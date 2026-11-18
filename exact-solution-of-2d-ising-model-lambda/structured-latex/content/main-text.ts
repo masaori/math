@@ -54927,6 +54927,256 @@ d&(e=a\text{ のとき})\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_symmetric_vanishing_shifted_quotient",
+        labels: [],
+        title: { text: "零代入で消える対称多項式を全変数の積で割る" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_qbar_all_ones_shift",
+              focus:
+                {
+                  id: "zero_pinching_def_qbar_all_ones_shift",
+                  kind: "definition",
+                  title: { text: "全ての指数を一つ下げた多項式" },
+                  labels: ["def_qbar_all_ones_shift"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.FisherZero.allOnesExponent",
+                    "Ising2DLambda.FisherZero.allOnesShift",
+                    "Ising2DLambda.FisherZero.allOnesShift_coeff",
+                  ],
+                  verification: ["sagemath/check/symmetric-vanishing-shifted-quotient-product"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " に対して、",
+                      math(String.raw`\mathbf{1}_n\in\mathrm{Ex}_n`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）を、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " で ",
+                      math(String.raw`\mathbf{1}_n(k):=1`),
+                      " となる指数と定める。",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " に対して、",
+                      math(String.raw`\mathrm{sd}_n(P)\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " を、任意の ",
+                      math(String.raw`d\in\mathrm{Ex}_n`),
+                      " で",
+                    ]),
+                    displayMath(String.raw`\mathrm{mco}_d\bigl(\mathrm{sd}_n(P)\bigr):=\mathrm{mco}_{d+\mathbf{1}_n}(P)`),
+                    paragraph([
+                      "となる元と定め、",
+                      math(String.raw`P`),
+                      " の全ての指数を一つ下げた多項式と呼ぶ。",
+                      "これは ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の元として定まる: 写像 ",
+                      math(String.raw`d\mapsto d+\mathbf{1}_n`),
+                      " は単射で、",
+                      math(String.raw`\mathrm{mco}_d(\mathrm{sd}_n(P))\ne0`),
+                      " となる ",
+                      math(String.raw`d`),
+                      " を、",
+                      math(String.raw`\mathrm{mco}_{a}(P)\ne0`),
+                      " となる有限個の ",
+                      math(String.raw`a`),
+                      " へ単射に送るので、そのような ",
+                      math(String.raw`d`),
+                      " は有限個である。",
+                      "現れるのは自然数、代数的数と有限集合だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_full_elementary_symmetric_is_all_ones_monomial",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_full_elementary_symmetric_is_all_ones_monomial",
+                  kind: "claim",
+                  title: { text: "変数の個数と同じ次数の基本対称式は全ての指数が一の単項式である" },
+                  labels: ["claim_qbar_full_elementary_symmetric_is_all_ones_monomial"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/symmetric-vanishing-shifted-quotient-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarElementarySymmetric_self_eq_monomial_allOnes",
+                    "Ising2DLambda.NecSuf.FisherZero.elementarySymmetricCard_eq_monomialProd_allOnes_necSuf",
+                    "Ising2DLambda.FisherZero.qbarElementarySymmetric_self_eq_monomial_allOnes_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\mathrm{es}_{n,n}=\mathrm{mon}_n(\mathbf{1}_n)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "、",
+                      ref("def_qbar_multivariate_monomial"),
+                      "、",
+                      ref("def_qbar_all_ones_shift"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`S\subseteq\mathbb{N}_{<n}`),
+                      " が ",
+                      math(String.raw`|S|=n=|\mathbb{N}_{<n}|`),
+                      " を満たすなら、有限集合の部分集合で元の個数が等しいので ",
+                      math(String.raw`S=\mathbb{N}_{<n}`),
+                      " である。したがって ",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " の ",
+                      math(String.raw`n`),
+                      " 元部分集合は ",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " ただ一つである。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{es}_{n,n}
+&=\sum_{S\subseteq\mathbb{N}_{<n}:\ |S|=n}\ \prod_{k\in S}X^{(n)}_k
+&&\bigl(\because\ \blkref{def_qbar_elementary_symmetric_polynomial}\bigr)\\
+&=\prod_{k\in\mathbb{N}_{<n}}X^{(n)}_k
+&&\bigl(\because\ n\text{ 元部分集合は }\mathbb{N}_{<n}\text{ ただ一つ}\bigr)\\
+&=\prod_{k\in\mathbb{N}_{<n}}\bigl(X^{(n)}_k\bigr)^{\mathbf{1}_n(k)}
+&&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\text{ により }\mathbf{1}_n(k)=1\text{、一乗はその元}\bigr)\\
+&=\mathrm{mon}_n(\mathbf{1}_n)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_monomial}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "全過程は有限集合の数え上げと ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_symmetric_vanishing_last_variable_shifted_quotient_product",
+              focus:
+                {
+                  id: "zero_pinching_claim_symmetric_vanishing_last_variable_shifted_quotient_product",
+                  kind: "claim",
+                  title: { text: "零代入で消える対称多項式は全変数の積と指数を一つ下げた多項式の積である" },
+                  labels: ["claim_symmetric_vanishing_last_variable_shifted_quotient_product"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/symmetric-vanishing-shifted-quotient-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.symmetricVanishing_eq_elementarySymmetric_mul_allOnesShift",
+                    "Ising2DLambda.NecSuf.FisherZero.swapInvariantVanishing_eq_monomialProd_mul_allOnesShift_necSuf",
+                    "Ising2DLambda.FisherZero.symmetricVanishing_eq_elementarySymmetric_mul_allOnesShift_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と、対称で（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）",
+                      math(String.raw`\mathrm{lz}_n(P)=0`),
+                      "（",
+                      ref("def_last_variable_zero_substitution"),
+                      "）を満たす任意の ",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`P=\mathrm{es}_{n+1,n+1}\cdot\mathrm{sd}_{n+1}(P)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "、",
+                      ref("def_qbar_all_ones_shift"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`c\in\mathrm{Ex}_{n+1}`),
+                      " を任意に取り、両辺の指数 ",
+                      math(String.raw`c`),
+                      " の係数を比べる。",
+                      math(String.raw`\mathbf{1}_{n+1}\le c`),
+                      "（",
+                      ref("def_qbar_multivariate_monomial"),
+                      "）でないとき、ある ",
+                      math(String.raw`k\in\mathbb{N}_{<n+1}`),
+                      " で ",
+                      math(String.raw`c(k)<1`),
+                      "、すなわち ",
+                      math(String.raw`c(k)=0`),
+                      " なので、",
+                      ref("claim_symmetric_vanishing_last_variable_coefficient_support"),
+                      " により ",
+                      math(String.raw`\mathrm{mco}_c(P)=0`),
+                      " である。",
+                      math(String.raw`\mathbf{1}_{n+1}\le c`),
+                      " のとき、各 ",
+                      math(String.raw`k`),
+                      " で ",
+                      math(String.raw`(c(k)-1)+1=c(k)`),
+                      " なので ",
+                      math(String.raw`(c-\mathbf{1}_{n+1})+\mathbf{1}_{n+1}=c`),
+                      " である。これらを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_c\bigl(\mathrm{es}_{n+1,n+1}\cdot\mathrm{sd}_{n+1}(P)\bigr)
+&=\mathrm{mco}_c\bigl(\mathrm{mon}_{n+1}(\mathbf{1}_{n+1})\cdot\mathrm{sd}_{n+1}(P)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_full_elementary_symmetric_is_all_ones_monomial}\bigr)\\
+&=\begin{cases}
+\mathrm{mco}_{c-\mathbf{1}_{n+1}}\bigl(\mathrm{sd}_{n+1}(P)\bigr)&(\mathbf{1}_{n+1}\le c\text{ のとき})\\
+0&(\mathbf{1}_{n+1}\le c\text{ でないとき})
+\end{cases}
+&&\bigl(\because\ \blkref{claim_qbar_monomial_multiplication_coefficient}\bigr)\\
+&=\begin{cases}
+\mathrm{mco}_{(c-\mathbf{1}_{n+1})+\mathbf{1}_{n+1}}(P)&(\mathbf{1}_{n+1}\le c\text{ のとき})\\
+0&(\mathbf{1}_{n+1}\le c\text{ でないとき})
+\end{cases}
+&&\bigl(\because\ \blkref{def_qbar_all_ones_shift}\bigr)\\
+&=\begin{cases}
+\mathrm{mco}_{c}(P)&(\mathbf{1}_{n+1}\le c\text{ のとき})\\
+0&(\mathbf{1}_{n+1}\le c\text{ でないとき})
+\end{cases}
+&&\bigl(\because\ (c-\mathbf{1}_{n+1})+\mathbf{1}_{n+1}=c\bigr)\\
+&=\mathrm{mco}_c(P)
+&&\bigl(\because\ \mathbf{1}_{n+1}\le c\text{ でないとき }\mathrm{mco}_c(P)=0\text{（}\blkref{claim_symmetric_vanishing_last_variable_coefficient_support}\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。係数がすべて等しい二つの元は等しいので（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）、",
+                      math(String.raw`P=\mathrm{es}_{n+1,n+1}\cdot\mathrm{sd}_{n+1}(P)`),
+                      " である。",
+                      "全過程は自然数の指数の比較と ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      " の係数の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
