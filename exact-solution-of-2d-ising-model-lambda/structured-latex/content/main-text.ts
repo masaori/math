@@ -48264,6 +48264,73 @@ b^2&=a&&\bigl(\because\ \text{移項}\bigr).
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_quadratic_norm_nonzero",
+        labels: [],
+        title: { text: "平方根の二次係数表示の非零ノルム" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_quadratic_norm_nonzero",
+              focus: {
+                id: "zero_pinching_claim_quadratic_norm_nonzero",
+                kind: "claim",
+                title: { text: "平方根が部分体の外にあるとき非零表示のノルムは零でない" },
+                labels: ["claim_quadratic_norm_nonzero"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/quadratic-norm-nonzero"],
+                lean: [
+                  "Ising2DLambda.FisherZero.quadraticNorm_ne_zero",
+                  "Ising2DLambda.NecSuf.FisherZero.quadraticNorm_ne_zero_necSuf",
+                  "Ising2DLambda.FisherZero.quadraticNorm_ne_zero_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                    math(String.raw`a,u,v\in F`), "、",
+                    math(String.raw`b\in\overline{\mathbb Q}`), " とし、",
+                    math(String.raw`b\notin F`), "、", math(String.raw`b^2=a`),
+                    " と仮定する。", math(String.raw`u+vb\ne0`), " ならば ",
+                    math(String.raw`u^2-av^2\ne0`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`u^2-av^2=0`), " と仮定する。",
+                    math(String.raw`v=0`), " なら ", math(String.raw`u^2=0`),
+                    " から ", math(String.raw`u=0`), " となり、",
+                    math(String.raw`u+vb\ne0`), " に反する。したがって ",
+                    math(String.raw`v\ne0`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+0&=u^2-av^2&&(\because\ \text{仮定})\\
+&=u^2-b^2v^2&&(\because\ b^2=a)\\
+&=(u+vb)(u-vb)&&(\because\ \text{差の平方})
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`u+vb\ne0`), " と代数的数体に零因子がないことから ",
+                    math(String.raw`u-vb=0`), "。よって ",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+b&=\frac{u}{v}&&(\because\ u-vb=0,\ v\ne0)\\
+&\in F&&(\because\ u,v\in F\ \text{と部分体の除法の閉性})
+\end{aligned}`),
+                  paragraph([
+                    "これは ", math(String.raw`b\notin F`), " に反する。",
+                    "実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_precone",
         labels: [],
         title: { text: "前錐とその一歩の延長" },
