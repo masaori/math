@@ -307,6 +307,7 @@ export const ALL_LABELS = [
   "claim_nonzero_long_pair_reference",
   "claim_nonzero_winding_simple_cycle_turning_zero",
   "claim_odd_degree_polynomial_has_odd_degree_root",
+  "claim_odd_degree_weighted_square_sum_avoids_minus_one",
   "claim_odd_orbit_selection_invariant",
   "claim_odd_orbit_signed_sum_zero",
   "claim_odd_ray_interior_cells_bounded",
