@@ -847,8 +847,12 @@ u
    \quad (\because u \text{ の定義と (0)}) \\
 &= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\cdot 0_{\mathbb{C}}
    \quad (\because B=O \text{ なので各成分 } b_{ij}=0_{\mathbb{C}}) \\
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}0_{\mathbb{C}}
+   \quad (\because \blkref{complex_times_zero_is_zero}\ (z\to\overline{a_{ij}})\ \text{を各項へ}) \\
+&= \sum_{i=1}^{n}0_{\mathbb{C}}
+   \quad (\because \blkref{finite_sum_of_complex_zeros}\ (m\to n)\ \text{を各}\ i\ \text{の内側の和へ}) \\
 &= 0_{\mathbb{C}}
-   \quad (\because 0_{\mathbb{C}} \text{ との積が } 0_{\mathbb{C}} \text{ であることと有限和})
+   \quad (\because \blkref{finite_sum_of_complex_zeros}\ (m\to n)\ \text{を外側の和へ})
 \end{aligned}`,
       ),
       paragraph([
@@ -1216,6 +1220,7 @@ u+\overline{u}
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 4 の鎖の後に置いていた「最後の段で引いたのは inclusion_rr_to_cc である。」の段落を削った。その行は ι_{ℝ→ℂ} が二重の有限和を保つことを使うが、inclusion_rr_to_cc は定義だけなので、行を 2 段に割り、各 i の内側の和と外側の和へ real_inclusion_preserves_finite_sum（m = n）を当てた。続けて置いていた (‖A‖²)_ℂ の鎖（根拠「上の鎖」）を同じ鎖の最後の行にし、後ろの段落の「（ノルムの定義は def_matrix_norm）」を、definition_of_sqrt_r_positive の y² = x の行と def_matrix_norm の行の 2 行に割って鎖に入れた（011_max_eigenvalue.ts の同じ変形と同じ割り方）。和の記号 Σ_{i,j} は (0) と同じ Σ_{i=1}^{n}Σ_{j=1}^{n} に書いた。鎖の両端は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 主張 (3) と Step 2・Step 3・Step 5 場合 1 の鎖に残っていた和の記号 Σ_{i,j} を、(0) と Step 4 と同じ Σ_{i=1}^{n}Σ_{j=1}^{n} に書いた。Step 4 の後の段落の √⟨A,A⟩ = ‖A‖ は ℂ の元の平方根で本文に定義が無く、主張にも無くどこからも使われないので削り、同じ段落の「非負実数 ‖A‖² の像」に写像 inclusion_rr_to_cc を添えた。式と主張は変えていない。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 4 の後の段落の ⟨A,A⟩ = 0_ℂ ⟺ ‖A‖ = 0 ⟺ A = O の根拠が matrix_norm_triangle_inequality (1) だけだったので、同値の鎖に割り、0_ℂ = ι_{ℝ→ℂ}(0)（inclusion_rr_to_cc）、inclusion_rr_to_cc_is_injective、square_of_real_number_is_product、real_product_of_nonzero_is_nonzero の対偶と real_times_zero_is_zero、matrix_norm_triangle_inequality (1) を段ごとに引いた。式と主張は変えていない。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 5 場合 1 の u の鎖の最後の行は「0_ℂ との積が 0_ℂ であることと有限和」の 2 つの操作を名前だけで 1 行にまとめていたので、complex_times_zero_is_zero（z → a_ij の共役）を各項へ当てる行と、finite_sum_of_complex_zeros（m → n）を内側の和・外側の和へ順に当てる 2 行の計 3 行に割った。鎖の両端と主張は変えていない。",
       ],
     },
   },
