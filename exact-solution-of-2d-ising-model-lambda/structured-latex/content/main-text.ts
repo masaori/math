@@ -48331,6 +48331,71 @@ b&=\frac{c_0}{c_1}&&(\because\ c_0-c_1b=0,\ c_1\ne0)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_quadratic_linear_values_closed",
+        labels: [],
+        title: { text: "平方根の一次式の値の閉性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_quadratic_linear_values_closed",
+            focus: {
+              id: "zero_pinching_claim_quadratic_linear_values_closed",
+              kind: "claim",
+              title: { text: "平方根の一次式の値の全体は和・符号反転・積で閉じる" },
+              labels: ["claim_quadratic_linear_values_closed"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/quadratic-linear-values-closed"],
+              lean: [
+                "Ising2DLambda.FisherZero.quadraticLinearValues_ringClosed",
+                "Ising2DLambda.NecSuf.FisherZero.quadraticLinearValues_ringClosed_necSuf",
+                "Ising2DLambda.FisherZero.quadraticLinearValues_ringClosed_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                  math(String.raw`a\in F`), "、", math(String.raw`b\in\overline{\mathbb Q}`),
+                  " とし、", math(String.raw`b^2=a`), " とする。",
+                  math(String.raw`S:=\{u+vb\mid u,v\in F\}\subseteq\overline{\mathbb Q}`),
+                  " と置く。このとき ", math(String.raw`0,1\in S`),
+                  " であり、任意の ", math(String.raw`y,z\in S`),
+                  " について ", math(String.raw`y+z,-y,yz\in S`), " である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`0=0+0b`), "、", math(String.raw`1=1+0b`),
+                  " と ", math(String.raw`0,1\in F`), " から ",
+                  math(String.raw`0,1\in S`), "。任意の ", math(String.raw`y,z\in S`),
+                  " に対し、", math(String.raw`u,v,w,t\in F`),
+                  " を ", math(String.raw`y=u+vb`), "、",
+                  math(String.raw`z=w+tb`), " となるように取る。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+y+z&=(u+vb)+(w+tb)&&\bigl(\because\ y,z\text{ の表示}\bigr)\\
+&=(u+w)+(v+t)b&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr),\\
+-y&=-(u+vb)&&\bigl(\because\ y\text{ の表示}\bigr)\\
+&=(-u)+(-v)b&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr),\\
+yz&=(u+vb)(w+tb)&&\bigl(\because\ y,z\text{ の表示}\bigr)\\
+&=uw+(ut+vw)b+vt b^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=(uw+avt)+(ut+vw)b&&\bigl(\because\ b^2=a\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`u+w,v+t,-u,-v,uw+avt,ut+vw\in F`),
+                  " は部分体の四則閉性による。したがって ",
+                  math(String.raw`y+z,-y,yz\in S`), "。",
+                  "全て代数的数体の中で行い、実数体・複素数体は使わない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_precone",
         labels: [],
         title: { text: "前錐とその一歩の延長" },
