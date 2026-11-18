@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/005_exp_conjugation_proof.ts`
 
-- 範囲: (0) 成分表示、(1) 共役対称性、(2) 第2変数線型・第1変数共役線型、(3) 正定値性、Cauchy–Schwarz、三角不等式
+- 範囲: (0) 成分表示、(1) 共役対称性、(2) 第2変数線型・第1変数共役線型、(3) 正定値性、(4) Cauchy–Schwarz、(5) 三角不等式
 
 ⟨A,B⟩ = tr(A*B) をトレースで計算した側と、成分の和で計算した側の 2 経路。Cauchy–Schwarz の等号（B = cA）も踏む。
 
@@ -14,7 +14,7 @@
 
 | # | ファイル | 検証内容 | 判定数 | 最大相対誤差 | ステータス |
 |---|---------|---------|-------|------------|-----------|
-| 01 | `check_01_axioms.sage` | (0)〜(3)、Cauchy–Schwarz、三角不等式、等号条件 | 728 | 1.008e-15 | **PASS** |
+| 01 | `check_01_axioms.sage` | (0)〜(3)、(4) Cauchy–Schwarz、(5) 三角不等式、Cauchy–Schwarz の等号（`B = cA`）。`n = 1, 2, 3, 5` で乱数の行列 20 組ずつ。(3) は `⟨A,A⟩ = (Σ_iΣ_j|a_ij|²)_ℂ = (‖A‖²)_ℂ`・非負・`⟨A,A⟩ = 0_ℂ ⟺ A = O` を確かめる。絶対値とノルムは `AA` の平方根で作り、(4)(5) の不等号と等号は `AA` の中で比べる。否定コントロール: 共役を落とした `Σ a_ij b_ij` は (1) を満たさない（80 件）。等号の判定が自明でないことの確認として、乱数の `B` で (4) が狭義の不等号になる標本を数える（3 件。`n = 1` では `|ā b| = |a||b|` なので等号になる）。`QQ[i]`・`AA` の厳密計算 | 968 | 厳密 | **PASS** |
 | 02 | `check_02_linearity_chains.sage` | (2) の 4 本の鎖（`⟨A,B+C⟩`・`⟨A,λB⟩`・`⟨A+B,C⟩`・`⟨λA,B⟩`）を 1 行ずつ。(0) の段と、`def_matrix_sum`・`def_matrix_scalar_multiple` の段を別の行として確かめ、定義の成分の式が Sage の和・スカラー倍と一致することも確かめる。否定コントロール: 第 1 変数で共役を落とした等式は偽。`n = 1, 2, 3`、`QQ[i]` の厳密計算 | 252 | 厳密 | **PASS** |
 | 03 | `check_03_cauchy_schwarz_case2_chain.sage` | Step 5 場合 2（`‖B‖ > 0`）を 1 行ずつ。前置きの `β_ℂ ∈ ℂ^×`・`(β^{-1})_ℂ = (β_ℂ)^{-1}`（`real_inclusion_preserves_inverse`）・`t = ū(β_ℂ)^{-1}`（`def_complex_quotient`）、準備 `t̄ = u(β_ℂ)^{-1}`（5 等号）・`(ūu)(β_ℂ)^{-1} = q_ℂ`（6 等号）、三つの積の項 `t⟨A,B⟩`（6 等号）・`t̄⟨B,A⟩`（8 等号）・`t̄t⟨B,B⟩`（13 等号）、展開式と合わせる鎖（12 等号）。逆元は `definition_of_cc` の積の式から `β_ℂ w = 1_ℂ` を解いて作る。否定コントロール: `t` を `u(β_ℂ)^{-1}` にすると `t⟨A,B⟩ ≠ q_ℂ`。`n = 1, 2, 3`、`QQ[i]` の厳密計算 | 648 | 厳密 | **PASS** |
 | 04 | `check_04_positive_definiteness_chain.sage` | Step 4（(3) の `⟨A,A⟩ = (‖A‖²)_ℂ`）の 6 等号の鎖を 1 行ずつ。(0)、Step 0 の `z̄z = (|z|²)_ℂ`、`real_inclusion_preserves_finite_sum` を各 `i` の内側の和へ当てた段と外側の和へ当てた段、`definition_of_sqrt_r_positive` の `y² = x` の段、`def_matrix_norm` の段を別の行として確かめる。`‖A‖` は `|a_ij|` を `QQbar` の絶対値（`x² + y²` とは別の経路）で取り、代数的実数体 `AA` の平方根で作って `y ≥ 0`・`y² = x` も確かめる。`ι_{ℝ→ℂ}(r) = (r, 0)` も各回確かめる。否定コントロール: 共役を落とした `Σ a_ij a_ij` は `(‖A‖²)_ℂ` と異なる。`n = 1, 2, 3`、`QQ[i]`・`QQ`・`AA` の厳密計算 | 108 | 厳密 | **PASS** |
@@ -22,7 +22,7 @@
 | – | `check_cauchy_schwarz_case1_zero_inner_product_chain.sage` | Step 5 場合 1（`‖B‖ = 0` で `B = O`）の `u` の鎖 `u = Σ_{i=1}^{n}Σ_{j=1}^{n} ā_ij b_ij = Σ_{i=1}^{n}Σ_{j=1}^{n} ā_ij·0_ℂ = Σ_{i=1}^{n}Σ_{j=1}^{n} 0_ℂ = Σ_{i=1}^{n} 0_ℂ = 0_ℂ` を 1 行ずつ（5 等号）。和は `def_finite_sum_of_complex_numbers` のとおり添字の順に左から足す。行ごとの根拠（`B = O` の各成分が `0_ℂ`、`complex_times_zero_is_zero`（`z → ā_ij`）を各項へ、`finite_sum_of_complex_zeros`（`m → n`）を各 `i` の内側の和へ、外側の和へ）もその行の値で確かめる。鎖の判定は `n = 1, 2, 3, 4`（1 行目は `B = O` では両辺が `0_ℂ` になるので、乱数の `B` でも 20 件確かめる）。否定コントロール 6 件（`n = 1, 2, 3`、(n,1) 成分だけが 1 の `B`）: `B = O` を使って各成分を `0_ℂ` に替える段の両辺が異なる（`B = O` を使うのはこの段だけなので、鎖の結論 `u = 0_ℂ` が `B = O` を要ることを表す）、`complex_times_zero_is_zero` の主張の形（右の因子が `0_ℂ`）から外れると結論が偽（`ā_{n1}·b_{n1} ≠ 0_ℂ`）。`QQ[i]` の厳密計算 | 200 | 厳密 | **PASS** |
 | – | `check_cauchy_schwarz_case1_norm_zero_gives_zero_matrix.sage` | Step 5 場合 1 の前提の段 `‖B‖ = 0 ⟹ B = O`（`matrix_norm_triangle_inequality` (1)（`K = ℂ`、`A → B`）の ⇒）。ノルムは `def_matrix_norm` の `√(Σ_{i=1}^{n}Σ_{j=1}^{n} |b_ij|²)`。`n = 1, 2` は成分を `{0, 1, −1, i, −i, 1+i}` から全て選んで `‖B‖ = 0 ⟺ B = O` と `‖B‖ ≥ 0` を、`n = 3, 4` は零行列と乱数の行列 20 件で `‖B‖ = 0 ⟺ B = O` を確かめる。否定コントロール 1 件: `|b|²` を共役なしの `b²` に替えると `B = [[1, i], [0, 0]]` で和が 0 になるが `B ≠ O`（同じ `B` で `‖B‖ ≠ 0` も正の判定として確かめる）。`QQ[i]`・`AA` の厳密計算 | 2647 | 厳密 | **PASS** |
 
-check_02・check_03・check_04・check_inner_product_zero_iff_zero_matrix_chain・check_cauchy_schwarz_case1_zero_inner_product_chain・check_cauchy_schwarz_case1_norm_zero_gives_zero_matrix は浮動小数点を使わない（ガウス有理数体 `QQ[i]` の厳密計算。check_04・check_inner_product_zero_iff_zero_matrix_chain・check_cauchy_schwarz_case1_norm_zero_gives_zero_matrix の平方根は代数的実数体 `AA`）。check_01 の許容誤差は既定の相対誤差 `1.0e-09`（成分の最大絶対値で正規化）。既定から変更していない。
+どの検算も浮動小数点を使わない（ガウス有理数体 `QQ[i]` の厳密計算。check_01・check_04・check_inner_product_zero_iff_zero_matrix_chain・check_cauchy_schwarz_case1_norm_zero_gives_zero_matrix の平方根は代数的実数体 `AA`）。
 
 ## 備考
 
