@@ -990,17 +990,79 @@ z\cdot 1_{\mathbb{C}}
     proof: [
       displayMath(
         String.raw`\begin{aligned}
+(ad)(bc)
+&= a\bigl(d(bc)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ (x \to a,\ y \to d,\ t \to bc)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= a\bigl((db)c\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ (x \to d,\ y \to b,\ t \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&= a\bigl((bd)c\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の可換則}\ xy = yx\ (x \to d,\ y \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= a\bigl(c(bd)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の可換則}\ xy = yx\ (x \to bd,\ y \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (ac)(bd)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ (x \to a,\ y \to c,\ t \to bd)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
+      displayMath(
+        String.raw`\begin{aligned}
 (ac-bd)^2+(ad+bc)^2
-&= \left(a^2c^2-2abcd+b^2d^2\right)+\left(a^2d^2+2abcd+b^2c^2\right)
-&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律・可換律を 2 箇所へ適用})\\
-&= a^2c^2+b^2d^2+a^2d^2+b^2c^2+\left((-2abcd)+2abcd\right)
-&&(\because\ \mathbb{R}\ \text{の和の可換律と結合律})\\
-&= a^2c^2+b^2d^2+a^2d^2+b^2c^2+0
-&&(\because\ -2abcd\ \text{は}\ 2abcd\ \text{の和の逆元})\\
-&= a^2c^2+b^2d^2+a^2d^2+b^2c^2
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to a^2c^2+b^2d^2+a^2d^2+b^2c^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (ac-bd)(ac-bd)+(ad+bc)(ad+bc)
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ \text{の}\ r^2 = r\,r\ (r \to ac-bd;\ r \to ad+bc)\ \text{を 2 箇所へ適用}\bigr)\\
+&= \Bigl(ac+\bigl(-(bd)\bigr)\Bigr)\Bigl(ac+\bigl(-(bd)\bigr)\Bigr)+(ad+bc)(ad+bc)
+&&\bigl(\because\ \text{差の定義}\ y-t = y+(-t)\ (y \to ac,\ t \to bd)\ \text{（}\blkref{def_real_difference}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \biggl((ac)\Bigl(ac+\bigl(-(bd)\bigr)\Bigr)+\bigl(-(bd)\bigr)\Bigl(ac+\bigl(-(bd)\bigr)\Bigr)\biggr)+\bigl((ad)(ad+bc)+(bc)(ad+bc)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x+y)t = xt+yt\ \bigl(x \to ac,\ y \to -(bd),\ t \to ac+\bigl(-(bd)\bigr);\ x \to ad,\ y \to bc,\ t \to ad+bc\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \biggl(\Bigl((ac)(ac)+(ac)\bigl(-(bd)\bigr)\Bigr)+\Bigl(\bigl(-(bd)\bigr)(ac)+\bigl(-(bd)\bigr)\bigl(-(bd)\bigr)\Bigr)\biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((bc)(ad)+(bc)(bc)\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ x(y+t) = xy+xt\ \bigl(x \to ac,\ y \to ac,\ t \to -(bd);\ x \to -(bd),\ y \to ac,\ t \to -(bd);\ x \to ad,\ y \to ad,\ t \to bc;\ x \to bc,\ y \to ad,\ t \to bc\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 4 箇所へ適用}\bigr)\\
+&= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Bigl(\bigl(-(bd)\bigr)(ac)+\bigl(-(bd)\bigr)\bigl(-(bd)\bigr)\Bigr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((bc)(ad)+(bc)(bc)\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ x(-t) = -(xt)\ (x \to ac,\ t \to bd)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((bd)(ac)\bigr)\Bigr)+\bigl(-(bd)\bigr)\bigl(-(bd)\bigr)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((bc)(ad)+(bc)(bc)\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-x)t = -(xt)\ (x \to bd,\ t \to ac)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((bd)(ac)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((bc)(ad)+(bc)(bc)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ \text{の}\ (-a)(-b) = ab\ \text{を文字を}\ p, q\ \text{に替えた}\ (-p)(-q) = pq\ (p \to bd,\ q \to bd)\bigr)\\
+&= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((ad)(bc)+(bc)(bc)\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の可換則}\ xy = yx\ (x \to bd,\ y \to ac;\ x \to bc,\ y \to ad)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Bigr)
+&&\bigl(\because\ \text{上の}\ (ad)(bc) = (ac)(bd)\ \text{を 2 箇所へ適用}\bigr)\\
+&= \biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\Bigl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Bigr)\Biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr),\ y \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ t \to \bigl((ad)(ad)+(ac)(bd)\bigr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Biggl(\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\bigl((ad)(ad)+(ac)(bd)\bigr)\Biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ y \to (ad)(ad)+(ac)(bd),\ t \to (ac)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&= \biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Biggl(\Biggl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ \bigl(x \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ y \to (ad)(ad)+(ac)(bd)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Biggl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Biggr)\Biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ad)(ad)+(ac)(bd),\ y \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ t \to (ac)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\bigl((ad)(ad)+(ac)(bd)\bigr)\Biggr)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr),\ y \to (ad)(ad)+(ac)(bd),\ t \to \biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&= \Biggl((ac)(ac)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\bigl((ad)(ad)+(ac)(bd)\bigr)\biggr)\Biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\Bigl((bd)(bd)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Bigr)\biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac),\ y \to -\bigl((ac)(bd)\bigr),\ t \to (ad)(ad)+(ac)(bd);\ x \to -\bigl((ac)(bd)\bigr),\ y \to (bd)(bd),\ t \to (ac)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \Biggl((ac)(ac)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ad)(ad)\biggr)+(ac)(bd)\Biggr)\Biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\Bigl(\bigl((bd)(bd)+(ac)(bd)\bigr)+(bc)(bc)\Bigr)\biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to -\bigl((ac)(bd)\bigr),\ y \to (ad)(ad),\ t \to (ac)(bd);\ x \to (bd)(bd),\ y \to (ac)(bd),\ t \to (bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&= \Biggl((ac)(ac)+\Biggl(\biggl((ad)(ad)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+(ac)(bd)\Biggr)\Biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\Bigl(\bigl((ac)(bd)+(bd)(bd)\bigr)+(bc)(bc)\Bigr)\biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ \bigl(x \to -\bigl((ac)(bd)\bigr),\ y \to (ad)(ad);\ x \to (bd)(bd),\ y \to (ac)(bd)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \Biggl((ac)(ac)+\Biggl((ad)(ad)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ac)(bd)\biggr)\Biggr)\Biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\Bigl((ac)(bd)+\bigl((bd)(bd)+(bc)(bc)\bigr)\Bigr)\biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ad)(ad),\ y \to -\bigl((ac)(bd)\bigr),\ t \to (ac)(bd);\ x \to (ac)(bd),\ y \to (bd)(bd),\ t \to (bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \Biggl(\bigl((ac)(ac)+(ad)(ad)\bigr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ac)(bd)\biggr)\Biggr)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ac)(bd)\biggr)+\bigl((bd)(bd)+(bc)(bc)\bigr)\Biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac),\ y \to (ad)(ad),\ t \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ac)(bd);\ x \to -\bigl((ac)(bd)\bigr),\ y \to (ac)(bd),\ t \to (bd)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&= \Biggl(\bigl((ac)(ac)+(ad)(ad)\bigr)+\biggl((ac)(bd)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)\Biggr)+\Biggl(\biggl((ac)(bd)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\bigl((bd)(bd)+(bc)(bc)\bigr)\Biggr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ \bigl(x \to -\bigl((ac)(bd)\bigr),\ y \to (ac)(bd)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \Bigl(\bigl((ac)(ac)+(ad)(ad)\bigr)+0\Bigr)+\Bigl(0+\bigl((bd)(bd)+(bc)(bc)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ \bigl(z \to (ac)(bd)\bigr)\ \text{を 2 箇所へ適用}\bigr)\\
+&= \bigl((ac)(ac)+(ad)(ad)\bigr)+\Bigl(0+\bigl((bd)(bd)+(bc)(bc)\bigr)\Bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ \bigl(x \to (ac)(ac)+(ad)(ad)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \bigl((ac)(ac)+(ad)(ad)\bigr)+\bigl((bd)(bd)+(bc)(bc)\bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ \bigl(x \to (bd)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \bigl((ac)(ac)+(ad)(ad)\bigr)+\bigl((bc)(bc)+(bd)(bd)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ \bigl(x \to (bd)(bd),\ y \to (bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \bigl((ac)^2+(ad)^2\bigr)+\bigl((bc)^2+(bd)^2\bigr)
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ \text{の}\ r^2 = r\,r\ (r \to ac;\ r \to ad;\ r \to bc;\ r \to bd)\ \text{を 4 箇所へ右辺から左辺へ適用}\bigr)\\
+&= (a^2c^2+a^2d^2)+(b^2c^2+b^2d^2)
+&&\bigl(\because\ \blkref{product_of_real_powers_is_power_of_product}\ \text{の}\ a^m\,b^m = (ab)^m\ \text{を文字を}\ p, q\ \text{に替えた}\ p^m\,q^m = (pq)^m\ (p \to a,\ q \to c,\ m \to 2;\ p \to a,\ q \to d,\ m \to 2;\ p \to b,\ q \to c,\ m \to 2;\ p \to b,\ q \to d,\ m \to 2)\ \text{を 4 箇所へ右辺から左辺へ適用}\bigr)\\
+&= a^2(c^2+d^2)+b^2(c^2+d^2)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ x(y+t) = xy+xt\ (x \to a^2,\ y \to c^2,\ t \to d^2;\ x \to b^2,\ y \to c^2,\ t \to d^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
 &= \left(a^2+b^2\right)\left(c^2+d^2\right)
-&&(\because\ \mathbb{R}\ \text{の分配律と積の可換律})
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x+y)t = xt+yt\ (x \to a^2,\ y \to b^2,\ t \to c^2+d^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
     ],
@@ -1008,6 +1070,7 @@ z\cdot 1_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。この恒等式は multiplicative_group_of_cc の証明の「積について閉じること」の段にしか無く、その主張は「ℂ^× は群をなす」だけなので、abs_basic_properties の (4)（積の絶対値）の鎖が引ける主張が無かった。その段の鎖を、式を変えずにこの主張の証明へ移した（鎖の両端は主張の両辺のまま）。1 行で 2 つ以上の定理を当てている行（第 1・第 2・第 5 の等号）は台帳の件で扱う。Lean の具体版は無い（Lean の ℂ は mathlib の Complex で、この恒等式を述べる宣言は置いていない）。数値検証: sagemath/check/product_of_sums_of_two_squares_identity/check_identity_chain.sage。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 鎖の第 1・第 2・第 5 の等号（ℝ の分配律と積の結合律・可換律を 1 行で、和の可換律と結合律を 1 行で、分配律と積の可換律を 1 行で当てていた行）を、1 行に 1 つの等式だけを当てる 28 行に割った。二乗は square_of_real_number_is_product で積に開き、差は def_real_difference で和と符号反転に開いてから分配則で展開し、符号反転の等式 x(−t) = −(xt)・(−x)t = −(xt)、real_negation_times_negation_is_product の (−a)(−b) = ab（文字を p, q に替えて書いた。文書の並びでは後ろのブロック。依存先にこの主張は無く循環しない）と積の可換則で交差項を (ac)(bd) と (ad)(bc) にそろえた。(ad)(bc) = (ac)(bd) は積の結合則と可換則の 5 行の鎖として主の鎖の前に置き、主の鎖ではその参照で替えた。和の並べ替えは加法の結合則・可換則を 1 行に 1 つずつ当て、z + (−z) = 0（def_real_difference）と 0 の単位元で交差項を消し、square_of_real_number_is_product と product_of_real_powers_is_power_of_product（文字を証明の a, b と衝突しない p, q に替えて書いた）を右辺から左辺へ当てて a^2c^2 などに閉じ、分配則を右辺から左辺へ当てて (a^2+b^2)(c^2+d^2) にした。各行に形と代入を書き、ℝ の法則は set_and_algebra_notation を参照した。積と和の括弧はすべて書いた。鎖の両端と主張は不変。数値検証: 同じ check_identity_chain.sage を 2 本の鎖と根拠の等式の実例に合わせた。",
       ],
     },
   },
