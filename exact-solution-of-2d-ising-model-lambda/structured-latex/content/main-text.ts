@@ -48379,12 +48379,12 @@ b&=\frac{c_0}{c_1}&&(\because\ c_0-c_1b=0,\ c_1\ne0)\\
                 ]),
                 displayMath(String.raw`\begin{aligned}
 y+z&=(u+vb)+(w+tb)&&\bigl(\because\ y,z\text{ の表示}\bigr)\\
-&=(u+w)+(v+t)b&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr),\\
+&=(u+w)+(v+t)b&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
 -y&=-(u+vb)&&\bigl(\because\ y\text{ の表示}\bigr)\\
-&=(-u)+(-v)b&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr),\\
+&=(-u)+(-v)b&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
 yz&=(u+vb)(w+tb)&&\bigl(\because\ y,z\text{ の表示}\bigr)\\
 &=uw+(ut+vw)b+vt b^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
-&=(uw+avt)+(ut+vw)b&&\bigl(\because\ b^2=a\bigr).
+&=(uw+avt)+(ut+vw)b&&\bigl(\because\ b^2=a\bigr)
 \end{aligned}`),
                 paragraph([
                   math(String.raw`u+w,v+t,-u,-v,uw+avt,ut+vw\in F`),
