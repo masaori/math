@@ -52,6 +52,9 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.FisherZero.quadraticLinearValues_eq_adjoin
+  Ising2DLambda.NecSuf.FisherZero.quadraticLinearValues_eq_adjoin_necSuf
+  Ising2DLambda.FisherZero.quadraticLinearValues_eq_adjoin_from_necSuf
   Ising2DLambda.FisherZero.quadraticLinearValues_ringClosed
   Ising2DLambda.NecSuf.FisherZero.quadraticLinearValues_ringClosed_necSuf
   Ising2DLambda.FisherZero.quadraticLinearValues_ringClosed_from_necSuf

@@ -702,6 +702,7 @@ export const ALL_LABELS = [
   "claim_sqrt_two_exists",
   "claim_square_difference_from_multiple_side_bound",
   "claim_square_of_sum_le_twice_sum_of_squares",
+  "claim_square_root_adjoined_subfield_equals_linear_values",
   "claim_staircase_from_band_top_meets_lift_only_at_base",
   "claim_standard_dual_height_horizontal_internal",
   "claim_standard_dual_height_horizontal_seam_conditional",
