@@ -576,7 +576,7 @@ y
         ],
         [
           "(3)（正定値性）",
-          math(String.raw`\displaystyle \langle A,A\rangle=\left(\sum_{i,j}|a_{ij}|^2\right)_{\mathbb{C}}`),
+          math(String.raw`\displaystyle \langle A,A\rangle=\left(\sum_{i=1}^{n}\sum_{j=1}^{n}|a_{ij}|^2\right)_{\mathbb{C}}`),
           "。特に ",
           math(String.raw`\langle A,A\rangle`),
           " は ",
@@ -707,13 +707,13 @@ y
       displayMath(
         String.raw`\begin{aligned}
 \overline{\langle A,B\rangle}
-&= \overline{\sum_{i,j}\overline{a_{ij}}\,b_{ij}}
+&= \overline{\sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\,b_{ij}}
    \quad (\because \text{(0)}) \\
-&= \sum_{i,j}\overline{\overline{a_{ij}}\,b_{ij}}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{\overline{a_{ij}}\,b_{ij}}
    \quad (\because \overline{\phantom{z}} \text{ は加法的、有限和}) \\
-&= \sum_{i,j}\overline{\overline{a_{ij}}}\cdot\overline{b_{ij}}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{\overline{a_{ij}}}\cdot\overline{b_{ij}}
    \quad (\because \overline{\phantom{z}} \text{ は乗法的}) \\
-&= \sum_{i,j}\overline{b_{ij}}\,a_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{b_{ij}}\,a_{ij}
    \quad (\because \overline{\overline{z}}=z,\ \mathbb{C} \text{ の乗法の可換性}) \\
 &= \langle B,A\rangle
    \quad (\because \text{(0)})
@@ -723,13 +723,13 @@ y
       displayMath(
         String.raw`\begin{aligned}
 \langle A,B+C\rangle
-&= \sum_{i,j}\overline{a_{ij}}\,(B+C)_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\,(B+C)_{ij}
    \quad (\because \text{(0)}) \\
-&= \sum_{i,j}\overline{a_{ij}}\left(b_{ij}+c_{ij}\right)
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\left(b_{ij}+c_{ij}\right)
    \quad (\because \blkref{def_matrix_sum}) \\
-&= \sum_{i,j}\left(\overline{a_{ij}}b_{ij}+\overline{a_{ij}}c_{ij}\right)
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\left(\overline{a_{ij}}b_{ij}+\overline{a_{ij}}c_{ij}\right)
    \quad (\because \mathbb{C} \text{ の分配律}) \\
-&= \sum_{i,j}\overline{a_{ij}}b_{ij}+\sum_{i,j}\overline{a_{ij}}c_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}b_{ij}+\sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}c_{ij}
    \quad (\because \text{有限和の分割}) \\
 &= \langle A,B\rangle+\langle A,C\rangle
    \quad (\because \text{(0)})
@@ -738,13 +738,13 @@ y
       displayMath(
         String.raw`\begin{aligned}
 \langle A,\lambda B\rangle
-&= \sum_{i,j}\overline{a_{ij}}\,(\lambda B)_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\,(\lambda B)_{ij}
    \quad (\because \text{(0)}) \\
-&= \sum_{i,j}\overline{a_{ij}}\left(\lambda b_{ij}\right)
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\left(\lambda b_{ij}\right)
    \quad (\because \blkref{def_matrix_scalar_multiple}) \\
-&= \sum_{i,j}\lambda\left(\overline{a_{ij}}b_{ij}\right)
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\lambda\left(\overline{a_{ij}}b_{ij}\right)
    \quad (\because \mathbb{C} \text{ の乗法の可換性と結合律}) \\
-&= \lambda\sum_{i,j}\overline{a_{ij}}b_{ij}
+&= \lambda\sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}b_{ij}
    \quad (\because \text{有限和と元の積についての分配律}) \\
 &= \lambda\langle A,B\rangle
    \quad (\because \text{(0)})
@@ -753,15 +753,15 @@ y
       displayMath(
         String.raw`\begin{aligned}
 \langle A+B,C\rangle
-&= \sum_{i,j}\overline{(A+B)_{ij}}\;c_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{(A+B)_{ij}}\;c_{ij}
    \quad (\because \text{(0)}) \\
-&= \sum_{i,j}\overline{a_{ij}+b_{ij}}\;c_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}+b_{ij}}\;c_{ij}
    \quad (\because \blkref{def_matrix_sum}) \\
-&= \sum_{i,j}\left(\overline{a_{ij}}+\overline{b_{ij}}\right)c_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\left(\overline{a_{ij}}+\overline{b_{ij}}\right)c_{ij}
    \quad (\because \text{Step 0 の } \overline{z+w}=\overline{z}+\overline{w}) \\
-&= \sum_{i,j}\left(\overline{a_{ij}}c_{ij}+\overline{b_{ij}}c_{ij}\right)
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\left(\overline{a_{ij}}c_{ij}+\overline{b_{ij}}c_{ij}\right)
    \quad (\because \mathbb{C} \text{ の分配律}) \\
-&= \sum_{i,j}\overline{a_{ij}}c_{ij}+\sum_{i,j}\overline{b_{ij}}c_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}c_{ij}+\sum_{i=1}^{n}\sum_{j=1}^{n}\overline{b_{ij}}c_{ij}
    \quad (\because \text{有限和の分割}) \\
 &= \langle A,C\rangle+\langle B,C\rangle
    \quad (\because \text{(0)})
@@ -770,13 +770,13 @@ y
       displayMath(
         String.raw`\begin{aligned}
 \langle \lambda A,B\rangle
-&= \sum_{i,j}\overline{(\lambda A)_{ij}}\;b_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{(\lambda A)_{ij}}\;b_{ij}
    \quad (\because \text{(0)}) \\
-&= \sum_{i,j}\overline{\lambda a_{ij}}\;b_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{\lambda a_{ij}}\;b_{ij}
    \quad (\because \blkref{def_matrix_scalar_multiple}) \\
-&= \sum_{i,j}\overline{\lambda}\,\overline{a_{ij}}\,b_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{\lambda}\,\overline{a_{ij}}\,b_{ij}
    \quad (\because \text{Step 0 の } \overline{zw}=\overline{z}\,\overline{w}) \\
-&= \overline{\lambda}\sum_{i,j}\overline{a_{ij}}\,b_{ij}
+&= \overline{\lambda}\sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\,b_{ij}
    \quad (\because \text{有限和と元の積についての分配律}) \\
 &= \overline{\lambda}\langle A,B\rangle
    \quad (\because \text{(0)})
@@ -805,9 +805,9 @@ y
         math(String.raw`\langle A,A\rangle`),
         " は非負実数 ",
         math(String.raw`\|A\|^2`),
-        " の像であり、",
-        math(String.raw`\sqrt{\langle A,A\rangle}=\|A\|`),
-        "。",
+        " の ",
+        ref("inclusion_rr_to_cc"),
+        " による像である。",
         math(String.raw`\langle A,A\rangle=0_{\mathbb{C}}\iff\|A\|=0\iff A=O`),
         " は ",
         ref("matrix_norm_triangle_inequality"),
@@ -828,9 +828,9 @@ y
       displayMath(
         String.raw`\begin{aligned}
 u
-&= \sum_{i,j}\overline{a_{ij}}\,b_{ij}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\,b_{ij}
    \quad (\because u \text{ の定義と (0)}) \\
-&= \sum_{i,j}\overline{a_{ij}}\cdot 0_{\mathbb{C}}
+&= \sum_{i=1}^{n}\sum_{j=1}^{n}\overline{a_{ij}}\cdot 0_{\mathbb{C}}
    \quad (\because B=O \text{ なので各成分 } b_{ij}=0_{\mathbb{C}}) \\
 &= 0_{\mathbb{C}}
    \quad (\because 0_{\mathbb{C}} \text{ との積が } 0_{\mathbb{C}} \text{ であることと有限和})
@@ -1199,6 +1199,7 @@ u+\overline{u}
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: Step 5 場合 2 の t := ū/(‖B‖²)_ℂ を β := ‖B‖² と def_complex_quotient で t = ū(β_ℂ)^{-1} と開き、β_ℂ ∈ ℂ^× と (β^{-1})_ℂ = (β_ℂ)^{-1} を新しい主張 real_inclusion_preserves_inverse から取った。三つの積の項の鎖の「約分」「ι_{ℝ→ℂ} が積と逆元を保つこと」「Step 0 による t̄ の表示」を、準備 t̄ = u(β_ℂ)^{-1}（complex_conjugate_of_product・complex_conjugate_of_inverse・complex_conjugate_of_real_inclusion）と準備 (ūu)(β_ℂ)^{-1} = q_ℂ（complex_conjugate_times_self・real_inclusion_preserves_product。q := |u|²/‖B‖²）と、積の結合律・可換律・逆元・単位元の 1 段ずつに開いた。三つの項の鎖は符号を付けない t⟨A,B⟩・t̄⟨B,A⟩・t̄t⟨B,B⟩ から始め、合わせる鎖は展開式の右辺から 1 行に 1 つずつ代入し、「ℂ の加法の結合律と加法逆元」を def_complex_difference と complex_numbers_form_a_field の結合律・加法逆元・単位元の行に、「ι_{ℝ→ℂ} が減法を保つこと」を real_inclusion_preserves_difference にした。主張と Step 5 の結論は変えていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 5 場合 2 の合わせる鎖で (-q_C) + q_C を 0_C にする行の根拠を、complex_numbers_form_a_field の加法逆元（右から足す z + (-z) = 0_C しか示しておらず、左から足す形は加法の可換律を合わせないと出ない）から negation_plus_self_is_zero_in_cc (x → q_C) に替えた。式は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 4 の鎖の後に置いていた「最後の段で引いたのは inclusion_rr_to_cc である。」の段落を削った。その行は ι_{ℝ→ℂ} が二重の有限和を保つことを使うが、inclusion_rr_to_cc は定義だけなので、行を 2 段に割り、各 i の内側の和と外側の和へ real_inclusion_preserves_finite_sum（m = n）を当てた。続けて置いていた (‖A‖²)_ℂ の鎖（根拠「上の鎖」）を同じ鎖の最後の行にし、後ろの段落の「（ノルムの定義は def_matrix_norm）」を、definition_of_sqrt_r_positive の y² = x の行と def_matrix_norm の行の 2 行に割って鎖に入れた（011_max_eigenvalue.ts の同じ変形と同じ割り方）。和の記号 Σ_{i,j} は (0) と同じ Σ_{i=1}^{n}Σ_{j=1}^{n} に書いた。鎖の両端は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 主張 (3) と Step 2・Step 3・Step 5 場合 1 の鎖に残っていた和の記号 Σ_{i,j} を、(0) と Step 4 と同じ Σ_{i=1}^{n}Σ_{j=1}^{n} に書いた。Step 4 の後の段落の √⟨A,A⟩ = ‖A‖ は ℂ の元の平方根で本文に定義が無く、主張にも無くどこからも使われないので削り、同じ段落の「非負実数 ‖A‖² の像」に写像 inclusion_rr_to_cc を添えた。式と主張は変えていない。",
       ],
     },
   },

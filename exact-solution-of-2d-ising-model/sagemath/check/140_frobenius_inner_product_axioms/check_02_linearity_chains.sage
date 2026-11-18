@@ -7,7 +7,7 @@ def msum(A, B):                        # def_matrix_sum: (A+B)_{ij} = A_{ij} + B
     return matrix(K, A.nrows(), A.ncols(), lambda r, c: A[r, c] + B[r, c])
 def msmul(a, A):                       # def_matrix_scalar_multiple: (aA)_{ij} = a A_{ij}
     return matrix(K, A.nrows(), A.ncols(), lambda r, c: a*A[r, c])
-def S(n, f):                           # Σ_{i,j}
+def S(n, f):                           # Σ_{i=1}^{n}Σ_{j=1}^{n}
     return sum(f(r, c) for r in range(n) for c in range(n))
 def inner(A, B):                       # def_frobenius_inner_product: ⟨A,B⟩ = tr(A^* B)（Sage の共役転置・積・トレース）
     return (A.conjugate_transpose()*B).trace()
