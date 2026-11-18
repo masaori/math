@@ -48526,6 +48526,66 @@ y\left(\frac{u}{n}-\frac{v}{n}b\right)
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_quadratic_representation_unique",
+        labels: [],
+        title: { text: "平方根を添加した部分体の二次係数表示の一意性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_quadratic_representation_unique",
+            focus: {
+              id: "zero_pinching_claim_quadratic_representation_unique",
+              kind: "claim",
+              title: { text: "平方根を添加した部分体の二次係数表示は一意である" },
+              labels: ["claim_square_root_adjoined_subfield_quadratic_representation"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/square-root-adjoined-representation-unique"],
+              lean: [
+                "Ising2DLambda.FisherZero.quadraticRepresentation_unique",
+                "Ising2DLambda.NecSuf.FisherZero.quadraticRepresentation_unique_necSuf",
+                "Ising2DLambda.FisherZero.quadraticRepresentation_unique_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`b\in\overline{\mathbb Q}\setminus F`), " とする。",
+                "任意の ", math(String.raw`u,v,w,t\in F`), " について、",
+                math(String.raw`u+vb=w+tb`), " ならば ",
+                math(String.raw`u=w`), " かつ ", math(String.raw`v=t`), " である。",
+                "したがって ", ref("claim_square_root_adjoined_subfield_equals_linear_values"),
+                " の一次式表示の係数は一意に定まる。",
+              ])],
+              proof: [
+                paragraph([
+                  math(String.raw`u+vb=w+tb`), " と仮定する。まず ",
+                  math(String.raw`v\ne t`), " と仮定する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+(v-t)b&=vb-tb&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=w-u&&\bigl(\because\ u+vb=w+tb\bigr)\\
+b&=(w-u)/(v-t)&&\bigl(\because\ v-t\ne0\bigr)
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`w-u,v-t\in F`), " と部分体の除法閉性から ",
+                  math(String.raw`b\in F`), " となり、仮定に反する。ゆえに ",
+                  math(String.raw`v=t`), " である。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+u+vb&=w+tb&&\bigl(\because\ \text{仮定}\bigr)\\
+u+vb&=w+vb&&\bigl(\because\ v=t\bigr)\\
+u&=w&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の消去律}\bigr)
+\end{aligned}`),
+                paragraph(["実数体・複素数体は使わない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_precone",
         labels: [],
         title: { text: "前錐とその一歩の延長" },
