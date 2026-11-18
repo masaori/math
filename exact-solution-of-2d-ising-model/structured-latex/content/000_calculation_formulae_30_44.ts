@@ -213,7 +213,7 @@ y & (x=0,\ y>0),\\
 &= \sqrt{0+y^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= \sqrt{y^2}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + p = p\ (p \to y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= y
 &&(\because\ y>0\ \text{なので}\ y\ge 0\ \text{であり}\ y^2=y^2\text{。}\blkref{definition_of_sqrt_r_positive}\ (s \to y^2)\ \text{のただ一つの元}\ u\ \text{は}\ y\ \text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）})\\
 &= \operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))
@@ -234,7 +234,7 @@ y & (x=0,\ y>0),\\
 &= \sqrt{0+y^2}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= \sqrt{y^2}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + p = p\ (p \to y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \sqrt{y\cdot y}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \blkref{square_of_real_number_is_product}\ (r\to y))\\
 &= \sqrt{(-y)\cdot(-y)}^{(\mathbb{R}_{\ge 0})}
@@ -261,7 +261,7 @@ y & (x=0,\ y>0),\\
 &= \sqrt{0+0}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0)\ \text{を 2 箇所へ適用})\\
 &= \sqrt{0}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + p = p\ (p \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 0
 &&(\because\ \blkref{sqrt_of_real_zero_is_zero})\\
 &= \operatorname{pr}_1(\phi_{\mathrm{polar}}(x,y))
@@ -370,7 +370,7 @@ x^2+y^2
 &= \left(a^2c^2+b^2d^2+a^2d^2+b^2c^2\right)+0
 &&(\because\ -2abcd\ \text{は}\ 2abcd\ \text{の和の逆元})\\
 &= a^2c^2+b^2d^2+a^2d^2+b^2c^2
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ p + 0 = p\ (p \to a^2c^2+b^2d^2+a^2d^2+b^2c^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (a^2+b^2)(c^2+d^2)
 &&(\because\ \mathbb{R}\ \text{の分配律})
 \end{aligned}`,
@@ -452,7 +452,7 @@ x^2+y^2
 &= \sqrt{x^2+0}^{(\mathbb{R}_{\ge 0})}
 &&(\because\ \blkref{real_zero_times_is_zero}\ (x\to 0))\\
 &= \sqrt{x^2}^{(\mathbb{R}_{\ge 0})}
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{は和の単位元})
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ p + 0 = p\ (p \to x^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -510,6 +510,7 @@ x^2+y^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: (1) の x = 0 の三つの場合の鎖・(4) の Lagrange の恒等式の鎖・(6) の鎖で、名前だけの根拠「ℝ では 0 は和の単位元」だった 5 行を、「0 は ℝ の加法の単位元 形 (代入)（set_and_algebra_notation）」の行にした（0 + p = p の p → y^2 を 2 か所、p → 0、p + 0 = p の p → a^2c^2+b^2d^2+a^2d^2+b^2c^2、p → x^2。形の文字は証明の x, y と衝突しないよう p にした）。式は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: (4) の鎖の (ac−bd)²+(ad+bc)² = (a²+b²)(c²+d²) の行は、multiplicative_group_of_cc の証明の中の段（「積について閉じること」の恒等式）を引いていた。その主張は「ℂ^× は群をなす」だけなので、恒等式を独立した主張 product_of_sums_of_two_squares_identity にし、その参照に替えた（a, b, c, d はこの段の z_1 = (a,b), z_2 = (c,d) の成分で、主張の文字と同じ）。式・鎖の両端・段数は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y < 0 の鎖の √(y^2) = √((−y)^2) と (6) の x < 0 の鎖の √(x^2) = √((−x)^2) の行の根拠が「ℝ では (−y)^2 = y^2」「(−x)^2 = x^2」の名前だけだったので、それぞれを square_of_real_number_is_product（r → y、r → x）・real_negation_times_negation_is_product（a, b → y、a, b → x を右辺から左辺へ。この回に足した主張）・square_of_real_number_is_product（r → −y、r → −x を右辺から左辺へ）の 3 行に割った。鎖の両端と主張は変えていない。数値検証: sagemath/check/103_abs_basic_properties/check_negation_square_rows.sage。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 非負実数の平方の比較の鎖の両端の u^2 = u·u・v·v = v^2 と、(2) の (√(x^2+y^2))^2 = x^2+y^2 の行の根拠が「平方の定め方」「平方根の定義」の名前だけだったので、square_of_real_number_is_product（r → u、r → v を右辺から左辺へ）と definition_of_sqrt_r_positive の u^2 = s（s → x^2+y^2、u → √(x^2+y^2)。証明の中の x, y と衝突しないよう、(1) の前置きと同じく定義の文字を s, u で書いた）の参照に替えた。式の両端と主張は変えていない。",
@@ -1106,8 +1107,16 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
       displayMath(
         String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)
+&= \left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)\right)+0
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&= \left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)\right)+\left(2\pi+(-2\pi)\right)
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ t + (-t) = 0\ (t \to 2\pi)\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)\right)+\left((-2\pi)+2\pi\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ (x \to 2\pi,\ y \to -2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \left(\left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)\right)+(-2\pi)\right)+2\pi
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ (x \to \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2),\ y \to -2\pi,\ t \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)-2\pi\right)+2\pi
-&&(\because\ \mathbb{R}\ \text{の加法の逆元と単位元})\\
+&&\bigl(\because\ \blkref{def_real_difference}\ y - t = y + (-t)\ (y \to \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2),\ t \to 2\pi)\ \text{を右辺から左辺へ}\bigr)\\
 &= \arg^{[0,2\pi)}(z_1 z_2)+2\pi
 &&(\because\ \text{この場合の不等式と 複素数の積の}\ \arg\ \text{の主張（}\blkref{arg_of_product_of_complex_numbers}\text{）})\\
 &= \pi+2\pi
@@ -1138,6 +1147,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 2π ≤ θ_1+θ_2−2(n_1+n_2)π < 4π の場合の鎖の 1 行目は、名前だけの根拠「ℝ の加法の逆元と単位元」で 2 つ以上の法則を当てていたので、加法の単位元 x + 0 = x（右辺から左辺へ）・def_real_difference の t + (−t) = 0（t → 2π、右辺から左辺へ）・加法の可換則・加法の結合則（右辺から左辺へ）・def_real_difference の y − t = y + (−t)（y → arg(z_1)+arg(z_2)、t → 2π、右辺から左辺へ）の 5 行に割った。定義の文字 z は z_1・z_2 と紛れるので t に替えて書いた。数値検証: sagemath/check/120_range_of_args_of_multiple_of_complex_numbers/check_split_inverse_and_identity_rows.sage。ℝ の法則は set_and_algebra_notation を参照した。鎖の両端は不変。",
         "原文は証明が「s_{[0,2π)}([θ_1+θ_2]) = π から場合分け」の一文と、" +
           "各場合について「θ_1+θ_2-2(n_1+n_2)π = π ゆえ」という日本語 1 行だけだった。" +
           "各場合を一続きの鎖へ書き下し、各行の末尾へ (∵ …) を付けた。" +
@@ -1352,8 +1362,12 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \arg^{[0,2\pi)}(z)=\theta-2n\pi\ \text{という仮定})\\
 &= \arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}(z)
 &&(\because\ \arg^{[0,2\pi)}(z)=\theta-2n\pi\ \text{という仮定})\\
+&= 1\cdot \arg^{[0,2\pi)}(z)+1\cdot \arg^{[0,2\pi)}(z)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&= (1+1)\cdot \arg^{[0,2\pi)}(z)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x+y)t = xt+yt\ (x \to 1,\ y \to 1,\ t \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= 2\arg^{[0,2\pi)}(z)
-&&(\because\ \mathbb{R}\ \text{の分配律と}\ 1\ \text{が積の単位元であること})
+&&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1402,8 +1416,12 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \arg^{[0,2\pi)}(z)=\theta-2n\pi\ \text{という仮定})\\
 &= \arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}(z)-2\pi
 &&(\because\ \arg^{[0,2\pi)}(z)=\theta-2n\pi\ \text{という仮定})\\
+&= 1\cdot \arg^{[0,2\pi)}(z)+1\cdot \arg^{[0,2\pi)}(z)-2\pi
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&= (1+1)\cdot \arg^{[0,2\pi)}(z)-2\pi
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x+y)t = xt+yt\ (x \to 1,\ y \to 1,\ t \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= 2\arg^{[0,2\pi)}(z)-2\pi
-&&(\because\ \mathbb{R}\ \text{の分配律と}\ 1\ \text{が積の単位元であること})
+&&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1417,6 +1435,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: r ≠ 0 の場合の 2 本の鎖の最後の行 arg(z)+arg(z) = 2arg(z)（と −2π を付けた形）は、名前だけの根拠「ℝ の分配律と 1 が積の単位元であること」で 2 つ以上の法則を当てていたので、乗法の単位元 1·x = x（x → arg(z)、2 箇所へ右辺から左辺へ）・分配則 (x+y)t = xt+yt（x → 1, y → 1, t → arg(z)、右辺から左辺へ）・def_real_two を右辺から左辺へ、の 3 行に割った。ℝ の法則は set_and_algebra_notation を参照した。鎖の両端は不変。",
         "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文の証明は " +
           "arg(z²) = s([2θ]) の 1 行と「0 ≤ 2(θ-2nπ) < 4π の場合分けによる」の 1 文だけで、" +
           "φ_polar が積を保つこと・極座標表現の演算・pr_2 の適用・角度表現の切断が" +
