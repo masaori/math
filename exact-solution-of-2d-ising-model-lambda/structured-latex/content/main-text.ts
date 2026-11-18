@@ -47968,9 +47968,11 @@ D\cap F_n&=(D\cap R)\cap F_n&&\bigl(\because\ F_n\subseteq R\bigr)\\
                   paragraph(["よって ", math(String.raw`(E,D)`), " は ", math(String.raw`(F_n,C_n)`),
                     " の延長である。取込条件をこの延長と ", math(String.raw`\xi(n)=z\in E`),
                     " に適用する。" ]),
-                  displayMath(String.raw`\xi(n)\in F_{n+1}\qquad\bigl(\because\ \text{取込条件}\bigr)`),
-                  displayMath(String.raw`z\in F_{n+1}\qquad\bigl(\because\ z=\xi(n)\bigr)`),
-                  displayMath(String.raw`z\in R\qquad\bigl(\because\ F_{n+1}\subseteq R\bigr)`),
+                  displayMath(String.raw`\begin{aligned}
+\xi(n)&\in F_{n+1}&&\bigl(\because\ \text{取込条件}\bigr)\\
+z&\in F_{n+1}&&\bigl(\because\ z=\xi(n)\bigr)\\
+z&\in R&&\bigl(\because\ F_{n+1}\subseteq R\bigr)
+\end{aligned}`),
                   paragraph(["従って ", math(String.raw`E\subseteq R`), " である。逆包含 ",
                     math(String.raw`R\subseteq E`), " は ", ref("def_positive_cone_extension"),
                     " の延長の前提なので ", math(String.raw`E=R`), " である。",
