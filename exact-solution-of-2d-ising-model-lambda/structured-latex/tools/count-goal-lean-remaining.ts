@@ -57,7 +57,8 @@ export const EXISTENCE_OBLIGATIONS = [
 ] as const;
 
 /**
- * 存在の義務の予定の部品（2026-11-17 の研究管理が台帳の行に合わせて決めた。runbook「実閉部分体の存在の経路」）。
+ * 存在の義務の予定の部品。台帳の行と一対一に対応させる（runbook「実閉部分体の存在の経路」）。
+ * 台帳で行を割ったら、ここにも割った行のラベルと依存を足す。
  * ラベル名は台帳の行が名指す。本文で別のラベルにしたら、ここを直す。
  */
 export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly string[] }> = {
@@ -76,15 +77,44 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
       "claim_quadratic_positive_cone_is_subfield_positive_cone",
     ],
   },
+  claim_square_root_adjoined_subfield_quadratic_representation: {
+    title: "平方根を添加した部分体の二次係数表示",
+    dependsOn: [],
+  },
+  claim_square_root_adjoined_weighted_square_sum_excludes_minus_one: {
+    title: "平方根を添加した部分体の正錐重み付き平方和は負の単位元を含まない",
+    dependsOn: ["claim_square_root_adjoined_subfield_quadratic_representation"],
+  },
+  claim_square_root_adjoined_positive_cone_extension: {
+    title: "正の元の平方根を添加した部分体への正錐の延長",
+    dependsOn: [
+      "claim_square_root_adjoined_subfield_quadratic_representation",
+      "claim_square_root_adjoined_weighted_square_sum_excludes_minus_one",
+    ],
+  },
   claim_maximal_ordered_subfield_positive_is_square: {
     title: "極大な順序付き部分体では正の元が平方である",
-    dependsOn: ["claim_enumerated_ordered_subfield_is_maximal"],
+    dependsOn: ["claim_enumerated_ordered_subfield_is_maximal", "claim_square_root_adjoined_positive_cone_extension"],
   },
   claim_odd_degree_positive_cone_extension: {
     title: "奇数次の元を付け足しても正錐は延長できる",
     dependsOn: ["def_positive_cone_extension"],
   },
-  claim_symmetric_polynomial_fundamental_theorem: { title: "対称式の基本定理", dependsOn: [] },
+  claim_symmetric_vanishing_last_variable_divisible_by_product: {
+    title: "零代入で消える対称多項式は全変数の積で割り切れる",
+    dependsOn: [],
+  },
+  claim_elementary_symmetric_substitution_degree_bound: {
+    title: "基本対称式への代入は対称で部分体係数を保ち、次数は重み付き次数以下",
+    dependsOn: [],
+  },
+  claim_symmetric_polynomial_fundamental_theorem: {
+    title: "対称式の基本定理",
+    dependsOn: [
+      "claim_symmetric_vanishing_last_variable_divisible_by_product",
+      "claim_elementary_symmetric_substitution_degree_bound",
+    ],
+  },
   claim_adjoin_imaginary_unit_gives_algebraic_numbers: {
     title: "虚数単位を足すと代数的数の全体になる",
     dependsOn: ["claim_odd_degree_positive_cone_extension", "claim_symmetric_polynomial_fundamental_theorem"],
