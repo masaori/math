@@ -808,11 +808,26 @@ y
         " の ",
         ref("inclusion_rr_to_cc"),
         " による像である。",
-        math(String.raw`\langle A,A\rangle=0_{\mathbb{C}}\iff\|A\|=0\iff A=O`),
-        " は ",
-        ref("matrix_norm_triangle_inequality"),
-        " (1) による。",
+        math(String.raw`\langle A,A\rangle=0_{\mathbb{C}}\iff A=O`),
+        " は次の同値の鎖による。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\langle A,A\rangle=0_{\mathbb{C}}
+&\iff \left(\|A\|^2\right)_{\mathbb{C}}=0_{\mathbb{C}}
+   \quad (\because \text{上の鎖の } \langle A,A\rangle=\left(\|A\|^2\right)_{\mathbb{C}}) \\
+&\iff \left(\|A\|^2\right)_{\mathbb{C}}=\left(0\right)_{\mathbb{C}}
+   \quad (\because 0_{\mathbb{C}}=\iota_{\mathbb{R}\to\mathbb{C}}(0)=\left(0\right)_{\mathbb{C}}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}:=\iota_{\mathbb{R}\to\mathbb{C}}(r)\ (r\to 0)) \\
+&\iff \|A\|^2=0
+   \quad (\because \Rightarrow\ \text{は}\ \blkref{inclusion_rr_to_cc_is_injective}\ (a\to\|A\|^2,\ b\to 0)\text{、}\Leftarrow\ \text{は両辺に}\ \iota_{\mathbb{R}\to\mathbb{C}}\ \text{を施す}) \\
+&\iff \|A\|\,\|A\|=0
+   \quad (\because \blkref{square_of_real_number_is_product}\ (r\to\|A\|)) \\
+&\iff \|A\|=0
+   \quad (\because \Rightarrow\ \text{は}\ \blkref{real_product_of_nonzero_is_nonzero}\ (a, b\to\|A\|)\ \text{の対偶、}\Leftarrow\ \text{は}\ \|A\|\,\|A\|=\|A\|\cdot 0\ (\text{右の因子へ}\ \|A\|=0\ \text{を代入})\ =0\ (\blkref{real_times_zero_is_zero}\ (x\to\|A\|))) \\
+&\iff A=O
+   \quad (\because \blkref{matrix_norm_triangle_inequality}\ (1)\ (K=\mathbb{C}))
+\end{aligned}`,
+      ),
       paragraph([
         "Step 5: (4)。",
         math(String.raw`u:=\langle A,B\rangle\in\mathbb{C}`),
@@ -1200,6 +1215,7 @@ u+\overline{u}
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: Step 5 場合 2 の合わせる鎖で (-q_C) + q_C を 0_C にする行の根拠を、complex_numbers_form_a_field の加法逆元（右から足す z + (-z) = 0_C しか示しておらず、左から足す形は加法の可換律を合わせないと出ない）から negation_plus_self_is_zero_in_cc (x → q_C) に替えた。式は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 4 の鎖の後に置いていた「最後の段で引いたのは inclusion_rr_to_cc である。」の段落を削った。その行は ι_{ℝ→ℂ} が二重の有限和を保つことを使うが、inclusion_rr_to_cc は定義だけなので、行を 2 段に割り、各 i の内側の和と外側の和へ real_inclusion_preserves_finite_sum（m = n）を当てた。続けて置いていた (‖A‖²)_ℂ の鎖（根拠「上の鎖」）を同じ鎖の最後の行にし、後ろの段落の「（ノルムの定義は def_matrix_norm）」を、definition_of_sqrt_r_positive の y² = x の行と def_matrix_norm の行の 2 行に割って鎖に入れた（011_max_eigenvalue.ts の同じ変形と同じ割り方）。和の記号 Σ_{i,j} は (0) と同じ Σ_{i=1}^{n}Σ_{j=1}^{n} に書いた。鎖の両端は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 主張 (3) と Step 2・Step 3・Step 5 場合 1 の鎖に残っていた和の記号 Σ_{i,j} を、(0) と Step 4 と同じ Σ_{i=1}^{n}Σ_{j=1}^{n} に書いた。Step 4 の後の段落の √⟨A,A⟩ = ‖A‖ は ℂ の元の平方根で本文に定義が無く、主張にも無くどこからも使われないので削り、同じ段落の「非負実数 ‖A‖² の像」に写像 inclusion_rr_to_cc を添えた。式と主張は変えていない。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 4 の後の段落の ⟨A,A⟩ = 0_ℂ ⟺ ‖A‖ = 0 ⟺ A = O の根拠が matrix_norm_triangle_inequality (1) だけだったので、同値の鎖に割り、0_ℂ = ι_{ℝ→ℂ}(0)（inclusion_rr_to_cc）、inclusion_rr_to_cc_is_injective、square_of_real_number_is_product、real_product_of_nonzero_is_nonzero の対偶と real_times_zero_is_zero、matrix_norm_triangle_inequality (1) を段ごとに引いた。式と主張は変えていない。",
       ],
     },
   },
