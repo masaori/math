@@ -10555,9 +10555,9 @@ i&\in\operatorname{Orb}_p(\tau(m(i)))&&\bigl(\because\ i\in\mathcal B_{\tau,\ups
               proof: [
                 paragraph(["写像 ", math(String.raw`m:=m_{\tau,\upsilon}:\mathcal J\to\mathcal J`), " と略し、", ref("def_matching_pair_step"), " の二歩置換 ", math(String.raw`p\in\operatorname{Perm}(\mathcal J)`), " を使う。任意の ", math(String.raw`j\in\mathcal J`), " について、"]),
                 displayMath(String.raw`\begin{aligned}
-j&\in\operatorname{Orb}_p(j)&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の零回の反復}\bigr),\\
-p(j)&\in\operatorname{Orb}_p(j)&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr),\\
-p(j)&\in\mathcal B_{\tau,\upsilon}(j)&&\bigl(\because\ \blkref{def_matching_pair_component}\text{ の合併}\bigr),\\
+j&\in\operatorname{Orb}_p(j)&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の零回の反復}\bigr)\\
+p(j)&\in\operatorname{Orb}_p(j)&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)\\
+p(j)&\in\mathcal B_{\tau,\upsilon}(j)&&\bigl(\because\ \blkref{def_matching_pair_component}\text{ の合併}\bigr)\\
 m(p(j))&=m(j)&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates}\text{ の証明の最小元の一致}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
@@ -48111,6 +48111,85 @@ z&\in R&&\bigl(\because\ F_{n+1}\subseteq R\bigr)
                     math(String.raw`R\subseteq E`), " は ", ref("def_positive_cone_extension"),
                     " の延長の前提なので ", math(String.raw`E=R`), " である。",
                     "実数体・複素数体は使わない。" ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "zero_pinching_heading_enumerated_ordered_subfield_is_maximal",
+        labels: [],
+        title: { text: "二次体からの延長列と極大性の接続" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_enumerated_ordered_subfield_is_maximal",
+              focus: {
+                id: "zero_pinching_claim_enumerated_ordered_subfield_is_maximal",
+                kind: "claim",
+                title: { text: "二次体の正錐を含む極大な順序付き部分体がある" },
+                labels: ["claim_enumerated_ordered_subfield_is_maximal"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/enumerated-ordered-subfield-is-maximal"],
+                lean: [
+                  "Ising2DLambda.FisherZero.enumeratedOrderedSubfield_isMaximal",
+                  "Ising2DLambda.NecSuf.FisherZero.enumeratedOrderedSubfield_isMaximal",
+                  "Ising2DLambda.FisherZero.enumeratedOrderedSubfield_isMaximal_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                    " を有理数の包含（", ref("def_algebraic_numbers"), "）とし、",
+                    math(String.raw`s\in\overline{\mathbb Q}`), " が ",
+                    math(String.raw`s^2=\iota(2)`), " を満たすとする。",
+                    "二次体 ", math(String.raw`Q_s`), "（", ref("claim_quadratic_field_set_is_subfield"),
+                    "）とその正錐 ", math(String.raw`P_s`), "（", ref("claim_quadratic_positive_cone_is_subfield_positive_cone"),
+                    "）から部分体 ", math(String.raw`R\subseteq\overline{\mathbb Q}`),
+                    " と正錐 ", math(String.raw`C_R\subseteq R`), " が存在し、",
+                    math(String.raw`(R,C_R)`), " は ", math(String.raw`(Q_s,P_s)`),
+                    " を延長する（", ref("def_positive_cone_extension"), "）。",
+                    "任意の正錐付き部分体 ", math(String.raw`(E,D)`), " が ",
+                    math(String.raw`(R,C_R)`), " を延長するなら ", math(String.raw`E=R`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_algebraic_numbers_enumeration"), " の全射 ",
+                    math(String.raw`\xi:\mathbb N\to\overline{\mathbb Q}`), " を固定する。",
+                    math(String.raw`F_0:=Q_s`), " と ", math(String.raw`C_0:=P_s`), " と置く。",
+                    ref("claim_quadratic_field_set_is_subfield"), " と ",
+                    ref("claim_quadratic_positive_cone_is_subfield_positive_cone"),
+                    " により初項は正錐付き部分体である。",
+                  ]),
+                  paragraph([
+                    ref("claim_enumerated_ordered_subfield_chain"), " を初項と ",
+                    math(String.raw`\xi`), " に適用し、延長列 ",
+                    math(String.raw`(F_n,C_n)_{n\in\mathbb N}`), " を取る。",
+                    "この列は各段の延長条件と取込条件を満たす。",
+                  ]),
+                  paragraph([
+                    math(String.raw`R:=\bigcup_{n\in\mathbb N}F_n`), "、",
+                    math(String.raw`C_R:=\bigcup_{n\in\mathbb N}C_n`), " と置く。",
+                    "任意の ", math(String.raw`n\in\mathbb N`), " について",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+C_R\cap F_n&=C_n&&\bigl(\because\ \blkref{claim_increasing_positive_cone_union_restricts_to_stage}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "延長条件・取込条件・制限等号を ",
+                    ref("claim_enumerated_ordered_subfield_maximality_criterion"),
+                    " に代入すると極大性を得る。",
+                    math(String.raw`F_0\subseteq R`), " と ",
+                    math(String.raw`C_R\cap F_0=C_0`), " により初項も延長される。",
+                    "実数体・複素数体は使わない。",
+                  ]),
                 ],
               },
             },

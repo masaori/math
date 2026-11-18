@@ -134,6 +134,7 @@ export const ALL_LABELS = [
   "claim_edge_simple_contact_split",
   "claim_empty_pfaffian_determinant",
   "claim_enumerated_ordered_subfield_chain",
+  "claim_enumerated_ordered_subfield_is_maximal",
   "claim_enumerated_ordered_subfield_maximality_criterion",
   "claim_enumerated_ordered_subfield_step_choice",
   "claim_enumerated_precone_chain_covers_signs",
