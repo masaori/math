@@ -17,6 +17,7 @@
 | exp(-u) の鎖の 1〜4 行目 | `check_proof_lines.sage` | L[W]（W は exp(-u) の値の不定元）で厳密に | **PASS** | 成り立つ |
 | exp(-u) の鎖の 5〜7 行目（exp の積の法則、exp(0) = 1） | `check_proof_lines.sage` | W·exp(u) = 1 の下でだけ s-y になること（対照として不定元のままでは s-y でない）を L で、7 点で exp(-u)exp(u) と exp(-u) = s-y をボールで | **PASS** | 成り立つ |
 | 主の鎖の 3〜5 行目と主張 | `check_proof_lines.sage` | L で (y+s-(s-y))/2 = y、7 点で sinh(arcsinh(y)) のボールが y と重なる | **PASS** | 成り立つ |
+| exp(-u) の鎖の 1 行目 exp(-u) = exp(-u)·1 の根拠（`set_and_algebra_notation` の ℝ の乗法の単位元 x·1 = x、x → exp(-u)、右辺から左辺へ） | `check_identity_row_cites_set_and_algebra_notation.sage` | exp(-u) を不定元 W に置いた QQ[W] で、行に書いた形と代入どおりに（形の左右はレビューの目視で確かめた）。対照: 単位元を 0・2 に取り違えた形 | **PASS** | 成り立つ |
 
 ## 計算の帰属と範囲
 

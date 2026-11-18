@@ -1084,7 +1084,7 @@ p < 0\ \land\ q < 0
       displayMath(String.raw`\begin{aligned}
 \exp(-u)
 &= \exp(-u)\cdot 1
-&&(\because\ 1\ \text{は乗法の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to \exp(-u))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \exp(-u)\left((y+s)(s-y)\right)
 &&(\because\ \blkref{arcsinh_argument_times_conjugate_is_one})\\
 &= \left(\exp(-u)\,(y+s)\right)(s-y)
@@ -1117,6 +1117,7 @@ p < 0\ \land\ q < 0
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (4) の sinh(arcsinh(y)) = y を独立の主張にした。旧証明の exp(-u) = 1/(y+√(y²+1)) は exp(u)exp(-u) = 1 を根拠に書いていなかったので、" +
           "(y+s)(s-y) = 1 と exp の積の法則で exp(-u) = s - y を出す鎖に改めた。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: exp(−u) の鎖の 1 行目の根拠「1 は乗法の単位元」は、どの構造の単位元かも参照も形と代入も無い名前だけの根拠だったので、ℝ が順序体であることを述べる set_and_algebra_notation を引き、形 x·1 = x と代入 (x → exp(−u)) と向き（右辺から左辺へ）を書いた。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -2661,7 +2662,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
 &= 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}}
   &&\bigl(\because\ \mathbb{Z}\ \text{の分配法則}\bigr)\\
 &= 2_{\mathbb{Z}}^{\,M} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M}
-  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の乗法の単位元を二か所へ同時に}\bigr)\\
+  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の乗法の単位元}\ x \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} = x\ (x \to 2_{\mathbb{Z}}^{\,M})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ}\bigr)\\
 &\geq 1_{\mathbb{Z}} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M}
   &&\bigl(\because\ \text{帰納法の仮定}\ 2_{\mathbb{Z}}^{\,M} \geq 1_{\mathbb{Z}}\ \text{の両辺に}\ 2_{\mathbb{Z}}^{\,M}\ \text{を足す}\bigr)\\
 &\geq 1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}}
@@ -2669,7 +2670,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
 &\geq 1_{\mathbb{Z}} +_{\mathbb{Z}} 0_{\mathbb{Z}}
   &&\bigl(\because\ 1_{\mathbb{Z}} \geq 0_{\mathbb{Z}}\ \text{の両辺に}\ 1_{\mathbb{Z}}\ \text{を足す}\bigr)\\
 &= 1_{\mathbb{Z}}
-  &&\bigl(\because\ 0_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の和の単位元}\bigr)
+  &&\bigl(\because\ 0_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の加法の単位元}\ x +_{\mathbb{Z}} 0_{\mathbb{Z}} = x\ (x \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph(["であり、主張は ", math(String.raw`M+1`), " でも成り立つ。"]),
     ],
@@ -2677,6 +2678,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。行列の大きさ d := 2_ℤ^{M_col} が ℤ_{≥1} の元であること（finite_sum_of_constant_real_number の m ∈ ℤ_{≥1}）と、inclusion_zz_to_rr_of_power_of_two の帰納法の段の 2_ℤ^M ∈ ℤ_{≥0} を引けるよう足した。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 帰納段の鎖の 2 つの単位元の行（「1_ℤ は ℤ の乗法の単位元を二か所へ同時に」「0_ℤ は ℤ の和の単位元」）は参照も形と代入も無い名前だけの根拠だったので、ℤ が整数環であることを述べる set_and_algebra_notation を引き、形 x ·_ℤ 1_ℤ = x（x → 2_ℤ^M、2 箇所へ）と x +_ℤ 0_ℤ = x（x → 1_ℤ）を書いた。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -2748,13 +2750,13 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
   &&\bigl(\because\ \mathbb{Z}\ \text{の分配法則}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M}\bigr)
-  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の乗法の単位元を二か所へ同時に}\bigr)\\
+  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の乗法の単位元}\ x \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} = x\ (x \to 2_{\mathbb{Z}}^{\,M})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M}\bigr) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M}\bigr)
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum_of_nonnegatives}\ (a, b \to 2_{\mathbb{Z}}^{\,M})\bigr)\\
 &= 2_{\mathbb{R}}^{\,M} +_{\mathbb{R}} 2_{\mathbb{R}}^{\,M}
   &&\bigl(\because\ \text{帰納法の仮定を二か所へ同時に}\bigr)\\
 &= 2_{\mathbb{R}}^{\,M}\, 1_{\mathbb{R}} +_{\mathbb{R}} 2_{\mathbb{R}}^{\,M}\, 1_{\mathbb{R}}
-  &&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元を二か所へ同時に}\bigr)\\
+  &&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\, 1_{\mathbb{R}} = x\ (x \to 2_{\mathbb{R}}^{\,M})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ}\bigr)\\
 &= 2_{\mathbb{R}}^{\,M}\,(1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}})
   &&\bigl(\because\ \mathbb{R}\ \text{の分配法則}\bigr)\\
 &= 2_{\mathbb{R}}^{\,M}\, 2_{\mathbb{R}}
@@ -2768,6 +2770,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の最後の鎖で、行列の大きさ d = 2^{M_col} ∈ ℤ を ι_{ℤ→ℝ} で送った値が ℝ の冪 2^{M_col} であることを引けるよう足した。ℝ の冪の定義の隣に置く。ℤ の冪は def_power_of_integer。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 帰納段の鎖の 2 つの単位元の行（ℤ と ℝ の「乗法の単位元を二か所へ同時に」）は参照も形と代入も無い名前だけの根拠だったので、set_and_algebra_notation（ℤ は整数環、ℝ は順序体）を引き、形 x ·_ℤ 1_ℤ = x（x → 2_ℤ^M、2 箇所へ）と x 1_ℝ = x（x → 2_ℝ^M、2 箇所へ右辺から左辺へ）を書いた。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -2900,7 +2903,7 @@ a^1
 &= 1\cdot a
 &&(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^0 := 1)\\
 &= a
-&&(\because\ \mathbb{R}\ \text{の乗法の単位元})
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "なので ",
@@ -2912,7 +2915,7 @@ a^1
 &= \log a
 &&(\because\ \text{上の}\ a^1 = a)\\
 &= 1_{\mathbb{R}}\cdot\log a
-&&(\because\ \mathbb{R}\ \text{の乗法の単位元})\\
+&&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1_{\mathbb{R}}\cdot x = x\ (x \to \log a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}})\,\log a
 &&(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}}) = 1_{\mathbb{R}}\ \text{を右辺から左辺へ})
 \end{aligned}`),
@@ -2945,7 +2948,7 @@ a^1
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(n)\,\log a + \log a
 &&(\because\ \text{帰納法の仮定})\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(n)\,\log a + 1_{\mathbb{R}}\cdot\log a
-&&(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元})\\
+&&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1_{\mathbb{R}}\cdot x = x\ (x \to \log a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)\log a
 &&(\because\ \mathbb{R}\ \text{の分配法則})\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}})\,\log a
@@ -2957,6 +2960,7 @@ a^1
       notes: [
         "2026-11-05: limit_of_log_Z_in_N_row の証明が根拠「log(c^N) = N log c」「log(2^M) = M log 2」をラベルなしで使っていたので、real_log_of_product から帰納法で示す主張にした。冪は def_power_of_real_number。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 右辺の n log a は n ∈ ℤ と log a ∈ ℝ の積で、ℤ の元を ℝ の積へ入れる写像が名指されていなかった（証明の書き方の「同一視をしない」）。inclusion_zz_to_rr の ι_{ℤ→ℝ} を通して ι(n) log a と書き、n = 1 の鎖に ι(1) = 1（inclusion_zz_to_rr_of_one）の行、帰納法の段に 1·log a と ι(n) + 1 = ι(n+1)（inclusion_zz_to_rr の定義）の行を足した。値は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: a^1 = a の鎖の最後の行、n = 1 の log の鎖の 2 行目、帰納段の鎖の 4 行目の根拠「ℝ の乗法の単位元」は参照も形と代入も無い名前だけの根拠だったので、ℝ が順序体であることを述べる set_and_algebra_notation を引き、形 1·x = x と代入（x → a、x → log a）と向きを書いた。鎖の両端と主張は不変。",
       ],
     },
   },

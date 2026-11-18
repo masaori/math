@@ -1,0 +1,3 @@
+identity rows of power_of_two_in_integers_is_at_least_one: 43 checks
+negative controls (broken lines detected): 2
+RESULT: PASS

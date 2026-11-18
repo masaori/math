@@ -16,8 +16,9 @@
 | 帰納の段: 仮定 `a^n > 0`・`log(a^n) = ι(n) log a`、`a^{n+1} = a^n a > 0` | `check_proof_lines.sage` | `a^{n+1}` を再帰で作り、`a^n a` と Sage 組み込みの `a**(n+1)` に一致し正であること（QQ・AA の厳密な比較） | **PASS** |
 | 帰納の段の鎖 `log(a^{n+1}) = log(a^n a) = log(a^n) + log a = ι(n) log a + log a = ι(n) log a + 1·log a = (ι(n)+1) log a = ι(n+1) log a` | `check_proof_lines.sage` | 各行の両辺を別々にボールで作って等号、鎖の両端も。`ι(n+1) = ι(n) + 1` は `ι` を定義の再帰（`sagemath/_shared/inclusion_zz_to_rr_by_definition.sage`）で作って QQ で | **PASS** |
 | 主張 | `check_proof_lines.sage` | a ∈ {1, 2, 1/3, 10^{-6}, 123/7, √2, √2+√3, √5−2}、n = 1..40 | **PASS** |
+| 単位元の 3 行の根拠（`set_and_algebra_notation` の ℝ の 1·x = x。a^1 の鎖の最後の行は x → a、n = 1 の log の鎖の 2 行目と帰納の段の鎖の 4 行目は x → log a を右辺から左辺へ） | `check_identity_rows_cite_set_and_algebra_notation.sage` | a・log a・ι(n) を不定元に置いた QQ[a, L, N] で、行に書いた形と代入どおりに（形の左右は多項式環が正規化するので区別できず、レビューの目視で確かめた） 3 個の等号（log の値を不定元に置くので ℝ へ脱出しない）。対照: 単位元を取り違えた形 2 個 | **PASS** |
 
-比較は 2232 個。否定コントロール: `a = 2, 1/3, √2+√3`、`n = 2..5` で `log(a^n)` は `(n+1) log a` とも `(log a)^n` とも一致しない。
+比較は 2232 個（`check_proof_lines.sage`）。単位元の行の根拠の検算 `check_identity_rows_cite_set_and_algebra_notation.sage` は別に 3 個と否定の対照 2 個。否定コントロール: `a = 2, 1/3, √2+√3`、`n = 2..5` で `log(a^n)` は `(n+1) log a` とも `(log a)^n` とも一致しない。
 
 ## 計算の帰属と範囲
 
