@@ -68,7 +68,7 @@ for M in range(2, 8):
                 count += 1
 
 # ---- 主張の鎖（組合せの層。厳密）----
-# 「ς の値」「1·b = b」「a·1 = a」「a(-1) = -a」「a + (-1)b = a - b」の行は、この層では隣の行と同じ多項式になる
+# 「ς の値」「1·b = b」「a·1 = a」「乗法の可換則 K(-1) = (-1)K」「(-1)K = -K」「(-1)exp(-K) = -exp(-K)」「def_real_difference」の行は、この層では隣の行と同じ多項式になる
 # （実数の層で別に確かめる）。
 for M in range(2, 9):
     S = configs(M)
@@ -78,12 +78,12 @@ for M in range(2, 9):
                      for u in [-1, 1]], Rxy(0))
     L4 = finite_sum([finite_prod([varsigma(1) * w_sym(varsigma(1)) + varsigma(0) * w_sym(varsigma(0)) for m in range(1, M)])
                      for u in [-1, 1]], Rxy(0))
-    L9 = finite_sum([finite_prod([X - Y for m in range(1, M)]) for u in [-1, 1]], Rxy(0))
-    L10 = 2 * finite_prod([X - Y for m in range(1, M)])
+    L11 = finite_sum([finite_prod([X - Y for m in range(1, M)]) for u in [-1, 1]], Rxy(0))
+    L12 = 2 * finite_prod([X - Y for m in range(1, M)])
     sinhK = (X - Y) / 2                         # def_cosh_sinh（exp(K) → x、exp(-K) → y）
-    L11 = 2 * finite_prod([2 * sinhK for m in range(1, M)])
-    L12 = 2 * (2 * sinhK) ^ (M - 1)
-    chain = [L1, L2, L3, L4, L9, L10, L11, L12]
+    L13 = 2 * finite_prod([2 * sinhK for m in range(1, M)])
+    L14 = 2 * (2 * sinhK) ^ (M - 1)
+    chain = [L1, L2, L3, L4, L11, L12, L13, L14]
     for a, b in zip(chain, chain[1:]):
         assert a == b, M
         count += 1
@@ -93,10 +93,21 @@ for M in range(2, 9):
     count += 1
     # 否定コントロール: 端点因子を落とすと cosh の側になる、二元集合の和で符号を落とすと外れる
     L0_no_endpoint = finite_sum([finite_prod([w_sym(t(s, m)) for m in range(1, M)]) for s in S], Rxy(0))
-    if L0_no_endpoint != L12:
+    if L0_no_endpoint != L14:
         neg_no_endpoint += 1
-    if L12 != 2 * (X + Y) ^ (M - 1):
+    if L14 != 2 * (X + Y) ^ (M - 1):
         neg_sign += 1
+
+# 主張の鎖の 8 行目・9 行目の根拠（K ∈ K_SAMPLES ⊂ ℚ で厳密に）: 乗法の可換則 K·(-1) = (-1)·K と
+# real_minus_one_times_is_negation の (-1)·K = -K（a → K）
+for K in K_SAMPLES:
+    assert QQ(K) * QQ(-1) == QQ(-1) * QQ(K)
+    assert QQ(-1) * QQ(K) == -QQ(K)
+    count += 2
+# 主張の鎖の 10 行目・11 行目の根拠（QQ[x,y] で厳密に。exp(K) → x、exp(-K) → y）:
+# real_minus_one_times_is_negation の (-1)·y = -y（a → exp(-K)）と def_real_difference の x + (-y) = x - y
+assert (-1) * Y == -Y and X + (-1) * Y == X + (-Y) and X + (-Y) == X - Y
+count += 3
 
 # ---- 主張の鎖（実数の層）と主張 ----
 for M in range(2, 8):
@@ -114,12 +125,14 @@ for M in range(2, 8):
         L5 = outer(lambda: 1 * rexp(RK * 1) + (-1) * rexp(RK * (-1)))
         L6 = outer(lambda: rexp(RK * 1) + (-1) * rexp(RK * (-1)))
         L7 = outer(lambda: rexp(RK) + (-1) * rexp(RK * (-1)))
-        L8 = outer(lambda: rexp(RK) + (-1) * rexp(-RK))
-        L9 = outer(lambda: rexp(RK) - rexp(-RK))
-        L10 = 2 * finite_prod([rexp(K) - rexp(-K) for m in range(1, M)])
-        L11 = 2 * finite_prod([2 * rsinh_def(K) for m in range(1, M)])
-        L12 = 2 * (2 * rsinh_def(K)) ^ (M - 1)
-        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, L12]
+        L8 = outer(lambda: rexp(RK) + (-1) * rexp((-1) * RK))
+        L9 = outer(lambda: rexp(RK) + (-1) * rexp(-RK))
+        L10 = outer(lambda: rexp(RK) + (-rexp(-RK)))
+        L11 = outer(lambda: rexp(RK) - rexp(-RK))
+        L12 = 2 * finite_prod([rexp(K) - rexp(-K) for m in range(1, M)])
+        L13 = 2 * finite_prod([2 * rsinh_def(K) for m in range(1, M)])
+        L14 = 2 * (2 * rsinh_def(K)) ^ (M - 1)
+        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, L12, L13, L14]
         if K == 0:
             # 値が 0 になるので相対の半径の判定が効かない。0 を含むことと半径の絶対値で見る
             for v in chain:

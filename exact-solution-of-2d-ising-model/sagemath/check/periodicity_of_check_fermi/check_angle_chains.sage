@@ -69,7 +69,8 @@ for j in range(len(nu_chain) - 1):
 neg_nu = [
     -(2 * PI - tt(mu)),
     tt(mu) + (-(2 * PI)),
-    tt(mu) + 2 * PI * (-one),
+    tt(mu) + (-one) * (2 * PI),       # real_minus_one_times_is_negation（a → 2π）を右辺から左辺へ
+    tt(mu) + 2 * PI * (-one),         # ℝ の乗法の可換則
     tt(mu) + 2 * PI * (-one),         # ι は単位元を保つ（像 (1)_R = 1_R。中身は下の整数の検算）
     tt(mu) + 2 * PI * (-one),         # 準備の第二を k = 1 で（中身は下の整数の検算）
 ]
@@ -131,7 +132,7 @@ for M in M_RANGE:
         cnt += 1
         if not (1 <= nu <= M
                 and T(nu) == 2 - T(m) == 2 + (-T(m)) == (-T(m)) + 2 == (-T(m)) + 2 * 1 == (-T(m)) + 2 * QQ(1)
-                and -T(nu) == -(2 - T(m)) == T(m) + (-2) == T(m) + 2 * (-1) == T(m) + 2 * (-QQ(1)) == T(m) + 2 * QQ(-1)):
+                and -T(nu) == -(2 - T(m)) == T(m) + (-2) == T(m) + (-1) * 2 == T(m) + 2 * (-1) == T(m) + 2 * (-QQ(1)) == T(m) + 2 * QQ(-1)):
             bad += 1
 rep.check(bad == 0, f"(3) ν ∈ M̌ と θ~_ν・-θ~_ν の鎖の各行（M = 2..8 の全 μ ∈ M̌、{cnt} 組）")
 

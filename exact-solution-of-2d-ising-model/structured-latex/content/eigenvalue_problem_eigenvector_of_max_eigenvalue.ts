@@ -2890,8 +2890,10 @@ D_0G
    \quad (\because \varsigma(1)=1,\ \varsigma(0)=-1\text{ を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(K\cdot(-1))\right)
    \quad (\because \mathbb R\text{ で }a\cdot 1 = a\text{ を各因子へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp((-1)\cdot K)\right)
+   \quad (\because \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to K,\ q \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(-K)\right)
-   \quad (\because \mathbb R\text{ で }a\cdot(-1) = -a\text{ を各因子へ}) \\
+   \quad (\because \blkref{real_minus_one_times_is_negation}\ (a \to K)\text{ を各因子へ}) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(-K)\right)
    \quad (\because u\text{ に依らない実数 }c\text{ の二元集合 }\{-1,1\}\text{ 上の和は }c + c = 2c) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\cosh K\right)
@@ -2906,6 +2908,7 @@ D_0G
       notes: [
         "数値検証: sagemath/check/open_chain_partition_sum/（旧: sagemath/check/053_claim_even_sector_closing/check_03 の M=2,…,8 の全配置の直接列挙）。",
         "2026-11-04: SageMath の検算を付けるときに、exp(KE(s)) = Π_m exp(Kt_m) の根拠が theorem_exp_product（二つの行列の主張）の n = 1 を指していた誤りを real_exp_of_finite_sum に直し、E(s) の書き替え・分配則・指数法則を準備の鎖に分けた。和の付け替えの行が準備の等式の適用も兼ねていたので二行に分けた。付け替えた後の和の添字を s(1)・t_m と同じ記号で書いていたのを u・τ_m にし、Step 1 の t_m を s の関数 t_m(s) と書いた。名前だけだった「有限個の因子の積の展開」は、写像 ς(e) := 2e − 1 で {0,1}^{M_col−1} の和へ付け替えて expansion_of_finite_product_of_two_term_sums_of_real_numbers を引く行にし、「二元集合上の二つの有限和」を ς の値・a·1 = a・a(−1) = −a・c + c = 2c の行に分けた。cosh の定義の行の前に置いていた文を行末のラベル参照にし、主張文に M_col ∈ ℤ_{≥2}・exp・cosh・冪の定義を書いた。主張は変えていない。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「ℝ で a·(−1) = −a を各因子へ」の行を、ℝ の乗法の可換則（set_and_algebra_notation）を各因子へ当てる行と real_minus_one_times_is_negation（a → K）を各因子へ当てる行の 2 行に割った。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -3078,10 +3081,14 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
    \quad (\because \mathbb R\text{ で }1\cdot b = b\text{ を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+(-1)\exp(K\cdot(-1))\right)
    \quad (\because \mathbb R\text{ で }a\cdot 1 = a\text{ を各因子へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+(-1)\exp((-1)\cdot K)\right)
+   \quad (\because \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to K,\ q \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+(-1)\exp(-K)\right)
-   \quad (\because \mathbb R\text{ で }a\cdot(-1) = -a\text{ を各因子へ}) \\
+   \quad (\because \blkref{real_minus_one_times_is_negation}\ (a \to K)\text{ を各因子へ}) \\
+&= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\left(-\exp(-K)\right)\right)
+   \quad (\because \blkref{real_minus_one_times_is_negation}\ (a \to \exp(-K))\text{ を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)-\exp(-K)\right)
-   \quad (\because \mathbb R\text{ で }a + (-1)b = a - b\text{ を各因子へ}) \\
+   \quad (\because \blkref{def_real_difference}\ (y \to \exp(K),\ z \to \exp(-K))\text{ を右辺から左辺へ、各因子へ}) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)-\exp(-K)\right)
    \quad (\because u\text{ に依らない実数 }c\text{ の二元集合 }\{-1,1\}\text{ 上の和は }c + c = 2c) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\sinh K\right)
@@ -3096,6 +3103,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
       notes: [
         "数値検証: sagemath/check/open_chain_endpoint_product_sum/（旧: sagemath/check/053_claim_even_sector_closing/check_03 の M=2,…,8 の全配置の直接列挙）。",
         "2026-11-04: SageMath の検算を付けるときに、exp(KE(s)) = Π_m exp(Kt_m) の根拠が theorem_exp_product（二つの行列の主張）の n = 1 を指していた誤りを、open_chain_partition_sum の準備の等式（real_exp_of_finite_sum）に直した。Step 2 の Π_{m=2}^{M_col−1} は M_col = 2 で因子が無く def_finite_product_of_real_numbers が定めない積だったので、M_col = 2 を別の鎖にした。主張の左辺の因子 s(M_col)s(1) を Step 2 の s(1)s(M_col) へ移す可換性の行と、二つの有限積の因子を対にする行（finite_product_of_real_products）を、名前だけの「Step 1 の全単射と直前の等式」から分けた。別のブロックの証明の途中の等式を引かないよう、exp(KE(s)) の鎖をこの証明にも置いた。付け替えた後の和の添字を u・τ_m にし、積の展開を open_chain_partition_sum と同じく ς で expansion_of_finite_product_of_two_term_sums_of_real_numbers を引く行にした。主張文に M_col ∈ ℤ_{≥2}・exp・sinh・冪の定義を書いた。主張は変えていない。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「ℝ で a·(−1) = −a を各因子へ」の行を、ℝ の乗法の可換則（set_and_algebra_notation）を各因子へ当てる行と real_minus_one_times_is_negation（a → K）を各因子へ当てる行の 2 行に割った。続く「ℝ で a + (−1)b = a − b を各因子へ」の行も、real_minus_one_times_is_negation（a → exp(−K)）を各因子へ当てる行と def_real_difference（y → exp(K)、z → exp(−K)）を右辺から左辺へ当てる行の 2 行に割った。鎖の両端と主張は不変。",
       ],
     },
   },

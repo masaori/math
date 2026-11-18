@@ -65,7 +65,7 @@ neg_power = neg_sinh = neg_sinh_real = neg_prep = 0
 
 # ---- 主張の鎖（組合せの層。厳密）----
 # w_sym(τ) が exp(Kτ)。exp(Kς(e)) は w_sym(ς(e))、exp(K·1)・exp(K·(-1)) も w_sym(1)・w_sym(-1) なので、
-# 「ς の値」「a·1 = a」「a(-1) = -a」の三行はこの層では同じ多項式になる（実数の層で別に確かめる）。
+# 「ς の値」「a·1 = a」「乗法の可換則 K(-1) = (-1)K」「(-1)K = -K」の四行はこの層では同じ多項式になる（実数の層で別に確かめる）。
 for M in range(2, 9):
     S = configs(M)
     L1 = finite_sum([finite_prod([w_sym(t(s, m)) for m in range(1, M)]) for s in S], Rxy(0))
@@ -73,19 +73,26 @@ for M in range(2, 9):
     L3 = finite_sum([binword_sum(lambda e: finite_prod([w_sym(varsigma(em)) for em in e]), M - 1, Rxy(0))
                      for u in [-1, 1]], Rxy(0))
     L4 = finite_sum([finite_prod([w_sym(varsigma(1)) + w_sym(varsigma(0)) for m in range(1, M)]) for u in [-1, 1]], Rxy(0))
-    L7 = finite_sum([finite_prod([X + Y for m in range(1, M)]) for u in [-1, 1]], Rxy(0))
-    L8 = 2 * finite_prod([X + Y for m in range(1, M)])
+    L8 = finite_sum([finite_prod([X + Y for m in range(1, M)]) for u in [-1, 1]], Rxy(0))
+    L9 = 2 * finite_prod([X + Y for m in range(1, M)])
     coshK = (X + Y) / 2                         # def_cosh_sinh（exp(K) → x、exp(-K) → y）
-    L9 = 2 * finite_prod([2 * coshK for m in range(1, M)])
-    L10 = 2 * (2 * coshK) ^ (M - 1)            # Sage の冪（有限積とは別の経路）
-    chain = [L1, L2, L3, L4, L7, L8, L9, L10]
+    L10 = 2 * finite_prod([2 * coshK for m in range(1, M)])
+    L11 = 2 * (2 * coshK) ^ (M - 1)            # Sage の冪（有限積とは別の経路）
+    chain = [L1, L2, L3, L4, L8, L9, L10, L11]
     for a, b in zip(chain, chain[1:]):
         assert a == b, M
         count += 1
-    if L10 != 2 * (2 * coshK) ^ M:
+    if L11 != 2 * (2 * coshK) ^ M:
         neg_power += 1
-    if L10 != 2 * (X - Y) ^ (M - 1):
+    if L11 != 2 * (X - Y) ^ (M - 1):
         neg_sinh += 1
+
+# 主張の鎖の 7 行目・8 行目の根拠（K ∈ K_SAMPLES ⊂ ℚ で厳密に）: 乗法の可換則 K·(-1) = (-1)·K と
+# real_minus_one_times_is_negation の (-1)·K = -K（a → K）
+for K in K_SAMPLES:
+    assert QQ(K) * QQ(-1) == QQ(-1) * QQ(K)
+    assert QQ(-1) * QQ(K) == -QQ(K)
+    count += 2
 
 # ---- 主張の鎖（実数の層）と主張 ----
 for M in range(2, 8):
@@ -100,11 +107,12 @@ for M in range(2, 8):
         L4 = finite_sum([finite_prod([rexp(RK * varsigma(1)) + rexp(RK * varsigma(0)) for m in range(1, M)]) for u in [-1, 1]], RB(0))
         L5 = finite_sum([finite_prod([rexp(RK * 1) + rexp(RK * (-1)) for m in range(1, M)]) for u in [-1, 1]], RB(0))
         L6 = finite_sum([finite_prod([rexp(RK) + rexp(RK * (-1)) for m in range(1, M)]) for u in [-1, 1]], RB(0))
-        L7 = finite_sum([finite_prod([rexp(RK) + rexp(-RK) for m in range(1, M)]) for u in [-1, 1]], RB(0))
-        L8 = 2 * finite_prod([rexp(K) + rexp(-K) for m in range(1, M)])
-        L9 = 2 * finite_prod([2 * rcosh_def(K) for m in range(1, M)])
-        L10 = 2 * (2 * rcosh_def(K)) ^ (M - 1)
-        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10]
+        L7 = finite_sum([finite_prod([rexp(RK) + rexp((-1) * RK) for m in range(1, M)]) for u in [-1, 1]], RB(0))
+        L8 = finite_sum([finite_prod([rexp(RK) + rexp(-RK) for m in range(1, M)]) for u in [-1, 1]], RB(0))
+        L9 = 2 * finite_prod([rexp(K) + rexp(-K) for m in range(1, M)])
+        L10 = 2 * finite_prod([2 * rcosh_def(K) for m in range(1, M)])
+        L11 = 2 * (2 * rcosh_def(K)) ^ (M - 1)
+        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11]
         for a, b in zip(chain, chain[1:]):
             assert same(a, b), (M, K)
             count += 1

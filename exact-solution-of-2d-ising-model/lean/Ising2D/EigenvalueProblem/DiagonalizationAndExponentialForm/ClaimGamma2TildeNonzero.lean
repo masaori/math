@@ -17,7 +17,7 @@
 別扱いしていた。**半整数運動量ではこの例外が起こらない。**
 
 理由は 1 行に集約できる: `sin θ~_μ = 0` は `M θ~_μ = (2μ-1)π` が `π` の**奇数**倍であることから
-`cos θ~_μ = -1` を強制し（必要十分版）、そのとき Step 1 の連立条件の第 2 式
+`cos θ~_μ = -1` を強制し（必要十分版）、そのとき Step 1 の連立条件の第 1 式
 `c_1 cos θ~_μ = s_1c_2` は `-c_1 = s_1c_2` となるが、`K_1, K_2 > 0` の下で
 左辺は負・右辺は正で矛盾する。
 
@@ -35,6 +35,7 @@
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionGamma1Gamma2OfThetaTilde
 import Ising2D.NecSuf.OddModePhase
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 
 namespace Ising2D
 
@@ -62,14 +63,28 @@ theorem gamma2_thetaTilde_ne_zero {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
   rcases (gamma2_eq_zero_iff P.const (thetaTilde M μ)).1 h with hs | ⟨hsin, hcos⟩
   · -- Step 0: `s_2^* = sinh 2K_2^* > 0` に反する
     exact absurd hs (ne_of_gt P.s2star_pos)
-  · -- Step 2〜Step 4
+  · -- Step 2 + Step 3: `cos θ~_μ = -1`
     have hcosval := cos_thetaTilde_eq_neg_one_of_sin_eq_zero hM μ hsin
-    rw [hcosval] at hcos
-    -- `-c_1 - s_1c_2 = 0` だが `c_1, s_1, c_2 > 0`
-    have h1 := P.c1_pos
-    have h2 := P.s1_pos
-    have h3 := P.c2_pos
-    nlinarith [hcos, h1, h2, h3]
+    -- Step 1 の連立条件の第 1 式 `c_1 cos θ = s_1c_2`（`gamma2_eq_zero_iff` は差が 0 の形で返すので、
+    -- 人手の同値の鎖の `c_1cos θ - s_1c_2 = 0 ⟺ c_1cos θ = s_1c_2` の段を `sub_eq_zero` で踏む）
+    have hstep1 : P.const.c1 * Real.cos (thetaTilde M μ) = P.const.s1 * P.const.c2 := sub_eq_zero.1 hcos
+    -- Step 4: `s_1c_2` の鎖
+    have hchain : P.const.s1 * P.const.c2 = -P.const.c1 :=
+      calc P.const.s1 * P.const.c2
+          = P.const.c1 * Real.cos (thetaTilde M μ) := hstep1.symm
+                                                  -- Step 1 の連立条件の第 1 式
+        _ = P.const.c1 * (-1) := by rw [hcosval]  -- Step 3 の `cos θ~_μ = -1`
+        _ = (-1) * P.const.c1 := mul_comm _ _     -- ℝ の乗法の可換則（`set_and_algebra_notation`）
+        _ = -P.const.c1 := real_minus_one_times_is_negation _
+                                                  -- `real_minus_one_times_is_negation`（`a → c_1`）
+    -- Step 4: 矛盾の鎖 `0 < s_1c_2 = -c_1 < 0`
+    have hlt : (0 : ℝ) < 0 :=
+      calc (0 : ℝ)
+          < P.const.s1 * P.const.c2 := mul_pos P.s1_pos P.c2_pos
+                                                  -- Step 0 の `s_1 > 0`、`c_2 > 0` と正数の積
+        _ = -P.const.c1 := hchain                 -- 直前の鎖
+        _ < 0 := neg_neg_of_pos P.c1_pos          -- Step 0 の `c_1 > 0`
+    exact lt_irrefl 0 hlt
 
 /-- `γ_2(-θ~_μ) ≠ 0`（人手証明の statement 末尾）。 -/
 theorem gamma2_neg_thetaTilde_ne_zero {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :

@@ -7,7 +7,7 @@
 - ファイル: `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - ブロック: `evenfermi_002_claim_periodicity`（γ_1, γ_2 の 2π 周期性と共役添字 M_col+1-μ）
 - 範囲: 準備の第一の cos x + i sin x の 22 等号（6 行目が引く `i(2_C i)^{-1} = 2_C^{-1}` は主張 `i_times_inverse_of_two_i_is_inverse_of_two_in_cc` の参照で、その鎖は同名のラベルのディレクトリが確かめる）、第二の (-k)_R の 7 等号、第三の ℝ の等式 cos(-x) = cos x（`cos_of_negated_real` と `inclusion_rr_to_cc_is_injective` から作る）、(1) の γ_1 の 3 等号と γ_2 の 6 等号、
-  (2) の θ̃_{μ+kM} の 17 等号・-θ̃_{μ+kM} の 4 等号・γ の三つの 2 等号、(3) の θ̃_ν の 5 等号・-θ̃_ν の 5 等号・γ_2 の二つの 2 等号・
+  (2) の θ̃_{μ+kM} の 17 等号・-θ̃_{μ+kM} の 4 等号・γ の三つの 2 等号、(3) の θ̃_ν の 5 等号・-θ̃_ν の 6 等号・γ_2 の二つの 2 等号・
   γ_1 の 5 等号・γ の 3 等号・P̌_ν の 3 等号、主張
 
 ## 証明の行との対応

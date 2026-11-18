@@ -13,8 +13,8 @@
 
 導出した主張は具体版と同じ型である。二つの主張の導出は、具体版の鎖と同じ行の順に、重みに依らない行を必要十分版
 （`人手 2`〜`人手 5` は `NecSuf.open_chain_weighted_sum_eq_sum_prod`、`{-1,1}` の上の和は `NecSuf.sum_spinVal_const`）で、
-重みに固有の行（`open_chain_partition_sum` の `人手 1`・`人手 6`・`人手 7`・`人手 9`、`open_chain_endpoint_product_sum` の
-`人手 1`・`人手 6`〜`人手 9`・`人手 11`）と冪の行を具体版と同じ根拠で置く。
+重みに固有の行（`open_chain_partition_sum` の `人手 1`・`人手 6`〜`人手 8`・`人手 10`、`open_chain_endpoint_product_sum` の
+`人手 1`・`人手 6`〜`人手 11`・`人手 13`）と冪の行を具体版と同じ根拠で置く。
 -/
 import Ising2D.NecSuf.OpenChainSpinSum
 
@@ -59,15 +59,17 @@ theorem open_chain_partition_sum_of_necSuf (hM : 2 ≤ M) (K : ℝ) :
                                                         -- 人手 2〜人手 5: 必要十分版の前半（`g(t) = exp(Kt)`）
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + Real.exp (K * (-1))) := by
         rw [mul_one]                                    -- 人手 6: ℝ で `a·1 = a` を各因子へ
+    _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + Real.exp ((-1) * K)) := by
+        rw [mul_comm K (-1)]                            -- 人手 7: ℝ の乗法の可換則（`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + Real.exp (-K)) := by
-        rw [mul_neg_one]                                -- 人手 7: ℝ で `a·(-1) = -a` を各因子へ
+        rw [real_minus_one_times_is_negation K]         -- 人手 8: `real_minus_one_times_is_negation`（`a → K`）を各因子へ
     _ = 2 * ∏ _m : Fin (n + 1), (Real.exp K + Real.exp (-K)) :=
-        NecSuf.sum_spinVal_const _                      -- 人手 8: `u` に依らない `c` の `{-1,1}` 上の和は `2c`（必要十分版）
+        NecSuf.sum_spinVal_const _                      -- 人手 9: `u` に依らない `c` の `{-1,1}` 上の和は `2c`（必要十分版）
     _ = 2 * ∏ _m : Fin (n + 1), (2 * Real.cosh K) := by
         rw [Real.cosh_eq, mul_div_cancel₀ _ (two_ne_zero : (2 : ℝ) ≠ 0)]
-                                                        -- 人手 9: `def_cosh_sinh`（`x → K`。具体版と同じく mathlib の `Real.cosh_eq`）
+                                                        -- 人手 10: `def_cosh_sinh`（`x → K`。具体版と同じく mathlib の `Real.cosh_eq`）
     _ = 2 * (2 * Real.cosh K) ^ (n + 2 - 1) := by
-        rw [Fin.prod_const]; rfl                        -- 人手 10: `x^n := Π_{j=1}^{n} x`（`n + 2 - 1` は `n + 1` と同じ数）
+        rw [Fin.prod_const]; rfl                        -- 人手 11: `x^n := Π_{j=1}^{n} x`（`n + 2 - 1` は `n + 1` と同じ数）
 
 /-- `open_chain_endpoint_product_sum` を、`endpoint_mul_exp_openChainEnergy_eq_prod_of_necSuf` と
 `NecSuf.open_chain_weighted_sum_eq_sum_prod`・`NecSuf.sum_spinVal_const`（`R = ℝ`、`g(t) = t·exp(Kt)`）を
@@ -89,16 +91,21 @@ theorem open_chain_endpoint_product_sum_of_necSuf (hM : 2 ≤ M) (K : ℝ) :
         rw [one_mul]                                    -- 人手 6: ℝ で `1·b = b` を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (K * (-1))) := by
         rw [mul_one]                                    -- 人手 7: ℝ で `a·1 = a` を各因子へ
+    _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + (-1) * Real.exp ((-1) * K)) := by
+        rw [mul_comm K (-1)]                            -- 人手 8: ℝ の乗法の可換則（`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (-K)) := by
-        rw [mul_neg_one K]                              -- 人手 8: ℝ で `a·(-1) = -a` を各因子へ
+        rw [real_minus_one_times_is_negation K]         -- 人手 9: `real_minus_one_times_is_negation`（`a → K`）を各因子へ
+    _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + -Real.exp (-K)) := by
+        rw [real_minus_one_times_is_negation (Real.exp (-K))]
+                                                        -- 人手 10: `real_minus_one_times_is_negation`（`a → exp(-K)`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K - Real.exp (-K)) := by
-        rw [neg_one_mul, ← sub_eq_add_neg]              -- 人手 9: ℝ で `a + (-1)b = a - b` を各因子へ
+        rw [← sub_eq_add_neg]                           -- 人手 11: `def_real_difference`（`y → exp(K)`、`z → exp(-K)`）を右辺から左辺へ、各因子へ
     _ = 2 * ∏ _m : Fin (n + 1), (Real.exp K - Real.exp (-K)) :=
-        NecSuf.sum_spinVal_const _                      -- 人手 10: `u` に依らない `c` の `{-1,1}` 上の和は `2c`（必要十分版）
+        NecSuf.sum_spinVal_const _                      -- 人手 12: `u` に依らない `c` の `{-1,1}` 上の和は `2c`（必要十分版）
     _ = 2 * ∏ _m : Fin (n + 1), (2 * Real.sinh K) := by
         rw [Real.sinh_eq, mul_div_cancel₀ _ (two_ne_zero : (2 : ℝ) ≠ 0)]
-                                                        -- 人手 11: `def_cosh_sinh`（`x → K`。具体版と同じく mathlib の `Real.sinh_eq`）
+                                                        -- 人手 13: `def_cosh_sinh`（`x → K`。具体版と同じく mathlib の `Real.sinh_eq`）
     _ = 2 * (2 * Real.sinh K) ^ (n + 2 - 1) := by
-        rw [Fin.prod_const]; rfl                        -- 人手 12: `x^n := Π_{j=1}^{n} x`（`n + 2 - 1` は `n + 1` と同じ数）
+        rw [Fin.prod_const]; rfl                        -- 人手 14: `x^n := Π_{j=1}^{n} x`（`n + 2 - 1` は `n + 1` と同じ数）
 
 end Ising2D

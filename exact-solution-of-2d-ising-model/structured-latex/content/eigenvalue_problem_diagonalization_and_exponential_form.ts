@@ -3170,8 +3170,10 @@ s_1c_2
    \quad (\because \text{Step 1 の連立条件の第 1 式}) \\
 &= c_1\cdot(-1)
    \quad (\because \text{Step 3 の } \cos\tilde\theta_\mu = -1) \\
+&= (-1)\cdot c_1
+   \quad (\because \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to c_1,\ q \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}) \\
 &= -c_1
-   \quad (\because \mathbb{R} \text{ の積の符号規則 } a\cdot(-1) = -a)
+   \quad (\because \blkref{real_minus_one_times_is_negation}\ (a \to c_1))
 \end{aligned}`,
       ),
       paragraph([
@@ -3212,6 +3214,7 @@ s_1c_2
           "行末根拠を補って鎖の後の重複した散文根拠を外した。内容・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。" +
           "Step 0 の正値性は第一・第二の双対結合定数の定義と添字つき略記の正値性から直接導く形に改めた。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 4 の s_1c_2 の鎖の最後の行が根拠「ℝ の積の符号規則 a·(−1) = −a」を名前だけで引いていたので、ℝ の乗法の可換則（set_and_algebra_notation）の行と real_minus_one_times_is_negation（a → c_1）の行の 2 行に割った。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -7165,8 +7168,10 @@ g
 &&(\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1))\\
 &= \tilde\theta_\mu + \left(-\left(2\pi\right)\right)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ -(p-q) = q+(-p)\ (p \to 2\pi,\ q \to \tilde\theta_\mu)\bigr)\\
+&= \tilde\theta_\mu + \left(-1_{\mathbb R}\right)(2\pi)
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to 2\pi)\ \text{を右辺から左辺へ}\bigr)\\
 &= \tilde\theta_\mu + 2\pi\left(-1_{\mathbb R}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ -p = p(-1_{\mathbb R})\ (p \to 2\pi)\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to -1_{\mathbb R},\ q \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \tilde\theta_\mu + 2\pi\left(-(1)_{\mathbb R}\right)
 &&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は単位元を保つ})\\
 &= \tilde\theta_\mu + 2\pi\,(-1)_{\mathbb R}
@@ -7296,6 +7301,7 @@ d_\nu
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 準備の第一の鎖の (1 + 1)_ℂ → 2_ℂ の行の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照（2_ℂ は inclusion_rr_to_cc の略記 (2)_ℂ）に替えた（式の両端と主張は不変）。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(2πk_ℝ) = 2π(−k_ℝ) の行の根拠「ℝ で −(pq) = p(−q)」を、主張 real_times_negation_is_negation_of_product（x → 2π, t → k_ℝ を右辺から左辺へ）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(θ̃_μ + 2πk_ℝ) を開く行の根拠「ℝ で −(p+q) = (−p)+(−q)」を、この回に足した主張 real_negation_of_sum_is_sum_of_negations（x → θ̃_μ, y → 2πk_ℝ）の参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: (3) の −θ̃_ν の鎖の 3 行目が根拠「ℝ で −p = p(−1_ℝ)」を名前だけで引いていたので、real_minus_one_times_is_negation（a → 2π）を右辺から左辺へ当てる行と ℝ の乗法の可換則（set_and_algebra_notation）の行の 2 行に割った。鎖の両端と主張は不変。",
       ],
     },
   },

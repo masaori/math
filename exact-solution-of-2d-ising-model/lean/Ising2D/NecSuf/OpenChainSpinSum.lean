@@ -11,16 +11,16 @@
 | 具体版の段 | 必要十分版 |
 | --- | --- |
 | `open_chain_partition_sum` の鎖の `人手 2`〜`人手 5`、`open_chain_endpoint_product_sum` の最後の鎖の `人手 2`〜`人手 5`（同じ並び） | `open_chain_weighted_sum_eq_sum_prod` の印 `人手 2`〜`人手 5` |
-| `open_chain_partition_sum` の `人手 8`、`open_chain_endpoint_product_sum` の `人手 10`（`u` に依らない `c` の `{-1,1}` 上の和） | `sum_spinVal_const` |
-| 上の二つと冪の行（`open_chain_partition_sum` の `人手 10`、`open_chain_endpoint_product_sum` の `人手 12`）を続けたもの | `open_chain_weighted_sum` |
+| `open_chain_partition_sum` の `人手 9`、`open_chain_endpoint_product_sum` の `人手 12`（`u` に依らない `c` の `{-1,1}` 上の和） | `sum_spinVal_const` |
+| 上の二つと冪の行（`open_chain_partition_sum` の `人手 11`、`open_chain_endpoint_product_sum` の `人手 14`）を続けたもの | `open_chain_weighted_sum` |
 | 二つの鎖の `人手 4` が引く `expansion_of_finite_product_of_two_term_sums_of_real_numbers` | `prod_add_eq_binWordSum'`（`finProdLeft_add_eq_binWordSum` を `Finset.prod` へ運んだもの） |
 | `{-1,1}` 上の有限和 `sum_spinVal` | `sum_spinVal_addCommMonoid` |
 | `open_chain_endpoint_product_sum` の Step 2 の `M_col = 2` の鎖（3 行） | `prod_mul_succ_of_two`（同じ 3 段） |
 | 同 `M_col ≥ 3` の鎖（4 行）と、2 行目の「ℝ の乗法の可換性と結合性」 | `prod_mul_succ_of_ge_three`（同じ 4 段。1 段目の `t_m(s) := s(m)s(m+1)` は、ここでは左辺を読み直すだけの段）・`prod_mul_succ_rearrange`（同じ 5 段。`finite_product_of_real_products` の段は `finset_prod_mul_distrib'`） |
 | 二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` | `prod_mul_succ_eq_first_mul_last` |
 
-具体版の鎖のうち、重みに固有の行（`open_chain_partition_sum` の準備の鎖・`人手 1`・`人手 6`・`人手 7`・`人手 9`、
-`open_chain_endpoint_product_sum` の `exp(KE(s))` の鎖・端点の積の鎖・`人手 1`・`人手 6`〜`人手 9`・`人手 11`）は、
+具体版の鎖のうち、重みに固有の行（`open_chain_partition_sum` の準備の鎖・`人手 1`・`人手 6`〜`人手 8`・`人手 10`、
+`open_chain_endpoint_product_sum` の `exp(KE(s))` の鎖・端点の積の鎖・`人手 1`・`人手 6`〜`人手 11`・`人手 13`）は、
 重みを `g(t) = exp(Kt)`・`g(t) = t·exp(Kt)` に取ったときの読み替えなので、導出のファイルに置く。導出のファイルは、
 具体版と同じ行の順で、`open_chain_weighted_sum_eq_sum_prod`・重みに固有の行・`sum_spinVal_const`・重みに固有の行・冪の行をつなぐ。
 
@@ -30,12 +30,12 @@
   次の構造だけである。
   - 加法の可換モノイド: `Φ`・`ς` による和の添字の付け替え（`Equiv.sum_comp`）と二重の和の読み替えは、足す順序を持たない
     `Finset.sum` の上で行う。`{0,1}^{M_col-1}` の上の和 `binWordSum` を `Finset.sum` で読む `binWordSum_eq_sum` もこれを使う。
-  - 二つの分配律: `人手 4` の展開（`finProdLeft_add_eq_binWordSum` が仮定するのは `Distrib` だけ）と、`人手 8` の `c + c = 2c`。
-  - `{-1,1}` が相異なる 2 元から成ること: `人手 8` の `{-1,1}` 上の和を `c + c` と読む段（`sum_spinVal_addCommMonoid` が
+  - 二つの分配律: `人手 4` の展開（`finProdLeft_add_eq_binWordSum` が仮定するのは `Distrib` だけ）と、`人手 9` の `c + c = 2c`。
+  - `{-1,1}` が相異なる 2 元から成ること: `人手 9` の `{-1,1}` 上の和を `c + c` と読む段（`sum_spinVal_addCommMonoid` が
     `{0,1}` と `{-1,1}` の全単射 `spinIdxEquiv` を使う）。
   - 乗法の可換モノイド: 具体版と同じく有限積を足す順序を持たない `Finset.prod` で書くので、その定まり方に要る。展開の段は
     `Finset.prod` と左から掛ける有限積 `finProdLeft` をつなぐ `finset_prod_eq_finProdLeft'`（運ぶ段）を通すだけである。
-    `人手 10` の冪は、人手の `x^n := Π_{j=1}^{n} x` を `Fin.prod_const` で読む。
+    `人手 11` の冪は、人手の `x^n := Π_{j=1}^{n} x` を `Fin.prod_const` で読む。
   零の吸収律 `0·a = 0` は効いていないが、`Finset.sum`・`Finset.prod`・二つの分配律・`1 + 1 = 2` を同時に持つ Lean の型クラスは
   半環の系列しかないので、`CommSemiring` で受ける。
   重みの値について、実数であること、指数関数、`cosh`・`sinh` は効いていない。二つのスピン和は、重みを
@@ -121,7 +121,7 @@ theorem open_chain_weighted_sum_eq_sum_prod {R : Type*} [CommSemiring R] {n : �
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) := by
         rw [varsigma_one_eq, varsigma_zero_eq]          -- 人手 5: `ς(1) = 1`、`ς(0) = -1` を各因子へ
 
-/-- 具体版の `open_chain_partition_sum` の `人手 8`・`open_chain_endpoint_product_sum` の `人手 10` の必要十分版:
+/-- 具体版の `open_chain_partition_sum` の `人手 9`・`open_chain_endpoint_product_sum` の `人手 12` の必要十分版:
 `u` に依らない `c` の `{-1,1}` 上の和は `c + c = 2c`。 -/
 theorem sum_spinVal_const {R : Type*} [CommSemiring R] (c : R) : ∑ _u : SpinVal, c = 2 * c := by
   rw [sum_spinVal_addCommMonoid, ← two_mul]
@@ -135,9 +135,9 @@ theorem open_chain_weighted_sum {R : Type*} [CommSemiring R] {n : ℕ} (g : Spin
       = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) :=
         open_chain_weighted_sum_eq_sum_prod g          -- 人手 2〜人手 5
     _ = 2 * ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) :=
-        sum_spinVal_const _                             -- 人手 8（端点の主張では 人手 10）: `{-1,1}` の上の和
+        sum_spinVal_const _                             -- 人手 9（端点の主張では 人手 12）: `{-1,1}` の上の和
     _ = 2 * (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) ^ (n + 1) := by
-        rw [Fin.prod_const]                             -- 人手 10（端点の主張では 人手 12）: `x^n := Π_{j=1}^{n} x`（`n → M_col-1`）
+        rw [Fin.prod_const]                             -- 人手 11（端点の主張では 人手 14）: `x^n := Π_{j=1}^{n} x`（`n → M_col-1`）
 
 /-- 具体版 `prod_bondSpin_of_two` の必要十分版（`M_col = 2`。Lean の `n = 0`）:
 `Π_{m=1}^{1}x(m)x(m+1) = x(1)x(2) = x(1)x(M_col)`。`x(m)x(m) = 1` は使わない。 -/
