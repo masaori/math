@@ -1,3 +1,5 @@
+2026-11-18: Lean の通しの証明のゴールラインの確認の五百九十四個目として、状態台帳の (d4c44p15f15p38m) を 3 つに割り、先頭を行って済んだ。`000_calculation_formulae_20_29.ts` の `complex_multiplication_is_associative` の鎖の、ℝ の 2 つの法則を 1 行で当てていた第 4〜第 6 の等号を、差を `def_real_difference` で開いて 1 行に 1 つの等式だけを当てる 13 行にした（形と代入、`set_and_algebra_notation` の参照つき。両端と主張は不変）。SageMath の鎖の検算を 19 行に合わせ、根拠の等式の実例 34 組を足した（PASS）。Lean は不変。次は (d4c44p15f15p38m2)。
+
 2026-11-18: Lean の通しの証明のゴールラインの確認の五百九十三個目として、状態台帳の (d4c44p15f15p38l) を行って済んだ。`005_exp_conjugation_proof.ts` の `frobenius_inner_product_axioms` の和の記号 Σ_{i,j} を Σ_{i=1}^{n}Σ_{j=1}^{n} に揃え、Step 4 の後の段落の定義の無い ℂ の平方根 √⟨A,A⟩ = ‖A‖（どこからも使われない）を削り、「非負実数 ‖A‖² の像」に写像 `inclusion_rr_to_cc` を添えた。式と主張は不変。Lean は不変。レビューの範囲外 4 件を状態台帳の (d4c44p15f15p38s)〜(d4c44p15f15p38v) にした。
 
 2026-11-18: Lean の通しの証明のゴールラインの確認の五百九十二個目として、状態台帳の (d4c44p15f15p38k) を行って済んだ。`003_exp_linear_map.ts` の `matrix_exp_series_converges` の Step 2 の鎖の行 ‖I‖ + Σ_{m=1}^{N}‖A‖^m/m! ≤ ‖I‖ + E(‖A‖) を 3 段（`E_N` の定義の等号で ‖I‖ + (E_N(‖A‖) − 1)、1 ≥ 0 の段、`real_exp_series_converges` (2) の段）に割った（鎖の両端は不変）。SageMath `check_02_step2_exp_partial_sum_rows.sage` を足した（1521 件 PASS）。Lean は不変。レビュー 3 回（最後は指摘なし）。次は状態台帳の (d4c44p15f15p38l)。

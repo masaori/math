@@ -855,12 +855,32 @@ w\cdot z
 &&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
 &= \left((ac-bd)e-(ad+bc)f,\ (ac-bd)f+(ad+bc)e\right)
 &&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
-&= \left(ace-bde-adf-bcf,\ acf-bdf+ade+bce\right)
-&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律を 4 箇所へ適用})\\
-&= \left(ace-adf-bcf-bde,\ acf+ade+bce-bdf\right)
-&&(\because\ \mathbb{R}\ \text{の和の可換律と結合律})\\
+&= \left(\bigl(ac+(-(bd))\bigr)e+\bigl(-((ad+bc)f)\bigr),\ \bigl(ac+(-(bd))\bigr)f+(ad+bc)e\right)
+&&\bigl(\because\ \text{差の定義}\ y-t = y+(-t)\ \bigl(y \to ac,\ t \to bd\ \text{を 2 箇所と}\ y \to (ac-bd)e,\ t \to (ad+bc)f\bigr)\ \text{（}\blkref{def_real_difference}\text{）}\text{を 3 箇所へ適用}\bigr)\\
+&= \left(\bigl((ac)e+(-(bd))e\bigr)+\Bigl(-\bigl((ad)f+(bc)f\bigr)\Bigr),\ \bigl((ac)f+(-(bd))f\bigr)+\bigl((ad)e+(bc)e\bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x+y)t = xt+yt\ \bigl(x \to ac,\ y \to -(bd),\ t \to e;\ x \to ad,\ y \to bc,\ t \to f;\ x \to ac,\ y \to -(bd),\ t \to f;\ x \to ad,\ y \to bc,\ t \to e\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 4 箇所へ適用}\bigr)\\
+&= \left(\bigl((ac)e+(-((bd)e))\bigr)+\Bigl(-\bigl((ad)f+(bc)f\bigr)\Bigr),\ \bigl((ac)f+(-((bd)f))\bigr)+\bigl((ad)e+(bc)e\bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-x)t = -(xt)\ (x \to bd,\ t \to e\ \text{と}\ x \to bd,\ t \to f)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \left(\bigl((ac)e+(-((bd)e))\bigr)+\bigl((-((ad)f))+(-((bc)f))\bigr),\ \bigl((ac)f+(-((bd)f))\bigr)+\bigl((ad)e+(bc)e\bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(x+y) = (-x)+(-y)\ \bigl(x \to (ad)f,\ y \to (bc)f\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \left(\bigl(a(ce)+(-(b(de)))\bigr)+\bigl((-(a(df)))+(-(b(cf)))\bigr),\ \bigl(a(cf)+(-(b(df)))\bigr)+\bigl(a(de)+b(ce)\bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ \bigl((x,y,t) \to (a,c,e),(b,d,e),(a,d,f),(b,c,f),(a,c,f),(b,d,f),(a,d,e),(b,c,e)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 8 箇所へ適用}\bigr)\\
+&= \left(a(ce)+\Bigl((-(b(de)))+\bigl((-(a(df)))+(-(b(cf)))\bigr)\Bigr),\ a(cf)+\Bigl((-(b(df)))+\bigl(a(de)+b(ce)\bigr)\Bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to a(ce),\ y \to -(b(de)),\ t \to (-(a(df)))+(-(b(cf)))\ \text{と}\ x \to a(cf),\ y \to -(b(df)),\ t \to a(de)+b(ce)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \left(a(ce)+\Bigl(\bigl((-(a(df)))+(-(b(cf)))\bigr)+(-(b(de)))\Bigr),\ a(cf)+\Bigl(\bigl(a(de)+b(ce)\bigr)+(-(b(df)))\Bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ \bigl(x \to -(b(de)),\ y \to (-(a(df)))+(-(b(cf)))\ \text{と}\ x \to -(b(df)),\ y \to a(de)+b(ce)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \left(a(ce)+\Bigl((-(a(df)))+\bigl((-(b(cf)))+(-(b(de)))\bigr)\Bigr),\ a(cf)+\Bigl(a(de)+\bigl(b(ce)+(-(b(df)))\bigr)\Bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to -(a(df)),\ y \to -(b(cf)),\ t \to -(b(de))\ \text{と}\ x \to a(de),\ y \to b(ce),\ t \to -(b(df))\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&= \left(\bigl(a(ce)+(-(a(df)))\bigr)+\bigl((-(b(cf)))+(-(b(de)))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+(-(b(df)))\bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to a(ce),\ y \to -(a(df)),\ t \to (-(b(cf)))+(-(b(de)))\ \text{と}\ x \to a(cf),\ y \to a(de),\ t \to b(ce)+(-(b(df)))\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&= \left(\bigl(a(ce)+(-(a(df)))\bigr)+\bigl(-(b(cf)+b(de))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+(-(b(df)))\bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(x+y) = (-x)+(-y)\ \bigl(x \to b(cf),\ y \to b(de)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&= \left(\bigl(a(ce)+a(-(df))\bigr)+\bigl(-(b(cf)+b(de))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+b(-(df))\bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ x(-t) = -(xt)\ (x \to a,\ t \to df\ \text{と}\ x \to b,\ t \to df)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&= \left(a\bigl(ce+(-(df))\bigr)+\bigl(-(b(cf+de))\bigr),\ a(cf+de)+b\bigl(ce+(-(df))\bigr)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ x(y+t) = xy+xt\ \bigl(x \to a,\ y \to ce,\ t \to -(df);\ x \to b,\ y \to cf,\ t \to de;\ x \to a,\ y \to cf,\ t \to de;\ x \to b,\ y \to ce,\ t \to -(df)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 4 箇所へ右辺から左辺へ適用}\bigr)\\
 &= \left(a(ce-df)-b(cf+de),\ a(cf+de)+b(ce-df)\right)
-&&(\because\ \mathbb{R}\ \text{の分配律と積の結合律を 4 箇所へ適用})\\
+&&\bigl(\because\ \text{差の定義}\ y-t = y+(-t)\ \bigl(y \to ce,\ t \to df\ \text{を 2 箇所と}\ y \to a(ce-df),\ t \to b(cf+de)\bigr)\ \text{（}\blkref{def_real_difference}\text{）}\text{を 3 箇所へ右辺から左辺へ適用}\bigr)\\
 &= (a,b)\cdot(ce-df,\ cf+de)
 &&(\because\ \blkref{definition_of_cc}\ \text{の積を右辺から左辺へ})\\
 &= (a,b)\cdot\left((c,d)\cdot(e,f)\right)
@@ -874,6 +894,7 @@ w\cdot z
       status: "added",
       notes: [
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℂ の全元についての積の結合律は multiplicative_group_of_cc の証明の中の段にしか無く、その主張は「ℂ^× は群をなす」だけなので、complex_numbers_form_a_field の積のモノイド構造の段落が 0_ℂ を含む全ての元についての結合律を引ける主張が無かった。multiplicative_group_of_cc の証明の「積の結合律」の段の鎖を、式を変えずにこの主張の証明へ移した（鎖の両端を主張の両辺 (z·w)·u・z·(w·u) に揃え、z, w, u を成分に開く行と閉じる行を足し、「ℂ の積の定義」を definition_of_cc の参照にした。鎖の後に置いていた第 3・第 5 の等号の説明の段落（2 つの定理を同時に当てた断り）は、日本語を鎖の後に置かない規律に従って削った。2 つの定理を 1 行で当てている点は台帳の新しい件で扱う）。Lean の具体版は無い（Lean の ℂ は mathlib の Complex で、結合律は使う側が mul_assoc で閉じている）。数値検証: sagemath/check/complex_multiplication_is_associative/check_component_chain.sage。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 鎖の第 4〜第 6 の等号（ℝ の分配律と積の結合律を 1 行で、和の可換律と結合律を 1 行で当てていた行）を、1 行に 1 つの等式だけを当てる 13 行に割った。差は def_real_difference で和と符号反転に開いてから並べ替え、最後に閉じた。各行に使った形と代入を書き、ℝ の法則には set_and_algebra_notation を参照した。符号反転の等式 (−x)t = −(xt)・x(−t) = −(xt)・−(x+y) = (−x)+(−y) は、000_calculation_formulae_00_09.ts の finite_sum_of_negated_real_numbers の (−a)+(−b) = −(a+b) と同じく、ℝ で成り立つ等式として 1 行に 1 つ当てた。積 ace のような括弧の無い書き方をやめ、(ac)e・a(ce) と括弧を書いた。鎖の両端と主張は不変。数値検証: 同じ check_component_chain.sage を 19 行に合わせた。",
       ],
     },
   },
