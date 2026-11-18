@@ -3414,11 +3414,11 @@ s_1c_2
 &= \Bigl(\exp(i\theta) + \bigl(\exp(i\theta) + (\exp(-i\theta) + (-\exp(-i\theta)))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
 &= \bigl(\exp(i\theta) + (\exp(i\theta) + 0_{\mathbb{C}})\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&&\bigl(\because\ \mathbb{C}\ \text{の加法の逆元}\ z + (-z) = 0_{\mathbb{C}}\ (z \to \exp(-i\theta))\ \text{（}\blkref{complex_numbers_form_a_field}\text{）}\bigr)\\
 &= \bigl(\exp(i\theta) + \exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
+&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\ z + 0_{\mathbb{C}} = z\ (z \to \exp(i\theta))\ \text{（}\blkref{complex_numbers_form_a_field}\text{）}\bigr)\\
 &= \bigl(1_{\mathbb{C}}\exp(i\theta) + 1_{\mathbb{C}}\exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 箇所へ右辺から左辺へ})\\
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元}\ 1_{\mathbb{C}}\cdot w = w\ (w \to \exp(i\theta))\ \text{（}\blkref{complex_numbers_form_a_field}\text{）}\text{を 2 箇所へ右辺から左辺へ}\bigr)\\
 &= \bigl((1_{\mathbb{C}} + 1_{\mathbb{C}})\exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の右からの分配律を右辺から左辺へ})\\
 &= \bigl((1 + 1)_{\mathbb{C}}\,\exp(i\theta)\bigr)\,2_{\mathbb{C}}^{-1}
@@ -3430,9 +3430,9 @@ s_1c_2
 &= \exp(i\theta)\bigl(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
 &= \exp(i\theta)\,1_{\mathbb{C}}
-&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ (2_{\mathbb{C}}\in\mathbb{C}^{\times})\bigr)\\
+&&\bigl(\because\ \blkref{multiplicative_group_of_cc}\ \text{の逆元}\ z\,z^{-1} = 1_{\mathbb{C}}\ (z \to 2_{\mathbb{C}},\ 2_{\mathbb{C}}\in\mathbb{C}^{\times})\bigr)\\
 &= \exp(i\theta)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元}\ w\cdot 1_{\mathbb{C}} = w\ (w \to \exp(i\theta))\ \text{（}\blkref{complex_numbers_form_a_field}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "第二に、",
@@ -3686,7 +3686,7 @@ s_1c_2
 &= \left[\left(\sqrt{r^2+0}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to r^2\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to r^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan 0+\pi\right)\right]_{\sim}
 &&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to -r,\ -r \neq 0\ \text{（}-r < 0\ \text{より）})\bigr)\\
 &= \left[\left(r,\ \arctan 0+\pi\right)\right]_{\sim}
@@ -3694,7 +3694,7 @@ s_1c_2
 &= \left[\left(r,\ 0+\pi\right)\right]_{\sim}
 &&(\because\ \blkref{arctan_zero})\\
 &= \left[\left(r,\ \pi\right)\right]_{\sim}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to \pi\bigr)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to \pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       paragraph([
         "角度 ",
@@ -3744,7 +3744,7 @@ s_1c_2
 &= \bigl(1\cdot r\bigr)_{\mathbb{C}}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ (-a)(-b) = ab\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 1,\ b \to r\bigr)\\
 &= r_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot x = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to r\bigr)
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to r)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \phi_{\mathrm{polar}}\bigl(r_{\mathbb{C}}\bigr)
@@ -3757,7 +3757,7 @@ s_1c_2
 &= \left[\left(\sqrt{r^2+0}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/r)\right)\right]_{\sim}
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\bigr)\\
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/r)\right)\right]_{\sim}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to r^2\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to r^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan 0\right)\right]_{\sim}
 &&\bigl(\because\ \blkref{real_zero_divided_is_zero}\ (x \to r,\ r \neq 0\ \text{（}r > 0\ \text{より）})\bigr)\\
 &= \left[\left(r,\ \arctan 0\right)\right]_{\sim}
@@ -3799,7 +3799,7 @@ s_1c_2
 &= \bigl(\left|\gamma_2(\theta)\right|\cdot 1,\ \left|\gamma_2(\theta)\right|\cdot 0\bigr)
 &&(\because\ \blkref{sine_zero})\\
 &= \bigl(\left|\gamma_2(\theta)\right|,\ \left|\gamma_2(\theta)\right|\cdot 0\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 1 = x\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ x \to \left|\gamma_2(\theta)\right|\bigr)\\
+&&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\cdot 1 = x\ (x \to \left|\gamma_2(\theta)\right|)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
 &&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to \left|\gamma_2(\theta)\right|)\bigr)\\
 &= \left|\gamma_2(\theta)\right|_{\mathbb{C}}
@@ -3852,7 +3852,7 @@ s_1c_2
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 1\cdot \left|\gamma_2(\theta)\right|\bigr)
 &&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x \to 1)\ \text{を第 1 成分の引く側の}\ 0\ \text{へ右辺から左辺へ}\bigr)\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 0 + 1\cdot \left|\gamma_2(\theta)\right|\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\text{の}\ a \to 1\cdot \left|\gamma_2(\theta)\right|\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 1\cdot \left|\gamma_2(\theta)\right|)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \bigl(0\cdot \left|\gamma_2(\theta)\right| - 1\cdot 0,\ 0\cdot 0 + 1\cdot \left|\gamma_2(\theta)\right|\bigr)
 &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to 0)\ \text{を第 2 成分の足す側の}\ 0\ \text{へ右辺から左辺へ}\bigr)\\
 &= (0,1)\bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
@@ -3899,6 +3899,7 @@ s_1c_2
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p22)）: (4) の主の鎖の 0/2 = 0 の行（real_zero_divided_is_zero、x → 2）の 2 ≠ 0 に根拠が無かったので、2 を def_real_two の 1 + 1 と明記し、2 ≠ 0 を real_two_is_nonzero の参照にした。式と主張は不変。",
         "2026-11-16（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p23)）: (5) の主の鎖の根拠「準備の cos(π/2) = 0」「準備の sin(π/2) = 1」が証明の中の準備を指していたので、準備の第五の 2 本の鎖を主張 sine_of_half_pi_is_one・cosine_of_half_pi_is_zero（020_critical_point.ts）へ移し、2 行の根拠をその参照にした。準備の第五は 2 本の鎖だけだったので段落ごと外した。式の両端と主張は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38i4)）: 「第二に」の \\bar i の鎖の 4 行目 (−1)·1 = (−1)·1 + 0 で、ℝ の加法の単位元を set_and_algebra_notation で引く根拠に使った形と代入が書かれていなかったので、009_eigenvalues_of_V.ts の同じ鎖と同じ「0 は ℝ の加法の単位元 形 (代入)（参照）」の並びにした（x + 0 = x の x → (−1)·1 を右辺から左辺へ）。式・鎖の両端・段数は不変。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38q)）: 「第一に」の cos θ + i sin θ の鎖で complex_numbers_form_a_field を名前だけで引いていた 4 行（加法逆元・零元・積の単位元を 2 箇所へ右辺から左辺へ・最後の積の単位元）に、形と代入を書いた（z + (−z) = 0_ℂ の z → exp(−iθ)、z + 0_ℂ = z の z → exp(iθ)、1_ℂ·w = w の w → exp(iθ) を 2 箇所へ右辺から左辺へ、w·1_ℂ = w の w → exp(iθ)）。(3) の φ_polar((−r)_C) の鎖と (4) の φ_polar(r_C) の鎖の「ℝ で a + 0 = a（ℝ は体）の a → r²」2 行を、「第二に」の \\bar i の鎖の 4 行目と同じ「0 は ℝ の加法の単位元 x + 0 = x（x → r²）（set_and_algebra_notation）」の形に揃えた。同じ趣旨で、(3) の φ_polar((−r)_C) の鎖の最後の行と (5) の主の鎖の (0 + 1·|γ_2(θ)|) の行の「ℝ で 0 + a = a（ℝ は体）」2 行を「0 は ℝ の加法の単位元 0 + x = x」の形に、(4) の −γ_2γ_2' の鎖の最後の行と (4) の主の鎖の (|γ_2(θ)|·1, …) の行の「ℝ で 1·x = x」「ℝ で x·1 = x」（ℝ は体）2 行を「1 は ℝ の乗法の単位元」の形に揃え、「第一に」の鎖の 2_ℂ 2_ℂ^{-1} = 1_ℂ の行の multiplicative_group_of_cc の逆元に形 z z^{-1} = 1_ℂ（z → 2_ℂ）を書いた。式と主張は不変。",
       ],
     },
   },
