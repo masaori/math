@@ -1821,8 +1821,15 @@ S_NT_N
 +\left(\sum_{j=0}^{N}\frac{a^j}{j!}\right)\left(\sum_{l=P_N}^{N}\frac{b^l}{l!}\right)
 \right)
 &&(\because\ \text{上の添字集合の包含と、非負項を付け加えても和は増えるだけであること})\\
+&= \|I\|^2\left(
+\left(\sum_{j=P_N}^{N}\frac{a^j}{j!}\right)E_N(b)
++E_N(a)\left(\sum_{l=P_N}^{N}\frac{b^l}{l!}\right)
+\right)
+&&(\because\ \blkref{real_exp_series_converges}\ \text{の}\ E_N(b),\ E_N(a)\ \text{の定義（和の変数}\ m\ \text{を}\ l,\ j\ \text{と書いた）})\\
+&\le \|I\|^2\left(R_{P_N-1}(a)\,E_N(b)+E_N(a)\,R_{P_N-1}(b)\right)
+&&(\because\ N\ge 1\ \text{なら}\ N\ge (N+1)/2\ \text{と}\ P_N\ \text{の最小性より}\ P_N\le N\ \text{で、}\blkref{real_exp_series_converges}\ \text{(3)}\ (p\to P_N,\ q\to N)\text{。}N=0\ \text{なら}\ P_N\in\mathbb{Z}_{\ge 1}\ \text{と最小性より}\ P_N=1>N\ \text{で和は空の和}\ 0\ \text{なので (3) の}\ R_{P_N-1}\ge 0\text{。掛かる}\ E_N(\cdot)\ \text{は非負の項の和で}\ \ge 0\text{、}\|I\|^2\ge 0)\\
 &\le \|I\|^2\left(R_{P_N-1}(a)\,E(b)+E(a)\,R_{P_N-1}(b)\right)
-&&(\because\ \blkref{real_exp_series_converges}\ \text{の (2)(3)})
+&&(\because\ \blkref{real_exp_series_converges}\ \text{(2) で}\ E_N(\cdot)\le E(\cdot)\ \text{に替える。掛かる因子}\ R_{P_N-1}(\cdot)\ \text{は (3) より}\ \ge 0\text{、}\|I\|^2\ge 0)
 \end{aligned}`,
       ),
       paragraph([
@@ -1970,6 +1977,7 @@ S_NT_N
           "AI=A=IA を、単位行列を根拠とする二段の行末根拠つきの鎖へ開いた。" +
           "内容・式変形・根拠・ラベル参照は変えていない。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 5 の剰余の評価の鎖の後の段落の「最後の不等号で引いたのは real_exp_series_converges の (2)(3) である。」を削り、鎖の最後の行の根拠「非負実数の指数級数の収束の (2)(3)」を \\blkref{real_exp_series_converges} の (2)(3) の参照にした（根拠を式変形の行から引く。式・鎖の両端・段数は不変）。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 5 の剰余の評価の鎖の最後の行は、(3) の不等式が p ≤ q を要るのに P_N > N となる N = 0 の場合を書いておらず、因子を大きい値に替えるのに使う非負性も書いていなかった。行を 3 段に割った。1 段目で Σ_{j=0}^{N}・Σ_{l=0}^{N} を E_N の定義で E_N(a)・E_N(b) と書き、2 段目で Σ_{j=P_N}^{N}・Σ_{l=P_N}^{N} を (3) で R_{P_N−1} に替え（N ≥ 1 では N ≥ (N+1)/2 と P_N の最小性より P_N ≤ N なので p → P_N, q → N、N = 0 では P_N = 1 で空の和 0 を (3) の R_{P_N−1} ≥ 0 で抑える）、3 段目で E_N を (2) で E に替えた。不等号の段に、掛かる因子と ‖I‖^2 が 0 以上であることを書いた（鎖の両端は不変）。",
       ],
     },
   },
