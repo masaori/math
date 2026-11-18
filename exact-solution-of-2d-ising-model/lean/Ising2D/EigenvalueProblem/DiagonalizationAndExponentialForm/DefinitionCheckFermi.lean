@@ -179,8 +179,8 @@ theorem thetaTilde_conj_eq_neg_add_two_pi (hM : M ≠ 0) (μ : ℤ) :
   calc thetaTilde M ((M : ℤ) + 1 - μ)
       = 2 * Real.pi - thetaTilde M μ := thetaTilde_conj hM μ
                                                   -- 1 行目: `conjugate_index_of_check_Z_Y` (1)
-    _ = 2 * Real.pi + (-thetaTilde M μ) := sub_eq_add_neg _ _
-                                                  -- 2 行目: ℝ の差の定義
+    _ = 2 * Real.pi + (-thetaTilde M μ) := sub_eq_add_neg (2 * Real.pi) (thetaTilde M μ)
+                                                  -- 2 行目: `def_real_difference`（`y → 2π`, `z → θ̃_μ`）
     _ = (-thetaTilde M μ) + 2 * Real.pi := add_comm _ _
                                                   -- 3 行目: ℝ の加法の交換律
     _ = (-thetaTilde M μ) + 2 * Real.pi * 1 := by

@@ -58,7 +58,7 @@ for j in range(len(neg2) - 1):
 one = Fr(1)
 nu_chain = [
     2 * PI - tt(mu),                  # conjugate_index_of_check_Z_Y (1)
-    2 * PI + (-tt(mu)),               # 差の定義
+    2 * PI + (-tt(mu)),               # def_real_difference（y → 2π, z → θ~_μ）
     (-tt(mu)) + 2 * PI,               # 加法の交換律
     (-tt(mu)) + 2 * PI * one,         # 1_R は積の単位元
     (-tt(mu)) + 2 * PI * one,         # ι は単位元を保つ（像 (1)_R = 1_R。中身は下の整数の検算）
