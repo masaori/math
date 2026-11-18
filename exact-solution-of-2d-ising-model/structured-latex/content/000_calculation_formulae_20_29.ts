@@ -1207,7 +1207,7 @@ z\cdot w
 &&(\because\ w\ \text{の定め方})\\
 &= \left(a\cdot\frac{a}{a^2+b^2}-b\cdot\frac{-b}{a^2+b^2},\
    a\cdot\frac{-b}{a^2+b^2}+b\cdot\frac{a}{a^2+b^2}\right)
-&&(\because\ \mathbb{C}\ \text{の積の定義})\\
+&&\Bigl(\because\ \blkref{definition_of_cc}\ \text{の積}\ \bigl(a\to a,\ b\to b,\ c\to\frac{a}{a^2+b^2},\ d\to\frac{-b}{a^2+b^2}\bigr)\Bigr)\\
 &= \left(\frac{a^2}{a^2+b^2}-\frac{-b^2}{a^2+b^2},\
    \frac{-ab}{a^2+b^2}+\frac{ab}{a^2+b^2}\right)
 &&(\because\ \mathbb{R}\ \text{の分数と積の関係を 4 箇所へ適用})\\
@@ -1220,7 +1220,7 @@ z\cdot w
 &= (1,\ 0)
 &&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を分子にもつ分数は}\ 0)\\
 &= 1_{\mathbb{C}}
-&&(\because\ 1_{\mathbb{C}}=(1,0))
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 1_{\mathbb{C}}=(1,0)\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph(["である。さらに"]),
@@ -1346,6 +1346,7 @@ b
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積の可換律」の段の鎖は ℂ の全元についての主張で、この主張（ℂ^× は群をなす）からは引けなかったので、鎖の式を変えずに新しい主張 complex_multiplication_is_commutative（このブロックの直前）の証明へ移した。この証明の中で可換律を使う 2 行（1_C·(a,b) = (a,b)·1_C と w·z = z·w）と結論の「可換群である」は、その主張の参照に替えた。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積の結合律」「積の単位元」の段の鎖は ℂ の全元についての主張で、その鎖のために置いていた (a,b),(c,d),(e,f) ∈ ℂ の前置きは使われなくなったので削った（残る段は z = (a,b) を段ごとに置き、閉性の恒等式の a,b,c,d ∈ ℝ は積の式の前置きにある）。この主張（ℂ^× は群をなす）からは引けなかったので、鎖の式を変えずに新しい主張 complex_multiplication_is_associative・complex_one_is_multiplicative_identity（このブロックの直前）の証明へ移し、ここではその参照を置いた。1/z = z^{-1} の鎖の「上で示した 1_C が積の単位元であること」と結論の結合律・単位元も、その主張の参照に替えた。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 「積について閉じること」の段の恒等式 (ac−bd)²+(ad+bc)² = (a²+b²)(c²+d²) は、abs_basic_properties の (4) の鎖が「multiplicative_group_of_cc の「積について閉じること」の恒等式」として証明の中の段を引いていた。この主張（ℂ^× は群をなす）からは引けないので、鎖の式を変えずに新しい主張 product_of_sums_of_two_squares_identity（このブロックの直前）の証明へ移し、ここではその参照を置いた。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認）: 「逆元の存在」の鎖の 2 行が参照の無い根拠（「C の積の定義」「1_C = (1,0)」）だったので、definition_of_cc の積（a → a, b → b, c → a/(a²+b²), d → −b/(a²+b²)）と inclusion_rr_to_cc の 1_C = (1,0) を右辺から左辺へ、の参照に替えた。式・鎖の両端・段数は不変。数値検証: sagemath/check/121_multiplicative_group_of_cc/check_inverse_chain_cited_rows.sage。",
       ],
     },
   },
