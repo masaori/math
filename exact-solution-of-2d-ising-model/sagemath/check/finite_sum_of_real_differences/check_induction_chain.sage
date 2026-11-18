@@ -1,5 +1,5 @@
 # 対象ラベル: finite_sum_of_real_differences
-# Σ_{j=1}^{m} (a_j − b_j) = (Σ a_j) − (Σ b_j) の帰納法の各行（m = 1 の 2 行、m → m+1 の 5 行）を
+# Σ_{j=1}^{m} (a_j − b_j) = (Σ a_j) − (Σ b_j) の帰納法の各行（m = 1 の 2 行、m → m+1 の 12 行）を
 # m = 1,…,8 で確かめる。有限和は def_finite_sum_of_real_numbers のとおり左から順に足して組む。
 # 帰属: QQ 上の多項式環（a_j, b_j は不定元）。不定元で成り立つ等号は、任意の実数を代入しても成り立つ。
 N = 9
@@ -31,7 +31,14 @@ for m in range(1, N):
         fsum(ab),                                                     # Σ^{m+1}(a_j − b_j)
         fsum(ab[:m]) + (am - bm),                                     # def_finite_sum_of_real_numbers
         (al - be) + (am - bm),                                        # 帰納法の仮定
-        (al + am) - (be + bm),                                        # ℝ の和と差の計算
+        (al + (-be)) + (am + (-bm)),                                  # def_real_difference を 2 か所へ同時適用
+        al + ((-be) + (am + (-bm))),                                  # ℝ の加法の結合則
+        al + (((-be) + am) + (-bm)),                                  # ℝ の加法の結合則
+        al + ((am + (-be)) + (-bm)),                                  # ℝ の加法の交換則
+        al + (am + ((-be) + (-bm))),                                  # ℝ の加法の結合則
+        (al + am) + ((-be) + (-bm)),                                  # ℝ の加法の結合則
+        (al + am) + (-(be + bm)),                                     # real_negation_of_sum_is_sum_of_negations を右辺から左辺へ
+        (al + am) - (be + bm),                                        # def_real_difference を右辺から左辺へ
         (fsum(list(a[:m])) + am) - (fsum(list(b[:m])) + bm),          # α, β の置き方
         fsum(list(a[:m + 1])) - fsum(list(b[:m + 1])),                # def_finite_sum_of_real_numbers（2 か所）
     ]

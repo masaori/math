@@ -45,6 +45,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimN
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealDoubleNegation
 
 namespace Ising2D
 
@@ -187,25 +188,32 @@ theorem thetaTilde_conj_eq_neg_add_two_pi (hM : M ≠ 0) (μ : ℤ) :
     _ = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
         rw [Int.cast_one]                         -- 5 行目: `ι_{ℤ→ℝ}` は単位元を保つ
 
-/-- 人手 `periodicity_of_check_fermi` (3) の `-θ̃_ν` の鎖: `-θ̃_ν = θ̃_μ + 2π(-1)_ℝ`（人手の 6 行）。
-2 行目の人手の 1 つの恒等式 `-(p-q) = q+(-p)` は、mathlib の `neg_sub`（`-(p-q) = q-p`）と
-`sub_eq_add_neg`（差の定義）を続けて読む。 -/
+/-- 人手 `periodicity_of_check_fermi` (3) の `-θ̃_ν` の鎖: `-θ̃_ν = θ̃_μ + 2π(-1)_ℝ`（人手の 9 行）。 -/
 theorem neg_thetaTilde_conj_eq_add_two_pi_neg_one (hM : M ≠ 0) (μ : ℤ) :
     -thetaTilde M ((M : ℤ) + 1 - μ) = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) :=
   calc -thetaTilde M ((M : ℤ) + 1 - μ)
       = -(2 * Real.pi - thetaTilde M μ) := by
         rw [thetaTilde_conj hM μ]                 -- 1 行目: `conjugate_index_of_check_Z_Y` (1)
-    _ = thetaTilde M μ + (-(2 * Real.pi)) := by
-        rw [neg_sub, sub_eq_add_neg]              -- 2 行目: ℝ で `-(p-q) = q+(-p)`（`p → 2π`, `q → θ̃_μ`）
+    _ = -(2 * Real.pi + (-thetaTilde M μ)) := by
+        rw [sub_eq_add_neg (2 * Real.pi) (thetaTilde M μ)]
+                                                  -- 2 行目: `def_real_difference`（`y → 2π`, `z → θ̃_μ`）
+    _ = (-(2 * Real.pi)) + (-(-thetaTilde M μ)) :=
+        real_negation_of_sum_is_sum_of_negations _ _
+                                                  -- 3 行目: `real_negation_of_sum_is_sum_of_negations`（`x → 2π`, `y → -θ̃_μ`）
+    _ = (-(2 * Real.pi)) + thetaTilde M μ := by
+        rw [real_double_negation (thetaTilde M μ)]
+                                                  -- 4 行目: `real_double_negation`（`a → θ̃_μ`）
+    _ = thetaTilde M μ + (-(2 * Real.pi)) := add_comm _ _
+                                                  -- 5 行目: ℝ の加法の交換則（`set_and_algebra_notation`）
     _ = thetaTilde M μ + (-1) * (2 * Real.pi) := by
         rw [real_minus_one_times_is_negation (2 * Real.pi)]
-                                                  -- 3 行目: `real_minus_one_times_is_negation`（`a → 2π`）を右辺から左辺へ
+                                                  -- 6 行目: `real_minus_one_times_is_negation`（`a → 2π`）を右辺から左辺へ
     _ = thetaTilde M μ + 2 * Real.pi * (-1) := by
-        rw [mul_comm (-1 : ℝ) (2 * Real.pi)]      -- 4 行目: ℝ の乗法の可換則（`set_and_algebra_notation`）
+        rw [mul_comm (-1 : ℝ) (2 * Real.pi)]      -- 7 行目: ℝ の乗法の可換則（`set_and_algebra_notation`）
     _ = thetaTilde M μ + 2 * Real.pi * (-((1 : ℤ) : ℝ)) := by
-        rw [Int.cast_one]                         -- 5 行目: `ι_{ℤ→ℝ}` は単位元を保つ
+        rw [Int.cast_one]                         -- 8 行目: `ι_{ℤ→ℝ}` は単位元を保つ
     _ = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) := by
-        rw [periodicity_prep_int_cast_neg 1]      -- 6 行目: 準備の第二を `k = 1` で
+        rw [periodicity_prep_int_cast_neg 1]      -- 9 行目: 準備の第二を `k = 1` で
 
 /-- 人手 `periodicity_of_check_fermi` (3): `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)`（人手の 2 行）。 -/
 theorem gamma2_thetaTilde_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :

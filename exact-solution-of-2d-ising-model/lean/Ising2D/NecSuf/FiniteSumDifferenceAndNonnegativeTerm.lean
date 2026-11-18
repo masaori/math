@@ -10,7 +10,7 @@
 
 | 具体版（係数 `ℝ`） | 必要十分版 | 仮定 |
 | --- | --- | --- |
-| `finite_sum_of_real_differences_step` | `finite_sum_sub_step'`（同じ 4 段） | 差が符号反転を足すことで、符号反転が和を項ごとの符号反転の和へ移す可換な加法（`SubtractionCommMonoid`） |
+| `finite_sum_of_real_differences_step` | `finite_sum_sub_step'`（同じ 8 段） | 差が符号反転を足すことで、符号反転が和を項ごとの符号反転の和へ移す可換な加法（`SubtractionCommMonoid`） |
 | `finite_sum_of_real_differences_succ` | `finite_sum_sub_succ'`（同じ並び） | 同上 |
 | `finite_sum_of_real_differences` | `finite_sum_sub_fin'` | 同上 |
 | `finite_sum_of_negated_real_numbers_succ` | `finite_sum_neg_succ'`（同じ並び） | 加法についての可換モノイドと符号反転 `Neg` に、明示の仮定 `-(a + b) = -a + -b` を足したものだけ |
@@ -22,8 +22,8 @@
 | `finite_sum_of_nonnegative_reals_ge_term` | `finite_sum_ge_term_fin'` | 同上 |
 | `finite_sum_of_nonnegative_reals_ge_term_fintype` | `finite_sum_ge_term'`（同じく番号を付けて `fin'` 版を当てる） | 同上 |
 
-* 差の主張に効いているのは、帰納法の段の `(α - β) + (x - y) = (α + x) - (β + y)` だけで、`finite_sum_sub_step'` の 4 段が示すとおり
-  差が「符号反転を足すこと」（`sub_eq_add_neg`）、加法の結合則・交換則（`finite_sum_add_step'`）、`-(β + y) = -β + -y`（`neg_add`）から出る。
+* 差の主張に効いているのは、帰納法の段の `(α - β) + (x - y) = (α + x) - (β + y)` だけで、`finite_sum_sub_step'` の 8 段が示すとおり
+  差が「符号反転を足すこと」（`sub_eq_add_neg`）、加法の結合則・交換則、`-(β + y) = -β + -y`（`neg_add`）から出る。
   加法の逆元の法則 `a + (-a) = 0` は使わないので、群ではなく `SubtractionCommMonoid` で足りる。乗法も順序も、実数であることも効いていない。
   交換則は外せない（`-β` と `x` を入れ替える段と、`neg_add` の右辺の順序がある）。
 * 符号反転の主張に効いているのは、帰納法の段の `(-a) + (-b) = -(a + b)` だけで、これを明示の仮定 `hneg` として置く
@@ -49,7 +49,11 @@ theorem finite_sum_sub_step' [SubtractionCommMonoid R] (α β x y : R) :
     (α - β) + (x - y) = (α + x) - (β + y) :=
   calc (α - β) + (x - y)
       = (α + -β) + (x + -y) := by rw [sub_eq_add_neg α β, sub_eq_add_neg x y]   -- 差は符号反転を足すこと（2 か所）
-    _ = (α + x) + (-β + -y) := finite_sum_add_step' _ _ _ _                     -- 結合則・交換則
+    _ = α + (-β + (x + -y)) := add_assoc _ _ _                                   -- 加法の結合則
+    _ = α + ((-β + x) + -y) := by rw [add_assoc (-β) x (-y)]                     -- 加法の結合則
+    _ = α + ((x + -β) + -y) := by rw [add_comm (-β) x]                           -- 加法の交換則
+    _ = α + (x + (-β + -y)) := by rw [add_assoc x (-β) (-y)]                     -- 加法の結合則
+    _ = (α + x) + (-β + -y) := (add_assoc _ _ _).symm                            -- 加法の結合則
     _ = (α + x) + -(β + y) := by rw [neg_add β y]                               -- 和の符号反転は符号反転の和
     _ = (α + x) - (β + y) := (sub_eq_add_neg _ _).symm                          -- 差は符号反転を足すこと
 
@@ -71,7 +75,7 @@ theorem finite_sum_sub_succ' [SubtractionCommMonoid R] (m : ℕ) (a b : Fin (m +
           rw [ih (fun j => a j.castSucc) (fun j => b j.castSucc)]             -- 帰納法の仮定
       _ = ((∑ j : Fin (m + 1), a j.castSucc) + a (Fin.last _))
             - ((∑ j : Fin (m + 1), b j.castSucc) + b (Fin.last _)) :=
-          finite_sum_sub_step' _ _ _ _                                         -- 和と差の計算
+          finite_sum_sub_step' _ _ _ _                                         -- 差を和に直す 8 段
       _ = (∑ j, a j) - ∑ j, b j := by
           rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- 和の定義を 2 か所
 

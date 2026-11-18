@@ -21,8 +21,9 @@
   `def_finite_sum_of_real_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc` で出す
   （mathlib の `Finset.sum` を人手の左から足す和の定義へ読み替える段）。人手の添字 `j ∈ {1, …, m+1}` は Lean の `Fin (m + 1)` の `j - 1`、
   `j = m + 1` は `Fin.last`、`j ≤ m` は `Fin.castSucc` である。
-* `finite_sum_of_real_differences_succ` の帰納法の段の calc は人手の 5 行と対応する。人手の 1 行「ℝ の和と差の計算」は
-  `finite_sum_of_real_differences_step`（差を符号反転の和に直す・結合則と交換則・和の符号反転の 4 段）。
+* `finite_sum_of_real_differences_succ` の帰納法の段の calc は人手の 12 行と対応する。人手の 8 行（`def_real_difference` の 2 か所同時適用・
+  加法の結合則・結合則・交換則・結合則・結合則・`real_negation_of_sum_is_sum_of_negations` を右辺から左辺へ・`def_real_difference` を右辺から左辺へ）は
+  `finite_sum_of_real_differences_step`（1 行 1 段）。
   人手の「`α, β` の置き方」の行は、Lean では `α, β` を置かずに `Σ_{j=1}^{m}` のまま書くので、その前の段の右辺と同じ式になり段にしない。`m = 0`（空の和）は人手には無い（`finite_sum_of_real_differences`）。
 * `finite_sum_of_real_sums_succ` の `m = 1` の 2 行と帰納法の段は人手の行と対応する。人手の結合則・交換則の 5 行は
   `finite_sum_of_real_sums_step`（1 行 1 段）。「`α, β` の置き方」の行は `finite_sum_of_real_differences_succ` と同じ理由で段にしない。
@@ -62,14 +63,19 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 
 namespace Ising2D
 
-/-- **`finite_sum_of_real_differences`** の帰納法の段の「ℝ の和と差の計算」: `(α - β) + (x - y) = (α + x) - (β + y)`。 -/
+/-- **`finite_sum_of_real_differences`** の帰納法の段の 8 行: `(α - β) + (x - y) = (α + x) - (β + y)`（人手の `a_{m+1}, b_{m+1}` が `x, y`）。 -/
 theorem finite_sum_of_real_differences_step (α β x y : ℝ) :
     (α - β) + (x - y) = (α + x) - (β + y) :=
   calc (α - β) + (x - y)
-      = (α + -β) + (x + -y) := by rw [sub_eq_add_neg α β, sub_eq_add_neg x y]   -- 差は符号反転を足すこと（2 か所）
-    _ = (α + x) + (-β + -y) := add_add_add_comm _ _ _ _                         -- 和の結合則・交換則
-    _ = (α + x) + -(β + y) := by rw [neg_add β y]                               -- 和の符号反転は符号反転の和
-    _ = (α + x) - (β + y) := (sub_eq_add_neg _ _).symm                          -- 差は符号反転を足すこと
+      = (α + -β) + (x + -y) := by rw [sub_eq_add_neg α β, sub_eq_add_neg x y]   -- `def_real_difference` を 2 か所へ同時適用
+    _ = α + (-β + (x + -y)) := add_assoc _ _ _                                   -- ℝ の加法の結合則
+    _ = α + ((-β + x) + -y) := by rw [add_assoc (-β) x (-y)]                     -- ℝ の加法の結合則
+    _ = α + ((x + -β) + -y) := by rw [add_comm (-β) x]                           -- ℝ の加法の交換則
+    _ = α + (x + (-β + -y)) := by rw [add_assoc x (-β) (-y)]                     -- ℝ の加法の結合則
+    _ = (α + x) + (-β + -y) := (add_assoc _ _ _).symm                            -- ℝ の加法の結合則
+    _ = (α + x) + -(β + y) := by rw [real_negation_of_sum_is_sum_of_negations β y]
+                                                  -- `real_negation_of_sum_is_sum_of_negations`（`x → β`, `y → b_{m+1}`）を右辺から左辺へ
+    _ = (α + x) - (β + y) := (sub_eq_add_neg _ _).symm                          -- `def_real_difference` を右辺から左辺へ
 
 /-- **`finite_sum_of_real_differences`**（`m + 1` 項）: `Σ_{j=1}^{m+1}(a_j - b_j) = Σ a_j - Σ b_j`。`m` についての帰納法。 -/
 theorem finite_sum_of_real_differences_succ (m : ℕ) (a b : Fin (m + 1) → ℝ) :
@@ -89,7 +95,7 @@ theorem finite_sum_of_real_differences_succ (m : ℕ) (a b : Fin (m + 1) → ℝ
           rw [ih (fun j => a j.castSucc) (fun j => b j.castSucc)]             -- 帰納法の仮定
       _ = ((∑ j : Fin (m + 1), a j.castSucc) + a (Fin.last _))
             - ((∑ j : Fin (m + 1), b j.castSucc) + b (Fin.last _)) :=
-          finite_sum_of_real_differences_step _ _ _ _                          -- ℝ の和と差の計算
+          finite_sum_of_real_differences_step _ _ _ _                          -- 人手の 8 行（差を和に直す）
       _ = (∑ j, a j) - ∑ j, b j := by
           rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- `α, β` の置き方と `def_finite_sum_of_real_numbers` を 2 か所
 

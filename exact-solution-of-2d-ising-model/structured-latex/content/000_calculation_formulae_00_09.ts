@@ -2160,8 +2160,22 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
 &= (\alpha - \beta) + (a_{m+1} - b_{m+1})
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \bigl(\alpha + (-\beta)\bigr) + \bigl(a_{m+1} + (-b_{m+1})\bigr)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \alpha,\ z \to \beta;\ y \to a_{m+1},\ z \to b_{m+1})\ \text{を 2 か所へ同時適用}\bigr)\\
+&= \alpha + \Bigl((-\beta) + \bigl(a_{m+1} + (-b_{m+1})\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&= \alpha + \Bigl(\bigl((-\beta) + a_{m+1}\bigr) + (-b_{m+1})\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&= \alpha + \Bigl(\bigl(a_{m+1} + (-\beta)\bigr) + (-b_{m+1})\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\bigr)\\
+&= \alpha + \Bigl(a_{m+1} + \bigl((-\beta) + (-b_{m+1})\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&= (\alpha + a_{m+1}) + \bigl((-\beta) + (-b_{m+1})\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&= (\alpha + a_{m+1}) + \bigl(-(\beta + b_{m+1})\bigr)
+&&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ (x \to \beta,\ y \to b_{m+1})\ \text{を右辺から左辺へ}\bigr)\\
 &= (\alpha + a_{m+1}) - (\beta + b_{m+1})
-&&\bigl(\because\ \mathbb{R}\ \text{の和と差の計算}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \alpha + a_{m+1},\ z \to \beta + b_{m+1})\ \text{を右辺から左辺へ}\bigr)\\
 &= \Bigl(\Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}\Bigr) - \Bigl(\Bigl(\sum_{j=1}^{m} b_j\Bigr) + b_{m+1}\Bigr)
 &&\bigl(\because\ \alpha, \beta\ \text{の置き方}\bigr)\\
 &= \Bigl(\sum_{j=1}^{m+1} a_j\Bigr) - \Bigl(\sum_{j=1}^{m+1} b_j\Bigr)
@@ -2173,6 +2187,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-03: 原文（Typst）に対応ブロックは無い。max_eigenvalue_of_V_plus_simple (2) の ǧ(1,…,1) − ǧ(ε) の鎖が「ǧ の定義と分配法則」の名前だけで二つの有限和の差を項ごとの差の有限和にしていたので、引けるよう足した。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w7)）: 帰納法の段の 1 行「ℝ の和と差の計算」（(α − β) + (a − b) = (α + a) − (β + b)）が複数の法則をまとめていたので、def_real_difference の 2 か所同時適用・加法の結合則・結合則・交換則・結合則・結合則（finite_sum_of_real_sums の帰納法の段と同じ 5 行）・real_negation_of_sum_is_sum_of_negations（右辺から左辺へ）・def_real_difference（右辺から左辺へ）の 8 行に割った（鎖の両端と主張は不変）。Lean の Ising2D.finite_sum_of_real_differences_step は同じ 8 段の calc。数値検証: sagemath/check/finite_sum_of_real_differences/。",
       ],
     },
   },

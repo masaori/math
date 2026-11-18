@@ -22,7 +22,7 @@
 | `Ising2D.neg_thetaTilde_add_int_mul` | `-θ̃_{μ+kM} = (-θ̃_μ) + 2π(-k)_ℝ`（人手の 4 行と 1 対 1 の `calc`） | 同 (2) の第二の鎖 |
 | `Ising2D.gamma1R_thetaTilde_add_int_mul` / `gamma2_thetaTilde_add_int_mul` / `gamma2_neg_thetaTilde_add_int_mul` | `γ_1(θ̃_{μ+kM}) = γ_1(θ̃_μ)`（ℝ の値。人手の 2 行と 1 対 1 の `calc`）ほか | 同 (2) |
 | `Ising2D.thetaTilde_conj_eq_neg_add_two_pi` | `θ̃_{M+1-μ} = (-θ̃_μ) + 2π(1)_ℝ`（人手の 5 行と 1 対 1 の `calc`） | 同 (3) の `θ̃_ν` の鎖 |
-| `Ising2D.neg_thetaTilde_conj_eq_add_two_pi_neg_one` | `-θ̃_{M+1-μ} = θ̃_μ + 2π(-1)_ℝ`（人手の 6 行と 1 対 1 の `calc`） | 同 (3) の `-θ̃_ν` の鎖 |
+| `Ising2D.neg_thetaTilde_conj_eq_add_two_pi_neg_one` | `-θ̃_{M+1-μ} = θ̃_μ + 2π(-1)_ℝ`（人手の 9 行と 1 対 1 の `calc`） | 同 (3) の `-θ̃_ν` の鎖 |
 | `Ising2D.gamma2_thetaTilde_conj` | `γ_2(θ̃_{M+1-μ}) = γ_2(-θ̃_μ)` | 同 (3) |
 | `Ising2D.gamma2_neg_thetaTilde_conj` | `γ_2(-θ̃_{M+1-μ}) = γ_2(θ̃_μ)` | 同 (3) |
 | `Ising2D.gamma1R_thetaTilde_conj` | `γ_1(θ̃_{M+1-μ}) = γ_1(θ̃_μ)`（ℝ の値。人手の 5 行と 1 対 1 の `calc`） | 同 (3) |
