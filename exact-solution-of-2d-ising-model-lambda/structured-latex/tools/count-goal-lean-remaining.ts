@@ -52,6 +52,9 @@ export const EXISTENCE_OBLIGATIONS = [
       "claim_maximal_ordered_subfield_positive_is_square",
       "claim_odd_degree_positive_cone_extension",
       "claim_adjoin_imaginary_unit_gives_algebraic_numbers",
+      "claim_maximal_ordered_subfield_odd_degree_root",
+      "claim_maximal_ordered_subfield_square_trichotomy",
+      "claim_imaginary_unit_extension_unique_representation",
     ],
   },
 ] as const;
@@ -185,9 +188,38 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
       "claim_elementary_symmetric_substitution_degree_bound",
     ],
   },
+  claim_imaginary_unit_extension_quadratic_root: {
+    title: "正の元が平方である部分体に虚数単位を足した体では二次多項式が根を持つ",
+    dependsOn: [],
+  },
+  claim_two_shifted_values_determine_sum_and_product: {
+    title: "二つの整数倍のずらしの値が部分体に入れば和と積も入る",
+    dependsOn: [],
+  },
+  claim_imaginary_unit_extension_conjugate_product_subfield_coefficient: {
+    title: "虚数単位を足した体を係数とする多項式と係数の共役の積は部分体係数である",
+    dependsOn: [],
+  },
   claim_adjoin_imaginary_unit_gives_algebraic_numbers: {
     title: "虚数単位を足すと代数的数の全体になる",
-    dependsOn: ["claim_odd_degree_positive_cone_extension", "claim_symmetric_polynomial_fundamental_theorem"],
+    dependsOn: [
+      "claim_symmetric_polynomial_fundamental_theorem",
+      "claim_imaginary_unit_extension_quadratic_root",
+      "claim_two_shifted_values_determine_sum_and_product",
+      "claim_imaginary_unit_extension_conjugate_product_subfield_coefficient",
+    ],
+  },
+  claim_maximal_ordered_subfield_odd_degree_root: {
+    title: "極大な順序付き部分体では奇数次の多項式が根を持つ",
+    dependsOn: [],
+  },
+  claim_maximal_ordered_subfield_square_trichotomy: {
+    title: "極大な順序付き部分体の平方の三分法",
+    dependsOn: [],
+  },
+  claim_imaginary_unit_extension_unique_representation: {
+    title: "順序付き部分体に虚数単位を足した表示は一意である",
+    dependsOn: [],
   },
 };
 
