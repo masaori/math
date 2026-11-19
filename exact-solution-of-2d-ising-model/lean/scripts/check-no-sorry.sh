@@ -3048,6 +3048,8 @@ targets=(
   Ising2D.finite_product_of_real_numbers_splits_off_first_factor
   Ising2D.NecSuf.finProdLeft_succ_first
   Ising2D.finite_product_of_real_numbers_splits_off_first_factor_of_necSuf
+  Ising2D.finite_product_of_real_ones
+  Ising2D.finite_product_of_real_ones_of_necSuf
   Ising2D.real_inclusion_preserves_finite_product
   Ising2D.real_inclusion_preserves_finite_product_or_empty
   Ising2D.twoByTwo_apply_eq_real_inclusion

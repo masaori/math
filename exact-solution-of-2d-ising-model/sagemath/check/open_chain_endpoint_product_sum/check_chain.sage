@@ -1,5 +1,5 @@
 # 対象ラベル: open_chain_endpoint_product_sum（Σ_{s∈𝔐} s(M_col)s(1) exp(KE(s)) = 2(2sinh K)^{M_col-1}）
-# 証明の Step 1（open_chain_partition_sum の Φ）、Step 2 の M_col = 2 の鎖（3 行）と M_col ≥ 3 の鎖（10 行）、
+# 証明の Step 1（open_chain_partition_sum の Φ）、Step 2 の M_col = 2 の鎖（3 行）と M_col ≥ 3 の鎖（11 行）、
 # 被加数の鎖（4 行）、主張の鎖（6 行）の全ての行と主張を確かめる。
 # 端点因子の鎖は ZZ で厳密に、組合せの層（QQ[x, y]、exp(K) → x、exp(-K) → y）は M_col = 2..8 の全ての配置で厳密に、
 # 実数の層（RealBallField(200)）は M_col = 2..7、K ∈ K_SAMPLES で確かめる。
@@ -25,7 +25,7 @@ for s in configs(2):
         assert a == b
         count += 1
 def step2_lines(M, sp, one):
-    # Step 2 の M_col ≥ 3 の鎖の 10 行（左辺と 10 行）。sp(m) がサイト m の値、one が乗法の単位元。
+    # Step 2 の M_col ≥ 3 の鎖の 11 行（左辺と 11 行）。sp(m) がサイト m の値、one が乗法の単位元。
     # 積は def_finite_product_of_real_numbers の左からの畳み込み finite_prod で組み、括弧は鎖の行の括弧どおりに掛ける。
     P = finite_prod([sp(m + 1) for m in range(1, M - 1)])                  # Π_{m=1}^{M_col-2} s(m+1)
     return [
@@ -39,12 +39,13 @@ def step2_lines(M, sp, one):
         (sp(1) * (P * P)) * sp(M),                                         # 7 行目
         (sp(1) * finite_prod([sp(m + 1) * sp(m + 1) for m in range(1, M - 1)])) * sp(M),   # 8 行目
         (sp(1) * finite_prod([one for m in range(1, M - 1)])) * sp(M),     # 9 行目
-        sp(1) * sp(M),                                                     # 10 行目
+        (sp(1) * one) * sp(M),                                             # 10 行目: finite_product_of_real_ones（m → M_col-2）
+        sp(1) * sp(M),                                                     # 11 行目: ℝ の乗法の単位元 p·1 = p（p → s(1)）
     ]
 
 # 行ごとの根拠の確かめ: サイトの値を非可換な自由代数 QQ<a_1,…,a_M> の生成元に取ると、乗法の結合則だけで移れる行
 # （3 行目 finite_product_of_real_numbers_splits_off_first_factor、4 行目 def_finite_product_of_real_numbers の帰納の式、
-# 5〜7 行目 ℝ の乗法の結合則）は自由代数でも隣の行と一致し、可換則を使う 2 行目・8 行目（finite_product_of_real_products）は
+# 5〜7 行目 ℝ の乗法の結合則、10 行目 finite_product_of_real_ones、11 行目 ℝ の乗法の単位元 p·1 = p）は自由代数でも隣の行と一致し、可換則を使う 2 行目・8 行目（finite_product_of_real_products）は
 # 自由代数では一致せず（否定コントロール）、可換な多項式環 QQ[a_1,…,a_M] では一致する。
 neg_free = 0
 for M in range(3, 9):
@@ -52,7 +53,7 @@ for M in range(3, 9):
     fl = step2_lines(M, lambda m: F.gen(m - 1), F(1))
     C = PolynomialRing(QQ, M, "a")
     cl = step2_lines(M, lambda m: C.gen(m - 1), C(1))
-    for i in [3, 4, 5, 6, 7]:
+    for i in [3, 4, 5, 6, 7, 10, 11]:
         assert fl[i - 1] == fl[i], (M, i)
         count += 1
     for i in [2, 8]:
@@ -89,6 +90,9 @@ for M in range(3, 9):
             count += 1
         assert all(spin(s, m + 1) * spin(s, m + 1) == 1 for m in range(1, M - 1))   # 9 行目の根拠
         count += 1
+        assert finite_prod([ZZ(1) for m in range(1, M - 1)]) == 1                     # 10 行目の根拠（finite_product_of_real_ones、m → M_col-2）
+        assert spin(s, 1) * 1 == spin(s, 1)                                            # 11 行目の根拠（p·1 = p、p → s(1)）
+        count += 2
         # 否定コントロール: 対にならない因子 s(2) を一つ残すと、s(2) = -1 の配置（全体の半分）で外れる
         if finite_prod([t(s, m) for m in range(1, M)]) != spin(s, 1) * spin(s, 2) * spin(s, M):
             neg_unpaired += 1

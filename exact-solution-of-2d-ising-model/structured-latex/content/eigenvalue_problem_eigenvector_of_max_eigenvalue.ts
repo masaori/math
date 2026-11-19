@@ -2917,6 +2917,7 @@ D_0G
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「ℝ で a·(−1) = −a を各因子へ」の行を、ℝ の乗法の可換則（set_and_algebra_notation）を各因子へ当てる行と real_minus_one_times_is_negation（a → K）を各因子へ当てる行の 2 行に割った。鎖の両端と主張は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w13)）: 最後の鎖の名前だけの根拠「ℝ で a·1 = a を各因子へ」を、set_and_algebra_notation の乗法の単位元 p·1 = p（p → K）の参照にした。主張・鎖・段数は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w22b)。有限積の並べ替えの行を割る件）: Step 2 の M_col ≥ 3 の鎖の 2 行目「ℝ の乗法の可換則と結合則を有限積の因子の並べ替えへ」を、finite_product_of_real_products で二つの積に分ける行・finite_product_of_real_numbers_splits_off_first_factor で先頭の因子 s(1) を出す行・def_finite_product_of_real_numbers の帰納の式で末尾の因子 s(M_col) を出す行・ℝ の乗法の結合則の 3 行・finite_product_of_real_products を右辺から左辺へ当てる行の 7 行に割った。中間の積は、def_finite_product_of_real_numbers が下端 1 の積しか定めないので、Π_{m=2}^{M_col−1}s(m)s(m) を Π_{m=1}^{M_col−2}s(m+1)s(m+1) と書き直した（同じ因子を同じ順に掛ける）。結合則の行で括弧を明示したので、続く 2 行にも外側の括弧を書き、finite_product_of_real_products を引く 2 行目の左辺（1 行目の式）と 8 行目の積の因子にも主張の (x_j y_j) と同じ括弧を書いた。鎖の両端と主張は不変。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w46)。1 の有限積の行を割る件）: Step 2 の M_col ≥ 3 の鎖の最後の行は、名前だけの根拠「1 の有限積は 1」で、1 の有限積を 1 にする段と s(1)·1 = s(1) の段の 2 つを 1 行で当てていた。新しく足した主張 finite_product_of_real_ones（m → M_col−2）の行と、ℝ の乗法の単位元 p·1 = p（p → s(1)、set_and_algebra_notation）の行の 2 行に割った（鎖は 10 行から 11 行）。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -3041,8 +3042,10 @@ D_0G
 &&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}}-2,\ j \to m,\ x_j \to s(m+1),\ y_j \to s(m+1))\text{ を右辺から左辺へ}\bigr)\\
 &= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}1\right)\right)s(M_{\mathrm{col}})
 &&\bigl(\because\ s(m+1)s(m+1)=1\text{ を各 }m\text{ へ同時適用}\bigr)\\
+&= \bigl(s(1)\cdot 1\bigr)s(M_{\mathrm{col}})
+&&\bigl(\because\ \blkref{finite_product_of_real_ones}\ (m \to M_{\mathrm{col}}-2,\ j \to m)\bigr)\\
 &= s(1)s(M_{\mathrm{col}})
-&&\bigl(\because\ 1\text{ の有限積は }1\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の単位元}\ p\cdot 1 = p\ (p \to s(1))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`,
       ),
       paragraph([

@@ -4,6 +4,9 @@
 具体版: `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/DefinitionFiniteProductOfMatrices.lean`
 （人手 `def_finite_product_of_matrices`・`finite_product_of_identity_matrices`）。具体版をこのファイルの系として導くのは
 `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/DefinitionFiniteProductOfMatricesFromNecSuf.lean`。
+`finProdLeft_const_one'` は人手 `finite_product_of_real_ones`（具体版 `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteProductOfRealOnes.lean`）の
+必要十分版でもあり、その導出は同じフォルダの `ClaimFiniteProductOfRealOnesFromNecSuf.lean` である（具体版の段の並びは行列の場合と同じで、
+`1·1 = 1` は ℝ の `mul_one 1`）。
 
 人手の `r ∈ ℤ_{≥1}` が Lean の `r + 1` に当たる。すなわち Lean の `finProdLeft r A`（因子 `A : Fin (r + 1) → R`）は人手の `∏_{j=1}^{r+1} A_j` で、人手の `A_j` が Lean の `A (j - 1)` である。
 定義の 2 つの式（`∏_{j=1}^{1} A_j := A_1`、`∏_{j=1}^{r+2} A_j := (∏_{j=1}^{r+1} A_j) A_{r+2}`）が、そのまま `finProdLeft` の 2 つの節である。
@@ -13,12 +16,16 @@ mathlib の `List.prod` は右から畳み込み、空の積を `1` とするの
 | --- | --- |
 | `finite_product_of_identity_matrices` の `r = 1`（定義） | `finProdLeft_const_one'` の `0` の節（定義） |
 | 同じく `r → r + 1`（定義 → 帰納法の仮定 → `I I = I`） | `finProdLeft_const_one'` の `r + 1` の節（同じ並び） |
+| `finite_product_of_real_ones` の `m = 1`（定義） | `finProdLeft_const_one'` の `0` の節（定義） |
+| 同じく `m → m + 1`（定義 → 帰納法の仮定 → `1·1 = 1`） | `finProdLeft_const_one'` の `r + 1` の節（同じ並び） |
 
 ## 何が効いているか / 効いていないか
 
 - 有限積の定義に要るのは二項演算 `*` だけである（`Mul R`）。単位元・結合則は定義に効いていない（空の積を持たないので単位元が要らない）。
 - `∏ 1 = 1` に効くのは、`1·1 = 1`（仮定 `h`）だけである。具体版は `identity_matrix_is_right_unit_of_mat_mult` を `A → I` で使うが、
-  効いているのはその `A = I` の場合だけである。積の結合則、`1` が左右の単位元であること（`1 = I` 以外の元について）、可換則は効いていない。
+  効いているのはその `A = I` の場合だけである。
+  実数の具体版 `finite_product_of_real_ones` も ℝ の `mul_one` を使うが、効いているのは `p → 1` の場合だけである。
+  どちらの具体版でも、積の結合則、`1` がほかの元の左右の単位元であること（行列なら `I` 以外、実数なら `1` 以外の元について）、可換則は効いていない。
 -/
 import Mathlib.Data.Fin.Basic
 import Mathlib.Algebra.Group.Defs

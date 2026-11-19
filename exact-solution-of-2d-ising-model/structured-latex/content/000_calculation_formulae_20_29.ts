@@ -4254,6 +4254,68 @@ x
     },
   },
   {
+    id: "calculation_formulae_claim_finite_product_of_real_ones",
+    kind: "claim",
+    title: { text: "実数の 1 の有限積は 1" },
+    labels: ["finite_product_of_real_ones"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`\prod_{j=1}^{m} 1 = 1`),
+        " が成り立つ。有限積は ",
+        ref("def_finite_product_of_real_numbers"),
+        " による（",
+        math(String.raw`r_1 = \dots = r_m = 1`),
+        "）。",
+        math(String.raw`1`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " の乗法の単位元である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} 1
+&= 1
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の}\ \textstyle\prod_{j=1}^{1} r_j := r_1\ (r_j \to 1)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+1} 1
+&= \Bigl(\prod_{j=1}^{m} 1\Bigr)\, 1
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の}\ \textstyle\prod_{j=1}^{m+1} r_j := \bigl(\prod_{j=1}^{m} r_j\bigr) r_{m+1}\ (r_j \to 1)\bigr)\\
+&= 1 \cdot 1
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= 1
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の単位元}\ p\cdot 1 = p\ (p \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`m+1`),
+        " でも成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w46)。1 の有限積の行を割る件）: 原文（Typst）に対応ブロックは無い。open_chain_endpoint_product_sum の Step 2 の M_col ≥ 3 の鎖の最後の行が「1 の有限積は 1」を名前だけで根拠にしており、本文には複素数の finite_product_of_complex_ones しか無かったので、実数の主張を足した。Lean の具体版は Ising2D.finite_product_of_real_ones（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteProductOfRealOnes.lean）、必要十分版は Ising2D.NecSuf.finProdLeft_const_one'（NecSuf/FiniteProductLeft.lean。効くのは 1·1 = 1 だけ）。数値検証: sagemath/check/finite_product_of_real_ones/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_definition_power_of_complex_number",
     kind: "definition",
     title: { text: "複素数の冪" },

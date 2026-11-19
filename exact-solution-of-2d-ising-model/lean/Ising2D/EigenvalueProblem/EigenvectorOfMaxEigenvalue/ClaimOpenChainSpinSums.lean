@@ -17,7 +17,7 @@
 | （運ぶ段。人手の行は無い）`{0,1}^r` の上の和を全体の上の `∑` で読む、`E(s)` を添字 `Fin (n + 1)` の和で読む | `binaryWordRealSum_eq_sum_univ`・`openChainEnergy_eq_sum_fin` |
 | `open_chain_endpoint_product_sum` の Step 1（`open_chain_partition_sum` の Step 1 の `Φ` と `ς` を使う） | `openChainPhiEquiv`・`varsigmaWordEquiv` |
 | 同 Step 2 の `M_col = 2` の鎖（3 行）`Π_{m=1}^{1}t_m(s) = t_1(s) = s(1)s(2) = s(1)s(M_col)` | `prod_bondSpin_of_two`（同じ 3 段の calc） |
-| 同 Step 2 の `M_col ≥ 3` の鎖（10 行）`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)` | `prod_bondSpin_of_ge_three`（印 `人手 1`〜`人手 10` の calc）・二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` |
+| 同 Step 2 の `M_col ≥ 3` の鎖（11 行）`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)` | `prod_bondSpin_of_ge_three`（印 `人手 1`〜`人手 11` の calc）・二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` |
 | 同 Step 2 の `exp(KE(s))` の鎖（3 行） | `exp_openChainEnergy_eq_prod_bondSpin`（`open_chain_partition_sum` の準備の鎖と同じ行） |
 | 同 Step 2 の `s(M_col)s(1)exp(KE(s)) = ⋯ = Π_m(t_m(s)exp(Kt_m(s)))`（左辺と 4 行） | `endpoint_mul_exp_openChainEnergy_eq_prod`（同じ 4 段の calc） |
 | 同 Step 2 の最後の鎖（左辺と 14 行） | `open_chain_endpoint_product_sum`（印 `人手 1`〜`人手 14` の calc） |
@@ -59,6 +59,7 @@ import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfF
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealProducts
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealNumbersSplitsOffFirstFactor
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealOnes
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 
 namespace Ising2D
@@ -311,7 +312,7 @@ theorem prod_bondSpin_of_two (s : SpinConf 2) :
     _ = (s 0 : ℝ) * (s 1 : ℝ) := rfl                    -- `t_1(s) := s(1)s(2)`
     _ = (s 0 : ℝ) * (s (Fin.last 1) : ℝ) := rfl         -- `M_col = 2`（人手の `2` が Lean の `Fin.last 1`）
 
-/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col ≥ 3` の鎖（10 行。人手の `M_col` は Lean の `k + 3`）:
+/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col ≥ 3` の鎖（11 行。人手の `M_col` は Lean の `k + 3`）:
 `Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)`。中間の積 `Π_{m=1}^{M_col-2}s(m+1)` の添字 `m` は `j : Fin (k + 1)`
 （人手の `m` が Lean の `(j : ℕ) + 1`）で、サイト `m+1` は `j.succ.castSucc` である。
 人手の 3 行目（先頭の因子を出す）が与える `s(Fin.castSucc j.succ)` と 4 行目（末尾の因子を出す）が与える `s(Fin.succ j.castSucc)` は、
@@ -350,8 +351,10 @@ theorem prod_bondSpin_of_ge_three (k : ℕ) (s : SpinConf (k + 3)) :
     _ = (s 0 : ℝ) * (∏ _j : Fin (k + 1), (1 : ℝ)) * (s (Fin.last (k + 2)) : ℝ) := by
         rw [Finset.prod_congr rfl fun j _ => spinVal_mul_self (s j.succ.castSucc)]
                                                         -- 人手 9: `s(m+1)s(m+1) = 1` を各 `m` へ同時適用
+    _ = (s 0 : ℝ) * 1 * (s (Fin.last (k + 2)) : ℝ) := by
+        rw [finite_product_of_real_ones k]              -- 人手 10: `finite_product_of_real_ones`（`m → M_col-2`、`j → m`）
     _ = (s 0 : ℝ) * (s (Fin.last (k + 2)) : ℝ) := by
-        rw [Finset.prod_const_one, mul_one]             -- 人手 10: `1` の有限積は `1`（と `a·1 = a`）
+        rw [mul_one]                                    -- 人手 11: ℝ の乗法の単位元 `p·1 = p`（`p → s(1)`。`set_and_algebra_notation`）
 
 /-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `Π_{m=1}^{M_col-1}t_m(s) = s(1)s(M_col)`
 （`M_col = 2` と `M_col ≥ 3` の二つの鎖。人手の `M_col` は Lean の `n + 2`）。 -/
