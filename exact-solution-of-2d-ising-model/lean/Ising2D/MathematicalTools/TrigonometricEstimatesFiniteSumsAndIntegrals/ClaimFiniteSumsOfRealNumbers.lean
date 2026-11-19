@@ -67,7 +67,8 @@ namespace Ising2D
 theorem finite_sum_of_real_differences_step (α β x y : ℝ) :
     (α - β) + (x - y) = (α + x) - (β + y) :=
   calc (α - β) + (x - y)
-      = (α + -β) + (x + -y) := by rw [sub_eq_add_neg α β, sub_eq_add_neg x y]   -- `def_real_difference` を 2 か所へ同時適用
+      = (α + -β) + (x + -y) := by rw [sub_eq_add_neg α β, sub_eq_add_neg x y]
+                          -- `def_real_difference`（`y → α`, `z → β`; `y → a_{m+1}`, `z → b_{m+1}`）を 2 か所へ同時適用
     _ = α + (-β + (x + -y)) := add_assoc α (-β) (x + -y)
                           -- ℝ の加法の結合律 `(p + q) + s = p + (q + s)`（`p → α`, `q → -β`, `s → a_{m+1} + (-b_{m+1})`）（`set_and_algebra_notation`）
     _ = α + ((-β + x) + -y) := by rw [add_assoc (-β) x (-y)]
@@ -79,8 +80,9 @@ theorem finite_sum_of_real_differences_step (α β x y : ℝ) :
     _ = (α + x) + (-β + -y) := (add_assoc α x (-β + -y)).symm
                           -- 同じ結合律（`p → α`, `q → a_{m+1}`, `s → (-β) + (-b_{m+1})`）を右辺から左辺へ
     _ = (α + x) + -(β + y) := by rw [real_negation_of_sum_is_sum_of_negations β y]
-                                                  -- `real_negation_of_sum_is_sum_of_negations`（`x → β`, `y → b_{m+1}`）を右辺から左辺へ
-    _ = (α + x) - (β + y) := (sub_eq_add_neg _ _).symm                          -- `def_real_difference` を右辺から左辺へ
+                          -- `real_negation_of_sum_is_sum_of_negations`（`x → β`, `y → b_{m+1}`）を右辺から左辺へ
+    _ = (α + x) - (β + y) := (sub_eq_add_neg _ _).symm
+                          -- `def_real_difference`（`y → α + a_{m+1}`, `z → β + b_{m+1}`）を右辺から左辺へ
 
 /-- **`finite_sum_of_real_differences`**（`m + 1` 項）: `Σ_{j=1}^{m+1}(a_j - b_j) = Σ a_j - Σ b_j`。`m` についての帰納法。 -/
 theorem finite_sum_of_real_differences_succ (m : ℕ) (a b : Fin (m + 1) → ℝ) :
