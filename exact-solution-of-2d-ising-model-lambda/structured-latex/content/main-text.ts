@@ -58981,6 +58981,430 @@ d&(e=a\text{ のとき})\\
                 },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_symmetric_polynomial_fundamental_theorem",
+              focus:
+                {
+                  id: "zero_pinching_claim_symmetric_polynomial_fundamental_theorem",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする対称多項式は、同じ部分体を係数とする多項式に基本対称式を代入したものである" },
+                  labels: ["claim_symmetric_polynomial_fundamental_theorem"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/symmetric-polynomial-fundamental-theorem"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.symmetricPolynomialFundamental_zero",
+                    "Ising2DLambda.FisherZero.fundamentalRemainder",
+                    "Ising2DLambda.FisherZero.fundamentalRemainder_mem",
+                    "Ising2DLambda.FisherZero.fundamentalRemainder_isQbarSymmetric",
+                    "Ising2DLambda.FisherZero.fundamentalRemainder_lastVariableZero",
+                    "Ising2DLambda.FisherZero.fundamentalRemainder_totalDegree_le",
+                    "Ising2DLambda.FisherZero.eq_elementarySymmetricSubst_add_fundamentalRemainder",
+                    "Ising2DLambda.FisherZero.symmetricPolynomialFundamental_succ",
+                    "Ising2DLambda.FisherZero.symmetricPolynomialFundamental",
+                    "Ising2DLambda.NecSuf.FisherZero.symmetricPolynomialFundamental_succ_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.symmetricPolynomialFundamental_necSuf",
+                    "Ising2DLambda.FisherZero.symmetricPolynomialFundamental_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。対称な（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）任意の ",
+                      math(String.raw`P\in F[X_{<n}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）について、",
+                    ]),
+                    displayMath(String.raw`P=\mathrm{se}_n(Q)\quad\text{かつ}\quad\mathrm{wdeg}_n(Q)\le\mathrm{tdeg}_n(P)`),
+                    paragraph([
+                      "を満たす ",
+                      math(String.raw`Q\in F[X_{<n}]`),
+                      " がある（",
+                      ref("def_elementary_symmetric_substitution"),
+                      "、",
+                      ref("def_qbar_multivariate_weighted_degree"),
+                      "、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "変数の個数 ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " についての帰納法で示す。",
+                    ]),
+                    paragraph([
+                      math(String.raw`n=0`),
+                      " のとき。",
+                      math(String.raw`\mathbb{N}_{<0}`),
+                      " は空集合なので、",
+                      math(String.raw`\mathrm{Ex}_0`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）の元は零写像 ",
+                      math(String.raw`0`),
+                      " だけである。対称な ",
+                      math(String.raw`P\in F[X_{<0}]`),
+                      " を取り、",
+                      math(String.raw`Q:=P\in F[X_{<0}]`),
+                      " と置く。唯一の指数 ",
+                      math(String.raw`0`),
+                      " の係数を比べると、",
+                      math(String.raw`P=\mathrm{mk}_0\bigl(\mathrm{mco}_0(P)\bigr)`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+P
+&=\mathrm{mk}_0\bigl(\mathrm{mco}_0(P)\bigr)
+&&\bigl(\because\ \text{上の係数の比較}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ee}_0}\Bigl(\mathrm{mk}_0\bigl(\mathrm{mco}_0(P)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(\mathrm{mk}_0(c))=\mathrm{mk}_0(c)\bigr)\\
+&=\mathrm{se}_0\Bigl(\mathrm{mk}_0\bigl(\mathrm{mco}_0(P)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{se}_0\bigr)\\
+&=\mathrm{se}_0(P)
+&&\bigl(\because\ \text{上の係数の比較}\bigr)\\
+&=\mathrm{se}_0(Q)
+&&\bigl(\because\ Q\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{wdeg}_0(Q)
+&=\max\Bigl(\{0\}\cup\bigl\{\,\mathrm{wsz}_0(a)\ \bigm|\ a\in\mathrm{spt}_0(P)\,\bigr\}\Bigr)
+&&\bigl(\because\ Q\text{ の置き方と }\blkref{def_qbar_multivariate_weighted_degree}\bigr)\\
+&=0
+&&\bigl(\because\ \mathrm{wsz}_0(a)\text{ は空集合 }\mathbb{N}_{<0}\text{ にわたる和なので }0\bigr)\\
+&\le\mathrm{tdeg}_0(P)
+&&\bigl(\because\ \mathrm{tdeg}_0(P)\in\mathbb{N}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " で主張が成り立つと仮定し（外側の帰納法の仮定）、",
+                      math(String.raw`n+1`),
+                      " で示す。",
+                      math(String.raw`d\in\mathbb{N}`),
+                      " について、「全次数が ",
+                      math(String.raw`d`),
+                      " の対称な任意の ",
+                      math(String.raw`P\in F[X_{<n+1}]`),
+                      " について、",
+                      math(String.raw`P=\mathrm{se}_{n+1}(Q)`),
+                      " かつ ",
+                      math(String.raw`\mathrm{wdeg}_{n+1}(Q)\le d`),
+                      " を満たす ",
+                      math(String.raw`Q\in F[X_{<n+1}]`),
+                      " がある」を、",
+                      math(String.raw`d`),
+                      " についての強い帰納法で示す。",
+                      math(String.raw`d\in\mathbb{N}`),
+                      " を取り、",
+                      math(String.raw`d`),
+                      " より小さい任意の ",
+                      math(String.raw`d'\in\mathbb{N}`),
+                      " でこの言明が成り立つと仮定する（内側の帰納法の仮定）。",
+                      math(String.raw`\mathrm{tdeg}_{n+1}(P)=d`),
+                      " の対称な ",
+                      math(String.raw`P\in F[X_{<n+1}]`),
+                      " を取る。準備として次の記号と事実を置く。",
+                    ]),
+                    paragraph([
+                      math(String.raw`P_0:=\mathrm{lz}_n(P)\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_last_variable_zero_substitution"),
+                      "）と置く。",
+                      ref("claim_last_variable_zero_subfield_coefficient"),
+                      " により ",
+                      math(String.raw`P_0\in F[X_{<n}]`),
+                      "、",
+                      ref("claim_last_variable_zero_preserves_symmetry"),
+                      " により ",
+                      math(String.raw`P_0`),
+                      " は対称、",
+                      ref("claim_last_variable_zero_total_degree_bound"),
+                      " により ",
+                      math(String.raw`\mathrm{tdeg}_n(P_0)\le\mathrm{tdeg}_{n+1}(P)=d`),
+                      " である。外側の帰納法の仮定を ",
+                      math(String.raw`P_0`),
+                      " に当てて、",
+                      math(String.raw`P_0=\mathrm{se}_n(Q_0)`),
+                      " かつ ",
+                      math(String.raw`\mathrm{wdeg}_n(Q_0)\le\mathrm{tdeg}_n(P_0)`),
+                      " を満たす ",
+                      math(String.raw`Q_0\in F[X_{<n}]`),
+                      " を取る。",
+                    ]),
+                    paragraph([
+                      math(String.raw`Q_1:=\mathrm{ex}_n(Q_0)\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      "（",
+                      ref("def_last_variable_extension"),
+                      "）と置く。",
+                      ref("claim_last_variable_extension_subfield_coefficient"),
+                      " により ",
+                      math(String.raw`Q_1\in F[X_{<n+1}]`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{wdeg}_{n+1}(Q_1)
+&\le\mathrm{wdeg}_n(Q_0)
+&&\bigl(\because\ \blkref{claim_last_variable_extension_weighted_degree_bound}\bigr)\\
+&\le\mathrm{tdeg}_n(P_0)
+&&\bigl(\because\ Q_0\text{ の取り方}\bigr)\\
+&\le d
+&&\bigl(\because\ \blkref{claim_last_variable_zero_total_degree_bound}\text{ と }\mathrm{tdeg}_{n+1}(P)=d\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`R:=P+\mathrm{mk}_{n+1}(-1)\cdot\mathrm{se}_{n+1}(Q_1)\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      " と置く。",
+                      math(String.raw`F`),
+                      " は部分体なので ",
+                      math(String.raw`-1\in F`),
+                      " であり、",
+                      ref("claim_subfield_coefficient_multivariate_constant"),
+                      " により ",
+                      math(String.raw`\mathrm{mk}_{n+1}(-1)\in F[X_{<n+1}]`),
+                      "、",
+                      ref("claim_elementary_symmetric_substitution_subfield_coefficient"),
+                      " により ",
+                      math(String.raw`\mathrm{se}_{n+1}(Q_1)\in F[X_{<n+1}]`),
+                      " である。二元の添字集合についての ",
+                      ref("claim_subfield_coefficient_multivariate_finite_product"),
+                      " によりその積が、二元の添字集合についての ",
+                      ref("claim_subfield_coefficient_multivariate_finite_sum"),
+                      " により ",
+                      math(String.raw`R`),
+                      " が ",
+                      math(String.raw`F[X_{<n+1}]`),
+                      " に属する。",
+                      math(String.raw`\mathrm{vs}_\varrho`),
+                      "（",
+                      ref("def_qbar_variable_permutation"),
+                      "）は代入なので和と積を保つ。任意の ",
+                      math(String.raw`\varrho\in\mathfrak{P}_{n+1}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{vs}_\varrho(R)
+&=\mathrm{vs}_\varrho\bigl(P+\mathrm{mk}_{n+1}(-1)\cdot\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ R\text{ の置き方}\bigr)\\
+&=\mathrm{vs}_\varrho(P)+\mathrm{vs}_\varrho\bigl(\mathrm{mk}_{n+1}(-1)\bigr)\cdot\mathrm{vs}_\varrho\bigl(\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ により和と積を保つ}\bigr)\\
+&=P+\mathrm{vs}_\varrho\bigl(\mathrm{mk}_{n+1}(-1)\bigr)\cdot\mathrm{vs}_\varrho\bigl(\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ P\text{ は対称（}\blkref{def_qbar_symmetric_polynomial}\text{）}\bigr)\\
+&=P+\mathrm{mk}_{n+1}(-1)\cdot\mathrm{vs}_\varrho\bigl(\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(\mathrm{mk}_{n+1}(c))=\mathrm{mk}_{n+1}(c)\bigr)\\
+&=P+\mathrm{mk}_{n+1}(-1)\cdot\mathrm{se}_{n+1}(Q_1)
+&&\bigl(\because\ \blkref{claim_elementary_symmetric_substitution_symmetric}\bigr)\\
+&=R
+&&\bigl(\because\ R\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので ",
+                      math(String.raw`R`),
+                      " は対称である。",
+                      math(String.raw`\mathrm{lz}_n`),
+                      " も代入なので和と積を保ち、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{lz}_n(R)
+&=\mathrm{lz}_n(P)+\mathrm{lz}_n\bigl(\mathrm{mk}_{n+1}(-1)\bigr)\cdot\mathrm{lz}_n\bigl(\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ R\text{ の置き方と }\blkref{def_qbar_multivariate_substitution}\text{ により和と積を保つ}\bigr)\\
+&=P_0+\mathrm{mk}_n(-1)\cdot\mathrm{lz}_n\bigl(\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ P_0\text{ の置き方と }\blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(\mathrm{mk}_{n+1}(c))=\mathrm{mk}_n(c)\bigr)\\
+&=P_0+\mathrm{mk}_n(-1)\cdot\mathrm{se}_n\bigl(\mathrm{lz}_n(Q_1)\bigr)
+&&\bigl(\because\ \blkref{claim_elementary_symmetric_substitution_last_variable_zero}\bigr)\\
+&=P_0+\mathrm{mk}_n(-1)\cdot\mathrm{se}_n(Q_0)
+&&\bigl(\because\ Q_1\text{ の置き方と }\blkref{claim_last_variable_zero_of_extension}\bigr)\\
+&=P_0+\mathrm{mk}_n(-1)\cdot P_0
+&&\bigl(\because\ Q_0\text{ の取り方}\bigr)\\
+&=\mathrm{mk}_n(1)\cdot P_0+\mathrm{mk}_n(-1)\cdot P_0
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の積の係数の式により }\mathrm{mk}_n(1)\text{ は単位元}\bigr)\\
+&=\bigl(\mathrm{mk}_n(1)+\mathrm{mk}_n(-1)\bigr)\cdot P_0
+&&\bigl(\because\ \overline{\mathbb{Q}}[X_{<n}]\text{ の分配法則}\bigr)\\
+&=\mathrm{mk}_n(0)\cdot P_0
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の和の係数の式と }1+(-1)=0\bigr)\\
+&=0
+&&\bigl(\because\ \mathrm{mk}_n(0)\text{ は零元で、零元との積は零元}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_{n+1}\bigl(\mathrm{mk}_{n+1}(-1)\cdot\mathrm{se}_{n+1}(Q_1)\bigr)
+&\le\mathrm{tdeg}_{n+1}\bigl(\mathrm{mk}_{n+1}(-1)\bigr)+\mathrm{tdeg}_{n+1}\bigl(\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_total_degree_product_bound}\bigr)\\
+&=0+\mathrm{tdeg}_{n+1}\bigl(\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_total_degree_constant}\bigr)\\
+&\le0+\mathrm{wdeg}_{n+1}(Q_1)
+&&\bigl(\because\ \blkref{claim_elementary_symmetric_substitution_degree_bound}\bigr)\\
+&\le d
+&&\bigl(\because\ \text{上の }\mathrm{wdeg}_{n+1}(Q_1)\le d\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`\mathrm{tdeg}_{n+1}(P)=d`),
+                      " と合わせて、二元の添字集合と ",
+                      math(String.raw`m=d`),
+                      " についての ",
+                      ref("claim_qbar_total_degree_finite_sum_bound"),
+                      " により ",
+                      math(String.raw`\mathrm{tdeg}_{n+1}(R)\le d`),
+                      " である。さらに",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+P
+&=P+0
+&&\bigl(\because\ 0\text{ は加法の単位元}\bigr)\\
+&=P+\mathrm{mk}_{n+1}(0)\cdot\mathrm{se}_{n+1}(Q_1)
+&&\bigl(\because\ \mathrm{mk}_{n+1}(0)\text{ は零元で、零元との積は零元}\bigr)\\
+&=P+\bigl(\mathrm{mk}_{n+1}(1)+\mathrm{mk}_{n+1}(-1)\bigr)\cdot\mathrm{se}_{n+1}(Q_1)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の和の係数の式と }1+(-1)=0\bigr)\\
+&=P+\bigl(\mathrm{mk}_{n+1}(1)\cdot\mathrm{se}_{n+1}(Q_1)+\mathrm{mk}_{n+1}(-1)\cdot\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}[X_{<n+1}]\text{ の分配法則}\bigr)\\
+&=P+\bigl(\mathrm{se}_{n+1}(Q_1)+\mathrm{mk}_{n+1}(-1)\cdot\mathrm{se}_{n+1}(Q_1)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の積の係数の式により }\mathrm{mk}_{n+1}(1)\text{ は単位元}\bigr)\\
+&=\mathrm{se}_{n+1}(Q_1)+R
+&&\bigl(\because\ \text{加法の結合法則・交換法則と }R\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`R\in F[X_{<n+1}]`),
+                      " は対称で ",
+                      math(String.raw`\mathrm{lz}_n(R)=0`),
+                      " なので、",
+                      ref("claim_symmetric_vanishing_last_variable_divisible_by_product"),
+                      " により、",
+                      math(String.raw`S`),
+                      " は対称で、",
+                      math(String.raw`R=\mathrm{es}_{n+1,n+1}\cdot S`),
+                      " であり、",
+                      math(String.raw`R\ne0`),
+                      " なら ",
+                      math(String.raw`\mathrm{tdeg}_{n+1}(S)+(n+1)=\mathrm{tdeg}_{n+1}(R)`),
+                      " である ",
+                      math(String.raw`S\in F[X_{<n+1}]`),
+                      " を取る。",
+                    ]),
+                    paragraph([
+                      math(String.raw`R=0`),
+                      " のとき、",
+                      math(String.raw`Q:=Q_1\in F[X_{<n+1}]`),
+                      " と置く。",
+                      math(String.raw`P=\mathrm{se}_{n+1}(Q_1)+R=\mathrm{se}_{n+1}(Q_1)+0=\mathrm{se}_{n+1}(Q)`),
+                      "（",
+                      math(String.raw`0`),
+                      " は加法の単位元）であり、上で示したとおり ",
+                      math(String.raw`\mathrm{wdeg}_{n+1}(Q)=\mathrm{wdeg}_{n+1}(Q_1)\le d`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`R\ne0`),
+                      " のとき、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_{n+1}(S)
+&<\mathrm{tdeg}_{n+1}(S)+(n+1)
+&&\bigl(\because\ n+1\ge1\bigr)\\
+&=\mathrm{tdeg}_{n+1}(R)
+&&\bigl(\because\ S\text{ の取り方と }R\ne0\bigr)\\
+&\le d
+&&\bigl(\because\ \text{上の }\mathrm{tdeg}_{n+1}(R)\le d\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので、内側の帰納法の仮定を ",
+                      math(String.raw`d'=\mathrm{tdeg}_{n+1}(S)`),
+                      " と対称な ",
+                      math(String.raw`S\in F[X_{<n+1}]`),
+                      " に当てて、",
+                      math(String.raw`S=\mathrm{se}_{n+1}(Q_2)`),
+                      " かつ ",
+                      math(String.raw`\mathrm{wdeg}_{n+1}(Q_2)\le\mathrm{tdeg}_{n+1}(S)`),
+                      " を満たす ",
+                      math(String.raw`Q_2\in F[X_{<n+1}]`),
+                      " を取る。",
+                      math(String.raw`Q:=Q_1+X^{(n+1)}_n\cdot Q_2`),
+                      " と置く。",
+                      ref("claim_subfield_coefficient_multivariate_variable"),
+                      " により ",
+                      math(String.raw`X^{(n+1)}_n\in F[X_{<n+1}]`),
+                      " であり、二元の添字集合についての ",
+                      ref("claim_subfield_coefficient_multivariate_finite_product"),
+                      " と ",
+                      ref("claim_subfield_coefficient_multivariate_finite_sum"),
+                      " により ",
+                      math(String.raw`Q\in F[X_{<n+1}]`),
+                      " である。",
+                      math(String.raw`\mathrm{se}_{n+1}`),
+                      " は代入なので和と積を保ち、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+P
+&=\mathrm{se}_{n+1}(Q_1)+R
+&&\bigl(\because\ \text{上の }P=\mathrm{se}_{n+1}(Q_1)+R\bigr)\\
+&=\mathrm{se}_{n+1}(Q_1)+\mathrm{es}_{n+1,n+1}\cdot S
+&&\bigl(\because\ S\text{ の取り方}\bigr)\\
+&=\mathrm{se}_{n+1}(Q_1)+\mathrm{es}_{n+1,n+1}\cdot\mathrm{se}_{n+1}(Q_2)
+&&\bigl(\because\ Q_2\text{ の取り方}\bigr)\\
+&=\mathrm{se}_{n+1}(Q_1)+\mathrm{ee}_{n+1}(n)\cdot\mathrm{se}_{n+1}(Q_2)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_{n+1}(n)=\mathrm{es}_{n+1,n+1}\bigr)\\
+&=\mathrm{se}_{n+1}(Q_1)+\mathrm{se}_{n+1}\bigl(X^{(n+1)}_n\bigr)\cdot\mathrm{se}_{n+1}(Q_2)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ と }\blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(X^{(n+1)}_n)=y(n)\bigr)\\
+&=\mathrm{se}_{n+1}\bigl(Q_1+X^{(n+1)}_n\cdot Q_2\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ により和と積を保つ}\bigr)\\
+&=\mathrm{se}_{n+1}(Q)
+&&\bigl(\because\ Q\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{wdeg}_{n+1}(Q)
+&\le\max\Bigl(\mathrm{wdeg}_{n+1}(Q_1),\ \mathrm{wdeg}_{n+1}\bigl(X^{(n+1)}_n\cdot Q_2\bigr)\Bigr)
+&&\bigl(\because\ Q\text{ の置き方と }\blkref{claim_qbar_weighted_degree_sum_bound}\bigr)\\
+&\le\max\Bigl(d,\ \mathrm{wdeg}_{n+1}\bigl(X^{(n+1)}_n\cdot Q_2\bigr)\Bigr)
+&&\bigl(\because\ \text{上の }\mathrm{wdeg}_{n+1}(Q_1)\le d\bigr)\\
+&\le\max\bigl(d,\ (n+1)+\mathrm{wdeg}_{n+1}(Q_2)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_weighted_degree_last_variable_product_bound}\bigr)\\
+&\le\max\bigl(d,\ (n+1)+\mathrm{tdeg}_{n+1}(S)\bigr)
+&&\bigl(\because\ Q_2\text{ の取り方}\bigr)\\
+&=\max\bigl(d,\ \mathrm{tdeg}_{n+1}(R)\bigr)
+&&\bigl(\because\ S\text{ の取り方と }R\ne0\bigr)\\
+&=d
+&&\bigl(\because\ \text{上の }\mathrm{tdeg}_{n+1}(R)\le d\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。どちらの場合も言明が ",
+                      math(String.raw`d`),
+                      " で成り立つ。対称な任意の ",
+                      math(String.raw`P\in F[X_{<n+1}]`),
+                      " は ",
+                      math(String.raw`d:=\mathrm{tdeg}_{n+1}(P)`),
+                      " についての言明の対象なので、主張は ",
+                      math(String.raw`n+1`),
+                      " で成り立つ。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " 係数の多項式の有限和・有限積と自然数の比較だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
         ],
       },
     },
