@@ -26,7 +26,7 @@
 - 人手の最後の行の「和の添字を書き換える」は束縛変数の名前の付け替えで、Lean では段にならない。
 - 一つ目の主張の左辺は、mathlib の `u ⬝ᵥ P *ᵥ v` ではなく人手 `def_real_bilinear_value` の和 `Σ_kΣ_l (u_kP_kl)v_l` で書く。
   mathlib の `u ⬝ᵥ P *ᵥ v` は定義から `∑ k, u k * (P *ᵥ v) k` と `rfl` で一致するので、`⬝ᵥ` で書くと主張が中身を持たず、
-  人手の 2・3 行目（結合則と `finite_sum_of_real_scalar_multiples`）が Lean で確かめられないからである。人手の 1 行目
+  人手の 2・3 行目（結合律と `finite_sum_of_real_scalar_multiples`）が Lean で確かめられないからである。人手の 1 行目
   （`def_real_bilinear_value`）は、この左辺の書き方に当たる。引く側で `⬝ᵥ` の値から始めるときは、
   `dotProduct_mulVec_eq_real_bilinear_value` で和へ開いてから本定理を当てる（`⬝ᵥ` の値を `Σ_k u_k(Pv)_k` へ移すだけなら `rfl` で足りる）。
 

@@ -13,18 +13,18 @@
 | --- | --- |
 | `def_real_matrix_vector_product`（最初と最後の段） | `rfl`（mathlib の `*ᵥ` の成分は `Σ_j P_ij x_j`） |
 | 仮定 `w_k = c u_k` | 仮定 `hw` |
-| 結合則、交換則、結合則 | `mul_assoc`、仮定 `hc`、`mul_assoc` |
+| 結合律、交換律、結合律 | `mul_assoc`、仮定 `hc`、`mul_assoc` |
 | `finite_sum_of_real_scalar_multiples_fintype` | `finite_sum_mul_left'`（`NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`） |
 
 ## この主張に本質的に効いている構造
 
-* 乗法の結合律（人手の 2 か所の段）と、`c` が行 `i` の各成分 `P_ij` と可換であること（明示の仮定 `hc`。人手の交換則の段
-  `P_ij c = c P_ij` で使う元だけに限った）、左分配則と `c·0 = 0`（`finite_sum_mul_left'`）。
+* 乗法の結合律（人手の 2 か所の段）と、`c` が行 `i` の各成分 `P_ij` と可換であること（明示の仮定 `hc`。人手の交換律の段
+  `P_ij c = c P_ij` で使う元だけに限った）、左分配律と `c·0 = 0`（`finite_sum_mul_left'`）。
   乗法の可換性一般・単位元・加法の逆元・順序は使わない。
-* `hc` を外すと人手の交換則の段が書けず、`(Pw)_i` と `c(Pu)_i` は一般に一致しない
+* `hc` を外すと人手の交換律の段が書けず、`(Pw)_i` と `c(Pu)_i` は一般に一致しない
   （非可換な環で、`c` が `P_ij` と可換でない場合。例えば係数を 2×2 の実行列の環（単位元を持つ非可換な環）に取り、
   `pc ≠ cp` なる `p, c` について 1 行 1 列で `P = (p)`、`u = (1)` とすると `(Pw)_1 = pc`、`c(Pu)_1 = cp`）。
-* 主張の文の `P *ᵥ w` そのものが mathlib で `NonUnitalNonAssocSemiring` を要求し、結合則の段のために結合的にする。
+* 主張の文の `P *ᵥ w` そのものが mathlib で `NonUnitalNonAssocSemiring` を要求し、結合律の段のために結合的にする。
   以上から、係数は非単位的な半環 `R` に置く。
 -/
 import Ising2D.NecSuf.FiniteSumDifferenceAndNonnegativeTerm

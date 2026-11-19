@@ -18,8 +18,8 @@
 
 - 一つの添字を除いた有限積の定義に要るのは二項演算 `*` だけである（`Mul R`）。
 - 主張に効くのは積の結合律だけである（`Semigroup R`）。単位元・和・スカラー倍は効いていない（空の積を持たないので単位元が要らない）。
-  結合則は、`ν ≤ r` の場合に `A_ν` と `A_{r+1}` を隣り合わせて入れ替える前後の 2 行に使う。`r = 2` と `ν = r + 1` の場合には使わない。
-  結合則は外せない。`r = 3`、`ν = 1` で、可換だが結合的でない積（`ℚ` の平均 `a * b := (a + b)/2`）を取ると、可換性の仮定は
+  結合律は、`ν ≤ r` の場合に `A_ν` と `A_{r+1}` を隣り合わせて入れ替える前後の 2 行に使う。`r = 2` と `ν = r + 1` の場合には使わない。
+  結合律は外せない。`r = 3`、`ν = 1` で、可換だが結合的でない積（`ℚ` の平均 `a * b := (a + b)/2`）を取ると、可換性の仮定は
   すべて成り立つが、`A_1 = 1`・`A_2 = A_3 = 0` で左辺 `(A_1A_2)A_3 = 1/4`、右辺 `(A_2A_3)A_1 = 1/2` となり一致しない。
 -/
 import Ising2D.NecSuf.FiniteProductLeft
@@ -82,11 +82,11 @@ theorem finProdLeft_eq_omitting_mul {R : Type*} [Semigroup R] :
         _ = (finProdLeftOmitting r ν' (fun j => A (Fin.castSucc j)) * A (Fin.castSucc ν')) * A (Fin.last (r + 2)) := by
             rw [finProdLeft_eq_omitting_mul r ν' (fun j => A (Fin.castSucc j)) h']    -- 帰納法の仮定
         _ = finProdLeftOmitting r ν' (fun j => A (Fin.castSucc j)) * (A (Fin.castSucc ν') * A (Fin.last (r + 2))) :=
-            mul_assoc _ _ _                                                           -- 結合則
+            mul_assoc _ _ _                                                           -- 結合律
         _ = finProdLeftOmitting r ν' (fun j => A (Fin.castSucc j)) * (A (Fin.last (r + 2)) * A (Fin.castSucc ν')) := by
             rw [h (Fin.last (r + 2)) (Fin.castSucc_lt_last ν')]                       -- 仮定（`j → r + 1`）
         _ = (finProdLeftOmitting r ν' (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 2))) * A (Fin.castSucc ν') :=
-            (mul_assoc _ _ _).symm                                                    -- 結合則を右辺から左辺へ
+            (mul_assoc _ _ _).symm                                                    -- 結合律を右辺から左辺へ
         _ = (finProdLeft r (fun j => A (Fin.castSucc (ν'.succAbove j))) * A (Fin.last (r + 2))) * A (Fin.castSucc ν') :=
             rfl                                                                       -- 定義（`r → r`）
         _ = (finProdLeft r (fun j => A (Fin.castSucc (ν'.succAbove j)))

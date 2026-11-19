@@ -20,11 +20,11 @@
 - `X - O = X` に効くのは、差が `x - y = x + (-y)` であること・`-0 = 0`・`x + 0 = x` だけである。型クラスは、この 3 つを
   定理（`sub_eq_add_neg`・`neg_zero`・`add_zero`）として持つ最も弱い mathlib の型クラス `SubNegZeroMonoid` にした。
   `SubNegZeroMonoid` は加法の結合律も含むが、証明は使っていない。
-  具体版の `-0 = (-1)·0` と積の計算は `-0 = 0` を出すためだけに使っていて、**乗法は効いていない**。加法の結合律・可換則・逆元の性質
+  具体版の `-0 = (-1)·0` と積の計算は `-0 = 0` を出すためだけに使っていて、**乗法は効いていない**。加法の結合律・可換律・逆元の性質
   （`x + (-x) = 0`）も効いていない。
 - `Σ_{j=1}^{r} O = O` に効くのは、有限和を左から 1 項ずつ足す定義と `O + O = O`（`x + 0 = x`）だけである。
   `Finset.sum` の定義が係数に加法の可換モノイド（`AddCommMonoid`）を要求するので型クラスはそれより弱くできないが、
-  証明は加法の可換則を使っていない（`Fin.sum_univ_castSucc` で左から足す形へ読み替えたあとは `x + 0 = x` だけで進む）。
+  証明は加法の可換律を使っていない（`Fin.sum_univ_castSucc` で左から足す形へ読み替えたあとは `x + 0 = x` だけで進む）。
 - 行列の添字の集合は任意で、有限であること・順序は効いていない（和の主張の和の項の添字は `Fin (r + 1)` で、左から足す順序を使う）。
   複素数であること、体であることは効いていない。
 -/
@@ -78,7 +78,7 @@ theorem sub_zero_matrix {R : Type*} [SubNegZeroMonoid R] (X : Matrix ι κ R) : 
       = X + 0 := Matrix.ext (sub_zero_matrix_apply X)   -- 成分ごとの等式
     _ = X := add_zero_matrix X                          -- `X + O = X`
 
-/-- **`Σ_{j=1}^{r+1} O = O`**（具体版 `finite_sum_of_zero_matrices`）。係数は `AddCommMonoid`（`Finset.sum` の定義が要求する。可換則は使わない）。 -/
+/-- **`Σ_{j=1}^{r+1} O = O`**（具体版 `finite_sum_of_zero_matrices`）。係数は `AddCommMonoid`（`Finset.sum` の定義が要求する。可換律は使わない）。 -/
 theorem sum_zero_matrices {R : Type*} [AddCommMonoid R] (r : ℕ) :
     ∑ _j : Fin (r + 1), (0 : Matrix ι κ R) = 0 := by
   induction r with

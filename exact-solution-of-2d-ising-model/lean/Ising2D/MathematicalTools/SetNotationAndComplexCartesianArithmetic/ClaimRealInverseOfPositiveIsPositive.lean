@@ -68,7 +68,7 @@ theorem real_inverse_of_positive_is_positive (a : ℝ) (ha : 0 < a) : 0 < a⁻¹
       calc (1 : ℝ)
           = 0 + 1 := (zero_add 1).symm                        -- 加法の単位元を右辺から左辺へ
         _ < -1 + 1 := add_lt_add_left h2 1                    -- `0 < −1` と順序と加法の両立（`x → 0, y → −1, c → 1`）
-        _ = 1 + -1 := add_comm (-1) 1                         -- 加法の可換則
+        _ = 1 + -1 := add_comm (-1) 1                         -- 加法の可換律
         _ = 0 := add_neg_cancel 1                             -- `def_real_difference` の加法の逆元（`z → 1`）
     have h00 : (0 : ℝ) < 0 := lt_trans real_zero_less_than_one h3  -- 推移律
     exact (lt_iff_le_and_ne.mp h00).2 rfl                    -- `<` の意味の後半で `0 ≠ 0`、反射律に反する

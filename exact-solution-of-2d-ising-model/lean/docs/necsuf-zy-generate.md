@@ -88,9 +88,9 @@ x n * x n = 1                             -- σ^xσ^x = I
 n < k → x k * x n = x n * x k             -- 相異なる番号どうしの可換性（等式が対称なので n < k の形で書く）
 ```
 
-* 使う代数の構造は結合則と単位元の両側の単位性だけで、加法・スカラー倍・`A` の乗法の可換性は使わない。
+* 使う代数の構造は結合律と単位元の両側の単位性だけで、加法・スカラー倍・`A` の乗法の可換性は使わない。
 * `x n * x n = 1` も可換性も削れない（ファイルの節の冒頭に反例を書いた）。
-* 結合則も削れない。`Monoid` を単位的マグマ `MulOneClass` に替えると、ほかの仮定を全部残しても両方の主張が偽になる。
+* 結合律も削れない。`Monoid` を単位的マグマ `MulOneClass` に替えると、ほかの仮定を全部残しても両方の主張が偽になる。
   反例は 6 元の単位的マグマ `NecSuf.SixElementUnitalMagma`（`N = 3`、`x 0, x 1, x 2 = a, b, c`、`p 2 = d`、`c d = e ≠ 1 = d c`、`d d = e`）で、
   `NecSuf.xl_mul_string_comm_false_without_assoc`・`NecSuf.string_mul_self_false_without_assoc` が、主張の `Monoid` を `MulOneClass` に替えた全称命題の否定を示す。
 
@@ -106,7 +106,7 @@ p (n+1) = p n * x n                       -- P_{n+1} = P_n σ^x_{n+1}（0 始ま
 1 * x 0 = x 0                             -- r = 1 の段の左の単位元（A → σ_1^x）
 ```
 
-* 結合則は使わない（漸化式と有限積の定義はどちらも右から 1 つずつ掛ける）。
+* 結合律は使わない（漸化式と有限積の定義はどちらも右から 1 つずつ掛ける）。
 * `1 * x 0 = x 0` は主張の `r = 0`（人手の `r = 1`）の場合そのものなので削れない。
 * `N = 0` のときは主張が空で、`1 * x 0 = x 0` も使わない。
 
@@ -191,7 +191,7 @@ bash scripts/check-no-sorry.sh
 ```
 
 （Step 2 の 6 行は 2026-11-12 に、累積帰納法の三段・可換の式・二乗の式へ組み直した後に `#print axioms` で取った出力。
-`map_mem_of_mulSingle_mem` の行は同じ日に `P_s`（いまの `Q_s`）の帰納法へ書き直した後の出力。結合則を外した反例の 2 行は同じ日に反例を足した後の出力で、`propext` は積の表を `decide` で確かめる段から入る。`string_eq_finProdLeft` の行は同じ日に積の表示を足した後の出力で、
+`map_mem_of_mulSingle_mem` の行は同じ日に `P_s`（いまの `Q_s`）の帰納法へ書き直した後の出力。結合律を外した反例の 2 行は同じ日に反例を足した後の出力で、`propext` は積の表を `decide` で確かめる段から入る。`string_eq_finProdLeft` の行は同じ日に積の表示を足した後の出力で、
 `propext` は有限積の初項・漸化式を右辺から左辺へ読む段の `rw` から入る。選択公理は使わない。）
 
 Step 2 の必要十分版（`string_mem_of_previous` / `local_mem_of_previous` / `local_mem` / `string_mem` / `xl_mul_string_comm` / `string_mul_self`）が**公理に一切依存しない**ことは、

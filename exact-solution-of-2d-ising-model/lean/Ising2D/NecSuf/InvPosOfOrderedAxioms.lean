@@ -14,13 +14,13 @@
 - 効くのは、`0 ≠ 1`、`0 < 1`、順序の全域性と反対称律（`0 < a⁻¹` か `a⁻¹ < 0` の場合分け。`LinearOrder` の `lt_or_gt_of_ne`。
   反対称律は mathlib の `<` の定め方による）、`<` の推移律と `x < y ⇒ x ≠ y`、順序と加法の両立 `x < y ⇒ x + c < y + c`、
   正の元どうしの積は正、`0` でない元の右逆元 `x·x⁻¹ = 1`、`x·0 = 0`、`(−1)·x = −x`、乗法の結合律と可換律、
-  加法の逆元 `z + (−z) = 0`、左からの加法の単位元 `0 + a = a`、加法の可換則だけである。
+  加法の逆元 `z + (−z) = 0`、左からの加法の単位元 `0 + a = a`、加法の可換律だけである。
 - 型には演算と元を持つだけの `Zero`・`One`・`Add`・`Neg`・`Mul`・`Inv` を置き、使う等式はすべて仮定に書く。
   `x·0 = 0`・`(−1)·x = −x`・`0 < 1` は具体版では示した主張（`real_times_zero_is_zero`・`real_minus_one_times_is_negation`・
   `real_zero_less_than_one`）を引く段で、ここではその結論だけを仮定に置く。
 - `0 ≠ 1` は `0 < 1` と `x < y ⇒ x ≠ y` からも出るが、具体版の手順（`a⁻¹ ≠ 0` を体の公理 `0 ≠ 1` で示す）に合わせて仮定に置く。
 - 乗法の可換律は、人手の鎖が `a·(−1)` を `(−1)·a` に替えて `(−1)·x = −x` を当てる段にだけ効く（人手の経路のためで、主張には本質的でない）。
-- 加法の結合律、右からの単位元 `a + 0 = a`・`1·a = a`・`a·1 = a`、分配則、左逆元 `x⁻¹·x = 1` は効いていない。
+- 加法の結合律、右からの単位元 `a + 0 = a`・`1·a = a`・`a·1 = a`、分配律、左逆元 `x⁻¹·x = 1` は効いていない。
   実数であること、完備性も効いていない。
 -/
 import Mathlib.Order.Basic
@@ -28,7 +28,7 @@ import Mathlib.Order.Basic
 namespace Ising2D.NecSuf
 
 /-- **`real_inverse_of_positive_is_positive`** の必要十分版: 順序の全域性と反対称律（`lt_or_gt_of_ne` の中）、推移律、`x < y ⇒ x ≠ y`、順序と加法の両立、正の元どうしの積は正、
-`0 ≠ 1`・`0 < 1`、右逆元、`x·0 = 0`、`(−1)·x = −x`、乗法の結合律と可換律、加法の逆元・左単位元・可換則から、
+`0 ≠ 1`・`0 < 1`、右逆元、`x·0 = 0`、`(−1)·x = −x`、乗法の結合律と可換律、加法の逆元・左単位元・可換律から、
 `0 < a` なら `0 < a⁻¹`。 -/
 theorem inv_pos_of_orderedAxioms {R : Type*} [Zero R] [One R] [Add R] [Neg R] [Mul R] [Inv R] [LinearOrder R]
     (h01 : (0 : R) ≠ 1)
@@ -77,7 +77,7 @@ theorem inv_pos_of_orderedAxioms {R : Type*} [Zero R] [One R] [Add R] [Neg R] [M
       calc (1 : R)
           = 0 + 1 := (hzero_add 1).symm                       -- 加法の単位元を右辺から左辺へ
         _ < -1 + 1 := hadd 0 (-1) 1 h2                        -- 順序と加法の両立
-        _ = 1 + -1 := hadd_comm (-1) 1                        -- 加法の可換則
+        _ = 1 + -1 := hadd_comm (-1) 1                        -- 加法の可換律
         _ = 0 := hadd_neg 1                                   -- 加法の逆元
     have h00 : (0 : R) < 0 := lt_trans hzero_lt_one h3       -- 推移律
     exact (lt_iff_le_and_ne.mp h00).2 rfl                    -- `<` の意味の後半で `0 ≠ 0`、反射律に反する

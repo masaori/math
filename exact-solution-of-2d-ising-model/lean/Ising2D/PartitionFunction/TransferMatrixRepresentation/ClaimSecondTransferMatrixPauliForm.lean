@@ -25,7 +25,7 @@
 `sgn (ι(μ) m) = μ(m)`（`sgn_configBasisIso`）、`s_2 = sinh 2K_2`（`def_indexed_hyperbolic_abbreviations`）。
 
 * 中間目標「`V_2` を `A` のクロネッカー冪で書く」→ `V2_eq_siteProd_twoByTwo`。
-  人手の 7 行（`def_transfer_matrix`・分配則・`theorem_exp_product`・`real_inclusion_preserves_finite_product`・
+  人手の 7 行（`def_transfer_matrix`・分配律・`theorem_exp_product`・`real_inclusion_preserves_finite_product`・
   `A` の成分（略記の取り決めでの読み方は `twoByTwo_apply_eq_real_inclusion`）・クロネッカー積の成分・番号の読み替え）は
   `V2_apply_configBasisIso_eq_siteProd` の `calc` の中で一行ずつ対応する。行番号 `ord(μ)` と `ν(ι(μ))` の
   読み替え（`config_numbering_equals_kronecker_numbering`）は、Lean では行列の添字が `ι(μ)` そのもの
@@ -108,7 +108,7 @@ theorem V2_apply_configBasisIso_eq_siteProd (K2 : ℝ) (μ μ' : SpinConf M) :
       = ((Real.exp (K2 * ∑ m : Fin M, (μ m : ℝ) * (μ' m : ℝ)) : ℝ) : ℂ) :=
         V2_apply_configBasisIso K2 μ μ'                                     -- `def_transfer_matrix`
     _ = ((Real.exp (∑ m : Fin M, K2 * ((μ m : ℝ) * (μ' m : ℝ))) : ℝ) : ℂ) := by
-        rw [Finset.mul_sum]                                                 -- `ℝ` の分配則
+        rw [Finset.mul_sum]                                                 -- `ℝ` の分配律
     _ = ((∏ m : Fin M, Real.exp (K2 * ((μ m : ℝ) * (μ' m : ℝ))) : ℝ) : ℂ) := by
         rw [Real.exp_sum]                                                   -- `theorem_exp_product` を有限和へ繰り返し適用
     _ = ∏ m : Fin M, ((Real.exp (K2 * ((μ m : ℝ) * (μ' m : ℝ))) : ℝ) : ℂ) :=

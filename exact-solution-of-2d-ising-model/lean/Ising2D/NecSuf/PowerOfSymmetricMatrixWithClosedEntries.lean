@@ -25,7 +25,7 @@
 - 転置の段に効いているのは、**係数の乗法の可換律**（11 行のうち 7 行目 `(A^p)_{jl}A_{kj} = A_{kj}(A^p)_{jl}`）である。
   可換でない係数では対称な `A` でも `A^2` が対称とは限らない: `((A^2)^⊤)_{kl} = Σ_j A_{lj}A_{jk} = Σ_j A_{jl}A_{kj}` と
   `(A^2)_{kl} = Σ_j A_{kj}A_{jl}` は、`A_{kj}` と `A_{jl}` が可換でなければ一致しない。
-- 型クラスを `CommSemiring` に置いたのは、上の可換則と、行列の積の結合律・単位元（`A^1 = A` と指数法則）が係数の半環の構造から来るためである。
+- 型クラスを `CommSemiring` に置いたのは、上の可換律と、行列の積の結合律・単位元（`A^1 = A` と指数法則）が係数の半環の構造から来るためである。
   加法の逆元、体であること、係数が `ℂ` であることは効いていない。
 -/
 import Ising2D.NecSuf.PowerExponentLaw
@@ -72,7 +72,7 @@ theorem pow_succ_transpose_apply' (A : Matrix ι ι R) (hAT : Aᵀ = A) (p : ℕ
     _ = (A * A ^ p) k l := rfl                                              -- 積の定義
     _ = (A ^ 1 * A ^ p) k l := by rw [pow_one_eq_self' A]                   -- 準備 `A^1 = A`
     _ = (A ^ (1 + p)) k l := by rw [power_exponent_law' A 1 p]              -- 冪の指数法則（`p → 1`, `q → p`）
-    _ = (A ^ (p + 1)) k l := by rw [Nat.add_comm 1 p]                       -- 加法の可換則
+    _ = (A ^ (p + 1)) k l := by rw [Nat.add_comm 1 p]                       -- 加法の可換律
 
 /-- **成分が `S` に入る対称行列の冪**（具体版 `power_of_real_symmetric_complex_matrix_is_real_symmetric`）:
 すべての `p` について、`A^p` の成分はすべて `S` に入り、`(A^p)^⊤ = A^p`（`p` についての帰納法）。 -/

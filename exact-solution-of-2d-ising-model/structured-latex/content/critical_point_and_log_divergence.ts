@@ -280,7 +280,7 @@ c_1^2
 &= s_1^2 (1 + s_2^2)
    \quad (\because\ \text{Step 0 の } c_2^2 = 1 + s_2^2) \\
 &= s_1^2 + s_1^2 s_2^2
-   \quad (\because\ \text{分配則})
+   \quad (\because\ \text{分配律})
 \end{aligned}`,
       ),
       paragraph(["が成り立つ。この両辺から ", math(String.raw`s_1^2`), " を引くと"]),
@@ -319,7 +319,7 @@ s_1s_2>0\ \land\ 1>0\ \land\ (s_1s_2)^2=1^2
 &= s_1^2 (1 + s_2^2)
    \quad (\because\ \text{Step 0 の } c_2^2 = 1 + s_2^2) \\
 &= s_1^2 + s_1^2 s_2^2
-   \quad (\because\ \text{分配則}) \\
+   \quad (\because\ \text{分配律}) \\
 &= s_1^2 + (s_1 s_2)^2
    \quad (\because\ \text{積の 2 乗は 2 乗の積}) \\
 &= s_1^2 + 1
@@ -503,7 +503,7 @@ A &= s_1 s_2^*
 &= c_1c_2^* - s_1s_2^*\cos\theta
    &&(\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= \left(c_1c_2^* - s_1s_2^*\right) + s_1s_2^*\left(1 - \cos\theta\right)
-   &&(\because \mathbb R\text{ の分配則}) \\
+   &&(\because \mathbb R\text{ の分配律}) \\
 &= \left(\cosh 2K_1\cosh 2K_2^* - \sinh 2K_1\sinh 2K_2^*\right) + s_1s_2^*\left(1 - \cos\theta\right)
    &&(\because \blkref{def_indexed_hyperbolic_abbreviations}) \\
 &= \cosh\left(2K_1 - 2K_2^*\right) + s_1s_2^*\left(1-\cos\theta\right)
@@ -746,7 +746,7 @@ s_1 s_2 = 1
 &\iff 2K_1 - 2K_2^* = 0
 &&\bigl(\because\ \blkref{def_kappa}\bigr) \\
 &\iff 2\left(K_1 - K_2^*\right) = 0
-&&\bigl(\because\ \mathbb{R}\text{ の分配則}\bigr) \\
+&&\bigl(\because\ \mathbb{R}\text{ の分配律}\bigr) \\
 &\iff K_1 - K_2^* = 0
 &&\bigl(\because\ 2 \ne 0\text{ なので、}\Rightarrow\text{ は両辺を }2\text{ で割り、}\Leftarrow\text{ は両辺に }2\text{ を掛ける}\bigr) \\
 &\iff K_1 = K_2^*
@@ -2613,13 +2613,13 @@ r^2
         String.raw`\begin{aligned}
 \frac{1}{r} - \frac{1}{rt}
 &= \frac{1}{r}\left(1 - \frac{1}{t}\right)
-&& (\because \mathbb R\text{ の分配則}) \\
+&& (\because \mathbb R\text{ の分配律}) \\
 &= \frac{1}{r}\cdot\frac{t-1}{t}
 && (\because \mathbb R\text{ の四則}) \\
 &= \frac{1}{r}\cdot\frac{(t-1)(t+1)}{t(t+1)}
 && (\because t+1 \geq 2 > 0) \\
 &= \frac{1}{r}\cdot\frac{t^2-1}{t(t+1)}
-&& (\because \mathbb R\text{ の分配則}) \\
+&& (\because \mathbb R\text{ の分配律}) \\
 &= \frac{1}{r}\cdot\frac{S}{t(t+1)}
 && (\because t^2 = 1+S) \\
 &\leq \frac{1}{r}\cdot\frac{S}{2}
@@ -2878,7 +2878,7 @@ T
 && (\because\ \text{直前の }\log\tfrac\pi\delta\text{ の表示})\\
 &= \left(\cosh\kappa - 1\right)\log\frac{1}{\kappa}
  + \cosh\kappa\left(\log(2\pi) + \rho\right)
-&& (\because\ \mathbb R\text{ の分配則}).
+&& (\because\ \mathbb R\text{ の分配律}).
 \end{aligned}`,
       ),
       paragraph(["右辺第 1 項は、", ref("cosh_half_angle_formula"), " と ", ref("sinh_at_most_argument_times_cosh"), " より"]),
@@ -3007,7 +3007,7 @@ T
 &= \frac{\cosh\kappa}{2}\left(2\log\frac{\pi}{\delta} + R\right) - T
 &&\bigl(\because\ \text{Step 4 の }J\text{ の表示}\bigr) \\
 &= \cosh\kappa\,\log\frac{\pi}{\delta} + \frac{\cosh\kappa}{2}R - T
-&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)
+&&\bigl(\because\ \mathbb R\text{ の分配律}\bigr)
 \end{aligned}`,
       ),
       paragraph(["したがって"]),

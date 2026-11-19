@@ -668,7 +668,7 @@ X - O
   {
     id: "linear_space_general_claim_matrix_sum_is_commutative",
     kind: "claim",
-    title: { text: "行列の和の可換則" },
+    title: { text: "行列の和の可換律" },
     labels: ["matrix_sum_is_commutative"],
     statement: [
       paragraph([
@@ -2007,7 +2007,7 @@ X - O
 &= \sum_{j=1}^{r} c_j\,A_{ik}
 &&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\text{ を }r\text{ 個の項へ同時適用}\bigr)\\
 &= \Bigl(\sum_{j=1}^{r} c_j\Bigr)A_{ik}
-&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配則}\bigr)\\
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配律}\bigr)\\
 &= \Bigl(\Bigl(\sum_{j=1}^{r} c_j\Bigr)A\Bigr)_{ik}
 &&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\bigr)
 \end{aligned}`),
@@ -2550,10 +2550,10 @@ X - (-Y)
 &&\bigl(\because\ \mathbb{C}\text{ の積の交換律を第 2 項の各 }l\text{ へ同時適用。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \sum_{l=1}^{n}\sum_{j=1}^{r} \bigl(a_j(X_j)_{pl}\bigr)\Bigl(\sum_{k=1}^{s} b_k(W_k)_{lq}\Bigr)
  + \sum_{l=1}^{n}\sum_{j=1}^{r} \bigl(a_j(X_j)_{lq}\bigr)\Bigl(\sum_{k=1}^{s} b_k(W_k)_{pl}\Bigr)
-&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配則 }\bigl(\textstyle\sum_j x_j\bigr)y=\sum_j x_jy\text{ を全ての }l\text{ へ同時適用}\bigr)\\
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配律 }\bigl(\textstyle\sum_j x_j\bigr)y=\sum_j x_jy\text{ を全ての }l\text{ へ同時適用}\bigr)\\
 &= \sum_{l=1}^{n}\sum_{j=1}^{r}\sum_{k=1}^{s} \bigl(a_j(X_j)_{pl}\bigr)\bigl(b_k(W_k)_{lq}\bigr)
  + \sum_{l=1}^{n}\sum_{j=1}^{r}\sum_{k=1}^{s} \bigl(a_j(X_j)_{lq}\bigr)\bigl(b_k(W_k)_{pl}\bigr)
-&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配則 }x\textstyle\sum_k y_k=\sum_k xy_k\text{ を全ての }(l,j)\text{ へ同時適用}\bigr)\\
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配律 }x\textstyle\sum_k y_k=\sum_k xy_k\text{ を全ての }(l,j)\text{ へ同時適用}\bigr)\\
 &= \sum_{l=1}^{n}\sum_{j=1}^{r}\sum_{k=1}^{s} (a_jb_k)\bigl((X_j)_{pl}(W_k)_{lq}\bigr)
  + \sum_{l=1}^{n}\sum_{j=1}^{r}\sum_{k=1}^{s} (a_jb_k)\bigl((W_k)_{pl}(X_j)_{lq}\bigr)
 &&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律を全ての項へ同時適用。}\blkref{complex_numbers_form_a_field}\bigr)\\
@@ -2571,7 +2571,7 @@ X - (-Y)
 &&\bigl(\because\ \blkref{finite_sum_of_complex_sums}\text{ を右辺から左辺へ、各 }j\text{ の内側の }k\text{ へ同時適用}\bigr)\\
 &= \sum_{j=1}^{r}\sum_{k=1}^{s}\Bigl((a_jb_k)\sum_{l=1}^{n} (X_j)_{pl}(W_k)_{lq}
  + (a_jb_k)\sum_{l=1}^{n} (W_k)_{pl}(X_j)_{lq}\Bigr)
-&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配則 }\textstyle\sum_l cx_l=c\sum_l x_l\text{ を全ての }(j,k)\text{ の 2 箇所へ同時適用}\bigr)\\
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配律 }\textstyle\sum_l cx_l=c\sum_l x_l\text{ を全ての }(j,k)\text{ の 2 箇所へ同時適用}\bigr)\\
 &= \sum_{j=1}^{r}\sum_{k=1}^{s}(a_jb_k)\Bigl(\sum_{l=1}^{n} (X_j)_{pl}(W_k)_{lq}
  + \sum_{l=1}^{n} (W_k)_{pl}(X_j)_{lq}\Bigr)
 &&\bigl(\because\ \mathbb{C}\text{ の分配法則 }ca+cb=c(a+b)\text{。}\blkref{complex_numbers_form_a_field}\bigr)\\
@@ -3084,7 +3084,7 @@ X - (-Y)
 &= \bigl(x_{(1)} + x_{(0)}\bigr) c
 &&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\bigr)\\
 &= x_{(1)} c + x_{(0)} c
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)c = ac + bc\ (a \to x_{(1)},\ b \to x_{(0)})\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ (a + b)c = ac + bc\ (a \to x_{(1)},\ b \to x_{(0)})\bigr)\\
 &= \sum_{\epsilon \in \{0,1\}^{1}} x_\epsilon c
 &&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\ (x_\epsilon \to x_\epsilon c)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -3103,7 +3103,7 @@ X - (-Y)
 &= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl(x_{(\epsilon',1)} + x_{(\epsilon',0)}\bigr) c
 &&\bigl(\because\ \text{帰納法の仮定}\ (x_{\epsilon'} \to x_{(\epsilon',1)} + x_{(\epsilon',0)})\bigr)\\
 &= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl(x_{(\epsilon',1)} c + x_{(\epsilon',0)} c\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)c = ac + bc\ (a \to x_{(\epsilon',1)},\ b \to x_{(\epsilon',0)})\ \text{を各項へ同時に}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ (a + b)c = ac + bc\ (a \to x_{(\epsilon',1)},\ b \to x_{(\epsilon',0)})\ \text{を各項へ同時に}\bigr)\\
 &= \sum_{\epsilon \in \{0,1\}^{r+1}} x_\epsilon c
 &&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\ (x_\epsilon \to x_\epsilon c)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -3181,7 +3181,7 @@ X - (-Y)
 &= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\prod_{j=1}^{r} a_j^{(\epsilon'_j)}\Bigr)\Bigl(a_{r+1}^{(1)} + a_{r+1}^{(0)}\Bigr)
 &&\bigl(\because\ \blkref{real_sum_over_binary_words_distributes_in_left_factor}\ (x_{\epsilon'} \to \textstyle\prod_{j=1}^{r} a_j^{(\epsilon'_j)},\ c \to a_{r+1}^{(1)} + a_{r+1}^{(0)})\bigr)\\
 &= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\Bigl(\prod_{j=1}^{r} a_j^{(\epsilon'_j)}\Bigr) a_{r+1}^{(1)} + \Bigl(\prod_{j=1}^{r} a_j^{(\epsilon'_j)}\Bigr) a_{r+1}^{(0)}\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ a(b + c) = ab + ac\ (a \to \textstyle\prod_{j=1}^{r} a_j^{(\epsilon'_j)},\ b \to a_{r+1}^{(1)},\ c \to a_{r+1}^{(0)})\ \text{を各項へ同時に}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ a(b + c) = ab + ac\ (a \to \textstyle\prod_{j=1}^{r} a_j^{(\epsilon'_j)},\ b \to a_{r+1}^{(1)},\ c \to a_{r+1}^{(0)})\ \text{を各項へ同時に}\bigr)\\
 &= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\Bigl(\prod_{j=1}^{r} a_j^{((\epsilon',1)_j)}\Bigr) a_{r+1}^{((\epsilon',1)_{r+1})} + \Bigl(\prod_{j=1}^{r} a_j^{((\epsilon',0)_j)}\Bigr) a_{r+1}^{((\epsilon',0)_{r+1})}\Bigr)
 &&\bigl(\because\ \blkref{def_sum_over_binary_words}\ \text{の}\ (\epsilon', e)_j = \epsilon'_j\ (j \leq r),\ (\epsilon', e)_{r+1} = e\ \text{を各項へ同時に}\bigr)\\
 &= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\prod_{j=1}^{r+1} a_j^{((\epsilon',1)_j)} + \prod_{j=1}^{r+1} a_j^{((\epsilon',0)_j)}\Bigr)
@@ -9596,7 +9596,7 @@ z_N-z_M&=(x_N-x_M,\ y_N-y_M)
         String.raw`\begin{aligned}
 \|A_N B - AB\|
 &= \|(A_N - A)B\|
-&&(\because\ \text{行列の積の右分配則})\\
+&&(\because\ \text{行列の積の右分配律})\\
 &\leq \|A_N - A\| \cdot \|B\|
 &&(\because\ \text{行列ノルムの劣乗法性。}\blkref{matrix_norm_submultiplicativity})\\
 &\to 0
@@ -9639,7 +9639,7 @@ z_N-z_M&=(x_N-x_M,\ y_N-y_M)
         String.raw`\begin{aligned}
 \|B A_N - BA\|
 &= \|B(A_N - A)\|
-&&(\because\ \text{行列の積の左分配則})\\
+&&(\because\ \text{行列の積の左分配律})\\
 &\leq \|B\| \cdot \|A_N - A\|
 &&(\because\ \blkref{matrix_norm_submultiplicativity}\ (K \to \mathbb{C},\ A \to B,\ B \to A_N - A))\\
 &\to 0

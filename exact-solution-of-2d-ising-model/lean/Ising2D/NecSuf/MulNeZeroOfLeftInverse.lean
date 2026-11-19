@@ -7,7 +7,7 @@
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `intro hab`・`apply hb` と `calc` の 5 段（単位元 → 逆元 → 結合則 → 仮定 → `x·0 = 0`） | `mul_ne_zero_of_leftInverse` の同じ並び |
+| `intro hab`・`apply hb` と `calc` の 5 段（単位元 → 逆元 → 結合律 → 仮定 → `x·0 = 0`） | `mul_ne_zero_of_leftInverse` の同じ並び |
 
 ## 何が効いているか / 効いていないか
 

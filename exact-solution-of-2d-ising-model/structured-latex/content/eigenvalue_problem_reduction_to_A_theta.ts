@@ -3756,7 +3756,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= 2\sum_{l=0}^{M_{\mathrm{col}}-1} \exp(-i\tilde\theta_\mu)\exp(-il\tilde\theta_\mu)\,Y_l^{\flat}
    &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= 2\,\exp(-i\tilde\theta_\mu)\sum_{l=0}^{M_{\mathrm{col}}-1} \exp(-il\tilde\theta_\mu)\,Y_l^{\flat}
-   &&(\because \text{分配則}) \\
+   &&(\because \text{分配律}) \\
 &= 2\,\exp(-i\tilde\theta_\mu)\sum_{l=1}^{M_{\mathrm{col}}} \exp(-il\tilde\theta_\mu)\,Y_l^{\flat}
    &&(\because \text{直前の displayMath による } l=0 \text{ の項と } l=M_{\mathrm{col}} \text{ の項の入れ替え}) \\
 &= 2\,\exp(-i\tilde\theta_\mu)\sum_{l=1}^{M_{\mathrm{col}}} \exp(-il\tilde\theta_\mu)\,Y_l
@@ -3808,7 +3808,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= -2\sum_{l=2}^{M_{\mathrm{col}}+1} \exp(i\tilde\theta_\mu)\exp(-il\tilde\theta_\mu)\,Z_{l}^{\flat}
    &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= -2\,\exp(i\tilde\theta_\mu)\sum_{l=2}^{M_{\mathrm{col}}+1} \exp(-il\tilde\theta_\mu)\,Z_l^{\flat}
-   &&(\because \text{分配則}) \\
+   &&(\because \text{分配律}) \\
 &= -2\,\exp(i\tilde\theta_\mu)\sum_{l=1}^{M_{\mathrm{col}}} \exp(-il\tilde\theta_\mu)\,Z_l^{\flat}
    &&(\because \text{直前の displayMath による } l=M_{\mathrm{col}}+1 \text{ の項と } l=1 \text{ の項の入れ替え}) \\
 &= -2\,\exp(i\tilde\theta_\mu)\sum_{l=1}^{M_{\mathrm{col}}} \exp(-il\tilde\theta_\mu)\,Z_l
@@ -5692,12 +5692,12 @@ b_n
 &= \sum_{n=0}^{N}(a_n)_{\mathbb{C}}\,A_{pq} + \sum_{n=0}^{N}\bigl(c\,(b_n)_{\mathbb{C}}\bigr)B_{pq}
 &&(\because \blkref{finite_sum_of_complex_sums}) \\
 &= \Bigl(\sum_{n=0}^{N}(a_n)_{\mathbb{C}}\Bigr)A_{pq} + \Bigl(c\sum_{n=0}^{N}(b_n)_{\mathbb{C}}\Bigr)B_{pq}
-&&(\because \mathbb{C}\ \text{の有限和の分配則}) \\
+&&(\because \mathbb{C}\ \text{の有限和の分配律}) \\
 &= \Bigl(\sum_{n=0}^{N}a_n\Bigr)_{\mathbb{C}}A_{pq} + \Bigl(c\Bigl(\sum_{n=0}^{N}b_n\Bigr)_{\mathbb{C}}\Bigr)B_{pq}
 &&(\because \blkref{real_inclusion_preserves_finite_sum}\ \text{を 2 箇所へ同時適用}) \\
 &= \Bigl(\frac{1}{2}\Bigl(\sum_{n=0}^{N}\frac{x^n}{n!} + \sum_{n=0}^{N}\frac{(-x)^n}{n!}\Bigr)\Bigr)_{\mathbb{C}}A_{pq}
  + \Bigl(c\Bigl(\frac{1}{2}\Bigl(\sum_{n=0}^{N}\frac{x^n}{n!} - \sum_{n=0}^{N}\frac{(-x)^n}{n!}\Bigr)\Bigr)_{\mathbb{C}}\Bigr)B_{pq}
-&&(\because \text{実数の有限和の分配則}) \\
+&&(\because \text{実数の有限和の分配律}) \\
 &= (\alpha_N)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B_{pq}
 &&(\because E_N, \alpha_N, \beta_N\ \text{の定義}) \\
 &= \bigl((\alpha_N)_{\mathbb{C}}\,A\bigr)_{pq} + \Bigl(\bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B\Bigr)_{pq}
@@ -7177,7 +7177,7 @@ e_+ e_-
 &= \exp\bigl(i(\theta)_{\mathbb{C}} + (-i)(\theta)_{\mathbb{C}}\bigr)
 &&(\because\ e_\pm\ \text{の定義と}\ \blkref{scalar_exp_product}\ (K = \mathbb{C}))\\
 &= \exp(0_{\mathbb{C}})
-&&(\because\ \mathbb{C}\ \text{の分配則と}\ i + (-i) = 0_{\mathbb{C}})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と}\ i + (-i) = 0_{\mathbb{C}})\\
 &= 1_{\mathbb{C}}
 &&(\because\ \blkref{scalar_exp_zero}\ (K = \mathbb{C}))
 \end{aligned}`),
@@ -7224,13 +7224,13 @@ a^2 + b^2 e_+ e_+
 &= a^2 (e_+ e_-) + b^2 e_+ e_+
 &&(\because\ e_+ e_- = 1_{\mathbb{C}})\\
 &= e_+\left(a^2 e_- + b^2 e_+\right)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= e_+\Bigl(a^2\bigl((\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) + b^2 e_+\Bigr)
 &&(\because\ e_-\ \text{の上の表示})\\
 &= e_+\Bigl(a^2\bigl((\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) + b^2\bigl((\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr)\Bigr)
 &&(\because\ e_+\ \text{の上の表示})\\
 &= e_+\Bigl(\left(a^2 + b^2\right)(\cos\theta)_{\mathbb{C}} - i\left(a^2 - b^2\right)(\sin\theta)_{\mathbb{C}}\Bigr)
-&&(\because\ \mathbb{C}\ \text{の分配則})\\
+&&(\because\ \mathbb{C}\ \text{の分配律})\\
 &= e_+\Bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i\left(a^2 - b^2\right)(\sin\theta)_{\mathbb{C}}\Bigr)
 &&(\because\ a^2 + b^2 = (c_1)_{\mathbb{C}})\\
 &= e_+\Bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\Bigr)
@@ -7241,13 +7241,13 @@ a^2 + b^2 e_- e_-
 &= a^2 (e_+ e_-) + b^2 e_- e_-
 &&(\because\ e_+ e_- = 1_{\mathbb{C}})\\
 &= e_-\left(a^2 e_+ + b^2 e_-\right)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= e_-\Bigl(a^2\bigl((\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) + b^2 e_-\Bigr)
 &&(\because\ e_+\ \text{の上の表示})\\
 &= e_-\Bigl(a^2\bigl((\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) + b^2\bigl((\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr)\Bigr)
 &&(\because\ e_-\ \text{の上の表示})\\
 &= e_-\Bigl(\left(a^2 + b^2\right)(\cos\theta)_{\mathbb{C}} + i\left(a^2 - b^2\right)(\sin\theta)_{\mathbb{C}}\Bigr)
-&&(\because\ \mathbb{C}\ \text{の分配則})\\
+&&(\because\ \mathbb{C}\ \text{の分配律})\\
 &= e_-\Bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i\left(a^2 - b^2\right)(\sin\theta)_{\mathbb{C}}\Bigr)
 &&(\because\ a^2 + b^2 = (c_1)_{\mathbb{C}})\\
 &= e_-\Bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\Bigr)
@@ -7288,14 +7288,14 @@ N_{12}
 &= C\bigl(((-i)e_+) b\bigr) + (iS) a
 &&(\because\ \blkref{mat_mult})\\
 &= i\left(Sa - C b e_+\right)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 N_{21}
 &= \bigl((-i)S\bigr) a + C\bigl((i e_-) b\bigr)
 &&(\because\ \blkref{mat_mult})\\
 &= i\left(C b e_- - S a\right)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 N_{22}
@@ -7318,11 +7318,11 @@ P_{11}
 &= a\left(Ca - S b e_-\right) + e_+ b\left(C b e_- - S a\right)
 &&(\because\ (-i) i = 1_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の積の交換律・結合律})\\
 &= C a^2 - S ab e_- + C b^2 e_+ e_- - S ab e_+
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= C a^2 - S ab e_- + C b^2 - S ab e_+
 &&(\because\ e_+ e_- = 1_{\mathbb{C}})\\
 &= C\left(a^2 + b^2\right) - S ab\left(e_+ + e_-\right)
-&&(\because\ \mathbb{C}\ \text{の分配則})\\
+&&(\because\ \mathbb{C}\ \text{の分配律})\\
 &= C (c_1)_{\mathbb{C}} - S ab\left(e_+ + e_-\right)
 &&(\because\ a^2 + b^2 = (c_1)_{\mathbb{C}})\\
 &= C (c_1)_{\mathbb{C}} - S ab\,(2)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
@@ -7359,11 +7359,11 @@ P_{22}
 &= (-1_{\mathbb{C}})\, e_- b\left(Sa - C b e_+\right) + a\left(Ca - S b e_+\right)
 &&(\because\ i i = -1_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の積の交換律・結合律})\\
 &= - S ab e_- + C b^2 e_+ e_- + C a^2 - S ab e_+
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= - S ab e_- + C b^2 + C a^2 - S ab e_+
 &&(\because\ e_+ e_- = 1_{\mathbb{C}})\\
 &= C\left(a^2 + b^2\right) - S ab\left(e_+ + e_-\right)
-&&(\because\ \mathbb{C}\ \text{の分配則と和の交換律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と和の交換律})\\
 &= C (c_1)_{\mathbb{C}} - S ab\left(e_+ + e_-\right)
 &&(\because\ a^2 + b^2 = (c_1)_{\mathbb{C}})\\
 &= C (c_1)_{\mathbb{C}} - S ab\,(2)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
@@ -7396,9 +7396,9 @@ P_{12}
 &= a\, i\left(Sa - C b e_+\right) + \bigl(((-i)e_+)b\bigr)\left(Ca - S b e_+\right)
 &&(\because\ \text{Step 1 の } N_{12}, N_{22})\\
 &= i\left(S a^2 - C ab e_+\right) + i\left(-C ab e_+ + S b^2 e_+ e_+\right)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= i\left(S\left(a^2 + b^2 e_+ e_+\right) - (2ab)\, C e_+\right)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= i\Bigl(S e_+\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) - (2ab)\, C e_+\Bigr)
 &&(\because\ \text{準備の補助的な等式の 1 本目})\\
 &= i\Bigl(S e_+\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) - (s_1)_{\mathbb{C}}\, C e_+\Bigr)
@@ -7406,7 +7406,7 @@ P_{12}
 &= i\Bigl(S e_+\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) - (s_1)_{\mathbb{C}}\, S (c_2)_{\mathbb{C}} e_+\Bigr)
 &&(\because\ C = S (c_2)_{\mathbb{C}})\\
 &= i e_+ S\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= i e_+ (s_2^*)_{\mathbb{C}}\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
 &&(\because\ S\ \text{の定義})
 \end{aligned}`),
@@ -7425,9 +7425,9 @@ P_{21}
 &= \bigl((i e_-) b\bigr)\left(Ca - S b e_-\right) + a\, i\left(C b e_- - S a\right)
 &&(\because\ \text{Step 1 の } N_{11}, N_{21})\\
 &= i\left(C ab e_- - S b^2 e_- e_-\right) + i\left(C ab e_- - S a^2\right)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= (-i)\left(S\left(a^2 + b^2 e_- e_-\right) - (2ab)\, C e_-\right)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= (-i)\Bigl(S e_-\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) - (2ab)\, C e_-\Bigr)
 &&(\because\ \text{準備の補助的な等式の 2 本目})\\
 &= (-i)\Bigl(S e_-\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) - (s_1)_{\mathbb{C}}\, C e_-\Bigr)
@@ -7435,7 +7435,7 @@ P_{21}
 &= (-i)\Bigl(S e_-\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) - (s_1)_{\mathbb{C}}\, S (c_2)_{\mathbb{C}} e_-\Bigr)
 &&(\because\ C = S (c_2)_{\mathbb{C}})\\
 &= (-i) e_- S\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
-&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&&(\because\ \mathbb{C}\ \text{の分配律と積の交換律・結合律})\\
 &= (-i) e_- (s_2^*)_{\mathbb{C}}\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
 &&(\because\ S\ \text{の定義})\\
 &= (-i) \exp\bigl((-i)(\theta)_{\mathbb{C}}\bigr) (s_2^*)_{\mathbb{C}}\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)

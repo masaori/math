@@ -405,7 +405,7 @@ T_B(I)
   {
     id: "finite_matrix_claim_difference_distributes_over_vector_product",
     kind: "claim",
-    title: { text: "行列の差と数ベクトルの積の分配則" },
+    title: { text: "行列の差と数ベクトルの積の分配律" },
     labels: ["matrix_difference_mul_vector"],
     statement: [
       paragraph([
@@ -439,7 +439,7 @@ T_B(I)
 &= \sum_{j=1}^{n} \left(A_{ij}\,v_j - B_{ij}\,v_j\right)
    &&\bigl(\because \text{有限和の差は項ごとの差の和}\bigr) \\
 &= \sum_{j=1}^{n} \left(A_{ij} - B_{ij}\right) v_j
-   &&\bigl(\because \text{分配則}\bigr) \\
+   &&\bigl(\because \text{分配律}\bigr) \\
 &= \sum_{j=1}^{n} (A - B)_{ij}\,v_j
    &&\bigl(\because \blkref{def_matrix_difference}\bigr) \\
 &= ((A - B) v)_i
@@ -459,7 +459,7 @@ T_B(I)
   {
     id: "finite_matrix_claim_vector_product_distributes_over_vector_difference",
     kind: "claim",
-    title: { text: "行列と数ベクトルの差の積の分配則" },
+    title: { text: "行列と数ベクトルの差の積の分配律" },
     labels: ["mat_mult_vector_difference"],
     statement: [
       paragraph([
@@ -491,7 +491,7 @@ T_B(I)
 &= \sum_{j=1}^{n} A_{ij}\,(u_j - w_j)
    &&\bigl(\because \blkref{def_matrix_difference}\bigr) \\
 &= \sum_{j=1}^{n} \left(A_{ij}\,u_j - A_{ij}\,w_j\right)
-   &&\bigl(\because \text{分配則}\bigr) \\
+   &&\bigl(\because \text{分配律}\bigr) \\
 &= \sum_{j=1}^{n} A_{ij}\,u_j - \sum_{j=1}^{n} A_{ij}\,w_j
    &&\bigl(\because \text{有限和の差は項ごとの差の和}\bigr) \\
 &= (Au)_i - (Aw)_i
@@ -666,7 +666,7 @@ T_B(I)
 &= \left(B_{11}B_{22} - B_{12}B_{21}\right)v_1
    &&\bigl(\because \blkref{def_det_two_by_two}\bigr) \\
 &= B_{11}B_{22}v_1 - B_{12}B_{21}v_1
-   &&\bigl(\because \text{分配則}\bigr) \\
+   &&\bigl(\because \text{分配律}\bigr) \\
 &= B_{22}B_{11}v_1 - B_{12}B_{21}v_1
    &&\bigl(\because \mathbb{C}\text{ の乗法の可換律}\bigr) \\
 &= B_{22}B_{11}v_1 - B_{12}B_{21}v_1 + \left(B_{22}B_{12}v_2 - B_{22}B_{12}v_2\right)
@@ -676,7 +676,7 @@ T_B(I)
 &= B_{22}B_{11}v_1 + B_{22}B_{12}v_2 - B_{12}B_{21}v_1 - B_{12}B_{22}v_2
    &&\bigl(\because \mathbb{C}\text{ の加法の交換律と結合律}\bigr) \\
 &= B_{22}\left(B_{11}v_1 + B_{12}v_2\right) - B_{12}\left(B_{21}v_1 + B_{22}v_2\right)
-   &&\bigl(\because \text{分配則}\bigr) \\
+   &&\bigl(\because \text{分配律}\bigr) \\
 &= B_{22}(Bv)_1 - B_{12}(Bv)_2
    &&\bigl(\because \blkref{mat_mult}\bigr) \\
 &= B_{22}\cdot 0 - B_{12}\cdot 0
@@ -691,7 +691,7 @@ T_B(I)
 &= \left(B_{11}B_{22} - B_{12}B_{21}\right)v_2
    &&\bigl(\because \blkref{def_det_two_by_two}\bigr) \\
 &= B_{11}B_{22}v_2 - B_{12}B_{21}v_2
-   &&\bigl(\because \text{分配則}\bigr) \\
+   &&\bigl(\because \text{分配律}\bigr) \\
 &= B_{11}B_{22}v_2 - B_{21}B_{12}v_2
    &&\bigl(\because \mathbb{C}\text{ の乗法の可換律}\bigr) \\
 &= B_{11}B_{22}v_2 - B_{21}B_{12}v_2 + \left(B_{11}B_{21}v_1 - B_{11}B_{21}v_1\right)
@@ -701,7 +701,7 @@ T_B(I)
 &= B_{11}B_{21}v_1 + B_{11}B_{22}v_2 - B_{21}B_{11}v_1 - B_{21}B_{12}v_2
    &&\bigl(\because \mathbb{C}\text{ の加法の交換律と結合律}\bigr) \\
 &= B_{11}\left(B_{21}v_1 + B_{22}v_2\right) - B_{21}\left(B_{11}v_1 + B_{12}v_2\right)
-   &&\bigl(\because \text{分配則}\bigr) \\
+   &&\bigl(\because \text{分配律}\bigr) \\
 &= B_{11}(Bv)_2 - B_{21}(Bv)_1
    &&\bigl(\because \blkref{mat_mult}\bigr) \\
 &= B_{11}\cdot 0 - B_{21}\cdot 0

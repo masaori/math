@@ -66,7 +66,7 @@ theorem det_mul_v0_eq_zero (B : Matrix (Fin 2) (Fin 2) ℂ) (v : Fin 2 → ℂ) 
     B.det * v 0 = 0 :=
   calc B.det * v 0
       = (B 0 0 * B 1 1 - B 0 1 * B 1 0) * v 0 := by rw [det_two_by_two_def]  -- `def_det_two_by_two`
-    _ = B 0 0 * B 1 1 * v 0 - B 0 1 * B 1 0 * v 0 := by ring                    -- 分配則
+    _ = B 0 0 * B 1 1 * v 0 - B 0 1 * B 1 0 * v 0 := by ring                    -- 分配律
     _ = B 1 1 * B 0 0 * v 0 - B 0 1 * B 1 0 * v 0 := by ring                    -- 乗法の可換律
     _ = B 1 1 * B 0 0 * v 0 - B 0 1 * B 1 0 * v 0 + (B 1 1 * B 0 1 * v 1 - B 1 1 * B 0 1 * v 1) := by
         rw [sub_self, add_zero]                                                  -- `x - x = 0`
@@ -74,7 +74,7 @@ theorem det_mul_v0_eq_zero (B : Matrix (Fin 2) (Fin 2) ℂ) (v : Fin 2 → ℂ) 
         rw [mul_comm (B 1 1) (B 0 1)]                                            -- 乗法の可換律
     _ = B 1 1 * B 0 0 * v 0 + B 1 1 * B 0 1 * v 1 - B 0 1 * B 1 0 * v 0 - B 0 1 * B 1 1 * v 1 := by
         ring                                                                     -- 加法の交換律と結合律
-    _ = B 1 1 * (B 0 0 * v 0 + B 0 1 * v 1) - B 0 1 * (B 1 0 * v 0 + B 1 1 * v 1) := by ring  -- 分配則
+    _ = B 1 1 * (B 0 0 * v 0 + B 0 1 * v 1) - B 0 1 * (B 1 0 * v 0 + B 1 1 * v 1) := by ring  -- 分配律
     _ = B 1 1 * (B *ᵥ v) 0 - B 0 1 * (B *ᵥ v) 1 := by
         rw [mulVec_two_zero, mulVec_two_one]                                     -- `mat_mult`
     _ = B 1 1 * 0 - B 0 1 * 0 := by rw [hBv]; rfl                               -- `Bv = 0`
@@ -85,7 +85,7 @@ theorem det_mul_v1_eq_zero (B : Matrix (Fin 2) (Fin 2) ℂ) (v : Fin 2 → ℂ) 
     B.det * v 1 = 0 :=
   calc B.det * v 1
       = (B 0 0 * B 1 1 - B 0 1 * B 1 0) * v 1 := by rw [det_two_by_two_def]  -- `def_det_two_by_two`
-    _ = B 0 0 * B 1 1 * v 1 - B 0 1 * B 1 0 * v 1 := by ring                    -- 分配則
+    _ = B 0 0 * B 1 1 * v 1 - B 0 1 * B 1 0 * v 1 := by ring                    -- 分配律
     _ = B 0 0 * B 1 1 * v 1 - B 1 0 * B 0 1 * v 1 := by ring                    -- 乗法の可換律
     _ = B 0 0 * B 1 1 * v 1 - B 1 0 * B 0 1 * v 1 + (B 0 0 * B 1 0 * v 0 - B 0 0 * B 1 0 * v 0) := by
         rw [sub_self, add_zero]                                                  -- `x - x = 0`
@@ -93,7 +93,7 @@ theorem det_mul_v1_eq_zero (B : Matrix (Fin 2) (Fin 2) ℂ) (v : Fin 2 → ℂ) 
         rw [mul_comm (B 0 0) (B 1 0)]                                            -- 乗法の可換律
     _ = B 0 0 * B 1 0 * v 0 + B 0 0 * B 1 1 * v 1 - B 1 0 * B 0 0 * v 0 - B 1 0 * B 0 1 * v 1 := by
         ring                                                                     -- 加法の交換律と結合律
-    _ = B 0 0 * (B 1 0 * v 0 + B 1 1 * v 1) - B 1 0 * (B 0 0 * v 0 + B 0 1 * v 1) := by ring  -- 分配則
+    _ = B 0 0 * (B 1 0 * v 0 + B 1 1 * v 1) - B 1 0 * (B 0 0 * v 0 + B 0 1 * v 1) := by ring  -- 分配律
     _ = B 0 0 * (B *ᵥ v) 1 - B 1 0 * (B *ᵥ v) 0 := by
         rw [mulVec_two_zero, mulVec_two_one]                                     -- `mat_mult`
     _ = B 0 0 * 0 - B 1 0 * 0 := by rw [hBv]; rfl                               -- `Bv = 0`

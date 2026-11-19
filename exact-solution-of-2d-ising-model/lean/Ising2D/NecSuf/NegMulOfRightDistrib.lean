@@ -12,11 +12,11 @@
 ## 何が効いているか / 効いていないか
 
 - `(-1)·a = -a` の 2 段は、具体版では主張 `real_minus_one_times_is_negation` を引く段で、ここでもその必要十分版
-  `neg_one_mul_of_rightDistrib` を引く。効くのは加法の可換群・右からの分配則・左からの乗法の単位元 `1·a = a` である。
+  `neg_one_mul_of_rightDistrib` を引く。効くのは加法の可換群・右からの分配律・左からの乗法の単位元 `1·a = a` である。
 - ほかに効くのは乗法の結合律（`Semigroup R`）だけである。
-- 乗法の可換律、左からの分配則、右からの乗法の単位元 `a·1 = a`、乗法の逆元、順序、実数であることは効いていない。
+- 乗法の可換律、左からの分配律、右からの乗法の単位元 `a·1 = a`、乗法の逆元、順序、実数であることは効いていない。
   mathlib には左からの単位元だけを持つ型クラスが無いので、`1·a = a` は仮定 `hone_mul` で受け取る。
-- 主張 `(-x)·t = -(x·t)` そのものは、加法の群と右からの分配則だけで（`x·t + (-x)·t = (x + -x)·t = 0·t = 0` から）成り立つ。
+- 主張 `(-x)·t = -(x·t)` そのものは、加法の群と右からの分配律だけで（`x·t + (-x)·t = (x + -x)·t = 0·t = 0` から）成り立つ。
   `1` と乗法の結合律が要るのは、`-x` を `(-1)·x` に書き換える人手の経路のためであり、主張には本質的でない。
 -/
 import Ising2D.NecSuf.NegOneMulOfRightDistrib
@@ -24,7 +24,7 @@ import Ising2D.NecSuf.NegOneMulOfRightDistrib
 namespace Ising2D.NecSuf
 
 /-- **`real_negation_times_is_negation_of_product`** の必要十分版: 加法の可換群で、乗法が半群をなし、
-右からの分配則をもち、`1` が左からの乗法の単位元なら `(-x)·t = -(x·t)`。 -/
+右からの分配律をもち、`1` が左からの乗法の単位元なら `(-x)·t = -(x·t)`。 -/
 theorem neg_mul_of_rightDistrib {R : Type*} [AddCommGroup R] [Semigroup R] [One R]
     [RightDistribClass R] (hone_mul : ∀ a : R, 1 * a = a) (x t : R) : (-x) * t = -(x * t) :=
   calc (-x) * t

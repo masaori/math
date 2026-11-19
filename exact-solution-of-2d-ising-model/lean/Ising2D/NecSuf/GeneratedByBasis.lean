@@ -22,7 +22,7 @@
 | Step 3 後半「`Q_1 := E_1`・`Q_{s+1} := Q_sE_{s+1}` の帰納法」 | `prefixProduct`・`prefixProduct_eq_and_mem`・`map_mem_of_mulSingle_mem` | 各サイトの単位元が両側の単位元であることと、`φ` が**積を保つ**こと（単位元を保つことは使わない）、添字 `Fin n` の順序、`0 < n` |
 | Step 2「Jordan–Wigner 文字列の帰納法」（外側の累積帰納法と、その中の `P_{m-1} ∈ 𝒜` の `r` の帰納法） | `string_mem_of_previous`, `local_mem_of_previous`, `local_mem`, `string_mem` | 文字列の漸化式と、局所元が「文字列 × 生成元」で書けることだけ |
 | Step 2 の準備「可換の式 `σ_k^xP_r = P_rσ_k^x`（`r < k`）と二乗の式 `P_rP_r = I`」 | `xl_mul_string_comm`, `string_mul_self` | モノイドであること、`x n * x n = 1`、相異なる番号どうしの可換性（下の節の冒頭） |
-| Step 2 の準備「積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`」 | `string_eq_finProdLeft` | 二項演算 `*` と元 `1`、`1 * x 0 = x 0` だけ（結合則・単位元のほかの性質は使わない。下の節の冒頭） |
+| Step 2 の準備「積の表示 `P_r = ∏_{j=1}^{r}σ_j^x`」 | `string_eq_finProdLeft` | 二項演算 `*` と元 `1`、`1 * x 0 = x 0` だけ（結合律・単位元のほかの性質は使わない。下の節の冒頭） |
 
 ### 効いていないもの（一次情報: 下の証明が使っている補題がすべて）
 
@@ -291,7 +291,7 @@ end StringInduction
 人手の `P_r` が `p r` である（人手の `k` は `k + 1`、条件 `r ≤ k - 1` は `r ≤ k`）。
 
 使うのは次だけである。
-* `A` が**モノイド**であること: 結合則（`mat_mult_associative` の段）と単位元の両側の単位性
+* `A` が**モノイド**であること: 結合律（`mat_mult_associative` の段）と単位元の両側の単位性
   （`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult` の段）。
   加法・スカラー倍・`A` の乗法の可換性は使わない。
 * `x n * x n = 1`（人手 Step 1 の `σ_k^xσ_k^x = I`）。
@@ -300,11 +300,11 @@ end StringInduction
 
 削れないもの: `x n * x n = 1` を外すと `N = 1` の `x 0 = 2`（`A = ℕ` の乗法）で `p 1 * p 1 = 4 ≠ 1` となり偽になる。
 可換性を外すと、`x 0 * x 0 = x 1 * x 1 = 1` で可換でない 2 元（3 文字の置換の 2 つの互換）で `p 2 * p 2 = (x 0 * x 1)^2 ≠ 1` となり偽になる。
-結合則を外して単位的マグマ（`MulOneClass`）にすると、ほかの仮定を全部残しても両方とも偽になる。
+結合律を外して単位的マグマ（`MulOneClass`）にすると、ほかの仮定を全部残しても両方とも偽になる。
 反例は下の節の 6 元の単位的マグマ `SixElementUnitalMagma` で、`N = 3`、`x 0, x 1, x 2` を相異なる 3 元とし、
 `p 2 = (1 * x 0) * x 1` が `x 2` と可換でなく、`p 2 * p 2 ≠ 1` となるように積を決める
 （`xl_mul_string_comm_false_without_assoc`・`string_mul_self_false_without_assoc`）。
-したがって結合則は `Monoid` の構造として仮定する。 -/
+したがって結合律は `Monoid` の構造として仮定する。 -/
 
 section StringSquare
 
@@ -329,11 +329,11 @@ theorem xl_mul_string_comm (hcomm : ∀ k n, k < N → n < k → x k * x n = x n
     have ih := xl_mul_string_comm hcomm k hk r (Nat.le_of_succ_le hr)
     calc x k * p (r + 1)
         = x k * (p r * x r) := by rw [hp r hrN]    -- `P_{r+1}` の定義
-      _ = (x k * p r) * x r := (mul_assoc _ _ _).symm      -- 結合則を右辺から左辺へ
+      _ = (x k * p r) * x r := (mul_assoc _ _ _).symm      -- 結合律を右辺から左辺へ
       _ = (p r * x k) * x r := by rw [ih]                 -- 帰納法の仮定
-      _ = p r * (x k * x r) := mul_assoc _ _ _             -- 結合則
+      _ = p r * (x k * x r) := mul_assoc _ _ _             -- 結合律
       _ = p r * (x r * x k) := by rw [hcomm k r hk (Nat.lt_of_succ_le hr)]  -- 相異なる番号どうしの可換性
-      _ = (p r * x r) * x k := (mul_assoc _ _ _).symm      -- 結合則を右辺から左辺へ
+      _ = (p r * x r) * x k := (mul_assoc _ _ _).symm      -- 結合律を右辺から左辺へ
       _ = p (r + 1) * x k := by rw [hp r hrN]              -- `P_{r+1}` の定義を右辺から左辺へ
 
 /-- **人手 Step 2 の二乗の式（必要十分版）**: `r ≤ N` について `p r * p r = 1`。
@@ -351,20 +351,20 @@ theorem string_mul_self (hxx : ∀ n, n < N → x n * x n = 1)
     have hc := xl_mul_string_comm hp0 hp hcomm r hrN r le_rfl
     calc p (r + 1) * p (r + 1)
         = (p r * x r) * (p r * x r) := by rw [hp r hrN]   -- `P_{r+1}` の定義を 2 か所へ
-      _ = p r * (x r * (p r * x r)) := mul_assoc _ _ _     -- 結合則
-      _ = p r * ((x r * p r) * x r) := by rw [mul_assoc (x r)]  -- 結合則を右辺から左辺へ
+      _ = p r * (x r * (p r * x r)) := mul_assoc _ _ _     -- 結合律
+      _ = p r * ((x r * p r) * x r) := by rw [mul_assoc (x r)]  -- 結合律を右辺から左辺へ
       _ = p r * ((p r * x r) * x r) := by rw [hc]          -- 可換の式（人手の `k → r+1`）
-      _ = p r * (p r * (x r * x r)) := by rw [mul_assoc (p r) (x r)]  -- 結合則
+      _ = p r * (p r * (x r * x r)) := by rw [mul_assoc (p r) (x r)]  -- 結合律
       _ = p r * (p r * 1) := by rw [hxx r hrN]             -- `x r * x r = 1`
       _ = p r * p r := by rw [mul_one]                     -- 右の単位元
       _ = 1 := ih                                          -- 帰納法の仮定
 
 end StringSquare
 
-/-! ## 結合則を外した反例
+/-! ## 結合律を外した反例
 
 上の節の可換の式 `xl_mul_string_comm` と二乗の式 `string_mul_self` から、`Monoid` を単位的マグマ `MulOneClass`
-（単位元の両側の単位性だけを持ち、結合則を持たない）に替えると、ほかの仮定（`p 0 = 1`、漸化式、`x n * x n = 1`、
+（単位元の両側の単位性だけを持ち、結合律を持たない）に替えると、ほかの仮定（`p 0 = 1`、漸化式、`x n * x n = 1`、
 相異なる番号どうしの可換性）を全部残しても主張が偽になることを、6 元の単位的マグマで示す。
 
 元は `1, a, b, c, d, e` で、積の表は次のとおり（`1` の行と列は単位元の規則）。
@@ -375,9 +375,9 @@ end StringSquare
 * ほかはすべて `1`。
 
 `x 0 = a`、`x 1 = b`、`x 2 = c` とすると `p 2 = (1 a) b = d` であり、`x 2 * p 2 = c d = e`、`p 2 * x 2 = d c = 1`、
-`p 2 * p 2 = d d = e` である。結合則は `(c a) b = 1 b = b` と `c (a b) = c d = e` で破れている
+`p 2 * p 2 = d d = e` である。結合律は `(c a) b = 1 b = b` と `c (a b) = c d = e` で破れている
 （`not_associative`）。これは `xl_mul_string_comm` の一段の
-「結合則を右辺から左辺へ」の段 `x k * (p r * x r) = (x k * p r) * x r`（`k = 2`、`r = 1`、`p 1 = a`）が、ここで偽になることと同じである。 -/
+「結合律を右辺から左辺へ」の段 `x k * (p r * x r) = (x k * p r) * x r`（`k = 2`、`r = 1`、`p 1 = a`）が、ここで偽になることと同じである。 -/
 
 section NonassociativeCounterexample
 
@@ -440,7 +440,7 @@ theorem prefixString_hypotheses :
 end SixElementUnitalMagma
 
 open SixElementUnitalMagma in
-/-- **可換の式は結合則なしでは偽**: `xl_mul_string_comm` の `Monoid` を `MulOneClass` に替えた主張は成り立たない
+/-- **可換の式は結合律なしでは偽**: `xl_mul_string_comm` の `Monoid` を `MulOneClass` に替えた主張は成り立たない
 （`N = 3`、`k = 2`、`r = 2` で `x 2 * p 2 = e ≠ 1 = p 2 * x 2`）。 -/
 theorem xl_mul_string_comm_false_without_assoc :
     ¬ ∀ (A : Type) [MulOneClass A] (p x : ℕ → A) (N : ℕ), p 0 = 1 →
@@ -453,7 +453,7 @@ theorem xl_mul_string_comm_false_without_assoc :
   exact absurd hfalse (by decide)
 
 open SixElementUnitalMagma in
-/-- **二乗の式は結合則なしでは偽**: `string_mul_self` の `Monoid` を `MulOneClass` に替えた主張は成り立たない
+/-- **二乗の式は結合律なしでは偽**: `string_mul_self` の `Monoid` を `MulOneClass` に替えた主張は成り立たない
 （`N = 3`、`r = 2` で `p 2 * p 2 = e ≠ 1`）。 -/
 theorem string_mul_self_false_without_assoc :
     ¬ ∀ (A : Type) [MulOneClass A] (p x : ℕ → A) (N : ℕ), p 0 = 1 →
@@ -474,7 +474,7 @@ end NonassociativeCounterexample
 添字は 0 始まりで、人手の `σ_{r+1}^x` が `x r`、人手の `P_r` が `p r`、人手の `∏_{j=1}^{r+1}` が `finProdLeft r` である。
 
 使うのは次だけである。
-* 二項演算 `*` と元 `1`（`P_0 := I` と漸化式を書くため）。結合則は使わない（漸化式と有限積の定義はどちらも右から 1 つずつ掛けるので、括弧の付け替えが起きない）。
+* 二項演算 `*` と元 `1`（`P_0 := I` と漸化式を書くため）。結合律は使わない（漸化式と有限積の定義はどちらも右から 1 つずつ掛けるので、括弧の付け替えが起きない）。
 * `1 * x 0 = x 0`（`r = 1` の段の `identity_matrix_is_left_unit_of_mat_mult`（`A → σ_1^x`））。`1` が `x 0` 以外の元の左の単位元であること、
   右の単位元であることは使わない。
 

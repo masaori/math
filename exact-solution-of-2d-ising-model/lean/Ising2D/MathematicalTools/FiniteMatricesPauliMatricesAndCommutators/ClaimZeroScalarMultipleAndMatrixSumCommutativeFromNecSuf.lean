@@ -1,5 +1,5 @@
 /-
-# 行列の 0 倍は零行列・行列の和の可換則（具体版を必要十分版から導く）
+# 行列の 0 倍は零行列・行列の和の可換律（具体版を必要十分版から導く）
 
 具体版 `ClaimZeroScalarMultipleAndMatrixSumCommutative.lean` の主張を、必要十分版 `Ising2D/NecSuf/ZeroSmulAndAddCommMatrix.lean` の
 係数・スカラー `ℂ`、添字 `Fin m`・`Fin n` の特殊化として得る。`hz := zero_mul`（人手の `complex_zero_times_is_zero`）、

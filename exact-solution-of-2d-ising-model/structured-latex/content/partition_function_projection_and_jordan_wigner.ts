@@ -2759,7 +2759,7 @@ G-G^{(+)}
   \left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}-\varepsilon W\right)
   -\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}- W\right)
 \right)
-&&\left(\because\ \text{スカラー倍の分配則}\right)\\
+&&\left(\because\ \text{スカラー倍の分配律}\right)\\
 &=iK_1\left(-\varepsilon W+ W\right)
 &&\left(\because\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb C)\ \text{の加法の四則}\right)
 \end{aligned}`,

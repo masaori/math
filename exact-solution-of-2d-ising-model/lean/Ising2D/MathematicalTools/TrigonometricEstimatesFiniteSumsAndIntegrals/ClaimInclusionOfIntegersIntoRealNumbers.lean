@@ -85,10 +85,10 @@ theorem inclusion_zz_to_rr_preserves_sum_of_nonnegatives (a b : ℕ) :
       _ = (a : ℝ) + 0 := (add_zero _).symm                                 -- `0_ℝ` は `ℝ` の和の単位元
       _ = (a : ℝ) + ((0 : ℕ) : ℝ) := by rw [inclusion_zz_to_rr_zero]       -- `inclusion_zz_to_rr` の `ι(0) := 0` を右辺から左辺へ
   | succ b ih =>
-    calc ((a + (b + 1) : ℕ) : ℝ) = (((a + b) + 1 : ℕ) : ℝ) := by rw [Nat.add_assoc]  -- `ℤ` の和の結合則
+    calc ((a + (b + 1) : ℕ) : ℝ) = (((a + b) + 1 : ℕ) : ℝ) := by rw [Nat.add_assoc]  -- `ℤ` の和の結合律
       _ = ((a + b : ℕ) : ℝ) + 1 := inclusion_zz_to_rr_succ (a + b)        -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`（`n → a + b`）
       _ = ((a : ℝ) + (b : ℝ)) + 1 := by rw [ih]                            -- 帰納法の仮定
-      _ = (a : ℝ) + ((b : ℝ) + 1) := add_assoc _ _ _                       -- `ℝ` の和の結合則
+      _ = (a : ℝ) + ((b : ℝ) + 1) := add_assoc _ _ _                       -- `ℝ` の和の結合律
       _ = (a : ℝ) + ((b + 1 : ℕ) : ℝ) := by rw [inclusion_zz_to_rr_succ b] -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`（`n → b`）を右辺から左辺へ
 
 /-- **人手 `finite_sum_of_constant_real_number`**（`m + 1` 項）: `Σ_{j=1}^{m+1} r = ι(m + 1) r`。`m` についての帰納法。 -/

@@ -1169,13 +1169,13 @@ b
 &= 2^{-1} \cdot \bigl((1 + 1) \cdot b\bigr)
 &&\bigl(\because\ \blkref{def_real_two}\bigr)\\
 &= 2^{-1} \cdot (1 \cdot b + 1 \cdot b)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x + y)c = xc + yc\ (x, y \to 1,\ c \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ (x + y)c = xc + yc\ (x, y \to 1,\ c \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 2^{-1} \cdot (b + b)
 &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1 \cdot a = a\ (a \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）を 2 か所へ同時に}\bigr)\\
 &= 2^{-1} \cdot \bigl((-b) + b\bigr)
 &&\bigl(\because\ -b = b\ \text{を右辺から左辺へ、和の第 1 項へ}\bigr)\\
 &= 2^{-1} \cdot \bigl(b + (-b)\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 2^{-1} \cdot 0
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to b)\bigr)\\
 &= 0
@@ -1348,7 +1348,7 @@ A^1
 &= (A^{1+p})_{kl}
 &&(\because \blkref{matrix_power_exponent_law}\ (p \to 1,\ q \to p)) \\
 &= (A^{p+1})_{kl}
-&&(\because \mathbb{Z}\ \text{の加法の可換則})
+&&(\because \mathbb{Z}\ \text{の加法の可換律})
 \end{aligned}`),
       paragraph([
         "であり、",

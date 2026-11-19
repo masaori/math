@@ -335,7 +335,7 @@ u_+^\top u_-
 &=(x_++x_-)^\top(x_++x_-)
   \quad (\because x=x_++x_-\ \text{を左右へ代入})\\
 &=x_+^\top x_+ + x_+^\top x_- + x_-^\top x_+ + x_-^\top x_-
-  \quad (\because \text{転置と内積の分配則})\\
+  \quad (\because \text{転置と内積の分配律})\\
 &=x_+^\top x_+ + x_-^\top x_-
   \quad (\because x_+^\top x_-=x_-^\top x_+=0)\\
 &=\|x_+\|^2+\|x_-\|^2
@@ -347,9 +347,9 @@ x^\top Wx
 &=(x_++x_-)^\top W(x_++x_-)
   \quad (\because x=x_++x_- \text{ を左右へ代入する})\\
 &=(x_++x_-)^\top(Wx_++Wx_-)
-  \quad (\because \text{行列の作用の分配則})\\
+  \quad (\because \text{行列の作用の分配律})\\
 &=x_+^\top Wx_+ + x_+^\top Wx_- + x_-^\top Wx_+ + x_-^\top Wx_-
-  \quad (\because \text{転置と内積の分配則})\\
+  \quad (\because \text{転置と内積の分配律})\\
 &=x_+^\top Wx_+ + 0 + 0 + x_-^\top Wx_-
   \quad (\because x_+,Wx_+\in\mathcal F^{(+)}\text{ と }x_-,Wx_-\in\mathcal F^{(-)}\text{ の直交性})\\
 &=x_+^\top Wx_+ + x_-^\top Wx_-
@@ -407,7 +407,7 @@ x^\top Wx
 &\leq \max(c_+,c_-)\|x_+\|^2 + \max(c_+,c_-)\|x_-\|^2
   \quad (\because c_\pm \leq \max(c_+,c_-) \text{ と } \|x_\pm\|^2 \geq 0 \text{ の積の単調性})\\
 &= \max(c_+,c_-)\left(\|x_+\|^2+\|x_-\|^2\right)
-  \quad (\because \text{分配則})\\
+  \quad (\because \text{分配律})\\
 &= \max(c_+,c_-)\,\|x\|^2
   \quad (\because \|x\|^2 = \|x_+\|^2 + \|x_-\|^2 \text{ を上で示した})\\
 &= \max(c_+,c_-)

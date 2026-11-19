@@ -11,25 +11,25 @@
 | --- | --- |
 | `matrix_sub_eq_zero_iff`・`vec_sub_eq_zero_iff`（成分ごとの等号 → 差の定義 → 零行列の定義 → 移項 → 成分ごとの等号） | `sub_eq_zero_iff_matrix`・`sub_eq_zero_iff_vec` |
 | `identity_matrix_mulVec_apply`（積の定義 → 単位行列の成分 `δ_{ij}` → `j = i` の項を分ける → `δ` の値 → `1·x = x` → `0·x = 0` → `0` の有限和と `x + 0 = x`） | `one_mulVec_apply` |
-| `smul_mulVec_eq_apply`（積の定義 → スカラー倍の定義 → 乗法の結合律 → 左分配則 → 積の定義 → スカラー倍の定義） | `smul_mulVec_apply` |
-| `sub_mulVec_eq_apply`（差の定義 → 積の定義 → 有限和の差 → 分配則 → 差の定義 → 積の定義） | `sub_mulVec_apply` |
+| `smul_mulVec_eq_apply`（積の定義 → スカラー倍の定義 → 乗法の結合律 → 左分配律 → 積の定義 → スカラー倍の定義） | `smul_mulVec_apply` |
+| `sub_mulVec_eq_apply`（差の定義 → 積の定義 → 有限和の差 → 分配律 → 差の定義 → 積の定義） | `sub_mulVec_apply` |
 
 ## 何が効いているか / 効いていないか
 
 - **仮定の型クラスについて**: 行列とベクトルの積 `Matrix.mulVec` の定義そのものが係数に `NonUnitalNonAssocSemiring`
-  （加法の可換モノイドと両側の分配則）を要求するので、各定理の型クラスはそれより弱くできない。証明が実際に使う性質は下に挙げたものだけで、
-  型クラスに含まれるそれ以外の性質（`I v = v` での両側の分配則、`(λB)v = λ(Bv)` での右分配則、`Av - Bv = (A - B)v` での左分配則など）は、
+  （加法の可換モノイドと両側の分配律）を要求するので、各定理の型クラスはそれより弱くできない。証明が実際に使う性質は下に挙げたものだけで、
+  型クラスに含まれるそれ以外の性質（`I v = v` での両側の分配律、`(λB)v = λ(Bv)` での右分配律、`Av - Bv = (A - B)v` での左分配律など）は、
   積の定義が要求するために残している仮定であって、証明では使っていない。
 - 添字は有限であること（`Fintype`。行列とベクトルの積が有限和だから）だけが効き、`Fin n` の順序は効いていない。
   単位行列には添字の等号の判定（`DecidableEq`）が要る。
 - `A - B = O ⟺ A = B` に効くのは、係数の加法群の構造（移項 `x - y = 0 ⟺ x = y`）だけである。乗法は現れない。
 - `I v = v` に効くのは、`1·x = x`・`0·x = 0`・`x + 0 = x` と有限和の取り出しだけである（`NonAssocSemiring`）。
   乗法の結合律も可換律も、加法逆元も効いていない。
-- `(λB)v = λ(Bv)` に効くのは、乗法の結合律（`(λB_{ij})v_j = λ(B_{ij}v_j)`）と左分配則（`λ` を有限和の外へ出す）である
+- `(λB)v = λ(Bv)` に効くのは、乗法の結合律（`(λB_{ij})v_j = λ(B_{ij}v_j)`）と左分配律（`λ` を有限和の外へ出す）である
   （`NonUnitalSemiring`）。**乗法の可換律は効いていない**: スカラーは左から掛け、行列とベクトルの積も左の行列の成分を左に置くので、
-  順序を入れ替える段が無い。結合則は外せない: 主張を添字 `Unit`（`1×1`）に制限すると乗法の結合律そのものが出る
+  順序を入れ替える段が無い。結合律は外せない: 主張を添字 `Unit`（`1×1`）に制限すると乗法の結合律そのものが出る
   （`mul_assoc_of_smul_mulVec`）。
-- `Av - Bv = (A - B)v` に効くのは、有限和の差（加法群）と右分配則（`(x - y)z = xz - yz`）である（`NonUnitalNonAssocRing`）。
+- `Av - Bv = (A - B)v` に効くのは、有限和の差（加法群）と右分配律（`(x - y)z = xz - yz`）である（`NonUnitalNonAssocRing`）。
   乗法の結合律・可換律・単位元は効いていない。
 - 複素数であること、体であることは効いていない。
 -/
@@ -79,14 +79,14 @@ theorem one_mulVec_apply {R : Type*} [NonAssocSemiring R] [Fintype ι] [Decidabl
     _ = v i + ∑ j ∈ Finset.univ.erase i, (0 : R) := by simp only [zero_mul]          -- `0·x = 0` を各項へ
     _ = v i := by rw [Finset.sum_const_zero, add_zero]                               -- `0` は加法の単位元
 
-/-- **`((λB)v)_i = (λ(Bv))_i`**（具体版 `smul_mulVec_eq_apply`）。係数は `NonUnitalSemiring`（可換則は使わない）。 -/
+/-- **`((λB)v)_i = (λ(Bv))_i`**（具体版 `smul_mulVec_eq_apply`）。係数は `NonUnitalSemiring`（可換律は使わない）。 -/
 theorem smul_mulVec_apply {R : Type*} [NonUnitalSemiring R] [Fintype κ] (lam : R) (B : Matrix ι κ R)
     (v : κ → R) (i : ι) : ((lam • B) *ᵥ v) i = (lam • (B *ᵥ v)) i :=
   calc ((lam • B) *ᵥ v) i
       = ∑ j, (lam • B) i j * v j := rfl                          -- 積の定義
     _ = ∑ j, (lam * B i j) * v j := rfl                          -- スカラー倍の定義
     _ = ∑ j, lam * (B i j * v j) := by simp only [mul_assoc]     -- 乗法の結合律
-    _ = lam * ∑ j, B i j * v j := (Finset.mul_sum _ _ _).symm    -- 左分配則
+    _ = lam * ∑ j, B i j * v j := (Finset.mul_sum _ _ _).symm    -- 左分配律
     _ = lam * (B *ᵥ v) i := rfl                                  -- 積の定義
     _ = (lam • (B *ᵥ v)) i := rfl                                -- スカラー倍の定義
 
@@ -97,12 +97,12 @@ theorem sub_mulVec_apply {R : Type*} [NonUnitalNonAssocRing R] [Fintype κ] (A B
       = (A *ᵥ v) i - (B *ᵥ v) i := rfl                                     -- 差の定義
     _ = ∑ j, A i j * v j - ∑ j, B i j * v j := rfl                         -- 積の定義
     _ = ∑ j, (A i j * v j - B i j * v j) := (Finset.sum_sub_distrib _ _).symm  -- 有限和の差
-    _ = ∑ j, (A i j - B i j) * v j := by simp only [sub_mul]               -- 右分配則
+    _ = ∑ j, (A i j - B i j) * v j := by simp only [sub_mul]               -- 右分配律
     _ = ∑ j, (A - B) i j * v j := rfl                                      -- 差の定義
     _ = ((A - B) *ᵥ v) i := rfl                                            -- 積の定義
 
-/-- **結合則が外せないことの確認**: `(λB)v = λ(Bv)` が添字 `Unit` の `1×1` 行列で成り立てば、係数の乗法は結合的である。
-したがって `smul_mulVec_apply` の `NonUnitalSemiring`（結合則）は、積の定義が要求する `NonUnitalNonAssocSemiring` へ弱められない。 -/
+/-- **結合律が外せないことの確認**: `(λB)v = λ(Bv)` が添字 `Unit` の `1×1` 行列で成り立てば、係数の乗法は結合的である。
+したがって `smul_mulVec_apply` の `NonUnitalSemiring`（結合律）は、積の定義が要求する `NonUnitalNonAssocSemiring` へ弱められない。 -/
 theorem mul_assoc_of_smul_mulVec {R : Type*} [NonUnitalNonAssocSemiring R]
     (h : ∀ (lam : R) (B : Matrix Unit Unit R) (v : Unit → R), (lam • B) *ᵥ v = lam • (B *ᵥ v))
     (a b c : R) : a * (b * c) = a * b * c := by

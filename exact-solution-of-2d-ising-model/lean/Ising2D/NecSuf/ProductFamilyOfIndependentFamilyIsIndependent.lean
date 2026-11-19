@@ -52,7 +52,7 @@
 ## 効いていないもの
 
 * **係数の乗法の可換律**: 具体版の (2a)(2d) の「積の可換律」の段で入れ替えるのは、`χ^{(s)}_q` または `δ` と
-  ほかの元との積だけである。`χ^{(s)}_q`・`δ` の値は `0_R` か `1_R` なので、可換則なしにどの元とも交換する
+  ほかの元との積だけである。`χ^{(s)}_q`・`δ` の値は `0_R` か `1_R` なので、可換律なしにどの元とも交換する
   （`delta_commute`・`suffixIndicatorOf_commute`）。積の順序は漸化式で固定し、係数 `d_q` は左から掛ける。
 * **係数が体であること・負元・逆元**: 引き算も割り算も使わない。係数は任意の半環 `R` でよい。
 * **行列であること**: 具体版が `b_a` から読むのは成分 `(b_a)_{uv}` だけで、行列の積も行と列の区別も使わない。
@@ -122,7 +122,7 @@ theorem suffixIndicatorOf_of_lt (p τ : Fin M → ι) (s : ℕ) (h : s < M) :
       = (if p ⟨s, h⟩ = τ ⟨s, h⟩ then 1 else 0) * suffixIndicatorOf p τ (s + 1) := by
   rw [suffixIndicatorOf, dif_pos h]
 
-/-- `δ` の値は `0_R` か `1_R` なので、可換則なしにどの元とも交換する（具体版の「積の可換律」の段の代わり）。 -/
+/-- `δ` の値は `0_R` か `1_R` なので、可換律なしにどの元とも交換する（具体版の「積の可換律」の段の代わり）。 -/
 theorem delta_commute (P : Prop) [Decidable P] (x : R) : Commute (if P then (1 : R) else 0) x := by
   by_cases hP : P
   · rw [if_pos hP]; exact Commute.one_left x

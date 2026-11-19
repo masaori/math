@@ -3320,7 +3320,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
 +\exp(-a)\exp(b)
 -\exp(-a)\exp(-b)
 \bigr)
-&&(\because\ \text{分配則})
+&&(\because\ \text{分配律})
 \\
 &=
 \frac{1}{4}
@@ -3367,7 +3367,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
 -
 \frac{\exp(a-b)-\exp(-(a-b))}{2}
 \right)
-&&(\because\ \text{分配則})
+&&(\because\ \text{分配律})
 \\
 &=
 \frac{1}{2}
@@ -3399,7 +3399,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
 +\exp(-a)\exp(b)
 +\exp(-a)\exp(-b)
 \bigr)
-&&(\because\ \text{分配則})
+&&(\because\ \text{分配律})
 \\
 &=
 \frac{1}{4}
@@ -3446,7 +3446,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
 +
 \frac{\exp(a-b)+\exp(-(a-b))}{2}
 \right)
-&&(\because\ \text{分配則})
+&&(\because\ \text{分配律})
 \\
 &=
 \frac{1}{2}

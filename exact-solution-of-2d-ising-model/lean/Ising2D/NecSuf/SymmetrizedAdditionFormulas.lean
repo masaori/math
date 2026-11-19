@@ -19,7 +19,7 @@
 | `sinh_sub_formula`（6 段） | `antisymmetrized_sub_formula'`（同じ 6 段） | 同上 |
 
 * 複号 `+` の人手の 8 行は「定義」「`real_negation_of_sum_is_sum_of_negations`」「`scalar_exp_product` を 2 箇所へ」
-  「分母と分子に 2 を掛ける」「`E_x E_{−y}` と `E_{−x} E_y` を足して引く」「分配則」「分数の和と積」「定義を 4 箇所へ」で、
+  「分母と分子に 2 を掛ける」「`E_x E_{−y}` と `E_{−x} E_y` を足して引く」「分配律」「分数の和と積」「定義を 4 箇所へ」で、
   必要十分版の 8 段と同じ並びである。`cosh`・`sinh` の定義は仮定 `hc`・`hs` として置く。2 段目は仮定 `hneg`、3 段目は仮定 `hf` である。
 * 複号 `−` の人手の 6 行は「`def_real_difference`」「複号 `+` の場合を `−y` に当てはめる」「`cosh_is_even`」「`sinh_is_odd`」
   「`real_times_negation_is_negation_of_product`」「`def_real_difference` を右辺から左辺へ」で、必要十分版の 6 段と同じ並びである。
@@ -32,7 +32,7 @@
 * 値の側で効くのは環の演算と、`2` が逆元 `⅟2` を持つことだけである。4 段目「分母と分子に 2 を掛ける」は約分
   `(2w)·⅟2 = (w·2)·⅟2 = w`（`2w = w + w = w·2` なので乗法の可換律は使わない）、7 段目「分数の和と積」は
   `⅟2` が任意の元と交換すること（`2` が任意の元と交換することから従う。`Commute.invOf_left`）を使う。
-  5・6 段（足して引く・分配則）は非可換環の計算（`noncomm_ring`）である。
+  5・6 段（足して引く・分配律）は非可換環の計算（`noncomm_ring`）である。
   2 以外の元の逆元（体・除法環であること）、乗法の可換律、順序は効いていない。
   `2` の可逆性は外せない（外すと具体版の `/2` に当たる元が無く、`c`・`s` の定義を書けない）。
 -/
@@ -52,7 +52,7 @@ theorem mul_invOf_two_eq_two_mul_mul_invOf_two_sq' {K : Type*} [Ring K] [Inverti
     w * ⅟2 = (2 * w) * (⅟2 * ⅟2) := by
   rw [two_mul, ← mul_two, ← mul_assoc, mul_invOf_cancel_right]
 
-/-- 7 段目「分数の和と積」: `(ab + pq)·(⅟2·⅟2) = (a·⅟2)(b·⅟2) + (p·⅟2)(q·⅟2)`。`⅟2` が `b`・`q` と交換することと分配則を使う。 -/
+/-- 7 段目「分数の和と積」: `(ab + pq)·(⅟2·⅟2) = (a·⅟2)(b·⅟2) + (p·⅟2)(q·⅟2)`。`⅟2` が `b`・`q` と交換することと分配律を使う。 -/
 theorem add_mul_invOf_two_sq_eq' {K : Type*} [Ring K] [Invertible (2 : K)] (a b p q : K) :
     (a * b + p * q) * (⅟2 * ⅟2) = a * ⅟2 * (b * ⅟2) + p * ⅟2 * (q * ⅟2) := by
   have hb : Commute (⅟(2 : K)) b := (Commute.ofNat_left 2 b).invOf_left
@@ -86,7 +86,7 @@ theorem symmetrized_add_formula' {G K : Type*} [Add G] [Neg G] [Ring K] [Inverti
           -- `f(x)f(−y)` と `f(−x)f(y)` を足して引く
     _ = ((f x + f (-x)) * (f y + f (-y)) + (f x - f (-x)) * (f y - f (-y))) * (⅟2 * ⅟2) := by
           congr 1; noncomm_ring
-          -- 分配則
+          -- 分配律
     _ = (f x + f (-x)) * ⅟2 * ((f y + f (-y)) * ⅟2) + (f x - f (-x)) * ⅟2 * ((f y - f (-y)) * ⅟2) :=
           add_mul_invOf_two_sq_eq' _ _ _ _
           -- 分数の和と積
@@ -116,7 +116,7 @@ theorem antisymmetrized_add_formula' {G K : Type*} [Add G] [Neg G] [Ring K] [Inv
           -- `f(x)f(−y)` と `f(−x)f(y)` を足して引く
     _ = ((f x - f (-x)) * (f y + f (-y)) + (f x + f (-x)) * (f y - f (-y))) * (⅟2 * ⅟2) := by
           congr 1; noncomm_ring
-          -- 分配則
+          -- 分配律
     _ = (f x - f (-x)) * ⅟2 * ((f y + f (-y)) * ⅟2) + (f x + f (-x)) * ⅟2 * ((f y - f (-y)) * ⅟2) :=
           add_mul_invOf_two_sq_eq' _ _ _ _
           -- 分数の和と積

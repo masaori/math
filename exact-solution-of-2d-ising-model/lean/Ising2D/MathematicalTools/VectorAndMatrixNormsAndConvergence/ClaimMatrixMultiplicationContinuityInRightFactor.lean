@@ -30,7 +30,7 @@ theorem matrix_mul_left_tendsto {n : ℕ} (B : Matrix (Fin n) (Fin n) ℂ) (A : 
   have hle : ∀ N, ‖B * A N - B * Alim‖ ≤ ‖B‖ * ‖A N - Alim‖ := fun N =>
     calc ‖B * A N - B * Alim‖
         = ‖B * (A N - Alim)‖ := by rw [Matrix.mul_sub]
-                                                        -- 行列の積の左分配則
+                                                        -- 行列の積の左分配律
       _ ≤ ‖B‖ * ‖A N - Alim‖ := Matrix.frobenius_norm_mul _ _
                                                         -- `matrix_norm_submultiplicativity`（`A → B`、`B → A_N − A`）
   -- `‖A_N − A‖ → 0` と、収束する実数列に定数を掛けた列の極限

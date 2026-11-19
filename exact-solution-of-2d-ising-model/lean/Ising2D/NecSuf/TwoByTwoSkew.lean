@@ -394,7 +394,7 @@ theorem skew2_mulVec_pos (g a b s : R) (hab : a * b = -s ^ 2) :
         = g * (-s) + a * b := by
           simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]       -- 行列とベクトルの積の定義
       _ = -(g * s) + -s ^ 2 := by rw [hab, mul_neg]                  -- `ab = -s^2`
-      _ = (g + s) * (-s) := by ring                                   -- 分配則
+      _ = (g + s) * (-s) := by ring                                   -- 分配律
       _ = ((g + s) • ![-s, b]) 0 := by simp                           -- 第 1 成分は `-s`
   · -- 第 2 成分
     calc (!![g, a; -b, g] *ᵥ ![-s, b]) 1
@@ -402,7 +402,7 @@ theorem skew2_mulVec_pos (g a b s : R) (hab : a * b = -s ^ 2) :
           simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]       -- 行列とベクトルの積の定義
       _ = b * s + g * b := by rw [neg_mul_neg]                        -- 環の四則 `(-b)(-s) = b s`（仮定は使わない）
       _ = s * b + g * b := by rw [mul_comm b s]                       -- 乗法の可換律
-      _ = (s + g) * b := by rw [add_mul]                              -- 分配則で `b` を括り出す
+      _ = (s + g) * b := by rw [add_mul]                              -- 分配律で `b` を括り出す
       _ = (g + s) * b := by rw [add_comm s g]                         -- 加法の交換律
       _ = ((g + s) • ![-s, b]) 1 := by simp                           -- 第 2 成分は `b`
 
@@ -417,7 +417,7 @@ theorem skew2_mulVec_neg (g a b s : R) (hab : a * b = -s ^ 2) :
         = g * s + a * b := by
           simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]       -- 行列とベクトルの積の定義
       _ = g * s + -s ^ 2 := by rw [hab]                               -- `ab = -s^2`
-      _ = (g - s) * s := by ring                                      -- 分配則
+      _ = (g - s) * s := by ring                                      -- 分配律
       _ = ((g - s) • ![s, b]) 0 := by simp                            -- 第 1 成分は `s`
   · -- 第 2 成分
     calc (!![g, a; -b, g] *ᵥ ![s, b]) 1
@@ -425,7 +425,7 @@ theorem skew2_mulVec_neg (g a b s : R) (hab : a * b = -s ^ 2) :
           simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]       -- 行列とベクトルの積の定義
       _ = b * (-s) + g * b := by rw [neg_mul_comm]                    -- 環の四則 `(-b) s = b (-s)`（仮定は使わない）
       _ = (-s) * b + g * b := by rw [mul_comm b (-s)]                 -- 乗法の可換律
-      _ = (-s + g) * b := by rw [add_mul]                             -- 分配則で `b` を括り出す
+      _ = (-s + g) * b := by rw [add_mul]                             -- 分配律で `b` を括り出す
       _ = (g - s) * b := by rw [add_comm, ← sub_eq_add_neg]           -- 加法の交換律（`g + (-s) = g - s`）
       _ = ((g - s) • ![s, b]) 1 := by simp                            -- 第 2 成分は `b`
 

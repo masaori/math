@@ -16,7 +16,7 @@
   `ℂ` の積の結合律・分配律（`complex_numbers_form_a_field`）は `mul_assoc`・`add_mul`。
 * `finite_sum_of_scalar_multiples_of_one_matrix` の `(i, k)` 成分の鎖の 4 行は、`finite_sum_smul_one_matrix_apply` の `calc` の 4 段と 1 対 1 である。
   人手の `r ∈ ℤ_{≥1}` が Lean の `r + 1` に当たる（`Fin (r + 1)` の上の和）。`finite_sum_of_matrices_entrywise` には Lean の具体版が無いので
-  mathlib の `Matrix.sum_apply`、人手の名前だけの根拠「`ℂ` の有限和の分配則」は mathlib の `Finset.sum_mul` で出す。
+  mathlib の `Matrix.sum_apply`、人手の名前だけの根拠「`ℂ` の有限和の分配律」は mathlib の `Finset.sum_mul` で出す。
 * 最後の「全ての成分が一致する」は `Matrix.ext`。人手の `m, n ∈ ℤ_{≥1}` に対し、Lean は `ℕ` で `0` も許す。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
@@ -53,7 +53,7 @@ theorem finite_sum_smul_one_matrix_apply {m n : ℕ} (r : ℕ) (c : Fin (r + 1) 
   calc (∑ j, c j • A) i k
       = ∑ j, (c j • A) i k := Matrix.sum_apply _ _ _ _                        -- `finite_sum_of_matrices_entrywise`（mathlib の `Matrix.sum_apply`）
     _ = ∑ j, c j * A i k := by simp only [matrix_smul_apply]                  -- `def_matrix_scalar_multiple` を `r` 個の項へ同時適用
-    _ = (∑ j, c j) * A i k := (Finset.sum_mul _ _ _).symm                     -- `ℂ` の有限和の分配則（mathlib の `Finset.sum_mul`）
+    _ = (∑ j, c j) * A i k := (Finset.sum_mul _ _ _).symm                     -- `ℂ` の有限和の分配律（mathlib の `Finset.sum_mul`）
     _ = ((∑ j, c j) • A) i k := (matrix_smul_apply _ _ _ _).symm              -- `def_matrix_scalar_multiple`
 
 /-- **`finite_sum_of_scalar_multiples_of_one_matrix`**: `Σ_{j=1}^{r+1} (c_jA) = (Σ_{j=1}^{r+1} c_j)A`（人手の `r` は Lean の `r + 1`）。 -/

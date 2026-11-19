@@ -196,7 +196,7 @@ u^\top Pv
         math(String.raw`\mathbb{R}`),
         " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の分配則と有限和だけを使い、極限・完備性を使わない。",
+        " の分配律と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -207,7 +207,7 @@ x^\top Pw
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,\bigl(y_l + z_l\bigr)
 &&\bigl(\because\ \text{仮定}\ w_l = y_l + z_l\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(\bigl(x_k\,P_{kl}\bigr)\,y_l + \bigl(x_k\,P_{kl}\bigr)\,z_l\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ a\,(b + c) = a\,b + a\,c\ (a \to x_k\,P_{kl},\ b \to y_l,\ c \to z_l)\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ a\,(b + c) = a\,b + a\,c\ (a \to x_k\,P_{kl},\ b \to y_l,\ c \to z_l)\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\Bigl(\Bigl(\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,y_l\Bigr) + \Bigl(\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,z_l\Bigr)\Bigr)
 &&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to n,\ \text{添字}\ j \to l,\ a_l \to (x_k\,P_{kl})\,y_l,\ b_l \to (x_k\,P_{kl})\,z_l)\ \text{を各}\ k\ \text{へ}\bigr)\\
 &=\Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,y_l\Bigr) + \Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,z_l\Bigr)
@@ -266,7 +266,7 @@ x^\top Pw
         math(String.raw`\mathbb{R}`),
         " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の分配則と有限和だけを使い、極限・完備性を使わない。",
+        " の分配律と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -277,9 +277,9 @@ w^\top Px
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(\bigl(y_k + z_k\bigr)\,P_{kl}\Bigr)\,x_l
 &&\bigl(\because\ \text{仮定}\ w_k = y_k + z_k\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(y_k\,P_{kl} + z_k\,P_{kl}\bigr)\,x_l
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (b + c)\,a = b\,a + c\,a\ (a \to P_{kl},\ b \to y_k,\ c \to z_k)\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ (b + c)\,a = b\,a + c\,a\ (a \to P_{kl},\ b \to y_k,\ c \to z_k)\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(\bigl(y_k\,P_{kl}\bigr)\,x_l + \bigl(z_k\,P_{kl}\bigr)\,x_l\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (b + c)\,a = b\,a + c\,a\ (a \to x_l,\ b \to y_k\,P_{kl},\ c \to z_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ (b + c)\,a = b\,a + c\,a\ (a \to x_l,\ b \to y_k\,P_{kl},\ c \to z_k\,P_{kl})\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\Bigl(\Bigl(\sum_{l=1}^{n} \bigl(y_k\,P_{kl}\bigr)\,x_l\Bigr) + \Bigl(\sum_{l=1}^{n} \bigl(z_k\,P_{kl}\bigr)\,x_l\Bigr)\Bigr)
 &&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to n,\ \text{添字}\ j \to l,\ a_l \to (y_k\,P_{kl})\,x_l,\ b_l \to (z_k\,P_{kl})\,x_l)\ \text{を各}\ k\ \text{へ}\bigr)\\
 &=\Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(y_k\,P_{kl}\bigr)\,x_l\Bigr) + \Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(z_k\,P_{kl}\bigr)\,x_l\Bigr)
@@ -517,7 +517,7 @@ w^\top Pw
         math(String.raw`\mathbb{R}`),
         " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の乗法の結合律・分配則と有限和だけを使い、極限・完備性を使わない。",
+        " の乗法の結合律・分配律と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -579,7 +579,7 @@ u^\top Pv
         math(String.raw`\mathbb{R}`),
         " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の乗法の結合律・可換律・分配則と有限和だけを使い、極限・完備性を使わない。",
+        " の乗法の結合律・可換律・分配律と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -1216,23 +1216,23 @@ q(t)
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} (y_k+t\,x_k)\,P_{kl}\,(y_l+t\,x_l)
 &&\bigl(\because\ q(t),\ w(t)\ \text{の定義と}\ \blkref{def_real_bilinear_value}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(y_kP_{kl}y_l+t\,y_kP_{kl}x_l+t\,x_kP_{kl}y_l+t^2\,x_kP_{kl}x_l\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則・乗法の結合律・可換律}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律・乗法の結合律・可換律}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} y_kP_{kl}y_l
 +\sum_{k=1}^{n}\sum_{l=1}^{n} t\,y_kP_{kl}x_l\\
 &\qquad+\sum_{k=1}^{n}\sum_{l=1}^{n} t\,x_kP_{kl}y_l
 +\sum_{k=1}^{n}\sum_{l=1}^{n} t^2\,x_kP_{kl}x_l
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律・可換則による有限和の項の並べ替え}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律・可換律による有限和の項の並べ替え}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} y_kP_{kl}y_l
 +t\sum_{k=1}^{n}\sum_{l=1}^{n} y_kP_{kl}x_l\\
 &\qquad+t\sum_{k=1}^{n}\sum_{l=1}^{n} x_kP_{kl}y_l
 +t^2\sum_{k=1}^{n}\sum_{l=1}^{n} x_kP_{kl}x_l
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則で}\ t,\ t^2\ \text{を有限和の外へ出す}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律で}\ t,\ t^2\ \text{を有限和の外へ出す}\bigr)\\
 &=y^\top Py+t\,y^\top Px+t\,x^\top Py+t^2\,x^\top Px
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &=y^\top Py+t\,y^\top Px+t\,y^\top Px+t^2\,x^\top Px
 &&\bigl(\because\ \blkref{real_bilinear_value_of_symmetric_matrix_is_symmetric}\ (n \to n,\ P \to P,\ u \to x,\ v \to y)\bigr)\\
 &=(x^\top Px)\,t^2+2\,(y^\top Px)\,t+y^\top Py
-&&\bigl(\because\ \mathbb{R}\ \text{の加法と乗法の可換律・分配則}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法と乗法の可換律・分配律}\bigr)
 \end{aligned}`),
       paragraph([
         "仮定の半正定値性を ",

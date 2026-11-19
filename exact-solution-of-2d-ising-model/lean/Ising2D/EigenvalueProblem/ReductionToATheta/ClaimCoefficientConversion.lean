@@ -47,7 +47,7 @@ theorem ad_smul_left (α : ℂ) (X W : TensorPow M) :
   calc (α • X) * W - W * (α • X)
       -- 交換子の第 1 引数についての ℂ 線型性（スカラー倍を積の外へ出す）
       = α • (X * W) - α • (W * X) := by rw [smul_mul_assoc, mul_smul_comm]
-    -- 分配則
+    -- 分配律
     _ = α • (X * W - W * X) := (smul_sub _ _ _).symm
 
 /-- 人手の補題 1 の「`ad_X` は ℂ 線型」: `ad_X(αW) = α ad_X(W)`。 -/
@@ -56,7 +56,7 @@ theorem ad_smul_right (α : ℂ) (X W : TensorPow M) :
   calc X * (α • W) - (α • W) * X
       -- スカラー倍を積の外へ出す
       = α • (X * W) - α • (W * X) := by rw [mul_smul_comm, smul_mul_assoc]
-    -- 分配則
+    -- 分配律
     _ = α • (X * W - W * X) := (smul_sub _ _ _).symm
 
 /-- **人手の補題 1**: `ad_{αX}^n(W) = α^n ad_X^n(W)`。

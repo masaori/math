@@ -12,8 +12,8 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 結合則: 10 行の鎖 `((PQ)x)_i = … = (P(Qx))_i` | `real_matrix_vector_product_is_associative` の `calc` の 10 段 |
-| 結合則: 結び（`i` は任意） | 同じ定理の `funext i` |
+| 結合律: 10 行の鎖 `((PQ)x)_i = … = (P(Qx))_i` | `real_matrix_vector_product_is_associative` の `calc` の 10 段 |
+| 結合律: 結び（`i` は任意） | 同じ定理の `funext i` |
 | 左単位: `j ≠ i` の 4 行 `(r_j)_ℂ = (I_ijx_j)_ℂ = (0·x_j)_ℂ = (0)_ℂ = 0_ℂ` | `real_identity_matrix_is_left_unit_of_real_matrix_vector_product` の `hoff` の `calc` の 4 段 |
 | 左単位: `j = i` の 3 行 `r_i = I_iix_i = 1·x_i = x_i` | 同じ定理の `hon` の `calc` の 3 段 |
 | 左単位: 5 行 `((Ix)_i)_ℂ = … = (x_i)_ℂ` と単射性 | 同じ定理の最後の `calc` の 5 段と `inclusion_rr_to_cc_is_injective` |
@@ -21,7 +21,7 @@
 - 人手の `def_real_matrix_product`・`def_real_matrix_vector_product`・`def_real_identity_matrix` は、Lean の `Matrix _ _ ℝ` の `*`・`*ᵥ`
   （成分は `dotProduct` で、人手の式と `rfl`）・`1`（成分は `Matrix.one_apply_eq`・`Matrix.one_apply_ne`）である。
 - 人手の `m, n, p ∈ ℤ_{≥1}` と成分の番号は、Lean の添字の型の元である。Lean の主張は添字の型が空でも成り立つので、`Nonempty` を置かない。
-- 結合則の 4 行目・8 行目の `finite_sum_of_real_scalar_multiples` は、有限型の添字の版 `finite_sum_of_real_scalar_multiples_fintype` を引く。
+- 結合律の 4 行目・8 行目の `finite_sum_of_real_scalar_multiples` は、有限型の添字の版 `finite_sum_of_real_scalar_multiples_fintype` を引く。
   7 行目の `finite_double_sum_of_real_numbers_interchange` は、有限型の添字の版 `finite_double_sum_of_real_numbers_interchange_fintype` を引く。
   乗法の交換律・結合律は `mul_comm`・`mul_assoc` である。
 - 左単位の 5 行目の `finite_sum_with_single_nonzero_term` は具体版が無いので、既存の慣行どおり mathlib の `Finset.sum_eq_single` を引く
@@ -29,7 +29,7 @@
   具体版 `real_inclusion_of_finite_sum_fintype`（`i ∈ ι` なので添字の型は空でない）、`0_ℂ = (0)_ℂ` の略記は `Complex.ofReal_zero` である。`j ≠ i` の 3 行目の `0·x_j = 0` は具体版 `real_zero_times_is_zero` を引き、`ℝ` の `1·a = a` は `one_mul` である。
 
 必要十分版はまだ置いていない。具体版は人手と同じく ℝ の乗法の交換律（結合律の 3 行目・5 行目）を使うが、
-結合則そのものは交換則なしで成り立つはずで、それを必要十分版で確かめるのは残した件である
+結合律そのものは交換律なしで成り立つはずで、それを必要十分版で確かめるのは残した件である
 （係数が ℂ の左単位には必要十分版 `NecSuf.one_mulVec_eq` がある）。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix

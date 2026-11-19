@@ -20,12 +20,12 @@
 
 - 係数の型 `R` に置いたのは `CommSemiring` である。効いているのは次のものである。
   - 積の可換律と結合律（1 段目・4 段目）: 全因子の積 `∏_k` から第 `j` 因子を取り出して右端へ置く（`Finset.prod_erase_mul`）。
-    `j` が並びの途中にあるとき、第 `j` 因子を右端へ動かすには可換則が要る。ただしこの段の可換則・結合則は、
+    `j` が並びの途中にあるとき、第 `j` 因子を右端へ動かすには可換律が要る。ただしこの段の可換律・結合律は、
     `Finset.prod` が並びに依らない積を定めるのに `CommMonoid` を要求することと切り離せず、外した場合の反例は示していない。
   - 分配律（3 段目）: `(∏_{k≠j}) · Σ_a c_a(B_a)_{s_jt_j} = Σ_a (∏_{k≠j}) · (c_a(B_a)_{s_jt_j})`（`Finset.mul_sum`。
     `NonUnitalNonAssocSemiring` を要求する）。外した場合の反例は示していない。
-  - 3 段目で `c_a` を `∏_{k≠j}` の前へ出す `p · (c q) = c · (p q)`（`mul_left_comm`、可換則と結合則）。
-    この段の可換則は外せない。係数が可換でなければ、成分を左から掛ける積で定義し直しても主張は偽になる: `R := Mat(2, ℂ)`、
+  - 3 段目で `c_a` を `∏_{k≠j}` の前へ出す `p · (c q) = c · (p q)`（`mul_left_comm`、可換律と結合律）。
+    この段の可換律は外せない。係数が可換でなければ、成分を左から掛ける積で定義し直しても主張は偽になる: `R := Mat(2, ℂ)`、
     `α = β := Unit`、サイトを 2 つ、`j` を 2 つ目（右端）のサイトとし（1 段目の並べ替えが効かない形）、1 つ目の因子の唯一の成分を
     `E_{12}`、`t` を 1 元、`c := E_{21}`、`B := I` と取ると、左辺の成分は `E_{12}(E_{21}I) = E_{11}`、
     右辺の成分は `E_{21}(E_{12}I) = E_{22}` で一致しない。
@@ -72,7 +72,7 @@ theorem kroneckerProdOf_update_sum_smul_apply (x : ι → Matrix α β R) (j : �
         simp only [Matrix.smul_apply, smul_eq_mul]                           -- 和・スカラー倍は成分ごと
     _ = ∑ a ∈ t, c a * ((∏ k ∈ Finset.univ.erase j, x k (s k) (u k)) * B a (s j) (u j)) := by
         rw [Finset.mul_sum]
-        exact Finset.sum_congr rfl fun a _ => mul_left_comm _ _ _            -- 分配律（と可換則・結合則）
+        exact Finset.sum_congr rfl fun a _ => mul_left_comm _ _ _            -- 分配律（と可換律・結合律）
     _ = ∑ a ∈ t, c a * kroneckerProdOf (Function.update x j (B a)) s u :=
         Finset.sum_congr rfl fun a _ => by rw [kroneckerProdOf_update_apply] -- `⊠` の定義
     _ = (∑ a ∈ t, c a • kroneckerProdOf (Function.update x j (B a))) s u := by
@@ -118,7 +118,7 @@ theorem vecKronOf_update_sum_smul_apply (v : ι → α → R) (j : ι)
         simp only [Pi.smul_apply, smul_eq_mul]                               -- 和・スカラー倍は成分ごと
     _ = ∑ a ∈ t, c a * ((∏ k ∈ Finset.univ.erase j, v k (s k)) * w a (s j)) := by
         rw [Finset.mul_sum]
-        exact Finset.sum_congr rfl fun a _ => mul_left_comm _ _ _            -- 分配律（と可換則・結合則）
+        exact Finset.sum_congr rfl fun a _ => mul_left_comm _ _ _            -- 分配律（と可換律・結合律）
     _ = ∑ a ∈ t, c a * vecKronOf (Function.update v j (w a)) s :=
         Finset.sum_congr rfl fun a _ => by rw [vecKronOf_update_apply]       -- `⊠` の定義
     _ = (∑ a ∈ t, c a • vecKronOf (Function.update v j (w a))) s := by

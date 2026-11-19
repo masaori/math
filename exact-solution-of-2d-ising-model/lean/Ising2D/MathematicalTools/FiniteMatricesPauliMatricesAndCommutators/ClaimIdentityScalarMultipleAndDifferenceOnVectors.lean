@@ -165,7 +165,7 @@ theorem sub_mulVec_eq_apply {m n : ℕ} (A B : Matrix (Fin m) (Fin n) ℂ) (v : 
     _ = ∑ j, A i j * v j - ∑ j, B i j * v j := by
         rw [mulVec_apply_sum, mulVec_apply_sum]                            -- `mat_mult`
     _ = ∑ j, (A i j * v j - B i j * v j) := (Finset.sum_sub_distrib _ _).symm  -- 有限和の差は項ごとの差の和
-    _ = ∑ j, (A i j - B i j) * v j := by simp only [sub_mul]               -- 分配則
+    _ = ∑ j, (A i j - B i j) * v j := by simp only [sub_mul]               -- 分配律
     _ = ∑ j, (A - B) i j * v j := by simp only [matrix_sub_apply]          -- `def_matrix_difference`
     _ = ((A - B) *ᵥ v) i := (mulVec_apply_sum _ _ _).symm                  -- `mat_mult`
 

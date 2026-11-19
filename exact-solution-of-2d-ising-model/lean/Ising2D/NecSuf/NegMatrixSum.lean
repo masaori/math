@@ -8,16 +8,16 @@
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `neg_add_matrix_apply`（符号反転の定義 → 和の定義 → `-x = (-1)x` → 左分配則 → `-x = (-1)x` を 2 か所 → 符号反転の定義を 2 か所 → 和の定義） | `neg_add_matrix_apply'`（同じ並び） |
+| `neg_add_matrix_apply`（符号反転の定義 → 和の定義 → `-x = (-1)x` → 左分配律 → `-x = (-1)x` を 2 か所 → 符号反転の定義を 2 か所 → 和の定義） | `neg_add_matrix_apply'`（同じ並び） |
 | `neg_finite_sum_of_matrices`（`r + 1` 項の帰納法。有限和の定義 → 帰納法の仮定 → 和の符号反転 → 有限和の定義） | `neg_finite_sum_matrix'`（同じ並び） |
 
 ## 何が効いているか / 効いていないか
 
 - 係数の符号反転と積のつながりは、仮定 `hneg : ∀ x, -x = (-1) * x`（人手の `multiply_by_minus_one` はこの形の定義である）で渡す。
   `HasDistribNeg` や環を取ると `-(x + y) = -x + -y` が型クラスの側に入ってしまい、何が効いているかが見えなくなるので取らない。
-- 和の符号反転で効いているのは `hneg` と係数の**左分配則**（`LeftDistribClass`）の 2 つだけである。
+- 和の符号反転で効いているのは `hneg` と係数の**左分配律**（`LeftDistribClass`）の 2 つだけである。
   `hneg` を外すと `Neg` は任意の写像になり、`-(x + y) = -x + -y` は一般には成り立たない。
-  左分配則を外すと `(-1)(x + y) = (-1)x + (-1)y` の段が通らない。
+  左分配律を外すと `(-1)(x + y) = (-1)x + (-1)y` の段が通らない。
 - **加法の結合律・交換律・零、乗法の結合律・単位元・可換律は、和の符号反転では効いていない**（`Add`・`Mul`・`Neg`・`One` だけを取る）。
   `(-1)(-1) = 1` のような `-1` の性質も使わない。
 - 有限和の符号反転で効いているのは、上の和の符号反転と有限和の定義（左から足す）だけである。`AddCommMonoid` は、mathlib の `Finset.sum` を
@@ -42,7 +42,7 @@ theorem neg_add_matrix_apply' {R : Type*} [Add R] [Mul R] [Neg R] [One R] [LeftD
       = -((A + B) i j) := rfl                                                -- 符号反転の定義
     _ = -(A i j + B i j) := rfl                                              -- 和の定義
     _ = (-1) * (A i j + B i j) := hneg _                                     -- `-x = (-1)x`
-    _ = (-1) * A i j + (-1) * B i j := left_distrib _ _ _                    -- 左分配則
+    _ = (-1) * A i j + (-1) * B i j := left_distrib _ _ _                    -- 左分配律
     _ = (-A i j) + (-B i j) := by rw [hneg (A i j), hneg (B i j)]            -- `-x = (-1)x`（2 か所へ同時適用）
     _ = (-A) i j + (-B) i j := rfl                                           -- 符号反転の定義（2 か所へ同時適用）
     _ = ((-A) + (-B)) i j := rfl                                             -- 和の定義

@@ -570,7 +570,7 @@ A_{\mathrm{ord}(\mu),\mathrm{ord}(\mu')}
 &= \exp\!\left(K_1\sum_{m=1}^{M_{\mathrm{col}}} \mu(m)\mu(m+1) + K_2\sum_{m=1}^{M_{\mathrm{col}}} \mu(m)\mu'(m)\right)
 &&(\because\ \blkref{theorem_exp_product}\ \text{を}\ n=1,\ K=\mathbb{R}\ \text{へ適用する。}\ \mathbb{C}\ \text{の積を実数の積の包含へまとめるのは}\ \blkref{real_inclusion_preserves_product}) \\
 &= \exp\!\left(\sum_{m=1}^{M_{\mathrm{col}}} \bigl(K_1\,\mu(m)\mu(m+1) + K_2\,\mu(m)\mu'(m)\bigr)\right)
-&&(\because\ \mathbb{R}\ \text{の分配則と有限和の項別加法})
+&&(\because\ \mathbb{R}\ \text{の分配律と有限和の項別加法})
 \end{aligned}`,
       ),
       paragraph(["中間目標: 行列の冪の成分。"]),
@@ -624,7 +624,7 @@ A_{\mathrm{ord}(\mu),\mathrm{ord}(\mu')}
 &&(\because\ \text{帰納法の仮定}\ (\ast)) \\
 &= \sum_{\mu^{(r+1)} \in \mathfrak{M}} \ \sum_{(\mu^{(2)},\dots,\mu^{(r)}) \in \mathfrak{M}^{r-1}}
    \left( \prod_{k=1}^{r} A_{\mathrm{ord}(\mu^{(k)}),\mathrm{ord}(\mu^{(k+1)})} \right) A_{\mathrm{ord}(\mu^{(r+1)}),\mathrm{ord}(\mu^{(r+2)})}
-&&(\because\ \text{有限和に対する分配則}\ \left(\textstyle\sum_\lambda x_\lambda\right) y = \textstyle\sum_\lambda x_\lambda y) \\
+&&(\because\ \text{有限和に対する分配律}\ \left(\textstyle\sum_\lambda x_\lambda\right) y = \textstyle\sum_\lambda x_\lambda y) \\
 &= \sum_{(\mu^{(2)},\dots,\mu^{(r+1)}) \in \mathfrak{M}^{r}} \ \prod_{k=1}^{r+1} A_{\mathrm{ord}(\mu^{(k)}),\mathrm{ord}(\mu^{(k+1)})}
 &&(\because\ \mathfrak{M} \times \mathfrak{M}^{r-1} \to \mathfrak{M}^{r}\ \text{の全単射による添え字の付け替えと、末尾の因子を有限積へ入れること})
 \end{aligned}`,
@@ -2771,7 +2771,7 @@ B_\tau^{\,2p+2}
 &= \tfrac{1}{m!}\,\tau^{m}\,\frac{1 + (-1)^m}{2}
 &&(\because \beta^{(m)}_{11}\ \text{の定義}) \\
 &= \frac{\tau^m + (-1)^m\tau^m}{2\cdot m!}
-&&(\because \text{実数の分配則}) \\
+&&(\because \text{実数の分配律}) \\
 &= \frac{\tau^m + (-\tau)^m}{2\cdot m!}
 &&(\because \text{実数の冪}\ (-1)^m\tau^m = (-\tau)^m),
 \end{aligned}`,
@@ -2782,7 +2782,7 @@ B_\tau^{\,2p+2}
 &= \tfrac{1}{m!}\,\tau^{m}\,\frac{1 - (-1)^m}{2}
 &&(\because \beta^{(m)}_{12}\ \text{の定義}) \\
 &= \frac{\tau^m - (-1)^m\tau^m}{2\cdot m!}
-&&(\because \text{実数の分配則}) \\
+&&(\because \text{実数の分配律}) \\
 &= \frac{\tau^m - (-\tau)^m}{2\cdot m!}
 &&(\because \text{実数の冪}\ (-1)^m\tau^m = (-\tau)^m)
 \end{aligned}`,
@@ -2813,7 +2813,7 @@ B_\tau^{\,2p+2}
 &= \Bigl(\sum_{m=0}^{N}\frac{\tau^m + (-\tau)^m}{2\cdot m!}\Bigr)_{\mathbb{C}}
 &&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
 &= \Bigl(\frac{1}{2}\Bigl(\sum_{m=0}^{N}\frac{\tau^m}{m!} + \sum_{m=0}^{N}\frac{(-\tau)^m}{m!}\Bigr)\Bigr)_{\mathbb{C}}
-&&(\because \text{実数の有限和の分配則}) \\
+&&(\because \text{実数の有限和の分配律}) \\
 &= \Bigl(\frac{E_N(\tau) + E_N(-\tau)}{2}\Bigr)_{\mathbb{C}}
 &&(\because E_N\ \text{の定義})
 \end{aligned}`,
@@ -2833,7 +2833,7 @@ B_\tau^{\,2p+2}
 &= \Bigl(\sum_{m=0}^{N}\frac{\tau^m - (-\tau)^m}{2\cdot m!}\Bigr)_{\mathbb{C}}
 &&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
 &= \Bigl(\frac{1}{2}\Bigl(\sum_{m=0}^{N}\frac{\tau^m}{m!} - \sum_{m=0}^{N}\frac{(-\tau)^m}{m!}\Bigr)\Bigr)_{\mathbb{C}}
-&&(\because \text{実数の有限和の分配則}) \\
+&&(\because \text{実数の有限和の分配律}) \\
 &= \Bigl(\frac{E_N(\tau) - E_N(-\tau)}{2}\Bigr)_{\mathbb{C}}
 &&(\because E_N\ \text{の定義})
 \end{aligned}`,
@@ -3331,7 +3331,7 @@ A
 &= \left(\exp\!\left(K_2\sum_{m=1}^{M_{\mathrm{col}}} \mu(m)\mu'(m)\right)\right)_{\mathbb{C}}
    &&(\because \blkref{def_transfer_matrix}) \\
 &= \left(\exp\!\left(\sum_{m=1}^{M_{\mathrm{col}}} K_2\,\bigl(\mu(m)\mu'(m)\bigr)\right)\right)_{\mathbb{C}}
-   &&(\because \mathbb{R}\text{ の分配則}) \\
+   &&(\because \mathbb{R}\text{ の分配律}) \\
 &= \left(\prod_{m=1}^{M_{\mathrm{col}}}\exp\!\left(K_2\,\bigl(\mu(m)\mu'(m)\bigr)\right)\right)_{\mathbb{C}}
    &&(\because \blkref{theorem_exp_product}\text{ を }n=1,\ K=\mathbb{R}\text{ で有限和へ繰り返し適用}) \\
 &= \prod_{m=1}^{M_{\mathrm{col}}}\left(\exp\!\left(K_2\,\bigl(\mu(m)\mu'(m)\bigr)\right)\right)_{\mathbb{C}}

@@ -82,7 +82,7 @@ theorem epsilon_action_eigenvalues_are_signs
     calc
       f = 1 *ᵥ f := honeMulVec.symm -- 本文: 直前に成分から示した `f=If`
       _ = (epsilon M * epsilon M) *ᵥ f := by rw [epsilon_mul_self] -- 本文: `If=epsilon^2f`
-      _ = epsilon M *ᵥ (epsilon M *ᵥ f) := hmulVec_assoc _ _ _ -- 本文: 直前に成分から示した結合則
+      _ = epsilon M *ᵥ (epsilon M *ᵥ f) := hmulVec_assoc _ _ _ -- 本文: 直前に成分から示した結合律
       _ = epsilon M *ᵥ (lambda • f) := by rw [heigen] -- 本文: 内側の固有値方程式を代入
       _ = lambda • (epsilon M *ᵥ f) := hmulVec_smul _ _ _ -- 本文: 直前に成分から示した複素線型性
       _ = lambda • (lambda • f) := by rw [heigen] -- 本文: 外側の固有値方程式を代入

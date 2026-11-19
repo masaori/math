@@ -398,7 +398,7 @@ theorem AMat_mulVec_eigen_pos :
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
       _ = -(g₁ * r) + a * (-(starRingEnd ℂ) a) := by rw [hb, mul_neg]           -- `b = -ā`
       _ = -(g₁ * r) - r ^ 2 := by rw [mul_neg, haa, ← sub_eq_add_neg]          -- `a ā = r^2`
-      _ = (g₁ + r) * (-r) := by ring                                          -- 分配則
+      _ = (g₁ + r) * (-r) := by ring                                          -- 分配律
       _ = ((g₁ + r) • ![-r, b]) 0 := by simp                                   -- `(v_+)_1 = -r`
   · -- 第 2 成分（`b = -ā` を使わない）
     calc (AMat K θ *ᵥ ![-r, b]) 1
@@ -407,7 +407,7 @@ theorem AMat_mulVec_eigen_pos :
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
       _ = b * r + g₁ * b := by rw [neg_mul_neg]                   -- ℂ の四則 `(-b)(-r) = b r`
       _ = r * b + g₁ * b := by rw [mul_comm b r]                  -- ℂ の乗法の可換律
-      _ = (r + g₁) * b := by rw [add_mul]                          -- 分配則で `b` を括り出す
+      _ = (r + g₁) * b := by rw [add_mul]                          -- 分配律で `b` を括り出す
       _ = (g₁ + r) * b := by rw [add_comm r g₁]                    -- ℂ の加法の交換律
       _ = ((g₁ + r) • ![-r, b]) 1 := by simp                       -- `λ_+ = g_1 + r`、`(v_+)_2 = b`
 
@@ -431,7 +431,7 @@ theorem AMat_mulVec_eigen_neg :
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
       _ = g₁ * r + a * (-(starRingEnd ℂ) a) := by rw [hb]                      -- `b = -ā`
       _ = g₁ * r - r ^ 2 := by rw [mul_neg, haa, ← sub_eq_add_neg]             -- `a ā = r^2`
-      _ = (g₁ - r) * r := by ring                                             -- 分配則
+      _ = (g₁ - r) * r := by ring                                             -- 分配律
       _ = ((g₁ - r) • ![r, b]) 0 := by simp                                    -- `(v_-)_1 = +r`
   · -- 第 2 成分（`b = -ā` を使わない）
     calc (AMat K θ *ᵥ ![r, b]) 1
@@ -440,7 +440,7 @@ theorem AMat_mulVec_eigen_neg :
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
       _ = b * (-r) + g₁ * b := by rw [neg_mul_comm]               -- ℂ の四則 `(-b) r = b (-r)`
       _ = (-r) * b + g₁ * b := by rw [mul_comm b (-r)]            -- ℂ の乗法の可換律
-      _ = (-r + g₁) * b := by rw [add_mul]                         -- 分配則で `b` を括り出す
+      _ = (-r + g₁) * b := by rw [add_mul]                         -- 分配律で `b` を括り出す
       _ = (g₁ - r) * b := by rw [add_comm, ← sub_eq_add_neg]       -- ℂ の加法の交換律（`g_1 + (-r) = g_1 - r`）
       _ = ((g₁ - r) • ![r, b]) 1 := by simp                        -- `λ_- = g_1 - r`、`(v_-)_2 = b`
 

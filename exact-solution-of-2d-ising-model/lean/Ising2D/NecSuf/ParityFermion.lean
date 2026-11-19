@@ -26,14 +26,14 @@
    `ε = σ^x_1⋯σ^x_M` であることも、`ψ̌` が `Ž, Y̌` の 1 次結合であることも、
    行列であることも、複素数であることも、テンソル冪であることも効いていない。
    **`ε` が `Q̌_ε` と可換であること**（同 (4) 後半）には、これに加えて、`1` が積の単位元であること、
-   分配則、差が和と符号反転で書けること（`x − y = x + (−y)`）、積が各因子について `𝕜` 倍と交換することが効く。
+   分配律、差が和と符号反転で書けること（`x − y = x + (−y)`）、積が各因子について `𝕜` 倍と交換することが効く。
    加法の零・結合律・可換性・逆元則、`Q̌_ε` の因子の係数 `ε_ν`・`1 − ε_ν` の関係、`n_μ` の冪等性は効かない。
 
 2. **符号の反転則**（人手証明 (2)）に効いているのは、次の 3 つだけである。
    - `Q_{T∪{μ}} (c_μ Q_T) = c_μ Q_T`（人手証明 Step 2）— これは
      **`n_μ c_μ = c_μ`** と **`n_ν`（`ν ≠ μ`）が `c_μ` と可換**なことから、
      環の計算だけで出る。`n_μ c_μ = c_μ` そのもの（`num_mul_cre'`）には、`a_μc_μ = 1 − n_μ` と `c_μc_μ = 0` に加えて、
-     積の結合律と右単位元、左分配則、`HasDistribNeg`、`x − y = x + (−y)`、`0x = 0`、`x − 0 = x` だけが効く。
+     積の結合律と右単位元、左分配律、`HasDistribNeg`、`x − y = x + (−y)`、`0x = 0`、`x − 0 = x` だけが効く。
    - `c_μ Q_T ≠ 0`（人手証明 Step 1）— これは **`a_μ c_μ = 1 - n_μ`** と
      `n_μ Q_T = 0`（`μ ∉ T`）から出る。**1 次元性は要らない。**
    - `ε (c_μ Q_T) = -η_T (c_μ Q_T)`（人手証明 Step 3）— 反交換関係だけ。
@@ -208,7 +208,7 @@ variable {𝕜 : Type*} {A : Type*} [MulOneClass A] [Add A] [LeftDistribClass A]
 
 人手の係数 `ε_ν`・`1 − ε_ν` を、ここでは無関係な二つのスカラー `c`・`d ∈ 𝕜` に置く。**`d = 1 − c` であることも、
 `c ∈ {0, 1}` であることも効いていない**（`𝕜` には構造を何も仮定しない）。効いているのは、`1` が積の単位元であること、
-差が和と符号反転で書けること、分配則、符号反転が積の因子から外へ出ること、積が各因子について `𝕜` 倍と交換することだけである。
+差が和と符号反転で書けること、分配律、符号反転が積の因子から外へ出ること、積が各因子について `𝕜` 倍と交換することだけである。
 `n` が個数演算子（冪等）であることは効いていない。 -/
 theorem commute_defFactor_of_commute' (hsub : ∀ x y : A, x - y = x + -y) {e n : A}
     (hn : e * n = n * e) (c d : 𝕜) :
@@ -242,7 +242,7 @@ variable {𝕜 : Type*} {A : Type*} [Monoid A] [Add A] [LeftDistribClass A] [Rig
 具体版 `Ising2D.CheckFermi.commute_epsilon_Qproj_succ` の `Q̌_ε` の 3 行（定義の行を除く 1 段、
 `matrix_commuting_with_each_factor_commutes_with_finite_product` にあたる `NecSuf.commute_finProdLeft`）と同じ並びである。
 各因子との可換性は `commute_defFactor_of_commute'` と前半 `commute_mul_of_anticomm'` から出す。
-有限積に効くのは積の結合律だけである。加法については分配則（`LeftDistribClass`・`RightDistribClass`）しか仮定しない（零・結合則・可換性は効かない）。 -/
+有限積に効くのは積の結合律だけである。加法については分配律（`LeftDistribClass`・`RightDistribClass`）しか仮定しない（零・結合律・可換性は効かない）。 -/
 theorem commute_parity_finProdLeft_defFactor (hsub : ∀ x y : A, x - y = x + -y) (r : ℕ)
     (c a : Fin (r + 1) → A) {e : A}
     (hc : ∀ ν, e * c ν = -(c ν * e)) (ha : ∀ ν, e * a ν = -(a ν * e)) (c' d' : Fin (r + 1) → 𝕜) :
@@ -261,8 +261,8 @@ variable {A : Type*} [Monoid A] [Add A] [Zero A] [LeftDistribClass A] [HasDistri
 具体版 `Ising2D.CheckFermi.nOp_mul_cre` と同じ行である）。
 
 効いているのは、`a_i c_i = 1 − n_i`（`check_number_operator_idempotent` (2)）と `c_i c_i = 0`（同 (1)）、積の結合律と単位元、
-左分配則、符号反転が右の因子から外へ出ること、差が和と符号反転で書けること（`hsub`）、`0x = 0`（`hz`）、`x − 0 = x`（`hs0`）だけである。
-加法の結合律・可換性・逆元則、右分配則、`x0 = 0`、`a_i` が `c_i` の随伴であること、反交換関係そのもの
+左分配律、符号反転が右の因子から外へ出ること、差が和と符号反転で書けること（`hsub`）、`0x = 0`（`hz`）、`x − 0 = x`（`hs0`）だけである。
+加法の結合律・可換性・逆元則、右分配律、`x0 = 0`、`a_i` が `c_i` の随伴であること、反交換関係そのもの
 （`a_i c_i = 1 − n_i` を導くのにだけ使う）は効いていない。 -/
 theorem num_mul_cre' (hsub : ∀ x y : A, x - y = x + -y) (hz : ∀ x : A, 0 * x = 0) (hs0 : ∀ x : A, x - 0 = x)
     (c a : ι → A) (i : ι) (hac : a i * c i = 1 - num c a i) (hsq : c i * c i = 0) :

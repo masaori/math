@@ -18,7 +18,7 @@
 - 証明に効くのは、乗法の結合律 `(ab)c = a(bc)`（仮定 `hassoc`）だけである。具体版はこれを ℝ の `mul_assoc` で受ける。
   乗法の可換律、単位元、逆元、和、順序は効いていない。
   `hassoc` は主張そのものから出てくるので削れない: 主張を因子が 3 つの場合（Lean の `m = 1`）に `A = ![a, b, c]` で当てると、
-  左辺は `finProdLeft 2 A = (ab)c`、右辺は `a(bc)` で、主張は結合則 `(ab)c = a(bc)` そのものになる。
+  左辺は `finProdLeft 2 A = (ab)c`、右辺は `a(bc)` で、主張は結合律 `(ab)c = a(bc)` そのものになる。
 -/
 import Ising2D.NecSuf.FiniteProductLeft
 

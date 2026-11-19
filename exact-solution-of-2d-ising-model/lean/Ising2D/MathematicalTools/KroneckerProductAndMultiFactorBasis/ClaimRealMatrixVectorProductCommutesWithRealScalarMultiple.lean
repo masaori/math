@@ -23,7 +23,7 @@
 必要十分版は `Ising2D.NecSuf.matrix_vector_product_commutes_with_scalar_multiple'`
 （`Ising2D/NecSuf/MatrixVectorProductCommutesWithScalarMultiple.lean`）、導出は同じフォルダの
 `ClaimRealMatrixVectorProductCommutesWithRealScalarMultipleFromNecSuf.lean` に置く。
-必要十分版も同じ 7 段の `calc` で、4 段目の交換則は仮定 `hc`、6 段目は `finite_sum_mul_left'` に当たる。
+必要十分版も同じ 7 段の `calc` で、4 段目の交換律は仮定 `hc`、6 段目は `finite_sum_mul_left'` に当たる。
 -/
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Mathlib.Data.Matrix.Mul

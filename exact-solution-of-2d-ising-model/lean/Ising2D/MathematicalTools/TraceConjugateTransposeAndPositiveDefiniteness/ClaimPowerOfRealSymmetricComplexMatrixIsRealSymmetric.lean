@@ -84,7 +84,7 @@ theorem matrix_pow_succ_transpose_apply_tensorPow (A : TensorPow M) (hAT : Aᵀ 
     _ = (A * A ^ p) k l := rfl                                              -- `mat_mult`
     _ = (A ^ 1 * A ^ p) k l := by rw [matrix_pow_one_eq_self_tensorPow A]   -- 準備の `A^1 = A`
     _ = (A ^ (1 + p)) k l := by rw [matrix_power_exponent_law A 1 p]        -- `matrix_power_exponent_law`（`p → 1`, `q → p`）
-    _ = (A ^ (p + 1)) k l := by rw [Nat.add_comm 1 p]                       -- `ℤ` の加法の可換則
+    _ = (A ^ (p + 1)) k l := by rw [Nat.add_comm 1 p]                       -- `ℤ` の加法の可換律
 
 /-- **人手 `power_of_real_symmetric_complex_matrix_is_real_symmetric`**: 実対称な `A` について、すべての `p` で `A^p` は実対称
 （`p` についての帰納法）。 -/

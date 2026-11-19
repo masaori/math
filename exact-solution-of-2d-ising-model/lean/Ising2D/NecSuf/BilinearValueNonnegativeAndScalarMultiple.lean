@@ -14,9 +14,9 @@
 | `def_real_bilinear_value`（最初と最後の段） | `dotProduct_mulVec_eq_double_sum'`（`NecSuf/BilinearValueAtMostValueAtAbsoluteVector.lean`） |
 | 非負の実数の積は非負（`mul_nonneg` を 2 回） | 仮定 `hmul` を 2 回 |
 | `finite_sum_of_nonnegative_reals_is_at_least_each_term`（各 `p` と外側の和） | `finite_sum_ge_term'`（`NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`） |
-| 仮定 `w_k = c u_k`、結合則 4 回、可換則 1 回 | 仮定 `hw`、`mul_assoc`、仮定 `hc` |
+| 仮定 `w_k = c u_k`、結合律 4 回、可換律 1 回 | 仮定 `hw`、`mul_assoc`、仮定 `hc` |
 | `finite_sum_of_real_scalar_multiples` を 4 回 | `finite_sum_mul_left'`（同上） |
-| 最後の結合則 `c(c(u^⊤Pu)) = (cc)(u^⊤Pu)` | `mul_assoc` |
+| 最後の結合律 `c(c(u^⊤Pu)) = (cc)(u^⊤Pu)` | `mul_assoc` |
 
 ## この主張に本質的に効いている構造
 
@@ -24,13 +24,13 @@
   非負の元どうしの積が非負であること（明示の仮定 `hmul`）だけ。積の非負性は主張そのものに要るので外せない。
   加法の逆元・乗法の単位元・可換性・反対称律・全順序は使わない。添字の型が空でないこと `[Nonempty n]` は、人手が `k → 1` と
   項を一つ選ぶ段のために要る（人手の `n ≥ 1`）。
-* 実数倍の主張: 乗法の結合律と、`c` が各 `u_kP_kl` と可換であること（明示の仮定 `hc`。人手の可換則の段 `s c = c s`（`s → u_kP_kl`）で使う元だけに限った）、
-  左分配則（`finite_sum_mul_left'`）と `c·0 = 0`。乗法の可換性一般・単位元・加法の逆元・順序は使わない。
-  `hc` を外すと人手の可換則の段が書けず、`w^⊤Pw` と `(cc)(u^⊤Pu)` は一般に一致しない（非可換な環で `c` が `u_kP_kl` と可換でない場合）。
+* 実数倍の主張: 乗法の結合律と、`c` が各 `u_kP_kl` と可換であること（明示の仮定 `hc`。人手の可換律の段 `s c = c s`（`s → u_kP_kl`）で使う元だけに限った）、
+  左分配律（`finite_sum_mul_left'`）と `c·0 = 0`。乗法の可換性一般・単位元・加法の逆元・順序は使わない。
+  `hc` を外すと人手の可換律の段が書けず、`w^⊤Pw` と `(cc)(u^⊤Pu)` は一般に一致しない（非可換な環で `c` が `u_kP_kl` と可換でない場合）。
 * 乗法の結合律は、実数倍の主張では人手の 4 か所の段そのものに要る。非負性の主張では、mathlib の `x ⬝ᵥ P *ᵥ y`（`Σ_k x_k (Σ_l P_kl y_l)`）を
   人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く段（`dotProduct_mulVec_eq_double_sum'`）だけで使う。結合的でない係数では人手の和と mathlib の値が別物になるので、
   具体版と同じ手順を保つ限り外せない。
-* どちらも、主張の文の `P *ᵥ y` そのものが mathlib で `NonUnitalNonAssocSemiring`（左右の分配則と `0·a = a·0 = 0`）を要求する。
+* どちらも、主張の文の `P *ᵥ y` そのものが mathlib で `NonUnitalNonAssocSemiring`（左右の分配律と `0·a = a·0 = 0`）を要求する。
   以上から、係数は非単位的な半環 `R` に置く。
 * 非負性の主張の `[AddRightMono R]` は、加法が可換なので `AddLeftMono` から出る（mathlib の instance）。既存の `finite_sum_ge_term_fin'` の
   仮定の並びに合わせて残している。

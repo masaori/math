@@ -121,7 +121,7 @@ theorem rayleigh_bounds_operator_norm_pow (h : IsPsdPair ip W) {c : R} (hc0 : 0 
   induction k generalizing x with
   | zero => simp
   | succ k ih =>
-      have happ : (W ^ (k + 1)) x = (W ^ k) (W x) := by                       -- `W^{k+1} = W^kW` と結合則
+      have happ : (W ^ (k + 1)) x = (W ^ k) (W x) := by                       -- `W^{k+1} = W^kW` と結合律
         rw [pow_succ]
         rfl
       rw [happ]

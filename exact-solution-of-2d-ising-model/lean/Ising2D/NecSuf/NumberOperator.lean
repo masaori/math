@@ -87,7 +87,7 @@ theorem num_mul_num (c a : ι → A) (i : ι) (htf : ∀ x : A, x + x = 0 → x 
   show c i * a i * (c i * a i) = c i * a i
   -- 具体版 `Ising2D.CheckFermiSetup.nOp_mul_self`（人手 `check_number_operator_idempotent` (3) の `ň_μň_μ` からの行）と同じ段。
   -- ただし冪を積へ運ぶ人手の先頭 4 行（具体版 `nOp_sq`）は無く、`num` の定義を開く行は、上の `show` で `num` を `c i * a i` と書いたので段として現れない（16 段）。
-  -- 効いているのは環の結合則・分配則・単位元・零元との積（`zero_mul`）・`-` と積の関係（`neg_mul`・`mul_neg`）・
+  -- 効いているのは環の結合律・分配律・単位元・零元との積（`zero_mul`）・`-` と積の関係（`neg_mul`・`mul_neg`）・
   -- `sub_eq_add_neg`・`sub_zero` と、仮定 `hac`・`hc2`・`ha2`（後の 2 つは 2-捩れが無いことから出す）だけ。
   calc c i * a i * (c i * a i)
       = c i * (a i * (c i * a i)) := mul_assoc _ _ _

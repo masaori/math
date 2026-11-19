@@ -4,7 +4,7 @@
 具体版 `ClaimRealTwiceQuotientByTwoIsOriginal.lean` の主張を、必要十分版
 `Ising2D/NecSuf/MulDivCancelOfRightInverse.lean` の `R := ℝ`、`t := 2` の特殊化として得る。
 商の定義の仮定には `def_real_quotient` を読む `div_eq_mul_inv` を、`b` と `2⁻¹` の可換性には `mul_comm` を、
-結合則には `mul_assoc` を、右逆元には `mul_inv_cancel₀ real_two_is_nonzero` を、左単位元には `one_mul` を渡す。
+結合律には `mul_assoc` を、右逆元には `mul_inv_cancel₀ real_two_is_nonzero` を、左単位元には `one_mul` を渡す。
 人手のラベルは `real_twice_quotient_by_two_is_original`。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwiceQuotientByTwoIsOriginal

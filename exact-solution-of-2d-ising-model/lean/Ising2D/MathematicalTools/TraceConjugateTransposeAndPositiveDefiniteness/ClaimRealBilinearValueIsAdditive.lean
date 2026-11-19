@@ -47,7 +47,7 @@ theorem real_bilinear_value_is_additive_in_right_vector (P : Matrix n n ℝ) (x 
           rw [hw l]                                                  -- 仮定 `w_l = y_l + z_l` を各項へ
     _ = ∑ k, ∑ l, (x k * P k l * y l + x k * P k l * z l) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-          mul_add (x k * P k l) (y l) (z l)                          -- ℝ の分配則 `a(b + c) = ab + ac` を各項へ
+          mul_add (x k * P k l) (y l) (z l)                          -- ℝ の分配律 `a(b + c) = ab + ac` を各項へ
     _ = ∑ k, ((∑ l, x k * P k l * y l) + ∑ l, x k * P k l * z l) :=
         Finset.sum_congr rfl fun k _ =>
           finite_sum_of_real_sums_fintype
@@ -72,10 +72,10 @@ theorem real_bilinear_value_is_additive_in_left_vector (P : Matrix n n ℝ) (x y
           rw [hw k]                                                  -- 仮定 `w_k = y_k + z_k` を各項へ
     _ = ∑ k, ∑ l, (y k * P k l + z k * P k l) * x l :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
-          rw [add_mul (y k) (z k) (P k l)]                           -- ℝ の分配則 `(b + c)a = ba + ca` を各項へ
+          rw [add_mul (y k) (z k) (P k l)]                           -- ℝ の分配律 `(b + c)a = ba + ca` を各項へ
     _ = ∑ k, ∑ l, (y k * P k l * x l + z k * P k l * x l) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-          add_mul (y k * P k l) (z k * P k l) (x l)                  -- ℝ の分配則 `(b + c)a = ba + ca` を各項へ
+          add_mul (y k * P k l) (z k * P k l) (x l)                  -- ℝ の分配律 `(b + c)a = ba + ca` を各項へ
     _ = ∑ k, ((∑ l, y k * P k l * x l) + ∑ l, z k * P k l * x l) :=
         Finset.sum_congr rfl fun k _ =>
           finite_sum_of_real_sums_fintype

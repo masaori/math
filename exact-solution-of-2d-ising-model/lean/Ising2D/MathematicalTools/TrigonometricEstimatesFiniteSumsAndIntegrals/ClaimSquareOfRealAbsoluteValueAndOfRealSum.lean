@@ -20,7 +20,7 @@
   mathlib の `abs_of_nonneg`・`abs_of_neg` で場合分けの形へ開いて読む。
 * 人手の二乗（`def_power_of_real_number` の冪）は Lean の `r ^ 2`（`Monoid.npow`）である。積の形へ開く段は
   `square_of_real_number_is_product`（`ClaimSquareOfRealNumberIsProduct.lean`）で引き、mathlib の `sq`・`neg_sq` は使わない。
-* 鎖の 4 行目「分配則による展開」と 6 行目「加法と減法の計算」は `ring` の 1 段ずつである（両辺は `a`、`b` の多項式として等しい）。
+* 鎖の 4 行目「分配律による展開」と 6 行目「加法と減法の計算」は `ring` の 1 段ずつである（両辺は `a`、`b` の多項式として等しい）。
   人手の展開は `ab` と `ba` を分けて書き、乗法の可換性を使わない（必要十分版が `Ring` で通ることがその検査である）。
 -/
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
@@ -54,7 +54,7 @@ theorem square_of_real_sum_is_at_most_twice_sum_of_squares (a b : ℝ) :
         rw [square_of_real_number_is_product (a + b),
           square_of_real_number_is_product (a - b)]                           -- `square_of_real_number_is_product`（`r → a + b`, `r → a - b`）を 2 か所へ同時適用
     _ = (a * a + a * b + b * a + b * b) + (a * a - a * b - b * a + b * b) := by
-        ring                                                                  -- 分配則による展開を 2 か所へ同時適用
+        ring                                                                  -- 分配律による展開を 2 か所へ同時適用
     _ = (a ^ 2 + a * b + b * a + b ^ 2) + (a ^ 2 - a * b - b * a + b ^ 2) := by
         rw [← square_of_real_number_is_product a,
           ← square_of_real_number_is_product b]                               -- `square_of_real_number_is_product`（`r → a`, `r → b`）を右辺から左辺へ 4 か所へ同時適用

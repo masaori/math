@@ -13,14 +13,14 @@
 | `finite_sum_of_complex_sums_succ`・`finite_sum_of_real_sums_succ`（`n + 1` 項の帰納法。`Σ_{j=1}^{1}` と `Σ_{j=1}^{n+1} = (Σ_{j=1}^{n}) + (n+1 項目)` の定義 → 帰納法の仮定 → 上の 5 段 → 定義） | `finite_sum_add_succ'`（同じ並び） |
 | `finite_sum_of_complex_sums`・`finite_sum_of_real_sums`（`n = 0` は空の和。人手には無い） | `finite_sum_add_fin'` |
 | `finite_sum_of_real_sums_fintype`（複素数の具体版の添字は `Fin n` なので無い。`TensorPow M` の系が縮める添字 `Conf M` のためにも使う） | `finite_sum_add'`（有限型 `κ` の上の和を `Fintype.equivFin` で `Fin (card κ)` の上の和へ番号付けし直してから `finite_sum_add_fin'` を使う） |
-| `mul_add_matrix_apply`（積の定義 → 和の定義 → 分配則を各項へ → 有限和を二つに分ける → 積の定義 → 和の定義） | `mul_add_matrix_apply'`（同じ並び） |
-| `add_mul_matrix_apply`（同上。分配則は右分配則） | `add_mul_matrix_apply'`（同じ並び） |
+| `mul_add_matrix_apply`（積の定義 → 和の定義 → 分配律を各項へ → 有限和を二つに分ける → 積の定義 → 和の定義） | `mul_add_matrix_apply'`（同じ並び） |
+| `add_mul_matrix_apply`（同上。分配律は右分配律） | `add_mul_matrix_apply'`（同じ並び） |
 
 ## 何が効いているか / 効いていないか
 
 - 有限和を二つに分ける段で効いているのは、**加法の結合律と交換律だけ**である（`AddCommMonoid`）。加法の零は `Finset.sum` の定義と
   `n = 0`（空の和。人手には無い）にだけ現れ、帰納法の段では効いていない。加法の逆元は効いていない。
-- 行列の積の分配で効いているのは、係数の**左分配則**（`A(B + C)`。`LeftDistribClass`）または**右分配則**（`(A + B)C`。`RightDistribClass`）
+- 行列の積の分配で効いているのは、係数の**左分配律**（`A(B + C)`。`LeftDistribClass`）または**右分配律**（`(A + B)C`。`RightDistribClass`）
   と、上の有限和の分配だけである。
 - **乗法の結合律・単位元・可換律は効いていない**（`Mul` だけを仮定した）。`0 * x = 0` も効いていない。
   複素数であること、体であることは効いていない。
@@ -88,7 +88,7 @@ theorem finite_sum_add' [AddCommMonoid R] {κ : Type*} [Fintype κ] (a b : κ �
 
 variable {ι κ μ : Type*}
 
-/-- **`(A(B + C))_{ik} = (AB + AC)_{ik}`**（具体版 `mul_add_matrix_apply`）。係数は `AddCommMonoid`・`Mul`・左分配則だけ。 -/
+/-- **`(A(B + C))_{ik} = (AB + AC)_{ik}`**（具体版 `mul_add_matrix_apply`）。係数は `AddCommMonoid`・`Mul`・左分配律だけ。 -/
 theorem mul_add_matrix_apply' [AddCommMonoid R] [Mul R] [LeftDistribClass R] [Fintype κ]
     (A : Matrix ι κ R) (B C : Matrix κ μ R) (i : ι) (k : μ) :
     (A * (B + C)) i k = (A * B + A * C) i k :=
@@ -96,7 +96,7 @@ theorem mul_add_matrix_apply' [AddCommMonoid R] [Mul R] [LeftDistribClass R] [Fi
       = ∑ j, A i j * (B + C) j k := rfl                                      -- 積の定義
     _ = ∑ j, A i j * (B j k + C j k) := rfl                                  -- 和の定義
     _ = ∑ j, (A i j * B j k + A i j * C j k) :=
-        Finset.sum_congr rfl fun _ _ => left_distrib _ _ _                    -- 左分配則を各項へ
+        Finset.sum_congr rfl fun _ _ => left_distrib _ _ _                    -- 左分配律を各項へ
     _ = (∑ j, A i j * B j k) + ∑ j, A i j * C j k := finite_sum_add' _ _     -- 有限和を二つに分ける
     _ = (A * B) i k + (A * C) i k := rfl                                     -- 積の定義を 2 か所
     _ = (A * B + A * C) i k := rfl                                           -- 和の定義
@@ -106,7 +106,7 @@ theorem mul_add_matrix' [AddCommMonoid R] [Mul R] [LeftDistribClass R] [Fintype 
     (A : Matrix ι κ R) (B C : Matrix κ μ R) : A * (B + C) = A * B + A * C :=
   Matrix.ext (mul_add_matrix_apply' A B C)   -- 全ての成分が一致する
 
-/-- **`((A + B)C)_{ik} = (AC + BC)_{ik}`**（具体版 `add_mul_matrix_apply`）。係数は `AddCommMonoid`・`Mul`・右分配則だけ。 -/
+/-- **`((A + B)C)_{ik} = (AC + BC)_{ik}`**（具体版 `add_mul_matrix_apply`）。係数は `AddCommMonoid`・`Mul`・右分配律だけ。 -/
 theorem add_mul_matrix_apply' [AddCommMonoid R] [Mul R] [RightDistribClass R] [Fintype κ]
     (A B : Matrix ι κ R) (C : Matrix κ μ R) (i : ι) (k : μ) :
     ((A + B) * C) i k = (A * C + B * C) i k :=
@@ -114,7 +114,7 @@ theorem add_mul_matrix_apply' [AddCommMonoid R] [Mul R] [RightDistribClass R] [F
       = ∑ j, (A + B) i j * C j k := rfl                                      -- 積の定義
     _ = ∑ j, (A i j + B i j) * C j k := rfl                                  -- 和の定義
     _ = ∑ j, (A i j * C j k + B i j * C j k) :=
-        Finset.sum_congr rfl fun _ _ => right_distrib _ _ _                   -- 右分配則を各項へ
+        Finset.sum_congr rfl fun _ _ => right_distrib _ _ _                   -- 右分配律を各項へ
     _ = (∑ j, A i j * C j k) + ∑ j, B i j * C j k := finite_sum_add' _ _     -- 有限和を二つに分ける
     _ = (A * C) i k + (B * C) i k := rfl                                     -- 積の定義を 2 か所
     _ = (A * C + B * C) i k := rfl                                           -- 和の定義

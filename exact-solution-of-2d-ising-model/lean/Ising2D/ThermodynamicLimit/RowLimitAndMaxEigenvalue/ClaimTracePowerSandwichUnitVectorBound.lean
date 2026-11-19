@@ -52,7 +52,7 @@
   `Finset.sum_sub_distrib`・`Finset.sum_add_distrib` で、`m_n ≤ T` の外側の和へ当てる行は `Finset.sum_mul` で書く（掛ける数が右にあるため）。
   `m_n ≤ T` の「有限和の加法の交換律・結合律」の行（人手に参照が無い）は `Finset.sum_add_distrib` で書く。
 - 本文の `W` への当てはめ（`*_physical`）は段ごとには置かない。主張 `trace_power_sandwich` の当てはめ `trace_power_sandwich_physical`（`PhysicalPartitionFunctionSandwich.lean`）が、ここの段をまとめて本文の `W` へ渡す。
-- 人手の `ℝ` の分配則・結合則・交換則と、同類項の加法は `ring` で、商と順序の行は mathlib の `div_le_div_of_nonneg_right`・
+- 人手の `ℝ` の分配律・結合律・交換律と、同類項の加法は `ring` で、商と順序の行は mathlib の `div_le_div_of_nonneg_right`・
   `mul_div_cancel_*`・`mul_le_mul_of_nonneg_left` で書く（人手のこれらの行には参照が無い）。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimMomentLogConvexity
@@ -302,7 +302,7 @@ theorem power_of_W_real_entry_bound (n : ℕ) (x : Conf M → ℝ) (k l : Conf M
             + (x k * x k) * ∑ i, ∑ j, el i * P i j * el j := by
           simp only [Finset.mul_sum, ← Finset.sum_sub_distrib, ← Finset.sum_add_distrib]
           exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => by ring
-                                                                            -- `ℝ` の分配則・交換則・結合則と、`finite_sum_of_real_scalar_multiples` を内側と外側の和へ
+                                                                            -- `ℝ` の分配律・交換律・結合律と、`finite_sum_of_real_scalar_multiples` を内側と外側の和へ
       _ = x l ^ 2 * ∑ i, ∑ j, ek i * P i j * ek j - x l * x k * ∑ i, ∑ j, ek i * P i j * el j
             - x k * x l * ∑ i, ∑ j, el i * P i j * ek j
             + x k ^ 2 * ∑ i, ∑ j, el i * P i j * el j := by

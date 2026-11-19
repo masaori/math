@@ -9,8 +9,8 @@
 | 人手 | Lean |
 | --- | --- |
 | 主張の前置き `a·b ≠ 0`（`real_product_of_nonzero_is_nonzero`） | `hab` |
-| 準備の 7 行の鎖（結合則 → 結合則を右辺から左辺へ → 可換則 → 結合則 → 逆元 `z z^{-1} = 1`（`z → b`） → 単位元 `x·1 = x` → 逆元（`z → a`）） | `prep` の `calc` の 7 段 |
-| 主鎖の 6 行（単位元 `1·x = x` を右辺から左辺へ → 逆元（`z → a·b`）を右辺から左辺へ → 可換則 → 結合則 → 準備 → 単位元 `x·1 = x`） | `real_product_of_inverses_is_inverse_of_product` の `calc` の 6 段 |
+| 準備の 7 行の鎖（結合律 → 結合律を右辺から左辺へ → 可換律 → 結合律 → 逆元 `z z^{-1} = 1`（`z → b`） → 単位元 `x·1 = x` → 逆元（`z → a`）） | `prep` の `calc` の 7 段 |
+| 主鎖の 6 行（単位元 `1·x = x` を右辺から左辺へ → 逆元（`z → a·b`）を右辺から左辺へ → 可換律 → 結合律 → 準備 → 単位元 `x·1 = x`） | `real_product_of_inverses_is_inverse_of_product` の `calc` の 6 段 |
 
 - 人手の乗法の逆元 `z^{-1}`（`def_real_quotient`、`z z^{-1} = 1_ℝ`）は mathlib の `z⁻¹` と `mul_inv_cancel₀` で読む。
 - mathlib の `mul_inv`・`mul_inv_rev` は使わない（人手の鎖をそのまま書くため）。

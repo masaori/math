@@ -16,9 +16,9 @@
   （`def_finite_product_of_real_numbers`）は `ClaimRealExpOfFiniteSum.lean` と同じく `Finset.prod` で、定義の 2 つの式は
   `Fin.prod_univ_one`・`Fin.prod_univ_castSucc` で読む。
 * `real_sum_over_binary_words_distributes_in_left_factor` の帰納法の 2 つの鎖（`r = 1` の 3 行、`r → r + 1` の 4 行）は
-  `binaryWordRealSum_mul` の 2 つの節の `calc` と 1 対 1 である。ℝ の分配則 `(a + b)c = ac + bc` は mathlib の `add_mul` である。
+  `binaryWordRealSum_mul` の 2 つの節の `calc` と 1 対 1 である。ℝ の分配律 `(a + b)c = ac + bc` は mathlib の `add_mul` である。
 * `expansion_of_finite_product_of_two_term_sums_of_real_numbers` の帰納法の 2 つの鎖（`r = 1` の 4 行、`r → r + 1` の 7 行）は
-  `expansion_of_finite_product_of_two_term_sums_of_real` の 2 つの節の `calc` と 1 対 1 である。ℝ の分配則 `a(b + c) = ab + ac` は
+  `expansion_of_finite_product_of_two_term_sums_of_real` の 2 つの節の `calc` と 1 対 1 である。ℝ の分配律 `a(b + c) = ab + ac` は
   mathlib の `mul_add` である。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionSumOverBinaryWords
@@ -36,7 +36,7 @@ theorem binaryWordRealSum_mul :
         = (x (fun _ => 1) + x (fun _ => 0)) * c := by rw [binaryWordRealSum_zero]
                                                         -- `def_sum_over_binary_words_of_real_numbers`
       _ = x (fun _ => 1) * c + x (fun _ => 0) * c := add_mul _ _ _
-                                                        -- ℝ の分配則 `(a + b)c = ac + bc`
+                                                        -- ℝ の分配律 `(a + b)c = ac + bc`
       _ = binaryWordRealSum 0 (fun ε => x ε * c) := by rw [binaryWordRealSum_zero]
                                                         -- `def_sum_over_binary_words_of_real_numbers` を右辺から左辺へ
   | r + 1, x, c =>
@@ -49,7 +49,7 @@ theorem binaryWordRealSum_mul :
           binaryWordRealSum_mul r _ c                   -- 帰納法の仮定（`x_{ε'} → x_{(ε',1)} + x_{(ε',0)}`）
       _ = binaryWordRealSum r
             (fun ε' => x (Fin.snoc (α := fun _ => Fin 2) ε' 1) * c + x (Fin.snoc (α := fun _ => Fin 2) ε' 0) * c) := by
-          congr 1; funext ε'; exact add_mul _ _ _       -- ℝ の分配則 `(a + b)c = ac + bc` を各項へ同時に
+          congr 1; funext ε'; exact add_mul _ _ _       -- ℝ の分配律 `(a + b)c = ac + bc` を各項へ同時に
       _ = binaryWordRealSum (r + 1) (fun ε => x ε * c) := by rw [binaryWordRealSum_succ]
                                                         -- `def_sum_over_binary_words_of_real_numbers` を右辺から左辺へ
 
@@ -82,7 +82,7 @@ theorem expansion_of_finite_product_of_two_term_sums_of_real :
           binaryWordRealSum_mul r _ _                   -- `real_sum_over_binary_words_distributes_in_left_factor`
       _ = binaryWordRealSum r (fun ε' => (∏ j, a (Fin.castSucc j) (ε' j)) * a (Fin.last (r + 1)) 1
             + (∏ j, a (Fin.castSucc j) (ε' j)) * a (Fin.last (r + 1)) 0) := by
-          congr 1; funext ε'; exact mul_add _ _ _       -- ℝ の分配則 `a(b + c) = ab + ac` を各項へ同時に
+          congr 1; funext ε'; exact mul_add _ _ _       -- ℝ の分配律 `a(b + c) = ab + ac` を各項へ同時に
       _ = binaryWordRealSum r (fun ε' =>
             (∏ j, a (Fin.castSucc j) (Fin.snoc (α := fun _ => Fin 2) ε' 1 (Fin.castSucc j)))
               * a (Fin.last (r + 1)) (Fin.snoc (α := fun _ => Fin 2) ε' 1 (Fin.last (r + 1)))

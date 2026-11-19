@@ -24,13 +24,13 @@ open Matrix Filter Topology
 
 attribute [local instance] Matrix.frobeniusNormedAddCommGroup Matrix.frobeniusNormSMulClass
 
-/-- `matrix_mul_right_tendsto` を `NecSuf.mul_right_tendsto'`（`hdist` は行列の右分配則、`hmul` は Frobenius ノルムの劣乗法性）の特殊化として得る。 -/
+/-- `matrix_mul_right_tendsto` を `NecSuf.mul_right_tendsto'`（`hdist` は行列の右分配律、`hmul` は Frobenius ノルムの劣乗法性）の特殊化として得る。 -/
 theorem matrix_mul_right_tendsto_of_necSuf {n : ℕ} (B : Matrix (Fin n) (Fin n) ℂ) (A : ℕ → Matrix (Fin n) (Fin n) ℂ)
     (Alim : Matrix (Fin n) (Fin n) ℂ) (h : Tendsto (fun N => ‖A N - Alim‖) atTop (𝓝 0)) :
     Tendsto (fun N => ‖A N * B - Alim * B‖) atTop (𝓝 0) :=
   NecSuf.mul_right_tendsto' norm_nonneg (fun b x y => (Matrix.sub_mul x y b).symm) Matrix.frobenius_norm_mul B A Alim h
 
-/-- `matrix_mul_left_tendsto` を `NecSuf.mul_left_tendsto'`（`hdist` は行列の左分配則、`hmul` は Frobenius ノルムの劣乗法性）の特殊化として得る。 -/
+/-- `matrix_mul_left_tendsto` を `NecSuf.mul_left_tendsto'`（`hdist` は行列の左分配律、`hmul` は Frobenius ノルムの劣乗法性）の特殊化として得る。 -/
 theorem matrix_mul_left_tendsto_of_necSuf {n : ℕ} (B : Matrix (Fin n) (Fin n) ℂ) (A : ℕ → Matrix (Fin n) (Fin n) ℂ)
     (Alim : Matrix (Fin n) (Fin n) ℂ) (h : Tendsto (fun N => ‖A N - Alim‖) atTop (𝓝 0)) :
     Tendsto (fun N => ‖B * A N - B * Alim‖) atTop (𝓝 0) :=

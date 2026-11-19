@@ -58,7 +58,7 @@ theorem cosh_add_formula (x y : ℝ) :
           -- `E_x E_{−y}` と `E_{−x} E_y` を足して引く
     _ = ((Real.exp x + Real.exp (-x)) * (Real.exp y + Real.exp (-y))
           + (Real.exp x - Real.exp (-x)) * (Real.exp y - Real.exp (-y))) / 4 := by ring
-          -- 分配則
+          -- 分配律
     _ = (Real.exp x + Real.exp (-x)) / 2 * ((Real.exp y + Real.exp (-y)) / 2)
           + (Real.exp x - Real.exp (-x)) / 2 * ((Real.exp y - Real.exp (-y)) / 2) := by ring
           -- 分数の和と積
@@ -108,7 +108,7 @@ theorem sinh_add_formula (x y : ℝ) :
           -- `E_x E_{−y}` と `E_{−x} E_y` を足して引く
     _ = ((Real.exp x - Real.exp (-x)) * (Real.exp y + Real.exp (-y))
           + (Real.exp x + Real.exp (-x)) * (Real.exp y - Real.exp (-y))) / 4 := by ring
-          -- 分配則
+          -- 分配律
     _ = (Real.exp x - Real.exp (-x)) / 2 * ((Real.exp y + Real.exp (-y)) / 2)
           + (Real.exp x + Real.exp (-x)) / 2 * ((Real.exp y - Real.exp (-y)) / 2) := by ring
           -- 分数の和と積

@@ -360,7 +360,7 @@ export default defineBlocks([
 &&(\because\ E_{x}E_{-y}\ \text{と}\ E_{-x}E_{y}\ \text{を足して引く})\\
 &= \frac{\left(E_{x}+E_{-x}\right)\left(E_{y}+E_{-y}\right)
         +\left(E_{x}-E_{-x}\right)\left(E_{y}-E_{-y}\right)}{4}
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{E_{x}+E_{-x}}{2}\cdot\frac{E_{y}+E_{-y}}{2}
  + \frac{E_{x}-E_{-x}}{2}\cdot\frac{E_{y}-E_{-y}}{2}
 &&(\because\ \text{分数の和と積})\\
@@ -444,7 +444,7 @@ export default defineBlocks([
 &&(\because\ E_{x}E_{-y}\ \text{と}\ E_{-x}E_{y}\ \text{を足して引く})\\
 &= \frac{\left(E_{x}-E_{-x}\right)\left(E_{y}+E_{-y}\right)
         +\left(E_{x}+E_{-x}\right)\left(E_{y}-E_{-y}\right)}{4}
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{E_{x}-E_{-x}}{2}\cdot\frac{E_{y}+E_{-y}}{2}
  + \frac{E_{x}+E_{-x}}{2}\cdot\frac{E_{y}-E_{-y}}{2}
 &&(\because\ \text{分数の和と積})\\
@@ -937,7 +937,7 @@ s = 0
       displayMath(String.raw`\begin{aligned}
 \left(y+s\right)\left(s-y\right)
 &= ys - y^2 + s^2 - sy
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= s^2 - y^2
 &&(\because\ ys = sy\ \text{と項の並べ替え})\\
 &= (y^2+1) - y^2
@@ -1611,7 +1611,7 @@ t
 &< -\pi/2 + \pi/2
 &&\bigl(\because\ \text{上の}\ 0 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow c + x < c + y\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to \pi/2,\ c \to -\pi/2\bigr)\\
 &= \pi/2 + (-\pi/2)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ a + b = b + a\ \text{（}\blkref{set_and_algebra_notation}\text{）の}\ a \to -\pi/2,\ b \to \pi/2\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換律}\ a + b = b + a\ \text{（}\blkref{set_and_algebra_notation}\text{）の}\ a \to -\pi/2,\ b \to \pi/2\bigr)\\
 &= 0
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to \pi/2)\bigr)
 \end{aligned}`),
@@ -2473,7 +2473,7 @@ c_0
 &\geq \frac{\theta}{2} - \frac{1}{6}\left(\frac{\theta}{2}\right)^3 + 0
 &&(\because\ \blkref{sine_cubic_lower_bound}\ \text{を}\ t = \tfrac{\theta}{2}\ \text{に})\\
 &= \frac{\theta}{2}\left(1 - \frac{1}{6}\left(\frac{\theta}{2}\right)^2\right)
-&&(\because\ \mathbb{R}\ \text{の分配則})\\
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
 &\geq \frac{\theta}{2}\left(1 - \frac{1}{6}\cdot\frac{\pi^2}{4}\right)
 &&(\because\ \text{上の}\ 1 - \tfrac{1}{6}(\tfrac{\theta}{2})^2 \geq 1 - \tfrac{1}{6}\cdot\tfrac{\pi^2}{4}\ \text{の両辺に}\ \tfrac{\theta}{2} \geq 0\ \text{を掛ける})\\
 &= \frac{\theta}{2}\left(1 - \frac{\pi^2}{24}\right)
@@ -3237,7 +3237,7 @@ y + s
 &= \log\left(2y + 2y\cdot\frac{1}{4y^2}\right)
 &&(\because\ \tfrac{1}{2y} = 2y\cdot\tfrac{1}{4y^2}\text{。}\mathbb{R}\ \text{の四則})\\
 &= \log\left(2y\left(1 + \frac{1}{4y^2}\right)\right)
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \log(2y) + \log\left(1 + \frac{1}{4y^2}\right)
 &&(\because\ \blkref{real_log_of_product})\\
 &\leq \log(2y) + \frac{1}{4y^2}
@@ -3455,7 +3455,7 @@ F(0)
 &= 2\left(\log\frac{\pi}{\delta} + \frac{\delta^2}{\pi^2}\right)
 &&(\because\ 2y = \tfrac{\pi}{\delta},\ \tfrac{1}{4y^2} = \tfrac{\delta^2}{\pi^2})\\
 &= 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2}
-&&(\because\ \text{分配則})
+&&(\because\ \text{分配律})
 \end{aligned}`),
     ],
     conversion: {
@@ -3575,7 +3575,7 @@ G'(\theta)
 &= \frac{\delta^2 r(\theta)^2 - \delta^2\,\dfrac{a^2\theta^2}{4}}{\delta^4\,r(\theta)^3}
 &&(\because\ \text{分子と分母に}\ r(\theta)\ \text{を掛ける})\\
 &= \frac{\delta^2\left(r(\theta)^2 - \dfrac{a^2\theta^2}{4}\right)}{\delta^4\,r(\theta)^3}
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{\delta^2\cdot\delta^2}{\delta^4\,r(\theta)^3}
 &&(\because\ r(\theta)^2 = w(\theta) = \delta^2 + \tfrac{a^2\theta^2}{4})\\
 &= \frac{1}{r(\theta)^2\,r(\theta)}
@@ -4068,13 +4068,13 @@ D_1D_2\left(D_1+D_2\right)
 &= \frac{\left(D_1 - D_2\right)\left(D_1+D_2\right)}{D_1D_2\left(D_1+D_2\right)}
 &&(\because\ \text{分子と分母に}\ D_1+D_2 > 0\ \text{を掛ける})\\
 &= \frac{D_1^2 - D_2^2}{D_1D_2\left(D_1+D_2\right)}
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{\left(\delta^2+p^2\right) - \left(\delta^2+s^2\right)}{D_1D_2\left(D_1+D_2\right)}
 &&(\because\ \blkref{definition_of_sqrt_r_positive})\\
 &= \frac{p^2 - s^2}{D_1D_2\left(D_1+D_2\right)}
 &&(\because\ \mathbb{R}\ \text{の四則})\\
 &= \frac{\left(p-s\right)\left(p+s\right)}{D_1D_2\left(D_1+D_2\right)}
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &\leq \frac{\frac{p^3}{6}\left(p+s\right)}{D_1D_2\left(D_1+D_2\right)}
 &&(\because\ p - s \leq \tfrac{p^3}{6}\ \text{の両辺に}\ \tfrac{p+s}{D_1D_2(D_1+D_2)} \geq 0\ \text{を掛ける})\\
 &\leq \frac{\frac{p^3}{6}\cdot 2p}{D_1D_2\left(D_1+D_2\right)}

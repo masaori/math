@@ -1,5 +1,5 @@
 /-
-# 行列の 0 倍は零行列・行列の和の可換則（**具体版**）
+# 行列の 0 倍は零行列・行列の和の可換律（**具体版**）
 
 対応する人手証明のラベル: `zero_scalar_multiple_is_zero_matrix`, `matrix_sum_is_commutative`
 （`structured-latex/content/002_linear_space_general.ts` の `linear_space_general_claim_zero_scalar_multiple_is_zero_matrix`,

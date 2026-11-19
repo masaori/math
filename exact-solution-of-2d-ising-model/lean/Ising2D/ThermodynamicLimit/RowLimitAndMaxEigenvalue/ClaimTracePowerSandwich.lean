@@ -36,7 +36,7 @@
   `T := Σ_k ((W_ℝ)^n)_kk` は `∑ k, (W_ℝ ^ n) k k` である。
 - 人手の `e_1` は Lean の `Pi.single i 1`（`i` は値がすべて `0` の配位）である。
 - 人手の実数の冪の定義 `def_power_of_real_number` の `a^{m+1} := a^ma` は mathlib の `pow_succ`、`a^0 := 1` は `pow_zero` で書く
-  （Lean の `ℝ` の冪は mathlib の `Monoid.npow` で、この二つはその公理 `Monoid.npow_succ`・`Monoid.npow_zero` である）。人手の「`ℝ` の分配則」「乗法の交換律・結合律」
+  （Lean の `ℝ` の冪は mathlib の `Monoid.npow` で、この二つはその公理 `Monoid.npow_succ`・`Monoid.npow_zero` である）。人手の「`ℝ` の分配律」「乗法の交換律・結合律」
   「`ℝ` の加法」の行は `ring` で、`(n c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}` は `mul_inv`、`c^{n-1}(c^{n-1})^{-1} = 1` は `mul_inv_cancel₀`、
   正の数を掛けても順序を保つ行は `mul_lt_mul_of_pos_*`・`mul_le_mul_of_nonneg_left`・`mul_le_mul_of_nonneg_right` で、移項は `linarith` で、
   `0 < n^{-1} ≤ 1` と `c > 0` から `cn^{-1} ≤ c` の行は `inv_le_one_of_one_le₀` と `nlinarith` で、`ℤ` の `n = (n−1)+1`・`p = (p+1)−1` は
@@ -85,7 +85,7 @@ theorem power_comparison_of_positive_reals {r s : ℝ} (hr : 0 < r) (hs : 0 < s)
         rw [mul_comm, ← pow_succ, Nat.sub_add_cancel hp]
       calc s ^ (p + 1) - r ^ (p + 1)
           = s * (s ^ p - r ^ p) + r ^ p * (s - r) := by
-            rw [pow_succ, pow_succ]; ring                                   -- `def_power_of_real_number` で `s^{p+1} = s^ps`, `r^{p+1} = r^pr` と `ℝ` の分配則・乗法の交換律（`−sr^p + r^ps = 0`）
+            rw [pow_succ, pow_succ]; ring                                   -- `def_power_of_real_number` で `s^{p+1} = s^ps`, `r^{p+1} = r^pr` と `ℝ` の分配律・乗法の交換律（`−sr^p + r^ps = 0`）
         _ ≤ s * ((p : ℝ) * s ^ (p - 1) * (s - r)) + r ^ p * (s - r) := by
             have := mul_le_mul_of_nonneg_left hb hs.le
             linarith                                                        -- (b) と `s > 0`
@@ -95,7 +95,7 @@ theorem power_comparison_of_positive_reals {r s : ℝ} (hr : 0 < r) (hs : 0 < s)
         _ = (p : ℝ) * s ^ p * (s - r) + s ^ p * (s - r) := by
             rw [← hss]; ring                                                -- `s s^{p−1} = s^p`（`def_power_of_real_number`）と乗法の交換律・結合律
         _ = ((p + 1 : ℕ) : ℝ) * s ^ (p + 1 - 1) * (s - r) := by
-            rw [Nat.add_sub_cancel]; push_cast; ring                        -- `ℝ` の分配則と `ℤ` で `p = (p+1)−1`
+            rw [Nat.add_sub_cancel]; push_cast; ring                        -- `ℝ` の分配律と `ℤ` で `p = (p+1)−1`
 
 variable {M : ℕ}
 

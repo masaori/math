@@ -999,7 +999,7 @@ w
         math(String.raw`\mathbb{R}`),
         " を使うのは、この章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の分配則・加法の交換律と有限和だけを使い、極限・完備性を使わない。",
+        " の分配律・加法の交換律と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -1017,7 +1017,7 @@ w
 &= \sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{kl}\,\bigl(u_l + (\varepsilon_{\mathbb{R}}u)_l\bigr)
   &&\bigl(\because\ v\ \text{の定義}\ (k \to l)\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{l=1}^{d} \bigl((\varepsilon_{\mathbb{R}})_{kl}\,u_l + (\varepsilon_{\mathbb{R}})_{kl}\,(\varepsilon_{\mathbb{R}}u)_l\bigr)
-  &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ a(b + c) = ab + ac\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
+  &&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ a(b + c) = ab + ac\ \text{を}\ d\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{kl}\,u_l + \sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{kl}\,(\varepsilon_{\mathbb{R}}u)_l
   &&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to d,\ j \to l,\ a_l \to (\varepsilon_{\mathbb{R}})_{kl}\,u_l,\ b_l \to (\varepsilon_{\mathbb{R}})_{kl}\,(\varepsilon_{\mathbb{R}}u)_l)\bigr)\\
 &= (\varepsilon_{\mathbb{R}}u)_k + \bigl(\varepsilon_{\mathbb{R}}(\varepsilon_{\mathbb{R}}u)\bigr)_k
@@ -2994,7 +2994,7 @@ v^\top W_{\mathbb{R}}v
 &= 1\,A + 1\,A
   &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\,x = x\ (x \to A)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ \text{を 2 か所へ同時に右辺から左辺へ}\bigr)\\
 &= (1 + 1)\,A
-  &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)\,c = a\,c + b\,c\ (a, b \to 1,\ c \to A)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ \text{を右辺から左辺へ}\bigr)\\
+  &&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ (a + b)\,c = a\,c + b\,c\ (a, b \to 1,\ c \to A)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ \text{を右辺から左辺へ}\bigr)\\
 &= 2\,A
   &&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -5219,7 +5219,7 @@ t^{-1}
 &= R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\cdots R_1^{(\epsilon_1)}
 &&\left(\because\ \check n_\mu^*=\check n_\mu\text{、}I^*=I\text{ と、}\blkref{star_preserves_norm_and_limits}\text{ (1) の線型性による }(I-\check n_\mu)^*=I^*-\check n_\mu^*\right)\\
 &= R_1^{(\epsilon_1)}\cdots R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}
-&&\left(\because\ \text{因子の可換性。}\blkref{check_number_operators_commute}\text{ (2) の }\check n_\mu\check n_\nu=\check n_\nu\check n_\mu\text{ と、分配則による }(I-\check n_\mu)\check n_\nu=\check n_\nu(I-\check n_\mu)\text{ など}\right)\\
+&&\left(\because\ \text{因子の可換性。}\blkref{check_number_operators_commute}\text{ (2) の }\check n_\mu\check n_\nu=\check n_\nu\check n_\mu\text{ と、分配律による }(I-\check n_\mu)\check n_\nu=\check n_\nu(I-\check n_\mu)\text{ など}\right)\\
 &= \check{Q}_\epsilon
 &&\left(\because\ \blkref{check_joint_eigenspace_decomposition}\right)
 \end{aligned}`,
@@ -5250,7 +5250,7 @@ x^*\check{Q}_\epsilon x
 &=\sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}\overline{x_k}\left(\sum_{m=1}^{2^{M_{\mathrm{col}}}}\overline{\left(\check{Q}_\epsilon\right)_{mk}}\left(\check{Q}_\epsilon\right)_{ml}\right)x_l
 &&\left(\because\ \blkref{mat_mult}\text{ と }\blkref{def_hermitian_positive_definite}\right)\\
 &=\sum_{m=1}^{2^{M_{\mathrm{col}}}}\left(\sum_{k=1}^{2^{M_{\mathrm{col}}}}\overline{\left(\check{Q}_\epsilon\right)_{mk}}\,\overline{x_k}\right)\left(\sum_{l=1}^{2^{M_{\mathrm{col}}}}\left(\check{Q}_\epsilon\right)_{ml}x_l\right)
-&&\left(\because\ \text{分配則と有限和の並べ替え（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+&&\left(\because\ \text{分配律と有限和の並べ替え（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &=\sum_{m=1}^{2^{M_{\mathrm{col}}}}\left(\sum_{k=1}^{2^{M_{\mathrm{col}}}}\overline{\left(\check{Q}_\epsilon\right)_{mk}x_k}\right)\left(\sum_{l=1}^{2^{M_{\mathrm{col}}}}\left(\check{Q}_\epsilon\right)_{ml}x_l\right)
 &&\left(\because\ \blkref{complex_conjugate_of_product}\text{ を各項へ}\right)\\
 &=\sum_{m=1}^{2^{M_{\mathrm{col}}}}\overline{\left(\sum_{k=1}^{2^{M_{\mathrm{col}}}}\left(\check{Q}_\epsilon\right)_{mk}x_k\right)}\left(\sum_{l=1}^{2^{M_{\mathrm{col}}}}\left(\check{Q}_\epsilon\right)_{ml}x_l\right)
@@ -5423,7 +5423,7 @@ u^*Au
 &= \sum_{k=1}^{n}\sum_{l=1}^{n}\overline{u_k}\left(A_{kl}\,u_l\right)
  &&\left(\because\ \mathbb{C}\ \text{の積の結合律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\sum_{l=1}^{n}A_{kl}\,u_l
- &&\left(\because\ \mathbb{C}\ \text{の分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+ &&\left(\because\ \mathbb{C}\ \text{の分配律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\,(Au)_k
  &&\left(\because\ \blkref{mat_mult}\right)
 \end{aligned}`,
@@ -5587,11 +5587,11 @@ V^{(+)}u
 &= \sum_{k=1}^{n}\overline{u_k}\sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}(w_\epsilon)_k
  &&\left(\because\ \text{直前の成分の式}\right)\\
 &= \sum_{k=1}^{n}\sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
- &&\left(\because\ \mathbb{C}\ \text{の分配則・交換則・結合則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+ &&\left(\because\ \mathbb{C}\ \text{の分配律・交換律・結合律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{\epsilon}\sum_{k=1}^{n}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
  &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合律・交換律。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\sum_{k=1}^{n}\overline{u_k}\,(w_\epsilon)_k
- &&\left(\because\ \mathbb{C}\ \text{の分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+ &&\left(\because\ \mathbb{C}\ \text{の分配律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\,u^*\check{Q}_\epsilon u
  &&\left(\because\ \text{準備 3（}A \to \check{Q}_\epsilon\text{）と}\ w_\epsilon = \check{Q}_\epsilon u\right)\\
 &= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\|w_\epsilon\|^2\right)_{\mathbb{C}}
@@ -5617,7 +5617,7 @@ V^{(+)}u
 &= \sum_{k=1}^{n}\sum_{\epsilon}\overline{u_k}\,(w_\epsilon)_k
  &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合律・交換律。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\sum_{\epsilon}(w_\epsilon)_k
- &&\left(\because\ \mathbb{C}\ \text{の分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+ &&\left(\because\ \mathbb{C}\ \text{の分配律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\,u_k
  &&\left(\because\ u_k = \textstyle\sum_\epsilon (w_\epsilon)_k\right)\\
 &= \left(\|u\|^2\right)_{\mathbb{C}}
@@ -5659,7 +5659,7 @@ x^\top W_{\mathbb{R}}x
 &\leq \sum_{\epsilon}\check\Lambda_{\max}\,\|w_\epsilon\|^2
  &&\left(\because\ \text{各項の不等式を}\ \blkref{def_sum_over_binary_words_of_real_numbers}\ \text{の和で足し合わせる}\right)\\
 &= \check\Lambda_{\max}\sum_{\epsilon}\|w_\epsilon\|^2
- &&\left(\because\ \mathbb{R}\ \text{の分配則を}\ \blkref{def_sum_over_binary_words_of_real_numbers}\ \text{の各段の和へ}\right)\\
+ &&\left(\because\ \mathbb{R}\ \text{の分配律を}\ \blkref{def_sum_over_binary_words_of_real_numbers}\ \text{の各段の和へ}\right)\\
 &= \check\Lambda_{\max}\,\|x\|^2
  &&\left(\because\ \text{直前の}\ \mathbb{R}\ \text{の等式}\right)\\
 &= \check\Lambda_{\max}
@@ -5830,7 +5830,7 @@ x^\top W_{\mathbb{R}}x
 &= (-i)\left(\overline{q_k} - q_k\right)
  &&\left(\because\ \overline{\overline{c}} = c\right)\\
 &= i\left(q_k - \overline{q_k}\right)
- &&\left(\because\ \mathbb{C}\ \text{の分配則と符号（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+ &&\left(\because\ \mathbb{C}\ \text{の分配律と符号（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= p'_k
  &&\left(\because\ p'\ \text{の置き方}\right)
 \end{aligned}`,
@@ -5845,11 +5845,11 @@ x^\top W_{\mathbb{R}}x
 p &= q + zq
  &&\left(\because\ \overline{q} = zq\right)\\
 &= (1_{\mathbb{C}} + z)q
- &&\left(\because\ \blkref{scalar_multiple_by_one}\ \text{と}\ \blkref{def_matrix_sum}\ \text{・}\ \blkref{def_matrix_scalar_multiple}\ \text{の成分での分配則}\right)\\
+ &&\left(\because\ \blkref{scalar_multiple_by_one}\ \text{と}\ \blkref{def_matrix_sum}\ \text{・}\ \blkref{def_matrix_scalar_multiple}\ \text{の成分での分配律}\right)\\
 p' &= i\left(q - zq\right)
  &&\left(\because\ \overline{q} = zq\right)\\
 &= i\left((1_{\mathbb{C}} - z)q\right)
- &&\left(\because\ \blkref{scalar_multiple_by_one}\ \text{と}\ \blkref{def_matrix_difference}\ \text{・}\ \blkref{def_matrix_scalar_multiple}\ \text{の成分での分配則}\right)\\
+ &&\left(\because\ \blkref{scalar_multiple_by_one}\ \text{と}\ \blkref{def_matrix_difference}\ \text{・}\ \blkref{def_matrix_scalar_multiple}\ \text{の成分での分配律}\right)\\
 &= \left(i(1_{\mathbb{C}} - z)\right)q
  &&\left(\because\ \blkref{scalar_multiple_is_associative}\right)
 \end{aligned}`,
@@ -5985,7 +5985,7 @@ p' &= i\left(q - zq\right)
 &= \sum_{k=1}^{n}\overline{(u_0)_k}\left(\left(\check\Lambda_{\max}\right)_{\mathbb{C}}(u_0)_k\right)
  &&\left(\because\ V^{(+)}u_0 = \left(\check\Lambda_{\max}\right)_{\mathbb{C}}u_0\ \text{と}\ \blkref{def_matrix_scalar_multiple}\right)\\
 &= \left(\check\Lambda_{\max}\right)_{\mathbb{C}}\sum_{k=1}^{n}\overline{(u_0)_k}\,(u_0)_k
- &&\left(\because\ \mathbb{C}\ \text{の交換則・結合則・分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+ &&\left(\because\ \mathbb{C}\ \text{の交換律・結合律・分配律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \left(\check\Lambda_{\max}\right)_{\mathbb{C}}\left(\|x_0\|^2\right)_{\mathbb{C}}
  &&\left(\because\ \text{準備 4（}u_0 = \iota^{n}(x_0)\text{）}\right)\\
 &= \left(\check\Lambda_{\max}\,\|x_0\|^2\right)_{\mathbb{C}}

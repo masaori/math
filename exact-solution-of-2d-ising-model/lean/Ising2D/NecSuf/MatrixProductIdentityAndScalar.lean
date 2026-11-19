@@ -11,8 +11,8 @@
 | --- | --- |
 | `identity_matrix_mul_apply`（積の定義 → 単位行列の成分 `δ_{ij}` → `j = i` の項を分ける → `δ` の値 → `1·x = x` → `0·x = 0` → `0` の有限和と `x + 0 = x`） | `one_mul_matrix_apply` |
 | `mul_identity_matrix_apply`（積の定義 → `δ_{jk}` → `j = k` の項を分ける → `δ` の値 → `x·1 = x` → `x·0 = 0` → `0` の有限和と `x + 0 = x`） | `mul_one_matrix_apply` |
-| `smul_mul_matrix_apply`（積の定義 → スカラー倍の定義 → 結合則 → 左分配則 → 積の定義 → スカラー倍の定義） | `smul_mul_matrix_apply'` |
-| `mul_smul_matrix_apply`（積の定義 → スカラー倍の定義 → 結合則 → 交換則 → 結合則 → 左分配則 → 積の定義 → スカラー倍の定義） | `mul_smul_matrix_apply'` |
+| `smul_mul_matrix_apply`（積の定義 → スカラー倍の定義 → 結合律 → 左分配律 → 積の定義 → スカラー倍の定義） | `smul_mul_matrix_apply'` |
+| `mul_smul_matrix_apply`（積の定義 → スカラー倍の定義 → 結合律 → 交換律 → 結合律 → 左分配律 → 積の定義 → スカラー倍の定義） | `mul_smul_matrix_apply'` |
 
 ## 何が効いているか / 効いていないか
 
@@ -22,7 +22,7 @@
 - `I A = A` に効くのは、`1·x = x`・`0·x = 0`・`x + 0 = x` と有限和の取り出しだけである（`NonAssocSemiring`）。
 - `A I = A` に効くのは、`x·1 = x`・`x·0 = 0`・`x + 0 = x` と有限和の取り出しだけである（`NonAssocSemiring`）。
   乗法の可換律は効いていない（右から `0` を掛けた項は `x·0 = 0` でそのまま消える）。
-- `(aA)B = a(AB)` に効くのは、乗法の結合律と左分配則である（`NonUnitalSemiring`）。乗法の可換律は効いていない。
+- `(aA)B = a(AB)` に効くのは、乗法の結合律と左分配律である（`NonUnitalSemiring`）。乗法の可換律は効いていない。
 - `A(aB) = a(AB)` には、**乗法の可換律が効いている**（`NonUnitalCommSemiring`）: `A_{ij}(aB_{jk})` の `a` を `A_{ij}` の左へ
   移す段がある。外せないことは、添字 `Unit`（`1×1`）・`B = 1` に制限すると乗法の可換律そのものが出ることで確かめる
   （`mul_comm_of_mul_smul_matrix`）。
@@ -56,7 +56,7 @@ theorem one_mul_matrix_apply {R : Type*} [NonAssocSemiring R] [Fintype ι] [Deci
     _ = A i k + ∑ j ∈ Finset.univ.erase i, (0 : R) := by simp only [zero_mul]       -- `0·x = 0` を各項へ
     _ = A i k := by rw [Finset.sum_const_zero, add_zero]                            -- `0` は加法の単位元
 
-/-- **`(A I)_{ik} = A_{ik}`**（具体版 `mul_identity_matrix_apply`）。係数は `NonAssocSemiring`（可換則は使わない）。 -/
+/-- **`(A I)_{ik} = A_{ik}`**（具体版 `mul_identity_matrix_apply`）。係数は `NonAssocSemiring`（可換律は使わない）。 -/
 theorem mul_one_matrix_apply {R : Type*} [NonAssocSemiring R] [Fintype κ] [DecidableEq κ]
     (A : Matrix ι κ R) (i : ι) (k : κ) : (A * (1 : Matrix κ κ R)) i k = A i k :=
   calc (A * (1 : Matrix κ κ R)) i k
@@ -74,14 +74,14 @@ theorem mul_one_matrix_apply {R : Type*} [NonAssocSemiring R] [Fintype κ] [Deci
     _ = A i k + ∑ j ∈ Finset.univ.erase k, (0 : R) := by simp only [mul_zero]       -- `x·0 = 0` を各項へ
     _ = A i k := by rw [Finset.sum_const_zero, add_zero]                            -- `0` は加法の単位元
 
-/-- **`((aA)B)_{ik} = (a(AB))_{ik}`**（具体版 `smul_mul_matrix_apply`）。係数は `NonUnitalSemiring`（可換則は使わない）。 -/
+/-- **`((aA)B)_{ik} = (a(AB))_{ik}`**（具体版 `smul_mul_matrix_apply`）。係数は `NonUnitalSemiring`（可換律は使わない）。 -/
 theorem smul_mul_matrix_apply' {R : Type*} [NonUnitalSemiring R] [Fintype κ] (a : R)
     (A : Matrix ι κ R) (B : Matrix κ μ R) (i : ι) (k : μ) : ((a • A) * B) i k = (a • (A * B)) i k :=
   calc ((a • A) * B) i k
       = ∑ j, (a • A) i j * B j k := rfl                        -- 積の定義
     _ = ∑ j, (a * A i j) * B j k := rfl                        -- スカラー倍の定義
     _ = ∑ j, a * (A i j * B j k) := by simp only [mul_assoc]   -- 乗法の結合律
-    _ = a * ∑ j, A i j * B j k := (Finset.mul_sum _ _ _).symm  -- 左分配則
+    _ = a * ∑ j, A i j * B j k := (Finset.mul_sum _ _ _).symm  -- 左分配律
     _ = a * (A * B) i k := rfl                                 -- 積の定義
     _ = (a • (A * B)) i k := rfl                               -- スカラー倍の定義
 
@@ -94,11 +94,11 @@ theorem mul_smul_matrix_apply' {R : Type*} [NonUnitalCommSemiring R] [Fintype κ
     _ = ∑ j, (A i j * a) * B j k := by simp only [mul_assoc]   -- 乗法の結合律
     _ = ∑ j, (a * A i j) * B j k := by simp only [mul_comm _ a] -- 乗法の可換律
     _ = ∑ j, a * (A i j * B j k) := by simp only [mul_assoc]   -- 乗法の結合律
-    _ = a * ∑ j, A i j * B j k := (Finset.mul_sum _ _ _).symm  -- 左分配則
+    _ = a * ∑ j, A i j * B j k := (Finset.mul_sum _ _ _).symm  -- 左分配律
     _ = a * (A * B) i k := rfl                                 -- 積の定義
     _ = (a • (A * B)) i k := rfl                               -- スカラー倍の定義
 
-/-- **可換則が外せないことの確認**: `A(aB) = a(AB)` が添字 `Unit` の `1×1` 行列で成り立てば、係数の乗法は可換である。 -/
+/-- **可換律が外せないことの確認**: `A(aB) = a(AB)` が添字 `Unit` の `1×1` 行列で成り立てば、係数の乗法は可換である。 -/
 theorem mul_comm_of_mul_smul_matrix {R : Type*} [Semiring R]
     (h : ∀ (a : R) (A B : Matrix Unit Unit R), A * (a • B) = a • (A * B)) (a x : R) : x * a = a * x := by
   have := congrFun (congrFun (h a (fun _ _ => x) 1) ()) ()

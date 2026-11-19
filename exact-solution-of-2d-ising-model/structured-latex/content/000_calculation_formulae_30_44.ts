@@ -1112,7 +1112,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &= \left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)\right)+\left(2\pi+(-2\pi)\right)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ t + (-t) = 0\ (t \to 2\pi)\ \text{を右辺から左辺へ}\bigr)\\
 &= \left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)\right)+\left((-2\pi)+2\pi\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ (x \to 2\pi,\ y \to -2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換律}\ x+y = y+x\ (x \to 2\pi,\ y \to -2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left(\left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)\right)+(-2\pi)\right)+2\pi
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ (x \to \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2),\ y \to -2\pi,\ t \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)-2\pi\right)+2\pi
@@ -1365,7 +1365,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
 &= 1\cdot \arg^{[0,2\pi)}(z)+1\cdot \arg^{[0,2\pi)}(z)
 &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
 &= (1+1)\cdot \arg^{[0,2\pi)}(z)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x+y)t = xt+yt\ (x \to 1,\ y \to 1,\ t \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ (x+y)t = xt+yt\ (x \to 1,\ y \to 1,\ t \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= 2\arg^{[0,2\pi)}(z)
 &&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
@@ -1419,7 +1419,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
 &= 1\cdot \arg^{[0,2\pi)}(z)+1\cdot \arg^{[0,2\pi)}(z)-2\pi
 &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
 &= (1+1)\cdot \arg^{[0,2\pi)}(z)-2\pi
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x+y)t = xt+yt\ (x \to 1,\ y \to 1,\ t \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ (x+y)t = xt+yt\ (x \to 1,\ y \to 1,\ t \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= 2\arg^{[0,2\pi)}(z)-2\pi
 &&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
@@ -2276,9 +2276,9 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \tfrac{1}{2}\!\left((\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)\right)
 &&(\because\ \text{角度切断の一意性を}\ \theta_1,\theta_2\ \text{へ当てた。}\blkref{angle_section_existence_uniqueness})\\
 &= \tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2)\pi\right)
-&&(\because\ \text{実数の加法の交換律・結合律と分配則})\\
+&&(\because\ \text{実数の加法の交換律・結合律と分配律})\\
 &= \tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi
-&&(\because\ \text{実数の分配則})
+&&(\because\ \text{実数の分配律})
 \end{aligned}`),
       paragraph([
         "また、",
@@ -2288,7 +2288,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 \Longrightarrow\ &0\leq(\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)<4\pi
 &&(\because\ \text{二つの不等式の辺々を加えた})\\
 \Longrightarrow\ &0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<4\pi
-&&(\because\ \mathbb{R}\ \text{の加法の交換律・結合律と分配則})
+&&(\because\ \mathbb{R}\ \text{の加法の交換律・結合律と分配律})
 \end{aligned}`),
       paragraph(["であるから、ここで場合を 2 つに分ける。"]),
       paragraph([
@@ -2300,7 +2300,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2)\pi\right)
 &&(\because\ \text{角度切断の一意性を}\ \theta=\theta_1+\theta_2,\ n=n_1+n_2\ \text{へ当てた。いまの場合分けがその範囲の条件である。}\blkref{angle_section_existence_uniqueness})\\
 &= \tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi
-&&(\because\ \text{実数の分配則})
+&&(\because\ \text{実数の分配律})
 \end{aligned}`),
       paragraph([
         "であり、右辺に現れる角と一致する。したがって左辺と右辺の 2 つの成分がそれぞれ一致し、",
@@ -2318,7 +2318,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2+1)\pi\right)
 &&(\because\ \text{角度切断の一意性を}\ \theta=\theta_1+\theta_2,\ n=n_1+n_2+1\ \text{へ当てた。}\blkref{angle_section_existence_uniqueness})\\
 &= \tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi-\pi
-&&(\because\ \text{実数の分配則})
+&&(\because\ \text{実数の分配律})
 \end{aligned}`),
       paragraph([
         "である。したがって左辺の 2 つの成分は",
@@ -2365,7 +2365,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= (\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)
 &&(\because\ \text{角度切断の一意性。}\blkref{angle_section_existence_uniqueness})\\
 &= \theta_1+\theta_2-2(n_1+n_2)\pi
-&&(\because\ \text{実数の加法の交換律・結合律と分配則})
+&&(\because\ \text{実数の加法の交換律・結合律と分配律})
 \end{aligned}`),
       paragraph(["なので、2 つの場合分けの条件は主張の 2 つの場合の条件と一致する。"]),
     ],

@@ -11,7 +11,7 @@
 
 ## 何が効いているか / 効いていないか
 
-- 効いているのは、行列の積が左の因子の和に分配すること（`add_mul_matrix'`。係数の**右分配則** `RightDistribClass` と、積の中の
+- 効いているのは、行列の積が左の因子の和に分配すること（`add_mul_matrix'`。係数の**右分配律** `RightDistribClass` と、積の中の
   有限和を二つに分けるための加法の結合律・交換律）と、有限和の定義（左から足す）だけである。
 - `AddCommMonoid` は、積の中の有限和（`Matrix` の積の定義）と、mathlib の `Finset.sum` を人手の左から足す有限和の定義の代わりに
   使うために要る（`Fin.sum_univ_one`・`Fin.sum_univ_castSucc` の証明は加法の結合律・交換律に依る）。

@@ -3971,7 +3971,7 @@ r^2
 &= (a + b)(a + b) + (a - b)(a - b)
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to a + b,\ r \to a - b)\ \text{を 2 か所へ同時適用}\bigr)\\
 &= \bigl(aa + ab + ba + bb\bigr) + \bigl(aa - ab - ba + bb\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則による展開を 2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律による展開を 2 か所へ同時適用}\bigr)\\
 &= \bigl(a^2 + ab + ba + b^2\bigr) + \bigl(a^2 - ab - ba + b^2\bigr)
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to a,\ r \to b)\ \text{を右辺から左辺へ 4 か所へ同時適用}\bigr)\\
 &= 2a^2 + 2b^2

@@ -859,7 +859,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
 &\le2\pi(t-n)
 &&(\because\ \text{準備の第三の}\ n\le t\ \text{より}\ 0\le t-n\ \text{、および準備の}\ 0<2\pi)\\
 &=2\pi t-2n\pi
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &=\theta-2n\pi
 &&(\because\ t\ \text{の定め方より}\ \theta=2\pi t)
 \end{aligned}`),
@@ -871,7 +871,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
 &=2\pi t-2n\pi
 &&(\because\ t\ \text{の定め方より}\ \theta=2\pi t)\\
 &=2\pi(t-n)
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &<2\pi\cdot1
 &&(\because\ \text{準備の第四の}\ t<n+1\ \text{より}\ t-n<1\ \text{、および準備の}\ 0<2\pi)\\
 &=2\pi

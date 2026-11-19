@@ -11,19 +11,19 @@
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `matrix_mul_right_tendsto`（右分配則 → 劣乗法性 → 定数倍の極限と挟み撃ち） | `mul_right_tendsto'`（同じ並び） |
-| `matrix_mul_left_tendsto`（左分配則 → 劣乗法性 → 定数倍の極限と挟み撃ち） | `mul_left_tendsto'`（同じ並び） |
+| `matrix_mul_right_tendsto`（右分配律 → 劣乗法性 → 定数倍の極限と挟み撃ち） | `mul_right_tendsto'`（同じ並び） |
+| `matrix_mul_left_tendsto`（左分配律 → 劣乗法性 → 定数倍の極限と挟み撃ち） | `mul_left_tendsto'`（同じ並び） |
 | `smul_matrix_tendsto`（係数の差のくくり出し → `‖cA‖ = |c|‖A‖` → 定数倍の極限） | `smul_tendsto'`（同じ並び） |
 
 ## 何が効いているか / 効いていないか
 
-- 左の因子が動く乗算の連続性（`mul_right_tendsto'`）で効いているのは、差に対する右分配則 `xb − yb = (x − y)b`（仮定 `hdist`）、
-  劣乗法性（仮定 `hmul`）、ノルムの非負性（仮定 `hnn`）だけである。左分配則は効いていない。右分配則と左分配則の役割が入れ替わるほかは、効いていない構造は下の右の因子の場合と同じである。
-- 右の因子が動く乗算の連続性（`mul_left_tendsto'`）で効いているのは、差に対する左分配則 `bx − by = b(x − y)`（仮定 `hdist`）、
+- 左の因子が動く乗算の連続性（`mul_right_tendsto'`）で効いているのは、差に対する右分配律 `xb − yb = (x − y)b`（仮定 `hdist`）、
+  劣乗法性（仮定 `hmul`）、ノルムの非負性（仮定 `hnn`）だけである。左分配律は効いていない。右分配律と左分配律の役割が入れ替わるほかは、効いていない構造は下の右の因子の場合と同じである。
+- 右の因子が動く乗算の連続性（`mul_left_tendsto'`）で効いているのは、差に対する左分配律 `bx − by = b(x − y)`（仮定 `hdist`）、
   劣乗法性 `‖ab‖ ≤ ‖a‖‖b‖`（仮定 `hmul`）、ノルムが非負であること（仮定 `hnn`。挟み撃ちに要る）だけである。
-  元の集合には `Norm`・`Sub`・`Mul` だけを置いた。**加法そのもの（結合則・交換則・零・逆元）、三角不等式、距離の構造、
-  乗法の結合律・単位元・可換律、右分配則、行列であること、係数が `ℂ` であることは効いていない。**
-  分配則と劣乗法性は `NonUnitalSeminormedRing` の一部だが、そのクラスはこれらの効いていない構造を連れてくるので、型クラスにせず仮定にした。
+  元の集合には `Norm`・`Sub`・`Mul` だけを置いた。**加法そのもの（結合律・交換律・零・逆元）、三角不等式、距離の構造、
+  乗法の結合律・単位元・可換律、右分配律、行列であること、係数が `ℂ` であることは効いていない。**
+  分配律と劣乗法性は `NonUnitalSeminormedRing` の一部だが、そのクラスはこれらの効いていない構造を連れてくるので、型クラスにせず仮定にした。
 - スカラー倍の収束で効いているのは、係数の差のくくり出し `ax − bx = (a − b)x`（仮定 `hsub`）と、
   `‖ax‖ = ‖a‖‖x‖`（仮定 `hnorm`）だけである。係数の集合にも元の集合にも `Norm`・`Sub` だけを置いた。
   **ノルムの非負性（等号の列なので挟み撃ちが要らない）、加法、三角不等式、加群の公理、係数の乗法は効いていない。**
@@ -47,7 +47,7 @@ theorem mul_right_tendsto' {R : Type*} [Norm R] [Sub R] [Mul R]
     Tendsto (fun N => ‖A N * B - Alim * B‖) atTop (𝓝 0) := by
   have hle : ∀ N, ‖A N * B - Alim * B‖ ≤ ‖A N - Alim‖ * ‖B‖ := fun N =>
     calc ‖A N * B - Alim * B‖
-        = ‖(A N - Alim) * B‖ := by rw [hdist]           -- 右分配則
+        = ‖(A N - Alim) * B‖ := by rw [hdist]           -- 右分配律
       _ ≤ ‖A N - Alim‖ * ‖B‖ := hmul _ _                -- 劣乗法性
   -- 収束する実数列に定数を掛けた列の極限
   have h0 : Tendsto (fun N => ‖A N - Alim‖ * ‖B‖) atTop (𝓝 0) := by
@@ -63,7 +63,7 @@ theorem mul_left_tendsto' {R : Type*} [Norm R] [Sub R] [Mul R]
     Tendsto (fun N => ‖B * A N - B * Alim‖) atTop (𝓝 0) := by
   have hle : ∀ N, ‖B * A N - B * Alim‖ ≤ ‖B‖ * ‖A N - Alim‖ := fun N =>
     calc ‖B * A N - B * Alim‖
-        = ‖B * (A N - Alim)‖ := by rw [hdist]           -- 左分配則
+        = ‖B * (A N - Alim)‖ := by rw [hdist]           -- 左分配律
       _ ≤ ‖B‖ * ‖A N - Alim‖ := hmul _ _                -- 劣乗法性
   -- 収束する実数列に定数を掛けた列の極限
   have h0 : Tendsto (fun N => ‖B‖ * ‖A N - Alim‖) atTop (𝓝 0) := by

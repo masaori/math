@@ -19,17 +19,17 @@
   `f(0) = 1`（`hzero`）は外すと通らない: 恒等的に `0` の写像は和を積へ送るが `f(x) > 0` を満たさない。
 - 定義域について効くのは、加法の逆元 `x + (-x) = 0`（Step 1）と、`x` が `y + y` の形に書けること（Step 2 の `x/2`）だけである。
   後者は仮定 `hhalf` として残した。外すと通らない: `ℤ` 上の `f(n) = (-1)^n` は和を積へ送り `f(0) = 1` だが `f(1) = -1 < 0` で、
-  `1` は `ℤ` の中で `y + y` の形に書けない。加法の可換則は効いていない（`AddGroup`）。
+  `1` は `ℤ` の中で `y + y` の形に書けない。加法の可換律は効いていない（`AddGroup`）。
   定義域が ℝ であること、割り算ができること（体であること）は効いていない。
 - 値域について効くのは、`0·y = 0` と `1 ≠ 0`（Step 1）、平方が非負であること（Step 2）、`≤` と `≠` から `<`（結び）である。
   補題ごとに型クラスを分けた。`f(x)f(-x) = 1` は値域の積と `1` だけ、`f(x) ≠ 0` はそれに `0·y = 0`（`MulZeroOneClass`）と
   `1 ≠ 0`（`Nontrivial`）を足したものだけを使う。`Nontrivial` は外すと通らない: 零環では `0 = 1` なので、恒等的に `0` の写像が
   `hadd`・`hzero` を満たし、`f(x) ≠ 0` が成り立たない。
   `f(x) ≠ 0` の鎖の最後の段 `0·f(-x) = 0` は、ここでは `MulZeroOneClass`（`MulZeroClass` の公理 `zero_mul`）で受ける。
-  具体版 `real_exp_ne_zero` はこの段を `real_zero_times_is_zero`（その `x` に `exp(-x)` を入れる。加法の単位元・逆元・結合則と
-  右からの分配則から示した主張。必要十分版は `NecSuf/ZeroMulOfRightDistrib.lean` の `zero_mul_of_rightDistrib`）で引く。
+  具体版 `real_exp_ne_zero` はこの段を `real_zero_times_is_zero`（その `x` に `exp(-x)` を入れる。加法の単位元・逆元・結合律と
+  右からの分配律から示した主張。必要十分版は `NecSuf/ZeroMulOfRightDistrib.lean` の `zero_mul_of_rightDistrib`）で引く。
   この鎖に効くのは `0·f(-x) = 0` という等式だけで、それをどう示すかは効かない
-  （具体版が `real_zero_times_is_zero` を通して使う値域の加法の単位元・逆元・結合則と右からの分配則は、どれも効いていない）。
+  （具体版が `real_zero_times_is_zero` を通して使う値域の加法の単位元・逆元・結合律と右からの分配律は、どれも効いていない）。
   `MulZeroOneClass` が連れてくるもののうち、`a·0 = 0`（`mul_zero`）と `a·1 = a`（`mul_one`）は使われていない。
   `1·a = a` と、`Nontrivial` が与える異なる 2 元での `0·b = 0` は、`one_ne_zero` が要る `1 ≠ 0` を mathlib のインスタンス `NeZero.one` が
   `Nontrivial` から導くのに使われている（上の「`1 ≠ 0`（`Nontrivial`）」はこの意味である）。

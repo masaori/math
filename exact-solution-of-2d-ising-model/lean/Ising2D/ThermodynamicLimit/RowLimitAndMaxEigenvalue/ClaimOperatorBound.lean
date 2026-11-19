@@ -105,7 +105,7 @@ theorem vecNorm_mulVec_sq_eq_bilinear (W : Matrix n n ℝ) (x : n → ℝ) :
     _ = ∑ k, y k * y k := by simp only [sq]                                   -- 3 行目: `y_k ∈ ℝ` なので `|y_k|^2 = y_ky_k`
     _ = ∑ k, y k * ∑ l, W k l * x l := by rw [hy]; rfl                        -- 4 行目: `y = W_ℝx` の成分（`def_real_matrix_vector_product`）
     _ = ∑ k, ∑ l, y k * W k l * x l := by
-        simp only [Finset.mul_sum, mul_assoc]                                 -- 5 行目: 分配則と乗法の結合律
+        simp only [Finset.mul_sum, mul_assoc]                                 -- 5 行目: 分配律と乗法の結合律
     _ = y ⬝ᵥ W *ᵥ x := (dotProduct_mulVec_eq_real_bilinear_value y x W).symm  -- 6 行目: `def_real_bilinear_value`（`x → y`、`y → x`）
 
 /-- **`‖W_ℝx‖ ≤ c(M)‖x‖`**（人手証明 `rayleigh_bounds_operator_norm` の前半。鎖を人手と同じ順に書いた具体版）。 -/

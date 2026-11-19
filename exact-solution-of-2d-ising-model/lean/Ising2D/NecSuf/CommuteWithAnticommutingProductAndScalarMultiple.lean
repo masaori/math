@@ -9,7 +9,7 @@
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `product_of_anticommuting_matrices_commutes` の 8 行（結合則・仮定・符号反転を左因子から外へ・結合則・仮定・符号反転を右因子から外へ・二重の符号反転・結合則） | `commute_mul_of_anticomm'` の 8 段（同じ並び） |
+| `product_of_anticommuting_matrices_commutes` の 8 行（結合律・仮定・符号反転を左因子から外へ・結合律・仮定・符号反転を右因子から外へ・二重の符号反転・結合律） | `commute_mul_of_anticomm'` の 8 段（同じ並び） |
 | `commuting_with_scalar_multiple` の 3 行（スカラー倍を右因子から外へ・仮定・スカラー倍を左因子へ） | `commute_smul_of_commute'` の 3 段（同じ並び） |
 
 ## 何が効いているか / 効いていないか

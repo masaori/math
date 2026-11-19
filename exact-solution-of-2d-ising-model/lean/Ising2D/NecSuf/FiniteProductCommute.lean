@@ -20,7 +20,7 @@
 - 残した可換性の仮定は外せない。一つ目は `r = 1` で `X A_1 ≠ A_1 X` なら主張そのものが外れる。二つ目は `r = 2` で
   `A_2 B_1 ≠ B_1 A_2` となる不定元の行列なら `(A_1A_2)(B_1B_2) ≠ (A_1B_1)(A_2B_2)` となる（SageMath の
   `product_of_two_finite_products_of_matrices` の否定コントロール）。
-- 結合則は、帰納法の段で括弧を付け替える行（`(∏A)A_{r+1}` の中へ `X` や `∏B` を入れる行）に使う。
+- 結合律は、帰納法の段で括弧を付け替える行（`(∏A)A_{r+1}` の中へ `X` や `∏B` を入れる行）に使う。
 -/
 import Ising2D.NecSuf.FiniteProductLeft
 
@@ -39,15 +39,15 @@ theorem commute_finProdLeft {R : Type*} [Semigroup R] :
         = X * (finProdLeft r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1))) := by
           rw [finProdLeft_succ]                                                  -- 定義
       _ = (X * finProdLeft r (fun j => A (Fin.castSucc j))) * A (Fin.last (r + 1)) :=
-          (mul_assoc _ _ _).symm                                                 -- 結合則を右辺から左辺へ
+          (mul_assoc _ _ _).symm                                                 -- 結合律を右辺から左辺へ
       _ = (finProdLeft r (fun j => A (Fin.castSucc j)) * X) * A (Fin.last (r + 1)) := by
           rw [commute_finProdLeft r X _ (fun j => h (Fin.castSucc j))]           -- 帰納法の仮定
       _ = finProdLeft r (fun j => A (Fin.castSucc j)) * (X * A (Fin.last (r + 1))) :=
-          mul_assoc _ _ _                                                        -- 結合則
+          mul_assoc _ _ _                                                        -- 結合律
       _ = finProdLeft r (fun j => A (Fin.castSucc j)) * (A (Fin.last (r + 1)) * X) := by
           rw [h (Fin.last (r + 1))]                                              -- 仮定（`j → r + 1`）
       _ = (finProdLeft r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1))) * X :=
-          (mul_assoc _ _ _).symm                                                 -- 結合則を右辺から左辺へ
+          (mul_assoc _ _ _).symm                                                 -- 結合律を右辺から左辺へ
       _ = finProdLeft (r + 1) A * X := by rw [finProdLeft_succ]                  -- 定義を右辺から左辺へ
 
 /-- **`product_of_two_finite_products_of_matrices`** の必要十分版: `j < i` で `A_i B_j = B_j A_i` なら `(∏A_j)(∏B_j) = ∏(A_jB_j)`。 -/
@@ -65,23 +65,23 @@ theorem finProdLeft_mul_finProdLeft {R : Type*} [Semigroup R] :
           rw [finProdLeft_succ, finProdLeft_succ]                                -- 定義を 2 か所
       _ = ((finProdLeft r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1)))
             * finProdLeft r (fun j => B (Fin.castSucc j))) * B (Fin.last (r + 1)) :=
-          (mul_assoc _ _ _).symm                                                 -- 結合則を右辺から左辺へ
+          (mul_assoc _ _ _).symm                                                 -- 結合律を右辺から左辺へ
       _ = (finProdLeft r (fun j => A (Fin.castSucc j))
             * (A (Fin.last (r + 1)) * finProdLeft r (fun j => B (Fin.castSucc j)))) * B (Fin.last (r + 1)) := by
-          rw [mul_assoc (finProdLeft r (fun j => A (Fin.castSucc j)))]           -- 結合則
+          rw [mul_assoc (finProdLeft r (fun j => A (Fin.castSucc j)))]           -- 結合律
       _ = (finProdLeft r (fun j => A (Fin.castSucc j))
             * (finProdLeft r (fun j => B (Fin.castSucc j)) * A (Fin.last (r + 1)))) * B (Fin.last (r + 1)) := by
           rw [commute_finProdLeft r (A (Fin.last (r + 1))) (fun j => B (Fin.castSucc j))
             (fun j => h _ _ (Fin.castSucc_lt_last j))]                           -- 一つ目の主張（`X → A_{r+1}`、`A_j → B_j`）
       _ = ((finProdLeft r (fun j => A (Fin.castSucc j)) * finProdLeft r (fun j => B (Fin.castSucc j)))
             * A (Fin.last (r + 1))) * B (Fin.last (r + 1)) := by
-          rw [← mul_assoc (finProdLeft r (fun j => A (Fin.castSucc j)))]         -- 結合則を右辺から左辺へ
+          rw [← mul_assoc (finProdLeft r (fun j => A (Fin.castSucc j)))]         -- 結合律を右辺から左辺へ
       _ = (finProdLeft r (fun j => A (Fin.castSucc j) * B (Fin.castSucc j)) * A (Fin.last (r + 1)))
             * B (Fin.last (r + 1)) := by
           rw [finProdLeft_mul_finProdLeft r (fun j => A (Fin.castSucc j)) (fun j => B (Fin.castSucc j))
             (fun i j hij => h _ _ (Fin.castSucc_lt_castSucc_iff.mpr hij))]       -- 帰納法の仮定
       _ = finProdLeft r (fun j => A (Fin.castSucc j) * B (Fin.castSucc j))
-            * (A (Fin.last (r + 1)) * B (Fin.last (r + 1))) := mul_assoc _ _ _    -- 結合則
+            * (A (Fin.last (r + 1)) * B (Fin.last (r + 1))) := mul_assoc _ _ _    -- 結合律
       _ = finProdLeft (r + 1) (fun j => A j * B j) := (finProdLeft_succ r (fun j => A j * B j)).symm -- 定義を右辺から左辺へ
 
 end Ising2D.NecSuf

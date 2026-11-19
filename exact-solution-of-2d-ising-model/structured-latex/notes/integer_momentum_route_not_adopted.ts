@@ -120,7 +120,7 @@ H_2 &= \frac{1}{M} \sum_{j=1}^{M} \hat{Z}_{-j}^{(-)}\, \hat{Y}_j
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \left(\exp\!\left(-i k_1\frac{2\pi j}{M}\right)Y_{k_1}\right)
 \left(\begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)Z_{k_2}\right)
-\exp\!\left(-i\frac{2\pi j}{M}\right) &&(\because\ \text{有限和どうしの積は二重和である（分配則）}) \\
+\exp\!\left(-i\frac{2\pi j}{M}\right) &&(\because\ \text{有限和どうしの積は二重和である（分配律）}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
 \exp\!\left(-i k_1\frac{2\pi j}{M}\right)\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\exp\!\left(-i\frac{2\pi j}{M}\right)
@@ -151,7 +151,7 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
 \overbrace{\left(\sum_{k_1=1}^M\begin{cases}1 & (k_1\neq 1)\\ +1 & (k_1=1)\end{cases}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)Z_{k_1}\right)}^{\hat{Z}_{-j}^{(-)}}\,
 \overbrace{\left(\sum_{k_2=1}^M \exp\!\left(-i k_2\frac{2\pi j}{M}\right)Y_{k_2}\right)}^{\hat{Y}_j} &&(\because\ \hat{Z}_{-j}^{(-)},\ \hat{Y}_j\ \text{の定義 }\text{〔def\_hatZ\_pm〕},\ \text{〔def\_hatY〕}\text{ の展開}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
-\left(\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)Z_{k_1}\right)\left(\exp\!\left(-i k_2\frac{2\pi j}{M}\right)Y_{k_2}\right) &&(\because\ \text{有限和どうしの積は二重和である（分配則）。}k_1=1\ \text{の場合の係数も }+1\text{ である}) \\
+\left(\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)Z_{k_1}\right)\left(\exp\!\left(-i k_2\frac{2\pi j}{M}\right)Y_{k_2}\right) &&(\because\ \text{有限和どうしの積は二重和である（分配律）。}k_1=1\ \text{の場合の係数も }+1\text{ である}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \exp\!\left(-i k_1\frac{2\pi(-j)}{M}-i k_2\frac{2\pi j}{M}\right)Z_{k_1}Y_{k_2} &&(\because\ \text{複素数の積の可換性と結合律、および }\exp a\cdot\exp b=\exp(a+b)) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
@@ -235,7 +235,7 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
       displayMath(String.raw`\begin{aligned}
 \sum_{\mu=1}^M \hat{Y}_\mu \exp\!\left(i m\frac{2\pi\mu}{M}\right)
 &= \sum_{\mu=1}^M \left(\sum_{j=1}^M \exp\!\left(-i j\frac{2\pi\mu}{M}\right)Y_j\right)\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \hat{Y}_\mu \text{ の定義}\ \text{〔def\_hatY〕}) \\
-&= \sum_{\mu=1}^M \sum_{j=1}^M \exp\!\left(-i j\frac{2\pi\mu}{M}\right)Y_j\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \text{有限和への右からの分配則}) \\
+&= \sum_{\mu=1}^M \sum_{j=1}^M \exp\!\left(-i j\frac{2\pi\mu}{M}\right)Y_j\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \text{有限和への右からの分配律}) \\
 &= \sum_{\mu=1}^M \sum_{j=1}^M \exp\!\left(-i j\frac{2\pi\mu}{M}\right)\exp\!\left(i m\frac{2\pi\mu}{M}\right)Y_j \quad (\because \text{複素スカラーは複素行列と可換に移せる}) \\
 &= \sum_{\mu=1}^M \sum_{j=1}^M \exp\!\left(i(m-j)\frac{2\pi\mu}{M}\right)Y_j \quad (\because \text{指数法則}) \\
 &= \sum_{j=1}^M \sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right)Y_j \quad (\because \text{有限二重和の順序交換}) \\
@@ -246,7 +246,7 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
       displayMath(String.raw`\begin{aligned}
 \sum_{\mu=1}^M \hat{Z}_\mu^{(-)} \exp\!\left(i m\frac{2\pi\mu}{M}\right)
 &= \sum_{\mu=1}^M \left(\sum_{j=1}^M \exp\!\left(-i j\frac{2\pi\mu}{M}\right)Z_j\right)\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \hat{Z}_\mu^{(-)} \text{ の定義}\ \text{〔def\_hatZ\_pm〕}) \\
-&= \sum_{\mu=1}^M \sum_{j=1}^M \exp\!\left(-i j\frac{2\pi\mu}{M}\right)Z_j\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \text{有限和への右からの分配則}) \\
+&= \sum_{\mu=1}^M \sum_{j=1}^M \exp\!\left(-i j\frac{2\pi\mu}{M}\right)Z_j\exp\!\left(i m\frac{2\pi\mu}{M}\right) \quad (\because \text{有限和への右からの分配律}) \\
 &= \sum_{\mu=1}^M \sum_{j=1}^M \exp\!\left(-i j\frac{2\pi\mu}{M}\right)\exp\!\left(i m\frac{2\pi\mu}{M}\right)Z_j \quad (\because \text{複素スカラーは複素行列と可換に移せる}) \\
 &= \sum_{\mu=1}^M \sum_{j=1}^M \exp\!\left(i(m-j)\frac{2\pi\mu}{M}\right)Z_j \quad (\because \text{指数法則}) \\
 &= \sum_{j=1}^M \sum_{\mu=1}^M \exp\!\left((m-j)\cdot\frac{2\pi i\mu}{M}\right)Z_j \quad (\because \text{有限二重和の順序交換}) \\
@@ -305,7 +305,7 @@ Z_m
 &&(\because\ \text{反交換子の定義}) \\
 &= \sum_{j,k=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_k\exp\!\left(-i\frac{2\pi}{M}(j\mu+k\nu)\right)Z_j Z_k \\
 &\quad + \sum_{j,k=1}^M \varepsilon^{(\pm)}_k\varepsilon^{(\pm)}_j\exp\!\left(-i\frac{2\pi}{M}(k\nu+j\mu)\right)Z_k Z_j
-&&(\because\ \text{有限和どうしの積を二重和へ開いた（分配則）}) \\
+&&(\because\ \text{有限和どうしの積を二重和へ開いた（分配律）}) \\
 &= \sum_{j,k=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_k\exp\!\left(-i\frac{2\pi}{M}(j\mu+k\nu)\right)(Z_j Z_k + Z_k Z_j)
 &&(\because\ \text{2 つの二重和をまとめ、}\ \mathbb{C}\ \text{の係数を前へ出した}) \\
 &= \sum_{j,k=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_k\exp\!\left(-i\frac{2\pi}{M}(j\mu+k\nu)\right)[Z_j, Z_k]_+
@@ -429,19 +429,19 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
 &&(\because\ \text{$H_1^{(\pm)}, H_2$ を $\hat{Z}, \hat{Y}$ で表す、と交換子の定義})\\
 &= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
    - \sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
-&&(\because\ \text{有限和と行列の積の分配則})\\
+&&(\because\ \text{有限和と行列の積の分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\exp(-i\frac{2\pi j}{M})\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
    - \exp(-i\frac{2\pi j}{M})\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{有限和どうしの差は項ごとの差の和})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
    - \hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
    + \hat{Y}_j\hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \hat{Z}_\mu^{(\pm)}\hat{Y}_j = -\hat{Y}_j\hat{Z}_\mu^{(\pm)}\ \text{すなわち $\hat{Z}$ と $\hat{Y}$ の反交換関係})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
    + \hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(\pm)}\right)
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\pm)}]_+
 &&(\because\ \text{反交換子の定義})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
@@ -479,7 +479,7 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
 &= \left[\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,\exp(-i\frac{2\pi j}{M})\right),\ \hat{Z}_\mu^{(\mp)}\right]
 &&(\because\ \text{準備 4})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\exp(-i\frac{2\pi j}{M}),\ \hat{Z}_\mu^{(\mp)}\right]
-&&(\because\ \text{交換子の定義と、有限和・スカラー倍についての分配則})\\
+&&(\because\ \text{交換子の定義と、有限和・スカラー倍についての分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)},\ \hat{Z}_\mu^{(\mp)}\right]
 &&(\because\ \text{スカラー倍を交換子の外へ出した})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
@@ -490,7 +490,7 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
 &&(\because\ \text{準備 5})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
    + \hat{Z}_\mu^{(\mp)}\hat{Z}_{-j}^{(\pm)}\right)
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\mp)}]_+
 &&(\because\ \text{反交換子の定義})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(
@@ -499,7 +499,7 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
 &&(\because\ \text{$\hat{Z}$ と $\hat{Y}$ の反交換関係の}\ [\hat{Z}^{(\pm)},\hat{Z}^{(\mp)}]_+\ \text{の値})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
    + \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(-2\,\exp(-i\frac{2\pi}{M}(-j+\mu))\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
-&&(\because\ \text{分配則と、有限和の項ごとの分割})\\
+&&(\because\ \text{分配律と、有限和の項ごとの分割})\\
 &= 2\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,\delta^M_{-j+\mu,0}
    - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M}-i\frac{2\pi}{M}(-j+\mu))\hat{Y}_j
 &&(\because\ \text{単位行列との積とスカラーの整理、および指数法則})\\
@@ -561,19 +561,19 @@ M & (\mu = M)
 &&(\because\ \text{$H_1^{(\pm)}, H_2$ を $\hat{Z}, \hat{Y}$ で表す、と交換子の定義})\\
 &= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu
    - \sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
-&&(\because\ \text{有限和と行列の積の分配則})\\
+&&(\because\ \text{有限和と行列の積の分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\exp(-i\frac{2\pi j}{M})\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu
    - \exp(-i\frac{2\pi j}{M})\hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{有限和どうしの差は項ごとの差の和})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu
    - \hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(-\hat{Y}_j\hat{Y}_\mu\hat{Z}_{-j}^{(\pm)}
    - \hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu = -\hat{Y}_\mu\hat{Z}_{-j}^{(\pm)}\ \text{すなわち $\hat{Z}$ と $\hat{Y}$ の反交換関係})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(-\hat{Y}_j\hat{Y}_\mu
    - \hat{Y}_\mu\hat{Y}_j\right)\hat{Z}_{-j}^{(\pm)}
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(-[\hat{Y}_j,\hat{Y}_\mu]_+\right)\hat{Z}_{-j}^{(\pm)}
 &&(\because\ \text{反交換子の定義})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(-2M\,\delta^M_{j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\hat{Z}_{-j}^{(\pm)}
@@ -614,7 +614,7 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
 &&(\because\ \text{スカラー倍は行列の積と可換に動かせる})\\
 &= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j\hat{Z}_\mu^{(\pm)}
    - \sum_{j\in\{1,\dots,M\}}\hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(-)}\hat{Y}_j\right)
-&&(\because\ \text{有限和と行列の積の分配則})\\
+&&(\because\ \text{有限和と行列の積の分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Z}_{-j}^{(-)}\hat{Y}_j\hat{Z}_\mu^{(\pm)}
    - \hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(-)}\hat{Y}_j\right)
 &&(\because\ \text{有限和どうしの差は項ごとの差の和})\\
@@ -623,7 +623,7 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
 &&(\because\ \text{準備 1})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-\hat{Z}_{-j}^{(-)}\hat{Z}_\mu^{(\pm)}
    - \hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(-)}\right)\hat{Y}_j
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-[\hat{Z}_{-j}^{(-)},\hat{Z}_\mu^{(\pm)}]_+\right)\hat{Y}_j
 &&(\because\ \text{反交換子の定義})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-[\hat{Z}_\mu^{(\pm)},\hat{Z}_{-j}^{(-)}]_+\right)\hat{Y}_j
@@ -661,7 +661,7 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
 &&(\because\ \text{括弧の展開（負号を両項へ配る）と複素数の四則})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2M\,\delta^M_{-j+\mu,0}\,\hat{Y}_j
    + 4\,\exp(-i\frac{2\pi}{M}(-j+\mu))\,\hat{Y}_j\right)
-&&(\because\ \text{分配則と単位行列との積})\\
+&&(\because\ \text{分配律と単位行列との積})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2M\,\delta^M_{-j+\mu,0}\,\hat{Y}_j\right)
    + \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(4\,\exp(-i\frac{2\pi}{M}(-j+\mu))\,\hat{Y}_j\right)
 &&(\because\ \text{項ごとの和の有限和は有限和どうしの和})\\
@@ -700,7 +700,7 @@ M & (\mu = M)
 &&(\because\ \text{スカラー倍は行列の積と可換に動かせる})\\
 &= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j\hat{Y}_\mu
    - \sum_{j\in\{1,\dots,M\}}\hat{Y}_\mu\hat{Z}_{-j}^{(-)}\hat{Y}_j\right)
-&&(\because\ \text{有限和と行列の積の分配則})\\
+&&(\because\ \text{有限和と行列の積の分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Z}_{-j}^{(-)}\hat{Y}_j\hat{Y}_\mu
    - \hat{Y}_\mu\hat{Z}_{-j}^{(-)}\hat{Y}_j\right)
 &&(\because\ \text{有限和どうしの差は項ごとの差の和})\\
@@ -709,7 +709,7 @@ M & (\mu = M)
 &&(\because\ \text{準備 1})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\left(\hat{Y}_j\hat{Y}_\mu
    + \hat{Y}_\mu\hat{Y}_j\right)
-&&(\because\ \text{行列の積の分配則})\\
+&&(\because\ \text{行列の積の分配律})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\,[\hat{Y}_j,\hat{Y}_\mu]_+
 &&(\because\ \text{反交換子の定義})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}
@@ -792,7 +792,7 @@ M & (\mu = M)
 &= \alpha\beta\,(XW) - \beta\alpha\,(WX)
 &&(\because\ \text{スカラー倍が積と可換なこと})\\
 &= \alpha\beta\,(XW - WX)
-&&(\because\ \mathbb{C}\ \text{の積の可換律}\ \beta\alpha=\alpha\beta\ \text{と分配則})\\
+&&(\because\ \mathbb{C}\ \text{の積の可換律}\ \beta\alpha=\alpha\beta\ \text{と分配律})\\
 &= \alpha\beta\,[X, W]
 &&(\because\ \text{交換子の定義})
 \end{aligned}`),
@@ -1277,7 +1277,7 @@ K_1^{n}\cdot\hat{Y}_\mu & (n\text{ 偶数})
 &= \cosh(K_1)\hat{Y}_\mu - i\,\exp(i\frac{2\pi\mu}{M})\sinh(K_1)\hat{Z}_\mu^{(\pm)}
 &&(\because\ \text{「sinh, cosh のテイラー展開」}) \\
 &= -i\,\exp(i\frac{2\pi\mu}{M})\sinh(K_1)\hat{Z}_\mu^{(\pm)} + \cosh(K_1)\hat{Y}_\mu
-&&(\because\ \text{行列の和の可換則により 2 つの項を並べ替えた})
+&&(\because\ \text{行列の和の可換律により 2 つの項を並べ替えた})
 \end{aligned}`),
       paragraph(["鎖の終点は主張の (h1.y) の右辺と字句どおり一致する。"]),
       paragraph(["(h2.z−) について、"]),
@@ -1412,7 +1412,7 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
 &= \sigma^z\left(\cosh(2K_2^*)\sigma^0 - \sinh(2K_2^*)\sigma^x\right)
    \quad (\because \text{Step 2},\ \cosh(-t)=\cosh t,\ \sinh(-t)=-\sinh t) \\
 &= \cosh(2K_2^*)\,\sigma^z - \sinh(2K_2^*)\,\sigma^z\sigma^x
-   \quad (\because \text{行列の積の分配則と}\ \sigma^z\sigma^0 = \sigma^z) \\
+   \quad (\because \text{行列の積の分配律と}\ \sigma^z\sigma^0 = \sigma^z) \\
 &= c_2^*\,\sigma^z - i\,s_2^*\,\sigma^y
    \quad (\because \text{上で計算した}\ \sigma^z\sigma^x = i\,\sigma^y\ \text{と略記}\ c_2^*,\ s_2^*)
 \end{aligned}`),
@@ -1878,17 +1878,17 @@ N_{11} &= C\cdot a + (iS)\cdot\left(i \exp(-i\theta) b\right)
 N_{12} &= C\cdot\left(-i \exp(i\theta) b\right) + (iS)\cdot a
         &&(\because \text{行列積の定義}) \\
 &= i\left(Sa - C b\, \exp(i\theta)\right)
-        &&(\because \text{分配則と複素数の積の可換律}) \\
+        &&(\because \text{分配律と複素数の積の可換律}) \\
 N_{21} &= (-iS)\cdot a + C\cdot\left(i \exp(-i\theta) b\right)
         &&(\because \text{行列積の定義}) \\
 &= i\left(C b\, \exp(-i\theta) - Sa\right)
-        &&(\because \text{分配則と複素数の積の可換律}) \\
+        &&(\because \text{分配律と複素数の積の可換律}) \\
 N_{22} &= (-iS)\cdot\left(-i \exp(i\theta) b\right) + C\cdot a
         &&(\because \text{行列積の定義}) \\
 &= i^2 S b\, \exp(i\theta) + Ca
         &&(\because (-i)(-i)=i^2\ \text{と複素数の積の結合律}) \\
 &= Ca - S b\, \exp(i\theta)
-        &&(\because i^2=-1\ \text{と加法の可換則})
+        &&(\because i^2=-1\ \text{と加法の可換律})
 \end{aligned}`),
       paragraph(["Step 2: ", math(String.raw`P := B_1(\theta)\, N = B_1(\theta)\, B_2\, B_1(\theta)`), " の (1,1) 成分。"]),
       displayMath(String.raw`\begin{aligned}
@@ -1904,7 +1904,7 @@ P_{11}
 &= Ca^2 - S ab\, \exp(-i\theta) + C b^2 - S ab\, \exp(i\theta)
    &&(\because \exp(i\theta)\exp(-i\theta) = 1) \\
 &= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
-   &&(\because \text{分配則による括り出し}) \\
+   &&(\because \text{分配律による括り出し}) \\
 &= C\, c_1 - S\cdot\frac{s_1}{2}\cdot 2\cos\theta
    &&(\because a^2+b^2 = c_1,\ 2ab = s_1,\ \exp(i\theta)+\exp(-i\theta) = 2\cos\theta) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
@@ -1922,9 +1922,9 @@ P_{22}
 &= -\exp(-i\theta) b\left(Sa - C b\, \exp(i\theta)\right) + Ca^2 - S ab\, \exp(i\theta)
    &&(\because i\cdot i = -1) \\
 &= -S ab\, \exp(-i\theta) + C b^2 + Ca^2 - S ab\, \exp(i\theta)
-   &&(\because \text{分配則と }\exp(-i\theta)\exp(i\theta)=1) \\
+   &&(\because \text{分配律と }\exp(-i\theta)\exp(i\theta)=1) \\
 &= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
-   &&(\because \text{加法の可換則と分配則による括り出し}) \\
+   &&(\because \text{加法の可換律と分配律による括り出し}) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
    &&(\because a^2+b^2=c_1,\ 2ab=s_1,\ \exp(i\theta)+\exp(-i\theta)=2\cos\theta,\ C=c_2^*,\ S=s_2^*)
 \end{aligned}`),
@@ -1939,9 +1939,9 @@ P_{12}
    &&(\because \text{Step 1 の }N_{12},N_{22}\text{ の表示}) \\
 &= i\left[S a^2 - C ab\, \exp(i\theta)\right]
    + i\left[-C ab\, \exp(i\theta) + S b^2 \exp(2i\theta)\right]
-   &&(\because \text{分配則と複素数の積の結合律}) \\
+   &&(\because \text{分配律と複素数の積の結合律}) \\
 &= i\left[S\left(a^2 + b^2 \exp(2i\theta)\right) - 2C ab\, \exp(i\theta)\right]
-   &&(\because \text{分配則による括り出し})
+   &&(\because \text{分配律による括り出し})
 \end{aligned}`),
       paragraph(["ここで括弧内の第 1 項を ", math(String.raw`\exp(i\theta)`), " でくくると、"]),
       displayMath(String.raw`\begin{aligned}
@@ -1951,7 +1951,7 @@ a^2 + b^2 \exp(2i\theta)
 &= \exp(i\theta)\left(a^2(\cos\theta - i\sin\theta) + b^2(\cos\theta + i\sin\theta)\right)
    &&(\because \text{Euler の公式}) \\
 &= \exp(i\theta)\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right)
-   &&(\because \text{分配則による整理}) \\
+   &&(\because \text{分配律による整理}) \\
 &= \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right)
    &&(\because a^2+b^2 = c_1,\ a^2-b^2 = 1)
 \end{aligned}`),
@@ -1961,13 +1961,13 @@ P_{12}
 &= i\left[S\, \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right) - C s_1 \exp(i\theta)\right]
    &&(\because \text{直前の補助計算と }2ab=s_1) \\
 &= i \exp(i\theta)\left[S\left(c_1\cos\theta - i\sin\theta\right) - C s_1\right]
-   &&(\because \text{分配則による }\exp(i\theta)\text{ の括り出し}) \\
+   &&(\because \text{分配律による }\exp(i\theta)\text{ の括り出し}) \\
 &= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
    &&(\because S=s_2^*,\ C=c_2^*\ \text{の略記}) \\
 &= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
    &&(\because c_2^* = s_2^* c_2) \\
 &= i \exp(i\theta) s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
-   &&(\because \text{分配則による }s_2^*\text{ の括り出し})
+   &&(\because \text{分配律による }s_2^*\text{ の括り出し})
 \end{aligned}`),
       paragraph(["ここで ", math(String.raw`c_2^* = s_2^* c_2`), " は ", ref("duality_c2_star_eq_s2_star_c2"), " による（この置き換えが、", ref("def_A_theta"), " の ", math(String.raw`\gamma_2`), " で ", math(String.raw`c_2^*`), " ではなく ", math(String.raw`c_2`), " が現れる理由である）。得られた ", math(String.raw`P_{12}`), " は ", math(String.raw`A(\theta)`), " の (1,2) 成分 ", math(String.raw`i \exp(i\theta) s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2) = \gamma_2(\theta)`), " に一致する。"]),
       paragraph(["Step 5: ", math(String.raw`P`), " の (2,1) 成分。"]),
@@ -1980,9 +1980,9 @@ P_{21}
    &&(\because \text{Step 1 の }N_{11},N_{21}\text{ の表示}) \\
 &= i\left[C ab\, \exp(-i\theta) - S b^2 \exp(-2i\theta)\right]
    + i\left[C ab\, \exp(-i\theta) - S a^2\right]
-   &&(\because \text{分配則と複素数の積の結合律}) \\
+   &&(\because \text{分配律と複素数の積の結合律}) \\
 &= -i\left[S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)\right]
-   &&(\because \text{分配則による括り出し})
+   &&(\because \text{分配律による括り出し})
 \end{aligned}`),
       paragraph(["括弧内は Step 4 の括弧内で ", math(String.raw`\theta`), " を ", math(String.raw`-\theta`), " に置き換えたものに他ならない。よって Step 4 と同じ計算（", math(String.raw`\cos(-\theta) = \cos\theta`), "、", math(String.raw`\sin(-\theta) = -\sin\theta`), " を用いる）により、"]),
       displayMath(String.raw`\begin{aligned}
@@ -2412,7 +2412,7 @@ c_2 s_1 = c_1\cos\theta_\mu
 &=\gamma_2(\theta_\mu)\Bigl(-\overline{\gamma_2(\theta_\mu)}\Bigr)
 &&(\because\ \gamma_2(-\theta_\mu)=-\overline{\gamma_2(\theta_\mu)})\\
 &=-\Bigl(\gamma_2(\theta_\mu)\overline{\gamma_2(\theta_\mu)}\Bigr)
-&&(\because\ \mathbb{C}\ \text{の分配則})\\
+&&(\because\ \mathbb{C}\ \text{の分配律})\\
 &=-\lvert\gamma_2(\theta_\mu)\rvert^2
 &&(\because\ \lvert z\rvert^2=z\overline z)
 \end{aligned}`),
@@ -2703,7 +2703,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i \exp(i\theta_\mu) s_2^*(c_1\cos\theta_\m
 &= \frac{2\gamma_1(\theta_\mu) \pm \sqrt{4\gamma_1(\theta_\mu)^2 - 4(\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}}{2}
 && (\because\ (-2\gamma_1(\theta_\mu))^2 = 4\gamma_1(\theta_\mu)^2\ \text{（負元の 2 乗は 2 乗、積の 2 乗）}) \\
 &= \frac{2\gamma_1(\theta_\mu) \pm \sqrt{4\bigl(\gamma_1(\theta_\mu)^2 - (\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))\bigr)}}{2}
-&& (\because\ \text{分配則で}\ 4\ \text{をくくる}) \\
+&& (\because\ \text{分配律で}\ 4\ \text{をくくる}) \\
 &= \frac{2\gamma_1(\theta_\mu) \pm 2\sqrt{\gamma_1(\theta_\mu)^2 - (\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}}{2}
 && (\because\ \text{「sqrt と積が可換になる条件」より}\ \sqrt{4z}=\sqrt{4}\,\sqrt{z}=2\sqrt{z}) \\
 &= \gamma_1(\theta_\mu) \pm \sqrt{\gamma_1(\theta_\mu)^2 - (\gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))}
@@ -3038,7 +3038,7 @@ c_1\cos\theta_\mu - i\sin\theta_\mu
 &= c_1\frac{\exp(i\theta_\mu) + \exp(-i\theta_\mu)}{2} - \frac{\exp(i\theta_\mu) - \exp(-i\theta_\mu)}{2}
 && (\because\ i\cdot\tfrac{1}{2i}=\tfrac{1}{2}\text{。共通因子}\ i\ne0\ \text{の約分}) \\
 &= \frac{(c_1 - 1)\exp(i\theta_\mu) + (c_1 + 1)\exp(-i\theta_\mu)}{2}
-&& (\because\ \text{分配則で}\ \exp(i\theta_\mu),\ \exp(-i\theta_\mu)\ \text{の係数をまとめる})
+&& (\because\ \text{分配律で}\ \exp(i\theta_\mu),\ \exp(-i\theta_\mu)\ \text{の係数をまとめる})
 \end{aligned}`),
       paragraph(["もう 1 本も同じ 3 段で計算する。"]),
       displayMath(String.raw`\begin{aligned}
@@ -3048,7 +3048,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
 &= c_1\frac{\exp(i\theta_\mu) + \exp(-i\theta_\mu)}{2} + \frac{\exp(i\theta_\mu) - \exp(-i\theta_\mu)}{2}
 && (\because\ i\cdot\tfrac{1}{2i}=\tfrac{1}{2}\text{。共通因子}\ i\ne0\ \text{の約分}) \\
 &= \frac{(c_1 + 1)\exp(i\theta_\mu) + (c_1 - 1)\exp(-i\theta_\mu)}{2}
-&& (\because\ \text{分配則で}\ \exp(i\theta_\mu),\ \exp(-i\theta_\mu)\ \text{の係数をまとめる})
+&& (\because\ \text{分配律で}\ \exp(i\theta_\mu),\ \exp(-i\theta_\mu)\ \text{の係数をまとめる})
 \end{aligned}`),
       paragraph(["Step 13: 分子分母へ代入し整理すると、"]),
       displayMath(String.raw`\begin{aligned}
@@ -3058,7 +3058,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
 &= \frac{\exp(i\theta_\mu)\left((c_1 - 1)\exp(i\theta_\mu) + (c_1 + 1)\exp(-i\theta_\mu) - 2 s_1 c_2\right)}{\exp(-i\theta_\mu)\left((c_1 + 1)\exp(i\theta_\mu) + (c_1 - 1)\exp(-i\theta_\mu) - 2 s_1 c_2\right)}
 && (\because\ \text{分子と分母の括弧内を共通分母 }2\text{ へ通分し、共通因子 }\tfrac12\text{ を約分}) \\
 &= \frac{(c_1 - 1)\exp(2i\theta_\mu) + (c_1 + 1) - 2 s_1 c_2\, \exp(i\theta_\mu)}{(c_1 + 1) + (c_1 - 1)\exp(-2i\theta_\mu) - 2 s_1 c_2\, \exp(-i\theta_\mu)}
-&& (\because\ \text{分配則と }\exp(i\theta_\mu)\exp(-i\theta_\mu)=\exp(-i\theta_\mu)\exp(i\theta_\mu)=1)
+&& (\because\ \text{分配律と }\exp(i\theta_\mu)\exp(-i\theta_\mu)=\exp(-i\theta_\mu)\exp(i\theta_\mu)=1)
 \end{aligned}`),
       paragraph(["Step 14: ", math(String.raw`x := \exp(i\theta_\mu)`), " とおく（", math(String.raw`x\,\exp(-i\theta_\mu) = \exp(i\theta_\mu)\exp(-i\theta_\mu) = 1`), " より ", math(String.raw`x \neq 0`), " であり、", math(String.raw`x^{-1} = \exp(-i\theta_\mu)`), "）。Step 13 の分子を書き直す。"]),
       displayMath(String.raw`\begin{aligned}
@@ -3066,7 +3066,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
 &= (c_1 - 1)x^2 - 2 s_1 c_2\, x + (c_1 + 1)
 && (\because\ x\ \text{の定義と指数法則}\ \exp(2i\theta_\mu)=(\exp(i\theta_\mu))^2\text{。項を}\ x\ \text{の降冪に並べ替え}) \\
 &= (c_1 + 1)\left(\frac{c_1 - 1}{c_1 + 1}x^2 - \frac{2 s_1 c_2}{c_1 + 1}x + 1\right)
-&& (\because\ c_1 > 0\ \text{より}\ c_1 + 1 \neq 0\text{。各項を}\ (c_1+1)\cdot\tfrac{\text{係数}}{c_1+1}\ \text{と書き、分配則でくくる})
+&& (\because\ c_1 > 0\ \text{より}\ c_1 + 1 \neq 0\text{。各項を}\ (c_1+1)\cdot\tfrac{\text{係数}}{c_1+1}\ \text{と書き、分配律でくくる})
 \end{aligned}`),
       paragraph(["分母も同じ 2 段で書き直す。"]),
       displayMath(String.raw`\begin{aligned}
@@ -3074,7 +3074,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
 &= (c_1 - 1)x^{-2} - 2 s_1 c_2\, x^{-1} + (c_1 + 1)
 && (\because\ x^{-1} = \exp(-i\theta_\mu)\ \text{と指数法則}\ \exp(-2i\theta_\mu)=(\exp(-i\theta_\mu))^2\text{。項を}\ x^{-1}\ \text{の降冪に並べ替え}) \\
 &= (c_1 + 1)\left(\frac{c_1 - 1}{c_1 + 1}x^{-2} - \frac{2 s_1 c_2}{c_1 + 1}x^{-1} + 1\right)
-&& (\because\ c_1 > 0\ \text{より}\ c_1 + 1 \neq 0\text{。各項を}\ (c_1+1)\cdot\tfrac{\text{係数}}{c_1+1}\ \text{と書き、分配則でくくる})
+&& (\because\ c_1 > 0\ \text{より}\ c_1 + 1 \neq 0\text{。各項を}\ (c_1+1)\cdot\tfrac{\text{係数}}{c_1+1}\ \text{と書き、分配律でくくる})
 \end{aligned}`),
       paragraph(["Step 15: ", math(String.raw`\dfrac{c_1 - 1}{c_1 + 1} = \alpha_1\alpha_2^{-1}`), " の証明。"]),
       displayMath(String.raw`\begin{aligned}
@@ -3120,7 +3120,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
 &= \tanh K_1\tanh K_2^* + \tanh K_1(\tanh K_2^*)^{-1}
 && (\because\ \text{積の逆元は逆元の積であり、}((\tanh K_1)^{-1})^{-1} = \tanh K_1) \\
 &= \tanh K_1\left(\tanh K_2^* + (\tanh K_2^*)^{-1}\right)
-&& (\because\ \text{分配則で}\ \tanh K_1\ \text{をくくり出す})
+&& (\because\ \text{分配律で}\ \tanh K_1\ \text{をくくり出す})
 \end{aligned}`),
       paragraph(["ここで、"]),
       displayMath(String.raw`\begin{aligned}
@@ -3204,9 +3204,9 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       displayMath(String.raw`\begin{aligned}
 (1 - \alpha_1 x)(1 - \alpha_2^{-1}x)
 &= 1-\alpha_2^{-1}x-\alpha_1x+\alpha_1\alpha_2^{-1}x^2
-&& (\because\ \text{分配則}) \\
+&& (\because\ \text{分配律}) \\
 &= 1-(\alpha_1+\alpha_2^{-1})x+\alpha_1\alpha_2^{-1}x^2
-&& (\because\ \text{分配則}) \\
+&& (\because\ \text{分配律}) \\
 &= 1-\frac{2s_1c_2}{c_1+1}x+\frac{c_1-1}{c_1+1}x^2
 && (\because\ (\star),(\star\star))
 \end{aligned}`),
@@ -3216,7 +3216,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
 &=(c_1+1)\left(1-\frac{2s_1c_2}{c_1+1}x+\frac{c_1-1}{c_1+1}x^2\right)
 && (\because\ \text{上の計算}) \\
 &=(c_1+1)-2s_1c_2x+(c_1-1)x^2
-&& (\because\ c_1+1\ne0\ \text{と分配則})
+&& (\because\ c_1+1\ne0\ \text{と分配律})
 \end{aligned}`),
       paragraph(["これは Step 14 の分子と一致する（", math(String.raw`x = \exp(i\theta_\mu)`), "）。同様に ", math(String.raw`y := \exp(-i\theta_\mu) = x^{-1}`), " とおくと ", math(String.raw`(c_1 + 1)(1 - \alpha_1 y)(1 - \alpha_2^{-1}y) = (c_1 + 1) - 2 s_1 c_2 y + (c_1 - 1)y^2`), " が Step 14 の分母と一致する。"]),
       paragraph(["Step 18: 結論。Step 14 と Step 17 より、"]),
@@ -3345,7 +3345,7 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
 &=\dfrac{2\pi(-\mu+kM)}{M}
 && (\because\ \nu=-\mu+kM)\\
 &=-\dfrac{2\pi\mu}{M}+2k\pi
-&& (\because\ \mathbb{R}\ \text{の分配則と約分})\\
+&& (\because\ \mathbb{R}\ \text{の分配律と約分})\\
 &=-\theta_\mu+2k\pi
 && (\because\ \theta_\mu\ \text{の定義})
 \end{aligned}`),
@@ -3401,7 +3401,7 @@ t_\mu&\neq0_{\mathbb{C}}
 &=t_\mu^2-t_\mu t_\nu
 && (\because\ t_\mu^2=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu))\\
 &=t_\mu(t_\mu-t_\nu)
-&& (\because\ \mathbb{C}\ \text{の分配則})
+&& (\because\ \mathbb{C}\ \text{の分配律})
 \end{aligned}`),
       paragraph(["Step 0-3 の ", math(String.raw`t_\nu = t_\mu`), " によってのみ ", math(String.raw`0`), " になる。仮に ", math(String.raw`t_\nu = -t_\mu`), " であれば括弧は ", math(String.raw`2t_\mu^2 \neq 0`), " となり第 1 の等式は偽になる（同様に b) の括弧は ", math(String.raw`t_\mu t_\nu + t_\mu^2`), " で、", math(String.raw`t_\nu = -t_\mu`), " なら ", math(String.raw`0`), " となって第 2 の等式も偽になる）。"]),
       paragraph(["〔def_fermi〕", " より、", math(String.raw`c_\mu := \frac{1}{2\sqrt{M}\,\gamma_2(-\theta_\mu)}`), " とおくと"]),
@@ -3604,7 +3604,7 @@ c_\mu c_\nu
 &=-(s_2^*)^2\Bigl(c_1^2u^2-2c_1s_1c_2u+s_1^2c_2^2+1-u^2\Bigr)
 &&\left(\because\ (a-b)^2=a^2-2ab+b^2\right)\\
 &=-c_1^2(s_2^*)^2u^2+2c_1s_1c_2(s_2^*)^2u-s_1^2c_2^2(s_2^*)^2-(s_2^*)^2+(s_2^*)^2u^2
-&&\left(\because\ \text{分配則}\right)
+&&\left(\because\ \text{分配律}\right)
 \end{aligned}`),
       paragraph(["Step 4: (iii) による ", math(String.raw`c_2`), " の消去。(iii) ", math(String.raw`c_2 s_2^* = c_2^*`), " を使うと"]),
       displayMath(String.raw`\begin{aligned}
@@ -3627,7 +3627,7 @@ s_1^2 c_2^2 (s_2^*)^2
 &&\left(\because\ \text{Step 3 の 2 式と直前の}\ c_2\ \text{の消去}\right)\\
 &= \bigl(c_1^2 - s_1^2\bigr)(c_2^*)^2 - (s_2^*)^2
  + (s_2^*)^2 u^2\bigl(s_1^2 - c_1^2 + 1\bigr)
-&&\left(\because\ u\ \text{の 1 次の項を相殺し、残る項を分配則でまとめる}\right)
+&&\left(\because\ u\ \text{の 1 次の項を相殺し、残る項を分配律でまとめる}\right)
 \end{aligned}`),
       paragraph(["（", math(String.raw`u`), " の 1 次の項 ", math(String.raw`-2 c_1 c_2^* s_1 s_2^* u`), " と ", math(String.raw`+2 c_1 s_1 c_2^* s_2^* u`), " は相殺した。これが (iii) を使った箇所である。）"]),
       paragraph(["Step 5: (i)(ii) による結論。(i) ", math(String.raw`c_1^2 - s_1^2 = 1`), " より ", math(String.raw`s_1^2 - c_1^2 + 1 = 0`), " であるから ", math(String.raw`u^2`), " の項は消え、同じく (i) より第 1 項は ", math(String.raw`(c_2^*)^2`), " になる。よって (ii) ", math(String.raw`(c_2^*)^2 - (s_2^*)^2 = 1`), " より"]),
@@ -3815,7 +3815,7 @@ T_{(V')}(\psi_\mu^\dagger)
 && (\because [\psi_{-\nu}, \psi_\mu^\dagger]_+ = \delta^M_{\mu-\nu,0}\,I) \\
 &= \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger I
    - \psi_\nu^\dagger\psi_\mu^\dagger\psi_{-\nu}
-&& (\because \text{分配則}) \\
+&& (\because \text{分配律}) \\
 &= \delta^M_{\mu-\nu,0}\,\psi_\nu^\dagger
    - \psi_\nu^\dagger\psi_\mu^\dagger\psi_{-\nu}
 && (\because \psi_\nu^\dagger I=\psi_\nu^\dagger) \\
@@ -3882,7 +3882,7 @@ X\psi_\mu^\dagger
 &=\psi_\mu^\dagger X+\psi_\mu^\dagger\gamma(\theta_\mu)I
 &&(\because\ \gamma(\theta_\mu)\ \text{はスカラー})\\
 &=\psi_\mu^\dagger\bigl(X+\gamma(\theta_\mu)I\bigr)
-&&(\because\ \text{分配則})
+&&(\because\ \text{分配律})
 \end{aligned}`),
       paragraph(["Step 3: 帰納法で ", math(String.raw`X^n \psi_\mu^\dagger = \psi_\mu^\dagger (X + \gamma(\theta_\mu)I)^n`), " を示す。", math(String.raw`n = 0`), " のときは"]),
       displayMath(String.raw`\begin{aligned}
@@ -3923,7 +3923,7 @@ X^{n+1}\psi_\mu^\dagger
 &= \sum_{n=0}^N \frac{\psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^n}{n!}
 && (\because\ \text{Step 3})\\
 &= \psi_\mu^\dagger \sum_{n=0}^N \frac{(X + \gamma(\theta_\mu)I)^n}{n!}
-&& (\because\ \text{有限和に対する分配則})
+&& (\because\ \text{有限和に対する分配律})
 \end{aligned}`),
       paragraph([math(String.raw`N \to \infty`), " の極限で ", ref("exp_converges"), " より右辺は ", math(String.raw`\psi_\mu^\dagger\exp(X + \gamma(\theta_\mu)I)`), " に収束し（", ref("matrix_multiplication_continuity"), "）、", math(String.raw`\exp(X)\psi_\mu^\dagger = \psi_\mu^\dagger\exp(X + \gamma(\theta_\mu)I)`), "。"]),
       paragraph(["Step 5: 結論。", math(String.raw`(X + \gamma(\theta_\mu)I)`), " と ", math(String.raw`(-X)`), " は可換だから ", ref("theorem_exp_product"), " より、"]),
@@ -3953,7 +3953,7 @@ T_{(V')}(\psi_\mu^\dagger)
 &= -(\delta^M_{\nu+\mu,0}\,I-\psi_\mu\psi_\nu^\dagger)\psi_{-\nu}
 &&(\because\ [\psi_\nu^\dagger,\psi_\mu]_+=\delta^M_{\nu+\mu,0}\,I)\\
 &= -\delta^M_{\nu+\mu,0}\,I\psi_{-\nu}+\psi_\mu\psi_\nu^\dagger\psi_{-\nu}
-&&(\because\ \text{分配則})\\
+&&(\because\ \text{分配律})\\
 &= -\delta^M_{\nu+\mu,0}\,\psi_{-\nu}+\psi_\mu\psi_\nu^\dagger\psi_{-\nu}
 &&(\because\ I\psi_{-\nu}=\psi_{-\nu})
 \end{aligned}`),
@@ -3966,7 +3966,7 @@ T_{(V')}(\psi_\mu^\dagger)
 &&(\because\ X\ \text{の定義})\\
 &=\sum_{\substack{\nu\in\{1,\dots,M\}\\\gamma_2(\theta_\nu)\neq0}}
 \gamma(\theta_\nu)[\psi_\nu^\dagger\psi_{-\nu},\psi_\mu]
-&&(\because\ \text{交換子の有限和とスカラー倍への分配則})\\
+&&(\because\ \text{交換子の有限和とスカラー倍への分配律})\\
 &=-\sum_{\substack{\nu\in\{1,\dots,M\}\\\gamma_2(\theta_\nu)\neq0}}
 \gamma(\theta_\nu)\delta^M_{\nu+\mu,0}\psi_{-\nu}
 &&(\because\ \text{Step 1'})
@@ -4184,11 +4184,11 @@ X^{n+1}W
       displayMath(String.raw`\begin{aligned}
 \left(\sum_{n=0}^N \frac{X^n}{n!}\right)W
 &= \sum_{n=0}^N \frac{X^n W}{n!}
-&& (\because\ \text{行列積の有限和に関する分配則}) \\
+&& (\because\ \text{行列積の有限和に関する分配律}) \\
 &= \sum_{n=0}^N \frac{W X^n}{n!}
 && (\because\ X^nW=WX^n) \\
 &= W\left(\sum_{n=0}^N \frac{X^n}{n!}\right)
-&& (\because\ \text{行列積の有限和に関する分配則})
+&& (\because\ \text{行列積の有限和に関する分配律})
 \end{aligned}`),
       paragraph([math(String.raw`N \to \infty`), " の極限で ", ref("exp_converges"), "・", ref("matrix_multiplication_continuity"), " より ", math(String.raw`\exp(X)W = W\exp(X)`), "。", math(String.raw`X`), " と ", math(String.raw`-X`), " は可換だから ", ref("theorem_exp_product"), " より ", math(String.raw`\exp(X)\exp(-X) = \exp(O) = I`), "（", ref("theorem_exp_zero"), "）であり、"]),
       displayMath(String.raw`\begin{aligned}
@@ -5504,7 +5504,7 @@ B
 &=B(AC)
    \quad (\because AC=I) \\
 &=(BA)C
-   \quad (\because \text{結合則}) \\
+   \quad (\because \text{結合律}) \\
 &=IC
    \quad (\because BA=I) \\
 &=C

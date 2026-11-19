@@ -8,14 +8,14 @@
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `matrix_smul_add_apply`（スカラー倍の定義 → 和の定義 → 左分配則 → スカラー倍の定義を 2 か所 → 和の定義） | `smul_add_matrix_apply'`（同じ並び） |
+| `matrix_smul_add_apply`（スカラー倍の定義 → 和の定義 → 左分配律 → スカラー倍の定義を 2 か所 → 和の定義） | `smul_add_matrix_apply'`（同じ並び） |
 | `matrix_smul_add`（全ての成分が一致する） | `smul_add_matrix'` |
 | `finite_sum_smul_of_matrices`（`r + 1` 項の帰納法。有限和の定義 → 帰納法の仮定 → 和のスカラー倍を右辺から左辺へ → 有限和の定義） | `finite_sum_smul_matrix'`（同じ並び） |
 
 ## 何が効いているか / 効いていないか
 
 - スカラーは係数と同じ集合の元が左から掛かるものとした（具体版のスカラー倍が `ℂ` の積であることに合わせた。`Mul` から入る `SMul`）。
-- 和のスカラー倍で効いているのは、係数の**左分配則**（`LeftDistribClass`）だけである。外すと `c(x + y) = cx + cy` の段が通らない。
+- 和のスカラー倍で効いているのは、係数の**左分配律**（`LeftDistribClass`）だけである。外すと `c(x + y) = cx + cy` の段が通らない。
 - **加法の結合律・交換律・零・逆元、乗法の結合律・単位元・可換律は、和のスカラー倍では効いていない**（`Add`・`Mul` だけを取る）。
 - 有限和のスカラー倍で効いているのは、上の和のスカラー倍と有限和の定義（左から足す）だけである。`AddCommMonoid` は、mathlib の `Finset.sum` を
   人手の左から足す有限和の定義の代わりに使うために要る（`Fin.sum_univ_one`・`Fin.sum_univ_castSucc` の証明は加法の結合律・交換律に依る）。
@@ -31,14 +31,14 @@ open Matrix
 
 variable {ι κ : Type*}
 
-/-- **`(c(A + B))_{ij} = (cA + cB)_{ij}`**（具体版 `matrix_smul_add_apply`）。係数は `Add`・`Mul` と左分配則だけ。 -/
+/-- **`(c(A + B))_{ij} = (cA + cB)_{ij}`**（具体版 `matrix_smul_add_apply`）。係数は `Add`・`Mul` と左分配律だけ。 -/
 theorem smul_add_matrix_apply' {R : Type*} [Add R] [Mul R] [LeftDistribClass R]
     (c : R) (A B : Matrix ι κ R) (i : ι) (j : κ) :
     (c • (A + B)) i j = (c • A + c • B) i j :=
   calc (c • (A + B)) i j
       = c * (A + B) i j := rfl                                                -- スカラー倍の定義
     _ = c * (A i j + B i j) := rfl                                            -- 和の定義
-    _ = c * A i j + c * B i j := left_distrib _ _ _                           -- 左分配則
+    _ = c * A i j + c * B i j := left_distrib _ _ _                           -- 左分配律
     _ = (c • A) i j + (c • B) i j := rfl                                      -- スカラー倍の定義（2 か所へ同時適用）
     _ = (c • A + c • B) i j := rfl                                            -- 和の定義
 

@@ -11,7 +11,7 @@
 | 具体版 | 必要十分版（同じ場合分けと並び） | 効いている仮定 |
 | --- | --- | --- |
 | `square_of_real_absolute_value` | `sq_abs'` | 全順序と、加法の群と左から同じ元を足しても `≤` が保たれること（`AddLeftMono`。絶対値の定め方の場合分け `abs_of_nonneg`・`abs_of_neg` に要る）、二乗を積へ開くこと（`sq_eq_mul_self'`。冪の定義の式と `1` が乗法の単位元であること）、符号の付け替え `(-a)(-a) = aa` |
-| `square_of_real_sum_is_at_most_twice_sum_of_squares` | `add_sq_le_two_mul_add'` | 全順序（平方が非負であることは符号の場合分けから来る）、順序と加法・乗法の両立（`IsOrderedRing`）、分配則、二乗を積へ開くこと（`sq_eq_mul_self'`。冪の定義の式と `1` が左からの乗法の単位元であること）。乗法の可換性は効いていない |
+| `square_of_real_sum_is_at_most_twice_sum_of_squares` | `add_sq_le_two_mul_add'` | 全順序（平方が非負であることは符号の場合分けから来る）、順序と加法・乗法の両立（`IsOrderedRing`）、分配律、二乗を積へ開くこと（`sq_eq_mul_self'`。冪の定義の式と `1` が左からの乗法の単位元であること）。乗法の可換性は効いていない |
 
 * `sq_abs'` は環 `Ring` を置く。鎖が使うのは、絶対値の場合分けに要る加法の群（`AddGroup`）と、
   二乗を積へ開く段 `sq_eq_mul_self'`（`Monoid` の `pow_succ`・`pow_zero`・`one_mul`）と、`(-q)(-q) = qq` に要る
@@ -59,7 +59,7 @@ theorem add_sq_le_two_mul_add' (a b : R) :
     _ = (a + b) * (a + b) + (a - b) * (a - b) := by
         rw [sq_eq_mul_self' (a + b), sq_eq_mul_self' (a - b)]                 -- 二乗は積を 2 か所へ
     _ = (a * a + a * b + b * a + b * b) + (a * a - a * b - b * a + b * b) := by
-        noncomm_ring                                                          -- 分配則による展開を 2 か所へ（可換性を使わない）
+        noncomm_ring                                                          -- 分配律による展開を 2 か所へ（可換性を使わない）
     _ = (a ^ 2 + a * b + b * a + b ^ 2) + (a ^ 2 - a * b - b * a + b ^ 2) := by
         rw [← sq_eq_mul_self' a, ← sq_eq_mul_self' b]                         -- 二乗は積を右辺から左辺へ 4 か所へ
     _ = 2 * a ^ 2 + 2 * b ^ 2 := by noncomm_ring                              -- 加法と減法の計算

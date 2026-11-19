@@ -13,21 +13,21 @@
 | --- | --- |
 | 1 段目 `def_real_bilinear_value` | `dotProduct_mulVec_eq_double_sum'`（`NecSuf/BilinearValueAtMostValueAtAbsoluteVector.lean`） |
 | 2 段目 仮定 `w_l = y_l + z_l`（左は `w_k = y_k + z_k`）を各項へ | 仮定 `hw` |
-| 分配則を各項へ（右は 1 回 `mul_add`、左は 2 回 `add_mul`） | `mul_add`・`add_mul` |
+| 分配律を各項へ（右は 1 回 `mul_add`、左は 2 回 `add_mul`） | `mul_add`・`add_mul` |
 | `finite_sum_of_real_sums` を各 `k` へ、続けて外側の和へ | `finite_sum_add'`（`NecSuf/MatMulDistribSum.lean`） |
 | 最後の段 `def_real_bilinear_value` を右辺から左辺へ 2 か所 | `dotProduct_mulVec_eq_double_sum'` |
 
 ## この主張に本質的に効いている構造
 
-* 分配則。右のベクトルの主張は左分配則 `a(b + c) = ab + ac` だけ、左のベクトルの主張は右分配則 `(b + c)a = ba + ca` だけを
+* 分配律。右のベクトルの主張は左分配律 `a(b + c) = ab + ac` だけ、左のベクトルの主張は右分配律 `(b + c)a = ba + ca` だけを
   主張の段で使う。和に分かれることそのものなので外せない。
 * 加法の結合律・交換律（`finite_sum_add'`。有限和を二つの有限和に分ける段）。
 * 乗法の結合律は、mathlib の `x ⬝ᵥ P *ᵥ y`（`Σ_k x_k (Σ_l P_kl y_l)`）を人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く最初と最後の段
-  （ほかに `Finset.mul_sum` の左分配則と、添字の型が空のときの `a·0 = 0`）だけで使う。結合的でない係数では
+  （ほかに `Finset.mul_sum` の左分配律と、添字の型が空のときの `a·0 = 0`）だけで使う。結合的でない係数では
   `(x_kP_kl)y_l` と `x_k(P_kl y_l)` が一致せず、人手の和と mathlib の値が別物になるので、具体版と同じ手順を保つ限り外せない
-  （主張の文だけなら結合則なしでも成り立つ）。
-* 右のベクトルの主張は右分配則と `0·a = 0` を手順では使わない。それでも外せないのは、主張の文の `P *ᵥ y` そのものが
-  mathlib で `NonUnitalNonAssocSemiring`（左右の分配則と `0·a = a·0 = 0` を含む）を要求するからである。
+  （主張の文だけなら結合律なしでも成り立つ）。
+* 右のベクトルの主張は右分配律と `0·a = 0` を手順では使わない。それでも外せないのは、主張の文の `P *ᵥ y` そのものが
+  mathlib で `NonUnitalNonAssocSemiring`（左右の分配律と `0·a = a·0 = 0` を含む）を要求するからである。
 * 乗法の可換性・単位元・加法の逆元・順序・ℝ であることは使わない。したがって係数は非単位的な半環 `R` に置く。
 -/
 import Ising2D.NecSuf.BilinearValueAtMostValueAtAbsoluteVector

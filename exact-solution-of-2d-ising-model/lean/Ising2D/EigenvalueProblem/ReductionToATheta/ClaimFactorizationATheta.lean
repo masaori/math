@@ -71,7 +71,7 @@ Lean 側の `factorization_of_A_theta_general` は `K_2^*` を任意の実数と
 `euler_cos_real_inclusion`・`euler_sin_real_inclusion`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimEulerFormulaCosSin.lean`）で引く。
 人手は `e_- := exp((-i)(θ)_ℂ)` と置くので、準備の 5〜7 本目は人手どおり `negative_i_times_complex_is_negation_of_i_times`
 （`neg_I_mul_eq_neg_of_I_mul`）で `exp(-(i(θ)_ℂ))` へ書き換える行を挟む。
-「`(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則」「ℂ の分配則と積の交換律・結合律」の行は `field_simp`・`ring` で閉じる。
+「`(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則」「ℂ の分配律と積の交換律・結合律」の行は `field_simp`・`ring` で閉じる。
 
 ## 人手の記号による `B_1(θ)`・`B_2` の表示と Step 1
 
@@ -189,7 +189,7 @@ theorem factorization_prep_exp_mul_exp_neg (θ : ℝ) :
       = Complex.exp (Complex.I * (θ : ℂ) + (-Complex.I) * (θ : ℂ)) :=
         (Complex.exp_add _ _).symm                                 -- `e_±` の定義と `scalar_exp_product`（`K = ℂ`）
     _ = Complex.exp 0 := by
-        rw [← add_mul, add_neg_cancel, zero_mul]                   -- ℂ の分配則と `i + (-i) = 0_ℂ`（と `0_ℂ(θ)_ℂ = 0_ℂ`）
+        rw [← add_mul, add_neg_cancel, zero_mul]                   -- ℂ の分配律と `i + (-i) = 0_ℂ`（と `0_ℂ(θ)_ℂ = 0_ℂ`）
     _ = 1 := Complex.exp_zero                                      -- `scalar_exp_zero`（`K = ℂ`）
 
 /-- **人手 `factorization_of_A_theta_general` の準備の 5 本目**:
@@ -275,7 +275,7 @@ theorem factorization_aux_plus (K1 θ : ℝ) :
     _ = Complex.exp (Complex.I * (θ : ℂ))
           * ((Real.cosh K1 : ℂ) ^ 2 * Complex.exp ((-Complex.I) * (θ : ℂ))
             + (Real.sinh K1 : ℂ) ^ 2 * Complex.exp (Complex.I * (θ : ℂ))) := by
-        ring                                                       -- ℂ の分配則と積の交換律・結合律
+        ring                                                       -- ℂ の分配律と積の交換律・結合律
     _ = Complex.exp (Complex.I * (θ : ℂ))
           * ((Real.cosh K1 : ℂ) ^ 2 * (((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ))
             + (Real.sinh K1 : ℂ) ^ 2 * Complex.exp (Complex.I * (θ : ℂ))) := by
@@ -287,7 +287,7 @@ theorem factorization_aux_plus (K1 θ : ℝ) :
     _ = Complex.exp (Complex.I * (θ : ℂ))
           * (((Real.cosh K1 : ℂ) ^ 2 + (Real.sinh K1 : ℂ) ^ 2) * ((Real.cos θ : ℝ) : ℂ)
             - Complex.I * (((Real.cosh K1 : ℂ) ^ 2 - (Real.sinh K1 : ℂ) ^ 2) * ((Real.sin θ : ℝ) : ℂ))) := by
-        ring                                                       -- ℂ の分配則
+        ring                                                       -- ℂ の分配律
     _ = Complex.exp (Complex.I * (θ : ℂ))
           * (((Real.cosh (2 * K1) : ℝ) : ℂ) * ((Real.cos θ : ℝ) : ℂ)
             - Complex.I * (((Real.cosh K1 : ℂ) ^ 2 - (Real.sinh K1 : ℂ) ^ 2) * ((Real.sin θ : ℝ) : ℂ))) := by
@@ -313,7 +313,7 @@ theorem factorization_aux_minus (K1 θ : ℝ) :
     _ = Complex.exp ((-Complex.I) * (θ : ℂ))
           * ((Real.cosh K1 : ℂ) ^ 2 * Complex.exp (Complex.I * (θ : ℂ))
             + (Real.sinh K1 : ℂ) ^ 2 * Complex.exp ((-Complex.I) * (θ : ℂ))) := by
-        ring                                                       -- ℂ の分配則と積の交換律・結合律
+        ring                                                       -- ℂ の分配律と積の交換律・結合律
     _ = Complex.exp ((-Complex.I) * (θ : ℂ))
           * ((Real.cosh K1 : ℂ) ^ 2 * (((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ))
             + (Real.sinh K1 : ℂ) ^ 2 * Complex.exp ((-Complex.I) * (θ : ℂ))) := by
@@ -325,7 +325,7 @@ theorem factorization_aux_minus (K1 θ : ℝ) :
     _ = Complex.exp ((-Complex.I) * (θ : ℂ))
           * (((Real.cosh K1 : ℂ) ^ 2 + (Real.sinh K1 : ℂ) ^ 2) * ((Real.cos θ : ℝ) : ℂ)
             + Complex.I * (((Real.cosh K1 : ℂ) ^ 2 - (Real.sinh K1 : ℂ) ^ 2) * ((Real.sin θ : ℝ) : ℂ))) := by
-        ring                                                       -- ℂ の分配則
+        ring                                                       -- ℂ の分配律
     _ = Complex.exp ((-Complex.I) * (θ : ℂ))
           * (((Real.cosh (2 * K1) : ℝ) : ℂ) * ((Real.cos θ : ℝ) : ℂ)
             + Complex.I * (((Real.cosh K1 : ℂ) ^ 2 - (Real.sinh K1 : ℂ) ^ 2) * ((Real.sin θ : ℝ) : ℂ))) := by
@@ -406,7 +406,7 @@ theorem factorization_step1_N11 (a b C S ep em : ℂ) :
         rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
     _ = C * a - S * b * em := by
         linear_combination (S * em * b) * factorization_I_mul_I        -- `i i = -1_ℂ` と ℂ の積の交換律・結合律
-                                                                     -- （人手が書かない分配則と差の定義も使う）
+                                                                     -- （人手が書かない分配律と差の定義も使う）
 
 /-- **人手 Step 1 の `N_{12}`**: `N_{12} = i(Sa - Cbe_+)`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
 theorem factorization_step1_N12 (a b C S ep em : ℂ) :
@@ -416,7 +416,7 @@ theorem factorization_step1_N12 (a b C S ep em : ℂ) :
       = C * (((-Complex.I) * ep) * b) + (Complex.I * S) * a := by
         rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
     _ = Complex.I * (S * a - C * b * ep) := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
                                                                      -- （人手が書かない `(-i)x = -(ix)` と差の定義も使う）
 
 /-- **人手 Step 1 の `N_{21}`**: `N_{21} = i(Cbe_- - Sa)`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
@@ -427,7 +427,7 @@ theorem factorization_step1_N21 (a b C S ep em : ℂ) :
       = ((-Complex.I) * S) * a + C * ((Complex.I * em) * b) := by
         rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
     _ = Complex.I * (C * b * em - S * a) := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
                                                                      -- （人手が書かない `(-i)x = -(ix)` と差の定義も使う）
 
 /-- **人手 Step 1 の `N_{22}`**: `N_{22} = Ca - Sbe_+`。人手の 2 行と calc の 2 段が 1 対 1 である。 -/
@@ -438,7 +438,7 @@ theorem factorization_step1_N22 (a b C S ep em : ℂ) :
         rw [Matrix.mul_apply, Fin.sum_univ_two]; rfl                  -- `mat_mult`
     _ = C * a - S * b * ep := by
         linear_combination (S * ep * b) * factorization_neg_I_mul_neg_I -- `(-i)(-i) = -1_ℂ` と ℂ の積の交換律・結合律
-                                                                     -- （人手が書かない分配則と差の定義も使う）
+                                                                     -- （人手が書かない分配律と差の定義も使う）
 
 /-! ## Step 2・3: `P := B_1(θ) N` の対角成分 -/
 
@@ -469,11 +469,11 @@ theorem factorization_step2_P11 (a b C S ep em c1 s1 cθ : ℂ)
         linear_combination (ep * b * (C * b * em - S * a)) * factorization_neg_I_mul_I
                                                                      -- `(-i) i = 1_ℂ` と ℂ の積の交換律・結合律
     _ = C * a ^ 2 - S * a * b * em + C * b ^ 2 * ep * em - S * a * b * ep := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
     _ = C * a ^ 2 - S * a * b * em + C * b ^ 2 - S * a * b * ep := by
         rw [mul_assoc (C * b ^ 2), hpm, mul_one]                     -- `e_+ e_- = 1_ℂ`
     _ = C * (a ^ 2 + b ^ 2) - S * a * b * (ep + em) := by
-        ring                                                         -- ℂ の分配則
+        ring                                                         -- ℂ の分配律
     _ = C * c1 - S * a * b * (ep + em) := by
         rw [hsq]                                                     -- `a^2 + b^2 = (c_1)_ℂ`
     _ = C * c1 - S * a * b * (((2 : ℝ) : ℂ) * cθ) := by
@@ -504,11 +504,11 @@ theorem factorization_step3_P22 (a b C S ep em c1 s1 cθ : ℂ)
         linear_combination (em * b * (S * a - C * b * ep)) * factorization_I_mul_I
                                                                      -- `i i = -1_ℂ` と ℂ の積の交換律・結合律
     _ = -(S * a * b * em) + C * b ^ 2 * ep * em + C * a ^ 2 - S * a * b * ep := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
     _ = -(S * a * b * em) + C * b ^ 2 + C * a ^ 2 - S * a * b * ep := by
         rw [mul_assoc (C * b ^ 2), hpm, mul_one]                     -- `e_+ e_- = 1_ℂ`
     _ = C * (a ^ 2 + b ^ 2) - S * a * b * (ep + em) := by
-        ring                                                         -- ℂ の分配則と和の交換律
+        ring                                                         -- ℂ の分配律と和の交換律
     _ = C * c1 - S * a * b * (ep + em) := by
         rw [hsq]                                                     -- `a^2 + b^2 = (c_1)_ℂ`
     _ = C * c1 - S * a * b * (((2 : ℝ) : ℂ) * cθ) := by
@@ -594,9 +594,9 @@ theorem factorization_step4_P12 (a b C S ep em c1 s1 c2 cθ sθ : ℂ)
     _ = a * (Complex.I * (S * a - C * b * ep)) + (((-Complex.I) * ep) * b) * (C * a - S * b * ep) := by
         rw [factorization_step1_N12, factorization_step1_N22]        -- Step 1 の `N_{12}, N_{22}`
     _ = Complex.I * (S * a ^ 2 - C * a * b * ep) + Complex.I * (-(C * a * b * ep) + S * b ^ 2 * ep * ep) := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
     _ = Complex.I * (S * (a ^ 2 + b ^ 2 * ep * ep) - 2 * a * b * C * ep) := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
     _ = Complex.I * (S * (ep * (c1 * cθ - Complex.I * sθ)) - 2 * a * b * C * ep) := by
         rw [haux]                                                    -- 準備の補助的な等式の 1 本目
     _ = Complex.I * (S * (ep * (c1 * cθ - Complex.I * sθ)) - s1 * C * ep) := by
@@ -604,7 +604,7 @@ theorem factorization_step4_P12 (a b C S ep em c1 s1 c2 cθ sθ : ℂ)
     _ = Complex.I * (S * (ep * (c1 * cθ - Complex.I * sθ)) - s1 * (S * c2) * ep) := by
         rw [hC]                                                      -- `C = S(c_2)_ℂ`
     _ = Complex.I * ep * S * (c1 * cθ - Complex.I * sθ - s1 * c2) := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
 
 /-- **人手 Step 5 の `P_{21}`**（人手の結論 `P_{21} = (-i)e_-(s_2^*)_ℂ((c_1)_ℂ(cos θ)_ℂ + i(sin θ)_ℂ - (s_1)_ℂ(c_2)_ℂ)`）。
 この版の右辺は `(-i)e_-S(c1 cθ + i sθ - s1 c2)` である。
@@ -625,9 +625,9 @@ theorem factorization_step5_P21 (a b C S ep em c1 s1 c2 cθ sθ : ℂ)
     _ = ((Complex.I * em) * b) * (C * a - S * b * em) + a * (Complex.I * (C * b * em - S * a)) := by
         rw [factorization_step1_N11, factorization_step1_N21]        -- Step 1 の `N_{11}, N_{21}`
     _ = Complex.I * (C * a * b * em - S * b ^ 2 * em * em) + Complex.I * (C * a * b * em - S * a ^ 2) := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
     _ = (-Complex.I) * (S * (a ^ 2 + b ^ 2 * em * em) - 2 * a * b * C * em) := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
     _ = (-Complex.I) * (S * (em * (c1 * cθ + Complex.I * sθ)) - 2 * a * b * C * em) := by
         rw [haux]                                                    -- 準備の補助的な等式の 2 本目
     _ = (-Complex.I) * (S * (em * (c1 * cθ + Complex.I * sθ)) - s1 * C * em) := by
@@ -635,7 +635,7 @@ theorem factorization_step5_P21 (a b C S ep em c1 s1 c2 cθ sθ : ℂ)
     _ = (-Complex.I) * (S * (em * (c1 * cθ + Complex.I * sθ)) - s1 * (S * c2) * em) := by
         rw [hC]                                                      -- `C = S(c_2)_ℂ`
     _ = (-Complex.I) * em * S * (c1 * cθ + Complex.I * sθ - s1 * c2) := by
-        ring                                                         -- ℂ の分配則と積の交換律・結合律
+        ring                                                         -- ℂ の分配律と積の交換律・結合律
 
 /-- 人手の準備の `C = S(c_2)_ℂ` を、双対関係を仮定 `hdual : s_2^* c_2 = c_2^*`（`s_2^* := sinh 2K_2^*`、
 `c_2^* := cosh 2K_2^*`、`K_2^*, c_2 ∈ ℝ`）として受けた形。人手の 3 行のうち 2・3 行目と calc の 2 段が 1 対 1 である

@@ -1,5 +1,5 @@
 /-
-# 行列の 0 倍は零行列・行列の和の可換則（必要十分版）
+# 行列の 0 倍は零行列・行列の和の可換律（必要十分版）
 
 具体版: `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimZeroScalarMultipleAndMatrixSumCommutative.lean`
 （人手 `zero_scalar_multiple_is_zero_matrix`・`matrix_sum_is_commutative`）。具体版をこのファイルの系として導くのは

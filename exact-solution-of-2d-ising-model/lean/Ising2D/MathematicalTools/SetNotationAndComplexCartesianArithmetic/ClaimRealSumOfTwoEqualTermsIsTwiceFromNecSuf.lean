@@ -3,7 +3,7 @@
 
 具体版 `ClaimRealSumOfTwoEqualTermsIsTwice.lean` の主張を、必要十分版
 `Ising2D/NecSuf/AddSelfEqTwoMul.lean` の `R := ℝ`、`t := 2` の特殊化として得る。
-左単位元の仮定には `one_mul` を、右からの分配則には `add_mul` を、`1 + 1 = t` には `def_real_two` を読む
+左単位元の仮定には `one_mul` を、右からの分配律には `add_mul` を、`1 + 1 = t` には `def_real_two` を読む
 `one_add_one_eq_two` を渡す。人手のラベルは `real_sum_of_two_equal_terms_is_twice`。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealSumOfTwoEqualTermsIsTwice

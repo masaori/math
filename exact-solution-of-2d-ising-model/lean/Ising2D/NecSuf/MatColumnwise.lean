@@ -13,7 +13,7 @@
 
 - 効いているのは、**行列の積と行列とベクトルの積が同じ和 `Σ_j A_{ij} v_j` で定まること**だけで、係数に要るのは
   その和を書くための `Mul`・`AddCommMonoid`（mathlib の `Matrix.mulVec` が要求する `NonUnitalNonAssocSemiring`）である。
-  積の結合律・分配則・単位元・可換性はどれも鎖に出ない。添字の集合に順序も要らない（`Fintype` だけ）。
+  積の結合律・分配律・単位元・可換性はどれも鎖に出ない。添字の集合に順序も要らない（`Fintype` だけ）。
 -/
 import Mathlib.Data.Matrix.Mul
 

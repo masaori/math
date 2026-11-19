@@ -3189,7 +3189,7 @@ c_1\cos\theta - s_1c_2
 &\iff \exists k \in \mathbb{Z}:\ 2\left(\mu - \tfrac12\right) = kM_{\mathrm{col}}
    \quad (\because \text{両辺を } M_{\mathrm{col}} \neq 0 \text{ 倍する}) \\
 &\iff \exists k \in \mathbb{Z}:\ 2\mu - 1 = kM_{\mathrm{col}}
-   \quad (\because \text{分配則 } 2\left(\mu-\tfrac12\right) = 2\mu - 1)
+   \quad (\because \text{分配律 } 2\left(\mu-\tfrac12\right) = 2\mu - 1)
 \end{aligned}`,
       ),
       paragraph([
@@ -4399,7 +4399,7 @@ s_1c_2
 &= \mp g_1 r - r^2
    \quad (\because \blkref{abs_basic_properties}\ (a\bar a = |a|^2 = r^2)) \\
 &= \left(g_1 \pm r\right)\left(\mp r\right)
-   \quad (\because \text{分配則}\ (\left(g_1 \pm r\right)\left(\mp r\right) = \mp g_1 r - r^2)) \\
+   \quad (\because \text{分配律}\ (\left(g_1 \pm r\right)\left(\mp r\right) = \mp g_1 r - r^2)) \\
 &= \lambda_{\pm,\mu}\,\left(v_\pm\right)_1
    \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_1 = \mp r)
 \end{aligned}`,
@@ -4415,7 +4415,7 @@ s_1c_2
 &= (\pm r)\,b + g_1 b
    \quad (\because \mathbb{C}\text{ の乗法の可換律}) \\
 &= \left(\pm r + g_1\right)b
-   \quad (\because \text{分配則で } b \text{ を括り出す}) \\
+   \quad (\because \text{分配律で } b \text{ を括り出す}) \\
 &= \left(g_1 \pm r\right)b
    \quad (\because \mathbb{C}\text{ の加法の交換律（下の符号では } g_1 + (-r) = g_1 - r \text{ と書く）}) \\
 &= \lambda_{\pm,\mu}\,\left(v_\pm\right)_2
@@ -4439,7 +4439,7 @@ s_1c_2
         String.raw`\begin{aligned}
 A(\theta)(cv)
 &= c\,A(\theta)v
-   \quad (\because \text{行列とベクトルの積の各成分の分配則（スカラー倍は積の外へ出る）}) \\
+   \quad (\because \text{行列とベクトルの積の各成分の分配律（スカラー倍は積の外へ出る）}) \\
 &= c(\lambda v)
    \quad (\because \text{上で示した } A(\theta)v = \lambda v \text{ の代入}) \\
 &= \lambda(cv)

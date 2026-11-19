@@ -77,19 +77,19 @@ theorem real_bilinear_value_of_scalar_multiple_vector (P : Matrix n n ℝ) (c : 
           rw [hw k, hw l]                                                    -- 仮定 `w_k = c u_k` を `w_k` と `w_l` へ同時適用
     _ = ∑ k, ∑ l, c * (u k * P k l) * (c * u l) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
-          rw [mul_assoc c (u k) (P k l)]                                     -- 結合則 `(cu_k)P_kl = c(u_kP_kl)` を各項へ
+          rw [mul_assoc c (u k) (P k l)]                                     -- 結合律 `(cu_k)P_kl = c(u_kP_kl)` を各項へ
     _ = ∑ k, ∑ l, c * (u k * P k l * (c * u l)) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-          mul_assoc c (u k * P k l) (c * u l)                                -- 結合則 `(cs)t = c(st)` を各項へ
+          mul_assoc c (u k * P k l) (c * u l)                                -- 結合律 `(cs)t = c(st)` を各項へ
     _ = ∑ k, ∑ l, c * (u k * P k l * c * u l) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
-          rw [mul_assoc (u k * P k l) c (u l)]                               -- 結合則 `s(cu_l) = (sc)u_l` を各項へ
+          rw [mul_assoc (u k * P k l) c (u l)]                               -- 結合律 `s(cu_l) = (sc)u_l` を各項へ
     _ = ∑ k, ∑ l, c * (c * (u k * P k l) * u l) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
-          rw [mul_comm (u k * P k l) c]                                      -- 可換則 `sc = cs` を各項へ
+          rw [mul_comm (u k * P k l) c]                                      -- 可換律 `sc = cs` を各項へ
     _ = ∑ k, ∑ l, c * (c * (u k * P k l * u l)) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
-          rw [mul_assoc c (u k * P k l) (u l)]                               -- 結合則 `(cs)u_l = c(su_l)` を各項へ
+          rw [mul_assoc c (u k * P k l) (u l)]                               -- 結合律 `(cs)u_l = c(su_l)` を各項へ
     _ = ∑ k, c * ∑ l, c * (u k * P k l * u l) :=
         Finset.sum_congr rfl fun k _ =>
           finite_sum_of_real_scalar_multiples_fintype c
@@ -106,6 +106,6 @@ theorem real_bilinear_value_of_scalar_multiple_vector (P : Matrix n n ℝ) (c : 
           (fun k => ∑ l, u k * P k l * u l)]                                 -- `finite_sum_of_real_scalar_multiples`
     _ = c * (c * (u ⬝ᵥ P *ᵥ u)) := by
         rw [dotProduct_mulVec_eq_real_bilinear_value u u P]                  -- `def_real_bilinear_value` を右辺から左辺へ
-    _ = c * c * (u ⬝ᵥ P *ᵥ u) := (mul_assoc c c _).symm                     -- 結合則 `c(ct) = (cc)t`（`t → u^⊤Pu`）
+    _ = c * c * (u ⬝ᵥ P *ᵥ u) := (mul_assoc c c _).symm                     -- 結合律 `c(ct) = (cc)t`（`t → u^⊤Pu`）
 
 end Ising2D

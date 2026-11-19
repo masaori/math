@@ -2873,7 +2873,7 @@ D_0G
 &= \exp\Bigl(K\sum_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\Bigr)
    \quad (\because \blkref{def_open_chain_spin_energy}\text{ と Step 1 の } t_m(s) := s(m)s(m+1)) \\
 &= \exp\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}Kt_m(s)\Bigr)
-   \quad (\because \mathbb R\text{ の分配則を有限和の各項へ}) \\
+   \quad (\because \mathbb R\text{ の分配律を有限和の各項へ}) \\
 &= \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
    \quad (\because \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}}-1,\ j \to m,\ x_j \to Kt_m(s)))
 \end{aligned}`,
@@ -3075,7 +3075,7 @@ D_0G
 &= \exp\Bigl(K\sum_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\Bigr)
    \quad (\because \blkref{def_open_chain_spin_energy}\text{ と Step 1 の } t_m(s) := s(m)s(m+1)) \\
 &= \exp\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}Kt_m(s)\Bigr)
-   \quad (\because \mathbb R\text{ の分配則を有限和の各項へ}) \\
+   \quad (\because \mathbb R\text{ の分配律を有限和の各項へ}) \\
 &= \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
    \quad (\because \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}}-1,\ j \to m,\ x_j \to Kt_m(s)))
 \end{aligned}`,

@@ -87,7 +87,7 @@ theorem comm_smul_smul (α β : ℂ) (X W : TensorPow M) :
     -- スカラー倍が積と可換であること（`scalar_identity_commutes`）
     _ = (α * β) • (X * W) - (α * β) • (W * X) := by
         rw [smul_mul_smul_comm, smul_mul_smul_comm, mul_comm β α]
-    -- 分配則
+    -- 分配律
     _ = (α * β) • (X * W - W * X) := (smul_sub _ _ _).symm
     -- 交換子の定義
     _ = (α * β) • ⁅X, W⁆ := by rw [Ring.lie_def]

@@ -17,7 +17,7 @@ Lean の `j : Fin (r + 1)`（人手の添字 `j + 1`）を因子の添字の型 
 ## 何が効いているか / 効いていないか
 
 - `R` はモノイドである。`Finset.noncommProd` の定義がモノイドを要る。等式の証明では、因子が 1 つの段の `noncommProd_singleton` が
-  単位元（`mul_one`）を使い、末尾に 1 因子を足す段の `noncommProd_insert_of_notMem'` が結合則を使う（どちらも mathlib の補題の中で使われる）。
+  単位元（`mul_one`）を使い、末尾に 1 因子を足す段の `noncommProd_insert_of_notMem'` が結合律を使う（どちらも mathlib の補題の中で使われる）。
 - 因子が互いに可換であること（`hf`）は、`noncommProd` を定めるのに要るうえ、末尾に 1 因子を足す段でも効く。mathlib の `noncommProd` は
   因子を左から順に掛ける形で畳み込むので、足す因子を右の末尾へ置くには、その因子とほかの因子の可換性が要る
   （`noncommProd_insert_of_notMem'` の中の `Multiset.noncommProd_cons'`）。

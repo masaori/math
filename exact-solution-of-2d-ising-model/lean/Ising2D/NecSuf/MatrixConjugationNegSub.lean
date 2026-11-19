@@ -17,11 +17,11 @@
 
 - **`B` が可逆であること、`B'` が `B` の逆元であること、行列の積の結合律は効いていない**（`(BA)B'` の括弧のまま変形する）。
 - 符号反転を保つことで効いているのは、符号反転を積の外へ出す 2 つ（`NecSuf.mul_neg_matrix'`・`NecSuf.neg_mul_matrix'`）であり、
-  係数は `Semiring` と `HasDistribNeg`（`-x = (-1)x`、乗法の結合律、有限和への左分配則）である。
+  係数は `Semiring` と `HasDistribNeg`（`-x = (-1)x`、乗法の結合律、有限和への左分配律）である。
   **係数の乗法の可換律と加法の逆元は効いていない**（`-1` は単位元と `HasDistribNeg` だけから全ての元と交換する）。
   `HasDistribNeg` が連れてくる二重の符号反転 `-(-x) = x`（`InvolutiveNeg`）も効いていない。
 - 差を保つことで効いているのは、差が `x + (-y)` で定まること（仮定 `hsub`。人手の `def_complex_difference`）、和を保つこと
-  （`NecSuf.conj_add_matrix'`。係数の左右の分配則と加法の結合律・交換律）、上の符号反転を保つことだけである。
+  （`NecSuf.conj_add_matrix'`。係数の左右の分配律と加法の結合律・交換律）、上の符号反転を保つことだけである。
   `Sub` を `Semiring` と別に取るのは、`hsub` と `Semiring`・`HasDistribNeg` を加法の逆元なしで同時に持つ型クラスが mathlib に無いからである
   （`NecSuf/SmulMatrixSub.lean` と同じ扱い）。
 - 行列が正方であることは効いていない（`B : ι × κ`、`W : κ × κ'`、`B' : κ' × μ` の形で述べる）。添字は有限であること（積が有限和だから）だけが効く。
