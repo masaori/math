@@ -15818,7 +15818,7 @@ b(\sigma)
                           "）。",
                         ]),
                         paragraph([
-                          "積の添字 ",
+                          "整数の代表で積を書くときの添字 ",
                           math(String.raw`i`),
                           " は整数として ",
                           math(String.raw`0`),
@@ -15826,7 +15826,11 @@ b(\sigma)
                           math(String.raw`L-1`),
                           " まで動かし、",
                           math(String.raw`\rho`),
-                          " の添字（行番号）としてはその剰余類を用いる（",
+                          " の添字（行番号）としては ",
+                          ref("def_lattice"),
+                          " の射影 ",
+                          math(String.raw`\pi(i)`),
+                          " を用いる（",
                           ref("claim_broken_bond_row_decomposition"),
                           " と同じ約束）。",
                           math(String.raw`\mathbb{Z}[x]`),
@@ -15847,8 +15851,12 @@ b(\sigma)
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \prod_{i\in\mathbb{Z}/L\mathbb{Z}}T_{\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)}
-&=\prod_{i=0}^{L-1}x^{\,b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))}
+&=\prod_{i=0}^{L-1}T_{\rho_{\pi(i)}(\sigma),\,\rho_{\pi(i)+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)}
+&&(\because\ \{0,1,\dots,L-1\}\ \text{を剰余類の代表に取る})\\
+&=\prod_{i=0}^{L-1}x^{\,b_{\mathrm{h}}(\rho_{\pi(i)}(\sigma))+b_{\mathrm{v}}(\rho_{\pi(i)}(\sigma),\,\rho_{\pi(i)+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))}
 &&(\because\ \blkref{def_transfer_matrix})\\
+&=\prod_{i\in\mathbb{Z}/L\mathbb{Z}}x^{\,b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))}
+&&(\because\ \{0,1,\dots,L-1\}\ \text{を剰余類の代表に取る})\\
 &=x^{\,\sum_{i\in\mathbb{Z}/L\mathbb{Z}}\bigl(b_{\mathrm{h}}(\rho_i(\sigma))+b_{\mathrm{v}}(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma))\bigr)}
 &&(\because\ x^{a}x^{a'}=x^{a+a'}\ \text{を}\ L-1\ \text{回})\\
 &=x^{\,\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{h}}(\rho_i(\sigma))
@@ -16583,7 +16591,7 @@ w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
 &=\prod_{y\in\mathbb{Z}/L\mathbb{Z}}T_{\rho_y(\sigma),\,\rho_{y+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)}
 &&(\because\ \mathrm{rows}\ \text{の定義})\\
 &=x^{\,b(\sigma)}
-&&(\because\ \text{配位の重みは行に沿った成分の積である})
+&&(\because\ \blkref{claim_transfer_weight_product})
 \end{aligned}`),
                     displayMath(String.raw`\begin{aligned}
 Z_L
