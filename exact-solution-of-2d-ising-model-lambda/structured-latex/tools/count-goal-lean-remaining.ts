@@ -188,9 +188,17 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
       "claim_elementary_symmetric_substitution_degree_bound",
     ],
   },
+  claim_maximal_ordered_subfield_sum_of_squares_is_square: {
+    title: "極大な順序付き部分体で二つの平方の和が平方である",
+    dependsOn: [],
+  },
+  claim_imaginary_unit_extension_square_root: {
+    title: "虚数単位を足した元は平方根を持つ",
+    dependsOn: ["claim_maximal_ordered_subfield_sum_of_squares_is_square"],
+  },
   claim_imaginary_unit_extension_quadratic_root: {
     title: "正の元が平方である部分体に虚数単位を足した体では二次多項式が根を持つ",
-    dependsOn: [],
+    dependsOn: ["claim_imaginary_unit_extension_square_root"],
   },
   claim_two_shifted_values_determine_sum_and_product: {
     title: "二つの整数倍のずらしの値が部分体に入れば和と積も入る",

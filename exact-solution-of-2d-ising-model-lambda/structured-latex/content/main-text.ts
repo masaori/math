@@ -50539,6 +50539,51 @@ b&\in R&&(\because\ E=R)
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_ordered_subfield_sum_of_squares",
+        labels: [],
+        title: { text: "極大な順序付き部分体での二つの平方の和" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_maximal_ordered_subfield_sum_of_squares_is_square",
+            focus: {
+              id: "zero_pinching_claim_maximal_ordered_subfield_sum_of_squares_is_square",
+              kind: "claim",
+              title: { text: "極大な順序付き部分体では二つの平方の和が平方である" },
+              labels: ["claim_maximal_ordered_subfield_sum_of_squares_is_square"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/maximal-ordered-subfield-sum-of-squares-is-square"],
+              lean: [
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_sumOfSquares_isSquare",
+                "Ising2DLambda.NecSuf.FisherZero.sumOfSquares_isSquare_of_positiveRoots",
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_sumOfSquares_isSquare_from_necSuf",
+              ],
+              statement: [paragraph([
+                ref("claim_enumerated_ordered_subfield_is_maximal"), " の極大な正錐付き部分体 ",
+                math(String.raw`(R,C_R)`), " を取る。任意の ", math(String.raw`a,b\in R`),
+                " に対し、ある ", math(String.raw`c\in R`), " が存在して ",
+                math(String.raw`c^2=a^2+b^2`), " となる。",
+              ])],
+              proof: [
+                paragraph([
+                  math(String.raw`a,b\in R`), " を固定する。",
+                  ref("claim_subfield_positive_cone_contains_nonzero_squares"),
+                  " により、", math(String.raw`a\ne0`), " なら ", math(String.raw`a^2\in C_R`),
+                  " であり、", math(String.raw`b\ne0`), " なら ", math(String.raw`b^2\in C_R`), " である。",
+                ]),
+                paragraph(["両方とも零なら ", math(String.raw`c=0`), " を取る。片方だけ零なら非零の平方が正錐に属する。両方とも非零なら正錐の和の閉性（", ref("def_subfield_positive_cone"), "）により和が正錐に属する。従って ", math(String.raw`a^2+b^2=0`), " または ", math(String.raw`a^2+b^2\in C_R`), " である。"]),
+                paragraph(["後者の場合、", ref("claim_maximal_ordered_subfield_positive_is_square"), " を ", math(String.raw`a^2+b^2`), " に適用して ", math(String.raw`c\in R`), " を取る。前者では ", math(String.raw`c=0`), " を取る。いずれも ", math(String.raw`c^2=a^2+b^2`), " である。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_coefficient_polynomials",
         labels: [],
         title: { text: "部分体を係数とする多項式と部分体上の次数" },
@@ -50620,7 +50665,9 @@ n+1&\in F&&\bigl(\because\ n\in F\text{（帰納法の仮定）と }1\in F\text{
                     ]),
                     displayMath(String.raw`\begin{aligned}
 -m&\in F&&\bigl(\because\ -m\in\mathbb{N}\text{ と自然数の段}\bigr)\\
-m=-(-m)&\in F&&\bigl(\because\ F\text{ は符号反転で閉じる}\bigr)
+-(-m)&\in F&&\bigl(\because\ F\text{ は符号反転で閉じる}\bigr)\\
+m&=-(-m)&&\bigl(\because\ \mathbb{Z}\text{ の符号反転}\bigr)\\
+m&\in F&&\bigl(\because\ -(-m)\in F\text{ と直前の等号}\bigr)
 \end{aligned}`),
                     paragraph([
                       "有理数。",
