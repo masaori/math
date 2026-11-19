@@ -50524,6 +50524,76 @@ A&=-1
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_maximal_ordered_subfield_positive_is_square",
+        labels: [],
+        title: { text: "極大な順序付き部分体の正の元の平方根" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_maximal_ordered_subfield_positive_is_square",
+            focus: {
+              id: "zero_pinching_claim_maximal_ordered_subfield_positive_is_square",
+              kind: "claim",
+              title: { text: "極大な順序付き部分体の正の元はその部分体で平方になる" },
+              labels: ["claim_maximal_ordered_subfield_positive_is_square"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/maximal-ordered-subfield-positive-is-square"],
+              lean: [
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_positive_isSquare",
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_sqrtTwo_isSquare",
+                "Ising2DLambda.NecSuf.FisherZero.maximalOrderedSubfield_positive_isSquare",
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_positive_isSquare_from_necSuf",
+              ],
+              statement: [paragraph([
+                ref("claim_enumerated_ordered_subfield_is_maximal"), " の極大な正錐付き部分体 ",
+                math(String.raw`(R,C_R)`), " を取る。任意の ", math(String.raw`a\in C_R`),
+                " に対し、零でない ", math(String.raw`b\in R`), " が存在して ",
+                math(String.raw`b^2=a`), " となる。特に ",
+                math(String.raw`a=s`), " の場合は ", ref("def_real_closed_subfield"),
+                " の第 5 条件を与え、一般の場合は同じ定義の第 2 条件の正の場合を与える。",
+              ])],
+              proof: [
+                paragraph([
+                  math(String.raw`a\in C_R`), " を任意に固定する。",
+                  ref("claim_positive_cone_element_qbar_square_root"), " により、零でない ",
+                  math(String.raw`b\in\overline{\mathbb Q}`), " で ",
+                  math(String.raw`b^2=a`), " となるものを取る。",
+                ]),
+                paragraph([
+                  math(String.raw`b\notin R`), " と仮定する。",
+                  ref("claim_square_root_adjoined_positive_cone_extension"),
+                  " を ", math(String.raw`(R,C_R),a,b`), " に適用する。",
+                  math(String.raw`E:=R(b)`), " に正錐 ", math(String.raw`C_E`),
+                  " があり、", math(String.raw`(E,C_E)`), " は ",
+                  math(String.raw`(R,C_R)`), " を延長する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+E&=R&&(\because\ \blkref{claim_enumerated_ordered_subfield_is_maximal}\text{ の極大性})\\
+b&\in E&&(\because\ E=R(b)\text{ の定義})\\
+b&\in R&&(\because\ E=R)
+\end{aligned}`),
+                paragraph([
+                  "これは ", math(String.raw`b\notin R`), " に矛盾する。従って ",
+                  math(String.raw`b\in R`), " であり、", math(String.raw`b\ne0`),
+                  " と ", math(String.raw`b^2=a`), " は選んだ平方根の条件である。",
+                  "また ", math(String.raw`s\in P_s`), "（",
+                  ref("def_quadratic_positive_cone"), "）と ",
+                  math(String.raw`P_s=C_R\cap Q_s`), "（",
+                  ref("claim_enumerated_ordered_subfield_is_maximal"),
+                  "）から ", math(String.raw`s\in C_R`), " なので、",
+                  math(String.raw`a=s`), " にも適用できる。実数体・複素数体は使わない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_coefficient_polynomials",
         labels: [],
         title: { text: "部分体を係数とする多項式と部分体上の次数" },

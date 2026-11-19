@@ -294,6 +294,7 @@ export const ALL_LABELS = [
   "claim_matching_pair_word_sign_map",
   "claim_matching_word_sign_swap",
   "claim_matrix_pow_entry",
+  "claim_maximal_ordered_subfield_positive_is_square",
   "claim_minimal_vanishing_polynomial_constant_term_nonzero",
   "claim_minimal_vanishing_polynomial_divides",
   "claim_minimal_vanishing_polynomial_leading_coefficient_nonzero",
