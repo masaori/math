@@ -4178,6 +4178,82 @@ x
     },
   },
   {
+    id: "calculation_formulae_claim_finite_product_of_real_numbers_splits_off_first_factor",
+    kind: "claim",
+    title: { text: "実数の有限積から先頭の因子を外へ出せる" },
+    labels: ["finite_product_of_real_numbers_splits_off_first_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r_1,\dots,r_{m+1} \in \mathbb{R}`),
+        " とする。有限積は ",
+        ref("def_finite_product_of_real_numbers"),
+        " による（右辺の ",
+        math(String.raw`\prod_{j=1}^{m} r_{j+1}`),
+        " は、",
+        math(String.raw`j = 1,\dots,m`),
+        " の ",
+        math(String.raw`r_{j+1}`),
+        " の有限積）。積は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " の積である。このとき",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{m+1} r_j = r_1\Bigl(\prod_{j=1}^{m} r_{j+1}\Bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で、任意の ",
+        math(String.raw`r_1,\dots,r_{m+1} \in \mathbb{R}`),
+        " について示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{2} r_j
+&= \Bigl(\prod_{j=1}^{1} r_j\Bigr) r_2
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の}\ \textstyle\prod_{j=1}^{m+1} r_j := \bigl(\prod_{j=1}^{m} r_j\bigr) r_{m+1}\ (m \to 1)\bigr)\\
+&= r_1 r_2
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の}\ \textstyle\prod_{j=1}^{1} r_j := r_1\bigr)\\
+&= r_1\Bigl(\prod_{j=1}^{1} r_{j+1}\Bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の}\ \textstyle\prod_{j=1}^{1} r_j := r_1\ (r_j \to r_{j+1})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定する。",
+        math(String.raw`r_1,\dots,r_{m+2} \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+2} r_j
+&= \Bigl(\prod_{j=1}^{m+1} r_j\Bigr) r_{m+2}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の}\ \textstyle\prod_{j=1}^{m+1} r_j := \bigl(\prod_{j=1}^{m} r_j\bigr) r_{m+1}\ (m \to m+1)\bigr)\\
+&= \Bigl(r_1\Bigl(\prod_{j=1}^{m} r_{j+1}\Bigr)\Bigr) r_{m+2}
+&&\bigl(\because\ \text{帰納法の仮定}\ (r_1,\dots,r_{m+1}\ \text{に当てる})\bigr)\\
+&= r_1\Bigl(\Bigl(\prod_{j=1}^{m} r_{j+1}\Bigr) r_{m+2}\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ \bigl(x \to r_1,\ y \to \textstyle\prod_{j=1}^{m} r_{j+1},\ t \to r_{m+2}\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= r_1\Bigl(\prod_{j=1}^{m+1} r_{j+1}\Bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の}\ \textstyle\prod_{j=1}^{m+1} r_j := \bigl(\prod_{j=1}^{m} r_j\bigr) r_{m+1}\ (r_j \to r_{j+1})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`m+1`),
+        " でも成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w22)。open_chain_endpoint_product_sum の並べ替えの行を割る件の準備）: 原文（Typst）に対応ブロックは無い。open_chain_endpoint_product_sum の Step 2 の M_col ≥ 3 の鎖の 2 行目が、有限積の先頭の因子 s(1) を外へ出す段を「ℝ の乗法の可換則と結合則を有限積の因子の並べ替えへ」の 1 行に含めており、引ける主張が本文に無かったので足した（末尾の因子を外へ出すのは def_finite_product_of_real_numbers の帰納の式そのもの）。乗法の可換則は使わない。Lean の具体版は Ising2D.finite_product_of_real_numbers_splits_off_first_factor（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteProductOfRealNumbersSplitsOffFirstFactor.lean）、必要十分版は Ising2D.NecSuf.finProdLeft_succ_first（NecSuf/FiniteProductLeftFirstFactor.lean）。数値検証: sagemath/check/finite_product_of_real_numbers_splits_off_first_factor/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_definition_power_of_complex_number",
     kind: "definition",
     title: { text: "複素数の冪" },
