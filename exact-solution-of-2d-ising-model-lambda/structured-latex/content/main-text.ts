@@ -58428,6 +58428,330 @@ d&(e=a\text{ のとき})\\
                 },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_last_variable_extension",
+              focus:
+                {
+                  id: "zero_pinching_def_last_variable_extension",
+                  kind: "definition",
+                  title: { text: "末尾に変数を足す持ち上げ" },
+                  labels: ["def_last_variable_extension"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.FisherZero.exponentRestrictLast",
+                    "Ising2DLambda.FisherZero.eq_exponentZeroExtension_of_last_eq_zero",
+                    "Ising2DLambda.FisherZero.lastVariableExtension",
+                    "Ising2DLambda.FisherZero.lastVariableExtension_coeff",
+                  ],
+                  verification: ["sagemath/check/last-variable-extension"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）に対して、",
+                      math(String.raw`\mathrm{ex}_n(Q)\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      " を係数で",
+                    ]),
+                    displayMath(String.raw`\mathrm{mco}_a\bigl(\mathrm{ex}_n(Q)\bigr):=
+\begin{cases}
+\mathrm{mco}_{a|_{<n}}(Q)&(a(n)=0\text{ のとき})\\
+0&(a(n)\ne0\text{ のとき})
+\end{cases}
+\qquad(a\in\mathrm{Ex}_{n+1})`),
+                    paragraph([
+                      "と定め、",
+                      math(String.raw`\mathrm{ex}_n:\overline{\mathbb{Q}}[X_{<n}]\to\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      " を末尾に変数を足す持ち上げと呼ぶ。",
+                      math(String.raw`a|_{<n}\in\mathrm{Ex}_n`),
+                      " は ",
+                      ref("def_exponent_zero_extension"),
+                      " の制限である。",
+                      "係数が零でない ",
+                      math(String.raw`a`),
+                      " は ",
+                      math(String.raw`a(n)=0`),
+                      " かつ ",
+                      math(String.raw`a|_{<n}\in\mathrm{spt}_n(Q)`),
+                      "（",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）を満たし、",
+                      ref("def_exponent_zero_extension"),
+                      " の同値により ",
+                      math(String.raw`a=\mathrm{ez}_n(a|_{<n})`),
+                      " である。よって係数が零でない ",
+                      math(String.raw`a`),
+                      " は有限集合 ",
+                      math(String.raw`\{\,\mathrm{ez}_n(b)\mid b\in\mathrm{spt}_n(Q)\,\}`),
+                      " に属し、",
+                      math(String.raw`\mathrm{ex}_n(Q)`),
+                      " は ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      " の元として定まる。",
+                      "現れるのは代数的数と自然数に値をとる有限個の点の写像だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_last_variable_zero_of_extension",
+              focus:
+                {
+                  id: "zero_pinching_claim_last_variable_zero_of_extension",
+                  kind: "claim",
+                  title: { text: "末尾に変数を足して持ち上げた多項式の末尾の変数に零を代入すると元に戻る" },
+                  labels: ["claim_last_variable_zero_of_extension"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/last-variable-extension"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.exponentRestrictLast_exponentZeroExtension",
+                    "Ising2DLambda.FisherZero.lastVariableZero_lastVariableExtension",
+                    "Ising2DLambda.NecSuf.FisherZero.lastVariableZero_lastVariableExtension_necSuf",
+                    "Ising2DLambda.FisherZero.lastVariableZero_lastVariableExtension_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について",
+                    ]),
+                    displayMath(String.raw`\mathrm{lz}_n\bigl(\mathrm{ex}_n(Q)\bigr)=Q`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_last_variable_zero_substitution"),
+                      "、",
+                      ref("def_last_variable_extension"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`b\in\mathrm{Ex}_n`),
+                      " を任意に取る。",
+                      ref("def_exponent_zero_extension"),
+                      " の同値を ",
+                      math(String.raw`a=\mathrm{ez}_n(b)`),
+                      " に当てると、",
+                      math(String.raw`\mathrm{ez}_n(b)(n)=0`),
+                      " かつ ",
+                      math(String.raw`\mathrm{ez}_n(b)|_{<n}=b`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_b\Bigl(\mathrm{lz}_n\bigl(\mathrm{ex}_n(Q)\bigr)\Bigr)
+&=\mathrm{mco}_{\mathrm{ez}_n(b)}\bigl(\mathrm{ex}_n(Q)\bigr)
+&&\bigl(\because\ \blkref{claim_last_variable_zero_coefficient}\bigr)\\
+&=\mathrm{mco}_{\mathrm{ez}_n(b)|_{<n}}(Q)
+&&\bigl(\because\ \mathrm{ez}_n(b)(n)=0\text{ と }\blkref{def_last_variable_extension}\bigr)\\
+&=\mathrm{mco}_b(Q)
+&&\bigl(\because\ \mathrm{ez}_n(b)|_{<n}=b\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`b`),
+                      " は任意で、係数がすべて等しい二つの元は等しい（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）ので、",
+                      math(String.raw`\mathrm{lz}_n(\mathrm{ex}_n(Q))=Q`),
+                      " である。",
+                      "全過程は代数的数の係数の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_last_variable_extension_subfield_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_last_variable_extension_subfield_coefficient",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする多項式を末尾に変数を足して持ち上げても同じ部分体を係数とする" },
+                  labels: ["claim_last_variable_extension_subfield_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/last-variable-extension"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.lastVariableExtension_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.lastVariableExtension_mem_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.lastVariableExtension_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。任意の ",
+                      math(String.raw`Q\in F[X_{<n}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）について ",
+                      math(String.raw`\mathrm{ex}_n(Q)\in F[X_{<n+1}]`),
+                      "（",
+                      ref("def_last_variable_extension"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`a\in\mathrm{Ex}_{n+1}`),
+                      " を任意に取る。",
+                      math(String.raw`a(n)=0`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\bigl(\mathrm{ex}_n(Q)\bigr)
+&=\mathrm{mco}_{a|_{<n}}(Q)
+&&\bigl(\because\ a(n)=0\text{ と }\blkref{def_last_variable_extension}\bigr)\\
+&\in F
+&&\bigl(\because\ Q\in F[X_{<n}]\text{ と }\blkref{def_subfield_coefficient_multivariate_polynomials}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`a(n)\ne0`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\bigl(\mathrm{ex}_n(Q)\bigr)
+&=0
+&&\bigl(\because\ a(n)\ne0\text{ と }\blkref{def_last_variable_extension}\bigr)\\
+&\in F
+&&\bigl(\because\ F\text{ は部分体なので零元を含む}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      " により ",
+                      math(String.raw`\mathrm{ex}_n(Q)\in F[X_{<n+1}]`),
+                      " である。",
+                      "全過程は代数的数の所属だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_last_variable_extension_weighted_degree_bound",
+              focus:
+                {
+                  id: "zero_pinching_claim_last_variable_extension_weighted_degree_bound",
+                  kind: "claim",
+                  title: { text: "末尾に変数を足して持ち上げても重み付き次数は増えない" },
+                  labels: ["claim_last_variable_extension_weighted_degree_bound"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/last-variable-extension"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.exponentWeightedTotal_of_last_eq_zero",
+                    "Ising2DLambda.FisherZero.qbarWeightedDegree_lastVariableExtension_le",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_lastVariableExtension_le_necSuf",
+                    "Ising2DLambda.FisherZero.qbarWeightedDegree_lastVariableExtension_le_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について",
+                    ]),
+                    displayMath(String.raw`\mathrm{wdeg}_{n+1}\bigl(\mathrm{ex}_n(Q)\bigr)\le\mathrm{wdeg}_n(Q)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_last_variable_extension"),
+                      "、",
+                      ref("def_qbar_multivariate_weighted_degree"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`a\in\mathrm{spt}_{n+1}(\mathrm{ex}_n(Q))`),
+                      "（",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）を任意に取る。",
+                      math(String.raw`a(n)\ne0`),
+                      " なら ",
+                      ref("def_last_variable_extension"),
+                      " により ",
+                      math(String.raw`\mathrm{mco}_a(\mathrm{ex}_n(Q))=0`),
+                      " となり ",
+                      math(String.raw`a\in\mathrm{spt}_{n+1}(\mathrm{ex}_n(Q))`),
+                      " に反するので、",
+                      math(String.raw`a(n)=0`),
+                      " である。準備として",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_{a|_{<n}}(Q)
+&=\mathrm{mco}_a\bigl(\mathrm{ex}_n(Q)\bigr)
+&&\bigl(\because\ a(n)=0\text{ と }\blkref{def_last_variable_extension}\bigr)\\
+&\ne0
+&&\bigl(\because\ a\in\mathrm{spt}_{n+1}(\mathrm{ex}_n(Q))\text{ と }\blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{spt}_{n+1}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので ",
+                      math(String.raw`a|_{<n}\in\mathrm{spt}_n(Q)`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{wsz}_{n+1}(a)
+&=\sum_{k\in\mathbb{N}_{<n+1}}(k+1)\cdot a(k)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_weighted_degree}\text{ の }\mathrm{wsz}_{n+1}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}(k+1)\cdot a(k)+(n+1)\cdot a(n)
+&&\bigl(\because\ \mathbb{N}_{<n+1}=\mathbb{N}_{<n}\cup\{n\}\text{ による有限和の分離}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}(k+1)\cdot a(k)+(n+1)\cdot0
+&&\bigl(\because\ a(n)=0\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}(k+1)\cdot a(k)
+&&\bigl(\because\ \mathbb{N}\text{ で零との積は零、零は加法の単位元}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}(k+1)\cdot a|_{<n}(k)
+&&\bigl(\because\ \blkref{def_exponent_zero_extension}\text{ の制限 }a|_{<n}(k)=a(k)\bigr)\\
+&=\mathrm{wsz}_n\bigl(a|_{<n}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_weighted_degree}\text{ の }\mathrm{wsz}_n\bigr)\\
+&\le\mathrm{wdeg}_n(Q)
+&&\bigl(\because\ a|_{<n}\in\mathrm{spt}_n(Q)\text{ と }\blkref{def_qbar_multivariate_weighted_degree}\text{ の最大元の性質}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      math(String.raw`\{0\}\cup\{\,\mathrm{wsz}_{n+1}(a)\mid a\in\mathrm{spt}_{n+1}(\mathrm{ex}_n(Q))\,\}`),
+                      " の元はすべて ",
+                      math(String.raw`\mathrm{wdeg}_n(Q)\in\mathbb{N}`),
+                      " 以下であり、その最大元 ",
+                      math(String.raw`\mathrm{wdeg}_{n+1}(\mathrm{ex}_n(Q))`),
+                      "（",
+                      ref("def_qbar_multivariate_weighted_degree"),
+                      "）も ",
+                      math(String.raw`\mathrm{wdeg}_n(Q)`),
+                      " 以下である。",
+                      "全過程は自然数の比較と代数的数の係数だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
         ],
       },
     },
