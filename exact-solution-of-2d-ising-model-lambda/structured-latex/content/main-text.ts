@@ -10725,15 +10725,15 @@ p(\tau(i))&=\upsilon(\tau(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_s
             proof: [
               paragraph(["この証明の中では ", math(String.raw`C:=C_{\tau,\upsilon}\subseteq\mathcal J`), "、", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}:\mathcal J\to\mathcal J`), " と略す。任意の ", math(String.raw`i\in\mathcal J`), " を固定する。", math(String.raw`i\in C`), " の場合、"]),
               displayMath(String.raw`\begin{aligned}
-\sigma(i)&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\in C\bigr),\\
-\tau(i)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates},\ i\in C\bigr),\\
-\sigma(i)&\notin C&&\bigl(\because\ \sigma(i)=\tau(i)\bigr).
+\sigma(i)&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\in C\bigr)\\
+\tau(i)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates},\ i\in C\bigr)\\
+\sigma(i)&\notin C&&\bigl(\because\ \sigma(i)=\tau(i)\bigr)
 \end{aligned}`),
               paragraph(["次に ", math(String.raw`i\notin C`), " の場合、"]),
               displayMath(String.raw`\begin{aligned}
-\sigma(i)&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\notin C\bigr),\\
-\upsilon(i)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates},\ i\notin C\bigr),\\
-\sigma(i)&\in C&&\bigl(\because\ \sigma(i)=\upsilon(i)\bigr).
+\sigma(i)&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\notin C\bigr)\\
+\upsilon(i)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates},\ i\notin C\bigr)\\
+\sigma(i)&\in C&&\bigl(\because\ \sigma(i)=\upsilon(i)\bigr)
 \end{aligned}`),
               paragraph(["二つの場合は排他的で全体を覆うため、結論が従う。空集合では全称条件が成り立つ。有限番号集合の写像だけを扱い、実数体への脱出はない。"]),
             ],
