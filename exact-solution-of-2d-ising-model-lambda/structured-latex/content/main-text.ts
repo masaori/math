@@ -57249,6 +57249,647 @@ d&(e=a\text{ のとき})\\
                 },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_qbar_multivariate_weighted_degree",
+              focus:
+                {
+                  id: "zero_pinching_def_qbar_multivariate_weighted_degree",
+                  kind: "definition",
+                  title: { text: "有限個の変数の多項式の重み付き次数" },
+                  labels: ["def_qbar_multivariate_weighted_degree"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.FisherZero.exponentWeightedTotal",
+                    "Ising2DLambda.FisherZero.qbarWeightedDegree",
+                    "Ising2DLambda.FisherZero.exponentWeightedTotal_le_qbarWeightedDegree",
+                  ],
+                  verification: ["sagemath/check/elementary-symmetric-substitution-degree-bound"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。",
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）に対して、重み付きの指数の総和を",
+                    ]),
+                    displayMath(String.raw`\mathrm{wsz}_n(a):=\sum_{k\in\mathbb{N}_{<n}}(k+1)\cdot a(k)\ \in\ \mathbb{N}`),
+                    paragraph([
+                      "と定める（変数 ",
+                      math(String.raw`X^{(n)}_k`),
+                      " の重みを ",
+                      math(String.raw`k+1`),
+                      " とする）。",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " に対して、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      " の有限集合 ",
+                      math(String.raw`\mathrm{spt}_n(Q)`),
+                      " を使い、",
+                    ]),
+                    displayMath(String.raw`\mathrm{wdeg}_n(Q):=\max\Bigl(\{0\}\cup\bigl\{\,\mathrm{wsz}_n(a)\ \bigm|\ a\in\mathrm{spt}_n(Q)\,\bigr\}\Bigr)\ \in\ \mathbb{N}`),
+                    paragraph([
+                      "を ",
+                      math(String.raw`Q`),
+                      " の重み付き次数と呼ぶ（",
+                      math(String.raw`\mathbb{N}`),
+                      " の空でない有限部分集合の最大元である）。最大元の定義から、任意の ",
+                      math(String.raw`a\in\mathrm{spt}_n(Q)`),
+                      " について ",
+                      math(String.raw`\mathrm{wsz}_n(a)\le\mathrm{wdeg}_n(Q)`),
+                      " である。",
+                      "現れるのは自然数と有限集合だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_total_degree_constant",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_total_degree_constant",
+                  kind: "claim",
+                  title: { text: "定数の全次数は零である" },
+                  labels: ["claim_qbar_total_degree_constant"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-degree-bound"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_C",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_C_necSuf",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_C_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`c\in\overline{\mathbb{Q}}`),
+                      " について ",
+                      math(String.raw`\mathrm{tdeg}_n\bigl(\mathrm{mk}_n(c)\bigr)=0`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`a\in\mathrm{spt}_n(\mathrm{mk}_n(c))`),
+                      " を任意に取る。",
+                      math(String.raw`\mathrm{mco}_a(\mathrm{mk}_n(c))\ne0`),
+                      " であり、",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      " の ",
+                      math(String.raw`\mathrm{mk}_n`),
+                      " は零写像でない指数の係数が ",
+                      math(String.raw`0`),
+                      " なので、",
+                      math(String.raw`a`),
+                      " は零写像である。よって",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sz}_n(a)
+&=\sum_{k\in\mathbb{N}_{<n}}a(k)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{sz}_n\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}0
+&&\bigl(\because\ a\text{ は零写像}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb{N}\text{ で零の有限和は零}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      " の上界の性質（",
+                      math(String.raw`m=0`),
+                      "）により ",
+                      math(String.raw`\mathrm{tdeg}_n(\mathrm{mk}_n(c))\le0`),
+                      " であり、",
+                      math(String.raw`\mathrm{tdeg}_n(\mathrm{mk}_n(c))\in\mathbb{N}`),
+                      " なので ",
+                      math(String.raw`\mathrm{tdeg}_n(\mathrm{mk}_n(c))=0`),
+                      " である。",
+                      "全過程は自然数と有限集合だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_total_degree_finite_sum_bound",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_total_degree_finite_sum_bound",
+                  kind: "claim",
+                  title: { text: "全次数が上界以下の多項式の有限和の全次数は同じ上界以下である" },
+                  labels: ["claim_qbar_total_degree_finite_sum_bound"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-degree-bound"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_sum_le",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_sum_le_necSuf",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_sum_le_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n,m\in\mathbb{N}`),
+                      " とする。任意の有限集合 ",
+                      math(String.raw`I`),
+                      " と、任意の写像 ",
+                      math(String.raw`P:I\to\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について、任意の ",
+                      math(String.raw`i\in I`),
+                      " で ",
+                      math(String.raw`\mathrm{tdeg}_n(P(i))\le m`),
+                      "（",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）ならば ",
+                      math(String.raw`\mathrm{tdeg}_n\bigl(\sum_{i\in I}P(i)\bigr)\le m`),
+                      " である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`a\in\mathrm{spt}_n\bigl(\sum_{i\in I}P(i)\bigr)`),
+                      " を任意に取る。",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      " の和の係数を ",
+                      math(String.raw`I`),
+                      " の元の個数について繰り返し使うと",
+                    ]),
+                    displayMath(String.raw`\mathrm{mco}_a\Bigl(\sum_{i\in I}P(i)\Bigr)=\sum_{i\in I}\mathrm{mco}_a\bigl(P(i)\bigr)`),
+                    paragraph([
+                      "であり、左辺は ",
+                      math(String.raw`0`),
+                      " でない。零元だけの有限和は零元なので、",
+                      math(String.raw`\mathrm{mco}_a(P(i_a))\ne0`),
+                      " となる ",
+                      math(String.raw`i_a\in I`),
+                      " がある。すなわち ",
+                      math(String.raw`a\in\mathrm{spt}_n(P(i_a))`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sz}_n(a)
+&\le\mathrm{tdeg}_n\bigl(P(i_a)\bigr)
+&&\bigl(\because\ a\in\mathrm{spt}_n(P(i_a))\text{ と }\blkref{def_qbar_multivariate_total_degree}\text{ の最大元の性質}\bigr)\\
+&\le m
+&&\bigl(\because\ \text{仮定}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      " の上界の性質により ",
+                      math(String.raw`\mathrm{tdeg}_n\bigl(\sum_{i\in I}P(i)\bigr)\le m`),
+                      " である。",
+                      "全過程は自然数の比較と有限和だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_total_degree_product_bound",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_total_degree_product_bound",
+                  kind: "claim",
+                  title: { text: "二つの多項式の積の全次数は全次数の和以下である" },
+                  labels: ["claim_qbar_total_degree_product_bound"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-degree-bound"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_mul_le",
+                    "Ising2DLambda.FisherZero.exponentTotal_add",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_mul_le_necSuf",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_mul_le_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`A,B\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について",
+                    ]),
+                    displayMath(String.raw`\mathrm{tdeg}_n(A\cdot B)\le\mathrm{tdeg}_n(A)+\mathrm{tdeg}_n(B)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、任意の ",
+                      math(String.raw`b,c\in\mathrm{Ex}_n`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sz}_n(b+c)
+&=\sum_{k\in\mathbb{N}_{<n}}(b+c)(k)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{sz}_n\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}\bigl(b(k)+c(k)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の指数の和}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}b(k)+\sum_{k\in\mathbb{N}_{<n}}c(k)
+&&\bigl(\because\ \mathbb{N}\text{ の加法の結合法則と交換法則}\bigr)\\
+&=\mathrm{sz}_n(b)+\mathrm{sz}_n(c)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{sz}_n\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a\in\mathrm{spt}_n(A\cdot B)`),
+                      " を任意に取る。",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      " の積の係数により ",
+                      math(String.raw`\sum_{(b,c)\in\mathrm{Ex}_n\times\mathrm{Ex}_n:\ b+c=a}\mathrm{mco}_b(A)\cdot\mathrm{mco}_c(B)=\mathrm{mco}_a(A\cdot B)\ne0`),
+                      " である。零元だけの有限和は零元なので、",
+                      math(String.raw`b+c=a`),
+                      " かつ ",
+                      math(String.raw`\mathrm{mco}_b(A)\cdot\mathrm{mco}_c(B)\ne0`),
+                      " となる ",
+                      math(String.raw`(b,c)`),
+                      " がある。零元との積は零元なので ",
+                      math(String.raw`\mathrm{mco}_b(A)\ne0`),
+                      " かつ ",
+                      math(String.raw`\mathrm{mco}_c(B)\ne0`),
+                      "、すなわち ",
+                      math(String.raw`b\in\mathrm{spt}_n(A)`),
+                      " かつ ",
+                      math(String.raw`c\in\mathrm{spt}_n(B)`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sz}_n(a)
+&=\mathrm{sz}_n(b+c)
+&&\bigl(\because\ b+c=a\bigr)\\
+&=\mathrm{sz}_n(b)+\mathrm{sz}_n(c)
+&&\bigl(\because\ \text{準備}\bigr)\\
+&\le\mathrm{tdeg}_n(A)+\mathrm{sz}_n(c)
+&&\bigl(\because\ b\in\mathrm{spt}_n(A)\text{ と }\blkref{def_qbar_multivariate_total_degree}\text{ の最大元の性質}\bigr)\\
+&\le\mathrm{tdeg}_n(A)+\mathrm{tdeg}_n(B)
+&&\bigl(\because\ c\in\mathrm{spt}_n(B)\text{ と }\blkref{def_qbar_multivariate_total_degree}\text{ の最大元の性質}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      " の上界の性質により ",
+                      math(String.raw`\mathrm{tdeg}_n(A\cdot B)\le\mathrm{tdeg}_n(A)+\mathrm{tdeg}_n(B)`),
+                      " である。",
+                      "零因子が無いことは使っていない。",
+                      "全過程は自然数の比較と有限和だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_total_degree_finite_product_bound",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_total_degree_finite_product_bound",
+                  kind: "claim",
+                  title: { text: "多項式の有限積の全次数は全次数の和以下である" },
+                  labels: ["claim_qbar_total_degree_finite_product_bound"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-degree-bound"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_prod_le",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_prod_le_necSuf",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_prod_le_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。任意の有限集合 ",
+                      math(String.raw`I`),
+                      " と、任意の写像 ",
+                      math(String.raw`P:I\to\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について",
+                    ]),
+                    displayMath(String.raw`\mathrm{tdeg}_n\Bigl(\prod_{i\in I}P(i)\Bigr)\le\sum_{i\in I}\mathrm{tdeg}_n\bigl(P(i)\bigr)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`I`),
+                      " の元の個数についての帰納法で示す。",
+                      math(String.raw`I`),
+                      " が空のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_n\Bigl(\prod_{i\in\emptyset}P(i)\Bigr)
+&=\mathrm{tdeg}_n\bigl(\mathrm{mk}_n(1)\bigr)
+&&\bigl(\because\ \text{空の積は単位元で、単位元は }\mathrm{mk}_n(1)\text{（}\blkref{def_qbar_multivariate_polynomial_ring}\text{）}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{claim_qbar_total_degree_constant}\bigr)\\
+&=\sum_{i\in\emptyset}\mathrm{tdeg}_n\bigl(P(i)\bigr)
+&&\bigl(\because\ \text{空の和は }0\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`I`),
+                      " が空でないとき、",
+                      math(String.raw`i_0\in I`),
+                      " を取り ",
+                      math(String.raw`I':=I\setminus\{i_0\}`),
+                      " と置く。",
+                      math(String.raw`I'`),
+                      " の元の個数は ",
+                      math(String.raw`I`),
+                      " より一つ少ないので、帰納法の仮定（",
+                      math(String.raw`P`),
+                      " の ",
+                      math(String.raw`I'`),
+                      " への制限に使う）が使え、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_n\Bigl(\prod_{i\in I}P(i)\Bigr)
+&=\mathrm{tdeg}_n\Bigl(P(i_0)\cdot\prod_{i\in I'}P(i)\Bigr)
+&&\bigl(\because\ I=\{i_0\}\sqcup I'\text{ と有限積は並べ方によらない}\bigr)\\
+&\le\mathrm{tdeg}_n\bigl(P(i_0)\bigr)+\mathrm{tdeg}_n\Bigl(\prod_{i\in I'}P(i)\Bigr)
+&&\bigl(\because\ \blkref{claim_qbar_total_degree_product_bound}\bigr)\\
+&\le\mathrm{tdeg}_n\bigl(P(i_0)\bigr)+\sum_{i\in I'}\mathrm{tdeg}_n\bigl(P(i)\bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=\sum_{i\in I}\mathrm{tdeg}_n\bigl(P(i)\bigr)
+&&\bigl(\because\ I=\{i_0\}\sqcup I'\text{ と有限和は並べ方によらない}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      "全過程は自然数の比較と有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_elementary_symmetric_total_degree_bound",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_elementary_symmetric_total_degree_bound",
+                  kind: "claim",
+                  title: { text: "j 次の基本対称式の全次数は j 以下である" },
+                  labels: ["claim_qbar_elementary_symmetric_total_degree_bound"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-degree-bound"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_elementarySymmetric_le",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_X_le",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_elementarySymmetric_le_necSuf",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_elementarySymmetric_le_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n,j\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`\mathrm{tdeg}_n(\mathrm{es}_{n,j})\le j`),
+                      "（",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について ",
+                      math(String.raw`\mathrm{tdeg}_n(X^{(n)}_k)\le1`),
+                      " を示す。",
+                      math(String.raw`a\in\mathrm{spt}_n(X^{(n)}_k)`),
+                      " を任意に取ると、",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      " の ",
+                      math(String.raw`X^{(n)}_k`),
+                      " は ",
+                      math(String.raw`\delta_k`),
+                      " 以外の指数の係数が ",
+                      math(String.raw`0`),
+                      " なので ",
+                      math(String.raw`a=\delta_k`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sz}_n(a)
+&=\sum_{i\in\mathbb{N}_{<n}}\delta_k(i)
+&&\bigl(\because\ a=\delta_k\text{ と }\blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{sz}_n\bigr)\\
+&=\delta_k(k)
+&&\bigl(\because\ i\ne k\text{ で }\delta_k(i)=0\text{（}\blkref{def_qbar_multivariate_polynomial_ring}\text{）}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の }\delta_k\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      " の上界の性質により ",
+                      math(String.raw`\mathrm{tdeg}_n(X^{(n)}_k)\le1`),
+                      " である。",
+                      math(String.raw`|S|=j`),
+                      " となる ",
+                      math(String.raw`S\subseteq\mathbb{N}_{<n}`),
+                      " を任意に取ると",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_n\Bigl(\prod_{k\in S}X^{(n)}_k\Bigr)
+&\le\sum_{k\in S}\mathrm{tdeg}_n\bigl(X^{(n)}_k\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_total_degree_finite_product_bound}\text{（}I=S\text{）}\bigr)\\
+&\le\sum_{k\in S}1
+&&\bigl(\because\ \text{準備}\bigr)\\
+&=|S|
+&&\bigl(\because\ 1\text{ の有限和は元の個数}\bigr)\\
+&=j
+&&\bigl(\because\ S\text{ の取り方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      " により ",
+                      math(String.raw`\mathrm{es}_{n,j}=\sum_{S\subseteq\mathbb{N}_{<n}:\ |S|=j}\ \prod_{k\in S}X^{(n)}_k`),
+                      " であり、",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " の ",
+                      math(String.raw`j`),
+                      " 元部分集合の全体は有限集合なので、",
+                      ref("claim_qbar_total_degree_finite_sum_bound"),
+                      "（",
+                      math(String.raw`I`),
+                      " をその全体、",
+                      math(String.raw`m=j`),
+                      "）により ",
+                      math(String.raw`\mathrm{tdeg}_n(\mathrm{es}_{n,j})\le j`),
+                      " である。",
+                      "全過程は有限集合の元の個数と自然数の比較だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_elementary_symmetric_substitution_degree_bound",
+              focus:
+                {
+                  id: "zero_pinching_claim_elementary_symmetric_substitution_degree_bound",
+                  kind: "claim",
+                  title: { text: "基本対称式への代入の全次数は重み付き次数以下" },
+                  labels: ["claim_elementary_symmetric_substitution_degree_bound"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-degree-bound"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_elementarySymmetricSubst_le",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_pow_le",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_aeval_le_necSuf",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_elementarySymmetricSubst_le_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\mathrm{tdeg}_n\bigl(\mathrm{se}_n(Q)\bigr)\le\mathrm{wdeg}_n(Q)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_elementary_symmetric_substitution"),
+                      "、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "、",
+                      ref("def_qbar_multivariate_weighted_degree"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備を二つ置く。第一に、任意の ",
+                      math(String.raw`A\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " と ",
+                      math(String.raw`e\in\mathbb{N}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_n\bigl(A^{e}\bigr)
+&=\mathrm{tdeg}_n\Bigl(\prod_{i\in\mathbb{N}_{<e}}A\Bigr)
+&&\bigl(\because\ \text{冪は積の繰り返し}\bigr)\\
+&\le\sum_{i\in\mathbb{N}_{<e}}\mathrm{tdeg}_n(A)
+&&\bigl(\because\ \blkref{claim_qbar_total_degree_finite_product_bound}\text{（}I=\mathbb{N}_{<e}\text{）}\bigr)\\
+&=e\cdot\mathrm{tdeg}_n(A)
+&&\bigl(\because\ \text{同じ自然数の }e\text{ 個の和}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。第二に、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_n\bigl(\mathrm{ee}_n(k)\bigr)
+&=\mathrm{tdeg}_n\bigl(\mathrm{es}_{n,k+1}\bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_n\bigr)\\
+&\le k+1
+&&\bigl(\because\ \blkref{claim_qbar_elementary_symmetric_total_degree_bound}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`A_Q:=\mathrm{spt}_n(Q)=\{\,a\in\mathrm{Ex}_n\mid\mathrm{mco}_a(Q)\ne0\,\}`),
+                      "（有限集合。",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）と置き、",
+                      math(String.raw`a\in A_Q`),
+                      " に対して",
+                    ]),
+                    displayMath(String.raw`T_a:=\mathrm{mk}_n\bigl(\mathrm{mco}_a(Q)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}\mathrm{ee}_n(k)^{a(k)}\ \in\ \overline{\mathbb{Q}}[X_{<n}]`),
+                    paragraph([
+                      "と置く。任意の ",
+                      math(String.raw`a\in A_Q`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_n(T_a)
+&=\mathrm{tdeg}_n\Bigl(\mathrm{mk}_n\bigl(\mathrm{mco}_a(Q)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}\mathrm{ee}_n(k)^{a(k)}\Bigr)
+&&\bigl(\because\ T_a\text{ の置き方}\bigr)\\
+&\le\mathrm{tdeg}_n\Bigl(\mathrm{mk}_n\bigl(\mathrm{mco}_a(Q)\bigr)\Bigr)+\mathrm{tdeg}_n\Bigl(\prod_{k\in\mathbb{N}_{<n}}\mathrm{ee}_n(k)^{a(k)}\Bigr)
+&&\bigl(\because\ \blkref{claim_qbar_total_degree_product_bound}\bigr)\\
+&=\mathrm{tdeg}_n\Bigl(\prod_{k\in\mathbb{N}_{<n}}\mathrm{ee}_n(k)^{a(k)}\Bigr)
+&&\bigl(\because\ \blkref{claim_qbar_total_degree_constant}\bigr)\\
+&\le\sum_{k\in\mathbb{N}_{<n}}\mathrm{tdeg}_n\bigl(\mathrm{ee}_n(k)^{a(k)}\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_total_degree_finite_product_bound}\text{（}I=\mathbb{N}_{<n}\text{）}\bigr)\\
+&\le\sum_{k\in\mathbb{N}_{<n}}a(k)\cdot\mathrm{tdeg}_n\bigl(\mathrm{ee}_n(k)\bigr)
+&&\bigl(\because\ \text{第一の準備}\bigr)\\
+&\le\sum_{k\in\mathbb{N}_{<n}}a(k)\cdot(k+1)
+&&\bigl(\because\ \text{第二の準備}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}(k+1)\cdot a(k)
+&&\bigl(\because\ \mathbb{N}\text{ の乗法の交換法則}\bigr)\\
+&=\mathrm{wsz}_n(a)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_weighted_degree}\text{ の }\mathrm{wsz}_n\bigr)\\
+&\le\mathrm{wdeg}_n(Q)
+&&\bigl(\because\ a\in\mathrm{spt}_n(Q)\text{ と }\blkref{def_qbar_multivariate_weighted_degree}\text{ の最大元の性質}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{tdeg}_n\bigl(\mathrm{se}_n(Q)\bigr)
+&=\mathrm{tdeg}_n\bigl(\mathrm{ms}_{\mathrm{ee}_n}(Q)\bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{se}_n\bigr)\\
+&=\mathrm{tdeg}_n\Bigl(\sum_{a\in A_Q}\mathrm{mk}_n\bigl(\mathrm{mco}_a(Q)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}\mathrm{ee}_n(k)^{a(k)}\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_{\mathrm{ee}_n}\bigr)\\
+&=\mathrm{tdeg}_n\Bigl(\sum_{a\in A_Q}T_a\Bigr)
+&&\bigl(\because\ T_a\text{ の置き方}\bigr)\\
+&\le\mathrm{wdeg}_n(Q)
+&&\bigl(\because\ \text{上の }\mathrm{tdeg}_n(T_a)\le\mathrm{wdeg}_n(Q)\text{ と }\blkref{claim_qbar_total_degree_finite_sum_bound}\text{（}I=A_Q\text{、}m=\mathrm{wdeg}_n(Q)\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。",
+                      "全過程は自然数の比較と ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " 係数の多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
         ],
       },
     },
