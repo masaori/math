@@ -710,6 +710,7 @@ export const ALL_LABELS = [
   "claim_sqrt_two_exists",
   "claim_square_difference_from_multiple_side_bound",
   "claim_square_of_sum_le_twice_sum_of_squares",
+  "claim_square_root_adjoined_positive_cone_extension",
   "claim_square_root_adjoined_subfield_equals_linear_values",
   "claim_square_root_adjoined_subfield_quadratic_representation",
   "claim_square_root_adjoined_weighted_square_sum_excludes_minus_one",

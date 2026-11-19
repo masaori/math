@@ -9178,7 +9178,7 @@ m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection
  &\ \Longleftrightarrow\ i\in\operatorname{Orb}_{\sigma}(m)
  &&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)\\
  &\ \Longleftrightarrow\ i\in C
- &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr).
+ &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)
 \end{aligned}`),
                   paragraph(["したがって ", ref("claim_invariant_subset_reversal"), " により ", ref("def_invariant_subset_reversal"), " の反転は置換を与え、写像 ", math(String.raw`R_{\mathrm{odd}}:\operatorname{DerOdd}(\mathcal J)\to\operatorname{Perm}(\mathcal J)`), " を、"]),
                   displayMath(String.raw`R_{\mathrm{odd}}(\sigma):=\rho_{\operatorname{OddOrb}(\sigma)}(\sigma)`),
@@ -50434,6 +50434,85 @@ A&=-1
                   ref("claim_subfield_weighted_square_sum_excludes_minus_one"),
                   " は ", math(String.raw`A=-1`), " を禁じる。",
                   "全て代数的数の有限和であり、実数体・複素数体は使わない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "zero_pinching_heading_square_root_adjoined_positive_cone_extension",
+        labels: [],
+        title: { text: "正の元の平方根を添加した部分体への正錐の延長" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_square_root_adjoined_positive_cone_extension",
+            focus: {
+              id: "zero_pinching_claim_square_root_adjoined_positive_cone_extension",
+              kind: "claim",
+              title: { text: "正の元の平方根を添加した部分体へ正錐を延長できる" },
+              labels: ["claim_square_root_adjoined_positive_cone_extension"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/square-root-adjoined-positive-cone-extension"],
+              lean: [
+                "Ising2DLambda.FisherZero.squareRootAdjoined_positiveCone_extension",
+                "Ising2DLambda.NecSuf.FisherZero.weightedSquareSums_positiveCone_extension",
+                "Ising2DLambda.FisherZero.squareRootAdjoined_positiveCone_extension_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                  math(String.raw`C_F`), " をその正錐（", ref("def_subfield_positive_cone"), "）とする。",
+                  math(String.raw`a\in C_F`), " と ", math(String.raw`b\in\overline{\mathbb Q}`),
+                  " が ", math(String.raw`b^2=a`), "、", math(String.raw`b\notin F`),
+                  " を満たすとする。", math(String.raw`E:=F(b)`),
+                  " を ", math(String.raw`F\cup\{b\}`), " が生成する部分体とする。",
+                  "このとき ", math(String.raw`E`), " の正錐 ", math(String.raw`C_E`),
+                  " で ", math(String.raw`C_E\cap F=C_F`), " を満たすものが存在する（",
+                  ref("def_positive_cone_extension"), "）。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "零元・単位元・符号反転は ", math(String.raw`\overline{\mathbb Q}`),
+                  " のものとする。", math(String.raw`\mathrm{Sq}(C_F;E)`),
+                  "（", ref("def_positive_weighted_square_sums"), "）を ",
+                  math(String.raw`T`), " と置く。", math(String.raw`F\subseteq E`),
+                  " は生成部分体の定義から従う。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+&T\text{ は }(F,C_F)\text{ に従う }E\text{ の前錐である}
+&&(\because\ \blkref{claim_positive_weighted_square_sums_is_precone})\\
+&-1\notin T
+&&(\because\ \blkref{claim_square_root_adjoined_weighted_square_sum_excludes_minus_one})
+\end{aligned}`),
+                paragraph([
+                  ref("claim_algebraic_numbers_enumeration"), " により全射 ",
+                  math(String.raw`\xi:\mathbb N\to\overline{\mathbb Q}`), " を取る。",
+                  ref("claim_enumerated_precone_chain_covers_signs"), " の構成を ",
+                  math(String.raw`T`), " と ", math(String.raw`\xi`), " に適用し、",
+                  "前錐の列の和集合を ", math(String.raw`T_\infty`), " と書く。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+&T_\infty\text{ は }(F,C_F)\text{ に従う }E\text{ の前錐である}
+&&(\because\ \blkref{claim_enumerated_precone_chain_covers_signs})\\
+&-1\notin T_\infty
+&&(\because\ \blkref{claim_enumerated_precone_chain_covers_signs})\\
+&\forall z\in E,\ z\in T_\infty\ \text{または}\ -z\in T_\infty
+&&(\because\ \blkref{claim_enumerated_precone_chain_covers_signs})
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`C_E:=\{z\in\overline{\mathbb Q}\mid z\in T_\infty\text{ かつ }z\ne0\}`),
+                  " と置く。上の三行を ", ref("claim_covering_precone_gives_positive_cone_extension"),
+                  " に適用すると、", math(String.raw`C_E`), " は ", math(String.raw`E`),
+                  " の正錐であり ", math(String.raw`C_E\cap F=C_F`), " を満たす。",
+                  "構成は可算な列挙と代数的数の四則だけを使い、実数体・複素数体は使わない。",
                 ]),
               ],
             },
