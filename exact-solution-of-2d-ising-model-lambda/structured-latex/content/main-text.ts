@@ -10913,14 +10913,14 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
                 displayMath(String.raw`\begin{aligned}
 \tau_{\sigma,C}(i)
 &=\sigma(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
-&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_successor}\bigr).
+&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_successor}\bigr)
 \end{aligned}`),
                 paragraph([math(String.raw`i\notin C`), " なら、", ref("claim_matching_pair_permutation"), " により ", math(String.raw`\sigma^{-1}=\eta_{\tau,\upsilon}`), " であるから、"]),
                 displayMath(String.raw`\begin{aligned}
 \tau_{\sigma,C}(i)
 &=\sigma^{-1}(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
 &=\eta_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{claim_matching_pair_permutation}\bigr)\\
-&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_predecessor}\bigr).
+&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_predecessor}\bigr)
 \end{aligned}`),
                 paragraph(["二場合で任意の ", math(String.raw`i\in\mathcal J`), " に対し ", math(String.raw`\tau_{\sigma,C}(i)=\tau(i)`), " を得た。対の族の定義に代入すると、"]),
                 displayMath(String.raw`\begin{aligned}
@@ -10930,7 +10930,7 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
 &=\bigl\{\{i,\tau(i)\}\mid i\in\mathcal J\bigr\}
 &&\bigl(\because\ \text{上で示した各点の等号}\bigr)\\
 &=\mathcal D_\tau
-&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr).
+&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr)
 \end{aligned}`),
                 paragraph(["空集合では二つの族はともに空である。共有対でも二場合の値は変わらない。有限集合とその写像だけを扱い、実数体への脱出はない。"]),
               ],
@@ -16592,7 +16592,7 @@ Z_L
 &=\sum_{\sigma\in\Sigma_L}w_T\bigl(\Theta(\mathrm{rows}(\sigma))\bigr)
 &&(\because\ \text{準備（族から作った閉じた道の重み）})\\
 &=\sum_{c\in C_L}w_T\bigl(\Theta(c)\bigr)
-&&(\because\ \mathrm{rows}\ \text{が全単射})\\
+&&(\because\ \blkref{claim_rows_bijection})\\
 &=\sum_{p\in W^{\mathrm{cl}}_{L}}w_T(p)
 &&(\because\ \Theta\ \text{が全単射})\\
 &=\sum_{\tau\in R_L}\ \sum_{p\in W_{L,L}(\tau,\tau)}w_T(p)
