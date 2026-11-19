@@ -3216,7 +3216,6 @@ targets=(
   Ising2D.exp_openChainEnergy_eq_prod_bondSpin
   Ising2D.open_chain_partition_sum
   Ising2D.prod_bondSpin_of_two
-  Ising2D.prod_bondSpin_rearrange
   Ising2D.prod_bondSpin_of_ge_three
   Ising2D.prod_bondSpin_eq_first_mul_last
   Ising2D.endpoint_mul_exp_openChainEnergy_eq_prod
@@ -3229,12 +3228,12 @@ targets=(
   Ising2D.NecSuf.open_chain_weighted_sum_eq_sum_prod
   Ising2D.NecSuf.sum_spinVal_const
   "Ising2D.NecSuf.finset_prod_mul_distrib'"
+  "Ising2D.NecSuf.finset_prod_succ_first'"
   "Ising2D.NecSuf.finset_prod_eq_finProdLeft'"
   "Ising2D.NecSuf.prod_add_eq_binWordSum'"
   Ising2D.NecSuf.varsigma_one_eq
   Ising2D.NecSuf.varsigma_zero_eq
   Ising2D.NecSuf.prod_mul_succ_of_two
-  Ising2D.NecSuf.prod_mul_succ_rearrange
   Ising2D.NecSuf.prod_mul_succ_of_ge_three
   Ising2D.NecSuf.prod_mul_succ_eq_first_mul_last
   Ising2D.prod_bondSpin_eq_first_mul_last_of_necSuf

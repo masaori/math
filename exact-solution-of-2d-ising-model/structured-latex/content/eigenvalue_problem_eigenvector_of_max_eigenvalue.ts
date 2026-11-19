@@ -2916,6 +2916,7 @@ D_0G
         "2026-11-04: SageMath の検算を付けるときに、exp(KE(s)) = Π_m exp(Kt_m) の根拠が theorem_exp_product（二つの行列の主張）の n = 1 を指していた誤りを real_exp_of_finite_sum に直し、E(s) の書き替え・分配則・指数法則を準備の鎖に分けた。和の付け替えの行が準備の等式の適用も兼ねていたので二行に分けた。付け替えた後の和の添字を s(1)・t_m と同じ記号で書いていたのを u・τ_m にし、Step 1 の t_m を s の関数 t_m(s) と書いた。名前だけだった「有限個の因子の積の展開」は、写像 ς(e) := 2e − 1 で {0,1}^{M_col−1} の和へ付け替えて expansion_of_finite_product_of_two_term_sums_of_real_numbers を引く行にし、「二元集合上の二つの有限和」を ς の値・a·1 = a・a(−1) = −a・c + c = 2c の行に分けた。cosh の定義の行の前に置いていた文を行末のラベル参照にし、主張文に M_col ∈ ℤ_{≥2}・exp・cosh・冪の定義を書いた。主張は変えていない。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「ℝ で a·(−1) = −a を各因子へ」の行を、ℝ の乗法の可換則（set_and_algebra_notation）を各因子へ当てる行と real_minus_one_times_is_negation（a → K）を各因子へ当てる行の 2 行に割った。鎖の両端と主張は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w13)）: 最後の鎖の名前だけの根拠「ℝ で a·1 = a を各因子へ」を、set_and_algebra_notation の乗法の単位元 p·1 = p（p → K）の参照にした。主張・鎖・段数は不変。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w22b)。有限積の並べ替えの行を割る件）: Step 2 の M_col ≥ 3 の鎖の 2 行目「ℝ の乗法の可換則と結合則を有限積の因子の並べ替えへ」を、finite_product_of_real_products で二つの積に分ける行・finite_product_of_real_numbers_splits_off_first_factor で先頭の因子 s(1) を出す行・def_finite_product_of_real_numbers の帰納の式で末尾の因子 s(M_col) を出す行・ℝ の乗法の結合則の 3 行・finite_product_of_real_products を右辺から左辺へ当てる行の 7 行に割った。中間の積は、def_finite_product_of_real_numbers が下端 1 の積しか定めないので、Π_{m=2}^{M_col−1}s(m)s(m) を Π_{m=1}^{M_col−2}s(m+1)s(m+1) と書き直した（同じ因子を同じ順に掛ける）。結合則の行で括弧を明示したので、続く 2 行にも外側の括弧を書き、finite_product_of_real_products を引く 2 行目の左辺（1 行目の式）と 8 行目の積の因子にも主張の (x_j y_j) と同じ括弧を書いた。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -3022,12 +3023,24 @@ D_0G
       displayMath(
         String.raw`\begin{aligned}
 \prod_{m=1}^{M_{\mathrm{col}}-1}t_m(s)
-&= \prod_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)
+&= \prod_{m=1}^{M_{\mathrm{col}}-1}\bigl(s(m)s(m+1)\bigr)
 &&\bigl(\because\ t_m(s):=s(m)s(m+1)\bigr)\\
-&= s(1)\left(\prod_{m=2}^{M_{\mathrm{col}}-1}s(m)s(m)\right)s(M_{\mathrm{col}})
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則と結合則（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）を有限積の因子の並べ替えへ}\bigr)\\
-&= s(1)\left(\prod_{m=2}^{M_{\mathrm{col}}-1}1\right)s(M_{\mathrm{col}})
-&&\bigl(\because\ s(m)s(m)=1\text{ を各 }m\text{ へ同時適用}\bigr)\\
+&= \left(\prod_{m=1}^{M_{\mathrm{col}}-1}s(m)\right)\left(\prod_{m=1}^{M_{\mathrm{col}}-1}s(m+1)\right)
+&&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}}-1,\ j \to m,\ x_j \to s(m),\ y_j \to s(m+1))\bigr)\\
+&= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\right)\left(\prod_{m=1}^{M_{\mathrm{col}}-1}s(m+1)\right)
+&&\bigl(\because\ \blkref{finite_product_of_real_numbers_splits_off_first_factor}\ (m \to M_{\mathrm{col}}-2,\ j \to m,\ r_j \to s(m))\bigr)\\
+&= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\right)\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,s(M_{\mathrm{col}})\right)
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の帰納の式}\ (m \to M_{\mathrm{col}}-2,\ j \to m,\ r_j \to s(m+1))\bigr)\\
+&= s(1)\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,s(M_{\mathrm{col}})\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ (x \to s(1),\ y \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ t \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,s(M_{\mathrm{col}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= s(1)\left(\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\right)s(M_{\mathrm{col}})\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ (x \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ y \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ t \to s(M_{\mathrm{col}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \left(s(1)\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\right)\right)s(M_{\mathrm{col}})
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ (x \to s(1),\ y \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ t \to s(M_{\mathrm{col}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}\bigl(s(m+1)s(m+1)\bigr)\right)\right)s(M_{\mathrm{col}})
+&&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}}-2,\ j \to m,\ x_j \to s(m+1),\ y_j \to s(m+1))\text{ を右辺から左辺へ}\bigr)\\
+&= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}1\right)\right)s(M_{\mathrm{col}})
+&&\bigl(\because\ s(m+1)s(m+1)=1\text{ を各 }m\text{ へ同時適用}\bigr)\\
 &= s(1)s(M_{\mathrm{col}})
 &&\bigl(\because\ 1\text{ の有限積は }1\bigr)
 \end{aligned}`,
@@ -3036,12 +3049,18 @@ D_0G
         "である（隣接する因子が対になって ",
         math(String.raw`1`),
         " になる。",
-        math(String.raw`\prod_{m=2}^{M_{\mathrm{col}}-1}`),
+        math(String.raw`\prod_{m=1}^{M_{\mathrm{col}}-2}`),
         " は ",
         math(String.raw`M_{\mathrm{col}}-2\geq1`),
         " 個の因子の ",
         ref("def_finite_product_of_real_numbers"),
-        " の積）。また",
+        " の積で、",
+        math(String.raw`s(m+1)`),
+        "（",
+        math(String.raw`m=1,\dots,M_{\mathrm{col}}-2`),
+        "）は両端を除くサイト ",
+        math(String.raw`2,\dots,M_{\mathrm{col}}-1`),
+        " のスピンである）。また",
       ]),
       displayMath(
         String.raw`\begin{aligned}

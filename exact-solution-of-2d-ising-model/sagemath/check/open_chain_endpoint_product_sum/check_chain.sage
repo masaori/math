@@ -1,5 +1,5 @@
 # 対象ラベル: open_chain_endpoint_product_sum（Σ_{s∈𝔐} s(M_col)s(1) exp(KE(s)) = 2(2sinh K)^{M_col-1}）
-# 証明の Step 1（open_chain_partition_sum の Φ）、Step 2 の M_col = 2 の鎖（3 行）と M_col ≥ 3 の鎖（4 行）、
+# 証明の Step 1（open_chain_partition_sum の Φ）、Step 2 の M_col = 2 の鎖（3 行）と M_col ≥ 3 の鎖（10 行）、
 # 被加数の鎖（4 行）、主張の鎖（6 行）の全ての行と主張を確かめる。
 # 端点因子の鎖は ZZ で厳密に、組合せの層（QQ[x, y]、exp(K) → x、exp(-K) → y）は M_col = 2..8 の全ての配置で厳密に、
 # 実数の層（RealBallField(200)）は M_col = 2..7、K ∈ K_SAMPLES で確かめる。
@@ -24,19 +24,70 @@ for s in configs(2):
     for a, b in zip(lines, lines[1:]):
         assert a == b
         count += 1
+def step2_lines(M, sp, one):
+    # Step 2 の M_col ≥ 3 の鎖の 10 行（左辺と 10 行）。sp(m) がサイト m の値、one が乗法の単位元。
+    # 積は def_finite_product_of_real_numbers の左からの畳み込み finite_prod で組み、括弧は鎖の行の括弧どおりに掛ける。
+    P = finite_prod([sp(m + 1) for m in range(1, M - 1)])                  # Π_{m=1}^{M_col-2} s(m+1)
+    return [
+        finite_prod([sp(m) * sp(m + 1) for m in range(1, M)]),             # 左辺（t_m(s) を展開した後の形も同じ値。1 行目は別に見る）
+        finite_prod([sp(m) * sp(m + 1) for m in range(1, M)]),             # 1 行目: t_m(s) := s(m)s(m+1)
+        finite_prod([sp(m) for m in range(1, M)]) * finite_prod([sp(m + 1) for m in range(1, M)]),   # 2 行目
+        (sp(1) * P) * finite_prod([sp(m + 1) for m in range(1, M)]),       # 3 行目
+        (sp(1) * P) * (P * sp(M)),                                         # 4 行目
+        sp(1) * (P * (P * sp(M))),                                         # 5 行目
+        sp(1) * ((P * P) * sp(M)),                                         # 6 行目
+        (sp(1) * (P * P)) * sp(M),                                         # 7 行目
+        (sp(1) * finite_prod([sp(m + 1) * sp(m + 1) for m in range(1, M - 1)])) * sp(M),   # 8 行目
+        (sp(1) * finite_prod([one for m in range(1, M - 1)])) * sp(M),     # 9 行目
+        sp(1) * sp(M),                                                     # 10 行目
+    ]
+
+# 行ごとの根拠の確かめ: サイトの値を非可換な自由代数 QQ<a_1,…,a_M> の生成元に取ると、乗法の結合則だけで移れる行
+# （3 行目 finite_product_of_real_numbers_splits_off_first_factor、4 行目 def_finite_product_of_real_numbers の帰納の式、
+# 5〜7 行目 ℝ の乗法の結合則）は自由代数でも隣の行と一致し、可換則を使う 2 行目・8 行目（finite_product_of_real_products）は
+# 自由代数では一致せず（否定コントロール）、可換な多項式環 QQ[a_1,…,a_M] では一致する。
+neg_free = 0
+for M in range(3, 9):
+    F = FreeAlgebra(QQ, M, "a")
+    fl = step2_lines(M, lambda m: F.gen(m - 1), F(1))
+    C = PolynomialRing(QQ, M, "a")
+    cl = step2_lines(M, lambda m: C.gen(m - 1), C(1))
+    for i in [3, 4, 5, 6, 7]:
+        assert fl[i - 1] == fl[i], (M, i)
+        count += 1
+    for i in [2, 8]:
+        if fl[i - 1] != fl[i]:
+            neg_free += 1
+        assert cl[i - 1] == cl[i], (M, i)
+        count += 1
+# 5〜7 行目の結合則を、積を評価しない二分木で 1 回ずつ確かめる。木は step2_lines の行の式から作る
+# （Tree の積は二つの木を対にするだけで、括弧は行の式の括弧そのもの）。assoc は ((x, y), t) → (x, (y, t))。
+class Tree:
+    def __init__(self, v):
+        self.v = v
+    def __mul__(self, other):
+        return Tree((self.v, other.v))
+def assoc(tr):
+    (x, y), t = tr
+    return (x, (y, t))
+def assoc_inv(tr):
+    x, (y, t) = tr
+    return ((x, y), t)
+for M in range(3, 9):
+    T = [l.v for l in step2_lines(M, lambda m: Tree("s%d" % m), Tree("1"))]
+    assert assoc(T[4]) == T[5]                   # 5 行目: x → s(1), y → P, t → P s(M_col)
+    assert (T[5][0], assoc_inv(T[5][1])) == T[6] # 6 行目: x → P, y → P, t → s(M_col) を右辺から左辺へ（右の因子の中で）
+    assert assoc_inv(T[6]) == T[7]               # 7 行目: x → s(1), y → PP, t → s(M_col) を右辺から左辺へ
+    assert T[4] != T[5] and T[5] != T[6] and T[6] != T[7]
+    count += 3
 for M in range(3, 9):
     for s in configs(M):
-        lines = [
-            finite_prod([t(s, m) for m in range(1, M)]),
-            finite_prod([spin(s, m) * spin(s, m + 1) for m in range(1, M)]),
-            spin(s, 1) * finite_prod([spin(s, m) * spin(s, m) for m in range(2, M)]) * spin(s, M),
-            spin(s, 1) * finite_prod([ZZ(1) for m in range(2, M)]) * spin(s, M),
-            spin(s, 1) * spin(s, M),
-        ]
+        lines = step2_lines(M, lambda m: spin(s, m), ZZ(1))
+        lines[0] = finite_prod([t(s, m) for m in range(1, M)])
         for a, b in zip(lines, lines[1:]):
             assert a == b, (M, s)
             count += 1
-        assert all(spin(s, m) * spin(s, m) == 1 for m in range(2, M))   # 3 行目の根拠
+        assert all(spin(s, m + 1) * spin(s, m + 1) == 1 for m in range(1, M - 1))   # 9 行目の根拠
         count += 1
         # 否定コントロール: 対にならない因子 s(2) を一つ残すと、s(2) = -1 の配置（全体の半分）で外れる
         if finite_prod([t(s, m) for m in range(1, M)]) != spin(s, 1) * spin(s, 2) * spin(s, M):
@@ -149,10 +200,12 @@ for M in range(2, 8):
 
 # 否定コントロールの件数: 対にならない因子は M_col = 3..8 の各配置の半分、端点因子の脱落と符号の脱落は全ての M_col、
 # cosh との取り違えは K ≠ 0 の全て
+# 自由代数で可換則の行が外れるのは M_col = 4..8 の 2 行ずつ（M_col = 3 では因子の並びが変わらない）
+assert neg_free == 2 * 5, neg_free
 assert neg_unpaired == sum(2 ^ (M - 1) for M in range(3, 9)), neg_unpaired
 assert neg_no_endpoint == 7 and neg_sign == 7
 assert neg_cosh == 6 * len([K for K in K_SAMPLES if K != 0])
-neg = neg_unpaired + neg_no_endpoint + neg_sign + neg_cosh
+neg = neg_unpaired + neg_no_endpoint + neg_sign + neg_cosh + neg_free
 print(f"checked {count} equalities/claims")
 print(f"negative controls detected: {neg}")
 print("RESULT: PASS")

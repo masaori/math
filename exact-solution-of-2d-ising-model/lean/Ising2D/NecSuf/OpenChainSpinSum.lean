@@ -16,7 +16,7 @@
 | 二つの鎖の `人手 4` が引く `expansion_of_finite_product_of_two_term_sums_of_real_numbers` | `prod_add_eq_binWordSum'`（`finProdLeft_add_eq_binWordSum` を `Finset.prod` へ運んだもの） |
 | `{-1,1}` 上の有限和 `sum_spinVal` | `sum_spinVal_addCommMonoid` |
 | `open_chain_endpoint_product_sum` の Step 2 の `M_col = 2` の鎖（3 行） | `prod_mul_succ_of_two`（同じ 3 段） |
-| 同 `M_col ≥ 3` の鎖（4 行）と、2 行目の「ℝ の乗法の可換性と結合性」 | `prod_mul_succ_of_ge_three`（同じ 4 段。1 段目の `t_m(s) := s(m)s(m+1)` は、ここでは左辺を読み直すだけの段）・`prod_mul_succ_rearrange`（同じ 5 段。`finite_product_of_real_products` の段は `finset_prod_mul_distrib'`） |
+| 同 `M_col ≥ 3` の鎖（10 行） | `prod_mul_succ_of_ge_three`（同じ 10 段。1 段目の `t_m(s) := s(m)s(m+1)` は、ここでは左辺を読み直すだけの段。`finite_product_of_real_products` の段は `finset_prod_mul_distrib'`、`finite_product_of_real_numbers_splits_off_first_factor` の段は `finset_prod_succ_first'`） |
 | 二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` | `prod_mul_succ_eq_first_mul_last` |
 
 具体版の鎖のうち、重みに固有の行（`open_chain_partition_sum` の準備の鎖・`人手 1`・`人手 6`〜`人手 8`・`人手 10`、
@@ -48,13 +48,14 @@
   `2 = 2·(g(1)+g(-1))^0` として成り立つ）。
 - **端点因子の書き替え（`prod_mul_succ_eq_first_mul_last`）。** 効いているのは、値が可換モノイドに在ることと、
   中間のサイト `m = 2,…,M_col-1` での `x(m)x(m) = 1` だけである。`M_col = 2` の鎖は `x(m)x(m) = 1` を使わず
-  （中間のサイトが無い）、`M_col ≥ 3` の鎖は乗法の可換性と結合性（`prod_mul_succ_rearrange`）と中間のサイトの
+  （中間のサイトが無い）、`M_col ≥ 3` の鎖は乗法の可換性と結合性（`finset_prod_mul_distrib'`・`finset_prod_succ_first'`・`mul_assoc`）と中間のサイトの
   `x(m)x(m) = 1` を使う。両端のサイトの `x·x = 1`、実数であること、値が `±1` であることは効いていない。
   `M_col ≥ 2` は具体版と同じく `M_col` を `n + 2` に取る形で入っている（`M_col = 1` では主張の積が空になる）。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimOpenChainSpinSums
 import Ising2D.NecSuf.BinaryWordSumAsFinsetSum
 import Ising2D.NecSuf.FiniteProductOfProducts
+import Ising2D.NecSuf.FiniteProductLeftFirstFactor
 
 namespace Ising2D.NecSuf
 
@@ -89,6 +90,14 @@ theorem finset_prod_mul_distrib' {G : Type*} [CommMonoid G] (m : ℕ) (x y : Fin
     ∏ j, x j * y j = (∏ j, x j) * ∏ j, y j := by
   rw [finset_prod_eq_finProdLeft', finset_prod_eq_finProdLeft', finset_prod_eq_finProdLeft']
   exact finProdLeft_mul' mul_mul_mul_comm m x y
+
+/-- 具体版の `finite_product_of_real_numbers_splits_off_first_factor`（`Π_{j=1}^{m+1} r_j = r_1(Π_{j=1}^{m} r_{j+1})`）を、
+値が可換モノイドで積が `Finset.prod` の形で述べたもの。証明は必要十分版 `finProdLeft_succ_first`（乗法の結合則だけを仮定する）を
+運ぶだけである。 -/
+theorem finset_prod_succ_first' {G : Type*} [CommMonoid G] (m : ℕ) (r : Fin (m + 2) → G) :
+    ∏ j, r j = r 0 * ∏ j : Fin (m + 1), r j.succ := by
+  rw [finset_prod_eq_finProdLeft', finset_prod_eq_finProdLeft']
+  exact finProdLeft_succ_first mul_assoc m r
 
 /-- 人手の `ς(1) = 1` を `{-1,1}` の元の等式として読む。 -/
 theorem varsigma_one_eq : varsigma 1 = (⟨1, Or.inl rfl⟩ : SpinVal) := Subtype.ext coe_varsigma_one
@@ -149,44 +158,41 @@ theorem prod_mul_succ_of_two {G : Type*} [CommMonoid G] (x : Fin 2 → G) :
     _ = x 0 * x 1 := rfl                                -- 添字 `m = 1` の `m`・`m+1` を読む段（具体版の `t_1(s) := s(1)s(2)` の段に当たる）
     _ = x 0 * x (Fin.last 1) := rfl                     -- `M_col = 2`（人手の `2` が Lean の `Fin.last 1`）
 
-/-- 具体版 `prod_bondSpin_rearrange` の必要十分版（人手の `M_col` は Lean の `k + 3`、中間の添字は `j : Fin (k + 1)`）:
-`Π_{m=1}^{M_col-1}x(m)x(m+1) = x(1)(Π_{m=2}^{M_col-1}x(m)x(m))x(M_col)`。具体版と同じ 5 段で、
-具体版の `finite_product_of_real_products` の段は `finset_prod_mul_distrib'`（必要十分版 `finProdLeft_mul'` を運んだもの）である。 -/
-theorem prod_mul_succ_rearrange {G : Type*} [CommMonoid G] (k : ℕ) (x : Fin (k + 3) → G) :
-    ∏ m : Fin (k + 2), x m.castSucc * x m.succ
-      = x 0 * (∏ j : Fin (k + 1), x j.succ.castSucc * x j.succ.castSucc) * x (Fin.last (k + 2)) :=
-  calc ∏ m : Fin (k + 2), x m.castSucc * x m.succ
-      = (∏ m : Fin (k + 2), x m.castSucc) * ∏ m : Fin (k + 2), x m.succ :=
-        finset_prod_mul_distrib' (k + 1) _ _            -- 因子の並べ替え（具体版の `finite_product_of_real_products`）
-    _ = (x 0 * ∏ j : Fin (k + 1), x j.succ.castSucc)
-          * ((∏ j : Fin (k + 1), x j.castSucc.succ) * x (Fin.last (k + 2))) := by
-        rw [Fin.prod_univ_succ (fun m : Fin (k + 2) => x m.castSucc),
-          Fin.prod_univ_castSucc (fun m : Fin (k + 2) => x m.succ)]
-        rfl                                             -- 先頭の因子 `x(1)` と末尾の因子 `x(M_col)` を外へ出す
-    _ = (x 0 * ∏ j : Fin (k + 1), x j.succ.castSucc)
-          * ((∏ j : Fin (k + 1), x j.succ.castSucc) * x (Fin.last (k + 2))) := by
-        simp only [Fin.succ_castSucc]                   -- 中間のサイト `m = 2,…,M_col-1` の二つの書き方を揃える
-    _ = x 0 * ((∏ j : Fin (k + 1), x j.succ.castSucc) * ∏ j : Fin (k + 1), x j.succ.castSucc)
-          * x (Fin.last (k + 2)) := by
-        rw [mul_assoc, mul_assoc, mul_assoc]            -- 乗法の結合性
-    _ = x 0 * (∏ j : Fin (k + 1), x j.succ.castSucc * x j.succ.castSucc) * x (Fin.last (k + 2)) := by
-        rw [← finset_prod_mul_distrib' k]               -- 因子の並べ替え（具体版の `finite_product_of_real_products` を右辺から左辺へ）
-
 /-- 具体版 `prod_bondSpin_of_ge_three` の必要十分版（人手の `M_col` は Lean の `k + 3`）: 中間のサイトで `x(m)x(m) = 1` なら
-`Π_{m=1}^{M_col-1}x(m)x(m+1) = x(1)x(M_col)`。具体版の 1 行目（`t_m(s) := s(m)s(m+1)`）に当たる段は、ここでは左辺がすでに
-`x(m)x(m+1)` の形なので、左辺を読み直すだけの 1 段目として置く。 -/
+`Π_{m=1}^{M_col-1}x(m)x(m+1) = x(1)x(M_col)`。具体版と同じ 10 段で、具体版の 1 段目（`t_m(s) := s(m)s(m+1)`）に当たる段は、
+ここでは左辺がすでに `x(m)x(m+1)` の形なので、左辺を読み直すだけの段として置く。具体版の `finite_product_of_real_products` の段は
+`finset_prod_mul_distrib'`、`finite_product_of_real_numbers_splits_off_first_factor` の段は `finset_prod_succ_first'` である。 -/
 theorem prod_mul_succ_of_ge_three {G : Type*} [CommMonoid G] (k : ℕ) (x : Fin (k + 3) → G)
     (hx : ∀ j : Fin (k + 1), x j.succ.castSucc * x j.succ.castSucc = 1) :
     ∏ m : Fin (k + 2), x m.castSucc * x m.succ = x 0 * x (Fin.last (k + 2)) :=
   calc ∏ m : Fin (k + 2), x m.castSucc * x m.succ
       = ∏ m : Fin (k + 2), x m.castSucc * x m.succ := rfl
-                                                        -- 添字 `m` の `m`・`m+1` を読む段（具体版の `t_m(s) := s(m)s(m+1)` の段に当たる）
-    _ = x 0 * (∏ j : Fin (k + 1), x j.succ.castSucc * x j.succ.castSucc) * x (Fin.last (k + 2)) :=
-        prod_mul_succ_rearrange k x                     -- 乗法の可換性と結合性
+                                                        -- 人手 1 に当たる段: 添字 `m` の `m`・`m+1` を読む
+    _ = (∏ m : Fin (k + 2), x m.castSucc) * ∏ m : Fin (k + 2), x m.succ :=
+        finset_prod_mul_distrib' (k + 1) _ _            -- 人手 2: 二つの積に分ける（具体版の `finite_product_of_real_products`）
+    _ = (x 0 * ∏ j : Fin (k + 1), x j.succ.castSucc) * ∏ m : Fin (k + 2), x m.succ := by
+        rw [finset_prod_succ_first' k (fun m : Fin (k + 2) => x m.castSucc)]
+        rfl                                             -- 人手 3: 先頭の因子を出す（具体版の `finite_product_of_real_numbers_splits_off_first_factor`）
+    _ = (x 0 * ∏ j : Fin (k + 1), x j.succ.castSucc)
+          * ((∏ j : Fin (k + 1), x j.succ.castSucc) * x (Fin.last (k + 2))) := by
+        rw [Fin.prod_univ_castSucc (fun m : Fin (k + 2) => x m.succ)]
+        rfl                                             -- 人手 4: 末尾の因子を出す（`def_finite_product_of_real_numbers` の帰納の式）
+    _ = x 0 * ((∏ j : Fin (k + 1), x j.succ.castSucc)
+          * ((∏ j : Fin (k + 1), x j.succ.castSucc) * x (Fin.last (k + 2)))) :=
+        mul_assoc _ _ _                                 -- 人手 5: 乗法の結合則
+    _ = x 0 * (((∏ j : Fin (k + 1), x j.succ.castSucc) * ∏ j : Fin (k + 1), x j.succ.castSucc)
+          * x (Fin.last (k + 2))) := by
+        rw [← mul_assoc (∏ j : Fin (k + 1), x j.succ.castSucc)]
+                                                        -- 人手 6: 乗法の結合則を右辺から左辺へ
+    _ = x 0 * ((∏ j : Fin (k + 1), x j.succ.castSucc) * ∏ j : Fin (k + 1), x j.succ.castSucc)
+          * x (Fin.last (k + 2)) :=
+        (mul_assoc _ _ _).symm                          -- 人手 7: 乗法の結合則を右辺から左辺へ
+    _ = x 0 * (∏ j : Fin (k + 1), x j.succ.castSucc * x j.succ.castSucc) * x (Fin.last (k + 2)) := by
+        rw [← finset_prod_mul_distrib' k]               -- 人手 8: 一つの積に戻す（具体版の `finite_product_of_real_products` を右辺から左辺へ）
     _ = x 0 * (∏ _j : Fin (k + 1), (1 : G)) * x (Fin.last (k + 2)) := by
-        rw [Finset.prod_congr rfl fun j _ => hx j]      -- 中間のサイトの `x(m)x(m) = 1` を各 `m` へ同時適用
+        rw [Finset.prod_congr rfl fun j _ => hx j]      -- 人手 9: 中間のサイトの `x(m)x(m) = 1` を各 `m` へ同時適用
     _ = x 0 * x (Fin.last (k + 2)) := by
-        rw [Finset.prod_const_one, mul_one]             -- `1` の有限積は `1`（と `a·1 = a`）
+        rw [Finset.prod_const_one, mul_one]             -- 人手 10: `1` の有限積は `1`（と `a·1 = a`）
 
 /-- **必要十分版**（具体版 `prod_bondSpin_eq_first_mul_last`）: 値が可換モノイド `G` の `x : {1,…,M_col} → G` が
 中間のサイト `m = 2,…,M_col-1` で `x(m)x(m) = 1` を満たせば `Π_{m=1}^{M_col-1}x(m)x(m+1) = x(1)x(M_col)`

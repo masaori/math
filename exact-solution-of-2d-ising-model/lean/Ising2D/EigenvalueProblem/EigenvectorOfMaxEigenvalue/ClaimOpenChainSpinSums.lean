@@ -17,7 +17,7 @@
 | （運ぶ段。人手の行は無い）`{0,1}^r` の上の和を全体の上の `∑` で読む、`E(s)` を添字 `Fin (n + 1)` の和で読む | `binaryWordRealSum_eq_sum_univ`・`openChainEnergy_eq_sum_fin` |
 | `open_chain_endpoint_product_sum` の Step 1（`open_chain_partition_sum` の Step 1 の `Φ` と `ς` を使う） | `openChainPhiEquiv`・`varsigmaWordEquiv` |
 | 同 Step 2 の `M_col = 2` の鎖（3 行）`Π_{m=1}^{1}t_m(s) = t_1(s) = s(1)s(2) = s(1)s(M_col)` | `prod_bondSpin_of_two`（同じ 3 段の calc） |
-| 同 Step 2 の `M_col ≥ 3` の鎖（4 行）`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)` | `prod_bondSpin_of_ge_three`（同じ 4 段の calc。2 行目の「ℝ の乗法の可換則と結合則（ℝ は順序体 `set_and_algebra_notation`）を有限積の因子の並べ替えへ」は `prod_bondSpin_rearrange`）・二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` |
+| 同 Step 2 の `M_col ≥ 3` の鎖（10 行）`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)` | `prod_bondSpin_of_ge_three`（印 `人手 1`〜`人手 10` の calc）・二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` |
 | 同 Step 2 の `exp(KE(s))` の鎖（3 行） | `exp_openChainEnergy_eq_prod_bondSpin`（`open_chain_partition_sum` の準備の鎖と同じ行） |
 | 同 Step 2 の `s(M_col)s(1)exp(KE(s)) = ⋯ = Π_m(t_m(s)exp(Kt_m(s)))`（左辺と 4 行） | `endpoint_mul_exp_openChainEnergy_eq_prod`（同じ 4 段の calc） |
 | 同 Step 2 の最後の鎖（左辺と 14 行） | `open_chain_endpoint_product_sum`（印 `人手 1`〜`人手 14` の calc） |
@@ -58,6 +58,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealProducts
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealNumbersSplitsOffFirstFactor
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 
 namespace Ising2D
@@ -310,49 +311,47 @@ theorem prod_bondSpin_of_two (s : SpinConf 2) :
     _ = (s 0 : ℝ) * (s 1 : ℝ) := rfl                    -- `t_1(s) := s(1)s(2)`
     _ = (s 0 : ℝ) * (s (Fin.last 1) : ℝ) := rfl         -- `M_col = 2`（人手の `2` が Lean の `Fin.last 1`）
 
-/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col ≥ 3` の鎖の 2 行目の根拠「ℝ の乗法の可換則と結合則（ℝ は順序体 `set_and_algebra_notation`）を有限積の因子の並べ替えへ」
-（人手の `M_col` は Lean の `k + 3`、中間の添字 `m = 2,…,M_col-1` は `j : Fin (k + 1)`（人手の `m` が Lean の `(j : ℕ) + 2`、
-サイトは `j.succ.castSucc`））: `Π_{m=1}^{M_col-1}s(m)s(m+1) = s(1)(Π_{m=2}^{M_col-1}s(m)s(m))s(M_col)`。
-人手の一段を、Lean では有限積の端の因子を外へ出す段（末尾の因子は `def_finite_product_of_real_numbers` の帰納の式
-`Fin.prod_univ_castSucc`、先頭の因子は可換性と結合性から従う `Fin.prod_univ_succ`）と、因子の並べ替え
-（`finite_product_of_real_products` と `mul_assoc`）に割って書く。 -/
-theorem prod_bondSpin_rearrange (k : ℕ) (s : SpinConf (k + 3)) :
-    ∏ m : Fin (k + 2), (s m.castSucc : ℝ) * (s m.succ : ℝ)
-      = (s 0 : ℝ) * (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ) * (s j.succ.castSucc : ℝ))
-          * (s (Fin.last (k + 2)) : ℝ) :=
-  calc ∏ m : Fin (k + 2), (s m.castSucc : ℝ) * (s m.succ : ℝ)
-      = (∏ m : Fin (k + 2), (s m.castSucc : ℝ)) * ∏ m : Fin (k + 2), (s m.succ : ℝ) :=
-        finite_product_of_real_products (k + 1) _ _      -- 因子の並べ替え（`finite_product_of_real_products`）
-    _ = ((s 0 : ℝ) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
-          * ((∏ j : Fin (k + 1), (s j.castSucc.succ : ℝ)) * (s (Fin.last (k + 2)) : ℝ)) := by
-        rw [Fin.prod_univ_succ (fun m : Fin (k + 2) => (s m.castSucc : ℝ)),
-          Fin.prod_univ_castSucc (fun m : Fin (k + 2) => (s m.succ : ℝ))]
-        rfl                                             -- 先頭の因子 `s(1)` と末尾の因子 `s(M_col)` を外へ出す
-    _ = ((s 0 : ℝ) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
-          * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * (s (Fin.last (k + 2)) : ℝ)) := by
-        simp only [Fin.succ_castSucc]                   -- 中間のサイト `m = 2,…,M_col-1` の二つの書き方を揃える
-    _ = (s 0 : ℝ) * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
-          * (s (Fin.last (k + 2)) : ℝ) := by
-        rw [mul_assoc, mul_assoc, mul_assoc]            -- ℝ の乗法の結合性
-    _ = (s 0 : ℝ) * (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ) * (s j.succ.castSucc : ℝ))
-          * (s (Fin.last (k + 2)) : ℝ) := by
-        rw [← finite_product_of_real_products k]        -- 因子の並べ替え（`finite_product_of_real_products` を右辺から左辺へ）
-
-/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col ≥ 3` の鎖（人手の `M_col` は Lean の `k + 3`）:
-`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)`（4 行）。 -/
+/-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `M_col ≥ 3` の鎖（10 行。人手の `M_col` は Lean の `k + 3`）:
+`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)`。中間の積 `Π_{m=1}^{M_col-2}s(m+1)` の添字 `m` は `j : Fin (k + 1)`
+（人手の `m` が Lean の `(j : ℕ) + 1`）で、サイト `m+1` は `j.succ.castSucc` である。
+人手の 3 行目（先頭の因子を出す）が与える `s(Fin.castSucc j.succ)` と 4 行目（末尾の因子を出す）が与える `s(Fin.succ j.castSucc)` は、
+人手ではどちらも `s(m+1)` で、Lean でも定義で一致するので、4 行目の右辺を `j.succ.castSucc` で書いて `rfl` で受ける。 -/
 theorem prod_bondSpin_of_ge_three (k : ℕ) (s : SpinConf (k + 3)) :
     ∏ m : Fin (k + 2), (bondSpin s m : ℝ) = (s 0 : ℝ) * (s (Fin.last (k + 2)) : ℝ) :=
   calc ∏ m : Fin (k + 2), (bondSpin s m : ℝ)
       = ∏ m : Fin (k + 2), (s m.castSucc : ℝ) * (s m.succ : ℝ) := rfl
-                                                        -- `t_m(s) := s(m)s(m+1)`
-    _ = (s 0 : ℝ) * (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ) * (s j.succ.castSucc : ℝ))
+                                                        -- 人手 1: `t_m(s) := s(m)s(m+1)`
+    _ = (∏ m : Fin (k + 2), (s m.castSucc : ℝ)) * ∏ m : Fin (k + 2), (s m.succ : ℝ) :=
+        finite_product_of_real_products (k + 1) _ _      -- 人手 2: `finite_product_of_real_products`（`m → M_col-1`、`j → m`、
+                                                        -- `x_j → s(m)`、`y_j → s(m+1)`）
+    _ = ((s 0 : ℝ) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * ∏ m : Fin (k + 2), (s m.succ : ℝ) := by
+        rw [finite_product_of_real_numbers_splits_off_first_factor k (fun m : Fin (k + 2) => (s m.castSucc : ℝ))]
+        rfl                                             -- 人手 3: `finite_product_of_real_numbers_splits_off_first_factor`
+                                                        -- （`m → M_col-2`、`j → m`、`r_j → s(m)`）
+    _ = ((s 0 : ℝ) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
+          * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * (s (Fin.last (k + 2)) : ℝ)) := by
+        rw [Fin.prod_univ_castSucc (fun m : Fin (k + 2) => (s m.succ : ℝ))]
+        rfl                                             -- 人手 4: `def_finite_product_of_real_numbers` の帰納の式
+                                                        -- （`m → M_col-2`、`j → m`、`r_j → s(m+1)`）
+    _ = (s 0 : ℝ) * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
+          * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * (s (Fin.last (k + 2)) : ℝ))) :=
+        mul_assoc _ _ _                                 -- 人手 5: ℝ の乗法の結合則 `(xy)t = x(yt)`（`set_and_algebra_notation`）
+    _ = (s 0 : ℝ) * (((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
+          * (s (Fin.last (k + 2)) : ℝ)) := by
+        rw [← mul_assoc (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))]
+                                                        -- 人手 6: 同じ結合則を右辺から左辺へ
+    _ = (s 0 : ℝ) * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
           * (s (Fin.last (k + 2)) : ℝ) :=
-        prod_bondSpin_rearrange k s                     -- ℝ の乗法の可換則と結合則（ℝ は順序体 `set_and_algebra_notation`）を有限積の因子の並べ替えへ
+        (mul_assoc _ _ _).symm                          -- 人手 7: 同じ結合則を右辺から左辺へ
+    _ = (s 0 : ℝ) * (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ) * (s j.succ.castSucc : ℝ))
+          * (s (Fin.last (k + 2)) : ℝ) := by
+        rw [← finite_product_of_real_products k]        -- 人手 8: `finite_product_of_real_products`（`m → M_col-2`、`j → m`、
+                                                        -- `x_j → s(m+1)`、`y_j → s(m+1)`）を右辺から左辺へ
     _ = (s 0 : ℝ) * (∏ _j : Fin (k + 1), (1 : ℝ)) * (s (Fin.last (k + 2)) : ℝ) := by
         rw [Finset.prod_congr rfl fun j _ => spinVal_mul_self (s j.succ.castSucc)]
-                                                        -- `s(m)s(m) = 1` を各 `m` へ同時適用
+                                                        -- 人手 9: `s(m+1)s(m+1) = 1` を各 `m` へ同時適用
     _ = (s 0 : ℝ) * (s (Fin.last (k + 2)) : ℝ) := by
-        rw [Finset.prod_const_one, mul_one]             -- `1` の有限積は `1`（と `a·1 = a`）
+        rw [Finset.prod_const_one, mul_one]             -- 人手 10: `1` の有限積は `1`（と `a·1 = a`）
 
 /-- 人手 `open_chain_endpoint_product_sum` の Step 2 の `Π_{m=1}^{M_col-1}t_m(s) = s(1)s(M_col)`
 （`M_col = 2` と `M_col ≥ 3` の二つの鎖。人手の `M_col` は Lean の `n + 2`）。 -/
