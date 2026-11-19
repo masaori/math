@@ -26,13 +26,13 @@ chain = [
     ((a*(c*e) + neg(b*(d*e))) + (neg(a*(d*f)) + neg(b*(c*f))),
      (a*(c*f) + neg(b*(d*f))) + (a*(d*e) + b*(c*e))),                         # 積の結合則を 8 箇所
     (a*(c*e) + (neg(b*(d*e)) + (neg(a*(d*f)) + neg(b*(c*f)))),
-     a*(c*f) + (neg(b*(d*f)) + (a*(d*e) + b*(c*e)))),                         # 加法の結合則を 2 箇所
+     a*(c*f) + (neg(b*(d*f)) + (a*(d*e) + b*(c*e)))),                         # 加法の結合律を 2 箇所
     (a*(c*e) + ((neg(a*(d*f)) + neg(b*(c*f))) + neg(b*(d*e))),
      a*(c*f) + ((a*(d*e) + b*(c*e)) + neg(b*(d*f)))),                         # 加法の可換則を 2 箇所
     (a*(c*e) + (neg(a*(d*f)) + (neg(b*(c*f)) + neg(b*(d*e)))),
-     a*(c*f) + (a*(d*e) + (b*(c*e) + neg(b*(d*f))))),                         # 加法の結合則を 2 箇所
+     a*(c*f) + (a*(d*e) + (b*(c*e) + neg(b*(d*f))))),                         # 加法の結合律を 2 箇所
     ((a*(c*e) + neg(a*(d*f))) + (neg(b*(c*f)) + neg(b*(d*e))),
-     (a*(c*f) + a*(d*e)) + (b*(c*e) + neg(b*(d*f)))),                         # 加法の結合則を 2 箇所へ右辺から左辺へ
+     (a*(c*f) + a*(d*e)) + (b*(c*e) + neg(b*(d*f)))),                         # 加法の結合律を 2 箇所へ右辺から左辺へ
     ((a*(c*e) + neg(a*(d*f))) + neg(b*(c*f) + b*(d*e)),
      (a*(c*f) + a*(d*e)) + (b*(c*e) + neg(b*(d*f)))),                         # real_negation_of_sum_is_sum_of_negations (x → b(cf), y → b(de)) を右辺から左辺へ
     ((a*(c*e) + a*neg(d*f)) + neg(b*(c*f) + b*(d*e)),

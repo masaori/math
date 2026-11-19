@@ -8,7 +8,7 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 8 行の鎖（加法の単位元を右辺から左辺へ → 加法の逆元（`z → a`）を右辺から左辺へ → 加法の可換則 → 加法の結合則 → 加法の可換則 → 加法の逆元（`z → -a`） → 加法の可換則 → 加法の単位元） | `real_double_negation` の `calc` の 8 段 |
+| 8 行の鎖（加法の単位元を右辺から左辺へ → 加法の逆元（`z → a`）を右辺から左辺へ → 加法の可換則 → 加法の結合律 → 加法の可換則 → 加法の逆元（`z → -a`） → 加法の可換則 → 加法の単位元） | `real_double_negation` の `calc` の 8 段 |
 
 - 人手の `-z`（`def_real_difference` の加法の逆元）は mathlib の `-z`（`Neg ℝ`）で、`z + (-z) = 0` は `add_neg_cancel` で読む。
 - mathlib の `neg_neg` は使わない（人手の鎖をそのまま書くため）。
@@ -26,7 +26,7 @@ theorem real_double_negation (a : ℝ) : -(-a) = a :=
       = -(-a) + 0 := (add_zero (-(-a))).symm                                 -- `0` は加法の単位元を右辺から左辺へ
     _ = -(-a) + (a + -a) := by rw [add_neg_cancel a]                          -- `z + (-z) = 0`（`z → a`）を右辺から左辺へ
     _ = -(-a) + (-a + a) := by rw [add_comm a (-a)]                           -- 加法の可換則
-    _ = (-(-a) + -a) + a := (add_assoc (-(-a)) (-a) a).symm                   -- 加法の結合則
+    _ = (-(-a) + -a) + a := (add_assoc (-(-a)) (-a) a).symm                   -- 加法の結合律
     _ = (-a + -(-a)) + a := by rw [add_comm (-(-a)) (-a)]                     -- 加法の可換則
     _ = 0 + a := by rw [add_neg_cancel (-a)]                                  -- `z + (-z) = 0`（`z → -a`）
     _ = a + 0 := add_comm 0 a                                                 -- 加法の可換則

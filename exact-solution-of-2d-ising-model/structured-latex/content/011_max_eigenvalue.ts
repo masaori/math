@@ -1221,7 +1221,7 @@ q(t)
 +\sum_{k=1}^{n}\sum_{l=1}^{n} t\,y_kP_{kl}x_l\\
 &\qquad+\sum_{k=1}^{n}\sum_{l=1}^{n} t\,x_kP_{kl}y_l
 +\sum_{k=1}^{n}\sum_{l=1}^{n} t^2\,x_kP_{kl}x_l
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則・可換則による有限和の項の並べ替え}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律・可換則による有限和の項の並べ替え}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} y_kP_{kl}y_l
 +t\sum_{k=1}^{n}\sum_{l=1}^{n} y_kP_{kl}x_l\\
 &\qquad+t\sum_{k=1}^{n}\sum_{l=1}^{n} x_kP_{kl}y_l

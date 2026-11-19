@@ -7,7 +7,7 @@
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `calc` の 6 段（加法の単位元 → 加法の逆元 → 加法の結合則 → 右からの分配則 → `0 + 0 = 0` → 加法の逆元） | `zero_mul_of_rightDistrib` の `calc` の 6 段（同じ並び） |
+| `calc` の 6 段（加法の単位元 → 加法の逆元 → 加法の結合律 → 右からの分配則 → `0 + 0 = 0` → 加法の逆元） | `zero_mul_of_rightDistrib` の `calc` の 6 段（同じ並び） |
 
 ## 何が効いているか / 効いていないか
 
@@ -29,7 +29,7 @@ theorem zero_mul_of_rightDistrib {R : Type*} [AddGroup R] [Mul R] [RightDistribC
   calc 0 * x
       = 0 * x + 0 := (add_zero (0 * x)).symm                                   -- 加法の単位元を右辺から左辺へ
     _ = 0 * x + (0 * x + -(0 * x)) := by rw [add_neg_cancel (0 * x)]            -- 加法の逆元を右辺から左辺へ
-    _ = (0 * x + 0 * x) + -(0 * x) := (add_assoc (0 * x) (0 * x) (-(0 * x))).symm  -- 加法の結合則
+    _ = (0 * x + 0 * x) + -(0 * x) := (add_assoc (0 * x) (0 * x) (-(0 * x))).symm  -- 加法の結合律
     _ = (0 + 0) * x + -(0 * x) := by rw [add_mul (0 : R) 0 x]                  -- 右からの分配則を右辺から左辺へ
     _ = 0 * x + -(0 * x) := by rw [add_zero (0 : R)]                           -- `0 + 0 = 0`
     _ = 0 := add_neg_cancel (0 * x)                                            -- 加法の逆元

@@ -182,7 +182,7 @@ theorem thetaTilde_conj_eq_neg_add_two_pi (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi + (-thetaTilde M μ) := sub_eq_add_neg (2 * Real.pi) (thetaTilde M μ)
                                                   -- 2 行目: `def_real_difference`（`y → 2π`, `z → θ̃_μ`）
     _ = (-thetaTilde M μ) + 2 * Real.pi := add_comm (2 * Real.pi) (-thetaTilde M μ)
-                                                  -- 3 行目: ℝ の加法の交換則 `p + q = q + p`（`p → 2π`, `q → -θ̃_μ`。`set_and_algebra_notation`）
+                                                  -- 3 行目: ℝ の加法の交換律 `p + q = q + p`（`p → 2π`, `q → -θ̃_μ`。`set_and_algebra_notation`）
     _ = (-thetaTilde M μ) + 2 * Real.pi * 1 := by
         rw [mul_one]                              -- 4 行目: ℝ の乗法の単位元 `p·1 = p`（`p → 2π`。`set_and_algebra_notation`）を右辺から左辺へ
     _ = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
@@ -204,7 +204,7 @@ theorem neg_thetaTilde_conj_eq_add_two_pi_neg_one (hM : M ≠ 0) (μ : ℤ) :
         rw [real_double_negation (thetaTilde M μ)]
                                                   -- 4 行目: `real_double_negation`（`a → θ̃_μ`）
     _ = thetaTilde M μ + (-(2 * Real.pi)) := add_comm _ _
-                                                  -- 5 行目: ℝ の加法の交換則（`set_and_algebra_notation`）
+                                                  -- 5 行目: ℝ の加法の交換律（`set_and_algebra_notation`）
     _ = thetaTilde M μ + (-1) * (2 * Real.pi) := by
         rw [real_minus_one_times_is_negation (2 * Real.pi)]
                                                   -- 6 行目: `real_minus_one_times_is_negation`（`a → 2π`）を右辺から左辺へ

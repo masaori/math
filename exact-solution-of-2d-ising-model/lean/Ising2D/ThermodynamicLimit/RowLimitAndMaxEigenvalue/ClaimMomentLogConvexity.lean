@@ -146,7 +146,7 @@ theorem real_identity_matrix_eq_real_matrix_of_identity :
 /-- 人手【冪の分け方】の `Mat(d,ℂ)` の一つ目の 3 行: `W^{a+b} = W^b(IW^a)`。 -/
 theorem power_of_W_split_with_identity (a b : ℕ) : W ^ (a + b) = W ^ b * (1 * W ^ a) :=
   calc W ^ (a + b)
-      = W ^ (b + a) := by rw [Nat.add_comm]                                 -- `ℤ` の加法の交換則
+      = W ^ (b + a) := by rw [Nat.add_comm]                                 -- `ℤ` の加法の交換律
     _ = W ^ b * W ^ a := matrix_power_exponent_law W b a                    -- `matrix_power_exponent_law`（`p → b`, `q → a`）
     _ = W ^ b * (1 * W ^ a) := by rw [identity_matrix_mul_tensorPow]        -- `identity_matrix_is_left_unit_of_mat_mult`
 

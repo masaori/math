@@ -37,7 +37,7 @@ theorem matrix_power_exponent_law (A : TensorPow M) (p : ℕ) :
       _ = A ^ p * A ^ 0 := by rw [pow_zero]                                 -- `def_exp` (1) の `A^0 := I`
   | q + 1 =>
     calc A ^ (p + (q + 1))
-        = A ^ ((p + q) + 1) := by rw [Nat.add_assoc]                        -- `ℤ` の加法の結合則
+        = A ^ ((p + q) + 1) := by rw [Nat.add_assoc]                        -- `ℤ` の加法の結合律
       _ = A ^ (p + q) * A := pow_succ A (p + q)                             -- `def_exp` (1) の `A^{m+1} := A^mA`（`m → p + q`）
       _ = (A ^ p * A ^ q) * A := by rw [matrix_power_exponent_law A p q]    -- 帰納法の仮定
       _ = A ^ p * (A ^ q * A) := Matrix.mul_assoc _ _ _                     -- `mat_mult_associative`

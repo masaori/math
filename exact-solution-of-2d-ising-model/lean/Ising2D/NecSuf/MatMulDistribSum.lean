@@ -9,7 +9,7 @@
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `finite_sum_of_complex_sums_step`・`finite_sum_of_real_sums_step`（結合則 → 結合則 → 交換則 → 結合則 → 結合則） | `finite_sum_add_step'`（同じ並び） |
+| `finite_sum_of_complex_sums_step`・`finite_sum_of_real_sums_step`（結合律 → 結合律 → 交換律 → 結合律 → 結合律） | `finite_sum_add_step'`（同じ並び） |
 | `finite_sum_of_complex_sums_succ`・`finite_sum_of_real_sums_succ`（`n + 1` 項の帰納法。`Σ_{j=1}^{1}` と `Σ_{j=1}^{n+1} = (Σ_{j=1}^{n}) + (n+1 項目)` の定義 → 帰納法の仮定 → 上の 5 段 → 定義） | `finite_sum_add_succ'`（同じ並び） |
 | `finite_sum_of_complex_sums`・`finite_sum_of_real_sums`（`n = 0` は空の和。人手には無い） | `finite_sum_add_fin'` |
 | `finite_sum_of_real_sums_fintype`（複素数の具体版の添字は `Fin n` なので無い。`TensorPow M` の系が縮める添字 `Conf M` のためにも使う） | `finite_sum_add'`（有限型 `κ` の上の和を `Fintype.equivFin` で `Fin (card κ)` の上の和へ番号付けし直してから `finite_sum_add_fin'` を使う） |
@@ -18,7 +18,7 @@
 
 ## 何が効いているか / 効いていないか
 
-- 有限和を二つに分ける段で効いているのは、**加法の結合則と交換則だけ**である（`AddCommMonoid`）。加法の零は `Finset.sum` の定義と
+- 有限和を二つに分ける段で効いているのは、**加法の結合律と交換律だけ**である（`AddCommMonoid`）。加法の零は `Finset.sum` の定義と
   `n = 0`（空の和。人手には無い）にだけ現れ、帰納法の段では効いていない。加法の逆元は効いていない。
 - 行列の積の分配で効いているのは、係数の**左分配則**（`A(B + C)`。`LeftDistribClass`）または**右分配則**（`(A + B)C`。`RightDistribClass`）
   と、上の有限和の分配だけである。
@@ -37,15 +37,15 @@ open Matrix
 
 variable {R : Type*}
 
-/-- **帰納法の段の 5 行**（具体版 `finite_sum_of_complex_sums_step`・`finite_sum_of_real_sums_step`）: `(α + β) + (x + y) = (α + x) + (β + y)`。加法の結合則と交換則だけを使う。 -/
+/-- **帰納法の段の 5 行**（具体版 `finite_sum_of_complex_sums_step`・`finite_sum_of_real_sums_step`）: `(α + β) + (x + y) = (α + x) + (β + y)`。加法の結合律と交換律だけを使う。 -/
 theorem finite_sum_add_step' [AddCommSemigroup R] (α β x y : R) :
     (α + β) + (x + y) = (α + x) + (β + y) :=
   calc (α + β) + (x + y)
-      = α + (β + (x + y)) := add_assoc _ _ _                                 -- 結合則
-    _ = α + ((β + x) + y) := by rw [add_assoc β x y]                         -- 結合則
-    _ = α + ((x + β) + y) := by rw [add_comm β x]                            -- 交換則
-    _ = α + (x + (β + y)) := by rw [add_assoc x β y]                         -- 結合則
-    _ = (α + x) + (β + y) := (add_assoc _ _ _).symm                          -- 結合則
+      = α + (β + (x + y)) := add_assoc _ _ _                                 -- 結合律
+    _ = α + ((β + x) + y) := by rw [add_assoc β x y]                         -- 結合律
+    _ = α + ((x + β) + y) := by rw [add_comm β x]                            -- 交換律
+    _ = α + (x + (β + y)) := by rw [add_assoc x β y]                         -- 結合律
+    _ = (α + x) + (β + y) := (add_assoc _ _ _).symm                          -- 結合律
 
 /-- **`Σ_{j=1}^{n+1}(a_j + b_j) = Σ a_j + Σ b_j`**（具体版 `finite_sum_of_complex_sums_succ`・`finite_sum_of_real_sums_succ`）。`n` についての帰納法。 -/
 theorem finite_sum_add_succ' [AddCommMonoid R] (n : ℕ) (a b : Fin (n + 1) → R) :
@@ -65,7 +65,7 @@ theorem finite_sum_add_succ' [AddCommMonoid R] (n : ℕ) (a b : Fin (n + 1) → 
           rw [ih (fun j => a j.castSucc) (fun j => b j.castSucc)]             -- 帰納法の仮定
       _ = ((∑ j : Fin (n + 1), a j.castSucc) + a (Fin.last _))
             + ((∑ j : Fin (n + 1), b j.castSucc) + b (Fin.last _)) :=
-          finite_sum_add_step' _ _ _ _                                         -- 結合則・交換則の 5 段
+          finite_sum_add_step' _ _ _ _                                         -- 結合律・交換律の 5 段
       _ = (∑ j, a j) + ∑ j, b j := by
           rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- 和の定義を 2 か所
 

@@ -20,7 +20,7 @@
   `SmulMatrixSub.lean` と同じ理由で型クラスにせず仮定にした）、`-y = (-1)y`（単位元と、符号反転が積に分配すること。`HasDistribNeg`）、
   乗法の結合則、**右分配則**である。
 - 差のくくり出しの仮定は `Add`・`Monoid`・`HasDistribNeg`・`RightDistribClass`・`Sub`（と `hsub`）だけにした。
-  **加法の結合則・交換則・零、左分配則、`0 * x = 0`、加法の逆元（`x + (-x) = 0`）、乗法の可換則は効いていない。** 具体版 `scalar_multiple_distributes_over_matrix_difference`
+  **加法の結合律・交換律・零、左分配則、`0 * x = 0`、加法の逆元（`x + (-x) = 0`）、乗法の可換則は効いていない。** 具体版 `scalar_multiple_distributes_over_matrix_difference`
   と違い、`-1` と係数を入れ替える段も無い。
 - 有限和のくくり出しで効いているのは、行列の有限和の成分が成分の有限和であることと、係数の有限和の右分配（`Finset.sum_mul`）だけである。
   `Finset.sum_mul` のために `NonUnitalNonAssocSemiring` を取った。`0 * x = 0` は mathlib の `Finset.sum` の空の和の段にだけ現れ、

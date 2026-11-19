@@ -21,7 +21,7 @@
   （和の側が可換なので左右は同じ内容である）。
 * 項ごとの大小の主張は、帰納法の段で右に足す段（帰納法の仮定に `a_{m+1}` を足す）と左に足す段（`a_{m+1} ≤ b_{m+1}` に `Σ b_j` を足す）を使う。
   順序は前順序で足り、反対称律・全順序、差、乗法、実数であることは効いていない。
-* 加法の交換則は、`Finset` の上の和 `∑` が `AddCommMonoid` を要求するので外せない（人手の左から足す和を `Fin` の上の `∑` で受けるための仮定）。
+* 加法の交換律は、`Finset` の上の和 `∑` が `AddCommMonoid` を要求するので外せない（人手の左から足す和を `Fin` の上の `∑` で受けるための仮定）。
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Algebra.Order.Monoid.Unbundled.Basic

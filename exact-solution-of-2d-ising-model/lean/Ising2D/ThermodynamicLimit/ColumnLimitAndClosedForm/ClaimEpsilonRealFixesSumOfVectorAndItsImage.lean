@@ -19,7 +19,7 @@
 - 人手の和の添字 `{1, …, d}` は Lean では有限型 `Conf (n + 1)` で、`finite_sum_of_real_sums` は `_fintype` 版を引く。
 
 必要十分版は置かない。鎖は、引いた主張（`finite_sum_of_real_sums`・`real_matrix_vector_product_is_associative`・
-`epsilon_real_square_is_identity`・`real_identity_matrix_is_left_unit_of_real_matrix_vector_product`）と ℝ の分配則・加法の交換則を
+`epsilon_real_square_is_identity`・`real_identity_matrix_is_left_unit_of_real_matrix_vector_product`）と ℝ の分配則・加法の交換律を
 成分ごとに 1 回ずつ当てることに尽き、それらの外に抽象的な内容を持たない（`epsilon_real_square_is_identity` と同じ）。
 -/
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealIsSymmetricAndSquareIsIdentity
@@ -54,7 +54,7 @@ theorem epsilon_real_fixes_sum_of_vector_and_its_image (n : ℕ) (u v : Conf (n 
         rw [epsilon_real_square_is_identity]                                  -- `epsilon_real_square_is_identity`
     _ = (epsilonReal n *ᵥ u) k + u k := by
         rw [real_identity_matrix_is_left_unit_of_real_matrix_vector_product]  -- `real_identity_matrix_is_left_unit_of_real_matrix_vector_product`（`x → u`）
-    _ = u k + (epsilonReal n *ᵥ u) k := add_comm _ _                          -- ℝ の加法の交換則
+    _ = u k + (epsilonReal n *ᵥ u) k := add_comm _ _                          -- ℝ の加法の交換律
     _ = v k := (hv k).symm                                                    -- `v` の定義を右辺から左辺へ
 
 end Ising2D

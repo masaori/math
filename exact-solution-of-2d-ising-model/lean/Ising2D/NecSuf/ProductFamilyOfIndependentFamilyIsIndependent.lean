@@ -41,7 +41,7 @@
 
 ## 効いているもの（一次情報: 下の証明が使っている補題がすべて）
 
-* 係数の加法の結合則・交換則と零（有限和 `Finset.sum`、`Finset.sum_comm`、`Finset.sum_eq_single`）。
+* 係数の加法の結合律・交換律と零（有限和 `Finset.sum`、`Finset.sum_comm`、`Finset.sum_eq_single`）。
 * 係数の乗法の結合則（(2a)(2d) の組み替えの段の `mul_assoc`）、単位元（`mul_one`）、零との積（`mul_zero`・`zero_mul`）。
 * 左 `R` 加群としてのスカラー倍の性質（`Finset.smul_sum`・`smul_smul`・`Finset.sum_smul`・`one_smul`・`zero_smul`）。
   関数全体の加群の和・スカラー倍・零が成分ごとであること（`Finset.sum_apply`・`Pi.smul_apply`・`Pi.zero_apply`）。

@@ -4376,7 +4376,7 @@ s_1c_2
 &= \left(\pm r + g_1\right)b
    \quad (\because \text{分配則で } b \text{ を括り出す}) \\
 &= \left(g_1 \pm r\right)b
-   \quad (\because \mathbb{C}\text{ の加法の交換則（下の符号では } g_1 + (-r) = g_1 - r \text{ と書く）}) \\
+   \quad (\because \mathbb{C}\text{ の加法の交換律（下の符号では } g_1 + (-r) = g_1 - r \text{ と書く）}) \\
 &= \lambda_{\pm,\mu}\,\left(v_\pm\right)_2
    \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_2 = b)
 \end{aligned}`,
@@ -7185,7 +7185,7 @@ g
 &= 2\pi + \left(-\tilde\theta_\mu\right)
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to 2\pi,\ z \to \tilde\theta_\mu)\bigr)\\
 &= \left(-\tilde\theta_\mu\right) + 2\pi
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\ p + q = q + p\ (p \to 2\pi,\ q \to -\tilde\theta_\mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ p + q = q + p\ (p \to 2\pi,\ q \to -\tilde\theta_\mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left(-\tilde\theta_\mu\right) + 2\pi\cdot1_{\mathbb R}
 &&\bigl(\because\ 1_{\mathbb R}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ p\cdot 1 = p\ (p \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \left(-\tilde\theta_\mu\right) + 2\pi\,(1)_{\mathbb R}
@@ -7202,7 +7202,7 @@ g
 &= \left(-\left(2\pi\right)\right) + \tilde\theta_\mu
 &&\bigl(\because\ \blkref{real_double_negation}\ (a \to \tilde\theta_\mu)\bigr)\\
 &= \tilde\theta_\mu + \left(-\left(2\pi\right)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\ p + q = q + p\ (p \to -\left(2\pi\right),\ q \to \tilde\theta_\mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ p + q = q + p\ (p \to -\left(2\pi\right),\ q \to \tilde\theta_\mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \tilde\theta_\mu + \left(-1_{\mathbb R}\right)(2\pi)
 &&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to 2\pi)\ \text{を右辺から左辺へ}\bigr)\\
 &= \tilde\theta_\mu + 2\pi\left(-1_{\mathbb R}\right)

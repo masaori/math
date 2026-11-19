@@ -27,7 +27,7 @@
    行列であることも、複素数であることも、テンソル冪であることも効いていない。
    **`ε` が `Q̌_ε` と可換であること**（同 (4) 後半）には、これに加えて、`1` が積の単位元であること、
    分配則、差が和と符号反転で書けること（`x − y = x + (−y)`）、積が各因子について `𝕜` 倍と交換することが効く。
-   加法の零・結合則・可換性・逆元則、`Q̌_ε` の因子の係数 `ε_ν`・`1 − ε_ν` の関係、`n_μ` の冪等性は効かない。
+   加法の零・結合律・可換性・逆元則、`Q̌_ε` の因子の係数 `ε_ν`・`1 − ε_ν` の関係、`n_μ` の冪等性は効かない。
 
 2. **符号の反転則**（人手証明 (2)）に効いているのは、次の 3 つだけである。
    - `Q_{T∪{μ}} (c_μ Q_T) = c_μ Q_T`（人手証明 Step 2）— これは
@@ -181,7 +181,7 @@ variable {A : Type*} [Mul A] [Add A] [LeftDistribClass A] [RightDistribClass A] 
 
 /-- **`commuting_with_difference` の必要十分版（環の元）**: `GX = XG` かつ `GW = WG` なら `G(X − W) = (X − W)G`。
 8 段は人手 `commuting_with_difference` の 8 行（具体版 `Ising2D.matrix_mul_sub_eq_sub_mul_of_commute`）と同じ並びである。
-差は仮定 `hsub`（`x − y = x + (−y)`）でだけ使い、加法の零・結合則・可換性・逆元則は効かない。
+差は仮定 `hsub`（`x − y = x + (−y)`）でだけ使い、加法の零・結合律・可換性・逆元則は効かない。
 積の結合則と単位元も効かないので、`Mul A` だけを仮定する。 -/
 theorem commute_sub_of_commute' (hsub : ∀ x y : A, x - y = x + -y) {G X W : A}
     (hX : G * X = X * G) (hW : G * W = W * G) : G * (X - W) = (X - W) * G :=
@@ -262,7 +262,7 @@ variable {A : Type*} [Monoid A] [Add A] [Zero A] [LeftDistribClass A] [HasDistri
 
 効いているのは、`a_i c_i = 1 − n_i`（`check_number_operator_idempotent` (2)）と `c_i c_i = 0`（同 (1)）、積の結合則と単位元、
 左分配則、符号反転が右の因子から外へ出ること、差が和と符号反転で書けること（`hsub`）、`0x = 0`（`hz`）、`x − 0 = x`（`hs0`）だけである。
-加法の結合則・可換性・逆元則、右分配則、`x0 = 0`、`a_i` が `c_i` の随伴であること、反交換関係そのもの
+加法の結合律・可換性・逆元則、右分配則、`x0 = 0`、`a_i` が `c_i` の随伴であること、反交換関係そのもの
 （`a_i c_i = 1 − n_i` を導くのにだけ使う）は効いていない。 -/
 theorem num_mul_cre' (hsub : ∀ x y : A, x - y = x + -y) (hz : ∀ x : A, 0 * x = 0) (hs0 : ∀ x : A, x - 0 = x)
     (c a : ι → A) (i : ι) (hac : a i * c i = 1 - num c a i) (hsq : c i * c i = 0) :

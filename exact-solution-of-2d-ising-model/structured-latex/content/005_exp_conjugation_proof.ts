@@ -1831,7 +1831,7 @@ h
 &= (XZ+XW)-(ZX+WX)
 &&(\because\ \text{行列の積の分配律})\\
 &= (XZ-ZX)+(XW-WX)
-&&(\because\ \text{行列の加法の交換則と結合則})\\
+&&(\because\ \text{行列の加法の交換律と結合律})\\
 &= \mathrm{ad}_X(Z)+\mathrm{ad}_X(W)
 &&(\because\ \mathrm{ad}_X \text{ の定義})
 \end{aligned}`,
@@ -2318,7 +2318,7 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
         String.raw`\begin{aligned}
 \left\|P_N-\exp(X)\,Y\,\exp(-X)\right\|
 &= \left\|\left(P_N-Q_N\right)+\left(Q_N-\exp(X)\,Y\,\exp(-X)\right)\right\|
-   &&(\because\ \text{行列の和の結合則と}\ (-Q_N)+Q_N=O) \\
+   &&(\because\ \text{行列の和の結合律と}\ (-Q_N)+Q_N=O) \\
 &\le \left\|P_N-Q_N\right\|+\left\|Q_N-\exp(X)\,Y\,\exp(-X)\right\|
    &&(\because\ \text{ノルムの三角不等式。}\blkref{matrix_norm_triangle_inequality}) \\
 &= \left\|Q_N-P_N\right\|+\left\|Q_N-\exp(X)\,Y\,\exp(-X)\right\|

@@ -2635,7 +2635,7 @@ I_{\mathbb{R}}
       displayMath(String.raw`\begin{aligned}
 W^{a+b}
 &=W^{b+a}
-&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換則}\bigr)\\
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\bigr)\\
 &=W^bW^a
 &&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to b,\ q \to a)\bigr)\\
 &=W^b\bigl(IW^a\bigr)
@@ -3873,7 +3873,7 @@ m_n
 &\leq 2^{-1}\sum_{k=1}^{d}\sum_{l=1}^{d}\bigl(x_l^2\,((W_{\mathbb{R}})^n)_{kk} + x_k^2\,((W_{\mathbb{R}})^n)_{ll}\bigr)
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^n\text{ の成分の評価】を}\ k, l \in \{1,\dots,d\}\ \text{の組}\ (k,l)\ \text{ごとの項へ同時に適用し、項ごとの不等式の有限和と}\ 2^{-1} > 0\ \text{倍は順序を保つ}\bigr)\\
 &=2^{-1}\Bigl(\sum_{k=1}^{d}\sum_{l=1}^{d}x_l^2\,((W_{\mathbb{R}})^n)_{kk} + \sum_{k=1}^{d}\sum_{l=1}^{d}x_k^2\,((W_{\mathbb{R}})^n)_{ll}\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の有限和の加法の交換則・結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の有限和の加法の交換律・結合律}\bigr)\\
 &=2^{-1}\Bigl(\sum_{k=1}^{d}((W_{\mathbb{R}})^n)_{kk}\sum_{l=1}^{d}x_l^2 + \sum_{k=1}^{d}x_k^2\sum_{l=1}^{d}((W_{\mathbb{R}})^n)_{ll}\Bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側の和へ適用}\bigr)\\
 &=2^{-1}\Bigl(\Bigl(\sum_{k=1}^{d}((W_{\mathbb{R}})^n)_{kk}\Bigr)\Bigl(\sum_{l=1}^{d}x_l^2\Bigr) + \Bigl(\sum_{k=1}^{d}x_k^2\Bigr)\Bigl(\sum_{l=1}^{d}((W_{\mathbb{R}})^n)_{ll}\Bigr)\Bigr)

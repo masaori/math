@@ -1375,13 +1375,13 @@ T_B(X - W)
       displayMath(String.raw`\begin{aligned}
 \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a +_{\mathbb{Z}} (b +_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((a +_{\mathbb{Z}} b) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の和の結合則}\bigr)\\
+  &&\bigl(\because\ \mathbb{Z}\ \text{の和の結合律}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} b) +_{\mathbb{R}} 1_{\mathbb{R}}
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ (n \to a +_{\mathbb{Z}} b)\bigr)\\
 &= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr) +_{\mathbb{R}} 1_{\mathbb{R}}
   &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)
-  &&\bigl(\because\ \mathbb{R}\ \text{の和の結合則}\bigr)\\
+  &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b +_{\mathbb{Z}} 1_{\mathbb{Z}})
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ (n \to b)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -2163,15 +2163,15 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &= \bigl(\alpha + (-\beta)\bigr) + \bigl(a_{m+1} + (-b_{m+1})\bigr)
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to \alpha,\ z \to \beta;\ y \to a_{m+1},\ z \to b_{m+1})\ \text{を 2 か所へ同時適用}\bigr)\\
 &= \alpha + \Bigl((-\beta) + \bigl(a_{m+1} + (-b_{m+1})\bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to -\beta,\ s \to a_{m+1} + (-b_{m+1}))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to -\beta,\ s \to a_{m+1} + (-b_{m+1}))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \alpha + \Bigl(\bigl((-\beta) + a_{m+1}\bigr) + (-b_{m+1})\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to -\beta,\ q \to a_{m+1},\ s \to -b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (p + q) + s = p + (q + s)\ (p \to -\beta,\ q \to a_{m+1},\ s \to -b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \alpha + \Bigl(\bigl(a_{m+1} + (-\beta)\bigr) + (-b_{m+1})\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\ p + q = q + p\ (p \to -\beta,\ q \to a_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ p + q = q + p\ (p \to -\beta,\ q \to a_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \alpha + \Bigl(a_{m+1} + \bigl((-\beta) + (-b_{m+1})\bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to a_{m+1},\ q \to -\beta,\ s \to -b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (p + q) + s = p + (q + s)\ (p \to a_{m+1},\ q \to -\beta,\ s \to -b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (\alpha + a_{m+1}) + \bigl((-\beta) + (-b_{m+1})\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to a_{m+1},\ s \to (-\beta) + (-b_{m+1}))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to a_{m+1},\ s \to (-\beta) + (-b_{m+1}))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= (\alpha + a_{m+1}) + \bigl(-(\beta + b_{m+1})\bigr)
 &&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ (x \to \beta,\ y \to b_{m+1})\ \text{を右辺から左辺へ}\bigr)\\
 &= (\alpha + a_{m+1}) - (\beta + b_{m+1})
@@ -2246,15 +2246,15 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &= (\alpha + \beta) + (a_{m+1} + b_{m+1})
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \alpha + \bigl(\beta + (a_{m+1} + b_{m+1})\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to \beta,\ s \to a_{m+1} + b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to \beta,\ s \to a_{m+1} + b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \alpha + \bigl((\beta + a_{m+1}) + b_{m+1}\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \beta,\ q \to a_{m+1},\ s \to b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (p + q) + s = p + (q + s)\ (p \to \beta,\ q \to a_{m+1},\ s \to b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \alpha + \bigl((a_{m+1} + \beta) + b_{m+1}\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\ p + q = q + p\ (p \to \beta,\ q \to a_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ p + q = q + p\ (p \to \beta,\ q \to a_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \alpha + \bigl(a_{m+1} + (\beta + b_{m+1})\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to a_{m+1},\ q \to \beta,\ s \to b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (p + q) + s = p + (q + s)\ (p \to a_{m+1},\ q \to \beta,\ s \to b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (\alpha + a_{m+1}) + (\beta + b_{m+1})
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to a_{m+1},\ s \to \beta + b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to a_{m+1},\ s \to \beta + b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \Bigl(\Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}\Bigr) + \Bigl(\Bigl(\sum_{j=1}^{m} b_j\Bigr) + b_{m+1}\Bigr)
 &&\bigl(\because\ \alpha, \beta\ \text{の置き方}\bigr)\\
 &= \Bigl(\sum_{j=1}^{m+1} a_j\Bigr) + \Bigl(\sum_{j=1}^{m+1} b_j\Bigr)

@@ -50,7 +50,7 @@
   「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
 - 人手の `finite_sum_of_real_scalar_multiples` を当てる行のうち、【`(W_ℝ)^n` の成分の評価】の 4 つの項へ分ける行は mathlib の `Finset.mul_sum`・
   `Finset.sum_sub_distrib`・`Finset.sum_add_distrib` で、`m_n ≤ T` の外側の和へ当てる行は `Finset.sum_mul` で書く（掛ける数が右にあるため）。
-  `m_n ≤ T` の「有限和の加法の交換則・結合則」の行（人手に参照が無い）は `Finset.sum_add_distrib` で書く。
+  `m_n ≤ T` の「有限和の加法の交換律・結合律」の行（人手に参照が無い）は `Finset.sum_add_distrib` で書く。
 - 本文の `W` への当てはめ（`*_physical`）は段ごとには置かない。主張 `trace_power_sandwich` の当てはめ `trace_power_sandwich_physical`（`PhysicalPartitionFunctionSandwich.lean`）が、ここの段をまとめて本文の `W` へ渡す。
 - 人手の `ℝ` の分配則・結合則・交換則と、同類項の加法は `ring` で、商と順序の行は mathlib の `div_le_div_of_nonneg_right`・
   `mul_div_cancel_*`・`mul_le_mul_of_nonneg_left` で書く（人手のこれらの行には参照が無い）。
@@ -437,7 +437,7 @@ theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : 
     _ = 2⁻¹ * (∑ k, ∑ l, x l ^ 2 * P k k + ∑ k, ∑ l, x k ^ 2 * P l l) := by
         rw [← Finset.sum_add_distrib]
         exact congrArg (2⁻¹ * ·) (Finset.sum_congr rfl fun k _ => Finset.sum_add_distrib)
-                                                                            -- `ℝ` の有限和の加法の交換則・結合則
+                                                                            -- `ℝ` の有限和の加法の交換律・結合律
     _ = 2⁻¹ * (∑ k, P k k * ∑ l, x l ^ 2 + ∑ k, x k ^ 2 * ∑ l, P l l) := by
         congr 2
         · exact Finset.sum_congr rfl fun k _ => by

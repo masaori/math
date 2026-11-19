@@ -999,7 +999,7 @@ w
         math(String.raw`\mathbb{R}`),
         " を使うのは、この章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の分配則・加法の交換則と有限和だけを使い、極限・完備性を使わない。",
+        " の分配則・加法の交換律と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -1029,7 +1029,7 @@ w
 &= (\varepsilon_{\mathbb{R}}u)_k + u_k
   &&\bigl(\because\ \blkref{real_identity_matrix_is_left_unit_of_real_matrix_vector_product}\ (n \to d,\ x \to u)\bigr)\\
 &= u_k + (\varepsilon_{\mathbb{R}}u)_k
-  &&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\bigr)\\
+  &&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\bigr)\\
 &= v_k
   &&\bigl(\because\ v\ \text{の定義を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -5589,7 +5589,7 @@ V^{(+)}u
 &= \sum_{k=1}^{n}\sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
  &&\left(\because\ \mathbb{C}\ \text{の分配則・交換則・結合則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{\epsilon}\sum_{k=1}^{n}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
- &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合則・交換則。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+ &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合律・交換律。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\sum_{k=1}^{n}\overline{u_k}\,(w_\epsilon)_k
  &&\left(\because\ \mathbb{C}\ \text{の分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\,u^*\check{Q}_\epsilon u
@@ -5615,7 +5615,7 @@ V^{(+)}u
 &= \sum_{\epsilon}\sum_{k=1}^{n}\overline{u_k}\,(w_\epsilon)_k
  &&\left(\because\ \text{準備 3（}A \to \check{Q}_\epsilon\text{）と}\ w_\epsilon = \check{Q}_\epsilon u\right)\\
 &= \sum_{k=1}^{n}\sum_{\epsilon}\overline{u_k}\,(w_\epsilon)_k
- &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合則・交換則。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+ &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合律・交換律。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\sum_{\epsilon}(w_\epsilon)_k
  &&\left(\because\ \mathbb{C}\ \text{の分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\,u_k
@@ -5814,7 +5814,7 @@ x^\top W_{\mathbb{R}}x
 &= \overline{q_k} + q_k
  &&\left(\because\ \overline{\overline{c}} = c\right)\\
 &= p_k
- &&\left(\because\ \mathbb{C}\ \text{の加法の交換則（}\blkref{complex_numbers_form_a_field}\text{）}\right)
+ &&\left(\because\ \mathbb{C}\ \text{の加法の交換律（}\blkref{complex_numbers_form_a_field}\text{）}\right)
 \end{aligned}
 \qquad
 \begin{aligned}

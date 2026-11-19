@@ -1,3 +1,5 @@
+2026-11-19: Lean の通しの証明のゴールラインの確認の六百十九個目として、状態台帳の (d4c44p15f15p38w15) を行って済んだ。本文の加法の交換・結合の法則の名前を「律」に揃えた（「加法の交換則」「加法の結合則」→「律」。本文全体で律 785・則 365 で、「加法の結合律・交換律」が既に 21 か所あるため）。経緯の記録は替えず、数式・主張・鎖は不変。Lean・lean/docs・README・SageMath のコメントも揃えた（SageMath の検査名 1 件はログと一緒に替えるので残した）。加法以外の律／則の混在は (w29)、set_and_algebra_notation が法則を書いていない件は (w30)。レビュー 2 回（最後は必須 0）。次は (w16) から。
+
 2026-11-19: Lean の通しの証明のゴールラインの確認の六百十八個目として、状態台帳の (d4c44p15f15p38w14) を行って済んだ。人手 `finite_sum_of_real_differences` の `def_finite_sum_of_real_numbers` を引く行に代入と向きを書き、`finite_sum_of_real_differences`・`finite_sum_of_real_sums` の帰納法の段の加法の結合則・交換則の 5 行ずつを形と代入を添えた `set_and_algebra_notation` の参照にした（主張・鎖は不変）。Lean の具体版・SageMath のコメントを合わせた。範囲外を (w26)〜(w28) にした。次は状態台帳の「次の一歩」の (w15) から（(w9) は (p63) の待ち）。
 
 2026-11-18: Lean の通しの証明のゴールラインの確認の六百十七個目として、状態台帳の (d4c44p15f15p38w13) を行って済んだ。人手 `open_chain_partition_sum`・`open_chain_endpoint_product_sum` の最後の鎖の「ℝ で a·1 = a」「1·b = b」と `periodicity_of_check_fermi` (3) の θ̃_ν の鎖の「ℝ の加法の交換律」「1_ℝ は積の単位元」を `set_and_algebra_notation` の参照にした（主張・鎖は不変）。Lean の具体版・導出版・SageMath のコメントと overview を合わせた。範囲外を (w24)・(w25) にした。次は状態台帳の「次の一歩」の (w14) から（(w9) は (p63) の待ち）。

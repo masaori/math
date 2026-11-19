@@ -866,13 +866,13 @@ w\cdot z
 &= \left(\bigl(a(ce)+(-(b(de)))\bigr)+\bigl((-(a(df)))+(-(b(cf)))\bigr),\ \bigl(a(cf)+(-(b(df)))\bigr)+\bigl(a(de)+b(ce)\bigr)\right)
 &&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ \bigl((x,y,t) \to (a,c,e),(b,d,e),(a,d,f),(b,c,f),(a,c,f),(b,d,f),(a,d,e),(b,c,e)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 8 箇所へ適用}\bigr)\\
 &= \left(a(ce)+\Bigl((-(b(de)))+\bigl((-(a(df)))+(-(b(cf)))\bigr)\Bigr),\ a(cf)+\Bigl((-(b(df)))+\bigl(a(de)+b(ce)\bigr)\Bigr)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to a(ce),\ y \to -(b(de)),\ t \to (-(a(df)))+(-(b(cf)))\ \text{と}\ x \to a(cf),\ y \to -(b(df)),\ t \to a(de)+b(ce)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to a(ce),\ y \to -(b(de)),\ t \to (-(a(df)))+(-(b(cf)))\ \text{と}\ x \to a(cf),\ y \to -(b(df)),\ t \to a(de)+b(ce)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= \left(a(ce)+\Bigl(\bigl((-(a(df)))+(-(b(cf)))\bigr)+(-(b(de)))\Bigr),\ a(cf)+\Bigl(\bigl(a(de)+b(ce)\bigr)+(-(b(df)))\Bigr)\right)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ \bigl(x \to -(b(de)),\ y \to (-(a(df)))+(-(b(cf)))\ \text{と}\ x \to -(b(df)),\ y \to a(de)+b(ce)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= \left(a(ce)+\Bigl((-(a(df)))+\bigl((-(b(cf)))+(-(b(de)))\bigr)\Bigr),\ a(cf)+\Bigl(a(de)+\bigl(b(ce)+(-(b(df)))\bigr)\Bigr)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to -(a(df)),\ y \to -(b(cf)),\ t \to -(b(de))\ \text{と}\ x \to a(de),\ y \to b(ce),\ t \to -(b(df))\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to -(a(df)),\ y \to -(b(cf)),\ t \to -(b(de))\ \text{と}\ x \to a(de),\ y \to b(ce),\ t \to -(b(df))\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= \left(\bigl(a(ce)+(-(a(df)))\bigr)+\bigl((-(b(cf)))+(-(b(de)))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+(-(b(df)))\bigr)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to a(ce),\ y \to -(a(df)),\ t \to (-(b(cf)))+(-(b(de)))\ \text{と}\ x \to a(cf),\ y \to a(de),\ t \to b(ce)+(-(b(df)))\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to a(ce),\ y \to -(a(df)),\ t \to (-(b(cf)))+(-(b(de)))\ \text{と}\ x \to a(cf),\ y \to a(de),\ t \to b(ce)+(-(b(df)))\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
 &= \left(\bigl(a(ce)+(-(a(df)))\bigr)+\bigl(-(b(cf)+b(de))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+(-(b(df)))\bigr)\right)
 &&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ \bigl(x \to b(cf),\ y \to b(de)\bigr)\ \text{を右辺から左辺へ}\bigr)\\
 &= \left(\bigl(a(ce)+a(-(df))\bigr)+\bigl(-(b(cf)+b(de))\bigr),\ \bigl(a(cf)+a(de)\bigr)+\bigl(b(ce)+b(-(df))\bigr)\right)
@@ -1029,25 +1029,25 @@ z\cdot 1_{\mathbb{C}}
 &= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Bigr)
 &&\bigl(\because\ \text{上の}\ (ad)(bc) = (ac)(bd)\ \text{を 2 箇所へ適用}\bigr)\\
 &= \biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\Bigl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Bigr)\Biggr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr),\ y \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ t \to \bigl((ad)(ad)+(ac)(bd)\bigr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr),\ y \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ t \to \bigl((ad)(ad)+(ac)(bd)\bigr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Biggl(\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\bigl((ad)(ad)+(ac)(bd)\bigr)\Biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Biggr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ y \to (ad)(ad)+(ac)(bd),\ t \to (ac)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ y \to (ad)(ad)+(ac)(bd),\ t \to (ac)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Biggl(\Biggl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Biggr)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ \bigl(x \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ y \to (ad)(ad)+(ac)(bd)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Biggl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Biggr)\Biggr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ad)(ad)+(ac)(bd),\ y \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ t \to (ac)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ad)(ad)+(ac)(bd),\ y \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd),\ t \to (ac)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\bigl((ad)(ad)+(ac)(bd)\bigr)\Biggr)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Biggr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr),\ y \to (ad)(ad)+(ac)(bd),\ t \to \biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr),\ y \to (ad)(ad)+(ac)(bd),\ t \to \biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \Biggl((ac)(ac)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\bigl((ad)(ad)+(ac)(bd)\bigr)\biggr)\Biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\Bigl((bd)(bd)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Bigr)\biggr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac),\ y \to -\bigl((ac)(bd)\bigr),\ t \to (ad)(ad)+(ac)(bd);\ x \to -\bigl((ac)(bd)\bigr),\ y \to (bd)(bd),\ t \to (ac)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac),\ y \to -\bigl((ac)(bd)\bigr),\ t \to (ad)(ad)+(ac)(bd);\ x \to -\bigl((ac)(bd)\bigr),\ y \to (bd)(bd),\ t \to (ac)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= \Biggl((ac)(ac)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ad)(ad)\biggr)+(ac)(bd)\Biggr)\Biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\Bigl(\bigl((bd)(bd)+(ac)(bd)\bigr)+(bc)(bc)\Bigr)\biggr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to -\bigl((ac)(bd)\bigr),\ y \to (ad)(ad),\ t \to (ac)(bd);\ x \to (bd)(bd),\ y \to (ac)(bd),\ t \to (bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to -\bigl((ac)(bd)\bigr),\ y \to (ad)(ad),\ t \to (ac)(bd);\ x \to (bd)(bd),\ y \to (ac)(bd),\ t \to (bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
 &= \Biggl((ac)(ac)+\Biggl(\biggl((ad)(ad)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+(ac)(bd)\Biggr)\Biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\Bigl(\bigl((ac)(bd)+(bd)(bd)\bigr)+(bc)(bc)\Bigr)\biggr)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ \bigl(x \to -\bigl((ac)(bd)\bigr),\ y \to (ad)(ad);\ x \to (bd)(bd),\ y \to (ac)(bd)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= \Biggl((ac)(ac)+\Biggl((ad)(ad)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ac)(bd)\biggr)\Biggr)\Biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+\Bigl((ac)(bd)+\bigl((bd)(bd)+(bc)(bc)\bigr)\Bigr)\biggr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ad)(ad),\ y \to -\bigl((ac)(bd)\bigr),\ t \to (ac)(bd);\ x \to (ac)(bd),\ y \to (bd)(bd),\ t \to (bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ad)(ad),\ y \to -\bigl((ac)(bd)\bigr),\ t \to (ac)(bd);\ x \to (ac)(bd),\ y \to (bd)(bd),\ t \to (bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= \Biggl(\bigl((ac)(ac)+(ad)(ad)\bigr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ac)(bd)\biggr)\Biggr)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ac)(bd)\biggr)+\bigl((bd)(bd)+(bc)(bc)\bigr)\Biggr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac),\ y \to (ad)(ad),\ t \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ac)(bd);\ x \to -\bigl((ac)(bd)\bigr),\ y \to (ac)(bd),\ t \to (bd)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to (ac)(ac),\ y \to (ad)(ad),\ t \to \Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(ac)(bd);\ x \to -\bigl((ac)(bd)\bigr),\ y \to (ac)(bd),\ t \to (bd)(bd)+(bc)(bc)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ適用}\bigr)\\
 &= \Biggl(\bigl((ac)(ac)+(ad)(ad)\bigr)+\biggl((ac)(bd)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)\Biggr)+\Biggl(\biggl((ac)(bd)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\bigl((bd)(bd)+(bc)(bc)\bigr)\Biggr)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則}\ x+y = y+x\ \bigl(x \to -\bigl((ac)(bd)\bigr),\ y \to (ac)(bd)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= \Bigl(\bigl((ac)(ac)+(ad)(ad)\bigr)+0\Bigr)+\Bigl(0+\bigl((bd)(bd)+(bc)(bc)\bigr)\Bigr)
@@ -1886,7 +1886,7 @@ t
 &= 0\cdot x + \bigl(0\cdot x + (-(0\cdot x))\bigr)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 0\cdot x)\ \text{を右辺から左辺へ}\bigr)\\
 &= (0\cdot x + 0\cdot x) + (-(0\cdot x))
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (0 + 0)\cdot x + (-(0\cdot x))
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)c = ac + bc\ (a, b \to 0,\ c \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= 0\cdot x + (-(0\cdot x))
@@ -1939,7 +1939,7 @@ x\cdot 0
 &= x\cdot 0 + \bigl(x\cdot 0 + (-(x\cdot 0))\bigr)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to x\cdot 0)\ \text{を右辺から左辺へ}\bigr)\\
 &= (x\cdot 0 + x\cdot 0) + (-(x\cdot 0))
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= x\cdot (0 + 0) + (-(x\cdot 0))
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ a(b + c) = ab + ac\ (a \to x,\ b, c \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= x\cdot 0 + (-(x\cdot 0))
@@ -2077,7 +2077,7 @@ a - 0
 &= (-1)\cdot a + \bigl(a + (-a)\bigr)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to a)\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl((-1)\cdot a + a\bigr) + (-a)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \bigl((-1)\cdot a + 1\cdot a\bigr) + (-a)
 &&\bigl(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \bigl((-1) + 1\bigr)\cdot a + (-a)
@@ -2141,7 +2141,7 @@ a - 0
 &= -(-a) + \bigl((-a) + a\bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \bigl(-(-a) + (-a)\bigr) + a
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \bigl((-a) + (-(-a))\bigr) + a
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 0 + a

@@ -8,7 +8,7 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 6 行の鎖（加法の単位元を右辺から左辺へ → 加法の逆元を右辺から左辺へ → 加法の結合則 → 分配則 `(a+b)c = ac+bc` を右辺から左辺へ → `0 + 0 = 0` → 加法の逆元） | `real_zero_times_is_zero` の `calc` の 6 段 |
+| 6 行の鎖（加法の単位元を右辺から左辺へ → 加法の逆元を右辺から左辺へ → 加法の結合律 → 分配則 `(a+b)c = ac+bc` を右辺から左辺へ → `0 + 0 = 0` → 加法の逆元） | `real_zero_times_is_zero` の `calc` の 6 段 |
 
 - 人手の `-z`（`def_real_difference` の加法の逆元）は mathlib の `-z`（`Neg ℝ`）で、`z + (-z) = 0` は `add_neg_cancel` で読む。
 - mathlib の `zero_mul`・`MulZeroClass` は使わない（人手の鎖をそのまま書くため）。
@@ -25,7 +25,7 @@ theorem real_zero_times_is_zero (x : ℝ) : 0 * x = 0 :=
   calc 0 * x
       = 0 * x + 0 := (add_zero (0 * x)).symm                                   -- `0` は加法の単位元を右辺から左辺へ
     _ = 0 * x + (0 * x + -(0 * x)) := by rw [add_neg_cancel (0 * x)]            -- `z + (-z) = 0`（`z → 0·x`）を右辺から左辺へ
-    _ = (0 * x + 0 * x) + -(0 * x) := (add_assoc (0 * x) (0 * x) (-(0 * x))).symm  -- 加法の結合則
+    _ = (0 * x + 0 * x) + -(0 * x) := (add_assoc (0 * x) (0 * x) (-(0 * x))).symm  -- 加法の結合律
     _ = (0 + 0) * x + -(0 * x) := by rw [add_mul (0 : ℝ) 0 x]                  -- 分配則 `(a+b)c = ac+bc` を右辺から左辺へ
     _ = 0 * x + -(0 * x) := by rw [add_zero (0 : ℝ)]                           -- `0 + 0 = 0`
     _ = 0 := add_neg_cancel (0 * x)                                            -- `z + (-z) = 0`（`z → 0·x`）

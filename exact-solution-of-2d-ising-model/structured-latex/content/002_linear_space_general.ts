@@ -4724,7 +4724,7 @@ G(X - W)
 &=(2^n-1)+2^n
    &&(\because \text{帰納法の仮定}\ \textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1) \\
 &=2\cdot 2^n-1
-   &&(\because \text{加法の結合則と }2^n+2^n=2\cdot 2^n) \\
+   &&(\because \text{加法の結合律と }2^n+2^n=2\cdot 2^n) \\
 &=2^{n+1}-1
    &&(\because \text{指数法則}\ 2\cdot 2^n=2^{n+1})
 \end{aligned}`,

@@ -64,7 +64,7 @@ for M in [1, 2, 3]:
             Eu[k] + EE_u[k],                                                         # real_matrix_vector_product_is_associative を右辺から左辺へ
             Eu[k] + I_u[k],                                                          # epsilon_real_square_is_identity
             Eu[k] + u[k],                                                            # real_identity_matrix_is_left_unit_of_real_matrix_vector_product
-            u[k] + Eu[k],                                                            # 加法の交換則
+            u[k] + Eu[k],                                                            # 加法の交換律
             v[k],                                                                    # v の定義を右辺から左辺へ
         ]
         for i in range(len(lines) - 1):

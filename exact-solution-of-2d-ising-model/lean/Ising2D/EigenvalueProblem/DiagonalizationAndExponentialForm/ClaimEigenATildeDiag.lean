@@ -408,7 +408,7 @@ theorem AMat_mulVec_eigen_pos :
       _ = b * r + g₁ * b := by rw [neg_mul_neg]                   -- ℂ の四則 `(-b)(-r) = b r`
       _ = r * b + g₁ * b := by rw [mul_comm b r]                  -- ℂ の乗法の可換則
       _ = (r + g₁) * b := by rw [add_mul]                          -- 分配則で `b` を括り出す
-      _ = (g₁ + r) * b := by rw [add_comm r g₁]                    -- ℂ の加法の交換則
+      _ = (g₁ + r) * b := by rw [add_comm r g₁]                    -- ℂ の加法の交換律
       _ = ((g₁ + r) • ![-r, b]) 1 := by simp                       -- `λ_+ = g_1 + r`、`(v_+)_2 = b`
 
 /-- **人手証明 Step 2**: `v_{-,μ} = (+r, b)` は固有値 `λ_{-,μ} = g_1 - r` の固有ベクトル。 -/
@@ -441,7 +441,7 @@ theorem AMat_mulVec_eigen_neg :
       _ = b * (-r) + g₁ * b := by rw [neg_mul_comm]               -- ℂ の四則 `(-b) r = b (-r)`
       _ = (-r) * b + g₁ * b := by rw [mul_comm b (-r)]            -- ℂ の乗法の可換則
       _ = (-r + g₁) * b := by rw [add_mul]                         -- 分配則で `b` を括り出す
-      _ = (g₁ - r) * b := by rw [add_comm, ← sub_eq_add_neg]       -- ℂ の加法の交換則（`g_1 + (-r) = g_1 - r`）
+      _ = (g₁ - r) * b := by rw [add_comm, ← sub_eq_add_neg]       -- ℂ の加法の交換律（`g_1 + (-r) = g_1 - r`）
       _ = ((g₁ - r) • ![r, b]) 1 := by simp                        -- `λ_- = g_1 - r`、`(v_-)_2 = b`
 
 /-- **人手証明 Step 2**: `b ≠ 0` より `v_{+,μ} = (-r, b) ≠ 0`。 -/

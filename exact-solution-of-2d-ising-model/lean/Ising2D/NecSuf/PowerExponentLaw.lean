@@ -8,7 +8,7 @@
 | 具体版の段 | 必要十分版 |
 | --- | --- |
 | `q = 0` の 3 行（`p + 0 = p` → 右単位律 → `A^0 := I`） | `power_exponent_law'` の `0` の `calc` の 3 段 |
-| `q + 1` の 5 行（加法の結合則 → `A^{m+1} := A^mA` → 帰納法の仮定 → 結合則 → `A^{m+1} := A^mA`） | `power_exponent_law'` の `q + 1` の `calc` の 5 段 |
+| `q + 1` の 5 行（加法の結合律 → `A^{m+1} := A^mA` → 帰納法の仮定 → 結合則 → `A^{m+1} := A^mA`） | `power_exponent_law'` の `q + 1` の `calc` の 5 段 |
 
 ## 何が効いているか / 効いていないか
 
@@ -31,7 +31,7 @@ theorem power_exponent_law' {G : Type*} [Monoid G] (a : G) (p : ℕ) :
       _ = a ^ p * a ^ 0 := by rw [pow_zero]                                 -- `a^0 := 1`
   | q + 1 =>
     calc a ^ (p + (q + 1))
-        = a ^ ((p + q) + 1) := by rw [Nat.add_assoc]                        -- 加法の結合則
+        = a ^ ((p + q) + 1) := by rw [Nat.add_assoc]                        -- 加法の結合律
       _ = a ^ (p + q) * a := pow_succ a (p + q)                             -- `a^{m+1} := a^ma`（`m → p + q`）
       _ = (a ^ p * a ^ q) * a := by rw [power_exponent_law' a p q]          -- 帰納法の仮定
       _ = a ^ p * (a ^ q * a) := mul_assoc _ _ _                            -- 乗法の結合則

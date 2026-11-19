@@ -315,11 +315,11 @@
 | **`NecSuf.commute_parity_num`** | **`e` が `c_i`, `a_i` の両方と反交換 ⇒ `e` は `n_i = c_i a_i` と可換**（具体版と同じ 3 行。2 行目は `NecSuf.commute_mul_of_anticomm'`） | **`Semigroup A` + `HasDistribNeg A` だけ** | 同 (4) 前半 |
 | `NecSuf.commute_mul_of_anticomm'`（`NecSuf/CommuteWithAnticommutingProductAndScalarMultiple.lean`） | `GX = −(XG)`, `GY = −(YG)` ⇒ `G(XY) = (XY)G`（8 段） | `Semigroup A` + `HasDistribNeg A` | `product_of_anticommuting_matrices_commutes` |
 | `NecSuf.commute_smul_of_commute'`（同） | `GX = XG` ⇒ `G(cX) = (cX)G`（3 段） | `Mul A` + `SMulCommClass 𝕜 A A` + `IsScalarTower 𝕜 A A`（`𝕜` に構造なし） | `commuting_with_scalar_multiple` |
-| `NecSuf.commute_sub_of_commute'` | `GX = XG`, `GW = WG` ⇒ `G(X − W) = (X − W)G`（8 段） | `Mul A` + `Add A` + 左右の分配則 + `HasDistribNeg A` + `x − y = x + (−y)`（積の結合則・単位元、加法の零・結合則・可換性・逆元則は不要） | `commuting_with_difference` |
+| `NecSuf.commute_sub_of_commute'` | `GX = XG`, `GW = WG` ⇒ `G(X − W) = (X − W)G`（8 段） | `Mul A` + `Add A` + 左右の分配則 + `HasDistribNeg A` + `x − y = x + (−y)`（積の結合則・単位元、加法の零・結合律・可換性・逆元則は不要） | `commuting_with_difference` |
 | `NecSuf.commute_defFactor_of_commute'` | `en = ne` ⇒ `e(cn + d(1 − n)) = (cn + d(1 − n))e`（`c`・`d` は無関係な二つのスカラー） | `MulOneClass A` + `Add A` + 左右の分配則 + `HasDistribNeg A` + `x − y = x + (−y)` + `SMul 𝕜 A` + `SMulCommClass` + `IsScalarTower`（`𝕜` に構造なし。`d = 1 − c`・`c ∈ {0,1}`・`n` の冪等性は不要） | `epsilon_anticommutes_with_check_Z_Y` (4) の `A_ν` の鎖 |
 | **`NecSuf.commute_parity_finProdLeft_defFactor`** | **`e` が `c_ν`, `a_ν` と反交換 ⇒ `e` は `∏_ν (c'_ν n_ν + d'_ν(1 − n_ν))` と可換**（具体版と同じ並び） | 同上で `MulOneClass A` を `Monoid A` に（有限積に積の結合則が効く） | 同 (4) 後半 |
 | **`NecSuf.commute_parity_projOn`** | **`e` は `Q_ε` とも可換**（添字を `Finset` で取る `projOn` の形。`M = 0` の埋め合わせに使う） | **`Ring A` だけ**（`projOn` の定義が要する） | 同 (4) 後半 |
-| `NecSuf.num_mul_cre'` | `a_ic_i = 1 − n_i`, `c_ic_i = 0` ⇒ `n_i c_i = c_i`（具体版 `nOp_mul_cre` と同じ 13 行） | `Monoid A` + `Add A` + `Zero A` + 左分配則 + `HasDistribNeg A` + `x − y = x + (−y)` + `0x = 0` + `x − 0 = x`（加法の結合則・可換性・逆元則、右分配則、`x0 = 0` は不要） | `epsilon_eigenvalue_on_check_Q` (2) Step 2 冒頭 |
+| `NecSuf.num_mul_cre'` | `a_ic_i = 1 − n_i`, `c_ic_i = 0` ⇒ `n_i c_i = c_i`（具体版 `nOp_mul_cre` と同じ 13 行） | `Monoid A` + `Add A` + `Zero A` + 左分配則 + `HasDistribNeg A` + `x − y = x + (−y)` + `0x = 0` + `x − 0 = x`（加法の結合律・可換性・逆元則、右分配則、`x0 = 0` は不要） | `epsilon_eigenvalue_on_check_Q` (2) Step 2 冒頭 |
 | `NecSuf.num_mul_cre` | `n_i c_i = c_i`（反交換関係から `ann_mul_cre` で `a_ic_i = 1 − n_i` を出し、`num_mul_cre'` を使う） | `Ring A` | 同 |
 | **`NecSuf.projOn_insert_mul_cre`** | **`μ ∈ s`, `μ ∉ T` ⇒ `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T`** | **`Ring A` だけ** | 同 (2) Step 2 と同じ結論の、行列の上の別の手順（人手との対応には数えない） |
 | **`NecSuf.cre_mul_projOn_ne_zero`** | **`Q_T ≠ 0` ⇒ `c_μ Q_T ≠ 0`** | **`Ring A` だけ（1 次元性不要）** | 同 (2) Step 1 と同じ結論の、行列の上の別の手順（人手との対応には数えない） |
@@ -336,7 +336,7 @@
 | `NecSuf.neg_one_pow_mul_self'` / `mul_eq_smul_mul_of_sign_pow'`（`NecSuf/ParityFormFromSignsOnProjections.lean`） | `eQ = η_εQ`, `η_ε = η(−1)^{m−k}`, `PQ = (−1)^kQ`, `k ≤ m` ⇒ `eQ = (η(−1)^m)(PQ)`（具体版と同じ 3 行・7 行） | `Monoid 𝕜`・`HasDistribNeg 𝕜`・`Mul R`・`SemigroupAction 𝕜 R`（`1x = x`、`𝕜` の積の可換則・加法、`R` の結合則・分配則・単位元、`η ∈ {±1}` は不要。`−1` どうしの可換性は `Commute.refl`） | 同 (4) の後半 |
 | `NecSuf.map_prod_two_valued_eq_pow'`（`NecSuf/PowerFromProductOfTwoValuedFactors.lean`。数え上げの `wordCount_one'`・`wordCount_castSucc'`・`wordCount_le'` も同じファイル） | `f(ab) = f(a)f(b)`, `f(u(1)) = 1`, `f(u(0)) = s` ⇒ `f(Π_μ u(ε_μ)) = s^{k−\|ε\|_k}`（具体版と同じ 5 行・7 行・6 行・6 行） | `Mul R`（有限積は左から掛ける `finProdLeft`。`R` の結合則・単位元・可換則は不要）・`Monoid S`（効くのは単位元の `1z = z`・`z1 = z` と冪の定義。`S` の結合則・可換則、`s = −1`、`(−1)(−1) = 1`、`f(1) = 1` は不要） | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 |
 | `NecSuf.signed_term_eq_map_mul'`（`NecSuf/SignedTermAsImageOfReorderedProduct.lean`） | `f(a)f(b) = f(ab)`, `ηε = η1q`, `f(u) = q`, `f(h) = η1` ⇒ `ηεf(l) = f((ul)h)`（具体版と同じ 6 行。7 行目の `ť_ε` の置き方は具体版の定義） | `CommSemigroup R`（6 行目の `(ab)c = (bc)a` に結合則と可換則が 1 回ずつ要る）・`Mul S`（`S` の結合則・可換則・単位元、`q` が `−1` の冪であること、`η1`・`h` が `±1` であること、`f(1) = 1` は不要） | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 3 |
-| `NecSuf.eq_smul_of_mul_eq_smul_mul'`（同） | `Σ_εQ_ε = 1`（`binWordSum`）, `eQ_ε = c(PQ_ε)` ⇒ `e = cP`（具体版の 9 行のうち「`c`, `P` の置き方」を除く 8 行と同じ行） | `MulOneClass R`・`Add R`・`LeftDistribClass R`・`SMul 𝕜 R`・`IsScalarTower 𝕜 R R`（左単位元は効かないが右単位元だけのクラスが無いので `MulOneClass` で受ける。`R` の積の結合則、加法の結合則・可換則・零元、`Q_ε` の冪等性・直交性、`𝕜` の積は不要） | 同 (4) の後半 |
+| `NecSuf.eq_smul_of_mul_eq_smul_mul'`（同） | `Σ_εQ_ε = 1`（`binWordSum`）, `eQ_ε = c(PQ_ε)` ⇒ `e = cP`（具体版の 9 行のうち「`c`, `P` の置き方」を除く 8 行と同じ行） | `MulOneClass R`・`Add R`・`LeftDistribClass R`・`SMul 𝕜 R`・`IsScalarTower 𝕜 R R`（左単位元は効かないが右単位元だけのクラスが無いので `MulOneClass` で受ける。`R` の積の結合則、加法の結合律・可換則・零元、`Q_ε` の冪等性・直交性、`𝕜` の積は不要） | 同 (4) の後半 |
 | `NecSuf.star_projOn` | `n_i` が可換な自己共役族なら `Q_ε^* = Q_ε` | `StarRing A` | `check_number_operator_is_hermitian` (4) |
 | `NecSuf.smul_left_cancel_of_ne_zero` | `x ≠ 0` ⇒ `ηx = η'x ⇒ η = η'` | `Module 𝕜 A`（`𝕜` は体） | `epsilon_eigenvalue_on_check_Q` (1) |
 | `NecSuf.sum_powerset_signed_exp` | `∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)` | ℝ の `exp`/`sinh` だけ | 旧い分け方の `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2（冪集合の上の和を一度に積へ変える別の手順。いまの具体版は Step 2〜5 の鎖で、これを使っていない） |
@@ -378,7 +378,7 @@
   （`NecSuf.commute_defFactor_of_commute'` は二つの係数を無関係なスカラーに置いて通る）。
   `ε = σ^x_1⋯σ^x_M` であることも、`ψ̌` が `Ž, Y̌` の 1 次結合であることも、
   行列であることも、複素数であることも、テンソル冪であることも効いていない。
-  加法の零・結合則・可換性・逆元則は効かない（`NecSuf.commute_parity_num` / `commute_parity_finProdLeft_defFactor`）。
+  加法の零・結合律・可換性・逆元則は効かない（`NecSuf.commute_parity_num` / `commute_parity_finProdLeft_defFactor`）。
 
 - **符号の反転則（人手証明 (2)）に `im Q̌_ε` の 1 次元性は要らない。**
   人手証明は (1)(2) の両方で 1 次元性を引くが、必要な材料は次の 3 つだけである。

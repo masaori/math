@@ -21,7 +21,7 @@
   **係数の乗法の可換則と加法の逆元は効いていない**（`-1` は単位元と `HasDistribNeg` だけから全ての元と交換する）。
   `HasDistribNeg` が連れてくる二重の符号反転 `-(-x) = x`（`InvolutiveNeg`）も効いていない。
 - 差を保つことで効いているのは、差が `x + (-y)` で定まること（仮定 `hsub`。人手の `def_complex_difference`）、和を保つこと
-  （`NecSuf.conj_add_matrix'`。係数の左右の分配則と加法の結合則・交換則）、上の符号反転を保つことだけである。
+  （`NecSuf.conj_add_matrix'`。係数の左右の分配則と加法の結合律・交換律）、上の符号反転を保つことだけである。
   `Sub` を `Semiring` と別に取るのは、`hsub` と `Semiring`・`HasDistribNeg` を加法の逆元なしで同時に持つ型クラスが mathlib に無いからである
   （`NecSuf/SmulMatrixSub.lean` と同じ扱い）。
 - 行列が正方であることは効いていない（`B : ι × κ`、`W : κ × κ'`、`B' : κ' × μ` の形で述べる）。添字は有限であること（積が有限和だから）だけが効く。

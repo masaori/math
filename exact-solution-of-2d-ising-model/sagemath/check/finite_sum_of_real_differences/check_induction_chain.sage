@@ -32,11 +32,11 @@ for m in range(1, N):
         fsum(ab[:m]) + (am - bm),                                     # def_finite_sum_of_real_numbers（r_j → a_j − b_j）
         (al - be) + (am - bm),                                        # 帰納法の仮定
         (al + (-be)) + (am + (-bm)),                                  # def_real_difference を 2 か所へ同時適用
-        al + ((-be) + (am + (-bm))),                                  # ℝ の加法の結合則 (p + q) + s = p + (q + s)（p → α, q → −β, s → a_{m+1} + (−b_{m+1})）（set_and_algebra_notation）
-        al + (((-be) + am) + (-bm)),                                  # 同じ結合則（p → −β, q → a_{m+1}, s → −b_{m+1}）を右辺から左辺へ
-        al + ((am + (-be)) + (-bm)),                                  # ℝ の加法の交換則 p + q = q + p（p → −β, q → a_{m+1}）（set_and_algebra_notation）
-        al + (am + ((-be) + (-bm))),                                  # 同じ結合則（p → a_{m+1}, q → −β, s → −b_{m+1}）
-        (al + am) + ((-be) + (-bm)),                                  # 同じ結合則（p → α, q → a_{m+1}, s → (−β) + (−b_{m+1})）を右辺から左辺へ
+        al + ((-be) + (am + (-bm))),                                  # ℝ の加法の結合律 (p + q) + s = p + (q + s)（p → α, q → −β, s → a_{m+1} + (−b_{m+1})）（set_and_algebra_notation）
+        al + (((-be) + am) + (-bm)),                                  # 同じ結合律（p → −β, q → a_{m+1}, s → −b_{m+1}）を右辺から左辺へ
+        al + ((am + (-be)) + (-bm)),                                  # ℝ の加法の交換律 p + q = q + p（p → −β, q → a_{m+1}）（set_and_algebra_notation）
+        al + (am + ((-be) + (-bm))),                                  # 同じ結合律（p → a_{m+1}, q → −β, s → −b_{m+1}）
+        (al + am) + ((-be) + (-bm)),                                  # 同じ結合律（p → α, q → a_{m+1}, s → (−β) + (−b_{m+1})）を右辺から左辺へ
         (al + am) + (-(be + bm)),                                     # real_negation_of_sum_is_sum_of_negations を右辺から左辺へ
         (al + am) - (be + bm),                                        # def_real_difference を右辺から左辺へ
         (fsum(list(a[:m])) + am) - (fsum(list(b[:m])) + bm),          # α, β の置き方

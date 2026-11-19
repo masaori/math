@@ -13,14 +13,14 @@
 | 人手の段 | 具体版の段 | 必要十分版の段 | 効いている仮定 |
 | --- | --- | --- | --- |
 | 成分の鎖の 1・2・4・5 行（`finite_sum_of_matrices_entrywise`） | `Matrix.sum_apply` | 同じ（`Matrix.sum_apply`） | 行列の和は成分ごと |
-| 成分の鎖の 3 行（ℂ の有限和の順序交換） | `Finset.sum_comm` | `finite_double_sum_interchange'`（`Ising2D/NecSuf/FiniteDoubleSumInterchange.lean`。外側の項の数の帰納法による自前の証明） | 加法の結合則・交換則 |
+| 成分の鎖の 3 行（ℂ の有限和の順序交換） | `Finset.sum_comm` | `finite_double_sum_interchange'`（`Ising2D/NecSuf/FiniteDoubleSumInterchange.lean`。外側の項の数の帰納法による自前の証明） | 加法の結合律・交換律 |
 | 「全ての成分が一致し、主張を得る」 | `Matrix.ext` | 同じ | — |
 
 - 3 段目は、具体版では人手が名前だけで引く順序交換に合わせて mathlib の `Finset.sum_comm` の 1 段、必要十分版では
   何が効いているかを示すため自前の証明 `finite_double_sum_interchange'` の 1 段である。どちらも同じ 1 段（順序交換）で、
   証明の手順は同じである。
 
-- **効いているのは、成分の加法の結合則と交換則だけである**（3 行目の順序交換）。零は有限和 `Finset.sum` の定義が要求するだけで、
+- **効いているのは、成分の加法の結合律と交換律だけである**（3 行目の順序交換）。零は有限和 `Finset.sum` の定義が要求するだけで、
   人手の `r, s ≥ 1` の和では効いていない（`FiniteDoubleSumInterchange.lean` の同じ注意）。
 - **効いていないもの**: 成分の乗法・加法の逆元、`ℂ` であること、行と列の添字の有限性。
 - 結合則・交換則が削れないことは、人手の和の定義（左から足す和）で `r = s = 2`、`1 × 1` の行列で見る
@@ -47,7 +47,7 @@ theorem finite_double_sum_of_matrices_interchange' {R : Type*} [AddCommMonoid R]
         = ∑ a, (∑ b, X a b) i k := Matrix.sum_apply i k Finset.univ _                 -- 行列の和は成分ごと
       _ = ∑ a, ∑ b, X a b i k :=
           Finset.sum_congr rfl fun a _ => Matrix.sum_apply i k Finset.univ (X a)       -- 同じことを各 `a` へ
-      _ = ∑ b, ∑ a, X a b i k := finite_double_sum_interchange' _                      -- 成分の加法の結合則・交換則による順序交換
+      _ = ∑ b, ∑ a, X a b i k := finite_double_sum_interchange' _                      -- 成分の加法の結合律・交換律による順序交換
       _ = ∑ b, (∑ a, X a b) i k :=
           Finset.sum_congr rfl fun b _ =>
             (Matrix.sum_apply i k Finset.univ (fun a => X a b)).symm                   -- 行列の和は成分ごと（右辺から左辺へ、各 `b` へ）

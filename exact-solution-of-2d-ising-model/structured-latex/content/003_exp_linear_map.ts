@@ -1264,7 +1264,7 @@ A^{p+0}
       displayMath(String.raw`\begin{aligned}
 A^{p+(q+1)}
 &= A^{(p+q)+1}
-&&(\because \mathbb{Z}\ \text{の加法の結合則}) \\
+&&(\because \mathbb{Z}\ \text{の加法の結合律}) \\
 &= A^{p+q}A
 &&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = p+q\ \text{に適用}) \\
 &= (A^pA^q)A

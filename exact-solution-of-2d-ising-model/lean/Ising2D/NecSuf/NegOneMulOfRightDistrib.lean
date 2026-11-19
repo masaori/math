@@ -7,7 +7,7 @@
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
-| `calc` の 10 段（加法の単位元 → 加法の逆元 → 加法の結合則 → `1·a = a` → 右からの分配則 → 加法の可換則 → 加法の逆元 → `0·a = 0` → 加法の可換則 → 加法の単位元） | `neg_one_mul_of_rightDistrib` の `calc` の 10 段（同じ並び） |
+| `calc` の 10 段（加法の単位元 → 加法の逆元 → 加法の結合律 → `1·a = a` → 右からの分配則 → 加法の可換則 → 加法の逆元 → `0·a = 0` → 加法の可換則 → 加法の単位元） | `neg_one_mul_of_rightDistrib` の `calc` の 10 段（同じ並び） |
 
 ## 何が効いているか / 効いていないか
 
@@ -31,7 +31,7 @@ theorem neg_one_mul_of_rightDistrib {R : Type*} [AddCommGroup R] [Mul R] [One R]
   calc (-1) * a
       = (-1) * a + 0 := (add_zero ((-1) * a)).symm                           -- 加法の単位元を右辺から左辺へ
     _ = (-1) * a + (a + -a) := by rw [add_neg_cancel a]                       -- 加法の逆元を右辺から左辺へ
-    _ = ((-1) * a + a) + -a := (add_assoc ((-1) * a) a (-a)).symm             -- 加法の結合則
+    _ = ((-1) * a + a) + -a := (add_assoc ((-1) * a) a (-a)).symm             -- 加法の結合律
     _ = ((-1) * a + 1 * a) + -a := by rw [hone_mul a]                         -- `1·a = a` を右辺から左辺へ
     _ = ((-1) + 1) * a + -a := by rw [add_mul (-1 : R) 1 a]                   -- 右からの分配則を右辺から左辺へ
     _ = (1 + -1) * a + -a := by rw [add_comm (-1 : R) 1]                      -- 加法の可換則

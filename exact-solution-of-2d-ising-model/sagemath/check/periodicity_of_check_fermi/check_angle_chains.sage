@@ -59,7 +59,7 @@ one = Fr(1)
 nu_chain = [
     2 * PI - tt(mu),                  # conjugate_index_of_check_Z_Y (1)
     2 * PI + (-tt(mu)),               # def_real_difference（y → 2π, z → θ~_μ）
-    (-tt(mu)) + 2 * PI,               # 加法の交換則 p + q = q + p（p → 2π, q → -θ~_μ。set_and_algebra_notation）
+    (-tt(mu)) + 2 * PI,               # 加法の交換律 p + q = q + p（p → 2π, q → -θ~_μ。set_and_algebra_notation）
     (-tt(mu)) + 2 * PI * one,         # 乗法の単位元 p·1 = p（p → 2π。set_and_algebra_notation）を右辺から左辺へ
     (-tt(mu)) + 2 * PI * one,         # ι は単位元を保つ（像 (1)_R = 1_R。中身は下の整数の検算）
 ]
@@ -71,7 +71,7 @@ neg_nu = [
     -(2 * PI + (-tt(mu))),            # def_real_difference（y → 2π, z → θ~_μ）
     (-(2 * PI)) + (-(-tt(mu))),       # real_negation_of_sum_is_sum_of_negations（x → 2π, y → -θ~_μ）
     (-(2 * PI)) + tt(mu),             # real_double_negation（a → θ~_μ）
-    tt(mu) + (-(2 * PI)),             # ℝ の加法の交換則（set_and_algebra_notation）
+    tt(mu) + (-(2 * PI)),             # ℝ の加法の交換律（set_and_algebra_notation）
     tt(mu) + (-one) * (2 * PI),       # real_minus_one_times_is_negation（a → 2π）を右辺から左辺へ
     tt(mu) + 2 * PI * (-one),         # ℝ の乗法の可換則
     tt(mu) + 2 * PI * (-one),         # ι は単位元を保つ（像 (1)_R = 1_R。中身は下の整数の検算）
