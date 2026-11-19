@@ -56307,8 +56307,10 @@ d&(e=a\text{ のとき})\\
 (\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ\mathrm{ee}_n)(j)
 &=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(\mathrm{ee}_n(j)\bigr)
 &&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)\\
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(\mathrm{es}_{n,j+1}\bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_n\bigr)\\
 &=\mathrm{vs}_{\varrho}\bigl(\mathrm{es}_{n,j+1}\bigr)
-&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_{\varrho}\text{ と }\blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_n\bigr)\\
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_{\varrho}\bigr)\\
 &=\mathrm{es}_{n,j+1}
 &&\bigl(\because\ \blkref{claim_qbar_elementary_symmetric_is_symmetric}\text{ と }\blkref{def_qbar_symmetric_polynomial}\bigr)\\
 &=\mathrm{ee}_n(j)
@@ -56321,8 +56323,10 @@ d&(e=a\text{ のとき})\\
                     ]),
                     displayMath(String.raw`\begin{aligned}
 \mathrm{vs}_{\varrho}\bigl(\mathrm{se}_n(Q)\bigr)
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(\mathrm{se}_n(Q)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_{\varrho}\bigr)\\
 &=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(\mathrm{ms}_{\mathrm{ee}_n}(Q)\bigr)
-&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ と }\blkref{def_elementary_symmetric_substitution}\bigr)\\
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{se}_n\bigr)\\
 &=\mathrm{ms}_{\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ\mathrm{ee}_n}(Q)
 &&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\bigr)\\
 &=\mathrm{ms}_{\mathrm{ee}_n}(Q)
@@ -56337,6 +56341,147 @@ d&(e=a\text{ のとき})\\
                       " により ",
                       math(String.raw`\mathrm{se}_n(Q)`),
                       " は対称である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " 係数の多項式の代入の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_elementary_symmetric_substitution_last_variable_zero",
+              focus:
+                {
+                  id: "zero_pinching_claim_elementary_symmetric_substitution_last_variable_zero",
+                  kind: "claim",
+                  title: { text: "基本対称式への代入は末尾の変数への零代入と入れ替わる" },
+                  labels: ["claim_elementary_symmetric_substitution_last_variable_zero"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-last-variable-zero"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.lastVariableZero_elementarySymmetricSubst",
+                    "Ising2DLambda.FisherZero.lastVariableZero_comp_elementarySymmetricValues",
+                    "Ising2DLambda.FisherZero.elementarySymmetric_eq_zero_of_lt",
+                    "Ising2DLambda.NecSuf.FisherZero.mvSubst_comm_of_values_comm_necSuf",
+                    "Ising2DLambda.FisherZero.lastVariableZero_comp_elementarySymmetricValues_from_necSuf",
+                    "Ising2DLambda.FisherZero.lastVariableZero_elementarySymmetricSubst_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について",
+                    ]),
+                    displayMath(String.raw`\mathrm{lz}_n\bigl(\mathrm{se}_{n+1}(Q)\bigr)=\mathrm{se}_n\bigl(\mathrm{lz}_n(Q)\bigr)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_last_variable_zero_substitution"),
+                      "、",
+                      ref("def_elementary_symmetric_substitution"),
+                      "）。左辺は ",
+                      math(String.raw`Q`),
+                      " の変数に ",
+                      math(String.raw`n+1`),
+                      " 変数の基本対称式を代入してから末尾の変数に零を代入したもの、右辺は ",
+                      math(String.raw`Q`),
+                      " の末尾の変数 ",
+                      math(String.raw`X^{(n+1)}_n`),
+                      " に零を代入してから ",
+                      math(String.raw`n`),
+                      " 変数の基本対称式を代入したものである。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、二つの写像 ",
+                      math(String.raw`\mathrm{ms}_{z_n}\circ\mathrm{ee}_{n+1}`),
+                      " と ",
+                      math(String.raw`\mathrm{ms}_{\mathrm{ee}_n}\circ z_n`),
+                      "（どちらも ",
+                      math(String.raw`\mathbb{N}_{<n+1}\to\overline{\mathbb{Q}}[X_{<n}]`),
+                      "。",
+                      ref("claim_qbar_multivariate_substitution_composition"),
+                      " の置き方）が等しいことを示す。",
+                      math(String.raw`j\in\mathbb{N}_{<n+1}`),
+                      " を取る。",
+                      math(String.raw`j<n`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+(\mathrm{ms}_{z_n}\circ\mathrm{ee}_{n+1})(j)
+&=\mathrm{ms}_{z_n}\bigl(\mathrm{ee}_{n+1}(j)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(\mathrm{es}_{n+1,j+1}\bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_{n+1}\bigr)\\
+&=\mathrm{lz}_n\bigl(\mathrm{es}_{n+1,j+1}\bigr)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{ の }\mathrm{lz}_n\bigr)\\
+&=\mathrm{es}_{n,j+1}
+&&\bigl(\because\ \blkref{claim_last_variable_zero_elementary_symmetric}\bigr)\\
+&=\mathrm{ee}_n(j)
+&&\bigl(\because\ j\in\mathbb{N}_{<n}\text{ と }\blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_n\bigr)\\
+&=\mathrm{ms}_{\mathrm{ee}_n}\bigl(X^{(n)}_j\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(X^{(n)}_k)=y(k)\bigr)\\
+&=\mathrm{ms}_{\mathrm{ee}_n}\bigl(z_n(j)\bigr)
+&&\bigl(\because\ j<n\text{ と }\blkref{def_last_variable_zero_substitution}\text{ の }z_n\bigr)\\
+&=(\mathrm{ms}_{\mathrm{ee}_n}\circ z_n)(j)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`j=n`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+(\mathrm{ms}_{z_n}\circ\mathrm{ee}_{n+1})(n)
+&=\mathrm{ms}_{z_n}\bigl(\mathrm{ee}_{n+1}(n)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(\mathrm{es}_{n+1,n+1}\bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_{n+1}\bigr)\\
+&=\mathrm{lz}_n\bigl(\mathrm{es}_{n+1,n+1}\bigr)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{ の }\mathrm{lz}_n\bigr)\\
+&=\mathrm{es}_{n,n+1}
+&&\bigl(\because\ \blkref{claim_last_variable_zero_elementary_symmetric}\bigr)\\
+&=0
+&&\bigl(\because\ n+1>n\text{ と }\blkref{def_qbar_elementary_symmetric_polynomial}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ee}_n}(0)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y\text{ は零元を零元へ送る}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ee}_n}\bigl(z_n(n)\bigr)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{ の }z_n(n)=0\bigr)\\
+&=(\mathrm{ms}_{\mathrm{ee}_n}\circ z_n)(n)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。よって写像として ",
+                      math(String.raw`\mathrm{ms}_{z_n}\circ\mathrm{ee}_{n+1}=\mathrm{ms}_{\mathrm{ee}_n}\circ z_n`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{lz}_n\bigl(\mathrm{se}_{n+1}(Q)\bigr)
+&=\mathrm{lz}_n\bigl(\mathrm{ms}_{\mathrm{ee}_{n+1}}(Q)\bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{se}_{n+1}\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(\mathrm{ms}_{\mathrm{ee}_{n+1}}(Q)\bigr)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{ の }\mathrm{lz}_n\bigr)\\
+&=\mathrm{ms}_{\mathrm{ms}_{z_n}\circ\mathrm{ee}_{n+1}}(Q)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ms}_{\mathrm{ee}_n}\circ z_n}(Q)
+&&\bigl(\because\ \text{準備の }\mathrm{ms}_{z_n}\circ\mathrm{ee}_{n+1}=\mathrm{ms}_{\mathrm{ee}_n}\circ z_n\bigr)\\
+&=\mathrm{ms}_{\mathrm{ee}_n}\bigl(\mathrm{ms}_{z_n}(Q)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ を右辺から左辺へ}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ee}_n}\bigl(\mathrm{lz}_n(Q)\bigr)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{ の }\mathrm{lz}_n\bigr)\\
+&=\mathrm{se}_n\bigl(\mathrm{lz}_n(Q)\bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{se}_n\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。",
                       "全過程は ",
                       math(String.raw`\overline{\mathbb{Q}}`),
                       " 係数の多項式の代入の等号だけで閉じ、実数体も複素数体も現れない。",

@@ -110,7 +110,11 @@ theorem variablePermutation_comp_elementarySymmetricValues {n : ℕ} (ϱ : Equiv
       elementarySymmetricValues n := by
   funext j
   calc variablePermutation n ϱ (elementarySymmetricValues n j)
-      = variablePermutation n ϱ (qbarElementarySymmetric n (j.val + 1)) := rfl
+      = qbarMvSubst (variablePermutationValues n ϱ) (elementarySymmetricValues n j) := rfl
+    -- 第二の等号: ee_n の定義。
+    _ = qbarMvSubst (variablePermutationValues n ϱ) (qbarElementarySymmetric n (j.val + 1)) := rfl
+    -- 第三の等号: vs_ϱ の定義。
+    _ = variablePermutation n ϱ (qbarElementarySymmetric n (j.val + 1)) := rfl
     _ = qbarElementarySymmetric n (j.val + 1) := elementarySymmetric_isQbarSymmetric n (j.val + 1) ϱ
     _ = elementarySymmetricValues n j := rfl
 
@@ -119,7 +123,9 @@ theorem elementarySymmetricSubst_isQbarSymmetric {n : ℕ} (Q : QbarMvPoly n) :
     IsQbarSymmetric (elementarySymmetricSubst n Q) := by
   intro ϱ
   calc variablePermutation n ϱ (elementarySymmetricSubst n Q)
-      = qbarMvSubst (variablePermutationValues n ϱ) (qbarMvSubst (elementarySymmetricValues n) Q) := rfl
+      = qbarMvSubst (variablePermutationValues n ϱ) (elementarySymmetricSubst n Q) := rfl
+    -- 第二の等号: se_n の定義。
+    _ = qbarMvSubst (variablePermutationValues n ϱ) (qbarMvSubst (elementarySymmetricValues n) Q) := rfl
     _ = qbarMvSubst (fun j => qbarMvSubst (variablePermutationValues n ϱ)
           (elementarySymmetricValues n j)) Q := qbarMvSubst_comp _ _ Q
     _ = qbarMvSubst (elementarySymmetricValues n) Q := by

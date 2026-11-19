@@ -124,12 +124,13 @@ for n in range(1, 5):
         for rho in permutations(range(n)):
             xv = [X[rho[k]] for k in range(n)]
             comp = [ms(xv, ee[j], R) for j in range(n)]
-            check(all(comp[j] == vs(R, rho, es(R, j + 1)) == es(R, j + 1) == ee[j] for j in range(n)), "prep comp = ee")
+            check(all(comp[j] == ms(xv, es(R, j + 1), R) == vs(R, rho, es(R, j + 1)) == es(R, j + 1) == ee[j] for j in range(n)), "prep comp = ee")
             m0 = vs(R, rho, S)
+            m1a = ms(xv, S, R)
             m1 = ms(xv, ms(ee, Q, R), R)
             m2 = ms(comp, Q, R)
             m3 = ms(ee, Q, R)
-            check(m0 == m1 == m2 == m3 == S, "se symmetric n=%d" % n)
+            check(m0 == m1a == m1 == m2 == m3 == S, "se symmetric n=%d" % n)
 
 # 対照: 基本対称式でない値（変数そのものを一つずらしたもの）を代入すると対称でない例がある。
 R = ring(2); X = R.gens()
