@@ -59778,6 +59778,430 @@ N+1
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_linear_factor_product_elementary_symmetric",
+        labels: [],
+        title: { text: "一次因子の積の係数と根の基本対称式" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_qbar_multivariate_point_value",
+              focus:
+                {
+                  id: "zero_pinching_def_qbar_multivariate_point_value",
+                  kind: "definition",
+                  title: { text: "有限個の変数の多項式の点での値" },
+                  labels: ["def_qbar_multivariate_point_value"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.FisherZero.qbarMvValue"],
+                  verification: ["sagemath/check/linear-factor-product-elementary-symmetric"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と写像 ",
+                      math(String.raw`\alpha:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）を取る。",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）に対して",
+                    ]),
+                    displayMath(String.raw`\mathrm{mev}_{n,\alpha}(P):=\sum_{a\in\mathrm{Ex}_n:\ \mathrm{mco}_a(P)\ne0}\mathrm{mco}_a(P)\cdot\prod_{k\in\mathbb{N}_{<n}}\alpha(k)^{a(k)}\ \in\ \overline{\mathbb{Q}}`),
+                    paragraph([
+                      "と定め、",
+                      math(String.raw`\mathrm{mev}_{n,\alpha}:\overline{\mathbb{Q}}[X_{<n}]\to\overline{\mathbb{Q}}`),
+                      " を点 ",
+                      math(String.raw`\alpha`),
+                      " での値と呼ぶ（冪は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の積の繰り返しで、零乗は ",
+                      math(String.raw`1`),
+                      "）。和は有限個の項からなる。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\mathrm{mev}_{n,\alpha}`),
+                      " は和と積を保ち、零元を ",
+                      math(String.raw`0`),
+                      " へ、単位元を ",
+                      math(String.raw`1`),
+                      " へ送り、",
+                      math(String.raw`c\in\overline{\mathbb{Q}}`),
+                      " について ",
+                      math(String.raw`\mathrm{mev}_{n,\alpha}(\mathrm{mk}_n(c))=c`),
+                      "、",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について ",
+                      math(String.raw`\mathrm{mev}_{n,\alpha}(X^{(n)}_k)=\alpha(k)`),
+                      " である（多項式環からの代入が環準同型であることであり、",
+                      ref("def_qbar_poly_evaluation"),
+                      " で一変数の値について、",
+                      ref("def_qbar_multivariate_substitution"),
+                      " で多項式の代入について置いた約束と同じ形のもので、証明すべきことではない）。",
+                      "とくに有限個の元の和を和へ、積を積へ送る。",
+                      "現れるのは代数的数と有限和・有限積だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_point_value_elementary_symmetric_last_split",
+              focus:
+                {
+                  id: "zero_pinching_claim_point_value_elementary_symmetric_last_split",
+                  kind: "claim",
+                  title: { text: "末尾の値を分けると基本対称式の値は二つの和になる" },
+                  labels: ["claim_point_value_elementary_symmetric_last_split"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/linear-factor-product-elementary-symmetric"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarMvValue_elementarySymmetric",
+                    "Ising2DLambda.FisherZero.qbarMvValue_elementarySymmetric_last_split",
+                    "Ising2DLambda.NecSuf.FisherZero.mvValue_elementarySymmetric_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.elementarySymmetricValue_last_split_necSuf",
+                    "Ising2DLambda.FisherZero.qbarMvValue_elementarySymmetric_last_split_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n,j\in\mathbb{N}`),
+                      " と写像 ",
+                      math(String.raw`\alpha:\mathbb{N}_{<n+1}\to\overline{\mathbb{Q}}`),
+                      " を取り、",
+                      math(String.raw`\alpha_{<n}:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}`),
+                      " を ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について ",
+                      math(String.raw`\alpha_{<n}(k):=\alpha(k)`),
+                      " と定める。このとき",
+                    ]),
+                    displayMath(String.raw`\mathrm{mev}_{n+1,\alpha}\bigl(\mathrm{es}_{n+1,j+1}\bigr)=\mathrm{mev}_{n,\alpha_{<n}}\bigl(\mathrm{es}_{n,j+1}\bigr)+\alpha(n)\cdot\mathrm{mev}_{n,\alpha_{<n}}\bigl(\mathrm{es}_{n,j}\bigr)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_multivariate_point_value"),
+                      "、",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、",
+                      math(String.raw`m,i\in\mathbb{N}`),
+                      " と写像 ",
+                      math(String.raw`\beta:\mathbb{N}_{<m}\to\overline{\mathbb{Q}}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mev}_{m,\beta}\bigl(\mathrm{es}_{m,i}\bigr)
+&=\mathrm{mev}_{m,\beta}\Bigl(\sum_{S\subseteq\mathbb{N}_{<m}:\ |S|=i}\ \prod_{k\in S}X^{(m)}_k\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_elementary_symmetric_polynomial}\bigr)\\
+&=\sum_{S\subseteq\mathbb{N}_{<m}:\ |S|=i}\ \prod_{k\in S}\mathrm{mev}_{m,\beta}\bigl(X^{(m)}_k\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\text{ の値は有限和と有限積を保つ}\bigr)\\
+&=\sum_{S\subseteq\mathbb{N}_{<m}:\ |S|=i}\ \prod_{k\in S}\beta(k)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\text{ の変数の値、各因子へ同時に当てる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る（以下これを準備の式と呼ぶ）。",
+                      math(String.raw`\mathbb{N}_{<n+1}`),
+                      " の ",
+                      math(String.raw`j+1`),
+                      " 元部分集合のうち ",
+                      math(String.raw`n`),
+                      " を含まないものの全体を ",
+                      math(String.raw`\mathcal{A}`),
+                      "、含むものの全体を ",
+                      math(String.raw`\mathcal{B}`),
+                      " と置く。",
+                      math(String.raw`\mathbb{N}_{<n+1}`),
+                      " の部分集合が ",
+                      math(String.raw`n`),
+                      " を含まないことは ",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " の部分集合であることと同じなので、",
+                      math(String.raw`\mathcal{A}=\{T\subseteq\mathbb{N}_{<n}\mid|T|=j+1\}`),
+                      " である。",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " の ",
+                      math(String.raw`j`),
+                      " 元部分集合 ",
+                      math(String.raw`T`),
+                      " は ",
+                      math(String.raw`n`),
+                      " を含まないので ",
+                      math(String.raw`|T\cup\{n\}|=j+1`),
+                      " であり、写像 ",
+                      math(String.raw`\iota:\{T\subseteq\mathbb{N}_{<n}\mid|T|=j\}\to\mathcal{B}`),
+                      "、",
+                      math(String.raw`\iota(T):=T\cup\{n\}`),
+                      " が定まる。",
+                      math(String.raw`S\in\mathcal{B}`),
+                      " に ",
+                      math(String.raw`S\setminus\{n\}`),
+                      " を対応させる写像がその逆写像なので、",
+                      math(String.raw`\iota`),
+                      " は全単射である。本体の式変形は次の通りである。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mev}_{n+1,\alpha}\bigl(\mathrm{es}_{n+1,j+1}\bigr)
+&=\sum_{S\subseteq\mathbb{N}_{<n+1}:\ |S|=j+1}\ \prod_{k\in S}\alpha(k)
+&&\bigl(\because\ \text{準備の式を}\ m=n+1,\ \beta=\alpha,\ i=j+1\ \text{へ当てる}\bigr)\\
+&=\sum_{S\in\mathcal{A}}\ \prod_{k\in S}\alpha(k)+\sum_{S\in\mathcal{B}}\ \prod_{k\in S}\alpha(k)
+&&\bigl(\because\ \text{和の添字の集合は交わらない}\ \mathcal{A},\mathcal{B}\ \text{の和集合で、有限和を二つに分ける}\bigr)\\
+&=\sum_{T\subseteq\mathbb{N}_{<n}:\ |T|=j+1}\ \prod_{k\in T}\alpha(k)+\sum_{T\subseteq\mathbb{N}_{<n}:\ |T|=j}\ \prod_{k\in T\cup\{n\}}\alpha(k)
+&&\bigl(\because\ \mathcal{A}\ \text{の表示と、全単射}\ \iota\ \text{による有限和の添字の付け替え}\bigr)\\
+&=\sum_{T\subseteq\mathbb{N}_{<n}:\ |T|=j+1}\ \prod_{k\in T}\alpha_{<n}(k)+\sum_{T\subseteq\mathbb{N}_{<n}:\ |T|=j}\alpha(n)\cdot\prod_{k\in T}\alpha_{<n}(k)
+&&\bigl(\because\ n\notin T\ \text{なので有限積から因子}\ \alpha(n)\ \text{を取り出し、}k\in T\subseteq\mathbb{N}_{<n}\ \text{で}\ \alpha(k)=\alpha_{<n}(k)\text{、各項へ同時に当てる}\bigr)\\
+&=\sum_{T\subseteq\mathbb{N}_{<n}:\ |T|=j+1}\ \prod_{k\in T}\alpha_{<n}(k)+\alpha(n)\cdot\sum_{T\subseteq\mathbb{N}_{<n}:\ |T|=j}\ \prod_{k\in T}\alpha_{<n}(k)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=\mathrm{mev}_{n,\alpha_{<n}}\bigl(\mathrm{es}_{n,j+1}\bigr)+\alpha(n)\cdot\mathrm{mev}_{n,\alpha_{<n}}\bigl(\mathrm{es}_{n,j}\bigr)
+&&\bigl(\because\ \text{準備の式を}\ m=n,\ \beta=\alpha_{<n},\ i=j+1\ \text{と}\ i=j\ \text{の二箇所へ同時に当てる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "全過程は有限集合の数え上げと ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_linear_factor_product_coefficient_elementary_symmetric",
+              focus:
+                {
+                  id: "zero_pinching_claim_linear_factor_product_coefficient_elementary_symmetric",
+                  kind: "claim",
+                  title: { text: "一次因子の積の係数は根の基本対称式の値に符号を付けたものである" },
+                  labels: ["claim_linear_factor_product_coefficient_elementary_symmetric"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/linear-factor-product-elementary-symmetric"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.coeff_mul_linearFactor_succ",
+                    "Ising2DLambda.FisherZero.coeff_mul_linearFactor_zero",
+                    "Ising2DLambda.FisherZero.linearFactorProduct_coeff_elementarySymmetric",
+                    "Ising2DLambda.NecSuf.FisherZero.linearFactorProduct_coeff_elementarySymmetric_necSuf",
+                    "Ising2DLambda.FisherZero.linearFactorProduct_coeff_elementarySymmetric_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "代数的数の列 ",
+                      math(String.raw`w:\mathbb{N}\to\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）を取る。",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " に対して、",
+                      ref("def_qbar_polynomial_ring"),
+                      " の中で番号の小さいものから順に掛ける有限積",
+                    ]),
+                    displayMath(String.raw`\Pi_{w,n}:=\prod_{i=0}^{n-1}\bigl(t-\widehat{w(i)}\bigr)\ \in\ \overline{\mathbb{Q}}[t]`),
+                    paragraph([
+                      "（",
+                      math(String.raw`n=0`),
+                      " のときは空積で単位元。",
+                      math(String.raw`\widehat{\ \cdot\ }`),
+                      " は ",
+                      ref("def_qbar_constant_embedding"),
+                      "）と、写像 ",
+                      math(String.raw`w_{<n}:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}`),
+                      "、",
+                      math(String.raw`w_{<n}(k):=w(k)`),
+                      " を置く。このとき、任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と、",
+                      math(String.raw`j\le n`),
+                      " を満たす任意の ",
+                      math(String.raw`j\in\mathbb{N}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\mathrm{ac}_{n-j}\bigl(\Pi_{w,n}\bigr)=(-1)^{j}\cdot\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,j}\bigr)`),
+                    paragraph([
+                      "が成り立つ（",
+                      math(String.raw`\mathrm{ac}`),
+                      " は ",
+                      ref("def_qbar_polynomial_ring"),
+                      " の係数、",
+                      math(String.raw`\mathrm{mev}`),
+                      " は ",
+                      ref("def_qbar_multivariate_point_value"),
+                      "、",
+                      math(String.raw`\mathrm{es}`),
+                      " は ",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "以下の係数はすべて ",
+                      ref("def_qbar_polynomial_ring"),
+                      " の係数であり、値の計算はすべて ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の中で行う。準備として、",
+                      math(String.raw`C\in\overline{\mathbb{Q}}[t]`),
+                      "、",
+                      math(String.raw`v\in\overline{\mathbb{Q}}`),
+                      "、",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{k+1}\bigl(C\cdot(t-\widehat{v})\bigr)&=\mathrm{ac}_{k}(C)-v\cdot\mathrm{ac}_{k+1}(C)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数と}\ \blkref{def_qbar_constant_embedding}\ \text{の係数}\bigr)\\
+\mathrm{ac}_{0}\bigl(C\cdot(t-\widehat{v})\bigr)&=-v\cdot\mathrm{ac}_{0}(C)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数と}\ \blkref{def_qbar_constant_embedding}\ \text{の係数}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である（以下、一つ目を番号が一以上の係数の式、二つ目を番号零の係数の式と呼ぶ）。また有限積から最後の因子を分けて ",
+                      math(String.raw`\Pi_{w,n+1}=\Pi_{w,n}\cdot(t-\widehat{w(n)})`),
+                      " であり、",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について ",
+                      math(String.raw`(w_{<n+1})(k)=w(k)=w_{<n}(k)`),
+                      " なので、",
+                      ref("claim_point_value_elementary_symmetric_last_split"),
+                      " を ",
+                      math(String.raw`\alpha=w_{<n+1}`),
+                      " へ当てると、その ",
+                      math(String.raw`\alpha_{<n}`),
+                      " は ",
+                      math(String.raw`w_{<n}`),
+                      "、",
+                      math(String.raw`\alpha(n)`),
+                      " は ",
+                      math(String.raw`w(n)`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " についての帰納法で示す。",
+                      math(String.raw`n=0`),
+                      " のとき、",
+                      math(String.raw`j\le0`),
+                      " なので ",
+                      math(String.raw`j=0`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{0-0}\bigl(\Pi_{w,0}\bigr)
+&=\mathrm{ac}_{0}(1)
+&&\bigl(\because\ \Pi_{w,0}\ \text{は空積}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の単位元の係数}\bigr)\\
+&=(-1)^{0}\cdot\mathrm{mev}_{0,w_{<0}}(1)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\ \text{の値は単位元を}\ 1\ \text{へ送る}\bigr)\\
+&=(-1)^{0}\cdot\mathrm{mev}_{0,w_{<0}}\bigl(\mathrm{es}_{0,0}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_elementary_symmetric_polynomial}\ \text{より}\ \mathrm{es}_{0,0}=1\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。一歩を示す。",
+                      math(String.raw`n`),
+                      " について ",
+                      math(String.raw`j\le n`),
+                      " を満たす全ての ",
+                      math(String.raw`j`),
+                      " で主張が成り立つと仮定し、",
+                      math(String.raw`j\le n+1`),
+                      " を満たす ",
+                      math(String.raw`j\in\mathbb{N}`),
+                      " を取る。",
+                      math(String.raw`j=0`),
+                      " のとき、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{(n+1)-0}\bigl(\Pi_{w,n+1}\bigr)
+&=\mathrm{ac}_{n+1}\bigl(\Pi_{w,n}\cdot(t-\widehat{w(n)})\bigr)
+&&\bigl(\because\ \text{有限積から最後の因子を分ける}\bigr)\\
+&=\mathrm{ac}_{n}\bigl(\Pi_{w,n}\bigr)-w(n)\cdot\mathrm{ac}_{n+1}\bigl(\Pi_{w,n}\bigr)
+&&\bigl(\because\ \text{番号が一以上の係数の式}\bigr)\\
+&=\mathrm{ac}_{n}\bigl(\Pi_{w,n}\bigr)-w(n)\cdot0
+&&\bigl(\because\ n+1>n\ \text{と}\ \blkref{claim_qbar_poly_linear_factor_product_coeff_bound}\bigr)\\
+&=\mathrm{ac}_{n-0}\bigl(\Pi_{w,n}\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元との積と差}\bigr)\\
+&=(-1)^{0}\cdot\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,0}\bigr)
+&&\bigl(\because\ \text{帰納法の仮定を}\ j=0\ \text{へ当てる}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_qbar_elementary_symmetric_polynomial}\ \text{より}\ \mathrm{es}_{n,0}=1\text{、}\blkref{def_qbar_multivariate_point_value}\ \text{の値は単位元を}\ 1\ \text{へ送る}\bigr)\\
+&=(-1)^{0}\cdot\mathrm{mev}_{n+1,w_{<n+1}}\bigl(\mathrm{es}_{n+1,0}\bigr)
+&&\bigl(\because\ \text{同じ二つの理由を}\ n+1\ \text{変数で}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`1\le j\le n`),
+                      " のとき、",
+                      math(String.raw`j=i+1`),
+                      "（",
+                      math(String.raw`i\in\mathbb{N}`),
+                      "、",
+                      math(String.raw`i<n`),
+                      "）と書く。",
+                      math(String.raw`i+1\le n`),
+                      " なので ",
+                      math(String.raw`(n+1)-(i+1)=(n-(i+1))+1`),
+                      "、",
+                      math(String.raw`i<n`),
+                      " なので ",
+                      math(String.raw`(n-(i+1))+1=n-i`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{(n+1)-(i+1)}\bigl(\Pi_{w,n+1}\bigr)
+&=\mathrm{ac}_{(n-(i+1))+1}\bigl(\Pi_{w,n}\cdot(t-\widehat{w(n)})\bigr)
+&&\bigl(\because\ \text{有限積から最後の因子を分ける}\bigr)\\
+&=\mathrm{ac}_{n-(i+1)}\bigl(\Pi_{w,n}\bigr)-w(n)\cdot\mathrm{ac}_{n-i}\bigl(\Pi_{w,n}\bigr)
+&&\bigl(\because\ \text{番号が一以上の係数の式と}\ (n-(i+1))+1=n-i\bigr)\\
+&=(-1)^{i+1}\cdot\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,i+1}\bigr)-w(n)\cdot(-1)^{i}\cdot\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,i}\bigr)
+&&\bigl(\because\ \text{帰納法の仮定を}\ j=i+1\le n\ \text{と}\ j=i\le n\ \text{の二箇所へ同時に当てる}\bigr)\\
+&=(-1)^{i+1}\cdot\Bigl(\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,i+1}\bigr)+w(n)\cdot\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,i}\bigr)\Bigr)
+&&\bigl(\because\ -(-1)^{i}=(-1)^{i+1}\ \text{と}\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=(-1)^{i+1}\cdot\mathrm{mev}_{n+1,w_{<n+1}}\bigl(\mathrm{es}_{n+1,i+1}\bigr)
+&&\bigl(\because\ \blkref{claim_point_value_elementary_symmetric_last_split}\ \text{を}\ \alpha=w_{<n+1},\ j=i\ \text{へ当てる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`j=n+1`),
+                      " のとき、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{(n+1)-(n+1)}\bigl(\Pi_{w,n+1}\bigr)
+&=\mathrm{ac}_{0}\bigl(\Pi_{w,n}\cdot(t-\widehat{w(n)})\bigr)
+&&\bigl(\because\ \text{有限積から最後の因子を分ける}\bigr)\\
+&=-w(n)\cdot\mathrm{ac}_{0}\bigl(\Pi_{w,n}\bigr)
+&&\bigl(\because\ \text{番号零の係数の式}\bigr)\\
+&=-w(n)\cdot(-1)^{n}\cdot\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,n}\bigr)
+&&\bigl(\because\ n-n=0\ \text{と、帰納法の仮定を}\ j=n\ \text{へ当てる}\bigr)\\
+&=(-1)^{n+1}\cdot\Bigl(0+w(n)\cdot\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,n}\bigr)\Bigr)
+&&\bigl(\because\ -(-1)^{n}=(-1)^{n+1}\ \text{と}\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
+&=(-1)^{n+1}\cdot\Bigl(\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,n+1}\bigr)+w(n)\cdot\mathrm{mev}_{n,w_{<n}}\bigl(\mathrm{es}_{n,n}\bigr)\Bigr)
+&&\bigl(\because\ n+1>n\ \text{なので}\ \blkref{def_qbar_elementary_symmetric_polynomial}\ \text{より}\ \mathrm{es}_{n,n+1}=0\text{、}\blkref{def_qbar_multivariate_point_value}\ \text{の値は零元を}\ 0\ \text{へ送る}\bigr)\\
+&=(-1)^{n+1}\cdot\mathrm{mev}_{n+1,w_{<n+1}}\bigl(\mathrm{es}_{n+1,n+1}\bigr)
+&&\bigl(\because\ \blkref{claim_point_value_elementary_symmetric_last_split}\ \text{を}\ \alpha=w_{<n+1},\ j=n\ \text{へ当てる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。これで帰納法が閉じた。全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の有限和・有限積と係数の比較だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },

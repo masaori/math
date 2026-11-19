@@ -212,9 +212,26 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
     title: "虚数単位を足した体を係数とする多項式と係数の共役の積は部分体係数である",
     dependsOn: [],
   },
+  claim_linear_factor_product_coefficient_elementary_symmetric: {
+    title: "一次因子の積の係数は根の基本対称式の値に符号を付けたものである",
+    dependsOn: [],
+  },
+  claim_pair_shift_elementary_symmetric_is_symmetric: {
+    title: "根の対の整数倍のずらしの基本対称式は対称である",
+    dependsOn: [],
+  },
+  claim_pair_shift_root_polynomial_subfield_coefficient: {
+    title: "根の対の整数倍のずらしを根とする多項式は部分体係数である",
+    dependsOn: [
+      "claim_symmetric_polynomial_fundamental_theorem",
+      "claim_linear_factor_product_coefficient_elementary_symmetric",
+      "claim_pair_shift_elementary_symmetric_is_symmetric",
+    ],
+  },
   claim_adjoin_imaginary_unit_gives_algebraic_numbers: {
     title: "虚数単位を足すと代数的数の全体になる",
     dependsOn: [
+      "claim_pair_shift_root_polynomial_subfield_coefficient",
       "claim_symmetric_polynomial_fundamental_theorem",
       "claim_imaginary_unit_extension_quadratic_root",
       "claim_two_shifted_values_determine_sum_and_product",
