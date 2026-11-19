@@ -50573,7 +50573,16 @@ b&\in R&&(\because\ E=R)
                   " であり、", math(String.raw`b\ne0`), " なら ", math(String.raw`b^2\in C_R`), " である。",
                 ]),
                 paragraph(["両方とも零なら ", math(String.raw`c=0`), " を取る。片方だけ零なら非零の平方が正錐に属する。両方とも非零なら正錐の和の閉性（", ref("def_subfield_positive_cone"), "）により和が正錐に属する。従って ", math(String.raw`a^2+b^2=0`), " または ", math(String.raw`a^2+b^2\in C_R`), " である。"]),
-                paragraph(["後者の場合、", ref("claim_maximal_ordered_subfield_positive_is_square"), " を ", math(String.raw`a^2+b^2`), " に適用して ", math(String.raw`c\in R`), " を取る。前者では ", math(String.raw`c=0`), " を取る。いずれも ", math(String.raw`c^2=a^2+b^2`), " である。"]),
+                paragraph([math(String.raw`a^2+b^2=0`), " の場合は ", math(String.raw`c:=0`), " と取る。"]),
+                displayMath(String.raw`\begin{aligned}
+c^2&=0^2&&(\because\ c=0)\\
+&=0&&(\because\ \text{零の平方})\\
+&=a^2+b^2&&(\because\ a^2+b^2=0)
+\end{aligned}`),
+                paragraph([math(String.raw`a^2+b^2\in C_R`), " の場合は ", ref("claim_maximal_ordered_subfield_positive_is_square"), " を適用して ", math(String.raw`c\in R`), " を取る。"]),
+                displayMath(String.raw`\begin{aligned}
+c^2&=a^2+b^2&&(\because\ \blkref{claim_maximal_ordered_subfield_positive_is_square})
+\end{aligned}`),
               ],
             },
           },
