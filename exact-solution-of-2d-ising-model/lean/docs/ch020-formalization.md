@@ -38,8 +38,8 @@
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.cosh_add_formula` / `cosh_sub_formula` | `cosh` の加法定理（複号 `+` の 8 行・複号 `−` の 4 行と 1 対 1 の `calc`） | `cosh_addition_formula` |
-| `Ising2D.sinh_add_formula` / `sinh_sub_formula` | `sinh` の加法定理（複号 `+` の 8 行・複号 `−` の 4 行と 1 対 1 の `calc`） | `sinh_addition_formula` |
+| `Ising2D.cosh_add_formula` / `cosh_sub_formula` | `cosh` の加法定理（複号 `+` の 8 行・複号 `−` の 6 行と 1 対 1 の `calc`） | `cosh_addition_formula` |
+| `Ising2D.sinh_add_formula` / `sinh_sub_formula` | `sinh` の加法定理（複号 `+` の 8 行・複号 `−` の 6 行と 1 対 1 の `calc`） | `sinh_addition_formula` |
 | `Ising2D.cosh_add_formula_of_necSuf` / `cosh_sub_formula_of_necSuf` / `sinh_add_formula_of_necSuf` / `sinh_sub_formula_of_necSuf` | 同じ 4 本を `NecSuf.symmetrized_add_formula'` ほか 3 本の特殊化として得る（`ClaimCoshAdditionAndHalfAngleFromNecSuf.lean`） | `cosh_addition_formula`・`sinh_addition_formula` |
 | `Ising2D.cosh_eq_one_add_two_sinh_half_sq` | **`cosh x = 1 + 2 sinh²(x/2)`** | (2) |
 | `Ising2D.sinh_eq_two_sinh_half_mul_cosh_half` | **`sinh x = 2 sinh(x/2) cosh(x/2)`** | (2) |

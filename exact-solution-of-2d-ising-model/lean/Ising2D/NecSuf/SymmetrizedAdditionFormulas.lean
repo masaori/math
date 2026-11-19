@@ -15,14 +15,15 @@
 | --- | --- | --- |
 | `cosh_add_formula`（8 段） | `symmetrized_add_formula'`（同じ 8 段） | 引数の側の `−(x + y) = (−x) + (−y)`（`hneg`）、`f(a + b) = f(a)f(b)`（`hf`）、値の側が環で `2` が逆元を持つこと（`[Ring K] [Invertible (2 : K)]`） |
 | `sinh_add_formula`（8 段） | `antisymmetrized_add_formula'`（同じ 8 段） | 同上 |
-| `cosh_sub_formula`（4 段） | `symmetrized_sub_formula'`（同じ 4 段） | 上に加えて、引数の側の `x − y = x + (−y)`（`hsub`）と符号反転の対合性（`InvolutiveNeg`） |
-| `sinh_sub_formula`（4 段） | `antisymmetrized_sub_formula'`（同じ 4 段） | 同上 |
+| `cosh_sub_formula`（6 段） | `symmetrized_sub_formula'`（同じ 6 段） | 上に加えて、引数の側の `x − y = x + (−y)`（`hsub`）と符号反転の対合性（`InvolutiveNeg`） |
+| `sinh_sub_formula`（6 段） | `antisymmetrized_sub_formula'`（同じ 6 段） | 同上 |
 
 * 複号 `+` の人手の 8 行は「定義」「`real_negation_of_sum_is_sum_of_negations`」「`scalar_exp_product` を 2 箇所へ」
   「分母と分子に 2 を掛ける」「`E_x E_{−y}` と `E_{−x} E_y` を足して引く」「分配則」「分数の和と積」「定義を 4 箇所へ」で、
   必要十分版の 8 段と同じ並びである。`cosh`・`sinh` の定義は仮定 `hc`・`hs` として置く。2 段目は仮定 `hneg`、3 段目は仮定 `hf` である。
-* 複号 `−` の人手の 4 行は「`x − y = x + (−y)`」「複号 `+` の場合を `−y` に当てはめる」「`cosh_is_even`・`sinh_is_odd`」
-  「ℝ の四則」で、必要十分版の 4 段と同じ並びである。3 段目は、偶奇の必要十分版 `symmetrized_sum_is_even'`
+* 複号 `−` の人手の 6 行は「`def_real_difference`」「複号 `+` の場合を `−y` に当てはめる」「`cosh_is_even`」「`sinh_is_odd`」
+  「`real_times_negation_is_negation_of_product`」「`def_real_difference` を右辺から左辺へ」で、必要十分版の 6 段と同じ並びである。
+  1 段目は仮定 `hsub`、5・6 段目は環の `mul_neg`・`sub_eq_add_neg` である。3・4 段目は、偶奇の必要十分版 `symmetrized_sum_is_even'`
   （`SymmetrizedSumIsEven.lean`）・`antisymmetrized_difference_is_odd'`（`AntisymmetrizedDifferenceIsOdd.lean`）を
   同じ `f` と `d := (· * ⅟2)` に当てはめて引く（具体版が `cosh_is_even`・`sinh_is_odd` を引くのと同じ）。
 * `exp` の性質のうち効いているのは指数法則 `f(a + b) = f(a)f(b)` だけである。`f(0) = 1`・正値性・連続性・級数による定義は効いていない。
@@ -131,16 +132,20 @@ theorem symmetrized_sub_formula' {G K : Type*} [Add G] [Sub G] [InvolutiveNeg G]
     c (x - y) = c x * c y - s x * s y :=
   calc c (x - y)
       = c (x + (-y)) := by rw [hsub x y]
-          -- `x − y = x + (−y)`
+          -- `x − y = x + (−y)`（具体版の `def_real_difference`）
     _ = c x * c (-y) + s x * s (-y) := symmetrized_add_formula' hneg f hf c s hc hs x (-y)
           -- 複号が `+` の場合を `−y` に当てはめる
+    _ = c x * c y + s x * s (-y) := by
+          rw [symmetrized_sum_is_even' f (fun r : K => r * ⅟2) c hc y]
+          -- `c` は偶（具体版の `cosh_is_even`）
     _ = c x * c y + s x * (-s y) := by
-          rw [symmetrized_sum_is_even' f (fun r : K => r * ⅟2) c hc y,
-            antisymmetrized_difference_is_odd' (fun a b : K => (neg_sub b a).symm) f (fun r : K => r * ⅟2)
+          rw [antisymmetrized_difference_is_odd' (fun a b : K => (neg_sub b a).symm) f (fun r : K => r * ⅟2)
               (fun r => neg_mul r ⅟2) s hs y]
-          -- `c` は偶、`s` は奇（具体版の `cosh_is_even`・`sinh_is_odd`）
-    _ = c x * c y - s x * s y := by rw [mul_neg, ← sub_eq_add_neg]
-          -- 環の四則（`a·(−b) = −(ab)`、`p + (−q) = p − q`）
+          -- `s` は奇（具体版の `sinh_is_odd`）
+    _ = c x * c y + (-(s x * s y)) := by rw [mul_neg (s x) (s y)]
+          -- `a·(−b) = −(ab)`（具体版の `real_times_negation_is_negation_of_product`）
+    _ = c x * c y - s x * s y := by rw [← sub_eq_add_neg (c x * c y) (s x * s y)]
+          -- `p + (−q) = p − q`（具体版の `def_real_difference` を右辺から左辺へ）
 
 /-- **`s(x − y) = s(x)c(y) − c(x)s(y)`**（具体版 `sinh_sub_formula`）。仮定は `symmetrized_sub_formula'` と同じ。 -/
 theorem antisymmetrized_sub_formula' {G K : Type*} [Add G] [Sub G] [InvolutiveNeg G] [Ring K] [Invertible (2 : K)]
@@ -151,15 +156,19 @@ theorem antisymmetrized_sub_formula' {G K : Type*} [Add G] [Sub G] [InvolutiveNe
     s (x - y) = s x * c y - c x * s y :=
   calc s (x - y)
       = s (x + (-y)) := by rw [hsub x y]
-          -- `x − y = x + (−y)`
+          -- `x − y = x + (−y)`（具体版の `def_real_difference`）
     _ = s x * c (-y) + c x * s (-y) := antisymmetrized_add_formula' hneg f hf c s hc hs x (-y)
           -- 複号が `+` の場合を `−y` に当てはめる
+    _ = s x * c y + c x * s (-y) := by
+          rw [symmetrized_sum_is_even' f (fun r : K => r * ⅟2) c hc y]
+          -- `c` は偶（具体版の `cosh_is_even`）
     _ = s x * c y + c x * (-s y) := by
-          rw [symmetrized_sum_is_even' f (fun r : K => r * ⅟2) c hc y,
-            antisymmetrized_difference_is_odd' (fun a b : K => (neg_sub b a).symm) f (fun r : K => r * ⅟2)
+          rw [antisymmetrized_difference_is_odd' (fun a b : K => (neg_sub b a).symm) f (fun r : K => r * ⅟2)
               (fun r => neg_mul r ⅟2) s hs y]
-          -- `c` は偶、`s` は奇（具体版の `cosh_is_even`・`sinh_is_odd`）
-    _ = s x * c y - c x * s y := by rw [mul_neg, ← sub_eq_add_neg]
-          -- 環の四則（`a·(−b) = −(ab)`、`p + (−q) = p − q`）
+          -- `s` は奇（具体版の `sinh_is_odd`）
+    _ = s x * c y + (-(c x * s y)) := by rw [mul_neg (c x) (s y)]
+          -- `a·(−b) = −(ab)`（具体版の `real_times_negation_is_negation_of_product`）
+    _ = s x * c y - c x * s y := by rw [← sub_eq_add_neg (s x * c y) (c x * s y)]
+          -- `p + (−q) = p − q`（具体版の `def_real_difference` を右辺から左辺へ）
 
 end Ising2D.NecSuf

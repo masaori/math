@@ -1,11 +1,12 @@
 # 対象ラベル: sinh_addition_formula
-# 複号 + の鎖の八行と、複号 - の鎖の四行を確かめる。
+# 複号 + の鎖の八行と、複号 - の鎖の六行を確かめる。
 # 帰属:
 # - exp の性質を使わない行（定義、分母と分子に 2 を掛ける、足して引く、分配則、分数の和と積、定義を 4 箇所へ）は、
 #   exp の値 exp(x), exp(-x), exp(y), exp(-y) を QQ 上の独立な不定元 Ex, Emx, Ey, Emy に置き、さらに
 #   exp(x+y), exp(-(x+y)) も独立な不定元 Exy, Emxy に置いて確かめる（代入は環準同型なので実数の値でも成り立つ）。
 # - 引数の等号（-(x+y) = (-x)+(-y)（real_negation_of_sum_is_sum_of_negations）、x-y = x+(-y)）は QQ[x,y] の等号として。
-# - exp の積の法則の行（scalar_exp_product）と、複号 - の鎖の行（+ の場合を -y に当てはめる、偶奇性）は、
+# - exp の積の法則の行（scalar_exp_product）と、複号 - の鎖の行（+ の場合を -y に当てはめる、cosh_is_even、sinh_is_odd、
+#   real_times_negation_is_negation_of_product、def_real_difference）は、
 #   QQ[x,y] の形式冪級数として全次数 14 以下で比べる。
 load("../../_shared/hyperbolic_by_definition.sage")
 KIND = "sinh"
@@ -68,14 +69,29 @@ ownS = cosh_series if KIND == "cosh" else sinh_series
 coshS, sinhS = cosh_series, sinh_series
 plus_rhs = T(coshS(P, x) * coshS(P, y) + sinhS(P, x) * sinhS(P, y)) if KIND == "cosh" else T(sinhS(P, x) * coshS(P, y) + coshS(P, x) * sinhS(P, y))
 assert ownS(P, x + y) == plus_rhs
-# 複号 - の鎖: 1 行目 x-y = x+(-y)、2 行目 + の場合を -y へ、3 行目 偶奇性、4 行目 四則
-m_line2 = T(coshS(P, x) * coshS(P, -y) + sinhS(P, x) * sinhS(P, -y)) if KIND == "cosh" else T(sinhS(P, x) * coshS(P, -y) + coshS(P, x) * sinhS(P, -y))
-assert ownS(P, x + (-y)) == m_line2
-assert coshS(P, -y) == coshS(P, y) and sinhS(P, -y) == -sinhS(P, y)
-m_line3 = T(coshS(P, x) * coshS(P, y) + sinhS(P, x) * (-sinhS(P, y))) if KIND == "cosh" else T(sinhS(P, x) * coshS(P, y) + coshS(P, x) * (-sinhS(P, y)))
-assert m_line2 == m_line3
-m_line4 = T(coshS(P, x) * coshS(P, y) - sinhS(P, x) * sinhS(P, y)) if KIND == "cosh" else T(sinhS(P, x) * coshS(P, y) - coshS(P, x) * sinhS(P, y))
-assert m_line3 == m_line4 and ownS(P, x - y) == m_line4
+# 複号 - の鎖: 1 行目 def_real_difference、2 行目 + の場合を -y へ、3 行目 cosh_is_even、4 行目 sinh_is_odd、
+# 5 行目 real_times_negation_is_negation_of_product、6 行目 def_real_difference を右辺から左辺へ
+# 1・5・6 行目は QQ[x,y] の形式冪級数の正規形では書き方によらず一致するので、本文の式の写し間違いの検査である
+# （1 行目の引数の等号 x - y = x + (-y) は上で確かめた）。式変形として意味を持つのは 2〜4 行目である。
+if KIND == "cosh":
+    mA = lambda u: coshS(P, x) * u          # 第 1 項: 第 1 因子 cosh x に第 2 因子 u（cosh(-y) または cosh y）を掛けたもの
+    mB = sinhS(P, x)                         # 第 2 項の第 1 因子 sinh x
+else:
+    mA = lambda u: sinhS(P, x) * u          # 第 1 項: 第 1 因子 sinh x に第 2 因子 u（cosh(-y) または cosh y）を掛けたもの
+    mB = coshS(P, x)                         # 第 2 項の第 1 因子 cosh x
+m_line2 = T(mA(coshS(P, -y)) + mB * sinhS(P, -y))
+assert ownS(P, x - y) == ownS(P, x + (-y))                      # 1 行目（x - y = x + (-y) は上で QQ[x,y] の等号として確かめた）
+assert ownS(P, x + (-y)) == m_line2                             # 2 行目
+assert coshS(P, -y) == coshS(P, y)                              # cosh_is_even (x -> y)
+m_line3 = T(mA(coshS(P, y)) + mB * sinhS(P, -y))
+assert m_line2 == m_line3                                       # 3 行目
+assert sinhS(P, -y) == -sinhS(P, y)                             # sinh_is_odd (x -> y)
+m_line4 = T(mA(coshS(P, y)) + mB * (-sinhS(P, y)))
+assert m_line3 == m_line4                                       # 4 行目
+m_line5 = T(mA(coshS(P, y)) + (-(mB * sinhS(P, y))))
+assert m_line4 == m_line5                                       # 5 行目 x(-t) = -(xt)
+m_line6 = T(mA(coshS(P, y)) - mB * sinhS(P, y))
+assert m_line5 == m_line6 and ownS(P, x - y) == m_line6         # 6 行目 y + (-z) = y - z
 assert ownS(P, x - y) != plus_rhs    # 対照: 複号を取り違えると一致しない
-print(f"{KIND}: 複号 + の鎖の両端と、複号 - の鎖の四行が QQ[x,y] の形式冪級数で全次数 {D_SERIES} 以下で一致し、複号を取り違えると一致しない")
+print(f"{KIND}: 複号 + の鎖の両端と、複号 - の鎖の六行が QQ[x,y] の形式冪級数で全次数 {D_SERIES} 以下で一致し、複号を取り違えると一致しない")
 print("RESULT: PASS")

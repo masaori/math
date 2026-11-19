@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/020_critical_point.ts`
 - ブロック: `critical_001_claim_cosh_addition_formula`（cosh の加法定理。cosh(x±y) = cosh x cosh y ± sinh x sinh y）
-- 範囲: 複号 + の鎖の八行、複号 - の鎖の四行、主張
+- 範囲: 複号 + の鎖の八行、複号 - の鎖の六行、主張
 
 ## 証明の行との対応
 
@@ -15,7 +15,7 @@
 | + の 1・4〜8 行目（定義、分母と分子に 2、足して引く、分配則、分数の和と積、定義を 4 箇所へ） | `check_proof_lines.sage` | exp の値（または cosh・sinh の値）を QQ 上の独立な不定元に置いて厳密に比べる。不定元で成り立つ有理式の等号は、実数の値を代入しても成り立つ（exp(x), exp(-x), exp(y), exp(-y), exp(x+y), exp(-(x+y)) の 6 個） | **PASS** | 成り立つ |
 | + の 2 行目 -(x+y) = (-x)+(-y)（`real_negation_of_sum_is_sum_of_negations`） | `check_proof_lines.sage` | QQ[x,y] の等号 | **PASS** | 成り立つ |
 | + の 3 行目 exp の積の法則を 2 箇所へ（scalar_exp_product） | `check_proof_lines.sage` | QQ[x]（または QQ[x,y]）の形式冪級数として全次数 14 以下で比べる。本文の exp は 1 行 1 列の行列の exp の成分で部分和の極限なので、部分和の切り捨てで比べる。対照として、独立な不定元では 1 行目と 3 行目が一致しない（この行だけが exp の性質を使う） | **PASS** | 成り立つ |
-| - の 1〜4 行目（x-y = x+(-y)、+ の場合を -y へ、偶奇性、四則）と + の鎖の両端 | `check_proof_lines.sage` | QQ[x]（または QQ[x,y]）の形式冪級数として全次数 14 以下で比べる。本文の exp は 1 行 1 列の行列の exp の成分で部分和の極限なので、部分和の切り捨てで比べる。対照として複号を取り違えると一致しない | **PASS** | 成り立つ |
+| - の 1〜6 行目（def_real_difference、+ の場合を -y へ、cosh_is_even、sinh_is_odd、real_times_negation_is_negation_of_product、def_real_difference を右辺から左辺へ）と + の鎖の両端 | `check_proof_lines.sage` | QQ[x]（または QQ[x,y]）の形式冪級数として全次数 14 以下で比べる。- の 1・5・6 行目は環の恒等式で正規形では常に一致するので、本文の式の写し間違いの検査である。本文の exp は 1 行 1 列の行列の exp の成分で部分和の極限なので、部分和の切り捨てで比べる。対照として複号を取り違えると一致しない | **PASS** | 成り立つ |
 | 主張そのもの | `check_statement_at_points.sage` | 6 点の両方の複号で具体の点で、本文の exp の部分和に尾の評価を半径として足したボール（RealBallField(512)）で比べる。許容誤差は置かず、ボールの重なり・上端と下端の比較で判定する。対照として複号を取り違えた式は x, y ≠ 0 の点で重ならない | **PASS** | 成り立つ |
 
 ## 計算の帰属と範囲

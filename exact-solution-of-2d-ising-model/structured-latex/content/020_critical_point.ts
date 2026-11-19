@@ -371,13 +371,17 @@ export default defineBlocks([
       displayMath(String.raw`\begin{aligned}
 \cosh(x-y)
 &= \cosh(x+(-y))
-&&(\because\ x-y = x+(-y))\\
+&&(\because\ \blkref{def_real_difference}\ (y \to x,\ z \to y))\\
 &= \cosh x\cosh(-y) + \sinh x\sinh(-y)
-&&(\because\ \text{複号が }+\text{ の場合を }-y \in \mathbb{R}\text{ に当てはめる})\\
+&&(\because\ \text{複号が }+\text{ の場合を }-y \in \mathbb{R}\text{ に当てはめる}\ (y \to -y))\\
+&= \cosh x\cosh y + \sinh x\sinh(-y)
+&&(\because\ \blkref{cosh_is_even}\ (x \to y))\\
 &= \cosh x\cosh y + \sinh x\left(-\sinh y\right)
-&&(\because\ \blkref{cosh_is_even},\ \blkref{sinh_is_odd})\\
+&&(\because\ \blkref{sinh_is_odd}\ (x \to y))\\
+&= \cosh x\cosh y + \left(-\left(\sinh x\sinh y\right)\right)
+&&(\because\ \blkref{real_times_negation_is_negation_of_product}\ (x \to \sinh x,\ t \to \sinh y))\\
 &= \cosh x\cosh y - \sinh x\sinh y
-&&(\because\ \mathbb{R}\ \text{の四則})
+&&(\because\ \blkref{def_real_difference}\ (y \to \cosh x\cosh y,\ z \to \sinh x\sinh y)\ \text{を右辺から左辺へ})
 \end{aligned}`),
     ],
     conversion: {
@@ -389,6 +393,7 @@ export default defineBlocks([
           "その cosh の加法定理をこのブロックにした。鎖を主張の左辺から始め、exp の積の法則・分配則・分数の和と積を一行ずつに分け、" +
           "複号が - の場合を cosh_is_even・sinh_is_odd を引く鎖で書いた。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 複号が + の場合の根拠「−(x+y) = (−x)+(−y)」（ℝ を書いていなかった）を、この回に足した主張 real_negation_of_sum_is_sum_of_negations の参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認）: 複号が - の鎖の名前だけの根拠を割った。1 行目「x−y = x+(−y)」を def_real_difference の参照に、3 行目の cosh_is_even・sinh_is_odd を 1 行ずつに、最後の「ℝ の四則」を real_times_negation_is_negation_of_product と def_real_difference（右辺から左辺へ）の 2 行にし、2 行目に代入 (y → −y) を書いた。鎖の両端は不変、段数は 4 から 6。",
       ],
     },
   },
@@ -450,13 +455,17 @@ export default defineBlocks([
       displayMath(String.raw`\begin{aligned}
 \sinh(x-y)
 &= \sinh(x+(-y))
-&&(\because\ x-y = x+(-y))\\
+&&(\because\ \blkref{def_real_difference}\ (y \to x,\ z \to y))\\
 &= \sinh x\cosh(-y) + \cosh x\sinh(-y)
-&&(\because\ \text{複号が }+\text{ の場合を }-y \in \mathbb{R}\text{ に当てはめる})\\
+&&(\because\ \text{複号が }+\text{ の場合を }-y \in \mathbb{R}\text{ に当てはめる}\ (y \to -y))\\
+&= \sinh x\cosh y + \cosh x\sinh(-y)
+&&(\because\ \blkref{cosh_is_even}\ (x \to y))\\
 &= \sinh x\cosh y + \cosh x\left(-\sinh y\right)
-&&(\because\ \blkref{cosh_is_even},\ \blkref{sinh_is_odd})\\
+&&(\because\ \blkref{sinh_is_odd}\ (x \to y))\\
+&= \sinh x\cosh y + \left(-\left(\cosh x\sinh y\right)\right)
+&&(\because\ \blkref{real_times_negation_is_negation_of_product}\ (x \to \cosh x,\ t \to \sinh y))\\
 &= \sinh x\cosh y - \cosh x\sinh y
-&&(\because\ \mathbb{R}\ \text{の四則})
+&&(\because\ \blkref{def_real_difference}\ (y \to \sinh x\cosh y,\ z \to \cosh x\sinh y)\ \text{を右辺から左辺へ})
 \end{aligned}`),
     ],
     conversion: {
@@ -464,6 +473,7 @@ export default defineBlocks([
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (1) の sinh の加法定理を独立の主張にした。旧証明は「sinh についても同じ計算で従う」としか書いていなかったので、鎖を書いた。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 複号が + の場合の根拠「−(x+y) = (−x)+(−y)」（ℝ を書いていなかった）を、この回に足した主張 real_negation_of_sum_is_sum_of_negations の参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認）: 複号が - の鎖の名前だけの根拠を割った。1 行目「x−y = x+(−y)」を def_real_difference の参照に、3 行目の cosh_is_even・sinh_is_odd を 1 行ずつに、最後の「ℝ の四則」を real_times_negation_is_negation_of_product と def_real_difference（右辺から左辺へ）の 2 行にし、2 行目に代入 (y → −y) を書いた。鎖の両端は不変、段数は 4 から 6。",
       ],
     },
   },

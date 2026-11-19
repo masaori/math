@@ -25,6 +25,7 @@ mathlib に**無かった**のは `sinh t ≤ t cosh t` だけで、これは必
 -/
 import Ising2D.NecSuf.HyperbolicBounds
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimSinhIsOdd
 
@@ -65,19 +66,25 @@ theorem cosh_add_formula (x y : ℝ) :
           rw [← Real.cosh_eq x, ← Real.cosh_eq y, ← Real.sinh_eq x, ← Real.sinh_eq y]
           -- `cosh`, `sinh` の定義を 4 箇所へ（`def_cosh_sinh`）
 
-/-- **人手 `cosh_addition_formula` の複号 `−`**: 人手の 4 行の鎖と 1 対 1 の `calc`。 -/
+/-- **人手 `cosh_addition_formula` の複号 `−`**: 人手の 6 行の鎖と 1 対 1 の `calc`。
+`def_real_difference`（`y − z := y + (−z)`）は Lean で定義し直しておらず、mathlib の `sub_eq_add_neg` が定義の式の役を担う。 -/
 theorem cosh_sub_formula (x y : ℝ) :
     Real.cosh (x - y) = Real.cosh x * Real.cosh y - Real.sinh x * Real.sinh y :=
   calc Real.cosh (x - y)
-      = Real.cosh (x + (-y)) := by rw [sub_eq_add_neg]
-          -- `x − y = x + (−y)`
+      = Real.cosh (x + (-y)) := by rw [sub_eq_add_neg x y]
+          -- `def_real_difference`（`y → x`, `z → y`）
     _ = Real.cosh x * Real.cosh (-y) + Real.sinh x * Real.sinh (-y) := cosh_add_formula x (-y)
-          -- 複号が `+` の場合を `−y ∈ ℝ` に当てはめる
-    _ = Real.cosh x * Real.cosh y + Real.sinh x * (-Real.sinh y) := by
-          rw [cosh_is_even y, sinh_is_odd y]
-          -- `cosh_is_even`, `sinh_is_odd`
-    _ = Real.cosh x * Real.cosh y - Real.sinh x * Real.sinh y := by ring
-          -- ℝ の四則
+          -- 複号が `+` の場合を `−y ∈ ℝ` に当てはめる（`y → −y`）
+    _ = Real.cosh x * Real.cosh y + Real.sinh x * Real.sinh (-y) := by rw [cosh_is_even y]
+          -- `cosh_is_even`（`x → y`）
+    _ = Real.cosh x * Real.cosh y + Real.sinh x * (-Real.sinh y) := by rw [sinh_is_odd y]
+          -- `sinh_is_odd`（`x → y`）
+    _ = Real.cosh x * Real.cosh y + (-(Real.sinh x * Real.sinh y)) := by
+          rw [real_times_negation_is_negation_of_product (Real.sinh x) (Real.sinh y)]
+          -- `real_times_negation_is_negation_of_product`（`x → sinh x`, `t → sinh y`）
+    _ = Real.cosh x * Real.cosh y - Real.sinh x * Real.sinh y := by
+          rw [← sub_eq_add_neg (Real.cosh x * Real.cosh y) (Real.sinh x * Real.sinh y)]
+          -- `def_real_difference`（`y → cosh x·cosh y`, `z → sinh x·sinh y`）を右辺から左辺へ
 
 /-- **人手 `sinh_addition_formula` の複号 `+`**: 人手の 8 行の鎖と 1 対 1 の `calc`。
 記号と根拠の読み方は `cosh_add_formula` と同じ。mathlib の `Real.sinh_add` は使わない。 -/
@@ -109,19 +116,25 @@ theorem sinh_add_formula (x y : ℝ) :
           rw [← Real.cosh_eq x, ← Real.cosh_eq y, ← Real.sinh_eq x, ← Real.sinh_eq y]
           -- `cosh`, `sinh` の定義を 4 箇所へ（`def_cosh_sinh`）
 
-/-- **人手 `sinh_addition_formula` の複号 `−`**: 人手の 4 行の鎖と 1 対 1 の `calc`。 -/
+/-- **人手 `sinh_addition_formula` の複号 `−`**: 人手の 6 行の鎖と 1 対 1 の `calc`。
+`def_real_difference`（`y − z := y + (−z)`）は Lean で定義し直しておらず、mathlib の `sub_eq_add_neg` が定義の式の役を担う。 -/
 theorem sinh_sub_formula (x y : ℝ) :
     Real.sinh (x - y) = Real.sinh x * Real.cosh y - Real.cosh x * Real.sinh y :=
   calc Real.sinh (x - y)
-      = Real.sinh (x + (-y)) := by rw [sub_eq_add_neg]
-          -- `x − y = x + (−y)`
+      = Real.sinh (x + (-y)) := by rw [sub_eq_add_neg x y]
+          -- `def_real_difference`（`y → x`, `z → y`）
     _ = Real.sinh x * Real.cosh (-y) + Real.cosh x * Real.sinh (-y) := sinh_add_formula x (-y)
-          -- 複号が `+` の場合を `−y ∈ ℝ` に当てはめる
-    _ = Real.sinh x * Real.cosh y + Real.cosh x * (-Real.sinh y) := by
-          rw [cosh_is_even y, sinh_is_odd y]
-          -- `cosh_is_even`, `sinh_is_odd`
-    _ = Real.sinh x * Real.cosh y - Real.cosh x * Real.sinh y := by ring
-          -- ℝ の四則
+          -- 複号が `+` の場合を `−y ∈ ℝ` に当てはめる（`y → −y`）
+    _ = Real.sinh x * Real.cosh y + Real.cosh x * Real.sinh (-y) := by rw [cosh_is_even y]
+          -- `cosh_is_even`（`x → y`）
+    _ = Real.sinh x * Real.cosh y + Real.cosh x * (-Real.sinh y) := by rw [sinh_is_odd y]
+          -- `sinh_is_odd`（`x → y`）
+    _ = Real.sinh x * Real.cosh y + (-(Real.cosh x * Real.sinh y)) := by
+          rw [real_times_negation_is_negation_of_product (Real.cosh x) (Real.sinh y)]
+          -- `real_times_negation_is_negation_of_product`（`x → cosh x`, `t → sinh y`）
+    _ = Real.sinh x * Real.cosh y - Real.cosh x * Real.sinh y := by
+          rw [← sub_eq_add_neg (Real.sinh x * Real.cosh y) (Real.cosh x * Real.sinh y)]
+          -- `def_real_difference`（`y → sinh x·cosh y`, `z → cosh x·sinh y`）を右辺から左辺へ
 
 /-- 人手証明 (2): `cosh x = 1 + 2 sinh²(x/2)`。 -/
 theorem cosh_eq_one_add_two_sinh_half_sq (x : ℝ) :
