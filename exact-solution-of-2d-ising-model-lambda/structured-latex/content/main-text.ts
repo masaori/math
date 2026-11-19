@@ -50064,9 +50064,9 @@ b&=(a^{-1}\cdot a)\cdot b&&\bigl(\because\ a^{-1}\cdot a=1\bigr)\\
                       " を示す。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-1&\in F&&\bigl(\because\ F\text{ は部分体}\bigr),\\
-1=0\ \lor\ 1\in C_F\ \lor\ -1\in C_F&&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の三分法}\bigr),\\
-1&\ne0&&\bigl(\because\ \overline{\mathbb{Q}}\text{ は体}\bigr).
+1&\in F&&\bigl(\because\ F\text{ は部分体}\bigr)\\
+1=0\ \lor\ 1\in C_F\ \lor\ -1\in C_F&&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の三分法}\bigr)\\
+1&\ne0&&\bigl(\because\ \overline{\mathbb{Q}}\text{ は体}\bigr)
 \end{aligned}`),
                     paragraph([
                       math(String.raw`1\in C_F`),
@@ -50236,6 +50236,82 @@ c_0
                     ]),
                   ],
                 },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_weighted_square_sum_excludes_minus_one",
+              focus: {
+                id: "zero_pinching_claim_subfield_weighted_square_sum_excludes_minus_one",
+                kind: "claim",
+                title: { text: "基礎体の正錐重み付き平方和は負の単位元を含まない" },
+                labels: ["claim_subfield_weighted_square_sum_excludes_minus_one"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/subfield-weighted-square-sum-excludes-minus-one"],
+                lean: [
+                  "Ising2DLambda.FisherZero.subfieldWeightedSquareSum_ne_neg_one",
+                  "Ising2DLambda.NecSuf.FisherZero.weightedSquareSums_ne_neg_one",
+                  "Ising2DLambda.FisherZero.subfieldWeightedSquareSum_ne_neg_one_from_necSuf",
+                ],
+                statement: [paragraph([
+                  math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                  math(String.raw`C_F`), " をその正錐（", ref("def_subfield_positive_cone"), "）とする。",
+                  "このとき ", math(String.raw`-1\notin\mathrm{Sq}(C_F;F)`),
+                  "（", ref("def_positive_weighted_square_sums"), "）である。",
+                ])],
+                proof: [
+                  paragraph([
+                    "零元・単位元・和・積は ", math(String.raw`\overline{\mathbb Q}`), " のものとする。",
+                    ref("def_subfield_positive_cone"), " の零元への三分法は ",
+                    math(String.raw`0\notin C_F`), " を与える。",
+                    ref("claim_positive_weighted_square_sums_is_precone"), " の冒頭の議論で ",
+                    math(String.raw`1\in C_F`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+1+(-1)&=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr),\\
+1\in C_F\ \land\ -1\in C_F&\Longrightarrow 0\in C_F
+&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の和の条件}\bigr)
+\end{aligned}`),
+                  paragraph(["よって ", math(String.raw`-1\notin C_F`), " である。"]),
+                  paragraph([
+                    "任意の ", math(String.raw`y\in F`), " を取る。",
+                    ref("def_subfield_positive_cone"), " の三分法により ",
+                    math(String.raw`y=0`), "、", math(String.raw`y\in C_F`),
+                    "、", math(String.raw`-y\in C_F`), " のいずれかである。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+y=0&\Longrightarrow y^2=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法}\bigr),\\
+y\in C_F&\Longrightarrow y^2\in C_F&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の積の条件}\bigr),\\
+-y\in C_F&\Longrightarrow (-y)^2\in C_F&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の積の条件}\bigr),\\
+(-y)^2&=y^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の符号反転と乗法}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "したがって ", math(String.raw`y^2=0`), " または ",
+                    math(String.raw`y^2\in C_F`), "。",
+                    math(String.raw`c\in C_F`), " なら ",
+                    math(String.raw`cy^2=0`), " または ",
+                    math(String.raw`cy^2\in C_F`),
+                    "（", ref("def_subfield_positive_cone"), " の積の条件）である。",
+                  ]),
+                  paragraph([
+                    "有限集合 ", math(String.raw`I`), " と写像 ",
+                    math(String.raw`c:I\to C_F`), "、", math(String.raw`y:I\to F`), " を取る。",
+                    "空の和は零である。一項を加えるとき、既存の和と新しい項がそれぞれ",
+                    "零または正錐の元なので、零の加法と正錐の和の条件から",
+                    math(String.raw`\sum_{i\in I}c(i)y(i)^2=0`), " または ",
+                    math(String.raw`\sum_{i\in I}c(i)y(i)^2\in C_F`), " である。",
+                    "有限集合の元の個数に関する帰納法で従う。",
+                  ]),
+                  paragraph([
+                    math(String.raw`-1\ne0`), " かつ ", math(String.raw`-1\notin C_F`),
+                    " なので、この和は ", math(String.raw`-1`), " に等しくない。",
+                    ref("def_positive_weighted_square_sums"), " の表示はこれらの有限和を尽くす。",
+                    "実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
             },
           },
         ],
