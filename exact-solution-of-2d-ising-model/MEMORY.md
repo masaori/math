@@ -1,3 +1,5 @@
+2026-11-19: Lean の通しの証明のゴールラインの確認の六百十八個目として、状態台帳の (d4c44p15f15p38w14) を行って済んだ。人手 `finite_sum_of_real_differences` の `def_finite_sum_of_real_numbers` を引く行に代入と向きを書き、`finite_sum_of_real_differences`・`finite_sum_of_real_sums` の帰納法の段の加法の結合則・交換則の 5 行ずつを形と代入を添えた `set_and_algebra_notation` の参照にした（主張・鎖は不変）。Lean の具体版・SageMath のコメントを合わせた。範囲外を (w26)〜(w28) にした。次は状態台帳の「次の一歩」の (w15) から（(w9) は (p63) の待ち）。
+
 2026-11-18: Lean の通しの証明のゴールラインの確認の六百十七個目として、状態台帳の (d4c44p15f15p38w13) を行って済んだ。人手 `open_chain_partition_sum`・`open_chain_endpoint_product_sum` の最後の鎖の「ℝ で a·1 = a」「1·b = b」と `periodicity_of_check_fermi` (3) の θ̃_ν の鎖の「ℝ の加法の交換律」「1_ℝ は積の単位元」を `set_and_algebra_notation` の参照にした（主張・鎖は不変）。Lean の具体版・導出版・SageMath のコメントと overview を合わせた。範囲外を (w24)・(w25) にした。次は状態台帳の「次の一歩」の (w14) から（(w9) は (p63) の待ち）。
 
 2026-11-18: Lean の通しの証明のゴールラインの確認の六百十六個目として、状態台帳の (d4c44p15f15p38w12) を行って済んだ。人手 `open_chain_endpoint_product_sum` の Step 2 の名前だけの根拠「ℝ の乗法の可換性と結合性」「ℝ の乗法の可換性」を `set_and_algebra_notation` の参照にした（主張・鎖は不変）。Lean・lean/docs・SageMath overview の記述を合わせた。範囲外を (w22)・(w23) にした。次は状態台帳の「次の一歩」の (w13) から。

@@ -2137,9 +2137,9 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
       displayMath(String.raw`\begin{aligned}
 \sum_{j=1}^{1} (a_j - b_j)
 &= a_1 - b_1
-&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j - b_j)\bigr)\\
 &= \Bigl(\sum_{j=1}^{1} a_j\Bigr) - \Bigl(\sum_{j=1}^{1} b_j\Bigr)
-&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\text{ を 2 か所へ同時適用}\bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j;\ r_j \to b_j)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
@@ -2157,21 +2157,21 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
       displayMath(String.raw`\begin{aligned}
 \sum_{j=1}^{m+1} (a_j - b_j)
 &= \Bigl(\sum_{j=1}^{m} (a_j - b_j)\Bigr) + (a_{m+1} - b_{m+1})
-&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j - b_j)\bigr)\\
 &= (\alpha - \beta) + (a_{m+1} - b_{m+1})
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \bigl(\alpha + (-\beta)\bigr) + \bigl(a_{m+1} + (-b_{m+1})\bigr)
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to \alpha,\ z \to \beta;\ y \to a_{m+1},\ z \to b_{m+1})\ \text{を 2 か所へ同時適用}\bigr)\\
 &= \alpha + \Bigl((-\beta) + \bigl(a_{m+1} + (-b_{m+1})\bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to -\beta,\ s \to a_{m+1} + (-b_{m+1}))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \alpha + \Bigl(\bigl((-\beta) + a_{m+1}\bigr) + (-b_{m+1})\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to -\beta,\ q \to a_{m+1},\ s \to -b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \alpha + \Bigl(\bigl(a_{m+1} + (-\beta)\bigr) + (-b_{m+1})\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\ p + q = q + p\ (p \to -\beta,\ q \to a_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \alpha + \Bigl(a_{m+1} + \bigl((-\beta) + (-b_{m+1})\bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to a_{m+1},\ q \to -\beta,\ s \to -b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (\alpha + a_{m+1}) + \bigl((-\beta) + (-b_{m+1})\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to a_{m+1},\ s \to (-\beta) + (-b_{m+1}))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= (\alpha + a_{m+1}) + \bigl(-(\beta + b_{m+1})\bigr)
 &&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ (x \to \beta,\ y \to b_{m+1})\ \text{を右辺から左辺へ}\bigr)\\
 &= (\alpha + a_{m+1}) - (\beta + b_{m+1})
@@ -2179,7 +2179,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &= \Bigl(\Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}\Bigr) - \Bigl(\Bigl(\sum_{j=1}^{m} b_j\Bigr) + b_{m+1}\Bigr)
 &&\bigl(\because\ \alpha, \beta\ \text{の置き方}\bigr)\\
 &= \Bigl(\sum_{j=1}^{m+1} a_j\Bigr) - \Bigl(\sum_{j=1}^{m+1} b_j\Bigr)
-&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\text{ を 2 か所へ同時適用}\bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j;\ r_j \to b_j)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
     ],
@@ -2188,6 +2188,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
       notes: [
         "2026-11-03: 原文（Typst）に対応ブロックは無い。max_eigenvalue_of_V_plus_simple (2) の ǧ(1,…,1) − ǧ(ε) の鎖が「ǧ の定義と分配法則」の名前だけで二つの有限和の差を項ごとの差の有限和にしていたので、引けるよう足した。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w7)）: 帰納法の段の 1 行「ℝ の和と差の計算」（(α − β) + (a − b) = (α + a) − (β + b)）が複数の法則をまとめていたので、def_real_difference の 2 か所同時適用・加法の結合則・結合則・交換則・結合則・結合則（finite_sum_of_real_sums の帰納法の段と同じ 5 行）・real_negation_of_sum_is_sum_of_negations（右辺から左辺へ）・def_real_difference（右辺から左辺へ）の 8 行に割った（鎖の両端と主張は不変）。Lean の Ising2D.finite_sum_of_real_differences_step は同じ 8 段の calc。数値検証: sagemath/check/finite_sum_of_real_differences/。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w14)）: m = 1 の 2 行と帰納法の段の最初と最後の行の def_finite_sum_of_real_numbers に代入（r_j → a_j − b_j、r_j → a_j; r_j → b_j）と向き（右辺から左辺へ）を書き、帰納法の段の加法の結合則・交換則の 5 行を形 (p + q) + s = p + (q + s)・p + q = q + p と代入を添えた set_and_algebra_notation の参照にした（兄弟の finite_sum_of_real_sums と揃えた。文字 p, q, s は同じ鎖の def_finite_sum_of_real_numbers の r_j、def_real_difference の y, z、real_negation_of_sum_is_sum_of_negations の x, y と衝突しないよう選んだ。def_finite_sum_of_real_numbers の 2 か所同時適用の代入は「;」で区切った。主張・鎖・段数は不変）。",
       ],
     },
   },
@@ -2223,7 +2224,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &= a_1 + b_1
 &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j + b_j)\bigr)\\
 &= \Bigl(\sum_{j=1}^{1} a_j\Bigr) + \Bigl(\sum_{j=1}^{1} b_j\Bigr)
-&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j,\ r_j \to b_j)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j;\ r_j \to b_j)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
@@ -2245,19 +2246,19 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &= (\alpha + \beta) + (a_{m+1} + b_{m+1})
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \alpha + \bigl(\beta + (a_{m+1} + b_{m+1})\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to \beta,\ s \to a_{m+1} + b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \alpha + \bigl((\beta + a_{m+1}) + b_{m+1}\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \beta,\ q \to a_{m+1},\ s \to b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \alpha + \bigl((a_{m+1} + \beta) + b_{m+1}\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換則}\ p + q = q + p\ (p \to \beta,\ q \to a_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \alpha + \bigl(a_{m+1} + (\beta + b_{m+1})\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to a_{m+1},\ q \to \beta,\ s \to b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (\alpha + a_{m+1}) + (\beta + b_{m+1})
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合則}\ (p + q) + s = p + (q + s)\ (p \to \alpha,\ q \to a_{m+1},\ s \to \beta + b_{m+1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \Bigl(\Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}\Bigr) + \Bigl(\Bigl(\sum_{j=1}^{m} b_j\Bigr) + b_{m+1}\Bigr)
 &&\bigl(\because\ \alpha, \beta\ \text{の置き方}\bigr)\\
 &= \Bigl(\sum_{j=1}^{m+1} a_j\Bigr) + \Bigl(\sum_{j=1}^{m+1} b_j\Bigr)
-&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j,\ r_j \to b_j)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to a_j;\ r_j \to b_j)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
     ],
@@ -2265,6 +2266,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 を W_ℝ・ε_ℝ で書き直すとき、実数の双線型値 (a+b)^⊤P(a+b) を 4 項へ展開する段（def_real_bilinear_value の二重の有限和を項ごとの和の有限和から二つの有限和へ分ける）から引けるよう足した。psd_cauchy_schwarz の q(t) の展開も同じ段を「有限和の項の並べ替え」の名前だけで使っている。複素数の兄弟の主張 finite_sum_of_complex_sums と同じ帰納法で、和の結合則・交換則の適用を 1 段ずつに割った。数値検証: sagemath/check/finite_sum_of_real_sums/。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w14)）: 帰納法の段の加法の結合則・交換則の 5 行を、形 (p + q) + s = p + (q + s)・p + q = q + p と代入を添えた set_and_algebra_notation の参照にした（finite_sum_of_real_differences と揃えた。m = 1 の 2 行目と帰納法の段の最後の行の def_finite_sum_of_real_numbers の 2 か所同時適用の代入の区切りを「,」から「;」にし、「を右辺から左辺へ 2 か所へ同時適用」の「へ」の重なりを「を右辺から左辺へ 2 か所同時適用」にした。主張・鎖・段数は不変）。",
       ],
     },
   },

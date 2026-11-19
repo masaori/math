@@ -68,11 +68,16 @@ theorem finite_sum_of_real_differences_step (α β x y : ℝ) :
     (α - β) + (x - y) = (α + x) - (β + y) :=
   calc (α - β) + (x - y)
       = (α + -β) + (x + -y) := by rw [sub_eq_add_neg α β, sub_eq_add_neg x y]   -- `def_real_difference` を 2 か所へ同時適用
-    _ = α + (-β + (x + -y)) := add_assoc _ _ _                                   -- ℝ の加法の結合則
-    _ = α + ((-β + x) + -y) := by rw [add_assoc (-β) x (-y)]                     -- ℝ の加法の結合則
-    _ = α + ((x + -β) + -y) := by rw [add_comm (-β) x]                           -- ℝ の加法の交換則
-    _ = α + (x + (-β + -y)) := by rw [add_assoc x (-β) (-y)]                     -- ℝ の加法の結合則
-    _ = (α + x) + (-β + -y) := (add_assoc _ _ _).symm                            -- ℝ の加法の結合則
+    _ = α + (-β + (x + -y)) := add_assoc α (-β) (x + -y)
+                          -- ℝ の加法の結合則 `(p + q) + s = p + (q + s)`（`p → α`, `q → -β`, `s → a_{m+1} + (-b_{m+1})`）（`set_and_algebra_notation`）
+    _ = α + ((-β + x) + -y) := by rw [add_assoc (-β) x (-y)]
+                          -- 同じ結合則（`p → -β`, `q → a_{m+1}`, `s → -b_{m+1}`）を右辺から左辺へ
+    _ = α + ((x + -β) + -y) := by rw [add_comm (-β) x]
+                          -- ℝ の加法の交換則 `p + q = q + p`（`p → -β`, `q → a_{m+1}`）（`set_and_algebra_notation`）
+    _ = α + (x + (-β + -y)) := by rw [add_assoc x (-β) (-y)]
+                          -- 同じ結合則（`p → a_{m+1}`, `q → -β`, `s → -b_{m+1}`）
+    _ = (α + x) + (-β + -y) := (add_assoc α x (-β + -y)).symm
+                          -- 同じ結合則（`p → α`, `q → a_{m+1}`, `s → (-β) + (-b_{m+1})`）を右辺から左辺へ
     _ = (α + x) + -(β + y) := by rw [real_negation_of_sum_is_sum_of_negations β y]
                                                   -- `real_negation_of_sum_is_sum_of_negations`（`x → β`, `y → b_{m+1}`）を右辺から左辺へ
     _ = (α + x) - (β + y) := (sub_eq_add_neg _ _).symm                          -- `def_real_difference` を右辺から左辺へ
@@ -83,13 +88,13 @@ theorem finite_sum_of_real_differences_succ (m : ℕ) (a b : Fin (m + 1) → ℝ
   induction m with
   | zero =>
     calc ∑ j : Fin 1, (a j - b j)
-        = a 0 - b 0 := Fin.sum_univ_one _                                    -- `def_finite_sum_of_real_numbers`
+        = a 0 - b 0 := Fin.sum_univ_one _                                    -- `def_finite_sum_of_real_numbers`（`r_j → a_j - b_j`）
       _ = (∑ j : Fin 1, a j) - ∑ j : Fin 1, b j := by
-          rw [Fin.sum_univ_one a, Fin.sum_univ_one b]                         -- 同上を 2 か所
+          rw [Fin.sum_univ_one a, Fin.sum_univ_one b]                         -- `def_finite_sum_of_real_numbers`（`r_j → a_j`; `r_j → b_j`）を右辺から左辺へ 2 か所同時適用
   | succ m ih =>
     calc ∑ j : Fin (m + 2), (a j - b j)
         = (∑ j : Fin (m + 1), (a j.castSucc - b j.castSucc)) + (a (Fin.last _) - b (Fin.last _)) :=
-          Fin.sum_univ_castSucc _                                             -- `def_finite_sum_of_real_numbers`
+          Fin.sum_univ_castSucc _                                             -- `def_finite_sum_of_real_numbers`（`r_j → a_j - b_j`）
       _ = ((∑ j : Fin (m + 1), a j.castSucc) - ∑ j : Fin (m + 1), b j.castSucc)
             + (a (Fin.last _) - b (Fin.last _)) := by
           rw [ih (fun j => a j.castSucc) (fun j => b j.castSucc)]             -- 帰納法の仮定
@@ -97,7 +102,7 @@ theorem finite_sum_of_real_differences_succ (m : ℕ) (a b : Fin (m + 1) → ℝ
             - ((∑ j : Fin (m + 1), b j.castSucc) + b (Fin.last _)) :=
           finite_sum_of_real_differences_step _ _ _ _                          -- 人手の 8 行（差を和に直す）
       _ = (∑ j, a j) - ∑ j, b j := by
-          rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- `α, β` の置き方と `def_finite_sum_of_real_numbers` を 2 か所
+          rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- `α, β` の置き方と `def_finite_sum_of_real_numbers`（`r_j → a_j`; `r_j → b_j`）を右辺から左辺へ 2 か所同時適用
 
 /-- **`finite_sum_of_real_differences`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
 theorem finite_sum_of_real_differences (m : ℕ) (a b : Fin m → ℝ) :
@@ -106,15 +111,20 @@ theorem finite_sum_of_real_differences (m : ℕ) (a b : Fin m → ℝ) :
   | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, Fin.sum_univ_zero, sub_zero]
   | succ m => exact finite_sum_of_real_differences_succ m a b
 
-/-- **`finite_sum_of_real_sums`** の帰納法の段の 5 行: `(α + β) + (x + y) = (α + x) + (β + y)`。ℝ の加法の結合則と交換則を 1 段ずつ。 -/
+/-- **`finite_sum_of_real_sums`** の帰納法の段の 5 行: `(α + β) + (x + y) = (α + x) + (β + y)`（人手の `a_{m+1}, b_{m+1}` が `x, y`）。ℝ の加法の結合則と交換則を 1 段ずつ。 -/
 theorem finite_sum_of_real_sums_step (α β x y : ℝ) :
     (α + β) + (x + y) = (α + x) + (β + y) :=
   calc (α + β) + (x + y)
-      = α + (β + (x + y)) := add_assoc _ _ _                                 -- ℝ の加法の結合則
-    _ = α + ((β + x) + y) := by rw [add_assoc β x y]                         -- ℝ の加法の結合則
-    _ = α + ((x + β) + y) := by rw [add_comm β x]                            -- ℝ の加法の交換則
-    _ = α + (x + (β + y)) := by rw [add_assoc x β y]                         -- ℝ の加法の結合則
-    _ = (α + x) + (β + y) := (add_assoc _ _ _).symm                          -- ℝ の加法の結合則
+      = α + (β + (x + y)) := add_assoc α β (x + y)
+                          -- ℝ の加法の結合則 `(p + q) + s = p + (q + s)`（`p → α`, `q → β`, `s → a_{m+1} + b_{m+1}`）（`set_and_algebra_notation`）
+    _ = α + ((β + x) + y) := by rw [add_assoc β x y]
+                          -- 同じ結合則（`p → β`, `q → a_{m+1}`, `s → b_{m+1}`）を右辺から左辺へ
+    _ = α + ((x + β) + y) := by rw [add_comm β x]
+                          -- ℝ の加法の交換則 `p + q = q + p`（`p → β`, `q → a_{m+1}`）（`set_and_algebra_notation`）
+    _ = α + (x + (β + y)) := by rw [add_assoc x β y]
+                          -- 同じ結合則（`p → a_{m+1}`, `q → β`, `s → b_{m+1}`）
+    _ = (α + x) + (β + y) := (add_assoc α x (β + y)).symm
+                          -- 同じ結合則（`p → α`, `q → a_{m+1}`, `s → β + b_{m+1}`）を右辺から左辺へ
 
 /-- **`finite_sum_of_real_sums`**（`m + 1` 項）: `Σ_{j=1}^{m+1}(a_j + b_j) = Σ a_j + Σ b_j`。`m` についての帰納法。 -/
 theorem finite_sum_of_real_sums_succ (m : ℕ) (a b : Fin (m + 1) → ℝ) :
@@ -124,7 +134,7 @@ theorem finite_sum_of_real_sums_succ (m : ℕ) (a b : Fin (m + 1) → ℝ) :
     calc ∑ j : Fin 1, (a j + b j)
         = a 0 + b 0 := Fin.sum_univ_one _                                    -- `def_finite_sum_of_real_numbers`（`r_j → a_j + b_j`）
       _ = (∑ j : Fin 1, a j) + ∑ j : Fin 1, b j := by
-          rw [Fin.sum_univ_one a, Fin.sum_univ_one b]                         -- `def_finite_sum_of_real_numbers` を右辺から左辺へ 2 か所
+          rw [Fin.sum_univ_one a, Fin.sum_univ_one b]                         -- `def_finite_sum_of_real_numbers`（`r_j → a_j`; `r_j → b_j`）を右辺から左辺へ 2 か所同時適用
   | succ m ih =>
     calc ∑ j : Fin (m + 2), (a j + b j)
         = (∑ j : Fin (m + 1), (a j.castSucc + b j.castSucc)) + (a (Fin.last _) + b (Fin.last _)) :=
@@ -134,9 +144,9 @@ theorem finite_sum_of_real_sums_succ (m : ℕ) (a b : Fin (m + 1) → ℝ) :
           rw [ih (fun j => a j.castSucc) (fun j => b j.castSucc)]             -- 帰納法の仮定
       _ = ((∑ j : Fin (m + 1), a j.castSucc) + a (Fin.last _))
             + ((∑ j : Fin (m + 1), b j.castSucc) + b (Fin.last _)) :=
-          finite_sum_of_real_sums_step _ _ _ _                                 -- 結合則・結合則・交換則・結合則・結合則の 5 行
+          finite_sum_of_real_sums_step _ _ _ _                                 -- 人手の 5 行（結合則・結合則・交換則・結合則・結合則）
       _ = (∑ j, a j) + ∑ j, b j := by
-          rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- `α, β` の置き方と `def_finite_sum_of_real_numbers` を右辺から左辺へ 2 か所
+          rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- `α, β` の置き方と `def_finite_sum_of_real_numbers`（`r_j → a_j`; `r_j → b_j`）を右辺から左辺へ 2 か所同時適用
 
 /-- **`finite_sum_of_real_sums`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
 theorem finite_sum_of_real_sums (m : ℕ) (a b : Fin m → ℝ) :
