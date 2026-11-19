@@ -2909,6 +2909,16 @@ targets=(
   Ising2D.sinh_is_odd
   "Ising2D.NecSuf.antisymmetrized_difference_is_odd'"
   Ising2D.sinh_is_odd_of_necSuf
+  "Ising2D.NecSuf.mul_invOf_two_eq_two_mul_mul_invOf_two_sq'"
+  "Ising2D.NecSuf.add_mul_invOf_two_sq_eq'"
+  "Ising2D.NecSuf.symmetrized_add_formula'"
+  "Ising2D.NecSuf.antisymmetrized_add_formula'"
+  "Ising2D.NecSuf.symmetrized_sub_formula'"
+  "Ising2D.NecSuf.antisymmetrized_sub_formula'"
+  Ising2D.cosh_add_formula_of_necSuf
+  Ising2D.cosh_sub_formula_of_necSuf
+  Ising2D.sinh_add_formula_of_necSuf
+  Ising2D.sinh_sub_formula_of_necSuf
   Ising2D.positive_real_square_injective
   Ising2D.factor_difference_of_squares_eq_zero
   "Ising2D.NecSuf.positive_square_injective'"
