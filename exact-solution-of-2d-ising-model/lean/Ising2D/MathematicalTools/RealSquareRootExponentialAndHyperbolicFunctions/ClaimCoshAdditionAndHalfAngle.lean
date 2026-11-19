@@ -11,7 +11,7 @@
 **具体版**（人手証明と同じ抽象度＝実数の `cosh, sinh, arsinh`）。
 必要十分版は `Ising2D/NecSuf/HyperbolicBounds.lean`
 （`Ising2D.NecSuf.sinh_le_mul_cosh` ほか）。(5) の後半は必要十分版の系として導出してある。
-(1) の加法定理 4 本の必要十分版は未判断（状態台帳の (d4c44p15f15p38w16)）。
+(1) の加法定理 4 本の必要十分版は未判断（状態台帳の (d4c44p15f15p38w16b)）。
 
 ## mathlib の状況（調査結果）
 

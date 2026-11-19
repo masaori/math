@@ -7,6 +7,8 @@
 人手の 5 行の鎖と `sinh_is_odd` の `calc` は 1 対 1 である。`def_cosh_sinh` は Lean で定義し直しておらず、
 mathlib の `Real.sinh` の等式 `Real.sinh_eq`（`sinh x = (exp x − exp(−x))/2`）が人手の定義の式そのものとしてその役を担う。
 mathlib の `Real.sinh_neg` は使わない（人手の鎖をそのまま書くため）。
+必要十分版は `Ising2D/NecSuf/AntisymmetrizedDifferenceIsOdd.lean` の `NecSuf.antisymmetrized_difference_is_odd'`、
+具体版をその特殊化として得る導出は `ClaimSinhIsOddFromNecSuf.lean`。
 -/
 import Mathlib.Analysis.Complex.Trigonometric
 
