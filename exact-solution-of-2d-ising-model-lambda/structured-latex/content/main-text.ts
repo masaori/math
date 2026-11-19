@@ -50584,6 +50584,72 @@ b&\in R&&(\because\ E=R)
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_imaginary_unit_square_root_formula",
+        labels: [],
+        title: { text: "虚数単位を足した元の平方根の明示式" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_imaginary_unit_square_root_formula",
+            focus: {
+              id: "zero_pinching_claim_imaginary_unit_square_root_formula",
+              kind: "claim",
+              title: { text: "虚数単位を足した元の平方根の明示式は平方すると元へ戻る" },
+              labels: ["claim_imaginary_unit_square_root_formula"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/imaginary-unit-square-root-formula"],
+              lean: [
+                "Ising2DLambda.FisherZero.imaginaryUnit_squareRootFormula",
+                "Ising2DLambda.NecSuf.FisherZero.imaginaryUnit_squareRootFormula",
+                "Ising2DLambda.FisherZero.imaginaryUnit_squareRootFormula_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subset\overline{\mathbb Q}`), " を部分体とし、",
+                math(String.raw`a,b,c,u\in F`), "、",
+                math(String.raw`\omega\in\overline{\mathbb Q}`), " を取る。",
+                math(String.raw`u\ne0`), "、", math(String.raw`c^2=a^2+b^2`), "、",
+                math(String.raw`2u^2=c+a`), "、", math(String.raw`\omega^2=-1`),
+                " とする。このとき ", math(String.raw`v:=b/(2u)\in F`), " であり、",
+                math(String.raw`(u+v\omega)^2=a+b\omega`), " である。",
+              ])],
+              proof: [
+                paragraph([math(String.raw`u\ne0`), " なので ", math(String.raw`2u\ne0`), " である。", math(String.raw`2=1+1\in F`), " と部分体の四則（", ref("def_subfield_positive_cone"), "）により ", math(String.raw`v=b/(2u)\in F`), " が定まる。"]),
+                displayMath(String.raw`\begin{aligned}
+b^2&=c^2-a^2&&(\because\ c^2=a^2+b^2)\\
+&=(c-a)(c+a)&&(\because\ \text{平方差の因数分解})\\
+&=(c-a)2u^2&&(\because\ 2u^2=c+a)
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+v^2&=\frac{b^2}{4u^2}&&(\because\ v=b/(2u))\\
+&=\frac{(c-a)2u^2}{4u^2}&&(\because\ \text{上の等式})\\
+&=\frac{c-a}{2}&&(\because\ u\ne0)
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+u^2-v^2&=\frac{c+a}{2}-v^2&&(\because\ 2u^2=c+a)\\
+&=\frac{c+a}{2}-\frac{c-a}{2}&&(\because\ v^2=(c-a)/2)\\
+&=a&&(\because\ \overline{\mathbb Q}\text{ の四則})
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+2uv&=2u\frac{b}{2u}&&(\because\ v=b/(2u))\\
+&=b&&(\because\ u\ne0)
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+(u+v\omega)^2&=u^2+2uv\omega+v^2\omega^2&&(\because\ \text{分配律})\\
+&=(u^2-v^2)+2uv\omega&&(\because\ \omega^2=-1)\\
+&=a+2uv\omega&&(\because\ u^2-v^2=a)\\
+&=a+b\omega&&(\because\ 2uv=b)
+\end{aligned}`),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_coefficient_polynomials",
         labels: [],
         title: { text: "部分体を係数とする多項式と部分体上の次数" },

@@ -192,9 +192,13 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
     title: "極大な順序付き部分体で二つの平方の和が平方である",
     dependsOn: [],
   },
+  claim_imaginary_unit_square_root_formula: {
+    title: "虚数単位を足した元の平方根の明示式",
+    dependsOn: ["claim_maximal_ordered_subfield_sum_of_squares_is_square"],
+  },
   claim_imaginary_unit_extension_square_root: {
     title: "虚数単位を足した元は平方根を持つ",
-    dependsOn: ["claim_maximal_ordered_subfield_sum_of_squares_is_square"],
+    dependsOn: ["claim_imaginary_unit_square_root_formula"],
   },
   claim_imaginary_unit_extension_quadratic_root: {
     title: "正の元が平方である部分体に虚数単位を足した体では二次多項式が根を持つ",
