@@ -22,7 +22,8 @@
   `ℤ_{≥0}` の上で 2 つの書き方が一致することは `inclusion_zz_to_rr_of_natCast`（`Int.cast_natCast`）である。
   `trace_power_upper_bound`・`real_log_of_power` は `ℤ_{≥0}` の元だけを送るので `Nat.cast` の形だけを使い、`limit_of_log_Z_in_N_row` の
   `N_0 ∈ ℤ` は `Int.cast` で送る。
-* `inclusion_zz_to_rr_of_one` は人手の 4 行と 1 対 1 の `calc` である。
+* `inclusion_zz_to_rr_of_one` は人手の 4 行と 1 対 1 の `calc` である。`ℤ` の元を送る主張が引く `Int.cast` の形は
+  `inclusion_zz_to_rr_of_one_intCast`（`inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形へ移してから `inclusion_zz_to_rr_of_one` を当てる）。
 * `inclusion_zz_to_rr_preserves_sum_of_nonnegatives` は人手と同じく `b` についての帰納法で、`b = 0` の 3 行と帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。
 * `finite_sum_of_constant_real_number_succ` は人手の `m ∈ ℤ_{≥1}` を Lean の `m + 1`（`Fin (m + 1)` の上の和）で書き、`m = 1` の 3 行と
   帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。`def_finite_sum_of_real_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
@@ -66,6 +67,14 @@ theorem inclusion_zz_to_rr_of_one : ((1 : ℕ) : ℝ) = 1 :=
     _ = ((0 : ℕ) : ℝ) + 1 := inclusion_zz_to_rr_succ 0                     -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`（`n → 0`）
     _ = 0 + 1 := by rw [inclusion_zz_to_rr_zero]                           -- `inclusion_zz_to_rr` の `ι(0) := 0`
     _ = 1 := zero_add 1                                                    -- `0_ℝ` は `ℝ` の和の単位元
+
+/-- **人手 `inclusion_zz_to_rr_of_one`** を `ℤ` 全体の `ι`（`Int.cast`）の形で書いたもの: `ι(1_ℤ) = 1_ℝ`。
+`1_ℤ ∈ ℤ_{≥0}` なので、2 つの書き方の一致 `inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形 `inclusion_zz_to_rr_of_one` へ移す。
+`ℤ` の元を `ℝ` へ送る主張（`periodicity_of_check_fermi` など）が引く。 -/
+theorem inclusion_zz_to_rr_of_one_intCast : ((1 : ℤ) : ℝ) = 1 :=
+  calc ((1 : ℤ) : ℝ) = (((1 : ℕ) : ℤ) : ℝ) := rfl                          -- `1_ℤ` は `ℤ_{≥0}` の元（Lean では `ℕ` の `1` の像と定義で一致）
+    _ = ((1 : ℕ) : ℝ) := inclusion_zz_to_rr_of_natCast 1                   -- `ℤ_{≥0}` の上で `Int.cast` と `Nat.cast` は一致する
+    _ = 1 := inclusion_zz_to_rr_of_one                                     -- `inclusion_zz_to_rr_of_one`
 
 /-- **人手 `inclusion_zz_to_rr_preserves_sum_of_nonnegatives`**: `a, b ∈ ℤ_{≥0}` なら `ι(a + b) = ι(a) + ι(b)`。`b` についての帰納法。 -/
 theorem inclusion_zz_to_rr_preserves_sum_of_nonnegatives (a b : ℕ) :

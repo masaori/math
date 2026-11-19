@@ -188,7 +188,7 @@ theorem thetaTilde_conj_eq_neg_add_two_pi (hM : M ≠ 0) (μ : ℤ) :
     _ = (-thetaTilde M μ) + 2 * Real.pi * 1 := by
         rw [mul_one]                              -- 4 行目: ℝ の乗法の単位元 `p·1 = p`（`p → 2π`。`set_and_algebra_notation`）を右辺から左辺へ
     _ = -thetaTilde M μ + 2 * Real.pi * ((1 : ℤ) : ℝ) := by
-        rw [Int.cast_one]                         -- 5 行目: `ι_{ℤ→ℝ}` は単位元を保つ
+        rw [inclusion_zz_to_rr_of_one_intCast]    -- 5 行目: `inclusion_zz_to_rr_of_one` を右辺から左辺へ
 
 /-- 人手 `periodicity_of_check_fermi` (3) の `-θ̃_ν` の鎖: `-θ̃_ν = θ̃_μ + 2π(-1)_ℝ`（人手の 9 行）。 -/
 theorem neg_thetaTilde_conj_eq_add_two_pi_neg_one (hM : M ≠ 0) (μ : ℤ) :
@@ -213,7 +213,7 @@ theorem neg_thetaTilde_conj_eq_add_two_pi_neg_one (hM : M ≠ 0) (μ : ℤ) :
     _ = thetaTilde M μ + 2 * Real.pi * (-1) := by
         rw [mul_comm (-1 : ℝ) (2 * Real.pi)]      -- 7 行目: ℝ の乗法の可換則（`set_and_algebra_notation`）
     _ = thetaTilde M μ + 2 * Real.pi * (-((1 : ℤ) : ℝ)) := by
-        rw [Int.cast_one]                         -- 8 行目: `ι_{ℤ→ℝ}` は単位元を保つ
+        rw [inclusion_zz_to_rr_of_one_intCast]    -- 8 行目: `inclusion_zz_to_rr_of_one` を右辺から左辺へ
     _ = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) := by
         rw [periodicity_prep_int_cast_neg 1]      -- 9 行目: 準備の第二を `k = 1` で
 

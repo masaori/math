@@ -61,7 +61,7 @@ nu_chain = [
     2 * PI + (-tt(mu)),               # def_real_difference（y → 2π, z → θ~_μ）
     (-tt(mu)) + 2 * PI,               # 加法の交換律 p + q = q + p（p → 2π, q → -θ~_μ。set_and_algebra_notation）
     (-tt(mu)) + 2 * PI * one,         # 乗法の単位元 p·1 = p（p → 2π。set_and_algebra_notation）を右辺から左辺へ
-    (-tt(mu)) + 2 * PI * one,         # ι は単位元を保つ（像 (1)_R = 1_R。中身は下の整数の検算）
+    (-tt(mu)) + 2 * PI * one,         # inclusion_zz_to_rr_of_one を右辺から左辺へ（像 (1)_R = 1_R。中身は下の整数の検算）
 ]
 rep.check(tt(MM + 1 - mu) == nu_chain[0], "(3) conjugate_index_of_check_Z_Y (1): θ~_(M+1-μ) = 2π - θ~_μ")
 for j in range(len(nu_chain) - 1):
@@ -74,7 +74,7 @@ neg_nu = [
     tt(mu) + (-(2 * PI)),             # ℝ の加法の交換律（set_and_algebra_notation）
     tt(mu) + (-one) * (2 * PI),       # real_minus_one_times_is_negation（a → 2π）を右辺から左辺へ
     tt(mu) + 2 * PI * (-one),         # ℝ の乗法の可換則
-    tt(mu) + 2 * PI * (-one),         # ι は単位元を保つ（像 (1)_R = 1_R。中身は下の整数の検算）
+    tt(mu) + 2 * PI * (-one),         # inclusion_zz_to_rr_of_one を右辺から左辺へ（像 (1)_R = 1_R。中身は下の整数の検算）
     tt(mu) + 2 * PI * (-one),         # 準備の第二を k = 1 で（中身は下の整数の検算）
 ]
 rep.check(-tt(MM + 1 - mu) == neg_nu[0], "(3) -θ~_ν の鎖 第 1 行")
@@ -82,7 +82,7 @@ for j in range(len(neg_nu) - 1):
     rep.check(neg_nu[j] == neg_nu[j + 1], f"(3) -θ~_ν の鎖 第 {j+1} 行 = 第 {j+2} 行")
 rep.check(tt(MM + 1 - mu) != (-tt(mu)) + PI, "(3) 対照: θ~_ν ≠ -θ~_μ + π")
 
-# ---- 準備の第二 (-k)_R = -k_R と、包含が和・積・単位元を保つこと（整数の具体の点） ----
+# ---- 準備の第二 (-k)_R = -k_R と、包含が和・積・単位元（ι(1) = 1。inclusion_zz_to_rr_of_one）を保つこと（整数の具体の点） ----
 # ι_{Z→R} を ZZ → QQ の埋め込みで持つ（QQ ⊂ ℝ。この検算に実数の完備性は要らない）。
 iota = lambda a: QQ(a)
 ok = True
