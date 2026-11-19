@@ -59459,6 +59459,257 @@ P
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_two_shifted_values_sum_product",
+        labels: [],
+        title: { text: "二つの整数倍のずらしの値から和と積を取り出す" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_pigeonhole_one_more_than_cardinality",
+              focus:
+                {
+                  id: "zero_pinching_claim_pigeonhole_one_more_than_cardinality",
+                  kind: "claim",
+                  title: { text: "有限集合の元の個数より一つ多い自然数を写すと、二つの自然数が同じ元へ行く" },
+                  labels: ["claim_pigeonhole_one_more_than_cardinality"],
+                  habitat: "N",
+                  verification: ["sagemath/check/two-shifted-values-sum-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.pigeonhole_one_more_than_cardinality",
+                    "Ising2DLambda.NecSuf.FisherZero.pigeonhole_lt_necSuf",
+                    "Ising2DLambda.FisherZero.pigeonhole_one_more_than_cardinality_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`P`),
+                      " を有限集合とし、",
+                      math(String.raw`N:=|P|\in\mathbb{N}`),
+                      "（",
+                      ref("def_cardinality_notation"),
+                      "）と置く。",
+                      math(String.raw`\mathbb{N}_{<N+1}:=\{c\in\mathbb{N}\mid c<N+1\}`),
+                      " から ",
+                      math(String.raw`P`),
+                      " への任意の写像 ",
+                      math(String.raw`\varphi`),
+                      " について、",
+                      math(String.raw`c<c'`),
+                      " かつ ",
+                      math(String.raw`\varphi(c)=\varphi(c')`),
+                      " を満たす ",
+                      math(String.raw`c,c'\in\mathbb{N}_{<N+1}`),
+                      " がある。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "そのような ",
+                      math(String.raw`c,c'`),
+                      " が無いと仮定して矛盾を導く。相異なる任意の ",
+                      math(String.raw`c,c'\in\mathbb{N}_{<N+1}`),
+                      " を取る。",
+                      math(String.raw`c<c'`),
+                      " なら仮定により ",
+                      math(String.raw`\varphi(c)\ne\varphi(c')`),
+                      "、",
+                      math(String.raw`c'<c`),
+                      " なら仮定により ",
+                      math(String.raw`\varphi(c')\ne\varphi(c)`),
+                      " である。自然数の順序は全順序なのでどちらかが起き、",
+                      math(String.raw`\varphi`),
+                      " は単射である。像を ",
+                      math(String.raw`\varphi(\mathbb{N}_{<N+1}):=\{\varphi(c)\mid c\in\mathbb{N}_{<N+1}\}`),
+                      " と置くと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+N+1
+&=\bigl|\mathbb{N}_{<N+1}\bigr|
+&&\bigl(\because\ \mathbb{N}_{<N+1}=\{0,1,\dots,N\}\bigr)\\
+&=\bigl|\varphi(\mathbb{N}_{<N+1})\bigr|
+&&\bigl(\because\ \varphi\text{ は単射で、単射写像は有限集合の元の個数を保つ}\bigr)\\
+&\le|P|
+&&\bigl(\because\ \varphi(\mathbb{N}_{<N+1})\subset P\text{ で、有限集合の部分集合の元の個数はもとの集合の元の個数以下}\bigr)\\
+&=N
+&&\bigl(\because\ N\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "となり、",
+                      math(String.raw`N+1\le N`),
+                      " は自然数の順序に反する。",
+                      "全過程は有限集合の元の個数と自然数の比較だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_two_shifted_values_determine_product",
+              focus:
+                {
+                  id: "zero_pinching_claim_two_shifted_values_determine_product",
+                  kind: "claim",
+                  title: { text: "二つの整数倍のずらしの値が部分体に入れば積も入る" },
+                  labels: ["claim_two_shifted_values_determine_product"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/two-shifted-values-sum-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.mul_mem_of_two_shifted_mem",
+                    "Ising2DLambda.NecSuf.FisherZero.mul_mem_of_two_shifted_mem_necSuf",
+                    "Ising2DLambda.FisherZero.mul_mem_of_two_shifted_mem_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`K`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体（",
+                      ref("def_subfield_positive_cone"),
+                      " の冒頭の意味）、",
+                      math(String.raw`\alpha,\beta\in\overline{\mathbb{Q}}`),
+                      "、",
+                      math(String.raw`c,c'\in\mathbb{Z}`),
+                      "、",
+                      math(String.raw`c\ne c'`),
+                      " とする。",
+                      ref("def_algebraic_numbers"),
+                      " の第一条件により ",
+                      math(String.raw`\mathbb{Z}\subset\mathbb{Q}`),
+                      " は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分集合であり、以下の和・差・積・商はすべて ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " のものとする。",
+                    ]),
+                    displayMath(String.raw`\alpha+\beta+c\cdot\alpha\cdot\beta\in K\quad\text{かつ}\quad\alpha+\beta+c'\cdot\alpha\cdot\beta\in K`),
+                    paragraph([
+                      "なら ",
+                      math(String.raw`\alpha\cdot\beta\in K`),
+                      " である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`u:=\alpha+\beta+c\cdot\alpha\cdot\beta\in K`),
+                      "、",
+                      math(String.raw`u':=\alpha+\beta+c'\cdot\alpha\cdot\beta\in K`),
+                      " と置く。",
+                      math(String.raw`c-c'\in\mathbb{Z}`),
+                      " は ",
+                      math(String.raw`c\ne c'`),
+                      " から零でなく、",
+                      ref("claim_subfield_contains_rationals"),
+                      " により ",
+                      math(String.raw`c-c'\in K`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\alpha\cdot\beta
+&=\frac{(c-c')\cdot\alpha\cdot\beta}{c-c'}
+&&\bigl(\because\ c-c'\ne0\text{ と }\overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=\frac{\bigl(\alpha+\beta+c\cdot\alpha\cdot\beta\bigr)-\bigl(\alpha+\beta+c'\cdot\alpha\cdot\beta\bigr)}{c-c'}
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の分配法則と加法の交換法則・結合法則}\bigr)\\
+&=\frac{u-u'}{c-c'}
+&&\bigl(\because\ u,u'\text{ の置き方}\bigr)\\
+&\in K
+&&\bigl(\because\ u,u'\in K\text{、}c-c'\in K\text{、}c-c'\ne0\text{ と、}K\text{ は差と零元でない元による商で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "部分体の性質のうち使ったのは、差と零元でない元による商で閉じることと、整数 ",
+                      math(String.raw`c-c'`),
+                      " を含むことだけである。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の四則だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_two_shifted_values_determine_sum_and_product",
+              focus:
+                {
+                  id: "zero_pinching_claim_two_shifted_values_determine_sum_and_product",
+                  kind: "claim",
+                  title: { text: "二つの整数倍のずらしの値が部分体に入れば和と積も入る" },
+                  labels: ["claim_two_shifted_values_determine_sum_and_product"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/two-shifted-values-sum-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.add_mem_and_mul_mem_of_two_shifted_mem",
+                    "Ising2DLambda.NecSuf.FisherZero.add_mem_and_mul_mem_of_two_shifted_mem_necSuf",
+                    "Ising2DLambda.FisherZero.add_mem_and_mul_mem_of_two_shifted_mem_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      ref("claim_two_shifted_values_determine_product"),
+                      " と同じ ",
+                      math(String.raw`K`),
+                      "、",
+                      math(String.raw`\alpha,\beta\in\overline{\mathbb{Q}}`),
+                      "、",
+                      math(String.raw`c,c'\in\mathbb{Z}`),
+                      "、",
+                      math(String.raw`c\ne c'`),
+                      " について、",
+                    ]),
+                    displayMath(String.raw`\alpha+\beta+c\cdot\alpha\cdot\beta\in K\quad\text{かつ}\quad\alpha+\beta+c'\cdot\alpha\cdot\beta\in K`),
+                    paragraph([
+                      "なら ",
+                      math(String.raw`\alpha+\beta\in K`),
+                      " かつ ",
+                      math(String.raw`\alpha\cdot\beta\in K`),
+                      " である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`u:=\alpha+\beta+c\cdot\alpha\cdot\beta\in K`),
+                      " と置く。",
+                      ref("claim_two_shifted_values_determine_product"),
+                      " により ",
+                      math(String.raw`\alpha\cdot\beta\in K`),
+                      " であり、",
+                      ref("claim_subfield_contains_rationals"),
+                      " により ",
+                      math(String.raw`c\in K`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\alpha+\beta
+&=\bigl(\alpha+\beta+c\cdot\alpha\cdot\beta\bigr)-c\cdot\alpha\cdot\beta
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=u-c\cdot\alpha\cdot\beta
+&&\bigl(\because\ u\text{ の置き方}\bigr)\\
+&\in K
+&&\bigl(\because\ u\in K\text{、}c\in K\text{、}\alpha\cdot\beta\in K\text{ と、}K\text{ は積と差で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の四則だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
