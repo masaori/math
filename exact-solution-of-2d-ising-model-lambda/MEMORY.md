@@ -8,7 +8,7 @@
 - **主経路の次の前進**: 台帳の先頭「残りの行き止まりの主張を一件ずつ切り分ける」。極大な順序付き部分体の正の元の平方根まで四層で完了した。
 
 - **積み上げを二本にした（2026-11-11、人の指示「ゴールに向かうために工夫をして」）**: 到達点に要る Lean の無い主張 57 件のうち、一側閉包の正負四の欠けに依存しない 36 件が、委譲の外し 54 件の後ろで順番待ちになっていた。台帳に表「並列の積み上げが受け持つもの」を足して 36 件を移し、連続実行「可算二次元イジング: 証明の積み上げ（並列）」が受け持つ。主経路は「残っているもの」の表だけを進める（runbook「二本の積み上げ」）。残りは `node structured-latex/tools/count-goal-lean-remaining.ts` で数え、推移を `docs/tasks/goal-lean-remaining.tsv` に残す。
-- **並列の積み上げの次の前進**: 台帳の並列の表の先頭「対称式の基本定理（有限変数・部分体係数）」（ラベル `claim_symmetric_polynomial_fundamental_theorem`）。基本対称式への代入の四件、対称性（`claim_elementary_symmetric_substitution_symmetric`）・末尾の変数への零代入との入れ替え（`claim_elementary_symmetric_substitution_last_variable_zero`）・部分体係数（`claim_elementary_symmetric_substitution_subfield_coefficient`）・全次数の上界（`claim_elementary_symmetric_substitution_degree_bound`。重み付き次数 `def_qbar_multivariate_weighted_degree` と、全次数の部品として定数・有限和・二元の積・有限積・基本対称式の上界がある）は四層で済んだ。本文の節「基本対称式への代入」に、代入の合成 `claim_qbar_multivariate_substitution_composition`、$\mathrm{ee}_n(j):=\mathrm{es}_{n,j+1}$・$\mathrm{se}_n:=\mathrm{ms}_{\mathrm{ee}_n}$（`def_elementary_symmetric_substitution`）がある。本体は零代入で消える対称多項式の割り切れ（`claim_symmetric_vanishing_last_variable_divisible_by_product`）も引く。
+- **並列の積み上げの次の前進**: 台帳の並列の表の先頭「末尾の変数への零代入は対称性を保つ」（ラベル `claim_last_variable_zero_preserves_symmetry`）。2026-11-19 に「対称式の基本定理」を五行に割った（零代入の部分体係数と全次数〔済〕・零代入の対称性・持ち上げ `claim_last_variable_zero_of_extension`・重み付き次数の上界 `claim_qbar_weighted_degree_last_variable_product_bound`・本体 `claim_symmetric_polynomial_fundamental_theorem`）。本体は変数の個数の帰納法の中で全次数の強い帰納法を行い、$\mathrm{lz}_n(P)=\mathrm{se}_n(Q_1)$ の $Q_1$ を持ち上げ、差 $P-\mathrm{se}_{n+1}(\mathrm{ex}_n(Q_1))$ を割り切れ（`claim_symmetric_vanishing_last_variable_divisible_by_product`）で $\mathrm{es}_{n+1,n+1}\cdot R$ と書いて $R$ に帰納法の仮定を使う。済んだ部品: 基本対称式への代入の四件（対称性・零代入との入れ替え・部分体係数・全次数の上界）、零代入の部分体係数 `claim_last_variable_zero_subfield_coefficient` と全次数 `claim_last_variable_zero_total_degree_bound`（節「対称式の基本定理」）。
 - **研究管理（2026-11-18）**: 前回から 24 時間で残りは 10 件から 5 件（同じ数え方）。台帳で割られた行（主経路の四行、並列の対称式の三行）を道具が一件ずつ数えるようにし、残り 10 件・最長の鎖 5 件（主経路の四行と合成）になった。行を割ったら、割った行の備考にラベル名を書き、同じ回に道具の `PLANNED_PARTS` にも足す。割り振りは変えない。
 - **研究管理（2026-11-17）**: 道具の上では Lean の無いものが方針の注意 1 件だけになったが、到達点の具体版は実閉部分体のデータを引数で受け取り、その値は本文にも Lean にも無い（本文は存在を「既知（Artin--Schreier）」と書くだけ）。存在の主張 `claim_real_closed_subfield_exists` を到達点に加え、道具もこれを数えるように直した（残りの和は 2 件）。存在は複素数体への埋め込みを使わず、列挙による極大な順序付き部分体・二次と奇数次の正錐の延長・Laplace の帰納法で示す（runbook「実閉部分体の存在の経路」）。主経路に四行、並列に五行（最後が合成と到達点からのデータの引数の除去）。
 - **研究管理（2026-11-16）**: 残りの和は 15 件から 9 件（Lean の無いもの 6＋必要十分版に頼るもの 3）。最長の鎖は 4 件（実対数 → Riemann 和 → 周期境界の密度 → Onsager 表示）。並列が主経路の Riemann 和を待って約 9 時間空回りしたので、Riemann 和を誤差評価の段（いま着手できる）と合成の段に割って並列へ移し、有限トーラス公式も並列の待ちの間の行として移した。主経路は実対数の行の後、委譲 3 件へ進む。
@@ -43,11 +43,11 @@
 - **本文で $u$ は方向単位ベクトルの名前。** Fourier 分解のモード変数には $u,w$ を使わず $\varpi,\varsigma$ を使う（1 記号 1 意味）。
 
 ## 直近の記録
+2026-11-19（並列）: 対称式の基本定理を五行に割り、末尾の変数への零代入が部分体係数を保つこと・全次数を増やさないことを本文・SageMath（PASS 632）・Lean 具体版・必要十分版・導出版で示した。必要十分版は係数の任意の部分集合と、$w(b)\le w'(\mathrm{ez}_n(b))$ を満たす指数の重みで成り立つ。
 2026-11-19（主経路の書式統一）: 「二色で相手を切り替えた二写像は互いに逆である」の四つの式鎖から根拠括弧後の句読点を除いた。主張と根拠は不変。
 2026-11-19（主経路）: 極大な順序付き部分体の正錐の元は同じ部分体で平方になることを本文・SageMath 厳密標本・Lean 具体版・必要十分版・導出版で示した。平方根の外への添加は極大性に矛盾する。次は残りの行き止まりの主張を切り分ける。
 2026-11-19（主経路）: 正の元の平方根を添加した部分体への正錐の延長を、本文・SageMath 厳密標本（PASS 44426）・Lean 具体版・必要十分版・導出版で示した。前錐の増大列と負の単位元の不包含を引いた。次は極大性から平方根の所属を示す。
 2026-11-19（並列）: 基本対称式への代入の全次数の上界 $\mathrm{tdeg}_n(\mathrm{se}_n(Q))\le\mathrm{wdeg}_n(Q)$ を、重み付き次数の定義と全次数の五つの部品（定数・有限和・二元の積・有限積・基本対称式）とともに本文・SageMath（PASS 6436）・Lean 具体版・必要十分版・導出版で示した。必要十分版は可換半環係数と、零で 0 以下・劣加法的な指数の重みで成り立つ。
-2026-11-19（主経路）: 平方根を添加した部分体の正錐重み付き平方和が負の単位元を含まないことを、共役和の恒等式と基礎体の不包含に帰着し、本文・SageMath 有理数標本・Lean 具体版・必要十分版・導出版で示した。次は正錐の延長。
 
 ## 章ごとの到達点（四層の状態が変わったときだけ書き換える）
 

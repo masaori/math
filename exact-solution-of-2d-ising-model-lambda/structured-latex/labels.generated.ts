@@ -242,6 +242,8 @@ export const ALL_LABELS = [
   "claim_kw_self_dual_quadratic_equivalence",
   "claim_last_variable_zero_coefficient",
   "claim_last_variable_zero_elementary_symmetric",
+  "claim_last_variable_zero_subfield_coefficient",
+  "claim_last_variable_zero_total_degree_bound",
   "claim_leading_distance_lt_iff_close_zero",
   "claim_leading_distance_pinching_implies_predicate",
   "claim_leading_distance_positive",

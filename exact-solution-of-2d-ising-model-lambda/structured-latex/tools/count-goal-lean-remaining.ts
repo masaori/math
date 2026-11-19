@@ -155,9 +155,29 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
     title: "基本対称式への代入の全次数は重み付き次数以下",
     dependsOn: [],
   },
+  claim_last_variable_zero_total_degree_bound: {
+    title: "末尾の変数への零代入は部分体係数を保ち全次数を増やさない",
+    dependsOn: [],
+  },
+  claim_last_variable_zero_preserves_symmetry: {
+    title: "末尾の変数への零代入は対称性を保つ",
+    dependsOn: [],
+  },
+  claim_last_variable_zero_of_extension: {
+    title: "末尾に変数を足す持ち上げ",
+    dependsOn: [],
+  },
+  claim_qbar_weighted_degree_last_variable_product_bound: {
+    title: "重み付き次数の和と末尾の変数倍の上界",
+    dependsOn: [],
+  },
   claim_symmetric_polynomial_fundamental_theorem: {
     title: "対称式の基本定理",
     dependsOn: [
+      "claim_last_variable_zero_total_degree_bound",
+      "claim_last_variable_zero_preserves_symmetry",
+      "claim_last_variable_zero_of_extension",
+      "claim_qbar_weighted_degree_last_variable_product_bound",
       "claim_symmetric_vanishing_last_variable_divisible_by_product",
       "claim_elementary_symmetric_substitution_symmetric",
       "claim_elementary_symmetric_substitution_last_variable_zero",

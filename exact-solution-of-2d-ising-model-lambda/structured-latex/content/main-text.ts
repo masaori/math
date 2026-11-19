@@ -57967,6 +57967,172 @@ d&(e=a\text{ のとき})\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_symmetric_polynomial_fundamental_theorem",
+        labels: [],
+        title: { text: "対称式の基本定理" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_last_variable_zero_subfield_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_last_variable_zero_subfield_coefficient",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする多項式の末尾の変数に零を代入しても同じ部分体を係数とする" },
+                  labels: ["claim_last_variable_zero_subfield_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/last-variable-zero-subfield-coefficient-degree"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.lastVariableZero_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.lastVariableZero_mem_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.lastVariableZero_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。任意の ",
+                      math(String.raw`P\in F[X_{<n+1}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）について ",
+                      math(String.raw`\mathrm{lz}_n(P)\in F[X_{<n}]`),
+                      "（",
+                      ref("def_last_variable_zero_substitution"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`b\in\mathrm{Ex}_n`),
+                      " を任意に取る。",
+                      math(String.raw`\mathrm{ez}_n(b)\in\mathrm{Ex}_{n+1}`),
+                      "（",
+                      ref("def_exponent_zero_extension"),
+                      "）である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_b\bigl(\mathrm{lz}_n(P)\bigr)
+&=\mathrm{mco}_{\mathrm{ez}_n(b)}(P)
+&&\bigl(\because\ \blkref{claim_last_variable_zero_coefficient}\bigr)\\
+&\in F
+&&\bigl(\because\ P\in F[X_{<n+1}]\text{ と }\blkref{def_subfield_coefficient_multivariate_polynomials}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`b`),
+                      " は任意なので、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      " により ",
+                      math(String.raw`\mathrm{lz}_n(P)\in F[X_{<n}]`),
+                      " である。",
+                      "全過程は代数的数の所属だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_last_variable_zero_total_degree_bound",
+              focus:
+                {
+                  id: "zero_pinching_claim_last_variable_zero_total_degree_bound",
+                  kind: "claim",
+                  title: { text: "末尾の変数に零を代入しても全次数は増えない" },
+                  labels: ["claim_last_variable_zero_total_degree_bound"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/last-variable-zero-subfield-coefficient-degree"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_lastVariableZero_le",
+                    "Ising2DLambda.FisherZero.exponentTotal_exponentZeroExtension",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_lastVariableZero_le_necSuf",
+                    "Ising2DLambda.FisherZero.qbarTotalDegree_lastVariableZero_le_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について",
+                    ]),
+                    displayMath(String.raw`\mathrm{tdeg}_n\bigl(\mathrm{lz}_n(P)\bigr)\le\mathrm{tdeg}_{n+1}(P)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_last_variable_zero_substitution"),
+                      "、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`b\in\mathrm{spt}_n(\mathrm{lz}_n(P))`),
+                      " を任意に取る。準備として",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_{\mathrm{ez}_n(b)}(P)
+&=\mathrm{mco}_b\bigl(\mathrm{lz}_n(P)\bigr)
+&&\bigl(\because\ \blkref{claim_last_variable_zero_coefficient}\bigr)\\
+&\ne0
+&&\bigl(\because\ b\in\mathrm{spt}_n(\mathrm{lz}_n(P))\text{ と }\blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{spt}_n\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので ",
+                      math(String.raw`\mathrm{ez}_n(b)\in\mathrm{spt}_{n+1}(P)`),
+                      "（",
+                      ref("def_exponent_zero_extension"),
+                      "）である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sz}_n(b)
+&=\sum_{k\in\mathbb{N}_{<n}}b(k)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{sz}_n\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}\mathrm{ez}_n(b)(k)
+&&\bigl(\because\ \blkref{def_exponent_zero_extension}\text{ の }\mathrm{ez}_n(b)(k)=b(k)\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}\mathrm{ez}_n(b)(k)+0
+&&\bigl(\because\ \mathbb{N}\text{ の加法の単位元}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n}}\mathrm{ez}_n(b)(k)+\mathrm{ez}_n(b)(n)
+&&\bigl(\because\ \blkref{def_exponent_zero_extension}\text{ の }\mathrm{ez}_n(b)(n)=0\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n+1}}\mathrm{ez}_n(b)(k)
+&&\bigl(\because\ \mathbb{N}_{<n+1}=\mathbb{N}_{<n}\cup\{n\}\text{ による有限和の分離}\bigr)\\
+&=\mathrm{sz}_{n+1}\bigl(\mathrm{ez}_n(b)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_total_degree}\text{ の }\mathrm{sz}_{n+1}\bigr)\\
+&\le\mathrm{tdeg}_{n+1}(P)
+&&\bigl(\because\ \mathrm{ez}_n(b)\in\mathrm{spt}_{n+1}(P)\text{ と }\blkref{def_qbar_multivariate_total_degree}\text{ の最大元の性質}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`b`),
+                      " は任意なので、",
+                      ref("def_qbar_multivariate_total_degree"),
+                      " の上界の性質（",
+                      math(String.raw`m=\mathrm{tdeg}_{n+1}(P)`),
+                      "）により ",
+                      math(String.raw`\mathrm{tdeg}_n(\mathrm{lz}_n(P))\le\mathrm{tdeg}_{n+1}(P)`),
+                      " である。",
+                      "全過程は自然数の比較と有限集合だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
