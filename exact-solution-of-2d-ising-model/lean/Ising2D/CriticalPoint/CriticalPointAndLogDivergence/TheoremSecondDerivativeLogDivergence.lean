@@ -603,14 +603,20 @@ theorem second_derivative_log_divergence_pos {κ : ℝ} (h0 : 0 < κ) (h1 : κ �
   rw [div_mul_eq_mul_div, div_le_iff₀ (by positivity)]
   nlinarith [htot, hpil, abs_nonneg (2 * Real.pi * Gsecond κ - Real.log (1 / κ))]
 
+/-- 人手 `gamma_kappa_identity` の偶関数性の鎖（`−κ/2 = −(κ/2)`、`sinh_is_odd`（`x → κ/2`）、`(−a)² = a²`）を `Sfun` について書いたもの。 -/
 theorem Sfun_neg (θ κ : ℝ) : Sfun θ (-κ) = Sfun θ κ := by
-  simp only [Sfun, show -κ / 2 = -(κ / 2) by ring, Real.sinh_neg]
-  ring
+  simp only [Sfun]
+  rw [show -κ / 2 = -(κ / 2) by ring, sinh_is_odd (κ / 2), neg_sq]
 
+/-- `∂²γ/∂κ²` の式は `κ` を `cosh κ`・`sinh² κ`・`Sfun` を通してだけ含む（`cosh_is_even`・`sinh_is_odd` を引く）。
+人手 `second_derivative_log_divergence` の Step 0 は `G(−κ) = G(κ)` を合成関数の微分で 2 回微分して `G''(−κ) = G''(κ)` を得ており、
+この補題の経路（被積分関数の偶関数性）とは別である。 -/
 theorem d2gammaK_neg (θ κ : ℝ) : d2gammaK θ (-κ) = d2gammaK θ κ := by
-  simp only [d2gammaK, Qfun, Sfun_neg, Real.cosh_neg, Real.sinh_neg]
+  simp only [d2gammaK, Qfun, Sfun_neg, cosh_is_even, sinh_is_odd]
   ring
 
+/-- `G''(−κ) = G''(κ)`。人手 `second_derivative_log_divergence` の Step 0 の結論に当たるが、経路は人手と別である
+（人手は `G(−κ) = G(κ)` と合成関数の微分、ここは `d2gammaK_neg` による被積分関数の偶関数性）。 -/
 theorem Gsecond_neg (κ : ℝ) : Gsecond (-κ) = Gsecond κ := by
   simp only [Gsecond, d2gammaK_neg]
 

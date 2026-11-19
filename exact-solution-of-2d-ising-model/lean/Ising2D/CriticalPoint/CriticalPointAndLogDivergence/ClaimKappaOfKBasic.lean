@@ -214,9 +214,12 @@ theorem sinh_two_K_bounds {K : ℝ} (hK : K ∈ Dnbhd) :
   have hc02 := cosh_02_bounds
   have hs02 := sinh_02_bounds
   have hlow : Real.sinh (2 * Kc - 0.2) = Real.cosh 0.2 - Real.sqrt 2 * Real.sinh 0.2 := by
-    rw [Real.sinh_sub, sinh_two_Kc, cosh_two_Kc]; ring
+    -- 人手 (4) の 1 行目（`sinh_addition_formula` の複号 −）が `sinh_sub_formula`、
+    -- 2 行目（`K_c` の定義と `cosh 2K_c = √2`）が `sinh_two_Kc`・`cosh_two_Kc` と `ring`（`1·a = a`）。
+    rw [sinh_sub_formula, sinh_two_Kc, cosh_two_Kc]; ring
   have hhigh : Real.sinh (2 * Kc + 0.2) = Real.cosh 0.2 + Real.sqrt 2 * Real.sinh 0.2 := by
-    rw [Real.sinh_add, sinh_two_Kc, cosh_two_Kc]; ring
+    -- 人手 (4) の複号 + の側。読み方は `hlow` と同じ。
+    rw [sinh_add_formula, sinh_two_Kc, cosh_two_Kc]; ring
   constructor
   · have hmono : Real.sinh (2 * Kc - 0.2) ≤ Real.sinh (2 * K) :=
       Real.sinh_le_sinh.2 (by norm_num at hl ⊢; linarith)

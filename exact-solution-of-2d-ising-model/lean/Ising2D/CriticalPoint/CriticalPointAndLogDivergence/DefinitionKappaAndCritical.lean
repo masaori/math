@@ -55,7 +55,7 @@ theorem gamma1R_eq_cosh_kappa_add (P : IsingParam) (θ : ℝ) :
   have hcs : Real.cosh (kappaP P)
       = Real.cosh (2 * P.K1) * Real.cosh (2 * P.K2star)
         - Real.sinh (2 * P.K1) * Real.sinh (2 * P.K2star) := by
-    rw [kappaP]; exact Real.cosh_sub _ _
+    rw [kappaP]; exact cosh_sub_formula _ _
   have hcos := one_sub_cos_eq θ
   simp only [gamma1R, IsingParam.const, AP]
   linear_combination (-1 : ℝ) * hcs
@@ -98,12 +98,12 @@ theorem gammaFn_eq_two_arsinh (P : IsingParam) (θ : ℝ) :
   linarith [this]
 
 /-- `κ` についての偶関数性（原文の「`κ` を `-κ` に置き換えても値が変わらない」）。
-`Sparam` が `sinh²(κ/2)` を通してしか `κ` に依存しないことの明示。 -/
+`Sparam` が `sinh²(κ/2)` を通してしか `κ` に依存しないことの明示。
+人手 `gamma_kappa_identity` の偶関数性の鎖の `−κ/2 = −(κ/2)`、`sinh_is_odd`（`x → κ/2`）、`(−a)² = a²` に当たる。 -/
 theorem Sparam_even (κ A θ : ℝ) :
     Real.sinh (-κ / 2) ^ 2 + A * Real.sin (θ / 2) ^ 2
       = Real.sinh (κ / 2) ^ 2 + A * Real.sin (θ / 2) ^ 2 := by
-  rw [show -κ / 2 = -(κ / 2) by ring, Real.sinh_neg]
-  ring
+  rw [show -κ / 2 = -(κ / 2) by ring, sinh_is_odd (κ / 2), neg_sq]
 
 /-! ## 臨界条件 -/
 
