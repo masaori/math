@@ -32,9 +32,9 @@
   eigenvector (v 1-5) = lambda (v)_1: max residual = 0.000e+00  ->  PASS
   eigenvector (v 2-1) (A v)_2 = (-b)(-/+ r) + g_1 b: max residual = 0.000e+00  ->  PASS
   eigenvector (v 2-2) (-b)(-/+ r) = b(+/- r): max residual = 0.000e+00  ->  PASS
-  eigenvector (v 2-3) 乗法の可換則: max residual = 0.000e+00  ->  PASS
+  eigenvector (v 2-3) 乗法の可換律: max residual = 0.000e+00  ->  PASS
   eigenvector (v 2-4) b を括り出す: max residual = 1.172e-13  ->  PASS
-  eigenvector (v 2-5) 加法の交換則: max residual = 0.000e+00  ->  PASS
+  eigenvector (v 2-5) 加法の交換律: max residual = 0.000e+00  ->  PASS
   eigenvector (v 2-6) = lambda (v)_2: max residual = 0.000e+00  ->  PASS
   eigenvector (固有ベクトル) A v = lambda v: max residual = 1.172e-13  ->  PASS
   diagonalization (det 1) 2x2 行列式の定義: max residual = 5.722e-17  ->  PASS

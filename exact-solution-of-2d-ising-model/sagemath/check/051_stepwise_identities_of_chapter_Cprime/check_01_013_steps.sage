@@ -515,7 +515,7 @@ for M in STEP_M:
               RDF(M) * t, expanded)
         S.add("half_integer_phase_antiperiodicity (b) M を約分",
               expanded, half_turn)
-        S.add("half_integer_phase_antiperiodicity (c) 実数の分配則",
+        S.add("half_integer_phase_antiperiodicity (c) 実数の分配法則",
               half_turn, RDF(2 * pi * mu - pi))
         S.add("half_integer_phase_antiperiodicity (d) Euler formula",
               eiph(-M * t), cos(RDF(M) * t) - CDF(I) * sin(RDF(M) * t))
@@ -545,7 +545,7 @@ for M in STEP_M:
         )
         S.add("half_integer_checkZ_periodicity (a1) theta~ の定義に mu+M を代入",
               th_tilde(M, mu + M), shifted_angle_definition)
-        S.add("half_integer_checkZ_periodicity (a2) 実数の分配則",
+        S.add("half_integer_checkZ_periodicity (a2) 実数の分配法則",
               shifted_angle_definition, shifted_angle_distributed)
         S.add("half_integer_checkZ_periodicity (a3) 分数の加法",
               shifted_angle_distributed, shifted_angle_split)
@@ -584,7 +584,7 @@ for M in STEP_M:
               unshifted_sum, checkZ(O, mu))
         S.add("half_integer_checkY_periodicity (a1) theta~ の定義に mu+M を代入",
               th_tilde(M, mu + M), shifted_angle_definition)
-        S.add("half_integer_checkY_periodicity (a2) 実数の分配則",
+        S.add("half_integer_checkY_periodicity (a2) 実数の分配法則",
               shifted_angle_definition, shifted_angle_distributed)
         S.add("half_integer_checkY_periodicity (a3) 分数の加法",
               shifted_angle_distributed, shifted_angle_split)

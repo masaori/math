@@ -201,7 +201,7 @@
   antiperiodic_exp_sum (7c) M*1=M: max residual = 0.000e+00  ->  PASS
   half_integer_phase_antiperiodicity (a) theta~ の定義を代入: max residual = 7.105e-15  ->  PASS
   half_integer_phase_antiperiodicity (b) M を約分: max residual = 0.000e+00  ->  PASS
-  half_integer_phase_antiperiodicity (c) 実数の分配則: max residual = 0.000e+00  ->  PASS
+  half_integer_phase_antiperiodicity (c) 実数の分配法則: max residual = 0.000e+00  ->  PASS
   half_integer_phase_antiperiodicity (d) Euler formula: max residual = 1.972e-30  ->  PASS
   half_integer_phase_antiperiodicity (e) substitute M theta~: max residual = 7.105e-15  ->  PASS
   half_integer_phase_antiperiodicity (f) cos integer half-turn = -1: max residual = 0.000e+00  ->  PASS
@@ -209,7 +209,7 @@
   half_integer_phase_antiperiodicity (h) i*0 = 0: max residual = 0.000e+00  ->  PASS
   half_integer_phase_antiperiodicity (i) additive identity: max residual = 0.000e+00  ->  PASS
   half_integer_checkZ_periodicity (a1) theta~ の定義に mu+M を代入: max residual = 1.776e-15  ->  PASS
-  half_integer_checkZ_periodicity (a2) 実数の分配則: max residual = 0.000e+00  ->  PASS
+  half_integer_checkZ_periodicity (a2) 実数の分配法則: max residual = 0.000e+00  ->  PASS
   half_integer_checkZ_periodicity (a3) 分数の加法: max residual = 1.776e-15  ->  PASS
   half_integer_checkZ_periodicity (a4) M!=0 により M を約分: max residual = 0.000e+00  ->  PASS
   half_integer_checkZ_periodicity (a5) theta~ の定義を再適用: max residual = 1.776e-15  ->  PASS
@@ -222,7 +222,7 @@
   half_integer_checkZ_periodicity (h) 位相の一致を全項へ適用: max residual = 2.289e-14  ->  PASS
   half_integer_checkZ_periodicity (i) checkZ_mu の定義を再適用: max residual = 0.000e+00  ->  PASS
   half_integer_checkY_periodicity (a1) theta~ の定義に mu+M を代入: max residual = 1.776e-15  ->  PASS
-  half_integer_checkY_periodicity (a2) 実数の分配則: max residual = 0.000e+00  ->  PASS
+  half_integer_checkY_periodicity (a2) 実数の分配法則: max residual = 0.000e+00  ->  PASS
   half_integer_checkY_periodicity (a3) 分数の加法: max residual = 1.776e-15  ->  PASS
   half_integer_checkY_periodicity (a4) M!=0 により M を約分: max residual = 0.000e+00  ->  PASS
   half_integer_checkY_periodicity (a5) theta~ の定義を再適用: max residual = 1.776e-15  ->  PASS

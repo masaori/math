@@ -156,9 +156,9 @@ for M in STEP_M + [6, 7, 8]:
                 gD = (gg1 + sgn * r) * b
                 S.add("eigenvector (v 2-1) (A v)_2 = (-b)(-/+ r) + g_1 b", (Amat * vp)[1], gA)
                 S.add("eigenvector (v 2-2) (-b)(-/+ r) = b(+/- r)", gA, gA2)
-                S.add("eigenvector (v 2-3) 乗法の可換則", gA2, gB)
+                S.add("eigenvector (v 2-3) 乗法の可換律", gA2, gB)
                 S.add("eigenvector (v 2-4) b を括り出す", gB, gC)
-                S.add("eigenvector (v 2-5) 加法の交換則", gC, gD)
+                S.add("eigenvector (v 2-5) 加法の交換律", gC, gD)
                 S.add("eigenvector (v 2-6) = lambda (v)_2", gD, lam * vp[1])
                 S.add("eigenvector (固有ベクトル) A v = lambda v",
                       Amat * vp, lam * vp)
