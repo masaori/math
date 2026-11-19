@@ -548,6 +548,8 @@ export const ALL_LABELS = [
   "claim_qbar_unit_sum_eq_rational",
   "claim_qbar_unit_sum_ne_zero",
   "claim_qbar_variable_permutation_coefficient",
+  "claim_qbar_weighted_degree_last_variable_product_bound",
+  "claim_qbar_weighted_degree_sum_bound",
   "claim_quadratic_addition_mem",
   "claim_quadratic_addition_representation",
   "claim_quadratic_conjugate_square_sum_identity",

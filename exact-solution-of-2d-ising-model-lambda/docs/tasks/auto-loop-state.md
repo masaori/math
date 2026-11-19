@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-19（並列）、表の先頭「重み付き次数の和と末尾の変数倍の上界」を四層で済ませた**（`claim_qbar_weighted_degree_sum_bound`・`claim_qbar_weighted_degree_last_variable_product_bound`。和の係数から $\mathrm{wdeg}_n(A+B)\le\max(\mathrm{wdeg}_n(A),\mathrm{wdeg}_n(B))$、$\mathrm{mon}_{n+1}(\delta_n)=X^{(n+1)}_n$ と単項式を掛けた係数の式から $\mathrm{wdeg}_{n+1}(X^{(n+1)}_n\cdot S)\le(n+1)+\mathrm{wdeg}_{n+1}(S)$）。並列の表の次は本体「対称式の基本定理」。
 - **2026-11-19（並列）、表の先頭「末尾に変数を足す持ち上げ」を四層で済ませた**（`def_last_variable_extension`・`claim_last_variable_zero_of_extension`・`claim_last_variable_extension_subfield_coefficient`・`claim_last_variable_extension_weighted_degree_bound`。持ち上げ $\mathrm{ex}_n(Q)$ を末尾の指数で場合分けした係数で定め、零代入の係数の式から $\mathrm{lz}_n(\mathrm{ex}_n(Q))=Q$、係数の場合分けから部分体係数の保存と $\mathrm{wdeg}_{n+1}(\mathrm{ex}_n(Q))\le\mathrm{wdeg}_n(Q)$）。並列の表の次は「重み付き次数の和と末尾の変数倍の上界」。
 - **2026-11-19（主経路）、「すべての配位を等しく数える点での自由エントロピー」は独立の到達点として残した。** $\Phi_L(1)=L^2\ell_2$ は可算な有限系の意味を具体化し、本文で主定理の印がある。次は転送行列の他の行き止まり候補を判定する。
 - **2026-11-19（並列）、表の先頭「末尾の変数への零代入は対称性を保つ」を四層で済ませた**（`def_last_fixed_permutation_extension`・`claim_last_fixed_permutation_extension_is_bijection`・`claim_last_variable_zero_commutes_with_variable_permutation`・`claim_last_variable_zero_preserves_symmetry`。末尾を固定する延長 $\mathrm{pe}_n(\varrho)$ が置換であることと、値の写像の一致から $\mathrm{vs}_\varrho\circ\mathrm{lz}_n=\mathrm{lz}_n\circ\mathrm{vs}_{\mathrm{pe}_n(\varrho)}$）。並列の表の次は「末尾に変数を足す持ち上げ」。
 - **2026-11-19（主経路）、連結グラフの頂点分割をまたぐ辺の補題を参照用ノートへ移した。** 本文に後続の引用はなく、全域木は辺の走査から示す。次は自由エントロピーの行き止まり候補を判定する。
-- **2026-11-19（並列）、表の先頭「対称式の基本定理」を論法で五行に割り、一つ目「末尾の変数への零代入は部分体係数を保ち全次数を増やさない」を四層で済ませた**（`claim_last_variable_zero_subfield_coefficient`・`claim_last_variable_zero_total_degree_bound`。どちらも零代入の係数の式 $\mathrm{mco}_b(\mathrm{lz}_n(P))=\mathrm{mco}_{\mathrm{ez}_n(b)}(P)$ から）。並列の表の次は「末尾の変数への零代入は対称性を保つ」。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -41,8 +41,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 零点の詰め寄り | 重み付き次数の和と末尾の変数倍の上界 | 未着手 | 2026-11-19 に対称式の基本定理から割った。$\mathrm{wdeg}_n(A+B)\le\max(\mathrm{wdeg}_n(A),\mathrm{wdeg}_n(B))$ と $\mathrm{wdeg}_{n+1}(X^{(n+1)}_n\cdot S)\le(n+1)+\mathrm{wdeg}_{n+1}(S)$（単項式を掛けた係数の式から）。全次数の差の上界が既存の和・積・定数の上界で済まなければここで足す。ラベルは `claim_qbar_weighted_degree_sum_bound`・`claim_qbar_weighted_degree_last_variable_product_bound`（計測の道具は後者を名指す）。 |
-| 零点の詰め寄り | 対称式の基本定理（有限変数・部分体係数） | 未着手 | 上の一行と、済んだ持ち上げ（`def_last_variable_extension`・`claim_last_variable_zero_of_extension`・`claim_last_variable_extension_subfield_coefficient`・`claim_last_variable_extension_weighted_degree_bound`）、零代入の部分体係数・全次数（`claim_last_variable_zero_subfield_coefficient`・`claim_last_variable_zero_total_degree_bound`）・対称性の保存（`claim_last_variable_zero_preserves_symmetry`）、基本対称式への代入の四件、割り切れ（`claim_symmetric_vanishing_last_variable_divisible_by_product`）を引く。変数の個数についての帰納法（$n=0$ では $\mathrm{se}_0$ は恒等写像）の中で全次数についての強い帰納法を行う。$\overline{\mathbb{Q}}$ の部分体 $F$ を係数とする対称な $P\in F[X_{<n}]$ に、$P=\mathrm{se}_n(Q)$ かつ $\mathrm{wdeg}_n(Q)\le\mathrm{tdeg}_n(P)$ の $Q\in F[X_{<n}]$ がある。次の行の Laplace の帰納法が引く。一般の環へ持ち上げない。ラベルは `claim_symmetric_polynomial_fundamental_theorem`。 |
+| 零点の詰め寄り | 対称式の基本定理（有限変数・部分体係数） | 未着手 | 済んだ重み付き次数の和と末尾の変数倍の上界（`claim_qbar_weighted_degree_sum_bound`・`claim_qbar_weighted_degree_last_variable_product_bound`）と、済んだ持ち上げ（`def_last_variable_extension`・`claim_last_variable_zero_of_extension`・`claim_last_variable_extension_subfield_coefficient`・`claim_last_variable_extension_weighted_degree_bound`）、零代入の部分体係数・全次数（`claim_last_variable_zero_subfield_coefficient`・`claim_last_variable_zero_total_degree_bound`）・対称性の保存（`claim_last_variable_zero_preserves_symmetry`）、基本対称式への代入の四件、割り切れ（`claim_symmetric_vanishing_last_variable_divisible_by_product`）を引く。変数の個数についての帰納法（$n=0$ では $\mathrm{se}_0$ は恒等写像）の中で全次数についての強い帰納法を行う。$\overline{\mathbb{Q}}$ の部分体 $F$ を係数とする対称な $P\in F[X_{<n}]$ に、$P=\mathrm{se}_n(Q)$ かつ $\mathrm{wdeg}_n(Q)\le\mathrm{tdeg}_n(P)$ の $Q\in F[X_{<n}]$ がある。次の行の Laplace の帰納法が引く。一般の環へ持ち上げない。ラベルは `claim_symmetric_polynomial_fundamental_theorem`。 |
 | 零点の詰め寄り | 正の元が平方で奇数次の多項式が根を持つ部分体に虚数単位を足すと代数的数の全体になる | 未着手 | 対称式の基本定理の後。そのような $F$ と $\omega^2=-1$ の $\omega$ について $F(\omega)=\overline{\mathbb{Q}}$。最小多項式の次数の 2 進付値についての帰納法（Laplace）。$\omega\notin F$ から表示 $\xi=a+b\omega$ の一意性も示す（`def_real_closed_subfield` の第三・第四条件）。ラベルは `claim_adjoin_imaginary_unit_gives_algebraic_numbers`。 |
 | 零点の詰め寄り | 実閉部分体の存在の合成と到達点からのデータの引数の除去 | 未着手 | 上の行と主経路の四行が済んでから。本文に `claim_real_closed_subfield_exists`（このラベル名は計測の道具が名指す）を立て、`def_real_closed_subfield` の「既知である」の段落をこの主張への参照に替える。Lean で `RealClosedSubfieldSqrtTwoData s` の値を作り、到達点の四つの具体版について、データ・$z$（$z^4=-1$ は `IsAlgClosed` から取れる）を引数に取らない形の定理を足して `lean:` に登録する。主経路の行を待つ間は表の先頭の行が全て済んでいれば何もしない。 |
 
@@ -52,11 +51,11 @@
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 
 ## レビュー記録
+- 2026-11-19（並列）: 前回の並列の「末尾に変数を足す持ち上げ」の本文四ブロックと Lean 具体版を照合した。定義の係数の場合分けと有限性の段落、零代入で元に戻る三つの等号、部分体係数の二つの場合、重み付き次数の六つの等号と最後の不等号が具体版の段と一致し、具体版は必要十分版を引いていない。修正は無かった。
 - 2026-11-19（並列）: 前回の並列の「末尾の変数への零代入は対称性を保つ」の本文四ブロックを読み直した。延長の定義の値の一意性、逆写像の準備の $j<n$・$j=n$ の二つの式鎖、値の写像の一致の九行と七行の式鎖、対称性の保存の二行が、それぞれ一行一根拠で定義と主張を引いており、記号の濫用・未定義の記号は無かった。修正は無かった。
 - 2026-11-19（主経路）: 「すべての配位を等しく数える点での自由エントロピー」の本文と Lean 具体版を照合した。係数表示、多重度の総和、対数の冪の法則、$\log 2=\ell_2$ が対応し、修正は無かった。
 - 2026-11-19（並列）: 前回の並列の「末尾の変数への零代入は部分体係数を保ち全次数を増やさない」を本文と Lean 具体版で照合した。零代入の係数の式からの所属、準備の台の所属、指数の総和の六つの等号と最後の不等号が具体版の段と一致し、具体版は必要十分版を引いていない。修正は無かった。
 - 2026-11-19（主経路）: 直前の「分配多項式は転送行列の冪のトレースである」を本文と Lean 具体版で照合した。閉じた道の類別、重みの対応、行列の冪の成分表示が対応し、修正は無かった。
-- 2026-11-19（並列）: 前回の並列の「基本対称式への代入の全次数は重み付き次数以下」を本文と Lean 具体版で照合した。冪の準備、$\mathrm{tdeg}_n(\mathrm{ee}_n(k))\le k+1$、$T_a$ の九つの値の式鎖、有限和への展開と上界が具体版の段と一致し、具体版は必要十分版を引いていない。修正は無かった。
 
 ## 式変形の書き方の統一
 - 2026-11-19（主経路の書式統一）: 「構成した置換の軌道は二歩軌道の合併に等しい」の式鎖で、根拠括弧の後の句読点を除いた。
@@ -66,8 +65,8 @@
 - 2026-11-19（主経路の書式統一）: 「選んだ奇数軌道の反転」の軌道不変性の式鎖末尾で、根拠括弧の後の句点を除いた。
 
 ## 前進の記録
+- 2026-11-19（並列）: 表の先頭「重み付き次数の和と末尾の変数倍の上界」を節「対称式の基本定理」（本文二ブロック）・SageMath 一件（PASS 4031）・Lean 具体版・必要十分版・導出版で済ませた。全次数の差の上界は、$-B=\mathrm{mk}(-1)\cdot B$ と既存の定数・積・有限和の全次数の上界で済むので足さなかった。必要十分版では、係数は可換半環でよく、和の上界は重みに何も要求せず、変数倍の上界は任意の有限の添字集合の任意の変数 $i$ で $w(\delta_i+c)\le d+w(c)$ だけを使う（末尾であることも $\mathrm{Fin}(n+1)$ の順序も使わない）。計測の道具の `PLANNED_PARTS` は変えていない（ラベルが本文に現れたので数えなくなった）。
 - 2026-11-19（並列）: 表の先頭「末尾に変数を足す持ち上げ」を節「対称式の基本定理」（本文四ブロック: 持ち上げの定義、零代入で元に戻ること、部分体係数の保存、重み付き次数の上界）・SageMath 一件（PASS 12850）・Lean 具体版・必要十分版・導出版で済ませた。一ブロック一主張のため、行の備考の二つのラベルに部分体係数と重み付き次数の二つの主張を足した。具体版の持ち上げは mathlib の `rename` を使わず、係数の場合分けの式（`AddMonoidAlgebra.ofCoeff` と `Finsupp.ofSupportFinite`）で定めた。必要十分版では、係数は可換半環でよく、部分体の代わりに零元を含む任意の部分集合でよい（零元は外せない。$S=\{1\}$、$Q=1$ が反例）。重み付き次数の代わりに、末尾の指数が零の $a$ で $w'(a)\le w(a|_{<n})$ を満たす重みでよい。計測の道具の `PLANNED_PARTS` は変えていない（ラベルが本文に現れたので数えなくなった）。
 - 2026-11-19（主経路）: 「すべての配位を等しく数える点での自由エントロピー」は、他の本文ブロックに `ref()`・`\blkref{}` の後続参照が無いが、有限系の可算な自由エントロピーを $x=1$ で具体化する主定理なので本文に残す。次は転送行列の他の候補を判定する。
 - 2026-11-19（並列）: 表の先頭「末尾の変数への零代入は対称性を保つ」を節「対称式の基本定理」（本文四ブロック: 末尾を固定する延長の定義、延長が置換であること、零代入と置換の入れ替わり、対称性の保存）・SageMath 一件（PASS 347）・Lean 具体版・必要十分版・導出版で済ませた。必要十分版では、延長の逆写像は添字集合が埋め込みの像と一点で覆われることと $g\circ f=\mathrm{id}$ だけから従い（埋め込みの単射性も一点が像の外にあることも使わない）、値の写像の一致は元の写像が全単射であることを使わず、係数は可換半環でよい。対称性の保存は多項式であることを使わず、写像 $L$ と各変換の持ち上げの入れ替わりだけから従う。計測の道具の `PLANNED_PARTS` は変えていない（ラベルが本文に現れたので数えなくなった）。
 - 2026-11-19（主経路）: 「連結グラフの非自明な頂点分割をまたぐ辺がある」は `ref()` と `\blkref{}` の後続参照がなく、全域木の証明は辺を順に走査しているので本文から参照用ノートへ退避した。有限検算は保管し、Lean 二版は残した。
-- 2026-11-19（並列）: 表の先頭「対称式の基本定理」は、零代入の部分体係数と全次数（零代入の係数の式）・零代入の対称性（置換の延長と代入の合成）・持ち上げ（係数による定義）・重み付き次数の上界（台の包含）・本体（二重帰納法）の五つの論法に分かれるので五行に割り、一つ目を節「対称式の基本定理」（本文二ブロック）・SageMath 一件（$F=\mathbb{Q},\mathbb{Q}(\sqrt2)$、PASS 632）・Lean 具体版・必要十分版・導出版で済ませた。計測の道具の `PLANNED_PARTS` に四行のラベルを足し、本体の依存にした。必要十分版では、係数は可換半環でよく、部分体の代わりに任意の部分集合でよく（零元も和・積での閉性も使わない）、全次数の代わりに二つの指数の重みで $w(b)\le w'(\mathrm{ez}_n(b))$ だけを使う。

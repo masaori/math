@@ -58752,6 +58752,227 @@ d&(e=a\text{ のとき})\\
                 },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_weighted_degree_sum_bound",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_weighted_degree_sum_bound",
+                  kind: "claim",
+                  title: { text: "二つの多項式の和の重み付き次数は重み付き次数の大きい方以下である" },
+                  labels: ["claim_qbar_weighted_degree_sum_bound"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/weighted-degree-sum-and-last-variable-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarWeightedDegree_add_le",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_add_le_necSuf",
+                    "Ising2DLambda.FisherZero.qbarWeightedDegree_add_le_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`A,B\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について",
+                    ]),
+                    displayMath(String.raw`\mathrm{wdeg}_n(A+B)\le\max\bigl(\mathrm{wdeg}_n(A),\mathrm{wdeg}_n(B)\bigr)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_multivariate_weighted_degree"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`a\in\mathrm{spt}_n(A+B)`),
+                      "（",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）を任意に取る。",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      " の和の係数により ",
+                      math(String.raw`\mathrm{mco}_a(A)+\mathrm{mco}_a(B)=\mathrm{mco}_a(A+B)\ne0`),
+                      " である。",
+                      math(String.raw`\mathrm{mco}_a(A)\ne0`),
+                      " のとき ",
+                      math(String.raw`a\in\mathrm{spt}_n(A)`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{wsz}_n(a)
+&\le\mathrm{wdeg}_n(A)
+&&\bigl(\because\ a\in\mathrm{spt}_n(A)\text{ と }\blkref{def_qbar_multivariate_weighted_degree}\text{ の最大元の性質}\bigr)\\
+&\le\max\bigl(\mathrm{wdeg}_n(A),\mathrm{wdeg}_n(B)\bigr)
+&&\bigl(\because\ \max\text{ の定義}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`\mathrm{mco}_a(A)=0`),
+                      " のとき、零は加法の単位元なので ",
+                      math(String.raw`\mathrm{mco}_a(B)=\mathrm{mco}_a(A)+\mathrm{mco}_a(B)\ne0`),
+                      "、すなわち ",
+                      math(String.raw`a\in\mathrm{spt}_n(B)`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{wsz}_n(a)
+&\le\mathrm{wdeg}_n(B)
+&&\bigl(\because\ a\in\mathrm{spt}_n(B)\text{ と }\blkref{def_qbar_multivariate_weighted_degree}\text{ の最大元の性質}\bigr)\\
+&\le\max\bigl(\mathrm{wdeg}_n(A),\mathrm{wdeg}_n(B)\bigr)
+&&\bigl(\because\ \max\text{ の定義}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      math(String.raw`\{0\}\cup\{\,\mathrm{wsz}_n(a)\mid a\in\mathrm{spt}_n(A+B)\,\}`),
+                      " の元はすべて ",
+                      math(String.raw`\max(\mathrm{wdeg}_n(A),\mathrm{wdeg}_n(B))\in\mathbb{N}`),
+                      " 以下であり、その最大元 ",
+                      math(String.raw`\mathrm{wdeg}_n(A+B)`),
+                      "（",
+                      ref("def_qbar_multivariate_weighted_degree"),
+                      "）も同じ値以下である。",
+                      "全過程は自然数の比較と代数的数の係数だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_weighted_degree_last_variable_product_bound",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_weighted_degree_last_variable_product_bound",
+                  kind: "claim",
+                  title: { text: "末尾の変数を掛けた多項式の重み付き次数は末尾の変数の重みだけしか増えない" },
+                  labels: ["claim_qbar_weighted_degree_last_variable_product_bound"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/weighted-degree-sum-and-last-variable-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarMonomial_single_last",
+                    "Ising2DLambda.FisherZero.exponentWeightedTotal_of_single_last_le",
+                    "Ising2DLambda.FisherZero.qbarWeightedDegree_X_last_mul_le",
+                    "Ising2DLambda.NecSuf.FisherZero.monomialProd_single",
+                    "Ising2DLambda.NecSuf.FisherZero.wDeg_X_mul_le_necSuf",
+                    "Ising2DLambda.FisherZero.qbarWeightedDegree_X_last_mul_le_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`S\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について",
+                    ]),
+                    displayMath(String.raw`\mathrm{wdeg}_{n+1}\bigl(X^{(n+1)}_n\cdot S\bigr)\le(n+1)+\mathrm{wdeg}_{n+1}(S)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_multivariate_weighted_degree"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "以下、",
+                      math(String.raw`\delta_n\in\mathrm{Ex}_{n+1}`),
+                      " は ",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      " の指数（",
+                      math(String.raw`\delta_n(n)=1`),
+                      "、",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " で ",
+                      math(String.raw`\delta_n(k)=0`),
+                      "）である。準備として",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mon}_{n+1}(\delta_n)
+&=\prod_{k\in\mathbb{N}_{<n+1}}\bigl(X^{(n+1)}_k\bigr)^{\delta_n(k)}
+&&\bigl(\because\ \blkref{def_qbar_multivariate_monomial}\bigr)\\
+&=\Bigl(\prod_{k\in\mathbb{N}_{<n}}\bigl(X^{(n+1)}_k\bigr)^{\delta_n(k)}\Bigr)\cdot\bigl(X^{(n+1)}_n\bigr)^{\delta_n(n)}
+&&\bigl(\because\ \mathbb{N}_{<n+1}=\mathbb{N}_{<n}\cup\{n\}\text{ による有限積の分離}\bigr)\\
+&=\Bigl(\prod_{k\in\mathbb{N}_{<n}}\bigl(X^{(n+1)}_k\bigr)^{0}\Bigr)\cdot\bigl(X^{(n+1)}_n\bigr)^{1}
+&&\bigl(\because\ \delta_n\text{ の値}\bigr)\\
+&=X^{(n+1)}_n
+&&\bigl(\because\ \text{零乗は単位元、単位元の有限積は単位元、一乗はそれ自身}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a\in\mathrm{spt}_{n+1}(X^{(n+1)}_n\cdot S)`),
+                      "（",
+                      ref("def_qbar_multivariate_total_degree"),
+                      "）を任意に取る。準備と ",
+                      ref("claim_qbar_monomial_multiplication_coefficient"),
+                      " により、",
+                      math(String.raw`\mathrm{mco}_a(X^{(n+1)}_n\cdot S)=\mathrm{mco}_a(\mathrm{mon}_{n+1}(\delta_n)\cdot S)`),
+                      " は ",
+                      math(String.raw`\delta_n\le a`),
+                      " のとき ",
+                      math(String.raw`\mathrm{mco}_{a-\delta_n}(S)`),
+                      "、そうでないとき ",
+                      math(String.raw`0`),
+                      " である。これは ",
+                      math(String.raw`0`),
+                      " でないので、",
+                      math(String.raw`\delta_n\le a`),
+                      " かつ ",
+                      math(String.raw`\mathrm{mco}_{a-\delta_n}(S)\ne0`),
+                      "、すなわち ",
+                      math(String.raw`a-\delta_n\in\mathrm{spt}_{n+1}(S)`),
+                      " である。",
+                      math(String.raw`\delta_n\le a`),
+                      " なので、",
+                      ref("def_qbar_multivariate_monomial"),
+                      " の指数の差の定義から、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n+1}`),
+                      " で ",
+                      math(String.raw`a(k)=\delta_n(k)+(a-\delta_n)(k)`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{wsz}_{n+1}(a)
+&=\sum_{k\in\mathbb{N}_{<n+1}}(k+1)\cdot a(k)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_weighted_degree}\text{ の }\mathrm{wsz}_{n+1}\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n+1}}(k+1)\cdot\bigl(\delta_n(k)+(a-\delta_n)(k)\bigr)
+&&\bigl(\because\ a(k)=\delta_n(k)+(a-\delta_n)(k)\bigr)\\
+&=\sum_{k\in\mathbb{N}_{<n+1}}(k+1)\cdot\delta_n(k)+\sum_{k\in\mathbb{N}_{<n+1}}(k+1)\cdot(a-\delta_n)(k)
+&&\bigl(\because\ \mathbb{N}\text{ の分配法則、加法の結合法則と交換法則}\bigr)\\
+&=(n+1)+\sum_{k\in\mathbb{N}_{<n+1}}(k+1)\cdot(a-\delta_n)(k)
+&&\bigl(\because\ \delta_n\text{ の値により第一の和で残るのは }k=n\text{ の項 }(n+1)\cdot1\text{ だけ}\bigr)\\
+&=(n+1)+\mathrm{wsz}_{n+1}(a-\delta_n)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_weighted_degree}\text{ の }\mathrm{wsz}_{n+1}\bigr)\\
+&\le(n+1)+\mathrm{wdeg}_{n+1}(S)
+&&\bigl(\because\ a-\delta_n\in\mathrm{spt}_{n+1}(S)\text{ と }\blkref{def_qbar_multivariate_weighted_degree}\text{ の最大元の性質}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      math(String.raw`\{0\}\cup\{\,\mathrm{wsz}_{n+1}(a)\mid a\in\mathrm{spt}_{n+1}(X^{(n+1)}_n\cdot S)\,\}`),
+                      " の元はすべて ",
+                      math(String.raw`(n+1)+\mathrm{wdeg}_{n+1}(S)\in\mathbb{N}`),
+                      " 以下であり、その最大元 ",
+                      math(String.raw`\mathrm{wdeg}_{n+1}(X^{(n+1)}_n\cdot S)`),
+                      "（",
+                      ref("def_qbar_multivariate_weighted_degree"),
+                      "）も同じ値以下である。",
+                      "零因子が無いことは使っていない。",
+                      "全過程は自然数の比較と代数的数の係数だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
         ],
       },
     },
