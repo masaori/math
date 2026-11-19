@@ -1,0 +1,3 @@
+Frac(QQ[a, t]) で恒等的な段 3 個と、t = 2 での両端 4 組を確かめた
+negative controls (broken lines detected): 2
+RESULT: PASS

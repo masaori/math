@@ -2838,6 +2838,65 @@ a^{-1}\cdot b^{-1}
     },
   },
   {
+    id: "calculation_formulae_claim_real_times_half_is_quotient_by_two",
+    kind: "claim",
+    title: { text: "実数に 1/2 を掛けると 2 で割った商になる" },
+    labels: ["real_times_half_is_quotient_by_two"],
+    statement: [
+      paragraph([
+        math(String.raw`a \in \mathbb{R}`),
+        " とする。積・",
+        math(String.raw`1`),
+        "・乗法の逆元 ",
+        math(String.raw`x^{-1}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        "、",
+        math(String.raw`\tfrac12 \in \mathbb{R}`),
+        " と ",
+        math(String.raw`\tfrac{a}{2} \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to 1,\ z \to 2`),
+        " と ",
+        math(String.raw`y \to a,\ z \to 2`),
+        "。",
+        math(String.raw`2 \neq 0`),
+        " は ",
+        ref("real_two_is_nonzero"),
+        "）である。このとき",
+      ]),
+      displayMath(String.raw`a\cdot\tfrac12 = \tfrac{a}{2}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+a\cdot\tfrac12
+&= a\cdot\left(1\cdot 2^{-1}\right)
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to 1,\ z \to 2)\bigr)\\
+&= a\cdot 2^{-1}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to 2^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \tfrac{a}{2}
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to a,\ z \to 2)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-19（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_of_epsilon_V_plus_via_check_eigenvalues の Step 4 の 2 本目の和の鎖が「ℝ で a·1/2 = a/2」を名前だけで根拠にしていたので、示す主張として足した（eigenvalues_of_V_plus の同じ形の行は別の回で扱う）。Lean の具体版は Ising2D.real_times_half_is_quotient_by_two（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealTimesHalfIsQuotientByTwo.lean）、必要十分版は Ising2D.NecSuf.mul_one_div_eq_div'（NecSuf/MulOneDivEqDiv.lean）。数値検証: sagemath/check/real_times_half_is_quotient_by_two/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_inverse_of_positive_is_positive",
     kind: "claim",
     title: { text: "正の実数の乗法の逆元は正" },

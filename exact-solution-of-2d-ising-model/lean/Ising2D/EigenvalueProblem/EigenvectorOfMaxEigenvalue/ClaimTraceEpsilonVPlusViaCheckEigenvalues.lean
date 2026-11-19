@@ -56,6 +56,7 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfPositiveRealsIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwoIsNonzero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealOneMinusHalfIsHalf
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesHalfIsQuotientByTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealLessThanIsAsymmetric
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
@@ -546,7 +547,8 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
                                                         -- `real_times_negation_is_negation_of_product`（`x → γ(θ̃_μ)`、`t → 1/2`）を各因子へ同時に
     _ = (∏ μ, (Real.exp (D.gam μ / 2) - Real.exp (-(D.gam μ / 2)))) * D.C := by
         congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
-        rw [mul_one_div (D.gam μ) 2]                    -- ℝ で `a·(1/2) = a/2`（`a → γ(θ̃_μ)`）を各因子の 2 箇所へ同時に
+        rw [real_times_half_is_quotient_by_two (D.gam μ)]
+                                                        -- `real_times_half_is_quotient_by_two`（`a → γ(θ̃_μ)`）を各因子の 2 箇所へ同時に
     _ = (∏ μ, 2 * ((Real.exp (D.gam μ / 2) - Real.exp (-(D.gam μ / 2))) / 2)) * D.C := by
         congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
         rw [mul_div_cancel₀ _ (two_ne_zero : (2 : ℝ) ≠ 0)]

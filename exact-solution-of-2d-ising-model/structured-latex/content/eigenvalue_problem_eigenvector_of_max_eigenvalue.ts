@@ -1778,7 +1778,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(-\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \blkref{real_times_negation_is_negation_of_product}\ (x \to \gamma(\tilde\theta_\mu),\ t \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) - \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a\cdot\tfrac12 = \tfrac{a}{2}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子の 2 箇所へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{real_times_half_is_quotient_by_two}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子の 2 箇所へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}2\cdot\frac{\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) - \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)}{2}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ 2 \ne 0\ \text{なので}\ b = 2\cdot\tfrac{b}{2}\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
@@ -1985,6 +1985,7 @@ r
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: exp(γ(θ~_μ)(−½)) = exp(−(γ(θ~_μ)·½)) の行の根拠「ℝ で a(−b) = −(ab)」を、主張 real_times_negation_is_negation_of_product（x → γ(θ~_μ), t → ½ を各因子へ同時に）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 4 の 2 本目の和の鎖の「ℝ で a + (−1)b = a − b を各因子へ同時に」の行を、real_minus_one_times_is_negation（a → exp(γ(θ̃_μ)(0 − ½))）を各因子へ当てる行と def_real_difference（y → exp(γ(θ̃_μ)(1 − ½))、z → exp(γ(θ̃_μ)(0 − ½))）を右辺から左辺へ各因子へ当てる行の 2 行に割った。鎖の両端と主張は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認）: Step 4 の 2 本目の和の鎖の名前だけの根拠のうち、「ℝ で 1·b = b」を ℝ の乗法の単位元 1·x = x（x → exp(γ(θ̃_μ)(1 − ½))、set_and_algebra_notation）に、「ℝ で 1 − 1/2 = 1/2」を新しく足した主張 real_one_minus_half_is_half の参照に替えた。鎖の両端と主張は不変。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認）: 同じ鎖の「ℝ で a·1/2 = a/2（a → γ(θ̃_μ)）」を、新しく足した主張 real_times_half_is_quotient_by_two の参照に替えた。鎖の両端と主張は不変。",
       ],
     },
   },
