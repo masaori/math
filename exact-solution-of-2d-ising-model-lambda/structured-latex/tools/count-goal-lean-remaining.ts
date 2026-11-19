@@ -224,12 +224,17 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
     title: "根の対の整数倍のずらしの基本対称式は対称である",
     dependsOn: [],
   },
+  claim_pair_shift_elementary_symmetric_subfield_coefficient: {
+    title: "部分体の元の倍のずらしの値を基本対称式へ代入した多項式はその部分体を係数とする",
+    dependsOn: [],
+  },
   claim_pair_shift_root_polynomial_subfield_coefficient: {
     title: "根の対の整数倍のずらしを根とする多項式は部分体係数である",
     dependsOn: [
       "claim_symmetric_polynomial_fundamental_theorem",
       "claim_linear_factor_product_coefficient_elementary_symmetric",
       "claim_pair_shift_elementary_symmetric_is_symmetric",
+      "claim_pair_shift_elementary_symmetric_subfield_coefficient",
     ],
   },
   claim_adjoin_imaginary_unit_gives_algebraic_numbers: {

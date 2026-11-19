@@ -60280,6 +60280,411 @@ N+1
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_pair_shift_elementary_symmetric",
+        labels: [],
+        title: { text: "根の対の整数倍のずらしの基本対称式" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_pair_shift_values",
+              focus:
+                {
+                  id: "zero_pinching_def_pair_shift_values",
+                  kind: "definition",
+                  title: { text: "根の番号の対のずらしの値" },
+                  labels: ["def_pair_shift_values"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.FisherZero.RootIndexPair",
+                    "Ising2DLambda.FisherZero.pairShiftValues",
+                  ],
+                  verification: ["sagemath/check/pair-shift-elementary-symmetric"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`d\in\mathbb{N}`),
+                      " に対して、根の番号の対の集合を",
+                    ]),
+                    displayMath(String.raw`\mathrm{Pr}_d:=\bigl\{\,(i,j)\in\mathbb{N}_{<d}\times\mathbb{N}_{<d}\ \bigm|\ i<j\,\bigr\}`),
+                    paragraph([
+                      "と置く（有限集合）。",
+                      math(String.raw`N\in\mathbb{N}`),
+                      " と全単射 ",
+                      math(String.raw`\nu:\mathbb{N}_{<N}\to\mathrm{Pr}_d`),
+                      " を取り、",
+                      math(String.raw`r\in\mathbb{N}_{<N}`),
+                      " について ",
+                      math(String.raw`\nu(r)=(\nu_1(r),\nu_2(r))`),
+                      " と成分を書く。",
+                      math(String.raw`c\in\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）に対して、写像 ",
+                      math(String.raw`\mathrm{ps}_{c,\nu}:\mathbb{N}_{<N}\to\overline{\mathbb{Q}}[X_{<d}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）を",
+                    ]),
+                    displayMath(String.raw`\mathrm{ps}_{c,\nu}(r):=X^{(d)}_{\nu_1(r)}+X^{(d)}_{\nu_2(r)}+\mathrm{mk}_d(c)\cdot X^{(d)}_{\nu_1(r)}\cdot X^{(d)}_{\nu_2(r)}\qquad(r\in\mathbb{N}_{<N})`),
+                    paragraph([
+                      "と定め、根の番号の対の ",
+                      math(String.raw`c`),
+                      " 倍のずらしの値と呼ぶ。",
+                      math(String.raw`N`),
+                      " 変数の多項式への代入 ",
+                      math(String.raw`\mathrm{ms}_{\mathrm{ps}_{c,\nu}}:\overline{\mathbb{Q}}[X_{<N}]\to\overline{\mathbb{Q}}[X_{<d}]`),
+                      " は ",
+                      ref("def_qbar_multivariate_substitution"),
+                      " のものである。",
+                      "現れるのは有限集合の全単射、代数的数と有限和・有限積だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_pair_shift_elementary_symmetric_is_symmetric",
+              focus:
+                {
+                  id: "zero_pinching_claim_pair_shift_elementary_symmetric_is_symmetric",
+                  kind: "claim",
+                  title: { text: "根の対のずらしの値を基本対称式へ代入した多項式は対称である" },
+                  labels: ["claim_pair_shift_elementary_symmetric_is_symmetric"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/pair-shift-elementary-symmetric"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.pairPermutationFun",
+                    "Ising2DLambda.FisherZero.pairPermutationFun_symm",
+                    "Ising2DLambda.FisherZero.pairPermutation",
+                    "Ising2DLambda.FisherZero.pairIndexPermutation",
+                    "Ising2DLambda.FisherZero.variablePermutation_pairShiftValues",
+                    "Ising2DLambda.FisherZero.pairShiftElementarySymmetric_isQbarSymmetric",
+                    "Ising2DLambda.NecSuf.FisherZero.aeval_perm_pairShiftValues_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.pairShiftElementarySymmetric_equivInvariant_necSuf",
+                    "Ising2DLambda.FisherZero.pairShiftElementarySymmetric_isQbarSymmetric_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`d,N\in\mathbb{N}`),
+                      "、全単射 ",
+                      math(String.raw`\nu:\mathbb{N}_{<N}\to\mathrm{Pr}_d`),
+                      "、",
+                      math(String.raw`c\in\overline{\mathbb{Q}}`),
+                      " を取る（",
+                      ref("def_pair_shift_values"),
+                      "）。任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について、",
+                      math(String.raw`\mathrm{ms}_{\mathrm{ps}_{c,\nu}}\bigl(\mathrm{es}_{N,k}\bigr)\in\overline{\mathbb{Q}}[X_{<d}]`),
+                      "（",
+                      ref("def_qbar_multivariate_substitution"),
+                      "、",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "）は対称である（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`\varrho\in\mathfrak{P}_d`),
+                      "（",
+                      ref("def_qbar_variable_permutation"),
+                      "）を任意に取る。",
+                      "以下、",
+                      math(String.raw`\mathrm{ps}:=\mathrm{ps}_{c,\nu}`),
+                      " と略す。準備を四つ置く。",
+                    ]),
+                    paragraph([
+                      "第一に、",
+                      math(String.raw`(i,j)\in\mathrm{Pr}_d`),
+                      " なら ",
+                      math(String.raw`i\ne j`),
+                      " で ",
+                      math(String.raw`\varrho`),
+                      " は単射なので ",
+                      math(String.raw`\varrho(i)\ne\varrho(j)`),
+                      "、よって ",
+                      math(String.raw`\min(\varrho(i),\varrho(j))<\max(\varrho(i),\varrho(j))`),
+                      " であり、写像",
+                    ]),
+                    displayMath(String.raw`\mathrm{pp}_\varrho:\mathrm{Pr}_d\to\mathrm{Pr}_d,\qquad\mathrm{pp}_\varrho(i,j):=\bigl(\min(\varrho(i),\varrho(j)),\ \max(\varrho(i),\varrho(j))\bigr)`),
+                    paragraph([
+                      "が定まる（",
+                      math(String.raw`\min`),
+                      "・",
+                      math(String.raw`\max`),
+                      " は ",
+                      math(String.raw`\mathbb{N}`),
+                      " の順序による）。",
+                      math(String.raw`\mathrm{pp}_\varrho(i,j)`),
+                      " の二つの成分の集合は ",
+                      math(String.raw`\{\varrho(i),\varrho(j)\}`),
+                      " なので、",
+                      math(String.raw`\mathrm{pp}_{\varrho^{-1}}(\mathrm{pp}_\varrho(i,j))`),
+                      " の二つの成分の集合は ",
+                      math(String.raw`\{\varrho^{-1}(\varrho(i)),\varrho^{-1}(\varrho(j))\}=\{i,j\}`),
+                      " であり、",
+                      math(String.raw`i<j`),
+                      " から ",
+                      math(String.raw`\mathrm{pp}_{\varrho^{-1}}(\mathrm{pp}_\varrho(i,j))=(i,j)`),
+                      " である。",
+                      math(String.raw`\varrho^{-1}\in\mathfrak{P}_d`),
+                      " と ",
+                      math(String.raw`(\varrho^{-1})^{-1}=\varrho`),
+                      " に同じことを当てて ",
+                      math(String.raw`\mathrm{pp}_\varrho(\mathrm{pp}_{\varrho^{-1}}(p))=p`),
+                      "（",
+                      math(String.raw`p\in\mathrm{Pr}_d`),
+                      "）も成り立つので、",
+                      math(String.raw`\mathrm{pp}_\varrho`),
+                      " は全単射である。",
+                    ]),
+                    paragraph([
+                      "第二に、",
+                      math(String.raw`\mathrm{ip}_\varrho:=\nu^{-1}\circ\mathrm{pp}_\varrho\circ\nu:\mathbb{N}_{<N}\to\mathbb{N}_{<N}`),
+                      " は全単射の合成なので ",
+                      math(String.raw`\mathrm{ip}_\varrho\in\mathfrak{P}_N`),
+                      " であり、任意の ",
+                      math(String.raw`r\in\mathbb{N}_{<N}`),
+                      " で ",
+                      math(String.raw`\nu(\mathrm{ip}_\varrho(r))=\mathrm{pp}_\varrho(\nu(r))`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      "第三に、",
+                      math(String.raw`r\in\mathbb{N}_{<N}`),
+                      " を取り、",
+                      math(String.raw`(i,j):=\nu(r)`),
+                      "、",
+                      math(String.raw`(i',j'):=\mathrm{pp}_\varrho(i,j)`),
+                      " と置く。",
+                      math(String.raw`\{i',j'\}=\{\varrho(i),\varrho(j)\}`),
+                      " なので、",
+                      math(String.raw`(i',j')`),
+                      " は ",
+                      math(String.raw`(\varrho(i),\varrho(j))`),
+                      " か ",
+                      math(String.raw`(\varrho(j),\varrho(i))`),
+                      " のどちらかである。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{vs}_\varrho\bigl(\mathrm{ps}(r)\bigr)
+&=\mathrm{vs}_\varrho\Bigl(X^{(d)}_{i}+X^{(d)}_{j}+\mathrm{mk}_d(c)\cdot X^{(d)}_{i}\cdot X^{(d)}_{j}\Bigr)
+&&\bigl(\because\ \blkref{def_pair_shift_values}\bigr)\\
+&=\mathrm{vs}_\varrho\bigl(X^{(d)}_{i}\bigr)+\mathrm{vs}_\varrho\bigl(X^{(d)}_{j}\bigr)+\mathrm{vs}_\varrho\bigl(\mathrm{mk}_d(c)\bigr)\cdot\mathrm{vs}_\varrho\bigl(X^{(d)}_{i}\bigr)\cdot\mathrm{vs}_\varrho\bigl(X^{(d)}_{j}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_\varrho\text{ は }\blkref{def_qbar_multivariate_substitution}\text{ の代入で、和と積を保つ}\bigr)\\
+&=X^{(d)}_{\varrho(i)}+X^{(d)}_{\varrho(j)}+\mathrm{mk}_d(c)\cdot X^{(d)}_{\varrho(i)}\cdot X^{(d)}_{\varrho(j)}
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_\varrho(X^{(d)}_k)=X^{(d)}_{\varrho(k)}\text{ と }\blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(\mathrm{mk}_d(c))=\mathrm{mk}_d(c)\bigr)\\
+&=X^{(d)}_{i'}+X^{(d)}_{j'}+\mathrm{mk}_d(c)\cdot X^{(d)}_{i'}\cdot X^{(d)}_{j'}
+&&\bigl(\because\ (i',j')\text{ は }(\varrho(i),\varrho(j))\text{ か }(\varrho(j),\varrho(i))\text{、後者なら }\blkref{def_qbar_multivariate_polynomial_ring}\text{ の和と積の可換律}\bigr)\\
+&=\mathrm{ps}\bigl(\mathrm{ip}_\varrho(r)\bigr)
+&&\bigl(\because\ \text{第二の準備の }\nu(\mathrm{ip}_\varrho(r))=\mathrm{pp}_\varrho(\nu(r))=(i',j')\text{ と }\blkref{def_pair_shift_values}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。第四に、任意の ",
+                      math(String.raw`r\in\mathbb{N}_{<N}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ms}_{\mathrm{ps}}\bigl(\mathrm{xv}_{N,\mathrm{ip}_\varrho}(r)\bigr)
+&=\mathrm{ms}_{\mathrm{ps}}\bigl(X^{(N)}_{\mathrm{ip}_\varrho(r)}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{xv}_{N,\mathrm{ip}_\varrho}\bigr)\\
+&=\mathrm{ps}\bigl(\mathrm{ip}_\varrho(r)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(X^{(N)}_k)=y(k)\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。準備の第三と第四により、写像 ",
+                      math(String.raw`\mathrm{vs}_\varrho\circ\mathrm{ps}`),
+                      "、",
+                      math(String.raw`\mathrm{ps}\circ\mathrm{ip}_\varrho`),
+                      "、",
+                      math(String.raw`\mathrm{ms}_{\mathrm{ps}}\circ\mathrm{xv}_{N,\mathrm{ip}_\varrho}`),
+                      "（いずれも ",
+                      math(String.raw`\mathbb{N}_{<N}\to\overline{\mathbb{Q}}[X_{<d}]`),
+                      "）は各点で値が等しいので、等しい写像である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{vs}_\varrho\Bigl(\mathrm{ms}_{\mathrm{ps}}\bigl(\mathrm{es}_{N,k}\bigr)\Bigr)
+&=\mathrm{ms}_{\mathrm{xv}_{d,\varrho}}\Bigl(\mathrm{ms}_{\mathrm{ps}}\bigl(\mathrm{es}_{N,k}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_\varrho\bigr)\\
+&=\mathrm{ms}_{\mathrm{vs}_\varrho\circ\mathrm{ps}}\bigl(\mathrm{es}_{N,k}\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ を }e=\mathrm{ps},\ y=\mathrm{xv}_{d,\varrho}\text{ へ当てる}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ps}\circ\mathrm{ip}_\varrho}\bigl(\mathrm{es}_{N,k}\bigr)
+&&\bigl(\because\ \text{第三の準備}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ms}_{\mathrm{ps}}\circ\mathrm{xv}_{N,\mathrm{ip}_\varrho}}\bigl(\mathrm{es}_{N,k}\bigr)
+&&\bigl(\because\ \text{第四の準備}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ps}}\Bigl(\mathrm{ms}_{\mathrm{xv}_{N,\mathrm{ip}_\varrho}}\bigl(\mathrm{es}_{N,k}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ を }e=\mathrm{xv}_{N,\mathrm{ip}_\varrho},\ y=\mathrm{ps}\text{ へ当てる}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ps}}\Bigl(\mathrm{vs}_{\mathrm{ip}_\varrho}\bigl(\mathrm{es}_{N,k}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_{\mathrm{ip}_\varrho}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ps}}\bigl(\mathrm{es}_{N,k}\bigr)
+&&\bigl(\because\ \text{第二の準備の }\mathrm{ip}_\varrho\in\mathfrak{P}_N\text{ と }\blkref{claim_qbar_elementary_symmetric_is_symmetric}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`\varrho`),
+                      " は任意だったので、",
+                      ref("def_qbar_symmetric_polynomial"),
+                      " により ",
+                      math(String.raw`\mathrm{ms}_{\mathrm{ps}}(\mathrm{es}_{N,k})`),
+                      " は対称である。",
+                      "全過程は有限集合の全単射と代数的数を係数とする多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_pair_shift_elementary_symmetric_subfield_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_pair_shift_elementary_symmetric_subfield_coefficient",
+                  kind: "claim",
+                  title: { text: "部分体の元の倍のずらしの値を基本対称式へ代入した多項式はその部分体を係数とする" },
+                  labels: ["claim_pair_shift_elementary_symmetric_subfield_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/pair-shift-elementary-symmetric"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.pairShiftValues_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.FisherZero.pairShiftElementarySymmetric_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.pairShiftElementarySymmetric_mem_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.pairShiftElementarySymmetric_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`d,N\in\mathbb{N}`),
+                      "、全単射 ",
+                      math(String.raw`\nu:\mathbb{N}_{<N}\to\mathrm{Pr}_d`),
+                      "、",
+                      math(String.raw`c\in F`),
+                      " とする（",
+                      ref("def_pair_shift_values"),
+                      "）。任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`\mathrm{ms}_{\mathrm{ps}_{c,\nu}}\bigl(\mathrm{es}_{N,k}\bigr)\in F[X_{<d}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`\mathrm{ps}:=\mathrm{ps}_{c,\nu}`),
+                      " と略す。準備を二つ置く。第一に、任意の ",
+                      math(String.raw`A,B\in F[X_{<d}]`),
+                      " について ",
+                      math(String.raw`A+B\in F[X_{<d}]`),
+                      "、",
+                      math(String.raw`A\cdot B\in F[X_{<d}]`),
+                      " であり、任意の ",
+                      math(String.raw`e\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`A^{e}\in F[X_{<d}]`),
+                      " である。前の二つは ",
+                      ref("claim_subfield_coefficient_multivariate_finite_sum"),
+                      " と ",
+                      ref("claim_subfield_coefficient_multivariate_finite_product"),
+                      " を二元の集合 ",
+                      math(String.raw`I=\{0,1\}`),
+                      "（",
+                      math(String.raw`P(0)=A`),
+                      "、",
+                      math(String.raw`P(1)=B`),
+                      "）に使ったもの、最後は ",
+                      math(String.raw`A^{e}=\prod_{i\in\mathbb{N}_{<e}}A`),
+                      " に ",
+                      ref("claim_subfield_coefficient_multivariate_finite_product"),
+                      " を使ったものである。",
+                      "第二に、任意の ",
+                      math(String.raw`r\in\mathbb{N}_{<N}`),
+                      " について ",
+                      math(String.raw`\mathrm{ps}(r)\in F[X_{<d}]`),
+                      " である。実際、",
+                      ref("claim_subfield_coefficient_multivariate_variable"),
+                      " により ",
+                      math(String.raw`X^{(d)}_{\nu_1(r)},X^{(d)}_{\nu_2(r)}\in F[X_{<d}]`),
+                      "、",
+                      math(String.raw`c\in F`),
+                      " と ",
+                      ref("claim_subfield_coefficient_multivariate_constant"),
+                      " により ",
+                      math(String.raw`\mathrm{mk}_d(c)\in F[X_{<d}]`),
+                      " であり、",
+                      ref("def_pair_shift_values"),
+                      " の三項に第一の準備の積を二回、和を二回使う。",
+                    ]),
+                    paragraph([
+                      ref("claim_qbar_elementary_symmetric_subfield_coefficient"),
+                      " により ",
+                      math(String.raw`\mathrm{es}_{N,k}\in F[X_{<N}]`),
+                      " である。",
+                      math(String.raw`A_k:=\{\,a\in\mathrm{Ex}_N\mid\mathrm{mco}_a(\mathrm{es}_{N,k})\ne0\,\}`),
+                      "（有限集合。",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）と置き、",
+                      math(String.raw`a\in A_k`),
+                      " に対して",
+                    ]),
+                    displayMath(String.raw`T_a:=\mathrm{mk}_d\bigl(\mathrm{mco}_a(\mathrm{es}_{N,k})\bigr)\cdot\prod_{r\in\mathbb{N}_{<N}}\mathrm{ps}(r)^{a(r)}\ \in\ \overline{\mathbb{Q}}[X_{<d}]`),
+                    paragraph([
+                      "と置く。",
+                      math(String.raw`a\in A_k`),
+                      " を任意に取る。",
+                      math(String.raw`\mathrm{mco}_a(\mathrm{es}_{N,k})\in F`),
+                      " なので ",
+                      ref("claim_subfield_coefficient_multivariate_constant"),
+                      " により ",
+                      math(String.raw`\mathrm{mk}_d(\mathrm{mco}_a(\mathrm{es}_{N,k}))\in F[X_{<d}]`),
+                      " である。第二の準備と第一の準備の冪により、任意の ",
+                      math(String.raw`r\in\mathbb{N}_{<N}`),
+                      " で ",
+                      math(String.raw`\mathrm{ps}(r)^{a(r)}\in F[X_{<d}]`),
+                      " であり、",
+                      ref("claim_subfield_coefficient_multivariate_finite_product"),
+                      "（",
+                      math(String.raw`I=\mathbb{N}_{<N}`),
+                      "）と第一の準備の積により ",
+                      math(String.raw`T_a\in F[X_{<d}]`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ms}_{\mathrm{ps}}\bigl(\mathrm{es}_{N,k}\bigr)
+&=\sum_{a\in A_k}\mathrm{mk}_d\bigl(\mathrm{mco}_a(\mathrm{es}_{N,k})\bigr)\cdot\prod_{r\in\mathbb{N}_{<N}}\mathrm{ps}(r)^{a(r)}
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_{\mathrm{ps}}\bigr)\\
+&=\sum_{a\in A_k}T_a
+&&\bigl(\because\ T_a\text{ の置き方}\bigr)\\
+&\in F[X_{<d}]
+&&\bigl(\because\ T_a\in F[X_{<d}]\text{ と }\blkref{claim_subfield_coefficient_multivariate_finite_sum}\text{（}I=A_k\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体の元と有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
