@@ -17,7 +17,11 @@ def fsum(rs):
 
 
 # m = 1
-lines1 = [fsum([a[0] + b[0]]), a[0] + b[0], fsum([a[0]]) + fsum([b[0]])]
+lines1 = [
+    fsum([a[0] + b[0]]),                                          # Σ^{1}(a_j + b_j)
+    a[0] + b[0],                                                  # def_finite_sum_of_real_numbers（r_j → a_j + b_j）
+    fsum([a[0]]) + fsum([b[0]]),                                  # def_finite_sum_of_real_numbers（r_j → a_j; r_j → b_j）を右辺から左辺へ 2 か所同時適用
+]
 for t in range(len(lines1) - 1):
     assert lines1[t] == lines1[t + 1], (1, t)
 count = 2
