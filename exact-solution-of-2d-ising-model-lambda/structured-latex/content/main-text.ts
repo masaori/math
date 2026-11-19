@@ -10662,29 +10662,29 @@ p(\tau(i))&=\upsilon(\tau(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_s
               proof: [
                 paragraph(["この証明の中では ", math(String.raw`C:=C_{\tau,\upsilon}\subseteq\mathcal J`), "、", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}:\mathcal J\to\mathcal J`), "、", math(String.raw`\eta:=\eta_{\tau,\upsilon}:\mathcal J\to\mathcal J`), " と略す。任意の ", math(String.raw`i\in\mathcal J`), " を固定し、", math(String.raw`i\in C`), " か否かで場合分けする。まず ", math(String.raw`i\in C`), " の場合、"]),
                 displayMath(String.raw`\begin{aligned}
-\tau(i)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates},\ i\in C\bigr),\\
-\upsilon(i)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates},\ i\in C\bigr).
+\tau(i)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates},\ i\in C\bigr)\\
+\upsilon(i)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates},\ i\in C\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 \eta(\sigma(i))&=\eta(\tau(i))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\in C\bigr)\\
 &=\tau(\tau(i))&&\bigl(\because\ \blkref{def_matching_pair_predecessor},\ \tau(i)\notin C\bigr)\\
-&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr),\\
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr)\\
 \sigma(\eta(i))&=\sigma(\upsilon(i))&&\bigl(\because\ \blkref{def_matching_pair_predecessor},\ i\in C\bigr)\\
 &=\upsilon(\upsilon(i))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ \upsilon(i)\notin C\bigr)\\
-&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr).
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr)
 \end{aligned}`),
                 paragraph(["次に ", math(String.raw`i\notin C`), " の場合、"]),
                 displayMath(String.raw`\begin{aligned}
-\upsilon(i)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates},\ i\notin C\bigr),\\
-\tau(i)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates},\ i\notin C\bigr).
+\upsilon(i)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates},\ i\notin C\bigr)\\
+\tau(i)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates},\ i\notin C\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 \eta(\sigma(i))&=\eta(\upsilon(i))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\notin C\bigr)\\
 &=\upsilon(\upsilon(i))&&\bigl(\because\ \blkref{def_matching_pair_predecessor},\ \upsilon(i)\in C\bigr)\\
-&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr),\\
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr)\\
 \sigma(\eta(i))&=\sigma(\tau(i))&&\bigl(\because\ \blkref{def_matching_pair_predecessor},\ i\notin C\bigr)\\
 &=\tau(\tau(i))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ \tau(i)\in C\bigr)\\
-&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr).
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr)
 \end{aligned}`),
                 paragraph(["両場合で二つの合成が恒等写像になるので、二写像は互いに逆である。空集合では全称条件が成り立ち、共有する対でも同じ計算を使う。有限番号集合とその写像だけを扱い、実数体への脱出はない。"]),
               ],
