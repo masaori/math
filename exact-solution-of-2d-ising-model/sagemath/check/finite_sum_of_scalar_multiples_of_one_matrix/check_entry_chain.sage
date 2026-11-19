@@ -20,7 +20,7 @@ for m in [1, 2, 3]:
                         lhs[i, k],                                          # (Σ_j (c_jA))_{ik}
                         sum(body_scalar(c[j], A)[i, k] for j in range(r)),  # finite_sum_of_matrices_entrywise
                         sum(c[j] * A[i, k] for j in range(r)),              # def_matrix_scalar_multiple
-                        csum * A[i, k],                                     # ℂ の有限和の分配則
+                        csum * A[i, k],                                     # ℂ の有限和の分配律
                         rhs[i, k],                                          # def_matrix_scalar_multiple
                     ]
                     for t in range(len(lines) - 1):

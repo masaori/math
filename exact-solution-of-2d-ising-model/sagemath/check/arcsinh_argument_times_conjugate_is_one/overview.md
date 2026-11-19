@@ -12,7 +12,7 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
-| 1・2 行目 分配則、ys = sy と並べ替え | `check_proof_lines.sage` | s を独立な不定元に置いた QQ[y,s] で | **PASS** | 成り立つ |
+| 1・2 行目 分配律、ys = sy と並べ替え | `check_proof_lines.sage` | s を独立な不定元に置いた QQ[y,s] で | **PASS** | 成り立つ |
 | 3・4 行目 s² = y²+1、四則 | `check_proof_lines.sage` | 剰余環 QQ[y,s]/(s²-y²-1) で。対照として s を独立に置くと 3 行目は成り立たない | **PASS** | 成り立つ |
 | 主張そのもの | `check_proof_lines.sage` | y の 7 点で s を AA の √(y²+1) として厳密に | **PASS** | 成り立つ |
 

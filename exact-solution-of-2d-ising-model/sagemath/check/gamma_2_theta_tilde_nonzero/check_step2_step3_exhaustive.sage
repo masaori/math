@@ -24,7 +24,7 @@ for M in range(2, MMAX + 1):
         L4 = any(2 * (QQ(mu) - QQ(1)/2) / M == k for k in KR)
         # 行 5: ∃k: 2(μ-1/2) = kM（M 倍した。QQ の等式）
         L5 = any(2 * (QQ(mu) - QQ(1)/2) == k * M for k in KR)
-        # 行 6: ∃k: 2μ - 1 = kM（分配則。ZZ の等式）
+        # 行 6: ∃k: 2μ - 1 = kM（分配律。ZZ の等式）
         rep_distrib = (2 * (QQ(mu) - QQ(1)/2) == 2 * mu - 1)
         L6 = any(2 * mu - 1 == k * M for k in KR)
         ok = (L1 == L2 == L3 == L4 == L5 == L6) and rep_ok_builtin and rep_distrib

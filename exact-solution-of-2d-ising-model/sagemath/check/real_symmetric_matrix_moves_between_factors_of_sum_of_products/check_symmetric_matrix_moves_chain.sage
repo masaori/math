@@ -34,12 +34,12 @@ for n in [1, 2, 3, 4, 5]:
     lines = [
         lsum(Qu[k] * v[k] for k in N),                                     # Σ_k (Qu)_k v_k
         lsum(lsum(Q[k][l] * u[l] for l in N) * v[k] for k in N),           # def_real_matrix_vector_product を各 k へ
-        lsum(v[k] * lsum(Q[k][l] * u[l] for l in N) for k in N),           # 可換則を各 k へ
+        lsum(v[k] * lsum(Q[k][l] * u[l] for l in N) for k in N),           # 可換律を各 k へ
         lsum(lsum(v[k] * (Q[k][l] * u[l]) for l in N) for k in N),         # finite_sum_of_real_scalar_multiples を右辺から左辺へ
         lsum(lsum(v[k] * (Q[l][k] * u[l]) for l in N) for k in N),         # Q は対称
-        lsum(lsum((Q[l][k] * u[l]) * v[k] for l in N) for k in N),         # 可換則
-        lsum(lsum((u[l] * Q[l][k]) * v[k] for l in N) for k in N),         # 可換則
-        lsum(lsum(u[l] * (Q[l][k] * v[k]) for l in N) for k in N),         # 結合則
+        lsum(lsum((Q[l][k] * u[l]) * v[k] for l in N) for k in N),         # 可換律
+        lsum(lsum((u[l] * Q[l][k]) * v[k] for l in N) for k in N),         # 可換律
+        lsum(lsum(u[l] * (Q[l][k] * v[k]) for l in N) for k in N),         # 結合律
         lsum(lsum(u[l] * (Q[l][k] * v[k]) for k in N) for l in N),         # finite_double_sum_of_real_numbers_interchange
         lsum(u[l] * lsum(Q[l][k] * v[k] for k in N) for l in N),           # finite_sum_of_real_scalar_multiples を各 l へ
         lsum(u[k] * Qv[k] for k in N),                                     # def_real_matrix_vector_product を右辺から左辺へ

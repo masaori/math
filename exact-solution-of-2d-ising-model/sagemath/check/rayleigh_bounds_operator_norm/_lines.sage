@@ -45,7 +45,7 @@ def check_proof_lines(P, c, x, K, what):
     eq(l1, l2, f"{what}: 鎖1 2→3（def_matrix_norm と (√a)^2 = a）")
     eq(l2, l3, f"{what}: 鎖1 3→4（実数の絶対値の平方）")
     eq(l3, l4, f"{what}: 鎖1 4→5（y = Wx の成分）")
-    eq(l4, l5, f"{what}: 鎖1 5→6（分配則）")
+    eq(l4, l5, f"{what}: 鎖1 5→6（分配律）")
     eq(l5, l6, f"{what}: 鎖1 6→7（def_real_bilinear_value）")
     eq(l6, l6_builtin, f"{what}: def_real_bilinear_value と組み込みの行列積")
     # 二つ目の鎖
@@ -62,7 +62,7 @@ def check_proof_lines(P, c, x, K, what):
     le(0, c * nx**2, f"{what}: 0 ≤ c‖x‖^2")
     le(m4, m5, f"{what}: 鎖2 4→5（x^⊤Wx ≤ c‖x‖^2 と 0 ≤ y^⊤Wy）")
     le(m5, m6, f"{what}: 鎖2 5→6（y^⊤Wy ≤ c‖y‖^2 と 0 ≤ c‖x‖^2）")
-    eq(m6, m7, f"{what}: 鎖2 6→7（y = Wx と乗法の可換則・結合則）")
+    eq(m6, m7, f"{what}: 鎖2 6→7（y = Wx と乗法の可換律・結合律）")
     # 場合分けと割り算・平方根
     global n_zero_side, n_positive_side
     if ny == 0:

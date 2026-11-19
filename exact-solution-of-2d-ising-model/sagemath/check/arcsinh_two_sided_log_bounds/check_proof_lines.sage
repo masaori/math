@@ -2,14 +2,14 @@
 # 下からの評価の二行 arcsinh(y) = log(y+s) ≥ log(2y) と、上からの評価の五行
 # arcsinh(y) = log(y+s) ≤ log(2y + 1/(2y)) = log(2y(1 + 1/(4y²))) = log(2y) + log(1 + 1/(4y²)) ≤ log(2y) + 1/(4y²) を確かめる。
 # 帰属:
-# - 四則と分配則の二行 2y + 1/(2y) = 2y + 2y·1/(4y²) = 2y(1 + 1/(4y²)) は QQ(y) の等号として厳密に。
+# - 四則と分配律の二行 2y + 1/(2y) = 2y + 2y·1/(4y²) = 2y(1 + 1/(4y²)) は QQ(y) の等号として厳密に。
 # - log の引数の大小（y+s と 2y、2y + 1/(2y)）は AA で厳密に。
 # - log の値の行は、y ∈ QQ_{>0} の点で Arb のボールへ脱出して確かめる（log の値が QQ に入らないため）。
 #   1 行目の arcsinh(y) は本文の定義 log(y + √(y²+1)) を Arb の log で囲んだものと、Arb の asinh（別の経路）の両方で見る。
 load("../../_shared/log_integral_by_balls.sage")
 Fy = QQ['y'].fraction_field(); y = Fy.gen()
 assert 2*y + 1/(2*y) == 2*y + 2*y*(1/(4*y^2)) == 2*y*(1 + 1/(4*y^2))
-print("四則と分配則の二行 2y + 1/(2y) = 2y + 2y·1/(4y²) = 2y(1 + 1/(4y²)) が QQ(y) で成り立つ")
+print("四則と分配律の二行 2y + 1/(2y) = 2y + 2y·1/(4y²) = 2y(1 + 1/(4y²)) が QQ(y) で成り立つ")
 YS = [QQ(1)/1000, QQ(1)/10, QQ(1)/2, QQ(1), QQ(3), QQ(100), QQ(10)^6]
 for y0 in YS:
     s0 = AA(y0^2 + 1).sqrt()

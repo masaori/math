@@ -18,7 +18,7 @@
   M_col = 2..7、K ∈ {1/3, 1, 5/2, −7/4, 0, 1/100, 6, −2/9} で確かめる。等号は球が交わること、半径が値の 1e-40 倍未満であること。
 - 付け替えた後の和（2 行目）は、Φ を通さず {−1,1} × {−1,1}^{M_col−1} を直に列挙して組む（1 行目は 𝔐 を列挙して組む）。
 - ς で付け替えた和（3 行目）は {0,1}^{M_col−1} の上の和を def_sum_over_binary_words_of_real_numbers の帰納法の順序（`binword_sum`）で組む。
-- 組合せの層では exp(Kς(e))・exp(K·1)・exp(K·(−1)) がどれも x か y になるので、「ς の値」「ℝ の乗法の単位元 K·1 = K（set_and_algebra_notation の p·1 = p）」「ℝ の乗法の可換則 K(−1) = (−1)K」「real_minus_one_times_is_negation の (−1)K = −K」の四行は実数の層だけで隣の行と別に組んで確かめる。
+- 組合せの層では exp(Kς(e))・exp(K·1)・exp(K·(−1)) がどれも x か y になるので、「ς の値」「ℝ の乗法の単位元 K·1 = K（set_and_algebra_notation の p·1 = p）」「ℝ の乗法の可換律 K(−1) = (−1)K」「real_minus_one_times_is_negation の (−1)K = −K」の四行は実数の層だけで隣の行と別に組んで確かめる。
 - 有限積は def_finite_product_of_real_numbers の左からの畳み込み、冪の行の右辺は Sage の `^`（別の経路）。
 - 主張は右辺を Sage の `cosh`（def_cosh_sinh とは別の経路）でも確かめる。
 
@@ -29,7 +29,7 @@
 | Step 1: Φ は全単射（単射・全射・復元が左右の逆）、両側は 2^{M_col} 個、s(m+1) = s(m)τ ⟺ τ = s(m)s(m+1) | 厳密（ZZ）。M_col = 2..8 の全ての元 |
 | Step 1: ς(1) = 1・ς(0) = −1、逆写像 τ ↦ (τ+1)/2、成分ごとの写像 {0,1}^{M_col−1} → {−1,1}^{M_col−1} が全単射 | 厳密。M_col = 2..8 |
 | 準備 1 行目（def_open_chain_spin_energy と t_m(s)） | 整数の等式 E(s) = Σ t_m(s) を厳密に、行の両辺を球で |
-| 準備 2 行目（ℝ の分配則） | 球 |
+| 準備 2 行目（ℝ の分配律） | 球 |
 | 準備 3 行目（real_exp_of_finite_sum） | 球 |
 | 主張の鎖 1 行目（準備の等式を各項へ） | 球（左辺が exp の値なので組合せの層には載らない） |
 | 主張の鎖 2 行目（Φ による和の付け替え） | 厳密と球 |
@@ -37,7 +37,7 @@
 | 主張の鎖 4 行目（expansion_of_finite_product_of_two_term_sums_of_real_numbers） | 厳密と球 |
 | 主張の鎖 5 行目（ς(1) = 1、ς(0) = −1） | 球 |
 | 主張の鎖 6 行目（ℝ の乗法の単位元 K·1 = K（set_and_algebra_notation の p·1 = p）） | 球 |
-| 主張の鎖 7 行目（ℝ の乗法の可換則 K(−1) = (−1)K） | 球。根拠の等式は K ∈ K_SAMPLES で厳密（QQ） |
+| 主張の鎖 7 行目（ℝ の乗法の可換律 K(−1) = (−1)K） | 球。根拠の等式は K ∈ K_SAMPLES で厳密（QQ） |
 | 主張の鎖 8 行目（real_minus_one_times_is_negation の (−1)K = −K） | 球。根拠の等式は K ∈ K_SAMPLES で厳密（QQ） |
 | 主張の鎖 9 行目（u に依らない c の二元集合 {−1,1} 上の和は c + c） | 厳密と球 |
 | 主張の鎖 10 行目（real_sum_of_two_equal_terms_is_twice（a → Π_m(exp(K) + exp(−K))）） | 厳密と球 |

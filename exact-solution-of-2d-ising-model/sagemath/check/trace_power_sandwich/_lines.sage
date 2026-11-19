@@ -143,13 +143,13 @@ def check_psd(P, Pn, n, z, what):
     s1a = sum(rpow(abs(iz * zi[i]), 2) for i in rng)                    # w_i := ‖z‖^{-1}z_i を代入
     s2 = sum(rpow(iz * zi[i], 2) for i in rng)
     s2a = sum((iz * zi[i]) * (iz * zi[i]) for i in rng)                 # square_of_real_number_is_product（r → ‖z‖^{-1}z_i）
-    s2b = sum((iz * iz) * (zi[i] * zi[i]) for i in rng)                 # 乗法の交換則・結合則
+    s2b = sum((iz * iz) * (zi[i] * zi[i]) for i in rng)                 # 乗法の交換律・結合律
     s3 = sum(rpow(iz, 2) * rpow(zi[i], 2) for i in rng)                 # 同（r → ‖z‖^{-1}, z_i）を右辺から左辺へ
     s4 = rpow(iz, 2) * sum(rpow(zi[i], 2) for i in rng)
     s5 = rpow(iz, 2) * sum(rpow(abs(zi[i]), 2) for i in rng)
     s6 = rpow(iz, 2) * rpow(nz, 2)
     s6a = (iz * iz) * (nz * nz)                                          # square_of_real_number_is_product（r → ‖z‖^{-1}, ‖z‖）
-    s6b = (iz * nz) * (iz * nz)                                          # 乗法の交換則・結合則
+    s6b = (iz * nz) * (iz * nz)                                          # 乗法の交換律・結合律
     s7 = rpow(iz * nz, 2)                                                # 同（r → ‖z‖^{-1}‖z‖）を右辺から左辺へ
     s8 = rpow(AA(1), 2)                                                  # ‖z‖^{-1}‖z‖ = 1
     eq(iz * nz, 1, f"{what}: ‖z‖^{-1}‖z‖ = 1")
@@ -161,7 +161,7 @@ def check_psd(P, Pn, n, z, what):
     L = [bil(z, Pn, z),
          sum(sum(z[i] * Pn[i, j] * z[j] for j in rng) for i in rng),
          sum(sum((nz * w[i]) * PnA[i, j] * (nz * w[j]) for j in rng) for i in rng),
-         sum(sum((nz * nz) * (w[i] * PnA[i, j] * w[j]) for j in rng) for i in rng),       # 乗法の交換則・結合則
+         sum(sum((nz * nz) * (w[i] * PnA[i, j] * w[j]) for j in rng) for i in rng),       # 乗法の交換律・結合律
          sum(sum(rpow(nz, 2) * (w[i] * PnA[i, j] * w[j]) for j in rng) for i in rng),     # square_of_real_number_is_product を右辺から左辺へ
          sum(rpow(nz, 2) * sum(w[i] * PnA[i, j] * w[j] for j in rng) for i in rng),       # finite_sum_of_real_scalar_multiples を内側の和へ
          rpow(nz, 2) * sum(sum(w[i] * PnA[i, j] * w[j] for j in rng) for i in rng),       # 同じ主張を外側の和へ

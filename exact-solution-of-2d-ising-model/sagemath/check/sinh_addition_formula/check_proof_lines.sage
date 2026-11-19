@@ -1,7 +1,7 @@
 # 対象ラベル: sinh_addition_formula
 # 複号 + の鎖の八行と、複号 - の鎖の六行を確かめる。
 # 帰属:
-# - exp の性質を使わない行（定義、分母と分子に 2 を掛ける、足して引く、分配則、分数の和と積、定義を 4 箇所へ）は、
+# - exp の性質を使わない行（定義、分母と分子に 2 を掛ける、足して引く、分配律、分数の和と積、定義を 4 箇所へ）は、
 #   exp の値 exp(x), exp(-x), exp(y), exp(-y) を QQ 上の独立な不定元 Ex, Emx, Ey, Emy に置き、さらに
 #   exp(x+y), exp(-(x+y)) も独立な不定元 Exy, Emxy に置いて確かめる（代入は環準同型なので実数の値でも成り立つ）。
 # - 引数の等号（-(x+y) = (-x)+(-y)（real_negation_of_sum_is_sum_of_negations）、x-y = x+(-y)）は QQ[x,y] の等号として。
@@ -33,7 +33,7 @@ else:
     g2 = Ex*Ey - Ex*Emy + Emx*Ey - Emx*Emy
 line5 = (g1 + g2) / F(4)
 assert line4 == line5
-# 6 行目: 分配則（因数分解の形を本文のまま書き、展開が 5 行目の二つの括弧に一致することも確かめる）
+# 6 行目: 分配律（因数分解の形を本文のまま書き、展開が 5 行目の二つの括弧に一致することも確かめる）
 if KIND == "cosh":
     f1 = (Ex + Emx) * (Ey + Emy); f2 = (Ex - Emx) * (Ey - Emy)
 else:

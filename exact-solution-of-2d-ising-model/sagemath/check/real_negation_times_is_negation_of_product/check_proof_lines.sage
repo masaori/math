@@ -3,7 +3,7 @@
 # 計算する環では (-1)·y = -y が既に成り立つので、主張を引く段を区別するため、
 # 符号を反転した元 -x, -(xt) を QQ[x, t, nx, nxt] の不定元に置き、
 # real_minus_one_times_is_negation を当てる段だけを、その主張が与える置き換えで確かめる。
-# 乗法の結合則の段は不定元のまま恒等的に等しい。
+# 乗法の結合律の段は不定元のまま恒等的に等しい。
 # 帰属: 多項式環 QQ[x, t, nx, nxt]。浮動小数点は使わない。
 
 R.<x, t, nx, nxt> = QQ[]
@@ -12,7 +12,7 @@ m1 = R(-1)
 lines = [
     nx * t,             # 左辺 (-x)t
     (m1 * x) * t,       # real_minus_one_times_is_negation (a → x) を右辺から左辺へ: nx を (-1)x に
-    m1 * (x * t),       # 乗法の結合則 (p → -1, q → x, r → t)
+    m1 * (x * t),       # 乗法の結合律 (p → -1, q → x, r → t)
     nxt,                # real_minus_one_times_is_negation (a → xt): (-1)(xt) を nxt に
 ]
 
@@ -34,7 +34,7 @@ neg = 0
 full = {nx: -x, nxt: -(x * t)}
 # 1. 主張を当てる段を置き換えなしで比べると一致しない
 assert lines[0] != lines[1]; neg += 1
-# 2. 結合則の段で (-1) を落とした x·t は 3 行目と一致しない
+# 2. 結合律の段で (-1) を落とした x·t は 3 行目と一致しない
 assert x * t != lines[2]; neg += 1
 # 3. 終点の符号を取り違えた xt は、全ての置き換えの後の左辺と一致しない
 assert lines[0].subs(full) != x * t; neg += 1

@@ -14,17 +14,17 @@ I_ab = R.ideal([(a * b) * ci - 1])   # 同（z → a·b）
 
 prep = [
     (a * b) * (ai * bi),
-    a * (b * (ai * bi)),             # 結合則
-    a * ((b * ai) * bi),             # 結合則を右辺から左辺へ
-    a * ((ai * b) * bi),             # 可換則
-    a * (ai * (b * bi)),             # 結合則
+    a * (b * (ai * bi)),             # 結合律
+    a * ((b * ai) * bi),             # 結合律を右辺から左辺へ
+    a * ((ai * b) * bi),             # 可換律
+    a * (ai * (b * bi)),             # 結合律
     a * (ai * 1),                    # 逆元（z → b）
     a * ai,                          # 単位元 x·1 = x
     R(1),                            # 逆元（z → a）
 ]
 n = 0
 for k in range(4):
-    assert prep[k] == prep[k + 1]; n += 1                   # 結合則・可換則の段は恒等的
+    assert prep[k] == prep[k + 1]; n += 1                   # 結合律・可換律の段は恒等的
 assert (prep[4] - prep[5]) in I_b; n += 1                    # b b^{-1} = 1 のもとで等しい
 assert prep[5] == prep[6]; n += 1                            # 単位元
 assert (prep[6] - prep[7]) in I_a; n += 1                    # a a^{-1} = 1 のもとで等しい
@@ -33,8 +33,8 @@ main = [
     ai * bi,
     1 * (ai * bi),                   # 単位元 1·x = x を右辺から左辺へ
     ((a * b) * ci) * (ai * bi),      # 逆元（z → a·b）を右辺から左辺へ
-    (ci * (a * b)) * (ai * bi),      # 可換則
-    ci * ((a * b) * (ai * bi)),      # 結合則
+    (ci * (a * b)) * (ai * bi),      # 可換律
+    ci * ((a * b) * (ai * bi)),      # 結合律
     ci * 1,                          # 準備
     ci,                              # 単位元 x·1 = x
 ]

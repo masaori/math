@@ -58,7 +58,7 @@ for M in [1, 2, 3]:
             Ev[k],                                                                   # (ε_ℝv)_k
             lsum(E[k][l] * v[l] for l in D),                                         # def_real_matrix_vector_product
             lsum(E[k][l] * (u[l] + Eu[l]) for l in D),                               # v の定義
-            lsum(E[k][l] * u[l] + E[k][l] * Eu[l] for l in D),                       # ℝ の分配則
+            lsum(E[k][l] * u[l] + E[k][l] * Eu[l] for l in D),                       # ℝ の分配律
             lsum(E[k][l] * u[l] for l in D) + lsum(E[k][l] * Eu[l] for l in D),      # finite_sum_of_real_sums
             Eu[k] + EEu[k],                                                          # def_real_matrix_vector_product を右辺から左辺へ 2 か所
             Eu[k] + EE_u[k],                                                         # real_matrix_vector_product_is_associative を右辺から左辺へ

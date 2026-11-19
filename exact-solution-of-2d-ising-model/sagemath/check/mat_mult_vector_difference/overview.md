@@ -5,7 +5,7 @@
 **対象ラベル**: `mat_mult_vector_difference` （structured-latex 側の安定識別子）
 
 - ファイル: `structured-latex/content/000_calculation_formulae_45_46.ts`
-- ブロック: `finite_matrix_claim_vector_product_distributes_over_vector_difference`（行列と数ベクトルの差の積の分配則）
+- ブロック: `finite_matrix_claim_vector_product_distributes_over_vector_difference`（行列と数ベクトルの差の積の分配律）
 - 範囲: 証明の成分の鎖の 6 個の等号と主張 `A(u - w) = Au - Aw`
 
 ## 証明の行との対応
@@ -14,7 +14,7 @@
 |---|---|---|---|---|
 | `(A(u-w))_i = Σ A_ij (u-w)_j`（`mat_mult`） | `check_steps.sage` | `A, u, w` の成分を `QQ` 上の不定元に置き、本文の積・差の成分の式で組んだ値を比べる | **PASS** | `m, n = 1,…,4` で厳密等号 |
 | `= Σ A_ij (u_j - w_j)`（`def_matrix_difference`） | 同上 | 隣り合う行の値が等しい | **PASS** | 同上 |
-| `= Σ (A_ij u_j - A_ij w_j)`（分配則） | 同上 | 同上 | **PASS** | 同上 |
+| `= Σ (A_ij u_j - A_ij w_j)`（分配律） | 同上 | 同上 | **PASS** | 同上 |
 | `= Σ A_ij u_j - Σ A_ij w_j`（有限和の差） | 同上 | 同上 | **PASS** | 同上 |
 | `= (Au)_i - (Aw)_i`（`mat_mult`） | 同上 | 同上 | **PASS** | 同上 |
 | `= (Au - Aw)_i`（`def_matrix_difference`）と主張 | 同上 | 隣り合う行の値が等しく、両辺が Sage の行列積・ベクトルの差で求めた値と等しい。否定コントロールとして差を和 `u + w` に替えると一致しないこと | **PASS** | 同上 |

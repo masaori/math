@@ -19,13 +19,13 @@
 | 一つ目の鎖 2→3（`def_matrix_norm` と `(√a)^2 = a`） | `_lines.sage` | `‖y‖` を AA の平方根で作って二乗したものと `Σ_k |y_k|^2` | **PASS** |
 | 一つ目の鎖 3→4（`|y_k|^2 = y_ky_k`） | `_lines.sage` | 絶対値の平方の和と積の和 | **PASS** |
 | 一つ目の鎖 4→5（`y = Wx` の成分、`def_real_matrix_vector_product`） | `_lines.sage` | 左の因子を組み込みの積の `y`、右の因子を成分の式 `Σ_l W_kl x_l` にした和 | **PASS** |
-| 一つ目の鎖 5→6（分配則と乗法の結合則） | `_lines.sage` | 二重和 `Σ_kΣ_l y_kW_klx_l` | **PASS** |
+| 一つ目の鎖 5→6（分配律と乗法の結合律） | `_lines.sage` | 二重和 `Σ_kΣ_l y_kW_klx_l` | **PASS** |
 | 一つ目の鎖 6→7（`def_real_bilinear_value`） | `_lines.sage` | `bil(y, W, x)`（定義どおり左から足す）。さらに組み込みの行列積 `y^⊤(Wx)` と比べる | **PASS** |
 | 二つ目の鎖 1→2・2→3（冪、一つ目の鎖） | `_lines.sage` | `‖y‖^4`、`(‖y‖^2)^2`、`(y^⊤Wx)^2` | **PASS** |
 | 二つ目の鎖 3→4（`psd_cauchy_schwarz` を `P = W` に） | `_lines.sage` | `(y^⊤Wx)^2 ≤ (x^⊤Wx)(y^⊤Wy)` を AA で比較 | **PASS** |
 | 二つ目の鎖 4→5（`x^⊤Wx ≤ c‖x‖^2` と `0 ≤ y^⊤Wy`） | `_lines.sage` | 側の条件 2 つと行の不等号 | **PASS** |
 | 二つ目の鎖 5→6（`y^⊤Wy ≤ c‖y‖^2` と `0 ≤ c‖x‖^2`） | `_lines.sage` | 側の条件 2 つと行の不等号 | **PASS** |
-| 二つ目の鎖 6→7（`y = Wx`、乗法の可換則・結合則） | `_lines.sage` | `‖Wx‖` を組み込みの積と内積から作り直して比べる | **PASS** |
+| 二つ目の鎖 6→7（`y = Wx`、乗法の可換律・結合律） | `_lines.sage` | `‖Wx‖` を組み込みの積と内積から作り直して比べる | **PASS** |
 | 場合分け `‖Wx‖ = 0` の側（`0 ≤ c‖x‖`） | `_lines.sage` | 特異な `P` の核の `x ≠ 0` で通る（`check_generic_…`） | **PASS** |
 | `‖Wx‖^2 ≤ c^2‖x‖^2`（`‖Wx‖^2 > 0` で割る）、`c^2‖x‖^2 = (c‖x‖)^2`、`‖Wx‖ ≤ c‖x‖`（`nonnegative_real_order_from_squares`、`‖Wx‖ ≥ 0`・`c‖x‖ ≥ 0`） | `_lines.sage` | 両辺を `‖Wx‖^2` で割った値の等号 2 つ、`‖Wx‖ ≥ 0`・`c‖x‖ ≥ 0`・`c^2‖x‖^2 = (c‖x‖)^2`、`‖Wx‖^2 ≤ (c‖x‖)^2` と両方の不等号。場合分けの件数をログに出す（一般の行列で `‖Wx‖ = 0` の側 13 件、`> 0` の側 144 件） | **PASS** |
 | `k = 0` の鎖 3 行（`def_exp` (1) の `W^0 := I`（`def_real_identity_matrix`）、`real_identity_matrix_is_left_unit_of_real_matrix_vector_product`、`c^0 = 1`） | `_lines.sage` | `W^0 := I` で作る | **PASS** |
@@ -86,7 +86,7 @@
   新しく足した主張 `W_real_is_positive_semidefinite`（検算は `sagemath/check/W_real_is_positive_semidefinite/`）で満たす。
 - 最後の段の「平方の単調性」を `c^2‖x‖^2 = (c‖x‖)^2` の行と `nonnegative_real_order_from_squares` に割った。検算に `‖Wx‖^2 ≤ (c‖x‖)^2` を足した。
 - 行列とベクトルの積を `mat_mult` から `def_real_matrix_vector_product` に、`k = 0` の段の根拠を新しい主張 `real_identity_matrix_is_left_unit_of_real_matrix_vector_product`
-  （検算は `sagemath/check/real_identity_matrix_is_left_unit_of_real_matrix_vector_product/`）に、帰納法の段の結合則を新しい主張
+  （検算は `sagemath/check/real_identity_matrix_is_left_unit_of_real_matrix_vector_product/`）に、帰納法の段の結合律を新しい主張
   `real_matrix_vector_product_is_associative`（検算は `sagemath/check/real_matrix_vector_product_is_associative/`）に替えた。値と検算の式は不変で、行の名前だけを直した。
 
 ## 計算の帰属と範囲

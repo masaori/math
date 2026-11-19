@@ -73,7 +73,7 @@ neg_nu = [
     (-(2 * PI)) + tt(mu),             # real_double_negation（a → θ~_μ）
     tt(mu) + (-(2 * PI)),             # ℝ の加法の交換律（set_and_algebra_notation）
     tt(mu) + (-one) * (2 * PI),       # real_minus_one_times_is_negation（a → 2π）を右辺から左辺へ
-    tt(mu) + 2 * PI * (-one),         # ℝ の乗法の可換則
+    tt(mu) + 2 * PI * (-one),         # ℝ の乗法の可換律
     tt(mu) + 2 * PI * (-one),         # inclusion_zz_to_rr_of_one を右辺から左辺へ（像 (1)_R = 1_R。中身は下の整数の検算）
     tt(mu) + 2 * PI * (-one),         # 準備の第二を k = 1 で（中身は下の整数の検算）
 ]

@@ -41,7 +41,7 @@ for n in [1, 2, 3, 4, 5]:
     lines = [
         bilin(u, P, v),                                                    # u^T P v
         lsum(lsum((u[k] * P[k][l]) * v[l] for l in N) for k in N),         # def_real_bilinear_value
-        lsum(lsum(u[k] * (P[k][l] * v[l]) for l in N) for k in N),         # 結合則
+        lsum(lsum(u[k] * (P[k][l] * v[l]) for l in N) for k in N),         # 結合律
         lsum(u[k] * lsum(P[k][l] * v[l] for l in N) for k in N),           # finite_sum_of_real_scalar_multiples を各 k へ
         lsum(u[k] * Pv[k] for k in N),                                     # def_real_matrix_vector_product を右辺から左辺へ
     ]

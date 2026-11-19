@@ -1,6 +1,6 @@
 # 対象ラベル: matrix_multiplication_continuity_in_right_factor
 # 証明の 3 行の鎖 ‖BA_N − BA‖ = ‖B(A_N − A)‖ ≤ ‖B‖‖A_N − A‖ → 0 を一行ずつ確かめる。
-# 1 行目（左分配則）: 成分を QQ 上の多項式環の不定元に置き、本文の定義（mat_mult・def_matrix_difference）で組んだ両辺が等しい。
+# 1 行目（左分配律）: 成分を QQ 上の多項式環の不定元に置き、本文の定義（mat_mult・def_matrix_difference）で組んだ両辺が等しい。
 # 2 行目（劣乗法性）: 成分が QQ(i) の行列で、ノルムの 2 乗（def_matrix_norm の平方根の中身）どうしを厳密に比べる。
 # 3 行目（→ 0）: A_N := A + 2^{-N}E とおくと ‖A_N − A‖^2 = 4^{-N}‖E‖^2 で、右辺の評価の 2 乗 ‖B‖^2·4^{-N}‖E‖^2 が
 #   N について狭義に減り、任意の正の有理数を下回る N が取れることを厳密に確かめる（極限そのものは ℝ への脱出なので、

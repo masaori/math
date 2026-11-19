@@ -36,7 +36,7 @@ for n in [1, 2, 3, 4, 5]:
         bilin(x, P, w),                                                            # x^T P w
         lsum(lsum((x[k] * P[k][l]) * w[l] for l in N) for k in N),                 # def_real_bilinear_value
         lsum(lsum((x[k] * P[k][l]) * (y[l] + z[l]) for l in N) for k in N),        # 仮定を各項へ
-        lsum(lsum((x[k] * P[k][l]) * y[l] + (x[k] * P[k][l]) * z[l] for l in N) for k in N),  # 分配則
+        lsum(lsum((x[k] * P[k][l]) * y[l] + (x[k] * P[k][l]) * z[l] for l in N) for k in N),  # 分配律
         lsum(lsum((x[k] * P[k][l]) * y[l] for l in N) + lsum((x[k] * P[k][l]) * z[l] for l in N)
              for k in N),                                                          # finite_sum_of_real_sums を各 k へ
         lsum(lsum((x[k] * P[k][l]) * y[l] for l in N) for k in N)

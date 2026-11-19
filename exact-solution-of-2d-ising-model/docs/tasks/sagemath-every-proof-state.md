@@ -59,7 +59,7 @@
   行列の和の定義が本文に無かったので `def_matrix_sum` を `002_linear_space_general.ts` に足した、単位行列を `I_{Mat(n,C)}` に、(3) の右辺を `Σ_{k=1}^{n} 1_C` に、
   (4) の仮定を「`P` が可逆」から「`P'P = I`」に、左辺を `tr(P(AP'))` に）。計算の誤りは無かった。
 
-- `trace_of_idempotent`（冪等行列のトレースは像の次元）と、そのために足した `mat_mult_vector_difference`（行列と数ベクトルの差の積の分配則 `A(u−w) = Au − Aw`、`000_calculation_formulae_45_46.ts`）:
+- `trace_of_idempotent`（冪等行列のトレースは像の次元）と、そのために足した `mat_mult_vector_difference`（行列と数ベクトルの差の積の分配律 `A(u−w) = Au − Aw`、`000_calculation_formulae_45_46.ts`）:
   `sagemath/check/trace_of_idempotent/`・`sagemath/check/mat_mult_vector_difference/`。準備と Step 1 の鎖は `Q` または `x` を不定元に、仮定 `Q^2 = Q` を使う行は `QQ(i)` の具体の冪等行列（`r = 0,…,n`、エルミートとは限らない）で、
   全行を厳密に確かめ、両端を Sage の `trace`・`rank`・`column_space`・`right_kernel` と比べた。人手証明を直した（`Q^2 = QQ` を `def_exp` (1) の冪から導く準備を足した、
   Step 1 の分配則・結合則・零の行を `mat_mult_vector_difference`・`mat_mult_associative`・`matrix_difference_zero_iff_equal` で引いた、`x = Qx + (x−Qx)` を成分の鎖に、

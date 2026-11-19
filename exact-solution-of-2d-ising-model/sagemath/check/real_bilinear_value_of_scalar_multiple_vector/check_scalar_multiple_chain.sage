@@ -36,17 +36,17 @@ for n in [1, 2, 3, 4, 5]:
         bilin(w, P, w),                                                             # w^T P w
         lsum(lsum((w[k] * P[k][l]) * w[l] for l in N) for k in N),                  # def_real_bilinear_value
         lsum(lsum(((c * u[k]) * P[k][l]) * (c * u[l]) for l in N) for k in N),      # 仮定を w_k と w_l へ
-        lsum(lsum((c * s(k, l)) * (c * u[l]) for l in N) for k in N),               # 結合則
-        lsum(lsum(c * (s(k, l) * (c * u[l])) for l in N) for k in N),               # 結合則
-        lsum(lsum(c * ((s(k, l) * c) * u[l]) for l in N) for k in N),               # 結合則
-        lsum(lsum(c * ((c * s(k, l)) * u[l]) for l in N) for k in N),               # 可換則
-        lsum(lsum(c * (c * (s(k, l) * u[l])) for l in N) for k in N),               # 結合則
+        lsum(lsum((c * s(k, l)) * (c * u[l]) for l in N) for k in N),               # 結合律
+        lsum(lsum(c * (s(k, l) * (c * u[l])) for l in N) for k in N),               # 結合律
+        lsum(lsum(c * ((s(k, l) * c) * u[l]) for l in N) for k in N),               # 結合律
+        lsum(lsum(c * ((c * s(k, l)) * u[l]) for l in N) for k in N),               # 可換律
+        lsum(lsum(c * (c * (s(k, l) * u[l])) for l in N) for k in N),               # 結合律
         lsum(c * lsum(c * (s(k, l) * u[l]) for l in N) for k in N),                 # finite_sum_of_real_scalar_multiples を各 k へ
         lsum(c * (c * lsum(s(k, l) * u[l] for l in N)) for k in N),                 # 同上
         c * lsum(c * lsum(s(k, l) * u[l] for l in N) for k in N),                   # finite_sum_of_real_scalar_multiples
         c * (c * lsum(lsum(s(k, l) * u[l] for l in N) for k in N)),                 # 同上
         c * (c * bilin(u, P, u)),                                                   # def_real_bilinear_value を右辺から左辺へ
-        (c * c) * bilin(u, P, u),                                                   # 結合則
+        (c * c) * bilin(u, P, u),                                                   # 結合律
     ]
     for i in range(len(lines) - 1):
         assert lines[i] == lines[i + 1], (n, i)

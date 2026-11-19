@@ -15,7 +15,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 準備 1 の 6 式（`def_pair_of_matrices_times_two_by_two_matrix`・`pr_l`・`def_pair_of_matrices_times_column_of_numbers`・`def_finite_sum_of_matrices` の r = 1 と r+1） | `check_preparations_generic.sage` | 各式を本文の成分の式で別々に組み、隣り合う式が多項式として等しい。終点を Sage の `g_{1l}X_1 + g_{2l}X_2` と比べる。対照: 行で読んだ `g_{l1}X_1 + g_{l2}X_2` とは異なる | **PASS** | X_1, X_2 ∈ Mat(4,ℂ) と G の成分を QQ 上の独立な不定元に取り、l = 1, 2 |
-| 準備 2 の 10 式の鎖（準備 1、`finite_sum_of_scalar_multiples`、`scalar_multiple_is_associative`、`finite_double_sum_of_matrices_interchange`、`finite_sum_of_scalar_multiples_of_one_matrix`、ℂ の乗法の可換則、`mat_mult`、準備 1）と組の 3 式 | `check_preparations_generic.sage` | 同上。終点を Sage の行列積 GH による `(GH)_{1l}X_1 + (GH)_{2l}X_2` と比べる。対照: `(X_1, X_2)(HG)` とは異なる | **PASS** | 同上（G, H の成分も不定元） |
+| 準備 2 の 10 式の鎖（準備 1、`finite_sum_of_scalar_multiples`、`scalar_multiple_is_associative`、`finite_double_sum_of_matrices_interchange`、`finite_sum_of_scalar_multiples_of_one_matrix`、ℂ の乗法の可換律、`mat_mult`、準備 1）と組の 3 式 | `check_preparations_generic.sage` | 同上。終点を Sage の行列積 GH による `(GH)_{1l}X_1 + (GH)_{2l}X_2` と比べる。対照: `(X_1, X_2)(HG)` とは異なる | **PASS** | 同上（G, H の成分も不定元） |
 | 準備 3 の 6 式の鎖（準備 1、`T_V_plus_is_conjugation`、`linearity_of_T`、`T_V_plus_is_conjugation`、準備 1）と組の 3 式 | `check_linearity_lift.sage` | T を `def_T_V_plus` の三つの共役の合成で、T_{V^{(+)}} を `def_V_plus` の V^{(+)} = (SV_2)S による `(V^{(+)}X)(V^{(+)})^{-1}` で作り、各式を別々に組んで等しい。対照: G を転置して読んだ値とは異なる | **PASS** | 結合定数 3 組 × M_col = 2, 3 × 全 μ、X_1, X_2 は (Ž_μ, Y̌_μ) と乱択行列の組、G の成分は E 上の不定元。数体 E の中で厳密 |
 | 本体の 17 式（`def_check_fermi`、準備 3、`T_V_plus_check_Z_Y`、準備 2、`diagonalization_check_P_D`、`mat_mult_associative`、`def_invertible_elements_of_R`、`identity_matrix_is_right_unit_of_mat_mult`、準備 2、`def_check_fermi`、`pr` の定め方、準備 1、Ď の成分、`zero_scalar_multiple_is_zero_matrix`、`matrix_plus_zero_matrix`、`zero_matrix_plus_matrix`） | `check_main_chain.sage` | 各式を別々に組んで、隣り合う組が等しい。第 1 式の ψ̌ は `def_check_fermi` の第二の式（P̌ との積を使わない形）で、A(θ̃_μ) は `def_A_theta` の成分の式で、P̌_μ・Ď_μ・λ_{±,μ} は `diagonalization_check_P_D`・`eigenvector_of_A_theta_tilde` の式で作る。P̌^{-1} は Sage の inverse で作り、P̌^{-1}P̌ = P̌P̌^{-1} = I を本文の積で確かめる | **PASS** | 結合定数 3 組 × M_col = 2, 3, 4 × 全 μ。数体 E の中で厳密 |
 | 成分を取り出す二本の鎖（`pr_l` の定め方、本体の鎖、`pr_l` の定め方） | `check_main_chain.sage` | 各式が等しい | **PASS** | 同上 |
@@ -39,7 +39,7 @@
 作り方から必ず通る遷移（両側を同じ式から組んでいるので、配置の写ししか確かめていない）:
 
 - 準備 1 の全ての遷移（定義の展開と `pr_l`。左から順に足す有限和の 1 項・2 項）。値として独立なのは終点と Sage の `g_{1l}X_1 + g_{2l}X_2` の比較と、行で読んだ対照である。
-- 準備 2 の第 1 式 → 第 2 式と第 9 式 → 第 10 式（準備 1 の当てはめ）、第 7 式 → 第 8 式（ℂ の乗法の可換則。不定元の多項式環が可換なので同じ多項式になる）。
+- 準備 2 の第 1 式 → 第 2 式と第 9 式 → 第 10 式（準備 1 の当てはめ）、第 7 式 → 第 8 式（ℂ の乗法の可換律。不定元の多項式環が可換なので同じ多項式になる）。
 - 準備 3 の第 1 式 → 第 2 式と第 5 式 → 第 6 式（準備 1 の当てはめ）。
 - 本体の第 1 式 → 第 2 式（`def_check_fermi`。ψ̌ を第二の式で、第 2 式を組と P̌ の積で作るが、どちらも同じ E の元 −r/(2σb)・1/(2σ) を係数に使う。第 10 式 → 第 11 式も同じ）、第 11 式 → 第 12 式・第 12 式 → 第 13 式（`pr` と準備 1）、第 13 式 → 第 14 式（Ď の成分。Ď を λ_± から組んでいる）。
 - 成分を取り出す鎖の第 1 式 → 第 2 式と第 3 式 → 第 4 式（`pr` の定め方）。

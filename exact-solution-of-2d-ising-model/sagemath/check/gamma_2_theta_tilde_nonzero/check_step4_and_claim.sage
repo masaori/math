@@ -23,7 +23,7 @@ for (Y, Z) in COUPLINGS:
             cond = (si == 0) and (k['c1'] * co == k['s1'] * k['c2'])
             ok = (g != 0) and (f1 != 0) and (f1 * b == 1) and ((g == 0) == (w == 0) == cond)
             if si == 0:
-                # Step 4 の鎖: c_1 cos θ~_μ = c_1·(-1) = (-1)·c_1（ℝ の乗法の可換則）= -c_1（real_minus_one_times_is_negation）
+                # Step 4 の鎖: c_1 cos θ~_μ = c_1·(-1) = (-1)·c_1（ℝ の乗法の可換律）= -c_1（real_minus_one_times_is_negation）
                 ok = ok and co == -1 and k['c1'] * co == k['c1'] * (-1) == (-1) * k['c1'] == -k['c1']
             if not ok:
                 allnz = False

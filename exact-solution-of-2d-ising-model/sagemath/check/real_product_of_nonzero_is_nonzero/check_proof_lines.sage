@@ -13,7 +13,7 @@ lines = [
     b,                  # 鎖の左辺 b
     1 * b,              # 乗法の単位元を右辺から左辺へ
     (ai * a) * b,       # 乗法の逆元 a^{-1}·a = 1 を右辺から左辺へ
-    ai * (a * b),       # 乗法の結合則
+    ai * (a * b),       # 乗法の結合律
     ai * o,             # 仮定 a·b = 0（右辺の 0 を o と書く）
     R(0),               # real_times_zero_is_zero（x → a^{-1}）
 ]
@@ -21,7 +21,7 @@ lines = [
 n = 0
 assert lines[0] == lines[1]; n += 1                        # 単位元の段は恒等的
 assert (lines[1] - lines[2]) in I_inv; n += 1              # 逆元の段は a^{-1}·a = 1 のもとで等しい
-assert lines[2] == lines[3]; n += 1                        # 結合則の段は恒等的
+assert lines[2] == lines[3]; n += 1                        # 結合律の段は恒等的
 assert (lines[3] - lines[4]) in I_hyp; n += 1              # 仮定の段は a·b = o のもとで等しい
 assert lines[4].subs(o=0) == lines[5]; n += 1              # real_times_zero_is_zero: o を 0 に置き換えると a^{-1}·0 = 0
 # 鎖の両端: a^{-1}·a = 1 と a·b = 0 のもとで b = 0。

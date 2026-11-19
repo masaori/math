@@ -43,9 +43,9 @@ def step2_lines(M, sp, one):
         sp(1) * sp(M),                                                     # 11 行目: ℝ の乗法の単位元 p·1 = p（p → s(1)）
     ]
 
-# 行ごとの根拠の確かめ: サイトの値を非可換な自由代数 QQ<a_1,…,a_M> の生成元に取ると、乗法の結合則だけで移れる行
+# 行ごとの根拠の確かめ: サイトの値を非可換な自由代数 QQ<a_1,…,a_M> の生成元に取ると、乗法の結合律だけで移れる行
 # （3 行目 finite_product_of_real_numbers_splits_off_first_factor、4 行目 def_finite_product_of_real_numbers の帰納の式、
-# 5〜7 行目 ℝ の乗法の結合則、10 行目 finite_product_of_real_ones、11 行目 ℝ の乗法の単位元 p·1 = p）は自由代数でも隣の行と一致し、可換則を使う 2 行目・8 行目（finite_product_of_real_products）は
+# 5〜7 行目 ℝ の乗法の結合律、10 行目 finite_product_of_real_ones、11 行目 ℝ の乗法の単位元 p·1 = p）は自由代数でも隣の行と一致し、可換律を使う 2 行目・8 行目（finite_product_of_real_products）は
 # 自由代数では一致せず（否定コントロール）、可換な多項式環 QQ[a_1,…,a_M] では一致する。
 neg_free = 0
 for M in range(3, 9):
@@ -61,7 +61,7 @@ for M in range(3, 9):
             neg_free += 1
         assert cl[i - 1] == cl[i], (M, i)
         count += 1
-# 5〜7 行目の結合則を、積を評価しない二分木で 1 回ずつ確かめる。木は step2_lines の行の式から作る
+# 5〜7 行目の結合律を、積を評価しない二分木で 1 回ずつ確かめる。木は step2_lines の行の式から作る
 # （Tree の積は二つの木を対にするだけで、括弧は行の式の括弧そのもの）。assoc は ((x, y), t) → (x, (y, t))。
 class Tree:
     def __init__(self, v):
@@ -123,7 +123,7 @@ for M in range(2, 8):
                 count += 1
 
 # ---- 主張の鎖（組合せの層。厳密）----
-# 「ς の値」「乗法の単位元 1·exp(K·1) = exp(K·1)」「乗法の単位元 K·1 = K」「乗法の可換則 K(-1) = (-1)K」「(-1)K = -K」「(-1)exp(-K) = -exp(-K)」「def_real_difference」の行は、この層では隣の行と同じ多項式になる
+# 「ς の値」「乗法の単位元 1·exp(K·1) = exp(K·1)」「乗法の単位元 K·1 = K」「乗法の可換律 K(-1) = (-1)K」「(-1)K = -K」「(-1)exp(-K) = -exp(-K)」「def_real_difference」の行は、この層では隣の行と同じ多項式になる
 # （実数の層で別に確かめる）。
 for M in range(2, 9):
     S = configs(M)
@@ -156,7 +156,7 @@ for M in range(2, 9):
     if L15 != 2 * (X + Y) ^ (M - 1):
         neg_sign += 1
 
-# 主張の鎖の 8 行目・9 行目の根拠（K ∈ K_SAMPLES ⊂ ℚ で厳密に）: 乗法の可換則 K·(-1) = (-1)·K と
+# 主張の鎖の 8 行目・9 行目の根拠（K ∈ K_SAMPLES ⊂ ℚ で厳密に）: 乗法の可換律 K·(-1) = (-1)·K と
 # real_minus_one_times_is_negation の (-1)·K = -K（a → K）
 for K in K_SAMPLES:
     assert QQ(K) * QQ(-1) == QQ(-1) * QQ(K)
@@ -209,7 +209,7 @@ for M in range(2, 8):
 
 # 否定コントロールの件数: 対にならない因子は M_col = 3..8 の各配置の半分、端点因子の脱落と符号の脱落は全ての M_col、
 # cosh との取り違えは K ≠ 0 の全て
-# 自由代数で可換則の行が外れるのは M_col = 4..8 の 2 行ずつ（M_col = 3 では因子の並びが変わらない）
+# 自由代数で可換律の行が外れるのは M_col = 4..8 の 2 行ずつ（M_col = 3 では因子の並びが変わらない）
 assert neg_free == 2 * 5, neg_free
 assert neg_unpaired == sum(2 ^ (M - 1) for M in range(3, 9)), neg_unpaired
 assert neg_no_endpoint == 7 and neg_sign == 7

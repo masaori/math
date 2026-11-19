@@ -24,7 +24,7 @@ for m in range(1, 5):
                 lhs[i, 0],                                                        # (A(u - w))_i
                 sum(A[i, j] * umw[j, 0] for j in range(n)),                       # Σ A_ij (u - w)_j      (mat_mult)
                 sum(A[i, j] * (u[j, 0] - w[j, 0]) for j in range(n)),             # Σ A_ij (u_j - w_j)    (def_matrix_difference)
-                sum(A[i, j] * u[j, 0] - A[i, j] * w[j, 0] for j in range(n)),     # Σ (A_ij u_j - A_ij w_j) (分配則)
+                sum(A[i, j] * u[j, 0] - A[i, j] * w[j, 0] for j in range(n)),     # Σ (A_ij u_j - A_ij w_j) (分配律)
                 sum(A[i, j] * u[j, 0] for j in range(n)) - sum(A[i, j] * w[j, 0] for j in range(n)),  # 有限和の差
                 Au[i, 0] - Aw[i, 0],                                              # (Au)_i - (Aw)_i       (mat_mult)
                 rhs[i, 0],                                                        # (Au - Aw)_i           (def_matrix_difference)

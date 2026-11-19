@@ -31,7 +31,7 @@ assert row0 == row1                              # 和と差の整理（仮定�
 assert row1.subs(h1) == row2.subs(h1)            # θ - θ~ = 2nπ だけを使う
 assert row1 != row2                              # 対照: 仮定なしでは等しくない
 assert row2.subs(h2) == row3                     # θ' - θ~' = 2n'π だけを使う
-assert row3 == row4                              # 分配則
+assert row3 == row4                              # 分配律
 assert row0.subs(h1).subs(h2) == row4            # 鎖の両端
 
 # 場合 (b): 半径の鎖

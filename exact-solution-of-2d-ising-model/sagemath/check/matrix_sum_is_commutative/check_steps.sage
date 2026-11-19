@@ -32,7 +32,7 @@ for m in [1, 2, 3]:
                 count += 1
         assert all(ApB[key] == BpA[key] for key in ApB)   # 行列の等号は成分ごと
 print(f"checked {count} entrywise chains over 9 shapes")
-# 対照: 行列の積は一般に可換でない（和の可換則が自明な一致でないことの比較）
+# 対照: 行列の積は一般に可換でない（和の可換律が自明な一致でないことの比較）
 a = matrix(QQ, [[0, 1], [0, 0]])
 b = matrix(QQ, [[0, 0], [1, 0]])
 assert a * b != b * a

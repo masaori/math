@@ -37,14 +37,14 @@ rel_double = (1 - co) - 2 * v^2            # 倍角公式 cos θ = 1 − 2 sin^2
 
 S1 = [
     c1 * c2s - s1 * s2s * co,                                   # 1 行目（def_gamma1_gamma2_of_theta）
-    (c1 * c2s - s1 * s2s) + s1 * s2s * (1 - co),                # 2 行目（分配則）
+    (c1 * c2s - s1 * s2s) + s1 * s2s * (1 - co),                # 2 行目（分配律）
     (c1 * c2s - s1 * s2s) + s1 * s2s * (1 - co),                # 3 行目（略記の書き換え。不定元は同じ値を表す）
     ck + s1 * s2s * (1 - co),                                   # 4 行目（加法定理）
     ck + s1 * s2s * (1 - co),                                   # 5 行目（κ の定義。cosh(2K_1−2K_2^*) と cosh κ は同じ値）
     ck + A * (1 - co),                                          # 6 行目（A の定義）
     ck + 2 * A * v^2,                                           # 7 行目（倍角公式）
 ]
-check("Step 1: 1→2 行目は多項式の等号（分配則だけ）", holds_mod(S1[0], S1[1], []))
+check("Step 1: 1→2 行目は多項式の等号（分配律だけ）", holds_mod(S1[0], S1[1], []))
 check("Step 1: 2→3 行目は略記の書き換え（同じ不定元）", S1[1] == S1[2])
 check("Step 1: 3→4 行目は加法定理の関係式だけで成り立つ", holds_mod(S1[2], S1[3], [rel_add]))
 check("Step 1: 3→4 行目は加法定理なしでは成り立たない", not holds_mod(S1[2], S1[3], []))

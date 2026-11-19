@@ -11,8 +11,8 @@ inv_t = t^(-1)
 
 L1 = t*(b/t)          # 2·(b/2)
 L2 = t*(b*inv_t)      # def_real_quotient（y → b、z → 2）
-L3 = t*(inv_t*b)      # 乗法の交換則（x → b、y → 2^{-1}）
-L4 = (t*inv_t)*b      # 乗法の結合則を右辺から左辺へ
+L3 = t*(inv_t*b)      # 乗法の交換律（x → b、y → 2^{-1}）
+L4 = (t*inv_t)*b      # 乗法の結合律を右辺から左辺へ
 L5 = 1*b              # 乗法の逆元 x·x^{-1} = 1（x → 2）
 L6 = b                # 乗法の単位元 1·x = x（x → b）
 

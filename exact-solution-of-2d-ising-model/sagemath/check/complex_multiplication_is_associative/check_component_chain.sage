@@ -18,17 +18,17 @@ chain = [
     ((a*c + neg(b*d))*e + neg((a*d + b*c)*f),
      (a*c + neg(b*d))*f + (a*d + b*c)*e),                                     # 差の定義を 3 箇所
     (((a*c)*e + neg(b*d)*e) + neg((a*d)*f + (b*c)*f),
-     ((a*c)*f + neg(b*d)*f) + ((a*d)*e + (b*c)*e)),                           # 分配則 (x+y)t を 4 箇所
+     ((a*c)*f + neg(b*d)*f) + ((a*d)*e + (b*c)*e)),                           # 分配律 (x+y)t を 4 箇所
     (((a*c)*e + neg((b*d)*e)) + neg((a*d)*f + (b*c)*f),
      ((a*c)*f + neg((b*d)*f)) + ((a*d)*e + (b*c)*e)),                         # real_negation_times_is_negation_of_product (-x)t = -(xt) を 2 箇所
     (((a*c)*e + neg((b*d)*e)) + (neg((a*d)*f) + neg((b*c)*f)),
      ((a*c)*f + neg((b*d)*f)) + ((a*d)*e + (b*c)*e)),                         # real_negation_of_sum_is_sum_of_negations (x → (ad)f, y → (bc)f)
     ((a*(c*e) + neg(b*(d*e))) + (neg(a*(d*f)) + neg(b*(c*f))),
-     (a*(c*f) + neg(b*(d*f))) + (a*(d*e) + b*(c*e))),                         # 積の結合則を 8 箇所
+     (a*(c*f) + neg(b*(d*f))) + (a*(d*e) + b*(c*e))),                         # 積の結合律を 8 箇所
     (a*(c*e) + (neg(b*(d*e)) + (neg(a*(d*f)) + neg(b*(c*f)))),
      a*(c*f) + (neg(b*(d*f)) + (a*(d*e) + b*(c*e)))),                         # 加法の結合律を 2 箇所
     (a*(c*e) + ((neg(a*(d*f)) + neg(b*(c*f))) + neg(b*(d*e))),
-     a*(c*f) + ((a*(d*e) + b*(c*e)) + neg(b*(d*f)))),                         # 加法の可換則を 2 箇所
+     a*(c*f) + ((a*(d*e) + b*(c*e)) + neg(b*(d*f)))),                         # 加法の可換律を 2 箇所
     (a*(c*e) + (neg(a*(d*f)) + (neg(b*(c*f)) + neg(b*(d*e)))),
      a*(c*f) + (a*(d*e) + (b*(c*e) + neg(b*(d*f))))),                         # 加法の結合律を 2 箇所
     ((a*(c*e) + neg(a*(d*f))) + (neg(b*(c*f)) + neg(b*(d*e))),
@@ -38,7 +38,7 @@ chain = [
     ((a*(c*e) + a*neg(d*f)) + neg(b*(c*f) + b*(d*e)),
      (a*(c*f) + a*(d*e)) + (b*(c*e) + b*neg(d*f))),                           # real_times_negation_is_negation_of_product を 2 箇所へ右辺から左辺へ
     (a*(c*e + neg(d*f)) + neg(b*(c*f + d*e)),
-     a*(c*f + d*e) + b*(c*e + neg(d*f))),                                     # 分配則 x(y+t) を 4 箇所へ右辺から左辺へ
+     a*(c*f + d*e) + b*(c*e + neg(d*f))),                                     # 分配律 x(y+t) を 4 箇所へ右辺から左辺へ
     (a*(c*e - d*f) - b*(c*f + d*e), a*(c*f + d*e) + b*(c*e - d*f)),           # 差の定義を 3 箇所へ右辺から左辺へ
     cc_mul((a, b), (c*e - d*f, c*f + d*e)),                                   # definition_of_cc の積を右辺から左辺へ
     cc_mul((a, b), cc_mul((c, d), (e, f))),                                   # definition_of_cc の積を右辺から左辺へ

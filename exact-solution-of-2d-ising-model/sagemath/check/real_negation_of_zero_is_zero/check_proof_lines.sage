@@ -11,11 +11,11 @@ ZERO = R(0)
 lines = [
     n,              # 1 行目の左辺 -0
     n + ZERO,       # 加法の単位元を右辺から左辺へ
-    ZERO + n,       # 加法の可換則
+    ZERO + n,       # 加法の可換律
     ZERO,           # 加法の逆元 z + (-z) = 0（z → 0）
 ]
 
-# 加法の単位元と可換則の段は、n を不定元にしたまま恒等的に等しい。
+# 加法の単位元と可換律の段は、n を不定元にしたまま恒等的に等しい。
 identity_steps = [0, 1]
 for k in identity_steps:
     assert lines[k] == lines[k + 1], (k, lines[k], lines[k + 1])

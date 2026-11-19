@@ -2,10 +2,10 @@
 # x(-t) = (-t)x = -(tx) = -(xt) の 3 行の鎖を確かめる。
 # 計算する環では x(-t) = -(xt) が既に成り立つので、主張を引く段を区別するため、
 # 符号を反転した元 -t, -(tx), -(xt) を QQ[x, t, nt, ntx, nxt] の不定元に置く。
-# 乗法の可換則の 1 行目は不定元のまま恒等的に等しい。
+# 乗法の可換律の 1 行目は不定元のまま恒等的に等しい。
 # 2 行目（real_negation_times_is_negation_of_product の (-p)q = -(pq)、p → t, q → x）は、
 # その主張が成り立つ形 -t = (-1)t、-(tx) = (-1)(tx) に置いたときにだけ等しい。
-# 3 行目（乗法の可換則 p → t, q → x を符号反転の中へ）は、-(tx)・-(xt) を (-1)(tx)・(-1)(xt) に置いたときにだけ等しい。
+# 3 行目（乗法の可換律 p → t, q → x を符号反転の中へ）は、-(tx)・-(xt) を (-1)(tx)・(-1)(xt) に置いたときにだけ等しい。
 # 帰属: 多項式環 QQ[x, t, nt, ntx, nxt]。浮動小数点は使わない。
 
 R.<x, t, nt, ntx, nxt> = QQ[]
@@ -13,9 +13,9 @@ m1 = R(-1)
 
 lines = [
     x * nt,    # 左辺 x(-t)
-    nt * x,    # 乗法の可換則 (p → x, q → -t)
+    nt * x,    # 乗法の可換律 (p → x, q → -t)
     ntx,       # real_negation_times_is_negation_of_product (p → t, q → x): (-t)x を -(tx) に
-    nxt,       # 乗法の可換則 (p → t, q → x): -(tx) を -(xt) に
+    nxt,       # 乗法の可換律 (p → t, q → x): -(tx) を -(xt) に
 ]
 
 identity_steps = [0]

@@ -32,7 +32,7 @@ for M_col in range(1, 7):
             o, op = ord_number(mu), ord_number(mup)
             chain = [V2[o - 1, op - 1],
                      xL ** sum(mu[m] * mup[m] for m in range(M_col)),                       # 1: (exp(K_2 Σ μμ'))_C
-                     xL ** sum(1 * (mu[m] * mup[m]) for m in range(M_col)),                 # 2: 分配則 K_2 Σ = Σ K_2(·)
+                     xL ** sum(1 * (mu[m] * mup[m]) for m in range(M_col)),                 # 2: 分配律 K_2 Σ = Σ K_2(·)
                      prod([xL ** (mu[m] * mup[m]) for m in range(M_col)], L(1)),            # 3: (Π exp(K_2(μμ')))_C
                      prod([L(xL ** (mu[m] * mup[m])) for m in range(M_col)], L(1)),         # 4: Π (exp(K_2(μμ')))_C
                      prod([A[I[m] - 1, J[m] - 1] for m in range(M_col)], L(1)),

@@ -16,7 +16,7 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
-| Step 1 の 1→2 行目（分配則） | `check_lines_generic.sage`・`check_lines_with_balls.sage` | 値を `QQ` 上の独立な不定元に置いて多項式の等号。具体値のボールでも重なる | **PASS** | 厳密 |
+| Step 1 の 1→2 行目（分配律） | `check_lines_generic.sage`・`check_lines_with_balls.sage` | 値を `QQ` 上の独立な不定元に置いて多項式の等号。具体値のボールでも重なる | **PASS** | 厳密 |
 | Step 1 の 2→3 行目（略記 c_1 = cosh 2K_1 ほかの展開）・4→5 行目（κ の定義の展開） | 同上・`check_series_identities.sage` | 定義の展開なので両辺は同じ式になる。検算は書き写しの形の一致だけで、内容は確かめていない | **PASS** | 形の一致のみ |
 | Step 1 の 3→4 行目（`cosh_addition_formula` の複号 −） | 同上・`check_series_identities.sage` | 加法定理の関係式 1 本を法として成り立ち、抜くと成り立たない。加法定理そのものは本文の exp の部分和から作った cosh・sinh の形式冪級数（全次数 16 以下）で成り立ち、複号を + に誤ると成り立たない | **PASS** | 厳密 |
 | Step 1 の 5→6 行目（A の定義） | 同上 | A = s_1s_2^* の 1 本を法として成り立ち、抜くと成り立たない | **PASS** | 厳密 |

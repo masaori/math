@@ -35,9 +35,9 @@ for n in [1, 2, 3, 4, 5]:
         bilin(u, P, v),                                                       # u^T P v
         lsum(lsum((u[k] * P[k][l]) * v[l] for l in N) for k in N),             # def_real_bilinear_value
         lsum(lsum((u[k] * P[l][k]) * v[l] for l in N) for k in N),             # def_real_symmetric_matrix を各項へ
-        lsum(lsum(v[l] * (u[k] * P[l][k]) for l in N) for k in N),             # 乗法の可換則
-        lsum(lsum(v[l] * (P[l][k] * u[k]) for l in N) for k in N),             # 乗法の可換則
-        lsum(lsum((v[l] * P[l][k]) * u[k] for l in N) for k in N),             # 乗法の結合則
+        lsum(lsum(v[l] * (u[k] * P[l][k]) for l in N) for k in N),             # 乗法の可換律
+        lsum(lsum(v[l] * (P[l][k] * u[k]) for l in N) for k in N),             # 乗法の可換律
+        lsum(lsum((v[l] * P[l][k]) * u[k] for l in N) for k in N),             # 乗法の結合律
         lsum(lsum((v[l] * P[l][k]) * u[k] for k in N) for l in N),             # finite_double_sum_of_real_numbers_interchange
         bilin(v, P, u),                                                       # def_real_bilinear_value を右辺から左辺へ
     ]

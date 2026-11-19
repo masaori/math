@@ -65,12 +65,12 @@ for n in range(1, 4):
                 (b, True),
                 (one * b, True),                         # 乗法の単位元（右辺から左辺へ）
                 ((inv2 * two) * b, True),                # 逆元 2^{-1}·2 = 1（右辺から左辺へ）
-                (inv2 * (two * b), True),                # 乗法の結合則
+                (inv2 * (two * b), True),                # 乗法の結合律
                 (inv2 * ((one + one) * b), True),        # def_real_two
-                (inv2 * (one * b + one * b), True),      # 分配則
+                (inv2 * (one * b + one * b), True),      # 分配律
                 (inv2 * (b + b), True),                  # 乗法の単位元を 2 か所へ
                 (inv2 * ((-b) + b), False),              # -b = b（J を法として）
-                (inv2 * (b + (-b)), True),               # 加法の可換則
+                (inv2 * (b + (-b)), True),               # 加法の可換律
                 (inv2 * P(0), True),                     # 加法の逆元 z + (-z) = 0（z → b）
                 (P(0), True),                            # real_times_zero_is_zero（x → 2^{-1}）
             ]

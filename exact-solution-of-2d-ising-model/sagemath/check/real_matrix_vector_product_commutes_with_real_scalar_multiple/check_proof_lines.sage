@@ -37,9 +37,9 @@ for m in [1, 2, 3, 4]:
                 mv(P, w, i),                                            # (Pw)_i
                 lsum(P[i][j] * w[j] for j in N),                        # def_real_matrix_vector_product
                 lsum(P[i][j] * (c * u[j]) for j in N),                  # 仮定を n 個の項へ
-                lsum((P[i][j] * c) * u[j] for j in N),                  # 結合則
-                lsum((c * P[i][j]) * u[j] for j in N),                  # 交換則
-                lsum(c * (P[i][j] * u[j]) for j in N),                  # 結合則
+                lsum((P[i][j] * c) * u[j] for j in N),                  # 結合律
+                lsum((c * P[i][j]) * u[j] for j in N),                  # 交換律
+                lsum(c * (P[i][j] * u[j]) for j in N),                  # 結合律
                 c * lsum(P[i][j] * u[j] for j in N),                    # finite_sum_of_real_scalar_multiples
                 c * mv(P, u, i),                                        # def_real_matrix_vector_product を右辺から左辺へ
             ]

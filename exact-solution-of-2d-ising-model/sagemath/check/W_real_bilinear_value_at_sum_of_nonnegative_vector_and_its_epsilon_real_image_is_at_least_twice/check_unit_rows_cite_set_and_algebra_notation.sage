@@ -1,7 +1,7 @@
 # 対象ラベル: W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice
 # 主の鎖の (A + 0) + (0 + A) = A + (0 + A) = A + A = 1A + 1A = (1 + 1)A の 4 行が引く
 # 「0 は ℝ の加法の単位元 x + 0 = x・0 + x = x（x → A）」「1 は ℝ の乗法の単位元 1x = x（x → A）を 2 か所へ同時に右辺から左辺へ」
-# 「ℝ の分配則 (a + b)c = ac + bc（a, b → 1、c → A）を右辺から左辺へ」（set_and_algebra_notation）を、
+# 「ℝ の分配律 (a + b)c = ac + bc（a, b → 1、c → A）を右辺から左辺へ」（set_and_algebra_notation）を、
 # 行に書いた形と代入で形の両辺を作り、前の行と次の行が同じ文脈の穴に形の左辺・右辺を入れたものであることを比べる
 # （浮動小数点を使わない）。A は不定元 t に置く。多項式環は式を正規化するので、形の左右と向きはこの検算では
 # 区別できない（レビューの目視で確かめる）。

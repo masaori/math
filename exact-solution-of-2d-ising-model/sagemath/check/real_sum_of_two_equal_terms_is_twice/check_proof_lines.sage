@@ -8,7 +8,7 @@ one = R(1)
 
 L1 = a + a                  # a + a
 L2 = one*a + one*a          # 乗法の単位元 1·x = x（x → a）を右辺から左辺へ 2 か所に同時適用
-L3 = (one + one)*a          # 分配則 (x+y)t = xt+yt（x → 1、y → 1、t → a）を右辺から左辺へ
+L3 = (one + one)*a          # 分配律 (x+y)t = xt+yt（x → 1、y → 1、t → a）を右辺から左辺へ
 L4 = 2*a                    # def_real_two の 2 := 1 + 1 を右辺から左辺へ
 
 assert L1 == L2

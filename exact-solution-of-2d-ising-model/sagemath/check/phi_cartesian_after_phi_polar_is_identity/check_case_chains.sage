@@ -141,7 +141,7 @@ for yy in (AA(-3), -AA(1) / 2, -s3):                             # x = 0, y < 0
     rows = [phi_cartesian((-yy, -pi_ / 2)), ((-yy) * cos_sin(-pi_ / 2)[0], (-yy) * cos_sin(-pi_ / 2)[1]),
             ((-yy) * 0, (-yy) * (-1)),
             (AA(0), (-yy) * (-1)),                               # real_times_zero_is_zero (x -> -y)
-            (AA(0), (-1) * (-yy)),                               # ℝ の乗法の可換則
+            (AA(0), (-1) * (-yy)),                               # ℝ の乗法の可換律
             (AA(0), -(-yy)),                                     # real_minus_one_times_is_negation (a -> -y)
             (AA(0), yy)]                                         # real_double_negation (a -> y)
     assert cos_sin(-pi_ / 2) == (0, -1)

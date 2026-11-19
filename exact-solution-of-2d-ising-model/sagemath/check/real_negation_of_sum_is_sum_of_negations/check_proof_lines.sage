@@ -3,7 +3,7 @@
 # 計算する環では -(x+y) = (-x)+(-y) が既に成り立つので、主張を引く段を区別するため、
 # 符号を反転した元 -(x+y), -x, -y を QQ[x, y, nxy, nx, ny] の不定元に置く。
 # 1 行目（real_minus_one_times_is_negation、a → x+y を右辺から左辺へ）は -(x+y) を (-1)(x+y) に置いたときにだけ等しい。
-# 2 行目（ℝ の分配則 p(q+r) = pq+pr、p → -1, q → x, r → y）は不定元のまま恒等的に等しい。
+# 2 行目（ℝ の分配律 p(q+r) = pq+pr、p → -1, q → x, r → y）は不定元のまま恒等的に等しい。
 # 3 行目（real_minus_one_times_is_negation、a → x と a → y を 2 箇所へ）は -x・-y を (-1)x・(-1)y に置いたときにだけ等しい。
 # 帰属: 多項式環 QQ[x, y, nxy, nx, ny]。浮動小数点は使わない。
 
@@ -13,7 +13,7 @@ m1 = R(-1)
 lines = [
     nxy,               # 左辺 -(x+y)
     m1 * (x + y),      # real_minus_one_times_is_negation (a → x+y) を右辺から左辺へ
-    m1 * x + m1 * y,   # 分配則 (p → -1, q → x, r → y)
+    m1 * x + m1 * y,   # 分配律 (p → -1, q → x, r → y)
     nx + ny,           # real_minus_one_times_is_negation (a → x と a → y)
 ]
 

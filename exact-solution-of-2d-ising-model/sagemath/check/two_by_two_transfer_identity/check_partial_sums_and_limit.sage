@@ -40,7 +40,7 @@ for N in range(0, 25):
             sum(entry((QQ(1) / factorial(m)) * matrix_power_by_definition(B, m), i, j) for m in range(N + 1)),
             sum(inc(c) for c in terms),                                   # 各項の成分の中間目標
             inc(sum(terms)),                                              # real_inclusion_preserves_finite_sum（和を取ってから写す）
-            inc(split),                                                   # 実数の有限和の分配則
+            inc(split),                                                   # 実数の有限和の分配律
             inc((E_partial(tr, N) + sgn * E_partial(-tr, N)) / 2),        # E_N の定義
         ]
         for k in range(len(chain) - 1):

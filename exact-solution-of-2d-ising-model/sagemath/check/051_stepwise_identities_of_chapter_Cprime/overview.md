@@ -176,7 +176,7 @@ check_01（`def_H1_pm 上の符号` → `def_H1_plus の境界符号`）と chec
 ## `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分の書き直しに伴う更新（2026-11-01）
 
 本文の第 2 成分の鎖を、`b = -conj(a)` を代入して `conj(a)` を括り出し最後に `b` へ戻す形から、
-`(-b)(∓r) = b(±r)` → 乗法の可換則 → `b` を括り出す → 加法の交換律 → `λ_± (v_±)_2` の形（`b = -conj(a)` を使わない）にした。
+`(-b)(∓r) = b(±r)` → 乗法の可換律 → `b` を括り出す → 加法の交換律 → `λ_± (v_±)_2` の形（`b = -conj(a)` を使わない）にした。
 check_02 の第 2 成分の段を新しい 6 行 `eigenvector (v 2-1)`〜`(v 2-6)` に置き換えて再実行した（全段 PASS）。
 `sage <file>.sage` の `__file__` の問題（上の節）は残っているので、
 `sage -c "__file__='<このディレクトリ>/check_02_015_steps.sage'; load('check_02_015_steps.sage')"` で実行した（SageMath 10.x / Linux）。

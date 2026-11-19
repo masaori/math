@@ -65,7 +65,7 @@ neg_power = neg_sinh = neg_sinh_real = neg_prep = 0
 
 # ---- 主張の鎖（組合せの層。厳密）----
 # w_sym(τ) が exp(Kτ)。exp(Kς(e)) は w_sym(ς(e))、exp(K·1)・exp(K·(-1)) も w_sym(1)・w_sym(-1) なので、
-# 「ς の値」「乗法の単位元 K·1 = K」「乗法の可換則 K(-1) = (-1)K」「(-1)K = -K」の四行はこの層では同じ多項式になる（実数の層で別に確かめる）。
+# 「ς の値」「乗法の単位元 K·1 = K」「乗法の可換律 K(-1) = (-1)K」「(-1)K = -K」の四行はこの層では同じ多項式になる（実数の層で別に確かめる）。
 for M in range(2, 9):
     S = configs(M)
     L1 = finite_sum([finite_prod([w_sym(t(s, m)) for m in range(1, M)]) for s in S], Rxy(0))
@@ -90,7 +90,7 @@ for M in range(2, 9):
     if L12 != 2 * (X - Y) ^ (M - 1):
         neg_sinh += 1
 
-# 主張の鎖の 7 行目・8 行目の根拠（K ∈ K_SAMPLES ⊂ ℚ で厳密に）: 乗法の可換則 K·(-1) = (-1)·K と
+# 主張の鎖の 7 行目・8 行目の根拠（K ∈ K_SAMPLES ⊂ ℚ で厳密に）: 乗法の可換律 K·(-1) = (-1)·K と
 # real_minus_one_times_is_negation の (-1)·K = -K（a → K）
 for K in K_SAMPLES:
     assert QQ(K) * QQ(-1) == QQ(-1) * QQ(K)

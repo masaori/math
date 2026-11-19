@@ -14,7 +14,7 @@ for m in range(1, 4):
             l1 = Av[i] - Bv[i]                                                       # def_matrix_difference
             l2 = sum(A[i][j] * v[j] for j in range(n)) - sum(B[i][j] * v[j] for j in range(n))  # mat_mult
             l3 = sum(A[i][j] * v[j] - B[i][j] * v[j] for j in range(n))              # 有限和の差
-            l4 = sum((A[i][j] - B[i][j]) * v[j] for j in range(n))                   # 分配則
+            l4 = sum((A[i][j] - B[i][j]) * v[j] for j in range(n))                   # 分配律
             l5 = sum(AmB[i][j] * v[j] for j in range(n))                             # def_matrix_difference
             assert l1 == l2 == l3 == l4 == l5
             assert (matrix(R, A) * vector(R, v) - matrix(R, B) * vector(R, v))[i] == ((matrix(R, A) - matrix(R, B)) * vector(R, v))[i] == l5

@@ -25,15 +25,15 @@ assert (0 + nb) == nb; k += 1                                # 加法の単位�
 # 第 2 の鎖: 0 < a·(−a^{-1}) = a·((−1)·a^{-1}) = (a·(−1))·a^{-1} = ((−1)·a)·a^{-1} = (−1)·(a·a^{-1}) = (−1)·1 = −1
 chain2 = [a * nb, a * (n * b), (a * n) * b, (n * a) * b, n * (a * b), n * 1, n]
 assert (chain2[0] - chain2[1]) in I_m1; k += 1               # real_minus_one_times_is_negation（a → a^{-1}）を右辺から左辺へ
-assert chain2[1] == chain2[2]; k += 1                        # 乗法の結合則
-assert chain2[2] == chain2[3]; k += 1                        # 乗法の可換則
-assert chain2[3] == chain2[4]; k += 1                        # 乗法の結合則
+assert chain2[1] == chain2[2]; k += 1                        # 乗法の結合律
+assert chain2[2] == chain2[3]; k += 1                        # 乗法の可換律
+assert chain2[3] == chain2[4]; k += 1                        # 乗法の結合律
 assert (chain2[4] - chain2[5]) in I_inv; k += 1              # 逆元 a·a^{-1} = 1
 assert chain2[5] == chain2[6]; k += 1                        # real_minus_one_times_is_negation（a → 1）: (−1)·1 = −1
 # 第 3 の鎖: 1 = 0 + 1 < (−1) + 1 = 1 + (−1) = 0
 assert R(1) == 0 + R(1); k += 1                              # 加法の単位元を右辺から左辺へ
 assert ((0 + R(1)) - (n + 1)) == R(0) - n; k += 1            # 順序と加法の両立: 差は x − y = 0 − (−1) で、同じ c = 1 を足しただけ
-assert (n + 1) == (1 + n); k += 1                            # 加法の可換則
+assert (n + 1) == (1 + n); k += 1                            # 加法の可換律
 assert (1 + n) in I_neg_1; k += 1                            # 加法の逆元（z → 1）
 # 第 2 の鎖の両端は、前提をすべて合わせたイデアルのもとで −1 に等しい（鎖全体の裏取り）。
 assert (chain2[0] - n) in I_all; k += 1
