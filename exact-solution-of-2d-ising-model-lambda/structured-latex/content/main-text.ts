@@ -50584,6 +50584,75 @@ b&\in R&&(\because\ E=R)
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_sum_of_squares_root_nonnegative_sign",
+        labels: [],
+        title: { text: "二つの平方の和の根の符号選択" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_sum_of_squares_root_nonnegative_sign",
+            focus: {
+              id: "zero_pinching_claim_sum_of_squares_root_nonnegative_sign",
+              kind: "claim",
+              title: { text: "二つの平方の和の根は零か正錐の元に選べる" },
+              labels: ["claim_sum_of_squares_root_nonnegative_sign"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/sum-of-squares-root-nonnegative-sign"],
+              lean: [
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_sumOfSquares_rootNonnegative",
+                "Ising2DLambda.NecSuf.FisherZero.sumOfSquares_rootNonnegative",
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_sumOfSquares_rootNonnegative_from_necSuf",
+              ],
+              statement: [paragraph([
+                ref("claim_enumerated_ordered_subfield_is_maximal"), " の極大な正錐付き部分体 ",
+                math(String.raw`(R,C_R)`), " を取る。任意の ", math(String.raw`a,b\in R`),
+                " に対し、ある ", math(String.raw`c\in R`), " が存在し、",
+                math(String.raw`c^2=a^2+b^2`), " かつ ",
+                math(String.raw`c=0\ \text{または}\ c\in C_R`), " である。",
+              ])],
+              proof: [
+                paragraph([
+                  ref("claim_maximal_ordered_subfield_sum_of_squares_is_square"),
+                  " により ", math(String.raw`d\in R`), " で ",
+                  math(String.raw`d^2=a^2+b^2`), " となるものを取る。",
+                  ref("def_subfield_positive_cone"), " の三分法により ",
+                  math(String.raw`d=0`), "、", math(String.raw`d\in C_R`), "、",
+                  math(String.raw`-d\in C_R`), " のいずれか一つが成り立つ。",
+                ]),
+                paragraph([
+                  math(String.raw`d=0`), " または ", math(String.raw`d\in C_R`),
+                  " の場合は ", math(String.raw`c:=d`), " とする。",
+                  math(String.raw`-d\in C_R`), " の場合は ", math(String.raw`c:=-d`), " とする。",
+                  "部分体は符号反転で閉じるので、いずれも ", math(String.raw`c\in R`), " である。",
+                ]),
+                paragraph([
+                  math(String.raw`c=d`), " の場合は次のとおりである。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+c^2&=d^2&&(\because\ c=d)\\
+&=a^2+b^2&&(\because\ \blkref{claim_maximal_ordered_subfield_sum_of_squares_is_square})
+\end{aligned}`),
+                paragraph([math(String.raw`c=-d`), " の場合は次のとおりである。"]),
+                displayMath(String.raw`\begin{aligned}
+c^2&=(-d)^2&&(\because\ c=-d)\\
+&=d^2&&(\because\ \text{符号反転した元の平方})\\
+&=a^2+b^2&&(\because\ \blkref{claim_maximal_ordered_subfield_sum_of_squares_is_square})
+\end{aligned}`),
+                paragraph([
+                  "選び方により ", math(String.raw`c=0`), " または ",
+                  math(String.raw`c\in C_R`), " である。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_imaginary_unit_square_root_formula",
         labels: [],
         title: { text: "虚数単位を足した元の平方根の明示式" },
