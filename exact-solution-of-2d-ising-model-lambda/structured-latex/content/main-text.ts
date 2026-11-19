@@ -50270,7 +50270,7 @@ c_0
                     math(String.raw`1\in C_F`), " である。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-1+(-1)&=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr),\\
+1+(-1)&=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
 1\in C_F\ \land\ -1\in C_F&\Longrightarrow 0\in C_F
 &&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の和の条件}\bigr)
 \end{aligned}`),
@@ -50282,10 +50282,10 @@ c_0
                     "、", math(String.raw`-y\in C_F`), " のいずれかである。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-y=0&\Longrightarrow y^2=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法}\bigr),\\
-y\in C_F&\Longrightarrow y^2\in C_F&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の積の条件}\bigr),\\
--y\in C_F&\Longrightarrow (-y)^2\in C_F&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の積の条件}\bigr),\\
-(-y)^2&=y^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の符号反転と乗法}\bigr).
+y=0&\Longrightarrow y^2=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法}\bigr)\\
+y\in C_F&\Longrightarrow y^2\in C_F&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の積の条件}\bigr)\\
+-y\in C_F&\Longrightarrow (-y)^2\in C_F&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の積の条件}\bigr)\\
+(-y)^2&=y^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の符号反転と乗法}\bigr)
 \end{aligned}`),
                   paragraph([
                     "したがって ", math(String.raw`y^2=0`), " または ",
@@ -50315,6 +50315,130 @@ y\in C_F&\Longrightarrow y^2\in C_F&&\bigl(\because\ \blkref{def_subfield_positi
             },
           },
         ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "zero_pinching_heading_square_root_adjoined_weighted_square_sum_excludes_minus_one",
+        labels: [],
+        title: { text: "平方根を添加した部分体の正錐重み付き平方和" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_square_root_adjoined_weighted_square_sum_excludes_minus_one",
+            focus: {
+              id: "zero_pinching_claim_square_root_adjoined_weighted_square_sum_excludes_minus_one",
+              kind: "claim",
+              title: { text: "平方根を添加した部分体の正錐重み付き平方和は負の単位元を含まない" },
+              labels: ["claim_square_root_adjoined_weighted_square_sum_excludes_minus_one"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/square-root-adjoined-weighted-square-sum-excludes-minus-one"],
+              lean: [
+                "Ising2DLambda.FisherZero.squareRootAdjoinedWeightedSquareSum_ne_neg_one",
+                "Ising2DLambda.NecSuf.FisherZero.squareRootAdjoinedWeightedSquareSum_ne_neg_one",
+                "Ising2DLambda.FisherZero.squareRootAdjoinedWeightedSquareSum_ne_neg_one_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`C_F`), " をその正錐（", ref("def_subfield_positive_cone"), "）とする。",
+                math(String.raw`a\in C_F`), " と ", math(String.raw`b\in\overline{\mathbb Q}`),
+                " が ", math(String.raw`b^2=a`), "、", math(String.raw`b\notin F`), " を満たすとし、",
+                math(String.raw`E:=F(b)`), " を ", math(String.raw`F\cup\{b\}`), " が生成する部分体とする。",
+                "このとき ", math(String.raw`-1\notin\mathrm{Sq}(C_F;E)`), "（",
+                ref("def_positive_weighted_square_sums"), "）である。",
+              ])],
+              proof: [
+                paragraph([
+                  "背理法で、有限集合 ", math(String.raw`I`), "、写像 ",
+                  math(String.raw`c:I\to C_F`), "、", math(String.raw`y:I\to E`),
+                  " が ", math(String.raw`-1=\sum_{i\in I}c(i)y(i)^2`),
+                  " を満たすとする（", ref("def_positive_weighted_square_sums"), "）。",
+                  ref("claim_square_root_adjoined_subfield_equals_linear_values"), " により、各 ",
+                  math(String.raw`i\in I`), " で ", math(String.raw`u(i),v(i)\in F`),
+                  " を選び、", math(String.raw`y(i)=u(i)+v(i)b`), " とする。",
+                ]),
+                paragraph([
+                  "次の有限和 ", math(String.raw`A,B\in F`), " を置く。",
+                  "係数の所属は ", math(String.raw`c(i),a,u(i),v(i)\in F`),
+                  " と部分体の和・積による。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+A&:=\sum_{i\in I}c(i)\bigl(u(i)^2+a v(i)^2\bigr),\\
+B&:=\sum_{i\in I}2c(i)u(i)v(i).
+\end{aligned}`),
+                paragraph(["各添字の平方を展開し、有限和へ移すと"]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{i\in I}c(i)y(i)^2
+&=\sum_{i\in I}c(i)(u(i)+v(i)b)^2
+&&\bigl(\because\ y(i)=u(i)+v(i)b\bigr)\\
+&=\sum_{i\in I}c(i)\bigl(u(i)^2+2u(i)v(i)b+v(i)^2b^2\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=\sum_{i\in I}c(i)\bigl(u(i)^2+2u(i)v(i)b+a v(i)^2\bigr)
+&&\bigl(\because\ b^2=a\bigr)\\
+&=\sum_{i\in I}\bigl(c(i)(u(i)^2+a v(i)^2)+(2c(i)u(i)v(i))b\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=\sum_{i\in I}c(i)(u(i)^2+a v(i)^2)+\sum_{i\in I}(2c(i)u(i)v(i))b
+&&\bigl(\because\ \text{有限和の加法}\bigr)\\
+&=A+\sum_{i\in I}(2c(i)u(i)v(i))b
+&&\bigl(\because\ A\text{ の定義}\bigr)\\
+&=A+Bb
+&&\bigl(\because\ B\text{ の定義と有限和の分配律}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "共役側も同じく各項を展開する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{i\in I}c(i)(u(i)-v(i)b)^2
+&=\sum_{i\in I}c(i)\bigl(u(i)^2-2u(i)v(i)b+v(i)^2b^2\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=\sum_{i\in I}c(i)\bigl(u(i)^2-2u(i)v(i)b+a v(i)^2\bigr)
+&&\bigl(\because\ b^2=a\bigr)\\
+&=\sum_{i\in I}\bigl(c(i)(u(i)^2+a v(i)^2)-(2c(i)u(i)v(i))b\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=\sum_{i\in I}c(i)(u(i)^2+a v(i)^2)-\sum_{i\in I}(2c(i)u(i)v(i))b
+&&\bigl(\because\ \text{有限和の減法}\bigr)\\
+&=A-\sum_{i\in I}(2c(i)u(i)v(i))b
+&&\bigl(\because\ A\text{ の定義}\bigr)\\
+&=A-Bb
+&&\bigl(\because\ B\text{ の定義と有限和の分配律}\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`-1,0\in F`), " かつ ", math(String.raw`-1=(-1)+0b`),
+                  " と上の仮定に ", ref("claim_quadratic_representation_unique"),
+                  " を適用すると ", math(String.raw`A=-1`), "、", math(String.raw`B=0`),
+                  "。よって共役側の和も ", math(String.raw`-1`), " である。",
+                ]),
+                paragraph([ref("claim_quadratic_conjugate_square_sum_identity"), " により"]),
+                displayMath(String.raw`\begin{aligned}
+-2
+&=(-1)+(-1)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
+&=\sum_{i\in I}c(i)(u(i)+v(i)b)^2+\sum_{i\in I}c(i)(u(i)-v(i)b)^2
+&&\bigl(\because\ \text{上の二つの和}\bigr)\\
+&=2A
+&&\bigl(\because\ \blkref{claim_quadratic_conjugate_square_sum_identity}\bigr),\\
+A&=-1
+&&\bigl(\because\ 2\ne0\text{ の除法}\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`A`), " は添字集合 ", math(String.raw`I\sqcup I`),
+                  " 上の重み付き平方和である。第一成分の係数と平方する元は ",
+                  math(String.raw`c(i),u(i)`), "、第二成分は ",
+                  math(String.raw`c(i)a,v(i)`), " とする。",
+                  math(String.raw`c(i)a\in C_F`), " は正錐の積の条件（",
+                  ref("def_subfield_positive_cone"), "）で従う。従って ",
+                  math(String.raw`A\in\mathrm{Sq}(C_F;F)`), " だが、",
+                  ref("claim_subfield_weighted_square_sum_excludes_minus_one"),
+                  " は ", math(String.raw`A=-1`), " を禁じる。",
+                  "全て代数的数の有限和であり、実数体・複素数体は使わない。",
+                ]),
+              ],
+            },
+          },
+        }],
       },
     },
     {
