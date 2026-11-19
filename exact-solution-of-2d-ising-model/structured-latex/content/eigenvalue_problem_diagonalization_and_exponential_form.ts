@@ -3078,6 +3078,46 @@ a(\theta)\,w(\theta)
       ),
       paragraph([
         "である。また、",
+        math(String.raw`c_1\cos\theta - s_1c_2 = 0`),
+        " と ",
+        math(String.raw`c_1\cos\theta = s_1c_2`),
+        " は同値である。前者を仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c_1\cos\theta
+&= c_1\cos\theta + 0
+   \quad (\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to c_1\cos\theta)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}) \\
+&= c_1\cos\theta + \bigl(s_1c_2 + (-(s_1c_2))\bigr)
+   \quad (\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to s_1c_2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}) \\
+&= c_1\cos\theta + \bigl((-(s_1c_2)) + s_1c_2\bigr)
+   \quad (\because\ \mathbb{R}\ \text{の加法の交換律}\ x + y = y + x\ (x \to s_1c_2,\ y \to -(s_1c_2))\ \text{（}\blkref{set_and_algebra_notation}\text{）}) \\
+&= \bigl(c_1\cos\theta + (-(s_1c_2))\bigr) + s_1c_2
+   \quad (\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to c_1\cos\theta,\ y \to -(s_1c_2),\ t \to s_1c_2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}) \\
+&= (c_1\cos\theta - s_1c_2) + s_1c_2
+   \quad (\because\ \blkref{def_real_difference}\ (y \to c_1\cos\theta,\ z \to s_1c_2)\ \text{を右辺から左辺へ}) \\
+&= 0 + s_1c_2
+   \quad (\because \text{仮定 } c_1\cos\theta - s_1c_2 = 0) \\
+&= s_1c_2 + 0
+   \quad (\because\ \mathbb{R}\ \text{の加法の交換律}\ x + y = y + x\ (x \to 0,\ y \to s_1c_2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}) \\
+&= s_1c_2
+   \quad (\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to s_1c_2)\ \text{（}\blkref{set_and_algebra_notation}\text{）})
+\end{aligned}`,
+      ),
+      paragraph(["であり、後者を仮定すると"]),
+      displayMath(
+        String.raw`\begin{aligned}
+c_1\cos\theta - s_1c_2
+&= c_1\cos\theta + (-(s_1c_2))
+   \quad (\because\ \blkref{def_real_difference}\ (y \to c_1\cos\theta,\ z \to s_1c_2)) \\
+&= s_1c_2 + (-(s_1c_2))
+   \quad (\because \text{仮定 } c_1\cos\theta = s_1c_2) \\
+&= 0
+   \quad (\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to s_1c_2)\ \text{（}\blkref{set_and_algebra_notation}\text{）})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。また、",
         math(String.raw`-\sin\theta = 0`),
         " と ",
         math(String.raw`\sin\theta = 0`),
@@ -3117,7 +3157,7 @@ a(\theta)\,w(\theta)
 &\iff \begin{cases} c_1\cos\theta - s_1c_2 = 0 \\ -\sin\theta = 0 \end{cases}
    \quad (\because \mathbf{R}^2 \text{ の元の相等は成分ごと}) \\
 &\iff \begin{cases} c_1\cos\theta = s_1c_2 \\ -\sin\theta = 0 \end{cases}
-   \quad (\because \text{第 1 式の両辺に } s_1c_2 \text{ を加える}) \\
+   \quad (\because c_1\cos\theta - s_1c_2 = 0 \text{ と } c_1\cos\theta = s_1c_2 \text{ の同値を示した二つの鎖を第 1 式に}) \\
 &\iff \begin{cases} c_1\cos\theta = s_1c_2 \\ \sin\theta = 0 \end{cases}
    \quad (\because -\sin\theta = 0 \text{ と } \sin\theta = 0 \text{ の同値を示した二つの鎖を第 2 式に})
 \end{aligned}`,
@@ -3244,6 +3284,7 @@ s_1c_2
           "Step 0 の正値性は第一・第二の双対結合定数の定義と添字つき略記の正値性から直接導く形に改めた。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 4 の s_1c_2 の鎖の最後の行が根拠「ℝ の積の符号規則 a·(−1) = −a」を名前だけで引いていたので、ℝ の乗法の可換則（set_and_algebra_notation）の行と real_minus_one_times_is_negation（a → c_1）の行の 2 行に割った。鎖の両端と主張は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 1 の同値の鎖の最終行の名前だけの根拠「第 2 式の両辺を −1 倍する」を、−sin θ = 0 と sin θ = 0 の同値を示す二つの鎖（前者から後者は real_double_negation（a → sin θ）を右辺から左辺へ・仮定・real_negation_of_zero_is_zero、後者から前者は仮定・real_negation_of_zero_is_zero）の参照にした。二つの鎖を挟んだので、2 行目の根拠「直前の二つの鎖」を「a(θ)w(θ) = 0_ℂ と w(θ) = 0_ℂ の同値を示した二つの鎖」と内容で指す形にした。主張と同値の鎖の両端は不変。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認）: Step 1 の同値の鎖の 5 行目の名前だけの根拠「第 1 式の両辺に s_1c_2 を加える」（加える向きと引く向きを 1 行で済ませていた）を、c_1cos θ − s_1c_2 = 0 と c_1cos θ = s_1c_2 の同値を示す二つの鎖（前者から後者へ: ℝ の加法の単位元を右辺から左辺へ・加法の逆元を右辺から左辺へ・加法の交換律・加法の結合律を右辺から左辺へ・def_real_difference を右辺から左辺へ・仮定・加法の交換律・加法の単位元の 8 行。後者から前者へ: def_real_difference・仮定・加法の逆元の 3 行）の参照にした。主張と鎖の両端は不変。",
       ],
     },
   },

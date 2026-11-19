@@ -1,5 +1,5 @@
 # Step 1: w(θ) の成分の鎖、逆元の鎖（a(θ) b(θ) = 1）、a(θ) ≠ 0 の背理の鎖、a w = 0 ⟺ w = 0 の二つの鎖、
-# -sin θ = 0 ⟺ sin θ = 0 の二つの鎖、同値の鎖。
+# c_1cos θ - s_1c_2 = 0 ⟺ c_1cos θ = s_1c_2 の二つの鎖、-sin θ = 0 ⟺ sin θ = 0 の二つの鎖、同値の鎖。
 # (a) 成分: ℂ を definition_of_cc どおり実数の対で持ち、cos θ = co、sin θ = si などを QQ 上の不定元に置く。
 # (b) 逆元の鎖: 本文は exp(iθ) を Euler の公式で展開せず scalar_exp_product・scalar_exp_zero だけを使うので、
 #     exp(iθ)、exp(-iθ)、exp(iθ + (-iθ)) を独立な不定元 e, f, g に置き、各行の根拠が導入する関係
@@ -28,7 +28,25 @@ rep.check(cmul(real(c1), real(co)) == (c1*co, 0) and cmul(I2, real(si)) == (0, s
           "w の成分 第 1 行 → 第 2 行: 三か所の積 (c_1,0)(cos θ,0)・(0,1)(sin θ,0)・(s_1,0)(c_2,0)")
 rep.check(cmul(m1, (P(0), si)) == (0, -si) and cmul(m1, (s1*c2, P(0))) == (-s1*c2, 0), "w の成分 第 2 行 → 第 3 行: 二か所の積")
 rep.check(w_l1 == w_l2 == w_l3 and w_l3 == w_l4, "w の成分 第 3 行 → 第 4 行: 和。鎖の両端 w(θ) = (c_1 cos θ - s_1c_2, -sin θ)")
-rep.check(w_l4[0] + s1*c2 == c1*co, "同値の鎖: 第 1 式の両辺に s_1c_2 を加える")
+# c_1 cos θ - s_1c_2 = 0 と c_1 cos θ = s_1c_2 の同値を示す二つの鎖（同値の鎖の 5 行目の根拠）。
+# 各行を上の多項式環 P（不定元 co,si,c1,s1,c2,s,t）の元として持ち、隣の行との一致を確かめる。仮定の行だけは、仮定の式が生成する
+# イデアルを法として一致し、法なしでは異なることを確かめる
+pp, qq = c1*co, s1*c2
+sub_hyp = P.ideal([pp - qq])                    # 仮定 c_1cos θ - s_1c_2 = 0 と仮定 c_1cos θ = s_1c_2（同じイデアル）
+fw = [pp, pp + 0, pp + (qq + (-qq)), pp + ((-qq) + qq), (pp + (-qq)) + qq, (pp - qq) + qq, 0 + qq, qq + 0, qq]
+names = ["加法の単位元を右辺から左辺へ", "加法の逆元 (x → s_1c_2) を右辺から左辺へ", "加法の交換律",
+         "加法の結合律を右辺から左辺へ", "def_real_difference を右辺から左辺へ", None, "加法の交換律", "加法の単位元"]
+for k, nm in enumerate(names):
+    if nm is None:
+        rep.check((fw[k] - fw[k+1]) in sub_hyp and fw[k] != fw[k+1],
+                  "c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 %d 行: 仮定（法として一致し、法なしでは異なる）" % (k+1))
+    else:
+        rep.check(fw[k] == fw[k+1], "c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 %d 行: %s" % (k+1, nm))
+rep.check(fw[0] == w_l4[0] + qq and fw[-1] == qq, "同 鎖の両端 c_1cos θ と s_1c_2（左端の差の式は w(θ) の第 1 成分）")
+bw = [pp - qq, pp + (-qq), qq + (-qq), P(0)]
+rep.check(bw[0] == bw[1], "c_1cos θ = s_1c_2 ⇒ c_1cos θ - s_1c_2 = 0 の鎖 第 1 行: def_real_difference")
+rep.check((bw[1] - bw[2]) in sub_hyp and bw[1] != bw[2], "同 第 2 行: 仮定 c_1cos θ = s_1c_2（法として一致し、法なしでは異なる）")
+rep.check(bw[2] == bw[3], "同 第 3 行: 加法の逆元 (x → s_1c_2)")
 # -sin θ = 0 と sin θ = 0 の同値を示す二つの鎖。仮定は、仮定の式が生成するイデアルを法として使う
 neg_hyp = P.ideal([-si])                        # 仮定 -sin θ = 0
 pos_hyp = P.ideal([si])                         # 仮定 sin θ = 0

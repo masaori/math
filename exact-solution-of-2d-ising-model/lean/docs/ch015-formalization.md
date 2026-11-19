@@ -19,6 +19,7 @@
 | --- | --- | --- |
 | `Ising2D.AMat_thetaTilde_eq`（`DefinitionGamma1Gamma2OfThetaTilde.lean`） | `A(θ~_μ) = !![γ_1, γ_2(θ~); -γ_2(-θ~), γ_1]` | `def_gamma1_gamma2_of_theta` |
 | `Ising2D.thetaTilde_mul_M` | `M·θ~_μ = (2μ-1)π`（**奇数**倍。015 章の要） | 同上（Step 2 の前提） |
+| `Ising2D.gamma2_step1_first_equation_iff`（`ClaimGamma2TildeNonzero.lean`） | `c_1cos θ − s_1c_2 = 0 ⟺ c_1cos θ = s_1c_2`（人手の 8 行と 3 行の鎖に 1 段ずつ対応） | `gamma_2_theta_tilde_nonzero` Step 1 の同値の鎖の 5 行目の根拠 |
 | `Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero`（`ClaimGamma2TildeNonzero.lean`） | `sin θ~_μ = 0 ⟹ cos θ~_μ = -1` | `gamma_2_theta_tilde_nonzero` Step 2+3 |
 | **`Ising2D.gamma2_thetaTilde_ne_zero`** | **`γ_2(θ~_μ) ≠ 0`（無条件・全 `μ ∈ ℤ`）** | **`gamma_2_theta_tilde_nonzero`** |
 | `Ising2D.gamma2_neg_thetaTilde_ne_zero` | `γ_2(-θ~_μ) ≠ 0` | 同上（statement 末尾） |

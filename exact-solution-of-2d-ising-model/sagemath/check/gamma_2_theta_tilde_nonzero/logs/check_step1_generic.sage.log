@@ -2,7 +2,18 @@
 PASS w の成分 第 1 行 → 第 2 行: 三か所の積 (c_1,0)(cos θ,0)・(0,1)(sin θ,0)・(s_1,0)(c_2,0)
 PASS w の成分 第 2 行 → 第 3 行: 二か所の積
 PASS w の成分 第 3 行 → 第 4 行: 和。鎖の両端 w(θ) = (c_1 cos θ - s_1c_2, -sin θ)
-PASS 同値の鎖: 第 1 式の両辺に s_1c_2 を加える
+PASS c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 1 行: 加法の単位元を右辺から左辺へ
+PASS c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 2 行: 加法の逆元 (x → s_1c_2) を右辺から左辺へ
+PASS c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 3 行: 加法の交換律
+PASS c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 4 行: 加法の結合律を右辺から左辺へ
+PASS c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 5 行: def_real_difference を右辺から左辺へ
+PASS c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 6 行: 仮定（法として一致し、法なしでは異なる）
+PASS c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 7 行: 加法の交換律
+PASS c_1cos θ - s_1c_2 = 0 ⇒ c_1cos θ = s_1c_2 の鎖 第 8 行: 加法の単位元
+PASS 同 鎖の両端 c_1cos θ と s_1c_2（左端の差の式は w(θ) の第 1 成分）
+PASS c_1cos θ = s_1c_2 ⇒ c_1cos θ - s_1c_2 = 0 の鎖 第 1 行: def_real_difference
+PASS 同 第 2 行: 仮定 c_1cos θ = s_1c_2（法として一致し、法なしでは異なる）
+PASS 同 第 3 行: 加法の逆元 (x → s_1c_2)
 PASS -sin θ = 0 ⇒ sin θ = 0 の鎖 第 1 行: real_double_negation (a → sin θ) を右辺から左辺へ
 PASS 同 第 2 行: 仮定 -sin θ = 0（法として一致し、法なしでは異なる）
 PASS 同 第 3 行: real_negation_of_zero_is_zero
@@ -25,5 +36,5 @@ PASS 背理の鎖: 1 = a b、a = 0 なら 0·b = 0、1 ≠ 0
 PASS a w = 0 ⇒ w = 0 の鎖: w = 1 w = (b a) w = b (a w)（b a = 1 を法として）
 PASS 同 b 0 = 0 b = 0
 PASS w = 0 ⇒ a w = 0 の鎖: a 0 = 0 a = 0
--- Step 1（零点の必要条件）一般の θ: 26/26 PASS
+-- Step 1（零点の必要条件）一般の θ: 37/37 PASS
 RESULT: PASS

@@ -24,8 +24,9 @@
 ## 形式化の方針
 
 * 人手証明の Step 1（零点の必要条件）は既存の `Ising2D.gamma2_eq_zero_iff` そのものである
-  （原文 008 章の `gamma_2_theta_is_0` の修正版として既に形式化済み）。
-  したがって本ファイルで新たに必要なのは Step 2〜Step 4 だけである。
+  （原文 008 章の `gamma_2_theta_is_0` の修正版として既に形式化済み）。ただし同値の鎖の 5 行目の根拠
+  （`c_1cos θ − s_1c_2 = 0` と `c_1cos θ = s_1c_2` の同値を示す二つの鎖）は本ファイルの
+  `gamma2_step1_first_equation_iff` に置く。本ファイルで新たに必要なのは、これと Step 2〜Step 4 である。
 * 正値性の前提は `Ising2D.IsingParam`（`K_1, K_2, K_2^* > 0`、
   `EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`）を使う。人手証明が Step 0 で
   `K_2^* = -½log(tanh K_2) > 0` を導いている部分に対応する。
@@ -56,6 +57,40 @@ theorem cos_thetaTilde_eq_neg_one_of_sin_eq_zero {M : ℕ} (hM : M ≠ 0) (μ : 
   NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd (N := (M : ℤ)) (m := 2 * μ - 1)
     (odd_two_mul_sub_one μ) (by exact_mod_cast thetaTilde_mul_M M hM μ) hsin
 
+/-- **人手証明 `gamma_2_theta_tilde_nonzero` の Step 1**: `c_1 cos θ − s_1c_2 = 0` と `c_1 cos θ = s_1c_2` の
+同値を示す二つの鎖（同値の鎖の 5 行目の根拠）。人手の 8 行と 3 行に 1 段ずつ対応する。
+ℝ の加法の単位元・逆元・交換律・結合律は `set_and_algebra_notation` の順序体の公理、差は `def_real_difference`。 -/
+theorem gamma2_step1_first_equation_iff (θ : ℝ) :
+    P.const.c1 * Real.cos θ - P.const.s1 * P.const.c2 = 0 ↔
+      P.const.c1 * Real.cos θ = P.const.s1 * P.const.c2 := by
+  constructor
+  · intro h
+    calc P.const.c1 * Real.cos θ
+        = P.const.c1 * Real.cos θ + 0 := (add_zero _).symm
+                                        -- ℝ の加法の単位元 `x + 0 = x`（`x → c_1cos θ`）を右辺から左辺へ
+      _ = P.const.c1 * Real.cos θ + (P.const.s1 * P.const.c2 + -(P.const.s1 * P.const.c2)) := by
+          rw [add_neg_cancel]           -- ℝ の加法の逆元 `x + (−x) = 0`（`x → s_1c_2`）を右辺から左辺へ
+      _ = P.const.c1 * Real.cos θ + (-(P.const.s1 * P.const.c2) + P.const.s1 * P.const.c2) := by
+          rw [add_comm (P.const.s1 * P.const.c2)]
+                                        -- ℝ の加法の交換律（`x → s_1c_2`、`y → −(s_1c_2)`）
+      _ = (P.const.c1 * Real.cos θ + -(P.const.s1 * P.const.c2)) + P.const.s1 * P.const.c2 :=
+          (add_assoc _ _ _).symm        -- ℝ の加法の結合律（`x → c_1cos θ`、`y → −(s_1c_2)`、`t → s_1c_2`）を右辺から左辺へ
+      _ = (P.const.c1 * Real.cos θ - P.const.s1 * P.const.c2) + P.const.s1 * P.const.c2 := by
+          rw [← sub_eq_add_neg]         -- `def_real_difference`（`y → c_1cos θ`、`z → s_1c_2`）を右辺から左辺へ
+      _ = 0 + P.const.s1 * P.const.c2 := by rw [h]
+                                        -- 仮定 `c_1cos θ − s_1c_2 = 0`
+      _ = P.const.s1 * P.const.c2 + 0 := add_comm _ _
+                                        -- ℝ の加法の交換律（`x → 0`、`y → s_1c_2`）
+      _ = P.const.s1 * P.const.c2 := add_zero _
+                                        -- ℝ の加法の単位元（`x → s_1c_2`）
+  · intro h
+    calc P.const.c1 * Real.cos θ - P.const.s1 * P.const.c2
+        = P.const.c1 * Real.cos θ + -(P.const.s1 * P.const.c2) := sub_eq_add_neg _ _
+                                        -- `def_real_difference`（`y → c_1cos θ`、`z → s_1c_2`）
+      _ = P.const.s1 * P.const.c2 + -(P.const.s1 * P.const.c2) := by rw [h]
+                                        -- 仮定 `c_1cos θ = s_1c_2`
+      _ = 0 := add_neg_cancel _         -- ℝ の加法の逆元（`x → s_1c_2`）
+
 /-- **人手証明 `gamma_2_theta_tilde_nonzero`**: `γ_2(θ~_μ) ≠ 0`（`μ ∈ ℤ` 全体で成り立つ）。 -/
 theorem gamma2_thetaTilde_ne_zero {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     gamma2 P.const (thetaTilde M μ) ≠ 0 := by
@@ -66,8 +101,10 @@ theorem gamma2_thetaTilde_ne_zero {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
   · -- Step 2 + Step 3: `cos θ~_μ = -1`
     have hcosval := cos_thetaTilde_eq_neg_one_of_sin_eq_zero hM μ hsin
     -- Step 1 の連立条件の第 1 式 `c_1 cos θ = s_1c_2`（`gamma2_eq_zero_iff` は差が 0 の形で返すので、
-    -- 人手の同値の鎖の `c_1cos θ - s_1c_2 = 0 ⟺ c_1cos θ = s_1c_2` の段を `sub_eq_zero` で踏む）
-    have hstep1 : P.const.c1 * Real.cos (thetaTilde M μ) = P.const.s1 * P.const.c2 := sub_eq_zero.1 hcos
+    -- 人手の同値の鎖の 5 行目 `c_1cos θ - s_1c_2 = 0 ⟺ c_1cos θ = s_1c_2` の段を、その根拠の二つの鎖
+    -- `gamma2_step1_first_equation_iff` の前者から後者への向きで踏む）
+    have hstep1 : P.const.c1 * Real.cos (thetaTilde M μ) = P.const.s1 * P.const.c2 :=
+      (gamma2_step1_first_equation_iff P (thetaTilde M μ)).1 hcos
     -- Step 4: `s_1c_2` の鎖
     have hchain : P.const.s1 * P.const.c2 = -P.const.c1 :=
       calc P.const.s1 * P.const.c2
