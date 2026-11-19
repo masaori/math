@@ -1,3 +1,4 @@
+- 式変形の書き方の統一: 2026-11-19（主経路の書式統一）: 「構成した置換の一歩で色が反転する」の二つの場合の式から、根拠括弧の後の句読点を除いた。
 - レビュー記録: 2026-11-19（主経路）: 前回の「すべての配位を等しく数える点での自由エントロピー」を再読した。係数の総和と対数順序群の等式が本文の根拠に対応し、修正は無かった。
 - 前進の記録: 2026-11-19（主経路）: 「配位全体と行配位の族全体は 1 対 1 に対応する」はトレース表示の式鎖で使われていたがラベル参照が無かったため、その行に `claim_rows_bijection` を接続した。残る転送行列の候補は次の tick で判定する。
 - 現在地: **2026-11-19（並列）、表の先頭「末尾に変数を足す持ち上げ」を四層で済ませた**（`def_last_variable_extension`・`claim_last_variable_zero_of_extension`・`claim_last_variable_extension_subfield_coefficient`・`claim_last_variable_extension_weighted_degree_bound`。持ち上げ $\mathrm{ex}_n(Q)$ を末尾の指数で場合分けした係数で定め、零代入の係数の式から $\mathrm{lz}_n(\mathrm{ex}_n(Q))=Q$、係数の場合分けから部分体係数の保存と $\mathrm{wdeg}_{n+1}(\mathrm{ex}_n(Q))\le\mathrm{wdeg}_n(Q)$）。並列の表の次は「重み付き次数の和と末尾の変数倍の上界」。

@@ -50752,7 +50752,9 @@ m&\in F&&\bigl(\because\ -(-m)\in F\text{ と直前の等号}\bigr)
 a&\in F&&\bigl(\because\ \text{整数の段}\bigr)\\
 b&\in F&&\bigl(\because\ \text{自然数の段}\bigr)\\
 b&\ne0&&\bigl(\because\ b\ge1\bigr)\\
-q=a/b&\in F&&\bigl(\because\ F\text{ は零元でない元による商で閉じる}\bigr)
+a/b&\in F&&\bigl(\because\ a,b\in F,\ b\ne0,\ F\text{ は商で閉じる}\bigr)\\
+q&=a/b&&\bigl(\because\ q\text{ の表示の選び方}\bigr)\\
+q&\in F&&\bigl(\because\ a/b\in F\text{ と直前の等号}\bigr)
 \end{aligned}`),
                     paragraph([
                       "部分体の性質のうち使ったのは、零元・単位元を含むことと、和・符号反転・商で閉じることだけである。",
