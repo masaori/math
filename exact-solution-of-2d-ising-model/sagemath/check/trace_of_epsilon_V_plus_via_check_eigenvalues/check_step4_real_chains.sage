@@ -20,7 +20,7 @@
 # 厳密な部: 行の構造（有限積の分配、和の分配、展開）を γ によらず確かめるため、exp(γ_μ/2) を QQ 上のローラン多項式環の不定元 A_μ、
 #   C を不定元に置き（exp(γ(e − 1/2)) = A^{2e−1}）、第一の鎖の 3〜6 行と第二の鎖の 1〜4 行と最後の閉形式 C·Π(A − A^{-1}) を厳密に比べる。
 #   指数の引数の書き換え（1 − 1/2 = 1/2（real_one_minus_half_is_half）、0 − a = −a、a(−b) = −(ab)（real_times_negation_is_negation_of_product）、a·1/2 = a/2（real_times_half_is_quotient_by_two））は QQ[γ]、1·b = b（乗法の単位元）・(−1)b = −b（real_minus_one_times_is_negation）・a + (−b) = a − b（def_real_difference）は QQ[a, b]、
-#   b = 2·(b/2) は QQ(b) で恒等式として確かめる。
+#   b = 2·(b/2)（real_twice_quotient_by_two_is_original を右辺から左辺へ）は QQ(b) で恒等式として確かめる。
 load("_prelude.sage")
 
 fold_sum = lambda xs: left_product(xs, lambda x, y: x + y)

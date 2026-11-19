@@ -2897,6 +2897,65 @@ a\cdot\tfrac12
     },
   },
   {
+    id: "calculation_formulae_claim_real_twice_quotient_by_two_is_original",
+    kind: "claim",
+    title: { text: "実数を 2 で割った商に 2 を掛けるともとの実数に戻る" },
+    labels: ["real_twice_quotient_by_two_is_original"],
+    statement: [
+      paragraph([
+        math(String.raw`b \in \mathbb{R}`),
+        " とする。積・",
+        math(String.raw`1`),
+        "・乗法の逆元 ",
+        math(String.raw`x^{-1}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        "、",
+        math(String.raw`\tfrac{b}{2} \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to b,\ z \to 2`),
+        "。",
+        math(String.raw`2 \neq 0`),
+        " は ",
+        ref("real_two_is_nonzero"),
+        "）である。このとき",
+      ]),
+      displayMath(String.raw`2\cdot\tfrac{b}{2} = b`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+2\cdot\tfrac{b}{2}
+&= 2\cdot\left(b\cdot 2^{-1}\right)
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to b,\ z \to 2)\bigr)\\
+&= 2\cdot\left(2^{-1}\cdot b\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\ xy = yx\ (x \to b,\ y \to 2^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \left(2\cdot 2^{-1}\right)\cdot b
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ (x \to 2,\ y \to 2^{-1},\ t \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 1\cdot b
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の逆元}\ x\cdot x^{-1} = 1\ (x \to 2\text{。}2 \neq 0\ \text{は}\ \blkref{real_two_is_nonzero})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= b
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-19（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_of_epsilon_V_plus_via_check_eigenvalues の Step 4 の 2 本目の和の鎖が「ℝ で 2 ≠ 0 なので b = 2·(b/2)」を名前だけで根拠にしていたので、示す主張として足した（ℂ の twice_times_inverse_of_two_is_original_in_cc に当たる ℝ の主張）。Lean の具体版は Ising2D.real_twice_quotient_by_two_is_original（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealTwiceQuotientByTwoIsOriginal.lean）、必要十分版は Ising2D.NecSuf.mul_div_cancel_of_right_inverse'（NecSuf/MulDivCancelOfRightInverse.lean）。数値検証: sagemath/check/real_twice_quotient_by_two_is_original/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_inverse_of_positive_is_positive",
     kind: "claim",
     title: { text: "正の実数の乗法の逆元は正" },

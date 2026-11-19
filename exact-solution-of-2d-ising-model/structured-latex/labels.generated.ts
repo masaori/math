@@ -613,6 +613,7 @@ export const ALL_LABELS = [
   "real_times_half_is_quotient_by_two",
   "real_times_negation_is_negation_of_product",
   "real_times_zero_is_zero",
+  "real_twice_quotient_by_two_is_original",
   "real_two_is_nonzero",
   "real_vector_inclusion_intertwines_matrix_vector_product",
   "real_vector_inclusion_is_injective",
