@@ -50655,8 +50655,8 @@ b&\in R&&(\because\ E=R)
                       " を示す。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-0&\in F&&\bigl(\because\ F\text{ は部分体}\bigr),\\
-n+1&\in F&&\bigl(\because\ n\in F\text{（帰納法の仮定）と }1\in F\text{ と }F\text{ は和で閉じる}\bigr).
+0&\in F&&\bigl(\because\ F\text{ は部分体}\bigr)\\
+n+1&\in F&&\bigl(\because\ n\in F\text{（帰納法の仮定）と }1\in F\text{ と }F\text{ は和で閉じる}\bigr)
 \end{aligned}`),
                     paragraph([
                       "整数。",
@@ -50674,8 +50674,8 @@ n+1&\in F&&\bigl(\because\ n\in F\text{（帰納法の仮定）と }1\in F\text{
                       " で",
                     ]),
                     displayMath(String.raw`\begin{aligned}
--m&\in F&&\bigl(\because\ -m\in\mathbb{N}\text{ と自然数の段}\bigr),\\
-m=-(-m)&\in F&&\bigl(\because\ F\text{ は符号反転で閉じる}\bigr).
+-m&\in F&&\bigl(\because\ -m\in\mathbb{N}\text{ と自然数の段}\bigr)\\
+m=-(-m)&\in F&&\bigl(\because\ F\text{ は符号反転で閉じる}\bigr)
 \end{aligned}`),
                     paragraph([
                       "有理数。",
@@ -50691,10 +50691,10 @@ m=-(-m)&\in F&&\bigl(\because\ F\text{ は符号反転で閉じる}\bigr).
                       " と書く。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-a&\in F&&\bigl(\because\ \text{整数の段}\bigr),\\
-b&\in F&&\bigl(\because\ \text{自然数の段}\bigr),\\
-b&\ne0&&\bigl(\because\ b\ge1\bigr),\\
-q=a/b&\in F&&\bigl(\because\ F\text{ は零元でない元による商で閉じる}\bigr).
+a&\in F&&\bigl(\because\ \text{整数の段}\bigr)\\
+b&\in F&&\bigl(\because\ \text{自然数の段}\bigr)\\
+b&\ne0&&\bigl(\because\ b\ge1\bigr)\\
+q=a/b&\in F&&\bigl(\because\ F\text{ は零元でない元による商で閉じる}\bigr)
 \end{aligned}`),
                     paragraph([
                       "部分体の性質のうち使ったのは、零元・単位元を含むことと、和・符号反転・商で閉じることだけである。",
