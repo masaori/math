@@ -72,6 +72,7 @@ theorem gamma1R_add_two_pi_mul_int (K : IsingConst) (θ : ℝ) (k : ℤ) :
 人手の `(M_col)_ℝ` は `M_col ∈ ℤ` の `ι_{ℤ→ℝ}` による像で、Lean では `((M : ℤ) : ℝ)` と書く
 （`thetaTilde` の分母と、分子の `(kM_col)_ℝ` から 3 行目で分ける因子の両方）。
 人手の `2π` は 1 つの実数で、Lean の `2 * Real.pi` に当たる。9 行目の分配法則が作る形は `2π(k_ℝ(M_col)_ℝ)` である。
+人手 `def_real_difference`（`y − z := y + (−z)`）は mathlib の `sub_eq_add_neg`、
 人手 `def_real_quotient`（`y/z := y z^{-1}`）は mathlib の `div_eq_mul_inv`、その乗法の逆元（`z z^{-1} = 1_ℝ`）は
 `mul_inv_cancel₀` で受ける。 -/
 theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
@@ -87,11 +88,12 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [add_comm (μ : ℝ)]                     -- 4 行目: ℝ の加法の交換律
     _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) + (-(1 / 2))) / ((M : ℤ) : ℝ) := by
-        rw [sub_eq_add_neg]                       -- 5 行目: `def_real_difference`
+        rw [sub_eq_add_neg ((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) (1 / 2)]
+                                                  -- 5 行目: `def_real_difference`（`y → k_ℝ(M_col)_ℝ + μ_ℝ`, `z → 1/2`）
     _ = 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ) + ((μ : ℝ) + (-(1 / 2)))) / ((M : ℤ) : ℝ) := by
         rw [add_assoc]                            -- 6 行目: ℝ の加法の結合律
     _ = 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ) + ((μ : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ) := by
-        rw [← sub_eq_add_neg]                     -- 7 行目: `def_real_difference` を右辺から左辺へ
+        rw [← sub_eq_add_neg (μ : ℝ) (1 / 2)]     -- 7 行目: `def_real_difference`（`y → μ_ℝ`, `z → 1/2`）を右辺から左辺へ
     _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + (k : ℝ) * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
         rw [add_comm ((k : ℝ) * ((M : ℤ) : ℝ))]         -- 8 行目: ℝ の加法の交換律
     _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by

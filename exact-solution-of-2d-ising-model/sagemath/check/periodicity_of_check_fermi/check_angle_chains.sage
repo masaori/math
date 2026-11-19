@@ -23,9 +23,9 @@ chain2 = [
     2 * PI * ((mu + (kk * MM)) - h) / MM,            # ι は和を保つ
     2 * PI * ((mu + kk * MM) - h) / MM,              # ι は積を保つ
     2 * PI * ((kk * MM + mu) - h) / MM,              # 加法の交換律
-    2 * PI * ((kk * MM + mu) + (-h)) / MM,           # 差の定義
+    2 * PI * ((kk * MM + mu) + (-h)) / MM,           # def_real_difference（y → k_R(M)_R + μ_R, z → 1/2）
     2 * PI * (kk * MM + (mu + (-h))) / MM,           # 加法の結合律
-    2 * PI * (kk * MM + (mu - h)) / MM,              # 差の定義を右辺から左辺へ
+    2 * PI * (kk * MM + (mu - h)) / MM,              # def_real_difference（y → μ_R, z → 1/2）を右辺から左辺へ
     2 * PI * ((mu - h) + kk * MM) / MM,              # 加法の交換律
     (2 * PI * (mu - h) + 2 * PI * (kk * MM)) / MM,   # 分配法則
     (2 * PI * (mu - h) + 2 * PI * (kk * MM)) * MM**(-1),             # def_real_quotient

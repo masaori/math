@@ -7154,11 +7154,11 @@ g
 &= \frac{2\pi\left(\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
 &= \frac{2\pi\left(\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \blkref{def_real_difference}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R},\ z \to \tfrac12)\bigr)\\
 &= \frac{2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb{R}\ \text{の加法の結合律})\\
 &= \frac{2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \blkref{def_real_difference}\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \mu_{\mathbb R},\ z \to \tfrac12)\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right)+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
 &= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
