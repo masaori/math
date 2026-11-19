@@ -58126,6 +58126,371 @@ d&(e=a\text{ のとき})\\
                 },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_last_fixed_permutation_extension",
+              focus:
+                {
+                  id: "zero_pinching_def_last_fixed_permutation_extension",
+                  kind: "definition",
+                  title: { text: "末尾を固定する写像の延長" },
+                  labels: ["def_last_fixed_permutation_extension"],
+                  habitat: "N",
+                  verification: ["sagemath/check/last-variable-zero-preserves-symmetry"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.lastFixedExtensionFun",
+                    "Ising2DLambda.FisherZero.lastFixedExtensionFun_castSucc",
+                    "Ising2DLambda.FisherZero.lastFixedExtensionFun_last",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と写像 ",
+                      math(String.raw`f:\mathbb{N}_{<n}\to\mathbb{N}_{<n}`),
+                      " に対して、写像 ",
+                      math(String.raw`\mathrm{pe}_n(f):\mathbb{N}_{<n+1}\to\mathbb{N}_{<n+1}`),
+                      " を、",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " なら ",
+                      math(String.raw`\mathrm{pe}_n(f)(k):=f(k)`),
+                      "、",
+                      math(String.raw`\mathrm{pe}_n(f)(n):=n`),
+                      " と定め、",
+                      math(String.raw`f`),
+                      " の末尾を固定する延長と呼ぶ。",
+                      math(String.raw`f(k)\in\mathbb{N}_{<n}\subseteq\mathbb{N}_{<n+1}`),
+                      " であり、",
+                      math(String.raw`\mathbb{N}_{<n+1}=\mathbb{N}_{<n}\cup\{n\}`),
+                      " なので、",
+                      math(String.raw`\mathrm{pe}_n(f)`),
+                      " は ",
+                      math(String.raw`\mathbb{N}_{<n+1}`),
+                      " の各元にただ一つの値を与える。",
+                      "現れるのは自然数の有限集合だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_last_fixed_permutation_extension_is_bijection",
+              focus:
+                {
+                  id: "zero_pinching_claim_last_fixed_permutation_extension_is_bijection",
+                  kind: "claim",
+                  title: { text: "置換の末尾を固定する延長は置換である" },
+                  labels: ["claim_last_fixed_permutation_extension_is_bijection"],
+                  habitat: "N",
+                  verification: ["sagemath/check/last-variable-zero-preserves-symmetry"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.lastFixedExtensionFun_inverse",
+                    "Ising2DLambda.FisherZero.lastFixedExtension",
+                    "Ising2DLambda.NecSuf.FisherZero.fixedPointExtension_inverse_necSuf",
+                    "Ising2DLambda.FisherZero.fin_succ_cover",
+                    "Ising2DLambda.FisherZero.lastFixedExtensionFun_inverse_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      "（",
+                      ref("def_qbar_variable_permutation"),
+                      "）について ",
+                      math(String.raw`\mathrm{pe}_n(\varrho)\in\mathfrak{P}_{n+1}`),
+                      " であり、その逆写像は ",
+                      math(String.raw`\mathrm{pe}_n(\varrho^{-1})`),
+                      " である（",
+                      ref("def_last_fixed_permutation_extension"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、写像 ",
+                      math(String.raw`f,g:\mathbb{N}_{<n}\to\mathbb{N}_{<n}`),
+                      " が任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " で ",
+                      math(String.raw`g(f(k))=k`),
+                      " を満たすなら、任意の ",
+                      math(String.raw`j\in\mathbb{N}_{<n+1}`),
+                      " で ",
+                      math(String.raw`\mathrm{pe}_n(g)(\mathrm{pe}_n(f)(j))=j`),
+                      " であることを示す。",
+                      math(String.raw`j<n`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{pe}_n(g)\bigl(\mathrm{pe}_n(f)(j)\bigr)
+&=\mathrm{pe}_n(g)\bigl(f(j)\bigr)
+&&\bigl(\because\ j\in\mathbb{N}_{<n}\text{ と }\blkref{def_last_fixed_permutation_extension}\bigr)\\
+&=g\bigl(f(j)\bigr)
+&&\bigl(\because\ f(j)\in\mathbb{N}_{<n}\text{ と }\blkref{def_last_fixed_permutation_extension}\bigr)\\
+&=j
+&&\bigl(\because\ g(f(k))=k\text{ を }k=j\text{ に当てる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`j=n`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{pe}_n(g)\bigl(\mathrm{pe}_n(f)(n)\bigr)
+&=\mathrm{pe}_n(g)(n)
+&&\bigl(\because\ \blkref{def_last_fixed_permutation_extension}\text{ の }\mathrm{pe}_n(f)(n)=n\bigr)\\
+&=n
+&&\bigl(\because\ \blkref{def_last_fixed_permutation_extension}\text{ の }\mathrm{pe}_n(g)(n)=n\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`\mathbb{N}_{<n+1}=\mathbb{N}_{<n}\cup\{n\}`),
+                      " なので、準備が示せた。",
+                      math(String.raw`\varrho^{-1}\circ\varrho`),
+                      " と ",
+                      math(String.raw`\varrho\circ\varrho^{-1}`),
+                      " はどちらも ",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " の恒等写像なので、準備を ",
+                      math(String.raw`(f,g)=(\varrho,\varrho^{-1})`),
+                      " と ",
+                      math(String.raw`(f,g)=(\varrho^{-1},\varrho)`),
+                      " に当てると、",
+                      math(String.raw`\mathrm{pe}_n(\varrho^{-1})\circ\mathrm{pe}_n(\varrho)`),
+                      " と ",
+                      math(String.raw`\mathrm{pe}_n(\varrho)\circ\mathrm{pe}_n(\varrho^{-1})`),
+                      " はどちらも ",
+                      math(String.raw`\mathbb{N}_{<n+1}`),
+                      " の恒等写像である。よって ",
+                      math(String.raw`\mathrm{pe}_n(\varrho)`),
+                      " は ",
+                      math(String.raw`\mathbb{N}_{<n+1}`),
+                      " から ",
+                      math(String.raw`\mathbb{N}_{<n+1}`),
+                      " への全単射、すなわち ",
+                      math(String.raw`\mathfrak{P}_{n+1}`),
+                      " の元で、逆写像は ",
+                      math(String.raw`\mathrm{pe}_n(\varrho^{-1})`),
+                      " である。",
+                      "全過程は自然数の有限集合の上の写像の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_last_variable_zero_commutes_with_variable_permutation",
+              focus:
+                {
+                  id: "zero_pinching_claim_last_variable_zero_commutes_with_variable_permutation",
+                  kind: "claim",
+                  title: { text: "末尾の変数への零代入は末尾を固定する変数の置換と入れ替わる" },
+                  labels: ["claim_last_variable_zero_commutes_with_variable_permutation"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/last-variable-zero-preserves-symmetry"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.variablePermutationValues_comp_lastVariableZeroValues",
+                    "Ising2DLambda.FisherZero.variablePermutation_lastVariableZero",
+                    "Ising2DLambda.NecSuf.FisherZero.lastPointZero_comm_variableMap_necSuf",
+                    "Ising2DLambda.FisherZero.variablePermutation_lastVariableZero_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      "、",
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      "、",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について",
+                    ]),
+                    displayMath(String.raw`\mathrm{vs}_{\varrho}\bigl(\mathrm{lz}_n(P)\bigr)=\mathrm{lz}_n\bigl(\mathrm{vs}_{\mathrm{pe}_n(\varrho)}(P)\bigr)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_variable_permutation"),
+                      "、",
+                      ref("def_last_variable_zero_substitution"),
+                      "、",
+                      ref("def_last_fixed_permutation_extension"),
+                      "）。右辺の ",
+                      math(String.raw`\mathrm{vs}_{\mathrm{pe}_n(\varrho)}`),
+                      " は、",
+                      ref("claim_last_fixed_permutation_extension_is_bijection"),
+                      " により ",
+                      math(String.raw`\mathrm{pe}_n(\varrho)\in\mathfrak{P}_{n+1}`),
+                      " なので定まる。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、二つの写像 ",
+                      math(String.raw`\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ z_n`),
+                      " と ",
+                      math(String.raw`\mathrm{ms}_{z_n}\circ\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)}`),
+                      "（どちらも ",
+                      math(String.raw`\mathbb{N}_{<n+1}\to\overline{\mathbb{Q}}[X_{<n}]`),
+                      "。",
+                      ref("claim_qbar_multivariate_substitution_composition"),
+                      " の置き方）が等しいことを示す。",
+                      math(String.raw`j\in\mathbb{N}_{<n+1}`),
+                      " を取る。",
+                      math(String.raw`j<n`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+(\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ z_n)(j)
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(z_n(j)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)\\
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(X^{(n)}_j\bigr)
+&&\bigl(\because\ j<n\text{ と }\blkref{def_last_variable_zero_substitution}\text{ の }z_n\bigr)\\
+&=\mathrm{xv}_{n,\varrho}(j)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(X^{(n)}_k)=y(k)\bigr)\\
+&=X^{(n)}_{\varrho(j)}
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{xv}_{n,\varrho}\bigr)\\
+&=z_n\bigl(\varrho(j)\bigr)
+&&\bigl(\because\ \varrho(j)\in\mathbb{N}_{<n}\text{ と }\blkref{def_last_variable_zero_substitution}\text{ の }z_n\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(X^{(n+1)}_{\varrho(j)}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(X^{(n+1)}_k)=y(k)\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(X^{(n+1)}_{\mathrm{pe}_n(\varrho)(j)}\bigr)
+&&\bigl(\because\ j<n\text{ と }\blkref{def_last_fixed_permutation_extension}\text{ の }\mathrm{pe}_n(\varrho)(j)=\varrho(j)\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)}(j)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)}\bigr)\\
+&=(\mathrm{ms}_{z_n}\circ\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)})(j)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`j=n`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+(\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ z_n)(n)
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(z_n(n)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)\\
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}(0)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{ の }z_n(n)=0\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y\text{ は零元を零元へ送る}\bigr)\\
+&=z_n(n)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{ の }z_n(n)=0\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(X^{(n+1)}_n\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(X^{(n+1)}_k)=y(k)\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(X^{(n+1)}_{\mathrm{pe}_n(\varrho)(n)}\bigr)
+&&\bigl(\because\ \blkref{def_last_fixed_permutation_extension}\text{ の }\mathrm{pe}_n(\varrho)(n)=n\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)}(n)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)}\bigr)\\
+&=(\mathrm{ms}_{z_n}\circ\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)})(n)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。よって写像として ",
+                      math(String.raw`\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ z_n=\mathrm{ms}_{z_n}\circ\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)}`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{vs}_{\varrho}\bigl(\mathrm{lz}_n(P)\bigr)
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(\mathrm{lz}_n(P)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_{\varrho}\bigr)\\
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(\mathrm{ms}_{z_n}(P)\bigr)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{ の }\mathrm{lz}_n\bigr)\\
+&=\mathrm{ms}_{\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ z_n}(P)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ms}_{z_n}\circ\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)}}(P)
+&&\bigl(\because\ \text{準備の }\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ z_n=\mathrm{ms}_{z_n}\circ\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)}\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(\mathrm{ms}_{\mathrm{xv}_{n+1,\mathrm{pe}_n(\varrho)}}(P)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ を右辺から左辺へ}\bigr)\\
+&=\mathrm{ms}_{z_n}\bigl(\mathrm{vs}_{\mathrm{pe}_n(\varrho)}(P)\bigr)
+&&\bigl(\because\ \blkref{claim_last_fixed_permutation_extension_is_bijection}\text{ と }\blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_{\mathrm{pe}_n(\varrho)}\bigr)\\
+&=\mathrm{lz}_n\bigl(\mathrm{vs}_{\mathrm{pe}_n(\varrho)}(P)\bigr)
+&&\bigl(\because\ \blkref{def_last_variable_zero_substitution}\text{ の }\mathrm{lz}_n\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " 係数の多項式の代入の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_last_variable_zero_preserves_symmetry",
+              focus:
+                {
+                  id: "zero_pinching_claim_last_variable_zero_preserves_symmetry",
+                  kind: "claim",
+                  title: { text: "対称な多項式の末尾の変数に零を代入しても対称である" },
+                  labels: ["claim_last_variable_zero_preserves_symmetry"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/last-variable-zero-preserves-symmetry"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.lastVariableZero_isQbarSymmetric",
+                    "Ising2DLambda.NecSuf.FisherZero.invariant_map_of_comm_necSuf",
+                    "Ising2DLambda.FisherZero.lastVariableZero_isQbarSymmetric_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と、対称な ",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n+1}]`),
+                      "（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）について、",
+                      math(String.raw`\mathrm{lz}_n(P)\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_last_variable_zero_substitution"),
+                      "）は対称である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      "（",
+                      ref("def_qbar_variable_permutation"),
+                      "）を任意に取る。",
+                      ref("claim_last_fixed_permutation_extension_is_bijection"),
+                      " により ",
+                      math(String.raw`\mathrm{pe}_n(\varrho)\in\mathfrak{P}_{n+1}`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{vs}_{\varrho}\bigl(\mathrm{lz}_n(P)\bigr)
+&=\mathrm{lz}_n\bigl(\mathrm{vs}_{\mathrm{pe}_n(\varrho)}(P)\bigr)
+&&\bigl(\because\ \blkref{claim_last_variable_zero_commutes_with_variable_permutation}\bigr)\\
+&=\mathrm{lz}_n(P)
+&&\bigl(\because\ \mathrm{pe}_n(\varrho)\in\mathfrak{P}_{n+1}\text{ と、}P\text{ が対称であること（}\blkref{def_qbar_symmetric_polynomial}\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`\varrho`),
+                      " は任意だったので、",
+                      ref("def_qbar_symmetric_polynomial"),
+                      " により ",
+                      math(String.raw`\mathrm{lz}_n(P)`),
+                      " は対称である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " 係数の多項式の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
         ],
       },
     },
