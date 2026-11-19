@@ -50662,6 +50662,78 @@ c^2&=(-d)^2&&(\because\ c=-d)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_sum_of_squares_positive_root_plus_real_positive",
+        labels: [],
+        title: { text: "平方和の正の根と実係数の和" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_sum_of_squares_positive_root_plus_real_positive",
+            focus: {
+              id: "zero_pinching_claim_sum_of_squares_positive_root_plus_real_positive",
+              kind: "claim",
+              title: { text: "非零の虚係数に対する平方和の正の根と実係数の和は正である" },
+              labels: ["claim_sum_of_squares_positive_root_plus_real_positive"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/sum-of-squares-positive-root-plus-real-positive"],
+              lean: [
+                "Ising2DLambda.FisherZero.sumOfSquares_positiveRoot_plusReal_positive",
+                "Ising2DLambda.NecSuf.FisherZero.sumOfSquares_positiveRoot_plusReal_positive",
+                "Ising2DLambda.FisherZero.sumOfSquares_positiveRoot_plusReal_positive_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subset\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`C_F\subset F`), " を ", ref("def_subfield_positive_cone"),
+                " の正錐とする。任意の ", math(String.raw`a,b,c\in F`), " について、",
+                math(String.raw`b\ne0`), "、", math(String.raw`c\in C_F`), "、",
+                math(String.raw`c^2=a^2+b^2`), " なら ", math(String.raw`c+a\in C_F`), " である。",
+              ])],
+              proof: [
+                paragraph([
+                  ref("claim_subfield_positive_cone_contains_nonzero_squares"), " により ",
+                  math(String.raw`b^2\in C_F`), "。正錐の三分法（",
+                  ref("def_subfield_positive_cone"), "）により ", math(String.raw`0\notin C_F`),
+                  " である。", math(String.raw`c+a\in F`), " なので、同じ三分法を ",
+                  math(String.raw`c+a`), " に適用する。",
+                ]),
+                paragraph([math(String.raw`c+a=0`), " と仮定すると、次の等式が成り立つ。"]),
+                displayMath(String.raw`\begin{aligned}
+b^2&=c^2-a^2&&(\because\ c^2=a^2+b^2)\\
+&=(-a)^2-a^2&&(\because\ c+a=0)\\
+&=0&&(\because\ \text{符号反転した元の平方})
+\end{aligned}`),
+                paragraph(["これは ", math(String.raw`b^2\in C_F`), " と ", math(String.raw`0\notin C_F`), " に矛盾する。"]),
+                paragraph([math(String.raw`-(c+a)\in C_F`), " と仮定する。正錐の和の閉性（", ref("def_subfield_positive_cone"), "）より次を得る。"]),
+                displayMath(String.raw`\begin{aligned}
+-a&=-(c+a)+c&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&\in C_F&&(\because\ -(c+a),c\in C_F,\ \blkref{def_subfield_positive_cone})
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+c-a&=c+(-a)&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&\in C_F&&(\because\ c,-a\in C_F,\ \blkref{def_subfield_positive_cone})
+\end{aligned}`),
+                paragraph(["正錐の積の閉性（", ref("def_subfield_positive_cone"), "）より次を得る。"]),
+                displayMath(String.raw`\begin{aligned}
+-b^2&=-(c^2-a^2)&&(\because\ c^2=a^2+b^2)\\
+&=-(c+a)(c-a)&&(\because\ \text{平方差の因数分解})\\
+&\in C_F&&(\because\ -(c+a),c-a\in C_F,\ \blkref{def_subfield_positive_cone})
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+0&=b^2+(-b^2)&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&\in C_F&&(\because\ b^2,-b^2\in C_F,\ \blkref{def_subfield_positive_cone})
+\end{aligned}`),
+                paragraph(["これは ", math(String.raw`0\notin C_F`), " に矛盾する。三分法に残るのは ", math(String.raw`c+a\in C_F`), " だけである。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_imaginary_unit_square_root_formula",
         labels: [],
         title: { text: "虚数単位を足した元の平方根の明示式" },

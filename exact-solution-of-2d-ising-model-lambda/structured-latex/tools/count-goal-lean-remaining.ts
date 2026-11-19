@@ -200,9 +200,13 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
     title: "二つの平方の和の根は零か正錐の元に選べる",
     dependsOn: ["claim_maximal_ordered_subfield_sum_of_squares_is_square"],
   },
+  claim_sum_of_squares_positive_root_plus_real_positive: {
+    title: "非零の虚係数に対する平方和の正の根と実係数の和は正である",
+    dependsOn: ["claim_sum_of_squares_root_nonnegative_sign"],
+  },
   claim_imaginary_unit_extension_square_root: {
     title: "虚数単位を足した元は平方根を持つ",
-    dependsOn: ["claim_imaginary_unit_square_root_formula", "claim_sum_of_squares_root_nonnegative_sign"],
+    dependsOn: ["claim_imaginary_unit_square_root_formula", "claim_sum_of_squares_root_nonnegative_sign", "claim_sum_of_squares_positive_root_plus_real_positive"],
   },
   claim_imaginary_unit_extension_quadratic_root: {
     title: "正の元が平方である部分体に虚数単位を足した体では二次多項式が根を持つ",
