@@ -20,6 +20,7 @@ import type {
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_main_text from './content/main-text.ts'
+import notes_connected_graph_crossing_edge from './notes/connected-graph-crossing-edge.ts'
 import notes_critical_exponent from './notes/critical-exponent.ts'
 import notes_formal_square_root_archive from './notes/formal-square-root-archive.ts'
 import notes_free_entropy from './notes/free-entropy.ts'
@@ -36,6 +37,7 @@ export type AllBlocks = [
 
 /** 全ノート。 */
 export type AllNotes = [
+  ...typeof notes_connected_graph_crossing_edge,
   ...typeof notes_critical_exponent,
   ...typeof notes_formal_square_root_archive,
   ...typeof notes_free_entropy,

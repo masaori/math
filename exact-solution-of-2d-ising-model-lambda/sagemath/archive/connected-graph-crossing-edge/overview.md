@@ -1,6 +1,6 @@
 # 連結グラフの非自明な頂点分割をまたぐ辺がある
 
-**対象ラベル**: `claim_connected_graph_crossing_edge`
+**退避した対象ラベル**: `claim_connected_graph_crossing_edge`
 
 | ファイル | 検証内容 | 状態 |
 |---|---|---|
