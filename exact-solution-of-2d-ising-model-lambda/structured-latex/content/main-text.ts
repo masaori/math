@@ -56490,6 +56490,562 @@ d&(e=a\text{ のとき})\\
                 },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_coefficient_multivariate_constant",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_coefficient_multivariate_constant",
+                  kind: "claim",
+                  title: { text: "部分体の元の定数は部分体を係数とする多項式である" },
+                  labels: ["claim_subfield_coefficient_multivariate_constant"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-subfield-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.C_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.C_mem_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.C_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。任意の ",
+                      math(String.raw`c\in F`),
+                      " について ",
+                      math(String.raw`\mathrm{mk}_n(c)\in F[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      " を任意に取る。",
+                      math(String.raw`a`),
+                      " が零写像のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\bigl(\mathrm{mk}_n(c)\bigr)
+&=c
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の }\mathrm{mk}_n\bigr)\\
+&\in F
+&&\bigl(\because\ c\text{ の取り方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`a`),
+                      " が零写像でないとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\bigl(\mathrm{mk}_n(c)\bigr)
+&=0
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の }\mathrm{mk}_n\bigr)\\
+&\in F
+&&\bigl(\because\ F\text{ は部分体なので零元を含む}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      " により ",
+                      math(String.raw`\mathrm{mk}_n(c)\in F[X_{<n}]`),
+                      " である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分集合への所属だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_coefficient_multivariate_variable",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_coefficient_multivariate_variable",
+                  kind: "claim",
+                  title: { text: "変数は部分体を係数とする多項式である" },
+                  labels: ["claim_subfield_coefficient_multivariate_variable"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-subfield-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.X_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.X_mem_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.X_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について ",
+                      math(String.raw`X^{(n)}_k\in F[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      " を任意に取る。",
+                      math(String.raw`a=\delta_k`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\bigl(X^{(n)}_k\bigr)
+&=1
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の }X^{(n)}_k\bigr)\\
+&\in F
+&&\bigl(\because\ F\text{ は部分体なので単位元を含む}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`a\ne\delta_k`),
+                      " のとき",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\bigl(X^{(n)}_k\bigr)
+&=0
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の }X^{(n)}_k\bigr)\\
+&\in F
+&&\bigl(\because\ F\text{ は部分体なので零元を含む}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      " により ",
+                      math(String.raw`X^{(n)}_k\in F[X_{<n}]`),
+                      " である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分集合への所属だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_coefficient_multivariate_finite_sum",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_coefficient_multivariate_finite_sum",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする多項式の有限和は部分体を係数とする" },
+                  labels: ["claim_subfield_coefficient_multivariate_finite_sum"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-subfield-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.sum_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.sum_mem_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.sum_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。任意の有限集合 ",
+                      math(String.raw`I`),
+                      " と、任意の写像 ",
+                      math(String.raw`P:I\to F[X_{<n}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）について ",
+                      math(String.raw`\sum_{i\in I}P(i)\in F[X_{<n}]`),
+                      " である（和は ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の和。",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`I`),
+                      " の元の個数についての帰納法で示す。",
+                      math(String.raw`I`),
+                      " が空のとき、和は零元であり、任意の ",
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\Bigl(\sum_{i\in\emptyset}P(i)\Bigr)
+&=\mathrm{mco}_a(0)
+&&\bigl(\because\ \text{空の和は零元}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の零元の係数}\bigr)\\
+&\in F
+&&\bigl(\because\ F\text{ は部分体なので零元を含む}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`I`),
+                      " が空でないとき、",
+                      math(String.raw`i_0\in I`),
+                      " を取り ",
+                      math(String.raw`I':=I\setminus\{i_0\}`),
+                      " と置く。",
+                      math(String.raw`I'`),
+                      " の元の個数は ",
+                      math(String.raw`I`),
+                      " より一つ少ないので、帰納法の仮定（",
+                      math(String.raw`P`),
+                      " の ",
+                      math(String.raw`I'`),
+                      " への制限に使う）により ",
+                      math(String.raw`\sum_{i\in I'}P(i)\in F[X_{<n}]`),
+                      " である。任意の ",
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\Bigl(\sum_{i\in I}P(i)\Bigr)
+&=\mathrm{mco}_a\Bigl(P(i_0)+\sum_{i\in I'}P(i)\Bigr)
+&&\bigl(\because\ I=\{i_0\}\sqcup I'\text{ と有限和は並べ方によらない}\bigr)\\
+&=\mathrm{mco}_a\bigl(P(i_0)\bigr)+\mathrm{mco}_a\Bigl(\sum_{i\in I'}P(i)\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の和の係数}\bigr)\\
+&\in F
+&&\bigl(\because\ P(i_0)\in F[X_{<n}]\text{、帰納法の仮定、}F\text{ は和で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      " により ",
+                      math(String.raw`\sum_{i\in I}P(i)\in F[X_{<n}]`),
+                      " である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体の元の和だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_coefficient_multivariate_finite_product",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_coefficient_multivariate_finite_product",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする多項式の有限積は部分体を係数とする" },
+                  labels: ["claim_subfield_coefficient_multivariate_finite_product"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-subfield-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.prod_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.prod_mem_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.prod_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。任意の有限集合 ",
+                      math(String.raw`I`),
+                      " と、任意の写像 ",
+                      math(String.raw`P:I\to F[X_{<n}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）について ",
+                      math(String.raw`\prod_{i\in I}P(i)\in F[X_{<n}]`),
+                      " である（積は ",
+                      math(String.raw`\overline{\mathbb{Q}}[X_{<n}]`),
+                      " の積。",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`I`),
+                      " の元の個数についての帰納法で示す。",
+                      math(String.raw`I`),
+                      " が空のとき、積は単位元であり、単位元は ",
+                      math(String.raw`\mathrm{mk}_n(1)`),
+                      " である（零写像の指数の係数が ",
+                      math(String.raw`1`),
+                      " で他の係数が ",
+                      math(String.raw`0`),
+                      " の元。",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      " の積の係数の式で単位元になる）。",
+                      math(String.raw`1\in F`),
+                      " なので、",
+                      ref("claim_subfield_coefficient_multivariate_constant"),
+                      " により ",
+                      math(String.raw`\prod_{i\in\emptyset}P(i)=\mathrm{mk}_n(1)\in F[X_{<n}]`),
+                      " である。",
+                      math(String.raw`I`),
+                      " が空でないとき、",
+                      math(String.raw`i_0\in I`),
+                      " を取り ",
+                      math(String.raw`I':=I\setminus\{i_0\}`),
+                      " と置く。帰納法の仮定により ",
+                      math(String.raw`\prod_{i\in I'}P(i)\in F[X_{<n}]`),
+                      " である。任意の ",
+                      math(String.raw`a\in\mathrm{Ex}_n`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\Bigl(\prod_{i\in I}P(i)\Bigr)
+&=\mathrm{mco}_a\Bigl(P(i_0)\cdot\prod_{i\in I'}P(i)\Bigr)
+&&\bigl(\because\ I=\{i_0\}\sqcup I'\text{ と有限積は並べ方によらない}\bigr)\\
+&=\sum_{(b,c)\in\mathrm{Ex}_n\times\mathrm{Ex}_n:\ b+c=a}\mathrm{mco}_b\bigl(P(i_0)\bigr)\cdot\mathrm{mco}_c\Bigl(\prod_{i\in I'}P(i)\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の積の係数}\bigr)\\
+&\in F
+&&\bigl(\because\ P(i_0)\in F[X_{<n}]\text{、帰納法の仮定、}F\text{ は零元を含み和と積で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である（右辺は有限和で、各項は ",
+                      math(String.raw`F`),
+                      " の二元の積）。",
+                      math(String.raw`a`),
+                      " は任意なので、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      " により ",
+                      math(String.raw`\prod_{i\in I}P(i)\in F[X_{<n}]`),
+                      " である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体の元の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_elementary_symmetric_subfield_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_elementary_symmetric_subfield_coefficient",
+                  kind: "claim",
+                  title: { text: "基本対称式は任意の部分体を係数とする" },
+                  labels: ["claim_qbar_elementary_symmetric_subfield_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-subfield-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.elementarySymmetric_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.elementarySymmetric_mem_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.elementarySymmetric_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体とする。任意の ",
+                      math(String.raw`n,j\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`\mathrm{es}_{n,j}\in F[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "、",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      " により ",
+                      math(String.raw`\mathrm{es}_{n,j}=\sum_{S\subseteq\mathbb{N}_{<n}:\ |S|=j}\ \prod_{k\in S}X^{(n)}_k`),
+                      " である。",
+                      math(String.raw`S\subseteq\mathbb{N}_{<n}`),
+                      " を任意に取ると、",
+                      ref("claim_subfield_coefficient_multivariate_variable"),
+                      " により任意の ",
+                      math(String.raw`k\in S`),
+                      " で ",
+                      math(String.raw`X^{(n)}_k\in F[X_{<n}]`),
+                      " なので、",
+                      ref("claim_subfield_coefficient_multivariate_finite_product"),
+                      "（",
+                      math(String.raw`I=S`),
+                      "）により ",
+                      math(String.raw`\prod_{k\in S}X^{(n)}_k\in F[X_{<n}]`),
+                      " である。",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " の ",
+                      math(String.raw`j`),
+                      " 元部分集合の全体は有限集合なので、",
+                      ref("claim_subfield_coefficient_multivariate_finite_sum"),
+                      "（",
+                      math(String.raw`I`),
+                      " をその全体とする）により ",
+                      math(String.raw`\mathrm{es}_{n,j}\in F[X_{<n}]`),
+                      " である。",
+                      "全過程は有限集合と有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_elementary_symmetric_substitution_subfield_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_elementary_symmetric_substitution_subfield_coefficient",
+                  kind: "claim",
+                  title: { text: "基本対称式への代入は部分体係数を保つ" },
+                  labels: ["claim_elementary_symmetric_substitution_subfield_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-subfield-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.elementarySymmetricSubst_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.FisherZero.mul_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.FisherZero.pow_mem_subfieldCoefficientMvPolys",
+                    "Ising2DLambda.NecSuf.FisherZero.aeval_mem_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.elementarySymmetricSubst_mem_subfieldCoefficientMvPolys_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。任意の ",
+                      math(String.raw`Q\in F[X_{<n}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）について ",
+                      math(String.raw`\mathrm{se}_n(Q)\in F[X_{<n}]`),
+                      "（",
+                      ref("def_elementary_symmetric_substitution"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備を二つ置く。第一に、任意の ",
+                      math(String.raw`A,B\in F[X_{<n}]`),
+                      " について ",
+                      math(String.raw`A\cdot B\in F[X_{<n}]`),
+                      " であり、任意の ",
+                      math(String.raw`A\in F[X_{<n}]`),
+                      " と ",
+                      math(String.raw`e\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`A^{e}\in F[X_{<n}]`),
+                      " である。前者は ",
+                      ref("claim_subfield_coefficient_multivariate_finite_product"),
+                      " を二元の集合 ",
+                      math(String.raw`I=\{0,1\}`),
+                      "（",
+                      math(String.raw`P(0)=A`),
+                      "、",
+                      math(String.raw`P(1)=B`),
+                      "）に使ったもの、後者は ",
+                      math(String.raw`A^{e}=\prod_{i\in\mathbb{N}_{<e}}A`),
+                      "（冪は積の繰り返し）に同じ主張を使ったものである。",
+                      "第二に、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ee}_n(k)
+&=\mathrm{es}_{n,k+1}
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_n\bigr)\\
+&\in F[X_{<n}]
+&&\bigl(\because\ \blkref{claim_qbar_elementary_symmetric_subfield_coefficient}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`A_Q:=\{\,a\in\mathrm{Ex}_n\mid\mathrm{mco}_a(Q)\ne0\,\}`),
+                      "（有限集合。",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）と置き、",
+                      math(String.raw`a\in A_Q`),
+                      " に対して",
+                    ]),
+                    displayMath(String.raw`T_a:=\mathrm{mk}_n\bigl(\mathrm{mco}_a(Q)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}\mathrm{ee}_n(k)^{a(k)}\ \in\ \overline{\mathbb{Q}}[X_{<n}]`),
+                    paragraph([
+                      "と置く。",
+                      math(String.raw`a\in A_Q`),
+                      " を任意に取る。",
+                      math(String.raw`Q\in F[X_{<n}]`),
+                      " なので ",
+                      math(String.raw`\mathrm{mco}_a(Q)\in F`),
+                      " であり、",
+                      ref("claim_subfield_coefficient_multivariate_constant"),
+                      " により ",
+                      math(String.raw`\mathrm{mk}_n(\mathrm{mco}_a(Q))\in F[X_{<n}]`),
+                      " である。第二の準備と第一の準備の冪により、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " で ",
+                      math(String.raw`\mathrm{ee}_n(k)^{a(k)}\in F[X_{<n}]`),
+                      " であり、",
+                      ref("claim_subfield_coefficient_multivariate_finite_product"),
+                      "（",
+                      math(String.raw`I=\mathbb{N}_{<n}`),
+                      "）により ",
+                      math(String.raw`\prod_{k\in\mathbb{N}_{<n}}\mathrm{ee}_n(k)^{a(k)}\in F[X_{<n}]`),
+                      " である。第一の準備の積により ",
+                      math(String.raw`T_a\in F[X_{<n}]`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{se}_n(Q)
+&=\mathrm{ms}_{\mathrm{ee}_n}(Q)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{se}_n\bigr)\\
+&=\sum_{a\in A_Q}\mathrm{mk}_n\bigl(\mathrm{mco}_a(Q)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}\mathrm{ee}_n(k)^{a(k)}
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_{\mathrm{ee}_n}\bigr)\\
+&=\sum_{a\in A_Q}T_a
+&&\bigl(\because\ T_a\text{ の置き方}\bigr)\\
+&\in F[X_{<n}]
+&&\bigl(\because\ T_a\in F[X_{<n}]\text{ と }\blkref{claim_subfield_coefficient_multivariate_finite_sum}\text{（}I=A_Q\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "を得る。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体の元と有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
         ],
       },
     },
