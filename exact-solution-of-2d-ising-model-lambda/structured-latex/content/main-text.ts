@@ -91581,9 +91581,11 @@ D^{a,b}_L(x)
 \end{array}`),
                   paragraph([
                     "各列の転倒数は右欄の位置対の個数である。",
-                    ref("def_permutation_sign"), " の ", math(String.raw`\operatorname{sgn}(\sigma)=(-1)^{\operatorname{inv}(\sigma)}`),
-                    " を各列に適用すると、表示した符号を得る。",
+                    ref("def_permutation_sign"), " の等式",
                   ]),
+                  displayMath(String.raw`\operatorname{sgn}(\sigma)=(-1)^{\operatorname{inv}(\sigma)}
+\qquad\bigl(\because\ \blkref{def_permutation_sign}\bigr)`),
+                  paragraph(["を各列に適用すると、表示した符号を得る。"]),
                 ],
               },
             },
