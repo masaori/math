@@ -36,7 +36,7 @@
 （`TheoremCPlusEqualsLambda.lean`）のための形で、`heta` を (1) の最後の行
 （`trace_of_epsilon_V_plus_via_check_eigenvalues` (3) の `⟸`、`VPlusData.eta_univ_eq_one_of_trace_pos`）で埋める。
 
-人手の「ℂ の乗法の結合則・単位元」（`complex_numbers_form_a_field`）と「可換な二数の冪の積」「非負の指数の指数法則」
+人手の「ℂ の積の結合律・単位元」（`complex_numbers_form_a_field`）と「可換な二数の冪の積」「非負の指数の指数法則」
 （`def_power_of_complex_number` からの帰納法）には Lean の具体版が無いので、既存の慣行どおり mathlib の
 `mul_assoc`・`one_mul`・`mul_one`・`mul_pow`・`pow_add`・`one_pow` を引き、(2) の 7 行目の指数
 `(M_col − |ε|) + |ε| = M_col` は (P2) と `Nat.sub_add_cancel` で閉じる。`mat_mult_associative` も具体版が無いので

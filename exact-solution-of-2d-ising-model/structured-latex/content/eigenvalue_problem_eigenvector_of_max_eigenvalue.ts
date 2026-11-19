@@ -654,7 +654,7 @@ q
 &= (c\eta)q
    \quad (\because \blkref{scalar_multiple_is_associative}) \\
 &= (\eta c)q
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の交換則}) \\
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の可換律}) \\
 &= \eta\left(cq\right)
    \quad (\because \blkref{scalar_multiple_is_associative}) \\
 &= \eta\left(\check{Q}_\epsilon x\right)
@@ -1217,9 +1217,9 @@ A_\mu^{\epsilon}q
 &= (-1)\left(\eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}-|\epsilon|-1}\right)
    \quad (\because \blkref{multiply_by_minus_one}) \\
 &= \left(\eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}-|\epsilon|-1}\right)(-1)
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の交換則}) \\
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の可換律}) \\
 &= \eta_{(1,\dots,1)}\left((-1)^{M_{\mathrm{col}}-|\epsilon|-1}(-1)\right)
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の結合則}) \\
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の結合律}) \\
 &= \eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}-|\epsilon|}
    \quad (\because \blkref{def_power_of_complex_number}\text{ の } z^{m+1} = z^m z)
 \end{aligned}`,
@@ -1298,7 +1298,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \left(\left(1 - 2\epsilon_{k+1}\right)p_k\right)\check{Q}_\epsilon
    \quad (\because \blkref{scalar_multiple_is_associative}) \\
 &= \left(p_k\left(1 - 2\epsilon_{k+1}\right)\right)\check{Q}_\epsilon
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の交換則}) \\
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の可換律}) \\
 &= p_{k+1}\check{Q}_\epsilon
    \quad (\because \blkref{def_finite_product_of_complex_numbers})
 \end{aligned}`,
@@ -1342,7 +1342,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \left(\eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}-|\epsilon|}\left((-1)^{|\epsilon|}(-1)^{|\epsilon|}\right)\right)\check{Q}_\epsilon
    \quad (\because (-1)^{|\epsilon|}(-1)^{|\epsilon|} = \left((-1)(-1)\right)^{|\epsilon|} = 1^{|\epsilon|} = 1) \\
 &= \left(\eta_{(1,\dots,1)}\left((-1)^{M_{\mathrm{col}}-|\epsilon|}(-1)^{|\epsilon|}\right)(-1)^{|\epsilon|}\right)\check{Q}_\epsilon
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の結合則}) \\
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の結合律}) \\
 &= \left(\eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}}(-1)^{|\epsilon|}\right)\check{Q}_\epsilon
    \quad (\because \text{非負の指数の指数法則 } z^{a}z^{b} = z^{a+b}\text{（}\blkref{def_power_of_complex_number}\text{ から } b \text{ の帰納法）}) \\
 &= c\left((-1)^{|\epsilon|}\check{Q}_\epsilon\right)
@@ -1562,7 +1562,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\eta_\epsilon
 &&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)\\
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \eta_\epsilon\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の交換則を各項へ同時に}\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律を各項へ同時に}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -4260,7 +4260,7 @@ V_1^{(+)}
         String.raw`\begin{aligned}
 (-1)^{k}(-1)^{k}
 &= \left((-1_{\mathbb{C}})(-1_{\mathbb{C}})\right)^{k}
-&&(\because\ \text{可換な二数の冪の積 } z^{k}w^{k} = (zw)^{k}\text{（}\blkref{def_power_of_complex_number}\text{ から } k \text{ の帰納法と、}\blkref{complex_numbers_form_a_field}\text{ の乗法の結合則・交換則）}) \\
+&&(\because\ \text{可換な二数の冪の積 } z^{k}w^{k} = (zw)^{k}\text{（}\blkref{def_power_of_complex_number}\text{ から } k \text{ の帰納法と、}\blkref{complex_numbers_form_a_field}\text{ の積の結合律・可換律）}) \\
 &= \left(\left((-1)(-1)\right)_{\mathbb{C}}\right)^{k}
 &&(\because\ \blkref{real_inclusion_preserves_product}) \\
 &= 1_{\mathbb{C}}^{\,k}
@@ -4328,7 +4328,7 @@ V_1^{(+)}
 &= (-1)^{M_{\mathrm{col}}-|\epsilon|}\left((-1)^{|\epsilon|}(-1)^{|\epsilon|}\right)
 &&(\because\ \text{(P1)}\ (k \to |\epsilon|)\ \text{を右辺から左辺へ}) \\
 &= \left((-1)^{M_{\mathrm{col}}-|\epsilon|}(-1)^{|\epsilon|}\right)(-1)^{|\epsilon|}
-&&(\because\ \blkref{complex_numbers_form_a_field}\text{ の乗法の結合則}) \\
+&&(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}) \\
 &= (-1)^{M_{\mathrm{col}}}(-1)^{|\epsilon|}
 &&(\because\ \text{非負の指数の指数法則 } z^{a}z^{b} = z^{a+b}\text{（}\blkref{def_power_of_complex_number}\text{ から } b \text{ の帰納法）}\ (a \to M_{\mathrm{col}}-|\epsilon|,\ b \to |\epsilon|)) \\
 &= (-1)^{M_{\mathrm{col}}+|\epsilon|}

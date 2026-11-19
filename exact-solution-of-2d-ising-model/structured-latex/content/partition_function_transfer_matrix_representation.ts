@@ -1440,7 +1440,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
 &= \left(\mu(m')_{\mathbb{C}}\,\mu(m)_{\mathbb{C}}\right)f_{\iota(\mu)}
    \quad (\because \blkref{scalar_multiple_is_associative}) \\
 &= \mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}\,f_{\iota(\mu)}
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の交換律}).
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の可換律}).
 \end{aligned}`,
       ),
     ],

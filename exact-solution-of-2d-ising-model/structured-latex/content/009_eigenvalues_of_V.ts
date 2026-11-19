@@ -1340,7 +1340,7 @@ A^1
 &= \sum_{j=1}^{n} (A^p)_{jl}\,A_{kj}
 &&(\because \text{仮定の}\ A^{\top} = A) \\
 &= \sum_{j=1}^{n} A_{kj}\,(A^p)_{jl}
-&&(\because \blkref{complex_numbers_form_a_field}\ \text{の乗法の可換則}) \\
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}) \\
 &= (AA^p)_{kl}
 &&(\because \blkref{mat_mult}) \\
 &= (A^1A^p)_{kl}

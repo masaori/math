@@ -27,7 +27,7 @@
   `if k = l then 1 else 0` を返すので、Lean では 1 段にまとまる（`ClaimRealMatrixOfRealEntryMatrixPreservesProductAndPower.lean` と同じ扱い）。
 - `def_exp` (1) の冪 `A^0 := I`・`A^{m+1} := A^mA` は mathlib の `pow_zero`・`pow_succ` と同じ形である。
   `mat_mult` は mathlib の行列の積の定義（成分は `dotProduct`）で `rfl`、`def_matrix_transpose` は `Aᵀ k l = A l k` が `rfl` である。
-  `complex_numbers_form_a_field` の乗法の可換則は mathlib の `mul_comm`（`ℂ`）である。
+  `complex_numbers_form_a_field` の積の可換律は mathlib の `mul_comm`（`ℂ`）である。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionRealSymmetricComplexMatrix
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfSymmetricIsSymmetric
@@ -80,7 +80,7 @@ theorem matrix_pow_succ_transpose_apply_tensorPow (A : TensorPow M) (hAT : Aᵀ 
     _ = ∑ j, (A ^ p) j l * Aᵀ k j := by rw [ih]                             -- 帰納法の仮定の `(A^p)^⊤ = A^p`
     _ = ∑ j, (A ^ p) j l * A k j := by rw [hAT]                             -- 仮定の `A^⊤ = A`
     _ = ∑ j, A k j * (A ^ p) j l :=
-        Finset.sum_congr rfl fun j _ => mul_comm _ _                        -- `complex_numbers_form_a_field` の乗法の可換則
+        Finset.sum_congr rfl fun j _ => mul_comm _ _                        -- `complex_numbers_form_a_field` の積の可換律
     _ = (A * A ^ p) k l := rfl                                              -- `mat_mult`
     _ = (A ^ 1 * A ^ p) k l := by rw [matrix_pow_one_eq_self_tensorPow A]   -- 準備の `A^1 = A`
     _ = (A ^ (1 + p)) k l := by rw [matrix_power_exponent_law A 1 p]        -- `matrix_power_exponent_law`（`p → 1`, `q → p`）

@@ -8319,7 +8319,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = \left(\exp(-\gamma(\tilde\theta_\mu
 &= \sum_{i=1}^{2} \Bigl(\sum_{k=1}^{2} h_{kl}g_{ik}\Bigr)X_i
 &&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\text{ を }i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \Bigl(\sum_{k=1}^{2} g_{ik}h_{kl}\Bigr)X_i
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の乗法の可換則を 4 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律を 4 か所へ同時適用}\bigr)\\
 &= \sum_{i=1}^{2} (GH)_{il}\,X_i
 &&\bigl(\because\ \blkref{mat_mult}\text{ を }i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
 &= \mathrm{pr}_l\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}\left(GH\right)\right)
@@ -9767,7 +9767,7 @@ X_l
 &= \sum_{i=1}^{2} \Bigl(\sum_{k=1}^{2} p_{ik}q_{kl}\Bigr)X_i
 &&\bigl(\because\ \blkref{mat_mult}\text{ を }i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \Bigl(\sum_{k=1}^{2} q_{kl}p_{ik}\Bigr)X_i
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の乗法の可換則を 4 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律を 4 か所へ同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \sum_{k=1}^{2} \left(q_{kl}p_{ik}\right)X_i
 &&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\text{ を右辺から左辺へ、}i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \sum_{k=1}^{2} q_{kl}\left(p_{ik}X_i\right)

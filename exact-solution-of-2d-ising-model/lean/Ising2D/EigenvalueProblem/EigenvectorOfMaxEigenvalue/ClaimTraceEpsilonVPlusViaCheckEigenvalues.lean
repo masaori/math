@@ -192,7 +192,7 @@ theorem trace_epsilon_mul_V_step1 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
         congr 1; funext ε; exact mul_one _              -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）を各項へ同時に
     _ = NecSuf.binWordSum r (fun ε =>
           F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)) := by
-        congr 1; funext ε; exact mul_comm _ _           -- `complex_numbers_form_a_field` の乗法の交換則を各項へ同時に
+        congr 1; funext ε; exact mul_comm _ _           -- `complex_numbers_form_a_field` の積の可換律を各項へ同時に
 
 /-- `tr(εV^{(+)}) = Σ_T η_T Λ̌_T`（和は部分集合の上の `Finset.sum`）。人手の主張の行ではなく、`trace_epsilon_mul_V` の
 人手の範囲外の `M = 0` の場合だけが使う形である（`M = r + 1` の場合は Step 5 の鎖 `trace_epsilon_mul_V_step5` を通る）。`M = r + 1` は Step 1 の鎖 `trace_epsilon_mul_V_step1` を通し、

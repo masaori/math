@@ -225,7 +225,7 @@ theorem epsilon_mul_Qproj_mulVec {T : Finset (Fin M)} {q : Conf M → ℂ} {η :
                                                         -- `scalar_multiple_factors_out_of_right_factor`
     _ = c • (η • q) := by rw [hεq]                      -- `εq = ηq` の置き方
     _ = (c * η) • q := smul_smul _ _ _                  -- `scalar_multiple_is_associative`
-    _ = (η * c) • q := by rw [mul_comm c η]             -- `complex_numbers_form_a_field` の乗法の交換則
+    _ = (η * c) • q := by rw [mul_comm c η]             -- `complex_numbers_form_a_field` の積の可換律
     _ = η • (c • q) := (smul_smul _ _ _).symm           -- `scalar_multiple_is_associative`
     _ = η • (F.Qproj T *ᵥ x) := by rw [hc]              -- `Q̌_ε x = cq` の置き方
     _ = (η • F.Qproj T) *ᵥ x := (smul_mulVec_tensorPow _ _ _).symm
@@ -845,9 +845,9 @@ theorem eta_eq_eta_univ_mul_of_sub_card (k : ℕ) :
         _ = (-1) * (F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card - 1)) := (neg_one_mul _).symm
                                                           -- `multiply_by_minus_one`
         _ = (F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card - 1)) * (-1) := mul_comm _ _
-                                                          -- `complex_numbers_form_a_field` の乗法の交換則
+                                                          -- `complex_numbers_form_a_field` の積の可換律
         _ = F.eta Finset.univ * ((-1 : ℂ) ^ (M - T.card - 1) * (-1)) := mul_assoc _ _ _
-                                                          -- `complex_numbers_form_a_field` の乗法の結合則
+                                                          -- `complex_numbers_form_a_field` の積の結合律
         _ = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by rw [← pow_succ, Nat.sub_add_cancel hpos]
                                                           -- `def_power_of_complex_number` の `z^{m+1} = z^m z`
 
@@ -932,7 +932,7 @@ theorem finProdLeft_mul_Qproj (T : Finset (Fin M)) :
       _ = (a (Fin.last (r + 1)) * ∏ j, a (Fin.castSucc j)) • F.Qproj T := smul_smul _ _ _
                                                         -- `scalar_multiple_is_associative`（具体版が無く mathlib の `smul_smul`）
       _ = ((∏ j, a (Fin.castSucc j)) * a (Fin.last (r + 1))) • F.Qproj T := by
-          rw [mul_comm (a (Fin.last (r + 1)))]          -- `complex_numbers_form_a_field` の乗法の交換則
+          rw [mul_comm (a (Fin.last (r + 1)))]          -- `complex_numbers_form_a_field` の積の可換律
       _ = (∏ j, a j) • F.Qproj T := by rw [Fin.prod_univ_castSucc a]
                                                         -- `def_finite_product_of_complex_numbers`
 
@@ -1025,7 +1025,7 @@ theorem epsilon_mul_Qproj_eq_smul_parityProd_mul (T : Finset (Fin M)) :
         rw [neg_one_pow_mul_self, mul_one]              -- `(−1)^{|ε|}(−1)^{|ε|} = ((−1)(−1))^{|ε|} = 1^{|ε|} = 1`
     _ = (F.eta Finset.univ * ((-1 : ℂ) ^ (M - T.card) * (-1 : ℂ) ^ T.card) * (-1 : ℂ) ^ T.card) • F.Qproj T := by
         rw [← mul_assoc (F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card)), mul_assoc (F.eta Finset.univ)]
-                                                        -- `complex_numbers_form_a_field` の乗法の結合則
+                                                        -- `complex_numbers_form_a_field` の積の結合律
     _ = (F.eta Finset.univ * (-1 : ℂ) ^ M * (-1 : ℂ) ^ T.card) • F.Qproj T := by
         rw [← pow_add, Nat.sub_add_cancel hle]          -- 非負の指数の指数法則 `z^a z^b = z^{a+b}`
                                                         -- （`def_power_of_complex_number` から `b` の帰納法。mathlib の `pow_add`）

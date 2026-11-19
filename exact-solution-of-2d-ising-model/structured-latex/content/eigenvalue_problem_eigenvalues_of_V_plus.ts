@@ -5961,7 +5961,7 @@ w
 &= (a^{-1})_{\mathbb{C}}\bigl(((a^{-1})_{\mathbb{C}}a_{\mathbb{C}})\tau\bigr)
    &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a^{-1},\ b \to a)\ \text{を右辺から左辺へ}) \\
 &= (a^{-1})_{\mathbb{C}}\bigl((a^{-1})_{\mathbb{C}}(a_{\mathbb{C}}\tau)\bigr)
-   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
 &= (a^{-1})_{\mathbb{C}}\bigl((a^{-1})_{\mathbb{C}}\,\mathrm{tr}(V^{(+)})\bigr)
    &&(\because\ \text{Step 1 の第一の鎖を右辺から左辺へ}) \\
 &= (a^{-1})_{\mathbb{C}}\bigl((a^{-1})_{\mathbb{C}}r_{\mathbb{C}}\bigr)
@@ -6006,9 +6006,9 @@ c^2w
 &= (cc)\bigl(c^{-1}t_{\mathbb{C}}\bigr)
    &&(\because\ \text{Step 3 の第二の鎖}) \\
 &= c\bigl(c(c^{-1}t_{\mathbb{C}})\bigr)
-   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
 &= c\bigl((cc^{-1})t_{\mathbb{C}}\bigr)
-   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
 &= c\bigl(1_{\mathbb{C}}t_{\mathbb{C}}\bigr)
    &&(\because\ c^{-1}\ \text{は}\ c\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
 &= c\,t_{\mathbb{C}}
@@ -6024,13 +6024,13 @@ c^2w
 &= a_{\mathbb{C}}\bigl((a_{\mathbb{C}}(a^{-1})_{\mathbb{C}})\tau\bigr)
    &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to a^{-1})\ \text{を右辺から左辺へ}) \\
 &= a_{\mathbb{C}}\bigl(a_{\mathbb{C}}((a^{-1})_{\mathbb{C}}\tau)\bigr)
-   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
 &= a_{\mathbb{C}}\bigl(a_{\mathbb{C}}((a^{-1})_{\mathbb{C}}\tau')\bigr)
    &&(\because\ \text{Step 2 を右辺から左辺へ}) \\
 &= a_{\mathbb{C}}\bigl(a_{\mathbb{C}}w\bigr)
    &&(\because\ \text{Step 1 の第二の鎖を右辺から左辺へ}) \\
 &= (a_{\mathbb{C}}a_{\mathbb{C}})w
-   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
 &= (aa)_{\mathbb{C}}\,w
    &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to a)) \\
 &= (a^2)_{\mathbb{C}}\,w
@@ -6046,11 +6046,11 @@ c^2
 &= c^2\bigl(ww^{-1}\bigr)
    &&(\because\ w^{-1}\ \text{は}\ w\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
 &= (c^2w)\,w^{-1}
-   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
 &= \bigl((a^2)_{\mathbb{C}}w\bigr)w^{-1}
    &&(\because\ \text{上の鎖}) \\
 &= (a^2)_{\mathbb{C}}\bigl(ww^{-1}\bigr)
-   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
 &= (a^2)_{\mathbb{C}}\,1_{\mathbb{C}}
    &&(\because\ w^{-1}\ \text{は}\ w\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
 &= (a^2)_{\mathbb{C}}
@@ -6080,7 +6080,7 @@ c
 &= c\bigl(t_{\mathbb{C}}(t^{-1})_{\mathbb{C}}\bigr)
    &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to t,\ b \to t^{-1})\ \text{を右辺から左辺へ}) \\
 &= \bigl(c\,t_{\mathbb{C}}\bigr)(t^{-1})_{\mathbb{C}}
-   &&(\because\ \text{乗法の結合律。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
 &= \mathrm{tr}\bigl(V^{(+)}\bigr)(t^{-1})_{\mathbb{C}}
    &&(\because\ \text{Step 3 の第一の鎖を右辺から左辺へ}) \\
 &= r_{\mathbb{C}}(t^{-1})_{\mathbb{C}}
