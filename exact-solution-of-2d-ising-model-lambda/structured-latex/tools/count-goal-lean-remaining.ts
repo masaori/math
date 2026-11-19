@@ -127,14 +127,29 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
       "claim_qbar_all_ones_shift_preserves_symmetry",
     ],
   },
+  claim_elementary_symmetric_substitution_symmetric: {
+    title: "基本対称式への代入は対称である",
+    dependsOn: [],
+  },
+  claim_elementary_symmetric_substitution_last_variable_zero: {
+    title: "基本対称式への代入は末尾の変数への零代入と入れ替わる",
+    dependsOn: ["claim_elementary_symmetric_substitution_symmetric"],
+  },
+  claim_elementary_symmetric_substitution_subfield_coefficient: {
+    title: "基本対称式への代入は部分体係数を保つ",
+    dependsOn: [],
+  },
   claim_elementary_symmetric_substitution_degree_bound: {
-    title: "基本対称式への代入は対称で部分体係数を保ち、次数は重み付き次数以下",
+    title: "基本対称式への代入の全次数は重み付き次数以下",
     dependsOn: [],
   },
   claim_symmetric_polynomial_fundamental_theorem: {
     title: "対称式の基本定理",
     dependsOn: [
       "claim_symmetric_vanishing_last_variable_divisible_by_product",
+      "claim_elementary_symmetric_substitution_symmetric",
+      "claim_elementary_symmetric_substitution_last_variable_zero",
+      "claim_elementary_symmetric_substitution_subfield_coefficient",
       "claim_elementary_symmetric_substitution_degree_bound",
     ],
   },

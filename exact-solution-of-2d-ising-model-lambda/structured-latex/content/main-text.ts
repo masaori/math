@@ -55884,6 +55884,327 @@ d&(e=a\text{ のとき})\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_elementary_symmetric_substitution",
+        labels: [],
+        title: { text: "基本対称式への代入" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_multivariate_substitution_composition",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_multivariate_substitution_composition",
+                  kind: "claim",
+                  title: { text: "代入を続けて行うことは代入した値に代入する写像の代入である" },
+                  labels: ["claim_qbar_multivariate_substitution_composition"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-symmetric"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarMvSubst_comp",
+                    "Ising2DLambda.NecSuf.FisherZero.mvSubst_comp_necSuf",
+                    "Ising2DLambda.FisherZero.qbarMvSubst_comp_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n,m,p\in\mathbb{N}`),
+                      "、写像 ",
+                      math(String.raw`e:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}[X_{<m}]`),
+                      "、写像 ",
+                      math(String.raw`y:\mathbb{N}_{<m}\to\overline{\mathbb{Q}}[X_{<p}]`),
+                      "、",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）について、写像 ",
+                      math(String.raw`\mathrm{ms}_y\circ e:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}[X_{<p}]`),
+                      " を ",
+                      math(String.raw`(\mathrm{ms}_y\circ e)(k):=\mathrm{ms}_y(e(k))`),
+                      " と置くと",
+                    ]),
+                    displayMath(String.raw`\mathrm{ms}_y\bigl(\mathrm{ms}_e(Q)\bigr)=\mathrm{ms}_{\mathrm{ms}_y\circ e}(Q)`),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_qbar_multivariate_substitution"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ms}_y\bigl(\mathrm{ms}_e(Q)\bigr)
+&=\mathrm{ms}_y\Bigl(\sum_{a\in\mathrm{Ex}_n:\ \mathrm{mco}_a(Q)\ne0}\mathrm{mk}_m\bigl(\mathrm{mco}_a(Q)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}e(k)^{a(k)}\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_e\bigr)\\
+&=\sum_{a\in\mathrm{Ex}_n:\ \mathrm{mco}_a(Q)\ne0}\mathrm{ms}_y\Bigl(\mathrm{mk}_m\bigl(\mathrm{mco}_a(Q)\bigr)\Bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}\mathrm{ms}_y\bigl(e(k)\bigr)^{a(k)}
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y\text{ は有限和と有限積を保つ}\bigr)\\
+&=\sum_{a\in\mathrm{Ex}_n:\ \mathrm{mco}_a(Q)\ne0}\mathrm{mk}_p\bigl(\mathrm{mco}_a(Q)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}\mathrm{ms}_y\bigl(e(k)\bigr)^{a(k)}
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y(\mathrm{mk}_m(c))=\mathrm{mk}_p(c)\bigr)\\
+&=\sum_{a\in\mathrm{Ex}_n:\ \mathrm{mco}_a(Q)\ne0}\mathrm{mk}_p\bigl(\mathrm{mco}_a(Q)\bigr)\cdot\prod_{k\in\mathbb{N}_{<n}}(\mathrm{ms}_y\circ e)(k)^{a(k)}
+&&\bigl(\because\ \mathrm{ms}_y\circ e\text{ の置き方}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ms}_y\circ e}(Q)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_{\mathrm{ms}_y\circ e}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "冪 ",
+                      math(String.raw`e(k)^{a(k)}`),
+                      " は積の繰り返しなので、二行目では有限積を保つことを冪にも使った。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " 係数の多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_elementary_symmetric_is_symmetric",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_elementary_symmetric_is_symmetric",
+                  kind: "claim",
+                  title: { text: "基本対称式は対称である" },
+                  labels: ["claim_qbar_elementary_symmetric_is_symmetric"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-symmetric"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.elementarySymmetric_isQbarSymmetric",
+                    "Ising2DLambda.FisherZero.variablePermutation_X",
+                    "Ising2DLambda.FisherZero.elementarySymmetric_term_perm",
+                    "Ising2DLambda.NecSuf.FisherZero.elementarySymmetric_equivInvariant_necSuf",
+                    "Ising2DLambda.FisherZero.elementarySymmetric_isQbarSymmetric_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n,j\in\mathbb{N}`),
+                      " について、",
+                      math(String.raw`\mathrm{es}_{n,j}`),
+                      "（",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "）は対称である（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      "（",
+                      ref("def_qbar_variable_permutation"),
+                      "）を任意に取る。",
+                      math(String.raw`S\subseteq\mathbb{N}_{<n}`),
+                      " に対して ",
+                      math(String.raw`\varrho(S):=\{\,\varrho(k)\mid k\in S\,\}\subseteq\mathbb{N}_{<n}`),
+                      " と置く。準備を二つ置く。",
+                      "第一に、",
+                      math(String.raw`\varrho`),
+                      " を ",
+                      math(String.raw`S`),
+                      " に制限した写像は ",
+                      math(String.raw`S`),
+                      " から ",
+                      math(String.raw`\varrho(S)`),
+                      " への全単射なので（",
+                      math(String.raw`\varrho`),
+                      " は単射）、有限積の添字をこの全単射で付け替えて",
+                    ]),
+                    displayMath(String.raw`\prod_{k\in S}X^{(n)}_{\varrho(k)}=\prod_{i\in\varrho(S)}X^{(n)}_i\qquad(S\subseteq\mathbb{N}_{<n})`),
+                    paragraph([
+                      "である。第二に、",
+                      math(String.raw`|S|=j`),
+                      " なら ",
+                      math(String.raw`|\varrho(S)|=|S|=j`),
+                      " であり（上の全単射）、",
+                      math(String.raw`T\subseteq\mathbb{N}_{<n}`),
+                      " に ",
+                      math(String.raw`\varrho^{-1}(T):=\{\,\varrho^{-1}(i)\mid i\in T\,\}`),
+                      " を対応させる写像が逆写像になる（",
+                      math(String.raw`\varrho^{-1}(\varrho(S))=S`),
+                      "、",
+                      math(String.raw`\varrho(\varrho^{-1}(T))=T`),
+                      "）。よって ",
+                      math(String.raw`S\mapsto\varrho(S)`),
+                      " は ",
+                      math(String.raw`\mathbb{N}_{<n}`),
+                      " の ",
+                      math(String.raw`j`),
+                      " 元部分集合の全体からそれ自身への全単射である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{vs}_{\varrho}(\mathrm{es}_{n,j})
+&=\mathrm{vs}_{\varrho}\Bigl(\sum_{S\subseteq\mathbb{N}_{<n}:\ |S|=j}\ \prod_{k\in S}X^{(n)}_k\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_elementary_symmetric_polynomial}\bigr)\\
+&=\sum_{S\subseteq\mathbb{N}_{<n}:\ |S|=j}\ \prod_{k\in S}\mathrm{vs}_{\varrho}\bigl(X^{(n)}_k\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_{\varrho}\text{ は }\blkref{def_qbar_multivariate_substitution}\text{ の代入で、有限和と有限積を保つ}\bigr)\\
+&=\sum_{S\subseteq\mathbb{N}_{<n}:\ |S|=j}\ \prod_{k\in S}X^{(n)}_{\varrho(k)}
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_{\varrho}(X^{(n)}_k)=X^{(n)}_{\varrho(k)}\bigr)\\
+&=\sum_{S\subseteq\mathbb{N}_{<n}:\ |S|=j}\ \prod_{i\in\varrho(S)}X^{(n)}_i
+&&\bigl(\because\ \text{第一の準備}\bigr)\\
+&=\sum_{T\subseteq\mathbb{N}_{<n}:\ |T|=j}\ \prod_{i\in T}X^{(n)}_i
+&&\bigl(\because\ \text{第二の準備の全単射 }S\mapsto\varrho(S)\text{ で和の添字を付け替える}\bigr)\\
+&=\mathrm{es}_{n,j}
+&&\bigl(\because\ \blkref{def_qbar_elementary_symmetric_polynomial}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`\varrho`),
+                      " は任意だったので、",
+                      ref("def_qbar_symmetric_polynomial"),
+                      " により ",
+                      math(String.raw`\mathrm{es}_{n,j}`),
+                      " は対称である。",
+                      "全過程は有限集合の全単射と有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_elementary_symmetric_substitution",
+              focus:
+                {
+                  id: "zero_pinching_def_elementary_symmetric_substitution",
+                  kind: "definition",
+                  title: { text: "基本対称式への代入" },
+                  labels: ["def_elementary_symmetric_substitution"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.FisherZero.elementarySymmetricValues",
+                    "Ising2DLambda.FisherZero.elementarySymmetricSubst",
+                  ],
+                  verification: ["sagemath/check/elementary-symmetric-substitution-symmetric"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " に対して、写像 ",
+                      math(String.raw`\mathrm{ee}_n:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}[X_{<n}]`),
+                      " を ",
+                      math(String.raw`\mathrm{ee}_n(j):=\mathrm{es}_{n,j+1}`),
+                      "（",
+                      ref("def_qbar_elementary_symmetric_polynomial"),
+                      "）と定め、",
+                    ]),
+                    displayMath(String.raw`\mathrm{se}_n:=\mathrm{ms}_{\mathrm{ee}_n}:\overline{\mathbb{Q}}[X_{<n}]\to\overline{\mathbb{Q}}[X_{<n}]`),
+                    paragraph([
+                      "を基本対称式への代入と呼ぶ（",
+                      ref("def_qbar_multivariate_substitution"),
+                      "）。",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " について、",
+                      math(String.raw`\mathrm{se}_n(Q)`),
+                      " は ",
+                      math(String.raw`Q`),
+                      " の変数 ",
+                      math(String.raw`X^{(n)}_j`),
+                      " に ",
+                      math(String.raw`j+1`),
+                      " 次の基本対称式 ",
+                      math(String.raw`\mathrm{es}_{n,j+1}`),
+                      " を代入した多項式である。",
+                      "現れるのは代数的数と有限和・有限積だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_elementary_symmetric_substitution_symmetric",
+              focus:
+                {
+                  id: "zero_pinching_claim_elementary_symmetric_substitution_symmetric",
+                  kind: "claim",
+                  title: { text: "基本対称式への代入は対称である" },
+                  labels: ["claim_elementary_symmetric_substitution_symmetric"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/elementary-symmetric-substitution-symmetric"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.elementarySymmetricSubst_isQbarSymmetric",
+                    "Ising2DLambda.FisherZero.variablePermutation_comp_elementarySymmetricValues",
+                    "Ising2DLambda.NecSuf.FisherZero.mvSubst_fixed_of_values_fixed_necSuf",
+                    "Ising2DLambda.FisherZero.elementarySymmetricSubst_isQbarSymmetric_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`Q\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " について、",
+                      math(String.raw`\mathrm{se}_n(Q)`),
+                      "（",
+                      ref("def_elementary_symmetric_substitution"),
+                      "）は対称である（",
+                      ref("def_qbar_symmetric_polynomial"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`\varrho\in\mathfrak{P}_n`),
+                      "（",
+                      ref("def_qbar_variable_permutation"),
+                      "）を任意に取る。準備として、任意の ",
+                      math(String.raw`j\in\mathbb{N}_{<n}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+(\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ\mathrm{ee}_n)(j)
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(\mathrm{ee}_n(j)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\text{ の }\mathrm{ms}_y\circ e\text{ の置き方}\bigr)\\
+&=\mathrm{vs}_{\varrho}\bigl(\mathrm{es}_{n,j+1}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\mathrm{vs}_{\varrho}\text{ と }\blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_n\bigr)\\
+&=\mathrm{es}_{n,j+1}
+&&\bigl(\because\ \blkref{claim_qbar_elementary_symmetric_is_symmetric}\text{ と }\blkref{def_qbar_symmetric_polynomial}\bigr)\\
+&=\mathrm{ee}_n(j)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので、写像として ",
+                      math(String.raw`\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ\mathrm{ee}_n=\mathrm{ee}_n`),
+                      " である。これを使うと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{vs}_{\varrho}\bigl(\mathrm{se}_n(Q)\bigr)
+&=\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\bigl(\mathrm{ms}_{\mathrm{ee}_n}(Q)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ と }\blkref{def_elementary_symmetric_substitution}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ\mathrm{ee}_n}(Q)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_substitution_composition}\bigr)\\
+&=\mathrm{ms}_{\mathrm{ee}_n}(Q)
+&&\bigl(\because\ \text{準備の }\mathrm{ms}_{\mathrm{xv}_{n,\varrho}}\circ\mathrm{ee}_n=\mathrm{ee}_n\bigr)\\
+&=\mathrm{se}_n(Q)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`\varrho`),
+                      " は任意だったので、",
+                      ref("def_qbar_symmetric_polynomial"),
+                      " により ",
+                      math(String.raw`\mathrm{se}_n(Q)`),
+                      " は対称である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " 係数の多項式の代入の等号だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
