@@ -2768,6 +2768,76 @@ a^{-1}\cdot b^{-1}
     },
   },
   {
+    id: "calculation_formulae_claim_real_one_minus_half_is_half",
+    kind: "claim",
+    title: { text: "実数で 1 から 1/2 を引くと 1/2 になる" },
+    labels: ["real_one_minus_half_is_half"],
+    statement: [
+      paragraph([
+        "和・積・",
+        math(String.raw`0`),
+        "・",
+        math(String.raw`1`),
+        "・加法の逆元 ",
+        math(String.raw`-x`),
+        "・乗法の逆元 ",
+        math(String.raw`x^{-1}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、差は ",
+        ref("def_real_difference"),
+        " のもの、",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        "、",
+        math(String.raw`\tfrac12 \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to 1,\ z \to 2`),
+        "。",
+        math(String.raw`2 \neq 0`),
+        " は ",
+        ref("real_two_is_nonzero"),
+        "）である。このとき",
+      ]),
+      displayMath(String.raw`1 - \tfrac12 = \tfrac12`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+1 - \tfrac12
+&= 1 + \left(-\left(\tfrac12\right)\right)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to 1,\ z \to \tfrac12)\bigr)\\
+&= 2\cdot 2^{-1} + \left(-\left(\tfrac12\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の逆元}\ x\cdot x^{-1} = 1\ (x \to 2\text{。}2 \neq 0\ \text{は}\ \blkref{real_two_is_nonzero})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= (1 + 1)\cdot 2^{-1} + \left(-\left(\tfrac12\right)\right)
+&&\bigl(\because\ \blkref{def_real_two}\ \text{を左の因子の}\ 2\ \text{だけへ}\bigr)\\
+&= \left(1\cdot 2^{-1} + 1\cdot 2^{-1}\right) + \left(-\left(\tfrac12\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ (x + y)t = xt + yt\ (x, y \to 1,\ t \to 2^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \left(\tfrac12 + \tfrac12\right) + \left(-\left(\tfrac12\right)\right)
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to 1,\ z \to 2)\ \text{を右辺から左辺へ、2 箇所へ}\bigr)\\
+&= \tfrac12 + \left(\tfrac12 + \left(-\left(\tfrac12\right)\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x, y, t \to \tfrac12)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \tfrac12 + 0
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to \tfrac12)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \tfrac12
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to \tfrac12)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-19（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_of_epsilon_V_plus_via_check_eigenvalues の Step 4 の 2 本目の和の鎖が「ℝ で 1 − 1/2 = 1/2」を名前だけで根拠にしていたので、示す主張として足した（eigenvalues_of_V_plus の同じ行は別の回で扱う）。Lean の具体版は Ising2D.real_one_minus_half_is_half（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealOneMinusHalfIsHalf.lean）、必要十分版は Ising2D.NecSuf.one_sub_half_eq_half'（NecSuf/OneSubHalfEqHalf.lean）。数値検証: sagemath/check/real_one_minus_half_is_half/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_inverse_of_positive_is_positive",
     kind: "claim",
     title: { text: "正の実数の乗法の逆元は正" },

@@ -55,6 +55,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Defin
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfPositiveRealsIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwoIsNonzero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealOneMinusHalfIsHalf
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealLessThanIsAsymmetric
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
@@ -516,7 +517,10 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
         rw [checkU_one, checkU_zero]                    -- `ǔ^{(1)} := 1`、`ǔ^{(0)} := −1` を各因子へ同時に
     _ = (∏ μ, (Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2))
           + (-1) * Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
-        simp only [one_mul]                             -- ℝ で `1·b = b` を各因子へ同時に
+        congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
+        rw [one_mul (Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2)))]
+                                                        -- ℝ の乗法の単位元 `1·x = x`（`x → exp(γ(θ̃_μ)(1−1/2))`）
+                                                        -- （`set_and_algebra_notation`）を各因子へ同時に
     _ = (∏ μ, (Real.exp (D.gam μ * ((1 : ℝ) - 1 / 2))
           + -Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
         congr 1; refine Finset.prod_congr rfl fun μ _ => ?_
@@ -531,7 +535,7 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
                                                         -- 右辺から左辺へ、各因子へ同時に
     _ = (∏ μ, (Real.exp (D.gam μ * (1 / 2))
           - Real.exp (D.gam μ * ((0 : ℝ) - 1 / 2)))) * D.C := by
-        rw [sub_half (1 : ℝ)]                           -- ℝ で `1 − 1/2 = 1/2` を各因子へ同時に
+        rw [real_one_minus_half_is_half]                -- `real_one_minus_half_is_half` を各因子へ同時に
     _ = (∏ μ, (Real.exp (D.gam μ * (1 / 2))
           - Real.exp (D.gam μ * (-(1 / 2))))) * D.C := by
         rw [zero_sub (1 / 2 : ℝ)]                       -- ℝ で `0 − a = −a`（`a → 1/2`）を各因子へ同時に

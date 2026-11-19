@@ -1,0 +1,3 @@
+Frac(QQ[t]) で恒等的な段 7 個と、t = 2 の段 1 個を確かめた（等号 8 個）
+negative controls (broken lines detected): 3
+RESULT: PASS

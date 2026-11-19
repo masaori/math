@@ -3022,6 +3022,9 @@ targets=(
   Ising2D.real_two_is_nonzero
   Ising2D.NecSuf.ne_zero_of_zero_lt
   Ising2D.real_two_is_nonzero_of_necSuf
+  Ising2D.real_one_minus_half_is_half
+  "Ising2D.NecSuf.one_sub_half_eq_half'"
+  Ising2D.real_one_minus_half_is_half_of_necSuf
   Ising2D.real_inverse_of_positive_is_positive
   Ising2D.NecSuf.inv_pos_of_orderedAxioms
   Ising2D.real_inverse_of_positive_is_positive_of_necSuf
