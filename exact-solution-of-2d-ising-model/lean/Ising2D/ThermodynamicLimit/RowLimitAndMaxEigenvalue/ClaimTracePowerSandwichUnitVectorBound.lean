@@ -129,7 +129,7 @@ theorem norm_of_inverse_norm_multiple_is_one {z : Conf M → ℝ} {j0 : Conf M} 
         simp only [square_of_real_number_is_product]                        -- `square_of_real_number_is_product`（`r → ‖z‖^{-1}z_i`）を各項へ同時に
     _ = Real.sqrt (∑ i, ((vecNorm z)⁻¹ * (vecNorm z)⁻¹) * (z i * z i)) := by
         congr 1
-        exact Finset.sum_congr rfl fun i _ => by ring                       -- ℝ の乗法の交換則・結合則を各項へ同時に
+        exact Finset.sum_congr rfl fun i _ => by ring                       -- ℝ の乗法の交換律・結合律を各項へ同時に
     _ = Real.sqrt (∑ i, ((vecNorm z)⁻¹) ^ 2 * z i ^ 2) := by
         simp only [square_of_real_number_is_product]                        -- `square_of_real_number_is_product`（`r → ‖z‖^{-1}, z_i`）を右辺から左辺へ、各項へ同時に
     _ = Real.sqrt (((vecNorm z)⁻¹) ^ 2 * ∑ i, z i ^ 2) := by
@@ -142,7 +142,7 @@ theorem norm_of_inverse_norm_multiple_is_one {z : Conf M → ℝ} {j0 : Conf M} 
         rw [square_of_real_number_is_product (vecNorm z)⁻¹,
           square_of_real_number_is_product (vecNorm z)]                     -- `square_of_real_number_is_product`（`r → ‖z‖^{-1}, ‖z‖`）
     _ = Real.sqrt (((vecNorm z)⁻¹ * vecNorm z) * ((vecNorm z)⁻¹ * vecNorm z)) := by
-        congr 1; ring                                                       -- ℝ の乗法の交換則・結合則
+        congr 1; ring                                                       -- ℝ の乗法の交換律・結合律
     _ = Real.sqrt (((vecNorm z)⁻¹ * vecNorm z) ^ 2) := by
         rw [square_of_real_number_is_product ((vecNorm z)⁻¹ * vecNorm z)]   -- `square_of_real_number_is_product`（`r → ‖z‖^{-1}‖z‖`）を右辺から左辺へ
     _ = Real.sqrt ((1 : ℝ) ^ 2) := by
@@ -250,7 +250,7 @@ theorem power_of_W_real_is_positive_semidefinite (n : ℕ) (z : Conf M → ℝ) 
       calc z i
           = 1 * z i := (one_mul (z i)).symm                                 -- 1 は ℝ の乗法の単位元
         _ = (vecNorm z * (vecNorm z)⁻¹) * z i := by rw [mul_inv_cancel₀ hne] -- `‖z‖ ≠ 0` なので `‖z‖‖z‖^{-1} = 1`
-        _ = vecNorm z * ((vecNorm z)⁻¹ * z i) := mul_assoc _ _ _            -- ℝ の乗法の結合則
+        _ = vecNorm z * ((vecNorm z)⁻¹ * z i) := mul_assoc _ _ _            -- ℝ の乗法の結合律
         _ = vecNorm z * w i := rfl                                          -- `w_i := ‖z‖^{-1}z_i`
     have hw1 : vecNorm w = 1 :=
       norm_of_inverse_norm_multiple_is_one hj0 w fun i => rfl               -- 上の 15 行
@@ -264,7 +264,7 @@ theorem power_of_W_real_is_positive_semidefinite (n : ℕ) (z : Conf M → ℝ) 
             simp only [← hzw]                                               -- `z_i = ‖z‖w_i` を各項へ同時に
         _ = ∑ i, ∑ j, (vecNorm z * vecNorm z) * (w i * P i j * w j) :=
             Finset.sum_congr rfl fun i _ =>
-              Finset.sum_congr rfl fun j _ => by ring                       -- ℝ の乗法の交換則・結合則を各項へ同時に
+              Finset.sum_congr rfl fun j _ => by ring                       -- ℝ の乗法の交換律・結合律を各項へ同時に
         _ = ∑ i, ∑ j, vecNorm z ^ 2 * (w i * P i j * w j) := by
             simp only [← square_of_real_number_is_product (vecNorm z)]      -- `square_of_real_number_is_product`（`r → ‖z‖`）を右辺から左辺へ、各項へ同時に
         _ = ∑ i, vecNorm z ^ 2 * ∑ j, w i * P i j * w j :=
@@ -315,7 +315,7 @@ theorem power_of_W_real_entry_bound (n : ℕ) (x : Conf M → ℝ) (k l : Conf M
       _ = x l ^ 2 * P k k - x l * x k * P k l - x k * x l * P k l + x k ^ 2 * P l l := by
           rw [show P l k = P k l from power_of_W_real_entry_symm W hW n l k]  -- 【`(W_ℝ)^n` の成分の対称性】の `((W_ℝ)^n)_lk = ((W_ℝ)^n)_kl`
       _ = x l ^ 2 * P k k - 2 * x k * P k l * x l + x k ^ 2 * P l l := by ring
-                                                                            -- `ℝ` の乗法の交換則と同類項の加法
+                                                                            -- `ℝ` の乗法の交換律と同類項の加法
   linarith                                                                  -- 移項
 
 omit hWRsymm hpd in
@@ -388,11 +388,11 @@ theorem moment_ge_moment_one_mul_prev {x : Conf M → ℝ} (hx : vecNorm x = 1) 
         _ = momentWReal W hW x k * momentWReal W hW x k / momentWReal W hW x (k - 1) := by
             rw [square_of_real_number_is_product]                           -- `square_of_real_number_is_product`（`r → m_k`）
         _ = momentWReal W hW x k * (momentWReal W hW x k / momentWReal W hW x (k - 1)) := by
-            rw [mul_div_assoc]                                              -- 乗法の結合則
+            rw [mul_div_assoc]                                              -- 乗法の結合律
         _ ≥ momentWReal W hW x k * momentWReal W hW x 1 :=
             mul_le_mul_of_nonneg_left hratio hk0.le                         -- 上の `m_k/m_{k-1} ≥ m_1` と、正の `m_k` を掛けても順序を保つ
         _ = momentWReal W hW x 1 * momentWReal W hW x (k + 1 - 1) := by
-            rw [mul_comm, Nat.add_sub_cancel]                               -- 乗法の交換則と `ℤ` で `k = (k+1)−1`
+            rw [mul_comm, Nat.add_sub_cancel]                               -- 乗法の交換律と `ℤ` で `k = (k+1)−1`
 
 /-- 人手【単位ベクトルでの評価】の `p ≥ 0` で `m_p ≥ m_1^p`（`p` についての帰納法）。 -/
 theorem moment_ge_moment_one_pow {x : Conf M → ℝ} (hx : vecNorm x = 1) :
@@ -412,7 +412,7 @@ theorem moment_ge_moment_one_pow {x : Conf M → ℝ} (hx : vecNorm x = 1) :
         _ ≥ momentWReal W hW x 1 * momentWReal W hW x 1 ^ p :=
             mul_le_mul_of_nonneg_left ih hm1.le                             -- 帰納法の仮定と、正の `m_1` を掛けても順序を保つ
         _ = momentWReal W hW x 1 ^ (p + 1) := by
-            rw [mul_comm, pow_succ]                                         -- 乗法の交換則と `def_power_of_real_number` で `m_1^{p+1} = m_1^pm_1`
+            rw [mul_comm, pow_succ]                                         -- 乗法の交換律と `def_power_of_real_number` で `m_1^{p+1} = m_1^pm_1`
 
 /-- 人手【単位ベクトルでの評価】の `m_n ≤ T`（`T := Σ_k ((W_ℝ)^n)_kk`、8 行）。 -/
 theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : ℕ) :
@@ -444,9 +444,9 @@ theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : 
             rw [← finite_sum_of_real_scalar_multiples_fintype]
             exact Finset.sum_congr rfl fun l _ => mul_comm _ _
         · exact Finset.sum_congr rfl fun k _ => by
-            rw [← finite_sum_of_real_scalar_multiples_fintype]              -- 乗法の交換則と、`finite_sum_of_real_scalar_multiples` を内側の和へ
+            rw [← finite_sum_of_real_scalar_multiples_fintype]              -- 乗法の交換律と、`finite_sum_of_real_scalar_multiples` を内側の和へ
     _ = 2⁻¹ * ((∑ k, P k k) * (∑ l, x l ^ 2) + (∑ k, x k ^ 2) * (∑ l, P l l)) := by
-        rw [Finset.sum_mul, Finset.sum_mul]                                 -- 乗法の交換則と、`finite_sum_of_real_scalar_multiples` を外側の和へ
+        rw [Finset.sum_mul, Finset.sum_mul]                                 -- 乗法の交換律と、`finite_sum_of_real_scalar_multiples` を外側の和へ
     _ = 2⁻¹ * (T * 1 + 1 * T) := by rw [hs]                                 -- `T := Σ_k((W_ℝ)^n)_kk` と、上の `Σ_k x_k^2 = 1`
     _ = T := by ring                                                        -- `ℝ` の四則
 

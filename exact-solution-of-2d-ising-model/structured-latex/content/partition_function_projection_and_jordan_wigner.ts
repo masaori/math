@@ -1988,7 +1988,7 @@ Y_m Z_{m+1}
 &= \bigl(i\cdot(-i)\bigr)\sigma_m^z\sigma_{m+1}^z
 && (\because\ i\cdot(-i)=1\text{（複素数の四則）})\\
 &= i\bigl((-i)\sigma_m^z\sigma_{m+1}^z\bigr)
-&& (\because\ \text{複素数倍の結合則})\\
+&& (\because\ \text{複素数倍の結合律})\\
 &= i\,Y_m Z_{m+1}
 && (\because\ \text{上の Step 2 の等式})
 \qquad (1\le m\le M_{\mathrm{col}}-1)
@@ -2039,7 +2039,7 @@ Y_m Z_{m+1}
 &= \bigl((-i)\cdot i\bigr)\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
 && (\because\ (-i)\cdot i=1\text{（複素数の四則）})\\
 &= (-i)\bigl(i\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z\bigr)
-&& (\because\ \text{複素数倍の結合則})\\
+&& (\because\ \text{複素数倍の結合律})\\
 &= -i\,\varepsilon\, Y_{M_{\mathrm{col}}} Z_1
 && (\because\ \text{上の Step 3 の等式})
 \end{aligned}`,
@@ -2276,7 +2276,7 @@ Z_mY_m
 &= \bigl(i\cdot(-i)\bigr)\sigma_m^x
 && (\because i\cdot(-i)=1) \\
 &= i\bigl((-i)\sigma_m^x\bigr)
-&& (\because \text{複素数倍の結合則}) \\
+&& (\because \text{複素数倍の結合律}) \\
 &= i\,Z_mY_m
 && (\because \text{Step 2})
 \end{aligned}`,

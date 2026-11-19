@@ -9,7 +9,7 @@
 | 人手 | Lean |
 | --- | --- |
 | 準備（`a·b = 0` と仮定して矛盾を導く。`a^{-1}` は `a` の乗法の逆元） | `intro hab`・`apply hb` |
-| 5 行の鎖（乗法の単位元を右辺から左辺へ → 乗法の逆元 `a^{-1}·a = 1` を右辺から左辺へ → 乗法の結合則 → 仮定 `a·b = 0` → `real_times_zero_is_zero`（`x → a^{-1}`）） | `real_product_of_nonzero_is_nonzero` の `calc` の 5 段 |
+| 5 行の鎖（乗法の単位元を右辺から左辺へ → 乗法の逆元 `a^{-1}·a = 1` を右辺から左辺へ → 乗法の結合律 → 仮定 `a·b = 0` → `real_times_zero_is_zero`（`x → a^{-1}`）） | `real_product_of_nonzero_is_nonzero` の `calc` の 5 段 |
 | 結び（`b ≠ 0` に反する） | `apply hb` が `b = 0` を目標にしたこと |
 
 - 人手の乗法の逆元 `a^{-1}`（体 `ℝ` の公理、`a ≠ 0`）は mathlib の `a⁻¹` と `inv_mul_cancel₀` で読む。
@@ -30,7 +30,7 @@ theorem real_product_of_nonzero_is_nonzero (a b : ℝ) (ha : a ≠ 0) (hb : b �
   calc b
       = 1 * b := (one_mul b).symm                          -- 乗法の単位元を右辺から左辺へ
     _ = (a⁻¹ * a) * b := by rw [inv_mul_cancel₀ ha]          -- 乗法の逆元 `a^{-1}·a = 1` を右辺から左辺へ
-    _ = a⁻¹ * (a * b) := mul_assoc a⁻¹ a b                    -- 乗法の結合則
+    _ = a⁻¹ * (a * b) := mul_assoc a⁻¹ a b                    -- 乗法の結合律
     _ = a⁻¹ * 0 := by rw [hab]                                -- 仮定 `a·b = 0`
     _ = 0 := real_times_zero_is_zero a⁻¹                      -- `real_times_zero_is_zero`（`x → a^{-1}`）
 

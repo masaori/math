@@ -1768,7 +1768,7 @@ c(M_{\mathrm{col}})
 &=\sum_{k=1}^{d}y_k\sum_{l=1}^{d}(W_{\mathbb{R}})_{kl}\,x_l
 &&\bigl(\because\ y=W_{\mathbb{R}}x\ \text{の成分 }\blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to W_{\mathbb{R}},\ x \to x)\bigr)\\
 &=\sum_{k=1}^{d}\sum_{l=1}^{d}y_k\,(W_{\mathbb{R}})_{kl}\,x_l
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\ y_k((W_{\mathbb{R}})_{kl}x_l)=(y_k(W_{\mathbb{R}})_{kl})x_l\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合律}\ y_k((W_{\mathbb{R}})_{kl}x_l)=(y_k(W_{\mathbb{R}})_{kl})x_l\bigr)\\
 &=y^\top W_{\mathbb{R}}x
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to d,\ P \to W_{\mathbb{R}},\ x \to y,\ y \to x)\bigr)
 \end{aligned}`),
@@ -1794,7 +1794,7 @@ c(M_{\mathrm{col}})
 &\leq\left(c\|x\|^2\right)\left(c\|y\|^2\right)
 &&\bigl(\because\ \blkref{def_rayleigh_sup}\ \text{の}\ y^\top W_{\mathbb{R}}y\leq c\|y\|^2\ (x \to y)\ \text{と}\ 0\leq c\|x\|^2\ \text{（}c>0\text{）}\bigr)\\
 &=c^2\|x\|^2\|W_{\mathbb{R}}x\|^2
-&&\bigl(\because\ y=W_{\mathbb{R}}x\ \text{と}\ \mathbb{R}\ \text{の乗法の可換則・結合則}\bigr)
+&&\bigl(\because\ y=W_{\mathbb{R}}x\ \text{と}\ \mathbb{R}\ \text{の乗法の可換律・結合律}\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`\|W_{\mathbb{R}}x\| = 0`),
@@ -1863,7 +1863,7 @@ c(M_{\mathrm{col}})
 &\leq c^k\bigl(c\|x\|\bigr)
   &&\bigl(\because\ \text{いま示した評価}\ \|W_{\mathbb{R}}x\|\leq c\|x\|\ \text{と}\ c^k\geq 0\ \text{（}c>0\text{）}\bigr)\\
 &=c^{k+1}\|x\|
-  &&\bigl(\because\ \text{冪の指数法則と}\ \mathbb{R}\ \text{の乗法の結合則}\bigr)
+  &&\bigl(\because\ \text{冪の指数法則と}\ \mathbb{R}\ \text{の乗法の結合律}\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`x`),
@@ -2339,7 +2339,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
 &=\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\sum_{r=1}^{d}(W_{\mathbb{R}})_{lr}\,\bigl((W_{\mathbb{R}})^a\bigr)_{rk}
 &&\bigl(\because\ \blkref{def_real_matrix_product}\ (m, n, p \to d,\ P \to W_{\mathbb{R}},\ Q \to (W_{\mathbb{R}})^a,\ i \to l,\ j \to r,\ k \to k)\bigr)\\
 &=\sum_{l=1}^{d}\sum_{r=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\,(W_{\mathbb{R}})_{lr}\,\bigl((W_{\mathbb{R}})^a\bigr)_{rk}
-&&\bigl(\because\ \text{分配則と乗法の結合則}\bigr)\\
+&&\bigl(\because\ \text{分配則と乗法の結合律}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{r=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(W_{\mathbb{R}})_{lr}\,\bigl((W_{\mathbb{R}})^a\bigr)_{rk}
 &&\bigl(\because\ \text{【冪の対称性】の}\ ((W_{\mathbb{R}})^a)_{kl} = ((W_{\mathbb{R}})^a)_{lk}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{r=1}^{d}u_l\,(W_{\mathbb{R}})_{lr}\,u_r
@@ -2718,15 +2718,15 @@ x^\top\Bigl((W_{\mathbb{R}})^b\bigl(C_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\Bigl(\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^b\bigr)_{il}\sum_{m=1}^{d}(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\Bigr)x_j
 &&\bigl(\because\ \blkref{def_real_matrix_product}\bigr)\\
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\sum_{l=1}^{d}\sum_{m=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合律}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
 &&\bigl(\because\ \mathbb{R}\ \text{の有限和の順序の交換}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の交換則・結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の交換律・結合律}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{li}\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
 &&\bigl(\because\ \text{【冪の対称性】の}\ ((W_{\mathbb{R}})^b)_{il} = ((W_{\mathbb{R}})^b)_{li}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}\bigl((W_{\mathbb{R}})^b\bigr)_{li}\,x_i\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}u^{(b)}_l\,(C_{\mathbb{R}})_{lm}\,u^{(a)}_m
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ の成分】を}\ a\ \text{と}\ b\ \text{へ同時に適用}\bigr)\\
 &=\bigl(u^{(b)}\bigr)^\top C_{\mathbb{R}}\,u^{(a)}
@@ -2914,11 +2914,11 @@ u^{(a+1)}_l
 &=\sum_{m=1}^{d}\Bigl(\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\Bigr)x_m
 &&\bigl(\because\ \blkref{def_real_matrix_product}\bigr)\\
 &=\sum_{m=1}^{d}\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合律}\bigr)\\
 &=\sum_{n=1}^{d}\sum_{m=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
 &&\bigl(\because\ \mathbb{R}\ \text{の有限和の順序の交換}\bigr)\\
 &=\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合律}\bigr)\\
 &=\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,u^{(a)}_n
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ の成分】}\bigr)\\
 &=\bigl(W_{\mathbb{R}}u^{(a)}\bigr)_l
@@ -2936,7 +2936,7 @@ u^{(a+1)}_l
 &=\sum_{k=1}^{d}\sum_{l=1}^{d}u^{(a)}_k\,(W_{\mathbb{R}})_{kl}\,u^{(a)}_l
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &=\sum_{k=1}^{d}u^{(a)}_k\sum_{l=1}^{d}(W_{\mathbb{R}})_{kl}\,u^{(a)}_l
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の結合律}\bigr)\\
 &=\sum_{k=1}^{d}u^{(a)}_k\,\bigl(W_{\mathbb{R}}u^{(a)}\bigr)_k
 &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\bigr)\\
 &=\sum_{k=1}^{d}u^{(a)}_k\cdot 0
@@ -3517,7 +3517,7 @@ z_i
 &=\bigl(\|z\|\,\|z\|^{-1}\bigr)z_i
 &&\bigl(\because\ \|z\| \neq 0\ \text{なので}\ \|z\|\,\|z\|^{-1} = 1\bigr)\\
 &=\|z\|\bigl(\|z\|^{-1}z_i\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\bigr)\\
 &=\|z\|\,w_i
 &&\bigl(\because\ w_i := \|z\|^{-1}z_i\bigr)
 \end{aligned}`),
@@ -3533,7 +3533,7 @@ z_i
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}z_i\bigr)\bigl(\|z\|^{-1}z_i\bigr)}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|^{-1}z_i)\ \text{を各項へ同時に適用}\bigr)\\
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}\|z\|^{-1}\bigr)(z_iz_i)}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則を各項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律・結合律を各項へ同時に適用}\bigr)\\
 &=\sqrt{\sum_{i=1}^{d}\bigl(\|z\|^{-1}\bigr)^2z_i^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|^{-1},\ z_i)\ \text{を右辺から左辺へ、各項へ同時に適用}\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\bigr)^2\sum_{i=1}^{d}z_i^2}^{\,(\mathbb{R}_{\ge 0})}
@@ -3545,7 +3545,7 @@ z_i
 &=\sqrt{\bigl(\|z\|^{-1}\|z\|^{-1}\bigr)\bigl(\|z\|\,\|z\|\bigr)}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|^{-1},\ \|z\|)\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\|z\|\bigr)\bigl(\|z\|^{-1}\|z\|\bigr)}^{\,(\mathbb{R}_{\ge 0})}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律・結合律}\bigr)\\
 &=\sqrt{\bigl(\|z\|^{-1}\|z\|\bigr)^2}^{\,(\mathbb{R}_{\ge 0})}
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|^{-1}\|z\|)\ \text{を右辺から左辺へ}\bigr)\\
 &=\sqrt{1^2}^{\,(\mathbb{R}_{\ge 0})}
@@ -3573,7 +3573,7 @@ z^\top (W_{\mathbb{R}})^nz
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\bigl(\|z\|\,w_i\bigr)((W_{\mathbb{R}})^n)_{ij}\bigl(\|z\|\,w_j\bigr)
 &&\bigl(\because\ z_i = \|z\|\,w_i\ \text{を各項へ同時に適用}\bigr)\\
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\bigl(\|z\|\,\|z\|\bigr)\bigl(w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則を各項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律・結合律を各項へ同時に適用}\bigr)\\
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\|z\|^2\bigl(w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j\bigr)
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \|z\|)\ \text{を右辺から左辺へ、各項へ同時に適用}\bigr)\\
 &=\sum_{i=1}^{d}\|z\|^2\sum_{j=1}^{d}w_i\,((W_{\mathbb{R}})^n)_{ij}\,w_j
@@ -3689,7 +3689,7 @@ z^\top (W_{\mathbb{R}})^nz
  - x_lx_k\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j\\
 &\qquad - x_kx_l\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
  + (x_kx_k)\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の交換則・結合則、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側と外側の和へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則と乗法の交換律・結合律、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側と外側の和へ適用}\bigr)\\
 &=x_l^2\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
  - x_lx_k\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j\\
 &\qquad - x_kx_l\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
@@ -3700,7 +3700,7 @@ z^\top (W_{\mathbb{R}})^nz
 &=x_l^2\,((W_{\mathbb{R}})^n)_{kk} - x_lx_k\,((W_{\mathbb{R}})^n)_{kl} - x_kx_l\,((W_{\mathbb{R}})^n)_{kl} + x_k^2\,((W_{\mathbb{R}})^n)_{ll}
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^n\text{ の成分の対称性】の}\ ((W_{\mathbb{R}})^n)_{lk} = ((W_{\mathbb{R}})^n)_{kl}\bigr)\\
 &=x_l^2\,((W_{\mathbb{R}})^n)_{kk} - 2\,x_k\,((W_{\mathbb{R}})^n)_{kl}\,x_l + x_k^2\,((W_{\mathbb{R}})^n)_{ll}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と同類項の加法}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律と同類項の加法}\bigr)
 \end{aligned}`),
       paragraph(["であり、移項して"]),
       displayMath(String.raw`2\,x_k\,((W_{\mathbb{R}})^n)_{kl}\,x_l \ \leq\ x_l^2\,((W_{\mathbb{R}})^n)_{kk} + x_k^2\,((W_{\mathbb{R}})^n)_{ll}`),
@@ -3821,11 +3821,11 @@ m_{k+1}
 &=\frac{m_km_k}{m_{k-1}}
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to m_k)\bigr)\\
 &=m_k\,\frac{m_k}{m_{k-1}}
-&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&&\bigl(\because\ \text{乗法の結合律}\bigr)\\
 &\geq m_k\,m_1
 &&\bigl(\because\ \text{上の}\ \tfrac{m_k}{m_{k-1}} \geq m_1\ \text{と、正の}\ m_k\ \text{を掛けても順序を保つ}\bigr)\\
 &=m_1m_{(k+1)-1}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と}\ \mathbb{Z}\ \text{で}\ k = (k+1)-1\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律と}\ \mathbb{Z}\ \text{で}\ k = (k+1)-1\bigr)
 \end{aligned}`),
       paragraph([
         "である。さらに、",
@@ -3855,7 +3855,7 @@ m_{p+1}
 &\geq m_1m_1^{\,p}
 &&\bigl(\because\ \text{帰納法の仮定と、正の}\ m_1\ \text{を掛けても順序を保つ}\bigr)\\
 &=m_1^{\,p+1}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と}\ \blkref{def_power_of_real_number}\ \text{で}\ m_1^{\,p+1} = m_1^{\,p}m_1\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律と}\ \blkref{def_power_of_real_number}\ \text{で}\ m_1^{\,p+1} = m_1^{\,p}m_1\bigr)
 \end{aligned}`),
       paragraph([
         "である。最後に、【",
@@ -3875,9 +3875,9 @@ m_n
 &=2^{-1}\Bigl(\sum_{k=1}^{d}\sum_{l=1}^{d}x_l^2\,((W_{\mathbb{R}})^n)_{kk} + \sum_{k=1}^{d}\sum_{l=1}^{d}x_k^2\,((W_{\mathbb{R}})^n)_{ll}\Bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{の有限和の加法の交換律・結合律}\bigr)\\
 &=2^{-1}\Bigl(\sum_{k=1}^{d}((W_{\mathbb{R}})^n)_{kk}\sum_{l=1}^{d}x_l^2 + \sum_{k=1}^{d}x_k^2\sum_{l=1}^{d}((W_{\mathbb{R}})^n)_{ll}\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側の和へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律と、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側の和へ適用}\bigr)\\
 &=2^{-1}\Bigl(\Bigl(\sum_{k=1}^{d}((W_{\mathbb{R}})^n)_{kk}\Bigr)\Bigl(\sum_{l=1}^{d}x_l^2\Bigr) + \Bigl(\sum_{k=1}^{d}x_k^2\Bigr)\Bigl(\sum_{l=1}^{d}((W_{\mathbb{R}})^n)_{ll}\Bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則と、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を外側の和へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律と、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を外側の和へ適用}\bigr)\\
 &=2^{-1}\bigl(T\cdot 1 + 1\cdot T\bigr)
 &&\bigl(\because\ T := \textstyle\sum_{k}((W_{\mathbb{R}})^n)_{kk}\ \text{と、上の}\ \textstyle\sum_{k}x_k^2 = 1\bigr)\\
 &=T
@@ -3954,13 +3954,13 @@ r^{p+1}
       displayMath(String.raw`\begin{aligned}
 s^{p+1} - r^{p+1}
 &=s\bigl(s^p - r^p\bigr) + r^p(s - r)
-&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ s^{p+1} = s^ps,\ r^{p+1} = r^pr\ \text{と}\ \mathbb{R}\ \text{の分配則・乗法の交換則（}-sr^p + r^ps = 0\text{）}\bigr)\\
+&&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{で}\ s^{p+1} = s^ps,\ r^{p+1} = r^pr\ \text{と}\ \mathbb{R}\ \text{の分配則・乗法の交換律（}-sr^p + r^ps = 0\text{）}\bigr)\\
 &\leq s\bigl(p\,s^{p-1}(s - r)\bigr) + r^p(s - r)
 &&\bigl(\because\ \text{(b) と}\ s > 0\bigr)\\
 &\leq s\bigl(p\,s^{p-1}(s - r)\bigr) + s^p(s - r)
 &&\bigl(\because\ \text{(a) の}\ r^p < s^p\ \text{と}\ s - r > 0\bigr)\\
 &=p\,s^p(s - r) + s^p(s - r)
-&&\bigl(\because\ s\,s^{p-1} = s^{p-1}s = s^p\ \text{（乗法の交換則と、}\blkref{def_power_of_real_number}\ \text{で}\ s^{(p-1)+1} = s^{p-1}s\ \text{、}\mathbb{Z}\ \text{で}\ (p-1)+1 = p\text{）と乗法の結合則}\bigr)\\
+&&\bigl(\because\ s\,s^{p-1} = s^{p-1}s = s^p\ \text{（乗法の交換律と、}\blkref{def_power_of_real_number}\ \text{で}\ s^{(p-1)+1} = s^{p-1}s\ \text{、}\mathbb{Z}\ \text{で}\ (p-1)+1 = p\text{）と乗法の結合律}\bigr)\\
 &=(p+1)\,s^{(p+1)-1}(s - r)
 &&\bigl(\because\ \mathbb{R}\ \text{の分配則と}\ \mathbb{Z}\ \text{で}\ p = (p+1)-1\bigr)
 \end{aligned}`),
@@ -4019,7 +4019,7 @@ s^{p+1} - r^{p+1}
 &=c^{n-1}c\,\bigl(n^{-1}(c^{n-1})^{-1}\bigr)
 &&\bigl(\because\ n \neq 0,\ c^{n-1} \neq 0\ \text{なので}\ (n\,c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}\bigr)\\
 &=c\,n^{-1}\bigl(c^{n-1}(c^{n-1})^{-1}\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則・結合則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律・結合律}\bigr)\\
 &=c\,n^{-1}
 &&\bigl(\because\ c^{n-1}(c^{n-1})^{-1} = 1\bigr)\\
 &\leq c

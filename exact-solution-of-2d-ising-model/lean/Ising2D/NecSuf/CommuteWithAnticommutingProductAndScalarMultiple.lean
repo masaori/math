@@ -14,11 +14,11 @@
 
 ## 何が効いているか / 効いていないか
 
-- `commute_mul_of_anticomm'` に効いているのは、**積の結合則**（`Semigroup`）と、**符号反転が積の各因子から外へ出ること、
+- `commute_mul_of_anticomm'` に効いているのは、**積の結合律**（`Semigroup`）と、**符号反転が積の各因子から外へ出ること、
   符号反転を二回すると元に戻ること**（`HasDistribNeg`）だけである。加法・零・単位元は鎖に出ない。
   行列であること、複素数であること、`G` が `ε` であることは効いていない。
 - `commute_smul_of_commute'` に効いているのは、**積が各因子について `𝕜` 倍と交換すること**
-  （`SMulCommClass 𝕜 A A`・`IsScalarTower 𝕜 A A`）だけである。`A` の積の結合則も、`𝕜` の構造（積・和・単位元）も効いていない。
+  （`SMulCommClass 𝕜 A A`・`IsScalarTower 𝕜 A A`）だけである。`A` の積の結合律も、`𝕜` の構造（積・和・単位元）も効いていない。
 -/
 import Mathlib.Algebra.Ring.Defs
 import Mathlib.Algebra.Group.Action.Defs

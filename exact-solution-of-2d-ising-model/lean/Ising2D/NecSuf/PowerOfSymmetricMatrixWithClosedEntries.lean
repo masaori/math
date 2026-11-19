@@ -22,10 +22,10 @@
   （`S` を「正の実数」に取ると `1` を含み積と和で閉じるが、`0` は入らない）。
 - 添字が空でないこと（`Nonempty ι`。人手の `n ≥ 1`）は主張には要らない（`ι` が空なら結論は空虚に成り立つ）。
   具体版と同じ段 `mul_entries_mem`（`product_of_real_entry_matrices_has_real_entries`）が `Nonempty` を要るので置いている。
-- 転置の段に効いているのは、**係数の乗法の可換則**（11 行のうち 7 行目 `(A^p)_{jl}A_{kj} = A_{kj}(A^p)_{jl}`）である。
+- 転置の段に効いているのは、**係数の乗法の可換律**（11 行のうち 7 行目 `(A^p)_{jl}A_{kj} = A_{kj}(A^p)_{jl}`）である。
   可換でない係数では対称な `A` でも `A^2` が対称とは限らない: `((A^2)^⊤)_{kl} = Σ_j A_{lj}A_{jk} = Σ_j A_{jl}A_{kj}` と
   `(A^2)_{kl} = Σ_j A_{kj}A_{jl}` は、`A_{kj}` と `A_{jl}` が可換でなければ一致しない。
-- 型クラスを `CommSemiring` に置いたのは、上の可換則と、行列の積の結合則・単位元（`A^1 = A` と指数法則）が係数の半環の構造から来るためである。
+- 型クラスを `CommSemiring` に置いたのは、上の可換則と、行列の積の結合律・単位元（`A^1 = A` と指数法則）が係数の半環の構造から来るためである。
   加法の逆元、体であること、係数が `ℂ` であることは効いていない。
 -/
 import Ising2D.NecSuf.PowerExponentLaw
@@ -68,7 +68,7 @@ theorem pow_succ_transpose_apply' (A : Matrix ι ι R) (hAT : Aᵀ = A) (p : ℕ
     _ = ∑ j, (A ^ p) j l * Aᵀ k j := by rw [ih]                             -- 帰納法の仮定 `(A^p)^⊤ = A^p`
     _ = ∑ j, (A ^ p) j l * A k j := by rw [hAT]                             -- 仮定 `A^⊤ = A`
     _ = ∑ j, A k j * (A ^ p) j l :=
-        Finset.sum_congr rfl fun j _ => mul_comm _ _                        -- 係数の乗法の可換則（効いている）
+        Finset.sum_congr rfl fun j _ => mul_comm _ _                        -- 係数の乗法の可換律（効いている）
     _ = (A * A ^ p) k l := rfl                                              -- 積の定義
     _ = (A ^ 1 * A ^ p) k l := by rw [pow_one_eq_self' A]                   -- 準備 `A^1 = A`
     _ = (A ^ (1 + p)) k l := by rw [power_exponent_law' A 1 p]              -- 冪の指数法則（`p → 1`, `q → p`）

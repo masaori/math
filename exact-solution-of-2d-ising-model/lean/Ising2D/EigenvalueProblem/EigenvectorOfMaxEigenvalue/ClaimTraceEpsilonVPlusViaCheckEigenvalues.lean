@@ -408,7 +408,7 @@ theorem eta_mul_checkLambda_eq_checkT_mul_checkH {r : ℕ} {F : CheckFermi (r + 
     _ = (((F.checkH * ∏ μ, checkU (ε μ)) * checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) :=
         real_inclusion_mul _ _                          -- `real_inclusion_preserves_product`（`a → ȟΠ_μǔ^{(ε_μ)}`、`b → Λ̌_ε`）
     _ = ((((∏ μ, checkU (ε μ)) * checkLambda D.C D.gam (CheckFermi.finsetOfWord ε)) * F.checkH : ℝ) : ℂ) := by
-        rw [mul_assoc, mul_comm]                        -- ℝ で `(ab)c = (bc)a`（乗法の交換則と結合則）
+        rw [mul_assoc, mul_comm]                        -- ℝ で `(ab)c = (bc)a`（乗法の交換律と結合律）
     _ = ((D.checkT ε * F.checkH : ℝ) : ℂ) := rfl        -- `ť_ε` の置き方
 
 /-- `eta_mul_checkLambda_eq_checkT_mul_checkH` を必要十分版 `NecSuf.signed_term_eq_map_mul'`
@@ -462,12 +462,12 @@ theorem checkT_eq_prod_checkW_mul {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
     _ = (∏ μ, checkU (ε μ)) * (D.C * ∏ μ, Real.exp (D.gam μ * (((ε μ : ℕ) : ℝ) - 1 / 2))) := by
         rw [real_exp_of_finite_sum r]                   -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → γ(θ̃_μ)(ε_μ − 1/2)`）
     _ = D.C * ((∏ μ, checkU (ε μ)) * ∏ μ, Real.exp (D.gam μ * (((ε μ : ℕ) : ℝ) - 1 / 2))) :=
-        mul_left_comm _ _ _                             -- ℝ で `a(bc) = b(ac)`（乗法の交換則と結合則）
+        mul_left_comm _ _ _                             -- ℝ で `a(bc) = b(ac)`（乗法の交換律と結合律）
     _ = D.C * ∏ μ, (checkU (ε μ) * Real.exp (D.gam μ * (((ε μ : ℕ) : ℝ) - 1 / 2))) := by
         rw [finite_product_of_real_products r]          -- `finite_product_of_real_products`（`m → M_col`、`j → μ`、`x_j → ǔ^{(ε_μ)}`、
                                                         -- `y_j → exp(γ(θ̃_μ)(ε_μ − 1/2))`）を右辺から左辺へ
     _ = D.C * ∏ μ, D.checkW μ (ε μ) := rfl              -- `w̌_μ^{(e)}` の置き方（`e → ε_μ`）を各因子へ同時に
-    _ = (∏ μ, D.checkW μ (ε μ)) * D.C := mul_comm _ _   -- ℝ の乗法の交換則
+    _ = (∏ μ, D.checkW μ (ε μ)) * D.C := mul_comm _ _   -- ℝ の乗法の交換律
 
 /-- 主張の `ϰ := (2 sinh 2K_2)^{M_col/2} Π_{μ=1}^{M_col} 2 sinh(γ(θ̃_μ)/2) ∈ ℝ`（`(2 sinh 2K_2)^{M_col/2}` が `D.C`、
 `γ(θ̃_μ)` が `D.gam μ`）。 -/
@@ -561,7 +561,7 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
                                                         -- （`def_cosh_sinh` は Lean で定義し直していない。mathlib の `Real.sinh` の
                                                         -- 等式 `Real.sinh_eq` が、人手の定義の式そのものとしてその役を担う）
     _ = D.C * ∏ μ, (2 * Real.sinh (D.gam μ / 2)) := mul_comm _ _
-                                                        -- ℝ の乗法の交換則
+                                                        -- ℝ の乗法の交換律
     _ = D.traceFactor := rfl                            -- `ϰ` の置き方
 
 /-! ## Step 5: (1) の等式 -/
@@ -574,7 +574,7 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
 付け替えの段の右辺では具体版 `binaryWordComplexSum r` で、2 行目の後の 1 段はその付け替え（`binaryWordComplexSum_eq_binWordSum`。
 運ぶ段で、人手の行は無い）。実数の和は `binaryWordRealSum r`）。必要十分版は置かない（効くのは、引いた
 Step 1・Step 3・Step 4 の鎖、`real_inclusion_preserves_sum_over_binary_words`・
-`real_sum_over_binary_words_distributes_in_left_factor` と ℝ の乗法の交換則だけで、
+`real_sum_over_binary_words_distributes_in_left_factor` と ℝ の乗法の交換律だけで、
 この鎖はそれらをつなぐだけなので、この鎖に固有の取り払える構造が無い）。 -/
 theorem trace_epsilon_mul_V_step5_rows_one_to_six {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
     (epsilon (r + 1) * D.V).trace = ((F.checkH * D.traceFactor : ℝ) : ℂ) :=
@@ -595,7 +595,7 @@ theorem trace_epsilon_mul_V_step5_rows_one_to_six {r : ℕ} {F : CheckFermi (r +
     _ = ((D.traceFactor * F.checkH : ℝ) : ℂ) := by
         rw [D.sum_checkT_eq_traceFactor]                -- Step 4 の鎖
     _ = ((F.checkH * D.traceFactor : ℝ) : ℂ) := by
-        rw [mul_comm]                                   -- ℝ の乗法の交換則
+        rw [mul_comm]                                   -- ℝ の乗法の交換律
 
 /-- **原文 Step 5** の 8 行の鎖の全体（(1) の等式）。1〜6 行目は `trace_epsilon_mul_V_step5_rows_one_to_six`
 （Step 7 の `⟸` が 1〜6 行目だけを引くので分けた）、7・8 行目はこの calc の 2 段である

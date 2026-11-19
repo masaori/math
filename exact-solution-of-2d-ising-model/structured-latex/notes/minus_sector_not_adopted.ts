@@ -382,7 +382,7 @@ x^\top Wx
 &=\left(\frac{1}{\|y\|}\right)^2 y^\top Wy
   \quad (\because (1/a)^2=1/a^2)\\
 &=\frac{1}{\|y\|}\,y^\top\left(\frac{1}{\|y\|}Wy\right)
-  \quad (\because \text{実数倍の結合則})\\
+  \quad (\because \text{実数倍の結合律})\\
 &=\frac{1}{\|y\|}\,y^\top W\left(\frac{1}{\|y\|}y\right)
   \quad (\because \text{行列の作用は実数倍を保つ})\\
 &=\left(\frac{1}{\|y\|}y\right)^\top W\left(\frac{1}{\|y\|}y\right)

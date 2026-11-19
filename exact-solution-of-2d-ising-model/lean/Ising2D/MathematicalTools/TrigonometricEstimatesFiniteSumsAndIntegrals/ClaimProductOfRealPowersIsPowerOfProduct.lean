@@ -14,7 +14,7 @@
 - 人手の `m ∈ ℤ_{≥0}` は Lean の `m : ℕ` である。
 - 人手の冪（`def_power_of_real_number`）は mathlib の `a ^ m`（`Monoid.npow`）で、定義の 2 つの式は `pow_zero`・`pow_succ` で読む。
   mathlib の `mul_pow` は使わない。
-- 人手の「`ℝ` で `(pq)(rs) = (pr)(qs)`（乗法の交換則と結合則）」は mathlib の `mul_mul_mul_comm` である
+- 人手の「`ℝ` で `(pq)(rs) = (pr)(qs)`（乗法の交換律と結合律）」は mathlib の `mul_mul_mul_comm` である
   （`ClaimFiniteProductOfRealProducts.lean` と同じ）。
 
 必要十分版は `Ising2D/NecSuf/ProductOfPowersIsPowerOfProduct.lean`、具体版をその系として導くのは
@@ -36,7 +36,7 @@ theorem product_of_real_powers_is_power_of_product :
   | m + 1, a, b =>
     calc a ^ (m + 1) * b ^ (m + 1)
         = (a ^ m * a) * (b ^ m * b) := by rw [pow_succ, pow_succ]             -- `a^{m+1} := a^m a`（`a → a`、`a → b`）を 2 箇所へ同時に
-      _ = (a ^ m * b ^ m) * (a * b) := mul_mul_mul_comm _ _ _ _               -- ℝ で `(pq)(rs) = (pr)(qs)`（乗法の交換則と結合則）
+      _ = (a ^ m * b ^ m) * (a * b) := mul_mul_mul_comm _ _ _ _               -- ℝ で `(pq)(rs) = (pr)(qs)`（乗法の交換律と結合律）
       _ = (a * b) ^ m * (a * b) := by rw [product_of_real_powers_is_power_of_product m a b]
                                                                               -- 帰納法の仮定
       _ = (a * b) ^ (m + 1) := (pow_succ (a * b) m).symm                      -- `a^{m+1} := a^m a`（`a → ab`）を右辺から左辺へ

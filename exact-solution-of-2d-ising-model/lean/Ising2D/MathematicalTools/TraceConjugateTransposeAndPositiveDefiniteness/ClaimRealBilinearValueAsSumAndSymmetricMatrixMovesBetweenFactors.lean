@@ -22,7 +22,7 @@
 - 人手の対称（`def_real_symmetric_matrix` の `P_kl = P_lk`）は Lean の `Matrix.IsSymm` で、各項へ当てる段は `Matrix.IsSymm.apply` である。
 - `finite_sum_of_real_scalar_multiples`・`finite_double_sum_of_real_numbers_interchange` は有限型の添字の版
   `finite_sum_of_real_scalar_multiples_fintype`・`finite_double_sum_of_real_numbers_interchange_fintype` を引く。
-  乗法の結合則・可換則は `mul_assoc`・`mul_comm` である。
+  乗法の結合律・可換律は `mul_assoc`・`mul_comm` である。
 - 人手の最後の行の「和の添字を書き換える」は束縛変数の名前の付け替えで、Lean では段にならない。
 - 一つ目の主張の左辺は、mathlib の `u ⬝ᵥ P *ᵥ v` ではなく人手 `def_real_bilinear_value` の和 `Σ_kΣ_l (u_kP_kl)v_l` で書く。
   mathlib の `u ⬝ᵥ P *ᵥ v` は定義から `∑ k, u k * (P *ᵥ v) k` と `rfl` で一致するので、`⬝ᵥ` で書くと主張が中身を持たず、
@@ -54,7 +54,7 @@ theorem real_bilinear_value_is_sum_with_real_matrix_vector_product (P : Matrix n
   calc ∑ k, ∑ l, u k * P k l * v l
       = ∑ k, ∑ l, u k * (P k l * v l) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-          mul_assoc (u k) (P k l) (v l)                              -- ℝ の乗法の結合則を各項へ
+          mul_assoc (u k) (P k l) (v l)                              -- ℝ の乗法の結合律を各項へ
     _ = ∑ k, u k * ∑ l, P k l * v l :=
         Finset.sum_congr rfl fun k _ =>
           finite_sum_of_real_scalar_multiples_fintype (u k) (fun l => P k l * v l)
@@ -70,7 +70,7 @@ theorem real_symmetric_matrix_moves_between_factors_of_sum_of_products (Q : Matr
       = ∑ k, (∑ l, Q k l * u l) * v k := rfl                        -- `def_real_matrix_vector_product`（`P → Q`、`x → u`）を各 `k` へ
     _ = ∑ k, v k * ∑ l, Q k l * u l :=
         Finset.sum_congr rfl fun k _ =>
-          mul_comm (∑ l, Q k l * u l) (v k)                          -- ℝ の乗法の可換則を各 `k` へ
+          mul_comm (∑ l, Q k l * u l) (v k)                          -- ℝ の乗法の可換律を各 `k` へ
     _ = ∑ k, ∑ l, v k * (Q k l * u l) :=
         Finset.sum_congr rfl fun k _ =>
           (finite_sum_of_real_scalar_multiples_fintype (v k) (fun l => Q k l * u l)).symm
@@ -80,13 +80,13 @@ theorem real_symmetric_matrix_moves_between_factors_of_sum_of_products (Q : Matr
           rw [hQ.apply l k]                                          -- `def_real_symmetric_matrix`（`Q_kl = Q_lk`）を各項へ
     _ = ∑ k, ∑ l, Q l k * u l * v k :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-          mul_comm (v k) (Q l k * u l)                               -- ℝ の乗法の可換則を各項へ
+          mul_comm (v k) (Q l k * u l)                               -- ℝ の乗法の可換律を各項へ
     _ = ∑ k, ∑ l, u l * Q l k * v k :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
-          rw [mul_comm (Q l k) (u l)]                                -- ℝ の乗法の可換則 `Q_lku_l = u_lQ_lk` を各項へ
+          rw [mul_comm (Q l k) (u l)]                                -- ℝ の乗法の可換律 `Q_lku_l = u_lQ_lk` を各項へ
     _ = ∑ k, ∑ l, u l * (Q l k * v k) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-          mul_assoc (u l) (Q l k) (v k)                              -- ℝ の乗法の結合則を各項へ
+          mul_assoc (u l) (Q l k) (v k)                              -- ℝ の乗法の結合律を各項へ
     _ = ∑ l, ∑ k, u l * (Q l k * v k) :=
         finite_double_sum_of_real_numbers_interchange_fintype
           (fun k l => u l * (Q l k * v k))                           -- `finite_double_sum_of_real_numbers_interchange`（`c_{k,l} → u_l(Q_lkv_k)`）

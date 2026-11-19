@@ -93,7 +93,7 @@ theorem finset_prod_mul_distrib' {G : Type*} [CommMonoid G] (m : ℕ) (x y : Fin
   exact finProdLeft_mul' mul_mul_mul_comm m x y
 
 /-- 具体版の `finite_product_of_real_numbers_splits_off_first_factor`（`Π_{j=1}^{m+1} r_j = r_1(Π_{j=1}^{m} r_{j+1})`）を、
-値が可換モノイドで積が `Finset.prod` の形で述べたもの。証明は必要十分版 `finProdLeft_succ_first`（乗法の結合則だけを仮定する）を
+値が可換モノイドで積が `Finset.prod` の形で述べたもの。証明は必要十分版 `finProdLeft_succ_first`（乗法の結合律だけを仮定する）を
 運ぶだけである。 -/
 theorem finset_prod_succ_first' {G : Type*} [CommMonoid G] (m : ℕ) (r : Fin (m + 2) → G) :
     ∏ j, r j = r 0 * ∏ j : Fin (m + 1), r j.succ := by
@@ -189,14 +189,14 @@ theorem prod_mul_succ_of_ge_three {G : Type*} [CommMonoid G] (k : ℕ) (x : Fin 
         rfl                                             -- 人手 4: 末尾の因子を出す（`def_finite_product_of_real_numbers` の帰納の式）
     _ = x 0 * ((∏ j : Fin (k + 1), x j.succ.castSucc)
           * ((∏ j : Fin (k + 1), x j.succ.castSucc) * x (Fin.last (k + 2)))) :=
-        mul_assoc _ _ _                                 -- 人手 5: 乗法の結合則
+        mul_assoc _ _ _                                 -- 人手 5: 乗法の結合律
     _ = x 0 * (((∏ j : Fin (k + 1), x j.succ.castSucc) * ∏ j : Fin (k + 1), x j.succ.castSucc)
           * x (Fin.last (k + 2))) := by
         rw [← mul_assoc (∏ j : Fin (k + 1), x j.succ.castSucc)]
-                                                        -- 人手 6: 乗法の結合則を右辺から左辺へ
+                                                        -- 人手 6: 乗法の結合律を右辺から左辺へ
     _ = x 0 * ((∏ j : Fin (k + 1), x j.succ.castSucc) * ∏ j : Fin (k + 1), x j.succ.castSucc)
           * x (Fin.last (k + 2)) :=
-        (mul_assoc _ _ _).symm                          -- 人手 7: 乗法の結合則を右辺から左辺へ
+        (mul_assoc _ _ _).symm                          -- 人手 7: 乗法の結合律を右辺から左辺へ
     _ = x 0 * (∏ j : Fin (k + 1), x j.succ.castSucc * x j.succ.castSucc) * x (Fin.last (k + 2)) := by
         rw [← finset_prod_mul_distrib' k]               -- 人手 8: 一つの積に戻す（具体版の `finite_product_of_real_products` を右辺から左辺へ）
     _ = x 0 * (∏ _j : Fin (k + 1), (1 : G)) * x (Fin.last (k + 2)) := by

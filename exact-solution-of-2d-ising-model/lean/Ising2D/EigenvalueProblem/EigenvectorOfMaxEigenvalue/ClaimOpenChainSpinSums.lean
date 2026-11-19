@@ -283,7 +283,7 @@ theorem open_chain_partition_sum (hM : 2 ≤ M) (K : ℝ) :
     _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + Real.exp (K * (-1))) := by
         rw [mul_one]                                    -- 人手 6: ℝ の乗法の単位元 `p·1 = p`（`p → K`。`set_and_algebra_notation`）を各因子へ
     _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + Real.exp ((-1) * K)) := by
-        rw [mul_comm K (-1)]                            -- 人手 7: ℝ の乗法の可換則（`set_and_algebra_notation`）を各因子へ
+        rw [mul_comm K (-1)]                            -- 人手 7: ℝ の乗法の可換律（`set_and_algebra_notation`）を各因子へ
     _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + Real.exp (-K)) := by
         rw [real_minus_one_times_is_negation K]         -- 人手 8: `real_minus_one_times_is_negation`（`a → K`）を各因子へ
     _ = ∏ m : Fin (n + 1), (Real.exp K + Real.exp (-K)) + ∏ m : Fin (n + 1), (Real.exp K + Real.exp (-K)) := by
@@ -339,7 +339,7 @@ theorem prod_bondSpin_of_ge_three (k : ℕ) (s : SpinConf (k + 3)) :
                                                         -- （`m → M_col-2`、`j → m`、`r_j → s(m+1)`）
     _ = (s 0 : ℝ) * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
           * ((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * (s (Fin.last (k + 2)) : ℝ))) :=
-        mul_assoc _ _ _                                 -- 人手 5: ℝ の乗法の結合則 `(xy)t = x(yt)`（`set_and_algebra_notation`）
+        mul_assoc _ _ _                                 -- 人手 5: ℝ の乗法の結合律 `(xy)t = x(yt)`（`set_and_algebra_notation`）
     _ = (s 0 : ℝ) * (((∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ)) * ∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))
           * (s (Fin.last (k + 2)) : ℝ)) := by
         rw [← mul_assoc (∏ j : Fin (k + 1), (s j.succ.castSucc : ℝ))]
@@ -373,7 +373,7 @@ theorem endpoint_mul_exp_openChainEnergy_eq_prod (K : ℝ) (s : SpinConf (n + 2)
       = ∏ m : Fin (n + 1), (bondSpin s m : ℝ) * Real.exp (K * (bondSpin s m : ℝ)) :=
   calc (s (Fin.last (n + 1)) : ℝ) * (s 0 : ℝ) * Real.exp (K * openChainEnergy s)
       = (s 0 : ℝ) * (s (Fin.last (n + 1)) : ℝ) * Real.exp (K * openChainEnergy s) := by
-        rw [mul_comm (s (Fin.last (n + 1)) : ℝ)]        -- ℝ の乗法の可換則 `p·q = q·p`（`p → s(M_col)`, `q → s(1)`。`set_and_algebra_notation`）
+        rw [mul_comm (s (Fin.last (n + 1)) : ℝ)]        -- ℝ の乗法の可換律 `p·q = q·p`（`p → s(M_col)`, `q → s(1)`。`set_and_algebra_notation`）
     _ = (∏ m : Fin (n + 1), (bondSpin s m : ℝ)) * Real.exp (K * openChainEnergy s) := by
         rw [prod_bondSpin_eq_first_mul_last]            -- 上の等式（`prod_bondSpin_eq_first_mul_last`）を右辺から左辺へ
     _ = (∏ m : Fin (n + 1), (bondSpin s m : ℝ)) * ∏ m : Fin (n + 1), Real.exp (K * (bondSpin s m : ℝ)) := by
@@ -426,7 +426,7 @@ theorem open_chain_endpoint_product_sum (hM : 2 ≤ M) (K : ℝ) :
     _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (K * (-1))) := by
         rw [mul_one]                                    -- 人手 7: ℝ の乗法の単位元 `p·1 = p`（`p → K`。`set_and_algebra_notation`）を各因子へ
     _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + (-1) * Real.exp ((-1) * K)) := by
-        rw [mul_comm K (-1)]                            -- 人手 8: ℝ の乗法の可換則（`set_and_algebra_notation`）を各因子へ
+        rw [mul_comm K (-1)]                            -- 人手 8: ℝ の乗法の可換律（`set_and_algebra_notation`）を各因子へ
     _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (-K)) := by
         rw [real_minus_one_times_is_negation K]         -- 人手 9: `real_minus_one_times_is_negation`（`a → K`）を各因子へ
     _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + -Real.exp (-K)) := by

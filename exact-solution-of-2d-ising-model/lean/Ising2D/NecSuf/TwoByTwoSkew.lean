@@ -401,7 +401,7 @@ theorem skew2_mulVec_pos (g a b s : R) (hab : a * b = -s ^ 2) :
         = (-b) * (-s) + g * b := by
           simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]       -- 行列とベクトルの積の定義
       _ = b * s + g * b := by rw [neg_mul_neg]                        -- 環の四則 `(-b)(-s) = b s`（仮定は使わない）
-      _ = s * b + g * b := by rw [mul_comm b s]                       -- 乗法の可換則
+      _ = s * b + g * b := by rw [mul_comm b s]                       -- 乗法の可換律
       _ = (s + g) * b := by rw [add_mul]                              -- 分配則で `b` を括り出す
       _ = (g + s) * b := by rw [add_comm s g]                         -- 加法の交換律
       _ = ((g + s) • ![-s, b]) 1 := by simp                           -- 第 2 成分は `b`
@@ -424,7 +424,7 @@ theorem skew2_mulVec_neg (g a b s : R) (hab : a * b = -s ^ 2) :
         = (-b) * s + g * b := by
           simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]       -- 行列とベクトルの積の定義
       _ = b * (-s) + g * b := by rw [neg_mul_comm]                    -- 環の四則 `(-b) s = b (-s)`（仮定は使わない）
-      _ = (-s) * b + g * b := by rw [mul_comm b (-s)]                 -- 乗法の可換則
+      _ = (-s) * b + g * b := by rw [mul_comm b (-s)]                 -- 乗法の可換律
       _ = (-s + g) * b := by rw [add_mul]                             -- 分配則で `b` を括り出す
       _ = (g - s) * b := by rw [add_comm, ← sub_eq_add_neg]           -- 加法の交換律（`g + (-s) = g - s`）
       _ = ((g - s) • ![s, b]) 1 := by simp                            -- 第 2 成分は `b`
@@ -617,7 +617,7 @@ theorem eq_conj_of_mul_eq {G : Type*} [Monoid G]
     A = P * D * Q :=
   calc A = A * 1 := (mul_one A).symm                                             -- 具体版 1 行目: 単位元は右単位元
     _ = A * (P * Q) := by rw [hQ]                                                 -- 具体版 2 行目: `P P^{-1} = I`
-    _ = (A * P) * Q := (mul_assoc _ _ _).symm                                     -- 具体版 3 行目: 積の結合則
+    _ = (A * P) * Q := (mul_assoc _ _ _).symm                                     -- 具体版 3 行目: 積の結合律
     _ = (P * D) * Q := by rw [h]                                                  -- 具体版 4 行目: Step 2
 
 end Ising2D.NecSuf

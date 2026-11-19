@@ -668,11 +668,11 @@ T_B(I)
 &= B_{11}B_{22}v_1 - B_{12}B_{21}v_1
    &&\bigl(\because \text{分配則}\bigr) \\
 &= B_{22}B_{11}v_1 - B_{12}B_{21}v_1
-   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換律}\bigr) \\
 &= B_{22}B_{11}v_1 - B_{12}B_{21}v_1 + \left(B_{22}B_{12}v_2 - B_{22}B_{12}v_2\right)
    &&\bigl(\because x - x = 0\ (x := B_{22}B_{12}v_2)\bigr) \\
 &= B_{22}B_{11}v_1 - B_{12}B_{21}v_1 + \left(B_{22}B_{12}v_2 - B_{12}B_{22}v_2\right)
-   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換律}\bigr) \\
 &= B_{22}B_{11}v_1 + B_{22}B_{12}v_2 - B_{12}B_{21}v_1 - B_{12}B_{22}v_2
    &&\bigl(\because \mathbb{C}\text{ の加法の交換律と結合律}\bigr) \\
 &= B_{22}\left(B_{11}v_1 + B_{12}v_2\right) - B_{12}\left(B_{21}v_1 + B_{22}v_2\right)
@@ -693,11 +693,11 @@ T_B(I)
 &= B_{11}B_{22}v_2 - B_{12}B_{21}v_2
    &&\bigl(\because \text{分配則}\bigr) \\
 &= B_{11}B_{22}v_2 - B_{21}B_{12}v_2
-   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換律}\bigr) \\
 &= B_{11}B_{22}v_2 - B_{21}B_{12}v_2 + \left(B_{11}B_{21}v_1 - B_{11}B_{21}v_1\right)
    &&\bigl(\because x - x = 0\ (x := B_{11}B_{21}v_1)\bigr) \\
 &= B_{11}B_{22}v_2 - B_{21}B_{12}v_2 + \left(B_{11}B_{21}v_1 - B_{21}B_{11}v_1\right)
-   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換律}\bigr) \\
 &= B_{11}B_{21}v_1 + B_{11}B_{22}v_2 - B_{21}B_{11}v_1 - B_{21}B_{12}v_2
    &&\bigl(\because \mathbb{C}\text{ の加法の交換律と結合律}\bigr) \\
 &= B_{11}\left(B_{21}v_1 + B_{22}v_2\right) - B_{21}\left(B_{11}v_1 + B_{12}v_2\right)
@@ -768,7 +768,7 @@ T_B(I)
 &= B_{11}B_{12} - B_{12}B_{11}
    &&\bigl(\because \mathbb{C}\text{ の四則}\bigr) \\
 &= B_{11}B_{12} - B_{11}B_{12}
-   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換律}\bigr) \\
 &= 0
    &&\bigl(\because x - x = 0\bigr)
 \end{aligned}`,
@@ -781,7 +781,7 @@ T_B(I)
 &= B_{21}B_{12} - B_{22}B_{11}
    &&\bigl(\because \mathbb{C}\text{ の四則}\bigr) \\
 &= B_{12}B_{21} - B_{11}B_{22}
-   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換律}\bigr) \\
 &= -\left(B_{11}B_{22} - B_{12}B_{21}\right)
    &&\bigl(\because \mathbb{C}\text{ の四則}\bigr) \\
 &= -\det B
@@ -826,7 +826,7 @@ T_B(I)
 &= B_{21}B_{22} - B_{22}B_{21}
    &&\bigl(\because \mathbb{C}\text{ の四則}\bigr) \\
 &= B_{21}B_{22} - B_{21}B_{22}
-   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換律}\bigr) \\
 &= 0
    &&\bigl(\because x - x = 0\bigr)
 \end{aligned}`,

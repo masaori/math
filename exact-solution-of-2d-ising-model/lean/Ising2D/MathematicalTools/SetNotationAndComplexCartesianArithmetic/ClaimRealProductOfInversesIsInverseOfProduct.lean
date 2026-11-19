@@ -30,10 +30,10 @@ theorem real_product_of_inverses_is_inverse_of_product (a b : ℝ) (ha : a ≠ 0
                                               -- `real_product_of_nonzero_is_nonzero` より `a·b ≠ 0`
   have prep : (a * b) * (a⁻¹ * b⁻¹) = 1 :=
     calc (a * b) * (a⁻¹ * b⁻¹)
-        = a * (b * (a⁻¹ * b⁻¹)) := mul_assoc a b (a⁻¹ * b⁻¹)       -- 乗法の結合則
-      _ = a * ((b * a⁻¹) * b⁻¹) := by rw [mul_assoc b a⁻¹ b⁻¹]       -- 乗法の結合則を右辺から左辺へ
-      _ = a * ((a⁻¹ * b) * b⁻¹) := by rw [mul_comm b a⁻¹]            -- 乗法の可換則
-      _ = a * (a⁻¹ * (b * b⁻¹)) := by rw [mul_assoc a⁻¹ b b⁻¹]       -- 乗法の結合則
+        = a * (b * (a⁻¹ * b⁻¹)) := mul_assoc a b (a⁻¹ * b⁻¹)       -- 乗法の結合律
+      _ = a * ((b * a⁻¹) * b⁻¹) := by rw [mul_assoc b a⁻¹ b⁻¹]       -- 乗法の結合律を右辺から左辺へ
+      _ = a * ((a⁻¹ * b) * b⁻¹) := by rw [mul_comm b a⁻¹]            -- 乗法の可換律
+      _ = a * (a⁻¹ * (b * b⁻¹)) := by rw [mul_assoc a⁻¹ b b⁻¹]       -- 乗法の結合律
       _ = a * (a⁻¹ * 1) := by rw [mul_inv_cancel₀ hb]                -- `def_real_quotient` の逆元（`z → b`）
       _ = a * a⁻¹ := by rw [mul_one]                                 -- 単位元 `x·1 = x`（`x → a^{-1}`）
       _ = 1 := mul_inv_cancel₀ ha                                    -- `def_real_quotient` の逆元（`z → a`）
@@ -42,8 +42,8 @@ theorem real_product_of_inverses_is_inverse_of_product (a b : ℝ) (ha : a ≠ 0
     _ = ((a * b) * (a * b)⁻¹) * (a⁻¹ * b⁻¹) := by rw [mul_inv_cancel₀ hab]
                                               -- `def_real_quotient` の逆元（`z → a·b ≠ 0`）を右辺から左辺へ
     _ = ((a * b)⁻¹ * (a * b)) * (a⁻¹ * b⁻¹) := by rw [mul_comm (a * b) (a * b)⁻¹]
-                                              -- 乗法の可換則
-    _ = (a * b)⁻¹ * ((a * b) * (a⁻¹ * b⁻¹)) := mul_assoc _ _ _       -- 乗法の結合則
+                                              -- 乗法の可換律
+    _ = (a * b)⁻¹ * ((a * b) * (a⁻¹ * b⁻¹)) := mul_assoc _ _ _       -- 乗法の結合律
     _ = (a * b)⁻¹ * 1 := by rw [prep]                                -- 準備
     _ = (a * b)⁻¹ := mul_one _                                       -- 単位元 `x·1 = x`（`x → (a·b)^{-1}`）
 

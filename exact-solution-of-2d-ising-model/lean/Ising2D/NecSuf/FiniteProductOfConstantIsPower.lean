@@ -15,9 +15,9 @@
 ## 何が効いているか / 効いていないか
 
 - 効くのは、`1` が左の単位元であること（`1r = r`。`m = 1` の 2 段目）と、冪の定義の 2 つの式（`a^0 = 1`・`a^{m+1} = a^m a`）だけである。
-  積の結合則・可換則、`1` が右の単位元であること、和・順序は効いていない。
+  積の結合律・可換律、`1` が右の単位元であること、和・順序は効いていない。
 - `Monoid R` は mathlib の冪 `^`（`Monoid.npow`）と、その定義の式 `pow_zero`・`pow_succ` を使うためだけに要る。
-  `Monoid` はその公理として積の結合則と右の単位元も含むが、証明はそれらを使わない（`PowerFromProductOfTwoValuedFactors.lean` と同じ事情）。
+  `Monoid` はその公理として積の結合律と右の単位元も含むが、証明はそれらを使わない（`PowerFromProductOfTwoValuedFactors.lean` と同じ事情）。
 -/
 import Ising2D.NecSuf.FiniteProductLeft
 

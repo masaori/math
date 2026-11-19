@@ -93,11 +93,11 @@ export default defineNotes([
       paragraph(["証明."]),
       paragraph([
         ref("epsilon_square_identity"),
-        "、行列と数ベクトルの積の結合則 ",
+        "、行列と数ベクトルの積の結合律 ",
         ref("mat_mult"),
         "、および複素数の体の法則 ",
         ref("complex_numbers_form_a_field"),
-        " を用いる。まず、この証明で使う行列作用の結合則を成分から確かめる。任意の ",
+        " を用いる。まず、この証明で使う行列作用の結合律を成分から確かめる。任意の ",
         math(String.raw`A,B\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         "、",
         math(String.raw`g\in\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
@@ -179,7 +179,7 @@ f
 &=\varepsilon^2f
 &&(\because\ \blkref{epsilon_square_identity})\\
 &=\varepsilon(\varepsilon f)
-&&(\because\ \blkref{mat_mult},\blkref{complex_numbers_form_a_field}\ \text{から直前に成分ごとに示した結合則})\\
+&&(\because\ \blkref{mat_mult},\blkref{complex_numbers_form_a_field}\ \text{から直前に成分ごとに示した結合律})\\
 &=\varepsilon(\lambda f)
 &&(\because\ \varepsilon f=\lambda f)\\
 &=\lambda(\varepsilon f)
@@ -187,7 +187,7 @@ f
 &=\lambda(\lambda f)
 &&(\because\ \varepsilon f=\lambda f)\\
 &=(\lambda\lambda)f
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合則})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
 &=\lambda^2f
 &&(\because\ \lambda^2=\lambda\lambda\ \text{という二乗の定義}).
 \end{aligned}`,
@@ -454,7 +454,7 @@ H_2 = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Z}_{M_{\m
         String.raw`\begin{aligned}
 (-\tfrac12S_1^{(+)})(\tfrac12S_1^{(+)})
 &= -\tfrac14(S_1^{(+)})^2
-   \quad (\because \text{スカラー倍と行列積の結合則}) \\
+   \quad (\because \text{スカラー倍と行列積の結合律}) \\
 &= (\tfrac12S_1^{(+)})(-\tfrac12S_1^{(+)})
    \quad (\because \text{スカラーの積は可換})
 \end{aligned}`,

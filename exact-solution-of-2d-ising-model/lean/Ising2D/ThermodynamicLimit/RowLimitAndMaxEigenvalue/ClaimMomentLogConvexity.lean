@@ -216,7 +216,7 @@ theorem real_bilinear_value_between_two_powers (CR : Matrix (Conf M) (Conf M) �
     _ = ∑ i, ∑ j, x i * (∑ l, Pb i l * (CR * Pa) l j) * x j := rfl          -- `def_real_matrix_product`
     _ = ∑ i, ∑ j, x i * (∑ l, Pb i l * ∑ m, CR l m * Pa m j) * x j := rfl   -- `def_real_matrix_product`
     _ = ∑ i, ∑ j, ∑ l, ∑ m, x i * Pb i l * CR l m * Pa m j * x j := by
-        simp only [Finset.mul_sum, Finset.sum_mul, mul_assoc]               -- `ℝ` の分配則と乗法の結合則
+        simp only [Finset.mul_sum, Finset.sum_mul, mul_assoc]               -- `ℝ` の分配則と乗法の結合律
     _ = ∑ l, ∑ m, ∑ i, ∑ j, x i * Pb i l * CR l m * Pa m j * x j := by
         calc ∑ i, ∑ j, ∑ l, ∑ m, x i * Pb i l * CR l m * Pa m j * x j
             = ∑ i, ∑ l, ∑ m, ∑ j, x i * Pb i l * CR l m * Pa m j * x j :=
@@ -231,11 +231,11 @@ theorem real_bilinear_value_between_two_powers (CR : Matrix (Conf M) (Conf M) �
         refine Finset.sum_congr rfl fun i _ => ?_
         rw [Finset.mul_sum]
         exact Finset.sum_congr rfl fun j _ => by ring
-                                                                            -- `ℝ` の分配則と乗法の交換則・結合則
+                                                                            -- `ℝ` の分配則と乗法の交換律・結合律
     _ = ∑ l, ∑ m, (∑ i, x i * Pb l i) * CR l m * (∑ j, Pa m j * x j) := by
         simp only [hPb, power_of_W_real_entry_symm W hW b _ _]              -- 【冪の対称性】の `((W_ℝ)^b)_il = ((W_ℝ)^b)_li`
     _ = ∑ l, ∑ m, (∑ i, Pb l i * x i) * CR l m * (∑ j, Pa m j * x j) := by
-        simp only [mul_comm (x _) (Pb _ _)]                                 -- `ℝ` の乗法の交換則
+        simp only [mul_comm (x _) (Pb _ _)]                                 -- `ℝ` の乗法の交換律
     _ = ∑ l, ∑ m, (Pb *ᵥ x) l * CR l m * (Pa *ᵥ x) m := rfl                 -- 【`(W_ℝ)^ax` の成分】を `a` と `b` へ同時に
     _ = (Pb *ᵥ x) ⬝ᵥ CR *ᵥ (Pa *ᵥ x) :=
         (dotProduct_mulVec_eq_real_bilinear_value _ _ CR).symm              -- `def_real_bilinear_value`
@@ -295,10 +295,10 @@ theorem power_succ_of_W_real_mulVec_apply (a : ℕ) (x : Conf M → ℝ) (l : Co
     _ = ∑ m, (WR * WR ^ a) l m * x m := by rw [power_succ_of_W_real W hW a] -- 上の式変形
     _ = ∑ m, (∑ n, WR l n * (WR ^ a) n m) * x m := rfl                      -- `def_real_matrix_product`
     _ = ∑ m, ∑ n, WR l n * (WR ^ a) n m * x m := by
-        simp only [Finset.sum_mul]                                          -- `ℝ` の分配則と乗法の結合則
+        simp only [Finset.sum_mul]                                          -- `ℝ` の分配則と乗法の結合律
     _ = ∑ n, ∑ m, WR l n * (WR ^ a) n m * x m := Finset.sum_comm            -- `ℝ` の有限和の順序の交換
     _ = ∑ n, WR l n * ∑ m, (WR ^ a) n m * x m := by
-        simp only [Finset.mul_sum, mul_assoc]                               -- `ℝ` の分配則と乗法の結合則
+        simp only [Finset.mul_sum, mul_assoc]                               -- `ℝ` の分配則と乗法の結合律
     _ = ∑ n, WR l n * ((WR ^ a) *ᵥ x) n := rfl                              -- 【`(W_ℝ)^ax` の成分】
     _ = (WR *ᵥ ((WR ^ a) *ᵥ x)) l := rfl                                    -- `def_real_matrix_vector_product`（`P → W_ℝ`, `x → u^{(a)}`）
 
@@ -311,7 +311,7 @@ theorem real_bilinear_value_eq_zero_of_mulVec_eq_zero (u : Conf M → ℝ)
       = ∑ k, ∑ l, u k * WR k l * u l := dotProduct_mulVec_eq_real_bilinear_value u u WR
                                                                             -- `def_real_bilinear_value`
     _ = ∑ k, u k * ∑ l, WR k l * u l := by
-        simp only [Finset.mul_sum, mul_assoc]                               -- `ℝ` の分配則と乗法の結合則
+        simp only [Finset.mul_sum, mul_assoc]                               -- `ℝ` の分配則と乗法の結合律
     _ = ∑ k, u k * (WR *ᵥ u) k := rfl                                       -- `def_real_matrix_vector_product`
     _ = ∑ k, u k * (0 : Conf M → ℝ) k := by rw [hu]                         -- `W_ℝu = 0` という仮定
     _ = ∑ _k : Conf M, (0 : ℝ) :=

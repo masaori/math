@@ -1704,7 +1704,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \Bigl(\Bigl(\check{h}\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon\Bigr)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \bigl(a \to \check{h}\textstyle\prod_{\mu}\check{u}^{(\epsilon_\mu)},\ b \to \check\Lambda_\epsilon\bigr)\bigr)\\
 &= \Bigl(\Bigl(\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon\Bigr)\check{h}\Bigr)_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ (ab)c = (bc)a\ \text{（乗法の交換則と結合則）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (ab)c = (bc)a\ \text{（乗法の交換律と結合律）}\bigr)\\
 &= \left(\check{t}_\epsilon\check{h}\right)_{\mathbb{C}}
 &&\bigl(\because\ \check{t}_\epsilon\ \text{の置き方}\bigr)
 \end{aligned}`,
@@ -1739,14 +1739,14 @@ P_{k+1}\check{Q}_\epsilon
 &&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12))\bigr)\\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
    \Bigl(\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\prod_{\mu=1}^{M_{\mathrm{col}}}\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a(bc) = b(ac)\ \text{（乗法の交換則と結合則）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a(bc) = b(ac)\ \text{（乗法の交換律と結合律）}\bigr)\\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
    \prod_{\mu=1}^{M_{\mathrm{col}}}\left(\check{u}^{(\epsilon_\mu)}\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\right)
 &&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \check{u}^{(\epsilon_\mu)},\ y_j \to \exp(\gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12)))\ \text{を右辺から左辺へ}\bigr)\\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}
 &&\bigl(\because\ \check{w}_\mu^{(e)}\ \text{の置き方}\ (e \to \epsilon_\mu)\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1784,7 +1784,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \blkref{def_cosh_sinh}\ \text{の}\ \sinh\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に、右辺から左辺へ}\bigr)\\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律}\bigr)\\
 &= \varkappa
 &&\bigl(\because\ \varkappa\ \text{の置き方}\bigr)
 \end{aligned}`,
@@ -1806,7 +1806,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \left(\varkappa\check{h}\right)_{\mathbb{C}}
 &&\bigl(\because\ \text{Step 4 の鎖}\bigr)\\
 &= \left(\check{h}\varkappa\right)_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律}\bigr)\\
 &= \check{h}_{\mathbb{C}}\varkappa_{\mathbb{C}}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to \check{h},\ b \to \varkappa)\ \text{を右辺から左辺へ}\bigr)\\
 &= \eta_{(1,\dots,1)}\varkappa_{\mathbb{C}}
@@ -2897,7 +2897,7 @@ D_0G
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(K\cdot(-1))\right)
    \quad (\because 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ p\cdot 1 = p\ (p \to K)\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp((-1)\cdot K)\right)
-   \quad (\because \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to K,\ q \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ}) \\
+   \quad (\because \mathbb{R}\ \text{の乗法の可換律}\ p\cdot q = q\cdot p\ (p \to K,\ q \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(-K)\right)
    \quad (\because \blkref{real_minus_one_times_is_negation}\ (a \to K)\text{ を各因子へ}) \\
 &= \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(-K)\right)
@@ -3037,11 +3037,11 @@ D_0G
 &= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\right)\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,s(M_{\mathrm{col}})\right)
 &&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の帰納の式}\ (m \to M_{\mathrm{col}}-2,\ j \to m,\ r_j \to s(m+1))\bigr)\\
 &= s(1)\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,s(M_{\mathrm{col}})\right)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ (x \to s(1),\ y \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ t \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,s(M_{\mathrm{col}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ (xy)t = x(yt)\ (x \to s(1),\ y \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ t \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,s(M_{\mathrm{col}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= s(1)\left(\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\right)s(M_{\mathrm{col}})\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ (x \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ y \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ t \to s(M_{\mathrm{col}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ (xy)t = x(yt)\ (x \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ y \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ t \to s(M_{\mathrm{col}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \left(s(1)\left(\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\right)\right)s(M_{\mathrm{col}})
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ (x \to s(1),\ y \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ t \to s(M_{\mathrm{col}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ (xy)t = x(yt)\ (x \to s(1),\ y \to \left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right)\,\left(\prod_{m=1}^{M_{\mathrm{col}}-2}s(m+1)\right),\ t \to s(M_{\mathrm{col}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}\bigl(s(m+1)s(m+1)\bigr)\right)\right)s(M_{\mathrm{col}})
 &&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}}-2,\ j \to m,\ x_j \to s(m+1),\ y_j \to s(m+1))\text{ を右辺から左辺へ}\bigr)\\
 &= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}1\right)\right)s(M_{\mathrm{col}})
@@ -3085,7 +3085,7 @@ D_0G
         String.raw`\begin{aligned}
 s(M_{\mathrm{col}})s(1)\exp(KE(s))
 &= s(1)s(M_{\mathrm{col}})\exp(KE(s))
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to s(M_{\mathrm{col}}),\ q \to s(1))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律}\ p\cdot q = q\cdot p\ (p \to s(M_{\mathrm{col}}),\ q \to s(1))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left(\prod_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\right)\exp(KE(s))
 &&\bigl(\because\ \text{上の等式を右辺から左辺へ}\bigr)\\
 &= \left(\prod_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\right)\prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
@@ -3115,7 +3115,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+(-1)\exp(K\cdot(-1))\right)
    \quad (\because 1\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ p\cdot 1 = p\ (p \to K)\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+(-1)\exp((-1)\cdot K)\right)
-   \quad (\because \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to K,\ q \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ}) \\
+   \quad (\because \mathbb{R}\ \text{の乗法の可換律}\ p\cdot q = q\cdot p\ (p \to K,\ q \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+(-1)\exp(-K)\right)
    \quad (\because \blkref{real_minus_one_times_is_negation}\ (a \to K)\text{ を各因子へ}) \\
 &= \sum_{u\in\{-1,1\}}\ \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\left(-\exp(-K)\right)\right)

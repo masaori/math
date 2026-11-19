@@ -1165,7 +1165,7 @@ b
 &= \bigl(2^{-1} \cdot 2\bigr) \cdot b
 &&\bigl(\because\ 2\ \text{の乗法の逆元}\ a^{-1} \cdot a = 1\ (a \to 2\text{。}2 \neq 0\ \text{は}\ \blkref{real_two_is_nonzero})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= 2^{-1} \cdot (2 \cdot b)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 2^{-1} \cdot \bigl((1 + 1) \cdot b\bigr)
 &&\bigl(\because\ \blkref{def_real_two}\bigr)\\
 &= 2^{-1} \cdot (1 \cdot b + 1 \cdot b)

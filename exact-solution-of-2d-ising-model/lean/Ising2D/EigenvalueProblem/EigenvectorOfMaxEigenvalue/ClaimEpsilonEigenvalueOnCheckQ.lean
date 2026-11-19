@@ -1006,7 +1006,7 @@ theorem parityProd_mul_Qproj (T : Finset (Fin M)) :
 /-- **原文 (4) の 7 行の鎖の 3 行目の根拠**: `(−1)^{|ε|}(−1)^{|ε|} = ((−1)(−1))^{|ε|} = 1^{|ε|} = 1`（人手の 3 つの等号と同じ行）。 -/
 theorem neg_one_pow_mul_self (k : ℕ) : (-1 : ℂ) ^ k * (-1 : ℂ) ^ k = 1 :=
   calc (-1 : ℂ) ^ k * (-1 : ℂ) ^ k
-      = ((-1 : ℂ) * (-1 : ℂ)) ^ k := (mul_pow _ _ k).symm  -- `z^a w^a = (zw)^a`（`ℂ` の乗法の交換則から。mathlib の `mul_pow`）
+      = ((-1 : ℂ) * (-1 : ℂ)) ^ k := (mul_pow _ _ k).symm  -- `z^a w^a = (zw)^a`（`ℂ` の乗法の交換律から。mathlib の `mul_pow`）
     _ = (1 : ℂ) ^ k := by rw [neg_one_mul, neg_neg]     -- `(−1)(−1) = 1`
     _ = 1 := one_pow k                                  -- `1^a = 1`
 

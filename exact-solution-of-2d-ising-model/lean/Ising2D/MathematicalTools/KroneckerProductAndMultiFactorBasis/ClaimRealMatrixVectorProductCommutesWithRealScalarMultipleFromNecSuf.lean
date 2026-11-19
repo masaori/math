@@ -6,7 +6,7 @@
 
 必要十分版 `Ising2D.NecSuf.matrix_vector_product_commutes_with_scalar_multiple'`
 （`Ising2D/NecSuf/MatrixVectorProductCommutesWithScalarMultiple.lean`）を `R → ℝ` に特殊化する。
-仮定 `hc`（`c` が `P_ij` と可換）は `ℝ` の乗法の交換則 `mul_comm` で埋める。
+仮定 `hc`（`c` が `P_ij` と可換）は `ℝ` の乗法の交換律 `mul_comm` で埋める。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixVectorProductCommutesWithRealScalarMultiple
 import Ising2D.NecSuf.MatrixVectorProductCommutesWithScalarMultiple

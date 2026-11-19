@@ -25,7 +25,7 @@ mathlib の `List.prod` は右から畳み込み、空の積を `1` とするの
 - `∏ 1 = 1` に効くのは、`1·1 = 1`（仮定 `h`）だけである。具体版は `identity_matrix_is_right_unit_of_mat_mult` を `A → I` で使うが、
   効いているのはその `A = I` の場合だけである。
   実数の具体版 `finite_product_of_real_ones` も ℝ の `mul_one` を使うが、効いているのは `p → 1` の場合だけである。
-  どちらの具体版でも、積の結合則、`1` がほかの元の左右の単位元であること（行列なら `I` 以外、実数なら `1` 以外の元について）、可換則は効いていない。
+  どちらの具体版でも、積の結合律、`1` がほかの元の左右の単位元であること（行列なら `I` 以外、実数なら `1` 以外の元について）、可換則は効いていない。
 -/
 import Mathlib.Data.Fin.Basic
 import Mathlib.Algebra.Group.Defs

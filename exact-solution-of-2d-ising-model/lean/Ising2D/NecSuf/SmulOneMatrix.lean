@@ -18,13 +18,13 @@
 - スカラーは係数と同じ集合の元が左から掛かるものとした（具体版のスカラー倍が `ℂ` の積であることに合わせた）。
 - 差のくくり出しで効いているのは、差が `x - y = x + (-y)` であること（仮定 `hsub`。人手の `def_complex_difference` に当たる。
   `SmulMatrixSub.lean` と同じ理由で型クラスにせず仮定にした）、`-y = (-1)y`（単位元と、符号反転が積に分配すること。`HasDistribNeg`）、
-  乗法の結合則、**右分配則**である。
+  乗法の結合律、**右分配則**である。
 - 差のくくり出しの仮定は `Add`・`Monoid`・`HasDistribNeg`・`RightDistribClass`・`Sub`（と `hsub`）だけにした。
-  **加法の結合律・交換律・零、左分配則、`0 * x = 0`、加法の逆元（`x + (-x) = 0`）、乗法の可換則は効いていない。** 具体版 `scalar_multiple_distributes_over_matrix_difference`
+  **加法の結合律・交換律・零、左分配則、`0 * x = 0`、加法の逆元（`x + (-x) = 0`）、乗法の可換律は効いていない。** 具体版 `scalar_multiple_distributes_over_matrix_difference`
   と違い、`-1` と係数を入れ替える段も無い。
 - 有限和のくくり出しで効いているのは、行列の有限和の成分が成分の有限和であることと、係数の有限和の右分配（`Finset.sum_mul`）だけである。
   `Finset.sum_mul` のために `NonUnitalNonAssocSemiring` を取った。`0 * x = 0` は mathlib の `Finset.sum` の空の和の段にだけ現れ、
-  人手の `r ≥ 1` 項の和では効いていない。**乗法の結合則・単位元・可換則、加法の逆元は効いていない。**
+  人手の `r ≥ 1` 項の和では効いていない。**乗法の結合律・単位元・可換律、加法の逆元は効いていない。**
 - 行列の添字の集合は任意で、有限であることも順序も効いていない（積を使わないため）。複素数であること、体であることは効いていない。
 -/
 import Mathlib.Data.Matrix.Basic

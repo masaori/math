@@ -124,7 +124,7 @@ export default defineBlocks([
         ref("psd_cauchy_schwarz"),
         " と熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の乗法の可換則・結合則と有限和だけを使い、極限・完備性を使わない。",
+        " の乗法の可換律・結合律と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -135,11 +135,11 @@ u^\top Pv
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(u_k\,P_{lk}\bigr)\,v_l
 &&\bigl(\because\ P\ \text{は対称}\ \blkref{def_real_symmetric_matrix}\ (k \to k,\ l \to l)\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} v_l\,\bigl(u_k\,P_{lk}\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ (u_k\,P_{lk})\,v_l = v_l\,(u_k\,P_{lk})\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律}\ (u_k\,P_{lk})\,v_l = v_l\,(u_k\,P_{lk})\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} v_l\,\bigl(P_{lk}\,u_k\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ u_k\,P_{lk} = P_{lk}\,u_k\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律}\ u_k\,P_{lk} = P_{lk}\,u_k\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(v_l\,P_{lk}\bigr)\,u_k
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律を各項へ}\bigr)\\
 &=\sum_{l=1}^{n}\sum_{k=1}^{n} \bigl(v_l\,P_{lk}\bigr)\,u_k
 &&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to n,\ n_2 \to n,\ c_{k,l} \to (v_l\,P_{lk})\,u_k)\bigr)\\
 &=v^\top Pu
@@ -433,7 +433,7 @@ x^\top Py
         math(String.raw`\mathbb{R}`),
         " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の乗法の結合則・可換則と有限和だけを使い、極限・完備性を使わない。",
+        " の乗法の結合律・可換律と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -444,15 +444,15 @@ w^\top Pw
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(\bigl(c\,u_k\bigr)\,P_{kl}\Bigr)\,\bigl(c\,u_l\bigr)
 &&\bigl(\because\ \text{仮定}\ w_k = c\,u_k\ \text{を各項の}\ w_k\ \text{と}\ w_l\ \text{へ同時適用}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(c\,\bigl(u_k\,P_{kl}\bigr)\Bigr)\,\bigl(c\,u_l\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (c\,u_k)\,P_{kl} = c\,(u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ (c\,u_k)\,P_{kl} = c\,(u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} c\,\Bigl(\bigl(u_k\,P_{kl}\bigr)\,\bigl(c\,u_l\bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (c\,s)\,t = c\,(s\,t)\ (s \to u_k\,P_{kl},\ t \to c\,u_l)\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ (c\,s)\,t = c\,(s\,t)\ (s \to u_k\,P_{kl},\ t \to c\,u_l)\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} c\,\Bigl(\Bigl(\bigl(u_k\,P_{kl}\bigr)\,c\Bigr)\,u_l\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ s\,(c\,u_l) = (s\,c)\,u_l\ (s \to u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ s\,(c\,u_l) = (s\,c)\,u_l\ (s \to u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} c\,\Bigl(\Bigl(c\,\bigl(u_k\,P_{kl}\bigr)\Bigr)\,u_l\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ s\,c = c\,s\ (s \to u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律}\ s\,c = c\,s\ (s \to u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} c\,\Bigl(c\,\Bigl(\bigl(u_k\,P_{kl}\bigr)\,u_l\Bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (c\,s)\,u_l = c\,(s\,u_l)\ (s \to u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ (c\,s)\,u_l = c\,(s\,u_l)\ (s \to u_k\,P_{kl})\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n} c\sum_{l=1}^{n} c\,\Bigl(\bigl(u_k\,P_{kl}\bigr)\,u_l\Bigr)
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to c,\ x_j \to c\,((u_k\,P_{kj})\,u_j))\ \text{を各}\ k\ \text{へ}\bigr)\\
 &=\sum_{k=1}^{n} c\,\Bigl(c\sum_{l=1}^{n} \bigl(u_k\,P_{kl}\bigr)\,u_l\Bigr)
@@ -464,7 +464,7 @@ w^\top Pw
 &=c\,\Bigl(c\,\bigl(u^\top Pu\bigr)\Bigr)
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to u,\ y \to u)\ \text{を右辺から左辺へ}\bigr)\\
 &=(c\,c)\,\bigl(u^\top Pu\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ c\,(c\,t) = (c\,c)\,t\ (t \to u^\top Pu)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ c\,(c\,t) = (c\,c)\,t\ (t \to u^\top Pu)\bigr)
 \end{aligned}`),
     ],
     conversion: {
@@ -517,7 +517,7 @@ w^\top Pw
         math(String.raw`\mathbb{R}`),
         " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の乗法の結合則・分配則と有限和だけを使い、極限・完備性を使わない。",
+        " の乗法の結合律・分配則と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -526,7 +526,7 @@ u^\top Pv
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(u_k\,P_{kl}\bigr)\,v_l
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to u,\ y \to v)\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} u_k\,\bigl(P_{kl}\,v_l\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律を各項へ}\bigr)\\
 &=\sum_{k=1}^{n} u_k\sum_{l=1}^{n} P_{kl}\,v_l
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to u_k,\ x_j \to P_{kj}\,v_j)\ \text{を各}\ k\ \text{へ}\bigr)\\
 &=\sum_{k=1}^{n} u_k\,(Pv)_k
@@ -579,7 +579,7 @@ u^\top Pv
         math(String.raw`\mathbb{R}`),
         " を使うのは、熱力学極限の章で、成分が実数の値をとる行列にこの主張を使うためである。証明は ",
         math(String.raw`\mathbb{R}`),
-        " の乗法の結合則・可換則・分配則と有限和だけを使い、極限・完備性を使わない。",
+        " の乗法の結合律・可換律・分配則と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -588,17 +588,17 @@ u^\top Pv
 &=\sum_{k=1}^{n} \Bigl(\sum_{l=1}^{n} Q_{kl}\,u_l\Bigr)\,v_k
 &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to Q,\ x \to u,\ i \to k。\text{和の添字}\ j\ \text{を}\ l\ \text{と書く})\ \text{を各}\ k\ \text{へ}\bigr)\\
 &=\sum_{k=1}^{n} v_k\sum_{l=1}^{n} Q_{kl}\,u_l
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則を各}\ k\ \text{へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律を各}\ k\ \text{へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} v_k\,\bigl(Q_{kl}\,u_l\bigr)
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to v_k,\ x_j \to Q_{kj}\,u_j)\ \text{を右辺から左辺へ、各}\ k\ \text{へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} v_k\,\bigl(Q_{lk}\,u_l\bigr)
 &&\bigl(\because\ Q\ \text{は対称}\ \blkref{def_real_symmetric_matrix}\ (P \to Q,\ k \to k,\ l \to l)\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(Q_{lk}\,u_l\bigr)\,v_k
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(u_l\,Q_{lk}\bigr)\,v_k
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ Q_{lk}\,u_l = u_l\,Q_{lk}\ \text{を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律}\ Q_{lk}\,u_l = u_l\,Q_{lk}\ \text{を各項へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} u_l\,\bigl(Q_{lk}\,v_k\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を各項へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律を各項へ}\bigr)\\
 &=\sum_{l=1}^{n}\sum_{k=1}^{n} u_l\,\bigl(Q_{lk}\,v_k\bigr)
 &&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to n,\ n_2 \to n,\ c_{k,l} \to u_l\,(Q_{lk}\,v_k))\bigr)\\
 &=\sum_{l=1}^{n} u_l\sum_{k=1}^{n} Q_{lk}\,v_k
@@ -1216,7 +1216,7 @@ q(t)
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} (y_k+t\,x_k)\,P_{kl}\,(y_l+t\,x_l)
 &&\bigl(\because\ q(t),\ w(t)\ \text{の定義と}\ \blkref{def_real_bilinear_value}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(y_kP_{kl}y_l+t\,y_kP_{kl}x_l+t\,x_kP_{kl}y_l+t^2\,x_kP_{kl}x_l\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配則・乗法の結合則・可換則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則・乗法の結合律・可換律}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} y_kP_{kl}y_l
 +\sum_{k=1}^{n}\sum_{l=1}^{n} t\,y_kP_{kl}x_l\\
 &\qquad+\sum_{k=1}^{n}\sum_{l=1}^{n} t\,x_kP_{kl}y_l
@@ -1232,7 +1232,7 @@ q(t)
 &=y^\top Py+t\,y^\top Px+t\,y^\top Px+t^2\,x^\top Px
 &&\bigl(\because\ \blkref{real_bilinear_value_of_symmetric_matrix_is_symmetric}\ (n \to n,\ P \to P,\ u \to x,\ v \to y)\bigr)\\
 &=(x^\top Px)\,t^2+2\,(y^\top Px)\,t+y^\top Py
-&&\bigl(\because\ \mathbb{R}\ \text{の加法と乗法の可換則・分配則}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法と乗法の可換律・分配則}\bigr)
 \end{aligned}`),
       paragraph([
         "仮定の半正定値性を ",

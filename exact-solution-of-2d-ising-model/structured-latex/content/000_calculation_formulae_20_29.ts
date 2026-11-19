@@ -864,7 +864,7 @@ w\cdot z
 &= \left(\bigl((ac)e+(-((bd)e))\bigr)+\bigl((-((ad)f))+(-((bc)f))\bigr),\ \bigl((ac)f+(-((bd)f))\bigr)+\bigl((ad)e+(bc)e\bigr)\right)
 &&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ \bigl(x \to (ad)f,\ y \to (bc)f\bigr)\bigr)\\
 &= \left(\bigl(a(ce)+(-(b(de)))\bigr)+\bigl((-(a(df)))+(-(b(cf)))\bigr),\ \bigl(a(cf)+(-(b(df)))\bigr)+\bigl(a(de)+b(ce)\bigr)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ \bigl((x,y,t) \to (a,c,e),(b,d,e),(a,d,f),(b,c,f),(a,c,f),(b,d,f),(a,d,e),(b,c,e)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 8 箇所へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の積の結合律}\ (xy)t = x(yt)\ \bigl((x,y,t) \to (a,c,e),(b,d,e),(a,d,f),(b,c,f),(a,c,f),(b,d,f),(a,d,e),(b,c,e)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 8 箇所へ適用}\bigr)\\
 &= \left(a(ce)+\Bigl((-(b(de)))+\bigl((-(a(df)))+(-(b(cf)))\bigr)\Bigr),\ a(cf)+\Bigl((-(b(df)))+\bigl(a(de)+b(ce)\bigr)\Bigr)\right)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x+y)+t = x+(y+t)\ \bigl(x \to a(ce),\ y \to -(b(de)),\ t \to (-(a(df)))+(-(b(cf)))\ \text{と}\ x \to a(cf),\ y \to -(b(df)),\ t \to a(de)+b(ce)\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= \left(a(ce)+\Bigl(\bigl((-(a(df)))+(-(b(cf)))\bigr)+(-(b(de)))\Bigr),\ a(cf)+\Bigl(\bigl(a(de)+b(ce)\bigr)+(-(b(df)))\Bigr)\right)
@@ -995,15 +995,15 @@ z\cdot 1_{\mathbb{C}}
         String.raw`\begin{aligned}
 (ad)(bc)
 &= a\bigl(d(bc)\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ (x \to a,\ y \to d,\ t \to bc)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の積の結合律}\ (xy)t = x(yt)\ (x \to a,\ y \to d,\ t \to bc)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= a\bigl((db)c\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ (x \to d,\ y \to b,\ t \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の積の結合律}\ (xy)t = x(yt)\ (x \to d,\ y \to b,\ t \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= a\bigl((bd)c\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の積の可換則}\ xy = yx\ (x \to d,\ y \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の積の可換律}\ xy = yx\ (x \to d,\ y \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= a\bigl(c(bd)\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の積の可換則}\ xy = yx\ (x \to bd,\ y \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の積の可換律}\ xy = yx\ (x \to bd,\ y \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (ac)(bd)
-&&\bigl(\because\ \mathbb{R}\ \text{の積の結合則}\ (xy)t = x(yt)\ (x \to a,\ y \to c,\ t \to bd)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の積の結合律}\ (xy)t = x(yt)\ (x \to a,\ y \to c,\ t \to bd)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph(["である。"]),
@@ -1025,7 +1025,7 @@ z\cdot 1_{\mathbb{C}}
 &= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((bd)(ac)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((bc)(ad)+(bc)(bc)\bigr)\Bigr)
 &&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ \text{の}\ (-a)(-b) = ab\ \text{を文字を}\ p, q\ \text{に替えた}\ (-p)(-q) = pq\ (p \to bd,\ q \to bd)\bigr)\\
 &= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ad)(bc)\bigr)+\bigl((ad)(bc)+(bc)(bc)\bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の積の可換則}\ xy = yx\ (x \to bd,\ y \to ac;\ x \to bc,\ y \to ad)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の積の可換律}\ xy = yx\ (x \to bd,\ y \to ac;\ x \to bc,\ y \to ad)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ適用}\bigr)\\
 &= \Biggl(\biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)\Biggr)+\Bigl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Bigr)
 &&\bigl(\because\ \text{上の}\ (ad)(bc) = (ac)(bd)\ \text{を 2 箇所へ適用}\bigr)\\
 &= \biggl((ac)(ac)+\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)\biggr)+\Biggl(\biggl(\Bigl(-\bigl((ac)(bd)\bigr)\Bigr)+(bd)(bd)\biggr)+\Bigl(\bigl((ad)(ad)+(ac)(bd)\bigr)+\bigl((ac)(bd)+(bc)(bc)\bigr)\Bigr)\Biggr)
@@ -2195,13 +2195,13 @@ a - 0
 &= \bigl((-1)\cdot a\bigr)\cdot\bigl((-1)\cdot b\bigr)
 &&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to b)\ \text{を右辺から左辺へ}\bigr)\\
 &= (-1)\cdot\Bigl(a\cdot\bigl((-1)\cdot b\bigr)\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (-1)\cdot\Bigl(\bigl(a\cdot(-1)\bigr)\cdot b\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (-1)\cdot\Bigl(\bigl((-1)\cdot a\bigr)\cdot b\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (-1)\cdot\bigl((-1)\cdot(a\cdot b)\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (-1)\cdot\bigl(-(a\cdot b)\bigr)
 &&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to a\cdot b)\bigr)\\
 &= -\bigl(-(a\cdot b)\bigr)
@@ -2250,7 +2250,7 @@ a - 0
 &= \bigl((-1)\cdot x\bigr)\cdot t
 &&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to x)\ \text{を右辺から左辺へ}\bigr)\\
 &= (-1)\cdot(x\cdot t)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (p\cdot q)\cdot r = p\cdot(q\cdot r)\ (p \to -1,\ q \to x,\ r \to t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ (p\cdot q)\cdot r = p\cdot(q\cdot r)\ (p \to -1,\ q \to x,\ r \to t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= -(x\cdot t)
 &&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to x\cdot t)\bigr)
 \end{aligned}`),
@@ -2293,11 +2293,11 @@ a - 0
       displayMath(String.raw`\begin{aligned}
 x\cdot(-t)
 &= (-t)\cdot x
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to x,\ q \to -t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律}\ p\cdot q = q\cdot p\ (p \to x,\ q \to -t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= -(t\cdot x)
 &&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ \text{の}\ (-x)\cdot t = -(x\cdot t)\ \text{を文字を}\ p, q\ \text{に替えた}\ (-p)\cdot q = -(p\cdot q)\ (p \to t,\ q \to x)\bigr)\\
 &= -(x\cdot t)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to t,\ q \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律}\ p\cdot q = q\cdot p\ (p \to t,\ q \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
     ],
     conversion: {
@@ -2454,7 +2454,7 @@ b
 &= (a^{-1}\cdot a)\cdot b
 &&\bigl(\because\ a\ \text{の乗法の逆元}\ a^{-1}\cdot a = 1\ (a \neq 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= a^{-1}\cdot(a\cdot b)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= a^{-1}\cdot 0
 &&\bigl(\because\ \text{仮定}\ a\cdot b = 0\bigr)\\
 &= 0
@@ -2522,13 +2522,13 @@ b
       displayMath(String.raw`\begin{aligned}
 (a\cdot b)\cdot\left(a^{-1}\cdot b^{-1}\right)
 &= a\cdot\left(b\cdot\left(a^{-1}\cdot b^{-1}\right)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= a\cdot\left(\left(b\cdot a^{-1}\right)\cdot b^{-1}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= a\cdot\left(\left(a^{-1}\cdot b\right)\cdot b^{-1}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= a\cdot\left(a^{-1}\cdot\left(b\cdot b^{-1}\right)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= a\cdot\left(a^{-1}\cdot 1\right)
 &&\bigl(\because\ \blkref{def_real_quotient}\ \text{の乗法の逆元}\ z\,z^{-1} = 1_{\mathbb{R}}\ (z \to b \neq 0)\bigr)\\
 &= a\cdot a^{-1}
@@ -2544,9 +2544,9 @@ a^{-1}\cdot b^{-1}
 &= \left((a\cdot b)\cdot(a\cdot b)^{-1}\right)\cdot\left(a^{-1}\cdot b^{-1}\right)
 &&\bigl(\because\ \blkref{def_real_quotient}\ \text{の乗法の逆元}\ z\,z^{-1} = 1_{\mathbb{R}}\ (z \to a\cdot b \neq 0)\ \text{を右辺から左辺へ}\bigr)\\
 &= \left((a\cdot b)^{-1}\cdot(a\cdot b)\right)\cdot\left(a^{-1}\cdot b^{-1}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (a\cdot b)^{-1}\cdot\left((a\cdot b)\cdot\left(a^{-1}\cdot b^{-1}\right)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (a\cdot b)^{-1}\cdot 1
 &&\bigl(\because\ \text{準備の}\ (a\cdot b)\cdot\left(a^{-1}\cdot b^{-1}\right) = 1\bigr)\\
 &= (a\cdot b)^{-1}
@@ -2939,9 +2939,9 @@ a\cdot\tfrac12
 &= 2\cdot\left(b\cdot 2^{-1}\right)
 &&\bigl(\because\ \blkref{def_real_quotient}\ (y \to b,\ z \to 2)\bigr)\\
 &= 2\cdot\left(2^{-1}\cdot b\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\ xy = yx\ (x \to b,\ y \to 2^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律}\ xy = yx\ (x \to b,\ y \to 2^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left(2\cdot 2^{-1}\right)\cdot b
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ (x \to 2,\ y \to 2^{-1},\ t \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ (xy)t = x(yt)\ (x \to 2,\ y \to 2^{-1},\ t \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= 1\cdot b
 &&\bigl(\because\ \mathbb{R}\ \text{の乗法の逆元}\ x\cdot x^{-1} = 1\ (x \to 2\text{。}2 \neq 0\ \text{は}\ \blkref{real_two_is_nonzero})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= b
@@ -3145,11 +3145,11 @@ a^{-1} \neq 0
 &= a\cdot\bigl((-1)\cdot a^{-1}\bigr)
 &&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to a^{-1})\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl(a\cdot(-1)\bigr)\cdot a^{-1}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \bigl((-1)\cdot a\bigr)\cdot a^{-1}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (-1)\cdot\bigl(a\cdot a^{-1}\bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (-1)\cdot 1
 &&\bigl(\because\ a\ \text{の乗法の逆元}\ a\cdot a^{-1} = 1\ (a \neq 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= -1
@@ -3763,7 +3763,7 @@ a^{m+1}\, b^{m+1}
 &= \left(a^m\, a\right)\left(b^m\, b\right)
 &&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m a\ (a \to a,\ a \to b)\ \text{を 2 箇所へ同時に}\bigr)\\
 &= \left(a^m\, b^m\right)\left(ab\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ (pq)(rs) = (pr)(qs)\ \text{（乗法の交換則と結合則）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (pq)(rs) = (pr)(qs)\ \text{（乗法の交換律と結合律）}\bigr)\\
 &= (ab)^m\,(ab)
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= (ab)^{m+1}
@@ -4207,7 +4207,7 @@ x
 &= \Bigl(\Bigl(\prod_{j=1}^{m} x_j\Bigr)\Bigl(\prod_{j=1}^{m} y_j\Bigr)\Bigr)\left(x_{m+1} y_{m+1}\right)
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \Bigl(\Bigl(\prod_{j=1}^{m} x_j\Bigr)x_{m+1}\Bigr)\Bigl(\Bigl(\prod_{j=1}^{m} y_j\Bigr)y_{m+1}\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ (ab)(cd) = (ac)(bd)\ \text{（乗法の交換則と結合則）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (ab)(cd) = (ac)(bd)\ \text{（乗法の交換律と結合律）}\bigr)\\
 &= \Bigl(\prod_{j=1}^{m+1} x_j\Bigr)\Bigl(\prod_{j=1}^{m+1} y_j\Bigr)
 &&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (r_j \to x_j,\ r_j \to y_j)\ \text{を 2 箇所へ同時に、右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -4279,7 +4279,7 @@ x
 &= \Bigl(r_1\Bigl(\prod_{j=1}^{m} r_{j+1}\Bigr)\Bigr) r_{m+2}
 &&\bigl(\because\ \text{帰納法の仮定}\ (r_1,\dots,r_{m+1}\ \text{に当てる})\bigr)\\
 &= r_1\Bigl(\Bigl(\prod_{j=1}^{m} r_{j+1}\Bigr) r_{m+2}\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則}\ (xy)t = x(yt)\ \bigl(x \to r_1,\ y \to \textstyle\prod_{j=1}^{m} r_{j+1},\ t \to r_{m+2}\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律}\ (xy)t = x(yt)\ \bigl(x \to r_1,\ y \to \textstyle\prod_{j=1}^{m} r_{j+1},\ t \to r_{m+2}\bigr)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= r_1\Bigl(\prod_{j=1}^{m+1} r_{j+1}\Bigr)
 &&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ \text{の}\ \textstyle\prod_{j=1}^{m+1} r_j := \bigl(\prod_{j=1}^{m} r_j\bigr) r_{m+1}\ (r_j \to r_{j+1})\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -5008,7 +5008,7 @@ z^2
 &= \bigl(0,\ (-y)\cdot(-1)\bigr)
 &&(\because\ \blkref{real_times_zero_is_zero}\ (x\to -y))\\
 &= \bigl(0,\ (-1)\cdot(-y)\bigr)
-&&(\because\ \mathbb{R}\ \text{の乗法の可換則（}\blkref{set_and_algebra_notation}\text{）})\\
+&&(\because\ \mathbb{R}\ \text{の乗法の可換律（}\blkref{set_and_algebra_notation}\text{）})\\
 &= \bigl(0,\ -(-y)\bigr)
 &&(\because\ \blkref{real_minus_one_times_is_negation}\ (a\to -y))\\
 &= (0,\ y)

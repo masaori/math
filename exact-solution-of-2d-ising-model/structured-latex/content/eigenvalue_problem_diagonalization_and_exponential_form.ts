@@ -3239,7 +3239,7 @@ s_1c_2
 &= c_1\cdot(-1)
    \quad (\because \text{Step 3 の } \cos\tilde\theta_\mu = -1) \\
 &= (-1)\cdot c_1
-   \quad (\because \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to c_1,\ q \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}) \\
+   \quad (\because \mathbb{R}\ \text{の乗法の可換律}\ p\cdot q = q\cdot p\ (p \to c_1,\ q \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}) \\
 &= -c_1
    \quad (\because \blkref{real_minus_one_times_is_negation}\ (a \to c_1))
 \end{aligned}`,
@@ -4413,7 +4413,7 @@ s_1c_2
 &= b(\pm r) + g_1 b
    \quad (\because \mathbb{C}\text{ の四則}\ ((-b)(\mp r) = b(\pm r))) \\
 &= (\pm r)\,b + g_1 b
-   \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
+   \quad (\because \mathbb{C}\text{ の乗法の可換律}) \\
 &= \left(\pm r + g_1\right)b
    \quad (\because \text{分配則で } b \text{ を括り出す}) \\
 &= \left(g_1 \pm r\right)b
@@ -7247,7 +7247,7 @@ g
 &= \tilde\theta_\mu + \left(-1_{\mathbb R}\right)(2\pi)
 &&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to 2\pi)\ \text{を右辺から左辺へ}\bigr)\\
 &= \tilde\theta_\mu + 2\pi\left(-1_{\mathbb R}\right)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換則}\ p\cdot q = q\cdot p\ (p \to -1_{\mathbb R},\ q \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律}\ p\cdot q = q\cdot p\ (p \to -1_{\mathbb R},\ q \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \tilde\theta_\mu + 2\pi\left(-(1)_{\mathbb R}\right)
 &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{の}\ \iota_{\mathbb Z\to\mathbb R}(1_{\mathbb Z}) = 1_{\mathbb R}\ \text{を右辺から左辺へ}\bigr)\\
 &= \tilde\theta_\mu + 2\pi\,(-1)_{\mathbb R}

@@ -23,14 +23,14 @@
 | `inclusion_zz_to_rr_of_nonpositive_is_nonpositive` | `n = 0` は `ι(0) = 0 ≤ 0`、`n = -m`（`m ≥ 1`）は `ι(-m) = -ι(m) ≤ -1 ≤ -0 = 0` | `int_cast_nonpos'`（同じ段） | `ℤ` の埋め込みの `ι(-n) = -ι(n)`（`Int.cast_neg`）と `ℤ_{≥0}` での一致（`Int.cast_natCast`）、`one_le_cast'`、符号反転が順序を逆にすること（加法の単調性から出る）、`0 ≤ 1` |
 | `inclusion_zz_to_rr_is_monotone_on_nonnegatives` | `k := b − a`、`ι(k) ≥ 0`（`k = 0` と `k ≥ 1`）、`ι(a) = ι(a) + 0 ≤ ι(a) + ι(k) = ι(a + k) = ι(b)` | `cast_mono'`（同じ段） | `cast_add'`、`one_le_cast'`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元 |
 
-- **効いていないもの**: `R` が `ℝ` であること、`R` の完備性・除法、`R` の符号反転（`int_cast_nonpos'` だけが使う）、乗法の可換性・結合則、全順序であること。
+- **効いていないもの**: `R` が `ℝ` であること、`R` の完備性・除法、`R` の符号反転（`int_cast_nonpos'` だけが使う）、乗法の可換性・結合律、全順序であること。
 - **型クラスについて**: mathlib の型クラスでは、効いている性質だけを切り出した組を作れない（`One` を二重に持つことになる）ので、
   それを含む最小の標準の組を置き、効いていない性質を次に書く。
   - `sum_const_fin_succ'` の `[NonAssocSemiring R]` のうち、左からの分配法則・`mul_one`・`zero_mul`・`mul_zero` は効いていない。
     加法の可換性は証明の段では使わず、有限和 `Finset.sum` を書くためだけに要る。
-  - `cast_two_pow'` の `[Semiring R]` のうち、右からの分配法則・加法の可換性・乗法の結合則は効いていない
+  - `cast_two_pow'` の `[Semiring R]` のうち、右からの分配法則・加法の可換性・乗法の結合律は効いていない
     （`Semiring` は記法 `^`（`Monoid` の冪）のためで、使う冪の性質は `pow_zero`・`pow_succ` の 2 つの式だけである）。
-  - `one_le_two_pow'` の `[Semiring R] [PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` のうち、右からの分配法則・乗法の結合則・順序の反対称律は効いていない。
+  - `one_le_two_pow'` の `[Semiring R] [PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` のうち、右からの分配法則・乗法の結合律・順序の反対称律は効いていない。
 - `cast_one'`・`cast_add'` は乗法を使わない（`[AddMonoidWithOne R]`）。
 - 順序の 3 つの主張（`one_le_cast'`・`int_cast_nonpos'`・`cast_mono'`）は乗法を使わない。`[AddCommMonoidWithOne R]`（`int_cast_nonpos'` は符号反転のため `[AddCommGroupWithOne R]`）に
   `[PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` を置く。加法の可換性は `IsOrderedAddMonoid` を書くためだけに要り、証明の段では使わない。順序の反対称律は効いていない。

@@ -18,7 +18,7 @@
   可換半環の上の正方行列では `G H = I` は `G` の可逆性と同値なので（mathlib `IsUnit.of_mul_eq_one`）、
   これは可逆性より弱い条件ではない。行列式の値そのもの・係数が体であること・`ℂ` であることは効いていない。
 - 行ベクトルと行列の積を左スカラー倍 `G_{kl} • z` で書いたため、結合律 `((z, y)G)H = (z, y)(GH)` に
-  係数の乗法の可換則を使う（右加群の右スカラー倍で書けば、この結合律は可換則なしで成り立つ）。
+  係数の乗法の可換律を使う（右加群の右スカラー倍で書けば、この結合律は可換則なしで成り立つ）。
   引き算は使わないので、係数は可換半環でよい。
 - Step 3 で写像について効くのは、加法とスカラー倍を保つこと（線型性）だけである。
   `T_{(V^{(+)})}`・`T_{(V̌')}` が共役であることも、可逆であることも効いていない。
@@ -43,7 +43,7 @@ def rowMul2 (p : A × A) (G : Matrix (Fin 2) (Fin 2) R) : A × A :=
 theorem rowMul2_one (p : A × A) : rowMul2 p (1 : Matrix (Fin 2) (Fin 2) R) = p := by
   simp [rowMul2]
 
-/-- 結合律 `((z, y) G) H = (z, y)(G H)`（左スカラー倍で書いたので係数の乗法の可換則を使う）。 -/
+/-- 結合律 `((z, y) G) H = (z, y)(G H)`（左スカラー倍で書いたので係数の乗法の可換律を使う）。 -/
 theorem rowMul2_rowMul2 (p : A × A) (G H : Matrix (Fin 2) (Fin 2) R) :
     rowMul2 (rowMul2 p G) H = rowMul2 p (G * H) := by
   simp only [rowMul2, Matrix.mul_apply, Fin.sum_univ_two, Prod.mk.injEq]

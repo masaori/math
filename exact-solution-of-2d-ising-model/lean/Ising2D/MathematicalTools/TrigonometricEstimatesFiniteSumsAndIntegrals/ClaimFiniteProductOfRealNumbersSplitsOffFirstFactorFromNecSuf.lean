@@ -2,7 +2,7 @@
 # 実数の有限積から先頭の因子を外へ出せる（具体版を必要十分版から導く）
 
 具体版 `ClaimFiniteProductOfRealNumbersSplitsOffFirstFactor.lean` の主張を、必要十分版
-`Ising2D/NecSuf/FiniteProductLeftFirstFactor.lean` の `R := ℝ`、`hassoc := mul_assoc`（人手の「ℝ の乗法の結合則」）の
+`Ising2D/NecSuf/FiniteProductLeftFirstFactor.lean` の `R := ℝ`、`hassoc := mul_assoc`（人手の「ℝ の乗法の結合律」）の
 特殊化として得る。人手のラベルは `finite_product_of_real_numbers_splits_off_first_factor`。
 
 ℝ の `Finset.prod` と `NecSuf.finProdLeft` の一致は `real_finset_prod_eq_finProdLeft`（`ClaimRealExpOfFiniteSumFromNecSuf.lean`）で受ける。

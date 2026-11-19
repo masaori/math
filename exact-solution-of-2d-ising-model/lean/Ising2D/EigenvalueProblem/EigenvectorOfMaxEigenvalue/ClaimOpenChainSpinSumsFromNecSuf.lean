@@ -61,7 +61,7 @@ theorem open_chain_partition_sum_of_necSuf (hM : 2 ≤ M) (K : ℝ) :
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + Real.exp (K * (-1))) := by
         rw [mul_one]                                    -- 人手 6: ℝ の乗法の単位元 `p·1 = p`（`p → K`。`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + Real.exp ((-1) * K)) := by
-        rw [mul_comm K (-1)]                            -- 人手 7: ℝ の乗法の可換則（`set_and_algebra_notation`）を各因子へ
+        rw [mul_comm K (-1)]                            -- 人手 7: ℝ の乗法の可換律（`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + Real.exp (-K)) := by
         rw [real_minus_one_times_is_negation K]         -- 人手 8: `real_minus_one_times_is_negation`（`a → K`）を各因子へ
     _ = 2 * ∏ _m : Fin (n + 1), (Real.exp K + Real.exp (-K)) :=
@@ -93,7 +93,7 @@ theorem open_chain_endpoint_product_sum_of_necSuf (hM : 2 ≤ M) (K : ℝ) :
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (K * (-1))) := by
         rw [mul_one]                                    -- 人手 7: ℝ の乗法の単位元 `p·1 = p`（`p → K`。`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + (-1) * Real.exp ((-1) * K)) := by
-        rw [mul_comm K (-1)]                            -- 人手 8: ℝ の乗法の可換則（`set_and_algebra_notation`）を各因子へ
+        rw [mul_comm K (-1)]                            -- 人手 8: ℝ の乗法の可換律（`set_and_algebra_notation`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + (-1) * Real.exp (-K)) := by
         rw [real_minus_one_times_is_negation K]         -- 人手 9: `real_minus_one_times_is_negation`（`a → K`）を各因子へ
     _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (Real.exp K + -Real.exp (-K)) := by

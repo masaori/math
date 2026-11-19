@@ -99,7 +99,7 @@ theorem sigmaXPrefixProduct_eq_finiteMatrixProduct :
 /-- 人手 Step 2 の可換の式 `σ_k^xP_r = P_rσ_k^x`（`r ∈ {0, …, k-1}`）。
 人手の 1 始まりのサイト `k` は Lean の `k : Fin M`（0 始まり）の `k + 1` なので、人手の `r ≤ k - 1` は Lean の `r ≤ k`。
 `r = 0` の 4 行と、一段の 7 行の鎖と 1 段ずつの `calc`。
-`mat_mult_associative` の Lean の具体版は無いので、その段は `mul_assoc`（行列の積の結合則）で閉じる。 -/
+`mat_mult_associative` の Lean の具体版は無いので、その段は `mul_assoc`（行列の積の結合律）で閉じる。 -/
 theorem sigmaX_mul_sigmaXPrefixProduct_comm (k : Fin M) :
     ∀ r : ℕ, r ≤ (k : ℕ) → sigmaX k * sigmaXPrefixProduct M r = sigmaXPrefixProduct M r * sigmaX k
   | 0, _ =>

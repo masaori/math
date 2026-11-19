@@ -59,9 +59,9 @@ theorem real_inverse_of_positive_is_positive (a : ℝ) (ha : 0 < a) : 0 < a⁻¹
       calc (0 : ℝ)
           < a * -a⁻¹ := mul_pos ha h1                         -- 正の数どうしの積は正
         _ = a * ((-1) * a⁻¹) := by rw [real_minus_one_times_is_negation a⁻¹]  -- `a → a⁻¹` を右辺から左辺へ
-        _ = (a * (-1)) * a⁻¹ := (mul_assoc a (-1) a⁻¹).symm   -- 乗法の結合則
-        _ = ((-1) * a) * a⁻¹ := by rw [mul_comm a (-1)]       -- 乗法の可換則
-        _ = (-1) * (a * a⁻¹) := mul_assoc (-1) a a⁻¹          -- 乗法の結合則
+        _ = (a * (-1)) * a⁻¹ := (mul_assoc a (-1) a⁻¹).symm   -- 乗法の結合律
+        _ = ((-1) * a) * a⁻¹ := by rw [mul_comm a (-1)]       -- 乗法の可換律
+        _ = (-1) * (a * a⁻¹) := mul_assoc (-1) a a⁻¹          -- 乗法の結合律
         _ = (-1) * 1 := by rw [hinv]                          -- 逆元 `a·a⁻¹ = 1`
         _ = -1 := real_minus_one_times_is_negation 1          -- `a → 1`
     have h3 : (1 : ℝ) < 0 :=

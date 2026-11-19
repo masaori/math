@@ -105,7 +105,7 @@ theorem vecNorm_mulVec_sq_eq_bilinear (W : Matrix n n ℝ) (x : n → ℝ) :
     _ = ∑ k, y k * y k := by simp only [sq]                                   -- 3 行目: `y_k ∈ ℝ` なので `|y_k|^2 = y_ky_k`
     _ = ∑ k, y k * ∑ l, W k l * x l := by rw [hy]; rfl                        -- 4 行目: `y = W_ℝx` の成分（`def_real_matrix_vector_product`）
     _ = ∑ k, ∑ l, y k * W k l * x l := by
-        simp only [Finset.mul_sum, mul_assoc]                                 -- 5 行目: 分配則と乗法の結合則
+        simp only [Finset.mul_sum, mul_assoc]                                 -- 5 行目: 分配則と乗法の結合律
     _ = y ⬝ᵥ W *ᵥ x := (dotProduct_mulVec_eq_real_bilinear_value y x W).symm  -- 6 行目: `def_real_bilinear_value`（`x → y`、`y → x`）
 
 /-- **`‖W_ℝx‖ ≤ c(M)‖x‖`**（人手証明 `rayleigh_bounds_operator_norm` の前半。鎖を人手と同じ順に書いた具体版）。 -/
@@ -130,7 +130,7 @@ theorem rayleigh_bounds_operator_norm {W : Matrix n n ℝ} (hW : W.IsSymm)
       _ ≤ (c * vecNorm x ^ 2) * (c * vecNorm y ^ 2) :=
           mul_le_mul_of_nonneg_left hRy
             (mul_nonneg hc.le (sq_nonneg _))                                  -- 5 行目: `y^⊤W_ℝy ≤ c‖y‖^2` と `0 ≤ c‖x‖^2`
-      _ = c ^ 2 * vecNorm x ^ 2 * vecNorm y ^ 2 := by ring                    -- 6 行目: `ℝ` の乗法の可換則・結合則
+      _ = c ^ 2 * vecNorm x ^ 2 * vecNorm y ^ 2 := by ring                    -- 6 行目: `ℝ` の乗法の可換律・結合律
   rcases eq_or_lt_of_le (vecNorm_nonneg y) with h0 | hpos
   · rw [← h0]                                                                 -- `‖W_ℝx‖ = 0` の側: 左辺 0、右辺 `c‖x‖ ≥ 0`
     exact mul_nonneg hc.le (vecNorm_nonneg x)
@@ -167,7 +167,7 @@ theorem rayleigh_bounds_operator_norm_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
         _ ≤ rayleighSup W ^ k * (rayleighSup W * vecNorm x) :=
             mul_le_mul_of_nonneg_left (rayleigh_bounds_operator_norm hW hpd x)
               (pow_nonneg hc.le k)                                            -- 4 行目: `‖W_ℝx‖ ≤ c‖x‖` と `c^k ≥ 0`
-        _ = rayleighSup W ^ (k + 1) * vecNorm x := by ring                    -- 5 行目: 冪の指数法則と乗法の結合則
+        _ = rayleighSup W ^ (k + 1) * vecNorm x := by ring                    -- 5 行目: 冪の指数法則と乗法の結合律
 
 /-- **`‖Wx‖ ≤ c(M)‖x‖` を必要十分版から導いたもの**（`rayleigh_bounds_operator_normSq` の平方根を取る）。
 具体版 `rayleigh_bounds_operator_norm` と同じ主張が必要十分版の特殊化として得られることの記録で、通しの証明には使わない。 -/

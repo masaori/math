@@ -106,7 +106,7 @@ theorem eta_eq_neg_one_pow_add_card (heta : F.eta Finset.univ = 1) (T : Finset (
     _ = (-1 : ℂ) ^ (M - T.card) * ((-1 : ℂ) ^ T.card * (-1 : ℂ) ^ T.card) := by
           rw [neg_one_pow_mul_neg_one_pow]                                     -- 人手 5: (P1)（`k → |ε|`）を右辺から左辺へ
     _ = ((-1 : ℂ) ^ (M - T.card) * (-1 : ℂ) ^ T.card) * (-1 : ℂ) ^ T.card :=
-          (mul_assoc _ _ _).symm                                               -- 人手 6: 乗法の結合則
+          (mul_assoc _ _ _).symm                                               -- 人手 6: 乗法の結合律
     _ = (-1 : ℂ) ^ M * (-1 : ℂ) ^ T.card := by
           rw [← pow_add, Nat.sub_add_cancel (card_le_of_finset T)]             -- 人手 7: 指数法則（`a → M_col − |ε|`、(P2)）
     _ = (-1 : ℂ) ^ (M + T.card) := (pow_add _ _ _).symm                        -- 人手 8: 指数法則（`a → M_col`）

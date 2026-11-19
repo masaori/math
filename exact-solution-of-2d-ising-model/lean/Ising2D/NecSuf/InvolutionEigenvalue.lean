@@ -9,7 +9,7 @@
 係数の可換性は使わない。
 
 具体版 `epsilon_action_eigenvalues_are_signs` との対応では、`hinvolution` が
-単位行列の作用・`epsilon_mul_self`・行列作用の結合則をまとめた条件に、`map_smul` が
+単位行列の作用・`epsilon_mul_self`・行列作用の結合律をまとめた条件に、`map_smul` が
 具体版で成分から示す `hmulVec_smul` に当たる。その後のスカラー計算は同じ順序で
 一段ずつ対応する。
 -/
@@ -34,11 +34,11 @@ theorem eigenvalue_eq_one_or_neg_one_of_involution
     lambda = 1 ∨ lambda = -1 := by
   have hvector : f = lambda ^ 2 • f := by
     calc
-      f = T (T f) := (hinvolution f).symm -- 本文: `If=ε²f` と作用の結合則を対合性へ抽象化
+      f = T (T f) := (hinvolution f).symm -- 本文: `If=ε²f` と作用の結合律を対合性へ抽象化
       _ = T (lambda • f) := by rw [heigen] -- 本文: 内側の固有値方程式を代入
       _ = lambda • T f := by rw [map_smul] -- 本文: スカラー倍への線型性
       _ = lambda • (lambda • f) := by rw [heigen] -- 本文: 外側の固有値方程式を代入
-      _ = (lambda * lambda) • f := by rw [smul_smul] -- 本文: スカラー倍の結合則
+      _ = (lambda * lambda) • f := by rw [smul_smul] -- 本文: スカラー倍の結合律
       _ = lambda ^ 2 • f := by rw [pow_two] -- 本文: 二乗の定義
   have hdifference : lambda ^ 2 • f - f = 0 := by
     rw [← hvector, sub_self] -- 本文: 固有ベクトル等式の両辺から `f` を引く

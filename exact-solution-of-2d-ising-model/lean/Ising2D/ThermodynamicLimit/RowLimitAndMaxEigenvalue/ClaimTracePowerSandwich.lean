@@ -36,7 +36,7 @@
   `T := Σ_k ((W_ℝ)^n)_kk` は `∑ k, (W_ℝ ^ n) k k` である。
 - 人手の `e_1` は Lean の `Pi.single i 1`（`i` は値がすべて `0` の配位）である。
 - 人手の実数の冪の定義 `def_power_of_real_number` の `a^{m+1} := a^ma` は mathlib の `pow_succ`、`a^0 := 1` は `pow_zero` で書く
-  （Lean の `ℝ` の冪は mathlib の `Monoid.npow` で、この二つはその公理 `Monoid.npow_succ`・`Monoid.npow_zero` である）。人手の「`ℝ` の分配則」「乗法の交換則・結合則」
+  （Lean の `ℝ` の冪は mathlib の `Monoid.npow` で、この二つはその公理 `Monoid.npow_succ`・`Monoid.npow_zero` である）。人手の「`ℝ` の分配則」「乗法の交換律・結合律」
   「`ℝ` の加法」の行は `ring` で、`(n c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}` は `mul_inv`、`c^{n-1}(c^{n-1})^{-1} = 1` は `mul_inv_cancel₀`、
   正の数を掛けても順序を保つ行は `mul_lt_mul_of_pos_*`・`mul_le_mul_of_nonneg_left`・`mul_le_mul_of_nonneg_right` で、移項は `linarith` で、
   `0 < n^{-1} ≤ 1` と `c > 0` から `cn^{-1} ≤ c` の行は `inv_le_one_of_one_le₀` と `nlinarith` で、`ℤ` の `n = (n−1)+1`・`p = (p+1)−1` は
@@ -81,11 +81,11 @@ theorem power_comparison_of_positive_reals {r s : ℝ} (hr : 0 < r) (hs : 0 < s)
         rw [pow_succ]; exact mul_pos hrp hr                                 -- `r^{p+1} = r^pr > 0`（`def_power_of_real_number`、`r^p > 0`、`r > 0`）
       refine ⟨⟨hpos, ha⟩, ?_⟩
       have hsr : 0 < s - r := sub_pos.mpr hrs
-      have hss : s * s ^ (p - 1) = s ^ p := by                              -- `s s^{p−1} = s^{p−1}s = s^p`（乗法の交換則と、`def_power_of_real_number` で `s^{(p−1)+1} = s^{p−1}s`、`ℤ` で `(p−1)+1 = p`）
+      have hss : s * s ^ (p - 1) = s ^ p := by                              -- `s s^{p−1} = s^{p−1}s = s^p`（乗法の交換律と、`def_power_of_real_number` で `s^{(p−1)+1} = s^{p−1}s`、`ℤ` で `(p−1)+1 = p`）
         rw [mul_comm, ← pow_succ, Nat.sub_add_cancel hp]
       calc s ^ (p + 1) - r ^ (p + 1)
           = s * (s ^ p - r ^ p) + r ^ p * (s - r) := by
-            rw [pow_succ, pow_succ]; ring                                   -- `def_power_of_real_number` で `s^{p+1} = s^ps`, `r^{p+1} = r^pr` と `ℝ` の分配則・乗法の交換則（`−sr^p + r^ps = 0`）
+            rw [pow_succ, pow_succ]; ring                                   -- `def_power_of_real_number` で `s^{p+1} = s^ps`, `r^{p+1} = r^pr` と `ℝ` の分配則・乗法の交換律（`−sr^p + r^ps = 0`）
         _ ≤ s * ((p : ℝ) * s ^ (p - 1) * (s - r)) + r ^ p * (s - r) := by
             have := mul_le_mul_of_nonneg_left hb hs.le
             linarith                                                        -- (b) と `s > 0`
@@ -93,7 +93,7 @@ theorem power_comparison_of_positive_reals {r s : ℝ} (hr : 0 < r) (hs : 0 < s)
             have := mul_le_mul_of_nonneg_right hrsp.le hsr.le
             linarith                                                        -- (a) の `r^p < s^p` と `s − r > 0`
         _ = (p : ℝ) * s ^ p * (s - r) + s ^ p * (s - r) := by
-            rw [← hss]; ring                                                -- `s s^{p−1} = s^p`（`def_power_of_real_number`）と乗法の交換則・結合則
+            rw [← hss]; ring                                                -- `s s^{p−1} = s^p`（`def_power_of_real_number`）と乗法の交換律・結合律
         _ = ((p + 1 : ℕ) : ℝ) * s ^ (p + 1 - 1) * (s - r) := by
             rw [Nat.add_sub_cancel]; push_cast; ring                        -- `ℝ` の分配則と `ℤ` で `p = (p+1)−1`
 
@@ -154,7 +154,7 @@ theorem rayleighSup_pow_le_trace_of_power {n : ℕ} (hn : 1 ≤ n) :
           rw [← pow_succ, Nat.sub_add_cancel hn]                            -- `def_power_of_real_number` で `c^{(n−1)+1} = c^{n−1}c` と `ℤ` で `n = (n−1)+1`
       _ = c ^ (n - 1) * c * ((n : ℝ)⁻¹ * (c ^ (n - 1))⁻¹) := by
           rw [mul_inv]                                                      -- `n ≠ 0`, `c^{n-1} ≠ 0` なので `(n c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}`
-      _ = c * (n : ℝ)⁻¹ * (c ^ (n - 1) * (c ^ (n - 1))⁻¹) := by ring       -- `ℝ` の乗法の交換則・結合則
+      _ = c * (n : ℝ)⁻¹ * (c ^ (n - 1) * (c ^ (n - 1))⁻¹) := by ring       -- `ℝ` の乗法の交換律・結合律
       _ = c * (n : ℝ)⁻¹ := by rw [mul_inv_cancel₀ hcn1.ne', mul_one]       -- `c^{n-1}(c^{n-1})^{-1} = 1`
       _ ≤ c := by
           have hn1 : (n : ℝ)⁻¹ ≤ 1 := inv_le_one_of_one_le₀ (by exact_mod_cast hn)

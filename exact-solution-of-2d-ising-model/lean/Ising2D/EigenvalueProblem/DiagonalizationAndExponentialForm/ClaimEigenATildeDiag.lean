@@ -406,7 +406,7 @@ theorem AMat_mulVec_eigen_pos :
           -- `def_gamma1_gamma2_of_theta` と行列とベクトルの積の定義
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
       _ = b * r + g₁ * b := by rw [neg_mul_neg]                   -- ℂ の四則 `(-b)(-r) = b r`
-      _ = r * b + g₁ * b := by rw [mul_comm b r]                  -- ℂ の乗法の可換則
+      _ = r * b + g₁ * b := by rw [mul_comm b r]                  -- ℂ の乗法の可換律
       _ = (r + g₁) * b := by rw [add_mul]                          -- 分配則で `b` を括り出す
       _ = (g₁ + r) * b := by rw [add_comm r g₁]                    -- ℂ の加法の交換律
       _ = ((g₁ + r) • ![-r, b]) 1 := by simp                       -- `λ_+ = g_1 + r`、`(v_+)_2 = b`
@@ -439,7 +439,7 @@ theorem AMat_mulVec_eigen_neg :
           -- `def_gamma1_gamma2_of_theta` と行列とベクトルの積の定義
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
       _ = b * (-r) + g₁ * b := by rw [neg_mul_comm]               -- ℂ の四則 `(-b) r = b (-r)`
-      _ = (-r) * b + g₁ * b := by rw [mul_comm b (-r)]            -- ℂ の乗法の可換則
+      _ = (-r) * b + g₁ * b := by rw [mul_comm b (-r)]            -- ℂ の乗法の可換律
       _ = (-r + g₁) * b := by rw [add_mul]                         -- 分配則で `b` を括り出す
       _ = (g₁ - r) * b := by rw [add_comm, ← sub_eq_add_neg]       -- ℂ の加法の交換律（`g_1 + (-r) = g_1 - r`）
       _ = ((g₁ - r) • ![r, b]) 1 := by simp                        -- `λ_- = g_1 - r`、`(v_-)_2 = b`

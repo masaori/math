@@ -5,7 +5,7 @@
 （`ClaimRealBilinearValueWithNonnegativeEntriesAndScalarMultiple.lean`）と同じ主張を、必要十分版
 `Ising2D.NecSuf.bilinear_value_with_nonnegative_entries_is_nonnegative'`・`bilinear_value_of_scalar_multiple_vector'`
 （`NecSuf/BilinearValueNonnegativeAndScalarMultiple.lean`）を係数 `R → ℝ` で特殊化して得る。
-積の非負性の仮定は `mul_nonneg`、`c` の可換性の仮定は ℝ の乗法の可換則 `mul_comm` で埋める。
+積の非負性の仮定は `mul_nonneg`、`c` の可換性の仮定は ℝ の乗法の可換律 `mul_comm` で埋める。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealBilinearValueWithNonnegativeEntriesAndScalarMultiple
 import Ising2D.NecSuf.BilinearValueNonnegativeAndScalarMultiple

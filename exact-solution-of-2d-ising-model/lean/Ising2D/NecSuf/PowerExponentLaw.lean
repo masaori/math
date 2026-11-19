@@ -12,10 +12,10 @@
 
 ## 何が効いているか / 効いていないか
 
-- 効いているのは、乗法の**結合則**（`q + 1` の 4 段目）と**右単位律** `a·1 = a`（`q = 0` の 2 段目）だけである。
+- 効いているのは、乗法の**結合律**（`q + 1` の 4 段目）と**右単位律** `a·1 = a`（`q = 0` の 2 段目）だけである。
 - 左単位律 `1·a = a` は使っていない。型クラスを `Monoid` に置いたのは、Lean の冪 `a^n`（`pow_zero`・`pow_succ`）が
   `Monoid` の上で定義されるためで、論証が左単位律を要るからではない。
-- 行列であること、係数が `ℂ` であること、乗法の可換則・加法・逆元は効いていない。
+- 行列であること、係数が `ℂ` であること、乗法の可換律・加法・逆元は効いていない。
 -/
 import Mathlib.Algebra.Group.Defs
 
@@ -34,7 +34,7 @@ theorem power_exponent_law' {G : Type*} [Monoid G] (a : G) (p : ℕ) :
         = a ^ ((p + q) + 1) := by rw [Nat.add_assoc]                        -- 加法の結合律
       _ = a ^ (p + q) * a := pow_succ a (p + q)                             -- `a^{m+1} := a^ma`（`m → p + q`）
       _ = (a ^ p * a ^ q) * a := by rw [power_exponent_law' a p q]          -- 帰納法の仮定
-      _ = a ^ p * (a ^ q * a) := mul_assoc _ _ _                            -- 乗法の結合則
+      _ = a ^ p * (a ^ q * a) := mul_assoc _ _ _                            -- 乗法の結合律
       _ = a ^ p * a ^ (q + 1) := by rw [pow_succ a q]                       -- `a^{m+1} := a^ma`（`m → q`）
 
 end Ising2D.NecSuf

@@ -47,7 +47,7 @@ theorem cosh_sub_sinh_eq_exp_neg (x : ℝ) : Real.cosh x - Real.sinh x = Real.ex
         congr 1; rw [two_mul]; abel                     -- 分子の整理
     _ = Real.exp (-x) :=
         by rw [two_mul, ← mul_two]; exact mul_div_cancel_right₀ _ two_ne_zero
-                                                        -- 約分（`2b = b + b = b·2` と直してから約分するので、乗法の可換則は使わない）
+                                                        -- 約分（`2b = b + b = b·2` と直してから約分するので、乗法の可換律は使わない）
 
 /-- **人手 `cosh_sinh_basic_properties` (1) の 2 本目の鎖**: `cosh x + sinh x = exp(x)`。 -/
 theorem cosh_add_sinh_eq_exp (x : ℝ) : Real.cosh x + Real.sinh x = Real.exp x :=
@@ -60,7 +60,7 @@ theorem cosh_add_sinh_eq_exp (x : ℝ) : Real.cosh x + Real.sinh x = Real.exp x 
         congr 1; rw [two_mul]; abel                     -- 分子の整理
     _ = Real.exp x :=
         by rw [two_mul, ← mul_two]; exact mul_div_cancel_right₀ _ two_ne_zero
-                                                        -- 約分（`2b = b + b = b·2` と直してから約分するので、乗法の可換則は使わない）
+                                                        -- 約分（`2b = b + b = b·2` と直してから約分するので、乗法の可換律は使わない）
 
 /-- **人手 `cosh_sinh_basic_properties` (1) の 3 本目の鎖**: `cosh x − sinh x = exp(−x) > 0`。 -/
 theorem cosh_sub_sinh_pos (x : ℝ) : Real.cosh x - Real.sinh x > 0 :=

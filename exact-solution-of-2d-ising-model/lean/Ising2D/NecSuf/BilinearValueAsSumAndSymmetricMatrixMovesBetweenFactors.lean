@@ -15,21 +15,21 @@
 | `def_real_matrix_vector_product`（右辺から左辺へを含む） | `rfl` |
 | `finite_sum_of_real_scalar_multiples`（右辺から左辺へを含む） | `finite_sum_mul_left'`（`NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`） |
 | `def_real_symmetric_matrix` を各項へ | `Matrix.IsSymm.apply` |
-| 乗法の可換則・結合則を各項へ | `mul_comm`・`mul_assoc` |
+| 乗法の可換律・結合律を各項へ | `mul_comm`・`mul_assoc` |
 | `finite_double_sum_of_real_numbers_interchange` | `finite_double_sum_interchange'`（`NecSuf/FiniteDoubleSumInterchange.lean`） |
 
 ## この主張に本質的に効いている構造
 
 一つ目の主張（`Σ_kΣ_l (u_kP_kl)v_l = Σ_k u_k(Pv)_k`。左辺は人手 `def_real_bilinear_value` の和で、mathlib の `u ⬝ᵥ P *ᵥ v` では書かない。
 `⬝ᵥ` は定義から右辺と `rfl` で一致し、検査にならないため）:
-* 乗法の結合則（1 段目）。`(u_kP_kl)v_l` から `(Pv)_k` を作るには `u_k(P_klv_l)` へ組み替えるしかないので外せない。
+* 乗法の結合律（1 段目）。`(u_kP_kl)v_l` から `(Pv)_k` を作るには `u_k(P_klv_l)` へ組み替えるしかないので外せない。
 * 左分配則と `a·0 = 0`（2 段目の `finite_sum_mul_left'`。`a·0 = 0` は添字の型が空のときに要る）。
 * 乗法の可換性・単位元・加法の逆元・順序・ℝ であることは使わない。したがって係数は非単位的な半環 `R` に置く。
 
 二つ目の主張（対称な `Q` で `Σ_k (Qu)_k v_k = Σ_k u_k(Qv)_k`）:
-* 乗法の**可換則**（2・5・6 段目）。可換でない係数では、`Q` が対称でも主張は一般に成り立たない
+* 乗法の**可換律**（2・5・6 段目）。可換でない係数では、`Q` が対称でも主張は一般に成り立たない
   （`n = 1` で、係数を 2 行 2 列の行列にとり、`v` を単位行列、`Q = q`・`u` を `qu ≠ uq` となる行列にすると、左辺は `qu`、右辺は `uq`）ので、外せない。
-* 乗法の結合則（7 段目）、左分配則と `a·0 = 0`（3・9 段目）、加法の結合律・交換律（8 段目の和の順序の入れ替え）。
+* 乗法の結合律（7 段目）、左分配則と `a·0 = 0`（3・9 段目）、加法の結合律・交換律（8 段目の和の順序の入れ替え）。
 * 乗法の単位元・加法の逆元・順序・ℝ であることは使わない。したがって係数は非単位的な可換半環 `R` に置く。
 -/
 import Ising2D.NecSuf.FiniteDoubleSumInterchange

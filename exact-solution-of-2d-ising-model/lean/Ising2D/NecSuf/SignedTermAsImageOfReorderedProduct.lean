@@ -13,7 +13,7 @@
 | 2 行目 Step 2 の `k = M_col` の式を右辺から左辺へ | `hu` を右辺から左辺へ |
 | 3 行目 `ȟ` の取り方 `ȟ_ℂ = η_{(1,…,1)}` を右辺から左辺へ | `hh` を右辺から左辺へ |
 | 4 行目・5 行目 `real_inclusion_preserves_product` | `hf` |
-| 6 行目 ℝ で `(ab)c = (bc)a`（乗法の交換則と結合則） | `mul_assoc`・`mul_comm`（`CommSemigroup R`） |
+| 6 行目 ℝ で `(ab)c = (bc)a`（乗法の交換律と結合律） | `mul_assoc`・`mul_comm`（`CommSemigroup R`） |
 | 7 行目 `ť_ε` の置き方 | 無い（`ť_ε` は具体版の定義） |
 
 具体版の包含 `(·)_ℂ` が `f`、`η_ε` が `ηε`、`η_{(1,…,1)}` が `η1`、`(−1_ℂ)^{M_col−|ε|}` が `q`、
@@ -21,7 +21,7 @@
 
 ## 何が効いているか / 効いていないか
 
-- 効くのは、`f` が積を積へ送ること（`hf`。具体版の `real_inclusion_preserves_product`）と、`R` の積の結合則と
+- 効くのは、`f` が積を積へ送ること（`hf`。具体版の `real_inclusion_preserves_product`）と、`R` の積の結合律と
   可換則（6 行目の `(ab)c = (bc)a`）だけである。6 行目は結合則（`(hu)l = h(ul)`）と可換則（`h(ul) = (ul)h`）を
   1 回ずつ使うので、`CommSemigroup R` から削れない。
 - `S` は積の記号 `Mul S` を持つだけで、結合則・可換則・単位元は効かない。
@@ -44,6 +44,6 @@ theorem signed_term_eq_map_mul' {R S : Type*} [CommSemigroup R] [Mul S] (f : R �
     _ = (f h * f u) * f l := by rw [hh]               -- 具体版の 3 行目（`ȟ` の取り方を右辺から左辺へ）
     _ = f (h * u) * f l := by rw [hf]                 -- 具体版の 4 行目（`real_inclusion_preserves_product`）
     _ = f ((h * u) * l) := hf _ _                     -- 具体版の 5 行目（`real_inclusion_preserves_product`）
-    _ = f ((u * l) * h) := by rw [mul_assoc, mul_comm] -- 具体版の 6 行目（`R` の乗法の交換則と結合則）
+    _ = f ((u * l) * h) := by rw [mul_assoc, mul_comm] -- 具体版の 6 行目（`R` の乗法の交換律と結合律）
 
 end Ising2D.NecSuf

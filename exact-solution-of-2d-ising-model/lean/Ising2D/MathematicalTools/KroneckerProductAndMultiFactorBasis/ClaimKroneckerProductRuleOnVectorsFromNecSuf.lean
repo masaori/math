@@ -2,7 +2,7 @@
 # クロネッカー積の積の規則の (3)（具体版を必要十分版から導く）
 
 具体版 `ClaimKroneckerProductRuleOnVectors.lean` の 2 つの主張を、必要十分版
-`Ising2D/NecSuf/KroneckerProductRuleOnVectors.lean` の `R := ℂ`、`ι := Fin 2`、`hmed := mul_mul_mul_comm`（ℂ の乗法の可換則と結合則）
+`Ising2D/NecSuf/KroneckerProductRuleOnVectors.lean` の `R := ℂ`、`ι := Fin 2`、`hmed := mul_mul_mul_comm`（ℂ の乗法の可換律と結合律）
 の特殊化として得る。人手のラベルは `kronecker_product_rule`（(3) と証明の準備）と `def_kronecker`（(1)・(2)）。
 
 ℂ の `Finset.prod` と `NecSuf.finProdLeft` の一致は `complex_finset_prod_eq_finProdLeft`

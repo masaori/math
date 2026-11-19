@@ -211,7 +211,7 @@ theorem neg_thetaTilde_conj_eq_add_two_pi_neg_one (hM : M ≠ 0) (μ : ℤ) :
         rw [real_minus_one_times_is_negation (2 * Real.pi)]
                                                   -- 6 行目: `real_minus_one_times_is_negation`（`a → 2π`）を右辺から左辺へ
     _ = thetaTilde M μ + 2 * Real.pi * (-1) := by
-        rw [mul_comm (-1 : ℝ) (2 * Real.pi)]      -- 7 行目: ℝ の乗法の可換則（`set_and_algebra_notation`）
+        rw [mul_comm (-1 : ℝ) (2 * Real.pi)]      -- 7 行目: ℝ の乗法の可換律（`set_and_algebra_notation`）
     _ = thetaTilde M μ + 2 * Real.pi * (-((1 : ℤ) : ℝ)) := by
         rw [inclusion_zz_to_rr_of_one_intCast]    -- 8 行目: `inclusion_zz_to_rr_of_one` を右辺から左辺へ
     _ = thetaTilde M μ + 2 * Real.pi * ((-1 : ℤ) : ℝ) := by

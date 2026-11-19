@@ -21,10 +21,10 @@
 - 添字は有限であること（`Fintype`。積が有限和だから）だけが効き、`Fin n` の順序は効いていない。単位行列には添字の等号の判定が要る。
 - `I A = A` に効くのは、`1·x = x`・`0·x = 0`・`x + 0 = x` と有限和の取り出しだけである（`NonAssocSemiring`）。
 - `A I = A` に効くのは、`x·1 = x`・`x·0 = 0`・`x + 0 = x` と有限和の取り出しだけである（`NonAssocSemiring`）。
-  乗法の可換則は効いていない（右から `0` を掛けた項は `x·0 = 0` でそのまま消える）。
-- `(aA)B = a(AB)` に効くのは、乗法の結合則と左分配則である（`NonUnitalSemiring`）。乗法の可換則は効いていない。
-- `A(aB) = a(AB)` には、**乗法の可換則が効いている**（`NonUnitalCommSemiring`）: `A_{ij}(aB_{jk})` の `a` を `A_{ij}` の左へ
-  移す段がある。外せないことは、添字 `Unit`（`1×1`）・`B = 1` に制限すると乗法の可換則そのものが出ることで確かめる
+  乗法の可換律は効いていない（右から `0` を掛けた項は `x·0 = 0` でそのまま消える）。
+- `(aA)B = a(AB)` に効くのは、乗法の結合律と左分配則である（`NonUnitalSemiring`）。乗法の可換律は効いていない。
+- `A(aB) = a(AB)` には、**乗法の可換律が効いている**（`NonUnitalCommSemiring`）: `A_{ij}(aB_{jk})` の `a` を `A_{ij}` の左へ
+  移す段がある。外せないことは、添字 `Unit`（`1×1`）・`B = 1` に制限すると乗法の可換律そのものが出ることで確かめる
   （`mul_comm_of_mul_smul_matrix`）。
 - 複素数であること、体であること、加法逆元は効いていない。
 -/
@@ -80,7 +80,7 @@ theorem smul_mul_matrix_apply' {R : Type*} [NonUnitalSemiring R] [Fintype κ] (a
   calc ((a • A) * B) i k
       = ∑ j, (a • A) i j * B j k := rfl                        -- 積の定義
     _ = ∑ j, (a * A i j) * B j k := rfl                        -- スカラー倍の定義
-    _ = ∑ j, a * (A i j * B j k) := by simp only [mul_assoc]   -- 乗法の結合則
+    _ = ∑ j, a * (A i j * B j k) := by simp only [mul_assoc]   -- 乗法の結合律
     _ = a * ∑ j, A i j * B j k := (Finset.mul_sum _ _ _).symm  -- 左分配則
     _ = a * (A * B) i k := rfl                                 -- 積の定義
     _ = (a • (A * B)) i k := rfl                               -- スカラー倍の定義
@@ -91,9 +91,9 @@ theorem mul_smul_matrix_apply' {R : Type*} [NonUnitalCommSemiring R] [Fintype κ
   calc (A * (a • B)) i k
       = ∑ j, A i j * (a • B) j k := rfl                        -- 積の定義
     _ = ∑ j, A i j * (a * B j k) := rfl                        -- スカラー倍の定義
-    _ = ∑ j, (A i j * a) * B j k := by simp only [mul_assoc]   -- 乗法の結合則
-    _ = ∑ j, (a * A i j) * B j k := by simp only [mul_comm _ a] -- 乗法の可換則
-    _ = ∑ j, a * (A i j * B j k) := by simp only [mul_assoc]   -- 乗法の結合則
+    _ = ∑ j, (A i j * a) * B j k := by simp only [mul_assoc]   -- 乗法の結合律
+    _ = ∑ j, (a * A i j) * B j k := by simp only [mul_comm _ a] -- 乗法の可換律
+    _ = ∑ j, a * (A i j * B j k) := by simp only [mul_assoc]   -- 乗法の結合律
     _ = a * ∑ j, A i j * B j k := (Finset.mul_sum _ _ _).symm  -- 左分配則
     _ = a * (A * B) i k := rfl                                 -- 積の定義
     _ = (a • (A * B)) i k := rfl                               -- スカラー倍の定義

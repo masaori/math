@@ -5421,7 +5421,7 @@ u^*Au
 &= \sum_{k=1}^{n}\sum_{l=1}^{n}\left(\overline{u_k}\,A_{kl}\right)u_l
  &&\left(\because\ \blkref{def_conjugate_bilinear_value}\right)\\
 &= \sum_{k=1}^{n}\sum_{l=1}^{n}\overline{u_k}\left(A_{kl}\,u_l\right)
- &&\left(\because\ \mathbb{C}\ \text{の積の結合則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
+ &&\left(\because\ \mathbb{C}\ \text{の積の結合律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\sum_{l=1}^{n}A_{kl}\,u_l
  &&\left(\because\ \mathbb{C}\ \text{の分配則（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\,(Au)_k

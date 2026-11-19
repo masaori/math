@@ -8,7 +8,7 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 9 行の鎖（`real_minus_one_times_is_negation`（`a → a`）を右辺から左辺へ → 同（`a → b`）を右辺から左辺へ → 乗法の結合則 → 乗法の結合則 → 乗法の可換則 → 乗法の結合則 → `real_minus_one_times_is_negation`（`a → a·b`） → 同（`a → -(a·b)`） → `real_double_negation`（`a → a·b`）） | `real_negation_times_negation_is_product` の `calc` の 9 段 |
+| 9 行の鎖（`real_minus_one_times_is_negation`（`a → a`）を右辺から左辺へ → 同（`a → b`）を右辺から左辺へ → 乗法の結合律 → 乗法の結合律 → 乗法の可換律 → 乗法の結合律 → `real_minus_one_times_is_negation`（`a → a·b`） → 同（`a → -(a·b)`） → `real_double_negation`（`a → a·b`）） | `real_negation_times_negation_is_product` の `calc` の 9 段 |
 
 - 人手の `-z`（`def_real_difference` の加法の逆元）は mathlib の `-z`（`Neg ℝ`）で読む。
 - mathlib の `neg_mul_neg` は使わない（人手の鎖をそのまま書くため）。
@@ -27,10 +27,10 @@ theorem real_negation_times_negation_is_product (a b : ℝ) : (-a) * (-b) = a * 
   calc (-a) * (-b)
       = ((-1) * a) * (-b) := by rw [real_minus_one_times_is_negation a]                -- `a → a` を右辺から左辺へ
     _ = ((-1) * a) * ((-1) * b) := by rw [real_minus_one_times_is_negation b]          -- `a → b` を右辺から左辺へ
-    _ = (-1) * (a * ((-1) * b)) := mul_assoc (-1) a ((-1) * b)                         -- 乗法の結合則
-    _ = (-1) * ((a * (-1)) * b) := by rw [mul_assoc a (-1) b]                          -- 乗法の結合則
-    _ = (-1) * (((-1) * a) * b) := by rw [mul_comm a (-1)]                             -- 乗法の可換則
-    _ = (-1) * ((-1) * (a * b)) := by rw [mul_assoc (-1) a b]                          -- 乗法の結合則
+    _ = (-1) * (a * ((-1) * b)) := mul_assoc (-1) a ((-1) * b)                         -- 乗法の結合律
+    _ = (-1) * ((a * (-1)) * b) := by rw [mul_assoc a (-1) b]                          -- 乗法の結合律
+    _ = (-1) * (((-1) * a) * b) := by rw [mul_comm a (-1)]                             -- 乗法の可換律
+    _ = (-1) * ((-1) * (a * b)) := by rw [mul_assoc (-1) a b]                          -- 乗法の結合律
     _ = (-1) * (-(a * b)) := by rw [real_minus_one_times_is_negation (a * b)]          -- `a → a·b`
     _ = -(-(a * b)) := real_minus_one_times_is_negation (-(a * b))                     -- `a → -(a·b)`
     _ = a * b := real_double_negation (a * b)                                          -- `real_double_negation`（`a → a·b`）

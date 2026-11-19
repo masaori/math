@@ -14,13 +14,13 @@
 
 - 効くのは、冪の定義の 2 つの式（`a^0 = 1`・`a^{m+1} = a^m a`）、`1·1 = 1`（`m = 0` の 2 段目）、
   明示の仮定 `hswap`: `(pq)(rs) = (pr)(qs)`（帰納法の段の 2 段目）だけである。
-- `hswap` は `Monoid` の単位元と合わせると積の可換則と同値である（`hswap 1 q r 1` から `qr = rq`）。
+- `hswap` は `Monoid` の単位元と合わせると積の可換律と同値である（`hswap 1 q r 1` から `qr = rq`）。
   したがってこの版の仮定は実質「可換モノイド」であり、具体版は ℝ の乗法の可換性に本当に依存している。
   それでも `CommMonoid` と書かず `hswap` の形で置くのは、証明が使うのが 4 つの元の並べ替えのこの形だけであることを
-  具体版の段（人手の「`(pq)(rs) = (pr)(qs)`（乗法の交換則と結合則）」）と同じ形で示すためである。
+  具体版の段（人手の「`(pq)(rs) = (pr)(qs)`（乗法の交換律と結合律）」）と同じ形で示すためである。
   削れない理由: `hswap` を外すと帰納法の段の 2 段目 `(a^m a)(b^m b) = (a^m b^m)(ab)` が出ない。和・順序・逆元は効いていない。
 - `Monoid R` は mathlib の冪 `^`（`Monoid.npow`）と、その定義の式 `pow_zero`・`pow_succ` を使うためだけに要る。
-  `1·1 = 1` は `Monoid` の `one_mul` で受ける。`Monoid` はその公理として積の結合則も含むが、証明は `hswap` の外では使わない
+  `1·1 = 1` は `Monoid` の `one_mul` で受ける。`Monoid` はその公理として積の結合律も含むが、証明は `hswap` の外では使わない
   （`FiniteProductOfConstantIsPower.lean` と同じ事情）。
 -/
 import Mathlib.Algebra.Group.Defs

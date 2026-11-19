@@ -21,7 +21,7 @@
 ## この主張に本質的に効いている構造（＝具体版が過剰な構造を要求していないかの検査結果）
 
 1. **`ε` が `n_μ` と可換であること**（人手証明 (4) 前半）に効いているのは、
-   **`ε` が生成・消滅演算子の両方と反交換すること**と、積の結合則、符号反転が積の因子から外へ出ること、
+   **`ε` が生成・消滅演算子の両方と反交換すること**と、積の結合律、符号反転が積の因子から外へ出ること、
    符号反転を二回すると元に戻ること（`Semigroup`・`HasDistribNeg`）だけである。加法・零・単位元は効かない。
    `ε = σ^x_1⋯σ^x_M` であることも、`ψ̌` が `Ž, Y̌` の 1 次結合であることも、
    行列であることも、複素数であることも、テンソル冪であることも効いていない。
@@ -33,7 +33,7 @@
    - `Q_{T∪{μ}} (c_μ Q_T) = c_μ Q_T`（人手証明 Step 2）— これは
      **`n_μ c_μ = c_μ`** と **`n_ν`（`ν ≠ μ`）が `c_μ` と可換**なことから、
      環の計算だけで出る。`n_μ c_μ = c_μ` そのもの（`num_mul_cre'`）には、`a_μc_μ = 1 − n_μ` と `c_μc_μ = 0` に加えて、
-     積の結合則と右単位元、左分配則、`HasDistribNeg`、`x − y = x + (−y)`、`0x = 0`、`x − 0 = x` だけが効く。
+     積の結合律と右単位元、左分配則、`HasDistribNeg`、`x − y = x + (−y)`、`0x = 0`、`x − 0 = x` だけが効く。
    - `c_μ Q_T ≠ 0`（人手証明 Step 1）— これは **`a_μ c_μ = 1 - n_μ`** と
      `n_μ Q_T = 0`（`μ ∉ T`）から出る。**1 次元性は要らない。**
    - `ε (c_μ Q_T) = -η_T (c_μ Q_T)`（人手証明 Step 3）— 反交換関係だけ。
@@ -145,7 +145,7 @@ variable {A : Type*} [Semigroup A] [HasDistribNeg A] {ι : Type*}
 `ε` は `n_i = c_i a_i` と可換。具体版 `Ising2D.CheckFermi.commute_epsilon_nOp` の 3 行（`def_check_number_operator`・
 `product_of_anticommuting_matrices_commutes`・`def_check_number_operator`）と同じ並びで、2 行目は
 `NecSuf.commute_mul_of_anticomm'`（人手 `product_of_anticommuting_matrices_commutes` の 8 行と同じ 8 段）である。
-効いているのは反交換関係 2 本と、積の結合則・符号反転が積の因子から外へ出ること・二重の符号反転だけで、
+効いているのは反交換関係 2 本と、積の結合律・符号反転が積の因子から外へ出ること・二重の符号反転だけで、
 仮定もそれだけにした（`Semigroup`・`HasDistribNeg`。`num` の定義には積だけが要る）。 -/
 theorem commute_parity_num (c a : ι → A) {e : A} {i : ι}
     (hc : e * c i = -(c i * e)) (ha : e * a i = -(a i * e)) :
@@ -182,7 +182,7 @@ variable {A : Type*} [Mul A] [Add A] [LeftDistribClass A] [RightDistribClass A] 
 /-- **`commuting_with_difference` の必要十分版（環の元）**: `GX = XG` かつ `GW = WG` なら `G(X − W) = (X − W)G`。
 8 段は人手 `commuting_with_difference` の 8 行（具体版 `Ising2D.matrix_mul_sub_eq_sub_mul_of_commute`）と同じ並びである。
 差は仮定 `hsub`（`x − y = x + (−y)`）でだけ使い、加法の零・結合律・可換性・逆元則は効かない。
-積の結合則と単位元も効かないので、`Mul A` だけを仮定する。 -/
+積の結合律と単位元も効かないので、`Mul A` だけを仮定する。 -/
 theorem commute_sub_of_commute' (hsub : ∀ x y : A, x - y = x + -y) {G X W : A}
     (hX : G * X = X * G) (hW : G * W = W * G) : G * (X - W) = (X - W) * G :=
   calc G * (X - W)
@@ -242,7 +242,7 @@ variable {𝕜 : Type*} {A : Type*} [Monoid A] [Add A] [LeftDistribClass A] [Rig
 具体版 `Ising2D.CheckFermi.commute_epsilon_Qproj_succ` の `Q̌_ε` の 3 行（定義の行を除く 1 段、
 `matrix_commuting_with_each_factor_commutes_with_finite_product` にあたる `NecSuf.commute_finProdLeft`）と同じ並びである。
 各因子との可換性は `commute_defFactor_of_commute'` と前半 `commute_mul_of_anticomm'` から出す。
-有限積に効くのは積の結合則だけである。加法については分配則（`LeftDistribClass`・`RightDistribClass`）しか仮定しない（零・結合則・可換性は効かない）。 -/
+有限積に効くのは積の結合律だけである。加法については分配則（`LeftDistribClass`・`RightDistribClass`）しか仮定しない（零・結合則・可換性は効かない）。 -/
 theorem commute_parity_finProdLeft_defFactor (hsub : ∀ x y : A, x - y = x + -y) (r : ℕ)
     (c a : Fin (r + 1) → A) {e : A}
     (hc : ∀ ν, e * c ν = -(c ν * e)) (ha : ∀ ν, e * a ν = -(a ν * e)) (c' d' : Fin (r + 1) → 𝕜) :
@@ -260,7 +260,7 @@ variable {A : Type*} [Monoid A] [Add A] [Zero A] [LeftDistribClass A] [HasDistri
 /-- **`n_i c_i = c_i` の必要十分版**（人手 `epsilon_eigenvalue_on_check_Q` (2) Step 2 冒頭の 13 行の鎖。
 具体版 `Ising2D.CheckFermi.nOp_mul_cre` と同じ行である）。
 
-効いているのは、`a_i c_i = 1 − n_i`（`check_number_operator_idempotent` (2)）と `c_i c_i = 0`（同 (1)）、積の結合則と単位元、
+効いているのは、`a_i c_i = 1 − n_i`（`check_number_operator_idempotent` (2)）と `c_i c_i = 0`（同 (1)）、積の結合律と単位元、
 左分配則、符号反転が右の因子から外へ出ること、差が和と符号反転で書けること（`hsub`）、`0x = 0`（`hz`）、`x − 0 = x`（`hs0`）だけである。
 加法の結合律・可換性・逆元則、右分配則、`x0 = 0`、`a_i` が `c_i` の随伴であること、反交換関係そのもの
 （`a_i c_i = 1 − n_i` を導くのにだけ使う）は効いていない。 -/

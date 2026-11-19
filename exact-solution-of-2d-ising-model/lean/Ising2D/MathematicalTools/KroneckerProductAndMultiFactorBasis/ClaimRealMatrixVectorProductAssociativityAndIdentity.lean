@@ -1,5 +1,5 @@
 /-
-# 実数の行列とベクトルの積の結合則と、実数の単位行列の左単位（具体版）
+# 実数の行列とベクトルの積の結合律と、実数の単位行列の左単位（具体版）
 
 正本: `structured-latex/content/002_linear_space_general.ts`
 
@@ -23,12 +23,12 @@
 - 人手の `m, n, p ∈ ℤ_{≥1}` と成分の番号は、Lean の添字の型の元である。Lean の主張は添字の型が空でも成り立つので、`Nonempty` を置かない。
 - 結合則の 4 行目・8 行目の `finite_sum_of_real_scalar_multiples` は、有限型の添字の版 `finite_sum_of_real_scalar_multiples_fintype` を引く。
   7 行目の `finite_double_sum_of_real_numbers_interchange` は、有限型の添字の版 `finite_double_sum_of_real_numbers_interchange_fintype` を引く。
-  乗法の交換則・結合則は `mul_comm`・`mul_assoc` である。
+  乗法の交換律・結合律は `mul_comm`・`mul_assoc` である。
 - 左単位の 5 行目の `finite_sum_with_single_nonzero_term` は具体版が無いので、既存の慣行どおり mathlib の `Finset.sum_eq_single` を引く
   （仮定の「`j ≠ i` のとき `0_ℂ`」は `hoff` で人手どおりに示す）。3 行目の `real_inclusion_preserves_finite_sum` は
   具体版 `real_inclusion_of_finite_sum_fintype`（`i ∈ ι` なので添字の型は空でない）、`0_ℂ = (0)_ℂ` の略記は `Complex.ofReal_zero` である。`j ≠ i` の 3 行目の `0·x_j = 0` は具体版 `real_zero_times_is_zero` を引き、`ℝ` の `1·a = a` は `one_mul` である。
 
-必要十分版はまだ置いていない。具体版は人手と同じく ℝ の乗法の交換則（結合則の 3 行目・5 行目）を使うが、
+必要十分版はまだ置いていない。具体版は人手と同じく ℝ の乗法の交換律（結合律の 3 行目・5 行目）を使うが、
 結合則そのものは交換則なしで成り立つはずで、それを必要十分版で確かめるのは残した件である
 （係数が ℂ の左単位には必要十分版 `NecSuf.one_mulVec_eq` がある）。
 -/
@@ -52,17 +52,17 @@ theorem real_matrix_vector_product_is_associative {α β γ : Type*} [Fintype β
       = ∑ k, (P * Q) i k * x k := rfl                                         -- `def_real_matrix_vector_product`（`P → PQ`）
     _ = ∑ k, (∑ j, P i j * Q j k) * x k := rfl                               -- `def_real_matrix_product` を `p` 個の項へ
     _ = ∑ k, x k * (∑ j, P i j * Q j k) :=
-        Finset.sum_congr rfl fun k _ => mul_comm _ _                          -- ℝ の乗法の交換則を `p` 個の項へ
+        Finset.sum_congr rfl fun k _ => mul_comm _ _                          -- ℝ の乗法の交換律を `p` 個の項へ
     _ = ∑ k, ∑ j, x k * (P i j * Q j k) :=
         Finset.sum_congr rfl fun k _ =>
           (finite_sum_of_real_scalar_multiples_fintype (x k) (fun j => P i j * Q j k)).symm
                                                                               -- `finite_sum_of_real_scalar_multiples`（`c → x_k`）を右辺から左辺へ
     _ = ∑ k, ∑ j, (P i j * Q j k) * x k :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun j _ =>
-          mul_comm _ _                                                        -- ℝ の乗法の交換則を `np` 個の項へ
+          mul_comm _ _                                                        -- ℝ の乗法の交換律を `np` 個の項へ
     _ = ∑ k, ∑ j, P i j * (Q j k * x k) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun j _ =>
-          mul_assoc _ _ _                                                     -- ℝ の乗法の結合則を `np` 個の項へ
+          mul_assoc _ _ _                                                     -- ℝ の乗法の結合律を `np` 個の項へ
     _ = ∑ j, ∑ k, P i j * (Q j k * x k) :=
         finite_double_sum_of_real_numbers_interchange_fintype (fun k j => P i j * (Q j k * x k))
                                                                               -- `finite_double_sum_of_real_numbers_interchange`（`n_1 → p`、`n_2 → n`、`c_{k,l} → P_il(Q_lk x_k)`）

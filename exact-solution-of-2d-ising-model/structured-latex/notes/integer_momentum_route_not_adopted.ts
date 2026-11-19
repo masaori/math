@@ -124,7 +124,7 @@ H_2 &= \frac{1}{M} \sum_{j=1}^{M} \hat{Z}_{-j}^{(-)}\, \hat{Y}_j
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
 \exp\!\left(-i k_1\frac{2\pi j}{M}\right)\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\exp\!\left(-i\frac{2\pi j}{M}\right)
-(Y_{k_1}Z_{k_2}) &&(\because\ \text{複素数の積の可換性と結合則（符号と exp を前へ、}YZ\text{ を後ろへ移した）}) \\
+(Y_{k_1}Z_{k_2}) &&(\because\ \text{複素数の積の可換性と結合律（符号と exp を前へ、}YZ\text{ を後ろへ移した）}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
 \exp\!\left(-i\frac{2\pi j}{M}(k_1-k_2+1)\right)(Y_{k_1}Z_{k_2}) &&(\because\ \exp a\cdot\exp b=\exp(a+b)) \\
@@ -153,7 +153,7 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \left(\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)Z_{k_1}\right)\left(\exp\!\left(-i k_2\frac{2\pi j}{M}\right)Y_{k_2}\right) &&(\because\ \text{有限和どうしの積は二重和である（分配則）。}k_1=1\ \text{の場合の係数も }+1\text{ である}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
-\exp\!\left(-i k_1\frac{2\pi(-j)}{M}-i k_2\frac{2\pi j}{M}\right)Z_{k_1}Y_{k_2} &&(\because\ \text{複素数の積の可換性と結合則、および }\exp a\cdot\exp b=\exp(a+b)) \\
+\exp\!\left(-i k_1\frac{2\pi(-j)}{M}-i k_2\frac{2\pi j}{M}\right)Z_{k_1}Y_{k_2} &&(\because\ \text{複素数の積の可換性と結合律、および }\exp a\cdot\exp b=\exp(a+b)) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
 \left(\sum_{j\in\{1,\dots,M\}}\exp\!\left((k_1-k_2)\,i\frac{2\pi j}{M}\right)\right)Z_{k_1}Y_{k_2} &&(\because\ \text{有限和の順序交換と、}j\text{ に依らない因子を和の外へ出すこと}) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M M\,\delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} &&(\because\ \blkref{exp_sum}) \\
@@ -792,7 +792,7 @@ M & (\mu = M)
 &= \alpha\beta\,(XW) - \beta\alpha\,(WX)
 &&(\because\ \text{スカラー倍が積と可換なこと})\\
 &= \alpha\beta\,(XW - WX)
-&&(\because\ \mathbb{C}\ \text{の積の可換則}\ \beta\alpha=\alpha\beta\ \text{と分配則})\\
+&&(\because\ \mathbb{C}\ \text{の積の可換律}\ \beta\alpha=\alpha\beta\ \text{と分配則})\\
 &= \alpha\beta\,[X, W]
 &&(\because\ \text{交換子の定義})
 \end{aligned}`),
@@ -1352,7 +1352,7 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
       displayMath(String.raw`\begin{aligned}
 (g_1g_2)\,\mathcal{P}_M\,(g_1g_2)^{-1}
 &= g_1\left(g_2\,\mathcal{P}_M\,g_2^{-1}\right)g_1^{-1}
-&&(\because\ (g_1g_2)^{-1} = g_2^{-1}g_1^{-1}\ \text{と行列の積の結合則})\\
+&&(\because\ (g_1g_2)^{-1} = g_2^{-1}g_1^{-1}\ \text{と行列の積の結合律})\\
 &= g_1\,\mathcal{P}_M\,g_1^{-1}
 &&(\because\ g_2 \in \mathcal{C}_M)\\
 &= \mathcal{P}_M
@@ -1872,21 +1872,21 @@ a^2 - b^2 &= \cosh^2 K_1 - \sinh^2 K_1
 N_{11} &= C\cdot a + (iS)\cdot\left(i \exp(-i\theta) b\right)
         &&(\because \text{行列積の定義}) \\
 &= Ca + i^2 S b\, \exp(-i\theta)
-        &&(\because \text{複素数の積の結合則と可換則}) \\
+        &&(\because \text{複素数の積の結合律と可換律}) \\
 &= Ca - S b\, \exp(-i\theta)
         &&(\because i^2=-1) \\
 N_{12} &= C\cdot\left(-i \exp(i\theta) b\right) + (iS)\cdot a
         &&(\because \text{行列積の定義}) \\
 &= i\left(Sa - C b\, \exp(i\theta)\right)
-        &&(\because \text{分配則と複素数の積の可換則}) \\
+        &&(\because \text{分配則と複素数の積の可換律}) \\
 N_{21} &= (-iS)\cdot a + C\cdot\left(i \exp(-i\theta) b\right)
         &&(\because \text{行列積の定義}) \\
 &= i\left(C b\, \exp(-i\theta) - Sa\right)
-        &&(\because \text{分配則と複素数の積の可換則}) \\
+        &&(\because \text{分配則と複素数の積の可換律}) \\
 N_{22} &= (-iS)\cdot\left(-i \exp(i\theta) b\right) + C\cdot a
         &&(\because \text{行列積の定義}) \\
 &= i^2 S b\, \exp(i\theta) + Ca
-        &&(\because (-i)(-i)=i^2\ \text{と複素数の積の結合則}) \\
+        &&(\because (-i)(-i)=i^2\ \text{と複素数の積の結合律}) \\
 &= Ca - S b\, \exp(i\theta)
         &&(\because i^2=-1\ \text{と加法の可換則})
 \end{aligned}`),
@@ -1939,7 +1939,7 @@ P_{12}
    &&(\because \text{Step 1 の }N_{12},N_{22}\text{ の表示}) \\
 &= i\left[S a^2 - C ab\, \exp(i\theta)\right]
    + i\left[-C ab\, \exp(i\theta) + S b^2 \exp(2i\theta)\right]
-   &&(\because \text{分配則と複素数の積の結合則}) \\
+   &&(\because \text{分配則と複素数の積の結合律}) \\
 &= i\left[S\left(a^2 + b^2 \exp(2i\theta)\right) - 2C ab\, \exp(i\theta)\right]
    &&(\because \text{分配則による括り出し})
 \end{aligned}`),
@@ -1980,7 +1980,7 @@ P_{21}
    &&(\because \text{Step 1 の }N_{11},N_{21}\text{ の表示}) \\
 &= i\left[C ab\, \exp(-i\theta) - S b^2 \exp(-2i\theta)\right]
    + i\left[C ab\, \exp(-i\theta) - S a^2\right]
-   &&(\because \text{分配則と複素数の積の結合則}) \\
+   &&(\because \text{分配則と複素数の積の結合律}) \\
 &= -i\left[S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)\right]
    &&(\because \text{分配則による括り出し})
 \end{aligned}`),
@@ -2437,7 +2437,7 @@ c_2 s_1 = c_1\cos\theta_\mu
 &= \left(i\,\exp(i\theta_\mu)s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,\exp(-i\theta_\mu)s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)\right)
 &&(\because\ \cos\ \text{は偶関数、}\sin\ \text{は奇関数})\\
 &= (i\cdot i)\left(\exp(i\theta_\mu)\exp(-i\theta_\mu)\right)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
-&&(\because\ \mathbb{C}\ \text{の積の可換性と結合則で因子を並べ替えた})\\
+&&(\because\ \mathbb{C}\ \text{の積の可換性と結合律で因子を並べ替えた})\\
 &= (-1)\left(\exp(i\theta_\mu + i(-\theta_\mu))\right)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
 &&(\because\ i\cdot i=-1\ \text{と指数法則})\\
 &= (-1)(\exp(0))(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
@@ -2691,7 +2691,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i \exp(i\theta_\mu) s_2^*(c_1\cos\theta_\m
 &= (\gamma_1(\theta_\mu) - \lambda)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
 && (\because\ \text{同じ元の積は 2 乗であり、負元を引くことは元を足すこと}) \\
 &= \gamma_1(\theta_\mu)^2 - 2\lambda\gamma_1(\theta_\mu) + \lambda^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
-&& (\because\ \text{平方の展開と複素数の積の可換則})
+&& (\because\ \text{平方の展開と複素数の積の可換律})
 \end{aligned}`),
       paragraph(["より"]),
       displayMath(String.raw`\lambda^2 - 2\lambda\gamma_1(\theta_\mu) + \gamma_1(\theta_\mu)^2 + \gamma_2(\theta_\mu)\gamma_2(-\theta_\mu) = 0`),
@@ -2784,7 +2784,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i \exp(i\theta_\mu) s_2^*(c_1\cos\theta_\m
 -\gamma_2(-\theta_\mu) & \pm i\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
 \end{pmatrix}
 \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0
-&& (\because\ \sqrt{-1_{\mathbb{C}}}=i\ \text{と複素数の積の可換則})
+&& (\because\ \sqrt{-1_{\mathbb{C}}}=i\ \text{と複素数の積の可換律})
 \end{aligned}`),
       paragraph(["第 1 行 ", math(String.raw`\gamma_2(-\theta_\mu)\,v_1 \mp i\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\,v_2 = 0`), " より、", math(String.raw`c \in \mathbb{C}^\times`), " として"]),
       displayMath(String.raw`v = c \begin{pmatrix} \pm i\,\sqrt{\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)} \\ \gamma_2(-\theta_\mu) \end{pmatrix}`),
@@ -3084,7 +3084,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
 &= (\tanh K_1\tanh K_2^*)\cdot(\tanh K_1(\tanh K_2^*)^{-1})
 && (\because\ \text{非零な積の逆数と逆数の逆数}) \\
 &= (\tanh K_1)^2\cdot\bigl(\tanh K_2^*(\tanh K_2^*)^{-1}\bigr)
-&& (\because\ \text{複素数の積の可換則と結合則}) \\
+&& (\because\ \text{複素数の積の可換律と結合律}) \\
 &= (\tanh K_1)^2\cdot 1
 && (\because\ \tanh K_2^*\neq0\ \text{と逆数の定義}) \\
 &= (\tanh K_1)^2
@@ -3298,7 +3298,7 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
 &= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr)(P_\mu D_\mu P_\mu^{-1})\cdot P_\mu
 \quad (\because\ A(\theta_\mu) = P_\mu D_\mu P_\mu^{-1}) \\
 &= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) P_\mu D_\mu
-\quad (\because\ \text{行列の積の結合則と}\ P_\mu^{-1}P_\mu = I) \\
+\quad (\because\ \text{行列の積の結合律と}\ P_\mu^{-1}P_\mu = I) \\
 &= \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix} D_\mu
 \quad (\because\ \text{フェルミオンの定義}) \\
 &= \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}\begin{pmatrix} \lambda_{+,\mu} & 0 \\ 0 & \lambda_{-,\mu} \end{pmatrix}
@@ -3368,7 +3368,7 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
 &=\gamma_2(-\theta_\mu)\gamma_2(\theta_\mu)
 && (\because\ \text{上の二つの等式})\\
 &=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
-&& (\because\ \mathbb{C}\ \text{の積の可換則})
+&& (\because\ \mathbb{C}\ \text{の積の可換律})
 \end{aligned}`),
       paragraph(["Step 0-3: ", ref("def_sqrt_cc"), " の ", math(String.raw`\sqrt{\cdot}`), " は ", math(String.raw`\mathbb{C}`), " から ", math(String.raw`\mathbb{C}`), " への写像である。写像は等しい入力に等しい値を返すから、Step 0-2 の等式より"]),
       displayMath(String.raw`\begin{aligned}
@@ -3447,7 +3447,7 @@ t_\mu&\neq0_{\mathbb{C}}
 &=\gamma_2(-\theta_\mu)\gamma_2(\theta_\mu)
 && (\because\ \text{Step 0-2 の}\ \gamma_2(-\theta_\nu)=\gamma_2(\theta_\mu))\\
 &=\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)
-&& (\because\ \mathbb{C}\ \text{の積の可換則})
+&& (\because\ \mathbb{C}\ \text{の積の可換律})
 \end{aligned}`),
       paragraph(["したがって係数の和は"]),
       displayMath(String.raw`\begin{aligned}
@@ -3491,7 +3491,7 @@ c_\mu c_\nu
 &=\frac{1}{4M\gamma_2(-\theta_\mu)\gamma_2(\theta_\mu)}
 && (\because\ \text{Step 0-2 の}\ \gamma_2(-\theta_\nu)=\gamma_2(\theta_\mu))\\
 &=\frac{1}{4M\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}
-&& (\because\ \mathbb{C}\ \text{の積の可換則})
+&& (\because\ \mathbb{C}\ \text{の積の可換律})
 \end{aligned}`),
       paragraph(["であるから、"]),
       displayMath(String.raw`\begin{aligned}
@@ -3560,7 +3560,7 @@ c_\mu c_\nu
 &&\left(\because\ 2\times2\ \text{行列の行列式の定義と直前の行列表示}\right)\\
 &= \gamma_1(\theta_\mu)^2
   - \bigl(-\gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)\bigr)
-&&\left(\because\ \text{冪の定義と積の結合則}\right)\\
+&&\left(\because\ \text{冪の定義と積の結合律}\right)\\
 &= \gamma_1(\theta_\mu)^2
   + \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
 &&\left(\because\ a-(-b)=a+b\right)
@@ -3578,7 +3578,7 @@ c_\mu c_\nu
 \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
 &=i^2\exp(i\theta_\mu)\exp(-i\theta_\mu)(s_2^*)^2
   \bigl((c_1u-s_1c_2)-iv\bigr)\bigl((c_1u-s_1c_2)+iv\bigr)
-&&\left(\because\ \text{直前の 2 式の代入と積の結合則}\right)\\
+&&\left(\because\ \text{直前の 2 式の代入と積の結合律}\right)\\
 &=-\exp(0)(s_2^*)^2
   \bigl((c_1u-s_1c_2)-iv\bigr)\bigl((c_1u-s_1c_2)+iv\bigr)
 &&\left(\because\ i^2=-1,\ \exp(i\theta_\mu)\exp(-i\theta_\mu)=\exp(0)\right)\\
@@ -3610,7 +3610,7 @@ c_\mu c_\nu
       displayMath(String.raw`\begin{aligned}
 2 c_1 s_1 c_2 (s_2^*)^2 u
 &=2 c_1 s_1 (c_2 s_2^*) s_2^* u
-&&\left(\because\ (s_2^*)^2=s_2^*s_2^*\ \text{と積の結合則}\right)\\
+&&\left(\because\ (s_2^*)^2=s_2^*s_2^*\ \text{と積の結合律}\right)\\
 &=2 c_1 s_1 c_2^* s_2^* u
 &&\left(\because\ \text{(iii)}\ c_2s_2^*=c_2^*\right),\\[4pt]
 s_1^2 c_2^2 (s_2^*)^2
@@ -3902,15 +3902,15 @@ X^{n+1}\psi_\mu^\dagger
 &= (X\cdot X^n)\psi_\mu^\dagger
 &&(\because\ \text{冪の定義})\\
 &= X\cdot(X^n\psi_\mu^\dagger)
-&&(\because\ \text{積の結合則})\\
+&&(\because\ \text{積の結合律})\\
 &= X\cdot\bigl(\psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^n\bigr)
 &&(\because\ \text{帰納法の仮定})\\
 &= (X\psi_\mu^\dagger)\cdot(X + \gamma(\theta_\mu)I)^n
-&&(\because\ \text{積の結合則})\\
+&&(\because\ \text{積の結合律})\\
 &= \bigl(\psi_\mu^\dagger(X + \gamma(\theta_\mu)I)\bigr)\cdot(X + \gamma(\theta_\mu)I)^n
 &&(\because\ \text{Step 2 のまとめ})\\
 &= \psi_\mu^\dagger\bigl((X + \gamma(\theta_\mu)I)\cdot(X + \gamma(\theta_\mu)I)^n\bigr)
-&&(\because\ \text{積の結合則})\\
+&&(\because\ \text{積の結合律})\\
 &= \psi_\mu^\dagger(X + \gamma(\theta_\mu)I)^{n+1}
 &&(\because\ \text{冪の定義})
 \end{aligned}`),
@@ -3949,7 +3949,7 @@ T_{(V')}(\psi_\mu^\dagger)
 &= \psi_\nu^\dagger(-\psi_\mu\psi_{-\nu})
 &&(\because\ [\psi_{-\nu},\psi_\mu]_+=0)\\
 &= -\psi_\nu^\dagger\psi_\mu\psi_{-\nu}
-&&(\because\ \text{スカラー倍と行列の積の結合則})\\
+&&(\because\ \text{スカラー倍と行列の積の結合律})\\
 &= -(\delta^M_{\nu+\mu,0}\,I-\psi_\mu\psi_\nu^\dagger)\psi_{-\nu}
 &&(\because\ [\psi_\nu^\dagger,\psi_\mu]_+=\delta^M_{\nu+\mu,0}\,I)\\
 &= -\delta^M_{\nu+\mu,0}\,I\psi_{-\nu}+\psi_\mu\psi_\nu^\dagger\psi_{-\nu}
@@ -4174,11 +4174,11 @@ X^{n+1}W
 &= X\cdot W X^n
 && (\because\ X^nW=WX^n) \\
 &= (XW)X^n
-&& (\because\ \text{行列積の結合則}) \\
+&& (\because\ \text{行列積の結合律}) \\
 &= (WX)X^n
 && (\because\ XW=WX) \\
 &= W X^{n+1}
-&& (\because\ \text{行列積の結合則と }X^{n+1}=X\cdot X^n)
+&& (\because\ \text{行列積の結合律と }X^{n+1}=X\cdot X^n)
 \end{aligned}`),
       paragraph([math(String.raw`n = 0`), " で ", math(String.raw`X^0 W = W = W X^0`), " だから全 ", math(String.raw`n \geq 0`), " で成立する。よって"]),
       displayMath(String.raw`\begin{aligned}
@@ -4246,7 +4246,7 @@ T_{(V')}(W)
 &= \bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) (P_\mu P_\mu^{-1})
 \quad (\because P_\mu P_\mu^{-1}=I) \\
 &= \left(\bigl(\hat{Z}_\mu^{(-)},\, \hat{Y}_\mu\bigr) P_\mu\right) P_\mu^{-1}
-\quad (\because \text{行列の積の結合則}) \\
+\quad (\because \text{行列の積の結合律}) \\
 &= \begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix} P_\mu^{-1}
 \quad (\because \text{def\_fermi}) \\
 &= \begin{pmatrix} q_{11}\psi_\mu^\dagger + q_{21}\psi_\mu & q_{12}\psi_\mu^\dagger + q_{22}\psi_\mu \end{pmatrix}
@@ -5614,7 +5614,7 @@ g(0,\dots,0)
    \quad (\because \Lambda_{\max},\Lambda_{\min}\ \text{の表式}) \\
 &= \left((2s_2)^{M/2}(2s_2)^{M/2}\right)
    \left(\exp(g(1,\dots,1))\exp(g(0,\dots,0))\right)
-   \quad (\because \text{積の可換則と結合則}) \\
+   \quad (\because \text{積の可換律と結合律}) \\
 &= (2s_2)^{M}\left(\exp(g(1,\dots,1))\exp(g(0,\dots,0))\right)
    \quad (\because \text{冪の法則}) \\
 &= (2s_2)^{M}\exp(g(1,\dots,1)+g(0,\dots,0))

@@ -48,13 +48,13 @@ theorem real_bilinear_value_of_symmetric_matrix_is_symmetric (P : Matrix n n ℝ
           rw [hP.apply l k]                                          -- `def_real_symmetric_matrix`（`P_kl = P_lk`）を各項へ
     _ = ∑ k, ∑ l, v l * (u k * P l k) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-          mul_comm (u k * P l k) (v l)                               -- ℝ の乗法の可換則 `(u_kP_lk)v_l = v_l(u_kP_lk)` を各項へ
+          mul_comm (u k * P l k) (v l)                               -- ℝ の乗法の可換律 `(u_kP_lk)v_l = v_l(u_kP_lk)` を各項へ
     _ = ∑ k, ∑ l, v l * (P l k * u k) :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => by
-          rw [mul_comm (u k) (P l k)]                                -- ℝ の乗法の可換則 `u_kP_lk = P_lku_k` を各項へ
+          rw [mul_comm (u k) (P l k)]                                -- ℝ の乗法の可換律 `u_kP_lk = P_lku_k` を各項へ
     _ = ∑ k, ∑ l, v l * P l k * u k :=
         Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
-          (mul_assoc (v l) (P l k) (u k)).symm                       -- ℝ の乗法の結合則を各項へ
+          (mul_assoc (v l) (P l k) (u k)).symm                       -- ℝ の乗法の結合律を各項へ
     _ = ∑ l, ∑ k, v l * P l k * u k :=
         finite_double_sum_of_real_numbers_interchange_fintype
           (fun k l => v l * P l k * u k)                             -- `finite_double_sum_of_real_numbers_interchange`（`c_{k,l} → (v_lP_lk)u_k`）

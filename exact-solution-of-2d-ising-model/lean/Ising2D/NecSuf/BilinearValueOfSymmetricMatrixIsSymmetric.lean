@@ -13,16 +13,16 @@
 | --- | --- |
 | 1 段目 `def_real_bilinear_value` | `dotProduct_mulVec_eq_double_sum'`（`NecSuf/BilinearValueAtMostValueAtAbsoluteVector.lean`） |
 | 2 段目 `def_real_symmetric_matrix` を各項へ | `Matrix.IsSymm.apply` |
-| 3・4 段目 乗法の可換則を各項へ | `mul_comm` |
-| 5 段目 乗法の結合則を各項へ | `mul_assoc` |
+| 3・4 段目 乗法の可換律を各項へ | `mul_comm` |
+| 5 段目 乗法の結合律を各項へ | `mul_assoc` |
 | 6 段目 `finite_double_sum_of_real_numbers_interchange` | `finite_double_sum_interchange'`（`NecSuf/FiniteDoubleSumInterchange.lean`） |
 | 7 段目 `def_real_bilinear_value` を右辺から左辺へ | `dotProduct_mulVec_eq_double_sum'` |
 
 ## この主張に本質的に効いている構造
 
-* 乗法の**可換則**（3・4 段目）。可換でない係数では、`P` が対称でも `u^⊤Pv = v^⊤Pu` は一般に成り立たない
+* 乗法の**可換律**（3・4 段目）。可換でない係数では、`P` が対称でも `u^⊤Pv = v^⊤Pu` は一般に成り立たない
   （`n = 1`・`P = 1` で `uv` と `vu`）ので、外せない。
-* 乗法の結合則（5 段目と、mathlib の `x ⬝ᵥ P *ᵥ y` を人手の和へ開く 1・7 段目）。結合的でない係数では
+* 乗法の結合律（5 段目と、mathlib の `x ⬝ᵥ P *ᵥ y` を人手の和へ開く 1・7 段目）。結合的でない係数では
   `(u_kP_kl)v_l` と `u_k(P_klv_l)` が一致せず、人手の `Σ_kΣ_l (x_kP_kl)y_l` と mathlib の値が別物になるので外せない。
 * 加法の結合律・交換律（6 段目の和の順序の入れ替え。`NecSuf/FiniteDoubleSumInterchange.lean`）。和の順序の入れ替えはこの二つに尽きるので外せない。
 * 分配律と `a·0 = 0` は、mathlib の `x ⬝ᵥ P *ᵥ y`（`Σ_k x_k (Σ_l P_kl y_l)`）を人手の `Σ_kΣ_l (x_kP_kl)y_l` へ開く段

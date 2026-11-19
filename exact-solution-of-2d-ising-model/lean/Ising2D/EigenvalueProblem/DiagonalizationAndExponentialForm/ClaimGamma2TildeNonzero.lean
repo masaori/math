@@ -111,7 +111,7 @@ theorem gamma2_thetaTilde_ne_zero {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
           = P.const.c1 * Real.cos (thetaTilde M μ) := hstep1.symm
                                                   -- Step 1 の連立条件の第 1 式
         _ = P.const.c1 * (-1) := by rw [hcosval]  -- Step 3 の `cos θ~_μ = -1`
-        _ = (-1) * P.const.c1 := mul_comm _ _     -- ℝ の乗法の可換則（`set_and_algebra_notation`）
+        _ = (-1) * P.const.c1 := mul_comm _ _     -- ℝ の乗法の可換律（`set_and_algebra_notation`）
         _ = -P.const.c1 := real_minus_one_times_is_negation _
                                                   -- `real_minus_one_times_is_negation`（`a → c_1`）
     -- Step 4: 矛盾の鎖 `0 < s_1c_2 = -c_1 < 0`

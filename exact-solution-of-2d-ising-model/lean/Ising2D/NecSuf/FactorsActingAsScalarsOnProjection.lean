@@ -18,11 +18,11 @@
 - 10 行の鎖に効くのは、`x − y = x + (−y)`、左因子の和への分配（`(x + y)z = xz + yz`）、符号反転が左因子から外へ出ること、
   `1` が積の左単位元であること、スカラー倍が左因子から外へ出ること（`IsScalarTower 𝕜 R R`）、`1x = x`、
   `a(bx) = (ab)x`、`ax − bx = (a − b)x` だけである（`R` は `NonAssocRing`、`𝕜` は `Ring` で `R` は `𝕜` 加群）。
-  `R` の積の結合則は効かない。`NonAssocRing` には `1` が右単位元であることも入るが、鎖が使うのは左単位元だけである。
+  `R` の積の結合律は効かない。`NonAssocRing` には `1` が右単位元であることも入るが、鎖が使うのは左単位元だけである。
   係数の `2` と `ε_μ ∈ {0,1}`（`ň_μ` の固有値が `0, 1` であること、`ň_μ` の冪等性）は効かない。
   一般の係数 `c` と、`nQ = dQ` を満たす任意の `d` で通る。`𝕜` の可換則も効かない。
-- `P_k` の帰納法に効くのは、積の結合則（`Semigroup R`）、スカラー倍が右因子から外へ出ること（`SMulCommClass 𝕜 R R`）、
-  `a(bx) = (ab)x`（`SemigroupAction 𝕜 R`。`1x = x` は効かない）と、`𝕜` の乗法の交換則（人手の「乗法の交換則」の行）だけである。
+- `P_k` の帰納法に効くのは、積の結合律（`Semigroup R`）、スカラー倍が右因子から外へ出ること（`SMulCommClass 𝕜 R R`）、
+  `a(bx) = (ab)x`（`SemigroupAction 𝕜 R`。`1x = x` は効かない）と、`𝕜` の乗法の交換律（人手の「乗法の交換律」の行）だけである。
   `R` の加法・単位元、因子どうしの可換性、因子が `I − 2ň_μ` の形であることは効かない。`𝕜` の単位元は、`∏` を
   `Finset.prod` で書くための `CommMonoid 𝕜` から入るだけで、鎖の行では使わない。
 -/
@@ -65,7 +65,7 @@ theorem finProdLeft_mul_eq_prod_smul' {𝕜 R : Type*} [CommMonoid 𝕜] [Semigr
         = (finProdLeft r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1))) * Q := rfl
                                                                -- 有限積の定義
       _ = finProdLeft r (fun j => A (Fin.castSucc j)) * (A (Fin.last (r + 1)) * Q) := mul_assoc _ _ _
-                                                               -- 積の結合則
+                                                               -- 積の結合律
       _ = finProdLeft r (fun j => A (Fin.castSucc j)) * (a (Fin.last (r + 1)) • Q) := by
           rw [h (Fin.last (r + 1))]                            -- 仮定（`j = k + 1`）
       _ = a (Fin.last (r + 1)) • (finProdLeft r (fun j => A (Fin.castSucc j)) * Q) := mul_smul_comm _ _ _
@@ -76,7 +76,7 @@ theorem finProdLeft_mul_eq_prod_smul' {𝕜 R : Type*} [CommMonoid 𝕜] [Semigr
       _ = (a (Fin.last (r + 1)) * ∏ j, a (Fin.castSucc j)) • Q := (mul_smul _ _ _).symm
                                                                -- `a(bx) = (ab)x`
       _ = ((∏ j, a (Fin.castSucc j)) * a (Fin.last (r + 1))) • Q := by
-          rw [mul_comm (a (Fin.last (r + 1)))]                 -- `𝕜` の乗法の交換則
+          rw [mul_comm (a (Fin.last (r + 1)))]                 -- `𝕜` の乗法の交換律
       _ = (∏ j, a j) • Q := by rw [Fin.prod_univ_castSucc a]   -- 有限積の定義
 
 end Ising2D.NecSuf

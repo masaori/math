@@ -67,11 +67,11 @@ theorem det_mul_v0_eq_zero (B : Matrix (Fin 2) (Fin 2) ℂ) (v : Fin 2 → ℂ) 
   calc B.det * v 0
       = (B 0 0 * B 1 1 - B 0 1 * B 1 0) * v 0 := by rw [det_two_by_two_def]  -- `def_det_two_by_two`
     _ = B 0 0 * B 1 1 * v 0 - B 0 1 * B 1 0 * v 0 := by ring                    -- 分配則
-    _ = B 1 1 * B 0 0 * v 0 - B 0 1 * B 1 0 * v 0 := by ring                    -- 乗法の可換則
+    _ = B 1 1 * B 0 0 * v 0 - B 0 1 * B 1 0 * v 0 := by ring                    -- 乗法の可換律
     _ = B 1 1 * B 0 0 * v 0 - B 0 1 * B 1 0 * v 0 + (B 1 1 * B 0 1 * v 1 - B 1 1 * B 0 1 * v 1) := by
         rw [sub_self, add_zero]                                                  -- `x - x = 0`
     _ = B 1 1 * B 0 0 * v 0 - B 0 1 * B 1 0 * v 0 + (B 1 1 * B 0 1 * v 1 - B 0 1 * B 1 1 * v 1) := by
-        rw [mul_comm (B 1 1) (B 0 1)]                                            -- 乗法の可換則
+        rw [mul_comm (B 1 1) (B 0 1)]                                            -- 乗法の可換律
     _ = B 1 1 * B 0 0 * v 0 + B 1 1 * B 0 1 * v 1 - B 0 1 * B 1 0 * v 0 - B 0 1 * B 1 1 * v 1 := by
         ring                                                                     -- 加法の交換律と結合律
     _ = B 1 1 * (B 0 0 * v 0 + B 0 1 * v 1) - B 0 1 * (B 1 0 * v 0 + B 1 1 * v 1) := by ring  -- 分配則
@@ -86,11 +86,11 @@ theorem det_mul_v1_eq_zero (B : Matrix (Fin 2) (Fin 2) ℂ) (v : Fin 2 → ℂ) 
   calc B.det * v 1
       = (B 0 0 * B 1 1 - B 0 1 * B 1 0) * v 1 := by rw [det_two_by_two_def]  -- `def_det_two_by_two`
     _ = B 0 0 * B 1 1 * v 1 - B 0 1 * B 1 0 * v 1 := by ring                    -- 分配則
-    _ = B 0 0 * B 1 1 * v 1 - B 1 0 * B 0 1 * v 1 := by ring                    -- 乗法の可換則
+    _ = B 0 0 * B 1 1 * v 1 - B 1 0 * B 0 1 * v 1 := by ring                    -- 乗法の可換律
     _ = B 0 0 * B 1 1 * v 1 - B 1 0 * B 0 1 * v 1 + (B 0 0 * B 1 0 * v 0 - B 0 0 * B 1 0 * v 0) := by
         rw [sub_self, add_zero]                                                  -- `x - x = 0`
     _ = B 0 0 * B 1 1 * v 1 - B 1 0 * B 0 1 * v 1 + (B 0 0 * B 1 0 * v 0 - B 1 0 * B 0 0 * v 0) := by
-        rw [mul_comm (B 0 0) (B 1 0)]                                            -- 乗法の可換則
+        rw [mul_comm (B 0 0) (B 1 0)]                                            -- 乗法の可換律
     _ = B 0 0 * B 1 0 * v 0 + B 0 0 * B 1 1 * v 1 - B 1 0 * B 0 0 * v 0 - B 1 0 * B 0 1 * v 1 := by
         ring                                                                     -- 加法の交換律と結合律
     _ = B 0 0 * (B 1 0 * v 0 + B 1 1 * v 1) - B 1 0 * (B 0 0 * v 0 + B 0 1 * v 1) := by ring  -- 分配則
@@ -117,13 +117,13 @@ theorem mulVec_row0_ne_zero (B : Matrix (Fin 2) (Fin 2) ℂ) (hdet : B.det = 0) 
     calc (B *ᵥ ![B 0 1, -B 0 0]) 0
         = B 0 0 * B 0 1 + B 0 1 * (-B 0 0) := by rw [mulVec_two_zero]; rfl  -- `mat_mult`
       _ = B 0 0 * B 0 1 - B 0 1 * B 0 0 := by ring                         -- ℂ の四則
-      _ = B 0 0 * B 0 1 - B 0 0 * B 0 1 := by rw [mul_comm (B 0 1) (B 0 0)]  -- 乗法の可換則
+      _ = B 0 0 * B 0 1 - B 0 0 * B 0 1 := by rw [mul_comm (B 0 1) (B 0 0)]  -- 乗法の可換律
       _ = 0 := sub_self _                                                   -- `x - x = 0`
   · show (B *ᵥ ![B 0 1, -B 0 0]) 1 = 0
     calc (B *ᵥ ![B 0 1, -B 0 0]) 1
         = B 1 0 * B 0 1 + B 1 1 * (-B 0 0) := by rw [mulVec_two_one]; rfl  -- `mat_mult`
       _ = B 1 0 * B 0 1 - B 1 1 * B 0 0 := by ring                         -- ℂ の四則
-      _ = B 0 1 * B 1 0 - B 0 0 * B 1 1 := by ring                         -- 乗法の可換則
+      _ = B 0 1 * B 1 0 - B 0 0 * B 1 1 := by ring                         -- 乗法の可換律
       _ = -(B 0 0 * B 1 1 - B 0 1 * B 1 0) := by ring                      -- ℂ の四則
       _ = -B.det := by rw [det_two_by_two_def]                              -- `def_det_two_by_two`
       _ = -0 := by rw [hdet]                                                -- `det B = 0`
@@ -143,7 +143,7 @@ theorem mulVec_row0_zero_row1_ne_zero (B : Matrix (Fin 2) (Fin 2) ℂ)
     calc (B *ᵥ ![B 1 1, -B 1 0]) 1
         = B 1 0 * B 1 1 + B 1 1 * (-B 1 0) := by rw [mulVec_two_one]; rfl  -- `mat_mult`
       _ = B 1 0 * B 1 1 - B 1 1 * B 1 0 := by ring                         -- ℂ の四則
-      _ = B 1 0 * B 1 1 - B 1 0 * B 1 1 := by rw [mul_comm (B 1 1) (B 1 0)]  -- 乗法の可換則
+      _ = B 1 0 * B 1 1 - B 1 0 * B 1 1 := by rw [mul_comm (B 1 1) (B 1 0)]  -- 乗法の可換律
       _ = 0 := sub_self _                                                   -- `x - x = 0`
 
 /-- 「⇐」の 1 行目も 2 行目も零の場合: `v := (1, 0)` について `Bv = 0`。 -/

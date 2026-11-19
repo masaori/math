@@ -6348,7 +6348,7 @@ A - B
   {
     id: "linear_space_general_claim_real_matrix_vector_product_is_associative",
     kind: "claim",
-    title: { text: "実数の行列の積と実数のベクトルへの積の結合則" },
+    title: { text: "実数の行列の積と実数のベクトルへの積の結合律" },
     labels: ["real_matrix_vector_product_is_associative"],
     statement: [
       paragraph([
@@ -6397,13 +6397,13 @@ A - B
 &= \sum_{k=1}^{p} \Bigl(\sum_{j=1}^{n} P_{ij}\,Q_{jk}\Bigr) x_k
 &&\bigl(\because\ \blkref{def_real_matrix_product}\ (P \to P,\ Q \to Q)\ \text{を}\ (PQ)_{ik}\ \text{へ、}p\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{k=1}^{p} x_k \Bigl(\sum_{j=1}^{n} P_{ij}\,Q_{jk}\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則を}\ p\ \text{個の項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律を}\ p\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{k=1}^{p} \sum_{j=1}^{n} x_k\,(P_{ij}\,Q_{jk})
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to x_k,\ (x_1,\dots,x_n) \to (P_{i1}Q_{1k},\dots,P_{in}Q_{nk}))\ \text{を右辺から左辺へ、}p\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{k=1}^{p} \sum_{j=1}^{n} (P_{ij}\,Q_{jk})\,x_k
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則を}\ np\ \text{個の項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律を}\ np\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{k=1}^{p} \sum_{j=1}^{n} P_{ij}\,(Q_{jk}\,x_k)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を}\ np\ \text{個の項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律を}\ np\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{j=1}^{n} \sum_{k=1}^{p} P_{ij}\,(Q_{jk}\,x_k)
 &&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to p,\ n_2 \to n,\ c_{k,l} \to P_{il}\,(Q_{lk}\,x_k))\bigr)\\
 &= \sum_{j=1}^{n} P_{ij} \Bigl(\sum_{k=1}^{p} Q_{jk}\,x_k\Bigr)
@@ -6578,7 +6578,7 @@ r_i
         " を使うのは、熱力学極限の章で、成分が実数の値をとる行列とベクトルにこの主張を使うためである。",
         "証明は ",
         math(String.raw`\mathbb{R}`),
-        " の乗法の結合則・交換則と有限和だけを使い、極限・完備性を使わない。",
+        " の乗法の結合律・交換律と有限和だけを使い、極限・完備性を使わない。",
       ]),
     ],
     proof: [
@@ -6593,11 +6593,11 @@ r_i
 &= \sum_{j=1}^{n} P_{ij}\,(c\,u_j)
 &&\bigl(\because\ \text{仮定}\ w_k = c\,u_k\ (k \to j)\ \text{を}\ n\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{j=1}^{n} (P_{ij}\,c)\,u_j
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律を}\ n\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{j=1}^{n} (c\,P_{ij})\,u_j
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律を}\ n\ \text{個の項へ同時に適用}\bigr)\\
 &= \sum_{j=1}^{n} c\,(P_{ij}\,u_j)
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合則を}\ n\ \text{個の項へ同時に適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の結合律を}\ n\ \text{個の項へ同時に適用}\bigr)\\
 &= c\sum_{j=1}^{n} P_{ij}\,u_j
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to c,\ x_j \to P_{ij}\,u_j)\bigr)\\
 &= c\,(Pu)_i

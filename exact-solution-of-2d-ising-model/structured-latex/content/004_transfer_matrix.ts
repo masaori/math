@@ -763,7 +763,7 @@ E_{I,J}E_{K,L}
 &= \delta_{L,P}\,\delta_{J,K}\,f_I
 &&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{（}\Theta_{I,J}\ \text{の定義）})\\
 &= \delta_{J,K}\,\delta_{L,P}\,f_I
-&&(\because\ \mathbb{C}\ \text{の乗法の可換則})\\
+&&(\because\ \mathbb{C}\ \text{の乗法の可換律})\\
 &= \delta_{J,K}\,\Theta_{I,L}(f_P)
 &&(\because\ \Theta_{I,L}(f_P)=\delta_{L,P}f_I\ \text{（}\Theta_{I,L}\ \text{の定義）})
 \end{aligned}`,

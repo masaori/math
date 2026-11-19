@@ -102,7 +102,7 @@ theorem rayleigh_bounds_operator_norm (h : IsPsdPair ip W) {c : R} (hc0 : 0 ≤ 
           mul_le_mul_of_nonneg_right (hc x) (h.W_psd (W x))                   -- 4 行目: `⟪x, Wx⟫ ≤ c⟪x, x⟫` と `0 ≤ ⟪Wx, W(Wx)⟫`
       _ ≤ (c * ip x x) * (c * ip (W x) (W x)) :=
           mul_le_mul_of_nonneg_left (hc (W x)) (mul_nonneg hc0 (h.ip_psd x))  -- 5 行目: `⟪Wx, W(Wx)⟫ ≤ c⟪Wx, Wx⟫` と `0 ≤ c⟪x, x⟫`
-      _ = (c ^ 2 * ip x x) * (ip (W x) (W x)) := by ring                      -- 6 行目: 乗法の可換則・結合則
+      _ = (c ^ 2 * ip x x) * (ip (W x) (W x)) := by ring                      -- 6 行目: 乗法の可換律・結合律
   -- 場合分けと割り算（人手の平方根の行は、平方根を取る前の形なので現れない）
   rcases eq_or_lt_of_le (h.ip_psd (W x)) with hzero | hpos
   · rw [← hzero]

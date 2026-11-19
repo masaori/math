@@ -4204,7 +4204,7 @@ E_K \check{Q}_\epsilon
    \quad \left(\because\ \text{鎖の係数 } \check{g}(\epsilon) \in \mathbb{R} \text{ は }\blkref{inclusion_rr_to_cc}\text{ の } \check{g}(\epsilon)_{\mathbb{C}} \text{ として掛けている}\right) \\
 &= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{\left(\check{g}(\epsilon)_{\mathbb{C}}\right)^k}{k!}\right)
    \check{Q}_\epsilon\right)
-   \quad \left(\because\ \tfrac{1}{k!}\,z = z \cdot \tfrac{1}{k!} =: \tfrac{z}{k!}\ (z \in \mathbb{C}\text{。乗法の可換則と、}\blkref{scalar_exp_is_limit_of_partial_sums}\text{ の部分和の項の書き方})\ \text{を各項へ}\right) \\
+   \quad \left(\because\ \tfrac{1}{k!}\,z = z \cdot \tfrac{1}{k!} =: \tfrac{z}{k!}\ (z \in \mathbb{C}\text{。乗法の可換律と、}\blkref{scalar_exp_is_limit_of_partial_sums}\text{ の部分和の項の書き方})\ \text{を各項へ}\right) \\
 &= \exp\!\left(\check{g}(\epsilon)_{\mathbb{C}}\right)\check{Q}_\epsilon
    \quad \left(\because\ \blkref{scalar_exp_is_limit_of_partial_sums}\ (\text{係数の集合 } K \to \mathbb{C},\ x \to \check{g}(\epsilon)_{\mathbb{C}})\ \text{の極限 } c_N \to c \text{ を仮定に置いた}\ \blkref{scalar_sequence_times_matrix_converges}\ (n \to 2^{M_{\mathrm{col}}},\ c_N \to \textstyle\sum_{k=0}^{N}\frac{(\check{g}(\epsilon)_{\mathbb{C}})^k}{k!},\ c \to \exp(\check{g}(\epsilon)_{\mathbb{C}}),\ A \to \check{Q}_\epsilon)\ \text{と、}\blkref{matrix_norm_triangle_inequality}\ (4)\right) \\
 &= \left(\exp(\check{g}(\epsilon))\right)_{\mathbb{C}}\check{Q}_\epsilon
@@ -4294,7 +4294,7 @@ E_K \check{Q}_\epsilon
    \check{Q}_\epsilon\right)
    \quad \left(\because\ \text{鎖の係数 } \check{g}(\epsilon) \in \mathbb{R} \text{ は }\blkref{inclusion_rr_to_cc}\text{ の } \check{g}(\epsilon)_{\mathbb{C}} \text{ として掛けている}\right) \\
 &= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{\left(\check{g}(\epsilon)_{\mathbb{C}}\right)^k}{k!}\right)\check{Q}_\epsilon\right)
-   \quad \left(\because\ \tfrac{1}{k!}\,z = z \cdot \tfrac{1}{k!} =: \tfrac{z}{k!}\ (z \in \mathbb{C}\text{。乗法の可換則と、}\blkref{scalar_exp_is_limit_of_partial_sums}\text{ の部分和の項の書き方})\ \text{を各項へ}\right) \\
+   \quad \left(\because\ \tfrac{1}{k!}\,z = z \cdot \tfrac{1}{k!} =: \tfrac{z}{k!}\ (z \in \mathbb{C}\text{。乗法の可換律と、}\blkref{scalar_exp_is_limit_of_partial_sums}\text{ の部分和の項の書き方})\ \text{を各項へ}\right) \\
 &= \exp\!\left(\check{g}(\epsilon)_{\mathbb{C}}\right)\check{Q}_\epsilon
    \quad \left(\because\ \blkref{scalar_exp_is_limit_of_partial_sums}\ (\text{係数の集合 } K \to \mathbb{C},\ x \to \check{g}(\epsilon)_{\mathbb{C}})\ \text{の極限 } c_N \to c \text{ を仮定に置いた}\ \blkref{scalar_sequence_times_matrix_converges}\ (n \to 2^{M_{\mathrm{col}}},\ c_N \to \textstyle\sum_{k=0}^{N}\frac{(\check{g}(\epsilon)_{\mathbb{C}})^k}{k!},\ c \to \exp(\check{g}(\epsilon)_{\mathbb{C}}),\ A \to \check{Q}_\epsilon)\ \text{と、}\blkref{matrix_norm_triangle_inequality}\ (4)\right) \\
 &= \left(\exp(\check{g}(\epsilon))\right)_{\mathbb{C}}\check{Q}_\epsilon

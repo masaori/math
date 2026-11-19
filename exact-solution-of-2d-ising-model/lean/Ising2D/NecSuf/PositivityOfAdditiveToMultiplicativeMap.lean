@@ -38,7 +38,7 @@
   平方の非負（`sq_nonneg`）は全順序を使うので、`f(x) ≥ 0`・`f(x) > 0` の値域は
   全順序環 `[Ring R] [LinearOrder R] [IsStrictOrderedRing R]` にした。`Ring` を `Semiring` に弱めると、
   `a ≤ b` から `b = a + c` を取り出す性質（`ExistsAddOfLE`）が無くなり `sq_nonneg` が通らない。`f(x) ≥ 0` の定義域は加法だけを使う（逆元は効かない）。
-  値域の乗法の可換則、値域が ℝ であること、完備性は効いていない。
+  値域の乗法の可換律、値域が ℝ であること、完備性は効いていない。
 -/
 import Mathlib.Algebra.Order.Ring.Defs
 

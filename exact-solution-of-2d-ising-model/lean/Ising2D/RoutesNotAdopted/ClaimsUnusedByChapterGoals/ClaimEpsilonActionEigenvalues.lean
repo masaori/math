@@ -86,7 +86,7 @@ theorem epsilon_action_eigenvalues_are_signs
       _ = epsilon M *ᵥ (lambda • f) := by rw [heigen] -- 本文: 内側の固有値方程式を代入
       _ = lambda • (epsilon M *ᵥ f) := hmulVec_smul _ _ _ -- 本文: 直前に成分から示した複素線型性
       _ = lambda • (lambda • f) := by rw [heigen] -- 本文: 外側の固有値方程式を代入
-      _ = (lambda * lambda) • f := by rw [smul_smul] -- 本文: 複素数倍の結合則
+      _ = (lambda * lambda) • f := by rw [smul_smul] -- 本文: 複素数倍の結合律
       _ = lambda ^ 2 • f := by rw [pow_two] -- 本文: 二乗の定義
   obtain ⟨j, hfj⟩ : ∃ j, f j ≠ 0 := by
     by_contra h

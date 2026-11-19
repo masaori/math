@@ -11,7 +11,7 @@
 | --- | --- |
 | `matrix_sub_eq_zero_iff`・`vec_sub_eq_zero_iff`（成分ごとの等号 → 差の定義 → 零行列の定義 → 移項 → 成分ごとの等号） | `sub_eq_zero_iff_matrix`・`sub_eq_zero_iff_vec` |
 | `identity_matrix_mulVec_apply`（積の定義 → 単位行列の成分 `δ_{ij}` → `j = i` の項を分ける → `δ` の値 → `1·x = x` → `0·x = 0` → `0` の有限和と `x + 0 = x`） | `one_mulVec_apply` |
-| `smul_mulVec_eq_apply`（積の定義 → スカラー倍の定義 → 乗法の結合則 → 左分配則 → 積の定義 → スカラー倍の定義） | `smul_mulVec_apply` |
+| `smul_mulVec_eq_apply`（積の定義 → スカラー倍の定義 → 乗法の結合律 → 左分配則 → 積の定義 → スカラー倍の定義） | `smul_mulVec_apply` |
 | `sub_mulVec_eq_apply`（差の定義 → 積の定義 → 有限和の差 → 分配則 → 差の定義 → 積の定義） | `sub_mulVec_apply` |
 
 ## 何が効いているか / 効いていないか
@@ -24,13 +24,13 @@
   単位行列には添字の等号の判定（`DecidableEq`）が要る。
 - `A - B = O ⟺ A = B` に効くのは、係数の加法群の構造（移項 `x - y = 0 ⟺ x = y`）だけである。乗法は現れない。
 - `I v = v` に効くのは、`1·x = x`・`0·x = 0`・`x + 0 = x` と有限和の取り出しだけである（`NonAssocSemiring`）。
-  乗法の結合則も可換則も、加法逆元も効いていない。
-- `(λB)v = λ(Bv)` に効くのは、乗法の結合則（`(λB_{ij})v_j = λ(B_{ij}v_j)`）と左分配則（`λ` を有限和の外へ出す）である
-  （`NonUnitalSemiring`）。**乗法の可換則は効いていない**: スカラーは左から掛け、行列とベクトルの積も左の行列の成分を左に置くので、
-  順序を入れ替える段が無い。結合則は外せない: 主張を添字 `Unit`（`1×1`）に制限すると乗法の結合則そのものが出る
+  乗法の結合律も可換律も、加法逆元も効いていない。
+- `(λB)v = λ(Bv)` に効くのは、乗法の結合律（`(λB_{ij})v_j = λ(B_{ij}v_j)`）と左分配則（`λ` を有限和の外へ出す）である
+  （`NonUnitalSemiring`）。**乗法の可換律は効いていない**: スカラーは左から掛け、行列とベクトルの積も左の行列の成分を左に置くので、
+  順序を入れ替える段が無い。結合則は外せない: 主張を添字 `Unit`（`1×1`）に制限すると乗法の結合律そのものが出る
   （`mul_assoc_of_smul_mulVec`）。
 - `Av - Bv = (A - B)v` に効くのは、有限和の差（加法群）と右分配則（`(x - y)z = xz - yz`）である（`NonUnitalNonAssocRing`）。
-  乗法の結合則・可換則・単位元は効いていない。
+  乗法の結合律・可換律・単位元は効いていない。
 - 複素数であること、体であることは効いていない。
 -/
 import Mathlib.Data.Matrix.Mul
@@ -85,7 +85,7 @@ theorem smul_mulVec_apply {R : Type*} [NonUnitalSemiring R] [Fintype κ] (lam : 
   calc ((lam • B) *ᵥ v) i
       = ∑ j, (lam • B) i j * v j := rfl                          -- 積の定義
     _ = ∑ j, (lam * B i j) * v j := rfl                          -- スカラー倍の定義
-    _ = ∑ j, lam * (B i j * v j) := by simp only [mul_assoc]     -- 乗法の結合則
+    _ = ∑ j, lam * (B i j * v j) := by simp only [mul_assoc]     -- 乗法の結合律
     _ = lam * ∑ j, B i j * v j := (Finset.mul_sum _ _ _).symm    -- 左分配則
     _ = lam * (B *ᵥ v) i := rfl                                  -- 積の定義
     _ = (lam • (B *ᵥ v)) i := rfl                                -- スカラー倍の定義

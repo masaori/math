@@ -21,9 +21,9 @@
 
 - 効くのは、`f` が積を積へ送ること（`hf`。具体版の `real_inclusion_preserves_product`）、`f(u(1)) = 1`・`f(u(0)) = s`
   （具体版の `ǔ^{(1)} := 1`・`ǔ^{(0)} := −1` と包含の略記）、`S` の単位元（`1z = z`・`z1 = z`）と冪の定義
-  （`z^0 = 1`・`z^{m+1} = z^m z`）だけである。`S` の積の結合則は効かない。`Monoid S` は mathlib の冪 `^`
+  （`z^0 = 1`・`z^{m+1} = z^m z`）だけである。`S` の積の結合律は効かない。`Monoid S` は mathlib の冪 `^`
   （`Monoid.npow`）を使うためだけに要る。
-- **`s = −1` であることは効かない。** `(−1)(−1) = 1` も `S` の積の可換則も使わない。`f` が `1` を `1` へ送ることも使わない。
+- **`s = −1` であることは効かない。** `(−1)(−1) = 1` も `S` の積の可換律も使わない。`f` が `1` を `1` へ送ることも使わない。
 - `R` は積の記号 `Mul R` を持つだけで、結合則・単位元・可換則は効かない。人手の有限積（`def_finite_product_of_real_numbers`）は
   左から掛ける有限積 `finProdLeft` で、定義の 2 つの式は `finProdLeft_zero`・`finProdLeft_succ` である
   （具体版の `Finset.prod` との一致は `real_finset_prod_eq_finProdLeft`）。
