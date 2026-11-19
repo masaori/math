@@ -210,6 +210,14 @@ check_01 の「実数の分配則」3 つ（`half_integer_phase_antiperiodicity 
 検査している等式は変えていない。`sage -c "__file__=…; load(…)"` で check_01・check_02 を再実行し、全段 PASS（段数 294・72、残差は前回と同じ）。
 `logs/` の 2 つのログを差し替え、`run-log.txt` を `logs/` の四つのログの連結で作り直した（前回のログとの差は段の名前の 5 行だけ）。
 
+## 前処理済みの `.sage.py` を消した更新（2026-11-19）
+
+git が追跡していた `check_0*_steps.sage.py` 4 つを消した。`sage <file>.sage` で実行すると sage が作る中間ファイルで、
+2026-07 から git に入っており、上の 2026-09-26 の節は `python <file>.sage.py` での実行にこれを使った（`sage -c "__file__=…; load(…)"` の実行では作られない）。
+リポジトリ直下の `.gitignore` は `*.sage.py` を無視し、`sagemath/tools/run-all-checks.sh` も実行対象から外している。
+check_01・check_02 の 2 つは元の `.sage` と食い違っていた（check_01 は 2026-11-01 の零行列の段と 2026-11-19 の段の名前の更新、check_02 は第 2 成分の 6 段が無い）。
+検算の正本は `.sage` 4 つで、ログ・`run-log.txt`・検査の等式は変えていない。消した後に check_04 を `sage -c` で実行し、全段 PASS だった。
+
 ## 結果
 
 実際の実行出力は `run-log.txt` に置いてある。要約:
