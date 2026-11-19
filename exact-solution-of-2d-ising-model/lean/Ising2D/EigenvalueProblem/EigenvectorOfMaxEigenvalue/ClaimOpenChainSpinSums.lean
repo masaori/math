@@ -13,14 +13,14 @@
 | 同 Step 1 の「両側の集合はともに `2^{M_col}` 個の元をもつ」 | 対応する補題は無い（全単射を逆写像で示すので、この文は使わない） |
 | 同 Step 1 の `ς(e) := 2e - 1`、`ς(1) = 1`、`ς(0) = -1`、`ς` と `ε ↦ (ς(ε_1),…)` は全単射 | `varsigma`・`coe_varsigma_one`・`coe_varsigma_zero`・`varsigmaEquiv`・`varsigmaWordEquiv` |
 | 同 Step 2 の準備の鎖（3 行）`exp(KE(s)) = … = Π_m exp(Kt_m(s))` | `exp_openChainEnergy_eq_prod_bondSpin`（同じ 3 段の calc） |
-| 同 Step 2 の鎖（左辺と 11 行） | `open_chain_partition_sum`（印 `人手 1`〜`人手 11` の calc） |
+| 同 Step 2 の鎖（左辺と 12 行） | `open_chain_partition_sum`（印 `人手 1`〜`人手 12` の calc） |
 | （運ぶ段。人手の行は無い）`{0,1}^r` の上の和を全体の上の `∑` で読む、`E(s)` を添字 `Fin (n + 1)` の和で読む | `binaryWordRealSum_eq_sum_univ`・`openChainEnergy_eq_sum_fin` |
 | `open_chain_endpoint_product_sum` の Step 1（`open_chain_partition_sum` の Step 1 の `Φ` と `ς` を使う） | `openChainPhiEquiv`・`varsigmaWordEquiv` |
 | 同 Step 2 の `M_col = 2` の鎖（3 行）`Π_{m=1}^{1}t_m(s) = t_1(s) = s(1)s(2) = s(1)s(M_col)` | `prod_bondSpin_of_two`（同じ 3 段の calc） |
 | 同 Step 2 の `M_col ≥ 3` の鎖（11 行）`Π_{m=1}^{M_col-1}t_m(s) = ⋯ = s(1)s(M_col)` | `prod_bondSpin_of_ge_three`（印 `人手 1`〜`人手 11` の calc）・二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` |
 | 同 Step 2 の `exp(KE(s))` の鎖（3 行） | `exp_openChainEnergy_eq_prod_bondSpin`（`open_chain_partition_sum` の準備の鎖と同じ行） |
 | 同 Step 2 の `s(M_col)s(1)exp(KE(s)) = ⋯ = Π_m(t_m(s)exp(Kt_m(s)))`（左辺と 4 行） | `endpoint_mul_exp_openChainEnergy_eq_prod`（同じ 4 段の calc） |
-| 同 Step 2 の最後の鎖（左辺と 14 行） | `open_chain_endpoint_product_sum`（印 `人手 1`〜`人手 14` の calc） |
+| 同 Step 2 の最後の鎖（左辺と 15 行） | `open_chain_endpoint_product_sum`（印 `人手 1`〜`人手 15` の calc） |
 | `open_chain_spin_sums_positive` | `open_chain_partition_sum_pos`・`open_chain_endpoint_product_sum_pos` |
 | `D0_G_diagonal_action` の `D_0f_{ι(s)}` の係数を `E(s)` で書いたもの（`trace_of_epsilon_V_plus` で使う） | `openChainD0_mulVec_basisVec_eq_energy` |
 
@@ -61,6 +61,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealNumbersSplitsOffFirstFactor
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealOnes
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealSumOfTwoEqualTermsIsTwice
 
 namespace Ising2D
 
@@ -250,7 +251,7 @@ theorem exp_openChainEnergy_eq_prod_bondSpin (K : ℝ) (s : SpinConf (n + 2)) :
 end OpenChainPartitionSum
 
 /-- **人手 `open_chain_partition_sum`**: `∑_{s∈𝔐} exp(KE(s)) = 2(2cosh K)^{M_col-1}`。
-人手の Step 2 の鎖（左辺と 11 行）と、印 `人手 1`〜`人手 11` で 1 対 1 の `calc` である。人手の `M_col` は Lean の `n + 2`。 -/
+人手の Step 2 の鎖（左辺と 12 行）と、印 `人手 1`〜`人手 12` で 1 対 1 の `calc` である。人手の `M_col` は Lean の `n + 2`。 -/
 theorem open_chain_partition_sum (hM : 2 ≤ M) (K : ℝ) :
     ∑ s : SpinConf M, Real.exp (K * openChainEnergy s) = 2 * (2 * Real.cosh K) ^ (M - 1) := by
   obtain ⟨n, rfl⟩ : ∃ n, M = n + 2 := ⟨M - 2, by omega⟩
@@ -285,15 +286,17 @@ theorem open_chain_partition_sum (hM : 2 ≤ M) (K : ℝ) :
         rw [mul_comm K (-1)]                            -- 人手 7: ℝ の乗法の可換則（`set_and_algebra_notation`）を各因子へ
     _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K + Real.exp (-K)) := by
         rw [real_minus_one_times_is_negation K]         -- 人手 8: `real_minus_one_times_is_negation`（`a → K`）を各因子へ
-    _ = 2 * ∏ m : Fin (n + 1), (Real.exp K + Real.exp (-K)) := by
-        rw [sum_spinVal, ← two_mul]                     -- 人手 9: `u` に依らない実数 `c` の `{-1,1}` 上の和は `c + c = 2c`
+    _ = ∏ m : Fin (n + 1), (Real.exp K + Real.exp (-K)) + ∏ m : Fin (n + 1), (Real.exp K + Real.exp (-K)) := by
+        rw [sum_spinVal]                                -- 人手 9: `u` に依らない実数 `c` の二元集合 `{-1,1}` 上の和は `c + c`
+    _ = 2 * ∏ m : Fin (n + 1), (Real.exp K + Real.exp (-K)) :=
+        real_sum_of_two_equal_terms_is_twice _          -- 人手 10: `real_sum_of_two_equal_terms_is_twice`（`a → Π_m(exp(K) + exp(-K))`）
     _ = 2 * ∏ m : Fin (n + 1), (2 * Real.cosh K) := by
         rw [Real.cosh_eq, mul_div_cancel₀ _ (two_ne_zero : (2 : ℝ) ≠ 0)]
-                                                        -- 人手 10: `def_cosh_sinh`（`x → K`）を各因子へ（`def_cosh_sinh` は Lean で
+                                                        -- 人手 11: `def_cosh_sinh`（`x → K`）を各因子へ（`def_cosh_sinh` は Lean で
                                                         -- 定義し直していないので mathlib の `Real.cosh_eq`。人手の `2cosh K` を
                                                         -- `exp K + exp(-K)` へ戻す `2·(b/2) = b` を同じ段に置く）
     _ = 2 * (2 * Real.cosh K) ^ (n + 2 - 1) := by
-        rw [Fin.prod_const]; rfl                        -- 人手 11: 主張の `x^n := Π_{j=1}^{n} x`（`x → 2cosh K`、`n → M_col-1`）。
+        rw [Fin.prod_const]; rfl                        -- 人手 12: 主張の `x^n := Π_{j=1}^{n} x`（`x → 2cosh K`、`n → M_col-1`）。
                                                         -- 指数の `n + 2 - 1` は Lean の自然数の引き算で、`n + 1` と同じ数
 
 /-! 以下、`open_chain_endpoint_product_sum` の Step 2 と本体の鎖を、`open_chain_partition_sum` と同じく人手の `M_col` を
@@ -383,7 +386,7 @@ end OpenChainEndpointProductSum
 
 /-- **人手 `open_chain_endpoint_product_sum`**:
 `∑_{s∈𝔐} s(M_col)s(1) exp(KE(s)) = 2(2sinh K)^{M_col-1}`。
-人手の最後の鎖（左辺と 14 行）と、印 `人手 1`〜`人手 14` で 1 対 1 の `calc` である。人手の `M_col` は Lean の `n + 2`。 -/
+人手の最後の鎖（左辺と 15 行）と、印 `人手 1`〜`人手 15` で 1 対 1 の `calc` である。人手の `M_col` は Lean の `n + 2`。 -/
 theorem open_chain_endpoint_product_sum (hM : 2 ≤ M) (K : ℝ) :
     ∑ s : SpinConf M, (s (lastSite M (by omega)) : ℝ) * (s (firstSite M (by omega)) : ℝ)
         * Real.exp (K * openChainEnergy s)
@@ -431,15 +434,17 @@ theorem open_chain_endpoint_product_sum (hM : 2 ≤ M) (K : ℝ) :
                                                         -- 人手 10: `real_minus_one_times_is_negation`（`a → exp(-K)`）を各因子へ
     _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (Real.exp K - Real.exp (-K)) := by
         rw [← sub_eq_add_neg]                           -- 人手 11: `def_real_difference`（`y → exp(K)`、`z → exp(-K)`）を右辺から左辺へ、各因子へ
-    _ = 2 * ∏ m : Fin (n + 1), (Real.exp K - Real.exp (-K)) := by
-        rw [sum_spinVal, ← two_mul]                     -- 人手 12: `u` に依らない実数 `c` の `{-1,1}` 上の和は `c + c = 2c`
+    _ = ∏ m : Fin (n + 1), (Real.exp K - Real.exp (-K)) + ∏ m : Fin (n + 1), (Real.exp K - Real.exp (-K)) := by
+        rw [sum_spinVal]                                -- 人手 12: `u` に依らない実数 `c` の二元集合 `{-1,1}` 上の和は `c + c`
+    _ = 2 * ∏ m : Fin (n + 1), (Real.exp K - Real.exp (-K)) :=
+        real_sum_of_two_equal_terms_is_twice _          -- 人手 13: `real_sum_of_two_equal_terms_is_twice`（`a → Π_m(exp(K) − exp(-K))`）
     _ = 2 * ∏ m : Fin (n + 1), (2 * Real.sinh K) := by
         rw [Real.sinh_eq, mul_div_cancel₀ _ (two_ne_zero : (2 : ℝ) ≠ 0)]
-                                                        -- 人手 13: `def_cosh_sinh`（`x → K`）を各因子へ（`def_cosh_sinh` は Lean で
+                                                        -- 人手 14: `def_cosh_sinh`（`x → K`）を各因子へ（`def_cosh_sinh` は Lean で
                                                         -- 定義し直していないので mathlib の `Real.sinh_eq`。人手の `2sinh K` を
                                                         -- `exp K - exp(-K)` へ戻す `2·(b/2) = b` を同じ段に置く）
     _ = 2 * (2 * Real.sinh K) ^ (n + 2 - 1) := by
-        rw [Fin.prod_const]; rfl                        -- 人手 14: 主張の `x^n := Π_{j=1}^{n} x`（`x → 2sinh K`、`n → M_col-1`）。
+        rw [Fin.prod_const]; rfl                        -- 人手 15: 主張の `x^n := Π_{j=1}^{n} x`（`x → 2sinh K`、`n → M_col-1`）。
                                                         -- 指数の `n + 2 - 1` は Lean の自然数の引き算で、`n + 1` と同じ数
 
 /-! ## `open_chain_spin_sums_positive` -/

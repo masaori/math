@@ -1,5 +1,5 @@
 # 対象ラベル: open_chain_partition_sum（Σ_{s∈𝔐} exp(KE(s)) = 2(2cosh K)^{M_col-1}）
-# 証明の Step 1（全単射 Φ）、Step 2 の準備の鎖（3 行）、主張の鎖（6 行）の全ての行と主張を確かめる。
+# 証明の Step 1（全単射 Φ）、Step 2 の準備の鎖（3 行）、主張の鎖（12 行）の全ての行と主張を確かめる。
 # 組合せの層（QQ[x, y]、exp(K) → x、exp(-K) → y）は M_col = 2..8 の全ての配置で厳密に、
 # 実数の層（RealBallField(200)）は M_col = 2..7、K ∈ K_SAMPLES で確かめる。
 load("../../_shared/open_chain_spin_sums.sage")
@@ -74,17 +74,20 @@ for M in range(2, 9):
                      for u in [-1, 1]], Rxy(0))
     L4 = finite_sum([finite_prod([w_sym(varsigma(1)) + w_sym(varsigma(0)) for m in range(1, M)]) for u in [-1, 1]], Rxy(0))
     L8 = finite_sum([finite_prod([X + Y for m in range(1, M)]) for u in [-1, 1]], Rxy(0))
-    L9 = 2 * finite_prod([X + Y for m in range(1, M)])
+    L9 = finite_prod([X + Y for m in range(1, M)]) + finite_prod([X + Y for m in range(1, M)])
+                                                # u に依らない c の二元集合 {-1,1} 上の和は c + c
+    L10 = 2 * finite_prod([X + Y for m in range(1, M)])
+                                                # real_sum_of_two_equal_terms_is_twice（a → Π_m(x + y)）
     coshK = (X + Y) / 2                         # def_cosh_sinh（exp(K) → x、exp(-K) → y）
-    L10 = 2 * finite_prod([2 * coshK for m in range(1, M)])
-    L11 = 2 * (2 * coshK) ^ (M - 1)            # Sage の冪（有限積とは別の経路）
-    chain = [L1, L2, L3, L4, L8, L9, L10, L11]
+    L11 = 2 * finite_prod([2 * coshK for m in range(1, M)])
+    L12 = 2 * (2 * coshK) ^ (M - 1)            # Sage の冪（有限積とは別の経路）
+    chain = [L1, L2, L3, L4, L8, L9, L10, L11, L12]
     for a, b in zip(chain, chain[1:]):
         assert a == b, M
         count += 1
-    if L11 != 2 * (2 * coshK) ^ M:
+    if L12 != 2 * (2 * coshK) ^ M:
         neg_power += 1
-    if L11 != 2 * (X - Y) ^ (M - 1):
+    if L12 != 2 * (X - Y) ^ (M - 1):
         neg_sinh += 1
 
 # 主張の鎖の 7 行目・8 行目の根拠（K ∈ K_SAMPLES ⊂ ℚ で厳密に）: 乗法の可換則 K·(-1) = (-1)·K と
@@ -109,10 +112,12 @@ for M in range(2, 8):
         L6 = finite_sum([finite_prod([rexp(RK) + rexp(RK * (-1)) for m in range(1, M)]) for u in [-1, 1]], RB(0))
         L7 = finite_sum([finite_prod([rexp(RK) + rexp((-1) * RK) for m in range(1, M)]) for u in [-1, 1]], RB(0))
         L8 = finite_sum([finite_prod([rexp(RK) + rexp(-RK) for m in range(1, M)]) for u in [-1, 1]], RB(0))
-        L9 = 2 * finite_prod([rexp(K) + rexp(-K) for m in range(1, M)])
-        L10 = 2 * finite_prod([2 * rcosh_def(K) for m in range(1, M)])
-        L11 = 2 * (2 * rcosh_def(K)) ^ (M - 1)
-        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11]
+        L9 = (finite_prod([rexp(RK) + rexp(-RK) for m in range(1, M)])
+              + finite_prod([rexp(RK) + rexp(-RK) for m in range(1, M)]))   # 二元集合 {-1,1} 上の和は c + c
+        L10 = 2 * finite_prod([rexp(RK) + rexp(-RK) for m in range(1, M)])     # real_sum_of_two_equal_terms_is_twice
+        L11 = 2 * finite_prod([2 * rcosh_def(K) for m in range(1, M)])
+        L12 = 2 * (2 * rcosh_def(K)) ^ (M - 1)
+        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, L12]
         for a, b in zip(chain, chain[1:]):
             assert same(a, b), (M, K)
             count += 1

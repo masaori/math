@@ -609,6 +609,7 @@ export const ALL_LABELS = [
   "real_product_of_inverses_is_inverse_of_product",
   "real_product_of_nonzero_is_nonzero",
   "real_scalar_multiple_of_real_entry_matrix_has_real_entries",
+  "real_sum_of_two_equal_terms_is_twice",
   "real_sum_over_binary_words_distributes_in_left_factor",
   "real_symmetric_matrix_is_hermitian",
   "real_symmetric_matrix_moves_between_factors_of_sum_of_products",

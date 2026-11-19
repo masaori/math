@@ -1,6 +1,6 @@
 # 対象ラベル: open_chain_endpoint_product_sum（Σ_{s∈𝔐} s(M_col)s(1) exp(KE(s)) = 2(2sinh K)^{M_col-1}）
 # 証明の Step 1（open_chain_partition_sum の Φ）、Step 2 の M_col = 2 の鎖（3 行）と M_col ≥ 3 の鎖（11 行）、
-# 被加数の鎖（4 行）、主張の鎖（6 行）の全ての行と主張を確かめる。
+# 被加数の鎖（4 行）、主張の鎖（15 行）の全ての行と主張を確かめる。
 # 端点因子の鎖は ZZ で厳密に、組合せの層（QQ[x, y]、exp(K) → x、exp(-K) → y）は M_col = 2..8 の全ての配置で厳密に、
 # 実数の層（RealBallField(200)）は M_col = 2..7、K ∈ K_SAMPLES で確かめる。
 load("../../_shared/open_chain_spin_sums.sage")
@@ -134,11 +134,14 @@ for M in range(2, 9):
     L4 = finite_sum([finite_prod([varsigma(1) * w_sym(varsigma(1)) + varsigma(0) * w_sym(varsigma(0)) for m in range(1, M)])
                      for u in [-1, 1]], Rxy(0))
     L11 = finite_sum([finite_prod([X - Y for m in range(1, M)]) for u in [-1, 1]], Rxy(0))
-    L12 = 2 * finite_prod([X - Y for m in range(1, M)])
+    L12 = finite_prod([X - Y for m in range(1, M)]) + finite_prod([X - Y for m in range(1, M)])
+                                                # u に依らない c の二元集合 {-1,1} 上の和は c + c
+    L13 = 2 * finite_prod([X - Y for m in range(1, M)])
+                                                # real_sum_of_two_equal_terms_is_twice（a → Π_m(x − y)）
     sinhK = (X - Y) / 2                         # def_cosh_sinh（exp(K) → x、exp(-K) → y）
-    L13 = 2 * finite_prod([2 * sinhK for m in range(1, M)])
-    L14 = 2 * (2 * sinhK) ^ (M - 1)
-    chain = [L1, L2, L3, L4, L11, L12, L13, L14]
+    L14 = 2 * finite_prod([2 * sinhK for m in range(1, M)])
+    L15 = 2 * (2 * sinhK) ^ (M - 1)
+    chain = [L1, L2, L3, L4, L11, L12, L13, L14, L15]
     for a, b in zip(chain, chain[1:]):
         assert a == b, M
         count += 1
@@ -148,9 +151,9 @@ for M in range(2, 9):
     count += 1
     # 否定コントロール: 端点因子を落とすと cosh の側になる、二元集合の和で符号を落とすと外れる
     L0_no_endpoint = finite_sum([finite_prod([w_sym(t(s, m)) for m in range(1, M)]) for s in S], Rxy(0))
-    if L0_no_endpoint != L14:
+    if L0_no_endpoint != L15:
         neg_no_endpoint += 1
-    if L14 != 2 * (X + Y) ^ (M - 1):
+    if L15 != 2 * (X + Y) ^ (M - 1):
         neg_sign += 1
 
 # 主張の鎖の 8 行目・9 行目の根拠（K ∈ K_SAMPLES ⊂ ℚ で厳密に）: 乗法の可換則 K·(-1) = (-1)·K と
@@ -184,10 +187,12 @@ for M in range(2, 8):
         L9 = outer(lambda: rexp(RK) + (-1) * rexp(-RK))
         L10 = outer(lambda: rexp(RK) + (-rexp(-RK)))
         L11 = outer(lambda: rexp(RK) - rexp(-RK))
-        L12 = 2 * finite_prod([rexp(K) - rexp(-K) for m in range(1, M)])
-        L13 = 2 * finite_prod([2 * rsinh_def(K) for m in range(1, M)])
-        L14 = 2 * (2 * rsinh_def(K)) ^ (M - 1)
-        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, L12, L13, L14]
+        L12 = (finite_prod([rexp(RK) - rexp(-RK) for m in range(1, M)])
+               + finite_prod([rexp(RK) - rexp(-RK) for m in range(1, M)]))  # 二元集合 {-1,1} 上の和は c + c
+        L13 = 2 * finite_prod([rexp(RK) - rexp(-RK) for m in range(1, M)])   # real_sum_of_two_equal_terms_is_twice
+        L14 = 2 * finite_prod([2 * rsinh_def(K) for m in range(1, M)])
+        L15 = 2 * (2 * rsinh_def(K)) ^ (M - 1)
+        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, L12, L13, L14, L15]
         if K == 0:
             # 値が 0 になるので相対の半径の判定が効かない。0 を含むことと半径の絶対値で見る
             for v in chain:

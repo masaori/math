@@ -2956,6 +2956,49 @@ a\cdot\tfrac12
     },
   },
   {
+    id: "calculation_formulae_claim_real_sum_of_two_equal_terms_is_twice",
+    kind: "claim",
+    title: { text: "同じ実数を二つ足すと 2 倍になる" },
+    labels: ["real_sum_of_two_equal_terms_is_twice"],
+    statement: [
+      paragraph([
+        math(String.raw`a \in \mathbb{R}`),
+        " とする。和・積・",
+        math(String.raw`1`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        " である。このとき",
+      ]),
+      displayMath(String.raw`a + a = 2\cdot a`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+a + a
+&= 1\cdot a + 1\cdot a
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ 2 か所に同時適用}\bigr)\\
+&= (1 + 1)\cdot a
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (x+y)t = xt+yt\ (x \to 1,\ y \to 1,\ t \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 2\cdot a
+&&\bigl(\because\ \blkref{def_real_two}\ \text{の}\ 2 := 1 + 1\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w25)。開鎖のスピン和の c + c = 2c の件）: 原文（Typst）に対応ブロックは無い。open_chain_partition_sum・open_chain_endpoint_product_sum の最後の鎖が「u に依らない実数 c の二元集合 {-1,1} 上の和は c + c = 2c」を名前だけで根拠にしていたので、後半の c + c = 2c を示す主張として足した。Lean の具体版は Ising2D.real_sum_of_two_equal_terms_is_twice（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealSumOfTwoEqualTermsIsTwice.lean）、必要十分版は Ising2D.NecSuf.add_self_eq_two_mul'（NecSuf/AddSelfEqTwoMul.lean）。数値検証: sagemath/check/real_sum_of_two_equal_terms_is_twice/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_inverse_of_positive_is_positive",
     kind: "claim",
     title: { text: "正の実数の乗法の逆元は正" },

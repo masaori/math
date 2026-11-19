@@ -250,8 +250,8 @@
 | `Ising2D.binaryWordRealSum_eq_sum_univ` / `openChainEnergy_eq_sum_fin` | 運ぶ段（人手の行は無い）: `{0,1}^r` の上の和を全体の上の和で読む、`E(s)` を添字 `Fin (n + 1)` の和で読む | `open_chain_partition_sum` の Step 2 |
 | `Ising2D.prod_bondSpin_of_two` / `prod_bondSpin_of_ge_three` / `prod_bondSpin_eq_first_mul_last` | `Π_m t_m(s) = s(1)s(M_col)`（`M_col = 2` の 3 段と `M_col ≥ 3` の 11 段。因子の並べ替えは `finite_product_of_real_products`・`finite_product_of_real_numbers_splits_off_first_factor`・`def_finite_product_of_real_numbers` の帰納の式・ℝ の乗法の結合則（`set_and_algebra_notation`）の段） | `open_chain_endpoint_product_sum` の Step 2 |
 | `Ising2D.endpoint_mul_exp_openChainEnergy_eq_prod` | `s(M_col)s(1)exp(KE(s)) = Π_m(t_m(s)exp(Kt_m(s)))`（4 段） | `open_chain_endpoint_product_sum` の Step 2 |
-| **`Ising2D.open_chain_partition_sum`** | **`∑_s exp(KE(s)) = 2(2cosh K)^{M_col-1}`**（左辺と 11 行の calc） | **主張本体** |
-| **`Ising2D.open_chain_endpoint_product_sum`** | **`∑_s s(M_col)s(1)exp(KE(s)) = 2(2sinh K)^{M_col-1}`**（左辺と 14 行の calc） | **主張本体** |
+| **`Ising2D.open_chain_partition_sum`** | **`∑_s exp(KE(s)) = 2(2cosh K)^{M_col-1}`**（左辺と 12 行の calc。`u` に依らない `c` の `{-1,1}` 上の和の段と `c + c = 2c` の段（`real_sum_of_two_equal_terms_is_twice`）は別の段） | **主張本体** |
+| **`Ising2D.open_chain_endpoint_product_sum`** | **`∑_s s(M_col)s(1)exp(KE(s)) = 2(2sinh K)^{M_col-1}`**（左辺と 15 行の calc。`u` に依らない `c` の `{-1,1}` 上の和の段と `c + c = 2c` の段（`real_sum_of_two_equal_terms_is_twice`）は別の段） | **主張本体** |
 | `Ising2D.open_chain_partition_sum_pos` / `open_chain_endpoint_product_sum_pos` | 二つのスピン和は正（`K > 0`） | `open_chain_spin_sums_positive` |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReduction.lean`（ラベル `trace_of_epsilon_V_plus` の Step 1・Step 2）
@@ -340,7 +340,7 @@
 | `NecSuf.star_projOn` | `n_i` が可換な自己共役族なら `Q_ε^* = Q_ε` | `StarRing A` | `check_number_operator_is_hermitian` (4) |
 | `NecSuf.smul_left_cancel_of_ne_zero` | `x ≠ 0` ⇒ `ηx = η'x ⇒ η = η'` | `Module 𝕜 A`（`𝕜` は体） | `epsilon_eigenvalue_on_check_Q` (1) |
 | `NecSuf.sum_powerset_signed_exp` | `∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)` | ℝ の `exp`/`sinh` だけ | 旧い分け方の `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2（冪集合の上の和を一度に積へ変える別の手順。いまの具体版は Step 2〜5 の鎖で、これを使っていない） |
-| **`NecSuf.open_chain_weighted_sum`**（`NecSuf/OpenChainSpinSum.lean`。前半は `open_chain_weighted_sum_eq_sum_prod`、`{-1,1}` の上の和は `sum_spinVal_const`、展開の段は `prod_add_eq_binWordSum'`・`finset_prod_eq_finProdLeft'`、`ς` の値は `varsigma_one_eq`・`varsigma_zero_eq`） | **`∑_{s∈𝔐} ∏_{m=1}^{M_col-1} g(t_m(s)) = 2(g(1)+g(-1))^{M_col-1}`**（具体版の最後の鎖の `人手 2`〜`人手 5` と `{-1,1}` の上の和・冪と同じ並び） | **重みの値は可換半環（加法・乗法の可換モノイドと二つの分配律。零の吸収律は不要）。`M_col ≥ 2` は具体版と同じ `n + 2` の形** | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` |
+| **`NecSuf.open_chain_weighted_sum`**（`NecSuf/OpenChainSpinSum.lean`。前半は `open_chain_weighted_sum_eq_sum_prod`、`{-1,1}` の上の和は `sum_spinVal_const`（`c + c = 2c` の段は `add_self_eq_two_mul'`）、展開の段は `prod_add_eq_binWordSum'`・`finset_prod_eq_finProdLeft'`、`ς` の値は `varsigma_one_eq`・`varsigma_zero_eq`） | **`∑_{s∈𝔐} ∏_{m=1}^{M_col-1} g(t_m(s)) = 2(g(1)+g(-1))^{M_col-1}`**（具体版の最後の鎖の `人手 2`〜`人手 5` と `{-1,1}` の上の和・冪と同じ並び） | **重みの値は可換半環（加法・乗法の可換モノイドと二つの分配律。零の吸収律は不要）。`M_col ≥ 2` は具体版と同じ `n + 2` の形** | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` |
 | `NecSuf.prod_mul_succ_eq_first_mul_last` / `prod_mul_succ_of_two` / `prod_mul_succ_of_ge_three`（同） | 中間のサイトで `x(m)x(m) = 1` なら `∏_{m=1}^{M_col-1} x(m)x(m+1) = x(1)x(M_col)`（具体版の `M_col = 2` の 3 段と `M_col ≥ 3` の鎖と同じ並び） | 可換モノイド（`M_col = 2` の鎖は `x·x = 1` を使わない。両端の `x·x = 1` は不要。積の並べ替えは `finset_prod_mul_distrib'`・`finset_prod_succ_first'`・`mul_assoc`、単位元の段は `finset_prod_const_one'`・`mul_one`） | `open_chain_endpoint_product_sum` の Step 2 |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」

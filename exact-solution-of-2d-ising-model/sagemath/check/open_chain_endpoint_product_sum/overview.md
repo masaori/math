@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 - ブロック: `closing_005_claim_open_chain_endpoint_product_sum`（Σ_{s∈𝔐} s(M_col)s(1) exp(KE(s)) = 2(2sinh K)^{M_col−1}、K ∈ ℝ）
-- 範囲: Step 1（Φ の復元）、Step 2 の M_col = 2 の鎖（3 行）と M_col ≥ 3 の鎖（11 行）、exp(KE(s)) の鎖（3 行）、被加数の鎖（4 行）、主張の鎖（14 行）の全ての行と主張。
+- 範囲: Step 1（Φ の復元）、Step 2 の M_col = 2 の鎖（3 行）と M_col ≥ 3 の鎖（11 行）、exp(KE(s)) の鎖（3 行）、被加数の鎖（4 行）、主張の鎖（15 行）の全ての行と主張。
 
 ## 組み方
 
@@ -37,7 +37,7 @@
 | 被加数の鎖 1 行目（ℝ の乗法の可換則 s(M_col)s(1) = s(1)s(M_col)、set_and_algebra_notation）・2 行目（Step 2 の等式）・3 行目（exp(KE(s)) の鎖）・4 行目（finite_product_of_real_products） | 球 |
 | 主張の鎖 1〜4 行目（直前の等式・Φ による付け替え・ς による付け替え・expansion_of_finite_product_of_two_term_sums_of_real_numbers） | 厳密（QQ[x,y]）と球 |
 | 主張の鎖 5〜11 行目（ς の値・ℝ の乗法の単位元 1·exp(K·1) = exp(K·1)・K·1 = K（set_and_algebra_notation の 1·p = p・p·1 = p）・ℝ の乗法の可換則 K(−1) = (−1)K・real_minus_one_times_is_negation の (−1)K = −K・real_minus_one_times_is_negation の (−1)exp(−K) = −exp(−K)・def_real_difference） | 球。8・9 行目の根拠の等式は K ∈ K_SAMPLES で厳密（QQ）、10・11 行目の根拠の等式は QQ[x,y] で厳密 |
-| 主張の鎖 12〜14 行目（c + c = 2c・def_cosh_sinh・冪の定義） | 厳密と球 |
+| 主張の鎖 12〜15 行目（u に依らない c の二元集合 {−1,1} 上の和は c + c・real_sum_of_two_equal_terms_is_twice（a → Π_m(exp(K) − exp(−K))）・def_cosh_sinh・冪の定義） | 厳密と球 |
 | 主張 | 球。右辺は Sage の sinh |
 
 否定コントロール（種類ごとに外れる件数を確かめる）: 端点の対にならない因子 s(2) を一つ残すと s(2) = −1 の配置で外れる（252 件）、端点因子を落とすと cosh の側の値になって外れる（7 件）、
@@ -50,7 +50,7 @@ Step 2（M_col ≥ 3）の可換則を使う 2 行目・8 行目は自由代数�
 
 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|
-| `check_chain.sage` | Step 1・Step 2・被加数・主張の鎖の全ての行、主張、否定コントロール | 実行済み | PASS（23063 件、否定コントロール 318 件） |
+| `check_chain.sage` | Step 1・Step 2・被加数・主張の鎖の全ての行、主張、否定コントロール | 実行済み | PASS（23118 件、否定コントロール 318 件） |
 
 ## 実行方法
 
