@@ -47694,7 +47694,7 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
                   ]),
                   displayMath(String.raw`\begin{aligned}
 0&\in F_0\subseteq F_\infty&&\bigl(\because\ F_0\text{ は部分体、和集合の定義}\bigr)\\
-1&\in F_0\subseteq F_\infty&&\bigl(\because\ F_0\text{ は部分体、和集合の定義}\bigr).
+1&\in F_0\subseteq F_\infty&&\bigl(\because\ F_0\text{ は部分体、和集合の定義}\bigr)
 \end{aligned}`),
                   paragraph([
                     "任意の ", math(String.raw`x,y\in F_\infty`), " を取る。",
@@ -47709,7 +47709,7 @@ y&\in F_k&&\bigl(\because\ j\le k,\ F_j\subseteq F_k\bigr)\\
 x+y&\in F_k&&\bigl(\because\ F_k\text{ は部分体}\bigr)\\
 x+y&\in F_\infty&&\bigl(\because\ F_k\subseteq F_\infty\bigr)\\
 x\cdot y&\in F_k&&\bigl(\because\ F_k\text{ は部分体}\bigr)\\
-x\cdot y&\in F_\infty&&\bigl(\because\ F_k\subseteq F_\infty\bigr).
+x\cdot y&\in F_\infty&&\bigl(\because\ F_k\subseteq F_\infty\bigr)
 \end{aligned}`),
                   paragraph([
                     "任意の ", math(String.raw`x\in F_\infty`), " には ",
@@ -47717,7 +47717,7 @@ x\cdot y&\in F_\infty&&\bigl(\because\ F_k\subseteq F_\infty\bigr).
                   ]),
                   displayMath(String.raw`\begin{aligned}
 -x&\in F_i&&\bigl(\because\ F_i\text{ は部分体}\bigr)\\
--x&\in F_\infty&&\bigl(\because\ F_i\subseteq F_\infty\bigr).
+-x&\in F_\infty&&\bigl(\because\ F_i\subseteq F_\infty\bigr)
 \end{aligned}`),
                   paragraph([
                     "さらに ", math(String.raw`x\ne 0`), " の場合に限り、部分体 ",
@@ -47725,7 +47725,7 @@ x\cdot y&\in F_\infty&&\bigl(\because\ F_k\subseteq F_\infty\bigr).
                   ]),
                   displayMath(String.raw`\begin{aligned}
 x^{-1}&\in F_i&&\bigl(\because\ x\ne0,\ F_i\text{ は部分体}\bigr)\\
-x^{-1}&\in F_\infty&&\bigl(\because\ F_i\subseteq F_\infty\bigr).
+x^{-1}&\in F_\infty&&\bigl(\because\ F_i\subseteq F_\infty\bigr)
 \end{aligned}`),
                   paragraph([
                     "これで部分体の六つの閉性をすべて示した。議論は ",
@@ -48576,6 +48576,77 @@ u+vb&=w+vb&&\bigl(\because\ v=t\bigr)\\
 u&=w&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の消去律}\bigr)
 \end{aligned}`),
                 paragraph(["実数体・複素数体は使わない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "zero_pinching_heading_quadratic_conjugate_square_sum_identity",
+        labels: [],
+        title: { text: "平方根を添加した部分体の共役平方和の恒等式" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_quadratic_conjugate_square_sum_identity",
+            focus: {
+              id: "zero_pinching_claim_quadratic_conjugate_square_sum_identity",
+              kind: "claim",
+              title: { text: "共役した二つの重み付き平方和の和は二倍の基礎体の平方和に等しい" },
+              labels: ["claim_quadratic_conjugate_square_sum_identity"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/quadratic-conjugate-square-sum-identity"],
+              lean: [
+                "Ising2DLambda.FisherZero.quadraticConjugateSquareSumIdentity",
+                "Ising2DLambda.NecSuf.FisherZero.quadraticConjugateSquareSumIdentity",
+                "Ising2DLambda.FisherZero.quadraticConjugateSquareSumIdentity_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subseteq\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`a\in F`), "、", math(String.raw`b\in\overline{\mathbb Q}`),
+                " とし、", math(String.raw`b^2=a`), " とする。",
+                math(String.raw`I`), " を有限集合、",
+                math(String.raw`c,u,v:I\to F`), " を写像とする。このとき次の等号が ",
+                math(String.raw`\overline{\mathbb Q}`), " で成り立つ。",
+              ]), displayMath(String.raw`\sum_{i\in I}c(i)(u(i)+v(i)b)^2+\sum_{i\in I}c(i)(u(i)-v(i)b)^2=2\sum_{i\in I}c(i)\bigl(u(i)^2+a v(i)^2\bigr)`)],
+              proof: [
+                paragraph([
+                  "任意の ", math(String.raw`i\in I`), " を固定し、",
+                  math(String.raw`r:=u(i)\in F`), "、",
+                  math(String.raw`s:=v(i)b\in\overline{\mathbb Q}`),
+                  " と置く。平方の展開と加法の消去を一行ずつ行う。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+c(i)(r+s)^2+c(i)(r-s)^2
+&=c(i)\bigl((r+s)^2+(r-s)^2\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=c(i)\bigl((r^2+2rs+s^2)+(r^2-2rs+s^2)\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の平方の展開}\bigr)\\
+&=c(i)(2r^2+2s^2)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の消去律}\bigr)\\
+&=2c(i)(r^2+s^2)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=2c(i)\bigl(u(i)^2+v(i)^2b^2\bigr)
+&&\bigl(\because\ r=u(i),\ s=v(i)b\bigr)\\
+&=2c(i)\bigl(u(i)^2+a v(i)^2\bigr)
+&&\bigl(\because\ b^2=a\bigr)
+\end{aligned}`),
+                paragraph(["各添字の等号を有限和に移す。"]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{i\in I}c(i)(u(i)+v(i)b)^2+\sum_{i\in I}c(i)(u(i)-v(i)b)^2
+&=\sum_{i\in I}\bigl(c(i)(u(i)+v(i)b)^2+c(i)(u(i)-v(i)b)^2\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の有限和の加法}\bigr)\\
+&=\sum_{i\in I}2c(i)\bigl(u(i)^2+a v(i)^2\bigr)
+&&\bigl(\because\ \text{上の添字ごとの等号}\bigr)\\
+&=2\sum_{i\in I}c(i)\bigl(u(i)^2+a v(i)^2\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の有限和の分配律}\bigr)
+\end{aligned}`),
+                paragraph(["すべて代数的数体内の有限和であり、実数体・複素数体は使わない。"]),
               ],
             },
           },

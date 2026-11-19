@@ -91,7 +91,14 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
   },
   claim_square_root_adjoined_weighted_square_sum_excludes_minus_one: {
     title: "平方根を添加した部分体の正錐重み付き平方和は負の単位元を含まない",
-    dependsOn: ["claim_square_root_adjoined_subfield_quadratic_representation"],
+    dependsOn: [
+      "claim_square_root_adjoined_subfield_quadratic_representation",
+      "claim_quadratic_conjugate_square_sum_identity",
+    ],
+  },
+  claim_quadratic_conjugate_square_sum_identity: {
+    title: "共役した重み付き平方和の恒等式",
+    dependsOn: [],
   },
   claim_square_root_adjoined_positive_cone_extension: {
     title: "正の元の平方根を添加した部分体への正錐の延長",

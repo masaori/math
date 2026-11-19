@@ -533,6 +533,7 @@ export const ALL_LABELS = [
   "claim_qbar_variable_permutation_coefficient",
   "claim_quadratic_addition_mem",
   "claim_quadratic_addition_representation",
+  "claim_quadratic_conjugate_square_sum_identity",
   "claim_quadratic_field_set_is_subfield",
   "claim_quadratic_inverse_mem",
   "claim_quadratic_linear_values_closed",
