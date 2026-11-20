@@ -19,13 +19,13 @@
 
 確かめるのは次の 7 で、人手証明の段に 1 対 1 で対応する。
 
-1. 鎖の第 2 段。$\chi_U=\prod_{O\in\mathcal{O}_L}(t^{\lvert O\rvert}+u)$
+1. 鎖の第 2 段。$\chi_U=\prod_{O\in\mathcal{O}_L}(t^{\lvert O\rvert}+\iota(-\kappa(1)))$
    （`claim_shift_char_orbit_factorization`）。$\chi_U$ は特性行列の行列式として直に計算して
    突き合わせる。
 2. 鎖の第 3 段。$\mathrm{ev}_{\xi,z}(\prod_O f_O)=\prod_O\mathrm{ev}_{\xi,z}(f_O)$
    （`claim_second_evaluation_prod`）。
 3. 0 である因子が取れること（`claim_qbar_prod_eq_zero`）。値が 0 になる $(\xi,z)$ について、
-   $\mathrm{ev}_{\xi,z}(t^{\lvert O_0\rvert}+u)=0$ を満たす軌道 $O_0$ が実際に取れること。
+   $\mathrm{ev}_{\xi,z}(t^{\lvert O_0\rvert}+\iota(-\kappa(1)))=0$ を満たす軌道 $O_0$ が実際に取れること。
 4. その因子から $z^{\lvert O_0\rvert}=1$ が出ること（`claim_orbit_factor_root`）。
 5. $\lvert O_0\rvert$ が $L$ を割り切ること（`claim_row_config_orbit_card` と
    `claim_row_config_minimal_period_divides_L`。ここでは全軌道について確かめる）。
@@ -63,4 +63,5 @@ sage sagemath/check/shift-char-root-of-unity/check.sage
 
 | 実行日 | 結果 |
 |---|---|
+| 2026-11-20 | 通過。$L=1,\dots,6$ の各値で式鎖と零因子の選択を再確認した。 |
 | 2026-08-10 | 通過。1〜7 のすべてが成り立った。値が 0 になる $(\xi,z)$ は $L=1$ で 3 組から $L=6$ で 18 組、ならない組は各 $L$ で 12 組であり、主張は空虚でない |

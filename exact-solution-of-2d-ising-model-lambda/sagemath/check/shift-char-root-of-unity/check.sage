@@ -7,6 +7,7 @@
 #
 # 計算はすべて厳密に行う（浮動小数点は使わない）。ZZ[x][t] の中の計算と、
 # 代数的数の全体 Qbar を表す SageMath の QQbar の中の計算だけである。
+# この検算内の u は iota(-kappa(1)) の局所変数で、本文の記号ではない。
 #
 # 何を確かめるか（人手証明の段に 1 対 1 で対応させる）:
 #   1. 鎖の第 2 段。chi_U = prod_{O in O_L} (t^{|O|} + u)（claim_shift_char_orbit_factorization）。
@@ -33,8 +34,9 @@
 #   本文の主張は任意の L と任意の (xi, z) についてのものなので、有限個で確かめたことは証明ではない。
 
 import os
+import sys
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 load(os.path.join(_dir, '..', '..', '_shared', 'defs.sage'))
 
 

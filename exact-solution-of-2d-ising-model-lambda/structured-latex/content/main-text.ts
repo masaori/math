@@ -29575,11 +29575,6 @@ t^{L}+u
                       ],
                       proof: [
                         paragraph([
-                          "以下 ",
-                          math(String.raw`u:=\iota\bigl(-\kappa(1)\bigr)\in\mathbb{Z}[x][t]`),
-                          " と書く。",
-                        ]),
-                        paragraph([
                           "まず 2 つの写像を置く。",
                           math(String.raw`a:\mathcal{O}_L\to\mathbb{Z}[x][t]`),
                           " を ",
@@ -29602,7 +29597,7 @@ t^{L}+u
                           "次に、任意の ",
                           math(String.raw`O\in\mathcal{O}_L`),
                           " について ",
-                          math(String.raw`a(O)\cdot h=t^{L}+u`),
+                          math(String.raw`a(O)\cdot h=t^{L}+\iota(-\kappa(1))`),
                           " を満たす ",
                           math(String.raw`h\in\mathbb{Z}[x][t]`),
                           " が存在するので（",
@@ -29627,9 +29622,7 @@ t^{L}+u
                         displayMath(String.raw`\begin{aligned}
 a(O)\cdot b(O)
 &=t^{L}+\iota\bigl(-\kappa(1)\bigr)
-&&(\because\ \blkref{claim_orbit_sum_divides_pow_L}\text{ の証人として }b(O)\text{ を選んだ})\\
-&=t^{L}+u
-&&(\because\ u\text{ の定義})
+&&(\because\ \blkref{claim_orbit_sum_divides_pow_L}\text{ の証人として }b(O)\text{ を選んだ})
 \end{aligned}`),
                         paragraph([
                           "そのうえで ",
@@ -29644,8 +29637,8 @@ a(O)\cdot b(O)
 &&(\because\ g\ \text{の定義})\\
 &=\Bigl(\prod_{O\in\mathcal{O}_L}a(O)\Bigr)\cdot\prod_{O\in\mathcal{O}_L}b(O)
 &&(\because\ \blkref{claim_shift_char_orbit_product}\ \text{と}\ a\ \text{の定義})\\
-&=\bigl(t^{L}+u\bigr)^{\lvert\mathcal{O}_L\rvert}
-&&(\because\ \blkref{claim_prod_pair_eq_pow_card}\ \text{の}\ s=\mathcal{O}_L,\ c=t^{L}+u\ \text{の場合})
+&=\bigl(t^{L}+\iota(-\kappa(1))\bigr)^{\lvert\mathcal{O}_L\rvert}
+&&(\because\ \blkref{claim_prod_pair_eq_pow_card}\ \text{の}\ s=\mathcal{O}_L,\ c=t^{L}+\iota(-\kappa(1))\ \text{の場合})
 \end{aligned}`),
                         paragraph([
                           "現れるのは有限集合 ",
@@ -30328,9 +30321,6 @@ const chapter_algebraic_eigenvalue = defineSection({
                   ],
                   proof: [
                     paragraph([
-                      "以下 ",
-                      math(String.raw`u:=\iota\bigl(-\kappa(1)\bigr)\in\mathbb{Z}[x][t]`),
-                      " と書く（",
                       math(String.raw`\iota`),
                       " は ",
                       ref("def_second_constant_embedding"),
@@ -30338,24 +30328,24 @@ const chapter_algebraic_eigenvalue = defineSection({
                       math(String.raw`\kappa`),
                       " は ",
                       ref("def_constant_polynomial"),
-                      "）。仮定 ",
+                      " で定めた写像である。仮定 ",
                       math(String.raw`\mathrm{ev}_{\xi,z}(\chi_U)=0`),
                       " を置く。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
 0&=\mathrm{ev}_{\xi,z}\bigl(\chi_U\bigr)
 &&\bigl(\because\ \text{仮定}\bigr)\\
-&=\mathrm{ev}_{\xi,z}\Bigl(\prod_{O\in\mathcal{O}_L}\bigl(t^{\lvert O\rvert}+u\bigr)\Bigr)
+&=\mathrm{ev}_{\xi,z}\Bigl(\prod_{O\in\mathcal{O}_L}\bigl(t^{\lvert O\rvert}+\iota(-\kappa(1))\bigr)\Bigr)
 &&\bigl(\because\ \blkref{claim_shift_char_orbit_factorization}\bigr)\\
-&=\prod_{O\in\mathcal{O}_L}\mathrm{ev}_{\xi,z}\bigl(t^{\lvert O\rvert}+u\bigr)
+&=\prod_{O\in\mathcal{O}_L}\mathrm{ev}_{\xi,z}\bigl(t^{\lvert O\rvert}+\iota(-\kappa(1))\bigr)
 &&\bigl(\because\ \blkref{claim_second_evaluation_prod}\bigr)
 \end{aligned}`),
                     paragraph([
                       ref("claim_qbar_prod_eq_zero"),
                       " を族 ",
-                      math(String.raw`O\mapsto\mathrm{ev}_{\xi,z}(t^{\lvert O\rvert}+u)`),
+                      math(String.raw`O\mapsto\mathrm{ev}_{\xi,z}(t^{\lvert O\rvert}+\iota(-\kappa(1)))`),
                       " へ当てて、",
-                      math(String.raw`\mathrm{ev}_{\xi,z}\bigl(t^{\lvert O_0\rvert}+u\bigr)=0`),
+                      math(String.raw`\mathrm{ev}_{\xi,z}\bigl(t^{\lvert O_0\rvert}+\iota(-\kappa(1))\bigr)=0`),
                       " を満たす ",
                       math(String.raw`O_0\in\mathcal{O}_L`),
                       " を 1 つ取る（",
