@@ -81,7 +81,7 @@ theorem sinh_two_Kc : Real.sinh (2 * Kc) = 1 := by
 theorem cosh_two_Kc : Real.cosh (2 * Kc) = Real.sqrt 2 := by
   have hsq : Real.cosh (2 * Kc) ^ 2 = 2 := by
     rw [cosh_sq_eq_one_add_sinh_sq, sinh_two_Kc]; norm_num
-  have hpos : 0 < Real.cosh (2 * Kc) := Real.cosh_pos _
+  have hpos : 0 < Real.cosh (2 * Kc) := cosh_pos_of_two_cosh_pos _
   have h := congrArg Real.sqrt hsq
   rwa [Real.sqrt_sq hpos.le] at h
 
@@ -107,7 +107,7 @@ noncomputable def kappaSecond (K : ℝ) : ℝ :=
 
 /-- 人手 `kappa_of_K_basic` (1) の証明の `(tanh)' = 1/cosh²`。`tanh = sinh/cosh` の商の微分。 -/
 theorem hasDerivAt_tanh_real (K : ℝ) : HasDerivAt Real.tanh (1 / Real.cosh K ^ 2) K := by
-  have hc : Real.cosh K ≠ 0 := ne_of_gt (Real.cosh_pos K)
+  have hc : Real.cosh K ≠ 0 := ne_of_gt (cosh_pos_of_two_cosh_pos K)
   have hfun : Real.tanh = Real.sinh / Real.cosh := by
     funext x; exact Real.tanh_eq_sinh_div_cosh x
   have h := (Real.hasDerivAt_sinh K).div (Real.hasDerivAt_cosh K) hc
@@ -124,8 +124,8 @@ theorem hasDerivAt_tanh_real (K : ℝ) : HasDerivAt Real.tanh (1 / Real.cosh K ^
 theorem hasDerivAt_Kstar {K : ℝ} (hK : 0 < K) :
     HasDerivAt Kstar (-(1 / Real.sinh (2 * K))) K := by
   have ht : 0 < Real.tanh K := tanh_pos hK
-  have hs : 0 < Real.sinh K := Real.sinh_pos_iff.2 hK
-  have hc : 0 < Real.cosh K := Real.cosh_pos K
+  have hs : 0 < Real.sinh K := real_sinh_pos_of_pos hK
+  have hc : 0 < Real.cosh K := cosh_pos_of_two_cosh_pos K
   -- `log` の微分と合成関数の微分
   have h := (HasDerivAt.log (hasDerivAt_tanh_real K) (ne_of_gt ht)).const_mul (-(1 / 2 : ℝ))
   have hfun : Kstar = fun x => -(1 / 2) * Real.log (Real.tanh x) := by
@@ -160,7 +160,7 @@ theorem hasDerivAt_kappaK {K : ℝ} (hK : 0 < K) : HasDerivAt kappaK (kappaDeriv
 /-- **人手証明 `kappa_of_K_basic` (3)**: `κ''(K) = -4 cosh 2K/sinh² 2K`。 -/
 theorem hasDerivAt_kappaDeriv {K : ℝ} (hK : 0 < K) :
     HasDerivAt kappaDeriv (kappaSecond K) K := by
-  have hs : 0 < Real.sinh (2 * K) := Real.sinh_pos_iff.2 (by linarith)
+  have hs : 0 < Real.sinh (2 * K) := real_sinh_pos_of_pos (by linarith)
   have h2 : HasDerivAt (fun x : ℝ => 2 * x) 2 K := by
     simpa using (hasDerivAt_id K).const_mul (2 : ℝ)
   have hsin : HasDerivAt (fun x : ℝ => Real.sinh (2 * x)) (Real.cosh (2 * K) * 2) K := h2.sinh
@@ -190,7 +190,7 @@ theorem kappaK_eq_zero_iff {K : ℝ} (hK : 0 < K) : kappaK K = 0 ↔ K = Kc := b
   · intro h
     have hcrit := critical_point_iff_kappa_zero hK hK
     have h1 : Real.sinh (2 * K) * Real.sinh (2 * K) = 1 := hcrit.1.2 (hcrit.2.2 h)
-    have hs : 0 < Real.sinh (2 * K) := Real.sinh_pos_iff.2 (by linarith)
+    have hs : 0 < Real.sinh (2 * K) := real_sinh_pos_of_pos (by linarith)
     have h3 : Real.sinh (2 * K) = 1 := by nlinarith [h1, hs]
     have h4 : Real.sinh (2 * K) = Real.sinh (2 * Kc) := by rw [h3, sinh_two_Kc]
     have := sinh_injective_real h4
@@ -255,7 +255,7 @@ theorem kappaDeriv_bounds {K : ℝ} (hK : K ∈ Dnbhd) :
 theorem abs_kappaSecond_le {K : ℝ} (hK : K ∈ Dnbhd) : |kappaSecond K| ≤ 9.3 := by
   obtain ⟨hl, hu⟩ := sinh_two_K_bounds hK
   have hs : 0 < Real.sinh (2 * K) := by linarith
-  have hc : 0 < Real.cosh (2 * K) := Real.cosh_pos _
+  have hc : 0 < Real.cosh (2 * K) := cosh_pos_of_two_cosh_pos _
   have hcs : Real.cosh (2 * K) ^ 2 = 1 + Real.sinh (2 * K) ^ 2 := cosh_sq_eq_one_add_sinh_sq _
   have hkey : 4 * Real.cosh (2 * K) ≤ 9.3 * Real.sinh (2 * K) ^ 2 := by
     nlinarith [hcs, hc, hs, hl, sq_nonneg (Real.sinh (2 * K) ^ 2 - 0.5348)]

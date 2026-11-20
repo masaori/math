@@ -112,8 +112,10 @@ theorem sinh_two_eq_two_sinh_mul_cosh (K2 : ℝ) :
 `sinh(2K₂)sinh(2K₂*)=1`。 -/
 theorem second_dual_coupling_relation {K2 : ℝ} (hK2 : 0 < K2) :
     Real.sinh (2 * K2) * Real.sinh (2 * Kstar K2) = 1 := by
-  have hs : Real.sinh K2 ≠ 0 := ne_of_gt (Real.sinh_pos_iff.mpr hK2)
-  have hc : Real.cosh K2 ≠ 0 := ne_of_gt (Real.cosh_pos K2)
+  -- 人手: `cosh_sinh_basic_properties` (3) の `cosh K_2 > sinh K_2 > 0` と「ℝ の正の元は零でない」
+  have h3 := cosh_sinh_basic_properties_3 hK2
+  have hs : Real.sinh K2 ≠ 0 := ne_of_gt h3.2
+  have hc : Real.cosh K2 ≠ 0 := ne_of_gt (h3.2.trans h3.1)
   have hsc : Real.sinh K2 * Real.cosh K2 ≠ 0 := mul_ne_zero hs hc
   calc
     Real.sinh (2 * K2) * Real.sinh (2 * Kstar K2) =

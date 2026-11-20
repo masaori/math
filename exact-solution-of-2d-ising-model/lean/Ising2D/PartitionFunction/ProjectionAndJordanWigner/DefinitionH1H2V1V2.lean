@@ -82,6 +82,7 @@ import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMat
 import Ising2D.Representation
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -227,17 +228,19 @@ theorem indexedHyperbolicAbbreviations_pos
   have h2K1star : 0 < 2 * K1star := mul_pos (by norm_num) hK1star
   have h2K2 : 0 < 2 * K2 := mul_pos (by norm_num) hK2
   have h2K2star : 0 < 2 * K2star := mul_pos (by norm_num) hK2star
-  -- 人手本文の第2段: 各正の引数で `cosh x > sinh x > 0` を得る。
-  have hSinhK1 : 0 < Real.sinh (2 * K1) := (Real.sinh_pos_iff).2 h2K1
-  have hSinhK1star : 0 < Real.sinh (2 * K1star) := (Real.sinh_pos_iff).2 h2K1star
-  have hSinhK2 : 0 < Real.sinh (2 * K2) := (Real.sinh_pos_iff).2 h2K2
-  have hSinhK2star : 0 < Real.sinh (2 * K2star) := (Real.sinh_pos_iff).2 h2K2star
-  have hSinhLtCoshK1 : Real.sinh (2 * K1) < Real.cosh (2 * K1) := Real.sinh_lt_cosh _
-  have hSinhLtCoshK1star : Real.sinh (2 * K1star) < Real.cosh (2 * K1star) :=
-    Real.sinh_lt_cosh _
-  have hSinhLtCoshK2 : Real.sinh (2 * K2) < Real.cosh (2 * K2) := Real.sinh_lt_cosh _
-  have hSinhLtCoshK2star : Real.sinh (2 * K2star) < Real.cosh (2 * K2star) :=
-    Real.sinh_lt_cosh _
+  -- 人手本文の第2段: 各正の引数で `cosh x > sinh x > 0` を得る（`cosh_sinh_basic_properties` (3)）。
+  have h3K1 := cosh_sinh_basic_properties_3 h2K1
+  have h3K1star := cosh_sinh_basic_properties_3 h2K1star
+  have h3K2 := cosh_sinh_basic_properties_3 h2K2
+  have h3K2star := cosh_sinh_basic_properties_3 h2K2star
+  have hSinhK1 : 0 < Real.sinh (2 * K1) := h3K1.2
+  have hSinhK1star : 0 < Real.sinh (2 * K1star) := h3K1star.2
+  have hSinhK2 : 0 < Real.sinh (2 * K2) := h3K2.2
+  have hSinhK2star : 0 < Real.sinh (2 * K2star) := h3K2star.2
+  have hSinhLtCoshK1 : Real.sinh (2 * K1) < Real.cosh (2 * K1) := h3K1.1
+  have hSinhLtCoshK1star : Real.sinh (2 * K1star) < Real.cosh (2 * K1star) := h3K1star.1
+  have hSinhLtCoshK2 : Real.sinh (2 * K2) < Real.cosh (2 * K2) := h3K2.1
+  have hSinhLtCoshK2star : Real.sinh (2 * K2star) < Real.cosh (2 * K2star) := h3K2star.1
   -- 人手本文の第3段: 略記定義を代入して二つの連鎖不等式を得る。
   have hS1LtC1 :
       (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s1 <

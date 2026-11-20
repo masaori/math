@@ -60,6 +60,7 @@ import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Series
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -151,8 +152,10 @@ theorem sqrt_two_s2_eq {K2 : ℝ} :
 /-- 人手の中間目標「示すべき 2 つの等式」の 1 つ目 `q cosh K_2^* = e^{K_2}`（人手の鎖と 1 対 1 でない）。 -/
 theorem sqrt_two_s2_mul_cosh_Kstar {K2 : ℝ} (h : 0 < K2) :
     Real.sqrt (2 * Real.sinh (2 * K2)) * Real.cosh (Kstar K2) = Real.exp K2 := by
-  have hs : 0 < Real.sinh K2 := Real.sinh_pos_iff.mpr h
-  have hc : 0 < Real.cosh K2 := Real.cosh_pos K2
+  -- 人手: `cosh_sinh_basic_properties` (3) より `cosh K_2 > sinh K_2 > 0`
+  have h3 := cosh_sinh_basic_properties_3 h
+  have hs : 0 < Real.sinh K2 := h3.2
+  have hc : 0 < Real.cosh K2 := h3.2.trans h3.1
   have ha : 0 < Real.sqrt (Real.sinh K2) := Real.sqrt_pos.mpr hs
   have hb : 0 < Real.sqrt (Real.cosh K2) := Real.sqrt_pos.mpr hc
   have ha2 : Real.sqrt (Real.sinh K2) ^ 2 = Real.sinh K2 := Real.sq_sqrt hs.le
@@ -170,8 +173,10 @@ theorem sqrt_two_s2_mul_cosh_Kstar {K2 : ℝ} (h : 0 < K2) :
 /-- 人手の中間目標「示すべき 2 つの等式」の 2 つ目 `q sinh K_2^* = e^{-K_2}`（人手の鎖と 1 対 1 でない）。 -/
 theorem sqrt_two_s2_mul_sinh_Kstar {K2 : ℝ} (h : 0 < K2) :
     Real.sqrt (2 * Real.sinh (2 * K2)) * Real.sinh (Kstar K2) = Real.exp (-K2) := by
-  have hs : 0 < Real.sinh K2 := Real.sinh_pos_iff.mpr h
-  have hc : 0 < Real.cosh K2 := Real.cosh_pos K2
+  -- 人手: `cosh_sinh_basic_properties` (3) より `cosh K_2 > sinh K_2 > 0`
+  have h3 := cosh_sinh_basic_properties_3 h
+  have hs : 0 < Real.sinh K2 := h3.2
+  have hc : 0 < Real.cosh K2 := h3.2.trans h3.1
   have ha : 0 < Real.sqrt (Real.sinh K2) := Real.sqrt_pos.mpr hs
   have hb : 0 < Real.sqrt (Real.cosh K2) := Real.sqrt_pos.mpr hc
   have ha2 : Real.sqrt (Real.sinh K2) ^ 2 = Real.sinh K2 := Real.sq_sqrt hs.le

@@ -62,6 +62,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealOnes
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealSumOfTwoEqualTermsIsTwice
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -453,13 +454,13 @@ theorem open_chain_endpoint_product_sum (hM : 2 ≤ M) (K : ℝ) :
 theorem open_chain_partition_sum_pos (hM : 2 ≤ M) {K : ℝ} (_hK : 0 < K) :
     0 < ∑ s : SpinConf M, Real.exp (K * openChainEnergy s) := by
   rw [open_chain_partition_sum hM K]
-  exact mul_pos two_pos (pow_pos (mul_pos two_pos (Real.cosh_pos K)) _)
+  exact mul_pos two_pos (pow_pos (mul_pos two_pos (cosh_pos_of_two_cosh_pos K)) _)
 
 /-- **人手 `open_chain_spin_sums_positive`** の二つ目: `∑_{s∈𝔐} s(M_col)s(1) exp(KE(s)) > 0`。 -/
 theorem open_chain_endpoint_product_sum_pos (hM : 2 ≤ M) {K : ℝ} (hK : 0 < K) :
     0 < ∑ s : SpinConf M, (s (lastSite M (by omega)) : ℝ) * (s (firstSite M (by omega)) : ℝ)
         * Real.exp (K * openChainEnergy s) := by
   rw [open_chain_endpoint_product_sum hM K]
-  exact mul_pos two_pos (pow_pos (mul_pos two_pos (Real.sinh_pos_iff.mpr hK)) _)
+  exact mul_pos two_pos (pow_pos (mul_pos two_pos (real_sinh_pos_of_pos hK)) _)
 
 end Ising2D

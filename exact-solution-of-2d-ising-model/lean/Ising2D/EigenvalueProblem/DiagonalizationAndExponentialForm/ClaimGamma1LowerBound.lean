@@ -37,6 +37,8 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimDualityC2StarEqS2StarC2
 import Ising2D.NecSuf.Arcosh
 import Ising2D.NecSuf.CoshLowerBound
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
 
 namespace Ising2D
 
@@ -77,14 +79,14 @@ noncomputable def gamma1R (K : IsingConst) (θ : ℝ) : ℝ :=
 theorem gamma1_eq_ofReal (K : IsingConst) (θ : ℝ) : gamma1 K θ = ((gamma1R K θ : ℝ) : ℂ) := rfl
 
 /-- `s_1 = sinh 2K_1 > 0`（原文 `K_1 > 0` から）。 -/
-theorem IsingParam.s1_pos (P : IsingParam) : 0 < P.const.s1 := by
-  have : 0 < 2 * P.K1 := by linarith [P.K1_pos]
-  simpa [IsingParam.const] using Real.sinh_pos_iff.2 this
+theorem IsingParam.s1_pos (P : IsingParam) : 0 < P.const.s1 :=
+  -- 人手: `indexed_hyperbolic_abbreviations_positive` の `s_1 > 0`（`Kstar K1` が人手の `K_1^*`（`def_first_dual_coupling_constant`）に当たる）
+  (indexedHyperbolicAbbreviations_pos P.K1_pos P.K2_pos (Kstar_pos P.K1_pos) P.K2star_pos).2.1
 
 /-- `s_2^* = sinh 2K_2^* > 0`（原文 `K_2^* > 0` から）。 -/
-theorem IsingParam.s2star_pos (P : IsingParam) : 0 < P.const.s2star := by
-  have : 0 < 2 * P.K2star := by linarith [P.K2star_pos]
-  simpa [IsingParam.const] using Real.sinh_pos_iff.2 this
+theorem IsingParam.s2star_pos (P : IsingParam) : 0 < P.const.s2star :=
+  -- 人手: `indexed_hyperbolic_abbreviations_positive` の `s_2^* > 0`
+  (indexedHyperbolicAbbreviations_pos P.K1_pos P.K2_pos (Kstar_pos P.K1_pos) P.K2star_pos).2.2.2.2.2.2.2
 
 /-- **人手証明 `gamma1_lower_bound_all_theta` の第 1 の不等式**（`∀θ ∈ ℝ`）:
 `γ_1(θ) ≥ cosh(2K_1 - 2K_2^*)`。必要十分版 `NecSuf.cosh_sub_le_cosh_mul_cosh_sub` の系。 -/
@@ -101,7 +103,7 @@ theorem gamma1R_ge_cosh_sub (P : IsingParam) (θ : ℝ) :
 
 /-- **人手証明 `gamma1_lower_bound_all_theta` の第 2 の不等式**: `γ_1(θ) ≥ 1`（`∀θ ∈ ℝ`）。 -/
 theorem one_le_gamma1R (P : IsingParam) (θ : ℝ) : 1 ≤ gamma1R P.const θ :=
-  le_trans (Real.one_le_cosh _) (gamma1R_ge_cosh_sub P θ)
+  le_trans (cosh_at_least_one _) (gamma1R_ge_cosh_sub P θ)
 
 /-- **人手証明 `gamma1_lower_bound_all_theta` そのもの**（2 つの不等式を並べた形）。 -/
 theorem gamma1_lower_bound_all_theta (P : IsingParam) (θ : ℝ) :

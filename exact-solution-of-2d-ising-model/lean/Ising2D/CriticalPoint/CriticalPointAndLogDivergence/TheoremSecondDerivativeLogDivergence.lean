@@ -25,6 +25,7 @@ import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.ClaimGammaDerivatives
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSineIntegralTwoSided
 import Ising2D.NecSuf.DiffUnderIntegral
 import Mathlib.Analysis.Complex.ExponentialBounds
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
 
 namespace Ising2D
 
@@ -203,7 +204,7 @@ theorem inv_sqrt_diff_S_Q {θ κ : ℝ} (hκ : κ ≠ 0) :
       rw [ha]
       have h1 : Real.sqrt (Sfun θ κ) ≤ Real.sqrt (Real.cosh (κ / 2) ^ 2) :=
         Real.sqrt_le_sqrt (Sfun_le_cosh_sq θ κ)
-      rwa [Real.sqrt_sq (Real.cosh_pos _).le] at h1
+      rwa [Real.sqrt_sq (cosh_pos_of_two_cosh_pos _).le] at h1
     have hkey : 2 * (v - 1) ≤ a ^ 2 * v := by
       rw [hasq]
       nlinarith [hv1, hvsq]
@@ -283,7 +284,7 @@ theorem inv_pow_three_half_mono {w S : ℝ} (hw : 0 < w) (hle : w ≤ S) :
 theorem Tint_le {κ : ℝ} (hκ : 0 < κ) :
     0 ≤ Tint κ ∧ Tint κ ≤ 2 * Real.cosh (κ / 2) ^ 2 / c0 := by
   have hκ0 : κ ≠ 0 := ne_of_gt hκ
-  have hδ : 0 < Real.sinh (κ / 2) := Real.sinh_pos_iff.2 (by linarith)
+  have hδ : 0 < Real.sinh (κ / 2) := real_sinh_pos_of_pos (by linarith)
   have hc0 : 0 < c0 := c0_pos
   have hpi : (0:ℝ) < Real.pi := Real.pi_pos
   have hiT : IntervalIntegrable (fun θ : ℝ =>
@@ -384,8 +385,8 @@ theorem step6_bound {κ : ℝ} (h0 : 0 < κ) (h1 : κ ≤ 1/2) :
     |Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ)| ≤ 2.27 := by
   have hpi : (0:ℝ) < Real.pi := Real.pi_pos
   have hpiu : Real.pi < 3.141593 := Real.pi_lt_d6
-  have hδpos : 0 < Real.sinh (κ / 2) := Real.sinh_pos_iff.2 (by linarith)
-  have hcpos : (1:ℝ) ≤ Real.cosh (κ / 2) := Real.one_le_cosh _
+  have hδpos : 0 < Real.sinh (κ / 2) := real_sinh_pos_of_pos (by linarith)
+  have hcpos : (1:ℝ) ≤ Real.cosh (κ / 2) := cosh_at_least_one _
   have hcub : Real.cosh (κ / 2) ≤ 32/31 := by
     have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ / 2) (by nlinarith)
     have hd : (31:ℝ)/32 ≤ 1 - (κ / 2) ^ 2 / 2 := by nlinarith
@@ -397,7 +398,7 @@ theorem step6_bound {κ : ℝ} (h0 : 0 < κ) (h1 : κ ≤ 1/2) :
   have hδub : Real.sinh (κ / 2) ≤ κ / 2 * Real.cosh (κ / 2) :=
     sinh_le_mul_cosh_of_nonneg (by linarith)
   have hδlb : κ / 2 ≤ Real.sinh (κ / 2) := self_le_sinh_of_nonneg (by linarith)
-  have hcoshκ1 : (1:ℝ) ≤ Real.cosh κ := Real.one_le_cosh _
+  have hcoshκ1 : (1:ℝ) ≤ Real.cosh κ := cosh_at_least_one _
   have hcoshκ : Real.cosh κ ≤ 8/7 := by
     have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ) (by nlinarith)
     have hd : (7:ℝ)/8 ≤ 1 - κ ^ 2 / 2 := by nlinarith
@@ -421,9 +422,9 @@ theorem step6_bound {κ : ℝ} (h0 : 0 < κ) (h1 : κ ≤ 1/2) :
     have h : Real.log (2 * Real.sinh (κ / 2)) ≤ Real.log (κ * Real.cosh (κ / 2)) :=
       Real.log_le_log (by linarith) (by nlinarith)
     rw [Real.log_mul two_ne_zero (ne_of_gt hδpos),
-      Real.log_mul (ne_of_gt h0) (ne_of_gt (Real.cosh_pos (κ / 2)))] at h
+      Real.log_mul (ne_of_gt h0) (ne_of_gt (cosh_pos_of_two_cosh_pos (κ / 2)))] at h
     have hlogc : Real.log (Real.cosh (κ / 2)) ≤ 1/31 := by
-      have := Real.log_le_sub_one_of_pos (Real.cosh_pos (κ / 2))
+      have := Real.log_le_sub_one_of_pos (cosh_pos_of_two_cosh_pos (κ / 2))
       linarith
     rw [hρdef]; linarith
   -- log(2π) の評価
@@ -479,7 +480,7 @@ theorem step6_bound {κ : ℝ} (h0 : 0 < κ) (h1 : κ ≤ 1/2) :
   set x : ℝ := Real.log (2 * Real.pi) + ρ with hxdef
   have hxub : x ≤ 1.865 := by rw [hxdef]; linarith
   have hxlb : -(1/31 : ℝ) ≤ x := by rw [hxdef]; linarith
-  have hcoshpos : (0:ℝ) < Real.cosh κ := Real.cosh_pos κ
+  have hcoshpos : (0:ℝ) < Real.cosh κ := cosh_pos_of_two_cosh_pos κ
   have hprod : |Real.cosh κ * x| ≤ 2.1315 := by
     rcases le_total (0:ℝ) x with hxs | hxs
     · have hnn : (0:ℝ) ≤ Real.cosh κ * x := mul_nonneg hcoshpos.le hxs
@@ -511,8 +512,8 @@ theorem second_derivative_log_divergence_pos {κ : ℝ} (h0 : 0 < κ) (h1 : κ �
   have hpi : (0:ℝ) < Real.pi := Real.pi_pos
   have hpiu : Real.pi < 3.141593 := Real.pi_lt_d6
   have hpil : (3.141592:ℝ) < Real.pi := Real.pi_gt_d6
-  have hδpos : 0 < Real.sinh (κ / 2) := Real.sinh_pos_iff.2 (by linarith)
-  have hcpos : (1:ℝ) ≤ Real.cosh (κ / 2) := Real.one_le_cosh _
+  have hδpos : 0 < Real.sinh (κ / 2) := real_sinh_pos_of_pos (by linarith)
+  have hcpos : (1:ℝ) ≤ Real.cosh (κ / 2) := cosh_at_least_one _
   have hcub : Real.cosh (κ / 2) ≤ 32/31 := by
     have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ / 2) (by nlinarith)
     have hd : (31:ℝ)/32 ≤ 1 - (κ / 2) ^ 2 / 2 := by nlinarith
@@ -523,7 +524,7 @@ theorem second_derivative_log_divergence_pos {κ : ℝ} (h0 : 0 < κ) (h1 : κ �
   have hδub : Real.sinh (κ / 2) ≤ 8/31 := by
     have h := sinh_le_mul_cosh_of_nonneg (t := κ / 2) (by linarith)
     nlinarith [h, hcub, h0, h1]
-  have hcoshκ1 : (1:ℝ) ≤ Real.cosh κ := Real.one_le_cosh _
+  have hcoshκ1 : (1:ℝ) ≤ Real.cosh κ := cosh_at_least_one _
   have hcoshκ : Real.cosh κ ≤ 8/7 := by
     have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ) (by nlinarith)
     have hd : (7:ℝ)/8 ≤ 1 - κ ^ 2 / 2 := by nlinarith

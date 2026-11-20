@@ -21,27 +21,32 @@
 -/
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
-/-- **人手 `def_second_dual_coupling_constant` の `K_2^* = -(1/2) log(tanh K_2)`。** -/
+/-- **人手 `def_second_dual_coupling_constant` の `K_2^* = -(1/2) log(tanh K_2)`。**
+同じ式 `−(1/2) log(tanh K_1)` の人手 `def_first_dual_coupling_constant` の `K_1^*` にも `Kstar K1` として使う。 -/
 noncomputable def Kstar (K2 : ℝ) : ℝ := -(1 / 2) * Real.log (Real.tanh K2)
 
 /-- `K_2 > 0` なら `tanh K_2 > 0`（実対数の引数が正であること）。 -/
 theorem tanh_pos {K2 : ℝ} (h : 0 < K2) : 0 < Real.tanh K2 := by
   rw [Real.tanh_eq_sinh_div_cosh]
-  exact div_pos (Real.sinh_pos_iff.mpr h) (Real.cosh_pos K2)
+  -- 人手: `cosh_sinh_basic_properties` (3) より `cosh K_2 > sinh K_2 > 0`
+  have h3 := cosh_sinh_basic_properties_3 h
+  exact div_pos h3.2 (h3.2.trans h3.1)
 
 /-- **人手 `def_positive_coupling_tanh` の上側の評価** `tanh K < 1`。
 `tanh K = sinh K / cosh K < cosh K / cosh K = 1`（`sinh K < cosh K` かつ `cosh K > 0`）。 -/
 theorem positive_coupling_tanh_lt_one (K : ℝ) : Real.tanh K < 1 := by
-  have hc : 0 < Real.cosh K := Real.cosh_pos K
+  have hc : 0 < Real.cosh K := cosh_pos_of_two_cosh_pos K
   calc
     Real.tanh K = Real.sinh K / Real.cosh K := Real.tanh_eq_sinh_div_cosh K
     _ < Real.cosh K / Real.cosh K := div_lt_div_of_pos_right (Real.sinh_lt_cosh K) hc
     _ = 1 := div_self (ne_of_gt hc)
 
-/-- **人手 `def_second_dual_coupling_constant` の正値性** `K_2^* > 0`（`K_2 > 0`）。 -/
+/-- **人手 `def_second_dual_coupling_constant` の正値性** `K_2^* > 0`（`K_2 > 0`）。
+`Kstar_pos hK1` は人手 `def_first_dual_coupling_constant` の `K_1^* > 0` に当たる。 -/
 theorem Kstar_pos {K2 : ℝ} (h : 0 < K2) : 0 < Kstar K2 := by
   -- `0 < tanh K_2 < 1 ⟹ log(tanh K_2) < 0`
   have hlog : Real.log (Real.tanh K2) < 0 := Real.log_neg (tanh_pos h) (positive_coupling_tanh_lt_one K2)

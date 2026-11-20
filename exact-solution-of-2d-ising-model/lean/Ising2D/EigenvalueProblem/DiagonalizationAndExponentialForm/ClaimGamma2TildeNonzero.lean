@@ -43,12 +43,14 @@ namespace Ising2D
 variable (P : IsingParam)
 
 /-- `c_1 = cosh 2K_1 > 0`。 -/
-theorem IsingParam.c1_pos : 0 < P.const.c1 := by
-  simpa [IsingParam.const] using Real.cosh_pos (2 * P.K1)
+theorem IsingParam.c1_pos : 0 < P.const.c1 :=
+  -- 人手: `indexed_hyperbolic_abbreviations_positive` の `c_1 > 0`（`Kstar K1` が人手の `K_1^*`（`def_first_dual_coupling_constant`）に当たる）
+  (indexedHyperbolicAbbreviations_pos P.K1_pos P.K2_pos (Kstar_pos P.K1_pos) P.K2star_pos).1
 
 /-- `c_2 = cosh 2K_2 > 0`。 -/
-theorem IsingParam.c2_pos : 0 < P.const.c2 := by
-  simpa [IsingParam.const] using Real.cosh_pos (2 * P.K2)
+theorem IsingParam.c2_pos : 0 < P.const.c2 :=
+  -- 人手: `indexed_hyperbolic_abbreviations_positive` の `c_2 > 0`
+  (indexedHyperbolicAbbreviations_pos P.K1_pos P.K2_pos (Kstar_pos P.K1_pos) P.K2star_pos).2.2.2.2.1
 
 /-- **人手証明 `gamma_2_theta_tilde_nonzero` の Step 2 + Step 3**:
 `sin θ~_μ = 0` なら `cos θ~_μ = -1`。必要十分版 `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` の系。 -/

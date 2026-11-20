@@ -32,6 +32,7 @@
 `exp`・`log` を持つ体を述べ直すだけになり、何が本質的かについて新しい情報を与えない。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimSecondDualCouplingRelation
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -102,8 +103,8 @@ theorem cosh_two_Kstar_eq_half_inv_tanh_add_tanh {K2 : ℝ} (hK2 : 0 < K2) :
 /-- **人手 `duality_c2_star_eq_s2_star_c2` の第一式** `s_2^* = 1/s_2`。 -/
 theorem s2star_eq_inv_s2 {K2 : ℝ} (hK2 : 0 < K2) :
     Real.sinh (2 * Kstar K2) = 1 / Real.sinh (2 * K2) := by
-  have hs : Real.sinh K2 ≠ 0 := ne_of_gt (Real.sinh_pos_iff.mpr hK2)
-  have hc : Real.cosh K2 ≠ 0 := ne_of_gt (Real.cosh_pos K2)
+  have hs : Real.sinh K2 ≠ 0 := ne_of_gt (real_sinh_pos_of_pos hK2)
+  have hc : Real.cosh K2 ≠ 0 := ne_of_gt (cosh_pos_of_two_cosh_pos K2)
   calc
     Real.sinh (2 * Kstar K2) = (1 / Real.tanh K2 - Real.tanh K2) / 2 :=
       -- `sinh` の指数表示と準備の `exp(±2K_2^*)` の代入
@@ -122,8 +123,8 @@ theorem s2star_eq_inv_s2 {K2 : ℝ} (hK2 : 0 < K2) :
 /-- **人手 `duality_c2_star_eq_s2_star_c2` の第二式** `c_2^* = c_2/s_2`。 -/
 theorem c2star_eq_c2_div_s2 {K2 : ℝ} (hK2 : 0 < K2) :
     Real.cosh (2 * Kstar K2) = Real.cosh (2 * K2) / Real.sinh (2 * K2) := by
-  have hs : Real.sinh K2 ≠ 0 := ne_of_gt (Real.sinh_pos_iff.mpr hK2)
-  have hc : Real.cosh K2 ≠ 0 := ne_of_gt (Real.cosh_pos K2)
+  have hs : Real.sinh K2 ≠ 0 := ne_of_gt (real_sinh_pos_of_pos hK2)
+  have hc : Real.cosh K2 ≠ 0 := ne_of_gt (cosh_pos_of_two_cosh_pos K2)
   calc
     Real.cosh (2 * Kstar K2) = (1 / Real.tanh K2 + Real.tanh K2) / 2 :=
       -- `cosh` の指数表示と準備の `exp(±2K_2^*)` の代入

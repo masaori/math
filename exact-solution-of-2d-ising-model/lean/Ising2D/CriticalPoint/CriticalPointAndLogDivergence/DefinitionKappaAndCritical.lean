@@ -25,6 +25,7 @@
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -111,16 +112,18 @@ theorem Sparam_even (κ A θ : ℝ) :
 `s2star_eq_inv_s2`（`sinh 2K^* = 1/sinh 2K`）の両辺に `sinh 2K ≠ 0` を掛けたもの。 -/
 theorem sinh_two_mul_sinh_two_Kstar {K : ℝ} (hK : 0 < K) :
     Real.sinh (2 * K) * Real.sinh (2 * Kstar K) = 1 := by
-  have hs : 0 < Real.sinh (2 * K) := Real.sinh_pos_iff.2 (by linarith)
+  have hs : 0 < Real.sinh (2 * K) := real_sinh_pos_of_pos (by linarith)
   rw [s2star_eq_inv_s2 hK]
   field_simp
 
 /-- **人手証明 `critical_point_iff_kappa_zero`**:
 `sinh 2K_1 sinh 2K_2 = 1 ⟺ K_1 = K_2^* ⟺ κ = 0`。 -/
-theorem critical_point_iff_kappa_zero {K1 K2 : ℝ} (_hK1 : 0 < K1) (hK2 : 0 < K2) :
+theorem critical_point_iff_kappa_zero {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 : 0 < K2) :
     (Real.sinh (2 * K1) * Real.sinh (2 * K2) = 1 ↔ K1 = Kstar K2) ∧
     (K1 = Kstar K2 ↔ 2 * K1 - 2 * Kstar K2 = 0) := by
-  have hs2 : 0 < Real.sinh (2 * K2) := Real.sinh_pos_iff.2 (by linarith)
+  -- 人手: `indexed_hyperbolic_abbreviations_positive` の `i = 2` の `s_2 > 0`（`Kstar K1` が人手の `K_1^*`（`def_first_dual_coupling_constant`）に当たる）
+  have hs2 : 0 < Real.sinh (2 * K2) :=
+    (indexedHyperbolicAbbreviations_pos hK1 hK2 (Kstar_pos hK1) (Kstar_pos hK2)).2.2.2.2.2.1
   constructor
   · constructor
     · intro h

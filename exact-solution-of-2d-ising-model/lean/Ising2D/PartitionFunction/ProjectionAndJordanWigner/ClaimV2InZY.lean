@@ -24,6 +24,7 @@
   （第 2 行は `V2FromJordanWigner_eq_V2H2Form`）。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSecondTransferMatrixPauliForm
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -47,6 +48,6 @@ theorem V2_exponential_representation {K2 : ℝ} (h : 0 < K2) :
 
 /-- `K_2 > 0` なら `s_2 = sinh 2K_2 > 0`。 -/
 theorem sinh_two_mul_pos {K2 : ℝ} (h : 0 < K2) : 0 < Real.sinh (2 * K2) :=
-  Real.sinh_pos_iff.mpr (by linarith)
+  real_sinh_pos_of_pos (by linarith)
 
 end Ising2D

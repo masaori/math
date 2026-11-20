@@ -10,14 +10,17 @@
 -/
 import Ising2D.NecSuf.DualCouplingRelation
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimSecondDualCouplingRelation
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
 /-- 具体版 `second_dual_coupling_relation` と同じ主張を、必要十分版の特殊化として導出した形。 -/
 theorem second_dual_coupling_relation_of_necSuf {K2 : ℝ} (hK2 : 0 < K2) :
     Real.sinh (2 * K2) * Real.sinh (2 * Kstar K2) = 1 := by
-  have hs : Real.sinh K2 ≠ 0 := ne_of_gt (Real.sinh_pos_iff.mpr hK2)
-  have hc : Real.cosh K2 ≠ 0 := ne_of_gt (Real.cosh_pos K2)
+  -- 人手: `cosh_sinh_basic_properties` (3) の `cosh K_2 > sinh K_2 > 0` と「ℝ の正の元は零でない」
+  have h3 := cosh_sinh_basic_properties_3 hK2
+  have hs : Real.sinh K2 ≠ 0 := ne_of_gt h3.2
+  have hc : Real.cosh K2 ≠ 0 := ne_of_gt (h3.2.trans h3.1)
   apply NecSuf.dualCouplingProduct_eq_one
       (s := Real.sinh K2)
       (c := Real.cosh K2)

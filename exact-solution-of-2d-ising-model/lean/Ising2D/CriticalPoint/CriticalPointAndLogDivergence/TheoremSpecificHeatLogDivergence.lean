@@ -34,6 +34,7 @@
 import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.ClaimKappaOfKBasic
 import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.TheoremSecondDerivativeLogDivergence
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.TheoremOnsagerExactSolution
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -98,7 +99,7 @@ noncomputable def fSecond (K : ℝ) : ℝ :=
 theorem hasDerivAt_logTerm {K : ℝ} (hK : 0 < K) :
     HasDerivAt (fun x : ℝ => 1 / 2 * Real.log (2 * Real.sinh (2 * x)))
       (Real.cosh (2 * K) / Real.sinh (2 * K)) K := by
-  have hs : 0 < Real.sinh (2 * K) := Real.sinh_pos_iff.2 (by linarith)
+  have hs : 0 < Real.sinh (2 * K) := real_sinh_pos_of_pos (by linarith)
   have h2 : HasDerivAt (fun x : ℝ => 2 * x) 2 K := by
     simpa using (hasDerivAt_id K).const_mul (2 : ℝ)
   have hsin : HasDerivAt (fun x : ℝ => Real.sinh (2 * x)) (Real.cosh (2 * K) * 2) K := h2.sinh
@@ -115,7 +116,7 @@ theorem hasDerivAt_logTerm {K : ℝ} (hK : 0 < K) :
 theorem hasDerivAt_logTermDeriv {K : ℝ} (hK : 0 < K) :
     HasDerivAt (fun x : ℝ => Real.cosh (2 * x) / Real.sinh (2 * x))
       (-(2 / Real.sinh (2 * K) ^ 2)) K := by
-  have hs : 0 < Real.sinh (2 * K) := Real.sinh_pos_iff.2 (by linarith)
+  have hs : 0 < Real.sinh (2 * K) := real_sinh_pos_of_pos (by linarith)
   have h2 : HasDerivAt (fun x : ℝ => 2 * x) 2 K := by
     simpa using (hasDerivAt_id K).const_mul (2 : ℝ)
   have hsin : HasDerivAt (fun x : ℝ => Real.sinh (2 * x)) (Real.cosh (2 * K) * 2) K := h2.sinh

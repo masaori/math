@@ -30,6 +30,7 @@
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimVPlusEqCCheckVprime
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionGammaTildeMu
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTVPlusAction
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -136,7 +137,7 @@ theorem VPlus_eq_smul_checkVprime' (hM : M ≠ 0)
 
 /-- `s_2 = sinh 2K_2 > 0`（`K_2 > 0` から）。 -/
 theorem sinh_two_K2_pos (P : IsingParam) : 0 < Real.sinh (2 * P.K2) :=
-  Real.sinh_pos_iff.2 (by linarith [P.K2_pos])
+  real_sinh_pos_of_pos (by linarith [P.K2_pos])
 
 /-- 014 章 `T_V_plus_check_Z_Y`: 本章の仮定 `hT` は（双対関係の下で）無条件に成り立つ。 -/
 theorem TVPlus_actsBy_checkZY (P : IsingParam) {M : ℕ} (hM : M ≠ 0)

@@ -56,6 +56,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesPower
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Mathlib.Topology.Algebra.Module.FiniteDimension
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -81,7 +82,7 @@ theorem rpow_half_pow (x : ℝ) (hx : 0 ≤ x) (M : ℕ) :
 theorem secondTransferPrefactor_eq_rpow {K2 : ℝ} (h : 0 < K2) (M : ℕ) :
     secondTransferPrefactor M K2 = (2 * Real.sinh (2 * K2)) ^ ((M : ℝ) / 2) := by
   have hs2 : (0 : ℝ) ≤ 2 * Real.sinh (2 * K2) := by
-    have : 0 < Real.sinh (2 * K2) := Real.sinh_pos_iff.mpr (by linarith)
+    have : 0 < Real.sinh (2 * K2) := real_sinh_pos_of_pos (by linarith)
     linarith
   rw [secondTransferPrefactor, rpow_half_pow _ hs2]
 

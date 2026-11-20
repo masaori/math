@@ -35,6 +35,7 @@ import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.TheoremEigenvaluesVPlus
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.TheoremOnsagerFreeEnergy
 import Ising2D.NecSuf.ArcoshExp
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
 
 namespace Ising2D
 
@@ -70,7 +71,7 @@ theorem one_lt_gamma1R_thetaTilde_checkIndex (P : IsingParam) (hM : M ≠ 0) {μ
   have hcs : Real.cosh (2 * P.K1 - 2 * P.K2star)
       = Real.cosh (2 * P.K1) * Real.cosh (2 * P.K2star)
         - Real.sinh (2 * P.K1) * Real.sinh (2 * P.K2star) := Real.cosh_sub _ _
-  have hone : (1 : ℝ) ≤ Real.cosh (2 * P.K1 - 2 * P.K2star) := Real.one_le_cosh _
+  have hone : (1 : ℝ) ≤ Real.cosh (2 * P.K1 - 2 * P.K2star) := cosh_at_least_one _
   have hpos : 0 < Real.sinh (2 * P.K1) * Real.sinh (2 * P.K2star)
       * (1 - Real.cos (thetaTilde M μ)) :=
     mul_pos (mul_pos hsinh1 hsinh2) (by linarith)
@@ -252,7 +253,7 @@ theorem checkBigLambda_lt_max_of_gammaFn (F : CheckFermiSetup M) (P : IsingParam
     exact gammaFn_thetaTilde_pos P F.hM (CheckIdx.prop' i)
   have hs2 : 0 < Real.sinh (2 * P.K2) := by
     have : 0 < 2 * P.K2 := by linarith [P.K2_pos]
-    exact Real.sinh_pos_iff.2 this
+    exact real_sinh_pos_of_pos this
   exact checkBigLambda_lt_checkBigLambda_univ F g hgpos hs2 hT
 
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (3) の固有方程式に左から `Q̌_{ε'}` を掛ける鎖**:

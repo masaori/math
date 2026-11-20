@@ -24,6 +24,7 @@
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimGammaContinuous
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.TheoremRiemannSumToIntegral
 import Ising2D.NecSuf.LogSqueeze
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -40,7 +41,7 @@ noncomputable def LambdaM (P : IsingParam) (δ : ℝ) (M : ℕ) : ℝ :=
 /-- `2 sinh 2K_2 > 0`（原文 `K_2 > 0`）。 -/
 theorem two_sinh_pos (P : IsingParam) : 0 < 2 * Real.sinh (2 * P.K2) := by
   have : 0 < 2 * P.K2 := by linarith [P.K2_pos]
-  have := Real.sinh_pos_iff.2 this
+  have := real_sinh_pos_of_pos this
   linarith
 
 theorem LambdaM_pos (P : IsingParam) (δ : ℝ) (M : ℕ) : 0 < LambdaM P δ M := by
