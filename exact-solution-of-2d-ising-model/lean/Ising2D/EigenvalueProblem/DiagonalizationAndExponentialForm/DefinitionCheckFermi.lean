@@ -85,7 +85,8 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
         rw [inclusion_zz_to_rr_preserves_sum μ (k * M)]
                                                   -- 2 行目: `inclusion_zz_to_rr_preserves_sum`（`a → μ`, `b → kM_col`）
     _ = 2 * Real.pi * (((μ : ℝ) + (k : ℝ) * ((M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [Int.cast_mul]                         -- 3 行目: `ι_{ℤ→ℝ}` は積を保つ
+        rw [inclusion_zz_to_rr_preserves_product k M]
+                                                  -- 3 行目: `inclusion_zz_to_rr_preserves_product`（`a → k`, `b → M_col`）
     _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [add_comm (μ : ℝ) ((k : ℝ) * ((M : ℤ) : ℝ))]
                                                   -- 4 行目: ℝ の加法の交換律 `p + q = q + p`（`p → μ_ℝ`, `q → k_ℝ(M_col)_ℝ`。`set_and_algebra_notation`）

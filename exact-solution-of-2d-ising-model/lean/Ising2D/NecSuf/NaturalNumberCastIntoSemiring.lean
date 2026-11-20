@@ -1,10 +1,10 @@
 /-
-# 整数の埋め込み: `ι(1) = 1`・非負の整数の和・`ℤ` 全体の後者と和・定数の有限和・2 の冪（必要十分版）
+# 整数の埋め込み: `ι(1) = 1`・非負の整数の和・`ℤ` 全体の後者と和と積・定数の有限和・2 の冪（必要十分版）
 
 対応する人手証明のラベル: `inclusion_zz_to_rr_of_one`、`inclusion_zz_to_rr_preserves_sum_of_nonnegatives`、
 `finite_sum_of_constant_real_number`、`power_of_two_in_integers_is_at_least_one`、`inclusion_zz_to_rr_of_power_of_two`、
 `inclusion_zz_to_rr_of_positive_is_at_least_one`、`inclusion_zz_to_rr_of_nonpositive_is_nonpositive`、`inclusion_zz_to_rr_is_monotone_on_nonnegatives`、
-`inclusion_zz_to_rr_of_successor`、`inclusion_zz_to_rr_preserves_sum`
+`inclusion_zz_to_rr_of_successor`、`inclusion_zz_to_rr_preserves_sum`、`inclusion_zz_to_rr_preserves_product`
 具体版: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimInclusionOfIntegersIntoRealNumbers.lean`
 （具体版をこのファイルの系として導くのは、同じフォルダの `ClaimInclusionOfIntegersIntoRealNumbersFromNecSuf.lean`）
 
@@ -27,8 +27,9 @@
 | `inclusion_zz_to_rr_is_monotone_on_nonnegatives` | `k := b − a`、`ι(k) ≥ 0`（`k = 0` と `k ≥ 1`）、`ι(a) = ι(a) + 0 ≤ ι(a) + ι(k) = ι(a + k) = ι(b)` | `cast_mono'`（同じ段） | `cast_add'`、`one_le_cast'`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元 |
 | `inclusion_zz_to_rr_of_successor` | `n ∈ ℤ_{≥0}` は定義、`n = -1` は `ι(-1 + 1) = ι(0) = 0 = (-1) + 1 = (-ι(1)) + 1 = ι(-1) + 1`、`n = -(p + 1)`（`p ≥ 1`）は `ι(-(p+1) + 1) = ι(-p) = -ι(p) = -ι(p) + 0 = -ι(p) + ((-1) + 1) = (-ι(p) + (-1)) + 1 = -(ι(p) + 1) + 1 = -ι(p + 1) + 1 = ι(-(p + 1)) + 1` | `int_cast_succ'`（同じ段） | `ℤ` の埋め込みの `ι(0) = 0`・`ι(1) = 1`・`ι(-n) = -ι(n)` と `ℤ_{≥0}` での一致・`Nat.cast_succ`、`0` が和の右単位元、加法逆元、和の結合律、`-(x + y) = (-x) + (-y)`（加法の可換性） |
 | `inclusion_zz_to_rr_preserves_sum` | `b` について `0` から足す帰納法（3 行と 5 行）と引く帰納法（12 行）。足す段・引く段とも `inclusion_zz_to_rr_of_successor` を使う | `int_cast_add'`（同じ段） | `int_cast_succ'`、`ι(0) = 0`、`0` が和の右単位元、加法逆元、和の結合律 |
+| `inclusion_zz_to_rr_preserves_product` | `b` について `0` から足す帰納法（4 行と 7 行）と引く帰納法（15 行）。`b = 0` は `x · 0 = 0`、足す段・引く段とも `inclusion_zz_to_rr_preserves_sum`・`inclusion_zz_to_rr_of_successor` を使う | `int_cast_mul'`（同じ段） | `int_cast_add'`・`int_cast_succ'`、`ι(0) = 0`、`x · 0 = 0`、`1` が乗法の右単位元、左からの分配法則 `x(y + z) = xy + xz`、`0` が和の右単位元、加法逆元、和の結合律 |
 
-- **効いていないもの**: `R` が `ℝ` であること、`R` の完備性・除法、`R` の符号反転（`int_cast_nonpos'`・`int_cast_succ'`・`int_cast_add'` だけが使う）、乗法の可換性・結合律、全順序であること。
+- **効いていないもの**: `R` が `ℝ` であること、`R` の完備性・除法、`R` の符号反転（`int_cast_nonpos'`・`int_cast_succ'`・`int_cast_add'`・`int_cast_mul'` だけが使う）、乗法の可換性・結合律、全順序であること。
 - **型クラスについて**: mathlib の型クラスでは、効いている性質だけを切り出した組を作れない（`One` を二重に持つことになる）ので、
   それを含む最小の標準の組を置き、効いていない性質を次に書く。
   - `sum_const_fin_succ'` の `[NonAssocSemiring R]` のうち、左からの分配法則・`mul_one`・`zero_mul`・`mul_zero` は効いていない。
@@ -40,6 +41,8 @@
 - 順序の 3 つの主張（`one_le_cast'`・`int_cast_nonpos'`・`cast_mono'`）は乗法を使わない。`[AddCommMonoidWithOne R]`（`int_cast_nonpos'` は符号反転のため `[AddCommGroupWithOne R]`）に
   `[PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` を置く。加法の可換性は `IsOrderedAddMonoid` を書くためだけに要り、証明の段では使わない。順序の反対称律は効いていない。
 - 人手の `ι` の負の元の節 `ι(-n) := -ι(n)` を使うのは `int_cast_nonpos'`・`int_cast_succ'` だけである（`int_cast_add'` は `int_cast_succ'` を通して使う）。
+- `int_cast_mul'` は順序を使わない。`[NonAssocRing R]` を置く（`AddCommGroupWithOne` に乗法と分配法則と乗法の単位元を足した最小の標準の組）。
+  そのうち右からの分配法則・`1` が乗法の左単位元であること・`0 · x = 0` は効いておらず、乗法の結合律・可換性はそもそも仮定していない。
 - `int_cast_succ'`・`int_cast_add'` は乗法と順序を使わない。`[AddCommGroupWithOne R]` を置く。加法の可換性は `int_cast_succ'` の `n = -(p + 1)` の段の
   `-(x + y) = (-x) + (-y)`（`neg_add`）だけで効いている。可換でない `AddGroupWithOne` では `-(x + y) = (-y) + (-x)` しか言えず、同じ手順では通らない
   （mathlib の `Int.cast_add` は可換性を使わない別の論法で、`AddGroupWithOne` で成り立つ）。
@@ -243,5 +246,56 @@ theorem int_cast_add' {R : Type*} [AddCommGroupWithOne R] (a b : ℤ) :
       _ = ((a : ℤ) : R) + (((-(i : ℤ) - 1 : ℤ) : R) + 0) := by rw [add_neg_cancel]
                                                                            -- 加法逆元
       _ = ((a : ℤ) : R) + ((-(i : ℤ) - 1 : ℤ) : R) := by rw [add_zero]     -- `0` は和の右単位元
+
+/-- **必要十分版の `inclusion_zz_to_rr_preserves_product`**: `ℤ` の埋め込みで `ι(ab) = ι(a)ι(b)`（`a, b ∈ ℤ`）。
+具体版と同じく `b` について `0` から `1` を足す帰納法と `1` を引く帰納法（`Int.induction_on`）。 -/
+theorem int_cast_mul' {R : Type*} [NonAssocRing R] (a b : ℤ) :
+    ((a * b : ℤ) : R) = ((a : ℤ) : R) * ((b : ℤ) : R) := by
+  refine Int.induction_on b ?_ ?_ ?_
+  · calc ((a * 0 : ℤ) : R) = ((0 : ℤ) : R) := by rw [mul_zero]            -- `ℤ` で `a · 0 = 0`
+      _ = 0 := Int.cast_zero                                               -- 埋め込みの `ι(0) = 0`
+      _ = ((a : ℤ) : R) * 0 := (mul_zero _).symm                           -- `x · 0 = 0` を右辺から左辺へ
+      _ = ((a : ℤ) : R) * ((0 : ℤ) : R) := by rw [Int.cast_zero]           -- 埋め込みの `ι(0) = 0` を右辺から左辺へ
+  · intro i ih
+    calc ((a * ((i : ℤ) + 1) : ℤ) : R) = ((a * (i : ℤ) + a * 1 : ℤ) : R) := by rw [mul_add]
+                                                                           -- `ℤ` の分配律
+      _ = ((a * (i : ℤ) + a : ℤ) : R) := by rw [mul_one]                   -- `ℤ` の積の単位元
+      _ = ((a * (i : ℤ) : ℤ) : R) + ((a : ℤ) : R) := int_cast_add' _ _     -- `int_cast_add'`（`a → ab`, `b → a`）
+      _ = ((a : ℤ) : R) * (((i : ℤ)) : R) + ((a : ℤ) : R) := by rw [ih]    -- 帰納法の仮定
+      _ = ((a : ℤ) : R) * (((i : ℤ)) : R) + ((a : ℤ) : R) * 1 := by rw [mul_one]
+                                                                           -- `1` は乗法の右単位元
+      _ = ((a : ℤ) : R) * ((((i : ℤ)) : R) + 1) := (mul_add _ _ _).symm    -- 左からの分配法則を右辺から左辺へ
+      _ = ((a : ℤ) : R) * ((((i : ℤ) + 1 : ℤ)) : R) := by rw [int_cast_succ' (i : ℤ)]
+                                                                           -- `int_cast_succ'`（`n → b`）を右辺から左辺へ
+  · intro i ih
+    calc ((a * (-(i : ℤ) - 1) : ℤ) : R)
+        = ((a * (-(i : ℤ) - 1) : ℤ) : R) + 0 := (add_zero _).symm          -- `0` は和の右単位元
+      _ = ((a * (-(i : ℤ) - 1) : ℤ) : R) + (((a : ℤ) : R) + -((a : ℤ) : R)) := by rw [add_neg_cancel]
+                                                                           -- 加法逆元を右辺から左辺へ
+      _ = (((a * (-(i : ℤ) - 1) : ℤ) : R) + ((a : ℤ) : R)) + -((a : ℤ) : R) := (add_assoc _ _ _).symm
+                                                                           -- 和の結合律を右辺から左辺へ
+      _ = ((a * (-(i : ℤ) - 1) + a : ℤ) : R) + -((a : ℤ) : R) := by
+          rw [int_cast_add' (a * (-(i : ℤ) - 1)) a]                        -- `int_cast_add'` を右辺から左辺へ
+      _ = (((a * -(i : ℤ) - a * 1) + a : ℤ) : R) + -((a : ℤ) : R) := by rw [mul_sub]
+                                                                           -- `ℤ` の分配律
+      _ = (((a * -(i : ℤ) - a) + a : ℤ) : R) + -((a : ℤ) : R) := by rw [mul_one]
+                                                                           -- `ℤ` の積の単位元
+      _ = ((a * -(i : ℤ) : ℤ) : R) + -((a : ℤ) : R) := by rw [sub_add_cancel]
+                                                                           -- `ℤ` の四則
+      _ = ((a : ℤ) : R) * ((-(i : ℤ) : ℤ) : R) + -((a : ℤ) : R) := by rw [ih]
+                                                                           -- 帰納法の仮定
+      _ = ((a : ℤ) : R) * (((-(i : ℤ) - 1) + 1 : ℤ) : R) + -((a : ℤ) : R) := by
+          rw [show (-(i : ℤ) - 1) + 1 = -(i : ℤ) by omega]                  -- `ℤ` の四則
+      _ = ((a : ℤ) : R) * (((-(i : ℤ) - 1 : ℤ) : R) + 1) + -((a : ℤ) : R) := by
+          rw [int_cast_succ' (-(i : ℤ) - 1)]                               -- `int_cast_succ'`（`n → b - 1`）
+      _ = (((a : ℤ) : R) * ((-(i : ℤ) - 1 : ℤ) : R) + ((a : ℤ) : R) * 1) + -((a : ℤ) : R) := by
+          rw [mul_add]                                                     -- 左からの分配法則
+      _ = (((a : ℤ) : R) * ((-(i : ℤ) - 1 : ℤ) : R) + ((a : ℤ) : R)) + -((a : ℤ) : R) := by
+          rw [mul_one]                                                     -- `1` は乗法の右単位元
+      _ = ((a : ℤ) : R) * ((-(i : ℤ) - 1 : ℤ) : R) + (((a : ℤ) : R) + -((a : ℤ) : R)) := add_assoc _ _ _
+                                                                           -- 和の結合律
+      _ = ((a : ℤ) : R) * ((-(i : ℤ) - 1 : ℤ) : R) + 0 := by rw [add_neg_cancel]
+                                                                           -- 加法逆元
+      _ = ((a : ℤ) : R) * ((-(i : ℤ) - 1 : ℤ) : R) := add_zero _          -- `0` は和の右単位元
 
 end Ising2D.NecSuf

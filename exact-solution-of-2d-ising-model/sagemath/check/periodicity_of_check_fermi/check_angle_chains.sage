@@ -21,7 +21,7 @@ def tt(m):
 chain2 = [
     2 * PI * ((mu + kk * MM) - h) / MM,              # θ~ の定義を μ+kM で（像 (μ+kM)_R）
     2 * PI * ((mu + (kk * MM)) - h) / MM,            # inclusion_zz_to_rr_preserves_sum（a → μ, b → kM）
-    2 * PI * ((mu + kk * MM) - h) / MM,              # ι は積を保つ
+    2 * PI * ((mu + kk * MM) - h) / MM,              # inclusion_zz_to_rr_preserves_product（a → k, b → M）
     2 * PI * ((kk * MM + mu) - h) / MM,              # 加法の交換律 p + q = q + p（p → μ_R, q → k_R(M)_R。set_and_algebra_notation）
     2 * PI * ((kk * MM + mu) + (-h)) / MM,           # def_real_difference（y → k_R(M)_R + μ_R, z → 1/2）
     2 * PI * (kk * MM + (mu + (-h))) / MM,           # 加法の結合律 (p + q) + s = p + (q + s)（p → k_R(M)_R, q → μ_R, s → -1/2。set_and_algebra_notation）
