@@ -4655,7 +4655,7 @@ E_K \check{Q}_\epsilon
 &&\bigl(\because\ \blkref{real_times_half_is_quotient_by_two}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子の 2 箇所へ同時に}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
    2\cdot\frac{\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) + \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)}{2}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 2 \ne 0\ \text{なので}\ b = 2\cdot\tfrac{b}{2}\ \bigl(b \to \exp(\tfrac{\gamma(\tilde\theta_\mu)}{2}) + \exp(-\tfrac{\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{を各因子へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{real_twice_quotient_by_two_is_original}\ \bigl(b \to \exp(\tfrac{\gamma(\tilde\theta_\mu)}{2}) + \exp(-\tfrac{\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{を右辺から左辺へ、各因子へ同時に}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
 &&\bigl(\because\ \blkref{def_cosh_sinh}\ \text{の}\ \cosh\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に、右辺から左辺へ}\bigr)
 \end{aligned}`,
@@ -4740,7 +4740,7 @@ E_K \check{Q}_\epsilon
 &&\bigl(\because\ \blkref{real_times_half_is_quotient_by_two}\ (a \to -\gamma(\tilde\theta_\mu))\ \text{を各因子の 2 箇所へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
    2\cdot\frac{\exp\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right) + \exp\!\left(-\frac{-\gamma(\tilde\theta_\mu)}{2}\right)}{2}\Bigr)_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 2 \ne 0\ \text{なので}\ b = 2\cdot\tfrac{b}{2}\ \bigl(b \to \exp(\tfrac{-\gamma(\tilde\theta_\mu)}{2}) + \exp(-\tfrac{-\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{を各因子へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{real_twice_quotient_by_two_is_original}\ \bigl(b \to \exp(\tfrac{-\gamma(\tilde\theta_\mu)}{2}) + \exp(-\tfrac{-\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{を右辺から左辺へ、各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{def_cosh_sinh}\ \text{の}\ \cosh\ (x \to \tfrac{-\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に、右辺から左辺へ}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
@@ -4829,6 +4829,7 @@ E_K \check{Q}_\epsilon
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 2 と Step 3 の鎖の exp(γ(θ~_μ)(−½)) = exp(−(γ(θ~_μ)·½))（Step 3 は γ → −γ）の 2 行の根拠「ℝ で a(−b) = −(ab)」を、主張 real_times_negation_is_negation_of_product（x → γ(θ~_μ), t → ½ と x → −γ(θ~_μ), t → ½ を各因子へ同時に）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認）: Step 2 と Step 3 の鎖の「ℝ で 1 − 1/2 = 1/2」（各 1 か所）は名前だけの根拠だった。主張 real_one_minus_half_is_half の参照に替えた（Lean の prod_step2_cosh の対応する段も mathlib の sub_half から同じ主張の具体版へ替えた）。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認）: Step 2 と Step 3 の鎖の「ℝ で a·1/2 = a/2」（各 1 か所。a → γ(θ̃_μ) と a → −γ(θ̃_μ)）は名前だけの根拠だった。主張 real_times_half_is_quotient_by_two の参照に替えた（Lean の prod_step2_cosh の対応する段も mathlib の mul_one_div から同じ主張の具体版へ替えた。Step 3 は同じ補題を g → −g で使う）。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認）: Step 2 と Step 3 の鎖の「ℝ で 2 ≠ 0 なので b = 2·(b/2)」（各 1 か所。b → exp(γ(θ̃_μ)/2) + exp(−γ(θ̃_μ)/2) と b → exp(−γ(θ̃_μ)/2) + exp(−(−γ(θ̃_μ))/2)）は名前だけの根拠だった。主張 real_twice_quotient_by_two_is_original を右辺から左辺へ当てる参照に替えた（Lean の prod_step2_cosh の対応する段も mathlib の mul_div_cancel₀ から同じ主張の具体版へ替えた。Step 3 は同じ補題を g → −g で使う）。",
       ],
     },
   },

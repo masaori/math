@@ -2953,6 +2953,7 @@ a\cdot\tfrac12
       status: "added",
       notes: [
         "2026-11-19（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_of_epsilon_V_plus_via_check_eigenvalues の Step 4 の 2 本目の和の鎖が「ℝ で 2 ≠ 0 なので b = 2·(b/2)」を名前だけで根拠にしていたので、示す主張として足した（ℂ の twice_times_inverse_of_two_is_original_in_cc に当たる ℝ の主張）。Lean の具体版は Ising2D.real_twice_quotient_by_two_is_original（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealTwiceQuotientByTwoIsOriginal.lean）、必要十分版は Ising2D.NecSuf.mul_div_cancel_of_right_inverse'（NecSuf/MulDivCancelOfRightInverse.lean）。数値検証: sagemath/check/real_twice_quotient_by_two_is_original/。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認）: trace_of_check_Vprime の Step 2・Step 3 の鎖の「ℝ で 2 ≠ 0 なので b = 2·(b/2)」の各 1 か所も、この主張を右辺から左辺へ当てる参照に替えた（Lean は Ising2D.CheckFermiSetup.prod_step2_cosh の段）。",
       ],
     },
   },

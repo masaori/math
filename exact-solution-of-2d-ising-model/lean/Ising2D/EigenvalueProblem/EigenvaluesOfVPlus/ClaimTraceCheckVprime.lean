@@ -73,6 +73,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealOneMinusHalfIsHalf
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesHalfIsQuotientByTwo
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwiceQuotientByTwoIsOriginal
 
 namespace Ising2D
 
@@ -271,8 +272,10 @@ theorem prod_step2_cosh {r : ℕ} (g : CheckIdx (r + 1) → ℝ) :
     _ = ∏ j : Fin (r + 1),
           2 * ((Real.exp (g (checkIdxOfFin j) / 2) + Real.exp (-(g (checkIdxOfFin j) / 2))) / 2) := by
         refine Finset.prod_congr rfl fun j _ => ?_
-        rw [mul_div_cancel₀ _ (two_ne_zero : (2 : ℝ) ≠ 0)]
-                                                        -- ℝ で `2 ≠ 0` なので `b = 2·(b/2)` を各因子へ同時に
+        rw [real_twice_quotient_by_two_is_original
+          (Real.exp (g (checkIdxOfFin j) / 2) + Real.exp (-(g (checkIdxOfFin j) / 2)))]
+                                                        -- `real_twice_quotient_by_two_is_original`
+                                                        -- （`b → exp(γ(θ̃_μ)/2) + exp(−γ(θ̃_μ)/2)`）を右辺から左辺へ、各因子へ同時に
     _ = ∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) := by
         refine Finset.prod_congr rfl fun j _ => ?_
         rw [← Real.cosh_eq]                             -- `def_cosh_sinh` の `cosh`（`x → γ(θ̃_μ)/2`）を各因子へ同時に、右辺から左辺へ

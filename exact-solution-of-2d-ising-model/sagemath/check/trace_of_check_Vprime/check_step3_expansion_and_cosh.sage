@@ -6,7 +6,7 @@
 #   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(−1/2)))            (ℝ で 0 − a = −a、a → 1/2)
 #   = Π_μ (exp((−γ_μ)·1/2) + exp(−((−γ_μ)·1/2)))           (real_times_negation_is_negation_of_product、x → −γ_μ、t → 1/2)
 #   = Π_μ (exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))               (real_times_half_is_quotient_by_two、a → −γ_μ、各因子の 2 箇所)
-#   = Π_μ 2·((exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))/2)         (ℝ で 2 ≠ 0 なので b = 2·(b/2))
+#   = Π_μ 2·((exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))/2)         (real_twice_quotient_by_two_is_original を右辺から左辺へ)
 #   = Π_μ 2cosh((−γ_μ)/2)                                  (def_cosh_sinh の cosh、x → (−γ_μ)/2、右辺から左辺へ)
 #   = Π_μ 2cosh(−(γ_μ/2))                                  (ℝ で (−a)/2 = −(a/2))
 #   = Π_μ 2cosh(γ_μ/2)                                     (cosh_is_even、x → γ_μ/2)
@@ -88,7 +88,7 @@ for a, b in exact_steps:
     exact += 1
 Fb = FractionField(PolynomialRing(QQ, 'b'))
 bb = Fb.gen()
-assert bb == 2 * (bb / 2)              # b = 2·(b/2)
+assert bb == 2 * (bb / 2)              # b = 2·(b/2)（real_twice_quotient_by_two_is_original を右辺から左辺へ）
 exact += 1
 exact_broken = 0
 for a, b in [(mg * (0 - h), mg * h), (mg * h, mg), (bb, bb / 2)]:
