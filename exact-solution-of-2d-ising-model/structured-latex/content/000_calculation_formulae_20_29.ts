@@ -2893,6 +2893,7 @@ a\cdot\tfrac12
       status: "added",
       notes: [
         "2026-11-19（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_of_epsilon_V_plus_via_check_eigenvalues の Step 4 の 2 本目の和の鎖が「ℝ で a·1/2 = a/2」を名前だけで根拠にしていたので、示す主張として足した（eigenvalues_of_V_plus の同じ形の行は別の回で扱う）。Lean の具体版は Ising2D.real_times_half_is_quotient_by_two（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealTimesHalfIsQuotientByTwo.lean）、必要十分版は Ising2D.NecSuf.mul_one_div_eq_div'（NecSuf/MulOneDivEqDiv.lean）。数値検証: sagemath/check/real_times_half_is_quotient_by_two/。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認）: 上の「eigenvalues_of_V_plus の同じ形の行」は、trace_of_check_Vprime の Step 2・Step 3 の鎖の 2 か所（a → γ(θ̃_μ)、a → −γ(θ̃_μ)）だった。この主張の参照に替えた。主張は変えていない。",
       ],
     },
   },

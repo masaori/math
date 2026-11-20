@@ -72,6 +72,7 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealOneMinusHalfIsHalf
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesHalfIsQuotientByTwo
 
 namespace Ising2D
 
@@ -265,7 +266,8 @@ theorem prod_step2_cosh {r : ℕ} (g : CheckIdx (r + 1) → ℝ) :
     _ = ∏ j : Fin (r + 1),
           (Real.exp (g (checkIdxOfFin j) / 2) + Real.exp (-(g (checkIdxOfFin j) / 2))) := by
         refine Finset.prod_congr rfl fun j _ => ?_
-        rw [mul_one_div (g (checkIdxOfFin j)) 2]        -- ℝ で `a·(1/2) = a/2`（`a → γ(θ̃_μ)`）を各因子の 2 箇所へ同時に
+        rw [real_times_half_is_quotient_by_two (g (checkIdxOfFin j))]
+                                                        -- `real_times_half_is_quotient_by_two`（`a → γ(θ̃_μ)`）を各因子の 2 箇所へ同時に
     _ = ∏ j : Fin (r + 1),
           2 * ((Real.exp (g (checkIdxOfFin j) / 2) + Real.exp (-(g (checkIdxOfFin j) / 2))) / 2) := by
         refine Finset.prod_congr rfl fun j _ => ?_

@@ -5,14 +5,14 @@
 #   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(0 − 1/2)))         (real_one_minus_half_is_half)
 #   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(−1/2)))            (ℝ で 0 − a = −a、a → 1/2)
 #   = Π_μ (exp((−γ_μ)·1/2) + exp(−((−γ_μ)·1/2)))           (real_times_negation_is_negation_of_product、x → −γ_μ、t → 1/2)
-#   = Π_μ (exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))               (ℝ で a·1/2 = a/2、a → −γ_μ、各因子の 2 箇所)
+#   = Π_μ (exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))               (real_times_half_is_quotient_by_two、a → −γ_μ、各因子の 2 箇所)
 #   = Π_μ 2·((exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))/2)         (ℝ で 2 ≠ 0 なので b = 2·(b/2))
 #   = Π_μ 2cosh((−γ_μ)/2)                                  (def_cosh_sinh の cosh、x → (−γ_μ)/2、右辺から左辺へ)
 #   = Π_μ 2cosh(−(γ_μ/2))                                  (ℝ で (−a)/2 = −(a/2))
 #   = Π_μ 2cosh(γ_μ/2)                                     (cosh_is_even、x → γ_μ/2)
 # 最後の 2 行は check_step3_and_step4_real_lines.sage も確かめている。ここでは鎖が切れずにつながることを見るために含める。
 # 厳密な部: 展開の行を exp((−γ_μ)(e − 1/2)) → a_μ^{−(2e−1)}（a_μ は QQ 上の有理関数体の不定元）に置いて M_col = 1..6 で、
-#   書き換えの 5 段（a·1/2 = a/2 は 2 箇所を別々に数えて 6 段）と (−a)/2 = −(a/2) を QQ[γ] の不定元で、b = 2·(b/2) を QQ(b) で確かめる。
+#   書き換えの 5 段（real_times_half_is_quotient_by_two は 2 箇所を別々に数えて 6 段）と (−a)/2 = −(a/2) を QQ[γ] の不定元で、b = 2·(b/2) を QQ(b) で確かめる。
 # 球の部: γ(θ~_μ)・exp・cosh の値は ℝ への脱出なので、区間演算 RealBallField(200) の球で扱い、
 #   11 個の式を M_col = 2..6、K の 4 組で組んで、隣どうしの球が交わること（半径 1e-40 未満）を確かめる。
 #   1 行目の左辺の exp(−ǧ(ε)) は ǧ の定義の和の符号反転の exp として組み、2 行目の積とは別に計算する。
@@ -79,8 +79,8 @@ exact_steps = [
     (mg * (1 - h), mg * h),            # real_one_minus_half_is_half
     (mg * (0 - h), mg * (-h)),         # 0 − a = −a
     (mg * (-h), -(mg * h)),            # real_times_negation_is_negation_of_product、x → −γ
-    (mg * h, mg / 2),                  # a·1/2 = a/2（1 つ目の箇所）
-    (-(mg * h), -(mg / 2)),            # a·1/2 = a/2（2 つ目の箇所）
+    (mg * h, mg / 2),                  # real_times_half_is_quotient_by_two（1 つ目の箇所）
+    (-(mg * h), -(mg / 2)),            # real_times_half_is_quotient_by_two（2 つ目の箇所）
     (mg / 2, -(gam / 2)),              # (−a)/2 = −(a/2)
 ]
 for a, b in exact_steps:

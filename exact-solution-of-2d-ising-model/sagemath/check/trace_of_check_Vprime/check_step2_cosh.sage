@@ -3,12 +3,12 @@
 #   = Π_μ (exp(γ_μ·1/2) + exp(γ_μ(0 − 1/2)))        (real_one_minus_half_is_half)
 #   = Π_μ (exp(γ_μ·1/2) + exp(γ_μ(−1/2)))           (ℝ で 0 − a = −a、a → 1/2)
 #   = Π_μ (exp(γ_μ·1/2) + exp(−(γ_μ·1/2)))          (real_times_negation_is_negation_of_product、x → γ_μ、t → 1/2)
-#   = Π_μ (exp(γ_μ/2) + exp(−(γ_μ/2)))              (ℝ で a·1/2 = a/2、a → γ_μ、各因子の 2 箇所)
+#   = Π_μ (exp(γ_μ/2) + exp(−(γ_μ/2)))              (real_times_half_is_quotient_by_two、a → γ_μ、各因子の 2 箇所)
 #   = Π_μ 2·((exp(γ_μ/2) + exp(−(γ_μ/2)))/2)        (ℝ で 2 ≠ 0 なので b = 2·(b/2))
 #   = Π_μ 2cosh(γ_μ/2)                              (def_cosh_sinh の cosh、x → γ_μ/2、右辺から左辺へ)
 # γ_μ := γ(θ~_μ)。
 # 厳密な部: 書き換えの 5 行（cosh の行を除く）は因子の中の一つの計算規則なので、書き換えた部分式どうしを厳密に比べる
-#   （a·1/2 = a/2 の行は 2 箇所を別々に数えて 6 段）。cosh の行は球の部だけで確かめる。
+#   （real_times_half_is_quotient_by_two の行は 2 箇所を別々に数えて 6 段）。cosh の行は球の部だけで確かめる。
 #   指数の引数の 4 行は γ を QQ 上の多項式環 QQ[γ] の不定元に置いて恒等式として、b = 2·(b/2) は
 #   b を QQ 上の有理関数体の不定元に置いて確かめる（γ・b が ℝ の元であることは使わず、体の計算だけで閉じる）。
 # 球の部: γ(θ~_μ)・exp・cosh の値は ℝ への脱出（arccosh・exp・cos・cosh の値）なので、区間演算 RealBallField(200) の球で扱い、
@@ -60,8 +60,8 @@ exact_steps = [
     (gam * (1 - h), gam * h),          # real_one_minus_half_is_half
     (gam * (0 - h), gam * (-h)),       # 0 − a = −a
     (gam * (-h), -(gam * h)),          # real_times_negation_is_negation_of_product
-    (gam * h, gam / 2),                # a·1/2 = a/2（1 つ目の箇所）
-    (-(gam * h), -(gam / 2)),          # a·1/2 = a/2（2 つ目の箇所）
+    (gam * h, gam / 2),                # real_times_half_is_quotient_by_two（1 つ目の箇所）
+    (-(gam * h), -(gam / 2)),          # real_times_half_is_quotient_by_two（2 つ目の箇所）
 ]
 for a, b in exact_steps:
     assert a == b
