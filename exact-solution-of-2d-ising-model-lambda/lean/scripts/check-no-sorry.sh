@@ -2556,6 +2556,9 @@ targets=(
   Ising2DLambda.FisherZero.imaginaryUnitExtension_zeroCoefficient_squareRoot
   Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_zeroCoefficient_squareRoot
   Ising2DLambda.FisherZero.imaginaryUnitExtension_zeroCoefficient_squareRoot_from_necSuf
+  Ising2DLambda.FisherZero.imaginaryUnitExtension_squareRoot
+  Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_squareRoot
+  Ising2DLambda.FisherZero.imaginaryUnitExtension_squareRoot_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

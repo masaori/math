@@ -50946,6 +50946,85 @@ u^2-v^2&=\frac{c+a}{2}-v^2&&(\because\ 2u^2=c+a)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_imaginary_unit_extension_square_root",
+        labels: [],
+        title: { text: "虚数単位を足した元の平方根" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_imaginary_unit_extension_square_root",
+            focus: {
+              id: "zero_pinching_claim_imaginary_unit_extension_square_root",
+              kind: "claim",
+              title: { text: "正の元が平方である部分体に虚数単位を足した元は平方根を持つ" },
+              labels: ["claim_imaginary_unit_extension_square_root"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/imaginary-unit-extension-square-root"],
+              lean: [
+                "Ising2DLambda.FisherZero.imaginaryUnitExtension_squareRoot",
+                "Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_squareRoot",
+                "Ising2DLambda.FisherZero.imaginaryUnitExtension_squareRoot_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subset\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`C_F\subset F`), " を ", ref("def_subfield_positive_cone"),
+                " の正錐とし、", math(String.raw`C_F`), " の各元は ",
+                math(String.raw`F`), " に平方根を持つと仮定する。任意の ",
+                math(String.raw`a,b\in F`), " と ",
+                math(String.raw`\omega\in\overline{\mathbb Q}`), " について、",
+                math(String.raw`\omega^2=-1`), " なら、ある ",
+                math(String.raw`u,v\in F`), " が存在して ",
+                math(String.raw`(u+v\omega)^2=a+b\omega`), " となる。",
+              ])],
+              proof: [
+                paragraph([math(String.raw`b=0`), " の場合は ",
+                  ref("claim_imaginary_unit_zero_coefficient_square_root"),
+                  " により結論を得る。以下、", math(String.raw`b\ne0`), " とする。"]),
+                paragraph([ref("claim_subfield_positive_cone_contains_nonzero_squares"),
+                  " より ", math(String.raw`b^2\in C_F`), " である。",
+                  math(String.raw`a=0`), " なら次のようになる。"]),
+                displayMath(String.raw`\begin{aligned}
+a^2+b^2&=0^2+b^2&&(\because\ a=0)\\
+&=b^2&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&\in C_F&&(\because\ \blkref{claim_subfield_positive_cone_contains_nonzero_squares})
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`a\ne0`), " なら同じ主張と ",
+                  ref("def_subfield_positive_cone"), " の和の閉性から ",
+                  math(String.raw`a^2+b^2\in C_F`), " である。"]),
+                paragraph(["仮定から ", math(String.raw`c\in F`), " を ",
+                  math(String.raw`c^2=a^2+b^2`), " と選ぶ。",
+                  math(String.raw`c=0`), " と仮定すると、次の等式を得る。"]),
+                displayMath(String.raw`\begin{aligned}
+a^2+b^2&=c^2&&(\because\ c^2=a^2+b^2)\\
+&=0&&(\because\ c=0)
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`0\notin C_F`), " に矛盾する。よって ",
+                  math(String.raw`c\ne0`), " である。"]),
+                paragraph([ref("def_subfield_positive_cone"), " の三分法により ",
+                  math(String.raw`c\in C_F`), " または ",
+                  math(String.raw`-c\in C_F`), " である。前者では ",
+                  ref("claim_imaginary_unit_nonzero_coefficient_square_root"),
+                  " を ", math(String.raw`c`), " に適用する。後者では ",
+                  math(String.raw`-c`), " について次の等式を得る。"]),
+                displayMath(String.raw`\begin{aligned}
+(-c)^2&=c^2&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&=a^2+b^2&&(\because\ c^2=a^2+b^2)
+\end{aligned}`),
+                paragraph([ref("claim_imaginary_unit_nonzero_coefficient_square_root"),
+                  " を ", math(String.raw`-c`), " に適用する。どちらも結論を得る。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_coefficient_polynomials",
         labels: [],
         title: { text: "部分体を係数とする多項式と部分体上の次数" },
@@ -52334,9 +52413,14 @@ y&=\mathrm{aev}_{\alpha}(f)&&\bigl(\because\ f\ \text{の取り方}\bigr)\\
                     paragraph([
                       "であり、係数がすべて等しい二つの多項式は等しい（",
                       ref("def_qbar_polynomial_ring"),
-                      "）ので ",
-                      math(String.raw`p=\widehat{\mathrm{ac}_0(p)}+t\cdot p'`),
-                      " である。全過程は ",
+                      "）。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+p&=\widehat{\mathrm{ac}_0(p)}+t\cdot p'
+&&\bigl(\because\ \text{全係数の一致と}\ \blkref{def_qbar_polynomial_ring}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "全過程は ",
                       math(String.raw`\overline{\mathbb{Q}}`),
                       " の係数の有限の計算だけで閉じ、実数体も複素数体も現れない。",
                     ]),
