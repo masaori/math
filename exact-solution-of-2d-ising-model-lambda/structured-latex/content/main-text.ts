@@ -31726,6 +31726,7 @@ A\cdot(B\cdot v)
                     {
                       id: "algebraic_eigenvalue_claim_qbar_transfer_preserves_shift_eigenspace",
                       kind: "claim",
+                      standing: "mainTheorem",
                       title: { text: "転送行列はシフト行列の各固有空間をそれ自身へ写す" },
                       labels: ["claim_qbar_transfer_preserves_shift_eigenspace"],
                       habitat: "Qbar",
@@ -36660,9 +36661,7 @@ Z_L(1)
 &\ne0
 &&(\because\ 2^{L^2}\ \text{は正の自然数})
 \end{aligned}`),
-                    paragraph([
-                      "したがって ", math(String.raw`Z_L\ne0`), " である。",
-                    ]),
+                    displayMath(String.raw`Z_L\ne0\qquad(\because\ Z_L(1)\ne0)`),
                     displayMath(String.raw`\mathrm{Ev}^{F}_{\xi}(Z_L)=0
 \qquad(\because\ \xi\in\mathcal{F}_{L},\ \blkref{def_finite_lattice_fisher_zeros})`),
                     paragraph([
