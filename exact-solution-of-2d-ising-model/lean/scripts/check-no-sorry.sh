@@ -2414,7 +2414,9 @@ targets=(
   Ising2D.sinh_sub_formula
   Ising2D.cosh_eq_one_add_two_sinh_half_sq
   Ising2D.sinh_eq_two_sinh_half_mul_cosh_half
-  Ising2D.sinh_strictMono
+  Ising2D.real_neg_lt_neg_of_lt
+  Ising2D.sinh_strictly_increasing
+  Ising2D.sinh_le_sinh_of_le
   Ising2D.sinh_injective_real
   Ising2D.arsinh_eq_log_form
   Ising2D.sinh_arsinh_eq
@@ -2925,6 +2927,10 @@ targets=(
   Ising2D.sinh_sub_formula_of_necSuf
   "Ising2D.NecSuf.double_angle_formula'"
   Ising2D.sinh_eq_two_sinh_half_mul_cosh_half_of_necSuf
+  "Ising2D.NecSuf.neg_lt_neg_of_lt'"
+  "Ising2D.NecSuf.oddPart_strictly_increasing'"
+  Ising2D.sinh_eq_mul_one_half
+  Ising2D.sinh_strictly_increasing_of_necSuf
   Ising2D.positive_real_square_injective
   Ising2D.factor_difference_of_squares_eq_zero
   "Ising2D.NecSuf.positive_square_injective'"

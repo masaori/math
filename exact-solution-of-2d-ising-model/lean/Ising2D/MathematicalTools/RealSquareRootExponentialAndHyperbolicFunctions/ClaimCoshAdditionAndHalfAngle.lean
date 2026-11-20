@@ -20,8 +20,9 @@
 
 原文 `arcsinh(y) := log(y + √(y²+1))` は mathlib の `Real.arsinh`（綴りは `arcsinh` ではない）と
 **定義が一致する**（`Real.arsinh x = log (x + √(1 + x^2))`）。
-逆関数性 `Real.sinh_arsinh` / `Real.arsinh_sinh`、単調性 `Real.sinh_lt_sinh` /
-`Real.sinh_le_sinh`、微分 `Real.hasDerivAt_arsinh` がすべて揃っているので自前定義は不要。
+逆関数性 `Real.sinh_arsinh` / `Real.arsinh_sinh`、微分 `Real.hasDerivAt_arsinh` が揃っているので自前定義は不要。
+単調性は mathlib の `Real.sinh_lt_sinh` / `Real.sinh_le_sinh` を使わず、人手 `sinh_strictly_increasing` の具体版
+（`ClaimSinhStrictlyIncreasing.lean`）で引く。
 `t ≤ sinh t` も `Real.self_le_sinh_iff` にある。
 mathlib に**無かった**のは `sinh t ≤ t cosh t` だけで、これは必要十分版で証明した。
 -/
@@ -30,6 +31,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimSinhIsOdd
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimSinhStrictlyIncreasing
 
 namespace Ising2D
 
@@ -165,11 +167,20 @@ theorem sinh_eq_two_sinh_half_mul_cosh_half (x : ℝ) :
           rw [← two_mul, ← mul_assoc]
           -- 同類項をまとめる（`two_mul`）。続く `mul_assoc` は上の docstring の Lean にだけある段
 
-/-- 人手証明 (3): `sinh` は狭義単調増加。 -/
-theorem sinh_strictMono : StrictMono Real.sinh := fun _ _ h => Real.sinh_lt_sinh.2 h
-
-/-- 人手証明 (3) の系: `sinh` は単射。 -/
-theorem sinh_injective_real : Function.Injective Real.sinh := sinh_strictMono.injective
+/-- **人手 `sinh_is_injective`**: `sinh u = sinh v` ならば `u = v`。人手の対偶の 3 行の鎖と 1 対 1。
+狭義単調増加は人手 `sinh_strictly_increasing` の具体版（`ClaimSinhStrictlyIncreasing.lean`）で引く。
+mathlib の `StrictMono.injective` は使わない。 -/
+theorem sinh_injective_real : Function.Injective Real.sinh := by
+  intro u v huv
+  by_contra hne                                         -- 対偶を示す
+  have h1 : u < v ∨ v < u := lt_or_gt_of_ne hne         -- ℝ の順序は全順序
+  have h2 : Real.sinh u < Real.sinh v ∨ Real.sinh v < Real.sinh u :=
+    h1.imp sinh_strictly_increasing sinh_strictly_increasing
+                                                        -- `sinh_strictly_increasing` をそれぞれの場合へ
+  have h3 : Real.sinh u ≠ Real.sinh v :=
+    h2.elim (fun h => ne_of_lt h) (fun h => (ne_of_lt h).symm)
+                                                        -- `a < b` なら `a ≠ b`
+  exact h3 huv
 
 /-- 人手証明 (4): `arcsinh(y) = log(y + √(y²+1))` は mathlib の `Real.arsinh` と一致する。 -/
 theorem arsinh_eq_log_form (y : ℝ) : Real.arsinh y = Real.log (y + Real.sqrt (y ^ 2 + 1)) := by

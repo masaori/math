@@ -88,7 +88,9 @@ theorem Kc_gt_tenth : (1:ℝ)/10 < Kc := by
   have h1 : Real.sinh (0.2 : ℝ) < Real.sinh (2 * Kc) := by
     rw [sinh_two_Kc]
     linarith [sinh_02_bounds.2]
-  have := Real.sinh_lt_sinh.1 h1
+  -- `2K_c ≤ 0.2` なら `sinh_strictly_increasing`（等号のときは等しい。`sinh_le_sinh_of_le`）で `sinh 2K_c ≤ sinh 0.2` となり `h1` に反する
+  -- （この補題は Lean にだけある。人手の `K_c > 0` の背理法とは別の経路）
+  have h2 : (0.2 : ℝ) < 2 * Kc := lt_of_not_ge fun hle => absurd h1 (not_lt.mpr (sinh_le_sinh_of_le hle))
   linarith
 
 theorem Kc_pos : 0 < Kc := by linarith [Kc_gt_tenth]
@@ -221,12 +223,14 @@ theorem sinh_two_K_bounds {K : ℝ} (hK : K ∈ Dnbhd) :
     -- 人手 (4) の複号 + の側。読み方は `hlow` と同じ。
     rw [sinh_add_formula, sinh_two_Kc, cosh_two_Kc]; ring
   constructor
-  · have hmono : Real.sinh (2 * Kc - 0.2) ≤ Real.sinh (2 * K) :=
-      Real.sinh_le_sinh.2 (by norm_num at hl ⊢; linarith)
+  · -- `2K_c − 1/5 ≤ 2K` と `sinh_strictly_increasing`（等号のときは等しい）
+    have hmono : Real.sinh (2 * Kc - 0.2) ≤ Real.sinh (2 * K) :=
+      sinh_le_sinh_of_le (by norm_num at hl ⊢; linarith)
     rw [hlow] at hmono
     nlinarith [hs2.1, hs2.2, hc02.1, hc02.2, hs02.1, hs02.2, hmono]
-  · have hmono : Real.sinh (2 * K) ≤ Real.sinh (2 * Kc + 0.2) :=
-      Real.sinh_le_sinh.2 (by norm_num at hu ⊢; linarith)
+  · -- `2K ≤ 2K_c + 1/5` と `sinh_strictly_increasing`（等号のときは等しい）
+    have hmono : Real.sinh (2 * K) ≤ Real.sinh (2 * Kc + 0.2) :=
+      sinh_le_sinh_of_le (by norm_num at hu ⊢; linarith)
     rw [hhigh] at hmono
     nlinarith [hs2.1, hs2.2, hc02.1, hc02.2, hs02.1, hs02.2, hmono]
 
