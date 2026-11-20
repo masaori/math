@@ -138,10 +138,13 @@ for M in range(2, 9):
                                                 # u に依らない c の二元集合 {-1,1} 上の和は c + c
     L13 = 2 * finite_prod([X - Y for m in range(1, M)])
                                                 # real_sum_of_two_equal_terms_is_twice（a → Π_m(x − y)）
-    sinhK = (X - Y) / 2                         # def_cosh_sinh（exp(K) → x、exp(-K) → y）
-    L14 = 2 * finite_prod([2 * sinhK for m in range(1, M)])
-    L15 = 2 * (2 * sinhK) ^ (M - 1)
-    chain = [L1, L2, L3, L4, L11, L12, L13, L14, L15]
+    L14 = 2 * finite_prod([2 * ((X - Y) / 2) for m in range(1, M)])
+                                                # real_twice_quotient_by_two_is_original（b → x − y）を右辺から左辺へ
+    sinhK = (X - Y) / 2                         # def_cosh_sinh の sinh（exp(K) → x、exp(-K) → y）
+    L15 = 2 * finite_prod([2 * sinhK for m in range(1, M)])
+                                                # def_cosh_sinh の sinh（exp(K) → x、exp(-K) → y として）を右辺から左辺へ
+    L16 = 2 * (2 * sinhK) ^ (M - 1)
+    chain = [L1, L2, L3, L4, L11, L12, L13, L14, L15, L16]
     for a, b in zip(chain, chain[1:]):
         assert a == b, M
         count += 1
@@ -151,9 +154,9 @@ for M in range(2, 9):
     count += 1
     # 否定コントロール: 端点因子を落とすと cosh の側になる、二元集合の和で符号を落とすと外れる
     L0_no_endpoint = finite_sum([finite_prod([w_sym(t(s, m)) for m in range(1, M)]) for s in S], Rxy(0))
-    if L0_no_endpoint != L15:
+    if L0_no_endpoint != L16:
         neg_no_endpoint += 1
-    if L15 != 2 * (X + Y) ^ (M - 1):
+    if L16 != 2 * (X + Y) ^ (M - 1):
         neg_sign += 1
 
 # 主張の鎖の 8 行目・9 行目の根拠（K ∈ K_SAMPLES ⊂ ℚ で厳密に）: 乗法の可換律 K·(-1) = (-1)·K と
@@ -190,9 +193,11 @@ for M in range(2, 8):
         L12 = (finite_prod([rexp(RK) - rexp(-RK) for m in range(1, M)])
                + finite_prod([rexp(RK) - rexp(-RK) for m in range(1, M)]))  # 二元集合 {-1,1} 上の和は c + c
         L13 = 2 * finite_prod([rexp(RK) - rexp(-RK) for m in range(1, M)])   # real_sum_of_two_equal_terms_is_twice
-        L14 = 2 * finite_prod([2 * rsinh_def(K) for m in range(1, M)])
-        L15 = 2 * (2 * rsinh_def(K)) ^ (M - 1)
-        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, L12, L13, L14, L15]
+        L14 = 2 * finite_prod([2 * ((rexp(RK) - rexp(-RK)) / 2) for m in range(1, M)])
+                                                # real_twice_quotient_by_two_is_original（b → exp(K) − exp(−K)）を右辺から左辺へ
+        L15 = 2 * finite_prod([2 * rsinh_def(K) for m in range(1, M)])   # def_cosh_sinh の sinh（x → K）を右辺から左辺へ
+        L16 = 2 * (2 * rsinh_def(K)) ^ (M - 1)
+        chain = [L0, L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, L12, L13, L14, L15, L16]
         if K == 0:
             # 値が 0 になるので相対の半径の判定が効かない。0 を含むことと半径の絶対値で見る
             for v in chain:

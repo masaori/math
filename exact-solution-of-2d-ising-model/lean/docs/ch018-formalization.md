@@ -250,8 +250,8 @@
 | `Ising2D.binaryWordRealSum_eq_sum_univ` / `openChainEnergy_eq_sum_fin` | 運ぶ段（人手の行は無い）: `{0,1}^r` の上の和を全体の上の和で読む、`E(s)` を添字 `Fin (n + 1)` の和で読む | `open_chain_partition_sum` の Step 2 |
 | `Ising2D.prod_bondSpin_of_two` / `prod_bondSpin_of_ge_three` / `prod_bondSpin_eq_first_mul_last` | `Π_m t_m(s) = s(1)s(M_col)`（`M_col = 2` の 3 段と `M_col ≥ 3` の 11 段。因子の並べ替えは `finite_product_of_real_products`・`finite_product_of_real_numbers_splits_off_first_factor`・`def_finite_product_of_real_numbers` の帰納の式・ℝ の乗法の結合律（`set_and_algebra_notation`）の段） | `open_chain_endpoint_product_sum` の Step 2 |
 | `Ising2D.endpoint_mul_exp_openChainEnergy_eq_prod` | `s(M_col)s(1)exp(KE(s)) = Π_m(t_m(s)exp(Kt_m(s)))`（4 段） | `open_chain_endpoint_product_sum` の Step 2 |
-| **`Ising2D.open_chain_partition_sum`** | **`∑_s exp(KE(s)) = 2(2cosh K)^{M_col-1}`**（左辺と 12 行の calc。`u` に依らない `c` の `{-1,1}` 上の和の段と `c + c = 2c` の段（`real_sum_of_two_equal_terms_is_twice`）は別の段） | **主張本体** |
-| **`Ising2D.open_chain_endpoint_product_sum`** | **`∑_s s(M_col)s(1)exp(KE(s)) = 2(2sinh K)^{M_col-1}`**（左辺と 15 行の calc。`u` に依らない `c` の `{-1,1}` 上の和の段と `c + c = 2c` の段（`real_sum_of_two_equal_terms_is_twice`）は別の段） | **主張本体** |
+| **`Ising2D.open_chain_partition_sum`** | **`∑_s exp(KE(s)) = 2(2cosh K)^{M_col-1}`**（左辺と 13 行の calc。`u` に依らない `c` の `{-1,1}` 上の和の段と `c + c = 2c` の段（`real_sum_of_two_equal_terms_is_twice`）、`2·(b/2) = b` の段（`real_twice_quotient_by_two_is_original`）と `def_cosh_sinh` の段は別の段） | **主張本体** |
+| **`Ising2D.open_chain_endpoint_product_sum`** | **`∑_s s(M_col)s(1)exp(KE(s)) = 2(2sinh K)^{M_col-1}`**（左辺と 16 行の calc。`u` に依らない `c` の `{-1,1}` 上の和の段と `c + c = 2c` の段（`real_sum_of_two_equal_terms_is_twice`）、`2·(b/2) = b` の段（`real_twice_quotient_by_two_is_original`）と `def_cosh_sinh` の段は別の段） | **主張本体** |
 | `Ising2D.open_chain_partition_sum_pos` / `open_chain_endpoint_product_sum_pos` | 二つのスピン和は正（`K > 0`） | `open_chain_spin_sums_positive` |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReduction.lean`（ラベル `trace_of_epsilon_V_plus` の Step 1・Step 2）

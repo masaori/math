@@ -12,15 +12,15 @@
 | --- | --- |
 | `open_chain_partition_sum` の鎖の `人手 2`〜`人手 5`、`open_chain_endpoint_product_sum` の最後の鎖の `人手 2`〜`人手 5`（同じ並び） | `open_chain_weighted_sum_eq_sum_prod` の印 `人手 2`〜`人手 5` |
 | `open_chain_partition_sum` の `人手 9`・`人手 10`、`open_chain_endpoint_product_sum` の `人手 12`・`人手 13`（`u` に依らない `c` の `{-1,1}` 上の和を `c + c` にし、`c + c = 2c`） | `sum_spinVal_const`（同じ 2 段。`c + c = 2c` の段は `add_self_eq_two_mul'`） |
-| 上の二つと冪の行（`open_chain_partition_sum` の `人手 12`、`open_chain_endpoint_product_sum` の `人手 15`）を続けたもの | `open_chain_weighted_sum` |
+| 上の二つと冪の行（`open_chain_partition_sum` の `人手 13`、`open_chain_endpoint_product_sum` の `人手 16`）を続けたもの | `open_chain_weighted_sum` |
 | 二つの鎖の `人手 4` が引く `expansion_of_finite_product_of_two_term_sums_of_real_numbers` | `prod_add_eq_binWordSum'`（`finProdLeft_add_eq_binWordSum` を `Finset.prod` へ運んだもの） |
 | `{-1,1}` 上の有限和 `sum_spinVal` | `sum_spinVal_addCommMonoid` |
 | `open_chain_endpoint_product_sum` の Step 2 の `M_col = 2` の鎖（3 行） | `prod_mul_succ_of_two`（同じ 3 段） |
 | 同 `M_col ≥ 3` の鎖（11 行） | `prod_mul_succ_of_ge_three`（同じ 11 段。1 段目の `t_m(s) := s(m)s(m+1)` は、ここでは左辺を読み直すだけの段。`finite_product_of_real_products` の段は `finset_prod_mul_distrib'`、`finite_product_of_real_numbers_splits_off_first_factor` の段は `finset_prod_succ_first'`、`finite_product_of_real_ones` の段は `finset_prod_const_one'`） |
 | 二つの鎖をまとめた `prod_bondSpin_eq_first_mul_last` | `prod_mul_succ_eq_first_mul_last` |
 
-具体版の鎖のうち、重みに固有の行（`open_chain_partition_sum` の準備の鎖・`人手 1`・`人手 6`〜`人手 8`・`人手 11`、
-`open_chain_endpoint_product_sum` の `exp(KE(s))` の鎖・端点の積の鎖・`人手 1`・`人手 6`〜`人手 11`・`人手 14`）は、
+具体版の鎖のうち、重みに固有の行（`open_chain_partition_sum` の準備の鎖・`人手 1`・`人手 6`〜`人手 8`・`人手 11`・`人手 12`、
+`open_chain_endpoint_product_sum` の `exp(KE(s))` の鎖・端点の積の鎖・`人手 1`・`人手 6`〜`人手 11`・`人手 14`・`人手 15`）は、
 重みを `g(t) = exp(Kt)`・`g(t) = t·exp(Kt)` に取ったときの読み替えなので、導出のファイルに置く。導出のファイルは、
 具体版と同じ行の順で、`open_chain_weighted_sum_eq_sum_prod`・重みに固有の行・`sum_spinVal_const`・重みに固有の行・冪の行をつなぐ。
 
@@ -35,7 +35,7 @@
     `{0,1}` と `{-1,1}` の全単射 `spinIdxEquiv` を使う）。
   - 乗法の可換モノイド: 具体版と同じく有限積を足す順序を持たない `Finset.prod` で書くので、その定まり方に要る。展開の段は
     `Finset.prod` と左から掛ける有限積 `finProdLeft` をつなぐ `finset_prod_eq_finProdLeft'`（運ぶ段）を通すだけである。
-    `人手 12`（端点の主張では `人手 15`）の冪は、人手の `x^n := Π_{j=1}^{n} x` を `Fin.prod_const` で読む。
+    `人手 13`（端点の主張では `人手 16`）の冪は、人手の `x^n := Π_{j=1}^{n} x` を `Fin.prod_const` で読む。
   零の吸収律 `0·a = 0` は効いていないが、`Finset.sum`・`Finset.prod`・二つの分配律・`1 + 1 = 2` を同時に持つ Lean の型クラスは
   半環の系列しかないので、`CommSemiring` で受ける。
   重みの値について、実数であること、指数関数、`cosh`・`sinh` は効いていない。二つのスピン和は、重みを

@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 - ブロック: `closing_005_claim_open_chain_partition_sum`（Σ_{s∈𝔐} exp(KE(s)) = 2(2cosh K)^{M_col−1}、K ∈ ℝ）
-- 範囲: Step 1（全単射 Φ と復元、ς と成分ごとの写像の全単射）、Step 2 の準備の鎖（3 行）、主張の鎖（12 行）の全ての行と主張。
+- 範囲: Step 1（全単射 Φ と復元、ς と成分ごとの写像の全単射）、Step 2 の準備の鎖（3 行）、主張の鎖（13 行）の全ての行と主張。
 
 ## 組み方
 
@@ -41,8 +41,9 @@
 | 主張の鎖 8 行目（real_minus_one_times_is_negation の (−1)K = −K） | 球。根拠の等式は K ∈ K_SAMPLES で厳密（QQ） |
 | 主張の鎖 9 行目（u に依らない c の二元集合 {−1,1} 上の和は c + c） | 厳密と球 |
 | 主張の鎖 10 行目（real_sum_of_two_equal_terms_is_twice（a → Π_m(exp(K) + exp(−K))）） | 厳密と球 |
-| 主張の鎖 11 行目（def_cosh_sinh） | 厳密と球 |
-| 主張の鎖 12 行目（冪の定義） | 厳密と球 |
+| 主張の鎖 11 行目（real_twice_quotient_by_two_is_original（b → exp(K) + exp(−K)）を右辺から左辺へ） | 厳密と球 |
+| 主張の鎖 12 行目（def_cosh_sinh の cosh を右辺から左辺へ） | 厳密と球 |
+| 主張の鎖 13 行目（冪の定義） | 厳密と球 |
 | 主張 | 球。右辺は Sage の cosh |
 
 否定コントロール（種類ごとに外れる件数を確かめる）: 準備 3 行目を「exp の和」に壊すと M_col = 3..7 の全ての配置と K で外れる（1984 件）、主張の冪を M_col にすると外れる（7 件）、cosh を sinh にすると外れる（厳密 7 件、球 42 件）。
@@ -53,7 +54,7 @@
 
 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|
-| `check_chain.sage` | Step 1、準備と主張の鎖の全ての行、主張、否定コントロール | 実行済み | PASS（8828 件、否定コントロール 2040 件） |
+| `check_chain.sage` | Step 1、準備と主張の鎖の全ての行、主張、否定コントロール | 実行済み | PASS（8883 件、否定コントロール 2040 件） |
 
 ## 実行方法
 

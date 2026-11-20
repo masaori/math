@@ -2905,8 +2905,10 @@ D_0G
    \quad (\because u\text{ に依らない実数 }c\text{ の二元集合 }\{-1,1\}\text{ 上の和は }c + c) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(-K)\right)
    \quad \left(\because \blkref{real_sum_of_two_equal_terms_is_twice}\ \left(a \to \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(-K)\right)\right)\right) \\
+&= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\cdot\frac{\exp(K)+\exp(-K)}{2}\right)
+   \quad \left(\because \blkref{real_twice_quotient_by_two_is_original}\ (b \to \exp(K)+\exp(-K))\text{ を右辺から左辺へ、各因子へ}\right) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\cosh K\right)
-   \quad \left(\because \blkref{def_cosh_sinh}\ (x \to K)\text{ を各因子へ}\right) \\
+   \quad \left(\because \blkref{def_cosh_sinh}\ \text{の}\ \cosh\ (x \to K)\text{ を右辺から左辺へ、各因子へ}\right) \\
 &= 2\left(2\cosh K\right)^{M_{\mathrm{col}}-1}
    \quad (\because \text{主張の } x^{n} := \textstyle\prod_{j=1}^{n}x\ (x \to 2\cosh K,\ n \to M_{\mathrm{col}}-1))
 \end{aligned}`,
@@ -2922,6 +2924,7 @@ D_0G
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w22b)。有限積の並べ替えの行を割る件）: Step 2 の M_col ≥ 3 の鎖の 2 行目「ℝ の乗法の可換則と結合則を有限積の因子の並べ替えへ」を、finite_product_of_real_products で二つの積に分ける行・finite_product_of_real_numbers_splits_off_first_factor で先頭の因子 s(1) を出す行・def_finite_product_of_real_numbers の帰納の式で末尾の因子 s(M_col) を出す行・ℝ の乗法の結合則の 3 行・finite_product_of_real_products を右辺から左辺へ当てる行の 7 行に割った。中間の積は、def_finite_product_of_real_numbers が下端 1 の積しか定めないので、Π_{m=2}^{M_col−1}s(m)s(m) を Π_{m=1}^{M_col−2}s(m+1)s(m+1) と書き直した（同じ因子を同じ順に掛ける）。結合則の行で括弧を明示したので、続く 2 行にも外側の括弧を書き、finite_product_of_real_products を引く 2 行目の左辺（1 行目の式）と 8 行目の積の因子にも主張の (x_j y_j) と同じ括弧を書いた。鎖の両端と主張は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w46)。1 の有限積の行を割る件）: Step 2 の M_col ≥ 3 の鎖の最後の行は、名前だけの根拠「1 の有限積は 1」で、1 の有限積を 1 にする段と s(1)·1 = s(1) の段の 2 つを 1 行で当てていた。新しく足した主張 finite_product_of_real_ones（m → M_col−2）の行と、ℝ の乗法の単位元 p·1 = p（p → s(1)、set_and_algebra_notation）の行の 2 行に割った（鎖は 10 行から 11 行）。鎖の両端と主張は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w25)。開鎖のスピン和の c + c = 2c の件）: 最後の鎖の 9 行目は、名前だけの根拠「u に依らない実数 c の二元集合 {-1,1} 上の和は c + c = 2c」で、{-1,1} 上の和を c + c にする段と c + c = 2c の段の 2 つを 1 行で当てていた。前者の行と、新しく足した主張 real_sum_of_two_equal_terms_is_twice（a → Π_{m=1}^{M_col−1}(exp(K) + exp(−K))）の行の 2 行に割った（鎖は 11 行から 12 行）。{-1,1} 上の和の行は、有限集合の上の和の添字の付け方を本文で定める件が残るので名前だけの根拠のまま残した。鎖の両端と主張は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w42)）: 最後の鎖の def_cosh_sinh の行は、2·(b/2) = b を名前を出さずに使って exp(K) + exp(−K) を 2cosh K に置いていた。real_twice_quotient_by_two_is_original（b → exp(K) + exp(−K)）を右辺から左辺へ当てる行と、def_cosh_sinh の cosh（x → K）を右辺から左辺へ当てる行の 2 行に割った（鎖は 12 行から 13 行）。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -3127,8 +3130,10 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
    \quad (\because u\text{ に依らない実数 }c\text{ の二元集合 }\{-1,1\}\text{ 上の和は }c + c) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)-\exp(-K)\right)
    \quad \left(\because \blkref{real_sum_of_two_equal_terms_is_twice}\ \left(a \to \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)-\exp(-K)\right)\right)\right) \\
+&= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\cdot\frac{\exp(K)-\exp(-K)}{2}\right)
+   \quad \left(\because \blkref{real_twice_quotient_by_two_is_original}\ (b \to \exp(K)-\exp(-K))\text{ を右辺から左辺へ、各因子へ}\right) \\
 &= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\sinh K\right)
-   \quad \left(\because \blkref{def_cosh_sinh}\ (x \to K)\text{ を各因子へ}\right) \\
+   \quad \left(\because \blkref{def_cosh_sinh}\ \text{の}\ \sinh\ (x \to K)\text{ を右辺から左辺へ、各因子へ}\right) \\
 &= 2\left(2\sinh K\right)^{M_{\mathrm{col}}-1}
    \quad (\because \text{主張の } x^{n} := \textstyle\prod_{j=1}^{n}x\ (x \to 2\sinh K,\ n \to M_{\mathrm{col}}-1))
 \end{aligned}`,
@@ -3143,6 +3148,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 2 の M_col ≥ 3 の鎖の 2 行目の名前だけの根拠「ℝ の乗法の可換性と結合性」と、被加数の鎖の 1 行目の「ℝ の乗法の可換性」を、set_and_algebra_notation（ℝ は順序体）の参照にした（1 行目は p → s(M_col)、q → s(1) の代入つき）。鎖と主張は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w13)）: 最後の鎖の名前だけの根拠「ℝ で 1·b = b を各因子へ」「ℝ で a·1 = a を各因子へ」を、set_and_algebra_notation の乗法の単位元 1·p = p（p → exp(K·1)）と p·1 = p（p → K）の参照にした。主張・鎖・段数は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w25)。開鎖のスピン和の c + c = 2c の件）: 最後の鎖の 12 行目は、名前だけの根拠「u に依らない実数 c の二元集合 {-1,1} 上の和は c + c = 2c」で、{-1,1} 上の和を c + c にする段と c + c = 2c の段の 2 つを 1 行で当てていた。前者の行と、新しく足した主張 real_sum_of_two_equal_terms_is_twice（a → Π_{m=1}^{M_col−1}(exp(K) − exp(−K))）の行の 2 行に割った（鎖は 14 行から 15 行）。{-1,1} 上の和の行は、有限集合の上の和の添字の付け方を本文で定める件が残るので名前だけの根拠のまま残した。鎖の両端と主張は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w42)）: 最後の鎖の def_cosh_sinh の行は、2·(b/2) = b を名前を出さずに使って exp(K) − exp(−K) を 2sinh K に置いていた。real_twice_quotient_by_two_is_original（b → exp(K) − exp(−K)）を右辺から左辺へ当てる行と、def_cosh_sinh の sinh（x → K）を右辺から左辺へ当てる行の 2 行に割った（鎖は 15 行から 16 行）。鎖の両端と主張は不変。",
       ],
     },
   },
