@@ -121,9 +121,12 @@
 | `Ising2D.hasDerivAt_kappaDeriv` / `kappaSecond` | **`κ''(K)`** | (3) |
 | `Ising2D.kappaK_Kc` / `kappaK_eq_zero_iff` | **`κ(K_c) = 0`、`κ(K) = 0 ⟺ K = K_c`**（`critical_point_iff_kappa_zero` の (1) ⟺ (3) と `sinh` の単射性） | (2) |
 | `Ising2D.Dnbhd` / `Dnbhd_convex` / `Kc_mem_Dnbhd` | 近傍 `D = [K_c-0.1, K_c+0.1]`（凸、`K_c` を含む） | (4) |
+| `Ising2D.sinh_two_Kc_sub_fifth` / `sinh_two_Kc_sub_fifth_ge` / `two_Kc_sub_fifth_pos` | 端点の式 `sinh(2K_c − 1/5) = cosh(1/5) − √2 sinh(1/5)`、`sinh(2K_c − 1/5) ≥ 0.7313`（原文は `0.7353`）、`2K_c − 1/5 > 0` | (4) |
 | `Ising2D.sinh_two_K_bounds` | `D` 上での `sinh 2K` の上下界 | (4) |
 | `Ising2D.kappaDeriv_bounds` | **`D` 上で `3.52 ≤ κ' ≤ 4.74`**（原文は `[3.53, 4.72]`） | (4) |
-| `Ising2D.abs_kappaSecond_le` | **`D` 上で `\|κ''\| ≤ 9.3`**（原文は `9.19`） | (4) |
+| `Ising2D.hCoshOverSinhSq` / `hasDerivAt_hCoshOverSinhSq` / `hCoshOverSinhSq_deriv_neg` / `hCoshOverSinhSq_antitone` | `h(t) = cosh t/sinh² t`、`h'(t) = (−1 − cosh² t)/sinh³ t < 0`、(R3)(R4) による `0 < a ≤ b ⟹ h(b) ≤ h(a)` | (4) の証明 |
+| `Ising2D.cosh_two_Kc_sub_fifth_le` | `cosh(2K_c − 1/5) ≤ 1.2431`（原文は `1.2413`） | (4) の証明 |
+| `Ising2D.abs_kappaSecond_le` | **`D` 上で `\|κ''\| ≤ 9.3`**（原文は `9.19`。`4h(2K) ≤ 4h(2K_c − 1/5)` の鎖） | (4) |
 | `Ising2D.abs_kappaK_bounds` | **`3.52\|K-K_c\| ≤ \|κ(K)\| ≤ 4.74\|K-K_c\|`** | (5) |
 | `Ising2D.kappaDerivSq` / `abs_deriv_kappaDerivSq_le` | `(κ'²)'` と **`\|(κ'²)'\| ≤ 88.2`**（原文は `87`） | (6) |
 | `Ising2D.abs_kappaDerivSq_sub_le` | **`\|κ'(K)² - 16\| ≤ 25.1\|κ(K)\|`**（原文は `24.7`） | (6) |

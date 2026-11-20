@@ -22,6 +22,7 @@
 | `sinh 2K` の下界 | `0.7353` | `0.7313` |
 | `sinh 2K` の上界 | `1.3048` | `1.3091` |
 | `κ'` の範囲 | `[3.53, 4.72]` | `[3.52, 4.74]` |
+| `cosh(2K_c − 1/5)` の上界 | `1.2413` | `1.2431` |
 | `\|κ''\|` の上界 | `9.19` | `9.3` |
 | `\|(κ'²)'\|` の上界 | `87` | `88.2` |
 | `\|κ'²-16\|/\|κ\|` | `24.7` | `25.1` |
@@ -29,14 +30,14 @@
 **この差は `second_derivative_log_divergence` の結論の定数 `6/5` を変えない**ことを
 `TheoremSecondDerivativeLogDivergence.lean` で確認してある。
 
-また原文は `|κ''|` の上界に「`t ↦ 4cosh t/sinh²t` が `t > 0` で単調減少」を使うが、
-本形式化では `cosh 2K = √(1 + sinh²2K)` に直して
-「`s ↦ 4√(1+s²)/s²` が `s > 0` で単調減少」という**代数的な**形で使う
-（`sinh` の単調性しか要らず、微分が要らない）。
+`|κ''|` の上界は原文どおり、`h(t) = cosh t/sinh² t` の導関数が負であることと
+(R3)(R4)（区間積分の単調性と微分積分学の基本定理）から `h` の単調減少を出し、
+`cosh(2K_c − 1/5)` を加法定理で評価して得る（`hCoshOverSinhSq_antitone`・`cosh_two_Kc_sub_fifth_le`・`abs_kappaSecond_le`）。
 -/
 import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.DefinitionKappaAndCritical
 import Ising2D.NecSuf.MeanValueTwoSided
 import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
@@ -208,6 +209,49 @@ theorem pos_of_mem_Dnbhd {K : ℝ} (hK : K ∈ Dnbhd) : 0 < K := by
   have h : Kc - 1/10 ≤ K := hK.1
   linarith [Kc_gt_tenth]
 
+/-- 人手 `kappa_of_K_basic` (4) の端点の式の複号 `−`: `sinh(2K_c − 1/5) = cosh(1/5) − √2 sinh(1/5)`。
+人手の鎖の 1 行目（`sinh_addition_formula` の複号 −）が `sinh_sub_formula`、
+2 行目（`K_c` の定義と `cosh 2K_c = √2`）が `sinh_two_Kc`・`cosh_two_Kc` と `ring`（`1·a = a`）。 -/
+theorem sinh_two_Kc_sub_fifth :
+    Real.sinh (2 * Kc - 0.2) = Real.cosh 0.2 - Real.sqrt 2 * Real.sinh 0.2 := by
+  rw [sinh_sub_formula, sinh_two_Kc, cosh_two_Kc]; ring
+
+/-- 人手 `kappa_of_K_basic` (4) の「一つ目の鎖の 2 行目以降は `K` に依らないので
+`sinh(2K_c − 1/5) ≥ 0.7353` でもある」（本形式化の定数は `0.7313`）。 -/
+theorem sinh_two_Kc_sub_fifth_ge : (0.7313 : ℝ) ≤ Real.sinh (2 * Kc - 0.2) := by
+  have hs2 := sqrt_two_bounds
+  have hc02 := cosh_02_bounds
+  have hs02 := sinh_02_bounds
+  have hspos : (0 : ℝ) < Real.sinh 0.2 := by linarith [hs02.1]
+  calc Real.sinh (2 * Kc - 0.2)
+      = Real.cosh 0.2 - Real.sqrt 2 * Real.sinh 0.2 :=
+        -- 上の端点の式の複号 −
+        sinh_two_Kc_sub_fifth
+    _ ≥ 1.02 - Real.sqrt 2 * Real.sinh 0.2 := by
+        -- `cosh(1/5) ≥ 1.02`
+        linarith [hc02.1]
+    _ ≥ 1.02 - 1.4142136 * Real.sinh 0.2 := by
+        -- `√2 ≤ 1.4142136` と `sinh(1/5) > 0`
+        have := mul_le_mul_of_nonneg_right hs2.2 hspos.le
+        linarith
+    _ ≥ 1.02 - 1.4142136 * 0.2040817 := by
+        -- `sinh(1/5) ≤ 0.2040817`
+        have := mul_le_mul_of_nonneg_left hs02.2 (by norm_num : (0 : ℝ) ≤ 1.4142136)
+        linarith
+    _ ≥ 0.7313 := by
+        -- `ℚ` の四則と大小
+        norm_num
+
+/-- 人手 `kappa_of_K_basic` (4) の「同じ理由で `2K_c − 1/5 > 0`」。
+`2K_c − 1/5 ≤ 0` なら `sinh_strictly_increasing`（等号のときは等しい。`sinh_le_sinh_of_le`）と
+`sinh_zero`（Lean では mathlib の `Real.sinh_zero`）で `sinh(2K_c − 1/5) ≤ 0 < 0.7313` となり、
+`sinh_two_Kc_sub_fifth_ge` に反する。 -/
+theorem two_Kc_sub_fifth_pos : (0 : ℝ) < 2 * Kc - 0.2 := by
+  refine lt_of_not_ge fun hle => ?_
+  have h1 : Real.sinh (2 * Kc - 0.2) ≤ Real.sinh 0 := sinh_le_sinh_of_le hle
+  rw [Real.sinh_zero] at h1
+  linarith [sinh_two_Kc_sub_fifth_ge]
+
 /-- **人手証明 `kappa_of_K_basic` (4)**: `0.7313 ≤ sinh 2K ≤ 1.3091`。 -/
 theorem sinh_two_K_bounds {K : ℝ} (hK : K ∈ Dnbhd) :
     (0.7313 : ℝ) ≤ Real.sinh (2 * K) ∧ Real.sinh (2 * K) ≤ 1.3091 := by
@@ -216,19 +260,14 @@ theorem sinh_two_K_bounds {K : ℝ} (hK : K ∈ Dnbhd) :
   have hs2 := sqrt_two_bounds
   have hc02 := cosh_02_bounds
   have hs02 := sinh_02_bounds
-  have hlow : Real.sinh (2 * Kc - 0.2) = Real.cosh 0.2 - Real.sqrt 2 * Real.sinh 0.2 := by
-    -- 人手 (4) の 1 行目（`sinh_addition_formula` の複号 −）が `sinh_sub_formula`、
-    -- 2 行目（`K_c` の定義と `cosh 2K_c = √2`）が `sinh_two_Kc`・`cosh_two_Kc` と `ring`（`1·a = a`）。
-    rw [sinh_sub_formula, sinh_two_Kc, cosh_two_Kc]; ring
   have hhigh : Real.sinh (2 * Kc + 0.2) = Real.cosh 0.2 + Real.sqrt 2 * Real.sinh 0.2 := by
-    -- 人手 (4) の複号 + の側。読み方は `hlow` と同じ。
+    -- 人手 (4) の端点の式の複号 + の側。読み方は `sinh_two_Kc_sub_fifth` と同じ。
     rw [sinh_add_formula, sinh_two_Kc, cosh_two_Kc]; ring
   constructor
-  · -- `2K_c − 1/5 ≤ 2K` と `sinh_strictly_increasing`（等号のときは等しい）
+  · -- `2K_c − 1/5 ≤ 2K` と `sinh_strictly_increasing`（等号のときは等しい）、続く行は `sinh_two_Kc_sub_fifth_ge`
     have hmono : Real.sinh (2 * Kc - 0.2) ≤ Real.sinh (2 * K) :=
       sinh_le_sinh_of_le (by norm_num at hl ⊢; linarith)
-    rw [hlow] at hmono
-    nlinarith [hs2.1, hs2.2, hc02.1, hc02.2, hs02.1, hs02.2, hmono]
+    linarith [sinh_two_Kc_sub_fifth_ge]
   · -- `2K ≤ 2K_c + 1/5` と `sinh_strictly_increasing`（等号のときは等しい）
     have hmono : Real.sinh (2 * K) ≤ Real.sinh (2 * Kc + 0.2) :=
       sinh_le_sinh_of_le (by norm_num at hu ⊢; linarith)
@@ -249,21 +288,160 @@ theorem kappaDeriv_bounds {K : ℝ} (hK : K ∈ Dnbhd) :
       rw [div_le_iff₀ hs]; linarith
     linarith
 
-/-- **人手証明 `kappa_of_K_basic` (4)**: `|κ''(K)| ≤ 9.3`。
-原文の「`4cosh t/sinh²t` の単調減少」を、`cosh 2K = √(1+sinh²2K)` に直した
-代数的な形（`4√(1+s²)/s²` の `s` についての単調減少）で使う。 -/
-theorem abs_kappaSecond_le {K : ℝ} (hK : K ∈ Dnbhd) : |kappaSecond K| ≤ 9.3 := by
-  obtain ⟨hl, hu⟩ := sinh_two_K_bounds hK
-  have hs : 0 < Real.sinh (2 * K) := by linarith
-  have hc : 0 < Real.cosh (2 * K) := cosh_pos_of_two_cosh_pos _
-  have hcs : Real.cosh (2 * K) ^ 2 = 1 + Real.sinh (2 * K) ^ 2 := cosh_sq_eq_one_add_sinh_sq _
-  have hkey : 4 * Real.cosh (2 * K) ≤ 9.3 * Real.sinh (2 * K) ^ 2 := by
-    nlinarith [hcs, hc, hs, hl, sq_nonneg (Real.sinh (2 * K) ^ 2 - 0.5348)]
-  simp only [kappaSecond]
-  rw [abs_div, abs_of_nonneg (by positivity : (0:ℝ) ≤ Real.sinh (2 * K) ^ 2), abs_neg,
-    abs_of_nonneg (by positivity : (0:ℝ) ≤ 4 * Real.cosh (2 * K)),
-    div_le_iff₀ (by positivity)]
+/-- 人手 `kappa_of_K_basic` (4) の証明の `h : ℝ_{>0} → ℝ, h(t) := cosh t / sinh² t`
+（Lean では全実数の上の関数として置き、`t > 0` でだけ使う）。 -/
+noncomputable def hCoshOverSinhSq (t : ℝ) : ℝ := Real.cosh t / Real.sinh t ^ 2
+
+/-- 人手 (4) の証明の `h'(t) = (−1 − cosh² t)/sinh³ t`（`t > 0`）。
+人手の鎖の 1 行目（微分の公式の商）が `HasDerivAt.div`、2 行目（微分の公式の積）が `HasDerivAt.mul`、
+3 行目（`cosh_derivative`・`sinh_derivative`）が mathlib の `Real.hasDerivAt_cosh`・`Real.hasDerivAt_sinh` で、
+Lean ではこの 3 行が導関数の値を作る段に入り、下の `calc` は値の側の残りの行
+（`ℝ` の乗法の交換律、`ℝ` の四則（`sinh t ≠ 0`）、`cosh_sinh_basic_properties` (2) の `sinh² t = cosh² t − 1`）を 1 行ずつ追う。 -/
+theorem hasDerivAt_hCoshOverSinhSq {t : ℝ} (ht : 0 < t) :
+    HasDerivAt hCoshOverSinhSq ((-1 - Real.cosh t ^ 2) / Real.sinh t ^ 3) t := by
+  have hs : Real.sinh t > 0 := real_sinh_pos_of_pos ht
+  have hss : Real.sinh t * Real.sinh t ≠ 0 := by positivity
+  -- 微分の公式の積: `(sinh·sinh)' = sinh' sinh + sinh sinh'`
+  have hprod := (Real.hasDerivAt_sinh t).mul (Real.hasDerivAt_sinh t)
+  -- 微分の公式の商
+  have hquot := (Real.hasDerivAt_cosh t).div hprod hss
+  have hfun : hCoshOverSinhSq = fun x => Real.cosh x / (Real.sinh x * Real.sinh x) := by
+    funext x; simp only [hCoshOverSinhSq, pow_two]
+  have hv :
+      (Real.sinh t * (Real.sinh t * Real.sinh t)
+          - Real.cosh t * (Real.cosh t * Real.sinh t + Real.sinh t * Real.cosh t))
+        / (Real.sinh t * Real.sinh t) ^ 2
+      = (-1 - Real.cosh t ^ 2) / Real.sinh t ^ 3 :=
+    calc (Real.sinh t * (Real.sinh t * Real.sinh t)
+            - Real.cosh t * (Real.cosh t * Real.sinh t + Real.sinh t * Real.cosh t))
+          / (Real.sinh t * Real.sinh t) ^ 2
+        = (Real.sinh t * Real.sinh t ^ 2 - Real.cosh t * (2 * Real.sinh t * Real.cosh t))
+            / Real.sinh t ^ 4 := by
+          -- `ℝ` の乗法の交換律（人手の 2 行目の `2 sinh t sinh'(t)` と `sinh^4 t`）
+          ring
+      _ = (Real.sinh t ^ 2 - 2 * Real.cosh t ^ 2) / Real.sinh t ^ 3 := by
+          -- `ℝ` の四則（`sinh t ≠ 0`）
+          field_simp
+      _ = (-1 - Real.cosh t ^ 2) / Real.sinh t ^ 3 := by
+          -- `cosh_sinh_basic_properties` (2) の `sinh² t = cosh² t − 1`
+          rw [show Real.sinh t ^ 2 = Real.cosh t ^ 2 - 1 by
+            linarith [cosh_sinh_basic_properties_2 t]]
+          ring
+  rw [hfun, ← hv]
+  exact hquot
+
+/-- 人手 (4) の証明の `h'(t) < 0`（`t > 0`）: `−1 − cosh² t ≤ −1 < 0`、`sinh³ t > 0`。 -/
+theorem hCoshOverSinhSq_deriv_neg {t : ℝ} (ht : 0 < t) :
+    (-1 - Real.cosh t ^ 2) / Real.sinh t ^ 3 < 0 := by
+  have hs : Real.sinh t > 0 := real_sinh_pos_of_pos ht
+  have hnum : -1 - Real.cosh t ^ 2 < 0 := by nlinarith [sq_nonneg (Real.cosh t)]
+  exact div_neg_of_neg_of_pos hnum (by positivity)
+
+/-- 人手 (4) の証明の「`0 < a ≤ b` なら `h(b) ≤ h(a)`」。
+人手の鎖 `h(b) − h(a) = ∫_a^b h' ≤ ∫_a^b 0 = 0` と 1 対 1:
+1 行目（(R4) を `F = h` で）が `intervalIntegral.integral_eq_sub_of_hasDerivAt`、
+2 行目（(R3) の単調性と `h'(t) < 0`）が `intervalIntegral.integral_mono_on`、
+3 行目（(R4) を定数関数 `F = 0` で）が同じ `intervalIntegral.integral_eq_sub_of_hasDerivAt` と `hasDerivAt_const`。
+`h'` の連続（人手「微分可能な関数の商として微分可能なので連続」）は、
+`cosh`・`sinh` の連続と `sinh t ≠ 0` からの商の連続で読む。 -/
+theorem hCoshOverSinhSq_antitone {a b : ℝ} (ha : 0 < a) (hab : a ≤ b) :
+    hCoshOverSinhSq b ≤ hCoshOverSinhSq a := by
+  have hpos : ∀ t ∈ Set.uIcc a b, 0 < t := by
+    intro t ht
+    rw [Set.uIcc_of_le hab] at ht
+    exact lt_of_lt_of_le ha ht.1
+  have hderiv : ∀ t ∈ Set.uIcc a b,
+      HasDerivAt hCoshOverSinhSq ((-1 - Real.cosh t ^ 2) / Real.sinh t ^ 3) t :=
+    fun t ht => hasDerivAt_hCoshOverSinhSq (hpos t ht)
+  have hcont : ContinuousOn (fun t => (-1 - Real.cosh t ^ 2) / Real.sinh t ^ 3) (Set.uIcc a b) := by
+    refine ContinuousOn.div (by fun_prop) (by fun_prop) ?_
+    intro t ht
+    exact pow_ne_zero 3 (ne_of_gt (real_sinh_pos_of_pos (hpos t ht)))
+  have hint : IntervalIntegrable (fun t => (-1 - Real.cosh t ^ 2) / Real.sinh t ^ 3) MeasureTheory.volume a b :=
+    hcont.intervalIntegrable
+  have hdiff : hCoshOverSinhSq b - hCoshOverSinhSq a ≤ 0 :=
+    calc hCoshOverSinhSq b - hCoshOverSinhSq a
+        = ∫ t in a..b, (-1 - Real.cosh t ^ 2) / Real.sinh t ^ 3 := by
+          -- (R4) を `F = h` で
+          rw [intervalIntegral.integral_eq_sub_of_hasDerivAt hderiv hint]
+      _ ≤ ∫ _ in a..b, (0 : ℝ) := by
+          -- (R3) の単調性と `h'(t) < 0`
+          refine intervalIntegral.integral_mono_on hab hint intervalIntegrable_const ?_
+          intro t ht
+          exact (hCoshOverSinhSq_deriv_neg (lt_of_lt_of_le ha ht.1)).le
+      _ = 0 - 0 := by
+          -- (R4) を定数関数 `F = 0` で
+          exact intervalIntegral.integral_eq_sub_of_hasDerivAt (f := fun _ : ℝ => (0 : ℝ))
+            (fun t _ => hasDerivAt_const t (0 : ℝ)) intervalIntegrable_const
+      _ = 0 := sub_self 0
   linarith
+
+/-- 人手 (4) の証明の `cosh(2K_c − 1/5) ≤ 1.2413`（本形式化の定数は `1.2431`）。人手の 6 行の鎖と 1 対 1。 -/
+theorem cosh_two_Kc_sub_fifth_le : Real.cosh (2 * Kc - 0.2) ≤ 1.2431 := by
+  have hs2 := sqrt_two_bounds
+  have hc02 := cosh_02_bounds
+  have hs02 := sinh_02_bounds
+  have hcpos : (0 : ℝ) < Real.cosh 0.2 := by linarith [hc02.1]
+  calc Real.cosh (2 * Kc - 0.2)
+      = Real.cosh (2 * Kc) * Real.cosh 0.2 - Real.sinh (2 * Kc) * Real.sinh 0.2 :=
+        -- `cosh_addition_formula` の複号 −
+        cosh_sub_formula _ _
+    _ = Real.sqrt 2 * Real.cosh 0.2 - Real.sinh 0.2 := by
+        -- 準備の `cosh 2K_c = √2` と `K_c` の定義（`sinh 2K_c = 1`）
+        rw [cosh_two_Kc, sinh_two_Kc, one_mul]
+    _ ≤ 1.4142136 * Real.cosh 0.2 - Real.sinh 0.2 := by
+        -- `√2 ≤ 1.4142136` と `cosh(1/5) > 0`
+        have := mul_le_mul_of_nonneg_right hs2.2 hcpos.le
+        linarith
+    _ ≤ 1.4142136 * 1.0204082 - Real.sinh 0.2 := by
+        -- `cosh(1/5) ≤ 1.0204082`
+        have := mul_le_mul_of_nonneg_left hc02.2 (by norm_num : (0 : ℝ) ≤ 1.4142136)
+        linarith
+    _ ≤ 1.4142136 * 1.0204082 - 0.2 := by
+        -- `sinh(1/5) ≥ 0.2`
+        linarith [hs02.1]
+    _ ≤ 1.2431 := by
+        -- `ℚ` の四則と大小
+        norm_num
+
+/-- **人手証明 `kappa_of_K_basic` (4)**: `|κ''(K)| ≤ 9.3`（原文は `9.19`）。人手の 8 行の鎖と 1 対 1。 -/
+theorem abs_kappaSecond_le {K : ℝ} (hK : K ∈ Dnbhd) : |kappaSecond K| ≤ 9.3 := by
+  have hl : Kc - 1/10 ≤ K := hK.1
+  have hs : 0 < Real.sinh (2 * K) := by linarith [(sinh_two_K_bounds hK).1]
+  have hc : 0 < Real.cosh (2 * K) := cosh_pos_of_two_cosh_pos _
+  have h0 := two_Kc_sub_fifth_pos
+  have hle : 2 * Kc - 0.2 ≤ 2 * K := by norm_num at hl ⊢; linarith
+  have hsc := sinh_two_Kc_sub_fifth_ge
+  have hscpos : (0 : ℝ) < Real.sinh (2 * Kc - 0.2) ^ 2 := by positivity
+  calc |kappaSecond K|
+      = |-(4 * Real.cosh (2 * K)) / Real.sinh (2 * K) ^ 2| := by
+        -- (3)
+        rfl
+    _ = 4 * Real.cosh (2 * K) / Real.sinh (2 * K) ^ 2 := by
+        -- `cosh 2K > 0`（`cosh_sinh_basic_properties` (1)）、`sinh² 2K > 0`
+        rw [neg_div, abs_neg, abs_of_pos (div_pos (mul_pos (by norm_num) hc) (pow_pos hs 2))]
+    _ = 4 * hCoshOverSinhSq (2 * K) := by
+        -- `h` の定義
+        simp only [hCoshOverSinhSq]; ring
+    _ ≤ 4 * hCoshOverSinhSq (2 * Kc - 0.2) := by
+        -- `0 < 2K_c − 1/5 ≤ 2K` と `h` の単調減少
+        have := hCoshOverSinhSq_antitone h0 hle
+        linarith
+    _ = 4 * Real.cosh (2 * Kc - 0.2) / Real.sinh (2 * Kc - 0.2) ^ 2 := by
+        -- `h` の定義
+        simp only [hCoshOverSinhSq]; ring
+    _ ≤ 4 * 1.2431 / Real.sinh (2 * Kc - 0.2) ^ 2 := by
+        -- 上の `cosh(2K_c − 1/5) ≤ 1.2431`
+        have := cosh_two_Kc_sub_fifth_le
+        exact div_le_div_of_nonneg_right (by linarith) hscpos.le
+    _ ≤ 4 * 1.2431 / 0.7313 ^ 2 := by
+        -- `sinh(2K_c − 1/5) ≥ 0.7313 > 0`
+        have h7 : (0.7313 : ℝ) ^ 2 ≤ Real.sinh (2 * Kc - 0.2) ^ 2 :=
+          pow_le_pow_left₀ (by norm_num) hsc 2
+        exact div_le_div_of_nonneg_left (by norm_num) (by norm_num) h7
+    _ ≤ 9.3 := by
+        -- `ℚ` の四則と大小
+        norm_num
 
 /-! ## 増分の評価（原文 (5)） -/
 
