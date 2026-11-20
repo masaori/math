@@ -22,11 +22,11 @@ chain2 = [
     2 * PI * ((mu + kk * MM) - h) / MM,              # θ~ の定義を μ+kM で（像 (μ+kM)_R）
     2 * PI * ((mu + (kk * MM)) - h) / MM,            # ι は和を保つ
     2 * PI * ((mu + kk * MM) - h) / MM,              # ι は積を保つ
-    2 * PI * ((kk * MM + mu) - h) / MM,              # 加法の交換律
+    2 * PI * ((kk * MM + mu) - h) / MM,              # 加法の交換律 p + q = q + p（p → μ_R, q → k_R(M)_R。set_and_algebra_notation）
     2 * PI * ((kk * MM + mu) + (-h)) / MM,           # def_real_difference（y → k_R(M)_R + μ_R, z → 1/2）
-    2 * PI * (kk * MM + (mu + (-h))) / MM,           # 加法の結合律
+    2 * PI * (kk * MM + (mu + (-h))) / MM,           # 加法の結合律 (p + q) + s = p + (q + s)（p → k_R(M)_R, q → μ_R, s → -1/2。set_and_algebra_notation）
     2 * PI * (kk * MM + (mu - h)) / MM,              # def_real_difference（y → μ_R, z → 1/2）を右辺から左辺へ
-    2 * PI * ((mu - h) + kk * MM) / MM,              # 加法の交換律
+    2 * PI * ((mu - h) + kk * MM) / MM,              # 加法の交換律 p + q = q + p（p → k_R(M)_R, q → μ_R - 1/2。set_and_algebra_notation）
     (2 * PI * (mu - h) + 2 * PI * (kk * MM)) / MM,   # 分配法則
     (2 * PI * (mu - h) + 2 * PI * (kk * MM)) * MM**(-1),             # def_real_quotient
     (2 * PI * (mu - h)) * MM**(-1) + (2 * PI * (kk * MM)) * MM**(-1),  # 右からの分配律

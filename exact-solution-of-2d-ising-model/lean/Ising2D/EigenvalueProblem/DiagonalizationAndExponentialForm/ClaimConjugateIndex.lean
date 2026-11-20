@@ -54,10 +54,10 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
         rw [Int.cast_one]                         -- 4 行目: `ι_{ℤ→ℝ}` は単位元を保つ
     _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + 1) + -(μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg (((M : ℤ) : ℝ) + 1) (μ : ℝ)]
-                                                  -- 5 行目: `def_real_difference`
+                                                  -- 5 行目: `def_real_difference`（`y → (M_col)_ℝ + 1_ℝ`, `z → μ_ℝ`）
     _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + 1) + -(μ : ℝ)) + -(1 / 2)) / ((M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg ((((M : ℤ) : ℝ) + 1) + -(μ : ℝ)) (1 / 2)]
-                                                  -- 6 行目: `def_real_difference`
+                                                  -- 6 行目: `def_real_difference`（`y → ((M_col)_ℝ + 1_ℝ) + (-μ_ℝ)`, `z → 1/2`）
     _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + 1) + (-(μ : ℝ) + -(1 / 2))) / ((M : ℤ) : ℝ) := by
         rw [add_assoc (((M : ℤ) : ℝ) + 1)]        -- 7 行目: ℝ の加法の結合律
     _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + 1) + (-(1 / 2) + -(μ : ℝ))) / ((M : ℤ) : ℝ) := by
@@ -67,13 +67,13 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + (1 + -(1 / 2))) + -(μ : ℝ)) / ((M : ℤ) : ℝ) := by
         rw [add_assoc ((M : ℤ) : ℝ) 1]            -- 10 行目: ℝ の加法の結合律
     _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + (1 - 1 / 2)) + -(μ : ℝ)) / ((M : ℤ) : ℝ) := by
-        rw [← sub_eq_add_neg (1 : ℝ) (1 / 2)]     -- 11 行目: `def_real_difference` を右辺から左辺へ
+        rw [← sub_eq_add_neg (1 : ℝ) (1 / 2)]     -- 11 行目: `def_real_difference`（`y → 1_ℝ`, `z → 1/2`）を右辺から左辺へ
     _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + 1 / 2) + -(μ : ℝ)) / ((M : ℤ) : ℝ) := by
         rw [show (1 : ℝ) - 1 / 2 = 1 / 2 by norm_num]  -- 12 行目: `1_ℝ - ½ = ½`
     _ = 2 * Real.pi * (((M : ℤ) : ℝ) + (1 / 2 + -(μ : ℝ))) / ((M : ℤ) : ℝ) := by
         rw [add_assoc ((M : ℤ) : ℝ)]              -- 13 行目: ℝ の加法の結合律
     _ = 2 * Real.pi * (((M : ℤ) : ℝ) + (1 / 2 - (μ : ℝ))) / ((M : ℤ) : ℝ) := by
-        rw [← sub_eq_add_neg (1 / 2 : ℝ) (μ : ℝ)] -- 14 行目: `def_real_difference` を右辺から左辺へ
+        rw [← sub_eq_add_neg (1 / 2 : ℝ) (μ : ℝ)] -- 14 行目: `def_real_difference`（`y → 1/2`, `z → μ_ℝ`）を右辺から左辺へ
     _ = 2 * Real.pi * (((M : ℤ) : ℝ) + -((μ : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ) := by
         rw [← neg_sub (μ : ℝ) (1 / 2)]            -- 15 行目: ℝ で `½ - μ_ℝ = -(μ_ℝ - ½)`
     _ = 2 * Real.pi * (((M : ℤ) : ℝ) + -((μ : ℝ) - 1 / 2)) * ((M : ℤ) : ℝ)⁻¹ := by
@@ -101,7 +101,7 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi + -thetaTilde M μ := rfl     -- 25 行目: `θ~_μ` の定義（`antiperiodic_exp_sum`）
     _ = 2 * Real.pi - thetaTilde M μ := by
         rw [← sub_eq_add_neg (2 * Real.pi) (thetaTilde M μ)]
-                                                  -- 26 行目: `def_real_difference` を右辺から左辺へ
+                                                  -- 26 行目: `def_real_difference`（`y → 2π`, `z → θ~_μ`）を右辺から左辺へ
 
 /-- **(2) の準備の第一の鎖**（実数の側）: `j_ℝ θ~_{M+1-μ} = 2π j_ℝ + (-(j_ℝ θ~_μ))`。
 人手の 4 行（直前の (1)、ℝ の分配法則、ℝ の積の交換律、ℝ の差は加法の逆元の和）に 1 段ずつ対応する。 -/

@@ -168,10 +168,10 @@ theorem thetaTilde_one_sub (M : ℕ) (μ : ℤ) : thetaTilde M (1 - μ) = -theta
     _ = 2 * Real.pi * (((1 : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [Int.cast_one]                         -- 3 行目: `ι_{ℤ→ℝ}` は単位元を保つ
     _ = 2 * Real.pi * (((1 : ℝ) + -(μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [sub_eq_add_neg (1 : ℝ) (μ : ℝ)]       -- 4 行目: `def_real_difference`
+        rw [sub_eq_add_neg (1 : ℝ) (μ : ℝ)]       -- 4 行目: `def_real_difference`（`y → 1_ℝ`, `z → μ_ℝ`）
     _ = 2 * Real.pi * (((1 : ℝ) + -(μ : ℝ)) + -(1 / 2)) / ((M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg ((1 : ℝ) + -(μ : ℝ)) (1 / 2)]
-                                                  -- 5 行目: `def_real_difference`
+                                                  -- 5 行目: `def_real_difference`（`y → 1_ℝ + (-μ_ℝ)`, `z → 1/2`）
     _ = 2 * Real.pi * ((1 : ℝ) + (-(μ : ℝ) + -(1 / 2))) / ((M : ℤ) : ℝ) := by
         rw [add_assoc]                            -- 6 行目: ℝ の加法の結合律
     _ = 2 * Real.pi * ((1 : ℝ) + (-(1 / 2) + -(μ : ℝ))) / ((M : ℤ) : ℝ) := by
@@ -179,10 +179,10 @@ theorem thetaTilde_one_sub (M : ℕ) (μ : ℤ) : thetaTilde M (1 - μ) = -theta
     _ = 2 * Real.pi * (((1 : ℝ) + -(1 / 2)) + -(μ : ℝ)) / ((M : ℤ) : ℝ) := by
         rw [← add_assoc]                          -- 8 行目: ℝ の加法の結合律を右辺から左辺へ
     _ = 2 * Real.pi * (((1 : ℝ) - 1 / 2) + -(μ : ℝ)) / ((M : ℤ) : ℝ) := by
-        rw [← sub_eq_add_neg (1 : ℝ) (1 / 2)]     -- 9 行目: `def_real_difference` を右辺から左辺へ
+        rw [← sub_eq_add_neg (1 : ℝ) (1 / 2)]     -- 9 行目: `def_real_difference`（`y → 1_ℝ`, `z → 1/2`）を右辺から左辺へ
     _ = 2 * Real.pi * (((1 : ℝ) - 1 / 2) - (μ : ℝ)) / ((M : ℤ) : ℝ) := by
         rw [← sub_eq_add_neg ((1 : ℝ) - 1 / 2) (μ : ℝ)]
-                                                  -- 10 行目: `def_real_difference` を右辺から左辺へ
+                                                  -- 10 行目: `def_real_difference`（`y → 1_ℝ - 1/2`, `z → μ_ℝ`）を右辺から左辺へ
     _ = 2 * Real.pi * ((1 / 2 : ℝ) - (μ : ℝ)) / ((M : ℤ) : ℝ) := by
         rw [show (1 : ℝ) - 1 / 2 = 1 / 2 by norm_num]
                                                   -- 11 行目: `1_ℝ - 1/2 = 1/2`

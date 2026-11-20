@@ -86,16 +86,19 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     _ = 2 * Real.pi * (((μ : ℝ) + (k : ℝ) * ((M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [Int.cast_mul]                         -- 3 行目: `ι_{ℤ→ℝ}` は積を保つ
     _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [add_comm (μ : ℝ)]                     -- 4 行目: ℝ の加法の交換律
+        rw [add_comm (μ : ℝ) ((k : ℝ) * ((M : ℤ) : ℝ))]
+                                                  -- 4 行目: ℝ の加法の交換律 `p + q = q + p`（`p → μ_ℝ`, `q → k_ℝ(M_col)_ℝ`。`set_and_algebra_notation`）
     _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) + (-(1 / 2))) / ((M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg ((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) (1 / 2)]
                                                   -- 5 行目: `def_real_difference`（`y → k_ℝ(M_col)_ℝ + μ_ℝ`, `z → 1/2`）
     _ = 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ) + ((μ : ℝ) + (-(1 / 2)))) / ((M : ℤ) : ℝ) := by
-        rw [add_assoc]                            -- 6 行目: ℝ の加法の結合律
+        rw [add_assoc ((k : ℝ) * ((M : ℤ) : ℝ)) (μ : ℝ) (-(1 / 2))]
+                                                  -- 6 行目: ℝ の加法の結合律 `(p + q) + s = p + (q + s)`（`p → k_ℝ(M_col)_ℝ`, `q → μ_ℝ`, `s → -1/2`。`set_and_algebra_notation`）
     _ = 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ) + ((μ : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ) := by
         rw [← sub_eq_add_neg (μ : ℝ) (1 / 2)]     -- 7 行目: `def_real_difference`（`y → μ_ℝ`, `z → 1/2`）を右辺から左辺へ
     _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + (k : ℝ) * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
-        rw [add_comm ((k : ℝ) * ((M : ℤ) : ℝ))]         -- 8 行目: ℝ の加法の交換律
+        rw [add_comm ((k : ℝ) * ((M : ℤ) : ℝ)) ((μ : ℝ) - 1 / 2)]
+                                                  -- 8 行目: ℝ の加法の交換律 `p + q = q + p`（`p → k_ℝ(M_col)_ℝ`, `q → μ_ℝ - 1/2`。`set_and_algebra_notation`）
     _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
         rw [mul_add]                              -- 9 行目: ℝ の分配法則
     _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ))) * ((M : ℤ) : ℝ)⁻¹ := by

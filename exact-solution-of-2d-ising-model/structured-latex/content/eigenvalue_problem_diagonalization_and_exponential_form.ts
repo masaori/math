@@ -1379,9 +1379,9 @@ Q_{s+1}
 &=\frac{2\pi\left((1_{\mathbb R}-\mu_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は単位元を保つ。}\blkref{antiperiodic_exp_sum}\bigr)\\
 &=\frac{2\pi\left(\left(1_{\mathbb R}+(-\mu_{\mathbb R})\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \blkref{def_real_difference}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to 1_{\mathbb R},\ z \to \mu_{\mathbb R})\bigr)\\
 &=\frac{2\pi\left(\left(1_{\mathbb R}+(-\mu_{\mathbb R})\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \blkref{def_real_difference}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to 1_{\mathbb R}+(-\mu_{\mathbb R}),\ z \to \tfrac12)\bigr)\\
 &=\frac{2\pi\left(1_{\mathbb R}+\left((-\mu_{\mathbb R})+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \mathbb R\text{ の加法の結合律}\bigr)\\
 &=\frac{2\pi\left(1_{\mathbb R}+\left(\left(-\tfrac12\right)+(-\mu_{\mathbb R})\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1389,9 +1389,9 @@ Q_{s+1}
 &=\frac{2\pi\left(\left(1_{\mathbb R}+\left(-\tfrac12\right)\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \mathbb R\text{ の加法の結合律を右辺から左辺へ}\bigr)\\
 &=\frac{2\pi\left(\left(1_{\mathbb R}-\tfrac12\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to 1_{\mathbb R},\ z \to \tfrac12)\text{ を右辺から左辺へ}\bigr)\\
 &=\frac{2\pi\left((1_{\mathbb R}-\tfrac12)-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to 1_{\mathbb R}-\tfrac12,\ z \to \mu_{\mathbb R})\text{ を右辺から左辺へ}\bigr)\\
 &=\frac{2\pi\left(\tfrac12-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ 1_{\mathbb R}-\tfrac12=\tfrac12\bigr)\\
 &=\frac{2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1411,6 +1411,7 @@ Q_{s+1}
         "2026-11-03（全証明の SageMath 検算）: 鎖を antiperiodic_exp_sum の像の記号 μ_R・(M_col)_R で書き直し、整数から実数への包含が差と単位元を保つ行を分けた（主張は不変）。",
         "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた「ℝ の加法の結合律と交換律」の行を、差の定義（def_real_difference）2 行・結合律・交換律・結合律（右辺から左辺へ）・差の定義（右辺から左辺へ）2 行の 7 行に割った（8 等号 → 14 等号）。主張の中身は不変。",
         "(3) により、整数運動量の場合に -μ が果たしていた「共役添字」の役割を、半整数運動量では 1-μ が果たす。反交換関係の対が μ+ν ≡ 1 (mod M) になるのはこのためである。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。差の定義の代入の件）: (3) の鎖で def_real_difference を引く 4 行（左辺から右辺へ 2 行、右辺から左辺へ 2 行）に代入 (y → …, z → …) を書いた。鎖の式・段数・主張は変えていない。",
       ],
     },
   },
@@ -1524,9 +1525,9 @@ Q_{s+1}
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は単位元を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+(-\mu_{\mathbb R})\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \blkref{def_real_difference}\bigr) \\
+   &&\bigl(\because\ \blkref{def_real_difference}\ (y \to (M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R},\ z \to \mu_{\mathbb R})\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+(-\mu_{\mathbb R})\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \blkref{def_real_difference}\bigr) \\
+   &&\bigl(\because\ \blkref{def_real_difference}\ (y \to \left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+(-\mu_{\mathbb R}),\ z \to \tfrac12)\bigr) \\
 &= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+\left((-\mu_{\mathbb R})+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \mathbb R\text{ の加法の結合律}\bigr) \\
 &= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+\left(\left(-\tfrac12\right)+(-\mu_{\mathbb R})\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1536,13 +1537,13 @@ Q_{s+1}
 &= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\left(1_{\mathbb R}+\left(-\tfrac12\right)\right)\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \mathbb R\text{ の加法の結合律}\bigr) \\
 &= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\left(1_{\mathbb R}-\tfrac12\right)\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr) \\
+   &&\bigl(\because\ \blkref{def_real_difference}\ (y \to 1_{\mathbb R},\ z \to \tfrac12)\text{ を右辺から左辺へ}\bigr) \\
 &= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\tfrac12\right)+(-\mu_{\mathbb R})\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ 1_{\mathbb R}-\tfrac12=\tfrac12\bigr) \\
 &= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(\tfrac12+(-\mu_{\mathbb R})\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \mathbb R\text{ の加法の結合律}\bigr) \\
 &= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(\tfrac12-\mu_{\mathbb R}\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr) \\
+   &&\bigl(\because\ \blkref{def_real_difference}\ (y \to \tfrac12,\ z \to \mu_{\mathbb R})\text{ を右辺から左辺へ}\bigr) \\
 &= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \mathbb R\text{ で }\tfrac12-\mu_{\mathbb R}=-\left(\mu_{\mathbb R}-\tfrac12\right)\bigr) \\
 &= \Bigl(2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
@@ -1566,7 +1567,7 @@ Q_{s+1}
 &= 2\pi+\left(-\tilde\theta_\mu\right)
    &&\bigl(\because\ \tilde\theta_\mu\text{ の定義。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= 2\pi - \tilde\theta_\mu
-   &&\bigl(\because\ \blkref{def_real_difference}\text{ を右辺から左辺へ}\bigr)
+   &&\bigl(\because\ \blkref{def_real_difference}\ (y \to 2\pi,\ z \to \tilde\theta_\mu)\text{ を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1709,6 +1710,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: (1) の鎖の末尾の、def_real_difference を右辺から左辺へ当てて (M_col)_ℝ - (μ_ℝ - ½) に戻す行・「ℝ の分配法則」（差に対する分配）・「(M_col)_ℝ ≠ 0_ℝ を分母とする分数の差」「(M_col)_ℝ ≠ 0_ℝ による約分」・θ̃_μ の定義の 5 行を、def_real_quotient の商 y/z = y z^{-1} で開き、def_real_quotient・ℝ の分配法則（和に対する）・右からの分配律・乗法の結合律・乗法の逆元・乗法の単位元・a(-b) = -(ab)・(-a)b = -(ab)・def_real_quotient を右辺から左辺へ・θ̃_μ の定義・def_real_difference を右辺から左辺への 11 行にした（20 等号 → 26 等号）。主張は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (−(2π(μ_ℝ−½)))(M_col)_ℝ^{-1} = −((2π(μ_ℝ−½))(M_col)_ℝ^{-1}) の行の根拠「ℝ で (−a)b=−(ab)」を、主張 real_negation_times_is_negation_of_product（x → 2π(μ_ℝ−½), t → (M_col)_ℝ^{-1}）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 2π(−(μ_ℝ−½)) = −(2π(μ_ℝ−½)) の行の根拠「ℝ で a(−b)=−(ab)」を、主張 real_times_negation_is_negation_of_product（x → 2π, t → μ_ℝ−½）の参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。差の定義の代入の件）: (1) の鎖で def_real_difference を引く 5 行（左辺から右辺へ 2 行、右辺から左辺へ 3 行）に代入 (y → …, z → …) を書いた。鎖の式・段数・主張は変えていない。",
       ],
     },
   },
@@ -7153,15 +7155,15 @@ g
 &= \frac{2\pi\left(\left(\mu_{\mathbb R}+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は積を保つ})\\
 &= \frac{2\pi\left(\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ p + q = q + p\ (p \to \mu_{\mathbb R},\ q \to k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \frac{2\pi\left(\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R},\ z \to \tfrac12)\bigr)\\
 &= \frac{2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ \mathbb{R}\ \text{の加法の結合律})\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (p + q) + s = p + (q + s)\ (p \to k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R},\ q \to \mu_{\mathbb R},\ s \to -\tfrac12)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \frac{2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to \mu_{\mathbb R},\ z \to \tfrac12)\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right)+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ p + q = q + p\ (p \to k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R},\ q \to \mu_{\mathbb R}-\tfrac12)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb{R}\ \text{の分配法則})\\
 &= \Bigl(2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
@@ -7383,6 +7385,7 @@ d_\nu
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w11)）: (3) の θ̃_ν の鎖の 2 行目の根拠「ℝ の差の定義」を def_real_difference（y → 2π, z → θ̃_μ）の参照にした（−θ̃_ν の鎖の 2 行目と同じ書き方）。主張と鎖は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w13)）: (3) の θ̃_ν の鎖の 3 行目・4 行目の名前だけの根拠「ℝ の加法の交換律」「1_ℝ は積の単位元」を、set_and_algebra_notation の加法の交換則 p + q = q + p（p → 2π、q → −θ̃_μ）と乗法の単位元 p·1 = p（p → 2π）を右辺から左辺への参照にした。主張・鎖・段数は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w24)。整数 1 の実数の像についての名前だけの根拠の件）: (3) の θ̃_ν の鎖の 5 行目と −θ̃_ν の鎖の 8 行目の名前だけの根拠「ι_{ℤ→ℝ} は単位元を保つ」を、inclusion_zz_to_rr_of_one（ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ）を右辺から左辺へ当てる参照にした。主張・鎖・段数は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。加法の交換律・結合律の代入の件）: (2) の θ̃_{μ+kM} の鎖の 4・6・8 行目が根拠を「ℝ の加法の交換律」「ℝ の加法の結合律」と名前だけで書いていたので、(3) の θ̃_ν の鎖と同じく等式 p + q = q + p・(p + q) + s = p + (q + s) と代入と set_and_algebra_notation を書いた。鎖の式・段数・主張は変えていない。",
       ],
     },
   },
