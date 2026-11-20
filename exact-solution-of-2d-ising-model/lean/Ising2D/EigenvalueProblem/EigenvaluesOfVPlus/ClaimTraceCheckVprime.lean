@@ -71,6 +71,7 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealOneMinusHalfIsHalf
 
 namespace Ising2D
 
@@ -250,7 +251,7 @@ theorem prod_step2_cosh {r : ℕ} (g : CheckIdx (r + 1) → ℝ) :
     _ = ∏ j : Fin (r + 1),
           (Real.exp (g (checkIdxOfFin j) * (1 / 2))
             + Real.exp (g (checkIdxOfFin j) * ((0 : ℝ) - 1 / 2))) := by
-        rw [sub_half (1 : ℝ)]                           -- ℝ で `1 − 1/2 = 1/2` を各因子へ同時に
+        rw [real_one_minus_half_is_half]                -- `real_one_minus_half_is_half` を各因子へ同時に
     _ = ∏ j : Fin (r + 1),
           (Real.exp (g (checkIdxOfFin j) * (1 / 2))
             + Real.exp (g (checkIdxOfFin j) * (-(1 / 2)))) := by

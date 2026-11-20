@@ -20,6 +20,7 @@ import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimConstantCEvenSector
 import Ising2D.NecSuf.SimpleEigenvalue
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealOneMinusHalfIsHalf
 
 namespace Ising2D
 
@@ -306,8 +307,8 @@ theorem gval_univ_eq_half_sum (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) :
         simp only [Finset.mem_univ, if_true]
                                                         -- `eigenvalues_of_check_Vprime` の `ǧ` の定義（`ε → (1,…,1)`）
     _ = ∑ j : Fin M, g (checkIdxOfFin j) * (1 / 2) :=
-        Finset.sum_congr rfl fun j _ => by rw [show (1 : ℝ) - 1 / 2 = 1 / 2 by norm_num]
-                                                        -- ℝ で `1 − 1/2 = 1/2` を各項へ同時適用
+        Finset.sum_congr rfl fun j _ => by rw [real_one_minus_half_is_half]
+                                                        -- `real_one_minus_half_is_half` を各項へ同時適用
     _ = ∑ j : Fin M, (1 / 2) * g (checkIdxOfFin j) :=
         Finset.sum_congr rfl fun j _ => mul_comm _ _
                                                         -- ℝ の積の交換法則を各項へ同時適用

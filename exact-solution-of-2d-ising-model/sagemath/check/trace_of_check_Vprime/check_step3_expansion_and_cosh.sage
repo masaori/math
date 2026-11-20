@@ -2,7 +2,7 @@
 #   Σ_ε exp(−ǧ(ε))
 #   = Σ_ε Π_μ exp((−γ_μ)(ε_μ − 1/2))                       (冒頭の exp(−ǧ(ε)) の鎖を各項へ同時に)
 #   = Π_μ (exp((−γ_μ)(1 − 1/2)) + exp((−γ_μ)(0 − 1/2)))    (expansion_of_finite_product_of_two_term_sums_of_real_numbers を右辺から左辺へ)
-#   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(0 − 1/2)))         (ℝ で 1 − 1/2 = 1/2)
+#   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(0 − 1/2)))         (real_one_minus_half_is_half)
 #   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(−1/2)))            (ℝ で 0 − a = −a、a → 1/2)
 #   = Π_μ (exp((−γ_μ)·1/2) + exp(−((−γ_μ)·1/2)))           (real_times_negation_is_negation_of_product、x → −γ_μ、t → 1/2)
 #   = Π_μ (exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))               (ℝ で a·1/2 = a/2、a → −γ_μ、各因子の 2 箇所)
@@ -76,7 +76,7 @@ gam = P.gen()
 h = QQ(1) / 2
 mg = -gam
 exact_steps = [
-    (mg * (1 - h), mg * h),            # 1 − 1/2 = 1/2
+    (mg * (1 - h), mg * h),            # real_one_minus_half_is_half
     (mg * (0 - h), mg * (-h)),         # 0 − a = −a
     (mg * (-h), -(mg * h)),            # real_times_negation_is_negation_of_product、x → −γ
     (mg * h, mg / 2),                  # a·1/2 = a/2（1 つ目の箇所）

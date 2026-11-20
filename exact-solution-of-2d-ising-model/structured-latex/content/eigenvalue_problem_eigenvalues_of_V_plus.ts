@@ -4640,7 +4640,7 @@ E_K \check{Q}_\epsilon
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)
    + \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 - \tfrac12 = \tfrac12\ \text{を各因子へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{real_one_minus_half_is_half}\ \text{を各因子へ同時に}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)
    + \exp\!\left(\gamma(\tilde\theta_\mu)\left(-\tfrac12\right)\right)\right)
@@ -4725,7 +4725,7 @@ E_K \check{Q}_\epsilon
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)
    + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(0 - \tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 - \tfrac12 = \tfrac12\ \text{を各因子へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{real_one_minus_half_is_half}\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)
    + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(-\tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
@@ -4827,6 +4827,7 @@ E_K \check{Q}_\epsilon
         "2026-11-04: 主張文・表題と Step 4 の最後の鎖は、ℂ の値 tr(V̌') と ℝ の値 Π_μ 2cosh(γ(θ̃_μ)/2) を包含 (·)_ℂ を書かずに等号で結び、ℂ の値に > 0 を書いていた（「Step 1--2」と名前だけの根拠）。主張文と表題を tr(V̌') = tr((V̌')^{-1}) = (Π_μ 2cosh(γ(θ̃_μ)/2))_ℂ と Π_μ 2cosh(γ(θ̃_μ)/2) ∈ ℝ_{>0}（> 0）の二つにし、Step 4 の最後の鎖を ℝ の不等号 Π_μ 2cosh(γ(θ̃_μ)/2) > 0 だけにして、Step 5 に Step 1 の鎖・real_inclusion_preserves_sum_over_binary_words・Step 2 の鎖の 3 行の鎖 tr(V̌') = (Π_μ 2cosh(γ(θ̃_μ)/2))_ℂ を置いた。値は変えていない（ℂ の > 0 を、ℝ の > 0 と包含に書き分けた）。下流の constant_c_value_even_sector は tr(V̌') = tr((V̌')^{-1}) > 0 と書いたまま引いている。Lean は Ising2D.CheckFermiSetup.trace_Vprime_pos（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step5_chain.sage。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: Σ(−(γ(θ~_μ)(ε_μ−½))) = Σ(−γ(θ~_μ))(ε_μ−½) の行の根拠「ℝ で −(ab) = (−a)b」を、主張 real_negation_times_is_negation_of_product（x → γ(θ~_μ), t → ε_μ − ½ を右辺から左辺へ各項へ同時に）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: Step 2 と Step 3 の鎖の exp(γ(θ~_μ)(−½)) = exp(−(γ(θ~_μ)·½))（Step 3 は γ → −γ）の 2 行の根拠「ℝ で a(−b) = −(ab)」を、主張 real_times_negation_is_negation_of_product（x → γ(θ~_μ), t → ½ と x → −γ(θ~_μ), t → ½ を各因子へ同時に）の参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認）: Step 2 と Step 3 の鎖の「ℝ で 1 − 1/2 = 1/2」（各 1 か所）は名前だけの根拠だった。主張 real_one_minus_half_is_half の参照に替えた（Lean の prod_step2_cosh の対応する段も mathlib の sub_half から同じ主張の具体版へ替えた）。",
       ],
     },
   },
@@ -6851,7 +6852,7 @@ x &= Ix
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigl(1 - \tfrac12\Bigr)
    \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}\ (\epsilon \to (1,\dots,1))) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\cdot\tfrac12
-   \quad (\because \mathbb{R}\text{ で }1 - \tfrac12 = \tfrac12\text{ を各項へ同時適用}) \\
+   \quad (\because \blkref{real_one_minus_half_is_half}\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \tfrac12\,\gamma(\tilde\theta_\mu)
    \quad (\because \mathbb{R}\text{ の積の交換法則を各項へ同時適用}) \\
 &= \frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
@@ -7009,6 +7010,7 @@ x &= Ix
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: (2) の積の鎖の 19 行目（√ の積を冪へ戻す行）の名前だけの根拠「ℝ の冪で y^2 = yy」を square_of_real_number_is_product を引く形にした（definition_of_sqrt_r_positive の二乗を def_power_of_real_number の冪と明記したことに合わせた）。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (2) の ǧ(0,…,0) の鎖の最後の行 (−½)Σγ = −(½Σγ) の根拠「ℝ で (−a)b = −(ab)」を、主張 real_negation_times_is_negation_of_product（x → ½, t → Σγ(θ~_μ)）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (2) の Λ̌_min の式と、証明の ǧ(0,…,0) の鎖の最後の行・Λ̌_min の鎖の最後の行・積の鎖の 2 行目に出る −½Σγ(θ~_μ) を −(½Σγ(θ~_μ)) と括弧を付けて書いた。ǧ(0,…,0) の鎖の最後の行で引く real_negation_times_is_negation_of_product の右辺 −(x·t) と字面で一致させ、Lean の Ising2D.gval_empty_eq_neg_half_sum・Ising2D.checkBigLambda_min_eq の −((1/2)·Σ) と SageMath の check_part2_extreme_values_chains.sage の −(half·S) に揃えるためである。括弧を書いたので、証明の前置きにあった「−½Σγ は −(½Σγ) と読む」の断りを外した。値・鎖の段数・根拠は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認）: (2) の ǧ(1,…,1) の鎖の 2 行目は「ℝ で 1 − 1/2 = 1/2」を名前だけで根拠にしていた。主張 real_one_minus_half_is_half の参照に替えた（Lean の gval_univ_eq_half_sum の対応する段も同じ主張の具体版を引く）。",
       ],
     },
   },

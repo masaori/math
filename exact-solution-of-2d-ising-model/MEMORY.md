@@ -1,3 +1,5 @@
+2026-11-20: Lean の通しの証明のゴールラインの確認の六百五十二個目として、状態台帳の (d4c44p15f15p38w39) を行って済んだ。`eigenvalue_problem_eigenvalues_of_V_plus.ts` の 3 か所（`trace_of_check_Vprime` の Step 2・Step 3、`eigenvalues_of_V_plus` (2) の `ǧ(1,…,1)` の鎖）の名前だけの根拠「ℝ で 1 − 1/2 = 1/2」を `real_one_minus_half_is_half` の参照に替え、Lean の `prod_step2_cosh`（`sub_half`）・`gval_univ_eq_half_sum`（`norm_num`）の段を具体版へ替えた。主張の型は不変。範囲外は (w84)(w85) へ。
+
 2026-11-20: Lean の通しの証明のゴールラインの確認の六百五十一個目として、状態台帳の (d4c44p15f15p38w38) を行って済んだ。`ClaimKappaOfKBasic.lean` の `|κ''| ≤ 9.3` を、人手 `kappa_of_K_basic` (4) の経路（`h(t) = cosh t/sinh² t` の導関数が負であることと (R3)(R4) による単調減少、`cosh(2K_c − 1/5)` の加法定理による評価）と 1 対 1 の鎖に書き直し、端点の式・`sinh(2K_c − 1/5) ≥ 0.7313`・`2K_c − 1/5 > 0` を人手の文に合わせた補題として足した。主張の型・人手証明・SageMath は不変。次は (w39) から。範囲外は (w82)・(w83)。
 
 2026-11-20: Lean の通しの証明のゴールラインの確認の六百五十個目として、状態台帳の (d4c44p15f15p38w37b) を行って済んだ。本文の章の 18 ファイルの `Real.sinh_pos_iff`・`Real.cosh_pos`・`Real.one_le_cosh` の直引きを、人手の行が引く主張の具体版（`cosh_sinh_basic_properties` (1)・(3)、`cosh_at_least_one`、`indexed_hyperbolic_abbreviations_positive`）へ替えた。主張の型・人手証明・SageMath は不変。範囲外は新しい件 (w77)〜(w81) へ。lake build・check-no-sorry・check-end-to-end・check-docs-references 通過。

@@ -1,6 +1,6 @@
 # 対象ラベル: trace_of_check_Vprime（Step 2 の展開の行に続く 6 行）
 #   Π_μ (exp(γ_μ(1 − 1/2)) + exp(γ_μ(0 − 1/2)))
-#   = Π_μ (exp(γ_μ·1/2) + exp(γ_μ(0 − 1/2)))        (ℝ で 1 − 1/2 = 1/2)
+#   = Π_μ (exp(γ_μ·1/2) + exp(γ_μ(0 − 1/2)))        (real_one_minus_half_is_half)
 #   = Π_μ (exp(γ_μ·1/2) + exp(γ_μ(−1/2)))           (ℝ で 0 − a = −a、a → 1/2)
 #   = Π_μ (exp(γ_μ·1/2) + exp(−(γ_μ·1/2)))          (real_times_negation_is_negation_of_product、x → γ_μ、t → 1/2)
 #   = Π_μ (exp(γ_μ/2) + exp(−(γ_μ/2)))              (ℝ で a·1/2 = a/2、a → γ_μ、各因子の 2 箇所)
@@ -57,7 +57,7 @@ P = PolynomialRing(QQ, 'gam')
 gam = P.gen()
 h = QQ(1) / 2
 exact_steps = [
-    (gam * (1 - h), gam * h),          # 1 − 1/2 = 1/2
+    (gam * (1 - h), gam * h),          # real_one_minus_half_is_half
     (gam * (0 - h), gam * (-h)),       # 0 − a = −a
     (gam * (-h), -(gam * h)),          # real_times_negation_is_negation_of_product
     (gam * h, gam / 2),                # a·1/2 = a/2（1 つ目の箇所）

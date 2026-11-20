@@ -37,7 +37,7 @@ for M in range(2, 9):
     lines_max = [
         gcheck(ones),
         fsum([gam[mu] * (1 - half) for mu in range(M)]),          # ǧ の定義（ε → (1,…,1)）
-        fsum([gam[mu] * half for mu in range(M)]),                # 1 − 1/2 = 1/2 を各項へ
+        fsum([gam[mu] * half for mu in range(M)]),                # real_one_minus_half_is_half を各項へ
         fsum([half * gam[mu] for mu in range(M)]),                # 積の交換法則を各項へ
         half * S,                                                 # finite_sum_of_real_scalar_multiples（c → 1/2）
     ]

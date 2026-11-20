@@ -32,7 +32,7 @@ Step 2 と Step 3・4 の実数の値の検算は ň_μ を使わず、γ(θ̃_�
 | Step 2 の 1 行目 Σ_ε(exp ǧ)_ℂ = (Σ_ε exp ǧ)_ℂ（`real_inclusion_preserves_sum_over_binary_words`） | `check_step2_real_inclusion.sage` | 厳密（ℂ を実数の対で持ち、二つの和を定義どおりに組む） |
 | Step 2 の指数法則の 2 行（ǧ の定義、`real_exp_of_finite_sum`） | `check_step2_exp_product.sage` | 球 |
 | Step 2 の展開の 2 行（直前の鎖を各項へ、`expansion_of_finite_product_of_two_term_sums_of_real_numbers` を右辺から左辺へ） | `check_step2_expansion.sage` | 展開の行は厳密（a_μ^{2e−1} の置き方）と球、両端の比較は球 |
-| Step 2 の展開に続く 6 行（1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)、a·(1/2) = a/2、b = 2·(b/2)、`def_cosh_sinh` の cosh） | `check_step2_cosh.sage` | 書き換えの 5 行は厳密（QQ[γ]・QQ(b)）、cosh の行は球 |
+| Step 2 の展開に続く 6 行（`real_one_minus_half_is_half`、0 − a = −a、a(−b) = −(ab)、a·(1/2) = a/2、b = 2·(b/2)、`def_cosh_sinh` の cosh） | `check_step2_cosh.sage` | 書き換えの 5 行は厳密（QQ[γ]・QQ(b)）、cosh の行は球 |
 | 主張の (V̌')^{-1} = exp(−X̌) が使う −X̌ = Σ_μ(−γ(θ̃_μ))(ň_μ − (1/2)I)（Step 3 の旧い前置き。いまの Step 3 は冒頭の鎖で exp(−ǧ(ε)) を Π_μ exp((−γ(θ̃_μ))(ε_μ − 1/2)) に開く。その鎖は `check_step3_exp_product.sage`） | `check_step3_chain.sage` | 厳密（γ_μ は模型では有理数、本物の ψ̌ では F 上の不定元） |
 | Step 3 のトレースの鎖の 1〜8 行（Step 1 の 8 行と同じ根拠で、5 行目だけ `eigenvalues_of_inverse_of_check_Vprime`） | `check_step3_chain.sage`（行列の部） | 厳密（成分の環の中の等号）。和は二つの定義の帰納法どおりに組む |
 | Step 3 のトレースの鎖の 9 行目 Σ_ε(exp(−ǧ))_ℂ = (Σ_ε exp(−ǧ))_ℂ（`real_inclusion_preserves_sum_over_binary_words`） | `check_step3_real_inclusion.sage` | 厳密（ℂ を実数の対で持ち、二つの和を定義どおりに組む） |
