@@ -311,6 +311,7 @@ export const ALL_LABELS = [
   "claim_matrix_pow_entry",
   "claim_maximal_ordered_subfield_odd_degree_root",
   "claim_maximal_ordered_subfield_positive_is_square",
+  "claim_maximal_ordered_subfield_square_trichotomy",
   "claim_maximal_ordered_subfield_sum_of_squares_is_square",
   "claim_minimal_vanishing_polynomial_constant_term_nonzero",
   "claim_minimal_vanishing_polynomial_divides",

@@ -50547,6 +50547,70 @@ b&\in R&&(\because\ E=R)
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_maximal_ordered_subfield_square_trichotomy",
+        labels: [],
+        title: { text: "極大な順序付き部分体の平方の三分法" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_maximal_ordered_subfield_square_trichotomy",
+            focus: {
+              id: "zero_pinching_claim_maximal_ordered_subfield_square_trichotomy",
+              kind: "claim",
+              title: { text: "極大な順序付き部分体の平方の三分法" },
+              labels: ["claim_maximal_ordered_subfield_square_trichotomy"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/maximal-ordered-subfield-square-trichotomy"],
+              lean: [
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_squareTrichotomy",
+                "Ising2DLambda.NecSuf.FisherZero.maximalOrderedSubfield_squareTrichotomy",
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_squareTrichotomy_from_necSuf",
+              ],
+              statement: [paragraph([
+                ref("claim_enumerated_ordered_subfield_is_maximal"), " の極大な正錐付き部分体 ",
+                math(String.raw`(R,C_R)`), " を取る。任意の ", math(String.raw`z\in R`), " について、",
+                math(String.raw`z=0`), "、ある零でない ", math(String.raw`w\in R`), " に対して ",
+                math(String.raw`z=w^2`), "、ある零でない ", math(String.raw`w\in R`), " に対して ",
+                math(String.raw`-z=w^2`), " の三つのうち、ちょうど一つが成り立つ。",
+              ])],
+              proof: [
+                paragraph([
+                  math(String.raw`z\in R`), " を固定する。正錐の三分法は次の形になる。",
+                ]),
+                displayMath(String.raw`z=0\quad\text{または}\quad z\in C_R\quad\text{または}\quad -z\in C_R
+\qquad(\because\ \blkref{def_subfield_positive_cone}\text{ の三分法。三つは互いに排他的})`),
+                paragraph([
+                  math(String.raw`z\in C_R`), " の場合、零でない ", math(String.raw`w\in R`),
+                  " を取ると、次が成り立つ。",
+                ]),
+                displayMath(String.raw`z=w^2
+\qquad(\because\ \blkref{claim_maximal_ordered_subfield_positive_is_square})`),
+                paragraph([
+                  math(String.raw`-z\in C_R`), " の場合も、零でない ", math(String.raw`w\in R`),
+                  " を取ると、次が成り立つ。",
+                ]),
+                displayMath(String.raw`-z=w^2
+\qquad(\because\ \blkref{claim_maximal_ordered_subfield_positive_is_square})`),
+                paragraph([
+                  "逆に、", math(String.raw`w\in R`), " かつ ", math(String.raw`w\ne0`),
+                  " を固定する。正錐の三分法で ", math(String.raw`w\in C_R`),
+                  " または ", math(String.raw`-w\in C_R`), " である。前者では積についての閉性を使い、",
+                  "後者では符号を二回反転して同じ結果を得る。",
+                ]),
+                displayMath(String.raw`w^2\in C_R
+\qquad(\because\ \blkref{def_subfield_positive_cone}\text{ の三分法と積についての閉性})`),
+                paragraph(["平方の場合の排他性は、正錐の三分法により従う。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_ordered_subfield_sum_of_squares",
         labels: [],
         title: { text: "極大な順序付き部分体での二つの平方の和" },

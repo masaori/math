@@ -300,7 +300,7 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
   },
   claim_maximal_ordered_subfield_square_trichotomy: {
     title: "極大な順序付き部分体の平方の三分法",
-    dependsOn: [],
+    dependsOn: ["claim_maximal_ordered_subfield_positive_is_square"],
   },
   claim_imaginary_unit_extension_unique_representation: {
     title: "順序付き部分体に虚数単位を足した表示は一意である",
