@@ -60753,6 +60753,393 @@ N+1
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_pair_shift_root_polynomial",
+        labels: [],
+        title: { text: "根の対の整数倍のずらしを根とする多項式" },
+        children: [
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_multivariate_point_value_of_substitution",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_multivariate_point_value_of_substitution",
+                  kind: "claim",
+                  title: { text: "多項式を代入してから点での値を取ることは、代入した多項式の値を点として値を取ることに等しい" },
+                  labels: ["claim_qbar_multivariate_point_value_of_substitution"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/pair-shift-root-polynomial-subfield-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarMvValue_qbarMvSubst",
+                    "Ising2DLambda.NecSuf.FisherZero.aeval_aeval_necSuf",
+                    "Ising2DLambda.FisherZero.qbarMvValue_qbarMvSubst_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n,m\in\mathbb{N}`),
+                      "、写像 ",
+                      math(String.raw`y:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}[X_{<m}]`),
+                      "（",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）と写像 ",
+                      math(String.raw`\alpha:\mathbb{N}_{<m}\to\overline{\mathbb{Q}}`),
+                      " を取り、写像 ",
+                      math(String.raw`\mathrm{mev}_{m,\alpha}\circ y:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}`),
+                      " を ",
+                      math(String.raw`(\mathrm{mev}_{m,\alpha}\circ y)(r):=\mathrm{mev}_{m,\alpha}\bigl(y(r)\bigr)`),
+                      " と定める（",
+                      ref("def_qbar_multivariate_point_value"),
+                      "）。任意の ",
+                      math(String.raw`P\in\overline{\mathbb{Q}}[X_{<n}]`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\mathrm{mev}_{m,\alpha}\bigl(\mathrm{ms}_{y}(P)\bigr)=\mathrm{mev}_{n,\mathrm{mev}_{m,\alpha}\circ y}(P)`),
+                    paragraph([
+                      "が成り立つ（",
+                      math(String.raw`\mathrm{ms}_y`),
+                      " は ",
+                      ref("def_qbar_multivariate_substitution"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`A:=\{\,a\in\mathrm{Ex}_n\mid\mathrm{mco}_a(P)\ne0\,\}`),
+                      "（有限集合。",
+                      ref("def_qbar_multivariate_polynomial_ring"),
+                      "）と置く。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mev}_{m,\alpha}\bigl(\mathrm{ms}_{y}(P)\bigr)
+&=\mathrm{mev}_{m,\alpha}\Bigl(\sum_{a\in A}\mathrm{mk}_m\bigl(\mathrm{mco}_a(P)\bigr)\cdot\prod_{r\in\mathbb{N}_{<n}}y(r)^{a(r)}\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y\bigr)\\
+&=\sum_{a\in A}\mathrm{mev}_{m,\alpha}\Bigl(\mathrm{mk}_m\bigl(\mathrm{mco}_a(P)\bigr)\Bigr)\cdot\prod_{r\in\mathbb{N}_{<n}}\mathrm{mev}_{m,\alpha}\bigl(y(r)\bigr)^{a(r)}
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\text{ の値は有限和・積・有限積を保つ。冪は積の繰り返し}\bigr)\\
+&=\sum_{a\in A}\mathrm{mco}_a(P)\cdot\prod_{r\in\mathbb{N}_{<n}}\mathrm{mev}_{m,\alpha}\bigl(y(r)\bigr)^{a(r)}
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\text{ の }\mathrm{mev}_{m,\alpha}(\mathrm{mk}_m(c))=c\text{、各項へ同時に当てる}\bigr)\\
+&=\sum_{a\in A}\mathrm{mco}_a(P)\cdot\prod_{r\in\mathbb{N}_{<n}}\bigl((\mathrm{mev}_{m,\alpha}\circ y)(r)\bigr)^{a(r)}
+&&\bigl(\because\ \mathrm{mev}_{m,\alpha}\circ y\text{ の定め方}\bigr)\\
+&=\mathrm{mev}_{n,\mathrm{mev}_{m,\alpha}\circ y}(P)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "全過程は代数的数の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_subfield_coefficient_multivariate_point_value_mem",
+              focus:
+                {
+                  id: "zero_pinching_claim_subfield_coefficient_multivariate_point_value_mem",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする多項式の、部分体の元を並べた点での値は部分体に入る" },
+                  labels: ["claim_subfield_coefficient_multivariate_point_value_mem"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/pair-shift-root-polynomial-subfield-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarMvValue_mem_subfield",
+                    "Ising2DLambda.NecSuf.FisherZero.pow_mem_of_closed_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.aeval_mem_of_coeffIn_necSuf",
+                    "Ising2DLambda.FisherZero.qbarMvValue_mem_subfield_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体（",
+                      ref("def_subfield_positive_cone"),
+                      " の冒頭の意味）、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " とする。",
+                      math(String.raw`P\in F[X_{<n}]`),
+                      "（",
+                      ref("def_subfield_coefficient_multivariate_polynomials"),
+                      "）と、任意の ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " で ",
+                      math(String.raw`\alpha(k)\in F`),
+                      " を満たす写像 ",
+                      math(String.raw`\alpha:\mathbb{N}_{<n}\to\overline{\mathbb{Q}}`),
+                      " について、",
+                      math(String.raw`\mathrm{mev}_{n,\alpha}(P)\in F`),
+                      "（",
+                      ref("def_qbar_multivariate_point_value"),
+                      "）である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`A:=\{\,a\in\mathrm{Ex}_n\mid\mathrm{mco}_a(P)\ne0\,\}`),
+                      "（有限集合）と置く。",
+                      math(String.raw`F`),
+                      " は零元と単位元を含み、和と積で閉じる。したがって ",
+                      math(String.raw`F`),
+                      " の元の有限和・有限積は ",
+                      math(String.raw`F`),
+                      " に入り（空和は零元、空積は単位元）、",
+                      math(String.raw`x\in F`),
+                      " と ",
+                      math(String.raw`e\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`x^{e}=\prod_{i\in\mathbb{N}_{<e}}x\in F`),
+                      " である。",
+                      math(String.raw`a\in A`),
+                      " を任意に取ると、",
+                      math(String.raw`P\in F[X_{<n}]`),
+                      " から ",
+                      math(String.raw`\mathrm{mco}_a(P)\in F`),
+                      "、仮定から各 ",
+                      math(String.raw`k\in\mathbb{N}_{<n}`),
+                      " で ",
+                      math(String.raw`\alpha(k)^{a(k)}\in F`),
+                      " なので、",
+                      math(String.raw`\mathrm{mco}_a(P)\cdot\prod_{k\in\mathbb{N}_{<n}}\alpha(k)^{a(k)}\in F`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mev}_{n,\alpha}(P)
+&=\sum_{a\in A}\mathrm{mco}_a(P)\cdot\prod_{k\in\mathbb{N}_{<n}}\alpha(k)^{a(k)}
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\bigr)\\
+&\in F
+&&\bigl(\because\ \text{各項は }F\text{ に入り、}F\text{ は有限和で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体の元の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_pair_shift_root_polynomial_subfield_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_pair_shift_root_polynomial_subfield_coefficient",
+                  kind: "claim",
+                  title: { text: "部分体を係数とする一次因子の積の根の対を部分体の元の倍でずらした値を根とする多項式は、その部分体を係数とする" },
+                  labels: ["claim_pair_shift_root_polynomial_subfield_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/pair-shift-root-polynomial-subfield-coefficient"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.pairShiftValues_qbarMvValue",
+                    "Ising2DLambda.FisherZero.elementarySymmetricValues_qbarMvValue_mem",
+                    "Ising2DLambda.FisherZero.pairShiftRootPolynomial_mem_subfieldCoefficientPolynomials",
+                    "Ising2DLambda.NecSuf.FisherZero.aeval_esNecSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.pairShiftRootPolynomial_coeff_mem_necSuf",
+                    "Ising2DLambda.FisherZero.pairShiftRootPolynomial_mem_subfieldCoefficientPolynomials_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体、",
+                      math(String.raw`d\in\mathbb{N}`),
+                      " とし、代数的数の列 ",
+                      math(String.raw`\alpha:\mathbb{N}\to\overline{\mathbb{Q}}`),
+                      " が",
+                    ]),
+                    displayMath(String.raw`f:=\prod_{i=0}^{d-1}\bigl(t-\widehat{\alpha(i)}\bigr)\ \in\ F[t]`),
+                    paragraph([
+                      "を満たすとする（",
+                      ref("def_qbar_polynomial_ring"),
+                      " の中で番号の小さいものから順に掛ける有限積。",
+                      math(String.raw`\widehat{\ \cdot\ }`),
+                      " は ",
+                      ref("def_qbar_constant_embedding"),
+                      "、",
+                      math(String.raw`F[t]`),
+                      " は ",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）。",
+                      math(String.raw`N\in\mathbb{N}`),
+                      "、全単射 ",
+                      math(String.raw`\nu:\mathbb{N}_{<N}\to\mathrm{Pr}_d`),
+                      "、",
+                      math(String.raw`c\in F`),
+                      " を取り（",
+                      ref("def_pair_shift_values"),
+                      "）、代数的数の列 ",
+                      math(String.raw`\beta:\mathbb{N}\to\overline{\mathbb{Q}}`),
+                      " が、任意の ",
+                      math(String.raw`r\in\mathbb{N}_{<N}`),
+                      " で",
+                    ]),
+                    displayMath(String.raw`\beta(r)=\alpha\bigl(\nu_1(r)\bigr)+\alpha\bigl(\nu_2(r)\bigr)+c\cdot\alpha\bigl(\nu_1(r)\bigr)\cdot\alpha\bigl(\nu_2(r)\bigr)`),
+                    paragraph([
+                      "を満たすとする。このとき",
+                    ]),
+                    displayMath(String.raw`g:=\prod_{r=0}^{N-1}\bigl(t-\widehat{\beta(r)}\bigr)\ \in\ F[t]`),
+                    paragraph([
+                      "である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "写像 ",
+                      math(String.raw`\alpha_{<d}:\mathbb{N}_{<d}\to\overline{\mathbb{Q}}`),
+                      "、",
+                      math(String.raw`\beta_{<N}:\mathbb{N}_{<N}\to\overline{\mathbb{Q}}`),
+                      " を ",
+                      math(String.raw`\alpha_{<d}(k):=\alpha(k)`),
+                      "、",
+                      math(String.raw`\beta_{<N}(r):=\beta(r)`),
+                      " と定め、",
+                      math(String.raw`\mathrm{ps}:=\mathrm{ps}_{c,\nu}`),
+                      " と略す。準備を二つ置く。",
+                    ]),
+                    paragraph([
+                      "第一に、",
+                      math(String.raw`r\in\mathbb{N}_{<N}`),
+                      " を取り、",
+                      math(String.raw`(i,j):=\nu(r)`),
+                      " と置くと",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mev}_{d,\alpha_{<d}}\bigl(\mathrm{ps}(r)\bigr)
+&=\mathrm{mev}_{d,\alpha_{<d}}\Bigl(X^{(d)}_{i}+X^{(d)}_{j}+\mathrm{mk}_d(c)\cdot X^{(d)}_{i}\cdot X^{(d)}_{j}\Bigr)
+&&\bigl(\because\ \blkref{def_pair_shift_values}\bigr)\\
+&=\mathrm{mev}_{d,\alpha_{<d}}\bigl(X^{(d)}_{i}\bigr)+\mathrm{mev}_{d,\alpha_{<d}}\bigl(X^{(d)}_{j}\bigr)+\mathrm{mev}_{d,\alpha_{<d}}\bigl(\mathrm{mk}_d(c)\bigr)\cdot\mathrm{mev}_{d,\alpha_{<d}}\bigl(X^{(d)}_{i}\bigr)\cdot\mathrm{mev}_{d,\alpha_{<d}}\bigl(X^{(d)}_{j}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\text{ の値は和と積を保つ}\bigr)\\
+&=\alpha_{<d}(i)+\alpha_{<d}(j)+c\cdot\alpha_{<d}(i)\cdot\alpha_{<d}(j)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\text{ の変数の値と定数の値、各項へ同時に当てる}\bigr)\\
+&=\alpha(i)+\alpha(j)+c\cdot\alpha(i)\cdot\alpha(j)
+&&\bigl(\because\ \alpha_{<d}\text{ の定め方}\bigr)\\
+&=\beta_{<N}(r)
+&&\bigl(\because\ \beta\text{ の仮定と }\beta_{<N}\text{ の定め方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`r`),
+                      " は任意なので、写像として ",
+                      math(String.raw`\mathrm{mev}_{d,\alpha_{<d}}\circ\mathrm{ps}=\beta_{<N}`),
+                      "（記法は ",
+                      ref("claim_qbar_multivariate_point_value_of_substitution"),
+                      "）である。",
+                    ]),
+                    paragraph([
+                      "第二に、",
+                      math(String.raw`i\in\mathbb{N}_{<d}`),
+                      " を取る。",
+                      math(String.raw`i+1\le d`),
+                      " であり、",
+                      math(String.raw`\mathrm{ee}_d`),
+                      " は ",
+                      ref("def_elementary_symmetric_substitution"),
+                      " のものである。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{mev}_{d,\alpha_{<d}}\bigl(\mathrm{ee}_d(i)\bigr)
+&=\mathrm{mev}_{d,\alpha_{<d}}\bigl(\mathrm{es}_{d,i+1}\bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{ee}_d\bigr)\\
+&=(-1)^{i+1}\cdot(-1)^{i+1}\cdot\mathrm{mev}_{d,\alpha_{<d}}\bigl(\mathrm{es}_{d,i+1}\bigr)
+&&\bigl(\because\ (-1)^{i+1}\cdot(-1)^{i+1}=(-1)^{2(i+1)}=1\bigr)\\
+&=(-1)^{i+1}\cdot\mathrm{ac}_{d-(i+1)}(f)
+&&\bigl(\because\ \blkref{claim_linear_factor_product_coefficient_elementary_symmetric}\text{ を }w=\alpha,\ n=d,\ j=i+1\text{ へ当てる}\bigr)\\
+&\in F
+&&\bigl(\because\ -1\in F\text{、}f\in F[t]\text{ から }\mathrm{ac}_{d-(i+1)}(f)\in F\text{、}F\text{ は積で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                    ]),
+                    paragraph([
+                      "本体に入る。",
+                      math(String.raw`m\in\mathbb{N}`),
+                      " を任意に取り、",
+                      math(String.raw`\mathrm{ac}_m(g)\in F`),
+                      " を示す。",
+                      math(String.raw`m>N`),
+                      " なら ",
+                      ref("claim_qbar_poly_linear_factor_product_coeff_bound"),
+                      "（",
+                      math(String.raw`w=\beta`),
+                      "、因子の個数 ",
+                      math(String.raw`N`),
+                      "）により ",
+                      math(String.raw`\mathrm{ac}_m(g)=0\in F`),
+                      " である。",
+                      math(String.raw`m\le N`),
+                      " なら ",
+                      math(String.raw`k:=N-m\in\mathbb{N}`),
+                      " と置くと ",
+                      math(String.raw`k\le N`),
+                      "、",
+                      math(String.raw`m=N-k`),
+                      " である。",
+                      ref("claim_pair_shift_elementary_symmetric_is_symmetric"),
+                      " により ",
+                      math(String.raw`\mathrm{ms}_{\mathrm{ps}}(\mathrm{es}_{N,k})`),
+                      " は対称であり、",
+                      math(String.raw`c\in F`),
+                      " と ",
+                      ref("claim_pair_shift_elementary_symmetric_subfield_coefficient"),
+                      " により ",
+                      math(String.raw`\mathrm{ms}_{\mathrm{ps}}(\mathrm{es}_{N,k})\in F[X_{<d}]`),
+                      " である。よって ",
+                      ref("claim_symmetric_polynomial_fundamental_theorem"),
+                      " により、",
+                      math(String.raw`\mathrm{ms}_{\mathrm{ps}}(\mathrm{es}_{N,k})=\mathrm{se}_d(Q_k)`),
+                      " を満たす ",
+                      math(String.raw`Q_k\in F[X_{<d}]`),
+                      " がある（",
+                      ref("def_elementary_symmetric_substitution"),
+                      "）。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{N-k}(g)
+&=(-1)^{k}\cdot\mathrm{mev}_{N,\beta_{<N}}\bigl(\mathrm{es}_{N,k}\bigr)
+&&\bigl(\because\ \blkref{claim_linear_factor_product_coefficient_elementary_symmetric}\text{ を }w=\beta,\ n=N,\ j=k\text{ へ当てる}\bigr)\\
+&=(-1)^{k}\cdot\mathrm{mev}_{N,\mathrm{mev}_{d,\alpha_{<d}}\circ\mathrm{ps}}\bigl(\mathrm{es}_{N,k}\bigr)
+&&\bigl(\because\ \text{第一の準備}\bigr)\\
+&=(-1)^{k}\cdot\mathrm{mev}_{d,\alpha_{<d}}\Bigl(\mathrm{ms}_{\mathrm{ps}}\bigl(\mathrm{es}_{N,k}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_point_value_of_substitution}\text{ を }n=N,\ m=d,\ y=\mathrm{ps}\text{ へ当てる}\bigr)\\
+&=(-1)^{k}\cdot\mathrm{mev}_{d,\alpha_{<d}}\bigl(\mathrm{se}_d(Q_k)\bigr)
+&&\bigl(\because\ Q_k\text{ の取り方}\bigr)\\
+&=(-1)^{k}\cdot\mathrm{mev}_{d,\alpha_{<d}}\bigl(\mathrm{ms}_{\mathrm{ee}_d}(Q_k)\bigr)
+&&\bigl(\because\ \blkref{def_elementary_symmetric_substitution}\text{ の }\mathrm{se}_d\bigr)\\
+&=(-1)^{k}\cdot\mathrm{mev}_{d,\mathrm{mev}_{d,\alpha_{<d}}\circ\mathrm{ee}_d}(Q_k)
+&&\bigl(\because\ \blkref{claim_qbar_multivariate_point_value_of_substitution}\text{ を }n=m=d,\ y=\mathrm{ee}_d\text{ へ当てる}\bigr)\\
+&\in F
+&&\bigl(\because\ \text{第二の準備と }Q_k\in F[X_{<d}]\text{ に }\blkref{claim_subfield_coefficient_multivariate_point_value_mem}\text{、}(-1)^{k}\in F\text{ と積の閉性}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "したがって任意の ",
+                      math(String.raw`m\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_m(g)\in F`),
+                      " であり、",
+                      ref("def_subfield_coefficient_polynomials"),
+                      " により ",
+                      math(String.raw`g\in F[t]`),
+                      " である。",
+                      "全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体の元と有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
