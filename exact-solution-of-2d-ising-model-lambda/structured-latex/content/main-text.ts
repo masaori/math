@@ -61353,6 +61353,176 @@ z
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_root_index_pair_count",
+        labels: [],
+        title: { text: "根の番号の対の個数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_root_index_pair_count",
+              focus:
+                {
+                  id: "zero_pinching_claim_root_index_pair_count",
+                  kind: "claim",
+                  title: { text: "根の番号の対の個数の倍は、次数と次数より一つ小さい数の積である" },
+                  labels: ["claim_root_index_pair_count"],
+                  habitat: "N",
+                  verification: ["sagemath/check/root-index-pair-count"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.rootIndexPairSplit",
+                    "Ising2DLambda.FisherZero.card_rootIndexPair_one",
+                    "Ising2DLambda.FisherZero.card_rootIndexPair_succ_succ",
+                    "Ising2DLambda.FisherZero.card_rootIndexPair_add_self",
+                    "Ising2DLambda.FisherZero.rootIndexPairCount",
+                    "Ising2DLambda.NecSuf.FisherZero.pair_family_count_necSuf",
+                    "Ising2DLambda.FisherZero.rootIndexPairCount_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`d,N\in\mathbb{N}`),
+                      " が ",
+                      math(String.raw`d\ge1`),
+                      " を満たし、全単射 ",
+                      math(String.raw`\nu:\mathbb{N}_{<N}\to\mathrm{Pr}_d`),
+                      "（",
+                      math(String.raw`\mathrm{Pr}_d`),
+                      " は ",
+                      ref("def_pair_shift_values"),
+                      " の根の番号の対の集合）があるとする。ここで ",
+                      math(String.raw`d-1`),
+                      " は ",
+                      math(String.raw`(d-1)+1=d`),
+                      " を満たす自然数である。このとき",
+                    ]),
+                    displayMath(String.raw`N+N=d\cdot(d-1)`),
+                    paragraph([
+                      "である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`e\in\mathbb{N}`),
+                      " に対して ",
+                      math(String.raw`C_{e+1}:=\bigl\{\,(i,e+1)\ \bigm|\ i\in\mathbb{N}_{<e+1}\,\bigr\}\subset\mathrm{Pr}_{e+2}`),
+                      " と置く。",
+                      math(String.raw`(i,j)\in\mathrm{Pr}_{e+2}`),
+                      " は ",
+                      math(String.raw`j<e+1`),
+                      " か ",
+                      math(String.raw`j=e+1`),
+                      " のちょうど一方を満たし、前者は ",
+                      math(String.raw`i<j<e+1`),
+                      " から ",
+                      math(String.raw`(i,j)\in\mathrm{Pr}_{e+1}`),
+                      "、後者は ",
+                      math(String.raw`i<e+1`),
+                      " から ",
+                      math(String.raw`(i,j)\in C_{e+1}`),
+                      " である。逆に ",
+                      math(String.raw`\mathrm{Pr}_{e+1}`),
+                      " と ",
+                      math(String.raw`C_{e+1}`),
+                      " の元は ",
+                      math(String.raw`\mathrm{Pr}_{e+2}`),
+                      " の元である。よって ",
+                      math(String.raw`\mathrm{Pr}_{e+2}`),
+                      " は互いに素な ",
+                      math(String.raw`\mathrm{Pr}_{e+1}`),
+                      " と ",
+                      math(String.raw`C_{e+1}`),
+                      " の和集合である。写像 ",
+                      math(String.raw`\mathbb{N}_{<e+1}\to C_{e+1},\ i\mapsto(i,e+1)`),
+                      " は全単射なので、",
+                      math(String.raw`|C_{e+1}|=e+1`),
+                      "（",
+                      ref("def_cardinality_notation"),
+                      "）である。したがって",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\bigl|\mathrm{Pr}_{e+2}\bigr|
+&=\bigl|\mathrm{Pr}_{e+1}\bigr|+\bigl|C_{e+1}\bigr|
+&&\bigl(\because\ \text{互いに素な有限集合の和集合の元の個数は元の個数の和}\bigr)\\
+&=\bigl|\mathrm{Pr}_{e+1}\bigr|+(e+1)
+&&\bigl(\because\ |C_{e+1}|=e+1\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`e\in\mathbb{N}`),
+                      " についての帰納法で ",
+                      math(String.raw`\bigl|\mathrm{Pr}_{e+1}\bigr|+\bigl|\mathrm{Pr}_{e+1}\bigr|=(e+1)\cdot e`),
+                      " を示す。",
+                      math(String.raw`e=0`),
+                      " のとき、",
+                      math(String.raw`\mathbb{N}_{<1}=\{0\}`),
+                      " には ",
+                      math(String.raw`i<j`),
+                      " を満たす ",
+                      math(String.raw`i,j`),
+                      " が無いので ",
+                      math(String.raw`\mathrm{Pr}_1=\emptyset`),
+                      " で、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\bigl|\mathrm{Pr}_{1}\bigr|+\bigl|\mathrm{Pr}_{1}\bigr|
+&=0+0
+&&\bigl(\because\ \mathrm{Pr}_1=\emptyset\bigr)\\
+&=(0+1)\cdot0
+&&\bigl(\because\ \mathbb{N}\text{ の四則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`e`),
+                      " で成り立つとすると、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\bigl|\mathrm{Pr}_{e+2}\bigr|+\bigl|\mathrm{Pr}_{e+2}\bigr|
+&=\Bigl(\bigl|\mathrm{Pr}_{e+1}\bigr|+(e+1)\Bigr)+\Bigl(\bigl|\mathrm{Pr}_{e+1}\bigr|+(e+1)\Bigr)
+&&\bigl(\because\ \text{上の }|\mathrm{Pr}_{e+2}|=|\mathrm{Pr}_{e+1}|+(e+1)\bigr)\\
+&=\Bigl(\bigl|\mathrm{Pr}_{e+1}\bigr|+\bigl|\mathrm{Pr}_{e+1}\bigr|\Bigr)+\bigl((e+1)+(e+1)\bigr)
+&&\bigl(\because\ \mathbb{N}\text{ の和の可換則・結合則}\bigr)\\
+&=(e+1)\cdot e+\bigl((e+1)+(e+1)\bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=\bigl((e+1)+1\bigr)\cdot(e+1)
+&&\bigl(\because\ \text{分配則と }\mathbb{N}\text{ の積の可換則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "となり ",
+                      math(String.raw`e+1`),
+                      " で成り立つ。",
+                      math(String.raw`e:=d-1`),
+                      " と置くと ",
+                      math(String.raw`e+1=d`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+N+N
+&=\bigl|\mathbb{N}_{<N}\bigr|+\bigl|\mathbb{N}_{<N}\bigr|
+&&\bigl(\because\ \mathbb{N}_{<N}\text{ は }N\text{ より小さい自然数 }N\text{ 個からなる}\bigr)\\
+&=\bigl|\mathrm{Pr}_d\bigr|+\bigl|\mathrm{Pr}_d\bigr|
+&&\bigl(\because\ \nu\text{ は全単射で、全単射は有限集合の元の個数を保つ}\bigr)\\
+&=\bigl|\mathrm{Pr}_{e+1}\bigr|+\bigl|\mathrm{Pr}_{e+1}\bigr|
+&&\bigl(\because\ d=e+1\bigr)\\
+&=(e+1)\cdot e
+&&\bigl(\because\ \text{上の帰納法}\bigr)\\
+&=d\cdot(d-1)
+&&\bigl(\because\ e+1=d\text{ と }e=d-1\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。全過程は有限集合の元の個数と自然数の和・積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_pair_count_two_adic_valuation_decrease",
         labels: [],
         title: { text: "偶数の次数の対の個数" },

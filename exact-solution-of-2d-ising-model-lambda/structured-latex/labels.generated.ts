@@ -647,6 +647,7 @@ export const ALL_LABELS = [
   "claim_reversed_parallel_staircase_turning_zero",
   "claim_rightward_seam_mode_phase",
   "claim_root_factor_quotient_value_ne_zero",
+  "claim_root_index_pair_count",
   "claim_root_of_unity_card",
   "claim_root_of_unity_divisor",
   "claim_root_of_unity_element_ne_zero",
