@@ -215,6 +215,7 @@ export const ALL_LABELS = [
   "claim_hole_free_cell_set_euler_number_one",
   "claim_horizontal_seam_parity_equals_column",
   "claim_horizontal_twisted_modes_coset",
+  "claim_imaginary_unit_extension_conjugate_evaluation",
   "claim_imaginary_unit_extension_conjugate_product_subfield_coefficient",
   "claim_imaginary_unit_extension_quadratic_root",
   "claim_imaginary_unit_extension_square_root",

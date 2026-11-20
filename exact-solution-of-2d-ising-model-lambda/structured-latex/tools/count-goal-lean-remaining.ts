@@ -292,13 +292,27 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
       "claim_subfield_polynomial_root_induction_step",
     ],
   },
-  claim_adjoin_imaginary_unit_gives_algebraic_numbers: {
-    title: "虚数単位を足すと代数的数の全体になる",
+  claim_imaginary_unit_extension_conjugate_evaluation: {
+    title: "虚数単位を足した体の共役は多項式の値と入れ替わる",
+    dependsOn: ["claim_imaginary_unit_extension_unique_representation"],
+  },
+  claim_imaginary_unit_extension_factor_quotient_coefficient: {
+    title: "虚数単位を足した体の根で割った商の係数は虚数単位を足した体に入る",
+    dependsOn: [],
+  },
+  claim_imaginary_unit_extension_monic_polynomial_linear_factor_product: {
+    title: "虚数単位を足した体を係数とする最高次の係数が一の多項式は、その体の元を根とする一次因子の積である",
     dependsOn: [
       "claim_subfield_polynomial_root_in_imaginary_unit_extension",
       "claim_qbar_monic_polynomial_linear_factor_product",
       "claim_imaginary_unit_extension_conjugate_product_subfield_coefficient",
+      "claim_imaginary_unit_extension_conjugate_evaluation",
+      "claim_imaginary_unit_extension_factor_quotient_coefficient",
     ],
+  },
+  claim_adjoin_imaginary_unit_gives_algebraic_numbers: {
+    title: "虚数単位を足すと代数的数の全体になる",
+    dependsOn: ["claim_imaginary_unit_extension_monic_polynomial_linear_factor_product"],
   },
   claim_maximal_ordered_subfield_odd_degree_root: {
     title: "極大な順序付き部分体では奇数次の多項式が根を持つ",
