@@ -45,7 +45,7 @@ sage sagemath/check/transfer-matrix-trace/check.sage
 
 | 項目 | 状態 |
 | --- | --- |
-| 実行 | 2026-08-08 実行（SageMath, `/usr/local/bin/sage`） |
+| 実行 | 2026-11-20 実行（SageMath） |
 | 結果 | 全アサーション成立（$L=1,2,3$） |
 
 出力:

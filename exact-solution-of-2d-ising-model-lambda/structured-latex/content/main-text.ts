@@ -16602,7 +16602,7 @@ Z_L
 &=\sum_{c\in C_L}w_T\bigl(\Theta(c)\bigr)
 &&(\because\ \blkref{claim_rows_bijection})\\
 &=\sum_{p\in W^{\mathrm{cl}}_{L}}w_T(p)
-&&(\because\ \Theta\ \text{が全単射})\\
+&&(\because\ \blkref{claim_closed_walk_bijection})\\
 &=\sum_{\tau\in R_L}\ \sum_{p\in W_{L,L}(\tau,\tau)}w_T(p)
 &&(\because\ \text{準備（閉じた道の類別）})\\
 &=\sum_{\tau\in R_L}\bigl(T^{L}\bigr)_{\tau,\tau}
