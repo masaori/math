@@ -106333,6 +106333,7 @@ f^{\mathrm{per}}(q)
                 kind: "claim",
                 title: { text: "分散因子の最小値は自己双対点で零になる" },
                 labels: ["claim_dispersion_minimum_self_dual_point"],
+                standing: "mainTheorem",
                 habitat: "R",
                 realEscape: "実数の角と余弦。実閉部分体の元を実現写像で実数へ送り、角に関する分散式の最小値を取る。零点の同定は実閉部分体の代数と順序へ戻す。",
                 verification: ["sagemath/check/dispersion-minimum-self-dual-point"],
@@ -106390,7 +106391,7 @@ r
 &<\rho_{R\to\mathbb R}(1)
 &&\bigl(\because\ \xi<_R1\text{ と }\blkref{claim_cut_realization_preserves_strict_order}\bigr)\\
 &=1
-&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ を有理数 }1\text{ に当てる}\bigr).
+&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ を有理数 }1\text{ に当てる}\bigr)
 \end{aligned}`),
                   paragraph(["第二の事実: ", math(String.raw`c>0`), "。"]),
                   displayMath(String.raw`\begin{aligned}
@@ -106400,7 +106401,7 @@ c
 &=2\cdot r\cdot\bigl((1-r)(1+r)\bigr)
 &&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)\\
 &>0
-&&\bigl(\because\ \text{第一の事実から }0<r\text{、}0<1-r\text{、}0<1+r\text{。正の実数の積は正}\bigr).
+&&\bigl(\because\ \text{第一の事実から }0<r\text{、}0<1-r\text{、}0<1+r\text{。正の実数の積は正}\bigr)
 \end{aligned}`),
                   paragraph([
                     "第三の事実: ", math(String.raw`\rho_{R\to\mathbb R}(p)=1-2r-r^2`), "。",
@@ -106420,7 +106421,7 @@ c
 &=\rho_{R\to\mathbb R}(1)-(2r+r\cdot r)
 &&\bigl(\because\ p\text{ の定義と }R\text{ の四則}\bigr)\\
 &=1-2r-r^2
-&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ を有理数 }1\text{ に当てる、}\mathbb R\text{ の四則}\bigr).
+&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ を有理数 }1\text{ に当てる、}\mathbb R\text{ の四則}\bigr)
 \end{aligned}`),
                   paragraph([
                     "第四の事実: ", math(String.raw`s\in R`), "、", math(String.raw`s\ne0`), "、",
@@ -106537,7 +106538,7 @@ B_\xi(0,0)
 &\iff \xi=-1+s
 &&\bigl(\because\ \text{第五の事実}\bigr)\\
 &\iff \xi=x_c
-&&\bigl(\because\ \blkref{def_critical_point}\bigr).
+&&\bigl(\because\ \blkref{def_critical_point}\bigr)
 \end{aligned}`),
                   paragraph(["最後に ", math(String.raw`\xi=x_c`), " の点での双対性を示す。"]),
                   displayMath(String.raw`\begin{aligned}
