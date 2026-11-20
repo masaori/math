@@ -25,7 +25,7 @@
   「`real_times_negation_is_negation_of_product`」「`def_real_difference` を右辺から左辺へ」で、必要十分版の 6 段と同じ並びである。
   1 段目は仮定 `hsub`、5・6 段目は環の `mul_neg`・`sub_eq_add_neg` である。3・4 段目は、偶奇の必要十分版 `symmetrized_sum_is_even'`
   （`SymmetrizedSumIsEven.lean`）・`antisymmetrized_difference_is_odd'`（`AntisymmetrizedDifferenceIsOdd.lean`）を
-  同じ `f` と `d := (· * ⅟2)` に当てはめて引く（具体版が `cosh_is_even`・`sinh_is_odd` を引くのと同じ）。
+  同じ `f` と `d := (· * ⅟2)`（奇のほうは `m := d`、`hdm := rfl` も）に当てはめて引く（具体版が `cosh_is_even`・`sinh_is_odd` を引くのと同じ）。
 * `exp` の性質のうち効いているのは指数法則 `f(a + b) = f(a)f(b)` だけである。`f(0) = 1`・正値性・連続性・級数による定義は効いていない。
 * 引数の側 `G` の加法の結合律・交換律・零・逆元は効いていない。効くのは和の符号反転が符号反転の和であること（`hneg`）だけで、
   複号 `−` では差が符号反転の和であること（`hsub`）と `−(−y) = y`（偶奇の必要十分版が使う）が加わる。
@@ -139,8 +139,8 @@ theorem symmetrized_sub_formula' {G K : Type*} [Add G] [Sub G] [InvolutiveNeg G]
           rw [symmetrized_sum_is_even' f (fun r : K => r * ⅟2) c hc y]
           -- `c` は偶（具体版の `cosh_is_even`）
     _ = c x * c y + s x * (-s y) := by
-          rw [antisymmetrized_difference_is_odd' (fun a b : K => (neg_sub b a).symm) f (fun r : K => r * ⅟2)
-              (fun r => neg_mul r ⅟2) s hs y]
+          rw [antisymmetrized_difference_is_odd' sub_eq_add_neg add_comm neg_add f (fun r : K => r * ⅟2)
+              (fun r : K => r * ⅟2) (fun _ => rfl) (fun r => neg_mul r ⅟2) s hs y]
           -- `s` は奇（具体版の `sinh_is_odd`）
     _ = c x * c y + (-(s x * s y)) := by rw [mul_neg (s x) (s y)]
           -- `a·(−b) = −(ab)`（具体版の `real_times_negation_is_negation_of_product`）
@@ -163,8 +163,8 @@ theorem antisymmetrized_sub_formula' {G K : Type*} [Add G] [Sub G] [InvolutiveNe
           rw [symmetrized_sum_is_even' f (fun r : K => r * ⅟2) c hc y]
           -- `c` は偶（具体版の `cosh_is_even`）
     _ = s x * c y + c x * (-s y) := by
-          rw [antisymmetrized_difference_is_odd' (fun a b : K => (neg_sub b a).symm) f (fun r : K => r * ⅟2)
-              (fun r => neg_mul r ⅟2) s hs y]
+          rw [antisymmetrized_difference_is_odd' sub_eq_add_neg add_comm neg_add f (fun r : K => r * ⅟2)
+              (fun r : K => r * ⅟2) (fun _ => rfl) (fun r => neg_mul r ⅟2) s hs y]
           -- `s` は奇（具体版の `sinh_is_odd`）
     _ = s x * c y + (-(c x * s y)) := by rw [mul_neg (c x) (s y)]
           -- `a·(−b) = −(ab)`（具体版の `real_times_negation_is_negation_of_product`）

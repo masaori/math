@@ -300,12 +300,24 @@ export default defineBlocks([
 &&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})\\
 &= \frac{\exp(-x)-\exp(x)}{2}
 &&\bigl(\because\ \blkref{real_double_negation}\ (a \to x)\bigr)\\
+&= \frac{\exp(-x)+\left(-\exp(x)\right)}{2}
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \exp(-x),\ z \to \exp(x))\bigr)\\
+&= \frac{\left(-\exp(x)\right)+\exp(-x)}{2}
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ p + q = q + p\ (p \to \exp(-x),\ q \to -\exp(x))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \frac{\left(-\exp(x)\right)+\left(-\left(-\exp(-x)\right)\right)}{2}
+&&\bigl(\because\ \blkref{real_double_negation}\ (a \to \exp(-x))\ \text{を右辺から左辺へ}\bigr)\\
+&= \frac{-\left(\exp(x)+\left(-\exp(-x)\right)\right)}{2}
+&&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ (x \to \exp(x),\ y \to -\exp(-x))\ \text{を右辺から左辺へ}\bigr)\\
 &= \frac{-\left(\exp(x)-\exp(-x)\right)}{2}
-&&(\because\ a-b = -(b-a))\\
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \exp(x),\ z \to \exp(-x))\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(-\left(\exp(x)-\exp(-x)\right)\right)\cdot 2^{-1}
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to -(\exp(x)-\exp(-x)),\ z \to 2)\text{。}2 \neq 0\ \text{は}\ \blkref{real_two_is_nonzero}\bigr)\\
+&= -\left(\left(\exp(x)-\exp(-x)\right)\cdot 2^{-1}\right)
+&&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ (x \to \exp(x)-\exp(-x),\ t \to 2^{-1})\bigr)\\
 &= -\frac{\exp(x)-\exp(-x)}{2}
-&&(\because\ \text{分子の符号を分数の外へ出す})\\
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to \exp(x)-\exp(-x),\ z \to 2)\ \text{を右辺から左辺へ。}2 \neq 0\ \text{は}\ \blkref{real_two_is_nonzero}\bigr)\\
 &= -\sinh x
-&&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})
+&&(\because\ \sinh\ \text{の定義を右辺から左辺へ。}\blkref{def_cosh_sinh})
 \end{aligned}`),
     ],
     conversion: {
@@ -313,6 +325,7 @@ export default defineBlocks([
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (1) の証明が「sinh(-y) = -sinh y は定義から直ちに従う」と書いて省いていた等式を、独立の主張にした。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認）: 2 行目の根拠が式 −(−x) = x だけだったので、主張 real_double_negation（a → x）の参照にした。式は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認）: 3 行目「a−b = −(b−a)」と 4 行目「分子の符号を分数の外へ出す」が名前だけの根拠だったので、3 行目を def_real_difference・加法の交換律（set_and_algebra_notation）・real_double_negation を右辺から左辺へ・real_negation_of_sum_is_sum_of_negations を右辺から左辺へ・def_real_difference を右辺から左辺への 5 行に、4 行目を def_real_quotient（2 ≠ 0 は real_two_is_nonzero）・real_negation_times_is_negation_of_product・def_real_quotient を右辺から左辺への 3 行に割った。最後の行の sinh の定義に「右辺から左辺へ」を足した。鎖の両端は不変、段数は 5 から 11。",
       ],
     },
   },

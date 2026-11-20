@@ -62,7 +62,7 @@
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.sinh_is_odd` | **`sinh(−x) = −sinh x`**（人手の 5 行と 1 対 1） | 主張全体 |
+| `Ising2D.sinh_is_odd` | **`sinh(−x) = −sinh x`**（人手の 11 行と 1 対 1） | 主張全体 |
 | `Ising2D.sinh_is_odd_of_necSuf` | 同じ主張を `NecSuf.antisymmetrized_difference_is_odd'` の特殊化として得る（`ClaimSinhIsOddFromNecSuf.lean`） | 主張全体 |
 
 ### `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAtLeastOne.lean`（ラベル `cosh_at_least_one`）
@@ -240,7 +240,7 @@
 | --- | --- | --- |
 | `HyperbolicBounds.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`, `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean` | 原文 (1)〜(5) のうち mathlib に無いのは **`sinh t ≤ t cosh t` 1 本だけ**で、それも `(t cosh t - sinh t)' = t sinh t` の**符号**だけで出る。`t ≥ 0` の仮定は結論の向きのためだけで、単調性自体は `ℝ` 全体で成り立つ。原文の `arcsinh` の逆関数性・微分は**対数発散の本体には効いていない**——効いているのは `arsinh y - log(2y) ∈ [0, 1/(4y²)]` という**平方根の 2 次評価**だけである。 |
 | `SymmetrizedSumIsEven.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshIsEven.lean` | `cosh_is_even` に効いているのは引数の側の符号反転の対合性と値の側の和の交換律だけで、`exp` の性質も 2 で割ることも効いていない（`h y = d(f y + f(−y))` の `f`・`d` は任意の写像でよい）。 |
-| `AntisymmetrizedDifferenceIsOdd.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimSinhIsOdd.lean` | `sinh_is_odd` に効いているのは引数の側の符号反転の対合性、値の側の `a − b = −(b − a)`（仮定 `hns`。値の側の加法・零・結合律・交換律は要らない）、2 で割ることが符号反転と交換することだけで、`exp` の性質も 2 で割ることのほかの性質も効いていない（`h y = d(f y − f(−y))` の `f` は任意の写像、`d` は符号反転と交換する任意の写像でよい）。 |
+| `AntisymmetrizedDifferenceIsOdd.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimSinhIsOdd.lean` | `sinh_is_odd` に効いているのは引数の側と値の側の符号反転の対合性、値の側の `a − b = a + (−b)`（仮定 `hsub`）・加法の交換律（`hcomm`）・`−(a + b) = (−a) + (−b)`（`hnegadd`。値の側の加法の結合律・零・逆元の公理は要らない）、2 で割ること `d` が 2 の逆数を掛けること `m` と一致し（`hdm`）、`m` が符号反転と交換すること（`hm`）だけで、`exp` の性質も 2 の逆数を掛けることのほかの性質も効いていない（`h y = d(f y − f(−y))` の `f` は任意の写像でよい）。 |
 | `SymmetrizedAdditionFormulas.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`（加法定理 4 本） | `cosh_addition_formula`・`sinh_addition_formula` に効いているのは、`exp` の指数法則 `f(a + b) = f(a)f(b)`、引数の側の `−(x + y) = (−x) + (−y)`（複号 `−` では `x − y = x + (−y)` と `−(−y) = y` も）、値の側が環で `2` が逆元 `⅟2` を持つこと（約分は「分母と分子に 2 を掛ける」段、`⅟2` が任意の元と交換することは「分数の和と積」段で使う）だけで、`f(0) = 1`・正値性・連続性・級数による定義も、引数の側の結合律・交換律・零も、値の側の乗法の可換律と 2 以外の元の逆元も効いていない。 |
 | `OnePlusTwiceNonnegativeIsAtLeastOne.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAtLeastOne.lean` | `cosh_at_least_one` に効いているのは、半角公式の形 `h = 1 + 2t²` と、全順序の半環で平方が非負であること・非負の数を掛けることと和が順序を保つことだけで、`cosh`・`exp` の性質も乗法の可換性・減法・逆元も効いていない。 |
 | `HyperbolicBasicPropertiesFromMonotoneMap.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshSinhBasicProperties.lean` | `cosh_sinh_basic_properties` の (1)・(3) を写像 `e` の `c = (e(x)+e(−x))·⅟2`・`s = (e(x)−e(−x))·⅟2`（`⅟2` は `2` の逆元） で述べ直すと、(1) の等式は環と `2` の可逆性（`Invertible 2`）だけで `e` に仮定は要らず、(1) の不等号は `e` の正値性だけ、(3) の `s(x) > 0` は `e` の狭義単調性だけが効く。`e(0) = 1`、`e(a+b) = e(a)e(b)`、乗法の可換律、2 以外の元の逆元は効かない |
