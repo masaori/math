@@ -50510,9 +50510,10 @@ A&=-1
                 paragraph([
                   math(String.raw`a\in C_R`), " を任意に固定する。",
                   ref("claim_positive_cone_element_qbar_square_root"), " により、零でない ",
-                  math(String.raw`b\in\overline{\mathbb Q}`), " で ",
-                  math(String.raw`b^2=a`), " となるものを取る。",
+                  math(String.raw`b\in\overline{\mathbb Q}`), " を取る。",
                 ]),
+                displayMath(String.raw`b^2=a
+\qquad(\because\ \blkref{claim_positive_cone_element_qbar_square_root})`),
                 paragraph([
                   math(String.raw`b\notin R`), " と仮定する。",
                   ref("claim_square_root_adjoined_positive_cone_extension"),
