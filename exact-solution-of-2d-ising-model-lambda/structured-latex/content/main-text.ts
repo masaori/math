@@ -16606,7 +16606,7 @@ Z_L
 &=\sum_{\tau\in R_L}\ \sum_{p\in W_{L,L}(\tau,\tau)}w_T(p)
 &&(\because\ \text{準備（閉じた道の類別）})\\
 &=\sum_{\tau\in R_L}\bigl(T^{L}\bigr)_{\tau,\tau}
-&&(\because\ \text{行列の冪の成分は道に沿った成分の積の和である})\\
+&&(\because\ \blkref{claim_matrix_pow_entry})\\
 &=\operatorname{Tr}\bigl(T^{L}\bigr)
 &&(\because\ \text{トレースの定義})
 \end{aligned}`),
