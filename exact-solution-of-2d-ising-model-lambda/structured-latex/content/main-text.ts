@@ -46481,7 +46481,7 @@ H^{a,b}_L(\xi)
                           ref("def_critical_point"), " の不動点性により",
                         ]),
                         displayMath(String.raw`\mathrm{KW}(x_{\mathrm{sd}})=x_{\mathrm{sd}}
-\qquad\bigl(\because\ \blkref{def_critical_point}\text{ の自己双対性}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_critical_point}\text{ の自己双対性}\bigr)`),
                         paragraph([
                           "以上を使って、セクター双対関係へ ",
                           math(String.raw`\xi=x_{\mathrm{sd}}`), " を代入する。",
