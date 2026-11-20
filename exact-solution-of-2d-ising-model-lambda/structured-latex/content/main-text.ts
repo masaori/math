@@ -51042,14 +51042,10 @@ q&\in F&&\bigl(\because\ a/b\in F\text{ と直前の等号}\bigr)
                     ]),
                     displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_k(p)&\in\mathbb{Q}&&\bigl(\because\ p\text{ の取り方}\bigr),\\
-\mathrm{ac}_k(p)&\in F&&\bigl(\because\ \blkref{claim_subfield_contains_rationals}\bigr),
+\mathrm{ac}_k(p)&\in F&&\bigl(\because\ \blkref{claim_subfield_contains_rationals}\bigr),\\
+p&\in F[t]&&\bigl(\because\ \blkref{def_subfield_coefficient_polynomials}\bigr)
 \end{aligned}`),
                     paragraph([
-                      "なので ",
-                      math(String.raw`p\in F[t]`),
-                      "（",
-                      ref("def_subfield_coefficient_polynomials"),
-                      "）である。",
                       math(String.raw`f:=p`),
                       " と置けば、",
                       math(String.raw`f\in F[t]`),
