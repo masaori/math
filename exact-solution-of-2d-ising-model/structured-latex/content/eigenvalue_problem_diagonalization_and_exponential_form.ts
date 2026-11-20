@@ -1522,7 +1522,7 @@ Q_{s+1}
 &= \frac{2\pi\left(\left(\iota_{\mathbb Z\to\mathbb R}(M_{\mathrm{col}}+1)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので差を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+\iota_{\mathbb Z\to\mathbb R}(1)\right)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
+   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum_of_nonnegatives}\ (a \to M_{\mathrm{col}},\ b \to 1_{\mathbb Z}\text{。}M_{\mathrm{col}}\in\mathbb Z_{\geq2}\subset\mathbb Z_{\geq0},\ 1_{\mathbb Z}\in\mathbb Z_{\geq0})\text{。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{の}\ \iota_{\mathbb Z\to\mathbb R}(1_{\mathbb Z}) = 1_{\mathbb R}\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+(-\mu_{\mathbb R})\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1713,6 +1713,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 2π(−(μ_ℝ−½)) = −(2π(μ_ℝ−½)) の行の根拠「ℝ で a(−b)=−(ab)」を、主張 real_times_negation_is_negation_of_product（x → 2π, t → μ_ℝ−½）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。差の定義の代入の件）: (1) の鎖で def_real_difference を引く 5 行（左辺から右辺へ 2 行、右辺から左辺へ 3 行）に代入 (y → …, z → …) を書いた。鎖の式・段数・主張は変えていない。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49a)。整数 1 の実数の像についての名前だけの根拠の件）: (1) の鎖の 4 行目の名前だけの根拠「ι_{ℤ→ℝ} は単位元を保つ」を、inclusion_zz_to_rr_of_one（ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ）を左辺から右辺へ当てる参照にした。主張・鎖・段数は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b1)。整数の実数の像の和と零についての名前だけの根拠の件）: (1) の鎖の 3 行目の名前だけの根拠「ι_{ℤ→ℝ} は和を保つ」を、inclusion_zz_to_rr_preserves_sum_of_nonnegatives（a → M_col, b → 1_ℤ。M_col ∈ ℤ_{≥2} と 1_ℤ はともに ℤ_{≥0} の元）の参照にした。主張・鎖・段数は不変。",
       ],
     },
   },
@@ -7079,7 +7080,7 @@ g
 &= (0)_{\mathbb R} + (-k_{\mathbb R})
 &&(\because\ \mathbb{Z}\ \text{で}\ (-k) + k = 0)\\
 &= 0_{\mathbb R} + (-k_{\mathbb R})
-&&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は零を保つ})\\
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb Z\to\mathbb R}(0_{\mathbb Z}) := 0_{\mathbb R}\bigr)\\
 &= -k_{\mathbb R}
 &&(\because\ 0_{\mathbb R}\ \text{は}\ \mathbb{R}\ \text{の和の単位元})
 \end{aligned}`),
@@ -7388,6 +7389,7 @@ d_\nu
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w13)。単位元・交換律の名前だけの根拠の件）: (3) の θ̃_ν の鎖の 3 行目・4 行目の名前だけの根拠「ℝ の加法の交換律」「1_ℝ は積の単位元」を、set_and_algebra_notation の加法の交換則 p + q = q + p（p → 2π、q → −θ̃_μ）と乗法の単位元 p·1 = p（p → 2π）を右辺から左辺への参照にした。主張・鎖・段数は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w24)。整数 1 の実数の像についての名前だけの根拠の件）: (3) の θ̃_ν の鎖の 5 行目と −θ̃_ν の鎖の 8 行目の名前だけの根拠「ι_{ℤ→ℝ} は単位元を保つ」を、inclusion_zz_to_rr_of_one（ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ）を右辺から左辺へ当てる参照にした。主張・鎖・段数は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。加法の交換律・結合律の代入の件）: (2) の θ̃_{μ+kM} の鎖の 4・6・8 行目が根拠を「ℝ の加法の交換律」「ℝ の加法の結合律」と名前だけで書いていたので、(3) の θ̃_ν の鎖と同じく等式 p + q = q + p・(p + q) + s = p + (q + s) と代入と set_and_algebra_notation を書いた。鎖の式・段数・主張は変えていない。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b1)。整数の実数の像の和と零についての名前だけの根拠の件）: 準備の第二の (-k)_ℝ = -k_ℝ の鎖の 6 行目の名前だけの根拠「ι_{ℤ→ℝ} は零を保つ」を、inclusion_zz_to_rr の ι_{ℤ→ℝ}(0_ℤ) := 0_ℝ の参照にした。主張・鎖・段数は不変。",
       ],
     },
   },

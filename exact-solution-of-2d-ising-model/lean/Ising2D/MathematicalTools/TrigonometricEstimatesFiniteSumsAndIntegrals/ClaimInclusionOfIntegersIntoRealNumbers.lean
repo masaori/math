@@ -20,11 +20,14 @@
   `Int.cast` で書く（人手の `ℤ_{≥0}` を Lean の `ℕ` で書くのは、ほかのファイルと同じ）。人手の定義の 3 つの式は
   `inclusion_zz_to_rr_zero`（`Nat.cast_zero`）・`inclusion_zz_to_rr_succ`（`Nat.cast_succ`）・`inclusion_zz_to_rr_neg`（`Int.cast_neg`）で、
   `ℤ_{≥0}` の上で 2 つの書き方が一致することは `inclusion_zz_to_rr_of_natCast`（`Int.cast_natCast`）である。
+  `ι(0) := 0` を `Int.cast` の形で書いたものは `inclusion_zz_to_rr_zero_intCast`（`inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形へ移して当てる）。
   `trace_power_upper_bound`・`real_log_of_power` は `ℤ_{≥0}` の元だけを送るので `Nat.cast` の形だけを使い、`limit_of_log_Z_in_N_row` の
   `N_0 ∈ ℤ` は `Int.cast` で送る。
 * `inclusion_zz_to_rr_of_one` は人手の 4 行と 1 対 1 の `calc` である。`ℤ` の元を送る主張が引く `Int.cast` の形は
   `inclusion_zz_to_rr_of_one_intCast`（`inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形へ移してから `inclusion_zz_to_rr_of_one` を当てる）。
 * `inclusion_zz_to_rr_preserves_sum_of_nonnegatives` は人手と同じく `b` についての帰納法で、`b = 0` の 3 行と帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。
+  `ℤ` の元を送る主張が引く `Int.cast` の形は `inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast`（`inclusion_zz_to_rr_of_natCast` で
+  `Nat.cast` の形へ移して当てる）。
 * `finite_sum_of_constant_real_number_succ` は人手の `m ∈ ℤ_{≥1}` を Lean の `m + 1`（`Fin (m + 1)` の上の和）で書き、`m = 1` の 3 行と
   帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。`def_finite_sum_of_real_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
   （`ClaimFiniteSumsOfRealNumbers.lean` と同じ読み替え）。
@@ -61,6 +64,14 @@ theorem inclusion_zz_to_rr_neg (n : ℤ) (_hn : 1 ≤ n) : ((-n : ℤ) : ℝ) = 
 /-- `ℤ_{≥0}` の上で、`ℤ` 全体の `ι`（`Int.cast`）と `ℕ` の埋め込み（`Nat.cast`）は一致する。 -/
 theorem inclusion_zz_to_rr_of_natCast (n : ℕ) : (((n : ℤ)) : ℝ) = (n : ℝ) := Int.cast_natCast n
 
+/-- **`inclusion_zz_to_rr`** の `ι(0_ℤ) := 0_ℝ` を `ℤ` 全体の `ι`（`Int.cast`）の形で書いたもの。
+`0_ℤ ∈ ℤ_{≥0}` なので、2 つの書き方の一致 `inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形 `inclusion_zz_to_rr_zero` へ移す。
+`ℤ` の元を `ℝ` へ送る主張（`periodicity_of_check_fermi` の準備の第二など）が引く。 -/
+theorem inclusion_zz_to_rr_zero_intCast : ((0 : ℤ) : ℝ) = 0 :=
+  calc ((0 : ℤ) : ℝ) = (((0 : ℕ) : ℤ) : ℝ) := rfl                          -- `0_ℤ` は `ℤ_{≥0}` の元（Lean では `ℕ` の `0` の像と定義で一致）
+    _ = ((0 : ℕ) : ℝ) := inclusion_zz_to_rr_of_natCast 0                   -- `ℤ_{≥0}` の上で `Int.cast` と `Nat.cast` は一致する
+    _ = 0 := inclusion_zz_to_rr_zero                                       -- `inclusion_zz_to_rr` の `ι(0) := 0`
+
 /-- **人手 `inclusion_zz_to_rr_of_one`**: `ι(1_ℤ) = 1_ℝ`。 -/
 theorem inclusion_zz_to_rr_of_one : ((1 : ℕ) : ℝ) = 1 :=
   calc ((1 : ℕ) : ℝ) = ((0 + 1 : ℕ) : ℝ) := by rw [Nat.zero_add]           -- `0_ℤ` は `ℤ` の和の単位元
@@ -90,6 +101,20 @@ theorem inclusion_zz_to_rr_preserves_sum_of_nonnegatives (a b : ℕ) :
       _ = ((a : ℝ) + (b : ℝ)) + 1 := by rw [ih]                            -- 帰納法の仮定
       _ = (a : ℝ) + ((b : ℝ) + 1) := add_assoc _ _ _                       -- `ℝ` の和の結合律
       _ = (a : ℝ) + ((b + 1 : ℕ) : ℝ) := by rw [inclusion_zz_to_rr_succ b] -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`（`n → b`）を右辺から左辺へ
+
+/-- **人手 `inclusion_zz_to_rr_preserves_sum_of_nonnegatives`** を `ℤ` 全体の `ι`（`Int.cast`）の形で書いたもの:
+`a, b ∈ ℤ_{≥0}` なら `ι(a + b) = ι(a) + ι(b)`。`a, b, a + b ∈ ℤ_{≥0}` なので、2 つの書き方の一致 `inclusion_zz_to_rr_of_natCast` で
+`Nat.cast` の形へ移してから `inclusion_zz_to_rr_preserves_sum_of_nonnegatives` を当て、同じ一致で戻す。
+`ℤ` の元を `ℝ` へ送る主張（`conjugate_index_of_check_Z_Y` など）が引く。 -/
+theorem inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast (a b : ℕ) :
+    (((a : ℤ) + (b : ℤ) : ℤ) : ℝ) = ((a : ℤ) : ℝ) + ((b : ℤ) : ℝ) :=
+  calc (((a : ℤ) + (b : ℤ) : ℤ) : ℝ) = (((a + b : ℕ) : ℤ) : ℝ) := rfl     -- `ℤ_{≥0}` の和（Lean では `ℕ` の和の像と定義で一致）
+    _ = ((a + b : ℕ) : ℝ) := inclusion_zz_to_rr_of_natCast (a + b)         -- `ℤ_{≥0}` の上で `Int.cast` と `Nat.cast` は一致する
+    _ = (a : ℝ) + (b : ℝ) := inclusion_zz_to_rr_preserves_sum_of_nonnegatives a b
+                                                                           -- `inclusion_zz_to_rr_preserves_sum_of_nonnegatives`
+    _ = ((a : ℤ) : ℝ) + ((b : ℤ) : ℝ) := by
+        rw [inclusion_zz_to_rr_of_natCast a, inclusion_zz_to_rr_of_natCast b]
+                                                                           -- 同じ一致を右辺から左辺へ二か所へ同時に
 
 /-- **人手 `finite_sum_of_constant_real_number`**（`m + 1` 項）: `Σ_{j=1}^{m+1} r = ι(m + 1) r`。`m` についての帰納法。 -/
 theorem finite_sum_of_constant_real_number_succ (m : ℕ) (r : ℝ) :

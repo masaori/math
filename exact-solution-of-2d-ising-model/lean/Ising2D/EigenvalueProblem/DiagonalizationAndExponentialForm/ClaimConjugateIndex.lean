@@ -49,8 +49,12 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
           -- 1 行目: `θ~` の定義を `M_col+1-μ ∈ ℤ` で（`antiperiodic_exp_sum`）
     _ = 2 * Real.pi * (((((M : ℤ) + 1 : ℤ) : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [Int.cast_sub]                         -- 2 行目: `ι_{ℤ→ℝ}` は和と零を保つので差を保つ
-    _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + ((1 : ℤ) : ℝ)) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [Int.cast_add]                         -- 3 行目: `ι_{ℤ→ℝ}` は和を保つ
+    _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + ((1 : ℤ) : ℝ)) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) :=
+        congrArg (fun t : ℝ => 2 * Real.pi * ((t - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ))
+          (inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast M 1)
+                                                  -- 3 行目: `inclusion_zz_to_rr_preserves_sum_of_nonnegatives`（`a → M_col`, `b → 1_ℤ`。
+                                                  -- 人手の `M_col ∈ ℤ_{≥0}` は Lean では `M : ℕ` の像 `(M : ℤ)` であること、
+                                                  -- `1_ℤ ∈ ℤ_{≥0}` は `ℕ` の `1` の像と定義で一致すること）
     _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + 1) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [inclusion_zz_to_rr_of_one_intCast]    -- 4 行目: `inclusion_zz_to_rr_of_one`（`ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ`）
     _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + 1) + -(μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by

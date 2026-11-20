@@ -149,7 +149,7 @@ theorem periodicity_prep_int_cast_neg (k : ℤ) : ((-k : ℤ) : ℝ) = -(k : ℝ
     _ = ((0 : ℤ) : ℝ) + (-(k : ℝ)) := by
         rw [neg_add_cancel]                       -- 5 行目: ℤ で `(-k) + k = 0`
     _ = (0 : ℝ) + (-(k : ℝ)) := by
-        rw [Int.cast_zero]                        -- 6 行目: `ι_{ℤ→ℝ}` は零を保つ
+        rw [inclusion_zz_to_rr_zero_intCast]      -- 6 行目: `inclusion_zz_to_rr` の `ι(0_ℤ) := 0_ℝ`
     _ = -(k : ℝ) := zero_add _                    -- 7 行目: `0_ℝ` は ℝ の和の単位元
 
 /-- 人手 `periodicity_of_check_fermi` (2) の第二の鎖: `-θ̃_{μ+kM} = (-θ̃_μ) + 2π(-k)_ℝ`（人手の 4 行）。 -/

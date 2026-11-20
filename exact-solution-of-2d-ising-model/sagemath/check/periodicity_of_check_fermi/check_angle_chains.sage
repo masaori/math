@@ -83,6 +83,7 @@ for j in range(len(neg_nu) - 1):
 rep.check(tt(MM + 1 - mu) != (-tt(mu)) + PI, "(3) 対照: θ~_ν ≠ -θ~_μ + π")
 
 # ---- 準備の第二 (-k)_R = -k_R と、包含が和・積・単位元（ι(1) = 1。inclusion_zz_to_rr_of_one）を保つこと（整数の具体の点） ----
+# 準備の第二の 6 行目 ι(0) + (-k_R) = 0 + (-k_R) の根拠は inclusion_zz_to_rr の ι(0_ℤ) := 0_ℝ（下の iota(0) == 0 も同じ）。
 # ι_{Z→R} を ZZ → QQ の埋め込みで持つ（QQ ⊂ ℝ。この検算に実数の完備性は要らない）。
 iota = lambda a: QQ(a)
 ok = True

@@ -25,7 +25,7 @@
   - `check_exp_chain.sage`: cos(2πj_R)・sin(2πj_R) の AA の値は 1 の冪根の実部・虚部から作るので、第 8・9 等号の厳密な比較は必ず成り立ち中身を持たない（中身は Arb の cos・sin が担う）。第 10 等号（`(1_R)_C = 1_C`）・第 12 等号（差の定義）・第 13 等号（-1 倍の定義）も、両辺を同じ定義の式から作るので比較は自明である。
   - `check_exp_chain.sage` の第 6 等号のボールの比較: `exp((-i)x_C)` と `exp(-(ix_C))` の部分和は Arb の上でほぼ同じボールになるので、重なりは作り方でほぼ自明である（第 6 等号の中身は厳密な指数の比較が担う）。
   - `check_sign_chain.sage`: 第 1 等号（`-x = (-1_R)x`。多項式環では同じ元）と第 4 等号（`-i := (-1_C)i`）の比較は自明である。
-  - `check_angle_chain.sage`: 整数の像の行（`(M+1-μ)_R = ι(M+1) - μ_R`、`ι(M+1) = (M)_R + ι(1)` は `antiperiodic_exp_sum` の仮定（包含は零・和を保つ）、`ι(1) = 1_R` は `inclusion_zz_to_rr_of_one`（`ι(1_ℤ) = 1_ℝ`。中身の検算は `inclusion_zz_to_rr_of_one` の検査）を当てる行）は、有理関数体の上では両辺が同じ式になり、検算は中身を持たない。
+  - `check_angle_chain.sage`: 整数の像の行（`(M+1-μ)_R = ι(M+1) - μ_R` は `antiperiodic_exp_sum` の仮定（包含は零・和を保つ）、`ι(M+1) = (M)_R + ι(1)` は `inclusion_zz_to_rr_preserves_sum_of_nonnegatives`（`a → M`、`b → 1`。中身の検算は `inclusion_zz_to_rr_preserves_sum_of_nonnegatives` の検査）、`ι(1) = 1_R` は `inclusion_zz_to_rr_of_one`（`ι(1_ℤ) = 1_ℝ`。中身の検算は `inclusion_zz_to_rr_of_one` の検査）を当てる行）は、有理関数体の上では両辺が同じ式になり、検算は中身を持たない。
   - どれも定義や仮定を当てはめるだけの行で、検算は値の計算が通ることを確かめるだけである。
 - 全実数上の cos・sin（cos(2πn_R) = 1_R、sin(2πn_R) = 0_R）は本文では未整備（`euler_formula_cos_sin` の前置き）で、主張 (2) はそれを前提とする。検算では通常の cos・sin の値を使う。
 - 範囲外: (1)(2) の具体の点で M_col ≥ 9（ボールは ≥ 7）、(3) で M_col ≥ 6。
