@@ -218,7 +218,11 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
   },
   claim_imaginary_unit_extension_quadratic_root: {
     title: "正の元が平方である部分体に虚数単位を足した体では二次多項式が根を持つ",
-    dependsOn: ["claim_imaginary_unit_extension_square_root"],
+    dependsOn: ["claim_imaginary_unit_extension_square_root", "claim_imaginary_unit_outside_ordered_subfield"],
+  },
+  claim_imaginary_unit_outside_ordered_subfield: {
+    title: "虚数単位は正錐を持つ部分体に属さない",
+    dependsOn: ["claim_subfield_positive_cone_contains_nonzero_squares"],
   },
   claim_two_shifted_values_determine_sum_and_product: {
     title: "二つの整数倍のずらしの値が部分体に入れば和と積も入る",

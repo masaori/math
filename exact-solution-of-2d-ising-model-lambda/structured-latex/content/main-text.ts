@@ -51025,6 +51025,64 @@ a^2+b^2&=c^2&&(\because\ c^2=a^2+b^2)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_imaginary_unit_outside_ordered_subfield",
+        labels: [],
+        title: { text: "虚数単位と順序付き部分体" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_imaginary_unit_outside_ordered_subfield",
+            focus: {
+              id: "zero_pinching_claim_imaginary_unit_outside_ordered_subfield",
+              kind: "claim",
+              title: { text: "虚数単位は正錐を持つ部分体に属さない" },
+              labels: ["claim_imaginary_unit_outside_ordered_subfield"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/imaginary-unit-outside-ordered-subfield"],
+              lean: [
+                "Ising2DLambda.FisherZero.imaginaryUnit_not_mem_orderedSubfield",
+                "Ising2DLambda.NecSuf.FisherZero.imaginaryUnit_not_mem_orderedSubfield",
+                "Ising2DLambda.FisherZero.imaginaryUnit_not_mem_orderedSubfield_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subset\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`C_F\subset F`), " を ", ref("def_subfield_positive_cone"),
+                " の正錐とする。任意の ", math(String.raw`\omega\in\overline{\mathbb Q}`),
+                " について ", math(String.raw`\omega^2=-1`), " なら ",
+                math(String.raw`\omega\notin F`), " である。",
+              ])],
+              proof: [
+                paragraph([ref("def_subfield_positive_cone"), " の三分法より ",
+                  math(String.raw`0\notin C_F`), " である。また ",
+                  ref("claim_subfield_positive_cone_contains_nonzero_squares"),
+                  " を単位元に適用して ", math(String.raw`1\in C_F`), " を得る。"]),
+                paragraph([math(String.raw`-1\in C_F`), " と仮定すると、和の閉性により"]),
+                displayMath(String.raw`\begin{aligned}
+0&=1+(-1)&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法逆元}\bigr)\\
+1+(-1)&\in C_F&&\bigl(\because\ \blkref{def_subfield_positive_cone}\text{ の和の閉性}\bigr)
+\end{aligned}`),
+                paragraph([math(String.raw`0\notin C_F`), " に矛盾するため ",
+                  math(String.raw`-1\notin C_F`), " である。",
+                  math(String.raw`\omega\in F`), " と仮定する。",
+                  math(String.raw`\omega^2=-1`), " より ",
+                  math(String.raw`\omega\ne0`), " である。"]) ,
+                displayMath(String.raw`\begin{aligned}
+\omega^2&=-1&&\bigl(\because\ \omega^2=-1\bigr)\\
+\omega^2&\in C_F&&\bigl(\because\ \blkref{claim_subfield_positive_cone_contains_nonzero_squares}\bigr)
+\end{aligned}`),
+                paragraph([math(String.raw`-1\notin C_F`), " に矛盾する。ゆえに ",
+                  math(String.raw`\omega\notin F`), " である。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_coefficient_polynomials",
         labels: [],
         title: { text: "部分体を係数とする多項式と部分体上の次数" },
