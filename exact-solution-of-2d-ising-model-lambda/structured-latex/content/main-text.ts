@@ -54858,6 +54858,74 @@ T&:=\mathrm{Sq}(C_F;E)
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_maximal_ordered_subfield_odd_degree_root",
+        labels: [],
+        title: { text: "極大な順序付き部分体と奇数次の多項式の根" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_maximal_ordered_subfield_odd_degree_root",
+            focus: {
+              id: "zero_pinching_claim_maximal_ordered_subfield_odd_degree_root",
+              kind: "claim",
+              title: { text: "極大な順序付き部分体では奇数次の多項式が根を持つ" },
+              labels: ["claim_maximal_ordered_subfield_odd_degree_root"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/maximal-ordered-subfield-odd-degree-root"],
+              lean: [
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_oddDegreeRoot",
+                "Ising2DLambda.NecSuf.FisherZero.maximalOrderedSubfield_oddDegreeRoot",
+                "Ising2DLambda.FisherZero.maximalOrderedSubfield_oddDegreeRoot_from_necSuf",
+              ],
+              statement: [paragraph([
+                ref("claim_enumerated_ordered_subfield_is_maximal"), " の極大な正錐付き部分体 ",
+                math(String.raw`(R,C_R)`), " を取る。",
+                math(String.raw`n\in\mathbb N`), " と ", math(String.raw`f\in R[t]`),
+                "（", ref("def_subfield_coefficient_polynomials"), "）について、",
+                "ある ", math(String.raw`j\in\mathbb N`), " が ",
+                math(String.raw`n=2j+1`), " を満たし、",
+                math(String.raw`\mathrm{ac}_n(f)\ne0`), " であり、任意の ",
+                math(String.raw`k\in\mathbb N`), " について ",
+                math(String.raw`k>n`), " なら ",
+                math(String.raw`\mathrm{ac}_k(f)=0`), " とする。",
+                "このとき、ある ", math(String.raw`\beta\in R`), " が ",
+                math(String.raw`\mathrm{aev}_{\beta}(f)=0`), " を満たす。",
+              ])],
+              proof: [
+                paragraph([
+                  ref("claim_odd_degree_polynomial_has_odd_degree_root"),
+                  " を ", math(String.raw`R,n,f`), " に適用する。",
+                  "根 ", math(String.raw`\beta\in\overline{\mathbb Q}`),
+                  " が存在し、", math(String.raw`\mathrm{aev}_{\beta}(f)=0`),
+                  " かつ、ある ", math(String.raw`m\in\mathbb N`), " について ",
+                  math(String.raw`\deg_R(\beta)=2m+1`), " である。",
+                ]),
+                paragraph([
+                  ref("claim_odd_degree_positive_cone_extension"),
+                  " を ", math(String.raw`(R,C_R),\beta,m`), " に適用する。",
+                  math(String.raw`E:=\mathrm{Val}_R(\beta)`), " に正錐 ",
+                  math(String.raw`C_E`), " が存在し、",
+                  math(String.raw`(E,C_E)`), " は ",
+                  math(String.raw`(R,C_R)`), " を延長する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+E&=R&&(\because\ \blkref{claim_enumerated_ordered_subfield_is_maximal}\text{ の極大性})\\
+\beta&\in E&&(\because\ \blkref{claim_subfield_polynomial_values_contains_element})\\
+\beta&\in R&&(\because\ E=R)
+\end{aligned}`),
+                paragraph(["選んだ根の等式 ", math(String.raw`\mathrm{aev}_{\beta}(f)=0`),
+                  " と併せて結論を得る。実数体・複素数体は使わない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_multivariate_elementary_symmetric",
         labels: [],
         title: { text: "多変数多項式と基本対称式" },

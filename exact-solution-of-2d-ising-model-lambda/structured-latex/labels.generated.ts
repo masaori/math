@@ -309,6 +309,7 @@ export const ALL_LABELS = [
   "claim_matching_pair_word_sign_map",
   "claim_matching_word_sign_swap",
   "claim_matrix_pow_entry",
+  "claim_maximal_ordered_subfield_odd_degree_root",
   "claim_maximal_ordered_subfield_positive_is_square",
   "claim_maximal_ordered_subfield_sum_of_squares_is_square",
   "claim_minimal_vanishing_polynomial_constant_term_nonzero",
