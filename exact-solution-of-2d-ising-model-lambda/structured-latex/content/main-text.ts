@@ -52794,14 +52794,20 @@ p&=\widehat{\mathrm{ac}_0(p)}+t\cdot p'
                       "（",
                       ref("def_subfield_coefficient_polynomials"),
                       "）である。",
+                    ]),
+                    paragraph([
                       ref("def_qbar_poly_evaluation"),
-                      " により ",
-                      math(String.raw`\mathrm{aev}_{\alpha}(t)=\alpha`),
-                      " なので、",
+                      " と ",
                       ref("def_subfield_polynomial_values"),
-                      " により ",
-                      math(String.raw`\alpha\in\mathrm{Val}_F(\alpha)`),
-                      " である。",
+                      " を順に用いる。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\alpha&=\mathrm{aev}_{\alpha}(t)
+&& (\because\ \blkref{def_qbar_poly_evaluation})\\
+&\in\mathrm{Val}_F(\alpha)
+&& (\because\ t\in F[t]\text{ と }\blkref{def_subfield_polynomial_values})
+\end{aligned}`),
+                    paragraph([
                       math(String.raw`F`),
                       " について使ったのは、零元と単位元を含むことだけである。",
                       "実数体も複素数体も現れない。",
