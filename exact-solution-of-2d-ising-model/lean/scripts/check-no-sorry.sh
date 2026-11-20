@@ -3012,6 +3012,9 @@ targets=(
   Ising2D.real_negation_times_negation_is_product
   Ising2D.NecSuf.neg_mul_neg_of_rightDistrib
   Ising2D.real_negation_times_negation_is_product_of_necSuf
+  Ising2D.real_plus_or_minus_one_times_itself_is_one
+  Ising2D.NecSuf.mul_self_eq_one_of_eq_one_or_eq_neg_one
+  Ising2D.real_plus_or_minus_one_times_itself_is_one_of_necSuf
   Ising2D.real_negation_times_is_negation_of_product
   Ising2D.NecSuf.neg_mul_of_rightDistrib
   Ising2D.real_negation_times_is_negation_of_product_of_necSuf

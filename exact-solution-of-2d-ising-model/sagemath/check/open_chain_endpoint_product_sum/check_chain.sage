@@ -88,7 +88,9 @@ for M in range(3, 9):
         for a, b in zip(lines, lines[1:]):
             assert a == b, (M, s)
             count += 1
-        assert all(spin(s, m + 1) * spin(s, m + 1) == 1 for m in range(1, M - 1))   # 9 行目の根拠
+        assert all(spin(s, m + 1) in (ZZ(-1), ZZ(1)) for m in range(1, M - 1))     # 9 行目の根拠の仮定 s(m+1) ∈ {-1,1}
+        assert all(spin(s, m + 1) * spin(s, m + 1) == 1 for m in range(1, M - 1))   # 9 行目の根拠（real_plus_or_minus_one_times_itself_is_one、σ → s(m+1)）
+        count += 1
         count += 1
         assert finite_prod([ZZ(1) for m in range(1, M - 1)]) == 1                     # 10 行目の根拠（finite_product_of_real_ones、m → M_col-2）
         assert spin(s, 1) * 1 == spin(s, 1)                                            # 11 行目の根拠（p·1 = p、p → s(1)）

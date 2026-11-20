@@ -2218,6 +2218,72 @@ a - 0
     },
   },
   {
+    id: "calculation_formulae_claim_real_plus_or_minus_one_times_itself_is_one",
+    kind: "claim",
+    title: { text: "−1 か 1 の実数は、自分自身との積が 1" },
+    labels: ["real_plus_or_minus_one_times_itself_is_one"],
+    statement: [
+      paragraph([
+        math(String.raw`\sigma \in \{-1,1\} \subset \mathbb{R}`),
+        " とする。",
+        math(String.raw`-1`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to 1`),
+        "）、積と ",
+        math(String.raw`1`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`\sigma\cdot\sigma = 1`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\sigma = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1\cdot 1
+&= 1
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の単位元}\ p\cdot 1 = p\ (p \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\sigma = -1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-1)\cdot(-1)
+&= 1\cdot 1
+&&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ (a \to 1,\ b \to 1)\bigr)\\
+&= 1
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の単位元}\ p\cdot 1 = p\ (p \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\sigma`),
+        " は ",
+        math(String.raw`-1`),
+        " か ",
+        math(String.raw`1`),
+        " なので、どちらの場合も ",
+        math(String.raw`\sigma\cdot\sigma = 1`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w47)。スピンの値の二乗が 1 の件）: 原文（Typst）に対応ブロックは無い。open_chain_endpoint_product_sum の Step 2 の M_col ≥ 3 の鎖の 9 行目が「s(m+1)s(m+1) = 1」をラベルで引かずに当てていたので、示す主張として足した。Lean の具体版は Ising2D.real_plus_or_minus_one_times_itself_is_one（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealPlusOrMinusOneTimesItselfIsOne.lean）、必要十分版は Ising2D.NecSuf.mul_self_eq_one_of_eq_one_or_eq_neg_one（NecSuf/MulSelfEqOneOfEqOneOrEqNegOne.lean）。数値検証: sagemath/check/real_plus_or_minus_one_times_itself_is_one/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_negation_times_is_negation_of_product",
     kind: "claim",
     title: { text: "符号を反転した実数に右から実数を掛けると、積の符号が反転する" },

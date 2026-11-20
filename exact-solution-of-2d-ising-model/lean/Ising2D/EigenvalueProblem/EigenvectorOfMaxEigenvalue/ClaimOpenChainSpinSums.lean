@@ -60,6 +60,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealProducts
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealNumbersSplitsOffFirstFactor
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealOnes
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealPlusOrMinusOneTimesItselfIsOne
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealSumOfTwoEqualTermsIsTwice
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwiceQuotientByTwoIsOriginal
@@ -79,9 +80,9 @@ theorem sum_spinVal (f : SpinVal → ℝ) :
   rw [← spinIdxEquiv.symm.sum_comp, Fin.sum_univ_two]
   congr 2
 
-/-- 人手の `s(m)s(m) = 1`。 -/
-theorem spinVal_mul_self (a : SpinVal) : (a : ℝ) * (a : ℝ) = 1 := by
-  rcases a.2 with h | h <;> rw [h] <;> norm_num
+/-- 人手の `s(m)s(m) = 1`（`real_plus_or_minus_one_times_itself_is_one` の `σ → s(m)`。`s(m) ∈ {-1,1}` は `SpinVal` の条件）。 -/
+theorem spinVal_mul_self (a : SpinVal) : (a : ℝ) * (a : ℝ) = 1 :=
+  real_plus_or_minus_one_times_itself_is_one (a : ℝ) a.2
 
 /-- `{-1,1}` の二元の積は `{-1,1}` の元（人手の `t_m = s(m)s(m+1) ∈ {-1,1}`）。 -/
 def spinMul (a b : SpinVal) : SpinVal :=
@@ -356,8 +357,10 @@ theorem prod_bondSpin_of_ge_three (k : ℕ) (s : SpinConf (k + 3)) :
         rw [← finite_product_of_real_products k]        -- 人手 8: `finite_product_of_real_products`（`m → M_col-2`、`j → m`、
                                                         -- `x_j → s(m+1)`、`y_j → s(m+1)`）を右辺から左辺へ
     _ = (s 0 : ℝ) * (∏ _j : Fin (k + 1), (1 : ℝ)) * (s (Fin.last (k + 2)) : ℝ) := by
-        rw [Finset.prod_congr rfl fun j _ => spinVal_mul_self (s j.succ.castSucc)]
-                                                        -- 人手 9: `s(m+1)s(m+1) = 1` を各 `m` へ同時適用
+        rw [Finset.prod_congr rfl fun j _ =>
+          real_plus_or_minus_one_times_itself_is_one (s j.succ.castSucc : ℝ) (s j.succ.castSucc).2]
+                                                        -- 人手 9: `real_plus_or_minus_one_times_itself_is_one`（`σ → s(m+1)`）を
+                                                        -- 各 `m` へ同時適用（`s(m+1) ∈ {-1,1}` は `SpinVal` の条件）
     _ = (s 0 : ℝ) * 1 * (s (Fin.last (k + 2)) : ℝ) := by
         rw [finite_product_of_real_ones k]              -- 人手 10: `finite_product_of_real_ones`（`m → M_col-2`、`j → m`）
     _ = (s 0 : ℝ) * (s (Fin.last (k + 2)) : ℝ) := by

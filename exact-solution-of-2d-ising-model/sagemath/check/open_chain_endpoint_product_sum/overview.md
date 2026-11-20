@@ -32,7 +32,7 @@
 |---|---|
 | Step 1: 復元が Φ の左右の逆 | 厳密。M_col = 2..8 |
 | Step 2（M_col = 2）の 3 行 | 厳密（ZZ） |
-| Step 2（M_col ≥ 3）の 11 行と、9 行目の根拠 s(m+1)s(m+1) = 1・10 行目の根拠 Π_{m=1}^{M_col−2}1 = 1・11 行目の根拠 s(1)·1 = s(1) | 厳密（ZZ）。M_col = 3..8。3〜7・10・11 行目は自由代数、2・8 行目は可換な多項式環でも |
+| Step 2（M_col ≥ 3）の 11 行と、9 行目の根拠 s(m+1)s(m+1) = 1（real_plus_or_minus_one_times_itself_is_one（σ → s(m+1)）。仮定 s(m+1) ∈ {-1,1} も確かめる）・10 行目の根拠 Π_{m=1}^{M_col−2}1 = 1・11 行目の根拠 s(1)·1 = s(1) | 厳密（ZZ）。M_col = 3..8。3〜7・10・11 行目は自由代数、2・8 行目は可換な多項式環でも |
 | exp(KE(s)) の鎖 3 行（def_open_chain_spin_energy、ℝ の分配律、real_exp_of_finite_sum） | 球 |
 | 被加数の鎖 1 行目（ℝ の乗法の可換律 s(M_col)s(1) = s(1)s(M_col)、set_and_algebra_notation）・2 行目（Step 2 の等式）・3 行目（exp(KE(s)) の鎖）・4 行目（finite_product_of_real_products） | 球 |
 | 主張の鎖 1〜4 行目（直前の等式・Φ による付け替え・ς による付け替え・expansion_of_finite_product_of_two_term_sums_of_real_numbers） | 厳密（QQ[x,y]）と球 |
@@ -50,7 +50,7 @@ Step 2（M_col ≥ 3）の可換律を使う 2 行目・8 行目は自由代数�
 
 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|
-| `check_chain.sage` | Step 1・Step 2・被加数・主張の鎖の全ての行、主張、否定コントロール | 実行済み | PASS（23173 件、否定コントロール 318 件） |
+| `check_chain.sage` | Step 1・Step 2・被加数・主張の鎖の全ての行、主張、否定コントロール | 実行済み | PASS（23677 件、否定コントロール 318 件） |
 
 ## 実行方法
 

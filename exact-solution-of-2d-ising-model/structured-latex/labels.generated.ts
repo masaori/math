@@ -606,6 +606,7 @@ export const ALL_LABELS = [
   "real_negation_times_negation_is_product",
   "real_number_is_at_most_its_absolute_value",
   "real_one_minus_half_is_half",
+  "real_plus_or_minus_one_times_itself_is_one",
   "real_product_of_inverses_is_inverse_of_product",
   "real_product_of_nonzero_is_nonzero",
   "real_scalar_multiple_of_real_entry_matrix_has_real_entries",

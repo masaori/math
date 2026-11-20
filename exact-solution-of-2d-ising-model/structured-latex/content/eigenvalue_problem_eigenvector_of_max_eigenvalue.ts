@@ -3048,7 +3048,7 @@ D_0G
 &= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}\bigl(s(m+1)s(m+1)\bigr)\right)\right)s(M_{\mathrm{col}})
 &&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}}-2,\ j \to m,\ x_j \to s(m+1),\ y_j \to s(m+1))\text{ を右辺から左辺へ}\bigr)\\
 &= \left(s(1)\left(\prod_{m=1}^{M_{\mathrm{col}}-2}1\right)\right)s(M_{\mathrm{col}})
-&&\bigl(\because\ s(m+1)s(m+1)=1\text{ を各 }m\text{ へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{real_plus_or_minus_one_times_itself_is_one}\ (\sigma \to s(m+1))\ \text{を各 }m\text{ へ同時適用。}s(m+1)\in\{-1,1\}\ \text{は}\ \blkref{def_row_configurations}\ \text{の}\ \mathfrak{M}\ \text{の元の値}\bigr)\\
 &= \bigl(s(1)\cdot 1\bigr)s(M_{\mathrm{col}})
 &&\bigl(\because\ \blkref{finite_product_of_real_ones}\ (m \to M_{\mathrm{col}}-2,\ j \to m)\bigr)\\
 &= s(1)s(M_{\mathrm{col}})
@@ -3149,6 +3149,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
         "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w13)。単位元・交換律の名前だけの根拠の件）: 最後の鎖の名前だけの根拠「ℝ で 1·b = b を各因子へ」「ℝ で a·1 = a を各因子へ」を、set_and_algebra_notation の乗法の単位元 1·p = p（p → exp(K·1)）と p·1 = p（p → K）の参照にした。主張・鎖・段数は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w25)。開鎖のスピン和の c + c = 2c の件）: 最後の鎖の 12 行目は、名前だけの根拠「u に依らない実数 c の二元集合 {-1,1} 上の和は c + c = 2c」で、{-1,1} 上の和を c + c にする段と c + c = 2c の段の 2 つを 1 行で当てていた。前者の行と、新しく足した主張 real_sum_of_two_equal_terms_is_twice（a → Π_{m=1}^{M_col−1}(exp(K) − exp(−K))）の行の 2 行に割った（鎖は 14 行から 15 行）。{-1,1} 上の和の行は、有限集合の上の和の添字の付け方を本文で定める件が残るので名前だけの根拠のまま残した。鎖の両端と主張は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w42)。2·(b/2) = b を名前を出さずに使う件）: 最後の鎖の def_cosh_sinh の行は、2·(b/2) = b を名前を出さずに使って exp(K) − exp(−K) を 2sinh K に置いていた。real_twice_quotient_by_two_is_original（b → exp(K) − exp(−K)）を右辺から左辺へ当てる行と、def_cosh_sinh の sinh（x → K）を右辺から左辺へ当てる行の 2 行に割った（鎖は 15 行から 16 行）。鎖の両端と主張は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w47)。スピンの値の二乗が 1 の件）: Step 2 の M_col ≥ 3 の鎖の 9 行目は、根拠「s(m+1)s(m+1) = 1 を各 m へ同時適用」をラベルで引いていなかった。新しく足した主張 real_plus_or_minus_one_times_itself_is_one（σ → s(m+1)）を各 m へ同時適用する行にし、s(m+1) ∈ {-1,1} が def_row_configurations の 𝔐 の元の値であることを添えた。鎖の式・段数・両端と主張は不変。",
       ],
     },
   },
