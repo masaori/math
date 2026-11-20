@@ -273,17 +273,23 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
     title: "和が部分体に入る二数は、二次式の値を零にする部分体の元があれば共に部分体に入る",
     dependsOn: [],
   },
-  claim_subfield_polynomial_root_in_imaginary_unit_extension: {
-    title: "部分体を係数とする多項式は虚数単位を足した体に根を持つ",
+  claim_subfield_polynomial_root_induction_step: {
+    title: "虚数単位を足した体に根を持つことの帰納法の一歩",
     dependsOn: [
-      "claim_qbar_monic_polynomial_linear_factor_product",
-      "claim_qbar_linear_factor_product_root_is_listed_root",
       "claim_pair_count_two_adic_valuation_decrease",
       "claim_root_index_pair_count",
       "claim_pair_shift_root_polynomial_subfield_coefficient",
       "claim_imaginary_unit_extension_quadratic_root",
       "claim_two_shifted_values_determine_sum_and_product",
       "claim_sum_in_subfield_root_gives_both_numbers",
+    ],
+  },
+  claim_subfield_polynomial_root_in_imaginary_unit_extension: {
+    title: "部分体を係数とする多項式は虚数単位を足した体に根を持つ",
+    dependsOn: [
+      "claim_qbar_monic_polynomial_linear_factor_product",
+      "claim_qbar_linear_factor_product_root_is_listed_root",
+      "claim_subfield_polynomial_root_induction_step",
     ],
   },
   claim_adjoin_imaginary_unit_gives_algebraic_numbers: {

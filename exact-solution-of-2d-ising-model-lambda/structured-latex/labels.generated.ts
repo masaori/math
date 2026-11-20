@@ -768,6 +768,7 @@ export const ALL_LABELS = [
   "claim_subfield_coefficient_polynomials_ring_closed",
   "claim_subfield_coefficient_vanishing_polynomial_exists",
   "claim_subfield_contains_rationals",
+  "claim_subfield_polynomial_root_induction_step",
   "claim_subfield_polynomial_values_contains_element",
   "claim_subfield_polynomial_values_contains_subfield",
   "claim_subfield_polynomial_values_evaluation_closed",
