@@ -5926,7 +5926,7 @@ c_2s_2^*
 &= \gamma_1(\theta)^2 + (0)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 0_{\mathbb{C}} = (0)_{\mathbb{C}}\bigr)\\
 &= \gamma_1(\theta)^2 + \bigl(-r^2 + r^2\bigr)_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{の加法逆元}\ -a + a = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to r^2\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ (-x) + x = 0\ (x \to r^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \gamma_1(\theta)^2 + \bigl((-r^2)_{\mathbb{C}} + (r^2)_{\mathbb{C}}\bigr)
 &&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to -r^2,\ b \to r^2)\ \text{を右辺から左辺へ}\bigr)\\
 &= \gamma_1(\theta)^2 + \bigl(\gamma_2(\theta)\gamma_2(-\theta) + (r^2)_{\mathbb{C}}\bigr)
@@ -5971,6 +5971,7 @@ c_2s_2^*
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 虚数単位 i = (0,1) の根拠を、後ろの章の antiperiodic_exp_sum の前置きから、計算公式の章に足した定義 def_imaginary_unit への参照に替えた。計算と主張は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 主張 (1) の鎖で -(2_C c_1c_2^*s_1s_2^*u) + 2_C c_1c_2^*s_1s_2^*u を 0_C にする行の根拠を、complex_numbers_form_a_field の加法逆元（右から足す z + (-z) = 0_C しか示していない）から negation_plus_self_is_zero_in_cc (x → 2_C c_1c_2^*s_1s_2^*u) に替えた。式は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 「第一に」の u + iv = e_+ の鎖の (1 + 1)_ℂ → 2_ℂ の行の根拠「ℝ の四則 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照（2_ℂ は inclusion_rr_to_cc の略記 (2)_ℂ）に替えた（式の両端と主張は不変）。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)）: 「ℝ の加法逆元 −a + a = 0（ℝ は体）」の行を、set_and_algebra_notation に並べた名前と形「加法の逆元 (−x) + x = 0」で引く形に書き直した。式は不変。",
       ],
     },
   },

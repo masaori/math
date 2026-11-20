@@ -2772,7 +2772,7 @@ z
 &= \arg^{[0,2\pi)}(z)+\left(\left(-\arg^{[0,2\pi)}(z)\right)+2\pi\right)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ x + y = y + x\ (x \to 2\pi,\ y \to -\arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \left(\arg^{[0,2\pi)}(z)+\left(-\arg^{[0,2\pi)}(z)\right)\right)+2\pi
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ x + (y + w) = (x + y) + w\ (x \to \arg^{[0,2\pi)}(z),\ y \to -\arg^{[0,2\pi)}(z),\ w \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to \arg^{[0,2\pi)}(z),\ y \to -\arg^{[0,2\pi)}(z),\ t \to 2\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= 0+2\pi
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to \arg^{[0,2\pi)}(z))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 2\pi
@@ -2838,6 +2838,7 @@ z
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 上の 2026-08-09 の記録にある「この生成器は \\blkref を定義していない」は当時の状態で、いまとは合わない。いまの生成器は \\blkref を定義しており（tools/build-latex.ts は \\cref に、tools/build-html.ts はブロックへのリンクに展開する）、本文のブロックは式の行の (∵ …) の中から \\blkref で引ける。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 二つの場合の鎖の名前だけの根拠を参照に替えた。「1_C は C の積の単位元」4 行と「C の積の結合律」2 行を complex_numbers_form_a_field の参照（使った形と代入つき）に、「準備の第三で取った 1/√z の定め方」「準備の第二で取った 1/z の定め方」各 2 行を multiplicative_group_of_cc の逆元（w^{-1}w = 1_C の w → √z、ww^{-1} = 1_C の w → z）に、「sqrt と積が可換になる条件の第 1・第 2 の場合」を condition_of_commutativity_of_sqrt_and_product（z_1 → z、z_2 → 1/z）を右辺から左辺へに、「-(-w)=w」を double_negation_in_cc に、「C の積と符号の関係」を complex_times_negation_is_negation_of_product_in_cc（z → 1/√z、w → 1_C）にした。偏角の和の「ℝ の和の計算」2 行のうち 0 + 0 = 0 を set_and_algebra_notation の加法の単位元（x → 0）に、arg z + (2π − arg z) = 2π を def_real_difference・加法の交換律・結合律・逆元・単位元の 5 行に割った（鎖の両端は不変。偏角の和の第 2 の場合の鎖は 2 段から 6 段）。主張は不変。SageMath の検算 check_reciprocal_cases_chains.sage を足した。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く 2 行に、使った形と代入が書かれていない、または代入が参照の後ろに置かれていたので、000_calculation_formulae_20_29.ts の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: φ_polar(1_C) の鎖の 1 + 0 = 1（x + 0 = x の x → 1）と、√(1_C) の鎖の (1·1, 1·0) = (1, 0)（1·x = x の x → 1、x → 0 を 2 箇所へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)）: 加法の結合律の行の形 x + (y + w) = (x + y) + w を、set_and_algebra_notation に並べた向き (x + y) + t = x + (y + t) を右辺から左辺へ当てる形に書き直した。式の両端は不変。",
       ],
     },
   },

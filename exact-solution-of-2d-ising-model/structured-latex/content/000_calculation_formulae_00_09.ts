@@ -31,13 +31,15 @@ export default defineBlocks([
       displayMath(String.raw`\begin{aligned}
 \mathbb{N}&:=\left(\mathbf{N},+_{\mathbb{N}},\cdot_{\mathbb{N}},0_{\mathbb{N}},1_{\mathbb{N}},\le_{\mathbb{N}}\right),\\
 \mathbb{Z}&:=\left(\mathbf{Z},+_{\mathbb{Z}},\cdot_{\mathbb{Z}},0_{\mathbb{Z}},1_{\mathbb{Z}},\le_{\mathbb{Z}}\right),\\
-\mathbb{R}&:=\left(\mathbf{R},+_{\mathbb{R}},\cdot_{\mathbb{R}},0_{\mathbb{R}},1_{\mathbb{R}},\le_{\mathbb{R}}\right).
+\mathbb{R}&:=\left(\mathbf{R},+_{\mathbb{R}},\cdot_{\mathbb{R}},0_{\mathbb{R}},1_{\mathbb{R}},-_{\mathbb{R}},(\cdot)^{-1}_{\mathbb{R}},\le_{\mathbb{R}}\right).
 \end{aligned}`),
       paragraph(["各演算と順序の所属は次のとおりである。"]),
       displayMath(String.raw`\begin{aligned}
 +_{\mathbb{N}},\cdot_{\mathbb{N}}&:\mathbf{N}\times\mathbf{N}\to\mathbf{N},\\
 +_{\mathbb{Z}},\cdot_{\mathbb{Z}}&:\mathbf{Z}\times\mathbf{Z}\to\mathbf{Z},\\
 +_{\mathbb{R}},\cdot_{\mathbb{R}}&:\mathbf{R}\times\mathbf{R}\to\mathbf{R},\\
+-_{\mathbb{R}}&:\mathbf{R}\to\mathbf{R},\qquad
+(\cdot)^{-1}_{\mathbb{R}}:\mathbf{R}\setminus\{0_{\mathbb{R}}\}\to\mathbf{R},\\
 \le_{\mathbb{N}}&\subset\mathbf{N}\times\mathbf{N},\qquad
 \le_{\mathbb{Z}}\subset\mathbf{Z}\times\mathbf{Z},\qquad
 \le_{\mathbb{R}}\subset\mathbf{R}\times\mathbf{R}.
@@ -65,6 +67,51 @@ export default defineBlocks([
         " の略記とする。積、零元、単位元についても同様に、所属する代数構造の添字を省略した略記である。",
       ]),
       paragraph([
+        math(String.raw`\mathbb{R}`),
+        " の演算が満たす性質のうち、体であること（体の公理）は次の等式と条件からなる。任意の ",
+        math(String.raw`x,y,t\in\mathbf{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&(x+y)+t=x+(y+t)
+&&\text{（加法の結合律）},\\
+&x+y=y+x
+&&\text{（加法の交換律。加法の可換律・和の可換律とも書く）},\\
+&x+0_{\mathbb{R}}=x,\qquad 0_{\mathbb{R}}+x=x
+&&\text{（}0_{\mathbb{R}}\ \text{は加法の単位元）},\\
+&x+(-x)=0_{\mathbb{R}},\qquad (-x)+x=0_{\mathbb{R}}
+&&\text{（加法の逆元）},\\
+&(x\cdot y)\cdot t=x\cdot(y\cdot t)
+&&\text{（乗法の結合律。積の結合律とも書く）},\\
+&x\cdot y=y\cdot x
+&&\text{（乗法の可換律。乗法の交換律・積の可換律とも書く）},\\
+&x\cdot 1_{\mathbb{R}}=x,\qquad 1_{\mathbb{R}}\cdot x=x
+&&\text{（}1_{\mathbb{R}}\ \text{は乗法の単位元）},\\
+&x\neq 0_{\mathbb{R}}\ \Rightarrow\ \bigl(x\cdot x^{-1}=1_{\mathbb{R}}\ \text{かつ}\ x^{-1}\cdot x=1_{\mathbb{R}}\bigr)
+&&\text{（乗法の逆元）},\\
+&x\cdot(y+t)=x\cdot y+x\cdot t,\qquad (x+y)\cdot t=x\cdot t+y\cdot t
+&&\text{（分配律）},\\
+&0_{\mathbb{R}}\neq 1_{\mathbb{R}}
+&&\text{（零元と単位元の相違）}.
+\end{aligned}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`-x`),
+        " は ",
+        math(String.raw`-_{\mathbb{R}}(x)`),
+        "、",
+        math(String.raw`x^{-1}`),
+        " は ",
+        math(String.raw`(x)^{-1}_{\mathbb{R}}`),
+        " の略記である（",
+        math(String.raw`-_{\mathbb{R}}`),
+        " は符号反転、",
+        math(String.raw`(\cdot)^{-1}_{\mathbb{R}}`),
+        " は逆数）。本文の証明で「",
+        math(String.raw`\mathbb{R}`),
+        " の加法の交換律」などと引くのは、この一覧の該当する行である。",
+      ]),
+      paragraph([
         math(String.raw`\mathbb{Z}_{\ge k}`),
         "、",
         math(String.raw`\mathbb{R}_{\ge 0}`),
@@ -84,7 +131,10 @@ export default defineBlocks([
     ],
     conversion: {
       status: "added",
-      notes: ["main.md 冒頭の記号方針を、集合と代数構造を混同しない本文定義として追加した。複素数は既存定義と重複させていない。"],
+      notes: [
+        "main.md 冒頭の記号方針を、集合と代数構造を混同しない本文定義として追加した。複素数は既存定義と重複させていない。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認）: ℝ を「順序体」とだけ書いて体の等式を並べていなかったので、本文の証明が「ℝ の加法の交換律 p + q = q + p（set_and_algebra_notation）」のように引く等式（加法・乗法の結合律と交換律、単位元と逆元の左右両側、分配律の左右両側、0_ℝ ≠ 1_ℝ）を名前つきで並べた。引く側が使う別名（加法の可換律、和の可換律、積の結合律、乗法の交換律、積の可換律）も挙げた。一覧の −x と x^{-1} が写像の値であることを示すため、組に符号反転 −_ℝ と逆数 (·)^{-1}_ℝ を足して型を宣言した（逆元の一意性の主張に頼らない）。順序の公理の形と < の定義はまだ並べていない。",
+      ],
     },
   },
   {
@@ -109,11 +159,11 @@ export default defineBlocks([
         math(String.raw`\mathbb{R}`),
         " における ",
         math(String.raw`z`),
-        " の加法の逆元（",
+        " の加法の逆元 ",
+        math(String.raw`-_{\mathbb{R}}(z)`),
+        "（",
         math(String.raw`z + (-z) = 0_{\mathbb{R}}`),
-        " を満たす ",
-        math(String.raw`\mathbb{R}`),
-        " の元。体の加法の逆元はただ一つに定まる）であり、和は ",
+        " を満たす）であり、和は ",
         math(String.raw`+_{\mathbb{R}}`),
         " である。",
       ]),
@@ -122,6 +172,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℝ の差は本文全体で使われていたが、set_and_algebra_notation の ℝ の演算は和・積・零元・単位元・順序だけで、差を定めるブロックが無かった（def_A_theta の (1,1)・(2,2) 成分の差、real_inclusion_preserves_difference の右辺など）。ℂ の def_complex_difference と同じ形で足し、ℝ の差を最初に使う definition_of_cc より前（set_and_algebra_notation の直後）に置いた。符号反転は、本文の ℝ の計算（cos_of_negated_real の準備など）が加法の逆元として読んでいるので、ℂ の multiply_by_minus_one のように (-1) 倍で定めず、順序体の加法の逆元とした。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)）: set_and_algebra_notation の ℝ の組に符号反転 −_ℝ を足したので、−z をその値 −_ℝ(z) として指す形にし、証明の要る「体の加法の逆元はただ一つに定まる」を消した。定義の式は不変。",
       ],
     },
   },
@@ -151,13 +202,11 @@ export default defineBlocks([
         math(String.raw`\mathbb{R}`),
         " における ",
         math(String.raw`z`),
-        " の乗法の逆元（",
+        " の乗法の逆元 ",
+        math(String.raw`(z)^{-1}_{\mathbb{R}}`),
+        "（",
         math(String.raw`z\,z^{-1} = 1_{\mathbb{R}}`),
-        " を満たす ",
-        math(String.raw`\mathbb{R}`),
-        " の元。体の ",
-        math(String.raw`0_{\mathbb{R}}`),
-        " でない元の乗法の逆元はただ一つに定まる）であり、積は ",
+        " を満たす）であり、積は ",
         math(String.raw`\cdot_{\mathbb{R}}`),
         " である。",
       ]),
@@ -166,6 +215,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℝ の分数は本文全体で使われていたが、set_and_algebra_notation の ℝ の演算は和・積・零元・単位元・順序だけで、商を定めるブロックが無く、periodicity_of_check_fermi (2) の θ̃_{μ+kM} の鎖が「(M_col)_ℝ ≠ 0_ℝ を分母とする分数の和」「約分」を名前だけで当てていた。一ステップ一定理に割るために、ℂ の def_complex_quotient と同じ形で def_real_difference の直後に足した。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)）: set_and_algebra_notation の ℝ の組に逆数 (·)^{-1}_ℝ を足したので、z^{-1} をその値 (z)^{-1}_ℝ として指す形にし、証明の要る「0_ℝ でない元の乗法の逆元はただ一つに定まる」を消した。定義の式は不変。",
       ],
     },
   },
