@@ -1883,7 +1883,7 @@ t
     conversion: {
       status: "added",
       notes: [
-        "2026-11-16（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p23)）: relation_of_gamma_2_theta_tilde の準備の第五にあった sin(π/2) = 1 の鎖を独立の主張にした。1 行目の根拠に「右辺から左辺へ」を添えた（式は不変）。(5) の主の鎖が引く。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p23)。cos(π/2)・sin(π/2) を主張にする件）: relation_of_gamma_2_theta_tilde の準備の第五にあった sin(π/2) = 1 の鎖を独立の主張にした。1 行目の根拠に「右辺から左辺へ」を添えた（式は不変）。(5) の主の鎖が引く。",
         "四層のうち記述と SageMath まで。Lean は置かない: 本文の sin は弧の長さで定めた arcsin の逆で、Lean の Real.sin・Real.pi とは定義が違い、本文の弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない（arcsin_of_one_is_half_pi と同じ理由）。",
       ],
     },
@@ -1932,7 +1932,7 @@ t
     conversion: {
       status: "added",
       notes: [
-        "2026-11-16（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p23)）: relation_of_gamma_2_theta_tilde の準備の第五にあった cos(π/2) = 0 の鎖を独立の主張にした。1 行目の根拠に、def_cos の定義域に π/2 が入る理由（arcsin_of_one_is_half_pi と arcsin_is_bijection の値域）を足し、2 行目の「上の sin(π/2) = 1」を sine_of_half_pi_is_one の参照にした。値と鎖の式は不変。",
+        "2026-11-16（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p23)。cos(π/2)・sin(π/2) を主張にする件）: relation_of_gamma_2_theta_tilde の準備の第五にあった cos(π/2) = 0 の鎖を独立の主張にした。1 行目の根拠に、def_cos の定義域に π/2 が入る理由（arcsin_of_one_is_half_pi と arcsin_is_bijection の値域）を足し、2 行目の「上の sin(π/2) = 1」を sine_of_half_pi_is_one の参照にした。値と鎖の式は不変。",
         "四層のうち記述と SageMath まで。Lean は置かない（sine_of_half_pi_is_one と同じ理由）。",
       ],
     },

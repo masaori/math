@@ -172,7 +172,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℝ の差は本文全体で使われていたが、set_and_algebra_notation の ℝ の演算は和・積・零元・単位元・順序だけで、差を定めるブロックが無かった（def_A_theta の (1,1)・(2,2) 成分の差、real_inclusion_preserves_difference の右辺など）。ℂ の def_complex_difference と同じ形で足し、ℝ の差を最初に使う definition_of_cc より前（set_and_algebra_notation の直後）に置いた。符号反転は、本文の ℝ の計算（cos_of_negated_real の準備など）が加法の逆元として読んでいるので、ℂ の multiply_by_minus_one のように (-1) 倍で定めず、順序体の加法の逆元とした。",
-        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)）: set_and_algebra_notation の ℝ の組に符号反転 −_ℝ を足したので、−z をその値 −_ℝ(z) として指す形にし、証明の要る「体の加法の逆元はただ一つに定まる」を消した。定義の式は不変。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)。体の法則の式と名前を並べる件）: set_and_algebra_notation の ℝ の組に符号反転 −_ℝ を足したので、−z をその値 −_ℝ(z) として指す形にし、証明の要る「体の加法の逆元はただ一つに定まる」を消した。定義の式は不変。",
       ],
     },
   },
@@ -215,7 +215,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℝ の分数は本文全体で使われていたが、set_and_algebra_notation の ℝ の演算は和・積・零元・単位元・順序だけで、商を定めるブロックが無く、periodicity_of_check_fermi (2) の θ̃_{μ+kM} の鎖が「(M_col)_ℝ ≠ 0_ℝ を分母とする分数の和」「約分」を名前だけで当てていた。一ステップ一定理に割るために、ℂ の def_complex_quotient と同じ形で def_real_difference の直後に足した。",
-        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)）: set_and_algebra_notation の ℝ の組に逆数 (·)^{-1}_ℝ を足したので、z^{-1} をその値 (z)^{-1}_ℝ として指す形にし、証明の要る「0_ℝ でない元の乗法の逆元はただ一つに定まる」を消した。定義の式は不変。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)。体の法則の式と名前を並べる件）: set_and_algebra_notation の ℝ の組に逆数 (·)^{-1}_ℝ を足したので、z^{-1} をその値 (z)^{-1}_ℝ として指す形にし、証明の要る「0_ℝ でない元の乗法の逆元はただ一つに定まる」を消した。定義の式は不変。",
       ],
     },
   },
@@ -2237,8 +2237,8 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-03: 原文（Typst）に対応ブロックは無い。max_eigenvalue_of_V_plus_simple (2) の ǧ(1,…,1) − ǧ(ε) の鎖が「ǧ の定義と分配法則」の名前だけで二つの有限和の差を項ごとの差の有限和にしていたので、引けるよう足した。",
-        "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w7)）: 帰納法の段の 1 行「ℝ の和と差の計算」（(α − β) + (a − b) = (α + a) − (β + b)）が複数の法則をまとめていたので、def_real_difference の 2 か所同時適用・加法の結合則・結合則・交換則・結合則・結合則（finite_sum_of_real_sums の帰納法の段と同じ 5 行）・real_negation_of_sum_is_sum_of_negations（右辺から左辺へ）・def_real_difference（右辺から左辺へ）の 8 行に割った（鎖の両端と主張は不変）。Lean の Ising2D.finite_sum_of_real_differences_step は同じ 8 段の calc。数値検証: sagemath/check/finite_sum_of_real_differences/。",
-        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w14)）: m = 1 の 2 行と帰納法の段の最初と最後の行の def_finite_sum_of_real_numbers に代入（r_j → a_j − b_j、r_j → a_j; r_j → b_j）と向き（右辺から左辺へ）を書き、帰納法の段の加法の結合則・交換則の 5 行を形 (p + q) + s = p + (q + s)・p + q = q + p と代入を添えた set_and_algebra_notation の参照にした（兄弟の finite_sum_of_real_sums と揃えた。文字 p, q, s は同じ鎖の def_finite_sum_of_real_numbers の r_j、def_real_difference の y, z、real_negation_of_sum_is_sum_of_negations の x, y と衝突しないよう選んだ。def_finite_sum_of_real_numbers の 2 か所同時適用の代入は「;」で区切った。主張・鎖・段数は不変）。",
+        "2026-11-18（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w7)。和と差の計算の行を割る件）: 帰納法の段の 1 行「ℝ の和と差の計算」（(α − β) + (a − b) = (α + a) − (β + b)）が複数の法則をまとめていたので、def_real_difference の 2 か所同時適用・加法の結合則・結合則・交換則・結合則・結合則（finite_sum_of_real_sums の帰納法の段と同じ 5 行）・real_negation_of_sum_is_sum_of_negations（右辺から左辺へ）・def_real_difference（右辺から左辺へ）の 8 行に割った（鎖の両端と主張は不変）。Lean の Ising2D.finite_sum_of_real_differences_step は同じ 8 段の calc。数値検証: sagemath/check/finite_sum_of_real_differences/。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w14)。有限和の定義の代入と、結合則・交換則の形を揃える件）: m = 1 の 2 行と帰納法の段の最初と最後の行の def_finite_sum_of_real_numbers に代入（r_j → a_j − b_j、r_j → a_j; r_j → b_j）と向き（右辺から左辺へ）を書き、帰納法の段の加法の結合則・交換則の 5 行を形 (p + q) + s = p + (q + s)・p + q = q + p と代入を添えた set_and_algebra_notation の参照にした（兄弟の finite_sum_of_real_sums と揃えた。文字 p, q, s は同じ鎖の def_finite_sum_of_real_numbers の r_j、def_real_difference の y, z、real_negation_of_sum_is_sum_of_negations の x, y と衝突しないよう選んだ。def_finite_sum_of_real_numbers の 2 か所同時適用の代入は「;」で区切った。主張・鎖・段数は不変）。",
       ],
     },
   },
@@ -2316,7 +2316,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 を W_ℝ・ε_ℝ で書き直すとき、実数の双線型値 (a+b)^⊤P(a+b) を 4 項へ展開する段（def_real_bilinear_value の二重の有限和を項ごとの和の有限和から二つの有限和へ分ける）から引けるよう足した。psd_cauchy_schwarz の q(t) の展開も同じ段を「有限和の項の並べ替え」の名前だけで使っている。複素数の兄弟の主張 finite_sum_of_complex_sums と同じ帰納法で、和の結合則・交換則の適用を 1 段ずつに割った。数値検証: sagemath/check/finite_sum_of_real_sums/。",
-        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w14)）: 帰納法の段の加法の結合則・交換則の 5 行を、形 (p + q) + s = p + (q + s)・p + q = q + p と代入を添えた set_and_algebra_notation の参照にした（finite_sum_of_real_differences と揃えた。m = 1 の 2 行目と帰納法の段の最後の行の def_finite_sum_of_real_numbers の 2 か所同時適用の代入の区切りを「,」から「;」にし、「を右辺から左辺へ 2 か所へ同時適用」の「へ」の重なりを「を右辺から左辺へ 2 か所同時適用」にした。主張・鎖・段数は不変）。",
+        "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w14)。有限和の定義の代入と、結合則・交換則の形を揃える件）: 帰納法の段の加法の結合則・交換則の 5 行を、形 (p + q) + s = p + (q + s)・p + q = q + p と代入を添えた set_and_algebra_notation の参照にした（finite_sum_of_real_differences と揃えた。m = 1 の 2 行目と帰納法の段の最後の行の def_finite_sum_of_real_numbers の 2 か所同時適用の代入の区切りを「,」から「;」にし、「を右辺から左辺へ 2 か所へ同時適用」の「へ」の重なりを「を右辺から左辺へ 2 か所同時適用」にした。主張・鎖・段数は不変）。",
       ],
     },
   },
@@ -4494,7 +4494,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-10（Lean の通しの証明）: 原文（Typst）に対応ブロックは無い。matrix_sum_with_itself_zero_implies_zero・V1_plus_square_root_property・trace_of_check_number_operator_product・exp_of_negative_i_real_as_cos_minus_i_sin の証明の準備が同じ 4 行の鎖をそれぞれ置いていたので、minus_one_times_minus_one_is_one_in_cc と同じく主張にして引けるようにした。",
-        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)）: 3 行目 (1 + 1)_ℂ = (2)_ℂ の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、ℝ の 2 を定める def_real_two を右辺から左辺へ当てる参照に替えた（式の両端と主張は不変）。",
+        "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)。「ℝ で 1 + 1 = 2」の名前だけの根拠の件）: 3 行目 (1 + 1)_ℂ = (2)_ℂ の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、ℝ の 2 を定める def_real_two を右辺から左辺へ当てる参照に替えた（式の両端と主張は不変）。",
       ],
     },
   },
