@@ -2,7 +2,7 @@
 # 実数の二つの鎖を、π・μ・M・j を不定元にした QQ 上の有理関数体で、各行をその行の式の形のまま組んで隣と比べる。
 # - (1) θ̃_{M+1-μ} = ⋯ = 2π - θ̃_μ の 26 等号（末尾の 11 等号は def_real_quotient の商 y z^{-1} の形のまま組む）
 # - (2) の準備の第一の鎖 j_R θ̃_{M+1-μ} = j_R(2π - θ̃_μ) = j_R·2π - j_R θ̃_μ = 2πj_R - j_R θ̃_μ = 2πj_R + (-(j_R θ̃_μ)) の 4 等号
-# 整数の像の行（(M+1-μ)_R = ι(M+1) - μ_R は antiperiodic_exp_sum の仮定（包含は零・和を保つ）、ι(M+1) = (M)_R + ι(1) は
+# 整数の像の行（(M+1-μ)_R = ι(M+1) - μ_R は inclusion_zz_to_rr_preserves_difference（中身は sagemath/check/inclusion_zz_to_rr_preserves_difference）、ι(M+1) = (M)_R + ι(1) は
 # inclusion_zz_to_rr_preserves_sum_of_nonnegatives（a → M, b → 1。中身は sagemath/check/inclusion_zz_to_rr_preserves_sum_of_nonnegatives）、
 # ι(1) = 1_R は inclusion_zz_to_rr_of_one（ι(1_ℤ) = 1_ℝ。中身は sagemath/check/inclusion_zz_to_rr_of_one）を当てる行）は、
 # 有理関数体の上では両辺が同じ式になり、検算は中身を持たない。

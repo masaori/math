@@ -72,7 +72,8 @@ theorem recover_exponent_real_chain (k l : ℤ) (x : ℝ) :
       = (k : ℝ) * x + (-(l : ℝ)) * x := by rw [real_negation_times_is_negation_of_product]  -- `real_negation_times_is_negation_of_product`（文字を `p, q` に替え `p → k_ℝ`、`q → x`）を右辺から左辺へ
     _ = ((k : ℝ) + (-(l : ℝ))) * x := (add_mul _ _ _).symm                  -- ℝ の分配法則
     _ = ((k : ℝ) - (l : ℝ)) * x := by rw [← sub_eq_add_neg]                 -- ℝ の差は加法の逆元の和
-    _ = ((k - l : ℤ) : ℝ) * x := by rw [Int.cast_sub]                       -- `ℤ → ℝ` は差を保つ
+    _ = ((k - l : ℤ) : ℝ) * x := by rw [inclusion_zz_to_rr_preserves_difference k l]
+                                                                           -- `inclusion_zz_to_rr_preserves_difference`（`a → j_ℤ`, `b → k_ℤ`）を右辺から左辺へ
 
 /-- **準備 2 の複素数の鎖**: `i(a)_ℂ + (-i)(b)_ℂ = i(c)_ℂ`（`a + (-b) = c`。人手では `a = j_ℝx`、`b = k_ℝx`、
 `c = (j_ℤ - k_ℤ)_ℝ x`、`h` は直前の実数の鎖 `recover_exponent_real_chain`）。人手の 5 行に 1 段ずつ対応する。

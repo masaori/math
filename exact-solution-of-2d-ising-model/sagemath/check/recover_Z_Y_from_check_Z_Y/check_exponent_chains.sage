@@ -1,7 +1,7 @@
 # 対象ラベル: recover_Z_Y_from_check_Z_Y
 # 準備 2 の二つの鎖を一行ずつ確かめる。
 # - 実数の鎖（4 等号）: x・j・k を不定元にした QQ 上の有理関数体で各行を組み、隣と比べる。j_R・k_R は (j_Z)_R・(k_Z)_R と同じ不定元で、
-#   ι_{Z→R} が差を保つ最後の行は (j - k)_R を j - k として作るので作り方で自明である。有理関数体は分配律・
+#   ι_{Z→R} が差を保つ最後の行（inclusion_zz_to_rr_preserves_difference を右辺から左辺へ。中身は sagemath/check/inclusion_zz_to_rr_preserves_difference）は (j - k)_R を j - k として作るので作り方で自明である。有理関数体は分配律・
 #   -(ab) = (-a)b で並べ替えた式を同じ元にするので、この鎖の比較は中身を持たず、値が通ることを見るだけである。
 # - 複素数の鎖（5 等号）: ℂ を本文どおり実数の対で持ち（complex_as_real_pairs.sage）、同じ有理関数体の上で各行を組み、隣と比べる。
 #   -i は multiply_by_minus_one どおり (-1_C)i、-1_C は inclusion_rr_to_cc の像 (-1)_C として作る。

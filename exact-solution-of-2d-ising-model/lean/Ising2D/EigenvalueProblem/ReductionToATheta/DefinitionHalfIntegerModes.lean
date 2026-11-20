@@ -166,7 +166,8 @@ theorem thetaTilde_one_sub (M : ℕ) (μ : ℤ) : thetaTilde M (1 - μ) = -theta
       = 2 * Real.pi * (((1 - μ : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
                                                   -- 1 行目: `θ~` の定義を `1-μ` で（`antiperiodic_exp_sum`）
     _ = 2 * Real.pi * ((((1 : ℤ) : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [Int.cast_sub]                         -- 2 行目: `ι_{ℤ→ℝ}` は差を保つ
+        rw [inclusion_zz_to_rr_preserves_difference 1 μ]
+                                                  -- 2 行目: `inclusion_zz_to_rr_preserves_difference`（`a → 1_ℤ`, `b → μ`）
     _ = 2 * Real.pi * (((1 : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [inclusion_zz_to_rr_of_one_intCast]    -- 3 行目: `inclusion_zz_to_rr_of_one`（`ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ`）
     _ = 2 * Real.pi * (((1 : ℝ) + -(μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by

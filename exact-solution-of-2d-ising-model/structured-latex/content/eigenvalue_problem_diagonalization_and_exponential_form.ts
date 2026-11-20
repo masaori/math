@@ -1375,7 +1375,7 @@ Q_{s+1}
 &=\frac{2\pi\left((1-\mu)_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \tilde\theta\text{ の定義を }1-\mu\in\mathbb Z\text{ で。}\blkref{antiperiodic_exp_sum}\bigr)\\
 &=\frac{2\pi\left((\iota_{\mathbb Z\to\mathbb R}(1)-\mu_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので差を保つ。}\blkref{antiperiodic_exp_sum}\bigr)\\
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_difference}\ (a \to 1_{\mathbb Z},\ b \to \mu)\text{。}\blkref{antiperiodic_exp_sum}\bigr)\\
 &=\frac{2\pi\left((1_{\mathbb R}-\mu_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{の}\ \iota_{\mathbb Z\to\mathbb R}(1_{\mathbb Z}) = 1_{\mathbb R}\bigr)\\
 &=\frac{2\pi\left(\left(1_{\mathbb R}+(-\mu_{\mathbb R})\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1413,6 +1413,7 @@ Q_{s+1}
         "(3) により、整数運動量の場合に -μ が果たしていた「共役添字」の役割を、半整数運動量では 1-μ が果たす。反交換関係の対が μ+ν ≡ 1 (mod M) になるのはこのためである。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。差の定義の代入の件）: (3) の鎖で def_real_difference を引く 4 行（左辺から右辺へ 2 行、右辺から左辺へ 2 行）に代入 (y → …, z → …) を書いた。鎖の式・段数・主張は変えていない。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49a)。整数 1 の実数の像についての名前だけの根拠の件）: (3) の鎖の 3 行目の名前だけの根拠「ι_{ℤ→ℝ} は単位元を保つ」を、inclusion_zz_to_rr_of_one（ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ）を左辺から右辺へ当てる参照にした。主張・鎖・段数は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b4)。ℤ 全体で差を保つ主張の件）: (3) の鎖の 2 行目の名前だけの根拠「ι_{ℤ→ℝ} は和と零を保つので差を保つ」を、新しく足した inclusion_zz_to_rr_preserves_difference（a → 1_ℤ、b → μ。μ は符号が決まっていない）の参照にした。主張・鎖・段数は不変。Lean の thetaTilde_one_sub の対応する段の Int.cast_sub を Ising2D.inclusion_zz_to_rr_preserves_difference に替えた。",
       ],
     },
   },
@@ -1520,7 +1521,7 @@ Q_{s+1}
 &= \frac{2\pi\left((M_{\mathrm{col}}+1-\mu)_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \tilde\theta\text{ の定義を }M_{\mathrm{col}}+1-\mu\in\mathbb Z\text{ で。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= \frac{2\pi\left(\left(\iota_{\mathbb Z\to\mathbb R}(M_{\mathrm{col}}+1)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので差を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
+   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_difference}\ (a \to M_{\mathrm{col}}+1,\ b \to \mu)\text{。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+\iota_{\mathbb Z\to\mathbb R}(1)\right)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum_of_nonnegatives}\ (a \to M_{\mathrm{col}},\ b \to 1_{\mathbb Z}\text{。}M_{\mathrm{col}}\in\mathbb Z_{\geq2}\subset\mathbb Z_{\geq0},\ 1_{\mathbb Z}\in\mathbb Z_{\geq0})\text{。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1714,6 +1715,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。差の定義の代入の件）: (1) の鎖で def_real_difference を引く 5 行（左辺から右辺へ 2 行、右辺から左辺へ 3 行）に代入 (y → …, z → …) を書いた。鎖の式・段数・主張は変えていない。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49a)。整数 1 の実数の像についての名前だけの根拠の件）: (1) の鎖の 4 行目の名前だけの根拠「ι_{ℤ→ℝ} は単位元を保つ」を、inclusion_zz_to_rr_of_one（ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ）を左辺から右辺へ当てる参照にした。主張・鎖・段数は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b1)。整数の実数の像の和と零についての名前だけの根拠の件）: (1) の鎖の 3 行目の名前だけの根拠「ι_{ℤ→ℝ} は和を保つ」を、inclusion_zz_to_rr_preserves_sum_of_nonnegatives（a → M_col, b → 1_ℤ。M_col ∈ ℤ_{≥2} と 1_ℤ はともに ℤ_{≥0} の元）の参照にした。主張・鎖・段数は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b4)。ℤ 全体で差を保つ主張の件）: (1) の鎖の 2 行目の名前だけの根拠「ι_{ℤ→ℝ} は和と零を保つので差を保つ」を、新しく足した inclusion_zz_to_rr_preserves_difference（a → M_col + 1、b → μ）の参照にした。主張・鎖・段数は不変。Lean の thetaTilde_conj の対応する段の Int.cast_sub を Ising2D.inclusion_zz_to_rr_preserves_difference に替えた。",
       ],
     },
   },
@@ -2279,7 +2281,7 @@ j_{\mathbb R}x + \left(-(k_{\mathbb R}x)\right)
 &= \left(j_{\mathbb R} - k_{\mathbb R}\right)x
 &&(\because\ \mathbb R\text{ の差は加法の逆元の和}) \\
 &= (j_{\mathbb Z} - k_{\mathbb Z})_{\mathbb R}\,x
-&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので差を保つ。}j_{\mathbb R}=(j_{\mathbb Z})_{\mathbb R},\ k_{\mathbb R}=(k_{\mathbb Z})_{\mathbb R}\ (\blkref{antiperiodic_exp_sum})\bigr)
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_difference}\ (a \to j_{\mathbb Z},\ b \to k_{\mathbb Z})\ \text{を右辺から左辺へ。}j_{\mathbb R}=(j_{\mathbb Z})_{\mathbb R},\ k_{\mathbb R}=(k_{\mathbb Z})_{\mathbb R}\ (\blkref{antiperiodic_exp_sum})\bigr)
 \end{aligned}`,
       ),
       paragraph(["であり、複素数の側で"]),
@@ -2427,6 +2429,7 @@ c\sum_{\mu=1}^{N} f_{j,\mu}\check{Y}_{\mu_{\mathbb Z}}
         "2026-11-03（全証明の SageMath 検算）: 主張に像の記号（j_Z・j_R・μ_Z）と (M_col)_C^{-1} の存在、exp・積・和の出所を書き、定義どおりスカラーを左に置いて主張の左辺から鎖を始める形にした（中身は不変）。生成の主張を Z_Y_generate_algebra の (i)〜(iv) で述べ直した。証明は、行列の theorem_exp_product (n=1) を scalar_exp_product に、名前だけの「有限和への分配」「有限和の順序交換」「k = j の項だけが残る」を finite_sum_of_scalar_multiples・新しい主張 finite_double_sum_of_matrices_interchange・finite_sum_of_matrices_with_single_nonzero_term に付け替え、指数の和を i((j_Z − k_Z)_R θ̃)_C へ書き換える準備 2 の鎖と、k ≠ j の項が O になる準備 1 の鎖を置いた。",
         "2026-11-10（Lean の通しの証明）: 準備 2 の複素数の鎖が -i の積（multiply_by_minus_one・交換律・結合律）と (-1_R)_C = -1_C をその場で開いていた 4 行を、negative_i_times_complex_is_negation_of_i_times（z → (k_R x)_C）と i_times_negated_real_is_negation_of_i_times（θ → k_R x）の参照 2 行に替えた。二項の和の像は real_inclusion_preserves_finite_sum の m = 2 から real_inclusion_preserves_sum にした（8 等号から 5 等号）。実数の鎖は左辺を j_R x + (-(k_R x)) にし、(-1_R)(k_R x) を開く 2 行を ℝ の -(yx) = (-y)x の 1 行にした（5 等号から 4 等号）。両端と第 1・2 式は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: −(k_ℝx) = (−k_ℝ)x の行の根拠「ℝ で −(ab)=(−a)b」を、主張 real_negation_times_is_negation_of_product（証明の x と衝突しないよう文字を p, q に替え、p → k_ℝ, q → x を右辺から左辺へ）の参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b4)。ℤ 全体で差を保つ主張の件）: 準備 2 の実数の鎖の 4 行目の名前だけの根拠「ι_{ℤ→ℝ} は和と零を保つので差を保つ」を、新しく足した inclusion_zz_to_rr_preserves_difference（a → j_ℤ、b → k_ℤ を右辺から左辺へ）の参照にした。主張・鎖・段数は不変。Lean の recover_exponent_real_chain の対応する段の Int.cast_sub を Ising2D.inclusion_zz_to_rr_preserves_difference に替えた。",
       ],
     },
   },

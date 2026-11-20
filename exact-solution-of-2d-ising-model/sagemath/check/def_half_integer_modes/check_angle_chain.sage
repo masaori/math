@@ -1,7 +1,7 @@
 # 対象ラベル: def_half_integer_modes
 # 証明の鎖 θ̃_{1-μ} = ⋯ = -θ̃_μ の 14 等号を、π・μ・M を不定元にした QQ 上の有理関数体で、
 # 各行をその行の式の形のまま組んで隣の行と比べる。不定元で成り立つ有理式の等号は、M ≠ 0 の代入でも成り立つ。
-# 整数の像の行（(1-μ)_R = ι(1) - μ_R は antiperiodic_exp_sum の仮定（包含は零・和を保つ）、ι(1) = 1_R は
+# 整数の像の行（(1-μ)_R = ι(1) - μ_R は inclusion_zz_to_rr_preserves_difference（中身は sagemath/check/inclusion_zz_to_rr_preserves_difference）、ι(1) = 1_R は
 # inclusion_zz_to_rr_of_one（ι(1_ℤ) = 1_ℝ。中身は sagemath/check/inclusion_zz_to_rr_of_one）を当てる行）は、
 # 有理関数体の上では両辺が同じ式になり、検算は中身を持たない。
 # 具体の点: M = 2..8、μ = -2M..2M で、各行の 角度/2π が一致し、θ̃_{1-μ}/2π = -θ̃_μ/2π であることも見る。

@@ -1811,6 +1811,55 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_claim_inclusion_zz_to_rr_preserves_difference",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a - b) = \iota_{\mathbb{Z}\to\mathbb{R}}(a) - \iota_{\mathbb{Z}\to\mathbb{R}}(b)\quad(a, b \in \mathbb{Z})` },
+    labels: ["inclusion_zz_to_rr_preserves_difference"],
+    statement: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " について、",
+        math(String.raw`a, b \in \mathbb{Z}`),
+        " なら",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a -_{\mathbb{Z}} b) = \iota_{\mathbb{Z}\to\mathbb{R}}(a) -_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)`),
+      paragraph([
+        "である。右辺の ",
+        math(String.raw`-_{\mathbb{R}}`),
+        " は ",
+        ref("def_real_difference"),
+        " の差である。",
+      ]),
+    ],
+    proof: [
+      paragraph(["主張の左辺から"]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(a -_{\mathbb{Z}} b)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a -_{\mathbb{Z}} b) +_{\mathbb{R}} 0_{\mathbb{R}}
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a -_{\mathbb{Z}} b) +_{\mathbb{R}} \Bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr)\Bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の加法逆元}\ x +_{\mathbb{R}} (-x) = 0_{\mathbb{R}}\ (x \to \iota_{\mathbb{Z}\to\mathbb{R}}(b))\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(a -_{\mathbb{Z}} b) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)\Bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((a -_{\mathbb{Z}} b) +_{\mathbb{Z}} b\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr)
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a \to a -_{\mathbb{Z}} b,\ b \to b)\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ (x -_{\mathbb{Z}} b) +_{\mathbb{Z}} b = x\ (x \to a)\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) -_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)
+  &&\bigl(\because\ \blkref{def_real_difference}\ (y \to \iota_{\mathbb{Z}\to\mathbb{R}}(a),\ z \to \iota_{\mathbb{Z}\to\mathbb{R}}(b))\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b4)）: 原文（Typst）に対応ブロックは無い。def_half_integer_modes (3)・conjugate_index_of_check_Z_Y (1) の鎖の 2 行目と recover_Z_Y_from_check_Z_Y の準備 2 の実数の鎖の 4 行目（いずれも eigenvalue_problem_diagonalization_and_exponential_form.ts）が「ι_{ℤ→ℝ} は和と零を保つので差を保つ」を名前だけで使っていたので、ℤ 全体の主張として足した。証明は inclusion_zz_to_rr_preserves_sum だけを引く 6 行の鎖である。Lean の具体版は Ising2D.inclusion_zz_to_rr_preserves_difference、必要十分版は Ising2D.NecSuf.int_cast_sub'。数値検証: sagemath/check/inclusion_zz_to_rr_preserves_difference/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_inclusion_zz_to_rr_of_positive_is_at_least_one",
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n) \geq 1_{\mathbb{R}}\quad(n \geq 1)` },

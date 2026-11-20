@@ -1,12 +1,12 @@
 /-
-# `ι(1) = 1`・非負の整数の和・`ℤ` 全体の後者と和と積・定数の有限和・2 の冪（具体版を必要十分版から導く）
+# `ι(1) = 1`・非負の整数の和・`ℤ` 全体の後者と和と積と差・定数の有限和・2 の冪（具体版を必要十分版から導く）
 
-具体版 `ClaimInclusionOfIntegersIntoRealNumbers.lean` の 11 の主張を、必要十分版
+具体版 `ClaimInclusionOfIntegersIntoRealNumbers.lean` の 12 の主張を、必要十分版
 `Ising2D/NecSuf/NaturalNumberCastIntoSemiring.lean` の `R := ℝ`（`power_of_two_in_integers_is_at_least_one` は `R := ℕ`）の特殊化として得る。
 人手のラベルは `inclusion_zz_to_rr_of_one`、`inclusion_zz_to_rr_preserves_sum_of_nonnegatives`、
 `finite_sum_of_constant_real_number`、`power_of_two_in_integers_is_at_least_one`、`inclusion_zz_to_rr_of_power_of_two`、
 `inclusion_zz_to_rr_of_positive_is_at_least_one`、`inclusion_zz_to_rr_of_nonpositive_is_nonpositive`、`inclusion_zz_to_rr_is_monotone_on_nonnegatives`、
-`inclusion_zz_to_rr_of_successor`、`inclusion_zz_to_rr_preserves_sum`、`inclusion_zz_to_rr_preserves_product`。
+`inclusion_zz_to_rr_of_successor`、`inclusion_zz_to_rr_preserves_sum`、`inclusion_zz_to_rr_preserves_product`、`inclusion_zz_to_rr_preserves_difference`。
 -/
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Ising2D.NecSuf.NaturalNumberCastIntoSemiring
@@ -60,5 +60,10 @@ theorem inclusion_zz_to_rr_preserves_sum_of_necSuf (a b : ℤ) :
 theorem inclusion_zz_to_rr_preserves_product_of_necSuf (a b : ℤ) :
     ((a * b : ℤ) : ℝ) = ((a : ℤ) : ℝ) * ((b : ℤ) : ℝ) :=
   NecSuf.int_cast_mul' (R := ℝ) a b
+
+/-- `inclusion_zz_to_rr_preserves_difference` を `NecSuf.int_cast_sub'` の `R := ℝ` として得る。 -/
+theorem inclusion_zz_to_rr_preserves_difference_of_necSuf (a b : ℤ) :
+    ((a - b : ℤ) : ℝ) = ((a : ℤ) : ℝ) - ((b : ℤ) : ℝ) :=
+  NecSuf.int_cast_sub' (R := ℝ) a b
 
 end Ising2D

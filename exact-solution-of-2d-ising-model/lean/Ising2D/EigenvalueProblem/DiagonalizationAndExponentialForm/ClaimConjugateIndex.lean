@@ -48,7 +48,8 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
       = 2 * Real.pi * ((((M : ℤ) + 1 - μ : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
           -- 1 行目: `θ~` の定義を `M_col+1-μ ∈ ℤ` で（`antiperiodic_exp_sum`）
     _ = 2 * Real.pi * (((((M : ℤ) + 1 : ℤ) : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [Int.cast_sub]                         -- 2 行目: `ι_{ℤ→ℝ}` は和と零を保つので差を保つ
+        rw [inclusion_zz_to_rr_preserves_difference ((M : ℤ) + 1) μ]
+                                                  -- 2 行目: `inclusion_zz_to_rr_preserves_difference`（`a → M_col + 1`, `b → μ`）
     _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + ((1 : ℤ) : ℝ)) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) :=
         congrArg (fun t : ℝ => 2 * Real.pi * ((t - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ))
           (inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast M 1)
