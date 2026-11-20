@@ -48188,9 +48188,10 @@ C_R\cap F_n&=C_n&&\bigl(\because\ \blkref{claim_increasing_positive_cone_union_r
                     math(String.raw`b\in\overline{\mathbb Q}`), " が存在する。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-0&=p(b)&&\bigl(\because\ b\text{ は }p\text{ の根}\bigr)\\
-&=b^2-a&&\bigl(\because\ p\text{ の定義}\bigr)\\
-b^2&=a&&\bigl(\because\ \text{移項}\bigr)
+b^2&=(b^2-a)+a&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&=p(b)+a&&(\because\ p(X)=X^2-a)\\
+&=0+a&&(\because\ b\text{ は }p\text{ の根})\\
+&=a&&(\because\ \overline{\mathbb Q}\text{ の四則})
 \end{aligned}`),
                   paragraph([
                     math(String.raw`b=0`), " なら ", math(String.raw`a=b^2=0`),
@@ -50862,6 +50863,78 @@ u^2-v^2&=\frac{c+a}{2}-v^2&&(\because\ 2u^2=c+a)\\
                 ]),
                 displayMath(String.raw`\begin{aligned}
 (u+v\omega)^2&=a+b\omega&&(\because\ \blkref{claim_imaginary_unit_square_root_formula})
+\end{aligned}`),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "zero_pinching_heading_imaginary_unit_zero_coefficient_square_root",
+        labels: [],
+        title: { text: "零の虚係数からの平方根の構成" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_imaginary_unit_zero_coefficient_square_root",
+            focus: {
+              id: "zero_pinching_claim_imaginary_unit_zero_coefficient_square_root",
+              kind: "claim",
+              title: { text: "虚係数が零なら虚数単位を足した元は平方根を持つ" },
+              labels: ["claim_imaginary_unit_zero_coefficient_square_root"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/imaginary-unit-zero-coefficient-square-root"],
+              lean: [
+                "Ising2DLambda.FisherZero.imaginaryUnitExtension_zeroCoefficient_squareRoot",
+                "Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_zeroCoefficient_squareRoot",
+                "Ising2DLambda.FisherZero.imaginaryUnitExtension_zeroCoefficient_squareRoot_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subset\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`C_F\subset F`), " を ", ref("def_subfield_positive_cone"),
+                " の正錐とし、", math(String.raw`C_F`), " の各元は ",
+                math(String.raw`F`), " に平方根を持つと仮定する。任意の ",
+                math(String.raw`a\in F`), " と ", math(String.raw`\omega\in\overline{\mathbb Q}`),
+                " について、", math(String.raw`\omega^2=-1`), " なら、ある ",
+                math(String.raw`u,v\in F`), " が存在し、",
+                math(String.raw`(u+v\omega)^2=a+0\omega`), " である。",
+              ])],
+              proof: [
+                paragraph([
+                  ref("def_subfield_positive_cone"), " の三分法により、",
+                  math(String.raw`a=0`), "、", math(String.raw`a\in C_F`),
+                  "、", math(String.raw`-a\in C_F`), " のいずれか一つが成り立つ。",
+                ]),
+                paragraph([math(String.raw`a=0`), " の場合は ", math(String.raw`u=v=0\in F`), " と選ぶ。"]),
+                displayMath(String.raw`\begin{aligned}
+(u+v\omega)^2&=(0+0\omega)^2&&(\because\ u=v=0)\\
+&=0&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&=a+0\omega&&(\because\ a=0)
+\end{aligned}`),
+                paragraph([math(String.raw`a\in C_F`), " の場合は、仮定により ",
+                  math(String.raw`w\in F`), " を ", math(String.raw`w^2=a`),
+                  " と選び、", math(String.raw`u=w`), "、", math(String.raw`v=0`), " と置く。"]),
+                displayMath(String.raw`\begin{aligned}
+(u+v\omega)^2&=(w+0\omega)^2&&(\because\ u=w,\ v=0)\\
+&=w^2&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&=a&&(\because\ w^2=a)\\
+&=a+0\omega&&(\because\ \overline{\mathbb Q}\text{ の四則})
+\end{aligned}`),
+                paragraph([math(String.raw`-a\in C_F`), " の場合は、仮定により ",
+                  math(String.raw`w\in F`), " を ", math(String.raw`w^2=-a`),
+                  " と選び、", math(String.raw`u=0`), "、", math(String.raw`v=w`), " と置く。"]),
+                displayMath(String.raw`\begin{aligned}
+(u+v\omega)^2&=(0+w\omega)^2&&(\because\ u=0,\ v=w)\\
+&=w^2\omega^2&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&=(-a)\omega^2&&(\because\ w^2=-a)\\
+&=(-a)(-1)&&(\because\ \omega^2=-1)\\
+&=a&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&=a+0\omega&&(\because\ \overline{\mathbb Q}\text{ の四則})
 \end{aligned}`),
               ],
             },

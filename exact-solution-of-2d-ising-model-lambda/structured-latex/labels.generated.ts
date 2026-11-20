@@ -217,6 +217,7 @@ export const ALL_LABELS = [
   "claim_horizontal_twisted_modes_coset",
   "claim_imaginary_unit_nonzero_coefficient_square_root",
   "claim_imaginary_unit_square_root_formula",
+  "claim_imaginary_unit_zero_coefficient_square_root",
   "claim_increasing_positive_cone_union_is_positive_cone",
   "claim_increasing_positive_cone_union_restricts_to_stage",
   "claim_increasing_subfield_union_is_subfield",

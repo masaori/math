@@ -2553,6 +2553,9 @@ targets=(
   Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral_from_necSuf
   Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm
   Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm_from_necSuf
+  Ising2DLambda.FisherZero.imaginaryUnitExtension_zeroCoefficient_squareRoot
+  Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_zeroCoefficient_squareRoot
+  Ising2DLambda.FisherZero.imaginaryUnitExtension_zeroCoefficient_squareRoot_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
