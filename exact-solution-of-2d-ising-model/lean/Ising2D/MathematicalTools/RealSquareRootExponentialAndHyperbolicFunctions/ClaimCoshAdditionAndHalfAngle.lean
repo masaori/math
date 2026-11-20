@@ -13,6 +13,8 @@
 （`Ising2D.NecSuf.sinh_le_mul_cosh` ほか）。(5) の後半は必要十分版の系として導出してある。
 (1) の加法定理 4 本の必要十分版は `Ising2D/NecSuf/SymmetrizedAdditionFormulas.lean`、
 具体版をその特殊化として得る導出は `ClaimCoshAdditionAndHalfAngleFromNecSuf.lean`。
+倍角公式 `sinh_double_angle_formula`（具体版 `sinh_eq_two_sinh_half_mul_cosh_half`。人手の 4 行と 1 対 1 の `calc`）の必要十分版は
+`Ising2D/NecSuf/DoubleAngleFormula.lean`、導出は同じ `ClaimCoshAdditionAndHalfAngleFromNecSuf.lean`。
 
 ## mathlib の状況（調査結果）
 
@@ -144,12 +146,24 @@ theorem cosh_eq_one_add_two_sinh_half_sq (x : ℝ) :
   rw [show 2 * (x / 2) = x by ring] at h2
   rw [h2, hcs]; ring
 
-/-- 人手証明 (2): `sinh x = 2 sinh(x/2) cosh(x/2)`。 -/
+/-- **人手 `sinh_double_angle_formula`**: `sinh x = 2 sinh(x/2) cosh(x/2)`。人手の 4 行の鎖と 1 対 1 の `calc`。
+mathlib の `Real.sinh_two_mul` は使わない。
+人手の右辺 `2 sinh(x/2) cosh(x/2)` は括弧を書かないが、Lean の `2 * a * b` は `(2 * a) * b` と読まれるので、
+最後の行の「同類項をまとめる」（`a b + a b = 2 (a b)`、`two_mul`）の後に、Lean にだけ乗法の結合律（`mul_assoc`）の段がある。 -/
 theorem sinh_eq_two_sinh_half_mul_cosh_half (x : ℝ) :
-    Real.sinh x = 2 * Real.sinh (x / 2) * Real.cosh (x / 2) := by
-  have h := Real.sinh_two_mul (x / 2)
-  rw [show 2 * (x / 2) = x by ring] at h
-  rw [h]
+    Real.sinh x = 2 * Real.sinh (x / 2) * Real.cosh (x / 2) :=
+  calc Real.sinh x
+      = Real.sinh (x / 2 + x / 2) := by rw [add_halves x]
+          -- `x = x/2 + x/2`
+    _ = Real.sinh (x / 2) * Real.cosh (x / 2) + Real.cosh (x / 2) * Real.sinh (x / 2) :=
+          sinh_add_formula (x / 2) (x / 2)
+          -- `sinh_addition_formula` の複号 `+` を `x → x/2`, `y → x/2` で
+    _ = Real.sinh (x / 2) * Real.cosh (x / 2) + Real.sinh (x / 2) * Real.cosh (x / 2) := by
+          rw [mul_comm (Real.cosh (x / 2)) (Real.sinh (x / 2))]
+          -- `ℝ` の乗法の交換律
+    _ = 2 * Real.sinh (x / 2) * Real.cosh (x / 2) := by
+          rw [← two_mul, ← mul_assoc]
+          -- 同類項をまとめる（`two_mul`）。続く `mul_assoc` は上の docstring の Lean にだけある段
 
 /-- 人手証明 (3): `sinh` は狭義単調増加。 -/
 theorem sinh_strictMono : StrictMono Real.sinh := fun _ _ h => Real.sinh_lt_sinh.2 h

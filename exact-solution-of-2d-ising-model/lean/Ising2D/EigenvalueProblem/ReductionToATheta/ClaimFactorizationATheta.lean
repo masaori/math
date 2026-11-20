@@ -44,8 +44,7 @@ Lean 側の `factorization_of_A_theta_general` は `K_2^*` を任意の実数と
 `-1_ℂ = (-1)_ℂ`・`2 = (2)_ℂ` は人手どおり `inclusion_rr_to_cc` の略記として `Complex.ofReal_neg`・`Complex.ofReal_one`・`Complex.ofReal_ofNat` で読む（`-1_ℂ = (-1)_ℂ` は `real_inclusion_sub` の 3 段目と同じ）。
 
 `cosh_addition_formula` は `cosh_add_formula`、`sinh_double_angle_formula` は `sinh_eq_two_sinh_half_mul_cosh_half`
-（どちらも `ClaimCoshAdditionAndHalfAngle.lean`）で受ける。`cosh_add_formula` は人手の鎖と 1 対 1 の `calc` である。
-`sinh_eq_two_sinh_half_mul_cosh_half` は中身が mathlib の `Real.sinh_two_mul` で、人手の証明の鎖と 1 対 1 ではない。
+（どちらも `ClaimCoshAdditionAndHalfAngle.lean`）で受ける。どちらも人手の鎖と 1 対 1 の `calc` である（`sinh` の側は、最後に Lean にだけ乗法の結合律の段がある）。
 またそのファイルの (2)〜(5) は旧ラベル `cosh_addition_and_half_angle`（2026-11-02 に
 `cosh_addition_formula`・`sinh_double_angle_formula` などへ分割された）の項の番号で書いてある。
 この 3 本で、具体版が Lean に無いので mathlib で受けた行は `cosh_sinh_basic_properties` (2)（`Real.cosh_sq_sub_sinh_sq`）だけである。

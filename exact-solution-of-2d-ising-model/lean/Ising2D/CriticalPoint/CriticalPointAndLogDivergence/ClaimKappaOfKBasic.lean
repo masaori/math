@@ -117,7 +117,7 @@ theorem hasDerivAt_tanh_real (K : ℝ) : HasDerivAt Real.tanh (1 / Real.cosh K ^
 
 /-- 人手 `kappa_of_K_basic` (1) の証明の `dK^*/dK = -1/sinh 2K`（`K > 0`）。
 `K^* = -(1/2) log(tanh K)`（`def_second_dual_coupling_constant`）を、`log` の微分と合成関数の微分、
-`(tanh)' = 1/cosh²`、倍角公式 `sinh 2K = 2 sinh K cosh K` の順に使って微分する。 -/
+`(tanh)' = 1/cosh²`、倍角公式 `sinh_double_angle_formula`（具体版 `sinh_eq_two_sinh_half_mul_cosh_half`）の順に使って微分する。 -/
 theorem hasDerivAt_Kstar {K : ℝ} (hK : 0 < K) :
     HasDerivAt Kstar (-(1 / Real.sinh (2 * K))) K := by
   have ht : 0 < Real.tanh K := tanh_pos hK
@@ -137,8 +137,8 @@ theorem hasDerivAt_Kstar {K : ℝ} (hK : 0 < K) :
           -- `ℝ` の四則
           field_simp
       _ = -(1 / Real.sinh (2 * K)) := by
-          -- 倍角公式 `sinh 2K = 2 sinh K cosh K`
-          rw [Real.sinh_two_mul]
+          -- `sinh_double_angle_formula` を `x = 2K` で。続く `2K/2 = K` の書き換えは、人手のこの行が根拠を書いていない段
+          rw [sinh_eq_two_sinh_half_mul_cosh_half (2 * K), mul_div_cancel_left₀ K two_ne_zero]
   rw [hfun, ← hv]
   exact h
 

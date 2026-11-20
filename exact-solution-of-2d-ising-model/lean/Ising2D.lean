@@ -599,6 +599,7 @@ import Ising2D.NecSuf.HyperbolicBounds
 import Ising2D.NecSuf.SymmetrizedSumIsEven
 import Ising2D.NecSuf.AntisymmetrizedDifferenceIsOdd
 import Ising2D.NecSuf.SymmetrizedAdditionFormulas
+import Ising2D.NecSuf.DoubleAngleFormula
 import Ising2D.NecSuf.MeanValueTwoSided
 import Ising2D.NecSuf.LogDivergentIntegral
 import Ising2D.NecSuf.DiffUnderIntegral

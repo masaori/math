@@ -2923,6 +2923,8 @@ targets=(
   Ising2D.cosh_sub_formula_of_necSuf
   Ising2D.sinh_add_formula_of_necSuf
   Ising2D.sinh_sub_formula_of_necSuf
+  "Ising2D.NecSuf.double_angle_formula'"
+  Ising2D.sinh_eq_two_sinh_half_mul_cosh_half_of_necSuf
   Ising2D.positive_real_square_injective
   Ising2D.factor_difference_of_squares_eq_zero
   "Ising2D.NecSuf.positive_square_injective'"
