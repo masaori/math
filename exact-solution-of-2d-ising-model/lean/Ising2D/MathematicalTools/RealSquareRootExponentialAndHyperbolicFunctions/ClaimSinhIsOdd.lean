@@ -11,6 +11,7 @@ mathlib の `Real.sinh_neg` は使わない（人手の鎖をそのまま書く�
 具体版をその特殊化として得る導出は `ClaimSinhIsOddFromNecSuf.lean`。
 -/
 import Mathlib.Analysis.Complex.Trigonometric
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealDoubleNegation
 
 namespace Ising2D
 
@@ -19,8 +20,8 @@ theorem sinh_is_odd (x : ℝ) : Real.sinh (-x) = -Real.sinh x :=
   calc Real.sinh (-x)
       = (Real.exp (-x) - Real.exp (-(-x))) / 2 := Real.sinh_eq (-x)
                                                         -- `sinh` の定義（`def_cosh_sinh`）
-    _ = (Real.exp (-x) - Real.exp x) / 2 := by rw [neg_neg]
-                                                        -- `−(−x) = x`
+    _ = (Real.exp (-x) - Real.exp x) / 2 := by rw [real_double_negation x]
+                                                        -- `real_double_negation`（`a → x`）
     _ = (-(Real.exp x - Real.exp (-x))) / 2 := by rw [neg_sub]
                                                         -- `a − b = −(b − a)`
     _ = -((Real.exp x - Real.exp (-x)) / 2) := neg_div 2 (Real.exp x - Real.exp (-x))

@@ -13,7 +13,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 1 行目 cosh の定義を -x へ | `check_proof_lines.sage` | exp(x), exp(-x), exp(-(-x)) を QQ 上の独立な不定元 Ep, Em, Emm に置き、定義の関数から作った左辺と比べる | **PASS** | 成り立つ |
-| 2 行目 -(-x) = x | `check_proof_lines.sage` | QQ[x] の等号と、形式冪級数で exp(-(-x)) = exp(x)。不定元のままでは 1 行目と一致せず、Emm を Ep に置き換えると一致する | **PASS** | 成り立つ |
+| 2 行目 real_double_negation (a → x) による -(-x) = x | `check_proof_lines.sage` | QQ[x] の等号と、形式冪級数で exp(-(-x)) = exp(x)。不定元のままでは 1 行目と一致せず、Emm を Ep に置き換えると一致する | **PASS** | 成り立つ |
 | 3 行目 加法の交換律 | `check_proof_lines.sage` | exp の値（または cosh・sinh の値）を QQ 上の独立な不定元に置いて厳密に比べる。不定元で成り立つ有理式の等号は、実数の値を代入しても成り立つ | **PASS** | 成り立つ |
 | 4 行目 cosh の定義 | `check_proof_lines.sage` | exp の値（または cosh・sinh の値）を QQ 上の独立な不定元に置いて厳密に比べる。不定元で成り立つ有理式の等号は、実数の値を代入しても成り立つ。対照として sinh では一致しない | **PASS** | 成り立つ |
 | 主張そのもの | `check_statement_at_points.sage` | QQ[x]（または QQ[x,y]）の形式冪級数として全次数 14 以下で比べる。本文の exp は 1 行 1 列の行列の exp の成分で部分和の極限なので、部分和の切り捨てで比べる。あわせて 6 点で具体の点で、本文の exp の部分和に尾の評価を半径として足したボール（RealBallField(512)）で比べる。許容誤差は置かず、ボールの重なり・上端と下端の比較で判定する。対照として x ≠ 0 の sinh(-x) と sinh(x) は重ならない | **PASS** | 成り立つ |

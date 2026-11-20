@@ -10,7 +10,7 @@ lhs = sinh_by_definition(F(Em), F(Emm))   # 1 行目: sinh(-x)、exp(-(-x)) は�
 line1 = (F(Em) - F(Emm)) / 2
 assert lhs == line1
 assert exp_series(P, -(-x)) == exp_series(P, x)
-line2 = (F(Em) - F(Ep)) / 2               # 2 行目: -(-x) = x
+line2 = (F(Em) - F(Ep)) / 2               # 2 行目: real_double_negation (a → x) の -(-x) = x
 assert line1 != line2 and line1.subs(Emm=Ep) == line2
 line3 = (-(F(Ep) - F(Em))) / 2            # 3 行目: a - b = -(b - a)
 assert line2 == line3

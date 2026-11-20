@@ -260,7 +260,7 @@ export default defineBlocks([
 &= \frac{\exp(-x)+\exp(-(-x))}{2}
 &&(\because\ \cosh\ \text{の定義。}\blkref{def_cosh_sinh})\\
 &= \frac{\exp(-x)+\exp(x)}{2}
-&&(\because\ -(-x) = x)\\
+&&\bigl(\because\ \blkref{real_double_negation}\ (a \to x)\bigr)\\
 &= \frac{\exp(x)+\exp(-x)}{2}
 &&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
 &= \cosh x
@@ -271,6 +271,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (1) の証明が「cosh(-y) = cosh y は定義から直ちに従う」と書いて省いていた等式を、独立の主張にした。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認）: 2 行目の根拠が式 −(−x) = x だけだったので、主張 real_double_negation（a → x）の参照にした。式は不変。",
       ],
     },
   },
@@ -298,7 +299,7 @@ export default defineBlocks([
 &= \frac{\exp(-x)-\exp(-(-x))}{2}
 &&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})\\
 &= \frac{\exp(-x)-\exp(x)}{2}
-&&(\because\ -(-x) = x)\\
+&&\bigl(\because\ \blkref{real_double_negation}\ (a \to x)\bigr)\\
 &= \frac{-\left(\exp(x)-\exp(-x)\right)}{2}
 &&(\because\ a-b = -(b-a))\\
 &= -\frac{\exp(x)-\exp(-x)}{2}
@@ -311,6 +312,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-02: 旧 cosh_addition_and_half_angle (1) の証明が「sinh(-y) = -sinh y は定義から直ちに従う」と書いて省いていた等式を、独立の主張にした。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認）: 2 行目の根拠が式 −(−x) = x だけだったので、主張 real_double_negation（a → x）の参照にした。式は不変。",
       ],
     },
   },

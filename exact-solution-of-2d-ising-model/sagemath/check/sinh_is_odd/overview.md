@@ -13,7 +13,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 1 行目 sinh の定義を -x へ | `check_proof_lines.sage` | exp(x), exp(-x), exp(-(-x)) を QQ 上の独立な不定元に置いて |
-| 2 行目 -(-x) = x | `check_proof_lines.sage` | QQ[x] の等号と形式冪級数。不定元のままでは 1 行目と一致せず、置き換えると一致する |
+| 2 行目 real_double_negation (a → x) による -(-x) = x | `check_proof_lines.sage` | QQ[x] の等号と形式冪級数。不定元のままでは 1 行目と一致せず、置き換えると一致する |
 | 3 行目 a-b = -(b-a) | `check_proof_lines.sage` | 不定元で |
 | 4 行目 分子の符号を外へ | `check_proof_lines.sage` | 不定元で。対照として符号を落とした式は一致しない |
 | 5 行目 sinh の定義 | `check_proof_lines.sage` | 不定元で |

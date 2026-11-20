@@ -1,7 +1,7 @@
 # 対象ラベル: cosh_is_even
 # 証明の鎖 cosh(-x) = (exp(-x)+exp(-(-x)))/2 = (exp(-x)+exp(x))/2 = (exp(x)+exp(-x))/2 = cosh x の四行を確かめる。
 # 帰属: exp の値 exp(x), exp(-x), exp(-(-x)) を QQ 上の独立な不定元 Ep, Em, Emm に置く（どの行も exp の性質を使わないことまで確かめる）。
-# 2 行目は Emm を Ep に置き換える行で、-(-x) = x（QQ[x]）と exp(-(-x)) = exp(x)（形式冪級数）を確かめる。
+# 2 行目は Emm を Ep に置き換える行で、本文の根拠 real_double_negation (a → x) の -(-x) = x（QQ[x]）と exp(-(-x)) = exp(x)（形式冪級数）を確かめる。
 # 引数の等号 -(-x) = x は QQ[x] の等号として確かめる。
 load("../../_shared/hyperbolic_by_definition.sage")
 
@@ -14,7 +14,7 @@ R = PolynomialRing(QQ, 'Ep,Em,Emm'); Ep, Em, Emm = R.gens(); F = R.fraction_fiel
 lhs = cosh_by_definition(F(Em), F(Emm))
 line1 = (F(Em) + F(Emm)) / 2
 assert lhs == line1
-# 2 行目: -(-x) = x により exp(-(-x)) と exp(x) は同じ値。形式冪級数でも exp(-(-x)) = exp(x) を確かめる
+# 2 行目: real_double_negation (a → x) の -(-x) = x により exp(-(-x)) と exp(x) は同じ値。形式冪級数でも exp(-(-x)) = exp(x) を確かめる
 assert exp_series(P, -(-x)) == exp_series(P, x)
 line2 = (F(Em) + F(Ep)) / 2
 assert line1 != line2 and line1.subs(Emm=Ep) == line2

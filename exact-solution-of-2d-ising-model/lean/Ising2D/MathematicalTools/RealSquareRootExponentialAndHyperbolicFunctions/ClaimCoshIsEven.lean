@@ -10,6 +10,7 @@ mathlib の `Real.cosh` の等式 `Real.cosh_eq`（`cosh x = (exp x + exp(−x))
 具体版をその特殊化として得る導出は `ClaimCoshIsEvenFromNecSuf.lean`。
 -/
 import Mathlib.Analysis.Complex.Trigonometric
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealDoubleNegation
 
 namespace Ising2D
 
@@ -18,8 +19,8 @@ theorem cosh_is_even (x : ℝ) : Real.cosh (-x) = Real.cosh x :=
   calc Real.cosh (-x)
       = (Real.exp (-x) + Real.exp (-(-x))) / 2 := Real.cosh_eq (-x)
                                                         -- `cosh` の定義（`def_cosh_sinh`）
-    _ = (Real.exp (-x) + Real.exp x) / 2 := by rw [neg_neg]
-                                                        -- `−(−x) = x`
+    _ = (Real.exp (-x) + Real.exp x) / 2 := by rw [real_double_negation x]
+                                                        -- `real_double_negation`（`a → x`）
     _ = (Real.exp x + Real.exp (-x)) / 2 := by rw [add_comm (Real.exp (-x))]
                                                         -- ℝ の加法の交換律
     _ = Real.cosh x := (Real.cosh_eq x).symm            -- `cosh` の定義（`def_cosh_sinh`）
