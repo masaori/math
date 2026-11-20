@@ -511,6 +511,7 @@ export const ALL_LABELS = [
   "claim_qbar_matrix_eval_product",
   "claim_qbar_matrix_pow_succ_right",
   "claim_qbar_matrix_product_assoc",
+  "claim_qbar_monic_polynomial_linear_factor_product",
   "claim_qbar_monomial_multiplication_coefficient",
   "claim_qbar_mul_pow",
   "claim_qbar_multivariate_point_value_of_substitution",

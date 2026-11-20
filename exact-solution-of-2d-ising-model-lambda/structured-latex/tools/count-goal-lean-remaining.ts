@@ -241,13 +241,34 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
       "claim_pair_shift_elementary_symmetric_subfield_coefficient",
     ],
   },
+  claim_qbar_monic_polynomial_linear_factor_product: {
+    title: "番号 d の係数が 1 の多項式は d 個の一次因子の積である",
+    dependsOn: [],
+  },
+  claim_qbar_linear_factor_product_root_is_listed_root: {
+    title: "一次因子の積の根は因子の根のどれかである",
+    dependsOn: [],
+  },
+  claim_pair_count_two_adic_valuation_decrease: {
+    title: "偶数の次数の対の個数の 2 進付値は一つ下がる",
+    dependsOn: [],
+  },
+  claim_subfield_polynomial_root_in_imaginary_unit_extension: {
+    title: "部分体を係数とする多項式は虚数単位を足した体に根を持つ",
+    dependsOn: [
+      "claim_qbar_monic_polynomial_linear_factor_product",
+      "claim_qbar_linear_factor_product_root_is_listed_root",
+      "claim_pair_count_two_adic_valuation_decrease",
+      "claim_pair_shift_root_polynomial_subfield_coefficient",
+      "claim_imaginary_unit_extension_quadratic_root",
+      "claim_two_shifted_values_determine_sum_and_product",
+    ],
+  },
   claim_adjoin_imaginary_unit_gives_algebraic_numbers: {
     title: "虚数単位を足すと代数的数の全体になる",
     dependsOn: [
-      "claim_pair_shift_root_polynomial_subfield_coefficient",
-      "claim_symmetric_polynomial_fundamental_theorem",
-      "claim_imaginary_unit_extension_quadratic_root",
-      "claim_two_shifted_values_determine_sum_and_product",
+      "claim_subfield_polynomial_root_in_imaginary_unit_extension",
+      "claim_qbar_monic_polynomial_linear_factor_product",
       "claim_imaginary_unit_extension_conjugate_product_subfield_coefficient",
     ],
   },

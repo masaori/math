@@ -60753,6 +60753,199 @@ N+1
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_monic_polynomial_linear_factor_product",
+        labels: [],
+        title: { text: "最高次の係数が一の多項式の一次因子への分解" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_monic_polynomial_linear_factor_product",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_monic_polynomial_linear_factor_product",
+                  kind: "claim",
+                  title: { text: "番号 d の係数が 1 でそれより上の係数が零の多項式は、代数的数を根とする d 個の一次因子の積である" },
+                  labels: ["claim_qbar_monic_polynomial_linear_factor_product"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/qbar-monic-polynomial-linear-factor-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarMonicPolynomialLinearFactorProduct",
+                    "Ising2DLambda.NecSuf.FisherZero.monic_linear_factor_product_necSuf",
+                    "Ising2DLambda.FisherZero.qbarMonicPolynomialLinearFactorProduct_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`d\in\mathbb{N}`),
+                      " とし、",
+                      math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+                      "（",
+                      ref("def_qbar_polynomial_ring"),
+                      "）が、「",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " が ",
+                      math(String.raw`k>d`),
+                      " を満たすならば ",
+                      math(String.raw`\mathrm{ac}_k(f)=0`),
+                      " である」と ",
+                      math(String.raw`\mathrm{ac}_d(f)=1`),
+                      " を満たすとする。このとき、ある写像 ",
+                      math(String.raw`\alpha:\mathbb{N}\to\overline{\mathbb{Q}}`),
+                      " で",
+                    ]),
+                    displayMath(String.raw`f=\prod_{i=0}^{d-1}\bigl(t-\widehat{\alpha(i)}\bigr)`),
+                    paragraph([
+                      "を満たすものがある（",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " の中で番号の小さい因子から順に掛ける有限積で、",
+                      math(String.raw`d=0`),
+                      " のときは単位元。",
+                      math(String.raw`\widehat{\ \cdot\ }`),
+                      " は ",
+                      ref("def_qbar_constant_embedding"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`d`),
+                      " についての帰納法で、「上の二条件を満たす任意の ",
+                      math(String.raw`f`),
+                      " について ",
+                      math(String.raw`\alpha`),
+                      " がある」ことを示す。",
+                    ]),
+                    paragraph([
+                      "出発点 ",
+                      math(String.raw`d=0`),
+                      "。",
+                      math(String.raw`\alpha:\mathbb{N}\to\overline{\mathbb{Q}}`),
+                      " を ",
+                      math(String.raw`\alpha(i):=0`),
+                      " と定める。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+f
+&=\sum_{k=0}^{0}\widehat{\mathrm{ac}_k(f)}\cdot t^{\,k}
+&&\bigl(\because\ \blkref{claim_qbar_poly_monomial_decomposition}\text{ を }n=0\text{ へ当てる}\bigr)\\
+&=\widehat{\mathrm{ac}_0(f)}\cdot t^{\,0}
+&&\bigl(\because\ \text{一項だけの和}\bigr)\\
+&=\widehat{1}\cdot 1
+&&\bigl(\because\ \mathrm{ac}_0(f)=1\text{ と }t^{\,0}=1\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の }\widehat{1}=1\bigr)\\
+&=\prod_{i=0}^{-1}\bigl(t-\widehat{\alpha(i)}\bigr)
+&&\bigl(\because\ \text{空積は単位元}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "一歩。",
+                      math(String.raw`d`),
+                      " で主張が成り立つと仮定し、",
+                      math(String.raw`f\in\overline{\mathbb{Q}}[t]`),
+                      " が「",
+                      math(String.raw`k>d+1`),
+                      " ならば ",
+                      math(String.raw`\mathrm{ac}_k(f)=0`),
+                      "」と ",
+                      math(String.raw`\mathrm{ac}_{d+1}(f)=1`),
+                      " を満たすとする。",
+                      math(String.raw`d+1\ge1`),
+                      " かつ ",
+                      math(String.raw`\mathrm{ac}_{d+1}(f)=1\ne0`),
+                      " なので、",
+                      math(String.raw`f`),
+                      " は次数 1 以上の多項式である。",
+                      ref("def_algebraic_numbers"),
+                      " の第二条件により、",
+                      math(String.raw`w\in\overline{\mathbb{Q}}`),
+                      " で ",
+                      math(String.raw`\mathrm{aev}_{w}(f)=0`),
+                      "（",
+                      ref("def_qbar_poly_evaluation"),
+                      "）を満たすものがある。",
+                      ref("claim_qbar_factor_theorem"),
+                      " を ",
+                      math(String.raw`f`),
+                      "、",
+                      math(String.raw`w`),
+                      "、",
+                      math(String.raw`n=d+1`),
+                      " へ当て、その主張で指定された商を ",
+                      math(String.raw`g\in\overline{\mathbb{Q}}[t]`),
+                      " と書くと ",
+                      math(String.raw`f=(t-\widehat{w})g`),
+                      " である。",
+                      ref("claim_qbar_factor_quotient_coeff_bound"),
+                      "（",
+                      math(String.raw`n=d+1`),
+                      "）により、",
+                      math(String.raw`k\ge d+1`),
+                      "、すなわち ",
+                      math(String.raw`k>d`),
+                      " ならば ",
+                      math(String.raw`\mathrm{ac}_k(g)=0`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{d}(g)
+&=\mathrm{ac}_{d+1}\bigl((t-\widehat{w})g\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_poly_linear_factor_leading_coeff}\text{ を }C=g,\ m=d\text{ へ当てる}\bigr)\\
+&=\mathrm{ac}_{d+1}(f)
+&&\bigl(\because\ f=(t-\widehat{w})g\bigr)\\
+&=1
+&&\bigl(\because\ f\text{ の仮定}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "よって ",
+                      math(String.raw`g`),
+                      " は ",
+                      math(String.raw`d`),
+                      " での二条件を満たし、帰納法の仮定により、",
+                      math(String.raw`g=\prod_{i=0}^{d-1}\bigl(t-\widehat{\alpha'(i)}\bigr)`),
+                      " を満たす写像 ",
+                      math(String.raw`\alpha':\mathbb{N}\to\overline{\mathbb{Q}}`),
+                      " がある。写像 ",
+                      math(String.raw`\alpha:\mathbb{N}\to\overline{\mathbb{Q}}`),
+                      " を、",
+                      math(String.raw`i=d`),
+                      " なら ",
+                      math(String.raw`\alpha(i):=w`),
+                      "、",
+                      math(String.raw`i\ne d`),
+                      " なら ",
+                      math(String.raw`\alpha(i):=\alpha'(i)`),
+                      " と定める。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+f
+&=(t-\widehat{w})\,g
+&&\bigl(\because\ \blkref{claim_qbar_factor_theorem}\bigr)\\
+&=(t-\widehat{w})\prod_{i=0}^{d-1}\bigl(t-\widehat{\alpha'(i)}\bigr)
+&&\bigl(\because\ \alpha'\text{ の取り方}\bigr)\\
+&=\Bigl(\prod_{i=0}^{d-1}\bigl(t-\widehat{\alpha'(i)}\bigr)\Bigr)(t-\widehat{w})
+&&\bigl(\because\ \overline{\mathbb{Q}}[t]\text{ の積の可換則}\bigr)\\
+&=\Bigl(\prod_{i=0}^{d-1}\bigl(t-\widehat{\alpha(i)}\bigr)\Bigr)\bigl(t-\widehat{\alpha(d)}\bigr)
+&&\bigl(\because\ i<d\text{ で }\alpha(i)=\alpha'(i)\text{、}\alpha(d)=w\bigr)\\
+&=\prod_{i=0}^{d}\bigl(t-\widehat{\alpha(i)}\bigr)
+&&\bigl(\because\ \text{番号の小さい因子から順に掛ける有限積の約束}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "これは ",
+                      math(String.raw`d+1`),
+                      " での主張である。全過程は代数的数とそれを係数とする多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_pair_shift_root_polynomial",
         labels: [],
         title: { text: "根の対の整数倍のずらしを根とする多項式" },
