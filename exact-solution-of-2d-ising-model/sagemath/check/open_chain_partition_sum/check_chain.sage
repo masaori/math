@@ -41,6 +41,9 @@ for M in range(2, 8):
             # 1 行目の根拠: E(s) = Σ t_m(s)（整数で厳密に）
             assert energy(s) == sum(t(s, m) for m in range(1, M))
             count += 1
+            # 2 行目の根拠: finite_sum_of_real_scalar_multiples（m → M_col−1、c → K、j → m、x_j → t_m(s)）の等式 Σ K t_m(s) = K Σ t_m(s) を QQ で厳密に
+            assert finite_sum([QQ(K) * t(s, m) for m in range(1, M)], QQ(0)) == QQ(K) * finite_sum([QQ(t(s, m)) for m in range(1, M)], QQ(0))
+            count += 1
             for a, b in zip(lines, lines[1:]):
                 assert same(a, b), (M, K, s)
                 count += 1

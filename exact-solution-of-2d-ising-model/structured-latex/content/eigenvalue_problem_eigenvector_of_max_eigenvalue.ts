@@ -2873,7 +2873,7 @@ D_0G
 &= \exp\Bigl(K\sum_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\Bigr)
    \quad (\because \blkref{def_open_chain_spin_energy}\text{ と Step 1 の } t_m(s) := s(m)s(m+1)) \\
 &= \exp\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}Kt_m(s)\Bigr)
-   \quad (\because \mathbb R\text{ の分配律を有限和の各項へ}) \\
+   \quad (\because \blkref{finite_sum_of_real_scalar_multiples}\ (m \to M_{\mathrm{col}}-1,\ c \to K,\ j \to m,\ x_j \to t_m(s))\text{ を右辺から左辺へ}) \\
 &= \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
    \quad (\because \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}}-1,\ j \to m,\ x_j \to Kt_m(s)))
 \end{aligned}`,
@@ -2925,6 +2925,7 @@ D_0G
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w46)。1 の有限積の行を割る件）: Step 2 の M_col ≥ 3 の鎖の最後の行は、名前だけの根拠「1 の有限積は 1」で、1 の有限積を 1 にする段と s(1)·1 = s(1) の段の 2 つを 1 行で当てていた。新しく足した主張 finite_product_of_real_ones（m → M_col−2）の行と、ℝ の乗法の単位元 p·1 = p（p → s(1)、set_and_algebra_notation）の行の 2 行に割った（鎖は 10 行から 11 行）。鎖の両端と主張は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w25)。開鎖のスピン和の c + c = 2c の件）: 最後の鎖の 9 行目は、名前だけの根拠「u に依らない実数 c の二元集合 {-1,1} 上の和は c + c = 2c」で、{-1,1} 上の和を c + c にする段と c + c = 2c の段の 2 つを 1 行で当てていた。前者の行と、新しく足した主張 real_sum_of_two_equal_terms_is_twice（a → Π_{m=1}^{M_col−1}(exp(K) + exp(−K))）の行の 2 行に割った（鎖は 11 行から 12 行）。{-1,1} 上の和の行は、有限集合の上の和の添字の付け方を本文で定める件が残るので名前だけの根拠のまま残した。鎖の両端と主張は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w42)。2·(b/2) = b を名前を出さずに使う件）: 最後の鎖の def_cosh_sinh の行は、2·(b/2) = b を名前を出さずに使って exp(K) + exp(−K) を 2cosh K に置いていた。real_twice_quotient_by_two_is_original（b → exp(K) + exp(−K)）を右辺から左辺へ当てる行と、def_cosh_sinh の cosh（x → K）を右辺から左辺へ当てる行の 2 行に割った（鎖は 12 行から 13 行）。鎖の両端と主張は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w48)。有限和の各項への分配の件）: Step 2 の準備の exp(KE(s)) の鎖の 2 行目の名前だけの根拠「ℝ の分配律を有限和の各項へ」を、finite_sum_of_real_scalar_multiples（m → M_col−1、c → K、j → m、x_j → t_m(s)）を右辺から左辺へ当てる参照にした（t_m(s) ∈ {−1,1} ⊂ ℝ、M_col − 1 ≥ 1）。鎖の式・段数・両端と主張は不変。",
       ],
     },
   },
@@ -3078,7 +3079,7 @@ D_0G
 &= \exp\Bigl(K\sum_{m=1}^{M_{\mathrm{col}}-1}t_m(s)\Bigr)
    \quad (\because \blkref{def_open_chain_spin_energy}\text{ と Step 1 の } t_m(s) := s(m)s(m+1)) \\
 &= \exp\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}Kt_m(s)\Bigr)
-   \quad (\because \mathbb R\text{ の分配律を有限和の各項へ}) \\
+   \quad (\because \blkref{finite_sum_of_real_scalar_multiples}\ (m \to M_{\mathrm{col}}-1,\ c \to K,\ j \to m,\ x_j \to t_m(s))\text{ を右辺から左辺へ}) \\
 &= \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m(s))
    \quad (\because \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}}-1,\ j \to m,\ x_j \to Kt_m(s)))
 \end{aligned}`,
@@ -3150,6 +3151,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w25)。開鎖のスピン和の c + c = 2c の件）: 最後の鎖の 12 行目は、名前だけの根拠「u に依らない実数 c の二元集合 {-1,1} 上の和は c + c = 2c」で、{-1,1} 上の和を c + c にする段と c + c = 2c の段の 2 つを 1 行で当てていた。前者の行と、新しく足した主張 real_sum_of_two_equal_terms_is_twice（a → Π_{m=1}^{M_col−1}(exp(K) − exp(−K))）の行の 2 行に割った（鎖は 14 行から 15 行）。{-1,1} 上の和の行は、有限集合の上の和の添字の付け方を本文で定める件が残るので名前だけの根拠のまま残した。鎖の両端と主張は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w42)。2·(b/2) = b を名前を出さずに使う件）: 最後の鎖の def_cosh_sinh の行は、2·(b/2) = b を名前を出さずに使って exp(K) − exp(−K) を 2sinh K に置いていた。real_twice_quotient_by_two_is_original（b → exp(K) − exp(−K)）を右辺から左辺へ当てる行と、def_cosh_sinh の sinh（x → K）を右辺から左辺へ当てる行の 2 行に割った（鎖は 15 行から 16 行）。鎖の両端と主張は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w47)。スピンの値の二乗が 1 の件）: Step 2 の M_col ≥ 3 の鎖の 9 行目は、根拠「s(m+1)s(m+1) = 1 を各 m へ同時適用」をラベルで引いていなかった。新しく足した主張 real_plus_or_minus_one_times_itself_is_one（σ → s(m+1)）を各 m へ同時適用する行にし、s(m+1) ∈ {-1,1} が def_row_configurations の 𝔐 の元の値であることを添えた。鎖の式・段数・両端と主張は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w48)。有限和の各項への分配の件）: Step 2 の exp(KE(s)) の鎖の 2 行目の名前だけの根拠「ℝ の分配律を有限和の各項へ」を、finite_sum_of_real_scalar_multiples（m → M_col−1、c → K、j → m、x_j → t_m(s)）を右辺から左辺へ当てる参照にした（t_m(s) ∈ {−1,1} ⊂ ℝ、M_col − 1 ≥ 1）。鎖の式・段数・両端と主張は不変。",
       ],
     },
   },

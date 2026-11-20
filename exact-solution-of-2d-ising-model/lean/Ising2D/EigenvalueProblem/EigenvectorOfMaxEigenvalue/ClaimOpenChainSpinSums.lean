@@ -247,7 +247,7 @@ theorem exp_openChainEnergy_eq_prod_bondSpin (K : ℝ) (s : SpinConf (n + 2)) :
         rw [openChainEnergy_eq_sum_fin]; rfl            -- `def_open_chain_spin_energy`（と上の運ぶ段）と `t_m(s) := s(m)s(m+1)`
     _ = Real.exp (∑ m : Fin (n + 1), K * (bondSpin s m : ℝ)) := by
         rw [finite_sum_of_real_scalar_multiples (n + 1) K]
-                                                        -- ℝ の分配律を有限和の各項へ（`finite_sum_of_real_scalar_multiples` を右辺から左辺へ）
+                                                        -- `finite_sum_of_real_scalar_multiples`（`m → M_col-1`、`c → K`、`j → m`、`x_j → t_m(s)`）を右辺から左辺へ
     _ = ∏ m : Fin (n + 1), Real.exp (K * (bondSpin s m : ℝ)) :=
         real_exp_of_finite_sum n _                      -- `real_exp_of_finite_sum`（`m → M_col-1`、`j → m`、`x_j → Kt_m(s)`）
 
