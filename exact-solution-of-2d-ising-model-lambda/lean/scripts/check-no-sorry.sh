@@ -2562,6 +2562,9 @@ targets=(
   Ising2DLambda.FisherZero.imaginaryUnit_not_mem_orderedSubfield
   Ising2DLambda.NecSuf.FisherZero.imaginaryUnit_not_mem_orderedSubfield
   Ising2DLambda.FisherZero.imaginaryUnit_not_mem_orderedSubfield_from_necSuf
+  Ising2DLambda.FisherZero.imaginaryUnitExtension_quadraticRoot
+  Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_quadraticRoot
+  Ising2DLambda.FisherZero.imaginaryUnitExtension_quadraticRoot_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

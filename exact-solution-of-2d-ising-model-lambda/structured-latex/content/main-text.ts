@@ -49006,13 +49006,13 @@ c&\in T\langle a\rangle&&\bigl(\because\ \text{上の包含 }T\subseteq T\langle
                       " で次を満たすものが取れる。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
--1&=t_1+a\cdot t_2,\\
--1&=t_3+(-a)\cdot t_4.
+-1&=t_1+a\cdot t_2&&\bigl(\because\ \blkref{claim_precone_adjoin_element_is_precone}\text{ の集合の定義}\bigr)\\
+-1&=t_3+(-a)\cdot t_4&&\bigl(\because\ \blkref{claim_precone_adjoin_element_is_precone}\text{ の集合の定義}\bigr)
 \end{aligned}`),
                     paragraph(["移項して、"]),
                     displayMath(String.raw`\begin{aligned}
-a\cdot t_2&=-1-t_1&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の移項}\bigr),\\
-(-a)\cdot t_4&=-1-t_3&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の移項}\bigr).
+a\cdot t_2&=-1-t_1&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の移項}\bigr)\\
+(-a)\cdot t_4&=-1-t_3&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の移項}\bigr)
 \end{aligned}`),
                     paragraph(["これを使って ", math(String.raw`-1`), " を書き直す。"]),
                     displayMath(String.raw`\begin{aligned}
@@ -51080,6 +51080,106 @@ a^2+b^2&=c^2&&(\because\ c^2=a^2+b^2)\\
 \end{aligned}`),
                 paragraph([math(String.raw`-1\notin C_F`), " に矛盾する。ゆえに ",
                   math(String.raw`\omega\notin F`), " である。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "zero_pinching_heading_imaginary_unit_extension_quadratic_root",
+        labels: [],
+        title: { text: "虚数単位を足した体の二次多項式の根" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_imaginary_unit_extension_quadratic_root",
+            focus: {
+              id: "zero_pinching_claim_imaginary_unit_extension_quadratic_root",
+              kind: "claim",
+              title: { text: "正の元が平方である部分体に虚数単位を足した体では二次多項式が根を持つ" },
+              labels: ["claim_imaginary_unit_extension_quadratic_root"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/imaginary-unit-extension-quadratic-root"],
+              lean: [
+                "Ising2DLambda.FisherZero.imaginaryUnitExtension_quadraticRoot",
+                "Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_quadraticRoot",
+                "Ising2DLambda.FisherZero.imaginaryUnitExtension_quadraticRoot_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subset\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`C_F\subset F`), " を ", ref("def_subfield_positive_cone"),
+                " の正錐とし、", math(String.raw`C_F`), " の各元は ",
+                math(String.raw`F`), " に平方根を持つと仮定する。",
+                math(String.raw`\omega\in\overline{\mathbb Q}`), " は ",
+                math(String.raw`\omega^2=-1`), " を満たす。",
+                math(String.raw`K:=F(\omega)`), " を ",
+                ref("claim_square_root_adjoined_subfield_equals_linear_values"),
+                " の部分体とする。任意の ",
+                math(String.raw`e,p,q\in K`), " について ",
+                math(String.raw`e\ne0`), " なら、ある ",
+                math(String.raw`x,y\in F`), " が存在し、",
+                math(String.raw`r:=x+y\omega`), " は ",
+                math(String.raw`er^2+pr+q=0`), " を満たす。",
+              ])],
+              proof: [
+                paragraph([ref("claim_imaginary_unit_outside_ordered_subfield"),
+                  " より ", math(String.raw`\omega\notin F`), " である。",
+                  ref("claim_square_root_adjoined_subfield_equals_linear_values"),
+                  " により ", math(String.raw`K=\{u+v\omega\mid u,v\in F\}`),
+                  " である。", math(String.raw`e\ne0`), " だから ",
+                  math(String.raw`P:=p/e`), "、", math(String.raw`Q:=q/e`),
+                  " は ", math(String.raw`K`), " に属する。よって ",
+                  math(String.raw`a,b,c,d\in F`), " を ",
+                  math(String.raw`P=a+b\omega`), "、",
+                  math(String.raw`Q=c+d\omega`), " となるように取る。"]),
+                paragraph([
+                  math(String.raw`A:=a^2-b^2-4c`), "、",
+                  math(String.raw`B:=2ab-4d`), " と置く。",
+                  math(String.raw`F`), " の単位元と和から ",
+                  math(String.raw`2=1+1\in F`), "、積から ",
+                  math(String.raw`4=2\cdot2\in F`), " である。",
+                  math(String.raw`F`), " の四則により ",
+                  math(String.raw`A,B\in F`), " となる。"]),
+                displayMath(String.raw`\begin{aligned}
+P^2-4Q&=(a+b\omega)^2-4(c+d\omega)&&\bigl(\because\ P=a+b\omega,\ Q=c+d\omega\bigr)\\
+&=a^2+2ab\omega+b^2\omega^2-4c-4d\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=a^2+2ab\omega-b^2-4c-4d\omega&&\bigl(\because\ \omega^2=-1\bigr)\\
+&=(a^2-b^2-4c)+(2ab-4d)\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)\\
+&=A+B\omega&&\bigl(\because\ A,B\text{ の定義}\bigr)
+\end{aligned}`),
+                paragraph([ref("claim_imaginary_unit_extension_square_root"),
+                  " を ", math(String.raw`A+B\omega`), " に適用し、",
+                  math(String.raw`u,v\in F`), " と ",
+                  math(String.raw`s:=u+v\omega\in\overline{\mathbb Q}`), " を ",
+                  math(String.raw`s^2=P^2-4Q`), " となるように取る。",
+                  math(String.raw`x:=(-a+u)/2`), "、",
+                  math(String.raw`y:=(-b+v)/2`), " と置く。",
+                  math(String.raw`2\in F`), " かつ ",
+                  math(String.raw`2\ne0`), " なので ",
+                  math(String.raw`x,y\in F`), " である。"]),
+                displayMath(String.raw`\begin{aligned}
+x+y\omega&=\frac{-a+u}{2}+\frac{-b+v}{2}\omega&&\bigl(\because\ x,y\text{ の定義}\bigr)\\
+&=\frac{-(a+b\omega)+(u+v\omega)}{2}&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)\\
+&=\frac{-P+s}{2}&&\bigl(\because\ P=a+b\omega,\ s=u+v\omega\bigr)
+\end{aligned}`),
+                paragraph([math(String.raw`r:=x+y\omega`), " と置く。次の式鎖で根を確かめる。"]),
+                displayMath(String.raw`\begin{aligned}
+r^2+Pr+Q&=\left(\frac{-P+s}{2}\right)^2+P\frac{-P+s}{2}+Q&&\bigl(\because\ r=(-P+s)/2\bigr)\\
+&=\frac{(-P+s)^2+2P(-P+s)+4Q}{4}&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)\\
+&=\frac{s^2-P^2+4Q}{4}&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=\frac{(P^2-4Q)-P^2+4Q}{4}&&\bigl(\because\ s^2=P^2-4Q\bigr)\\
+&=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+er^2+pr+q&=e(r^2+Pr+Q)&&\bigl(\because\ P=p/e,\ Q=q/e,\ e\ne0\bigr)\\
+&=e\cdot0&&\bigl(\because\ r^2+Pr+Q=0\bigr)\\
+&=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法}\bigr)
+\end{aligned}`),
               ],
             },
           },
