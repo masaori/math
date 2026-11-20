@@ -34,7 +34,7 @@ chain2 = [
     tt(mu) + (2 * PI * (kk * MM)) * MM**(-1),        # θ~_μ の定義
     tt(mu) + ((2 * PI * kk) * MM) * MM**(-1),        # 乗法の結合律を右辺から左辺へ
     tt(mu) + (2 * PI * kk) * (MM * MM**(-1)),        # 乗法の結合律
-    tt(mu) + (2 * PI * kk) * 1,                      # 乗法の逆元（(M)_R ≠ 0）
+    tt(mu) + (2 * PI * kk) * 1,                      # def_real_quotient の乗法の逆元（(M)_R ≠ 0）
     tt(mu) + 2 * PI * kk,                            # 乗法の単位元
 ]
 rep.check(len(chain2) == 17, "(2) θ~_(μ+kM) の鎖は 17 行")
@@ -45,9 +45,9 @@ rep.check(tt(mu + kk * MM) != tt(mu) + PI * kk, "(2) 対照: θ~_(μ+kM) ≠ θ~
 rep.check(MM * MM**(-1) == 1 and MM * MM**(-1) != MM, "(2) 乗法の逆元の行: (M)_R (M)_R^(-1) = 1_R（対照: (M)_R とは違う）")
 
 neg2 = [
-    -(tt(mu) + 2 * PI * kk),
-    (-tt(mu)) + (-(2 * PI * kk)),
-    (-tt(mu)) + 2 * PI * (-kk),
+    -(tt(mu) + 2 * PI * kk),      # 上の鎖
+    (-tt(mu)) + (-(2 * PI * kk)), # real_negation_of_sum_is_sum_of_negations（x → θ~_μ, y → 2πk_R）
+    (-tt(mu)) + 2 * PI * (-kk),   # real_times_negation_is_negation_of_product（x → 2π, t → k_R）を右辺から左辺へ
     (-tt(mu)) + 2 * PI * (-kk),   # 準備の第二 (-k)_R = -k_R。不定元の上では同じ式（中身は下の整数の検算）
 ]
 rep.check(-chain2[0] == neg2[0], "(2) -θ~_(μ+kM) の鎖 第 1 行は上の鎖")
@@ -67,7 +67,7 @@ rep.check(tt(MM + 1 - mu) == nu_chain[0], "(3) conjugate_index_of_check_Z_Y (1):
 for j in range(len(nu_chain) - 1):
     rep.check(nu_chain[j] == nu_chain[j + 1], f"(3) θ~_ν の鎖 第 {j+1} 行 = 第 {j+2} 行")
 neg_nu = [
-    -(2 * PI - tt(mu)),
+    -(2 * PI - tt(mu)),               # conjugate_index_of_check_Z_Y (1)
     -(2 * PI + (-tt(mu))),            # def_real_difference（y → 2π, z → θ~_μ）
     (-(2 * PI)) + (-(-tt(mu))),       # real_negation_of_sum_is_sum_of_negations（x → 2π, y → -θ~_μ）
     (-(2 * PI)) + tt(mu),             # real_double_negation（a → θ~_μ）
