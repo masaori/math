@@ -180,7 +180,8 @@
 | `Ising2D.two_pi_mul_Gsecond` | `2πG'' = cosh κ·log(π/sinh(κ/2)) + (cosh κ/2)(J - 2log(π/sinh(κ/2))) - T` | Step 6 の分解 |
 | `Ising2D.step6_bound` | **Step 6**: `\|cosh κ·log(π/sinh(κ/2)) - log(1/κ)\| ≤ 2.27` | Step 6 |
 | `Ising2D.second_derivative_log_divergence_pos` | **`\|G''(κ) - (1/2π)log(1/κ)\| ≤ 6/5`**（`0 < κ ≤ 1/2`） | 主張（`κ>0` の場合） |
-| `Ising2D.Sfun_neg` / `d2gammaK_neg` / `Gsecond_neg` | **`G''` は `κ` の偶関数** | 主張の `\|κ\|` への一般化 |
+| `Ising2D.Sfun_neg` / `gammaK_neg` / `Gfun_neg` | `S(θ,−κ) = S(θ,κ)`、`γ(θ,−κ) = γ(θ,κ)` と **`G(−κ) = G(κ)`** | Step 0 の鎖（`gamma_kappa_identity`） |
+| `Ising2D.Gfirst_eq_neg_Gfirst_neg` / `abs_Gfirst_neg` / `Gsecond_eq_Gsecond_neg` / `Gsecond_neg` | 合成関数の微分で **`G'(κ) = −G'(−κ)`、`\|G'(−κ)\| = \|G'(κ)\|`、`G''(κ) = G''(−κ)`** | Step 0（主張の `\|κ\|` への一般化） |
 | `Ising2D.second_derivative_log_divergence` | **`\|G''(κ) - (1/2π)log(1/\|κ\|)\| ≤ 6/5`（`0 < \|κ\| ≤ 1/2`）** | **主張全体** |
 | `Ising2D.Gsecond_ge` | **`G''(κ) ≥ (1/2π)log(1/\|κ\|) - 6/5 → +∞`（`κ → 0`）** | 主張の帰結 |
 

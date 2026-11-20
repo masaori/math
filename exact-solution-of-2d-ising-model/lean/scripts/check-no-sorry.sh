@@ -2537,7 +2537,11 @@ targets=(
   Ising2D.step6_bound
   Ising2D.second_derivative_log_divergence_pos
   Ising2D.Sfun_neg
-  Ising2D.d2gammaK_neg
+  Ising2D.gammaK_neg
+  Ising2D.Gfun_neg
+  Ising2D.Gfirst_eq_neg_Gfirst_neg
+  Ising2D.abs_Gfirst_neg
+  Ising2D.Gsecond_eq_Gsecond_neg
   Ising2D.Gsecond_neg
   Ising2D.second_derivative_log_divergence
   Ising2D.Gsecond_ge

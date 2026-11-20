@@ -608,17 +608,69 @@ theorem Sfun_neg (θ κ : ℝ) : Sfun θ (-κ) = Sfun θ κ := by
   simp only [Sfun]
   rw [show -κ / 2 = -(κ / 2) by ring, sinh_is_odd (κ / 2), neg_sq]
 
-/-- `∂²γ/∂κ²` の式は `κ` を `cosh κ`・`sinh² κ`・`Sfun` を通してだけ含む（`cosh_is_even`・`sinh_is_odd` を引く）。
-人手 `second_derivative_log_divergence` の Step 0 は `G(−κ) = G(κ)` を合成関数の微分で 2 回微分して `G''(−κ) = G''(κ)` を得ており、
-この補題の経路（被積分関数の偶関数性）とは別である。 -/
-theorem d2gammaK_neg (θ κ : ℝ) : d2gammaK θ (-κ) = d2gammaK θ κ := by
-  simp only [d2gammaK, Qfun, Sfun_neg, cosh_is_even, sinh_is_odd]
-  ring
+/-- 人手 `gamma_kappa_identity` の「`γ(θ)` は `κ` について偶関数」を、`gamma_derivatives_in_kappa` の
+`γ(θ,κ) = 2 arcsinh √S`（`gammaK`）について書いたもの。 -/
+theorem gammaK_neg (θ κ : ℝ) : gammaK θ (-κ) = gammaK θ κ := by
+  simp only [gammaK, Sfun_neg]
 
-/-- `G''(−κ) = G''(κ)`。人手 `second_derivative_log_divergence` の Step 0 の結論に当たるが、経路は人手と別である
-（人手は `G(−κ) = G(κ)` と合成関数の微分、ここは `d2gammaK_neg` による被積分関数の偶関数性）。 -/
+/-- **人手証明 Step 0 の鎖**: `G(−κ) = G(κ)`（すべての実数 `κ`）。 -/
+theorem Gfun_neg (κ : ℝ) : Gfun (-κ) = Gfun κ :=
+  calc Gfun (-κ)
+      = (1 / (4 * Real.pi)) * ∫ θ in (0:ℝ)..(2 * Real.pi), gammaK θ (-κ) := rfl  -- G の定義
+    _ = (1 / (4 * Real.pi)) * ∫ θ in (0:ℝ)..(2 * Real.pi), gammaK θ κ := by
+        simp only [gammaK_neg]  -- gamma_kappa_identity
+    _ = Gfun κ := rfl  -- G の定義
+
+/-- **人手証明 Step 0**: `G(κ) = G(−κ)` の右辺は `κ ↦ −κ` と `G` の合成なので、合成関数の微分より
+`G'(κ) = −G'(−κ)`（`−κ` での微分可能性は Step 1 の `hasDerivAt_Gfun`）。
+人手はこの等式を `κ < 0` の場合だけ述べるが、ここは `κ ≠ 0` で示す（`κ > 0` では `−κ < 0` に、Lean が `κ ≠ 0` へ広げた Step 1 の `hasDerivAt_Gfun` を当てる。人手の Step 1 は `κ > 0` だけを扱う）。
+Lean の `Gfirst` は導関数ではなく積分の式なので、左辺の `Gfirst κ` が `κ` での `G` の微分であることを
+Step 1 の `hasDerivAt_Gfun`（Lean は `κ ≠ 0` で示す）と微分の一意性で結ぶ。この段は人手 Step 0 には無い。 -/
+theorem Gfirst_eq_neg_Gfirst_neg {κ : ℝ} (hκ : κ ≠ 0) : Gfirst κ = -Gfirst (-κ) := by
+  -- 合成関数の微分（`HasDerivAt.comp`）: (κ ↦ G(−κ))' = G'(−κ)·(−1)。
+  -- `(−κ)' = −1`（`hasDerivAt_neg`）は、人手が根拠として書いていない段である。
+  have hcomp : HasDerivAt (Gfun ∘ Neg.neg) (Gfirst (-κ) * (-1)) κ :=
+    (hasDerivAt_Gfun (neg_ne_zero.mpr hκ)).comp κ (hasDerivAt_neg κ)
+  -- G(κ) = G(−κ)（上の鎖）なので、同じ関数 G の κ での微分
+  have hfun : Gfun ∘ Neg.neg = Gfun := funext Gfun_neg
+  rw [hfun] at hcomp
+  -- 微分の一意性（`HasDerivAt.unique`）: 左は Step 1 の `hasDerivAt_Gfun` を κ に当てたもの
+  calc Gfirst κ = Gfirst (-κ) * (-1) := (hasDerivAt_Gfun hκ).unique hcomp
+    _ = -Gfirst (-κ) := mul_neg_one _
+
+/-- **人手証明 Step 0 の結論の片方**: `|G'(−κ)| = |G'(κ)|`（`κ ≠ 0`）。
+人手はこれで `|G'(κ)| ≤ 1/2` を `κ < 0` へ広げるが、Lean の `abs_Gfirst_le` は `κ ≠ 0` で直接成り立つので、この帰着には使わない。 -/
+theorem abs_Gfirst_neg {κ : ℝ} (hκ : κ ≠ 0) : |Gfirst (-κ)| = |Gfirst κ| :=
+  calc |Gfirst (-κ)| = |-Gfirst (-κ)| := (abs_neg _).symm
+    _ = |Gfirst κ| := by rw [← Gfirst_eq_neg_Gfirst_neg hκ]
+
+/-- **人手証明 Step 0**: `G'(κ) = −G'(−κ)` の右辺をもう一度 `κ` で微分すると、合成関数の微分より
+`−(−1)G''(−κ) = G''(−κ)` なので `G''(κ) = G''(−κ)`（`κ ≠ 0`）。
+Lean は `G'(x) = −G'(−x)` を `x ≠ 0` で示すので、それは `κ` の近く（`0` を含まない開集合 `{x ≠ 0}`。人手の範囲なら `{x < 0}`）のすべての点で成り立ち、両辺の微分が一致する
+（人手はこの「近くで成り立つ」ことを書いていない）。
+`Gfirst_eq_neg_Gfirst_neg` と同じく、左辺の `Gsecond κ` が `κ` での `G'` の微分であることは Step 1 の
+`hasDerivAt_Gfirst`（Lean は `κ ≠ 0` で示す）と微分の一意性で結ぶ。この段は人手 Step 0 には無い。 -/
+theorem Gsecond_eq_Gsecond_neg {κ : ℝ} (hκ : κ ≠ 0) : Gsecond κ = Gsecond (-κ) := by
+  -- 合成関数の微分（`HasDerivAt.comp`）と符号を反転した関数の微分（`HasDerivAt.neg`、人手が根拠として書いていない段）:
+  -- (κ ↦ −G'(−κ))' = −(G''(−κ)·(−1))
+  have hcomp : HasDerivAt (fun x => -(Gfirst ∘ Neg.neg) x) (-(Gsecond (-κ) * (-1))) κ :=
+    ((hasDerivAt_Gfirst (neg_ne_zero.mpr hκ)).comp κ (hasDerivAt_neg κ)).neg
+  -- κ の近くで G' と κ ↦ −G'(−κ) は一致する（上の Gfirst_eq_neg_Gfirst_neg）
+  have hev : Gfirst =ᶠ[nhds κ] fun x => -(Gfirst ∘ Neg.neg) x :=
+    (isOpen_ne_zero.eventually_mem hκ).mono fun x hx => Gfirst_eq_neg_Gfirst_neg hx
+  -- 近くで一致する関数は同じ微分をもつ（`HasDerivAt.congr_of_eventuallyEq`）と微分の一意性（`HasDerivAt.unique`）
+  -- 人手の `−(−1)G''(−κ)` は、ここでは積の順序を入れ替えた `−(G''(−κ)·(−1))` の形で現れる
+  calc Gsecond κ = -(Gsecond (-κ) * (-1)) :=
+        (hasDerivAt_Gfirst hκ).unique (hcomp.congr_of_eventuallyEq hev)
+    _ = -(-Gsecond (-κ)) := by rw [mul_neg_one]
+    _ = Gsecond (-κ) := neg_neg _
+
+/-- `G''(−κ) = G''(κ)`（人手 Step 0 の結論「`G''(−κ) = G''(κ)`」）。`κ ≠ 0` は `Gsecond_eq_Gsecond_neg`、
+`κ = 0` は `−0 = 0`。 -/
 theorem Gsecond_neg (κ : ℝ) : Gsecond (-κ) = Gsecond κ := by
-  simp only [Gsecond, d2gammaK_neg]
+  rcases eq_or_ne κ 0 with h | h
+  · rw [h, neg_zero]
+  · exact (Gsecond_eq_Gsecond_neg h).symm
 
 /-- **人手証明 `second_derivative_log_divergence` そのもの**:
 `0 < |κ| ≤ 1/2` で `|G''(κ) - (1/2π)log(1/|κ|)| ≤ 6/5`。 -/
