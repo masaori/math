@@ -230,7 +230,7 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
   },
   claim_imaginary_unit_extension_conjugate_product_subfield_coefficient: {
     title: "虚数単位を足した体を係数とする多項式と係数の共役の積は部分体係数である",
-    dependsOn: [],
+    dependsOn: ["claim_imaginary_unit_extension_unique_representation"],
   },
   claim_linear_factor_product_coefficient_elementary_symmetric: {
     title: "一次因子の積の係数は根の基本対称式の値に符号を付けたものである",
@@ -299,7 +299,7 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
   },
   claim_imaginary_unit_extension_unique_representation: {
     title: "順序付き部分体に虚数単位を足した表示は一意である",
-    dependsOn: [],
+    dependsOn: ["claim_imaginary_unit_outside_ordered_subfield"],
   },
 };
 
