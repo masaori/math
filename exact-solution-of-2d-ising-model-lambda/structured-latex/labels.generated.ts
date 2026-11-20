@@ -405,6 +405,7 @@ export const ALL_LABELS = [
   "claim_orbit_transposition_composite_values",
   "claim_orbit_transposition_sign",
   "claim_oriented_orbit_pairs_cross_disjoint",
+  "claim_pair_count_two_adic_valuation_decrease",
   "claim_pair_shift_elementary_symmetric_is_symmetric",
   "claim_pair_shift_elementary_symmetric_subfield_coefficient",
   "claim_pair_shift_root_polynomial_subfield_coefficient",

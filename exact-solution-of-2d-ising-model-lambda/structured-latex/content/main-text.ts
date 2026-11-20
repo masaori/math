@@ -61204,6 +61204,193 @@ z
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_pair_count_two_adic_valuation_decrease",
+        labels: [],
+        title: { text: "偶数の次数の対の個数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_pair_count_two_adic_valuation_decrease",
+              focus:
+                {
+                  id: "zero_pinching_claim_pair_count_two_adic_valuation_decrease",
+                  kind: "claim",
+                  title: { text: "偶数の次数の対の個数は、次数の 2 の冪の指数を一つ下げた冪と奇数の積である" },
+                  labels: ["claim_pair_count_two_adic_valuation_decrease"],
+                  habitat: "N",
+                  verification: ["sagemath/check/pair-count-two-adic-valuation-decrease"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.pairCountTwoAdicValuationDecrease",
+                    "Ising2DLambda.NecSuf.FisherZero.pair_count_two_adic_valuation_decrease_necSuf",
+                    "Ising2DLambda.FisherZero.pairCountTwoAdicValuationDecrease_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      "自然数 ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " が奇数であるとは、ある ",
+                      math(String.raw`j\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`n=j+j+1`),
+                      " となることをいう。",
+                      math(String.raw`k,m,d,N\in\mathbb{N}`),
+                      " が次の三つを満たすとする: ",
+                      math(String.raw`k\ge1`),
+                      "、",
+                      math(String.raw`m`),
+                      " は奇数、",
+                      math(String.raw`d=2^{k}\cdot m`),
+                      "、",
+                      math(String.raw`N+N=d\cdot(d-1)`),
+                      "。ここで ",
+                      math(String.raw`k-1`),
+                      " は ",
+                      math(String.raw`(k-1)+1=k`),
+                      " を満たす自然数、",
+                      math(String.raw`d-1`),
+                      " は ",
+                      math(String.raw`(d-1)+1=d`),
+                      " を満たす自然数である（",
+                      math(String.raw`k\ge1`),
+                      " は仮定、",
+                      math(String.raw`d\ge1`),
+                      " は証明の第一の式鎖が示す）。このとき",
+                    ]),
+                    displayMath(String.raw`m':=m\cdot(d-1)\in\mathbb{N}`),
+                    paragraph([
+                      "は奇数であり、",
+                      math(String.raw`N=2^{k-1}\cdot m'`),
+                      " である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`m=j+j+1`),
+                      " を満たす ",
+                      math(String.raw`j\in\mathbb{N}`),
+                      " を取り、",
+                      math(String.raw`a:=2^{k-1}\cdot m\in\mathbb{N}`),
+                      " と置く。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+a
+&=2^{k-1}\cdot m
+&&\bigl(\because\ a\text{ の置き方}\bigr)\\
+&\ge1\cdot1
+&&\bigl(\because\ 2^{k-1}\ge1\text{ と }m=j+j+1\ge1\text{、}\mathbb{N}\text{ の積は大小を保つ}\bigr)\\
+&=1
+&&\bigl(\because\ 1\text{ は乗法の単位元}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので、",
+                      math(String.raw`a=b+1`),
+                      " を満たす ",
+                      math(String.raw`b\in\mathbb{N}`),
+                      " がある。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+d
+&=2^{k}\cdot m
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&=2^{(k-1)+1}\cdot m
+&&\bigl(\because\ (k-1)+1=k\bigr)\\
+&=2\cdot\bigl(2^{k-1}\cdot m\bigr)
+&&\bigl(\because\ \text{指数法則と }\mathbb{N}\text{ の積の可換則・結合則}\bigr)\\
+&=2\cdot a
+&&\bigl(\because\ a\text{ の置き方}\bigr)\\
+&=2\cdot(b+1)
+&&\bigl(\because\ a=b+1\bigr)\\
+&=(b+b+1)+1
+&&\bigl(\because\ \text{分配則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "よって ",
+                      math(String.raw`d\ge1`),
+                      " で、",
+                      math(String.raw`(d-1)+1=d=(b+b+1)+1`),
+                      " から ",
+                      math(String.raw`\mathbb{N}`),
+                      " の加法の消去により ",
+                      math(String.raw`d-1=b+b+1`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+m'
+&=m\cdot(d-1)
+&&\bigl(\because\ m'\text{ の置き方}\bigr)\\
+&=(j+j+1)\cdot(b+b+1)
+&&\bigl(\because\ m=j+j+1\text{ と }d-1=b+b+1\bigr)\\
+&=(2jb+j+b)+(2jb+j+b)+1
+&&\bigl(\because\ \text{分配則と }\mathbb{N}\text{ の和・積の可換則・結合則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので ",
+                      math(String.raw`m'`),
+                      " は奇数である（",
+                      math(String.raw`j'=2jb+j+b\in\mathbb{N}`),
+                      "）。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+N+N
+&=d\cdot(d-1)
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&=(2\cdot a)\cdot(d-1)
+&&\bigl(\because\ \text{第一の式鎖の }d=2\cdot a\bigr)\\
+&=a\cdot(d-1)+a\cdot(d-1)
+&&\bigl(\because\ \text{分配則と }\mathbb{N}\text{ の積の結合則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "自然数 ",
+                      math(String.raw`x,y`),
+                      " で ",
+                      math(String.raw`x<y`),
+                      " なら ",
+                      math(String.raw`x+x<y+y`),
+                      " であり、",
+                      math(String.raw`y<x`),
+                      " なら ",
+                      math(String.raw`y+y<x+x`),
+                      " であるから、",
+                      math(String.raw`\mathbb{N}`),
+                      " の大小の三分法により ",
+                      math(String.raw`x+x=y+y`),
+                      " なら ",
+                      math(String.raw`x=y`),
+                      " である。これを ",
+                      math(String.raw`x=N`),
+                      "、",
+                      math(String.raw`y=a\cdot(d-1)`),
+                      " へ当てて ",
+                      math(String.raw`N=a\cdot(d-1)`),
+                      " を得る。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+N
+&=a\cdot(d-1)
+&&\bigl(\because\ \text{上の倍の消去}\bigr)\\
+&=\bigl(2^{k-1}\cdot m\bigr)\cdot(d-1)
+&&\bigl(\because\ a\text{ の置き方}\bigr)\\
+&=2^{k-1}\cdot\bigl(m\cdot(d-1)\bigr)
+&&\bigl(\because\ \mathbb{N}\text{ の積の結合則}\bigr)\\
+&=2^{k-1}\cdot m'
+&&\bigl(\because\ m'\text{ の置き方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "全過程は自然数の和・積・大小だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_pair_shift_root_polynomial",
         labels: [],
         title: { text: "根の対の整数倍のずらしを根とする多項式" },
