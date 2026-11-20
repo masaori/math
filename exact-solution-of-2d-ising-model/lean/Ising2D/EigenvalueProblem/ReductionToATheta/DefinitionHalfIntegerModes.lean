@@ -37,6 +37,7 @@
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSum
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 
 namespace Ising2D
 
@@ -166,7 +167,7 @@ theorem thetaTilde_one_sub (M : ℕ) (μ : ℤ) : thetaTilde M (1 - μ) = -theta
     _ = 2 * Real.pi * ((((1 : ℤ) : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [Int.cast_sub]                         -- 2 行目: `ι_{ℤ→ℝ}` は差を保つ
     _ = 2 * Real.pi * (((1 : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [Int.cast_one]                         -- 3 行目: `ι_{ℤ→ℝ}` は単位元を保つ
+        rw [inclusion_zz_to_rr_of_one_intCast]    -- 3 行目: `inclusion_zz_to_rr_of_one`（`ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ`）
     _ = 2 * Real.pi * (((1 : ℝ) + -(μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg (1 : ℝ) (μ : ℝ)]       -- 4 行目: `def_real_difference`（`y → 1_ℝ`, `z → μ_ℝ`）
     _ = 2 * Real.pi * (((1 : ℝ) + -(μ : ℝ)) + -(1 / 2)) / ((M : ℤ) : ℝ) := by

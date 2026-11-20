@@ -27,6 +27,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimE
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 
 namespace Ising2D
 
@@ -51,7 +52,7 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + ((1 : ℤ) : ℝ)) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [Int.cast_add]                         -- 3 行目: `ι_{ℤ→ℝ}` は和を保つ
     _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + 1) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [Int.cast_one]                         -- 4 行目: `ι_{ℤ→ℝ}` は単位元を保つ
+        rw [inclusion_zz_to_rr_of_one_intCast]    -- 4 行目: `inclusion_zz_to_rr_of_one`（`ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ`）
     _ = 2 * Real.pi * (((((M : ℤ) : ℝ) + 1) + -(μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg (((M : ℤ) : ℝ) + 1) (μ : ℝ)]
                                                   -- 5 行目: `def_real_difference`（`y → (M_col)_ℝ + 1_ℝ`, `z → μ_ℝ`）

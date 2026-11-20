@@ -1377,7 +1377,7 @@ Q_{s+1}
 &=\frac{2\pi\left((\iota_{\mathbb Z\to\mathbb R}(1)-\mu_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので差を保つ。}\blkref{antiperiodic_exp_sum}\bigr)\\
 &=\frac{2\pi\left((1_{\mathbb R}-\mu_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は単位元を保つ。}\blkref{antiperiodic_exp_sum}\bigr)\\
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{の}\ \iota_{\mathbb Z\to\mathbb R}(1_{\mathbb Z}) = 1_{\mathbb R}\bigr)\\
 &=\frac{2\pi\left(\left(1_{\mathbb R}+(-\mu_{\mathbb R})\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to 1_{\mathbb R},\ z \to \mu_{\mathbb R})\bigr)\\
 &=\frac{2\pi\left(\left(1_{\mathbb R}+(-\mu_{\mathbb R})\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1412,6 +1412,7 @@ Q_{s+1}
         "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた「ℝ の加法の結合律と交換律」の行を、差の定義（def_real_difference）2 行・結合律・交換律・結合律（右辺から左辺へ）・差の定義（右辺から左辺へ）2 行の 7 行に割った（8 等号 → 14 等号）。主張の中身は不変。",
         "(3) により、整数運動量の場合に -μ が果たしていた「共役添字」の役割を、半整数運動量では 1-μ が果たす。反交換関係の対が μ+ν ≡ 1 (mod M) になるのはこのためである。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。差の定義の代入の件）: (3) の鎖で def_real_difference を引く 4 行（左辺から右辺へ 2 行、右辺から左辺へ 2 行）に代入 (y → …, z → …) を書いた。鎖の式・段数・主張は変えていない。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49a)。整数 1 の実数の像についての名前だけの根拠の件）: (3) の鎖の 3 行目の名前だけの根拠「ι_{ℤ→ℝ} は単位元を保つ」を、inclusion_zz_to_rr_of_one（ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ）を左辺から右辺へ当てる参照にした。主張・鎖・段数は不変。",
       ],
     },
   },
@@ -1523,7 +1524,7 @@ Q_{s+1}
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+\iota_{\mathbb Z\to\mathbb R}(1)\right)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-   &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は単位元を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
+   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{の}\ \iota_{\mathbb Z\to\mathbb R}(1_{\mathbb Z}) = 1_{\mathbb R}\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+(-\mu_{\mathbb R})\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
    &&\bigl(\because\ \blkref{def_real_difference}\ (y \to (M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R},\ z \to \mu_{\mathbb R})\bigr) \\
 &= \frac{2\pi\left(\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}\right)+(-\mu_{\mathbb R})\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1711,6 +1712,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (−(2π(μ_ℝ−½)))(M_col)_ℝ^{-1} = −((2π(μ_ℝ−½))(M_col)_ℝ^{-1}) の行の根拠「ℝ で (−a)b=−(ab)」を、主張 real_negation_times_is_negation_of_product（x → 2π(μ_ℝ−½), t → (M_col)_ℝ^{-1}）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 2π(−(μ_ℝ−½)) = −(2π(μ_ℝ−½)) の行の根拠「ℝ で a(−b)=−(ab)」を、主張 real_times_negation_is_negation_of_product（x → 2π, t → μ_ℝ−½）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。差の定義の代入の件）: (1) の鎖で def_real_difference を引く 5 行（左辺から右辺へ 2 行、右辺から左辺へ 3 行）に代入 (y → …, z → …) を書いた。鎖の式・段数・主張は変えていない。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49a)。整数 1 の実数の像についての名前だけの根拠の件）: (1) の鎖の 4 行目の名前だけの根拠「ι_{ℤ→ℝ} は単位元を保つ」を、inclusion_zz_to_rr_of_one（ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ）を左辺から右辺へ当てる参照にした。主張・鎖・段数は不変。",
       ],
     },
   },
