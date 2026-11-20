@@ -36022,10 +36022,20 @@ f
                           " の有限性の仮定が満たされる。",
                         ]),
                         paragraph([
-                          "第 2 に、", math(String.raw`w^{m}-1\ne0`), " である。実際、",
-                          math(String.raw`w^{m}-1=0`), " とすると両辺に ", math(String.raw`1`),
-                          " を足して ", math(String.raw`w^{m}=1`), " となり、仮定 ",
-                          math(String.raw`w^{m}\ne1`), " に反する。",
+                          "第 2 に、", math(String.raw`w^{m}-1\ne0`), " である。",
+                          math(String.raw`w^{m}-1=0`), " と仮定すると、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+w^{m}
+&=(w^{m}-1)+1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法群の四則})\\
+&=0+1
+&&(\because\ w^{m}-1=0\ \text{という仮定})\\
+&=1
+&&(\because\ 0\ \text{は加法の単位元})
+\end{aligned}`),
+                        paragraph([
+                          "これは仮定 ", math(String.raw`w^{m}\ne1`), " に反する。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 (w^{m}-1)\,S_{n,m}
