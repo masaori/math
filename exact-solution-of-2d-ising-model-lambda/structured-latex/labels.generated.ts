@@ -217,6 +217,7 @@ export const ALL_LABELS = [
   "claim_horizontal_twisted_modes_coset",
   "claim_imaginary_unit_extension_quadratic_root",
   "claim_imaginary_unit_extension_square_root",
+  "claim_imaginary_unit_extension_unique_representation",
   "claim_imaginary_unit_nonzero_coefficient_square_root",
   "claim_imaginary_unit_outside_ordered_subfield",
   "claim_imaginary_unit_square_root_formula",

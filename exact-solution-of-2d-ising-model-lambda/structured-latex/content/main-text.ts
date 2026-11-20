@@ -61764,6 +61764,137 @@ N+N
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_imaginary_unit_extension_representation_and_conjugate",
+        labels: [],
+        title: { text: "虚数単位を足した表示の一意性と共役" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_imaginary_unit_extension_unique_representation",
+              focus:
+                {
+                  id: "zero_pinching_claim_imaginary_unit_extension_unique_representation",
+                  kind: "claim",
+                  title: { text: "順序付き部分体に虚数単位を足した表示は一意である" },
+                  labels: ["claim_imaginary_unit_extension_unique_representation"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/imaginary-unit-extension-unique-representation"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.imaginaryUnitExtension_unique_representation",
+                    "Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_unique_representation_necSuf",
+                    "Ising2DLambda.FisherZero.imaginaryUnitExtension_unique_representation_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F\subset\overline{\mathbb{Q}}`),
+                      " を部分体、",
+                      math(String.raw`C_F\subset F`),
+                      " を ",
+                      ref("def_subfield_positive_cone"),
+                      " の正錐とし、",
+                      math(String.raw`\omega\in\overline{\mathbb{Q}}`),
+                      " は ",
+                      math(String.raw`\omega\cdot\omega=-1`),
+                      " を満たすとする。以下の和・差・積・逆元はすべて ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）のものとする。任意の ",
+                      math(String.raw`a,a',b,b'\in F`),
+                      " について、",
+                    ]),
+                    displayMath(String.raw`a+b\cdot\omega=a'+b'\cdot\omega`),
+                    paragraph([
+                      "ならば、",
+                      math(String.raw`a=a'`),
+                      " かつ ",
+                      math(String.raw`b=b'`),
+                      " である。",
+                    ]),
+                  ],
+                  proof: [
+                    displayMath(String.raw`\begin{aligned}
+(b-b')\cdot\omega
+&=b\cdot\omega-b'\cdot\omega
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の分配法則}\bigr)\\
+&=(a+b\cdot\omega)-(a+b'\cdot\omega)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の加法の交換法則・結合法則と加法逆元}\bigr)\\
+&=(a'+b'\cdot\omega)-(a+b'\cdot\omega)
+&&\bigl(\because\ a+b\cdot\omega=a'+b'\cdot\omega\bigr)\\
+&=a'-a
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の加法の交換法則・結合法則と加法逆元}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`b-b'\ne0`),
+                      " と仮定すると、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\omega
+&=(b-b')^{-1}\cdot\bigl((b-b')\cdot\omega\bigr)
+&&\bigl(\because\ b-b'\ne0\text{ と }\overline{\mathbb{Q}}\text{ の乗法の逆元・結合法則}\bigr)\\
+&=(b-b')^{-1}\cdot(a'-a)
+&&\bigl(\because\ \text{上の式鎖}\bigr)\\
+&\in F
+&&\bigl(\because\ a,a',b,b'\in F\text{ と、}F\text{ は差・零でない元の逆元・積で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "となり、",
+                      ref("claim_imaginary_unit_outside_ordered_subfield"),
+                      "（",
+                      math(String.raw`\omega\notin F`),
+                      "）に矛盾する。ゆえに ",
+                      math(String.raw`b-b'=0`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+b
+&=b'+(b-b')
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=b'+0
+&&\bigl(\because\ b-b'=0\text{、}\blkref{claim_imaginary_unit_outside_ordered_subfield}\bigr)\\
+&=b'
+&&\bigl(\because\ 0\text{ は加法の単位元}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。これを使って",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+a
+&=(a+b\cdot\omega)-b\cdot\omega
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=(a'+b'\cdot\omega)-b\cdot\omega
+&&\bigl(\because\ a+b\cdot\omega=a'+b'\cdot\omega\bigr)\\
+&=(a'+b'\cdot\omega)-b'\cdot\omega
+&&\bigl(\because\ b=b'\bigr)\\
+&=a'
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。正錐 ",
+                      math(String.raw`C_F`),
+                      " と ",
+                      math(String.raw`\omega\cdot\omega=-1`),
+                      " は ",
+                      math(String.raw`\omega\notin F`),
+                      " を得るためだけに使う。全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の四則と ",
+                      math(String.raw`F`),
+                      " の閉性だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_pair_count_two_adic_valuation_decrease",
         labels: [],
         title: { text: "偶数の次数の対の個数" },
