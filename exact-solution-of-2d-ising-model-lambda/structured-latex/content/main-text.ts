@@ -61523,6 +61523,147 @@ N+N
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_sum_root_in_subfield_gives_both",
+        labels: [],
+        title: { text: "和が部分体に入る二数と部分体の根" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_sum_in_subfield_root_gives_both_numbers",
+              focus:
+                {
+                  id: "zero_pinching_claim_sum_in_subfield_root_gives_both_numbers",
+                  kind: "claim",
+                  title: { text: "和が部分体に入る二数は、二数を根とする二次式の値を零にする部分体の元があれば共に部分体に入る" },
+                  labels: ["claim_sum_in_subfield_root_gives_both_numbers"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/sum-in-subfield-root-gives-both-numbers"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.mem_and_mem_of_sum_mem_of_root_mem",
+                    "Ising2DLambda.NecSuf.FisherZero.mem_and_mem_of_sum_mem_of_root_mem_necSuf",
+                    "Ising2DLambda.FisherZero.mem_and_mem_of_sum_mem_of_root_mem_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`K`),
+                      " を ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の部分体（",
+                      ref("def_subfield_positive_cone"),
+                      " の冒頭の意味）、",
+                      math(String.raw`\alpha,\beta\in\overline{\mathbb{Q}}`),
+                      " とし、",
+                      math(String.raw`\alpha+\beta\in K`),
+                      " とする。以下の和・差・積はすべて ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " のものとする。ある ",
+                      math(String.raw`\gamma\in K`),
+                      " が",
+                    ]),
+                    displayMath(String.raw`\gamma\cdot\gamma-(\alpha+\beta)\cdot\gamma+\alpha\cdot\beta=0`),
+                    paragraph([
+                      "を満たすなら、",
+                      math(String.raw`\alpha\in K`),
+                      " かつ ",
+                      math(String.raw`\beta\in K`),
+                      " である。",
+                    ]),
+                  ],
+                  proof: [
+                    displayMath(String.raw`\begin{aligned}
+(\gamma-\alpha)\cdot(\gamma-\beta)
+&=\gamma\cdot\gamma-\gamma\cdot\beta-\alpha\cdot\gamma+\alpha\cdot\beta
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の分配法則}\bigr)\\
+&=\gamma\cdot\gamma-(\alpha\cdot\gamma+\beta\cdot\gamma)+\alpha\cdot\beta
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の積の可換則と加法の交換法則・結合法則}\bigr)\\
+&=\gamma\cdot\gamma-(\alpha+\beta)\cdot\gamma+\alpha\cdot\beta
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の分配法則}\bigr)\\
+&=0
+&&\bigl(\because\ \gamma\text{ についての仮定}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`\gamma-\alpha=0`),
+                      " の場合、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\alpha
+&=\gamma-(\gamma-\alpha)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=\gamma-0
+&&\bigl(\because\ \gamma-\alpha=0\bigr)\\
+&=\gamma
+&&\bigl(\because\ 0\text{ は加法の単位元}\bigr)\\
+&\in K
+&&\bigl(\because\ \gamma\in K\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\beta
+&=(\alpha+\beta)-\alpha
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&\in K
+&&\bigl(\because\ \alpha+\beta\in K\text{、}\alpha\in K\text{ と、}K\text{ は差で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。",
+                      math(String.raw`\gamma-\alpha\ne0`),
+                      " の場合、上の式鎖 ",
+                      math(String.raw`(\gamma-\alpha)\cdot(\gamma-\beta)=0`),
+                      " と ",
+                      ref("claim_qbar_no_zero_divisors"),
+                      "（",
+                      math(String.raw`a:=\gamma-\alpha`),
+                      "、",
+                      math(String.raw`b:=\gamma-\beta`),
+                      "）により ",
+                      math(String.raw`\gamma-\beta=0`),
+                      " である。よって",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\beta
+&=\gamma-(\gamma-\beta)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=\gamma-0
+&&\bigl(\because\ \gamma-\beta=0\text{、}\blkref{claim_qbar_no_zero_divisors}\bigr)\\
+&=\gamma
+&&\bigl(\because\ 0\text{ は加法の単位元}\bigr)\\
+&\in K
+&&\bigl(\because\ \gamma\in K\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\alpha
+&=(\alpha+\beta)-\beta
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&\in K
+&&\bigl(\because\ \alpha+\beta\in K\text{、}\beta\in K\text{ と、}K\text{ は差で閉じる}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。部分体の性質のうち使ったのは差で閉じることだけで、",
+                      math(String.raw`\alpha\cdot\beta\in K`),
+                      " は使わない。全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の四則と零因子が無いことだけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_pair_count_two_adic_valuation_decrease",
         labels: [],
         title: { text: "偶数の次数の対の個数" },

@@ -772,6 +772,7 @@ export const ALL_LABELS = [
   "claim_subfield_positive_cone_contains_nonzero_squares",
   "claim_subfield_weighted_square_sum_excludes_minus_one",
   "claim_successor_direction_selection",
+  "claim_sum_in_subfield_root_gives_both_numbers",
   "claim_sum_of_squares_positive_root_plus_real_positive",
   "claim_sum_of_squares_root_nonnegative_sign",
   "claim_symmetric_polynomial_fundamental_theorem",
