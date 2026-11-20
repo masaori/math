@@ -50800,6 +50800,79 @@ u^2-v^2&=\frac{c+a}{2}-v^2&&(\because\ 2u^2=c+a)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_imaginary_unit_nonzero_coefficient_square_root",
+        labels: [],
+        title: { text: "非零の虚係数からの平方根の構成" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_zero_pinching_claim_imaginary_unit_nonzero_coefficient_square_root",
+            focus: {
+              id: "zero_pinching_claim_imaginary_unit_nonzero_coefficient_square_root",
+              kind: "claim",
+              title: { text: "非零の虚係数と正の平方和根から平方根を構成できる" },
+              labels: ["claim_imaginary_unit_nonzero_coefficient_square_root"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/imaginary-unit-nonzero-coefficient-square-root"],
+              lean: [
+                "Ising2DLambda.FisherZero.imaginaryUnitExtension_nonzeroCoefficient_squareRoot",
+                "Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_nonzeroCoefficient_squareRoot",
+                "Ising2DLambda.FisherZero.imaginaryUnitExtension_nonzeroCoefficient_squareRoot_from_necSuf",
+              ],
+              statement: [paragraph([
+                math(String.raw`F\subset\overline{\mathbb Q}`), " を部分体、",
+                math(String.raw`C_F\subset F`), " を ", ref("def_subfield_positive_cone"),
+                " の正錐とし、", math(String.raw`C_F`), " の各元は ",
+                math(String.raw`F`), " に非零の平方根を持つと仮定する。",
+                math(String.raw`a,b,c\in F`), " と ",
+                math(String.raw`\omega\in\overline{\mathbb Q}`), " が ",
+                math(String.raw`b\ne0`), "、", math(String.raw`c\in C_F`), "、",
+                math(String.raw`c^2=a^2+b^2`), "、", math(String.raw`\omega^2=-1`),
+                " を満たすなら、ある ", math(String.raw`u,v\in F`), " が存在して ",
+                math(String.raw`(u+v\omega)^2=a+b\omega`), " となる。",
+              ])],
+              proof: [
+                paragraph([
+                  ref("claim_sum_of_squares_positive_root_plus_real_positive"),
+                  " より ", math(String.raw`c+a\in C_F`), " である。",
+                  ref("claim_positive_weighted_square_sums_is_precone"),
+                  " の冒頭から ", math(String.raw`1\in C_F`), "。",
+                  ref("def_subfield_positive_cone"), " の和の閉性から ",
+                  math(String.raw`2=1+1\in C_F`), " である。",
+                ]),
+                paragraph([
+                  "仮定により ", math(String.raw`d,t\in F`), " を ",
+                  math(String.raw`d\ne0`), "、", math(String.raw`t\ne0`), "、",
+                  math(String.raw`d^2=c+a`), "、", math(String.raw`t^2=2`),
+                  " となるように取る。", math(String.raw`u:=d/t\in F`),
+                  " と置く。", math(String.raw`d,t\ne0`), " なので ",
+                  math(String.raw`u\ne0`), " である。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+2u^2&=2(d/t)^2&&(\because\ u=d/t)\\
+&=d^2\frac{2}{t^2}&&(\because\ \overline{\mathbb Q}\text{ の四則})\\
+&=d^2&&(\because\ t^2=2)\\
+&=c+a&&(\because\ d^2=c+a)
+\end{aligned}`),
+                paragraph([
+                  ref("claim_imaginary_unit_square_root_formula"),
+                  " を ", math(String.raw`a,b,c,u,\omega`), " に適用し、",
+                  math(String.raw`v:=b/(2u)\in F`), " と置く。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+(u+v\omega)^2&=a+b\omega&&(\because\ \blkref{claim_imaginary_unit_square_root_formula})
+\end{aligned}`),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_subfield_coefficient_polynomials",
         labels: [],
         title: { text: "部分体を係数とする多項式と部分体上の次数" },
