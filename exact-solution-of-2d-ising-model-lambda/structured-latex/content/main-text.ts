@@ -47458,8 +47458,15 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
                     math(String.raw`\xi\ne0`), " と体 ", math(String.raw`\overline{\mathbb Q}`),
                     " の零積性から ", math(String.raw`\iota(a)-\iota(b)s=0`), " となる。",
                   ]),
-                  displayMath(String.raw`\iota(a)+\iota(-b)s=\iota(0)+\iota(0)s
-\quad\bigl(\because\ \iota(-b)=-\iota(b),\ \text{直前の等式}\bigr)`),
+                  displayMath(String.raw`\begin{aligned}
+\iota(a)+\iota(-b)s
+&=\iota(a)-\iota(b)s
+&&\bigl(\because\ \iota(-b)=-\iota(b)\bigr)\\
+&=0
+&&\bigl(\because\ \text{直前の等式}\bigr)\\
+&=\iota(0)+\iota(0)s
+&&\bigl(\because\ \iota(0)=0,\ 0s=0,\ \blkref{def_algebraic_numbers}\bigr)
+\end{aligned}`),
                   paragraph([
                     ref("claim_quadratic_representation_unique"), " をこの二つの表示へ適用すると ",
                     math(String.raw`a=0`), " かつ ", math(String.raw`-b=0`), " である。",
