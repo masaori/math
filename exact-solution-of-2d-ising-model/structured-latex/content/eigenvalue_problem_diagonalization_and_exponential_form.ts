@@ -7076,7 +7076,7 @@ g
 &= \bigl((-k)_{\mathbb R} + k_{\mathbb R}\bigr) + (-k_{\mathbb R})
 &&(\because\ \mathbb{R}\ \text{の加法の結合律})\\
 &= \bigl((-k) + k\bigr)_{\mathbb R} + (-k_{\mathbb R})
-&&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は和を保つ})\\
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a \to -k,\ b \to k)\ \text{を右辺から左辺へ}\bigr)\\
 &= (0)_{\mathbb R} + (-k_{\mathbb R})
 &&(\because\ \mathbb{Z}\ \text{で}\ (-k) + k = 0)\\
 &= 0_{\mathbb R} + (-k_{\mathbb R})
@@ -7154,7 +7154,7 @@ g
 &= \frac{2\pi\left((\mu+kM_{\mathrm{col}})_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \tilde\theta\ \text{の定義を}\ \mu+kM_{\mathrm{col}}\ \text{で。}\blkref{antiperiodic_exp_sum})\\
 &= \frac{2\pi\left(\left(\mu_{\mathbb R}+(kM_{\mathrm{col}})_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は和を保つ})\\
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a \to \mu,\ b \to kM_{\mathrm{col}})\bigr)\\
 &= \frac{2\pi\left(\left(\mu_{\mathbb R}+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は積を保つ})\\
 &= \frac{2\pi\left(\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -7390,6 +7390,7 @@ d_\nu
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w24)。整数 1 の実数の像についての名前だけの根拠の件）: (3) の θ̃_ν の鎖の 5 行目と −θ̃_ν の鎖の 8 行目の名前だけの根拠「ι_{ℤ→ℝ} は単位元を保つ」を、inclusion_zz_to_rr_of_one（ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ）を右辺から左辺へ当てる参照にした。主張・鎖・段数は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w44)。加法の交換律・結合律の代入の件）: (2) の θ̃_{μ+kM} の鎖の 4・6・8 行目が根拠を「ℝ の加法の交換律」「ℝ の加法の結合律」と名前だけで書いていたので、(3) の θ̃_ν の鎖と同じく等式 p + q = q + p・(p + q) + s = p + (q + s) と代入と set_and_algebra_notation を書いた。鎖の式・段数・主張は変えていない。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b1)。整数の実数の像の和と零についての名前だけの根拠の件）: 準備の第二の (-k)_ℝ = -k_ℝ の鎖の 6 行目の名前だけの根拠「ι_{ℤ→ℝ} は零を保つ」を、inclusion_zz_to_rr の ι_{ℤ→ℝ}(0_ℤ) := 0_ℝ の参照にした。主張・鎖・段数は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b2)。ℤ 全体で和を保つ主張の件）: 準備の第二の 4 行目と (2) の θ̃_{μ+kM_col} の鎖の 2 行目の名前だけの根拠「ι_{ℤ→ℝ} は和を保つ」を、新しく足した inclusion_zz_to_rr_preserves_sum の参照にした（準備の第二は a → −k、b → k を右辺から左辺へ、(2) は a → μ、b → kM_col。−k・k・μ・kM_col は符号が決まっていないので inclusion_zz_to_rr_preserves_sum_of_nonnegatives は引けない）。主張・鎖・段数は不変。Lean の periodicity_prep_int_cast_neg・thetaTilde_add_int_mul の対応する段の Int.cast_add を Ising2D.inclusion_zz_to_rr_preserves_sum に替えた。",
       ],
     },
   },

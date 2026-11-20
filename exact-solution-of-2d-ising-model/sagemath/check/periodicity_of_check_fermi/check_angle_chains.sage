@@ -20,7 +20,7 @@ def tt(m):
 # 同じ式になる（ι を和・積の準同型として持つ以外の表し方が無い）。この 2 行の中身は具体の点の整数で確かめる。
 chain2 = [
     2 * PI * ((mu + kk * MM) - h) / MM,              # θ~ の定義を μ+kM で（像 (μ+kM)_R）
-    2 * PI * ((mu + (kk * MM)) - h) / MM,            # ι は和を保つ
+    2 * PI * ((mu + (kk * MM)) - h) / MM,            # inclusion_zz_to_rr_preserves_sum（a → μ, b → kM）
     2 * PI * ((mu + kk * MM) - h) / MM,              # ι は積を保つ
     2 * PI * ((kk * MM + mu) - h) / MM,              # 加法の交換律 p + q = q + p（p → μ_R, q → k_R(M)_R。set_and_algebra_notation）
     2 * PI * ((kk * MM + mu) + (-h)) / MM,           # def_real_difference（y → k_R(M)_R + μ_R, z → 1/2）
@@ -83,6 +83,8 @@ for j in range(len(neg_nu) - 1):
 rep.check(tt(MM + 1 - mu) != (-tt(mu)) + PI, "(3) 対照: θ~_ν ≠ -θ~_μ + π")
 
 # ---- 準備の第二 (-k)_R = -k_R と、包含が和・積・単位元（ι(1) = 1。inclusion_zz_to_rr_of_one）を保つこと（整数の具体の点） ----
+# 準備の第二の 4 行目 ((-k)_R + k_R) + (-k_R) = ((-k) + k)_R + (-k_R) の根拠は inclusion_zz_to_rr_preserves_sum（a → -k, b → k）を右辺から左辺へ
+# （下の iota(a + b) == iota(a) + iota(b) も同じ。ℤ 全体の和の保存の中身は sagemath/check/inclusion_zz_to_rr_preserves_sum/ が定義の再帰で確かめる）。
 # 準備の第二の 6 行目 ι(0) + (-k_R) = 0 + (-k_R) の根拠は inclusion_zz_to_rr の ι(0_ℤ) := 0_ℝ（下の iota(0) == 0 も同じ）。
 # ι_{Z→R} を ZZ → QQ の埋め込みで持つ（QQ ⊂ ℝ。この検算に実数の完備性は要らない）。
 iota = lambda a: QQ(a)

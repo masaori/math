@@ -15,7 +15,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 準備の第一: cos x + i sin x = exp(ix) の鎖 | `check_generic_chains.sage` | exp(±ix) を有理関数体の元にして 22 本の等号の右辺 22 行を別々に組み（分数は def_complex_quotient の zw^{-1} に開く）、隣と比べる。左辺 cos x + i sin x と第 1 行の比較は 2 倍して分母を払った差が euler の関係のイデアルに入る（関係なしでは入らない）。対照: 分母の i だけを落とすと等号が崩れる。逆元の対照: (2_C i)^{-1} ≠ 2_C^{-1} i | **PASS** | 成り立つ |
-| 準備の第二: (-k)_R = -k_R の 7 等号 | `check_angle_chains.sage` | ι_{Z→R} を ZZ → QQ の埋め込みで持ち、k = -30..30 で各行を比べる。ι が和・積・単位元・零を保つことも見る | **PASS** | 成り立つ |
+| 準備の第二: (-k)_R = -k_R の 7 等号 | `check_angle_chains.sage` | ι_{Z→R} を ZZ → QQ の埋め込みで持ち、k = -30..30 で各行を比べる。ι が和・積・単位元・零を保つことも見る（4 行目の根拠は `inclusion_zz_to_rr_preserves_sum`。定義の再帰での中身は `sagemath/check/inclusion_zz_to_rr_preserves_sum/`） | **PASS** | 成り立つ |
 | 準備の第三: ℝ の等式 cos(-x) = cos x | `check_values_and_claims.sage` | 本文は鎖を持たず、`cos_of_negated_real`（鎖は `sagemath/check/cos_of_negated_real/`）と `inclusion_rr_to_cc_is_injective` を当てる。具体値の照合は作り方で自明（下記）で、中身は `cos_of_negated_real` の検算が担う | **PASS** | 成り立つ |
 | (1) γ_1(θ+2πk_R) の鎖、γ_2(θ+2πk_R) の鎖 | `check_generic_chains.sage`・`check_values_and_claims.sage` | 一般の点: 各行の差が「cos の周期性」「sin の周期性」「準備の exp(ix) の表示」のうちその行の根拠だけのイデアルに入る（対照つき。exp の表示が euler の関係から出ることも確かめる）。具体値: 結合定数 4 組 × M_col = 2..8、θ = ±θ̃_m（m = -M..2M）、k = -3..3 で円分体 Q(ζ_{4M}) の中で各行 | **PASS** | 成り立つ |
 | (2) θ̃_{μ+kM} の 17 等号、-θ̃_{μ+kM} の 4 等号 | `check_angle_chains.sage` | π・μ_R・k_R・(M)_R を不定元にした ℚ 上の有理関数体で各行を別々に組み隣と比べる（分数は `def_real_quotient` の y z^{-1} に開く）。M = 2..8、μ = -2M..3M、k = -3..3 で θ/π ∈ QQ として各行。対照: θ̃_{μ+kM} ≠ θ̃_μ + kπ、(M)_R (M)_R^{-1} ≠ (M)_R | **PASS** | 成り立つ |

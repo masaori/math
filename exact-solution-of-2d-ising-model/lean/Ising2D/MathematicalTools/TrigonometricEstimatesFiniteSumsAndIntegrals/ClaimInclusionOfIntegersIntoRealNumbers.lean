@@ -1,13 +1,14 @@
 /-
-# `ℤ → ℝ` の包含写像と、`ι(1) = 1`・非負の整数の和・定数の有限和・2 の冪（**具体版**）
+# `ℤ → ℝ` の包含写像と、`ι(1) = 1`・非負の整数の和・`ℤ` 全体の後者と和・定数の有限和・2 の冪（**具体版**）
 
 対応する人手証明のラベル: `inclusion_zz_to_rr`、`inclusion_zz_to_rr_of_one`、`inclusion_zz_to_rr_preserves_sum_of_nonnegatives`、
 `finite_sum_of_constant_real_number`、`inclusion_zz_to_rr_of_positive_is_at_least_one`、`inclusion_zz_to_rr_of_nonpositive_is_nonpositive`、
-`inclusion_zz_to_rr_is_monotone_on_nonnegatives`（`structured-latex/content/000_calculation_formulae_00_09.ts` の
+`inclusion_zz_to_rr_is_monotone_on_nonnegatives`、`inclusion_zz_to_rr_of_successor`、`inclusion_zz_to_rr_preserves_sum`（`structured-latex/content/000_calculation_formulae_00_09.ts` の
 `calc_formulae_definition_inclusion_zz_to_rr`・`calc_formulae_claim_inclusion_zz_to_rr_of_one`・
 `calc_formulae_claim_inclusion_zz_to_rr_preserves_sum_of_nonnegatives`・`calc_formulae_claim_finite_sum_of_constant_real_number`・
 `calc_formulae_claim_inclusion_zz_to_rr_of_positive_is_at_least_one`・`calc_formulae_claim_inclusion_zz_to_rr_of_nonpositive_is_nonpositive`・
-`calc_formulae_claim_inclusion_zz_to_rr_is_monotone_on_nonnegatives`）と
+`calc_formulae_claim_inclusion_zz_to_rr_is_monotone_on_nonnegatives`・`calc_formulae_claim_inclusion_zz_to_rr_of_successor`・
+`calc_formulae_claim_inclusion_zz_to_rr_preserves_sum`）と
 `def_power_of_integer`・`power_of_two_in_integers_is_at_least_one`・`inclusion_zz_to_rr_of_power_of_two`（`structured-latex/content/020_critical_point.ts` の
 `critical_definition_power_of_integer`・`critical_claim_power_of_two_in_integers_is_at_least_one`・`critical_claim_inclusion_zz_to_rr_of_power_of_two`）。
 
@@ -28,6 +29,11 @@
 * `inclusion_zz_to_rr_preserves_sum_of_nonnegatives` は人手と同じく `b` についての帰納法で、`b = 0` の 3 行と帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。
   `ℤ` の元を送る主張が引く `Int.cast` の形は `inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast`（`inclusion_zz_to_rr_of_natCast` で
   `Nat.cast` の形へ移して当てる）。
+* `inclusion_zz_to_rr_of_successor` は人手と同じく `n ∈ ℤ_{≥0}`・`n = -1_ℤ`・`n = -(p + 1_ℤ)`（`p ∈ ℤ_{≥1}`）の場合分けで、`n = -1_ℤ` の 5 行と
+  `n = -(p + 1_ℤ)` の 8 行が人手の行と 1 対 1 の `calc` である。人手の定義の `ι(n + 1) := ι(n) + 1`（`n ∈ ℤ_{≥0}`）の `Int.cast` の形は
+  `inclusion_zz_to_rr_succ_intCast`（`inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形へ移して当てる）。
+* `inclusion_zz_to_rr_preserves_sum` は人手と同じく `a` を固定した `b` についての 2 方向の帰納法（`Int.induction_on`）で、`b = 0` の 3 行、
+  `b → b + 1` の 5 行、`b → b − 1` の 12 行が人手の行と 1 対 1 の `calc` である。`ℤ` の四則の段は `omega` で閉じる。
 * `finite_sum_of_constant_real_number_succ` は人手の `m ∈ ℤ_{≥1}` を Lean の `m + 1`（`Fin (m + 1)` の上の和）で書き、`m = 1` の 3 行と
   帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。`def_finite_sum_of_real_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
   （`ClaimFiniteSumsOfRealNumbers.lean` と同じ読み替え）。
@@ -49,6 +55,7 @@
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 
 namespace Ising2D
 
@@ -115,6 +122,97 @@ theorem inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast (a b : ℕ) :
     _ = ((a : ℤ) : ℝ) + ((b : ℤ) : ℝ) := by
         rw [inclusion_zz_to_rr_of_natCast a, inclusion_zz_to_rr_of_natCast b]
                                                                            -- 同じ一致を右辺から左辺へ二か所へ同時に
+
+/-- **`inclusion_zz_to_rr`** の `ι(n + 1_ℤ) := ι(n) + 1_ℝ`（`n ∈ ℤ_{≥0}`）を `ℤ` 全体の `ι`（`Int.cast`）の形で書いたもの。
+`n, n + 1 ∈ ℤ_{≥0}` なので、2 つの書き方の一致 `inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形 `inclusion_zz_to_rr_succ` へ移し、同じ一致で戻す。
+`inclusion_zz_to_rr_of_successor` の `n ∈ ℤ_{≥0}` の場合と `n = -(p + 1)` の場合が引く。 -/
+theorem inclusion_zz_to_rr_succ_intCast (k : ℕ) : (((k : ℤ) + 1 : ℤ) : ℝ) = ((k : ℤ) : ℝ) + 1 :=
+  calc (((k : ℤ) + 1 : ℤ) : ℝ) = (((k + 1 : ℕ) : ℤ) : ℝ) := rfl            -- `ℤ_{≥0}` の和（Lean では `ℕ` の和の像と定義で一致）
+    _ = ((k + 1 : ℕ) : ℝ) := inclusion_zz_to_rr_of_natCast (k + 1)         -- `ℤ_{≥0}` の上で `Int.cast` と `Nat.cast` は一致する
+    _ = (k : ℝ) + 1 := inclusion_zz_to_rr_succ k                           -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`（`n → k`）
+    _ = ((k : ℤ) : ℝ) + 1 := by rw [inclusion_zz_to_rr_of_natCast k]       -- 同じ一致を右辺から左辺へ
+
+/-- **人手 `inclusion_zz_to_rr_of_successor`**: `n ∈ ℤ` なら `ι(n + 1_ℤ) = ι(n) + 1_ℝ`。
+人手と同じく `n ∈ ℤ_{≥0}`・`n = -1_ℤ`・`n = -(p + 1_ℤ)`（`p ∈ ℤ_{≥1}`）の 3 つの場合に分ける。
+`n ∈ ℤ_{≥0}` の場合は人手の 1 行（定義）で、Lean では `Int.cast` の形の `inclusion_zz_to_rr_succ_intCast` である。
+`n = -1_ℤ` の場合は人手の 5 行、`n = -(p + 1_ℤ)` の場合は人手の 8 行と 1 対 1 の `calc` である
+（人手の `p ∈ ℤ_{≥1} ⊂ ℤ_{≥0}` を Lean では `ℕ` の元 `q`（`1 ≤ q`）の像 `(q : ℤ)` で書く）。 -/
+theorem inclusion_zz_to_rr_of_successor (n : ℤ) : ((n + 1 : ℤ) : ℝ) = ((n : ℤ) : ℝ) + 1 := by
+  rcases le_or_gt 0 n with hn | hn
+  · -- `n ∈ ℤ_{≥0}` のとき
+    obtain ⟨k, rfl⟩ := Int.eq_ofNat_of_zero_le hn
+    exact inclusion_zz_to_rr_succ_intCast k                                -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`
+  · obtain ⟨m, hm, rfl⟩ : ∃ m : ℤ, 1 ≤ m ∧ n = -m := ⟨-n, by omega, by omega⟩
+    rcases eq_or_lt_of_le hm with h1 | h2
+    · -- `n = -1_ℤ` のとき
+      subst h1
+      calc ((-(1 : ℤ) + 1 : ℤ) : ℝ) = ((0 : ℤ) : ℝ) := by rw [neg_add_cancel]  -- `ℤ` の加法逆元 `(-1) + 1 = 0`
+        _ = 0 := inclusion_zz_to_rr_zero_intCast                           -- `inclusion_zz_to_rr` の `ι(0) := 0`
+        _ = -(1 : ℝ) + 1 := (neg_add_cancel 1).symm                        -- `ℝ` の加法逆元 `(-1) + 1 = 0` を右辺から左辺へ
+        _ = -((1 : ℤ) : ℝ) + 1 := by rw [inclusion_zz_to_rr_of_one_intCast]  -- `inclusion_zz_to_rr_of_one` を右辺から左辺へ
+        _ = ((-(1 : ℤ) : ℤ) : ℝ) + 1 := by rw [inclusion_zz_to_rr_neg 1 le_rfl]
+                                                                           -- `inclusion_zz_to_rr` の `ι(-n) := -ι(n)`（`n → 1`）を右辺から左辺へ
+    · -- `n = -(p + 1_ℤ)`（`p ∈ ℤ_{≥1}`）のとき
+      obtain ⟨q, hq, rfl⟩ : ∃ q : ℕ, 1 ≤ q ∧ m = (q : ℤ) + 1 := ⟨(m - 1).toNat, by omega, by omega⟩
+      calc ((-((q : ℤ) + 1) + 1 : ℤ) : ℝ) = ((-(q : ℤ) : ℤ) : ℝ) := by
+            rw [show -((q : ℤ) + 1) + 1 = -(q : ℤ) by omega]                -- `ℤ` の四則 `-(p + 1) + 1 = -p`
+        _ = -((q : ℤ) : ℝ) := inclusion_zz_to_rr_neg _ (by exact_mod_cast hq)
+                                                                           -- `inclusion_zz_to_rr` の `ι(-n) := -ι(n)`（`n → p`）
+        _ = -((q : ℤ) : ℝ) + 0 := (add_zero _).symm                        -- `0_ℝ` は `ℝ` の和の単位元
+        _ = -((q : ℤ) : ℝ) + (-(1 : ℝ) + 1) := by rw [neg_add_cancel]      -- `ℝ` の加法逆元 `(-1) + 1 = 0` を右辺から左辺へ
+        _ = (-((q : ℤ) : ℝ) + -(1 : ℝ)) + 1 := (add_assoc _ _ _).symm       -- `ℝ` の和の結合律を右辺から左辺へ
+        _ = -(((q : ℤ) : ℝ) + 1) + 1 := by
+            rw [real_negation_of_sum_is_sum_of_negations]                  -- `real_negation_of_sum_is_sum_of_negations`（`x → ι(p)`, `y → 1`）を右辺から左辺へ
+        _ = -((((q : ℤ) + 1 : ℤ)) : ℝ) + 1 := by rw [inclusion_zz_to_rr_succ_intCast q]
+                                                                           -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`（`n → p`）を右辺から左辺へ
+        _ = ((-((q : ℤ) + 1) : ℤ) : ℝ) + 1 := by
+            rw [inclusion_zz_to_rr_neg ((q : ℤ) + 1) (by omega)]           -- `inclusion_zz_to_rr` の `ι(-n) := -ι(n)`（`n → p + 1`）を右辺から左辺へ
+
+/-- **人手 `inclusion_zz_to_rr_preserves_sum`**: `a, b ∈ ℤ` なら `ι(a + b) = ι(a) + ι(b)`。
+人手と同じく `a` を固定し、`b ∈ ℤ_{≥0}` は `0` から `1` を足す帰納法、`b ∈ ℤ_{≤0}` は `0` から `1` を引く帰納法で示す
+（Lean では `Int.induction_on`。`b ∈ ℤ_{≤0}` の段の `b` は `ℕ` の元 `i` の像の符号反転 `-(i : ℤ)` である）。
+`b = 0` の 3 行、`b → b + 1` の 5 行、`b → b - 1` の 12 行が人手の行と 1 対 1 の `calc` である。 -/
+theorem inclusion_zz_to_rr_preserves_sum (a b : ℤ) :
+    ((a + b : ℤ) : ℝ) = ((a : ℤ) : ℝ) + ((b : ℤ) : ℝ) := by
+  refine Int.induction_on b ?_ ?_ ?_
+  · -- `b = 0_ℤ` のとき
+    calc ((a + 0 : ℤ) : ℝ) = ((a : ℤ) : ℝ) := by rw [add_zero]            -- `0_ℤ` は `ℤ` の和の単位元
+      _ = ((a : ℤ) : ℝ) + 0 := (add_zero _).symm                           -- `0_ℝ` は `ℝ` の和の単位元
+      _ = ((a : ℤ) : ℝ) + ((0 : ℤ) : ℝ) := by rw [inclusion_zz_to_rr_zero_intCast]
+                                                                           -- `inclusion_zz_to_rr` の `ι(0) := 0` を右辺から左辺へ
+  · -- `b ∈ ℤ_{≥0}` から `b + 1_ℤ` へ
+    intro i ih
+    calc ((a + ((i : ℤ) + 1) : ℤ) : ℝ) = (((a + (i : ℤ)) + 1 : ℤ) : ℝ) := by rw [add_assoc]
+                                                                           -- `ℤ` の和の結合律
+      _ = ((a + (i : ℤ) : ℤ) : ℝ) + 1 := inclusion_zz_to_rr_of_successor _ -- `inclusion_zz_to_rr_of_successor`（`n → a + b`）
+      _ = (((a : ℤ) : ℝ) + (((i : ℤ)) : ℝ)) + 1 := by rw [ih]              -- 帰納法の仮定
+      _ = ((a : ℤ) : ℝ) + ((((i : ℤ)) : ℝ) + 1) := add_assoc _ _ _         -- `ℝ` の和の結合律
+      _ = ((a : ℤ) : ℝ) + ((((i : ℤ) + 1 : ℤ)) : ℝ) := by
+          rw [inclusion_zz_to_rr_of_successor (i : ℤ)]                     -- `inclusion_zz_to_rr_of_successor`（`n → b`）を右辺から左辺へ
+  · -- `b ∈ ℤ_{≤0}` から `b - 1_ℤ` へ
+    intro i ih
+    calc ((a + (-(i : ℤ) - 1) : ℤ) : ℝ)
+        = ((a + (-(i : ℤ) - 1) : ℤ) : ℝ) + 0 := (add_zero _).symm          -- `0_ℝ` は `ℝ` の和の単位元
+      _ = ((a + (-(i : ℤ) - 1) : ℤ) : ℝ) + (1 + -(1 : ℝ)) := by rw [add_neg_cancel]
+                                                                           -- `ℝ` の加法逆元 `1 + (-1) = 0` を右辺から左辺へ
+      _ = (((a + (-(i : ℤ) - 1) : ℤ) : ℝ) + 1) + -(1 : ℝ) := (add_assoc _ _ _).symm
+                                                                           -- `ℝ` の和の結合律を右辺から左辺へ
+      _ = (((a + (-(i : ℤ) - 1)) + 1 : ℤ) : ℝ) + -(1 : ℝ) := by
+          rw [inclusion_zz_to_rr_of_successor (a + (-(i : ℤ) - 1))]        -- `inclusion_zz_to_rr_of_successor`（`n → a + (b - 1)`）を右辺から左辺へ
+      _ = ((a + -(i : ℤ) : ℤ) : ℝ) + -(1 : ℝ) := by
+          rw [show (a + (-(i : ℤ) - 1)) + 1 = a + -(i : ℤ) by omega]        -- `ℤ` の四則 `(a + (b - 1)) + 1 = a + b`
+      _ = (((a : ℤ) : ℝ) + ((-(i : ℤ) : ℤ) : ℝ)) + -(1 : ℝ) := by rw [ih]  -- 帰納法の仮定
+      _ = ((a : ℤ) : ℝ) + (((-(i : ℤ) : ℤ) : ℝ) + -(1 : ℝ)) := add_assoc _ _ _
+                                                                           -- `ℝ` の和の結合律
+      _ = ((a : ℤ) : ℝ) + ((((-(i : ℤ) - 1) + 1 : ℤ) : ℝ) + -(1 : ℝ)) := by
+          rw [show (-(i : ℤ) - 1) + 1 = -(i : ℤ) by omega]                  -- `ℤ` の四則 `b = (b - 1) + 1`
+      _ = ((a : ℤ) : ℝ) + ((((-(i : ℤ) - 1 : ℤ) : ℝ) + 1) + -(1 : ℝ)) := by
+          rw [inclusion_zz_to_rr_of_successor (-(i : ℤ) - 1)]              -- `inclusion_zz_to_rr_of_successor`（`n → b - 1`）
+      _ = ((a : ℤ) : ℝ) + (((-(i : ℤ) - 1 : ℤ) : ℝ) + (1 + -(1 : ℝ))) := by
+          rw [add_assoc (((-(i : ℤ) - 1 : ℤ) : ℝ))]                        -- `ℝ` の和の結合律
+      _ = ((a : ℤ) : ℝ) + (((-(i : ℤ) - 1 : ℤ) : ℝ) + 0) := by rw [add_neg_cancel]
+                                                                           -- `ℝ` の加法逆元 `1 + (-1) = 0`
+      _ = ((a : ℤ) : ℝ) + ((-(i : ℤ) - 1 : ℤ) : ℝ) := by rw [add_zero]     -- `0_ℝ` は `ℝ` の和の単位元
 
 /-- **人手 `finite_sum_of_constant_real_number`**（`m + 1` 項）: `Σ_{j=1}^{m+1} r = ι(m + 1) r`。`m` についての帰納法。 -/
 theorem finite_sum_of_constant_real_number_succ (m : ℕ) (r : ℝ) :

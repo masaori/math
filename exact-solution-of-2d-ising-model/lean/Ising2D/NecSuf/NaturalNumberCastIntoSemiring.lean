@@ -1,14 +1,17 @@
 /-
-# 非負の整数の埋め込み: `ι(1) = 1`・和・定数の有限和・2 の冪（必要十分版）
+# 整数の埋め込み: `ι(1) = 1`・非負の整数の和・`ℤ` 全体の後者と和・定数の有限和・2 の冪（必要十分版）
 
 対応する人手証明のラベル: `inclusion_zz_to_rr_of_one`、`inclusion_zz_to_rr_preserves_sum_of_nonnegatives`、
 `finite_sum_of_constant_real_number`、`power_of_two_in_integers_is_at_least_one`、`inclusion_zz_to_rr_of_power_of_two`、
-`inclusion_zz_to_rr_of_positive_is_at_least_one`、`inclusion_zz_to_rr_of_nonpositive_is_nonpositive`、`inclusion_zz_to_rr_is_monotone_on_nonnegatives`
+`inclusion_zz_to_rr_of_positive_is_at_least_one`、`inclusion_zz_to_rr_of_nonpositive_is_nonpositive`、`inclusion_zz_to_rr_is_monotone_on_nonnegatives`、
+`inclusion_zz_to_rr_of_successor`、`inclusion_zz_to_rr_preserves_sum`
 具体版: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimInclusionOfIntegersIntoRealNumbers.lean`
 （具体版をこのファイルの系として導くのは、同じフォルダの `ClaimInclusionOfIntegersIntoRealNumbersFromNecSuf.lean`）
 
 人手の `ι_{ℤ→ℝ}` の `ℤ_{≥0}` の部分は、`ι(0) := 0`・`ι(n + 1) := ι(n) + 1` の帰納法の定義である。ここでは `ℝ` を、
 この 2 つの式を持つ埋め込み `(n : ℕ) → (n : R)` の付いた構造 `R` に置き換える（`Nat.cast_zero`・`Nat.cast_succ` は `AddMonoidWithOne` の公理）。
+負の元の節 `ι(-n) := -ι(n)` を使う主張（`int_cast_nonpos'`・`int_cast_succ'`・`int_cast_add'`）では、`ℤ` からの埋め込み `(n : ℤ) → (n : R)`
+（`Int.cast`。`AddGroupWithOne` の構造）を使い、`ι(-n) = -ι(n)` は `Int.cast_neg`、`ℤ_{≥0}` の上での `Nat.cast` との一致は `Int.cast_natCast` である。
 
 ## 何が効いているか / 効いていないか
 
@@ -22,8 +25,10 @@
 | `inclusion_zz_to_rr_of_positive_is_at_least_one` | `n` の帰納法。`ι(1) = 1 ≥ 1`、`ι(n + 1) = ι(n) + 1 ≥ 1 + 1 ≥ 1 + 0 = 1` | `one_le_cast'`（同じ段） | `cast_one'`、埋め込みの `ι(n + 1) = ι(n) + 1`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元、反射律 |
 | `inclusion_zz_to_rr_of_nonpositive_is_nonpositive` | `n = 0` は `ι(0) = 0 ≤ 0`、`n = -m`（`m ≥ 1`）は `ι(-m) = -ι(m) ≤ -1 ≤ -0 = 0` | `int_cast_nonpos'`（同じ段） | `ℤ` の埋め込みの `ι(-n) = -ι(n)`（`Int.cast_neg`）と `ℤ_{≥0}` での一致（`Int.cast_natCast`）、`one_le_cast'`、符号反転が順序を逆にすること（加法の単調性から出る）、`0 ≤ 1` |
 | `inclusion_zz_to_rr_is_monotone_on_nonnegatives` | `k := b − a`、`ι(k) ≥ 0`（`k = 0` と `k ≥ 1`）、`ι(a) = ι(a) + 0 ≤ ι(a) + ι(k) = ι(a + k) = ι(b)` | `cast_mono'`（同じ段） | `cast_add'`、`one_le_cast'`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元 |
+| `inclusion_zz_to_rr_of_successor` | `n ∈ ℤ_{≥0}` は定義、`n = -1` は `ι(-1 + 1) = ι(0) = 0 = (-1) + 1 = (-ι(1)) + 1 = ι(-1) + 1`、`n = -(p + 1)`（`p ≥ 1`）は `ι(-(p+1) + 1) = ι(-p) = -ι(p) = -ι(p) + 0 = -ι(p) + ((-1) + 1) = (-ι(p) + (-1)) + 1 = -(ι(p) + 1) + 1 = -ι(p + 1) + 1 = ι(-(p + 1)) + 1` | `int_cast_succ'`（同じ段） | `ℤ` の埋め込みの `ι(0) = 0`・`ι(1) = 1`・`ι(-n) = -ι(n)` と `ℤ_{≥0}` での一致・`Nat.cast_succ`、`0` が和の右単位元、加法逆元、和の結合律、`-(x + y) = (-x) + (-y)`（加法の可換性） |
+| `inclusion_zz_to_rr_preserves_sum` | `b` について `0` から足す帰納法（3 行と 5 行）と引く帰納法（12 行）。足す段・引く段とも `inclusion_zz_to_rr_of_successor` を使う | `int_cast_add'`（同じ段） | `int_cast_succ'`、`ι(0) = 0`、`0` が和の右単位元、加法逆元、和の結合律 |
 
-- **効いていないもの**: `R` が `ℝ` であること、`R` の完備性・除法、`R` の符号反転（`int_cast_nonpos'` だけが使う）、乗法の可換性・結合律、全順序であること。
+- **効いていないもの**: `R` が `ℝ` であること、`R` の完備性・除法、`R` の符号反転（`int_cast_nonpos'`・`int_cast_succ'`・`int_cast_add'` だけが使う）、乗法の可換性・結合律、全順序であること。
 - **型クラスについて**: mathlib の型クラスでは、効いている性質だけを切り出した組を作れない（`One` を二重に持つことになる）ので、
   それを含む最小の標準の組を置き、効いていない性質を次に書く。
   - `sum_const_fin_succ'` の `[NonAssocSemiring R]` のうち、左からの分配法則・`mul_one`・`zero_mul`・`mul_zero` は効いていない。
@@ -34,7 +39,10 @@
 - `cast_one'`・`cast_add'` は乗法を使わない（`[AddMonoidWithOne R]`）。
 - 順序の 3 つの主張（`one_le_cast'`・`int_cast_nonpos'`・`cast_mono'`）は乗法を使わない。`[AddCommMonoidWithOne R]`（`int_cast_nonpos'` は符号反転のため `[AddCommGroupWithOne R]`）に
   `[PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` を置く。加法の可換性は `IsOrderedAddMonoid` を書くためだけに要り、証明の段では使わない。順序の反対称律は効いていない。
-- 人手の `ι` の負の元の節 `ι(-n) := -ι(n)` を使うのは `int_cast_nonpos'` だけである。
+- 人手の `ι` の負の元の節 `ι(-n) := -ι(n)` を使うのは `int_cast_nonpos'`・`int_cast_succ'` だけである（`int_cast_add'` は `int_cast_succ'` を通して使う）。
+- `int_cast_succ'`・`int_cast_add'` は乗法と順序を使わない。`[AddCommGroupWithOne R]` を置く。加法の可換性は `int_cast_succ'` の `n = -(p + 1)` の段の
+  `-(x + y) = (-x) + (-y)`（`neg_add`）だけで効いている。可換でない `AddGroupWithOne` では `-(x + y) = (-y) + (-x)` しか言えず、同じ手順では通らない
+  （mathlib の `Int.cast_add` は可換性を使わない別の論法で、`AddGroupWithOne` で成り立つ）。
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Algebra.Ring.Defs
@@ -166,5 +174,74 @@ theorem cast_mono' {R : Type*} [AddCommMonoidWithOne R] [PartialOrder R] [IsOrde
     _ ≤ (a : R) + (k : R) := add_le_add (le_refl _) hk                     -- `ι(k) ≥ 0` の両辺に `ι(a)` を足す
     _ = ((a + k : ℕ) : R) := (cast_add' a k).symm                          -- `cast_add'`
     _ = (b : R) := by rw [← hb]
+
+/-- **必要十分版の `inclusion_zz_to_rr_of_successor`**: `ℤ` の埋め込みで `ι(n + 1) = ι(n) + 1`（`n ∈ ℤ`）。
+具体版と同じく `n ∈ ℤ_{≥0}`・`n = -1`・`n = -(p + 1)`（`p ≥ 1`）の 3 つの場合に分ける。 -/
+theorem int_cast_succ' {R : Type*} [AddCommGroupWithOne R] (n : ℤ) : ((n + 1 : ℤ) : R) = ((n : ℤ) : R) + 1 := by
+  have hsucc : ∀ k : ℕ, (((k : ℤ) + 1 : ℤ) : R) = ((k : ℤ) : R) + 1 := fun k =>
+    calc (((k : ℤ) + 1 : ℤ) : R) = (((k + 1 : ℕ) : ℤ) : R) := rfl
+      _ = ((k + 1 : ℕ) : R) := Int.cast_natCast _                          -- `ℤ_{≥0}` の上で 2 つの埋め込みは一致する
+      _ = (k : R) + 1 := Nat.cast_succ k                                   -- 埋め込みの `ι(n + 1) = ι(n) + 1`
+      _ = ((k : ℤ) : R) + 1 := by rw [Int.cast_natCast]                    -- 同じ一致を右辺から左辺へ
+  rcases le_or_gt 0 n with hn | hn
+  · obtain ⟨k, rfl⟩ := Int.eq_ofNat_of_zero_le hn
+    exact hsucc k                                                          -- 埋め込みの `ι(n + 1) = ι(n) + 1`
+  · obtain ⟨m, hm, rfl⟩ : ∃ m : ℤ, 1 ≤ m ∧ n = -m := ⟨-n, by omega, by omega⟩
+    rcases eq_or_lt_of_le hm with h1 | h2
+    · subst h1
+      calc ((-(1 : ℤ) + 1 : ℤ) : R) = ((0 : ℤ) : R) := by rw [neg_add_cancel]  -- `ℤ` の加法逆元
+        _ = 0 := Int.cast_zero                                             -- 埋め込みの `ι(0) = 0`
+        _ = -(1 : R) + 1 := (neg_add_cancel 1).symm                        -- 加法逆元を右辺から左辺へ
+        _ = -((1 : ℤ) : R) + 1 := by rw [Int.cast_one]                     -- 埋め込みの `ι(1) = 1` を右辺から左辺へ
+        _ = ((-(1 : ℤ) : ℤ) : R) + 1 := by rw [Int.cast_neg]               -- 埋め込みの `ι(-n) = -ι(n)` を右辺から左辺へ
+    · obtain ⟨q, hq, rfl⟩ : ∃ q : ℕ, 1 ≤ q ∧ m = (q : ℤ) + 1 := ⟨(m - 1).toNat, by omega, by omega⟩
+      calc ((-((q : ℤ) + 1) + 1 : ℤ) : R) = ((-(q : ℤ) : ℤ) : R) := by
+            rw [show -((q : ℤ) + 1) + 1 = -(q : ℤ) by omega]                -- `ℤ` の四則
+        _ = -((q : ℤ) : R) := Int.cast_neg _                               -- 埋め込みの `ι(-n) = -ι(n)`
+        _ = -((q : ℤ) : R) + 0 := (add_zero _).symm                        -- `0` は和の右単位元
+        _ = -((q : ℤ) : R) + (-(1 : R) + 1) := by rw [neg_add_cancel]      -- 加法逆元を右辺から左辺へ
+        _ = (-((q : ℤ) : R) + -(1 : R)) + 1 := (add_assoc _ _ _).symm       -- 和の結合律を右辺から左辺へ
+        _ = -(((q : ℤ) : R) + 1) + 1 := by rw [neg_add]                    -- `-(x + y) = (-x) + (-y)` を右辺から左辺へ（加法の可換性が効く）
+        _ = -((((q : ℤ) + 1 : ℤ)) : R) + 1 := by rw [hsucc q]              -- 埋め込みの `ι(n + 1) = ι(n) + 1` を右辺から左辺へ
+        _ = ((-((q : ℤ) + 1) : ℤ) : R) + 1 := by rw [Int.cast_neg]         -- 埋め込みの `ι(-n) = -ι(n)` を右辺から左辺へ
+
+/-- **必要十分版の `inclusion_zz_to_rr_preserves_sum`**: `ℤ` の埋め込みで `ι(a + b) = ι(a) + ι(b)`（`a, b ∈ ℤ`）。
+具体版と同じく `b` について `0` から `1` を足す帰納法と `1` を引く帰納法（`Int.induction_on`）。 -/
+theorem int_cast_add' {R : Type*} [AddCommGroupWithOne R] (a b : ℤ) :
+    ((a + b : ℤ) : R) = ((a : ℤ) : R) + ((b : ℤ) : R) := by
+  refine Int.induction_on b ?_ ?_ ?_
+  · calc ((a + 0 : ℤ) : R) = ((a : ℤ) : R) := by rw [add_zero]            -- `0` は `ℤ` の和の単位元
+      _ = ((a : ℤ) : R) + 0 := (add_zero _).symm                           -- `0` は和の右単位元
+      _ = ((a : ℤ) : R) + ((0 : ℤ) : R) := by rw [Int.cast_zero]           -- 埋め込みの `ι(0) = 0` を右辺から左辺へ
+  · intro i ih
+    calc ((a + ((i : ℤ) + 1) : ℤ) : R) = (((a + (i : ℤ)) + 1 : ℤ) : R) := by rw [add_assoc]
+      _ = ((a + (i : ℤ) : ℤ) : R) + 1 := int_cast_succ' _                  -- `int_cast_succ'`（`n → a + b`）
+      _ = (((a : ℤ) : R) + (((i : ℤ)) : R)) + 1 := by rw [ih]              -- 帰納法の仮定
+      _ = ((a : ℤ) : R) + ((((i : ℤ)) : R) + 1) := add_assoc _ _ _         -- 和の結合律
+      _ = ((a : ℤ) : R) + ((((i : ℤ) + 1 : ℤ)) : R) := by rw [int_cast_succ' (i : ℤ)]
+                                                                           -- `int_cast_succ'`（`n → b`）を右辺から左辺へ
+  · intro i ih
+    calc ((a + (-(i : ℤ) - 1) : ℤ) : R)
+        = ((a + (-(i : ℤ) - 1) : ℤ) : R) + 0 := (add_zero _).symm          -- `0` は和の右単位元
+      _ = ((a + (-(i : ℤ) - 1) : ℤ) : R) + (1 + -(1 : R)) := by rw [add_neg_cancel]
+                                                                           -- 加法逆元を右辺から左辺へ
+      _ = (((a + (-(i : ℤ) - 1) : ℤ) : R) + 1) + -(1 : R) := (add_assoc _ _ _).symm
+                                                                           -- 和の結合律を右辺から左辺へ
+      _ = (((a + (-(i : ℤ) - 1)) + 1 : ℤ) : R) + -(1 : R) := by
+          rw [int_cast_succ' (a + (-(i : ℤ) - 1))]                         -- `int_cast_succ'` を右辺から左辺へ
+      _ = ((a + -(i : ℤ) : ℤ) : R) + -(1 : R) := by
+          rw [show (a + (-(i : ℤ) - 1)) + 1 = a + -(i : ℤ) by omega]        -- `ℤ` の四則
+      _ = (((a : ℤ) : R) + ((-(i : ℤ) : ℤ) : R)) + -(1 : R) := by rw [ih]  -- 帰納法の仮定
+      _ = ((a : ℤ) : R) + (((-(i : ℤ) : ℤ) : R) + -(1 : R)) := add_assoc _ _ _
+                                                                           -- 和の結合律
+      _ = ((a : ℤ) : R) + ((((-(i : ℤ) - 1) + 1 : ℤ) : R) + -(1 : R)) := by
+          rw [show (-(i : ℤ) - 1) + 1 = -(i : ℤ) by omega]                  -- `ℤ` の四則
+      _ = ((a : ℤ) : R) + ((((-(i : ℤ) - 1 : ℤ) : R) + 1) + -(1 : R)) := by
+          rw [int_cast_succ' (-(i : ℤ) - 1)]                               -- `int_cast_succ'`（`n → b - 1`）
+      _ = ((a : ℤ) : R) + (((-(i : ℤ) - 1 : ℤ) : R) + (1 + -(1 : R))) := by
+          rw [add_assoc (((-(i : ℤ) - 1 : ℤ) : R))]                        -- 和の結合律
+      _ = ((a : ℤ) : R) + (((-(i : ℤ) - 1 : ℤ) : R) + 0) := by rw [add_neg_cancel]
+                                                                           -- 加法逆元
+      _ = ((a : ℤ) : R) + ((-(i : ℤ) - 1 : ℤ) : R) := by rw [add_zero]     -- `0` は和の右単位元
 
 end Ising2D.NecSuf

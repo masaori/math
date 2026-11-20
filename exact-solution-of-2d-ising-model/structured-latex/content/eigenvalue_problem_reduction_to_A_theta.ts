@@ -2627,7 +2627,7 @@ k
 &=\frac{2\pi\left((\mu+M_{\mathrm{col}})_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \tilde\theta\text{ の定義を }\mu+M_{\mathrm{col}}\in\mathbb Z\text{ で。}\blkref{antiperiodic_exp_sum}\bigr)\\
 &=\frac{2\pi\left((\mu_{\mathbb R}+(M_{\mathrm{col}})_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和を保つ}\bigr)\\
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a \to \mu,\ b \to M_{\mathrm{col}})\bigr)\\
 &=\frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \mathbb R\text{ の加法の交換律}\bigr)\\
 &=\frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\mu_{\mathbb R}\right)+\left(-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -2685,6 +2685,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
         "2026-11-02（全証明の SageMath 検算）: half_integer_checkZ_periodicity と half_integer_checkY_periodicity の証明が同じ二つの鎖（添字をずらした角度と係数の一致）を重複して持っていたので、係数の一致を一つの主張に切り出した。",
         "2026-11-09（Lean の通しの証明）: 主張の -i(·)_C の読みが書かれていなかった。def_half_integer_checkZ・def_half_integer_checkY の係数と同じ (-i)(·)_C の読みを主張に書き、exp_of_negative_i_real_as_cos_minus_i_sin（-iθ_C は -(iθ_C)）を当てる 1 行目の前と末尾の行の後に negative_i_times_complex_is_negation_of_i_times の行を 1 行ずつ足した（4 等号 → 6 等号）。ほかの行は変えていない。",
         "2026-11-10（Lean の通しの証明）: 1 行に 2 つの事実を当てていた 2 行を割った。角度の鎖の「ℝ の加法の結合律と交換律」を、交換律・差の定義（def_real_difference）・結合律・差の定義（右辺から左辺へ）・交換律の 5 行に（7 等号 → 11 等号）、主鎖の「cos,sin の 2π 周期性を 2 箇所へ同時適用」を、cos の周期性と sin の周期性の 2 行に（6 等号 → 7 等号）した。主張の中身は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b2)。ℤ 全体で和を保つ主張の件）: 準備の鎖の 2 行目の名前だけの根拠「ι_{ℤ→ℝ} は和を保つ」を、新しく足した inclusion_zz_to_rr_preserves_sum（a → μ、b → M_col。μ ∈ ℤ は符号が決まっていない）の参照にした。主張・鎖・段数は不変。Lean の thetaTilde_period_for_checkZY の対応する段の Int.cast_add を Ising2D.inclusion_zz_to_rr_preserves_sum に替えた。",
       ],
     },
   },

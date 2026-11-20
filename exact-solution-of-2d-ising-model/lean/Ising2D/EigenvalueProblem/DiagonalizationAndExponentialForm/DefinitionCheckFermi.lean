@@ -82,7 +82,8 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
       = 2 * Real.pi * (((μ + k * M : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
                                                   -- 1 行目: `θ̃` の定義を `μ+kM_col` で（`antiperiodic_exp_sum`）
     _ = 2 * Real.pi * (((μ : ℝ) + ((k * M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [Int.cast_add]                         -- 2 行目: `ι_{ℤ→ℝ}` は和を保つ
+        rw [inclusion_zz_to_rr_preserves_sum μ (k * M)]
+                                                  -- 2 行目: `inclusion_zz_to_rr_preserves_sum`（`a → μ`, `b → kM_col`）
     _ = 2 * Real.pi * (((μ : ℝ) + (k : ℝ) * ((M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [Int.cast_mul]                         -- 3 行目: `ι_{ℤ→ℝ}` は積を保つ
     _ = 2 * Real.pi * (((k : ℝ) * ((M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
@@ -145,7 +146,8 @@ theorem periodicity_prep_int_cast_neg (k : ℤ) : ((-k : ℤ) : ℝ) = -(k : ℝ
     _ = (((-k : ℤ) : ℝ) + (k : ℝ)) + (-(k : ℝ)) := (add_assoc _ _ _).symm
                                                   -- 3 行目: ℝ の加法の結合律
     _ = (((-k + k : ℤ)) : ℝ) + (-(k : ℝ)) := by
-        rw [Int.cast_add]                         -- 4 行目: `ι_{ℤ→ℝ}` は和を保つ
+        rw [inclusion_zz_to_rr_preserves_sum (-k) k]
+                                                  -- 4 行目: `inclusion_zz_to_rr_preserves_sum`（`a → -k`, `b → k`）を右辺から左辺へ
     _ = ((0 : ℤ) : ℝ) + (-(k : ℝ)) := by
         rw [neg_add_cancel]                       -- 5 行目: ℤ で `(-k) + k = 0`
     _ = (0 : ℝ) + (-(k : ℝ)) := by

@@ -1445,6 +1445,242 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_claim_inclusion_zz_to_rr_of_successor",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n+1) = \iota_{\mathbb{Z}\to\mathbb{R}}(n)+1\quad(n \in \mathbb{Z})` },
+    labels: ["inclusion_zz_to_rr_of_successor"],
+    statement: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " について、",
+        math(String.raw`n \in \mathbb{Z}`),
+        " なら",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) = \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}`),
+      paragraph([
+        "である（",
+        ref("inclusion_zz_to_rr"),
+        " はこの式を ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " についてだけ定めている）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " のとおり ",
+        math(String.raw`\mathbb{Z}`),
+        " の各元は、",
+        math(String.raw`\mathbb{Z}_{\geq 0}`),
+        " の元であるか、ある ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`-m`),
+        " と書けるかの、ちょうど一方である。",
+        math(String.raw`\mathbb{Z}_{\geq 1}`),
+        " の元 ",
+        math(String.raw`m`),
+        " は、",
+        math(String.raw`1_{\mathbb{Z}}`),
+        " であるか、ある ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`p +_{\mathbb{Z}} 1_{\mathbb{Z}}`),
+        " と書けるかの、ちょうど一方である。よって ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`n = -1_{\mathbb{Z}}`),
+        "、",
+        math(String.raw`n = -(p +_{\mathbb{Z}} 1_{\mathbb{Z}})`),
+        "（",
+        math(String.raw`p \in \mathbb{Z}_{\geq 1}`),
+        "）の 3 つの場合に分ける。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}})
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)
+\end{aligned}`),
+      paragraph(["である。", math(String.raw`n = -1_{\mathbb{Z}}`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}\bigl((-1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}})
+  &&\bigl(\because\ \mathbb{Z}\ \text{の加法逆元}\ (-1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}} = 0_{\mathbb{Z}}\bigr)\\
+&= 0_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\bigr)\\
+&= (-1_{\mathbb{R}}) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \mathbb{R}\ \text{の加法逆元}\ (-1_{\mathbb{R}}) +_{\mathbb{R}} 1_{\mathbb{R}} = 0_{\mathbb{R}}\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}})\bigr) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(-1_{\mathbb{Z}}) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(-n) := -\iota_{\mathbb{Z}\to\mathbb{R}}(n)\ (n \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n = -(p +_{\mathbb{Z}} 1_{\mathbb{Z}})`),
+        "（",
+        math(String.raw`p \in \mathbb{Z}_{\geq 1}`),
+        "）のとき、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`p +_{\mathbb{Z}} 1_{\mathbb{Z}} \in \mathbb{Z}_{\geq 1}`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}\bigl(-(p +_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(-p)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ -(p +_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}} = -p\bigr)\\
+&= -\iota_{\mathbb{Z}\to\mathbb{R}}(p)
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(-n) := -\iota_{\mathbb{Z}\to\mathbb{R}}(n)\ (n \to p)\bigr)\\
+&= \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(p)\bigr) +_{\mathbb{R}} 0_{\mathbb{R}}
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)\\
+&= \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(p)\bigr) +_{\mathbb{R}} \bigl((-1_{\mathbb{R}}) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の加法逆元}\ (-1_{\mathbb{R}}) +_{\mathbb{R}} 1_{\mathbb{R}} = 0_{\mathbb{R}}\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(p)\bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})\Bigr) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律を右辺から左辺へ}\bigr)\\
+&= -\bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(p) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ (x \to \iota_{\mathbb{Z}\to\mathbb{R}}(p),\ y \to 1_{\mathbb{R}})\ \text{を右辺から左辺へ}\bigr)\\
+&= -\iota_{\mathbb{Z}\to\mathbb{R}}(p +_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ (n \to p)\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(-(p +_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(-n) := -\iota_{\mathbb{Z}\to\mathbb{R}}(n)\ (n \to p +_{\mathbb{Z}} 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b2)）: 原文（Typst）に対応ブロックは無い。inclusion_zz_to_rr は ι(n + 1) := ι(n) + 1 を n ∈ ℤ_{≥0} についてだけ定めるので、ℤ 全体で和を保つ主張 inclusion_zz_to_rr_preserves_sum の帰納法の段で引けるよう、ℤ 全体の場合を示す主張として足した。Lean の具体版は Ising2D.inclusion_zz_to_rr_of_successor、必要十分版は Ising2D.NecSuf.int_cast_succ'。数値検証: sagemath/check/inclusion_zz_to_rr_of_successor/。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_inclusion_zz_to_rr_preserves_sum",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a+b) = \iota_{\mathbb{Z}\to\mathbb{R}}(a)+\iota_{\mathbb{Z}\to\mathbb{R}}(b)\quad(a, b \in \mathbb{Z})` },
+    labels: ["inclusion_zz_to_rr_preserves_sum"],
+    statement: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " について、",
+        math(String.raw`a, b \in \mathbb{Z}`),
+        " なら",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} b) = \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a \in \mathbb{Z}`),
+        " を固定する。",
+        math(String.raw`\mathbb{Z}`),
+        " の各元は ",
+        math(String.raw`\mathbb{Z}_{\geq 0}`),
+        " か ",
+        math(String.raw`\mathbb{Z}_{\leq 0}`),
+        " の元であり、",
+        math(String.raw`\mathbb{Z}_{\geq 0}`),
+        " の元は ",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " から ",
+        math(String.raw`1_{\mathbb{Z}}`),
+        " を足すことを、",
+        math(String.raw`\mathbb{Z}_{\leq 0}`),
+        " の元は ",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " から ",
+        math(String.raw`1_{\mathbb{Z}}`),
+        " を引くことを有限回繰り返して得られる。よって ",
+        math(String.raw`b = 0_{\mathbb{Z}}`),
+        " で主張を示し、",
+        math(String.raw`b`),
+        " で成り立てば ",
+        math(String.raw`b \in \mathbb{Z}_{\geq 0}`),
+        " のとき ",
+        math(String.raw`b +_{\mathbb{Z}} 1_{\mathbb{Z}}`),
+        " で、",
+        math(String.raw`b \in \mathbb{Z}_{\leq 0}`),
+        " のとき ",
+        math(String.raw`b -_{\mathbb{Z}} 1_{\mathbb{Z}}`),
+        " で成り立つことを示す。",
+        math(String.raw`b = 0_{\mathbb{Z}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} 0_{\mathbb{Z}})
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a)
+  &&\bigl(\because\ 0_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の和の単位元}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} 0_{\mathbb{R}}
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}})
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`b \in \mathbb{Z}_{\geq 0}`),
+        " で主張が成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a +_{\mathbb{Z}} (b +_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((a +_{\mathbb{Z}} b) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の和の結合律}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} b) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_successor}\ (n \to a +_{\mathbb{Z}} b)\bigr)\\
+&= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr) +_{\mathbb{R}} 1_{\mathbb{R}}
+  &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b +_{\mathbb{Z}} 1_{\mathbb{Z}})
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_successor}\ (n \to b)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`b \in \mathbb{Z}_{\leq 0}`),
+        " で主張が成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr) +_{\mathbb{R}} 0_{\mathbb{R}}
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr) +_{\mathbb{R}} \bigl(1_{\mathbb{R}} +_{\mathbb{R}} (-1_{\mathbb{R}})\bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の加法逆元}\ 1_{\mathbb{R}} +_{\mathbb{R}} (-1_{\mathbb{R}}) = 0_{\mathbb{R}}\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr) +_{\mathbb{R}} 1_{\mathbb{R}}\Bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})
+  &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\Bigl(\bigl(a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr) +_{\mathbb{Z}} 1_{\mathbb{Z}}\Bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_successor}\ (n \to a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}}))\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} b) +_{\mathbb{R}} (-1_{\mathbb{R}})
+  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ \bigl(a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr) +_{\mathbb{Z}} 1_{\mathbb{Z}} = a +_{\mathbb{Z}} b\bigr)\\
+&= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})
+  &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b) +_{\mathbb{R}} (-1_{\mathbb{R}})\bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \Bigl(\iota_{\mathbb{Z}\to\mathbb{R}}\bigl((b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})\Bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ b = (b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \Bigl(\bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})\Bigr)
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_successor}\ (n \to b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \Bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{R}} \bigl(1_{\mathbb{R}} +_{\mathbb{R}} (-1_{\mathbb{R}})\bigr)\Bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{R}} 0_{\mathbb{R}}\bigr)
+  &&\bigl(\because\ \mathbb{R}\ \text{の加法逆元}\ 1_{\mathbb{R}} +_{\mathbb{R}} (-1_{\mathbb{R}}) = 0_{\mathbb{R}}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b -_{\mathbb{Z}} 1_{\mathbb{Z}})
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b2)）: 原文（Typst）に対応ブロックは無い。periodicity_of_check_fermi の準備の第二と (2) の θ̃_{μ+kM_col} の鎖、half_integer_phase_periodicity の準備の鎖が、符号の決まっていない ℤ の元の和について「ι_{ℤ→ℝ} は和を保つ」を名前だけで使っていた（inclusion_zz_to_rr_preserves_sum_of_nonnegatives は a, b ∈ ℤ_{≥0} だけ）ので、ℤ 全体の主張として足した。Lean の具体版は Ising2D.inclusion_zz_to_rr_preserves_sum、必要十分版は Ising2D.NecSuf.int_cast_add'。数値検証: sagemath/check/inclusion_zz_to_rr_preserves_sum/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_inclusion_zz_to_rr_of_positive_is_at_least_one",
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n) \geq 1_{\mathbb{R}}\quad(n \geq 1)` },

@@ -69,7 +69,8 @@ theorem thetaTilde_period_for_checkZY (hM : M ≠ 0) (μ : ℤ) :
       = 2 * Real.pi * (((μ + (M : ℤ) : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
                                                   -- 1 行目: `θ~` の定義を `μ+M_col` で（`antiperiodic_exp_sum`）
     _ = 2 * Real.pi * (((μ : ℝ) + ((M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [Int.cast_add]                         -- 2 行目: `ι_{ℤ→ℝ}` は和を保つ
+        rw [inclusion_zz_to_rr_preserves_sum μ (M : ℤ)]
+                                                  -- 2 行目: `inclusion_zz_to_rr_preserves_sum`（`a → μ`, `b → M_col`）
     _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [add_comm (μ : ℝ)]                     -- 3 行目: ℝ の加法の交換律
     _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + (μ : ℝ)) + (-(1 / 2))) / ((M : ℤ) : ℝ) := by
