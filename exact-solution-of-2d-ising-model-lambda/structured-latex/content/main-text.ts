@@ -60946,6 +60946,121 @@ f
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_linear_factor_product_root_is_listed_root",
+        labels: [],
+        title: { text: "一次因子の積の根" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_qbar_linear_factor_product_root_is_listed_root",
+              focus:
+                {
+                  id: "zero_pinching_claim_qbar_linear_factor_product_root_is_listed_root",
+                  kind: "claim",
+                  title: { text: "代数的数を根とする一次因子の有限積の根は、因子の根のどれかである" },
+                  labels: ["claim_qbar_linear_factor_product_root_is_listed_root"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/qbar-linear-factor-product-root-is-listed-root"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.qbarLinearFactorProductRootIsListedRoot",
+                    "Ising2DLambda.NecSuf.FisherZero.linear_factor_product_root_is_listed_root_necSuf",
+                    "Ising2DLambda.FisherZero.qbarLinearFactorProductRootIsListedRoot_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`N\in\mathbb{N}`),
+                      "、写像 ",
+                      math(String.raw`\beta:\mathbb{N}\to\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）、",
+                      math(String.raw`z\in\overline{\mathbb{Q}}`),
+                      " を任意に取り、",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      "（",
+                      ref("def_qbar_polynomial_ring"),
+                      "）の元",
+                    ]),
+                    displayMath(String.raw`P:=\prod_{r=0}^{N-1}\bigl(t-\widehat{\beta(r)}\bigr)`),
+                    paragraph([
+                      "を置く（番号の小さい因子から順に掛ける有限積で、",
+                      math(String.raw`N=0`),
+                      " のときは単位元。",
+                      math(String.raw`\widehat{\ \cdot\ }`),
+                      " は ",
+                      ref("def_qbar_constant_embedding"),
+                      "）。",
+                      math(String.raw`\mathrm{aev}_{z}(P)=0`),
+                      "（",
+                      ref("def_qbar_poly_evaluation"),
+                      "）ならば、",
+                      math(String.raw`r<N`),
+                      " を満たすある ",
+                      math(String.raw`r\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`z=\beta(r)`),
+                      " である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`\mathrm{aev}_{z}(P)=0`),
+                      " と仮定する。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+0
+&=\mathrm{aev}_{z}(P)
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&=\mathrm{aev}_{z}\Bigl(\prod_{r=0}^{N-1}\bigl(t-\widehat{\beta(r)}\bigr)\Bigr)
+&&\bigl(\because\ P\text{ の置き方}\bigr)\\
+&=\prod_{r=0}^{N-1}\mathrm{aev}_{z}\bigl(t-\widehat{\beta(r)}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\text{ の、}\mathrm{aev}_{z}\text{ は積と単位元を保つこと}\bigr)\\
+&=\prod_{r=0}^{N-1}\Bigl(\mathrm{aev}_{z}(t)-\mathrm{aev}_{z}\bigl(\widehat{\beta(r)}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\text{ の、}\mathrm{aev}_{z}\text{ は和と加法の逆元を保つこと}\bigr)\\
+&=\prod_{r=0}^{N-1}\bigl(z-\beta(r)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\text{ の }\mathrm{aev}_{z}(t)=z\text{ と }\mathrm{aev}_{z}(\widehat{a})=a\bigr)
+\end{aligned}`),
+                    paragraph([
+                      ref("claim_qbar_prod_eq_zero"),
+                      " を、有限集合 ",
+                      math(String.raw`s=\{r\in\mathbb{N}\mid r<N\}`),
+                      " と ",
+                      math(String.raw`c_r=z-\beta(r)\in\overline{\mathbb{Q}}`),
+                      " へ当てると、",
+                      math(String.raw`r_0<N`),
+                      " を満たすある ",
+                      math(String.raw`r_0\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`z-\beta(r_0)=0`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+z
+&=\bigl(z-\beta(r_0)\bigr)+\beta(r_0)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の加法の結合則と逆元}\bigr)\\
+&=0+\beta(r_0)
+&&\bigl(\because\ z-\beta(r_0)=0\bigr)\\
+&=\beta(r_0)
+&&\bigl(\because\ 0\text{ は加法の単位元}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "よって ",
+                      math(String.raw`r=r_0`),
+                      " が求めるものである。全過程は代数的数とそれを係数とする多項式の有限積・四則だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_pair_shift_root_polynomial",
         labels: [],
         title: { text: "根の対の整数倍のずらしを根とする多項式" },

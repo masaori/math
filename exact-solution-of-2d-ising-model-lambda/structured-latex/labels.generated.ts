@@ -506,6 +506,7 @@ export const ALL_LABELS = [
   "claim_qbar_linear_factor_pow_mul_coeff_bound",
   "claim_qbar_linear_factor_pow_mul_leading_coeff",
   "claim_qbar_linear_factor_powers_bezout",
+  "claim_qbar_linear_factor_product_root_is_listed_root",
   "claim_qbar_matrix_eval_identity",
   "claim_qbar_matrix_eval_pow",
   "claim_qbar_matrix_eval_product",
