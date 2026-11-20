@@ -53030,13 +53030,10 @@ y^{-1}=z&\in\mathrm{Val}_F(\alpha)&&\bigl(\because\ \text{上の二行と}\ \blk
                       " なら、",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-(-a)\cdot(-a)&\in C_F&&\bigl(\because\ -a\in C_F\ \text{と}\ \blkref{def_subfield_positive_cone}\ \text{の第二条件}\bigr),\\
-(-a)\cdot(-a)&=a\cdot a&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr),
+a\cdot a&=(-a)\cdot(-a)&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
+&\in C_F&&\bigl(\because\ -a\in C_F\ \text{と}\ \blkref{def_subfield_positive_cone}\ \text{の第二条件}\bigr)
 \end{aligned}`),
                     paragraph([
-                      "なので ",
-                      math(String.raw`a\cdot a\in C_F`),
-                      " である。",
                       math(String.raw`a=1`),
                       " に当てれば、",
                       math(String.raw`1\in F`),
