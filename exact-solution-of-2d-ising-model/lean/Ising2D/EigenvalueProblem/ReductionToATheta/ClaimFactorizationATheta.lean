@@ -47,7 +47,7 @@ Lean 側の `factorization_of_A_theta_general` は `K_2^*` を任意の実数と
 （どちらも `ClaimCoshAdditionAndHalfAngle.lean`）で受ける。どちらも人手の鎖と 1 対 1 の `calc` である（`sinh` の側は、最後に Lean にだけ乗法の結合律の段がある）。
 またそのファイルの (2)〜(5) は旧ラベル `cosh_addition_and_half_angle`（2026-11-02 に
 `cosh_addition_formula`・`sinh_double_angle_formula` などへ分割された）の項の番号で書いてある。
-この 3 本で、具体版が Lean に無いので mathlib で受けた行は `cosh_sinh_basic_properties` (2)（`Real.cosh_sq_sub_sinh_sq`）だけである。
+この 3 本で `cosh_sinh_basic_properties` (2) は具体版 `cosh_sinh_basic_properties_2`（`ClaimCoshSinhBasicProperties.lean`）で受ける。
 
 ## 準備の `e_±` の鎖、補助的な等式 2 本と `C = S(c_2)_ℂ`
 
@@ -109,6 +109,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimE
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -173,7 +174,7 @@ theorem factorization_prep_sq_sub_sq (K1 : ℝ) :
     _ = ((Real.cosh K1 ^ 2 - Real.sinh K1 ^ 2 : ℝ) : ℂ) := by
         rw [neg_one_mul, ← sub_eq_add_neg, ← sq, ← sq]             -- ℝ の差と二乗の記法
     _ = ((1 : ℝ) : ℂ) := by
-        rw [Real.cosh_sq_sub_sinh_sq]                              -- `cosh_sinh_basic_properties` (2)
+        rw [cosh_sinh_basic_properties_2]                          -- `cosh_sinh_basic_properties` (2)
     _ = 1 := Complex.ofReal_one                                    -- `inclusion_rr_to_cc` の略記
 
 /-! ## 準備の `e_±` の鎖 -/

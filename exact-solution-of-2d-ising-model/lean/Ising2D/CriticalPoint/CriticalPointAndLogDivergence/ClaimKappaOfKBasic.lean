@@ -37,6 +37,7 @@
 import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.DefinitionKappaAndCritical
 import Ising2D.NecSuf.MeanValueTwoSided
 import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -79,7 +80,7 @@ theorem sinh_two_Kc : Real.sinh (2 * Kc) = 1 := by
 
 theorem cosh_two_Kc : Real.cosh (2 * Kc) = Real.sqrt 2 := by
   have hsq : Real.cosh (2 * Kc) ^ 2 = 2 := by
-    rw [Real.cosh_sq, sinh_two_Kc]; norm_num
+    rw [cosh_sq_eq_one_add_sinh_sq, sinh_two_Kc]; norm_num
   have hpos : 0 < Real.cosh (2 * Kc) := Real.cosh_pos _
   have h := congrArg Real.sqrt hsq
   rwa [Real.sqrt_sq hpos.le] at h
@@ -113,7 +114,7 @@ theorem hasDerivAt_tanh_real (K : ℝ) : HasDerivAt Real.tanh (1 / Real.cosh K ^
   -- `cosh² K - sinh² K = 1`
   have hv : (Real.cosh K * Real.cosh K - Real.sinh K * Real.sinh K) / Real.cosh K ^ 2
       = 1 / Real.cosh K ^ 2 := by
-    rw [← Real.cosh_sq_sub_sinh_sq K]; ring
+    rw [← cosh_sinh_basic_properties_2 K]; ring
   rw [hfun, ← hv]
   exact h
 
@@ -255,7 +256,7 @@ theorem abs_kappaSecond_le {K : ℝ} (hK : K ∈ Dnbhd) : |kappaSecond K| ≤ 9.
   obtain ⟨hl, hu⟩ := sinh_two_K_bounds hK
   have hs : 0 < Real.sinh (2 * K) := by linarith
   have hc : 0 < Real.cosh (2 * K) := Real.cosh_pos _
-  have hcs : Real.cosh (2 * K) ^ 2 = Real.sinh (2 * K) ^ 2 + 1 := Real.cosh_sq _
+  have hcs : Real.cosh (2 * K) ^ 2 = 1 + Real.sinh (2 * K) ^ 2 := cosh_sq_eq_one_add_sinh_sq _
   have hkey : 4 * Real.cosh (2 * K) ≤ 9.3 * Real.sinh (2 * K) ^ 2 := by
     nlinarith [hcs, hc, hs, hl, sq_nonneg (Real.sinh (2 * K) ^ 2 - 0.5348)]
   simp only [kappaSecond]

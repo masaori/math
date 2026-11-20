@@ -117,7 +117,7 @@ theorem s2star_eq_inv_s2 {K2 : ℝ} (hK2 : 0 < K2) :
       field_simp
     _ = 1 / Real.sinh (2 * K2) := by
       -- `cosh² x - sinh² x = 1`、`2 sinh x cosh x = sinh 2x`
-      rw [Real.cosh_sq_sub_sinh_sq, sinh_two_eq_two_sinh_mul_cosh]
+      rw [cosh_sinh_basic_properties_2, sinh_two_eq_two_sinh_mul_cosh]
 
 /-- **人手 `duality_c2_star_eq_s2_star_c2` の第二式** `c_2^* = c_2/s_2`。 -/
 theorem c2star_eq_c2_div_s2 {K2 : ℝ} (hK2 : 0 < K2) :

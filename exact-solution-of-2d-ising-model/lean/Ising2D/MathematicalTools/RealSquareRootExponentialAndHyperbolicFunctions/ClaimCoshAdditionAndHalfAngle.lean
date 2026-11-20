@@ -32,6 +32,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimSinhIsOdd
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimSinhStrictlyIncreasing
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -143,7 +144,7 @@ theorem sinh_sub_formula (x y : ℝ) :
 /-- 人手証明 (2): `cosh x = 1 + 2 sinh²(x/2)`。 -/
 theorem cosh_eq_one_add_two_sinh_half_sq (x : ℝ) :
     Real.cosh x = 1 + 2 * Real.sinh (x / 2) ^ 2 := by
-  have hcs := Real.cosh_sq (x / 2)
+  have hcs := cosh_sq_eq_one_add_sinh_sq (x / 2)
   have h2 := Real.cosh_two_mul (x / 2)
   rw [show 2 * (x / 2) = x by ring] at h2
   rw [h2, hcs]; ring

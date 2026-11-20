@@ -125,7 +125,7 @@ theorem hasDerivAt_logTermDeriv {K : ℝ} (hK : 0 < K) :
         - Real.cosh (2 * K) * (Real.cosh (2 * K) * 2)) / Real.sinh (2 * K) ^ 2
       = -(2 / Real.sinh (2 * K) ^ 2) := by
     have hid : Real.cosh (2 * K) ^ 2 - Real.sinh (2 * K) ^ 2 = 1 :=
-      Real.cosh_sq_sub_sinh_sq (2 * K)
+      cosh_sinh_basic_properties_2 (2 * K)
     field_simp
     nlinarith [hid]
   rwa [hv] at hdiv

@@ -170,7 +170,7 @@ theorem integral_d2gammaK_eq {κ : ℝ} (hκ : κ ≠ 0) :
 /-! ## Step 4: `J` の評価 -/
 
 theorem Sfun_le_cosh_sq (θ κ : ℝ) : Sfun θ κ ≤ Real.cosh (κ / 2) ^ 2 := by
-  have h := Real.cosh_sq (κ / 2)
+  have h := cosh_sq_eq_one_add_sinh_sq (κ / 2)
   have hs : Real.sin (θ / 2) ^ 2 ≤ 1 := by
     nlinarith [Real.sin_sq_add_cos_sq (θ / 2), sq_nonneg (Real.cos (θ / 2))]
   simp only [Sfun]

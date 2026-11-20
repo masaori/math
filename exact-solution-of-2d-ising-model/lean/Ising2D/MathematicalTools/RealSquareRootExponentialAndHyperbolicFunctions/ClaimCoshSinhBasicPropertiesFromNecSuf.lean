@@ -1,10 +1,12 @@
 /-
-# `cosh`・`sinh` の基本性質 (1)・(3)（具体版を必要十分版から導く）
+# `cosh`・`sinh` の基本性質 (1)・(2)・(3)（具体版を必要十分版から導く）
 
 具体版 `ClaimCoshSinhBasicProperties.lean` の主張を、必要十分版 `Ising2D/NecSuf/HyperbolicBasicPropertiesFromMonotoneMap.lean` の
 定義域 `G := ℝ`、値域 `R := ℝ`、写像 `e := Real.exp`、`c := Real.cosh`、`s := Real.sinh` の特殊化として得る。
 `c`・`s` の定義の仮定には mathlib の `Real.cosh_eq`・`Real.sinh_eq`（`/2` を `·⅟2` へ読み替える `cosh_eq_mul_invOf_two`・
 `sinh_eq_mul_invOf_two`）、`e` の正値性には具体版 `real_exp_positive`、狭義単調性には mathlib の `Real.exp_lt_exp` を当てる。
+(2) の `e(x)` と `e(−x)` の可換性には ℝ の乗法の可換律（`Commute.all`）、`e(−x)e(x) = e(−x + x)` には mathlib の `Real.exp_add`
+（人手の `scalar_exp_product`）、`e(0) = 1` には mathlib の `Real.exp_zero`（人手の `scalar_exp_zero`）を当てる。
 人手のラベルは `cosh_sinh_basic_properties`。
 -/
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
@@ -33,5 +35,10 @@ theorem cosh_sinh_basic_properties_3_of_necSuf {x : ℝ} (hx : x > 0) :
     Real.cosh x > Real.sinh x ∧ Real.sinh x > 0 :=
   NecSuf.evenPart_gt_oddPart_pos' Real.exp Real.cosh Real.sinh real_exp_positive
     (fun _ _ h => Real.exp_lt_exp.mpr h) cosh_eq_mul_invOf_two sinh_eq_mul_invOf_two hx
+
+/-- `cosh_sinh_basic_properties` (2) を `NecSuf.evenPart_sq_sub_oddPart_sq'` の特殊化として得る。 -/
+theorem cosh_sinh_basic_properties_2_of_necSuf (x : ℝ) : Real.cosh x ^ 2 - Real.sinh x ^ 2 = 1 :=
+  NecSuf.evenPart_sq_sub_oddPart_sq' Real.exp Real.cosh Real.sinh
+    cosh_eq_mul_invOf_two sinh_eq_mul_invOf_two x (Commute.all _ _) (Real.exp_add (-x) x).symm Real.exp_zero
 
 end Ising2D

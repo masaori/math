@@ -76,18 +76,20 @@
 | `Ising2D.cosh_at_least_one` | **`cosh x ≥ 1`**（人手の含意の 3 式と鎖の 3 行と 1 対 1。半角公式は `cosh_eq_one_add_two_sinh_half_sq`） | 主張全体 |
 | `Ising2D.cosh_at_least_one_of_necSuf` | 同じ主張を `NecSuf.one_add_two_mul_sq_ge_one'` の特殊化として得る（`ClaimCoshAtLeastOneFromNecSuf.lean`） | 主張全体 |
 
-### `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshSinhBasicProperties.lean`（ラベル `cosh_sinh_basic_properties` の (1)・(3)）
+### `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshSinhBasicProperties.lean`（ラベル `cosh_sinh_basic_properties` の (1)・(2)・(3)）
 
-本文の置き場は `003_exp_linear_map.ts`。章「V^{(+)} の最大固有値に属する固有ベクトル」の `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 6 が (3) の `sinh x > 0` を引く。(2)・(4) は未形式化。
+本文の置き場は `003_exp_linear_map.ts`。章「V^{(+)} の最大固有値に属する固有ベクトル」の `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 6 が (3) の `sinh x > 0` を引く。(4) は未形式化。
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
 | `Ising2D.cosh_sub_sinh_eq_exp_neg`・`Ising2D.cosh_add_sinh_eq_exp` | `cosh x ∓ sinh x = exp(∓x)`（人手の 4 行の鎖 2 本と 1 対 1） | (1) |
 | `Ising2D.cosh_sub_sinh_pos`・`Ising2D.real_cosh_gt_sinh`・`Ising2D.two_cosh_pos`・`Ising2D.cosh_pos_of_two_cosh_pos` | `cosh x − sinh x > 0`・`cosh x > sinh x`・`2cosh x > 0`・`cosh x > 0`（人手の鎖と含意と 1 対 1） | (1) |
 | `Ising2D.cosh_sinh_basic_properties_1` | (1) の主張全体 | (1) |
+| `Ising2D.cosh_sinh_basic_properties_2` | `(cosh x)² − (sinh x)² = 1`（人手の 5 行の鎖と 1 対 1。`scalar_exp_product`・`scalar_exp_zero` は mathlib の `Real.exp_add`・`Real.exp_zero`） | (2) |
+| `Ising2D.cosh_sq_eq_one_add_sinh_sq` | (2) を移項した形 `(cosh x)² = 1 + (sinh x)²`（人手が「(2) を移項」と引く行の受け口） | (2) |
 | `Ising2D.real_neg_lt_zero_of_pos`・`Ising2D.real_exp_neg_lt_one`・`Ising2D.real_one_lt_exp`・`Ising2D.real_exp_sub_exp_neg_pos`・`Ising2D.real_sinh_pos_of_pos` | `x > 0` から `sinh x > 0` までの含意と鎖（人手の行と 1 対 1。`real_exp_strictly_increasing` は mathlib の `Real.exp_lt_exp`） | (3) |
 | `Ising2D.cosh_sinh_basic_properties_3` | (3) の主張全体 `cosh x > sinh x > 0` | (3) |
-| `Ising2D.cosh_sinh_basic_properties_1_of_necSuf`・`Ising2D.cosh_sinh_basic_properties_3_of_necSuf` | 同じ主張を `NecSuf/HyperbolicBasicPropertiesFromMonotoneMap.lean` の特殊化として得る（`ClaimCoshSinhBasicPropertiesFromNecSuf.lean`） | (1)・(3) |
+| `Ising2D.cosh_sinh_basic_properties_1_of_necSuf`・`Ising2D.cosh_sinh_basic_properties_2_of_necSuf`・`Ising2D.cosh_sinh_basic_properties_3_of_necSuf` | 同じ主張を `NecSuf/HyperbolicBasicPropertiesFromMonotoneMap.lean` の特殊化として得る（`ClaimCoshSinhBasicPropertiesFromNecSuf.lean`） | (1)・(2)・(3) |
 
 ### 1.2 `CriticalPoint/CriticalPointAndLogDivergence/DefinitionKappaAndCritical.lean`（ラベル `def_kappa`, `def_critical_sinh_product_A`, `gamma_kappa_identity`, `critical_point_iff_kappa_zero`, `isotropic_A_equals_one`, `def_isotropic_dual_coupling`, `def_isotropic_kappa_of_K`, `isotropic_kappa_equals_kappa_of_K`, `isotropic_gamma_in_kappa`）
 
@@ -250,7 +252,7 @@
 | `DoubleAngleFormula.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`（`sinh_eq_two_sinh_half_mul_cosh_half`） | `sinh_double_angle_formula` に効いているのは、`x = y + y` を満たす元 `y` と、点 `(y, y)` での加法定理（仮定として受け取る）、`c(y)` と `s(y)` の 1 組の交換、値の側の `ab + ab = 2(ab)`（と、主張の括弧の付け方のために Lean にだけある `2(ab) = (2a)b`。どちらも `a = s(y)`、`b = c(y)` の 1 組について）だけで、`exp` の性質も `2` の逆元も零・分配律も乗法の可換律の全体も効いていない。 |
 | `OddPartStrictlyIncreasing.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimSinhStrictlyIncreasing.lean`（`sinh_strictly_increasing`） | `sinh_strictly_increasing` に効いているのは、`exp` の狭義単調性、定義域の `Ring`・`AddLeftStrictMono`・`PosMulStrictMono`・`0 < 1`（`−1 < 0` を掛けると不等号が反転する段）、値域の `Ring`・`AddLeftStrictMono`・`PosMulStrictMono` だけである。`/2` は正の元を掛けることとしてしか効かず、`2` の逆元であること・全順序・右から掛ける側の単調性・値域の `0 < 1`・`exp` の正値性・指数法則は効いていない。 |
 | `OnePlusTwiceNonnegativeIsAtLeastOne.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAtLeastOne.lean` | `cosh_at_least_one` に効いているのは、半角公式の形 `h = 1 + 2t²` と、全順序の半環で平方が非負であること・非負の数を掛けることと和が順序を保つことだけで、`cosh`・`exp` の性質も乗法の可換性・減法・逆元も効いていない。 |
-| `HyperbolicBasicPropertiesFromMonotoneMap.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshSinhBasicProperties.lean` | `cosh_sinh_basic_properties` の (1)・(3) を写像 `e` の `c = (e(x)+e(−x))·⅟2`・`s = (e(x)−e(−x))·⅟2`（`⅟2` は `2` の逆元） で述べ直すと、(1) の等式は環と `2` の可逆性（`Invertible 2`）だけで `e` に仮定は要らず、(1) の不等号は `e` の正値性だけ、(3) の `s(x) > 0` は `e` の狭義単調性だけが効く。`e(0) = 1`、`e(a+b) = e(a)e(b)`、乗法の可換律、2 以外の元の逆元は効かない |
+| `HyperbolicBasicPropertiesFromMonotoneMap.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshSinhBasicProperties.lean` | `cosh_sinh_basic_properties` の (1)・(2)・(3) を写像 `e` の `c = (e(x)+e(−x))·⅟2`・`s = (e(x)−e(−x))·⅟2`（`⅟2` は `2` の逆元） で述べ直すと、(1) の等式は環と `2` の可逆性（`Invertible 2`）だけで `e` に仮定は要らず、(1) の不等号は `e` の正値性だけ、(3) の `s(x) > 0` は `e` の狭義単調性だけが効く。(1)・(3) では `e(0) = 1`、`e(a+b) = e(a)e(b)`、乗法の可換律、2 以外の元の逆元は効かない。(2)（`evenPart_sq_sub_oddPart_sq'`）は (1) の等式に、`e(x)` と `e(−x)` の可換性・その 1 組での `e(−x)e(x) = e(−x+x)`・定義域の `−x + x = 0`・`e(0) = 1` だけを足し、順序と `e` の正値性・単調性は効かない |
 | `MeanValueTwoSided.lean` | `CriticalPoint/CriticalPointAndLogDivergence/ClaimKappaOfKBasic.lean` (5) | 原文は (R4)（微分積分学の基本定理）＋(R3)（積分の単調性）で `3.53\|K-K_c\| ≤ \|κ\| ≤ 4.72\|K-K_c\|` を出すが、**積分は効いていない**。効いているのは (a) 定義域が凸 (b) 導関数が定数で両側から抑えられる (c) 下界が非負、の 3 点だけで、**平均値の定理で足りる**。`κ` が Ising 模型の量であることも `arcsinh` で書けることも効いていない。 |
 | `LogDivergentIntegral.lean` | `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`, `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSineIntegralTwoSided.lean` | **`sin` は効いていない。** 対数発散に効いているのは被積分関数の分母 `w` についての 2 つの各点評価 `c₀(aθ) ≤ w(θ) ≤ aθ` と `aθ - w(θ) ≤ Cθ³` **だけ**である。この 2 条件から差が `δ` に依存しない定数で抑えられ、発散の形は `∫_0^b dθ/√(δ²+(aθ)²) = arsinh(ab/δ)/a` という**完全に初等的な積分**だけで決まる。三角関数も周期性も `θ/2` という内部関数も効いていない。さらに原文の定数 `B = π²/(12c_0(1+c_0))` は必要十分版の `Cb²/(c_0(1+c_0)a²)` に `a=1/2, b=π, C=1/48` を入れたものと**厳密に一致する**（原文の定数は最良化されていないが、必要十分版と同じ値）。 |
 | `DiffUnderIntegral.lean` | `CriticalPoint/CriticalPointAndLogDivergence/TheoremSecondDerivativeLogDivergence.lean` | 原文 (R5) は `[a,b]×[x_1,x_2]`（有界閉長方形）で述べているが、効いているのは (a) 積分区間がコンパクト (b) パラメータの動く範囲が `x_0` の**近傍**（閉区間である必要はない） (c) `g` と `∂g/∂x` がその上で連続、の 3 点だけである。被積分関数が `θ` について偶関数であることも、`γ` が Ising 模型に由来することも効いていない。**mathlib に (R5) のこの形は無く**、優関数版から導出する必要があった（コンパクト上の連続関数の有界性で優関数を定数に取る）。 |

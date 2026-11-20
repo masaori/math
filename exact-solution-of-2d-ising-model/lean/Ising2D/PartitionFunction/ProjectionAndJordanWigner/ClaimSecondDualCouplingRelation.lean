@@ -21,6 +21,7 @@
 `exp(log(tanh K₂))=tanh K₂` を与える箇所にだけ現れる。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimTwoByTwoTransferIdentity
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -144,6 +145,6 @@ theorem second_dual_coupling_relation {K2 : ℝ} (hK2 : 0 < K2) :
     _ = Real.cosh K2 ^ 2 - Real.sinh K2 ^ 2 := by
       exact mul_div_cancel_left₀
         (Real.cosh K2 ^ 2 - Real.sinh K2 ^ 2) hsc
-    _ = 1 := Real.cosh_sq_sub_sinh_sq K2
+    _ = 1 := cosh_sinh_basic_properties_2 K2
 
 end Ising2D

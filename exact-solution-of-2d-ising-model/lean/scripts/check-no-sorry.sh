@@ -2947,6 +2947,8 @@ targets=(
   Ising2D.two_cosh_pos
   Ising2D.cosh_pos_of_two_cosh_pos
   Ising2D.cosh_sinh_basic_properties_1
+  Ising2D.cosh_sinh_basic_properties_2
+  Ising2D.cosh_sq_eq_one_add_sinh_sq
   Ising2D.real_neg_lt_zero_of_pos
   Ising2D.real_exp_neg_lt_one
   Ising2D.real_one_lt_exp
@@ -2967,9 +2969,12 @@ targets=(
   "Ising2D.NecSuf.evenPart_gt_oddPart_pos'"
   "Ising2D.NecSuf.evenPart_oddPart_properties'"
   "Ising2D.NecSuf.invOf_two_pos'"
+  "Ising2D.NecSuf.commute_evenPart_oddPart'"
+  "Ising2D.NecSuf.evenPart_sq_sub_oddPart_sq'"
   Ising2D.cosh_eq_mul_invOf_two
   Ising2D.sinh_eq_mul_invOf_two
   Ising2D.cosh_sinh_basic_properties_1_of_necSuf
+  Ising2D.cosh_sinh_basic_properties_2_of_necSuf
   Ising2D.cosh_sinh_basic_properties_3_of_necSuf
   Ising2D.finite_product_of_positive_reals_is_positive
   "Ising2D.NecSuf.finProdLeft_pos'"

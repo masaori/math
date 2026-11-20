@@ -4,8 +4,7 @@
 人手証明（正本は `structured-latex/content/003_exp_linear_map.ts`）:
 - `calc_formulae_000b_claim_cosh_sinh_basic_properties`（ラベル **`cosh_sinh_basic_properties`**）
 
-このファイルは主張の (1) と (3) を置く。(2) `(cosh x)^2 − (sinh x)^2 = 1` と (4) `a^2 = b^2 ⟺ a = b` は置いていない
-（状態台帳に残してある）。
+このファイルは主張の (1)・(2)・(3) を置く。(4) `a^2 = b^2 ⟺ a = b` は置いていない（状態台帳に残してある）。
 
 | 人手の行 | Lean |
 | --- | --- |
@@ -15,6 +14,8 @@
 | (1) の含意 `cosh x − sinh x > 0 ⟹ cosh x > sinh x` | `real_cosh_gt_sinh` |
 | (1) の 4 本目の 3 行の鎖 `2cosh x = … > 0` | `two_cosh_pos`（同じ行の calc） |
 | (1) の含意 `2cosh x > 0 ⟹ cosh x > 0` | `cosh_pos_of_two_cosh_pos` |
+| (2) の 5 行の鎖 `(cosh x)^2 − (sinh x)^2 = … = 1` | `cosh_sinh_basic_properties_2`（同じ行の calc） |
+| (2) を移項した形 `(cosh x)^2 = 1 + (sinh x)^2`（人手が「(2) を移項」と引く行の受け口） | `cosh_sq_eq_one_add_sinh_sq` |
 | (3) の含意 `x > 0 ⟹ −x < 0`・`x > 0 ⟹ 0 < x` | `real_neg_lt_zero_of_pos` と `real_one_lt_exp` の `h0x` |
 | (3) の 2 本の鎖 `exp(−x) < exp(0) = 1`・`1 = exp(0) < exp(x)` | `real_exp_neg_lt_one`・`real_one_lt_exp`（同じ行の calc） |
 | (3) の含意の 2 行 `exp(−x) < 1 < exp(x) ⟹ exp(−x) < exp(x) ⟹ exp(x) − exp(−x) > 0` | `real_exp_sub_exp_neg_pos` |
@@ -23,7 +24,7 @@
 
 人手の `cosh`・`sinh`（`def_cosh_sinh`）は Lean で定義し直していない。mathlib の `Real.cosh`・`Real.sinh` の等式
 `Real.cosh_eq`・`Real.sinh_eq` が、人手の定義の式そのものとしてその役を担う。人手が引く `real_exp_positive` は具体版
-`Ising2D.real_exp_positive`、`scalar_exp_zero`（`K → ℝ`）は mathlib の `Real.exp_zero`、`real_exp_strictly_increasing` は
+`Ising2D.real_exp_positive`、`scalar_exp_product`（`K → ℝ`）は mathlib の `Real.exp_add`、`scalar_exp_zero`（`K → ℝ`）は mathlib の `Real.exp_zero`、`real_exp_strictly_increasing` は
 Lean の具体版が無いので mathlib の `Real.exp_lt_exp` で受ける。
 
 人手の主張 (1) は `cosh x + sinh x = exp(x) > 0` も述べるが、人手の証明に `exp(x) > 0` の行は無い（`real_exp_positive` の
@@ -99,6 +100,27 @@ theorem cosh_sinh_basic_properties_1 (x : ℝ) :
   ⟨⟨cosh_sub_sinh_eq_exp_neg x, real_exp_positive (-x)⟩,
     ⟨cosh_add_sinh_eq_exp x, real_exp_positive x⟩,
     cosh_pos_of_two_cosh_pos x, real_cosh_gt_sinh x⟩
+
+/-- **人手 `cosh_sinh_basic_properties` (2)**: `(cosh x)^2 − (sinh x)^2 = 1`。人手の 5 行の鎖と 1 対 1 の `calc`。
+mathlib の `Real.cosh_sq_sub_sinh_sq`・`Real.cosh_sq` は使わない。 -/
+theorem cosh_sinh_basic_properties_2 (x : ℝ) : Real.cosh x ^ 2 - Real.sinh x ^ 2 = 1 :=
+  calc Real.cosh x ^ 2 - Real.sinh x ^ 2
+      = (Real.cosh x - Real.sinh x) * (Real.cosh x + Real.sinh x) := by
+        rw [sq, sq]; exact (Commute.all _ _).mul_self_sub_mul_self_eq'
+                                                        -- 2 乗の差の因数分解（ℝ の乗法の可換律を使う）
+    _ = Real.exp (-x) * Real.exp x := by
+        rw [cosh_sub_sinh_eq_exp_neg, cosh_add_sinh_eq_exp]
+                                                        -- (1) の 2 式
+    _ = Real.exp (-x + x) := (Real.exp_add (-x) x).symm  -- `scalar_exp_product`（Lean は mathlib の `Real.exp_add`）
+    _ = Real.exp 0 := by rw [neg_add_cancel]            -- `−x + x = 0`
+    _ = 1 := Real.exp_zero                              -- `scalar_exp_zero`（Lean は mathlib の `Real.exp_zero`）
+
+/-- 人手 `cosh_sinh_basic_properties` (2) を移項した形: `(cosh x)^2 = 1 + (sinh x)^2`。
+人手が「(2) を移項」と引く行（`020_critical_point.ts` の `cosh x = 1 + 2 sinh²(x/2)` の行、
+`critical_point_and_log_divergence.ts` の `cosh² = 1 + sinh²` の行）の受け口。 -/
+theorem cosh_sq_eq_one_add_sinh_sq (x : ℝ) : Real.cosh x ^ 2 = 1 + Real.sinh x ^ 2 :=
+  sub_eq_iff_eq_add.mp (cosh_sinh_basic_properties_2 x)
+                                                        -- (2) の `− (sinh x)^2` を右辺へ移項する
 
 /-- **人手 `cosh_sinh_basic_properties` (3) の 1 行目**: `x > 0 ⟹ −x < 0`。 -/
 theorem real_neg_lt_zero_of_pos {x : ℝ} (hx : x > 0) : -x < 0 := by

@@ -1,7 +1,7 @@
 /-
 # 写像の偶部と奇部の基本性質（**必要十分版**）
 
-対応する人手証明のラベル: `cosh_sinh_basic_properties` (1)・(3)（`structured-latex/content/003_exp_linear_map.ts`）。
+対応する人手証明のラベル: `cosh_sinh_basic_properties` (1)・(2)・(3)（`structured-latex/content/003_exp_linear_map.ts`）。
 具体版は `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshSinhBasicProperties.lean`、
 具体版をこのファイルの系として導くのは同じフォルダの `ClaimCoshSinhBasicPropertiesFromNecSuf.lean`。
 
@@ -17,6 +17,7 @@
 | `two_cosh_pos`（右辺の整理 → 上の 2 式 → `exp` の正値性） | `two_mul_evenPart_pos'`（同じ 3 段） |
 | `cosh_pos_of_two_cosh_pos`（両辺を `2 > 0` で割る） | `evenPart_pos'` |
 | `cosh_sinh_basic_properties_1`（(1) 全体） | `evenPart_oddPart_properties'` |
+| `cosh_sinh_basic_properties_2`（2 乗の差の因数分解 → (1) の 2 式 → `scalar_exp_product` → `−x + x = 0` → `scalar_exp_zero`） | `evenPart_sq_sub_oddPart_sq'`（同じ 5 段。因数分解に要る `c(x)` と `s(x)` の可換性は `commute_evenPart_oddPart'`） |
 | `real_neg_lt_zero_of_pos`（両辺に `−1 < 0` を掛ける） | `neg_lt_zero_of_pos'` |
 | `real_exp_neg_lt_one`・`real_one_lt_exp`（`exp` の狭義単調性 → `exp(0) = 1`） | `map_neg_lt_map_zero'`・`map_zero_lt_map'`（`e` の狭義単調性。`= 1` の段は無い） |
 | `real_exp_sub_exp_neg_pos`（推移律 → 両辺に `−exp(−x)` を加える） | `map_sub_map_neg_pos'`（推移律 → 両辺に `−e(−x)` を加える） |
@@ -33,10 +34,18 @@
   `2c > 0 ⟹ c > 0` である。値域は全順序環 `[Ring R] [LinearOrder R] [IsStrictOrderedRing R]` に `Invertible 2` を足した。
   全順序は外すと通らない: `2c > 0 ⟹ c > 0`（`mul_pos_iff_of_pos_left`）と `⅟2 > 0`（`invOf_two_pos'` の背理法 `⅟2 ≤ 0` でないなら `⅟2 > 0`）は、
   比べられない元があると使えない（`PartialOrder` では通らないことを確かめた）。
+- (2) で効くのは、(1) の 2 つの等式（環と `Invertible 2`）、`e(x)` と `e(−x)` が可換であること（`hcomm`。2 乗の差の因数分解
+  `c² − s² = (c − s)(c + s)` に要る `c(x)s(x) = s(x)c(x)` はこれと、`⅟2` が全ての元と可換であることから出る）、その 1 組での
+  `e(−x)e(x) = e(−x + x)`（`hadd`）、定義域の `−x + x = 0`（`AddGroup G`）、`e(0) = 1`（`hzero`）である。`hcomm` は外すと通らない:
+  `a := e(x)`、`b := e(−x)` について `c s − s c = (b a − a b)·⅟2` なので、`a b ≠ b a` なら `c² − s² ≠ (c − s)(c + s)`。
+  結論そのものも偽になる: `hadd`・`hzero` の下で `c² − s² = 1 + (b a − a b)·⅟2` なので、`b a = 1` かつ `a b ≠ 1` の環
+  （ℚ 上の数列の片側シフト作用素の対など）では `c² − s² ≠ 1`。
+  効いていないもの: 順序・`e` の正値性と単調性、全ての `a, b` での `e(a + b) = e(a)e(b)`（使うのは `−x, x` の 1 組だけ）、
+  値域の乗法の可換律（使うのは `e(x)` と `e(−x)` の可換性だけ）、2 以外の元の逆元、ℝ であること。
 - (3) で効くのは、定義域の `x > 0 ⟹ −x < 0`（`−1 < 0` を掛ける。定義域は全順序環）、`e` が狭義単調であること（`hmono`）、
   値域の推移律と、加法と順序の両立（`map_sub_map_neg_pos'` は値域が順序つきの加法群であることだけを使う）と、正の元に正の `⅟2` を
   掛けた値が正であることである。`e` の正値性は (3) の `s(x) > 0` には効かない（(3) の `c(x) > s(x)` は (1) の結論なので効く）。
-- 効いていないもの: `exp(0) = 1`（具体版の `exp(−x) < exp(0) = 1 < exp(x)` の `= 1` は、推移律が `e(0)` を経由するだけで足りる）、
+- (1)・(3) で効いていないもの: `exp(0) = 1`（具体版の `exp(−x) < exp(0) = 1 < exp(x)` の `= 1` は、推移律が `e(0)` を経由するだけで足りる）、
   `e(a + b) = e(a)e(b)`、`e` が級数で定義されていること、連続性・極限・完備性、値域・定義域が ℝ であること、乗法の可換律、2 以外の元の逆元。
 -/
 import Mathlib.Algebra.Order.Ring.Defs
@@ -179,5 +188,38 @@ theorem evenPart_gt_oddPart_pos' (e c s : G → R) (hpos : ∀ y, 0 < e y) (hmon
   ⟨oddPart_lt_evenPart' e c s hpos hc hs x, oddPart_pos' e s hmono hs hx⟩  -- (1) と直前の不等式
 
 end SecondInequalities
+
+section SquareDifference
+
+variable {G R : Type*} [AddGroup G] [Ring R] [Invertible (2 : R)]
+
+/-- `e(x)` と `e(−x)` が可換なら `c(x)` と `s(x)` は可換（具体版の「2 乗の差の因数分解」に要る。具体版では ℝ の乗法の可換律）。 -/
+theorem commute_evenPart_oddPart' (e c s : G → R)
+    (hc : ∀ x, c x = (e x + e (-x)) * ⅟2) (hs : ∀ x, s x = (e x - e (-x)) * ⅟2) (x : G)
+    (hcomm : Commute (e x) (e (-x))) : Commute (c x) (s x) := by
+  have hp : Commute (e x + e (-x)) (e x - e (-x)) :=
+    (((Commute.refl (e x)).add_left hcomm.symm).sub_right (hcomm.add_left (Commute.refl (e (-x)))))
+  have hinv : ∀ y : R, Commute y ⅟2 := fun y => (Commute.ofNat_right y 2).invOf_right
+  rw [hc, hs]
+  exact ((hp.mul_right (hinv _)).mul_left
+    ((hinv _).symm.mul_right (Commute.refl _)))
+
+/-- **`c(x)² − s(x)² = 1`**（具体版 `cosh_sinh_basic_properties_2`。同じ 5 段の鎖）。 -/
+theorem evenPart_sq_sub_oddPart_sq' (e c s : G → R)
+    (hc : ∀ x, c x = (e x + e (-x)) * ⅟2) (hs : ∀ x, s x = (e x - e (-x)) * ⅟2) (x : G)
+    (hcomm : Commute (e x) (e (-x))) (hadd : e (-x) * e x = e (-x + x)) (hzero : e 0 = 1) :
+    c x ^ 2 - s x ^ 2 = 1 :=
+  calc c x ^ 2 - s x ^ 2
+      = (c x - s x) * (c x + s x) := by
+        rw [sq, sq]; exact (commute_evenPart_oddPart' e c s hc hs x hcomm).mul_self_sub_mul_self_eq'
+                                                                     -- 2 乗の差の因数分解
+    _ = e (-x) * e x := by
+        rw [evenPart_sub_oddPart' e c s hc hs, evenPart_add_oddPart' e c s hc hs]
+                                                                     -- (1) の 2 式
+    _ = e (-x + x) := hadd                                          -- `scalar_exp_product` に当たる 1 組の等式
+    _ = e 0 := by rw [neg_add_cancel]                               -- `−x + x = 0`
+    _ = 1 := hzero                                                  -- `scalar_exp_zero` に当たる `e(0) = 1`
+
+end SquareDifference
 
 end Ising2D.NecSuf

@@ -52,6 +52,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
 namespace Ising2D
 
@@ -59,11 +60,11 @@ variable (P : IsingParam)
 
 /-- (i) `c_1^2 - s_1^2 = 1`（`cosh^2 - sinh^2 = 1`）。 -/
 theorem IsingParam.c1_sq_sub_s1_sq : P.const.c1 ^ 2 - P.const.s1 ^ 2 = 1 := by
-  simp [IsingParam.const, Real.cosh_sq_sub_sinh_sq]
+  simp [IsingParam.const, cosh_sinh_basic_properties_2]
 
 /-- (ii) `(c_2^*)^2 - (s_2^*)^2 = 1`。 -/
 theorem IsingParam.c2star_sq_sub_s2star_sq : P.const.c2star ^ 2 - P.const.s2star ^ 2 = 1 := by
-  simp [IsingParam.const, Real.cosh_sq_sub_sinh_sq]
+  simp [IsingParam.const, cosh_sinh_basic_properties_2]
 
 /-- 実数の 2 乗の像は像の 2 乗: `(c_ℂ)^2 = (c^2)_ℂ`（`c ∈ ℝ`）。人手 `det_A_theta_tilde` の最後の等式の鎖の最初の 3 行
 （`square_of_real_number_is_product`・`real_inclusion_preserves_product`・`square_of_complex_number_is_product`）を、右辺から左辺へ並べた。 -/

@@ -207,7 +207,7 @@ theorem d2gammaK_eq {κ : ℝ} (θ : ℝ) (hκ : κ ≠ 0) :
 theorem sinh_sq_div_four_le_Qfun (θ κ : ℝ) : Real.sinh κ ^ 2 / 4 ≤ Qfun θ κ := by
   have hs : Real.sinh κ = 2 * Real.sinh (κ / 2) * Real.cosh (κ / 2) :=
     sinh_eq_two_sinh_half_mul_cosh_half κ
-  have hc : Real.cosh (κ / 2) ^ 2 = Real.sinh (κ / 2) ^ 2 + 1 := Real.cosh_sq (κ / 2)
+  have hc : Real.cosh (κ / 2) ^ 2 = 1 + Real.sinh (κ / 2) ^ 2 := cosh_sq_eq_one_add_sinh_sq (κ / 2)
   have hS : Real.sinh (κ / 2) ^ 2 ≤ Sfun θ κ := by
     simp only [Sfun]; nlinarith [sq_nonneg (Real.sin (θ / 2))]
   have hSnn : 0 ≤ Sfun θ κ := Sfun_nonneg θ κ

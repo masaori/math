@@ -33,6 +33,6 @@ theorem second_dual_coupling_relation_of_necSuf {K2 : ℝ} (hK2 : 0 < K2) :
   · rw [Real.sinh_eq]
     ring
   · exact sinh_two_eq_two_sinh_mul_cosh K2
-  · exact Real.cosh_sq_sub_sinh_sq K2
+  · exact cosh_sinh_basic_properties_2 K2
 
 end Ising2D
