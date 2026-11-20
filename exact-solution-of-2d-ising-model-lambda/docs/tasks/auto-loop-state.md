@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-20（並列・八回目）、表の先頭「共役の積は部分体係数」を四層で済ませた**（`claim_imaginary_unit_extension_conjugate_product_subfield_coefficient`。定義二つ: $\mathrm{Lin}_F(\omega)=\{u+v\omega\}$ 上の共役 $\mathrm{cj}_\omega(a+b\omega)=a-b\omega$（一意性で取り方に依らない）と係数の共役 $\mathrm{cjp}_\omega(g)$。$\mathrm{ac}_k(g\cdot\mathrm{cjp}_\omega(g))=\sum(a_ia_{k-i}+b_ib_{k-i})$ を番号の付け替えで示した）。並列の表の次は Laplace の帰納法「虚数単位を足した体に根を持つ」で、部品は揃い着手できる。
 - **2026-11-20（主経路）、極大な順序付き部分体の平方の三分法を四層で示した。** 次は残りの行き止まりの主張を一件切り分ける。並列の表は共役の積へ進められる。
 - **2026-11-20（並列・七回目）、表の先頭「順序付き部分体に虚数単位を足した表示は一意である」を四層で済ませた**（`claim_imaginary_unit_extension_unique_representation`。$a+b\omega=a'+b'\omega$（$a,a',b,b'\in F$）なら $(b-b')\omega=a'-a$ で、$b-b'\ne0$ なら $\omega=(b-b')^{-1}(a'-a)\in F$ が非所属の主張に矛盾するので $b=b'$、$a=a'$）。並列の表の次は「共役の積は部分体係数」で、主経路を待たずに進められる。
 - **2026-11-20（主経路）、極大な順序付き部分体で奇数次の多項式が根を持つことを四層で示した。** 次は極大な順序付き部分体の平方の三分法を示す。並列の表は表示の一意性から進められる。
 - **2026-11-20（並列・六回目）、Laplace の帰納法から主経路に依らない部品「和が部分体に入る二数は、二数を根とする二次式の値を零にする部分体の元があれば共に部分体に入る」を割り、四層で済ませた**（`claim_sum_in_subfield_root_gives_both_numbers`。$(\gamma-\alpha)(\gamma-\beta)=\gamma\gamma-(\alpha+\beta)\gamma+\alpha\beta=0$ と零因子が無いことから $\gamma=\alpha$ か $\gamma=\beta$、残りは和との差）。
-- **2026-11-20（並列・五回目）、Laplace の帰納法から主経路に依らない部品「根の番号の対の個数の倍は次数と次数より一つ小さい数の積である」を割り、四層で済ませた**（`claim_root_index_pair_count`。$d\ge1$ と全単射 $\nu:\mathbb{N}_{<N}\to\mathrm{Pr}_d$ から $N+N=d(d-1)$。$\mathrm{Pr}_{e+2}=\mathrm{Pr}_{e+1}\sqcup\{(i,e+1)\}$ による個数の漸化式と $e$ についての帰納法）。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -44,9 +44,8 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 零点の詰め寄り | 虚数単位を足した体を係数とする多項式と係数の共役の積は部分体係数である | 未着手 | 済んだ一意性（`claim_imaginary_unit_extension_unique_representation`）で共役 $a+b\omega\mapsto a-b\omega$ を定め（well-defined 性はここで要る）、$g\in F(\omega)[X]$ と係数を共役した $\bar g$ の積が $F$ 係数であること。2026-11-20 の研究管理が主経路から移した。置き場は一意性と同じ節「虚数単位を足した表示の一意性と共役」。下の「代数的数の全体になる」が引く。ラベルは `claim_imaginary_unit_extension_conjugate_product_subfield_coefficient`。 |
 | 零点の詰め寄り | 正の元が平方で奇数次の多項式が根を持つ部分体を係数とする多項式は、虚数単位を足した体に根を持つ | 未着手 | Laplace の帰納法（次数の 2 進付値についての帰納法）。番号 $d\ge1$ の係数が 1 の $f\in F[t]$ を済んだ「一次因子への分解」（`claim_qbar_monic_polynomial_linear_factor_product`）で $\prod(t-\widehat{\alpha(i)})$ にし、済んだ「ずらしの多項式は部分体係数」（`claim_pair_shift_root_polynomial_subfield_coefficient`）・済んだ「一次因子の積の根」（`claim_qbar_linear_factor_product_root_is_listed_root`）・上の行・済んだ鳩の巣（`claim_pigeonhole_one_more_than_cardinality`）・済んだ「二つの整数倍のずらし」（`claim_two_shifted_values_determine_sum_and_product`）と、済んだ「二次多項式が根を持つ」（`claim_imaginary_unit_extension_quadratic_root`）を引く。対の個数の 2 進付値の主張が仮定に取る $N+N=d\cdot(d-1)$ は、済んだ「根の番号の対の個数」（`claim_root_index_pair_count`）で得る。二次式の根から根 $\alpha_i,\alpha_j$ を虚数単位を足した体へ入れる段は、済んだ「和が部分体に入る二数と部分体の根」（`claim_sum_in_subfield_root_gives_both_numbers`）で行う。ラベルは `claim_subfield_polynomial_root_in_imaginary_unit_extension`。 |
-| 零点の詰め寄り | 正の元が平方で奇数次の多項式が根を持つ部分体に虚数単位を足すと代数的数の全体になる | 未着手 | 上の行と、済んだ「一次因子への分解」と、この表の「共役の積は部分体係数」を引く。そのような $F$ と $\omega^2=-1$ の $\omega$ について $F(\omega)=\overline{\mathbb{Q}}$。$\omega\notin F$ から表示 $\xi=a+b\omega$ の一意性も示す（`def_real_closed_subfield` の第三・第四条件）。ラベルは `claim_adjoin_imaginary_unit_gives_algebraic_numbers`。 |
+| 零点の詰め寄り | 正の元が平方で奇数次の多項式が根を持つ部分体に虚数単位を足すと代数的数の全体になる | 未着手 | 上の行と、済んだ「一次因子への分解」と、済んだ「共役の積は部分体係数」（`claim_imaginary_unit_extension_conjugate_product_subfield_coefficient`。共役は `def_imaginary_unit_extension_conjugate`、係数の共役は `def_imaginary_unit_extension_conjugate_polynomial`）を引く。そのような $F$ と $\omega^2=-1$ の $\omega$ について $F(\omega)=\overline{\mathbb{Q}}$。$\omega\notin F$ から表示 $\xi=a+b\omega$ の一意性も示す（`def_real_closed_subfield` の第三・第四条件）。ラベルは `claim_adjoin_imaginary_unit_gives_algebraic_numbers`。 |
 | 零点の詰め寄り | 実閉部分体の存在の合成と到達点からのデータの引数の除去 | 未着手 | 上の行と、主経路の「奇数次の多項式が根を持つ」「平方の三分法」の二行と、済んだ「表示は一意」（`claim_imaginary_unit_extension_unique_representation`）が揃ってから。本文に `claim_real_closed_subfield_exists`（このラベル名は計測の道具が名指す）を立て、`def_real_closed_subfield` の「既知である」の段落をこの主張への参照に替える。Lean で `RealClosedSubfieldSqrtTwoData s` の値を作り、到達点の四つの具体版について、データ・$z$（$z^4=-1$ は `IsAlgClosed` から取れる）を引数に取らない形の定理を足して `lean:` に登録する。主経路の行を待つ間は表の先頭の行が全て済んでいれば何もしない。 |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
@@ -54,11 +53,11 @@
 
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
+- 2026-11-20（並列・八回目）: 前回の並列の「表示は一意である」の本文一ブロック（$(b-b')\omega=a'-a$ の四行、背理の三行、$b=b'$ の三行、$a=a'$ の四行）を読み直した。各行に根拠があり、記号の宣言も揃っていた。修正は無かった。
 - 2026-11-20（主経路）: 直前の「極大な順序付き部分体では奇数次の多項式が根を持つ」の本文・SageMath 標本・Lean 具体版と必要十分版を照合した。根の選択、正錐の延長、極大性による所属の回復が対応し、修正は無かった。
 - 2026-11-20（主経路）: 直前の「虚数単位を足した体では二次多項式が根を持つ」の本文と Lean 具体版を照合した。先頭係数の正規化と判別式の平方完成が対応し、修正は無かった。
 - 2026-11-20（並列・七回目）: 前回の並列の「和が部分体に入る二数と部分体の根」の本文一ブロック（$(\gamma-\alpha)(\gamma-\beta)$ の四行の式鎖、$\gamma-\alpha=0$ の場合の二つの式鎖、そうでない場合の零因子が無いことの適用と二つの式鎖）を読み直した。二段目の根拠が積の可換則を挙げていること、各行の根拠と記号の宣言を確かめ、修正は無かった。
 - 2026-11-20（並列・六回目）: 前回の並列の「根の番号の対の個数」の本文一ブロック（$\mathrm{Pr}_{e+2}$ の分解、個数の二行、基底の二行、一歩の四行、結論の五行）を読み直した。各行に根拠があり、$d-1$ の意味も主張で宣言されていて、記号の濫用・未定義の記号は無かった。修正は無かった。
-- 2026-11-20（並列・五回目）: 前回の並列の「偶数の次数の対の個数」の本文一ブロック（$a\ge1$ の三行、$d=(b+b+1)+1$ の六行、$m'$ の奇数性の三行、倍の消去、$N=2^{k-1}m'$ の四行）を読み直した。各行に根拠があり、$d-1$・$k-1$ の意味も主張で宣言されていて、記号の濫用・未定義の記号は無かった。修正は無かった。
 
 ## 式変形の書き方の統一
 
@@ -69,8 +68,8 @@
 - 2026-11-20（主経路の書式統一）: 「多項式は、定数項の定数多項式と、係数を一つずらした多項式に不定元を掛けたものとの和である」の結論等式を、全係数の一致を根拠とする式鎖にした。
 
 ## 前進の記録
+- 2026-11-20（並列・八回目）: 表の先頭「共役の積は部分体係数」を、節「虚数単位を足した表示の一意性と共役」に定義二ブロック（一次式の値の全体と共役、係数の共役）と主張一ブロック（十一行の式鎖と有限和の帰納法）・SageMath 一件（PASS 560）・Lean 具体版（共役は全域の関数として表示を一つ選び、取り方に依らないことを `imaginaryUnitConj_apply` で一意性から示す）・必要十分版（可換環、零元を含み和と積で閉じる部分集合、$\omega\omega=-1$、二つの多項式の係数が同じ二列で $a_i\pm b_i\omega$ と書けることだけ。表示の一意性・正錐・逆元は使わない）・導出版で済ませた。計測の道具の `PLANNED_PARTS` は既にこのラベルを持っていた。
 - 2026-11-20（主経路）: `claim_maximal_ordered_subfield_square_trichotomy` を本文・SageMath 厳密標本・Lean 具体版・必要十分版・導出版で示した。正錐の三分法を正の元の平方根と非零平方の正性で平方の三分法へ移した。
 - 2026-11-20（主経路）: `claim_maximal_ordered_subfield_odd_degree_root` を本文・SageMath 厳密標本・Lean 具体版・必要十分版・導出版で示した。奇数次の多項式から奇数次の相対次数を持つ根を選び、正錐を延長した体を極大性で元の部分体に戻した。
 - 2026-11-20（並列・七回目）: 表の先頭「表示は一意である」を新しい節「虚数単位を足した表示の一意性と共役」（本文一ブロック: $(b-b')\omega=a'-a$ の四行の式鎖、$b-b'\ne0$ を仮定して $\omega\in F$ を導く三行と `claim_imaginary_unit_outside_ordered_subfield` との矛盾、$b=b'$ の三行、$a=a'$ の四行）・SageMath 一件（PASS 1341）・Lean 具体版・必要十分版（除法環、差・積・逆元で閉じた部分集合、$\omega\notin S$ だけ。積の可換性・零元・和の閉性は使わない）・導出版で済ませた。計測の道具の `PLANNED_PARTS` は既にこのラベルを持っていた。
 - 2026-11-20（並列・六回目）: 表の先頭「虚数単位を足した体に根を持つ」（Laplace の帰納法）は主経路の「二次多項式が根を持つ」を待つので、帰納法の一歩で要る「$\alpha+\beta\in K$ で、$\gamma\in K$ が $\gamma\gamma-(\alpha+\beta)\gamma+\alpha\beta=0$ を満たせば $\alpha,\beta\in K$」を割り、新しい節「和が部分体に入る二数と部分体の根」（本文一ブロック: 四行の式鎖と、$\gamma-\alpha=0$ かどうかの二場合）・SageMath 一件（PASS 332）・Lean 具体版・必要十分版（零因子の無い環と、差で閉じた部分集合と、一つの等式 $\gamma\beta=\beta\gamma$ だけ。逆元・台の可換性・$\alpha\beta\in K$ は使わない）・導出版で済ませた。計測の道具の `PLANNED_PARTS` に足し、帰納法本体の依存に加えた。
-- 2026-11-20（並列・五回目）: 表の先頭「虚数単位を足した体に根を持つ」（Laplace の帰納法）は主経路の「二次多項式が根を持つ」を待つので、帰納法の中で要る「$\mathrm{Pr}_d$ の個数 $N$ は $N+N=d(d-1)$ を満たす」を割り、新しい節「根の番号の対の個数」（本文一ブロック: 分解 $\mathrm{Pr}_{e+2}=\mathrm{Pr}_{e+1}\sqcup C_{e+1}$、個数の二行、基底の二行、一歩の四行、結論の五行）・SageMath 一件（PASS 683）・Lean 具体版（和型への全単射 `rootIndexPairSplit` と帰納法）・必要十分版（有限型の族で、初項が空で $A(e+1)\simeq A(e)\sqcup\mathrm{Fin}(e+1)$ のものだけ。対の成分の大小・`Fin` の順序は使わない）・導出版で済ませた。計測の道具の `PLANNED_PARTS` に `claim_root_index_pair_count` を足し、帰納法本体の依存に加えた。

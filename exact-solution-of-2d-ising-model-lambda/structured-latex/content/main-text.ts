@@ -62027,6 +62027,313 @@ a
                 },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_imaginary_unit_extension_conjugate",
+              focus:
+                {
+                  id: "zero_pinching_def_imaginary_unit_extension_conjugate",
+                  kind: "definition",
+                  title: { text: "虚数単位を足した一次式の値の全体と共役" },
+                  labels: ["def_imaginary_unit_extension_conjugate"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/imaginary-unit-extension-conjugate-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.imaginaryUnitLinearValues",
+                    "Ising2DLambda.FisherZero.imaginaryUnitConj",
+                    "Ising2DLambda.FisherZero.imaginaryUnitConj_apply",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F\subset\overline{\mathbb{Q}}`),
+                      " を部分体、",
+                      math(String.raw`C_F\subset F`),
+                      " を ",
+                      ref("def_subfield_positive_cone"),
+                      " の正錐とし、",
+                      math(String.raw`\omega\in\overline{\mathbb{Q}}`),
+                      " は ",
+                      math(String.raw`\omega\cdot\omega=-1`),
+                      " を満たすとする。和・差・積は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）のものとする。",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分集合",
+                    ]),
+                    displayMath(String.raw`\mathrm{Lin}_F(\omega):=\bigl\{\,u+v\cdot\omega\ \bigm|\ u\in F,\ v\in F\,\bigr\}`),
+                    paragraph([
+                      "を置く。任意の ",
+                      math(String.raw`z\in\mathrm{Lin}_F(\omega)`),
+                      " について、",
+                      math(String.raw`z=a+b\cdot\omega`),
+                      " を満たす ",
+                      math(String.raw`a,b\in F`),
+                      " を取り、",
+                    ]),
+                    displayMath(String.raw`\mathrm{cj}_{\omega}(z):=a-b\cdot\omega\in\mathrm{Lin}_F(\omega)`),
+                    paragraph([
+                      "と定める。この値は ",
+                      math(String.raw`a,b`),
+                      " の取り方に依らない。実際、",
+                      math(String.raw`a',b'\in F`),
+                      " も ",
+                      math(String.raw`z=a'+b'\cdot\omega`),
+                      " を満たすなら、",
+                      math(String.raw`a+b\cdot\omega=a'+b'\cdot\omega`),
+                      " だから ",
+                      ref("claim_imaginary_unit_extension_unique_representation"),
+                      " により ",
+                      math(String.raw`a=a'`),
+                      " かつ ",
+                      math(String.raw`b=b'`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+a-b\cdot\omega
+&=a'-b\cdot\omega
+&&\bigl(\because\ a=a'\bigr)\\
+&=a'-b'\cdot\omega
+&&\bigl(\because\ b=b'\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "となる。",
+                      math(String.raw`a-b\cdot\omega=a+(-b)\cdot\omega`),
+                      " で ",
+                      math(String.raw`-b\in F`),
+                      " だから値は ",
+                      math(String.raw`\mathrm{Lin}_F(\omega)`),
+                      " に属する。写像 ",
+                      math(String.raw`\mathrm{cj}_{\omega}:\mathrm{Lin}_F(\omega)\to\mathrm{Lin}_F(\omega)`),
+                      " を共役と呼ぶ。記号 ",
+                      math(String.raw`\mathrm{Lin}_F(\omega)`),
+                      " と ",
+                      math(String.raw`\mathrm{cj}_{\omega}`),
+                      " はこの意味だけに使う。正錐 ",
+                      math(String.raw`C_F`),
+                      " は、表示の一意性を通して共役の値が取り方に依らないことにだけ効く。",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_def_imaginary_unit_extension_conjugate_polynomial",
+              focus:
+                {
+                  id: "zero_pinching_def_imaginary_unit_extension_conjugate_polynomial",
+                  kind: "definition",
+                  title: { text: "虚数単位を足した一次式の値を係数とする多項式の係数の共役" },
+                  labels: ["def_imaginary_unit_extension_conjugate_polynomial"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/imaginary-unit-extension-conjugate-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.imaginaryUnitConjPoly",
+                    "Ising2DLambda.FisherZero.imaginaryUnitConj_zero",
+                    "Ising2DLambda.FisherZero.imaginaryUnitConjPoly_coeff",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      "、",
+                      math(String.raw`C_F`),
+                      "、",
+                      math(String.raw`\omega`),
+                      "、",
+                      math(String.raw`\mathrm{Lin}_F(\omega)`),
+                      "、",
+                      math(String.raw`\mathrm{cj}_{\omega}`),
+                      " を ",
+                      ref("def_imaginary_unit_extension_conjugate"),
+                      " のものとする。",
+                      math(String.raw`g\in\overline{\mathbb{Q}}[t]`),
+                      "（",
+                      ref("def_qbar_polynomial_ring"),
+                      "）は、任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`\mathrm{ac}_k(g)\in\mathrm{Lin}_F(\omega)`),
+                      " を満たすとする。このとき ",
+                      math(String.raw`\mathrm{cjp}_{\omega}(g)\in\overline{\mathbb{Q}}[t]`),
+                      " を、係数で",
+                    ]),
+                    displayMath(String.raw`\mathrm{ac}_k\bigl(\mathrm{cjp}_{\omega}(g)\bigr):=\mathrm{cj}_{\omega}\bigl(\mathrm{ac}_k(g)\bigr)\qquad(k\in\mathbb{N})`),
+                    paragraph([
+                      "と定める。これは多項式である（零でない係数が有限個である）。",
+                      math(String.raw`\mathrm{ac}_k(g)=0`),
+                      " となる ",
+                      math(String.raw`k`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k\bigl(\mathrm{cjp}_{\omega}(g)\bigr)
+&=\mathrm{cj}_{\omega}(0)
+&&\bigl(\because\ \mathrm{ac}_k(g)=0\bigr)\\
+&=\mathrm{cj}_{\omega}(0+0\cdot\omega)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=0-0\cdot\omega
+&&\bigl(\because\ 0\in F\text{ と }\blkref{def_imaginary_unit_extension_conjugate}\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`\mathrm{ac}_k(g)\ne0`),
+                      " となる ",
+                      math(String.raw`k`),
+                      " は有限個だからである。記号 ",
+                      math(String.raw`\mathrm{cjp}_{\omega}`),
+                      " はこの意味だけに使う。実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_imaginary_unit_extension_conjugate_product_subfield_coefficient",
+              focus:
+                {
+                  id: "zero_pinching_claim_imaginary_unit_extension_conjugate_product_subfield_coefficient",
+                  kind: "claim",
+                  title: { text: "虚数単位を足した体を係数とする多項式と係数の共役の積は部分体係数である" },
+                  labels: ["claim_imaginary_unit_extension_conjugate_product_subfield_coefficient"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/imaginary-unit-extension-conjugate-product"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.imaginaryUnitExtension_conjugateProduct_subfieldCoefficient",
+                    "Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_conjugateProduct_subfieldCoefficient_necSuf",
+                    "Ising2DLambda.FisherZero.imaginaryUnitExtension_conjugateProduct_subfieldCoefficient_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      "、",
+                      math(String.raw`C_F`),
+                      "、",
+                      math(String.raw`\omega`),
+                      "、",
+                      math(String.raw`\mathrm{Lin}_F(\omega)`),
+                      " を ",
+                      ref("def_imaginary_unit_extension_conjugate"),
+                      " のものとする。任意の ",
+                      math(String.raw`g\in\overline{\mathbb{Q}}[t]`),
+                      " について、任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(g)\in\mathrm{Lin}_F(\omega)`),
+                      " ならば、",
+                    ]),
+                    displayMath(String.raw`g\cdot\mathrm{cjp}_{\omega}(g)\in F[t]`),
+                    paragraph([
+                      "である（",
+                      math(String.raw`\mathrm{cjp}_{\omega}`),
+                      " は ",
+                      ref("def_imaginary_unit_extension_conjugate_polynomial"),
+                      "、",
+                      math(String.raw`F[t]`),
+                      " は ",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "、積は ",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " のもの）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`i\in\mathbb{N}`),
+                      " について、",
+                      math(String.raw`\mathrm{ac}_i(g)\in\mathrm{Lin}_F(\omega)`),
+                      " だから ",
+                      math(String.raw`a_i,b_i\in F`),
+                      " を ",
+                      math(String.raw`\mathrm{ac}_i(g)=a_i+b_i\cdot\omega`),
+                      " となるように取る。",
+                      ref("def_imaginary_unit_extension_conjugate_polynomial"),
+                      " と ",
+                      ref("def_imaginary_unit_extension_conjugate"),
+                      " により ",
+                      math(String.raw`\mathrm{ac}_i\bigl(\mathrm{cjp}_{\omega}(g)\bigr)=\mathrm{cj}_{\omega}(a_i+b_i\cdot\omega)=a_i-b_i\cdot\omega`),
+                      " である。",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " を任意に取り、",
+                      math(String.raw`\Sigma_0:=\sum_{i=0}^{k}\bigl(a_i\cdot a_{k-i}+b_i\cdot b_{k-i}\bigr)`),
+                      "、",
+                      math(String.raw`\Sigma_1:=\sum_{i=0}^{k}b_i\cdot a_{k-i}`),
+                      " と置く。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k\bigl(g\cdot\mathrm{cjp}_{\omega}(g)\bigr)
+&=\sum_{i=0}^{k}\mathrm{ac}_i(g)\cdot\mathrm{ac}_{k-i}\bigl(\mathrm{cjp}_{\omega}(g)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\text{ の積の係数}\bigr)\\
+&=\sum_{i=0}^{k}(a_i+b_i\cdot\omega)\cdot(a_{k-i}-b_{k-i}\cdot\omega)
+&&\bigl(\because\ a_i,b_i\text{ の取り方、}\blkref{def_imaginary_unit_extension_conjugate_polynomial}\text{、}\blkref{def_imaginary_unit_extension_conjugate}\bigr)\\
+&=\sum_{i=0}^{k}\bigl(a_i\cdot a_{k-i}-a_i\cdot b_{k-i}\cdot\omega+b_i\cdot\omega\cdot a_{k-i}-b_i\cdot\omega\cdot b_{k-i}\cdot\omega\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の分配法則}\bigr)\\
+&=\sum_{i=0}^{k}\bigl(a_i\cdot a_{k-i}-a_i\cdot b_{k-i}\cdot\omega+b_i\cdot a_{k-i}\cdot\omega-b_i\cdot b_{k-i}\cdot(\omega\cdot\omega)\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の積の交換法則・結合法則}\bigr)\\
+&=\sum_{i=0}^{k}\bigl(a_i\cdot a_{k-i}-a_i\cdot b_{k-i}\cdot\omega+b_i\cdot a_{k-i}\cdot\omega+b_i\cdot b_{k-i}\bigr)
+&&\bigl(\because\ \omega\cdot\omega=-1\bigr)\\
+&=\sum_{i=0}^{k}\Bigl(\bigl(a_i\cdot a_{k-i}+b_i\cdot b_{k-i}\bigr)+\bigl(b_i\cdot a_{k-i}-a_i\cdot b_{k-i}\bigr)\cdot\omega\Bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の加法の交換法則・結合法則と分配法則}\bigr)\\
+&=\Sigma_0+\Bigl(\Sigma_1-\sum_{i=0}^{k}a_i\cdot b_{k-i}\Bigr)\cdot\omega
+&&\bigl(\because\ \text{有限和の加法性と分配法則、}\Sigma_0,\Sigma_1\text{ の定義}\bigr)\\
+&=\Sigma_0+\Bigl(\Sigma_1-\sum_{i=0}^{k}b_{k-i}\cdot a_i\Bigr)\cdot\omega
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の積の交換法則}\bigr)\\
+&=\Sigma_0+\Bigl(\Sigma_1-\sum_{j=0}^{k}b_j\cdot a_{k-j}\Bigr)\cdot\omega
+&&\bigl(\because\ j:=k-i\text{ は }\{0,\dots,k\}\text{ の全単射で、}i=k-j\bigr)\\
+&=\Sigma_0+(\Sigma_1-\Sigma_1)\cdot\omega
+&&\bigl(\because\ \Sigma_1\text{ の定義}\bigr)\\
+&=\Sigma_0
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。各 ",
+                      math(String.raw`0\le i\le k`),
+                      " について ",
+                      math(String.raw`a_i,a_{k-i},b_i,b_{k-i}\in F`),
+                      " と ",
+                      math(String.raw`F`),
+                      " が積と和で閉じることから ",
+                      math(String.raw`a_i\cdot a_{k-i}+b_i\cdot b_{k-i}\in F`),
+                      " であり、項の個数についての帰納法（空の和は ",
+                      math(String.raw`0\in F`),
+                      "、一項足す段は ",
+                      math(String.raw`F`),
+                      " が和で閉じること）で ",
+                      math(String.raw`\Sigma_0\in F`),
+                      " である。",
+                      math(String.raw`k`),
+                      " は任意なので、",
+                      ref("def_subfield_coefficient_polynomials"),
+                      " により ",
+                      math(String.raw`g\cdot\mathrm{cjp}_{\omega}(g)\in F[t]`),
+                      " である。正錐 ",
+                      math(String.raw`C_F`),
+                      " は共役の値が取り方に依らないこと（",
+                      ref("def_imaginary_unit_extension_conjugate"),
+                      "）にだけ効き、上の計算は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の四則と ",
+                      math(String.raw`\omega\cdot\omega=-1`),
+                      " と ",
+                      math(String.raw`F`),
+                      " の閉性だけで閉じる。実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
         ],
       },
     },

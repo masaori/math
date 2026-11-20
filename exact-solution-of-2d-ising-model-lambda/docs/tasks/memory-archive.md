@@ -1,4 +1,5 @@
 ## 直近の記録から移したもの
+2026-11-20（並列・六回目）: $\alpha+\beta\in K$ で $\gamma\in K$ が $\gamma\gamma-(\alpha+\beta)\gamma+\alpha\beta=0$ を満たせば $\alpha,\beta\in K$ であることを、$(\gamma-\alpha)(\gamma-\beta)$ への式鎖と零因子が無いことから、本文・SageMath（PASS 332）・Lean 具体版・必要十分版（零因子の無い環、差で閉じた部分集合、$\gamma\beta=\beta\gamma$ の一つの等式）・導出版で示した。前回の根の番号の対の個数の本文を読み直し修正なし。
 2026-11-20（並列・五回目）: 根の番号の対の集合 $\mathrm{Pr}_d$（$d\ge1$）と全単射 $\nu:\mathbb{N}_{<N}\to\mathrm{Pr}_d$ から $N+N=d(d-1)$ を、$\mathrm{Pr}_{e+2}=\mathrm{Pr}_{e+1}\sqcup\{(i,e+1)\}$ の個数の漸化式と帰納法で、本文・SageMath（PASS 683）・Lean 具体版・必要十分版（初項が空で一つずつ $e+1$ 個増える有限型の族）・導出版で示した。前回の偶数の次数の対の個数の本文を読み直し修正なし。
 
 ## 直近の記録から移したもの
