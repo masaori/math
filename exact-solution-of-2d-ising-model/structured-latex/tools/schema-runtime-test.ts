@@ -6,7 +6,7 @@
  * 入力言語そのものの実行時検証（ノード種別、見出しに本文、`proof` の打ち間違い、
  * ノートの targets が空 ほか）は**システム側の単体テスト**
  * （`structured-latex/domain-model/structured-text/validate.test.ts`）が持つ。
- * ここに残すのは、このプロジェクトが宣言したメタデータ `conversion` に関する検査だけである。
+ * ここに残すのは、このプロジェクトが宣言したメタデータ `conversion`・`lean` に関する検査だけである。
  * ——すなわち「`schema.ts` の `blockMeta` 宣言が、実行時にも意図どおり効いているか」の検査。
  *
  * システムの実行時スキーマは **throw せず Result を返す**（docs/error-handling-strategy.md）。
@@ -16,6 +16,7 @@
  */
 
 import { runtimeSchema } from "../schema.ts";
+import { leanFieldIssueOf } from "./lean-field.ts";
 
 type Case = {
   name: string;
@@ -52,6 +53,28 @@ const cases: Case[] = [
     name: "宣言していないメタデータのキーを拒む（他プロジェクトの語彙の混入）",
     value: { ...base, habitat: "countable" },
     expect: /habitat|Unrecognized key/,
+  },
+  {
+    name: "lean が空の配列なら拒む（具体版の宣言が無いブロックには書かない）",
+    value: { ...base, lean: [] },
+    expect: /lean/,
+  },
+  {
+    name: "lean の宣言名が Ising2D の完全な名前でないなら拒む",
+    value: { ...base, lean: ["sigmaZ_eq_diagonal"] },
+    expect: /lean/,
+  },
+  {
+    name: "見出しは lean を持てない",
+    value: {
+      id: "runtime_test_heading_lean",
+      kind: "heading",
+      level: 2,
+      title: { text: "見出し" },
+      labels: [],
+      lean: ["Ising2D.sigmaZ_eq_diagonal"],
+    },
+    expect: /lean|Unrecognized key/,
   },
   {
     name: "見出しはメタデータを持てない（conversion は定理型だけ）",
@@ -105,8 +128,24 @@ if (!control.success) {
   console.log("✓ 正しいブロック（conversion 付き）は通る");
 }
 
+// 欄 lean の、validate-content.ts が掛ける規則（lean-field.ts）。
+const leanFieldCases: Array<{ name: string; block: { kind: string; lean?: readonly string[] }; expect: RegExp | undefined }> = [
+  { name: "注意（remark）の欄 lean を拒む", block: { kind: "remark", lean: ["Ising2D.sigmaZ"] }, expect: /定義・主張・定理だけ/ },
+  { name: "欄 lean の同じ名前の重複を拒む", block: { kind: "claim", lean: ["Ising2D.sigmaZ", "Ising2D.sigmaZ"] }, expect: /二度ある/ },
+  { name: "主張の正しい欄 lean は通る", block: { kind: "claim", lean: ["Ising2D.sigmaZ", "Ising2D.sigmaX"] }, expect: undefined },
+];
+for (const c of leanFieldCases) {
+  const issue = leanFieldIssueOf(c.block);
+  const ok = c.expect === undefined ? issue === undefined : issue !== undefined && c.expect.test(issue);
+  if (ok) console.log(`✓ ${c.name}`);
+  else {
+    failed += 1;
+    console.error(`✗ ${c.name}: ${issue ?? "拒まれなかった"}`);
+  }
+}
+
 if (failed > 0) {
   console.error(`\n${failed} 件の実行時検証テストが期待どおりに動かなかった`);
   process.exit(1);
 }
-console.log(`\n実行時検証テスト ${cases.length + 1} 件すべて期待どおり`);
+console.log(`\n実行時検証テスト ${cases.length + 1 + leanFieldCases.length} 件すべて期待どおり`);

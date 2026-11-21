@@ -15,6 +15,7 @@
  * 使い方: node structured-latex/tools/validate-content.ts
  */
 
+import { leanFieldIssueOf } from "./lean-field.ts";
 import { ALL_LABELS } from "../labels.generated.ts";
 import { runtimeSchema } from "../schema.ts";
 import type { ConvertedBlock, Node, ValidationIssue } from "../schema.ts";
@@ -57,6 +58,8 @@ for (const { file, blocks } of contentFiles) {
     }
     scanForTypstMath(block, file);
     collectRefTargets(block, file, refs);
+    const leanFieldIssue = leanFieldIssueOf(block);
+    if (leanFieldIssue !== undefined) throw new Error(`${file}:${block.id}: ${leanFieldIssue}`);
   }
 }
 

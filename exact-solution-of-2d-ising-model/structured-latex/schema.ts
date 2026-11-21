@@ -6,7 +6,7 @@
  * このファイルがやることは 3 つだけである（システムの docs/domain-model.md §5.4）。
  *
  *   1. 生成された `Label`（content に実在するラベルのユニオン型）を受け取る
- *   2. このプロジェクト固有のメタデータ（`conversion` = Typst 原本からの移行の由来）を宣言する
+ *   2. このプロジェクト固有のメタデータ（`conversion` = Typst 原本からの移行の由来、`lean` = 対応する Lean の具体版の宣言）を宣言する
  *   3. ファクトリを具体化して `defineBlocks` / `defineNotes` / `ref` を得る
  *
  * 型で捕まえること（コンパイル時）と実行時にしか捕まえられないことの切り分けは、
@@ -58,7 +58,16 @@ export type Conversion = {
  * `origin.path` から一意に復元できることを確認したうえで落としてある
  * （`tools/codemod-source-to-origin.ts` がその確認を機械的に行う）。
  */
-export type ConversionMeta = { conversion?: Conversion };
+export type ConversionMeta = {
+  conversion?: Conversion;
+  /**
+   * このブロックに対応する Lean の具体版の宣言の完全な名前（例 `Ising2D.sigmaZ_eq_diagonal`）。
+   * 主の宣言を先頭に置き、Step ごとの宣言や特殊化した宣言を続ける。具体版の宣言が無いブロックには書かない。
+   * 宣言が実在し具体版であることと、本文の引用との一致は `lean/scripts/text-and-concrete-one-to-one/check.sh` が
+   * ビルド後の Lean の環境と突き合わせて確かめる（型システムは Lean の環境を読めない）。
+   */
+  lean?: readonly string[];
+};
 
 // --- 入力言語の具体化 --------------------------------------------------------
 
@@ -74,9 +83,10 @@ export const { defineBlocks, defineNotes, ref } = createStructuredTextSchema<
 export const runtimeSchema = createRuntimeSchema<
   Label,
   ConversionMeta,
-  { conversion: z.ZodTypeAny }
+  { conversion: z.ZodTypeAny; lean: z.ZodTypeAny }
 >({
   blockMeta: {
+    lean: z.array(z.string().regex(/^Ising2D\.[^\s]+$/)).min(1).optional(),
     conversion: z
       .object({
         status: z.enum(["converted", "added"]),

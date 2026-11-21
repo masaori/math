@@ -9,14 +9,23 @@
 //     比べるのは引かれたブロックのうち主張と定理だけで、定義は比べない（主張どうしの依存を比べる）。
 //   - runbook の「証明の後の注で触れるだけの参照は根拠に数えない」について: 本文の書式は証明と注を分ける構造を持たないので、
 //     証明の中の参照は全て数える（2026-11-21 の本文で、証明の後の「なお、…」の段落が引くのは定義だけで、結果に影響しない）。
+// ブロックと具体版の宣言の対応:
+//   - 正本は本文のブロックの欄 `lean`（具体版の宣言の完全な名前の列）である。欄に書いた宣言はそのブロックだけに対応し、
+//     docstring の太字が別のブロックを指していても欄が勝つ。ブロックの具体版の証明をたどる起点は欄に書いた宣言だけである
+//     （主の宣言を先頭に、Step ごとの宣言や特殊化した宣言を続ける）。
+//   - 欄に書いた名前が、ビルド後の環境に無いか具体版でない宣言（必要十分版・導出・RoutesNotAdopted）を指すなら
+//     LEAN_FIELD_NOT_CONCRETE_DECLARATION の行に、二つのブロックの欄に同じ宣言があるなら LEAN_FIELD_SHARED_DECLARATION の行に出す。
+//     欄に書いた宣言の docstring の太字が別のブロックを指すなら LEAN_FIELD_DOCSTRING_CONFLICT の行に、docstring の太字が欄を持つ
+//     ブロックを指すのにその欄に無い具体版の宣言は LEAN_FIELD_MISSING_DECLARATION の行に出す。
+//     どの行も台帳に載せず、出たら欄か docstring を直す。
+//   - 欄の無いブロックは、移行の間だけ docstring の太字で対応を取り（下の規則）、対応が取れたら NO_LEAN_FIELD の行に出す。
 // Lean の側（lean.tsv）:
-//   - 具体版の宣言が対応するブロックは、docstring の先頭の太字の中にバッククォートで書いた語のうち、最初に現れる
+//   - 欄の無い具体版の宣言が対応するブロックは、docstring の先頭の太字の中にバッククォートで書いた語のうち、最初に現れる
 //     「本文のラベルか、ラベルの形の語（下線で区切った三つ以上の語。山括弧 <…> や &lt;…&gt; で囲んだものは外して読む）」である。
 //     太字はほかのブロックの名前も出す（「`A` の Step 3 が引く `B`」）ので、対応先は最初の一つだけにする。
 //     ラベルの形なのに本文に無い語が最初に現れた宣言は、UNKNOWN_LABEL_IN_DOCSTRING の行に出し、どのブロックにも対応させず、たどらない。
 //     下線が一つの語（`Y_m` など）は記号と見分けられないのでラベルの形に数えない。そのため二語の古いラベルが太字の先頭にあると読み飛ばす。
 //   - 一つのブロックに対応する具体版の宣言が二つ以上あるときは（Step ごとの宣言、特殊化した宣言）、全てから依存をたどった和で比べる。
-//     主の宣言を一つに決める書き方は、本文に Lean の対応先の欄を足す行（状態台帳）で入れる。
 //   - 主張・定理のブロック B について、B に対応する具体版の宣言から証明の依存をたどる。たどった宣言が
 //       ・B 以外のブロックに対応する具体版の宣言なら、そのブロックを Lean の証明が使うブロックに数え、その先はたどらない。
 //       ・B 以外のブロックに対応する、具体版でない宣言（必要十分版・導出）なら、使ったことに数えず、たどらない。
@@ -27,6 +36,11 @@
 //
 // 書き出す行（タブ区切り）:
 //   NO_CONCRETE_DECLARATION  <ブロック>            対応する具体版の宣言が無い定義・主張・定理
+//   NO_LEAN_FIELD            <ブロック>            欄 `lean` が無く、docstring の太字でだけ対応が取れる定義・主張・定理
+//   LEAN_FIELD_NOT_CONCRETE_DECLARATION  <ブロック>  <名前>  欄 `lean` の名前が具体版の宣言でない（台帳に載せない）
+//   LEAN_FIELD_SHARED_DECLARATION  <宣言>  <ブロック>  二つ以上のブロックの欄 `lean` に書いた宣言（台帳に載せない）
+//   LEAN_FIELD_DOCSTRING_CONFLICT  <宣言>  <docstring が指すブロック>  欄と docstring が別のブロックを指す（台帳に載せない）
+//   LEAN_FIELD_MISSING_DECLARATION  <ブロック>  <宣言>  docstring がこのブロックを指すのに欄に無い具体版の宣言（台帳に載せない）
 //   UNKNOWN_LABEL_IN_DOCSTRING  <具体版の宣言>  <語>  docstring の先頭の太字が、本文に無いラベルを指す具体版の宣言
 //   CITED_ONLY_IN_TEXT       <ブロック>  <引くブロック>  本文の証明か主張が引くのに、具体版の証明が使わない主張・定理
 //   USED_ONLY_IN_LEAN        <ブロック>  <使うブロック>  具体版の証明が使うのに、本文の証明も主張も引かない主張・定理
@@ -40,7 +54,7 @@ if (!leanTsv || !contentDir || !countsPath) {
   process.exit(2);
 }
 
-type TextBlock = { name: string; kind: string; labels: string[]; cites: Set<string> };
+type TextBlock = { name: string; kind: string; labels: string[]; cites: Set<string>; lean?: string[] };
 
 const countedKinds = new Set(["definition", "claim", "theorem"]);
 const claimKinds = new Set(["claim", "theorem"]);
@@ -71,7 +85,7 @@ for (const f of readdirSync(contentDir).filter((f) => f.endsWith(".ts")).sort())
   const mod = await import(resolve(join(contentDir, f)));
   for (const v of Object.values(mod)) {
     if (!Array.isArray(v)) continue;
-    for (const b of v as Array<{ id?: string; labels?: string[]; kind?: string; proof?: unknown }>) {
+    for (const b of v as Array<{ id?: string; labels?: string[]; kind?: string; proof?: unknown; lean?: string[] }>) {
       if (!b || typeof b !== "object" || !Array.isArray(b.labels) || b.labels.length === 0) continue;
       if (!countedKinds.has(b.kind ?? "")) continue;
       // 同じブロックを二つ以上の書き出しの名前で持つモジュールがあっても、一度だけ数える。
@@ -80,7 +94,7 @@ for (const f of readdirSync(contentDir).filter((f) => f.endsWith(".ts")).sort())
       const cites = new Set<string>();
       collectRefs(b.proof ?? [], cites);
       collectRefs((b as { statement?: unknown }).statement ?? [], cites);
-      const tb: TextBlock = { name: b.labels[0], kind: b.kind!, labels: [...b.labels], cites };
+      const tb: TextBlock = { name: b.labels[0], kind: b.kind!, labels: [...b.labels], cites, lean: b.lean ? [...b.lean] : undefined };
       blocks.push(tb);
       for (const l of b.labels) blockOfLabel.set(l, tb);
     }
@@ -89,7 +103,16 @@ for (const f of readdirSync(contentDir).filter((f) => f.endsWith(".ts")).sort())
 
 // --- Lean ---------------------------------------------------------------------
 
-type Decl = { name: string; theorem: boolean; concrete: boolean; labeled: boolean; blocks: Set<TextBlock>; uses: string[] };
+type Decl = {
+  name: string;
+  theorem: boolean;
+  concrete: boolean;
+  labeled: boolean;
+  blocks: Set<TextBlock>;
+  /** docstring の太字だけから決めたブロック（欄で上書きする前の値）。 */
+  docBlocks: Set<TextBlock>;
+  uses: string[];
+};
 const labelShaped = /^[A-Za-z][A-Za-z0-9]*(_[A-Za-z0-9]+){2,}$/;
 const unknownLabels: string[] = [];
 const decls = new Map<string, Decl>();
@@ -119,7 +142,15 @@ for (const line of readFileSync(leanTsv, "utf8").split("\n")) {
         break;
       }
     }
-    decls.set(name, { name, theorem: kind === "theorem", concrete: concrete === "1", labeled, blocks: bs, uses: [] });
+    decls.set(name, {
+      name,
+      theorem: kind === "theorem",
+      concrete: concrete === "1",
+      labeled,
+      blocks: bs,
+      docBlocks: new Set(bs),
+      uses: [],
+    });
   } else if (cols[0] === "USES") {
     pendingUses.push([cols[1], cols[2]]);
   } else {
@@ -128,6 +159,38 @@ for (const line of readFileSync(leanTsv, "utf8").split("\n")) {
   }
 }
 for (const [a, b] of pendingUses) decls.get(a)?.uses.push(b);
+
+// 欄 `lean` の対応を docstring の対応より先に決める。
+const fieldRows: string[] = [];
+const fieldOwner = new Map<string, TextBlock>();
+const fieldStarts = new Map<TextBlock, Decl[]>();
+for (const b of blocks) {
+  if (!b.lean) continue;
+  const starts: Decl[] = [];
+  for (const n of b.lean) {
+    const d = decls.get(n);
+    if (!d || !d.concrete) {
+      fieldRows.push(`LEAN_FIELD_NOT_CONCRETE_DECLARATION\t${b.name}\t${n}`);
+      continue;
+    }
+    const owner = fieldOwner.get(n);
+    if (owner && owner !== b) {
+      fieldRows.push(`LEAN_FIELD_SHARED_DECLARATION\t${n}\t${owner.name}`);
+      fieldRows.push(`LEAN_FIELD_SHARED_DECLARATION\t${n}\t${b.name}`);
+      continue;
+    }
+    fieldOwner.set(n, b);
+    for (const c of d.docBlocks) if (c !== b) fieldRows.push(`LEAN_FIELD_DOCSTRING_CONFLICT\t${n}\t${c.name}`);
+    d.blocks = new Set([b]);
+    d.labeled = true;
+    starts.push(d);
+  }
+  fieldStarts.set(b, starts);
+}
+for (const d of decls.values()) {
+  if (!d.concrete || fieldOwner.has(d.name)) continue;
+  for (const c of d.docBlocks) if (c.lean) fieldRows.push(`LEAN_FIELD_MISSING_DECLARATION\t${c.name}\t${d.name}`);
+}
 
 const concreteOf = new Map<TextBlock, Decl[]>();
 for (const d of decls.values()) {
@@ -161,16 +224,17 @@ function usedBlocks(b: TextBlock, starts: Decl[]): Set<TextBlock> {
 
 // --- 突き合わせ ---------------------------------------------------------------
 
-const rows: string[] = [...unknownLabels];
+const rows: string[] = [...unknownLabels, ...fieldRows];
 let withConcrete = 0;
 let compared = 0;
 let matched = 0;
 for (const b of blocks) {
-  const starts = concreteOf.get(b) ?? [];
+  const starts = b.lean ? (fieldStarts.get(b) ?? []) : (concreteOf.get(b) ?? []);
   if (starts.length === 0) {
-    rows.push(`NO_CONCRETE_DECLARATION\t${b.name}`);
+    if (!b.lean) rows.push(`NO_CONCRETE_DECLARATION\t${b.name}`);
     continue;
   }
+  if (!b.lean) rows.push(`NO_LEAN_FIELD\t${b.name}`);
   withConcrete++;
   if (!claimKinds.has(b.kind)) continue;
   compared++;
@@ -193,6 +257,7 @@ writeFileSync(
   [
     `本文の定義・主張・定理のブロック\t${blocks.length}`,
     `具体版の宣言を持つブロック\t${withConcrete}`,
+    `欄 lean を持つブロック\t${blocks.filter((b) => b.lean).length}`,
     `比べた主張・定理\t${compared}`,
     `引く主張と使う主張が一致する主張・定理\t${matched}`,
   ].join("\n") + "\n",

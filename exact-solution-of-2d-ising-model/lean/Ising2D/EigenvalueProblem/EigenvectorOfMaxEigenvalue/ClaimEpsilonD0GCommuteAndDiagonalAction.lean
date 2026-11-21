@@ -270,10 +270,12 @@ Lean の数ベクトルは 1 列の行列ではなく `Conf M → ℂ` なので
 `real_inclusion_preserves_finite_sum` は具体版の `Finset.filter` の上の和の形 `real_inclusion_of_finite_sum_finset` を引く
 （人手は `M_col ≥ 2` だが、Lean の主張は人手の範囲外の `M ≤ 1` も含み、そのとき和は空なので、空の場合を分ける版を経る）。`real_inclusion_preserves_product` は具体版 `real_inclusion_mul` を引く。 -/
 
-/-- **人手 `D0_G_diagonal_action` の準備** `(σ^z_aσ^z_b)f_{ι(s)} = ⋯ = (s(a)s(b))_ℂ f_{ι(s)}` の 7 行。
+/-- **人手 `sigma_z_product_action`** `(σ^z_aσ^z_b)f_{ι(s)} = ⋯ = (s(a)s(b))_ℂ f_{ι(s)}`。
 
-人手の準備は `a = m`、`b = m + 1` について書くが、鎖は `b = a + 1` を使わないので、Lean は相異なるとも限らない
-任意の 2 サイト `a, b` について述べる（開鎖項の鎖で `a → m`、`b → m + 1` として使う）。 -/
+人手 `sigma_z_product_action` の 6 行の鎖と、最初の 5 段が同じ順で対応する。人手の最後の段（ℂ の積の可換律）は、
+Lean では `real_inclusion_preserves_product` で `(s(b))_ℂ(s(a))_ℂ = (s(b)s(a))_ℂ` とまとめてから ℝ の積の交換律を使う 2 段になる
+（右辺を ℝ の積の像で述べるため）。人手 `D0_G_diagonal_action` の準備の 7 行も同じ鎖で、Lean はこの定理を開鎖項の鎖で
+`a → m`、`b → m + 1` として使う。人手の主張と同じく、`a, b` は相異なるとも限らない任意の 2 サイトである。 -/
 theorem sigmaZ_mul_sigmaZ_mulVec_basisVec_spin (a b : Fin M) (s : SpinConf M) :
     (sigmaZ a * sigmaZ b) *ᵥ basisVec (configBasisIso M s)
       = (((s a : ℝ) * (s b : ℝ) : ℝ) : ℂ) • basisVec (configBasisIso M s) :=

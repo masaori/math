@@ -56,6 +56,7 @@ export default defineBlocks([
     },
     title: { text: "2次元ising模型の分配関数" },
     labels: ["def_partition_function_2d_ising"],
+    lean: ["Ising2D.partitionFunction"],
     statement: [
       paragraph([
         ref("def_lattice_size"),
@@ -150,6 +151,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/001_partition_function_2d_ising.ts", ordinal: 3 },
     title: { text: "1 行ぶんのスピン配置の全体" },
     labels: ["def_row_configurations"],
+    lean: ["Ising2D.SpinConf"],
     statement: [
       paragraph([
         ref("def_lattice_size"),
@@ -170,6 +172,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/001_partition_function_2d_ising.ts", ordinal: 4 },
     title: { text: "1 行ぶんのスピン配置の番号付け" },
     labels: ["def_row_configuration_numbering"],
+    lean: ["Ising2D.rowConfigOrd"],
     statement: [
       paragraph([
         ref("def_row_configurations"),
@@ -207,6 +210,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/001_partition_function_2d_ising.ts", ordinal: 5 },
     title: { text: "1 行ぶんのスピン配置の番号付けは全単射" },
     labels: ["row_configuration_numbering_bijective"],
+    lean: ["Ising2D.row_configuration_numbering_bijective"],
     statement: [
       paragraph([
         ref("def_row_configuration_numbering"),
@@ -375,6 +379,7 @@ export default defineBlocks([
     origin: { path: "_old/typst/parts/001_2次元ising模型の分配関数/002_definition_転送行列.typ", ordinal: 3 },
     title: { text: "転送行列" },
     labels: ["def_transfer_matrix"],
+    lean: ["Ising2D.V1", "Ising2D.V2", "Ising2D.V1_apply_configBasisIso", "Ising2D.V2_apply_configBasisIso"],
     statement: [
       paragraph([
         ref("def_partition_function_2d_ising"),
@@ -480,6 +485,7 @@ export default defineBlocks([
     },
     title: { text: "転送行列による分配関数の表式" },
     labels: ["partition_function_via_transfer_matrix"],
+    lean: ["Ising2D.partition_function_via_transfer_matrix"],
     statement: [
       paragraph([
         ref("def_partition_function_2d_ising"),
@@ -873,6 +879,7 @@ s(i,M_{\mathrm{col}}+1)
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
     title: { text: "サイトごとの Pauli 行列族" },
     labels: ["def_site_pauli_matrices"],
+    lean: ["Ising2D.sigmaX", "Ising2D.sigmaY", "Ising2D.sigmaZ", "Ising2D.siteOp"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -923,6 +930,7 @@ s(i,M_{\mathrm{col}}+1)
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 2 },
     title: { text: "サイトごとの Pauli 行列族の周期的な延長" },
     labels: ["def_site_pauli_periodic_extension"],
+    lean: ["Ising2D.nextSite", "Ising2D.sigmaZ_nextSite_of_last"],
     statement: [
       paragraph([
         ref("def_site_pauli_matrices"),
@@ -953,6 +961,7 @@ s(i,M_{\mathrm{col}}+1)
     kind: "claim",
     title: { text: "相異なるサイトに置いた Pauli 行列は可換" },
     labels: ["distinct_site_pauli_matrices_commute"],
+    lean: ["Ising2D.siteOp_mul_comm"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -1082,6 +1091,7 @@ y_ix_i
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 3 },
     title: { text: "スピン配置から多重添字への写像" },
     labels: ["def_config_basis_iso"],
+    lean: ["Ising2D.configBasisIso"],
     statement: [
       paragraph([
         ref("def_row_configurations"),
@@ -1135,6 +1145,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 3 },
     title: { text: "スピン配置の番号付けはクロネッカー積の番号付けと一致する" },
     labels: ["config_numbering_equals_kronecker_numbering"],
+    lean: ["Ising2D.config_numbering_equals_kronecker_numbering"],
     statement: [
       paragraph([
         ref("def_row_configuration_numbering"),
@@ -1202,6 +1213,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 4 },
     title: { tex: String.raw`\sigma_m^z \text{ の基底 } f_{\iota(\mu)} \text{ への作用}` },
     labels: ["sigma_z_diagonal_action"],
+    lean: ["Ising2D.sigmaZ_mulVec_basisVec_spin", "Ising2D.sigmaZ_mulVec_basisVec"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \mathfrak{M}`),
@@ -1416,6 +1428,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
     kind: "claim",
     title: { tex: String.raw`\sigma_m^z\sigma_{m'}^z \text{ の基底 } f_{\iota(\mu)} \text{ への作用}` },
     labels: ["sigma_z_product_action"],
+    lean: ["Ising2D.sigmaZ_mul_sigmaZ_mulVec_basisVec_spin", "Ising2D.sigmaZ_mul_sigmaZ_mulVec_basisVec"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \mathfrak{M}`),
@@ -1461,6 +1474,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
     kind: "claim",
     title: { tex: String.raw`\sigma_m^z \text{ は対角行列}` },
     labels: ["site_sigma_z_is_diagonal"],
+    lean: ["Ising2D.sigmaZ_eq_diagonal"],
     statement: [
       paragraph([
         math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
@@ -1557,6 +1571,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
     kind: "claim",
     title: { tex: String.raw`\sigma_m^z\sigma_{m'}^z \text{ は対角行列}` },
     labels: ["site_sigma_z_product_is_diagonal"],
+    lean: ["Ising2D.sigmaZ_mul_sigmaZ_apply_of_ne"],
     statement: [
       paragraph([
         math(String.raw`m, m' \in \{1,\dots,M_{\mathrm{col}}\}`),
@@ -1675,6 +1690,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
     kind: "claim",
     title: { tex: String.raw`\sigma_m^z\sigma_{m'}^z \text{ の対角成分}` },
     labels: ["site_sigma_z_product_diagonal_entry"],
+    lean: ["Ising2D.sigmaZ_mul_sigmaZ_apply_configBasisIso_self"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \mathfrak{M}`),
@@ -1751,6 +1767,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
     title: { tex: String.raw`V_1 \text{ のパウリ行列表示}` },
     labels: ["first_transfer_matrix_pauli_form"],
+    lean: ["Ising2D.first_transfer_matrix_pauli_form", "Ising2D.V1PauliForm"],
     statement: [
       paragraph([
         ref("def_transfer_matrix"),
@@ -1979,6 +1996,7 @@ D_{kk}
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
     title: { text: "正の結合定数上の双曲線正接" },
     labels: ["def_positive_coupling_tanh"],
+    lean: ["Ising2D.tanh_pos", "Ising2D.positive_coupling_tanh_lt_one"],
     statement: [
       paragraph([
         ref("def_cosh_sinh"),
@@ -2092,6 +2110,7 @@ K\in\mathbb{R}
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
     title: { text: "正の実数上の実対数は狭義単調増加" },
     labels: ["real_log_strictly_increasing"],
+    lean: ["Ising2D.real_log_strictly_increasing"],
     statement: [
       paragraph([
         ref("def_real_logarithm_positive"),
@@ -2324,6 +2343,7 @@ K_1^*\in\mathbb{R}\ \land\ K_1^*>0
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
     title: { text: "第二の双対結合定数" },
     labels: ["def_second_dual_coupling_constant"],
+    lean: ["Ising2D.Kstar", "Ising2D.IsingParam.K2star", "Ising2D.Kstar_pos"],
     statement: [
       paragraph([
         ref("def_partition_function_2d_ising"),
@@ -2417,6 +2437,7 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
     title: { text: "双曲線関数の添字つき略記" },
     labels: ["def_indexed_hyperbolic_abbreviations"],
+    lean: ["Ising2D.indexedHyperbolicAbbreviations", "Ising2D.IndexedHyperbolicAbbreviations"],
     statement: [
       paragraph([
         ref("def_partition_function_2d_ising"),
@@ -2461,6 +2482,7 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 7 },
     title: { tex: String.raw`2\times 2 \text{ の転送行列の恒等式}` },
     labels: ["two_by_two_transfer_identity"],
+    lean: ["Ising2D.two_by_two_transfer_identity"],
     statement: [
       paragraph([
         math(String.raw`K_2 \in \mathbb{R}_{>0}`),
@@ -3201,6 +3223,7 @@ A
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 5 },
     title: { text: "第二の転送行列のパウリ行列表示の前係数" },
     labels: ["def_second_transfer_matrix_prefactor"],
+    lean: ["Ising2D.secondTransferPrefactor"],
     statement: [
       paragraph([
         ref("def_partition_function_2d_ising"),
@@ -3247,6 +3270,7 @@ A
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 6 },
     title: { tex: String.raw`V_2 \text{ のパウリ行列表示}` },
     labels: ["second_transfer_matrix_pauli_form"],
+    lean: ["Ising2D.second_transfer_matrix_pauli_form", "Ising2D.second_transfer_matrix_pauli_form_prefactor", "Ising2D.V2PauliForm"],
     statement: [
       paragraph([
         ref("def_transfer_matrix"),
@@ -3475,6 +3499,7 @@ V_2
     standing: "mainTheorem",
     title: { text: "Pauli 行列で書いた転送行列による分配関数の表式" },
     labels: ["partition_function_via_pauli_transfer_matrices"],
+    lean: ["Ising2D.partition_function_via_pauli_transfer_matrices"],
     statement: [
       paragraph([
         ref("def_partition_function_2d_ising"),
