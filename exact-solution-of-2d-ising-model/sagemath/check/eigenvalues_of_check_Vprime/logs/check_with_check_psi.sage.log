@@ -1,9 +1,9 @@
   本物の ψ̌ の ň_μ: 6 組（本物の ψ̌ (x,y)=(2,2) M=2, 本物の ψ̌ (x,y)=(2,2) M=3, 本物の ψ̌ (x,y)=(3,3/2) M=2, 本物の ψ̌ (x,y)=(3,3/2) M=3, 本物の ψ̌ (x,y)=(5/4,3) M=2, 本物の ψ̌ (x,y)=(5/4,3) M=3）
 == check_step1_left_chain.sage（本物の ψ̌）
-checked 517 steps (settings M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)
+checked 1469 steps (μ ごとの左の等式と X̌Q̌_ε の 8 行の鎖、settings M = 2, 3, 4 with all eps、否定コントロールの等号を含む); 否定コントロール 3 本で (3) を引く行だけが外れる
 RESULT: PASS
 == check_step1_right_chain.sage（本物の ψ̌）
-checked 517 steps (settings M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)
+checked 1469 steps (μ ごとの右の等式と Q̌_εX̌ の 8 行の鎖、settings M = 2, 3, 4 with all eps、否定コントロールの等号を含む); 否定コントロール 3 本で (3) を引く行だけが外れる
 RESULT: PASS
 == check_step2_step3prime_induction_and_step4_idempotent_chains.sage（本物の ψ̌）
 PASS eigenvalues_of_check_Vprime Step 2・Step 3' の帰納法と Step 4 の鎖: 3313 段、否定コントロール 9 行

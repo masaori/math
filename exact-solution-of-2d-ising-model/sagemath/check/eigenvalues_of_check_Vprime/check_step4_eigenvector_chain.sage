@@ -4,8 +4,8 @@
 # を、括弧どおりに一行ずつ厳密に確かめる（y = Q̌_εx）。
 # 鎖が使う仮定は、前半の鎖の Q̌_εy = y と Step 3 の V̌'Q̌_ε = (exp ǧ(ε))_ℂ Q̌_ε だけである。
 # ň_μ は _vprime_settings.sage が読み込む number_operator_settings() から取る（既定は Jordan–Wigner の模型 n_μ := c_μ^T c_μ、
-# check_with_check_psi.sage からは本文の ψ̌ の ň_μ）。Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň、R^{(0)} := I − ň）。
-# exp(γ_μ/2) を不定元 t_μ に置き、V̌' := Π_μ (t_μ^{-1}(I − ň_μ) + t_μ ň_μ)、(exp ǧ(ε))_ℂ := Π_μ t_μ^{2ε_μ − 1} とする
+# check_with_check_psi.sage からは本文の ψ̌ の ň_μ）。Q̌_ε := Π_μ R_μ^{(ε(μ))}（R^{(1)} := ň、R^{(0)} := I − ň）。
+# exp(γ_μ/2) を不定元 t_μ に置き、V̌' := Π_μ (t_μ^{-1}(I − ň_μ) + t_μ ň_μ)、(exp ǧ(ε))_ℂ := Π_μ t_μ^{±1}（ε(μ) = 1 なら t_μ、0 なら t_μ^{-1}。exp(γ_μ h(ε(μ)))） とする
 # （ň_μ は互いに可換な冪等行列なので、これは exp(Σ_μ γ_μ(ň_μ − 1/2)) の値と同じ形の式である。
 # 指数関数の値そのものは ℝ への脱出なので、ここでは不定元のローラン多項式環 F[t^{±1}] の中で鎖の形だけを確かめる）。
 # M = 2, 3、ε を全列挙、x は有理数の列ベクトル 2 本。
@@ -50,7 +50,7 @@ for (tag, M, F, ns) in number_operator_settings():
           vector(K, [QQ((-1) ** j * (2 * j + 5)) / 3 for j in range(2 ** M)]).column()]
     for eps in cartesian_product([[0, 1]] * M):
         Q = joint_projector(n, eps, Id)
-        e = prod(t[mu] ** (2 * eps[mu] - 1) for mu in range(M))
+        e = prod(t[mu] if eps[mu] == 1 else t[mu] ** (-1) for mu in range(M))   # exp(γ_μ h(ε(μ)))、h(1) = ½・h(0) = −(½)
         assert V * Q == e * Q                                # 仮定 Step 3 が成り立つ
         for x in xs:
             y = Q * x

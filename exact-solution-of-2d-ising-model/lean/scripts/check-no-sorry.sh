@@ -2655,10 +2655,7 @@ targets=(
   Ising2D.CheckFermi.finProdLeft_mul_Qproj
   Ising2D.CheckFermi.parityFactor_mul_Qproj_of_necSuf
   Ising2D.CheckFermi.finProdLeft_mul_Qproj_of_necSuf
-  "Ising2D.NecSuf.one_sub_smul_mul_eq_smul'"
-  "Ising2D.NecSuf.finProdLeft_mul_eq_prod_smul'"
   Ising2D.CheckFermi.parityProd
-  Ising2D.CheckFermi.prod_one_sub_two_mul_indicator
   Ising2D.CheckFermi.parityProd_mul_Qproj
   Ising2D.CheckFermi.neg_one_pow_mul_self
   Ising2D.CheckFermi.epsilon_mul_Qproj_eq_smul_parityProd_mul
@@ -2703,7 +2700,6 @@ targets=(
   Ising2D.VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH
   Ising2D.VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf
   "Ising2D.NecSuf.signed_term_eq_map_mul'"
-  Ising2D.ite_eq_one_eq_val_real
   Ising2D.VPlusData.checkW
   Ising2D.VPlusData.checkLambda_finsetOfWord
   Ising2D.VPlusData.checkT_eq_prod_checkW_mul

@@ -30,7 +30,15 @@ export default defineBlocks([
         ref("def_simple_eigenvalue"),
         "）であり、その固有空間は ",
         math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
-        " である。以下では、",
+        "（",
+        math(String.raw`\check{Q}_\epsilon`),
+        " は ",
+        ref("def_check_Q_epsilon"),
+        "、",
+        math(String.raw`(1,\dots,1)`),
+        " は ",
+        ref("def_binary_assignments_on_check_index_set"),
+        " の定数写像）である。以下では、",
         math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
         " が ",
         ref("def_even_eigenvectors_of_epsilon"),
@@ -65,7 +73,13 @@ export default defineBlocks([
         "、",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " は ",
-        ref("check_joint_eigenspace_decomposition"),
+        ref("def_binary_assignments_on_check_index_set"),
+        " の写像 ",
+        math(String.raw`\epsilon : \check{\mathcal{M}} \to \{0,1\}`),
+        " で、",
+        ref("def_check_Q_epsilon"),
+        " の ",
+        math(String.raw`\check{Q}_\epsilon`),
         " の添字である。**字体が違うだけの別物なので注意する**）。",
       ]),
       list([
@@ -90,16 +104,26 @@ export default defineBlocks([
           "（",
           math(String.raw`\eta_\epsilon \in \{+1,-1\}`),
           "）。しかも ",
+          math(String.raw`\epsilon(\mu) = 0`),
+          " のとき ",
           math(String.raw`\check\psi_\mu^\dagger`),
           " が ",
-          math(String.raw`\epsilon_\mu`),
-          " を ",
+          math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+          " の元を ",
+          math(String.raw`\mathrm{im}\,\check{Q}_{\epsilon[\mu\to1]}`),
+          "（",
+          math(String.raw`\epsilon[\mu\to1]`),
+          " は ",
+          ref("def_binary_assignment_with_one_value_set_to_one"),
+          "）へ移し、かつ ",
+          math(String.raw`\varepsilon`),
+          " と反可換なので、",
+          math(String.raw`\epsilon`),
+          " の値を 1 つ ",
           math(String.raw`0`),
           " から ",
           math(String.raw`1`),
-          " へ移し、かつ ",
-          math(String.raw`\varepsilon`),
-          " と反可換なので、成分を 1 つ変えるたびに ",
+          " へ変えるたびに ",
           math(String.raw`\eta`),
           " の符号が反転する（",
           ref("epsilon_eigenvalue_on_check_Q"),
@@ -142,6 +166,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-21: ε の記法の書き直し（代表の指摘）。ε ∈ {0,1}^{M̌} の出所を check_joint_eigenspace_decomposition の添字から def_binary_assignments_on_check_index_set の写像に、Q̌_ε の出所を def_check_Q_epsilon に替え、(ii) の「ψ̌_μ^† が ε_μ を 0 から 1 へ移し」を、ε(μ) = 0 のとき im Q̌_ε の元を im Q̌_{ε[μ→1]}（def_binary_assignment_with_one_value_set_to_one）へ移す、と書いた。筋は変えていない。",
       ],
     },
   },
@@ -184,6 +209,15 @@ export default defineBlocks([
           math(String.raw`\text{(4)}\quad \varepsilon\,\check{n}_\mu = \check{n}_\mu\,\varepsilon,
 \qquad \varepsilon\,\check{Q}_\epsilon = \check{Q}_\epsilon\,\varepsilon
 \qquad \left(\epsilon \in \{0,1\}^{\check{\mathcal{M}}}\right)`),
+          "（",
+          math(String.raw`\check{Q}_\epsilon`),
+          " は ",
+          ref("def_check_Q_epsilon"),
+          "、",
+          math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+          " は ",
+          ref("def_binary_assignments_on_check_index_set"),
+          "）",
         ],
       ]),
       paragraph([
@@ -191,10 +225,6 @@ export default defineBlocks([
         math(String.raw`\check{n}_\mu`),
         " は ",
         ref("def_check_number_operator"),
-        "、",
-        math(String.raw`\check{Q}_\epsilon`),
-        " は ",
-        ref("check_joint_eigenspace_decomposition"),
         "。）",
       ]),
     ],
@@ -330,19 +360,17 @@ export default defineBlocks([
       ),
       paragraph([
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
-        " とし、",
+        "（",
+        ref("def_binary_assignments_on_check_index_set"),
+        "）とし、",
         math(String.raw`\nu \in \check{\mathcal{M}}`),
         " について ",
-        ref("check_joint_eigenspace_decomposition"),
+        ref("def_check_R_factor"),
         " の ",
-        math(String.raw`\check{Q}_\epsilon`),
-        " の定義の因子を ",
-        math(String.raw`A_\nu := \epsilon_\nu\,\check{n}_\nu + (1-\epsilon_\nu)\left(I - \check{n}_\nu\right)`),
-        " と書く（",
-        math(String.raw`\epsilon_\nu`),
-        "・",
-        math(String.raw`1-\epsilon_\nu`),
-        " はその定義のスカラー）。まず ",
+        math(String.raw`R_\nu^{(e)}`),
+        "（",
+        math(String.raw`e \in \{0,1\}`),
+        "）を使う。まず ",
         math(String.raw`\varepsilon`),
         " は ",
         math(String.raw`I`),
@@ -362,48 +390,76 @@ export default defineBlocks([
         math(String.raw`\varepsilon\,\check{n}_\nu = \check{n}_\nu\,\varepsilon`),
         "（",
         math(String.raw`\mu \to \nu`),
-        "）から、次の 3 式が成り立つ。",
+        "）から、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\left(I - \check{n}_\nu\right) &= \left(I - \check{n}_\nu\right)\varepsilon
-&&\bigl(\because\ \blkref{commuting_with_difference}\ (G \to \varepsilon,\ X \to I,\ W \to \check{n}_\nu)\text{。仮定は }\varepsilon I = I\varepsilon\text{ と }\varepsilon\check{n}_\nu = \check{n}_\nu\varepsilon\bigr)\\
-\varepsilon\bigl(\epsilon_\nu\,\check{n}_\nu\bigr) &= \bigl(\epsilon_\nu\,\check{n}_\nu\bigr)\varepsilon
-&&\bigl(\because\ \blkref{commuting_with_scalar_multiple}\ (G \to \varepsilon,\ c \to \epsilon_\nu,\ X \to \check{n}_\nu)\text{。仮定は }\varepsilon\check{n}_\nu = \check{n}_\nu\varepsilon\bigr)\\
-\varepsilon\Bigl((1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr) &= \Bigl((1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)\varepsilon
-&&\bigl(\because\ \blkref{commuting_with_scalar_multiple}\ (G \to \varepsilon,\ c \to 1-\epsilon_\nu,\ X \to I - \check{n}_\nu)\text{。仮定は 1 行目}\bigr)
-\end{aligned}`,
-      ),
-      paragraph(["したがって"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon\,A_\nu
-&= \varepsilon\Bigl(\epsilon_\nu\,\check{n}_\nu + (1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)
-&&\bigl(\because\ A_\nu\text{ の置き方}\bigr)\\
-&= \varepsilon\bigl(\epsilon_\nu\,\check{n}_\nu\bigr) + \varepsilon\Bigl((1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)
-&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\bigr)\\
-&= \bigl(\epsilon_\nu\,\check{n}_\nu\bigr)\varepsilon + \Bigl((1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)\varepsilon
-&&\bigl(\because\ \text{上の 3 式の 2 行目と 3 行目を 2 項へ同時適用}\bigr)\\
-&= \Bigl(\epsilon_\nu\,\check{n}_\nu + (1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)\varepsilon
-&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\bigr)\\
-&= A_\nu\,\varepsilon
-&&\bigl(\because\ A_\nu\text{ の置き方}\bigr)
+&&\bigl(\because\ \blkref{commuting_with_difference}\ (G \to \varepsilon,\ X \to I,\ W \to \check{n}_\nu)\text{。仮定は }\varepsilon I = I\varepsilon\text{ と }\varepsilon\check{n}_\nu = \check{n}_\nu\varepsilon\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "がすべての ",
+        "が成り立つ。",
+        math(String.raw`\varepsilon\,R_\nu^{(\epsilon(\nu))} = R_\nu^{(\epsilon(\nu))}\,\varepsilon`),
+        " を、",
+        math(String.raw`\epsilon(\nu)`),
+        " の値で場合を分けて示す。",
+        math(String.raw`\epsilon(\nu) = 1`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\,R_\nu^{(\epsilon(\nu))}
+&= \varepsilon\,R_\nu^{(1)}
+&&\bigl(\because\ \epsilon(\nu) = 1\bigr)\\
+&= \varepsilon\,\check{n}_\nu
+&&\bigl(\because\ \blkref{def_check_R_factor}\ \text{の}\ R_\nu^{(1)} := \check{n}_\nu\bigr)\\
+&= \check{n}_\nu\,\varepsilon
+&&\bigl(\because\ \text{上の}\ \varepsilon\,\check{n}_\mu = \check{n}_\mu\,\varepsilon\ (\mu \to \nu)\bigr)\\
+&= R_\nu^{(1)}\,\varepsilon
+&&\bigl(\because\ \blkref{def_check_R_factor}\ \text{の}\ R_\nu^{(1)} := \check{n}_\nu\ \text{を右辺から左辺へ}\bigr)\\
+&= R_\nu^{(\epsilon(\nu))}\,\varepsilon
+&&\bigl(\because\ \epsilon(\nu) = 1\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`\epsilon(\nu) = 0`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\,R_\nu^{(\epsilon(\nu))}
+&= \varepsilon\,R_\nu^{(0)}
+&&\bigl(\because\ \epsilon(\nu) = 0\bigr)\\
+&= \varepsilon\left(I - \check{n}_\nu\right)
+&&\bigl(\because\ \blkref{def_check_R_factor}\ \text{の}\ R_\nu^{(0)} := I - \check{n}_\nu\bigr)\\
+&= \left(I - \check{n}_\nu\right)\varepsilon
+&&\bigl(\because\ \text{上の}\ \varepsilon(I - \check{n}_\nu) = (I - \check{n}_\nu)\varepsilon\bigr)\\
+&= R_\nu^{(0)}\,\varepsilon
+&&\bigl(\because\ \blkref{def_check_R_factor}\ \text{の}\ R_\nu^{(0)} := I - \check{n}_\nu\ \text{を右辺から左辺へ}\bigr)\\
+&= R_\nu^{(\epsilon(\nu))}\,\varepsilon
+&&\bigl(\because\ \epsilon(\nu) = 0\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。これがすべての ",
         math(String.raw`\nu \in \check{\mathcal{M}}`),
         " で成り立ち、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\,\check{Q}_\epsilon
-&= \varepsilon\prod_{\nu=1}^{M_{\mathrm{col}}}A_\nu
-&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\text{ の }\check{Q}_\epsilon\text{ の定義と }A_\nu\text{ の置き方}\bigr)\\
-&= \Bigl(\prod_{\nu=1}^{M_{\mathrm{col}}}A_\nu\Bigr)\varepsilon
-&&\bigl(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \varepsilon,\ A_j \to A_\nu)\bigr)\\
+&= \varepsilon\prod_{\nu \in \check{\mathcal{M}}}R_\nu^{(\epsilon(\nu))}
+&&\bigl(\because\ \blkref{def_check_Q_epsilon}\bigr)\\
+&= \varepsilon\prod_{\nu=1}^{M_{\mathrm{col}}}R_\nu^{(\epsilon(\nu))}
+&&\bigl(\because\ \blkref{def_product_over_check_index_set}\ (n \to 2^{M_{\mathrm{col}}},\ A_\mu \to R_\mu^{(\epsilon(\mu))})\bigr)\\
+&= \Bigl(\prod_{\nu=1}^{M_{\mathrm{col}}}R_\nu^{(\epsilon(\nu))}\Bigr)\varepsilon
+&&\bigl(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \varepsilon,\ A_j \to R_j^{(\epsilon(j))})\bigr)\\
+&= \Bigl(\prod_{\nu \in \check{\mathcal{M}}}R_\nu^{(\epsilon(\nu))}\Bigr)\varepsilon
+&&\bigl(\because\ \blkref{def_product_over_check_index_set}\ \text{を右辺から左辺へ}\bigr)\\
 &= \check{Q}_\epsilon\,\varepsilon
-&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\text{ の }\check{Q}_\epsilon\text{ の定義と }A_\nu\text{ の置き方}\bigr)
+&&\bigl(\because\ \blkref{def_check_Q_epsilon}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
     ],
@@ -413,6 +469,116 @@ export default defineBlocks([
         "ε が Z_j, Y_j と反可換であることは epsilon_anticommutes_with_jordan_wigner_Z・epsilon_anticommutes_with_jordan_wigner_Y（σ_k^x とは可換、σ_k^y, σ_k^z とは反可換から従う）である。ε が V_1, V_2 と可換であることと、Z_j, Y_j と反可換であることは矛盾しない（V_1, V_2 の指数の中身は Z, Y の 2 次式である）。",
         "2026-11-04（全証明の SageMath 検算）: (1) の鎖が引いていた「epsilon_commutes_with_transfer_matrices の Step 1」は本文に無いブロックの段だった（その内容は 2026-11-02 に epsilon_anticommutes_with_jordan_wigner_Z・_Y へ切り出されている）。(1) をその二つの主張の引用にした。(2) の鎖が引いていた def_half_integer_modes は θ̃_{1−μ} = −θ̃_μ の主張で Ž の定義ではなかったので、def_half_integer_checkZ・def_half_integer_checkY に直し、項の順序を定義どおり exp(…)Z_{j_Z} にした。(2)(3) の「積の ℂ 線型性」の行を finite_sum_of_matrices_distributes_in_left/right_factor・scalar_multiple_factors_out_of_left/right_factor・scalar_multiple_of_negated_matrix・finite_sum_of_negated_matrices・negation_distributes_over_matrix_sum の一行ずつに分け、散文の「Y̌_μ も同じ計算」を (W̌_μ, W) ∈ {(Ž_μ, Z), (Y̌_μ, Y)} の一本の鎖に、(3) の ψ̌_μ を (Ψ, p, q) の一本の鎖に含めた。(4) の ň_μ の鎖を product_of_anticommuting_matrices_commutes の引用に、Q̌_ε の散文を εI = Iε の鎖、commuting_with_difference・commuting_with_scalar_multiple を引く 3 式、分配則の鎖と matrix_commuting_with_each_factor_commutes_with_finite_product の鎖にした。主張は変えていない。",
         "数値検証: sagemath/check/epsilon_anticommutes_with_check_Z_Y/（厳密計算）。旧い浮動小数点の検算 sagemath/check/053_claim_even_sector_closing/check_01 も残っている。",
+        "2026-11-21: ε の記法の書き直し（代表の指摘）。主張 (4) の Q̌_ε の出所を def_check_Q_epsilon に、ε の出所を def_binary_assignments_on_check_index_set にした。(4) の証明の Q̌_ε の因子を、{0,1} の元 ε_ν を複素数として掛けた A_ν := ε_νň_ν + (1 − ε_ν)(I − ň_ν) から def_check_R_factor の R_ν^{(ε(ν))} に替えた。commuting_with_scalar_multiple を 2 回引いていた 3 式と A_ν の分配の 5 行の鎖は、ε(I − ň_ν) = (I − ň_ν)ε の 1 式と、εR_ν^{(ε(ν))} = R_ν^{(ε(ν))}ε を ε(ν) = 1・ε(ν) = 0 の場合に分けた 5 行ずつの鎖になった。Q̌_ε の鎖は def_check_Q_epsilon と def_product_over_check_index_set（Π_{ν∈M̌} と Π_{ν=1}^{M_col} の行き来）の行を足して 5 行にした。行列と主張は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "closing_definition_number_of_ones_of_binary_assignment",
+    kind: "definition",
+    title: { tex: String.raw`\epsilon \text{ の値が } 1 \text{ である添字の個数 } |\epsilon|` },
+    labels: ["def_number_of_ones_of_binary_assignment"],
+    statement: [
+      paragraph([
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`|\epsilon| := \#\{\mu \in \check{\mathcal{M}} \mid \epsilon(\mu) = 1\} \ \in\ \{0,1,\dots,M_{\mathrm{col}}\}`),
+      paragraph([
+        "と定める（",
+        math(String.raw`\#S`),
+        " は有限集合 ",
+        math(String.raw`S`),
+        " の元の個数。",
+        math(String.raw`\{\mu \in \check{\mathcal{M}} \mid \epsilon(\mu) = 1\}`),
+        " は ",
+        ref("def_check_index_set"),
+        " の ",
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
+        " の部分集合なので、",
+        math(String.raw`|\epsilon|`),
+        " は ",
+        math(String.raw`0`),
+        " 以上 ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " 以下の整数である）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 代表の指摘（ε から作る記号は主張の中で「とおく」のではなく定義として置き、使う箇所から引く）を受けて、epsilon_eigenvalue_on_check_Q の主張の中で「|ε| := #{μ ∈ M̌ | ε_μ = 1} とおく」としていたものを独立した定義にした。値の書き方を ε_μ から写像の値 ε(μ) に替えた。数は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "closing_definition_number_of_ones_of_binary_assignment_among_first_indices",
+    kind: "definition",
+    title: { tex: String.raw`\text{先頭の } k \text{ 個の添字のうち } \epsilon \text{ の値が } 1 \text{ であるものの個数 } |\epsilon|_k` },
+    labels: ["def_number_of_ones_of_binary_assignment_among_first_indices"],
+    statement: [
+      paragraph([
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " と ",
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`|\epsilon|_k := \#\{\mu \in \{1,\dots,k\} \mid \epsilon(\mu) = 1\} \ \in\ \{0,1,\dots,k\}`),
+      paragraph([
+        "と定める（",
+        math(String.raw`\#S`),
+        " は有限集合 ",
+        math(String.raw`S`),
+        " の元の個数。",
+        math(String.raw`\{1,\dots,k\} \subseteq \check{\mathcal{M}}`),
+        " は ",
+        ref("def_check_index_set"),
+        " による）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 代表の指摘（ε から作る記号は定義として置き、使う箇所から引く）を受けて、trace_of_epsilon_V_plus_via_check_eigenvalues の証明の準備で「とおく」としていた |ε|_k を独立した定義にした。epsilon_eigenvalue_on_check_Q (4) の帰納法も引く。値の書き方を ε_μ から写像の値 ε(μ) に替えた。数は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "closing_definition_binary_assignment_with_one_value_set_to_one",
+    kind: "definition",
+    title: { tex: String.raw`\mu \text{ での値だけを } 1 \text{ に替えた写像 } \epsilon[\mu\to1]` },
+    labels: ["def_binary_assignment_with_one_value_set_to_one"],
+    statement: [
+      paragraph([
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " と ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " に対して、写像 ",
+        math(String.raw`\epsilon[\mu\to1] : \check{\mathcal{M}} \to \{0,1\}`),
+        " を",
+      ]),
+      displayMath(String.raw`\epsilon[\mu\to1](\nu) :=
+\begin{cases}
+1 & (\nu = \mu)\\
+\epsilon(\nu) & (\nu \neq \mu)
+\end{cases}
+\qquad (\nu \in \check{\mathcal{M}})`),
+      paragraph([
+        "で定める。",
+        math(String.raw`\epsilon[\mu\to1] \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 代表の指摘（ε から作る記号は定義として置き、使う箇所から引く。写像として定義を書く）を受けて、epsilon_eigenvalue_on_check_Q の主張 (2) の中で「ε の第 μ 成分だけを 1 に取り替えたもの」と散文で置いていた ε[μ→1] を、写像の値を書いた独立した定義にした。",
       ],
     },
   },
@@ -425,10 +591,24 @@ export default defineBlocks([
     labels: ["epsilon_eigenvalue_on_check_Q"],
     statement: [
       paragraph([
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
-        " に対し ",
-        math(String.raw`|\epsilon| := \#\{\mu \in \check{\mathcal{M}} \mid \epsilon_\mu = 1\}`),
-        " とおく。次が成り立つ。",
+        " について、",
+        ref("def_check_Q_epsilon"),
+        " の ",
+        math(String.raw`\check{Q}_\epsilon`),
+        "、",
+        ref("def_number_of_ones_of_binary_assignment"),
+        " の ",
+        math(String.raw`|\epsilon|`),
+        "、",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " についての ",
+        ref("def_binary_assignment_with_one_value_set_to_one"),
+        " の ",
+        math(String.raw`\epsilon[\mu\to1]`),
+        " を使う。次が成り立つ。",
       ]),
       list([
         [
@@ -436,17 +616,9 @@ export default defineBlocks([
 \varepsilon\,\check{Q}_\epsilon = \eta_\epsilon\,\check{Q}_\epsilon`),
         ],
         [
-          math(String.raw`\text{(2)}\quad \epsilon_\mu = 0 \ \Longrightarrow\
-\eta_{\epsilon[\mu\to1]} = -\eta_\epsilon`),
-          "。ここで ",
-          math(String.raw`\epsilon[\mu\to1]`),
-          " は ",
-          math(String.raw`\epsilon`),
-          " の第 ",
-          math(String.raw`\mu`),
-          " 成分だけを ",
-          math(String.raw`1`),
-          " に取り替えたもの。",
+          math(String.raw`\text{(2)}\quad \epsilon(\mu) = 0 \ \Longrightarrow\
+\eta_{\epsilon[\mu\to1]} = -\eta_\epsilon
+\qquad (\mu \in \check{\mathcal{M}})`),
         ],
         [
           math(String.raw`\text{(3)}\quad \eta_\epsilon
@@ -742,8 +914,10 @@ q
       ]),
       paragraph([
         "(2) ",
-        math(String.raw`\epsilon_\mu = 0`),
-        " とし、",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " を ",
+        math(String.raw`\epsilon(\mu) = 0`),
+        " となるものとし、",
         math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
         " の ",
         math(String.raw`0`),
@@ -787,7 +961,7 @@ q
         "Step 1（",
         math(String.raw`\check\psi_\mu^\dagger q \neq 0`),
         "）。",
-        math(String.raw`\epsilon_\mu = 0`),
+        math(String.raw`\epsilon(\mu) = 0`),
         " なので",
       ]),
       displayMath(
@@ -797,12 +971,8 @@ q
    \quad (\because \check{Q}_\epsilon q = q) \\
 &= \left(\check{n}_\mu\check{Q}_\epsilon\right)q
    \quad (\because \blkref{mat_mult_associative}) \\
-&= \left(\epsilon_\mu\check{Q}_\epsilon\right)q
-   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (3)}) \\
-&= \left(0_{\mathbb{C}}\check{Q}_\epsilon\right)q
-   \quad (\because \epsilon_\mu = 0) \\
 &= Oq
-   \quad (\because \blkref{zero_scalar_multiple_is_zero_matrix}) \\
+   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (3) の } \epsilon(\nu) = 0 \text{ の場合の } \check{n}_\nu\check{Q}_\epsilon = O\ (\nu \to \mu)) \\
 &= 0
    \quad (\because \blkref{zero_matrix_is_left_zero_of_mat_mult})
 \end{aligned}`,
@@ -859,6 +1029,8 @@ q
         math(String.raw`\check{Q}_{\epsilon'}\left(\check\psi_\mu^\dagger q\right) = \check\psi_\mu^\dagger q`),
         "、",
         math(String.raw`\epsilon' := \epsilon[\mu\to1]`),
+        "。",
+        ref("def_binary_assignment_with_one_value_set_to_one"),
         "）。まず ",
         math(String.raw`\check{n}_\mu\check\psi_\mu^\dagger = \check\psi_\mu^\dagger`),
         " を示す。",
@@ -899,75 +1071,55 @@ q
       ),
       paragraph([
         math(String.raw`\delta \in \{\epsilon, \epsilon'\}`),
-        " と ",
-        math(String.raw`\nu \in \check{\mathcal{M}}`),
-        " について ",
-        math(String.raw`A_\nu^{\delta} := \delta_\nu\,\check{n}_\nu + (1-\delta_\nu)\left(I - \check{n}_\nu\right)`),
-        " とおく。",
-        ref("check_joint_eigenspace_decomposition"),
-        " の ",
-        math(String.raw`\check{Q}_\delta`),
-        " の定義により ",
-        math(String.raw`\check{Q}_\delta = \prod_{\nu=1}^{M_{\mathrm{col}}}A_\nu^{\delta}`),
+        " について、",
+        ref("def_check_Q_epsilon"),
+        " により ",
+        math(String.raw`\check{Q}_\delta = \prod_{\nu \in \check{\mathcal{M}}}R_\nu^{(\delta(\nu))}`),
+        " であり（",
+        math(String.raw`R_\nu^{(e)}`),
+        " は ",
+        ref("def_check_R_factor"),
+        "）、右辺は ",
+        ref("def_product_over_check_index_set"),
+        " により ",
+        math(String.raw`\prod_{\nu=1}^{M_{\mathrm{col}}}R_\nu^{(\delta(\nu))}`),
         " である。",
         math(String.raw`\nu \neq \mu`),
         " では ",
-        math(String.raw`\epsilon'_\nu = \epsilon_\nu`),
+        ref("def_binary_assignment_with_one_value_set_to_one"),
+        " より ",
+        math(String.raw`\epsilon'(\nu) = \epsilon(\nu)`),
         " なので ",
-        math(String.raw`A_\nu^{\epsilon'} = A_\nu^{\epsilon}`),
-        " であり、以下これを ",
-        math(String.raw`A_\nu`),
-        " と書く。",
+        math(String.raw`R_\nu^{(\epsilon'(\nu))} = R_\nu^{(\epsilon(\nu))}`),
+        " である。",
         math(String.raw`\mu`),
         " 番目の因子は、",
-        math(String.raw`\epsilon_\mu = 0`),
+        math(String.raw`\epsilon(\mu) = 0`),
         " から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-A_\mu^{\epsilon}
-&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}-0_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \epsilon_\mu=0) \\
-&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-\left(0_{\mathbb{C}}\right)\right)\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{def_complex_difference}) \\
-&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\cdot 0_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{multiply_by_minus_one}) \\
-&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+0_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{complex_times_zero_is_zero}) \\
-&= 0_{\mathbb{C}}\,\check{n}_\mu + 1_{\mathbb{C}}\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の単位元}) \\
-&= O + 1_{\mathbb{C}}\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{zero_scalar_multiple_is_zero_matrix}) \\
-&= O + \left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{scalar_multiple_by_one}) \\
+R_\mu^{(\epsilon(\mu))}
+&= R_\mu^{(0)}
+  \quad (\because \epsilon(\mu) = 0) \\
 &= I - \check{n}_\mu
-  \quad (\because \blkref{zero_matrix_plus_matrix})
+  \quad (\because \blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       paragraph([
         "であり、",
-        math(String.raw`\epsilon'_\mu = 1`),
+        ref("def_binary_assignment_with_one_value_set_to_one"),
+        " の ",
+        math(String.raw`\epsilon'(\mu) = 1`),
         " から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-A_\mu^{\epsilon'}
-&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}-1_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \epsilon'_\mu=1) \\
-&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-\left(1_{\mathbb{C}}\right)\right)\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{def_complex_difference}) \\
-&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\cdot 1_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{multiply_by_minus_one}) \\
-&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の単位元}) \\
-&= 1_{\mathbb{C}}\,\check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の逆元}) \\
-&= \check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{scalar_multiple_by_one}) \\
-&= \check{n}_\mu + O
-  \quad (\because \blkref{zero_scalar_multiple_is_zero_matrix}) \\
+R_\mu^{(\epsilon'(\mu))}
+&= R_\mu^{(1)}
+  \quad (\because \epsilon'(\mu) = 1) \\
 &= \check{n}_\mu
-  \quad (\because \blkref{matrix_plus_zero_matrix})
+  \quad (\because \blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       paragraph([
@@ -989,27 +1141,43 @@ A_\mu^{\epsilon'}
         ref("commuting_with_difference"),
         " より ",
         math(String.raw`X\left(I-\check{n}_\nu\right) = \left(I-\check{n}_\nu\right)X`),
-        "、",
-        ref("commuting_with_scalar_multiple"),
-        " より ",
-        math(String.raw`X\left(\delta_\nu\check{n}_\nu\right) = \left(\delta_\nu\check{n}_\nu\right)X`),
-        " と ",
-        math(String.raw`X\left((1-\delta_\nu)\left(I-\check{n}_\nu\right)\right) = \left((1-\delta_\nu)\left(I-\check{n}_\nu\right)\right)X`),
-        " であり、",
+        " である。",
+        math(String.raw`\delta(\nu) = 1`),
+        " なら",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-XA_\nu^{\delta}
-&= X\left(\delta_\nu\check{n}_\nu + (1-\delta_\nu)\left(I-\check{n}_\nu\right)\right)
-   \quad (\because A_\nu^{\delta}\text{ の置き方}) \\
-&= X\left(\delta_\nu\check{n}_\nu\right) + X\left((1-\delta_\nu)\left(I-\check{n}_\nu\right)\right)
-   \quad (\because \blkref{mat_mult_distributes_over_sum_in_right_factor}) \\
-&= \left(\delta_\nu\check{n}_\nu\right)X + \left((1-\delta_\nu)\left(I-\check{n}_\nu\right)\right)X
-   \quad (\because \text{上の 2 式}) \\
-&= \left(\delta_\nu\check{n}_\nu + (1-\delta_\nu)\left(I-\check{n}_\nu\right)\right)X
-   \quad (\because \blkref{mat_mult_distributes_over_sum_in_left_factor}) \\
-&= A_\nu^{\delta}X
-   \quad (\because A_\nu^{\delta}\text{ の置き方})
+XR_\nu^{(\delta(\nu))}
+&= XR_\nu^{(1)}
+   \quad (\because \delta(\nu) = 1) \\
+&= X\check{n}_\nu
+   \quad (\because \blkref{def_check_R_factor}) \\
+&= \check{n}_\nu X
+   \quad (\because X\check{n}_\nu = \check{n}_\nu X\text{ の仮定}) \\
+&= R_\nu^{(1)}X
+   \quad (\because \blkref{def_check_R_factor}\text{ を右辺から左辺へ}) \\
+&= R_\nu^{(\delta(\nu))}X
+   \quad (\because \delta(\nu) = 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`\delta(\nu) = 0`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+XR_\nu^{(\delta(\nu))}
+&= XR_\nu^{(0)}
+   \quad (\because \delta(\nu) = 0) \\
+&= X\left(I-\check{n}_\nu\right)
+   \quad (\because \blkref{def_check_R_factor}) \\
+&= \left(I-\check{n}_\nu\right)X
+   \quad (\because \text{上の } X\left(I-\check{n}_\nu\right) = \left(I-\check{n}_\nu\right)X) \\
+&= R_\nu^{(0)}X
+   \quad (\because \blkref{def_check_R_factor}\text{ を右辺から左辺へ}) \\
+&= R_\nu^{(\delta(\nu))}X
+   \quad (\because \delta(\nu) = 0)
 \end{aligned}`,
       ),
       paragraph([
@@ -1024,11 +1192,11 @@ XA_\nu^{\delta}
         " では両辺が同じ積 ",
         math(String.raw`\check{n}_\nu\check{n}_\nu`),
         " である）に使うと ",
-        math(String.raw`\check{n}_\kappa A_\nu^{\delta} = A_\nu^{\delta}\check{n}_\kappa`),
+        math(String.raw`\check{n}_\kappa R_\nu^{(\delta(\nu))} = R_\nu^{(\delta(\nu))}\check{n}_\kappa`),
         "、さらに ",
-        math(String.raw`X \to A_\kappa^{\delta}`),
+        math(String.raw`X \to R_\kappa^{(\delta(\kappa))}`),
         " に使うと ",
-        math(String.raw`A_\kappa^{\delta}A_\nu^{\delta} = A_\nu^{\delta}A_\kappa^{\delta}`),
+        math(String.raw`R_\kappa^{(\delta(\kappa))}R_\nu^{(\delta(\nu))} = R_\nu^{(\delta(\nu))}R_\kappa^{(\delta(\kappa))}`),
         " である（因子の可換性）。また ",
         math(String.raw`\nu \neq \mu`),
         " では ",
@@ -1038,15 +1206,15 @@ XA_\nu^{\delta}
         " なので ",
         math(String.raw`X \to \check\psi_\mu^\dagger`),
         " に使うと ",
-        math(String.raw`\check\psi_\mu^\dagger A_\nu = A_\nu\check\psi_\mu^\dagger`),
+        math(String.raw`\check\psi_\mu^\dagger R_\nu^{(\epsilon(\nu))} = R_\nu^{(\epsilon(\nu))}\check\psi_\mu^\dagger`),
         " である。",
-        math(String.raw`\Pi' := \prod_{\nu=1,\ \nu\neq\mu}^{M_{\mathrm{col}}}A_\nu`),
+        math(String.raw`\Pi' := \prod_{\nu=1,\ \nu\neq\mu}^{M_{\mathrm{col}}}R_\nu^{(\epsilon(\nu))}`),
         "（",
         ref("def_finite_product_of_matrices_omitting_one_index"),
         "（",
         math(String.raw`r \to M_{\mathrm{col}},\ \nu \to \mu`),
         "）。",
-        math(String.raw`\Pi' = \prod_{j=1}^{M_{\mathrm{col}}-1}A_{s(j)}`),
+        math(String.raw`\Pi' = \prod_{j=1}^{M_{\mathrm{col}}-1}R_{s(j)}^{(\epsilon(s(j)))}`),
         " で ",
         math(String.raw`s(j) \neq \mu`),
         "）とおくと、",
@@ -1057,9 +1225,9 @@ XA_\nu^{\delta}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-A_\mu^{\epsilon}q
+R_\mu^{(\epsilon(\mu))}q
 &= \left(I - \check{n}_\mu\right)q
-   \quad (\because \text{上の } A_\mu^{\epsilon} = I - \check{n}_\mu) \\
+   \quad (\because \text{上の } R_\mu^{(\epsilon(\mu))} = I - \check{n}_\mu) \\
 &= Iq - \check{n}_\mu q
    \quad (\because \blkref{matrix_difference_mul_vector}) \\
 &= q - \check{n}_\mu q
@@ -1073,14 +1241,16 @@ A_\mu^{\epsilon}q
       displayMath(
         String.raw`\begin{aligned}
 \Pi' q
-&= \Pi'\left(A_\mu^{\epsilon}q\right)
-   \quad (\because \text{上の } A_\mu^{\epsilon}q = q) \\
-&= \left(\Pi' A_\mu^{\epsilon}\right)q
+&= \Pi'\left(R_\mu^{(\epsilon(\mu))}q\right)
+   \quad (\because \text{上の } R_\mu^{(\epsilon(\mu))}q = q) \\
+&= \left(\Pi' R_\mu^{(\epsilon(\mu))}\right)q
    \quad (\because \blkref{mat_mult_associative}) \\
-&= \left(\prod_{\nu=1}^{M_{\mathrm{col}}}A_\nu^{\epsilon}\right)q
+&= \left(\prod_{\nu=1}^{M_{\mathrm{col}}}R_\nu^{(\epsilon(\nu))}\right)q
    \quad (\because \blkref{moving_one_factor_of_finite_product_to_the_end}\text{ と因子の可換性}) \\
+&= \left(\prod_{\nu \in \check{\mathcal{M}}}R_\nu^{(\epsilon(\nu))}\right)q
+   \quad (\because \blkref{def_product_over_check_index_set}\text{ を右辺から左辺へ}) \\
 &= \check{Q}_\epsilon q
-   \quad (\because \check{Q}_\epsilon\text{ の定義}) \\
+   \quad (\because \blkref{def_check_Q_epsilon}\text{ を右辺から左辺へ}) \\
 &= q
    \quad (\because \check{Q}_\epsilon q = q)
 \end{aligned}`,
@@ -1088,12 +1258,14 @@ A_\mu^{\epsilon}q
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_{\epsilon'}\left(\check\psi_\mu^\dagger q\right)
-&= \left(\prod_{\nu=1}^{M_{\mathrm{col}}}A_\nu^{\epsilon'}\right)\left(\check\psi_\mu^\dagger q\right)
-   \quad (\because \check{Q}_{\epsilon'}\text{ の定義}) \\
-&= \left(\Pi' A_\mu^{\epsilon'}\right)\left(\check\psi_\mu^\dagger q\right)
-   \quad (\because \blkref{moving_one_factor_of_finite_product_to_the_end}\text{ と因子の可換性、} \nu\neq\mu\text{ で } A_\nu^{\epsilon'} = A_\nu) \\
+&= \left(\prod_{\nu \in \check{\mathcal{M}}}R_\nu^{(\epsilon'(\nu))}\right)\left(\check\psi_\mu^\dagger q\right)
+   \quad (\because \blkref{def_check_Q_epsilon}) \\
+&= \left(\prod_{\nu=1}^{M_{\mathrm{col}}}R_\nu^{(\epsilon'(\nu))}\right)\left(\check\psi_\mu^\dagger q\right)
+   \quad (\because \blkref{def_product_over_check_index_set}) \\
+&= \left(\Pi' R_\mu^{(\epsilon'(\mu))}\right)\left(\check\psi_\mu^\dagger q\right)
+   \quad (\because \blkref{moving_one_factor_of_finite_product_to_the_end}\text{ と因子の可換性、} \nu\neq\mu\text{ で } R_\nu^{(\epsilon'(\nu))} = R_\nu^{(\epsilon(\nu))}) \\
 &= \left(\Pi'\check{n}_\mu\right)\left(\check\psi_\mu^\dagger q\right)
-   \quad (\because \text{上の } A_\mu^{\epsilon'} = \check{n}_\mu) \\
+   \quad (\because \text{上の } R_\mu^{(\epsilon'(\mu))} = \check{n}_\mu) \\
 &= \Pi'\left(\check{n}_\mu\left(\check\psi_\mu^\dagger q\right)\right)
    \quad (\because \blkref{mat_mult_associative}) \\
 &= \Pi'\left(\left(\check{n}_\mu\check\psi_\mu^\dagger\right)q\right)
@@ -1173,13 +1345,19 @@ A_\mu^{\epsilon}q
         math(String.raw`k := M_{\mathrm{col}} - |\epsilon| \in \{0,1,\dots,M_{\mathrm{col}}\}`),
         " についての帰納法で示す。",
         math(String.raw`k = 0`),
-        " なら全ての ",
-        math(String.raw`\mu`),
+        " なら ",
+        math(String.raw`|\epsilon| = M_{\mathrm{col}}`),
+        " なので、",
+        ref("def_number_of_ones_of_binary_assignment"),
+        " より全ての ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
         " で ",
-        math(String.raw`\epsilon_\mu = 1`),
+        math(String.raw`\epsilon(\mu) = 1`),
         "、すなわち ",
         math(String.raw`\epsilon = (1,\dots,1)`),
-        " であり、",
+        "（",
+        ref("def_binary_assignments_on_check_index_set"),
+        " の定数写像）であり、",
         math(String.raw`\eta_\epsilon = \eta_{(1,\dots,1)} = \eta_{(1,\dots,1)}(-1)^{0}`),
         " である。",
         math(String.raw`k \geq 1`),
@@ -1190,12 +1368,26 @@ A_\mu^{\epsilon}q
         " で (3) が成り立つとする。",
         math(String.raw`k \geq 1`),
         " より ",
-        math(String.raw`\epsilon_\mu = 0`),
+        math(String.raw`|\epsilon| < M_{\mathrm{col}}`),
+        " なので、",
+        ref("def_number_of_ones_of_binary_assignment"),
+        " より ",
+        math(String.raw`\epsilon(\mu) = 0`),
         " なる ",
-        math(String.raw`\mu`),
-        " が取れ、",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " が取れる。",
         math(String.raw`\epsilon' := \epsilon[\mu\to1]`),
-        " は ",
+        "（",
+        ref("def_binary_assignment_with_one_value_set_to_one"),
+        "）は ",
+        math(String.raw`\mu`),
+        " での値だけが ",
+        math(String.raw`0`),
+        " から ",
+        math(String.raw`1`),
+        " に替わるので、",
+        ref("def_number_of_ones_of_binary_assignment"),
+        " より ",
         math(String.raw`|\epsilon'| = |\epsilon| + 1`),
         "、すなわち ",
         math(String.raw`M_{\mathrm{col}} - |\epsilon'| = k - 1`),
@@ -1232,7 +1424,15 @@ A_\mu^{\epsilon}q
         " で (3) が成り立つ。",
       ]),
       paragraph([
-        "(4) まず各 ",
+        "(4) 以下、",
+        math(String.raw`-1`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`-1_{\mathbb{C}}`),
+        "、その冪は ",
+        ref("def_power_of_complex_number"),
+        " による。まず各 ",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         " について",
       ]),
@@ -1250,39 +1450,129 @@ A_\mu^{\epsilon}q
 &= \check{Q}_\epsilon - \left(2\check{n}_\mu\right)\check{Q}_\epsilon
    \quad (\because \blkref{identity_matrix_is_left_unit_of_mat_mult}) \\
 &= \check{Q}_\epsilon - 2\left(\check{n}_\mu\check{Q}_\epsilon\right)
-   \quad (\because \blkref{scalar_multiple_factors_out_of_left_factor}) \\
-&= \check{Q}_\epsilon - 2\left(\epsilon_\mu\check{Q}_\epsilon\right)
-   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (3)}) \\
-&= 1\check{Q}_\epsilon - 2\left(\epsilon_\mu\check{Q}_\epsilon\right)
+   \quad (\because \blkref{scalar_multiple_factors_out_of_left_factor})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`\epsilon(\mu) = 1`),
+        " なら、これに続けて",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon - 2\left(\check{n}_\mu\check{Q}_\epsilon\right)
+&= \check{Q}_\epsilon - 2\check{Q}_\epsilon
+   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (3) の } \epsilon(\nu) = 1 \text{ の場合の } \check{n}_\nu\check{Q}_\epsilon = \check{Q}_\epsilon\ (\nu \to \mu)) \\
+&= 1\check{Q}_\epsilon - 2\check{Q}_\epsilon
    \quad (\because \blkref{scalar_multiple_by_one}) \\
-&= 1\check{Q}_\epsilon - \left(2\epsilon_\mu\right)\check{Q}_\epsilon
-   \quad (\because \blkref{scalar_multiple_is_associative}) \\
-&= \left(1 - 2\epsilon_\mu\right)\check{Q}_\epsilon
-   \quad (\because \blkref{difference_of_scalar_multiples_of_one_matrix})
+&= \left(1 - 2\right)\check{Q}_\epsilon
+   \quad (\because \blkref{difference_of_scalar_multiples_of_one_matrix}) \\
+&= (-1)\check{Q}_\epsilon
+   \quad (\because \mathbb{C}\text{ の四則 } 1 - 2 = -1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`\epsilon(\mu) = 0`),
+        " なら、これに続けて",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon - 2\left(\check{n}_\mu\check{Q}_\epsilon\right)
+&= \check{Q}_\epsilon - 2O
+   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (3) の } \epsilon(\nu) = 0 \text{ の場合の } \check{n}_\nu\check{Q}_\epsilon = O\ (\nu \to \mu)) \\
+&= \check{Q}_\epsilon - O
+   \quad (\because \blkref{scalar_multiple_of_zero_matrix}) \\
+&= \check{Q}_\epsilon
+   \quad (\because \blkref{matrix_minus_zero_matrix})
 \end{aligned}`,
       ),
       paragraph([
         "である。",
         math(String.raw`P_k := \prod_{\mu=1}^{k}\left(I - 2\check{n}_\mu\right)`),
-        "、",
-        math(String.raw`p_k := \prod_{\mu=1}^{k}\left(1 - 2\epsilon_\mu\right) \in \mathbb{C}`),
         "（",
         ref("def_finite_product_of_matrices"),
-        "・",
-        ref("def_finite_product_of_complex_numbers"),
         "、",
         math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
         "）とおき、",
-        math(String.raw`P_k\check{Q}_\epsilon = p_k\check{Q}_\epsilon`),
+        ref("def_number_of_ones_of_binary_assignment_among_first_indices"),
+        " の ",
+        math(String.raw`|\epsilon|_k`),
+        " について ",
+        math(String.raw`P_k\check{Q}_\epsilon = (-1)^{|\epsilon|_k}\check{Q}_\epsilon`),
         " を ",
         math(String.raw`k`),
         " についての帰納法で示す。",
-        math(String.raw`k = 1`),
-        " は上の式（",
-        math(String.raw`\mu \to 1`),
-        "）である。",
+        ref("def_number_of_ones_of_binary_assignment_among_first_indices"),
+        " の数え上げから、",
+        math(String.raw`|\epsilon|_1`),
+        " は ",
+        math(String.raw`\epsilon(1) = 1`),
+        " なら ",
+        math(String.raw`1`),
+        "、",
+        math(String.raw`\epsilon(1) = 0`),
+        " なら ",
+        math(String.raw`0`),
+        " であり、",
         math(String.raw`k < M_{\mathrm{col}}`),
-        " で成り立つとすると",
+        " について ",
+        math(String.raw`|\epsilon|_{k+1}`),
+        " は ",
+        math(String.raw`\epsilon(k+1) = 1`),
+        " なら ",
+        math(String.raw`|\epsilon|_k + 1`),
+        "、",
+        math(String.raw`\epsilon(k+1) = 0`),
+        " なら ",
+        math(String.raw`|\epsilon|_k`),
+        " である。",
+        math(String.raw`k = 1`),
+        " で ",
+        math(String.raw`\epsilon(1) = 1`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+P_1\check{Q}_\epsilon
+&= \left(I - 2\check{n}_1\right)\check{Q}_\epsilon
+   \quad (\because \blkref{def_finite_product_of_matrices}) \\
+&= (-1)\check{Q}_\epsilon
+   \quad (\because \text{上の } \epsilon(\mu) = 1 \text{ の場合の鎖 } (\mu \to 1)) \\
+&= \left(1_{\mathbb{C}}(-1)\right)\check{Q}_\epsilon
+   \quad (\because 1_{\mathbb{C}}\text{ は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \left((-1)^{0}(-1)\right)\check{Q}_\epsilon
+   \quad (\because \blkref{def_power_of_complex_number}\text{ の } z^0 := 1_{\mathbb{C}}\text{ を右辺から左辺へ}) \\
+&= (-1)^{1}\check{Q}_\epsilon
+   \quad (\because \blkref{def_power_of_complex_number}\text{ の } z^{m+1} := z^m z\ (m \to 0)\text{ を右辺から左辺へ}) \\
+&= (-1)^{|\epsilon|_1}\check{Q}_\epsilon
+   \quad (\because |\epsilon|_1 = 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon(1) = 0`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+P_1\check{Q}_\epsilon
+&= \left(I - 2\check{n}_1\right)\check{Q}_\epsilon
+   \quad (\because \blkref{def_finite_product_of_matrices}) \\
+&= \check{Q}_\epsilon
+   \quad (\because \text{上の } \epsilon(\mu) = 0 \text{ の場合の鎖 } (\mu \to 1)) \\
+&= 1_{\mathbb{C}}\check{Q}_\epsilon
+   \quad (\because \blkref{scalar_multiple_by_one}\text{ を右辺から左辺へ}) \\
+&= (-1)^{0}\check{Q}_\epsilon
+   \quad (\because \blkref{def_power_of_complex_number}\text{ の } z^0 := 1_{\mathbb{C}}\text{ を右辺から左辺へ}) \\
+&= (-1)^{|\epsilon|_1}\check{Q}_\epsilon
+   \quad (\because |\epsilon|_1 = 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`k < M_{\mathrm{col}}`),
+        " で成り立つとする。",
+        math(String.raw`\epsilon(k+1) = 1`),
+        " なら",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1291,43 +1581,58 @@ P_{k+1}\check{Q}_\epsilon
    \quad (\because \blkref{def_finite_product_of_matrices}) \\
 &= P_k\left(\left(I - 2\check{n}_{k+1}\right)\check{Q}_\epsilon\right)
    \quad (\because \blkref{mat_mult_associative}) \\
-&= P_k\left(\left(1 - 2\epsilon_{k+1}\right)\check{Q}_\epsilon\right)
-   \quad (\because \text{上の式 } (\mu \to k+1)) \\
-&= \left(1 - 2\epsilon_{k+1}\right)\left(P_k\check{Q}_\epsilon\right)
+&= P_k\left((-1)\check{Q}_\epsilon\right)
+   \quad (\because \text{上の } \epsilon(\mu) = 1 \text{ の場合の鎖 } (\mu \to k+1)) \\
+&= (-1)\left(P_k\check{Q}_\epsilon\right)
    \quad (\because \blkref{scalar_multiple_factors_out_of_right_factor}) \\
-&= \left(1 - 2\epsilon_{k+1}\right)\left(p_k\check{Q}_\epsilon\right)
+&= (-1)\left((-1)^{|\epsilon|_k}\check{Q}_\epsilon\right)
    \quad (\because \text{帰納法の仮定}) \\
-&= \left(\left(1 - 2\epsilon_{k+1}\right)p_k\right)\check{Q}_\epsilon
+&= \left((-1)(-1)^{|\epsilon|_k}\right)\check{Q}_\epsilon
    \quad (\because \blkref{scalar_multiple_is_associative}) \\
-&= \left(p_k\left(1 - 2\epsilon_{k+1}\right)\right)\check{Q}_\epsilon
+&= \left((-1)^{|\epsilon|_k}(-1)\right)\check{Q}_\epsilon
    \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の可換律}) \\
-&= p_{k+1}\check{Q}_\epsilon
-   \quad (\because \blkref{def_finite_product_of_complex_numbers})
+&= (-1)^{|\epsilon|_k+1}\check{Q}_\epsilon
+   \quad (\because \blkref{def_power_of_complex_number}\text{ の } z^{m+1} := z^m z\ (m \to |\epsilon|_k)\text{ を右辺から左辺へ}) \\
+&= (-1)^{|\epsilon|_{k+1}}\check{Q}_\epsilon
+   \quad (\because |\epsilon|_{k+1} = |\epsilon|_k + 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon(k+1) = 0`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+P_{k+1}\check{Q}_\epsilon
+&= \left(P_k\left(I - 2\check{n}_{k+1}\right)\right)\check{Q}_\epsilon
+   \quad (\because \blkref{def_finite_product_of_matrices}) \\
+&= P_k\left(\left(I - 2\check{n}_{k+1}\right)\check{Q}_\epsilon\right)
+   \quad (\because \blkref{mat_mult_associative}) \\
+&= P_k\check{Q}_\epsilon
+   \quad (\because \text{上の } \epsilon(\mu) = 0 \text{ の場合の鎖 } (\mu \to k+1)) \\
+&= (-1)^{|\epsilon|_k}\check{Q}_\epsilon
+   \quad (\because \text{帰納法の仮定}) \\
+&= (-1)^{|\epsilon|_{k+1}}\check{Q}_\epsilon
+   \quad (\because |\epsilon|_{k+1} = |\epsilon|_k)
 \end{aligned}`,
       ),
       paragraph([
         "で、",
         math(String.raw`k+1`),
         " でも成り立つ。",
-        math(String.raw`1 - 2\epsilon_\mu`),
-        " は ",
-        math(String.raw`\epsilon_\mu = 1`),
-        " なら ",
-        math(String.raw`-1`),
-        "、",
-        math(String.raw`\epsilon_\mu = 0`),
-        " なら ",
-        math(String.raw`+1`),
-        " なので、",
-        math(String.raw`p_{M_{\mathrm{col}}}`),
-        " は ",
-        math(String.raw`-1`),
-        " を ",
-        math(String.raw`|\epsilon|`),
-        " 個、",
-        math(String.raw`+1`),
-        " を残りの個数だけ掛けたものであり ",
-        math(String.raw`p_{M_{\mathrm{col}}} = (-1)^{|\epsilon|}`),
+        math(String.raw`\{1,\dots,M_{\mathrm{col}}\} = \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）なので ",
+        ref("def_number_of_ones_of_binary_assignment_among_first_indices"),
+        " と ",
+        ref("def_number_of_ones_of_binary_assignment"),
+        " より ",
+        math(String.raw`|\epsilon|_{M_{\mathrm{col}}} = |\epsilon|`),
+        " であり、",
+        math(String.raw`k = M_{\mathrm{col}}`),
+        " で ",
+        math(String.raw`P_{M_{\mathrm{col}}}\check{Q}_\epsilon = (-1)^{|\epsilon|}\check{Q}_\epsilon`),
         " である。以下 ",
         math(String.raw`P := P_{M_{\mathrm{col}}}`),
         "、",
@@ -1350,7 +1655,7 @@ P_{k+1}\check{Q}_\epsilon
 &= c\left((-1)^{|\epsilon|}\check{Q}_\epsilon\right)
    \quad (\because c\text{ の置き方と }\blkref{scalar_multiple_is_associative}) \\
 &= c\left(P\check{Q}_\epsilon\right)
-   \quad (\because \text{上の } P\check{Q}_\epsilon = p_{M_{\mathrm{col}}}\check{Q}_\epsilon = (-1)^{|\epsilon|}\check{Q}_\epsilon)
+   \quad (\because \text{上の } P\check{Q}_\epsilon = P_{M_{\mathrm{col}}}\check{Q}_\epsilon = (-1)^{|\epsilon|}\check{Q}_\epsilon)
 \end{aligned}`,
       ),
       paragraph([
@@ -1400,6 +1705,7 @@ P_{k+1}\check{Q}_\epsilon
         "数値検証: sagemath/check/epsilon_eigenvalue_on_check_Q/（厳密計算。本文の ψ̌ で M_col = 2, 3、結合定数 3 組）。旧い浮動小数点の検算 sagemath/check/053_claim_even_sector_closing/check_02 も残っている。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: (1) の (η − 1)(η + 1) の鎖の (ηη − η) + (η − 1) = ηη − 1 を、complex_numbers_form_a_field の「加法の結合則と逆元」の 1 行で当てていた（差の定義・和の結合律 2 回・左から足す逆元・左から足す 0_C を束ねており、後の 2 つは体の公理に無い）。def_complex_difference（2 か所へ同時適用）・和の結合律・和の結合律（右辺から左辺へ）・negation_plus_self_is_zero_in_cc・complex_zero_plus_is_original・def_complex_difference（右辺から左辺へ）を 1 行に 1 つずつ当てる 6 行に割った（鎖は 4 行から 9 行）。式の両端と主張は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: (1) の (η − 1)(η + 1) の鎖の 2 行目 (η − 1)η + (η − 1)·1 = (ηη − η) + (η − 1) を、complex_numbers_form_a_field の「分配則と乗法の単位元」の 1 行で当てていた（差についての右からの分配と、積の単位元の 2 か所を束ねていた。差についての分配律は本文に無い）。積の単位元（z·1_C = z）・def_complex_difference（2 か所へ同時適用）・右からの分配律・negation_times_complex_is_negation_of_product_in_cc（z → 1, w → η）・積の単位元（1_C·z = z）を 1 行に 1 つずつ当てる 5 行に割り、続く def_complex_difference の行はこの中へ入った（鎖は 9 行から 12 行）。1 行目の根拠の書き方を「左からの分配律」に揃えた。式の両端と主張は不変。",
+        "2026-11-21: ε の記法の書き直し（代表の指摘）。主張の中で「とおく」としていた |ε| と、散文で置いていた ε[μ→1] を独立した定義 def_number_of_ones_of_binary_assignment・def_binary_assignment_with_one_value_set_to_one にして引き、Q̌_ε の出所を def_check_Q_epsilon にした。ε の値を ε_μ から ε(μ) に書き替えた。(2) Step 1 は check_joint_eigenspace_decomposition (3) の ε(ν) = 0 の場合の ň_νQ̌_ε = O を引く形にし、ε_μQ̌_ε = 0_ℂQ̌_ε = O の 2 行が無くなった。(2) Step 2 は Q̌_δ の因子を、{0,1} の元を複素数として掛けた A_ν^δ := δ_νň_ν + (1 − δ_ν)(I − ň_ν) から def_check_R_factor の R_ν^{(δ(ν))} に替えた。A_μ^ε = I − ň_μ・A_μ^{ε'} = ň_μ の 8 行ずつの鎖は R_μ^{(ε(μ))} = R_μ^{(0)} = I − ň_μ・R_μ^{(ε'(μ))} = R_μ^{(1)} = ň_μ の 2 行ずつに、可換性 XA_ν^δ = A_ν^δX の 5 行の鎖（commuting_with_scalar_multiple を 2 回引く）は δ(ν) = 1・δ(ν) = 0 の場合に分けた 5 行ずつの鎖になった。Π'q = q と Q̌_{ε'}(ψ̌_μ^†q) = ψ̌_μ^†q の鎖には def_product_over_check_index_set と def_check_Q_epsilon の行を足した。(4) は (I − 2ň_μ)Q̌_ε = (1 − 2ε_μ)Q̌_ε（ε_μ ∈ {0,1} に算術をしていた）を、共通の 6 行のあとを ε(μ) = 1 で (−1)Q̌_ε、ε(μ) = 0 で Q̌_ε となる場合分けにし、P_kQ̌_ε = p_kQ̌_ε（p_k := Π(1 − 2ε_μ)）の帰納法と散文の「p_{M_col} は −1 を |ε| 個掛けたもの」を、def_number_of_ones_of_binary_assignment_among_first_indices の |ε|_k による P_kQ̌_ε = (−1)^{|ε|_k}Q̌_ε の帰納法（k = 1 と k → k+1 をそれぞれ ε の値で場合分け）にした。行列・値と主張は変えていない。",
       ],
     },
   },
@@ -1484,9 +1790,15 @@ P_{k+1}\check{Q}_\epsilon
         "（どちらも ",
         math(String.raw`r \to M_{\mathrm{col}}`),
         "）による（",
-        ref("def_check_index_set"),
+        ref("def_binary_assignments_on_check_index_set"),
         " により ",
-        math(String.raw`\{0,1\}^{\check{\mathcal{M}}} = \{0,1\}^{M_{\mathrm{col}}}`),
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " は ",
+        math(String.raw`\{0,1\}^{M_{\mathrm{col}}}`),
+        " と同じ集合。",
+        math(String.raw`\check{Q}_\epsilon`),
+        " は ",
+        ref("def_check_Q_epsilon"),
         "）。",
         ref("eigenvalues_of_V_plus"),
         " の ",
@@ -1522,16 +1834,44 @@ P_{k+1}\check{Q}_\epsilon
         " と ",
         math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
         " について ",
-        math(String.raw`|\epsilon|_k := \#\{\mu \in \{1,\dots,k\} \mid \epsilon_\mu = 1\}`),
-        " とおく。",
+        ref("def_number_of_ones_of_binary_assignment_among_first_indices"),
+        " の ",
+        math(String.raw`|\epsilon|_k`),
+        " と ",
+        ref("def_number_of_ones_of_binary_assignment"),
+        " の ",
+        math(String.raw`|\epsilon|`),
+        " を使う。数え上げから、",
         math(String.raw`|\epsilon|_{M_{\mathrm{col}}} = |\epsilon|`),
+        "（",
+        ref("def_check_index_set"),
+        " の ",
+        math(String.raw`\{1,\dots,M_{\mathrm{col}}\} = \check{\mathcal{M}}`),
+        "）、",
+        math(String.raw`|\epsilon|_1`),
+        " は ",
+        math(String.raw`\epsilon(1) = 1`),
+        " なら ",
+        math(String.raw`1`),
         "、",
-        math(String.raw`|\epsilon|_1 = \epsilon_1`),
+        math(String.raw`\epsilon(1) = 0`),
+        " なら ",
+        math(String.raw`0`),
         "、",
-        math(String.raw`|\epsilon|_{k+1} = |\epsilon|_k + \epsilon_{k+1}`),
+        math(String.raw`k < M_{\mathrm{col}}`),
+        " について ",
+        math(String.raw`|\epsilon|_{k+1}`),
+        " は ",
+        math(String.raw`\epsilon(k+1) = 1`),
+        " なら ",
+        math(String.raw`|\epsilon|_k + 1`),
+        "、",
+        math(String.raw`\epsilon(k+1) = 0`),
+        " なら ",
+        math(String.raw`|\epsilon|_k`),
         "、",
         math(String.raw`0 \le |\epsilon|_k \le k`),
-        " である（数え上げの定義）。",
+        " である。",
       ]),
       paragraph([
         "Step 1（トレースの分解）。",
@@ -1573,7 +1913,7 @@ P_{k+1}\check{Q}_\epsilon
         " を固定し、",
         math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
         " について ",
-        math(String.raw`\Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}} = \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}`),
+        math(String.raw`\Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}} = \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}`),
         "（冪は ",
         ref("def_power_of_complex_number"),
         "）を ",
@@ -1581,18 +1921,18 @@ P_{k+1}\check{Q}_\epsilon
         " についての帰納法で示す。",
         math(String.raw`k = 1`),
         " で ",
-        math(String.raw`\epsilon_1 = 1`),
+        math(String.raw`\epsilon(1) = 1`),
         " なら ",
         math(String.raw`|\epsilon|_1 = 1`),
         " であり",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\Bigl(\prod_{\mu=1}^{1}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}
-&= \left(\check{u}^{(\epsilon_1)}\right)_{\mathbb{C}}
+\Bigl(\prod_{\mu=1}^{1}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}
+&= \left(\check{u}^{(\epsilon(1))}\right)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
 &= \left(\check{u}^{(1)}\right)_{\mathbb{C}}
-&&\bigl(\because\ \epsilon_1 = 1\bigr)\\
+&&\bigl(\because\ \epsilon(1) = 1\bigr)\\
 &= 1_{\mathbb{C}}
 &&\bigl(\because\ \check{u}^{(1)} := 1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{0}
@@ -1602,18 +1942,18 @@ P_{k+1}\check{Q}_\epsilon
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\epsilon_1 = 0`),
+        math(String.raw`\epsilon(1) = 0`),
         " なら ",
         math(String.raw`|\epsilon|_1 = 0`),
         " であり",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\Bigl(\prod_{\mu=1}^{1}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}
-&= \left(\check{u}^{(\epsilon_1)}\right)_{\mathbb{C}}
+\Bigl(\prod_{\mu=1}^{1}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}
+&= \left(\check{u}^{(\epsilon(1))}\right)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
 &= \left(\check{u}^{(0)}\right)_{\mathbb{C}}
-&&\bigl(\because\ \epsilon_1 = 0\bigr)\\
+&&\bigl(\because\ \epsilon(1) = 0\bigr)\\
 &= -1_{\mathbb{C}}
 &&\bigl(\because\ \check{u}^{(0)} := -1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
 &= 1_{\mathbb{C}}\left(-1_{\mathbb{C}}\right)
@@ -1629,22 +1969,22 @@ P_{k+1}\check{Q}_\epsilon
       paragraph([
         math(String.raw`k < M_{\mathrm{col}}`),
         " で成り立つとする。",
-        math(String.raw`\epsilon_{k+1} = 1`),
+        math(String.raw`\epsilon(k+1) = 1`),
         " なら ",
         math(String.raw`(k+1) - |\epsilon|_{k+1} = k - |\epsilon|_k`),
         " であり",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\Bigl(\prod_{\mu=1}^{k+1}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}
-&= \Bigl(\Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)\check{u}^{(\epsilon_{k+1})}\Bigr)_{\mathbb{C}}
+\Bigl(\prod_{\mu=1}^{k+1}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}
+&= \Bigl(\Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon(\mu))}\Bigr)\check{u}^{(\epsilon(k+1))}\Bigr)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\left(\check{u}^{(\epsilon_{k+1})}\right)_{\mathbb{C}}
+&= \Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}\left(\check{u}^{(\epsilon(k+1))}\right)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \text{を右辺から左辺へ}\bigr)\\
-&= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}\left(\check{u}^{(\epsilon_{k+1})}\right)_{\mathbb{C}}
+&= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}\left(\check{u}^{(\epsilon(k+1))}\right)_{\mathbb{C}}
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}1_{\mathbb{C}}
-&&\bigl(\because\ \epsilon_{k+1} = 1,\ \check{u}^{(1)} := 1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
+&&\bigl(\because\ \epsilon(k+1) = 1,\ \check{u}^{(1)} := 1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}
 &&\bigl(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{(k+1)-|\epsilon|_{k+1}}
@@ -1652,22 +1992,22 @@ P_{k+1}\check{Q}_\epsilon
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\epsilon_{k+1} = 0`),
+        math(String.raw`\epsilon(k+1) = 0`),
         " なら ",
         math(String.raw`(k+1) - |\epsilon|_{k+1} = (k - |\epsilon|_k) + 1`),
         " であり",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\Bigl(\prod_{\mu=1}^{k+1}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}
-&= \Bigl(\Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)\check{u}^{(\epsilon_{k+1})}\Bigr)_{\mathbb{C}}
+\Bigl(\prod_{\mu=1}^{k+1}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}
+&= \Bigl(\Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon(\mu))}\Bigr)\check{u}^{(\epsilon(k+1))}\Bigr)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\left(\check{u}^{(\epsilon_{k+1})}\right)_{\mathbb{C}}
+&= \Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}\left(\check{u}^{(\epsilon(k+1))}\right)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \text{を右辺から左辺へ}\bigr)\\
-&= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}\left(\check{u}^{(\epsilon_{k+1})}\right)_{\mathbb{C}}
+&= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}\left(\check{u}^{(\epsilon(k+1))}\right)_{\mathbb{C}}
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}\left(-1_{\mathbb{C}}\right)
-&&\bigl(\because\ \epsilon_{k+1} = 0,\ \check{u}^{(0)} := -1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
+&&\bigl(\because\ \epsilon(k+1) = 0,\ \check{u}^{(0)} := -1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{(k-|\epsilon|_k)+1}
 &&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^m z\ (m \to k - |\epsilon|_k)\ \text{を右辺から左辺へ}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{(k+1)-|\epsilon|_{k+1}}
@@ -1679,17 +2019,25 @@ P_{k+1}\check{Q}_\epsilon
         math(String.raw`k+1`),
         " でも成り立つ。",
         math(String.raw`k = M_{\mathrm{col}}`),
-        " と ",
-        math(String.raw`|\epsilon|_{M_{\mathrm{col}}} = |\epsilon|`),
-        " より ",
-        math(String.raw`\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}} = \left(-1_{\mathbb{C}}\right)^{M_{\mathrm{col}}-|\epsilon|}`),
-        " である。",
+        " に使うと",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Bigl(\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_product_over_check_index_set}\ (r_\mu \to \check{u}^{(\epsilon(\mu))})\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{M_{\mathrm{col}}-|\epsilon|_{M_{\mathrm{col}}}}
+&&\bigl(\because\ \text{上の帰納法の}\ k = M_{\mathrm{col}}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{M_{\mathrm{col}}-|\epsilon|}
+&&\bigl(\because\ |\epsilon|_{M_{\mathrm{col}}} = |\epsilon|\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
       paragraph([
         "Step 3（各項を実数の包含で表す）。",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " について ",
-        math(String.raw`\check{t}_\epsilon := \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon \in \mathbb{R}`),
+        math(String.raw`\check{t}_\epsilon := \Bigl(\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\Bigr)\check\Lambda_\epsilon \in \mathbb{R}`),
         " とおく。",
       ]),
       displayMath(
@@ -1697,15 +2045,15 @@ P_{k+1}\check{Q}_\epsilon
 \eta_\epsilon\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
 &= \left(\eta_{(1,\dots,1)}\left(-1_{\mathbb{C}}\right)^{M_{\mathrm{col}}-|\epsilon|}\right)\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(3)}\bigr)\\
-&= \Bigl(\eta_{(1,\dots,1)}\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\Bigr)\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
-&&\bigl(\because\ \text{Step 2 の}\ k = M_{\mathrm{col}}\ \text{の式を右辺から左辺へ}\bigr)\\
-&= \Bigl(\check{h}_{\mathbb{C}}\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\Bigr)\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&= \Bigl(\eta_{(1,\dots,1)}\Bigl(\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}\Bigr)\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 2 の最後の鎖を右辺から左辺へ}\bigr)\\
+&= \Bigl(\check{h}_{\mathbb{C}}\Bigl(\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}\Bigr)\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
 &&\bigl(\because\ \check{h}\ \text{の取り方}\ \check{h}_{\mathbb{C}} = \eta_{(1,\dots,1)}\ \text{を右辺から左辺へ}\bigr)\\
-&= \Bigl(\check{h}\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
-&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \bigl(a \to \check{h},\ b \to \textstyle\prod_{\mu}\check{u}^{(\epsilon_\mu)}\bigr)\bigr)\\
-&= \Bigl(\Bigl(\check{h}\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon\Bigr)_{\mathbb{C}}
-&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \bigl(a \to \check{h}\textstyle\prod_{\mu}\check{u}^{(\epsilon_\mu)},\ b \to \check\Lambda_\epsilon\bigr)\bigr)\\
-&= \Bigl(\Bigl(\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon\Bigr)\check{h}\Bigr)_{\mathbb{C}}
+&= \Bigl(\check{h}\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\Bigr)_{\mathbb{C}}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \bigl(a \to \check{h},\ b \to \textstyle\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\bigr)\bigr)\\
+&= \Bigl(\Bigl(\check{h}\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\Bigr)\check\Lambda_\epsilon\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \bigl(a \to \check{h}\textstyle\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))},\ b \to \check\Lambda_\epsilon\bigr)\bigr)\\
+&= \Bigl(\Bigl(\Bigl(\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\Bigr)\check\Lambda_\epsilon\Bigr)\check{h}\Bigr)_{\mathbb{C}}
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ (ab)c = (bc)a\ \text{（乗法の交換律と結合律）}\bigr)\\
 &= \left(\check{t}_\epsilon\check{h}\right)_{\mathbb{C}}
 &&\bigl(\because\ \check{t}_\epsilon\ \text{の置き方}\bigr)
@@ -1717,8 +2065,12 @@ P_{k+1}\check{Q}_\epsilon
         " と ",
         math(String.raw`e \in \{0,1\}`),
         " について ",
-        math(String.raw`\check{w}_\mu^{(e)} := \check{u}^{(e)}\exp\!\left(\gamma(\tilde\theta_\mu)\left(e - \tfrac12\right)\right) \in \mathbb{R}`),
-        " とおく。",
+        math(String.raw`\check{w}_\mu^{(e)} := \check{u}^{(e)}\exp\!\left(\gamma(\tilde\theta_\mu)\,h(e)\right) \in \mathbb{R}`),
+        " とおく（",
+        math(String.raw`h`),
+        " は ",
+        ref("def_half_sign_of_binary_value"),
+        "）。",
         math(String.raw`\exp`),
         " は ",
         ref("def_scalar_exp"),
@@ -1731,52 +2083,68 @@ P_{k+1}\check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \check{t}_\epsilon
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon
+&= \Bigl(\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\Bigr)\check\Lambda_\epsilon
 &&\bigl(\because\ \check{t}_\epsilon\ \text{の置き方}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)
-   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\Bigr)\Bigr)
+&= \Bigl(\prod_{\mu \in \check{\mathcal{M}}}\check{u}^{(\epsilon(\mu))}\Bigr)
+   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)\Bigr)
 &&\bigl(\because\ \blkref{eigenvalues_of_V_plus}\ \text{の}\ \check\Lambda_\epsilon\ \text{の定義}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)
-   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\Bigr)
-&&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12))\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon(\mu))}\Bigr)
+   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_product_over_check_index_set}\ (r_\mu \to \check{u}^{(\epsilon(\mu))})\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon(\mu))}\Bigr)
+   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_sum_over_check_index_set}\ (r_\mu \to \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu)))\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon(\mu))}\Bigr)
+   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}\exp\!\left(\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)\Bigr)
+&&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu)))\bigr)\\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-   \Bigl(\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\prod_{\mu=1}^{M_{\mathrm{col}}}\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\Bigr)
+   \Bigl(\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon(\mu))}\Bigr)\prod_{\mu=1}^{M_{\mathrm{col}}}\exp\!\left(\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)\Bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a(bc) = b(ac)\ \text{（乗法の交換律と結合律）}\bigr)\\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-   \prod_{\mu=1}^{M_{\mathrm{col}}}\left(\check{u}^{(\epsilon_\mu)}\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\right)
-&&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \check{u}^{(\epsilon_\mu)},\ y_j \to \exp(\gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12)))\ \text{を右辺から左辺へ}\bigr)\\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}
-&&\bigl(\because\ \check{w}_\mu^{(e)}\ \text{の置き方}\ (e \to \epsilon_\mu)\ \text{を各因子へ同時に}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+   \prod_{\mu=1}^{M_{\mathrm{col}}}\left(\check{u}^{(\epsilon(\mu))}\exp\!\left(\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)\right)
+&&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \check{u}^{(\epsilon(\mu))},\ y_j \to \exp(\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))))\ \text{を右辺から左辺へ}\bigr)\\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon(\mu))}
+&&\bigl(\because\ \check{w}_\mu^{(e)}\ \text{の置き方}\ (e \to \epsilon(\mu))\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon(\mu))}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "これを和の各項へ入れる。",
+        "これを和の各項へ入れる（",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " の元 ",
+        math(String.raw`\epsilon`),
+        " の値 ",
+        math(String.raw`\epsilon(\mu)`),
+        " は、",
+        ref("def_sum_over_binary_words"),
+        " の ",
+        math(String.raw`\epsilon_j := \epsilon(j)`),
+        "（",
+        math(String.raw`j \to \mu`),
+        "）である）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\check{t}_\epsilon
-&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon(\mu))}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \text{直前の鎖を各項へ同時に}\bigr)\\
-&= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \blkref{real_sum_over_binary_words_distributes_in_left_factor}\ \bigl(r \to M_{\mathrm{col}},\ x_\epsilon \to \textstyle\prod_{\mu} \check{w}_\mu^{(\epsilon_\mu)},\ c \to (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon(\mu))}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \blkref{real_sum_over_binary_words_distributes_in_left_factor}\ \bigl(r \to M_{\mathrm{col}},\ x_\epsilon \to \textstyle\prod_{\mu} \check{w}_\mu^{(\epsilon(\mu))},\ c \to (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)\ \text{を右辺から左辺へ}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\check{w}_\mu^{(1)} + \check{w}_\mu^{(0)}\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}},\ j \to \mu,\ a_j^{(e)} \to \check{w}_\mu^{(e)})\ \text{を右辺から左辺へ}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\check{u}^{(1)}\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) + \check{u}^{(0)}\exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\check{u}^{(1)}\exp\!\left(\gamma(\tilde\theta_\mu)\,h(1)\right) + \check{u}^{(0)}\exp\!\left(\gamma(\tilde\theta_\mu)\,h(0)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \check{w}_\mu^{(e)}\ \text{の置き方}\ (e \to 1,\ e \to 0)\ \text{を各因子へ同時に}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(1\cdot\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) + (-1)\exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(1\cdot\exp\!\left(\gamma(\tilde\theta_\mu)\,h(1)\right) + (-1)\exp\!\left(\gamma(\tilde\theta_\mu)\,h(0)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \check{u}^{(1)} := 1,\ \check{u}^{(0)} := -1\ \text{を各因子へ同時に}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) + (-1)\exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to \exp(\gamma(\tilde\theta_\mu)(1 - \tfrac12)))\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ同時に}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) + \left(-\exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to \exp(\gamma(\tilde\theta_\mu)(0 - \tfrac12)))\ \text{を各因子へ同時に}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \exp(\gamma(\tilde\theta_\mu)(1 - \tfrac12)),\ z \to \exp(\gamma(\tilde\theta_\mu)(0 - \tfrac12)))\ \text{を右辺から左辺へ、各因子へ同時に}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \blkref{real_one_minus_half_is_half}\ \text{を各因子へ同時に}\bigr)\\
-&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(-\tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - a = -a\ (a \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\,h(1)\right) + (-1)\exp\!\left(\gamma(\tilde\theta_\mu)\,h(0)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の単位元}\ 1\cdot x = x\ (x \to \exp(\gamma(\tilde\theta_\mu)\,h(1)))\ \text{（}\blkref{set_and_algebra_notation}\text{）を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\,h(1)\right) + \left(-\exp\!\left(\gamma(\tilde\theta_\mu)\,h(0)\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to \exp(\gamma(\tilde\theta_\mu)\,h(0)))\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\,h(1)\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\,h(0)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \exp(\gamma(\tilde\theta_\mu)\,h(1)),\ z \to \exp(\gamma(\tilde\theta_\mu)\,h(0)))\ \text{を右辺から左辺へ、各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(-\left(\tfrac12\right)\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \blkref{def_half_sign_of_binary_value}\ \text{の}\ h(1) := \tfrac12,\ h(0) := -\left(\tfrac12\right)\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(-\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 &&\bigl(\because\ \blkref{real_times_negation_is_negation_of_product}\ (x \to \gamma(\tilde\theta_\mu),\ t \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) - \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
@@ -1989,6 +2357,7 @@ r
         "2026-11-19（Lean の通しの証明のゴールラインの確認）: Step 4 の 2 本目の和の鎖の名前だけの根拠のうち、「ℝ で 1·b = b」を ℝ の乗法の単位元 1·x = x（x → exp(γ(θ̃_μ)(1 − ½))、set_and_algebra_notation）に、「ℝ で 1 − 1/2 = 1/2」を新しく足した主張 real_one_minus_half_is_half の参照に替えた。鎖の両端と主張は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認）: 同じ鎖の「ℝ で a·1/2 = a/2（a → γ(θ̃_μ)）」を、新しく足した主張 real_times_half_is_quotient_by_two の参照に替えた。鎖の両端と主張は不変。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認）: 同じ鎖の「ℝ で 2 ≠ 0 なので b = 2·(b/2)」を、新しく足した主張 real_twice_quotient_by_two_is_original（b → exp(γ(θ̃_μ)/2) − exp(−γ(θ̃_μ)/2) を右辺から左辺へ）の参照に替えた。鎖の両端と主張は不変。",
+        "2026-11-21: ε の記法の書き直し（代表の指摘）。準備で「とおく」としていた |ε|_k を def_number_of_ones_of_binary_assignment_among_first_indices の参照にし、ε_1・ε_{k+1} に算術をしていた |ε|_1 = ε_1・|ε|_{k+1} = |ε|_k + ε_{k+1} を、ε(1)・ε(k+1) の値で場合を分けた形にした。ε の値を ε_μ から ε(μ) に書き替え、Q̌_ε の出所を def_check_Q_epsilon、{0,1}^{M̌} の出所を def_binary_assignments_on_check_index_set にした。Step 2 の帰納法の結論を Π_{μ∈M̌} の形に直す 3 行の鎖（def_product_over_check_index_set、帰納法の k = M_col、|ε|_{M_col} = |ε|）を足し、ť_ε と Step 3 の鎖を Π_{μ∈M̌} で書いた。Step 4 は w̌_μ^{(e)} の指数を γ(θ̃_μ)(e − ½)（{0,1} の元 e から実数を引く式）から def_half_sign_of_binary_value の γ(θ̃_μ)h(e) に替え、1 本目の鎖に Λ̌_ε の新しい定義（Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ))）から Π_{μ=1}^{M_col}・Σ_{μ=1}^{M_col} へ開く def_product_over_check_index_set・def_sum_over_check_index_set の 2 行を足した。2 本目の和の鎖の real_one_minus_half_is_half の行と「ℝ で 0 − a = −a」の行は、h(1) = ½・h(0) = −(½) を引く 1 行になった。値と主張は変えていない。",
       ],
     },
   },
@@ -4187,9 +4556,21 @@ V_1^{(+)}
         "、",
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " について、",
         ref("epsilon_eigenvalue_on_check_Q"),
         " の ",
         math(String.raw`\eta_\epsilon`),
+        "、",
+        ref("def_number_of_ones_of_binary_assignment"),
+        " の ",
+        math(String.raw`|\epsilon|`),
+        "、",
+        ref("def_check_Q_epsilon"),
+        " の ",
+        math(String.raw`\check{Q}_\epsilon`),
         " について次が成り立つ。",
       ]),
       list([
@@ -4284,14 +4665,14 @@ V_1^{(+)}
         "(P2) ",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " について ",
-        math(String.raw`\{\mu \in \check{\mathcal{M}} \mid \epsilon_\mu = 1\} \subseteq \check{\mathcal{M}}`),
+        math(String.raw`\{\mu \in \check{\mathcal{M}} \mid \epsilon(\mu) = 1\} \subseteq \check{\mathcal{M}}`),
         " なので",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 |\epsilon|
-&= \#\{\mu \in \check{\mathcal{M}} \mid \epsilon_\mu = 1\}
-&&(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\text{ の } |\epsilon| \text{ の置き方}) \\
+&= \#\{\mu \in \check{\mathcal{M}} \mid \epsilon(\mu) = 1\}
+&&(\because\ \blkref{def_number_of_ones_of_binary_assignment}) \\
 &\leq \#\check{\mathcal{M}}
 &&(\because\ \text{有限集合の部分集合の元の個数は全体の元の個数以下}) \\
 &= M_{\mathrm{col}}
@@ -4460,6 +4841,7 @@ V_1^{(+)}
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-11-04（全証明の SageMath 検算）: 散文の推論を (∵) 付きの鎖にした。主張は変えていない。(1) は trace_of_epsilon_V_plus の読み方（左辺が右辺の像 r_ℂ、r ∈ ℝ_{>0}）と trace_of_epsilon_V_plus_via_check_eigenvalues の z > 0 の定め方をつなぐ行を足した 3 行の含意の鎖に、(2) の「(1) を代入して」と定義の無い負の冪 (−1)^{−|ϵ|} を、準備 (P1) (−1)^k(−1)^k = 1_ℂ・(P2) |ϵ| ≤ M_col と非負の冪だけの 8 行の鎖に、(3) を 3 行の鎖に、(4) の εQ̌_{(1,…,1)} = Q̌_{(1,…,1)} を、Lean の具体版の epsilon_mul_Qproj_univ と同じ η_{(1,…,1)} = +1 を代入する 3 行の鎖に、「冪等性より y = Q̌y」を y = Q̌x からの 4 行の鎖に、言い換えを max_eigenvalue_of_V_plus_simple (3) を引く 2 行の鎖にした。計算の誤りは無かった。",
         "数値検証: sagemath/check/max_eigenvector_in_even_sector/（厳密計算。本文の ψ̌ と実際の V^{(+)} で M_col = 2, 3、結合定数 3 組）。旧い浮動小数点の検算 sagemath/check/053_claim_even_sector_closing/check_02 も残っている。",
+        "2026-11-21: ε の記法の書き直し（代表の指摘）。主張の冒頭で ε・|ε|・Q̌_ε の出所を def_binary_assignments_on_check_index_set・def_number_of_ones_of_binary_assignment・def_check_Q_epsilon として引き、準備 (P2) の ε_μ を ε(μ) に、|ε| の根拠を epsilon_eigenvalue_on_check_Q の置き方から def_number_of_ones_of_binary_assignment に替えた。鎖と主張は変えていない。",
       ],
     },
   },
@@ -4485,9 +4867,14 @@ V_1^{(+)}
         " の ",
         math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}}^x \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         "、",
-        ref("check_joint_eigenspace_decomposition"),
+        ref("def_check_Q_epsilon"),
         " の ",
         math(String.raw`\check{Q}_{(1,\dots,1)} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（",
+        math(String.raw`(1,\dots,1)`),
+        " は ",
+        ref("def_binary_assignments_on_check_index_set"),
+        " の定数写像）",
         "、",
         ref("def_even_eigenvectors_of_epsilon"),
         " の ",
@@ -4629,6 +5016,7 @@ V_1^{(+)}
       notes: [
         "2026-10-31: 章立ての組み直しで、V^{(+)} の最大固有値に属する固有ベクトルの章のゴールの式（tr(εV^{(+)}) = … > 0 ⟹ im Q̌_{(1,…,1)} ⊆ F^{(+)}）を一つの主張として立てた。既存の主張 trace_of_epsilon_V_plus・trace_of_epsilon_V_plus_via_check_eigenvalues・epsilon_eigenvalue_on_check_Q と、max_eigenvector_in_even_sector (4) の証明の計算を並べるだけで、新しい証明は無い。",
         "2026-11-05: (2) を一ステップ一定理に揃えた。含意の鎖の 1 行目を、(1) の右辺 r の置き方と trace_of_epsilon_V_plus_via_check_eigenvalues の z > 0 の定め方を分けた 2 行にし（max_eigenvector_in_even_sector (1) と同じ）、εQ̌_{(1,…,1)} = Q̌_{(1,…,1)} を epsilon_eigenvalue_on_check_Q (1)・η の代入・scalar_multiple_by_one の 3 行の鎖に、「冪等性より y = Q̌y」を y = Q̌x からの 4 行の鎖に、εy = y を mat_mult_associative の行を入れた 4 行の鎖にした（max_eigenvector_in_even_sector (4) と同じ行）。η の ±1 を ℂ の元 ±1_ℂ と読むことを冒頭に書いた。主張は変えていない。",
+        "2026-11-21: ε の記法の書き直し（代表の指摘）。主張の Q̌_{(1,…,1)} の出所を check_joint_eigenspace_decomposition から def_check_Q_epsilon に替え、(1,…,1) が def_binary_assignments_on_check_index_set の定数写像であることを書いた。証明と主張は変えていない。",
       ],
     },
   },

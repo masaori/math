@@ -1,11 +1,11 @@
 # 対象ラベル: epsilon_eigenvalue_on_check_Q（主張 (1) と証明の (1) の鎖を、本文の ψ̌ で）
-# 各 ϵ ∈ {0,1}^{M̌} について、証明の (1) の鎖を行の括弧どおりに組んで隣どうし比べる:
-#   仮定 rank Q̌_ϵ = 1（check_joint_eigenspace_decomposition (4)）・Q̌_ϵ^2 = Q̌_ϵ（同 (1)）・εQ̌_ϵ = Q̌_ϵε（epsilon_anticommutes_with_check_Z_Y (4)）・ε^2 = I、
-#   Q̌_ϵq = q の鎖（4 行）、Q̌_ϵ(εq) = εq の鎖（5 行）、εq ∈ Cq と η、q = (ηη)q の鎖（8 行）、(ηη-1)q = O の鎖（5 行）、
-#   ηη - 1 = 0、(η-1)(η+1) = 0 の鎖（13 行）、η ∈ {±1}、全ての e_k について (εQ̌_ϵ)x = (ηQ̌_ϵ)x の鎖（10 行）、
-#   εQ̌_ϵ = ηQ̌_ϵ の列の鎖（8 行）、一意性の鎖（7 行、η' = η）、主張 (1)。
+# 各 ε ∈ {0,1}^{M̌} について、証明の (1) の鎖を行の括弧どおりに組んで隣どうし比べる:
+#   仮定 rank Q̌_ε = 1（check_joint_eigenspace_decomposition (4)）・Q̌_ε^2 = Q̌_ε（同 (1)）・εQ̌_ε = Q̌_εε（epsilon_anticommutes_with_check_Z_Y (4)）・ε^2 = I、
+#   Q̌_εq = q の鎖（4 行）、Q̌_ε(εq) = εq の鎖（5 行）、εq ∈ Cq と η、q = (ηη)q の鎖（8 行）、(ηη-1)q = O の鎖（5 行）、
+#   ηη - 1 = 0、(η-1)(η+1) = 0 の鎖（13 行）、η ∈ {±1}、全ての e_k について (εQ̌_ε)x = (ηQ̌_ε)x の鎖（10 行）、
+#   εQ̌_ε = ηQ̌_ε の列の鎖（8 行）、一意性の鎖（7 行、η' = η）、主張 (1)。
 #   (η-1)(η+1) の鎖は η を不定元に置いても確かめる。
-# 否定コントロール: η' = -η では εQ̌_ϵ ≠ η'Q̌_ϵ。ε を σ_1^z に替えると、σ_1^z q ∉ Cq となる ϵ がある（(1) の仮定 εQ̌_ϵ = Q̌_ϵε が要ること）。
+# 否定コントロール: η' = -η では εQ̌_ε ≠ η'Q̌_ε。ε を σ_1^z に替えると、σ_1^z q ∉ Cq となる ε がある（(1) の仮定 εQ̌_ε = Q̌_εε が要ること）。
 load("_prelude.sage")
 
 Ms = [int(a) for a in sys.argv[1:]] or [2, 3]
@@ -16,11 +16,11 @@ for st in settings(Ms):
     rep.check(P_(E, E) == Id, f"{st.tag}: ε^2 = I（epsilon_square_and_eigenvalues）")
     G_breaks = False
     for w in st.words:
-        tag = f"{st.tag} ϵ={w}"
+        tag = f"{st.tag} ε={w}"
         Q = st.Q[w]
-        rep.check(Q.rank() == 1, f"{tag}: 仮定 dim im Q̌_ϵ = 1")
-        rep.check(P_(Q, Q) == Q, f"{tag}: 仮定 Q̌_ϵ^2 = Q̌_ϵ")
-        rep.check(P_(E, Q) == P_(Q, E), f"{tag}: 仮定 εQ̌_ϵ = Q̌_ϵε")
+        rep.check(Q.rank() == 1, f"{tag}: 仮定 dim im Q̌_ε = 1")
+        rep.check(P_(Q, Q) == Q, f"{tag}: 仮定 Q̌_ε^2 = Q̌_ε")
+        rep.check(P_(E, Q) == P_(Q, E), f"{tag}: 仮定 εQ̌_ε = Q̌_εε")
         x, q = st.chosen_q(w)
         rep.check(q != 0, f"{tag}: q ≠ 0")
         rep.chain([("Q̌q", P_(Q, q)), ("Q̌(Q̌x)", P_(Q, P_(Q, x))), ("(Q̌Q̌)x", P_(P_(Q, Q), x)), ("Q̌x", P_(Q, x)), ("q", q)], f"{tag} Q̌q = q")
@@ -62,9 +62,9 @@ for st in settings(Ms):
         rep.chain([("η'q", S_(etap, q)), ("η'(Q̌q)", S_(etap, P_(Q, q))), ("(η'Q̌)q", P_(S_(etap, Q), q)), ("(εQ̌)q", P_(EQ, q)),
                    ("ε(Q̌q)", P_(E, P_(Q, q))), ("εq", Eq), ("ηq", S_(eta, q))], f"{tag} 一意性")
         rep.negative(EQ != S_(-eta, Q), f"{tag}: η' = -η では εQ̌ ≠ η'Q̌")
-        rep.check(E * Q == eta * Q, f"{tag}: 主張 (1) εQ̌_ϵ = η_ϵQ̌_ϵ（Sage の積）")
+        rep.check(E * Q == eta * Q, f"{tag}: 主張 (1) εQ̌_ε = η_εQ̌_ε（Sage の積）")
         G_breaks = G_breaks or coefficient_on(P_(st.G, q), q) is None
-    rep.negative(G_breaks, f"{st.tag}: ε を σ_1^z に替えると σ_1^z q ∉ Cq となる ϵ がある")
+    rep.negative(G_breaks, f"{st.tag}: ε を σ_1^z に替えると σ_1^z q ∉ Cq となる ε がある")
     print(f"  {st.tag}: 済（累計 {rep.n} 件、否定 {rep.neg} 件、失敗 {rep.fail} 件）", flush=True)
 
 # (η-1)(η+1) の鎖を η を QQ(i) 上の不定元に置いて一般の等式として確かめる（上の鎖では η は ±1 の具体の値）。

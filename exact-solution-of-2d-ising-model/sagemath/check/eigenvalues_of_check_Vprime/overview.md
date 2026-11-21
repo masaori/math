@@ -5,13 +5,13 @@
 **対象ラベル**: `eigenvalues_of_check_Vprime`
 
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`
-- ブロック: `evenEigen_006_claim_eigenvalues_of_check_Vprime`（ε ∈ {0,1}^{M̌} について ǧ(ε) := Σ_μ γ(θ̃_μ)(ε_μ − 1/2) ∈ ℝ と置くと、
+- ブロック: `evenEigen_006_claim_eigenvalues_of_check_Vprime`（写像 ε: M̌ → {0,1} について ǧ(ε) := Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ)) ∈ ℝ（h(1) := ½、h(0) := −(½) は `def_half_sign_of_binary_value`）と置くと、
   V̌'Q̌_ε = Q̌_εV̌' = (exp(ǧ(ε)))_ℂ Q̌_ε。V̌' は対角化可能で、固有値は重複度を込めて {exp(ǧ(ε))}_ε（総個数 2^{M_col}）で尽くされ、
   すべて正の実数。相異なる ε が同じ固有値を与えることは実際に起こる）
-- 範囲: 証明の全ての鎖（Step 1 の左右の 14 行、Step 2・Step 3' の帰納法、Step 3・Step 3' の部分和の 8 行と極限の鎖、
+- 範囲: 証明の全ての鎖（Step 1 の μ ごとの左右の等式（ε(μ) によらない 6 行と ε(μ) = 1・0 の 7 行ずつ）と左右の 8 行、Step 2・Step 3' の帰納法、Step 3・Step 3' の部分和の 8 行と極限の鎖、
   Step 4 の Q̌_εy = y の 8 行と後半の 5 行、最後の段落の exp(ǧ(ε)) > 0）、直和から対角化可能性を述べる段落、主張そのもの。
-- 記号: X̌ := Σ_μ γ(θ̃_μ)(ň_μ − (1/2)I)、V̌' := exp(X̌)（`def_check_number_operator` (2)）、Q̌_ε := Π_μ R_μ^{(ε_μ)}
-  （R^{(1)} := ň_μ、R^{(0)} := I − ň_μ。`check_joint_eigenspace_decomposition`）、E_K := Σ_{k=0}^{K}(1/k!)X̌^k。
+- 記号: X̌ := Σ_μ γ(θ̃_μ)(ň_μ − (1/2)I)、V̌' := exp(X̌)（`def_check_number_operator` (2)）、Q̌_ε := Π_{μ∈M̌} R_μ^{(ε(μ))}
+  （R^{(1)} := ň_μ、R^{(0)} := I − ň_μ。`def_check_Q_epsilon`・`def_check_R_factor`）、E_K := Σ_{k=0}^{K}(1/k!)X̌^k。
 
 ## ň_μ と γ_μ の供給元
 
@@ -19,7 +19,7 @@
 をそのまま読み込んで使う（複製しない）。
 
 - **既定（Jordan–Wigner の模型）**: 鎖が ň_μ について使う性質は `check_joint_eigenspace_decomposition` の (1)（Q̌_ε^2 = Q̌_ε）と
-  (3)（ň_μQ̌_ε = Q̌_εň_μ = ε_μQ̌_ε）だけなので、二つを満たす n_μ := c_μ^Tc_μ（`QQ`、M_col = 2, 3, 4）と有理数 γ_μ = 3/2, 5/7, 2, 11/3 を使う。
+  (3)（ε(μ) = 1 なら ň_μQ̌_ε = Q̌_εň_μ = Q̌_ε、ε(μ) = 0 なら O）だけなので、二つを満たす n_μ := c_μ^Tc_μ（`QQ`、M_col = 2, 3, 4）と有理数 γ_μ = 3/2, 5/7, 2, 11/3 を使う。
 - **本物の ψ̌（`check_with_check_psi.sage`）**: `USE_CHECK_PSI = True` と置いてから、同じ検算を読み込む。ň_μ は本文の ψ̌ の ň_μ := ψ̌_μ^†ψ̌_{σ(μ)}
   （数体 F := E_1 の厳密な行列。結合定数 3 組 × M_col = 2, 3）。γ_μ は、
   - Step 1 の鎖（γ_μ について一次）では F 上の多項式環の不定元 γ_1, …, γ_M。不定元での等号は γ(θ̃_μ) の実際の値を代入しても成り立つ。
@@ -37,8 +37,8 @@
 
 | 証明の行 | 検算 | 段数（模型） |
 |---|---|---|
-| Step 1 の X̌Q̌_ε から ǧ(ε)Q̌_ε までの 14 行（`def_check_number_operator` (2)・`finite_sum_of_matrices_distributes_in_left_factor`・`scalar_multiple_factors_out_of_left_factor`・`matrix_difference_is_sum_with_negation`・`mat_mult_distributes_over_sum_in_left_factor`・`negation_factors_out_of_left_factor`・`identity_matrix_is_left_unit_of_mat_mult`・(3)・`difference_of_scalar_multiples_of_one_matrix`・`scalar_multiple_is_associative`・`finite_sum_of_scalar_multiples_of_one_matrix`・ǧ の定義）。両端は Sage の演算（独立な経路）とも比べる | `check_step1_left_chain.sage` | 405（否定コントロールの 13 段を含む） |
-| Step 1 の Q̌_εX̌ から ǧ(ε)Q̌_ε までの 14 行（右から掛ける形の同じ主張たち）と、「とくに X̌Q̌_ε = Q̌_εX̌」（左右の鎖の終わりが同じ ǧ(ε)Q̌_ε） | `check_step1_right_chain.sage` | 405（同上） |
+| Step 1 の μ ごとの左の等式 (ň_μ − ½I)Q̌_ε = h(ε(μ))Q̌_ε（ε(μ) によらない 6 行: `matrix_difference_is_sum_with_negation`・`mat_mult_distributes_over_sum_in_left_factor`・`negation_factors_out_of_left_factor`・右辺から左辺へ・`scalar_multiple_factors_out_of_left_factor`・`identity_matrix_is_left_unit_of_mat_mult`。ε(μ) = 1 の 7 行: (3)・`scalar_multiple_by_one`・`difference_of_scalar_multiples_of_one_matrix`・`real_one_minus_half_is_half`・h(1) := ½・場合の仮定。ε(μ) = 0 の 7 行: (3)・`zero_scalar_multiple_is_zero_matrix`・同・0 − a = −a・h(0) := −(½)・場合の仮定）と、X̌Q̌_ε から ǧ(ε)Q̌_ε までの 8 行（`def_check_number_operator` (2)・`finite_sum_of_matrices_distributes_in_left_factor`・`scalar_multiple_factors_out_of_left_factor`・μ ごとの左の等式・`scalar_multiple_is_associative`・`finite_sum_of_scalar_multiples_of_one_matrix`・`def_sum_over_check_index_set`（作り方で自明）・ǧ の定義）。鎖の項は `_step1_chains.sage` が組む。両端は Sage の演算（独立な経路）とも比べる | `check_step1_left_chain.sage` | 1405（否定コントロールで等号のまま残る段を含む） |
+| Step 1 の μ ごとの右の等式 Q̌_ε(ň_μ − ½I) = h(ε(μ))Q̌_ε と Q̌_εX̌ から ǧ(ε)Q̌_ε までの 8 行（右から掛ける形の同じ主張たち）と、「とくに X̌Q̌_ε = Q̌_εX̌」（左右の鎖の終わりが同じ ǧ(ε)Q̌_ε） | `check_step1_right_chain.sage` | 1405（同上） |
 | Step 2 の帰納法（k = 0 の 4 行、k + 1 の 8 行）、Step 3' の帰納法（k = 0 の 4 行、k + 1 の 7 行）、Step 4 の Q̌_εy = y の 8 行（`def_exp` (1) の冪・`mat_mult_associative`・単位行列・`scalar_multiple_by_one`・スカラー倍の主張・ℂ の交換律・(1)）。k = 0, …, 4 | `check_step2_step3prime_induction_and_step4_idempotent_chains.sage` | 1129（否定コントロール 9 行） |
 | Step 3 の E_KQ̌_ε と Step 3' の Q̌_εE_K から (Σ_{k≤K}(1/k!)ǧ^k)Q̌_ε までの各 8 行（K = 0, …, 4） | `check_step3_partial_sum_chains.sage` | 974（否定コントロールの 14 段を含む） |
 | Step 3・Step 3' の極限の鎖（Step 3' の最後の行 = V̌'Q̌_ε は「主張の両辺」が受け持つ。E_K → V̌'、行列積の連続性の評価（左右）、(1/k!)z = z/k!、`scalar_sequence_times_matrix_converges` の評価、`scalar_exp_is_limit_of_partial_sums` の極限、`complex_exp_of_real_argument`、主張の両辺。ǧ(ε) < 0 の ε が在ること） | `check_step3_limit_chains.sage` | 1044 の関係 |
@@ -68,8 +68,8 @@ P^{-1}V̌'P が diag(exp ǧ(ε)) と重なる（対角化可能、固有値は�
 
 | 検算 | 本物の ψ̌ での段数 | 否定コントロール |
 |---|---|---|
-| `check_step1_left_chain.sage`（γ_μ は不定元） | 517（否定コントロールの 13 段を含む） | 1 行 |
-| `check_step1_right_chain.sage`（γ_μ は不定元） | 517（同上） | 1 行 |
+| `check_step1_left_chain.sage`（γ_μ は不定元） | 1469（否定コントロールで等号のまま残る段を含む） | 3 本 |
+| `check_step1_right_chain.sage`（γ_μ は不定元） | 1469（同上） | 3 本 |
 | `check_step2_step3prime_induction_and_step4_idempotent_chains.sage` | 3313 | 9 行 |
 | `check_step3_partial_sum_chains.sage` | 2894（否定コントロールの 14 段を含む） | 2 行 |
 | `check_step3_limit_chains.sage`（γ(θ̃_μ) の球。K_max = 14〜33） | 4368 の関係 | — |
@@ -113,6 +113,10 @@ P^{-1}V̌'P が diag(exp ǧ(ε)) と重なる（対角化可能、固有値は�
 | `check_claim_statements.sage`、`check_with_check_psi.sage`、`_vprime_settings.sage` | 新しく足した |
 
 主張を浮動小数点で確かめ、縮退の組の実在を記録した `050_claim_even_sector_eigenvalues/check_03_Vprime_eigenvalues.sage` は、そこに残した。
+
+2026-11-21、代表の指摘（ε の添字・算術・和の範囲）を受けて本文の ǧ(ε) を Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ)) と書き直し、Step 1 を μ ごとの等式
+（(3) の ε(ν) の場合分けを使う）と 8 行の主鎖に組み直したのに合わせて、`check_step1_left_chain.sage`・`check_step1_right_chain.sage` を書き直した
+（鎖の項を組む関数は `_step1_chains.sage` に置いた）。ほかの検算は ǧ(ε) の値を h で組むように替えただけで、鎖の行は変えていない（値は不変）。
 
 ## 実行
 

@@ -78,7 +78,7 @@ for s in c_plus_settings([2, 3]):
 
     # ---------------- Step 1 ----------------
     Qsum = fsum_left([s.Q[w] for w in s.words])
-    rep.eq(Qsum, s.Id, f"{tag}: Σ_εQ̌_ε = I（check_joint_eigenspace_decomposition (2)）")
+    rep.eq(Qsum, s.Id, f"{tag}: Σ_{{ε∈{{0,1}}^{{M̌}}}}Q̌_ε = I（check_joint_eigenspace_decomposition (2)）")
     for w in s.words:
         rep.ineq(s.L[w] > 0 and s.L[w] <= s.Lmax, f"{tag}: 0 < Λ̌_ε ≤ Λ̌_max（eigenvalues_of_V_plus (2)）")
     for t in T_LIST[M]:
@@ -95,23 +95,23 @@ for s in c_plus_settings([2, 3]):
         B6 = ordered_sum([ordered_sum([(ident(u[k, 0]) * s.W[k, l]) * u[l, 0] for l in range(n)], F(0)) for k in range(n)], F(0))
         B7 = conj_bilinear(u.list(), s.W, u.list(), ident)
         rep.chain([B1, B2, B3, B4, B5, B6, B7], f"{tag}: 準備 2 の鎖")
-        # u = Σ_ε w_ε と V^(+)u = Σ_ε (Λ̌_ε)_ℂ w_ε
+        # u = Σ_{ε∈{0,1}^{M̌}} w_ε と V^(+)u = Σ_{ε∈{0,1}^{M̌}} (Λ̌_ε)_ℂ w_ε
         ws = {w: body_product(s.Q[w], u) for w in s.words}
         U1 = u
         U2 = body_product(s.Id, u)
         U3 = body_product(Qsum, u)
         U4 = fsum_left([body_product(s.Q[w], u) for w in s.words])
         U5 = fsum_left([ws[w] for w in s.words])
-        rep.chain([U1, U2, U3, U4, U5], f"{tag}: u = Σ_ε w_ε の鎖")
+        rep.chain([U1, U2, U3, U4, U5], f"{tag}: u = Σ_{{ε∈{{0,1}}^{{M̌}}}} w_ε の鎖")
         V1 = body_product(s.V, u)
         V2 = body_product(s.V, fsum_left([body_product(s.Q[w], u) for w in s.words]))
         V3 = fsum_left([body_product(s.V, body_product(s.Q[w], u)) for w in s.words])
         V4 = fsum_left([body_product(body_product(s.V, s.Q[w]), u) for w in s.words])
         V5 = fsum_left([body_product(body_scalar(s.lam[w], s.Q[w]), u) for w in s.words])
         V6 = fsum_left([body_scalar(s.lam[w], ws[w]) for w in s.words])
-        rep.chain([V1, V2, V3, V4, V5, V6], f"{tag}: V^(+)u = Σ_ε (Λ̌_ε)_ℂ w_ε の鎖")
+        rep.chain([V1, V2, V3, V4, V5, V6], f"{tag}: V^(+)u = Σ_{{ε∈{{0,1}}^{{M̌}}}} (Λ̌_ε)_ℂ w_ε の鎖")
         for k in range(n):
-            rep.eq(u[k, 0], ordered_sum([ws[w][k, 0] for w in s.words], F(0)), f"{tag}: u_k = Σ_ε (w_ε)_k")
+            rep.eq(u[k, 0], ordered_sum([ws[w][k, 0] for w in s.words], F(0)), f"{tag}: u_k = Σ_{{ε∈{{0,1}}^{{M̌}}}} (w_ε)_k")
             rep.eq(V1[k, 0], ordered_sum([s.lam[w] * ws[w][k, 0] for w in s.words], F(0)), f"{tag}: (V^(+)u)_k の成分の式")
         # Step 1 の三本目の鎖（1〜8 行目は E_1）
         Wu = body_product(s.W, u)
@@ -134,7 +134,7 @@ for s in c_plus_settings([2, 3]):
         C11 = ordered_sum([QQbar(s.L[w] * nq[w]) for w in s.words], QQbar(0))
         C12 = QQbar(ordered_sum([s.L[w] * nq[w] for w in s.words], AA(0)))
         rep.chain([toq(C9), C10, C11, C12], f"{tag}: Step 1 の (x^⊤W_ℝx)_ℂ の鎖の 9〜12 行目")
-        # Σ‖w_ε‖^2 = ‖x‖^2 の鎖
+        # Σ_{ε∈{0,1}^{M̌}}‖w_ε‖^2 = ‖x‖^2 の鎖
         D1 = QQbar(ordered_sum([nq[w] for w in s.words], AA(0)))
         D2 = ordered_sum([QQbar(nq[w]) for w in s.words], QQbar(0))
         D3 = ordered_sum([toq(conj_bilinear(u.list(), s.Q[w], u.list(), ident)) for w in s.words], QQbar(0))
@@ -144,10 +144,10 @@ for s in c_plus_settings([2, 3]):
         D7 = toq(ordered_sum([ident(u[k, 0]) * u[k, 0] for k in range(n)], F(0)))
         D8 = QQbar(norm2_AA(s.to_qqbar_mat(u)))
         D9 = QQbar(AA(sum(z * z for z in xq)))
-        rep.chain([D1, D2, D3, D4, D5, D6, D7, D8, D9], f"{tag}: Σ‖w_ε‖^2 = ‖x‖^2 の鎖")
+        rep.chain([D1, D2, D3, D4, D5, D6, D7, D8, D9], f"{tag}: Σ_{{ε∈{{0,1}}^{{M̌}}}}‖w_ε‖^2 = ‖x‖^2 の鎖")
         # inclusion_rr_to_cc_is_injective で ℝ へ戻した等式と、実数の鎖
         xR = AA(real_bilinear(xq, WR, xq))
-        rep.eq(QQbar(xR), C12, f"{tag}: x^⊤W_ℝx = Σ_εΛ̌_ε‖w_ε‖^2（ℝ）")
+        rep.eq(QQbar(xR), C12, f"{tag}: x^⊤W_ℝx = Σ_{{ε∈{{0,1}}^{{M̌}}}}Λ̌_ε‖w_ε‖^2（ℝ）")
         E1 = ordered_sum([s.L[w] * nq[w] for w in s.words], AA(0))
         E2 = ordered_sum([s.Lmax * nq[w] for w in s.words], AA(0))
         for w in s.words:

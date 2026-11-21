@@ -52,7 +52,7 @@ for st in trace_settings([2, 3]):
     assert eta1 == 1 and trEV.imag().contains_zero() and trEV.real() > 0, st.tag   # (iv)
     assert max(trEV.real().rad(), trEV.imag().rad()) < 1e-100
     checks += 5
-    # 否定コントロール: sinh を cosh に（ϰ を Σ_ϵ Λ̌_ϵ に）すると重ならない。η を −1 にすると重ならない。
+    # 否定コントロール: sinh を cosh に（ϰ を Σ_ε Λ̌_ε に）すると重ならない。η を −1 にすると重ならない。
     assert not trEV.overlaps(CB(C * left_product([2 * (g / 2).cosh() for g in st.gam]))), st.tag
     assert not trEV.overlaps(-rhs), st.tag
     # 否定コントロール: ε を I に取り違えた tr(V^{(+)}) は重ならない

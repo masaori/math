@@ -83,7 +83,7 @@ half = RB(1) / 2
 for M in range(2, 7):
     for (K1, K2) in PARAMS:
         g = [gamma_tilde_b(M, mu, K1, K2) for mu in range(1, M + 1)]
-        gcheck = lambda eps: finite_sum([g[mu] * (RB(eps[mu]) - half) for mu in range(M)])
+        gcheck = lambda eps: finite_sum([g[mu] * (half if eps[mu] == 1 else -half) for mu in range(M)])   # ǧ(ε) = Σ γ_μ h(ε(μ))
         # Step 3
         lines = [
             bsum(M, lambda eps: (-gcheck(eps)).exp()),

@@ -1,5 +1,5 @@
 # 対象ラベル: trace_of_epsilon_V_plus_via_check_eigenvalues の検算の共通の準備。
-# 本文の ψ̌・ε・ň_μ・Q̌_ϵ・η_ϵ は ../epsilon_eigenvalue_on_check_Q/_prelude.sage の EpsilonSetting から取る
+# 本文の ψ̌・ε・ň_μ・Q̌_ε・η_ε は ../epsilon_eigenvalue_on_check_Q/_prelude.sage の EpsilonSetting から取る
 # （結合定数 K_1 := 2 log y、K_2 := log x、(x, y) ∈ COUPLINGS、M_col = 2, 3。成分は数体 E_1 の元で厳密）。
 # ここで足すもの:
 #   - 和・トレース・有限積を本文の定義の帰納法どおりに組む関数（def_sum_over_binary_words・_of_complex_numbers・_of_real_numbers、
@@ -45,8 +45,19 @@ def binary_word_sum(r, z):
 
 
 def popcount_prefix(eps, k):
-    """|ϵ|_k := #{μ ∈ {1, …, k} | ϵ_μ = 1}（k は 1 始まり）。"""
-    return sum(eps[:k])
+    """def_number_of_ones_of_binary_assignment_among_first_indices の |ε|_k := #{μ ∈ {1, …, k} | ε(μ) = 1}（k は 1 始まり）。
+    eps は値の組 (ε(1), …, ε(M_col)) で、値に算術はしない。"""
+    return len([e for e in eps[:k] if e == 1])
+
+
+def h_half(e):
+    """def_half_sign_of_binary_value の h: {0,1} → ℝ、h(1) := 1/2、h(0) := −(1/2)。"""
+    return QQ(1) / 2 if e == 1 else -(QQ(1) / 2)
+
+
+def two_h(e):
+    """2h(e) ∈ {1, −1}（exp(γh(e)) を a^{2h(e)} として持つための指数。h_half の値の 2 倍）。"""
+    return 1 if e == 1 else -1
 
 
 def u_sign(e):

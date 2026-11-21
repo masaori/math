@@ -8,7 +8,7 @@
 # 複素共役: F の自己同型のうち、F → QQbar の埋め込み emb（embedding_to_qqbar）について emb∘c = conj∘emb となるもの c_F を選ぶ
 #（F の生成元で確かめる）。E_μ = F(R) では R^2 ∈ F が c_F で動かないことを確かめ、c(c_0 + c_1R) := c_F(c_0) + c_F(c_1)R と延ばす
 #（R ↦ +r_μ の埋め込みで本物の複素共役であることを R と F の生成元で確かめる）。
-# (4) の Q̌_ε の鎖は全ての μ の ň_μ を一つの体 E_1 に移して行う（移し方は check_joint_eigenspace_decomposition/_number_operators.sage と同じ）。
+# (4) の Q̌_ε の鎖（def_check_Q_epsilon の Q̌_ε = ∏_{μ∈M̌}R_μ^{(ε(μ))} から始まる 9 行）は全ての μ の ň_μ を一つの体 E_1 に移して行う（移し方は check_joint_eigenspace_decomposition/_number_operators.sage と同じ）。
 # 範囲: 結合定数 3 組 × M_col = 2, 3（引数で M_col を絞れる）× μ ∈ M̌ の全て × ε ∈ {0,1}^{M̌} の全て。
 # 帰属: 成分はすべて数体 F・E_μ の元（厳密計算。浮動小数点は使わない）。x^*Q̌_εx ≥ 0 は値を QQbar へ移して AA の元として判定する。
 load("../def_check_number_operator/_prelude.sage")
@@ -58,6 +58,19 @@ def prod_left(Fs):
     for X in Fs[1:]:
         P = body_product(P, X)
     return P
+
+
+def finite_product_inductive(As):
+    """def_finite_product_of_matrices の ∏_{j=1}^{r} A_j（∏_{j=1}^{1} := A_1、∏_{j=1}^{r+1} := (∏_{j=1}^{r})A_{r+1}）。"""
+    if len(As) == 1:
+        return As[0]
+    return body_product(finite_product_inductive(As[:-1]), As[-1])
+
+
+def prod_over_check_index_set(Af, J):
+    """def_product_over_check_index_set の ∏_{μ∈M̌} A_μ := ∏_{μ=1}^{M_col} A_μ（Af は μ ↦ A_μ の辞書、J = M̌ を昇順に並べたもの）。"""
+    assert list(J) == list(range(1, len(J) + 1))
+    return finite_product_inductive([Af[m] for m in J])
 
 
 def scalar_transport(tr, v, E_from):
@@ -283,16 +296,22 @@ for (x, y) in COUPLINGS:
               matrix(E1, n, 1, lambda k, _: 1),
               matrix(E1, n, 1, lambda k, _: (k + 1) + (k * k - 2) * iE),
               matrix(E1, n, 1, lambda k, _: s1.r * (k % 3) - iE * (k % 2) + 1 / (k + 2))]
-        for eps in cartesian_product([[0, 1]] * M):
-            tag = f"(x,y)=({x},{y}) M={M} ε={tuple(eps)}"
-            R = [ns[m] if eps[m - 1] == 1 else body_difference(Id, ns[m]) for m in st.J]   # R_μ^(ε_μ)
-            Q = prod_left(R)                                 # check_joint_eigenspace_decomposition の Q̌_ε
+        for vals in cartesian_product([[0, 1]] * M):
+            eps = {m: vals[m - 1] for m in st.J}             # ε: M̌ → {0,1}（def_binary_assignments_on_check_index_set）。値は ε(μ) = eps[μ]
+            tag = f"(x,y)=({x},{y}) M={M} ε={tuple(vals)}"
+            Rf = {m: (ns[m] if eps[m] == 1 else body_difference(Id, ns[m])) for m in st.J}   # R_μ^{(ε(μ))}（def_check_R_factor）
+            R = [Rf[m] for m in st.J]                        # μ = 1, …, M_col の順
+            Q = prod_over_check_index_set(Rf, st.J)          # def_check_Q_epsilon の Q̌_ε := ∏_{μ∈M̌} R_μ^{(ε(μ))}
             rep.chain([
                 ("Q̌_ε^*", star1(Q)),
+                ("(∏_{μ∈M̌} R_μ^{(ε(μ))})^*", star1(prod_over_check_index_set(Rf, st.J))),
+                ("(∏_{μ=1}^{M} R_μ^{(ε(μ))})^*", star1(finite_product_inductive(R))),
                 ("(R_1⋯R_M)^*", star1(prod_left(R))),
                 ("(R_M)^*⋯(R_1)^*", prod_left([star1(X) for X in reversed(R)])),
                 ("R_M⋯R_1", prod_left(list(reversed(R)))),
                 ("R_1⋯R_M", prod_left(R)),
+                ("∏_{μ=1}^{M} R_μ^{(ε(μ))}", finite_product_inductive(R)),
+                ("∏_{μ∈M̌} R_μ^{(ε(μ))}", prod_over_check_index_set(Rf, st.J)),
                 ("Q̌_ε", Q),
             ], f"{tag}: (4) Q̌_ε の鎖")
             rep.eq(body_product(Q, Q), Q, f"{tag}: Q̌_ε^2 = Q̌_ε（check_joint_eigenspace_decomposition (1)）")
@@ -345,7 +364,7 @@ sx1 = matrix(KGc, [[0, 1], [1, 0]]).tensor_product(identity_matrix(KGc, 2))
 P1, P2 = (I4 + sz1) / 2, (I4 + sx1) / 2                  # エルミートな冪等行列で可換でないもの
 PP = P1 * P2
 rep.eq(body_star(PP, conjc), P2 * P1, "対照: (P_1P_2)^* = P_2P_1")
-rep.neq(body_star(PP, conjc), PP, "対照: 可換でないエルミートな冪等行列の積はエルミートでない（Q̌_ε の鎖の 4 行目に可換性が要る）")
+rep.neq(body_star(PP, conjc), PP, "対照: 可換でないエルミートな冪等行列の積はエルミートでない（Q̌_ε の鎖の 6 行目に可換性が要る）")
 Pn = matrix(KGc, [[1, 1], [0, 0]]).tensor_product(identity_matrix(KGc, 2))   # エルミートでない冪等行列
 rep.eq(Pn * Pn, Pn, "対照: P' は冪等")
 xc = matrix(KGc, 4, 1, [1, 0, ic, 0])

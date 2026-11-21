@@ -5,7 +5,7 @@
 # def_exp (1) の冪 A^0 := I、A^{m+1} := A^m A）で成分から組み、隣り合う項が等しいことを一行ずつ確かめる。
 # 添字 0 からの和は、定義どおり項 X_{j-1}（j = 1..K+1）を左から足す和として組む。
 # ň_μ と γ_μ は _vprime_settings.sage の chain_settings から取る（既定は Jordan–Wigner の模型 n_μ := c_μ^T c_μ と有理数 γ_μ、
-# check_with_check_psi.sage からは本文の ψ̌ の ň_μ と有理数 γ_μ）。Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň、R^{(0)} := I − ň）、
+# check_with_check_psi.sage からは本文の ψ̌ の ň_μ と有理数 γ_μ）。Q̌_ε := Π_μ R_μ^{(ε(μ))}（R^{(1)} := ň、R^{(0)} := I − ň）、
 # X̌ := Σ_μ γ_μ(ň_μ − ½I)（M = 2, 3、ε を全列挙、K = 0..4）。
 # 鎖が使う仮定は Step 2 の X̌^kQ̌_ε = ǧ(ε)^kQ̌_ε（右からの形は Step 3' の帰納法の Q̌_εX̌^k = ǧ(ε)^kQ̌_ε）だけである。
 # 否定コントロール: 不定元の成分の 2×2 行列 X、Q と不定元 g（K = 2）では、その仮定を引く行だけが等号を外れ、
@@ -96,7 +96,7 @@ for (tag, M, R, n, gammas) in chain_settings([2, 3]):
     for eps in cartesian_product([[0, 1]] * M):
         eps = [R(e) for e in eps]
         Q = joint_projector(n, eps, Id)
-        g = sum(gammas[mu] * (eps[mu] - R(1) / 2) for mu in range(M))
+        g = sum(gammas[mu] * (R(1) / 2 if eps[mu] == 1 else -(R(1) / 2)) for mu in range(M))   # ǧ(ε) = Σ γ_μ h(ε(μ))
         for k in range(6):   # 鎖の仮定（Step 2 と Step 3' の帰納法）が ň_μ の供給元で成り立つ
             assert X ** k * Q == g ** k * Q and Q * X ** k == g ** k * Q
         for K in range(5):

@@ -2,7 +2,7 @@
 # Σ_{ε∈{0,1}^𝓜̌} (exp ǧ(ε))_C = (Σ_{ε∈{0,1}^𝓜̌} exp ǧ(ε))_C   (real_inclusion_preserves_sum_over_binary_words, x_ε → exp(ǧ(ε)))
 # 左辺の和は def_sum_over_binary_words_of_complex_numbers、右辺の和は def_sum_over_binary_words_of_real_numbers の
 # 帰納法どおりに（最後の成分で 1 を 0 より先に）組む。ℂ は実数の対（_shared/complex_as_real_pairs.sage）。
-# exp(γ(θ~_μ)/2) を有理関数体 QQ(a_1, …, a_M) の不定元 a_μ に置き、exp(ǧ(ε)) = ∏_μ a_μ^{2ε_μ − 1} とする
+# exp(γ(θ~_μ)/2) を有理関数体 QQ(a_1, …, a_M) の不定元 a_μ に置き、exp(ǧ(ε)) = ∏_μ a_μ^{±1}（ε(μ) = 1 なら a_μ、0 なら a_μ^{-1}）とする
 # （check_step1_chain と同じ置き方。Step 1 の右辺の項はこの値の包含である）。
 # 帰属: QQ 上の有理関数体（厳密計算）。浮動小数点はない。
 load("../../_shared/complex_as_real_pairs.sage")
@@ -30,7 +30,7 @@ for M in range(1, 6):
     def exp_g(eps):
         out = K(1)
         for mu in range(M):
-            out = out * a[mu] ** (2 * eps[mu] - 1)
+            out = out * (a[mu] if eps[mu] == 1 else a[mu] ** (-1))
         return out
 
     lhs = complex_sum(M, lambda eps: iota(exp_g(eps), K))

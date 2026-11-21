@@ -1,7 +1,7 @@
 # 対象ラベル: eigenvalues_of_check_Vprime
 # eigenvalues_of_check_Vprime の Step 3（V̌'Q̌_ε）と Step 3'（Q̌_εV̌'）の極限の鎖の行を確かめる。
 # 模型の分岐（既定）は check_step3_partial_sum_chains.sage と同じ ň_μ・γ_μ（_vprime_settings.sage の chain_settings。
-# Jordan–Wigner の n_μ := c_μ^T c_μ、Q̌_ε := Π_μ R_μ^{(ε_μ)}、X̌ := Σ_μ γ_μ(n_μ − ½I)、有理数 γ_μ、M = 2, 3、ε を全列挙）で、
+# Jordan–Wigner の n_μ := c_μ^T c_μ、Q̌_ε := Π_μ R_μ^{(ε(μ))}、X̌ := Σ_μ γ_μ(n_μ − ½I)、有理数 γ_μ、M = 2, 3、ε を全列挙）で、
 # 以下の (0)〜(e) を RealField(256) で確かめる。
 # (0) 1 行目 E_K → V̌': ‖E_K − V̌'‖ が K ≥ 5 で狭義に減り、K = 20 で 10^{-8} を下回る（RealField(256)）。
 # (a) 「(1/k!)z = z/k! を各項へ」の行: 部分和 Σ_{k≤K}(1/k!)ǧ^k と Σ_{k≤K}ǧ^k/k! が QQ で等しい（厳密、K = 0..20）。
@@ -42,7 +42,7 @@ if not USE_CHECK_PSI:
         for eps in cartesian_product([[0, 1]] * M):
             eps = [QQ(e) for e in eps]
             Q = joint_projector(n, eps, Id)
-            g = sum(gammas[mu] * (eps[mu] - QQ(1) / 2) for mu in range(M))
+            g = sum(gammas[mu] * (QQ(1) / 2 if eps[mu] == 1 else -(QQ(1) / 2)) for mu in range(M))   # ǧ(ε) = Σ γ_μ h(ε(μ))
             neg_seen = neg_seen or g < 0
             eg = exp(RF(g))
             QR = Q.change_ring(RF)

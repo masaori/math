@@ -1,11 +1,11 @@
 # 対象ラベル: max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus（証明の (2) の鎖を一行ずつ、厳密に）
-# 結合定数 K_1 := 2 log y、K_2 := log x（(x, y) ∈ COUPLINGS）、M_col = 2, 3 で、本文の ψ̌ の ε・Q̌_ϵ・η_ϵ（数体 E_1）と
+# 結合定数 K_1 := 2 log y、K_2 := log x（(x, y) ∈ COUPLINGS）、M_col = 2, 3 で、本文の ψ̌ の ε・Q̌_ε・η_ε（数体 E_1）と
 # 実際の V^(+)（def_V_plus。QQ の行列を E_1 へ移したもの）を ../max_eigenvector_in_even_sector/_prelude.sage から取る。
 #   含意の鎖: 1 行目 tr(εV^(+)) = r_ℂ かつ r ∈ ℝ_{>0}（r は QQ）、2 行目 tr(εV^(+)) > 0（z > 0 の定め方の証人 r）、3 行目 η_(1,…,1) = +1。
 #   εQ̌_(1,…,1) = η_(1,…,1)Q̌ = 1_ℂQ̌ = Q̌ の 3 行。
 #   y := Q̌_(1,…,1)x を、x を I の全ての列 e_k と有理数の列 z に取って、Q̌y = Q̌(Q̌x) = (Q̌Q̌)x = Q̌x = y の 4 行と
 #   εy = ε(Q̌y) = (εQ̌)y = Q̌y = y の 4 行（列は 2^M 行 1 列の行列、積は括弧どおり）。y ∈ F^(+)（εy = y）。
-# 否定コントロール: r の和を差にしたものは tr(εV^(+)) に一致しない。η_ϵ = −1 となる ϵ の Q̌_ϵ では εQ̌_ϵ ≠ Q̌_ϵ。
+# 否定コントロール: r の和を差にしたものは tr(εV^(+)) に一致しない。η_ε = −1 となる ε の Q̌_ε では εQ̌_ε ≠ Q̌_ε。
 #                   im に入らない有理数の列 z では Q̌z ≠ z。
 load("../max_eigenvector_in_even_sector/_prelude.sage")
 
@@ -30,7 +30,7 @@ for s in max_settings(Ms):
     rep.chain([("εQ̌", P_(E, Q1)), ("η_1Q̌", S_(e1, Q1)), ("1_ℂQ̌", S_(F(1), Q1)), ("Q̌", Q1)], f"{tag} εQ̌_(1,…,1) = Q̌_(1,…,1)")
     for w in s.words:
         if s.eta[w] == F(-1):
-            rep.negative(P_(E, s.Q[w]) != s.Q[w], f"{tag} ϵ={w}: η_ϵ = −1 の Q̌_ϵ では εQ̌_ϵ ≠ Q̌_ϵ")
+            rep.negative(P_(E, s.Q[w]) != s.Q[w], f"{tag} ε={w}: η_ε = −1 の Q̌_ε では εQ̌_ε ≠ Q̌_ε")
             break
     # y の鎖
     xs = [s.basis(k) for k in range(N)] + [matrix(F, N, 1, [QQ(k + 1) / (k + 3) for k in range(N)])]

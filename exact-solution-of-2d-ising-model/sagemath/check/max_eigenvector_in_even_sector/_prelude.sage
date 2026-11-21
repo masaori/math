@@ -1,6 +1,6 @@
 # 対象ラベル: max_eigenvector_in_even_sector の検算の共通の準備。
-# 本文の ψ̌ から作った ε・ň_μ・Q̌_ϵ・η_ϵ は ../epsilon_eigenvalue_on_check_Q/_prelude.sage の EpsilonSetting から取る
-#（結合定数 K_1 := 2 log y、K_2 := log x、(x, y) ∈ COUPLINGS、M_col = 2, 3。成分は数体 E_1 の元で厳密。η_ϵ は epsilon_eigenvalue_on_check_Q の (1) の作り方）。
+# 本文の ψ̌ から作った ε・ň_μ・Q̌_ε・η_ε は ../epsilon_eigenvalue_on_check_Q/_prelude.sage の EpsilonSetting から取る
+#（結合定数 K_1 := 2 log y、K_2 := log x、(x, y) ∈ COUPLINGS、M_col = 2, 3。成分は数体 E_1 の元で厳密。η_ε は epsilon_eigenvalue_on_check_Q の (1) の作り方）。
 # 実際の V^(+)（def_V_plus の ((V_1^(+))^{1/2}V_2)(V_1^(+))^{1/2}）は ../../_shared/transfer_matrix_factor_inverses.sage の
 # exp_V1_half_exact（整数固有値の iH_1^(+) のスペクトル射影で y^λ）と V2_components_exact（成分 x^n）から QQ の行列として組み、E_1 へ移す
 #（max_eigenvalue_of_V_plus_simple の検算と同じ作り方）。
@@ -26,7 +26,7 @@ def r_of(M, x, y):
 
 
 class MaxSetting(EpsilonSetting):
-    """EpsilonSetting と同じ ε・ň_μ・Q̌_ϵ（数体 E_1）に、実際の V^(+)（E_1 へ移したもの）・η_ϵ・Λ̌_ϵ・E_1 → QQbar の埋め込みを足す。
+    """EpsilonSetting と同じ ε・ň_μ・Q̌_ε（数体 E_1）に、実際の V^(+)（E_1 へ移したもの）・η_ε・Λ̌_ε・E_1 → QQbar の埋め込みを足す。
     E_1 の作り方は EpsilonSetting と同じ（ψ̌_μ の数体 E_μ を transport で E_1 へ移す）。"""
 
     def __init__(self, x, y, M):
@@ -42,14 +42,14 @@ class MaxSetting(EpsilonSetting):
         self.V = self.VQ.change_ring(self.F)
         self.eta = {w: eta_of(self, w) for w in self.words}
         self.ones = tuple([1] * M)
-        # V^(+)Q̌_ϵ = Λ̌_ϵQ̌_ϵ（eigenvalues_of_V_plus (1)）の Λ̌_ϵ を Q̌_ϵ の 0 でない成分の比として E_1 の元で持つ
+        # V^(+)Q̌_ε = Λ̌_εQ̌_ε（eigenvalues_of_V_plus (1)）の Λ̌_ε を Q̌_ε の 0 でない成分の比として E_1 の元で持つ
         self.lam = {}
         for w in self.words:
             Q = self.Q[w]
             VQw = body_product(self.V, Q)
             k0, l0 = next((k, l) for k in range(self.N) for l in range(self.N) if Q[k, l] != 0)
             lw = VQw[k0, l0] / Q[k0, l0]
-            assert VQw == lw * Q, "V^(+)Q̌_ϵ が Q̌_ϵ のスカラー倍でない"
+            assert VQw == lw * Q, "V^(+)Q̌_ε が Q̌_ε のスカラー倍でない"
             self.lam[w] = lw
 
     def to_qqbar(self, e):

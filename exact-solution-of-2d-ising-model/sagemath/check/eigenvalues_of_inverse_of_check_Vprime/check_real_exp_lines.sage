@@ -1,6 +1,6 @@
 # 対象ラベル: eigenvalues_of_inverse_of_check_Vprime（証明の鎖の 2〜4 行目の係数の値）
 #   1_C = (exp 0)_C = (exp(−ǧ(ε) + ǧ(ε)))_C = (exp(−ǧ(ε)) exp(ǧ(ε)))_C
-# の実数の値を、ǧ(ε) := Σ_μ γ(θ̃_μ)(ε_μ − 1/2) を def_gamma_theta の値で RealBallField(200) の球に置いて確かめる
+# の実数の値を、ǧ(ε) := Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ))（h(1) := ½、h(0) := −(½)）を def_gamma_theta の値で RealBallField(200) の球に置いて確かめる
 # （行列の行は check_chain.sage が確かめる。そこでは exp が不定元の冪に置かれていて、この 3 行は値として試されない）。
 # γ(θ̃_μ) := arccosh(γ_1(θ̃_μ))、γ_1(θ̃_μ) := cosh(2K_1)cosh(2K_2^*) − sinh(2K_1)sinh(2K_2^*)cos θ̃_μ、K_2^* := −(1/2)log tanh K_2、
 # θ̃_μ := 2π(μ − 1/2)/M_col。
@@ -38,7 +38,7 @@ for M in range(2, 7):
     for (K1, K2) in PARAMS:
         gam = [gamma_tilde_b(M, mu, K1, K2) for mu in range(1, M + 1)]
         for eps in cartesian_product([[0, 1]] * M):
-            gv = sum((gam[mu] * (RB(eps[mu]) - RB(1) / 2) for mu in range(M)), RB(0))
+            gv = sum((gam[mu] * (RB(1) / 2 if eps[mu] == 1 else -(RB(1) / 2)) for mu in range(M)), RB(0))   # Σ γ h(ε(μ))
             vals = [RB(1), RB(0).exp(), (-gv + gv).exp(), (-gv).exp() * gv.exp()]
             for x, y in zip(vals, vals[1:]):
                 assert same(x, y), (M, K1, K2, eps)

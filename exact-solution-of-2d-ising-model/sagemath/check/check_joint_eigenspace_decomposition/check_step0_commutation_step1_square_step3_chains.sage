@@ -4,9 +4,9 @@
 #           commuting_with_difference の行と check_number_operators_commute (2) の行）
 #   Step 1: Q̌^2 = Q̌^1Q̌ = (Q̌^0Q̌)Q̌ = (IQ̌)Q̌ = Q̌Q̌ = (∏R)(∏R) = ∏(RR) = ∏R = Q̌
 #           （冪は def_exp (1) の A^0 := I、A^{m+1} := A^mA どおりに組む。product_of_two_finite_products_of_matrices の前提
-#            R_i^{(ε_i)}R_j^{(ε_j)} = R_j^{(ε_j)}R_i^{(ε_i)}（j < i）も確かめる）
-#   Step 3: ň_νR_μ^{(ε_μ)} = R_μ^{(ε_μ)}ň_ν（μ ≠ ν の 3 行、μ = ν の ε_ν = 1 の 2 行と ε_ν = 0 の 4 行）、
-#           Q̌ň_ν = (∏R)ň_ν = ň_ν∏R = ň_νQ̌ = ε_νQ̌
+#            R_i^{(ε(i))}R_j^{(ε(j))} = R_j^{(ε(j))}R_i^{(ε(i))}（j < i）も確かめる）
+#   Step 3: ň_νR_μ^{(ε(μ))} = R_μ^{(ε(μ))}ň_ν（μ ≠ ν の 3 行、μ = ν の ε(ν) = 1 の 2 行と ε(ν) = 0 の 4 行）、
+#           右から掛けた側 Q̌ň_ν = (∏R)ň_ν = ň_ν∏R = ň_νQ̌（3 行。ε(ν) による値 Q̌・O は check_step1_orthogonality_step3_moving_one_factor_chains）
 # 有限積は def_finite_product_of_matrices どおり μ = 1 の因子から左へ掛ける。積・差・和は本文の成分の式で組む。
 # ň_μ は _number_operators.sage の number_operator_settings() から取る（既定は Jordan–Wigner の模型 M = 2, 3, 4、check_with_check_psi.sage からは本文の ψ̌）。
 # 否定コントロール: 可換でない 2 因子の族（巡回置換の行列 J と対角行列 diag(1,2,3,4)）では (∏R)(∏R) = ∏(RR) の行が外れる。
@@ -64,7 +64,7 @@ for (tag, M, F, ns) in number_operator_settings():
     for eps in cartesian_product([[0, 1]] * M):
         eps = tuple(eps)
         R = [Rf(mu, eps[mu]) for mu in range(M)]
-        Q = finite_product(R)                                         # Q̌_ε の定義（冒頭）
+        Q = finite_product(R)                                         # Q̌_ε の定義（冒頭）: def_check_Q_epsilon・def_product_over_check_index_set
         # product_of_two_finite_products_of_matrices の前提（j < i）
         for i in range(M):
             for j in range(i):
@@ -101,7 +101,6 @@ for (tag, M, F, ns) in number_operator_settings():
                 body_product(finite_product(R), ns[nu]),
                 body_product(ns[nu], finite_product(R)),
                 body_product(ns[nu], Q),
-                body_scalar(eps[nu], Q),
             ]
             for A, B in zip(lines, lines[1:]):
                 assert A == B, ("step3", M, eps, nu)

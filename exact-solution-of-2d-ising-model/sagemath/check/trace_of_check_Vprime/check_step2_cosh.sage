@@ -1,7 +1,7 @@
 # 対象ラベル: trace_of_check_Vprime（Step 2 の展開の行に続く 6 行）
-#   Π_μ (exp(γ_μ(1 − 1/2)) + exp(γ_μ(0 − 1/2)))
-#   = Π_μ (exp(γ_μ·1/2) + exp(γ_μ(0 − 1/2)))        (real_one_minus_half_is_half)
-#   = Π_μ (exp(γ_μ·1/2) + exp(γ_μ(−1/2)))           (ℝ で 0 − a = −a、a → 1/2)
+#   Π_μ (exp(γ_μh(1)) + exp(γ_μh(0)))
+#   = Π_μ (exp(γ_μ·1/2) + exp(γ_μh(0)))             (def_half_sign_of_binary_value の h(1) := ½)
+#   = Π_μ (exp(γ_μ·1/2) + exp(γ_μ(−1/2)))           (def_half_sign_of_binary_value の h(0) := −(½))
 #   = Π_μ (exp(γ_μ·1/2) + exp(−(γ_μ·1/2)))          (real_times_negation_is_negation_of_product、x → γ_μ、t → 1/2)
 #   = Π_μ (exp(γ_μ/2) + exp(−(γ_μ/2)))              (real_times_half_is_quotient_by_two、a → γ_μ、各因子の 2 箇所)
 #   = Π_μ 2·((exp(γ_μ/2) + exp(−(γ_μ/2)))/2)        (real_twice_quotient_by_two_is_original を右辺から左辺へ)
@@ -9,13 +9,14 @@
 # γ_μ := γ(θ~_μ)。
 # 厳密な部: 書き換えの 5 行（cosh の行を除く）は因子の中の一つの計算規則なので、書き換えた部分式どうしを厳密に比べる
 #   （real_times_half_is_quotient_by_two の行は 2 箇所を別々に数えて 6 段）。cosh の行は球の部だけで確かめる。
-#   指数の引数の 4 行は γ を QQ 上の多項式環 QQ[γ] の不定元に置いて恒等式として、b = 2·(b/2) は
+#   指数の引数の 4 行は γ を QQ 上の多項式環 QQ[γ] の不定元に置いて恒等式として（h の 2 行は h(1)・h(0) を h の定義どおりの値の関数で組み、
+#   その値と書き換えた後の式を比べる）、b = 2·(b/2) は
 #   b を QQ 上の有理関数体の不定元に置いて確かめる（γ・b が ℝ の元であることは使わず、体の計算だけで閉じる）。
 # 球の部: γ(θ~_μ)・exp・cosh の値は ℝ への脱出（arccosh・exp・cos・cosh の値）なので、区間演算 RealBallField(200) の球で扱い、
 #   7 つの行の積を M_col = 2..6、K の 4 組で組んで、隣どうしの行の球が交わること（半径 1e-40 未満）を確かめる。
 #   有限積は def_finite_product_of_real_numbers どおり左から畳み込む。最後の行の cosh は Sage の cosh で計算し、
 #   def_cosh_sinh の式で組んだ前の行と独立に比べる（実質の比較はこの行）。
-# 否定コントロール: 旧い行の書き方で起こりやすい誤り（0 − 1/2 を +1/2 にする、cosh の引数を γ にする、2 を落とす）が、
+# 否定コントロール: 起こりやすい誤り（h(0) を +1/2 にする、cosh の引数を γ にする、2 を落とす）が、
 #   厳密な部では恒等式でなく、球の部では 2 行目の積と交わらないことを確かめる（2 行目から最後の行までは互いに等しい）。
 
 RB = RealBallField(200)
@@ -56,9 +57,10 @@ PARAMS = [(QQ(2) / 5, QQ(4) / 5), (QQ(6) / 5, QQ(3) / 10), (QQ(11) / 25, QQ(11) 
 P = PolynomialRing(QQ, 'gam')
 gam = P.gen()
 h = QQ(1) / 2
+hq = lambda e: QQ(1) / 2 if e == 1 else -(QQ(1) / 2)   # def_half_sign_of_binary_value
 exact_steps = [
-    (gam * (1 - h), gam * h),          # real_one_minus_half_is_half
-    (gam * (0 - h), gam * (-h)),       # 0 − a = −a
+    (gam * hq(1), gam * h),            # h(1) := ½
+    (gam * hq(0), gam * (-h)),         # h(0) := −(½)
     (gam * (-h), -(gam * h)),          # real_times_negation_is_negation_of_product
     (gam * h, gam / 2),                # real_times_half_is_quotient_by_two（1 つ目の箇所）
     (-(gam * h), -(gam / 2)),          # real_times_half_is_quotient_by_two（2 つ目の箇所）
@@ -70,7 +72,7 @@ bb = Fb.gen()
 assert bb == 2 * (bb / 2)              # b = 2·(b/2)（real_twice_quotient_by_two_is_original を右辺から左辺へ）
 exact = len(exact_steps) + 1
 exact_broken = 0
-for a, b in [(gam * (0 - h), gam * h), (gam * h, gam), (bb, bb / 2)]:
+for a, b in [(gam * hq(0), gam * h), (gam * h, gam), (bb, bb / 2)]:
     if a != b:
         exact_broken += 1
 assert exact_broken == 3
@@ -79,12 +81,13 @@ assert exact_broken == 3
 count = 0
 broken = 0
 half = RB(1) / 2
+hb = lambda e: half if e == 1 else -half                 # def_half_sign_of_binary_value
 for M in range(2, 7):
     for (K1, K2) in PARAMS:
         g = [gamma_tilde_b(M, mu, K1, K2) for mu in range(1, M + 1)]
         lines = [
-            finite_prod([(g[m] * (RB(1) - half)).exp() + (g[m] * (RB(0) - half)).exp() for m in range(M)]),
-            finite_prod([(g[m] * half).exp() + (g[m] * (RB(0) - half)).exp() for m in range(M)]),
+            finite_prod([(g[m] * hb(1)).exp() + (g[m] * hb(0)).exp() for m in range(M)]),
+            finite_prod([(g[m] * half).exp() + (g[m] * hb(0)).exp() for m in range(M)]),
             finite_prod([(g[m] * half).exp() + (g[m] * (-half)).exp() for m in range(M)]),
             finite_prod([(g[m] * half).exp() + (-(g[m] * half)).exp() for m in range(M)]),
             finite_prod([(g[m] / 2).exp() + (-(g[m] / 2)).exp() for m in range(M)]),

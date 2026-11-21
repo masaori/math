@@ -1,10 +1,14 @@
 # 対象ラベル: max_eigenvalue_of_V_plus_simple
-# max_eigenvalue_of_V_plus_simple (2) の二つの鎖を一行ずつ確かめる。
-#  (A) ǧ(1,…,1) − ǧ(ε) = Σγ(1−½) − Σγ(ε−½) = Σ(γ(1−½) − γ(ε−½)) = Σγ((1−½)−(ε−½)) = Σγ(1−ε) = Σa ≥ a_{μ0}
-#      = γ_{μ0}(1−ε_{μ0}) = γ_{μ0}·1 = γ_{μ0} > 0
-#  (B) Λ̌_ε = (2 sinh 2K_2)^{M/2}exp(Σγ(ε−½)) = (2s_2)^{M/2}exp(Σγ(ε−½)) = (2s_2)^{M/2}exp(ǧ(ε))
-#      < (2s_2)^{M/2}exp(ǧ(1,…,1)) = (2s_2)^{M/2}exp(Σγ(1−½)) = (2 sinh 2K_2)^{M/2}exp(Σγ(1−½)) = Λ̌_{(1,…,1)} = Λ̌_max
-# (A) の等号の行は γ_μ を不定元に置いた QQ 上の多項式環で、ε を全列挙して恒等式として確かめる。
+# max_eigenvalue_of_V_plus_simple (2) の鎖を一行ずつ確かめる。h は def_half_sign_of_binary_value の h(1) := ½・h(0) := −(½)、
+# ε は写像 ε: M̌ → {0,1}（値 ε(μ) は算術に使わない）、(1,…,1) は定数写像。
+#  (前置き) ε(μ) = 1 なら h(1) − h(ε(μ)) = h(1) − h(1) = 0、ε(μ) = 0 なら h(1) − h(ε(μ)) = h(1) − h(0) = ½ − h(0) = ½ − (−(½)) = 1
+#  (A) ǧ(1,…,1) − ǧ(ε) = Σ_{M̌}γh((1,…,1)(μ)) − Σ_{M̌}γh(ε(μ)) = Σ_{M̌}γh(1) − Σ_{M̌}γh(ε(μ)) = Σ_{μ=1}^{M}γh(1) − Σ_{μ=1}^{M}γh(ε(μ))
+#      = Σ(γh(1) − γh(ε(μ))) = Σγ(h(1) − h(ε(μ))) = Σa ≥ a_{μ0} = γ_{μ0}(h(1) − h(ε(μ0))) = γ_{μ0}·1 = γ_{μ0} > 0
+#  (B) Λ̌_ε = (2 sinh 2K_2)^{M/2}exp(Σ_{M̌}γh(ε(μ))) = (2s_2)^{M/2}exp(Σ_{M̌}γh(ε(μ))) = (2s_2)^{M/2}exp(ǧ(ε))
+#      < (2s_2)^{M/2}exp(ǧ(1,…,1)) = (2s_2)^{M/2}exp(Σ_{M̌}γh((1,…,1)(μ))) = (2 sinh 2K_2)^{M/2}exp(Σ_{M̌}γh((1,…,1)(μ)))
+#      = Λ̌_{(1,…,1)} = Λ̌_max
+# (A) の等号の行は γ_μ を不定元に置いた QQ 上の多項式環で、ε を全列挙して恒等式として確かめる
+#     （定数写像の値と def_sum_over_check_index_set の行は、同じ値の関数と同じ左からの和で組むので作り方で自明）。
 #     不等号の行は γ_μ を正の有理数の組に置いて厳密に確かめる（鎖が使う γ の性質は γ_μ > 0 だけ）。
 #     有限和は def_finite_sum_of_real_numbers のとおり左から足す。
 # (B) と、物理の γ(θ̃_μ) = arccosh(γ_1(θ̃_μ)) での (A) は、exp・arccosh・実数冪を含むので RealField(200) で確かめる
@@ -12,9 +16,16 @@
 #     (B) の定義の行（Λ̌_ε・s_2・ǧ の定義の展開）は、同じ定義から組むので構成上一致する。実質の比較は、
 #     狭義不等号の行と、最後の行の Λ̌_max = (2 sinh 2K_2)^{M/2}exp(½Σγ)（eigenvalues_of_V_plus (2) の表式）との一致である。
 # (A) の不等号の行は、差が仮定で 0 以上とされる量（a_μ (μ ≠ μ0) の和、γ_{μ0}）に恒等的に一致することも多項式環で確かめる。
-# 否定コントロール: γ のどれかが 0 なら (A) の最後の狭義不等号が外れる ε がある。
+# 否定コントロール: γ のどれかが 0 なら (A) の最後の狭義不等号が外れる ε がある。h(0) を +½ にすると h(1) − h(0) = 1 が外れる。
 
 set_random_seed(20261104)   # 試す正の有理数の組を実行ごとに同じにする（ログの再現のため）
+
+half = QQ(1) / 2
+
+
+def h(e):
+    return half if e == 1 else -half                                 # def_half_sign_of_binary_value
+
 
 def fsum(rs):
     s = rs[0]
@@ -23,27 +34,41 @@ def fsum(rs):
     return s
 
 
+def h_difference_chains():
+    chains = [
+        [h(1) - h(1), QQ(0)],                                        # ε(μ) = 1
+        [h(1) - h(0), half - h(0), half - (-half), QQ(1)],           # ε(μ) = 0
+    ]
+    n = 0
+    for ch in chains:
+        for x, y in zip(ch, ch[1:]):
+            assert x == y
+            n += 1
+    return n
+
+
 def chain_A(gam, eps, mu0):
     M = len(gam)
-    a = [gam[m] * (1 - eps[m]) for m in range(M)]
-    half = QQ(1) / 2
-    gcheck = lambda e: fsum([gam[m] * (e[m] - half) for m in range(M)])
+    ones = [1] * M
+    a = [gam[m] * (h(1) - h(eps[m])) for m in range(M)]
+    gcheck = lambda e: fsum([gam[m] * h(e[m]) for m in range(M)])
     return [
-        ("ǧ(1)−ǧ(ε)", gcheck([1] * M) - gcheck(eps), "="),
-        ("Σγ(1−½) − Σγ(ε−½)", fsum([gam[m] * (1 - half) for m in range(M)]) - fsum([gam[m] * (eps[m] - half) for m in range(M)]), "="),
-        ("Σ(γ(1−½) − γ(ε−½))", fsum([gam[m] * (1 - half) - gam[m] * (eps[m] - half) for m in range(M)]), "="),
-        ("Σγ((1−½)−(ε−½))", fsum([gam[m] * ((1 - half) - (eps[m] - half)) for m in range(M)]), "="),
-        ("Σγ(1−ε)", fsum([gam[m] * (1 - eps[m]) for m in range(M)]), "="),
+        ("ǧ(1)−ǧ(ε)", gcheck(ones) - gcheck(eps), "="),
+        ("Σγh((1,…,1)(μ)) − Σγh(ε)", fsum([gam[m] * h(ones[m]) for m in range(M)]) - fsum([gam[m] * h(eps[m]) for m in range(M)]), "="),
+        ("Σ_{M̌}γh(1) − Σ_{M̌}γh(ε)", fsum([gam[m] * h(1) for m in range(M)]) - fsum([gam[m] * h(eps[m]) for m in range(M)]), "="),
+        ("Σ_{1..M}γh(1) − Σ_{1..M}γh(ε)", fsum([gam[m] * h(1) for m in range(M)]) - fsum([gam[m] * h(eps[m]) for m in range(M)]), "="),
+        ("Σ(γh(1) − γh(ε))", fsum([gam[m] * h(1) - gam[m] * h(eps[m]) for m in range(M)]), "="),
+        ("Σγ(h(1) − h(ε))", fsum([gam[m] * (h(1) - h(eps[m])) for m in range(M)]), "="),
         ("Σa", fsum(a), ">="),
         ("a_{μ0}", a[mu0], "="),
-        ("γ_{μ0}(1−ε_{μ0})", gam[mu0] * (1 - eps[mu0]), "="),
+        ("γ_{μ0}(h(1) − h(ε(μ0)))", gam[mu0] * (h(1) - h(eps[mu0])), "="),
         ("γ_{μ0}·1", gam[mu0] * 1, "="),
         ("γ_{μ0}", gam[mu0], ">"),
         ("0", 0, None),
     ]
 
 
-eq_count = 0
+eq_count = h_difference_chains()
 ineq_count = 0
 for M in range(2, 7):
     R = PolynomialRing(QQ, [f"g{m}" for m in range(M)])
@@ -58,8 +83,8 @@ for M in range(2, 7):
                     assert v1 == v2, (M, eps, mu0, n1, n2)
                     eq_count += 1
             g = list(R.gens())
-            assert lines[5][1] - lines[6][1] == sum(g[m] * (1 - eps[m]) for m in range(M) if m != mu0)   # Σa − a_{μ0}
-            assert lines[9][1] - 0 == g[mu0]                                                          # γ_{μ0} − 0
+            assert lines[6][1] - lines[7][1] == sum(g[m] * (h(1) - h(eps[m])) for m in range(M) if m != mu0)   # Σa − a_{μ0}
+            assert lines[10][1] - 0 == g[mu0]                                                                   # γ_{μ0} − 0
             eq_count += 2
             for trial in range(3):
                 gam = [QQ(randint(1, 40)) / randint(1, 9) for _ in range(M)]
@@ -71,11 +96,12 @@ for M in range(2, 7):
                         assert v1 >= v2, (n1, n2); ineq_count += 1
                     elif rel == ">":
                         assert v1 > v2, (n1, n2); ineq_count += 1
-                assert all(gam[m] * (1 - eps[m]) >= 0 for m in range(M))   # a_μ ≥ 0（鎖の前置き）
+                assert all(gam[m] * (h(1) - h(eps[m])) >= 0 for m in range(M))   # a_μ ≥ 0（鎖の前置き）
 
 # 否定コントロール: γ_{μ0} = 0 だと最後の狭義不等号が外れる
 lines = chain_A([QQ(0), QQ(1)], [0, 1], 0)
 assert not (lines[-2][1] > 0)
+assert (half - half) != 1                                            # h(0) を +½ にすると h(1) − h(0) = 1 が外れる
 
 # 物理の γ(θ̃_μ) で (A) の端と (B) を RealField(200) で
 RF = RealField(200)
@@ -90,7 +116,8 @@ for (K1, K2) in [(RF(k1), RF(k2)) for (k1, k2) in couplings] + [(Kc, Kc)]:
         th = [2 * RF(pi) * (mu - RF(1) / 2) / M for mu in range(1, M + 1)]
         gam = [arccosh(cosh(2 * K1) * cosh(2 * K2s) - sinh(2 * K1) * sinh(2 * K2s) * cos(t)) for t in th]
         assert min(gam) > RF(10) ** (-50)
-        gch = lambda e: sum(gam[m] * (e[m] - RF(1) / 2) for m in range(M))
+        hR = lambda e: RF(1) / 2 if e == 1 else -(RF(1) / 2)         # def_half_sign_of_binary_value
+        gch = lambda e: sum(gam[m] * hR(e[m]) for m in range(M))
         Lam = lambda e: (2 * s2) ** (RF(M) / 2) * exp(gch(e))
         top = [1] * M
         for eps in cartesian_product([[0, 1]] * M):
@@ -99,17 +126,16 @@ for (K1, K2) in [(RF(k1), RF(k2)) for (k1, k2) in couplings] + [(Kc, Kc)]:
                 continue
             mu0 = eps.index(0)
             diff = gch(top) - gch(eps)
-            assert abs(diff - sum(gam[m] * (1 - eps[m]) for m in range(M))) < RF(10) ** (-50)
+            assert abs(diff - sum(gam[m] * (hR(1) - hR(eps[m])) for m in range(M))) < RF(10) ** (-50)
             assert diff >= gam[mu0] - RF(10) ** (-50) and gam[mu0] > 0
             assert exp(gch(eps)) < exp(gch(top))                                  # real_exp_strictly_increasing
-            half = RF(1) / 2
             linesB = [
-                (2 * sinh(2 * K2)) ** (RF(M) / 2) * exp(sum(gam[m] * (eps[m] - half) for m in range(M))),   # Λ̌_ε の定義
-                (2 * s2) ** (RF(M) / 2) * exp(sum(gam[m] * (eps[m] - half) for m in range(M))),            # s_2 = sinh 2K_2
+                (2 * sinh(2 * K2)) ** (RF(M) / 2) * exp(sum(gam[m] * hR(eps[m]) for m in range(M))),       # Λ̌_ε の定義
+                (2 * s2) ** (RF(M) / 2) * exp(sum(gam[m] * hR(eps[m]) for m in range(M))),                # s_2 = sinh 2K_2
                 (2 * s2) ** (RF(M) / 2) * exp(gch(eps)),                                                  # ǧ の定義
                 (2 * s2) ** (RF(M) / 2) * exp(gch(top)),                                                  # < 正の実数を掛ける
-                (2 * s2) ** (RF(M) / 2) * exp(sum(gam[m] * (1 - half) for m in range(M))),                # ǧ の定義（ε → (1,…,1)）
-                (2 * sinh(2 * K2)) ** (RF(M) / 2) * exp(sum(gam[m] * (1 - half) for m in range(M))),       # s_2 = sinh 2K_2
+                (2 * s2) ** (RF(M) / 2) * exp(sum(gam[m] * hR(top[m]) for m in range(M))),               # ǧ の定義（ε → (1,…,1)）
+                (2 * sinh(2 * K2)) ** (RF(M) / 2) * exp(sum(gam[m] * hR(top[m]) for m in range(M))),      # s_2 = sinh 2K_2
                 Lam(top),                                                                                 # Λ̌_{(1,…,1)}
                 (2 * sinh(2 * K2)) ** (RF(M) / 2) * exp(sum(gam) / 2),                                    # Λ̌_max（(2) の表式）
             ]

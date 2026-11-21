@@ -6,13 +6,13 @@
 
 - `epsilon_anticommutes_with_check_Z_Y` (2) → `Ising2D.NecSuf.anticomm_sum_smul`、(3) → `NecSuf.anticomm_add_smul`
 - `epsilon_anticommutes_with_check_Z_Y` (4) → `Ising2D.NecSuf.commute_parity_num`（`ň_μ` の 3 行）/
-  `NecSuf.commute_sub_of_commute'`・`NecSuf.commute_defFactor_of_commute'`（`A_ν` の鎖）/
-  `NecSuf.commute_parity_finProdLeft_defFactor`（`Q̌_ε` の 3 行）。添字を `Finset` で取る `Q_ε` の形は `NecSuf.commute_parity_projOn`
+  `NecSuf.commute_sub_of_commute'`・`NecSuf.commute_defFactor_of_commute'`（`R_ν^{(ε(ν))}` の場合分けの鎖）/
+  `NecSuf.commute_parity_finProdLeft_defFactor`（`Q̌_ε` の鎖）。添字を `Finset` で取る `Q_ε` の形は `NecSuf.commute_parity_projOn`
 - `epsilon_eigenvalue_on_check_Q` (2) の冒頭・Step 1・Step 2 の後半・Step 3 の数ベクトルの鎖 → `NecSuf/SignReversalOnGeneratorVector.lean`。
   (2) Step 2 冒頭の `ň_μψ̌_μ^† = ψ̌_μ^†` の 13 行 → `NecSuf.num_mul_cre'`。本ファイルの `NecSuf.projOn_insert_mul_cre` /
   `NecSuf.cre_mul_projOn_ne_zero` は (2) と同じ結論を行列 `c_μQ_T` の上の別の手順で出すもので、人手との対応には数えない
   （1 次元性が要らないことの別証として残す）
-- `epsilon_eigenvalue_on_check_Q` (4) の前半（`(I − 2ň_μ)Q̌_ε = (1 − 2ε_μ)Q̌_ε` の 10 行と `P_k` の帰納法）→
+- `epsilon_eigenvalue_on_check_Q` (4) の前半（`(I − 2ň_μ)Q̌_ε` の共通の 6 行と `ε(μ)` の値の場合分け、`P_k` の帰納法）→
   `NecSuf/FactorsActingAsScalarsOnProjection.lean`
 - `trace_of_epsilon_V_plus_via_check_eigenvalues` の旧い Step 2 →
   `Ising2D.NecSuf.sum_powerset_signed_exp`（冪集合の上の和を一度に積へ変える別証として残す。人手の Step 2〜5 と
@@ -26,8 +26,9 @@
    `ε = σ^x_1⋯σ^x_M` であることも、`ψ̌` が `Ž, Y̌` の 1 次結合であることも、
    行列であることも、複素数であることも、テンソル冪であることも効いていない。
    **`ε` が `Q̌_ε` と可換であること**（同 (4) 後半）には、これに加えて、`1` が積の単位元であること、
-   分配律、差が和と符号反転で書けること（`x − y = x + (−y)`）、積が各因子について `𝕜` 倍と交換することが効く。
-   加法の零・結合律・可換性・逆元則、`Q̌_ε` の因子の係数 `ε_ν`・`1 − ε_ν` の関係、`n_μ` の冪等性は効かない。
+   分配律、差が和と符号反転で書けることが効く（`x − y = x + (−y)`）。
+   加法の零・結合律・可換性・逆元則、`Q̌_ε` の因子を `n_ν` と `1 − n_ν` のどちらにするかの選び方、`n_μ` の冪等性は効かない。
+   スカラー倍は効かない（因子 `R_ν^{(ε(ν))}` は `ε(ν)` で場合を分けて `n_ν` か `1 − n_ν` を取るだけで、係数を掛けない）。
 
 2. **符号の反転則**（人手証明 (2)）に効いているのは、次の 3 つだけである。
    - `Q_{T∪{μ}} (c_μ Q_T) = c_μ Q_T`（人手証明 Step 2）— これは
@@ -173,7 +174,7 @@ theorem commute_parity_projOn (c a : ι → A) {e : A}
 
 end Parity
 
-/-! ## 1'. `ε` は `Q̌_ε` の因子 `A_ν` と有限積 `Q̌_ε` とも可換（人手証明 `epsilon_anticommutes_with_check_Z_Y` (4) の後半の鎖） -/
+/-! ## 1'. `ε` は `Q̌_ε` の因子 `R_ν^{(ε(ν))}` と有限積 `Q̌_ε` とも可換（人手証明 `epsilon_anticommutes_with_check_Z_Y` (4) の後半の鎖） -/
 
 section CommuteSub
 
@@ -199,57 +200,57 @@ end CommuteSub
 
 section ParityFactor
 
-variable {𝕜 : Type*} {A : Type*} [MulOneClass A] [Add A] [LeftDistribClass A] [RightDistribClass A]
-  [HasDistribNeg A] [Sub A] [SMul 𝕜 A] [SMulCommClass 𝕜 A A] [IsScalarTower 𝕜 A A]
+variable {A : Type*} [MulOneClass A] [Add A] [LeftDistribClass A] [RightDistribClass A]
+  [HasDistribNeg A] [Sub A]
 
-/-- **人手証明 (4) の `A_ν` の鎖の必要十分版**: `e n = n e` なら、`e` は `c n + d(1 − n)` と可換。
-具体版 `Ising2D.CheckFermi.commute_epsilon_defFactor` と同じ並びで、`e·1 = 1·e` の 2 行、3 式
-（`commuting_with_difference`・`commuting_with_scalar_multiple` 2 本）、`A_ν` の鎖（定義の行を除く 3 段）である。
+/-- **人手証明 (4) の `R_ν^{(ε(ν))}` の鎖の必要十分版**: `e n = n e` なら、`e` は `p` が真なら `n`、偽なら `1 − n` に
+なる元と可換。具体版 `Ising2D.CheckFermi.commute_epsilon_defFactor` と同じ並びで、`e·1 = 1·e` の 2 行、
+`e(1 − n) = (1 − n)e` の 1 式（`commuting_with_difference`）、`p` が真の場合の 5 行と偽の場合の 5 行である。
 
-人手の係数 `ε_ν`・`1 − ε_ν` を、ここでは無関係な二つのスカラー `c`・`d ∈ 𝕜` に置く。**`d = 1 − c` であることも、
-`c ∈ {0, 1}` であることも効いていない**（`𝕜` には構造を何も仮定しない）。効いているのは、`1` が積の単位元であること、
-差が和と符号反転で書けること、分配律、符号反転が積の因子から外へ出ること、積が各因子について `𝕜` 倍と交換することだけである。
+人手の `ε(ν) = 1` を命題 `p` に置く。**`p` が何であるかは効いていない**（真か偽かで場合を分けるだけ）。
+効いているのは、`1` が積の単位元であること、差が和と符号反転で書けること、分配律、符号反転が積の因子から外へ出ることだけである。
 `n` が個数演算子（冪等）であることは効いていない。 -/
 theorem commute_defFactor_of_commute' (hsub : ∀ x y : A, x - y = x + -y) {e n : A}
-    (hn : e * n = n * e) (c d : 𝕜) :
-    e * (c • n + d • (1 - n)) = (c • n + d • (1 - n)) * e := by
+    (hn : e * n = n * e) (p : Prop) [Decidable p] :
+    e * (if p then n else 1 - n) = (if p then n else 1 - n) * e := by
   have h1 : e * 1 = 1 * e :=
     calc e * 1 = e := mul_one e                         -- `identity_matrix_is_right_unit_of_mat_mult` にあたる
       _ = 1 * e := (one_mul e).symm                     -- `identity_matrix_is_left_unit_of_mat_mult` にあたる
   have h2 : e * (1 - n) = (1 - n) * e := commute_sub_of_commute' hsub h1 hn
-                                                        -- 3 式の 1 行目（`commuting_with_difference` にあたる）
-  have h3 : e * (c • n) = (c • n) * e := commute_smul_of_commute' c hn
-                                                        -- 3 式の 2 行目（`commuting_with_scalar_multiple` にあたる）
-  have h4 : e * (d • (1 - n)) = (d • (1 - n)) * e := commute_smul_of_commute' d h2
-                                                        -- 3 式の 3 行目（`commuting_with_scalar_multiple` にあたる）
-  calc e * (c • n + d • (1 - n))
-      = e * (c • n) + e * (d • (1 - n)) := mul_add _ _ _
-                                                        -- `mat_mult_distributes_over_sum_in_right_factor` にあたる
-    _ = (c • n) * e + (d • (1 - n)) * e := by rw [h3, h4]
-                                                        -- 3 式の 2 行目と 3 行目を 2 項へ同時適用
-    _ = (c • n + d • (1 - n)) * e := (add_mul _ _ _).symm
-                                                        -- `mat_mult_distributes_over_sum_in_left_factor` にあたる
+                                                        -- `commuting_with_difference` にあたる
+  by_cases hp : p
+  · calc e * (if p then n else 1 - n)
+        = e * n := by rw [if_pos hp]                    -- 場合の仮定と `R^{(1)} := n`
+      _ = n * e := hn                                   -- 仮定 `en = ne`
+      _ = (if p then n else 1 - n) * e := by rw [if_pos hp]
+                                                        -- `R^{(1)} := n` を右辺から左辺へと場合の仮定
+  · calc e * (if p then n else 1 - n)
+        = e * (1 - n) := by rw [if_neg hp]              -- 場合の仮定と `R^{(0)} := 1 − n`
+      _ = (1 - n) * e := h2                             -- 上の `e(1 − n) = (1 − n)e`
+      _ = (if p then n else 1 - n) * e := by rw [if_neg hp]
+                                                        -- `R^{(0)} := 1 − n` を右辺から左辺へと場合の仮定
 
 end ParityFactor
 
 section ParityFactorProduct
 
-variable {𝕜 : Type*} {A : Type*} [Monoid A] [Add A] [LeftDistribClass A] [RightDistribClass A]
-  [HasDistribNeg A] [Sub A] [SMul 𝕜 A] [SMulCommClass 𝕜 A A] [IsScalarTower 𝕜 A A]
+variable {A : Type*} [Monoid A] [Add A] [LeftDistribClass A] [RightDistribClass A]
+  [HasDistribNeg A] [Sub A]
 
 /-- **人手証明 (4) の後半の必要十分版**: `ε` が `c_ν`, `a_ν` の両方と反交換なら、`ε` は
-`Q = ∏_{ν} (c'_ν n_ν + d'_ν(1 − n_ν))`（`n_ν = c_ν a_ν`、左から掛ける積）と可換。
-具体版 `Ising2D.CheckFermi.commute_epsilon_Qproj_succ` の `Q̌_ε` の 3 行（定義の行を除く 1 段、
-`matrix_commuting_with_each_factor_commutes_with_finite_product` にあたる `NecSuf.commute_finProdLeft`）と同じ並びである。
+`Q = ∏_{ν} R_ν`（`R_ν` は `p_ν` が真なら `n_ν = c_ν a_ν`、偽なら `1 − n_ν`。左から掛ける積）と可換。
+具体版 `Ising2D.CheckFermi.commute_epsilon_Qproj_succ` の `Q̌_ε` の 5 行のうち、定義と記法の行を除く 1 段
+（`matrix_commuting_with_each_factor_commutes_with_finite_product` にあたる `NecSuf.commute_finProdLeft`）と同じ並びである。
 各因子との可換性は `commute_defFactor_of_commute'` と前半 `commute_mul_of_anticomm'` から出す。
 有限積に効くのは積の結合律だけである。加法については分配律（`LeftDistribClass`・`RightDistribClass`）しか仮定しない（零・結合律・可換性は効かない）。 -/
 theorem commute_parity_finProdLeft_defFactor (hsub : ∀ x y : A, x - y = x + -y) (r : ℕ)
     (c a : Fin (r + 1) → A) {e : A}
-    (hc : ∀ ν, e * c ν = -(c ν * e)) (ha : ∀ ν, e * a ν = -(a ν * e)) (c' d' : Fin (r + 1) → 𝕜) :
-    e * finProdLeft r (fun ν => c' ν • (c ν * a ν) + d' ν • (1 - c ν * a ν))
-      = finProdLeft r (fun ν => c' ν • (c ν * a ν) + d' ν • (1 - c ν * a ν)) * e :=
+    (hc : ∀ ν, e * c ν = -(c ν * e)) (ha : ∀ ν, e * a ν = -(a ν * e))
+    (p : Fin (r + 1) → Prop) [DecidablePred p] :
+    e * finProdLeft r (fun ν => if p ν then c ν * a ν else 1 - c ν * a ν)
+      = finProdLeft r (fun ν => if p ν then c ν * a ν else 1 - c ν * a ν) * e :=
   commute_finProdLeft r e _ fun ν =>
-    commute_defFactor_of_commute' hsub (commute_mul_of_anticomm' (hc ν) (ha ν)) (c' ν) (d' ν)
+    commute_defFactor_of_commute' hsub (commute_mul_of_anticomm' (hc ν) (ha ν)) (p ν)
 
 end ParityFactorProduct
 

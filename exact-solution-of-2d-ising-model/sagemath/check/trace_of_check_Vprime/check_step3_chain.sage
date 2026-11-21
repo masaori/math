@@ -12,7 +12,7 @@
 #   tr((V̌')^{-1}) = tr((V̌')^{-1} I) = tr((V̌')^{-1} Σ_ε Q̌_ε) = tr(Σ_ε (V̌')^{-1}Q̌_ε) = Σ_ε tr((V̌')^{-1}Q̌_ε)
 #                 = Σ_ε tr((exp(−ǧ(ε)))_C Q̌_ε) = Σ_ε (exp(−ǧ(ε)))_C tr(Q̌_ε) = Σ_ε (exp(−ǧ(ε)))_C 1_C = Σ_ε (exp(−ǧ(ε)))_C
 # 続く Step 2 の γ ↦ −γ の形（Σ_ε exp(−ǧ(ε)) = Π_μ (exp(−γ/2) + exp(γ/2))）は、a_μ := exp(γ(θ̃_μ)/2) の置き方で
-#   Σ_ε Π_μ a_μ^{−(2ε_μ−1)} = Π_μ (a_μ^{-1} + a_μ)
+#   Σ_ε Π_μ a_μ^{∓1}（ε(μ) = 1 なら a_μ^{-1}、0 なら a_μ） = Π_μ (a_μ^{-1} + a_μ)
 # になり、本文の 4 行は a の形で Π_μ (a_μ^{-1} + a_μ) = Π_μ (a_μ + a_μ^{-1}) = tr(V̌') になる（2 行目の (−a)/2 = −(a/2) は a の形では同じ元で、3 行目の cosh_is_even は
 # この形では ℂ の和の交換に縮むので、値としての 2・3 行目は check_step3_and_step4_real_lines.sage が球で確かめる）。
 # あわせて本文の −X̌ = Σ_μ (−γ_μ)(ň_μ − (1/2)I) を、X̌ := Σ_μ γ_μ(ň_μ − (1/2)I)（def_check_number_operator (2) の略記どおり）と比べる。
@@ -71,7 +71,7 @@ for (tag, M, F, ns) in number_operator_settings():
     Q = {eps: left_product([n[mu] if eps[mu] == 1 else Id - n[mu] for mu in range(M)]) for eps in itertools.product([1, 0], repeat=M)}
     V = left_product([body_sum(body_scalar(a[mu], n[mu]), body_scalar(a[mu] ** -1, Id - n[mu])) for mu in range(M)])
     Vinv = left_product([body_sum(body_scalar(a[mu] ** -1, n[mu]), body_scalar(a[mu], Id - n[mu])) for mu in range(M)])
-    expmg = lambda eps: prod(a[mu] ** (-(2 * eps[mu] - 1)) for mu in range(M))   # exp(−ǧ(ε))
+    expmg = lambda eps: prod(a[mu] ** (-1) if eps[mu] == 1 else a[mu] for mu in range(M))   # exp(−ǧ(ε))
     one = K(1)
     # 前提: (V̌')^{-1} は V̌' の逆元、(2)・(4)、eigenvalues_of_inverse_of_check_Vprime
     assert Vinv * V == Id and V * Vinv == Id, tag

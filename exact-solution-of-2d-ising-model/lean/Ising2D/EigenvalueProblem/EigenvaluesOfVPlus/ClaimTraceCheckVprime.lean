@@ -17,9 +17,10 @@
 4 行目の `trace_of_sum_over_binary_words` は、`TensorPow M` の系 `trace_binWordSum_tensorPow`（必要十分版 `NecSuf.binWordSum_map` の
 特殊化。3 行目の `mul_binWordSum_tensorPow` と同じ作り）で受ける。人手の帰納法と 1 対 1 の `calc` は添字 `Fin n` の `trace_binaryWordMatrixSum` にある。
 Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`）は `NecSuf.binWordSum` の系 `binWordSum_ofReal`、
-指数法則の 2 行と展開の 2 行は `sum_exp_gval_step2_expansion`（各項に `exp_gval_step2_product`、展開は
-`expansion_of_finite_product_of_two_term_sums_of_real`）、続く 6 行は `prod_step2_cosh`（ℝ の計算規則を 1 行に 1 つと、
-`def_cosh_sinh` の `cosh` を右辺から左辺へ）である。
+指数法則の 3 行（`ǧ` の定義・`def_sum_over_check_index_set`・`real_exp_of_finite_sum`）と展開の 2 行は `sum_exp_gval_step2_expansion`
+（各項に `exp_gval_step2_product`、展開は `expansion_of_finite_product_of_two_term_sums_of_real`）、続く 6 行は `prod_step2_cosh`
+（`def_half_sign_of_binary_value` の `h(1) := ½`・`h(0) := −(½)`（`halfSign_one`・`halfSign_zero`）と、ℝ の計算規則を 1 行に 1 つと、
+`def_cosh_sinh` の `cosh` を右辺から左辺へ）である。人手の `h(ε(μ))` は `halfSign (ε j)`（`ε j` は人手の `ε(j + 1)`）である。
 `trace_Vprime`（積の添字が `𝓜̌`）は、`M = r + 1` では Step 5 の鎖 `trace_Vprime_step5` に積の添字を `𝓜̌` へ戻す運ぶ段を足したもので、
 人手に対応する行は無い。このファイルで `trace_Vprime` を使うのは人手の範囲外の `M = 0` の枝（`trace_Vprime_inv`・`trace_Vprime_pos`）だけで、
 人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` と `sum_exp_gval` で閉じる。
@@ -29,7 +30,7 @@ Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`）は `Ne
 Step 3 のトレースの 9 行の鎖は `trace_Vprime_inv_step3` の `calc` と 1 対 1 である（5 行目だけが `eigenvalues_of_inverse_of_check_Vprime`
 （`Vprime_inv_mul_Qproj`）を引き、ほかは Step 1 の鎖と Step 2 の 1 行目と同じ根拠）。人手の `(V̌')^{-1}` は `↑(F.VprimeUnits g)⁻¹` で、
 `trace_Vprime_inv` の左辺の `F.Vprime (fun i => -(g i))` へは `VprimeUnits_inv` で付け替える。
-Step 3 の冒頭の `exp(−ǧ(ε))` の 4 行の鎖は `exp_neg_gval_step3_product` の `calc` と 1 対 1 である（ℝ の `−(ab) = (−a)b` は `real_negation_times_is_negation_of_product` を右辺から左辺へ。
+Step 3 の冒頭の `exp(−ǧ(ε))` の 5 行の鎖は `exp_neg_gval_step3_product` の `calc` と 1 対 1 である（ℝ の `−(ab) = (−a)b` は `real_negation_times_is_negation_of_product` を右辺から左辺へ。
 `finite_sum_of_negated_real_numbers` は具体版 `finite_sum_of_negated_real_numbers_succ`）。トレースの鎖の 10・11 行目は `sum_exp_neg_gval_step3_expansion`
 （Step 2 の `sum_exp_gval_step2_expansion` と同じ並び）、続く 6 行は Step 2 の `prod_step2_cosh` を `γ → −γ`（`g → fun i => -(g i)`）で使う段で、
 人手もこの 6 行を Step 2 の 6 行に `γ(θ̃_μ) → −γ(θ̃_μ)` を代入した形で書いている。その先の 5 行（ℝ の `(−a)/2 = −(a/2)`、`cosh_is_even`
@@ -158,32 +159,30 @@ theorem Vprime_inv_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) 
     _ = ((Real.exp (-(F.gval g T)) : ℝ) : ℂ) • F.Qproj T := by
         rw [identity_matrix_mul_tensorPow]              -- `identity_matrix_is_left_unit_of_mat_mult`（`A → Q̌_ε`）
 
-/-- **原文 `trace_of_check_Vprime` Step 2 の指数法則の 2 行の鎖**:
-`exp(ǧ(ε)) = exp(Σ_{μ=1}^{M_col} γ(θ̃_μ)(ε_μ − 1/2)) = Π_{μ=1}^{M_col} exp(γ(θ̃_μ)(ε_μ − 1/2))`
-（人手の `M_col` が Lean の `r + 1`、人手の `μ` が Lean の `checkIdxOfFin j`（`μ = j + 1`）、人手の `ε_μ ∈ {0,1}` を ℝ の元として使う箇所が
-Lean の `((ε j : ℕ) : ℝ)`）。 -/
+/-- **原文 `trace_of_check_Vprime` Step 2 の指数法則の 3 行の鎖**:
+`exp(ǧ(ε)) = exp(Σ_{μ∈𝓜̌} γ(θ̃_μ)h(ε(μ))) = exp(Σ_{μ=1}^{M_col} γ(θ̃_μ)h(ε(μ))) = Π_{μ=1}^{M_col} exp(γ(θ̃_μ)h(ε(μ)))`
+（人手の `M_col` が Lean の `r + 1`、人手の `μ` が Lean の `checkIdxOfFin j`（`μ = j + 1`）、人手の `ε(μ)` が Lean の語の値 `ε j`、
+`h` が `halfSign`）。3 行目（`def_sum_over_check_index_set`）は、Lean では `μ = j + 1` の全単射で和の添字を付け替える段である。 -/
 theorem exp_gval_step2_product {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ)
     (ε : Fin (r + 1) → Fin 2) :
     Real.exp (F.gval g (finsetOfBinWord ε))
-      = ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2)) := by
+      = ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * halfSign (ε j)) := by
   have hterm : ∀ j : Fin (r + 1),
-      g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2)
-        = g (checkIdxOfFin j) * ((if checkIdxOfFin j ∈ finsetOfBinWord ε then (1 : ℝ) else 0) - 1 / 2) := by
+      g (checkIdxOfFin j) * halfSign (ε j)
+        = g (checkIdxOfFin j) * halfSign (binOfMem (finsetOfBinWord ε) (checkIdxOfFin j)) := by
     intro j
-    simp only [checkIdxOfFin_mem_finsetOfBinWord]
-    generalize ε j = e
-    fin_cases e <;> simp
+    rw [binOfMem_finsetOfBinWord]
   calc Real.exp (F.gval g (finsetOfBinWord ε))
       = Real.exp (∑ i : CheckIdx (r + 1),
-          g i * ((if i ∈ finsetOfBinWord ε then (1 : ℝ) else 0) - 1 / 2)) := by
+          g i * halfSign (binOfMem (finsetOfBinWord ε) i)) := by
         rw [gval]                                       -- `eigenvalues_of_check_Vprime` の `ǧ` の定義
-    _ = Real.exp (∑ j : Fin (r + 1), g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2)) :=
+    _ = Real.exp (∑ j : Fin (r + 1), g (checkIdxOfFin j) * halfSign (ε j)) :=
         congrArg Real.exp
           (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _ hterm).symm
-                                                        -- Lean の `gval` は `𝓜̌` の上の和なので、人手の `Σ_{μ=1}^{M_col}` へ
-                                                        -- `μ = j + 1` の全単射で添字を付け替える（運ぶ段。人手の行は無い）
-    _ = ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2)) :=
-        real_exp_of_finite_sum r _                      -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → γ(θ̃_μ)(ε_μ − 1/2)`）
+                                                        -- `def_sum_over_check_index_set`（`Σ_{μ∈𝓜̌}` を `Σ_{μ=1}^{M_col}` へ。
+                                                        -- Lean は `μ = j + 1` の全単射で添字を付け替える）
+    _ = ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * halfSign (ε j)) :=
+        real_exp_of_finite_sum r _                      -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → γ(θ̃_μ)h(ε(μ))`）
 
 /-- 各因子の展開: `exp(ǧ(ε)) = ∏_μ (μ ∈ T ? e^{γ_μ/2} : e^{-γ_μ/2})`。
 `M = r + 1` の証明は、`exp_gval_step2_product` で積へ移し、積の添字を `𝓜̌` へ戻して各因子を書き換えて閉じる。`M = 0` は mathlib の `Real.exp_sum` で閉じる。
@@ -195,7 +194,9 @@ theorem exp_gval_eq_prod (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
   | 0, F, g, T =>
     rw [gval, Real.exp_sum]
     refine Finset.prod_congr rfl fun i _ => ?_
-    by_cases hT : i ∈ T <;> simp [hT] <;> ring_nf
+    by_cases hT : i ∈ T
+    · rw [binOfMem_of_mem hT, halfSign_one, if_pos hT]; ring_nf
+    · rw [binOfMem_of_not_mem hT, halfSign_zero, if_neg hT]; ring_nf
   | r + 1, F, g, T =>
     obtain ⟨ε, rfl⟩ := finsetOfBinWord_bijective.2 T
     rw [F.exp_gval_step2_product g ε]
@@ -203,61 +204,57 @@ theorem exp_gval_eq_prod (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
     intro j
     simp only [checkIdxOfFin_mem_finsetOfBinWord]
     generalize ε j = e
-    fin_cases e <;> simp <;> ring_nf
+    fin_cases e
+    · simp [halfSign_zero]; ring_nf
+    · simp [halfSign_one]; ring_nf
 
 /-- **原文 `trace_of_check_Vprime` Step 2 の展開の 2 行**:
-`Σ_ε exp(ǧ(ε)) = Σ_ε Π_μ exp(γ(θ̃_μ)(ε_μ − 1/2)) = Π_μ (exp(γ(θ̃_μ)(1 − 1/2)) + exp(γ(θ̃_μ)(0 − 1/2)))`
+`Σ_ε exp(ǧ(ε)) = Σ_ε Π_μ exp(γ(θ̃_μ)h(ε(μ))) = Π_μ (exp(γ(θ̃_μ)h(1)) + exp(γ(θ̃_μ)h(0)))`
 （人手の `M_col` が Lean の `r + 1`、人手の `μ` が Lean の `checkIdxOfFin j`、人手の和 `Σ_{ε∈{0,1}^𝓜̌}`
 （`def_sum_over_binary_words_of_real_numbers`）が `NecSuf.binWordSum r`（`trace_Vprime_step1` と同じ）、
 人手の `e ∈ {0,1}` を ℝ の元として使う箇所が Lean の `((e : ℕ) : ℝ)`）。 -/
 theorem sum_exp_gval_step2_expansion {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ) :
     NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε)))
       = ∏ j : Fin (r + 1),
-          (Real.exp (g (checkIdxOfFin j) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
-            + Real.exp (g (checkIdxOfFin j) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2))) :=
+          (Real.exp (g (checkIdxOfFin j) * halfSign 1)
+            + Real.exp (g (checkIdxOfFin j) * halfSign 0)) :=
   calc NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε)))
       = NecSuf.binWordSum r
-          (fun ε => ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2))) := by
+          (fun ε => ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * halfSign (ε j))) := by
         congr 1; funext ε; exact F.exp_gval_step2_product g ε
                                                         -- 直前の鎖（`exp_gval_step2_product`）を各項へ同時に
     _ = binaryWordRealSum r
-          (fun ε => ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2))) :=
+          (fun ε => ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * halfSign (ε j))) :=
         (binaryWordRealSum_eq_binWordSum r _).symm      -- 人手の和の Lean の二つの表し方を付け替える（運ぶ段。人手の行は無い）
     _ = ∏ j : Fin (r + 1),
-          (Real.exp (g (checkIdxOfFin j) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
-            + Real.exp (g (checkIdxOfFin j) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2))) :=
+          (Real.exp (g (checkIdxOfFin j) * halfSign 1)
+            + Real.exp (g (checkIdxOfFin j) * halfSign 0)) :=
         (expansion_of_finite_product_of_two_term_sums_of_real r
-          (fun j e => Real.exp (g (checkIdxOfFin j) * (((e : ℕ) : ℝ) - 1 / 2)))).symm
+          (fun j e => Real.exp (g (checkIdxOfFin j) * halfSign e))).symm
                                                         -- `expansion_of_finite_product_of_two_term_sums_of_real_numbers`
-                                                        -- （`r → M_col`、`j → μ`、`a_j^{(e)} → exp(γ(θ̃_μ)(e − 1/2))`）を右辺から左辺へ
+                                                        -- （`r → M_col`、`j → μ`、`a_j^{(e)} → exp(γ(θ̃_μ)h(e))`）を右辺から左辺へ
 
 /-- **原文 `trace_of_check_Vprime` Step 2 の展開の行に続く 6 行**:
-`Π_μ(exp(γ(1 − 1/2)) + exp(γ(0 − 1/2))) = Π_μ(exp(γ·1/2) + exp(γ(0 − 1/2))) = Π_μ(exp(γ·1/2) + exp(γ(−1/2)))
+`Π_μ(exp(γh(1)) + exp(γh(0))) = Π_μ(exp(γ·1/2) + exp(γh(0))) = Π_μ(exp(γ·1/2) + exp(γ(−1/2)))
 = Π_μ(exp(γ·1/2) + exp(−(γ·1/2))) = Π_μ(exp(γ/2) + exp(−(γ/2))) = Π_μ 2·((exp(γ/2) + exp(−(γ/2)))/2) = Π_μ 2cosh(γ/2)`
-（人手の `M_col` が Lean の `r + 1`、人手の `γ(θ̃_μ)` が Lean の `g (checkIdxOfFin j)`。各行は人手どおり各因子へ同時に書き換える）。
-左辺の `(((1 : Fin 2) : ℕ) : ℝ)`・`(((0 : Fin 2) : ℕ) : ℝ)` は `sum_exp_gval_step2_expansion` の右辺の `e ∈ {0,1}` を ℝ の元として
-使う書き方で、1 段目でこれを ℝ の `1`・`0` へ付け替える（運ぶ段。人手の行は無い）。 -/
+（人手の `M_col` が Lean の `r + 1`、人手の `γ(θ̃_μ)` が Lean の `g (checkIdxOfFin j)`、`h` が `halfSign`。
+各行は人手どおり各因子へ同時に書き換える。6 段は人手の 6 行と 1 対 1 である）。 -/
 theorem prod_step2_cosh {r : ℕ} (g : CheckIdx (r + 1) → ℝ) :
     ∏ j : Fin (r + 1),
-        (Real.exp (g (checkIdxOfFin j) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
-          + Real.exp (g (checkIdxOfFin j) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2)))
+        (Real.exp (g (checkIdxOfFin j) * halfSign 1)
+          + Real.exp (g (checkIdxOfFin j) * halfSign 0))
       = ∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) :=
   calc ∏ j : Fin (r + 1),
-        (Real.exp (g (checkIdxOfFin j) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
-          + Real.exp (g (checkIdxOfFin j) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2)))
+        (Real.exp (g (checkIdxOfFin j) * halfSign 1)
+          + Real.exp (g (checkIdxOfFin j) * halfSign 0))
       = ∏ j : Fin (r + 1),
-          (Real.exp (g (checkIdxOfFin j) * ((1 : ℝ) - 1 / 2))
-            + Real.exp (g (checkIdxOfFin j) * ((0 : ℝ) - 1 / 2))) := by
-        rw [Fin.val_one, Fin.val_zero, Nat.cast_one, Nat.cast_zero]
-                                                        -- `e ∈ {0,1}` を ℝ の `1`・`0` へ付け替える（運ぶ段。人手の行は無い）
-    _ = ∏ j : Fin (r + 1),
           (Real.exp (g (checkIdxOfFin j) * (1 / 2))
-            + Real.exp (g (checkIdxOfFin j) * ((0 : ℝ) - 1 / 2))) := by
-        rw [real_one_minus_half_is_half]                -- `real_one_minus_half_is_half` を各因子へ同時に
+            + Real.exp (g (checkIdxOfFin j) * halfSign 0)) := by
+        rw [halfSign_one]                               -- `def_half_sign_of_binary_value` の `h(1) := ½` を各因子へ同時に
     _ = ∏ j : Fin (r + 1),
           (Real.exp (g (checkIdxOfFin j) * (1 / 2))
             + Real.exp (g (checkIdxOfFin j) * (-(1 / 2)))) := by
-        rw [zero_sub (1 / 2 : ℝ)]                       -- ℝ で `0 − a = −a`（`a → 1/2`）を各因子へ同時に
+        rw [halfSign_zero]                              -- `def_half_sign_of_binary_value` の `h(0) := −(½)` を各因子へ同時に
     _ = ∏ j : Fin (r + 1),
           (Real.exp (g (checkIdxOfFin j) * (1 / 2))
             + Real.exp (-(g (checkIdxOfFin j) * (1 / 2)))) := by
@@ -375,9 +372,9 @@ theorem trace_Vprime (g : CheckIdx M → ℝ) :
           binWordSum_ofReal r _                         -- Step 2 の 1 行目: `real_inclusion_preserves_sum_over_binary_words`
                                                         -- （`x_ε → exp(ǧ(ε))`）
       _ = ((∏ j : Fin (r + 1),
-              (Real.exp (g (checkIdxOfFin j) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
-                + Real.exp (g (checkIdxOfFin j) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2))) : ℝ) : ℂ) := by
-          rw [sum_exp_gval_step2_expansion F g]         -- Step 2 の指数法則の 2 行と展開の 2 行
+              (Real.exp (g (checkIdxOfFin j) * halfSign 1)
+                + Real.exp (g (checkIdxOfFin j) * halfSign 0)) : ℝ) : ℂ) := by
+          rw [sum_exp_gval_step2_expansion F g]         -- Step 2 の指数法則の 3 行と展開の 2 行
       _ = ((∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) : ℝ) : ℂ) := by
           rw [prod_step2_cosh g]                        -- Step 2 の展開の行に続く 6 行
       _ = ((∏ i : CheckIdx (r + 1), (2 * Real.cosh (g i / 2)) : ℝ) : ℂ) :=
@@ -422,62 +419,60 @@ theorem trace_Vprime_inv_step3 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : Chec
     _ = ((NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
         binWordSum_ofReal r _                           -- `real_inclusion_preserves_sum_over_binary_words`（`x_ε → exp(−ǧ(ε))`）
 
-/-- **原文 `trace_of_check_Vprime` Step 3 の冒頭の 4 行の鎖**:
-`exp(−ǧ(ε)) = exp(−Σ_μ γ(θ̃_μ)(ε_μ − 1/2)) = exp(Σ_μ −(γ(θ̃_μ)(ε_μ − 1/2))) = exp(Σ_μ (−γ(θ̃_μ))(ε_μ − 1/2))
-= Π_μ exp((−γ(θ̃_μ))(ε_μ − 1/2))`（人手の `M_col`・`μ`・`ε_μ` の読み替えは `exp_gval_step2_product` と同じ）。 -/
+/-- **原文 `trace_of_check_Vprime` Step 3 の冒頭の 5 行の鎖**:
+`exp(−ǧ(ε)) = exp(−Σ_{μ∈𝓜̌} γ(θ̃_μ)h(ε(μ))) = exp(−Σ_μ γ(θ̃_μ)h(ε(μ))) = exp(Σ_μ −(γ(θ̃_μ)h(ε(μ)))) = exp(Σ_μ (−γ(θ̃_μ))h(ε(μ)))
+= Π_μ exp((−γ(θ̃_μ))h(ε(μ)))`（人手の `M_col`・`μ`・`ε(μ)` の読み替えは `exp_gval_step2_product` と同じ）。 -/
 theorem exp_neg_gval_step3_product {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ)
     (ε : Fin (r + 1) → Fin 2) :
     Real.exp (-(F.gval g (finsetOfBinWord ε)))
-      = ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * (((ε j : ℕ) : ℝ) - 1 / 2)) := by
+      = ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * halfSign (ε j)) := by
   have hterm : ∀ j : Fin (r + 1),
-      g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2)
-        = g (checkIdxOfFin j) * ((if checkIdxOfFin j ∈ finsetOfBinWord ε then (1 : ℝ) else 0) - 1 / 2) := by
+      g (checkIdxOfFin j) * halfSign (ε j)
+        = g (checkIdxOfFin j) * halfSign (binOfMem (finsetOfBinWord ε) (checkIdxOfFin j)) := by
     intro j
-    simp only [checkIdxOfFin_mem_finsetOfBinWord]
-    generalize ε j = e
-    fin_cases e <;> simp
+    rw [binOfMem_finsetOfBinWord]
   calc Real.exp (-(F.gval g (finsetOfBinWord ε)))
       = Real.exp (-(∑ i : CheckIdx (r + 1),
-          g i * ((if i ∈ finsetOfBinWord ε then (1 : ℝ) else 0) - 1 / 2))) := by
+          g i * halfSign (binOfMem (finsetOfBinWord ε) i))) := by
         rw [gval]                                       -- `eigenvalues_of_check_Vprime` の `ǧ` の定義
-    _ = Real.exp (-(∑ j : Fin (r + 1), g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2))) :=
+    _ = Real.exp (-(∑ j : Fin (r + 1), g (checkIdxOfFin j) * halfSign (ε j))) :=
         congrArg (fun s : ℝ => Real.exp (-s))
           (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _ hterm).symm
-                                                        -- Lean の `gval` は `𝓜̌` の上の和なので、人手の `Σ_{μ=1}^{M_col}` へ
-                                                        -- `μ = j + 1` の全単射で添字を付け替える（運ぶ段。人手の行は無い）
-    _ = Real.exp (∑ j : Fin (r + 1), -(g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2))) := by
+                                                        -- `def_sum_over_check_index_set`（`Σ_{μ∈𝓜̌}` を `Σ_{μ=1}^{M_col}` へ。
+                                                        -- Lean は `μ = j + 1` の全単射で添字を付け替える）
+    _ = Real.exp (∑ j : Fin (r + 1), -(g (checkIdxOfFin j) * halfSign (ε j))) := by
         rw [finite_sum_of_negated_real_numbers_succ r]  -- `finite_sum_of_negated_real_numbers`（`m → M_col`、`j → μ`、
-                                                        -- `x_j → γ(θ̃_μ)(ε_μ − 1/2)`）を右辺から左辺へ
-    _ = Real.exp (∑ j : Fin (r + 1), (-(g (checkIdxOfFin j))) * (((ε j : ℕ) : ℝ) - 1 / 2)) := by
+                                                        -- `x_j → γ(θ̃_μ)h(ε(μ))`）を右辺から左辺へ
+    _ = Real.exp (∑ j : Fin (r + 1), (-(g (checkIdxOfFin j))) * halfSign (ε j)) := by
         refine congrArg Real.exp (Finset.sum_congr rfl fun j _ => ?_)
         exact (real_negation_times_is_negation_of_product _ _).symm
-                                                        -- `real_negation_times_is_negation_of_product`（`x → γ(θ̃_μ)`、`t → ε_μ − 1/2`）を右辺から左辺へ各項へ同時に
-    _ = ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * (((ε j : ℕ) : ℝ) - 1 / 2)) :=
-        real_exp_of_finite_sum r _                      -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → (−γ(θ̃_μ))(ε_μ − 1/2)`）
+                                                        -- `real_negation_times_is_negation_of_product`（`x → γ(θ̃_μ)`、`t → h(ε(μ))`）を右辺から左辺へ各項へ同時に
+    _ = ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * halfSign (ε j)) :=
+        real_exp_of_finite_sum r _                      -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → (−γ(θ̃_μ))h(ε(μ))`）
 
 /-- **原文 `trace_of_check_Vprime` Step 3 のトレースの鎖の 10・11 行目**（`(·)_ℂ` の中身）:
-`Σ_ε exp(−ǧ(ε)) = Σ_ε Π_μ exp((−γ(θ̃_μ))(ε_μ − 1/2)) = Π_μ (exp((−γ(θ̃_μ))(1 − 1/2)) + exp((−γ(θ̃_μ))(0 − 1/2)))`
+`Σ_ε exp(−ǧ(ε)) = Σ_ε Π_μ exp((−γ(θ̃_μ))h(ε(μ))) = Π_μ (exp((−γ(θ̃_μ))h(1)) + exp((−γ(θ̃_μ))h(0)))`
 （`sum_exp_gval_step2_expansion` と同じ並び。1 行目は `exp_neg_gval_step3_product` を各項へ）。 -/
 theorem sum_exp_neg_gval_step3_expansion {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ) :
     NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε))))
       = ∏ j : Fin (r + 1),
-          (Real.exp ((-(g (checkIdxOfFin j))) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
-            + Real.exp ((-(g (checkIdxOfFin j))) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2))) :=
+          (Real.exp ((-(g (checkIdxOfFin j))) * halfSign 1)
+            + Real.exp ((-(g (checkIdxOfFin j))) * halfSign 0)) :=
   calc NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε))))
       = NecSuf.binWordSum r
-          (fun ε => ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * (((ε j : ℕ) : ℝ) - 1 / 2))) := by
+          (fun ε => ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * halfSign (ε j))) := by
         congr 1; funext ε; exact F.exp_neg_gval_step3_product g ε
                                                         -- 冒頭の `exp(−ǧ(ε))` の鎖（`exp_neg_gval_step3_product`）を各項へ同時に
     _ = binaryWordRealSum r
-          (fun ε => ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * (((ε j : ℕ) : ℝ) - 1 / 2))) :=
+          (fun ε => ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * halfSign (ε j))) :=
         (binaryWordRealSum_eq_binWordSum r _).symm      -- 人手の和の Lean の二つの表し方を付け替える（運ぶ段。人手の行は無い）
     _ = ∏ j : Fin (r + 1),
-          (Real.exp ((-(g (checkIdxOfFin j))) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
-            + Real.exp ((-(g (checkIdxOfFin j))) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2))) :=
+          (Real.exp ((-(g (checkIdxOfFin j))) * halfSign 1)
+            + Real.exp ((-(g (checkIdxOfFin j))) * halfSign 0)) :=
         (expansion_of_finite_product_of_two_term_sums_of_real r
-          (fun j e => Real.exp ((-(g (checkIdxOfFin j))) * (((e : ℕ) : ℝ) - 1 / 2)))).symm
+          (fun j e => Real.exp ((-(g (checkIdxOfFin j))) * halfSign e))).symm
                                                         -- `expansion_of_finite_product_of_two_term_sums_of_real_numbers`
-                                                        -- （`r → M_col`、`j → μ`、`a_j^{(e)} → exp((−γ(θ̃_μ))(e − 1/2))`）を右辺から左辺へ
+                                                        -- （`r → M_col`、`j → μ`、`a_j^{(e)} → exp((−γ(θ̃_μ))h(e))`）を右辺から左辺へ
 
 /-- **原文 `trace_of_check_Vprime` Step 3**: `tr((V̌')^{-1}) = tr(V̌')`。
 左辺の `F.Vprime (fun i => -(g i))` は人手の `(V̌')^{-1}` の Lean の表し方で、`VprimeUnits_inv` で `↑(F.VprimeUnits g)⁻¹` と付け替える。
@@ -499,8 +494,8 @@ theorem trace_Vprime_inv (g : CheckIdx M → ℝ) :
       _ = ((NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
           trace_Vprime_inv_step3 F g                    -- Step 3 のトレースの鎖
       _ = ((∏ j : Fin (r + 1),
-              (Real.exp ((-(g (checkIdxOfFin j))) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
-                + Real.exp ((-(g (checkIdxOfFin j))) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2))) : ℝ) : ℂ) := by
+              (Real.exp ((-(g (checkIdxOfFin j))) * halfSign 1)
+                + Real.exp ((-(g (checkIdxOfFin j))) * halfSign 0)) : ℝ) : ℂ) := by
           rw [sum_exp_neg_gval_step3_expansion F g]     -- トレースの鎖の 10・11 行目
       _ = ((∏ j : Fin (r + 1), 2 * Real.cosh ((-(g (checkIdxOfFin j))) / 2) : ℝ) : ℂ) :=
           congrArg (fun x : ℝ => (x : ℂ)) (prod_step2_cosh (fun i => -(g i)))

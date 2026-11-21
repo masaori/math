@@ -5,8 +5,8 @@
 # 鎖が使う仮定は Step 1 の X̌Q̌ = gQ̌・Q̌X̌ = gQ̌、帰納法の仮定、check_joint_eigenspace_decomposition (1) の
 # Q̌^2 = Q̌ だけである。ň_μ と γ_μ は _vprime_settings.sage の chain_settings から取る（既定は Jordan–Wigner の模型
 # n_μ := c_μ^T c_μ と有理数 γ_μ、check_with_check_psi.sage からは本文の ψ̌ の ň_μ と有理数 γ_μ）。
-# Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň、R^{(0)} := I − ň）、X̌ := Σ_μ γ_μ (ň_μ − (1/2)I)、
-# g := Σ_μ γ_μ(ε_μ − 1/2) を取る（M = 2, 3、ε を全列挙、k = 0, …, 4）。
+# Q̌_ε := Π_μ R_μ^{(ε(μ))}（R^{(1)} := ň、R^{(0)} := I − ň）、X̌ := Σ_μ γ_μ (ň_μ − (1/2)I)、
+# g := Σ_μ γ_μ h(ε(μ))（h(1) = ½、h(0) = −(½)） を取る（M = 2, 3、ε を全列挙、k = 0, …, 4）。
 # 否定コントロール: 不定元の成分の行列 X、Q と不定元 g、x では、Step 1・帰納法の仮定・冪等性を使う行だけが
 # 等号を外れ、冪の定義・結合律・単位行列・スカラー倍を引く行は等号のまま残ることを確かめる。
 # ℂ の積の交換律の行（(g g^k) Q = (g^k g) Q）は、可換な QQ と多項式環の上では構成上いつも一致するので、
@@ -110,7 +110,7 @@ for (tag, M, R, n, gammas) in chain_settings([2, 3]):
     x = vector(R, [QQ(j * j - 3 * j + 1) / (j + 2) for j in range(2 ** M)]).column()
     for eps in cartesian_product([[0, 1]] * M):
         Q = joint_projector(n, eps, Id)
-        g = sum(gammas[mu] * (eps[mu] - R(1) / 2) for mu in range(M))
+        g = sum(gammas[mu] * (R(1) / 2 if eps[mu] == 1 else -(R(1) / 2)) for mu in range(M))   # ǧ(ε) = Σ γ_μ h(ε(μ))
         assert X * Q == g * Q and Q * X == g * Q and Q * Q == Q   # 鎖の仮定（Step 1・冪等性）が ň_μ の供給元で成り立つ
         check_chain(step2_base(X, Q, g, Id), ("step2 base", tag, eps), True)
         check_chain(step3p_base(X, Q, g, Id), ("step3' base", tag, eps), True)

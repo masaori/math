@@ -37,10 +37,11 @@ def gamma_tilde_b(M, mu, K1, K2):
 
 
 def gcheck(M, eps, gam):
-    # ǧ(ε) = Σ_{μ=1}^{M} γ(θ̃_μ)(ε_μ − 1/2)。def_finite_sum_of_real_numbers どおり左から足す
-    s = gam[0] * (RB(eps[0]) - RB(1) / 2)
+    # ǧ(ε) = Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ))（= Σ_{μ=1}^{M}、def_sum_over_check_index_set）。def_finite_sum_of_real_numbers どおり左から足す
+    h = lambda e: RB(1) / 2 if e == 1 else -(RB(1) / 2)   # def_half_sign_of_binary_value
+    s = gam[0] * h(eps[0])
     for mu in range(1, M):
-        s = s + gam[mu] * (RB(eps[mu]) - RB(1) / 2)
+        s = s + gam[mu] * h(eps[mu])
     return s
 
 

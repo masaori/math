@@ -103,7 +103,9 @@ variable {F : CheckFermi M} {D : VPlusData M F} (B : EvenSectorBridge M F D)
 
 /-! ## Step 1: `c_+(M) ≤ Λ̌_max` -/
 
-/-- `x^* Q̌_ε x = ‖Q̌_ε x‖²`（人手証明 `check_number_operator_is_hermitian` (4)）。 -/
+/-- `x^* Q̌_ε x = ‖Q̌_ε x‖²`（人手証明 `check_number_operator_is_hermitian` (4)）。
+`Q̌_ε` は `def_check_Q_epsilon`。人手の `ε ∈ {0,1}^{M̌}`（写像 `ε : M̌ → {0,1}`）は、Lean では
+`T := {μ ∈ M̌ ∣ ε(μ) = 1} : Finset (Fin M)` で表す。 -/
 theorem quad_Qproj (x : Conf M → ℝ) (T : Finset (Fin M)) :
     cvec x ⬝ᵥ (F.Qproj T *ᵥ cvec x)
       = ((∑ k, Complex.normSq ((F.Qproj T *ᵥ cvec x) k) : ℝ) : ℂ) := by
@@ -118,7 +120,7 @@ theorem quad_Qproj (x : Conf M → ℝ) (T : Finset (Fin M)) :
     _ = star u ⬝ᵥ u := by rw [hstar]
     _ = _ := star_dotProduct_self u
 
-/-- `∑_ε ‖Q̌_ε x‖² = ‖x‖²`。 -/
+/-- `∑_{ε∈{0,1}^{M̌}} ‖Q̌_ε x‖² = ‖x‖²`（`ε` の上の和は `T : Finset (Fin M)` の上の和）。 -/
 theorem sum_quad_Qproj (x : Conf M → ℝ) :
     ∑ T : Finset (Fin M), (∑ k, Complex.normSq ((F.Qproj T *ᵥ cvec x) k))
       = vecNormSq x := by
@@ -134,7 +136,7 @@ theorem sum_quad_Qproj (x : Conf M → ℝ) :
       _ = ((vecNormSq x : ℝ) : ℂ) := by rw [cvec_dotProduct]; rfl
   exact_mod_cast hC
 
-/-- 人手証明 Step 1 の展開: `x^T V^{(+)} x = ∑_ε Λ̌_ε ‖Q̌_ε x‖²`。 -/
+/-- 人手証明 Step 1 の展開: `x^T V^{(+)} x = ∑_{ε∈{0,1}^{M̌}} Λ̌_ε ‖Q̌_ε x‖²`。 -/
 theorem quad_Vr_eq_sum (x : Conf M → ℝ) :
     x ⬝ᵥ B.Vr *ᵥ x
       = ∑ T : Finset (Fin M),

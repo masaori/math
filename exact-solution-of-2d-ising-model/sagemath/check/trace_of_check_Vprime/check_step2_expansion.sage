@@ -1,7 +1,8 @@
 # 対象ラベル: trace_of_check_Vprime（Step 2 の展開の行）
-#   Σ_ε exp(ǧ(ε)) = Σ_ε Π_μ exp(γ(θ~_μ)(ε_μ − 1/2))                       (直前の鎖を各項へ同時に)
-#                 = Π_μ (exp(γ(θ~_μ)(1 − 1/2)) + exp(γ(θ~_μ)(0 − 1/2)))   (expansion_of_finite_product_of_two_term_sums_of_real_numbers
-#                                                                           を右辺から左辺へ、a_μ^(e) → exp(γ(θ~_μ)(e − 1/2)))
+#   Σ_ε exp(ǧ(ε)) = Σ_ε Π_μ exp(γ(θ~_μ)h(ε(μ)))                           (直前の鎖を各項へ同時に)
+#                 = Π_μ (exp(γ(θ~_μ)h(1)) + exp(γ(θ~_μ)h(0)))             (expansion_of_finite_product_of_two_term_sums_of_real_numbers
+#                                                                           を右辺から左辺へ、a_μ^(e) → exp(γ(θ~_μ)h(e)))
+# h は def_half_sign_of_binary_value の h(1) := ½、h(0) := −(½)。
 # 下の lines の後ろの 2 つは、旧い本文の中間の式（いまの本文には無い）と Step 2 の最後の行 Π_μ 2cosh(γ(θ~_μ)/2) である。
 # いまの本文はこの間を 6 行に割っており、その一行ずつの検算は check_step2_cosh.sage が担う。
 # ここでは展開の行の右辺が Step 2 の最後の行に一致することを、両端の比較として見るだけである。
@@ -12,7 +13,7 @@
 # 有限和・有限積は def_finite_sum_of_real_numbers・def_finite_product_of_real_numbers どおり左から畳み込む。
 # 1 行目の左辺の exp(ǧ(ε)) は ǧ の定義の和の exp として組み、右辺の積（直前の鎖の右辺）とは別に計算する。
 # 否定コントロール: 語を一つ落とした和は 3 行目の積と交わらないことを確かめる。
-# 厳密な部: 展開の行（2 行目と 3 行目）を、exp(γ(θ~_μ)(e − 1/2)) を a_μ^{2e−1}（a_μ は QQ 上の有理関数体の不定元。
+# 厳密な部: 展開の行（2 行目と 3 行目）を、exp(γ(θ~_μ)h(e)) を a_μ^{±1}（e = 1 なら a_μ、e = 0 なら a_μ^{-1}）（a_μ は QQ 上の有理関数体の不定元。
 # Step 1 の検算と同じ置き方）に置いて M_col = 1..6 で厳密に確かめる。否定コントロールとして、因子の
 # a^(1)・a^(0) を a_μ・a_μ^2 に替えると、語を一つ落とした和が積と一致しないことを見る。
 
@@ -68,15 +69,16 @@ def bsum(r, f):
 count = 0
 broken = 0
 half = RB(1) / 2
+hb = lambda e: half if e == 1 else -half                         # def_half_sign_of_binary_value
 for M in range(2, 7):
     for (K1, K2) in PARAMS:
         gam = [gamma_tilde_b(M, mu, K1, K2) for mu in range(1, M + 1)]
-        exp_g = lambda eps: finite_sum([gam[mu] * (RB(eps[mu]) - half) for mu in range(M)]).exp()
-        prod_e = lambda eps: finite_prod([(gam[mu] * (RB(eps[mu]) - half)).exp() for mu in range(M)])
+        exp_g = lambda eps: finite_sum([gam[mu] * hb(eps[mu]) for mu in range(M)]).exp()
+        prod_e = lambda eps: finite_prod([(gam[mu] * hb(eps[mu])).exp() for mu in range(M)])
         lines = [
             bsum(M, exp_g),
             bsum(M, prod_e),
-            finite_prod([(gam[mu] * (RB(1) - half)).exp() + (gam[mu] * (RB(0) - half)).exp() for mu in range(M)]),
+            finite_prod([(gam[mu] * hb(1)).exp() + (gam[mu] * hb(0)).exp() for mu in range(M)]),
             finite_prod([(-gam[mu] / 2).exp() + (gam[mu] / 2).exp() for mu in range(M)]),
             finite_prod([2 * (gam[mu] / 2).cosh() for mu in range(M)]),
         ]
@@ -92,7 +94,7 @@ exact = 0
 for M in range(1, 7):
     F = FractionField(PolynomialRing(QQ, [f'a{mu}' for mu in range(1, M + 1)]))
     av = F.gens()
-    term = lambda mu, e: av[mu] ** (2 * e - 1)                    # exp(γ(θ~_μ)(e − 1/2)) の置き方
+    term = lambda mu, e: av[mu] if e == 1 else av[mu] ** (-1)     # exp(γ(θ~_μ)h(e)) の置き方
     lhs = bsum(M, lambda eps: finite_prod([term(mu, eps[mu]) for mu in range(M)]))
     rhs = finite_prod([term(mu, 1) + term(mu, 0) for mu in range(M)])
     assert lhs == rhs, M

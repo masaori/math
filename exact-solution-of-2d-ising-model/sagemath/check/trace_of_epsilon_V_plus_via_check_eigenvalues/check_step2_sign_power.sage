@@ -1,13 +1,16 @@
-# 対象ラベル: trace_of_epsilon_V_plus_via_check_eigenvalues（Step 2: (Π_{μ=1}^{k} ǔ^{(ϵ_μ)})_C = (−1_C)^{k−|ϵ|_k} の帰納法）
-# k = 1、ϵ_1 = 1:  (Π_{μ≤1} ǔ)_C = (ǔ^{(ϵ_1)})_C = (ǔ^{(1)})_C = 1_C = (−1_C)^0 = (−1_C)^{1−|ϵ|_1}
-# k = 1、ϵ_1 = 0:  (Π_{μ≤1} ǔ)_C = (ǔ^{(ϵ_1)})_C = (ǔ^{(0)})_C = −1_C = 1_C(−1_C) = (−1_C)^0(−1_C) = (−1_C)^1 = (−1_C)^{1−|ϵ|_1}
-# k → k+1、ϵ_{k+1} = 1: ((Π_{≤k} ǔ)ǔ^{(ϵ_{k+1})})_C = (Π_{≤k})_C(ǔ^{(ϵ_{k+1})})_C = (−1_C)^{k−|ϵ|_k}(ǔ)_C = (−1_C)^{k−|ϵ|_k}1_C
-#                       = (−1_C)^{k−|ϵ|_k} = (−1_C)^{(k+1)−|ϵ|_{k+1}}
-# k → k+1、ϵ_{k+1} = 0: … = (−1_C)^{k−|ϵ|_k}(−1_C) = (−1_C)^{(k−|ϵ|_k)+1} = (−1_C)^{(k+1)−|ϵ|_{k+1}}
+# 対象ラベル: trace_of_epsilon_V_plus_via_check_eigenvalues（Step 2: (Π_{μ=1}^{k} ǔ^{(ε(μ))})_C = (−1_C)^{k−|ε|_k} の帰納法）
+# k = 1、ε(1) = 1:  (Π_{μ≤1} ǔ)_C = (ǔ^{(ε(1))})_C = (ǔ^{(1)})_C = 1_C = (−1_C)^0 = (−1_C)^{1−|ε|_1}
+# k = 1、ε(1) = 0:  (Π_{μ≤1} ǔ)_C = (ǔ^{(ε(1))})_C = (ǔ^{(0)})_C = −1_C = 1_C(−1_C) = (−1_C)^0(−1_C) = (−1_C)^1 = (−1_C)^{1−|ε|_1}
+# k → k+1、ε(k+1) = 1: ((Π_{≤k} ǔ)ǔ^{(ε(k+1))})_C = (Π_{≤k})_C(ǔ^{(ε(k+1))})_C = (−1_C)^{k−|ε|_k}(ǔ)_C = (−1_C)^{k−|ε|_k}1_C
+#                       = (−1_C)^{k−|ε|_k} = (−1_C)^{(k+1)−|ε|_{k+1}}
+# k → k+1、ε(k+1) = 0: … = (−1_C)^{k−|ε|_k}(−1_C) = (−1_C)^{(k−|ε|_k)+1} = (−1_C)^{(k+1)−|ε|_{k+1}}
 # ℂ は QQ(i)（i^2 = −1）で持ち、包含 inclusion_rr_to_cc は QQ → QQ(i) の r ↦ r + 0i、冪は def_power_of_complex_number の帰納法
 # （z^0 := 1_C、z^{m+1} := z^m z）を関数で組む。実数の有限積は def_finite_product_of_real_numbers どおり左から掛ける。
-# 帰納法の各段の行を、M_col = 1..7 の全ての ϵ ∈ {0,1}^{M_col} と全ての k で確かめる。|ϵ|_k の性質
-# （|ϵ|_1 = ϵ_1、|ϵ|_{k+1} = |ϵ|_k + ϵ_{k+1}、0 ≤ |ϵ|_k ≤ k、|ϵ|_M = |ϵ|）も確かめる。
+# 帰納法の各段の行を、M_col = 1..7 の全ての ε ∈ {0,1}^{M_col} と全ての k で確かめる。|ε|_k の性質
+# （|ε|_1 は ε(1) = 1 なら 1・ε(1) = 0 なら 0、|ε|_{k+1} は ε(k+1) = 1 なら |ε|_k + 1・ε(k+1) = 0 なら |ε|_k、0 ≤ |ε|_k ≤ k、
+# |ε|_M = |ε|）も場合分けで確かめる（ε の値には算術をしない）。
+# 最後の 3 行の鎖: (Π_{μ∈M̌} ǔ^{(ε(μ))})_C = (Π_{μ=1}^{M_col} ǔ^{(ε(μ))})_C = (−1_C)^{M−|ε|_M} = (−1_C)^{M−|ε|}
+# （Π_{μ∈M̌} と Π_{μ=1}^{M_col} は def_product_over_check_index_set で同じ左から掛ける積なので、1 行目と 2 行目は同じ値を並べる）。
 # 帰属: 全て厳密（QQ・QQ(i)）。
 load("_prelude.sage")
 
@@ -29,9 +32,10 @@ count = 0
 negatives = 0
 for M in range(1, 8):
     for eps in itertools.product([1, 0], repeat=M):
-        assert popcount_prefix(eps, 1) == eps[0] and popcount_prefix(eps, M) == sum(eps)
+        card = popcount(eps)                                       # |ε|（def_number_of_ones_of_binary_assignment）
+        assert popcount_prefix(eps, 1) == (1 if eps[0] == 1 else 0) and popcount_prefix(eps, M) == card
         for k in range(1, M):
-            assert popcount_prefix(eps, k + 1) == popcount_prefix(eps, k) + eps[k]
+            assert popcount_prefix(eps, k + 1) == (popcount_prefix(eps, k) + 1 if eps[k] == 1 else popcount_prefix(eps, k))
         for k in range(1, M + 1):
             assert 0 <= popcount_prefix(eps, k) <= k
         # k = 1
@@ -59,14 +63,18 @@ for M in range(1, 8):
             for x, y in zip(lines, lines[1:]):
                 assert x == y, (eps, k)
                 count += 1
-        # 結論: (Π_{μ≤M} ǔ)_C = (−1_C)^{M−|ϵ|}
-        assert inc(left_product([u_sign(e) for e in eps])) == cpow(mone, M - sum(eps))
-        # 否定コントロール: 指数を |ϵ| にすると、M_col が奇数なら外れる（M − |ϵ| と |ϵ| の偶奇が違う）
+        # 結論の 3 行の鎖: (Π_{μ∈M̌} ǔ)_C = (Π_{μ=1}^{M} ǔ)_C = (−1_C)^{M−|ε|_M} = (−1_C)^{M−|ε|}
+        full = inc(left_product([u_sign(e) for e in eps]))
+        lines = [full, full, cpow(mone, M - popcount_prefix(eps, M)), cpow(mone, M - card)]
+        for x, y in zip(lines, lines[1:]):
+            assert x == y, (eps, "final")
+            count += 1
+        # 否定コントロール: 指数を |ε| にすると、M_col が奇数なら外れる（M − |ε| と |ε| の偶奇が違う）
         if M % 2 == 1:
-            assert inc(left_product([u_sign(e) for e in eps])) != cpow(mone, sum(eps))
+            assert inc(left_product([u_sign(e) for e in eps])) != cpow(mone, card)
             negatives += 1
-# 否定コントロール: ǔ^{(0)} を +1 にすると (−1_C)^{M−|ϵ|} と外れる ϵ がある
-assert any(inc(left_product([1 for e in eps])) != cpow(mone, 3 - sum(eps)) for eps in itertools.product([1, 0], repeat=3))
+# 否定コントロール: ǔ^{(0)} を +1 にすると (−1_C)^{M−|ε|} と外れる ε がある
+assert any(inc(left_product([1 for e in eps])) != cpow(mone, 3 - popcount(eps)) for eps in itertools.product([1, 0], repeat=3))
 negatives += 1
 print(f"checked {count} lines")
 print(f"negative controls: {negatives}")

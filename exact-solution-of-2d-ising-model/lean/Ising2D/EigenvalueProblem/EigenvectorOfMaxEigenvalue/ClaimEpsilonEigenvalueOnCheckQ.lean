@@ -16,14 +16,14 @@
 | (1) `∃! η_ε ∈ {±1}, ε Q̌_ε = η_ε Q̌_ε` | `Ising2D.CheckFermi.eta` / `eta_mem` / `epsilon_mul_Qproj` / `eta_unique` |
 | (1) の鎖: `Q̌_ε q = q`（4 行）・`Q̌_ε(εq) = εq`（4 行）・`q = (ηη)q`（7 行）・`(ηη − 1)q = O`（4 行）・`(η − 1)(η + 1) = 0`（12 行）・`(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）・列ごとの `εQ̌_ε = ηQ̌_ε`（7 行）・一意性（6 行） | `exists_eta_with_generator`・`Qproj_mulVec_generator`・`Qproj_mulVec_epsilon_mulVec_generator`・`generator_eq_eta_mul_eta_smul`・`eta_mul_eta_sub_one_smul_generator`・`eta_mem_of_mul_self_sub_one`・`epsilon_mul_Qproj_mulVec`・`epsilon_mul_Qproj_eq_smul_of_mulVec`・`smul_generator_eq_eta_smul`（各 calc が人手の鎖と同じ行。`mat_mult_associative` の行は、Lean の数ベクトルが 1 列の行列でないので mathlib の `Matrix.mulVec_mulVec`） |
 | (2) の冒頭: `im Q̌_ε` の `0` でない元 `q` を取り、冪等性で `Q̌_ε q = q`、5 行の鎖で `εq = η_ε q` | `eta_insert` の冒頭（`q` は `exists_ne_zero_mem_range_Qproj` の `q = Q̌_ε x`。1 次元性は使わない）・`Qproj_mulVec_generator`・`epsilon_mulVec_generator_eq_eta_smul` |
-| (2) Step 1: `ň_μ q = 0`（6 行）・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行）・背理法（3 行）で `ψ̌_μ^† q ≠ 0` | `nOp_mulVec_generator_eq_zero`・`ann_mulVec_cre_mulVec_generator`・`cre_mulVec_generator_ne_zero` |
-| (2) Step 2 の前半: `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行）・`A_μ^ε = I − ň_μ`・`A_μ^{ε'} = ň_μ`（8 行ずつ）・`ν ≠ μ` で `A_ν^{ε'} = A_ν^ε`・`XA_ν^δ = A_ν^δX`（3 式と 5 行）と、その `X → ň_κ`・`X → A_κ^δ`・`X → ψ̌_μ^†` | `nOp_mul_cre`・`defFactor_of_notMem`・`defFactor_of_mem`・`defFactor_insert_of_ne`・`commute_defFactor_of_commute`・`nOp_mul_defFactor`・`defFactor_mul_defFactor`・`cre_mul_defFactor_of_ne`（必要十分版の特殊化は `nOp_mul_cre_of_necSuf`（`NecSuf.num_mul_cre'`）・`commute_defFactor_of_commute_of_necSuf`（`NecSuf.commute_defFactor_of_commute'`）） |
-| (2) Step 2 の後半: `Π' := ∏_{ν≠μ}A_ν` と `ψ̌_μ^†Π' = Π'ψ̌_μ^†`、`A_μ^ε q = q`（5 行）・`Π'q = q`（5 行）・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`（10 行）の 3 本の鎖 | `cre_mul_omittingDefFactor`・`defFactor_mulVec_generator_of_notMem`・`omittingDefFactor_mulVec_generator`・`omittingDefFactor_insert`・`Qproj_insert_mulVec_cre_mulVec_generator`（`Π'` は `NecSuf.finProdLeftOmitting r μ (F.defFactor T)`、人手の `M_col` が Lean の `r + 2`。必要十分版の特殊化は `*_of_necSuf`） |
+| (2) Step 1: `ň_μ q = 0`（4 行）・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行）・背理法（3 行）で `ψ̌_μ^† q ≠ 0` | `nOp_mulVec_generator_eq_zero`・`ann_mulVec_cre_mulVec_generator`・`cre_mulVec_generator_ne_zero` |
+| (2) Step 2 の前半: `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行）・`R_μ^{(ε(μ))} = I − ň_μ`・`R_μ^{(ε'(μ))} = ň_μ`（2 行ずつ）・`ν ≠ μ` で `R_ν^{(ε'(ν))} = R_ν^{(ε(ν))}`・`XR_ν^{(δ(ν))} = R_ν^{(δ(ν))}X`（`X(I − ň_ν) = (I − ň_ν)X` と `δ(ν) = 1`・`δ(ν) = 0` の 5 行ずつ）と、その `X → ň_κ`・`X → R_κ^{(δ(κ))}`・`X → ψ̌_μ^†`（`R_ν^{(e)}` は `rFactor`、`ε(ν)` は `epsVal`、`R_ν^{(ε(ν))}` は `defFactor`。`CheckFermiInput.lean`） | `nOp_mul_cre`・`defFactor_of_notMem`・`defFactor_of_mem`・`defFactor_insert_of_ne`・`commute_defFactor_of_commute`・`nOp_mul_defFactor`・`defFactor_mul_defFactor`・`cre_mul_defFactor_of_ne`（必要十分版の特殊化は `nOp_mul_cre_of_necSuf`（`NecSuf.num_mul_cre'`）・`commute_defFactor_of_commute_of_necSuf`（`NecSuf.commute_defFactor_of_commute'`）） |
+| (2) Step 2 の後半: `Π' := ∏_{ν≠μ}R_ν^{(ε(ν))}` と `ψ̌_μ^†Π' = Π'ψ̌_μ^†`、`R_μ^{(ε(μ))} q = q`（5 行）・`Π'q = q`（6 行）・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`（11 行）の 3 本の鎖（`def_product_over_check_index_set` の行は `rfl` の段） | `cre_mul_omittingDefFactor`・`defFactor_mulVec_generator_of_notMem`・`omittingDefFactor_mulVec_generator`・`omittingDefFactor_insert`・`Qproj_insert_mulVec_cre_mulVec_generator`（`Π'` は `NecSuf.finProdLeftOmitting r μ (F.defFactor T)`、人手の `M_col` が Lean の `r + 2`。必要十分版の特殊化は `*_of_necSuf`） |
 | (2) Step 3 の前半: `ε(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（9 行） | `epsilon_mulVec_cre_mulVec_generator` |
 | (2) Step 3 の後半: `η_{ε'}(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（6 行） | `eta_insert_smul_cre_mulVec_generator` |
 | (2) `ψ̌_μ^† q ≠ 0` の 0 でない成分を比べて `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert`（`smul_generator_cancel`。Step 2 は `M` を限らない形 `Qproj_insert_mulVec_cre_mulVec_of_notMem` で受け、人手の範囲外の `M = 1` は `Qproj_insert_mulVec_cre_mulVec_generator_one`） |
-| (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}`: `k := M_col − \|ε\|` の帰納法（`k = 0` の 4 行、`k ≥ 1` で `ε_μ = 0` の `μ` を取り、(2) の両辺に `−1` を掛けた `η_ε = −η_{ε'}` から始まる 7 行の鎖） | `Ising2D.CheckFermi.eta_eq_eta_univ_mul`・`eta_eq_eta_univ_mul_of_sub_card`・`eta_eq_neg_eta_insert`（必要十分版の特殊化は `eta_eq_eta_univ_mul_of_necSuf`・`eta_eq_neg_eta_insert_of_necSuf`） |
-| (4) の前半: `(I − 2ň_μ)Q̌_ε = (1 − 2ε_μ)Q̌_ε`（10 行）・`P_kQ̌_ε = p_kQ̌_ε` の `k` の帰納法（`k = 1` と `k → k+1` の 8 行）・`p_{M_col} = (−1)^{\|ε\|}` | `parityFactor_mul_Qproj`・`finProdLeft_mul_Qproj`（人手の鎖と同じ行の calc。`P_k` は左から掛ける有限積 `NecSuf.finProdLeft`）・`prod_one_sub_two_mul_indicator`・`parityProd_mul_Qproj`（必要十分版の特殊化は `*_of_necSuf`） |
+| (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}`: `k := M_col − \|ε\|` の帰納法（`k = 0` の 4 行、`k ≥ 1` で `ε(μ) = 0` の `μ` を取り、(2) の両辺に `−1` を掛けた `η_ε = −η_{ε'}` から始まる 7 行の鎖） | `Ising2D.CheckFermi.eta_eq_eta_univ_mul`・`eta_eq_eta_univ_mul_of_sub_card`・`eta_eq_neg_eta_insert`（必要十分版の特殊化は `eta_eq_eta_univ_mul_of_necSuf`・`eta_eq_neg_eta_insert_of_necSuf`） |
+| (4) の前半: `(I − 2ň_μ)Q̌_ε` の共通の 6 行と、`ε(μ) = 1` の 4 行（`(−1)Q̌_ε`）・`ε(μ) = 0` の 3 行（`Q̌_ε`）、`P_kQ̌_ε = (−1)^{\|ε\|_k}Q̌_ε` の `k` の帰納法（`k = 1` の 6 行・5 行、`k → k+1` の 9 行・5 行）、`k = M_col` と `\|ε\|_{M_col} = \|ε\|` | `parityFactor_mul_Qproj`・`parityFactor_mul_Qproj_of_mem`・`parityFactor_mul_Qproj_of_notMem`・`finProdLeft_mul_Qproj`（人手の鎖と同じ行の calc。`P_k` は左から掛ける有限積 `NecSuf.finProdLeft`、`\|ε\|_k` は先頭の `k` 成分の語の `(finsetOfWord e).card`）・`parityProd_mul_Qproj`（`finsetOfWord_epsVal`）。数え上げは `card_finsetOfWord_one`・`card_finsetOfWord_castSucc`（必要十分版の特殊化は `*_of_necSuf`） |
 | (4) の後半: `εQ̌_ε = c(PQ̌_ε)`（7 行。3 行目の根拠 `(−1)^{\|ε\|}(−1)^{\|ε\|} = 1` の 3 つの等号を含む）・`ε = εI = … = cP`（9 行。和 `Σ_ε` は `def_sum_over_binary_words`） | `epsilon_mul_Qproj_eq_smul_parityProd_mul`・`neg_one_pow_mul_self`・`epsilon_eq_parityProd_succ`（人手の鎖と同じ行の calc。和は `NecSuf.binWordSum r` で、Lean の `Finset.sum` との付け替えは `sum_Qproj_eq_binWordSum`・`binWordSum_Qproj`。必要十分版の特殊化は `*_of_necSuf`） |
 | (4) `ε = η_{(1,…,1)}(-1)^M ∏(I - 2ň_μ)` | `Ising2D.CheckFermi.epsilon_eq_parityProd`（`M = r + 1` は 9 行の鎖。人手の範囲外の `M = 0` は 7 行の鎖を全ての `Q̌_ε` に使って `eq_of_mul_Qproj_eq`） |
 
@@ -335,18 +335,15 @@ theorem eta_unique {T : Finset (Fin M)} {η : ℂ} (h : epsilon M * F.Qproj T = 
 `Matrix.neg_mulVec`・`sub_zero`・`neg_one_smul` で受ける。必要十分版は `Ising2D/NecSuf/SignReversalOnGeneratorVector.lean` で、
 同じ行の calc である。 -/
 
-/-- **原文 (2) Step 1** の `ň_μ q = 0` の 6 行の鎖（`ε_μ = 0`、すなわち `μ ∉ T`）。 -/
+/-- **原文 (2) Step 1** の `ň_μ q = 0` の 4 行の鎖（`ε(μ) = 0`、すなわち `μ ∉ T`）。 -/
 theorem nOp_mulVec_generator_eq_zero {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) {q : Conf M → ℂ}
     (hqfix : F.Qproj T *ᵥ q = q) : F.nOp μ *ᵥ q = 0 :=
   calc F.nOp μ *ᵥ q
       = F.nOp μ *ᵥ (F.Qproj T *ᵥ q) := by rw [hqfix]    -- `Q̌_ε q = q`
     _ = (F.nOp μ * F.Qproj T) *ᵥ q := Matrix.mulVec_mulVec _ _ _
                                                         -- `mat_mult_associative`
-    _ = ((if μ ∈ T then (1 : ℂ) else 0) • F.Qproj T) *ᵥ q := by rw [F.nOp_mul_Qproj μ T]
-                                                        -- `check_joint_eigenspace_decomposition` (3)（`ε_μ` は `if μ ∈ T then 1 else 0`）
-    _ = ((0 : ℂ) • F.Qproj T) *ᵥ q := by rw [if_neg hμ]  -- `ε_μ = 0`
-    _ = (0 : TensorPow M) *ᵥ q := by rw [zero_smul_tensorPow]
-                                                        -- `zero_scalar_multiple_is_zero_matrix`
+    _ = (0 : TensorPow M) *ᵥ q := by rw [F.nOp_mul_Qproj_of_notMem hμ]
+                                                        -- `check_joint_eigenspace_decomposition` (3) の `ε(ν) = 0` の場合の `ň_νQ̌_ε = O`（`ν → μ`）
     _ = 0 := Matrix.zero_mulVec q                       -- `zero_matrix_is_left_zero_of_mat_mult`（右の因子が数ベクトル）
 
 /-- **原文 (2) Step 1** の `ψ̌_{M_col+1−μ}(ψ̌_μ^† q) = q` の 6 行の鎖（Lean の `ann μ` が人手の `ψ̌_{M_col+1−μ}`）。 -/
@@ -400,7 +397,7 @@ theorem epsilon_mulVec_cre_mulVec_generator {μ : Fin M} {q : Conf M → ℂ} {�
 
 theorem nOp_mulVec_generator_eq_zero_of_necSuf {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T)
     {q : Conf M → ℂ} (hqfix : F.Qproj T *ᵥ q = q) : F.nOp μ *ᵥ q = 0 :=
-  NecSuf.num_mulVec_eq_zero_of_fixed (fun x : ℂ => zero_mul x) hqfix (F.nOp_mul_Qproj μ T) (if_neg hμ)
+  NecSuf.num_mulVec_eq_zero_of_fixed hqfix (F.nOp_mul_Qproj_of_notMem hμ)
 
 theorem ann_mulVec_cre_mulVec_generator_of_necSuf {μ : Fin M} {q : Conf M → ℂ}
     (hn : F.nOp μ *ᵥ q = 0) : F.ann μ *ᵥ (F.cre μ *ᵥ q) = q :=
@@ -416,9 +413,10 @@ theorem epsilon_mulVec_cre_mulVec_generator_of_necSuf {μ : Fin M} {q : Conf M �
     epsilon M *ᵥ (F.cre μ *ᵥ q) = (-η) • (F.cre μ *ᵥ q) :=
   NecSuf.mulVec_cre_mulVec_eq_neg_smul_of_anticomm (F.epsilon_anticomm_cre μ) hεq
 
-/-! 人手の (2) Step 2 の前半: `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行）、`Q̌_δ` の因子 `A_ν^δ := δ_νň_ν + (1 − δ_ν)(I − ň_ν)`
-（Lean の `defFactor`。`δ ∈ {ε, ε'}` の `ε` は Lean の `T`、`ε' := ε[μ→1]` は `insert μ T`）の値 `A_μ^ε = I − ň_μ`・
-`A_μ^{ε'} = ň_μ`（8 行ずつ）と `ν ≠ μ` での `A_ν^{ε'} = A_ν^ε`、可換性 `XA_ν^δ = A_ν^δX`（5 行）とその 3 つの使い方である。
+/-! 人手の (2) Step 2 の前半: `ň_μψ̌_μ^† = ψ̌_μ^†`（13 行）、`Q̌_δ` の因子 `R_ν^{(δ(ν))}`（`def_check_R_factor`。
+Lean の `defFactor`。`δ ∈ {ε, ε'}` の `ε` は Lean の `T`、`ε' := ε[μ→1]` は `insert μ T`）の値 `R_μ^{(ε(μ))} = I − ň_μ`・
+`R_μ^{(ε'(μ))} = ň_μ`（2 行ずつ）と `ν ≠ μ` での `R_ν^{(ε'(ν))} = R_ν^{(ε(ν))}`、可換性 `XR_ν^{(δ(ν))} = R_ν^{(δ(ν))}X`
+（`δ(ν) = 1`・`δ(ν) = 0` の場合の 5 行ずつ）とその 3 つの使い方である。
 `mat_mult_associative` の行は (1) と同じく mathlib で受ける（(1) の数ベクトルの行は `Matrix.mulVec_mulVec`、ここは行列どうしの積なので `mul_assoc`）。 -/
 
 /-- **原文 (2) Step 2 冒頭**の `ň_μψ̌_μ^† = ψ̌_μ^†` の 13 行の鎖。 -/
@@ -452,59 +450,31 @@ theorem nOp_mul_cre_of_necSuf (μ : Fin M) : F.nOp μ * F.cre μ = F.cre μ :=
   NecSuf.num_mul_cre' (fun x y => sub_eq_add_neg x y) (fun x => zero_mul x) (fun x => sub_zero x) F.cre F.ann μ
     (F.ann_mul_cre μ) (F.cre_sq μ)
 
-/-- **原文 (2) Step 2** の `A_μ^ε = I − ň_μ` の 8 行の鎖（`ε_μ = 0`、すなわち `μ ∉ T`）。 -/
+/-- **原文 (2) Step 2** の `R_μ^{(ε(μ))} = I − ň_μ` の 2 行の鎖（`ε(μ) = 0`、すなわち `μ ∉ T`）。 -/
 theorem defFactor_of_notMem {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) :
     F.defFactor T μ = 1 - F.nOp μ :=
   calc F.defFactor T μ
-      = (0 : ℂ) • F.nOp μ + ((1 : ℂ) - 0) • (1 - F.nOp μ) := by
-        rw [defFactor, if_neg hμ]                       -- `ε_μ = 0`
-    _ = (0 : ℂ) • F.nOp μ + ((1 : ℂ) + -0) • (1 - F.nOp μ) := by
-        rw [sub_eq_add_neg (1 : ℂ) 0]                   -- `def_complex_difference`
-    _ = (0 : ℂ) • F.nOp μ + ((1 : ℂ) + (-1) * 0) • (1 - F.nOp μ) :=
-        congrArg (fun c : ℂ => (0 : ℂ) • F.nOp μ + ((1 : ℂ) + c) • (1 - F.nOp μ)) (neg_one_mul (0 : ℂ)).symm
-                                                        -- `multiply_by_minus_one`
-    _ = (0 : ℂ) • F.nOp μ + ((1 : ℂ) + 0) • (1 - F.nOp μ) := by
-        rw [mul_zero (-1 : ℂ)]                          -- `complex_times_zero_is_zero`
-    _ = (0 : ℂ) • F.nOp μ + (1 : ℂ) • (1 - F.nOp μ) := by
-        rw [add_zero (1 : ℂ)]                           -- `complex_numbers_form_a_field` の加法の単位元
-    _ = 0 + (1 : ℂ) • (1 - F.nOp μ) := by
-        rw [zero_smul_tensorPow]                        -- `zero_scalar_multiple_is_zero_matrix`
-    _ = 0 + (1 - F.nOp μ) := by
-        rw [one_smul_tensorPow]                         -- `scalar_multiple_by_one`
-    _ = 1 - F.nOp μ := zero_matrix_add_matrix_tensorPow _
-                                                        -- `zero_matrix_plus_matrix`
+      = F.rFactor μ 0 := by rw [defFactor, epsVal_of_notMem hμ]
+                                                        -- `ε(μ) = 0`
+    _ = 1 - F.nOp μ := F.rFactor_zero μ                 -- `def_check_R_factor`
 
-/-- **原文 (2) Step 2** の `A_μ^{ε'} = ň_μ` の 8 行の鎖（`ε'_μ = 1`、すなわち `μ ∈ T'`。使うのは `T' = insert μ T`）。 -/
+/-- **原文 (2) Step 2** の `R_μ^{(ε'(μ))} = ň_μ` の 2 行の鎖（`ε'(μ) = 1`、すなわち `μ ∈ T'`。使うのは `T' = insert μ T`）。 -/
 theorem defFactor_of_mem {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∈ T) :
     F.defFactor T μ = F.nOp μ :=
   calc F.defFactor T μ
-      = (1 : ℂ) • F.nOp μ + ((1 : ℂ) - 1) • (1 - F.nOp μ) := by
-        rw [defFactor, if_pos hμ]                       -- `ε'_μ = 1`
-    _ = (1 : ℂ) • F.nOp μ + ((1 : ℂ) + -1) • (1 - F.nOp μ) := by
-        rw [sub_eq_add_neg (1 : ℂ) 1]                   -- `def_complex_difference`
-                                                        -- （人手の `−(1_ℂ)`。Lean では定数 `−1_ℂ` と同じ項 `-1` で、次の 2 段で同じ項 `-1` へ戻る）
-    _ = (1 : ℂ) • F.nOp μ + ((1 : ℂ) + (-1) * 1) • (1 - F.nOp μ) :=
-        congrArg (fun c : ℂ => (1 : ℂ) • F.nOp μ + ((1 : ℂ) + c) • (1 - F.nOp μ)) (neg_one_mul (1 : ℂ)).symm
-                                                        -- `multiply_by_minus_one`
-    _ = (1 : ℂ) • F.nOp μ + ((1 : ℂ) + -1) • (1 - F.nOp μ) := by
-        rw [mul_one (-1 : ℂ)]                           -- `complex_numbers_form_a_field` の積の単位元
-    _ = (1 : ℂ) • F.nOp μ + (0 : ℂ) • (1 - F.nOp μ) := by
-        rw [add_neg_cancel (1 : ℂ)]                     -- `complex_numbers_form_a_field` の加法の逆元
-    _ = F.nOp μ + (0 : ℂ) • (1 - F.nOp μ) := by
-        rw [one_smul_tensorPow]                         -- `scalar_multiple_by_one`
-    _ = F.nOp μ + 0 := by
-        rw [zero_smul_tensorPow]                        -- `zero_scalar_multiple_is_zero_matrix`
-    _ = F.nOp μ := matrix_add_zero_matrix_tensorPow _  -- `matrix_plus_zero_matrix`
+      = F.rFactor μ 1 := by rw [defFactor, epsVal_of_mem hμ]
+                                                        -- `ε'(μ) = 1`（`def_binary_assignment_with_one_value_set_to_one`）
+    _ = F.nOp μ := F.rFactor_one μ                      -- `def_check_R_factor`
 
-/-- **原文 (2) Step 2** の「`ν ≠ μ` では `ε'_ν = ε_ν` なので `A_ν^{ε'} = A_ν^ε`」（`ε' = ε[μ→1]` は `insert μ T`）。 -/
+/-- **原文 (2) Step 2** の「`ν ≠ μ` では `ε'(ν) = ε(ν)` なので `R_ν^{(ε'(ν))} = R_ν^{(ε(ν))}`」（`ε' = ε[μ→1]` は `insert μ T`）。 -/
 theorem defFactor_insert_of_ne (T : Finset (Fin M)) {μ ν : Fin M} (hν : ν ≠ μ) :
     F.defFactor (insert μ T) ν = F.defFactor T ν := by
   have h : (ν ∈ insert μ T) = (ν ∈ T) := propext (by rw [Finset.mem_insert]; exact or_iff_right hν)
-                                                        -- `ε'_ν = ε_ν`（`ε[μ→1]` の定義）
-  simp only [defFactor, h]
+                                                        -- `ε'(ν) = ε(ν)`（`def_binary_assignment_with_one_value_set_to_one`）
+  simp only [defFactor, epsVal, h]
 
-/-- **原文 (2) Step 2** の可換性: `Xň_ν = ň_νX` なら `XA_ν^δ = A_ν^δX`。前半の 3 式（`have` の `h1`・`h2`・`h3`。
-`XI = X = IX` は `hI`）と 5 行の鎖である。 -/
+/-- **原文 (2) Step 2** の可換性: `Xň_ν = ň_νX` なら `XR_ν^{(δ(ν))} = R_ν^{(δ(ν))}X`。前置きの `X(I − ň_ν) = (I − ň_ν)X`
+（`have` の `h1`。`XI = X = IX` は `hI`）と、`δ(ν) = 1`（Lean の `ν ∈ T`）・`δ(ν) = 0`（`ν ∉ T`）の場合の 5 行ずつの鎖である。 -/
 theorem commute_defFactor_of_commute (T : Finset (Fin M)) (ν : Fin M) {X : TensorPow M}
     (hn : X * F.nOp ν = F.nOp ν * X) : X * F.defFactor T ν = F.defFactor T ν * X := by
   have hI : X * 1 = 1 * X :=
@@ -514,31 +484,28 @@ theorem commute_defFactor_of_commute (T : Finset (Fin M)) (ν : Fin M) {X : Tens
   have h1 : X * (1 - F.nOp ν) = (1 - F.nOp ν) * X :=
     mul_sub_eq_sub_mul_of_commute_tensorPow _ _ _ hI hn
                                                         -- `commuting_with_difference`
-  have h2 : X * ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν)
-      = ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν) * X :=
-    mul_smul_comm_of_commute_tensorPow _ _ _ hn         -- `commuting_with_scalar_multiple`（`c → δ_ν`）
-  have h3 : X * ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν))
-      = ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) * X :=
-    mul_smul_comm_of_commute_tensorPow _ _ _ h1         -- `commuting_with_scalar_multiple`（`c → 1 − δ_ν`）
-  calc X * F.defFactor T ν
-      = X * ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν
-          + (1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) := rfl
-                                                        -- `A_ν^δ` の置き方
-    _ = X * ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν)
-          + X * ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) :=
-        mul_add_matrix_tensorPow _ _ _                  -- `mat_mult_distributes_over_sum_in_right_factor`
-    _ = ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν) * X
-          + ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) * X := by
-        rw [h2, h3]                                     -- 上の 2 式
-    _ = ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν
-          + (1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) * X :=
-        (add_mul_matrix_tensorPow _ _ _).symm           -- `mat_mult_distributes_over_sum_in_left_factor`
-    _ = F.defFactor T ν * X := rfl                      -- `A_ν^δ` の置き方
+  by_cases hν : ν ∈ T
+  · calc X * F.defFactor T ν
+        = X * F.rFactor ν 1 := by rw [defFactor, epsVal_of_mem hν]
+                                                        -- `δ(ν) = 1`
+      _ = X * F.nOp ν := by rw [rFactor_one]            -- `def_check_R_factor`
+      _ = F.nOp ν * X := hn                             -- `Xň_ν = ň_νX` の仮定
+      _ = F.rFactor ν 1 * X := by rw [rFactor_one]      -- `def_check_R_factor` を右辺から左辺へ
+      _ = F.defFactor T ν * X := by rw [defFactor, epsVal_of_mem hν]
+                                                        -- `δ(ν) = 1`
+  · calc X * F.defFactor T ν
+        = X * F.rFactor ν 0 := by rw [defFactor, epsVal_of_notMem hν]
+                                                        -- `δ(ν) = 0`
+      _ = X * (1 - F.nOp ν) := by rw [rFactor_zero]     -- `def_check_R_factor`
+      _ = (1 - F.nOp ν) * X := h1                       -- 上の `X(I − ň_ν) = (I − ň_ν)X`
+      _ = F.rFactor ν 0 * X := by rw [rFactor_zero]     -- `def_check_R_factor` を右辺から左辺へ
+      _ = F.defFactor T ν * X := by rw [defFactor, epsVal_of_notMem hν]
+                                                        -- `δ(ν) = 0`
 
 /-- 上の可換性が、同じ並びの必要十分版 `NecSuf.commute_defFactor_of_commute'` の特殊化として得られること。 -/
 theorem commute_defFactor_of_commute_of_necSuf (T : Finset (Fin M)) (ν : Fin M) {X : TensorPow M}
     (hn : X * F.nOp ν = F.nOp ν * X) : X * F.defFactor T ν = F.defFactor T ν * X :=
-  NecSuf.commute_defFactor_of_commute' (fun x y => sub_eq_add_neg x y) hn _ _
+  NecSuf.commute_defFactor_of_commute' (fun x y => sub_eq_add_neg x y) hn (epsVal T ν = 1)
 
 /-- **原文 (2) Step 2**: 可換性を `X → ň_κ` に使う（`check_number_operators_commute` (2)。`κ = ν` では両辺が同じ積 `ň_νň_ν`）。 -/
 theorem nOp_mul_defFactor (T : Finset (Fin M)) (κ ν : Fin M) :
@@ -555,27 +522,28 @@ theorem cre_mul_defFactor_of_ne (T : Finset (Fin M)) {μ ν : Fin M} (hν : ν �
     F.cre μ * F.defFactor T ν = F.defFactor T ν * F.cre μ :=
   F.commute_defFactor_of_commute T ν (F.commute_cre_nOp (Ne.symm hν)).eq
 
-/-! 人手の (2) Step 2 の後半: `Π' := ∏_{ν≠μ}A_ν`（`def_finite_product_of_matrices_omitting_one_index`（`r → M_col`、`ν → μ`）。
+/-! 人手の (2) Step 2 の後半: `Π' := ∏_{ν≠μ}R_ν^{(ε(ν))}`（`def_finite_product_of_matrices_omitting_one_index`（`r → M_col`、`ν → μ`）。
 Lean は `NecSuf.finProdLeftOmitting r μ (F.defFactor T)`。人手の `M_col ∈ ℤ_{≥2}` が Lean の `r + 2` で、人手の添字は 1 始まり、Lean の `Fin` は 0 始まりである。
-Lean の `μ` は人手の `μ` から 1 を引いた値である。人手の `A_j` は Lean の `A (j − 1)` である。人手の `s(j)` は Lean の `μ.succAbove (j − 1)` に 1 を足した値である）と、
-`ψ̌_μ^†Π' = Π'ψ̌_μ^†`、`A_μ^ε q = q`（5 行）・`Π'q = q`（5 行）・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`（10 行）である。
-人手の `Q̌_δ = ∏_{ν=1}^{M_col}A_ν^δ`（`Q̌_δ` の定義）は、Lean の `Qproj` の定義とつなぐ等式 `Qproj_eq_finProdLeft_defFactor` で受ける。
-`Π'` は `δ = ε` の因子で作る（人手の `A_ν` は `ν ≠ μ` での `A_ν^{ε'} = A_ν^ε` の共通の値）。 -/
+Lean の `μ` は人手の `μ` から 1 を引いた値である。人手の `R_j^{(ε(j))}` は Lean の `F.defFactor T (j − 1)` である。人手の `s(j)` は Lean の `μ.succAbove (j − 1)` に 1 を足した値である）と、
+`ψ̌_μ^†Π' = Π'ψ̌_μ^†`、`R_μ^{(ε(μ))}q = q`（5 行）・`Π'q = q`（6 行）・`Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`（11 行）である。
+人手の `Q̌_δ = ∏_{ν∈𝓜̌}R_ν^{(δ(ν))}`（`def_check_Q_epsilon`）は、Lean の `Qproj` の定義とつなぐ等式 `Qproj_eq_finProdLeft_defFactor` で受ける。
+人手の `∏_{ν∈𝓜̌}` と `∏_{ν=1}^{M_col}` を行き来する行（`def_product_over_check_index_set`）は Lean では同じ項なので `rfl` の段である。
+`Π'` は `δ = ε` の因子で作る（`ν ≠ μ` では `R_ν^{(ε'(ν))} = R_ν^{(ε(ν))}`）。 -/
 
 /-- **原文 (2) Step 2**: `ψ̌_μ^†Π' = Π'ψ̌_μ^†`。`matrix_commuting_with_each_factor_commutes_with_finite_product`
-（`X → ψ̌_μ^†`、`A_j → A_{s(j)}`。`s(j) ≠ μ` なので仮定は上の `ψ̌_μ^†A_ν = A_νψ̌_μ^†`（`ν → s(j)`））。 -/
+（`X → ψ̌_μ^†`、`A_j → R_{s(j)}^{(ε(s(j)))}`。`s(j) ≠ μ` なので仮定は上の `ψ̌_μ^†R_ν^{(ε(ν))} = R_ν^{(ε(ν))}ψ̌_μ^†`（`ν → s(j)`））。 -/
 theorem cre_mul_omittingDefFactor {r : ℕ} (F : CheckFermi (r + 2)) (T : Finset (Fin (r + 2))) (μ : Fin (r + 2)) :
     F.cre μ * NecSuf.finProdLeftOmitting r μ (F.defFactor T)
       = NecSuf.finProdLeftOmitting r μ (F.defFactor T) * F.cre μ :=
   commute_finProdLeft_tensorPow r (F.cre μ) (fun j => F.defFactor T (μ.succAbove j))
     (fun j => F.cre_mul_defFactor_of_ne T (Fin.succAbove_ne μ j))
 
-/-- **原文 (2) Step 2** の `A_μ^ε q = q` の 5 行の鎖（`ε_μ = 0`、すなわち `μ ∉ T`。`ň_μ q = 0` は Step 1 の鎖）。 -/
+/-- **原文 (2) Step 2** の `R_μ^{(ε(μ))} q = q` の 5 行の鎖（`ε(μ) = 0`、すなわち `μ ∉ T`。`ň_μ q = 0` は Step 1 の鎖）。 -/
 theorem defFactor_mulVec_generator_of_notMem {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T)
     {q : Conf M → ℂ} (hn : F.nOp μ *ᵥ q = 0) : F.defFactor T μ *ᵥ q = q :=
   calc F.defFactor T μ *ᵥ q
       = (1 - F.nOp μ) *ᵥ q := by rw [F.defFactor_of_notMem hμ]
-                                                        -- 上の `A_μ^ε = I − ň_μ`
+                                                        -- 上の `R_μ^{(ε(μ))} = I − ň_μ`
     _ = (1 : TensorPow M) *ᵥ q - F.nOp μ *ᵥ q := (sub_mulVec_tensorPow _ _ _).symm
                                                         -- `matrix_difference_mul_vector`
     _ = q - F.nOp μ *ᵥ q := by rw [identity_matrix_mulVec_tensorPow]
@@ -583,30 +551,32 @@ theorem defFactor_mulVec_generator_of_notMem {T : Finset (Fin M)} {μ : Fin M} (
     _ = q - 0 := by rw [hn]                             -- Step 1 の `ň_μ q = 0`
     _ = q := sub_zero q                                 -- `matrix_minus_zero_matrix`
 
-/-- **原文 (2) Step 2** の `Π'q = q` の 5 行の鎖。 -/
+/-- **原文 (2) Step 2** の `Π'q = q` の 6 行の鎖。 -/
 theorem omittingDefFactor_mulVec_generator {r : ℕ} (F : CheckFermi (r + 2)) {T : Finset (Fin (r + 2))}
     {μ : Fin (r + 2)} {q : Conf (r + 2) → ℂ} (hA : F.defFactor T μ *ᵥ q = q)
     (hqfix : F.Qproj T *ᵥ q = q) : NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ q = q :=
   calc NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ q
       = NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ (F.defFactor T μ *ᵥ q) := by rw [hA]
-                                                        -- 上の `A_μ^ε q = q`
+                                                        -- 上の `R_μ^{(ε(μ))} q = q`
     _ = (NecSuf.finProdLeftOmitting r μ (F.defFactor T) * F.defFactor T μ) *ᵥ q :=
         Matrix.mulVec_mulVec _ _ _                      -- `mat_mult_associative`
     _ = NecSuf.finProdLeft (r + 1) (F.defFactor T) *ᵥ q := by
         rw [finProdLeft_eq_omitting_mul_tensorPow r μ (F.defFactor T)
           (fun j _ => F.defFactor_mul_defFactor T μ j)]
                                                         -- `moving_one_factor_of_finite_product_to_the_end` と因子の可換性
+    _ = NecSuf.finProdLeft (r + 1) (F.defFactor T) *ᵥ q := rfl
+                                                        -- `def_product_over_check_index_set` を右辺から左辺へ（Lean では同じ項）
     _ = F.Qproj T *ᵥ q := by rw [Qproj_eq_finProdLeft_defFactor F T]
-                                                        -- `Q̌_ε` の定義
+                                                        -- `def_check_Q_epsilon` を右辺から左辺へ
     _ = q := hqfix                                      -- `Q̌_ε q = q`
 
-/-- 人手の「`ν ≠ μ` で `A_ν^{ε'} = A_ν`」を `Π'` の全ての因子へ同時に使ったもの: `∏_{ν≠μ}A_ν^{ε'} = Π'`。 -/
+/-- 人手の「`ν ≠ μ` で `R_ν^{(ε'(ν))} = R_ν^{(ε(ν))}`」を `Π'` の全ての因子へ同時に使ったもの: `∏_{ν≠μ}R_ν^{(ε'(ν))} = Π'`。 -/
 theorem omittingDefFactor_insert {r : ℕ} (F : CheckFermi (r + 2)) (T : Finset (Fin (r + 2))) (μ : Fin (r + 2)) :
     NecSuf.finProdLeftOmitting r μ (F.defFactor (insert μ T))
       = NecSuf.finProdLeftOmitting r μ (F.defFactor T) :=
   congrArg (NecSuf.finProdLeft r) (funext fun j => F.defFactor_insert_of_ne T (Fin.succAbove_ne μ j))
 
-/-- **原文 (2) Step 2** の `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q` の 10 行の鎖（`ε' := ε[μ→1]` は `insert μ T`）。 -/
+/-- **原文 (2) Step 2** の `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q` の 11 行の鎖（`ε' := ε[μ→1]` は `insert μ T`）。 -/
 theorem Qproj_insert_mulVec_cre_mulVec_generator {r : ℕ} (F : CheckFermi (r + 2)) {T : Finset (Fin (r + 2))}
     {μ : Fin (r + 2)} {q : Conf (r + 2) → ℂ}
     (hP : NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ q = q) :
@@ -614,15 +584,17 @@ theorem Qproj_insert_mulVec_cre_mulVec_generator {r : ℕ} (F : CheckFermi (r + 
   calc F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q)
       = NecSuf.finProdLeft (r + 1) (F.defFactor (insert μ T)) *ᵥ (F.cre μ *ᵥ q) := by
         rw [Qproj_eq_finProdLeft_defFactor F (insert μ T)]
-                                                        -- `Q̌_{ε'}` の定義
+                                                        -- `def_check_Q_epsilon`
+    _ = NecSuf.finProdLeft (r + 1) (F.defFactor (insert μ T)) *ᵥ (F.cre μ *ᵥ q) := rfl
+                                                        -- `def_product_over_check_index_set`（Lean では同じ項）
     _ = (NecSuf.finProdLeftOmitting r μ (F.defFactor T) * F.defFactor (insert μ T) μ) *ᵥ (F.cre μ *ᵥ q) := by
         rw [finProdLeft_eq_omitting_mul_tensorPow r μ (F.defFactor (insert μ T))
           (fun j _ => F.defFactor_mul_defFactor (insert μ T) μ j), F.omittingDefFactor_insert T μ]
                                                         -- `moving_one_factor_of_finite_product_to_the_end` と因子の可換性、
-                                                        -- `ν ≠ μ` で `A_ν^{ε'} = A_ν`
+                                                        -- `ν ≠ μ` で `R_ν^{(ε'(ν))} = R_ν^{(ε(ν))}`
     _ = (NecSuf.finProdLeftOmitting r μ (F.defFactor T) * F.nOp μ) *ᵥ (F.cre μ *ᵥ q) := by
         rw [F.defFactor_of_mem (Finset.mem_insert_self μ T)]
-                                                        -- 上の `A_μ^{ε'} = ň_μ`
+                                                        -- 上の `R_μ^{(ε'(μ))} = ň_μ`
     _ = NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ (F.nOp μ *ᵥ (F.cre μ *ᵥ q)) :=
         (Matrix.mulVec_mulVec _ _ _).symm               -- `mat_mult_associative`
     _ = NecSuf.finProdLeftOmitting r μ (F.defFactor T) *ᵥ ((F.nOp μ * F.cre μ) *ᵥ q) := by
@@ -707,7 +679,7 @@ theorem eta_insert_smul_cre_mulVec_generator_of_necSuf {T : Finset (Fin M)} {μ 
 /-- `M = 1` の `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`。**人手証明の範囲外**: 人手の (2) は `M_col ∈ ℤ_{≥2}` の下で述べ
 （`epsilon_anticommutes_with_check_Z_Y` の仮定）、Step 2 の `Π'`（`def_finite_product_of_matrices_omitting_one_index`）も
 `M_col ≥ 2` を要する。Lean の (2)・(3)・(4) は `M` を限らずに述べてきたので、`M = 1` だけを、`Π'` が因子を持たない場合の
-10 行の鎖の縮めた形（`Q̌_{ε'}` は因子 `A_μ^{ε'}` 1 つ、`A_μ^{ε'} = ň_μ`、`ň_μψ̌_μ^† = ψ̌_μ^†`）で埋める。 -/
+11 行の鎖の縮めた形（`Q̌_{ε'}` は因子 `R_μ^{(ε'(μ))}` 1 つ、`R_μ^{(ε'(μ))} = ň_μ`、`ň_μψ̌_μ^† = ψ̌_μ^†`）で埋める。 -/
 theorem Qproj_insert_mulVec_cre_mulVec_generator_one (F : CheckFermi 1) (T : Finset (Fin 1)) (μ : Fin 1)
     (q : Conf 1 → ℂ) : F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q) = F.cre μ *ᵥ q :=
   calc F.Qproj (insert μ T) *ᵥ (F.cre μ *ᵥ q)
@@ -717,7 +689,7 @@ theorem Qproj_insert_mulVec_cre_mulVec_generator_one (F : CheckFermi 1) (T : Fin
     _ = F.defFactor (insert μ T) μ *ᵥ (F.cre μ *ᵥ q) := by rw [Subsingleton.elim μ 0]; rfl
                                                         -- 因子 1 つの有限積（`Fin 1` の元は `μ` だけ）
     _ = F.nOp μ *ᵥ (F.cre μ *ᵥ q) := by rw [F.defFactor_of_mem (Finset.mem_insert_self μ T)]
-                                                        -- `A_μ^{ε'} = ň_μ`
+                                                        -- `R_μ^{(ε'(μ))} = ň_μ`
     _ = (F.nOp μ * F.cre μ) *ᵥ q := Matrix.mulVec_mulVec _ _ _
                                                         -- `mat_mult_associative`
     _ = F.cre μ *ᵥ q := by rw [F.nOp_mul_cre μ]          -- Step 2 冒頭の `ň_μψ̌_μ^† = ψ̌_μ^†`
@@ -748,7 +720,7 @@ theorem exists_ne_zero_mem_range_Qproj (T : Finset (Fin M)) :
   have := congrFun h i
   simpa [Matrix.mulVec_single_one] using this           -- 第 `i` 成分は `Q̌_ε` の `(i, j)` 成分
 
-/-- **原文 (2)**: `μ ∉ T`（`ε_μ = 0`）なら `η_{ε[μ→1]} = -η_ε`（`ε[μ→1]` は Lean の `insert μ T`）。
+/-- **原文 (2)**: `μ ∉ T`（`ε(μ) = 0`）なら `η_{ε[μ→1]} = -η_ε`（`ε[μ→1]` は Lean の `insert μ T`）。
 
 人手どおり `im Q̌_ε` の `0` でない元 `q` を 1 つ取り（`q = Q̌_ε x`。`exists_ne_zero_mem_range_Qproj`。1 次元性は使わない）、冪等性で `Q̌_ε q = q`、冒頭の 5 行で `εq = η_ε q`、Step 1 で `ψ̌_μ^† q ≠ 0`、Step 2 で
 `Q̌_{ε'}(ψ̌_μ^† q) = ψ̌_μ^† q`、Step 3 の前半と後半で `η_{ε'}(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)` を出し、
@@ -800,18 +772,18 @@ theorem eta_eq_neg_eta_insert {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T)
   calc F.eta T = -(-F.eta T) := (neg_neg _).symm        -- 符号反転を二回すると元に戻る
     _ = -F.eta (insert μ T) := by rw [F.eta_insert hμ]  -- (2)
 
-/-- **原文 (3) の `k := M_col − |ε| ∈ {0,1,…,M_col}` についての帰納法**。人手の `ε` は Lean の `T`（`ε_μ = 1` の `μ` の集合）、
+/-- **原文 (3) の `k := M_col − |ε| ∈ {0,1,…,M_col}` についての帰納法**。人手の `ε` は Lean の `T`（`ε(μ) = 1` の `μ` の集合）、
 `ε[μ→1]` は `insert μ T`、`(1,…,1)` は `Finset.univ`、`|ε|` は `T.card` である。`|ε| ≤ M_col` なので、
 人手の整数の差 `M_col − |ε|` と Lean の自然数の差 `M - T.card` は一致する。
 
-`k = 0`: 全ての `μ` で `ε_μ = 1`、すなわち `ε = (1,…,1)` で、`η_ε = η_{(1,…,1)} = η_{(1,…,1)}(−1)^0`（人手の 1 行を、乗法の単位元・`z^0 = 1`・`0 = M_col − |ε|` を補った 4 行にした）。
-`k ≥ 1`: `ε_μ = 0` の `μ` を取り、`ε' := ε[μ→1]`（`|ε'| = |ε| + 1`）について人手の 7 行の鎖。 -/
+`k = 0`: 全ての `μ` で `ε(μ) = 1`、すなわち `ε = (1,…,1)` で、`η_ε = η_{(1,…,1)} = η_{(1,…,1)}(−1)^0`（人手の 1 行を、乗法の単位元・`z^0 = 1`・`0 = M_col − |ε|` を補った 4 行にした）。
+`k ≥ 1`: `ε(μ) = 0` の `μ` を取り、`ε' := ε[μ→1]`（`|ε'| = |ε| + 1`）について人手の 7 行の鎖。 -/
 theorem eta_eq_eta_univ_mul_of_sub_card (k : ℕ) :
     ∀ T : Finset (Fin M), M - T.card = k → F.eta T = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by
   induction k with
   | zero =>
       intro T hk
-      -- `k = 0` なら全ての `μ` で `ε_μ = 1`、すなわち `ε = (1,…,1)`
+      -- `k = 0` なら全ての `μ` で `ε(μ) = 1`、すなわち `ε = (1,…,1)`
       have hT : T = Finset.univ := by
         apply Finset.eq_univ_of_card
         have hle : T.card ≤ M := by simpa using Finset.card_le_univ T
@@ -825,7 +797,7 @@ theorem eta_eq_eta_univ_mul_of_sub_card (k : ℕ) :
                                                           -- `0 = M_col − |ε|`
   | succ k ih =>
       intro T hk
-      -- `k ≥ 1` より `ε_μ = 0` なる `μ` が取れる
+      -- `k ≥ 1` より `ε(μ) = 0` なる `μ` が取れる
       obtain ⟨μ, hμ⟩ : ∃ μ, μ ∉ T := by
         by_contra hall
         have hT : T = Finset.univ :=
@@ -871,13 +843,67 @@ theorem eta_eq_eta_univ_mul_of_necSuf (T : Finset (Fin M)) :
 
 /-! ## 原文 (4): `ε` はパリティ演算子 -/
 
+/-- 人手の語 `ε ∈ {0,1}^𝓜̌`（`ε(j+1)` は Lean の `ε j`）に、`ε(μ) = 1` となる `μ` の集合を対応させる（Lean の `Qproj` の添字）。
+`ClaimCheckJointEigenspace.lean` の `finsetOfBinWord`（添字 `CheckIdx M`）の `Fin M` 版である。
+人手の `|ε|`（`def_number_of_ones_of_binary_assignment`）は `(finsetOfWord ε).card` で、
+人手の `|ε|_k`（`def_number_of_ones_of_binary_assignment_among_first_indices`）は先頭の `k` 成分の語の `finsetOfWord` の元の個数である。 -/
+def finsetOfWord (ε : Fin M → Fin 2) : Finset (Fin M) :=
+  Finset.univ.filter fun j => ε j = 1
+
+theorem finsetOfWord_bijective : Function.Bijective (finsetOfWord (M := M)) := by
+  constructor
+  · intro ε ε' h
+    funext j
+    have hj : ε j = 1 ↔ ε' j = 1 := by
+      have := congrArg (fun S : Finset (Fin M) => j ∈ S) h
+      simpa [finsetOfWord] using this
+    generalize ε j = a at hj
+    generalize ε' j = b at hj
+    fin_cases a <;> fin_cases b <;> simp_all
+  · intro T
+    refine ⟨fun j => if j ∈ T then 1 else 0, ?_⟩
+    ext j
+    by_cases hj : j ∈ T <;> simp [finsetOfWord, hj]
+
+/-- 部分集合 `T`（`ε(μ) = 1 ⟺ μ ∈ T`）の値 `epsVal T` の語に戻すと `T` に戻る。人手の `|ε|_{M_col} = |ε|` を Lean の
+`(finsetOfWord (epsVal T)).card = T.card` で読むための等式で、人手の行は無い。 -/
+theorem finsetOfWord_epsVal (T : Finset (Fin M)) : finsetOfWord (fun μ => epsVal T μ) = T := by
+  ext μ
+  by_cases h : μ ∈ T <;> simp [finsetOfWord, epsVal, h]
+
+end CheckFermi
+
+/-- 数え上げの項 `[e = 1]` は `e ∈ {0,1}` の値に等しい。 -/
+theorem ite_eq_one_eq_val (e : Fin 2) : (if e = 1 then 1 else 0) = e.val := by
+  rcases binaryWord_fin_two_eq_one_or_zero e with rfl | rfl <;> rfl
+
+/-- 数え上げ（`def_number_of_ones_of_binary_assignment_among_first_indices`）: `|ε|_1` は `ε(1)` の値（`ε(1) = 1` なら `1`、
+`ε(1) = 0` なら `0`）。 -/
+theorem card_finsetOfWord_one (ε : Fin 1 → Fin 2) : (CheckFermi.finsetOfWord ε).card = (ε 0).val := by
+  unfold CheckFermi.finsetOfWord
+  rw [Finset.card_filter, Fin.sum_univ_one, ite_eq_one_eq_val]
+
+/-- 数え上げ: `|ε|_{k+1}` は `ε(k+1) = 1` なら `|ε|_k + 1`、`ε(k+1) = 0` なら `|ε|_k`（Lean では値 `ε(k+1) ∈ {0,1}` を足す 1 つの式）。 -/
+theorem card_finsetOfWord_castSucc {n : ℕ} (ε : Fin (n + 1) → Fin 2) :
+    (CheckFermi.finsetOfWord ε).card
+      = (CheckFermi.finsetOfWord (fun μ : Fin n => ε (Fin.castSucc μ))).card + (ε (Fin.last n)).val := by
+  unfold CheckFermi.finsetOfWord
+  rw [Finset.card_filter, Finset.card_filter, Fin.sum_univ_castSucc, ite_eq_one_eq_val]
+
+/-- 数え上げ: `0 ≤ |ε|_k ≤ k`。 -/
+theorem card_finsetOfWord_le {n : ℕ} (ε : Fin n → Fin 2) : (CheckFermi.finsetOfWord ε).card ≤ n :=
+  (Finset.card_filter_le _ _).trans (by rw [Finset.card_univ, Fintype.card_fin])
+
+namespace CheckFermi
+
+variable (F : CheckFermi M)
+
 /-- 原文 (4) の因子 `I − 2ň_μ`（`2ň_μ` は `ň_μ` のスカラー倍）。 -/
 noncomputable def parityFactor (μ : Fin M) : TensorPow M := 1 - (2 : ℂ) • F.nOp μ
 
-/-- **原文 (4) の前半の 10 行の鎖**: `(I − 2ň_μ)Q̌_ε = (1 − 2ε_μ)Q̌_ε`。人手の `ε_μ ∈ {0,1}` は Lean の
-`if μ ∈ T then 1 else 0`（`check_joint_eigenspace_decomposition` (3) の `ň_μQ̌_ε = ε_μQ̌_ε` の Lean の形）である。 -/
+/-- **原文 (4) の前半の共通の 6 行の鎖**: `(I − 2ň_μ)Q̌_ε = Q̌_ε − 2(ň_μQ̌_ε)`。 -/
 theorem parityFactor_mul_Qproj (μ : Fin M) (T : Finset (Fin M)) :
-    F.parityFactor μ * F.Qproj T = ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) • F.Qproj T :=
+    F.parityFactor μ * F.Qproj T = F.Qproj T - (2 : ℂ) • (F.nOp μ * F.Qproj T) :=
   calc F.parityFactor μ * F.Qproj T
       = (1 + -((2 : ℂ) • F.nOp μ)) * F.Qproj T := by
         rw [parityFactor, sub_eq_add_neg_tensorPow]     -- `matrix_difference_is_sum_with_negation`
@@ -891,61 +917,139 @@ theorem parityFactor_mul_Qproj (μ : Fin M) (T : Finset (Fin M)) :
         rw [identity_matrix_mul_tensorPow]              -- `identity_matrix_is_left_unit_of_mat_mult`
     _ = F.Qproj T - (2 : ℂ) • (F.nOp μ * F.Qproj T) := by
         rw [smul_mul_matrix_tensorPow]                  -- `scalar_multiple_factors_out_of_left_factor`
-    _ = F.Qproj T - (2 : ℂ) • ((if μ ∈ T then (1 : ℂ) else 0) • F.Qproj T) := by
-        rw [F.nOp_mul_Qproj μ T]                        -- `check_joint_eigenspace_decomposition` (3)
-    _ = (1 : ℂ) • F.Qproj T - (2 : ℂ) • ((if μ ∈ T then (1 : ℂ) else 0) • F.Qproj T) := by
-        rw [one_smul_tensorPow]                         -- `scalar_multiple_by_one`
-    _ = (1 : ℂ) • F.Qproj T - ((2 : ℂ) * (if μ ∈ T then (1 : ℂ) else 0)) • F.Qproj T := by
-        rw [smul_smul]                                  -- `scalar_multiple_is_associative`（具体版が無く mathlib の `smul_smul`）
-    _ = ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) • F.Qproj T := smul_sub_smul_tensorPow _ _ _
+
+/-- **原文 (4) の前半の `ε(μ) = 1`（Lean の `μ ∈ T`）の場合の 4 行の鎖**: 共通の 6 行に続けて `(I − 2ň_μ)Q̌_ε = (−1)Q̌_ε`。 -/
+theorem parityFactor_mul_Qproj_of_mem {μ : Fin M} {T : Finset (Fin M)} (hμ : μ ∈ T) :
+    F.parityFactor μ * F.Qproj T = (-1 : ℂ) • F.Qproj T :=
+  calc F.parityFactor μ * F.Qproj T
+      = F.Qproj T - (2 : ℂ) • (F.nOp μ * F.Qproj T) := F.parityFactor_mul_Qproj μ T
+                                                        -- 上の共通の 6 行
+    _ = F.Qproj T - (2 : ℂ) • F.Qproj T := by rw [F.nOp_mul_Qproj_of_mem hμ]
+                                                        -- `check_joint_eigenspace_decomposition` (3) の `ε(ν) = 1` の場合（`ν → μ`）
+    _ = (1 : ℂ) • F.Qproj T - (2 : ℂ) • F.Qproj T := by rw [one_smul_tensorPow]
+                                                        -- `scalar_multiple_by_one`
+    _ = ((1 : ℂ) - 2) • F.Qproj T := smul_sub_smul_tensorPow _ _ _
                                                         -- `difference_of_scalar_multiples_of_one_matrix`
+    _ = (-1 : ℂ) • F.Qproj T := by norm_num            -- `ℂ` の四則 `1 − 2 = −1`
 
-/-- **原文 (4) の `P_kQ̌_ε = p_kQ̌_ε` の `k` についての帰納法**。人手の `P_k := ∏_{μ=1}^{k}(I − 2ň_μ)`
-（`def_finite_product_of_matrices`。左から掛ける）は Lean の `NecSuf.finProdLeft r A`、`p_k := ∏_{μ=1}^{k}(1 − 2ε_μ)`
-（`def_finite_product_of_complex_numbers`）は `∏ j, a j` で、人手の `k` が Lean の `r + 1` である。
-人手が「上の式（`μ → k+1`）」として引く 10 行の鎖を、仮定 `h`（各因子 `A_j` について `A_jQ̌_ε = a_jQ̌_ε`）として受ける。
+/-- **原文 (4) の前半の `ε(μ) = 0`（Lean の `μ ∉ T`）の場合の 3 行の鎖**: 共通の 6 行に続けて `(I − 2ň_μ)Q̌_ε = Q̌_ε`。 -/
+theorem parityFactor_mul_Qproj_of_notMem {μ : Fin M} {T : Finset (Fin M)} (hμ : μ ∉ T) :
+    F.parityFactor μ * F.Qproj T = F.Qproj T :=
+  calc F.parityFactor μ * F.Qproj T
+      = F.Qproj T - (2 : ℂ) • (F.nOp μ * F.Qproj T) := F.parityFactor_mul_Qproj μ T
+                                                        -- 上の共通の 6 行
+    _ = F.Qproj T - (2 : ℂ) • (0 : TensorPow M) := by rw [F.nOp_mul_Qproj_of_notMem hμ]
+                                                        -- `check_joint_eigenspace_decomposition` (3) の `ε(ν) = 0` の場合（`ν → μ`）
+    _ = F.Qproj T - 0 := by rw [smul_zero]              -- `scalar_multiple_of_zero_matrix`（具体版が無く mathlib の `smul_zero`）
+    _ = F.Qproj T := matrix_sub_zero_matrix_tensorPow _ -- `matrix_minus_zero_matrix`
 
-`k = 1`: 人手の「上の式（`μ → 1`）」を、有限積の定義の 2 行で挟んだ 3 行にした。`k → k+1`: 人手の 8 行と同じ行の calc。 -/
+/-- **原文 (4) の `P_kQ̌_ε = (−1)^{|ε|_k}Q̌_ε` の `k` についての帰納法**。人手の `P_k := ∏_{μ=1}^{k}(I − 2ň_μ)`
+（`def_finite_product_of_matrices`。左から掛ける）は Lean の `NecSuf.finProdLeft r A`、人手の `k` が Lean の `r + 1`、
+`|ε|_k`（`def_number_of_ones_of_binary_assignment_among_first_indices`）は先頭の `k` 成分の語 `e` の `(finsetOfWord e).card` である。
+人手が「上の `ε(μ) = 1`・`ε(μ) = 0` の場合の鎖（`μ → 1`・`μ → k+1`）」として引く鎖を、仮定 `h1`・`h0` として受ける。
+
+`k = 1`: `ε(1) = 1` の 6 行と `ε(1) = 0` の 5 行。`k → k+1`: `ε(k+1) = 1` の 9 行と `ε(k+1) = 0` の 5 行。どれも人手と同じ行の calc。 -/
 theorem finProdLeft_mul_Qproj (T : Finset (Fin M)) :
-    ∀ (r : ℕ) (A : Fin (r + 1) → TensorPow M) (a : Fin (r + 1) → ℂ),
-      (∀ j, A j * F.Qproj T = a j • F.Qproj T) →
-      NecSuf.finProdLeft r A * F.Qproj T = (∏ j, a j) • F.Qproj T
-  | 0, A, a, h =>
-    calc NecSuf.finProdLeft 0 A * F.Qproj T
-        = A 0 * F.Qproj T := rfl                        -- `def_finite_product_of_matrices`
-      _ = a 0 • F.Qproj T := h 0                        -- 上の式（`μ → 1`）
-      _ = (∏ j, a j) • F.Qproj T := by rw [Fin.prod_univ_one]
-                                                        -- `def_finite_product_of_complex_numbers`
-  | r + 1, A, a, h =>
-    calc NecSuf.finProdLeft (r + 1) A * F.Qproj T
-        = (NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1))) * F.Qproj T := rfl
+    ∀ (r : ℕ) (A : Fin (r + 1) → TensorPow M) (e : Fin (r + 1) → Fin 2),
+      (∀ j, e j = 1 → A j * F.Qproj T = (-1 : ℂ) • F.Qproj T) →
+      (∀ j, e j = 0 → A j * F.Qproj T = F.Qproj T) →
+      NecSuf.finProdLeft r A * F.Qproj T = (-1 : ℂ) ^ (finsetOfWord e).card • F.Qproj T
+  | 0, A, e, h1, h0 => by
+    rcases binaryWord_fin_two_eq_one_or_zero (e 0) with he | he
+    · -- `ε(1) = 1` なら `|ε|_1 = 1`
+      have hc : (finsetOfWord e).card = 1 := by rw [card_finsetOfWord_one, he]; rfl
+      calc NecSuf.finProdLeft 0 A * F.Qproj T
+          = A 0 * F.Qproj T := rfl                      -- `def_finite_product_of_matrices`
+        _ = (-1 : ℂ) • F.Qproj T := h1 0 he             -- 上の `ε(μ) = 1` の場合の鎖（`μ → 1`）
+        _ = ((1 : ℂ) * (-1)) • F.Qproj T := by rw [one_mul]
+                                                        -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
+        _ = ((-1 : ℂ) ^ 0 * (-1)) • F.Qproj T := by rw [pow_zero]
+                                                        -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+        _ = (-1 : ℂ) ^ 1 • F.Qproj T := by rw [← pow_succ]
+                                                        -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
+        _ = (-1 : ℂ) ^ (finsetOfWord e).card • F.Qproj T := by rw [hc]
+                                                        -- `|ε|_1 = 1`
+    · -- `ε(1) = 0` なら `|ε|_1 = 0`
+      have hc : (finsetOfWord e).card = 0 := by rw [card_finsetOfWord_one, he]; rfl
+      calc NecSuf.finProdLeft 0 A * F.Qproj T
+          = A 0 * F.Qproj T := rfl                      -- `def_finite_product_of_matrices`
+        _ = F.Qproj T := h0 0 he                        -- 上の `ε(μ) = 0` の場合の鎖（`μ → 1`）
+        _ = (1 : ℂ) • F.Qproj T := (one_smul_tensorPow _).symm
+                                                        -- `scalar_multiple_by_one` を右辺から左辺へ
+        _ = (-1 : ℂ) ^ 0 • F.Qproj T := by rw [pow_zero]
+                                                        -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+        _ = (-1 : ℂ) ^ (finsetOfWord e).card • F.Qproj T := by rw [hc]
+                                                        -- `|ε|_1 = 0`
+  | r + 1, A, e, h1, h0 => by
+    have ih := finProdLeft_mul_Qproj T r (fun j => A (Fin.castSucc j)) (fun j => e (Fin.castSucc j))
+      (fun j hj => h1 (Fin.castSucc j) hj) (fun j hj => h0 (Fin.castSucc j) hj)
+                                                        -- 帰納法の仮定（先頭の `k` 成分の語に当てる）
+    have hcount := card_finsetOfWord_castSucc e         -- `|ε|_{k+1}` の数え上げ
+    rcases binaryWord_fin_two_eq_one_or_zero (e (Fin.last (r + 1))) with he | he
+    · -- `ε(k+1) = 1` なら `|ε|_{k+1} = |ε|_k + 1`
+      have hk : (finsetOfWord e).card
+          = (finsetOfWord (fun j : Fin (r + 1) => e (Fin.castSucc j))).card + 1 := by
+        rw [hcount, he]; rfl
+      calc NecSuf.finProdLeft (r + 1) A * F.Qproj T
+          = (NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1))) * F.Qproj T := rfl
                                                         -- `def_finite_product_of_matrices`
-      _ = NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * (A (Fin.last (r + 1)) * F.Qproj T) :=
-          Matrix.mul_assoc _ _ _                        -- `mat_mult_associative`（具体版が無く mathlib の `Matrix.mul_assoc`）
-      _ = NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * (a (Fin.last (r + 1)) • F.Qproj T) := by
-          rw [h (Fin.last (r + 1))]                     -- 上の式（`μ → k+1`）
-      _ = a (Fin.last (r + 1)) • (NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * F.Qproj T) :=
-          mul_smul_matrix_tensorPow _ _ _               -- `scalar_multiple_factors_out_of_right_factor`
-      _ = a (Fin.last (r + 1)) • ((∏ j, a (Fin.castSucc j)) • F.Qproj T) := by
-          rw [finProdLeft_mul_Qproj T r _ _ (fun j => h (Fin.castSucc j))]
+        _ = NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * (A (Fin.last (r + 1)) * F.Qproj T) :=
+            Matrix.mul_assoc _ _ _                      -- `mat_mult_associative`（具体版が無く mathlib の `Matrix.mul_assoc`）
+        _ = NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * ((-1 : ℂ) • F.Qproj T) := by
+            rw [h1 _ he]                                -- 上の `ε(μ) = 1` の場合の鎖（`μ → k+1`）
+        _ = (-1 : ℂ) • (NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * F.Qproj T) :=
+            mul_smul_matrix_tensorPow _ _ _             -- `scalar_multiple_factors_out_of_right_factor`
+        _ = (-1 : ℂ) • ((-1 : ℂ) ^ (finsetOfWord (fun j : Fin (r + 1) => e (Fin.castSucc j))).card
+              • F.Qproj T) := by rw [ih]                -- 帰納法の仮定
+        _ = ((-1 : ℂ) * (-1 : ℂ) ^ (finsetOfWord (fun j : Fin (r + 1) => e (Fin.castSucc j))).card)
+              • F.Qproj T := smul_smul _ _ _            -- `scalar_multiple_is_associative`（具体版が無く mathlib の `smul_smul`）
+        _ = ((-1 : ℂ) ^ (finsetOfWord (fun j : Fin (r + 1) => e (Fin.castSucc j))).card * (-1 : ℂ))
+              • F.Qproj T := by rw [mul_comm (-1 : ℂ)]  -- `complex_numbers_form_a_field` の積の可換律
+        _ = (-1 : ℂ) ^ ((finsetOfWord (fun j : Fin (r + 1) => e (Fin.castSucc j))).card + 1)
+              • F.Qproj T := by rw [← pow_succ]         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`
+                                                        -- （`m → |ε|_k`）を右辺から左辺へ
+        _ = (-1 : ℂ) ^ (finsetOfWord e).card • F.Qproj T := by rw [hk]
+                                                        -- `|ε|_{k+1} = |ε|_k + 1`
+    · -- `ε(k+1) = 0` なら `|ε|_{k+1} = |ε|_k`
+      have hk : (finsetOfWord e).card
+          = (finsetOfWord (fun j : Fin (r + 1) => e (Fin.castSucc j))).card := by
+        rw [hcount, he]; rfl
+      calc NecSuf.finProdLeft (r + 1) A * F.Qproj T
+          = (NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * A (Fin.last (r + 1))) * F.Qproj T := rfl
+                                                        -- `def_finite_product_of_matrices`
+        _ = NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * (A (Fin.last (r + 1)) * F.Qproj T) :=
+            Matrix.mul_assoc _ _ _                      -- `mat_mult_associative`（具体版が無く mathlib の `Matrix.mul_assoc`）
+        _ = NecSuf.finProdLeft r (fun j => A (Fin.castSucc j)) * F.Qproj T := by
+            rw [h0 _ he]                                -- 上の `ε(μ) = 0` の場合の鎖（`μ → k+1`）
+        _ = (-1 : ℂ) ^ (finsetOfWord (fun j : Fin (r + 1) => e (Fin.castSucc j))).card • F.Qproj T := ih
                                                         -- 帰納法の仮定
-      _ = (a (Fin.last (r + 1)) * ∏ j, a (Fin.castSucc j)) • F.Qproj T := smul_smul _ _ _
-                                                        -- `scalar_multiple_is_associative`（具体版が無く mathlib の `smul_smul`）
-      _ = ((∏ j, a (Fin.castSucc j)) * a (Fin.last (r + 1))) • F.Qproj T := by
-          rw [mul_comm (a (Fin.last (r + 1)))]          -- `complex_numbers_form_a_field` の積の可換律
-      _ = (∏ j, a j) • F.Qproj T := by rw [Fin.prod_univ_castSucc a]
-                                                        -- `def_finite_product_of_complex_numbers`
+        _ = (-1 : ℂ) ^ (finsetOfWord e).card • F.Qproj T := by rw [hk]
+                                                        -- `|ε|_{k+1} = |ε|_k`
 
-/-- `parityFactor_mul_Qproj` を必要十分版 `NecSuf.one_sub_smul_mul_eq_smul'` の特殊化として。 -/
+/-- `parityFactor_mul_Qproj` を必要十分版 `NecSuf.one_sub_smul_mul_eq_sub_smul_mul'` の特殊化として。 -/
 theorem parityFactor_mul_Qproj_of_necSuf (μ : Fin M) (T : Finset (Fin M)) :
-    F.parityFactor μ * F.Qproj T = ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) • F.Qproj T :=
-  NecSuf.one_sub_smul_mul_eq_smul' (2 : ℂ) _ (F.nOp μ) (F.Qproj T) (F.nOp_mul_Qproj μ T)
+    F.parityFactor μ * F.Qproj T = F.Qproj T - (2 : ℂ) • (F.nOp μ * F.Qproj T) :=
+  NecSuf.one_sub_smul_mul_eq_sub_smul_mul' (2 : ℂ) (F.nOp μ) (F.Qproj T)
 
-/-- `finProdLeft_mul_Qproj` を必要十分版 `NecSuf.finProdLeft_mul_eq_prod_smul'` の特殊化として。 -/
+/-- `parityFactor_mul_Qproj_of_mem` を必要十分版 `NecSuf.sub_smul_mul_eq_smul_of_mul_eq'` の特殊化として。 -/
+theorem parityFactor_mul_Qproj_of_mem_of_necSuf {μ : Fin M} {T : Finset (Fin M)} (hμ : μ ∈ T) :
+    F.parityFactor μ * F.Qproj T = (-1 : ℂ) • F.Qproj T := by
+  rw [F.parityFactor_mul_Qproj_of_necSuf μ T]
+  exact NecSuf.sub_smul_mul_eq_smul_of_mul_eq' (2 : ℂ) (-1 : ℂ) (by norm_num) (F.nOp_mul_Qproj_of_mem hμ)
+
+/-- `parityFactor_mul_Qproj_of_notMem` を必要十分版 `NecSuf.sub_smul_mul_eq_self_of_mul_eq_zero'` の特殊化として。 -/
+theorem parityFactor_mul_Qproj_of_notMem_of_necSuf {μ : Fin M} {T : Finset (Fin M)} (hμ : μ ∉ T) :
+    F.parityFactor μ * F.Qproj T = F.Qproj T := by
+  rw [F.parityFactor_mul_Qproj_of_necSuf μ T]
+  exact NecSuf.sub_smul_mul_eq_self_of_mul_eq_zero' (2 : ℂ) (F.nOp_mul_Qproj_of_notMem hμ)
+
+/-- `finProdLeft_mul_Qproj` を必要十分版 `NecSuf.finProdLeft_mul_eq_pow_smul'` の特殊化として
+（Lean の `(finsetOfWord e).card` と必要十分版の `NecSuf.wordCount' e` は同じ数で、定義から一致する）。 -/
 theorem finProdLeft_mul_Qproj_of_necSuf (T : Finset (Fin M)) (r : ℕ) (A : Fin (r + 1) → TensorPow M)
-    (a : Fin (r + 1) → ℂ) (h : ∀ j, A j * F.Qproj T = a j • F.Qproj T) :
-    NecSuf.finProdLeft r A * F.Qproj T = (∏ j, a j) • F.Qproj T :=
-  NecSuf.finProdLeft_mul_eq_prod_smul' (F.Qproj T) r A a h
+    (e : Fin (r + 1) → Fin 2) (h1 : ∀ j, e j = 1 → A j * F.Qproj T = (-1 : ℂ) • F.Qproj T)
+    (h0 : ∀ j, e j = 0 → A j * F.Qproj T = F.Qproj T) :
+    NecSuf.finProdLeft r A * F.Qproj T = (-1 : ℂ) ^ (finsetOfWord e).card • F.Qproj T :=
+  NecSuf.finProdLeft_mul_eq_pow_smul' (F.Qproj T) (-1 : ℂ) r A e h1 h0
 
 /-- 原文 (4) の `P := P_{M_col} = ∏_{μ=1}^{M_col}(I − 2ň_μ)`（`def_finite_product_of_matrices`。左から掛ける）。
 人手の `M_col ≥ 1` が Lean の `r + 1` である。人手の範囲外の `M = 0` では因子が無いので単位行列と置く。 -/
@@ -954,30 +1058,8 @@ noncomputable def parityProd : TensorPow M :=
   | 0, _ => 1
   | r + 1, F => NecSuf.finProdLeft r F.parityFactor
 
-/-- 原文 (4) の「`1 − 2ε_μ` は `ε_μ = 1` なら `−1`、`ε_μ = 0` なら `+1` なので、`p_{M_col}` は `−1` を `|ε|` 個、
-`+1` を残りの個数だけ掛けたものであり `p_{M_col} = (−1)^{|ε|}`」。 -/
-theorem prod_one_sub_two_mul_indicator (T : Finset (Fin M)) :
-    ∏ μ, ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) = (-1 : ℂ) ^ T.card := by
-  -- `ε_μ = 1` なら `1 − 2ε_μ = −1`、`ε_μ = 0` なら `1 − 2ε_μ = +1`
-  have hfac : ∀ μ, ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0)) = if μ ∈ T then -1 else 1 := by
-    intro μ
-    by_cases hμ : μ ∈ T
-    · rw [if_pos hμ, if_pos hμ]; norm_num
-    · rw [if_neg hμ, if_neg hμ]; norm_num
-  have hfilter : (Finset.univ.filter fun μ : Fin M => μ ∈ T) = T := by
-    ext μ; simp
-  calc ∏ μ, ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0))
-      = ∏ μ, (if μ ∈ T then (-1 : ℂ) else 1) := Finset.prod_congr rfl fun μ _ => hfac μ
-                                                        -- 各因子は `ε_μ = 1` なら `−1`、`ε_μ = 0` なら `+1`
-    _ = (∏ μ ∈ Finset.univ.filter (fun μ : Fin M => μ ∈ T), (-1 : ℂ))
-          * ∏ μ ∈ Finset.univ.filter (fun μ : Fin M => μ ∉ T), (1 : ℂ) := Finset.prod_ite _ _
-                                                        -- `−1` の因子と `+1` の因子に分ける
-    _ = (∏ μ ∈ T, (-1 : ℂ)) * 1 := by rw [hfilter, Finset.prod_const_one]
-                                                        -- `ε_μ = 1` の `μ` の集合は `T`、`+1` の積は `1`
-    _ = (-1 : ℂ) ^ T.card := by rw [Finset.prod_const, mul_one]
-                                                        -- `−1` を `|ε|` 個掛けたもの
-
-/-- 原文 (4) の `PQ̌_ε = p_{M_col}Q̌_ε = (−1)^{|ε|}Q̌_ε`（`P_kQ̌_ε = p_kQ̌_ε` の `k = M_col` と `p_{M_col} = (−1)^{|ε|}`）。
+/-- 原文 (4) の `P_{M_col}Q̌_ε = (−1)^{|ε|_{M_col}}Q̌_ε = (−1)^{|ε|}Q̌_ε`（帰納法の `k = M_col` と `|ε|_{M_col} = |ε|`）。
+人手の `ε` は Lean の `T`、語 `ε` は `epsVal T`、`|ε|` は `T.card` である。
 人手の範囲外の `M = 0` では `ε` は空の語で `|ε| = 0`、`P = I` である。 -/
 theorem parityProd_mul_Qproj (T : Finset (Fin M)) :
     F.parityProd * F.Qproj T = (-1 : ℂ) ^ T.card • F.Qproj T := by
@@ -995,11 +1077,15 @@ theorem parityProd_mul_Qproj (T : Finset (Fin M)) :
     calc F.parityProd * F.Qproj T
         = NecSuf.finProdLeft r F.parityFactor * F.Qproj T := rfl
                                                         -- `P := P_{M_col}`
-      _ = (∏ μ, ((1 : ℂ) - 2 * (if μ ∈ T then (1 : ℂ) else 0))) • F.Qproj T :=
-          F.finProdLeft_mul_Qproj T r _ _ fun μ => F.parityFactor_mul_Qproj μ T
-                                                        -- `P_kQ̌_ε = p_kQ̌_ε`（`k = M_col`。因子 `A := I − 2ň_μ`、係数 `a := 1 − 2ε_μ`）
-      _ = (-1 : ℂ) ^ T.card • F.Qproj T := by rw [prod_one_sub_two_mul_indicator]
-                                                        -- `p_{M_col} = (−1)^{|ε|}`
+      _ = (-1 : ℂ) ^ (finsetOfWord (fun μ => epsVal T μ)).card • F.Qproj T :=
+          F.finProdLeft_mul_Qproj T r _ _
+            (fun μ hμ => F.parityFactor_mul_Qproj_of_mem
+              (by by_contra h; rw [epsVal_of_notMem h] at hμ; exact absurd hμ (by decide)))
+            (fun μ hμ => F.parityFactor_mul_Qproj_of_notMem
+              (by intro h; rw [epsVal_of_mem h] at hμ; exact absurd hμ (by decide)))
+                                                        -- `P_kQ̌_ε = (−1)^{|ε|_k}Q̌_ε`（`k = M_col`。因子 `A := I − 2ň_μ`、語 `e := ε`）
+      _ = (-1 : ℂ) ^ T.card • F.Qproj T := by rw [finsetOfWord_epsVal]
+                                                        -- `|ε|_{M_col} = |ε|`
 
 /-! 人手の (4) の後半: `εQ̌_ε = c(PQ̌_ε)` の 7 行の鎖（`c := η_{(1,…,1)}(−1)^{M_col}`）と、`ε = εI = … = cP` の 9 行の鎖。 -/
 
@@ -1032,27 +1118,7 @@ theorem epsilon_mul_Qproj_eq_smul_parityProd_mul (T : Finset (Fin M)) :
     _ = (F.eta Finset.univ * (-1 : ℂ) ^ M) • ((-1 : ℂ) ^ T.card • F.Qproj T) := (smul_smul _ _ _).symm
                                                         -- `c` の置き方と `scalar_multiple_is_associative`（具体版が無く mathlib の `smul_smul`）
     _ = (F.eta Finset.univ * (-1 : ℂ) ^ M) • (F.parityProd * F.Qproj T) := by
-        rw [F.parityProd_mul_Qproj T]                   -- 上の `PQ̌_ε = p_{M_col}Q̌_ε = (−1)^{|ε|}Q̌_ε`
-
-/-- 人手の語 `ε ∈ {0,1}^𝓜̌`（`ε_{j+1} = ε j`）に、`ε_μ = 1` となる `μ` の集合を対応させる（Lean の `Qproj` の添字）。
-`ClaimCheckJointEigenspace.lean` の `finsetOfBinWord`（添字 `CheckIdx M`）の `Fin M` 版である。 -/
-def finsetOfWord (ε : Fin M → Fin 2) : Finset (Fin M) :=
-  Finset.univ.filter fun j => ε j = 1
-
-theorem finsetOfWord_bijective : Function.Bijective (finsetOfWord (M := M)) := by
-  constructor
-  · intro ε ε' h
-    funext j
-    have hj : ε j = 1 ↔ ε' j = 1 := by
-      have := congrArg (fun S : Finset (Fin M) => j ∈ S) h
-      simpa [finsetOfWord] using this
-    generalize ε j = a at hj
-    generalize ε' j = b at hj
-    fin_cases a <;> fin_cases b <;> simp_all
-  · intro T
-    refine ⟨fun j => if j ∈ T then 1 else 0, ?_⟩
-    ext j
-    by_cases hj : j ∈ T <;> simp [finsetOfWord, hj]
+        rw [F.parityProd_mul_Qproj T]                   -- 上の `PQ̌_ε = P_{M_col}Q̌_ε = (−1)^{|ε|}Q̌_ε`
 
 /-- Lean の `sum_Qproj` の和（部分集合の上の `Finset.sum`）は、人手の和 `Σ_{ε∈{0,1}^𝓜̌}`（`def_sum_over_binary_words`、
 Lean の `NecSuf.binWordSum`）に等しい。人手の証明の行ではなく、Lean の二つの和をつなぐ等式である

@@ -114,7 +114,7 @@ theorem commute_nOp_nOp (i j : Fin M) : Commute (F.nOp i) (F.nOp j) := by
 
 /-! ## 同時固有射影 `Q̌_ε`（原文 `check_joint_eigenspace_decomposition`） -/
 
-/-- **原文の `Q̌_ε`**（`ε_μ = 1 ⟺ μ ∈ T` で添字づける）。 -/
+/-- **原文の `Q̌_ε`**（`def_check_Q_epsilon`。`ε(μ) = 1 ⟺ μ ∈ T` で添字づける）。 -/
 noncomputable def Qproj (T : Finset (Fin M)) : TensorPow M :=
   NecSuf.projOn F.nOp F.commute_nOp_nOp Finset.univ T
 
@@ -139,6 +139,17 @@ theorem nOp_mul_Qproj (ν : Fin M) (T : Finset (Fin M)) :
     F.nOp_mul_self (T := T) (Finset.mem_univ ν)
   rw [Qproj, h]
   by_cases hT : ν ∈ T <;> simp [hT]
+
+/-- **原文 `check_joint_eigenspace_decomposition` (3) の `ε(ν) = 1` の場合**: `ň_νQ̌_ε = Q̌_ε`（`ε(ν) = 1` は Lean の `ν ∈ T`）。
+上の `nOp_mul_Qproj`（係数を `if` で書いた形。章 017 側の `ClaimVPlusDataFromEigenvaluesOfVPlus.lean` が引く）から出す。 -/
+theorem nOp_mul_Qproj_of_mem {ν : Fin M} {T : Finset (Fin M)} (hν : ν ∈ T) :
+    F.nOp ν * F.Qproj T = F.Qproj T := by
+  rw [F.nOp_mul_Qproj ν T, if_pos hν, one_smul]
+
+/-- **原文 `check_joint_eigenspace_decomposition` (3) の `ε(ν) = 0` の場合**: `ň_νQ̌_ε = O`（`ε(ν) = 0` は Lean の `ν ∉ T`）。 -/
+theorem nOp_mul_Qproj_of_notMem {ν : Fin M} {T : Finset (Fin M)} (hν : ν ∉ T) :
+    F.nOp ν * F.Qproj T = 0 := by
+  rw [F.nOp_mul_Qproj ν T, if_neg hν, zero_smul]
 
 /-- **原文 `check_joint_eigenspace_decomposition` (4)**: `tr(Q̌_ε) = 1`。
 
@@ -193,11 +204,23 @@ theorem commute_epsilon_nOp (i : Fin M) : Commute (epsilon M) (F.nOp i) := by
 theorem commute_epsilon_nOp_of_necSuf (i : Fin M) : Commute (epsilon M) (F.nOp i) :=
   NecSuf.commute_parity_num F.cre F.ann (F.epsilon_anticomm_cre i) (F.epsilon_anticomm_ann i)
 
-/-- 人手の `Q̌_ε` の定義の因子 `A_ν := ε_ν ň_ν + (1 − ε_ν)(I − ň_ν)`（`check_joint_eigenspace_decomposition`）。
-Lean の `Qproj` は `ε ∈ {0,1}^𝓜̌` を `ε_ν = 1 ⟺ ν ∈ T` の部分集合 `T` で添字づけるので、人手のスカラー `ε_ν` は
-`if ν ∈ T then (1 : ℂ) else 0` である。 -/
-noncomputable def defFactor (T : Finset (Fin M)) (ν : Fin M) : TensorPow M :=
-  (if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν + (1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)
+/-- 人手の `ε ∈ {0,1}^𝓜̌`（`def_binary_assignments_on_check_index_set`）の値 `ε(ν) ∈ {0,1}`（Lean の `Fin 2`）。
+Lean の `Qproj` は `ε` を `ε(ν) = 1 ⟺ ν ∈ T` の部分集合 `T` で添字づけるので、`ε(ν)` は `T` の所属で決まる。 -/
+def epsVal (T : Finset (Fin M)) (ν : Fin M) : Fin 2 := if ν ∈ T then 1 else 0
+
+theorem epsVal_of_mem {T : Finset (Fin M)} {ν : Fin M} (h : ν ∈ T) : epsVal T ν = 1 := if_pos h
+
+theorem epsVal_of_notMem {T : Finset (Fin M)} {ν : Fin M} (h : ν ∉ T) : epsVal T ν = 0 := if_neg h
+
+/-- **原文 `def_check_R_factor`**: `R_ν^{(1)} := ň_ν`、`R_ν^{(0)} := I − ň_ν`（`e ∈ {0,1}` は Lean の `Fin 2`）。 -/
+noncomputable def rFactor (ν : Fin M) (e : Fin 2) : TensorPow M := if e = 1 then F.nOp ν else 1 - F.nOp ν
+
+theorem rFactor_one (ν : Fin M) : F.rFactor ν 1 = F.nOp ν := if_pos rfl
+
+theorem rFactor_zero (ν : Fin M) : F.rFactor ν 0 = 1 - F.nOp ν := if_neg (by decide)
+
+/-- 人手の `Q̌_ε` の定義（`def_check_Q_epsilon`）の因子 `R_ν^{(ε(ν))}`。 -/
+noncomputable def defFactor (T : Finset (Fin M)) (ν : Fin M) : TensorPow M := F.rFactor ν (epsVal T ν)
 
 /-- **原文 (4)** の `εI = Iε` の 2 行。 -/
 theorem epsilon_mul_identity_eq_identity_mul_epsilon (M : ℕ) : epsilon M * 1 = 1 * epsilon M :=
@@ -206,50 +229,51 @@ theorem epsilon_mul_identity_eq_identity_mul_epsilon (M : ℕ) : epsilon M * 1 =
     _ = 1 * epsilon M := (identity_matrix_mul_tensorPow _).symm
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`
 
-/-- **原文 (4)** の `εA_ν = A_νε`。前半の 3 式（`have` の `h1`・`h2`・`h3`）と、`A_ν` の 5 行の鎖である。 -/
+/-- **原文 (4)** の `εR_ν^{(ε(ν))} = R_ν^{(ε(ν))}ε`。前置きの 1 式 `ε(I − ň_ν) = (I − ň_ν)ε`（`have` の `h1`）と、
+`ε(ν) = 1`（Lean の `ν ∈ T`）の場合の 5 行・`ε(ν) = 0`（`ν ∉ T`）の場合の 5 行の鎖である。 -/
 theorem commute_epsilon_defFactor (T : Finset (Fin M)) (ν : Fin M) :
     epsilon M * F.defFactor T ν = F.defFactor T ν * epsilon M := by
   have hn : epsilon M * F.nOp ν = F.nOp ν * epsilon M := F.commute_epsilon_nOp ν
                                                         -- 上の `εň_ν = ň_νε`（`μ → ν`）
   have h1 : epsilon M * (1 - F.nOp ν) = (1 - F.nOp ν) * epsilon M :=
     mul_sub_eq_sub_mul_of_commute_tensorPow _ _ _ (epsilon_mul_identity_eq_identity_mul_epsilon M) hn
-                                                        -- 3 式の 1 行目: `commuting_with_difference`
+                                                        -- `commuting_with_difference`
                                                         -- （`G → ε`、`X → I`、`W → ň_ν`。仮定は `εI = Iε` と `εň_ν = ň_νε`）
-  have h2 : epsilon M * ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν)
-      = ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν) * epsilon M :=
-    mul_smul_comm_of_commute_tensorPow _ _ _ hn
-                                                        -- 3 式の 2 行目: `commuting_with_scalar_multiple`
-                                                        -- （`G → ε`、`c → ε_ν`、`X → ň_ν`。仮定は `εň_ν = ň_νε`）
-  have h3 : epsilon M * ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν))
-      = ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) * epsilon M :=
-    mul_smul_comm_of_commute_tensorPow _ _ _ h1
-                                                        -- 3 式の 3 行目: `commuting_with_scalar_multiple`
-                                                        -- （`G → ε`、`c → 1 − ε_ν`、`X → I − ň_ν`。仮定は 1 行目）
-  calc epsilon M * F.defFactor T ν
-      = epsilon M * ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν
-          + (1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) := rfl
-                                                        -- `A_ν` の置き方
-    _ = epsilon M * ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν)
-          + epsilon M * ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) :=
-        mul_add_matrix_tensorPow _ _ _                  -- `mat_mult_distributes_over_sum_in_right_factor`
-    _ = ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν) * epsilon M
-          + ((1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) * epsilon M := by
-        rw [h2, h3]                                     -- 上の 3 式の 2 行目と 3 行目を 2 項へ同時適用
-    _ = ((if ν ∈ T then (1 : ℂ) else 0) • F.nOp ν
-          + (1 - (if ν ∈ T then (1 : ℂ) else 0)) • (1 - F.nOp ν)) * epsilon M :=
-        (add_mul_matrix_tensorPow _ _ _).symm           -- `mat_mult_distributes_over_sum_in_left_factor`
-    _ = F.defFactor T ν * epsilon M := rfl              -- `A_ν` の置き方
+  by_cases hν : ν ∈ T
+  · calc epsilon M * F.defFactor T ν
+        = epsilon M * F.rFactor ν 1 := by rw [defFactor, epsVal_of_mem hν]
+                                                        -- `ε(ν) = 1`
+      _ = epsilon M * F.nOp ν := by rw [rFactor_one]    -- `def_check_R_factor` の `R_ν^{(1)} := ň_ν`
+      _ = F.nOp ν * epsilon M := hn                     -- 上の `εň_μ = ň_με`（`μ → ν`）
+      _ = F.rFactor ν 1 * epsilon M := by rw [rFactor_one]
+                                                        -- `def_check_R_factor` を右辺から左辺へ
+      _ = F.defFactor T ν * epsilon M := by rw [defFactor, epsVal_of_mem hν]
+                                                        -- `ε(ν) = 1`
+  · calc epsilon M * F.defFactor T ν
+        = epsilon M * F.rFactor ν 0 := by rw [defFactor, epsVal_of_notMem hν]
+                                                        -- `ε(ν) = 0`
+      _ = epsilon M * (1 - F.nOp ν) := by rw [rFactor_zero]
+                                                        -- `def_check_R_factor` の `R_ν^{(0)} := I − ň_ν`
+      _ = (1 - F.nOp ν) * epsilon M := h1               -- 上の `ε(I − ň_ν) = (I − ň_ν)ε`
+      _ = F.rFactor ν 0 * epsilon M := by rw [rFactor_zero]
+                                                        -- `def_check_R_factor` を右辺から左辺へ
+      _ = F.defFactor T ν * epsilon M := by rw [defFactor, epsVal_of_notMem hν]
+                                                        -- `ε(ν) = 0`
 
-/-- Lean の `Qproj` の因子 `NecSuf.projFactor`（`ν ∈ T` なら `ň_ν`、そうでなければ `I − ň_ν`）は、人手の定義の因子 `A_ν` に等しい。
-人手の証明の行ではなく、Lean の `Qproj` の定義と人手の `Q̌_ε` の定義をつなぐ等式である。 -/
+/-- Lean の `Qproj` の因子 `NecSuf.projFactor`（`ν ∈ T` なら `ň_ν`、そうでなければ `I − ň_ν`）は、人手の定義の因子
+`R_ν^{(ε(ν))}` に等しい。人手の証明の行ではなく、Lean の `Qproj` の定義と人手の `Q̌_ε` の定義をつなぐ等式である。 -/
 theorem projFactor_eq_defFactor (T : Finset (Fin M)) (ν : Fin M) :
     NecSuf.projFactor F.nOp T ν = F.defFactor T ν := by
-  by_cases h : ν ∈ T <;> simp [NecSuf.projFactor, defFactor, h]
+  by_cases h : ν ∈ T
+  · rw [NecSuf.projFactor, if_pos h, defFactor, epsVal_of_mem h, rFactor_one]
+  · rw [NecSuf.projFactor, if_neg h, defFactor, epsVal_of_notMem h, rFactor_zero]
 
-/-- Lean の `Qproj`（`Finset.noncommProd`）は、人手の定義 `Q̌_ε = ∏_{ν=1}^{M_col} A_ν`（`def_finite_product_of_matrices` の
-左から掛ける積。人手の `M_col` が Lean の `r + 1`、人手の `ν` が Lean の `ν : Fin (r + 1)` の `ν + 1`）に等しい。
+/-- Lean の `Qproj`（`Finset.noncommProd`）は、人手の定義 `Q̌_ε = ∏_{ν∈𝓜̌} R_ν^{(ε(ν))}`（`def_check_Q_epsilon`。
+`def_product_over_check_index_set` により `def_finite_product_of_matrices` の左から掛ける積 `∏_{ν=1}^{M_col}`。
+人手の `M_col` が Lean の `r + 1`、人手の `ν` が Lean の `ν : Fin (r + 1)` の `ν + 1`）に等しい。
 人手の証明の行ではなく、Lean の定義と人手の定義をつなぐ等式である
-（必要十分版 `NecSuf.finProdLeft_eq_noncommProd_image` を恒等写像で使い、因子を `projFactor_eq_defFactor` で付け替える）。 -/
+（必要十分版 `NecSuf.finProdLeft_eq_noncommProd_image` を恒等写像で使い、因子を `projFactor_eq_defFactor` で付け替える）。
+人手の `∏_{ν∈𝓜̌}` と `∏_{ν=1}^{M_col}` は Lean では同じ項 `NecSuf.finProdLeft r _` で、両者を行き来する人手の行は Lean の `rfl` の段である。 -/
 theorem Qproj_eq_finProdLeft_defFactor {r : ℕ} (F : CheckFermi (r + 1)) (T : Finset (Fin (r + 1))) :
     F.Qproj T = NecSuf.finProdLeft r (fun ν => F.defFactor T ν) := by
   have h := NecSuf.finProdLeft_eq_noncommProd_image (NecSuf.projFactor F.nOp T)
@@ -262,19 +286,23 @@ theorem Qproj_eq_finProdLeft_defFactor {r : ℕ} (F : CheckFermi (r + 1)) (T : F
     _ = NecSuf.finProdLeft r (fun ν => F.defFactor T ν) :=
         congrArg (NecSuf.finProdLeft r) (funext fun ν => F.projFactor_eq_defFactor T ν)
 
-/-- **原文 (4) 後半**の `Q̌_ε` の 3 行の鎖（人手の `M_col` が Lean の `r + 1`）。 -/
+/-- **原文 (4) 後半**の `Q̌_ε` の 5 行の鎖（人手の `M_col` が Lean の `r + 1`）。 -/
 theorem commute_epsilon_Qproj_succ {r : ℕ} (F : CheckFermi (r + 1)) (T : Finset (Fin (r + 1))) :
     epsilon (r + 1) * F.Qproj T = F.Qproj T * epsilon (r + 1) :=
   calc epsilon (r + 1) * F.Qproj T
       = epsilon (r + 1) * NecSuf.finProdLeft r (fun ν => F.defFactor T ν) := by
-        rw [Qproj_eq_finProdLeft_defFactor F T]         -- `check_joint_eigenspace_decomposition` の `Q̌_ε` の定義と `A_ν` の置き方
+        rw [Qproj_eq_finProdLeft_defFactor F T]         -- `def_check_Q_epsilon`
+    _ = epsilon (r + 1) * NecSuf.finProdLeft r (fun ν => F.defFactor T ν) := rfl
+                                                        -- `def_product_over_check_index_set`（Lean では同じ項）
     _ = NecSuf.finProdLeft r (fun ν => F.defFactor T ν) * epsilon (r + 1) :=
         commute_finProdLeft_tensorPow r _ _ fun ν => F.commute_epsilon_defFactor T ν
                                                         -- `matrix_commuting_with_each_factor_commutes_with_finite_product`
-                                                        -- （`n → 2^{M_col}`、`r → M_col`、`X → ε`、`A_j → A_ν`。
+                                                        -- （`n → 2^{M_col}`、`r → M_col`、`X → ε`、`A_j → R_j^{(ε(j))}`。
                                                         -- Lean の `r` は人手の `M_col − 1`）
+    _ = NecSuf.finProdLeft r (fun ν => F.defFactor T ν) * epsilon (r + 1) := rfl
+                                                        -- `def_product_over_check_index_set` を右辺から左辺へ（Lean では同じ項）
     _ = F.Qproj T * epsilon (r + 1) := by
-        rw [Qproj_eq_finProdLeft_defFactor F T]         -- `check_joint_eigenspace_decomposition` の `Q̌_ε` の定義と `A_ν` の置き方
+        rw [Qproj_eq_finProdLeft_defFactor F T]         -- `def_check_Q_epsilon` を右辺から左辺へ
 
 /-- 原文 (4) 後半が必要十分版 `NecSuf.commute_parity_projOn` の特殊化として得られること（`M` を限らない）。 -/
 theorem commute_epsilon_Qproj_of_necSuf (T : Finset (Fin M)) : Commute (epsilon M) (F.Qproj T) :=
@@ -286,8 +314,8 @@ theorem commute_epsilon_Qproj_of_necSuf (T : Finset (Fin M)) : Commute (epsilon 
 theorem commute_epsilon_Qproj_succ_of_necSuf {r : ℕ} (F : CheckFermi (r + 1)) (T : Finset (Fin (r + 1))) :
     epsilon (r + 1) * F.Qproj T = F.Qproj T * epsilon (r + 1) := by
   rw [Qproj_eq_finProdLeft_defFactor F T]
-  exact NecSuf.commute_parity_finProdLeft_defFactor (𝕜 := ℂ) (fun x y => sub_eq_add_neg x y) r F.cre F.ann
-    F.epsilon_anticomm_cre F.epsilon_anticomm_ann _ _
+  exact NecSuf.commute_parity_finProdLeft_defFactor (fun x y => sub_eq_add_neg x y) r F.cre F.ann
+    F.epsilon_anticomm_cre F.epsilon_anticomm_ann (fun ν => epsVal T ν = 1)
 
 /-- **原文 (4) 後半**: `ε Q̌_ε = Q̌_ε ε`。人手の主張は `M_col ≥ 2` で、それは `M = r + 1` の場合
 `commute_epsilon_Qproj_succ`（人手の鎖）である。`M = 0` は人手の主張の外で、必要十分版の特殊化

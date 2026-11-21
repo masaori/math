@@ -1,12 +1,13 @@
 # 対象ラベル: epsilon_eigenvalue_on_check_Q の検算の共通の準備。
 # 本文の ψ̌（def_check_fermi の第二の式どおりの行列）を、結合定数 K_1 := 2 log y、K_2 := log x、(x, y) ∈ COUPLINGS、M_col = 2, 3 で作り、
 # 全ての μ を一つの数体 E_1 に移す（../epsilon_anticommutes_with_check_Z_Y/check_part3_part4_with_check_psi.sage と同じ移し方）。
-# ň_μ := ψ̌_μ^†ψ̌_{σ(μ)}（def_check_number_operator）、Q̌_ϵ := Π_μ (ϵ_μň_μ + (1-ϵ_μ)(I-ň_μ))（check_joint_eigenspace_decomposition）。
+# ň_μ := ψ̌_μ^†ψ̌_{σ(μ)}（def_check_number_operator）、Q̌_ε := Π_{μ∈M̌} R_μ^{(ε(μ))}（def_check_Q_epsilon。R_μ^{(1)} := ň_μ、R_μ^{(0)} := I - ň_μ は
+# def_check_R_factor）。ε ∈ {0,1}^{M̌}（def_binary_assignments_on_check_index_set）は値の組 w = (ε(1), …, ε(M_col)) で持ち、値に算術はしない。
 # 行列の演算は本文の定め方（body_product・body_scalar・body_sum・body_difference・body_negation・body_identity・body_finite_sum）で
 # 行の括弧どおりに組む。Sage の `*`・`+`・`-` は比べる相手を独立に作るときと、主張の確認にだけ使う。ベクトルは 2^M 行 1 列の行列で持つ。
 # 等号は全て数体 E_1 の中で厳密に判定する。
 load("../def_check_number_operator/_prelude.sage")
-load("../epsilon_anticommutes_with_check_Z_Y/_prelude.sage")   # Report・factor_A・body_finite_product・Q_check_by_definition
+load("../epsilon_anticommutes_with_check_Z_Y/_prelude.sage")   # Report・factor_R・body_finite_product・Q_check_by_definition
 
 P_ = lambda A, B: body_product(A, B)
 S_ = lambda a, A: body_scalar(a, A)
@@ -15,7 +16,7 @@ N_ = lambda A: body_negation(A)
 
 
 class EpsilonSetting:
-    """一つの (x, y, M_col) について、E_1 の成分の ε・σ_1^z・ψ̌_μ^†・ψ̌_{σ(μ)}・ψ̌_μ（対照）・ň_μ・Q̌_ϵ を持つ。"""
+    """一つの (x, y, M_col) について、E_1 の成分の ε・σ_1^z・ψ̌_μ^†・ψ̌_{σ(μ)}・ψ̌_μ（対照）・ň_μ・Q̌_ε を持つ。"""
 
     def __init__(self, x, y, M):
         self.tag = f"(x,y)=({x},{y}) M={M}"
@@ -42,21 +43,21 @@ class EpsilonSetting:
         self.Pself = [maps[m](st.psi_self[m]) for m in st.J]               # 対照用: 対を μ 自身に取り違えた ψ̌_μ
         self.ns = [body_product(self.Ds[k], self.Ps[k]) for k in range(M)]
         self.words = [tuple(w) for w in cartesian_product([[0, 1]] * M)]   # def_sum_over_binary_words の並び（辞書式）
-        self.Q = {w: body_finite_product([factor_A(w[k], self.ns[k], self.Id) for k in range(M)]) for w in self.words}
+        self.Q = {w: body_finite_product([factor_R(w[k], self.ns[k], self.Id) for k in range(M)]) for w in self.words}
 
     def basis(self, k):
         """I の第 k 列 e_k（0 始まり）を def_identity_matrix の δ から組む。"""
         return matrix(self.F, self.N, 1, lambda i, j: body_delta(self.F, i, k))
 
     def chosen_q(self, w):
-        """証明の (1) の q := Q̌_ϵ x。x は Q̌_ϵ e_k ≠ 0 となる最初の e_k。"""
+        """証明の (1) の q := Q̌_ε x。x は Q̌_ε e_k ≠ 0 となる最初の e_k。"""
         Q = self.Q[w]
         for k in range(self.N):
             x = self.basis(k)
             q = P_(Q, x)
             if q != 0:
                 return x, q
-        raise AssertionError("Q̌_ϵ = O")
+        raise AssertionError("Q̌_ε = O")
 
 
 def coefficient_on(v, q):
@@ -78,7 +79,13 @@ def eta_of(st, w):
 
 
 def popcount(w):
-    return sum(w)
+    """def_number_of_ones_of_binary_assignment の |ε| := #{μ ∈ M̌ | ε(μ) = 1}。"""
+    return len([e for e in w if e == 1])
+
+
+def count_first(w, k):
+    """def_number_of_ones_of_binary_assignment_among_first_indices の |ε|_k := #{μ ∈ {1,…,k} | ε(μ) = 1}。"""
+    return len([e for e in w[:k] if e == 1])
 
 
 def settings(Ms):

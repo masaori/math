@@ -1,12 +1,14 @@
-# 対象ラベル: trace_of_check_Vprime（Step 2 の指数法則の 2 行の鎖）
-#   exp(ǧ(ε)) = exp(Σ_{μ=1}^{M_col} γ(θ~_μ)(ε_μ − 1/2))       (eigenvalues_of_check_Vprime の ǧ の定義)
-#             = Π_{μ=1}^{M_col} exp(γ(θ~_μ)(ε_μ − 1/2))        (real_exp_of_finite_sum, m → M_col, x_μ → γ(θ~_μ)(ε_μ − 1/2))
+# 対象ラベル: trace_of_check_Vprime（Step 2 の指数法則の 3 行の鎖）
+#   exp(ǧ(ε)) = exp(Σ_{μ∈M̌} γ(θ~_μ)h(ε(μ)))                (eigenvalues_of_check_Vprime の ǧ の定義)
+#             = exp(Σ_{μ=1}^{M_col} γ(θ~_μ)h(ε(μ)))         (def_sum_over_check_index_set。作り方で自明: 同じ左からの和で組む)
+#             = Π_{μ=1}^{M_col} exp(γ(θ~_μ)h(ε(μ)))          (real_exp_of_finite_sum, m → M_col, x_μ → γ(θ~_μ)h(ε(μ)))
+# h は def_half_sign_of_binary_value の h(1) := ½、h(0) := −(½)。ε(μ) は算術に使わず h を通す。
 # 帰属: γ(θ~_μ)・ǧ(ε)・exp は ℝ の元で、値は ℝ への脱出（arccosh・exp・cos の値）なので、
 # 区間演算 RealBallField(200) の球で扱う。等号の行は球が共通部分を持つこと（overlaps）と、半径が 1e-40 未満であることで確かめる。
 # K_1, K_2 は有理数で与える。M_col = 2..6、K の 4 組、全ての ε ∈ {0,1}^{M_col}。
 # 有限和・有限積は def_finite_sum_of_real_numbers・def_finite_product_of_real_numbers どおり左から畳み込む。
-# 比べる側: 右辺の積は Step 1・Step 2 の 1 行目の検算の置き方 Π_μ a_μ^{2ε_μ − 1}（a_μ = exp(γ(θ~_μ)/2)）に一致する。
-# 否定コントロール: 2 行目の積を和 Σ_μ exp(γ(θ~_μ)(ε_μ − 1/2)) に壊すと 1 行目と交わらないことを確かめる。
+# 比べる側: 右辺の積は Step 1・Step 2 の 1 行目の検算の置き方 Π_μ a_μ^{±1}（ε(μ) = 1 なら a_μ、0 なら a_μ^{-1}。a_μ = exp(γ(θ~_μ)/2)）に一致する。
+# 否定コントロール: 3 行目の積を和 Σ_μ exp(γ(θ~_μ)h(ε(μ))) に壊すと 1 行目と交わらないことを確かめる。
 
 RB = RealBallField(200)
 pi_b = RB.pi()
@@ -55,18 +57,20 @@ for M in range(2, 7):
     for (K1, K2) in PARAMS:
         gam = [gamma_tilde_b(M, mu, K1, K2) for mu in range(1, M + 1)]
         for eps in cartesian_product([[0, 1]] * M):
-            terms = [gam[mu] * (RB(eps[mu]) - RB(1) / 2) for mu in range(M)]
-            gcheck = finite_sum(terms)                                  # 主張の ǧ の定義
+            h = lambda e: RB(1) / 2 if e == 1 else -(RB(1) / 2)          # def_half_sign_of_binary_value
+            terms = [gam[mu] * h(eps[mu]) for mu in range(M)]
+            gcheck = finite_sum(terms)                                  # 主張の ǧ の定義（Σ_{μ∈M̌}）
             lines = [
                 gcheck.exp(),
-                finite_sum(terms).exp(),
+                finite_sum(terms).exp(),                                # ǧ の定義（Σ_{μ∈M̌}）
+                finite_sum(terms).exp(),                                # Σ_{μ=1}^{M_col}（def_sum_over_check_index_set）
                 finite_prod([t.exp() for t in terms]),
             ]
             for a, b in zip(lines, lines[1:]):
                 assert same(a, b), (M, K1, K2, eps)
                 count += 1
-            # 比べる側: Π_μ a_μ^{2ε_μ − 1}、a_μ = exp(γ(θ~_μ)/2)
-            other = finite_prod([(gam[mu] / 2).exp() ** (2 * eps[mu] - 1) for mu in range(M)])
+            # 比べる側: Π_μ a_μ^{±1}、a_μ = exp(γ(θ~_μ)/2)
+            other = finite_prod([(gam[mu] / 2).exp() if eps[mu] == 1 else (gam[mu] / 2).exp() ** (-1) for mu in range(M)])
             assert same(lines[2], other)
             bad = finite_sum([t.exp() for t in terms])
             if not same(bad, lines[0]):

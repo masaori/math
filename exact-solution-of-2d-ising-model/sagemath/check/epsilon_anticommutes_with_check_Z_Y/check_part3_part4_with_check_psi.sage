@@ -4,11 +4,13 @@
 #   (3) 各 μ について、(Ψ, p, q) = (ψ̌_μ^†, -r/(2√M_col b), 1/(2√M_col)) と (ψ̌_μ, +r/(2√M_col b), 1/(2√M_col)) の鎖の 9 個の等号と主張。
 #       成分は数体 E_μ := F(r_μ)（r_μ := |γ_2(θ̃_μ)|）。
 #   (4) 全ての μ を一つの数体 E_1 に移し（../check_joint_eigenspace_decomposition/_number_operators.sage の _check_psi_settings と同じ移し方）、
-#       ň_μ の鎖の 3 個の等号とその仮定（(3) の 2 式）、εI = Iε の 2 個の等号、全ての ϵ ∈ {0,1}^{M̌} と ν について A_ν の鎖の前の 3 式と A_ν の鎖の 5 個の等号、
-#       Q̌_ϵ の鎖の 3 個の等号と主張。Q̌_ϵ は Sage の `*`・`+`・`-` で組んだものと、本文の定め方で組んだ Π_ν A_ν の一致も確かめる。
+#       ň_μ の鎖の 3 個の等号とその仮定（(3) の 2 式）、εI = Iε の 2 個の等号、全ての ν について ε(I - ň_ν) = (I - ň_ν)ε の 1 式と、
+#       εR_ν^{(ε(ν))} = R_ν^{(ε(ν))}ε の ε(ν) = 1・ε(ν) = 0 の両方の場合の 5 個ずつの等号（def_check_R_factor）、
+#       全ての ε ∈ {0,1}^{M̌} について Q̌_ε の鎖の 5 個の等号と主張。Q̌_ε は Sage の `*`・`-` で組んだものと、本文の定め方で組んだ
+#       Π_ν R_ν^{(ε(ν))}（def_check_Q_epsilon）の一致も確かめる。
 # 等号は全て数体の中で厳密に判定する（浮動小数点は使わない）。ℝ への脱出は K_1・K_2 の選び方と r_μ・(√M_col)_C を代数的数として持つことだけである。
 # 否定コントロール: ε の代わりに σ_1^z を入れると、ň_μ の鎖の仮定（(3) の 2 式）が外れ、σ_1^z ň_μ ≠ ň_μ σ_1^z となる μ がある。
-#   ň_μ・Q̌_ϵ が単位行列のスカラー倍でないこと（可換性が自明でないこと）も見る。
+#   ň_μ・Q̌_ε が単位行列のスカラー倍でないこと（可換性が自明でないこと）も見る。
 load("../def_check_number_operator/_prelude.sage")
 load("_prelude.sage")
 
@@ -61,18 +63,19 @@ for (x, y) in COUPLINGS:
             g_breaks = g_breaks or (G * ns[k] != ns[k] * G)
         rep.negative(g_breaks, f"{tag0}: σ_1^z ň_μ ≠ ň_μ σ_1^z となる μ がある")
         rep.chain(chain_part4_identity(E, Id), f"{tag0} εI = Iε")
+        for k in range(M):
+            nm3, Lh, Rh = part4_difference_equation(E, ns[k], Id)
+            rep.check(Lh == Rh, f"{tag0} ν={k+1}: {nm3}")
+            for e in (1, 0):
+                rep.chain(chain_part4_factor(E, e, ns[k], Id), f"{tag0} ν={k+1} ε(ν)={e} R_ν")
         for eps in cartesian_product([[0, 1]] * M):
             eps = tuple(eps)
-            tag = f"{tag0} ϵ={eps}"
-            for k in range(M):
-                for nm3, Lh, Rh in part4_three_equations(E, eps[k], ns[k], Id):
-                    rep.check(Lh == Rh, f"{tag} ν={k+1}: {nm3}")
-                rep.chain(chain_part4_factor(E, eps[k], ns[k], Id), f"{tag} ν={k+1} A_ν")
+            tag = f"{tag0} ε={eps}"
             Q = Q_check_by_definition(eps, ns, Id)
-            rep.check(Q == body_finite_product([factor_A(eps[k], ns[k], Id) for k in range(M)]), f"{tag}: Q̌_ϵ（Sage の経路）= Π_ν A_ν（本文の定め方）")
-            rep.negative(Q != Q[0, 0] * Id, f"{tag}: Q̌_ϵ は I のスカラー倍でない")
+            rep.check(Q == body_finite_product([factor_R(eps[k], ns[k], Id) for k in range(M)]), f"{tag}: Q̌_ε（Sage の経路）= Π_ν R_ν^{{(ε(ν))}}（本文の定め方）")
+            rep.negative(Q != Q[0, 0] * Id, f"{tag}: Q̌_ε は I のスカラー倍でない")
             rep.chain(chain_part4_Q(E, eps, ns, Id, Q), f"{tag} Q̌")
-            rep.check(E * Q == Q * E, f"{tag}: 主張 (4) εQ̌_ϵ = Q̌_ϵε（Sage の積）")
+            rep.check(E * Q == Q * E, f"{tag}: 主張 (4) εQ̌_ε = Q̌_εε（Sage の積）")
         print(f"  {tag0}: 済（累計 {rep.n} 件、否定 {rep.neg} 件、失敗 {rep.fail} 件）", flush=True)
 
 rep.finish()

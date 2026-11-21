@@ -121,7 +121,8 @@ noncomputable def checkGam (P : IsingParam) (M : ℕ) (j : Fin M) : ℝ :=
 theorem checkGam_pos (P : IsingParam) (hM : M ≠ 0) (j : Fin M) : 0 < checkGam P M j :=
   gammaFn_thetaTilde_pos P hM (checkIndex_checkIdx M j)
 
-/-- `ǧ(ε) = ∑_μ γ_μ(ε_μ - 1/2)`（章 017 の `CheckFermiSetup.gval` の `Fin M` 版）。 -/
+/-- `ǧ(ε) = Σ_{μ=1}^{M_col} γ(θ~_μ) h(ε(μ))` を、章 018 の `VPlusData` の形（`Fin M` で添字付け、`h(ε(μ))` を `χ_T(μ) - 1/2` と書く）で
+置いたもの（章 017 の `CheckFermiSetup.gval` と値は同じ。Lean の橋渡しで、人手の行ではない）。 -/
 noncomputable def checkGval (P : IsingParam) (M : ℕ) (T : Finset (Fin M)) : ℝ :=
   ∑ j : Fin M, checkGam P M j * ((if j ∈ T then (1 : ℝ) else 0) - 1 / 2)
 

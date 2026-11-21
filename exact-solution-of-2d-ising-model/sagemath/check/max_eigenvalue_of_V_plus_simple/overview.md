@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`
 - ブロック: `evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple`（Λ̌_max = Λ^{(1/2)}_{M_col} であり V^{(+)} の単純固有値）
-- 範囲: (1) の 4 行の鎖、(2) の ǧ(1,…,1) − ǧ(ε) の 10 行の鎖と、それに続く ǧ(ε) < ǧ(1,…,1) ⟹ exp の不等号の 2 行・(2s_2)^{M_col/2} ∈ ℝ_{>0}・Λ̌_ε の 8 行の鎖、
+- 範囲: (1) の 4 行の鎖、(2) の前置きの h の値の差の鎖と ǧ(1,…,1) − ǧ(ε) の 11 行の鎖と、それに続く ǧ(ε) < ǧ(1,…,1) ⟹ exp の不等号の 2 行・(2s_2)^{M_col/2} ∈ ℝ_{>0}・Λ̌_ε の 8 行の鎖、
   (3) の左から Q̌_{ε'} を掛ける 5 行、d の鎖 4 行、割り算の鎖 5 行、項を消す 4 行、逆向きの Q̌y = y の 8 行と V^{(+)}y = Λ̌_max y の 6 行の全てと、主張 (1)(2)(3) そのもの。
 
 ## 証明の行との対応
@@ -15,7 +15,7 @@
 |---|---|---|
 | (1) の 4 行 | `check_step1_lambda_half_chain.sage` | 角の行は θ̃_μ/π と θ^{(1/2)}_{M_col,μ}/π を QQ で、exp・arccosh・実数冪の行は RealField(200)（M_col = 2..8、結合定数 4 組と臨界点） |
 | 同上（厳密） | `check_claim_with_actual_V_plus.sage` | 角の行を QQ で、Λ̌_{(1,…,1)} = a·Π exp(γ_μ/2) = Λ^{(1/2)}_{M_col} を AA で。Λ^{(1/2)} は角 2π(μ − 1/2)/M_col から 1 の冪根と結合定数で直接作る（Λ̌ の側の γ_1(θ̃_μ) と独立なのは、cos を 1 の冪根から作ることと、c_2^*・s_2^* を t = tanh K_2 から作ることの二点。c_1・s_1 の式は同じ） |
-| (2) の ǧ の 10 行の鎖と Λ̌_ε の 8 行の鎖 | `check_step2_strict_inequality_chains.sage` | 等号の行は γ_μ を不定元に置いた QQ 上の多項式環で、不等号の行は γ_μ を正の有理数に置いて厳密に（M = 2..6、ε と μ_0 を全列挙）。物理の γ と Λ̌_ε の鎖は RealField(200) |
+| (2) の前置きの h の値の差の鎖（ε(μ) = 1: h(1) − h(1) = 0、ε(μ) = 0: h(1) − h(0) = ½ − h(0) = ½ − (−(½)) = 1）、ǧ の 11 行の鎖（ǧ の定義・定数写像の値・`def_sum_over_check_index_set`（作り方で自明）・`finite_sum_of_real_differences`・分配・a_μ := γ(θ̃_μ)(h(1) − h(ε(μ))) の置き方・各項以上・置き方・h(1) − h(0) = 1・単位元・正値）と Λ̌_ε の 8 行の鎖 | `check_step2_strict_inequality_chains.sage` | 等号の行は γ_μ を不定元に置いた QQ 上の多項式環で、不等号の行は γ_μ を正の有理数に置いて厳密に（M = 2..6、ε と μ_0 を全列挙）。物理の γ と Λ̌_ε の鎖は RealField(200) |
 | (2) の鎖の exp を取った値、ǧ(ε) < ǧ(1,…,1) からの 2 行、(2s_2)^{M_col/2} > 0、Λ̌_ε の鎖の両端 | `check_claim_with_actual_V_plus.sage` | 実際の γ_μ（exp(γ_μ) ∈ AA）で exp(ǧ(1,…,1) − ǧ(ε)) = Π exp(a_μ) ≥ exp(γ_{μ_0}) > 1 と a·exp(ǧ(ε)) < a·exp(ǧ(1,…,1)) = Λ̌_max を AA で |
 | (3) の左から Q̌_{ε'} を掛ける 5 行 | `check_step3_left_projection_chain.sage` | Jordan–Wigner の模型の Q̌_ε と有理数の Λ_ε で QQ で厳密に（M = 2, 3, 4）。否定コントロールは不定元の行列 |
 | (3) の後半の 5 本の鎖 | `check_step3_eigenspace_chains.sage` | 同じ模型で QQ で厳密に |
@@ -28,7 +28,7 @@ gamma_theta_tilde_mu_positive）は、`check_claim_with_actual_V_plus.sage` が�
 
 否定コントロール:
 - `check_step1_lambda_half_chain.sage`: Λ^{(0)}_M、前因子の冪を M にしたもの、和の 1/2 を落としたもの（105 件）。
-- `check_step2_strict_inequality_chains.sage`: γ_{μ_0} = 0 だと最後の狭義不等号が外れる。
+- `check_step2_strict_inequality_chains.sage`: γ_{μ_0} = 0 だと最後の狭義不等号が外れる。h(0) を +½ にすると h(1) − h(0) = 1 が外れる。
 - `check_step3_left_projection_chain.sage`: 不定元の行列では (1) と固有方程式を使う 2 行だけが外れる。
 - `check_step3_eigenspace_chains.sage`: 固有ベクトルでない x、im Q̌ に入らない y で決まった行だけが外れる（12 件）。
 - `check_claim_with_actual_V_plus.sage`: Λ^{(0)}_{M_col} ≠ Λ̌_max、固有ベクトルでない有理数の列 z で V^{(+)}z ≠ Λ̌_max z と左から Q̌_{(0,…,0)} を掛けた行が外れること、
@@ -70,7 +70,7 @@ gamma_theta_tilde_mu_positive）は、`check_claim_with_actual_V_plus.sage` が�
 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|
 | `check_step1_lambda_half_chain.sage` | (1) の 4 行 | **PASS** | 角の一致 35 項、隣どうしの行 140 段、否定コントロール 105 件 |
-| `check_step2_strict_inequality_chains.sage` | (2) の二つの鎖 | **PASS** | 等号 3200 段、不等号 1920 段、物理の結合定数で 476 通り |
+| `check_step2_strict_inequality_chains.sage` | (2) の二つの鎖 | **PASS** | 等号 3524 段（h の値の差の鎖 4 段を含む。2026-11-21 に定数写像の値と `def_sum_over_check_index_set` の行が足され、(1 − ½) − (ε_μ − ½) = 1 − ε_μ の行が消えて 3200 段から変わった）、不等号 1920 段、物理の結合定数で 476 通り |
 | `check_step3_left_projection_chain.sage` | (3) の左から掛ける 5 行 | **PASS** | 143 段、否定コントロール 2 行 |
 | `check_step3_eigenspace_chains.sage` | (3) の後半の 5 本の鎖 | **PASS** | 279 段、否定コントロール 12 件 |
 | `check_claim_with_actual_V_plus.sage` | 主張 (1)(2)(3) と (2)(3) の鎖を実際の V^{(+)} で | **PASS** | 等号 759 個、不等号 120 個、否定コントロール 30 件 |

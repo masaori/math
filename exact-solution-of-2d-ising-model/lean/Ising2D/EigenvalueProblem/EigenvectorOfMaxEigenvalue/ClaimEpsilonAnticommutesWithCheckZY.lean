@@ -21,7 +21,7 @@
 | (2) `ε Ž_μ = -Ž_μ ε`, `ε Y̌_μ = -Y̌_μ ε` | `Ising2D.epsilon_anticomm_checkZ` / `epsilon_anticomm_checkY` |
 | (3) の 9 行の鎖（`(Ψ, p, q)` を `def_check_fermi` の二つの組のどちらかとする） | `Ising2D.epsilon_anticomm_two_term` |
 | (3) `ε ψ̌_μ^† = -ψ̌_μ^† ε`, `ε ψ̌_μ = -ψ̌_μ ε` | `Ising2D.epsilon_anticomm_checkPsiDag` / `epsilon_anticomm_checkPsi`（`IsCheckMode` の元へは `epsilon_anticomm_of_isCheckMode`） |
-| (4) `ε ň_μ = ň_μ ε`, `ε Q̌_ε = Q̌_ε ε` | `Ising2D.CheckFermi.commute_epsilon_nOp`（3 行）/ `commute_epsilon_defFactor`（`εI = Iε`・3 式・`A_ν` の 5 行）/ `commute_epsilon_Qproj_succ`（`Q̌_ε` の 3 行）/ `commute_epsilon_Qproj`（`CheckFermiInput.lean`。人手の鎖と同じ行の calc） |
+| (4) `ε ň_μ = ň_μ ε`, `ε Q̌_ε = Q̌_ε ε` | `Ising2D.CheckFermi.commute_epsilon_nOp`（3 行）/ `commute_epsilon_defFactor`（`εI = Iε`・`ε(I − ň_ν) = (I − ň_ν)ε`・`εR_ν^{(ε(ν))} = R_ν^{(ε(ν))}ε` の `ε(ν) = 1`・`ε(ν) = 0` の 5 行ずつ。`R_ν^{(e)}` は `rFactor`、`ε(ν)` は `epsVal`）/ `commute_epsilon_Qproj_succ`（`Q̌_ε` の 5 行）/ `commute_epsilon_Qproj`（`CheckFermiInput.lean`。人手の鎖と同じ行の calc） |
 
 **(1)(2)(3) は無条件である**（章 004・010・013 の形式化済みの定理と、`ψ̌_μ^†`・`ψ̌_μ` の定義
 `checkPsiDag`・`checkPsi`（`DefinitionCheckFermi.lean`）だけを使う）。

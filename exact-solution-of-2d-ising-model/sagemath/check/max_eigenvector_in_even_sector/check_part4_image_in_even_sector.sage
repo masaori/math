@@ -6,7 +6,7 @@
 #   言い換え: {x | V^(+)x = Λ̌_max x} = im Q̌_{(1,…,1)}（max_eigenvalue_of_V_plus_simple (3) の当てはめ）を、Λ̌_max を V^(+)Q̌_{(1,…,1)} の比として持ち、
 #     その QQbar での像が V^(+) の固有多項式（QQ）の最大の根（AA）に等しいことを確かめたうえで、V^(+) − Λ̌_max I の核（E_1）と Q̌ の列空間の一致で確かめる。
 #   独立の確認（ψ̌ を使わない）: V^(+) の最大の根 λ（AA）について V^(+) − λI の核（QQbar）は 1 次元で、その基底 v は εv = v。
-# 否定コントロール: η_ϵ = −1 となる最初の ϵ の Q̌_ϵ の列 y では εy = −y ≠ y。im に入らない有理数の列 z では Q̌z ≠ z。2 番目に大きい根の固有ベクトルは F^(+) に入らないものがある。
+# 否定コントロール: η_ε = −1 となる最初の ε の Q̌_ε の列 y では εy = −y ≠ y。im に入らない有理数の列 z では Q̌z ≠ z。2 番目に大きい根の固有ベクトルは F^(+) に入らないものがある。
 load("_prelude.sage")
 
 Ms = [int(a) for a in sys.argv[1:]] or [2, 3]
@@ -32,9 +32,9 @@ for s in max_settings(Ms):
     z = xs[-1]
     rep.negative(P_(Q1, z) != z, f"{tag}: im に入らない列 z では Q̌z ≠ z")
     for w in s.words:
-        if s.eta[w] == mF:                                        # η_ϵ = −1 の ϵ（|ϵ| ≢ M_col mod 2）
+        if s.eta[w] == mF:                                        # η_ε = −1 の ε（|ε| ≢ M_col mod 2）
             col = next(P_(s.Q[w], s.basis(k)) for k in range(N) if P_(s.Q[w], s.basis(k)) != 0)
-            rep.negative(P_(E, col) != col, f"{tag} ϵ={w}: Q̌_ϵ の列は F^(+) に入らない（εy = η_ϵy、η_ϵ = {s.eta[w]}）")
+            rep.negative(P_(E, col) != col, f"{tag} ε={w}: Q̌_ε の列は F^(+) に入らない（εy = η_εy、η_ε = {s.eta[w]}）")
             break
     # 言い換え
     lm = s.lam[one_w]                                             # Λ̌_max = Λ̌_(1,…,1)（eigenvalues_of_V_plus (2) の置き方）

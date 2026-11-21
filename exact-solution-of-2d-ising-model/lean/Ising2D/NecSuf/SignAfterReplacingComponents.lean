@@ -6,7 +6,7 @@
 具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonEigenvalueOnCheckQ.lean` の
 `CheckFermi.eta_eq_neg_eta_insert`（帰納法の段の 1 行目の根拠）・`eta_eq_eta_univ_mul_of_sub_card`（`k := M_col − |ε|` の帰納法）・
 `eta_eq_eta_univ_mul` で、本ファイルの `eq_neg_of_insert`・`eq_univ_mul_neg_one_pow_of_sub_card`・`eq_univ_mul_neg_one_pow` が
-それぞれ同じ行の calc を持つ。人手の `ε ∈ {0,1}^{M_col}` は Lean の `T : Finset ι`（`ε_μ = 1` の `μ` の集合）、
+それぞれ同じ行の calc を持つ。人手の `ε ∈ {0,1}^{M_col}` は Lean の `T : Finset ι`（`ε(μ) = 1` の `μ` の集合）、
 `ε[μ→1]` は `insert μ T`、`(1,…,1)` は `univ`、`|ε|` は `T.card`、`M_col` は `Fintype.card ι` である。
 
 ## 何が効いているか / 効いていないか
@@ -19,7 +19,7 @@
   それは `(−1)x = −x = x(−1)`（`HasDistribNeg`）から出る。`R` の積の可換律は効いていない。
 - 加法（和・零・差）は効いていない。`η` の値が `±1` であることも、`η` が `ε Q̌_ε = η_ε Q̌_ε` の固有値であることも、
   添字の集合が `Fin M_col` であることも効いていない。添字の集合について効いているのは、有限であること
-  （`|ε| ≤ M_col` と、`M_col − |ε| = 0` なら `ε = (1,…,1)`、`M_col − |ε| ≥ 1` なら `ε_μ = 0` の `μ` が取れること）と、
+  （`|ε| ≤ M_col` と、`M_col − |ε| = 0` なら `ε = (1,…,1)`、`M_col − |ε| ≥ 1` なら `ε(μ) = 0` の `μ` が取れること）と、
   等号が決定できること（`DecidableEq ι`。`ε[μ→1]` にあたる `insert μ T` を作るのに要る。外すと主張の型が書けない）だけである。
 -/
 import Mathlib.Algebra.Ring.Defs
@@ -51,7 +51,7 @@ theorem eq_univ_mul_neg_one_pow_of_sub_card
   induction k with
   | zero =>
       intro T hk
-      -- `k = 0` なら全ての `μ` で `ε_μ = 1`、すなわち `ε = (1,…,1)`
+      -- `k = 0` なら全ての `μ` で `ε(μ) = 1`、すなわち `ε = (1,…,1)`
       have hT : T = Finset.univ := by
         apply Finset.eq_univ_of_card
         have hle : T.card ≤ Fintype.card ι := Finset.card_le_univ T
@@ -62,7 +62,7 @@ theorem eq_univ_mul_neg_one_pow_of_sub_card
         _ = η Finset.univ * (-1 : R) ^ (Fintype.card ι - T.card) := by rw [hk]     -- `0 = M_col − |ε|`
   | succ k ih =>
       intro T hk
-      -- `k ≥ 1` より `ε_μ = 0` なる `μ` が取れる
+      -- `k ≥ 1` より `ε(μ) = 0` なる `μ` が取れる
       obtain ⟨μ, hμ⟩ : ∃ μ, μ ∉ T := by
         by_contra hall
         have hT : T = Finset.univ :=

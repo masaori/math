@@ -1,8 +1,8 @@
 # 対象ラベル: eigenvalues_of_V_plus
 # eigenvalues_of_V_plus (2) の正値性の前置きと 5 行の鎖
 #   a > 0（a := (2s_2)^{M_col/2}、所属は def_second_transfer_matrix_prefactor）、exp(ǧ(ε)) > 0（real_exp_positive）
-#   Λ̌_ε = (2 sinh 2K_2)^{M_col/2} exp(Σ_μ γ_μ(ε_μ − 1/2))
-#       = (2s_2)^{M_col/2} exp(Σ_μ γ_μ(ε_μ − 1/2))     （s_2 = sinh 2K_2 を右辺から左辺へ）
+#   Λ̌_ε = (2 sinh 2K_2)^{M_col/2} exp(Σ_{μ∈M̌} γ_μh(ε(μ)))
+#       = (2s_2)^{M_col/2} exp(Σ_{μ∈M̌} γ_μh(ε(μ)))   （s_2 = sinh 2K_2 を右辺から左辺へ。h は def_half_sign_of_binary_value）
 #       = (2s_2)^{M_col/2} exp(ǧ(ε))                    （ǧ(ε) の定義を右辺から左辺へ）
 #       = a exp(ǧ(ε))                                    （a の置き方を右辺から左辺へ）
 #       > 0                                              （ℝ で u > 0, v > 0 なら uv > 0。u → a、v → exp(ǧ(ε))）
@@ -21,7 +21,7 @@ RBF200 = RealBallField(200)
 def chain_symbolic(M, eps):
     K2, s2 = var("K2 s2")
     gam = [var("gamma%d" % mu) for mu in range(M)]
-    gsum = sum(gam[mu] * (eps[mu] - QQ(1) / 2) for mu in range(M))
+    gsum = sum(gam[mu] * (QQ(1) / 2 if eps[mu] == 1 else -(QQ(1) / 2)) for mu in range(M))   # Σ γ_μ h(ε(μ))
     gcheck = gsum                                       # ǧ(ε) の定義
     a = sqrt(2 * s2) ** M                               # a の置き方（def_second_transfer_matrix_prefactor の (sqrt(2s_2))^{M_col}）
     lines = [
@@ -40,7 +40,7 @@ def chain_symbolic(M, eps):
 def values(M, eps, K2, gam):
     s2 = RBF200(2 * K2).sinh()                          # s_2 = sinh 2K_2
     a = (2 * s2).sqrt() ** M                            # a = (sqrt(2s_2))^{M_col}
-    gcheck = sum(RBF200(gam[mu]) * (eps[mu] - QQ(1) / 2) for mu in range(M))
+    gcheck = sum(RBF200(gam[mu]) * (QQ(1) / 2 if eps[mu] == 1 else -(QQ(1) / 2)) for mu in range(M))   # ǧ(ε) = Σ γ_μ h(ε(μ))
     return a, gcheck, gcheck.exp()
 
 eq_count = 0

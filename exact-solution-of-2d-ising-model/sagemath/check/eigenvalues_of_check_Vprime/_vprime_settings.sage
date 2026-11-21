@@ -37,7 +37,7 @@ def chain_settings(Ms, symbolic_gamma=False):
 
 
 def joint_projector(ns, eps, Id):
-    """check_joint_eigenspace_decomposition の Q̌_ε = Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň、R^{(0)} := I − ň）を左から掛ける。"""
+    """def_check_Q_epsilon の Q̌_ε = Π_{μ∈M̌} R_μ^{(ε(μ))}（def_check_R_factor の R^{(1)} := ň、R^{(0)} := I − ň）を左から掛ける。"""
     Q = Id
     for mu in range(len(ns)):
         Q = Q * (ns[mu] if eps[mu] == 1 else Id - ns[mu])
@@ -120,9 +120,14 @@ def max_radius(A):
     return RBv(max(max(a.real().rad(), a.imag().rad()) for a in A.list()))
 
 
+def h_ball(e):
+    """def_half_sign_of_binary_value: h(1) := ½、h(0) := −(½)（ε(μ) は算術に使わず h を通す）。"""
+    return RBv(1) / 2 if e == 1 else -(RBv(1) / 2)
+
+
 def gcheck_ball(gams, eps):
-    """ǧ(ε) = Σ_{μ=1}^{M} γ_μ(ε_μ − 1/2)（def_finite_sum_of_real_numbers どおり左から足す）。"""
-    out = gams[0] * (RBv(eps[0]) - RBv(1) / 2)
+    """ǧ(ε) = Σ_{μ∈M̌} γ_μ h(ε(μ)) = Σ_{μ=1}^{M} γ_μ h(ε(μ))（def_sum_over_check_index_set・def_finite_sum_of_real_numbers どおり左から足す）。"""
+    out = gams[0] * h_ball(eps[0])
     for mu in range(1, len(gams)):
-        out = out + gams[mu] * (RBv(eps[mu]) - RBv(1) / 2)
+        out = out + gams[mu] * h_ball(eps[mu])
     return out

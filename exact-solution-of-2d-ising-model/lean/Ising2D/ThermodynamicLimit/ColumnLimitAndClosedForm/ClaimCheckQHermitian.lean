@@ -16,7 +16,7 @@
 | (1) `Z_j^* = Z_j`, `Y_j^* = Y_j` | `Ising2D.Z_conjTranspose` / `Y_conjTranspose`（章 009 で証明済み。証明の中のクロネッカー積の共役転置の 5 行の鎖は `Ising2D.siteProd_conjTranspose_apply`、`(σ_k^a)^* = σ_k^a` の 5 行の鎖は `Ising2D.siteOp_conjTranspose_of_conjTranspose_eq`（`a = x, y, z` は `sigmaX_conjTranspose`・`sigmaY_conjTranspose`・`sigmaZ_conjTranspose`）（どれも `ClaimPositiveDefinite.lean`）。`Z_j^*` の 5 行の鎖は `Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq`（`(XW)^* = W^*X^*` の反復適用は `Ising2D.xString_conjTranspose`、各因子の `(σ_i^x)^* = σ_i^x` は `Ising2D.revSiteProduct_sigmaXAt_conjTranspose`、`distinct_site_pauli_matrices_commute` の反復適用は `Ising2D.commute_xString_of_commute_sigmaX`・`Ising2D.siteOp_mul_xString`・`Ising2D.revSiteProduct_sigmaX_eq_xString`。`Y_j` は `A → σ^y`）） |
 | (2) `Ž_μ^* = Ž_{M+1-μ}`, `Y̌_μ^* = Y̌_{M+1-μ}` | `Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose` |
 | (3) `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}` | `CheckFermi.hstar`（章 016 からの入力） |
-| (4) `ň_μ^* = ň_μ`, `Q̌_ε^* = Q̌_ε` | `CheckFermi.nOp_conjTranspose` / `Qproj_conjTranspose` |
+| (4) `ň_μ^* = ň_μ`, `Q̌_ε^* = Q̌_ε` | `CheckFermi.nOp_conjTranspose` / `Qproj_conjTranspose`（人手の `Q̌_ε^*` の 9 行の鎖は `def_check_Q_epsilon` の `Q̌_ε = ∏_{μ∈M̌}R_μ^{(ε(μ))}` から始まり、`def_product_over_check_index_set`・`def_finite_product_of_matrices` で `R_1^{(ε(1))}⋯R_{M_col}^{(ε(M_col))}` に開いてから積の順の反転・各因子のエルミート性・因子の可換性を当てる。Lean はこれを必要十分版 `NecSuf.star_projOn` の特殊化で一度に示す。Lean の `Qproj T` の `T : Finset (Fin M)` は `{μ ∈ M̌ ∣ ε(μ) = 1}` である） |
 | `x^* Q̌_ε x = ‖Q̌_ε x‖² ≥ 0` | `Ising2D.EvenSectorBridge.quad_Qproj`（`TheoremCPlusEqualsLambda.lean` にある） |
 
 **(1)(2) は無条件である。**

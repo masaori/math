@@ -95,59 +95,67 @@ def body_finite_product(factors):
     return out
 
 
-def factor_A(eps_nu, n, Id):
-    """Q̌_ϵ の定義の因子 A_ν := ϵ_ν ň_ν + (1 - ϵ_ν)(I - ň_ν)。"""
-    R = Id.base_ring()
-    return body_sum(S_(R(eps_nu), n), S_(R(1 - eps_nu), body_difference(Id, n)))
+def factor_R(e, n, Id):
+    """def_check_R_factor の R_ν^{(e)}: R_ν^{(1)} := ň_ν、R_ν^{(0)} := I - ň_ν。e は ε(ν) ∈ {0,1} で、算術はしない（場合分けだけ）。"""
+    return n if e == 1 else body_difference(Id, n)
 
 
 def chain_part4_identity(G, Id):
     return [("εI", P_(G, Id)), ("ε", G), ("Iε", P_(Id, G))]
 
 
-def chain_part4_factor(G, eps_nu, n, Id):
-    R = Id.base_ring()
-    a, b = R(eps_nu), R(1 - eps_nu)
-    T1, T2 = S_(a, n), S_(b, body_difference(Id, n))
-    A = factor_A(eps_nu, n, Id)
+def part4_difference_equation(G, n, Id):
+    """(4) の εR の鎖の前の 1 式 ε(I - ň_ν) = (I - ň_ν)ε（commuting_with_difference の適用）。"""
+    D = body_difference(Id, n)
+    return ("ε(I-ň_ν) = (I-ň_ν)ε", P_(G, D), P_(D, G))
+
+
+def chain_part4_factor(G, e, n, Id):
+    """(4) の εR_ν^{(ε(ν))} = R_ν^{(ε(ν))}ε の鎖（ε(ν) = 1 と ε(ν) = 0 の場合に分けた 6 行ずつ）。"""
+    R = factor_R(e, n, Id)
+    if e == 1:
+        R1 = factor_R(1, n, Id)
+        return [
+            ("εR_ν^{(ε(ν))}", P_(G, R)),
+            ("εR_ν^{(1)}", P_(G, R1)),
+            ("εň_ν", P_(G, n)),
+            ("ň_νε", P_(n, G)),
+            ("R_ν^{(1)}ε", P_(R1, G)),
+            ("R_ν^{(ε(ν))}ε", P_(R, G)),
+        ]
+    R0 = factor_R(0, n, Id)
+    D = body_difference(Id, n)
     return [
-        ("εA_ν", P_(G, A)),
-        ("ε(ϵ_νň_ν + (1-ϵ_ν)(I-ň_ν))", P_(G, body_sum(T1, T2))),
-        ("ε(ϵ_νň_ν) + ε((1-ϵ_ν)(I-ň_ν))", body_sum(P_(G, T1), P_(G, T2))),
-        ("(ϵ_νň_ν)ε + ((1-ϵ_ν)(I-ň_ν))ε", body_sum(P_(T1, G), P_(T2, G))),
-        ("(ϵ_νň_ν + (1-ϵ_ν)(I-ň_ν))ε", P_(body_sum(T1, T2), G)),
-        ("A_νε", P_(A, G)),
+        ("εR_ν^{(ε(ν))}", P_(G, R)),
+        ("εR_ν^{(0)}", P_(G, R0)),
+        ("ε(I-ň_ν)", P_(G, D)),
+        ("(I-ň_ν)ε", P_(D, G)),
+        ("R_ν^{(0)}ε", P_(R0, G)),
+        ("R_ν^{(ε(ν))}ε", P_(R, G)),
     ]
 
 
 def chain_part4_Q(G, eps, ns, Id, Q):
-    """Q = Q̌_ϵ を check_joint_eigenspace_decomposition の定義どおりに作ったもの。"""
-    As = [factor_A(eps[k], ns[k], Id) for k in range(len(ns))]
+    """Q = Q̌_ε を def_check_Q_epsilon どおりに作ったもの。Π_{ν∈M̌} と Π_{ν=1}^{M_col} は def_product_over_check_index_set
+    により同じ左から掛ける有限積なので、行列としては同じものを並べる（その 2 行は記法の行き来だけ）。"""
+    Rs = [factor_R(eps[k], ns[k], Id) for k in range(len(ns))]
+    PR = body_finite_product(Rs)
     return [
-        ("εQ̌_ϵ", P_(G, Q)),
-        ("ε Π_ν A_ν", P_(G, body_finite_product(As))),
-        ("(Π_ν A_ν)ε", P_(body_finite_product(As), G)),
-        ("Q̌_ϵε", P_(Q, G)),
+        ("εQ̌_ε", P_(G, Q)),
+        ("ε Π_{ν∈M̌} R_ν^{(ε(ν))}", P_(G, PR)),
+        ("ε Π_{ν=1}^{M_col} R_ν^{(ε(ν))}", P_(G, PR)),
+        ("(Π_{ν=1}^{M_col} R_ν^{(ε(ν))})ε", P_(PR, G)),
+        ("(Π_{ν∈M̌} R_ν^{(ε(ν))})ε", P_(PR, G)),
+        ("Q̌_εε", P_(Q, G)),
     ]
 
 
 def Q_check_by_definition(eps, ns, Id):
-    """check_joint_eigenspace_decomposition の Q̌_ϵ := Π_μ (ϵ_μň_μ + (1-ϵ_μ)(I-ň_μ))。
-    比べる相手を独立に作るため、Sage の `*`・`+`・`-` で組む（chain_part4_Q の body_* の経路とは別）。"""
+    """def_check_Q_epsilon の Q̌_ε := Π_{μ∈M̌} R_μ^{(ε(μ))}。
+    比べる相手を独立に作るため、Sage の `*`・`-` で組む（chain_part4_Q の body_* の経路とは別）。"""
     R = Id.base_ring()
+    I = identity_matrix(R, Id.nrows())
     Q = identity_matrix(R, Id.nrows())
     for e, n in zip(eps, ns):
-        Q = Q * (R(e) * n + R(1 - e) * (identity_matrix(R, Id.nrows()) - n))
+        Q = Q * (n if e == 1 else I - n)
     return Q
-
-
-def part4_three_equations(G, eps_nu, n, Id):
-    """(4) の A_ν の鎖の前の 3 式（左辺, 右辺）。差との可換・スカラー倍との可換の 2 回の適用。"""
-    R = Id.base_ring()
-    D = body_difference(Id, n)
-    T1, T2 = S_(R(eps_nu), n), S_(R(1 - eps_nu), D)
-    return [
-        ("ε(I-ň_ν) = (I-ň_ν)ε", P_(G, D), P_(D, G)),
-        ("ε(ϵ_νň_ν) = (ϵ_νň_ν)ε", P_(G, T1), P_(T1, G)),
-        ("ε((1-ϵ_ν)(I-ň_ν)) = ((1-ϵ_ν)(I-ň_ν))ε", P_(G, T2), P_(T2, G)),
-    ]

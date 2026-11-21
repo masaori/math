@@ -11,14 +11,14 @@
 
 ## 人手証明との対応
 
-人手の `ε ∈ {0,1}^{𝓜̌}` は Lean では `T : Finset (Fin M)`（`ε_μ = 1` の `μ` の集合）で、`|ε|` は `T.card`、
+人手の `ε ∈ {0,1}^{𝓜̌}` は Lean では `T : Finset (Fin M)`（`ε(μ) = 1` の `μ` の集合）で、`|ε|` は `T.card`、
 `(1,…,1)` は `Finset.univ` である。人手の `-1_ℂ := (−1)_ℂ` は Lean の `(-1 : ℂ)` で、
 `(-1)^k` は mathlib の `Monoid.npow`（人手 `def_power_of_complex_number` の `z^0 = 1`・`z^{m+1} = z^m z` と同じ再帰）である。
 
 | 人手の行 | Lean |
 | --- | --- |
 | 準備 (P1) `(-1)^k(-1)^k = 1_ℂ` の 4 行 | `neg_one_pow_mul_neg_one_pow`（Lean で補った段は 2 つ: 人手の 2 行目の前に略記 `-1_ℂ = (−1)_ℂ` を開く段、人手 3 と 4 の間に `(1)_ℂ = 1_ℂ` の段） |
-| 準備 (P2) `|ε| ≤ M_col` の 3 行 | `card_le_of_finset`（1 行目の `|ε|` の置き方は `T.card` そのもの） |
+| 準備 (P2) `|ε| ≤ M_col` の 3 行 | `card_le_of_finset`（1 行目の `def_number_of_ones_of_binary_assignment` の `|ε|` は `T.card` そのもの） |
 | (1) 3 行の含意 | `vPlusDataOf_eta_univ_eq_one`（具体的な `V^{(+)}`） |
 | (2) 8 行の鎖 | `CheckFermi.eta_eq_neg_one_pow_sub_card`（1〜3 行）・`CheckFermi.eta_eq_neg_one_pow_add_card`（3〜8 行） |
 | (2) 行列の式 2 行 | `CheckFermi.epsilon_mul_Qproj_eq_neg_one_pow_add_card` |
@@ -75,7 +75,7 @@ theorem neg_one_pow_mul_neg_one_pow (k : ℕ) : (-1 : ℂ) ^ k * (-1 : ℂ) ^ k 
     _ = (1 : ℂ) ^ k := by rw [Complex.ofReal_one]            -- `(1)_ℂ = 1_ℂ`（`inclusion_rr_to_cc` の像）
     _ = 1 := one_pow k                                       -- 人手 4: `1_ℂ^k = 1_ℂ`（`k` の帰納法）
 
-/-- **人手 準備 (P2)**: `|ε| ≤ M_col`。人手の 1 行目 `|ε| = #{μ ∈ 𝓜̌ | ε_μ = 1}` は、Lean では `ε` を
+/-- **人手 準備 (P2)**: `|ε| ≤ M_col`。人手の 1 行目 `|ε| = #{μ ∈ 𝓜̌ | ε(μ) = 1}`（`def_number_of_ones_of_binary_assignment`）は、Lean では `ε` を
 その集合 `T` で表すので `T.card` そのものである。 -/
 theorem card_le_of_finset (T : Finset (Fin M)) : T.card ≤ M :=
   calc T.card
@@ -196,7 +196,7 @@ theorem vPlusDataOf_eta_univ_eq_one (P : IsingParam) (hM2 : 2 ≤ M) :
 人手の `Q̌_ε` の Lean は二つある。`max_eigenvalue_of_V_plus_simple`・`check_joint_eigenspace_decomposition` と 1 対 1 の鎖は
 `CheckFermiSetup`（添字 `𝓜̌ = CheckIdx M`）の上の `CheckFermiSetup.Qproj`、この章の鎖は `CheckFermi`（添字 `Fin M`）の上の
 `CheckFermi.Qproj` である。具体的な `ψ̌` から作った二つ（`checkFermiSetupOf`・`checkFermiOf`）では、
-どちらも人手の定義 `Q̌_ε = ∏_{ν=1}^{M_col} A_ν` の同じ行列であることを `checkFermiOf_Qproj_eq` で示す
+どちらも人手の定義 `Q̌_ε = ∏_{ν∈𝓜̌} R_ν^{(ε(ν))}`（`def_check_Q_epsilon`）の同じ行列であることを `checkFermiOf_Qproj_eq` で示す
 （添字 `j : Fin M` を `finCheckIdxEquiv M j = j + 1 ∈ 𝓜̌` へ送る付け替えで、人手の証明の行ではない）。 -/
 
 /-- 運ぶ段: 具体的な `ψ̌` について、`CheckFermi` の `Q̌_T` と `CheckFermiSetup` の `Q̌_{e(T)}`（`e = finCheckIdxEquiv`）は

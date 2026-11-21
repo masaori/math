@@ -420,17 +420,49 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
       paragraph([
         "この章のゴールの式は次である（",
         math(String.raw`\epsilon\in\{0,1\}^{\check{\mathcal M}}`),
-        "。前の章の ",
+        " は ",
+        math(String.raw`\check{\mathcal M}`),
+        " から ",
+        math(String.raw`\{0,1\}`),
+        " への写像で、",
+        math(String.raw`\mu`),
+        " での値を ",
+        math(String.raw`\epsilon(\mu)`),
+        " と書く（",
+        ref("def_binary_assignments_on_check_index_set"),
+        "）。",
+        math(String.raw`(1,\dots,1)`),
+        " はすべての ",
+        math(String.raw`\mu`),
+        " を ",
+        math(String.raw`1`),
+        " へ送る写像である。前の章の ",
         math(String.raw`c`),
         " の値を一つ目の式で決める）。",
       ]),
       displayMath(String.raw`V^{(+)}=(2\sinh 2K_2)^{M/2}\exp\left(\sum_{\mu\in\check{\mathcal M}}\gamma(\tilde\theta_\mu)\left(\check n_\mu-\tfrac12I\right)\right),\qquad
 V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon,`),
-      displayMath(String.raw`\max_\epsilon\check\Lambda_\epsilon=\check\Lambda_{(1,\dots,1)}=\Lambda^{(1/2)}_M=(2\sinh 2K_2)^{M/2}\exp\left(\frac12\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\right),\qquad
+      displayMath(String.raw`\max_{\epsilon\in\{0,1\}^{\check{\mathcal M}}}\check\Lambda_\epsilon=\check\Lambda_{(1,\dots,1)}=\Lambda^{(1/2)}_M=(2\sinh 2K_2)^{M/2}\exp\left(\frac12\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\right),\qquad
 \epsilon\neq(1,\dots,1)\Longrightarrow\check\Lambda_\epsilon<\check\Lambda_{(1,\dots,1)}`),
-      paragraph(["ここに現れる記号は次である。"]),
-      displayMath(String.raw`\check Q_\epsilon=\prod_{\mu=1}^{M}\left(\epsilon_\mu\check n_\mu+(1-\epsilon_\mu)\left(I-\check n_\mu\right)\right),\qquad
-\check\Lambda_\epsilon=(2\sinh 2K_2)^{M/2}\exp\left(\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu-\tfrac12\right)\right)`),
+      paragraph([
+        "ここに現れる記号は次である（",
+        math(String.raw`\check Q_\epsilon`),
+        " は ",
+        ref("def_check_Q_epsilon"),
+        "、因子 ",
+        math(String.raw`R_\mu^{(e)}`),
+        " は ",
+        ref("def_check_R_factor"),
+        "、",
+        math(String.raw`h`),
+        " は ",
+        ref("def_half_sign_of_binary_value"),
+        "）。",
+      ]),
+      displayMath(String.raw`\check Q_\epsilon=\prod_{\mu\in\check{\mathcal M}}R_\mu^{(\epsilon(\mu))},\qquad
+R_\mu^{(1)}=\check n_\mu,\qquad R_\mu^{(0)}=I-\check n_\mu,`),
+      displayMath(String.raw`\check\Lambda_\epsilon=(2\sinh 2K_2)^{M/2}\exp\left(\sum_{\mu\in\check{\mathcal M}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right),\qquad
+h(1)=\tfrac12,\qquad h(0)=-\left(\tfrac12\right)`),
     ],
   },
   {
@@ -455,7 +487,7 @@ V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon,`),
 \mathrm{im}\,\check Q_{(1,\dots,1)}\subseteq\mathcal F^{(+)}`),
       paragraph(["ここに現れる記号は次である。"]),
       displayMath(String.raw`\varepsilon=\sigma^x_1\cdots\sigma^x_M,\qquad
-\check Q_{(1,\dots,1)}=\prod_{\mu=1}^{M}\check n_\mu,\qquad
+\check Q_{(1,\dots,1)}=\prod_{\mu\in\check{\mathcal M}}\check n_\mu,\qquad
 \mathcal F^{(+)}=\left\{x\in\mathbb C^{2^M}\ \middle|\ \varepsilon x=x\right\}`),
     ],
   },

@@ -7,9 +7,9 @@
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`
 - ブロック: `evenEigen_007_claim_trace_of_check_Vprime`（V̌' は可逆で (V̌')^{-1} = exp(−X̌)（`def_check_Vprime` (2)）であり、
   tr(V̌') = tr((V̌')^{-1}) = (Π_{μ=1}^{M_col} 2cosh(γ(θ̃_μ)/2))_ℂ、Π_{μ=1}^{M_col} 2cosh(γ(θ̃_μ)/2) ∈ ℝ_{>0}）
-- 範囲: 証明の Step 1（8 行の鎖）、Step 2（包含の 1 行、指数法則の 2 行、展開と続く 7 行）、Step 3（冒頭の exp(−ǧ(ε)) の 4 行と、トレースの 22 行の鎖）、Step 4（正値性の不等号）、Step 5（tr(V̌') を積の包含で表す 3 行）の全ての行と、主張そのもの。
-- 記号: X̌ := Σ_μ γ(θ̃_μ)(ň_μ − (1/2)I)、V̌' := exp(X̌)、Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň_μ、R^{(0)} := I − ň_μ）、
-  ǧ(ε) := Σ_μ γ(θ̃_μ)(ε_μ − 1/2)。
+- 範囲: 証明の Step 1（8 行の鎖）、Step 2（包含の 1 行、指数法則の 3 行、展開と続く 7 行）、Step 3（冒頭の exp(−ǧ(ε)) の 5 行と、トレースの 22 行の鎖）、Step 4（正値性の不等号）、Step 5（tr(V̌') を積の包含で表す 3 行）の全ての行と、主張そのもの。
+- 記号: X̌ := Σ_μ γ(θ̃_μ)(ň_μ − (1/2)I)、V̌' := exp(X̌)、Q̌_ε := Π_{μ∈M̌} R_μ^{(ε(μ))}（`def_check_Q_epsilon`。R^{(1)} := ň_μ、R^{(0)} := I − ň_μ は `def_check_R_factor`）、
+  ǧ(ε) := Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ))（h(1) := ½、h(0) := −(½) は `def_half_sign_of_binary_value`。ε は写像 ε: M̌ → {0,1}、値 ε(μ) は算術に使わない）。
 
 ## ň_μ と γ_μ の供給元
 
@@ -30,14 +30,14 @@ Step 2 と Step 3・4 の実数の値の検算は ň_μ を使わず、γ(θ̃_�
 |---|---|---|
 | Step 1 の 8 行（`identity_matrix_is_right_unit_of_mat_mult`、`check_joint_eigenspace_decomposition` (2)、`sum_over_binary_words_distributes_in_right_factor`、`trace_of_sum_over_binary_words`、`eigenvalues_of_check_Vprime`、`trace_of_scalar_multiple`、(4) の tr(Q̌_ε) = 1、1_ℂ は単位元） | `check_step1_chain.sage` | 厳密（成分の環の中の等号）。和は二つの定義の帰納法どおりに組む |
 | Step 2 の 1 行目 Σ_ε(exp ǧ)_ℂ = (Σ_ε exp ǧ)_ℂ（`real_inclusion_preserves_sum_over_binary_words`） | `check_step2_real_inclusion.sage` | 厳密（ℂ を実数の対で持ち、二つの和を定義どおりに組む） |
-| Step 2 の指数法則の 2 行（ǧ の定義、`real_exp_of_finite_sum`） | `check_step2_exp_product.sage` | 球 |
-| Step 2 の展開の 2 行（直前の鎖を各項へ、`expansion_of_finite_product_of_two_term_sums_of_real_numbers` を右辺から左辺へ） | `check_step2_expansion.sage` | 展開の行は厳密（a_μ^{2e−1} の置き方）と球、両端の比較は球 |
-| Step 2 の展開に続く 6 行（`real_one_minus_half_is_half`、0 − a = −a、a(−b) = −(ab)、`real_times_half_is_quotient_by_two`、`real_twice_quotient_by_two_is_original`、`def_cosh_sinh` の cosh） | `check_step2_cosh.sage` | 書き換えの 5 行は厳密（QQ[γ]・QQ(b)）、cosh の行は球 |
-| 主張の (V̌')^{-1} = exp(−X̌) が使う −X̌ = Σ_μ(−γ(θ̃_μ))(ň_μ − (1/2)I)（Step 3 の旧い前置き。いまの Step 3 は冒頭の鎖で exp(−ǧ(ε)) を Π_μ exp((−γ(θ̃_μ))(ε_μ − 1/2)) に開く。その鎖は `check_step3_exp_product.sage`） | `check_step3_chain.sage` | 厳密（γ_μ は模型では有理数、本物の ψ̌ では F 上の不定元） |
+| Step 2 の指数法則の 3 行（ǧ の定義、`def_sum_over_check_index_set`、`real_exp_of_finite_sum`） | `check_step2_exp_product.sage` | 球 |
+| Step 2 の展開の 2 行（直前の鎖を各項へ、`expansion_of_finite_product_of_two_term_sums_of_real_numbers` を右辺から左辺へ。a_μ^{(e)} → exp(γ(θ̃_μ)h(e))） | `check_step2_expansion.sage` | 展開の行は厳密（e = 1 で a_μ、e = 0 で a_μ^{-1} の置き方）と球、両端の比較は球 |
+| Step 2 の展開に続く 6 行（`def_half_sign_of_binary_value` の h(1) := ½、同じく h(0) := −(½)、a(−b) = −(ab)、`real_times_half_is_quotient_by_two`、`real_twice_quotient_by_two_is_original`、`def_cosh_sinh` の cosh） | `check_step2_cosh.sage` | 書き換えの 5 行は厳密（QQ[γ]・QQ(b)）、cosh の行は球 |
+| 主張の (V̌')^{-1} = exp(−X̌) が使う −X̌ = Σ_μ(−γ(θ̃_μ))(ň_μ − (1/2)I)（Step 3 の旧い前置き。いまの Step 3 は冒頭の鎖で exp(−ǧ(ε)) を Π_μ exp((−γ(θ̃_μ))h(ε(μ))) に開く。その鎖は `check_step3_exp_product.sage`） | `check_step3_chain.sage` | 厳密（γ_μ は模型では有理数、本物の ψ̌ では F 上の不定元） |
 | Step 3 のトレースの鎖の 1〜8 行（Step 1 の 8 行と同じ根拠で、5 行目だけ `eigenvalues_of_inverse_of_check_Vprime`） | `check_step3_chain.sage`（行列の部） | 厳密（成分の環の中の等号）。和は二つの定義の帰納法どおりに組む |
 | Step 3 のトレースの鎖の 9 行目 Σ_ε(exp(−ǧ))_ℂ = (Σ_ε exp(−ǧ))_ℂ（`real_inclusion_preserves_sum_over_binary_words`） | `check_step3_real_inclusion.sage` | 厳密（ℂ を実数の対で持ち、二つの和を定義どおりに組む） |
-| Step 3 の冒頭の 4 行（ǧ の定義、`finite_sum_of_negated_real_numbers` を右辺から左辺へ、ℝ の −(ab) = (−a)b、`real_exp_of_finite_sum`） | `check_step3_exp_product.sage` | 球と、指数の引数の 2 行の厳密な比較（QQ[γ_1, …, γ_M]） |
-| Step 3 のトレースの鎖の 10・11 行目（冒頭の鎖を各項へ、`expansion_of_finite_product_of_two_term_sums_of_real_numbers` を右辺から左辺へ。a_j^{(e)} → exp((−γ)(e − 1/2))） | `check_step3_expansion_and_cosh.sage` | 展開の行は厳密（a_μ^{−(2e−1)} の置き方）と球 |
+| Step 3 の冒頭の 5 行（ǧ の定義、`def_sum_over_check_index_set`、`finite_sum_of_negated_real_numbers` を右辺から左辺へ、ℝ の −(ab) = (−a)b、`real_exp_of_finite_sum`） | `check_step3_exp_product.sage` | 球と、指数の引数の 2 行の厳密な比較（QQ[γ_1, …, γ_M]） |
+| Step 3 のトレースの鎖の 10・11 行目（冒頭の鎖を各項へ、`expansion_of_finite_product_of_two_term_sums_of_real_numbers` を右辺から左辺へ。a_j^{(e)} → exp((−γ)h(e))） | `check_step3_expansion_and_cosh.sage` | 展開の行は厳密（e = 1 で a_μ^{-1}、e = 0 で a_μ の置き方）と球 |
 | Step 3 のトレースの鎖の 12〜17 行目（Step 2 の 6 行を γ → −γ で） | `check_step3_expansion_and_cosh.sage` | 書き換えの 5 行は厳密（QQ[γ]・QQ(b)）、cosh の行は球 |
 | Step 3 のトレースの鎖の 18 行目 ℝ で (−a)/2 = −(a/2) | `check_step3_and_step4_real_lines.sage`・`check_step3_expansion_and_cosh.sage` | 厳密（QQ[γ]）と球 |
 | Step 3 のトレースの鎖の 19 行目 `cosh_is_even`（x → γ/2） | `check_step3_and_step4_real_lines.sage`・`check_step3_expansion_and_cosh.sage` | 球（各因子の cosh(−x) = cosh(x) と積） |
@@ -48,7 +48,7 @@ Step 2 と Step 3・4 の実数の値の検算は ň_μ を使わず、γ(θ̃_�
 
 置き方（`check_step1_chain.sage`・`check_step3_chain.sage`）: exp(γ(θ̃_μ)/2) をローラン多項式環 F[a_1^{±1}, …, a_M^{±1}] の不定元 a_μ に置き、
 V̌' := Π_μ(a_μň_μ + a_μ^{-1}(I − ň_μ))、(V̌')^{-1} := Π_μ(a_μ^{-1}ň_μ + a_μ(I − ň_μ)) とする（逆元であることは Sage の積で両側から確かめる）。
-exp(±ǧ(ε)) = Π_μ a_μ^{±(2ε_μ−1)}。V̌' = exp(X̌) そのものはこの置き方では確かめず、`eigenvalues_of_check_Vprime` の検算と `check_claim_statement.sage` が確かめる。
+exp(ǧ(ε)) = Π_μ exp(γ(θ̃_μ)h(ε(μ))) は ε(μ) = 1 の因子が a_μ、ε(μ) = 0 の因子が a_μ^{-1} の積で、exp(−ǧ(ε)) はその逆数の積である。V̌' = exp(X̌) そのものはこの置き方では確かめず、`eigenvalues_of_check_Vprime` の検算と `check_claim_statement.sage` が確かめる。
 両端は Sage の `trace` と Π_μ(a_μ + a_μ^{-1}) とも比べる。
 
 Step 3 の 2 行目 (−a)/2 = −(a/2) は a の形では同じ元で、3 行目 `cosh_is_even` は a の形では Π_μ(a_μ^{-1} + a_μ) = Π_μ(a_μ + a_μ^{-1}) という ℂ の和の交換に縮むので、`check_step3_chain.sage` の
@@ -81,13 +81,13 @@ I と重なることを確かめる。そのうえで (i) tr(V̌')・tr((V̌')^{
 |---|---|---|---|
 | `check_step1_chain.sage` | 模型の ň_μ（`QQ`、M_col = 2, 3, 4）で Step 1 の 8 行 | **PASS** | 鎖 24 段（移す前と一致）、否定コントロール 3 件 |
 | `check_step2_real_inclusion.sage` | Step 2 の 1 行目（M_col = 1..5） | **PASS** | 5 通り、否定コントロール 5 件（移す前と一致） |
-| `check_step2_exp_product.sage` | Step 2 の指数法則の 2 行（M_col = 2..6、(K_1, K_2) の 4 組、全ての ε） | **PASS** | 等号 992 個、否定コントロール 496 件（移す前と一致） |
+| `check_step2_exp_product.sage` | Step 2 の指数法則の 3 行（M_col = 2..6、(K_1, K_2) の 4 組、全ての ε） | **PASS** | 等号 1488 個、否定コントロール 496 件（2026-11-21 に `def_sum_over_check_index_set` の行を足して 992 個から増えた） |
 | `check_step2_expansion.sage` | Step 2 の展開の行（球: M_col = 2..6、4 組。厳密: M_col = 1..6） | **PASS** | 球の行 80 個、厳密 6 通り、否定コントロール 20 件（移す前と一致） |
 | `check_step2_cosh.sage` | 展開に続く 6 行（厳密 6 段、球: M_col = 2..6、4 組） | **PASS** | 厳密 6 段、球の行 120 個、否定コントロール 3 + 60 件（移す前と一致） |
 | `check_step3_real_inclusion.sage` | Step 3 のトレースの鎖の 9 行目（M_col = 1..5） | **PASS** | 5 通り、否定コントロール 5 件 |
 | `check_step3_chain.sage` | 模型の ň_μ で Step 3 の行列の部（(V̌')^{-1} の 8 行の鎖、a の形の 3 行、−X̌ の行） | **PASS** | 鎖 24 段、Step 3 の行 12 個、否定コントロール 34 件 |
 | `check_step3_and_step4_real_lines.sage` | Step 3 の値の 4 行と各因子の cosh(−x) = cosh(x)、(−a)/2 = −(a/2) の厳密な 1 行、Step 4 の不等号（M_col = 2..6、4 組） | **PASS** | Step 3 の行 161 個、Step 4 の不等号 400 個（μ ごとに γ > 0・cosh ≥ 1・2cosh ≥ 2·1・2cosh > 0・部分積 > 0 の 5 個。2·1 = 2 と 2 > 0 は μ に依らない）、否定コントロール 126 件 |
-| `check_step3_exp_product.sage` | Step 3 の冒頭の 4 行（球: M_col = 2..6、4 組、全ての ε。厳密: M_col = 1..6、全ての ε） | **PASS** | 球の行 1984 個、厳密な引数の行 252 個、否定コントロール 496 件 |
+| `check_step3_exp_product.sage` | Step 3 の冒頭の 5 行（球: M_col = 2..6、4 組、全ての ε。厳密: M_col = 1..6、全ての ε） | **PASS** | 球の行 2480 個（2026-11-21 に `def_sum_over_check_index_set` の行を足して 1984 個から増えた）、厳密な引数の行 252 個、否定コントロール 496 件 |
 | `check_step3_expansion_and_cosh.sage` | Step 3 のトレースの鎖の 10〜19 行目（厳密: 書き換え 7 段と展開 6 通り。球: M_col = 2..6、4 組） | **PASS** | 厳密 13 件、球の行 200 個、否定コントロール 9 + 80 件 |
 | `check_step3_final_lines.sage` | Step 3 のトレースの鎖の 20〜22 行目（模型の ň_μ と有理数 γ_μ、M_col = 2, 3, 4） | **PASS** | 等号 9 個（半径 < 10^{-80}）、否定コントロール 9 件 |
 | `check_step5_chain.sage` | Step 5 の 3 行と Step 4 の最後の不等号（模型の ň_μ と有理数 γ_μ、M_col = 2, 3, 4） | **PASS** | 等号 9 個（半径 < 10^{-80}）、不等号 3 個（各段の部分積も正）、否定コントロール 10 件 |
@@ -101,12 +101,14 @@ I と重なることを確かめる。そのうえで (i) tr(V̌')・tr((V̌')^{
   実対数 log(g + √(g^2 − 1)) で作る。模型の主張の検算では有理数）、ǧ(ε) の値、実数の exp・cosh・sinh と行列の exp の値、行列の逆行列とトレースの球。
   球は丸めの誤差を半径に含めて真の値を囲む。等号は球の重なりで確かめ、半径が 10^{-40}（`RealBallField(200)` の検算）、10^{-80}（`check_claim_statement.sage`）
   未満であることも確かめる。不等号は球の全体が満たすことで確かめる。
-- **作り方で自明な比較**: Step 2 の指数法則の 1 行目（ǧ の定義）は検算でも同じ和から組むので同語反復。Step 3 のトレースの鎖の 18・19 行目（(−a)/2 = −(a/2)、`cosh_is_even`）の `check_step3_chain.sage` での a の形の段は同じ元か ℂ の和の交換。Step 1 の最後の行 Σ_ε(exp ǧ)_ℂ1_ℂ = Σ_ε(exp ǧ)_ℂ は、成分の環の中で同じ元になる。
+- **作り方で自明な比較**: Step 2 の指数法則の 1・2 行目（ǧ の定義と `def_sum_over_check_index_set`）と Step 3 の冒頭の 1・2 行目は、検算でも同じ左からの和で組むので同語反復。h(1) := ½・h(0) := −(½) の行は、h を定義どおりの値の関数で組んで書き換えた後の式と比べる。Step 3 のトレースの鎖の 18・19 行目（(−a)/2 = −(a/2)、`cosh_is_even`）の `check_step3_chain.sage` での a の形の段は同じ元か ℂ の和の交換。Step 1 の最後の行 Σ_ε(exp ǧ)_ℂ1_ℂ = Σ_ε(exp ǧ)_ℂ は、成分の環の中で同じ元になる。
 - Step 3 のトレースの鎖の 9 行目（包含の行の −ǧ 版）は、`check_step3_real_inclusion.sage` が ℂ を実数の対で持って厳密に確かめる。
 - Step 3 の 18・19 行目は `check_step3_and_step4_real_lines.sage` と `check_step3_expansion_and_cosh.sage` の両方が確かめる（後者は 10 行目から鎖が切れずにつながることを見るため）。
 - 範囲外: 本物の ψ̌ の M_col ≥ 4（`check_joint_eigenspace_decomposition` の overview と同じ理由）。M_col = 4 は模型が受け持つ。
 
 ## 本文について
+
+- 2026-11-21、代表の指摘（ε の添字・算術・和の範囲）を受けて、ǧ(ε) を Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ)) と書き直した。Step 2・Step 3 の指数法則の鎖に `def_sum_over_check_index_set` の行が足され、展開に続く「1 − ½ = ½」「0 − ½ = −½」の 2 行が `def_half_sign_of_binary_value` の h(1)・h(0) の行に替わった。検算もその行に合わせた（値は不変）。
 
 - 2026-11-04、Lean の通しの証明の連続実行が、Step 3 の 1 行目の名前だけの根拠「Step 1〜2 を γ(θ̃_μ) ↦ −γ(θ̃_μ) として適用」のうちトレースの部分を、
   Step 1 の 8 行の鎖を (V̌')^{-1} で組み 5 行目を `eigenvalues_of_inverse_of_check_Vprime` に替えたものと包含の行の 9 行の鎖として本文に書いた

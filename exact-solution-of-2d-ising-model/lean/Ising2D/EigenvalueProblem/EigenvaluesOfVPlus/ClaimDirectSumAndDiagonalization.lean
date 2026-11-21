@@ -97,7 +97,7 @@ variable {M : ℕ}
 (4) の `dim im Q̌_ε = 1`（`finrank_range_Qproj`）から `v ε` 1 本の基底（mathlib の `FiniteDimensional.basisSingleton`。1 次元の空間では
 0 でない元 1 本が基底）を取り、それらを合わせた基底（`DirectSum.IsInternal.collectedBasis`。添字は `Σ ε, Unit` で、
 `Equiv.sigmaPUnit` で `ε` の集合へ付け替える）を作る。固有ベクトルであることは段落の後の鎖 `VPlus_mulVec_of_mem_range`。
-添字が `ε` の集合 `Finset (CheckIdx M)`（`{0,1}^𝓜̌` を `ε_μ = 1` の `μ` の集合で表した Lean の型）そのものなので、
+添字が `ε` の集合 `Finset (CheckIdx M)`（`{0,1}^𝓜̌` を `ε(μ) = 1` の `μ` の集合で表した Lean の型）そのものなので、
 「各 `ε` が 1 本ずつ」はこの添字の付け方で、「`2^{M_col}` 本」は `card_eps_index` である。
 人手の段落は直和と基底の言葉を本文で定めずに使っており、Lean はそれを mathlib の `DirectSum.IsInternal`・`Basis` で読む。 -/
 theorem exists_eigenBasis_VPlus_of_joint_eigenspaces {r : ℕ} (F : CheckFermiSetup (r + 1))

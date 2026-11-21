@@ -4,8 +4,8 @@
 #   - 行列の計算は ψ̌ の数体 E_1 の中で行う。V^(+)Q̌_ε = Λ̌_εQ̌_ε の Λ̌_ε は、Q̌_ε の成分の比で作った E_1 の元 lE[ε] として持ち、
 #     その QQbar での像が AA の Λ̌_ε に等しいことを厳密に確かめてから行列に掛ける。
 #   - ň_μ は本文の ψ̌（def_check_fermi の式どおりの行列）から ň_μ := ψ̌_μ^†ψ̌_{M_col+1−μ}（def_check_number_operator）、
-#     Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň、R^{(0)} := I − ň。check_joint_eigenspace_decomposition の定義の形）。
-#   - Λ̌_ε := a·Π_μ exp(γ_μ(ε_μ − 1/2))（eigenvalues_of_V_plus の定義。a := (2s_2)^{M_col/2}、exp(γ_μ/2) := √(γ_1 + √(γ_1^2 − 1))、
+#     Q̌_ε := Π_μ R_μ^{(ε(μ))}（R^{(1)} := ň、R^{(0)} := I − ň。def_check_Q_epsilon）。
+#   - Λ̌_ε := a·Π_μ exp(γ_μh(ε(μ)))（eigenvalues_of_V_plus の定義。h(1) = ½、h(0) = −(½)。a := (2s_2)^{M_col/2}、exp(γ_μ/2) := √(γ_1 + √(γ_1^2 − 1))、
 #     γ_1 = γ_1(θ̃_μ) は _number_operators.sage の g1_AA）。
 #   - Λ^{(1/2)}_{M_col} は def_Lambda_delta_M の a·exp(½Σγ(θ^{(1/2)}_{M_col,μ}))を、角 θ^{(1/2)}_{M_col,μ} = 2π(μ − 1/2)/M_col（def_Theta_delta_M）から
 #     _prelude.sage の gamma_exp_independent で結合定数と 1 の冪根から直接作る（g1_AA とは独立な経路）。
@@ -101,7 +101,7 @@ for (x, y) in COUPLINGS:
         def Lam(eps):
             w = AA(1)
             for mu in range(M):
-                w = w * (eh[mu] if eps[mu] == 1 else 1 / eh[mu])     # exp(γ_μ(ε_μ − 1/2))
+                w = w * (eh[mu] if eps[mu] == 1 else 1 / eh[mu])     # exp(γ_μh(ε(μ)))
             return a * w
         Ls = {e: Lam(e) for e in epss}
         Lmax = Ls[one]                                               # eigenvalues_of_V_plus (2) の Λ̌_max = Λ̌_{(1,…,1)}
@@ -141,7 +141,7 @@ for (x, y) in COUPLINGS:
             if e == one:
                 continue
             mu0 = next(mu for mu in range(M) if e[mu] == 0)
-            expa = [eg[mu] if e[mu] == 0 else AA(1) for mu in range(M)]   # exp(a_μ) = exp(γ_μ(1 − ε_μ))
+            expa = [eg[mu] if e[mu] == 0 else AA(1) for mu in range(M)]   # exp(a_μ) = exp(γ_μ(h(1) − h(ε(μ))))
             lhs = Ls[one] / Ls[e]                                    # exp(ǧ(1,…,1) − ǧ(ε))
             chain([lhs, prod(expa)], f"{tag}: (2) exp(ǧ(1)−ǧ(ε)) = Πexp(a_μ)")
             assert prod(expa) >= expa[mu0] and eg[mu0] > 1; n_ineq += 2

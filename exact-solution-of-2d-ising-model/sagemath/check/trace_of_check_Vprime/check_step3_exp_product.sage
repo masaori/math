@@ -1,15 +1,17 @@
 # 対象ラベル: trace_of_check_Vprime（Step 3 の冒頭の 4 行の鎖）
-#   exp(−ǧ(ε)) = exp(−Σ_{μ=1}^{M_col} γ(θ~_μ)(ε_μ − 1/2))          (eigenvalues_of_check_Vprime の ǧ の定義)
-#              = exp(Σ_{μ=1}^{M_col} −(γ(θ~_μ)(ε_μ − 1/2)))         (finite_sum_of_negated_real_numbers を右辺から左辺へ)
-#              = exp(Σ_{μ=1}^{M_col} (−γ(θ~_μ))(ε_μ − 1/2))         (ℝ で −(ab) = (−a)b を各項へ同時に)
-#              = Π_{μ=1}^{M_col} exp((−γ(θ~_μ))(ε_μ − 1/2))          (real_exp_of_finite_sum)
+#   exp(−ǧ(ε)) = exp(−Σ_{μ∈M̌} γ(θ~_μ)h(ε(μ)))                     (eigenvalues_of_check_Vprime の ǧ の定義)
+#              = exp(−Σ_{μ=1}^{M_col} γ(θ~_μ)h(ε(μ)))              (def_sum_over_check_index_set。作り方で自明: 同じ左からの和で組む)
+#              = exp(Σ_{μ=1}^{M_col} −(γ(θ~_μ)h(ε(μ))))             (finite_sum_of_negated_real_numbers を右辺から左辺へ)
+#              = exp(Σ_{μ=1}^{M_col} (−γ(θ~_μ))h(ε(μ)))             (ℝ で −(ab) = (−a)b を各項へ同時に)
+#              = Π_{μ=1}^{M_col} exp((−γ(θ~_μ))h(ε(μ)))              (real_exp_of_finite_sum)
+# h は def_half_sign_of_binary_value の h(1) := ½、h(0) := −(½)。
 # 帰属: γ(θ~_μ)・ǧ(ε)・exp は ℝ の元で、値は ℝ への脱出（arccosh・exp・cos の値）なので、
 # 区間演算 RealBallField(200) の球で扱う。等号の行は球が共通部分を持つこと（overlaps）と、半径が 1e-40 未満であることで確かめる。
 # K_1, K_2 は有理数で与える。M_col = 2..6、K の 4 組、全ての ε ∈ {0,1}^{M_col}。
 # 有限和・有限積は def_finite_sum_of_real_numbers・def_finite_product_of_real_numbers どおり左から畳み込む。
 # 厳密な部: 2 行目と 3 行目の指数の引数（有限和の符号反転と −(ab) = (−a)b）を、γ_μ を QQ 上の多項式環の不定元に置いて
 #   M_col = 1..6、全ての ε で厳密に確かめる（1 行目は ǧ の定義なので同じ和から組む同語反復）。
-# 比べる側: 右辺の積は Step 3 のトレースの鎖の検算（check_step3_chain.sage）の置き方 Π_μ a_μ^{−(2ε_μ − 1)}（a_μ = exp(γ(θ~_μ)/2)）に一致する。
+# 比べる側: 右辺の積は Step 3 のトレースの鎖の検算（check_step3_chain.sage）の置き方 Π_μ a_μ^{∓1}（ε(μ) = 1 なら a_μ^{-1}、0 なら a_μ）（a_μ = exp(γ(θ~_μ)/2)）に一致する。
 # 否定コントロール: 符号反転を最後の項にだけ付け忘れた和（Σ_{μ<M} −(…) + γ_M(ε_M − 1/2)）の exp は 1 行目と交わらない。
 
 RB = RealBallField(200)
@@ -59,20 +61,22 @@ for M in range(2, 7):
     for (K1, K2) in PARAMS:
         gam = [gamma_tilde_b(M, mu, K1, K2) for mu in range(1, M + 1)]
         for eps in cartesian_product([[0, 1]] * M):
-            terms = [gam[mu] * (RB(eps[mu]) - RB(1) / 2) for mu in range(M)]
-            gcheck = finite_sum(terms)                                  # 主張の ǧ の定義
+            hb = lambda e: RB(1) / 2 if e == 1 else -(RB(1) / 2)         # def_half_sign_of_binary_value
+            terms = [gam[mu] * hb(eps[mu]) for mu in range(M)]
+            gcheck = finite_sum(terms)                                  # 主張の ǧ の定義（Σ_{μ∈M̌}）
             lines = [
                 (-gcheck).exp(),
-                (-finite_sum(terms)).exp(),
+                (-finite_sum(terms)).exp(),                             # ǧ の定義（Σ_{μ∈M̌}）
+                (-finite_sum(terms)).exp(),                             # Σ_{μ=1}^{M_col}（def_sum_over_check_index_set）
                 finite_sum([-t for t in terms]).exp(),
-                finite_sum([(-gam[mu]) * (RB(eps[mu]) - RB(1) / 2) for mu in range(M)]).exp(),
-                finite_prod([((-gam[mu]) * (RB(eps[mu]) - RB(1) / 2)).exp() for mu in range(M)]),
+                finite_sum([(-gam[mu]) * hb(eps[mu]) for mu in range(M)]).exp(),
+                finite_prod([((-gam[mu]) * hb(eps[mu])).exp() for mu in range(M)]),
             ]
             for a, b in zip(lines, lines[1:]):
                 assert same(a, b), (M, K1, K2, eps)
                 count += 1
-            # 比べる側: Π_μ a_μ^{−(2ε_μ − 1)}、a_μ = exp(γ(θ~_μ)/2)
-            other = finite_prod([(gam[mu] / 2).exp() ** (-(2 * eps[mu] - 1)) for mu in range(M)])
+            # 比べる側: Π_μ a_μ^{∓1}（ε(μ) = 1 なら a_μ^{-1}、0 なら a_μ）、a_μ = exp(γ(θ~_μ)/2)
+            other = finite_prod([(gam[mu] / 2).exp() ** (-1) if eps[mu] == 1 else (gam[mu] / 2).exp() for mu in range(M)])
             assert same(lines[-1], other)
             bad = finite_sum([-t for t in terms[:-1]] + [terms[-1]]).exp()
             if not same(bad, lines[0]):
@@ -82,13 +86,13 @@ exact = 0
 for M in range(1, 7):
     Pg = PolynomialRing(QQ, [f"g{mu}" for mu in range(1, M + 1)])
     gv = Pg.gens()
-    h = QQ(1) / 2
+    hq = lambda e: QQ(1) / 2 if e == 1 else -(QQ(1) / 2)         # def_half_sign_of_binary_value
     for eps in cartesian_product([[0, 1]] * M):
-        terms = [gv[mu] * (eps[mu] - h) for mu in range(M)]
+        terms = [gv[mu] * hq(eps[mu]) for mu in range(M)]
         args = [
             -finite_sum(terms),
             finite_sum([-t for t in terms]),
-            finite_sum([(-gv[mu]) * (eps[mu] - h) for mu in range(M)]),
+            finite_sum([(-gv[mu]) * hq(eps[mu]) for mu in range(M)]),
         ]
         for a, b in zip(args, args[1:]):
             assert a == b, (M, eps)

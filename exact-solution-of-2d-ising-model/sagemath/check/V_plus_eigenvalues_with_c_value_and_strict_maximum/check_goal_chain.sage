@@ -98,7 +98,7 @@ for M in EIG_M:
         Lams = {}
         for eps in E:
             Q = Q_check(O, eps, ns)
-            L = RDF(pref * exp(sum(gam[mu] * (RDF(eps[mu - 1]) - RDF(1) / 2) for mu in range(1, M + 1))))
+            L = RDF(pref * exp(sum(gam[mu] * (RDF(1) / 2 if eps[mu - 1] == 1 else -(RDF(1) / 2)) for mu in range(1, M + 1))))   # Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(Σ γ h(ε(μ)))
             Lams[eps] = L
             r2 = max(r2, opnorm(line0 * Q - CDF(L) * Q) / abs(L))
         # (3)

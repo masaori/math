@@ -13,7 +13,7 @@
 3. `Λ^{(1/2)}_M = Λ̌_{(1,…,1)} = (2 sinh 2K_2)^{M/2} exp(½ Σ_μ γ(θ~_μ))`
 4. `ε ≠ (1,…,1) ⇒ Λ̌_ε < Λ̌_{(1,…,1)}`。とくに `Λ̌_{(1,…,1)}` は族 `(Λ̌_ε)_ε` の最大値で、`max_ε Λ̌_ε = Λ̌_{(1,…,1)}`
 
-`ε ∈ {0,1}^{𝓜̌}` は `ε_μ = 1` となる `μ` の集合 `T : Finset (CheckIdx M)` で表す
+`ε ∈ {0,1}^{𝓜̌}` は `ε(μ) = 1` となる `μ` の集合 `T : Finset (CheckIdx M)` で表す
 （`(1,…,1)` は `Finset.univ`）。`Q̌_ε` は `CheckFermiSetup.Qproj`、`Λ̌_ε` は `checkBigLambda`、
 `Λ^{(1/2)}_M` は `LambdaM P (1/2) M`。`CheckFermiSetup` は `checkFermiSetupOf P hM`
 （`ψ̌_μ` から作ったもの）、`γ(θ~_μ)` は `gammaTilde P M μ`。(1) の和の添字づけは

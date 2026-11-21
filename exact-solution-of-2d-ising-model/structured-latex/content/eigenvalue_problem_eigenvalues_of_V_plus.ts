@@ -41,19 +41,33 @@ V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
       paragraph([
         "であり、",
         math(String.raw`V^{(+)}`),
-        " の固有値は ",
-        math(String.raw`\epsilon = (\epsilon_\mu)_{\mu=1}^{M_{\mathrm{col}}}`),
-        "（各 ",
-        math(String.raw`\epsilon_\mu \in \{0,1\}`),
+        " の固有値は、写像 ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        "（",
+        ref("def_binary_assignments_on_check_index_set"),
+        "。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " での値は ",
+        math(String.raw`\epsilon(\mu) \in \{0,1\}`),
         "）でパラメトライズされた",
       ]),
       displayMath(
         String.raw`\check\Lambda_\epsilon = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-\exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
-\left(\epsilon_\mu - \tfrac{1}{2}\right)\right)`,
+\exp\!\left(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,
+h(\epsilon(\mu))\right)`,
       ),
       paragraph([
-        "であり、その最大値は ",
+        "であり（",
+        math(String.raw`h`),
+        " は ",
+        ref("def_half_sign_of_binary_value"),
+        " の ",
+        math(String.raw`h(1) = \tfrac12`),
+        "、",
+        math(String.raw`h(0) = -\left(\tfrac12\right)`),
+        "、和は ",
+        ref("def_sum_over_check_index_set"),
+        "）、その最大値は ",
         ref("def_Lambda_delta_M"),
         " の ",
         math(String.raw`\Lambda^{(\delta)}_{M_{\mathrm{col}}}`),
@@ -153,6 +167,7 @@ V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
         "009 章の iH_is_real_symmetric と sign_flip_conjugation は S_1^{(±)} = iK_1H_1^{(±)} について複号同順で述べられているので、(+) 側をそのまま引ける（H_1^{(+)} 用に書き直す必要はない）。この点は数値でも残差 0.0 で確認した（sagemath/check/050_claim_even_sector_eigenvalues/check_05）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-21: Λ̌_ε の式を、ε を写像 ε: M̌ → {0,1}（def_binary_assignments_on_check_index_set）とし、ε_μ − ½ を h(ε(μ))（def_half_sign_of_binary_value）、Σ_{μ=1}^{M_col} を Σ_{μ∈M̌}（def_sum_over_check_index_set）と書く形にした（eigenvalues_of_V_plus の定義に合わせた）。値は不変。",
       ],
     },
   },
@@ -2574,6 +2589,218 @@ X\,\check{n}_\nu
     },
   },
   {
+    id: "evenEigen_definition_binary_assignments_on_check_index_set",
+    kind: "definition",
+    title: { tex: String.raw`\{0,1\}^{\check{\mathcal{M}}} \text{ と、その元の値 } \epsilon(\mu)` },
+    labels: ["def_binary_assignments_on_check_index_set"],
+    statement: [
+      paragraph([
+        ref("def_check_index_set"),
+        " の ",
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
+        " から二元集合 ",
+        math(String.raw`\{0,1\}`),
+        " への写像 ",
+        math(String.raw`\epsilon : \check{\mathcal{M}} \to \{0,1\}`),
+        " の全体を ",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " と書き、",
+        math(String.raw`\epsilon`),
+        " の ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " での値を ",
+        math(String.raw`\epsilon(\mu) \in \{0,1\}`),
+        " と書く。",
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
+        " なので、",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " は ",
+        ref("def_sum_over_binary_words"),
+        " の ",
+        math(String.raw`\{0,1\}^{r}`),
+        "（",
+        math(String.raw`r \to M_{\mathrm{col}}`),
+        "）と同じ集合であり、",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " の上の和はそこで定めた和である。",
+        math(String.raw`\epsilon(\mu)`),
+        " は ",
+        math(String.raw`0`),
+        " か ",
+        math(String.raw`1`),
+        " かを区別するためだけに使い、",
+        math(String.raw`\epsilon(\mu)`),
+        " どうしや ",
+        math(String.raw`\epsilon(\mu)`),
+        " と数との和・積は書かない。数が要るところは ",
+        ref("def_half_sign_of_binary_value"),
+        " の写像 ",
+        math(String.raw`h`),
+        " を通すか、",
+        math(String.raw`\epsilon(\mu) = 1`),
+        " と ",
+        math(String.raw`\epsilon(\mu) = 0`),
+        " の場合に分けて書く。",
+      ]),
+      paragraph([
+        "すべての ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " を ",
+        math(String.raw`1`),
+        " へ送る写像を ",
+        math(String.raw`(1,\dots,1) \in \{0,1\}^{\check{\mathcal{M}}}`),
+        "、すべての ",
+        math(String.raw`\mu`),
+        " を ",
+        math(String.raw`0`),
+        " へ送る写像を ",
+        math(String.raw`(0,\dots,0) \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " と書く。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 代表の指摘（ε の添字が何か分からない、記号が噛み合っていない、写像として明示する）を受けて足した。以前は「ε = (ε_μ)_{μ=1}^{M_col} ∈ {0,1}^{M̌}」と書いていたが、肩が集合の {0,1}^{M̌} も、添字 ε_μ も、使う章では定めていなかった（ε_j := ε(j) は線型空間の章の def_sum_over_binary_words にだけ在った）。また {0,1} ⊂ ℤ の元 ε_μ を、ε_μ − ½ では実数、ε_μň_μ では複素数として写像を通さずに使っていた。ε を写像と書き、値の算術を h と場合分けへ出す形を代表が選んだ（2026-11-21、Slack）。",
+      ],
+    },
+  },
+  {
+    id: "evenEigen_definition_half_sign_of_binary_value",
+    kind: "definition",
+    title: { tex: String.raw`\{0,1\} \text{ から } \mathbb{R} \text{ への写像 } h` },
+    labels: ["def_half_sign_of_binary_value"],
+    statement: [
+      paragraph([
+        "写像 ",
+        math(String.raw`h : \{0,1\} \to \mathbb{R}`),
+        " を",
+      ]),
+      displayMath(String.raw`h(1) := \tfrac{1}{2}, \qquad h(0) := -\left(\tfrac{1}{2}\right)`),
+      paragraph([
+        "で定める（",
+        math(String.raw`\tfrac12 \in \mathbb{R}`),
+        "、",
+        math(String.raw`-`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の符号反転）。",
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " について、",
+        math(String.raw`h(\epsilon(\mu)) \in \mathbb{R}`),
+        " は ",
+        math(String.raw`\check{n}_\mu`),
+        " の固有値 ",
+        math(String.raw`1`),
+        "・",
+        math(String.raw`0`),
+        " から ",
+        math(String.raw`\tfrac12`),
+        " を引いた値に当たる（",
+        ref("eigenvalues_of_check_Vprime"),
+        " で使う）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: ǧ(ε) と Λ̌_ε の指数の各項に現れていた ε_μ − ½（{0,1} ⊂ ℤ の元から実数を引く式）を、写像を通して書くために足した。",
+      ],
+    },
+  },
+  {
+    id: "evenEigen_definition_check_R_factor",
+    kind: "definition",
+    title: { tex: String.raw`\check{Q}_\epsilon \text{ の因子 } R_\mu^{(e)}` },
+    labels: ["def_check_R_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）と ",
+        math(String.raw`e \in \{0,1\}`),
+        " に対して、",
+        ref("def_check_number_operator"),
+        " の ",
+        math(String.raw`\check{n}_\mu`),
+        " を使って",
+      ]),
+      displayMath(String.raw`R_\mu^{(1)} := \check{n}_\mu, \qquad R_\mu^{(0)} := I - \check{n}_\mu
+\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+      paragraph([
+        "と定める（",
+        math(String.raw`I`),
+        " は ",
+        ref("def_identity_matrix"),
+        "、差は ",
+        ref("def_matrix_difference"),
+        "）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: trace_of_check_number_operator_product の主張の中で「と書く」として置いていた R_μ^{(e)} を、Q̌_ε の定義（def_check_Q_epsilon）からも引けるよう、独立した定義にした。",
+      ],
+    },
+  },
+  {
+    id: "evenEigen_definition_check_Q_epsilon",
+    kind: "definition",
+    title: { tex: String.raw`\check{Q}_\epsilon` },
+    labels: ["def_check_Q_epsilon"],
+    statement: [
+      paragraph([
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\check{Q}_\epsilon := \prod_{\mu \in \check{\mathcal{M}}} R_\mu^{(\epsilon(\mu))}
+\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+      paragraph([
+        "と定める（",
+        math(String.raw`R_\mu^{(e)}`),
+        " は ",
+        ref("def_check_R_factor"),
+        "、積は ",
+        ref("def_product_over_check_index_set"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ A_\mu \to R_\mu^{(\epsilon(\mu))}`),
+        "）の ",
+        math(String.raw`\mu = 1, \dots, M_{\mathrm{col}}`),
+        " の順の積）。各因子は、",
+        math(String.raw`\epsilon(\mu) = 1`),
+        " なら ",
+        math(String.raw`\check{n}_\mu`),
+        "、",
+        math(String.raw`\epsilon(\mu) = 0`),
+        " なら ",
+        math(String.raw`I - \check{n}_\mu`),
+        " である。",
+        math(String.raw`\check{Q}_\epsilon`),
+        " が、すべての ",
+        math(String.raw`\mu`),
+        " で ",
+        math(String.raw`\check{n}_\mu`),
+        " の固有値が ",
+        math(String.raw`\epsilon(\mu)`),
+        " に当たる 1 次元の部分空間への射影であることは、",
+        ref("check_joint_eigenspace_decomposition"),
+        " で示す。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 代表の指摘（Q̌ は別途定義して適切に参照する）を受けて、check_joint_eigenspace_decomposition の主張の中で定めていた Q̌_ε を独立した定義にした。以前の定義の因子 ε_μň_μ + (1 − ε_μ)(I − ň_μ) は、{0,1} ⊂ ℤ の元 ε_μ を複素数として掛けていたので、R_μ^{(ε(μ))} で書いた（ε(μ) = 1 なら ň_μ、0 なら I − ň_μ で、行列は同じ）。",
+      ],
+    },
+  },
+  {
     id: "evenEigen_004_claim_trace_of_check_number_operator_product",
     kind: "claim",
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 6 },
@@ -2587,16 +2814,15 @@ X\,\check{n}_\nu
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         " と ",
         math(String.raw`e \in \{0,1\}`),
-        " に対して",
-      ]),
-      displayMath(
-        String.raw`R_\mu^{(1)} := \check{n}_\mu, \qquad R_\mu^{(0)} := I - \check{n}_\mu
-\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
-      ),
-      paragraph([
-        "と書く（",
-        ref("def_check_number_operator"),
-        "）。このとき、",
+        " に対する ",
+        math(String.raw`R_\mu^{(e)} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " は ",
+        ref("def_check_R_factor"),
+        " のもの（",
+        math(String.raw`R_\mu^{(1)} = \check{n}_\mu`),
+        "、",
+        math(String.raw`R_\mu^{(0)} = I - \check{n}_\mu`),
+        "）とする。",
         math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
         "、相異なる ",
         math(String.raw`\mu_1,\dots,\mu_k \in \check{\mathcal{M}}`),
@@ -2660,7 +2886,11 @@ X\,\check{n}_\nu
         ref("check_joint_eigenspace_decomposition"),
         " の ",
         math(String.raw`\mathrm{tr}\!\left(\check{Q}_\epsilon\right) = 1`),
-        " が、",
+        "（",
+        math(String.raw`\check{Q}_\epsilon`),
+        " は ",
+        ref("def_check_Q_epsilon"),
+        "）が、",
         math(String.raw`\prod_{\mu \notin T}\left(I - \check{n}_\mu\right)`),
         " を部分集合の和へ展開して二項定理で足し上げる、という手順を経ずに直接得られる（",
         math(String.raw`k = M_{\mathrm{col}}`),
@@ -2834,11 +3064,11 @@ X\,\check{n}_\nu
         String.raw`\begin{aligned}
 \check\psi_{M_{\mathrm{col}}+1-\mu_k}\,R_{\mu_j}^{(1)}
 &= \check\psi_{M_{\mathrm{col}}+1-\mu_k}\,\check{n}_{\mu_j}
-   \quad (\because R_{\mu_j}^{(1)}\ \text{の定義（主張）}) \\
+   \quad (\because R_{\mu_j}^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \check{n}_{\mu_j}\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
    \quad \left(\because\ \blkref{check_number_operators_commute}\ \text{(1) の第 2 式}\ (\mu \to \mu_k,\ \nu \to \mu_j)\right) \\
 &= R_{\mu_j}^{(1)}\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
-   \quad (\because R_{\mu_j}^{(1)}\ \text{の定義（主張）})
+   \quad (\because R_{\mu_j}^{(1)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       paragraph([math(String.raw`e_j = 0`), " なら"]),
@@ -2846,11 +3076,11 @@ X\,\check{n}_\nu
         String.raw`\begin{aligned}
 \check\psi_{M_{\mathrm{col}}+1-\mu_k}\,R_{\mu_j}^{(0)}
 &= \check\psi_{M_{\mathrm{col}}+1-\mu_k}\left(I - \check{n}_{\mu_j}\right)
-   \quad (\because R_{\mu_j}^{(0)}\ \text{の定義（主張）}) \\
+   \quad (\because R_{\mu_j}^{(0)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \left(I - \check{n}_{\mu_j}\right)\check\psi_{M_{\mathrm{col}}+1-\mu_k}
    \quad \left(\because\ \blkref{commuting_with_difference}\ (n \to 2^{M_{\mathrm{col}}},\ G \to \check\psi_{M_{\mathrm{col}}+1-\mu_k},\ X \to I,\ W \to \check{n}_{\mu_j})\text{。前提は上の単位行列との積の鎖と、}\blkref{check_number_operators_commute}\ \text{(1) の第 2 式}\ (\mu \to \mu_k,\ \nu \to \mu_j)\right) \\
 &= R_{\mu_j}^{(0)}\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
-   \quad (\because R_{\mu_j}^{(0)}\ \text{の定義（主張）})
+   \quad (\because R_{\mu_j}^{(0)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       paragraph([
@@ -3044,12 +3274,12 @@ w
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(P R_{\mu_k}^{(1)}\right)
 &= \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
-   \quad (\because R_{\mu_k}^{(1)}\ \text{の定義（主張）}) \\
+   \quad (\because R_{\mu_k}^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
    \quad (\because \text{直前の鎖}), \\
 \mathrm{tr}\!\left(P R_{\mu_k}^{(0)}\right)
 &= \mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_k}\right)\right)
-   \quad (\because R_{\mu_k}^{(0)}\ \text{の定義（主張）}) \\
+   \quad (\because R_{\mu_k}^{(0)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
    \quad (\because \text{準備 3}) \\
 &= \mathrm{tr}(P) - 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
@@ -3102,6 +3332,7 @@ w
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 帰納段階の名前だけの根拠「ℂ の四則」4 か所（移項の 2 行、e_k = 0 の最後の行、最後の鎖の最後の行）を、準備 4（2_C = 1_C + 1_C、2_C^{-1}2_C = 1_C、2_C w = w + w、w = 2_C^{-1}(2_C w)、w = 2_C^{-1}w + 2_C^{-1}w）と ℂ の体の等式 1 つずつの鎖にした。「両辺に足して 2 で割る」の 2 行は tr(Pň) から始まる 9 行の鎖にした。½ を 2_C^{-1} と書き、主張の右辺の冪の底が 2_C であることを主張に書いた。値と主張は不変。基底段階の「1_C を 2^{M_col} 個足した和」は別に扱う。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 基底段階の名前だけの根拠「1_C を 2^{M_col} 個足した和。ℂ の四則」を、1_C = (1_ℝ)_C・real_inclusion_preserves_finite_sum・finite_sum_of_constant_real_number・inclusion_zz_to_rr_of_power_of_two と新しく足した real_inclusion_preserves_power（ℝ の冪の包含は包含の ℂ の冪）の 9 行の鎖にした。行列の大きさが def_power_of_integer の 2_ℤ^{M_col} ∈ ℤ_{≥1} であることを基底段階の前置きに書いた。値と主張は不変。",
         "2026-11-10（Lean の通しの証明）: 準備の 1_ℂ+1_ℂ = 2_ℂ の 4 行の鎖を、同じ鎖を置いていたほかの証明と合わせて主張 one_plus_one_is_two_in_cc にし、ここではその参照にした。",
+        "2026-11-21: 主張の中で「と書く」として置いていた R_μ^{(e)} を、独立した定義 def_check_R_factor へ移し、主張はそれを引く文にした。証明の「R の定義（主張）」の 6 行の根拠を def_check_R_factor の参照にし、主張の末尾で Q̌_ε に触れる箇所に def_check_Q_epsilon の参照を置いた。式・主張は不変。",
       ],
     },
   },
@@ -3113,20 +3344,14 @@ w
     labels: ["check_joint_eigenspace_decomposition"],
     statement: [
       paragraph([
-        math(String.raw`\epsilon = (\epsilon_\mu)_{\mu=1}^{M_{\mathrm{col}}} \in \{0,1\}^{\check{\mathcal{M}}}`),
-        " に対して",
-      ]),
-      displayMath(
-        String.raw`\check{Q}_\epsilon := \prod_{\mu=1}^{M_{\mathrm{col}}}
-\Bigl(\epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)\Bigr)
-\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
-      ),
-      paragraph([
-        "と定める（有限積は ",
-        ref("def_finite_product_of_matrices"),
-        "（",
-        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_\mu \to \epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)`),
-        "）による）。このとき、",
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
+        math(String.raw`\epsilon, \epsilon' \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " に対する ",
+        ref("def_check_Q_epsilon"),
+        " の ",
+        math(String.raw`\check{Q}_\epsilon, \check{Q}_{\epsilon'} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " について、次が成り立つ。",
       ]),
       list([
         [
@@ -3138,9 +3363,22 @@ w
 \check{Q}_\epsilon = I`),
         ],
         [
-          math(String.raw`\text{(3)}\quad \check{n}_\nu \check{Q}_\epsilon
-= \check{Q}_\epsilon \check{n}_\nu
-= \epsilon_\nu \check{Q}_\epsilon \quad (\nu \in \check{\mathcal{M}})`),
+          math(String.raw`\text{(3)}`),
+          " ",
+          math(String.raw`\nu \in \check{\mathcal{M}}`),
+          " について、",
+          math(String.raw`\epsilon(\nu) = 1`),
+          " なら ",
+          math(String.raw`\check{n}_\nu \check{Q}_\epsilon = \check{Q}_\epsilon \check{n}_\nu = \check{Q}_\epsilon`),
+          "、",
+          math(String.raw`\epsilon(\nu) = 0`),
+          " なら ",
+          math(String.raw`\check{n}_\nu \check{Q}_\epsilon = \check{Q}_\epsilon \check{n}_\nu = O`),
+          "（",
+          math(String.raw`O`),
+          " は ",
+          ref("def_zero_matrix"),
+          " の零行列）",
         ],
         [
           math(String.raw`\text{(4)}\quad \mathrm{tr}\!\left(\check{Q}_\epsilon\right) = 1,
@@ -3173,98 +3411,36 @@ w
     ],
     proof: [
       paragraph([
-        "以下、",
-        ref("trace_of_check_number_operator_product"),
-        " と同じ記号を使う：",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         " と ",
         math(String.raw`e \in \{0,1\}`),
-        " に対して ",
-        math(String.raw`R_\mu^{(1)} := \check{n}_\mu`),
+        " に対する ",
+        math(String.raw`R_\mu^{(e)}`),
+        " は ",
+        ref("def_check_R_factor"),
+        " のもの（",
+        math(String.raw`R_\mu^{(1)} = \check{n}_\mu`),
         "、",
-        math(String.raw`R_\mu^{(0)} := I - \check{n}_\mu`),
-        "。本証明の行列の等式の ",
+        math(String.raw`R_\mu^{(0)} = I - \check{n}_\mu`),
+        "）である。本証明の行列の等式の ",
         math(String.raw`0`),
         " は零行列 ",
         math(String.raw`O \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         "（",
         ref("def_zero_matrix"),
-        "）である。",
-      ]),
-      paragraph([
-        "まず ",
+        "）である。まず ",
         math(String.raw`\check{Q}_\epsilon`),
-        " の因子を ",
-        math(String.raw`R_\mu^{(\epsilon_\mu)}`),
-        " で書く。",
-        math(String.raw`\mu \in \check{\mathcal{M}}`),
-        " とする。",
-        math(String.raw`\epsilon_\mu = 1`),
-        " の場合は",
+        " を ",
+        math(String.raw`\mu = 1, \dots, M_{\mathrm{col}}`),
+        " の順の積で書く：",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)
-&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}-1_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \text{場合の仮定 } \epsilon_\mu=1) \\
-&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-\left(1_{\mathbb{C}}\right)\right)\right)\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{def_complex_difference}\ (z \to 1_{\mathbb{C}},\ w \to 1_{\mathbb{C}})\right) \\
-&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\cdot 1_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{multiply_by_minus_one}\ (z \to 1_{\mathbb{C}})\right) \\
-&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\right)\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\right) \\
-&= 1_{\mathbb{C}}\,\check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元}\right) \\
-&= \check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\right) \\
-&= \check{n}_\mu + O
-  \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I - \check{n}_\mu)\right) \\
-&= \check{n}_\mu
-  \quad \left(\because\ \blkref{matrix_plus_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ X \to \check{n}_\mu)\right) \\
-&= R_\mu^{(1)}
-  \quad (\because R_\mu^{(1)} \text{ の定義（冒頭）}) \\
-&= R_\mu^{(\epsilon_\mu)}
-  \quad (\because \text{場合の仮定 } \epsilon_\mu=1)
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`\epsilon_\mu = 0`),
-        " の場合は",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)
-&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}-0_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \text{場合の仮定 } \epsilon_\mu=0) \\
-&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-\left(0_{\mathbb{C}}\right)\right)\right)\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{def_complex_difference}\ (z \to 1_{\mathbb{C}},\ w \to 0_{\mathbb{C}})\right) \\
-&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\cdot 0_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{multiply_by_minus_one}\ (z \to 0_{\mathbb{C}})\right) \\
-&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+0_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{complex_times_zero_is_zero}\ (z \to -1_{\mathbb{C}})\right) \\
-&= 0_{\mathbb{C}}\,\check{n}_\mu + 1_{\mathbb{C}}\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\right) \\
-&= O + 1_{\mathbb{C}}\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\right) \\
-&= O + \left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I - \check{n}_\mu)\right) \\
-&= I - \check{n}_\mu
-  \quad \left(\because\ \blkref{zero_matrix_plus_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ X \to I - \check{n}_\mu)\right) \\
-&= R_\mu^{(0)}
-  \quad (\because R_\mu^{(0)} \text{ の定義（冒頭）}) \\
-&= R_\mu^{(\epsilon_\mu)}
-  \quad (\because \text{場合の仮定 } \epsilon_\mu=0)
-\end{aligned}`,
-      ),
-      paragraph(["したがって"]),
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_\epsilon
-&= \prod_{\mu=1}^{M_{\mathrm{col}}}
-\Bigl(\epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)\Bigr)
-  \quad (\because \check{Q}_\epsilon \text{ の定義（主張）}) \\
-&= \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
-  \quad (\because \text{直前の二つの場合を各因子へ同時に適用})
+&= \prod_{\mu \in \check{\mathcal{M}}} R_\mu^{(\epsilon(\mu))}
+  \quad (\because\ \blkref{def_check_Q_epsilon}) \\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}
+  \quad \left(\because\ \blkref{def_product_over_check_index_set}\ (n \to 2^{M_{\mathrm{col}}},\ A_\mu \to R_\mu^{(\epsilon(\mu))})\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -3299,7 +3475,7 @@ w
         String.raw`\begin{aligned}
 R_\mu^{(1)}R_\mu^{(0)}
 &= \check{n}_\mu\left(I - \check{n}_\mu\right)
-   \quad (\because R_\mu^{(1)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+   \quad (\because R_\mu^{(1)}, R_\mu^{(0)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \check{n}_\mu\left(I + \left(-\check{n}_\mu\right)\right)
    \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\mu)\right) \\
 &= \check{n}_\mu I + \check{n}_\mu\left(-\check{n}_\mu\right)
@@ -3320,7 +3496,7 @@ R_\mu^{(1)}R_\mu^{(0)}
         String.raw`\begin{aligned}
 R_\mu^{(0)}R_\mu^{(1)}
 &= \left(I - \check{n}_\mu\right)\check{n}_\mu
-   \quad (\because R_\mu^{(0)}, R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+   \quad (\because R_\mu^{(0)}, R_\mu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \left(I + \left(-\check{n}_\mu\right)\right)\check{n}_\mu
    \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\mu)\right) \\
 &= I\check{n}_\mu + \left(-\check{n}_\mu\right)\check{n}_\mu
@@ -3342,18 +3518,18 @@ R_\mu^{(0)}R_\mu^{(1)}
         String.raw`\begin{aligned}
 R_\mu^{(1)}R_\mu^{(1)}
 &= \check{n}_\mu\check{n}_\mu
-   \quad (\because R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+   \quad (\because R_\mu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \check{n}_\mu
    \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu) \\
 &= R_\mu^{(1)}
-   \quad (\because R_\mu^{(1)} \text{ の定義（冒頭）})
+   \quad (\because R_\mu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 R_\mu^{(0)}R_\mu^{(0)}
 &= \left(I-\check{n}_\mu\right)\left(I-\check{n}_\mu\right)
-   \quad (\because R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+   \quad (\because R_\mu^{(0)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \left(I + \left(-\check{n}_\mu\right)\right)\left(I-\check{n}_\mu\right)
    \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\mu)\ \text{を左の因子へ}\right) \\
 &= I\left(I-\check{n}_\mu\right) + \left(-\check{n}_\mu\right)\left(I-\check{n}_\mu\right)
@@ -3369,7 +3545,7 @@ R_\mu^{(0)}R_\mu^{(0)}
 &= I-\check{n}_\mu
    \quad \left(\because\ \blkref{matrix_minus_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ X \to I-\check{n}_\mu)\right) \\
 &= R_\mu^{(0)}
-   \quad (\because R_\mu^{(0)} \text{ の定義（冒頭）})
+   \quad (\because R_\mu^{(0)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       paragraph(["最後に和が単位行列であること："]),
@@ -3377,7 +3553,7 @@ R_\mu^{(0)}R_\mu^{(0)}
         String.raw`\begin{aligned}
 R_\mu^{(1)} + R_\mu^{(0)}
 &= \check{n}_\mu + \left(I - \check{n}_\mu\right)
-   \quad (\because R_\mu^{(1)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+   \quad (\because R_\mu^{(1)}, R_\mu^{(0)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= I
    \quad \left(\because\ \blkref{matrix_plus_difference_cancels}\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to I)\right)
 \end{aligned}`,
@@ -3405,44 +3581,44 @@ Y\,I
         String.raw`\begin{aligned}
 R_\nu^{(1)}R_\mu^{(1)}
 &= \check{n}_\nu\check{n}_\mu
-   \quad (\because R_\nu^{(1)}, R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+   \quad (\because R_\nu^{(1)}, R_\mu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \check{n}_\mu\check{n}_\nu
    \quad \left(\because\ \blkref{check_number_operators_commute}\ (2)\ (\mu \to \nu,\ \nu \to \mu)\right) \\
 &= R_\mu^{(1)}R_\nu^{(1)}
-   \quad (\because R_\mu^{(1)}, R_\nu^{(1)} \text{ の定義（冒頭）})
+   \quad (\because R_\mu^{(1)}, R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 R_\nu^{(1)}R_\mu^{(0)}
 &= \check{n}_\nu\left(I - \check{n}_\mu\right)
-   \quad (\because R_\nu^{(1)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+   \quad (\because R_\nu^{(1)}, R_\mu^{(0)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \left(I - \check{n}_\mu\right)\check{n}_\nu
    \quad \left(\because\ \blkref{commuting_with_difference}\ (n \to 2^{M_{\mathrm{col}}},\ G \to \check{n}_\nu,\ X \to I,\ W \to \check{n}_\mu)\text{。前提は上の}\ \check{n}_\nu I = I\check{n}_\nu\ \text{と}\ \blkref{check_number_operators_commute}\ (2)\ (\mu \to \nu,\ \nu \to \mu)\right) \\
 &= R_\mu^{(0)}R_\nu^{(1)}
-   \quad (\because R_\mu^{(0)}, R_\nu^{(1)} \text{ の定義（冒頭）})
+   \quad (\because R_\mu^{(0)}, R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 R_\nu^{(0)}R_\mu^{(1)}
 &= \left(I - \check{n}_\nu\right)\check{n}_\mu
-   \quad (\because R_\nu^{(0)}, R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+   \quad (\because R_\nu^{(0)}, R_\mu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \check{n}_\mu\left(I - \check{n}_\nu\right)
    \quad (\because \text{直前の鎖の}\ \check{n}_\nu\left(I - \check{n}_\mu\right) = \left(I - \check{n}_\mu\right)\check{n}_\nu\ \text{を}\ (\mu \to \nu,\ \nu \to \mu)\ \text{で、右辺から左辺へ}) \\
 &= R_\mu^{(1)}R_\nu^{(0)}
-   \quad (\because R_\mu^{(1)}, R_\nu^{(0)} \text{ の定義（冒頭）})
+   \quad (\because R_\mu^{(1)}, R_\nu^{(0)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 R_\nu^{(0)}R_\mu^{(0)}
 &= \left(I - \check{n}_\nu\right)\left(I - \check{n}_\mu\right)
-   \quad (\because R_\nu^{(0)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+   \quad (\because R_\nu^{(0)}, R_\mu^{(0)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &= \left(I - \check{n}_\mu\right)\left(I - \check{n}_\nu\right)
    \quad \left(\because\ \blkref{commuting_with_difference}\ (n \to 2^{M_{\mathrm{col}}},\ G \to I - \check{n}_\nu,\ X \to I,\ W \to \check{n}_\mu)\text{。前提は上の}\ \left(I - \check{n}_\nu\right)I = I\left(I - \check{n}_\nu\right)\ \text{と直前の鎖}\right) \\
 &= R_\mu^{(0)}R_\nu^{(0)}
-   \quad (\because R_\mu^{(0)}, R_\nu^{(0)} \text{ の定義（冒頭）})
+   \quad (\because R_\mu^{(0)}, R_\nu^{(0)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       paragraph([
@@ -3460,56 +3636,56 @@ R_\nu^{(0)}R_\mu^{(0)}
         " なら、ある ",
         math(String.raw`\nu \in \check{\mathcal{M}}`),
         " で ",
-        math(String.raw`\epsilon_\nu \neq \epsilon'_\nu`),
+        math(String.raw`\epsilon(\nu) \neq \epsilon'(\nu)`),
         "。まず ",
-        math(String.raw`R_\nu^{(\epsilon_\nu)}`),
+        math(String.raw`R_\nu^{(\epsilon(\nu))}`),
         " は ",
         math(String.raw`\check{Q}_{\epsilon'}`),
         " のどの因子 ",
-        math(String.raw`R_\mu^{(\epsilon'_\mu)}`),
+        math(String.raw`R_\mu^{(\epsilon'(\mu))}`),
         "（",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         "）とも可換である。",
         math(String.raw`\mu \neq \nu`),
         " なら Step 0 の可換性（",
-        math(String.raw`e' \to \epsilon_\nu,\ e \to \epsilon'_\mu`),
+        math(String.raw`e' \to \epsilon(\nu),\ e \to \epsilon'(\mu)`),
         "）による。",
         math(String.raw`\mu = \nu`),
         " なら",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
+R_\nu^{(\epsilon(\nu))}R_\nu^{(\epsilon'(\nu))}
 &= 0
-  \quad (\because (\epsilon_\nu,\epsilon'_\nu) = (1,0)\ \text{なら Step 0 の}\ R_\mu^{(1)}R_\mu^{(0)} = 0,\ (0,1)\ \text{なら}\ R_\mu^{(0)}R_\mu^{(1)} = 0\ (\mu \to \nu)) \\
-&= R_\nu^{(\epsilon'_\nu)}R_\nu^{(\epsilon_\nu)}
-  \quad (\because (\epsilon_\nu,\epsilon'_\nu) = (1,0)\ \text{なら Step 0 の}\ R_\mu^{(0)}R_\mu^{(1)} = 0,\ (0,1)\ \text{なら}\ R_\mu^{(1)}R_\mu^{(0)} = 0\ (\mu \to \nu)\ \text{を右辺から左辺へ})
+  \quad (\because (\epsilon(\nu),\epsilon'(\nu)) = (1,0)\ \text{なら Step 0 の}\ R_\mu^{(1)}R_\mu^{(0)} = 0,\ (0,1)\ \text{なら}\ R_\mu^{(0)}R_\mu^{(1)} = 0\ (\mu \to \nu)) \\
+&= R_\nu^{(\epsilon'(\nu))}R_\nu^{(\epsilon(\nu))}
+  \quad (\because (\epsilon(\nu),\epsilon'(\nu)) = (1,0)\ \text{なら Step 0 の}\ R_\mu^{(0)}R_\mu^{(1)} = 0,\ (0,1)\ \text{なら}\ R_\mu^{(1)}R_\mu^{(0)} = 0\ (\mu \to \nu)\ \text{を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph(["したがって"]),
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_\epsilon \check{Q}_{\epsilon'}
-&= \left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\check{Q}_{\epsilon'}
+&= \left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\check{Q}_{\epsilon'}
   \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
-&= \left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)\check{Q}_{\epsilon'}
-  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon_j)})\text{。前提}\ R_\nu^{(\epsilon_\nu)}R_j^{(\epsilon_j)} = R_j^{(\epsilon_j)}R_\nu^{(\epsilon_\nu)}\ (\nu < j)\ \text{は Step 0 の可換性}\ (\mu \to j,\ e' \to \epsilon_\nu,\ e \to \epsilon_j)\right) \\
-&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(R_\nu^{(\epsilon_\nu)}\check{Q}_{\epsilon'}\right)
-  \quad \left(\because\ \blkref{mat_mult_associative}\ \left(m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)},\ B \to R_\nu^{(\epsilon_\nu)},\ C \to \check{Q}_{\epsilon'}\right)\right) \\
-&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(R_\nu^{(\epsilon_\nu)}\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)
+&= \left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)R_\nu^{(\epsilon(\nu))}\right)\check{Q}_{\epsilon'}
+  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon(j))})\text{。前提}\ R_\nu^{(\epsilon(\nu))}R_j^{(\epsilon(j))} = R_j^{(\epsilon(j))}R_\nu^{(\epsilon(\nu))}\ (\nu < j)\ \text{は Step 0 の可換性}\ (\mu \to j,\ e' \to \epsilon(\nu),\ e \to \epsilon(j))\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(R_\nu^{(\epsilon(\nu))}\check{Q}_{\epsilon'}\right)
+  \quad \left(\because\ \blkref{mat_mult_associative}\ \left(m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))},\ B \to R_\nu^{(\epsilon(\nu))},\ C \to \check{Q}_{\epsilon'}\right)\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(R_\nu^{(\epsilon(\nu))}\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'(\mu))}\right)
   \quad (\because \check{Q}_{\epsilon'}\text{ の定義（冒頭）}) \\
-&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)
-  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to R_\nu^{(\epsilon_\nu)},\ A_j \to R_j^{(\epsilon'_j)})\text{。前提は直前の可換性}\right) \\
-&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)R_\nu^{(\epsilon'_\nu)}\right)R_\nu^{(\epsilon_\nu)}\right)
-  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon'_j)})\text{。前提は Step 0 の可換性}\ (\mu \to j,\ e' \to \epsilon'_\nu,\ e \to \epsilon'_j)\right) \\
-&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)\left(R_\nu^{(\epsilon'_\nu)}R_\nu^{(\epsilon_\nu)}\right)\right)
-  \quad \left(\because\ \blkref{mat_mult_associative}\ \left(m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)},\ B \to R_\nu^{(\epsilon'_\nu)},\ C \to R_\nu^{(\epsilon_\nu)}\right)\right) \\
-&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)\cdot 0\right)
-  \quad (\because (\epsilon'_\nu,\epsilon_\nu) = (0,1)\ \text{なら Step 0 の}\ R_\mu^{(0)}R_\mu^{(1)} = 0,\ (1,0)\ \text{なら}\ R_\mu^{(1)}R_\mu^{(0)} = 0\ (\mu \to \nu)) \\
-&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\cdot 0
-  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(\left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'(\mu))}\right)R_\nu^{(\epsilon(\nu))}\right)
+  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to R_\nu^{(\epsilon(\nu))},\ A_j \to R_j^{(\epsilon'(j))})\text{。前提は直前の可換性}\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'(\mu))}\right)R_\nu^{(\epsilon'(\nu))}\right)R_\nu^{(\epsilon(\nu))}\right)
+  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon'(j))})\text{。前提は Step 0 の可換性}\ (\mu \to j,\ e' \to \epsilon'(\nu),\ e \to \epsilon'(j))\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'(\mu))}\right)\left(R_\nu^{(\epsilon'(\nu))}R_\nu^{(\epsilon(\nu))}\right)\right)
+  \quad \left(\because\ \blkref{mat_mult_associative}\ \left(m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'(\mu))},\ B \to R_\nu^{(\epsilon'(\nu))},\ C \to R_\nu^{(\epsilon(\nu))}\right)\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'(\mu))}\right)\cdot 0\right)
+  \quad (\because (\epsilon'(\nu),\epsilon(\nu)) = (0,1)\ \text{なら Step 0 の}\ R_\mu^{(0)}R_\mu^{(1)} = 0,\ (1,0)\ \text{なら}\ R_\mu^{(1)}R_\mu^{(0)} = 0\ (\mu \to \nu)) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\cdot 0
+  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'(\mu))}\right)\right) \\
 &= 0
-  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\right)
+  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -3527,12 +3703,12 @@ R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\right) \\
 &=\check{Q}_\epsilon\check{Q}_\epsilon
   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\right) \\
-&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}\right)
-  \left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}\right)
+&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon(\mu))}\right)
+  \left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon(\mu))}\right)
   \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）を 2 か所}) \\
-&=\prod_{\mu=1}^{M_{\mathrm{col}}}\left(R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon_\mu)}\right)
-  \quad \left(\because\ \blkref{product_of_two_finite_products_of_matrices}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon_j)},\ B_j \to R_j^{(\epsilon_j)})\text{。前提}\ R_i^{(\epsilon_i)}R_j^{(\epsilon_j)} = R_j^{(\epsilon_j)}R_i^{(\epsilon_i)}\ (j < i)\ \text{は Step 0 の可換性}\ (\nu \to i,\ \mu \to j,\ e' \to \epsilon_i,\ e \to \epsilon_j)\right) \\
-&=\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
+&=\prod_{\mu=1}^{M_{\mathrm{col}}}\left(R_\mu^{(\epsilon(\mu))}R_\mu^{(\epsilon(\mu))}\right)
+  \quad \left(\because\ \blkref{product_of_two_finite_products_of_matrices}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon(j))},\ B_j \to R_j^{(\epsilon(j))})\text{。前提}\ R_i^{(\epsilon(i))}R_j^{(\epsilon(j))} = R_j^{(\epsilon(j))}R_i^{(\epsilon(i))}\ (j < i)\ \text{は Step 0 の可換性}\ (\nu \to i,\ \mu \to j,\ e' \to \epsilon(i),\ e \to \epsilon(j))\right) \\
+&=\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon(\mu))}
   \quad (\because \text{Step 0 の二つの冪等性を各因子へ同時に適用}) \\
 &=\check{Q}_\epsilon
   \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）})
@@ -3544,7 +3720,7 @@ R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
       displayMath(
         String.raw`\begin{aligned}
 \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \check{Q}_\epsilon
-&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}
    \quad (\because \check{Q}_\epsilon \text{ の定義（冒頭）}) \\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
    \quad \left(\because\ \blkref{expansion_of_finite_product_of_two_term_sums}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j^{(e)} \to R_j^{(e)})\ \text{を右辺から左辺へ}\right) \\
@@ -3562,7 +3738,7 @@ R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
         " は ",
         math(String.raw`\check{Q}_\epsilon`),
         " のどの因子 ",
-        math(String.raw`R_\mu^{(\epsilon_\mu)}`),
+        math(String.raw`R_\mu^{(\epsilon(\mu))}`),
         "（",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         "）とも可換である。",
@@ -3571,82 +3747,72 @@ R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\check{n}_\nu R_\mu^{(\epsilon_\mu)}
-&=R_\nu^{(1)}R_\mu^{(\epsilon_\mu)}
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
-&=R_\mu^{(\epsilon_\mu)}R_\nu^{(1)}
-  \quad (\because \text{Step 0 の可換性}\ (e' \to 1,\ e \to \epsilon_\mu)) \\
-&=R_\mu^{(\epsilon_\mu)}\check{n}_\nu
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）})
+\check{n}_\nu R_\mu^{(\epsilon(\mu))}
+&=R_\nu^{(1)}R_\mu^{(\epsilon(\mu))}
+  \quad (\because R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
+&=R_\mu^{(\epsilon(\mu))}R_\nu^{(1)}
+  \quad (\because \text{Step 0 の可換性}\ (e' \to 1,\ e \to \epsilon(\mu))) \\
+&=R_\mu^{(\epsilon(\mu))}\check{n}_\nu
+  \quad (\because R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`\mu = \nu`),
         " で ",
-        math(String.raw`\epsilon_\nu = 1`),
+        math(String.raw`\epsilon(\nu) = 1`),
         " なら",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\nu R_\nu^{(1)}
 &=\check{n}_\nu\check{n}_\nu
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+  \quad (\because R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &=R_\nu^{(1)}\check{n}_\nu
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）})
+  \quad (\because R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`\mu = \nu`),
         " で ",
-        math(String.raw`\epsilon_\nu = 0`),
+        math(String.raw`\epsilon(\nu) = 0`),
         " なら",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\nu R_\nu^{(0)}
 &=R_\nu^{(1)}R_\nu^{(0)}
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+  \quad (\because R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &=0
   \quad (\because \text{Step 0 の}\ R_\mu^{(1)}R_\mu^{(0)} = 0\ (\mu \to \nu)) \\
 &=R_\nu^{(0)}R_\nu^{(1)}
   \quad (\because \text{Step 0 の}\ R_\mu^{(0)}R_\mu^{(1)} = 0\ (\mu \to \nu)\ \text{を右辺から左辺へ}) \\
 &=R_\nu^{(0)}\check{n}_\nu
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）})
+  \quad (\because R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
       paragraph([
         "次に ",
-        math(String.raw`\check{n}_\nu R_\nu^{(\epsilon_\nu)}`),
+        math(String.raw`\check{n}_\nu R_\nu^{(1)}`),
+        " と ",
+        math(String.raw`\check{n}_\nu R_\nu^{(0)}`),
         " を求める。",
-      ]),
-      paragraph([
-        math(String.raw`\epsilon_\nu = 1`),
-        " の場合は",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\nu R_\nu^{(1)}
 &=\check{n}_\nu\check{n}_\nu
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+  \quad (\because R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &=\check{n}_\nu
   \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
 &=R_\nu^{(1)}
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
-&=1_{\mathbb{C}}\,R_\nu^{(1)}
-  \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to R_\nu^{(1)})\ \text{を右辺から左辺へ}\right) \\
-&=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
-  \quad (\because \text{場合の仮定 } \epsilon_\nu=1)
+  \quad (\because R_\nu^{(1)}\ \text{の定義。}\blkref{def_check_R_factor})
 \end{aligned}`,
       ),
-      paragraph([
-        math(String.raw`\epsilon_\nu = 0`),
-        " の場合は",
-      ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\nu R_\nu^{(0)}
 &=\check{n}_\nu\left(I-\check{n}_\nu\right)
-  \quad (\because R_\nu^{(0)}\text{ の定義（冒頭）}) \\
+  \quad (\because R_\nu^{(0)}\ \text{の定義。}\blkref{def_check_R_factor}) \\
 &=\check{n}_\nu\left(I+\left(-\check{n}_\nu\right)\right)
   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\nu)\right) \\
 &=\check{n}_\nu I+\check{n}_\nu\left(-\check{n}_\nu\right)
@@ -3660,58 +3826,93 @@ R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
 &=\check{n}_\nu-\check{n}_\nu
   \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
 &=0
-  \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu)\right) \\
-&=0_{\mathbb{C}}\,R_\nu^{(0)}
-  \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to R_\nu^{(0)})\ \text{を右辺から左辺へ}\right) \\
-&=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
-  \quad (\because \text{場合の仮定 } \epsilon_\nu=0)
+  \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu)\right)
 \end{aligned}`,
       ),
       paragraph([
-        "したがって、どちらの場合も ",
-        math(String.raw`\check{n}_\nu R_\nu^{(\epsilon_\nu)} = \epsilon_\nu R_\nu^{(\epsilon_\nu)}`),
-        " である。主張の左辺から始める：",
+        "主張の左辺から、",
+        math(String.raw`\epsilon(\nu)`),
+        " の値によらない部分を進める：",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\nu\check{Q}_\epsilon
-&=\check{n}_\nu \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
+&=\check{n}_\nu \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}
   \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
-&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\check{n}_\nu
-  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \check{n}_\nu,\ A_j \to R_j^{(\epsilon_j)})\text{。前提は最初の三つの場合}\right) \\
-&=\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)\check{n}_\nu
-  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon_j)})\text{。前提は Step 0 の可換性}\ (\mu \to j,\ e' \to \epsilon_\nu,\ e \to \epsilon_j)\right) \\
-&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(R_\nu^{(\epsilon_\nu)}\check{n}_\nu\right)
-  \quad \left(\because\ \blkref{mat_mult_associative}\ \left(m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)},\ B \to R_\nu^{(\epsilon_\nu)},\ C \to \check{n}_\nu\right)\right) \\
-&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\check{n}_\nu R_\nu^{(\epsilon_\nu)}\right)
-  \quad (\because \text{最初の三つの場合のうち}\ \mu = \nu\ \text{の二つ（}\epsilon_\nu = 1\ \text{なら一つ目、}\epsilon_\nu = 0\ \text{なら二つ目）を右辺から左辺へ}) \\
-&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\epsilon_\nu R_\nu^{(\epsilon_\nu)}\right)
-  \quad (\because \text{直前の二つの場合}) \\
-&=\epsilon_\nu\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)
-  \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \epsilon_\nu,\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)},\ B \to R_\nu^{(\epsilon_\nu)}\right)\right) \\
-&=\epsilon_\nu \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
-  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon_j)})\ \text{を右辺から左辺へ}\right) \\
-&=\epsilon_\nu\check{Q}_\epsilon
+&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\check{n}_\nu
+  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \check{n}_\nu,\ A_j \to R_j^{(\epsilon(j))})\text{。前提は最初の三つの場合}\right) \\
+&=\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)R_\nu^{(\epsilon(\nu))}\right)\check{n}_\nu
+  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon(j))})\text{。前提は Step 0 の可換性}\ (\mu \to j,\ e' \to \epsilon(\nu),\ e \to \epsilon(j))\right) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(R_\nu^{(\epsilon(\nu))}\check{n}_\nu\right)
+  \quad \left(\because\ \blkref{mat_mult_associative}\ \left(m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))},\ B \to R_\nu^{(\epsilon(\nu))},\ C \to \check{n}_\nu\right)\right) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(\check{n}_\nu R_\nu^{(\epsilon(\nu))}\right)
+  \quad (\because \text{最初の三つの場合のうち}\ \mu = \nu\ \text{の二つ（}\epsilon(\nu) = 1\ \text{なら一つ目、}\epsilon(\nu) = 0\ \text{なら二つ目）を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon(\nu) = 1`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu\check{Q}_\epsilon
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(\check{n}_\nu R_\nu^{(\epsilon(\nu))}\right)
+  \quad (\because \text{直前の鎖}) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(\check{n}_\nu R_\nu^{(1)}\right)
+  \quad (\because \text{場合の仮定 } \epsilon(\nu)=1) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)R_\nu^{(1)}
+  \quad (\because \text{上の}\ \check{n}_\nu R_\nu^{(1)} = R_\nu^{(1)}\ \text{の鎖}) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)R_\nu^{(\epsilon(\nu))}
+  \quad (\because \text{場合の仮定 } \epsilon(\nu)=1\ \text{を右辺から左辺へ}) \\
+&=\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}
+  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon(j))})\ \text{を右辺から左辺へ}\right) \\
+&=\check{Q}_\epsilon
   \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon(\nu) = 0`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu\check{Q}_\epsilon
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(\check{n}_\nu R_\nu^{(\epsilon(\nu))}\right)
+  \quad (\because \text{直前の鎖}) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\left(\check{n}_\nu R_\nu^{(0)}\right)
+  \quad (\because \text{場合の仮定 } \epsilon(\nu)=0) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\cdot 0
+  \quad (\because \text{上の}\ \check{n}_\nu R_\nu^{(0)} = 0\ \text{の鎖}) \\
+&=0
+  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\right)
 \end{aligned}`,
       ),
       paragraph(["右から掛けた側は"]),
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_\epsilon\check{n}_\nu
-&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\check{n}_\nu
+&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}\right)\check{n}_\nu
   \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
-&=\check{n}_\nu \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
-  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \check{n}_\nu,\ A_j \to R_j^{(\epsilon_j)})\ \text{を右辺から左辺へ。前提は最初の三つの場合}\right) \\
+&=\check{n}_\nu \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}
+  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \check{n}_\nu,\ A_j \to R_j^{(\epsilon(j))})\ \text{を右辺から左辺へ。前提は最初の三つの場合}\right) \\
 &=\check{n}_\nu\check{Q}_\epsilon
-  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
-&=\epsilon_\nu\check{Q}_\epsilon
-  \quad (\because \text{直前の鎖})
+  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）})
 \end{aligned}`,
       ),
       paragraph([
+        "であり、右辺へ ",
+        math(String.raw`\epsilon(\nu) = 1`),
+        " の場合の鎖を続ければ ",
+        math(String.raw`\check{Q}_\epsilon`),
+        "、",
+        math(String.raw`\epsilon(\nu) = 0`),
+        " の場合の鎖を続ければ ",
+        math(String.raw`0`),
+        " である。",
+      ]),
+      paragraph([
         "Step 4（(4) の証明）。",
-        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}`),
+        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon(\mu))}`),
         " は、相異なる ",
         math(String.raw`M_{\mathrm{col}}`),
         " 個の添字 ",
@@ -3725,7 +3926,7 @@ R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
         "、",
         math(String.raw`(\mu_1,\dots,\mu_{M_{\mathrm{col}}}) = (1,\dots,M_{\mathrm{col}})`),
         "、",
-        math(String.raw`(e_1,\dots,e_{M_{\mathrm{col}}}) = (\epsilon_1,\dots,\epsilon_{M_{\mathrm{col}}})`),
+        math(String.raw`(e_1,\dots,e_{M_{\mathrm{col}}}) = (\epsilon(1),\dots,\epsilon(M_{\mathrm{col}}))`),
         " として適用でき、",
       ]),
       displayMath(
@@ -3903,6 +4104,7 @@ y_{\epsilon'}
         "2026-11-02: Step 4 の「冪の零乗」を新しく足した def_power_of_complex_number の参照に、Step 5 の「単位行列の作用」を identity_matrix_is_left_unit_of_mat_mult（n → 1）に、「行列の作用の分配法則」2 か所を sum_over_binary_words_distributes_in_left_factor（p → 1）と新しく足した sum_over_binary_words_distributes_in_right_factor に、「零ベクトルへの行列の作用」を zero_matrix_is_right_zero_of_mat_mult（p → 1）に替えた。数ベクトルを 2^{M_col} 行 1 列の行列として扱うこと、数ベクトルの和が def_sum_over_binary_words によること、零ベクトルが O_{2^{M_col},1} であることを Step 5 の冒頭に書いた。主張の中身は不変。SageMath は 050 の check_36。",
         "2026-11-02: Step 5 の直和の鎖の 1 行目「Step 1 の直交性と冪等性」を、新しく足した sum_over_binary_words_with_one_nonzero_term の参照（右辺から左辺へ）と、その前提 Q̌_{ε'}y_ε = O（ε ≠ ε'）の 4 行の鎖（x_ε の取り方・mat_mult_associative（q → 1）・Step 1 の (1)・zero_matrix_is_left_zero_of_mat_mult（p → 1））、Q̌_{ε'}y_{ε'} = y_{ε'} の 4 行の鎖（mat_mult_associative・Step 1 の Q̌_εQ̌_ε = Q̌_ε）に替えた。散文「各項は像に属するから和は全体を張る」を、Q̌_εx ∈ im Q̌_ε を trace_of_idempotent の im の定義で述べる文にした。y_ε ∈ im Q̌_ε から y_ε = Q̌_εx_ε となる x_ε を取ることを書いた。主張の中身は不変。SageMath は 050 の check_joint_eigenspace_step5_direct_sum_first_line.sage。",
         "2026-11-03: 証明の冒頭で名前だけで置いていた Q̌_ε = ∏R_μ^{(ε_μ)} を、定義の因子 ε_μň_μ + (1−ε_μ)(I−ň_μ) が R_μ^{(ε_μ)} に等しいことの二場合の 10 行の鎖（場合の仮定・def_complex_difference・multiply_by_minus_one・complex_numbers_form_a_field（ε_μ = 0 は complex_times_zero_is_zero も）・scalar_multiple_by_one・zero_scalar_multiple_is_zero_matrix・matrix_plus_zero_matrix／zero_matrix_plus_matrix・R の定義）と、それを各因子へ同時に適用する 2 行の鎖にした。主張の中身は変えていない。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_48。",
+        "2026-11-21: 代表の指摘（ε の添字・算術、Q̌ の定義の置き場）を受けて記法を書き直した。主張の中で定めていた Q̌_ε := ∏_{μ=1}^{M_col}(ε_μň_μ + (1−ε_μ)(I−ň_μ)) を消し、独立した定義 def_check_Q_epsilon（Q̌_ε := ∏_{μ∈M̌} R_μ^{(ε(μ))}）を引く文にした。ε は写像 ε: M̌ → {0,1}（def_binary_assignments_on_check_index_set）で、値を ε(μ) と書く。(3) の ň_νQ̌_ε = Q̌_εň_ν = ε_νQ̌_ε（{0,1} の元 ε_ν を複素数として掛けていた）を、ε(ν) = 1 なら ň_νQ̌_ε = Q̌_εň_ν = Q̌_ε、ε(ν) = 0 なら = O の場合分けにした（行列は同じ）。証明の冒頭の、定義の因子が R_μ^{(ε_μ)} に等しいことの二場合の 10 行の鎖と 2 行の鎖は要らなくなったので消し、def_check_Q_epsilon と def_product_over_check_index_set を引く 2 行の鎖 Q̌_ε = ∏_{μ∈M̌}R_μ^{(ε(μ))} = ∏_{μ=1}^{M_col}R_μ^{(ε(μ))} に替えた。R の定義の根拠は def_check_R_factor の参照にした。Step 3 は、ň_νR_ν^{(1)} = R_ν^{(1)}（3 行）・ň_νR_ν^{(0)} = 0（8 行）と、ε(ν) によらない 5 行の鎖、ε(ν) = 1 の 6 行・ε(ν) = 0 の 4 行の鎖、右から掛けた側の 3 行にした（スカラー倍 ε_ν・1_ℂ・0_ℂ を経る行と scalar_multiple_factors_out_of_right_factor の行は無くなった）。 Lean は Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_mem・nOp_mul_projFactor_of_not_mem・nOp_mul_Qproj_common_step3・nOp_mul_Qproj_of_mem_step3・nOp_mul_Qproj_of_not_mem_step3・Qproj_mul_nOp_eq_nOp_mul_Qproj_step3 が同じ行の calc、(3) は nOp_mul_Qproj_of_mem・nOp_mul_Qproj_of_not_mem（冒頭の 2 行は Qproj_eq_finProdLeft_rFactor）。数値検証: sagemath/check/check_joint_eigenspace_decomposition/ の check_step3_factor_case_chains.sage・check_step1_orthogonality_step3_moving_one_factor_chains.sage・check_claim_statements.sage（消した鎖の check_factor_as_R_chains.sage は消した）。",
       ],
     },
   },
@@ -3914,21 +4116,33 @@ y_{\epsilon'}
     labels: ["eigenvalues_of_check_Vprime"],
     statement: [
       paragraph([
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " に対して",
       ]),
       displayMath(
-        String.raw`\check{g}(\epsilon) := \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
-\left(\epsilon_\mu - \tfrac{1}{2}\right) \in \mathbb{R}`,
+        String.raw`\check{g}(\epsilon) := \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,
+h(\epsilon(\mu)) \in \mathbb{R}`,
       ),
       paragraph([
         "とおく（",
+        math(String.raw`\gamma`),
+        " は ",
         ref("def_gamma_theta"),
+        "、",
+        math(String.raw`h : \{0,1\} \to \mathbb{R}`),
+        " は ",
+        ref("def_half_sign_of_binary_value"),
         "。和は ",
-        ref("def_finite_sum_of_real_numbers"),
+        ref("def_sum_over_check_index_set"),
         " の ",
         math(String.raw`\mathbb{R}`),
-        " の有限和である）。このとき",
+        " の和である）。",
+        ref("def_check_Q_epsilon"),
+        " の ",
+        math(String.raw`\check{Q}_\epsilon`),
+        " について",
       ]),
       displayMath(
         String.raw`\check{V}'\,\check{Q}_\epsilon = \check{Q}_\epsilon\,\check{V}'
@@ -3972,9 +4186,11 @@ y_{\epsilon'}
         math(String.raw`\gamma(\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \gamma(\tilde\theta_\mu)`),
         " なので、",
         math(String.raw`\epsilon`),
-        " の成分を ",
-        math(String.raw`\mu \leftrightarrow M_{\mathrm{col}}+1-\mu`),
-        " で入れ替えても ",
+        " の値 ",
+        math(String.raw`\epsilon(\mu)`),
+        " と ",
+        math(String.raw`\epsilon(M_{\mathrm{col}}+1-\mu)`),
+        " を入れ替えた写像に替えても ",
         math(String.raw`\check{g}(\epsilon)`),
         " は変わらない。したがって相異なる ",
         math(String.raw`\epsilon`),
@@ -3988,7 +4204,82 @@ y_{\epsilon'}
       paragraph([
         "Step 1（",
         math(String.raw`\check{X}\check{Q}_\epsilon = \check{g}(\epsilon)\check{Q}_\epsilon`),
-        "）。",
+        "）。まず ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " ごとに ",
+        math(String.raw`\left(\check{n}_\mu - \tfrac12 I\right)\check{Q}_\epsilon = h(\epsilon(\mu))\,\check{Q}_\epsilon`),
+        " を示す。",
+        math(String.raw`\epsilon(\mu)`),
+        " の値によらない部分は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\check{n}_\mu - \tfrac12 I\right)\check{Q}_\epsilon
+&= \left(\check{n}_\mu + \left(-\left(\tfrac12 I\right)\right)\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \tfrac12 I)\right) \\
+&= \check{n}_\mu\check{Q}_\epsilon + \left(-\left(\tfrac12 I\right)\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to -\left(\tfrac12 I\right),\ C \to \check{Q}_\epsilon)\right) \\
+&= \check{n}_\mu\check{Q}_\epsilon + \left(-\left(\left(\tfrac12 I\right)\check{Q}_\epsilon\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \tfrac12 I,\ B \to \check{Q}_\epsilon)\right) \\
+&= \check{n}_\mu\check{Q}_\epsilon - \left(\tfrac12 I\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu\check{Q}_\epsilon,\ B \to \left(\tfrac12 I\right)\check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \check{n}_\mu\check{Q}_\epsilon - \tfrac12\left(I\check{Q}_\epsilon\right)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \tfrac12,\ A \to I,\ B \to \check{Q}_\epsilon)\right) \\
+&= \check{n}_\mu\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`\epsilon(\mu) = 1`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\check{n}_\mu - \tfrac12 I\right)\check{Q}_\epsilon
+&= \check{n}_\mu\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon
+   \quad (\because \epsilon(\mu)\ \text{によらない部分の鎖}) \\
+&= \check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (3)\ \text{の}\ \epsilon(\nu) = 1\ \text{の}\ \check{n}_\nu\check{Q}_\epsilon = \check{Q}_\epsilon\ (\nu \to \mu)\text{。場合の仮定}\ \epsilon(\mu) = 1\right) \\
+&= 1\,\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \left(1 - \tfrac12\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to 1,\ b \to \tfrac12,\ A \to \check{Q}_\epsilon)\right) \\
+&= \tfrac12\,\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{real_one_minus_half_is_half}\right) \\
+&= h(1)\,\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{def_half_sign_of_binary_value}\ \text{の}\ h(1) := \tfrac12\ \text{を右辺から左辺へ}\right) \\
+&= h(\epsilon(\mu))\,\check{Q}_\epsilon
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 1\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon(\mu) = 0`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\check{n}_\mu - \tfrac12 I\right)\check{Q}_\epsilon
+&= \check{n}_\mu\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon
+   \quad (\because \epsilon(\mu)\ \text{によらない部分の鎖}) \\
+&= O - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (3)\ \text{の}\ \epsilon(\nu) = 0\ \text{の}\ \check{n}_\nu\check{Q}_\epsilon = O\ (\nu \to \mu)\text{。場合の仮定}\ \epsilon(\mu) = 0\right) \\
+&= 0\,\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \left(0 - \tfrac12\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to 0,\ b \to \tfrac12,\ A \to \check{Q}_\epsilon)\right) \\
+&= \left(-\left(\tfrac12\right)\right)\check{Q}_\epsilon
+   \quad (\because\ 0 - a = -a\ (a \to \tfrac12)) \\
+&= h(0)\,\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{def_half_sign_of_binary_value}\ \text{の}\ h(0) := -\left(\tfrac12\right)\ \text{を右辺から左辺へ}\right) \\
+&= h(\epsilon(\mu))\,\check{Q}_\epsilon
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 0\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（以下「",
+        math(String.raw`\mu`),
+        " ごとの左の等式」と呼ぶ）。",
         math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
         "（",
         ref("def_check_index_set"),
@@ -4011,26 +4302,14 @@ y_{\epsilon'}
    \quad \left(\because\ \blkref{finite_sum_of_matrices_distributes_in_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (X_1,\dots,X_r) \to (\gamma(\tilde\theta_1)(\check{n}_1 - \tfrac12 I),\dots,\gamma(\tilde\theta_{M_{\mathrm{col}}})(\check{n}_{M_{\mathrm{col}}} - \tfrac12 I)),\ C \to \check{Q}_\epsilon)\right) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\left(\check{n}_\mu - \tfrac12 I\right)\check{Q}_\epsilon\right)
    \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \gamma(\tilde\theta_\mu),\ A \to \check{n}_\mu - \tfrac12 I,\ B \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\left(\check{n}_\mu + \left(-\left(\tfrac12 I\right)\right)\right)\check{Q}_\epsilon\right)
-   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \tfrac12 I)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{n}_\mu\check{Q}_\epsilon + \left(-\left(\tfrac12 I\right)\right)\check{Q}_\epsilon\right)
-   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to -\left(\tfrac12 I\right),\ C \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{n}_\mu\check{Q}_\epsilon + \left(-\left(\left(\tfrac12 I\right)\check{Q}_\epsilon\right)\right)\right)
-   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \tfrac12 I,\ B \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{n}_\mu\check{Q}_\epsilon - \left(\tfrac12 I\right)\check{Q}_\epsilon\right)
-   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu\check{Q}_\epsilon,\ B \to \left(\tfrac12 I\right)\check{Q}_\epsilon)\ \text{を右辺から左辺へ、各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{n}_\mu\check{Q}_\epsilon - \tfrac12\left(I\check{Q}_\epsilon\right)\right)
-   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \tfrac12,\ A \to I,\ B \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{n}_\mu\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon\right)
-   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon\right)
-   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (3)\ \text{の}\ \check{n}_\nu\check{Q}_\epsilon = \epsilon_\nu\check{Q}_\epsilon\ (\nu \to \mu)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\left(\epsilon_\mu - \tfrac12\right)\check{Q}_\epsilon\right)
-   \quad \left(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \epsilon_\mu,\ b \to \tfrac12,\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\check{Q}_\epsilon
-   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \gamma(\tilde\theta_\mu),\ b \to \epsilon_\mu - \tfrac12,\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\check{Q}_\epsilon
-   \quad \left(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (c_1,\dots,c_r) \to (\gamma(\tilde\theta_1)(\epsilon_1 - \tfrac12),\dots,\gamma(\tilde\theta_{M_{\mathrm{col}}})(\epsilon_{M_{\mathrm{col}}} - \tfrac12)),\ A \to \check{Q}_\epsilon)\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(h(\epsilon(\mu))\,\check{Q}_\epsilon\right)
+   \quad (\because \mu\ \text{ごとの左の等式を各項へ}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \left(\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \gamma(\tilde\theta_\mu),\ b \to h(\epsilon(\mu)),\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
+&= \left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (c_1,\dots,c_r) \to (\gamma(\tilde\theta_1)h(\epsilon(1)),\dots,\gamma(\tilde\theta_{M_{\mathrm{col}}})h(\epsilon(M_{\mathrm{col}}))),\ A \to \check{Q}_\epsilon)\right) \\
+&= \left(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{def_sum_over_check_index_set}\ (r_\mu \to \gamma(\tilde\theta_\mu)h(\epsilon(\mu)))\ \text{を右辺から左辺へ}\right) \\
 &= \check{g}(\epsilon)\,\check{Q}_\epsilon
    \quad (\because \check{g} \text{ の定義})
 \end{aligned}`,
@@ -4038,11 +4317,80 @@ y_{\epsilon'}
       paragraph([
         "右から掛ける形 ",
         math(String.raw`\check{Q}_\epsilon\check{X} = \check{g}(\epsilon)\check{Q}_\epsilon`),
-        " も、",
-        ref("check_joint_eigenspace_decomposition"),
-        " (3) の ",
-        math(String.raw`\check{Q}_\epsilon\check{n}_\nu = \epsilon_\nu\check{Q}_\epsilon`),
-        " を使って同じ形の鎖で示す。",
+        " も同じ形で示す。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " ごとに、",
+        math(String.raw`\epsilon(\mu)`),
+        " の値によらない部分は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon\left(\check{n}_\mu - \tfrac12 I\right)
+&= \check{Q}_\epsilon\left(\check{n}_\mu + \left(-\left(\tfrac12 I\right)\right)\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \tfrac12 I)\right) \\
+&= \check{Q}_\epsilon\check{n}_\mu + \check{Q}_\epsilon\left(-\left(\tfrac12 I\right)\right)
+   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon,\ B \to \check{n}_\mu,\ C \to -\left(\tfrac12 I\right))\right) \\
+&= \check{Q}_\epsilon\check{n}_\mu + \left(-\left(\check{Q}_\epsilon\left(\tfrac12 I\right)\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon,\ B \to \tfrac12 I)\right) \\
+&= \check{Q}_\epsilon\check{n}_\mu - \check{Q}_\epsilon\left(\tfrac12 I\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon\check{n}_\mu,\ B \to \check{Q}_\epsilon\left(\tfrac12 I\right))\ \text{を右辺から左辺へ}\right) \\
+&= \check{Q}_\epsilon\check{n}_\mu - \tfrac12\left(\check{Q}_\epsilon I\right)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \tfrac12,\ A \to \check{Q}_\epsilon,\ B \to I)\right) \\
+&= \check{Q}_\epsilon\check{n}_\mu - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`\epsilon(\mu) = 1`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon\left(\check{n}_\mu - \tfrac12 I\right)
+&= \check{Q}_\epsilon\check{n}_\mu - \tfrac12\check{Q}_\epsilon
+   \quad (\because \epsilon(\mu)\ \text{によらない部分の鎖}) \\
+&= \check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (3)\ \text{の}\ \epsilon(\nu) = 1\ \text{の}\ \check{Q}_\epsilon\check{n}_\nu = \check{Q}_\epsilon\ (\nu \to \mu)\text{。場合の仮定}\ \epsilon(\mu) = 1\right) \\
+&= 1\,\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \left(1 - \tfrac12\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to 1,\ b \to \tfrac12,\ A \to \check{Q}_\epsilon)\right) \\
+&= \tfrac12\,\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{real_one_minus_half_is_half}\right) \\
+&= h(1)\,\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{def_half_sign_of_binary_value}\ \text{の}\ h(1) := \tfrac12\ \text{を右辺から左辺へ}\right) \\
+&= h(\epsilon(\mu))\,\check{Q}_\epsilon
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 1\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon(\mu) = 0`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon\left(\check{n}_\mu - \tfrac12 I\right)
+&= \check{Q}_\epsilon\check{n}_\mu - \tfrac12\check{Q}_\epsilon
+   \quad (\because \epsilon(\mu)\ \text{によらない部分の鎖}) \\
+&= O - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (3)\ \text{の}\ \epsilon(\nu) = 0\ \text{の}\ \check{Q}_\epsilon\check{n}_\nu = O\ (\nu \to \mu)\text{。場合の仮定}\ \epsilon(\mu) = 0\right) \\
+&= 0\,\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \left(0 - \tfrac12\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to 0,\ b \to \tfrac12,\ A \to \check{Q}_\epsilon)\right) \\
+&= \left(-\left(\tfrac12\right)\right)\check{Q}_\epsilon
+   \quad (\because\ 0 - a = -a\ (a \to \tfrac12)) \\
+&= h(0)\,\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{def_half_sign_of_binary_value}\ \text{の}\ h(0) := -\left(\tfrac12\right)\ \text{を右辺から左辺へ}\right) \\
+&= h(\epsilon(\mu))\,\check{Q}_\epsilon
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 0\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（以下「",
+        math(String.raw`\mu`),
+        " ごとの右の等式」と呼ぶ）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -4053,26 +4401,14 @@ y_{\epsilon'}
    \quad \left(\because\ \blkref{finite_sum_of_matrices_distributes_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ C \to \check{Q}_\epsilon,\ (X_1,\dots,X_r) \to (\gamma(\tilde\theta_1)(\check{n}_1 - \tfrac12 I),\dots,\gamma(\tilde\theta_{M_{\mathrm{col}}})(\check{n}_{M_{\mathrm{col}}} - \tfrac12 I)))\right) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\left(\check{n}_\mu - \tfrac12 I\right)\right)
    \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \gamma(\tilde\theta_\mu),\ A \to \check{Q}_\epsilon,\ B \to \check{n}_\mu - \tfrac12 I)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\left(\check{n}_\mu + \left(-\left(\tfrac12 I\right)\right)\right)\right)
-   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \tfrac12 I)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu + \check{Q}_\epsilon\left(-\left(\tfrac12 I\right)\right)\right)
-   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon,\ B \to \check{n}_\mu,\ C \to -\left(\tfrac12 I\right))\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu + \left(-\left(\check{Q}_\epsilon\left(\tfrac12 I\right)\right)\right)\right)
-   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon,\ B \to \tfrac12 I)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu - \check{Q}_\epsilon\left(\tfrac12 I\right)\right)
-   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon\check{n}_\mu,\ B \to \check{Q}_\epsilon\left(\tfrac12 I\right))\ \text{を右辺から左辺へ、各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu - \tfrac12\left(\check{Q}_\epsilon I\right)\right)
-   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \tfrac12,\ A \to \check{Q}_\epsilon,\ B \to I)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu - \tfrac12\check{Q}_\epsilon\right)
-   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon\right)
-   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (3)\ \text{の}\ \check{Q}_\epsilon\check{n}_\nu = \epsilon_\nu\check{Q}_\epsilon\ (\nu \to \mu)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\left(\epsilon_\mu - \tfrac12\right)\check{Q}_\epsilon\right)
-   \quad \left(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \epsilon_\mu,\ b \to \tfrac12,\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\check{Q}_\epsilon
-   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \gamma(\tilde\theta_\mu),\ b \to \epsilon_\mu - \tfrac12,\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
-&= \left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\check{Q}_\epsilon
-   \quad \left(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (c_1,\dots,c_r) \to (\gamma(\tilde\theta_1)(\epsilon_1 - \tfrac12),\dots,\gamma(\tilde\theta_{M_{\mathrm{col}}})(\epsilon_{M_{\mathrm{col}}} - \tfrac12)),\ A \to \check{Q}_\epsilon)\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(h(\epsilon(\mu))\,\check{Q}_\epsilon\right)
+   \quad (\because \mu\ \text{ごとの右の等式を各項へ}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \left(\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \gamma(\tilde\theta_\mu),\ b \to h(\epsilon(\mu)),\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
+&= \left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (c_1,\dots,c_r) \to (\gamma(\tilde\theta_1)h(\epsilon(1)),\dots,\gamma(\tilde\theta_{M_{\mathrm{col}}})h(\epsilon(M_{\mathrm{col}}))),\ A \to \check{Q}_\epsilon)\right) \\
+&= \left(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{def_sum_over_check_index_set}\ (r_\mu \to \gamma(\tilde\theta_\mu)h(\epsilon(\mu)))\ \text{を右辺から左辺へ}\right) \\
 &= \check{g}(\epsilon)\,\check{Q}_\epsilon
    \quad (\because \check{g} \text{ の定義})
 \end{aligned}`,
@@ -4411,6 +4747,7 @@ E_K \check{Q}_\epsilon
         "2026-11-03: Step 4 の後半の鎖 V̌'y = V̌'(Q̌_εy) = exp(ǧ)Q̌_εy = exp(ǧ)y が、2 行目で (V̌'Q̌_ε)y = V̌'(Q̌_εy) とスカラー倍の作用を名前を出さずに使っていたのを、mat_mult_associative（q → 1）・Step 3 の極限の鎖・scalar_multiple_factors_out_of_left_factor（p → 1）の 1 行 1 主張の 5 行にした。係数は Step 3 の主張文どおり (exp(ǧ(ε)))_ℂ と書いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step4_eigenvector_chain.sage。",
         "2026-11-04: SageMath の検算を付けたときのレビューで、主張文の「im Q̌_ε の各元は V̌' の固有ベクトル」が 0 で破れる（固有ベクトルは 0 でない）ので「0 でない各元」に直し、直和の段落の「1 次元なので 1 本」に check_joint_eigenspace_decomposition (4) の参照と、その元が固有ベクトルである理由を足した。数値検証: sagemath/check/eigenvalues_of_check_Vprime/（証明の各行は移した検算、主張そのものは check_claim_statements.sage）。",
         "2026-11-03: 証明の最後の段落「ǧ(ε) ∈ ℝ（gamma_theta_tilde_mu_positive より γ(θ̃_μ) ∈ ℝ_{>0}）なので exp(ǧ(ε)) > 0」は、実数の exp が正であることを名前を出さずに使い、要らない γ の正値性を根拠に挙げていた。real_exp_positive（x → ǧ(ε)）を引く 1 行にし、ǧ(ε) ∈ ℝ の根拠は主張の ǧ の定義とした。主張の ǧ の定義に、和が def_finite_sum_of_real_numbers の ℝ の有限和であることを書いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.exp_gval_pos は real_exp_positive の具体版 Ising2D.real_exp_positive（MathematicalTools/MatrixExponentialAndCommutators/ClaimRealExpPositive.lean）を引く。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_positivity.sage。",
+        "2026-11-21: 代表の指摘（ε の添字・算術・和の範囲）を受けて記法を書き直した。ǧ(ε) := Σ_{μ=1}^{M_col} γ(θ̃_μ)(ε_μ − ½) を ǧ(ε) := Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ))（def_sum_over_check_index_set・def_half_sign_of_binary_value）にした（値は不変）。Step 1 は、check_joint_eigenspace_decomposition (3) が ε(ν) の場合分けの形になったので、μ ごとに (ň_μ − ½I)Q̌_ε = h(ε(μ))Q̌_ε を示す鎖（ε(μ) によらない 6 行と、ε(μ) = 1・ε(μ) = 0 の 7 行ずつ。1 − ½ = ½ は real_one_minus_half_is_half、h の値は def_half_sign_of_binary_value）を先に置き、X̌Q̌_ε の鎖を def_check_number_operator (2)・finite_sum_of_matrices_distributes_in_left_factor・scalar_multiple_factors_out_of_left_factor・μ ごとの左の等式・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix・def_sum_over_check_index_set を右辺から左辺へ・ǧ の定義の 8 行にした。右から掛ける形も同じ構成にした。Q̌_ε が最初に出る主張の文に def_check_Q_epsilon の参照を置き、「ε の成分を入れ替える」を「値 ε(μ) と ε(M_col+1−μ) を入れ替えた写像」にした。 Lean は Ising2D.halfSign・Ising2D.binOfMem と、Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common・nOp_sub_half_mul_Qproj_of_mem・nOp_sub_half_mul_Qproj_of_not_mem・Xop_mul_Qproj_step1（右から掛ける形は Qproj_mul_nOp_sub_half_*・Qproj_mul_Xop_step1）が同じ行の calc。数値検証: sagemath/check/eigenvalues_of_check_Vprime/check_step1_left_chain.sage・check_step1_right_chain.sage。",
       ],
     },
   },
@@ -4429,7 +4766,7 @@ E_K \check{Q}_\epsilon
         " のもの、",
         math(String.raw`\check{Q}_\epsilon`),
         " を ",
-        ref("check_joint_eigenspace_decomposition"),
+        ref("def_check_Q_epsilon"),
         " のもの、",
         math(String.raw`\left(\check{V}'\right)^{-1}`),
         " を ",
@@ -4507,6 +4844,7 @@ E_K \check{Q}_\epsilon
       status: "added",
       notes: [
         "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 3 は「(V̌')^{-1} = exp(−X̌) であり −X̌ = Σ(−γ(θ̃_μ))(ň_μ − ½I) だから、Step 1〜2 をそのまま γ(θ̃_μ) → −γ(θ̃_μ) として適用でき（eigenvalues_of_check_Vprime の Step 1〜4 も符号を替えるだけで通る）」と書いていた。本文の V̌'・X̌・ǧ は γ(θ̃_μ) に固定した記号で、γ を引数に取る主張が無いので、γ → −γ の代入は引ける主張を持たない。Step 1 の鎖が使う V̌' の固有関係を (V̌')^{-1} について述べ直したのがこの主張で、eigenvalues_of_check_Vprime と (V̌')^{-1}V̌' = I から導く（eigenvalues_of_check_Vprime の証明を符号を替えて繰り返さない）。Lean は Ising2D.CheckFermiSetup.Vprime_inv_mul_Qproj（EigenvalueProblem/EigenvaluesOfVPlus/ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/eigenvalues_of_inverse_of_check_Vprime/。",
+        "2026-11-21: 主張の Q̌_ε の出典を、Q̌_ε を独立した定義にした def_check_Q_epsilon の参照に替えた（以前は check_joint_eigenspace_decomposition の主張の中で定めていた）。式は不変。",
       ],
     },
   },
@@ -4619,11 +4957,13 @@ E_K \check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \exp(\check{g}(\epsilon))
-&= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
+&= \exp\!\left(\sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)
 &&\bigl(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\bigr)\\
+&= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)
+&&\bigl(\because\ \blkref{def_sum_over_check_index_set}\ (r_\mu \to \gamma(\tilde\theta_\mu)h(\epsilon(\mu)))\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
-\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
-&&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12))\bigr)
+\exp\!\left(\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)
+&&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)h(\epsilon(\mu)))\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -4633,20 +4973,20 @@ E_K \check{Q}_\epsilon
         String.raw`\begin{aligned}
 \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(\check{g}(\epsilon))
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M_{\mathrm{col}}}
-   \exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
+   \exp\!\left(\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)
 &&\bigl(\because\ \text{直前の鎖を各項へ同時に}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
-   \left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right)
-   + \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)
-&&\bigl(\because\ \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}},\ j \to \mu,\ a_j^{(e)} \to \exp(\gamma(\tilde\theta_\mu)(e - \tfrac12)))\ \text{を右辺から左辺へ}\bigr)\\
+   \left(\exp\!\left(\gamma(\tilde\theta_\mu)\,h(1)\right)
+   + \exp\!\left(\gamma(\tilde\theta_\mu)\,h(0)\right)\right)
+&&\bigl(\because\ \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}},\ j \to \mu,\ a_j^{(e)} \to \exp(\gamma(\tilde\theta_\mu)h(e)))\ \text{を右辺から左辺へ}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)
-   + \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)
-&&\bigl(\because\ \blkref{real_one_minus_half_is_half}\ \text{を各因子へ同時に}\bigr)\\
+   + \exp\!\left(\gamma(\tilde\theta_\mu)\,h(0)\right)\right)
+&&\bigl(\because\ \blkref{def_half_sign_of_binary_value}\ \text{の}\ h(1) := \tfrac12\ \text{を各因子へ同時に}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)
    + \exp\!\left(\gamma(\tilde\theta_\mu)\left(-\tfrac12\right)\right)\right)
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - a = -a\ (a \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{def_half_sign_of_binary_value}\ \text{の}\ h(0) := -\left(\tfrac12\right)\ \text{を各因子へ同時に}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)
    + \exp\!\left(-\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)\right)\right)
@@ -4680,15 +5020,17 @@ E_K \check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \exp(-\check{g}(\epsilon))
-&= \exp\!\left(-\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
+&= \exp\!\left(-\sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)
 &&\bigl(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\bigr)\\
-&= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\right)\right)
-&&\bigl(\because\ \blkref{finite_sum_of_negated_real_numbers}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12))\ \text{を右辺から左辺へ}\bigr)\\
-&= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)\right)
-&&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ (x \to \gamma(\tilde\theta_\mu),\ t \to \epsilon_\mu - \tfrac12)\ \text{を右辺から左辺へ各項へ同時に}\bigr)\\
+&= \exp\!\left(-\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\right)
+&&\bigl(\because\ \blkref{def_sum_over_check_index_set}\ (r_\mu \to \gamma(\tilde\theta_\mu)h(\epsilon(\mu)))\bigr)\\
+&= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\left(\gamma(\tilde\theta_\mu)h(\epsilon(\mu))\right)\right)\right)
+&&\bigl(\because\ \blkref{finite_sum_of_negated_real_numbers}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)h(\epsilon(\mu)))\ \text{を右辺から左辺へ}\bigr)\\
+&= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\gamma(\tilde\theta_\mu)\right)h(\epsilon(\mu))\right)
+&&\bigl(\because\ \blkref{real_negation_times_is_negation_of_product}\ (x \to \gamma(\tilde\theta_\mu),\ t \to h(\epsilon(\mu)))\ \text{を右辺から左辺へ各項へ同時に}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
-\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)\right)
-&&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to (-\gamma(\tilde\theta_\mu))(\epsilon_\mu - \tfrac12))\bigr)
+\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)h(\epsilon(\mu))\right)
+&&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to (-\gamma(\tilde\theta_\mu))h(\epsilon(\mu)))\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -4718,20 +5060,20 @@ E_K \check{Q}_\epsilon
 &= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(-\check{g}(\epsilon))\Bigr)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \exp(-\check{g}(\epsilon)))\bigr)\\
 &= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M_{\mathrm{col}}}
-   \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)\right)\Bigr)_{\mathbb{C}}
+   \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)h(\epsilon(\mu))\right)\Bigr)_{\mathbb{C}}
 &&\bigl(\because\ \text{冒頭の}\ \exp(-\check{g}(\epsilon))\ \text{の鎖を各項へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
-   \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(1 - \tfrac12\right)\right)
-   + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(0 - \tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
-&&\bigl(\because\ \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}},\ j \to \mu,\ a_j^{(e)} \to \exp((-\gamma(\tilde\theta_\mu))(e - \tfrac12)))\ \text{を右辺から左辺へ}\bigr)\\
+   \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)h(1)\right)
+   + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)h(0)\right)\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}},\ j \to \mu,\ a_j^{(e)} \to \exp((-\gamma(\tilde\theta_\mu))h(e)))\ \text{を右辺から左辺へ}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)
-   + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(0 - \tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
-&&\bigl(\because\ \blkref{real_one_minus_half_is_half}\ \text{を各因子へ同時に}\bigr)\\
+   + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)h(0)\right)\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_half_sign_of_binary_value}\ \text{の}\ h(1) := \tfrac12\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)
    + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(-\tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - a = -a\ (a \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&&\bigl(\because\ \blkref{def_half_sign_of_binary_value}\ \text{の}\ h(0) := -\left(\tfrac12\right)\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)
    + \exp\!\left(-\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
@@ -4832,6 +5174,7 @@ E_K \check{Q}_\epsilon
         "2026-11-20（Lean の通しの証明のゴールラインの確認）: Step 2 と Step 3 の鎖の「ℝ で 1 − 1/2 = 1/2」（各 1 か所）は名前だけの根拠だった。主張 real_one_minus_half_is_half の参照に替えた（Lean の prod_step2_cosh の対応する段も mathlib の sub_half から同じ主張の具体版へ替えた）。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認）: Step 2 と Step 3 の鎖の「ℝ で a·1/2 = a/2」（各 1 か所。a → γ(θ̃_μ) と a → −γ(θ̃_μ)）は名前だけの根拠だった。主張 real_times_half_is_quotient_by_two の参照に替えた（Lean の prod_step2_cosh の対応する段も mathlib の mul_one_div から同じ主張の具体版へ替えた。Step 3 は同じ補題を g → −g で使う）。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認）: Step 2 と Step 3 の鎖の「ℝ で 2 ≠ 0 なので b = 2·(b/2)」（各 1 か所。b → exp(γ(θ̃_μ)/2) + exp(−γ(θ̃_μ)/2) と b → exp(−γ(θ̃_μ)/2) + exp(−(−γ(θ̃_μ))/2)）は名前だけの根拠だった。主張 real_twice_quotient_by_two_is_original を右辺から左辺へ当てる参照に替えた（Lean の prod_step2_cosh の対応する段も mathlib の mul_div_cancel₀ から同じ主張の具体版へ替えた。Step 3 は同じ補題を g → −g で使う）。",
+        "2026-11-21: ǧ(ε) の定義を Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ)) に改めたのに合わせた。Step 2・Step 3 の exp(±ǧ(ε)) の鎖に、Σ_{μ∈M̌} を Σ_{μ=1}^{M_col} へ開く def_sum_over_check_index_set の行を足し、各項の ε_μ − ½ を h(ε(μ)) と書いた。展開の a_μ^{(e)} を exp(±γ(θ̃_μ)h(e)) にし、続く「1 − ½ = ½」（real_one_minus_half_is_half）と「0 − ½ = −½」の 2 行（Step 2・Step 3 に 1 組ずつ）を、def_half_sign_of_binary_value の h(1) := ½・h(0) := −(½) を引く行に置き換えた。主張・値は不変。 Lean は Ising2D.CheckFermiSetup.exp_gval_step2_product・prod_step2_cosh・exp_neg_gval_step3_product。数値検証: sagemath/check/trace_of_check_Vprime/ の check_step2_exp_product.sage・check_step2_expansion.sage・check_step2_cosh.sage・check_step3_exp_product.sage・check_step3_expansion_and_cosh.sage。",
       ],
     },
   },
@@ -6196,15 +6539,29 @@ V^{(+)}
     labels: ["eigenvalues_of_V_plus"],
     statement: [
       paragraph([
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " に対して",
       ]),
       displayMath(
         String.raw`\check\Lambda_\epsilon := (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-\exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
-\left(\epsilon_\mu - \tfrac{1}{2}\right)\right) \in \mathbb{R}`,
+\exp\!\left(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,
+h(\epsilon(\mu))\right) \in \mathbb{R}`,
       ),
-      paragraph(["とおく。このとき"]),
+      paragraph([
+        "とおく（",
+        math(String.raw`h`),
+        " は ",
+        ref("def_half_sign_of_binary_value"),
+        "、和は ",
+        ref("def_sum_over_check_index_set"),
+        "）。",
+        ref("def_check_Q_epsilon"),
+        " の ",
+        math(String.raw`\check{Q}_\epsilon`),
+        " について、次が成り立つ。",
+      ]),
       list([
         [
           math(String.raw`\text{(1)}\quad V^{(+)}\check{Q}_\epsilon
@@ -6264,11 +6621,15 @@ V^{(+)}
           math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
           " である。",
           math(String.raw`\check\Lambda_\epsilon`),
-          " のうち最大のものは全ての ",
-          math(String.raw`\epsilon_\mu = 1`),
-          " を取ったとき、最小のものは全ての ",
-          math(String.raw`\epsilon_\mu = 0`),
-          " を取ったときである。",
+          " のうち最大のものは ",
+          math(String.raw`\epsilon = (1,\dots,1)`),
+          " のとき、最小のものは ",
+          math(String.raw`\epsilon = (0,\dots,0)`),
+          " のときである（",
+          math(String.raw`(1,\dots,1), (0,\dots,0)`),
+          " は ",
+          ref("def_binary_assignments_on_check_index_set"),
+          " の定数写像）。",
           math(String.raw`\check\Lambda_{\max} := \check\Lambda_{(1,\dots,1)} \in \mathbb{R}`),
           "、",
           math(String.raw`\check\Lambda_{\min} := \check\Lambda_{(0,\dots,0)} \in \mathbb{R}`),
@@ -6333,9 +6694,9 @@ V^{(+)}\check{Q}_\epsilon
    &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to \exp(\check{g}(\epsilon)))) \\
 &= \bigl((2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\check{Q}_\epsilon
    &&(\because\ a\ \text{の置き方}) \\
-&= \Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
+&= \Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}(\epsilon)\ \text{の定義}) \\
-&= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
+&= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
    &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2) \\
 &= (\check\Lambda_\epsilon)_{\mathbb{C}}\check{Q}_\epsilon
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義})
@@ -6356,9 +6717,9 @@ V^{(+)}\check{Q}_\epsilon
    &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to \exp(\check{g}(\epsilon)))) \\
 &= \bigl((2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\check{Q}_\epsilon
    &&(\because\ a\ \text{の置き方}) \\
-&= \Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
+&= \Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}(\epsilon)\ \text{の定義}) \\
-&= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
+&= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
    &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2) \\
 &= (\check\Lambda_\epsilon)_{\mathbb{C}}\check{Q}_\epsilon
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義})
@@ -6620,9 +6981,9 @@ x &= Ix
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_\epsilon
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
    &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2\ \text{を右辺から左辺へ}) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}(\epsilon)\ \text{の定義を右辺から左辺へ}) \\
@@ -6656,20 +7017,78 @@ x &= Ix
       paragraph([
         "大小の比較。",
         math(String.raw`\epsilon`),
-        " を任意に取る。各 ",
+        " を任意に取る。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " について、",
+        math(String.raw`h`),
+        " の値の差を求める（",
+        math(String.raw`h`),
+        " は ",
+        ref("def_half_sign_of_binary_value"),
+        "）。",
+        math(String.raw`\epsilon(\mu) = 1`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+h(1) - h(\epsilon(\mu))
+&= h(1) - h(1)
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 1) \\
+&= 0
+   \quad (\because \mathbb{R}\text{ で }a - a = 0\ (a \to h(1)))
+\end{aligned}
+\qquad
+\begin{aligned}
+h(\epsilon(\mu)) - h(0)
+&= h(1) - h(0)
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 1) \\
+&= \tfrac12 - h(0)
+   \quad (\because \blkref{def_half_sign_of_binary_value}\text{ の }h(1) := \tfrac12) \\
+&= \tfrac12 - \left(-\left(\tfrac12\right)\right)
+   \quad (\because \blkref{def_half_sign_of_binary_value}\text{ の }h(0) := -\left(\tfrac12\right)) \\
+&= 1
+   \quad (\because \mathbb{R}\text{ で }\tfrac12 - \left(-\left(\tfrac12\right)\right) = 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`\epsilon(\mu) = 0`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+h(1) - h(\epsilon(\mu))
+&= h(1) - h(0)
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 0) \\
+&= \tfrac12 - h(0)
+   \quad (\because \blkref{def_half_sign_of_binary_value}\text{ の }h(1) := \tfrac12) \\
+&= \tfrac12 - \left(-\left(\tfrac12\right)\right)
+   \quad (\because \blkref{def_half_sign_of_binary_value}\text{ の }h(0) := -\left(\tfrac12\right)) \\
+&= 1
+   \quad (\because \mathbb{R}\text{ で }\tfrac12 - \left(-\left(\tfrac12\right)\right) = 1)
+\end{aligned}
+\qquad
+\begin{aligned}
+h(\epsilon(\mu)) - h(0)
+&= h(0) - h(0)
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 0) \\
+&= 0
+   \quad (\because \mathbb{R}\text{ で }a - a = 0\ (a \to h(0)))
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。したがって ",
+        math(String.raw`h(1) - h(\epsilon(\mu)) \geq 0,\ h(\epsilon(\mu)) - h(0) \geq 0`),
+        " である。各 ",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         " について ",
-        math(String.raw`r_\mu := \gamma(\tilde\theta_\mu)\bigl(1 - \epsilon_\mu\bigr) \in \mathbb{R}`),
+        math(String.raw`r_\mu := \gamma(\tilde\theta_\mu)\bigl(h(1) - h(\epsilon(\mu))\bigr) \in \mathbb{R}`),
         "、",
-        math(String.raw`w_\mu := \gamma(\tilde\theta_\mu)\,\epsilon_\mu \in \mathbb{R}`),
+        math(String.raw`w_\mu := \gamma(\tilde\theta_\mu)\bigl(h(\epsilon(\mu)) - h(0)\bigr) \in \mathbb{R}`),
         " とおく。",
         ref("gamma_theta_tilde_mu_positive"),
         " より ",
         math(String.raw`\gamma(\tilde\theta_\mu) > 0`),
-        "、",
-        math(String.raw`\epsilon_\mu \in \{0,1\}`),
-        " より ",
-        math(String.raw`1 - \epsilon_\mu \in \{0,1\}`),
         " なので、正の実数と ",
         math(String.raw`0`),
         " 以上の実数の積として ",
@@ -6684,21 +7103,29 @@ x &= Ix
         ref("eigenvalues_of_check_Vprime"),
         " の ",
         math(String.raw`\check{g}`),
-        " について",
+        " について（",
+        math(String.raw`(1,\dots,1), (0,\dots,0)`),
+        " は ",
+        ref("def_binary_assignments_on_check_index_set"),
+        " の定数写像）",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{g}(1,\dots,1) - \check{g}(\epsilon)
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(1 - \tfrac12\Bigr)
- - \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)
+&= \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h((1,\dots,1)(\mu))
+ - \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
    \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義を 2 か所へ同時適用}) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\Bigl(\gamma(\tilde\theta_\mu)\Bigl(1 - \tfrac12\Bigr)
- - \gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
-   \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)\bigl(1 - \tfrac12\bigr),\ b_j \to \gamma(\tilde\theta_j)\bigl(\epsilon_j - \tfrac12\bigr)\bigr)\ \text{を右辺から左辺へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\Bigl(1 - \tfrac12\Bigr) - \Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
+&= \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(1)
+ - \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
+   \quad (\because \blkref{def_binary_assignments_on_check_index_set}\text{ の }(1,\dots,1)(\mu) = 1\text{ を各項へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,h(1)
+ - \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
+   \quad (\because \blkref{def_sum_over_check_index_set}\text{ を 2 か所へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\Bigl(\gamma(\tilde\theta_\mu)\,h(1)
+ - \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
+   \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)h(1),\ b_j \to \gamma(\tilde\theta_j)h(\epsilon(j))\bigr)\ \text{を右辺から左辺へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(h(1) - h(\epsilon(\mu))\Bigr)
    \quad (\because \mathbb{R}\text{ の分配律を各項へ同時適用}) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(1 - \epsilon_\mu\Bigr)
-   \quad (\because \mathbb{R}\text{ で }\bigl(1 - \tfrac12\bigr) - \bigl(\epsilon_\mu - \tfrac12\bigr) = 1 - \epsilon_\mu\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}r_\mu
    \quad (\because r_\mu\text{ の置き方}) \\
 &\geq r_1
@@ -6711,16 +7138,20 @@ x &= Ix
       displayMath(
         String.raw`\begin{aligned}
 \check{g}(\epsilon) - \check{g}(0,\dots,0)
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)
- - \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(0 - \tfrac12\Bigr)
+&= \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
+ - \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h((0,\dots,0)(\mu))
    \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義を 2 か所へ同時適用}) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\Bigl(\gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)
- - \gamma(\tilde\theta_\mu)\Bigl(0 - \tfrac12\Bigr)\Bigr)
-   \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)\bigl(\epsilon_j - \tfrac12\bigr),\ b_j \to \gamma(\tilde\theta_j)\bigl(0 - \tfrac12\bigr)\bigr)\ \text{を右辺から左辺へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\Bigl(\epsilon_\mu - \tfrac12\Bigr) - \Bigl(0 - \tfrac12\Bigr)\Bigr)
+&= \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
+ - \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(0)
+   \quad (\because \blkref{def_binary_assignments_on_check_index_set}\text{ の }(0,\dots,0)(\mu) = 0\text{ を各項へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
+ - \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,h(0)
+   \quad (\because \blkref{def_sum_over_check_index_set}\text{ を 2 か所へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\Bigl(\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
+ - \gamma(\tilde\theta_\mu)\,h(0)\Bigr)
+   \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)h(\epsilon(j)),\ b_j \to \gamma(\tilde\theta_j)h(0)\bigr)\ \text{を右辺から左辺へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(h(\epsilon(\mu)) - h(0)\Bigr)
    \quad (\because \mathbb{R}\text{ の分配律を各項へ同時適用}) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,\epsilon_\mu
-   \quad (\because \mathbb{R}\text{ で }\bigl(\epsilon_\mu - \tfrac12\bigr) - \bigl(0 - \tfrac12\bigr) = \epsilon_\mu\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}w_\mu
    \quad (\because w_\mu\text{ の置き方}) \\
 &\geq w_1
@@ -6779,9 +7210,9 @@ x &= Ix
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_\epsilon
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
    &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2\ \text{を右辺から左辺へ}) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}(\epsilon)\ \text{の定義を右辺から左辺へ}) \\
@@ -6791,9 +7222,9 @@ x &= Ix
    &&(\because\ \exp(\check{g}(\epsilon)) \leq \exp(\check{g}(1,\dots,1))\ \text{の両辺に正の実数}\ a\ \text{を掛ける}) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(1,\dots,1))
    &&(\because\ a\ \text{の置き方}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(1 - \tfrac{1}{2}\right)\Bigr)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h((1,\dots,1)(\mu))\Bigr)
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\ (\epsilon \to (1,\dots,1))) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(1 - \tfrac{1}{2}\right)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h((1,\dots,1)(\mu))\Bigr)
    &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2) \\
 &= \check\Lambda_{(1,\dots,1)}
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義}\ (\epsilon \to (1,\dots,1))\ \text{を右辺から左辺へ})
@@ -6803,9 +7234,9 @@ x &= Ix
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_{(0,\dots,0)}
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(0 - \tfrac{1}{2}\right)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h((0,\dots,0)(\mu))\Bigr)
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義}\ (\epsilon \to (0,\dots,0))) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(0 - \tfrac{1}{2}\right)\Bigr)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h((0,\dots,0)(\mu))\Bigr)
    &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2\ \text{を右辺から左辺へ}) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(0,\dots,0))
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\ (\epsilon \to (0,\dots,0))\ \text{を右辺から左辺へ}) \\
@@ -6815,9 +7246,9 @@ x &= Ix
    &&(\because\ \exp(\check{g}(0,\dots,0)) \leq \exp(\check{g}(\epsilon))\ \text{の両辺に正の実数}\ a\ \text{を掛ける}) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))
    &&(\because\ a\ \text{の置き方}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}(\epsilon)\ \text{の定義}) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
    &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2) \\
 &= \check\Lambda_\epsilon
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義を右辺から左辺へ})
@@ -6828,13 +7259,13 @@ x &= Ix
         math(String.raw`\epsilon`),
         " は任意だったので、",
         math(String.raw`\check\Lambda_\epsilon`),
-        " のうち最大のものは全ての ",
-        math(String.raw`\epsilon_\mu = 1`),
-        " を取った ",
+        " のうち最大のものは ",
+        math(String.raw`\epsilon = (1,\dots,1)`),
+        " の ",
         math(String.raw`\check\Lambda_{(1,\dots,1)}`),
-        "、最小のものは全ての ",
-        math(String.raw`\epsilon_\mu = 0`),
-        " を取った ",
+        "、最小のものは ",
+        math(String.raw`\epsilon = (0,\dots,0)`),
+        " の ",
         math(String.raw`\check\Lambda_{(0,\dots,0)}`),
         " である。主張のとおり、これを ",
         math(String.raw`\check\Lambda_{\max} := \check\Lambda_{(1,\dots,1)} \in \mathbb{R}`),
@@ -6853,10 +7284,14 @@ x &= Ix
       displayMath(
         String.raw`\begin{aligned}
 \check{g}(1,\dots,1)
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigl(1 - \tfrac12\Bigr)
+&= \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h((1,\dots,1)(\mu))
    \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}\ (\epsilon \to (1,\dots,1))) \\
+&= \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(1)
+   \quad (\because \blkref{def_binary_assignments_on_check_index_set}\text{ の }(1,\dots,1)(\mu) = 1\text{ を各項へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\,h(1)
+   \quad (\because \blkref{def_sum_over_check_index_set}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\cdot\tfrac12
-   \quad (\because \blkref{real_one_minus_half_is_half}\text{ を各項へ同時適用}) \\
+   \quad (\because \blkref{def_half_sign_of_binary_value}\text{ の }h(1) := \tfrac12\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \tfrac12\,\gamma(\tilde\theta_\mu)
    \quad (\because \mathbb{R}\text{ の積の交換律を各項へ同時適用}) \\
 &= \frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
@@ -6867,10 +7302,14 @@ x &= Ix
       displayMath(
         String.raw`\begin{aligned}
 \check{g}(0,\dots,0)
-&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigl(0 - \tfrac12\Bigr)
+&= \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h((0,\dots,0)(\mu))
    \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}\ (\epsilon \to (0,\dots,0))) \\
+&= \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h(0)
+   \quad (\because \blkref{def_binary_assignments_on_check_index_set}\text{ の }(0,\dots,0)(\mu) = 0\text{ を各項へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\,h(0)
+   \quad (\because \blkref{def_sum_over_check_index_set}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\cdot\Bigl(-\tfrac12\Bigr)
-   \quad (\because \mathbb{R}\text{ で }0 - \tfrac12 = -\tfrac12\text{ を各項へ同時適用}) \\
+   \quad (\because \blkref{def_half_sign_of_binary_value}\text{ の }h(0) := -\left(\tfrac12\right)\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \Bigl(-\tfrac12\Bigr)\gamma(\tilde\theta_\mu)
    \quad (\because \mathbb{R}\text{ の積の交換律を各項へ同時適用}) \\
 &= \Bigl(-\frac{1}{2}\Bigr)\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
@@ -6885,7 +7324,7 @@ x &= Ix
 \check\Lambda_{\max}
 &= \check\Lambda_{(1,\dots,1)}
    &&(\because\ \check\Lambda_{\max}\ \text{の置き方}) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(1 - \tfrac{1}{2}\right)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h((1,\dots,1)(\mu))\Bigr)
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義}\ (\epsilon \to (1,\dots,1))) \\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(1,\dots,1))
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\ (\epsilon \to (1,\dots,1))\ \text{を右辺から左辺へ}) \\
@@ -6899,7 +7338,7 @@ x &= Ix
 \check\Lambda_{\min}
 &= \check\Lambda_{(0,\dots,0)}
    &&(\because\ \check\Lambda_{\min}\ \text{の置き方}) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(0 - \tfrac{1}{2}\right)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\,h((0,\dots,0)(\mu))\Bigr)
    &&(\because\ \check\Lambda_\epsilon\ \text{の定義}\ (\epsilon \to (0,\dots,0))) \\
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(0,\dots,0))
    &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\ (\epsilon \to (0,\dots,0))\ \text{を右辺から左辺へ}) \\
@@ -7015,6 +7454,7 @@ x &= Ix
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (2) の ǧ(0,…,0) の鎖の最後の行 (−½)Σγ = −(½Σγ) の根拠「ℝ で (−a)b = −(ab)」を、主張 real_negation_times_is_negation_of_product（x → ½, t → Σγ(θ~_μ)）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (2) の Λ̌_min の式と、証明の ǧ(0,…,0) の鎖の最後の行・Λ̌_min の鎖の最後の行・積の鎖の 2 行目に出る −½Σγ(θ~_μ) を −(½Σγ(θ~_μ)) と括弧を付けて書いた。ǧ(0,…,0) の鎖の最後の行で引く real_negation_times_is_negation_of_product の右辺 −(x·t) と字面で一致させ、Lean の Ising2D.gval_empty_eq_neg_half_sum・Ising2D.checkBigLambda_min_eq の −((1/2)·Σ) と SageMath の check_part2_extreme_values_chains.sage の −(half·S) に揃えるためである。括弧を書いたので、証明の前置きにあった「−½Σγ は −(½Σγ) と読む」の断りを外した。値・鎖の段数・根拠は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認）: (2) の ǧ(1,…,1) の鎖の 2 行目は「ℝ で 1 − 1/2 = 1/2」を名前だけで根拠にしていた。主張 real_one_minus_half_is_half の参照に替えた（Lean の gval_univ_eq_half_sum の対応する段も同じ主張の具体版を引く）。",
+        "2026-11-21: 代表の指摘（ε の添字・算術・和の範囲）を受けて記法を書き直した。Λ̌_ε を (2 sinh 2K_2)^{M_col/2} exp(Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ)))（def_sum_over_check_index_set・def_half_sign_of_binary_value）で定め、主張で Q̌_ε が最初に出る箇所に def_check_Q_epsilon の参照を置いた。「全ての ε_μ = 1 を取ったとき」を「ε = (1,…,1) のとき」（def_binary_assignments_on_check_index_set の定数写像）にした。大小の比較は、r_μ := γ(θ̃_μ)(1 − ε_μ)・w_μ := γ(θ̃_μ)ε_μ を r_μ := γ(θ̃_μ)(h(1) − h(ε(μ)))・w_μ := γ(θ̃_μ)(h(ε(μ)) − h(0)) にし、その非負性を ε(μ) = 1・0 の場合分けの h の値の差の鎖（各 2〜4 行）で示した。ǧ(1,…,1) − ǧ(ε) と ǧ(ε) − ǧ(0,…,0) の鎖は、定数写像の値 (1,…,1)(μ) = 1・(0,…,0)(μ) = 0 の行と def_sum_over_check_index_set の行を足し、「(1 − ½) − (ε_μ − ½) = 1 − ε_μ」の行は要らなくなったので消した。ǧ(1,…,1)・ǧ(0,…,0) の値の鎖は、ǧ の定義・定数写像の値・def_sum_over_check_index_set・h(1) := ½（h(0) := −(½)）を引く 4 行で始まる形にした（real_one_minus_half_is_half と 0 − ½ = −½ の行を置き換えた）。主張・値は不変。 Lean は Ising2D.gval_le_gval_univ・gval_empty_le_gval・gval_univ_eq_half_sum・gval_empty_eq_neg_half_sum（h の値の差は halfSign_one_sub_halfSign_zero・halfSign_one_sub_nonneg・halfSign_sub_zero_nonneg）。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_comparison_chains.sage・check_part2_extreme_values_chains.sage。",
       ],
     },
   },
@@ -7125,22 +7565,65 @@ x &= Ix
       paragraph([
         "(2) ",
         math(String.raw`\epsilon \neq (1,\dots,1)`),
-        " とすると、ある ",
+        " とすると、",
+        math(String.raw`(1,\dots,1)`),
+        " はすべての ",
+        math(String.raw`\mu`),
+        " を ",
+        math(String.raw`1`),
+        " へ送る写像（",
+        ref("def_binary_assignments_on_check_index_set"),
+        "）なので、ある ",
         math(String.raw`\mu_0 \in \check{\mathcal{M}}`),
         " で ",
-        math(String.raw`\epsilon_{\mu_0} = 0`),
-        " である。各 ",
+        math(String.raw`\epsilon(\mu_0) = 0`),
+        " である。",
+        math(String.raw`h`),
+        " は ",
+        ref("def_half_sign_of_binary_value"),
+        " の写像である。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " について、",
+        math(String.raw`\epsilon(\mu) = 1`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+h(1) - h(\epsilon(\mu))
+&= h(1) - h(1)
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 1) \\
+&= 0
+   \quad (\because \mathbb{R}\text{ で }a - a = 0\ (a \to h(1)))
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon(\mu) = 0`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+h(1) - h(\epsilon(\mu))
+&= h(1) - h(0)
+   \quad (\because \text{場合の仮定 } \epsilon(\mu) = 0) \\
+&= \tfrac12 - h(0)
+   \quad (\because \blkref{def_half_sign_of_binary_value}\text{ の }h(1) := \tfrac12) \\
+&= \tfrac12 - \left(-\left(\tfrac12\right)\right)
+   \quad (\because \blkref{def_half_sign_of_binary_value}\text{ の }h(0) := -\left(\tfrac12\right)) \\
+&= 1
+   \quad (\because \mathbb{R}\text{ で }\tfrac12 - \left(-\left(\tfrac12\right)\right) = 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。各 ",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         " について ",
-        math(String.raw`a_\mu := \gamma(\tilde\theta_\mu)\bigl(1 - \epsilon_\mu\bigr) \in \mathbb{R}`),
+        math(String.raw`a_\mu := \gamma(\tilde\theta_\mu)\bigl(h(1) - h(\epsilon(\mu))\bigr) \in \mathbb{R}`),
         " とおく。",
         ref("gamma_theta_tilde_mu_positive"),
         " より ",
         math(String.raw`\gamma(\tilde\theta_\mu) > 0`),
-        "、",
-        math(String.raw`\epsilon_\mu \in \{0,1\}`),
-        " より ",
-        math(String.raw`1 - \epsilon_\mu \in \{0,1\}`),
+        "、上の二つの鎖より ",
+        math(String.raw`h(1) - h(\epsilon(\mu)) \geq 0`),
         " なので、正の実数と ",
         math(String.raw`0`),
         " 以上の実数の積として ",
@@ -7154,24 +7637,28 @@ x &= Ix
       displayMath(
         String.raw`\begin{aligned}
 \check{g}(1,\dots,1) - \check{g}(\epsilon)
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(1 - \tfrac12\Bigr)
- - \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)
+&= \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h((1,\dots,1)(\mu))
+ - \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
    \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義を 2 か所へ同時適用}) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\Bigl(\gamma(\tilde\theta_\mu)\Bigl(1 - \tfrac12\Bigr)
- - \gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
-   \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)\bigl(1 - \tfrac12\bigr),\ b_j \to \gamma(\tilde\theta_j)\bigl(\epsilon_j - \tfrac12\bigr)\bigr)\ \text{を右辺から左辺へ}\right) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\Bigl(1 - \tfrac12\Bigr) - \Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
+&= \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(1)
+ - \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
+   \quad (\because \blkref{def_binary_assignments_on_check_index_set}\text{ の }(1,\dots,1)(\mu) = 1\text{ を各項へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,h(1)
+ - \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))
+   \quad (\because \blkref{def_sum_over_check_index_set}\text{ を 2 か所へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\Bigl(\gamma(\tilde\theta_\mu)\,h(1)
+ - \gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
+   \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)h(1),\ b_j \to \gamma(\tilde\theta_j)h(\epsilon(j))\bigr)\ \text{を右辺から左辺へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(h(1) - h(\epsilon(\mu))\Bigr)
    \quad (\because \mathbb{R}\text{ の分配律を各項へ同時適用}) \\
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(1 - \epsilon_\mu\Bigr)
-   \quad (\because \mathbb{R}\text{ で }\bigl(1 - \tfrac12\bigr) - \bigl(\epsilon_\mu - \tfrac12\bigr) = 1 - \epsilon_\mu\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}a_\mu
    \quad (\because a_\mu\text{ の置き方}) \\
 &\geq a_{\mu_0}
    \quad \left(\because \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (m \to M_{\mathrm{col}},\ k \to \mu_0)\text{。}a_\mu \geq 0\text{ は上で示した}\right) \\
-&= \gamma(\tilde\theta_{\mu_0})\Bigl(1 - \epsilon_{\mu_0}\Bigr)
+&= \gamma(\tilde\theta_{\mu_0})\Bigl(h(1) - h(\epsilon(\mu_0))\Bigr)
    \quad (\because a_\mu\text{ の置き方}) \\
 &= \gamma(\tilde\theta_{\mu_0}) \cdot 1
-   \quad (\because \epsilon_{\mu_0} = 0\text{ なので }1 - \epsilon_{\mu_0} = 1) \\
+   \quad (\because \text{上の }\epsilon(\mu) = 0\text{ の鎖}\ (\mu \to \mu_0)\text{。}\epsilon(\mu_0) = 0) \\
 &= \gamma(\tilde\theta_{\mu_0})
    \quad (\because 1\text{ は }\mathbb{R}\text{ の積の単位元}) \\
 &> 0
@@ -7203,17 +7690,17 @@ x &= Ix
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_\epsilon
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\bigl(\epsilon_\mu - \tfrac12\bigr)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
    \quad (\because \blkref{eigenvalues_of_V_plus}\text{ の }\check\Lambda_\epsilon\text{ の定義}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\bigl(\epsilon_\mu - \tfrac12\bigr)\Bigr)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h(\epsilon(\mu))\Bigr)
    \quad (\because \blkref{def_indexed_hyperbolic_abbreviations}\text{ の }s_2 = \sinh 2K_2) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))
    \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}) \\
 &< (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(1,\dots,1))
    \quad (\because \exp(\check{g}(\epsilon)) < \exp(\check{g}(1,\dots,1))\text{ の両辺に正の実数 }(2s_2)^{M_{\mathrm{col}}/2}\text{ を掛ける}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\bigl(1 - \tfrac12\bigr)\Bigr)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h((1,\dots,1)(\mu))\Bigr)
    \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義（}\epsilon \to (1,\dots,1)\text{）}) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\bigl(1 - \tfrac12\bigr)\Bigr)
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\,h((1,\dots,1)(\mu))\Bigr)
    \quad (\because \blkref{def_indexed_hyperbolic_abbreviations}\text{ の }s_2 = \sinh 2K_2) \\
 &= \check\Lambda_{(1,\dots,1)}
    \quad (\because \blkref{eigenvalues_of_V_plus}\text{ の }\check\Lambda_\epsilon\text{ の定義（}\epsilon \to (1,\dots,1)\text{）}) \\
@@ -7448,6 +7935,7 @@ V^{(+)}y
         "2026-11-03: (3) の後半の名前だけの根拠を鎖にした。「0 でない複素数なので割ることができて」を、d := (Λ̌_{ε'})_ℂ − (Λ̌_max)_ℂ の置き方（d ≠ 0 と d^{-1} は (2)・inclusion_rr_to_cc・complex_numbers_form_a_field から鎖の前に置いた）、difference_of_scalar_multiples_of_one_matrix・matrix_difference_zero_iff_equal の 4 行と、scalar_multiple_by_one・d^{-1}d = 1_ℂ・scalar_multiple_is_associative・scalar_multiple_of_zero_matrix の 5 行にした。x = Σ_ε Q̌_ε x から ε ≠ (1,…,1) の項を消す行を、identity_matrix_is_left_unit_of_mat_mult・check_joint_eigenspace_decomposition (2)・sum_over_binary_words_distributes_in_left_factor・sum_over_binary_words_with_one_nonzero_term の 4 行にした。逆向きの「eigenvalues_of_V_plus (1) と eigenvalues_of_check_Vprime の Step 4 と同じ計算で従う」を、Q̌_{(1,…,1)}y = y の 8 行（eigenvalues_of_check_Vprime の Step 4 と同じ行）と V^{(+)}y = Λ̌_max y の 6 行にした。主張は変えていない。Lean の Ising2D.Qproj_mulVec_eq_zero_of_eigen（差と割り算の鎖）・Ising2D.colVec_eq_Qproj_mul_of_zero（項を消す鎖。Ising2D.eq_Qproj_univ_mulVec_of_eigen が数ベクトルへ運ぶ）・Ising2D.VPlus_mulVec_of_mem_range_Qproj_univ（逆向きの鎖）は同じ行の calc である。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_max_eigenvalue_simple_step3_eigenspace_chains.sage。",
         "2026-11-03: (1) の散文（Θ^{(1/2)}_{M_col} = {θ~_μ}、M_col 個の値が相異なるので集合の上の和を Σ_{μ=1}^{M_col} へ付け替える、eigenvalues_of_V_plus の表式と比べる）を、eigenvalues_of_V_plus (2)・θ~_μ の定義・def_Theta_delta_M（δ → 1/2）・def_Lambda_delta_M（δ → 1/2）の 4 行の鎖にした。def_Theta_delta_M を集合から添字 μ の族 θ^{(δ)}_{M_col,μ} へ、def_Lambda_delta_M の和を添字の和へ改めたので、元が相異なることの証明と和の付け替えは要らなくなった（主張は不変）。",
         "2026-11-04: 全証明の SageMath 検算として、(2) の散文「左辺を移項して」「real_exp_strictly_increasing より」「s_2 > 0 より 2s_2 > 0 であり、その実数冪として (2s_2)^{M_col/2} > 0」を、移項と real_exp_strictly_increasing を引く 2 行の含意の鎖と、def_indexed_hyperbolic_abbreviations の s_2 = sinh 2K_2・def_second_transfer_matrix_prefactor の (2 sinh 2K_2)^{M_col/2} ∈ ℝ_{>0} を引く 2 行の鎖にした（主張は不変）。数値検証: sagemath/check/max_eigenvalue_of_V_plus_simple/（050 の check_26・check_max_eigenvalue_simple_step1〜3 を移したもの、実際の V^{(+)} と本文の ψ̌ で主張 (1)(2)(3) と鎖を厳密に確かめる check_claim_with_actual_V_plus.sage）。",
+        "2026-11-21: ǧ(ε)・Λ̌_ε の定義を Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ)) に改めたのに合わせた。(2) の「ある μ_0 で ε_{μ_0} = 0」を (1,…,1) が定数写像であること（def_binary_assignments_on_check_index_set）から書き、a_μ := γ(θ̃_μ)(1 − ε_μ) を a_μ := γ(θ̃_μ)(h(1) − h(ε(μ))) にした。a_μ ≥ 0 は ε(μ) = 1・0 の場合分けの h の値の差の鎖（2 行と 4 行）で示した。ǧ(1,…,1) − ǧ(ε) の鎖に定数写像の値と def_sum_over_check_index_set の行を足し、「(1 − ½) − (ε_μ − ½) = 1 − ε_μ」の行を消し、a_{μ_0} の値の行を h(1) − h(0) = 1 の鎖を引く行にした。Λ̌_ε < Λ̌_max の鎖の和を Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ))（ε → (1,…,1) では h((1,…,1)(μ))）と書いた。主張・値は不変。 Lean は Ising2D.gval_lt_gval_univ・checkBigLambda_lt_checkBigLambda_univ。数値検証: sagemath/check/max_eigenvalue_of_V_plus_simple/check_step2_strict_inequality_chains.sage。",
       ],
     },
   },
@@ -7487,9 +7975,11 @@ V^{(+)}y
         " が逆双曲線余弦を実対数で定めるため）、",
         math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
         "、",
+        ref("def_binary_assignments_on_check_index_set"),
+        " の ",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " に対する ",
-        ref("check_joint_eigenspace_decomposition"),
+        ref("def_check_Q_epsilon"),
         " の ",
         math(String.raw`\check{Q}_\epsilon \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " と ",
@@ -7648,6 +8138,7 @@ V^{(+)}
         "2026-10-31: 章立ての組み直しで、V^{(+)} の固有値の章のゴールの式を一つの主張として立てた。既存の主張 constant_c_value_even_sector・eigenvalues_of_V_plus・max_eigenvalue_of_V_plus_simple を並べ、V̌'・X̌・ň_μ・Λ̌_ε の定義を代入するだけで、新しい証明は無い。",
         "2026-11-04: (3) の 5 行の鎖の名前だけの根拠（「eigenvalues_of_V_plus (2)：最大のものは全ての ε_μ = 1 を取ったとき」「Λ̌_ε の定義に ε_μ = 1 を代入」「1 − ½ = ½」「分配法則」）を、主張の二つの等号ごとの 2 本の鎖にした。Λ^{(1/2)}_{M_col} = Λ̌_max（max_eigenvalue_of_V_plus_simple (1) を右辺から左辺へ）= Λ̌_{(1,…,1)}（eigenvalues_of_V_plus (2) の Λ̌_max := Λ̌_{(1,…,1)}）と、Λ̌_{(1,…,1)} = Λ̌_max = (2 sinh 2K_2)^{M_col/2} exp(½Σγ(θ~_μ))（同じ置き方を右辺から左辺へ、eigenvalues_of_V_plus (2) の Λ̌_max の値）である。値の計算（ǧ(1,…,1) = ½Σγ）は eigenvalues_of_V_plus の証明が一ステップ一定理で済ませているので繰り返さない。この置き方は eigenvalues_of_V_plus の証明の中でしか書かれていなかったので、その主張 (2) に Λ̌_max := Λ̌_{(1,…,1)}、Λ̌_min := Λ̌_{(0,…,0)} を書き足した（内容は不変）。(4) の 2 行目の根拠も同じ置き方にした。Lean の Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum の (3) は同じ行の calc 二本で、値の行は Ising2D.checkBigLambda_max_eq。数値検証: sagemath/check/V_plus_eigenvalues_with_c_value_and_strict_maximum/check_goal_chain.sage。",
         "2026-11-04: (4) の後半の散文「集合 {Λ̌_ε} は有限集合で Λ̌_{(1,…,1)} を含み、他の元は小さいので最大元が存在して max = Λ̌_{(1,…,1)}」が最大値と max を定義せずに使っていたので、定義 def_maximum_value_of_real_family（族の最大値: ある i_0 で x_{i_0} = m、すべての i で x_i ≤ m）・主張 maximum_value_of_real_family_is_unique・記号の定義 def_max_of_real_family を 000_calculation_formulae_00_09.ts に足し、(4) の後半を、Λ̌_{(1,…,1)} が最大値の定義の (1)(2) を満たすこと（(2) は ε = (1,…,1) と ε ≠ (1,…,1) の場合分け。後者は前半の鎖）と、記号の定義で max_ε Λ̌_ε = Λ̌_{(1,…,1)} とする行に書き下した。主張の文にも、最大値と記号 max の定義を引く形で書いた（内容は不変）。有限性は使わないので外した。Lean の Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum に同じ内容の 6 つ目の連言（IsMaxValueOfRealFamily と maxOfRealFamily）を足した。",
+        "2026-11-21: 主張の Q̌_ε の出典を、Q̌_ε を独立した定義にした def_check_Q_epsilon の参照に替え、ε の集合 {0,1}^{M̌} に def_binary_assignments_on_check_index_set の参照を置いた。式は不変。",
       ],
     },
   },

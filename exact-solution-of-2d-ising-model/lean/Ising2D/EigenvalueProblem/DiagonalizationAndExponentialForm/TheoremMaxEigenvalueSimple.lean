@@ -170,7 +170,7 @@ theorem checkBigLambda_univ_eq_LambdaM (F : CheckFermiSetup M) (P : IsingParam)
         rw [checkBigLambda, gval_eq_sum_fin_real, Finset.mul_sum]
         congr 2
         refine Finset.sum_congr rfl fun j _ => ?_
-        rw [hg (CheckFermiSetup.checkIdxOfFin j), if_pos (Finset.mem_univ _)]
+        rw [hg (CheckFermiSetup.checkIdxOfFin j), binOfMem_of_mem (Finset.mem_univ _), halfSign_one]
         simp only [CheckFermiSetup.checkIdxOfFin]
         ring
                                                         -- `eigenvalues_of_V_plus` (2)
@@ -193,8 +193,9 @@ theorem checkBigLambda_univ_eq_LambdaM (F : CheckFermiSetup M) (P : IsingParam)
 
 open CheckFermiSetup in
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (2) の `ǧ(1,…,1) − ǧ(ε)` の鎖**: `γ(θ~_μ) > 0` かつ `ε ≠ (1,…,1)` なら
-`ǧ(ε) < ǧ(1,…,1)`。人手の行と 1 対 1 の calc（人手の `ε_μ` は Lean の `if μ ∈ T then 1 else 0`、`ε = (1,…,1)` は `T = univ`）。
-人手の `a_μ` は `let a` で置き、「`a_μ` の置き方」の 2 行は `rfl` の段にした。最後の「移項」は `sub_pos`。
+`ǧ(ε) < ǧ(1,…,1)`。人手の行と 1 対 1 の calc（人手の `ε(μ)` は Lean の `binOfMem T μ`、`ε = (1,…,1)` は `T = univ`、`h` は `halfSign`）。
+人手の `a_μ` は `let a` で置き、「`a_μ` の置き方」の 2 行は `rfl` の段にした。`a_μ ≥ 0` の前置きの二つの場合の鎖は
+`halfSign_one_sub_nonneg`（`ε(μ) = 0` の 4 行は `halfSign_one_sub_halfSign_zero`）。最後の「移項」は `sub_pos`。
 必要十分版 `NecSuf.sum_weight_lt_of_ne_univ` は同じ並びの calc である。 -/
 theorem gval_lt_gval_univ (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (hgpos : ∀ i, 0 < g i)
     {T : Finset (CheckIdx M)} (hT : T ≠ Finset.univ) :
@@ -202,41 +203,42 @@ theorem gval_lt_gval_univ (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (hgpo
   obtain ⟨i₀, hi₀⟩ : ∃ i₀ : CheckIdx M, i₀ ∉ T := by
     by_contra hc
     exact hT (Finset.eq_univ_of_forall fun i => not_not.1 fun hi => hc ⟨i, hi⟩)
-                                                        -- 人手の「ある `μ_0` で `ε_{μ_0} = 0`」
+                                                        -- 人手の「ある `μ_0` で `ε(μ_0) = 0`」
   obtain ⟨j₀, rfl⟩ := checkIdxOfFin_surjective i₀
-  let a : Fin M → ℝ := fun j => g (checkIdxOfFin j) * (1 - (if checkIdxOfFin j ∈ T then (1 : ℝ) else 0))
-                                                        -- 人手の `a_μ := γ(θ~_μ)(1 - ε_μ)`
-  have ha : ∀ j : Fin M, 0 ≤ a j := by
-    intro j
-    refine mul_nonneg (le_of_lt (hgpos _)) ?_
-    split <;> norm_num
+  let a : Fin M → ℝ := fun j => g (checkIdxOfFin j) * (halfSign 1 - halfSign (binOfMem T (checkIdxOfFin j)))
+                                                        -- 人手の `a_μ := γ(θ~_μ)(h(1) - h(ε(μ)))`
+  have ha : ∀ j : Fin M, 0 ≤ a j := fun j =>
+    mul_nonneg (le_of_lt (hgpos _)) (halfSign_one_sub_nonneg _)
                                                         -- 人手の `a_μ ≥ 0`（正の実数と `0` 以上の実数の積）
   have hchain : F.gval g Finset.univ - F.gval g T > 0 :=
     calc F.gval g Finset.univ - F.gval g T
-        = (∑ j : Fin M, g (checkIdxOfFin j) * (1 - 1 / 2))
-            - ∑ j : Fin M, g (checkIdxOfFin j) * ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2) := by
-          rw [gval_eq_sum_fin_real F g Finset.univ, gval_eq_sum_fin_real F g T]
-          simp only [Finset.mem_univ, if_true]
+        = (∑ i : CheckIdx M, g i * halfSign (binOfMem Finset.univ i))
+            - ∑ i : CheckIdx M, g i * halfSign (binOfMem T i) := rfl
                                                         -- `eigenvalues_of_check_Vprime` の `ǧ` の定義を 2 か所へ同時適用
-      _ = ∑ j : Fin M, (g (checkIdxOfFin j) * (1 - 1 / 2)
-            - g (checkIdxOfFin j) * ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2)) :=
+      _ = (∑ i : CheckIdx M, g i * halfSign 1) - ∑ i : CheckIdx M, g i * halfSign (binOfMem T i) := by
+          simp only [binOfMem, Finset.mem_univ, if_true]
+                                                        -- `def_binary_assignments_on_check_index_set` の `(1,…,1)(μ) = 1` を各項へ同時適用
+      _ = (∑ j : Fin M, g (checkIdxOfFin j) * halfSign 1)
+            - ∑ j : Fin M, g (checkIdxOfFin j) * halfSign (binOfMem T (checkIdxOfFin j)) := by
+          rw [sum_checkIdx_eq_sum_fin_real (fun i => g i * halfSign 1),
+            sum_checkIdx_eq_sum_fin_real (fun i => g i * halfSign (binOfMem T i))]
+                                                        -- `def_sum_over_check_index_set` を 2 か所へ同時適用
+      _ = ∑ j : Fin M, (g (checkIdxOfFin j) * halfSign 1
+            - g (checkIdxOfFin j) * halfSign (binOfMem T (checkIdxOfFin j))) :=
           (finite_sum_of_real_differences M _ _).symm
                                                         -- `finite_sum_of_real_differences`（`m → M_col`）を右辺から左辺へ
-      _ = ∑ j : Fin M, g (checkIdxOfFin j)
-            * ((1 - 1 / 2) - ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2)) :=
+      _ = ∑ j : Fin M, g (checkIdxOfFin j) * (halfSign 1 - halfSign (binOfMem T (checkIdxOfFin j))) :=
           Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm
                                                         -- ℝ の分配律を各項へ同時適用
-      _ = ∑ j : Fin M, g (checkIdxOfFin j) * (1 - (if checkIdxOfFin j ∈ T then (1 : ℝ) else 0)) :=
-          Finset.sum_congr rfl fun j _ => by ring
-                                                        -- ℝ で `(1 - 1/2) - (ε_μ - 1/2) = 1 - ε_μ` を各項へ同時適用
       _ = ∑ j : Fin M, a j := rfl
                                                         -- `a_μ` の置き方
       _ ≥ a j₀ := finite_sum_of_nonnegative_reals_ge_term M a ha j₀
                                                         -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`m → M_col`、`k → μ_0`）
-      _ = g (checkIdxOfFin j₀) * (1 - (if checkIdxOfFin j₀ ∈ T then (1 : ℝ) else 0)) := rfl
+      _ = g (checkIdxOfFin j₀) * (halfSign 1 - halfSign (binOfMem T (checkIdxOfFin j₀))) := rfl
                                                         -- `a_μ` の置き方
-      _ = g (checkIdxOfFin j₀) * 1 := by rw [if_neg hi₀, sub_zero]
-                                                        -- `ε_{μ_0} = 0` なので `1 - ε_{μ_0} = 1`
+      _ = g (checkIdxOfFin j₀) * 1 := by
+          rw [binOfMem_of_not_mem hi₀, halfSign_one_sub_halfSign_zero]
+                                                        -- 上の `ε(μ) = 0` の鎖 `h(1) - h(ε(μ)) = h(1) - h(0) = 1`（`μ → μ_0`）。`ε(μ_0) = 0`
       _ = g (checkIdxOfFin j₀) := mul_one _
                                                         -- `1` は ℝ の積の単位元
       _ > 0 := hgpos _
@@ -258,7 +260,7 @@ theorem checkBigLambda_lt_checkBigLambda_univ (F : CheckFermiSetup M) (g : Check
                                                         -- `2s_2 > 0` の実数冪
   calc checkBigLambda F g s2 T
       = (2 * s2) ^ ((M : ℝ) / 2)
-          * Real.exp (∑ i : CheckIdx M, g i * ((if i ∈ T then (1 : ℝ) else 0) - 1 / 2)) := rfl
+          * Real.exp (∑ i : CheckIdx M, g i * halfSign (binOfMem T i)) := rfl
                                                         -- `eigenvalues_of_V_plus` の `Λ̌_ε` の定義
                                                         -- （人手の次の行「`s_2 = sinh 2K_2`」は、Lean では `s2` を引数に取るので段にしない）
     _ = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp (F.gval g T) := rfl
@@ -267,7 +269,7 @@ theorem checkBigLambda_lt_checkBigLambda_univ (F : CheckFermiSetup M) (g : Check
         mul_lt_mul_of_pos_left hexp hpow
                                                         -- 両辺に正の実数 `(2s_2)^{M_col/2}` を掛ける
     _ = (2 * s2) ^ ((M : ℝ) / 2)
-          * Real.exp (∑ i : CheckIdx M, g i * ((if i ∈ (Finset.univ : Finset (CheckIdx M)) then (1 : ℝ) else 0) - 1 / 2)) := rfl
+          * Real.exp (∑ i : CheckIdx M, g i * halfSign (binOfMem (Finset.univ : Finset (CheckIdx M)) i)) := rfl
                                                         -- `ǧ` の定義（`ε → (1,…,1)`）。`s_2` の行は上と同じく段にしない
     _ = checkBigLambda F g s2 Finset.univ := rfl
                                                         -- `Λ̌_ε` の定義（`ε → (1,…,1)`）。人手の最後の行 `Λ̌_{(1,…,1)} = Λ̌_max`（`eigenvalues_of_V_plus` (2)）は、

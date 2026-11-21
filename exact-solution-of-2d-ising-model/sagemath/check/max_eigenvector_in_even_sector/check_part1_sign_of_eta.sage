@@ -6,7 +6,7 @@
 #   3 行目: η_{(1,…,1)} = +1。η は ψ̌ の側から epsilon_eigenvalue_on_check_Q の (1) の作り方で求めた値（V^(+) を使わない）。
 #           引いた同値の当てはめ: 同じ設定で trace_of_epsilon_V_plus_via_check_eigenvalues (1) の tr(εV^(+)) = η_{(1,…,1)}ϰ_ℂ を、
 #           ϰ := (2s_2)^{M/2}Π_μ 2sinh(γ(θ̃_μ)/2) を AA で作って確かめ（2sinh(γ/2) = exp(γ/2) − exp(γ/2)^{-1}、exp(γ) = γ_1 + √(γ_1^2 − 1)）、ϰ > 0。
-#   独立の確認: tr(εV^(+)) = Σ_ϵ η_ϵΛ̌_ϵ（Λ̌_ϵ は V^(+)Q̌_ϵ = Λ̌_ϵQ̌_ϵ の比。ψ̌ の η と V^(+) の tr が同じ体の中で噛み合うこと）。
+#   独立の確認: tr(εV^(+)) = Σ_ε η_εΛ̌_ε（Λ̌_ε は V^(+)Q̌_ε = Λ̌_εQ̌_ε の比。ψ̌ の η と V^(+) の tr が同じ体の中で噛み合うこと）。
 # 否定コントロール: r の和を差にしたもの、tr(V^(+))（ε を落としたもの）は tr(εV^(+)) に一致しない。η を −1 にした −ϰ は負で、tr(εV^(+)) に一致しない。
 load("_prelude.sage")
 
@@ -36,7 +36,7 @@ for s in max_settings(Ms):
     rep.check(QQbar(r) == s.to_qqbar(e1) * QQbar(kappa), f"{tag}: tr(εV^(+)) = η_(1,…,1)ϰ_ℂ（via_check_eigenvalues (1)）")
     rep.negative(-kappa < 0 and QQbar(r) != -QQbar(kappa), f"{tag}: η = −1 なら tr = −ϰ < 0 で一致しない")
     # 独立の確認
-    rep.check(T == sum(s.eta[w] * s.lam[w] for w in s.words), f"{tag}: tr(εV^(+)) = Σ η_ϵ Λ̌_ϵ")
+    rep.check(T == sum(s.eta[w] * s.lam[w] for w in s.words), f"{tag}: tr(εV^(+)) = Σ η_ε Λ̌_ε")
     print(f"  {tag}: tr(εV^(+)) = {r}、ϰ ≈ {RR(kappa):.6f}、η_(1,…,1) = {e1}（累計 {rep.n} 件）", flush=True)
 
 rep.finish()

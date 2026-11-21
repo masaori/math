@@ -5,7 +5,7 @@
 #   ../max_eigenvector_in_even_sector/_prelude.sage の MaxSetting から取る（複製しない）。
 # - W（def_symmetrized_transfer_matrix の (BV_2)B。B = exp((1/2)K_1D) は D の固有値の射影に y^λ を掛けて QQ）は
 #   ../rayleigh_bounds_operator_norm/_prelude.sage の W_exact から取る。V^(+) とは別の経路（D と H_1^(+) は別の行列）で作る。
-# - Λ̌_ε（AA）は eigenvalues_of_V_plus の定義 a·Π_μ exp(γ_μ(ε_μ − 1/2))（a := (2s_2)^{M_col/2}、exp(γ_μ) := γ_1 + √(γ_1^2 − 1)、
+# - Λ̌_ε（AA）は eigenvalues_of_V_plus の定義 a·Π_{μ∈M̌} exp(γ_μ h(ε(μ)))（h(1) = 1/2、h(0) = −(1/2) は def_half_sign_of_binary_value。Lam は ε(μ) = 1 なら exp(γ_μ/2)、0 なら 1/exp(γ_μ/2) を掛ける場合分け。a := (2s_2)^{M_col/2}、exp(γ_μ) := γ_1 + √(γ_1^2 − 1)、
 #   γ_1 = γ_1(θ̃_μ)）。Λ^{(1/2)}_{M_col} は ../max_eigenvalue_of_V_plus_simple/_prelude.sage の gamma_exp_independent
 #   （結合定数と 1 の冪根から直接作る独立な経路）で作る。
 # ℝ への脱出は K_1・K_2 の選び方と γ を arccosh の実対数の式から作る一点だけで、以後の等号・不等号は全て E_1・QQbar・AA の厳密計算である。

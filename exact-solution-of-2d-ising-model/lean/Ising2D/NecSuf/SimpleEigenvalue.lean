@@ -12,9 +12,9 @@
 
 **(2) 最大性が狭義であること。** これは
 「重み `γ(θ~_μ)` がすべて**狭義に**正であること」と
-「`ε` の各成分が独立に `0/1` を選べること」だけから出る
+「`ε` の値 `ε(μ)` が各 `μ` で独立に `0/1` を選べること」と「`h(1) - h(0) > 0`」だけから出る
 （`sum_weight_lt_of_ne_univ`）。指数関数も転送行列も固有値も効いていない。
-係数は順序環でよく、`1/2` は任意の元でよい（乗法の可換律・割り算・全順序・実数の完備性は効いていない）。
+係数は順序環でよく、`h(1) = ½`・`h(0) = −(½)` の値そのものは効かない（乗法の可換律・割り算・全順序・実数の完備性も効いていない）。
 章 009 が `γ(θ_μ) ≥ 0` しか持てず単純性を言えなかったのは、
 まさにこの狭義性が無かったからである。
 
@@ -39,7 +39,7 @@
 具体版が **行列の `mulVec` による作用**（`ℂ^{2^M}` への作用）を使うためである。
 同じ補題は `act = (· * ·)`（環の自分自身への作用）にも特殊化できる。
 **`eigenvalues_of_V_plus` (2) の大小の比較（非狭義）。** `sum_weight_le_univ`・`sum_weight_empty_le` は狭義版と同じ並びで、
-効いているのは係数が順序環であることと重みが**非負**であることだけである（`γ(θ~_μ) > 0` の狭義性は効いていない）。`1/2` は任意の元 `h` でよい。
+効いているのは係数が順序環であることと重みが**非負**であること、`h(1) - h(0) ≥ 0` だけである（`γ(θ~_μ) > 0` の狭義性は効いていない）。
 添字集合が空でないこと（`Nonempty ι`）は主張には要らず、人手の鎖が項 `r_1` を取り出す手順のためだけに要る。
 -/
 import Mathlib.Algebra.BigOperators.Ring.Finset
@@ -60,129 +60,131 @@ section StrictMax
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
 /-- **人手証明 `max_eigenvalue_of_V_plus_simple` (2) の核**:
-重み `w_i` がすべて狭義に正なら、`∑_i w_i (χ_T(i) - 1/2)` は
-`T = univ` のときにのみ最大値を取る。
+重み `w_i` がすべて狭義に正で、`k : Fin 2 → R` が `k(1) - k(0) = 1` を満たすなら、`∑_i w_i k(χ_T(i))`
+（`χ_T(i) := (i ∈ T ? 1 : 0)`。人手の `ǧ(ε) = Σ_μ γ(θ~_μ) h(ε(μ))` の `h` が `k`、`ε(μ)` が `χ_T(μ)`）は `T = univ` のときにのみ最大値を取る。
 
 手順は具体版 `gval_lt_gval_univ` と同じ（人手の `ǧ(1,…,1) − ǧ(ε)` の鎖）: 添字を `Fin` へ付け替え、差をとり、
-差の有限和（`finite_sum_sub_fin'`）・分配律・`(1 - h) - (χ - h) = 1 - χ`・非負の項の有限和は各項以上（`finite_sum_ge_term_fin'`）・
-`χ_T(i₀) = 0`・`w_{i₀} > 0` の順に進む。
+差の有限和（`finite_sum_sub_fin'`）・分配律・非負の項の有限和は各項以上（`finite_sum_ge_term_fin'`）・`χ_T(i₀) = 0`・
+`k(1) - k(0) = 1`・`w_{i₀} > 0` の順に進む。項の非負性 `k(1) - k(χ) ≥ 0` は、人手と同じく `χ = 1`（`k(1) - k(1) = 0`）と `χ = 0`
+（`k(1) - k(0)`）の場合分けで出す。
 
-効いているのは、係数が順序環であること（加法の可換群、乗法の左分配 `mul_sub`、`0 ≤ 1`、`0 ≤ a` かつ `0 ≤ b` なら `0 ≤ ab`、
-加法と両立する順序）だけである。乗法の可換律・逆元（`1/2` で割ること）・全順序・完備性（実数であること）は効いていない。
-人手の `1/2` は任意の元 `h` でよい（`(1 - h) - (χ - h) = 1 - χ` は加法だけで出る）。添字が `CheckIdx M` であることも、
-重みが `γ(θ~_μ)` であることも効いていない。具体版の `checkBigLambda_lt_max` は `R := ℝ`、`h := 1/2` への特殊化である。 -/
-theorem sum_weight_lt_of_ne_univ {R : Type*} [Ring R] [PartialOrder R] [IsOrderedRing R] {h : R}
-    (w : ι → R) (hw : ∀ i, 0 < w i) {T : Finset ι}
+効いているのは、係数が順序環であること（加法の可換群、乗法の左分配 `mul_sub`、`0 ≤ a` かつ `0 ≤ b` なら `0 ≤ ab`、
+`0 ≤ 1`、加法と両立する順序）と、`k(1) - k(0) = 1` だけである。人手の `h(1) = ½`・`h(0) = −(½)` の値そのものは効かず、
+差 `h(1) - h(0) = 1` だけが要る（差が正であることだけで済ませるには、`0 < a` かつ `0 < b` なら `0 < ab`（`PosMulStrictMono`）を
+係数に足す必要があり、人手の手順 `γ·1 = γ > 0` の方が仮定が少ない）。乗法の可換律・逆元・全順序・完備性（実数であること）も効いていない。添字が `CheckIdx M` であることも、重みが `γ(θ~_μ)` であることも効いていない。
+具体版の `checkBigLambda_lt_max` は `R := ℝ`、`k := halfSign` への特殊化である。 -/
+theorem sum_weight_lt_of_ne_univ {R : Type*} [Ring R] [PartialOrder R] [IsOrderedRing R] (k : Fin 2 → R)
+    (hk : k 1 - k 0 = 1) (w : ι → R) (hw : ∀ i, 0 < w i) {T : Finset ι}
     (hT : T ≠ Finset.univ) :
-    ∑ i, w i * ((if i ∈ T then (1 : R) else 0) - h)
-      < ∑ i, w i * ((if i ∈ (Finset.univ : Finset ι) then (1 : R) else 0) - h) := by
+    ∑ i, w i * k (if i ∈ T then 1 else 0)
+      < ∑ i, w i * k (if i ∈ (Finset.univ : Finset ι) then 1 else 0) := by
   let e : Fin (Fintype.card ι) ≃ ι := (Fintype.equivFin ι).symm
-  have hre : ∀ S : Finset ι, ∑ i, w i * ((if i ∈ S then (1 : R) else 0) - h)
-      = ∑ j : Fin (Fintype.card ι), w (e j) * ((if e j ∈ S then (1 : R) else 0) - h) :=
+  have hre : ∀ S : Finset ι, ∑ i, w i * k (if i ∈ S then 1 else 0)
+      = ∑ j : Fin (Fintype.card ι), w (e j) * k (if e j ∈ S then 1 else 0) :=
     fun S => (Fintype.sum_equiv e _ _ (fun _ => rfl)).symm
                                                         -- 添字の付け替え（具体版の `gval_eq_sum_fin_real`）
   obtain ⟨i₀, hi₀⟩ : ∃ i₀ : ι, i₀ ∉ T := by
     by_contra hc
     exact hT (Finset.eq_univ_of_forall fun i => not_not.1 fun hi => hc ⟨i, hi⟩)
   obtain ⟨j₀, rfl⟩ := e.surjective i₀
-  have ha : ∀ j, 0 ≤ w (e j) * (1 - (if e j ∈ T then (1 : R) else 0)) := by
+  have ha : ∀ j, 0 ≤ w (e j) * (k 1 - k (if e j ∈ T then 1 else 0)) := by
     intro j
     refine mul_nonneg (le_of_lt (hw _)) ?_
-    split <;> norm_num
-  have hchain : ∑ i, w i * ((if i ∈ (Finset.univ : Finset ι) then (1 : R) else 0) - h)
-      - ∑ i, w i * ((if i ∈ T then (1 : R) else 0) - h) > 0 :=
-    calc ∑ i, w i * ((if i ∈ (Finset.univ : Finset ι) then (1 : R) else 0) - h)
-          - ∑ i, w i * ((if i ∈ T then (1 : R) else 0) - h)
-        = (∑ j, w (e j) * (1 - h)) - ∑ j, w (e j) * ((if e j ∈ T then (1 : R) else 0) - h) := by
+    split
+    · rw [sub_self]                                     -- `χ = 1`: `k(1) - k(1) = 0`
+    · rw [hk]; exact zero_le_one                        -- `χ = 0`: `k(1) - k(0) = 1 ≥ 0`
+  have hchain : ∑ i, w i * k (if i ∈ (Finset.univ : Finset ι) then 1 else 0)
+      - ∑ i, w i * k (if i ∈ T then 1 else 0) > 0 :=
+    calc ∑ i, w i * k (if i ∈ (Finset.univ : Finset ι) then 1 else 0)
+          - ∑ i, w i * k (if i ∈ T then 1 else 0)
+        = (∑ j, w (e j) * k 1) - ∑ j, w (e j) * k (if e j ∈ T then 1 else 0) := by
           rw [hre Finset.univ, hre T]
-          simp only [Finset.mem_univ, if_true]          -- 和の定義を 2 か所
-      _ = ∑ j, (w (e j) * (1 - h) - w (e j) * ((if e j ∈ T then (1 : R) else 0) - h)) :=
+          simp only [Finset.mem_univ, if_true]          -- 和の定義を 2 か所（`χ_univ = 1`）
+      _ = ∑ j, (w (e j) * k 1 - w (e j) * k (if e j ∈ T then 1 else 0)) :=
           (finite_sum_sub_fin' _ _ _).symm              -- 差の有限和を右辺から左辺へ
-      _ = ∑ j, w (e j) * ((1 - h) - ((if e j ∈ T then (1 : R) else 0) - h)) :=
+      _ = ∑ j, w (e j) * (k 1 - k (if e j ∈ T then 1 else 0)) :=
           Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm   -- 分配律を各項へ
-      _ = ∑ j, w (e j) * (1 - (if e j ∈ T then (1 : R) else 0)) :=
-          Finset.sum_congr rfl fun j _ => by rw [sub_sub_sub_cancel_right]   -- `(1 - h) - (χ - h) = 1 - χ` を各項へ
-      _ ≥ w (e j₀) * (1 - (if e j₀ ∈ T then (1 : R) else 0)) :=
+      _ ≥ w (e j₀) * (k 1 - k (if e j₀ ∈ T then 1 else 0)) :=
           finite_sum_ge_term_fin' _ _ ha j₀             -- 非負の項の有限和は各項以上
-      _ = w (e j₀) * 1 := by rw [if_neg hi₀, sub_zero]  -- `χ_T(i₀) = 0`
+      _ = w (e j₀) * (k 1 - k 0) := by rw [if_neg hi₀]  -- `χ_T(i₀) = 0`
+      _ = w (e j₀) * 1 := by rw [hk]                    -- `k(1) - k(0) = 1`（人手は `h(1) - h(0) = 1` の鎖）
       _ = w (e j₀) := mul_one _                         -- 積の単位元
       _ > 0 := hw _                                     -- 重みは狭義に正
   exact sub_pos.1 hchain
 
 /-- **人手証明 `eigenvalues_of_V_plus` (2) の大小の比較の `ǧ(1,…,1) − ǧ(ε) ≥ 0` の鎖の核**:
-重み `w_i` がすべて非負なら、`∑_i w_i (χ_T(i) - h)` は `T = univ` で最大になる。
+重み `w_i` がすべて非負で `k(1) - k(0) ≥ 0` なら、`∑_i w_i k(χ_T(i))` は `T = univ` で最大になる。
 
 手順は具体版 `gval_le_gval_univ` と同じ: 添字を `Fin` へ付け替え、差をとり、差の有限和（`finite_sum_sub_fin'`）・分配律・
-`(1 - h) - (χ - h) = 1 - χ`・非負の項の有限和は各項以上（`finite_sum_ge_term_fin'`、`k → 1`）・その項が `0` 以上、の順に進む。
-狭義版 `sum_weight_lt_of_ne_univ` と同じく、係数は順序環でよく `1/2` は任意の元 `h` でよい。
+非負の項の有限和は各項以上（`finite_sum_ge_term_fin'`、`k → 1`）・その項が `0` 以上、の順に進む。項の非負性は人手と同じく `χ` の場合分けで出す。
+狭義版 `sum_weight_lt_of_ne_univ` と同じく、係数は順序環でよく、人手の `h` の値は効かず `h(1) - h(0) ≥ 0` だけが要る。
 重みは**非負**で足りる（具体版の `γ(θ~_μ) > 0` の狭義性は効いていない。人手の `r_μ ≥ 0` に要るのは `γ(θ~_μ) ≥ 0` だけである）。
 添字集合が空でないこと（`Nonempty ι`）は**主張には要らない**（空なら両辺は空和の `0`）。人手の鎖が「各項以上」を `k → 1` で使い、
 項 `r_1` を取り出すのに `1 ∈ 𝓜̌` が要るので、**同じ手順では削れない**（非負の項の和が `0` 以上であることを直接使えば不要になる）。
-つまり具体版の手順は、主張に要らない `M_col ≥ 1` に依存している（この版の前の必要十分版は各項の比較 `Finset.sum_le_sum` で書いてあり、
-`Nonempty` を仮定していなかった。手順を具体版と同じにしたので、仮定が 1 つ増えた）。 -/
-theorem sum_weight_le_univ {R : Type*} [Ring R] [PartialOrder R] [IsOrderedRing R] {h : R} [Nonempty ι]
-    (w : ι → R) (hw : ∀ i, 0 ≤ w i) (T : Finset ι) :
-    ∑ i, w i * ((if i ∈ T then (1 : R) else 0) - h)
-      ≤ ∑ i, w i * ((if i ∈ (Finset.univ : Finset ι) then (1 : R) else 0) - h) := by
+つまり具体版の手順は、主張に要らない `M_col ≥ 1` に依存している。 -/
+theorem sum_weight_le_univ {R : Type*} [Ring R] [PartialOrder R] [IsOrderedRing R] (k : Fin 2 → R)
+    (hk : 0 ≤ k 1 - k 0) [Nonempty ι] (w : ι → R) (hw : ∀ i, 0 ≤ w i) (T : Finset ι) :
+    ∑ i, w i * k (if i ∈ T then 1 else 0)
+      ≤ ∑ i, w i * k (if i ∈ (Finset.univ : Finset ι) then 1 else 0) := by
   let e : Fin (Fintype.card ι) ≃ ι := (Fintype.equivFin ι).symm
-  have hre : ∀ S : Finset ι, ∑ i, w i * ((if i ∈ S then (1 : R) else 0) - h)
-      = ∑ j : Fin (Fintype.card ι), w (e j) * ((if e j ∈ S then (1 : R) else 0) - h) :=
+  have hre : ∀ S : Finset ι, ∑ i, w i * k (if i ∈ S then 1 else 0)
+      = ∑ j : Fin (Fintype.card ι), w (e j) * k (if e j ∈ S then 1 else 0) :=
     fun S => (Fintype.sum_equiv e _ _ (fun _ => rfl)).symm
                                                         -- 添字の付け替え（具体版の `gval_eq_sum_fin_real`）
   let j₀ : Fin (Fintype.card ι) := ⟨0, Fintype.card_pos⟩  -- 人手の `k → 1`
-  have ha : ∀ j, 0 ≤ w (e j) * (1 - (if e j ∈ T then (1 : R) else 0)) := by
+  have ha : ∀ j, 0 ≤ w (e j) * (k 1 - k (if e j ∈ T then 1 else 0)) := by
     intro j
     refine mul_nonneg (hw _) ?_
-    split <;> norm_num
-  have hchain : ∑ i, w i * ((if i ∈ (Finset.univ : Finset ι) then (1 : R) else 0) - h)
-      - ∑ i, w i * ((if i ∈ T then (1 : R) else 0) - h) ≥ 0 :=
-    calc ∑ i, w i * ((if i ∈ (Finset.univ : Finset ι) then (1 : R) else 0) - h)
-          - ∑ i, w i * ((if i ∈ T then (1 : R) else 0) - h)
-        = (∑ j, w (e j) * (1 - h)) - ∑ j, w (e j) * ((if e j ∈ T then (1 : R) else 0) - h) := by
+    split
+    · rw [sub_self]                                     -- `χ = 1`: `k(1) - k(1) = 0`
+    · exact hk                                          -- `χ = 0`: `k(1) - k(0) ≥ 0`
+  have hchain : ∑ i, w i * k (if i ∈ (Finset.univ : Finset ι) then 1 else 0)
+      - ∑ i, w i * k (if i ∈ T then 1 else 0) ≥ 0 :=
+    calc ∑ i, w i * k (if i ∈ (Finset.univ : Finset ι) then 1 else 0)
+          - ∑ i, w i * k (if i ∈ T then 1 else 0)
+        = (∑ j, w (e j) * k 1) - ∑ j, w (e j) * k (if e j ∈ T then 1 else 0) := by
           rw [hre Finset.univ, hre T]
-          simp only [Finset.mem_univ, if_true]          -- 和の定義を 2 か所
-      _ = ∑ j, (w (e j) * (1 - h) - w (e j) * ((if e j ∈ T then (1 : R) else 0) - h)) :=
+          simp only [Finset.mem_univ, if_true]          -- 和の定義を 2 か所（`χ_univ = 1`）
+      _ = ∑ j, (w (e j) * k 1 - w (e j) * k (if e j ∈ T then 1 else 0)) :=
           (finite_sum_sub_fin' _ _ _).symm              -- 差の有限和を右辺から左辺へ
-      _ = ∑ j, w (e j) * ((1 - h) - ((if e j ∈ T then (1 : R) else 0) - h)) :=
+      _ = ∑ j, w (e j) * (k 1 - k (if e j ∈ T then 1 else 0)) :=
           Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm   -- 分配律を各項へ
-      _ = ∑ j, w (e j) * (1 - (if e j ∈ T then (1 : R) else 0)) :=
-          Finset.sum_congr rfl fun j _ => by rw [sub_sub_sub_cancel_right]   -- `(1 - h) - (χ - h) = 1 - χ` を各項へ
-      _ ≥ w (e j₀) * (1 - (if e j₀ ∈ T then (1 : R) else 0)) :=
+      _ ≥ w (e j₀) * (k 1 - k (if e j₀ ∈ T then 1 else 0)) :=
           finite_sum_ge_term_fin' _ _ ha j₀             -- 非負の項の有限和は各項以上（`k → 1`）
       _ ≥ 0 := ha j₀                                    -- その項は `0` 以上
   exact sub_nonneg.1 hchain
 
 /-- **人手証明 `eigenvalues_of_V_plus` (2) の大小の比較の `ǧ(ε) − ǧ(0,…,0) ≥ 0` の鎖の核**:
-重み `w_i` がすべて非負なら、`∑_i w_i (χ_T(i) - h)` は `T = ∅` で最小になる。手順は具体版 `gval_empty_le_gval` と同じで、
-`sum_weight_le_univ` の鎖の `1 - χ` が `χ - 0`（人手の `(ε_μ - 1/2) - (0 - 1/2) = ε_μ`）に替わるだけである。効いている構造も同じ。 -/
-theorem sum_weight_empty_le {R : Type*} [Ring R] [PartialOrder R] [IsOrderedRing R] {h : R} [Nonempty ι]
-    (w : ι → R) (hw : ∀ i, 0 ≤ w i) (T : Finset ι) :
-    ∑ i, w i * ((if i ∈ (∅ : Finset ι) then (1 : R) else 0) - h)
-      ≤ ∑ i, w i * ((if i ∈ T then (1 : R) else 0) - h) := by
+重み `w_i` がすべて非負で `k(1) - k(0) ≥ 0` なら、`∑_i w_i k(χ_T(i))` は `T = ∅` で最小になる。手順は具体版 `gval_empty_le_gval` と同じで、
+`sum_weight_le_univ` の鎖の `k(1) - k(χ)` が `k(χ) - k(0)`（人手の `h(ε(μ)) - h(0)`）に替わるだけである。効いている構造も同じ。 -/
+theorem sum_weight_empty_le {R : Type*} [Ring R] [PartialOrder R] [IsOrderedRing R] (k : Fin 2 → R)
+    (hk : 0 ≤ k 1 - k 0) [Nonempty ι] (w : ι → R) (hw : ∀ i, 0 ≤ w i) (T : Finset ι) :
+    ∑ i, w i * k (if i ∈ (∅ : Finset ι) then 1 else 0)
+      ≤ ∑ i, w i * k (if i ∈ T then 1 else 0) := by
   let e : Fin (Fintype.card ι) ≃ ι := (Fintype.equivFin ι).symm
-  have hre : ∀ S : Finset ι, ∑ i, w i * ((if i ∈ S then (1 : R) else 0) - h)
-      = ∑ j : Fin (Fintype.card ι), w (e j) * ((if e j ∈ S then (1 : R) else 0) - h) :=
+  have hre : ∀ S : Finset ι, ∑ i, w i * k (if i ∈ S then 1 else 0)
+      = ∑ j : Fin (Fintype.card ι), w (e j) * k (if e j ∈ S then 1 else 0) :=
     fun S => (Fintype.sum_equiv e _ _ (fun _ => rfl)).symm
                                                         -- 添字の付け替え（具体版の `gval_eq_sum_fin_real`）
   let j₀ : Fin (Fintype.card ι) := ⟨0, Fintype.card_pos⟩  -- 人手の `k → 1`
-  have ha : ∀ j, 0 ≤ w (e j) * (if e j ∈ T then (1 : R) else 0) := by
+  have ha : ∀ j, 0 ≤ w (e j) * (k (if e j ∈ T then 1 else 0) - k 0) := by
     intro j
     refine mul_nonneg (hw _) ?_
-    split <;> norm_num
-  have hchain : ∑ i, w i * ((if i ∈ T then (1 : R) else 0) - h)
-      - ∑ i, w i * ((if i ∈ (∅ : Finset ι) then (1 : R) else 0) - h) ≥ 0 :=
-    calc ∑ i, w i * ((if i ∈ T then (1 : R) else 0) - h)
-          - ∑ i, w i * ((if i ∈ (∅ : Finset ι) then (1 : R) else 0) - h)
-        = (∑ j, w (e j) * ((if e j ∈ T then (1 : R) else 0) - h)) - ∑ j, w (e j) * (0 - h) := by
+    split
+    · exact hk                                          -- `χ = 1`: `k(1) - k(0) ≥ 0`
+    · rw [sub_self]                                     -- `χ = 0`: `k(0) - k(0) = 0`
+  have hchain : ∑ i, w i * k (if i ∈ T then 1 else 0)
+      - ∑ i, w i * k (if i ∈ (∅ : Finset ι) then 1 else 0) ≥ 0 :=
+    calc ∑ i, w i * k (if i ∈ T then 1 else 0)
+          - ∑ i, w i * k (if i ∈ (∅ : Finset ι) then 1 else 0)
+        = (∑ j, w (e j) * k (if e j ∈ T then 1 else 0)) - ∑ j, w (e j) * k 0 := by
           rw [hre T, hre ∅]
-          simp only [Finset.notMem_empty, if_false]     -- 和の定義を 2 か所
-      _ = ∑ j, (w (e j) * ((if e j ∈ T then (1 : R) else 0) - h) - w (e j) * (0 - h)) :=
+          simp only [Finset.notMem_empty, if_false]     -- 和の定義を 2 か所（`χ_∅ = 0`）
+      _ = ∑ j, (w (e j) * k (if e j ∈ T then 1 else 0) - w (e j) * k 0) :=
           (finite_sum_sub_fin' _ _ _).symm              -- 差の有限和を右辺から左辺へ
-      _ = ∑ j, w (e j) * (((if e j ∈ T then (1 : R) else 0) - h) - (0 - h)) :=
+      _ = ∑ j, w (e j) * (k (if e j ∈ T then 1 else 0) - k 0) :=
           Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm   -- 分配律を各項へ
-      _ = ∑ j, w (e j) * (if e j ∈ T then (1 : R) else 0) :=
-          Finset.sum_congr rfl fun j _ => by rw [sub_sub_sub_cancel_right, sub_zero]   -- `(χ - h) - (0 - h) = χ` を各項へ
-      _ ≥ w (e j₀) * (if e j₀ ∈ T then (1 : R) else 0) :=
+      _ ≥ w (e j₀) * (k (if e j₀ ∈ T then 1 else 0) - k 0) :=
           finite_sum_ge_term_fin' _ _ ha j₀             -- 非負の項の有限和は各項以上（`k → 1`）
       _ ≥ 0 := ha j₀                                    -- その項は `0` 以上
   exact sub_nonneg.1 hchain

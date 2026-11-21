@@ -12,9 +12,9 @@
 # トレースは def_trace の対角成分の和で組む。
 # ň_μ は ../eigenvalues_of_check_Vprime/_vprime_settings.sage が読み込む number_operator_settings() から取る（既定は Jordan–Wigner の
 # 模型 n_μ := c_μ^T c_μ、QQ、M_col = 2, 3, 4。check_with_check_psi.sage からは本文の ψ̌ の ň_μ、数体 F := E_1、結合定数 3 組 × M_col = 2, 3）。
-# Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň_μ、R^{(0)} := I − ň_μ、左から掛ける）。
+# Q̌_ε := Π_μ R_μ^{(ε(μ))}（def_check_Q_epsilon）（R^{(1)} := ň_μ、R^{(0)} := I − ň_μ、左から掛ける）。
 # exp(γ(θ̃_μ)/2) をローラン多項式環 F[a_1^{±1}, …, a_M^{±1}] の不定元 a_μ に置き、V̌' := Π_μ (a_μ ň_μ + a_μ^{-1}(I − ň_μ))（左から掛ける積）とする。
-# このとき exp(ǧ(ε)) = Π_μ a_μ^{2ε_μ − 1} である。V̌' = exp(X̌) となること自体はここでは確かめていない
+# このとき exp(ǧ(ε)) = Π_μ exp(γ_μ h(ε(μ))) = Π_μ a_μ^{±1}（ε(μ) = 1 なら a_μ、0 なら a_μ^{-1}）である。V̌' = exp(X̌) となること自体はここでは確かめていない
 # （eigenvalues_of_check_Vprime の検算と、このディレクトリの check_claim_statement.sage が確かめる）。5 行目の
 # V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε と、2 行目・7 行目が引く (2)・(4) は、前提として各 ε で確かめる（本文の ψ̌ ではこれが本物の ň_μ の性質として試される）。
 # 帰属: 成分は F[a_1^{±1}, …, a_M^{±1}]（F は QQ か本文の ψ̌ の数体）の元（厳密計算）。浮動小数点はない。
@@ -62,7 +62,7 @@ for (tag, M, F, ns) in number_operator_settings():
     Id = body_identity(K, 2 ** M)
     Q = {eps: left_product([n[mu] if eps[mu] == 1 else Id - n[mu] for mu in range(M)]) for eps in itertools.product([1, 0], repeat=M)}
     V = left_product([body_sum(body_scalar(a[mu], n[mu]), body_scalar(a[mu] ** -1, Id - n[mu])) for mu in range(M)])
-    expg = lambda eps: prod(a[mu] ** (2 * eps[mu] - 1) for mu in range(M))
+    expg = lambda eps: prod(a[mu] if eps[mu] == 1 else a[mu] ** (-1) for mu in range(M))   # exp(ǧ(ε)) = Π_μ exp(γ_μ h(ε(μ)))
     one = K(1)
     # 引いた主張の前提: (2) Σ_ε Q̌_ε = I、(4) tr(Q̌_ε) = 1、eigenvalues_of_check_Vprime の V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε
     assert binary_word_matrix_sum(M, lambda eps: Q[eps]) == Id, tag

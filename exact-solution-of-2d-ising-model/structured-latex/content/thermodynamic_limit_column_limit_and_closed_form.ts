@@ -4648,6 +4648,15 @@ p
           math(String.raw`\text{(4)}\quad \check{n}_\mu^* = \check{n}_\mu,
 \qquad \check{Q}_\epsilon^* = \check{Q}_\epsilon
 \qquad \left(\epsilon \in \{0,1\}^{\check{\mathcal{M}}}\right)`),
+          "（",
+          math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+          " は ",
+          ref("def_binary_assignments_on_check_index_set"),
+          "、",
+          math(String.raw`\check{Q}_\epsilon`),
+          " は ",
+          ref("def_check_Q_epsilon"),
+          "）",
         ],
       ]),
       paragraph([
@@ -5196,10 +5205,14 @@ t^{-1}
 \end{aligned}`,
       ),
       paragraph([
-        ref("check_joint_eigenspace_decomposition"),
+        ref("def_check_Q_epsilon"),
         " の ",
-        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}`),
+        math(String.raw`\check{Q}_\epsilon = \prod_{\mu \in \check{\mathcal{M}}}R_\mu^{(\epsilon(\mu))}`),
         "（",
+        math(String.raw`R_\mu^{(e)}`),
+        " は ",
+        ref("def_check_R_factor"),
+        " の ",
         math(String.raw`R_\mu^{(1)} = \check{n}_\mu`),
         "、",
         math(String.raw`R_\mu^{(0)} = I - \check{n}_\mu`),
@@ -5212,16 +5225,24 @@ t^{-1}
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_\epsilon^*
-&= \left(R_1^{(\epsilon_1)}\cdots R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\right)^*
-&&\left(\because\ \blkref{check_joint_eigenspace_decomposition}\right)\\
-&= \left(R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\right)^*\cdots\left(R_1^{(\epsilon_1)}\right)^*
+&= \left(\prod_{\mu \in \check{\mathcal{M}}}R_\mu^{(\epsilon(\mu))}\right)^*
+&&\left(\because\ \blkref{def_check_Q_epsilon}\right)\\
+&= \left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon(\mu))}\right)^*
+&&\left(\because\ \blkref{def_product_over_check_index_set}\right)\\
+&= \left(R_1^{(\epsilon(1))}\cdots R_{M_{\mathrm{col}}}^{(\epsilon(M_{\mathrm{col}}))}\right)^*
+&&\left(\because\ \blkref{def_finite_product_of_matrices}\text{（左から順に掛ける）}\right)\\
+&= \left(R_{M_{\mathrm{col}}}^{(\epsilon(M_{\mathrm{col}}))}\right)^*\cdots\left(R_1^{(\epsilon(1))}\right)^*
 &&\left(\because\ \blkref{star_preserves_norm_and_limits}\text{ (1) の }(XW)^*=W^*X^*\text{ の反復適用}\right)\\
-&= R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\cdots R_1^{(\epsilon_1)}
-&&\left(\because\ \check n_\mu^*=\check n_\mu\text{、}I^*=I\text{ と、}\blkref{star_preserves_norm_and_limits}\text{ (1) の線型性による }(I-\check n_\mu)^*=I^*-\check n_\mu^*\right)\\
-&= R_1^{(\epsilon_1)}\cdots R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}
+&= R_{M_{\mathrm{col}}}^{(\epsilon(M_{\mathrm{col}}))}\cdots R_1^{(\epsilon(1))}
+&&\left(\because\ \blkref{def_check_R_factor}\text{ の }R_\mu^{(1)}=\check n_\mu\text{・}R_\mu^{(0)}=I-\check n_\mu\text{ に、}\check n_\mu^*=\check n_\mu\text{、}I^*=I\text{ と、}\blkref{star_preserves_norm_and_limits}\text{ (1) の線型性による }(I-\check n_\mu)^*=I^*-\check n_\mu^*\right)\\
+&= R_1^{(\epsilon(1))}\cdots R_{M_{\mathrm{col}}}^{(\epsilon(M_{\mathrm{col}}))}
 &&\left(\because\ \text{因子の可換性。}\blkref{check_number_operators_commute}\text{ (2) の }\check n_\mu\check n_\nu=\check n_\nu\check n_\mu\text{ と、分配律による }(I-\check n_\mu)\check n_\nu=\check n_\nu(I-\check n_\mu)\text{ など}\right)\\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon(\mu))}
+&&\left(\because\ \blkref{def_finite_product_of_matrices}\text{（左から順に掛ける）}\right)\\
+&= \prod_{\mu \in \check{\mathcal{M}}}R_\mu^{(\epsilon(\mu))}
+&&\left(\because\ \blkref{def_product_over_check_index_set}\right)\\
 &= \check{Q}_\epsilon
-&&\left(\because\ \blkref{check_joint_eigenspace_decomposition}\right)
+&&\left(\because\ \blkref{def_check_Q_epsilon}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -5294,6 +5315,7 @@ x^*\check{Q}_\epsilon x
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: (3) の前置きの β := 1/(2√M_col) ∈ ℝ_{>0} と、def_check_fermi の Y̌ の係数（def_complex_quotient の商 1_ℂ/u）の一致が書かれておらず、(ψ̌_μ^†)^* の鎖の 4 行目は β を実数として complex_conjugate_of_real_inclusion（r → β）で動かさなかった。β の所属を外し、α_μ・α_ν と同じ読みで β = 1_ℂ/u と書き、準備 (f)（\\overline{β} = β。def_complex_quotient・complex_conjugate_of_product・complex_conjugate_of_real_inclusion（r → 1）・complex_conjugate_of_inverse（w → u）・準備 (b) の 8 行）を足して、4 行目の根拠を準備 (f) にした。計算と主張は不変。",
         "2026-11-05: 全証明の SageMath 検算（sagemath/check/check_number_operator_is_hermitian/）を付けたときに根拠を直した（計算と主張は不変）。Pauli 行列の成分の出典を pauli_matrix_products に、(A_1⊠⋯⊠A_M)^* = A_1^*⊠⋯⊠A_M^* の出典を kronecker_product_rule (2)（I⊠⋯⊠I = I の主張）から def_kronecker (2) の成分の鎖に、(σ_k^a)^* = σ_k^a を def_site_pauli_matrices の鎖に、相異なるサイトの因子の可換性を kronecker_product_rule (1) から distinct_site_pauli_matrices_commute に、Z_j・Y_j の定義を def_transfer_matrix_symbols から def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices に、Ž_μ・Y̌_μ の定義を def_half_integer_modes（θ̃ の共役添字恒等式のラベル）から def_half_integer_checkZ・def_half_integer_checkY に、ň_μ の定義を def_check_fermi から def_check_number_operator に直した。(XW)^* = W^*X^* と転置共役の線型性を star_preserves_norm_and_limits (1) で、結びの鎖を、数ベクトルの共役転置（本文に定義が無い）を経ない成分の鎖に書き直した（def_conjugate_bilinear_value・mat_mult・complex_conjugate_of_product・complex_conjugate_of_sum・complex_conjugate_times_self・real_inclusion_preserves_finite_sum・definition_of_sqrt_r_positive・def_matrix_norm）。Q̌_ε の鎖の (I−ň_μ)^* と因子の可換性の根拠を足した。名前だけの根拠（\\text{…}）を \\blkref に直した。",
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: (1) の証明で Pauli 行列と 2 次の単位行列の共役転置を文で述べていた箇所（「Pauli 行列の成分より」「σ^y は転置で (1,2) 成分 -i と (2,1) 成分 i が入れ替わり、複素共役でさらに符号が戻る」「δ_{kl} は実数で δ_{lk} = δ_{kl}」）を外し、(σ_k^a)^* の鎖の 3 行目（σ^a と I の共役転置を 1 行で当てていた）を、成分の鎖で示す主張 conjugate_transpose_of_identity_matrix_of_order_two（I の因子へ同時に）の行と conjugate_transpose_of_pauli_x・conjugate_transpose_of_pauli_y・conjugate_transpose_of_pauli_z（009_eigenvalues_of_V.ts）の行に割った（4 → 5 等号）。計算と主張は不変。",
+        "2026-11-21: ε・Σ・Q̌ の記法の書き直し（代表の指摘）に合わせた。主張 (4) で Q̌_ε が最初に出る箇所に def_binary_assignments_on_check_index_set と def_check_Q_epsilon を引いた。(4) の Q̌_ε^* の鎖は、check_joint_eigenspace_decomposition の主張の中の定義（∏_{μ=1}^{M_col}R_μ^{(ε_μ)}）を引いていたのを、独立した定義 def_check_Q_epsilon の Q̌_ε = ∏_{μ∈M̌}R_μ^{(ε(μ))} を引く形にし、∏_{μ∈M̌} と ∏_{μ=1}^{M_col} を行き来する行（def_product_over_check_index_set）と、∏_{μ=1}^{M_col} を R_1⋯R_{M_col} と書く行（def_finite_product_of_matrices）を両端に一つずつ足した（5 → 9 等号）。因子のエルミート性の行に def_check_R_factor を引いた。添字 ε_μ は ε(μ) にした。行列と主張は不変。",
       ],
     },
   },
@@ -5527,6 +5549,14 @@ Wy
         math(String.raw`w_\epsilon := \check{Q}_\epsilon u`),
         "（",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        "。",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " は ",
+        ref("def_binary_assignments_on_check_index_set"),
+        "、",
+        math(String.raw`\check{Q}_\epsilon`),
+        " は ",
+        ref("def_check_Q_epsilon"),
         "）とおく。まず",
       ]),
       displayMath(
@@ -5534,11 +5564,11 @@ Wy
 u
 &= Iu
  &&\left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right)\\
-&= \Bigl(\sum_{\epsilon}\check{Q}_\epsilon\Bigr)u
+&= \Bigl(\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\check{Q}_\epsilon\Bigr)u
  &&\left(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(2)}\right)\\
-&= \sum_{\epsilon}\check{Q}_\epsilon u
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\check{Q}_\epsilon u
  &&\left(\because\ \blkref{sum_over_binary_words_distributes_in_left_factor}\right)\\
-&= \sum_{\epsilon}w_\epsilon
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}w_\epsilon
  &&\left(\because\ w_\epsilon\ \text{の置き方}\right)
 \end{aligned}`,
       ),
@@ -5548,29 +5578,31 @@ u
       displayMath(
         String.raw`\begin{aligned}
 V^{(+)}u
-&= V^{(+)}\Bigl(\sum_{\epsilon}\check{Q}_\epsilon u\Bigr)
+&= V^{(+)}\Bigl(\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\check{Q}_\epsilon u\Bigr)
  &&\left(\because\ \text{直前の鎖の 3 行目}\right)\\
-&= \sum_{\epsilon}V^{(+)}\left(\check{Q}_\epsilon u\right)
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}V^{(+)}\left(\check{Q}_\epsilon u\right)
  &&\left(\because\ \blkref{sum_over_binary_words_distributes_in_right_factor}\right)\\
-&= \sum_{\epsilon}\left(V^{(+)}\check{Q}_\epsilon\right)u
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(V^{(+)}\check{Q}_\epsilon\right)u
  &&\left(\because\ \blkref{mat_mult_associative}\right)\\
-&= \sum_{\epsilon}\left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\check{Q}_\epsilon\right)u
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\check{Q}_\epsilon\right)u
  &&\left(\because\ \blkref{eigenvalues_of_V_plus}\ \text{(1)}\right)\\
-&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}w_\epsilon
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}w_\epsilon
  &&\left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ \text{と}\ w_\epsilon\ \text{の置き方}\right)
 \end{aligned}`,
       ),
       paragraph([
         "である（",
-        math(String.raw`\sum_\epsilon`),
-        " は ",
+        math(String.raw`\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}`),
+        " は、",
+        ref("def_binary_assignments_on_check_index_set"),
+        " により ",
         ref("def_sum_over_binary_words"),
         " の和）。",
         ref("sum_over_binary_words_entrywise"),
         " より、",
-        math(String.raw`u_k = \sum_\epsilon (w_\epsilon)_k`),
+        math(String.raw`u_k = \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}} (w_\epsilon)_k`),
         "、",
-        math(String.raw`(V^{(+)}u)_k = \sum_\epsilon(\check\Lambda_\epsilon)_{\mathbb{C}}(w_\epsilon)_k`),
+        math(String.raw`(V^{(+)}u)_k = \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}(\check\Lambda_\epsilon)_{\mathbb{C}}(w_\epsilon)_k`),
         " である（後者は ",
         ref("def_matrix_scalar_multiple"),
         " も使う）。これらを使うと",
@@ -5584,21 +5616,21 @@ V^{(+)}u
  &&\left(\because\ \text{準備 3}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\,\left(V^{(+)}u\right)_k
  &&\left(\because\ u \in \mathcal{F}^{(+)}\ \text{と Step 0}\right)\\
-&= \sum_{k=1}^{n}\overline{u_k}\sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}(w_\epsilon)_k
+&= \sum_{k=1}^{n}\overline{u_k}\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}(w_\epsilon)_k
  &&\left(\because\ \text{直前の成分の式}\right)\\
-&= \sum_{k=1}^{n}\sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
+&= \sum_{k=1}^{n}\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
  &&\left(\because\ \mathbb{C}\ \text{の分配律・交換律・結合律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
-&= \sum_{\epsilon}\sum_{k=1}^{n}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\sum_{k=1}^{n}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\overline{u_k}\,(w_\epsilon)_k\right)
  &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合律・交換律。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
-&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\sum_{k=1}^{n}\overline{u_k}\,(w_\epsilon)_k
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\sum_{k=1}^{n}\overline{u_k}\,(w_\epsilon)_k
  &&\left(\because\ \mathbb{C}\ \text{の分配律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
-&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\,u^*\check{Q}_\epsilon u
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\,u^*\check{Q}_\epsilon u
  &&\left(\because\ \text{準備 3（}A \to \check{Q}_\epsilon\text{）と}\ w_\epsilon = \check{Q}_\epsilon u\right)\\
-&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\|w_\epsilon\|^2\right)_{\mathbb{C}}
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\|w_\epsilon\|^2\right)_{\mathbb{C}}
  &&\left(\because\ \blkref{check_number_operator_is_hermitian}\ \text{の (4) に続く式}\right)\\
-&= \sum_{\epsilon}\left(\check\Lambda_\epsilon\,\|w_\epsilon\|^2\right)_{\mathbb{C}}
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(\check\Lambda_\epsilon\,\|w_\epsilon\|^2\right)_{\mathbb{C}}
  &&\left(\because\ \blkref{real_inclusion_preserves_product}\right)\\
-&= \Bigl(\sum_{\epsilon}\check\Lambda_\epsilon\,\|w_\epsilon\|^2\Bigr)_{\mathbb{C}}
+&= \Bigl(\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\check\Lambda_\epsilon\,\|w_\epsilon\|^2\Bigr)_{\mathbb{C}}
  &&\left(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\right)
 \end{aligned}`,
       ),
@@ -5607,19 +5639,19 @@ V^{(+)}u
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\Bigl(\sum_{\epsilon}\|w_\epsilon\|^2\Bigr)_{\mathbb{C}}
-&= \sum_{\epsilon}\left(\|w_\epsilon\|^2\right)_{\mathbb{C}}
+\Bigl(\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\|w_\epsilon\|^2\Bigr)_{\mathbb{C}}
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\left(\|w_\epsilon\|^2\right)_{\mathbb{C}}
  &&\left(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\right)\\
-&= \sum_{\epsilon}u^*\check{Q}_\epsilon u
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}u^*\check{Q}_\epsilon u
  &&\left(\because\ \blkref{check_number_operator_is_hermitian}\ \text{の (4) に続く式}\right)\\
-&= \sum_{\epsilon}\sum_{k=1}^{n}\overline{u_k}\,(w_\epsilon)_k
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\sum_{k=1}^{n}\overline{u_k}\,(w_\epsilon)_k
  &&\left(\because\ \text{準備 3（}A \to \check{Q}_\epsilon\text{）と}\ w_\epsilon = \check{Q}_\epsilon u\right)\\
-&= \sum_{k=1}^{n}\sum_{\epsilon}\overline{u_k}\,(w_\epsilon)_k
+&= \sum_{k=1}^{n}\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\overline{u_k}\,(w_\epsilon)_k
  &&\left(\because\ \text{有限個の複素数の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合律・交換律。}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
-&= \sum_{k=1}^{n}\overline{u_k}\sum_{\epsilon}(w_\epsilon)_k
+&= \sum_{k=1}^{n}\overline{u_k}\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}(w_\epsilon)_k
  &&\left(\because\ \mathbb{C}\ \text{の分配律（}\blkref{complex_numbers_form_a_field}\text{）}\right)\\
 &= \sum_{k=1}^{n}\overline{u_k}\,u_k
- &&\left(\because\ u_k = \textstyle\sum_\epsilon (w_\epsilon)_k\right)\\
+ &&\left(\because\ u_k = \textstyle\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}} (w_\epsilon)_k\right)\\
 &= \left(\|u\|^2\right)_{\mathbb{C}}
  &&\left(\because\ \text{準備 4}\right)\\
 &= \left(\|x\|^2\right)_{\mathbb{C}}
@@ -5630,15 +5662,15 @@ V^{(+)}u
         "である。",
         ref("inclusion_rr_to_cc_is_injective"),
         "（",
-        math(String.raw`a \to x^\top W_{\mathbb{R}}x,\ b \to \sum_\epsilon\check\Lambda_\epsilon\|w_\epsilon\|^2`),
+        math(String.raw`a \to x^\top W_{\mathbb{R}}x,\ b \to \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\check\Lambda_\epsilon\|w_\epsilon\|^2`),
         " と ",
-        math(String.raw`a \to \sum_\epsilon\|w_\epsilon\|^2,\ b \to \|x\|^2`),
+        math(String.raw`a \to \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\|w_\epsilon\|^2,\ b \to \|x\|^2`),
         "）より、二つの鎖の両端は ",
         math(String.raw`\mathbb{R}`),
         " の等式 ",
-        math(String.raw`x^\top W_{\mathbb{R}}x = \sum_\epsilon\check\Lambda_\epsilon\|w_\epsilon\|^2`),
+        math(String.raw`x^\top W_{\mathbb{R}}x = \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\check\Lambda_\epsilon\|w_\epsilon\|^2`),
         "、",
-        math(String.raw`\sum_\epsilon\|w_\epsilon\|^2 = \|x\|^2`),
+        math(String.raw`\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\|w_\epsilon\|^2 = \|x\|^2`),
         " を与える。",
         ref("eigenvalues_of_V_plus"),
         " (2) より ",
@@ -5654,11 +5686,11 @@ V^{(+)}u
       displayMath(
         String.raw`\begin{aligned}
 x^\top W_{\mathbb{R}}x
-&= \sum_{\epsilon}\check\Lambda_\epsilon\,\|w_\epsilon\|^2
+&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\check\Lambda_\epsilon\,\|w_\epsilon\|^2
  &&\left(\because\ \text{直前の}\ \mathbb{R}\ \text{の等式}\right)\\
-&\leq \sum_{\epsilon}\check\Lambda_{\max}\,\|w_\epsilon\|^2
+&\leq \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\check\Lambda_{\max}\,\|w_\epsilon\|^2
  &&\left(\because\ \text{各項の不等式を}\ \blkref{def_sum_over_binary_words_of_real_numbers}\ \text{の和で足し合わせる}\right)\\
-&= \check\Lambda_{\max}\sum_{\epsilon}\|w_\epsilon\|^2
+&= \check\Lambda_{\max}\sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\|w_\epsilon\|^2
  &&\left(\because\ \mathbb{R}\ \text{の分配律を}\ \blkref{def_sum_over_binary_words_of_real_numbers}\ \text{の各段の和へ}\right)\\
 &= \check\Lambda_{\max}\,\|x\|^2
  &&\left(\because\ \text{直前の}\ \mathbb{R}\ \text{の等式}\right)\\
@@ -6060,6 +6092,7 @@ c_+(M_{\mathrm{col}})
         "数値検証の場所: 上の 053_claim_even_sector_closing/check_04 に加え、証明の行と対応する検算は sagemath/check/c_plus_equals_Lambda_half_integer/ にある。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: def_sector_rayleigh_sup の 𝓡_+ の条件を x ∈ ℝ^{2^{M_col}}、ε_ℝx = x に述べ直したのに合わせ、主張の集合の条件を同じ形にし、準備 1 の「x ∈ 𝓕^{(+)} ∩ ℝ^n を ι^n(x) ∈ 𝓕^{(+)} と読む」を、epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors による同値の読み替えにした。x^⊤Wx を W_ℝ で書き直すこと、準備 1 の ι^n を def_real_vector_inclusion への参照に替えることは残っている。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 主張の x^⊤Wx を def_W_real の W_ℝ による x^⊤W_ℝx に直した（def_sector_rayleigh_sup と同じ式。値は不変）。準備 1 で局所に置いていた写像 ι^n と行列 W_ℝ := (w_kl) を、def_real_vector_inclusion の ι^n_{ℝ→ℂ}（略記 ι^n）と def_W_real の W_ℝ への参照に替え、「(·)_ℂ の単射性」と呼んでいた事実を inclusion_rr_to_cc_is_injective への参照に替えた。準備 2 の 5 行目（u と W_kl の二つの書き換えを 1 行でしていた）と、Step 2 の (Wq̄)_k の鎖の 2 行目（W_kl = (w_kl)_ℂ と共役の 2 段を 1 行でしていた）を一ステップ一定理に分けた。ε の成分の実性は epsilon_is_real_symmetric の e_kl から def_epsilon_real の ε_ℝ に替えた。",
+        "2026-11-21: ε・Σ・Q̌ の記法の書き直し（代表の指摘「わたる集合を明示する」「Q̌ は別途定義して参照する」）に合わせた。Step 1 の ε ∈ {0,1}^{M̌} の上の和 Σ_ε を、わたる集合を書いた Σ_{ε∈{0,1}^{M̌}} にし（33 箇所）、それが def_sum_over_binary_words の和であることの根拠に def_binary_assignments_on_check_index_set を足した。w_ε := Q̌_εu を置く箇所（Q̌_ε が最初に出る箇所）に def_binary_assignments_on_check_index_set と def_check_Q_epsilon を引いた。鎖の行数・値・主張は不変。",
       ],
     },
   },

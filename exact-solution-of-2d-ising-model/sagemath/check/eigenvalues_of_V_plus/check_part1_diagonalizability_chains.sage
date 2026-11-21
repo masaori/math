@@ -12,7 +12,7 @@
 # 鎖が使う仮定は、(1) の第一の鎖の V^(+)Q̌_ε = (Λ̌_ε)_ℂQ̌_ε と check_joint_eigenspace_decomposition (1) の Q̌_ε^2 = Q̌_ε だけである。
 # ň_μ は ../eigenvalues_of_check_Vprime/_vprime_settings.sage が読み込む number_operator_settings() から取る
 # （既定は Jordan–Wigner の模型 n_μ := c_μ^T c_μ）。exp(γ_μ/2) を不定元 t_μ、a := (2s_2)^{M_col/2} を不定元 a に置き、
-# V̌' := Π_μ (t_μ^{-1}(I − ň_μ) + t_μ ň_μ)、V^(+) := aV̌'、(Λ̌_ε)_ℂ := a·Π_μ t_μ^{2ε_μ − 1} とする
+# V̌' := Π_μ (t_μ^{-1}(I − ň_μ) + t_μ ň_μ)、V^(+) := aV̌'、(Λ̌_ε)_ℂ := a·Π_μ t_μ^{±1}（ε(μ) = 1 なら t_μ、0 なら t_μ^{-1}） とする
 # （指数関数の値と a の値そのものは ℝ への脱出なので、ローラン多項式環 F[a, t^{±1}] の中で鎖の形だけを確かめる。
 # 基底の段落の正則性は、不定元に有理数を代入した値でも確かめる）。
 # M = 2, 3、ε を全列挙、x は有理数の列ベクトル 2 本。
@@ -133,7 +133,7 @@ for (tag, M, F, ns) in number_operator_settings():
     lams = []
     for eps in cartesian_product([[0, 1]] * M):
         Q = joint_projector(n, eps, Id)
-        L = a * prod(t[mu] ** (2 * eps[mu] - 1) for mu in range(M))
+        L = a * prod(t[mu] if eps[mu] == 1 else t[mu] ** (-1) for mu in range(M))
         assert Q * Q == Q and Vp * Q == L * Q                  # 仮定が成り立つ
         for x in xs:
             check_chain(first_chain(Q, x, Id), ("first", tag, eps), True)

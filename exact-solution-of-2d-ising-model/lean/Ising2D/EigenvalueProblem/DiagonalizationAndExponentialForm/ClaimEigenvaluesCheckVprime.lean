@@ -5,6 +5,12 @@
 `eigenvalues_of_check_Vprime`（`evenEigen_006_claim_...`）、および
 `def_check_number_operator` (2) の `X̌`, `V̌'`（正本は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`）。
 
+`ǧ(ε) := Σ_{μ∈𝓜̌} γ(θ~_μ) h(ε(μ))` の `h`（`def_half_sign_of_binary_value`）は `halfSign`、`ε(μ)` は `binOfMem T μ`
+（人手の写像 `ε : 𝓜̌ → {0,1}` を、Lean は `ε(μ) = 1` となる `μ` の集合 `T` で持つ）である。Step 1 の `μ` ごとの等式
+`(ň_μ - ½I)Q̌_ε = h(ε(μ))Q̌_ε` は、`ε(μ)` によらない 6 行 `nOp_sub_half_mul_Qproj_common` と、`ε(μ) = 1`・`ε(μ) = 0` の 7 行ずつ
+`nOp_sub_half_mul_Qproj_of_mem`・`nOp_sub_half_mul_Qproj_of_not_mem` に置き（右から掛ける形は `Qproj_mul_nOp_sub_half_*`）、
+`X̌Q̌_ε` の 8 行の鎖は `Xop_mul_Qproj_step1`（右から掛ける形は `Qproj_mul_Xop_step1`）に置く。
+
 **必要十分版**は `Ising2D/NecSuf/JointEigenspace.lean` の
 `NecSuf.pow_mul_eq_of_mul_eq_smul`（原文 Step 2）と
 `NecSuf.exp_mul_eq_of_mul_eq_smul`（原文 Step 3）、
@@ -30,10 +36,30 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrixFromNecSuf
 import Ising2D.MathematicalTools.VectorAndMatrixNormsAndConvergence.ClaimContinuityOfProductsAndScalarMultiplesFromNecSuf
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpPositiveFromNecSuf
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealOneMinusHalfIsHalf
 
 namespace Ising2D
 
 open Matrix Filter Topology
+
+/-- **`def_half_sign_of_binary_value`**: `h : {0,1} → ℝ`、`h(1) := ½`、`h(0) := −(½)`（人手の `{0,1}` は Lean の `Fin 2`）。 -/
+noncomputable def halfSign (e : Fin 2) : ℝ := if e = 1 then 1 / 2 else -(1 / 2)
+
+/-- `def_half_sign_of_binary_value` の `h(1) := ½`。 -/
+theorem halfSign_one : halfSign 1 = 1 / 2 := by rw [halfSign, if_pos rfl]
+
+/-- `def_half_sign_of_binary_value` の `h(0) := −(½)`。 -/
+theorem halfSign_zero : halfSign 0 = -(1 / 2) := by rw [halfSign, if_neg (by decide)]
+
+/-- 人手の写像 `ε : 𝓜̌ → {0,1}`（`def_binary_assignments_on_check_index_set`）の値 `ε(μ)` を、Lean の `T`（`ε(μ) = 1` となる `μ` の集合）
+から読む: `ν ∈ T` なら `1`、そうでなければ `0`。 -/
+def binOfMem {M : ℕ} (T : Finset (CheckIdx M)) (μ : CheckIdx M) : Fin 2 := if μ ∈ T then 1 else 0
+
+theorem binOfMem_of_mem {M : ℕ} {T : Finset (CheckIdx M)} {μ : CheckIdx M} (hμ : μ ∈ T) :
+    binOfMem T μ = 1 := by rw [binOfMem, if_pos hμ]
+
+theorem binOfMem_of_not_mem {M : ℕ} {T : Finset (CheckIdx M)} {μ : CheckIdx M} (hμ : μ ∉ T) :
+    binOfMem T μ = 0 := by rw [binOfMem, if_neg hμ]
 
 namespace CheckFermiSetup
 
@@ -48,12 +74,23 @@ noncomputable def Xop (g : CheckIdx M → ℝ) : TensorPow M :=
 noncomputable def Vprime (g : CheckIdx M → ℝ) : TensorPow M := matExp (F.Xop g)
 
 /-- **原文 `eigenvalues_of_check_Vprime` の `ǧ(ε)`**:
-`ǧ(ε) = ∑_{μ=1}^{M} γ(θ~_μ)(ε_μ - 1/2)`。
+`ǧ(ε) := Σ_{μ∈𝓜̌} γ(θ~_μ) h(ε(μ))`（`def_sum_over_check_index_set` の `𝓜̌` の上の和。Lean の `Finset.univ` の上の和）。
+人手の写像 `ε : 𝓜̌ → {0,1}` は Lean の `T`（`ε(μ) = 1` となる `μ` の集合）で、`ε(μ)` は `binOfMem T μ`、`h` は `halfSign` である。
 
 （`ǧ` の値は `F` に依らないが、`F.gval g T` と書けるように `F` を引数に取る。） -/
 noncomputable def gval (_F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (T : Finset (CheckIdx M)) : ℝ :=
-  ∑ i : CheckIdx M, g i * ((if i ∈ T then (1 : ℝ) else 0) - 1 / 2)
+  ∑ i : CheckIdx M, g i * halfSign (binOfMem T i)
+
+/-- 語 `ε : Fin M → Fin 2`（人手の写像 `ε : 𝓜̌ → {0,1}` の `ε(j + 1) = ε j`）で添字付けた `Qproj` の添字 `finsetOfBinWord ε` から
+読んだ値 `binOfMem` は、語の値 `ε j` に戻る。 -/
+theorem binOfMem_finsetOfBinWord (ε : Fin M → Fin 2) (j : Fin M) :
+    binOfMem (finsetOfBinWord ε) (checkIdxOfFin j) = ε j := by
+  by_cases h : ε j = 1
+  · rw [binOfMem_of_mem ((checkIdxOfFin_mem_finsetOfBinWord ε j).2 h), h]
+  · rw [binOfMem_of_not_mem (fun hm => h ((checkIdxOfFin_mem_finsetOfBinWord ε j).1 hm))]
+    generalize ε j = e at h ⊢
+    fin_cases e <;> simp_all
 
 theorem Xop_neg (g : CheckIdx M → ℝ) : F.Xop (fun i => -(g i)) = -F.Xop g := by
   simp only [Xop, ← Finset.sum_neg_distrib]
@@ -73,22 +110,168 @@ theorem Xop_eq_sum_fin (g : CheckIdx M → ℝ) :
   (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
     (fun _ => rfl)).symm
 
-/-- 人手の Step 1 の最後の行「`ǧ` の定義」: `ǧ(ε) = Σ_{μ=1}^{M_col} γ(θ~_μ)(ε_μ - 1/2)` を、`ℂ` の値として `Fin M` の上の和で書く。
-人手の `ε_μ` は Lean の `if μ ∈ T then 1 else 0`。人手は `γ(θ~_μ)`・`ǧ(ε) ∈ ℝ` をそのまま `ℂ` の係数として使っており、
-ℝ から ℂ への包含（`Complex.ofReal` が和・積・差・`1`・`0`・`1/2` を保つこと）を書いていない。Lean ではそれを `push_cast` で出し、
-添字の付け替えは `Xop_eq_sum_fin` と同じく `checkIdxOfFin` で行う。 -/
+/-- 人手の Step 1 の最後の 2 行「`def_sum_over_check_index_set` を右辺から左辺へ」「`ǧ` の定義」をまとめて、
+`ǧ(ε) = Σ_{μ=1}^{M_col} γ(θ~_μ) h(ε(μ))` を `ℂ` の値として `Fin M` の上の和で書く。人手は `γ(θ~_μ)`・`h(ε(μ))`・`ǧ(ε) ∈ ℝ` を
+そのまま `ℂ` の係数として使っており、ℝ から ℂ への包含（`Complex.ofReal` が和・積を保つこと）を書いていない。Lean ではそれを `push_cast` で出す。
+Step 1 の鎖そのものは 2 行を `sum_fin_eq_sum_checkIdx`（`def_sum_over_check_index_set`）と `gval_ofReal`（`ǧ` の定義）に分けて書く。 -/
 theorem gval_eq_sum_fin (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
     ((F.gval g T : ℝ) : ℂ)
-      = ∑ j : Fin M, ((g (checkIdxOfFin j) : ℂ)) *
-          ((if checkIdxOfFin j ∈ T then (1 : ℂ) else 0) - 1 / 2) := by
+      = ∑ j : Fin M, ((g (checkIdxOfFin j) : ℂ)) * ((halfSign (binOfMem T (checkIdxOfFin j)) : ℝ) : ℂ) := by
   rw [gval, ← Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
     (fun _ => rfl)]
   push_cast
-  refine Finset.sum_congr rfl fun j _ => ?_
-  split_ifs <;> simp
+  rfl
 
-/-- **原文 `eigenvalues_of_check_Vprime` Step 1**（左から掛ける形）: `X̌Q̌_ε = ǧ(ε)Q̌_ε`。人手の 14 行の鎖と 1 対 1 の calc
-（`M_col = r + 1`。人手の `μ` は `checkIdxOfFin j`、`½` は `(1/2 : ℂ)`、`ε_μ` は `if μ ∈ T then 1 else 0`）。
+/-- `def_sum_over_check_index_set`（`Σ_{μ∈𝓜̌} r_μ := Σ_{μ=1}^{M_col} r_μ`）: Lean の `𝓜̌` の上の和（`Finset.univ`）と、
+人手の添字 `μ = j + 1`（`checkIdxOfFin`）の `Fin M` の上の和は等しい。 -/
+theorem sum_fin_eq_sum_checkIdx (f : CheckIdx M → ℂ) :
+    ∑ j : Fin M, f (checkIdxOfFin j) = ∑ i : CheckIdx M, f i :=
+  Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _ (fun _ => rfl)
+
+/-- 「`ǧ` の定義」の行の `ℂ` の値: `(ǧ(ε))_ℂ = Σ_{μ∈𝓜̌} (γ(θ~_μ))_ℂ (h(ε(μ)))_ℂ`（ℝ から ℂ への包含が和・積を保つことを `push_cast` で出す）。 -/
+theorem gval_ofReal (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
+    ((F.gval g T : ℝ) : ℂ) = ∑ i : CheckIdx M, ((g i : ℂ)) * ((halfSign (binOfMem T i) : ℝ) : ℂ) := by
+  rw [gval]
+  push_cast
+  rfl
+
+/-! ## 原文 Step 1 の `μ` ごとの等式 `(ň_μ - ½I)Q̌_ε = h(ε(μ))Q̌_ε`・`Q̌_ε(ň_μ - ½I) = h(ε(μ))Q̌_ε`
+
+人手の `½` は `(1/2 : ℂ)`、`h(1) = ½`・`h(0) = −(½)` は `ℝ` の値 `halfSign` を `ℂ` へ移したもの（人手は包含を書かない。Lean は `push_cast`）。
+人手の `ε(μ) = 1`・`ε(μ) = 0` は Lean の `μ ∈ T`・`μ ∉ T` である。各行の右のコメントは、人手の鎖の同じ行の根拠である。 -/
+
+/-- **原文 Step 1** の左の等式の、`ε(μ)` によらない 6 行: `(ň_μ - ½I)Q̌_ε = ň_μQ̌_ε - ½Q̌_ε`。 -/
+theorem nOp_sub_half_mul_Qproj_common (μ : CheckIdx M) (T : Finset (CheckIdx M)) :
+    (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M)) * F.Qproj T = F.nOp μ * F.Qproj T - (1 / 2 : ℂ) • F.Qproj T :=
+  calc (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M)) * F.Qproj T
+      = (F.nOp μ + -((1 / 2 : ℂ) • (1 : TensorPow M))) * F.Qproj T := by rw [sub_eq_add_neg_tensorPow]
+                                                        -- `matrix_difference_is_sum_with_negation`
+    _ = F.nOp μ * F.Qproj T + (-((1 / 2 : ℂ) • (1 : TensorPow M))) * F.Qproj T := by rw [add_mul_matrix_tensorPow]
+                                                        -- `mat_mult_distributes_over_sum_in_left_factor`
+    _ = F.nOp μ * F.Qproj T + -(((1 / 2 : ℂ) • (1 : TensorPow M)) * F.Qproj T) := by rw [neg_mul_matrix_tensorPow]
+                                                        -- `negation_factors_out_of_left_factor`
+    _ = F.nOp μ * F.Qproj T - ((1 / 2 : ℂ) • (1 : TensorPow M)) * F.Qproj T := by rw [← sub_eq_add_neg_tensorPow]
+                                                        -- `matrix_difference_is_sum_with_negation` を右辺から左辺へ
+    _ = F.nOp μ * F.Qproj T - (1 / 2 : ℂ) • ((1 : TensorPow M) * F.Qproj T) := by rw [smul_mul_matrix_tensorPow]
+                                                        -- `scalar_multiple_factors_out_of_left_factor`
+    _ = F.nOp μ * F.Qproj T - (1 / 2 : ℂ) • F.Qproj T := by rw [identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+
+/-- **原文 Step 1** の左の等式の `ε(μ) = 1` の場合（7 行）。 -/
+theorem nOp_sub_half_mul_Qproj_of_mem {μ : CheckIdx M} {T : Finset (CheckIdx M)} (hμ : μ ∈ T) :
+    (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M)) * F.Qproj T
+      = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T :=
+  calc (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M)) * F.Qproj T
+      = F.nOp μ * F.Qproj T - (1 / 2 : ℂ) • F.Qproj T := F.nOp_sub_half_mul_Qproj_common μ T
+                                                        -- `ε(μ)` によらない部分の鎖
+    _ = F.Qproj T - (1 / 2 : ℂ) • F.Qproj T := by rw [F.nOp_mul_Qproj_of_mem hμ]
+                                                        -- `check_joint_eigenspace_decomposition` (3) の `ε(ν) = 1` の `ň_νQ̌_ε = Q̌_ε`
+    _ = (1 : ℂ) • F.Qproj T - (1 / 2 : ℂ) • F.Qproj T := by rw [one_smul_tensorPow]
+                                                        -- `scalar_multiple_by_one` を右辺から左辺へ
+    _ = ((1 : ℂ) - 1 / 2) • F.Qproj T := smul_sub_smul_tensorPow _ _ _
+                                                        -- `difference_of_scalar_multiples_of_one_matrix`
+    _ = (1 / 2 : ℂ) • F.Qproj T := by
+        rw [show ((1 : ℂ) - 1 / 2) = (((1 : ℝ) - 1 / 2 : ℝ) : ℂ) by push_cast; ring, real_one_minus_half_is_half]
+        push_cast; rfl                                  -- `real_one_minus_half_is_half`（ℝ の等式を包含で ℂ へ）
+    _ = ((halfSign 1 : ℝ) : ℂ) • F.Qproj T := by rw [halfSign_one]; push_cast; rfl
+                                                        -- `def_half_sign_of_binary_value` の `h(1) := ½` を右辺から左辺へ
+    _ = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T := by rw [binOfMem_of_mem hμ]
+                                                        -- 場合の仮定 `ε(μ) = 1` を右辺から左辺へ
+
+/-- **原文 Step 1** の左の等式の `ε(μ) = 0` の場合（7 行）。 -/
+theorem nOp_sub_half_mul_Qproj_of_not_mem {μ : CheckIdx M} {T : Finset (CheckIdx M)} (hμ : μ ∉ T) :
+    (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M)) * F.Qproj T
+      = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T :=
+  calc (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M)) * F.Qproj T
+      = F.nOp μ * F.Qproj T - (1 / 2 : ℂ) • F.Qproj T := F.nOp_sub_half_mul_Qproj_common μ T
+                                                        -- `ε(μ)` によらない部分の鎖
+    _ = 0 - (1 / 2 : ℂ) • F.Qproj T := by rw [F.nOp_mul_Qproj_of_not_mem hμ]
+                                                        -- `check_joint_eigenspace_decomposition` (3) の `ε(ν) = 0` の `ň_νQ̌_ε = O`
+    _ = (0 : ℂ) • F.Qproj T - (1 / 2 : ℂ) • F.Qproj T := by rw [zero_smul_tensorPow]
+                                                        -- `zero_scalar_multiple_is_zero_matrix` を右辺から左辺へ
+    _ = ((0 : ℂ) - 1 / 2) • F.Qproj T := smul_sub_smul_tensorPow _ _ _
+                                                        -- `difference_of_scalar_multiples_of_one_matrix`
+    _ = (-(1 / 2 : ℂ)) • F.Qproj T := by rw [zero_sub] -- `0 - a = -a`（`a → ½`）
+    _ = ((halfSign 0 : ℝ) : ℂ) • F.Qproj T := by rw [halfSign_zero]; push_cast; rfl
+                                                        -- `def_half_sign_of_binary_value` の `h(0) := −(½)` を右辺から左辺へ
+    _ = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T := by rw [binOfMem_of_not_mem hμ]
+                                                        -- 場合の仮定 `ε(μ) = 0` を右辺から左辺へ
+
+/-- **原文 Step 1** の「`μ` ごとの左の等式」: `(ň_μ - ½I)Q̌_ε = h(ε(μ))Q̌_ε`（`ε(μ) = 1`・`ε(μ) = 0` の二つの場合）。 -/
+theorem nOp_sub_half_mul_Qproj (μ : CheckIdx M) (T : Finset (CheckIdx M)) :
+    (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M)) * F.Qproj T
+      = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T := by
+  by_cases hμ : μ ∈ T
+  · exact F.nOp_sub_half_mul_Qproj_of_mem hμ           -- `ε(μ) = 1` の場合
+  · exact F.nOp_sub_half_mul_Qproj_of_not_mem hμ       -- `ε(μ) = 0` の場合
+
+/-- **原文 Step 1** の右の等式の、`ε(μ)` によらない 6 行: `Q̌_ε(ň_μ - ½I) = Q̌_εň_μ - ½Q̌_ε`。 -/
+theorem Qproj_mul_nOp_sub_half_common (μ : CheckIdx M) (T : Finset (CheckIdx M)) :
+    F.Qproj T * (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M)) = F.Qproj T * F.nOp μ - (1 / 2 : ℂ) • F.Qproj T :=
+  calc F.Qproj T * (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M))
+      = F.Qproj T * (F.nOp μ + -((1 / 2 : ℂ) • (1 : TensorPow M))) := by rw [sub_eq_add_neg_tensorPow]
+                                                        -- `matrix_difference_is_sum_with_negation`
+    _ = F.Qproj T * F.nOp μ + F.Qproj T * (-((1 / 2 : ℂ) • (1 : TensorPow M))) := by rw [mul_add_matrix_tensorPow]
+                                                        -- `mat_mult_distributes_over_sum_in_right_factor`
+    _ = F.Qproj T * F.nOp μ + -(F.Qproj T * ((1 / 2 : ℂ) • (1 : TensorPow M))) := by rw [mul_neg_matrix_tensorPow]
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = F.Qproj T * F.nOp μ - F.Qproj T * ((1 / 2 : ℂ) • (1 : TensorPow M)) := by rw [← sub_eq_add_neg_tensorPow]
+                                                        -- `matrix_difference_is_sum_with_negation` を右辺から左辺へ
+    _ = F.Qproj T * F.nOp μ - (1 / 2 : ℂ) • (F.Qproj T * (1 : TensorPow M)) := by rw [mul_smul_matrix_tensorPow]
+                                                        -- `scalar_multiple_factors_out_of_right_factor`
+    _ = F.Qproj T * F.nOp μ - (1 / 2 : ℂ) • F.Qproj T := by rw [mul_identity_matrix_tensorPow]
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult`
+
+/-- **原文 Step 1** の右の等式の `ε(μ) = 1` の場合（7 行）。 -/
+theorem Qproj_mul_nOp_sub_half_of_mem {μ : CheckIdx M} {T : Finset (CheckIdx M)} (hμ : μ ∈ T) :
+    F.Qproj T * (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M))
+      = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T :=
+  calc F.Qproj T * (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M))
+      = F.Qproj T * F.nOp μ - (1 / 2 : ℂ) • F.Qproj T := F.Qproj_mul_nOp_sub_half_common μ T
+                                                        -- `ε(μ)` によらない部分の鎖
+    _ = F.Qproj T - (1 / 2 : ℂ) • F.Qproj T := by rw [F.Qproj_mul_nOp_of_mem hμ]
+                                                        -- `check_joint_eigenspace_decomposition` (3) の `ε(ν) = 1` の `Q̌_εň_ν = Q̌_ε`
+    _ = (1 : ℂ) • F.Qproj T - (1 / 2 : ℂ) • F.Qproj T := by rw [one_smul_tensorPow]
+                                                        -- `scalar_multiple_by_one` を右辺から左辺へ
+    _ = ((1 : ℂ) - 1 / 2) • F.Qproj T := smul_sub_smul_tensorPow _ _ _
+                                                        -- `difference_of_scalar_multiples_of_one_matrix`
+    _ = (1 / 2 : ℂ) • F.Qproj T := by
+        rw [show ((1 : ℂ) - 1 / 2) = (((1 : ℝ) - 1 / 2 : ℝ) : ℂ) by push_cast; ring, real_one_minus_half_is_half]
+        push_cast; rfl                                  -- `real_one_minus_half_is_half`（ℝ の等式を包含で ℂ へ）
+    _ = ((halfSign 1 : ℝ) : ℂ) • F.Qproj T := by rw [halfSign_one]; push_cast; rfl
+                                                        -- `def_half_sign_of_binary_value` の `h(1) := ½` を右辺から左辺へ
+    _ = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T := by rw [binOfMem_of_mem hμ]
+                                                        -- 場合の仮定 `ε(μ) = 1` を右辺から左辺へ
+
+/-- **原文 Step 1** の右の等式の `ε(μ) = 0` の場合（7 行）。 -/
+theorem Qproj_mul_nOp_sub_half_of_not_mem {μ : CheckIdx M} {T : Finset (CheckIdx M)} (hμ : μ ∉ T) :
+    F.Qproj T * (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M))
+      = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T :=
+  calc F.Qproj T * (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M))
+      = F.Qproj T * F.nOp μ - (1 / 2 : ℂ) • F.Qproj T := F.Qproj_mul_nOp_sub_half_common μ T
+                                                        -- `ε(μ)` によらない部分の鎖
+    _ = 0 - (1 / 2 : ℂ) • F.Qproj T := by rw [F.Qproj_mul_nOp_of_not_mem hμ]
+                                                        -- `check_joint_eigenspace_decomposition` (3) の `ε(ν) = 0` の `Q̌_εň_ν = O`
+    _ = (0 : ℂ) • F.Qproj T - (1 / 2 : ℂ) • F.Qproj T := by rw [zero_smul_tensorPow]
+                                                        -- `zero_scalar_multiple_is_zero_matrix` を右辺から左辺へ
+    _ = ((0 : ℂ) - 1 / 2) • F.Qproj T := smul_sub_smul_tensorPow _ _ _
+                                                        -- `difference_of_scalar_multiples_of_one_matrix`
+    _ = (-(1 / 2 : ℂ)) • F.Qproj T := by rw [zero_sub] -- `0 - a = -a`（`a → ½`）
+    _ = ((halfSign 0 : ℝ) : ℂ) • F.Qproj T := by rw [halfSign_zero]; push_cast; rfl
+                                                        -- `def_half_sign_of_binary_value` の `h(0) := −(½)` を右辺から左辺へ
+    _ = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T := by rw [binOfMem_of_not_mem hμ]
+                                                        -- 場合の仮定 `ε(μ) = 0` を右辺から左辺へ
+
+/-- **原文 Step 1** の「`μ` ごとの右の等式」: `Q̌_ε(ň_μ - ½I) = h(ε(μ))Q̌_ε`。 -/
+theorem Qproj_mul_nOp_sub_half (μ : CheckIdx M) (T : Finset (CheckIdx M)) :
+    F.Qproj T * (F.nOp μ - (1 / 2 : ℂ) • (1 : TensorPow M))
+      = ((halfSign (binOfMem T μ) : ℝ) : ℂ) • F.Qproj T := by
+  by_cases hμ : μ ∈ T
+  · exact F.Qproj_mul_nOp_sub_half_of_mem hμ           -- `ε(μ) = 1` の場合
+  · exact F.Qproj_mul_nOp_sub_half_of_not_mem hμ       -- `ε(μ) = 0` の場合
+
+/-- **原文 `eigenvalues_of_check_Vprime` Step 1**（左から掛ける形）: `X̌Q̌_ε = ǧ(ε)Q̌_ε`。人手の 8 行の鎖と 1 対 1 の calc
+（`M_col = r + 1`。人手の `μ` は `checkIdxOfFin j`、`½` は `(1/2 : ℂ)`、`h(ε(μ))` は `halfSign (binOfMem T μ)` を `ℂ` へ移したもの）。
 和の各項へ同じ主張を同時に適用する行（人手の「各項へ」）は `Finset.sum_congr` で書く。 -/
 theorem Xop_mul_Qproj_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ)
     (T : Finset (CheckIdx (r + 1))) :
@@ -96,7 +279,7 @@ theorem Xop_mul_Qproj_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckId
   set Q := F.Qproj T
   set γ : Fin (r + 1) → ℂ := fun j => (g (checkIdxOfFin j) : ℂ)
   set n : Fin (r + 1) → TensorPow (r + 1) := fun j => F.nOp (checkIdxOfFin j)
-  set e : Fin (r + 1) → ℂ := fun j => if checkIdxOfFin j ∈ T then (1 : ℂ) else 0
+  set H : Fin (r + 1) → ℂ := fun j => ((halfSign (binOfMem T (checkIdxOfFin j)) : ℝ) : ℂ)
   set h : ℂ := 1 / 2
   calc F.Xop g * Q
       = (∑ j, γ j • (n j - h • (1 : TensorPow (r + 1)))) * Q := by rw [F.Xop_eq_sum_fin g]
@@ -106,54 +289,27 @@ theorem Xop_mul_Qproj_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckId
     _ = ∑ j, γ j • ((n j - h • (1 : TensorPow (r + 1))) * Q) :=
         Finset.sum_congr rfl fun j _ => smul_mul_matrix_tensorPow _ _ _
                                                         -- `scalar_multiple_factors_out_of_left_factor` を各項へ
-    _ = ∑ j, γ j • ((n j + -(h • (1 : TensorPow (r + 1)))) * Q) :=
-        Finset.sum_congr rfl fun j _ => by rw [sub_eq_add_neg_tensorPow]
-                                                        -- `matrix_difference_is_sum_with_negation` を各項へ
-    _ = ∑ j, γ j • (n j * Q + (-(h • (1 : TensorPow (r + 1)))) * Q) :=
-        Finset.sum_congr rfl fun j _ => by rw [add_mul_matrix_tensorPow]
-                                                        -- `mat_mult_distributes_over_sum_in_left_factor` を各項へ
-    _ = ∑ j, γ j • (n j * Q + -((h • (1 : TensorPow (r + 1))) * Q)) :=
-        Finset.sum_congr rfl fun j _ => by rw [neg_mul_matrix_tensorPow]
-                                                        -- `negation_factors_out_of_left_factor` を各項へ
-    _ = ∑ j, γ j • (n j * Q - (h • (1 : TensorPow (r + 1))) * Q) :=
-        Finset.sum_congr rfl fun j _ => by rw [← sub_eq_add_neg_tensorPow]
-                                                        -- `matrix_difference_is_sum_with_negation` を右辺から左辺へ、各項へ
-    _ = ∑ j, γ j • (n j * Q - h • ((1 : TensorPow (r + 1)) * Q)) :=
-        Finset.sum_congr rfl fun j _ => by rw [smul_mul_matrix_tensorPow]
-                                                        -- `scalar_multiple_factors_out_of_left_factor` を各項へ
-    _ = ∑ j, γ j • (n j * Q - h • Q) :=
-        Finset.sum_congr rfl fun j _ => by rw [identity_matrix_mul_tensorPow]
-                                                        -- `identity_matrix_is_left_unit_of_mat_mult` を各項へ
-    _ = ∑ j, γ j • (e j • Q - h • Q) :=
-        Finset.sum_congr rfl fun j _ => by rw [F.nOp_mul_Qproj (checkIdxOfFin j) T]
-                                                        -- `check_joint_eigenspace_decomposition` (3) の `ň_νQ̌_ε = ε_νQ̌_ε` を各項へ
-    _ = ∑ j, γ j • ((e j - h) • Q) :=
-        Finset.sum_congr rfl fun j _ => by rw [smul_sub_smul_tensorPow]
-                                                        -- `difference_of_scalar_multiples_of_one_matrix` を各項へ
-    _ = ∑ j, (γ j * (e j - h)) • Q :=
+    _ = ∑ j, γ j • (H j • Q) :=
+        Finset.sum_congr rfl fun j _ => by rw [F.nOp_sub_half_mul_Qproj (checkIdxOfFin j) T]
+                                                        -- `μ` ごとの左の等式を各項へ
+    _ = ∑ j, (γ j * H j) • Q :=
         Finset.sum_congr rfl fun j _ => smul_smul _ _ _
                                                         -- `scalar_multiple_is_associative` を各項へ（Lean の具体版は無く、mathlib の `smul_smul`）
-    _ = (∑ j, γ j * (e j - h)) • Q := finite_sum_smul_one_tensorPow r _ Q
+    _ = (∑ j, γ j * H j) • Q := finite_sum_smul_one_tensorPow r _ Q
                                                         -- `finite_sum_of_scalar_multiples_of_one_matrix`
-    _ = ((F.gval g T : ℝ) : ℂ) • Q := by rw [F.gval_eq_sum_fin g T]
+    _ = (∑ i : CheckIdx (r + 1), ((g i : ℂ)) * ((halfSign (binOfMem T i) : ℝ) : ℂ)) • Q := by
+        rw [sum_fin_eq_sum_checkIdx (fun i => ((g i : ℂ)) * ((halfSign (binOfMem T i) : ℝ) : ℂ))]
+                                                        -- `def_sum_over_check_index_set` を右辺から左辺へ
+    _ = ((F.gval g T : ℝ) : ℂ) • Q := by rw [F.gval_ofReal g T]
                                                         -- `ǧ` の定義
 
 /-- 人手の範囲外の `M_col = 0`（人手は `M_col ≥ 2`）でだけ使う `X̌Q̌_ε = ǧ(ε)Q̌_ε`。mathlib の `Finset.sum_mul` などで閉じる
-（人手の鎖とは対応しない）。 -/
+（人手の鎖とは対応しない。各項は `μ` ごとの左の等式 `nOp_sub_half_mul_Qproj`）。 -/
 theorem Xop_mul_Qproj_of_finset_sum (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
     F.Xop g * F.Qproj T = ((F.gval g T : ℝ) : ℂ) • F.Qproj T := by
-  rw [Xop, Finset.sum_mul]
-  have hterm : ∀ i : CheckIdx M,
-      ((g i : ℂ)) • (F.nOp i - (1 / 2 : ℂ) • 1) * F.Qproj T
-        = ((g i * ((if i ∈ T then (1 : ℝ) else 0) - 1 / 2) : ℝ) : ℂ) • F.Qproj T := by
-    intro i
-    simp only [sub_mul, smul_mul_assoc, one_mul]
-    rw [F.nOp_mul_Qproj i T, ← sub_smul, smul_smul]
-    congr 1
-    by_cases hT : i ∈ T <;> simp [hT] <;> push_cast <;> ring
-  rw [Finset.sum_congr rfl fun i _ => hterm i, gval]
-  push_cast
-  rw [Finset.sum_smul]
+  rw [Xop, Finset.sum_mul, F.gval_ofReal g T, Finset.sum_smul]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [smul_mul_matrix_tensorPow, F.nOp_sub_half_mul_Qproj i T, smul_smul]
 
 /-- **原文 `eigenvalues_of_check_Vprime` Step 1**: `X̌ Q̌_ε = ǧ(ε) Q̌_ε`。
 `M = r + 1` では人手の鎖と 1 対 1 の `Xop_mul_Qproj_step1`、人手の範囲外の `M = 0` では `Xop_mul_Qproj_of_finset_sum` による。 -/
@@ -163,7 +319,7 @@ theorem Xop_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
   | 0, F, g, T => exact F.Xop_mul_Qproj_of_finset_sum g T
   | r + 1, F, g, T => exact Xop_mul_Qproj_step1 F g T
 
-/-- **原文 `eigenvalues_of_check_Vprime` Step 1**（右から掛ける形）: `Q̌_εX̌ = ǧ(ε)Q̌_ε`。人手の 14 行の鎖と 1 対 1 の calc
+/-- **原文 `eigenvalues_of_check_Vprime` Step 1**（右から掛ける形）: `Q̌_εX̌ = ǧ(ε)Q̌_ε`。人手の 8 行の鎖と 1 対 1 の calc
 （`M_col = r + 1`。記号の対応は `Xop_mul_Qproj_step1` と同じ）。和の各項へ同じ主張を同時に適用する行（人手の「各項へ」）は
 `Finset.sum_congr` で書く。 -/
 theorem Qproj_mul_Xop_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ)
@@ -172,7 +328,7 @@ theorem Qproj_mul_Xop_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckId
   set Q := F.Qproj T
   set γ : Fin (r + 1) → ℂ := fun j => (g (checkIdxOfFin j) : ℂ)
   set n : Fin (r + 1) → TensorPow (r + 1) := fun j => F.nOp (checkIdxOfFin j)
-  set e : Fin (r + 1) → ℂ := fun j => if checkIdxOfFin j ∈ T then (1 : ℂ) else 0
+  set H : Fin (r + 1) → ℂ := fun j => ((halfSign (binOfMem T (checkIdxOfFin j)) : ℝ) : ℂ)
   set h : ℂ := 1 / 2
   calc Q * F.Xop g
       = Q * (∑ j, γ j • (n j - h • (1 : TensorPow (r + 1)))) := by rw [F.Xop_eq_sum_fin g]
@@ -182,36 +338,18 @@ theorem Qproj_mul_Xop_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckId
     _ = ∑ j, γ j • (Q * (n j - h • (1 : TensorPow (r + 1)))) :=
         Finset.sum_congr rfl fun j _ => mul_smul_matrix_tensorPow _ _ _
                                                         -- `scalar_multiple_factors_out_of_right_factor` を各項へ
-    _ = ∑ j, γ j • (Q * (n j + -(h • (1 : TensorPow (r + 1))))) :=
-        Finset.sum_congr rfl fun j _ => by rw [sub_eq_add_neg_tensorPow]
-                                                        -- `matrix_difference_is_sum_with_negation` を各項へ
-    _ = ∑ j, γ j • (Q * n j + Q * (-(h • (1 : TensorPow (r + 1))))) :=
-        Finset.sum_congr rfl fun j _ => by rw [mul_add_matrix_tensorPow]
-                                                        -- `mat_mult_distributes_over_sum_in_right_factor` を各項へ
-    _ = ∑ j, γ j • (Q * n j + -(Q * (h • (1 : TensorPow (r + 1))))) :=
-        Finset.sum_congr rfl fun j _ => by rw [mul_neg_matrix_tensorPow]
-                                                        -- `negation_factors_out_of_right_factor` を各項へ
-    _ = ∑ j, γ j • (Q * n j - Q * (h • (1 : TensorPow (r + 1)))) :=
-        Finset.sum_congr rfl fun j _ => by rw [← sub_eq_add_neg_tensorPow]
-                                                        -- `matrix_difference_is_sum_with_negation` を右辺から左辺へ、各項へ
-    _ = ∑ j, γ j • (Q * n j - h • (Q * (1 : TensorPow (r + 1)))) :=
-        Finset.sum_congr rfl fun j _ => by rw [mul_smul_matrix_tensorPow]
-                                                        -- `scalar_multiple_factors_out_of_right_factor` を各項へ
-    _ = ∑ j, γ j • (Q * n j - h • Q) :=
-        Finset.sum_congr rfl fun j _ => by rw [mul_identity_matrix_tensorPow]
-                                                        -- `identity_matrix_is_right_unit_of_mat_mult` を各項へ
-    _ = ∑ j, γ j • (e j • Q - h • Q) :=
-        Finset.sum_congr rfl fun j _ => by rw [F.Qproj_mul_nOp (checkIdxOfFin j) T]
-                                                        -- `check_joint_eigenspace_decomposition` (3) の `Q̌_εň_ν = ε_νQ̌_ε` を各項へ
-    _ = ∑ j, γ j • ((e j - h) • Q) :=
-        Finset.sum_congr rfl fun j _ => by rw [smul_sub_smul_tensorPow]
-                                                        -- `difference_of_scalar_multiples_of_one_matrix` を各項へ
-    _ = ∑ j, (γ j * (e j - h)) • Q :=
+    _ = ∑ j, γ j • (H j • Q) :=
+        Finset.sum_congr rfl fun j _ => by rw [F.Qproj_mul_nOp_sub_half (checkIdxOfFin j) T]
+                                                        -- `μ` ごとの右の等式を各項へ
+    _ = ∑ j, (γ j * H j) • Q :=
         Finset.sum_congr rfl fun j _ => smul_smul _ _ _
                                                         -- `scalar_multiple_is_associative` を各項へ（Lean の具体版は無く、mathlib の `smul_smul`）
-    _ = (∑ j, γ j * (e j - h)) • Q := finite_sum_smul_one_tensorPow r _ Q
+    _ = (∑ j, γ j * H j) • Q := finite_sum_smul_one_tensorPow r _ Q
                                                         -- `finite_sum_of_scalar_multiples_of_one_matrix`
-    _ = ((F.gval g T : ℝ) : ℂ) • Q := by rw [F.gval_eq_sum_fin g T]
+    _ = (∑ i : CheckIdx (r + 1), ((g i : ℂ)) * ((halfSign (binOfMem T i) : ℝ) : ℂ)) • Q := by
+        rw [sum_fin_eq_sum_checkIdx (fun i => ((g i : ℂ)) * ((halfSign (binOfMem T i) : ℝ) : ℂ))]
+                                                        -- `def_sum_over_check_index_set` を右辺から左辺へ
+    _ = ((F.gval g T : ℝ) : ℂ) • Q := by rw [F.gval_ofReal g T]
                                                         -- `ǧ` の定義
 
 /-- 人手の範囲外の `M_col = 0`（人手は `M_col ≥ 2`）でだけ使う `Q̌_εX̌ = ǧ(ε)Q̌_ε`。`X̌` と `Q̌_ε` の可換性と

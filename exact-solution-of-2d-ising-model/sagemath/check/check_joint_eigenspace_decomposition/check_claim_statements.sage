@@ -1,14 +1,15 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
 # 主張 (1)〜(5) そのものを、全ての ε, ε' ∈ {0,1}^{M_col} と全ての ν で厳密に確かめる（証明の行を経ずに、主張の式を直接比べる）。
-#   Q̌_ε := ∏_μ (ε_μň_μ + (1−ε_μ)(I−ň_μ))（主張の定義の因子のまま、def_finite_product_of_matrices の左から掛ける積）。
+#   Q̌_ε := ∏_{μ∈M̌} R_μ^{(ε(μ))}（def_check_Q_epsilon。R は def_check_R_factor、積は def_product_over_check_index_set の
+#   μ = 1, …, M_col の順に左から掛ける積）。以前の定義 ∏_μ(ε_μň_μ + (1−ε_μ)(I−ň_μ)) と同じ行列であることも確かめる。
 #   (1) ε ≠ ε' で Q̌_εQ̌_{ε'} = O、Q̌_ε^2 = Q̌_ε
 #   (2) Σ_ε Q̌_ε = I
-#   (3) ň_νQ̌_ε = Q̌_εň_ν = ε_νQ̌_ε（三つの式を対で比べる）
+#   (3) ε(ν) = 1 なら ň_νQ̌_ε = Q̌_εň_ν = Q̌_ε、ε(ν) = 0 なら ň_νQ̌_ε = Q̌_εň_ν = O（三つの式を対で比べる）
 #   (4) tr(Q̌_ε) = 1、dim im Q̌_ε = 1（rank を体 F の上の行基本変形で厳密に求める）、Step 4 の dim im Q̌_ε = tr(Q̌_ε)
 #   (5) 2^{M_col} 個の像の基底を並べた行列の rank が 2^{M_col}（像の和が全体）で、各像の次元の和も 2^{M_col}（和が直和）。
 # ň_μ は _number_operators.sage の number_operator_settings() から取る（既定は Jordan–Wigner の模型 M = 2, 3, 4、
 # check_with_check_psi.sage からは本文の ψ̌）。
-# 否定コントロール: I − ň_μ の代わりに I を使った族（ε_μ = 0 の因子を I にしたもの）では (1) の直交性と (4) の次元が外れる。
+# 否定コントロール: I − ň_μ の代わりに I を使った族（ε(μ) = 0 の因子を I にしたもの）では (1) の直交性と (4) の次元が外れる。
 # 帰属: 成分は QQ か本文の ψ̌ の数体 F（厳密計算。浮動小数点は使わない）。
 load("_number_operators.sage")
 import itertools
@@ -35,8 +36,12 @@ for (tag, M, F, ns) in number_operator_settings():
     Id = identity_matrix(F, N)
     O = matrix(F, N, N, 0)
     W = [tuple(w) for w in itertools.product([1, 0], repeat=M)]
-    factor = lambda e, n: e * n + (1 - e) * (Id - n)                    # 主張の定義の因子
-    Q = {w: left_product([factor(w[mu], ns[mu]) for mu in range(M)]) for w in W}
+    Rfac = lambda e, n: n if e == 1 else Id - n                         # def_check_R_factor
+    Q = {w: left_product([Rfac(w[mu], ns[mu]) for mu in range(M)]) for w in W}   # def_check_Q_epsilon
+    old_factor = lambda e, n: e * n + (1 - e) * (Id - n)                # 以前の定義の因子 ε_μň_μ + (1−ε_μ)(I−ň_μ)
+    for w in W:
+        claim_check(Q[w] == left_product([old_factor(w[mu], ns[mu]) for mu in range(M)]),
+                    f"{tag} ε={w}: def_check_Q_epsilon の Q̌_ε は以前の定義の行列に等しい")
     for w in W:
         for wp in W:
             if w != wp:
@@ -44,8 +49,9 @@ for (tag, M, F, ns) in number_operator_settings():
         claim_check(Q[w] * Q[w] == Q[w], f"{tag} ε={w}: (1) 冪等")
         for nu in range(M):
             claim_check(ns[nu] * Q[w] == Q[w] * ns[nu], f"{tag} ε={w} ν={nu + 1}: (3) 可換")
-            claim_check(ns[nu] * Q[w] == w[nu] * Q[w], f"{tag} ε={w} ν={nu + 1}: (3) ň_νQ̌_ε = ε_νQ̌_ε")
-            claim_check(Q[w] * ns[nu] == w[nu] * Q[w], f"{tag} ε={w} ν={nu + 1}: (3) Q̌_εň_ν = ε_νQ̌_ε")
+            target = Q[w] if w[nu] == 1 else O                          # ε(ν) = 1 なら Q̌_ε、ε(ν) = 0 なら O
+            claim_check(ns[nu] * Q[w] == target, f"{tag} ε={w} ν={nu + 1}: (3) ň_νQ̌_ε")
+            claim_check(Q[w] * ns[nu] == target, f"{tag} ε={w} ν={nu + 1}: (3) Q̌_εň_ν")
         claim_check(Q[w].trace() == 1, f"{tag} ε={w}: (4) tr = 1")
         claim_check(Q[w].rank() == Q[w].trace(), f"{tag} ε={w}: Step 4 の dim im Q̌_ε = tr(Q̌_ε)")
         claim_check(Q[w].rank() == 1, f"{tag} ε={w}: (4) dim im = 1")

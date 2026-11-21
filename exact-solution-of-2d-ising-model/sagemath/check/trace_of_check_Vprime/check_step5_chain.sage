@@ -66,7 +66,7 @@ for (tag, M, F, ns, gams, to_cb, g1s) in ball_settings([2, 3, 4]):
     V = X.exp()
     assert balls_overlap_mat(V, exp_ball_by_partial_sums(X)) and max_radius(V) < tol, (tag, "V̌' の二つの経路")
     half = RBv(1) / 2
-    gcheck = lambda eps: finite_sum([RBv(gams[mu]) * (RBv(eps[mu]) - half) for mu in range(M)])
+    gcheck = lambda eps: finite_sum([RBv(gams[mu]) * (half if eps[mu] == 1 else -half) for mu in range(M)])   # ǧ(ε) = Σ γ_μ h(ε(μ))
     prod_r = finite_prod([2 * (RBv(gams[mu]) / 2).cosh() for mu in range(M)])
     lines = [
         tr(V),

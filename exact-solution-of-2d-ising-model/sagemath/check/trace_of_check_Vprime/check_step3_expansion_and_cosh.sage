@@ -1,9 +1,9 @@
 # 対象ラベル: trace_of_check_Vprime（Step 3 のトレースの鎖の 10〜19 行目。γ_μ := γ(θ~_μ)、全体に (·)_ℂ が付く）
 #   Σ_ε exp(−ǧ(ε))
-#   = Σ_ε Π_μ exp((−γ_μ)(ε_μ − 1/2))                       (冒頭の exp(−ǧ(ε)) の鎖を各項へ同時に)
-#   = Π_μ (exp((−γ_μ)(1 − 1/2)) + exp((−γ_μ)(0 − 1/2)))    (expansion_of_finite_product_of_two_term_sums_of_real_numbers を右辺から左辺へ)
-#   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(0 − 1/2)))         (real_one_minus_half_is_half)
-#   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(−1/2)))            (ℝ で 0 − a = −a、a → 1/2)
+#   = Σ_ε Π_μ exp((−γ_μ)h(ε(μ)))                           (冒頭の exp(−ǧ(ε)) の鎖を各項へ同時に)
+#   = Π_μ (exp((−γ_μ)h(1)) + exp((−γ_μ)h(0)))              (expansion_of_finite_product_of_two_term_sums_of_real_numbers を右辺から左辺へ)
+#   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)h(0)))              (def_half_sign_of_binary_value の h(1) := ½)
+#   = Π_μ (exp((−γ_μ)·1/2) + exp((−γ_μ)(−1/2)))            (def_half_sign_of_binary_value の h(0) := −(½))
 #   = Π_μ (exp((−γ_μ)·1/2) + exp(−((−γ_μ)·1/2)))           (real_times_negation_is_negation_of_product、x → −γ_μ、t → 1/2)
 #   = Π_μ (exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))               (real_times_half_is_quotient_by_two、a → −γ_μ、各因子の 2 箇所)
 #   = Π_μ 2·((exp((−γ_μ)/2) + exp(−((−γ_μ)/2)))/2)         (real_twice_quotient_by_two_is_original を右辺から左辺へ)
@@ -11,13 +11,13 @@
 #   = Π_μ 2cosh(−(γ_μ/2))                                  (ℝ で (−a)/2 = −(a/2))
 #   = Π_μ 2cosh(γ_μ/2)                                     (cosh_is_even、x → γ_μ/2)
 # 最後の 2 行は check_step3_and_step4_real_lines.sage も確かめている。ここでは鎖が切れずにつながることを見るために含める。
-# 厳密な部: 展開の行を exp((−γ_μ)(e − 1/2)) → a_μ^{−(2e−1)}（a_μ は QQ 上の有理関数体の不定元）に置いて M_col = 1..6 で、
+# 厳密な部: 展開の行を exp((−γ_μ)h(e)) → a_μ^{∓1}（e = 1 なら a_μ^{-1}、e = 0 なら a_μ）（a_μ は QQ 上の有理関数体の不定元）に置いて M_col = 1..6 で、
 #   書き換えの 5 段（real_times_half_is_quotient_by_two は 2 箇所を別々に数えて 6 段）と (−a)/2 = −(a/2) を QQ[γ] の不定元で、b = 2·(b/2) を QQ(b) で確かめる。
 # 球の部: γ(θ~_μ)・exp・cosh の値は ℝ への脱出なので、区間演算 RealBallField(200) の球で扱い、
 #   11 個の式を M_col = 2..6、K の 4 組で組んで、隣どうしの球が交わること（半径 1e-40 未満）を確かめる。
 #   1 行目の左辺の exp(−ǧ(ε)) は ǧ の定義の和の符号反転の exp として組み、2 行目の積とは別に計算する。
 #   {0,1}^{M_col} の上の和は def_sum_over_binary_words_of_real_numbers どおり、有限和・有限積は左から畳み込む。
-# 否定コントロール: 0 − 1/2 を +1/2 にした因子、cosh の引数の 1/2 を落とした因子、2 を落とした因子、
+# 否定コントロール: h(0) を +1/2 にした因子、cosh の引数の 1/2 を落とした因子、2 を落とした因子、
 #   語を一つ落とした和が、球の部で 3 行目の積と交わらないことを確かめる。厳密な部では、因子を a_μ・a_μ^2 に替えた展開が一致しないことを見る。
 
 RB = RealBallField(200)
@@ -74,10 +74,11 @@ exact = 0
 P = PolynomialRing(QQ, 'gam')
 gam = P.gen()
 h = QQ(1) / 2
+hq = lambda e: QQ(1) / 2 if e == 1 else -(QQ(1) / 2)   # def_half_sign_of_binary_value
 mg = -gam
 exact_steps = [
-    (mg * (1 - h), mg * h),            # real_one_minus_half_is_half
-    (mg * (0 - h), mg * (-h)),         # 0 − a = −a
+    (mg * hq(1), mg * h),              # h(1) := ½
+    (mg * hq(0), mg * (-h)),           # h(0) := −(½)
     (mg * (-h), -(mg * h)),            # real_times_negation_is_negation_of_product、x → −γ
     (mg * h, mg / 2),                  # real_times_half_is_quotient_by_two（1 つ目の箇所）
     (-(mg * h), -(mg / 2)),            # real_times_half_is_quotient_by_two（2 つ目の箇所）
@@ -91,14 +92,14 @@ bb = Fb.gen()
 assert bb == 2 * (bb / 2)              # b = 2·(b/2)（real_twice_quotient_by_two_is_original を右辺から左辺へ）
 exact += 1
 exact_broken = 0
-for a, b in [(mg * (0 - h), mg * h), (mg * h, mg), (bb, bb / 2)]:
+for a, b in [(mg * hq(0), mg * h), (mg * h, mg), (bb, bb / 2)]:
     if a != b:
         exact_broken += 1
 assert exact_broken == 3
 for M in range(1, 7):
     F = FractionField(PolynomialRing(QQ, [f'a{mu}' for mu in range(1, M + 1)]))
     av = F.gens()
-    term = lambda mu, e: av[mu] ** (-(2 * e - 1))                 # exp((−γ_μ)(e − 1/2)) の置き方
+    term = lambda mu, e: av[mu] ** (-1) if e == 1 else av[mu]     # exp((−γ_μ)h(e)) の置き方
     lhs = bsum(M, lambda eps: finite_prod([term(mu, eps[mu]) for mu in range(M)]))
     rhs = finite_prod([term(mu, 1) + term(mu, 0) for mu in range(M)])
     assert lhs == rhs, M
@@ -112,16 +113,17 @@ for M in range(1, 7):
 count = 0
 broken = 0
 half = RB(1) / 2
+hb = lambda e: half if e == 1 else -half                 # def_half_sign_of_binary_value
 for M in range(2, 7):
     for (K1, K2) in PARAMS:
         g = [gamma_tilde_b(M, mu, K1, K2) for mu in range(1, M + 1)]
-        exp_neg_g = lambda eps: (-finite_sum([g[m] * (RB(eps[m]) - half) for m in range(M)])).exp()
-        prod_e = lambda eps: finite_prod([((-g[m]) * (RB(eps[m]) - half)).exp() for m in range(M)])
+        exp_neg_g = lambda eps: (-finite_sum([g[m] * hb(eps[m]) for m in range(M)])).exp()
+        prod_e = lambda eps: finite_prod([((-g[m]) * hb(eps[m])).exp() for m in range(M)])
         lines = [
             bsum(M, exp_neg_g),
             bsum(M, prod_e),
-            finite_prod([((-g[m]) * (RB(1) - half)).exp() + ((-g[m]) * (RB(0) - half)).exp() for m in range(M)]),
-            finite_prod([((-g[m]) * half).exp() + ((-g[m]) * (RB(0) - half)).exp() for m in range(M)]),
+            finite_prod([((-g[m]) * hb(1)).exp() + ((-g[m]) * hb(0)).exp() for m in range(M)]),
+            finite_prod([((-g[m]) * half).exp() + ((-g[m]) * hb(0)).exp() for m in range(M)]),
             finite_prod([((-g[m]) * half).exp() + ((-g[m]) * (-half)).exp() for m in range(M)]),
             finite_prod([((-g[m]) * half).exp() + (-((-g[m]) * half)).exp() for m in range(M)]),
             finite_prod([((-g[m]) / 2).exp() + (-((-g[m]) / 2)).exp() for m in range(M)]),

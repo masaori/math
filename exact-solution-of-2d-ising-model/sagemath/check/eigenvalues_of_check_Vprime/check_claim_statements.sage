@@ -90,7 +90,8 @@ for (tag, M, F, ns, gams, to_cb, g1s) in ball_settings([2, 3, 4]):
             eps2 = tuple(eps[sigma(mu)] for mu in range(M))
             if eps2 == eps:
                 continue
-            coeff = lambda w, c: sum(QQ(w[mu]) - QQ(1) / 2 for mu in range(M) if g1s[mu] == c)
+            hq = lambda e: QQ(1) / 2 if e == 1 else -(QQ(1) / 2)                      # def_half_sign_of_binary_value
+            coeff = lambda w, c: sum(hq(w[mu]) for mu in range(M) if g1s[mu] == c)
             claim(all(coeff(eps, c) == coeff(eps2, c) for c in classes), (tag, eps, "(v) ǧ(ε) = ǧ(ε∘σ)（厳密）"))
             e2 = evals[W.index(eps2)]
             claim(evals[j].overlaps(e2) and RBv(max(evals[j].rad(), e2.rad())) < tiny, (tag, eps, "(v) 同じ固有値の球"))

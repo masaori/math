@@ -6,7 +6,7 @@ from sage.all_cmdline import *   # import sage library
 _sage_const_0 = Integer(0); _sage_const_1 = Integer(1); _sage_const_1en6 = RealNumber('1e-6'); _sage_const_2 = Integer(2)# =========================================================================
 # check_02: epsilon_eigenvalue_on_check_Q / max_eigenvector_in_even_sector
 #   (1) ε Q̌_ε = η_ε Q̌_ε,  η_ε ∈ {+1,−1}
-#   (2) ε_μ = 0 ⟹ η_{ε[μ→1]} = −η_ε（ψ̌_μ^† による橋渡し。ψ̌_μ^† q ≠ 0 も確認）
+#   (2) ε(μ) = 0 ⟹ η_{ε[μ→1]} = −η_ε（ψ̌_μ^† による橋渡し。ψ̌_μ^† q ≠ 0 も確認）
 #   (3) η_ε = η_{(1,…,1)} (−1)^{M−|ε|}
 #   (4) ε = η_{(1,…,1)} (−1)^M Π_μ (I − 2ň_μ)
 #   (5) η_{(1,…,1)} = +1、したがって η_ε = (−1)^{M+|ε|}、ε = (−1)^M Π(I − 2ň_μ)
