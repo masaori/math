@@ -9,8 +9,6 @@
 #    antiperiodic_exp_sum
 #    def_half_integer_checkZ
 #    def_half_integer_checkY
-#    half_integer_phase_antiperiodicity / half_integer_checkZ_periodicity /
-#    def_half_integer_modes
 #    commutator_of_H_and_check_Z_Y
 #    anticommutator_of_check_Z_Y
 #    recover_Z_Y_from_check_Z_Y
@@ -503,126 +501,9 @@ for M in STEP_M:
     S.add("antiperiodic_exp_sum (7b) M(-1)^0=M*1", CDF(M * (-1) ** 0), CDF(M * 1))
     S.add("antiperiodic_exp_sum (7c) M*1=M", CDF(M * 1), CDF(M))
 
-    # -----------------------------------------------------------------
-    # half_integer_phase_antiperiodicity、half_integer_checkZ_periodicity、
-    # half_integer_checkY_periodicity、def_half_integer_modes (3) の各段
-    # -----------------------------------------------------------------
-    for mu in list(range(1, M + 1)) + [0, -1, M + 1]:
-        t = th_tilde(M, mu)
-        expanded = RDF(M) * (RDF(2 * pi) / RDF(M)) * (RDF(mu) - RDF(1) / RDF(2))
-        half_turn = RDF(2 * pi) * (RDF(mu) - RDF(1) / RDF(2))
-        S.add("half_integer_phase_antiperiodicity (a) theta~ の定義を代入",
-              RDF(M) * t, expanded)
-        S.add("half_integer_phase_antiperiodicity (b) M を約分",
-              expanded, half_turn)
-        S.add("half_integer_phase_antiperiodicity (c) 実数の分配法則",
-              half_turn, RDF(2 * pi * mu - pi))
-        S.add("half_integer_phase_antiperiodicity (d) Euler formula",
-              eiph(-M * t), cos(RDF(M) * t) - CDF(I) * sin(RDF(M) * t))
-        S.add("half_integer_phase_antiperiodicity (e) substitute M theta~",
-              cos(RDF(M) * t) - CDF(I) * sin(RDF(M) * t),
-              cos(RDF(2 * pi * mu - pi)) - CDF(I) * sin(RDF(2 * pi * mu - pi)))
-        S.add("half_integer_phase_antiperiodicity (f) cos integer half-turn = -1",
-              cos(RDF(2 * pi * mu - pi)) - CDF(I) * sin(RDF(2 * pi * mu - pi)),
-              CDF(-1) - CDF(I) * sin(RDF(2 * pi * mu - pi)))
-        S.add("half_integer_phase_antiperiodicity (g) sin integer half-turn = 0",
-              CDF(-1) - CDF(I) * sin(RDF(2 * pi * mu - pi)),
-              CDF(-1) - CDF(I) * CDF(0))
-        S.add("half_integer_phase_antiperiodicity (h) i*0 = 0",
-              CDF(-1) - CDF(I) * CDF(0), CDF(-1) - CDF(0))
-        S.add("half_integer_phase_antiperiodicity (i) additive identity",
-              CDF(-1) - CDF(0), CDF(-1))
-        shifted_angle_definition = RDF(2 * pi) * (RDF(mu + M) - RDF(1) / 2) / RDF(M)
-        shifted_angle_distributed = (
-            RDF(2 * pi) * (RDF(mu) - RDF(1) / 2) + RDF(2 * pi) * RDF(M)
-        ) / RDF(M)
-        shifted_angle_split = (
-            RDF(2 * pi) * (RDF(mu) - RDF(1) / 2) / RDF(M)
-            + RDF(2 * pi) * RDF(M) / RDF(M)
-        )
-        shifted_angle_cancelled = (
-            RDF(2 * pi) * (RDF(mu) - RDF(1) / 2) / RDF(M) + RDF(2 * pi)
-        )
-        S.add("half_integer_checkZ_periodicity (a1) theta~ の定義に mu+M を代入",
-              th_tilde(M, mu + M), shifted_angle_definition)
-        S.add("half_integer_checkZ_periodicity (a2) 実数の分配法則",
-              shifted_angle_definition, shifted_angle_distributed)
-        S.add("half_integer_checkZ_periodicity (a3) 分数の加法",
-              shifted_angle_distributed, shifted_angle_split)
-        S.add("half_integer_checkZ_periodicity (a4) M!=0 により M を約分",
-              shifted_angle_split, shifted_angle_cancelled)
-        S.add("half_integer_checkZ_periodicity (a5) theta~ の定義を再適用",
-              shifted_angle_cancelled, t + RDF(2 * pi))
-        for j in range(1, M + 1):
-            shifted = th_tilde(M, mu + M)
-            S.add("half_integer_checkZ_periodicity (b) negative-angle Euler representation",
-                  eiph(-j * shifted), cos(RDF(j) * shifted) - CDF(I) * sin(RDF(j) * shifted))
-            S.add("half_integer_checkZ_periodicity (c) substitute theta~_{mu+M}",
-                  cos(RDF(j) * shifted) - CDF(I) * sin(RDF(j) * shifted),
-                  cos(RDF(j) * (t + RDF(2 * pi))) - CDF(I) * sin(RDF(j) * (t + RDF(2 * pi))))
-            S.add("half_integer_checkZ_periodicity (d) distribute j",
-                  cos(RDF(j) * (t + RDF(2 * pi))) - CDF(I) * sin(RDF(j) * (t + RDF(2 * pi))),
-                  cos(RDF(j) * t + RDF(2 * pi * j)) - CDF(I) * sin(RDF(j) * t + RDF(2 * pi * j)))
-            S.add("half_integer_checkZ_periodicity (e) trigonometric periodicity",
-                  cos(RDF(j) * t + RDF(2 * pi * j)) - CDF(I) * sin(RDF(j) * t + RDF(2 * pi * j)),
-                  cos(RDF(j) * t) - CDF(I) * sin(RDF(j) * t))
-            S.add("half_integer_checkZ_periodicity (f) reverse negative-angle Euler representation",
-                  cos(RDF(j) * t) - CDF(I) * sin(RDF(j) * t), eiph(-j * t))
-        shifted_sum = sum([
-            eiph(-j * th_tilde(M, mu + M)) * O.Z[j]
-            for j in range(1, M + 1)
-        ], matrix(CDF, O.d, O.d, 0))
-        unshifted_sum = sum([
-            eiph(-j * t) * O.Z[j]
-            for j in range(1, M + 1)
-        ], matrix(CDF, O.d, O.d, 0))
-        S.add("half_integer_checkZ_periodicity (g) checkZ_{mu+M} の定義",
-              checkZ(O, mu + M), shifted_sum)
-        S.add("half_integer_checkZ_periodicity (h) 位相の一致を全項へ適用",
-              shifted_sum, unshifted_sum)
-        S.add("half_integer_checkZ_periodicity (i) checkZ_mu の定義を再適用",
-              unshifted_sum, checkZ(O, mu))
-        S.add("half_integer_checkY_periodicity (a1) theta~ の定義に mu+M を代入",
-              th_tilde(M, mu + M), shifted_angle_definition)
-        S.add("half_integer_checkY_periodicity (a2) 実数の分配法則",
-              shifted_angle_definition, shifted_angle_distributed)
-        S.add("half_integer_checkY_periodicity (a3) 分数の加法",
-              shifted_angle_distributed, shifted_angle_split)
-        S.add("half_integer_checkY_periodicity (a4) M!=0 により M を約分",
-              shifted_angle_split, shifted_angle_cancelled)
-        S.add("half_integer_checkY_periodicity (a5) theta~ の定義を再適用",
-              shifted_angle_cancelled, t + RDF(2 * pi))
-        for j in range(1, M + 1):
-            shifted = th_tilde(M, mu + M)
-            S.add("half_integer_checkY_periodicity (b) negative-angle Euler representation",
-                  eiph(-j * shifted), cos(RDF(j) * shifted) - CDF(I) * sin(RDF(j) * shifted))
-            S.add("half_integer_checkY_periodicity (c) substitute theta~_{mu+M}",
-                  cos(RDF(j) * shifted) - CDF(I) * sin(RDF(j) * shifted),
-                  cos(RDF(j) * (t + RDF(2 * pi))) - CDF(I) * sin(RDF(j) * (t + RDF(2 * pi))))
-            S.add("half_integer_checkY_periodicity (d) distribute j",
-                  cos(RDF(j) * (t + RDF(2 * pi))) - CDF(I) * sin(RDF(j) * (t + RDF(2 * pi))),
-                  cos(RDF(j) * t + RDF(2 * pi * j)) - CDF(I) * sin(RDF(j) * t + RDF(2 * pi * j)))
-            S.add("half_integer_checkY_periodicity (e) trigonometric periodicity",
-                  cos(RDF(j) * t + RDF(2 * pi * j)) - CDF(I) * sin(RDF(j) * t + RDF(2 * pi * j)),
-                  cos(RDF(j) * t) - CDF(I) * sin(RDF(j) * t))
-            S.add("half_integer_checkY_periodicity (f) reverse negative-angle Euler representation",
-                  cos(RDF(j) * t) - CDF(I) * sin(RDF(j) * t), eiph(-j * t))
-        shifted_Y_sum = sum([
-            eiph(-j * th_tilde(M, mu + M)) * O.Y[j]
-            for j in range(1, M + 1)
-        ], matrix(CDF, O.d, O.d, 0))
-        unshifted_Y_sum = sum([
-            eiph(-j * t) * O.Y[j]
-            for j in range(1, M + 1)
-        ], matrix(CDF, O.d, O.d, 0))
-        S.add("half_integer_checkY_periodicity (g) checkY_{mu+M} の定義",
-              checkY(O, mu + M), shifted_Y_sum)
-        S.add("half_integer_checkY_periodicity (h) 位相の一致を全項へ適用",
-              shifted_Y_sum, unshifted_Y_sum)
-        S.add("half_integer_checkY_periodicity (i) checkY_mu の定義を再適用",
-              unshifted_Y_sum, checkY(O, mu))
-        S.add("def_half_integer_modes (3) theta~_{1-mu} = -theta~_mu",
-              th_tilde(M, 1 - mu), -t)
+    # half_integer_phase_antiperiodicity・half_integer_phase_periodicity・
+    # half_integer_checkZ_periodicity・half_integer_checkY_periodicity・def_half_integer_modes の
+    # 証明の各行は、sagemath/check/ の同じ名前のディレクトリが厳密計算で 1 行ずつ確かめる。
 
     # -----------------------------------------------------------------
     # def_check_index_set / conjugate_index_of_check_Z_Y の各段（mu ∈ 𝓜̌ のみ）

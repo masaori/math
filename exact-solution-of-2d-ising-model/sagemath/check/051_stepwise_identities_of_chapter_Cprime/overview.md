@@ -9,9 +9,6 @@
 - 併せて検証（章 C′ の全ブロック）:
   - 013 章: `antiperiodic_exp_sum` /
     `def_half_integer_checkZ` / `def_half_integer_checkY` /
-    `half_integer_phase_antiperiodicity` / `half_integer_checkZ_periodicity` /
-    `half_integer_checkY_periodicity` /
-    `def_half_integer_modes` /
     `commutator_of_H_and_check_Z_Y` /
     `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y` / `H1_H2_via_check_Z_Y`
     （`H1_H2_via_check_Z_Y` は 2026-10-31 に本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts`
@@ -115,9 +112,9 @@ A(t)   = [[gamma_1(t), gamma_2(t)], [-gamma_2(-t), gamma_1(t)]]
   （`half_integer_phase_antiperiodicity`、`half_integer_checkZ_periodicity`、
   `half_integer_checkY_periodicity`、`def_half_integer_modes` (3) の検証だけは
   `μ = 0, −1, M+1` を含めたまま残してある。
-  これらはいずれも `μ ∈ ℤ` で量化してよい主張だからである）。
+  これらはいずれも `μ ∈ ℤ` で量化してよい主張だからである。2026-11-21 にこれらの段は消した。下記）。
 - `half_integer_phase_antiperiodicity` は、Euler 公式、角度の代入、余弦値、正弦値、零積、
-  加法の単位元を本文の各等号に対応する別々の検査として記録する。
+  加法の単位元を本文の各等号に対応する別々の検査として記録する（2026-11-21 に消した。下記）。
 
 ## 半整数運動量の指数和の段分割（2026-09-20）
 
@@ -218,18 +215,33 @@ git が追跡していた `check_0*_steps.sage.py` 4 つを消した。`sage <fi
 check_01・check_02 の 2 つは元の `.sage` と食い違っていた（check_01 は 2026-11-01 の零行列の段と 2026-11-19 の段の名前の更新、check_02 は第 2 成分の 6 段が無い）。
 検算の正本は `.sage` 4 つで、ログ・`run-log.txt`・検査の等式は変えていない。消した後に check_04 を `sage -c` で実行し、全段 PASS だった。
 
+## 半整数の位相と Ž・Y̌ の添字周期性の段を消した更新（2026-11-21）
+
+check_01 の `half_integer_phase_antiperiodicity` (a)〜(i)・`half_integer_checkZ_periodicity` (a1)〜(i)・`half_integer_checkY_periodicity` (a1)〜(i)・
+`def_half_integer_modes` (3) の 36 段を消した。これらの段は本文のいまの鎖と 1 行ずつ対応していなかった。
+`half_integer_phase_antiperiodicity` (c) は角度の鎖の 5 行（分配律・積の交換律・積の結合律・2·(1/2)=1・加法の交換律）を 1 段で確かめ、
+`half_integer_checkZ_periodicity`・`half_integer_checkY_periodicity` の (a1)〜(f) は、本文では 2026-11-02 に `half_integer_phase_periodicity` へ切り出した鎖を、
+切り出す前の形で持っていた。
+本文の各行の検算は、`sagemath/check/` のラベル名のディレクトリ `half_integer_phase_antiperiodicity/`（7 等号・18 等号）・
+`half_integer_phase_periodicity/`（11 等号・3 等号・7 等号）・`half_integer_checkZ_periodicity/`・`half_integer_checkY_periodicity/`（各 3 等号）・
+`def_half_integer_modes/`（14 等号）が、有理関数体・`AA`・`QQbar`・円分体の厳密計算と Arb のボールで 1 行ずつ行っている。
+消した後にこの 5 つのディレクトリの `.sage` を実行し、全て PASS だった。
+check_01 は `sage -c "__file__=…; load(…)"` で再実行し、全段 PASS（段数 294 → 258。残る 258 段の名前と残差は前回のログと同じで、
+最大残差が 2.3e-14 から 1.5e-14 になったのは、最大だった段が消した段に入っていたためである）。
+`logs/check_01_013_steps.sage.log` を差し替え、`run-log.txt` を `logs/` の四つのログの連結で作り直した。
+
 ## 結果
 
 実際の実行出力は `run-log.txt` に置いてある。要約:
 
 | ファイル | 対象 | 区別された段の種類 | 最大残差 | 判定 |
 | --- | --- | --- | --- | --- |
-| `check_01_013_steps.sage` | 013 章の各段 | 294 | 2.3e-14 | PASS |
+| `check_01_013_steps.sage` | 013 章の各段 | 258 | 1.5e-14 | PASS |
 | `check_02_015_steps.sage` | 015 章の各段（ほかに不等号 6 件） | 72 | 2.1e-13 | PASS |
 | `check_03_014_steps.sage` | 014 章の各段 | 100 | 9.3e-11 | PASS |
 | `check_04_016_steps.sage` | 016 章の各段 | 62 | 5.0e-9 | PASS |
 
-**章 C′ の 4 章あわせて 528 種類の段と、Step 0 の不等号 6 件がすべて成り立っている。**
+**章 C′ の 4 章あわせて 492 種類の段と、Step 0 の不等号 6 件がすべて成り立っている。**
 
 副産物として、次の 3 つの狭義不等号も再確認した（本文が半整数運動量に固有の帰結として
 主張しているもの。整数運動量では臨界点で等号が起こる）。

@@ -199,42 +199,6 @@
   antiperiodic_exp_sum (7a) k=0 は l=0 の整除の場合: max residual = 0.000e+00  ->  PASS
   antiperiodic_exp_sum (7b) M(-1)^0=M*1: max residual = 0.000e+00  ->  PASS
   antiperiodic_exp_sum (7c) M*1=M: max residual = 0.000e+00  ->  PASS
-  half_integer_phase_antiperiodicity (a) theta~ の定義を代入: max residual = 7.105e-15  ->  PASS
-  half_integer_phase_antiperiodicity (b) M を約分: max residual = 0.000e+00  ->  PASS
-  half_integer_phase_antiperiodicity (c) 実数の分配法則: max residual = 0.000e+00  ->  PASS
-  half_integer_phase_antiperiodicity (d) Euler formula: max residual = 1.972e-30  ->  PASS
-  half_integer_phase_antiperiodicity (e) substitute M theta~: max residual = 7.105e-15  ->  PASS
-  half_integer_phase_antiperiodicity (f) cos integer half-turn = -1: max residual = 0.000e+00  ->  PASS
-  half_integer_phase_antiperiodicity (g) sin integer half-turn = 0: max residual = 4.900e-15  ->  PASS
-  half_integer_phase_antiperiodicity (h) i*0 = 0: max residual = 0.000e+00  ->  PASS
-  half_integer_phase_antiperiodicity (i) additive identity: max residual = 0.000e+00  ->  PASS
-  half_integer_checkZ_periodicity (a1) theta~ の定義に mu+M を代入: max residual = 1.776e-15  ->  PASS
-  half_integer_checkZ_periodicity (a2) 実数の分配法則: max residual = 0.000e+00  ->  PASS
-  half_integer_checkZ_periodicity (a3) 分数の加法: max residual = 1.776e-15  ->  PASS
-  half_integer_checkZ_periodicity (a4) M!=0 により M を約分: max residual = 0.000e+00  ->  PASS
-  half_integer_checkZ_periodicity (a5) theta~ の定義を再適用: max residual = 1.776e-15  ->  PASS
-  half_integer_checkZ_periodicity (b) negative-angle Euler representation: max residual = 1.241e-16  ->  PASS
-  half_integer_checkZ_periodicity (c) substitute theta~_{mu+M}: max residual = 7.105e-15  ->  PASS
-  half_integer_checkZ_periodicity (d) distribute j: max residual = 7.074e-15  ->  PASS
-  half_integer_checkZ_periodicity (e) trigonometric periodicity: max residual = 4.777e-15  ->  PASS
-  half_integer_checkZ_periodicity (f) reverse negative-angle Euler representation: max residual = 1.241e-16  ->  PASS
-  half_integer_checkZ_periodicity (g) checkZ_{mu+M} の定義: max residual = 0.000e+00  ->  PASS
-  half_integer_checkZ_periodicity (h) 位相の一致を全項へ適用: max residual = 2.289e-14  ->  PASS
-  half_integer_checkZ_periodicity (i) checkZ_mu の定義を再適用: max residual = 0.000e+00  ->  PASS
-  half_integer_checkY_periodicity (a1) theta~ の定義に mu+M を代入: max residual = 1.776e-15  ->  PASS
-  half_integer_checkY_periodicity (a2) 実数の分配法則: max residual = 0.000e+00  ->  PASS
-  half_integer_checkY_periodicity (a3) 分数の加法: max residual = 1.776e-15  ->  PASS
-  half_integer_checkY_periodicity (a4) M!=0 により M を約分: max residual = 0.000e+00  ->  PASS
-  half_integer_checkY_periodicity (a5) theta~ の定義を再適用: max residual = 1.776e-15  ->  PASS
-  half_integer_checkY_periodicity (b) negative-angle Euler representation: max residual = 1.241e-16  ->  PASS
-  half_integer_checkY_periodicity (c) substitute theta~_{mu+M}: max residual = 7.105e-15  ->  PASS
-  half_integer_checkY_periodicity (d) distribute j: max residual = 7.074e-15  ->  PASS
-  half_integer_checkY_periodicity (e) trigonometric periodicity: max residual = 4.777e-15  ->  PASS
-  half_integer_checkY_periodicity (f) reverse negative-angle Euler representation: max residual = 1.241e-16  ->  PASS
-  half_integer_checkY_periodicity (g) checkY_{mu+M} の定義: max residual = 0.000e+00  ->  PASS
-  half_integer_checkY_periodicity (h) 位相の一致を全項へ適用: max residual = 2.289e-14  ->  PASS
-  half_integer_checkY_periodicity (i) checkY_mu の定義を再適用: max residual = 0.000e+00  ->  PASS
-  def_half_integer_modes (3) theta~_{1-mu} = -theta~_mu: max residual = 0.000e+00  ->  PASS
   def_check_index_set (1) theta~_nu - theta~_mu = 2pi(nu-mu)/M: max residual = 4.441e-16  ->  PASS
   def_check_index_set (1) theta~_1 = pi/M: max residual = 0.000e+00  ->  PASS
   def_check_index_set (1) theta~_M = 2pi - pi/M: max residual = 8.882e-16  ->  PASS
@@ -293,7 +257,7 @@
   H1_H2_via_check (H1 5) antiperiodic_exp_sum の l=0, l=1 の 2 場合: max residual = 2.624e-15  ->  PASS
   H1_H2_via_check (H1 6) = H_1^{(+)}: max residual = 7.495e-15  ->  PASS
   def_check_index_set (4) そのとき theta~_mu = pi: max residual = 0.000e+00  ->  PASS
-  段数（区別された等式の種類）: 294
+  段数（区別された等式の種類）: 258
 check_01: PASS
 === check_02: 015 章の各段の等式 ===
   gamma_2_nonzero Step0 K_2^* の定義式 = prelude の K_star(K_2): max residual = 0.000e+00  ->  PASS
