@@ -853,7 +853,7 @@ v_p(a)-v_p(b)
 &=0
 &&\bigl(\because\ \mathbb{Z}\text{ の減法}\bigr)\\
 &=\bigl(0\cdot\log q\bigr)(p)
-&&\bigl(\because\ \Lambda\ \text{の整数倍の定義}\bigr)
+&&\bigl(\because\ \blkref{def_log_order_group}\text{ の }\Lambda\text{ の整数倍の定義}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "であり、両辺は ",
@@ -873,7 +873,7 @@ v_p(a)-v_p(b)
 &=k\,\log q+\log q
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=k\,\log q+1\,\log q
-&&\bigl(\because\ \Lambda\ \text{の整数倍の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_log_order_group}\text{ の }\Lambda\text{ の整数倍の定義}\bigr)\\
 &=(k+1)\,\log q
 &&\bigl(\because\ \mathbb{Z}\ \text{の分配則}\bigr)
 \end{aligned}`),
