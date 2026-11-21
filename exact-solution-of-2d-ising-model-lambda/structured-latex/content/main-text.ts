@@ -109866,7 +109866,7 @@ D
                           " と置く。", math(String.raw`\mathbb{Q}`),
                           " の Archimedes 性により、ある ", math(String.raw`n\in\mathbb{N}`), " が存在して",
                         ]),
-                        displayMath(String.raw`\frac{1}{n+1}<\varepsilon`),
+                        displayMath(String.raw`\frac{1}{n+1}<\varepsilon\qquad(\because\ \mathbb{Q}\text{ の Archimedes 性})`),
                         paragraph([
                           "となる。", math(String.raw`N:=n+1\in\mathbb{N}`), "、",
                           math(String.raw`h_N:=1/N\in\mathbb{Q}`), " と置く。",
@@ -109878,6 +109878,10 @@ D
 h_N\cdot h_N
 &<h_N
 &&(\because\ 0<h_N<1\ \text{と}\ \mathbb{Q}\ \text{の積の単調性})\\
+&=\frac{1}{N}
+&&(\because\ h_N\text{ の定義})\\
+&=\frac{1}{n+1}
+&&(\because\ N=n+1)\\
 &<\varepsilon
 &&(\because\ n\ \text{の取り方})\\
 &\le\delta
