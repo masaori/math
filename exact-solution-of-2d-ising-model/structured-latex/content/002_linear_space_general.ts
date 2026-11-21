@@ -4555,6 +4555,2748 @@ G(X - W)
     },
   },
   {
+    id: "linear_space_general_definition_subspace",
+    kind: "definition",
+    title: { text: "部分空間" },
+    labels: ["def_subspace"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        " とする。",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("mat_mult"),
+        " の記号、行列の和は ",
+        ref("def_matrix_sum"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、",
+        math(String.raw`O \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列である。部分集合 ",
+        math(String.raw`U \subseteq \mathrm{Mat}(m,n,\mathbb{C})`),
+        " が次の三つを満たすとき、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間と呼ぶ。",
+      ]),
+      list([
+        ["(i) ", math(String.raw`O \in U`), "。"],
+        ["(ii) ", math(String.raw`A, B \in U`), " ならば ", math(String.raw`A + B \in U`), "。"],
+        ["(iii) ", math(String.raw`a \in \mathbb{C}`), "、", math(String.raw`A \in U`), " ならば ", math(String.raw`aA \in U`), "。"],
+      ]),
+      paragraph([
+        math(String.raw`n = 1`),
+        " のとき ",
+        math(String.raw`\mathrm{Mat}(m,1,\mathbb{C})`),
+        " は ",
+        ref("mat_mult"),
+        " の約束により数ベクトル全体 ",
+        math(String.raw`\mathbb{C}^m`),
+        " であり、このとき ",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathbb{C}^m`),
+        " の部分空間とも呼ぶ。",
+        math(String.raw`U = \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は (i)〜(iii) を満たす（",
+        math(String.raw`O`),
+        "・",
+        math(String.raw`A + B`),
+        "・",
+        math(String.raw`aA`),
+        " は ",
+        ref("def_zero_matrix"),
+        "・",
+        ref("def_matrix_sum"),
+        "・",
+        ref("def_matrix_scalar_multiple"),
+        " で ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元として定めたものである）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。本文は部分空間・基底・次元・直和を定義せずに使っていた（tensor_basis の dim_ℂ、trace_of_idempotent の ℂ^n = im Q ⊕ ker Q と dim_ℂ im Q、def_simple_eigenvalue の dim_ℂ E_λ(A) など）。" +
+          "一般のベクトル空間・体へ持ち上げず（README 4 節）、行列全体 Mat(m,n,ℂ)（数ベクトル全体 ℂ^m はその n = 1 の場合）の中で定めた。数値検証は主張の側（linear_combination_of_subspace_elements_stays_in_subspace など）で行う。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_linear_combination",
+    kind: "definition",
+    title: { text: "有限族の線型結合" },
+    labels: ["def_linear_combination"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`u_1,\dots,u_p \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）、",
+        math(String.raw`c_1,\dots,c_p \in \mathbb{C}`),
+        " とする。",
+        math(String.raw`p`),
+        " 個の元の並び ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " を族と呼び、",
+        math(String.raw`p`),
+        " をその元の個数と呼ぶ（",
+        math(String.raw`p = 0`),
+        " の族は元を持たない）。",
+      ]),
+      displayMath(String.raw`\sum_{t=1}^{p} c_t u_t :=
+\begin{cases}
+  O & (p = 0) \\
+  \displaystyle\sum_{t=1}^{p} (c_t u_t) & (p \geq 1)
+\end{cases}`),
+      paragraph([
+        "と定め、族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " の係数 ",
+        math(String.raw`c_1,\dots,c_p`),
+        " による線型結合と呼ぶ。",
+        math(String.raw`O \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列、",
+        math(String.raw`c_t u_t`),
+        " は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍、",
+        math(String.raw`p \geq 1`),
+        " の右辺は ",
+        ref("def_finite_sum_of_matrices"),
+        " の有限和（",
+        math(String.raw`r \to p,\ X_t \to c_t u_t`),
+        "）である。",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について、",
+        math(String.raw`A = \sum_{t=1}^{p} c_t u_t`),
+        " を満たす ",
+        math(String.raw`c_1,\dots,c_p \in \mathbb{C}`),
+        " が存在するとき、",
+        math(String.raw`A`),
+        " は族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " の線型結合であるという。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。「線型結合」「一次結合」は本文で定義されずに使われていた（Z_Y_generate_algebra、V1_restriction_to_eigenspaces など）。" +
+          "元を持たない族（p = 0）の線型結合を零行列と定めたのは、零部分空間 {O} の基底を元を持たない族とし、基底の存在（subspace_has_basis）を例外なく述べるためである。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_spanning_family",
+    kind: "definition",
+    title: { text: "族が部分空間を張る" },
+    labels: ["def_spanning_family"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`u_1,\dots,u_p \in U`),
+        " とする。",
+        math(String.raw`U`),
+        " のすべての元が族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " の線型結合（",
+        ref("def_linear_combination"),
+        "）であるとき、族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " は ",
+        math(String.raw`U`),
+        " を張る（",
+        math(String.raw`\mathbb{C}`),
+        " 上張る）という。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。「張る」は kronecker_family_of_spanning_family_spans・Z_Y_generate_algebra などで、その場の言い換え（「すなわち任意の A について…と書ける」）だけで使われていた。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_linearly_independent",
+    kind: "definition",
+    title: { text: "線型独立" },
+    labels: ["def_linearly_independent"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`u_1,\dots,u_p \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。",
+        math(String.raw`c_1,\dots,c_p \in \mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{t=1}^{p} c_t u_t = O`),
+        "（左辺は ",
+        ref("def_linear_combination"),
+        "、",
+        math(String.raw`O`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列）を満たすならば、すべての ",
+        math(String.raw`t \in \{1,\dots,p\}`),
+        " について ",
+        math(String.raw`c_t = 0_{\mathbb{C}}`),
+        " であるとき、族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " は線型独立（",
+        math(String.raw`\mathbb{C}`),
+        " 上線型独立）であるという。",
+        math(String.raw`0_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+        math(String.raw`p = 0`),
+        " の族では「すべての ",
+        math(String.raw`t`),
+        "」が空なので、この条件は満たされる。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。「線型独立」は kronecker_family_of_independent_family_is_independent・Z_Y_linearly_independent などで、その場の言い換えだけで使われていた。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_basis",
+    kind: "definition",
+    title: { text: "基底" },
+    labels: ["def_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`u_1,\dots,u_p \in U`),
+        " とする。族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " が ",
+        math(String.raw`U`),
+        " を張り（",
+        ref("def_spanning_family"),
+        "）、かつ線型独立（",
+        ref("def_linearly_independent"),
+        "）であるとき、",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " を ",
+        math(String.raw`U`),
+        " の基底（",
+        math(String.raw`\mathbb{C}`),
+        "-基底）と呼ぶ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。「基底」「ℂ-基底」は tensor_basis・trace_of_idempotent・eigenvalues_of_V_plus などで定義されずに使われていた。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_basis_indexed_by_finite_set",
+    kind: "definition",
+    title: { text: "有限集合を添字とする族の基底" },
+    labels: ["def_basis_indexed_by_finite_set"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）、",
+        math(String.raw`\mathcal{A}`),
+        " を元の個数が ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " の有限集合とし、各 ",
+        math(String.raw`a \in \mathcal{A}`),
+        " について ",
+        math(String.raw`u_a \in U`),
+        " とする。全単射 ",
+        math(String.raw`\pi : \{1,\dots,p\} \to \mathcal{A}`),
+        " であって、族 ",
+        math(String.raw`(u_{\pi(1)},\dots,u_{\pi(p)})`),
+        " が ",
+        math(String.raw`U`),
+        " の基底（",
+        ref("def_basis"),
+        "）となるものが存在するとき、族 ",
+        math(String.raw`(u_a)_{a \in \mathcal{A}}`),
+        " は ",
+        math(String.raw`U`),
+        " の基底であるという。",
+        math(String.raw`\mathcal{A}`),
+        " が ",
+        math(String.raw`\{1,\dots,p\}`),
+        " そのものであるときは、この定義を使わず ",
+        ref("def_basis"),
+        " の意味で読む。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。tensor_basis の (E_{I,J})_{I,J∈𝓘_M}、eigenvalues_of_V_plus の (q_ε)_ε のように、本文の基底は 1, …, p 以外の有限集合を添字に持つ。" +
+          "有限和は 1, …, p の添字でしか定めていない（def_finite_sum_of_matrices）ので、添字集合を 1, …, p へ並べる全単射を通して def_basis へ帰着させた。" +
+          "並べ方によらないこと（並べ替えても基底であること）は本文のどこも使わないので主張しない。添字集合が 1, …, p そのものときの二通りの読みを避けるため、その場合はこの定義を使わないと書いた。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_finite_sum_of_complex_numbers_times_complex_number",
+    kind: "claim",
+    title: { text: "複素数の有限和に右から複素数を掛けると、各項に掛けた和になる" },
+    labels: ["finite_sum_of_complex_numbers_times_complex_number"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`y_1,\dots,y_m, w \in \mathbb{C}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        "、積は ",
+        ref("definition_of_cc"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} (y_j w) = \Bigl(\sum_{j=1}^{m} y_j\Bigr) w`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} (y_j w)
+&= y_1 w
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ (z_j \to y_j w)\bigr)\\
+&= \Bigl(\sum_{j=1}^{1} y_j\Bigr) w
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`y_1,\dots,y_{m+1} \in \mathbb{C}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} (y_j w)
+&= \Bigl(\sum_{j=1}^{m} (y_j w)\Bigr) + y_{m+1} w
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ (z_j \to y_j w)\bigr)\\
+&= \Bigl(\sum_{j=1}^{m} y_j\Bigr) w + y_{m+1} w
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{m} y_j\Bigr) + y_{m+1}\Bigr) w
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律}\ (a + b)c = ac + bc\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{j=1}^{m+1} y_j\Bigr) w
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。homogeneous_linear_equations_with_more_unknowns_have_nonzero_solution の証明で、係数の有限和に共通の因子を掛けた形を各項へ配るのに要る。実数の版 finite_sum_of_real_scalar_multiples と同じ帰納法で示した。数値検証: sagemath/check/finite_sum_of_complex_numbers_times_complex_number/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_linear_combination_splits_off_last_term",
+    kind: "claim",
+    title: { text: "線型結合から最後の項を切り離す" },
+    labels: ["linear_combination_splits_off_last_term"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`u_1,\dots,u_{p+1} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`c_1,\dots,c_{p+1} \in \mathbb{C}`),
+        " とする。線型結合は ",
+        ref("def_linear_combination"),
+        "、和は ",
+        ref("def_matrix_sum"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{t=1}^{p+1} c_t u_t = \Bigl(\sum_{t=1}^{p} c_t u_t\Bigr) + c_{p+1} u_{p+1}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`p = 0`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{1} c_t u_t
+&= \sum_{t=1}^{1} (c_t u_t)
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{の}\ p \geq 1\ \text{の場合}\ (p \to 1)\bigr)\\
+&= c_1 u_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (r \to 1)\bigr)\\
+&= O + c_1 u_1
+&&\bigl(\because\ \blkref{zero_matrix_plus_matrix}\ (X \to c_1 u_1)\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{t=1}^{0} c_t u_t\Bigr) + c_1 u_1
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{の}\ p = 0\ \text{の場合を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。", math(String.raw`p \geq 1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{p+1} c_t u_t
+&= \sum_{t=1}^{p+1} (c_t u_t)
+&&\bigl(\because\ \blkref{def_linear_combination}\ (p \to p+1)\bigr)\\
+&= \Bigl(\sum_{t=1}^{p} (c_t u_t)\Bigr) + c_{p+1} u_{p+1}
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (r \to p,\ X_t \to c_t u_t)\bigr)\\
+&= \Bigl(\sum_{t=1}^{p} c_t u_t\Bigr) + c_{p+1} u_{p+1}
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{を右辺から左辺へ。}p \geq 1\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。def_linear_combination は元を持たない族（p = 0）の線型結合を零行列と定めたので、def_finite_sum_of_matrices の漸化式を p = 0 から使える形にした。数値検証: sagemath/check/linear_combination_splits_off_last_term/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_matrix_sum_is_associative",
+    kind: "claim",
+    title: { text: "行列の和の結合律" },
+    labels: ["matrix_sum_is_associative"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B, C \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。和は ",
+        ref("def_matrix_sum"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(A + B) + C = A + (B + C)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((A + B) + C\bigr)_{ik}
+&= (A + B)_{ik} + C_{ik}
+&&(\because\ \blkref{def_matrix_sum})\\
+&= (A_{ik} + B_{ik}) + C_{ik}
+&&(\because\ \blkref{def_matrix_sum})\\
+&= A_{ik} + (B_{ik} + C_{ik})
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= A_{ik} + (B + C)_{ik}
+&&(\because\ \blkref{def_matrix_sum}\ \text{を右辺から左辺へ})\\
+&= \bigl(A + (B + C)\bigr)_{ik}
+&&(\because\ \blkref{def_matrix_sum}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph(["であり、行列の等号は成分ごとの等号なので、主張が成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。linear_combination_splits_into_two_blocks の帰納法の段で要る。数値検証: sagemath/check/matrix_sum_is_associative/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_linear_combination_splits_into_two_blocks",
+    kind: "claim",
+    title: { text: "線型結合を前の部分と後ろの部分に分ける" },
+    labels: ["linear_combination_splits_into_two_blocks"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r, s \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`v_1,\dots,v_{r+s} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`c_1,\dots,c_{r+s} \in \mathbb{C}`),
+        " とする。線型結合は ",
+        ref("def_linear_combination"),
+        "（右辺の第二項は族 ",
+        math(String.raw`(v_{r+1},\dots,v_{r+s})`),
+        " の係数 ",
+        math(String.raw`c_{r+1},\dots,c_{r+s}`),
+        " による線型結合）、和は ",
+        ref("def_matrix_sum"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{t=1}^{r+s} c_t v_t = \Bigl(\sum_{t=1}^{r} c_t v_t\Bigr) + \Bigl(\sum_{t=1}^{s} c_{r+t} v_{r+t}\Bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " を固定し、",
+        math(String.raw`s`),
+        " についての帰納法で示す。",
+        math(String.raw`s = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{r} c_t v_t
+&= \Bigl(\sum_{t=1}^{r} c_t v_t\Bigr) + O
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{t=1}^{r} c_t v_t\Bigr) + \Bigl(\sum_{t=1}^{0} c_{r+t} v_{r+t}\Bigr)
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{の}\ p = 0\ \text{の場合を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`s`),
+        " で成り立つと仮定し、",
+        math(String.raw`v_1,\dots,v_{r+s+1}`),
+        "、",
+        math(String.raw`c_1,\dots,c_{r+s+1}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{r+s+1} c_t v_t
+&= \Bigl(\sum_{t=1}^{r+s} c_t v_t\Bigr) + c_{r+s+1} v_{r+s+1}
+&&\bigl(\because\ \blkref{linear_combination_splits_off_last_term}\ (p \to r+s,\ u_t \to v_t)\bigr)\\
+&= \Bigl(\Bigl(\sum_{t=1}^{r} c_t v_t\Bigr) + \Bigl(\sum_{t=1}^{s} c_{r+t} v_{r+t}\Bigr)\Bigr) + c_{r+s+1} v_{r+s+1}
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \Bigl(\sum_{t=1}^{r} c_t v_t\Bigr) + \Bigl(\Bigl(\sum_{t=1}^{s} c_{r+t} v_{r+t}\Bigr) + c_{r+(s+1)} v_{r+(s+1)}\Bigr)
+&&\bigl(\because\ \blkref{matrix_sum_is_associative}\bigr)\\
+&= \Bigl(\sum_{t=1}^{r} c_t v_t\Bigr) + \Bigl(\sum_{t=1}^{s+1} c_{r+t} v_{r+t}\Bigr)
+&&\bigl(\because\ \blkref{linear_combination_splits_off_last_term}\ (p \to s,\ u_t \to v_{r+t},\ c_t \to c_{r+t})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。concatenated_bases_of_direct_sum_form_basis で、二つの基底をつないだ族の線型結合を二つの線型結合の和に分けるのに要る。数値検証: sagemath/check/linear_combination_splits_into_two_blocks/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_linear_combination_of_subspace_elements_stays_in_subspace",
+    kind: "claim",
+    title: { text: "部分空間の元の線型結合は部分空間に属する" },
+    labels: ["linear_combination_of_subspace_elements_stays_in_subspace"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`u_1,\dots,u_p \in U`),
+        "、",
+        math(String.raw`c_1,\dots,c_p \in \mathbb{C}`),
+        " とする。このとき ",
+        math(String.raw`\sum_{t=1}^{p} c_t u_t \in U`),
+        "（",
+        ref("def_linear_combination"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`p`),
+        " についての帰納法で示す。",
+        math(String.raw`p = 0`),
+        " のとき、",
+        math(String.raw`\sum_{t=1}^{0} c_t u_t = O`),
+        "（",
+        ref("def_linear_combination"),
+        "）であり、",
+        ref("def_subspace"),
+        " (i) より ",
+        math(String.raw`O \in U`),
+        " である。",
+        math(String.raw`p`),
+        " で成り立つと仮定し、",
+        math(String.raw`u_1,\dots,u_{p+1} \in U`),
+        "、",
+        math(String.raw`c_1,\dots,c_{p+1} \in \mathbb{C}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{p+1} c_t u_t
+&= \Bigl(\sum_{t=1}^{p} c_t u_t\Bigr) + c_{p+1} u_{p+1}
+&&\bigl(\because\ \blkref{linear_combination_splits_off_last_term}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。帰納法の仮定より ",
+        math(String.raw`\sum_{t=1}^{p} c_t u_t \in U`),
+        "、",
+        ref("def_subspace"),
+        " (iii)（",
+        math(String.raw`a \to c_{p+1},\ A \to u_{p+1}`),
+        "）より ",
+        math(String.raw`c_{p+1} u_{p+1} \in U`),
+        " なので、",
+        ref("def_subspace"),
+        " (ii) より右辺は ",
+        math(String.raw`U`),
+        " に属する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。concatenated_bases_of_direct_sum_form_basis で、線型結合が直和の各部分空間に属することを言うのに要る。数値検証: sagemath/check/linear_combination_of_subspace_elements_stays_in_subspace/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_linearly_independent_family_has_no_zero_element",
+    kind: "claim",
+    title: { text: "線型独立な族の元は零行列でない" },
+    labels: ["linearly_independent_family_has_no_zero_element"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`u_1,\dots,u_p \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とし、族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " は線型独立（",
+        ref("def_linearly_independent"),
+        "）とする。このとき、すべての ",
+        math(String.raw`s \in \{1,\dots,p\}`),
+        " について ",
+        math(String.raw`u_s \neq O`),
+        "（",
+        ref("def_zero_matrix"),
+        " の零行列）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`u_s = O`),
+        " となる ",
+        math(String.raw`s \in \{1,\dots,p\}`),
+        " があると仮定して矛盾を導く。",
+        math(String.raw`t \in \{1,\dots,p\}`),
+        " について ",
+        math(String.raw`c_t := \delta_{ts}`),
+        "（",
+        ref("def_kronecker_delta"),
+        "、",
+        math(String.raw`n \to p`),
+        "）とおく。",
+        math(String.raw`t \neq s`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c_t u_t
+&= 0_{\mathbb{C}}\,u_t
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (n \to p),\ t \neq s\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (A \to u_t)\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+c_s u_s
+&= c_s\,O
+&&(\because\ u_s = O\ \text{の仮定})\\
+&= O
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\ (a \to c_s)\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{p} c_t u_t
+&= \sum_{t=1}^{p} (c_t u_t)
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{の}\ p \geq 1\ \text{の場合}\bigr)\\
+&= \sum_{t=1}^{p} O
+&&\bigl(\because\ \text{上の二つの鎖を各}\ t\ \text{へ同時に適用}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{finite_sum_of_zero_matrices}\ (r \to p)\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、線型独立性の仮定より ",
+        math(String.raw`c_s = 0_{\mathbb{C}}`),
+        " である。一方 ",
+        math(String.raw`c_s = \delta_{ss} = 1_{\mathbb{C}}`),
+        "（",
+        ref("def_kronecker_delta"),
+        "）であり、",
+        math(String.raw`1_{\mathbb{C}} = (1,0) \neq (0,0) = 0_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " で ",
+        math(String.raw`1 \neq 0`),
+        "）なので矛盾する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。bases_of_subspace_have_same_number_of_elements（零部分空間の基底は元を持たない族だけ）と one_dimensional_subspace_is_multiples_of_nonzero_element（1 次元の部分空間の基底の元は 0 でない）で要る。数値検証: sagemath/check/linearly_independent_family_has_no_zero_element/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_homogeneous_linear_equations_with_more_unknowns_have_nonzero_solution",
+    kind: "claim",
+    title: { text: "未知数が式より多い斉次連立一次方程式は、0 でない解を持つ" },
+    labels: ["homogeneous_linear_equations_with_more_unknowns_have_nonzero_solution"],
+    statement: [
+      paragraph([
+        math(String.raw`q \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 1}`),
+        " が ",
+        math(String.raw`p > q`),
+        " を満たすとし、",
+        math(String.raw`i \in \{1,\dots,p\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,q\}`),
+        " について ",
+        math(String.raw`a_{ij} \in \mathbb{C}`),
+        " とする。このとき、",
+        math(String.raw`c_1,\dots,c_p \in \mathbb{C}`),
+        " であって、ある ",
+        math(String.raw`i_0 \in \{1,\dots,p\}`),
+        " で ",
+        math(String.raw`c_{i_0} \neq 0_{\mathbb{C}}`),
+        " であり、すべての ",
+        math(String.raw`j \in \{1,\dots,q\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\sum_{i=1}^{p} c_i a_{ij} = 0_{\mathbb{C}}`),
+      paragraph([
+        "を満たすものが存在する（",
+        math(String.raw`q = 0`),
+        " のとき後者の条件は空である）。有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        "、",
+        math(String.raw`0_{\mathbb{C}}, 1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`q`),
+        " についての帰納法で、すべての ",
+        math(String.raw`p > q`),
+        " とすべての ",
+        math(String.raw`(a_{ij})`),
+        " について示す。",
+      ]),
+      paragraph([
+        math(String.raw`q = 0`),
+        " のとき。",
+        math(String.raw`c_1 := 1_{\mathbb{C}}`),
+        "、",
+        math(String.raw`c_i := 0_{\mathbb{C}}\ (2 \leq i \leq p)`),
+        " とおく。",
+        math(String.raw`c_1 = 1_{\mathbb{C}} = (1,0) \neq (0,0) = 0_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）であり、方程式の条件は空である。",
+      ]),
+      paragraph([
+        math(String.raw`q`),
+        " で成り立つと仮定し、",
+        math(String.raw`p > q+1`),
+        " と ",
+        math(String.raw`a_{ij} \in \mathbb{C}\ (i \in \{1,\dots,p\},\ j \in \{1,\dots,q+1\})`),
+        " を取る。",
+        math(String.raw`p \geq 2`),
+        " なので ",
+        math(String.raw`p-1 \in \mathbb{Z}_{\geq 1}`),
+        "、また ",
+        math(String.raw`p - 1 > q`),
+        " である。",
+      ]),
+      paragraph([
+        "場合 1: すべての ",
+        math(String.raw`j \in \{1,\dots,q+1\}`),
+        " で ",
+        math(String.raw`a_{pj} = 0_{\mathbb{C}}`),
+        " のとき。",
+        math(String.raw`c_i := 0_{\mathbb{C}}\ (1 \leq i \leq p-1)`),
+        "、",
+        math(String.raw`c_p := 1_{\mathbb{C}}`),
+        " とおく。",
+        math(String.raw`c_p \neq 0_{\mathbb{C}}`),
+        " であり、",
+        math(String.raw`j \in \{1,\dots,q+1\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{i=1}^{p} c_i a_{ij}
+&= \Bigl(\sum_{i=1}^{p-1} c_i a_{ij}\Bigr) + c_p a_{pj}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ (m \to p-1)\bigr)\\
+&= \Bigl(\sum_{i=1}^{p-1} 0_{\mathbb{C}}\,a_{ij}\Bigr) + 1_{\mathbb{C}}\,a_{pj}
+&&(\because\ c_i\ \text{の置き方})\\
+&= \Bigl(\sum_{i=1}^{p-1} 0_{\mathbb{C}}\Bigr) + 1_{\mathbb{C}}\,a_{pj}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ \text{を各}\ i\ \text{へ同時に適用}\bigr)\\
+&= 0_{\mathbb{C}} + 1_{\mathbb{C}}\,a_{pj}
+&&\bigl(\because\ \blkref{finite_sum_of_complex_zeros}\ (m \to p-1)\bigr)\\
+&= 1_{\mathbb{C}}\,a_{pj}
+&&\bigl(\because\ \blkref{complex_zero_plus_is_original}\bigr)\\
+&= a_{pj}
+&&\bigl(\because\ \blkref{complex_one_is_multiplicative_identity}\bigr)\\
+&= 0_{\mathbb{C}}
+&&(\because\ \text{場合 1 の仮定})
+\end{aligned}`),
+      paragraph(["である。"]),
+      paragraph([
+        "場合 2: ",
+        math(String.raw`a_{pj_0} \neq 0_{\mathbb{C}}`),
+        " となる ",
+        math(String.raw`j_0 \in \{1,\dots,q+1\}`),
+        " があるとき。",
+        math(String.raw`\alpha := a_{pj_0}^{-1} \in \mathbb{C}`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        " の乗法の逆元。",
+        math(String.raw`\alpha a_{pj_0} = 1_{\mathbb{C}}`),
+        "）とし、",
+        math(String.raw`j \in \{1,\dots,q+1\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p-1\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\tau_j := -(\alpha a_{pj}) \in \mathbb{C},
+\qquad
+g_{kj} := a_{kj} + a_{kj_0}\tau_j \in \mathbb{C}`),
+      paragraph([
+        "とおく。",
+        math(String.raw`k \in \{1,\dots,p-1\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g_{kj_0}
+&= a_{kj_0} + a_{kj_0}\bigl(-(\alpha a_{pj_0})\bigr)
+&&(\because\ g_{kj_0},\ \tau_{j_0}\ \text{の置き方})\\
+&= a_{kj_0} + a_{kj_0}(-1_{\mathbb{C}})
+&&(\because\ \alpha a_{pj_0} = 1_{\mathbb{C}})\\
+&= a_{kj_0} + \bigl(-(a_{kj_0}1_{\mathbb{C}})\bigr)
+&&\bigl(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to a_{kj_0},\ w \to 1_{\mathbb{C}})\bigr)\\
+&= a_{kj_0} + (-a_{kj_0})
+&&\bigl(\because\ \blkref{complex_one_is_multiplicative_identity}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`q \geq 1`),
+        " のときは ",
+        math(String.raw`\delta^{q}_{j_0} : \{1,\dots,q\} \to \{1,\dots,q+1\}`),
+        "（",
+        ref("def_index_skipping_map"),
+        "、",
+        math(String.raw`m \to q,\ k \to j_0`),
+        "）を使い、",
+        math(String.raw`b_{kl} := g_{k\,\delta^{q}_{j_0}(l)}\ (k \in \{1,\dots,p-1\},\ l \in \{1,\dots,q\})`),
+        " とおく（",
+        math(String.raw`q = 0`),
+        " のときは ",
+        math(String.raw`b`),
+        " を置かない）。帰納法の仮定（",
+        math(String.raw`p \to p-1,\ a_{ij} \to b_{ij}`),
+        "）より、",
+        math(String.raw`c'_1,\dots,c'_{p-1} \in \mathbb{C}`),
+        " であって、ある ",
+        math(String.raw`k_0`),
+        " で ",
+        math(String.raw`c'_{k_0} \neq 0_{\mathbb{C}}`),
+        " であり、すべての ",
+        math(String.raw`l \in \{1,\dots,q\}`),
+        " で ",
+        math(String.raw`\sum_{k=1}^{p-1} c'_k b_{kl} = 0_{\mathbb{C}}`),
+        " を満たすものが取れる。",
+      ]),
+      displayMath(String.raw`S := \sum_{k=1}^{p-1} c'_k a_{kj_0} \in \mathbb{C},
+\qquad
+c_i := c'_i\ (1 \leq i \leq p-1),
+\qquad
+c_p := -(S\alpha)`),
+      paragraph([
+        "とおく。",
+        math(String.raw`c_{k_0} = c'_{k_0} \neq 0_{\mathbb{C}}`),
+        " である。",
+        math(String.raw`j \in \{1,\dots,q+1\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{i=1}^{p} c_i a_{ij}
+&= \Bigl(\sum_{i=1}^{p-1} c_i a_{ij}\Bigr) + c_p a_{pj}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ (m \to p-1)\bigr)\\
+&= \Bigl(\sum_{k=1}^{p-1} c'_k a_{kj}\Bigr) + \bigl(-(S\alpha)\bigr)a_{pj}
+&&(\because\ c_i\ \text{の置き方})\\
+&= \Bigl(\sum_{k=1}^{p-1} c'_k a_{kj}\Bigr) + \bigl(-((S\alpha)a_{pj})\bigr)
+&&\bigl(\because\ \blkref{negation_times_complex_is_negation_of_product_in_cc}\ (z \to S\alpha,\ w \to a_{pj})\bigr)\\
+&= \Bigl(\sum_{k=1}^{p-1} c'_k a_{kj}\Bigr) + \bigl(-(S(\alpha a_{pj}))\bigr)
+&&\bigl(\because\ \blkref{complex_multiplication_is_associative}\bigr)\\
+&= \Bigl(\sum_{k=1}^{p-1} c'_k a_{kj}\Bigr) + S\bigl(-(\alpha a_{pj})\bigr)
+&&\bigl(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to S,\ w \to \alpha a_{pj})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{k=1}^{p-1} c'_k a_{kj}\Bigr) + S\tau_j
+&&(\because\ \tau_j\ \text{の置き方})\\
+&= \Bigl(\sum_{k=1}^{p-1} c'_k a_{kj}\Bigr) + \sum_{k=1}^{p-1} \bigl((c'_k a_{kj_0})\tau_j\bigr)
+&&\bigl(\because\ S\ \text{の置き方と}\ \blkref{finite_sum_of_complex_numbers_times_complex_number}\ (m \to p-1,\ y_k \to c'_k a_{kj_0},\ w \to \tau_j)\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{k=1}^{p-1} \bigl(c'_k a_{kj} + (c'_k a_{kj_0})\tau_j\bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_complex_sums}\ (n \to p-1)\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{k=1}^{p-1} \bigl(c'_k a_{kj} + c'_k (a_{kj_0}\tau_j)\bigr)
+&&\bigl(\because\ \blkref{complex_multiplication_is_associative}\ \text{を各}\ k\ \text{へ同時に適用}\bigr)\\
+&= \sum_{k=1}^{p-1} c'_k \bigl(a_{kj} + a_{kj_0}\tau_j\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を右辺から左辺へ、各}\ k\ \text{へ同時に適用}\bigr)\\
+&= \sum_{k=1}^{p-1} c'_k g_{kj}
+&&(\because\ g_{kj}\ \text{の置き方})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`j = j_0`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{p-1} c'_k g_{kj_0}
+&= \sum_{k=1}^{p-1} c'_k\,0_{\mathbb{C}}
+&&\bigl(\because\ \text{上の}\ g_{kj_0} = 0_{\mathbb{C}}\ \text{を各}\ k\ \text{へ同時に適用}\bigr)\\
+&= \sum_{k=1}^{p-1} 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ \text{を各}\ k\ \text{へ同時に適用}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{finite_sum_of_complex_zeros}\ (m \to p-1)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`j \neq j_0`),
+        " なら、",
+        math(String.raw`\{1,\dots,q+1\}`),
+        " に ",
+        math(String.raw`j_0`),
+        " 以外の元があるので ",
+        math(String.raw`q \geq 1`),
+        " であり、",
+        ref("index_skipping_map_reaches_every_other_index"),
+        "（",
+        math(String.raw`m \to q,\ k \to j_0,\ i \to j`),
+        "）より ",
+        math(String.raw`\delta^{q}_{j_0}(l) = j`),
+        " を満たす ",
+        math(String.raw`l \in \{1,\dots,q\}`),
+        " が取れて",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{p-1} c'_k g_{kj}
+&= \sum_{k=1}^{p-1} c'_k g_{k\,\delta^{q}_{j_0}(l)}
+&&\bigl(\because\ \delta^{q}_{j_0}(l) = j\bigr)\\
+&= \sum_{k=1}^{p-1} c'_k b_{kl}
+&&(\because\ b_{kl}\ \text{の置き方})\\
+&= 0_{\mathbb{C}}
+&&(\because\ c'\ \text{の取り方})
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。基底の元の個数が基底の取り方によらないこと（bases_of_subspace_have_same_number_of_elements）を示すための、交換の議論の中身である。" +
+          "消去する未知数を最後の c_p に固定し、c_p の係数が 0 でない式 j_0 を使って消去するので、和の添字を並べ替える議論が要らない（式の番号 j は和の添字ではないので、j_0 を飛ばす写像 δ^q_{j_0} は値を選び直すだけに使う）。" +
+          "数値検証: sagemath/check/homogeneous_linear_equations_with_more_unknowns_have_nonzero_solution/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_linearly_independent_family_is_no_longer_than_spanning_family",
+    kind: "claim",
+    title: { text: "線型独立な族の元の個数は、それらを線型結合で表す族の元の個数以下" },
+    labels: ["linearly_independent_family_is_no_longer_than_spanning_family"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`q \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`u_1,\dots,u_p, w_1,\dots,w_q \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。各 ",
+        math(String.raw`u_i`),
+        " が族 ",
+        math(String.raw`(w_1,\dots,w_q)`),
+        " の線型結合（",
+        ref("def_linear_combination"),
+        "）であり、族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " が線型独立（",
+        ref("def_linearly_independent"),
+        "）ならば、",
+        math(String.raw`p \leq q`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`p = 0`),
+        " なら ",
+        math(String.raw`p \leq q`),
+        " である。",
+        math(String.raw`p \geq 1`),
+        " かつ ",
+        math(String.raw`p > q`),
+        " と仮定して矛盾を導く。各 ",
+        math(String.raw`i \in \{1,\dots,p\}`),
+        " について ",
+        math(String.raw`u_i = \sum_{j=1}^{q} a_{ij} w_j`),
+        " を満たす ",
+        math(String.raw`a_{i1},\dots,a_{iq} \in \mathbb{C}`),
+        " を取る。",
+        math(String.raw`q \geq 1`),
+        " なので ",
+        ref("def_linear_combination"),
+        " より ",
+        math(String.raw`u_i = \sum_{j=1}^{q} (a_{ij} w_j)`),
+        "（",
+        ref("def_finite_sum_of_matrices"),
+        " の有限和）である。",
+        ref("homogeneous_linear_equations_with_more_unknowns_have_nonzero_solution"),
+        " より、",
+        math(String.raw`c_1,\dots,c_p \in \mathbb{C}`),
+        " であって、ある ",
+        math(String.raw`i_0`),
+        " で ",
+        math(String.raw`c_{i_0} \neq 0_{\mathbb{C}}`),
+        " であり、すべての ",
+        math(String.raw`j \in \{1,\dots,q\}`),
+        " で ",
+        math(String.raw`\sum_{i=1}^{p} c_i a_{ij} = 0_{\mathbb{C}}`),
+        " を満たすものが取れる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{i=1}^{p} c_i u_i
+&= \sum_{i=1}^{p} (c_i u_i)
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{の}\ p \geq 1\ \text{の場合}\bigr)\\
+&= \sum_{i=1}^{p} \Bigl(c_i \sum_{j=1}^{q} (a_{ij} w_j)\Bigr)
+&&(\because\ u_i\ \text{の表示を各}\ i\ \text{へ同時に適用})\\
+&= \sum_{i=1}^{p} \sum_{j=1}^{q} \bigl(c_i (a_{ij} w_j)\bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples}\ (r \to q,\ c \to c_i,\ X_j \to a_{ij} w_j)\ \text{を右辺から左辺へ、各}\ i\ \text{へ同時に適用}\bigr)\\
+&= \sum_{i=1}^{p} \sum_{j=1}^{q} \bigl((c_i a_{ij}) w_j\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (a \to c_i,\ b \to a_{ij},\ A \to w_j)\ \text{を各項へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{q} \sum_{i=1}^{p} \bigl((c_i a_{ij}) w_j\bigr)
+&&\bigl(\because\ \blkref{finite_double_sum_of_matrices_interchange}\ (r \to p,\ s \to q)\bigr)\\
+&= \sum_{j=1}^{q} \Bigl(\Bigl(\sum_{i=1}^{p} c_i a_{ij}\Bigr) w_j\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (r \to p,\ c_i \to c_i a_{ij},\ A \to w_j)\ \text{を各}\ j\ \text{へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{q} (0_{\mathbb{C}}\,w_j)
+&&(\because\ c\ \text{の取り方を各}\ j\ \text{へ同時に適用})\\
+&= \sum_{j=1}^{q} O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ \text{を各}\ j\ \text{へ同時に適用}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{finite_sum_of_zero_matrices}\ (r \to q)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " は線型独立なので ",
+        math(String.raw`c_{i_0} = 0_{\mathbb{C}}`),
+        " となり、",
+        math(String.raw`c_{i_0} \neq 0_{\mathbb{C}}`),
+        " に矛盾する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。基底の存在（subspace_has_basis）と、基底の元の個数が取り方によらないこと（bases_of_subspace_have_same_number_of_elements）の両方の根拠である。" +
+          "q ≥ 1 に限ったのは、q = 0 の場合（元を持たない族の線型結合は O）を使う箇所が bases_of_subspace_have_same_number_of_elements の一か所だけで、そこでは linearly_independent_family_has_no_zero_element で直接済むからである。" +
+          "数値検証: sagemath/check/linearly_independent_family_is_no_longer_than_spanning_family/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_extending_independent_family_by_element_outside_span",
+    kind: "claim",
+    title: { text: "線型独立な族に、その線型結合でない元を足しても線型独立" },
+    labels: ["extending_independent_family_by_element_outside_span"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`u_1,\dots,u_p, x \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とし、族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " は線型独立（",
+        ref("def_linearly_independent"),
+        "）、",
+        math(String.raw`x`),
+        " は族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " の線型結合（",
+        ref("def_linear_combination"),
+        "）でないとする。",
+        math(String.raw`u_{p+1} := x`),
+        " とおくと、族 ",
+        math(String.raw`(u_1,\dots,u_{p+1})`),
+        " は線型独立である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`c_1,\dots,c_{p+1} \in \mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{t=1}^{p+1} c_t u_t = O`),
+        " を満たすとする。",
+        ref("linear_combination_splits_off_last_term"),
+        " より ",
+        math(String.raw`\bigl(\sum_{t=1}^{p} c_t u_t\bigr) + c_{p+1}x = O`),
+        " であり、",
+        math(String.raw`L := \sum_{t=1}^{p} c_t u_t`),
+        " とおくと、",
+        ref("matrix_sum_is_commutative"),
+        " より ",
+        math(String.raw`c_{p+1}x + L = O`),
+        "、",
+        ref("matrix_equals_negation_if_sum_is_zero"),
+        "（",
+        math(String.raw`X \to c_{p+1}x,\ Y \to L`),
+        "）より ",
+        math(String.raw`c_{p+1}x = -L`),
+        " である。",
+      ]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`c_{p+1} = 0_{\mathbb{C}}`),
+        "。",
+        math(String.raw`c_{p+1} \neq 0_{\mathbb{C}}`),
+        " と仮定し、",
+        math(String.raw`\beta := c_{p+1}^{-1}`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        " の乗法の逆元。",
+        math(String.raw`\beta c_{p+1} = 1_{\mathbb{C}}`),
+        "）、",
+        math(String.raw`\gamma := -\beta`),
+        " とおく。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x
+&= 1_{\mathbb{C}}\,x
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\ \text{を右辺から左辺へ}\bigr)\\
+&= (\beta c_{p+1})\,x
+&&(\because\ \beta c_{p+1} = 1_{\mathbb{C}})\\
+&= \beta\,(c_{p+1}x)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ \text{を右辺から左辺へ}\bigr)\\
+&= \beta\,(-L)
+&&(\because\ c_{p+1}x = -L)\\
+&= \beta\bigl((-1_{\mathbb{C}})L\bigr)
+&&\bigl(\because\ \blkref{negation_is_scalar_multiple_by_minus_one}\ (A \to L)\bigr)\\
+&= \bigl(\beta(-1_{\mathbb{C}})\bigr)L
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= \bigl(-(\beta 1_{\mathbb{C}})\bigr)L
+&&\bigl(\because\ \blkref{complex_times_negation_is_negation_of_product_in_cc}\ (z \to \beta,\ w \to 1_{\mathbb{C}})\bigr)\\
+&= \gamma L
+&&\bigl(\because\ \blkref{complex_one_is_multiplicative_identity}\ \text{と}\ \gamma\ \text{の置き方}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`p = 0`),
+        " なら ",
+        math(String.raw`L = O`),
+        "（",
+        ref("def_linear_combination"),
+        "）なので ",
+        math(String.raw`x = \gamma O = O`),
+        "（",
+        ref("scalar_multiple_of_zero_matrix"),
+        "）",
+        math(String.raw`= \sum_{t=1}^{0} c_t u_t`),
+        " となり、",
+        math(String.raw`x`),
+        " は元を持たない族の線型結合である。",
+        math(String.raw`p \geq 1`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma L
+&= \gamma \sum_{t=1}^{p} (c_t u_t)
+&&\bigl(\because\ L\ \text{の置き方と}\ \blkref{def_linear_combination}\ \text{の}\ p \geq 1\ \text{の場合}\bigr)\\
+&= \sum_{t=1}^{p} \bigl(\gamma (c_t u_t)\bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples}\ (r \to p,\ c \to \gamma,\ X_t \to c_t u_t)\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{t=1}^{p} \bigl((\gamma c_t) u_t\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ \text{を各}\ t\ \text{へ同時に適用}\bigr)\\
+&= \sum_{t=1}^{p} (\gamma c_t) u_t
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        math(String.raw`x`),
+        " は族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " の係数 ",
+        math(String.raw`\gamma c_1,\dots,\gamma c_p`),
+        " による線型結合である。どちらの場合も仮定に矛盾する。",
+      ]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`t \leq p`),
+        " の係数。Step 1 より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L
+&= L + O
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\ \text{を右辺から左辺へ}\bigr)\\
+&= L + 0_{\mathbb{C}}\,x
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (A \to x)\ \text{を右辺から左辺へ}\bigr)\\
+&= L + c_{p+1}x
+&&(\because\ \text{Step 1})\\
+&= O
+&&(\because\ \text{冒頭の}\ L + c_{p+1}x = O)
+\end{aligned}`),
+      paragraph([
+        "であり、族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " の線型独立性より ",
+        math(String.raw`c_1 = \dots = c_p = 0_{\mathbb{C}}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。subspace_has_basis（極大な線型独立な族は張る）と linearly_independent_family_of_n_vectors_is_basis で要る。数値検証: sagemath/check/extending_independent_family_by_element_outside_span/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_matrix_units_form_basis",
+    kind: "claim",
+    title: { text: "行列単位を並べた族は行列全体の基底" },
+    labels: ["matrix_units_form_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " について行列単位 ",
+        math(String.raw`E^{(m,n)}_{ij} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(String.raw`\bigl(E^{(m,n)}_{ij}\bigr)_{kl} := \delta_{ik}\,\delta_{jl}
+\qquad (k \in \{1,\dots,m\},\ l \in \{1,\dots,n\})`),
+      paragraph([
+        "で定める（",
+        math(String.raw`\delta_{ik}`),
+        " は ",
+        ref("def_kronecker_delta"),
+        " の ",
+        math(String.raw`n \to m`),
+        "、",
+        math(String.raw`\delta_{jl}`),
+        " は ",
+        math(String.raw`n \to n`),
+        " の場合）。",
+        math(String.raw`N := mn`),
+        " とし、",
+        math(String.raw`\pi : \{1,\dots,N\} \to \{1,\dots,m\}\times\{1,\dots,n\}`),
+        " を全単射（",
+        math(String.raw`\{1,\dots,m\}\times\{1,\dots,n\}`),
+        " の元の個数は ",
+        math(String.raw`mn`),
+        " なので存在する）として、",
+        math(String.raw`\pi(t) = (\pi_1(t), \pi_2(t))`),
+        "、",
+        math(String.raw`F_t := E^{(m,n)}_{\pi_1(t)\pi_2(t)}`),
+        " と書く。このとき族 ",
+        math(String.raw`(F_1,\dots,F_N)`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("def_subspace"),
+        " の部分空間としての ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " 自身）の基底（",
+        ref("def_basis"),
+        "）である。",
+        math(String.raw`n = 1`),
+        "、",
+        math(String.raw`\pi(t) := (t, 1)`),
+        " とした ",
+        math(String.raw`e_t := E^{(m,1)}_{t1} \in \mathbb{C}^m`),
+        " を ",
+        math(String.raw`\mathbb{C}^m`),
+        " の標準基底と呼ぶ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 1（線型結合の成分）。",
+        math(String.raw`b_1,\dots,b_N \in \mathbb{C}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`l \in \{1,\dots,n\}`),
+        " とし、",
+        math(String.raw`t_0 := \pi^{-1}(k,l)`),
+        " とおく。",
+        math(String.raw`t \neq t_0`),
+        " なら ",
+        math(String.raw`\pi`),
+        " が単射なので ",
+        math(String.raw`(\pi_1(t),\pi_2(t)) \neq (k,l)`),
+        " であり、",
+        math(String.raw`\pi_1(t) \neq k`),
+        " なら ",
+        math(String.raw`\delta_{\pi_1(t)k} = 0_{\mathbb{C}}`),
+        "、",
+        math(String.raw`\pi_2(t) \neq l`),
+        " なら ",
+        math(String.raw`\delta_{\pi_2(t)l} = 0_{\mathbb{C}}`),
+        "（",
+        ref("def_kronecker_delta"),
+        "）なので、",
+        ref("complex_times_zero_is_zero"),
+        " または ",
+        ref("complex_zero_times_is_zero"),
+        " より ",
+        math(String.raw`\delta_{\pi_1(t)k}\delta_{\pi_2(t)l} = 0_{\mathbb{C}}`),
+        " である。よって ",
+        math(String.raw`t \neq t_0`),
+        " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b_t (F_t)_{kl}
+&= b_t \bigl(\delta_{\pi_1(t)k}\,\delta_{\pi_2(t)l}\bigr)
+&&\bigl(\because\ F_t\ \text{と}\ E^{(m,n)}_{ij}\ \text{の定め方}\bigr)\\
+&= b_t\,0_{\mathbb{C}}
+&&(\because\ \text{上の}\ \delta_{\pi_1(t)k}\delta_{\pi_2(t)l} = 0_{\mathbb{C}})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_times_zero_is_zero})
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{t=1}^{N} b_t F_t\Bigr)_{kl}
+&= \Bigl(\sum_{t=1}^{N} (b_t F_t)\Bigr)_{kl}
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{の}\ p \geq 1\ \text{の場合}\ (p \to N)\bigr)\\
+&= \sum_{t=1}^{N} (b_t F_t)_{kl}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\ (r \to N,\ X_t \to b_t F_t)\bigr)\\
+&= \sum_{t=1}^{N} b_t (F_t)_{kl}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を各}\ t\ \text{へ同時に適用}\bigr)\\
+&= b_{t_0} (F_{t_0})_{kl}
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (m \to N,\ z_t \to b_t (F_t)_{kl},\ n \to t_0)\text{。前提は上の}\ t \neq t_0\ \text{の鎖}\bigr)\\
+&= b_{t_0} \bigl(\delta_{kk}\,\delta_{ll}\bigr)
+&&\bigl(\because\ \pi(t_0) = (k,l)\ \text{と}\ E^{(m,n)}_{kl}\ \text{の定め方}\bigr)\\
+&= b_{t_0} (1_{\mathbb{C}} 1_{\mathbb{C}})
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= b_{t_0}
+&&\bigl(\because\ \blkref{complex_one_is_multiplicative_identity}\ \text{を二回}\bigr)
+\end{aligned}`),
+      paragraph(["である。この式を (C) と呼ぶ。"]),
+      paragraph([
+        "Step 2（張る）。",
+        math(String.raw`F_t \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " である。",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " を取り、",
+        math(String.raw`b_t := A_{\pi_1(t)\pi_2(t)}\ (t \in \{1,\dots,N\})`),
+        " とおく。",
+        math(String.raw`k, l`),
+        " について (C) より ",
+        math(String.raw`\bigl(\sum_{t=1}^{N} b_t F_t\bigr)_{kl} = b_{\pi^{-1}(k,l)} = A_{kl}`),
+        " であり、行列の等号は成分ごとの等号なので ",
+        math(String.raw`A = \sum_{t=1}^{N} b_t F_t`),
+        " である。よって族 ",
+        math(String.raw`(F_1,\dots,F_N)`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " を張る（",
+        ref("def_spanning_family"),
+        "）。",
+      ]),
+      paragraph([
+        "Step 3（線型独立）。",
+        math(String.raw`c_1,\dots,c_N \in \mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{t=1}^{N} c_t F_t = O`),
+        " を満たすとし、",
+        math(String.raw`t_0 \in \{1,\dots,N\}`),
+        " を取って ",
+        math(String.raw`(k,l) := \pi(t_0)`),
+        " とおく。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c_{t_0}
+&= \Bigl(\sum_{t=1}^{N} c_t F_t\Bigr)_{kl}
+&&\bigl(\because\ \text{(C)}\ (b_t \to c_t)\ \text{を右辺から左辺へ}\bigr)\\
+&= O_{kl}
+&&(\because\ \text{仮定})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{def_zero_matrix})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`t_0`),
+        " は任意なので族 ",
+        math(String.raw`(F_1,\dots,F_N)`),
+        " は線型独立（",
+        ref("def_linearly_independent"),
+        "）であり、Step 2 と合わせて基底である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。行列全体（と数ベクトル全体 ℂ^m）が元の個数 mn（と m）の基底を持つことを示す。subspace_has_basis の元の個数の上界、dimension_of_matrix_space、linearly_independent_family_of_n_vectors_is_basis、centralizer_is_scalar の Mat(2,ℂ) の基底が使う。" +
+          "行列単位の添字の組 (i,j) を 1, …, mn へ並べる全単射 π を任意に取り、どの π でも基底であることを示した。数値検証: sagemath/check/matrix_units_form_basis/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_subspace_has_basis",
+    kind: "claim",
+    title: { text: "部分空間は基底を持つ" },
+    labels: ["subspace_has_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）とする。このとき ",
+        math(String.raw`U`),
+        " の基底（",
+        ref("def_basis"),
+        "）",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " であって ",
+        math(String.raw`p \leq mn`),
+        " のものが存在する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`N := mn`),
+        " とし、",
+        ref("matrix_units_form_basis"),
+        " の全単射 ",
+        math(String.raw`\pi`),
+        " を一つ取り、その族 ",
+        math(String.raw`(F_1,\dots,F_N)`),
+        " を使う。",
+        math(String.raw`\mathcal{S} \subseteq \mathbb{Z}_{\geq 0}`),
+        " を、",
+        math(String.raw`u_1,\dots,u_p \in U`),
+        " であって族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " が線型独立（",
+        ref("def_linearly_independent"),
+        "）なものが存在する ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " の全体とする。",
+      ]),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`0 \in \mathcal{S}`),
+        "。元を持たない族は線型独立である（",
+        ref("def_linearly_independent"),
+        "）。",
+      ]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`p \in \mathcal{S}`),
+        " ならば ",
+        math(String.raw`p \leq N`),
+        "。",
+        math(String.raw`u_1,\dots,u_p \in U`),
+        " を線型独立な族とする。各 ",
+        math(String.raw`u_t \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は、",
+        ref("matrix_units_form_basis"),
+        " より族 ",
+        math(String.raw`(F_1,\dots,F_N)`),
+        " が ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " を張るので、その線型結合である。",
+        math(String.raw`N \geq 1`),
+        " なので ",
+        ref("linearly_independent_family_is_no_longer_than_spanning_family"),
+        "（",
+        math(String.raw`q \to N,\ w_j \to F_j`),
+        "）より ",
+        math(String.raw`p \leq N`),
+        " である。",
+      ]),
+      paragraph([
+        "Step 3: 結論。Step 1・2 より ",
+        math(String.raw`\mathcal{S}`),
+        " は ",
+        math(String.raw`\{0,1,\dots,N\}`),
+        " の空でない部分集合なので最大元 ",
+        math(String.raw`p_0`),
+        " を持ち、",
+        math(String.raw`u_1,\dots,u_{p_0} \in U`),
+        " であって族 ",
+        math(String.raw`(u_1,\dots,u_{p_0})`),
+        " が線型独立なものが取れる。この族が ",
+        math(String.raw`U`),
+        " を張る（",
+        ref("def_spanning_family"),
+        "）ことを示す。",
+        math(String.raw`x \in U`),
+        " が族 ",
+        math(String.raw`(u_1,\dots,u_{p_0})`),
+        " の線型結合でないとすると、",
+        ref("extending_independent_family_by_element_outside_span"),
+        "（",
+        math(String.raw`p \to p_0`),
+        "）より ",
+        math(String.raw`(u_1,\dots,u_{p_0},x)`),
+        " は線型独立で、その元はすべて ",
+        math(String.raw`U`),
+        " に属するので ",
+        math(String.raw`p_0 + 1 \in \mathcal{S}`),
+        " となり、",
+        math(String.raw`p_0`),
+        " が最大であることに矛盾する。よって ",
+        math(String.raw`U`),
+        " のすべての元は族 ",
+        math(String.raw`(u_1,\dots,u_{p_0})`),
+        " の線型結合であり、この族は ",
+        math(String.raw`U`),
+        " の基底で、",
+        math(String.raw`p_0 \leq N = mn`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。次元（def_dimension）が意味を持つための一つ目の主張（基底の存在）である。trace_of_idempotent の Step 2 が im Q と ker Q の基底を取るところ、def_simple_eigenvalue の dim_ℂ E_λ(A) などが使う。" +
+          "線型独立な族の元の個数が mn 以下であることから、元の個数が最大の線型独立な族を取り、それが張ることを示した（有限集合の最大元しか使わない）。数値検証: sagemath/check/subspace_has_basis/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_bases_of_subspace_have_same_number_of_elements",
+    kind: "claim",
+    title: { text: "同じ部分空間の二つの基底は元の個数が等しい" },
+    labels: ["bases_of_subspace_have_same_number_of_elements"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）とし、",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " と ",
+        math(String.raw`(w_1,\dots,w_q)`),
+        "（",
+        math(String.raw`p, q \in \mathbb{Z}_{\geq 0}`),
+        "）をどちらも ",
+        math(String.raw`U`),
+        " の基底（",
+        ref("def_basis"),
+        "）とする。このとき ",
+        math(String.raw`p = q`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 1: ",
+        math(String.raw`q = 0`),
+        " ならば ",
+        math(String.raw`p = 0`),
+        "。",
+        math(String.raw`q = 0`),
+        " かつ ",
+        math(String.raw`p \geq 1`),
+        " と仮定する。",
+        math(String.raw`u_1 \in U`),
+        " であり、元を持たない族 ",
+        math(String.raw`(w_1,\dots,w_q)`),
+        " は ",
+        math(String.raw`U`),
+        " を張るので、",
+        math(String.raw`u_1 = \sum_{t=1}^{0} c_t w_t = O`),
+        "（",
+        ref("def_spanning_family"),
+        "・",
+        ref("def_linear_combination"),
+        "）である。一方、族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " は線型独立なので ",
+        ref("linearly_independent_family_has_no_zero_element"),
+        " より ",
+        math(String.raw`u_1 \neq O`),
+        " であり、矛盾する。",
+        math(String.raw`(u_t)`),
+        " と ",
+        math(String.raw`(w_t)`),
+        " の役を入れ替えて、",
+        math(String.raw`p = 0`),
+        " ならば ",
+        math(String.raw`q = 0`),
+        " でもある。",
+      ]),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`p, q \geq 1`),
+        " のとき。各 ",
+        math(String.raw`u_s \in U`),
+        " は、族 ",
+        math(String.raw`(w_1,\dots,w_q)`),
+        " が ",
+        math(String.raw`U`),
+        " を張る（",
+        ref("def_basis"),
+        "・",
+        ref("def_spanning_family"),
+        "）のでその線型結合であり、族 ",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " は線型独立なので、",
+        ref("linearly_independent_family_is_no_longer_than_spanning_family"),
+        " より ",
+        math(String.raw`p \leq q`),
+        " である。役を入れ替えて ",
+        math(String.raw`q \leq p`),
+        " でもあるので ",
+        math(String.raw`p = q`),
+        " である。",
+      ]),
+      paragraph([
+        "Step 1・2 で ",
+        math(String.raw`p, q`),
+        " のすべての場合が尽くされている。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。次元（def_dimension）が意味を持つための二つ目の主張（基底の元の個数が基底の取り方によらないこと）である。交換の議論の中身は homogeneous_linear_equations_with_more_unknowns_have_nonzero_solution と linearly_independent_family_is_no_longer_than_spanning_family に置いた。数値検証: sagemath/check/bases_of_subspace_have_same_number_of_elements/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_dimension",
+    kind: "definition",
+    title: { text: "次元" },
+    labels: ["def_dimension"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）とする。",
+        ref("subspace_has_basis"),
+        " より ",
+        math(String.raw`U`),
+        " の基底（",
+        ref("def_basis"),
+        "）",
+        math(String.raw`(u_1,\dots,u_p)`),
+        " が存在し、",
+        ref("bases_of_subspace_have_same_number_of_elements"),
+        " よりその元の個数 ",
+        math(String.raw`p`),
+        " は基底の取り方によらない。この ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " を ",
+        math(String.raw`U`),
+        " の次元と呼び、",
+        math(String.raw`\dim_{\mathbb{C}} U`),
+        " と書く。",
+        math(String.raw`\dim_{\mathbb{C}} U = d`),
+        " のとき、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`d`),
+        " 次元の部分空間とも呼ぶ。",
+      ]),
+      paragraph([
+        math(String.raw`U`),
+        " が ",
+        ref("def_basis_indexed_by_finite_set"),
+        " の意味の基底 ",
+        math(String.raw`(u_a)_{a \in \mathcal{A}}`),
+        " を持つときは、その定義の全単射 ",
+        math(String.raw`\pi`),
+        " で並べた族が元の個数 ",
+        math(String.raw`\#\mathcal{A}`),
+        " の基底なので、",
+        math(String.raw`\dim_{\mathbb{C}} U = \#\mathcal{A}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。dim_ℂ は tensor_basis・trace_of_idempotent・check_joint_eigenspace_decomposition・def_simple_eigenvalue などで定義されずに使われていた。" +
+          "well-defined であるための二つの主張（subspace_has_basis、bases_of_subspace_have_same_number_of_elements）を定義の前に置き、定義の中で引いた。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_dimension_of_matrix_space",
+    kind: "claim",
+    title: { text: "行列全体と数ベクトル全体の次元" },
+    labels: ["dimension_of_matrix_space"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`\dim_{\mathbb{C}} \mathrm{Mat}(m,n,\mathbb{C}) = mn`),
+        "（",
+        ref("def_dimension"),
+        "。",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("def_subspace"),
+        " の部分空間としての自分自身）である。とくに ",
+        math(String.raw`n = 1`),
+        " として ",
+        math(String.raw`\dim_{\mathbb{C}} \mathbb{C}^m = m`),
+        "、",
+        math(String.raw`m = n`),
+        " として ",
+        math(String.raw`\dim_{\mathbb{C}} \mathrm{Mat}(n,\mathbb{C}) = n^2`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("matrix_units_form_basis"),
+        " より、",
+        math(String.raw`\{1,\dots,m\}\times\{1,\dots,n\}`),
+        " への全単射 ",
+        math(String.raw`\pi`),
+        " を一つ取ると、族 ",
+        math(String.raw`(F_1,\dots,F_{mn})`),
+        " は元の個数 ",
+        math(String.raw`mn`),
+        " の ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の基底である。",
+        ref("def_dimension"),
+        " より ",
+        math(String.raw`\dim_{\mathbb{C}} \mathrm{Mat}(m,n,\mathbb{C}) = mn`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。tensor_basis の dim_ℂ Mat(2^M,ℂ) = 4^M・dim_ℂ ℂ^{2^M} = 2^M、trace_of_idempotent の基底の元の個数 n、matrix_exp_conjugation の「次元 n^2」が使う。数値検証: sagemath/check/dimension_of_matrix_space/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_image_of_matrix_is_subspace",
+    kind: "claim",
+    title: { text: "行列の像は部分空間" },
+    labels: ["image_of_matrix_is_subspace"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`Q \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とし、",
+        math(String.raw`\mathrm{im}\,Q := \{Qx \mid x \in \mathbb{C}^n\} \subseteq \mathbb{C}^m`),
+        "（",
+        math(String.raw`Qx`),
+        " は ",
+        ref("mat_mult"),
+        " の行列と数ベクトルの積）とおく。このとき ",
+        math(String.raw`\mathrm{im}\,Q`),
+        " は ",
+        math(String.raw`\mathbb{C}^m`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "(i) ",
+        math(String.raw`O_{m,1} = Q\,O_{n,1}`),
+        "（",
+        ref("zero_matrix_is_right_zero_of_mat_mult"),
+        "、",
+        math(String.raw`p \to 1`),
+        "）なので ",
+        math(String.raw`O_{m,1} \in \mathrm{im}\,Q`),
+        "。(ii) ",
+        math(String.raw`Qx, Qy \in \mathrm{im}\,Q`),
+        " について ",
+        math(String.raw`Qx + Qy = Q(x + y)`),
+        "（",
+        ref("mat_mult_distributes_over_sum_in_right_factor"),
+        " を右辺から左辺へ、",
+        math(String.raw`p \to 1`),
+        "）",
+        math(String.raw`\in \mathrm{im}\,Q`),
+        "。(iii) ",
+        math(String.raw`a \in \mathbb{C}`),
+        "、",
+        math(String.raw`Qx \in \mathrm{im}\,Q`),
+        " について ",
+        math(String.raw`a(Qx) = Q(ax)`),
+        "（",
+        ref("scalar_multiple_factors_out_of_right_factor"),
+        " を右辺から左辺へ、",
+        math(String.raw`p \to 1`),
+        "）",
+        math(String.raw`\in \mathrm{im}\,Q`),
+        "。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。trace_of_idempotent と check_joint_eigenspace_decomposition (4) の dim_ℂ im Q が意味を持つのに要る。im Q の定め方は trace_of_idempotent と同じである。数値検証: sagemath/check/image_of_matrix_is_subspace/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_kernel_of_matrix_is_subspace",
+    kind: "claim",
+    title: { text: "行列の核は部分空間" },
+    labels: ["kernel_of_matrix_is_subspace"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`Q \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とし、",
+        math(String.raw`\ker Q := \{x \in \mathbb{C}^n \mid Qx = O_{m,1}\}`),
+        "（",
+        math(String.raw`Qx`),
+        " は ",
+        ref("mat_mult"),
+        "、",
+        math(String.raw`O_{m,1}`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零ベクトル）とおく。このとき ",
+        math(String.raw`\ker Q`),
+        " は ",
+        math(String.raw`\mathbb{C}^n`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "(i) ",
+        math(String.raw`Q\,O_{n,1} = O_{m,1}`),
+        "（",
+        ref("zero_matrix_is_right_zero_of_mat_mult"),
+        "、",
+        math(String.raw`p \to 1`),
+        "）なので ",
+        math(String.raw`O_{n,1} \in \ker Q`),
+        "。(ii) ",
+        math(String.raw`x, y \in \ker Q`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Q(x + y)
+&= Qx + Qy
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (p \to 1)\bigr)\\
+&= O_{m,1} + O_{m,1}
+&&(\because\ x, y \in \ker Q)\\
+&= O_{m,1}
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\ (X \to O_{m,1})\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`x + y \in \ker Q`),
+        "。(iii) ",
+        math(String.raw`a \in \mathbb{C}`),
+        "、",
+        math(String.raw`x \in \ker Q`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Q(ax)
+&= a(Qx)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (p \to 1)\bigr)\\
+&= a\,O_{m,1}
+&&(\because\ x \in \ker Q)\\
+&= O_{m,1}
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`ax \in \ker Q`), "。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。trace_of_idempotent の ℂ^n = im Q ⊕ ker Q（def_direct_sum_of_two_subspaces は部分空間の直和）と、Step 2 の ker Q の基底に要る。ker Q の定め方は trace_of_idempotent と同じである。数値検証: sagemath/check/kernel_of_matrix_is_subspace/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_eigenvalue_equation_solution_set_is_subspace",
+    kind: "claim",
+    title: { tex: String.raw`E_\lambda(A) = \{x \mid Ax = \lambda x\}\ \text{は部分空間}` },
+    labels: ["eigenvalue_equation_solution_set_is_subspace"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        "、",
+        math(String.raw`\lambda \in \mathbb{C}`),
+        " とし、",
+        math(String.raw`E_\lambda(A) := \{x \in \mathbb{C}^n \mid Ax = \lambda x\}`),
+        "（",
+        math(String.raw`Ax`),
+        " は ",
+        ref("mat_mult"),
+        "、",
+        math(String.raw`\lambda x`),
+        " は ",
+        ref("def_matrix_scalar_multiple"),
+        "）とおく。このとき ",
+        math(String.raw`E_\lambda(A)`),
+        " は ",
+        math(String.raw`\mathbb{C}^n`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph(["(i) ", math(String.raw`O_{n,1}`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+A\,O_{n,1}
+&= O_{n,1}
+&&\bigl(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ (m \to n,\ p \to 1)\bigr)\\
+&= \lambda\,O_{n,1}
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\ (a \to \lambda)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`O_{n,1} \in E_\lambda(A)`),
+        "。(ii) ",
+        math(String.raw`x, y \in E_\lambda(A)`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A(x + y)
+&= Ax + Ay
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (p \to 1)\bigr)\\
+&= \lambda x + \lambda y
+&&(\because\ x, y \in E_\lambda(A))\\
+&= \lambda(x + y)
+&&\bigl(\because\ \blkref{scalar_multiple_distributes_over_matrix_sum}\ (c \to \lambda)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`x + y \in E_\lambda(A)`),
+        "。(iii) ",
+        math(String.raw`a \in \mathbb{C}`),
+        "、",
+        math(String.raw`x \in E_\lambda(A)`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A(ax)
+&= a(Ax)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (p \to 1)\bigr)\\
+&= a(\lambda x)
+&&(\because\ x \in E_\lambda(A))\\
+&= (a\lambda)x
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= (\lambda a)x
+&&\bigl(\because\ \blkref{complex_multiplication_is_commutative}\bigr)\\
+&= \lambda(ax)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`ax \in E_\lambda(A)`), "。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。def_simple_eigenvalue の dim_ℂ E_λ(A) が意味を持つのに要る。E_λ(A) の定め方は def_simple_eigenvalue と同じである。数値検証: sagemath/check/eigenvalue_equation_solution_set_is_subspace/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_direct_sum_of_two_subspaces",
+    kind: "definition",
+    title: { text: "二つの部分空間の直和" },
+    labels: ["def_direct_sum_of_two_subspaces"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`V, U, W`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）で ",
+        math(String.raw`U \subseteq V`),
+        "、",
+        math(String.raw`W \subseteq V`),
+        " を満たすものとする。次の二つが成り立つとき、",
+        math(String.raw`V`),
+        " は ",
+        math(String.raw`U`),
+        " と ",
+        math(String.raw`W`),
+        " の直和であるといい、",
+        math(String.raw`V = U \oplus W`),
+        " と書く。",
+      ]),
+      list([
+        [
+          "(i) すべての ",
+          math(String.raw`v \in V`),
+          " について、",
+          math(String.raw`v = u + w`),
+          "（",
+          ref("def_matrix_sum"),
+          "）を満たす ",
+          math(String.raw`u \in U`),
+          "、",
+          math(String.raw`w \in W`),
+          " がある。",
+        ],
+        [
+          "(ii) ",
+          math(String.raw`U \cap W = \{O\}`),
+          "（",
+          math(String.raw`O`),
+          " は ",
+          ref("def_zero_matrix"),
+          " の零行列）。",
+        ],
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。trace_of_idempotent の ℂ^n = im Q ⊕ ker Q は ⊕ を定義せずに使っていた。証明の Step 1 が示している二つのこと（和で書けること、交わりが零だけであること）をそのまま定義にした。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_direct_sum_over_binary_words",
+    kind: "definition",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{で添字付けた有限個の部分空間の直和}` },
+    labels: ["def_direct_sum_over_binary_words"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`\{0,1\}^{r}`),
+        " は ",
+        ref("def_sum_over_binary_words"),
+        " の記号とする。",
+        math(String.raw`V`),
+        " と、各 ",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " についての ",
+        math(String.raw`U_\epsilon`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）で ",
+        math(String.raw`U_\epsilon \subseteq V`),
+        " を満たすものとする。次の二つが成り立つとき、",
+        math(String.raw`V`),
+        " は ",
+        math(String.raw`(U_\epsilon)_{\epsilon \in \{0,1\}^{r}}`),
+        " の直和であるといい、",
+        math(String.raw`V = \bigoplus_{\epsilon \in \{0,1\}^{r}} U_\epsilon`),
+        " と書く。和 ",
+        math(String.raw`\sum_{\epsilon \in \{0,1\}^{r}}`),
+        " は ",
+        ref("def_sum_over_binary_words"),
+        " による。",
+      ]),
+      list([
+        [
+          "(i) すべての ",
+          math(String.raw`v \in V`),
+          " について、各 ",
+          math(String.raw`\epsilon`),
+          " で ",
+          math(String.raw`u_\epsilon \in U_\epsilon`),
+          " を取って ",
+          math(String.raw`v = \sum_{\epsilon \in \{0,1\}^{r}} u_\epsilon`),
+          " とできる。",
+        ],
+        [
+          "(ii) 各 ",
+          math(String.raw`\epsilon`),
+          " で ",
+          math(String.raw`u_\epsilon \in U_\epsilon`),
+          " を取り ",
+          math(String.raw`\sum_{\epsilon \in \{0,1\}^{r}} u_\epsilon = O`),
+          "（",
+          ref("def_zero_matrix"),
+          "）ならば、すべての ",
+          math(String.raw`\epsilon`),
+          " で ",
+          math(String.raw`u_\epsilon = O`),
+          " である。",
+        ],
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition (5) の ℂ^{2^{M_col}} = ⨁_ε im Q̌_ε は ⨁ を定義せずに使っていた。本文で三つ以上の部分空間の直和が現れるのはこの一か所だけで、その添字は {0,1}^{M_col} であり、証明の Step 5 は def_sum_over_binary_words の和で (i)・(ii) を示している。" +
+          "そのため添字を 1, …, k へ並べ直さず、{0,1}^r の上の和のまま定めた（並べ直すと、{0,1}^r の上の和と 1, …, k の有限和が等しいことを別に示す必要が生じる）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_concatenated_bases_of_direct_sum_form_basis",
+    kind: "claim",
+    title: { text: "直和の二つの部分空間の基底をつなぐと全体の基底になる" },
+    labels: ["concatenated_bases_of_direct_sum_form_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`V, U, W`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間で ",
+        math(String.raw`V = U \oplus W`),
+        "（",
+        ref("def_direct_sum_of_two_subspaces"),
+        "）を満たすものとし、",
+        math(String.raw`(u_1,\dots,u_r)`),
+        " を ",
+        math(String.raw`U`),
+        " の基底、",
+        math(String.raw`(w_1,\dots,w_s)`),
+        " を ",
+        math(String.raw`W`),
+        " の基底（",
+        ref("def_basis"),
+        "。",
+        math(String.raw`r, s \in \mathbb{Z}_{\geq 0}`),
+        "）とする。",
+        math(String.raw`v_t := u_t\ (1 \leq t \leq r)`),
+        "、",
+        math(String.raw`v_{r+t} := w_t\ (1 \leq t \leq s)`),
+        " とおくと、族 ",
+        math(String.raw`(v_1,\dots,v_{r+s})`),
+        " は ",
+        math(String.raw`V`),
+        " の基底である。とくに ",
+        math(String.raw`\dim_{\mathbb{C}} V = \dim_{\mathbb{C}} U + \dim_{\mathbb{C}} W`),
+        "（",
+        ref("def_dimension"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`U \subseteq V`),
+        "、",
+        math(String.raw`W \subseteq V`),
+        " なので各 ",
+        math(String.raw`v_t \in V`),
+        " である。",
+      ]),
+      paragraph([
+        "Step 1（張る）。",
+        math(String.raw`x \in V`),
+        " を取る。",
+        ref("def_direct_sum_of_two_subspaces"),
+        " (i) より ",
+        math(String.raw`x = u + w`),
+        " を満たす ",
+        math(String.raw`u \in U`),
+        "、",
+        math(String.raw`w \in W`),
+        " があり、",
+        math(String.raw`(u_t)`),
+        "・",
+        math(String.raw`(w_t)`),
+        " はそれぞれ ",
+        math(String.raw`U`),
+        "・",
+        math(String.raw`W`),
+        " を張るので ",
+        math(String.raw`u = \sum_{t=1}^{r} a_t u_t`),
+        "、",
+        math(String.raw`w = \sum_{t=1}^{s} b_t w_t`),
+        " を満たす ",
+        math(String.raw`a_t, b_t \in \mathbb{C}`),
+        " がある。",
+        math(String.raw`c_t := a_t\ (1 \leq t \leq r)`),
+        "、",
+        math(String.raw`c_{r+t} := b_t\ (1 \leq t \leq s)`),
+        " とおく。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{t=1}^{r+s} c_t v_t
+&= \Bigl(\sum_{t=1}^{r} c_t v_t\Bigr) + \Bigl(\sum_{t=1}^{s} c_{r+t} v_{r+t}\Bigr)
+&&\bigl(\because\ \blkref{linear_combination_splits_into_two_blocks}\bigr)\\
+&= \Bigl(\sum_{t=1}^{r} a_t u_t\Bigr) + \Bigl(\sum_{t=1}^{s} b_t w_t\Bigr)
+&&(\because\ c_t,\ v_t\ \text{の置き方})\\
+&= u + w
+&&(\because\ a_t,\ b_t\ \text{の取り方})\\
+&= x
+&&(\because\ u,\ w\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "である。よって族 ",
+        math(String.raw`(v_1,\dots,v_{r+s})`),
+        " は ",
+        math(String.raw`V`),
+        " を張る（",
+        ref("def_spanning_family"),
+        "）。",
+      ]),
+      paragraph([
+        "Step 2（線型独立）。",
+        math(String.raw`c_1,\dots,c_{r+s} \in \mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{t=1}^{r+s} c_t v_t = O`),
+        " を満たすとする。",
+        math(String.raw`u := \sum_{t=1}^{r} c_t u_t`),
+        "、",
+        math(String.raw`w := \sum_{t=1}^{s} c_{r+t} w_t`),
+        " とおくと、",
+        ref("linear_combination_of_subspace_elements_stays_in_subspace"),
+        " より ",
+        math(String.raw`u \in U`),
+        "、",
+        math(String.raw`w \in W`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u + w
+&= \Bigl(\sum_{t=1}^{r} c_t v_t\Bigr) + \Bigl(\sum_{t=1}^{s} c_{r+t} v_{r+t}\Bigr)
+&&(\because\ u,\ w,\ v_t\ \text{の置き方})\\
+&= \sum_{t=1}^{r+s} c_t v_t
+&&\bigl(\because\ \blkref{linear_combination_splits_into_two_blocks}\ \text{を右辺から左辺へ}\bigr)\\
+&= O
+&&(\because\ \text{仮定})
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+u
+&= -w
+&&\bigl(\because\ \blkref{matrix_equals_negation_if_sum_is_zero}\ (X \to u,\ Y \to w)\bigr)\\
+&= (-1_{\mathbb{C}})\,w
+&&\bigl(\because\ \blkref{negation_is_scalar_multiple_by_minus_one}\ (A \to w)\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("def_subspace"),
+        " (iii) より ",
+        math(String.raw`u \in W`),
+        " である。",
+        math(String.raw`u \in U \cap W = \{O\}`),
+        "（",
+        ref("def_direct_sum_of_two_subspaces"),
+        " (ii)）なので ",
+        math(String.raw`u = O`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w
+&= O + w
+&&\bigl(\because\ \blkref{zero_matrix_plus_matrix}\ (X \to w)\ \text{を右辺から左辺へ}\bigr)\\
+&= u + w
+&&(\because\ u = O)\\
+&= O
+&&(\because\ \text{上の}\ u + w\ \text{の鎖})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\sum_{t=1}^{r} c_t u_t = u = O`),
+        " と族 ",
+        math(String.raw`(u_t)`),
+        " の線型独立性より ",
+        math(String.raw`c_1 = \dots = c_r = 0_{\mathbb{C}}`),
+        "、",
+        math(String.raw`\sum_{t=1}^{s} c_{r+t} w_t = w = O`),
+        " と族 ",
+        math(String.raw`(w_t)`),
+        " の線型独立性より ",
+        math(String.raw`c_{r+1} = \dots = c_{r+s} = 0_{\mathbb{C}}`),
+        " である（",
+        ref("def_linearly_independent"),
+        "）。",
+      ]),
+      paragraph([
+        "Step 1・2 より族 ",
+        math(String.raw`(v_1,\dots,v_{r+s})`),
+        " は ",
+        math(String.raw`V`),
+        " の基底であり、",
+        ref("def_dimension"),
+        " より ",
+        math(String.raw`\dim_{\mathbb{C}} V = r + s = \dim_{\mathbb{C}} U + \dim_{\mathbb{C}} W`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。trace_of_idempotent の Step 2 は「Step 1 の直和分解より v_1, …, v_n は ℂ^n の基底」と根拠なしに書いていた。その根拠として足した。数値検証: sagemath/check/concatenated_bases_of_direct_sum_form_basis/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_matrix_of_basis_columns_has_inverse",
+    kind: "claim",
+    title: { text: "基底を列に並べた行列は逆行列を持つ" },
+    labels: ["matrix_of_basis_columns_has_inverse"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`v_1,\dots,v_n \in \mathbb{C}^n`),
+        " とし、族 ",
+        math(String.raw`(v_1,\dots,v_n)`),
+        " は ",
+        math(String.raw`\mathbb{C}^n`),
+        " の基底（",
+        ref("def_basis"),
+        "）とする。",
+        math(String.raw`P := \left[\,v_1\ \cdots\ v_n\,\right] \in \mathrm{Mat}(n,\mathbb{C})`),
+        "（",
+        ref("mat_columnwise"),
+        " の列に並べた行列）とおく。このとき ",
+        math(String.raw`P'P = I`),
+        " かつ ",
+        math(String.raw`PP' = I`),
+        " を満たす ",
+        math(String.raw`P' \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が存在する。",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        " は ",
+        ref("def_identity_matrix"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "数ベクトル ",
+        math(String.raw`y \in \mathbb{C}^n`),
+        " の第 ",
+        math(String.raw`j`),
+        " 成分を ",
+        math(String.raw`y_j`),
+        " と書く。",
+        math(String.raw`e_1,\dots,e_n`),
+        " は ",
+        ref("matrix_units_form_basis"),
+        " の ",
+        math(String.raw`\mathbb{C}^n`),
+        " の標準基底（",
+        math(String.raw`(e_k)_i = \delta_{ik}`),
+        "）である。",
+      ]),
+      paragraph([
+        "準備（",
+        math(String.raw`P`),
+        " と数ベクトルの積は列の線型結合）。",
+        math(String.raw`y \in \mathbb{C}^n`),
+        "、",
+        math(String.raw`i \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(Py)_i
+&= \sum_{j=1}^{n} P_{ij}\,y_j
+&&(\because\ \blkref{mat_mult})\\
+&= \sum_{j=1}^{n} (v_j)_i\,y_j
+&&\bigl(\because\ \blkref{mat_columnwise}\ \text{の、列に並べた行列の成分の定め方}\bigr)\\
+&= \sum_{j=1}^{n} y_j\,(v_j)_i
+&&\bigl(\because\ \blkref{complex_multiplication_is_commutative}\ \text{を各}\ j\ \text{へ同時に適用}\bigr)\\
+&= \sum_{j=1}^{n} (y_j v_j)_i
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を右辺から左辺へ、各}\ j\ \text{へ同時に適用}\bigr)\\
+&= \Bigl(\sum_{j=1}^{n} (y_j v_j)\Bigr)_i
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\ (m \to n,\ n \to 1,\ r \to n,\ X_j \to y_j v_j)\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{j=1}^{n} y_j v_j\Bigr)_i
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`Py = \sum_{j=1}^{n} y_j v_j`),
+        " である。これを (L) と呼ぶ。",
+      ]),
+      paragraph([
+        "Step 1（",
+        math(String.raw`PC = I`),
+        " を満たす ",
+        math(String.raw`C`),
+        "）。族 ",
+        math(String.raw`(v_1,\dots,v_n)`),
+        " は ",
+        math(String.raw`\mathbb{C}^n`),
+        " を張るので、各 ",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`e_k = \sum_{j=1}^{n} c_{jk} v_j`),
+        " を満たす ",
+        math(String.raw`c_{1k},\dots,c_{nk} \in \mathbb{C}`),
+        " がある。",
+        math(String.raw`C \in \mathrm{Mat}(n,\mathbb{C})`),
+        " を ",
+        math(String.raw`C_{jk} := c_{jk}`),
+        " で定め、",
+        math(String.raw`c^{(k)} \in \mathbb{C}^n`),
+        " を ",
+        math(String.raw`c^{(k)}_j := c_{jk}`),
+        " で定める。",
+        math(String.raw`i, k \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(PC)_{ik}
+&= \sum_{j=1}^{n} P_{ij}\,C_{jk}
+&&(\because\ \blkref{mat_mult})\\
+&= \sum_{j=1}^{n} P_{ij}\,c^{(k)}_j
+&&(\because\ C,\ c^{(k)}\ \text{の定め方})\\
+&= \bigl(P c^{(k)}\bigr)_i
+&&\bigl(\because\ \blkref{mat_mult}\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{j=1}^{n} c_{jk} v_j\Bigr)_i
+&&\bigl(\because\ \text{(L)}\ (y \to c^{(k)})\bigr)\\
+&= (e_k)_i
+&&(\because\ c_{jk}\ \text{の取り方})\\
+&= \delta_{ik}
+&&(\because\ e_k\ \text{の定め方})\\
+&= I_{ik}
+&&\bigl(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`PC = I`), " である。"]),
+      paragraph([
+        "Step 2（",
+        math(String.raw`CP = I`),
+        "）。",
+        math(String.raw`l \in \{1,\dots,n\}`),
+        " を固定し、",
+        math(String.raw`y := (CP)e_l - e_l \in \mathbb{C}^n`),
+        "（",
+        ref("def_matrix_difference"),
+        "）とおく。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Py
+&= P\bigl((CP)e_l\bigr) - Pe_l
+&&\bigl(\because\ \blkref{mat_mult_vector_difference}\ (A \to P,\ u \to (CP)e_l,\ w \to e_l)\bigr)\\
+&= \bigl(P(CP)\bigr)e_l - Pe_l
+&&\bigl(\because\ \blkref{mat_mult_associative}\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((PC)P\bigr)e_l - Pe_l
+&&\bigl(\because\ \blkref{mat_mult_associative}\ \text{を右辺から左辺へ}\bigr)\\
+&= (IP)e_l - Pe_l
+&&(\because\ \text{Step 1 の}\ PC = I)\\
+&= Pe_l - Pe_l
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (A, B \to Pe_l)\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、(L) より ",
+        math(String.raw`\sum_{j=1}^{n} y_j v_j = Py = O`),
+        " なので、族 ",
+        math(String.raw`(v_1,\dots,v_n)`),
+        " の線型独立性（",
+        ref("def_linearly_independent"),
+        "）よりすべての ",
+        math(String.raw`j`),
+        " で ",
+        math(String.raw`y_j = 0_{\mathbb{C}}`),
+        "、すなわち ",
+        math(String.raw`y = O`),
+        " である。",
+        ref("matrix_difference_zero_iff_equal"),
+        " の ",
+        math(String.raw`\Rightarrow`),
+        " より ",
+        math(String.raw`(CP)e_l = e_l`),
+        " である。",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " について、",
+        math(String.raw`k \neq l`),
+        " なら ",
+        math(String.raw`(CP)_{jk}(e_l)_k = (CP)_{jk}\,0_{\mathbb{C}} = 0_{\mathbb{C}}`),
+        "（",
+        ref("def_kronecker_delta"),
+        "、",
+        ref("complex_times_zero_is_zero"),
+        "）なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(CP)_{jl}
+&= (CP)_{jl}\,1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_one_is_multiplicative_identity}\ \text{を右辺から左辺へ}\bigr)\\
+&= (CP)_{jl}\,(e_l)_l
+&&\bigl(\because\ e_l\ \text{の定め方と}\ \blkref{def_kronecker_delta}\bigr)\\
+&= \sum_{k=1}^{n} (CP)_{jk}\,(e_l)_k
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (m \to n,\ n \to l)\ \text{を右辺から左辺へ。前提は上の}\ k \neq l\ \text{の項}\bigr)\\
+&= \bigl((CP)e_l\bigr)_j
+&&\bigl(\because\ \blkref{mat_mult}\ \text{を右辺から左辺へ}\bigr)\\
+&= (e_l)_j
+&&(\because\ (CP)e_l = e_l)\\
+&= \delta_{jl}
+&&(\because\ e_l\ \text{の定め方})\\
+&= I_{jl}
+&&\bigl(\because\ \blkref{def_identity_matrix}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`j, l`),
+        " は任意なので ",
+        math(String.raw`CP = I`),
+        " である。",
+        math(String.raw`P' := C`),
+        " とおけばよい。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。trace_of_idempotent の Step 3 は「v_1, …, v_n は ℂ^n の基底なので P'P = PP' = I を満たす P' が取れる」と根拠なしに書いていた。その根拠として足した。数値検証: sagemath/check/matrix_of_basis_columns_has_inverse/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_one_dimensional_subspace_is_multiples_of_nonzero_element",
+    kind: "claim",
+    title: { text: "1 次元の部分空間は、0 でない一つの元の倍数の全体" },
+    labels: ["one_dimensional_subspace_is_multiples_of_nonzero_element"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`U`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）で ",
+        math(String.raw`\dim_{\mathbb{C}} U = 1`),
+        "（",
+        ref("def_dimension"),
+        "）のものとする。このとき ",
+        math(String.raw`q \in U`),
+        "、",
+        math(String.raw`q \neq O`),
+        "（",
+        ref("def_zero_matrix"),
+        "）であって、",
+        math(String.raw`U = \{cq \mid c \in \mathbb{C}\}`),
+        "（",
+        math(String.raw`cq`),
+        " は ",
+        ref("def_matrix_scalar_multiple"),
+        "）を満たすものが存在する。",
+        math(String.raw`U = \{cq \mid c \in \mathbb{C}\}`),
+        " を ",
+        math(String.raw`U = \mathbb{C}q`),
+        " とも書く。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_dimension"),
+        " と ",
+        ref("subspace_has_basis"),
+        " より ",
+        math(String.raw`U`),
+        " は元の個数 ",
+        math(String.raw`\dim_{\mathbb{C}} U = 1`),
+        " の基底 ",
+        math(String.raw`(q)`),
+        " を持つ。",
+        math(String.raw`q \in U`),
+        " であり（",
+        ref("def_basis"),
+        "）、族 ",
+        math(String.raw`(q)`),
+        " は線型独立なので ",
+        ref("linearly_independent_family_has_no_zero_element"),
+        "（",
+        math(String.raw`p \to 1`),
+        "）より ",
+        math(String.raw`q \neq O`),
+        " である。",
+        math(String.raw`u \in U`),
+        " は族 ",
+        math(String.raw`(q)`),
+        " の線型結合なので、ある ",
+        math(String.raw`c_1 \in \mathbb{C}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u
+&= \sum_{t=1}^{1} c_t q
+&&\bigl(\because\ \blkref{def_spanning_family}\bigr)\\
+&= \sum_{t=1}^{1} (c_t q)
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{の}\ p \geq 1\ \text{の場合}\bigr)\\
+&= c_1 q
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (r \to 1)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。逆に ",
+        math(String.raw`c \in \mathbb{C}`),
+        " について ",
+        math(String.raw`cq \in U`),
+        "（",
+        ref("def_subspace"),
+        " (iii)）なので、",
+        math(String.raw`U = \{cq \mid c \in \mathbb{C}\}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。epsilon_eigenvalue_on_check_Q (1) と c_plus_equals_Lambda_half_integer の Step 2 は「dim_ℂ im Q̌_ε = 1 なので im Q̌_ε = ℂq なる q ≠ 0 が取れる」と根拠なしに書いていた。その根拠として足した。数値検証: sagemath/check/one_dimensional_subspace_is_multiples_of_nonzero_element/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_linearly_independent_family_of_n_vectors_is_basis",
+    kind: "claim",
+    title: { tex: String.raw`\mathbb{C}^n\ \text{の}\ n\ \text{個の元の線型独立な族は基底}` },
+    labels: ["linearly_independent_family_of_n_vectors_is_basis"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`v_1,\dots,v_n \in \mathbb{C}^n`),
+        " とし、族 ",
+        math(String.raw`(v_1,\dots,v_n)`),
+        " は線型独立（",
+        ref("def_linearly_independent"),
+        "）とする。このとき族 ",
+        math(String.raw`(v_1,\dots,v_n)`),
+        " は ",
+        math(String.raw`\mathbb{C}^n`),
+        "（",
+        ref("def_subspace"),
+        " の部分空間としての自分自身）の基底（",
+        ref("def_basis"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`(e_1,\dots,e_n)`),
+        " を ",
+        ref("matrix_units_form_basis"),
+        "（",
+        math(String.raw`m \to n,\ n \to 1,\ \pi(t) := (t,1)`),
+        "）の ",
+        math(String.raw`\mathbb{C}^n`),
+        " の標準基底とする。",
+        math(String.raw`\mathbb{C}^n`),
+        " の元がすべて族 ",
+        math(String.raw`(v_1,\dots,v_n)`),
+        " の線型結合であることを示す。",
+        math(String.raw`x \in \mathbb{C}^n`),
+        " がその線型結合でないとすると、",
+        ref("extending_independent_family_by_element_outside_span"),
+        "（",
+        math(String.raw`p \to n`),
+        "）より族 ",
+        math(String.raw`(v_1,\dots,v_n,x)`),
+        " は線型独立である。その ",
+        math(String.raw`n+1`),
+        " 個の元はどれも ",
+        math(String.raw`\mathbb{C}^n`),
+        " の元なので、",
+        math(String.raw`(e_1,\dots,e_n)`),
+        " が ",
+        math(String.raw`\mathbb{C}^n`),
+        " を張ることから族 ",
+        math(String.raw`(e_1,\dots,e_n)`),
+        " の線型結合である。",
+        ref("linearly_independent_family_is_no_longer_than_spanning_family"),
+        "（",
+        math(String.raw`p \to n+1,\ q \to n`),
+        "）より ",
+        math(String.raw`n + 1 \leq n`),
+        " となり矛盾する。よって族 ",
+        math(String.raw`(v_1,\dots,v_n)`),
+        " は ",
+        math(String.raw`\mathbb{C}^n`),
+        " を張り（",
+        ref("def_spanning_family"),
+        "）、線型独立なので基底である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。nonzero_elements_of_images_of_check_Q_form_basis（eigenvalues_of_check_Vprime・eigenvalues_of_V_plus の「合わせると ℂ^{2^{M_col}} の基底」の根拠）で、線型独立性だけを示して基底を得るのに要る。数値検証: sagemath/check/linearly_independent_family_of_n_vectors_is_basis/。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_000_definition_kronecker_product",
     kind: "definition",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
@@ -4655,7 +7397,9 @@ G(X - W)
         math(String.raw`2^M`),
         " 次元数ベクトル全体 ",
         math(String.raw`\mathbb{C}^{2^M}`),
-        " の元である。基底と単位行列に関する帰結は、定義後の成分計算で別に示す。",
+        " の元である。基底（",
+        ref("def_basis_indexed_by_finite_set"),
+        "）と単位行列に関する帰結は、定義後の成分計算で別に示す。",
       ]),
     ],
     proof: [
@@ -4848,6 +7592,7 @@ G(X - W)
           "複素行列として専用記号で定義する）に従い、成分の式によるクロネッカー積 ⊠ を本文に置いた。" +
           "移行期には既存章の ⊗ をこの ⊠ の別記法として同一視する注記を置いていたが、" +
           "本文全章の書き換えが完了したので同一視の注記は削除した（本文に ⊗ はもう現れない）。",
+        "2026-11-21: 「基底」に def_basis_indexed_by_finite_set を引いた。定義の中身は変えていない",
       ],
     },
   },
@@ -6905,9 +9650,13 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
           math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
           " の ",
           math(String.raw`\mathbb{C}`),
-          "-基底である。特に ",
+          "-基底（",
+          ref("def_basis_indexed_by_finite_set"),
+          "）である。特に ",
           math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2^M,\mathbb{C}) = 4^M`),
-          "。",
+          "（",
+          ref("def_dimension"),
+          "）。",
         ],
         [
           "(2) 族 ",
@@ -6916,9 +9665,13 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
           math(String.raw`\mathbb{C}^{2^M}`),
           " の ",
           math(String.raw`\mathbb{C}`),
-          "-基底である。特に ",
+          "-基底（",
+          ref("def_basis_indexed_by_finite_set"),
+          "）である。特に ",
           math(String.raw`\dim_{\mathbb{C}}\mathbb{C}^{2^M}=2^M`),
-          "。",
+          "（",
+          ref("def_dimension"),
+          "）。",
         ],
       ]),
       paragraph([
@@ -6928,7 +9681,9 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の基底についての主張、(2) は ",
         math(String.raw`2^M`),
-        " 次元数ベクトル空間 ",
+        " 次元（",
+        ref("dimension_of_matrix_space"),
+        "）の数ベクトル全体 ",
         math(String.raw`\mathbb{C}^{2^M}`),
         " の基底についての主張である。",
       ]),
@@ -6963,19 +9718,45 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         " で他が ",
         math(String.raw`0`),
         " の数ベクトル、つまり ",
+        math(String.raw`f_I = e_{\nu(I)}`),
+        "（",
+        math(String.raw`e_t`),
+        " は ",
+        ref("matrix_units_form_basis"),
+        "（",
+        math(String.raw`m \to 2^M,\ n \to 1`),
+        "）の ",
         math(String.raw`\mathbb{C}^{2^M}`),
-        " の標準基底ベクトルである。",
+        " の標準基底の第 ",
+        math(String.raw`t`),
+        " 元）である。",
         math(String.raw`\nu`),
         " が全単射だから ",
-        math(String.raw`(f_I)_{I\in\mathcal{I}_M}`),
-        " は標準基底全体と一致し、これは ",
+        math(String.raw`\pi := \nu^{-1} : \{1,\dots,2^M\} \to \mathcal{I}_M`),
+        " も全単射で、",
+        math(String.raw`f_{\pi(t)} = e_t`),
+        " なので、族 ",
+        math(String.raw`(f_{\pi(1)},\dots,f_{\pi(2^M)})`),
+        " は標準基底 ",
+        math(String.raw`(e_1,\dots,e_{2^M})`),
+        " に一致し、",
+        ref("matrix_units_form_basis"),
+        "（",
+        math(String.raw`m \to 2^M,\ n \to 1,\ \pi(t) := (t,1)`),
+        "）より ",
         math(String.raw`\mathbb{C}^{2^M}`),
-        " の基底である（任意の ",
-        math(String.raw`w=(w_1,\dots,w_{2^M})`),
+        " の基底（",
+        ref("def_basis"),
+        "）である。",
+        ref("def_basis_indexed_by_finite_set"),
+        " より族 ",
+        math(String.raw`(f_I)_{I\in\mathcal{I}_M}`),
         " は ",
-        math(String.raw`w=\sum_{p=1}^{2^M}w_p\,(\text{第 } p \text{ 標準基底ベクトル})`),
-        " と成分比較で一意に書ける）。特に ",
-        math(String.raw`\dim_{\mathbb{C}}\mathbb{C}^{2^M}=2^M`),
+        math(String.raw`\mathbb{C}^{2^M}`),
+        " の基底であり、",
+        ref("def_dimension"),
+        " より ",
+        math(String.raw`\dim_{\mathbb{C}}\mathbb{C}^{2^M}=\#\mathcal{I}_M=2^M`),
         "。",
       ]),
       paragraph([
@@ -7008,22 +9789,44 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         math(String.raw`0`),
         " の ",
         math(String.raw`2^M`),
-        " 次行列（",
-        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
-        " の行列単位）である。",
+        " 次行列、つまり ",
+        math(String.raw`E_{I,J} = E^{(2^M,2^M)}_{\nu(I)\nu(J)}`),
+        "（",
+        ref("matrix_units_form_basis"),
+        "（",
+        math(String.raw`m, n \to 2^M`),
+        "）の行列単位）である。",
+        math(String.raw`\kappa : \{1,\dots,4^M\} \to \{1,\dots,2^M\}\times\{1,\dots,2^M\}`),
+        " を全単射とし（元の個数が ",
+        math(String.raw`2^M\cdot 2^M = 4^M`),
+        " なので存在する）、",
+        math(String.raw`\kappa(t) = (\kappa_1(t),\kappa_2(t))`),
+        " と書いて ",
+        math(String.raw`\pi(t) := \bigl(\nu^{-1}(\kappa_1(t)),\ \nu^{-1}(\kappa_2(t))\bigr) \in \mathcal{I}_M\times\mathcal{I}_M`),
+        " とおく。",
         math(String.raw`\nu`),
         " が全単射だから ",
-        math(String.raw`(E_{I,J})_{I,J\in\mathcal{I}_M}`),
+        math(String.raw`\pi : \{1,\dots,4^M\} \to \mathcal{I}_M\times\mathcal{I}_M`),
+        " も全単射で、",
+        math(String.raw`E_{\pi(t)} = E^{(2^M,2^M)}_{\kappa_1(t)\kappa_2(t)}`),
+        " である。",
+        ref("matrix_units_form_basis"),
+        "（",
+        math(String.raw`m, n \to 2^M,\ \pi \to \kappa`),
+        "）より族 ",
+        math(String.raw`(E_{\pi(1)},\dots,E_{\pi(4^M)})`),
         " は ",
-        math(String.raw`2^M`),
-        " 次の行列単位全体と一致する。任意の ",
-        math(String.raw`A=(a_{pq})\in\mathrm{Mat}(2^M,\mathbb{C})`),
-        " は成分比較により ",
-        math(String.raw`A=\sum_{p,q=1}^{2^M}a_{pq}\,(\text{第 }(p,q)\text{ 行列単位})`),
-        " と一意に書けるから、これは基底であり、元数は ",
-        math(String.raw`2^M\cdot 2^M=4^M`),
-        "。よって ",
-        math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2^M,\mathbb{C})=4^M`),
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " の基底（",
+        ref("def_basis"),
+        "）であり、",
+        ref("def_basis_indexed_by_finite_set"),
+        " より族 ",
+        math(String.raw`(E_{I,J})_{I,J\in\mathcal{I}_M}`),
+        " は基底である。",
+        ref("def_dimension"),
+        " より ",
+        math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2^M,\mathbb{C})=\#(\mathcal{I}_M\times\mathcal{I}_M)=4^M`),
         "。",
       ]),
     ],
@@ -7058,6 +9861,7 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: Step 4（(2)）は、行列単位を 𝓑 で展開して張ることを示したうえで、元数 4^M と次元 4^M の一致から Step 3 (b) で基底としていた。Step 3 (b) の前提の (a)「張る有限族の元数は次元以上」は本文で証明していない一般論なので、張ることを kronecker_family_of_spanning_family_spans、線型独立であることを kronecker_family_of_independent_family_is_independent で示し、張りかつ線型独立なので基底とする形に書き直した。主張は変えていない。Step 5 は「Step 4 とまったく同じ議論を行えばよい」と書いていたので、書き直す前の Step 4 の議論（展開の代入、j についての帰納法、f_I の展開の表示式、元数と次元の一致と Step 3 (b)）を数ベクトルについて自分で述べる形にした（Step 5 の論法は変えていない）。数値検証: sagemath/check/172_tensor_basis/check_02_kronecker_family_of_basis.sage。Step 3 は Step 5 がまだ使う。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: (3) の一般の基底 {u_1,u_2} についての前半と、その証明の Step 5、Step 5 だけが使っていた Step 3（張る有限族の元数は次元以上、という本文で証明していない一般論）を参照用ノート notes/claims_unused_by_chapter_goals_not_adopted.ts へ退避した。理由: 本文で tensor_basis (3) を引く箇所（004 章の f_I が F の基底であること）は標準基底の場合だけを使い、一般の基底の側はどこからも使われない。(3) は (f_I) が基底で次元が 2^M という主張にし、その証明は旧 Step 1 のまま。旧 Step 4（(2)）を Step 3 とした。数値検証: sagemath/check/172_tensor_basis/ から Step 5 の検算を外した。",
         "2026-11-13（Lean の通しの証明のゴールラインの確認）: (2)（Mat(2,C) の任意の基底のクロネッカー積の族は Mat(2^M,C) の基底）とその証明の Step 3 を参照用ノート notes/claims_unused_by_chapter_goals_not_adopted.ts へ退避した。理由: Z_Y_generate_algebra は kronecker_family_of_spanning_family_spans を、Z_Y_linearly_independent は kronecker_family_of_independent_family_is_independent を直接引くようになり、(2) は本文のどこからも引かれない。旧 (3)（(f_I) が基底で次元が 2^M）を (2) とし、引く側（004 章の def_end_iso）の「(3) と (1)」を「(2) と (1)」に直した。証明は Step 1（いまの (2)）と Step 2（(1)）のまま。数値検証: sagemath/check/172_tensor_basis/ から (2) の検算 check_02 を外した。",
+        "2026-11-21: 基底・次元を定義せずに使っていたので、主張の「ℂ-基底」に def_basis_indexed_by_finite_set、「dim_ℂ」に def_dimension を引いた。証明の「標準基底全体・行列単位全体と一致し、成分比較で一意に書けるから基底」を、行列単位の族が基底であること（matrix_units_form_basis）と、添字集合を 1, …, 2^M・1, …, 4^M へ並べる全単射（ν^{-1} と κ を通したもの）で述べ直した。主張は変えていない。",
       ],
     },
   },
@@ -7078,7 +9882,9 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
         " を ",
         math(String.raw`\mathbb{C}`),
-        " 上張る、すなわち任意の ",
+        " 上張る（",
+        ref("def_spanning_family"),
+        "）、すなわち任意の ",
         math(String.raw`A \in \mathrm{Mat}(2,\mathbb{C})`),
         " について ",
         math(String.raw`c_1,c_2,c_3,c_4 \in \mathbb{C}`),
@@ -7118,7 +9924,9 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " を ",
         math(String.raw`\mathbb{C}`),
-        " 上張る。すなわち任意の ",
+        " 上張る（",
+        ref("def_spanning_family"),
+        "）。すなわち任意の ",
         math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " について ",
         math(String.raw`d_1,\dots,d_N \in \mathbb{C}`),
@@ -7143,7 +9951,9 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         math(String.raw`\mathcal{S}`),
         " は ",
         math(String.raw`\mathbb{C}`),
-        "-線型結合について閉じる。すなわち ",
+        "-線型結合（",
+        ref("def_linear_combination"),
+        "）について閉じる。すなわち ",
         math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
         "、",
         math(String.raw`X_1,\dots,X_r \in \mathcal{S}`),
@@ -7319,12 +10129,22 @@ A_1\boxtimes\cdots\boxtimes A_M
         math(String.raw`(E_{I,J})_{I,J\in\mathcal{I}_M}`),
         " は ",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
-        " の基底なので、",
+        " の基底（",
+        ref("def_basis_indexed_by_finite_set"),
+        "）なので、",
         math(String.raw`\mathcal{I}_M\times\mathcal{I}_M`),
-        " の元を ",
+        " の元をその定義の全単射で ",
         math(String.raw`(I_1,J_1),\dots,(I_{N},J_{N})`),
-        " と並べて（",
+        " と並べると（",
         math(String.raw`\#(\mathcal{I}_M\times\mathcal{I}_M) = 2^M\cdot2^M = N`),
+        "）、族 ",
+        math(String.raw`(E_{I_1,J_1},\dots,E_{I_N,J_N})`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を張り（",
+        ref("def_basis"),
+        "・",
+        ref("def_spanning_family"),
         "）、",
         math(String.raw`X = \sum_{t=1}^{N}\kappa_t E_{I_t,J_t}`),
         "（",
@@ -7358,6 +10178,7 @@ A_1\boxtimes\cdots\boxtimes A_M
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。Z_Y_generate_algebra の Step 3 は {I, σ^x, σ^y, σ^z} のクロネッカー積の族が Mat(2^M,C) を張ることだけを使うのに、" +
           "「dim Mat(2,C) = 4 = #𝓑 より基底」と tensor_basis (2) を経由していた。tensor_basis (2) は張る族の元数が次元に等しければ基底であること（その証明の Step 3 (b)）に依り、その前提の (a)「張る有限族の元数は次元以上」は本文で証明されていない。" +
           "張ることだけを仮定して張ることを結ぶ主張として足し、Z_Y_generate_algebra はこれを引くようにした。数値検証: sagemath/check/kronecker_family_of_spanning_family_spans/。",
+        "2026-11-21: 「張る」「線型結合」「基底」を定義せずに使っていたので、def_spanning_family・def_linear_combination・def_basis_indexed_by_finite_set を引いた。Step 3 の「𝓘_M×𝓘_M の元を並べて」を、def_basis_indexed_by_finite_set の全単射で並べると書き直した。主張は変えていない",
       ],
     },
   },
@@ -7375,7 +10196,9 @@ A_1\boxtimes\cdots\boxtimes A_M
         math(String.raw`b_1,b_2,b_3,b_4 \in \mathrm{Mat}(2,\mathbb{C})`),
         " は ",
         math(String.raw`\mathbb{C}`),
-        " 上線型独立、すなわち ",
+        " 上線型独立（",
+        ref("def_linearly_independent"),
+        "）、すなわち ",
         math(String.raw`c_1,c_2,c_3,c_4 \in \mathbb{C}`),
         " が ",
         math(String.raw`\sum_{a=1}^{4} c_a b_a = O`),
@@ -7407,7 +10230,9 @@ A_1\boxtimes\cdots\boxtimes A_M
         math(String.raw`(F_q)_{q\in\{1,\dots,N\}}`),
         " は ",
         math(String.raw`\mathbb{C}`),
-        " 上線型独立である。すなわち ",
+        " 上線型独立（",
+        ref("def_linearly_independent"),
+        "）である。すなわち ",
         math(String.raw`d_1,\dots,d_N \in \mathbb{C}`),
         " が ",
         math(String.raw`\sum_{q=1}^{N} d_q F_q = O`),
@@ -7983,6 +10808,7 @@ d_{q_0}
       notes: [
         "2026-11-12（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。tensor_basis (2) の証明の Step 4 は、族 (b_{a_1}⊠⋯⊠b_{a_M}) が張り、元数が次元 4^M に等しいことから、その証明の Step 3 (b) で基底と結んでいた。Step 3 (b) の前提の (a)「張る有限族の元数は次元以上」は本文で証明されておらず、" +
           "それを証明する代わりに線型独立性を直接示す（README 3 節の「より初等的な書き方で済むならそちらを採る」）と決めたので、線型独立性を成分の比較とサイトについての帰納法で示す主張として足した。kronecker_family_of_spanning_family_spans と同じ記号で書いた。数値検証: sagemath/check/kronecker_family_of_independent_family_is_independent/。",
+        "2026-11-21: 「線型独立」を定義せずに使っていたので def_linearly_independent を引いた。主張は変えていない",
       ],
     },
   },
@@ -8102,11 +10928,21 @@ E_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix}`,
         math(String.raw`\mathcal{E}_0 := \{E_{11},E_{12},E_{21},E_{22}\}`),
         " は ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " を張り、",
-        math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2,\mathbb{C})=4=\#\mathcal{E}_0`),
-        " であるから ",
+        " を張る（",
+        ref("def_spanning_family"),
+        "）。",
         math(String.raw`\mathcal{E}_0`),
-        " は基底である。成分計算により、",
+        " の元を ",
+        math(String.raw`E_{11},E_{12},E_{21},E_{22}`),
+        " の順に並べた族は、",
+        ref("matrix_units_form_basis"),
+        "（",
+        math(String.raw`m, n \to 2`),
+        "）より ",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の基底（",
+        ref("def_basis"),
+        "）である。成分計算により、",
         math(String.raw`i,j,k,l\in\{1,2\}`),
         " について",
       ]),
@@ -8130,7 +10966,9 @@ E_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix}`,
         math(String.raw`\mathcal{E}:=\{E_{IJ}:I,J\in\{1,2\}^M\}`),
         " は ",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
-        " の基底である（",
+        " の基底（",
+        ref("def_basis_indexed_by_finite_set"),
+        "）である（",
         ref("tensor_basis"),
         " (1)）。その元数は ",
         math(String.raw`\#\mathcal{E}=(2^M)^2=4^M`),
@@ -8187,7 +11025,9 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         math(String.raw`W`),
         " を行列単位で展開し、可換性から係数を決定する。",
         math(String.raw`\mathcal{E}`),
-        " は基底であるから ",
+        " は基底（",
+        ref("def_basis_indexed_by_finite_set"),
+        "）であるから ",
         math(String.raw`W`),
         " は一意に ",
         math(String.raw`W=\sum_{I,J\in\{1,2\}^M} w_{IJ}E_{IJ}`),
@@ -8316,6 +11156,7 @@ W
           "内容・式変形・根拠・参照は変えていない。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 2 の I_{Mat(2^M,ℂ)} の展開の鎖の後に置いていた「（引いたのは kronecker_product_rule (2) と kronecker_multilinear である）」を削り、その鎖の 1 行目の根拠を \\blkref{kronecker_product_rule} (2)、3 行目を \\blkref{kronecker_multilinear} にした（docs/context/証明の書き方.md の「根拠は式変形の各行から引く。証明の末尾に参照の一覧を置かない」）。同じ Step の E_{IJ}E_{KL} の鎖で名前だけで書いていた「クロネッカー積の積の規則」「各因子についての線型性を M 回」も \\blkref{kronecker_product_rule} (1)・\\blkref{kronecker_multilinear} にした。式・鎖の両端・段数は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: Step 2 の E_{IJ}E_{KL} の鎖の前の導入の文が、鎖の行の \\blkref と同じ参照（kronecker_product_rule (1)・kronecker_multilinear）と「Step 1 より」を並べていたので、導入の文から削り、Step 1 を引く行の根拠を「Step 1 の E_{ij}E_{kl}=δ_{jk}E_{il}」と書いた。I_{Mat(2^M,ℂ)} の展開の鎖の前の「各因子に I_{Mat(2,ℂ)}=E_{11}+E_{22} を代入して展開すると」も行の根拠と重なるので「また、一続きに」とし、その行の根拠を「Step 1 の I_{Mat(2,ℂ)}=E_{11}+E_{22}」と書いた。E_{IJ}E_{KL} の鎖の 1 行目に欠けていた根拠「E_{IJ} の定め方」を足した。式・鎖の両端・段数は不変。",
+        "2026-11-21: 基底・張る・次元を定義せずに使っていたので引いた。Step 1 の「𝓔_0 は Mat(2,ℂ) を張り、dim_ℂ Mat(2,ℂ) = 4 = #𝓔_0 であるから基底」は、張る有限族の元数が次元に等しければ基底であるという本文で証明していない一般論に依っていたので、matrix_units_form_basis（m, n → 2）を直接引く形にした。Step 3 の 𝓔 の基底には def_basis_indexed_by_finite_set を引いた。主張は変えていない",
       ],
     },
   },

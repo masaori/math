@@ -1093,7 +1093,11 @@ y_ix_i
         math(String.raw`M := M_{\mathrm{col}}`),
         " として用いたときの多重添字の集合 ",
         math(String.raw`\mathcal{I} = \{1,2\}^{M_{\mathrm{col}}}`),
-        "・基底 ",
+        "・基底（",
+        ref("tensor_basis"),
+        " (2)。",
+        ref("def_basis_indexed_by_finite_set"),
+        "）",
         math(String.raw`f_I = e_{i_1}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}} \in \mathcal{F} = \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " を用いる。写像 ",
         math(String.raw`\iota : \mathfrak{M} \to \mathcal{I}`),
@@ -1121,6 +1125,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。" +
           "分配関数の転送行列の章から転送行列の章へ移した。旧版の「転送行列の定義の全単射として ι を取る（取り方に依らない）」という同一視は、" +
           "<def_transfer_matrix> が番号付け ord を明示したため不要になり削除した。ord と ι の関係は <config_numbering_equals_kronecker_numbering> で示す。",
+        "2026-11-21: 「基底」に tensor_basis (2) と def_basis_indexed_by_finite_set を引いた。定義の中身は変えていない",
       ],
     },
   },

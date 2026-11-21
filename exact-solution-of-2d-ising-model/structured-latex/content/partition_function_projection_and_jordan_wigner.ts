@@ -2689,7 +2689,9 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         math(String.raw`\varepsilon`),
         " と可換な元の ",
         math(String.raw`\mathbb{C}`),
-        "-線型結合であり、積の双線型性より ",
+        "-線型結合（",
+        ref("def_linear_combination"),
+        "）であり、積の双線型性より ",
         math(String.raw`\varepsilon G = G\varepsilon`),
         "、",
         math(String.raw`\varepsilon G^{(+)} = G^{(+)}\varepsilon`),
@@ -2977,6 +2979,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
         "式変形の書き方の統一（2026-08-14）: 同一の点列の極限の一意性を散文中で圧縮していた箇所を、" +
           "三角不等式・二つの収束・ノルム零からの一致を一行ずつ根拠付きで示す鎖へ開いた。内容は変えていない。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-21: 「線型結合」に def_linear_combination を引いた。主張は変えていない",
       ],
     },
   },

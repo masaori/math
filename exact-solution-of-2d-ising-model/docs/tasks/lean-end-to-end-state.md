@@ -706,6 +706,26 @@
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
+- （2026-11-21 追加、最優先）**本文が定義のブロック無しに使っている語の解消。** 代表の問い「未定義のものを放置している？」（Slack、2026-11-21）を受けて本文の statement と proof を洗い出した結果である。
+  線型代数の語（部分空間・張る・線型独立・基底・次元 `dim_ℂ`・直和）は同じ日に別の実行で定義を足した。残りは次のとおりで、1 回に 1 つずつ（大きいものは割って）定義のブロックか主張を足し、使う箇所から引き、四層を合わせる。
+  この台帳の下の件と重なるもの（有限和の添字の集合、一般の `n` の正則な行列、`mat_mult_associative` など）は、この件の中で一緒に片付けたものとして下の件にも記録する。
+  - 全実数上の `sin`・`cos` とその周期性・偶奇性（`def_sin`・`def_cos` は `[−π/2, π/2]` の上だけ。`euler_formula_cos_sin` などが「全実数上への拡張は未整備」と書く。`def_phi_cartesian` から `A(θ̃_μ)`・Onsager の積分までの鎖が依拠する）。
+  - 円周率 `π`（定義ブロックが無い。`arcsin_is_bijection` が外部の文献から `f([0,1]) = [0, π/2]` として持ち込む）。
+  - 実数列の収束・極限とその基本性質（単調有界列の収束、極限の定数倍・和・積、はさみうち、級数から項を分ける操作）。`def_matrix_norm`・`def_exp` が依拠し、証明の根拠の行で名前だけで使う（約 36 ブロック）。
+  - 上限 `sup`・上界・`ℝ` の完備性（`def_rayleigh_sup`・`def_sector_rayleigh_sup` が `c(M)`・`c₊(M)` を `sup` で定める。「上限は最小の上界」を根拠に使う証明がある）。
+  - `ℝ` の順序の公理（推移律・三分律・和と積との両立）とアルキメデス性（`set_and_algebra_notation` は順序の公理を列挙していないのに、約 27 ブロックの証明が「`ℝ` の順序の推移律（`set_and_algebra_notation`）」と引く）。
+  - 有理数 `ℚ` と `ℚ` から `ℝ` への写像（`pi_squared_numerical_bounds`・`sine_bound_constant_numerical_bounds` などが「`ℚ` の四則・大小比較」を根拠にする）。
+  - 階乗 `m!`（`def_exp` の `Σ A^m/m!` と二項係数が使う。`real_exp_series_converges` は `0! := 1` だけを置き、`(m+1)! = (m+1)·m!` を根拠に使う）。
+  - 有限集合の上の和 `Σ_{s∈S}`・二重添字の和と、元の個数 `|S|`・`#`（`def_partition_function_2d_ising` の `Z := Σ_{s∈𝔖}` そのものが使う）。
+  - 線型写像・`End(F)`・線型拡張・線型同型（`def_end_iso` が「基底上の値で定まる ℂ-線型写像」とし、`end_agrees_with_matrix_vector_product`・`end_is_algebra_isomorphism` が存在しない「線型写像の和とスカラー倍の値の定義」を引く）。
+  - 一般の大きさの正則な行列と逆行列 `B^{-1}`（`def_invertible_elements_of_R` は `Mat(2^M,ℂ)` だけ。`mat_conj` ほか約 11 ブロック）。
+  - 床関数 `⌊·⌋`（`matrix_exp_conjugation`・`moment_log_convexity`。`riemann_sum_to_integral` だけはその場で定める）。
+  - 写像の語（全単射・単射・全射・合成・恒等写像・逆写像。約 46 ブロック。「写像の合成の定義」「恒等写像の定義」を存在しない定義として引く箇所がある）と「可換群」。
+  - `gamma_is_continuous` が存在しない「連続の定義の δ」を引き、`def_real_logarithm_positive` が `ℝ` 脱出の一覧（(R0)〜(R6)）に無い中間値の定理を持ち込んでいる。
+  - 定義は在るのに使う箇所で引いていないもの: `im Q`・`ker Q`（`trace_of_idempotent` の中の定義を、`eigenvalues_of_check_Vprime` ほか 5 ブロックが引かない。独立した定義のブロックにする）、
+    「固有空間」（`def_simple_eigenvalue` の `E_λ(A)` を `max_eigenvalue_of_V_plus_simple` が引かない）、冪・`mat_mult`・交換子と反交換子・`⊠`・実数の絶対値・二項係数の定義を名前だけで引く行。
+  - 線型代数の語を足した実行（2026-11-21）が残したもの: 「対角化可能」「重複度」（固有値の章）の定義、`check_joint_eigenspace_decomposition` の証明の末尾の「次元の整合」（`{0,1}^r` の直和で次元の和が全体の次元になること）の証明、
+    書き直した人手の Step と 1 対 1 でない Lean 具体版（`trace_of_idempotent` と `eigenvalues_of_V_plus` の基底の段は mathlib の `Basis` で読んでいる）。
 - 本文のほかの証明（`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
   「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
   行列の和を定義するブロックは `def_matrix_sum`（`002_linear_space_general.ts`、2026-11-01 に SageMath の検算の連続実行が足した）。各ブロックの Lean の対応も確かめる。

@@ -139,6 +139,37 @@ targets=(
   Ising2D.NecSuf.productFamilyOf_independent
   Ising2D.prefixProductOf_eq_prefixEntryProduct
   Ising2D.kronecker_family_of_independent_family_is_independent_of_necSuf
+  Ising2D.finite_sum_of_complex_numbers_times_complex_number
+  Ising2D.linear_combination_splits_off_last_term
+  Ising2D.matrix_sum_is_associative
+  Ising2D.linear_combination_splits_into_two_blocks
+  Ising2D.linear_combination_of_subspace_elements_stays_in_subspace
+  Ising2D.linearly_independent_family_has_no_zero_element
+  Ising2D.homogeneous_linear_equations_with_more_unknowns_have_nonzero_solution
+  Ising2D.linearly_independent_family_is_no_longer_than_spanning_family
+  Ising2D.extending_independent_family_by_element_outside_span
+  Ising2D.matrix_units_form_basis
+  Ising2D.subspace_has_basis
+  Ising2D.bases_of_subspace_have_same_number_of_elements
+  Ising2D.matDim_eq_of_isBasis
+  Ising2D.dimension_of_matrix_space
+  Ising2D.image_of_matrix_is_subspace
+  Ising2D.kernel_of_matrix_is_subspace
+  Ising2D.eigenvalue_equation_solution_set_is_subspace
+  Ising2D.concatenated_bases_of_direct_sum_form_basis
+  Ising2D.dim_of_direct_sum_of_two
+  Ising2D.matrix_of_basis_columns_has_inverse
+  Ising2D.one_dimensional_subspace_is_multiples_of_nonzero_element
+  Ising2D.linearly_independent_family_of_n_vectors_is_basis
+  Ising2D.CheckFermiSetup.nonzero_elements_of_images_of_check_Q_form_basis
+  Ising2D.CheckFermiSetup.nonzero_elements_of_images_of_check_Q_form_basis_of_necSuf
+  Ising2D.subspace_has_basis_of_necSuf
+  Ising2D.dimension_of_matrix_space_of_necSuf
+  Ising2D.one_dimensional_subspace_is_multiples_of_nonzero_element_of_necSuf
+  Ising2D.linearly_independent_family_of_n_vectors_is_basis_of_necSuf
+  Ising2D.matrix_of_basis_columns_has_inverse_of_necSuf
+  Ising2D.concatenated_bases_of_direct_sum_form_basis_of_necSuf
+  Ising2D.matDim_eq_finrank
   Ising2D.siteProd_transpose_apply
   Ising2D.siteProd_transpose
   Ising2D.identity_matrix_two_conjTranspose

@@ -123,7 +123,9 @@ h(\epsilon(\mu))\right)`,
           "）の全部になる。",
         ],
         [
-          "(b) 同時固有空間が**すべて 1 次元**になる。",
+          "(b) 同時固有空間が**すべて 1 次元**（",
+          ref("def_dimension"),
+          "）になる。",
         ],
         [
           "(c) ",
@@ -168,6 +170,7 @@ h(\epsilon(\mu))\right)`,
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-11-21: Λ̌_ε の式を、ε を写像 ε: M̌ → {0,1}（def_binary_assignments_on_check_index_set）とし、ε_μ − ½ を h(ε(μ))（def_half_sign_of_binary_value）、Σ_{μ=1}^{M_col} を Σ_{μ∈M̌}（def_sum_over_check_index_set）と書く形にした（eigenvalues_of_V_plus の定義に合わせた）。値は不変。",
+        "2026-11-21: (b) の「1 次元」に def_dimension を引いた。中身は変えていない",
       ],
     },
   },
@@ -2788,7 +2791,11 @@ X\,\check{n}_\nu
         math(String.raw`\check{n}_\mu`),
         " の固有値が ",
         math(String.raw`\epsilon(\mu)`),
-        " に当たる 1 次元の部分空間への射影であることは、",
+        " に当たる 1 次元（",
+        ref("def_dimension"),
+        "）の部分空間（",
+        ref("def_subspace"),
+        "）への射影であることは、",
         ref("check_joint_eigenspace_decomposition"),
         " で示す。",
       ]),
@@ -2797,6 +2804,7 @@ X\,\check{n}_\nu
       status: "added",
       notes: [
         "2026-11-21: 代表の指摘（Q̌ は別途定義して適切に参照する）を受けて、check_joint_eigenspace_decomposition の主張の中で定めていた Q̌_ε を独立した定義にした。以前の定義の因子 ε_μň_μ + (1 − ε_μ)(I − ň_μ) は、{0,1} ⊂ ℤ の元 ε_μ を複素数として掛けていたので、R_μ^{(ε(μ))} で書いた（ε(μ) = 1 なら ň_μ、0 なら I − ň_μ で、行列は同じ）。",
+        "2026-11-21: 「1 次元の部分空間」に def_dimension・def_subspace を引いた。定義の中身は変えていない",
       ],
     },
   },
@@ -3400,7 +3408,27 @@ w
         math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
         " なので ",
         math(String.raw`\{0,1\}^{\check{\mathcal{M}}} = \{0,1\}^{M_{\mathrm{col}}}`),
-        "）。すなわち ",
+        "）。(4) の ",
+        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+        " は ",
+        ref("image_of_matrix_is_subspace"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}}`),
+        "）の像で ",
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " の部分空間（",
+        ref("def_subspace"),
+        "）、",
+        math(String.raw`\dim_{\mathbb{C}}`),
+        " は ",
+        ref("def_dimension"),
+        "、(5) の ",
+        math(String.raw`\bigoplus`),
+        " は ",
+        ref("def_direct_sum_over_binary_words"),
+        "（",
+        math(String.raw`m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ r \to M_{\mathrm{col}}`),
+        "）による。すなわち ",
         math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " は ",
         math(String.raw`2^{M_{\mathrm{col}}}`),
@@ -4075,7 +4103,11 @@ y_{\epsilon'}
       paragraph([
         "が各 ",
         math(String.raw`\epsilon'`),
-        " について成り立ち、直和である。",
+        " について成り立つ。上の ",
+        math(String.raw`x = \sum_\epsilon \check{Q}_\epsilon x`),
+        " と合わせて ",
+        ref("def_direct_sum_over_binary_words"),
+        " の (i)・(ii) が成り立つので、直和である。",
       ]),
       paragraph([
         "（次元の整合：",
@@ -4086,7 +4118,9 @@ y_{\epsilon'}
         math(String.raw`2^{M_{\mathrm{col}}}`),
         " となり ",
         math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
-        " の次元に一致する。）",
+        " の次元（",
+        ref("dimension_of_matrix_space"),
+        "）に一致する。）",
       ]),
     ],
     conversion: {
@@ -4105,6 +4139,218 @@ y_{\epsilon'}
         "2026-11-02: Step 5 の直和の鎖の 1 行目「Step 1 の直交性と冪等性」を、新しく足した sum_over_binary_words_with_one_nonzero_term の参照（右辺から左辺へ）と、その前提 Q̌_{ε'}y_ε = O（ε ≠ ε'）の 4 行の鎖（x_ε の取り方・mat_mult_associative（q → 1）・Step 1 の (1)・zero_matrix_is_left_zero_of_mat_mult（p → 1））、Q̌_{ε'}y_{ε'} = y_{ε'} の 4 行の鎖（mat_mult_associative・Step 1 の Q̌_εQ̌_ε = Q̌_ε）に替えた。散文「各項は像に属するから和は全体を張る」を、Q̌_εx ∈ im Q̌_ε を trace_of_idempotent の im の定義で述べる文にした。y_ε ∈ im Q̌_ε から y_ε = Q̌_εx_ε となる x_ε を取ることを書いた。主張の中身は不変。SageMath は 050 の check_joint_eigenspace_step5_direct_sum_first_line.sage。",
         "2026-11-03: 証明の冒頭で名前だけで置いていた Q̌_ε = ∏R_μ^{(ε_μ)} を、定義の因子 ε_μň_μ + (1−ε_μ)(I−ň_μ) が R_μ^{(ε_μ)} に等しいことの二場合の 10 行の鎖（場合の仮定・def_complex_difference・multiply_by_minus_one・complex_numbers_form_a_field（ε_μ = 0 は complex_times_zero_is_zero も）・scalar_multiple_by_one・zero_scalar_multiple_is_zero_matrix・matrix_plus_zero_matrix／zero_matrix_plus_matrix・R の定義）と、それを各因子へ同時に適用する 2 行の鎖にした。主張の中身は変えていない。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_48。",
         "2026-11-21: 代表の指摘（ε の添字・算術、Q̌ の定義の置き場）を受けて記法を書き直した。主張の中で定めていた Q̌_ε := ∏_{μ=1}^{M_col}(ε_μň_μ + (1−ε_μ)(I−ň_μ)) を消し、独立した定義 def_check_Q_epsilon（Q̌_ε := ∏_{μ∈M̌} R_μ^{(ε(μ))}）を引く文にした。ε は写像 ε: M̌ → {0,1}（def_binary_assignments_on_check_index_set）で、値を ε(μ) と書く。(3) の ň_νQ̌_ε = Q̌_εň_ν = ε_νQ̌_ε（{0,1} の元 ε_ν を複素数として掛けていた）を、ε(ν) = 1 なら ň_νQ̌_ε = Q̌_εň_ν = Q̌_ε、ε(ν) = 0 なら = O の場合分けにした（行列は同じ）。証明の冒頭の、定義の因子が R_μ^{(ε_μ)} に等しいことの二場合の 10 行の鎖と 2 行の鎖は要らなくなったので消し、def_check_Q_epsilon と def_product_over_check_index_set を引く 2 行の鎖 Q̌_ε = ∏_{μ∈M̌}R_μ^{(ε(μ))} = ∏_{μ=1}^{M_col}R_μ^{(ε(μ))} に替えた。R の定義の根拠は def_check_R_factor の参照にした。Step 3 は、ň_νR_ν^{(1)} = R_ν^{(1)}（3 行）・ň_νR_ν^{(0)} = 0（8 行）と、ε(ν) によらない 5 行の鎖、ε(ν) = 1 の 6 行・ε(ν) = 0 の 4 行の鎖、右から掛けた側の 3 行にした（スカラー倍 ε_ν・1_ℂ・0_ℂ を経る行と scalar_multiple_factors_out_of_right_factor の行は無くなった）。 Lean は Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_mem・nOp_mul_projFactor_of_not_mem・nOp_mul_Qproj_common_step3・nOp_mul_Qproj_of_mem_step3・nOp_mul_Qproj_of_not_mem_step3・Qproj_mul_nOp_eq_nOp_mul_Qproj_step3 が同じ行の calc、(3) は nOp_mul_Qproj_of_mem・nOp_mul_Qproj_of_not_mem（冒頭の 2 行は Qproj_eq_finProdLeft_rFactor）。数値検証: sagemath/check/check_joint_eigenspace_decomposition/ の check_step3_factor_case_chains.sage・check_step1_orthogonality_step3_moving_one_factor_chains.sage・check_claim_statements.sage（消した鎖の check_factor_as_R_chains.sage は消した）。",
+        "2026-11-21: 部分空間・次元・直和を定義せずに使っていたので、主張に im Q̌_ε が部分空間であること（image_of_matrix_is_subspace）と dim_ℂ（def_dimension）・⨁（def_direct_sum_over_binary_words）の定義を書き、Step 5 の結びを def_direct_sum_over_binary_words の (i)・(ii) とした。次元の整合の括弧書きに dimension_of_matrix_space を引いた。主張・証明の中身は変えていない",
+      ],
+    },
+  },
+  {
+    id: "evenEigen_claim_nonzero_elements_of_images_of_check_Q_form_basis",
+    kind: "claim",
+    title: { tex: String.raw`\mathrm{im}\,\check{Q}_\epsilon\ \text{から 0 でない元を一つずつ取った族は基底}` },
+    labels: ["nonzero_elements_of_images_of_check_Q_form_basis"],
+    statement: [
+      paragraph([
+        ref("def_binary_assignments_on_check_index_set"),
+        " の各 ",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " について、",
+        ref("def_check_Q_epsilon"),
+        " の ",
+        math(String.raw`\check{Q}_\epsilon`),
+        " の像 ",
+        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+        "（",
+        ref("image_of_matrix_is_subspace"),
+        "、",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}}`),
+        "）の元 ",
+        math(String.raw`q_\epsilon`),
+        " で ",
+        math(String.raw`q_\epsilon \neq O`),
+        "（",
+        ref("def_zero_matrix"),
+        " の零ベクトル ",
+        math(String.raw`O \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        "）のものが与えられているとする。",
+        math(String.raw`N := 2^{M_{\mathrm{col}}}`),
+        " とし、",
+        math(String.raw`\pi : \{1,\dots,N\} \to \{0,1\}^{\check{\mathcal{M}}}`),
+        " を全単射（",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " の元の個数は ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " なので存在する）とする。このとき族 ",
+        math(String.raw`(q_{\pi(1)},\dots,q_{\pi(N)})`),
+        " は ",
+        math(String.raw`\mathbb{C}^{N}`),
+        " の基底（",
+        ref("def_basis"),
+        "）であり、したがって族 ",
+        math(String.raw`(q_\epsilon)_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}`),
+        " は ",
+        math(String.raw`\mathbb{C}^{N}`),
+        " の基底（",
+        ref("def_basis_indexed_by_finite_set"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 1（",
+        math(String.raw`\check{Q}_{\epsilon'}`),
+        " の ",
+        math(String.raw`q_\epsilon`),
+        " への作用）。各 ",
+        math(String.raw`\epsilon`),
+        " について、",
+        math(String.raw`q_\epsilon \in \mathrm{im}\,\check{Q}_\epsilon`),
+        " なので ",
+        math(String.raw`q_\epsilon = \check{Q}_\epsilon x_\epsilon`),
+        " を満たす ",
+        math(String.raw`x_\epsilon \in \mathbb{C}^{N}`),
+        " を取る。",
+        math(String.raw`\epsilon \neq \epsilon'`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\check{Q}_{\epsilon'}q_\epsilon
+&= \check{Q}_{\epsilon'}\left(\check{Q}_\epsilon x_\epsilon\right)
+&&(\because\ x_\epsilon\ \text{の取り方})\\
+&= \left(\check{Q}_{\epsilon'}\check{Q}_\epsilon\right)x_\epsilon
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p \to N,\ q \to 1)\ \text{を右辺から左辺へ}\bigr)\\
+&= O_{N,N}\,x_\epsilon
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(1)}\ (\epsilon \to \epsilon',\ \epsilon' \to \epsilon)\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{zero_matrix_is_left_zero_of_mat_mult}\ (m,n \to N,\ p \to 1)\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+\check{Q}_{\epsilon}q_{\epsilon}
+&= \check{Q}_{\epsilon}\left(\check{Q}_{\epsilon}x_{\epsilon}\right)
+&&(\because\ x_\epsilon\ \text{の取り方})\\
+&= \left(\check{Q}_{\epsilon}\check{Q}_{\epsilon}\right)x_{\epsilon}
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p \to N,\ q \to 1)\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\bigl(I\,\check{Q}_{\epsilon}\bigr)\check{Q}_{\epsilon}\Bigr)x_{\epsilon}
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\bigl(\check{Q}_\epsilon^0\,\check{Q}_{\epsilon}\bigr)\check{Q}_{\epsilon}\Bigr)x_{\epsilon}
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(\check{Q}_\epsilon^1\,\check{Q}_{\epsilon}\right)x_{\epsilon}
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0)\ \text{を右辺から左辺へ}\bigr)\\
+&= \check{Q}_\epsilon^2\,x_{\epsilon}
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1)\ \text{を右辺から左辺へ}\bigr)\\
+&= \check{Q}_{\epsilon}x_{\epsilon}
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(1) の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\bigr)\\
+&= q_{\epsilon}
+&&(\because\ x_\epsilon\ \text{の取り方})
+\end{aligned}`),
+      paragraph(["である。"]),
+      paragraph([
+        "Step 2（線型独立）。",
+        math(String.raw`d_1,\dots,d_N \in \mathbb{C}`),
+        " が ",
+        math(String.raw`\sum_{t=1}^{N} d_t q_{\pi(t)} = O`),
+        "（",
+        ref("def_linear_combination"),
+        "）を満たすとし、",
+        math(String.raw`t_0 \in \{1,\dots,N\}`),
+        " を取って ",
+        math(String.raw`\epsilon' := \pi(t_0)`),
+        " とおく。",
+        math(String.raw`t \neq t_0`),
+        " なら ",
+        math(String.raw`\pi`),
+        " が単射なので ",
+        math(String.raw`\pi(t) \neq \epsilon'`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\check{Q}_{\epsilon'}\bigl(d_t q_{\pi(t)}\bigr)
+&= d_t\bigl(\check{Q}_{\epsilon'} q_{\pi(t)}\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n \to N,\ p \to 1)\bigr)\\
+&= d_t\,O
+&&(\because\ \text{Step 1 の}\ \epsilon \neq \epsilon'\ \text{の鎖}\ (\epsilon \to \pi(t)))\\
+&= O
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`\begin{aligned}
+d_{t_0}\,q_{\epsilon'}
+&= d_{t_0}\bigl(\check{Q}_{\epsilon'}q_{\epsilon'}\bigr)
+&&(\because\ \text{Step 1 の}\ \check{Q}_{\epsilon}q_{\epsilon}\ \text{の鎖}\ (\epsilon \to \epsilon')\ \text{を右辺から左辺へ})\\
+&= \check{Q}_{\epsilon'}\bigl(d_{t_0} q_{\pi(t_0)}\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ \text{を右辺から左辺へ。}\pi(t_0) = \epsilon'\bigr)\\
+&= \sum_{t=1}^{N} \check{Q}_{\epsilon'}\bigl(d_t q_{\pi(t)}\bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_with_single_nonzero_term}\ (r \to N,\ X_t \to \check{Q}_{\epsilon'}(d_t q_{\pi(t)}),\ q \to t_0)\ \text{を右辺から左辺へ。前提は上の}\ t \neq t_0\ \text{の鎖}\bigr)\\
+&= \check{Q}_{\epsilon'}\Bigl(\sum_{t=1}^{N} \bigl(d_t q_{\pi(t)}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_right_factor}\ (m,n \to N,\ p \to 1,\ r \to N)\ \text{を右辺から左辺へ}\bigr)\\
+&= \check{Q}_{\epsilon'}\Bigl(\sum_{t=1}^{N} d_t q_{\pi(t)}\Bigr)
+&&\bigl(\because\ \blkref{def_linear_combination}\ \text{を右辺から左辺へ}\bigr)\\
+&= \check{Q}_{\epsilon'}\,O
+&&(\because\ \text{仮定})\\
+&= O
+&&\bigl(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ (m,n \to N,\ p \to 1)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`d_{t_0} \neq 0_{\mathbb{C}}`),
+        " と仮定し、",
+        math(String.raw`\beta := d_{t_0}^{-1}`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        " の乗法の逆元）とおくと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q_{\epsilon'}
+&= 1_{\mathbb{C}}\,q_{\epsilon'}
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\ \text{を右辺から左辺へ}\bigr)\\
+&= (\beta d_{t_0})\,q_{\epsilon'}
+&&(\because\ \beta d_{t_0} = 1_{\mathbb{C}})\\
+&= \beta\,(d_{t_0} q_{\epsilon'})
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ \text{を右辺から左辺へ}\bigr)\\
+&= \beta\,O
+&&(\because\ \text{上の鎖})\\
+&= O
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、",
+        math(String.raw`q_{\epsilon'} \neq O`),
+        " に矛盾する。よって ",
+        math(String.raw`d_{t_0} = 0_{\mathbb{C}}`),
+        " であり、",
+        math(String.raw`t_0`),
+        " は任意なので族 ",
+        math(String.raw`(q_{\pi(1)},\dots,q_{\pi(N)})`),
+        " は線型独立（",
+        ref("def_linearly_independent"),
+        "）である。",
+      ]),
+      paragraph([
+        "Step 3（結論）。",
+        ref("linearly_independent_family_of_n_vectors_is_basis"),
+        "（",
+        math(String.raw`n \to N,\ v_t \to q_{\pi(t)}`),
+        "）より族 ",
+        math(String.raw`(q_{\pi(1)},\dots,q_{\pi(N)})`),
+        " は ",
+        math(String.raw`\mathbb{C}^{N}`),
+        " の基底である。",
+        math(String.raw`\pi`),
+        " は全単射なので、",
+        ref("def_basis_indexed_by_finite_set"),
+        " より族 ",
+        math(String.raw`(q_\epsilon)_{\epsilon}`),
+        " は ",
+        math(String.raw`\mathbb{C}^{N}`),
+        " の基底である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21: 原文（Typst）に対応ブロックは無い。eigenvalues_of_check_Vprime と eigenvalues_of_V_plus の証明は「ℂ^{2^{M_col}} は im Q̌_ε たちの直和だから、各 im Q̌_ε の基底を合わせると基底が得られる」と、直和と基底の一般論を根拠なしに使っていた。" +
+          "直和（def_direct_sum_over_binary_words）の (ii) は {0,1}^{M_col} の上の和で述べてあり、1, …, N の線型結合（def_linear_combination）へ並べ直すには和の並べ替えの主張が要る。それを避けるため、線型独立性を check_joint_eigenspace_decomposition (1) の Q̌_{ε'}Q̌_ε = O・Q̌_ε^2 = Q̌_ε から直接示し、" +
+          "n 個の線型独立な元が基底であること（linearly_independent_family_of_n_vectors_is_basis）で結んだ。数値検証: sagemath/check/nonzero_elements_of_images_of_check_Q_form_basis/。",
       ],
     },
   },
@@ -4698,15 +4944,31 @@ E_K \check{Q}_\epsilon
       ),
       paragraph([
         ref("check_joint_eigenspace_decomposition"),
-        " (5) より ",
-        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " (4) より ",
+        math(String.raw`\dim_{\mathbb{C}}\mathrm{im}\,\check{Q}_\epsilon = 1`),
+        " なので、",
+        ref("one_dimensional_subspace_is_multiples_of_nonzero_element"),
+        " より各 ",
+        math(String.raw`\epsilon`),
+        " について ",
+        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+        " の 0 でない元 ",
+        math(String.raw`q_\epsilon`),
+        " が取れ、上の等式（",
+        math(String.raw`y \to q_\epsilon`),
+        "）から ",
+        math(String.raw`q_\epsilon`),
         " は ",
-        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
-        " たちの直和だから、各 ",
-        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
+        math(String.raw`\check{V}'`),
+        " の固有ベクトルである。",
+        ref("nonzero_elements_of_images_of_check_Q_form_basis"),
+        " より族 ",
+        math(String.raw`(q_\epsilon)_\epsilon`),
+        " は ",
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " の基底（",
-        ref("check_joint_eigenspace_decomposition"),
-        " (4) より 1 次元なので 1 本。0 でないので上の等式から固有ベクトルである）を合わせると ",
+        ref("def_basis_indexed_by_finite_set"),
+        "）であり、",
         math(String.raw`\check{V}'`),
         " の固有ベクトルからなる ",
         math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
@@ -4748,6 +5010,7 @@ E_K \check{Q}_\epsilon
         "2026-11-04: SageMath の検算を付けたときのレビューで、主張文の「im Q̌_ε の各元は V̌' の固有ベクトル」が 0 で破れる（固有ベクトルは 0 でない）ので「0 でない各元」に直し、直和の段落の「1 次元なので 1 本」に check_joint_eigenspace_decomposition (4) の参照と、その元が固有ベクトルである理由を足した。数値検証: sagemath/check/eigenvalues_of_check_Vprime/（証明の各行は移した検算、主張そのものは check_claim_statements.sage）。",
         "2026-11-03: 証明の最後の段落「ǧ(ε) ∈ ℝ（gamma_theta_tilde_mu_positive より γ(θ̃_μ) ∈ ℝ_{>0}）なので exp(ǧ(ε)) > 0」は、実数の exp が正であることを名前を出さずに使い、要らない γ の正値性を根拠に挙げていた。real_exp_positive（x → ǧ(ε)）を引く 1 行にし、ǧ(ε) ∈ ℝ の根拠は主張の ǧ の定義とした。主張の ǧ の定義に、和が def_finite_sum_of_real_numbers の ℝ の有限和であることを書いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.exp_gval_pos は real_exp_positive の具体版 Ising2D.real_exp_positive（MathematicalTools/MatrixExponentialAndCommutators/ClaimRealExpPositive.lean）を引く。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_positivity.sage。",
         "2026-11-21: 代表の指摘（ε の添字・算術・和の範囲）を受けて記法を書き直した。ǧ(ε) := Σ_{μ=1}^{M_col} γ(θ̃_μ)(ε_μ − ½) を ǧ(ε) := Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ))（def_sum_over_check_index_set・def_half_sign_of_binary_value）にした（値は不変）。Step 1 は、check_joint_eigenspace_decomposition (3) が ε(ν) の場合分けの形になったので、μ ごとに (ň_μ − ½I)Q̌_ε = h(ε(μ))Q̌_ε を示す鎖（ε(μ) によらない 6 行と、ε(μ) = 1・ε(μ) = 0 の 7 行ずつ。1 − ½ = ½ は real_one_minus_half_is_half、h の値は def_half_sign_of_binary_value）を先に置き、X̌Q̌_ε の鎖を def_check_number_operator (2)・finite_sum_of_matrices_distributes_in_left_factor・scalar_multiple_factors_out_of_left_factor・μ ごとの左の等式・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix・def_sum_over_check_index_set を右辺から左辺へ・ǧ の定義の 8 行にした。右から掛ける形も同じ構成にした。Q̌_ε が最初に出る主張の文に def_check_Q_epsilon の参照を置き、「ε の成分を入れ替える」を「値 ε(μ) と ε(M_col+1−μ) を入れ替えた写像」にした。 Lean は Ising2D.halfSign・Ising2D.binOfMem と、Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common・nOp_sub_half_mul_Qproj_of_mem・nOp_sub_half_mul_Qproj_of_not_mem・Xop_mul_Qproj_step1（右から掛ける形は Qproj_mul_nOp_sub_half_*・Qproj_mul_Xop_step1）が同じ行の calc。数値検証: sagemath/check/eigenvalues_of_check_Vprime/check_step1_left_chain.sage・check_step1_right_chain.sage。",
+        "2026-11-21: 「(5) より直和だから、各 im Q̌_ε の基底を合わせると基底」は直和と基底の一般論を根拠なしに使っていたので、0 でない元 q_ε の存在を one_dimensional_subspace_is_multiples_of_nonzero_element、(q_ε)_ε が基底であることを nonzero_elements_of_images_of_check_Q_form_basis で示す形にした。主張は変えていない",
       ],
     },
   },
@@ -6593,7 +6856,9 @@ h(\epsilon(\mu))\right) \in \mathbb{R}`,
           math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
           " に属する）からなる ",
           math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
-          " の基底である。また ",
+          " の基底（",
+          ref("def_basis_indexed_by_finite_set"),
+          "）である。また ",
           math(String.raw`V^{(+)}`),
           " の固有値（",
           ref("def_eigenvalue"),
@@ -6782,26 +7047,19 @@ V^{(+)} y
 \end{aligned}`,
       ),
       paragraph([
-        ref("check_joint_eigenspace_decomposition"),
-        " (5) より ",
-        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
-        " は ",
-        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
-        " たちの直和である。各 ",
+        "各 ",
         math(String.raw`\epsilon`),
         " について ",
         math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
         " の 0 でない元 ",
         math(String.raw`q_\epsilon`),
-        " を任意に取ると、",
+        " を任意に取る（",
         ref("check_joint_eigenspace_decomposition"),
-        " (4) より ",
-        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
-        " は 1 次元なので ",
-        math(String.raw`q_\epsilon`),
-        " 1 本が ",
-        math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
-        " の基底であり、",
+        " (4) の ",
+        math(String.raw`\dim_{\mathbb{C}}\mathrm{im}\,\check{Q}_\epsilon = 1`),
+        " と ",
+        ref("one_dimensional_subspace_is_multiples_of_nonzero_element"),
+        " より取れる）。",
         math(String.raw`q_\epsilon`),
         " は上の等式（",
         math(String.raw`y \to q_\epsilon`),
@@ -6809,13 +7067,17 @@ V^{(+)} y
         math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
         " に属する固有ベクトル（",
         ref("def_eigenvector"),
-        "）である。直和なので、これらを合わせた ",
+        "）である。",
+        ref("nonzero_elements_of_images_of_check_Q_form_basis"),
+        " より、これらを合わせた ",
         math(String.raw`\{q_\epsilon\}_\epsilon`),
         " は ",
         math(String.raw`V^{(+)}`),
         " の固有ベクトルからなる ",
         math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
-        " の基底である。本数は ",
+        " の基底（",
+        ref("def_basis_indexed_by_finite_set"),
+        "）である。本数は ",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " の個数 ",
         math(String.raw`2^{M_{\mathrm{col}}}`),
@@ -7455,6 +7717,7 @@ h(\epsilon(\mu)) - h(0)
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (2) の Λ̌_min の式と、証明の ǧ(0,…,0) の鎖の最後の行・Λ̌_min の鎖の最後の行・積の鎖の 2 行目に出る −½Σγ(θ~_μ) を −(½Σγ(θ~_μ)) と括弧を付けて書いた。ǧ(0,…,0) の鎖の最後の行で引く real_negation_times_is_negation_of_product の右辺 −(x·t) と字面で一致させ、Lean の Ising2D.gval_empty_eq_neg_half_sum・Ising2D.checkBigLambda_min_eq の −((1/2)·Σ) と SageMath の check_part2_extreme_values_chains.sage の −(half·S) に揃えるためである。括弧を書いたので、証明の前置きにあった「−½Σγ は −(½Σγ) と読む」の断りを外した。値・鎖の段数・根拠は不変。",
         "2026-11-20（Lean の通しの証明のゴールラインの確認）: (2) の ǧ(1,…,1) の鎖の 2 行目は「ℝ で 1 − 1/2 = 1/2」を名前だけで根拠にしていた。主張 real_one_minus_half_is_half の参照に替えた（Lean の gval_univ_eq_half_sum の対応する段も同じ主張の具体版を引く）。",
         "2026-11-21: 代表の指摘（ε の添字・算術・和の範囲）を受けて記法を書き直した。Λ̌_ε を (2 sinh 2K_2)^{M_col/2} exp(Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ)))（def_sum_over_check_index_set・def_half_sign_of_binary_value）で定め、主張で Q̌_ε が最初に出る箇所に def_check_Q_epsilon の参照を置いた。「全ての ε_μ = 1 を取ったとき」を「ε = (1,…,1) のとき」（def_binary_assignments_on_check_index_set の定数写像）にした。大小の比較は、r_μ := γ(θ̃_μ)(1 − ε_μ)・w_μ := γ(θ̃_μ)ε_μ を r_μ := γ(θ̃_μ)(h(1) − h(ε(μ)))・w_μ := γ(θ̃_μ)(h(ε(μ)) − h(0)) にし、その非負性を ε(μ) = 1・0 の場合分けの h の値の差の鎖（各 2〜4 行）で示した。ǧ(1,…,1) − ǧ(ε) と ǧ(ε) − ǧ(0,…,0) の鎖は、定数写像の値 (1,…,1)(μ) = 1・(0,…,0)(μ) = 0 の行と def_sum_over_check_index_set の行を足し、「(1 − ½) − (ε_μ − ½) = 1 − ε_μ」の行は要らなくなったので消した。ǧ(1,…,1)・ǧ(0,…,0) の値の鎖は、ǧ の定義・定数写像の値・def_sum_over_check_index_set・h(1) := ½（h(0) := −(½)）を引く 4 行で始まる形にした（real_one_minus_half_is_half と 0 − ½ = −½ の行を置き換えた）。主張・値は不変。 Lean は Ising2D.gval_le_gval_univ・gval_empty_le_gval・gval_univ_eq_half_sum・gval_empty_eq_neg_half_sum（h の値の差は halfSign_one_sub_halfSign_zero・halfSign_one_sub_nonneg・halfSign_sub_zero_nonneg）。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_comparison_chains.sage・check_part2_extreme_values_chains.sage。",
+        "2026-11-21: 基底・次元・直和を定義せずに使っていたので引いた。証明の「(5) より直和。各 im Q̌_ε は 1 次元なので q_ε 1 本が基底。直和なので合わせた {q_ε} は基底」を、q_ε の存在を one_dimensional_subspace_is_multiples_of_nonzero_element、{q_ε} が基底であることを nonzero_elements_of_images_of_check_Q_form_basis で示す形にした。主張は変えていない",
       ],
     },
   },
@@ -7500,7 +7763,9 @@ h(\epsilon(\mu)) - h(0)
           math(String.raw`\left\{x \in \mathbb{C}^{2^{M_{\mathrm{col}}}} \mid V^{(+)}x
 = \check\Lambda_{\max}x\right\}
 = \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
-          " であり、この空間の次元は ",
+          " であり、この空間の次元（",
+          ref("def_dimension"),
+          "）は ",
           math(String.raw`1`),
           " である。",
         ],
@@ -7936,6 +8201,7 @@ V^{(+)}y
         "2026-11-03: (1) の散文（Θ^{(1/2)}_{M_col} = {θ~_μ}、M_col 個の値が相異なるので集合の上の和を Σ_{μ=1}^{M_col} へ付け替える、eigenvalues_of_V_plus の表式と比べる）を、eigenvalues_of_V_plus (2)・θ~_μ の定義・def_Theta_delta_M（δ → 1/2）・def_Lambda_delta_M（δ → 1/2）の 4 行の鎖にした。def_Theta_delta_M を集合から添字 μ の族 θ^{(δ)}_{M_col,μ} へ、def_Lambda_delta_M の和を添字の和へ改めたので、元が相異なることの証明と和の付け替えは要らなくなった（主張は不変）。",
         "2026-11-04: 全証明の SageMath 検算として、(2) の散文「左辺を移項して」「real_exp_strictly_increasing より」「s_2 > 0 より 2s_2 > 0 であり、その実数冪として (2s_2)^{M_col/2} > 0」を、移項と real_exp_strictly_increasing を引く 2 行の含意の鎖と、def_indexed_hyperbolic_abbreviations の s_2 = sinh 2K_2・def_second_transfer_matrix_prefactor の (2 sinh 2K_2)^{M_col/2} ∈ ℝ_{>0} を引く 2 行の鎖にした（主張は不変）。数値検証: sagemath/check/max_eigenvalue_of_V_plus_simple/（050 の check_26・check_max_eigenvalue_simple_step1〜3 を移したもの、実際の V^{(+)} と本文の ψ̌ で主張 (1)(2)(3) と鎖を厳密に確かめる check_claim_with_actual_V_plus.sage）。",
         "2026-11-21: ǧ(ε)・Λ̌_ε の定義を Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ)) に改めたのに合わせた。(2) の「ある μ_0 で ε_{μ_0} = 0」を (1,…,1) が定数写像であること（def_binary_assignments_on_check_index_set）から書き、a_μ := γ(θ̃_μ)(1 − ε_μ) を a_μ := γ(θ̃_μ)(h(1) − h(ε(μ))) にした。a_μ ≥ 0 は ε(μ) = 1・0 の場合分けの h の値の差の鎖（2 行と 4 行）で示した。ǧ(1,…,1) − ǧ(ε) の鎖に定数写像の値と def_sum_over_check_index_set の行を足し、「(1 − ½) − (ε_μ − ½) = 1 − ε_μ」の行を消し、a_{μ_0} の値の行を h(1) − h(0) = 1 の鎖を引く行にした。Λ̌_ε < Λ̌_max の鎖の和を Σ_{μ∈M̌} γ(θ̃_μ)h(ε(μ))（ε → (1,…,1) では h((1,…,1)(μ))）と書いた。主張・値は不変。 Lean は Ising2D.gval_lt_gval_univ・checkBigLambda_lt_checkBigLambda_univ。数値検証: sagemath/check/max_eigenvalue_of_V_plus_simple/check_step2_strict_inequality_chains.sage。",
+        "2026-11-21: 「次元」に def_dimension を引いた。主張は変えていない",
       ],
     },
   },

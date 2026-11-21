@@ -47,6 +47,7 @@ sagemath/
 | ファイル | 何を提供するか | 使いどころ |
 | --- | --- | --- |
 | `_shared/defs.sage` | SageMath の**記号式**としての `gamma_1(θ)`, `gamma_2(θ)`, `A(θ)`, `a(θ)`, `arg^{[0,2π)}`, 本プロジェクト定義の `sqrt`、および `numerical_check()` | 2×2 のスカラー式レベルの恒等式 |
+| `_shared/linear_algebra_families.sage` | `K = QQ(i)` 上の線型結合（`p = 0` は零行列）・左から足す有限和・線型独立性と線型結合の判定（階数）・行列単位と標準基底 | 部分空間・基底・次元の定義（`def_subspace` など）を使う主張の検算 |
 | `_shared/operators.sage` | `Mat(2,C)^{⊗M}` の元を**具体的な 2^M × 2^M の複素行列**（クロネッカー積）として構成する。`Zop`, `Yop`, `eps_op`, `V1_op`, `V2_op`, `H1_op`, `H2_op`, `hatZ_op`, `hatY_op`, `psi_ops`, `T_conj`, `comm`, `acomm` など。数値は numpy の complex128、行列指数は `scipy.linalg.expm` | 作用素の等式・反交換関係・共役作用・固有値 |
 
 `operators.sage` は記号計算を使わない。`2^M × 2^M` の行列指数を扱う必要があるためである。
