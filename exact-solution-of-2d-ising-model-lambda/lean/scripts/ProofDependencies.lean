@@ -15,9 +15,7 @@ def isConcreteConstant (env : Environment) (n : Name) : Bool :=
   if !isProjectConstant env n then false
   else
     let name := n.toString
-    let moduleName := env.header.moduleNames[(env.getModuleIdxFor? n).get!.toNat]!.toString
-    (name.toLower.splitOn "necsuf").length == 1 &&
-      (moduleName.splitOn "NecSuf").length == 1
+    (name.toLower.splitOn "necsuf").length == 1
 
 #eval show CoreM Unit from do
   let env ← getEnv
@@ -25,6 +23,10 @@ def isConcreteConstant (env : Environment) (n : Name) : Bool :=
     (System.FilePath.mk ".lake/one-to-one/direct-dependencies.unsorted.tsv") .write
   for (n, ci) in env.constants.toList do
     unless isConcreteConstant env n do continue
+    let kind := match ci with
+      | .thmInfo _ => "theorem"
+      | _ => "other"
+    out.putStrLn s!"{n}\tdecl\t{kind}"
     for d in ci.type.getUsedConstants do
       if isProjectConstant env d && n != d then
         out.putStrLn s!"{n}\ttype\t{d}"
