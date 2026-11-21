@@ -67,15 +67,17 @@ theorem finite_sum_sub_succ' [SubtractionCommMonoid R] (m : ℕ) (a b : Fin (m +
       _ = (∑ j : Fin 1, a j) - ∑ j : Fin 1, b j := by
           rw [Fin.sum_univ_one a, Fin.sum_univ_one b]                         -- 和の定義（1 項）を 2 か所
   | succ m ih =>
+    let α : R := ∑ j : Fin (m + 1), a j.castSucc                            -- 具体版の `α` の置き方
+    let β : R := ∑ j : Fin (m + 1), b j.castSucc                            -- 具体版の `β` の置き方
     calc ∑ j : Fin (m + 2), (a j - b j)
         = (∑ j : Fin (m + 1), (a j.castSucc - b j.castSucc)) + (a (Fin.last _) - b (Fin.last _)) :=
           Fin.sum_univ_castSucc _                                             -- 和の定義（項を 1 つ足す）
-      _ = ((∑ j : Fin (m + 1), a j.castSucc) - ∑ j : Fin (m + 1), b j.castSucc)
-            + (a (Fin.last _) - b (Fin.last _)) := by
+      _ = (α - β) + (a (Fin.last _) - b (Fin.last _)) := by
           rw [ih (fun j => a j.castSucc) (fun j => b j.castSucc)]             -- 帰納法の仮定
-      _ = ((∑ j : Fin (m + 1), a j.castSucc) + a (Fin.last _))
-            - ((∑ j : Fin (m + 1), b j.castSucc) + b (Fin.last _)) :=
+      _ = (α + a (Fin.last _)) - (β + b (Fin.last _)) :=
           finite_sum_sub_step' _ _ _ _                                         -- 差を和に直す 8 段
+      _ = ((∑ j : Fin (m + 1), a j.castSucc) + a (Fin.last _))
+            - ((∑ j : Fin (m + 1), b j.castSucc) + b (Fin.last _)) := rfl     -- `α, β` の置き方
       _ = (∑ j, a j) - ∑ j, b j := by
           rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- 和の定義を 2 か所
 

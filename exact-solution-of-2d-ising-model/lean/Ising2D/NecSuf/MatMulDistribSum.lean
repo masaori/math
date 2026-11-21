@@ -10,7 +10,7 @@
 | 具体版の段 | 必要十分版 |
 | --- | --- |
 | `finite_sum_of_complex_sums_step`・`finite_sum_of_real_sums_step`（結合律 → 結合律 → 交換律 → 結合律 → 結合律） | `finite_sum_add_step'`（同じ並び） |
-| `finite_sum_of_complex_sums_succ`・`finite_sum_of_real_sums_succ`（`n + 1` 項の帰納法。`Σ_{j=1}^{1}` と `Σ_{j=1}^{n+1} = (Σ_{j=1}^{n}) + (n+1 項目)` の定義 → 帰納法の仮定 → 上の 5 段 → 定義） | `finite_sum_add_succ'`（同じ並び） |
+| `finite_sum_of_complex_sums_succ`・`finite_sum_of_real_sums_succ`（`n + 1` 項の帰納法。`Σ_{j=1}^{1}` と `Σ_{j=1}^{n+1} = (Σ_{j=1}^{n}) + (n+1 項目)` の定義 → 帰納法の仮定 → 上の 5 段 → 定義） | `finite_sum_add_succ'`（同じ並び。係数が ℝ の `finite_sum_of_real_sums_succ` だけは、人手が「`α, β` の置き方」を別の行に書くので、`let` で置いた `α, β` を和へ戻す `rfl` の段が定義の段の前に 1 つ多い。この証明は複素数の具体版 `finite_sum_of_complex_sums_succ` と共有し、複素数の人手は置き方と定義を 1 行で書いてこの段を持たないので、ここには置かない） |
 | `finite_sum_of_complex_sums`・`finite_sum_of_real_sums`（`n = 0` は空の和。人手には無い） | `finite_sum_add_fin'` |
 | `finite_sum_of_real_sums_fintype`（複素数の具体版の添字は `Fin n` なので無い。`TensorPow M` の系が縮める添字 `Conf M` のためにも使う） | `finite_sum_add'`（有限型 `κ` の上の和を `Fintype.equivFin` で `Fin (card κ)` の上の和へ番号付けし直してから `finite_sum_add_fin'` を使う） |
 | `mul_add_matrix_apply`（積の定義 → 和の定義 → 分配律を各項へ → 有限和を二つに分ける → 積の定義 → 和の定義） | `mul_add_matrix_apply'`（同じ並び） |
