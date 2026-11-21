@@ -145,7 +145,7 @@ theorem openChainPhiInv_zero (y : SpinVal × (Fin (n + 1) → SpinVal)) : openCh
 theorem openChainPhiInv_succ (y : SpinVal × (Fin (n + 1) → SpinVal)) (m : Fin (n + 1)) :
     openChainPhiInv y m.succ = spinMul (openChainPhiInv y m.castSucc) (y.2 m) := rfl
 
-/-- **人手 `open_chain_partition_sum` の Step 1**: `Φ` は全単射で、逆写像は `s(1) := u`、`s(m+1) := s(m)τ_m`。
+/-- **二つの開鎖のスピン和の Step 1 が共有する全単射**（人手 `open_chain_partition_sum` の Step 1。`open_chain_endpoint_product_sum` の Step 1 も同じ `Φ` を使う）: `Φ` は全単射で、逆写像は `s(1) := u`、`s(m+1) := s(m)τ_m`。
 `left_inv` は人手の「`s(m)s(m) = 1` なので `s(m+1) = s(m)τ_m` は `τ_m = s(m)s(m+1)` と同値」の `⇐`（`m` に関する帰納法）、
 `right_inv` は人手の「この手続きで作った `s` は `Φ(s)` として元の組を与える」である。 -/
 def openChainPhiEquiv : SpinConf (n + 2) ≃ SpinVal × (Fin (n + 1) → SpinVal) where

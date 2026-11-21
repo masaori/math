@@ -179,6 +179,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 3 },
     title: { tex: String.raw`\varepsilon \text{ は } \check{Z}, \check{Y}, \check\psi \text{ と反可換}` },
     labels: ["epsilon_anticommutes_with_check_Z_Y"],
+    lean: ["Ising2D.epsilon_anticomm_checkZ", "Ising2D.epsilon_anticomm_checkY", "Ising2D.epsilon_anticomm_checkZ_succ", "Ising2D.epsilon_anticomm_checkY_succ", "Ising2D.epsilon_anticomm_phase_sum", "Ising2D.epsilon_anticomm_checkPsiDag", "Ising2D.epsilon_anticomm_checkPsi", "Ising2D.epsilon_anticomm_two_term", "Ising2D.CheckFermi.commute_epsilon_nOp", "Ising2D.CheckFermi.commute_epsilon_defFactor", "Ising2D.CheckFermi.epsilon_mul_identity_eq_identity_mul_epsilon", "Ising2D.CheckFermi.commute_epsilon_Qproj", "Ising2D.CheckFermi.commute_epsilon_Qproj_succ"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -592,6 +593,7 @@ export default defineBlocks([
     title: { tex: String.raw`\varepsilon\check{Q}_\epsilon = \eta_\epsilon\check{Q}_\epsilon
 \text{ と符号の反転則}` },
     labels: ["epsilon_eigenvalue_on_check_Q"],
+    lean: ["Ising2D.CheckFermi.epsilon_mul_Qproj", "Ising2D.CheckFermi.eta_mem", "Ising2D.CheckFermi.eta_unique", "Ising2D.CheckFermi.exists_eta", "Ising2D.CheckFermi.exists_eta_with_generator", "Ising2D.CheckFermi.Qproj_mulVec_epsilon_mulVec_generator", "Ising2D.CheckFermi.generator_eq_eta_mul_eta_smul", "Ising2D.CheckFermi.eta_mul_eta_sub_one_smul_generator", "Ising2D.CheckFermi.eta_mem_of_mul_self_sub_one", "Ising2D.CheckFermi.epsilon_mul_Qproj_mulVec", "Ising2D.CheckFermi.epsilon_mul_Qproj_eq_smul_of_mulVec", "Ising2D.CheckFermi.smul_generator_eq_eta_smul", "Ising2D.CheckFermi.eta_insert", "Ising2D.CheckFermi.epsilon_mulVec_generator_eq_eta_smul", "Ising2D.CheckFermi.nOp_mulVec_generator_eq_zero", "Ising2D.CheckFermi.ann_mulVec_cre_mulVec_generator", "Ising2D.CheckFermi.cre_mulVec_generator_ne_zero", "Ising2D.CheckFermi.nOp_mul_cre", "Ising2D.CheckFermi.defFactor_of_notMem", "Ising2D.CheckFermi.defFactor_of_mem", "Ising2D.CheckFermi.defFactor_insert_of_ne", "Ising2D.CheckFermi.commute_defFactor_of_commute", "Ising2D.CheckFermi.nOp_mul_defFactor", "Ising2D.CheckFermi.defFactor_mul_defFactor", "Ising2D.CheckFermi.cre_mul_defFactor_of_ne", "Ising2D.CheckFermi.cre_mul_omittingDefFactor", "Ising2D.CheckFermi.defFactor_mulVec_generator_of_notMem", "Ising2D.CheckFermi.omittingDefFactor_mulVec_generator", "Ising2D.CheckFermi.Qproj_insert_mulVec_cre_mulVec_generator", "Ising2D.CheckFermi.Qproj_insert_mulVec_cre_mulVec_of_notMem", "Ising2D.CheckFermi.epsilon_mulVec_cre_mulVec_generator", "Ising2D.CheckFermi.eta_insert_smul_cre_mulVec_generator", "Ising2D.CheckFermi.eta_eq_eta_univ_mul", "Ising2D.CheckFermi.eta_eq_eta_univ_mul_of_sub_card", "Ising2D.CheckFermi.parityFactor_mul_Qproj", "Ising2D.CheckFermi.parityFactor_mul_Qproj_of_mem", "Ising2D.CheckFermi.parityFactor_mul_Qproj_of_notMem", "Ising2D.CheckFermi.finProdLeft_mul_Qproj", "Ising2D.CheckFermi.neg_one_pow_mul_self", "Ising2D.CheckFermi.epsilon_mul_Qproj_eq_smul_parityProd_mul", "Ising2D.CheckFermi.epsilon_eq_parityProd_succ", "Ising2D.CheckFermi.epsilon_eq_parityProd"],
     statement: [
       paragraph([
         ref("def_binary_assignments_on_check_index_set"),
@@ -1728,6 +1730,7 @@ P_{k+1}\check{Q}_\epsilon
 \text{ を } \eta_{(1,\dots,1)} \text{ で表す}`,
     },
     labels: ["trace_of_epsilon_V_plus_via_check_eigenvalues"],
+    lean: ["Ising2D.VPlusData.trace_epsilon_mul_V", "Ising2D.VPlusData.traceFactor_pos", "Ising2D.VPlusData.eta_univ_eq_one_iff_trace_pos", "Ising2D.VPlusData.trace_epsilon_mul_V_step1", "Ising2D.checkU_prod_eq_neg_one_pow", "Ising2D.checkU_prod_univ_eq_neg_one_pow", "Ising2D.VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH", "Ising2D.VPlusData.checkT_eq_prod_checkW_mul", "Ising2D.VPlusData.sum_checkT_eq_traceFactor", "Ising2D.VPlusData.trace_epsilon_mul_V_step5", "Ising2D.VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six", "Ising2D.VPlusData.gam_half_pos", "Ising2D.VPlusData.sinh_gam_half_pos", "Ising2D.VPlusData.two_sinh_gam_half_pos", "Ising2D.VPlusData.prod_two_sinh_gam_half_pos", "Ising2D.VPlusData.traceFactor_pos_step6", "Ising2D.VPlusData.eta_univ_eq_one_of_trace_pos_step7", "Ising2D.VPlusData.trace_pos_of_eta_univ_eq_one_step7", "Ising2D.VPlusData.eta_univ_eq_one_iff_trace_pos_step7", "Ising2D.VPlusData.eta_univ_eq_one_of_trace_pos"],
     statement: [
       paragraph([
         ref("epsilon_eigenvalue_on_check_Q"),
@@ -2377,6 +2380,7 @@ r
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 6 },
     title: { tex: String.raw`\text{開鎖項 } D_0` },
     labels: ["def_D0_open_chain_operator"],
+    lean: ["Ising2D.openChainD0"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -2395,6 +2399,7 @@ r
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 6 },
     title: { tex: String.raw`\text{周期境界項 } G` },
     labels: ["def_G_boundary_operator"],
+    lean: ["Ising2D.boundaryG"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -2416,6 +2421,7 @@ r
 + \varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z`,
     },
     labels: ["H1_plus_in_sigma_z_form"],
+    lean: ["Ising2D.H1_plus_in_sigma_z_form", "Ising2D.Y_kronecker_form", "Ising2D.Z_nextSite_kronecker_form", "Ising2D.sigmaZ_mul_sigmaZ_nextSite_kronecker", "Ising2D.Y_lastSite_kronecker_form", "Ising2D.Z_firstSite_kronecker_form", "Ising2D.sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker", "Ising2D.I_smul_Y_mul_Z_next_of_not_last", "Ising2D.neg_I_smul_Y_lastSite_mul_Z_firstSite"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -2741,6 +2747,7 @@ i\,H_1^{(+)}
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 6 },
     title: { tex: String.raw`D_0, G \text{ の配置基底上の対角作用}` },
     labels: ["D0_G_diagonal_action"],
+    lean: ["Ising2D.openChainD0_mulVec_basisVec", "Ising2D.boundaryG_mulVec_basisVec", "Ising2D.openChainD0_mulVec_basisVec_eq_energy"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -2863,6 +2870,7 @@ Gf_{\iota(s)}
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 6 },
     title: { tex: String.raw`\varepsilon, D_0, G \text{ の二つずつの可換性}` },
     labels: ["epsilon_D0_G_pairwise_commute"],
+    lean: ["Ising2D.epsilon_mul_openChainD0", "Ising2D.epsilon_mul_boundaryG", "Ising2D.openChainD0_mul_boundaryG", "Ising2D.epsilon_mul_sigmaZ_mul_sigmaZ", "Ising2D.sigmaZ_mul_sigmaZ_comm", "Ising2D.sigmaZ_mul_sigmaZ_mul_boundaryG"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3020,6 +3028,7 @@ D_0G
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 6 },
     title: { tex: String.raw`\varepsilon G \text{ の二乗}` },
     labels: ["epsilon_G_is_involution"],
+    lean: ["Ising2D.epsilon_mul_boundaryG_sq", "Ising2D.sigmaZ_mul_self"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3120,6 +3129,7 @@ D_0G
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 7 },
     title: { text: "1 次元開鎖のスピン配置とエネルギー" },
     labels: ["def_open_chain_spin_energy"],
+    lean: ["Ising2D.openChainEnergy", "Ising2D.openChainEnergy_mem_int"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3150,6 +3160,7 @@ D_0G
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 7 },
     title: { text: "端点因子のない1次元開鎖のスピン和" },
     labels: ["open_chain_partition_sum"],
+    lean: ["Ising2D.open_chain_partition_sum"],
     statement: [
       paragraph([
         ref("def_open_chain_spin_energy"),
@@ -3319,6 +3330,7 @@ D_0G
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 7 },
     title: { text: "両端のスピンの積を掛けた1次元開鎖のスピン和" },
     labels: ["open_chain_endpoint_product_sum"],
+    lean: ["Ising2D.open_chain_endpoint_product_sum", "Ising2D.prod_bondSpin_eq_first_mul_last", "Ising2D.prod_bondSpin_of_two", "Ising2D.prod_bondSpin_of_ge_three", "Ising2D.endpoint_mul_exp_openChainEnergy_eq_prod"],
     statement: [
       paragraph([
         ref("def_open_chain_spin_energy"),
@@ -3545,6 +3557,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 7 },
     title: { text: "1次元開鎖の二つのスピン和の正値性" },
     labels: ["open_chain_spin_sums_positive"],
+    lean: ["Ising2D.open_chain_partition_sum_pos", "Ising2D.open_chain_endpoint_product_sum_pos"],
     statement: [
       paragraph([
         ref("def_open_chain_spin_energy"),
@@ -3617,6 +3630,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`\left(V_1^{(+)}\right)^{1/2} \text{ の平方根性}` },
     labels: ["V1_plus_square_root_property"],
+    lean: ["Ising2D.V1_plus_square_root_property", "Ising2D.c_add_c_eq_I_mul"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -3763,6 +3777,7 @@ c+c
 = \left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}} + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}} > 0`,
     },
     labels: ["trace_of_epsilon_V_plus"],
+    lean: ["Ising2D.trace_of_epsilon_V_plus", "Ising2D.trace_epsilon_VPlusOfTransfer_pos", "Ising2D.trace_epsilon_VPlusOfTransfer_closed_form", "Ising2D.closed_form_of_trace_epsilon_V_plus_pos", "Ising2D.spin_sums_combination_eq_closed_form", "Ising2D.finite_sum_of_negated_constant_real", "Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums", "Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2", "Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2", "Ising2D.finite_sum_over_spinConf_of_real_scalar_multiples", "Ising2D.trace_eq_sum_configBasisIso", "Ising2D.matExp_openChainD0_mul_epsilon_mul_V2_apply_self", "Ising2D.matExp_openChainD0_mul_boundaryG_mul_V2_apply_self", "Ising2D.trace_epsilon_VPlusOfTransfer", "Ising2D.I_mul_smul_H1plus", "Ising2D.commute_openChainD0_epsilon_mul_boundaryG", "Ising2D.openChainD0_mul_smul_epsilon_mul_boundaryG", "Ising2D.smul_epsilon_mul_boundaryG_mul_smul_openChainD0", "Ising2D.epsilon_mul_smul_openChainD0", "Ising2D.pow_two_mul_of_sq_eq_one", "Ising2D.pow_two_mul_add_one_of_pow_two_mul_eq_one", "Ising2D.pow_two_mul_add_one_of_sq_eq_one", "Ising2D.smul_pow_tensorPow", "Ising2D.V1plus_eq_exp_openChainD0_mul_exp", "Ising2D.smul_epsilon_mul_boundaryG_pow_of_even", "Ising2D.smul_epsilon_mul_boundaryG_pow_of_odd", "Ising2D.exp_epsilon_mul_boundaryG", "Ising2D.epsilon_mul_V1plus", "Ising2D.basisVec_apply_eq_prod", "Ising2D.basisVec_configBasisIso_apply", "Ising2D.mulVec_basisVec_configBasisIso_apply", "Ising2D.openChainD0_apply_configBasisIso", "Ising2D.boundaryG_apply_configBasisIso", "Ising2D.eq_diagonal_of_apply_configBasisIso", "Ising2D.openChainD0_eq_diagonal", "Ising2D.boundaryG_eq_diagonal", "Ising2D.smul_openChainD0_eq_diagonal", "Ising2D.matExp_smul_openChainD0", "Ising2D.matExp_smul_openChainD0_apply", "Ising2D.mul_apply_configBasisIso_of_single_nonzero", "Ising2D.matExp_smul_openChainD0_apply_of_ne", "Ising2D.boundaryG_apply_configBasisIso_of_ne", "Ising2D.boundaryG_apply_configBasisIso_self", "Ising2D.epsilon_mulVec_basisVec_configBasisIso", "Ising2D.epsilon_apply_configBasisIso_col", "Ising2D.epsilon_apply_configBasisIso_of_ne", "Ising2D.epsilon_apply_configBasisIso_neg_self", "Ising2D.V2_apply_configBasisIso_self", "Ising2D.V2_apply_configBasisIso_neg_self"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -4566,6 +4581,7 @@ V_1^{(+)}
 \mathrm{im}\,\check{Q}_{(1,\dots,1)} \subseteq \mathcal{F}^{(+)}`,
     },
     labels: ["max_eigenvector_in_even_sector"],
+    lean: ["Ising2D.max_eigenvector_in_even_sector", "Ising2D.vPlusDataOf_eta_univ_eq_one", "Ising2D.neg_one_pow_mul_neg_one_pow", "Ising2D.card_le_of_finset", "Ising2D.CheckFermi.eta_eq_neg_one_pow_sub_card", "Ising2D.CheckFermi.eta_eq_neg_one_pow_add_card", "Ising2D.CheckFermi.epsilon_mul_Qproj_eq_neg_one_pow_add_card", "Ising2D.CheckFermi.epsilon_eq_neg_one_pow_smul_parityProd", "Ising2D.eigenspace_VPlus_max_subset_evenSector"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -4869,6 +4885,7 @@ V_1^{(+)}
       tex: String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0 \text{ から } \mathrm{im}\,\check{Q}_{(1,\dots,1)} \subseteq \mathcal{F}^{(+)}`,
     },
     labels: ["max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus"],
+    lean: ["Ising2D.max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
