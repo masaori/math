@@ -24,6 +24,7 @@
 import Ising2DLambda.RealEscape.PeriodicDensityModeMaxLimit
 import Ising2DLambda.RealEscape.OnsagerHyperbolicIntegralRewrite
 import Ising2DLambda.KacWard.PartitionLogOrderBounds
+import Ising2DLambda.RealEscape.OpenSquareLimitPeriodicDensity
 
 namespace Ising2DLambda.RealEscape
 
@@ -44,12 +45,25 @@ theorem periodicFreeEnergyDensity_eq_dispersionIntegral_of_modeLimits
     (q : ℚ) (hq0 : 0 < q) (hq1 : q < 1)
     (hmode : ∀ s : SpinStructure,
       Tendsto (modeLogDensity data q s) atTop (𝓝 (dispersionIntegral q hq0 hq1))) :
-    periodicFreeEnergyDensity q = dispersionIntegral q hq0 hq1 :=
-  periodicFreeEnergyDensity_eq_of_modeLimits data z hz4 q hq0 hq1 (dispersionIntegral q hq0 hq1)
-    -- 鎖: claim_partition_log_order_bounds
-    (fun L _ => partitionLogOrderBounds (L := L) data z hz4 q hq0 hq1)
-    -- 四つのモード和の極限: claim_shifted_mode_riemann_sums
-    hmode
+    periodicFreeEnergyDensity q = dispersionIntegral q hq0 hq1 := by
+  obtain ⟨I, _, hOpen⟩ :=
+    openSquare_realLimit_eq_periodicFreeEnergyDensity_of_le_one hq0 (le_of_lt hq1)
+  have hPeriodicLimit :
+      Tendsto (fun L => realizeRational (periodicDensitySequence q L)) atTop
+        (𝓝 (dispersionIntegral q hq0 hq1)) :=
+    tendsto_realizeRational_periodicDensitySequence q (dispersionIntegral q hq0 hq1)
+      (fun _ _ => signedEvenSubgraphAbsMax_pos data z hz4 q hq0 hq1)
+      (fun L _ => partitionLogOrderBounds (L := L) data z hz4 q hq0 hq1)
+      (tendsto_scaledLogAbsMax_of_modeLimits data z hz4 q hq0 hq1
+        (dispersionIntegral q hq0 hq1) hmode)
+  have hPeriodicSup : sSup (periodicRealizedLowerSet q) = dispersionIntegral q hq0 hq1 := by
+    exact (sequence_lowerSet_sup_eq_realLimit (periodicDensitySequence q)
+      (dispersionIntegral q hq0 hq1) hPeriodicLimit).2.2
+  calc
+    periodicFreeEnergyDensity q = I := hOpen
+    _ = sSup (periodicRealizedLowerSet q) :=
+      hOpen.symm.trans (periodicFreeEnergyDensity_eq_sSup q)
+    _ = dispersionIntegral q hq0 hq1 := hPeriodicSup
 
 /-- `claim_onsager_hyperbolic_integral_form` の合成: `c_q = cosh(2K_q)`、`s_q = sinh(2K_q)`、`H_q > 0`、
 `f^per(q) = log_ℝ 2 + log_ℝ r + (1/8π²)∫∫ log_ℝ H_q`。 -/

@@ -108524,10 +108524,10 @@ b
                     math(String.raw`e:=\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\ell_2)\in\Lambda_{\mathbb Q}`),
                     "、", math(String.raw`c:=\rho(e)\in\mathbb R`), " と置く。",
                     "任意の ", math(String.raw`\mu,\nu\in\Lambda_{\mathbb Q}`), " について、",
-                    ref("def_rational_log_order_group_realization"), " の有限和を項ごとに足すと ",
-                    math(String.raw`\rho(\mu+\nu)=\rho(\mu)+\rho(\nu)`), " であり、",
-                    "符号反転については",
+                    "有限和を項ごとに足すと",
                   ]),
+                  displayMath(String.raw`\rho(\mu+\nu)=\rho(\mu)+\rho(\nu)\qquad(\because\ \blkref{def_rational_log_order_group_realization}\text{ の有限和と }\blkref{def_rational_log_order_group}\text{ の加法})`),
+                  paragraph(["符号反転については"]),
                   displayMath(String.raw`\begin{aligned}
 \rho(-\mu)
 &=\rho((-1)\cdot\mu)
@@ -109508,6 +109508,54 @@ f^{\mathrm{per}}(q)
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_real_escape_claim_open_square_real_limit_eq_periodic_density",
+              focus: {
+                id: "real_escape_claim_open_square_real_limit_eq_periodic_density",
+                kind: "claim",
+                title: { text: "開境界密度の実数極限は周期境界密度に等しい" },
+                labels: ["claim_open_square_real_limit_eq_periodic_density"],
+                habitat: "R",
+                realEscape: "連続極限。可算な開境界密度の列を実数へ実現して極限を取り、下組の実現像の上限を介して周期境界密度と同定する。",
+                verification: ["sagemath/check/open-square-real-limit-periodic-density"],
+                lean: [
+                  "Ising2DLambda.RealEscape.openSquare_realLimit_eq_periodicFreeEnergyDensity_of_le_one",
+                  "Ising2DLambda.NecSuf.RealEscape.sequence_lowerSet_isLUB_necSuf",
+                  "Ising2DLambda.RealEscape.openSquare_realLimit_eq_periodicFreeEnergyDensity_of_le_one_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`q\in\mathbb Q`), "、",
+                    math(String.raw`0<q\le1`), " について、開境界正方形の密度の列 ",
+                    math(String.raw`\Psi^{\mathrm{op}}_L(q)\in\Lambda_{\mathbb Q}`),
+                    " の実現像は、ある ", math(String.raw`J_q\in\mathbb R`),
+                    " に収束し、", math(String.raw`f^{\mathrm{per}}(q)=J_q`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_realized_log_order_cauchy_has_real_limit"),
+                    " を開境界正方形の密度の列に適用し、極限 ",
+                    math(String.raw`J_q\in\mathbb R`), " を取る。",
+                    ref("claim_sequence_lower_set_sup_eq_real_limit"),
+                    " をこの列と ", math(String.raw`J_q`), " に適用する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+f^{\mathrm{per}}(q)
+&=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))
+&&(\because\ \blkref{def_periodic_free_energy_density_le_one})\\
+&=\sup\rho_{\mathbb R}(A^{\mathrm{op}}(q))
+&&(\because\ \blkref{claim_periodic_density_lower_set_eq_open_square_le_one})\\
+&=J_q
+&&(\because\ \blkref{claim_sequence_lower_set_sup_eq_real_limit}\text{ と }\blkref{def_open_square_density_lower_set})
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_real_escape_theorem_periodic_density_onsager_integral",
               focus: {
                 id: "real_escape_theorem_periodic_density_onsager_integral",
@@ -109612,6 +109660,13 @@ f^{\mathrm{per}}(q)
 &=I_q
 &&\bigl(\because\ \blkref{claim_sequence_lower_set_sup_eq_real_limit}\text{ と }\blkref{def_periodic_density_lower_set}\bigr).
 \end{aligned}`),
+                  paragraph([
+                    ref("claim_open_square_real_limit_eq_periodic_density"),
+                    " の開境界正方形の実数極限を ", math(String.raw`J_q\in\mathbb R`),
+                    " と書くと、同じ ", math(String.raw`f^{\mathrm{per}}(q)`),
+                    " に等しい。上の等式と合わせて ", math(String.raw`J_q=I_q`),
+                    " であり、可算側の Cauchy 性から得た極限が積分の値に接続した。",
+                  ]),
                 ],
               },
             },

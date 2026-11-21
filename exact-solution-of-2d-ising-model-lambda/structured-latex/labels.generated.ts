@@ -389,6 +389,7 @@ export const ALL_LABELS = [
   "claim_open_square_multiple_side_subsquare_density_error_bound",
   "claim_open_square_non_multiple_side_density_lower_vs_base_side_le_one",
   "claim_open_square_non_multiple_side_density_upper_vs_base_side_le_one",
+  "claim_open_square_real_limit_eq_periodic_density",
   "claim_open_square_subsquare_comparison_density_le_one",
   "claim_open_square_subsquare_comparison_log_le_one",
   "claim_open_square_subsquare_comparison_rational_le_one",
