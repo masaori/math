@@ -55,7 +55,7 @@ theorem checkZY_row_eq_rowMul_checkPmat_inv (P : IsingParam) (hM : M ≠ 0) (μ 
       = rowMul (checkZ M μ, checkY M μ) (checkPmat P.const M μ * (checkPmat P.const M μ)⁻¹) := by
         rw [Matrix.mul_nonsing_inv _ hdet, rowMul_one]                  -- `P̌_μ P̌_μ^{-1} = I`、`(A_0, B_0) I = (A_0, B_0)`
     _ = rowMul (rowMul (checkZ M μ, checkY M μ) (checkPmat P.const M μ)) (checkPmat P.const M μ)⁻¹ :=
-        (rowMul_rowMul _ _ _).symm                                      -- 結合法則
+        (rowMul_rowMul _ _ _).symm                                      -- 結合律
     _ = rowMul (checkPsiDag P.const M μ, checkPsi P.const M μ) (checkPmat P.const M μ)⁻¹ := by
         rw [checkPsi_row_eq_rowMul_checkPmat]                           -- `ψ̌_μ^†, ψ̌_μ` の定義
 

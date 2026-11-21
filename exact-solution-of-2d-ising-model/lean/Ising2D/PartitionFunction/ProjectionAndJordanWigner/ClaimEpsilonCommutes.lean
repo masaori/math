@@ -29,7 +29,7 @@
   その `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` への適用 `commute_V1_epsProjPlus` /
   `commute_V2_epsProjPlus` / `commute_V1plus_epsProjPlus` / `commute_V1plusHalf_epsProjPlus`
   （人手の `epsilon_projector_commutes_with_V1` / `_V2` / `_V1_plus` / `_V1_plus_square_root`）。
-  人手の一般の主張は 9 行の鎖（分配法則・単位行列・スカラー倍の出し入れを 1 行ずつ）だが、
+  人手の一般の主張は 9 行の鎖（分配律・単位行列・スカラー倍の出し入れを 1 行ずつ）だが、
   Lean の `commute_epsProjPlus_of_commute_epsilon` はまだ鎖と 1 対 1 ではない。
 
 符号引数つきの一般形（`epsilon_commute_H1` / `epsilon_commute_V1pm` / `epsilon_commute_V1pmHalf`、

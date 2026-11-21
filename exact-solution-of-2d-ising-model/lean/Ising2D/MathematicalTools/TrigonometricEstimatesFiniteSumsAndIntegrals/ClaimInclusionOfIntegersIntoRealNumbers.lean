@@ -321,7 +321,7 @@ theorem finite_sum_of_constant_real_number_succ (m : ℕ) (r : ℝ) :
         = (∑ _j : Fin (m + 1), r) + r := Fin.sum_univ_castSucc (fun _ => r)  -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}`
       _ = ((m + 1 : ℕ) : ℝ) * r + r := by rw [ih]                          -- 帰納法の仮定
       _ = ((m + 1 : ℕ) : ℝ) * r + 1 * r := by rw [one_mul]                 -- `1_ℝ` は `ℝ` の乗法の単位元
-      _ = (((m + 1 : ℕ) : ℝ) + 1) * r := (add_mul _ _ _).symm              -- `ℝ` の分配法則
+      _ = (((m + 1 : ℕ) : ℝ) + 1) * r := (add_mul _ _ _).symm              -- `ℝ` の分配律
       _ = ((m + 1 + 1 : ℕ) : ℝ) * r := by rw [inclusion_zz_to_rr_succ (m + 1)]
                                                                            -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`（`n → m`）を右辺から左辺へ
 
@@ -346,7 +346,7 @@ theorem power_of_two_in_integers_is_at_least_one (M : ℕ) : 1 ≤ 2 ^ M := by
   | succ M ih =>
     calc 2 ^ (M + 1) = 2 ^ M * 2 := Nat.pow_succ 2 M                         -- `def_power_of_integer` の `a^{m+1} := a^ma`
       _ = 2 ^ M * (1 + 1) := rfl                                           -- `2_ℤ := 1_ℤ + 1_ℤ`
-      _ = 2 ^ M * 1 + 2 ^ M * 1 := Nat.mul_add _ _ _                       -- `ℤ` の分配法則
+      _ = 2 ^ M * 1 + 2 ^ M * 1 := Nat.mul_add _ _ _                       -- `ℤ` の分配律
       _ = 2 ^ M + 2 ^ M := by rw [Nat.mul_one]                             -- `1_ℤ` は乗法の単位元を二か所へ同時に
       _ ≥ 1 + 2 ^ M := Nat.add_le_add_right ih _                           -- 帰納法の仮定 `2^M ≥ 1` の両辺に `2^M` を足す
       _ ≥ 1 + 1 := Nat.add_le_add_left ih _                                -- 帰納法の仮定 `2^M ≥ 1` の両辺に `1` を足す
@@ -363,13 +363,13 @@ theorem inclusion_zz_to_rr_of_power_of_two (M : ℕ) : ((2 ^ M : ℕ) : ℝ) = (
   | succ M ih =>
     calc ((2 ^ (M + 1) : ℕ) : ℝ) = ((2 ^ M * 2 : ℕ) : ℝ) := by rw [Nat.pow_succ]  -- `def_power_of_integer` の `a^{m+1} := a^ma`
       _ = ((2 ^ M * (1 + 1) : ℕ) : ℝ) := rfl                               -- `2_ℤ := 1_ℤ + 1_ℤ`
-      _ = ((2 ^ M * 1 + 2 ^ M * 1 : ℕ) : ℝ) := by rw [Nat.mul_add]         -- `ℤ` の分配法則
+      _ = ((2 ^ M * 1 + 2 ^ M * 1 : ℕ) : ℝ) := by rw [Nat.mul_add]         -- `ℤ` の分配律
       _ = ((2 ^ M + 2 ^ M : ℕ) : ℝ) := by rw [Nat.mul_one]                 -- `1_ℤ` は乗法の単位元を二か所へ同時に
       _ = ((2 ^ M : ℕ) : ℝ) + ((2 ^ M : ℕ) : ℝ) :=
           inclusion_zz_to_rr_preserves_sum_of_nonnegatives _ _             -- `inclusion_zz_to_rr_preserves_sum_of_nonnegatives`（`a, b → 2^M`）
       _ = (2 : ℝ) ^ M + (2 : ℝ) ^ M := by rw [ih]                          -- 帰納法の仮定を二か所へ同時に
       _ = (2 : ℝ) ^ M * 1 + (2 : ℝ) ^ M * 1 := by rw [mul_one]             -- `1_ℝ` は `ℝ` の乗法の単位元を二か所へ同時に
-      _ = (2 : ℝ) ^ M * (1 + 1) := (mul_add _ _ _).symm                    -- `ℝ` の分配法則
+      _ = (2 : ℝ) ^ M * (1 + 1) := (mul_add _ _ _).symm                    -- `ℝ` の分配律
       _ = (2 : ℝ) ^ M * 2 := by rw [one_add_one_eq_two]                    -- `2_ℝ := 1_ℝ + 1_ℝ`
       _ = (2 : ℝ) ^ (M + 1) := (pow_succ _ _).symm                         -- `def_power_of_real_number` の `a^{m+1} := a^ma`（`a → 2_ℝ`, `m → M`）を右辺から左辺へ
 

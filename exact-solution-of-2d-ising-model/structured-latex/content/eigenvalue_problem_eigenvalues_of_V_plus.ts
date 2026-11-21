@@ -6696,7 +6696,7 @@ x &= Ix
  - \gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
    \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)\bigl(1 - \tfrac12\bigr),\ b_j \to \gamma(\tilde\theta_j)\bigl(\epsilon_j - \tfrac12\bigr)\bigr)\ \text{を右辺から左辺へ}\right) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\Bigl(1 - \tfrac12\Bigr) - \Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
-   \quad (\because \mathbb{R}\text{ の分配法則を各項へ同時適用}) \\
+   \quad (\because \mathbb{R}\text{ の分配律を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(1 - \epsilon_\mu\Bigr)
    \quad (\because \mathbb{R}\text{ で }\bigl(1 - \tfrac12\bigr) - \bigl(\epsilon_\mu - \tfrac12\bigr) = 1 - \epsilon_\mu\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}r_\mu
@@ -6718,7 +6718,7 @@ x &= Ix
  - \gamma(\tilde\theta_\mu)\Bigl(0 - \tfrac12\Bigr)\Bigr)
    \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)\bigl(\epsilon_j - \tfrac12\bigr),\ b_j \to \gamma(\tilde\theta_j)\bigl(0 - \tfrac12\bigr)\bigr)\ \text{を右辺から左辺へ}\right) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\Bigl(\epsilon_\mu - \tfrac12\Bigr) - \Bigl(0 - \tfrac12\Bigr)\Bigr)
-   \quad (\because \mathbb{R}\text{ の分配法則を各項へ同時適用}) \\
+   \quad (\because \mathbb{R}\text{ の分配律を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\,\epsilon_\mu
    \quad (\because \mathbb{R}\text{ で }\bigl(\epsilon_\mu - \tfrac12\bigr) - \bigl(0 - \tfrac12\bigr) = \epsilon_\mu\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}w_\mu
@@ -6858,7 +6858,7 @@ x &= Ix
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\cdot\tfrac12
    \quad (\because \blkref{real_one_minus_half_is_half}\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \tfrac12\,\gamma(\tilde\theta_\mu)
-   \quad (\because \mathbb{R}\text{ の積の交換法則を各項へ同時適用}) \\
+   \quad (\because \mathbb{R}\text{ の積の交換律を各項へ同時適用}) \\
 &= \frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
    \quad \left(\because \blkref{finite_sum_of_real_scalar_multiples}\ \bigl(m \to M_{\mathrm{col}},\ c \to \tfrac12,\ j \to \mu,\ x_\mu \to \gamma(\tilde\theta_\mu)\bigr)\right)
 \end{aligned}`,
@@ -6872,7 +6872,7 @@ x &= Ix
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\cdot\Bigl(-\tfrac12\Bigr)
    \quad (\because \mathbb{R}\text{ で }0 - \tfrac12 = -\tfrac12\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}} \Bigl(-\tfrac12\Bigr)\gamma(\tilde\theta_\mu)
-   \quad (\because \mathbb{R}\text{ の積の交換法則を各項へ同時適用}) \\
+   \quad (\because \mathbb{R}\text{ の積の交換律を各項へ同時適用}) \\
 &= \Bigl(-\frac{1}{2}\Bigr)\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
    \quad \left(\because \blkref{finite_sum_of_real_scalar_multiples}\ \bigl(m \to M_{\mathrm{col}},\ c \to -\tfrac12,\ j \to \mu,\ x_\mu \to \gamma(\tilde\theta_\mu)\bigr)\right) \\
 &= -\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)
@@ -7161,7 +7161,7 @@ x &= Ix
  - \gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
    \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)\bigl(1 - \tfrac12\bigr),\ b_j \to \gamma(\tilde\theta_j)\bigl(\epsilon_j - \tfrac12\bigr)\bigr)\ \text{を右辺から左辺へ}\right) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\Bigl(1 - \tfrac12\Bigr) - \Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
-   \quad (\because \mathbb{R}\text{ の分配法則を各項へ同時適用}) \\
+   \quad (\because \mathbb{R}\text{ の分配律を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(1 - \epsilon_\mu\Bigr)
    \quad (\because \mathbb{R}\text{ で }\bigl(1 - \tfrac12\bigr) - \bigl(\epsilon_\mu - \tfrac12\bigr) = 1 - \epsilon_\mu\text{ を各項へ同時適用}) \\
 &= \sum_{\mu=1}^{M_{\mathrm{col}}}a_\mu

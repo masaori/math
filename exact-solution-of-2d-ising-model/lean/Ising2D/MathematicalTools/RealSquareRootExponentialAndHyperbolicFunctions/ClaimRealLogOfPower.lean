@@ -65,7 +65,7 @@ theorem real_log_of_power {a : ℝ} (ha : 0 < a) :
         _ = (n : ℝ) * Real.log a + 1 * Real.log a := by rw [one_mul]
                                         -- ℝ の乗法の単位元
         _ = ((n : ℝ) + 1) * Real.log a := (add_mul _ _ _).symm
-                                        -- ℝ の分配法則
+                                        -- ℝ の分配律
         _ = ((n + 1 : ℕ) : ℝ) * Real.log a := by rw [inclusion_zz_to_rr_succ n]
                                         -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1` を右辺から左辺へ
 

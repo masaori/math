@@ -225,7 +225,7 @@ theorem gval_lt_gval_univ (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (hgpo
       _ = ∑ j : Fin M, g (checkIdxOfFin j)
             * ((1 - 1 / 2) - ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2)) :=
           Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm
-                                                        -- ℝ の分配法則を各項へ同時適用
+                                                        -- ℝ の分配律を各項へ同時適用
       _ = ∑ j : Fin M, g (checkIdxOfFin j) * (1 - (if checkIdxOfFin j ∈ T then (1 : ℝ) else 0)) :=
           Finset.sum_congr rfl fun j _ => by ring
                                                         -- ℝ で `(1 - 1/2) - (ε_μ - 1/2) = 1 - ε_μ` を各項へ同時適用

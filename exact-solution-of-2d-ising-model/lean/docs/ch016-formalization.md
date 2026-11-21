@@ -58,7 +58,7 @@
 | `Ising2D.lie_checkX_checkPsi` | `[X̌, ψ̌_μ] = -γ(θ̃_μ) ψ̌_μ` | 同 準備 5 と Step 2' |
 | `Ising2D.TCheckVprime_checkPsiDag` / `TCheckVprime_checkPsi`（`ClaimActionTCheckVprime.lean`） | `T_{(V̌')}(ψ̌_μ^†) = e^{+γ}ψ̌_μ^†`, `T_{(V̌')}(ψ̌_μ) = e^{-γ}ψ̌_μ` | **`action_of_T_check_Vprime_on_check_psi`** |
 | `Ising2D.rowMul_one` | `(A_0, B_0) I = (A_0, B_0)` | `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1 の 1 行目 |
-| `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv` | `(Ž_μ, Y̌_μ) = (ψ̌_μ^†, ψ̌_μ) P̌_μ^{-1}`（`P̌_μP̌_μ^{-1} = I`・結合法則・`ψ̌` の定義の 3 行の鎖） | 同 Step 1 |
+| `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv` | `(Ž_μ, Y̌_μ) = (ψ̌_μ^†, ψ̌_μ) P̌_μ^{-1}`（`P̌_μP̌_μ^{-1} = I`・結合律・`ψ̌` の定義の 3 行の鎖） | 同 Step 1 |
 | `Ising2D.checkZ_eq_checkPmat_inv_col` / `checkY_eq_checkPmat_inv_col` | `Ž_μ = q_{11}ψ̌_μ^† + q_{21}ψ̌_μ`、`Y̌_μ = q_{12}ψ̌_μ^† + q_{22}ψ̌_μ` | 同 Step 1 の「すなわち」 |
 | `Ising2D.eq_on_checkZY_of_eq_on_checkPsi` | フェルミオン上の一致を線型性で `Ž, Y̌` へ移す（5 行の鎖を 2 本） | 同 Step 3 |
 | `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv_of_necSuf` | Step 1 の鎖を必要十分版 `NecSuf.eq_rowMul2_of_rowMul2_eq` の特殊化として導いたもの | 同 Step 1 |

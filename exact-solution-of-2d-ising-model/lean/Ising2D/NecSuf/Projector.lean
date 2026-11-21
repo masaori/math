@@ -24,10 +24,10 @@ Lean で抽象化してみると、効いているのは次だけである。
   `P` が `(1 ± e)/2` の形であることすら使わない。つまり「偶奇セクター」という言葉が
   持つ情報のうち、この段で実際に使われているのは**冪等元と可換性**だけである。
 * **対称形の分解（`partition_function_sector_decomposition` の Step 3）**:
-  `B (B V B)^n = (B B V)^n B` は結合法則だけで成り立つ
+  `B (B V B)^n = (B B V)^n B` は結合律だけで成り立つ
   （原文が「結合法則で括り直すだけ」と書いているとおり）。
 * **射影後の対称形における因子の置き換え（`symmetrized_transfer_matrix_on_sectors`）**:
-  `BP = CP` と、`C`, `V` が `P` と可換であること、および結合法則だけで
+  `BP = CP` と、`C`, `V` が `P` と可換であること、および結合律だけで
   `BVB P = CVC P` が成り立つ。射影子の冪等性も、行列であることも使わない。
 -/
 import Mathlib.Algebra.Group.Commute.Defs
@@ -133,7 +133,7 @@ variable {S : Type*} [Semigroup S]
 /-- **人手本文 `symmetrized_transfer_matrix_on_sectors` の必要十分版。**
 
 `BP = CP` かつ `C`, `V` が `P` と可換なら、対称形でも `BVB P = CVC P` となる。
-証明に効いているのはこの三つの関係と結合法則だけである。 -/
+証明に効いているのはこの三つの関係と結合律だけである。 -/
 theorem sandwich_mul_proj_eq {B C V P : S} (hBP : B * P = C * P)
     (hCP : Commute C P) (hVP : Commute V P) :
     B * V * B * P = C * V * C * P := by

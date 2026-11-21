@@ -1297,7 +1297,7 @@ K_1^*&=-\frac12\log(\tanh K_1)
 &=\frac{\frac1{\tanh K_1}-\tanh K_1}{2}
 &&\left(\because\ \exp(-2K_1^*)=\tanh K_1\right)\\
 &=\frac12\left(\frac1{\tanh K_1}-\tanh K_1\right)
-&&\left(\because\ \mathbb{R}\text{ の分配法則}\right)
+&&\left(\because\ \mathbb{R}\text{ の分配律}\right)
 \end{aligned}`),
       paragraph(["一方、倍角の双曲線正弦は定義から"]),
       displayMath(String.raw`\begin{aligned}
@@ -1450,7 +1450,7 @@ K_2^*&=-\frac12\log(\tanh K_2)
 &=\frac{\frac1{\tanh K_2}-\tanh K_2}{2}
 &&\left(\because\ \exp(-2K_2^*)=\tanh K_2\right)\\
 &=\frac12\left(\frac1{\tanh K_2}-\tanh K_2\right)
-&&\left(\because\ \mathbb{R}\text{ の分配法則}\right)
+&&\left(\because\ \mathbb{R}\text{ の分配律}\right)
 \end{aligned}`),
       paragraph(["一方、倍角の双曲線正弦は定義から"]),
       displayMath(String.raw`\begin{aligned}

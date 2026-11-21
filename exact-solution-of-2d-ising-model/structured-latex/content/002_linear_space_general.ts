@@ -2235,7 +2235,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
 &= \sum_{a=1}^{r}\sum_{b=1}^{s} (X_{a,b})_{ik}
 &&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\text{ を各 }a\text{ へ同時適用}\bigr)\\
 &= \sum_{b=1}^{s}\sum_{a=1}^{r} (X_{a,b})_{ik}
-&&\bigl(\because\ \mathbb{C}\ \text{の加法の結合法則・交換法則による有限和の順序交換。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&&\bigl(\because\ \mathbb{C}\ \text{の加法の結合律・交換律による有限和の順序交換。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \sum_{b=1}^{s}\Bigl(\sum_{a=1}^{r} X_{a,b}\Bigr)_{ik}
 &&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\text{ を右辺から左辺へ、各 }b\text{ へ同時適用}\bigr)\\
 &= \Bigl(\sum_{b=1}^{s}\sum_{a=1}^{r} X_{a,b}\Bigr)_{ik}
@@ -2574,7 +2574,7 @@ X - (-Y)
 &&\bigl(\because\ \mathbb{C}\text{ の有限和の分配律 }\textstyle\sum_l cx_l=c\sum_l x_l\text{ を全ての }(j,k)\text{ の 2 箇所へ同時適用}\bigr)\\
 &= \sum_{j=1}^{r}\sum_{k=1}^{s}(a_jb_k)\Bigl(\sum_{l=1}^{n} (X_j)_{pl}(W_k)_{lq}
  + \sum_{l=1}^{n} (W_k)_{pl}(X_j)_{lq}\Bigr)
-&&\bigl(\because\ \mathbb{C}\text{ の分配法則 }ca+cb=c(a+b)\text{。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&&\bigl(\because\ \mathbb{C}\text{ の分配律 }ca+cb=c(a+b)\text{。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \sum_{j=1}^{r}\sum_{k=1}^{s}(a_jb_k)\bigl((X_jW_k)_{pq} + (W_kX_j)_{pq}\bigr)
 &&\bigl(\because\ \blkref{mat_mult}\text{ を全ての項へ同時適用}\bigr)\\
 &= \sum_{j=1}^{r}\sum_{k=1}^{s}(a_jb_k)\,(X_jW_k + W_kX_j)_{pq}

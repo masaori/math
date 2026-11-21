@@ -4485,7 +4485,7 @@ V' W
 &= V'(V'^{-1} V)
    \quad (\because W = V'^{-1} V) \\
 &= (V' V'^{-1}) V
-   \quad (\because \text{行列の積の結合法則}) \\
+   \quad (\because \text{行列の積の結合律}) \\
 &= I_{\mathrm{Mat}(2^M,\mathbb{C})}\, V
    \quad (\because V' V'^{-1} = I_{\mathrm{Mat}(2^M,\mathbb{C})}) \\
 &= V
@@ -4528,7 +4528,7 @@ V^{-1}
       displayMath(String.raw`\begin{aligned}
 V'\left(W x W^{-1}\right)V'^{-1}
 &= (V' W)\, x\, (W^{-1} V'^{-1})
-   \quad (\because \text{行列の積の結合法則}) \\
+   \quad (\because \text{行列の積の結合律}) \\
 &= V x V^{-1}
    \quad (\because V = V' W,\ V^{-1} = W^{-1}V'^{-1}) \\
 &= V' x V'^{-1}
@@ -4744,15 +4744,15 @@ n_\mu^2
 &= (\psi_\mu^\dagger\psi_{-\mu})(\psi_\mu^\dagger\psi_{-\mu})
 &&\bigl(\because\ \text{フェルミオン数演算子 } n_\mu \text{ の定義}\bigr)\\
 &= \psi_\mu^\dagger\left(\psi_{-\mu}\psi_\mu^\dagger\right)\psi_{-\mu}
-&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
+&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
 &= \psi_\mu^\dagger\left(I - n_\mu\right)\psi_{-\mu}
 &&\bigl(\because\ \text{(2)}\bigr)\\
 &= \psi_\mu^\dagger\psi_{-\mu} - \psi_\mu^\dagger n_\mu \psi_{-\mu}
-&&\bigl(\because\ \text{行列の積の分配法則}\bigr)\\
+&&\bigl(\because\ \text{行列の積の分配律}\bigr)\\
 &= n_\mu - \psi_\mu^\dagger\left(\psi_\mu^\dagger\psi_{-\mu}\right)\psi_{-\mu}
 &&\bigl(\because\ n_\mu = \psi_\mu^\dagger\psi_{-\mu}\bigr)\\
 &= n_\mu - (\psi_\mu^\dagger)^2\,(\psi_{-\mu})^2
-&&\bigl(\because\ \text{結合法則}\bigr)\\
+&&\bigl(\because\ \text{結合律}\bigr)\\
 &= n_\mu - 0 \cdot 0
 &&\bigl(\because\ \text{(1)}\bigr)\\
 &= n_\mu
@@ -4778,7 +4778,7 @@ n_\mu^2
 &=XY+YX
 && (\because\ \text{反交換子の定義})\\
 &=YX+XY
-&& (\because\ \text{行列の加法の交換法則})\\
+&& (\because\ \text{行列の加法の交換律})\\
 &=[Y,X]_+
 && (\because\ \text{反交換子の定義})
 \end{aligned}`),
@@ -4810,11 +4810,11 @@ A\,n_\nu
 &= (-\psi_\nu^\dagger A)\,\psi_{-\nu}
    \quad (\because A\psi_\nu^\dagger = -\psi_\nu^\dagger A) \\
 &= -\psi_\nu^\dagger\,(A \psi_{-\nu})
-   \quad (\because \text{結合法則}) \\
+   \quad (\because \text{結合律}) \\
 &= -\psi_\nu^\dagger\,(-\psi_{-\nu} A)
    \quad (\because A\psi_{-\nu} = -\psi_{-\nu}A) \\
 &= \psi_\nu^\dagger \psi_{-\nu} A
-   \quad (\because \text{符号の積 } (-1)(-1) = 1 \text{ と結合法則}) \\
+   \quad (\because \text{符号の積 } (-1)(-1) = 1 \text{ と結合律}) \\
 &= n_\nu A
    \quad (\because \text{フェルミオン数演算子 } n_\nu \text{ の定義})
 \end{aligned}`),
@@ -4825,15 +4825,15 @@ n_\mu n_\nu
 &= \left(\psi_\mu^\dagger \psi_{-\mu}\right) n_\nu
    \quad (\because \text{フェルミオン数演算子 } n_\mu \text{ の定義}) \\
 &= \psi_\mu^\dagger\left(\psi_{-\mu} n_\nu\right)
-   \quad (\because \text{結合法則}) \\
+   \quad (\because \text{結合律}) \\
 &= \psi_\mu^\dagger\left(n_\nu \psi_{-\mu}\right)
    \quad (\because \text{(1) を } A = \psi_{-\mu} \text{ へ適用}) \\
 &= \left(\psi_\mu^\dagger n_\nu\right)\psi_{-\mu}
-   \quad (\because \text{結合法則}) \\
+   \quad (\because \text{結合律}) \\
 &= \left(n_\nu \psi_\mu^\dagger\right)\psi_{-\mu}
    \quad (\because \text{(1) を } A = \psi_\mu^\dagger \text{ へ適用}) \\
 &= n_\nu\left(\psi_\mu^\dagger\psi_{-\mu}\right)
-   \quad (\because \text{結合法則}) \\
+   \quad (\because \text{結合律}) \\
 &= n_\nu n_\mu
    \quad (\because \text{フェルミオン数演算子 } n_\mu \text{ の定義})
 \end{aligned}`),
@@ -4866,7 +4866,7 @@ n_\mu n_\nu
 \end{aligned}`),
       paragraph(["帰納段階：", math(String.raw`k \geq 1`), " とし、相異なる ", math(String.raw`k-1`), " 個の添字については主張が成り立つと仮定する。相異なる ", math(String.raw`\mu_1,\dots,\mu_k \in \mathcal{I}`), " を取り、"]),
       displayMath(String.raw`P := R_{\mu_2}^{(e_2)} R_{\mu_3}^{(e_3)}\cdots R_{\mu_k}^{(e_k)}`),
-      paragraph(["とおく。", math(String.raw`\mu_1 \neq \mu_j`), "（", math(String.raw`j = 2,\dots,k`), "）なので ", "〔number_operators_commute〕", " (1) より ", math(String.raw`\psi_{\mu_1}^\dagger`), " と ", math(String.raw`\psi_{-\mu_1}`), " はどの ", math(String.raw`n_{\mu_j}`), " とも可換である。ゆえに単位行列とも可換であることと分配法則から ", math(String.raw`I-n_{\mu_j}`), " とも可換であり、したがって各 ", math(String.raw`R_{\mu_j}^{(e_j)}`), " および積 ", math(String.raw`P`), " とも可換である。同じく ", "〔number_operators_commute〕", " (2) より ", math(String.raw`n_{\mu_1}`), " と ", math(String.raw`P`), " は可換である。"]),
+      paragraph(["とおく。", math(String.raw`\mu_1 \neq \mu_j`), "（", math(String.raw`j = 2,\dots,k`), "）なので ", "〔number_operators_commute〕", " (1) より ", math(String.raw`\psi_{\mu_1}^\dagger`), " と ", math(String.raw`\psi_{-\mu_1}`), " はどの ", math(String.raw`n_{\mu_j}`), " とも可換である。ゆえに単位行列とも可換であることと分配律から ", math(String.raw`I-n_{\mu_j}`), " とも可換であり、したがって各 ", math(String.raw`R_{\mu_j}^{(e_j)}`), " および積 ", math(String.raw`P`), " とも可換である。同じく ", "〔number_operators_commute〕", " (2) より ", math(String.raw`n_{\mu_1}`), " と ", math(String.raw`P`), " は可換である。"]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{tr}\!\left(n_{\mu_1} P\right)
 &= \mathrm{tr}\!\left(\psi_{\mu_1}^\dagger \psi_{-\mu_1} P\right)
@@ -4878,7 +4878,7 @@ n_\mu n_\nu
 &= \mathrm{tr}\!\left(P\,(I - n_{\mu_1})\right)
    \quad (\because \text{数演算子の冪等性 (2)。}\text{〔number\_operator\_idempotent〕}) \\
 &= \mathrm{tr}\!\left(P-P\,n_{\mu_1}\right)
-   \quad (\because \text{分配法則と単位行列の性質}) \\
+   \quad (\because \text{分配律と単位行列の性質}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}(P\,n_{\mu_1})
    \quad (\because \text{トレースの線型性。}\blkref{trace_basic_properties}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}(n_{\mu_1} P)
@@ -4919,7 +4919,7 @@ n_\mu n_\nu
 &= \mathrm{tr}\!\left((I-n_{\mu_1})P\right)
    \quad (\because R_{\mu_1}^{(0)}=I-n_{\mu_1}) \\
 &= \mathrm{tr}\!\left(P-n_{\mu_1}P\right)
-   \quad (\because \text{分配法則と単位行列の性質}) \\
+   \quad (\because \text{分配律と単位行列の性質}) \\
 &= \mathrm{tr}(P)-\mathrm{tr}(n_{\mu_1}P)
    \quad (\because \text{トレースの線型性。}\blkref{trace_basic_properties}) \\
 &= \mathrm{tr}(P)-\frac{1}{2}\,\mathrm{tr}(P)
@@ -4950,7 +4950,7 @@ n_\mu n_\nu
       paragraph(["と定める。ここで ", math(String.raw`R_\mu^{(1)} = n_\mu`), "、", math(String.raw`R_\mu^{(0)} = I - n_\mu`), " は ", "〔trace_of_number_operator_product〕", " の記号であり、因子は ", "〔number_operators_commute〕", " により互いに可換なので、積の順序は問わない。"]),
       paragraph([math(String.raw`Q_\epsilon`), " は、恒等式"]),
       displayMath(String.raw`I = \prod_{\mu \in \mathcal{I}}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)`),
-      paragraph(["の右辺を分配法則で展開したときに現れる項のうち、各 ", math(String.raw`\mu \in \mathcal{I}`), " について因子 ", math(String.raw`R_\mu^{(\epsilon_\mu)}`), " を選んで作られる項である。", math(String.raw`\epsilon_\mu = 1`), " は ", math(String.raw`n_\mu`), " が ", math(String.raw`1`), " として働く側を、", math(String.raw`\epsilon_\mu = 0`), " は ", math(String.raw`0`), " として働く側を選ぶことに当たる（下の (3)）。このとき、"]),
+      paragraph(["の右辺を分配律で展開したときに現れる項のうち、各 ", math(String.raw`\mu \in \mathcal{I}`), " について因子 ", math(String.raw`R_\mu^{(\epsilon_\mu)}`), " を選んで作られる項である。", math(String.raw`\epsilon_\mu = 1`), " は ", math(String.raw`n_\mu`), " が ", math(String.raw`1`), " として働く側を、", math(String.raw`\epsilon_\mu = 0`), " は ", math(String.raw`0`), " として働く側を選ぶことに当たる（下の (3)）。このとき、"]),
       list([[math(String.raw`\text{(1)}\quad Q_\epsilon Q_{\epsilon'} = 0 \quad (\epsilon \neq \epsilon'), \qquad Q_\epsilon^2 = Q_\epsilon`)], [math(String.raw`\text{(2)}\quad \sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} Q_\epsilon = I`)], [math(String.raw`\text{(3)}\quad n_\nu Q_\epsilon = \epsilon_\nu Q_\epsilon \quad (\nu \in \mathcal{I})`)], [math(String.raw`\text{(4)}\quad \mathrm{tr}(Q_\epsilon) = 2^{M-m}, \qquad \dim_{\mathbb{C}} \mathrm{im}\,Q_\epsilon = 2^{M-m}`)], [math(String.raw`\text{(5)}\quad \mathbb{C}^{2^M} = \bigoplus_{\epsilon \in \{0,1\}^{\mathcal{I}}} \mathrm{im}\,Q_\epsilon`)]]),
       paragraph(["が成り立つ。とくに ", math(String.raw`m = M`), "（臨界点でない場合）には各 ", math(String.raw`\mathrm{im}\,Q_\epsilon`), " は 1 次元である。"]),
       paragraph(["証明."]),
@@ -4969,7 +4969,7 @@ R_\mu^{(0)}R_\mu^{(0)}
 &= (I-n_\mu)^2
    \quad (\because R_\mu^{(0)} = I - n_\mu \text{ の定義と冪の記法}) \\
 &= I - 2n_\mu + n_\mu^2
-   \quad (\because \text{分配法則と、単位行列との積}) \\
+   \quad (\because \text{分配律と、単位行列との積}) \\
 &= I - 2n_\mu + n_\mu
    \quad (\because \text{上に引いた } n_\mu^2 = n_\mu) \\
 &= I - n_\mu
@@ -4982,7 +4982,7 @@ R_\mu^{(1)}R_\mu^{(0)}
 &= n_\mu(I - n_\mu)
    \quad (\because R_\mu^{(1)},\ R_\mu^{(0)} \text{ の定義}) \\
 &= n_\mu - n_\mu^2
-   \quad (\because \text{分配法則と、単位行列との積}) \\
+   \quad (\because \text{分配律と、単位行列との積}) \\
 &= n_\mu - n_\mu
    \quad (\because \text{上に引いた } n_\mu^2 = n_\mu) \\
 &= 0
@@ -4993,7 +4993,7 @@ R_\mu^{(0)}R_\mu^{(1)}
 &= (I - n_\mu)n_\mu
    \quad (\because R_\mu^{(0)},\ R_\mu^{(1)} \text{ の定義}) \\
 &= n_\mu - n_\mu^2
-   \quad (\because \text{分配法則と、単位行列との積}) \\
+   \quad (\because \text{分配律と、単位行列との積}) \\
 &= n_\mu - n_\mu
    \quad (\because \text{上に引いた } n_\mu^2 = n_\mu) \\
 &= 0
@@ -5028,13 +5028,13 @@ Q_\epsilon^2
 &= Q_\epsilon
    \quad (\because Q_\epsilon\text{ の定義})
 \end{aligned}`),
-      paragraph(["Step 2（(2) の証明）。Step 0 の ", math(String.raw`R_\mu^{(1)} + R_\mu^{(0)} = I`), " を各因子に代入し、可換な有限個の因子の積を分配法則で展開すると"]),
+      paragraph(["Step 2（(2) の証明）。Step 0 の ", math(String.raw`R_\mu^{(1)} + R_\mu^{(0)} = I`), " を各因子に代入し、可換な有限個の因子の積を分配律で展開すると"]),
       displayMath(String.raw`\begin{aligned}
 I
 &= \prod_{\mu \in \mathcal{I}}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
    \quad (\because \text{Step 0 の }R_\mu^{(1)}+R_\mu^{(0)}=I) \\
 &= \sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} \prod_{\mu \in \mathcal{I}} R_\mu^{(\epsilon_\mu)}
-   \quad (\because \text{有限積を分配法則で展開}) \\
+   \quad (\because \text{有限積を分配律で展開}) \\
 &= \sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} Q_\epsilon
    \quad (\because Q_\epsilon\text{ の定義})
 \end{aligned}`),
@@ -5078,10 +5078,10 @@ Q_\epsilon
 &= \left(\prod_{\mu \in T} n_\mu\right)\prod_{\mu \in \mathcal{I}\setminus T}(I - n_\mu)
    \quad (\because R_\mu^{(1)},\,R_\mu^{(0)}\text{ の定義})
 \end{aligned}`),
-      paragraph(["である。第 2 の積を分配法則で展開すると"]),
+      paragraph(["である。第 2 の積を分配律で展開すると"]),
       displayMath(String.raw`\prod_{\mu \in \mathcal{I}\setminus T}(I - n_\mu)
 = \sum_{S \subseteq \mathcal{I}\setminus T} (-1)^{|S|} \prod_{\mu \in S} n_\mu
-\quad (\because \text{有限積を分配法則で展開})`),
+\quad (\because \text{有限積を分配律で展開})`),
       paragraph(["であるから、トレースの線型性（", ref("trace_basic_properties"), " (1)）と ", "〔trace_of_number_operator_product〕", "（", math(String.raw`T`), " と ", math(String.raw`S`), " は交わらないので ", math(String.raw`T \cup S`), " の元は相異なる ", math(String.raw`|T| + |S|`), " 個）より"]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{tr}(Q_\epsilon)
@@ -5173,7 +5173,7 @@ y_\epsilon, & \epsilon=\epsilon'
 X Q_\epsilon
 &= \sum_{\mu \in \mathcal{I}} \gamma(\theta_\mu)
    \left(n_\mu Q_\epsilon - \tfrac{1}{2} Q_\epsilon\right)
-   \quad (\because \text{〔def\_number\_operator〕}\text{ と行列の積の分配法則}) \\
+   \quad (\because \text{〔def\_number\_operator〕}\text{ と行列の積の分配律}) \\
 &= \sum_{\mu \in \mathcal{I}} \gamma(\theta_\mu)
    \left(\epsilon_\mu Q_\epsilon - \tfrac{1}{2} Q_\epsilon\right)
    \quad (\because \text{〔joint\_eigenspace\_decomposition〕}\text{ (3)}) \\
@@ -5186,7 +5186,7 @@ X Q_\epsilon
       displayMath(String.raw`\begin{aligned}
 X^{k+1}Q_\epsilon
 &= X\left(X^k Q_\epsilon\right)
-   \quad (\because \text{冪の定義 } X^{k+1} = X X^k \text{ と行列の積の結合法則}) \\
+   \quad (\because \text{冪の定義 } X^{k+1} = X X^k \text{ と行列の積の結合律}) \\
 &= X\left(g(\epsilon)^k Q_\epsilon\right)
    \quad (\because \text{帰納法の仮定}) \\
 &= g(\epsilon)^k\left(X Q_\epsilon\right)
@@ -5198,7 +5198,7 @@ X^{k+1}Q_\epsilon
       displayMath(String.raw`\begin{aligned}
 E_K Q_\epsilon
 &= \sum_{k=0}^{K}\frac{1}{k!}X^k Q_\epsilon
-   \quad (\because E_K \text{ の定義と行列の積の分配法則}) \\
+   \quad (\because E_K \text{ の定義と行列の積の分配律}) \\
 &= \sum_{k=0}^{K}\frac{1}{k!}\,g(\epsilon)^k Q_\epsilon
    \quad (\because \text{Step 2 を各項へ適用}) \\
 &= \left(\sum_{k=0}^{K}\frac{g(\epsilon)^k}{k!}\right) Q_\epsilon
@@ -5647,15 +5647,15 @@ g(0,\dots,0)
       displayMath(String.raw`\begin{aligned}
 \left(Z_mY_m\right)Z_j
 &= Z_m\left(Y_mZ_j\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Z_m\left(-Z_jY_m\right)
    &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (m \neq j)) \\
 &= -\left(Z_mZ_j\right)Y_m
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -\left(-Z_jZ_m\right)Y_m
    &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (m \neq j)) \\
 &= Z_j\left(Z_mY_m\right)
-   &&(\because -(-1) = 1 \text{ の符号の消去と行列の積の結合法則})
+   &&(\because -(-1) = 1 \text{ の符号の消去と行列の積の結合律})
 \end{aligned}`),
       paragraph(["すなわち ", math(String.raw`[Z_mY_m, Z_j] = 0`), "（符号が 2 回反転して戻る）。", math(String.raw`m = j`), " の項は、", math(String.raw`Y_jZ_j = -Z_jY_j`), " と ", math(String.raw`Z_jZ_j = I`), "（", ref("anticommutator_of_Z_and_Y"), " で ", math(String.raw`\mu=\nu=j`), " とすると ", math(String.raw`2Z_j^2 = 2I`), "）より"]),
       displayMath(String.raw`\begin{aligned}
@@ -5663,11 +5663,11 @@ g(0,\dots,0)
 &= \left(Z_jY_j\right)Z_j - Z_j\left(Z_jY_j\right)
    &&(\because \text{交換子の定義}) \\
 &= Z_j\left(Y_jZ_j\right) - \left(Z_jZ_j\right)Y_j
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Z_j\left(-Z_jY_j\right) - \left(Z_jZ_j\right)Y_j
    &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_jZ_j = -Z_jY_j)) \\
 &= -\left(Z_jZ_j\right)Y_j - \left(Z_jZ_j\right)Y_j
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -I\,Y_j - I\,Y_j
    &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_jZ_j = I)) \\
 &= -2Y_j

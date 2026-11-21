@@ -24,7 +24,7 @@
 - 写像 `e` で効くのは狭義単調性（`hmono`）だけである。`e` の正値性、`e(0) = 1`、`e(a + b) = e(a)e(b)`、
   級数で定義されていること、連続性・極限・完備性は効いていない。
 - 値域 `R` で効くのは、加法と順序の両立（両辺に同じ元を加える、正の元の和は正。`AddLeftStrictMono R`）、
-  右分配法則 `ac − bc = (a − b)c` と分子の並べ替え（`Ring R`）、正の元どうしの積が正であること（`PosMulStrictMono R`）だけである。
+  右分配律 `ac − bc = (a − b)c` と分子の並べ替え（`Ring R`）、正の元どうしの積が正であること（`PosMulStrictMono R`）だけである。
   全順序、右から掛ける側の単調性、`0 < 1`、非自明性は効いていない。
 - 具体版の `/2` は、正の元 `k` を掛けることとしてしか効いていない。`2` の逆元であること（`2·k = 1`）は使わない
   （`HyperbolicBasicPropertiesFromMonotoneMap.lean` の `⅟2` と違い、約分の段が無いため）。乗法の可換律も効いていない。
@@ -70,7 +70,7 @@ theorem oddPart_strictly_increasing' {G R : Type*} [Ring G] [PartialOrder G] [Ad
         = (e y - e (-y)) * k - (e x - e (-x)) * k := by rw [hs y, hs x]
                                                         -- 定義を 2 箇所へ
       _ = ((e y - e (-y)) - (e x - e (-x))) * k := (sub_mul _ _ _).symm
-                                                        -- 分母の等しい分数の差（右分配法則）
+                                                        -- 分母の等しい分数の差（右分配律）
       _ = ((e y - e x) + (e (-x) - e (-y))) * k := by congr 1; abel
                                                         -- 分子の項の並べ替え
       _ > 0 := mul_pos h3 hk                            -- 正の元に正の `k` を掛けると正

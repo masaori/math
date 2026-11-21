@@ -238,11 +238,11 @@ BB
 &= \left(B V_2 B\right)^{n}
    \quad (\because V^{(\pm)}\text{ の定義}) \\
 &= B\,\underbrace{(V_2 B B)(V_2 BB)\cdots(V_2BB)}_{n-1 \text{ 個}}\,V_2\,B
-   \quad (\because \text{行列積の結合法則}) \\
+   \quad (\because \text{行列積の結合律}) \\
 &= B\,\left(V_2 V_1^{(\pm)}\right)^{n-1}V_2\,B
    \quad (\because BB=V_1^{(\pm)})
 \end{aligned}`),
-      paragraph(["（結合法則で括り直し、隣接する ", math(String.raw`B\,B = V_1^{(\pm)}`), " をまとめた。）よって ", ref("trace_basic_properties"), " (2) の巡回性と、", ref("epsilon_projector_commutes_with_epsilon_commuting_matrix"), " の鎖（", math(String.raw`P^{(-)}`), " には ", math(String.raw`I+\varepsilon`), " を ", math(String.raw`I-\varepsilon`), " に替えた同じ鎖）による ", math(String.raw`P^{(\pm)}`), " と ", math(String.raw`B`), " の可換性から"]),
+      paragraph(["（結合律で括り直し、隣接する ", math(String.raw`B\,B = V_1^{(\pm)}`), " をまとめた。）よって ", ref("trace_basic_properties"), " (2) の巡回性と、", ref("epsilon_projector_commutes_with_epsilon_commuting_matrix"), " の鎖（", math(String.raw`P^{(-)}`), " には ", math(String.raw`I+\varepsilon`), " を ", math(String.raw`I-\varepsilon`), " に替えた同じ鎖）による ", math(String.raw`P^{(\pm)}`), " と ", math(String.raw`B`), " の可換性から"]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{tr}\!\left(P^{(\pm)}\left(V^{(\pm)}\right)^{n}\right)
 &= \mathrm{tr}\!\left(P^{(\pm)}B\left(V_2V_1^{(\pm)}\right)^{n-1}V_2B\right)
@@ -254,7 +254,7 @@ BB
 &= \mathrm{tr}\!\left(P^{(\pm)}V_1^{(\pm)}\left(V_2V_1^{(\pm)}\right)^{n-1}V_2\right)
    \quad (\because BB = V_1^{(\pm)}) \\
 &= \mathrm{tr}\!\left(P^{(\pm)}\left(V_1^{(\pm)}V_2\right)^{n}\right)
-   \quad (\because \text{行列積の結合法則})
+   \quad (\because \text{行列積の結合律})
 \end{aligned}`),
       paragraph(["Step 4（結論）。Step 1〜3 を合わせて"]),
       displayMath(String.raw`\bigl(Z(K_1,K_2)\bigr)_{\mathbb{C}}

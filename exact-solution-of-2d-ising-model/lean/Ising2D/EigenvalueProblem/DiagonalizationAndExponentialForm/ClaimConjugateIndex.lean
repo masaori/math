@@ -86,7 +86,7 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
         rw [div_eq_mul_inv (2 * Real.pi * (((M : ℤ) : ℝ) + -((μ : ℝ) - 1 / 2)))]
                                                   -- 16 行目: `def_real_quotient`
     _ = (2 * Real.pi * ((M : ℤ) : ℝ) + 2 * Real.pi * -((μ : ℝ) - 1 / 2)) * ((M : ℤ) : ℝ)⁻¹ := by
-        rw [mul_add (2 * Real.pi)]                -- 17 行目: ℝ の分配法則
+        rw [mul_add (2 * Real.pi)]                -- 17 行目: ℝ の分配律
     _ = 2 * Real.pi * ((M : ℤ) : ℝ) * ((M : ℤ) : ℝ)⁻¹ + 2 * Real.pi * -((μ : ℝ) - 1 / 2) * ((M : ℤ) : ℝ)⁻¹ := by
         rw [add_mul (2 * Real.pi * ((M : ℤ) : ℝ)) (2 * Real.pi * -((μ : ℝ) - 1 / 2))]
                                                   -- 18 行目: ℝ の右からの分配律
@@ -110,13 +110,13 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
                                                   -- 26 行目: `def_real_difference`（`y → 2π`, `z → θ~_μ`）を右辺から左辺へ
 
 /-- **(2) の準備の第一の鎖**（実数の側）: `j_ℝ θ~_{M+1-μ} = 2π j_ℝ + (-(j_ℝ θ~_μ))`。
-人手の 4 行（直前の (1)、ℝ の分配法則、ℝ の積の交換律、ℝ の差は加法の逆元の和）に 1 段ずつ対応する。 -/
+人手の 4 行（直前の (1)、ℝ の分配律、ℝ の積の交換律、ℝ の差は加法の逆元の和）に 1 段ずつ対応する。 -/
 theorem conj_index_exponent_real_chain (hM : M ≠ 0) (k μ : ℤ) :
     (k : ℝ) * thetaTilde M ((M : ℤ) + 1 - μ)
       = 2 * Real.pi * (k : ℝ) + (-((k : ℝ) * thetaTilde M μ)) :=
   calc (k : ℝ) * thetaTilde M ((M : ℤ) + 1 - μ)
       = (k : ℝ) * (2 * Real.pi - thetaTilde M μ) := by rw [thetaTilde_conj hM μ]  -- 直前の (1)
-    _ = (k : ℝ) * (2 * Real.pi) - (k : ℝ) * thetaTilde M μ := mul_sub _ _ _      -- ℝ の分配法則
+    _ = (k : ℝ) * (2 * Real.pi) - (k : ℝ) * thetaTilde M μ := mul_sub _ _ _      -- ℝ の分配律
     _ = 2 * Real.pi * (k : ℝ) - (k : ℝ) * thetaTilde M μ := by
         rw [mul_comm (k : ℝ) (2 * Real.pi)]                                       -- ℝ の積の交換律
     _ = 2 * Real.pi * (k : ℝ) + (-((k : ℝ) * thetaTilde M μ)) := sub_eq_add_neg _ _ -- ℝ の差は加法の逆元の和
@@ -177,7 +177,7 @@ theorem checkPhase_conj' (hM : M ≠ 0) (k μ : ℤ) :
     _ = Complex.exp ((-Complex.I)
           * (((2 * Real.pi * (k : ℝ) : ℝ) : ℂ) + ((-((k : ℝ) * thetaTilde M μ) : ℝ) : ℂ))) := by
         rw [real_inclusion_add]
-      -- (∵ ℂ の分配法則)
+      -- (∵ ℂ の分配律)
     _ = Complex.exp ((-Complex.I) * ((2 * Real.pi * (k : ℝ) : ℝ) : ℂ)
           + (-Complex.I) * ((-((k : ℝ) * thetaTilde M μ) : ℝ) : ℂ)) := by
         rw [mul_add]

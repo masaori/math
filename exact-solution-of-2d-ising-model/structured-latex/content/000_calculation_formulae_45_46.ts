@@ -50,7 +50,7 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        "鎖が引く 3 つの主張（行列の積の結合法則と、単位行列を左右から掛けること）は、どれもその行列の大きさをすべてこの主張の ",
+        "鎖が引く 3 つの主張（行列の積の結合律と、単位行列を左右から掛けること）は、どれもその行列の大きさをすべてこの主張の ",
         math("n"),
         " として使う。",
       ]),
@@ -234,10 +234,10 @@ T_B(I)
         String.raw`\begin{aligned}
 [ab, c]
 &= (ab)c - c(ab) &&\bigl(\because \text{交換子の定義}\bigr) \\
-&= abc - cab &&\bigl(\because \text{行列の積の結合法則}\bigr) \\
+&= abc - cab &&\bigl(\because \text{行列の積の結合律}\bigr) \\
 &= abc + acb - acb - cab &&\bigl(\because\ acb - acb = O\bigr) \\
-&= a(bc + cb) - acb - cab &&\bigl(\because \text{行列の積の分配法則}\bigr) \\
-&= a(bc + cb) - (ac + ca)b &&\bigl(\because \text{行列の積の分配法則}\bigr) \\
+&= a(bc + cb) - acb - cab &&\bigl(\because \text{行列の積の分配律}\bigr) \\
+&= a(bc + cb) - (ac + ca)b &&\bigl(\because \text{行列の積の分配律}\bigr) \\
 &= a[b, c]_+ - [a, c]_+ b &&\bigl(\because \text{反交換子の定義}\bigr)
 \end{aligned}`,
       ),

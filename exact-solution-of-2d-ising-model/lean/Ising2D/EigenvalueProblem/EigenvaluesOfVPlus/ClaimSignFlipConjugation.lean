@@ -868,7 +868,7 @@ theorem Uflip_conj_pow (S : TensorPow M) (k : ℕ) :
       _ = (Uflip M * S * UflipInv M) ^ (k + 1) := (pow_succ _ _).symm
 
 /-- 人手本文 `constant_c_value_even_sector` Step 2 の「共役は行列の積・和・スカラー倍を保ち」を
-`def_exp` の部分和 `∑_{k<n} (k!)^{-1} S^k` に当てたもの（和を保つのは分配法則 `Uflip_conj_sum`）。
+`def_exp` の部分和 `∑_{k<n} (k!)^{-1} S^k` に当てたもの（和を保つのは分配律 `Uflip_conj_sum`）。
 必要十分版は `NecSuf.conj_partialSum_of_inv`。 -/
 theorem Uflip_conj_expPartialSum (S : TensorPow M) (n : ℕ) :
     Uflip M * (∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • S ^ k) * UflipInv M

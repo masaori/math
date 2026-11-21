@@ -12,7 +12,7 @@
 2. 単位的: `T_B(I) = I`
 3. 合成則: `T_A ∘ T_B = T_{A B}`
 
-を満たす。原文はこれらを行列積の結合法則と `B B⁻¹ = B⁻¹ B = I` から直接示している。
+を満たす。原文はこれらを行列積の結合律と `B B⁻¹ = B⁻¹ B = I` から直接示している。
 
 ## 人手証明と 1 対 1 に対応する具体版
 
@@ -65,8 +65,8 @@ theorem T_eq_conjAct_smul (B : Rˣ) (A : R) : T B A = ConjAct.toConjAct B • A 
 
 /-- **(1) 乗法的**（一般の環の単元）: `T_B(A C) = T_B(A) T_B(C)`。
 
-結合法則と `B⁻¹ B = I` を挿し込む計算だけで示す（mathlib の群作用の一般論には委ねない）。
-`simp` で結合法則をまとめて使うので、人手の鎖と 1 段ずつは対応しない。1 対 1 の具体版は節 `ComplexMatrixChains` の `conj_mul_matrix`。 -/
+結合律と `B⁻¹ B = I` を挿し込む計算だけで示す（mathlib の群作用の一般論には委ねない）。
+`simp` で結合律をまとめて使うので、人手の鎖と 1 段ずつは対応しない。1 対 1 の具体版は節 `ComplexMatrixChains` の `conj_mul_matrix`。 -/
 theorem T_mul (B : Rˣ) (A C : R) : T B (A * C) = T B A * T B C := by
   calc T B (A * C) = (B : R) * A * C * ((B⁻¹ : Rˣ) : R) := by
         simp only [T, mul_assoc]
@@ -79,7 +79,7 @@ theorem T_one (B : Rˣ) : T B (1 : R) = 1 := by
   rw [T, mul_one, B.mul_inv]
 
 /-- 加法性（原文は明示していないが、「環準同型」であるために必要）。
-分配法則だけで従う。 -/
+分配律だけで従う。 -/
 theorem T_add (B : Rˣ) (A C : R) : T B (A + C) = T B A + T B C := by
   simp only [T, mul_add, add_mul]
 

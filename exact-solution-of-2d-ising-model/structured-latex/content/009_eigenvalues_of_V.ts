@@ -90,9 +90,9 @@ export default defineBlocks([
 &= \sum_{k=1}^{n} \bigl(\alpha A_{kk} + \beta B_{kk}\bigr)
 &&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= \sum_{k=1}^{n} \alpha A_{kk} + \sum_{k=1}^{n} \beta B_{kk}
-&&(\because \mathbb{C}\ \text{の加法の結合法則・交換法則による有限和の並べ替え。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because \mathbb{C}\ \text{の加法の結合律・交換律による有限和の並べ替え。}\blkref{complex_numbers_form_a_field}) \\
 &= \alpha \sum_{k=1}^{n} A_{kk} + \beta \sum_{k=1}^{n} B_{kk}
-&&(\because \mathbb{C}\ \text{の分配法則。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because \mathbb{C}\ \text{の分配律。}\blkref{complex_numbers_form_a_field}) \\
 &= \alpha\,\mathrm{tr}(A) + \beta\,\mathrm{tr}(B)
 &&(\because \blkref{def_trace})
 \end{aligned}`,
@@ -106,9 +106,9 @@ export default defineBlocks([
 &= \sum_{k=1}^{n}\sum_{j=1}^{n} A_{kj}B_{jk}
 &&(\because \blkref{mat_mult}) \\
 &= \sum_{k=1}^{n}\sum_{j=1}^{n} B_{jk}A_{kj}
-&&(\because \mathbb{C}\ \text{の積の交換法則。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because \mathbb{C}\ \text{の積の交換律。}\blkref{complex_numbers_form_a_field}) \\
 &= \sum_{j=1}^{n}\sum_{k=1}^{n} B_{jk}A_{kj}
-&&(\because \mathbb{C}\ \text{の加法の結合法則・交換法則による有限和の順序交換。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because \mathbb{C}\ \text{の加法の結合律・交換律による有限和の順序交換。}\blkref{complex_numbers_form_a_field}) \\
 &= \sum_{j=1}^{n} (BA)_{jj}
 &&(\because \blkref{mat_mult}) \\
 &= \mathrm{tr}(BA)

@@ -37,10 +37,10 @@
   `finite_sum_of_scalar_multiples`・`scalar_multiple_is_associative`・`finite_double_sum_of_matrices_interchange`・
   `finite_sum_of_scalar_multiples_of_one_matrix`・`finite_sum_of_matrices_with_single_nonzero_term` の行も具体版が無く、
   mathlib の `Finset.smul_sum`・`smul_smul`・`Finset.sum_comm`・`Finset.sum_smul`・`Finset.sum_eq_single_of_mem` で表す。
-* 準備 2 の 2 本の鎖が実際に使うのは、実数の鎖では環の等式（`-(yx) = (-y)x`、分配法則、差は加法の逆元の和。可換性は使わない）と
+* 準備 2 の 2 本の鎖が実際に使うのは、実数の鎖では環の等式（`-(yx) = (-y)x`、分配律、差は加法の逆元の和。可換性は使わない）と
   `ℤ` からの環準同型が差を保つこと（`x` は任意の実数でよく、ℝ の順序・完備性は使わない）、複素数の鎖では `(-i)z = -(iz)` と
   `i(-θ)_ℂ = -(iθ_ℂ)`（既存の主張の具体版 2 本。後者の中で ℂ の積の交換律を 1 回と、包含が積を保つこと
-  `real_inclusion_mul` を使う）、分配法則、包含が和を保つこと（`real_inclusion_add`）だけである。
+  `real_inclusion_mul` を使う）、分配律、包含が和を保つこと（`real_inclusion_add`）だけである。
   2 本の鎖ごとの必要十分版は置かない。主張全体の必要十分版 `inverse_dft_antiperiodic` が、位相を `ξ` の冪と抽象し、
   読みの段（`checkPhase` を `exp` の形に直す段）と `scalar_exp_product` と準備 2 の 2 本の鎖を `ξ` の冪の指数の足し算
   1 段に吸収しているからである（具体版の calc の 3 段が必要十分版の 1 段に当たる。ほかの段は同じ順で対応する）。
@@ -70,7 +70,7 @@ theorem recover_exponent_real_chain (k l : ℤ) (x : ℝ) :
     (k : ℝ) * x + (-((l : ℝ) * x)) = ((k - l : ℤ) : ℝ) * x :=
   calc (k : ℝ) * x + (-((l : ℝ) * x))
       = (k : ℝ) * x + (-(l : ℝ)) * x := by rw [real_negation_times_is_negation_of_product]  -- `real_negation_times_is_negation_of_product`（文字を `p, q` に替え `p → k_ℝ`、`q → x`）を右辺から左辺へ
-    _ = ((k : ℝ) + (-(l : ℝ))) * x := (add_mul _ _ _).symm                  -- ℝ の分配法則
+    _ = ((k : ℝ) + (-(l : ℝ))) * x := (add_mul _ _ _).symm                  -- ℝ の分配律
     _ = ((k : ℝ) - (l : ℝ)) * x := by rw [← sub_eq_add_neg]                 -- ℝ の差は加法の逆元の和
     _ = ((k - l : ℤ) : ℝ) * x := by rw [inclusion_zz_to_rr_preserves_difference k l]
                                                                            -- `inclusion_zz_to_rr_preserves_difference`（`a → j_ℤ`, `b → k_ℤ`）を右辺から左辺へ
@@ -87,7 +87,7 @@ theorem recover_exponent_complex_chain {a b c : ℝ} (h : a + (-b) = c) :
         rw [neg_I_mul_eq_neg_of_I_mul]                                        -- `negative_i_times_complex_is_negation_of_i_times`
     _ = Complex.I * (a : ℂ) + Complex.I * ((-b : ℝ) : ℂ) := by
         rw [I_mul_real_neg_eq_neg_I_mul]                                      -- `i_times_negated_real_is_negation_of_i_times`（右辺から左辺へ）
-    _ = Complex.I * ((a : ℂ) + ((-b : ℝ) : ℂ)) := (mul_add _ _ _).symm        -- ℂ の分配法則
+    _ = Complex.I * ((a : ℂ) + ((-b : ℝ) : ℂ)) := (mul_add _ _ _).symm        -- ℂ の分配律
     _ = Complex.I * ((a + (-b) : ℝ) : ℂ) := by
         rw [real_inclusion_add]                                               -- `real_inclusion_preserves_sum`
     _ = Complex.I * (c : ℂ) := by rw [h]                                      -- 直前の実数の鎖

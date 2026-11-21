@@ -9,7 +9,7 @@
 | 人手 | Lean |
 | --- | --- |
 | `a = b ⇒ a^2 = b^2`（`a^2` の `a` へ `a = b` を代入する） | `positive_real_square_injective` の `mpr`（`rw [h]`） |
-| `(a-b)(a+b)` から `0` までの 8 行の鎖（分配法則 2 回・乗法の交換法則・打ち消し・`square_of_real_number_is_product`（`r → a`、`r → b`）・`a^2 = b^2`・`b^2 − b^2 = 0`） | `factor_difference_of_squares_eq_zero` の `calc` の 8 段 |
+| `(a-b)(a+b)` から `0` までの 8 行の鎖（分配律 2 回・乗法の交換律・打ち消し・`square_of_real_number_is_product`（`r → a`、`r → b`）・`a^2 = b^2`・`b^2 − b^2 = 0`） | `factor_difference_of_squares_eq_zero` の `calc` の 8 段 |
 | `a + b > 0`、`a + b ≠ 0`、ℝ は整域で `a - b = 0`、`b` を加えて `a = b` の 4 行 | `hpos`・`hne`・`hsub`・最後の行 |
 
 - 人手の二乗は `def_power_of_real_number` の冪（`m = 2`）で、Lean の `a ^ 2`（`Monoid.npow`）である。積の形は
@@ -27,9 +27,9 @@ namespace Ising2D
 theorem factor_difference_of_squares_eq_zero {a b : ℝ} (h : a ^ 2 = b ^ 2) :
     (a - b) * (a + b) = 0 :=
   calc (a - b) * (a + b)
-      = (a - b) * a + (a - b) * b := mul_add (a - b) a b                      -- ℝ の分配法則
-    _ = (a * a - b * a) + (a * b - b * b) := by rw [sub_mul a b a, sub_mul a b b]  -- ℝ の分配法則
-    _ = (a * a - a * b) + (a * b - b * b) := by rw [mul_comm b a]             -- ℝ の乗法の交換法則 `b a = a b`
+      = (a - b) * a + (a - b) * b := mul_add (a - b) a b                      -- ℝ の分配律
+    _ = (a * a - b * a) + (a * b - b * b) := by rw [sub_mul a b a, sub_mul a b b]  -- ℝ の分配律
+    _ = (a * a - a * b) + (a * b - b * b) := by rw [mul_comm b a]             -- ℝ の乗法の交換律 `b a = a b`
     _ = a * a - b * b := sub_add_sub_cancel (a * a) (a * b) (b * b)           -- `-ab` と `ab` が打ち消し合う
     _ = a ^ 2 - b * b := by rw [square_of_real_number_is_product a]           -- `square_of_real_number_is_product`（`r → a`）を右辺から左辺へ
     _ = a ^ 2 - b ^ 2 := by rw [square_of_real_number_is_product b]           -- `square_of_real_number_is_product`（`r → b`）を右辺から左辺へ

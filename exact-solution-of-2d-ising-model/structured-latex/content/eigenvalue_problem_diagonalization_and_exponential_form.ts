@@ -1551,7 +1551,7 @@ Q_{s+1}
 &= \Bigl(2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
    &&\bigl(\because\ \blkref{def_real_quotient}\bigr) \\
 &= \Bigl(2\pi(M_{\mathrm{col}})_{\mathbb R}+2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
-   &&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr) \\
+   &&\bigl(\because\ \mathbb R\text{ の分配律}\bigr) \\
 &= \Bigl(2\pi(M_{\mathrm{col}})_{\mathbb R}\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}+\Bigl(2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
    &&\bigl(\because\ \mathbb R\text{ の右からの分配律}\bigr) \\
 &= 2\pi\Bigl((M_{\mathrm{col}})_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}^{-1}\Bigr)+\Bigl(2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
@@ -1583,7 +1583,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
 &= j_{\mathbb R}\left(2\pi - \tilde\theta_\mu\right)
    &&(\because\ \text{直前の (1)}) \\
 &= j_{\mathbb R}\cdot2\pi - j_{\mathbb R}\tilde\theta_\mu
-   &&(\because\ \mathbb R\text{ の分配法則}) \\
+   &&(\because\ \mathbb R\text{ の分配律}) \\
 &= 2\pi j_{\mathbb R} - j_{\mathbb R}\tilde\theta_\mu
    &&(\because\ \mathbb R\text{ の積の交換律}) \\
 &= 2\pi j_{\mathbb R} + \left(-(j_{\mathbb R}\tilde\theta_\mu)\right)
@@ -1641,7 +1641,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
 &= \exp\!\left(-i\left((2\pi j_{\mathbb R})_{\mathbb C} + \left(-(j_{\mathbb R}\tilde\theta_\mu)\right)_{\mathbb C}\right)\right)
    &&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\text{ を }m=2,\ r_1=2\pi j_{\mathbb R},\ r_2=-(j_{\mathbb R}\tilde\theta_\mu)\text{ で。二項の有限和は }\blkref{def_finite_sum_of_complex_numbers}\text{ と }\mathbb R\text{ の有限和の定義で }r_1+r_2\text{ の形に開く}\bigr) \\
 &= \exp\!\left((-i)(2\pi j_{\mathbb R})_{\mathbb C} + (-i)\left(-(j_{\mathbb R}\tilde\theta_\mu)\right)_{\mathbb C}\right)
-   &&(\because\ \mathbb C\text{ の分配法則。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ \mathbb C\text{ の分配律。}\blkref{complex_numbers_form_a_field}) \\
 &= \exp\!\left((-i)(2\pi j_{\mathbb R})_{\mathbb C} + i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\right)
    &&(\because\ \text{準備の第二の鎖}) \\
 &= \exp((-i)(2\pi j_{\mathbb R})_{\mathbb C})\,\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
@@ -1898,13 +1898,13 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
         String.raw`\begin{aligned}
 j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
 &= j_{\mathbb R}\left(\tilde\theta_\mu + \tilde\theta_\nu\right)
-&&(\because\ \mathbb R\text{ の分配法則}) \\
+&&(\because\ \mathbb R\text{ の分配律}) \\
 &= j_{\mathbb R}\left(\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}} + \frac{2\pi\left(\nu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
 &&\bigl(\because\ \tilde\theta\text{ の定義を 2 箇所へ同時適用。}\blkref{antiperiodic_exp_sum}\bigr) \\
 &= j_{\mathbb R}\cdot\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right) + 2\pi\left(\nu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ を分母とする分数の和}) \\
 &= j_{\mathbb R}\cdot\frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right) + \left(\nu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ \mathbb R\text{ の分配法則}) \\
+&&(\because\ \mathbb R\text{ の分配律}) \\
 &= j_{\mathbb R}\cdot\frac{2\pi\left(\left(\mu_{\mathbb R}+\left(-\tfrac12\right)\right)+\left(\nu_{\mathbb R}+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb R\text{ の差は加法の逆元の和を 2 箇所へ同時適用}) \\
 &= j_{\mathbb R}\cdot\frac{2\pi\left(\mu_{\mathbb R}+\left(\left(-\tfrac12\right)+\left(\nu_{\mathbb R}+\left(-\tfrac12\right)\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -1956,7 +1956,7 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
         String.raw`\begin{aligned}
 (-i)(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C} + (-i)(j_{\mathbb R}\tilde\theta_\nu)_{\mathbb C}
 &= (-i)\left((j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C} + (j_{\mathbb R}\tilde\theta_\nu)_{\mathbb C}\right)
-&&(\because\ \mathbb C\text{ の分配法則。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because\ \mathbb C\text{ の分配律。}\blkref{complex_numbers_form_a_field}) \\
 &= (-i)\left(j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu\right)_{\mathbb C}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\text{ を }m=2\text{ で。二項の有限和は }\blkref{def_finite_sum_of_complex_numbers}\text{ と }\mathbb R\text{ の有限和の定義で二項の和の形に開く}\bigr) \\
 &= (-i)\left(-y_j\right)_{\mathbb C}
@@ -2286,7 +2286,7 @@ j_{\mathbb R}x + \left(-(k_{\mathbb R}x)\right)
 &= j_{\mathbb R}x + \left(-k_{\mathbb R}\right)x
 &&(\because\ \blkref{real_negation_times_is_negation_of_product}\ \text{の}\ (-x)t = -(xt)\ \text{を文字を}\ p, q\ \text{に替えた}\ (-p)q = -(pq)\ (p \to k_{\mathbb R},\ q \to x)\ \text{を右辺から左辺へ}) \\
 &= \left(j_{\mathbb R} + \left(-k_{\mathbb R}\right)\right)x
-&&(\because\ \mathbb R\text{ の分配法則}) \\
+&&(\because\ \mathbb R\text{ の分配律}) \\
 &= \left(j_{\mathbb R} - k_{\mathbb R}\right)x
 &&(\because\ \mathbb R\text{ の差は加法の逆元の和}) \\
 &= (j_{\mathbb Z} - k_{\mathbb Z})_{\mathbb R}\,x
@@ -2302,7 +2302,7 @@ i\,(j_{\mathbb R}x)_{\mathbb C} + (-i)(k_{\mathbb R}x)_{\mathbb C}
 &= i\,(j_{\mathbb R}x)_{\mathbb C} + i\left(-(k_{\mathbb R}x)\right)_{\mathbb C}
 &&\bigl(\because\ \blkref{i_times_negated_real_is_negation_of_i_times}\ (\theta \to k_{\mathbb R}x)\text{ を右辺から左辺へ}\bigr) \\
 &= i\left((j_{\mathbb R}x)_{\mathbb C} + \left(-(k_{\mathbb R}x)\right)_{\mathbb C}\right)
-&&(\because\ \mathbb C\text{ の分配法則。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because\ \mathbb C\text{ の分配律。}\blkref{complex_numbers_form_a_field}) \\
 &= i\left(j_{\mathbb R}x + \left(-(k_{\mathbb R}x)\right)\right)_{\mathbb C}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to j_{\mathbb R}x,\ b \to -(k_{\mathbb R}x))\bigr) \\
 &= i\left((j_{\mathbb Z} - k_{\mathbb Z})_{\mathbb R}\,x\right)_{\mathbb C}
@@ -7180,7 +7180,7 @@ g
 &= \frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right)+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ p + q = q + p\ (p \to k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R},\ q \to \mu_{\mathbb R}-\tfrac12)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&(\because\ \mathbb{R}\ \text{の分配法則})\\
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
 &= \Bigl(2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
 &&\bigl(\because\ \blkref{def_real_quotient}\bigr)\\
 &= \Bigl(2\pi\left(\mu_{\mathbb R}-\tfrac12\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}+\Bigl(2\pi\left(k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)\Bigr)(M_{\mathrm{col}})_{\mathbb R}^{-1}
@@ -7660,7 +7660,7 @@ h := 1_{\mathbb C}\,t^{-1}`,
 &= \bigl((uu')\omega + (hh)\omega\bigr)I
 &&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\bigr)\\
 &= \bigl((uu' + hh)\,\omega\bigr)I
-&&\bigl(\because\ \mathbb{C}\text{ の分配法則。}\blkref{complex_numbers_form_a_field}\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の分配律。}\blkref{complex_numbers_form_a_field}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -8040,7 +8040,7 @@ u^{+}_\mu u^{+}_\nu + h\,h
 &= \bigl(1_{\mathbb C}(t\,t)^{-1} + 1_{\mathbb C}(t\,t)^{-1}\bigr)\,\omega
 &&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元を 2 箇所へ同時適用。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \bigl((1_{\mathbb C} + 1_{\mathbb C})(t\,t)^{-1}\bigr)\,\omega
-&&\bigl(\because\ \mathbb{C}\text{ の分配法則。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&&\bigl(\because\ \mathbb{C}\text{ の分配律。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \bigl(2_{\mathbb C}(t\,t)^{-1}\bigr)\,\omega
 &&\bigl(\because\ 1_{\mathbb C} + 1_{\mathbb C} = (1_{\mathbb R} + 1_{\mathbb R}, 0_{\mathbb R}) = 2_{\mathbb C}\ (\blkref{definition_of_cc}\text{ の和})\bigr)\\
 &= \bigl(2_{\mathbb C}(t\,t)^{-1}\bigr)\Bigl(\bigl(2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}\bigr)1_{\mathbb C}\Bigr)

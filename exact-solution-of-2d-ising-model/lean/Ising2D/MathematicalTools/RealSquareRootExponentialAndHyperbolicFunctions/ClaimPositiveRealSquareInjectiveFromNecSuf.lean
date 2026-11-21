@@ -3,7 +3,7 @@
 
 具体版 `ClaimPositiveRealSquareInjective.lean` の `factor_difference_of_squares_eq_zero`・`positive_real_square_injective` の主張を、
 必要十分版 `Ising2D/NecSuf/PositiveSquareInjective.lean` の `NecSuf.factor_difference_of_squares_eq_zero'`・
-`NecSuf.positive_square_injective'` の `R := ℝ` の特殊化として得る。`b a = a b` は ℝ の乗法の交換法則 `mul_comm b a` で与える。
+`NecSuf.positive_square_injective'` の `R := ℝ` の特殊化として得る。`b a = a b` は ℝ の乗法の交換律 `mul_comm b a` で与える。
 人手のラベルは `positive_real_square_injective`。
 -/
 import Ising2D.NecSuf.PositiveSquareInjective

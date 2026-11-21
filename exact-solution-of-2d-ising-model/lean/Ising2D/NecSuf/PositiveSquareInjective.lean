@@ -15,8 +15,8 @@
 
 具体版と同じ手順のまま、係数を次だけを持つ `R` に上げる。
 
-- 環（`Ring`）: 分配法則 2 回（`mul_add`・`sub_mul`）、打ち消し（`sub_add_sub_cancel`）、`b^2 − b^2 = 0`。
-- `b a = a b`（仮定 `hab : Commute b a`）: 3 段目の乗法の交換法則は、この 1 組の元にしか使っていない。
+- 環（`Ring`）: 分配律 2 回（`mul_add`・`sub_mul`）、打ち消し（`sub_add_sub_cancel`）、`b^2 − b^2 = 0`。
+- `b a = a b`（仮定 `hab : Commute b a`）: 3 段目の乗法の交換律は、この 1 組の元にしか使っていない。
   これを外すと `(a-b)(a+b) = a^2 + ab - ba - b^2` で、`-ab` と `ab` の打ち消しの段が通らない。環全体の可換性は効いていない。
 - 冪の定義（`Monoid.npow` の `pow_zero`・`pow_succ`）: 5・6 段目の `sq_eq_mul_self'`（`NecSuf/SquareIsProduct.lean`）。
 - 零因子が無いこと（`NoZeroDivisors`）: 人手の「ℝ は整域」の段。
@@ -33,8 +33,8 @@ namespace Ising2D.NecSuf
 theorem factor_difference_of_squares_eq_zero' {R : Type*} [Ring R] {a b : R} (hab : Commute b a)
     (h : a ^ 2 = b ^ 2) : (a - b) * (a + b) = 0 :=
   calc (a - b) * (a + b)
-      = (a - b) * a + (a - b) * b := mul_add (a - b) a b                      -- 分配法則
-    _ = (a * a - b * a) + (a * b - b * b) := by rw [sub_mul a b a, sub_mul a b b]  -- 分配法則
+      = (a - b) * a + (a - b) * b := mul_add (a - b) a b                      -- 分配律
+    _ = (a * a - b * a) + (a * b - b * b) := by rw [sub_mul a b a, sub_mul a b b]  -- 分配律
     _ = (a * a - a * b) + (a * b - b * b) := by rw [hab.eq]                   -- `b a = a b`（効くのはこの 1 組だけ）
     _ = a * a - b * b := sub_add_sub_cancel (a * a) (a * b) (b * b)           -- `-ab` と `ab` が打ち消し合う
     _ = a ^ 2 - b * b := by rw [sq_eq_mul_self' a]                            -- 二乗は積（`r → a`）を右辺から左辺へ

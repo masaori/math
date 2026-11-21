@@ -24,7 +24,7 @@ Lean の `((partitionFunction … : ℝ) : ℂ)` と同じ）:
   （`RoutesNotAdopted/MinusSector/ClaimSectorReplacementOfV1.lean`）。
 * Step 3（対称形 `(B V_2 B)^n` の解消）→ `trace_epsProj_sym_pow`。
   代数的な核は必要十分版 `Ising2D.NecSuf.mul_pow_conj_left`
-  （`B (B V B)^n = (B B V)^n B`、結合法則のみ）。トレース側で使うのは
+  （`B (B V B)^n = (B B V)^n B`、結合律のみ）。トレース側で使うのは
   巡回性 `Matrix.trace_mul_comm` と `P^{(±)}` が `B` と可換であることだけ。
 * Step 4（結論）→ `partition_function_sector_decomposition`。
 

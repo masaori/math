@@ -178,7 +178,7 @@ theorem gval_le_gval_univ (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (hgpo
       _ = ∑ j : Fin M, g (checkIdxOfFin j)
             * ((1 - 1 / 2) - ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2)) :=
           Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm
-                                                        -- ℝ の分配法則を各項へ同時適用
+                                                        -- ℝ の分配律を各項へ同時適用
       _ = ∑ j : Fin M, g (checkIdxOfFin j) * (1 - (if checkIdxOfFin j ∈ T then (1 : ℝ) else 0)) :=
           Finset.sum_congr rfl fun j _ => by ring
                                                         -- ℝ で `(1 - 1/2) - (ε_μ - 1/2) = 1 - ε_μ` を各項へ同時適用
@@ -219,7 +219,7 @@ theorem gval_empty_le_gval (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (hgp
       _ = ∑ j : Fin M, g (checkIdxOfFin j)
             * (((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2) - (0 - 1 / 2)) :=
           Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm
-                                                        -- ℝ の分配法則を各項へ同時適用
+                                                        -- ℝ の分配律を各項へ同時適用
       _ = ∑ j : Fin M, g (checkIdxOfFin j) * (if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) :=
           Finset.sum_congr rfl fun j _ => by ring
                                                         -- ℝ で `(ε_μ - 1/2) - (0 - 1/2) = ε_μ` を各項へ同時適用
@@ -311,7 +311,7 @@ theorem gval_univ_eq_half_sum (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) :
                                                         -- `real_one_minus_half_is_half` を各項へ同時適用
     _ = ∑ j : Fin M, (1 / 2) * g (checkIdxOfFin j) :=
         Finset.sum_congr rfl fun j _ => mul_comm _ _
-                                                        -- ℝ の積の交換法則を各項へ同時適用
+                                                        -- ℝ の積の交換律を各項へ同時適用
     _ = (1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j) :=
         finite_sum_of_real_scalar_multiples M _ _
                                                         -- `finite_sum_of_real_scalar_multiples`（`m → M_col`、`c → 1/2`、`x_j → γ(θ~_j)`）
@@ -330,7 +330,7 @@ theorem gval_empty_eq_neg_half_sum (F : CheckFermiSetup M) (g : CheckIdx M → �
                                                         -- ℝ で `0 − 1/2 = −1/2` を各項へ同時適用
     _ = ∑ j : Fin M, (-(1 / 2)) * g (checkIdxOfFin j) :=
         Finset.sum_congr rfl fun j _ => mul_comm _ _
-                                                        -- ℝ の積の交換法則を各項へ同時適用
+                                                        -- ℝ の積の交換律を各項へ同時適用
     _ = (-(1 / 2)) * ∑ j : Fin M, g (checkIdxOfFin j) :=
         finite_sum_of_real_scalar_multiples M _ _
                                                         -- `finite_sum_of_real_scalar_multiples`（`m → M_col`、`c → −1/2`、`x_j → γ(θ~_j)`）

@@ -15,7 +15,7 @@
 
 ## 何が効いているか / 効いていないか
 
-- `SS^m = S^mS` は、行列であることも係数も効かず、積の結合法則と単位元だけで通る（任意の `Monoid`）。
+- `SS^m = S^mS` は、行列であることも係数も効かず、積の結合律と単位元だけで通る（任意の `Monoid`）。
 - `(S^m)^⊤ = S^m` で効いているのは、積の転置が転置を逆の順に掛けた積であること（`transpose_mul_matrix'`。係数の**積の交換律**が要る）と、
   単位行列の転置が単位行列であることである。係数の積の交換律は削れない: `S^⊤ = S` のとき
   `((S^2)^⊤)_{kl} = (S^2)_{lk} = Σ_j S_{lj}S_{jk}`、`(S^2)_{kl} = Σ_j S_{kj}S_{jl} = Σ_j S_{jk}S_{lj}` で、係数が非可換なら一般には一致しない
@@ -49,7 +49,7 @@ theorem one_transpose_matrix' {n α : Type*} [DecidableEq n] [Zero α] [One α] 
       _ = if k = l then 1 else 0 := by simp only [eq_comm]           -- `l = k` と `k = l` は同じ条件
       _ = (1 : Matrix n n α) k l := Matrix.one_apply.symm            -- 単位行列の定義
 
-/-- **`SS^m = S^mS`**（具体版 `tensorPow_mul_pow_comm`）。積の結合法則と単位元だけ（任意の `Monoid`）。 -/
+/-- **`SS^m = S^mS`**（具体版 `tensorPow_mul_pow_comm`）。積の結合律と単位元だけ（任意の `Monoid`）。 -/
 theorem mul_pow_comm_self' {R : Type*} [Monoid R] (S : R) (m : ℕ) : S * S ^ m = S ^ m * S := by
   induction m with
   | zero =>

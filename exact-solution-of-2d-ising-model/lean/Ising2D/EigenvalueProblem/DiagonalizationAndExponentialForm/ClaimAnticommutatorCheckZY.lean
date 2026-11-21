@@ -80,7 +80,7 @@ theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
     (k : ℝ) * thetaTilde M μ + (k : ℝ) * thetaTilde M ν
       = -(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ) / ((M : ℤ) : ℝ)) :=
   calc (k : ℝ) * thetaTilde M μ + (k : ℝ) * thetaTilde M ν
-      = (k : ℝ) * (thetaTilde M μ + thetaTilde M ν) := (mul_add _ _ _).symm  -- ℝ の分配法則
+      = (k : ℝ) * (thetaTilde M μ + thetaTilde M ν) := (mul_add _ _ _).symm  -- ℝ の分配律
     _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)
           + 2 * Real.pi * ((ν : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) := by
         rw [thetaTilde, thetaTilde]                                   -- θ~ の定義を 2 箇所へ
@@ -88,7 +88,7 @@ theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
           / ((M : ℤ) : ℝ)) := by
         rw [← add_div]          -- `(M_col)_ℝ ≠ 0` を分母とする分数の和（Lean の `add_div` は `≠ 0` を要しない）
     _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) - 1 / 2) + ((ν : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ)) := by
-        rw [← mul_add]                                                -- ℝ の分配法則
+        rw [← mul_add]                                                -- ℝ の分配律
     _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (-(1 / 2))) + ((ν : ℝ) + (-(1 / 2))))
           / ((M : ℤ) : ℝ)) := by
         rw [sub_eq_add_neg (μ : ℝ), sub_eq_add_neg (ν : ℝ)]           -- 差は加法の逆元の和を 2 箇所へ
@@ -142,7 +142,7 @@ theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
 theorem anticomm_exponent_complex_chain {a b y : ℝ} (h : a + b = -y) :
     (-Complex.I) * (a : ℂ) + (-Complex.I) * (b : ℂ) = Complex.I * (y : ℂ) :=
   calc (-Complex.I) * (a : ℂ) + (-Complex.I) * (b : ℂ)
-      = (-Complex.I) * ((a : ℂ) + (b : ℂ)) := (mul_add _ _ _).symm    -- ℂ の分配法則
+      = (-Complex.I) * ((a : ℂ) + (b : ℂ)) := (mul_add _ _ _).symm    -- ℂ の分配律
     _ = (-Complex.I) * ((a + b : ℝ) : ℂ) := by
         rw [real_inclusion_add]                                       -- `real_inclusion_preserves_finite_sum`（m = 2）
     _ = (-Complex.I) * ((-y : ℝ) : ℂ) := by rw [h]                    -- 直前の実数の鎖

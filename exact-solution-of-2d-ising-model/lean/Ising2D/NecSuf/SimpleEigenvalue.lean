@@ -64,7 +64,7 @@ variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 `T = univ` のときにのみ最大値を取る。
 
 手順は具体版 `gval_lt_gval_univ` と同じ（人手の `ǧ(1,…,1) − ǧ(ε)` の鎖）: 添字を `Fin` へ付け替え、差をとり、
-差の有限和（`finite_sum_sub_fin'`）・分配法則・`(1 - h) - (χ - h) = 1 - χ`・非負の項の有限和は各項以上（`finite_sum_ge_term_fin'`）・
+差の有限和（`finite_sum_sub_fin'`）・分配律・`(1 - h) - (χ - h) = 1 - χ`・非負の項の有限和は各項以上（`finite_sum_ge_term_fin'`）・
 `χ_T(i₀) = 0`・`w_{i₀} > 0` の順に進む。
 
 効いているのは、係数が順序環であること（加法の可換群、乗法の左分配 `mul_sub`、`0 ≤ 1`、`0 ≤ a` かつ `0 ≤ b` なら `0 ≤ ab`、
@@ -99,7 +99,7 @@ theorem sum_weight_lt_of_ne_univ {R : Type*} [Ring R] [PartialOrder R] [IsOrdere
       _ = ∑ j, (w (e j) * (1 - h) - w (e j) * ((if e j ∈ T then (1 : R) else 0) - h)) :=
           (finite_sum_sub_fin' _ _ _).symm              -- 差の有限和を右辺から左辺へ
       _ = ∑ j, w (e j) * ((1 - h) - ((if e j ∈ T then (1 : R) else 0) - h)) :=
-          Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm   -- 分配法則を各項へ
+          Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm   -- 分配律を各項へ
       _ = ∑ j, w (e j) * (1 - (if e j ∈ T then (1 : R) else 0)) :=
           Finset.sum_congr rfl fun j _ => by rw [sub_sub_sub_cancel_right]   -- `(1 - h) - (χ - h) = 1 - χ` を各項へ
       _ ≥ w (e j₀) * (1 - (if e j₀ ∈ T then (1 : R) else 0)) :=
@@ -112,7 +112,7 @@ theorem sum_weight_lt_of_ne_univ {R : Type*} [Ring R] [PartialOrder R] [IsOrdere
 /-- **人手証明 `eigenvalues_of_V_plus` (2) の大小の比較の `ǧ(1,…,1) − ǧ(ε) ≥ 0` の鎖の核**:
 重み `w_i` がすべて非負なら、`∑_i w_i (χ_T(i) - h)` は `T = univ` で最大になる。
 
-手順は具体版 `gval_le_gval_univ` と同じ: 添字を `Fin` へ付け替え、差をとり、差の有限和（`finite_sum_sub_fin'`）・分配法則・
+手順は具体版 `gval_le_gval_univ` と同じ: 添字を `Fin` へ付け替え、差をとり、差の有限和（`finite_sum_sub_fin'`）・分配律・
 `(1 - h) - (χ - h) = 1 - χ`・非負の項の有限和は各項以上（`finite_sum_ge_term_fin'`、`k → 1`）・その項が `0` 以上、の順に進む。
 狭義版 `sum_weight_lt_of_ne_univ` と同じく、係数は順序環でよく `1/2` は任意の元 `h` でよい。
 重みは**非負**で足りる（具体版の `γ(θ~_μ) > 0` の狭義性は効いていない。人手の `r_μ ≥ 0` に要るのは `γ(θ~_μ) ≥ 0` だけである）。
@@ -144,7 +144,7 @@ theorem sum_weight_le_univ {R : Type*} [Ring R] [PartialOrder R] [IsOrderedRing 
       _ = ∑ j, (w (e j) * (1 - h) - w (e j) * ((if e j ∈ T then (1 : R) else 0) - h)) :=
           (finite_sum_sub_fin' _ _ _).symm              -- 差の有限和を右辺から左辺へ
       _ = ∑ j, w (e j) * ((1 - h) - ((if e j ∈ T then (1 : R) else 0) - h)) :=
-          Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm   -- 分配法則を各項へ
+          Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm   -- 分配律を各項へ
       _ = ∑ j, w (e j) * (1 - (if e j ∈ T then (1 : R) else 0)) :=
           Finset.sum_congr rfl fun j _ => by rw [sub_sub_sub_cancel_right]   -- `(1 - h) - (χ - h) = 1 - χ` を各項へ
       _ ≥ w (e j₀) * (1 - (if e j₀ ∈ T then (1 : R) else 0)) :=
@@ -179,7 +179,7 @@ theorem sum_weight_empty_le {R : Type*} [Ring R] [PartialOrder R] [IsOrderedRing
       _ = ∑ j, (w (e j) * ((if e j ∈ T then (1 : R) else 0) - h) - w (e j) * (0 - h)) :=
           (finite_sum_sub_fin' _ _ _).symm              -- 差の有限和を右辺から左辺へ
       _ = ∑ j, w (e j) * (((if e j ∈ T then (1 : R) else 0) - h) - (0 - h)) :=
-          Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm   -- 分配法則を各項へ
+          Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm   -- 分配律を各項へ
       _ = ∑ j, w (e j) * (if e j ∈ T then (1 : R) else 0) :=
           Finset.sum_congr rfl fun j _ => by rw [sub_sub_sub_cancel_right, sub_zero]   -- `(χ - h) - (0 - h) = χ` を各項へ
       _ ≥ w (e j₀) * (if e j₀ ∈ T then (1 : R) else 0) :=

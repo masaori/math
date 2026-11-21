@@ -292,11 +292,11 @@ a=b
       displayMath(String.raw`\begin{aligned}
 (a - b)(a + b)
 &= (a - b)\,a + (a - b)\,b
-&&(\because\ \mathbb{R}\ \text{の分配法則})\\
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
 &= (a\,a - b\,a) + (a\,b - b\,b)
-&&(\because\ \mathbb{R}\ \text{の分配法則})\\
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
 &= (a\,a - a\,b) + (a\,b - b\,b)
-&&(\because\ \mathbb{R}\ \text{の乗法の交換法則}\ b\,a = a\,b)\\
+&&(\because\ \mathbb{R}\ \text{の乗法の交換律}\ b\,a = a\,b)\\
 &= a\,a - b\,b
 &&(\because\ -a\,b\ \text{と}\ a\,b\ \text{が打ち消し合う})\\
 &= a^2 - b\,b
@@ -2376,7 +2376,7 @@ T_B(X - W)
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(m)\, r + 1_{\mathbb{R}}\, r
   &&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\bigr)\\
 &= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(m) + 1_{\mathbb{R}}\bigr)\, r
-  &&\bigl(\because\ \mathbb{R}\ \text{の分配法則}\bigr)\\
+  &&\bigl(\because\ \mathbb{R}\ \text{の分配律}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(m +_{\mathbb{Z}} 1_{\mathbb{Z}})\, r
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ (n \to m)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -2977,7 +2977,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &= c\Bigl(\sum_{j=1}^{m} x_j\Bigr) + c\,x_{m+1}
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= c\Bigl(\Bigl(\sum_{j=1}^{m} x_j\Bigr) + x_{m+1}\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配法則}\ ca + cb = c(a + b)\ \bigl(a \to \textstyle\sum_{j=1}^{m} x_j,\ b \to x_{m+1}\bigr)\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律}\ ca + cb = c(a + b)\ \bigl(a \to \textstyle\sum_{j=1}^{m} x_j,\ b \to x_{m+1}\bigr)\bigr)\\
 &= c\sum_{j=1}^{m+1} x_j
 &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -3208,7 +3208,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &= b_1 + b_2
 &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
 &= b_2 + b_1
-&&\bigl(\because\ \mathbb{R}\ \text{の和の交換法則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の和の交換律}\bigr)\\
 &= b_{\delta^{1}_{1}(1)} + b_1
 &&\bigl(\because\ \delta^{1}_{1}(1) = 2\bigr)\\
 &= \Bigl(\sum_{j=1}^{1} b_{\delta^{1}_{1}(j)}\Bigr) + b_1
@@ -3318,11 +3318,11 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
 &= (s + b_k) + b_{m+2}
 &&\bigl(\because\ s\ \text{の置き方}\bigr)\\
 &= s + (b_k + b_{m+2})
-&&\bigl(\because\ \mathbb{R}\ \text{の和の結合法則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の和の結合律}\bigr)\\
 &= s + (b_{m+2} + b_k)
-&&\bigl(\because\ \mathbb{R}\ \text{の和の交換法則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の和の交換律}\bigr)\\
 &= (s + b_{m+2}) + b_k
-&&\bigl(\because\ \mathbb{R}\ \text{の和の結合法則}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の和の結合律}\bigr)\\
 &= \Bigl(\Bigl(\sum_{j=1}^{m} b_{\delta^{m}_{k}(j)}\Bigr) + b_{m+2}\Bigr) + b_k
 &&\bigl(\because\ s\ \text{の置き方}\bigr)\\
 &= \Bigl(\Bigl(\sum_{j=1}^{m} b_{\delta^{m+1}_{k}(j)}\Bigr) + b_{m+2}\Bigr) + b_k

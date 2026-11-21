@@ -35,7 +35,7 @@
 * `finite_sum_of_negated_real_numbers_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
   人手の 1 行 `real_negation_of_sum_is_sum_of_negations`（文字を `p, q` に替える）を右辺から左辺へ当てる行は、同じ名前の具体版の定理を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_negated_real_numbers`。その段の `-0 = 0` は mathlib の `neg_zero` ではなく `real_negation_of_zero_is_zero`）。
 * `finite_sum_of_real_scalar_multiples_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
-  人手の 1 行「ℝ の分配法則 `ca + cb = c(a + b)`」は mathlib の `mul_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_real_scalar_multiples`）。
+  人手の 1 行「ℝ の分配律 `ca + cb = c(a + b)`」は mathlib の `mul_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_real_scalar_multiples`）。
   有限型の添字の和には、`finite_sum_of_nonnegative_reals_ge_term_fintype` と同じく番号を付けて当てる `finite_sum_of_real_scalar_multiples_fintype` を置く。
 * `finite_sum_of_nonnegative_reals_ge_term_succ` は人手と同じく、`k ≤ m`（Lean の `Fin.castSucc k'`）と `k = m + 1`（`Fin.last`）に分け、
   それぞれ人手の 4 行と 1 対 1 の `calc` にした。`k = m + 1` の前置き `Σ_{j=1}^{m} a_j ≥ a_1 ≥ 0` は帰納法の仮定を `k → 1`（Lean の `0`）で使う。
@@ -267,7 +267,7 @@ theorem finite_sum_of_real_scalar_multiples_succ (m : ℕ) (c : ℝ) (x : Fin (m
       _ = c * (∑ j : Fin (m + 1), x j.castSucc) + c * x (Fin.last _) := by
           rw [ih (fun j => x j.castSucc)]                                     -- 帰納法の仮定
       _ = c * ((∑ j : Fin (m + 1), x j.castSucc) + x (Fin.last _)) :=
-          (mul_add _ _ _).symm                                                -- ℝ の分配法則 `ca + cb = c(a + b)`
+          (mul_add _ _ _).symm                                                -- ℝ の分配律 `ca + cb = c(a + b)`
       _ = c * ∑ j, x j := by rw [Fin.sum_univ_castSucc x]                     -- `def_finite_sum_of_real_numbers` を右辺から左辺へ
 
 /-- **`finite_sum_of_real_scalar_multiples`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
@@ -433,7 +433,7 @@ theorem finite_sum_of_real_numbers_moves_one_term_to_end (n : ℕ) (b : Fin (n +
             Fin.sum_univ_castSucc _                                           -- `def_finite_sum_of_real_numbers`
         _ = b (Fin.castSucc 0) + b (Fin.last 1) := by
             rw [Fin.sum_univ_one]                                             -- `def_finite_sum_of_real_numbers`
-        _ = b (Fin.last 1) + b (Fin.castSucc 0) := add_comm _ _               -- ℝ の和の交換法則
+        _ = b (Fin.last 1) + b (Fin.castSucc 0) := add_comm _ _               -- ℝ の和の交換律
         _ = b (skipIndex (Fin.castSucc (0 : Fin 1)) 0) + b (Fin.castSucc 0) := by
             rw [hδ]                                                           -- `δ^{1}_{1}(1) = 2`
         _ = (∑ j : Fin 1, b (skipIndex (Fin.castSucc (0 : Fin 1)) j)) + b (Fin.castSucc 0) := by
@@ -475,10 +475,10 @@ theorem finite_sum_of_real_numbers_moves_one_term_to_end (n : ℕ) (b : Fin (n +
         _ = ((∑ j : Fin (n + 1), b (skipIndex k' j).castSucc) + b k'.castSucc) + b (Fin.last _) := by
             rw [ih (fun j => b j.castSucc) k']                                -- 帰納法の仮定（`b_1, …, b_{m+1}` と `k`）
         _ = (s + b k'.castSucc) + b (Fin.last _) := rfl                       -- `s` の置き方
-        _ = s + (b k'.castSucc + b (Fin.last _)) := add_assoc _ _ _           -- ℝ の和の結合法則
+        _ = s + (b k'.castSucc + b (Fin.last _)) := add_assoc _ _ _           -- ℝ の和の結合律
         _ = s + (b (Fin.last _) + b k'.castSucc) := by
-            rw [add_comm (b k'.castSucc)]                                     -- ℝ の和の交換法則
-        _ = (s + b (Fin.last _)) + b k'.castSucc := (add_assoc _ _ _).symm    -- ℝ の和の結合法則
+            rw [add_comm (b k'.castSucc)]                                     -- ℝ の和の交換律
+        _ = (s + b (Fin.last _)) + b k'.castSucc := (add_assoc _ _ _).symm    -- ℝ の和の結合律
         _ = ((∑ j : Fin (n + 1), b (skipIndex k' j).castSucc) + b (Fin.last _))
               + b k'.castSucc := rfl                                          -- `s` の置き方
         _ = ((∑ j : Fin (n + 1), b (skipIndex k'.castSucc j.castSucc)) + b (Fin.last _))

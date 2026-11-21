@@ -96,7 +96,7 @@
 | `epsilon_projector_properties` (1)（とノートの `P^{(+)}P^{(-)} = 0`・`P^{(+)} + P^{(-)} = I`） | `Ising2D.epsProjPlus_sq`（一般形 `epsProj_sq` 経由）/ `epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg`（**必要十分版の系として導出済み**） | `Ising2D.NecSuf.invProj_sq` ほか（`NecSuf/Projector.lean`） | 効いているのは **`ε² = I` と `2` が可逆であること**だけ。`ε` が Jordan–Wigner 文字列の積であることも、行列であることも、環が可換であることも効いていない |
 | `epsilon_projector_commutes_with_epsilon_commuting_matrix` | `Ising2D.commute_epsProjPlus_of_commute_epsilon`（**必要十分版の系**） | `Ising2D.NecSuf.commute_invProj` | 「`ε` と可換なら `P^{(+)}` とも可換」に効いているのはスカラー作用と加法の両立則だけ |
 | ノート `sector_replacement_pow` | `Ising2D.sector_replacement_pow`（**必要十分版の系**） | `Ising2D.NecSuf.pow_mul_proj` | 効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」「`V_1P = V_1^{(±)}P`」の 3 点だけ。**`P` が `(I±ε)/2` の形であることすら使わない**。すなわち「偶奇セクター」という言葉のうちこの段で使われている情報は冪等元と可換性だけである |
-| ノート `partition_function_sector_decomposition` Step 3 | `Ising2D.trace_epsProj_sym_pow` | `Ising2D.NecSuf.mul_pow_conj_left` | 対称形 `(BV_2B)^n` の解消は**結合法則だけ**（原文の「結合法則で括り直すだけ」が文字どおり正しい）。トレース側で追加に要るのは巡回性と `P` と `B` の可換性のみで、`B` が `exp` であることは効いていない |
+| ノート `partition_function_sector_decomposition` Step 3 | `Ising2D.trace_epsProj_sym_pow` | `Ising2D.NecSuf.mul_pow_conj_left` | 対称形 `(BV_2B)^n` の解消は**結合律だけ**（原文の「結合法則で括り直すだけ」が文字どおり正しい）。トレース側で追加に要るのは巡回性と `P` と `B` の可換性のみで、`B` が `exp` であることは効いていない |
 
 必要十分版を置かなかった主張とその理由: 本章の主張は上の表のとおり必要十分版を持つか、その系である。
 この章から移した主張のうち、`first_transfer_matrix_pauli_form`, `second_transfer_matrix_pauli_form`,

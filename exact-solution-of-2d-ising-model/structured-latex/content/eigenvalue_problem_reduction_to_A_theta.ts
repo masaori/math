@@ -1930,7 +1930,7 @@ k_{\mathbb R}\tilde\theta_\mu
 &=\frac{2\pi k_{\mathbb R}\cdot2_{\mathbb R}\left(\mu_{\mathbb R}-\frac12\right)}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\ne0_{\mathbb R},\ 2_{\mathbb R}\ne0_{\mathbb R}\text{ なので分子と分母に }2_{\mathbb R}\text{ を掛ける}\bigr)\\
 &=\frac{2\pi k_{\mathbb R}\left(2_{\mathbb R}\mu_{\mathbb R}-2_{\mathbb R}\cdot\frac12\right)}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
+&&\bigl(\because\ \mathbb R\text{ の分配律}\bigr)\\
 &=\frac{2\pi k_{\mathbb R}(2_{\mathbb R}\mu_{\mathbb R}-1_{\mathbb R})}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ 2_{\mathbb R}\cdot\tfrac12=1_{\mathbb R}\bigr)\\
 &=\frac{2\pi(2_{\mathbb R}\mu_{\mathbb R}-1_{\mathbb R})k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}
@@ -2131,7 +2131,7 @@ S_{M_{\mathrm{col}},k}
 &=2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}-1_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}
 &&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
 &=(2_{\mathbb C}-1_{\mathbb C})(M_{\mathrm{col}})_{\mathbb C}
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配法則}\bigr)\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配律}\bigr)\\
 &=1_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc},\ \blkref{definition_of_cc}\text{ と }\blkref{def_complex_difference}\text{ により }2_{\mathbb C}-1_{\mathbb C}=(2_{\mathbb R}-1_{\mathbb R},0_{\mathbb R})=(1_{\mathbb R},0_{\mathbb R})=1_{\mathbb C}\bigr)\\
 &=(M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}
@@ -2488,7 +2488,7 @@ k
 &=2\pi\left(\mu_{\mathbb R}-\tfrac12\right)
 &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ による約分}\bigr)\\
 &=2\pi\mu_{\mathbb R}-2\pi\cdot\tfrac12
-&&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
+&&\bigl(\because\ \mathbb R\text{ の分配律}\bigr)\\
 &=2\pi\mu_{\mathbb R}-(\pi\cdot2)\cdot\tfrac12
 &&\bigl(\because\ \mathbb R\text{ の積の交換律}\ (2\pi=\pi\cdot2)\bigr)\\
 &=2\pi\mu_{\mathbb R}-\pi\left(2\cdot\tfrac12\right)
@@ -2639,7 +2639,7 @@ k
 &=\frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right)+(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ \mathbb R\text{ の加法の交換律}\bigr)\\
 &=\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
+&&\bigl(\because\ \mathbb R\text{ の分配律}\bigr)\\
 &=\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}+\frac{2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ を分母とする分数の和}\bigr)\\
 &=\tilde\theta_\mu+\frac{2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -2653,7 +2653,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
 &=j_{\mathbb R}\left(\tilde\theta_\mu+2\pi\right)
 &&\bigl(\because\ \text{上の鎖}\bigr)\\
 &=j_{\mathbb R}\tilde\theta_\mu+j_{\mathbb R}\cdot2\pi
-&&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
+&&\bigl(\because\ \mathbb R\text{ の分配律}\bigr)\\
 &=j_{\mathbb R}\tilde\theta_\mu+2\pi j_{\mathbb R}
 &&\bigl(\because\ \mathbb R\text{ の積の交換律}\bigr)
 \end{aligned}`),
@@ -2938,7 +2938,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
 &= \frac{2\pi\left(\nu-\frac12\right)}{M_{\mathrm{col}}} - \frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}}
 &&\bigl(\because \blkref{antiperiodic_exp_sum}\text{ の } \tilde\theta \text{ の定義}\bigr) \\
 &= \frac{2\pi}{M_{\mathrm{col}}}\left(\nu - \mu\right)
-&&\bigl(\because \text{通分と分配法則}\bigr)
+&&\bigl(\because \text{通分と分配律}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -3265,17 +3265,17 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \left(Z_aY_a\right)Z_j - Z_j\left(Z_aY_a\right)
    &&(\because \text{交換子の定義}) \\
 &= Z_a\left(Y_aZ_j\right) - Z_j\left(Z_aY_a\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Z_a\left(-Z_jY_a\right) - Z_j\left(Z_aY_a\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_aZ_j = -Z_jY_a)) \\
 &= -\left(Z_aZ_j\right)Y_a - Z_j\left(Z_aY_a\right)
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -\left(-Z_jZ_a\right)Y_a - Z_j\left(Z_aY_a\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_aZ_j = -Z_jZ_a,\ a \neq j)) \\
 &= \left(Z_jZ_a\right)Y_a - Z_j\left(Z_aY_a\right)
    &&(\because -(-1) = 1 \text{ の符号の消去}) \\
 &= Z_j\left(Z_aY_a\right) - Z_j\left(Z_aY_a\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= O
    &&(\because \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ A = B = Z_j\left(Z_aY_a\right)\ \text{へ適用})
 \end{aligned}`,
@@ -3291,17 +3291,17 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \left(Z_aY_a\right)Y_j - Y_j\left(Z_aY_a\right)
    &&(\because \text{交換子の定義}) \\
 &= Z_a\left(Y_aY_j\right) - Y_j\left(Z_aY_a\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Z_a\left(-Y_jY_a\right) - Y_j\left(Z_aY_a\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_aY_j = -Y_jY_a,\ a \neq j)) \\
 &= -\left(Z_aY_j\right)Y_a - Y_j\left(Z_aY_a\right)
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -\left(-Y_jZ_a\right)Y_a - Y_j\left(Z_aY_a\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_aY_j = -Y_jZ_a)) \\
 &= \left(Y_jZ_a\right)Y_a - Y_j\left(Z_aY_a\right)
    &&(\because -(-1) = 1 \text{ の符号の消去}) \\
 &= Y_j\left(Z_aY_a\right) - Y_j\left(Z_aY_a\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= O
    &&(\because \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ A = B = Y_j\left(Z_aY_a\right)\ \text{へ適用})
 \end{aligned}`,
@@ -3317,17 +3317,17 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \left(Y_aZ_b\right)Z_j - Z_j\left(Y_aZ_b\right)
    &&(\because \text{交換子の定義}) \\
 &= Y_a\left(Z_bZ_j\right) - Z_j\left(Y_aZ_b\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Y_a\left(-Z_jZ_b\right) - Z_j\left(Y_aZ_b\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_bZ_j = -Z_jZ_b,\ b \neq j)) \\
 &= -\left(Y_aZ_j\right)Z_b - Z_j\left(Y_aZ_b\right)
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -\left(-Z_jY_a\right)Z_b - Z_j\left(Y_aZ_b\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_aZ_j = -Z_jY_a)) \\
 &= \left(Z_jY_a\right)Z_b - Z_j\left(Y_aZ_b\right)
    &&(\because -(-1) = 1 \text{ の符号の消去}) \\
 &= Z_j\left(Y_aZ_b\right) - Z_j\left(Y_aZ_b\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= O
    &&(\because \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ A = B = Z_j\left(Y_aZ_b\right)\ \text{へ適用})
 \end{aligned}`,
@@ -3343,17 +3343,17 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \left(Y_aZ_b\right)Y_j - Y_j\left(Y_aZ_b\right)
    &&(\because \text{交換子の定義}) \\
 &= Y_a\left(Z_bY_j\right) - Y_j\left(Y_aZ_b\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Y_a\left(-Y_jZ_b\right) - Y_j\left(Y_aZ_b\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_bY_j = -Y_jZ_b)) \\
 &= -\left(Y_aY_j\right)Z_b - Y_j\left(Y_aZ_b\right)
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -\left(-Y_jY_a\right)Z_b - Y_j\left(Y_aZ_b\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_aY_j = -Y_jY_a,\ a \neq j)) \\
 &= \left(Y_jY_a\right)Z_b - Y_j\left(Y_aZ_b\right)
    &&(\because -(-1) = 1 \text{ の符号の消去}) \\
 &= Y_j\left(Y_aZ_b\right) - Y_j\left(Y_aZ_b\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= O
    &&(\because \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ A = B = Y_j\left(Y_aZ_b\right)\ \text{へ適用})
 \end{aligned}`,
@@ -3369,11 +3369,11 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \left(Z_jY_j\right)Z_j - Z_j\left(Z_jY_j\right)
    &&(\because \text{交換子の定義}) \\
 &= Z_j\left(Y_jZ_j\right) - \left(Z_jZ_j\right)Y_j
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Z_j\left(-Z_jY_j\right) - \left(Z_jZ_j\right)Y_j
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jZ_j = -Z_jY_j)) \\
 &= -\left(Z_jZ_j\right)Y_j - \left(Z_jZ_j\right)Y_j
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -I\,Y_j - I\,Y_j
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_jZ_j = I)) \\
 &= -Y_j - Y_j
@@ -3389,7 +3389,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \left(Z_jY_j\right)Y_j - Y_j\left(Z_jY_j\right)
    &&(\because \text{交換子の定義}) \\
 &= Z_j\left(Y_jY_j\right) - \left(Y_jZ_j\right)Y_j
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Z_j\,I - \left(Y_jZ_j\right)Y_j
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jY_j = I)) \\
 &= Z_j - \left(Y_jZ_j\right)Y_j
@@ -3397,7 +3397,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= Z_j - \left(-Z_jY_j\right)Y_j
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jZ_j = -Z_jY_j)) \\
 &= Z_j + Z_j\left(Y_jY_j\right)
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= Z_j + Z_j\,I
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jY_j = I)) \\
 &= Z_j + Z_j
@@ -3417,7 +3417,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \left(Y_mZ_{m+1}\right)Z_{m+1} - Z_{m+1}\left(Y_mZ_{m+1}\right)
    &&(\because \text{交換子の定義}) \\
 &= Y_m\left(Z_{m+1}Z_{m+1}\right) - \left(Z_{m+1}Y_m\right)Z_{m+1}
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Y_m\,I - \left(Z_{m+1}Y_m\right)Z_{m+1}
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Z_{m+1} = I)) \\
 &= Y_m - \left(Z_{m+1}Y_m\right)Z_{m+1}
@@ -3425,7 +3425,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= Y_m - \left(-Y_mZ_{m+1}\right)Z_{m+1}
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Y_m = -Y_mZ_{m+1})) \\
 &= Y_m + Y_m\left(Z_{m+1}Z_{m+1}\right)
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= Y_m + Y_m\,I
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Z_{m+1} = I)) \\
 &= Y_m + Y_m
@@ -3441,11 +3441,11 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \left(Y_mZ_{m+1}\right)Y_m - Y_m\left(Y_mZ_{m+1}\right)
    &&(\because \text{交換子の定義}) \\
 &= Y_m\left(Z_{m+1}Y_m\right) - \left(Y_mY_m\right)Z_{m+1}
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= Y_m\left(-Y_mZ_{m+1}\right) - \left(Y_mY_m\right)Z_{m+1}
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Y_m = -Y_mZ_{m+1})) \\
 &= -\left(Y_mY_m\right)Z_{m+1} - \left(Y_mY_m\right)Z_{m+1}
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -I\,Z_{m+1} - I\,Z_{m+1}
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_mY_m = I)) \\
 &= -Z_{m+1} - Z_{m+1}
@@ -3465,7 +3465,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= -\left(\left(Y_{M_{\mathrm{col}}}Z_1\right)Z_1 - Z_1\left(Y_{M_{\mathrm{col}}}Z_1\right)\right)
    &&(\because \text{交換子の定義}) \\
 &= -\left(Y_{M_{\mathrm{col}}}\left(Z_1Z_1\right) - \left(Z_1Y_{M_{\mathrm{col}}}\right)Z_1\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= -\left(Y_{M_{\mathrm{col}}}\,I - \left(Z_1Y_{M_{\mathrm{col}}}\right)Z_1\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Z_1 = I)) \\
 &= -\left(Y_{M_{\mathrm{col}}} - \left(Z_1Y_{M_{\mathrm{col}}}\right)Z_1\right)
@@ -3473,7 +3473,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= -\left(Y_{M_{\mathrm{col}}} - \left(-Y_{M_{\mathrm{col}}}Z_1\right)Z_1\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Y_{M_{\mathrm{col}}} = -Y_{M_{\mathrm{col}}}Z_1)) \\
 &= -\left(Y_{M_{\mathrm{col}}} + Y_{M_{\mathrm{col}}}\left(Z_1Z_1\right)\right)
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -\left(Y_{M_{\mathrm{col}}} + Y_{M_{\mathrm{col}}}\,I\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Z_1 = I)) \\
 &= -\left(Y_{M_{\mathrm{col}}} + Y_{M_{\mathrm{col}}}\right)
@@ -3495,11 +3495,11 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= -\left(\left(Y_{M_{\mathrm{col}}}Z_1\right)Y_{M_{\mathrm{col}}} - Y_{M_{\mathrm{col}}}\left(Y_{M_{\mathrm{col}}}Z_1\right)\right)
    &&(\because \text{交換子の定義}) \\
 &= -\left(Y_{M_{\mathrm{col}}}\left(Z_1Y_{M_{\mathrm{col}}}\right) - \left(Y_{M_{\mathrm{col}}}Y_{M_{\mathrm{col}}}\right)Z_1\right)
-   &&(\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合律}) \\
 &= -\left(Y_{M_{\mathrm{col}}}\left(-Y_{M_{\mathrm{col}}}Z_1\right) - \left(Y_{M_{\mathrm{col}}}Y_{M_{\mathrm{col}}}\right)Z_1\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Y_{M_{\mathrm{col}}} = -Y_{M_{\mathrm{col}}}Z_1)) \\
 &= -\left(-\left(Y_{M_{\mathrm{col}}}Y_{M_{\mathrm{col}}}\right)Z_1 - \left(Y_{M_{\mathrm{col}}}Y_{M_{\mathrm{col}}}\right)Z_1\right)
-   &&(\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合律とスカラー倍}) \\
 &= -\left(-I\,Z_1 - I\,Z_1\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_{M_{\mathrm{col}}}Y_{M_{\mathrm{col}}} = I)) \\
 &= -\left(-Z_1 - Z_1\right)

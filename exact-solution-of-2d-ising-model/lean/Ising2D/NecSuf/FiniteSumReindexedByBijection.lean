@@ -11,7 +11,7 @@
 | --- | --- | --- |
 | `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing` | `finite_sum_reindex_bijective'`（同じ帰納法と並び） | 加法についての可換モノイド、`π` は全単射 |
 
-* 係数の側で効いているのは、一つの項を末尾へ移す段（`finite_sum_skip_index_succ'`。加法の結合法則と交換法則）だけである。
+* 係数の側で効いているのは、一つの項を末尾へ移す段（`finite_sum_skip_index_succ'`。加法の結合律と交換律）だけである。
   `0`・差・乗法・順序も、実数であることも効いていない（`0` は `Finset` の上の和 `∑` が `AddCommMonoid` を要求するためだけに要る）。
 * `π` の全射性は `π(k) = m + 1` の `k` を取る段に、全単射性は帰納法の仮定へ渡す `τ^{π}_{k}` の全単射性（`compSkipIndex_bijective`）に効く。
   `Fin (n + 1)` の上では単射から全射が従うが、それは鳩の巣原理による別の論法なので、具体版と同じ手順を保つために全単射を仮定に残す（README 4 節の要件 1）。

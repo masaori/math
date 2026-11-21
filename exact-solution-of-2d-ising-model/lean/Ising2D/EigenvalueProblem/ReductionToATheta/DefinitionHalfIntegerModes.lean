@@ -82,7 +82,7 @@ theorem thetaTilde_period_for_checkZY (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
         rw [add_comm ((M : ℤ) : ℝ)]               -- 7 行目: ℝ の加法の交換律
     _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
-        rw [mul_add]                              -- 8 行目: ℝ の分配法則
+        rw [mul_add]                              -- 8 行目: ℝ の分配律
     _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) + 2 * Real.pi * ((M : ℤ) : ℝ) / ((M : ℤ) : ℝ) :=
         add_div _ _ _                             -- 9 行目: `(M_col)_ℝ ≠ 0_ℝ` を分母とする分数の和
     _ = thetaTilde M μ + 2 * Real.pi * ((M : ℤ) : ℝ) / ((M : ℤ) : ℝ) := rfl
@@ -100,7 +100,7 @@ theorem checkPhase_eq_exp_neg_I_mul (hM : M ≠ 0) (k l : ℤ) :
 /-- **`half_integer_phase_periodicity`**: `exp(-i(j_ℝθ~_{μ+M})_ℂ) = exp(-i(j_ℝθ~_μ)_ℂ)`。
 calc の 2〜9 段目が人手の主張の鎖の 7 行に対応する（人手の 3 行目だけが 4・5 段目の 2 段で、ほかは 1 段ずつ）。1 段目と末尾の段は `checkPhase` を人手の
 `exp((-i)(·)_ℂ)` と読む段（`checkPhase_eq_exp_neg_I_mul`）である。人手の「上の鎖を 2 箇所へ同時代入」は
-`thetaTilde_period_for_checkZY` と、`j_ℝ(θ~_μ + 2π) = j_ℝθ~_μ + j_ℝ·2π` の ℝ の分配法則の 2 段で受ける
+`thetaTilde_period_for_checkZY` と、`j_ℝ(θ~_μ + 2π) = j_ℝθ~_μ + j_ℝ·2π` の ℝ の分配律の 2 段で受ける
 （人手は分配と積の交換を準備の鎖 `j_ℝθ~_{μ+M} = j_ℝθ~_μ + 2πj_ℝ` で済ませ、Lean は `2πj_ℝ` を `j_ℝ·(2π)` の形のまま
 `Real.cos_add_int_mul_two_pi` に渡す）。 -/
 theorem checkPhase_period_for_checkZY (hM : M ≠ 0) (j μ : ℤ) :
@@ -120,7 +120,7 @@ theorem checkPhase_period_for_checkZY (hM : M ≠ 0) (j μ : ℤ) :
     _ = (Real.cos ((j : ℝ) * (thetaTilde M μ + 2 * Real.pi)) : ℂ)
             - Complex.I * (Real.sin ((j : ℝ) * (thetaTilde M μ + 2 * Real.pi)) : ℂ) := by
           rw [thetaTilde_period_for_checkZY hM]
-    -- 人手 3 行目（続き）: 準備の鎖の ℝ の分配法則
+    -- 人手 3 行目（続き）: 準備の鎖の ℝ の分配律
     _ = (Real.cos ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ)
             - Complex.I *
                 (Real.sin ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ) := by

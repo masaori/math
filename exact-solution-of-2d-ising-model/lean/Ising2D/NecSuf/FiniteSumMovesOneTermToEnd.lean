@@ -12,9 +12,9 @@
 | --- | --- | --- |
 | `finite_sum_of_real_numbers_moves_one_term_to_end` | `finite_sum_skip_index_succ'`（同じ場合分けと並び） | 加法についての可換モノイドだけ |
 
-* 効いているのは加法の結合法則と交換法則だけである（`m = 1` の `k = 1` の段の交換法則と、帰納法の段の結合法則・交換法則・結合法則の 3 行）。
+* 効いているのは加法の結合律と交換律だけである（`m = 1` の `k = 1` の段の交換律と、帰納法の段の結合律・交換律・結合律の 3 行）。
 * `0` は人手の鎖に現れず、`Finset` の上の和 `∑` が `AddCommMonoid` を要求するためだけに要る。
-  差も乗法も順序も、実数であることも効いていない。交換法則は外せない（`b_k` と `b_{m+2}` を入れ替える段がある）。
+  差も乗法も順序も、実数であることも効いていない。交換律は外せない（`b_k` と `b_{m+2}` を入れ替える段がある）。
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionIndexSkippingMap
@@ -39,7 +39,7 @@ theorem finite_sum_skip_index_succ' [AddCommMonoid R] (n : ℕ) (b : Fin (n + 2)
             Fin.sum_univ_castSucc _                                           -- 和の定義
         _ = b (Fin.castSucc 0) + b (Fin.last 1) := by
             rw [Fin.sum_univ_one]                                             -- 和の定義
-        _ = b (Fin.last 1) + b (Fin.castSucc 0) := add_comm _ _               -- 加法の交換法則
+        _ = b (Fin.last 1) + b (Fin.castSucc 0) := add_comm _ _               -- 加法の交換律
         _ = b (Ising2D.skipIndex (Fin.castSucc (0 : Fin 1)) 0) + b (Fin.castSucc 0) := by
             rw [hδ]                                                           -- `δ^{1}_{1}(1) = 2`
         _ = (∑ j : Fin 1, b (Ising2D.skipIndex (Fin.castSucc (0 : Fin 1)) j)) + b (Fin.castSucc 0) := by
@@ -81,10 +81,10 @@ theorem finite_sum_skip_index_succ' [AddCommMonoid R] (n : ℕ) (b : Fin (n + 2)
         _ = ((∑ j : Fin (n + 1), b (Ising2D.skipIndex k' j).castSucc) + b k'.castSucc) + b (Fin.last _) := by
             rw [ih (fun j => b j.castSucc) k']                                -- 帰納法の仮定（`b_1, …, b_{m+1}` と `k`）
         _ = (s + b k'.castSucc) + b (Fin.last _) := rfl                       -- `s` の置き方
-        _ = s + (b k'.castSucc + b (Fin.last _)) := add_assoc _ _ _           -- 加法の結合法則
+        _ = s + (b k'.castSucc + b (Fin.last _)) := add_assoc _ _ _           -- 加法の結合律
         _ = s + (b (Fin.last _) + b k'.castSucc) := by
-            rw [add_comm (b k'.castSucc)]                                     -- 加法の交換法則
-        _ = (s + b (Fin.last _)) + b k'.castSucc := (add_assoc _ _ _).symm    -- 加法の結合法則
+            rw [add_comm (b k'.castSucc)]                                     -- 加法の交換律
+        _ = (s + b (Fin.last _)) + b k'.castSucc := (add_assoc _ _ _).symm    -- 加法の結合律
         _ = ((∑ j : Fin (n + 1), b (Ising2D.skipIndex k' j).castSucc) + b (Fin.last _))
               + b k'.castSucc := rfl                                          -- `s` の置き方
         _ = ((∑ j : Fin (n + 1), b (Ising2D.skipIndex k'.castSucc j.castSucc)) + b (Fin.last _))

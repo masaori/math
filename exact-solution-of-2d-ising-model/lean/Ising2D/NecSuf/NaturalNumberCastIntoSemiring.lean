@@ -19,32 +19,32 @@
 | --- | --- | --- | --- |
 | `inclusion_zz_to_rr_of_one` | `ι(1) = ι(0 + 1) = ι(0) + 1 = 0 + 1 = 1` | `cast_one'`（同じ段） | 埋め込みの 2 つの式、`0` が和の左単位元 |
 | `inclusion_zz_to_rr_preserves_sum_of_nonnegatives` | `b` の帰納法。`b = 0` は `ι(a + 0) = ι(a) = ι(a) + 0 = ι(a) + ι(0)`、`b → b + 1` は `ι(a + (b + 1)) = ι((a + b) + 1) = ι(a + b) + 1 = (ι(a) + ι(b)) + 1 = ι(a) + (ι(b) + 1) = ι(a) + ι(b + 1)` | `cast_add'`（同じ段） | 埋め込みの 2 つの式、`0` が和の右単位元、和の結合律 |
-| `finite_sum_of_constant_real_number` | `m` の帰納法。`m = 1` は `Σ_{j=1}^{1} r = r = 1r = ι(1)r`、`m → m + 1` は `Σ_{j=1}^{m+1} r = (Σ_{j=1}^{m} r) + r = ι(m)r + r = ι(m)r + 1r = (ι(m) + 1)r = ι(m + 1)r` | `sum_const_fin_succ'`（同じ段） | 有限和の 2 つの式（左から足す）、埋め込みの 2 つの式（`cast_one'` を通して）、`1` が乗法の左単位元、右からの分配法則 `(x + y)r = xr + yr` |
-| `inclusion_zz_to_rr_of_power_of_two` | `M` の帰納法。`M = 0` は `ι(2^0) = ι(1) = 1 = 2^0`、`M → M + 1` は `ι(2^{M+1}) = ι(2^M·2) = ι(2^M(1+1)) = ι(2^M·1 + 2^M·1) = ι(2^M + 2^M) = ι(2^M) + ι(2^M) = 2^M + 2^M = 2^M·1 + 2^M·1 = 2^M(1 + 1) = 2^M·2 = 2^{M+1}` | `cast_two_pow'`（同じ段） | `ℕ` の側: 冪の 2 つの式・`2 = 1 + 1`・分配法則・乗法の単位元。`R` の側: `cast_add'`・`cast_one'`、`1` が乗法の右単位元、左からの分配法則 `x(y + z) = xy + xz`、`1 + 1 = 2`、冪の 2 つの式 `a^0 = 1`・`a^{m+1} = a^ma` |
-| `power_of_two_in_integers_is_at_least_one` | `M` の帰納法。`2^0 = 1 ≥ 1`、`2^{M+1} = 2^M·2 = 2^M(1+1) = 2^M·1 + 2^M·1 = 2^M + 2^M ≥ 1 + 2^M ≥ 1 + 1 ≥ 1 + 0 = 1` | `one_le_two_pow'`（同じ段） | 冪の 2 つの式、`2 = 1 + 1`、左からの分配法則、`1` が乗法の右単位元、加法の単調性（辺々を足す）、`0 ≤ 1`、`0` が和の右単位元、反射律 |
+| `finite_sum_of_constant_real_number` | `m` の帰納法。`m = 1` は `Σ_{j=1}^{1} r = r = 1r = ι(1)r`、`m → m + 1` は `Σ_{j=1}^{m+1} r = (Σ_{j=1}^{m} r) + r = ι(m)r + r = ι(m)r + 1r = (ι(m) + 1)r = ι(m + 1)r` | `sum_const_fin_succ'`（同じ段） | 有限和の 2 つの式（左から足す）、埋め込みの 2 つの式（`cast_one'` を通して）、`1` が乗法の左単位元、右からの分配律 `(x + y)r = xr + yr` |
+| `inclusion_zz_to_rr_of_power_of_two` | `M` の帰納法。`M = 0` は `ι(2^0) = ι(1) = 1 = 2^0`、`M → M + 1` は `ι(2^{M+1}) = ι(2^M·2) = ι(2^M(1+1)) = ι(2^M·1 + 2^M·1) = ι(2^M + 2^M) = ι(2^M) + ι(2^M) = 2^M + 2^M = 2^M·1 + 2^M·1 = 2^M(1 + 1) = 2^M·2 = 2^{M+1}` | `cast_two_pow'`（同じ段） | `ℕ` の側: 冪の 2 つの式・`2 = 1 + 1`・分配律・乗法の単位元。`R` の側: `cast_add'`・`cast_one'`、`1` が乗法の右単位元、左からの分配律 `x(y + z) = xy + xz`、`1 + 1 = 2`、冪の 2 つの式 `a^0 = 1`・`a^{m+1} = a^ma` |
+| `power_of_two_in_integers_is_at_least_one` | `M` の帰納法。`2^0 = 1 ≥ 1`、`2^{M+1} = 2^M·2 = 2^M(1+1) = 2^M·1 + 2^M·1 = 2^M + 2^M ≥ 1 + 2^M ≥ 1 + 1 ≥ 1 + 0 = 1` | `one_le_two_pow'`（同じ段） | 冪の 2 つの式、`2 = 1 + 1`、左からの分配律、`1` が乗法の右単位元、加法の単調性（辺々を足す）、`0 ≤ 1`、`0` が和の右単位元、反射律 |
 | `inclusion_zz_to_rr_of_positive_is_at_least_one` | `n` の帰納法。`ι(1) = 1 ≥ 1`、`ι(n + 1) = ι(n) + 1 ≥ 1 + 1 ≥ 1 + 0 = 1` | `one_le_cast'`（同じ段） | `cast_one'`、埋め込みの `ι(n + 1) = ι(n) + 1`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元、反射律 |
 | `inclusion_zz_to_rr_of_nonpositive_is_nonpositive` | `n = 0` は `ι(0) = 0 ≤ 0`、`n = -m`（`m ≥ 1`）は `ι(-m) = -ι(m) ≤ -1 ≤ -0 = 0` | `int_cast_nonpos'`（同じ段） | `ℤ` の埋め込みの `ι(-n) = -ι(n)`（`Int.cast_neg`）と `ℤ_{≥0}` での一致（`Int.cast_natCast`）、`one_le_cast'`、符号反転が順序を逆にすること（加法の単調性から出る）、`0 ≤ 1` |
 | `inclusion_zz_to_rr_is_monotone_on_nonnegatives` | `k := b − a`、`ι(k) ≥ 0`（`k = 0` と `k ≥ 1`）、`ι(a) = ι(a) + 0 ≤ ι(a) + ι(k) = ι(a + k) = ι(b)` | `cast_mono'`（同じ段） | `cast_add'`、`one_le_cast'`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元 |
 | `inclusion_zz_to_rr_of_successor` | `n ∈ ℤ_{≥0}` は定義、`n = -1` は `ι(-1 + 1) = ι(0) = 0 = (-1) + 1 = (-ι(1)) + 1 = ι(-1) + 1`、`n = -(p + 1)`（`p ≥ 1`）は `ι(-(p+1) + 1) = ι(-p) = -ι(p) = -ι(p) + 0 = -ι(p) + ((-1) + 1) = (-ι(p) + (-1)) + 1 = -(ι(p) + 1) + 1 = -ι(p + 1) + 1 = ι(-(p + 1)) + 1` | `int_cast_succ'`（同じ段） | `ℤ` の埋め込みの `ι(0) = 0`・`ι(1) = 1`・`ι(-n) = -ι(n)` と `ℤ_{≥0}` での一致・`Nat.cast_succ`、`0` が和の右単位元、加法逆元、和の結合律、`-(x + y) = (-x) + (-y)`（加法の可換性） |
 | `inclusion_zz_to_rr_preserves_sum` | `b` について `0` から足す帰納法（3 行と 5 行）と引く帰納法（12 行）。足す段・引く段とも `inclusion_zz_to_rr_of_successor` を使う | `int_cast_add'`（同じ段） | `int_cast_succ'`、`ι(0) = 0`、`0` が和の右単位元、加法逆元、和の結合律 |
-| `inclusion_zz_to_rr_preserves_product` | `b` について `0` から足す帰納法（4 行と 7 行）と引く帰納法（15 行）。`b = 0` は `x · 0 = 0`、足す段・引く段とも `inclusion_zz_to_rr_preserves_sum`・`inclusion_zz_to_rr_of_successor` を使う | `int_cast_mul'`（同じ段） | `int_cast_add'`・`int_cast_succ'`、`ι(0) = 0`、`x · 0 = 0`、`1` が乗法の右単位元、左からの分配法則 `x(y + z) = xy + xz`、`0` が和の右単位元、加法逆元、和の結合律 |
+| `inclusion_zz_to_rr_preserves_product` | `b` について `0` から足す帰納法（4 行と 7 行）と引く帰納法（15 行）。`b = 0` は `x · 0 = 0`、足す段・引く段とも `inclusion_zz_to_rr_preserves_sum`・`inclusion_zz_to_rr_of_successor` を使う | `int_cast_mul'`（同じ段） | `int_cast_add'`・`int_cast_succ'`、`ι(0) = 0`、`x · 0 = 0`、`1` が乗法の右単位元、左からの分配律 `x(y + z) = xy + xz`、`0` が和の右単位元、加法逆元、和の結合律 |
 | `inclusion_zz_to_rr_preserves_difference` | `ι(a − b) = ι(a − b) + 0 = ι(a − b) + (ι(b) + (−ι(b))) = (ι(a − b) + ι(b)) + (−ι(b)) = ι((a − b) + b) + (−ι(b)) = ι(a) + (−ι(b)) = ι(a) − ι(b)` | `int_cast_sub'`（同じ段） | `int_cast_add'`、`0` が和の右単位元、加法逆元、和の結合律、差が加法の逆元の和であること |
 | `inclusion_zz_to_rr_preserves_negation` | `ι(−a) = ι(0 − a) = ι(0) − ι(a) = 0 − ι(a) = 0 + (−ι(a)) = −ι(a)` | `int_cast_neg'`（同じ段） | `int_cast_sub'`、埋め込みの `ι(0) = 0`、差が加法の逆元の和であること、`0` が和の左単位元 |
 
 - **効いていないもの**: `R` が `ℝ` であること、`R` の完備性・除法、`R` の符号反転（`int_cast_nonpos'`・`int_cast_succ'`・`int_cast_add'`・`int_cast_mul'`・`int_cast_sub'`・`int_cast_neg'` だけが使う）、乗法の可換性・結合律、全順序であること。
 - **型クラスについて**: mathlib の型クラスでは、効いている性質だけを切り出した組を作れない（`One` を二重に持つことになる）ので、
   それを含む最小の標準の組を置き、効いていない性質を次に書く。
-  - `sum_const_fin_succ'` の `[NonAssocSemiring R]` のうち、左からの分配法則・`mul_one`・`zero_mul`・`mul_zero` は効いていない。
+  - `sum_const_fin_succ'` の `[NonAssocSemiring R]` のうち、左からの分配律・`mul_one`・`zero_mul`・`mul_zero` は効いていない。
     加法の可換性は証明の段では使わず、有限和 `Finset.sum` を書くためだけに要る。
-  - `cast_two_pow'` の `[Semiring R]` のうち、右からの分配法則・加法の可換性・乗法の結合律は効いていない
+  - `cast_two_pow'` の `[Semiring R]` のうち、右からの分配律・加法の可換性・乗法の結合律は効いていない
     （`Semiring` は記法 `^`（`Monoid` の冪）のためで、使う冪の性質は `pow_zero`・`pow_succ` の 2 つの式だけである）。
-  - `one_le_two_pow'` の `[Semiring R] [PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` のうち、右からの分配法則・乗法の結合律・順序の反対称律は効いていない。
+  - `one_le_two_pow'` の `[Semiring R] [PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` のうち、右からの分配律・乗法の結合律・順序の反対称律は効いていない。
 - `cast_one'`・`cast_add'` は乗法を使わない（`[AddMonoidWithOne R]`）。
 - 順序の 3 つの主張（`one_le_cast'`・`int_cast_nonpos'`・`cast_mono'`）は乗法を使わない。`[AddCommMonoidWithOne R]`（`int_cast_nonpos'` は符号反転のため `[AddCommGroupWithOne R]`）に
   `[PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` を置く。加法の可換性は `IsOrderedAddMonoid` を書くためだけに要り、証明の段では使わない。順序の反対称律は効いていない。
 - 人手の `ι` の負の元の節 `ι(-n) := -ι(n)` を使うのは `int_cast_nonpos'`・`int_cast_succ'` だけである（`int_cast_add'` は `int_cast_succ'` を通して使う）。
-- `int_cast_mul'` は順序を使わない。`[NonAssocRing R]` を置く（`AddCommGroupWithOne` に乗法と分配法則と乗法の単位元を足した最小の標準の組）。
-  そのうち右からの分配法則・`1` が乗法の左単位元であること・`0 · x = 0` は効いておらず、乗法の結合律・可換性はそもそも仮定していない。
+- `int_cast_mul'` は順序を使わない。`[NonAssocRing R]` を置く（`AddCommGroupWithOne` に乗法と分配律と乗法の単位元を足した最小の標準の組）。
+  そのうち右からの分配律・`1` が乗法の左単位元であること・`0 · x = 0` は効いておらず、乗法の結合律・可換性はそもそも仮定していない。
 - `int_cast_sub'` は乗法と順序を使わない。`int_cast_add'` と同じ `[AddCommGroupWithOne R]` を置く。加法の可換性はこの主張の段では使わず、
   `int_cast_add'` を通して効いている。
 - `int_cast_neg'` は乗法と順序を使わない。`int_cast_sub'` と同じ `[AddCommGroupWithOne R]` を置く。加法の可換性はこの主張の段では使わず、
@@ -95,7 +95,7 @@ theorem sum_const_fin_succ' {R : Type*} [NonAssocSemiring R] (m : ℕ) (r : R) :
         = (∑ _j : Fin (m + 1), r) + r := Fin.sum_univ_castSucc (fun _ => r)  -- 有限和の `Σ_{j=1}^{m+1} r_j = (Σ_{j=1}^{m} r_j) + r_{m+1}`
       _ = ((m + 1 : ℕ) : R) * r + r := by rw [ih]                          -- 帰納法の仮定
       _ = ((m + 1 : ℕ) : R) * r + 1 * r := by rw [one_mul]                 -- `1` は乗法の左単位元
-      _ = (((m + 1 : ℕ) : R) + 1) * r := (add_mul _ _ _).symm              -- 右からの分配法則
+      _ = (((m + 1 : ℕ) : R) + 1) * r := (add_mul _ _ _).symm              -- 右からの分配律
       _ = ((m + 1 + 1 : ℕ) : R) * r := by rw [Nat.cast_succ (m + 1)]       -- 埋め込みの `ι(n + 1) = ι(n) + 1` を右辺から左辺へ
 
 /-- **必要十分版の `inclusion_zz_to_rr_of_power_of_two`**: `ι(2^M) = 2^M`。`M` についての帰納法。 -/
@@ -108,12 +108,12 @@ theorem cast_two_pow' {R : Type*} [Semiring R] (M : ℕ) : ((2 ^ M : ℕ) : R) =
   | succ M ih =>
     calc ((2 ^ (M + 1) : ℕ) : R) = ((2 ^ M * 2 : ℕ) : R) := by rw [Nat.pow_succ]  -- `ℕ` の冪の `a^{m+1} = a^ma`
       _ = ((2 ^ M * (1 + 1) : ℕ) : R) := rfl                               -- `ℕ` で `2 = 1 + 1`
-      _ = ((2 ^ M * 1 + 2 ^ M * 1 : ℕ) : R) := by rw [Nat.mul_add]         -- `ℕ` の分配法則
+      _ = ((2 ^ M * 1 + 2 ^ M * 1 : ℕ) : R) := by rw [Nat.mul_add]         -- `ℕ` の分配律
       _ = ((2 ^ M + 2 ^ M : ℕ) : R) := by rw [Nat.mul_one]                 -- `1` は `ℕ` の乗法の単位元を二か所へ同時に
       _ = ((2 ^ M : ℕ) : R) + ((2 ^ M : ℕ) : R) := cast_add' _ _           -- `cast_add'`（`a, b → 2^M`）
       _ = (2 : R) ^ M + (2 : R) ^ M := by rw [ih]                          -- 帰納法の仮定を二か所へ同時に
       _ = (2 : R) ^ M * 1 + (2 : R) ^ M * 1 := by rw [mul_one]             -- `1` は乗法の右単位元を二か所へ同時に
-      _ = (2 : R) ^ M * (1 + 1) := (mul_add _ _ _).symm                    -- 左からの分配法則
+      _ = (2 : R) ^ M * (1 + 1) := (mul_add _ _ _).symm                    -- 左からの分配律
       _ = (2 : R) ^ M * 2 := by rw [one_add_one_eq_two]                    -- `1 + 1 = 2`
       _ = (2 : R) ^ (M + 1) := (pow_succ _ _).symm                         -- 冪の `a^{m+1} = a^ma` を右辺から左辺へ
 
@@ -127,7 +127,7 @@ theorem one_le_two_pow' {R : Type*} [Semiring R] [PartialOrder R] [IsOrderedAddM
   | succ M ih =>
     calc (2 : R) ^ (M + 1) = (2 : R) ^ M * 2 := pow_succ _ _               -- 冪の `a^{m+1} = a^ma`
       _ = (2 : R) ^ M * (1 + 1) := by rw [one_add_one_eq_two]              -- `2 = 1 + 1`
-      _ = (2 : R) ^ M * 1 + (2 : R) ^ M * 1 := mul_add _ _ _               -- 左からの分配法則
+      _ = (2 : R) ^ M * 1 + (2 : R) ^ M * 1 := mul_add _ _ _               -- 左からの分配律
       _ = (2 : R) ^ M + (2 : R) ^ M := by rw [mul_one]                     -- `1` は乗法の右単位元を二か所へ同時に
       _ ≥ 1 + (2 : R) ^ M := add_le_add_left ih _                         -- 帰納法の仮定 `2^M ≥ 1` の両辺に `2^M` を足す
       _ ≥ 1 + 1 := add_le_add_right ih _                                   -- 帰納法の仮定 `2^M ≥ 1` の両辺に `1` を足す
@@ -270,7 +270,7 @@ theorem int_cast_mul' {R : Type*} [NonAssocRing R] (a b : ℤ) :
       _ = ((a : ℤ) : R) * (((i : ℤ)) : R) + ((a : ℤ) : R) := by rw [ih]    -- 帰納法の仮定
       _ = ((a : ℤ) : R) * (((i : ℤ)) : R) + ((a : ℤ) : R) * 1 := by rw [mul_one]
                                                                            -- `1` は乗法の右単位元
-      _ = ((a : ℤ) : R) * ((((i : ℤ)) : R) + 1) := (mul_add _ _ _).symm    -- 左からの分配法則を右辺から左辺へ
+      _ = ((a : ℤ) : R) * ((((i : ℤ)) : R) + 1) := (mul_add _ _ _).symm    -- 左からの分配律を右辺から左辺へ
       _ = ((a : ℤ) : R) * ((((i : ℤ) + 1 : ℤ)) : R) := by rw [int_cast_succ' (i : ℤ)]
                                                                            -- `int_cast_succ'`（`n → b`）を右辺から左辺へ
   · intro i ih
@@ -295,7 +295,7 @@ theorem int_cast_mul' {R : Type*} [NonAssocRing R] (a b : ℤ) :
       _ = ((a : ℤ) : R) * (((-(i : ℤ) - 1 : ℤ) : R) + 1) + -((a : ℤ) : R) := by
           rw [int_cast_succ' (-(i : ℤ) - 1)]                               -- `int_cast_succ'`（`n → b - 1`）
       _ = (((a : ℤ) : R) * ((-(i : ℤ) - 1 : ℤ) : R) + ((a : ℤ) : R) * 1) + -((a : ℤ) : R) := by
-          rw [mul_add]                                                     -- 左からの分配法則
+          rw [mul_add]                                                     -- 左からの分配律
       _ = (((a : ℤ) : R) * ((-(i : ℤ) - 1 : ℤ) : R) + ((a : ℤ) : R)) + -((a : ℤ) : R) := by
           rw [mul_one]                                                     -- `1` は乗法の右単位元
       _ = ((a : ℤ) : R) * ((-(i : ℤ) - 1 : ℤ) : R) + (((a : ℤ) : R) + -((a : ℤ) : R)) := add_assoc _ _ _

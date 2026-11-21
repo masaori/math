@@ -490,7 +490,7 @@ t^{(M)}_\mu&=\frac{2\pi(\mu-\delta)}{M}
 ={}&\left|\sum_{\mu=1}^{M}\int_{I_\mu}g(t)\,dt - \frac{2\pi}{M}\sum_{\mu=1}^{M} g\!\left(t^{(M)}_\mu\right)\right|
 &&\left(\because\ \text{Step 0 の積分を区間ごとに分けた式}\right)\\
 ={}&\left|\sum_{\mu=1}^{M}\int_{I_\mu}g(t)\,dt - \sum_{\mu=1}^{M}\frac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)\right|
-&&\left(\because\ \text{分配法則}\right)\\
+&&\left(\because\ \text{分配律}\right)\\
 ={}&\left|\sum_{\mu=1}^{M}\left(\int_{I_\mu}g(t)\,dt - \frac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)\right)\right|
 &&\left(\because\ \text{和の差は差の和}\right)\\
 \leq{}&\sum_{\mu=1}^{M}\left|\int_{I_\mu}g(t)\,dt - \frac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)\right|
@@ -510,7 +510,7 @@ t^{(M)}_\mu&=\frac{2\pi(\mu-\delta)}{M}
 ={}&\left|\frac{1}{2\pi}\cdot\frac{2\pi}{M}\sum_{\mu=1}^{M} g\!\left(t^{(M)}_\mu\right) - \frac{1}{2\pi}\int_{0}^{2\pi} g(t)\,dt\right|
 &&\left(\because\ \tfrac{1}{M}=\tfrac{1}{2\pi}\cdot\tfrac{2\pi}{M}\right)\\
 ={}&\left|\frac{1}{2\pi}\left(\frac{2\pi}{M}\sum_{\mu=1}^{M} g\!\left(t^{(M)}_\mu\right) - \int_{0}^{2\pi} g(t)\,dt\right)\right|
-&&\left(\because\ \text{分配法則}\right)\\
+&&\left(\because\ \text{分配律}\right)\\
 ={}&\frac{1}{2\pi}\left|\frac{2\pi}{M}\sum_{\mu=1}^{M} g\!\left(t^{(M)}_\mu\right) - \int_{0}^{2\pi} g(t)\,dt\right|
 &&\left(\because\ |cy|=c|y|\ (c=\tfrac{1}{2\pi}>0)\right)\\
 ={}&\frac{1}{2\pi}\left|\int_{0}^{2\pi} g(t)\,dt - \frac{2\pi}{M}\sum_{\mu=1}^{M} g\!\left(t^{(M)}_\mu\right)\right|

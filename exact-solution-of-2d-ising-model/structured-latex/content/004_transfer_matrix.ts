@@ -1061,7 +1061,7 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
 &= \prod_{m=1}^{M}\delta_{i_m,k_m}\delta_{j_m,l_m}
 &&(\because\ (E_{ij})_{kl}=\delta_{i,k}\delta_{j,l}\ \text{を各因子へ同時に適用})\\
 &= \left(\prod_{m=1}^{M}\delta_{i_m,k_m}\right)\left(\prod_{m=1}^{M}\delta_{j_m,l_m}\right)
-&&(\because\ \text{複素数の積の交換法則と結合法則})\\
+&&(\because\ \text{複素数の積の交換律と結合律})\\
 &= \delta_{I,K}\,\delta_{J,L}
 &&(\because\ \delta_{I,K}=\prod_{m=1}^{M}\delta_{i_m,k_m},\ \delta_{J,L}=\prod_{m=1}^{M}\delta_{j_m,l_m})
 \end{aligned}`,

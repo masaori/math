@@ -2687,7 +2687,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
 &= 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} (1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}})
   &&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}} := 1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)\\
 &= 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}}
-  &&\bigl(\because\ \mathbb{Z}\ \text{の分配法則}\bigr)\\
+  &&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\bigr)\\
 &= 2_{\mathbb{Z}}^{\,M} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M}
   &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の乗法の単位元}\ x \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} = x\ (x \to 2_{\mathbb{Z}}^{\,M})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ}\bigr)\\
 &\geq 1_{\mathbb{Z}} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M}
@@ -2775,7 +2775,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} (1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)
   &&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}} := 1_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M} \cdot_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の分配法則}\bigr)\\
+  &&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M} +_{\mathbb{Z}} 2_{\mathbb{Z}}^{\,M}\bigr)
   &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の乗法の単位元}\ x \cdot_{\mathbb{Z}} 1_{\mathbb{Z}} = x\ (x \to 2_{\mathbb{Z}}^{\,M})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M}\bigr) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(2_{\mathbb{Z}}^{\,M}\bigr)
@@ -2785,7 +2785,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
 &= 2_{\mathbb{R}}^{\,M}\, 1_{\mathbb{R}} +_{\mathbb{R}} 2_{\mathbb{R}}^{\,M}\, 1_{\mathbb{R}}
   &&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ x\, 1_{\mathbb{R}} = x\ (x \to 2_{\mathbb{R}}^{\,M})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を 2 箇所へ右辺から左辺へ}\bigr)\\
 &= 2_{\mathbb{R}}^{\,M}\,(1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}})
-  &&\bigl(\because\ \mathbb{R}\ \text{の分配法則}\bigr)\\
+  &&\bigl(\because\ \mathbb{R}\ \text{の分配律}\bigr)\\
 &= 2_{\mathbb{R}}^{\,M}\, 2_{\mathbb{R}}
   &&\bigl(\because\ 2_{\mathbb{R}} := 1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)\\
 &= 2_{\mathbb{R}}^{\,M+1}
@@ -2977,7 +2977,7 @@ a^1
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(n)\,\log a + 1_{\mathbb{R}}\cdot\log a
 &&\bigl(\because\ 1_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の乗法の単位元}\ 1_{\mathbb{R}}\cdot x = x\ (x \to \log a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)\log a
-&&(\because\ \mathbb{R}\ \text{の分配法則})\\
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}})\,\log a
 &&(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(n +_{\mathbb{Z}} 1_{\mathbb{Z}}) := \iota_{\mathbb{Z}\to\mathbb{R}}(n) +_{\mathbb{R}} 1_{\mathbb{R}}\ \text{を右辺から左辺へ})
 \end{aligned}`),
