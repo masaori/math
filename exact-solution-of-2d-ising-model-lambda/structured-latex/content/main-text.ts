@@ -108096,6 +108096,120 @@ b
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_realized_log_order_cauchy_has_real_limit",
+              focus: {
+                id: "real_escape_claim_realized_log_order_cauchy_has_real_limit",
+                kind: "claim",
+                title: { text: "対数順序群の Cauchy 列の実現像は実数極限を持つ" },
+                labels: ["claim_realized_log_order_cauchy_has_real_limit"],
+                habitat: "R",
+                realEscape: "連続極限。可算側の Cauchy 条件を実現写像と有理数の稠密性で実数の Cauchy 条件へ移し、実数の完備性で極限を取る。",
+                verification: ["sagemath/check/realized-log-order-cauchy-has-real-limit"],
+                lean: [
+                  "Ising2DLambda.RealEscape.cauchySeq_realizeRational_of_isCauchyRationalLogOrder",
+                  "Ising2DLambda.RealEscape.exists_realLimit_realizeRational_of_isCauchyRationalLogOrder",
+                  "Ising2DLambda.RealEscape.exists_realLimit_openSquareDensitySequence_of_le_one",
+                  "Ising2DLambda.NecSuf.RealEscape.cauchySeq_realization_of_orderCauchy",
+                  "Ising2DLambda.NecSuf.RealEscape.exists_realLimit_of_orderCauchy",
+                  "Ising2DLambda.RealEscape.cauchySeq_realizeRational_of_isCauchyRationalLogOrder_from_necSuf",
+                  "Ising2DLambda.RealEscape.exists_realLimit_openSquareDensitySequence_of_le_one_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`(\lambda_L)_{L\ge1}`), " を ", math(String.raw`\Lambda_{\mathbb Q}`),
+                    " の Cauchy 列とする（", ref("def_rational_log_order_group_cauchy_sequence"), "）。",
+                    "その実現像 ", math(String.raw`\rho_{\mathbb R}(\lambda_L)`),
+                    " は実数の Cauchy 列であり、ある ", math(String.raw`I\in\mathbb R`),
+                    " に収束する。とくに ", math(String.raw`q\in\mathbb Q`), "、",
+                    math(String.raw`0<q\le1`),
+                    " では、", ref("claim_open_square_density_sequence_cauchy_le_one"),
+                    " の開境界正方形の密度の列の実現像に、この結論を適用できる。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "以下 ", math(String.raw`\rho:=\rho_{\mathbb R}`), "、",
+                    math(String.raw`e:=\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\ell_2)\in\Lambda_{\mathbb Q}`),
+                    "、", math(String.raw`c:=\rho(e)\in\mathbb R`), " と置く。",
+                    "任意の ", math(String.raw`\mu,\nu\in\Lambda_{\mathbb Q}`), " について、",
+                    ref("def_rational_log_order_group_realization"), " の有限和を項ごとに足すと ",
+                    math(String.raw`\rho(\mu+\nu)=\rho(\mu)+\rho(\nu)`), " であり、",
+                    ref("claim_rational_log_order_group_realization_smul"), " から ",
+                    math(String.raw`\rho(-\mu)=-\rho(\mu)`), " である。",
+                    ref("claim_log_order_group_realization_real_log"), " と ",
+                    ref("def_real_logarithm"), " の狭義単調性により ",
+                    math(String.raw`c=\log_{\mathbb R}2>0`), " である。",
+                  ]),
+                  paragraph([
+                    "任意の ", math(String.raw`\delta\in\mathbb R_{>0}`), " を取る。",
+                    "有理数の稠密性で ", math(String.raw`0<r<\delta/c`),
+                    " なる ", math(String.raw`r\in\mathbb Q`), " を取り、",
+                    math(String.raw`\varepsilon:=r\cdot e\in\Lambda_{\mathbb Q}`), " とする。",
+                    ref("claim_rational_log_order_group_scalar_compare_nonneg"), " から ",
+                    math(String.raw`0\le_{\Lambda_{\mathbb Q}}\varepsilon`),
+                    " である。また、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho(\varepsilon)
+&=\rho(r\cdot e)
+&&(\because\ \varepsilon=r\cdot e)\\
+&=r\rho(e)
+&&(\because\ \blkref{claim_rational_log_order_group_realization_smul})\\
+&=rc
+&&(\because\ c=\rho(e))\\
+&>0
+&&(\because\ 0<r\text{、}0<c)
+\end{aligned}`),
+                  paragraph([
+                    "である。よって ", math(String.raw`\varepsilon\ne0`), " である。",
+                    "Cauchy 条件をこの ", math(String.raw`\varepsilon`), " に適用すると、",
+                    "ある ", math(String.raw`N\ge1`), " について、すべての ",
+                    math(String.raw`L,M\ge N`), " で",
+                  ]),
+                  displayMath(String.raw`-\varepsilon\le_{\Lambda_{\mathbb Q}}\lambda_L-\lambda_M\le_{\Lambda_{\mathbb Q}}\varepsilon`),
+                  paragraph([
+                    "となる。", ref("claim_rational_log_order_group_realization_monotone"),
+                    " と上の加法性・符号反転を順に当てると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+-\delta
+&<-rc
+&&(\because\ rc<\delta)\\
+&=-\rho(\varepsilon)
+&&(\because\ \rho(\varepsilon)=rc)\\
+&=\rho(-\varepsilon)
+&&(\because\ \rho(-\mu)=-\rho(\mu))\\
+&\le\rho(\lambda_L-\lambda_M)
+&&(\because\ \blkref{claim_rational_log_order_group_realization_monotone})\\
+&=\rho(\lambda_L+(-\lambda_M))
+&&(\because\ \text{群の減法の定義})\\
+&=\rho(\lambda_L)+\rho(-\lambda_M)
+&&(\because\ \rho\text{ の加法性})\\
+&=\rho(\lambda_L)-\rho(\lambda_M)
+&&(\because\ \rho(-\mu)=-\rho(\mu))\\
+&\le\rho(\varepsilon)
+&&(\because\ \blkref{claim_rational_log_order_group_realization_monotone})\\
+&=rc
+&&(\because\ \blkref{claim_rational_log_order_group_realization_smul})\\
+&<\delta
+&&(\because\ r<\delta/c\text{、}c>0)
+\end{aligned}`),
+                  paragraph([
+                    "である。よって ", math(String.raw`|\rho(\lambda_L)-\rho(\lambda_M)|<\delta`),
+                    " であり、実数列は Cauchy である。実数体の完備性により極限 ",
+                    math(String.raw`I\in\mathbb R`), " が存在する。最後に ",
+                    ref("claim_open_square_density_sequence_cauchy_le_one"),
+                    " を ", math(String.raw`\lambda_L:=\Psi^{\mathrm{op}}_L(q)`),
+                    " として当てる。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

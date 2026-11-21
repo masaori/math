@@ -648,6 +648,7 @@ export const ALL_LABELS = [
   "claim_real_closed_sum_of_two_squares_is_square",
   "claim_real_closed_sum_of_two_squares_zero",
   "claim_real_logarithm_int_power",
+  "claim_realized_log_order_cauchy_has_real_limit",
   "claim_reconnection_turning_difference",
   "claim_reference_long_matching",
   "claim_reference_long_mate_reversal",
