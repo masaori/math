@@ -2404,3 +2404,4 @@ import Ising2DLambda.RealEscape.OpenSquareLimitPeriodicDensityFromNecSuf
 import Ising2DLambda.KacWard.PartitionLogOrderBounds
 import Ising2DLambda.NecSuf.KacWard.PartitionLogOrderBounds
 import Ising2DLambda.KacWard.PartitionLogOrderBoundsFromNecSuf
+import Ising2DLambda.RealEscape.GoalTheoremsWithoutRealClosedData

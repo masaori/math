@@ -109568,6 +109568,7 @@ f^{\mathrm{per}}(q)
                 verification: ["sagemath/check/periodic-density-onsager-integral"],
                 lean: [
                   "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral",
+                  "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral_withoutRealClosedData",
                   "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral_of_modeLimits",
                   "Ising2DLambda.NecSuf.RealEscape.sup_eq_of_signedBounds_modeLimits_necSuf",
                   "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral_from_necSuf",
@@ -109687,6 +109688,7 @@ f^{\mathrm{per}}(q)
                 verification: ["sagemath/check/onsager-hyperbolic-integral-form"],
                 lean: [
                   "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm",
+                  "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm_withoutRealClosedData",
                   "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm_of_modeLimits",
                   "Ising2DLambda.NecSuf.RealEscape.onsagerForm_of_signedBounds_modeLimits_necSuf",
                   "Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm_from_necSuf",
@@ -109817,6 +109819,7 @@ f^{\mathrm{per}}(q)
                 verification: ["sagemath/check/dispersion-minimum-self-dual-point"],
                 lean: [
                   "Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point",
+                  "Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point_withoutRealClosedData",
                   "Ising2DLambda.NecSuf.RealEscape.dispersion_minimum_self_dual_point_necSuf",
                   "Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point_from_necSuf",
                 ],
