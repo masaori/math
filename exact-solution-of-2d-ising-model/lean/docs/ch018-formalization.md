@@ -315,11 +315,11 @@
 | **`NecSuf.commute_parity_num`** | **`e` が `c_i`, `a_i` の両方と反交換 ⇒ `e` は `n_i = c_i a_i` と可換**（具体版と同じ 3 行。2 行目は `NecSuf.commute_mul_of_anticomm'`） | **`Semigroup A` + `HasDistribNeg A` だけ** | 同 (4) 前半 |
 | `NecSuf.commute_mul_of_anticomm'`（`NecSuf/CommuteWithAnticommutingProductAndScalarMultiple.lean`） | `GX = −(XG)`, `GY = −(YG)` ⇒ `G(XY) = (XY)G`（8 段） | `Semigroup A` + `HasDistribNeg A` | `product_of_anticommuting_matrices_commutes` |
 | `NecSuf.commute_smul_of_commute'`（同） | `GX = XG` ⇒ `G(cX) = (cX)G`（3 段） | `Mul A` + `SMulCommClass 𝕜 A A` + `IsScalarTower 𝕜 A A`（`𝕜` に構造なし） | `commuting_with_scalar_multiple` |
-| `NecSuf.commute_sub_of_commute'` | `GX = XG`, `GW = WG` ⇒ `G(X − W) = (X − W)G`（8 段） | `Mul A` + `Add A` + 左右の分配律 + `HasDistribNeg A` + `x − y = x + (−y)`（積の結合律・単位元、加法の零・結合律・可換性・逆元則は不要） | `commuting_with_difference` |
+| `NecSuf.commute_sub_of_commute'` | `GX = XG`, `GW = WG` ⇒ `G(X − W) = (X − W)G`（8 段） | `Mul A` + `Add A` + 左右の分配律 + `HasDistribNeg A` + `x − y = x + (−y)`（積の結合律・単位元、加法の零・結合律・可換性・逆元は不要） | `commuting_with_difference` |
 | `NecSuf.commute_defFactor_of_commute'` | `en = ne` ⇒ `e` は `p` が真なら `n`、偽なら `1 − n` になる元と可換（場合分けの 5 行ずつ） | `MulOneClass A` + `Add A` + 左右の分配律 + `HasDistribNeg A` + `x − y = x + (−y)`（スカラー倍は不要。`p` が何であるかも、`n` の冪等性も不要） | `epsilon_anticommutes_with_check_Z_Y` (4) の `R_ν^{(ε(ν))}` の鎖 |
 | **`NecSuf.commute_parity_finProdLeft_defFactor`** | **`e` が `c_ν`, `a_ν` と反交換 ⇒ `e` は `∏_ν R_ν`（`R_ν` は `p_ν` が真なら `n_ν`、偽なら `1 − n_ν`）と可換**（具体版と同じ並び） | 同上で `MulOneClass A` を `Monoid A` に（有限積に積の結合律が効く） | 同 (4) 後半 |
 | **`NecSuf.commute_parity_projOn`** | **`e` は `Q_ε` とも可換**（添字を `Finset` で取る `projOn` の形。`M = 0` の埋め合わせに使う） | **`Ring A` だけ**（`projOn` の定義が要する） | 同 (4) 後半 |
-| `NecSuf.num_mul_cre'` | `a_ic_i = 1 − n_i`, `c_ic_i = 0` ⇒ `n_i c_i = c_i`（具体版 `nOp_mul_cre` と同じ 13 行） | `Monoid A` + `Add A` + `Zero A` + 左分配律 + `HasDistribNeg A` + `x − y = x + (−y)` + `0x = 0` + `x − 0 = x`（加法の結合律・可換性・逆元則、右分配律、`x0 = 0` は不要） | `epsilon_eigenvalue_on_check_Q` (2) Step 2 冒頭 |
+| `NecSuf.num_mul_cre'` | `a_ic_i = 1 − n_i`, `c_ic_i = 0` ⇒ `n_i c_i = c_i`（具体版 `nOp_mul_cre` と同じ 13 行） | `Monoid A` + `Add A` + `Zero A` + 左分配律 + `HasDistribNeg A` + `x − y = x + (−y)` + `0x = 0` + `x − 0 = x`（加法の結合律・可換性・逆元、右分配律、`x0 = 0` は不要） | `epsilon_eigenvalue_on_check_Q` (2) Step 2 冒頭 |
 | `NecSuf.num_mul_cre` | `n_i c_i = c_i`（反交換関係から `ann_mul_cre` で `a_ic_i = 1 − n_i` を出し、`num_mul_cre'` を使う） | `Ring A` | 同 |
 | **`NecSuf.projOn_insert_mul_cre`** | **`μ ∈ s`, `μ ∉ T` ⇒ `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T`** | **`Ring A` だけ** | 同 (2) Step 2 と同じ結論の、行列の上の別の手順（人手との対応には数えない） |
 | **`NecSuf.cre_mul_projOn_ne_zero`** | **`Q_T ≠ 0` ⇒ `c_μ Q_T ≠ 0`** | **`Ring A` だけ（1 次元性不要）** | 同 (2) Step 1 と同じ結論の、行列の上の別の手順（人手との対応には数えない） |
@@ -378,7 +378,7 @@
   （`NecSuf.commute_defFactor_of_commute'` は選び方を任意の命題 `p` に置いて通る）。
   `ε = σ^x_1⋯σ^x_M` であることも、`ψ̌` が `Ž, Y̌` の 1 次結合であることも、
   行列であることも、複素数であることも、テンソル冪であることも効いていない。
-  加法の零・結合律・可換性・逆元則は効かない（`NecSuf.commute_parity_num` / `commute_parity_finProdLeft_defFactor`）。
+  加法の零・結合律・可換性・逆元は効かない（`NecSuf.commute_parity_num` / `commute_parity_finProdLeft_defFactor`）。
 
 - **符号の反転則（人手証明 (2)）に `im Q̌_ε` の 1 次元性は要らない。**
   人手証明は (1)(2) の両方で 1 次元性を引くが、必要な材料は次の 3 つだけである。
