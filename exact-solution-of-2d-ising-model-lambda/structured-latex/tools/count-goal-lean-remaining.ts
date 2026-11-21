@@ -300,13 +300,18 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
     title: "虚数単位を足した体の根で割った商の係数は虚数単位を足した体に入る",
     dependsOn: [],
   },
+  claim_imaginary_unit_extension_monic_polynomial_root: {
+    title: "虚数単位を足した体を係数とする最高次の係数が一の多項式は、その体に根を持つ",
+    dependsOn: [
+      "claim_subfield_polynomial_root_in_imaginary_unit_extension",
+      "claim_imaginary_unit_extension_conjugate_product_subfield_coefficient",
+      "claim_imaginary_unit_extension_conjugate_evaluation",
+    ],
+  },
   claim_imaginary_unit_extension_monic_polynomial_linear_factor_product: {
     title: "虚数単位を足した体を係数とする最高次の係数が一の多項式は、その体の元を根とする一次因子の積である",
     dependsOn: [
-      "claim_subfield_polynomial_root_in_imaginary_unit_extension",
-      "claim_qbar_monic_polynomial_linear_factor_product",
-      "claim_imaginary_unit_extension_conjugate_product_subfield_coefficient",
-      "claim_imaginary_unit_extension_conjugate_evaluation",
+      "claim_imaginary_unit_extension_monic_polynomial_root",
       "claim_imaginary_unit_extension_factor_quotient_coefficient",
     ],
   },

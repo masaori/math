@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-21（並列・十三回目）、表の先頭「一次因子の積である」を根の存在の段と次数の帰納法の段に割り、前者を四層で済ませた**（`claim_imaginary_unit_extension_monic_polynomial_root`。係数が $\mathrm{Lin}_F(\omega)$ で番号 $d\ge1$ の係数が 1 の $g$ は、$g\cdot\mathrm{cjp}_\omega(g)$ の根 $z$ から $z$ か $\mathrm{cj}_\omega(z)$ を根に持つ）。並列の表の次は「一次因子の積である」の帰納法の段で、着手できる。
 - **2026-11-21（主経路）、重複度付き Fisher 零点数の上界を独立した主定理と判定した。** 有限集合上の重複度和の上界を有限トーラスへ適用する可算な結論で、後続の引用はない。次は臨界指数の章の未引用主張を一件切り分ける。
 - **2026-11-20（主経路）、分散因子の最小値が自己双対点で零になる主張を独立した主定理と判定した。** 後続から引用されないが、Onsager 表示と別に分散式の零条件を明示する。次は Fisher 零点の個数と密度の未引用主張を一件切り分ける。
 - **2026-11-20（主経路）、開境界長方形の接合不等式を Λ へ移した主張を独立した可算な帰結として残した。** Fisher 零点と双対性の未引用主張は既に主定理であり、次は熱力学極限の後の未引用主張を一件切り分ける。
 - **2026-11-20（並列・十二回目）、表の先頭「根で割った商の係数」を四層で済ませた**（`claim_imaginary_unit_extension_factor_quotient_coefficient`。係数が $\mathrm{Lin}_F(\omega)$ の $f$ と $w\in\mathrm{Lin}_F(\omega)$ について、商 $g=\sum_{k\le n}\widehat{\mathrm{ac}_k(f)}K_k(w)$ の係数は全て $\mathrm{Lin}_F(\omega)$ に属する。根の条件と次数の条件は使わない）。並列の表の次は「一次因子の積である」で、着手できる。
-- **2026-11-20（主経路）、転送行列がシフト行列の各固有空間を保つ主張を独立の主定理と判定した。** 既存の可換性と固有空間の保存から得る可算な有限系の帰結で、後続からの引用はない。次は Fisher 零点と双対性の未引用主張を一件切り分ける。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -44,7 +44,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 零点の詰め寄り | 虚数単位を足した体を係数とする最高次の係数が一の多項式は、その体の元を根とする一次因子の積である | 未着手 | 済んだ「根で割った商の係数」（`claim_imaginary_unit_extension_factor_quotient_coefficient`）・「共役は多項式の値と入れ替わる」（`claim_imaginary_unit_extension_conjugate_evaluation`）・「共役の積は部分体係数」・「虚数単位を足した体に根を持つ」（`claim_subfield_polynomial_root_in_imaginary_unit_extension`）・`claim_qbar_monic_polynomial_linear_factor_product` を引く。次数 $d$ の帰納法: 係数が $\mathrm{Lin}_F(\omega)$ の番号 $d\ge1$ の係数が 1 の $g$ について、$g\cdot\mathrm{cjp}_\omega(g)$ は番号 $2d$ の係数が 1 の $F[t]$ の元（$g$ と $\mathrm{cjp}_\omega(g)$ の一次因子の積を並べ、`claim_linear_factor_product_coefficient_elementary_symmetric` の $j=0$ と係数の上界）なので $K$ に根 $z$ を持ち、$z$ か $\mathrm{cj}_\omega(z)$ が $g$ の根で、商は「根で割った商の係数」で $K$ 係数。$K=\mathrm{Lin}_F(\omega)$ は `claim_square_root_adjoined_subfield_equals_linear_values`。ラベルは `claim_imaginary_unit_extension_monic_polynomial_linear_factor_product`。 |
+| 零点の詰め寄り | 虚数単位を足した体を係数とする最高次の係数が一の多項式は、その体の元を根とする一次因子の積である | 未着手 | 2026-11-21 に根の存在の段（`claim_imaginary_unit_extension_monic_polynomial_root`）を割って済ませた。残りは次数 $d$ の帰納法: 係数が $\mathrm{Lin}_F(\omega)$ の番号 $d\ge1$ の係数が 1 の $g$ は、済んだ根の存在で根 $w\in\mathrm{Lin}_F(\omega)$ を持ち、`claim_qbar_factor_theorem` の商は「根で割った商の係数」（`claim_imaginary_unit_extension_factor_quotient_coefficient`）で $\mathrm{Lin}_F(\omega)$ 係数、番号 $d-1$ の係数が 1 で上の係数が零（`claim_qbar_factor_quotient_coeff_bound`・`claim_qbar_poly_linear_factor_leading_coeff`。`claim_qbar_monic_polynomial_linear_factor_product` の一歩と同じ段）。ラベルは `claim_imaginary_unit_extension_monic_polynomial_linear_factor_product`。 |
 | 零点の詰め寄り | 正の元が平方で奇数次の多項式が根を持つ部分体に虚数単位を足すと代数的数の全体になる | 未着手 | 上の行を引く合成。任意の $\xi\in\overline{\mathbb{Q}}$ について、`def_algebraic_numbers` の第三条件の零でない有理係数の多項式を最高次の係数で割って番号 $d\ge1$ の係数が 1 の $F[t]$ の元にし（$\mathbb{Q}\subset F$）、上の行の分解と `claim_qbar_linear_factor_product_root_is_listed_root` で $\xi\in K$。よって $F(\omega)=\overline{\mathbb{Q}}$。表示 $\xi=a+b\omega$ の存在は $K=\mathrm{Lin}_F(\omega)$、一意性は済んだ `claim_imaginary_unit_extension_unique_representation`（`def_real_closed_subfield` の第四条件）。ラベルは `claim_adjoin_imaginary_unit_gives_algebraic_numbers`。 |
 | 零点の詰め寄り | 実閉部分体の存在の合成と到達点からのデータの引数の除去 | 未着手 | 上の行と、主経路の「奇数次の多項式が根を持つ」「平方の三分法」の二行と、済んだ「表示は一意」（`claim_imaginary_unit_extension_unique_representation`）が揃ってから。本文に `claim_real_closed_subfield_exists`（このラベル名は計測の道具が名指す）を立て、`def_real_closed_subfield` の「既知である」の段落をこの主張への参照に替える。Lean で `RealClosedSubfieldSqrtTwoData s` の値を作り、到達点の四つの具体版について、データ・$z$（$z^4=-1$ は `IsAlgClosed` から取れる）を引数に取らない形の定理を足して `lean:` に登録する。主経路の行を待つ間は表の先頭の行が全て済んでいれば何もしない。 |
 
@@ -53,11 +53,11 @@
 
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
+- 2026-11-21（並列・十三回目）: 前回の並列の「根で割った商の係数」（準備 (一)〜(八) と二行の式鎖）を読み直した。各行の根拠と記号の宣言を確かめ、修正は無かった。
 - 2026-11-21（主経路）: 分散因子の最小値の本文・SageMath・Lean 具体版を照合した。余弦の上界と零条件、自己双対点への代入が対応し、修正は無かった。
 - 2026-11-20（主経路）: 直前の開境界長方形の接合不等式の対数化について、本文の四つの評価と SageMath の検査対象を照合し、修正は無かった。
 - 2026-11-20（主経路）: 直前の固有空間保存の本文・SageMath・Lean 具体版を照合した。可換性を固有空間保存へ適用する構成が一致し、修正は無かった。
 - 2026-11-20（並列・十二回目）: 前回の並列の「共役は多項式の値と入れ替わる」（準備の (一)〜(六) と所属の三行・七行の式鎖）を読み直した。各行の根拠と記号の宣言を確かめ、修正は無かった。
-- 2026-11-20（主経路）: 直前のシフト行列の固有値の主張を本文と Lean 具体版で照合した。行列の位数から固有ベクトルへの作用、非零性によるスカラーの消去が対応し、修正は無かった。
 
 ## 式変形の書き方の統一
 - 2026-11-21（主経路）: 「個数は重複度付きの個数を超えない」の二つの式鎖で、各行末の根拠を括弧付きの統一形にした。
@@ -67,8 +67,8 @@
 - 2026-11-20（主経路の書式統一）: 「冪が 1 でない 1 の冪根があるとき、冪の和は零元である」の準備で、仮定に反する等号を行末根拠付きの式鎖にした。
 
 ## 前進の記録
+- 2026-11-21（並列・十三回目）: 表の先頭「一次因子の積である」は、$K$ 係数の多項式が $K$ に根を持つ段（$g\cdot\mathrm{cjp}_\omega(g)\in F[t]$ の根を共役で戻す場合分け）と次数の帰納法の段の二つの論法を持つので、runbook「打ち切られたときの扱い」と同じく論法で割った。前者を節「虚数単位を足した体を係数とする多項式の根」に本文一ブロック（準備: $\mathrm{cj}_\omega(0)=0$・$\mathrm{cj}_\omega(1)=1$、$\mathrm{cjp}_\omega(g)$ の係数の上界と番号 $d$ の係数、$h\in F[t]$、$h$ の番号 $d+d$ の係数と上界、$F(\omega)=\mathrm{Lin}_F(\omega)$）・SageMath 一件（PASS 131、$F$ を実代数的数として二つの場合の両方を確かめた）・Lean 具体版・必要十分版（零因子の無い可換環、$0,1\in S$、$\mathrm{cj}(a+b\omega)=a-b\omega$、$T$ の共役での閉性、三つの部品の結論だけ。$\omega\cdot\omega=-1$・逆元・正錐は使わない）・導出版で済ませた。計測の道具の `PLANNED_PARTS` に足し、一次因子の積の依存をこの主張と商の係数にした。
 - 2026-11-21（主経路）: `claim_fisher_zero_mult_count_le_edge_bound` は後続から引用されないが、零点の重複度付き個数も $2L^2$ 以下と示し、通常の個数とともに密度の上界を与える独立した到達点なので、主定理として本文に残した。
 - 2026-11-20（主経路）: `claim_dispersion_minimum_self_dual_point` は後続に引用されないが、分散式の最小値が零になる条件と自己双対点の一致を示す独立した主定理として本文に残した。
 - 2026-11-20（主経路）: `claim_open_rectangle_gluing_inequality_log` は後続に引用されないが、接合不等式の有理数での評価を対数順序群 Λ の順序へ移す独立した可算な帰結なので本文に残した。Fisher 零点と双対性の未引用主張三件は既に主定理として位置付けられている。
 - 2026-11-20（並列・十二回目）: 表の先頭「根で割った商の係数」を、節「虚数単位を足した表示の一意性と共役」に本文一ブロック（準備: 一次式の値の全体の閉性、$\mathrm{Lin}_F(\omega)$ の有限和、係数が全て $\mathrm{Lin}_F(\omega)$ に属する多項式の集合 $\mathcal P$ の和・積・定数・不定元の冪・$K_k(w)$・有限和の閉性）・SageMath 一件（PASS 247）・Lean 具体版・必要十分版（可換環、$S$ は零元・単位元を含み和・符号反転・積で閉じ、$\omega\cdot\omega=-1$ だけ。逆元・正錐・共役・根の条件・次数の条件は使わない）・導出版で済ませた。台帳の備考の「$\mathrm{aev}_w(f)=0$ なら」は係数の所属に使わないので主張の仮定から外し、その条件のもとで `claim_qbar_factor_theorem` の商であることを主張の文に書いた。
-- 2026-11-20（主経路）: `claim_qbar_transfer_preserves_shift_eigenspace` は後続から引用されないが、転送行列とシフト行列の可換性から各固有空間の保存を示す独立した有限系の帰結であるため、主定理にした。

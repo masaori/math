@@ -64202,6 +64202,320 @@ d
       role: "subsection",
       element: {
         kind: "section",
+        id: "zero_pinching_heading_imaginary_unit_extension_monic_polynomial_root",
+        labels: [],
+        title: { text: "虚数単位を足した体を係数とする多項式の根" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_imaginary_unit_extension_monic_polynomial_root",
+              focus:
+                {
+                  id: "zero_pinching_claim_imaginary_unit_extension_monic_polynomial_root",
+                  kind: "claim",
+                  title: { text: "正の元が平方で奇数次の多項式が根を持つ部分体に虚数単位を足した体を係数とする、最高次の係数が一の多項式は、その体に根を持つ" },
+                  labels: ["claim_imaginary_unit_extension_monic_polynomial_root"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/imaginary-unit-extension-monic-polynomial-root"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.imaginaryUnitConj_one",
+                    "Ising2DLambda.FisherZero.imaginaryUnitExtension_monicPolynomial_root",
+                    "Ising2DLambda.NecSuf.FisherZero.imaginaryUnitExtension_monicPolynomial_root_necSuf",
+                    "Ising2DLambda.FisherZero.imaginaryUnitExtension_monicPolynomial_root_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`F`),
+                      "、",
+                      math(String.raw`C_F`),
+                      "、",
+                      math(String.raw`\omega`),
+                      "、",
+                      math(String.raw`\mathrm{Lin}_F(\omega)`),
+                      "、",
+                      math(String.raw`\mathrm{cj}_{\omega}`),
+                      " を ",
+                      ref("def_imaginary_unit_extension_conjugate"),
+                      " のものとする。",
+                      math(String.raw`C_F`),
+                      " の各元は ",
+                      math(String.raw`F`),
+                      " に平方根を持つと仮定する。さらに ",
+                      ref("claim_subfield_polynomial_root_in_imaginary_unit_extension"),
+                      " と同じく次を仮定する: 任意の奇数 ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " と任意の ",
+                      math(String.raw`p\in F[t]`),
+                      "（",
+                      ref("def_subfield_coefficient_polynomials"),
+                      "）について、",
+                      math(String.raw`\mathrm{ac}_n(p)\ne0`),
+                      " であり、",
+                      math(String.raw`k>n`),
+                      " を満たす任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(p)=0`),
+                      " ならば、ある ",
+                      math(String.raw`z\in F`),
+                      " で ",
+                      math(String.raw`\mathrm{aev}_{z}(p)=0`),
+                      "（",
+                      ref("def_qbar_poly_evaluation"),
+                      "）である。このとき、",
+                      math(String.raw`d\ge1`),
+                      " を満たす任意の ",
+                      math(String.raw`d\in\mathbb{N}`),
+                      " と、任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(g)\in\mathrm{Lin}_F(\omega)`),
+                      "、",
+                      math(String.raw`\mathrm{ac}_d(g)=1`),
+                      " であり、",
+                      math(String.raw`k>d`),
+                      " を満たす任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(g)=0`),
+                      " となる任意の ",
+                      math(String.raw`g\in\overline{\mathbb{Q}}[t]`),
+                      "（",
+                      ref("def_qbar_polynomial_ring"),
+                      "）について、ある ",
+                      math(String.raw`w\in\mathrm{Lin}_F(\omega)`),
+                      " で ",
+                      math(String.raw`\mathrm{aev}_{w}(g)=0`),
+                      " である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備を置く。和・差・積は、",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の元どうしなら ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）のもの、",
+                      math(String.raw`\overline{\mathbb{Q}}[t]`),
+                      " の元どうしなら ",
+                      ref("def_qbar_polynomial_ring"),
+                      " のものである。",
+                      math(String.raw`\mathrm{cjp}_{\omega}`),
+                      " は ",
+                      ref("def_imaginary_unit_extension_conjugate_polynomial"),
+                      " のもので、",
+                      math(String.raw`g`),
+                      " の係数が全て ",
+                      math(String.raw`\mathrm{Lin}_F(\omega)`),
+                      " に属するので ",
+                      math(String.raw`\mathrm{cjp}_{\omega}(g)`),
+                      " が定まる。(一) ",
+                      math(String.raw`0,1\in F`),
+                      " なので",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{cj}_{\omega}(0)
+&=\mathrm{cj}_{\omega}(0+0\cdot\omega)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=0-0\cdot\omega
+&&\bigl(\because\ 0\in F\text{ と }\blkref{def_imaginary_unit_extension_conjugate}\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)
+\end{aligned}`),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{cj}_{\omega}(1)
+&=\mathrm{cj}_{\omega}(1+0\cdot\omega)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
+&=1-0\cdot\omega
+&&\bigl(\because\ 1\in F\text{、}0\in F\text{ と }\blkref{def_imaginary_unit_extension_conjugate}\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "(二) ",
+                      math(String.raw`k>d`),
+                      " を満たす任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k\bigl(\mathrm{cjp}_{\omega}(g)\bigr)
+&=\mathrm{cj}_{\omega}\bigl(\mathrm{ac}_k(g)\bigr)
+&&\bigl(\because\ \blkref{def_imaginary_unit_extension_conjugate_polynomial}\bigr)\\
+&=\mathrm{cj}_{\omega}(0)
+&&\bigl(\because\ k>d\text{ と }g\text{ の仮定}\bigr)\\
+&=0
+&&\bigl(\because\ \text{(一)}\bigr)
+\end{aligned}`),
+                    paragraph(["であり、"]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_d\bigl(\mathrm{cjp}_{\omega}(g)\bigr)
+&=\mathrm{cj}_{\omega}\bigl(\mathrm{ac}_d(g)\bigr)
+&&\bigl(\because\ \blkref{def_imaginary_unit_extension_conjugate_polynomial}\bigr)\\
+&=\mathrm{cj}_{\omega}(1)
+&&\bigl(\because\ g\text{ の仮定}\bigr)\\
+&=1
+&&\bigl(\because\ \text{(一)}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。(三) ",
+                      math(String.raw`h:=g\cdot\mathrm{cjp}_{\omega}(g)\in\overline{\mathbb{Q}}[t]`),
+                      " と置く。",
+                      ref("claim_imaginary_unit_extension_conjugate_product_subfield_coefficient"),
+                      " により ",
+                      math(String.raw`h\in F[t]`),
+                      " である。(四) ",
+                      ref("claim_qbar_poly_product_coeff_bound"),
+                      " を ",
+                      math(String.raw`P:=g`),
+                      "、",
+                      math(String.raw`Q:=\mathrm{cjp}_{\omega}(g)`),
+                      "、",
+                      math(String.raw`p:=d`),
+                      "、",
+                      math(String.raw`q:=d`),
+                      " へ当てると、その仮定は ",
+                      math(String.raw`g`),
+                      " の仮定と (二) で満たされ、",
+                      math(String.raw`k>d+d`),
+                      " を満たす任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " で ",
+                      math(String.raw`\mathrm{ac}_k(h)=0`),
+                      " である。また",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{d+d}(h)
+&=\mathrm{ac}_{d+d}\bigl(g\cdot\mathrm{cjp}_{\omega}(g)\bigr)
+&&\bigl(\because\ h\text{ の置き方}\bigr)\\
+&=\mathrm{ac}_d(g)\cdot\mathrm{ac}_d\bigl(\mathrm{cjp}_{\omega}(g)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_poly_product_top_coefficient}\text{ を }a:=d,\ b:=d\text{ へ当てる。仮定は }g\text{ の仮定と (二)}\bigr)\\
+&=1\cdot1
+&&\bigl(\because\ g\text{ の仮定と (二)}\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の積の単位元}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。(五) ",
+                      math(String.raw`K:=F(\omega)`),
+                      " を、",
+                      math(String.raw`F`),
+                      " と ",
+                      math(String.raw`\omega`),
+                      " を含む ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の最小の部分体とする（",
+                      ref("claim_subfield_polynomial_root_in_imaginary_unit_extension"),
+                      " の ",
+                      math(String.raw`K`),
+                      "）。",
+                      ref("claim_imaginary_unit_outside_ordered_subfield"),
+                      " により ",
+                      math(String.raw`\omega\notin F`),
+                      " であり、",
+                      math(String.raw`-1\in F`),
+                      " と ",
+                      math(String.raw`\omega\cdot\omega=-1`),
+                      " だから、",
+                      ref("claim_square_root_adjoined_subfield_equals_linear_values"),
+                      " を ",
+                      math(String.raw`a:=-1`),
+                      "、",
+                      math(String.raw`b:=\omega`),
+                      " へ当てて ",
+                      math(String.raw`K=\{u+v\cdot\omega\mid u,v\in F\}=\mathrm{Lin}_F(\omega)`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      "主張を示す。",
+                      math(String.raw`d\ge1`),
+                      " だから ",
+                      math(String.raw`d+d\ge1`),
+                      " である。",
+                      ref("claim_subfield_polynomial_root_in_imaginary_unit_extension"),
+                      " を、その ",
+                      math(String.raw`d`),
+                      " を ",
+                      math(String.raw`d+d`),
+                      "、",
+                      math(String.raw`f`),
+                      " を ",
+                      math(String.raw`h`),
+                      " として当てる（仮定は (三)・(四) と、",
+                      math(String.raw`C_F`),
+                      " の平方根と奇数次の多項式の根の仮定で満たされる。",
+                      math(String.raw`\omega^2=\omega\cdot\omega`),
+                      "）。ある ",
+                      math(String.raw`z\in K`),
+                      " で ",
+                      math(String.raw`\mathrm{aev}_{z}(h)=0`),
+                      " であり、(五) により ",
+                      math(String.raw`z\in\mathrm{Lin}_F(\omega)`),
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{z}(g)\cdot\mathrm{aev}_{z}\bigl(\mathrm{cjp}_{\omega}(g)\bigr)
+&=\mathrm{aev}_{z}\bigl(g\cdot\mathrm{cjp}_{\omega}(g)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\text{ の、}\mathrm{aev}_{z}\text{ は積を保つこと}\bigr)\\
+&=\mathrm{aev}_{z}(h)
+&&\bigl(\because\ h\text{ の置き方}\bigr)\\
+&=0
+&&\bigl(\because\ z\text{ の取り方}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "場合を分ける。",
+                      math(String.raw`\mathrm{aev}_{z}(g)=0`),
+                      " のとき、",
+                      math(String.raw`w:=z\in\mathrm{Lin}_F(\omega)`),
+                      " が求めるものである。",
+                      math(String.raw`\mathrm{aev}_{z}(g)\ne0`),
+                      " のとき、",
+                      ref("claim_qbar_no_zero_divisors"),
+                      " を ",
+                      math(String.raw`a:=\mathrm{aev}_{z}(g)`),
+                      "、",
+                      math(String.raw`b:=\mathrm{aev}_{z}\bigl(\mathrm{cjp}_{\omega}(g)\bigr)`),
+                      " へ当てて ",
+                      math(String.raw`\mathrm{aev}_{z}\bigl(\mathrm{cjp}_{\omega}(g)\bigr)=0`),
+                      " である。",
+                      math(String.raw`w:=\mathrm{cj}_{\omega}(z)`),
+                      " と置くと、",
+                      ref("def_imaginary_unit_extension_conjugate"),
+                      " により ",
+                      math(String.raw`w\in\mathrm{Lin}_F(\omega)`),
+                      " であり、",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{w}(g)
+&=\mathrm{aev}_{\mathrm{cj}_{\omega}(z)}(g)
+&&\bigl(\because\ w\text{ の置き方}\bigr)\\
+&=\mathrm{cj}_{\omega}\Bigl(\mathrm{aev}_{z}\bigl(\mathrm{cjp}_{\omega}(g)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{claim_imaginary_unit_extension_conjugate_evaluation}\text{ を }z\in\mathrm{Lin}_F(\omega)\text{ へ当てる}\bigr)\\
+&=\mathrm{cj}_{\omega}(0)
+&&\bigl(\because\ \mathrm{aev}_{z}\bigl(\mathrm{cjp}_{\omega}(g)\bigr)=0\bigr)\\
+&=0
+&&\bigl(\because\ \text{(一)}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。全過程は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体の元と、それを係数とする多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "zero_pinching_heading_real_closed_subfield",
         labels: [],
         title: { text: "実閉部分体と実代数的数の順序" },
