@@ -199,6 +199,7 @@ theorem periodicFreeEnergyDensity_eq_of_logOrderChain (q : ℚ) (I : ℝ)
     periodicFreeEnergyDensity q = I := by
   -- f^per(q) = sup ρ(A^per(q))（def_periodic_free_energy_density_le_one）、
   -- A^per(q) = A((Ψ_L(q))_L)（def_periodic_density_lower_set）
+  rw [periodicFreeEnergyDensity_eq_sSup]
   show sSup (realizeRational '' rationalLogOrderSequenceLowerSet (periodicDensitySequence q)) = I
   -- claim_sequence_lower_set_sup_eq_real_limit
   exact (sequence_lowerSet_sup_eq_realLimit _ I

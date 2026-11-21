@@ -108777,7 +108777,10 @@ b
                     "Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_eq_openSquare_of_le_one",
                     "Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_nonempty_of_le_one",
                     "Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_bddAbove_of_le_one",
+                    "Ising2DLambda.ThermodynamicLimit.periodicRealizedLowerSet_exists_isLUB_of_le_one",
                     "Ising2DLambda.ThermodynamicLimit.periodicFreeEnergyDensity",
+                    "Ising2DLambda.ThermodynamicLimit.periodicFreeEnergyDensity_isLUB_of_le_one",
+                    "Ising2DLambda.ThermodynamicLimit.periodicFreeEnergyDensity_eq_sSup",
                     "Ising2DLambda.ThermodynamicLimit.periodicFreeEnergyDensity_eq_openSquare_of_le_one",
                   ],
                   statement: [

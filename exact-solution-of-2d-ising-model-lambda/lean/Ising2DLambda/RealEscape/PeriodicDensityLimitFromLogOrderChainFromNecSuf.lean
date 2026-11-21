@@ -28,6 +28,7 @@ theorem periodicFreeEnergyDensity_eq_of_logOrderChain_from_necSuf (q : ℚ) (I :
         logOrderLE (freeEntropy L q) (logRat (signedEvenSubgraphAbsMax L q) + logRat 2))
     (hlim : Tendsto (scaledLogAbsMax q) atTop (𝓝 I)) :
     periodicFreeEnergyDensity q = I := by
+  rw [periodicFreeEnergyDensity_eq_sSup]
   show sSup (realizeRational '' rationalLogOrderSequenceLowerSet (periodicDensitySequence q)) = I
   refine Ising2DLambda.NecSuf.RealEscape.sup_eq_of_logOrderChain_necSuf
     logOrderLE rationalLogOrderLE logRat rationalOfLog (fun a => Real.log ((a : ℚ) : ℝ))

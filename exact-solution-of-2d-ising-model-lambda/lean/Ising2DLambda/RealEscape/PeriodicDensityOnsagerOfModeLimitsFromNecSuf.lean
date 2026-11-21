@@ -76,6 +76,7 @@ theorem periodicFreeEnergyDensity_eq_dispersionIntegral_of_modeLimits_from_necSu
     (hmode : ∀ s : SpinStructure,
       Tendsto (modeLogDensity data q s) atTop (𝓝 (dispersionIntegral q hq0 hq1))) :
     periodicFreeEnergyDensity q = dispersionIntegral q hq0 hq1 := by
+  rw [periodicFreeEnergyDensity_eq_sSup]
   show sSup (realizeRational '' rationalLogOrderSequenceLowerSet (periodicDensitySequence q)) = _
   refine Ising2DLambda.NecSuf.RealEscape.sup_eq_of_signedBounds_modeLimits_necSuf
     spinStructure_univ_nonempty noRationalSquareTwo
@@ -157,6 +158,7 @@ theorem periodicFreeEnergyDensity_onsagerForm_of_modeLimits_from_necSuf
           1 / (8 * Real.pi ^ 2) *
             (∫ θ₁ in (0 : ℝ)..2 * Real.pi, ∫ θ₂ in (0 : ℝ)..2 * Real.pi,
               onsagerHyperbolicLog q hq0 hq1 (θ₁, θ₂)) := by
+  rw [periodicFreeEnergyDensity_eq_sSup]
   have hr0 : (0 : ℝ) < (q : ℝ) := by exact_mod_cast hq0
   obtain ⟨hc, hs, hH, hF⟩ :=
     Ising2DLambda.NecSuf.RealEscape.onsagerForm_of_signedBounds_modeLimits_necSuf
