@@ -1,5 +1,10 @@
 # MEMORY.md — cellular-automata-statistical-mechanics
 
+## 具体版と必要十分版の分離の検査（2026-11-21、人の指示「全てのプロジェクトで具体版と必要十分版の相互依存の違反を検出する仕組みをデフォルトにする」）
+
+- `lake build` の後にリポジトリ直下から `bash scripts/lean-concrete-necsuf-separation/check.sh cellular-automata-statistical-mechanics/lean` を通す（リポジトリ直下 CLAUDE.md「検証」）。ビルド後の Lean の環境の定数の依存と import で、具体版と必要十分版が互いを参照していないかを判定する。
+- 2026-11-21 時点の既知の違反は 具体版の 374 宣言・必要十分版の 373 宣言・import 97 組。`lean/concrete-necsuf-separation-ledger.txt` に載せた。台帳の行は減らすだけにし、新しく混ぜない。
+
 ## 自動ループ tick: 有限窓指数の原出典同定と前 tick の成果整理修正（2026-09-23 09:12）
 
 前 tick の一次文献整理を参照関係まで戻ってレビューし、Welch 指数の窓からの独立性、積公式、

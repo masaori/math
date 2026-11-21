@@ -151,6 +151,7 @@
 │   └── tools/             # verify-check-linkage.ts（検証↔証明の対応を機械検証）
 ├── lean/                  # Lean 4 + mathlib4 による機械的証明（任意）
 │   ├── README.md          # セットアップ・人手証明との対応規約
+│   ├── concrete-necsuf-separation-ledger.txt # 具体版と必要十分版の分離の既知の違反（新規は置かない＝違反零）
 │   └── <Lib>/<章名>/      # 人手証明の章に対応（章名で対応させる）
 ├── docs/
 │   └── tasks/             # タスク管理・作業指示書
@@ -206,6 +207,12 @@
   ノート非混入を検査（tectonic が必要。詳細は
   [docs/publication-output.md](exact-solution-of-2d-ising-model/docs/publication-output.md)）
 - `lean/` があれば `lake build` と `bash lean/scripts/check-no-sorry.sh`
+- `lean/` があれば、`lake build` の後に `bash scripts/lean-concrete-necsuf-separation/check.sh <project>/lean`
+  （リポジトリ直下から）— **具体版と必要十分版が互いを参照していないこと**を、ビルド後の Lean の環境の
+  定数の依存と import で判定する。許すのは導出（`*FromNecSuf.lean` と、名前の最後の成分に `necSuf` を含む
+  必要十分版でない宣言）が両方を使うことだけである。既知の違反は `<project>/lean/concrete-necsuf-separation-ledger.txt`
+  に載せ、**行は減らすだけにする**（台帳に無い違反も、直したのに残した行も落ちる）。台帳が無いプロジェクトは違反零として扱う。
+  分類の決まりは `scripts/lean-concrete-necsuf-separation/Separation.lean.in`
 
 ## MEMORY.md の運用
 

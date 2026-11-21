@@ -39,6 +39,7 @@
 cd cellular-automata-statistical-mechanics/lean
 lake build
 bash scripts/check-no-sorry.sh
+bash ../../scripts/lean-concrete-necsuf-separation/check.sh .   # 具体版と必要十分版が互いを参照していないこと（既知の違反は concrete-necsuf-separation-ledger.txt。行は減らすだけ）
 ```
 
 `scripts/check-no-sorry.sh` は次の 3 つを見る。

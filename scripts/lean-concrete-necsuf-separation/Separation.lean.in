@@ -1,14 +1,16 @@
 /-
-具体版と必要十分版の分離の検査が読む、依存の書き出し。
+具体版と必要十分版の分離の検査が読む、依存の書き出しの雛形。
 
-`lake build` の後に `lake env lean scripts/ConcreteNecSufSeparation.lean` で実行する
-（`scripts/check-concrete-necsuf-separation.sh` が呼ぶ）。ライブラリの一部ではないので、入口
-`Ising2DLambda.lean` からは import しない。
+`check.sh` が `@LIB@` を各プロジェクトのライブラリ名（`lakefile.toml` の `[[lean_lib]]` の `name`）に
+置き換えて `<lean>/.lake/concrete-necsuf-separation/Separation.lean` に書き、そのプロジェクトで
+`lake env lean` する。ライブラリの一部ではない。
 
-本プロジェクトの定数を三つに分ける。
+ライブラリの定数を三つに分ける。
 
-- 必要十分版: モジュール名に `NecSuf` の成分を持つ、または名前に `NecSuf` の成分を持つ。
-- 導出: モジュール名の最後の成分が `FromNecSuf` で終わる、または名前が `_from_necSuf` で終わる。
+- 必要十分版: モジュール名か宣言の名前に `NecSuf` の成分を持つ。
+- 導出: モジュール名の最後の成分が `FromNecSuf` で終わる。または、必要十分版でない宣言で、名前の
+  最後の成分に `necSuf` を含む（`…_of_necSuf`・`…_eq_of_necSuf`・`…_eq_necSuf`・`…_from_necSuf`・
+  `…FromNecSuf`。プロジェクトごとに付け方が違うので、全てを拾う）。
 - 具体版: それ以外。
 
 `.eq_1`・`._proof_1`・`.match_1` のような自動生成の定数は、親の宣言の側に数える
@@ -21,7 +23,7 @@
 - `IMPORT  <取り込む側の分類>  <取り込む側のモジュール>  <取り込まれる側の分類>  <取り込まれる側のモジュール>`:
   同じ向きのモジュールの import。
 -/
-import Ising2DLambda
+import @LIB@
 open Lean
 
 /-- 自動生成の定数を、それを生んだ宣言へ戻す。 -/
@@ -48,7 +50,7 @@ def classifyModule (m : Name) : String :=
 /-- モジュールの番号ごとの分類。本プロジェクトのモジュールでなければ `none`。 -/
 def moduleClasses (env : Environment) : Array (Option String) :=
   env.header.moduleNames.map fun m =>
-    if (`Ising2DLambda).isPrefixOf m then some (classifyModule m) else none
+    if (`@LIB@).isPrefixOf m then some (classifyModule m) else none
 
 /-- 定数の分類。mathlib の定数はモジュールの番号だけで先に外す（ここが速さを決める）。 -/
 def classify (env : Environment) (mods : Array (Option String)) (n : Name) : Option String := do
@@ -59,7 +61,9 @@ def classify (env : Environment) (mods : Array (Option String)) (n : Name) : Opt
   let cm ← mods[ridx.toNat]!
   let u := userName r
   if hasComponent u "NecSuf" then return "necsuf"
-  if u.toString.endsWith "_from_necSuf" then return "derivation"
+  match u with
+  | .str _ last => if (last.toLower.splitOn "necsuf").length > 1 then return "derivation"
+  | _ => pure ()
   return cm
 
 def crosses (user used : String) : Bool :=
@@ -68,7 +72,7 @@ def crosses (user used : String) : Bool :=
 #eval show CoreM Unit from do
   let env ← getEnv
   let mods := moduleClasses env
-  let out ← IO.FS.Handle.mk (System.FilePath.mk ".lake/concrete-necsuf-separation.tsv") .write
+  let out ← IO.FS.Handle.mk (System.FilePath.mk ".lake/concrete-necsuf-separation/dependencies.tsv") .write
   let mut seen : Std.HashSet (Name × Name) := {}
   for (n, ci) in env.constants.toList do
     let some cu := classify env mods n | continue
@@ -89,12 +93,12 @@ def crosses (user used : String) : Bool :=
   let names := env.header.moduleNames
   for i in [0:names.size] do
     let m := names[i]!
-    unless (`Ising2DLambda).isPrefixOf m && m != `Ising2DLambda do continue
+    unless (`@LIB@).isPrefixOf m && m != `@LIB@ do continue
     let cm := classifyModule m
     if cm == "derivation" then continue
     for imp in env.header.moduleData[i]!.imports do
       let t := imp.module
-      unless (`Ising2DLambda).isPrefixOf t do continue
+      unless (`@LIB@).isPrefixOf t do continue
       let ct := classifyModule t
       if crosses cm ct then
         out.putStrLn s!"IMPORT\t{cm}\t{m}\t{ct}\t{t}"

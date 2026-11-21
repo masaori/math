@@ -11,6 +11,7 @@ cd isomorphism-between-complex-matrix-algebra-and-clifford-algebra/lean
 lake exe cache get          # mathlib のビルド済み .olean を取得する（省くと mathlib 全体をビルドする）
 lake build
 bash scripts/check-no-sorry.sh
+bash ../../scripts/lean-concrete-necsuf-separation/check.sh .   # 具体版と必要十分版が互いを参照していないこと（既知の違反は concrete-necsuf-separation-ledger.txt。行は減らすだけ）
 node scripts/verify-label-correspondence.ts   # 本文のラベルと具体版・必要十分版・導出版の対応（下の「本文のラベルとの対応の検査」）
 ```
 

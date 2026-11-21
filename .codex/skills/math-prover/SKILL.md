@@ -216,6 +216,7 @@ node <project>/sagemath/tools/verify-check-linkage.ts
 - 型検査が捕まえるもの／捕まえられないものの一覧は
   [structured-latex/docs/type-coverage.md](../../../structured-latex/docs/type-coverage.md)（システム側が正本）。
 - `lean/` を持つプロジェクトでは `lake build` と `bash lean/scripts/check-no-sorry.sh` も通す。
+- `lean/` を持つプロジェクトでは、続けてリポジトリ直下から `bash scripts/lean-concrete-necsuf-separation/check.sh <project>/lean` も通す（具体版と必要十分版の分離。台帳の行は減らすだけ）。
 
 ---
 

@@ -137,6 +137,7 @@ node structured-latex/tools/validate-content.mjs      # スキーマ・ラベル
 node structured-latex/tools/verify-no-lost-proofs.mjs # 移行漏れ（原本に証明があるのに本文が未完のまま）
 node sagemath/tools/verify-check-linkage.mjs          # 数値検証と証明の対応
 cd lean && lake build && bash scripts/check-no-sorry.sh   # 機械的証明（lean/ がある場合）
+bash ../../scripts/lean-concrete-necsuf-separation/check.sh .   # 続けて lean/ の中から。具体版と必要十分版の分離（CLAUDE.md「検証」）
 ```
 
 **ブロック数や参照解決だけを見て「同期完了」と判断しないこと。**
