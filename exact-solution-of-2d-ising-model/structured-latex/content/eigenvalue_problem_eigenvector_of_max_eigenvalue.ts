@@ -957,7 +957,7 @@ A_\mu^{\epsilon'}
 &= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\cdot 1_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
   \quad (\because \blkref{multiply_by_minus_one}) \\
 &= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\right)\left(I - \check{n}_\mu\right)
-  \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元}) \\
+  \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の単位元}) \\
 &= 1_{\mathbb{C}}\,\check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の逆元}) \\
 &= \check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
@@ -1560,7 +1560,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\eta_\epsilon\right)1_{\mathbb{C}}
 &&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(4) の}\ \mathrm{tr}(\check{Q}_\epsilon) = 1\ \text{を各項へ同時に}\bigr)\\
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\eta_\epsilon
-&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)\\
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)\\
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \eta_\epsilon\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律を各項へ同時に}\bigr)
 \end{aligned}`,
@@ -1615,7 +1615,7 @@ P_{k+1}\check{Q}_\epsilon
 &= -1_{\mathbb{C}}
 &&\bigl(\because\ \check{u}^{(0)} := -1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
 &= 1_{\mathbb{C}}\left(-1_{\mathbb{C}}\right)
-&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{0}\left(-1_{\mathbb{C}}\right)
 &&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^0 := 1_{\mathbb{C}}\ \text{を右辺から左辺へ}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{1}
@@ -1644,7 +1644,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}1_{\mathbb{C}}
 &&\bigl(\because\ \epsilon_{k+1} = 1,\ \check{u}^{(1)} := 1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}
-&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
 &= \left(-1_{\mathbb{C}}\right)^{(k+1)-|\epsilon|_{k+1}}
 &&\bigl(\because\ (k+1) - |\epsilon|_{k+1} = k - |\epsilon|_k\bigr)
 \end{aligned}`,
@@ -1898,7 +1898,7 @@ P_{k+1}\check{Q}_\epsilon
 &= 1_{\mathbb{C}}\varkappa_{\mathbb{C}}
 &&\bigl(\because\ \text{(1) と}\ \eta_{(1,\dots,1)} = 1_{\mathbb{C}}\bigr)\\
 &= \varkappa_{\mathbb{C}}
-&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -4275,7 +4275,7 @@ V_1^{(+)}
 &= 1_{\mathbb{C}}^{\,k}
 &&(\because\ \mathbb{R}\ \text{の四則}\ (-1)(-1) = 1) \\
 &= 1_{\mathbb{C}}
-&&(\because\ 1_{\mathbb{C}}^{\,k+1} = 1_{\mathbb{C}}^{\,k}1_{\mathbb{C}}\text{（}\blkref{def_power_of_complex_number}\text{）と } 1_{\mathbb{C}}\text{ が乗法の単位元であること（}\blkref{complex_numbers_form_a_field}\text{）から } k \text{ の帰納法})
+&&(\because\ 1_{\mathbb{C}}^{\,k+1} = 1_{\mathbb{C}}^{\,k}1_{\mathbb{C}}\text{（}\blkref{def_power_of_complex_number}\text{）と } 1_{\mathbb{C}}\text{ が積の単位元であること（}\blkref{complex_numbers_form_a_field}\text{）から } k \text{ の帰納法})
 \end{aligned}`,
       ),
       paragraph([
@@ -4331,9 +4331,9 @@ V_1^{(+)}
 &= 1_{\mathbb{C}}(-1)^{M_{\mathrm{col}}-|\epsilon|}
 &&(\because\ \text{(1)}) \\
 &= (-1)^{M_{\mathrm{col}}-|\epsilon|}
-&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= (-1)^{M_{\mathrm{col}}-|\epsilon|}\,1_{\mathbb{C}}
-&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= (-1)^{M_{\mathrm{col}}-|\epsilon|}\left((-1)^{|\epsilon|}(-1)^{|\epsilon|}\right)
 &&(\because\ \text{(P1)}\ (k \to |\epsilon|)\ \text{を右辺から左辺へ}) \\
 &= \left((-1)^{M_{\mathrm{col}}-|\epsilon|}(-1)^{|\epsilon|}\right)(-1)^{|\epsilon|}
@@ -4367,7 +4367,7 @@ V_1^{(+)}
 &= \left(1_{\mathbb{C}}(-1)^{M_{\mathrm{col}}}\right)\prod_{\mu=1}^{M_{\mathrm{col}}}\left(I - 2\check{n}_\mu\right)
 &&(\because\ \text{(1)}) \\
 &= (-1)^{M_{\mathrm{col}}}\prod_{\mu=1}^{M_{\mathrm{col}}}\left(I - 2\check{n}_\mu\right)
-&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})
+&&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field})
 \end{aligned}`,
       ),
       paragraph([

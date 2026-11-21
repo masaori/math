@@ -72,7 +72,7 @@ theorem idempotent_decomposition_apply (Q : Matrix n n K) (x : n → K) (k : n) 
     _ = (Q *ᵥ x) k + (x k + -(Q *ᵥ x) k) := by rw [sub_eq_add_neg]    -- `def_complex_difference`（`z → x_k, w → (Qx)_k`）
     _ = (Q *ᵥ x) k + (-(Q *ᵥ x) k + x k) := by rw [add_comm (x k)]    -- `complex_numbers_form_a_field` の和の可換律
     _ = ((Q *ᵥ x) k + -(Q *ᵥ x) k) + x k := (add_assoc _ _ _).symm    -- `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
-    _ = 0 + x k := by rw [add_neg_cancel]                              -- `complex_numbers_form_a_field` の加法逆元
+    _ = 0 + x k := by rw [add_neg_cancel]                              -- `complex_numbers_form_a_field` の加法の逆元
     _ = x k := zero_add _                                               -- `complex_zero_plus_is_original`（`z → x_k`）
 
 theorem idempotent_decomposition (Q : Matrix n n K) (x : n → K) : x = Q *ᵥ x + (x - Q *ᵥ x) :=

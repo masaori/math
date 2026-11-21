@@ -157,7 +157,7 @@ theorem exp_I_mul_exp_neg_I_mul (θ : ℝ) :
     _ = Complex.exp (Complex.I * (θ : ℂ) + -(Complex.I * (θ : ℂ))) := (Complex.exp_add _ _).symm
                           -- 2 行目: `scalar_exp_product` を `K = ℂ` で
     _ = Complex.exp 0 := by rw [add_neg_cancel]
-                          -- 3 行目: `complex_numbers_form_a_field` の加法逆元
+                          -- 3 行目: `complex_numbers_form_a_field` の加法の逆元
     _ = 1 := Complex.exp_zero
                           -- 4 行目: `scalar_exp_zero` を `K = ℂ` で
 
@@ -223,7 +223,7 @@ theorem complex_sub_I_mul_mul_add_I_mul (x y : ℂ) :
         rw [neg_one_mul ((Complex.I * y) * x)]
                           -- 8 行目: `multiply_by_minus_one` を右辺から左辺へ
     _ = x * x + 0 + (-1) * ((Complex.I * y) * (Complex.I * y)) := by rw [add_neg_cancel]
-                          -- 9 行目: `complex_numbers_form_a_field` の加法逆元
+                          -- 9 行目: `complex_numbers_form_a_field` の加法の逆元
     _ = x * x + (-1) * ((Complex.I * y) * (Complex.I * y)) := by rw [add_zero]
                           -- 10 行目: `complex_numbers_form_a_field` の零元
     _ = x * x + (-1) * ((Complex.I * Complex.I) * (y * y)) := by
@@ -315,7 +315,7 @@ theorem complex_cos_add_I_mul_sin_chain (θ : ℝ) :
                           -- 5 行目: `complex_numbers_form_a_field` の積の結合律・可換律
     _ = (ep + em) * (2 : ℂ)⁻¹ + (ep - em) * ((2 : ℂ)⁻¹ * 1) := by
         rw [mul_inv_cancel₀ Complex.I_ne_zero]
-                          -- 6 行目: `complex_numbers_form_a_field` の乗法の逆元
+                          -- 6 行目: `complex_numbers_form_a_field` の逆元の存在
     _ = (ep + em) * (2 : ℂ)⁻¹ + (ep - em) * (2 : ℂ)⁻¹ := by rw [mul_one]
                           -- 7 行目: `complex_numbers_form_a_field` の積の単位元
     _ = ((ep + em) + (ep - em)) * (2 : ℂ)⁻¹ := (add_mul _ _ _).symm
@@ -325,7 +325,7 @@ theorem complex_cos_add_I_mul_sin_chain (θ : ℝ) :
     _ = (ep + ep + (em + (-em))) * (2 : ℂ)⁻¹ := by rw [add_add_add_comm ep em ep (-em)]
                           -- 10 行目: `complex_numbers_form_a_field` の和の結合律・可換律
     _ = (ep + ep + 0) * (2 : ℂ)⁻¹ := by rw [add_neg_cancel em]
-                          -- 11 行目: `complex_numbers_form_a_field` の加法逆元
+                          -- 11 行目: `complex_numbers_form_a_field` の加法の逆元
     _ = (ep + ep) * (2 : ℂ)⁻¹ := by rw [add_zero]
                           -- 12 行目: `complex_numbers_form_a_field` の零元
     _ = (1 * ep + 1 * ep) * (2 : ℂ)⁻¹ := by rw [one_mul ep]
@@ -341,7 +341,7 @@ theorem complex_cos_add_I_mul_sin_chain (θ : ℝ) :
     _ = ep * ((2 : ℂ) * (2 : ℂ)⁻¹) := by rw [mul_comm (2 : ℂ) ep, mul_assoc]
                           -- 17 行目: `complex_numbers_form_a_field` の積の結合律・可換律
     _ = ep * 1 := by rw [mul_inv_cancel₀ h2]
-                          -- 18 行目: `complex_numbers_form_a_field` の乗法の逆元
+                          -- 18 行目: `complex_numbers_form_a_field` の逆元の存在
     _ = ep := mul_one ep
                           -- 19 行目: `complex_numbers_form_a_field` の積の単位元
 
@@ -840,7 +840,7 @@ theorem lambda_mul_lambda_thetaTilde (hdual : P.const.c2 * P.const.s2star = P.co
           rw [neg_one_mul, neg_one_mul]
                           -- 13 行目: `multiply_by_minus_one` を 2 箇所へ右辺から左辺へ
       _ = g * g + (0 + (-((A : ℂ) * (A : ℂ)))) := by rw [add_neg_cancel]
-                          -- 14 行目: `complex_numbers_form_a_field` の加法逆元
+                          -- 14 行目: `complex_numbers_form_a_field` の加法の逆元
       _ = (g * g + 0) + (-((A : ℂ) * (A : ℂ))) := (add_assoc _ _ _).symm
                           -- 15 行目: `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
       _ = g * g + (-((A : ℂ) * (A : ℂ))) := by rw [add_zero]

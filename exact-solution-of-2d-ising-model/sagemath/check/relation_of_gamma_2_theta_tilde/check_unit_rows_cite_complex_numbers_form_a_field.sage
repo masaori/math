@@ -23,7 +23,7 @@ def check(name, prev, nxt, ctx, form, subs, rtl=False):
     else:
         assert prev == ctx(*ls) and nxt == ctx(*rs), name
     print("row", name)
-check("加法逆元: (E + (E + (F + (−F))))h = (E + (E + 0))h（z + (−z) = 0 の z → exp(−iθ)）",
+check("加法の逆元: (E + (E + (F + (−F))))h = (E + (E + 0))h（z + (−z) = 0 の z → exp(−iθ)）",
       (E + (E + (F + (-F)))) * h, (E + (E + 0)) * h, lambda u: (E + (E + u)) * h, add_inverse, [F])
 check("加法の単位元: (E + (E + 0))h = (E + E)h（z + 0 = z の z → exp(iθ)）",
       (E + (E + 0)) * h, (E + E) * h, lambda u: (E + u) * h, add_right, [E])

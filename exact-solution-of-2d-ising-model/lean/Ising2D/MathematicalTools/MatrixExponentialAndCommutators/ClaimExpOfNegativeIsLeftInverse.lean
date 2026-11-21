@@ -68,7 +68,7 @@ theorem neg_matrix_add_self_apply {n : ℕ} (A : Matrix (Fin n) (Fin n) ℂ) (k 
       = (-A) k l + A k l := matrix_sum_apply _ _ _ _                           -- `def_matrix_sum`
     _ = (-A k l) + A k l := by rw [matrix_neg_apply]                           -- `def_matrix_negation`
     _ = (-1) * A k l + A k l := by rw [neg_one_mul]                            -- `multiply_by_minus_one`
-    _ = (-1) * A k l + 1 * A k l := by rw [one_mul]                            -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）
+    _ = (-1) * A k l + 1 * A k l := by rw [one_mul]                            -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
     _ = ((-1) + 1) * A k l := (add_mul _ _ _).symm                             -- 分配律（`complex_numbers_form_a_field`）
     _ = ((⟨-1, 0⟩ : ℂ) + ⟨1, 0⟩) * A k l := by                                -- `inclusion_rr_to_cc`
         -- `1_ℂ = (1, 0)` は定義上の等号。Lean の `-1 : ℂ` は `1_ℂ` の符号反転なので、欄は ℂ の符号反転の定義で読む

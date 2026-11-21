@@ -56,7 +56,7 @@ export default defineNotes([
 &=0
 &&\left(\because\ \text{有限個の零の和}\right)\\
 &=-0
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の零の加法逆元}\right).
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の零の加法の逆元}\right).
 \end{aligned}`),
       paragraph(["全ての成分が一致するので ", math(String.raw`\varepsilon 0=-0`), " である。よって ", "〔def_odd_eigenvectors_of_epsilon〕", " から ", math(String.raw`0\in\mathcal{F}^{(-)}`), " である。"]),
       paragraph(["次に ", math(String.raw`f,g\in\mathcal{F}^{(-)}`), " とする。", "〔def_odd_eigenvectors_of_epsilon〕", " より ", math(String.raw`\varepsilon f=-f`), " かつ ", math(String.raw`\varepsilon g=-g`), " である。任意の ", math(String.raw`r\in\{1,\dots,2^{M_{\mathrm{col}}}\}`), " について、"]),
@@ -73,7 +73,7 @@ export default defineNotes([
 &=-f_r+(-g_r)
 &&\left(\because\ \varepsilon f=-f\ \text{かつ}\ \varepsilon g=-g\right)\\
 &=-(f_r+g_r)
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の和の加法逆元}\right)\\
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の和の加法の逆元}\right)\\
 &=[-(f+g)]_r
 &&\left(\because\ \text{複素数ベクトルの加法逆元の定義}\right).
 \end{aligned}`),
@@ -96,7 +96,7 @@ export default defineNotes([
 &=a(-f_r)
 &&\left(\because\ \varepsilon f=-f\right)\\
 &=-(af_r)
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積と加法逆元の両立}\right)\\
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積と加法の逆元の両立}\right)\\
 &=[-(af)]_r
 &&\left(\because\ \text{複素数ベクトルの加法逆元とスカラー倍の定義}\right).
 \end{aligned}`),

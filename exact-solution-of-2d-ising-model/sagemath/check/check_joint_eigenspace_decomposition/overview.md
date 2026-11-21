@@ -32,7 +32,7 @@
 
 | 証明の行 | 検算 | 段数（模型） |
 |---|---|---|
-| 冒頭: 定義の因子 ε_μň_μ + (1−ε_μ)(I−ň_μ) = R_μ^{(ε_μ)} の二場合の 10 行の鎖（場合の仮定・`def_complex_difference`・`multiply_by_minus_one`・乗法の単位元／`complex_times_zero_is_zero`・加法の逆元／単位元・`scalar_multiple_by_one`・`zero_scalar_multiple_is_zero_matrix`・`matrix_plus_zero_matrix`／`zero_matrix_plus_matrix`・R の定義）、Q̌_ε = ∏(定義の因子) = ∏R の 2 行 | `check_factor_as_R_chains.sage` | 236 |
+| 冒頭: 定義の因子 ε_μň_μ + (1−ε_μ)(I−ň_μ) = R_μ^{(ε_μ)} の二場合の 10 行の鎖（場合の仮定・`def_complex_difference`・`multiply_by_minus_one`・積の単位元／`complex_times_zero_is_zero`・加法の逆元／単位元・`scalar_multiple_by_one`・`zero_scalar_multiple_is_zero_matrix`・`matrix_plus_zero_matrix`／`zero_matrix_plus_matrix`・R の定義）、Q̌_ε = ∏(定義の因子) = ∏R の 2 行 | `check_factor_as_R_chains.sage` | 236 |
 | Step 0 の冒頭の ň_μň_μ = ň_μ（5 行。冪は `def_exp` (1) どおり）、ň − ň = O の行（`matrix_difference_zero_iff_equal` の ⟸。3 か所とも同じ行）、和 R^{(1)} + R^{(0)} = I（`matrix_plus_difference_cancels`） | `check_step0_square_zero_difference_and_sum_chains.sage` | 79 |
 | Step 0 の R^{(1)}R^{(0)} = 0・R^{(0)}R^{(1)} = 0（本文の 8 行のうち先頭の R の定義の行を除く 7 行）・R^{(0)}R^{(0)} = R^{(0)}（本文の 9 行のうち先頭を除く 8 行）、Step 3 の ε_ν = 0 の ň_νR_ν^{(0)} = 0（同じ 7 行） | `check_step0_step3_distributivity_chains.sage` | 217 |
 | Step 0 の R^{(1)}R^{(1)} = R^{(1)}（本文の 3 行）は、Step 3 の ε_ν = 1 の場合の鎖の先頭 3 行と同じ式で、`check_step3_scalar_case_chains.sage` が確かめる | 同左 | — |

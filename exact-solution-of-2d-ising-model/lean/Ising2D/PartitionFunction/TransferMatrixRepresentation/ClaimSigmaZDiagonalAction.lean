@@ -133,7 +133,7 @@ theorem sigmaZ_mul_sigmaZ_apply_of_ne (m m' : Fin M) {k l : Conf M} (hkl : k ≠
 （`site_sigma_z_product_is_diagonal` は `sigmaZ_mul_sigmaZ_apply_of_ne`、`complex_zero_times_is_zero` は `zero_mul`）。
 `config_basis_vector_own_component`（`(f_I)_{ν(I)} = 1_ℂ`）は具体版が無く、`basisVec` の定義 `Pi.single I 1` の
 `Pi.single_eq_same`、`finite_sum_with_single_nonzero_term` は `Finset.sum_eq_single`、`complex_numbers_form_a_field` の
-乗法の単位元は `mul_one` である（いずれも既存の慣行どおり）。`sigma_z_product_action` は
+積の単位元は `mul_one` である（いずれも既存の慣行どおり）。`sigma_z_product_action` は
 `sigmaZ_mul_sigmaZ_mulVec_basisVec` を `sgnC_configBasisIso`（`sgn(ι(μ)(m)) = μ(m)`）で `μ` の言葉に読んだもの。
 Lean のベクトルの添字は `ι(μ)` そのものなので、人手の `k = ν(ι(μ))` の `ν` は添字の読み方である。 -/
 theorem sigmaZ_mul_sigmaZ_apply_configBasisIso_self (μ : SpinConf M) (m m' : Fin M) :
@@ -145,7 +145,7 @@ theorem sigmaZ_mul_sigmaZ_apply_configBasisIso_self (μ : SpinConf M) (m m' : Fi
       rw [sigmaZ_mul_sigmaZ_apply_of_ne m m' (Ne.symm hl)]   -- `site_sigma_z_product_is_diagonal`
       exact zero_mul _                                        -- `complex_zero_times_is_zero`
   calc (sigmaZ m * sigmaZ m') k k
-      = (sigmaZ m * sigmaZ m') k k * 1 := (mul_one _).symm   -- `complex_numbers_form_a_field` の乗法の単位元
+      = (sigmaZ m * sigmaZ m') k k * 1 := (mul_one _).symm   -- `complex_numbers_form_a_field` の積の単位元
     _ = (sigmaZ m * sigmaZ m') k k * basisVec k k := by
         rw [basisVec, Pi.single_eq_same]                     -- `config_basis_vector_own_component`（`I → ι(μ)`）
     _ = ∑ l : Conf M, (sigmaZ m * sigmaZ m') k l * basisVec k l :=
@@ -159,7 +159,7 @@ theorem sigmaZ_mul_sigmaZ_apply_configBasisIso_self (μ : SpinConf M) (m m' : Fi
         rw [Pi.smul_apply, smul_eq_mul]                      -- `def_matrix_scalar_multiple`
     _ = ((μ m : ℝ) : ℂ) * ((μ m' : ℝ) : ℂ) * 1 := by
         rw [basisVec, Pi.single_eq_same]                     -- `config_basis_vector_own_component`（`I → ι(μ)`）
-    _ = ((μ m : ℝ) : ℂ) * ((μ m' : ℝ) : ℂ) := mul_one _       -- `complex_numbers_form_a_field` の乗法の単位元
+    _ = ((μ m : ℝ) : ℂ) * ((μ m' : ℝ) : ℂ) := mul_one _       -- `complex_numbers_form_a_field` の積の単位元
 
 /-- 原文の主張をスピン配置 `μ ∈ 𝔐` の言葉で書いた形
 （`sgn(ι(μ)(m)) = μ(m)` を代入したもの）。 -/

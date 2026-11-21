@@ -189,7 +189,7 @@ theorem trace_epsilon_mul_V_step1 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
         congr 1; funext ε; rw [F.trace_Qproj]           -- `check_joint_eigenspace_decomposition` (4) の `tr(Q̌_ε) = 1` を各項へ同時に
     _ = NecSuf.binWordSum r (fun ε =>
           ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) * F.eta (CheckFermi.finsetOfWord ε)) := by
-        congr 1; funext ε; exact mul_one _              -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）を各項へ同時に
+        congr 1; funext ε; exact mul_one _              -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）を各項へ同時に
     _ = NecSuf.binWordSum r (fun ε =>
           F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)) := by
         congr 1; funext ε; exact mul_comm _ _           -- `complex_numbers_form_a_field` の積の可換律を各項へ同時に
@@ -290,7 +290,7 @@ theorem checkU_prod_eq_neg_one_pow :
         _ = ((checkU 0 : ℝ) : ℂ) := by rw [he]          -- `ε_1 = 0`
         _ = -1 := by rw [checkU_zero, Complex.ofReal_neg, Complex.ofReal_one]
                                                         -- `ǔ^{(0)} := −1` と `inclusion_rr_to_cc` の略記
-        _ = 1 * (-1 : ℂ) := (one_mul _).symm            -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）
+        _ = 1 * (-1 : ℂ) := (one_mul _).symm            -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
         _ = (-1 : ℂ) ^ 0 * (-1 : ℂ) := by rw [pow_zero] -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
         _ = (-1 : ℂ) ^ 1 := (pow_succ _ 0).symm         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
         _ = (-1 : ℂ) ^ ((0 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hc]
@@ -318,7 +318,7 @@ theorem checkU_prod_eq_neg_one_pow :
               * 1 := by rw [he, checkU_one, Complex.ofReal_one]
                                                         -- `ε_{k+1} = 1`、`ǔ^{(1)} := 1` と `inclusion_rr_to_cc` の略記
         _ = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card) :=
-            mul_one _                                   -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）
+            mul_one _                                   -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
         _ = (-1 : ℂ) ^ ((n + 1 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hk]
                                                         -- `(k+1) − |ε|_{k+1} = k − |ε|_k`
     · -- `ε_{k+1} = 0` なら `(k+1) − |ε|_{k+1} = (k − |ε|_k) + 1`
@@ -712,7 +712,7 @@ theorem trace_pos_of_eta_univ_eq_one_step7 {r : ℕ} {F : CheckFermi (r + 1)} (D
     calc (epsilon (r + 1) * D.V).trace
         = 1 * ((D.traceFactor : ℝ) : ℂ) := by
           rw [D.trace_epsilon_mul_V_step5, hη]          -- (1) と `η_{(1,…,1)} = 1_ℂ`
-      _ = ((D.traceFactor : ℝ) : ℂ) := one_mul _⟩      -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）
+      _ = ((D.traceFactor : ℝ) : ℂ) := one_mul _⟩      -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
 
 /-- **原文 Step 7** の `⟸`: `tr(εV^{(+)}) = r_ℂ`（`r ∈ ℝ_{>0}`）なら
 `r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ`、

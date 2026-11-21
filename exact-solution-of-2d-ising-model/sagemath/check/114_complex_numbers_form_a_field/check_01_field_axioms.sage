@@ -30,6 +30,6 @@ for a in zs:
     rep.close(add(a, complex(-a.real,-a.imag)), zero, "加法逆元")
     if abs(a) > 1e-12:
         inv = complex(a.real/(a.real**2+a.imag**2), -a.imag/(a.real**2+a.imag**2))
-        rep.close(mul(a,inv), one, "乗法逆元（C^x が群）")
+        rep.close(mul(a,inv), one, "逆元の存在（C^x が群）")
         rep.close(inv, 1/a, "逆元の表示 z^{-1} = 1/z")
 rep.finish()

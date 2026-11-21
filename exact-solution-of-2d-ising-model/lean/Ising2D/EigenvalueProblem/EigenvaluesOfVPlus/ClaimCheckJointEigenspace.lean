@@ -548,7 +548,7 @@ theorem defFactor_one (μ : CheckIdx M) : F.defFactor μ 1 = F.rFactor μ 1 :=
         congrArg (fun c : ℂ => (1 : ℂ) • F.nOp μ + ((1 : ℂ) + c) • (1 - F.nOp μ)) (neg_one_mul (1 : ℂ)).symm
                                                         -- `multiply_by_minus_one`（`z → 1_ℂ`）
     _ = (1 : ℂ) • F.nOp μ + ((1 : ℂ) + -1) • (1 - F.nOp μ) := by
-        rw [mul_one (-1 : ℂ)]                           -- `complex_numbers_form_a_field` の乗法の単位元
+        rw [mul_one (-1 : ℂ)]                           -- `complex_numbers_form_a_field` の積の単位元
     _ = (1 : ℂ) • F.nOp μ + (0 : ℂ) • (1 - F.nOp μ) := by
         rw [add_neg_cancel (1 : ℂ)]                     -- `complex_numbers_form_a_field` の加法の逆元
     _ = F.nOp μ + (0 : ℂ) • (1 - F.nOp μ) := by

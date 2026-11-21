@@ -343,7 +343,7 @@ theorem trace_Vprime_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx
     _ = NecSuf.binWordSum r (fun ε => (((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) * 1) := by
         congr 1; funext ε; rw [F.trace_Qproj]           -- `check_joint_eigenspace_decomposition` (4) の `tr(Q̌_ε) = 1` を各項へ同時に
     _ = NecSuf.binWordSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) := by
-        congr 1; funext ε; exact mul_one _              -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）を各項へ同時に
+        congr 1; funext ε; exact mul_one _              -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）を各項へ同時に
 
 /-- 人手の範囲外の `M = 0` の `tr(V̌') = Σ_T e^{ǧ(T)}`（mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` で閉じる）。 -/
 theorem trace_Vprime_eq_finset_sum_of_mathlib (g : CheckIdx M → ℝ) :
@@ -418,7 +418,7 @@ theorem trace_Vprime_inv_step3 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : Chec
     _ = NecSuf.binWordSum r (fun ε => (((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) * 1) := by
         congr 1; funext ε; rw [F.trace_Qproj]           -- `check_joint_eigenspace_decomposition` (4) の `tr(Q̌_ε) = 1` を各項へ同時に
     _ = NecSuf.binWordSum r (fun ε => ((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) := by
-        congr 1; funext ε; exact mul_one _              -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）を各項へ同時に
+        congr 1; funext ε; exact mul_one _              -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）を各項へ同時に
     _ = ((NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
         binWordSum_ofReal r _                           -- `real_inclusion_preserves_sum_over_binary_words`（`x_ε → exp(−ǧ(ε))`）
 

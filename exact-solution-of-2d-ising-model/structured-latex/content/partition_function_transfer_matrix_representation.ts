@@ -1263,7 +1263,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
   1 + 0 \\
   0 + 0
 \end{pmatrix}
-\quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元},\ \blkref{complex_zero_times_is_zero},\ \blkref{complex_times_zero_is_zero}) \\
+\quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の単位元},\ \blkref{complex_zero_times_is_zero},\ \blkref{complex_times_zero_is_zero}) \\
 &=
 \begin{pmatrix}
   1 \\
@@ -1298,7 +1298,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
   0 + 0 \\
   0 + (-1)
 \end{pmatrix}
-\quad (\because \blkref{complex_times_zero_is_zero},\ \blkref{complex_zero_times_is_zero},\ \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元}) \\
+\quad (\because \blkref{complex_times_zero_is_zero},\ \blkref{complex_zero_times_is_zero},\ \blkref{complex_numbers_form_a_field}\text{ の積の単位元}) \\
 &=
 \begin{pmatrix}
   0 \\
@@ -1316,7 +1316,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
   (-1_{\mathbb{C}})\,0_{\mathbb{C}} \\
   (-1_{\mathbb{C}})\,1_{\mathbb{C}}
 \end{pmatrix}
-\quad (\because \blkref{complex_times_zero_is_zero},\ \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元}) \\
+\quad (\because \blkref{complex_times_zero_is_zero},\ \blkref{complex_numbers_form_a_field}\text{ の積の単位元}) \\
 &=
 \begin{pmatrix}
   -(0_{\mathbb{C}}) \\
@@ -1714,7 +1714,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
         String.raw`\begin{aligned}
 (\sigma_m^z\sigma_{m'}^z)_{kk}
 &= (\sigma_m^z\sigma_{m'}^z)_{kk}\,1_{\mathbb{C}}
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元}) \\
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の単位元}) \\
 &= (\sigma_m^z\sigma_{m'}^z)_{kk}\,(f_{\iota(\mu)})_{k}
    \quad (\because \blkref{config_basis_vector_own_component}\text{ を }I = \iota(\mu)\text{ で}) \\
 &= \sum_{l=1}^{2^{M_{\mathrm{col}}}} (\sigma_m^z\sigma_{m'}^z)_{kl}\,(f_{\iota(\mu)})_{l}
@@ -1728,7 +1728,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
 &= \mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}\, 1_{\mathbb{C}}
    \quad (\because \blkref{config_basis_vector_own_component}\text{ を }I = \iota(\mu)\text{ で}) \\
 &= \mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元}).
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の単位元}).
 \end{aligned}`,
       ),
     ],

@@ -236,7 +236,7 @@ theorem real_inclusion_cos_add_I_mul_sin (θ : ℝ) :
     _ = (eP + (eP + (eM + -eM))) * (2 : ℂ)⁻¹ := by
         rw [add_assoc eP eM]                      -- 12 行目: `complex_numbers_form_a_field` の和の結合律
     _ = (eP + (eP + 0)) * (2 : ℂ)⁻¹ := by
-        rw [add_neg_cancel]                       -- 13 行目: `complex_numbers_form_a_field` の加法逆元
+        rw [add_neg_cancel]                       -- 13 行目: `complex_numbers_form_a_field` の加法の逆元
     _ = (eP + eP) * (2 : ℂ)⁻¹ := by
         rw [add_zero]                             -- 14 行目: `complex_numbers_form_a_field` の零元
     _ = (1 * eP + 1 * eP) * (2 : ℂ)⁻¹ := by

@@ -2535,7 +2535,7 @@ k
 &=(-1_{\mathbb R})_{\mathbb C}+0_{\mathbb C}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z\to-1_{\mathbb C})\bigr) \\
 &=(-1_{\mathbb R})_{\mathbb C}
-&&\bigl(\because\ 0_{\mathbb C}\text{ は和の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
+&&\bigl(\because\ 0_{\mathbb C}\text{ は加法の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
 &=-1_{\mathbb C}
 &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\text{ と }\blkref{definition_of_cc}\text{ の和により }(1_{\mathbb R},0_{\mathbb R})+(-1_{\mathbb R},0_{\mathbb R})=(0_{\mathbb R},0_{\mathbb R})=0_{\mathbb C}\text{ なので、}(-1_{\mathbb R})_{\mathbb C}=(-1_{\mathbb R},0_{\mathbb R})\text{ は }1_{\mathbb C}\text{ の加法の逆元 }-1_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)
 \end{aligned}`,

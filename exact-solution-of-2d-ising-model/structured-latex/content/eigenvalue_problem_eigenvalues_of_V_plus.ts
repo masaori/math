@@ -543,7 +543,7 @@ S_2
 &= (1_{\mathbb{C}}(K_2^*)_{\mathbb{C}})\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad (\because i\cdot(-i) = 1_{\mathbb{C}}) \\
 &= (K_2^*)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
-   \quad \left(\because\ \mathbb{C}\ \text{の乗法の単位元 }\blkref{complex_numbers_form_a_field}\right)
+   \quad \left(\because\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -776,7 +776,7 @@ S_1^{(+)}
 &= (1_{\mathbb{C}}(K_1)_{\mathbb{C}})\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
    \quad (\because i\cdot(-i) = 1_{\mathbb{C}}) \\
 &= (K_1)_{\mathbb{C}}\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
-   \quad \left(\because\ \mathbb{C}\ \text{の乗法の単位元 }\blkref{complex_numbers_form_a_field}\right) \\
+   \quad \left(\because\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\right) \\
 &= (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - (K_1)_{\mathbb{C}}G
    \quad \left(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\ (m \to 2^{M_{\mathrm{col}}},\ p \to 2^{M_{\mathrm{col}}},\ c \to (K_1)_{\mathbb{C}},\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to G)\right)
 \end{aligned}`,
@@ -2938,7 +2938,7 @@ X\,\check{n}_\nu
 &= 2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}
    \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}) \\
 &= 1_{\mathbb{C}}
-   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の逆元})
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の逆元の存在})
 \end{aligned}`,
       ),
       paragraph([math(String.raw`w \in \mathbb{C}`), " について"]),
@@ -3022,7 +3022,7 @@ w
 &= 2_{\mathbb{C}}^{-1}\left(\left(\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right) + \left(-\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)\right)\right) + \mathrm{tr}(P)\right)
    \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ}) \\
 &= 2_{\mathbb{C}}^{-1}\left(0_{\mathbb{C}} + \mathrm{tr}(P)\right)
-   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元}) \\
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元}) \\
 &= 2_{\mathbb{C}}^{-1}\left(\mathrm{tr}(P) + 0_{\mathbb{C}}\right)
    \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律}) \\
 &= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
@@ -3059,7 +3059,7 @@ w
 &= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P) + \left(2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P) + \left(-2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)\right)\right)
    \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律}) \\
 &= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P) + 0_{\mathbb{C}}
-   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元}) \\
+   \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元}) \\
 &= 2_{\mathbb{C}}^{-1}\,\mathrm{tr}(P)
    \quad (\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})
 \end{aligned}`,
@@ -3210,7 +3210,7 @@ w
 &= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\cdot 1_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
   \quad \left(\because\ \blkref{multiply_by_minus_one}\ (z \to 1_{\mathbb{C}})\right) \\
 &= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\right)\left(I - \check{n}_\mu\right)
-  \quad \left(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元}\right) \\
+  \quad \left(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\right) \\
 &= 1_{\mathbb{C}}\,\check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
   \quad \left(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元}\right) \\
 &= \check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
@@ -4583,7 +4583,7 @@ E_K \check{Q}_\epsilon
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,1_{\mathbb{C}}
 &&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(4) の}\ \mathrm{tr}(\check{Q}_\epsilon) = 1\ \text{を各項へ同時に}\bigr)\\
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}
-&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -4712,7 +4712,7 @@ E_K \check{Q}_\epsilon
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,1_{\mathbb{C}}
 &&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(4) の}\ \mathrm{tr}(\check{Q}_\epsilon) = 1\ \text{を各項へ同時に}\bigr)\\
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}
-&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)\\
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)\\
 &= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(-\check{g}(\epsilon))\Bigr)_{\mathbb{C}}
 &&\bigl(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \exp(-\check{g}(\epsilon)))\bigr)\\
 &= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M_{\mathrm{col}}}
@@ -5718,7 +5718,7 @@ T_B\bigl(\exp(X)\bigr)
 &= 1_{\mathbb{C}}(S_1)_{kl}
 &&(\because\ \blkref{inclusion_rr_to_cc})\\
 &= (S_1)_{kl}
-&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})
+&&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field})
 \end{aligned}`),
       paragraph(["なので ", math(String.raw`H + H = S_1`), " であり、"]),
       displayMath(String.raw`\begin{aligned}
@@ -5958,7 +5958,7 @@ w
 &= (a^{-1})_{\mathbb{C}}\,\tau
    &&(\because\ \text{Step 2}) \\
 &= (a^{-1})_{\mathbb{C}}\bigl(1_{\mathbb{C}}\tau\bigr)
-   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= (a^{-1})_{\mathbb{C}}\bigl((a^{-1}a)_{\mathbb{C}}\tau\bigr)
    &&(\because\ \mathbb{R}\ \text{で}\ a^{-1}a = 1) \\
 &= (a^{-1})_{\mathbb{C}}\bigl(((a^{-1})_{\mathbb{C}}a_{\mathbb{C}})\tau\bigr)
@@ -6005,7 +6005,7 @@ c^2w
 &= \bigl((1_{\mathbb{C}}\,c)\,c\bigr)\,w
    &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{0} := 1_{\mathbb{C}}\ (z \to c)) \\
 &= (cc)\,w
-   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= (cc)\bigl(c^{-1}t_{\mathbb{C}}\bigr)
    &&(\because\ \text{Step 3 の第二の鎖}) \\
 &= c\bigl(c(c^{-1}t_{\mathbb{C}})\bigr)
@@ -6015,13 +6015,13 @@ c^2w
 &= c\bigl(1_{\mathbb{C}}t_{\mathbb{C}}\bigr)
    &&(\because\ c^{-1}\ \text{は}\ c\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
 &= c\,t_{\mathbb{C}}
-   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= \mathrm{tr}\bigl(V^{(+)}\bigr)
    &&(\because\ \text{Step 3 の第一の鎖を右辺から左辺へ}) \\
 &= a_{\mathbb{C}}\,\tau
    &&(\because\ \text{Step 1 の第一の鎖}) \\
 &= a_{\mathbb{C}}\bigl(1_{\mathbb{C}}\tau\bigr)
-   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= a_{\mathbb{C}}\bigl((aa^{-1})_{\mathbb{C}}\tau\bigr)
    &&(\because\ \mathbb{R}\ \text{で}\ aa^{-1} = 1) \\
 &= a_{\mathbb{C}}\bigl((a_{\mathbb{C}}(a^{-1})_{\mathbb{C}})\tau\bigr)
@@ -6045,7 +6045,7 @@ c^2w
         String.raw`\begin{aligned}
 c^2
 &= c^2\,1_{\mathbb{C}}
-   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= c^2\bigl(ww^{-1}\bigr)
    &&(\because\ w^{-1}\ \text{は}\ w\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
 &= (c^2w)\,w^{-1}
@@ -6057,7 +6057,7 @@ c^2
 &= (a^2)_{\mathbb{C}}\,1_{\mathbb{C}}
    &&(\because\ w^{-1}\ \text{は}\ w\ \text{の逆元。}\blkref{complex_numbers_form_a_field}) \\
 &= (a^2)_{\mathbb{C}}
-   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})
+   &&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field})
 \end{aligned}`,
       ),
       paragraph([
@@ -6077,7 +6077,7 @@ c^2
         String.raw`\begin{aligned}
 c
 &= c\,1_{\mathbb{C}}
-   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+   &&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= c\,(tt^{-1})_{\mathbb{C}}
    &&(\because\ \mathbb{R}\ \text{で}\ tt^{-1} = 1) \\
 &= c\bigl(t_{\mathbb{C}}(t^{-1})_{\mathbb{C}}\bigr)
@@ -6105,7 +6105,7 @@ c
 &= cc
    &&(\because\ \text{上の鎖の}\ c = \rho_{\mathbb{C}}) \\
 &= (1_{\mathbb{C}}\,c)\,c
-   &&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を右辺から左辺へ}) \\
+   &&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を右辺から左辺へ}) \\
 &= (c^{0}c)\,c
    &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{0} := 1_{\mathbb{C}}\ (z \to c)\ \text{を右辺から左辺へ}) \\
 &= c^{1}c
@@ -6985,7 +6985,7 @@ x &= Ix
 &= cc
    &&(\because\ \blkref{constant_c_value_even_sector}\ \text{を右辺から左辺へ、2 か所へ同時に}) \\
 &= (1_{\mathbb{C}}\,c)\,c
-   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元}\ 1_{\mathbb{C}}z = z\ (z \to c)\ \text{を右辺から左辺へ}) \\
+   &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\ 1_{\mathbb{C}}z = z\ (z \to c)\ \text{を右辺から左辺へ}) \\
 &= (c^{0}c)\,c
    &&(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{0} := 1_{\mathbb{C}}\ (z \to c)\ \text{を右辺から左辺へ}) \\
 &= c^{1}c

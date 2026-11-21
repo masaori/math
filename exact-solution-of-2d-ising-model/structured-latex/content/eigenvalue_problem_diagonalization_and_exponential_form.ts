@@ -1665,7 +1665,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
 &= \left(1_{\mathbb C} + 0_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
    &&(\because\ \blkref{complex_times_zero_is_zero}) \\
 &= 1_{\mathbb C}\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
-   &&(\because\ 0_{\mathbb C}\text{ は和の単位元}\ (\blkref{complex_numbers_form_a_field})) \\
+   &&(\because\ 0_{\mathbb C}\text{ は加法の単位元}\ (\blkref{complex_numbers_form_a_field})) \\
 &= \exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
    &&(\because\ 1_{\mathbb C}\text{ は積の単位元}\ (\blkref{complex_numbers_form_a_field}))
 \end{aligned}`,
@@ -4268,7 +4268,7 @@ s_1c_2
      A(\theta)_{11} - \lambda & A(\theta)_{12} - \lambda \cdot 0_{\mathbb{C}} \\
      A(\theta)_{21} - \lambda \cdot 0_{\mathbb{C}} & A(\theta)_{22} - \lambda
    \end{pmatrix}
-   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元 }\lambda\cdot 1_{\mathbb{C}} = \lambda\text{ を 2 成分へ同時適用}) \\
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の積の単位元 }\lambda\cdot 1_{\mathbb{C}} = \lambda\text{ を 2 成分へ同時適用}) \\
 &= \det\begin{pmatrix}
      A(\theta)_{11} - \lambda & A(\theta)_{12} - 0_{\mathbb{C}} \\
      A(\theta)_{21} - 0_{\mathbb{C}} & A(\theta)_{22} - \lambda
@@ -5330,7 +5330,7 @@ A(\tilde\theta_\mu)
         ref("real_inclusion_preserves_difference"),
         "）なので、実数の和・差・積の像は像の和・差・積である。",
         math(String.raw`\mathbb{C}`),
-        " の和と積の結合律・可換律・分配律・単位元・零元・加法逆元・乗法の逆元は ",
+        " の和と積の結合律・可換律・分配律・単位元・零元・加法の逆元・逆元の存在は ",
         ref("complex_numbers_form_a_field"),
         " による。",
         math(String.raw`w \neq 0_{\mathbb{C}}`),
@@ -5408,7 +5408,7 @@ e_+e_-
 &= \exp\bigl(i\theta + (-i\theta)\bigr)
 &&(\because\ \blkref{scalar_exp_product}\ \text{を}\ K = \mathbb{C}\ \text{で})\\
 &= \exp(0_{\mathbb{C}})
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元})\\
 &= 1_{\mathbb{C}}
 &&(\because\ \blkref{scalar_exp_zero}\ \text{を}\ K = \mathbb{C}\ \text{で})
 \end{aligned}`),
@@ -5431,7 +5431,7 @@ e_+e_-
 &= xx + \Bigl((iy)x + \bigl(-((iy)x)\bigr)\Bigr) + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
 &&(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ})\\
 &= xx + 0_{\mathbb{C}} + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元})\\
 &= xx + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
 &= xx + (-1_{\mathbb{C}})\bigl((ii)(yy)\bigr)
@@ -5497,7 +5497,7 @@ u + iv
 &= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\bigl(2_{\mathbb{C}}^{-1}(i\,i^{-1})\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
 &= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\bigl(2_{\mathbb{C}}^{-1}1_{\mathbb{C}}\bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の逆元})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の逆元の存在})\\
 &= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
 &= \bigl((e_+ + e_-) + (e_+ - e_-)\bigr)\,2_{\mathbb{C}}^{-1}
@@ -5507,7 +5507,7 @@ u + iv
 &= \Bigl(e_+ + e_+ + \bigl(e_- + (-e_-)\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律・可換律})\\
 &= \bigl(e_+ + e_+ + 0_{\mathbb{C}}\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元})\\
 &= \bigl(e_+ + e_+\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
 &= \bigl(1_{\mathbb{C}}e_+ + 1_{\mathbb{C}}e_+\bigr)\,2_{\mathbb{C}}^{-1}
@@ -5521,7 +5521,7 @@ u + iv
 &= e_+\bigl(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
 &= e_+\,1_{\mathbb{C}}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の逆元})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の逆元の存在})\\
 &= e_+
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
 \end{aligned}`),
@@ -5886,7 +5886,7 @@ c_2s_2^*
 &= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(\Bigl(r\gamma_1(\theta) + \bigl(-\bigl(r\gamma_1(\theta)\bigr)\bigr)\Bigr) + \bigl(-(rr)\bigr)\Bigr)
 &&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ右辺から左辺へ})\\
 &= \gamma_1(\theta)\gamma_1(\theta) + \bigl(0_{\mathbb{C}} + (-(rr))\bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元})\\
 &= \bigl(\gamma_1(\theta)\gamma_1(\theta) + 0_{\mathbb{C}}\bigr) + \bigl(-(rr)\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
 &= \gamma_1(\theta)\gamma_1(\theta) + \bigl(-(rr)\bigr)
@@ -7052,7 +7052,7 @@ g
 &= \Bigl(\exp(ix) + \bigl(\exp(ix) + (\exp(-ix) + (-\exp(-ix)))\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
 &= \bigl(\exp(ix) + (\exp(ix) + 0_{\mathbb{C}})\bigr)\,2_{\mathbb{C}}^{-1}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元})\\
 &= \bigl(\exp(ix) + \exp(ix)\bigr)\,2_{\mathbb{C}}^{-1}
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
 &= \bigl(1_{\mathbb{C}}\exp(ix) + 1_{\mathbb{C}}\exp(ix)\bigr)\,2_{\mathbb{C}}^{-1}
@@ -9111,7 +9111,7 @@ c\,\delta_{kk}
 &= c\,1_{\mathbb{C}}
 &&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
 &= c
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元}\bigr)
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元}\bigr)
 \end{aligned}
 \qquad
 \begin{aligned}
@@ -9150,7 +9150,7 @@ c\,\delta_{kl}
 &= \begin{cases} \exp(c) & (k = l) \\ 0_{\mathbb{C}} & (k \neq l) \end{cases}
 &&\bigl(\because\ \text{準備 6 の対角成分}\bigr)\\
 &= \begin{cases} \exp(c)\,1_{\mathbb{C}} & (k = l) \\ 0_{\mathbb{C}} & (k \neq l) \end{cases}
-&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元を右辺から左辺へ}\ (k = l)\bigr)\\
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を右辺から左辺へ}\ (k = l)\bigr)\\
 &= \begin{cases} \exp(c)\,1_{\mathbb{C}} & (k = l) \\ \exp(c)\,0_{\mathbb{C}} & (k \neq l) \end{cases}
 &&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to \exp(c))\ \text{を右辺から左辺へ}\ (k \neq l)\bigr)\\
 &= \exp(c)\,\delta_{kl}

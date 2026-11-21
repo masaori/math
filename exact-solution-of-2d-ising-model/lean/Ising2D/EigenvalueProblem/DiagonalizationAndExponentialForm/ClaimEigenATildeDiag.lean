@@ -253,7 +253,7 @@ theorem charPoly_factor_thetaTilde (lam : ℂ) :
         rw [h00, h11, h01, h10]                                           -- `def_kronecker_delta`
     _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1 - lam * 0;
             AMat K θ 1 0 - lam * 0, AMat K θ 1 1 - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
-        simp only [mul_one]                     -- `complex_numbers_form_a_field` の乗法の単位元（`λ·1_ℂ = λ` を 2 成分へ）
+        simp only [mul_one]                     -- `complex_numbers_form_a_field` の積の単位元（`λ·1_ℂ = λ` を 2 成分へ）
     _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1 - 0;
             AMat K θ 1 0 - 0, AMat K θ 1 1 - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
         simp only [mul_zero]                    -- `complex_times_zero_is_zero`（`z → λ` を 2 成分へ）

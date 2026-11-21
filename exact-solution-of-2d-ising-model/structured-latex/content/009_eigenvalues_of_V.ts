@@ -195,7 +195,7 @@ export default defineBlocks([
 &= 1_{\mathbb{C}}\,\mathrm{tr}(A) + 1_{\mathbb{C}}\,\mathrm{tr}(B)
 &&\bigl(\because\ \blkref{trace_basic_properties}\ \text{(1)}\ (\alpha, \beta \to 1_{\mathbb{C}})\bigr)\\
 &= \mathrm{tr}(A) + \mathrm{tr}(B)
-&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を二つの項へ同時に}\bigr)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を二つの項へ同時に}\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`r`),
@@ -377,7 +377,7 @@ Q^2
 &= \bigl((Qx)_k + (-(Qx)_k)\bigr) + x_k
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律を右辺から左辺へ})\\
 &= 0_{\mathbb{C}} + x_k
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元})\\
 &= x_k
 &&(\because\ \blkref{complex_zero_plus_is_original}\ (z \to x_k))
 \end{aligned}`),
@@ -2292,7 +2292,7 @@ b^{(k)*}Ab^{(k)}
 &= (-1_{\mathbb{C}})A_{kl} + A_{kl}
 &&(\because\ \blkref{multiply_by_minus_one})\\
 &= (-1_{\mathbb{C}})A_{kl} + 1_{\mathbb{C}}A_{kl}
-&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})\\
+&&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field})\\
 &= \bigl((-1_{\mathbb{C}}) + 1_{\mathbb{C}}\bigr)A_{kl}
 &&(\because\ \text{分配律。}\blkref{complex_numbers_form_a_field})\\
 &= \bigl((-1,0) + (1,0)\bigr)A_{kl}
@@ -2844,7 +2844,7 @@ SS^{m+1}
 &= 1_{\mathbb{C}}S_{kl}
 &&(\because\ \blkref{inclusion_rr_to_cc})\\
 &= S_{kl}
-&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})
+&&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field})
 \end{aligned}`),
       paragraph(["なので ", math(String.raw`H+H = S`), " である。"]),
       displayMath(String.raw`\begin{aligned}

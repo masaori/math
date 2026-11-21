@@ -33,7 +33,7 @@ def case_one_chain(n, Id):
         ("1n+(1-1)(I-n)", smul(one, n) + smul(one - one, sub(Id, n))),   # 場合の仮定 ε_μ = 1
         ("1n+(1+(-1))(I-n)", smul(one, n) + smul(one + (-one), sub(Id, n))),          # def_complex_difference
         ("1n+(1+(-1)1)(I-n)", smul(one, n) + smul(one + (-one) * one, sub(Id, n))),   # multiply_by_minus_one
-        ("1n+(1+(-1))(I-n)", smul(one, n) + smul(one + (-one), sub(Id, n))),          # 乗法の単位元
+        ("1n+(1+(-1))(I-n)", smul(one, n) + smul(one + (-one), sub(Id, n))),          # 積の単位元
         ("1n+0(I-n)", smul(one, n) + smul(zero, sub(Id, n))),           # complex_numbers_form_a_field の加法の逆元
         ("n+0(I-n)", n + smul(zero, sub(Id, n))),                       # scalar_multiple_by_one
         ("n+O", n + O),                                                 # zero_scalar_multiple_is_zero_matrix

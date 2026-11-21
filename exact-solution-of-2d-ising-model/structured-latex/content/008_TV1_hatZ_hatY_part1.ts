@@ -219,9 +219,9 @@ h(g_1g_2)
       paragraph([
         "(iv) ",
         math(String.raw`c \neq 0`),
-        " より、",
+        " なので、",
         ref("complex_numbers_form_a_field"),
-        " の乗法の逆元 ",
+        " の逆元の存在から、積に関する逆元 ",
         math(String.raw`c^{-1} \in \mathbb{C}`),
         " があり、",
         math(String.raw`c\,c^{-1} = c^{-1}c = 1`),

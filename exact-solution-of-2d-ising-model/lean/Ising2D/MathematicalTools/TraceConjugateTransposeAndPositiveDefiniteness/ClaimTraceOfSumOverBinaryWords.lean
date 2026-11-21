@@ -49,7 +49,7 @@ theorem trace_add_matrix {n : ℕ} (A B : Matrix (Fin n) (Fin n) ℂ) : (A + B).
                                                         -- `scalar_multiple_by_one`（`m, n → n`）を二つの項へ同時に右辺から左辺へ
     _ = 1 * A.trace + 1 * B.trace := trace_linear 1 1 A B
                                                         -- `trace_basic_properties` (1)（`α, β → 1_ℂ`）
-    _ = A.trace + B.trace := by rw [one_mul, one_mul]   -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）を二つの項へ同時に
+    _ = A.trace + B.trace := by rw [one_mul, one_mul]   -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）を二つの項へ同時に
 
 /-- **原文 `trace_of_sum_over_binary_words`**: `tr(Σ_{ε∈{0,1}^r} B_ε) = Σ_{ε∈{0,1}^r} tr(B_ε)`（人手の `r` は Lean の `r + 1`）。 -/
 theorem trace_binaryWordMatrixSum {n : ℕ} :
@@ -95,7 +95,7 @@ theorem trace_add_tensorPow {M : ℕ} (A B : TensorPow M) : (A + B).trace = A.tr
                                                         -- `scalar_multiple_by_one` を二つの項へ同時に右辺から左辺へ
     _ = 1 * A.trace + 1 * B.trace := trace_linear 1 1 A B
                                                         -- `trace_basic_properties` (1)（`α, β → 1_ℂ`）
-    _ = A.trace + B.trace := by rw [one_mul, one_mul]   -- `1_ℂ` は乗法の単位元を二つの項へ同時に
+    _ = A.trace + B.trace := by rw [one_mul, one_mul]   -- `1_ℂ` は積の単位元を二つの項へ同時に
 
 /-- `trace_of_scalar_multiple` の `TensorPow M` での系（同じ 5 行）。 -/
 theorem trace_smul_tensorPow {M : ℕ} (α : ℂ) (A : TensorPow M) : (α • A).trace = α * A.trace :=

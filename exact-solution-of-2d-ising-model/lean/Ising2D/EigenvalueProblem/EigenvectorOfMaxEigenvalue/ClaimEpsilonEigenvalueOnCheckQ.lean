@@ -487,7 +487,7 @@ theorem defFactor_of_mem {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∈ T) :
         congrArg (fun c : ℂ => (1 : ℂ) • F.nOp μ + ((1 : ℂ) + c) • (1 - F.nOp μ)) (neg_one_mul (1 : ℂ)).symm
                                                         -- `multiply_by_minus_one`
     _ = (1 : ℂ) • F.nOp μ + ((1 : ℂ) + -1) • (1 - F.nOp μ) := by
-        rw [mul_one (-1 : ℂ)]                           -- `complex_numbers_form_a_field` の乗法の単位元
+        rw [mul_one (-1 : ℂ)]                           -- `complex_numbers_form_a_field` の積の単位元
     _ = (1 : ℂ) • F.nOp μ + (0 : ℂ) • (1 - F.nOp μ) := by
         rw [add_neg_cancel (1 : ℂ)]                     -- `complex_numbers_form_a_field` の加法の逆元
     _ = F.nOp μ + (0 : ℂ) • (1 - F.nOp μ) := by
@@ -818,7 +818,7 @@ theorem eta_eq_eta_univ_mul_of_sub_card (k : ℕ) :
         rw [Fintype.card_fin]
         omega
       calc F.eta T = F.eta Finset.univ := by rw [hT]     -- `ε = (1,…,1)`
-        _ = F.eta Finset.univ * 1 := (mul_one _).symm    -- `complex_numbers_form_a_field` の乗法の単位元
+        _ = F.eta Finset.univ * 1 := (mul_one _).symm    -- `complex_numbers_form_a_field` の積の単位元
         _ = F.eta Finset.univ * (-1 : ℂ) ^ 0 := by rw [pow_zero]
                                                           -- `def_power_of_complex_number` の `z^0 := 1_ℂ`
         _ = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by rw [hk]

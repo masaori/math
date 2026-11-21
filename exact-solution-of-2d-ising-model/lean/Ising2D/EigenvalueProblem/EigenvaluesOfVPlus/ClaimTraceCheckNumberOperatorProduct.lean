@@ -219,7 +219,7 @@ theorem trace_mul_nOp_chain (P : TensorPow M) (ν : CheckIdx M) (hP : F.ann ν *
 theorem inv_two_mul_two_prep4 : (2 : ℂ)⁻¹ * 2 = 1 :=
   calc (2 : ℂ)⁻¹ * 2
       = 2 * (2 : ℂ)⁻¹ := mul_comm _ _                                -- `complex_numbers_form_a_field` の積の可換律
-    _ = 1 := mul_inv_cancel₀ two_ne_zero                              -- `complex_numbers_form_a_field` の乗法の逆元
+    _ = 1 := mul_inv_cancel₀ two_ne_zero                              -- `complex_numbers_form_a_field` の逆元の存在
 
 /-- **人手の準備 4** の第 2 の鎖（3 行）: `2_ℂ w = (1_ℂ + 1_ℂ) w = 1_ℂ w + 1_ℂ w = w + w`。 -/
 theorem two_mul_eq_add_prep4 (w : ℂ) : 2 * w = w + w :=
@@ -259,7 +259,7 @@ theorem trace_mul_nOp_eq_half (P : TensorPow M) (ν : CheckIdx M) (hP : F.ann ν
           rw [add_comm P.trace]                                       -- `complex_numbers_form_a_field` の和の可換律
     _ = (2 : ℂ)⁻¹ * (((P * F.nOp ν).trace + (-(P * F.nOp ν).trace)) + P.trace) := by
           rw [add_assoc]                                              -- `complex_numbers_form_a_field` の和の結合律を右辺から左辺へ
-    _ = (2 : ℂ)⁻¹ * (0 + P.trace) := by rw [add_neg_cancel]          -- `complex_numbers_form_a_field` の加法逆元
+    _ = (2 : ℂ)⁻¹ * (0 + P.trace) := by rw [add_neg_cancel]          -- `complex_numbers_form_a_field` の加法の逆元
     _ = (2 : ℂ)⁻¹ * (P.trace + 0) := by rw [add_comm (0 : ℂ)]        -- `complex_numbers_form_a_field` の和の可換律
     _ = (2 : ℂ)⁻¹ * P.trace := by rw [add_zero]                      -- `complex_numbers_form_a_field` の零元
 
@@ -285,7 +285,7 @@ theorem trace_mul_projFactor_eq_half (T : Finset (CheckIdx M)) (P : TensorPow M)
                                                                        -- `def_complex_difference`
       _ = (2 : ℂ)⁻¹ * P.trace + ((2 : ℂ)⁻¹ * P.trace + (-((2 : ℂ)⁻¹ * P.trace))) := add_assoc _ _ _
                                                                        -- `complex_numbers_form_a_field` の和の結合律
-      _ = (2 : ℂ)⁻¹ * P.trace + 0 := by rw [add_neg_cancel]           -- `complex_numbers_form_a_field` の加法逆元
+      _ = (2 : ℂ)⁻¹ * P.trace + 0 := by rw [add_neg_cancel]           -- `complex_numbers_form_a_field` の加法の逆元
       _ = (2 : ℂ)⁻¹ * P.trace := add_zero _                            -- `complex_numbers_form_a_field` の零元
 
 /-- **原文 `trace_of_check_number_operator_product`**（`k ≥ 1`。人手の帰納法と 1 対 1）:

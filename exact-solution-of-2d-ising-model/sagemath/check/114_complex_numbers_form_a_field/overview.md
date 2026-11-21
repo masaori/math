@@ -15,7 +15,7 @@
 | # | ファイル | 検証内容 | 判定数 | 最大相対誤差 | ステータス |
 |---|---------|---------|-------|------------|-----------|
 | 01 | `check_01_field_axioms.sage` | 体の公理一式と乗法逆元 | 4390 | 2.238e-16 | **PASS** |
-| 02 | `check_02_negation_rows.sage` | 証明の加法逆元と `(-1_C)·z` の一致の鎖を一行ずつ。`0·b`・`0·a` を消す行は `real_zero_times_is_zero`（`x → b, a`）、続く 3 行は `real_minus_zero_is_self`（`a → (−1)a`）・`0` は ℝ の加法の単位元（`set_and_algebra_notation`。`x + 0 = x` の `x → (−1)b`）・`real_minus_one_times_is_negation`（`a → a, b`）。`QQ[a, b]` の多項式の等号で比べ、終点が `(a,b)` の加法逆元であることも確かめる | 鎖 1 本 | 厳密（`QQ`） | **PASS** |
+| 02 | `check_02_negation_rows.sage` | 証明の加法の逆元と `(-1_C)·z` の一致の鎖を一行ずつ。`0·b`・`0·a` を消す行は `real_zero_times_is_zero`（`x → b, a`）、続く 3 行は `real_minus_zero_is_self`（`a → (−1)a`）・`0` は ℝ の加法の単位元（`set_and_algebra_notation`。`x + 0 = x` の `x → (−1)b`）・`real_minus_one_times_is_negation`（`a → a, b`）。`QQ[a, b]` の多項式の等号で比べ、終点が `(a,b)` の加法の逆元であることも確かめる | 鎖 1 本 | 厳密（`QQ`） | **PASS** |
 | 03 | `check_unit_rows_cite_set_and_algebra_notation.sage` | 加法の単位元の鎖の `(a + 0, b + 0) = (a, b)`（`x + 0 = x` の `x → a, x → b`）と `(−1_C)·z` の鎖の `((−1)a, (−1)b + 0) = ((−1)a, (−1)b)`（`x → (−1)b`）を、行に書いた形と代入どおりに（`set_and_algebra_notation`）。`QQ[a, b]` の多項式の等号で比べる。多項式環は式を正規化するので、形の左右は区別できず、それはレビューの目視で確かめた。対照（`a + 1 ≠ a`） | 2 行 | 厳密（`QQ`） | **PASS** |
 
 許容誤差は既定の相対誤差 `1.0e-09`（成分の最大絶対値で正規化）。既定から変更していない。

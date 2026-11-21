@@ -1536,7 +1536,7 @@ t
         " は可換群である。",
       ]),
       paragraph([
-        "この加法逆元は ",
+        "この加法の逆元は ",
         ref("multiply_by_minus_one"),
         " の ",
         math(String.raw`-z:=(-1_{\mathbb{C}})\cdot z`),
@@ -4621,7 +4621,7 @@ z^2
 &= 1_{\mathbb{C}}\, 1_{\mathbb{C}}
 &&(\because\ \text{帰納法の仮定})\\
 &= 1_{\mathbb{C}}
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元})
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
 \end{aligned}`),
     ],
     conversion: {
