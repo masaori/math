@@ -47103,6 +47103,252 @@ g
               ],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "zero_pinching_heading_adjoin_imaginary_unit_gives_algebraic_numbers",
+              labels: [],
+              title: { text: "虚数単位を足した体と代数的数の全体" },
+              children: [
+                {
+                  role: "primary",
+                  element: {
+                    kind: "elementGroup",
+                    id: "group_of_zero_pinching_claim_adjoin_imaginary_unit_gives_algebraic_numbers",
+                    focus:
+                      {
+                        id: "zero_pinching_claim_adjoin_imaginary_unit_gives_algebraic_numbers",
+                        kind: "claim",
+                        title: { text: "正の元が平方で奇数次の多項式が根を持つ部分体に虚数単位を足すと代数的数の全体になる" },
+                        labels: ["claim_adjoin_imaginary_unit_gives_algebraic_numbers"],
+                        habitat: "Qbar",
+                        verification: ["sagemath/check/adjoin-imaginary-unit-gives-algebraic-numbers"],
+                        lean: [
+                          "Ising2DLambda.FisherZero.adjoinImaginaryUnit_gives_algebraicNumbers",
+                          "Ising2DLambda.NecSuf.FisherZero.adjoinImaginaryUnit_gives_algebraicNumbers_necSuf",
+                          "Ising2DLambda.FisherZero.adjoinImaginaryUnit_gives_algebraicNumbers_from_necSuf",
+                        ],
+                        statement: [
+                          paragraph([
+                            math(String.raw`F`),
+                            "、",
+                            math(String.raw`C_F`),
+                            "、",
+                            math(String.raw`\omega`),
+                            "、",
+                            math(String.raw`\mathrm{Lin}_F(\omega)`),
+                            " を ",
+                            ref("def_imaginary_unit_extension_conjugate"),
+                            " のものとし、",
+                            ref("claim_imaginary_unit_extension_monic_polynomial_linear_factor_product"),
+                            " と同じく次の二つを仮定する: ",
+                            math(String.raw`C_F`),
+                            " の各元は ",
+                            math(String.raw`F`),
+                            " に平方根を持つ。任意の奇数 ",
+                            math(String.raw`n\in\mathbb{N}`),
+                            " と任意の ",
+                            math(String.raw`p\in F[t]`),
+                            "（",
+                            ref("def_subfield_coefficient_polynomials"),
+                            "）について、",
+                            math(String.raw`\mathrm{ac}_n(p)\ne0`),
+                            " であり、",
+                            math(String.raw`k>n`),
+                            " を満たす任意の ",
+                            math(String.raw`k\in\mathbb{N}`),
+                            " で ",
+                            math(String.raw`\mathrm{ac}_k(p)=0`),
+                            " ならば、ある ",
+                            math(String.raw`z\in F`),
+                            " で ",
+                            math(String.raw`\mathrm{aev}_{z}(p)=0`),
+                            "（",
+                            ref("def_qbar_poly_evaluation"),
+                            "）である。このとき、任意の ",
+                            math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+                            "（",
+                            ref("def_algebraic_numbers"),
+                            "）について ",
+                            math(String.raw`\xi\in\mathrm{Lin}_F(\omega)`),
+                            "、すなわち ",
+                            math(String.raw`\xi=a+b\cdot\omega`),
+                            " を満たす ",
+                            math(String.raw`a,b\in F`),
+                            " がある。",
+                            math(String.raw`\mathrm{Lin}_F(\omega)\subset\overline{\mathbb{Q}}`),
+                            " は定義から成り立つので、",
+                            math(String.raw`\mathrm{Lin}_F(\omega)=\overline{\mathbb{Q}}`),
+                            " である。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "準備を置く。",
+                            math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+                            " を任意に取り、",
+                            math(String.raw`n:=\deg_F(\xi)\in\mathbb{N}`),
+                            "（",
+                            ref("def_degree_over_subfield"),
+                            "）と置く。",
+                            math(String.raw`n\in D_F(\xi)`),
+                            " なので、",
+                            math(String.raw`p\in F[t]`),
+                            " で、",
+                            math(String.raw`p\ne0`),
+                            "、",
+                            math(String.raw`\mathrm{aev}_{\xi}(p)=0`),
+                            "、",
+                            math(String.raw`k>n`),
+                            " を満たす任意の ",
+                            math(String.raw`k\in\mathbb{N}`),
+                            " で ",
+                            math(String.raw`\mathrm{ac}_k(p)=0`),
+                            " となるものを取る。",
+                            ref("claim_minimal_vanishing_polynomial_leading_coefficient_nonzero"),
+                            " により ",
+                            math(String.raw`c:=\mathrm{ac}_n(p)\ne0`),
+                            " である。",
+                            math(String.raw`p\in F[t]`),
+                            " なので ",
+                            math(String.raw`c\in F`),
+                            " であり、",
+                            math(String.raw`F`),
+                            " は部分体なので ",
+                            math(String.raw`c^{-1}\in F`),
+                            " である。",
+                            math(String.raw`g:=\widehat{c^{-1}}\cdot p\in\overline{\mathbb{Q}}[t]`),
+                            "（",
+                            math(String.raw`\widehat{\ \cdot\ }`),
+                            " は ",
+                            ref("def_qbar_constant_embedding"),
+                            "）と置く。",
+                          ]),
+                          paragraph([
+                            "(一) 任意の ",
+                            math(String.raw`k\in\mathbb{N}`),
+                            " について",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(g)
+&=\sum_{i=0}^{k}\mathrm{ac}_i\bigl(\widehat{c^{-1}}\bigr)\cdot\mathrm{ac}_{k-i}(p)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\text{ の積の係数}\bigr)\\
+&=\mathrm{ac}_0\bigl(\widehat{c^{-1}}\bigr)\cdot\mathrm{ac}_{k}(p)+\sum_{i=1}^{k}\mathrm{ac}_i\bigl(\widehat{c^{-1}}\bigr)\cdot\mathrm{ac}_{k-i}(p)
+&&\bigl(\because\ i=0\text{ の項を分ける}\bigr)\\
+&=c^{-1}\cdot\mathrm{ac}_{k}(p)+\sum_{i=1}^{k}0\cdot\mathrm{ac}_{k-i}(p)
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の係数}\bigr)\\
+&=c^{-1}\cdot\mathrm{ac}_{k}(p)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の零元との積と和}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "である。(二) 任意の ",
+                            math(String.raw`k\in\mathbb{N}`),
+                            " について、",
+                            math(String.raw`c^{-1}\in F`),
+                            " と ",
+                            math(String.raw`\mathrm{ac}_k(p)\in F`),
+                            " と ",
+                            math(String.raw`F`),
+                            " の積での閉性により ",
+                            math(String.raw`\mathrm{ac}_k(g)=c^{-1}\cdot\mathrm{ac}_k(p)\in F`),
+                            " であり、",
+                            math(String.raw`0\in F`),
+                            " と ",
+                            math(String.raw`\mathrm{ac}_k(g)=\mathrm{ac}_k(g)+0\cdot\omega`),
+                            " により ",
+                            math(String.raw`\mathrm{ac}_k(g)\in\mathrm{Lin}_F(\omega)`),
+                            " である。(三)",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_n(g)
+&=c^{-1}\cdot\mathrm{ac}_{n}(p)
+&&\bigl(\because\ \text{(一)}\bigr)\\
+&=c^{-1}\cdot c
+&&\bigl(\because\ c\text{ の置き方}\bigr)\\
+&=1
+&&\bigl(\because\ c\ne0\text{ と }\overline{\mathbb{Q}}\text{ の逆元}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "(四) ",
+                            math(String.raw`k>n`),
+                            " を満たす任意の ",
+                            math(String.raw`k\in\mathbb{N}`),
+                            " について",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k(g)
+&=c^{-1}\cdot\mathrm{ac}_{k}(p)
+&&\bigl(\because\ \text{(一)}\bigr)\\
+&=c^{-1}\cdot0
+&&\bigl(\because\ k>n\text{ と }p\text{ の取り方}\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の零元との積}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "(五)",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_{\xi}(g)
+&=\mathrm{aev}_{\xi}\bigl(\widehat{c^{-1}}\bigr)\cdot\mathrm{aev}_{\xi}(p)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\text{ の、}\mathrm{aev}_{\xi}\text{ は積を保つこと}\bigr)\\
+&=c^{-1}\cdot\mathrm{aev}_{\xi}(p)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\text{ の }\mathrm{aev}_{\xi}(\widehat{a})=a\bigr)\\
+&=c^{-1}\cdot0
+&&\bigl(\because\ p\text{ の取り方}\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の零元との積}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "主張を示す。(二)・(三)・(四) により ",
+                            math(String.raw`g`),
+                            " は ",
+                            ref("claim_imaginary_unit_extension_monic_polynomial_linear_factor_product"),
+                            " の ",
+                            math(String.raw`d:=n`),
+                            " での三条件を満たすので、その主張により、任意の ",
+                            math(String.raw`i\in\mathbb{N}`),
+                            " で ",
+                            math(String.raw`\alpha(i)\in\mathrm{Lin}_F(\omega)`),
+                            " を満たし ",
+                            math(String.raw`g=\prod_{i=0}^{n-1}\bigl(t-\widehat{\alpha(i)}\bigr)`),
+                            " となる写像 ",
+                            math(String.raw`\alpha:\mathbb{N}\to\overline{\mathbb{Q}}`),
+                            " がある。(五) により ",
+                            math(String.raw`\mathrm{aev}_{\xi}\Bigl(\prod_{i=0}^{n-1}\bigl(t-\widehat{\alpha(i)}\bigr)\Bigr)=\mathrm{aev}_{\xi}(g)=0`),
+                            " なので、",
+                            ref("claim_qbar_linear_factor_product_root_is_listed_root"),
+                            " を ",
+                            math(String.raw`N:=n`),
+                            "、",
+                            math(String.raw`\beta:=\alpha`),
+                            "、",
+                            math(String.raw`z:=\xi`),
+                            " へ当てると、",
+                            math(String.raw`r<n`),
+                            " を満たすある ",
+                            math(String.raw`r\in\mathbb{N}`),
+                            " で ",
+                            math(String.raw`\xi=\alpha(r)`),
+                            " である。よって ",
+                            math(String.raw`\xi=\alpha(r)\in\mathrm{Lin}_F(\omega)`),
+                            " である。",
+                            math(String.raw`\xi`),
+                            " は任意だったので ",
+                            math(String.raw`\overline{\mathbb{Q}}\subset\mathrm{Lin}_F(\omega)`),
+                            " であり、逆の包含と合わせて ",
+                            math(String.raw`\mathrm{Lin}_F(\omega)=\overline{\mathbb{Q}}`),
+                            " である。全過程は ",
+                            math(String.raw`\overline{\mathbb{Q}}`),
+                            " の部分体の元と、それを係数とする多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                          ]),
+                        ],
+                      },
+                  },
+                },
+              ],
+            },
+          },
         ],
       },
     },

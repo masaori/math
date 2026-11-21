@@ -12,6 +12,7 @@ export const ALL_LABELS = [
   "about_this_paper_mathematical_tools",
   "claim_adjacent_cell_corners_connected",
   "claim_adjacent_cells_ray_crossing_difference",
+  "claim_adjoin_imaginary_unit_gives_algebraic_numbers",
   "claim_admissible_direction_permutation_signs",
   "claim_admissible_direction_permutations",
   "claim_algebraic_numbers_enumeration",

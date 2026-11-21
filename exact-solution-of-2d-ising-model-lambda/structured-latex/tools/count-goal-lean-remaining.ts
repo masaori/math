@@ -318,7 +318,11 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
   },
   claim_adjoin_imaginary_unit_gives_algebraic_numbers: {
     title: "虚数単位を足すと代数的数の全体になる",
-    dependsOn: ["claim_imaginary_unit_extension_monic_polynomial_linear_factor_product"],
+    dependsOn: [
+      "claim_imaginary_unit_extension_monic_polynomial_linear_factor_product",
+      "claim_minimal_vanishing_polynomial_leading_coefficient_nonzero",
+      "claim_qbar_linear_factor_product_root_is_listed_root",
+    ],
   },
   claim_maximal_ordered_subfield_odd_degree_root: {
     title: "極大な順序付き部分体では奇数次の多項式が根を持つ",
