@@ -6,6 +6,10 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "about_this_paper",
+  "about_this_paper_chapter_dependencies",
+  "about_this_paper_goal",
+  "about_this_paper_mathematical_tools",
   "claim_adjacent_cell_corners_connected",
   "claim_adjacent_cells_ray_crossing_difference",
   "claim_admissible_direction_permutation_signs",
@@ -975,6 +979,7 @@ export const ALL_LABELS = [
   "def_integer_matrix_determinant",
   "def_integer_matrix_product",
   "def_integer_polynomial_qbar_lift",
+  "def_integer_polynomial_substitution",
   "def_integer_sequence_level_crossing_counts",
   "def_inter_row_broken_count",
   "def_intra_row_broken_count",

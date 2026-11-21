@@ -50,6 +50,7 @@ export type { Label, Origin };
 // 利用側はこのモジュールだけを見ればよい）。
 export {
   cite,
+  diagram,
   displayMath,
   image,
   list,

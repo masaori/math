@@ -28,9 +28,21 @@ import { spawnSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
+import {
+  describeDiagramLayoutError,
+  layoutDiagram,
+} from "../../../structured-latex/renderers/diagram/layout.ts";
+import {
+  DIAGRAM_TIKZ_PREAMBLE,
+  renderDiagramTikz,
+} from "../../../structured-latex/renderers/latex/diagram.ts";
 import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 import { escapeText } from "./latex-escape.ts";
+
+/** 図式の最大の大きさ（pt）。本文の幅と 1 ページの高さに収める（複素版と同じ値）。 */
+const DIAGRAM_MAX_WIDTH_PT = 440;
+const DIAGRAM_MAX_HEIGHT_PT = 600;
 
 /**
  * 和文フォント。既定は macOS のヒラギノ（手元の作業環境）。
@@ -263,6 +275,9 @@ function renderDocument(inner: string): string {
 \\usepackage{amsthm}
 \\usepackage[margin=25mm]{geometry}
 \\usepackage{graphicx}
+\\usepackage{tikz}
+% 図式の箱の題を、行の長さを揃えて折り返す定義（システムの renderers/latex/diagram.ts が持つ）。
+${DIAGRAM_TIKZ_PREAMBLE}
 \\usepackage{xeCJK}
 \\setCJKmainfont{${cjkMainFont}}
 \\setCJKsansfont{${cjkSansFont}}
@@ -422,9 +437,19 @@ function renderNode(node: Node, blockId: string): string {
     case "todo":
       todoCount += 1;
       return `\\par\\noindent\\textbf{[TODO]}\\ ${escapeText(node.value)}`;
-    case "diagram":
-      // 図式ノードは入力言語の語彙にあるが、この出力器はまだ描かない（黙って落とさない）。
-      throw new Error(`図式ノードは、この出力器がまだ対応していない: ${blockId}`);
+    case "diagram": {
+      // 座標はシステムの共有の幾何が決める（HTML 側と同じ座標）。描けない配置は生成を止める。
+      const layout = layoutDiagram(node);
+      if (!layout.success) {
+        throw new Error(`図式を描けない: ${blockId}: ${describeDiagramLayoutError(layout.error)}`);
+      }
+      return renderDiagramTikz(
+        layout.data,
+        (title) =>
+          title.map((part) => (part.type === "text" ? escapeText(part.value) : `$${part.tex}$`)).join(""),
+        { maxWidthPt: DIAGRAM_MAX_WIDTH_PT, maxHeightPt: DIAGRAM_MAX_HEIGHT_PT },
+      );
+    }
     case "image":
       // 画像ノードは入力言語の語彙にあるが、この出力器はまだ資産解決器を持たない。
       // 素通しすると図が無音で消えるので、明示的に落とす。

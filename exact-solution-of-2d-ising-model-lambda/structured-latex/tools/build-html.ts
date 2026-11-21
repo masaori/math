@@ -37,6 +37,11 @@ import {
   primaryElementEntriesOf,
   renderPrimaryElementsLead,
 } from "../../../structured-latex/renderers/html/primary-elements.ts";
+import { DIAGRAM_CSS, renderDiagramHtml } from "../../../structured-latex/renderers/html/diagram.ts";
+import {
+  describeDiagramLayoutError,
+  layoutDiagram,
+} from "../../../structured-latex/renderers/diagram/layout.ts";
 import { standingOf } from "../../../structured-latex/domain-model/index.ts";
 import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContent, structuredLatexDir } from "./content-modules.ts";
@@ -232,9 +237,18 @@ function renderNode(node: Node, blockId: string): string {
       throw new Error(`引用ノードは、この出力器がまだ対応していない: ${blockId}`);
     case "todo":
       return `<p class="todo"><strong>[TODO]</strong> ${escapeHtml(node.value)}</p>`;
-    case "diagram":
-      // 図式ノードは入力言語の語彙にあるが、この出力器はまだ描かない（黙って落とさない）。
-      throw new Error(`図式ノードは、この出力器がまだ対応していない: ${blockId}`);
+    case "diagram": {
+      // 座標はシステムの共有の幾何が決める（LaTeX 側と同じ座標）。描けない配置は生成を止める。
+      const layout = layoutDiagram(node);
+      if (!layout.success) {
+        throw new Error(`図式を描けない: ${blockId}: ${describeDiagramLayoutError(layout.error)}`);
+      }
+      return renderDiagramHtml(layout.data, (title) =>
+        title
+          .map((part) => (part.type === "text" ? escapeHtml(part.value) : renderMath(part.tex, false, blockId)))
+          .join(""),
+      );
+    }
     case "image":
       throw new Error(`画像ノードは、この出力器がまだ対応していない: ${blockId}`);
   }
@@ -305,6 +319,7 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
 ${CHAPTER_NAVIGATION_CSS}
 ${THEOREM_STANDING_CSS}
+${DIAGRAM_CSS}
 ${PRIMARY_ELEMENTS_CSS}
 </style></head><body>
 ${mobileHtml}

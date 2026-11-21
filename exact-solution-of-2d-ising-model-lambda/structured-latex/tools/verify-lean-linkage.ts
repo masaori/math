@@ -32,7 +32,7 @@ const leanRoot = join(projectRoot, "lean", "Ising2DLambda");
  * 別名を作ると人手証明の定義と Lean の定義が 2 つになる）。
  */
 const MATHLIB_ALLOWLIST = new Set([
-  "Polynomial.X", "Finset.card", "Fintype.card", "HAdd.hAdd", "One.one",
+  "Polynomial.X", "Polynomial.aeval", "Finset.card", "Fintype.card", "HAdd.hAdd", "One.one",
 ]);
 
 const DECL_RE =
