@@ -328,15 +328,15 @@ theorem V1plus_eq_V1pm (K1 : ℂ) : V1plus M K1 = V1pm M K1 (-1) := rfl
 noncomputable def V1pmHalf (M : ℕ) (K1 η : ℂ) : TensorPow M :=
   matExp (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)
 
-/-- **人手 `V2_in_Z_Y` の右辺** `(2s_2)^{M/2} exp(√-1 K_2^* (Z_1Y_1 + ⋯ + Z_MY_M))`
-（有限和を省略しない表示。`s2`, `K2star` は独立な引数）。 -/
+/-- 人手 `V2_in_Z_Y` の右辺の式 `(2s_2)^{M/2} exp(√-1 K_2^* (Z_1Y_1 + ⋯ + Z_MY_M))`
+（有限和を省略しない表示。`s2`, `K2star` は独立な引数なので、主張 `V2_in_Z_Y` の具体版ではない）。 -/
 noncomputable def V2FromJordanWigner
     (M : ℕ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
   ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ)) •
     matExp ((Complex.I * K2star) • (∑ m : Fin M, Z m * Y m))
 
-/-- **人手 `V2_exponential_representation` の右辺** `(2 s_2)^{M/2} exp(√-1 K_2^* H_2)`
-（`s2`, `K2star` は独立な引数）。
+/-- 人手 `V2_exponential_representation` の右辺の式 `(2 s_2)^{M/2} exp(√-1 K_2^* H_2)`
+（`s2`, `K2star` は独立な引数なので、主張 `V2_exponential_representation` の具体版ではない）。
 `(2 s_2)^{M/2}` は `M` が奇数のとき実冪なので `Real.rpow` を使う。 -/
 noncomputable def V2H2Form (M : ℕ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
   ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ)) • matExp ((Complex.I * K2star) • H2 M)

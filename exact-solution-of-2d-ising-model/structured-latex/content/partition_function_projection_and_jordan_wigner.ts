@@ -19,6 +19,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
     title: { text: "Jordan–Wigner 行列族 Z_m" },
     labels: ["def_jordan_wigner_Z_matrices"],
+    lean: ["Ising2D.Z", "Ising2D.Z_eq_finiteMatrixProduct"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -86,6 +87,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 5 },
     title: { text: "Jordan–Wigner 行列族 Y_m" },
     labels: ["def_jordan_wigner_Y_matrices"],
+    lean: ["Ising2D.Y", "Ising2D.Y_eq_finiteMatrixProduct"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -153,6 +155,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 6 },
     title: { text: "全スピン反転行列" },
     labels: ["def_global_spin_flip_matrix"],
+    lean: ["Ising2D.epsilon", "Ising2D.epsilon_eq_finiteMatrixProduct"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -188,6 +191,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "先頭から並べたサイトの Pauli 行列の積のクロネッカー積表示" },
     labels: ["site_pauli_prefix_product_kronecker_form"],
+    lean: ["Ising2D.site_pauli_prefix_product_kronecker_form"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -294,6 +298,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "全スピン反転行列のクロネッカー積表示" },
     labels: ["global_spin_flip_kronecker_form"],
+    lean: ["Ising2D.global_spin_flip_kronecker_form"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -335,6 +340,7 @@ export default defineBlocks([
     kind: "claim",
     title: { tex: String.raw`\varepsilon \text{ と } \sigma_k^x \text{ は可換}` },
     labels: ["epsilon_commutes_with_site_sigma_x"],
+    lean: ["Ising2D.epsilon_commute_sigmaX"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -418,6 +424,7 @@ y_ix_i
     kind: "claim",
     title: { tex: String.raw`\varepsilon \text{ と } \sigma_k^z \text{ は反可換}` },
     labels: ["epsilon_anticommutes_with_site_sigma_z"],
+    lean: ["Ising2D.epsilon_anticomm_sigmaZ"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -510,6 +517,7 @@ y_ix_i
     kind: "claim",
     title: { tex: String.raw`\varepsilon \text{ と } \sigma_k^y \text{ は反可換}` },
     labels: ["epsilon_anticommutes_with_site_sigma_y"],
+    lean: ["Ising2D.epsilon_anticomm_sigmaY"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -602,6 +610,7 @@ y_ix_i
     kind: "claim",
     title: { tex: String.raw`\varepsilon \text{ と } Z_m \text{ は反可換}` },
     labels: ["epsilon_anticommutes_with_jordan_wigner_Z"],
+    lean: ["Ising2D.epsilon_anticomm_Z"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -763,6 +772,7 @@ v_iu_i
     kind: "claim",
     title: { tex: String.raw`\varepsilon \text{ と } Y_m \text{ は反可換}` },
     labels: ["epsilon_anticommutes_with_jordan_wigner_Y"],
+    lean: ["Ising2D.epsilon_anticomm_Y"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -925,6 +935,7 @@ v_iu_i
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 7 },
     title: { text: "全スピン反転行列の Jordan–Wigner 表示" },
     labels: ["global_spin_flip_jordan_wigner_representation"],
+    lean: ["Ising2D.epsilon_eq_i_pow_smul_zyPrefixProduct", "Ising2D.zyPrefixProduct_eq_neg_i_pow_smul_xString"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -1348,6 +1359,7 @@ K_1^*&=-\frac12\log(\tanh K_1)
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
     title: { text: "第二の結合定数と双対結合定数の双対関係" },
     labels: ["second_dual_coupling_relation"],
+    lean: ["Ising2D.second_dual_coupling_relation"],
     statement: [
       paragraph([
         ref("def_second_dual_coupling_constant"),
@@ -1501,6 +1513,7 @@ K_2^*&=-\frac12\log(\tanh K_2)
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
     title: { text: "双曲線関数の添字つき略記の正値性" },
     labels: ["indexed_hyperbolic_abbreviations_positive"],
+    lean: ["Ising2D.indexedHyperbolicAbbreviations_pos"],
     statement: [
       paragraph([
         "各 ",
@@ -1666,6 +1679,7 @@ c_i^*&>0
     origin: { path: "_old/typst/parts/004_転送行列/002_claim_V1V2をZYepsilonで表す.typ", ordinal: 3 },
     title: { tex: String.raw`V_1 \text{ を } Z, Y, \varepsilon \text{ で表す}` },
     labels: ["V1_in_Z_Y_epsilon"],
+    lean: ["Ising2D.V1_in_Z_Y_epsilon"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -2116,6 +2130,7 @@ V_1
     origin: { path: "_old/typst/parts/004_転送行列/002_claim_V1V2をZYepsilonで表す.typ", ordinal: 3 },
     title: { tex: String.raw`V_2 \text{ を } Z, Y \text{ で表す}` },
     labels: ["V2_in_Z_Y"],
+    lean: ["Ising2D.V2_in_Z_Y"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -2336,6 +2351,7 @@ V_2
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
     title: { tex: String.raw`\varepsilon\text{ の固有値 }+1\text{ の固有ベクトル全体}` },
     labels: ["def_even_eigenvectors_of_epsilon"],
+    lean: ["Ising2D.evenEigenvectors"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -2375,6 +2391,7 @@ V_2
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
     title: { tex: String.raw`\varepsilon\text{ の二乗}` },
     labels: ["epsilon_square_and_eigenvalues", "epsilon_square_identity"],
+    lean: ["Ising2D.epsilon_mul_self"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -2486,6 +2503,7 @@ P_{r+1}=P_r\sigma_{r+1}^x
     origin: { path: "_old/typst/parts/004_転送行列/005_claim_V1の固有空間への制限.typ", ordinal: 6 },
     title: { tex: String.raw`V_1 \text{ の }\mathcal{F}^{(+)}\text{ への制限}` },
     labels: ["V1_restriction_to_eigenspaces"],
+    lean: ["Ising2D.V1_restriction_to_eigenspaces"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -2989,6 +3007,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     origin: { path: "_old/typst/parts/004_転送行列/006_definition_V1_plus_minusの定義.typ", ordinal: 7 },
     title: { tex: String.raw`V_1^{(+)} \text{ の定義}` },
     labels: ["def_V1_plus"],
+    lean: ["Ising2D.V1plus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3034,6 +3053,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
     title: { tex: String.raw`\text{一般生成子 } H_1^{(+)}` },
     labels: ["def_H1_plus"],
+    lean: ["Ising2D.H1plus", "Ising2D.H1plus_eq_sub", "Ising2D.H1plus_eq_bulk_sub_boundary"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -3068,6 +3088,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
     title: { tex: String.raw`\text{一般生成子 } H_2` },
     labels: ["def_H2"],
+    lean: ["Ising2D.H2"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -3100,6 +3121,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
     title: { tex: String.raw`V_1^{(+)} \text{ の一般生成子による指数表示}` },
     labels: ["V1_plus_exponential_representation"],
+    lean: ["Ising2D.V1plus_exponential_representation"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -3162,6 +3184,7 @@ V_1^{(+)}
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
     title: { tex: String.raw`V_2 \text{ の一般生成子による指数表示}` },
     labels: ["V2_exponential_representation"],
+    lean: ["Ising2D.V2_exponential_representation"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -3222,6 +3245,7 @@ V_2
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 10 },
     title: { tex: String.raw`\mathcal{F}^{(+)} \text{ への射影子 } P^{(+)}` },
     labels: ["def_epsilon_projectors"],
+    lean: ["Ising2D.epsProjPlus"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -3253,6 +3277,7 @@ V_2
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 11 },
     title: { tex: String.raw`P^{(+)} \text{ の性質}` },
     labels: ["epsilon_projector_properties"],
+    lean: ["Ising2D.epsProjPlus_sq", "Ising2D.epsProjPlus_mulVec_eq_self", "Ising2D.epsProjPlus_mulVec_mem", "Ising2D.epsilon_projector_properties_image"],
     statement: [
       paragraph([
         ref("def_epsilon_projectors"),
@@ -3467,6 +3492,7 @@ P^{(+)} f
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`V_1^{(+)} \text{ の平方根として用いる行列}` },
     labels: ["def_V1_plus_square_root"],
+    lean: ["Ising2D.V1plusHalf"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3545,6 +3571,7 @@ P^{(+)} f
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`V^{(+)} := \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}` },
     labels: ["def_V_plus"],
+    lean: ["Ising2D.VPlusOfTransfer", "Ising2D.VPlusOfTransfer_eq_VPlus"],
     statement: [
       paragraph([
         ref("def_V1_plus_square_root"),
@@ -3583,6 +3610,7 @@ P^{(+)} f
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`\varepsilon \text{ は } \textstyle\sum_m \sigma_m^z\sigma_{m+1}^z \text{ と可換}` },
     labels: ["epsilon_commutes_with_bond_sum"],
+    lean: ["Ising2D.epsilon_commute_sum_sigmaZ_sigmaZ"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -3663,6 +3691,7 @@ P^{(+)} f
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`\varepsilon \text{ は } V_1 \text{ と可換}` },
     labels: ["epsilon_commutes_with_V1"],
+    lean: ["Ising2D.epsilon_commute_V1"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -3723,6 +3752,7 @@ P^{(+)} f
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`\varepsilon \text{ は } V_2 \text{ と可換}` },
     labels: ["epsilon_commutes_with_V2"],
+    lean: ["Ising2D.epsilon_commute_V2"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -3810,6 +3840,7 @@ P^{(+)} f
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`\varepsilon \text{ は } H_1^{(+)} \text{ と可換}` },
     labels: ["epsilon_commutes_with_H1_plus"],
+    lean: ["Ising2D.epsilon_commute_H1plus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3876,6 +3907,7 @@ P^{(+)} f
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`\varepsilon \text{ は } V_1^{(+)} \text{ と可換}` },
     labels: ["epsilon_commutes_with_V1_plus"],
+    lean: ["Ising2D.epsilon_commute_V1plus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3932,6 +3964,7 @@ P^{(+)} f
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`\varepsilon \text{ は } \left(V_1^{(+)}\right)^{1/2} \text{ と可換}` },
     labels: ["epsilon_commutes_with_V1_plus_square_root"],
+    lean: ["Ising2D.epsilon_commute_V1plusHalf"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3988,6 +4021,7 @@ P^{(+)} f
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`\varepsilon \text{ と可換な行列は } P^{(+)} \text{ とも可換}` },
     labels: ["epsilon_projector_commutes_with_epsilon_commuting_matrix"],
+    lean: ["Ising2D.commute_epsProjPlus_of_commute_epsilon"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -4056,6 +4090,7 @@ P^{(+)}X
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`P^{(+)} \text{ は } V_1 \text{ と可換}` },
     labels: ["epsilon_projector_commutes_with_V1"],
+    lean: ["Ising2D.commute_V1_epsProjPlus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -4095,6 +4130,7 @@ P^{(+)}V_1
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`P^{(+)} \text{ は } V_2 \text{ と可換}` },
     labels: ["epsilon_projector_commutes_with_V2"],
+    lean: ["Ising2D.commute_V2_epsProjPlus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -4134,6 +4170,7 @@ P^{(+)}V_2
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`P^{(+)} \text{ は } V_1^{(+)} \text{ と可換}` },
     labels: ["epsilon_projector_commutes_with_V1_plus"],
+    lean: ["Ising2D.commute_V1plus_epsProjPlus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -4170,6 +4207,7 @@ P^{(+)}V_1^{(+)}
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
     title: { tex: String.raw`P^{(+)} \text{ は } \left(V_1^{(+)}\right)^{1/2} \text{ と可換}` },
     labels: ["epsilon_projector_commutes_with_V1_plus_square_root"],
+    lean: ["Ising2D.commute_V1plusHalf_epsProjPlus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -4206,6 +4244,7 @@ P^{(+)}\left(V_1^{(+)}\right)^{1/2}
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 3 },
     title: { tex: String.raw`V_1^{1/2} := \exp\!\left(\tfrac{1}{2}K_1D\right)` },
     labels: ["def_transfer_matrix_square_root"],
+    lean: ["Ising2D.physicalV1halfC", "Ising2D.physicalV1halfC_mul_self"],
     statement: [
       paragraph([
         ref("first_transfer_matrix_pauli_form"),
@@ -4246,6 +4285,7 @@ P^{(+)}\left(V_1^{(+)}\right)^{1/2}
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 3 },
     title: { tex: String.raw`\text{対称化転送行列 } W` },
     labels: ["def_symmetrized_transfer_matrix"],
+    lean: ["Ising2D.physicalSymTransferC"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_square_root"),
@@ -4279,6 +4319,7 @@ P^{(+)}\left(V_1^{(+)}\right)^{1/2}
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 12 },
     title: { tex: String.raw`W P^{(+)} = V^{(+)}P^{(+)}` },
     labels: ["symmetrized_transfer_matrix_on_sectors"],
+    lean: ["Ising2D.symmetrized_transfer_matrix_on_sectors"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -4406,6 +4447,7 @@ WP
     kind: "claim",
     title: { tex: String.raw`V^{(+)} \text{ の } H_1^{(+)},\ H_2 \text{ による指数表示}` },
     labels: ["V_plus_exponential_form"],
+    lean: ["Ising2D.V_plus_exponential_form"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -4489,6 +4531,7 @@ V^{(+)}
       tex: String.raw`W P^{(+)} = V^{(+)} P^{(+)}\text{、}\mathcal{F}^{(+)} = \mathrm{im}\,P^{(+)}\text{ と }V^{(+)}\text{ の指数表示}`,
     },
     labels: ["W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form"],
+    lean: ["Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
