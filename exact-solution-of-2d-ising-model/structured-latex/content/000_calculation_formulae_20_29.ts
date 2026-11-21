@@ -3067,6 +3067,59 @@ a + a
     },
   },
   {
+    id: "calculation_formulae_claim_real_half_plus_half_is_original",
+    kind: "claim",
+    title: { text: "実数を 2 で割った商を二つ足すともとの実数に戻る" },
+    labels: ["real_half_plus_half_is_original"],
+    statement: [
+      paragraph([
+        math(String.raw`b \in \mathbb{R}`),
+        " とする。和・積・",
+        math(String.raw`1`),
+        "・乗法の逆元 ",
+        math(String.raw`x^{-1}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        "、",
+        math(String.raw`\tfrac{b}{2} \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to b,\ z \to 2`),
+        "。",
+        math(String.raw`2 \neq 0`),
+        " は ",
+        ref("real_two_is_nonzero"),
+        "）である。このとき",
+      ]),
+      displayMath(String.raw`\tfrac{b}{2} + \tfrac{b}{2} = b`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\tfrac{b}{2} + \tfrac{b}{2}
+&= 2\cdot\tfrac{b}{2}
+&&\bigl(\because\ \blkref{real_sum_of_two_equal_terms_is_twice}\ (a \to \tfrac{b}{2})\bigr)\\
+&= b
+&&\bigl(\because\ \blkref{real_twice_quotient_by_two_is_original}\ (b \to b)\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。全実数上の sin・cos を定める準備の主張（real_section_minus_half_pi_in_principal_interval・reflected_real_section_in_principal_interval・principal_angle_plus_half_pi_at_most_pi）がそれぞれ π/2 + π/2 = π の 2 行の鎖を持っていたので、b → π で引ける主張にまとめた。Lean の具体版は Ising2D.real_half_plus_half_is_original（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealHalfPlusHalfIsOriginal.lean）。数値検証: sagemath/check/real_half_plus_half_is_original/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_inverse_of_positive_is_positive",
     kind: "claim",
     title: { text: "正の実数の乗法の逆元は正" },
@@ -5470,6 +5523,845 @@ s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。relation_of_gamma_2_theta_tilde の準備の地の文が、0 < π だけを根拠に角度 0 と π の整数がどちらも 0 であるとしていた（π < 2π と π − 2·0·π = π が書かれていなかった）ので、角度 π の側を 1 つの主張にした（角度 0 の側は angle_section_integer_of_zero_is_zero）。Lean の具体版は無い（Lean は角度表現の切断 s_{[0,2π)} を形式化していない）。数値検証: sagemath/check/angle_section_integer_of_pi_is_zero/。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p51d)。「ℝ で 1 + 1 = 2」の名前だけの根拠の件）: 準備の π < 2π の鎖の最後の行 (1+1)π = 2π の根拠「ℝ で 1 + 1 = 2」は名前だけだったので、def_real_two を右辺から左辺へ当てる参照に替えた（式の両端と主張は不変）。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: π = 0 + π（0 + x = x の x → π を右辺から左辺へ）と π + π = 1·π + 1·π（1·x = x の x → π を 2 箇所へ、右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_real_section_minus_half_pi_in_principal_interval",
+    kind: "claim",
+    title: { tex: String.raw`0 \leq x \leq \pi \text{ なら } x - \pi/2 \in [-\pi/2,\pi/2]` },
+    labels: ["real_section_minus_half_pi_in_principal_interval"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " が ",
+        math(String.raw`0 \leq x \leq \pi`),
+        " を満たすとする。和・",
+        math(String.raw`0`),
+        "・順序 ",
+        math(String.raw`\leq`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、差と加法の逆元 ",
+        math(String.raw`-z`),
+        " は ",
+        ref("def_real_difference"),
+        " のもの、",
+        math(String.raw`\pi/2 \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to \pi,\ z \to 2`),
+        "。",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        "）、",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " は ",
+        ref("pi_is_positive"),
+        " の円周率であり、",
+        math(String.raw`-\pi/2`),
+        " は ",
+        math(String.raw`-(\pi/2)`),
+        " を表す。このとき",
+      ]),
+      displayMath(String.raw`-\pi/2 \leq x - \pi/2 \leq \pi/2`),
+      paragraph([
+        "が成り立つ。すなわち ",
+        math(String.raw`x - \pi/2`),
+        " は ",
+        ref("def_sin"),
+        " の定義域 ",
+        math(String.raw`[-\pi/2,\pi/2]`),
+        " に入る。",
+      ]),
+    ],
+    proof: [
+      paragraph(["左側の不等号を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+-\pi/2
+&= 0 + (-\pi/2)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -\pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\leq x + (-\pi/2)
+&&\bigl(\because\ \text{仮定の}\ 0 \leq x\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a \leq b \Rightarrow a + c \leq b + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 0,\ b \to x,\ c \to -\pi/2\bigr)\\
+&= x - \pi/2
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to x,\ z \to \pi/2)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["右側の不等号を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+x - \pi/2
+&= x + (-\pi/2)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to x,\ z \to \pi/2)\bigr)\\
+&\leq \pi + (-\pi/2)
+&&\bigl(\because\ \text{仮定の}\ x \leq \pi\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a \leq b \Rightarrow a + c \leq b + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to x,\ b \to \pi,\ c \to -\pi/2\bigr)\\
+&= (\pi/2 + \pi/2) + (-\pi/2)
+&&\bigl(\because\ \blkref{real_half_plus_half_is_original}\ (b \to \pi)\ \text{を右辺から左辺へ}\bigr)\\
+&= \pi/2 + \bigl(\pi/2 + (-\pi/2)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x, y \to \pi/2,\ t \to -\pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \pi/2 + 0
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \pi/2
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_sin_on_all_reals・def_cos_on_all_reals の一つ目の場合の引数が def_sin・def_cos の定義域に入ることを示すために足した。Lean の具体版はまだ無い。証明は π の性質を使わない（0 < π も使わない）ので、π を実数の変数に置いた形で人手と 1 対 1 の具体版を置ける。状態台帳の同じ件の次の一歩とした。数値検証: sagemath/check/real_section_minus_half_pi_in_principal_interval/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_reflected_real_section_in_principal_interval",
+    kind: "claim",
+    title: { tex: String.raw`\pi < x < 2\pi \text{ なら } (\pi + \pi/2) - x \in [-\pi/2,\pi/2]` },
+    labels: ["reflected_real_section_in_principal_interval"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " が ",
+        math(String.raw`\pi < x < 2\pi`),
+        " を満たすとする。和・積・",
+        math(String.raw`0`),
+        "・順序 ",
+        math(String.raw`\leq`),
+        "・",
+        math(String.raw`<`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの（",
+        math(String.raw`a < b`),
+        " は ",
+        math(String.raw`a \leq b`),
+        " かつ ",
+        math(String.raw`a \neq b`),
+        " のこと）、差と加法の逆元 ",
+        math(String.raw`-z`),
+        " は ",
+        ref("def_real_difference"),
+        " のもの、",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        "、",
+        math(String.raw`\pi/2 \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to \pi,\ z \to 2`),
+        "）、",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " は ",
+        ref("pi_is_positive"),
+        " の円周率であり、",
+        math(String.raw`-\pi/2`),
+        " は ",
+        math(String.raw`-(\pi/2)`),
+        " を表す。このとき",
+      ]),
+      displayMath(String.raw`-\pi/2 \leq (\pi + \pi/2) - x \leq \pi/2`),
+      paragraph([
+        "が成り立つ。すなわち ",
+        math(String.raw`(\pi + \pi/2) - x`),
+        " は ",
+        ref("def_sin"),
+        " の定義域 ",
+        math(String.raw`[-\pi/2,\pi/2]`),
+        " に入る。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備の第一。仮定の ",
+        math(String.raw`\pi < x`),
+        " と ",
+        math(String.raw`x < 2\pi`),
+        " に ",
+        math(String.raw`\mathbb{R}`),
+        " の順序と符号反転 ",
+        math(String.raw`a < b \Rightarrow -b < -a`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）を ",
+        math(String.raw`a \to \pi,\ b \to x`),
+        " と ",
+        math(String.raw`a \to x,\ b \to 2\pi`),
+        " で当てて、",
+      ]),
+      displayMath(String.raw`-x < -\pi,\qquad -(2\pi) < -x`),
+      paragraph(["である。準備の第二。"]),
+      displayMath(String.raw`\begin{aligned}
+(\pi + \pi/2) + (-\pi)
+&= (\pi/2 + \pi) + (-\pi)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ x + y = y + x\ (x \to \pi,\ y \to \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \pi/2 + \bigl(\pi + (-\pi)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to \pi/2,\ y \to \pi,\ t \to -\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \pi/2 + 0
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to \pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \pi/2
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph(["右側の不等号を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+(\pi + \pi/2) - x
+&= (\pi + \pi/2) + (-x)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \pi + \pi/2,\ z \to x)\bigr)\\
+&< (\pi + \pi/2) + (-\pi)
+&&\bigl(\because\ \text{準備の第一の}\ -x < -\pi\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a < b \Rightarrow c + a < c + b\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to -x,\ b \to -\pi,\ c \to \pi + \pi/2\bigr)\\
+&= \pi/2
+&&\bigl(\because\ \text{準備の第二}\bigr)
+\end{aligned}`),
+      paragraph(["左側の不等号を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+(\pi + \pi/2) - x
+&= (\pi + \pi/2) + (-x)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \pi + \pi/2,\ z \to x)\bigr)\\
+&> (\pi + \pi/2) + \bigl(-(2\pi)\bigr)
+&&\bigl(\because\ \text{準備の第一の}\ -(2\pi) < -x\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a < b \Rightarrow c + a < c + b\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to -(2\pi),\ b \to -x,\ c \to \pi + \pi/2\bigr)\\
+&= (\pi + \pi/2) + \bigl(-(\pi + \pi)\bigr)
+&&\bigl(\because\ \blkref{real_sum_of_two_equal_terms_is_twice}\ (a \to \pi)\ \text{を右辺から左辺へ}\bigr)\\
+&= (\pi + \pi/2) + \bigl((-\pi) + (-\pi)\bigr)
+&&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ (x, y \to \pi)\bigr)\\
+&= \bigl((\pi + \pi/2) + (-\pi)\bigr) + (-\pi)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to \pi + \pi/2,\ y, t \to -\pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \pi/2 + (-\pi)
+&&\bigl(\because\ \text{準備の第二}\bigr)\\
+&= \pi/2 + \bigl(-(\pi/2 + \pi/2)\bigr)
+&&\bigl(\because\ \blkref{real_half_plus_half_is_original}\ (b \to \pi)\ \text{を右辺から左辺へ}\bigr)\\
+&= \pi/2 + \bigl((-\pi/2) + (-\pi/2)\bigr)
+&&\bigl(\because\ \blkref{real_negation_of_sum_is_sum_of_negations}\ (x, y \to \pi/2)\bigr)\\
+&= \bigl(\pi/2 + (-\pi/2)\bigr) + (-\pi/2)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to \pi/2,\ y, t \to -\pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0 + (-\pi/2)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= -\pi/2
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -\pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "狭義の不等号 ",
+        math(String.raw`(\pi + \pi/2) - x < \pi/2`),
+        "・",
+        math(String.raw`-\pi/2 < (\pi + \pi/2) - x`),
+        " は、",
+        math(String.raw`<`),
+        " の意味（",
+        math(String.raw`a < b`),
+        " は ",
+        math(String.raw`a \leq b`),
+        " かつ ",
+        math(String.raw`a \neq b`),
+        "）より、それぞれ等号を含む不等号 ",
+        math(String.raw`\leq`),
+        " を含意する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_sin_on_all_reals・def_cos_on_all_reals の二つ目の場合の引数が def_sin・def_cos の定義域に入ることを示すために足した。Lean の具体版はまだ無い。証明は π の性質を使わない（0 < π も使わない）ので、π を実数の変数に置いた形で人手と 1 対 1 の具体版を置ける。状態台帳の同じ件の次の一歩とした。数値検証: sagemath/check/reflected_real_section_in_principal_interval/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_principal_angle_plus_half_pi_at_most_pi",
+    kind: "claim",
+    title: { tex: String.raw`\theta \leq \pi/2 \text{ なら } \theta + \pi/2 \leq \pi` },
+    labels: ["principal_angle_plus_half_pi_at_most_pi"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta \in \mathbb{R}`),
+        " が ",
+        math(String.raw`\theta \leq \pi/2`),
+        " を満たすとする。和・順序 ",
+        math(String.raw`\leq`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、",
+        math(String.raw`\pi/2 \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to \pi,\ z \to 2`),
+        "。",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        "）、",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " は ",
+        ref("pi_is_positive"),
+        " の円周率である。このとき",
+      ]),
+      displayMath(String.raw`\theta + \pi/2 \leq \pi`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\theta + \pi/2
+&\leq \pi/2 + \pi/2
+&&\bigl(\because\ \text{仮定の}\ \theta \leq \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a \leq b \Rightarrow a + c \leq b + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to \theta,\ b \to \pi/2,\ c \to \pi/2\bigr)\\
+&= \pi
+&&\bigl(\because\ \blkref{real_half_plus_half_is_original}\ (b \to \pi)\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。angle_section_of_principal_angle_plus_half_pi・sin_on_all_reals_agrees_on_principal_interval・cos_on_all_reals_agrees_on_principal_interval が同じ θ + π/2 ≤ π の鎖を持たないよう、1 つの主張にした。Lean の具体版はまだ無い。証明は π の性質を使わないので、π を実数の変数に置いた形で人手と 1 対 1 の具体版を置ける。状態台帳の同じ件の次の一歩とした。数値検証: sagemath/check/principal_angle_plus_half_pi_at_most_pi/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_definition_angle_section_of_theta_plus_half_pi",
+    kind: "definition",
+    title: { tex: String.raw`\xi_\theta := s_{[0,2\pi)}([\theta + \pi/2])` },
+    labels: ["def_angle_section_of_theta_plus_half_pi"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta \in \mathbb{R}`),
+        " について、",
+        ref("section_of_angle_representation"),
+        " の切断 ",
+        math(String.raw`s_{[0,2\pi)}`),
+        " と ",
+        ref("angle_equivalence_class"),
+        " の同値類を使って",
+      ]),
+      displayMath(String.raw`\xi_\theta := s_{[0,2\pi)}\!\left([\theta + \pi/2]_{\sim_{\mathrm{angle}}}\right) \in \mathbb{R}`),
+      paragraph([
+        "と定める。ここで和・積・順序 ",
+        math(String.raw`\leq`),
+        "・",
+        math(String.raw`<`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、差は ",
+        ref("def_real_difference"),
+        " のもの、",
+        math(String.raw`\pi/2 \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to \pi,\ z \to 2`),
+        "）、",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " は ",
+        ref("pi_is_positive"),
+        " の円周率である。",
+        ref("angle_section_existence_uniqueness"),
+        "（",
+        math(String.raw`\theta \to \theta + \pi/2`),
+        "）の整数を ",
+        math(String.raw`n`),
+        " とすると、",
+        ref("section_of_angle_representation"),
+        " より ",
+        math(String.raw`\xi_\theta = (\theta + \pi/2) - 2n\pi`),
+        " であり、",
+        math(String.raw`n`),
+        " の条件より ",
+        math(String.raw`0 \leq \xi_\theta < 2\pi`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_sin_on_all_reals・def_cos_on_all_reals が場合分けに使う量を、1 ブロック 1 定義にするために独立させた。" +
+          "θ + π/2 を [0, 2π) へ送ってから π/2 を引くと θ − 2nπ ∈ [−π/2, π + π/2) になり、その前半（ξ_θ ≤ π）はそのまま、後半（π < ξ_θ）は π − (θ − 2nπ) = (π + π/2) − ξ_θ へ折り返して、def_sin・def_cos の定義域 [−π/2, π/2] へ戻す。Lean の具体版は無い（Lean は本文の弧の長さによる sin・cos と角度表現の切断 s_{[0,2π)} を形式化していない。angle_section_of_zero_is_zero と同じ理由）。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_definition_sin_on_all_reals",
+    kind: "definition",
+    title: { text: "全実数上の sin" },
+    labels: ["def_sin_on_all_reals"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta \in \mathbb{R}`),
+        " について、",
+        ref("def_angle_section_of_theta_plus_half_pi"),
+        " の ",
+        math(String.raw`\xi_\theta`),
+        "（",
+        math(String.raw`0 \leq \xi_\theta < 2\pi`),
+        "）を使う。",
+        math(String.raw`\mathbb{R}`),
+        " の順序は全順序なので（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）、",
+        math(String.raw`\xi_\theta \leq \pi`),
+        " と ",
+        math(String.raw`\pi < \xi_\theta`),
+        "（",
+        math(String.raw`<`),
+        " は ",
+        math(String.raw`\leq`),
+        " かつ ",
+        math(String.raw`\neq`),
+        " のこと）の少なくとも一方が成り立ち、両方が成り立てば順序の反対称律より ",
+        math(String.raw`\xi_\theta = \pi`),
+        " となって ",
+        math(String.raw`\pi < \xi_\theta`),
+        " の ",
+        math(String.raw`\neq`),
+        " に反するので、ちょうど一方が成り立つ。",
+        math(String.raw`\sin_{\mathbb{R}} : \mathbb{R} \to \mathbb{R}`),
+        " を次で定める。",
+      ]),
+      list([
+        [
+          paragraph([
+            math(String.raw`\xi_\theta \leq \pi`),
+            " のとき、",
+            ref("real_section_minus_half_pi_in_principal_interval"),
+            "（",
+            math(String.raw`x \to \xi_\theta`),
+            "。",
+            math(String.raw`0 \leq \xi_\theta`),
+            "）より ",
+            math(String.raw`\xi_\theta - \pi/2 \in [-\pi/2,\pi/2]`),
+            " なので、",
+          ]),
+          displayMath(String.raw`\sin_{\mathbb{R}}(\theta) := \sin(\xi_\theta - \pi/2)`),
+          paragraph(["と定める。"]),
+        ],
+        [
+          paragraph([
+            math(String.raw`\pi < \xi_\theta`),
+            " のとき、",
+            ref("reflected_real_section_in_principal_interval"),
+            "（",
+            math(String.raw`x \to \xi_\theta`),
+            "。",
+            math(String.raw`\xi_\theta < 2\pi`),
+            "）より ",
+            math(String.raw`(\pi + \pi/2) - \xi_\theta \in [-\pi/2,\pi/2]`),
+            " なので、",
+          ]),
+          displayMath(String.raw`\sin_{\mathbb{R}}(\theta) := \sin\bigl((\pi + \pi/2) - \xi_\theta\bigr)`),
+          paragraph(["と定める。"]),
+        ],
+      ]),
+      paragraph([
+        "右辺の ",
+        math(String.raw`\sin`),
+        " は ",
+        ref("def_sin"),
+        " の ",
+        math(String.raw`[-\pi/2,\pi/2]`),
+        " 上の関数、差は ",
+        ref("def_real_difference"),
+        " のもの、",
+        math(String.raw`\pi/2`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to \pi,\ z \to 2`),
+        "）である。",
+        math(String.raw`\sin_{\mathbb{R}}`),
+        " を全実数上の正弦と呼ぶ（",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\pi`),
+        " と ",
+        ref("def_sin"),
+        " の値が弧の長さで定まる実数だからである）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_sin は [−π/2, π/2] の上だけの関数で、euler_formula_cos_sin・def_phi_cartesian・def_gamma1_gamma2_of_theta ほかが全実数の引数の sin を定義なしに使っていたので、主値区間の値と角度表現の切断から全実数上の関数を定めた。主値区間の上で def_sin と一致することは sin_on_all_reals_agrees_on_principal_interval で示す。2π 周期性・奇関数であること・特殊値・Euler の公式との関係は別の主張で扱う（まだ無い）。Lean の具体版は無い（Lean は本文の弧の長さによる sin・cos と角度表現の切断 s_{[0,2π)} を形式化していない。angle_section_of_zero_is_zero と同じ理由）。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_definition_cos_on_all_reals",
+    kind: "definition",
+    title: { text: "全実数上の cos" },
+    labels: ["def_cos_on_all_reals"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta \in \mathbb{R}`),
+        " について、",
+        ref("def_angle_section_of_theta_plus_half_pi"),
+        " の ",
+        math(String.raw`\xi_\theta`),
+        "（",
+        math(String.raw`0 \leq \xi_\theta < 2\pi`),
+        "）を使う。",
+        math(String.raw`\mathbb{R}`),
+        " の順序は全順序なので（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）、",
+        math(String.raw`\xi_\theta \leq \pi`),
+        " と ",
+        math(String.raw`\pi < \xi_\theta`),
+        "（",
+        math(String.raw`<`),
+        " は ",
+        math(String.raw`\leq`),
+        " かつ ",
+        math(String.raw`\neq`),
+        " のこと）の少なくとも一方が成り立ち、両方が成り立てば順序の反対称律より ",
+        math(String.raw`\xi_\theta = \pi`),
+        " となって ",
+        math(String.raw`\pi < \xi_\theta`),
+        " の ",
+        math(String.raw`\neq`),
+        " に反するので、ちょうど一方が成り立つ。",
+        math(String.raw`\cos_{\mathbb{R}} : \mathbb{R} \to \mathbb{R}`),
+        " を次で定める。",
+      ]),
+      list([
+        [
+          paragraph([
+            math(String.raw`\xi_\theta \leq \pi`),
+            " のとき、",
+            ref("real_section_minus_half_pi_in_principal_interval"),
+            "（",
+            math(String.raw`x \to \xi_\theta`),
+            "。",
+            math(String.raw`0 \leq \xi_\theta`),
+            "）より ",
+            math(String.raw`\xi_\theta - \pi/2 \in [-\pi/2,\pi/2]`),
+            " なので、",
+          ]),
+          displayMath(String.raw`\cos_{\mathbb{R}}(\theta) := \cos(\xi_\theta - \pi/2)`),
+          paragraph(["と定める。"]),
+        ],
+        [
+          paragraph([
+            math(String.raw`\pi < \xi_\theta`),
+            " のとき、",
+            ref("reflected_real_section_in_principal_interval"),
+            "（",
+            math(String.raw`x \to \xi_\theta`),
+            "。",
+            math(String.raw`\xi_\theta < 2\pi`),
+            "）より ",
+            math(String.raw`(\pi + \pi/2) - \xi_\theta \in [-\pi/2,\pi/2]`),
+            " なので、",
+          ]),
+          displayMath(String.raw`\cos_{\mathbb{R}}(\theta) := -\cos\bigl((\pi + \pi/2) - \xi_\theta\bigr)`),
+          paragraph(["と定める。"]),
+        ],
+      ]),
+      paragraph([
+        "右辺の ",
+        math(String.raw`\cos`),
+        " は ",
+        ref("def_cos"),
+        " の ",
+        math(String.raw`[-\pi/2,\pi/2]`),
+        " 上の関数、差と ",
+        math(String.raw`-\cos(\cdot)`),
+        " の加法の逆元は ",
+        ref("def_real_difference"),
+        " のもの、",
+        math(String.raw`\pi/2`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to \pi,\ z \to 2`),
+        "）である。",
+        math(String.raw`\cos_{\mathbb{R}}`),
+        " を全実数上の余弦と呼ぶ（",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\pi`),
+        " と ",
+        ref("def_cos"),
+        " の値が弧の長さで定まる実数だからである）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_cos は [−π/2, π/2] の上だけの関数で、euler_formula_cos_sin・def_gamma1_gamma2_of_theta・gamma1_lower_bound_all_theta ほかが全実数の引数の cos を定義なしに使っていたので、主値区間の値と角度表現の切断から全実数上の関数を定めた。二つ目の場合の符号は cos(π − t) = −cos t に合わせた。主値区間の上で def_cos と一致することは cos_on_all_reals_agrees_on_principal_interval で示す。2π 周期性・偶関数であること・特殊値・Euler の公式との関係は別の主張で扱う（まだ無い）。Lean の具体版は無い（Lean は本文の弧の長さによる sin・cos と角度表現の切断 s_{[0,2π)} を形式化していない。angle_section_of_zero_is_zero と同じ理由）。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_angle_section_of_principal_angle_plus_half_pi",
+    kind: "claim",
+    title: { tex: String.raw`\theta \in [-\pi/2,\pi/2] \text{ なら } s_{[0,2\pi)}([\theta + \pi/2]) = \theta + \pi/2` },
+    labels: ["angle_section_of_principal_angle_plus_half_pi"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta \in \mathbb{R}`),
+        " が ",
+        math(String.raw`-\pi/2 \leq \theta \leq \pi/2`),
+        " を満たすとする。和・積・",
+        math(String.raw`0`),
+        "・順序 ",
+        math(String.raw`\leq`),
+        "・",
+        math(String.raw`<`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの（",
+        math(String.raw`a < b`),
+        " は ",
+        math(String.raw`a \leq b`),
+        " かつ ",
+        math(String.raw`a \neq b`),
+        " のこと）、差と加法の逆元 ",
+        math(String.raw`-z`),
+        " は ",
+        ref("def_real_difference"),
+        " のもの、",
+        math(String.raw`2`),
+        " は ",
+        ref("def_real_two"),
+        " の ",
+        math(String.raw`2 = 1 + 1 \in \mathbb{R}`),
+        "、",
+        math(String.raw`\pi/2 \in \mathbb{R}`),
+        " は ",
+        ref("def_real_quotient"),
+        " の商（",
+        math(String.raw`y \to \pi,\ z \to 2`),
+        "）、",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " は ",
+        ref("pi_is_positive"),
+        " の円周率であり、",
+        math(String.raw`-\pi/2`),
+        " は ",
+        math(String.raw`-(\pi/2)`),
+        " を表す。このとき ",
+        ref("section_of_angle_representation"),
+        " の切断 ",
+        math(String.raw`s_{[0,2\pi)}`),
+        " について",
+      ]),
+      displayMath(String.raw`s_{[0,2\pi)}\!\left([\theta + \pi/2]_{\sim_{\mathrm{angle}}}\right) = \theta + \pi/2`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph(["準備の第一。"]),
+      displayMath(String.raw`\begin{aligned}
+(\theta + \pi/2) - 2\cdot 0\cdot\pi
+&= (\theta + \pi/2) - 0\cdot\pi
+&&\bigl(\because\ \blkref{real_times_zero_is_zero}\ (x\to 2)\bigr)\\
+&= (\theta + \pi/2) - 0
+&&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x\to\pi)\bigr)\\
+&= \theta + \pi/2
+&&\bigl(\because\ \blkref{real_minus_zero_is_self}\ (a \to \theta + \pi/2)\bigr)
+\end{aligned}`),
+      paragraph(["準備の第二（", math(String.raw`0 \leq \theta + \pi/2`), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+0
+&= (-\pi/2) + \pi/2
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ (-x) + x = 0\ (x \to \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\leq \theta + \pi/2
+&&\bigl(\because\ \text{仮定の}\ -\pi/2 \leq \theta\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a \leq b \Rightarrow a + c \leq b + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to -\pi/2,\ b \to \theta,\ c \to \pi/2\bigr)
+\end{aligned}`),
+      paragraph(["準備の第三（", math(String.raw`\theta + \pi/2 < 2\pi`), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\theta + \pi/2
+&\leq \pi
+&&\bigl(\because\ \text{仮定の}\ \theta \leq \pi/2\ \text{と}\ \blkref{principal_angle_plus_half_pi_at_most_pi}\ (\theta \to \theta)\bigr)\\
+&= 0 + \pi
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to \pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&< \pi + \pi
+&&\bigl(\because\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a < b \Rightarrow a + c < b + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 0,\ b \to \pi,\ c \to \pi\bigr)\\
+&= 2\pi
+&&\bigl(\because\ \blkref{real_sum_of_two_equal_terms_is_twice}\ (a \to \pi)\bigr)
+\end{aligned}`),
+      paragraph([
+        "この鎖の両端から ",
+        math(String.raw`\theta + \pi/2 < 2\pi`),
+        " を得る（",
+        math(String.raw`\mathbb{R}`),
+        " の順序の推移律 ",
+        math(String.raw`a \leq b,\ b < c \Rightarrow a < c`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）。準備の第二と第三に準備の第一の値を当てると ",
+        math(String.raw`0 \leq (\theta + \pi/2) - 2\cdot 0\cdot\pi < 2\pi`),
+        " であり、",
+        math(String.raw`n = 0`),
+        " は ",
+        ref("angle_section_existence_uniqueness"),
+        "（",
+        math(String.raw`\theta \to \theta + \pi/2`),
+        "）の条件を満たす。その一意性より、条件を満たす整数は ",
+        math(String.raw`0`),
+        " だけである。主張の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s_{[0,2\pi)}\!\left([\theta + \pi/2]_{\sim_{\mathrm{angle}}}\right)
+&= (\theta + \pi/2) - 2\cdot 0\cdot\pi
+&&\bigl(\because\ \blkref{section_of_angle_representation}\ (\theta \to \theta + \pi/2,\ n \to 0)\bigr)\\
+&= \theta + \pi/2
+&&\bigl(\because\ \text{準備の第一}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_angle_section_of_theta_plus_half_pi の ξ_θ が主値区間の θ で θ + π/2 になることを、sin_on_all_reals_agrees_on_principal_interval・cos_on_all_reals_agrees_on_principal_interval の共通の準備として足した。Lean の具体版は無い（Lean は角度表現の切断 s_{[0,2π)} を形式化していない。angle_section_of_zero_is_zero と同じ理由）。数値検証: sagemath/check/angle_section_of_principal_angle_plus_half_pi/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_sin_on_all_reals_agrees_on_principal_interval",
+    kind: "claim",
+    title: { text: "全実数上の sin は主値区間で sin の定義と一致する" },
+    labels: ["sin_on_all_reals_agrees_on_principal_interval"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta \in \mathbb{R}`),
+        " が ",
+        math(String.raw`-\pi/2 \leq \theta \leq \pi/2`),
+        " を満たすとする（記号の所属は ",
+        ref("angle_section_of_principal_angle_plus_half_pi"),
+        " と同じ）。このとき ",
+        ref("def_sin_on_all_reals"),
+        " の ",
+        math(String.raw`\sin_{\mathbb{R}}`),
+        " と ",
+        ref("def_sin"),
+        " の ",
+        math(String.raw`\sin`),
+        " について",
+      ]),
+      displayMath(String.raw`\sin_{\mathbb{R}}(\theta) = \sin(\theta)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph(["準備。"]),
+      displayMath(String.raw`\begin{aligned}
+\xi_\theta
+&= s_{[0,2\pi)}\!\left([\theta + \pi/2]_{\sim_{\mathrm{angle}}}\right)
+&&\bigl(\because\ \blkref{def_angle_section_of_theta_plus_half_pi}\bigr)\\
+&= \theta + \pi/2
+&&\bigl(\because\ \blkref{angle_section_of_principal_angle_plus_half_pi}\ (\theta \to \theta)\bigr)\\
+&\leq \pi
+&&\bigl(\because\ \text{仮定の}\ \theta \leq \pi/2\ \text{と}\ \blkref{principal_angle_plus_half_pi_at_most_pi}\ (\theta \to \theta)\bigr)
+\end{aligned}`),
+      paragraph([
+        "より ",
+        math(String.raw`\xi_\theta \leq \pi`),
+        " であり、",
+        ref("def_sin_on_all_reals"),
+        " の一つ目の場合に当たる。主張の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sin_{\mathbb{R}}(\theta)
+&= \sin(\xi_\theta - \pi/2)
+&&\bigl(\because\ \blkref{def_sin_on_all_reals}\ \text{の一つ目の場合。準備の}\ \xi_\theta \leq \pi\bigr)\\
+&= \sin\bigl((\theta + \pi/2) - \pi/2\bigr)
+&&\bigl(\because\ \text{準備の}\ \xi_\theta = \theta + \pi/2\bigr)\\
+&= \sin\bigl((\theta + \pi/2) + (-\pi/2)\bigr)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \theta + \pi/2,\ z \to \pi/2)\bigr)\\
+&= \sin\bigl(\theta + (\pi/2 + (-\pi/2))\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to \theta,\ y \to \pi/2,\ t \to -\pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \sin(\theta + 0)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \sin(\theta)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to \theta)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_sin_on_all_reals の sin_ℝ が def_sin の拡張であることを示すために足した。Lean の具体版は無い（Lean は本文の弧の長さによる sin と角度表現の切断を形式化していない）。数値検証: sagemath/check/sin_on_all_reals_agrees_on_principal_interval/。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_cos_on_all_reals_agrees_on_principal_interval",
+    kind: "claim",
+    title: { text: "全実数上の cos は主値区間で cos の定義と一致する" },
+    labels: ["cos_on_all_reals_agrees_on_principal_interval"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta \in \mathbb{R}`),
+        " が ",
+        math(String.raw`-\pi/2 \leq \theta \leq \pi/2`),
+        " を満たすとする（記号の所属は ",
+        ref("angle_section_of_principal_angle_plus_half_pi"),
+        " と同じ）。このとき ",
+        ref("def_cos_on_all_reals"),
+        " の ",
+        math(String.raw`\cos_{\mathbb{R}}`),
+        " と ",
+        ref("def_cos"),
+        " の ",
+        math(String.raw`\cos`),
+        " について",
+      ]),
+      displayMath(String.raw`\cos_{\mathbb{R}}(\theta) = \cos(\theta)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph(["準備。"]),
+      displayMath(String.raw`\begin{aligned}
+\xi_\theta
+&= s_{[0,2\pi)}\!\left([\theta + \pi/2]_{\sim_{\mathrm{angle}}}\right)
+&&\bigl(\because\ \blkref{def_angle_section_of_theta_plus_half_pi}\bigr)\\
+&= \theta + \pi/2
+&&\bigl(\because\ \blkref{angle_section_of_principal_angle_plus_half_pi}\ (\theta \to \theta)\bigr)\\
+&\leq \pi
+&&\bigl(\because\ \text{仮定の}\ \theta \leq \pi/2\ \text{と}\ \blkref{principal_angle_plus_half_pi_at_most_pi}\ (\theta \to \theta)\bigr)
+\end{aligned}`),
+      paragraph([
+        "より ",
+        math(String.raw`\xi_\theta \leq \pi`),
+        " であり、",
+        ref("def_cos_on_all_reals"),
+        " の一つ目の場合に当たる。主張の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\cos_{\mathbb{R}}(\theta)
+&= \cos(\xi_\theta - \pi/2)
+&&\bigl(\because\ \blkref{def_cos_on_all_reals}\ \text{の一つ目の場合。準備の}\ \xi_\theta \leq \pi\bigr)\\
+&= \cos\bigl((\theta + \pi/2) - \pi/2\bigr)
+&&\bigl(\because\ \text{準備の}\ \xi_\theta = \theta + \pi/2\bigr)\\
+&= \cos\bigl((\theta + \pi/2) + (-\pi/2)\bigr)
+&&\bigl(\because\ \blkref{def_real_difference}\ (y \to \theta + \pi/2,\ z \to \pi/2)\bigr)\\
+&= \cos\bigl(\theta + (\pi/2 + (-\pi/2))\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to \theta,\ y \to \pi/2,\ t \to -\pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \cos(\theta + 0)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \cos(\theta)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to \theta)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_cos_on_all_reals の cos_ℝ が def_cos の拡張であることを示すために足した。Lean の具体版は無い（Lean は本文の弧の長さによる cos と角度表現の切断を形式化していない）。数値検証: sagemath/check/cos_on_all_reals_agrees_on_principal_interval/。",
       ],
     },
   },

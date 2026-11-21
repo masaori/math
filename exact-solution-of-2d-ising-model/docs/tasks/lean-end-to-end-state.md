@@ -725,7 +725,13 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - （2026-11-21 追加、最優先）**本文が定義のブロック無しに使っている語の解消。** 代表の問い「未定義のものを放置している？」（Slack、2026-11-21）を受けて本文の statement と proof を洗い出した結果である。
   線型代数の語（部分空間・張る・線型独立・基底・次元 `dim_ℂ`・直和）は同じ日に別の実行で定義を足した。残りは次のとおりで、1 回に 1 つずつ（大きいものは割って）定義のブロックか主張を足し、使う箇所から引き、四層を合わせる。
   この台帳の下の件と重なるもの（有限和の添字の集合、一般の `n` の正則な行列、`mat_mult_associative` など）は、この件の中で一緒に片付けたものとして下の件にも記録する。
-  - 全実数上の `sin`・`cos` とその周期性・偶奇性（`def_sin`・`def_cos` は `[−π/2, π/2]` の上だけ。`euler_formula_cos_sin` などが「全実数上への拡張は未整備」と書く。`def_phi_cartesian` から `A(θ̃_μ)`・Onsager の積分までの鎖が依拠する）。
+  - 全実数上の `sin`・`cos` とその周期性・偶奇性。2026-11-21 に定義と主値区間での一致までを足した: `def_angle_section_of_theta_plus_half_pi`（`ξ_θ := s_{[0,2π)}([θ+π/2])`）・`def_sin_on_all_reals`・`def_cos_on_all_reals`（`ξ_θ ≤ π` なら `sin(ξ_θ−π/2)`、`π < ξ_θ` なら `sin((π+π/2)−ξ_θ)`、cos は二つ目の場合に符号 `−`）、準備の主張 `real_section_minus_half_pi_in_principal_interval`・`reflected_real_section_in_principal_interval`・`principal_angle_plus_half_pi_at_most_pi`・`real_half_plus_half_is_original`（Lean 具体版あり）、一致の主張 `angle_section_of_principal_angle_plus_half_pi`・`sin_on_all_reals_agrees_on_principal_interval`・`cos_on_all_reals_agrees_on_principal_interval`。`euler_formula_cos_sin` の冒頭段落から引いた。残りを次の順に 1 回に 1 つずつ行う。
+    - この単位で足した 10 ブロックのうち Lean の具体版を持つのは `real_half_plus_half_is_original` だけである。残る 9 ブロック（定義 3・主張 6）は、runbook の条件「一対一」の残り（上の表の行「本文の各ブロックに対応する具体版の宣言を機械で読める形で書く」）に数える。弧の長さの `sin`・`cos`・`π` と角度表現の切断の具体版は Lean に無く、上の表の行「本文に定義の無い記号を本文で定義か宣言し…」（`Real.pi`）と合わせて扱う。
+    - 次の一歩: `real_section_minus_half_pi_in_principal_interval`・`reflected_real_section_in_principal_interval`・`principal_angle_plus_half_pi_at_most_pi` の Lean 具体版（証明は π の性質を使わないので、π を実数の変数 `p` に置いた形で人手の鎖と 1 対 1 の `calc` にする。必要十分版の要否も README の基準で判断する）。
+    - `sin_ℝ`・`cos_ℝ` の 2π 周期性（`ξ_{θ+2kπ} = ξ_θ`。`angle_equivalence_class` の同値類が等しいことから）。
+    - 偶奇性 `cos_ℝ(−θ) = cos_ℝ(θ)`・`sin_ℝ(−θ) = −sin_ℝ(θ)`、特殊値 `cos_ℝ(π) = −1`・`sin_ℝ(π) = 0`・`cos_ℝ(2nπ) = 1`、`cos_ℝ θ ≤ 1`、`sin_ℝ² + cos_ℝ² = 1`。
+    - 本文の `cos θ`・`sin θ`（`θ ∈ ℝ`）を `cos_ℝ(θ)`・`sin_ℝ(θ)` の値として読む記法を定め、「全実数上への拡張は未整備」と書く約 30 ブロックの文を、定まった性質の主張への参照に替える（`cos_of_negated_real`・`sin_of_negated_real`・`half_integer_phase_periodicity` ほか）。
+    - 連続性と Euler の公式 `exp(iθ) = cos θ + i sin θ`（弧の長さによる定義から導くには微分が要る。導き方は着手時に決める）、加法定理（`cos 2t = 1 − 2 sin² t`）。`def_phi_cartesian` から `A(θ̃_μ)`・Onsager の積分までの鎖が依拠する。
   - 円周率 `π`（定義ブロックが無い。`arcsin_is_bijection` が外部の文献から `f([0,1]) = [0, π/2]` として持ち込む）。
   - 実数列の収束・極限とその基本性質（単調有界列の収束、極限の定数倍・和・積、はさみうち、級数から項を分ける操作）。`def_matrix_norm`・`def_exp` が依拠し、証明の根拠の行で名前だけで使う（約 36 ブロック）。
   - 上限 `sup`・上界・`ℝ` の完備性（`def_rayleigh_sup`・`def_sector_rayleigh_sup` が `c(M)`・`c₊(M)` を `sup` で定める。「上限は最小の上界」を根拠に使う証明がある）。

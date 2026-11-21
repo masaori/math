@@ -3081,6 +3081,7 @@ targets=(
   Ising2D.real_sum_of_two_equal_terms_is_twice
   "Ising2D.NecSuf.add_self_eq_two_mul'"
   Ising2D.real_sum_of_two_equal_terms_is_twice_of_necSuf
+  Ising2D.real_half_plus_half_is_original
   Ising2D.real_inverse_of_positive_is_positive
   Ising2D.NecSuf.inv_pos_of_orderedAxioms
   Ising2D.real_inverse_of_positive_is_positive_of_necSuf

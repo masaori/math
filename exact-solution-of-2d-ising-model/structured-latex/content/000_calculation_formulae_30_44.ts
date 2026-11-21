@@ -3475,7 +3475,7 @@ i(-\theta)_{\mathbb C}
     title: { tex: String.raw`\cos,\sin\text{のEuler表示}` },
     labels: ["euler_formula_cos_sin"],
     statement: [
-      paragraph(["現行の正弦・余弦は ", ref("def_sin"), "、", ref("def_cos"), "、複素数は ", ref("definition_of_cc"), " で定めている。複素数の exp は行列の exp の章で 1 行 1 列の行列の exp として定める。全実数上への拡張と、以下で使うEuler公式の導出は未整備である。"]),
+      paragraph(["現行の正弦・余弦は ", ref("def_sin"), "、", ref("def_cos"), " で ", math(String.raw`[-\pi/2,\pi/2]`), " の上に定め、", ref("def_sin_on_all_reals"), "・", ref("def_cos_on_all_reals"), " で全実数上の ", math(String.raw`\sin_{\mathbb{R}}, \cos_{\mathbb{R}}`), " へ拡張した（主値区間での一致は ", ref("sin_on_all_reals_agrees_on_principal_interval"), "、", ref("cos_on_all_reals_agrees_on_principal_interval"), "）。複素数は ", ref("definition_of_cc"), " で定めている。複素数の exp は行列の exp の章で 1 行 1 列の行列の exp として定める。以下の ", math(String.raw`\cos\theta, \sin\theta\ (\theta \in \mathbb{R})`), " を ", math(String.raw`\cos_{\mathbb{R}}(\theta), \sin_{\mathbb{R}}(\theta)`), " の値として読む記法、", math(String.raw`\sin_{\mathbb{R}}, \cos_{\mathbb{R}}`), " の性質（", math(String.raw`2\pi`), " 周期性・偶奇性など）、以下で使うEuler公式の導出は未整備である。"]),
       paragraph([math(String.raw`\forall \theta \in \mathbb{R}`)]),
       displayMath(
         String.raw`\cos\theta = \frac{\exp(i\theta) + \exp(-i\theta)}{2}`,
@@ -3629,6 +3629,7 @@ i(-\theta)_{\mathbb C}
           "第 1 の等式の鎖の「i sin θ を足して引いた」の行を主張 sum_plus_difference_is_twice_first_in_cc（a → cos θ、b → i sin θ）を右辺から左辺へ引く行にし、" +
           "第 2 の等式の鎖の「cos θ を足して引いた」の行を、積の結合律で (2_ℂ i)sin θ を 2_ℂ(i sin θ) にする行と、主張 sum_minus_difference_is_twice_second_in_cc（同じ置き換え）を右辺から左辺へ引く行の 2 行に割った。" +
           "cos の偶性・sin の奇性と Euler の公式を名前だけで引く行は、全実数上の cos・sin が未整備なので変えていない。",
+        "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 冒頭の段落の「全実数上への拡張は未整備」を、拡張 sin_ℝ・cos_ℝ を定めた def_sin_on_all_reals・def_cos_on_all_reals と主値区間での一致の 2 主張への参照に替え、未整備として残るもの（cos θ・sin θ を sin_ℝ・cos_ℝ の値として読む記法、2π 周期性・偶奇性などの性質、Euler の公式の導出）を書き分けた。主張の式と証明は不変。",
       ],
     },
   },
