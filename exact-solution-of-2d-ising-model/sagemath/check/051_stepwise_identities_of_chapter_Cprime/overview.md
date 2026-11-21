@@ -182,11 +182,17 @@ check_02 の第 2 成分の段を新しい 6 行 `eigenvector (v 2-1)`〜`(v 2-6
 
 ```
 cd exact-solution-of-2d-ising-model/sagemath/check/051_stepwise_identities_of_chapter_Cprime
-sage check_01_013_steps.sage
-sage check_02_015_steps.sage
-sage check_03_014_steps.sage
-sage check_04_016_steps.sage
+for f in check_01_013_steps.sage check_02_015_steps.sage check_03_014_steps.sage check_04_016_steps.sage; do
+  sage -c "__file__='$PWD/$f'; load('$f')" > "logs/$f.log" 2>&1 || echo "FAIL (終了コード): $f"
+done
+grep -l 'FAIL' logs/check_0*.log    # ループとこの行のどちらも何も出さなければ 4 本とも全段 PASS
+cat logs/check_0*.log > run-log.txt
 ```
+
+各検算は `_prelude.sage` を `__file__` のディレクトリから読む。SageMath 10.9 の `sage <file>.sage` は
+`__file__` を sage のパッケージの位置にするので、`sage <file>.sage` で直に呼ぶと `_prelude.sage` が見つからずに落ちる。
+`sagemath/tools/run-all-checks.sh` もこの呼び方なので、このディレクトリの 4 本は一括実行では 4 本とも失敗する
+（2026-11-21 に `run-all-checks.sh 051_stepwise` で確かめた。上の「整数運動量の経路の退避に伴う更新（2026-09-26）」の節の記述は今も正しい）。
 
 ## 零行列の和と差の段の根拠の付け替え（2026-11-01）
 
