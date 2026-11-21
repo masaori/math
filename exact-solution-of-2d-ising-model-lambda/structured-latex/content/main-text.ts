@@ -3327,8 +3327,12 @@ c\cdot\lambda\le_{\Lambda_{\mathbb{Q}}}c\cdot\mu`),
 (vN)\cdot(c\cdot\lambda)
 &=\bigl((vN)c\bigr)\cdot\lambda
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則 }(rs)\cdot\lambda=r\cdot(s\cdot\lambda))\\
+&=\bigl(v(Nc)\bigr)\cdot\lambda
+&&(\because\ \mathbb{Q}\text{ の積の結合則})\\
+&=\bigl(v(cN)\bigr)\cdot\lambda
+&&(\because\ \mathbb{Q}\text{ の積の可換性})\\
 &=\bigl((vc)N\bigr)\cdot\lambda
-&&(\because\ \mathbb{Q}\text{ の積の可換性と結合則})\\
+&&(\because\ \mathbb{Q}\text{ の積の結合則})\\
 &=(uN)\cdot\lambda
 &&(\because\ v\cdot c=u\text{。}\blkref{claim_common_denominator_exists}\text{ の }\operatorname{den}(r)\cdot r=\operatorname{num}(r))\\
 &=u\cdot(N\cdot\lambda)
@@ -3343,7 +3347,7 @@ c\cdot\lambda\le_{\Lambda_{\mathbb{Q}}}c\cdot\mu`),
                                 math(String.raw`\lambda`),
                                 " を ",
                                 math(String.raw`\mu`),
-                                " に置き換えて同じ六段を読めば、",
+                                " に置き換えて同じ八段を読めば、",
                                 math(String.raw`vN`),
                                 " は ",
                                 math(String.raw`c\cdot\mu`),

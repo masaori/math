@@ -133,16 +133,25 @@ for i in range(n):
             assert log_order_le(lam_N, mu_N)
             # vN ≥ 1
             assert v * N >= 1
-            # 六段: (vN)·(c·λ) = ((vN)c)·λ = ((vc)N)·λ = (uN)·λ = u·(N·λ) = u·ι(λ_N) = ι(uλ_N)
+            # 八段: 有理数の積の結合則と可換性を別々に確かめる
             for vec, vec_N in ((lam, lam_N), (mu, mu_N)):
                 s0 = qsmul(v * N, qsmul(c, vec))
                 s1 = qsmul((v * N) * c, vec)
-                s2 = qsmul((v * c) * N, vec)
-                s3 = qsmul(u * N, vec)
-                s4 = qsmul(u, qsmul(N, vec))
-                s5 = qsmul(u, iota(vec_N))
-                s6 = iota(zsmul(u, vec_N))
-                assert s0 == s1 == s2 == s3 == s4 == s5 == s6
+                s2 = qsmul(v * (N * c), vec)
+                s3 = qsmul(v * (c * N), vec)
+                s4 = qsmul((v * c) * N, vec)
+                s5 = qsmul(u * N, vec)
+                s6 = qsmul(u, qsmul(N, vec))
+                s7 = qsmul(u, iota(vec_N))
+                s8 = iota(zsmul(u, vec_N))
+                assert s0 == s1
+                assert s1 == s2
+                assert s2 == s3
+                assert s3 == s4
+                assert s4 == s5
+                assert s5 == s6
+                assert s6 == s7
+                assert s7 == s8
                 assert is_common_denominator(v * N, qsmul(c, vec), zsmul(u, vec_N))
             # 証人の順序: u ≥ 1 なら正整数倍不変性、u = 0 なら両辺 0 と反射律
             if u >= 1:
