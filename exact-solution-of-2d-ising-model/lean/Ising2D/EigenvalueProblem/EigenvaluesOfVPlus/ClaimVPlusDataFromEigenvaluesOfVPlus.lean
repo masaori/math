@@ -96,8 +96,8 @@ theorem checkFermiSetupOf_Vprime (P : IsingParam) (hM : M ≠ 0) :
 theorem star_ofReal_self (r : ℝ) : star ((r : ℝ) : ℂ) = ((r : ℝ) : ℂ) := by
   rw [Complex.star_def, Complex.conj_ofReal]
 
-/-- **章 016 の `V_plus_eq_c_check_Vprime` と章 017 の `constant_c_value_even_sector` の合成**:
-`V^{(+)} = (2 sinh 2K_2)^{M/2} V̌'`（仮定は `M ≠ 0` と双対関係だけ）。 -/
+/-- **二つの主張の合成**: `V^{(+)} = (2 sinh 2K_2)^{M/2} V̌'`（仮定は `M ≠ 0` と双対関係だけ）。
+章 016 の `V_plus_eq_c_check_Vprime` と章 017 の `constant_c_value_even_sector` を合わせる（本文のブロックではない）。 -/
 theorem VPlus_eq_smul_checkVprime_const (P : IsingParam) (hM : M ≠ 0)
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star) :
     VPlus M (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)

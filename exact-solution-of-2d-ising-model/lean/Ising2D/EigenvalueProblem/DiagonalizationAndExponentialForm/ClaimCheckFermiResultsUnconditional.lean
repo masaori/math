@@ -114,9 +114,9 @@ theorem TVPlus_eq_TCheckVprime' (hM : M ≠ 0)
     (fun j => lambdaPlusR_eq_exp_gammaTildeC P hdual M (checkIdx M j))
     (fun j => lambdaMinusR_eq_exp_gammaTildeC P hdual M (checkIdx M j))
 
-/-- **`V_plus_eq_c_check_Vprime`（015 章の仮定なし。残るのは 014 章の `hT` だけ）**。
+/-- **仮定 `hT` を取る一般形**: `V_plus_eq_c_check_Vprime`（015 章の仮定なし。残るのは 014 章の `hT` だけ。本文どおりの版は `VPlus_eq_smul_checkVprime_of_dual`）。
 
-本章の結論そのもの: ある `c ∈ ℂ^×` について `V^{(+)} = c V̌'`。 -/
+主張: ある `c ∈ ℂ^×` について `V^{(+)} = c V̌'`。 -/
 theorem VPlus_eq_smul_checkVprime' (hM : M ≠ 0)
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (uPlus : (TensorPow M)ˣ)

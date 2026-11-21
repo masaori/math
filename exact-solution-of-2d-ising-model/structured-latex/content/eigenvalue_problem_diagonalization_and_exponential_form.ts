@@ -360,6 +360,7 @@ t
       text: "Z, Y から和・スカラー倍・積だけで 2^M 次の複素行列がすべて得られる",
     },
     labels: ["Z_Y_generate_algebra"],
+    lean: ["Ising2D.Z_Y_generate_algebra"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -1353,6 +1354,7 @@ Q_{s+1}
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 5 },
     title: { tex: String.raw`\tilde\theta_\mu \text{ の共役添字恒等式 } \tilde\theta_{1-\mu} = -\tilde\theta_\mu` },
     labels: ["def_half_integer_modes"],
+    lean: ["Ising2D.thetaTilde_one_sub"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
@@ -1428,6 +1430,7 @@ Q_{s+1}
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 7 },
     title: { tex: String.raw`\check{\mathcal{M}} \text{ の内側で共役添字を取る}` },
     labels: ["conjugate_index_of_check_Z_Y"],
+    lean: ["Ising2D.thetaTilde_conj", "Ising2D.checkPhase_conj'", "Ising2D.checkZ_conj", "Ising2D.checkY_conj", "Ising2D.checkPhase_conj"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \check{\mathcal{M}}`),
@@ -1731,6 +1734,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 9 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ の反交換関係}` },
     labels: ["anticommutator_of_check_Z_Y"],
+    lean: ["Ising2D.acomm_checkZ_checkZ_of_mem", "Ising2D.acomm_checkZ_checkY", "Ising2D.acomm_checkY_checkY_of_mem", "Ising2D.acomm_checkY_checkZ", "Ising2D.acomm_checkZ_checkZ", "Ising2D.acomm_checkY_checkY"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
@@ -2124,6 +2128,7 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 10 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ から } Z_j, Y_j \text{ を復元する}` },
     labels: ["recover_Z_Y_from_check_Z_Y"],
+    lean: ["Ising2D.Z_eq_inverse_dft_check", "Ising2D.Y_eq_inverse_dft_check", "Ising2D.recover_checkZ", "Ising2D.recover_checkY", "Ising2D.checkZ_checkY_generate_algebra"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
@@ -2508,6 +2513,7 @@ c\sum_{\mu=1}^{N} f_{j,\mu}\check{Y}_{\mu_{\mathbb Z}}
     origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 3 },
     title: { tex: String.raw`\gamma_1(\theta), \gamma_2(\theta)\ (\theta \in \mathbb{R})` },
     labels: ["def_gamma1_gamma2_of_theta"],
+    lean: ["Ising2D.gamma1R", "Ising2D.gamma2", "Ising2D.gamma1", "Ising2D.AMat_thetaTilde_eq"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -2718,6 +2724,7 @@ A(\theta)_{2,1}
     origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 3 },
     title: { tex: String.raw`\gamma_1(\theta) \geq \cosh(2K_1 - 2K_2^*) \geq 1 \quad (\forall\theta\in\mathbb{R})` },
     labels: ["gamma1_lower_bound_all_theta"],
+    lean: ["Ising2D.gamma1_lower_bound_all_theta", "Ising2D.gamma1R_ge_cosh_sub", "Ising2D.one_le_gamma1R"],
     statement: [
       paragraph([
         ref("def_gamma1_gamma2_of_theta"),
@@ -2841,6 +2848,7 @@ s_1s_2^* &> 0\cdot s_2^*
     origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 3 },
     title: { tex: String.raw`\gamma(\theta)\ (\theta \in \mathbb{R}) \text{ の定義}` },
     labels: ["def_gamma_theta"],
+    lean: ["Ising2D.gammaFn", "Ising2D.gammaTilde"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -2913,6 +2921,7 @@ s_1s_2^* &> 0\cdot s_2^*
     origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 4 },
     title: { tex: String.raw`\gamma_2(\tilde\theta_\mu) \neq 0 \text{（例外なし）}` },
     labels: ["gamma_2_theta_tilde_nonzero"],
+    lean: ["Ising2D.gamma2_thetaTilde_ne_zero", "Ising2D.gamma2_step1_first_equation_iff", "Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -3318,6 +3327,7 @@ s_1c_2
       tex: String.raw`\gamma_2(-\tilde\theta_\mu) = -\overline{\gamma_2(\tilde\theta_\mu)} \text{ とその帰結}`,
     },
     labels: ["relation_of_gamma_2_theta_tilde"],
+    lean: ["Ising2D.gamma2_neg_thetaTilde_eq", "Ising2D.gamma2_mul_gamma2_neg_eq_neg_absSq", "Ising2D.sq_absGamma2", "Ising2D.sq_I_absGamma2", "Ising2D.absGamma2_thetaTilde_pos", "Ising2D.gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -4009,6 +4019,7 @@ s_1c_2
     origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 6 },
     title: { tex: String.raw`A(\tilde\theta_\mu) \text{ の固有値と固有ベクトル}` },
     labels: ["eigenvector_of_A_theta_tilde"],
+    lean: ["Ising2D.eigenvalue_AMat_iff", "Ising2D.isEigenvector_smul_eigen_pos", "Ising2D.isEigenvector_smul_eigen_neg", "Ising2D.lambdaPlusR_ne_lambdaMinusR", "Ising2D.charPoly_factor_thetaTilde", "Ising2D.factor_identity_thetaTilde", "Ising2D.det_AMat_sub_smul_eq_zero_iff", "Ising2D.AMat_mulVec_eigen_pos", "Ising2D.AMat_mulVec_eigen_neg", "Ising2D.eigenvector_pos_ne_zero", "Ising2D.eigenvector_neg_ne_zero", "Ising2D.AMat_mulVec_smul_eigen_pos", "Ising2D.AMat_mulVec_smul_eigen_neg"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -4545,6 +4556,7 @@ A(\theta)(cv)
     origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 7 },
     title: { tex: String.raw`A(\tilde\theta_\mu) \text{ の対角化 } (\check{P}_\mu,\, \check{D}_\mu)` },
     labels: ["diagonalization_check_P_D"],
+    lean: ["Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -5205,6 +5217,7 @@ A(\tilde\theta_\mu)
     origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 8 },
     title: { tex: String.raw`\det A(\tilde\theta_\mu) = 1` },
     labels: ["det_A_theta_tilde"],
+    lean: ["Ising2D.det_AMat_thetaTilde_eq_one", "Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde", "Ising2D.lambda_mul_lambda_thetaTilde", "Ising2D.gamma1R_sq_thetaTilde", "Ising2D.det_AMat_eq_gamma1_sq_add", "Ising2D.gamma1_sq_add_gamma2_mul_chain_first_half", "Ising2D.gamma1_sq_add_gamma2_mul_chain_second_half", "Ising2D.gamma2_a0_form", "Ising2D.gamma2_neg_a0_form", "Ising2D.gamma2_mul_gamma2_neg_sin_form", "Ising2D.exp_I_mul_exp_neg_I_mul", "Ising2D.complex_neg_neg_chain", "Ising2D.complex_I_mul_I_chain", "Ising2D.complex_sub_I_mul_mul_add_I_mul", "Ising2D.complex_sub_sq_chain", "Ising2D.complex_cos_add_I_mul_sin_chain", "Ising2D.cos_sq_add_sin_sq_complex_chain"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -6003,6 +6016,7 @@ c_2s_2^*
     origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 9 },
     title: { tex: String.raw`\gamma_1(\tilde\theta_\mu) > 1` },
     labels: ["gamma1_gt_1_theta_tilde"],
+    lean: ["Ising2D.one_lt_gamma1R_thetaTilde_checkIndex", "Ising2D.one_lt_gamma1R_thetaTilde", "Ising2D.one_lt_gamma1R_sq_thetaTilde", "Ising2D.gamma1_gt_1_prep_absGamma2_sq_pos", "Ising2D.gamma1R_thetaTilde_sq_le_one_of_le_one"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -6175,6 +6189,7 @@ g^2
     origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 10 },
     title: { tex: String.raw`\gamma(\tilde\theta_\mu) > 0` },
     labels: ["gamma_theta_tilde_mu_positive"],
+    lean: ["Ising2D.gammaFn_thetaTilde_pos", "Ising2D.gammaTilde_pos"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -6283,6 +6298,7 @@ g
     origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 11 },
     title: { tex: String.raw`\lambda_{\pm,\mu} = \exp(\pm\gamma(\tilde\theta_\mu))` },
     labels: ["lambda_eq_exp_gamma_theta_tilde"],
+    lean: ["Ising2D.lambdaPlusR_eq_exp", "Ising2D.lambdaMinusR_eq_exp", "Ising2D.sinh_gammaTilde", "Ising2D.lambda_separation", "Ising2D.lambdaPlusR_eq_exp_gammaTildeC", "Ising2D.lambdaMinusR_eq_exp_gammaTildeC"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -6666,6 +6682,7 @@ g
     origin: { path: "structured-latex/content/016_even_sector_fermions.ts", ordinal: 3 },
     title: { tex: String.raw`\check\psi_\mu, \check\psi_\mu^\dagger \text{（}\check{Z}_\mu, \check{Y}_\mu\text{ の一次結合）}` },
     labels: ["def_check_fermi"],
+    lean: ["Ising2D.checkPsiDag", "Ising2D.checkPsi", "Ising2D.checkPsiDag_eq_checkPmat_col", "Ising2D.checkPsi_eq_checkPmat_col", "Ising2D.checkPsi_row_eq_rowMul_checkPmat"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -6799,6 +6816,7 @@ g
     origin: { path: "structured-latex/content/016_even_sector_fermions.ts", ordinal: 4 },
     title: { tex: String.raw`\gamma_1, \gamma_2 \text{ の周期性と共役添字 } M_{\mathrm{col}}+1-\mu` },
     labels: ["periodicity_of_check_fermi"],
+    lean: ["Ising2D.checkPmat_conj", "Ising2D.checkPmat_conj_denominator_ne_zero", "Ising2D.gammaTilde_conj"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -7418,6 +7436,7 @@ d_\nu
     origin: { path: "structured-latex/content/016_even_sector_fermions.ts", ordinal: 5 },
     title: { tex: String.raw`\check\psi \text{ の反交換関係}` },
     labels: ["anticommutator_of_check_psi"],
+    lean: ["Ising2D.checkPsi_car'", "Ising2D.checkPsi_car"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -8220,6 +8239,7 @@ u^{+}_\mu u^{+}_\nu + h\,h
     origin: { path: "structured-latex/content/016_even_sector_fermions.ts", ordinal: 6 },
     title: { tex: String.raw`V^{(+)} \text{ と } \check\psi \text{ の交換関係}` },
     labels: ["commutation_V_plus_check_psi"],
+    lean: ["Ising2D.TVPlus_checkPsiDag_checkPsi", "Ising2D.TVPlus_checkPsiDag_psi_of_action", "Ising2D.TVPlus_checkPsiDag_of_action", "Ising2D.TVPlus_checkPsi_of_action"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -8566,6 +8586,7 @@ T(\check\psi_\mu)
     origin: { path: "structured-latex/content/016_even_sector_fermions.ts", ordinal: 7 },
     title: { tex: String.raw`\check{V}' \text{ の定義}` },
     labels: ["def_check_Vprime"],
+    lean: ["Ising2D.checkVprime", "Ising2D.checkX", "Ising2D.checkVprimeUnits", "Ising2D.isUnit_checkVprime", "Ising2D.CheckFermiSetup.Vprime"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -8772,6 +8793,7 @@ T(\check\psi_\mu)
     origin: { path: "structured-latex/content/016_even_sector_fermions.ts", ordinal: 8 },
     title: { tex: String.raw`T_{(\check{V}')} \text{ の } \check\psi \text{ への作用}` },
     labels: ["action_of_T_check_Vprime_on_check_psi"],
+    lean: ["Ising2D.TCheckVprime_checkPsi_pair"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -9626,6 +9648,7 @@ T\!\left(\check\psi_\mu\right)
       tex: String.raw`T_{(V^{(+)})} \text{ と } T_{(\check{V}')} \text{ は } \check{Z}, \check{Y} \text{ 上で一致する}`,
     },
     labels: ["T_V_plus_eq_T_check_Vprime_on_check_Z_Y"],
+    lean: ["Ising2D.TVPlus_eq_TCheckVprime_on_checkZY"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -9934,6 +9957,7 @@ T_{(V^{(+)})}\!\left(X_l\right)
     origin: { path: "structured-latex/content/016_even_sector_fermions.ts", ordinal: 10 },
     title: { tex: String.raw`T_{(V^{(+)})} = T_{(\check{V}')}` },
     labels: ["T_V_plus_eq_T_check_Vprime"],
+    lean: ["Ising2D.TVPlus_eq_TCheckVprime'", "Ising2D.TVPlus_eq_TCheckVprime", "Ising2D.TConj_eq_of_eq_on_checkZY"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -10311,6 +10335,7 @@ T_{(V^{(+)})}(I)
     origin: { path: "structured-latex/content/016_even_sector_fermions.ts", ordinal: 11 },
     title: { tex: String.raw`V^{(+)} = c\,\check{V}' \text{（定数倍を除いて一致）}` },
     labels: ["V_plus_eq_c_check_Vprime"],
+    lean: ["Ising2D.VPlus_eq_smul_checkVprime_of_dual", "Ising2D.exists_smul_of_TConj_eq", "Ising2D.commute_of_TConj_eq"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -10496,6 +10521,7 @@ V^{(+)}
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 3 },
     title: { tex: String.raw`\check{n}_\mu := \check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu} \text{ の定義}` },
     labels: ["def_check_number_operator"],
+    lean: ["Ising2D.CheckFermiSetup.nOp", "Ising2D.conjIdx", "Ising2D.conjIdx_involutive", "Ising2D.CheckFermiSetup.Xop", "Ising2D.CheckFermi.nOp"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -10742,6 +10768,7 @@ V^{(+)}
     standing: "mainTheorem",
     title: { tex: String.raw`V^{(+)} = c\,\exp\!\left(\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\left(\check{n}_\mu - \tfrac12 I\right)\right)` },
     labels: ["V_plus_eq_c_exp_sum_gamma_check_number_operator"],
+    lean: ["Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -10824,6 +10851,7 @@ V^{(+)}
     standing: "mainTheorem",
     title: { tex: String.raw`A(\tilde\theta_\mu)\text{ の対角化、}\lambda_{\pm,\mu} = \exp(\pm\gamma(\tilde\theta_\mu))\text{ と }V^{(+)}\text{ の指数表示}` },
     labels: ["A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form"],
+    lean: ["Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),

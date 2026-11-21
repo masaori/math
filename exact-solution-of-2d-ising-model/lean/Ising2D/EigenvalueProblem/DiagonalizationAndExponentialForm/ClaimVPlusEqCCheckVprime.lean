@@ -70,7 +70,7 @@ theorem exists_smul_of_TConj_eq (u v : (TensorPow M)ˣ)
     rw [hWdef, Units.val_mul, ← mul_assoc, Units.mul_inv, one_mul]
   rw [huv, hc, mul_smul_comm, mul_one]
 
-/-- **原文 `V_plus_eq_c_check_Vprime` そのもの（本章の結論）**:
+/-- **仮定 `hT`・`hlamPlus`・`hlamMinus` と任意の重み `g` を取る一般形**: 原文 `V_plus_eq_c_check_Vprime`（本文どおりの版は `VPlus_eq_smul_checkVprime_of_dual`）。
 ある `c ∈ ℂ^×` について `V^{(+)} = c V̌'`。 -/
 theorem VPlus_eq_smul_checkVprime (P : IsingParam) (g : ℤ → ℂ) (hM : M ≠ 0)
     (hgconj : ∀ μ : ℤ, CheckIndex M μ → g ((M : ℤ) + 1 - μ) = g μ)
