@@ -8,12 +8,10 @@
 -/
 import Ising2DLambda.KacWard.WindingTransverseStaircase
 import Ising2DLambda.KacWard.PeriodicPlaneLiftParallelIncrease
-import Ising2DLambda.NecSuf.KacWard.WindingParallelStaircase
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `def_winding_parallel_staircase`。巻き付きベクトルに平行な正の整数格子階段。 -/
 def windingParallelStaircase (L : ℕ) (wh wv : ℤ) : ℕ → ℤ × ℤ :=

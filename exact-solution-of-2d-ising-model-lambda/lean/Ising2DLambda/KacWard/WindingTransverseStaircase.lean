@@ -6,12 +6,11 @@
 住処は ℤ と ℕ だけであり、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.KacWard.PeriodicPlaneLiftTransverseBounded
-import Ising2DLambda.NecSuf.KacWard.WindingTransverseStaircase
+import Ising2DLambda.KacWard.Staircase
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `def_winding_transverse_staircase`。巻き付きベクトルを正に横切る整数格子の階段。 -/
 def windingTransverseStaircase (wh wv : ℤ) : ℕ → ℤ × ℤ :=

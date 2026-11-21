@@ -92378,7 +92378,7 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
                       lean: [
                         "Ising2DLambda.KacWard.windingParallelStaircaseFromWalk",
                         "Ising2DLambda.KacWard.windingParallelStaircase",
-                        "Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase",
+                        "Ising2DLambda.KacWard.orderedTwoPhaseStaircase",
                       ],
                       statement: [
                         paragraph([

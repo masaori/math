@@ -2,11 +2,9 @@
 import Ising2DLambda.KacWard.WindingParallelStaircase
 import Ising2DLambda.KacWard.Turn
 import Ising2DLambda.KacWard.DirectionSequence
-import Ising2DLambda.NecSuf.KacWard.ReversedParallelStaircaseTurning
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 単位非後退歩では `def_step_turning` に一致する整数の表。 -/
 def latticeStepTurning (u v : ℤ × ℤ) : ℤ := u.2 * v.1 - u.1 * v.2

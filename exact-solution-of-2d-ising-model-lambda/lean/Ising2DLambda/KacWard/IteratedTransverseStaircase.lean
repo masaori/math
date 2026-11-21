@@ -7,12 +7,10 @@
 整数横断座標の増加、歩数による下界、頂点の相異性を順に得る。
 -/
 import Ising2DLambda.KacWard.WindingTransverseStaircase
-import Ising2DLambda.NecSuf.KacWard.IteratedTransverseStaircase
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `def_iterated_transverse_staircase`。横断階段を終点だけ平行移動して反復する。 -/
 def iteratedTransverseStaircase (wh wv : ℤ) (base : ℤ × ℤ) (s : ℕ) : ℤ × ℤ :=

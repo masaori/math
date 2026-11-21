@@ -1,5 +1,8 @@
 /- 符号反転階段の必要十分版を、本文の整数格子と回転表へ特殊化する。 -/
 import Ising2DLambda.KacWard.NegatedParallelStaircaseTurning
+import Ising2DLambda.KacWard.StaircaseFromNecSuf
+import Ising2DLambda.KacWard.DirectionSequenceFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.NegatedParallelStaircaseTurning
 
 namespace Ising2DLambda.KacWard
 

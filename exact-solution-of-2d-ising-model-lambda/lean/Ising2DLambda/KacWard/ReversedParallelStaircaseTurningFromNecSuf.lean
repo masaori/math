@@ -1,5 +1,7 @@
 /- 二区間の相殺を、整数格子の回転数へ特殊化する。 -/
 import Ising2DLambda.KacWard.ReversedParallelStaircaseTurning
+import Ising2DLambda.KacWard.DirectionSequenceFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.ReversedParallelStaircaseTurning
 
 namespace Ising2DLambda.KacWard
 

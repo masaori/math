@@ -7,12 +7,10 @@
 -/
 import Ising2DLambda.KacWard.IteratedTransverseStaircase
 import Ising2DLambda.KacWard.PeriodicPlaneLiftParallelIncrease
-import Ising2DLambda.NecSuf.KacWard.IteratedStaircaseParallelWidth
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 private lemma signedPrefix_between (a b : ℤ) (n : ℕ) (hn : n ≤ a.natAbs) :
     min 0 (a * b) ≤ b * ((n : ℤ) * Int.sign a) ∧

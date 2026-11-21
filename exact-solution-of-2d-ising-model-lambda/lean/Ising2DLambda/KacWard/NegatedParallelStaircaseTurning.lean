@@ -2,11 +2,9 @@
 正の平行階段の点を同じ順で符号反転する。二区間の順序は反転しない。
 歩の単位性・平行座標の負値、回転表との照合、二区間の相殺を本文と対応させる。 -/
 import Ising2DLambda.KacWard.ReversedParallelStaircaseTurning
-import Ising2DLambda.NecSuf.KacWard.NegatedParallelStaircaseTurning
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 def negatedParallelStaircaseStep (L : ℕ) (wh wv : ℤ) (s : ℕ) : ℤ × ℤ :=
   -windingParallelStaircase L wh wv (s + 1) - (-windingParallelStaircase L wh wv s)

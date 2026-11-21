@@ -1,6 +1,7 @@
 /- 横断二列の基点独立性を、任意の添字写像に対する必要十分版から導く。 -/
 import Ising2DLambda.KacWard.OneSidedTransverseSteps
 import Ising2DLambda.NecSuf.KacWard.OneSidedTransverseSteps
+import Ising2DLambda.KacWard.StaircaseFromNecSuf
 
 namespace Ising2DLambda.KacWard
 
