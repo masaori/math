@@ -1860,6 +1860,65 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_claim_inclusion_zz_to_rr_preserves_negation",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(-a) = -\iota_{\mathbb{Z}\to\mathbb{R}}(a)\quad(a \in \mathbb{Z})` },
+    labels: ["inclusion_zz_to_rr_preserves_negation"],
+    statement: [
+      paragraph([
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " について、",
+        math(String.raw`a \in \mathbb{Z}`),
+        " なら",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(-a) = -\iota_{\mathbb{Z}\to\mathbb{R}}(a)`),
+      paragraph([
+        "である。左辺の ",
+        math(String.raw`-`),
+        " は ",
+        math(String.raw`\mathbb{Z}`),
+        " の符号反転、右辺の ",
+        math(String.raw`-`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の符号反転である（",
+        ref("inclusion_zz_to_rr"),
+        " の負の元の節 ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(-n) := -\iota_{\mathbb{Z}\to\mathbb{R}}(n)`),
+        " は ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " だけを覆い、この主張は ",
+        math(String.raw`a`),
+        " の符号を問わない）。",
+      ]),
+    ],
+    proof: [
+      paragraph(["主張の左辺から"]),
+      displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb{Z}\to\mathbb{R}}(-a)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}} -_{\mathbb{Z}} a)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ -x = 0_{\mathbb{Z}} -_{\mathbb{Z}} x\ (x \to a)\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) -_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(a)
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_difference}\ (a \to 0_{\mathbb{Z}},\ b \to a)\bigr)\\
+&= 0_{\mathbb{R}} -_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(a)
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\bigr)\\
+&= 0_{\mathbb{R}} +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
+  &&\bigl(\because\ \blkref{def_real_difference}\ (y \to 0_{\mathbb{R}},\ z \to \iota_{\mathbb{Z}\to\mathbb{R}}(a))\bigr)\\
+&= -\iota_{\mathbb{Z}\to\mathbb{R}}(a)
+  &&\bigl(\because\ 0_{\mathbb{R}}\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b5)）: 原文（Typst）に対応ブロックは無い。anticommutator_of_check_Z_Y の準備 2 の実数の鎖（eigenvalue_problem_diagonalization_and_exponential_form.ts）が「ι_{ℤ→ℝ} は和・零・単位元を保つので差と加法の逆元を保ち」を 1 行で名前だけで使っていたので、その行を割るために、符号を問わない ℤ の元の符号反転を保つ主張として足した。証明は inclusion_zz_to_rr_preserves_difference と定義の ι(0_ℤ) := 0_ℝ を引く 5 行の鎖である。Lean の具体版は Ising2D.inclusion_zz_to_rr_preserves_negation、必要十分版は Ising2D.NecSuf.int_cast_neg'。数値検証: sagemath/check/inclusion_zz_to_rr_preserves_negation/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_inclusion_zz_to_rr_of_positive_is_at_least_one",
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n) \geq 1_{\mathbb{R}}\quad(n \geq 1)` },

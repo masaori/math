@@ -1,3 +1,4 @@
-  real chain: 20 equalities hold in QQ(pi, mu, nu, M, j)
+  real chain: 24 equalities hold in QQ(pi, mu, nu, M, j)
+  iota lines: 8405 equalities hold for mu, nu in -20..20
   complex chain: 5 equalities hold on real pairs over QQ(pi, mu, nu, M, j)
 RESULT: PASS

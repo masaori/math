@@ -1885,7 +1885,7 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
       ),
       paragraph([
         "準備 2（指数）。",
-        math(String.raw`\kappa := -(\mu+\nu-1) \in \mathbb Z`),
+        math(String.raw`\kappa := -\left((\mu+\nu)-1_{\mathbb Z}\right) \in \mathbb Z`),
         " と置く。",
         ref("antiperiodic_exp_sum"),
         " より ",
@@ -1923,8 +1923,16 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
 &&(\because\ \mathbb R\text{ の差は加法の逆元の和}) \\
 &= j_{\mathbb R}\cdot\frac{2\pi\left(-\left(-\left(\mu_{\mathbb R}+\nu_{\mathbb R}-1_{\mathbb R}\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb R\text{ で }-(-x)=x) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(-\left(-\left(\mu_{\mathbb R}+\nu_{\mathbb R}-\iota_{\mathbb Z\to\mathbb R}(1_{\mathbb Z})\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{を右辺から左辺へ}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(-\left(-\left(\iota_{\mathbb Z\to\mathbb R}(\mu+\nu)-\iota_{\mathbb Z\to\mathbb R}(1_{\mathbb Z})\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a \to \mu,\ b \to \nu)\ \text{を右辺から左辺へ。}\mu_{\mathbb R}=\iota_{\mathbb Z\to\mathbb R}(\mu),\ \nu_{\mathbb R}=\iota_{\mathbb Z\to\mathbb R}(\nu)\text{ は }\blkref{antiperiodic_exp_sum}\text{ の記号}\bigr) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(-\left(-\iota_{\mathbb Z\to\mathbb R}\left((\mu+\nu)-1_{\mathbb Z}\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \blkref{inclusion_zz_to_rr_preserves_difference}\ (a \to \mu+\nu,\ b \to 1_{\mathbb Z})\ \text{を右辺から左辺へ}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(-\iota_{\mathbb Z\to\mathbb R}\left(-\left((\mu+\nu)-1_{\mathbb Z}\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \blkref{inclusion_zz_to_rr_preserves_negation}\ (a \to (\mu+\nu)-1_{\mathbb Z})\ \text{を右辺から左辺へ}) \\
 &= j_{\mathbb R}\cdot\frac{2\pi\left(-\kappa_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和・零・単位元を保つので差と加法の逆元を保ち、}\kappa_{\mathbb R}=-\left(\mu_{\mathbb R}+\nu_{\mathbb R}-1_{\mathbb R}\right)\text{。}\blkref{antiperiodic_exp_sum}\bigr) \\
+&&\bigl(\because\ \text{準備 2 の }\kappa := -\left((\mu+\nu)-1_{\mathbb Z}\right)\text{ と、}\blkref{antiperiodic_exp_sum}\text{ の記号 }a_{\mathbb R} := \iota_{\mathbb Z\to\mathbb R}(a)\ (a \to \kappa)\bigr) \\
 &= \frac{j_{\mathbb R}\left(2\pi\left(-\kappa_{\mathbb R}\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&(\because\ \mathbb R\text{ で }a\cdot\tfrac{b}{c}=\tfrac{ab}{c}) \\
 &= \frac{j_{\mathbb R}\left(-\left(2\pi\kappa_{\mathbb R}\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
@@ -2017,7 +2025,7 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
 &= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})}_{(\kappa,\,0)}\right)\left(2_{\mathbb C}I\right)
    &&\bigl(\because \blkref{exp_sum}\text{ を }N\text{ と }\kappa\text{ で。準備 2 の読み}\bigr) \\
 &= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})}_{(\mu+\nu,\,1)}\right)\left(2_{\mathbb C}I\right)
-   &&\bigl(\because \kappa - 0 = -\left((\mu+\nu)-1\right)\text{ なので }\kappa\equiv0 \iff \mu+\nu\equiv1 \pmod{M_{\mathrm{col}}}\text{。}\blkref{def_delta_M}\bigr) \\
+   &&\bigl(\because \kappa - 0 = -\left((\mu+\nu)-1_{\mathbb Z}\right)\text{ なので }\kappa\equiv0 \iff \mu+\nu\equiv1 \pmod{M_{\mathrm{col}}}\text{。}\blkref{def_delta_M}\bigr) \\
 &= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)\left(2_{\mathbb C}I\right)
    &&\bigl(\because \blkref{def_check_index_set}\ (5)\ (\mu,\nu \in \check{\mathcal{M}})\bigr) \\
 &= \left(\left((M_{\mathrm{col}})_{\mathbb C}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)2_{\mathbb C}\right)I
@@ -2078,7 +2086,7 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
 &= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})}_{(\kappa,\,0)}\right)\left(2_{\mathbb C}I\right)
    &&\bigl(\because \blkref{exp_sum}\text{ を }N\text{ と }\kappa\text{ で。準備 2 の読み}\bigr) \\
 &= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})}_{(\mu+\nu,\,1)}\right)\left(2_{\mathbb C}I\right)
-   &&\bigl(\because \kappa - 0 = -\left((\mu+\nu)-1\right)\text{ なので }\kappa\equiv0 \iff \mu+\nu\equiv1 \pmod{M_{\mathrm{col}}}\text{。}\blkref{def_delta_M}\bigr) \\
+   &&\bigl(\because \kappa - 0 = -\left((\mu+\nu)-1_{\mathbb Z}\right)\text{ なので }\kappa\equiv0 \iff \mu+\nu\equiv1 \pmod{M_{\mathrm{col}}}\text{。}\blkref{def_delta_M}\bigr) \\
 &= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)\left(2_{\mathbb C}I\right)
    &&\bigl(\because \blkref{def_check_index_set}\ (5)\ (\mu,\nu \in \check{\mathcal{M}})\bigr) \\
 &= \left(\left((M_{\mathrm{col}})_{\mathbb C}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)2_{\mathbb C}\right)I
@@ -2101,6 +2109,7 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
         "2026-11-10（Lean の通しの証明）: 準備 2 の複素数の鎖の (-i)(-y_j)_C から i(y_j)_C までの 11 行（-y_j を (-1_R)y_j に開き、-1_C と i の積を結合律・交換律で並べ替える鎖）を、主張 negative_i_times_complex_is_negation_of_i_times（z → (-y_j)_C）と negation_of_i_times_negated_real_is_i_times（θ → y_j）の 2 行に替えた。鎖の両端は変えていない。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: j_ℝ(2π(−κ_ℝ)) の鎖の 2 行の根拠「ℝ で a(−b)=−(ab)」を、主張 real_times_negation_is_negation_of_product（x → 2π, t → κ_ℝ と x → j_ℝ, t → 2πκ_ℝ）の参照にした。式・鎖の両端・段数は不変。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (−½)+(−½) = −(½+½) の行の根拠「ℝ で (−a)+(−b) = −(a+b)」を、この回に足した主張 real_negation_of_sum_is_sum_of_negations（x → ½, y → ½）を右辺から左辺へ当てる参照にした。式・鎖の両端・段数は不変。",
+        "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b5)。整数の実数の像の差と符号反転についての名前だけの根拠の件）: 準備 2 の実数の鎖の -(-(μ_ℝ+ν_ℝ-1_ℝ)) を -κ_ℝ に置く行の根拠「ι_{ℤ→ℝ} は和・零・単位元を保つので差と加法の逆元を保ち、κ_ℝ = -(μ_ℝ+ν_ℝ-1_ℝ)」（複数の性質を 1 行で使っていた）を、inclusion_zz_to_rr_of_one を右辺から左辺へ・inclusion_zz_to_rr_preserves_sum（a → μ、b → ν）を右辺から左辺へ・inclusion_zz_to_rr_preserves_difference（a → μ+ν、b → 1_ℤ）を右辺から左辺へ・新しく足した inclusion_zz_to_rr_preserves_negation（a → (μ+ν)-1_ℤ）を右辺から左辺へ・κ の置き方の 5 行に割った（実数の鎖は 20 等号 → 24 等号）。主張は不変。Lean の anticomm_exponent_real_chain の Int.cast_neg・Int.cast_sub・Int.cast_add・Int.cast_one を 1 段にまとめた段も、同じ 4 段に割った。同じ回に、準備 2 の κ の置き方を κ := -((μ+ν)-1_ℤ) と書き、鎖の κ を置く行と主鎖の def_delta_M の 2 行の根拠の字面を揃えた（値は不変）。",
       ],
     },
   },

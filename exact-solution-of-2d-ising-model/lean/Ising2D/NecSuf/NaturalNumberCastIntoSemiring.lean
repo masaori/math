@@ -1,10 +1,10 @@
 /-
-# 整数の埋め込み: `ι(1) = 1`・非負の整数の和・`ℤ` 全体の後者と和と積と差・定数の有限和・2 の冪（必要十分版）
+# 整数の埋め込み: `ι(1) = 1`・非負の整数の和・`ℤ` 全体の後者と和と積と差と符号反転・定数の有限和・2 の冪（必要十分版）
 
 対応する人手証明のラベル: `inclusion_zz_to_rr_of_one`、`inclusion_zz_to_rr_preserves_sum_of_nonnegatives`、
 `finite_sum_of_constant_real_number`、`power_of_two_in_integers_is_at_least_one`、`inclusion_zz_to_rr_of_power_of_two`、
 `inclusion_zz_to_rr_of_positive_is_at_least_one`、`inclusion_zz_to_rr_of_nonpositive_is_nonpositive`、`inclusion_zz_to_rr_is_monotone_on_nonnegatives`、
-`inclusion_zz_to_rr_of_successor`、`inclusion_zz_to_rr_preserves_sum`、`inclusion_zz_to_rr_preserves_product`、`inclusion_zz_to_rr_preserves_difference`
+`inclusion_zz_to_rr_of_successor`、`inclusion_zz_to_rr_preserves_sum`、`inclusion_zz_to_rr_preserves_product`、`inclusion_zz_to_rr_preserves_difference`、`inclusion_zz_to_rr_preserves_negation`
 具体版: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimInclusionOfIntegersIntoRealNumbers.lean`
 （具体版をこのファイルの系として導くのは、同じフォルダの `ClaimInclusionOfIntegersIntoRealNumbersFromNecSuf.lean`）
 
@@ -29,8 +29,9 @@
 | `inclusion_zz_to_rr_preserves_sum` | `b` について `0` から足す帰納法（3 行と 5 行）と引く帰納法（12 行）。足す段・引く段とも `inclusion_zz_to_rr_of_successor` を使う | `int_cast_add'`（同じ段） | `int_cast_succ'`、`ι(0) = 0`、`0` が和の右単位元、加法逆元、和の結合律 |
 | `inclusion_zz_to_rr_preserves_product` | `b` について `0` から足す帰納法（4 行と 7 行）と引く帰納法（15 行）。`b = 0` は `x · 0 = 0`、足す段・引く段とも `inclusion_zz_to_rr_preserves_sum`・`inclusion_zz_to_rr_of_successor` を使う | `int_cast_mul'`（同じ段） | `int_cast_add'`・`int_cast_succ'`、`ι(0) = 0`、`x · 0 = 0`、`1` が乗法の右単位元、左からの分配法則 `x(y + z) = xy + xz`、`0` が和の右単位元、加法逆元、和の結合律 |
 | `inclusion_zz_to_rr_preserves_difference` | `ι(a − b) = ι(a − b) + 0 = ι(a − b) + (ι(b) + (−ι(b))) = (ι(a − b) + ι(b)) + (−ι(b)) = ι((a − b) + b) + (−ι(b)) = ι(a) + (−ι(b)) = ι(a) − ι(b)` | `int_cast_sub'`（同じ段） | `int_cast_add'`、`0` が和の右単位元、加法逆元、和の結合律、差が加法の逆元の和であること |
+| `inclusion_zz_to_rr_preserves_negation` | `ι(−a) = ι(0 − a) = ι(0) − ι(a) = 0 − ι(a) = 0 + (−ι(a)) = −ι(a)` | `int_cast_neg'`（同じ段） | `int_cast_sub'`、埋め込みの `ι(0) = 0`、差が加法の逆元の和であること、`0` が和の左単位元 |
 
-- **効いていないもの**: `R` が `ℝ` であること、`R` の完備性・除法、`R` の符号反転（`int_cast_nonpos'`・`int_cast_succ'`・`int_cast_add'`・`int_cast_mul'`・`int_cast_sub'` だけが使う）、乗法の可換性・結合律、全順序であること。
+- **効いていないもの**: `R` が `ℝ` であること、`R` の完備性・除法、`R` の符号反転（`int_cast_nonpos'`・`int_cast_succ'`・`int_cast_add'`・`int_cast_mul'`・`int_cast_sub'`・`int_cast_neg'` だけが使う）、乗法の可換性・結合律、全順序であること。
 - **型クラスについて**: mathlib の型クラスでは、効いている性質だけを切り出した組を作れない（`One` を二重に持つことになる）ので、
   それを含む最小の標準の組を置き、効いていない性質を次に書く。
   - `sum_const_fin_succ'` の `[NonAssocSemiring R]` のうち、左からの分配法則・`mul_one`・`zero_mul`・`mul_zero` は効いていない。
@@ -46,6 +47,8 @@
   そのうち右からの分配法則・`1` が乗法の左単位元であること・`0 · x = 0` は効いておらず、乗法の結合律・可換性はそもそも仮定していない。
 - `int_cast_sub'` は乗法と順序を使わない。`int_cast_add'` と同じ `[AddCommGroupWithOne R]` を置く。加法の可換性はこの主張の段では使わず、
   `int_cast_add'` を通して効いている。
+- `int_cast_neg'` は乗法と順序を使わない。`int_cast_sub'` と同じ `[AddCommGroupWithOne R]` を置く。加法の可換性はこの主張の段では使わず、
+  `int_cast_sub'` を通して効いている。埋め込みの負の元の節 `ι(-n) = -ι(n)`（`Int.cast_neg`）は直には使わない。
 - `int_cast_succ'`・`int_cast_add'` は乗法と順序を使わない。`[AddCommGroupWithOne R]` を置く。加法の可換性は `int_cast_succ'` の `n = -(p + 1)` の段の
   `-(x + y) = (-x) + (-y)`（`neg_add`）だけで効いている。可換でない `AddGroupWithOne` では `-(x + y) = (-y) + (-x)` しか言えず、同じ手順では通らない
   （mathlib の `Int.cast_add` は可換性を使わない別の論法で、`AddGroupWithOne` で成り立つ）。
@@ -315,5 +318,16 @@ theorem int_cast_sub' {R : Type*} [AddCommGroupWithOne R] (a b : ℤ) :
         rw [int_cast_add' (a - b) b]                                       -- `int_cast_add'` を右辺から左辺へ
     _ = ((a : ℤ) : R) + -((b : ℤ) : R) := by rw [sub_add_cancel]          -- `ℤ` の四則
     _ = ((a : ℤ) : R) - ((b : ℤ) : R) := (sub_eq_add_neg _ _).symm        -- 差は加法の逆元の和（右辺から左辺へ）
+
+/-- **必要十分版の `inclusion_zz_to_rr_preserves_negation`**: `ℤ` の埋め込みで `ι(-a) = -ι(a)`（`a ∈ ℤ`）。
+具体版と同じ 5 段で、`int_cast_sub'` と埋め込みの `ι(0) = 0` を引く。 -/
+theorem int_cast_neg' {R : Type*} [AddCommGroupWithOne R] (a : ℤ) :
+    ((-a : ℤ) : R) = -((a : ℤ) : R) :=
+  calc ((-a : ℤ) : R)
+      = ((0 - a : ℤ) : R) := by rw [zero_sub]                              -- `ℤ` の四則
+    _ = ((0 : ℤ) : R) - ((a : ℤ) : R) := int_cast_sub' 0 a                 -- `int_cast_sub'`（`a → 0`, `b → a`）
+    _ = 0 - ((a : ℤ) : R) := by rw [Int.cast_zero]                         -- 埋め込みの `ι(0) = 0`
+    _ = 0 + -((a : ℤ) : R) := sub_eq_add_neg _ _                          -- 差は加法の逆元の和
+    _ = -((a : ℤ) : R) := zero_add _                                      -- `0` は和の左単位元
 
 end Ising2D.NecSuf

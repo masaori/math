@@ -433,6 +433,7 @@ export const ALL_LABELS = [
   "inclusion_zz_to_rr_of_power_of_two",
   "inclusion_zz_to_rr_of_successor",
   "inclusion_zz_to_rr_preserves_difference",
+  "inclusion_zz_to_rr_preserves_negation",
   "inclusion_zz_to_rr_preserves_product",
   "inclusion_zz_to_rr_preserves_sum",
   "inclusion_zz_to_rr_preserves_sum_of_nonnegatives",

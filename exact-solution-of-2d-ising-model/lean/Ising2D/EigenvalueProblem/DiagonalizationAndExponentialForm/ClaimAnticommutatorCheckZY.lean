@@ -75,7 +75,7 @@ theorem deltaMod_neg_sub_one (M : ℕ) (μ ν : ℤ) :
   simp only [dvd_neg]
 
 /-- **準備 2 の実数の鎖**: `j_ℝθ~_μ + j_ℝθ~_ν = -(2π j_ℝ κ_ℝ / (M_col)_ℝ)`（`κ = -(μ+ν-1)`）。
-人手の `j` は Lean の `k` である。人手の 20 行に 1 段ずつ対応する（`2π` は Lean では積 `2 * Real.pi`）。 -/
+人手の `j` は Lean の `k` である。人手の 24 行のうち `κ` を置く 1 行を除く 23 行に 1 段ずつ対応する（`2π` は Lean では積 `2 * Real.pi`）。 -/
 theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
     (k : ℝ) * thetaTilde M μ + (k : ℝ) * thetaTilde M ν
       = -(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ) / ((M : ℤ) : ℝ)) :=
@@ -112,8 +112,15 @@ theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
         rw [← sub_eq_add_neg]                                         -- 差は加法の逆元の和
     _ = (k : ℝ) * (2 * Real.pi * (-(-((μ : ℝ) + (ν : ℝ) - 1))) / ((M : ℤ) : ℝ)) := by
         rw [neg_neg]                                                  -- `-(-x) = x`
+    _ = (k : ℝ) * (2 * Real.pi * (-(-((μ : ℝ) + (ν : ℝ) - ((1 : ℤ) : ℝ)))) / ((M : ℤ) : ℝ)) := by
+        rw [inclusion_zz_to_rr_of_one_intCast]                        -- `inclusion_zz_to_rr_of_one` を右辺から左辺へ
+    _ = (k : ℝ) * (2 * Real.pi * (-(-(((μ + ν : ℤ) : ℝ) - ((1 : ℤ) : ℝ)))) / ((M : ℤ) : ℝ)) := by
+        rw [inclusion_zz_to_rr_preserves_sum μ ν]                     -- `inclusion_zz_to_rr_preserves_sum`（`a → μ`, `b → ν`）を右辺から左辺へ
+    _ = (k : ℝ) * (2 * Real.pi * (-(-((μ + ν - 1 : ℤ) : ℝ))) / ((M : ℤ) : ℝ)) := by
+        rw [inclusion_zz_to_rr_preserves_difference (μ + ν) 1]       -- `inclusion_zz_to_rr_preserves_difference`（`a → μ + ν`, `b → 1_ℤ`）を右辺から左辺へ
     _ = (k : ℝ) * (2 * Real.pi * (-((-(μ + ν - 1) : ℤ) : ℝ)) / ((M : ℤ) : ℝ)) := by
-        rw [Int.cast_neg, Int.cast_sub, Int.cast_add, Int.cast_one]   -- `ℤ → ℝ` は和・符号反転・`1` を保つ
+        rw [inclusion_zz_to_rr_preserves_negation (μ + ν - 1)]       -- `inclusion_zz_to_rr_preserves_negation`（`a → (μ + ν) - 1_ℤ`）を右辺から左辺へ
+                                                                      -- 人手の次の行 `κ := -(μ+ν-1)`・`κ_ℝ = ι(κ)` は、Lean では `κ` を置かず式のまま書くので段が無い
     _ = (k : ℝ) * (2 * Real.pi * (-((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) :=
         (mul_div_assoc _ _ _).symm                                    -- `a(b/c) = (ab)/c`
     _ = (k : ℝ) * (-(2 * Real.pi * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
