@@ -12,6 +12,7 @@
 
 住処: 人手証明のこのブロックは Z（ℤ/4ℤ）を宣言している。ℝ / ℂ は現れない。
 -/
+import Ising2DLambda.KacWard.Turn
 import Mathlib.Data.ZMod.Basic
 import Ising2DLambda.NecSuf.KacWard.CyclicTurningVanishes
 

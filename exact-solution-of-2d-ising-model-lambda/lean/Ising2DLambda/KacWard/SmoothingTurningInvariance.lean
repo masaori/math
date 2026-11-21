@@ -7,7 +7,7 @@
 `claim_reconnection_turning_difference` の帰結を仮定 `hrec` として受け取る。
 -/
 import Ising2DLambda.KacWard.TransverseCrossing
-import Ising2DLambda.NecSuf.KacWard.TotalTurning
+import Ising2DLambda.KacWard.Turn
 import Ising2DLambda.NecSuf.KacWard.SmoothingTurningInvariance
 
 namespace Ising2DLambda.KacWard

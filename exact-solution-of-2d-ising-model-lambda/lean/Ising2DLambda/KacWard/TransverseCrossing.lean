@@ -3,7 +3,7 @@
 （`def_transverse_crossing`・`claim_transverse_crossing_symmetric`）の具体版。
 住処は有限な方向データであり、ℝ / ℂ は現れない。
 -/
-import Ising2DLambda.NecSuf.KacWard.TotalTurning
+import Ising2DLambda.KacWard.Turn
 import Ising2DLambda.NecSuf.KacWard.TransverseCrossing
 import Ising2DLambda.KacWard.StepTurning
 import Ising2DLambda.KacWard.DirectionGateCrossingTurning

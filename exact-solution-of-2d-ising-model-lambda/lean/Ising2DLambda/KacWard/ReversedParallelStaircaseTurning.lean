@@ -1,6 +1,6 @@
 /- 反転平行階段の循環総回転数零。整数格子の歩を用い、本文の一方向・二方向の二場合を保つ。 -/
 import Ising2DLambda.KacWard.WindingParallelStaircase
-import Ising2DLambda.NecSuf.KacWard.TotalTurning
+import Ising2DLambda.KacWard.Turn
 import Ising2DLambda.NecSuf.KacWard.ReversedParallelStaircaseTurning
 
 namespace Ising2DLambda.KacWard

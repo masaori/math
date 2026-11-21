@@ -80781,7 +80781,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           title: { text: "一歩の回転数" },
                           labels: ["def_step_turning"],
                           habitat: "Z",
-                          lean: ["Ising2DLambda.KacWard.stepTurning", "Ising2DLambda.NecSuf.KacWard.turnValue"],
+                          lean: ["Ising2DLambda.KacWard.stepTurning", "Ising2DLambda.KacWard.turnValue"],
                           statement: [
                             paragraph([
                               math(String.raw`\vec e\in\vec E_L`), " と ",

@@ -12,7 +12,7 @@
 住処: 人手証明のこのブロックは Z を宣言している。ℝ / ℂ は現れない。
 -/
 import Mathlib.Data.ZMod.Basic
-import Ising2DLambda.NecSuf.KacWard.TotalTurning
+import Ising2DLambda.KacWard.Turn
 import Ising2DLambda.NecSuf.KacWard.ReconnectionTurningDifference
 
 namespace Ising2DLambda.KacWard

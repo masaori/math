@@ -108,9 +108,14 @@ theorem shortPairRotationPhase_ne_zero_of_direction_ne {L : ℕ} (z : Qbar)
   have hz0 : z ≠ 0 := by
     intro h
     simp [h] at hz
-  exact Ising2DLambda.NecSuf.KacWard.three_value_phase_ne_zero z
-    (rotationPhase z (reversal e) f) hz0
-    (shortPairRotationPhase_three_values z e f hdir)
+  -- 三つの値 1・z・z⁻¹ を順に調べる。
+  rcases shortPairRotationPhase_three_values z e f hdir with h | h | h
+  · rw [h]
+    exact one_ne_zero
+  · rw [h]
+    exact hz0
+  · rw [h]
+    exact inv_ne_zero hz0
 
 /-- The two actual oriented edges have a nonzero rotation phase. -/
 theorem shortPairRotationPhase_ne_zero {L : ℕ} [NeZero L] (z : Qbar)
