@@ -109703,11 +109703,11 @@ f^{\mathrm{per}}(q)
                   displayMath(String.raw`\begin{aligned}
 f^{\mathrm{per}}(q)
 &=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))
-&&(\because\ \blkref{def_periodic_free_energy_density_le_one})\\
+&&\bigl(\because\ \blkref{def_periodic_free_energy_density_le_one}\bigr)\\
 &=\sup\rho_{\mathbb R}(A^{\mathrm{op}}(q))
-&&(\because\ \blkref{claim_periodic_density_lower_set_eq_open_square_le_one})\\
+&&\bigl(\because\ \blkref{claim_periodic_density_lower_set_eq_open_square_le_one}\bigr)\\
 &=J_q
-&&(\because\ \blkref{claim_sequence_lower_set_sup_eq_real_limit}\text{ と }\blkref{def_open_square_density_lower_set})
+&&\bigl(\because\ \blkref{claim_sequence_lower_set_sup_eq_real_limit}\text{ と }\blkref{def_open_square_density_lower_set}\bigr)
 \end{aligned}`),
                 ],
               },
