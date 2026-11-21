@@ -222,6 +222,7 @@ export const ALL_LABELS = [
   "claim_imaginary_unit_extension_conjugate_evaluation",
   "claim_imaginary_unit_extension_conjugate_product_subfield_coefficient",
   "claim_imaginary_unit_extension_factor_quotient_coefficient",
+  "claim_imaginary_unit_extension_monic_polynomial_linear_factor_product",
   "claim_imaginary_unit_extension_monic_polynomial_root",
   "claim_imaginary_unit_extension_quadratic_root",
   "claim_imaginary_unit_extension_square_root",

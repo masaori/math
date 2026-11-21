@@ -311,6 +311,7 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
   claim_imaginary_unit_extension_monic_polynomial_linear_factor_product: {
     title: "虚数単位を足した体を係数とする最高次の係数が一の多項式は、その体の元を根とする一次因子の積である",
     dependsOn: [
+      "claim_qbar_monic_polynomial_linear_factor_product",
       "claim_imaginary_unit_extension_monic_polynomial_root",
       "claim_imaginary_unit_extension_factor_quotient_coefficient",
     ],
