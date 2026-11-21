@@ -61,7 +61,7 @@ theorem add_sq_le_two_mul_add' (a b : R) :
     _ = (a * a + a * b + b * a + b * b) + (a * a - a * b - b * a + b * b) := by
         noncomm_ring                                                          -- 分配律による展開を 2 か所へ（可換性を使わない）
     _ = (a ^ 2 + a * b + b * a + b ^ 2) + (a ^ 2 - a * b - b * a + b ^ 2) := by
-        rw [← sq_eq_mul_self' a, ← sq_eq_mul_self' b]                         -- 二乗は積を右辺から左辺へ 4 か所へ
+        rw [← sq_eq_mul_self' a, ← sq_eq_mul_self' b]                         -- 二乗は積を右辺から左辺へ 4 か所
     _ = 2 * a ^ 2 + 2 * b ^ 2 := by noncomm_ring                              -- 加法と減法の計算
 
 end SumOfSquares

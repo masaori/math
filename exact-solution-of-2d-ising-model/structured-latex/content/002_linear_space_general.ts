@@ -3706,7 +3706,7 @@ B_{(\delta,1)} + B_{(\delta,0)}
 &= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\Bigl(\prod_{j=1}^{r} A_j^{((\epsilon',1)_j)}\Bigr) A_{r+1}^{((\epsilon',1)_{r+1})} + \Bigl(\prod_{j=1}^{r} A_j^{((\epsilon',0)_j)}\Bigr) A_{r+1}^{((\epsilon',0)_{r+1})}\Bigr)
 &&\bigl(\because\ \blkref{def_sum_over_binary_words}\ \text{の}\ (\epsilon', e)_j = \epsilon'_j\ (j \leq r),\ (\epsilon', e)_{r+1} = e\ \text{を各項へ同時適用}\bigr)\\
 &= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\prod_{j=1}^{r+1} A_j^{((\epsilon',1)_j)} + \prod_{j=1}^{r+1} A_j^{((\epsilon',0)_j)}\Bigr)
-&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (A_j \to A_j^{((\epsilon',e)_j)})\ \text{を右辺から左辺へ、各項の 2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (A_j \to A_j^{((\epsilon',e)_j)})\ \text{を右辺から左辺へ、各項の 2 か所に同時適用}\bigr)\\
 &= \sum_{\epsilon \in \{0,1\}^{r+1}} \prod_{j=1}^{r+1} A_j^{(\epsilon_j)}
 &&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (B_\epsilon \to \textstyle\prod_{j=1}^{r+1} A_j^{(\epsilon_j)})\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),

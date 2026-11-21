@@ -213,7 +213,7 @@ x^\top Pw
 &=\Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,y_l\Bigr) + \Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(x_k\,P_{kl}\bigr)\,z_l\Bigr)
 &&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to n,\ \text{添字}\ j \to k,\ a_k \to \textstyle\sum_{l=1}^{n} (x_k\,P_{kl})\,y_l,\ b_k \to \textstyle\sum_{l=1}^{n} (x_k\,P_{kl})\,z_l)\bigr)\\
 &=x^\top Py + x^\top Pz
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to x,\ y \to y\ \text{と}\ y \to z)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to x,\ y \to y\ \text{と}\ y \to z)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)
 \end{aligned}`),
     ],
     conversion: {
@@ -285,7 +285,7 @@ w^\top Px
 &=\Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(y_k\,P_{kl}\bigr)\,x_l\Bigr) + \Bigl(\sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(z_k\,P_{kl}\bigr)\,x_l\Bigr)
 &&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to n,\ \text{添字}\ j \to k,\ a_k \to \textstyle\sum_{l=1}^{n} (y_k\,P_{kl})\,x_l,\ b_k \to \textstyle\sum_{l=1}^{n} (z_k\,P_{kl})\,x_l)\bigr)\\
 &=y^\top Px + z^\top Px
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to y,\ y \to x\ \text{と}\ x \to z,\ y \to x)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to y,\ y \to x\ \text{と}\ x \to z,\ y \to x)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)
 \end{aligned}`),
     ],
     conversion: {

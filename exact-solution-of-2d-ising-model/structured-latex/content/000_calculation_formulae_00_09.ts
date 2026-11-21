@@ -4497,7 +4497,7 @@ r^2
 &= \bigl(aa + ab + ba + bb\bigr) + \bigl(aa - ab - ba + bb\bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{の分配律による展開を 2 か所へ同時適用}\bigr)\\
 &= \bigl(a^2 + ab + ba + b^2\bigr) + \bigl(a^2 - ab - ba + b^2\bigr)
-&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to a,\ r \to b)\ \text{を右辺から左辺へ 4 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to a,\ r \to b)\ \text{を右辺から左辺へ 4 か所同時適用}\bigr)\\
 &= 2a^2 + 2b^2
 &&\bigl(\because\ \mathbb{R}\ \text{の加法と減法の計算}\bigr)
 \end{aligned}`),

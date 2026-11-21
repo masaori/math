@@ -57,7 +57,7 @@ theorem square_of_real_sum_is_at_most_twice_sum_of_squares (a b : ℝ) :
         ring                                                                  -- 分配律による展開を 2 か所へ同時適用
     _ = (a ^ 2 + a * b + b * a + b ^ 2) + (a ^ 2 - a * b - b * a + b ^ 2) := by
         rw [← square_of_real_number_is_product a,
-          ← square_of_real_number_is_product b]                               -- `square_of_real_number_is_product`（`r → a`, `r → b`）を右辺から左辺へ 4 か所へ同時適用
+          ← square_of_real_number_is_product b]                               -- `square_of_real_number_is_product`（`r → a`, `r → b`）を右辺から左辺へ 4 か所同時適用
     _ = 2 * a ^ 2 + 2 * b ^ 2 := by ring                                      -- ℝ の加法と減法の計算
 
 end Ising2D

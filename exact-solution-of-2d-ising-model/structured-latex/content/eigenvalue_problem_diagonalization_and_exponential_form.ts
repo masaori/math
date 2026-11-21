@@ -4899,7 +4899,7 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
 &= \left[\,\lambda_{+,\mu}v_{+,\mu}\ \ \lambda_{-,\mu}v_{-,\mu}\,\right]
    &&(\because\ \blkref{eigenvector_of_A_theta_tilde}\ \text{を 2 列へ同時適用})\\
 &= \left[\,(\check{D}_\mu)_{11}\,v_{+,\mu}\ \ (\check{D}_\mu)_{22}\,v_{-,\mu}\,\right]
-   &&(\because\ \check{D}_\mu\ \text{の定義（statement）を右辺から左辺へ 2 か所へ同時適用})\\
+   &&(\because\ \check{D}_\mu\ \text{の定義（statement）を右辺から左辺へ 2 か所同時適用})\\
 &= \left[\,v_{+,\mu}\ \ v_{-,\mu}\,\right]\check{D}_\mu
    &&\bigl(\because\ \blkref{column_matrix_times_diagonal_matrix_scales_columns}\ (n, p \to 2,\ b_1 \to v_{+,\mu},\ b_2 \to v_{-,\mu},\ D \to \check{D}_\mu)\ \text{を右辺から左辺へ}\bigr)\\
 &= \check{P}_\mu\,\check{D}_\mu
@@ -8333,7 +8333,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = \left(\exp(-\gamma(\tilde\theta_\mu
 &= \sum_{k=1}^{2} h_{kl}\Bigl(\sum_{i=1}^{2} g_{ik}X_i\Bigr)
 &&\bigl(\because\ \text{準備 1 を }k = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
 &= \sum_{k=1}^{2} \sum_{i=1}^{2} h_{kl}\left(g_{ik}X_i\right)
-&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples}\text{ を右辺から左辺へ、}k = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples}\text{ を右辺から左辺へ、}k = 1, 2\text{ の 2 か所に同時適用}\bigr)\\
 &= \sum_{k=1}^{2} \sum_{i=1}^{2} \left(h_{kl}g_{ik}\right)X_i
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\text{ を 4 か所へ同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \sum_{k=1}^{2} \left(h_{kl}g_{ik}\right)X_i
@@ -9783,23 +9783,23 @@ X_l
 &= \sum_{i=1}^{2} \delta_{il}X_i
 &&\bigl(\because\ \blkref{finite_sum_of_matrices_with_single_nonzero_term}\text{（和の添字 }a\text{ を }i\text{ に、項 }X_a\text{ を }\delta_{al}X_a\text{ に、定理の }r, q\text{ を }2, l\text{ に取る）を右辺から左辺へ。}i \neq l\text{ の項が }O\text{ であることは上の鎖}\bigr)\\
 &= \sum_{i=1}^{2} \left(I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{il}X_i
-&&\bigl(\because\ \blkref{def_identity_matrix}\ (n \to 2)\text{ を右辺から左辺へ、}i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{def_identity_matrix}\ (n \to 2)\text{ を右辺から左辺へ、}i = 1, 2\text{ の 2 か所に同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \left(\check{P}_\mu\check{P}_\mu^{-1}\right)_{il}X_i
-&&\bigl(\because\ \blkref{def_invertible_elements_of_R}\ (M \to 1)\text{ の }\check{P}_\mu\check{P}_\mu^{-1} = I_{\mathrm{Mat}(2,\mathbb{C})}\text{ を右辺から左辺へ、}i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{def_invertible_elements_of_R}\ (M \to 1)\text{ の }\check{P}_\mu\check{P}_\mu^{-1} = I_{\mathrm{Mat}(2,\mathbb{C})}\text{ を右辺から左辺へ、}i = 1, 2\text{ の 2 か所に同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \Bigl(\sum_{k=1}^{2} p_{ik}q_{kl}\Bigr)X_i
 &&\bigl(\because\ \blkref{mat_mult}\text{ を }i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \Bigl(\sum_{k=1}^{2} q_{kl}p_{ik}\Bigr)X_i
 &&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律を 4 か所へ同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \sum_{k=1}^{2} \left(q_{kl}p_{ik}\right)X_i
-&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\text{ を右辺から左辺へ、}i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\text{ を右辺から左辺へ、}i = 1, 2\text{ の 2 か所に同時適用}\bigr)\\
 &= \sum_{i=1}^{2} \sum_{k=1}^{2} q_{kl}\left(p_{ik}X_i\right)
-&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\text{ を右辺から左辺へ、4 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\text{ を右辺から左辺へ、4 か所同時適用}\bigr)\\
 &= \sum_{k=1}^{2} \sum_{i=1}^{2} q_{kl}\left(p_{ik}X_i\right)
 &&\bigl(\because\ \blkref{finite_double_sum_of_matrices_interchange}\bigr)\\
 &= \sum_{k=1}^{2} q_{kl}\Bigl(\sum_{i=1}^{2} p_{ik}X_i\Bigr)
 &&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples}\text{ を }k = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
 &= \sum_{k=1}^{2} q_{kl}\Psi_k
-&&\bigl(\because\ \text{準備 1 を右辺から左辺へ、}k = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \text{準備 1 を右辺から左辺へ、}k = 1, 2\text{ の 2 か所に同時適用}\bigr)\\
 &= \Bigl(\sum_{k=1}^{1} q_{kl}\Psi_k\Bigr) + q_{2l}\Psi_2
 &&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\text{ の }r+1\text{ の式}\ (r \to 1)\bigr)\\
 &= q_{1l}\Psi_1 + q_{2l}\Psi_2
@@ -9846,7 +9846,7 @@ T_{(V^{(+)})}\!\left(X_l\right)
 &= q_{1l}\,T_{V^{(+)}}\!\left(\Psi_1\right) + q_{2l}\,T_{V^{(+)}}\!\left(\Psi_2\right)
 &&\bigl(\because\ \blkref{linearity_of_T}\ (M \to M_{\mathrm{col}},\ g \to V^{(+)},\ a \to q_{1l},\ b \to q_{2l},\ X \to \Psi_1,\ W \to \Psi_2)\bigr)\\
 &= q_{1l}\,T_{(V^{(+)})}\!\left(\Psi_1\right) + q_{2l}\,T_{(V^{(+)})}\!\left(\Psi_2\right)
-&&\bigl(\because\ \blkref{T_V_plus_is_conjugation}\text{ を右辺から左辺へ、2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \blkref{T_V_plus_is_conjugation}\text{ を右辺から左辺へ、2 か所同時適用}\bigr)\\
 &= q_{1l}\left(\left(\exp(+\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\Psi_1\right)
    + q_{2l}\left(\left(\exp(-\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\Psi_2\right)
 &&\bigl(\because\ \blkref{commutation_V_plus_check_psi}\text{ の二つの式}\bigr)\\
@@ -10166,7 +10166,7 @@ T_{(V^{(+)})}(x + y)
 &= T'_{V^{(+)}}(x) + T'_{V^{(+)}}(y)
 &&\bigl(\because\ \blkref{mat_conj}\text{ の和の式}\bigr)\\
 &= T_{(V^{(+)})}(x) + T_{(V^{(+)})}(y)
-&&\bigl(\because\ \text{準備 1 の第 1 の鎖を右辺から左辺へ、2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖を右辺から左辺へ、2 か所同時適用}\bigr)\\
 &= T_{(\check{V}')}(x) + T_{(\check{V}')}(y)
 &&\bigl(\because\ x, y \in \mathcal{E}\bigr)\\
 &= T'_{\check{V}'}(x) + T'_{\check{V}'}(y)
@@ -10200,7 +10200,7 @@ T_{(V^{(+)})}(xy)
 &= T'_{V^{(+)}}(x)\,T'_{V^{(+)}}(y)
 &&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\ (B \to V^{(+)})\bigr)\\
 &= T_{(V^{(+)})}(x)\,T_{(V^{(+)})}(y)
-&&\bigl(\because\ \text{準備 1 の第 1 の鎖を右辺から左辺へ、2 か所へ同時適用}\bigr)\\
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖を右辺から左辺へ、2 か所同時適用}\bigr)\\
 &= T_{(\check{V}')}(x)\,T_{(\check{V}')}(y)
 &&\bigl(\because\ x, y \in \mathcal{E}\bigr)\\
 &= T'_{\check{V}'}(x)\,T'_{\check{V}'}(y)

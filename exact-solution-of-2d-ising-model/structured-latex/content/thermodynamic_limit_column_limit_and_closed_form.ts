@@ -1021,7 +1021,7 @@ w
 &= \sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{kl}\,u_l + \sum_{l=1}^{d} (\varepsilon_{\mathbb{R}})_{kl}\,(\varepsilon_{\mathbb{R}}u)_l
   &&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ (m \to d,\ j \to l,\ a_l \to (\varepsilon_{\mathbb{R}})_{kl}\,u_l,\ b_l \to (\varepsilon_{\mathbb{R}})_{kl}\,(\varepsilon_{\mathbb{R}}u)_l)\bigr)\\
 &= (\varepsilon_{\mathbb{R}}u)_k + \bigl(\varepsilon_{\mathbb{R}}(\varepsilon_{\mathbb{R}}u)\bigr)_k
-  &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ i \to k,\ j \to l\text{；}x \to u\ \text{と}\ x \to \varepsilon_{\mathbb{R}}u)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)\\
+  &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m, n \to d,\ P \to \varepsilon_{\mathbb{R}},\ i \to k,\ j \to l\text{；}x \to u\ \text{と}\ x \to \varepsilon_{\mathbb{R}}u)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)\\
 &= (\varepsilon_{\mathbb{R}}u)_k + \bigl((\varepsilon_{\mathbb{R}}\varepsilon_{\mathbb{R}})u\bigr)_k
   &&\bigl(\because\ \blkref{real_matrix_vector_product_is_associative}\ (m, n, p \to d,\ P, Q \to \varepsilon_{\mathbb{R}},\ x \to u)\ \text{を右辺から左辺へ}\bigr)\\
 &= (\varepsilon_{\mathbb{R}}u)_k + \bigl(I_{\mathrm{Mat}(d,\mathbb{R})}\,u\bigr)_k
@@ -1866,7 +1866,7 @@ k
 &\leq 2u_k^2 + 2(\varepsilon_{\mathbb{R}}u)_k^2
   &&\bigl(\because\ \blkref{square_of_real_sum_is_at_most_twice_sum_of_squares}\ (a \to u_k,\ b \to (\varepsilon_{\mathbb{R}}u)_k)\bigr)\\
 &= 2|u_k|^2 + 2\bigl|(\varepsilon_{\mathbb{R}}u)_k\bigr|^2
-  &&\bigl(\because\ \blkref{square_of_real_absolute_value}\ (q \to u_k\ \text{と}\ q \to (\varepsilon_{\mathbb{R}}u)_k)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)
+  &&\bigl(\because\ \blkref{square_of_real_absolute_value}\ (q \to u_k\ \text{と}\ q \to (\varepsilon_{\mathbb{R}}u)_k)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)
 \end{aligned}`),
       paragraph(["である。よって"]),
       displayMath(String.raw`\begin{aligned}
@@ -1880,7 +1880,7 @@ k
 &= 2\sum_{k=1}^{d} |u_k|^2 + 2\sum_{k=1}^{d} \bigl|(\varepsilon_{\mathbb{R}}u)_k\bigr|^2
   &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to d,\ c \to 2,\ \text{添字}\ j \to k,\ x_k \to |u_k|^2\ \text{と}\ x_k \to |(\varepsilon_{\mathbb{R}}u)_k|^2)\ \text{を 2 か所へ同時適用}\bigr)\\
 &= 2\|u\|^2 + 2\|\varepsilon_{\mathbb{R}}u\|^2
-  &&\bigl(\because\ \text{上で示した}\ \|x\|^2 = \textstyle\sum_{k=1}^{d} |x_k|^2\ (x \to u\ \text{と}\ x \to \varepsilon_{\mathbb{R}}u)\ \text{を右辺から左辺へ 2 か所へ同時適用}\bigr)\\
+  &&\bigl(\because\ \text{上で示した}\ \|x\|^2 = \textstyle\sum_{k=1}^{d} |x_k|^2\ (x \to u\ \text{と}\ x \to \varepsilon_{\mathbb{R}}u)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)\\
 &= 2\|u\|^2 + 2\|u\|^2
   &&\bigl(\because\ \blkref{epsilon_real_preserves_norm}\ (u \to u)\bigr)\\
 &= 2 \cdot 1^2 + 2 \cdot 1^2

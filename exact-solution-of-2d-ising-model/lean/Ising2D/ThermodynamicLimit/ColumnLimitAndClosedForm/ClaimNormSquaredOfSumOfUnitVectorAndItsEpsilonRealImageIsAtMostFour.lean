@@ -54,7 +54,7 @@ theorem norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most
           square_of_real_sum_is_at_most_twice_sum_of_squares _ _    -- `square_of_real_sum_is_at_most_twice_sum_of_squares`（`a → u_k, b → (ε_ℝu)_k`）
       _ = 2 * |u k| ^ 2 + 2 * |(epsilonReal n *ᵥ u) k| ^ 2 := by
           rw [square_of_real_absolute_value, square_of_real_absolute_value]
-                                                                    -- `square_of_real_absolute_value` を右辺から左辺へ 2 か所へ同時適用
+                                                                    -- `square_of_real_absolute_value` を右辺から左辺へ 2 か所同時適用
   calc vecNorm v ^ 2
       = ∑ k, |v k| ^ 2 := vecNorm_sq_eq_sum_abs_sq v                -- 準備の `‖x‖^2 = Σ|x_k|^2`（`x → v`）
     _ ≤ ∑ k, (2 * |u k| ^ 2 + 2 * |(epsilonReal n *ᵥ u) k| ^ 2) :=
@@ -66,7 +66,7 @@ theorem norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most
                                                                     -- `finite_sum_of_real_scalar_multiples`（`c → 2`）を 2 か所へ同時適用
     _ = 2 * vecNorm u ^ 2 + 2 * vecNorm (epsilonReal n *ᵥ u) ^ 2 := by
         rw [vecNorm_sq_eq_sum_abs_sq u, vecNorm_sq_eq_sum_abs_sq (epsilonReal n *ᵥ u)]
-                                                                    -- 準備の `‖x‖^2 = Σ|x_k|^2`（`x → u, ε_ℝu`）を右辺から左辺へ 2 か所へ
+                                                                    -- 準備の `‖x‖^2 = Σ|x_k|^2`（`x → u, ε_ℝu`）を右辺から左辺へ 2 か所
     _ = 2 * vecNorm u ^ 2 + 2 * vecNorm u ^ 2 := by
         rw [epsilon_real_preserves_norm]                            -- `epsilon_real_preserves_norm`（`u → u`）
     _ = 2 * 1 ^ 2 + 2 * 1 ^ 2 := by rw [hu]                         -- `‖u‖ = 1` を 2 か所へ同時適用
