@@ -275,6 +275,7 @@ export const ALL_LABELS = [
   "def_second_dual_coupling_constant",
   "def_second_transfer_matrix_prefactor",
   "def_sector_rayleigh_sup",
+  "def_simple_eigenvalue",
   "def_sin",
   "def_sine_bound_constant",
   "def_sine_integral_constant",

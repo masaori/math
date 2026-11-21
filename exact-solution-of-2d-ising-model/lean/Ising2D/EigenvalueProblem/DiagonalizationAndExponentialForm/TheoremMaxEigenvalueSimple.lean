@@ -13,6 +13,11 @@
   （(3) の集合の等号 `{x | V^{(+)}x = Λ̌_max x} = im Q̌_{(1,…,1)}` そのものは、二つの包含の具体版を合わせた
   `eigenspace_VPlus_max_eq_range_Qproj_univ`）
 
+人手 `def_simple_eigenvalue`（`structured-latex/content/000_calculation_formulae_45_46.ts` の
+`finite_matrix_definition_simple_eigenvalue`）の `E_λ(A)` は `eigenSubspace`、単純固有値は `IsSimpleEigenvalue` である。
+人手の `ℂ^n` の添字 `1, …, n` に対し、`A` の行と列の添字の有限集合 `ι` をそのまま使う（`V^{(+)}` は `Conf M` で添字付ける）。
+(3) の結論「`Λ̌_max` は `V^{(+)}` の単純固有値」は `isSimpleEigenvalue_VPlus_max`。
+
 ## `γ(θ~_μ) > 0`（半整数運動量に固有の点）
 
 章 009 は `γ(θ_μ) ≥ 0` しか持てず（臨界点で `γ(θ_M) = 0` になりうる）、
@@ -108,6 +113,33 @@ theorem tagPoint_half_eq_thetaTilde (M : ℕ) (k : ℕ) :
   ring
 
 end Reindex
+
+/-! ## 単純固有値（`def_simple_eigenvalue`） -/
+
+section SimpleEigenvalue
+
+variable {ι : Type*} [Fintype ι] [DecidableEq ι]
+
+/-- **`def_simple_eigenvalue` の `E_λ(A) := {x ∈ ℂ^n | Ax = λx}`**。次元を考えるために、和・零・スカラー倍で
+閉じることを示して `ℂ` 上の部分空間として置く。 -/
+def eigenSubspace (A : Matrix ι ι ℂ) (lam : ℂ) : Submodule ℂ (ι → ℂ) where
+  carrier := {x | A *ᵥ x = lam • x}
+  add_mem' := by
+    intro x y hx hy
+    simp only [Set.mem_setOf_eq] at hx hy ⊢
+    rw [Matrix.mulVec_add, hx, hy, smul_add]
+  zero_mem' := by
+    simp only [Set.mem_setOf_eq, Matrix.mulVec_zero, smul_zero]
+  smul_mem' := by
+    intro a x hx
+    simp only [Set.mem_setOf_eq] at hx ⊢
+    rw [Matrix.mulVec_smul, hx, smul_comm]
+
+/-- **`def_simple_eigenvalue`**: `dim_ℂ E_λ(A) = 1` のとき、`λ` を `A` の単純固有値と呼ぶ。 -/
+def IsSimpleEigenvalue (A : Matrix ι ι ℂ) (lam : ℂ) : Prop :=
+  Module.finrank ℂ (eigenSubspace A lam) = 1
+
+end SimpleEigenvalue
 
 /-! ## 本体 -/
 
@@ -504,6 +536,21 @@ theorem finrank_range_Qproj_univ (F : CheckFermiSetup M) :
         (LinearMap.range (Matrix.toLin' (F.Qproj (Finset.univ : Finset (CheckIdx M))))) : ℕ)
       : ℂ) = 1 :=
   F.finrank_range_Qproj _
+
+/-- **原文 `max_eigenvalue_of_V_plus_simple` (3) の結論**: `Λ̌_max` は `V^{(+)}` の単純固有値（`def_simple_eigenvalue`）。
+人手の最後の文と同じく、固有空間が `im Q̌_{(1,…,1)}` に一致すること（`eigenspace_VPlus_max_eq_range_Qproj_univ`）と、
+その次元が `1` であること（`finrank_range_Qproj_univ`）から従う。 -/
+theorem isSimpleEigenvalue_VPlus_max {r : ℕ} (F : CheckFermiSetup (r + 1))
+    (g : CheckIdx (r + 1) → ℝ) (hgpos : ∀ i, 0 < g i) {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
+    (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
+    (hVeq : VPlus (r + 1) s2 K1 K2star = c • F.Vprime g) :
+    IsSimpleEigenvalue (VPlus (r + 1) s2 K1 K2star) ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) := by
+  have hE : eigenSubspace (VPlus (r + 1) s2 K1 K2star) ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ)
+      = LinearMap.range (Matrix.toLin' (F.Qproj (Finset.univ : Finset (CheckIdx (r + 1))))) :=
+    SetLike.coe_injective (eigenspace_VPlus_max_eq_range_Qproj_univ F g hgpos hK1 hK2 hs2 hVeq)
+  unfold IsSimpleEigenvalue
+  rw [hE]
+  exact_mod_cast finrank_range_Qproj_univ F
 
 end MaxSimple
 
