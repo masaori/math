@@ -1,6 +1,6 @@
-# 具体版と必要十分版の分離の既知の違反（2026-11-21 の点検で書き出した）。scripts/check-concrete-necsuf-separation.sh が読む。
+# 具体版と必要十分版の分離の既知の違反。scripts/lean-concrete-necsuf-separation/check.sh（リポジトリ直下）が読む。
 # DEP 行は「使う側の分類・使う側の宣言」、IMPORT 行は「取り込む側の分類・モジュール・取り込まれる側の分類・モジュール」。
-# 行は減らすだけにする。直して違反でなくなった行は同じ回に消す（runbook「Lean の点検で見つかった直し」）。
+# 行は減らすだけにする。直して違反でなくなった行は同じ回に消す。
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.blockDiagonal_term_eq_prod_fiber_terms
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.derangement_partition
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.emptyPfaffianDeterminant
@@ -75,7 +75,6 @@ DEP	concrete	Ising2DLambda.KacWard.edgeDirectionTranspositions_pairwise_commute
 DEP	concrete	Ising2DLambda.KacWard.finiteTransposition_inversionCount
 DEP	concrete	Ising2DLambda.KacWard.finiteTransposition_sign
 DEP	concrete	Ising2DLambda.KacWard.finiteTransposition_sign_of_lt
-DEP	concrete	Ising2DLambda.KacWard.firstHitConnectingStaircaseFromWalk_eq_necSuf
 DEP	concrete	Ising2DLambda.KacWard.firstHitStepSetFromWalk
 DEP	concrete	Ising2DLambda.KacWard.formalSquareRoot_exists
 DEP	concrete	Ising2DLambda.KacWard.formalSquareRoot_unique
@@ -122,7 +121,6 @@ DEP	concrete	Ising2DLambda.KacWard.negatedParallelStaircase_turnValue_sum_eq
 DEP	concrete	Ising2DLambda.KacWard.negatedParallelStaircase_turning_via_projection
 DEP	concrete	Ising2DLambda.KacWard.negatedParallelStaircase_turning_zero
 DEP	concrete	Ising2DLambda.KacWard.nodup_cons_orbitTail
-DEP	concrete	Ising2DLambda.KacWard.oddRayInteriorCellsOfWalk_eq_necSuf
 DEP	concrete	Ising2DLambda.KacWard.oneSidedClosureJunctionPairs
 DEP	concrete	Ising2DLambda.KacWard.oneSidedClosureJunctionPairs_eq_fixed
 DEP	concrete	Ising2DLambda.KacWard.oneSidedClosureJunctionPairs_normalize
