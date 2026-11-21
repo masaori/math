@@ -109,7 +109,7 @@ theorem checkLambda_lt_univ {C : ℝ} (hC : 0 < C) {gam : Fin M → ℝ} (hgam :
   · rw [if_neg hν, if_pos (Finset.mem_univ ν)]
     nlinarith [hgam ν]
 
-/-- **章 017 `eigenvalues_of_V_plus` から受け取る入力**。 -/
+/-- **章「V^{(+)} の固有値」から受け取る入力**（`eigenvalues_of_V_plus` の結論）。 -/
 structure VPlusData (M : ℕ) (F : CheckFermi M) where
   /-- `V^{(+)}` -/
   V : TensorPow M

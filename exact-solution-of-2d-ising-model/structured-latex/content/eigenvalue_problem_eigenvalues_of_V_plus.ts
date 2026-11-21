@@ -180,6 +180,7 @@ h(\epsilon(\mu))\right)`,
     origin: { path: "structured-latex/content/009_eigenvalues_of_V.ts", ordinal: 16 },
     title: { tex: String.raw`i (K_1)_{\mathbb{C}} H_1^{(+)} \text{ と } i (K_2^*)_{\mathbb{C}} H_2 \text{ は実対称}` },
     labels: ["iH_is_real_symmetric"],
+    lean: ["Ising2D.S1plus_isRealSymmetric", "Ising2D.S2_isRealSymmetric", "Ising2D.S1plus_isHermitian", "Ising2D.S2_isHermitian", "Ising2D.S1plus_isHermitian_of_real_symmetric", "Ising2D.S2_isHermitian_of_real_symmetric", "Ising2D.S1plus_transpose", "Ising2D.S2_transpose", "Ising2D.S1plus_hasRealEntries", "Ising2D.S2_hasRealEntries", "Ising2D.H2_eq_neg_I_smul_sum_sigmaX", "Ising2D.S2_eq_K2star_smul_sum_sigmaX", "Ising2D.S1plus_eq_K1_smul_sub", "Ising2D.Z_mul_Y_same_by_kronecker_form", "Ising2D.boundaryG_kronecker_form", "Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_kronecker", "Ising2D.Y_castSucc_mul_Z_succ", "Ising2D.Y_last_mul_Z_zero", "Ising2D.sigmaX_hasRealEntries", "Ising2D.sigmaX_transpose", "Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries", "Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_transpose", "Ising2D.boundaryYXY_eq_neg_one_smul_real", "Ising2D.boundaryYXY_hasRealEntries", "Ising2D.boundaryYXY_transpose", "Ising2D.S1plus_transpose_by_pauli_form", "Ising2D.S2_transpose_by_pauli_form"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -1155,6 +1156,7 @@ G
     origin: { path: "structured-latex/content/009_eigenvalues_of_V.ts", ordinal: 18 },
     title: { tex: String.raw`\text{符号反転共役 } U` },
     labels: ["sign_flip_conjugation"],
+    lean: ["Ising2D.Uflip_conj_H1plus", "Ising2D.Uflip_conj_H2", "Ising2D.Uflip_conj_S1plus", "Ising2D.Uflip_conj_S2"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -2091,6 +2093,7 @@ U S_2 U^{-1}
     origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 7 },
     title: { tex: String.raw`\theta^{(\delta)}_{M_{\mathrm{col}},\mu}` },
     labels: ["def_Theta_delta_M"],
+    lean: ["Ising2D.tagPoint"],
     statement: [
       paragraph([
         ref("antiperiodic_exp_sum"),
@@ -2137,6 +2140,7 @@ U S_2 U^{-1}
     origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 7 },
     title: { tex: String.raw`\Lambda^{(\delta)}_{M_{\mathrm{col}}}` },
     labels: ["def_Lambda_delta_M"],
+    lean: ["Ising2D.LambdaM"],
     statement: [
       paragraph([
         ref("def_transfer_matrix"),
@@ -2198,6 +2202,7 @@ U S_2 U^{-1}
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 4 },
     title: { tex: String.raw`\check{n}_\mu^2 = \check{n}_\mu` },
     labels: ["check_number_operator_idempotent"],
+    lean: ["Ising2D.CheckFermiSetup.nOp_mul_self", "Ising2D.CheckFermiSetup.nOp_sq", "Ising2D.CheckFermiSetup.ann_sq", "Ising2D.CheckFermiSetup.cre_sq", "Ising2D.CheckFermiSetup.ann_add_self_eq_zero", "Ising2D.CheckFermiSetup.cre_add_self_eq_zero", "Ising2D.CheckFermiSetup.ann_mul_cre", "Ising2D.CheckFermiSetup.cre_ann_add_ann_cre_eq_one"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \check{\mathcal{M}}`),
@@ -2383,6 +2388,7 @@ U S_2 U^{-1}
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 5 },
     title: { tex: String.raw`\check{n}_\mu \check{n}_\nu = \check{n}_\nu \check{n}_\mu` },
     labels: ["check_number_operators_commute"],
+    lean: ["Ising2D.CheckFermiSetup.commute_nOp_nOp", "Ising2D.CheckFermiSetup.nOp_mul_nOp_of_ne", "Ising2D.CheckFermiSetup.commute_cre_nOp", "Ising2D.CheckFermiSetup.commute_ann_nOp", "Ising2D.CheckFermiSetup.anticomm_cre_cre_eq_zero", "Ising2D.CheckFermiSetup.anticomm_ann_ann_eq_zero", "Ising2D.CheckFermiSetup.anticomm_cre_ann_eq_zero", "Ising2D.CheckFermiSetup.anticomm_ann_cre_eq_zero", "Ising2D.CheckFermiSetup.mul_eq_neg_of_anticomm_eq_zero", "Ising2D.CheckFermiSetup.mul_nOp_of_anticommute"],
     statement: [
       paragraph([
         math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
@@ -2673,6 +2679,7 @@ X\,\check{n}_\nu
     kind: "definition",
     title: { tex: String.raw`\{0,1\} \text{ から } \mathbb{R} \text{ への写像 } h` },
     labels: ["def_half_sign_of_binary_value"],
+    lean: ["Ising2D.halfSign", "Ising2D.CheckFermi.halfSign"],
     statement: [
       paragraph([
         "写像 ",
@@ -2718,6 +2725,7 @@ X\,\check{n}_\nu
     kind: "definition",
     title: { tex: String.raw`\check{Q}_\epsilon \text{ の因子 } R_\mu^{(e)}` },
     labels: ["def_check_R_factor"],
+    lean: ["Ising2D.CheckFermiSetup.rFactor", "Ising2D.CheckFermi.rFactor"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \check{\mathcal{M}}`),
@@ -2755,6 +2763,7 @@ X\,\check{n}_\nu
     kind: "definition",
     title: { tex: String.raw`\check{Q}_\epsilon` },
     labels: ["def_check_Q_epsilon"],
+    lean: ["Ising2D.CheckFermiSetup.Qproj", "Ising2D.CheckFermiSetup.Qproj'", "Ising2D.CheckFermi.Qproj"],
     statement: [
       paragraph([
         ref("def_binary_assignments_on_check_index_set"),
@@ -2817,6 +2826,7 @@ X\,\check{n}_\nu
 \quad \left(R_\mu^{(1)} = \check{n}_\mu,\ R_\mu^{(0)} = I - \check{n}_\mu\right)`,
     },
     labels: ["trace_of_check_number_operator_product"],
+    lean: ["Ising2D.CheckFermiSetup.trace_projFactorProd", "Ising2D.CheckFermiSetup.trace_projFactor_finProdLeft", "Ising2D.CheckFermiSetup.trace_nOpProd"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \check{\mathcal{M}}`),
@@ -3350,6 +3360,7 @@ w
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 7 },
     title: { tex: String.raw`\check{n}_\mu \text{ の同時固有空間分解（各空間は 1 次元）}` },
     labels: ["check_joint_eigenspace_decomposition"],
+    lean: ["Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne", "Ising2D.CheckFermiSetup.Qproj_mul_self", "Ising2D.CheckFermiSetup.sum_Qproj", "Ising2D.CheckFermiSetup.nOp_mul_Qproj_of_mem", "Ising2D.CheckFermiSetup.nOp_mul_Qproj_of_not_mem", "Ising2D.CheckFermiSetup.commute_nOp_Qproj", "Ising2D.CheckFermiSetup.Qproj_mul_nOp_of_mem", "Ising2D.CheckFermiSetup.Qproj_mul_nOp_of_not_mem", "Ising2D.CheckFermiSetup.trace_Qproj", "Ising2D.CheckFermiSetup.finrank_range_Qproj", "Ising2D.CheckFermiSetup.sum_Qproj_mulVec", "Ising2D.CheckFermiSetup.eq_zero_of_sum_eq_zero", "Ising2D.CheckFermiSetup.isInternal_range_Qproj", "Ising2D.CheckFermiSetup.Qproj_eq_finProdLeft_rFactor", "Ising2D.CheckFermiSetup.Qproj_eq_finProdLeft", "Ising2D.CheckFermiSetup.rFactor_one_add_rFactor_zero", "Ising2D.CheckFermiSetup.nOp_add_one_sub_nOp", "Ising2D.CheckFermiSetup.nOp_mul_nOp_of_sq", "Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp", "Ising2D.CheckFermiSetup.one_sub_nOp_mul_nOp", "Ising2D.CheckFermiSetup.one_sub_nOp_mul_self", "Ising2D.CheckFermiSetup.one_sub_nOp_mul_nOp_comm_step0", "Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp_comm_step0", "Ising2D.CheckFermiSetup.one_sub_nOp_mul_one_sub_nOp_comm_step0", "Ising2D.CheckFermiSetup.nOp_mul_nOp_comm_step0", "Ising2D.CheckFermiSetup.mul_identity_eq_identity_mul_step0", "Ising2D.CheckFermiSetup.projFactor_mul_comm_step0", "Ising2D.CheckFermiSetup.projFactor_mul_self_step0", "Ising2D.CheckFermiSetup.Qproj_sq_step1", "Ising2D.CheckFermiSetup.Qproj_sq_eq_mul_self_step1", "Ising2D.CheckFermiSetup.Qproj_mul_self_step1", "Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne_step1", "Ising2D.CheckFermiSetup.projFactor_comm_factor_step1", "Ising2D.CheckFermiSetup.projFactor_mul_projFactor_eq_zero_step1", "Ising2D.CheckFermiSetup.sum_Qproj_step2", "Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_mem", "Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_not_mem", "Ising2D.CheckFermiSetup.nOp_mul_projFactor_comm_step3", "Ising2D.CheckFermiSetup.nOp_mul_Qproj_common_step3", "Ising2D.CheckFermiSetup.nOp_mul_Qproj_of_mem_step3", "Ising2D.CheckFermiSetup.nOp_mul_Qproj_of_not_mem_step3", "Ising2D.CheckFermiSetup.Qproj_mul_nOp_eq_nOp_mul_Qproj_step3", "Ising2D.CheckFermiSetup.trace_Qproj_step4", "Ising2D.CheckFermiSetup.Qproj_mul_colVec_self_step5", "Ising2D.CheckFermiSetup.Qproj_mul_colVec_of_ne_step5", "Ising2D.CheckFermiSetup.colVec_eq_sum_Qproj_mul_step5", "Ising2D.CheckFermiSetup.eq_zero_of_binWordSum_eq_zero_step5", "Ising2D.CheckFermi.nOp_mul_Qproj_of_mem", "Ising2D.CheckFermi.nOp_mul_Qproj_of_notMem", "Ising2D.CheckFermi.trace_Qproj", "Ising2D.CheckFermi.finrank_range_Qproj"],
     statement: [
       paragraph([
         ref("def_binary_assignments_on_check_index_set"),
@@ -4148,6 +4159,7 @@ y_{\epsilon'}
     kind: "claim",
     title: { tex: String.raw`\mathrm{im}\,\check{Q}_\epsilon\ \text{から 0 でない元を一つずつ取った族は基底}` },
     labels: ["nonzero_elements_of_images_of_check_Q_form_basis"],
+    lean: ["Ising2D.CheckFermiSetup.nonzero_elements_of_images_of_check_Q_form_basis"],
     statement: [
       paragraph([
         ref("def_binary_assignments_on_check_index_set"),
@@ -4360,6 +4372,7 @@ q_{\epsilon'}
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 8 },
     title: { tex: String.raw`\check{V}' \text{ の固有値}` },
     labels: ["eigenvalues_of_check_Vprime"],
+    lean: ["Ising2D.CheckFermiSetup.Vprime_mul_Qproj", "Ising2D.CheckFermiSetup.Qproj_mul_Vprime", "Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range", "Ising2D.CheckFermiSetup.exp_gval_pos", "Ising2D.CheckFermiSetup.exists_eigenBasis_Vprime", "Ising2D.CheckFermiSetup.exists_conj_diagonal_Vprime", "Ising2D.CheckFermiSetup.Xop_mul_Qproj", "Ising2D.CheckFermiSetup.Xop_mul_Qproj_step1", "Ising2D.CheckFermiSetup.Qproj_mul_Xop", "Ising2D.CheckFermiSetup.Qproj_mul_Xop_step1", "Ising2D.CheckFermiSetup.Xop_pow_mul_Qproj", "Ising2D.CheckFermiSetup.Qproj_mul_Xop_pow", "Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj", "Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum", "Ising2D.CheckFermiSetup.partialExpSum_tendsto", "Ising2D.CheckFermiSetup.Qproj_mulVec_Qproj_mulVec", "Ising2D.checkVprime_mul_Qproj", "Ising2D.checkX_mul_Qproj"],
     statement: [
       paragraph([
         ref("def_binary_assignments_on_check_index_set"),
@@ -5019,6 +5032,7 @@ E_K \check{Q}_\epsilon
     kind: "claim",
     title: { tex: String.raw`\left(\check{V}'\right)^{-1} \text{ と } \check{Q}_\epsilon \text{ の積}` },
     labels: ["eigenvalues_of_inverse_of_check_Vprime"],
+    lean: ["Ising2D.CheckFermiSetup.Vprime_inv_mul_Qproj"],
     statement: [
       paragraph([
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
@@ -5122,6 +5136,7 @@ E_K \check{Q}_\epsilon
 \quad \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) > 0`,
     },
     labels: ["trace_of_check_Vprime"],
+    lean: ["Ising2D.CheckFermiSetup.trace_Vprime_step5", "Ising2D.CheckFermiSetup.trace_Vprime_pos", "Ising2D.CheckFermiSetup.trace_Vprime_inv", "Ising2D.CheckFermiSetup.trace_Vprime_step1", "Ising2D.CheckFermiSetup.sum_exp_gval_step2_expansion", "Ising2D.CheckFermiSetup.exp_gval_step2_product", "Ising2D.CheckFermiSetup.prod_step2_cosh", "Ising2D.CheckFermiSetup.VprimeUnits_inv", "Ising2D.CheckFermiSetup.exp_neg_gval_step3_product", "Ising2D.CheckFermiSetup.trace_Vprime_inv_step3", "Ising2D.CheckFermiSetup.sum_exp_neg_gval_step3_expansion", "Ising2D.CheckFermiSetup.two_cosh_half_step4", "Ising2D.CheckFermiSetup.prod_two_cosh_half_pos_step4"],
     statement: [
       paragraph([
         math(String.raw`\check{V}'`),
@@ -5449,6 +5464,7 @@ E_K \check{Q}_\epsilon
       tex: String.raw`V^{(+)} \text{ は正定値}`,
     },
     labels: ["V_plus_is_positive_definite"],
+    lean: ["Ising2D.VPlus_posDef", "Ising2D.VPlus_eq_smul"],
     statement: [
       paragraph([
         ref("iH_is_real_symmetric"),
@@ -5675,6 +5691,7 @@ V^{(+)}
       tex: String.raw`V^{(+)} \text{ は可逆であり、左右逆は明示できる}`,
     },
     labels: ["V_plus_is_invertible"],
+    lean: ["Ising2D.VPlus_isUnit_and_inv_eq", "Ising2D.VPlus_mul_VPlusInv", "Ising2D.VPlusInv_mul_VPlus"],
     statement: [
       paragraph([
         ref("def_invertible_elements_of_R"),
@@ -5950,6 +5967,7 @@ R^{(+)}V^{(+)}
       tex: String.raw`\mathrm{tr}\!\left(V^{(+)}\right)\text{ は正}`,
     },
     labels: ["trace_V_plus_is_positive"],
+    lean: ["Ising2D.trace_VPlus_pos"],
     statement: [
       paragraph([
         ref("def_V_plus"),
@@ -6011,6 +6029,7 @@ R^{(+)}V^{(+)}
     kind: "claim",
     title: { text: "共役は行列の exp と交換する" },
     labels: ["conjugation_commutes_with_matrix_exp"],
+    lean: ["Ising2D.Uflip_conj_matExp"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -6215,6 +6234,7 @@ T_B\bigl(\exp(X)\bigr)
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 11 },
     title: { tex: String.raw`c = \bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}` },
     labels: ["constant_c_value_even_sector"],
+    lean: ["Ising2D.constant_c_value_even_sector"],
     statement: [
       paragraph([
         ref("V_plus_eq_c_check_Vprime"),
@@ -6800,6 +6820,7 @@ V^{(+)}
     origin: { path: "structured-latex/content/017_even_sector_eigenvalues.ts", ordinal: 12 },
     title: { tex: String.raw`V^{(+)} \text{ の固有値}` },
     labels: ["eigenvalues_of_V_plus"],
+    lean: ["Ising2D.VPlus_mul_Qproj", "Ising2D.Qproj_mul_VPlus", "Ising2D.VPlus_mulVec_of_mem_range", "Ising2D.exists_eigenBasis_VPlus_of_joint_eigenspaces", "Ising2D.exists_eigenBasis_VPlus", "Ising2D.exists_conj_diagonal_VPlus", "Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigenvalue", "Ising2D.Qproj_mulVec_eq_zero_of_ne_eigenvalue", "Ising2D.exists_checkBigLambda_eq_of_eigenvalue", "Ising2D.eigenvalue_VPlus_eq_positive_real", "Ising2D.checkBigLambda_pos", "Ising2D.gval_empty_eq_neg_half_sum", "Ising2D.gval_univ_eq_half_sum", "Ising2D.gval_empty_le_gval", "Ising2D.gval_le_gval_univ", "Ising2D.real_exp_le_exp_of_le", "Ising2D.checkBigLambda_empty_le_checkBigLambda", "Ising2D.checkBigLambda_le_checkBigLambda_univ", "Ising2D.checkBigLambda_le_max", "Ising2D.checkBigLambda_min_le", "Ising2D.checkBigLambda_max_eq", "Ising2D.checkBigLambda_min_eq", "Ising2D.checkBigLambda_max_mul_min", "Ising2D.checkBigLambda_max_mul_min_eq_sq_prefactor", "Ising2D.checkBigLambda_max_mul_min_eq_c_sq"],
     statement: [
       paragraph([
         ref("def_binary_assignments_on_check_index_set"),
@@ -7730,6 +7751,7 @@ h(\epsilon(\mu)) - h(0)
       tex: String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_{M_{\mathrm{col}}} \text{ であり単純固有値}`,
     },
     labels: ["max_eigenvalue_of_V_plus_simple"],
+    lean: ["Ising2D.isSimpleEigenvalue_VPlus_max", "Ising2D.checkBigLambda_univ_eq_LambdaM", "Ising2D.checkBigLambda_lt_max", "Ising2D.checkBigLambda_lt_max_of_gammaFn", "Ising2D.gval_lt_gval_univ", "Ising2D.checkBigLambda_lt_checkBigLambda_univ", "Ising2D.eigenspace_VPlus_max_eq_range_Qproj_univ", "Ising2D.eigenspace_VPlus_max_eq_range_Qproj_univ_checkFermiSetupOf", "Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigen", "Ising2D.Qproj_mulVec_eq_zero_of_eigen", "Ising2D.eq_Qproj_univ_mulVec_of_eigen", "Ising2D.VPlus_mulVec_of_mem_range_Qproj_univ", "Ising2D.finrank_range_Qproj_univ"],
     statement: [
       paragraph([
         ref("def_Lambda_delta_M"),
@@ -8213,6 +8235,7 @@ V^{(+)}y
       tex: String.raw`V^{(+)}\check{Q}_\epsilon = \check\Lambda_\epsilon\check{Q}_\epsilon \text{ と } \max_\epsilon \check\Lambda_\epsilon = \check\Lambda_{(1,\dots,1)} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`,
     },
     labels: ["V_plus_eigenvalues_with_c_value_and_strict_maximum"],
+    lean: ["Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),

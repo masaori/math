@@ -361,7 +361,7 @@ theorem Qproj_mulVec_eq_zero_of_eigen (F : CheckFermiSetup M) (g : CheckIdx M �
     _ = d⁻¹ • (0 : Conf M → ℂ) := by rw [hdv]          -- 上の鎖 `d(Q̌_{ε'}x) = O`
     _ = 0 := smul_zero _                                -- `scalar_multiple_of_zero_matrix`
 
-/-- **原文 `max_eigenvalue_of_V_plus_simple` (3) の `x = Q̌_{(1,…,1)}x` の鎖**（4 行）を、人手と同じく
+/-- **`x = Q̌_{ε₀}x` の鎖**（原文 `max_eigenvalue_of_V_plus_simple` (3) と `eigenvalues_of_V_plus` が共有する一般形）（4 行）を、人手と同じく
 数ベクトルを 1 列の行列 `x : Matrix (Conf (r + 1)) (Fin 1) ℂ` に、`ε ∈ {0,1}^𝓜̌` の上の和を `NecSuf.binWordSum r`
 （`def_sum_over_binary_words`、`m → 2^{M_col}`、`n → 1`、`r → M_col`）にして書いた calc。人手の `M_col` が Lean の `r + 1`、
 人手の `(1,…,1)` が Lean の語 `ε₀` である（Lean の添字 `finsetOfBinWord ε₀` が `Finset.univ` のもの）。

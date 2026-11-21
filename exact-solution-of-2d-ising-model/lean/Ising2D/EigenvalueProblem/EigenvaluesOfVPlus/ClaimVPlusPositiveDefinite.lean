@@ -132,7 +132,7 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
   have : (0 : ℝ) < 2 * s2 := by linarith
   exact Real.rpow_pos_of_pos this _
 
-/-- **原文 `V_plus_is_invertible` の `R^{(+)}`**:
+/-- **原文の `R^{(+)}`**（`V_plus_is_invertible` の主張で定める）:
 `R^{(+)} := ((2s_2)^{-M/2})_ℂ exp(-½S_1^{(+)}) exp(-S_2) exp(-½S_1^{(+)})`。
 人手の主張は `(2s_2)^{-M/2} := ((2s_2)^{M/2})^{-1} ∈ ℝ`（`ℝ` の逆数）と置くので、係数を同じ式で書く。 -/
 noncomputable def VPlusInv (M : ℕ) (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=

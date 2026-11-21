@@ -73,7 +73,7 @@ noncomputable def Xop (g : CheckIdx M → ℝ) : TensorPow M :=
 /-- **原文 `def_check_Vprime` の `V̌' = exp(X̌)`**。 -/
 noncomputable def Vprime (g : CheckIdx M → ℝ) : TensorPow M := matExp (F.Xop g)
 
-/-- **原文 `eigenvalues_of_check_Vprime` の `ǧ(ε)`**:
+/-- **原文の `ǧ(ε)`**（`eigenvalues_of_check_Vprime` の主張で定める）:
 `ǧ(ε) := Σ_{μ∈𝓜̌} γ(θ~_μ) h(ε(μ))`（`def_sum_over_check_index_set` の `𝓜̌` の上の和。Lean の `Finset.univ` の上の和）。
 人手の写像 `ε : 𝓜̌ → {0,1}` は Lean の `T`（`ε(μ) = 1` となる `μ` の集合）で、`ε(μ)` は `binOfMem T μ`、`h` は `halfSign` である。
 
@@ -444,7 +444,7 @@ theorem Qproj_mul_Xop_pow (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k 
       _ = (((F.gval g T : ℝ) : ℂ)) ^ (k + 1) • F.Qproj T := by rw [pow_succ]
                                                         -- `ǧ(ε)^{k+1} := ǧ(ε)^k ǧ(ε)`
 
-/-- **原文 `eigenvalues_of_check_Vprime` Step 3 の部分和**: `E_K := Σ_{k=0}^{K} (1/k!) X̌^k`。
+/-- **原文の部分和 `E_K`**（`eigenvalues_of_check_Vprime` Step 3 で定める）: `E_K := Σ_{k=0}^{K} (1/k!) X̌^k`。
 人手の添字 `0` からの和（`def_finite_sum_of_matrices_from_index_zero`）は `Finset.range (K + 1)` の上の和で書く。 -/
 noncomputable def partialExpSum (g : CheckIdx M → ℝ) (K : ℕ) : TensorPow M :=
   ∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) • F.Xop g ^ k
@@ -546,7 +546,7 @@ theorem partialExpSum_tendsto (g : CheckIdx M → ℝ) :
   refine h.congr fun K => ?_
   simp only [Function.comp_apply, partialExpSum, one_div]
 
-/-- **原文 `eigenvalues_of_check_Vprime` Step 3 の極限の鎖の 6 行目が引く `scalar_exp_is_limit_of_partial_sums`**
+/-- **原文 `scalar_exp_is_limit_of_partial_sums`**（`eigenvalues_of_check_Vprime` Step 3 の極限の鎖の 6 行目が引く）
 （係数の集合 `K → ℂ`、`x → ǧ(ε)_ℂ`）: `Σ_{k=0}^{K} z^k/k! → exp(z)`。人手のこの主張の Lean の具体版はまだ無く、
 mathlib の `NormedSpace.expSeries_div_hasSum_exp`（`Complex.exp_eq_exp_ℂ` で `Complex.exp` へ読み替える）で閉じる。
 添字は `partialExpSum_tendsto` と同じく `K ↦ K + 1` で送る。 -/

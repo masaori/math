@@ -186,8 +186,8 @@ theorem acomm_ann_ann (i j : CheckIdx M) : F.ann i * F.ann j + F.ann j * F.ann i
   F.haa ((M : ℤ) + 1 - i.1) ((M : ℤ) + 1 - j.1)
     (CheckIdx.prop' (conjIdx M i)) (CheckIdx.prop' (conjIdx M j))
 
-/-- **本章の要点（`check_number_operator_idempotent` (2) と
-`check_number_operators_commute` Step 1）**:
+/-- **本章の要点**（`check_number_operator_idempotent` (2) と
+`check_number_operators_commute` Step 1 が共有する）:
 原文の `δ_{ν, M+1-μ}` は、消滅演算子を共役添字で付け替えると
 Kronecker のデルタ `δ_{μν}` になる。**合同式の書き換えは要らない。** -/
 theorem acomm_cre_ann (i j : CheckIdx M) :

@@ -2269,6 +2269,7 @@ a
     origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 7 },
     title: { text: "数の exp は指数級数の部分和の極限" },
     labels: ["scalar_exp_is_limit_of_partial_sums"],
+    lean: ["Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto"],
     statement: [
       paragraph([
         math(String.raw`K := \mathbb{R}`),

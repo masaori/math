@@ -751,7 +751,7 @@ theorem jw_mul_jw_same (m : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
   · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
     rw [jwFamily_of_gt h, jwFamily_of_gt h, mul_one, if_neg hne]
 
-/-- **人手 `iH_is_real_symmetric` Step 1 の `Z_mY_m = (-i)σ^x_m` の 8 行の鎖**（`global_spin_flip_jordan_wigner_representation` の
+/-- **`Z_mY_m = (-i)σ^x_m` の 8 行の鎖**（人手 `iH_is_real_symmetric` Step 1 ほかが共有する）（`global_spin_flip_jordan_wigner_representation` の
 `Z_mY_m` の鎖も同じ道で、そちらは 1・2 行目を 1 行にまとめている）。
 
 人手との対応: 人手の準備の `Z_m`・`Y_m` のクロネッカー積表示（`def_jordan_wigner_Z_matrices`・`def_jordan_wigner_Y_matrices` と

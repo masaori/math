@@ -881,7 +881,7 @@ theorem Uflip_conj_expPartialSum (S : TensorPow M) (n : ℕ) :
     _ = ∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • (Uflip M * S * UflipInv M) ^ k := by
         simp only [Uflip_conj_pow]
 
-/-- **人手本文 `constant_c_value_even_sector` Step 2** の `U exp(S) U^{-1} = exp(U S U^{-1})`。
+/-- **人手本文 `conjugation_commutes_with_matrix_exp` の `B → U`** の `U exp(S) U^{-1} = exp(U S U^{-1})`（`constant_c_value_even_sector` Step 2 が引く）。
 
 人手どおり、`def_exp`（`matExp_hasSum`）の部分和 `s_n(S) := ∑_{k<n} (k!)^{-1} S^k` について
 1. `U s_n(S) U^{-1} = s_n(USU^{-1})`（`Uflip_conj_expPartialSum`）、

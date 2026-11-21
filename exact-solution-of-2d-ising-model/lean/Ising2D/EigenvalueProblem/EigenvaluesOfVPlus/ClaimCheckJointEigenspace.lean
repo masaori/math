@@ -243,7 +243,7 @@ theorem nOp_mul_projFactor_of_not_mem {ν : CheckIdx M} {T : Finset (CheckIdx M)
                                                         -- `R_ν^{(0)}` の定義（`def_check_R_factor`）
     _ = 0 := F.nOp_mul_one_sub_nOp ν                    -- 人手の続く 7 行（`nOp_mul_one_sub_nOp` の calc と同じ行）
 
-/-- **原文 `check_joint_eigenspace_decomposition` の `Q̌_ε`**:
+/-- **原文 `def_check_Q_epsilon` の `Q̌_ε`**（`check_joint_eigenspace_decomposition` が使う）:
 `Q̌_T = ∏_{μ∈𝓜̌} (μ ∈ T ? ň_μ : I - ň_μ)`。 -/
 noncomputable def Qproj (T : Finset (CheckIdx M)) : TensorPow M :=
   NecSuf.projOn F.nOp F.commute_nOp_nOp Finset.univ T

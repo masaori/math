@@ -31,7 +31,7 @@ section EigenVPlus
 
 variable {M : ℕ}
 
-/-- **原文 `eigenvalues_of_V_plus` の `Λ̌_ε`**:
+/-- **原文の `Λ̌_ε`**（`eigenvalues_of_V_plus` の主張で定める）:
 `Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(Σ_{μ∈𝓜̌} γ(θ~_μ) h(ε(μ)))`（指数の中は `ǧ(ε)`、Lean の `F.gval g T`）。 -/
 noncomputable def checkBigLambda (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (s2 : ℝ)
     (T : Finset (CheckIdx M)) : ℝ :=
