@@ -96,7 +96,7 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 i\cdot(-i)
 &= (-i)\cdot i
-&&(\because \mathbb{C} \text{ の乗法の可換律}) \\
+&&(\because \blkref{complex_numbers_form_a_field}\text{ の積の可換律}) \\
 &= 1
 &&(\because \text{直前の鎖})
 \end{aligned}`,

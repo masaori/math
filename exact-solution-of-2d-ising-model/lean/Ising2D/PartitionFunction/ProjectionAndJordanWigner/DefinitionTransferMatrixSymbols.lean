@@ -92,7 +92,7 @@ theorem neg_I_mul_I : (-Complex.I) * Complex.I = 1 := by
 /-- 人手の準備の鎖 `i·(-i) = (-i)·i = 1`。 -/
 theorem I_mul_neg_I : Complex.I * (-Complex.I) = 1 := by
   calc
-    -- ℂ の乗法の可換律
+    -- `complex_numbers_form_a_field` の積の可換律
     Complex.I * (-Complex.I) = (-Complex.I) * Complex.I := mul_comm _ _
     -- 直前の鎖
     _ = 1 := neg_I_mul_I
@@ -967,7 +967,7 @@ theorem epsilon_eq_i_pow_smul_zyPrefixProduct :
     -- 本文: `i(-i)=1` を底へ代入する。
     _ = (Complex.I * (-Complex.I)) ^ M • xString M M := by
       rw [mul_neg, Complex.I_mul_I, neg_neg]
-    -- 本文: 積の冪を二つの冪の積へ分ける。
+    -- 本文: ℂ の積の可換律（`complex_numbers_form_a_field`）と冪の法則で、積の冪を二つの冪の積へ分ける。
     _ = (Complex.I ^ M * (-Complex.I) ^ M) • xString M M := by rw [mul_pow]
     -- 本文: スカラー作用の合成として `i^M` を外側へ出す。
     _ = Complex.I ^ M • ((-Complex.I) ^ M • xString M M) := by rw [mul_smul]

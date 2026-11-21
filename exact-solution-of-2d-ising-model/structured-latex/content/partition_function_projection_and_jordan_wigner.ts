@@ -1174,7 +1174,7 @@ Q_{r+1}
 &=(i(-i))^{M_{\mathrm{col}}}P_{M_{\mathrm{col}}}
 &&(\because\ i(-i)=1)\\
 &=i^{M_{\mathrm{col}}}(-i)^{M_{\mathrm{col}}}P_{M_{\mathrm{col}}}
-&&(\because\ \mathbb{C}\text{ の乗法の可換律と冪の法則})\\
+&&(\because\ \mathbb{C}\text{ の積の可換律（}\blkref{complex_numbers_form_a_field}\text{）と冪の法則})\\
 &=i^{M_{\mathrm{col}}}Q_{M_{\mathrm{col}}}
 &&(\because\ \text{有限帰納法の終端})\\
 &=i^{M_{\mathrm{col}}}(Z_1Y_1)(Z_2Y_2)\cdots(Z_{M_{\mathrm{col}}}Y_{M_{\mathrm{col}}})
