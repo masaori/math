@@ -82,6 +82,7 @@
 - **導出版は、必要十分版の定理を特殊化して具体版の主張を得る。** 各段の導出版をつないで具体版の定理を組み立て直すことで代えない（それは必要十分版と具体版を結ばない）。具体版と必要十分版の前提から作った構造（クリフォード代数など）が別の集合になるときは、`CliffordAlgebra/SplitQuadraticSpace/GeneratorsFromNecSuf.lean` と同じく、二つの間に普遍性で互いに逆向きの準同型を作り、必要十分版の主張をその準同型で引き戻す。
 - **各定理の docstring に、対応する本文のラベルを書く。** 一つの行で、その節の本文のブロックを全部形式化する。
 - Lean の行の検証は、`lake build` と、`sorry` が残っていないことの検査（`bash lean/scripts/check-no-sorry.sh`）と、本文のラベルとの対応の検査（`node lean/scripts/verify-label-correspondence.ts`）である。本文を直したら `npm run check` も通す。
+- **具体版と必要十分版は互いを参照しない。** リポジトリ直下から `bash scripts/lean-concrete-necsuf-separation/check.sh isomorphism-between-complex-matrix-algebra-and-clifford-algebra/lean`（`lake build` の後）を Lean の行の検証に含める。両方を使ってよいのは導出（`*FromNecSuf.lean` と、名前の最後の成分に `necSuf` を含む必要十分版でない宣言）だけである。Lean のゴールラインは、この検査の四つの件数が全て 0 で、`lean/concrete-necsuf-separation-ledger.txt` に違反の行が無いことを含む。台帳の行は減らすだけにし、違反を足して通さない。必要十分版が具体版の定義を使っているなら、必要十分版の側に定義を置いて参照を移す（係数を含まない定義でも共有しない）。導出の宣言の名前の最後の成分を `eq_` で始めない（検査が自動生成の等式の補題と見なし、親の具体版の宣言の違反に数える）。
 - Lean で本文の誤りや、本文が書いていない前提が見つかったら、本文を直す（同じ行の中で）。主張が偽なら、台帳の「研究管理への申し送り」に書いて止まる。
 
 ## 止まってよい場合
