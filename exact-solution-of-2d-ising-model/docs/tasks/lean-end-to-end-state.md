@@ -706,6 +706,22 @@
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
+**Lean の点検で見つかった直し（2026-11-21、代表の指示「複素版イジング全然ダメなので、連続実行と定期実行で全て修正して」。最優先。runbook「Lean の点検で見つかった直し」）。** 上から、依存の済んだ行を一つずつ進める。済んだ行は消し、下の「現在地」へ一行で書く。
+
+| 観点 | 行 | 状態 | 備考 |
+|---|---|---|---|
+| 繋がり・未定義の記号・一対一 | 点検の検査を作る | 未着手 | `lean/scripts/` に、ビルド後の Lean の環境を読む検査を置く（分離の検査 `scripts/lean-concrete-necsuf-separation/` と同じ形で、台帳で減らすだけにする）。出すもの: (a) 最終定理の依存に入らない具体版の宣言（`RoutesNotAdopted` を除く）、(b) 具体版の定義と主張に出る mathlib の記号のうち、許可の一覧（記号と、それを定義か宣言する本文のラベルの組）に無いもの、(c) 対応する具体版の宣言が書かれていない本文のブロック、(d) 本文の証明が引く主張と具体版の証明が使う対応先の食い違い。依存: なし。 |
+| 一対一 | 本文の各ブロックに対応する具体版の宣言を機械で読める形で書く | 未着手 | 本文の論文側の schema に、ブロックごとの Lean の対応先の欄（可算版の `lean` と同じもの）を足し、全ての定義・主張・定理に具体版の宣言名を書く。docstring の先頭のラベルで取れるのは 469／737 件で、残る 268 件は `lean/README.md` の表にファイルの単位でしか書かれていない。一回に一章ずつ。依存: なし。 |
+| 分離 | TensorPow 上の行列の基本恒等式を具体版で証明し直す | 未着手 | 具体版の約 210 宣言が、導出の定理 `identity_matrix_mul_tensorPow`（37）・`smul_mul_matrix_tensorPow`（27）・`mul_smul_matrix_tensorPow`（26）・`one_smul_tensorPow`（24）・`mul_identity_matrix_tensorPow`（23）・`mul_neg_matrix_tensorPow`（18）・`neg_mul_matrix_tensorPow`（15）・`sub_eq_add_neg_tensorPow`・`zero_smul_tensorPow`（11）などを使う（いずれも `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/*FromNecSuf.lean`）。本文の該当する主張（`identity_matrix_is_left_unit_of_mat_mult` ほか）の具体版を `TensorPow M` について本文どおりに示し、参照を移す。依存: なし。 |
+| 分離 | 必要十分版の同時固有空間・数演算子・二進語の和・有限積・交換子・置換行列を使う具体版を直す | 未着手 | 具体版が `NecSuf.JointEigenspace`（42 宣言）・`NecSuf.NumberOperator`（25）・`NecSuf.BinaryWordSum`（21）・`NecSuf.FiniteProductLeft`（21）・`NecSuf.CommutatorClifford`（14）・`NecSuf.JointEigenspaceDecomposition`（13）・`NecSuf.PermMatrix`（13）の定義と定理を使う。本文の定義どおりの具体版を置き、証明を本文どおりに書き直す。依存: なし。 |
+| 分離 | 必要十分版が使う具体版の定義を必要十分版の側に立てる | 未着手 | 必要十分版の 57 宣言が具体版を使う。多いのは `ClaimCommutatorViaAnticommutators`（33）、`DefinitionIndexSkippingMap`・`RealMatrixBilinearFormAndNorm`・`ClaimRayleighSupSectorDecomposition`・`DefinitionRowConfigurations`（各 6）。依存: なし。 |
+| 分離 | 具体版のファイルから導出のファイルの import を外し、分離の台帳を零にする | 未着手 | 具体版→必要十分版・導出の import 198 組と必要十分版→具体版の 14 組を消し、上の三行で扱わなかった台帳の行を一件ずつ直す。台帳が空になれば済み。依存: 上の【分離】の三行。 |
+| 未定義の記号 | Lean の具体版の定義を本文の定義どおりにする | 未着手 | `matExp A := NormedSpace.exp A`（本文 `def_exp` は級数で定義する）を本文どおりに定義し直す。本文が定義する cosh・sinh（`def_cosh_sinh`）・正の実数上の実対数（`def_real_logarithm_positive`）・平方根（`definition_of_sqrt_r_positive`）・逆双曲線余弦（`def_arccosh`）に、本文どおりの具体版の定義を置く（いまは `Real.cosh`（107 件）・`Real.sinh`（172）・`Real.log`（43）・`Real.sqrt`（55）を直接使う）。mathlib との一致は補題一本に留める。依存: なし。 |
+| 未定義の記号 | 本文に定義の無い記号を本文で定義か宣言し、Lean の対応先を許可の一覧に載せる | 未着手 | π（`Real.pi` 58 件）・区間積分（`intervalIntegral` 22 件。測度による積分である）・実数列の極限（`Filter.Tendsto` 32 件）・上限など。本文の側は下の既存の件「本文が定義のブロック無しに使っている語の解消」が進めている。Lean の側は、その定義か宣言のブロックを許可の一覧に載せる。依存: 既存の件、点検の検査を作る行。 |
+| 一対一 | 本文の引用と具体版の依存のずれを一件ずつ直す | 未着手 | 2026-11-21 の測り方で、Lean が本文の引かない主張を使うもの 89 件（例 `trace_V_plus_is_positive` が `V2_exponential_representation` を使う）、本文が根拠に引く主張を Lean が使わないもの 111 件（例 `check_number_operator_is_hermitian` の同時固有空間分解・数演算子の可換性・周期性）。既存の件（`matrix_exp_conjugation` が必要十分版を特殊化するだけの件など）も含む。依存: 点検の検査を作る行、対応を機械で読める形で書く行。 |
+| 繋がり | 全ての具体版の宣言を一つの最終定理へ繋ぐ | 未着手 | 最終定理の依存に入らない具体版の宣言（2026-11-21 に 1,298 件。本筋のフォルダのファイル 72 件）を、(i) 一対一のずれで使われなくなったもの、(ii) 臨界点の章（`specific_heat_log_divergence` ほか）のように別の到達点に繋がるもの、(iii) どこからも使われないもの、に分ける。(i) は上の行で直す。(ii) は通しの定理と臨界点の到達点を一つの最終定理にまとめ、`check-end-to-end.sh` が固定する型をその分だけ強める（弱めない）。(iii) は本文の使う側へ繋ぐか、本文と Lean の両方を退避の場所へ移す。依存: 一対一の行。 |
+
+
 - （2026-11-21 追加、最優先）**本文が定義のブロック無しに使っている語の解消。** 代表の問い「未定義のものを放置している？」（Slack、2026-11-21）を受けて本文の statement と proof を洗い出した結果である。
   線型代数の語（部分空間・張る・線型独立・基底・次元 `dim_ℂ`・直和）は同じ日に別の実行で定義を足した。残りは次のとおりで、1 回に 1 つずつ（大きいものは割って）定義のブロックか主張を足し、使う箇所から引き、四層を合わせる。
   この台帳の下の件と重なるもの（有限和の添字の集合、一般の `n` の正則な行列、`mat_mult_associative` など）は、この件の中で一緒に片付けたものとして下の件にも記録する。
