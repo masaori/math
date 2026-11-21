@@ -108138,8 +108138,20 @@ b
                     "任意の ", math(String.raw`\mu,\nu\in\Lambda_{\mathbb Q}`), " について、",
                     ref("def_rational_log_order_group_realization"), " の有限和を項ごとに足すと ",
                     math(String.raw`\rho(\mu+\nu)=\rho(\mu)+\rho(\nu)`), " であり、",
-                    ref("claim_rational_log_order_group_realization_smul"), " から ",
-                    math(String.raw`\rho(-\mu)=-\rho(\mu)`), " である。",
+                    "符号反転については",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho(-\mu)
+&=\rho((-1)\cdot\mu)
+&&(\because\ \blkref{def_rational_log_order_group})\\
+&=(-1)\rho(\mu)
+&&(\because\ \blkref{claim_rational_log_order_group_realization_smul})\\
+&=-\rho(\mu)
+&&(\because\ \text{実数の符号反転})
+\end{aligned}`),
+                  paragraph([
+                    "である。", ref("claim_rational_log_order_group_realization_smul"),
+                    " と ", ref("def_rational_log_order_group"), " を順に使った。",
                     ref("claim_log_order_group_realization_real_log"), " と ",
                     ref("def_real_logarithm"), " の狭義単調性により ",
                     math(String.raw`c=\log_{\mathbb R}2>0`), " である。",
