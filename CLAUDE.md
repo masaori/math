@@ -152,6 +152,8 @@
 ├── lean/                  # Lean 4 + mathlib4 による機械的証明（任意）
 │   ├── README.md          # セットアップ・人手証明との対応規約
 │   ├── concrete-necsuf-separation-ledger.txt # 具体版と必要十分版の分離の既知の違反（新規は置かない＝違反零）
+│   ├── concrete-general-theory-ledger.txt # 具体版が mathlib の一般論を使う既知の箇所（新規は置かない）
+│   ├── declared-general-theory.txt # 本文が定義せずに用いると明示した一般論（任意）
 │   └── <Lib>/<章名>/      # 人手証明の章に対応（章名で対応させる）
 ├── docs/
 │   └── tasks/             # タスク管理・作業指示書
@@ -213,6 +215,13 @@
   必要十分版でない宣言）が両方を使うことだけである。既知の違反は `<project>/lean/concrete-necsuf-separation-ledger.txt`
   に載せ、**行は減らすだけにする**（台帳に無い違反も、直したのに残した行も落ちる）。台帳が無いプロジェクトは違反零として扱う。
   分類の決まりは `scripts/lean-concrete-necsuf-separation/Separation.lean.in`
+- `lean/` があれば、続けて `bash scripts/lean-concrete-general-theory/check.sh <project>/lean`（リポジトリ直下から）—
+  **具体版が mathlib の線型代数の一般論（基底・次元・部分加群・線型独立・直和など。接頭辞の一覧は
+  `scripts/lean-concrete-general-theory/general-theory-prefixes.txt`）を直接使っていないこと**を、ビルド後の Lean の環境で判定する。
+  具体版は人手証明と 1 対 1 なので、人手が定義も証明もしていない一般論を Lean だけが mathlib で埋めると、人手の証明の穴が
+  Lean の検査を通ってしまう。**本文が一般論として定義せずに用いると明示したものだけは使ってよい**: 主張に「定義せずに用いる」と
+  書いたブロックのラベルを `<project>/lean/declared-general-theory.txt` に「接頭辞<TAB>ラベル」で書く（検査がラベルと文言を確かめる）。
+  既知の違反は `<project>/lean/concrete-general-theory-ledger.txt` に載せ、**行は減らすだけにする**。
 
 ## MEMORY.md の運用
 

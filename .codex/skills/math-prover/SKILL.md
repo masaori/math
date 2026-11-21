@@ -217,6 +217,7 @@ node <project>/sagemath/tools/verify-check-linkage.ts
   [structured-latex/docs/type-coverage.md](../../../structured-latex/docs/type-coverage.md)（システム側が正本）。
 - `lean/` を持つプロジェクトでは `lake build` と `bash lean/scripts/check-no-sorry.sh` も通す。
 - `lean/` を持つプロジェクトでは、続けてリポジトリ直下から `bash scripts/lean-concrete-necsuf-separation/check.sh <project>/lean` も通す（具体版と必要十分版の分離。台帳の行は減らすだけ）。
+- `lean/` を持つプロジェクトでは、さらに `bash scripts/lean-concrete-general-theory/check.sh <project>/lean` も通す（具体版が mathlib の線型代数の一般論を使わないこと。本文が「定義せずに用いる」と明示したものだけ `lean/declared-general-theory.txt` で許す。台帳の行は減らすだけ）。
 
 ---
 

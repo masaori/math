@@ -1,5 +1,10 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+## 具体版の一般論の使用の検査（2026-11-21、代表の承認「論文の方で一般論として定義せずに用いることを明示するならば使って良い」）
+
+- `lake build` の後にリポジトリ直下から `bash scripts/lean-concrete-general-theory/check.sh countable-core-of-3d-ising/lean` を通す（リポジトリ直下 CLAUDE.md「検証」）。具体版が mathlib の線型代数の一般論（基底・次元・部分加群・線型独立・直和など）を直接使っていないことを、ビルド後の Lean の環境で確かめる。
+- 2026-11-21 時点の既知の使用は 具体版の 3 宣言（`Module.Free`・`Module.finrank`。3 行）。台帳 `lean/concrete-general-theory-ledger.txt` の行は減らすだけにする。本文が「定義せずに用いる」と明示した一般論だけは `lean/declared-general-theory.txt` で許す。
+
 ## 具体版と必要十分版の分離の検査（2026-11-21、人の指示「全てのプロジェクトで具体版と必要十分版の相互依存の違反を検出する仕組みをデフォルトにする」）
 
 - `lake build` の後にリポジトリ直下から `bash scripts/lean-concrete-necsuf-separation/check.sh countable-core-of-3d-ising/lean` を通す（リポジトリ直下 CLAUDE.md「検証」）。ビルド後の Lean の環境の定数の依存と import で、具体版と必要十分版が互いを参照していないかを判定する。

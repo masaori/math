@@ -706,6 +706,12 @@
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
+- （2026-11-21 追加、最優先）**具体版が mathlib の線型代数の一般論を使っている箇所を、人手の証明が定義・証明した主張を引く形に直す。**
+  代表の承認（Slack、2026-11-21）で、リポジトリ共通の検査 `scripts/lean-concrete-general-theory/check.sh` を足した。既知の使用は
+  `lean/concrete-general-theory-ledger.txt`（具体版の 56 宣言、宣言と接頭辞の組 134 行。`Submodule`・`LinearMap.range`・`Module.Basis`・`Module.finrank` など）。
+  1 回に 1 つの人手の主張（`trace_of_idempotent` の `idempotentAdaptedBasis` の系、`check_joint_eigenspace_decomposition` の `finrank_range_Qproj`・`isInternal_range_Qproj` の系、
+  `exists_eigenBasis_*` の系など）ずつ、具体版を `MathematicalTools/SubspacesBasesAndDimension/` の自前の定義・主張で書き直し、台帳の行を同じ回に消す。
+  本文が「定義せずに用いる」と明示した一般論だけは `lean/declared-general-theory.txt` に書いて使ってよい（明示は本文のブロックの主張に書く）。
 **Lean の点検で見つかった直し（2026-11-21、代表の指示「複素版イジング全然ダメなので、連続実行と定期実行で全て修正して」。最優先。runbook「Lean の点検で見つかった直し」）。** 上から、依存の済んだ行を一つずつ進める。済んだ行は消し、下の「現在地」へ一行で書く。
 
 | 観点 | 行 | 状態 | 備考 |

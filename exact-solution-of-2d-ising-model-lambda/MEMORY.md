@@ -1,5 +1,10 @@
 # MEMORY — 2次元 Ising 模型の厳密解（Λ・Fisher 零点の立場）
 
+## 具体版の一般論の使用の検査（2026-11-21、代表の承認「論文の方で一般論として定義せずに用いることを明示するならば使って良い」）
+
+- `lake build` の後にリポジトリ直下から `bash scripts/lean-concrete-general-theory/check.sh exact-solution-of-2d-ising-model-lambda/lean` を通す（リポジトリ直下 CLAUDE.md「検証」）。具体版が mathlib の線型代数の一般論（基底・次元・部分加群・線型独立・直和など）を直接使っていないことを、ビルド後の Lean の環境で確かめる。
+- 2026-11-21 時点の既知の使用は 零（台帳を置かない）。本文が「定義せずに用いる」と明示した一般論だけは `lean/declared-general-theory.txt` で許す。
+
 次の tick が読む引き継ぎメモ。進捗の正本は [docs/tasks/auto-loop-state.md](docs/tasks/auto-loop-state.md)（台帳）で、ここはその要約である。tick ごとの古い記録は [docs/tasks/memory-archive.md](docs/tasks/memory-archive.md) にある（runbook「MEMORY.md を短く保つ」。直近 5 件だけをここに置く）。
 
 ## いまの状態（2026-11-20 の連続実行）

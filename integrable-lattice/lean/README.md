@@ -50,6 +50,7 @@ cd integrable-lattice/lean
 lake build
 ./scripts/check-no-sorry.sh   # 終了コード 0 なら OK
 bash ../../scripts/lean-concrete-necsuf-separation/check.sh .   # 具体版と必要十分版が互いを参照していないこと（既知の違反は concrete-necsuf-separation-ledger.txt。行は減らすだけ）
+bash ../../scripts/lean-concrete-general-theory/check.sh .   # 具体版が mathlib の線型代数の一般論を使っていないこと（本文が「定義せずに用いる」と明示したものは declared-general-theory.txt で許す。既知の違反は concrete-general-theory-ledger.txt。行は減らすだけ）
 ```
 
 `scripts/check-no-sorry.sh` は `exact-solution-of-2d-ising-model/lean/scripts/check-no-sorry.sh`

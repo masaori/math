@@ -45,6 +45,7 @@ bash scripts/use-shared-dependencies.sh   # 依存を用意する。**lake build
 lake build
 bash scripts/check-no-sorry.sh
 bash scripts/check-concrete-necsuf-separation.sh   # 具体版と必要十分版が互いを参照していないこと（本体はリポジトリ直下の scripts/lean-concrete-necsuf-separation/。既知の違反は concrete-necsuf-separation-ledger.txt。行は減らすだけ）
+bash ../../scripts/lean-concrete-general-theory/check.sh .   # 具体版が mathlib の線型代数の一般論を使っていないこと（本文が「定義せずに用いる」と明示したものは declared-general-theory.txt で許す。既知の違反は concrete-general-theory-ledger.txt。行は減らすだけ）
 ```
 
 依存（mathlib を含む `.lake/packages`、約 7.4GB）は作業ツリーごとに取らず、マシンに 1 つだけ置いた

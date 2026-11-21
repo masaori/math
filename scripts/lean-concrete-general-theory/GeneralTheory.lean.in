@@ -1,0 +1,99 @@
+/-
+具体版が mathlib の線型代数の一般論を使っていないかの検査が読む、使用の書き出しの雛形。
+
+`check.sh` が `@LIB@` を各プロジェクトのライブラリ名に、`@PREFIXES@` を一般論の接頭辞の一覧のファイルの
+絶対パスに置き換えて `<lean>/.lake/concrete-general-theory/GeneralTheory.lean` に書き、そのプロジェクトで
+`lake env lean` する。ライブラリの一部ではない。
+
+定数の分類は `scripts/lean-concrete-necsuf-separation/Separation.lean.in` と同じである（必要十分版・導出・具体版）。
+具体版の宣言が主張か本体で直接使う、ライブラリの外（mathlib・Lean 本体）の定数 `d` について、
+`d` の名前が一覧の接頭辞 `P` で始まるか、`d` の主張（型）が `P` で始まる定数を含めば、
+`GT  <具体版の宣言>  <P>` を一行書く（タブ区切り）。
+-/
+import @LIB@
+open Lean
+
+partial def rootDecl (env : Environment) (n : Name) : Name :=
+  match n with
+  | .str p s =>
+    let generated := s.startsWith "_" || s.startsWith "eq_" || s.startsWith "match_" ||
+      s.startsWith "proof_" || s == "eq_def" || s == "injEq" || s == "inj" ||
+      s == "casesOn" || s == "recOn" || s == "rec" || s == "noConfusion" ||
+      s == "noConfusionType" || s == "ctorIdx" || s == "below" || s == "brecOn"
+    if generated && (env.find? p).isSome then rootDecl env p else n
+  | _ => n
+
+def userName (n : Name) : Name := (privateToUserName? n).getD n
+
+def hasComponent (n : Name) (c : String) : Bool :=
+  n.components.any fun x => x.toString == c
+
+def classifyModule (m : Name) : String :=
+  if hasComponent m "NecSuf" then "necsuf"
+  else if m.getString!.endsWith "FromNecSuf" then "derivation"
+  else "concrete"
+
+def moduleClasses (env : Environment) : Array (Option String) :=
+  env.header.moduleNames.map fun m =>
+    if (`@LIB@).isPrefixOf m then some (classifyModule m) else none
+
+/-- ライブラリの定数の分類。ライブラリの外なら `none`。 -/
+def classify (env : Environment) (mods : Array (Option String)) (n : Name) : Option String := do
+  let idx ← env.getModuleIdxFor? n
+  let _ ← mods[idx.toNat]!
+  let r := rootDecl env n
+  let ridx ← env.getModuleIdxFor? r
+  let cm ← mods[ridx.toNat]!
+  let u := userName r
+  if hasComponent u "NecSuf" then return "necsuf"
+  match u with
+  | .str _ last => if (last.toLower.splitOn "necsuf").length > 1 then return "derivation"
+  | _ => pure ()
+  return cm
+
+def inLibrary (env : Environment) (mods : Array (Option String)) (n : Name) : Bool :=
+  match env.getModuleIdxFor? n with
+  | some idx => (mods[idx.toNat]!).isSome
+  | none => false
+
+def matchPrefix (prefixes : Array Name) (n : Name) : Option Name :=
+  prefixes.find? fun p => p.isPrefixOf n
+
+/-- `d` が使う一般論の接頭辞（名前か主張に現れるもの）。 -/
+def conceptOf (env : Environment) (prefixes : Array Name) (d : Name) : Option Name :=
+  match matchPrefix prefixes d with
+  | some p => some p
+  | none => match env.find? d with
+    | some di => di.type.getUsedConstants.findSome? (matchPrefix prefixes)
+    | none => none
+
+#eval show CoreM Unit from do
+  let env ← getEnv
+  let mods := moduleClasses env
+  let lines ← IO.FS.lines "@PREFIXES@"
+  let prefixes : Array Name := lines.filterMap fun l =>
+    let t := l.trimAscii.toString
+    if t.isEmpty || t.startsWith "#" then none else some t.toName
+  let out ← IO.FS.Handle.mk (System.FilePath.mk ".lake/concrete-general-theory/uses.tsv") .write
+  let mut concept : Std.HashMap Name (Option Name) := {}
+  let mut seen : Std.HashSet (Name × Name) := {}
+  for (n, ci) in env.constants.toList do
+    let some cu := classify env mods n | continue
+    unless cu == "concrete" do continue
+    let used : Array Name := ci.type.getUsedConstants ++ match ci with
+      | .inductInfo i => i.ctors.toArray
+      | _ => match ci.value? (allowOpaque := true) with
+        | some v => v.getUsedConstants
+        | none => #[]
+    let user := userName (rootDecl env n)
+    for d in used do
+      if inLibrary env mods d then continue
+      let cached := concept.get? d
+      let c := match cached with
+        | some c => c
+        | none => conceptOf env prefixes d
+      if cached.isNone then concept := concept.insert d c
+      let some p := c | continue
+      if !seen.contains (user, p) then
+        seen := seen.insert (user, p)
+        out.putStrLn s!"GT\t{user}\t{p}"

@@ -1,0 +1,6 @@
+# 具体版が mathlib の線型代数の一般論を使っている既知の箇所。scripts/lean-concrete-general-theory/check.sh（リポジトリ直下）が読む。
+# GT 行は「具体版の宣言・使っている一般論の接頭辞」。人手の証明が定義・証明した主張を引く形に直すか、本文で明示して
+# declared-general-theory.txt に書いたら、同じ回にこの行を消す。行は減らすだけにする。
+GT	Ising3DCut.NullModel.irreducibleFactorizationType_determines_rootMinimalPolynomialDegrees	Module.Free
+GT	Ising3DCut.NullModel.rationalSplittingField_degree	Module.finrank
+GT	Ising3DCut.NullModel.splittingDegree_galoisGroup_do_not_determine_polynomial	Module.finrank

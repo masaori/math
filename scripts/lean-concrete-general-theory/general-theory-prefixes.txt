@@ -1,0 +1,24 @@
+# 具体版が直接使ってはならない mathlib の線型代数の一般論。scripts/lean-concrete-general-theory/check.sh が読む。
+# 一行に一つ、Lean の名前の接頭辞を書く。使われた定数の名前がこの接頭辞で始まるか、
+# その定数の主張（型）がこの接頭辞で始まる定数を含めば、その接頭辞の一般論を使ったとみなす。
+# 基底・次元
+Basis
+Module.Basis
+Module.finBasis
+Module.finBasisOfFinrankEq
+Module.finrank
+Module.rank
+Module.Free
+Module.Finite
+FiniteDimensional
+Matrix.rank
+# 部分加群・像と核・張る
+Submodule
+LinearMap.range
+LinearMap.ker
+# 線型独立
+LinearIndependent
+# 直和・補空間
+DirectSum
+iSupIndep
+IsCompl
