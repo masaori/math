@@ -1,0 +1,14 @@
+# 具体版の定義と主張に使ってよい mathlib・Lean 本体の記号の一覧。scripts/mathlib-symbols-undefined-in-text/check.sh が読む。
+# 一行に「記号<TAB>ラベル」。ラベルは、その記号を本文で定義するか、外から持ち込むと宣言する本文の定義のブロックである。
+# 載せてよいのは、本文が定義し具体版がそれを本文の定義どおりに定めている記号（mathlib の構成の別名ではない）か、
+# 本文が外から持ち込み、使う性質を列挙している記号だけである。型クラスの演算は「演算@型@インスタンス」で書く（UndefinedSymbols.lean）。
+#
+# 集合と代数構造の記号: ℕ・ℤ・ℝ を構成せず既知の集合として持ち込み、ℝ の +・·・− について体の公理を列挙している。
+# ℕ・ℤ の演算と順序 ≤、ℝ の順序と逆数は、本文が使う性質をまだ列挙していないので載せない
+# （ℝ の逆数は本文では ℝ∖{0} 上の写像で、Lean の Inv.inv は 0⁻¹ = 0 と定める全域の写像である）。
+Nat	set_and_algebra_notation
+Int	set_and_algebra_notation
+Real	set_and_algebra_notation
+HAdd.hAdd@Real,Real,Real@Real.instAdd	set_and_algebra_notation
+HMul.hMul@Real,Real,Real@Real.instMul	set_and_algebra_notation
+Neg.neg@Real@Real.instNeg	set_and_algebra_notation

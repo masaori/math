@@ -59,6 +59,7 @@ cd exact-solution-of-2d-ising-model/lean
 bash ../../scripts/lean-concrete-necsuf-separation/check.sh .   # 具体版と必要十分版が互いを参照していないこと（既知の違反は concrete-necsuf-separation-ledger.txt。行は減らすだけ）
 bash ../../scripts/lean-concrete-general-theory/check.sh .   # 具体版が mathlib の線型代数の一般論を使っていないこと（本文が「定義せずに用いる」と明示したものは declared-general-theory.txt で許す。既知の違反は concrete-general-theory-ledger.txt。行は減らすだけ）
 bash scripts/connection-to-final-theorem/check.sh   # 具体版の宣言（必要十分版・導出・RoutesNotAdopted を除く）が最終定理 onsager_exact_solution_end_to_end の依存に入っていること（既知の例外は unconnected-concrete-declarations-ledger.txt。行は減らすだけ）
+bash scripts/mathlib-symbols-undefined-in-text/check.sh   # 具体版の定義と主張に出る mathlib の記号が、本文が定義か宣言したもの（mathlib-symbols-defined-or-declared-in-text.txt）だけであること（既知の例外は mathlib-symbols-undefined-in-text-ledger.txt。行は減らすだけ）
 ```
 
 ソース中の `sorry` / `admit` の有無と、主要定理の `#print axioms` に `sorryAx` が
