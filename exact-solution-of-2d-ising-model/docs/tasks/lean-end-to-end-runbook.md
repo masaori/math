@@ -20,7 +20,7 @@
 
 - **2026-11-21 の代表の指示（「複素版イジング全然ダメなので、連続実行と定期実行で全て修正して」）による四つの条件。** 同じ日の点検（<https://hexcomp-artifacts.web.app/masaori/math/complex-ising-lean-audit-2026-11-21>）がどれも満たしていないと判定した。直す行は節「Lean の点検で見つかった直し」にあり、状態台帳の「次の一歩」の先頭に置いた。
   - **分離**: リポジトリ直下から `bash scripts/lean-concrete-necsuf-separation/check.sh exact-solution-of-2d-ising-model/lean` が出す四つの件数が全て 0 で、台帳 `lean/concrete-necsuf-separation-ledger.txt` が空である。
-  - **繋がり**: 具体版の宣言（`Ising2D/RoutesNotAdopted/` を除く）が全て、ただ一つの最終定理の依存に入っている。判定は節の行「点検の検査を作る」が作る検査で行う。
+  - **繋がり**: 具体版の宣言（`Ising2D/RoutesNotAdopted/` を除く）が全て、ただ一つの最終定理の依存に入っている。判定は `lean/` で `lake build` の後に `bash scripts/connection-to-final-theorem/check.sh` を通し、台帳 `lean/unconnected-concrete-declarations-ledger.txt` が空であることで行う。
   - **未定義の記号**: 具体版の定義と主張に出る mathlib の記号は、本文に定義のブロックがあってその具体版が本文の定義どおりに定義されているか（mathlib の構成の別名にしない。一致は補題一本）、本文が「外から持ち込み、使う性質はこれだけ」と宣言したものだけである。
   - **一対一**: 本文の定義・主張・定理の全てに、対応する具体版の宣言が機械で読める形で書かれ、本文の証明が根拠として引く主張と、具体版の証明が使う対応先が一致する。
 
@@ -89,7 +89,7 @@
 
 行は状態台帳の「次の一歩」の先頭の表にある。上から、依存の済んだ行を一つずつ進める。行が一回に収まらなければ、補題の単位で割って表を書き換える。
 
-- **台帳の行は減らすだけにする。** 分離の台帳も、行「点検の検査を作る」が作る台帳も、新しい違反を足して通さない。直した行は同じ回に消す。
+- **台帳の行は減らすだけにする。** 分離の台帳も、繋がりの台帳 `lean/unconnected-concrete-declarations-ledger.txt` も、未定義の記号と一対一の検査が作る台帳も、新しい違反を足して通さない。直した行は同じ回に消す。
 - **分離の直し方**: 具体版が必要十分版の定義を使っているなら、本文の定義どおりの定義を具体版に置いて参照を移す。具体版が必要十分版か導出の定理で証明しているなら（`identity_matrix_mul_tensorPow` などの `TensorPow` への特殊化を含む）、具体版の対象について本文の証明と一対一に書き直す。必要十分版が具体版の定義を使っているなら、必要十分版の側に一般の型の定義を置く。具体版が必要十分版の特殊化であることは `*FromNecSuf.lean` だけが述べ、具体版のファイルはそれを import しない。
 - **一対一の直し方**: Lean が使うのに本文が引かない主張は、本文に根拠を足すか Lean を本文の経路に直す。本文が引くのに Lean が使わない主張は、Lean を本文の経路に直す（同じ内容をファイル内の補題として作り直すことも一致しないものに数える）。証明の後の注で触れるだけの参照は根拠に数えない。
 - 既に在る「次の一歩」の件（本文が定義のブロック無しに使っている語の解消、`matrix_exp_conjugation` の Lean が本文と一対一でない件など）は、この節の行の部品として扱い、済んだら両方に記録する。
@@ -110,7 +110,7 @@
 - 状態台帳の「次の一歩」だけを行い、別のエージェントにレビューさせる。レビューは、人手証明との 1 対 1 対応、
   mathlib の一般論への丸投げが無いこと（README 4 節）、主張を弱めていないことを見る。
 - `lake build`、`bash scripts/check-no-sorry.sh`、`bash scripts/check-end-to-end.sh`（項目 6 より前は失敗してよい。失敗の理由が
-  「定理が無い」であることだけを確かめる）、`bash scripts/check-docs-references.sh`（README と `lean/docs/` が書くパスと名前の実在）を通す。人手証明の正本や SageMath を変えたら、論文側の `npm run check` と
+  「定理が無い」であることだけを確かめる）、`bash scripts/check-docs-references.sh`（README と `lean/docs/` が書くパスと名前の実在）を通す。リポジトリ直下から `bash scripts/lean-concrete-necsuf-separation/check.sh exact-solution-of-2d-ising-model/lean`（分離）と、`lean/` で `bash scripts/connection-to-final-theorem/check.sh`（繋がり。台帳と一致すること）を通す。人手証明の正本や SageMath を変えたら、論文側の `npm run check` と
   `node sagemath/tools/verify-check-linkage.ts` も通す。
 - 人手に証明を持つブロックを足したら、同じ回でそのブロックの SageMath の検算を足し、
   `node sagemath/tools/verify-every-proof-has-check.ts` の未検算の件数が作業の前より増えていないことを確かめる。
