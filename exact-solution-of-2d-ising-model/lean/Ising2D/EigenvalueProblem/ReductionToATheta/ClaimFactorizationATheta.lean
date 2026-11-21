@@ -357,7 +357,7 @@ noncomputable def factorizationB1Symbols (a b ep em : ℂ) : Matrix (Fin 2) (Fin
 noncomputable def factorizationB2Symbols (C S : ℂ) : Matrix (Fin 2) (Fin 2) ℂ :=
   !![C, Complex.I * S; (-Complex.I) * S, C]
 
-/-- **人手の「この記号で `def_B1_theta_B2` は `B_1(θ) = !![a, ((-i)e_+)b; (ie_-)b, a]` である」**
+/-- **人手 `factorization_of_A_theta_general` の準備の「この記号で `def_B1_theta_B2` は `B_1(θ) = !![a, ((-i)e_+)b; (ie_-)b, a]` である」**
 （`a := (cosh K_1)_ℂ`、`b := (sinh K_1)_ℂ`、`e_+ := exp(i(θ)_ℂ)`、`e_- := exp((-i)(θ)_ℂ)`、`K_1, θ ∈ ℝ`）。
 
 Lean の `B1mat` は `K1 : ℂ` と `Complex.cosh K1` で定義され、指数を `θ * i`・`-θ * i` の順で書くので、
@@ -376,7 +376,7 @@ theorem factorization_B1mat_eq_symbols (K1 θ : ℝ) :
       _ = (-Complex.I) * (θ : ℂ) := (neg_mul _ _).symm                      -- `multiply_by_minus_one` の `-i(θ)_ℂ = (-i)(θ)_ℂ`
   rw [B1mat, factorizationB1Symbols, Complex.ofReal_cosh, Complex.ofReal_sinh, hplus, hminus]
 
-/-- **人手の「この記号で `def_B1_theta_B2` は `B_2 = !![C, iS; (-i)S, C]` である」**
+/-- **人手 `factorization_of_A_theta_general` の準備の「この記号で `def_B1_theta_B2` は `B_2 = !![C, iS; (-i)S, C]` である」**
 （`C := (cosh 2K_2^*)_ℂ`、`S := (sinh 2K_2^*)_ℂ`、`K_2^* ∈ ℝ`）。
 
 Lean の `B2mat` は `K2star : ℂ` と `Complex.cosh (2 * K2star)` で定義されるので、`2(K_2^*)_ℂ = (2K_2^*)_ℂ`

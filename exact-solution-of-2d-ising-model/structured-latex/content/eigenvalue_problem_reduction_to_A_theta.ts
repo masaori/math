@@ -26,6 +26,7 @@ export default defineBlocks([
     origin: { path: "_old/typst/parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ", ordinal: 8 },
     title: { tex: String.raw`\delta^{(M_{\mathrm{col}})}_{(\mu,\nu)} \text{ の定義}` },
     labels: ["def_delta_M"],
+    lean: ["Ising2D.deltaMod"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{N}_{\geq 1}`),
@@ -55,6 +56,7 @@ export default defineBlocks([
     origin: { path: "_old/typst/parts/004_転送行列/008_claim_指数関数の和とクロネッカーのデルタの関係.typ", ordinal: 9 },
     title: null,
     labels: ["exp_sum"],
+    lean: ["Ising2D.expPhase_sum"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{N}_{\geq 1}`),
@@ -143,6 +145,7 @@ export default defineBlocks([
     },
     title: { tex: String.raw`Z\text{と}Y\text{の反交換関係}` },
     labels: ["anticommutator_of_Z_and_Y"],
+    lean: ["Ising2D.anticomm_Z_Z", "Ising2D.anticomm_Z_Y", "Ising2D.anticomm_Y_Y"],
     statement: [
       displayMath(
         String.raw`[Z_\mu, Z_\nu]_+ = 2I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})} \delta^{(M_{\mathrm{col}})}_{(\mu,\nu)}, \quad
@@ -1264,6 +1267,7 @@ Y_\nu Y_\mu
     },
     title: null,
     labels: ["exp_X_Y_exp_-X"],
+    lean: ["Ising2D.matExp_conj_eq_tsum", "Ising2D.hasSum_matExp_conj", "Ising2D.matExpUnits_conj_eq_tsum"],
     statement: [
       paragraph([
         math(String.raw`d\in\mathbb{Z}_{\ge 1}`),
@@ -1419,6 +1423,7 @@ Y_\nu Y_\mu
     origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 17 },
     title: { tex: String.raw`K_2 \text{ と } K_2^* \text{ の双対関係}` },
     labels: ["duality_c2_star_eq_s2_star_c2"],
+    lean: ["Ising2D.duality_c2_star_eq_s2_star_c2", "Ising2D.s2star_eq_inv_s2", "Ising2D.c2star_eq_c2_div_s2", "Ising2D.IsingParam.c2_mul_s2star_eq_c2star"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -1537,6 +1542,7 @@ c_2^*
     },
     title: { tex: String.raw`A(\theta) \text{ の定義}` },
     labels: ["def_A_theta"],
+    lean: ["Ising2D.AMat"],
     statement: [
       paragraph([math(String.raw`\theta \in \mathbb{R}`), " について、"]),
       displayMath(
@@ -1778,6 +1784,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 4 },
     title: { tex: String.raw`\tilde\theta_\mu \text{ と指数和 } \sum_{\mu=1}^{M_{\mathrm{col}}}\exp(ik\tilde\theta_\mu)` },
     labels: ["antiperiodic_exp_sum"],
+    lean: ["Ising2D.antiperiodic_exp_sum", "Ising2D.antiperiodic_complex_exp_sum", "Ising2D.antiperiodic_exp_sum_dvd", "Ising2D.antiperiodic_exp_sum_not_dvd", "Ising2D.antiperiodic_complex_exp_sum_dvd", "Ising2D.antiperiodic_complex_exp_sum_not_dvd", "Ising2D.antiperiodic_exp_sum_zero", "Ising2D.antiperiodic_complex_exp_sum_zero", "Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt", "Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -2277,6 +2284,7 @@ k
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 5 },
     title: { tex: String.raw`\check{Z}_\mu \text{（}\tilde\theta_\mu\text{ による }Z_j\text{ の離散 Fourier 変換）}` },
     labels: ["def_half_integer_checkZ"],
+    lean: ["Ising2D.checkZ"],
     statement: [
       paragraph([
         ref("set_and_algebra_notation"),
@@ -2345,6 +2353,7 @@ k
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 5 },
     title: { tex: String.raw`\check{Y}_\mu \text{（}\tilde\theta_\mu\text{ による }Y_j\text{ の離散 Fourier 変換）}` },
     labels: ["def_half_integer_checkY"],
+    lean: ["Ising2D.checkY"],
     statement: [
       paragraph([
         ref("set_and_algebra_notation"),
@@ -2413,6 +2422,7 @@ k
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 5 },
     title: { tex: String.raw`\tilde\theta_\mu \text{ の反周期性 } \exp(-i((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}) = -1_{\mathbb C}` },
     labels: ["half_integer_phase_antiperiodicity"],
+    lean: ["Ising2D.checkPhase_antiperiodic", "Ising2D.checkPhase_M"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
@@ -2560,6 +2570,7 @@ k
     kind: "claim",
     title: { tex: String.raw`\tilde\theta_\mu \text{ の添字をずらした位相 } \exp(-i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C}) = \exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})` },
     labels: ["half_integer_phase_periodicity"],
+    lean: ["Ising2D.checkPhase_period_for_checkZY", "Ising2D.thetaTilde_period_for_checkZY"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
@@ -2695,6 +2706,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 5 },
     title: { tex: String.raw`\check{Z}_\mu \text{ の添字周期性 } \check{Z}_{\mu+M_{\mathrm{col}}} = \check{Z}_\mu` },
     labels: ["half_integer_checkZ_periodicity"],
+    lean: ["Ising2D.checkZ_period"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
@@ -2755,6 +2767,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 5 },
     title: { tex: String.raw`\check{Y}_\mu \text{ の添字周期性 } \check{Y}_{\mu+M_{\mathrm{col}}} = \check{Y}_\mu` },
     labels: ["half_integer_checkY_periodicity"],
+    lean: ["Ising2D.checkY_period"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
@@ -2815,6 +2828,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 6 },
     title: { tex: String.raw`\text{添字集合 } \check{\mathcal{M}} := \{1, \dots, M_{\mathrm{col}}\}` },
     labels: ["def_check_index_set"],
+    lean: ["Ising2D.CheckIndex", "Ising2D.thetaTilde_ne", "Ising2D.thetaTilde_pos", "Ising2D.thetaTilde_lt_two_pi", "Ising2D.checkIndex_conj", "Ising2D.conj_index_sub", "Ising2D.conj_index_self_iff", "Ising2D.thetaTilde_of_self_conj", "Ising2D.dvd_add_sub_one_iff", "Ising2D.deltaMod_add_one_eq", "Ising2D.CheckIdx"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3153,6 +3167,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
     kind: "definition",
     title: { tex: String.raw`\check{\mathcal{M}} \text{ の上の和}` },
     labels: ["def_sum_over_check_index_set"],
+    lean: ["Ising2D.CheckFermiSetup.sum_fin_eq_sum_checkIdx", "Ising2D.sum_checkIdx_eq_sum_fin_real"],
     statement: [
       paragraph([
         ref("def_check_index_set"),
@@ -3237,6 +3252,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 8 },
     title: { tex: String.raw`H_1^{(+)}, H_2 \text{ と } \check{Z}, \check{Y} \text{ の交換関係}` },
     labels: ["commutator_of_H_and_check_Z_Y"],
+    lean: ["Ising2D.lie_H1Plus_checkZ", "Ising2D.lie_H1Plus_checkY", "Ising2D.lie_H2_checkZ", "Ising2D.lie_H2_checkY"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \check{\mathcal{M}}`),
@@ -4062,6 +4078,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 3 },
     title: { tex: String.raw`\left(V_1^{(+)}\right)^{1/2} \text{ の可逆性}` },
     labels: ["V1_plus_half_invertible"],
+    lean: ["Ising2D.isUnit_V1plusHalf"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -4146,6 +4163,7 @@ h\left(V_1^{(+)}\right)^{1/2}
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 3 },
     title: { tex: String.raw`V_2 \text{ の可逆性と逆元}` },
     labels: ["V2_invertible"],
+    lean: ["Ising2D.isUnit_V2", "Ising2D.V2_mul_V2Inv", "Ising2D.V2Inv_mul_V2", "Ising2D.V2Units_inv_val"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -4339,6 +4357,7 @@ hV_2
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 3 },
     title: { tex: String.raw`T_{(V^{(+)})} := T_{\left(V_1^{(+)}\right)^{1/2}} \circ T_{V_2} \circ T_{\left(V_1^{(+)}\right)^{1/2}}` },
     labels: ["def_T_V_plus"],
+    lean: ["Ising2D.TVPlus", "Ising2D.TV_V1plusHalfUnits_V2Units"],
     statement: [
       paragraph([
         ref("def_V_plus"),
@@ -4368,6 +4387,7 @@ T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 3 },
     title: { tex: String.raw`V^{(+)} \text{ の可逆性}` },
     labels: ["V_plus_factors_invertible"],
+    lean: ["Ising2D.isUnit_VPlus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -4413,6 +4433,7 @@ V^{(+)}
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 3 },
     title: { tex: String.raw`T_{(V^{(+)})} = T_{V^{(+)}}` },
     labels: ["T_V_plus_is_conjugation"],
+    lean: ["Ising2D.TVPlus_eq_TConj", "Ising2D.TVPlus_apply_eq_conj"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -4569,6 +4590,7 @@ T_{(V^{(+)})}(X)
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 4 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ についての } n \text{ 重交換子}` },
     labels: ["nesting_of_commutator_of_H_and_check_Z"],
+    lean: ["Ising2D.nesting_H1Plus_checkZ_even", "Ising2D.nesting_H1Plus_checkZ_odd", "Ising2D.nesting_H1Plus_checkY_even", "Ising2D.nesting_H1Plus_checkY_odd", "Ising2D.nesting_H2_checkZ_even", "Ising2D.nesting_H2_checkZ_odd", "Ising2D.nesting_H2_checkY_even", "Ising2D.nesting_H2_checkY_odd"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
@@ -5087,6 +5109,7 @@ F_{n+1}
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 5 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ についての } \cosh, \sinh \text{ の展開係数への変換}` },
     labels: ["cosh_sinh_coefficient_conversion_for_check"],
+    lean: ["Ising2D.conversion_H1Plus_checkZ_even", "Ising2D.conversion_H1Plus_checkZ_odd", "Ising2D.conversion_H1Plus_checkY_even", "Ising2D.conversion_H1Plus_checkY_odd", "Ising2D.conversion_H2_checkZ_even", "Ising2D.conversion_H2_checkZ_odd", "Ising2D.conversion_H2_checkY_even", "Ising2D.conversion_H2_checkY_odd"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
@@ -5540,6 +5563,7 @@ i^{2(l+1)}(-1_{\mathbb{C}})^{l+1}
     kind: "claim",
     title: { text: "偶数番目と奇数番目が数の冪のスカラー倍である行列の列の指数級数" },
     labels: ["exponential_series_of_even_odd_power_terms"],
+    lean: ["Ising2D.exponential_series_of_even_odd_power_terms"],
     statement: [
       paragraph([
         math(String.raw`d \in \mathbb{Z}_{\geq 1}`),
@@ -5978,6 +6002,7 @@ b_n
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 6 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ についてのテイラー係数の抽出}` },
     labels: ["extract_taylor_coefficient_of_check_Z_Y"],
+    lean: ["Ising2D.extract_taylor_H1Plus_checkZ", "Ising2D.extract_taylor_H1Plus_checkY", "Ising2D.extract_taylor_H2_checkZ", "Ising2D.extract_taylor_H2_checkY"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
@@ -6288,6 +6313,7 @@ b_n
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 7 },
     title: { tex: String.raw`\text{行列の組と数の列の積}` },
     labels: ["def_pair_of_matrices_times_column_of_numbers"],
+    lean: ["Ising2D.rowMulCol"],
     statement: [
       paragraph([
         math(String.raw`d\in\mathbb{Z}_{\geq 1}`),
@@ -6327,6 +6353,7 @@ b_n
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 7 },
     title: { tex: String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}, T_{V_2} \text{ の } \check{Z}, \check{Y} \text{ への作用}` },
     labels: ["T_actions_on_check_Z_Y"],
+    lean: ["Ising2D.TConj_V1plusHalf_checkZ", "Ising2D.TConj_V1plusHalf_checkY", "Ising2D.TConj_V2_checkZ", "Ising2D.TConj_V2_checkY"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -6631,6 +6658,7 @@ T_{V_2}(\check{Y}_\mu)
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 8 },
     title: { tex: String.raw`\left(V_1^{(+)}\right)^{1/2} \text{ による共役写像の } \mathbb{C} \text{ 線型性}` },
     labels: ["linearity_of_T_on_check_Z_Y"],
+    lean: ["Ising2D.linearity_of_T_V1plusHalf"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -6710,6 +6738,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(a\check Z_\mu+b\check Y_\mu\right)
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 9 },
     title: { tex: String.raw`V_2 \text{ による共役写像の } \mathbb{C} \text{ 線型性}` },
     labels: ["linearity_of_T_V2"],
+    lean: ["Ising2D.linearity_of_T_V2"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -6789,6 +6818,7 @@ T_{V_2}\!\left(a\check Z_\mu+b\check Y_\mu\right)
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 9 },
     title: { tex: String.raw`B_1(\theta), B_2 \text{ の定義}` },
     labels: ["def_B1_theta_B2"],
+    lean: ["Ising2D.B1mat", "Ising2D.B2mat"],
     statement: [
       paragraph([
         math(String.raw`\theta \in \mathbb{R}`),
@@ -6854,6 +6884,7 @@ B_2 := \begin{pmatrix}
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 10 },
     title: { tex: String.raw`\text{行列の組と } 2\times 2 \text{ 行列の積}` },
     labels: ["def_pair_of_matrices_times_two_by_two_matrix"],
+    lean: ["Ising2D.rowMul"],
     statement: [
       paragraph([
         math(String.raw`d\in\mathbb{Z}_{\geq 1}`),
@@ -6888,6 +6919,7 @@ B_2 := \begin{pmatrix}
     kind: "claim",
     title: { tex: String.raw`\text{行列の組と } 2\times 2 \text{ 行列と数の列の積の結合律}` },
     labels: ["pair_of_matrices_times_matrix_times_column_associative"],
+    lean: ["Ising2D.rowMulCol_rowMul_assoc"],
     statement: [
       paragraph([
         math(String.raw`d\in\mathbb{Z}_{\geq 1}`),
@@ -6987,6 +7019,7 @@ B_2 := \begin{pmatrix}
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 10 },
     title: { tex: String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}, T_{V_2} \text{ の } (\check{Z}, \check{Y}) \text{ への直積作用}` },
     labels: ["calc_of_TxT_check_Z_Y"],
+    lean: ["Ising2D.actsBy_TConj_V1plusHalf", "Ising2D.actsBy_TConj_V2_check"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -7110,6 +7143,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 11 },
     title: { tex: String.raw`A(\theta) = B_1(\theta) B_2 B_1(\theta) \text{（}\theta \in \mathbb{R}\text{ 一般）}` },
     labels: ["factorization_of_A_theta_general"],
+    lean: ["Ising2D.factorization_of_A_theta_general", "Ising2D.factorization_of_A_theta_general_of_coupling", "Ising2D.factorization_prep_sq_add_sq", "Ising2D.factorization_prep_two_mul_mul", "Ising2D.factorization_prep_sq_sub_sq", "Ising2D.factorization_prep_exp_mul_exp_neg", "Ising2D.factorization_prep_exp_add_exp_neg", "Ising2D.factorization_prep_exp_eq_cos_add_sin", "Ising2D.factorization_prep_exp_neg_eq_cos_sub_sin", "Ising2D.factorization_aux_plus", "Ising2D.factorization_aux_minus", "Ising2D.factorization_prep_C_eq_S_mul_c2", "Ising2D.factorization_B1mat_eq_symbols", "Ising2D.factorization_B2mat_eq_symbols", "Ising2D.factorization_of_A_thetaTilde"],
     statement: [
       paragraph([
         math(String.raw`\theta \in \mathbb{R}`),
@@ -7572,6 +7606,7 @@ P_{21}
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 12 },
     title: { tex: String.raw`T_{(V^{(+)})} \text{ の } \check{Z}, \check{Y} \text{ への作用}` },
     labels: ["T_V_plus_check_Z_Y"],
+    lean: ["Ising2D.TVPlus_checkZ_checkY", "Ising2D.TVPlus_apply_checkZ", "Ising2D.TVPlus_apply_checkY", "Ising2D.TVPlus_checkZ_checkY_components"],
     statement: [
       paragraph([math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）", " について、"]),
       displayMath(
@@ -7783,6 +7818,7 @@ T_{(V^{(+)})}(\check{Y}_\mu)
     standing: "mainTheorem",
     title: { tex: String.raw`V^{(+)} \text{ による } \check{Z}_\mu, \check{Y}_\mu \text{ の共役の、} 2\times2 \text{ 行列 } A(\tilde\theta_\mu) \text{ による表示}` },
     labels: ["T_V_plus_check_Z_Y_via_B1_B2_B1"],
+    lean: ["Ising2D.T_V_plus_check_Z_Y_via_B1_B2_B1"],
     statement: [
       paragraph([
         math(String.raw`\mu \in \check{\mathcal{M}}`),

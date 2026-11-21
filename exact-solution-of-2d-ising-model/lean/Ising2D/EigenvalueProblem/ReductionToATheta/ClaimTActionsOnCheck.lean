@@ -318,9 +318,9 @@ theorem actsBy_TConj_V1plusHalf (hM : M ≠ 0) (K1 : ℝ) (μ : ℤ) :
     rw [TConj_V1plusHalf_checkY hM K1 μ, B1mat_zero_one, B1mat_one_one,
       checkPhase_neg_one_eq_exp hM μ]
 
-/-- **原文 `calc_of_TxT_check_Z_Y` の第 2 式**:
+/-- **`V_2` を結合定数を独立にした `V2H2Form` で書いた一般形**（原文 `calc_of_TxT_check_Z_Y` の第 2 式の形）:
 `(T_{V_2}(check(Z)_μ), T_{V_2}(check(Y)_μ)) = (check(Z)_μ, check(Y)_μ) B_2`
-（`V_2` は `V2H2Form`。人手の `V_2` 版は `actsBy_TConj_V2_check`）。 -/
+（人手の `V_2` 版は `actsBy_TConj_V2_check`）。 -/
 theorem actsBy_TConj_V2H2Form_check {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℝ) (μ : ℤ) :
     ActsBy (TConj (V2H2FormUnits M hs2 K2star)).toLinearMap (checkZ M μ) (checkY M μ)
       (B2mat K2star) := by
