@@ -5,6 +5,7 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-21（人の指示「タスクとその依存関係を洗い出し、定期実行の中で修正するよう指示して」）、Lean の点検で見つかった直しを、主経路の表の十六行と並列の表の末尾の一行（通しの定理）にした。** 行の頭に観点（繋がり・未定義の記号・一対一・分離）を書き、備考に依存を書いた。分離は新しい検査 `lean/scripts/check-concrete-necsuf-separation.sh` と台帳 `lean/concrete-necsuf-separation-ledger.txt` で数える。扱い方は runbook「Lean の点検で見つかった直し」。
 - **2026-11-21（並列・十四回目）、表の先頭「一次因子の積である」（次数の帰納法の段）を四層で済ませた**（`claim_imaginary_unit_extension_monic_polynomial_linear_factor_product`。係数が $\mathrm{Lin}_F(\omega)$ で番号 $d$ の係数が 1 の $g$ は、値が全て $\mathrm{Lin}_F(\omega)$ の $\alpha$ で $g=\prod_{i<d}(t-\widehat{\alpha(i)})$）。並列の表の次は「代数的数の全体になる」で、着手できる。
 - **2026-11-21（人の指示「数学的道具立てのパートに移すべきものを洗い出して論文冒頭で整理して」）、行「道具の節を割って道具の章へ移す」を済ませて表から消した。** 依存を辿っても格子・配位に届かず住処が可算なブロック 287 件を道具の章へ移し、道具の章を主題ごとの十四節（対数順序群、有限集合・整数・剰余類、置換・行列・行列式、代数的数と行列、代数的数係数の多項式、1 の冪根の個数と復元、多項式行列の行列式、完全マッチングと Pfaffian、有限グラフ、二次体と正錐、部分体の正錐と極大な順序付き部分体、対称式の基本定理、虚数単位を足した体の多項式の根、実代数的数の有理上下界）にまとめた。分配多項式の定義に埋まっていた代入の約束は道具の定義 `def_integer_polynomial_substitution` に切り出し、有理係数の対数順序群の定義から密度の段落を外した。格子を参照しなくても意味が Ising に固有なもの（自己双対方程式と臨界点、相転移の言明の距離、ねじれたモードと分散因子、Kac--Ward の四方向と局所対合、平面のセルと方向番号、軌道にまたがる転倒対）は本論に残した。冒頭に章「この論文について」（ゴール・章の依存の図・道具立ての整理）を足した。並列の積み上げが受け持つ虚数単位・対称式・実閉部分体の節は道具の章の中にある。
 - **2026-11-21（主経路）、臨界指数の章の未引用主張は既に主定理と判定済みと確認した。** 行き止まりの切り分けは完了し、次は道具の節の移動を一単位ずつ進める。
@@ -27,6 +28,22 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
+| 熱力学極限 | 【繋がり・一対一】周期境界の密度の定義に、論文の well-definedness の鎖を担わせる | 未着手 | Lean の `periodicFreeEnergyDensity q := sSup (periodicRealizedLowerSet q)` は、mathlib の実数の `sSup` が有界でない集合にも値を返すので、論文が定義の根拠にする下組の非空・上に有界（開境界正方形の密度の Cauchy 性の鎖）を使わない。そのため論文が到達点の根拠に数える 144 ブロック（熱力学極限 60 ほか）の Lean が、到達点の Lean の証明に入っていない。非空と上に有界の証明を定義の引数にするか、`IsLUB` の存在から定義し、到達点の依存にこの鎖を入れる。依存: なし。 |
+| 道具（置換の符号） | 【分離】置換の符号と転倒数を具体版の定義で立て直す | 未着手 | 具体版の 55 宣言が `NecSuf.AlgebraicEigenvalue.sign`・`inversionCount`・`orderedPairs` を自分の定義として使う。本文 `def_permutation_sign` どおりの定義を具体版に置いて参照を移す。互換の符号・台の交わらない積の符号（`NecSuf.KacWard.PermutationSignOrbitProduct` の定理を使う具体版 10 宣言）も具体版で示す。依存: なし。 |
+| 道具（行列式） | 【未定義の記号・分離】行列式を論文の定義どおり置換の符号付き和で定義し直す | 未着手 | `IntegerMatrix.determinant A := Matrix.det A`、`kacWardDeterminant M := Matrix.det …` など、具体版の行列式が mathlib の `Matrix.det` の別名で、論文の和の形は後から補題で結んでいる。論文の和で定義し、`Matrix.det` との一致は補題一本に留める。具体版が使う導出の定理（`qbarPolynomial_det_row_expansion_from_necSuf`・`qbarPolynomial_det_mul_function_expansion_from_necSuf`・`qbarPolynomial_fixedPointFree_sum_sign_from_necSuf`）を具体版の証明に置き換える。依存: 置換の符号の行。 |
+| 道具（行シフトの軌道） | 【分離】行シフトの軌道と周期を具体版で示す | 未着手 | 具体版の 16 宣言が `NecSuf.AlgebraicEigenvalue` の `iterLeft`・`orbit`・`minimalPeriod` とその定理（`RowShiftOrbit`・`RowShiftPeriod`・`ShiftMatrixOrder`・`RowShiftOrbitPartition`）を使う。依存: なし。 |
+| 熱力学極限 | 【分離】正の有理数の冪の正値性と部分和を具体版で示す | 未着手 | 具体版の 28 宣言が `NecSuf.ThermodynamicLimit.pow_pos_by_induction` を、2 宣言が `NecSuf.FisherZero.nonemptyPartialSum` を使う。依存: なし。 |
+| 離散 Whitney 系 | 【分離】回転と回転値を具体版の定義で立て直す | 未着手 | 具体版の 58 宣言が `NecSuf.KacWard` の `Turn`・`turnValue`・`phaseOfTurn`・`reverseTurn` と `three_value_phase_ne_zero` を使う。依存: なし。 |
+| 離散 Whitney 系 | 【分離】方向の列と階段を具体版の定義で立て直す | 未着手 | `cyclicAdjacentSum`・`internalAdjacentSum`・`twoBlockSequence`・`joinDirectionSequence`・`repeatDirectionSequence`・`twoPhaseStaircase`・`orderedTwoPhaseStaircase`・`iteratedStaircase`・`oneSidedFourSegmentPath`・`fourJunctionPairs`・`fourPartClosure` とその定理を使う具体版（合わせて約 75 宣言）。依存: 回転の行。 |
+| 離散 Whitney 系 | 【分離】セルと格子の補題を具体版で示す | 未着手 | `FourCellsFormParityArcs`・`DiagonalCellPairsExcluded`・`activeVertices`・`exists_position_of_odd_count`・`periodic_closure_length_necSuf`・`firstHitStepSet` など、`NecSuf.KacWard` の残りの定義と定理を使う具体版。分離の台帳で `DEP\tconcrete` の行のうち `KacWard` の残り全部。依存: 方向の列の行。 |
+| 道具（マッチング） | 【分離】マッチングの向きの符号を具体版で示す | 未着手 | 具体版の 8 宣言が `NecSuf.AlgebraicEigenvalue` の `ascendingMatePair`・`orientationFactor`・`matchingPairWordOrientationSign` を使う。依存: 置換の符号の行。 |
+| Kac--Ward 行列の反対称化 | 【分離】必要十分版が使う具体版のマッチングと置換の定義を、必要十分版の側に立てる | 未着手 | `NecSuf.KacWard` の 98 定数が具体版の `PerfectMatching`・`FixedPointFreeInvolution`・`perfectMatchingMate`・`matchingPair*`・`finitePermutation*`・`finiteMapIterate`・`consecutivePairs` などを使う。必要十分版に一般の型の定義を置き、具体版への参照を外す。依存: マッチングの向きの符号の行（同じファイルを触る）。 |
+| （全章） | 【分離】導出の定理を導出のファイルへ移し、import を分ける | 未着手 | 具体版のファイルに置いた `*_from_necSuf`（例: `KacWard/ClosedWalkRotationPhase.lean`）を `*FromNecSuf.lean` へ移し、分離の台帳の `IMPORT` の行（具体版→必要十分版・導出、必要十分版→具体版）を全て消す。依存: 上の【分離】の行の全て。 |
+| （全章） | 【分離】分離の台帳の残りを零にする | 未着手 | 上の行で扱わなかった `concrete-necsuf-separation-ledger.txt` の行を一件ずつ直す。台帳が空になり、`check-concrete-necsuf-separation.sh` の四つの件数が全て 0 になったら済み。依存: 導出を移す行。 |
+| 道具（有限グラフ） | 【未定義の記号】有限単純グラフ・道・閉路・木を論文の定義どおり具体版で定義する | 未着手 | `FiniteSimpleGraph n := SimpleGraph (Fin n)` で、道・閉路・木は mathlib の `Walk.IsPath`・`IsCycle`・`IsTree`。本文 `def_finite_simple_graph` ほかは $(V,E)$、$E$ を相異なる二頂点の組の集合として定義している。本文の定義どおりに具体版を定義し、mathlib との一致は補題一本に留める。依存: なし。 |
+| 実数体への脱出と熱力学極限 | 【未定義の記号】脱出の章で使う π・指数関数・余弦・正弦・積分・極限を本文で宣言する | 未着手 | 本文はこれらを定義しない。積分は「実数体上の連続関数の Riemann 積分」と書くが、Lean の具体版は `intervalIntegral`（Lebesgue 測度による区間積分）である。本文に宣言のブロックを置き、使う性質と Lean の対応先（`Real.pi`・`Complex.exp`・`Real.cos`・`intervalIntegral`・`Filter.Tendsto`）を登録し、積分の呼び名を Lean と一致させる。依存: なし。 |
+| （全章） | 【一対一】論文の引用と Lean の依存の突き合わせを検査にする | 未着手 | ブロックごとに、Lean 具体版の証明が使う登録済みの主張（登録の無い補助補題は通り抜けて辿る）と、本文の証明が根拠として引く主張（`\blkref` と式変形の行の参照）を比べる道具を `lean/scripts/` に作り、ずれを台帳に載せて減らすだけにする（分離の検査と同じ形）。2026-11-21 の点検の測り方では、主張・定理 867 件のうち一致は 480 件、Lean が論文の引かない主張を使うものが 194 件、論文が式の根拠として引く主張を Lean が使わないものが 90 件だった。依存: なし。 |
+| （全章） | 【一対一】突き合わせの台帳のずれを一件ずつ直す | 未着手 | runbook「Lean の点検で見つかった直し」の一対一の直し方で直す。台帳が空になったら済み。依存: 突き合わせの検査の行。 |
 | 臨界指数を零点列で書く | 先頭距離の列の可算な命題 | 保留 | $L=2,\dots,8$ の七点では定義多項式の次数も実対数へ脱出した読みも一般則・収束先を一意に定めない。命題候補が立つまで本文へ項目を追加しない。 |
 
 **並列の積み上げが受け持つもの**（連続実行「可算二次元イジング: 証明の積み上げ（並列）」が上から順に進める。runbook「二本の積み上げ」）。
@@ -44,6 +61,7 @@
 |---|---|---|---|
 | 零点の詰め寄り | 正の元が平方で奇数次の多項式が根を持つ部分体に虚数単位を足すと代数的数の全体になる | 未着手 | 済んだ「一次因子の積である」（`claim_imaginary_unit_extension_monic_polynomial_linear_factor_product`）を引く合成。任意の $\xi\in\overline{\mathbb{Q}}$ について、`def_algebraic_numbers` の第三条件の零でない有理係数の多項式を最高次の係数で割って番号 $d\ge1$ の係数が 1 の $F[t]$ の元にし（$\mathbb{Q}\subset F$）、その分解と `claim_qbar_linear_factor_product_root_is_listed_root` で $\xi\in K$。よって $F(\omega)=\overline{\mathbb{Q}}$。表示 $\xi=a+b\omega$ の存在は $K=\mathrm{Lin}_F(\omega)$、一意性は済んだ `claim_imaginary_unit_extension_unique_representation`（`def_real_closed_subfield` の第四条件）。ラベルは `claim_adjoin_imaginary_unit_gives_algebraic_numbers`。 |
 | 零点の詰め寄り | 実閉部分体の存在の合成と到達点からのデータの引数の除去 | 未着手 | 上の行と、主経路の「奇数次の多項式が根を持つ」「平方の三分法」の二行と、済んだ「表示は一意」（`claim_imaginary_unit_extension_unique_representation`）が揃ってから。本文に `claim_real_closed_subfield_exists`（このラベル名は計測の道具が名指す）を立て、`def_real_closed_subfield` の「既知である」の段落をこの主張への参照に替える。Lean で `RealClosedSubfieldSqrtTwoData s` の値を作り、到達点の四つの具体版について、データ・$z$（$z^4=-1$ は `IsAlgClosed` から取れる）を引数に取らない形の定理を足して `lean:` に登録する。主経路の行を待つ間は表の先頭の行が全て済んでいれば何もしない。 |
+| （全章） | 【繋がり】到達点の四つを仮定の無い一つの通しの定理にまとめる | 未着手 | 到達点の Lean は四つの別々の定理で、実閉部分体のデータと $z^4=-1$ を満たす $z\in\overline{\mathbb{Q}}$ を引数で受け取る。上の行でデータの引数を外した後、$z$ の存在も示して引数を外し、四つの到達点を一つの Lean 定理として述べ、`check-no-sorry.sh` の対象に登録する。依存: 上の行。 |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
 割り直した理由は「前進の記録」へ 1 行で残す。

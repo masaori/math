@@ -44,6 +44,7 @@ cd lean
 bash scripts/use-shared-dependencies.sh   # 依存を用意する。**lake build の前に毎回打つ**
 lake build
 bash scripts/check-no-sorry.sh
+bash scripts/check-concrete-necsuf-separation.sh   # 具体版と必要十分版が互いを参照していないこと（既知の違反は concrete-necsuf-separation-ledger.txt。行は減らすだけ）
 ```
 
 依存（mathlib を含む `.lake/packages`、約 7.4GB）は作業ツリーごとに取らず、マシンに 1 つだけ置いた
