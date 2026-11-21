@@ -32685,6 +32685,163 @@ a^2+b^2&=c^2&&(\because\ c^2=a^2+b^2)\\
             role: "subsection",
             element: {
               kind: "section",
+              id: "zero_pinching_heading_imaginary_unit_exists",
+              labels: [],
+              title: { text: "虚数単位の存在" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_zero_pinching_claim_imaginary_unit_exists",
+                  focus: {
+                    id: "zero_pinching_claim_imaginary_unit_exists",
+                    kind: "claim",
+                    title: { text: "代数的数には平方が負の単位元になる元がある" },
+                    labels: ["claim_imaginary_unit_exists"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/imaginary-unit-exists"],
+                    lean: [
+                      "Ising2DLambda.FisherZero.imaginaryUnit_exists",
+                      "Ising2DLambda.NecSuf.FisherZero.sqrt_two_exists_necSuf",
+                      "Ising2DLambda.FisherZero.imaginaryUnit_exists_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "ある ",
+                        math(String.raw`\omega\in\overline{\mathbb{Q}}`),
+                        "（", ref("def_algebraic_numbers"), "）が存在して、",
+                      ]),
+                      displayMath(String.raw`\omega\cdot\omega=-1`),
+                      paragraph([
+                        "を満たす（",
+                        math(String.raw`-1`),
+                        " は ",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " の単位元 ",
+                        math(String.raw`1`),
+                        " の加法の逆元）。この主張は存在だけを述べ、そのような元のどれかを特定しない。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "準備。",
+                        math(String.raw`\mathbb{Q}`),
+                        " の中で ",
+                        math(String.raw`1\ne0`),
+                        " であり、",
+                        math(String.raw`\mathbb{Q}`),
+                        " は ",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " の部分体である（",
+                        ref("def_algebraic_numbers"),
+                        "）から、",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " の中でも ",
+                        math(String.raw`1\ne0`),
+                        " である。",
+                        math(String.raw`-1\in\overline{\mathbb{Q}}`),
+                        " は ",
+                        math(String.raw`1+(-1)=0`),
+                        " を満たす。多項式",
+                      ]),
+                      displayMath(String.raw`g:=t^{2}+\widehat{1}\ \in\ \overline{\mathbb{Q}}[t]`),
+                      paragraph([
+                        "と置く（",
+                        math(String.raw`t^{2}`),
+                        " は ",
+                        ref("def_qbar_polynomial_ring"),
+                        " の冪の約束、",
+                        math(String.raw`\widehat{1}`),
+                        " は ",
+                        ref("def_qbar_constant_embedding"),
+                        "）。まず ",
+                        math(String.raw`g`),
+                        " の ",
+                        math(String.raw`t^{2}`),
+                        " の係数を計算する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_2(g)
+&=\mathrm{ac}_2\bigl(t^{2}+\widehat{1}\bigr)
+&&\bigl(\because\ g\ \text{の定義}\bigr)\\
+&=\mathrm{ac}_2\bigl(t^{2}\bigr)+\mathrm{ac}_2\bigl(\widehat{1}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数}\bigr)\\
+&=1+\mathrm{ac}_2\bigl(\widehat{1}\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_poly_indeterminate_power_coefficient}\ \text{を}\ k=2,\ j=2\ \text{へ適用}\bigr)\\
+&=1+0
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\ \text{の}\ 2\ge1\ \text{番の係数}\bigr)\\
+&=1
+&&\bigl(\because\ \text{零元との和}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "準備より ",
+                        math(String.raw`1\ne0`),
+                        " であるから ",
+                        math(String.raw`\mathrm{ac}_2(g)\ne0`),
+                        " であり、",
+                        math(String.raw`g`),
+                        " は次数 1 以上の多項式である。",
+                        ref("def_algebraic_numbers"),
+                        " の代数閉性により、ある ",
+                        math(String.raw`\omega\in\overline{\mathbb{Q}}`),
+                        " が存在して ",
+                        math(String.raw`\mathrm{aev}_{\omega}(g)=0`),
+                        " を満たす（",
+                        math(String.raw`\mathrm{aev}`),
+                        " は ",
+                        ref("def_qbar_poly_evaluation"),
+                        "）。この ",
+                        math(String.raw`\omega`),
+                        " が主張の等式を満たすことを、主張の左辺から計算する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\omega\cdot\omega
+&=\mathrm{aev}_{\omega}(t)\cdot\mathrm{aev}_{\omega}(t)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{\omega}(t)=\omega\bigr)\\
+&=\mathrm{aev}_{\omega}(t\cdot t)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{は積を保つ}\bigr)\\
+&=\mathrm{aev}_{\omega}\bigl(t^{1}\cdot t\bigr)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の一乗}\ t^{1}=t\bigr)\\
+&=\mathrm{aev}_{\omega}\bigl(t^{2}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の漸化式}\ t^{2}=t^{1}\cdot t\bigr)\\
+&=\mathrm{aev}_{\omega}\bigl(t^{2}\bigr)+0
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=\mathrm{aev}_{\omega}\bigl(t^{2}\bigr)+\bigl(1+(-1)\bigr)
+&&\bigl(\because\ \text{準備の加法の逆元}\ 1+(-1)=0\bigr)\\
+&=\mathrm{aev}_{\omega}\bigl(t^{2}\bigr)+\bigl(\mathrm{aev}_{\omega}\bigl(\widehat{1}\bigr)+(-1)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の定数の値}\ \mathrm{aev}_{\omega}\bigl(\widehat{1}\bigr)=1\bigr)\\
+&=\bigl(\mathrm{aev}_{\omega}\bigl(t^{2}\bigr)+\mathrm{aev}_{\omega}\bigl(\widehat{1}\bigr)\bigr)+(-1)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&=\mathrm{aev}_{\omega}\bigl(t^{2}+\widehat{1}\bigr)+(-1)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{は和を保つ}\bigr)\\
+&=\mathrm{aev}_{\omega}(g)+(-1)
+&&\bigl(\because\ g\ \text{の定義}\bigr)\\
+&=0+(-1)
+&&\bigl(\because\ \text{上で取った}\ \mathrm{aev}_{\omega}(g)=0\bigr)\\
+&=-1
+&&\bigl(\because\ \text{零元との和}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "ゆえに ",
+                        math(String.raw`\omega\cdot\omega=-1`),
+                        " を満たす ",
+                        math(String.raw`\omega\in\overline{\mathbb{Q}}`),
+                        " が存在する。全過程は ",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " と ",
+                        math(String.raw`\overline{\mathbb{Q}}[t]`),
+                        " の有限個の加法・積・係数の取り出し・多項式の値だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "zero_pinching_heading_imaginary_unit_outside_ordered_subfield",
               labels: [],
               title: { text: "虚数単位と順序付き部分体" },

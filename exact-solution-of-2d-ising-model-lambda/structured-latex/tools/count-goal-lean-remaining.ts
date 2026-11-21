@@ -55,6 +55,7 @@ export const EXISTENCE_OBLIGATIONS = [
       "claim_maximal_ordered_subfield_odd_degree_root",
       "claim_maximal_ordered_subfield_square_trichotomy",
       "claim_imaginary_unit_extension_unique_representation",
+      "claim_imaginary_unit_exists",
     ],
   },
 ] as const;
@@ -252,6 +253,10 @@ export const PLANNED_PARTS: Record<string, { title: string; dependsOn: readonly 
       "claim_pair_shift_elementary_symmetric_is_symmetric",
       "claim_pair_shift_elementary_symmetric_subfield_coefficient",
     ],
+  },
+  claim_imaginary_unit_exists: {
+    title: "代数的数には平方が負の単位元になる元がある",
+    dependsOn: [],
   },
   claim_qbar_monic_polynomial_linear_factor_product: {
     title: "番号 d の係数が 1 の多項式は d 個の一次因子の積である",
