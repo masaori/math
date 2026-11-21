@@ -1,3 +1,4 @@
+import Ising2DLambda.KacWard.DirectionSequenceFromNecSuf
 import Ising2DLambda.KacWard.PlaneProjectionCyclicTurning
 import Ising2DLambda.NecSuf.KacWard.PlaneProjectionCyclicTurning
 
@@ -12,6 +13,7 @@ theorem planeProjection_cyclicTurning_from_necSuf (L : ℕ) [NeZero L]
     cyclicAdjacentSum (fun e f => directionPairTurning (directionNumber e) (directionNumber f))
       n (fun j => projectedUnitStep L (W j) (W (j + 1) - W j)) =
     cyclicAdjacentSum latticeStepTurning n (fun j => W (j + 1) - W j) := by
+  rw [cyclicAdjacentSum_eq_necSuf, cyclicAdjacentSum_eq_necSuf]
   apply cyclicAdjacentSum_transport_necSuf _ _ _ _ n
   · intro j hj
     exact projectedUnitStep_turning L _ _ _ _ (hunit j (by omega))

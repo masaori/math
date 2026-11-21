@@ -4,7 +4,6 @@
 本文の二区間・一接合の有限和分割を三回行い、閉じる接合を加える。
 -/
 import Ising2DLambda.KacWard.ReversedParallelStaircaseTurning
-import Ising2DLambda.NecSuf.KacWard.FourPartAdjacentSum
 
 namespace Ising2DLambda.KacWard
 

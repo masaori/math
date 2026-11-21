@@ -154,7 +154,7 @@ theorem negatedParallelStaircase_projectedTurning_zero
     (fun e f => directionPairTurning (directionNumber e) (directionNumber f)) n E = 0
   calc
     _ = cyclicAdjacentSum (fun a b => turnValue (latticeTurnOfSteps a b)) n u := by
-      apply cyclicAdjacentSum_transport_necSuf
+      apply cyclicAdjacentSum_transport
       · intro j hj
         exact hpair j (j + 1) (by omega) (by omega)
       · exact hpair (n - 1) 0 (by omega) hn

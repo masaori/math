@@ -4,7 +4,6 @@
 二列の内部和の分割、端点の代入、共通項の消去を同じ順で行う。
 -/
 import Ising2DLambda.KacWard.FourPartAdjacentSum
-import Ising2DLambda.NecSuf.KacWard.RepeatedAdjacentSum
 
 namespace Ising2DLambda.KacWard
 

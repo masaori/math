@@ -1,5 +1,6 @@
 /- 必要十分版を整数ベクトルの有限列と整数の回転表へ特殊化する。 -/
 import Ising2DLambda.KacWard.RepeatedAdjacentSum
+import Ising2DLambda.NecSuf.KacWard.RepeatedAdjacentSum
 
 namespace Ising2DLambda.KacWard
 

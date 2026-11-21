@@ -2,6 +2,7 @@
 点列の各部分を既存の反復同定・基点不変性で固定列へ移し、
 反復二列の先頭と末尾を計算する。平行移動した辺そのものは同一視しない。 -/
 import Ising2DLambda.KacWard.PeriodicLiftStepRepetition
+import Ising2DLambda.KacWard.DirectionSequence
 import Ising2DLambda.KacWard.OneSidedParallelReturn
 import Ising2DLambda.KacWard.OneSidedTransverseSteps
 import Ising2DLambda.NecSuf.KacWard.OneSidedClosureJunctions

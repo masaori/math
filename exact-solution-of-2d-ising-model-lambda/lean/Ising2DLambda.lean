@@ -1273,6 +1273,8 @@ import Ising2DLambda.KacWard.WalkTwistSign
 import Ising2DLambda.NecSuf.KacWard.ReversalDirectionShift
 import Ising2DLambda.KacWard.ReversalDirectionShift
 import Ising2DLambda.KacWard.Turn
+import Ising2DLambda.KacWard.DirectionSequence
+import Ising2DLambda.KacWard.DirectionSequenceFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.ReversalRotationPhase
 import Ising2DLambda.KacWard.ReversalRotationPhase
 import Ising2DLambda.NecSuf.KacWard.TotalTurning

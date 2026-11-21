@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-21（並列・二十一回目）、表の先頭「方向の列と階段を具体版の定義で立て直す」を三つの論法（方向の列・階段・一側閉包の四区間）に割り、方向の列を済ませた。** 具体版のファイル `KacWard/DirectionSequence.lean`（必要十分版を import しない）に本文の連結・内部和 $I_n$・循環隣接和 $C_n$（値は ℤ）・二区間の列・余りによる反復と、循環隣接和の移送と範囲内の一致の補題を置き、具体版の参照を移した。分離の台帳は 468 行から 432 行になった（宣言 33 行、import 3 行）。並列の表の次は「二相の階段と反復階段を具体版の定義で立て直す」で、着手できる。
 - **2026-11-21（並列・二十回目）、表の先頭「回転と回転値を具体版の定義で立て直す」を済ませた。** 具体版のファイル `KacWard/Turn.lean` に本文の表どおりの `Turn`・`turnValue`・`phaseOfTurn`（値は代数的数）・`reverseTurn` を置き、具体版の参照を全て移した。`three_value_phase_ne_zero` を使っていた具体版は三つの値を直接調べる証明にした。分離の台帳は 511 行から 468 行になった（宣言 39 行、import 4 行）。並列の表の次は「方向の列と階段を具体版の定義で立て直す」で、着手できる。
 - **2026-11-21（並列・十九回目）、表の先頭「通しの定理」を済ませ、並列の表に残るのは離散 Whitney 系の【分離】の三行になった。** $\zeta_8$ の存在 `claim_eighth_root_exists`（$\zeta:=(1+\omega)\cdot s^{-1}$、$\zeta\cdot\zeta=\omega$、$\zeta^4=-1$）を四層で示し、到達点の三つの具体版から $z$ の引数を外し、四つの到達点を仮定の無い一つの Lean 定理 `goalTheorems` にまとめて `check-no-sorry.sh` に登録した。次は「回転と回転値を具体版の定義で立て直す」で、着手できる。
 - **2026-11-21（主経路）、論文の証明中の引用と Lean 具体版の登録名を抽出した。** 主張・定理 876 件を対象に、証明中だけの参照と登録名を JSON へ書き出せる。次は Lean の直接依存との突き合わせである。
 - **2026-11-21（主経路）、Lean 具体版の直接依存を宣言ごとに取り出す道具を作った。** ビルド済みの Lean 環境から各具体版宣言の主張と本体が使う内部宣言を TSV に書き出す。次は本文の証明にあるラベル参照と Lean 登録名を抽出する。
-- **2026-11-21（並列・十八回目）、到達点の具体版から実閉部分体のデータの引数を外した**（三つの `_withoutRealClosedData`）。並列の表の次は「通しの定理」で、残る引数は $z^4=-1$ の $z$（本文の $\zeta_8$。存在の主張が本文に無い）である。着手できる。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -57,7 +57,8 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 離散 Whitney 系 | 【分離】方向の列と階段を具体版の定義で立て直す | 未着手 | `cyclicAdjacentSum`・`internalAdjacentSum`・`twoBlockSequence`・`joinDirectionSequence`・`repeatDirectionSequence`・`twoPhaseStaircase`・`orderedTwoPhaseStaircase`・`iteratedStaircase`・`oneSidedFourSegmentPath`・`fourJunctionPairs`・`fourPartClosure` とその定理を使う具体版（合わせて約 75 宣言）。依存: なし（回転の行は 2026-11-21 に済んだ）。 |
+| 離散 Whitney 系 | 【分離】二相の階段と反復階段を具体版の定義で立て直す | 未着手 | `twoPhaseStaircase`・`orderedTwoPhaseStaircase`・`iteratedStaircase` とその定理（`twoPhaseStaircase_difference_necSuf`・`twoPhaseStaircase_step_necSuf`・`orderedTwoPhaseStaircase_injOn_necSuf`・`iteratedStaircase_coordinate_necSuf` など）を使う具体版。具体版の `ReversedParallelStaircaseTurning`・`NegatedParallelStaircaseTurning`・`WindingTransverseStaircase`・`WindingParallelStaircase`・`IteratedTransverseStaircase` などが必要十分版のファイルを import している。依存: なし（方向の列の行は 2026-11-21 に済んだ）。 |
+| 離散 Whitney 系 | 【分離】一側閉包の四区間の道・接合対・四部分の閉包を具体版の定義で立て直す | 未着手 | `oneSidedFourSegmentPath`・`fourJunctionPairs`・`fourPartClosure` とその定理（`fourJunctionPairs_repetition_necSuf`・`oneSidedClosure_cyclicAdjacentSum_necSuf` など）を使う具体版。依存: 二相の階段と反復階段の行（`oneSidedPeriodicLiftClosure` が階段を区間に持つ）。 |
 | 離散 Whitney 系 | 【分離】セルと格子の補題を具体版で示す | 未着手 | `FourCellsFormParityArcs`・`DiagonalCellPairsExcluded`・`activeVertices`・`exists_position_of_odd_count`・`periodic_closure_length_necSuf`・`firstHitStepSet` など、`NecSuf.KacWard` の残りの定義と定理を使う具体版。分離の台帳で `DEP\tconcrete` の行のうち `KacWard` の残り全部。依存: 方向の列の行。2026-11-21 の研究管理が、回転・方向の列とともに並列の表へ移した。 |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
@@ -65,11 +66,11 @@
 
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
+- 2026-11-21（並列・二十一回目）: 前回の並列の `KacWard/Turn.lean` と、`ReversalRotationPhase`・`TotalTurning`・`ShortPairRotationPhaseNonzero` の三つの場合の直接の証明と値の一致の補題を読み直した。本文の表（直進 0／1、左回転 1／$z$、右回転 $-1$／$z^{-1}$）と一致し、修正は無かった。
 - 2026-11-21（並列・二十回目）: 前回の並列の `claim_eighth_root_exists`（準備の $s\ne0$ と $s^{-1}$、$\zeta\cdot\zeta=\omega$ の十三行、$\zeta^4$ からの七行）を読み直した。各行の根拠と記号の宣言を確かめ、修正は無かった。
 - 2026-11-21（並列・十九回目）: 前回の並列の `GoalTheoremsWithoutRealClosedData.lean`（データの取り出しと三つの `_withoutRealClosedData`）を読み直した。ファイルの冒頭の注に「$z$ はまだ引数で受け取る」とあったのを、この回で外したことに合わせて直した。数学的な修正は無かった。
 - 2026-11-21（主経路）: 前回の「開境界密度の実数極限は周期境界密度に等しい」を読み直した。証明の二つの文章参照と三行の式の根拠を照合し、修正は無かった。
 - 2026-11-21（主経路）: 前回の「開境界密度の実数極限は周期境界密度に等しい」の本文と Lean 具体版を照合し、下組の一致と上限の等式に誤りは無かった。
-- 2026-11-21（並列・十八回目）: 前回の並列の「実閉部分体と虚数単位の組の存在」（準備、第一〜第五条件、第五条件の三行の式鎖）と、定義 `def_real_closed_subfield` の存在への参照の段落を読み直した。各行の根拠と記号の宣言を確かめ、修正は無かった。
 ## 式変形の書き方の統一
 - 2026-11-21（主経路）: 「開境界密度の実数極限は周期境界密度に等しい」の三行の等式で、根拠の括弧を統一した。
 - 2026-11-21（主経路）: 「対数の冪の法則」の帰納法で、対数順序群の整数倍を使う二行の行末に定義のラベル参照を付けた。
@@ -79,8 +80,8 @@
 - 2026-11-21（主経路）: 「正の有理数より平方が小さい有理網幅」の証明で Archimedes 性の根拠を式へ付け、網幅の代入を一行ずつ示した。
 
 ## 前進の記録
+- 2026-11-21（並列・二十一回目）: 表の先頭「方向の列と階段を具体版の定義で立て直す」は、方向の列（連結・内部和・循環隣接和・二区間・反復）、二相の階段と反復階段、一側閉包の四区間の道・接合対・四部分の閉包という、定義を置き換える三つの論法を持つ（一側閉包は階段を区間に持つ）。三行に割り、方向の列を済ませた。具体版の定義は重みの値を本文どおり ℤ に固定し、列の項の型は引数で受ける（本文は整数ベクトルの列にも方向の列にも同じ記法を使う）。具体版 `OneSidedClosurePeriodDifferenceTurning` が呼んでいた必要十分版の `cyclicAdjacentSum_transport_necSuf`・`cyclicAdjacentSum_congr_range`、`OneSidedClosureNonbacktracking` の `repeatDirectionSequence_last` は具体版の補題に替えた。導出の五ファイルは `KacWard/DirectionSequenceFromNecSuf.lean` の定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を通して必要十分版を呼ぶ。具体版の `FourPartAdjacentSum`・`RepeatedAdjacentSum`・`OneSidedClosureStepSequence` から必要十分版の import を外した。
 - 2026-11-21（並列・二十回目）: 表の先頭「回転と回転値を具体版の定義で立て直す」を一つの論法（定義の置き換え）として割らずに済ませた。新しい具体版のファイル `KacWard/Turn.lean`（必要十分版を import しない）に四つの定義を置き、名前空間 `Ising2DLambda.KacWard` の中の名前が開いた必要十分版の名前より先に解決されることで、14 の具体版のファイルの参照を移した。具体版の `reversal_rotation_phase_product` と `shortPairRotationPhase_ne_zero_of_direction_ne` は必要十分版の定理を呼ばず三つの場合を直接調べる証明にした。導出の定理（`*_from_necSuf`）は、具体版の場合を必要十分版の場合へ送る `Turn.toNecSuf` と、値の一致の補題（`phaseOfTurn_eq_necSuf`・`turnValue_eq_necSuf` とその列版）を通して必要十分版を呼ぶ。四つの具体版のファイルから必要十分版 `TotalTurning` の import を外した。本文 `def_step_turning` の `lean:` を具体版の `turnValue` に替えた。
 - 2026-11-21（主経路）: 本文の証明だけの引用と Lean 具体版の登録名を抽出する道具を置いた。主張・定理 876 件のうち具体版の登録があるものは 874 件、証明中の参照があるものは 837 件だった。参照の対象ラベルの存在を検査し、証明の後の注は読まない。引用と Lean の依存の比較は次の行に残した。
 - 2026-11-21（並列・十九回目）: 表の先頭「通しの定理」は、$\zeta_8$ の存在を示す論法と、到達点の四つを一つにまとめる論法を持つが、後者は既にある具体版を並べるだけなので割らずに済ませた。本文に新しい節「四乗が負の単位元になる元の存在」を置き、`claim_eighth_root_exists`（二の平方根 $s$ と虚数単位 $\omega$ から $\zeta:=(1+\omega)\cdot s^{-1}$。$\zeta\cdot\zeta=\omega$ の十三行と $\zeta^4$ からの七行）を本文・SageMath（PASS。四つの組、負の検査は $s$ の代わりに 1）・Lean 具体版・必要十分版（可換環で、平方が 2 と $-1$ の元、$2\ne0$、零でない元の右逆元だけを仮定する）・導出版で示した。`def_rotation_phase` の「固定済み」をこの主張への参照に替え、原始性の理由を添えた。到達点の三つの `_withoutRealClosedData` から $z$ の引数を外し、`goalTheorems`（$\zeta_8$ の存在、任意の $z$ と $L\ge1$ での平方根の一意存在と有限トーラス公式、周期境界の密度、Onsager 表示、分散因子の最小値）を置いた。
 - 2026-11-21（主経路）: 「論文の引用と Lean の依存の突き合わせ」は直接依存の抽出、本文の引用と登録名の抽出、差分台帳の検査という三つの論法を持つため、台帳を三行へ割った。先頭の直接依存の抽出を Lean 環境の宣言の主張と本体を読む道具で済ませた。補助補題を越える追跡と比較の完了は主張しない。
-- 2026-11-21（並列・十八回目）: 表の先頭「到達点の四つの具体版から実閉部分体のデータと $z$ の引数を外す」は、データの除去（存在の主張で取った組を渡す）と $z$ の除去（本文に無い $\zeta_8$ の存在の主張を立てる）の二つの論法を持つ。前者だけを済ませ、後者は次の行「通しの定理」が既に受け持つのでそこへ寄せた。新しいファイルに `realClosedSubfieldData_exists`（二の平方根の存在と組の存在からデータを取る）と、周期境界の密度・Onsager 表示・分散因子の最小値の三つの `_withoutRealClosedData` を置き、`lean:` に登録した。最小値の主張は $\xi\in R$ について述べるので「組が在り、その組の任意の $\xi$ で成り立つ」の形にした。

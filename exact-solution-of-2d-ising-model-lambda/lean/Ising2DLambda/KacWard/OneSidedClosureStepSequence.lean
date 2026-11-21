@@ -4,7 +4,7 @@
 閉性・単位性・非後退性はこの列の等式には不要であり、仮定しない。
 -/
 import Ising2DLambda.KacWard.OneSidedPeriodicLiftClosure
-import Ising2DLambda.NecSuf.KacWard.FourPartAdjacentSum
+import Ising2DLambda.KacWard.DirectionSequence
 
 namespace Ising2DLambda.KacWard
 

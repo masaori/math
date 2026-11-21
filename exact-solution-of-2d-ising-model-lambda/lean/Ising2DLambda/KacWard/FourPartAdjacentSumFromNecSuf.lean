@@ -1,5 +1,6 @@
 /- 四部分の分割の必要十分版を、整数格子の歩と整数の回転表へ特殊化する。 -/
 import Ising2DLambda.KacWard.FourPartAdjacentSum
+import Ising2DLambda.NecSuf.KacWard.FourPartAdjacentSum
 
 namespace Ising2DLambda.KacWard
 
