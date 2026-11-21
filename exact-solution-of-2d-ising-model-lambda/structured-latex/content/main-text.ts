@@ -92314,7 +92314,7 @@ E^{\gamma,k_0,u}_0
                       lean: [
                         "Ising2DLambda.KacWard.firstHitLiftIndexFromWalk",
                         "Ising2DLambda.KacWard.periodicLiftClosureFromWalk",
-                        "Ising2DLambda.NecSuf.KacWard.fourPartClosure",
+                        "Ising2DLambda.KacWard.fourPartClosure",
                       ],
                       statement: [
                         paragraph([
@@ -92624,7 +92624,7 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
                       habitat: "Z",
                       lean: [
                         "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure",
-                        "Ising2DLambda.NecSuf.KacWard.oneSidedFourSegmentPath",
+                        "Ising2DLambda.KacWard.oneSidedFourSegmentPath",
                       ],
                       statement: [
                         paragraph([

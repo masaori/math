@@ -10,8 +10,6 @@ import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
-
 /-- `claim_one_sided_periodic_lift_closure_simple` の具体版。 -/
 theorem oneSidedPeriodicLiftClosure_injective
     (periodicLift upperStaircase parallelReturn lowerStaircase : ℕ → ℤ × ℤ)

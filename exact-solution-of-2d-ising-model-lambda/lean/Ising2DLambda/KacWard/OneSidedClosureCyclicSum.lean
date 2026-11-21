@@ -7,14 +7,11 @@ import Ising2DLambda.KacWard.PeriodicLiftStepRepetition
 import Ising2DLambda.KacWard.OneSidedParallelReturn
 import Ising2DLambda.KacWard.OneSidedTransverseSteps
 import Ising2DLambda.KacWard.FourPartRepeatedDifference
-import Ising2DLambda.NecSuf.KacWard.OneSidedClosureCyclicSum
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
-
 /-- 四区間の各歩の一致を、連結列の同じ位置の一致へ移す。 -/
-private theorem fourPartSequence_congr_range_concrete {Y : Type*}
+theorem fourPartSequence_congr_range_concrete {Y : Type*}
     (u v r x U V R X : ℕ → Y) (a b c d : ℕ)
     (hu : ∀ i < a, u i = U i) (hv : ∀ i < b, v i = V i)
     (hr : ∀ i < c, r i = R i) (hx : ∀ i < d, x i = X i)

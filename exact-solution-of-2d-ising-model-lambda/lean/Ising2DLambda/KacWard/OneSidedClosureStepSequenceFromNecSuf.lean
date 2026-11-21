@@ -1,5 +1,6 @@
 /- 歩ベクトル列の具体版を、隣接対を読む写像の必要十分版から導く。 -/
 import Ising2DLambda.KacWard.OneSidedClosureStepSequence
+import Ising2DLambda.KacWard.OneSidedClosureFourPartsFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.OneSidedClosureStepSequence
 
 namespace Ising2DLambda.KacWard

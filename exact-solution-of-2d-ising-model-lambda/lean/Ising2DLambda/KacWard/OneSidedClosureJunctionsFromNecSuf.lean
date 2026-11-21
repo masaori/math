@@ -1,6 +1,7 @@
 /- 具体的な四部分の同定を行い、整数格子の固定列へ必要十分版を特殊化する。 -/
 import Ising2DLambda.KacWard.DirectionSequenceFromNecSuf
 import Ising2DLambda.KacWard.OneSidedClosureJunctions
+import Ising2DLambda.KacWard.OneSidedClosureFourPartsFromNecSuf
 
 namespace Ising2DLambda.KacWard
 
@@ -20,7 +21,8 @@ theorem oneSidedClosureJunctionPairs_eq_fixed_from_necSuf
         (fun i => D (b - (i + 1)) - D (b - i)) := by
   dsimp only
   rw [oneSidedClosureJunctionPairs_normalize m L base wh wv k₀ t c hm hn hb,
-    repeatDirectionSequence_eq_necSuf, repeatDirectionSequence_eq_necSuf]
+    repeatDirectionSequence_eq_necSuf, repeatDirectionSequence_eq_necSuf,
+    fourJunctionPairs_eq_necSuf, fourJunctionPairs_eq_necSuf]
   exact fourJunctionPairs_repetition_necSuf _ _ _ _ m _ _ _ c hm hn hc
 
 end Ising2DLambda.KacWard

@@ -1,9 +1,7 @@
 import Ising2DLambda.KacWard.FirstHitConnectingStaircase
-import Ising2DLambda.NecSuf.KacWard.PeriodicLiftClosureFromWalk
+import Ising2DLambda.KacWard.OneSidedClosureFourParts
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 最初の当たりを与える、移動後の周期持ち上げの添字。 -/
 noncomputable def firstHitLiftIndexFromWalk {L m : ℕ}

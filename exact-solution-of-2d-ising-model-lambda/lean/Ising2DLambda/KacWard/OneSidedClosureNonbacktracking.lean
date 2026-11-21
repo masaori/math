@@ -478,7 +478,7 @@ theorem oneSidedClosurePoint_nonbacktracking
       W (j + 1) - W j = _ := oneSidedClosure_stepSequence p q r s
         (c * m) b (c * n) (Nat.mul_pos hc hm) hb (Nat.mul_pos hc hn)
         h12 h23 h34 j (by omega)
-      _ = z j := fourPartSequence_congr_range _ _ _ _
+      _ = z j := fourPartSequence_congr_range_concrete _ _ _ _
         (repeatDirectionSequence u m) v (repeatDirectionSequence e n) x
         (c * m) b (c * n) b hu' hv' hr' hx' j hj
   change (∀ j, j + 1 < N → W (j + 2) - W (j + 1) ≠ -(W (j + 1) - W j)) ∧

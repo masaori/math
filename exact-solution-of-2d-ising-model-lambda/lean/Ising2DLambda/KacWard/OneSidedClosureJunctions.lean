@@ -5,11 +5,9 @@ import Ising2DLambda.KacWard.PeriodicLiftStepRepetition
 import Ising2DLambda.KacWard.DirectionSequence
 import Ising2DLambda.KacWard.OneSidedParallelReturn
 import Ising2DLambda.KacWard.OneSidedTransverseSteps
-import Ising2DLambda.NecSuf.KacWard.OneSidedClosureJunctions
+import Ising2DLambda.KacWard.OneSidedClosureFourParts
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 一側閉包の各部分を局所添字で読んだ四つの接合対。 -/
 def oneSidedClosureJunctionPairs (m L : ℕ) (base : ℤ → ℤ × ℤ)

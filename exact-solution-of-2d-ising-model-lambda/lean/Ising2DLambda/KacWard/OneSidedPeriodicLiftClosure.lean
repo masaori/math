@@ -6,11 +6,9 @@
 始点へ降りる横断階段の四部分を連結する。境界の一致で閉性を示し、各部分の一歩から
 全ての連続差が単位格子ベクトルであることを示す。住処は ℕ と ℤ だけである。
 -/
-import Ising2DLambda.NecSuf.KacWard.OneSidedPeriodicLiftClosure
+import Ising2DLambda.KacWard.OneSidedClosureFourParts
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `def_one_sided_periodic_lift_closure`。第四部分を逆向きにたどる四部分の一側閉包。 -/
 def oneSidedPeriodicLiftClosure

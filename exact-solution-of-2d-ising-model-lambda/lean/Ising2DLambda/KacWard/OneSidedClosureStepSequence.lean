@@ -8,8 +8,6 @@ import Ising2DLambda.KacWard.DirectionSequence
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
-
 /-- 接合点で途切れない歩ベクトル列の四部分表示。 -/
 theorem oneSidedClosure_stepSequence
     (p q r s : ℕ → ℤ × ℤ) (a b c : ℕ)

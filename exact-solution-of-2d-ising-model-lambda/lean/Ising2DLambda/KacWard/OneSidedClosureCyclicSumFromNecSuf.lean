@@ -1,5 +1,7 @@
 /- 一側閉包の循環隣接和の同定を必要十分版から具体化する。 -/
 import Ising2DLambda.KacWard.OneSidedClosureCyclicSum
+import Ising2DLambda.KacWard.OneSidedClosureFourPartsFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.OneSidedClosureCyclicSum
 
 namespace Ising2DLambda.KacWard
 
@@ -32,6 +34,7 @@ theorem oneSidedClosure_cyclicTurning_identification_from_necSuf
   dsimp only
   obtain ⟨h12, h23, h34, hu, hv, hr, hx⟩ :=
     oneSidedClosure_concrete_parts m L base wv wh k₀ t c hm hn hb
+  simp only [oneSidedPeriodicLiftClosure, oneSidedFourSegmentPath_eq_necSuf]
   -- 点の型を整数格子、歩の写像を差、重みを整数の回転表へ特殊化する。
   exact oneSidedClosure_cyclicAdjacentSum_necSuf
     (fun x y : ℤ × ℤ => y - x) latticeStepTurning _ _ _ _ _ _ _ _
