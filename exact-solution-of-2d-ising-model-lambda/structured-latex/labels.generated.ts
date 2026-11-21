@@ -136,6 +136,7 @@ export const ALL_LABELS = [
   "claim_edge_set_horizontal_seam_parity_equals_winding_parity",
   "claim_edge_set_vertical_seam_parity_equals_winding_parity",
   "claim_edge_simple_contact_split",
+  "claim_eighth_root_exists",
   "claim_elementary_symmetric_substitution_degree_bound",
   "claim_elementary_symmetric_substitution_last_variable_zero",
   "claim_elementary_symmetric_substitution_subfield_coefficient",

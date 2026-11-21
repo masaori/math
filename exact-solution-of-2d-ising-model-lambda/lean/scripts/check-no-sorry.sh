@@ -1623,6 +1623,14 @@ targets=(
   Ising2DLambda.NecSuf.FisherZero.kw_self_dual_quadratic_equivalence_necSuf
   Ising2DLambda.FisherZero.kwSelfDual_quadratic_equivalence_from_necSuf
   Ising2DLambda.FisherZero.sqrtTwo_exists
+  Ising2DLambda.FisherZero.eighthRoot_exists
+  Ising2DLambda.NecSuf.FisherZero.eighthRoot_exists_necSuf
+  Ising2DLambda.FisherZero.eighthRoot_exists_from_necSuf
+  Ising2DLambda.RealEscape.realClosedSubfieldData_exists
+  Ising2DLambda.RealEscape.periodicFreeEnergyDensity_eq_dispersionIntegral_withoutRealClosedData
+  Ising2DLambda.RealEscape.periodicFreeEnergyDensity_onsagerForm_withoutRealClosedData
+  Ising2DLambda.RealEscape.dispersion_minimum_self_dual_point_withoutRealClosedData
+  Ising2DLambda.RealEscape.goalTheorems
   Ising2DLambda.NecSuf.FisherZero.sqrt_two_exists_necSuf
   Ising2DLambda.FisherZero.sqrtTwo_exists_from_necSuf
   Ising2DLambda.FisherZero.selfDualQuadratic_roots

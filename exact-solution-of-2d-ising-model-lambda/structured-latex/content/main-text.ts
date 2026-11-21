@@ -32842,6 +32842,164 @@ a^2+b^2&=c^2&&(\because\ c^2=a^2+b^2)\\
             role: "subsection",
             element: {
               kind: "section",
+              id: "zero_pinching_heading_eighth_root_exists",
+              labels: [],
+              title: { text: "四乗が負の単位元になる元の存在" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_zero_pinching_claim_eighth_root_exists",
+                  focus: {
+                    id: "zero_pinching_claim_eighth_root_exists",
+                    kind: "claim",
+                    title: { text: "代数的数には四乗が負の単位元になる元がある" },
+                    labels: ["claim_eighth_root_exists"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/eighth-root-exists"],
+                    lean: [
+                      "Ising2DLambda.FisherZero.eighthRoot_exists",
+                      "Ising2DLambda.NecSuf.FisherZero.eighthRoot_exists_necSuf",
+                      "Ising2DLambda.FisherZero.eighthRoot_exists_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "ある ",
+                        math(String.raw`\zeta\in\overline{\mathbb{Q}}`),
+                        "（", ref("def_algebraic_numbers"), "）が存在して、",
+                      ]),
+                      displayMath(String.raw`\zeta^{4}=-1`),
+                      paragraph([
+                        "を満たす（",
+                        math(String.raw`\zeta^{4}`),
+                        " は冪の約束 ",
+                        math(String.raw`\zeta^{1}=\zeta`), "、",
+                        math(String.raw`\zeta^{k+1}=\zeta^{k}\cdot\zeta`),
+                        " による四乗、",
+                        math(String.raw`-1`),
+                        " は単位元 ",
+                        math(String.raw`1`),
+                        " の加法の逆元）。この主張は存在だけを述べ、そのような元のどれかを特定しない。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "準備。",
+                        ref("claim_sqrt_two_exists"),
+                        " により、",
+                        math(String.raw`s\cdot s=2`),
+                        " を満たす ",
+                        math(String.raw`s\in\overline{\mathbb{Q}}`),
+                        " を一つ取る。",
+                        ref("claim_imaginary_unit_exists"),
+                        " により、",
+                        math(String.raw`\omega\cdot\omega=-1`),
+                        " を満たす ",
+                        math(String.raw`\omega\in\overline{\mathbb{Q}}`),
+                        " を一つ取る。",
+                        math(String.raw`\mathbb{Q}`),
+                        " の中で ",
+                        math(String.raw`2\ne0`),
+                        " であり、",
+                        math(String.raw`\mathbb{Q}`),
+                        " は ",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " の部分体である（",
+                        ref("def_algebraic_numbers"),
+                        "）から、",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " の中でも ",
+                        math(String.raw`2\ne0`),
+                        " である。",
+                        math(String.raw`s=0`),
+                        " と仮定すると ",
+                        math(String.raw`2=s\cdot s=0\cdot0=0`),
+                        " となって矛盾するので、",
+                        math(String.raw`s\ne0`),
+                        " である。",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " は体なので、",
+                        math(String.raw`s\cdot s^{-1}=1`),
+                        " を満たす ",
+                        math(String.raw`s^{-1}\in\overline{\mathbb{Q}}`),
+                        " がある。",
+                      ]),
+                      displayMath(String.raw`\zeta:=(1+\omega)\cdot s^{-1}\ \in\ \overline{\mathbb{Q}}`),
+                      paragraph([
+                        "と置く。まず ",
+                        math(String.raw`\zeta\cdot\zeta`),
+                        " を計算する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\zeta\cdot\zeta
+&=\bigl((1+\omega)\cdot s^{-1}\bigr)\cdot\bigl((1+\omega)\cdot s^{-1}\bigr)
+&&\bigl(\because\ \zeta\ \text{の定義}\bigr)\\
+&=\bigl((1+\omega)\cdot(1+\omega)\bigr)\cdot\bigl(s^{-1}\cdot s^{-1}\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則と結合則}\bigr)\\
+&=\bigl((1\cdot1+1\cdot\omega)+(\omega\cdot1+\omega\cdot\omega)\bigr)\cdot\bigl(s^{-1}\cdot s^{-1}\bigr)
+&&\bigl(\because\ \text{分配則}\bigr)\\
+&=\bigl((1+\omega)+(\omega+\omega\cdot\omega)\bigr)\cdot\bigl(s^{-1}\cdot s^{-1}\bigr)
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
+&=\bigl((1+\omega)+(\omega+(-1))\bigr)\cdot\bigl(s^{-1}\cdot s^{-1}\bigr)
+&&\bigl(\because\ \text{準備の}\ \omega\cdot\omega=-1\bigr)\\
+&=\bigl((\omega+\omega)+(1+(-1))\bigr)\cdot\bigl(s^{-1}\cdot s^{-1}\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則と結合則}\bigr)\\
+&=(\omega+\omega)\cdot\bigl(s^{-1}\cdot s^{-1}\bigr)
+&&\bigl(\because\ 1+(-1)=0\ \text{と零元との和}\bigr)\\
+&=\bigl(\omega\cdot(1+1)\bigr)\cdot\bigl(s^{-1}\cdot s^{-1}\bigr)
+&&\bigl(\because\ \text{分配則と単位元との積}\bigr)\\
+&=(\omega\cdot2)\cdot\bigl(s^{-1}\cdot s^{-1}\bigr)
+&&\bigl(\because\ 1+1=2\bigr)\\
+&=\bigl(\omega\cdot(s\cdot s)\bigr)\cdot\bigl(s^{-1}\cdot s^{-1}\bigr)
+&&\bigl(\because\ \text{準備の}\ s\cdot s=2\bigr)\\
+&=\omega\cdot\bigl((s\cdot s^{-1})\cdot(s\cdot s^{-1})\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則と結合則}\bigr)\\
+&=\omega\cdot(1\cdot1)
+&&\bigl(\because\ \text{準備の}\ s\cdot s^{-1}=1\bigr)\\
+&=\omega
+&&\bigl(\because\ \text{単位元との積}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "この ",
+                        math(String.raw`\zeta`),
+                        " が主張の等式を満たすことを、主張の左辺から計算する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\zeta^{4}
+&=\zeta^{3}\cdot\zeta
+&&\bigl(\because\ \text{冪の約束}\ \zeta^{4}=\zeta^{3}\cdot\zeta\bigr)\\
+&=\bigl(\zeta^{2}\cdot\zeta\bigr)\cdot\zeta
+&&\bigl(\because\ \text{冪の約束}\ \zeta^{3}=\zeta^{2}\cdot\zeta\bigr)\\
+&=\bigl((\zeta^{1}\cdot\zeta)\cdot\zeta\bigr)\cdot\zeta
+&&\bigl(\because\ \text{冪の約束}\ \zeta^{2}=\zeta^{1}\cdot\zeta\bigr)\\
+&=\bigl((\zeta\cdot\zeta)\cdot\zeta\bigr)\cdot\zeta
+&&\bigl(\because\ \text{冪の約束}\ \zeta^{1}=\zeta\bigr)\\
+&=(\zeta\cdot\zeta)\cdot(\zeta\cdot\zeta)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
+&=\omega\cdot\omega
+&&\bigl(\because\ \text{上で示した}\ \zeta\cdot\zeta=\omega\bigr)\\
+&=-1
+&&\bigl(\because\ \text{準備の}\ \omega\cdot\omega=-1\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "ゆえに ",
+                        math(String.raw`\zeta^{4}=-1`),
+                        " を満たす ",
+                        math(String.raw`\zeta\in\overline{\mathbb{Q}}`),
+                        " が存在する。全過程は ",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " の有限個の加法・積・逆元だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "zero_pinching_heading_imaginary_unit_outside_ordered_subfield",
               labels: [],
               title: { text: "虚数単位と順序付き部分体" },
@@ -79857,7 +80015,10 @@ const chapter_kac_ward = defineSection({
                           statement: [
                             paragraph([
                               math(String.raw`\zeta_8\in\overline{\mathbb Q}`), " を ",
-                              math(String.raw`\zeta_8^4=-1`), " を満たす固定済みの原始 8 乗根とする。",
+                              math(String.raw`\zeta_8^4=-1`), " を満たす元とする（そのような元は ",
+                              ref("claim_eighth_root_exists"), " により存在し、その一つを固定する。",
+                              math(String.raw`\zeta_8^8=(\zeta_8^4)^2=1`), " かつ ", math(String.raw`\zeta_8^4=-1\ne1`),
+                              " なので、", math(String.raw`\zeta_8`), " は原始 8 乗根である）。",
                               math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " に対する回転位相を",
                             ]),
                             displayMath(String.raw`\rho(\vec e,\vec f):=
