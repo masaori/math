@@ -109032,9 +109032,9 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                         displayMath(String.raw`\begin{aligned}
 \mathrm{aev}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
 &=\mathrm{Ev}^{F}_{\xi}(Z_L)
-&&(\because\ \blkref{claim_integer_polynomial_qbar_lift_evaluation})\\
+&&\bigl(\because\ \blkref{claim_integer_polynomial_qbar_lift_evaluation}\bigr)\\
 &=0
-&&(\because\ \xi\in\mathcal{F}_{L}\text{。}\ \blkref{def_finite_lattice_fisher_zeros})
+&&\bigl(\because\ \xi\in\mathcal{F}_{L}\text{ と }\blkref{def_finite_lattice_fisher_zeros}\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。", ref("claim_partition_polynomial_qbar_lift_nonzero_coeff_bound"),
@@ -109048,13 +109048,13 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                         displayMath(String.raw`\begin{aligned}
 N_{L}(c,r)
 &=\bigl\lvert\mathcal{F}_{L}\cap D(c,r)\bigr\rvert
-&&(\because\ \blkref{def_fisher_zero_count_in_rational_disc})\\
+&&\bigl(\because\ \blkref{def_fisher_zero_count_in_rational_disc}\bigr)\\
 &=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}1
-&&(\because\ \text{有限集合の元の個数は各元を 1 と数えた有限和})\\
+&&\bigl(\because\ \text{有限集合の元の個数は各元を 1 と数えた有限和}\bigr)\\
 &\le\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
-&&(\because\ \text{準備の各項 }1\le\mathrm{mult}_{\xi}\text{ と有限和の単調性})\\
+&&\bigl(\because\ \text{準備の各項 }1\le\mathrm{mult}_{\xi}\text{ と有限和の単調性}\bigr)\\
 &=N^{\mathrm{mult}}_{L}(c,r)
-&&(\because\ \blkref{def_fisher_zero_mult_count_in_rational_disc})
+&&\bigl(\because\ \blkref{def_fisher_zero_mult_count_in_rational_disc}\bigr)
 \end{aligned}`),
                         paragraph([
                           "これで主張を得た。現れるのは代数的数の有限集合と自然数の有限和だけであり、",
