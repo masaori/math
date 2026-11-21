@@ -36738,706 +36738,6 @@ E&=R&&(\because\ \blkref{claim_enumerated_ordered_subfield_is_maximal}\text{ の
               }],
             },
           },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "tools_heading_zero_pinching_heading_real_closed_subfield",
-              labels: [],
-              title: { text: "実閉部分体での平方と実代数的数の順序" },
-              children: [
-                {
-                  role: "primary",
-                  element: {
-                    kind: "elementGroup",
-                    id: "group_of_zero_pinching_def_real_closed_subfield",
-                    focus:
-                      {
-                        id: "zero_pinching_def_real_closed_subfield",
-                        kind: "definition",
-                        title: { text: "実閉部分体と虚数単位" },
-                        labels: ["def_real_closed_subfield"],
-                        habitat: "Qbar",
-                        lean: [
-                          "Ising2DLambda.FisherZero.RealClosedSubfieldSqrtTwoData",
-                          "Ising2DLambda.FisherZero.realClosedOmega_pow_four",
-                          "Ising2DLambda.NecSuf.FisherZero.omega_pow_four_of_square_neg_one_necSuf",
-                          "Ising2DLambda.FisherZero.realClosedOmega_pow_four_from_necSuf",
-                        ],
-                        verification: ["sagemath/check/real-closed-subfield"],
-                        statement: [
-                          paragraph([
-                            math(String.raw`\overline{\mathbb{Q}}`),
-                            "（",
-                            ref("def_algebraic_numbers"),
-                            "）の部分集合 ",
-                            math(String.raw`R`),
-                            " と元 ",
-                            math(String.raw`\omega\in\overline{\mathbb{Q}}`),
-                            " の組 ",
-                            math(String.raw`(R,\omega)`),
-                            " であって、次の 5 条件を満たすものを 1 つ固定する。",
-                            "ここで ",
-                            math(String.raw`s\in\overline{\mathbb{Q}}`),
-                            " は、",
-                            ref("claim_sqrt_two_exists"),
-                            " により存在が示され、本文全体で固定している ",
-                            math(String.raw`s\cdot s=2`),
-                            " を満たす元である。",
-                          ]),
-                          list([
-                            [
-                              math(String.raw`R`),
-                              " は ",
-                              math(String.raw`\overline{\mathbb{Q}}`),
-                              " の部分体である。",
-                            ],
-                            [
-                              math(String.raw`R`),
-                              " の任意の元 ",
-                              math(String.raw`z`),
-                              " について、次の 3 つのうちちょうど 1 つが成り立つ。",
-                              "「",
-                              math(String.raw`z`),
-                              " は ",
-                              math(String.raw`R`),
-                              " の零元である」「ある零元でない ",
-                              math(String.raw`w\in R`),
-                              " が存在して ",
-                              math(String.raw`z=w\cdot w`),
-                              "」「ある零元でない ",
-                              math(String.raw`w\in R`),
-                              " が存在して ",
-                              math(String.raw`-z=w\cdot w`),
-                              "」。",
-                            ],
-                            [
-                              math(String.raw`\omega\cdot\omega=-1`),
-                              " である。",
-                            ],
-                            [
-                              math(String.raw`\overline{\mathbb{Q}}`),
-                              " の任意の元 ",
-                              math(String.raw`\xi`),
-                              " について、",
-                              math(String.raw`\xi=a+b\cdot\omega`),
-                              " を満たす組 ",
-                              math(String.raw`(a,b)\in R\times R`),
-                              " がちょうど 1 つ存在する。",
-                            ],
-                            [
-                              "ある零元でない ",
-                              math(String.raw`w\in R`),
-                              " が存在して ",
-                              math(String.raw`s=w\cdot w`),
-                              "。",
-                            ],
-                          ]),
-                          paragraph([
-                            "第 5 条件は、固定済みの根 ",
-                            math(String.raw`s`),
-                            " と組 ",
-                            math(String.raw`(R,\omega)`),
-                            " の整合を要求する。第 1〜4 条件だけでは ",
-                            math(String.raw`s`),
-                            " と ",
-                            math(String.raw`-s`),
-                            " のどちらが ",
-                            math(String.raw`R`),
-                            " の平方かは組の選び方に依存して決まらず、",
-                            "のちに臨界点を有理数で近似するときの符号が主張として述べられない。",
-                            "第 5 条件はこの選び方を「",
-                            math(String.raw`s`),
-                            " が平方である側」に固定する。",
-                          ]),
-                          paragraph([
-                            "この 5 条件を満たす組が存在すること（Artin--Schreier の定理。",
-                            math(String.raw`s`),
-                            " を正とする順序を入れた順序体 ",
-                            math(String.raw`\mathbb{Q}(s)`),
-                            " の実閉包を ",
-                            math(String.raw`\overline{\mathbb{Q}}`),
-                            " の中に取れば、正の元はそこで平方になる）、および 2 つあれば ",
-                            math(String.raw`\mathbb{Q}(s)`),
-                            " の元を動かさない ",
-                            math(String.raw`\overline{\mathbb{Q}}`),
-                            " の体の同型で互いに移り合うことは既知である。",
-                            "以下ではその 1 つを固定して使い、どれを固定したかに依存する主張は述べない。",
-                            math(String.raw`R`),
-                            " の元を実代数的数と呼ぶ。この名前は実数体を使うことを意味しない（",
-                            math(String.raw`R`),
-                            " は ",
-                            math(String.raw`\overline{\mathbb{Q}}`),
-                            " の部分集合であり、",
-                            math(String.raw`\overline{\mathbb{Q}}`),
-                            " が可算なので ",
-                            math(String.raw`R`),
-                            " も可算である）。",
-                          ]),
-                          paragraph([
-                            "また、冪の定義と第 3 条件から",
-                          ]),
-                          displayMath(String.raw`\begin{aligned}
-\omega^{4}
-&=\omega^{2}\cdot\omega^{2}
-&&(\because\ \text{自然数の指数法則 }4=2+2)\\
-&=(\omega\cdot\omega)\cdot(\omega\cdot\omega)
-&&(\because\ \text{二乗の定義})\\
-&=(-1)\cdot(-1)
-&&(\because\ \omega\cdot\omega=-1)\\
-&=1
-&&(\because\ \overline{\mathbb{Q}}\ \text{の乗法})
-\end{aligned}`),
-                          paragraph([
-                            "である。したがって ",
-                            math(String.raw`\omega\in\mu_{4}`),
-                            "（",
-                            ref("def_root_of_unity_set"),
-                            "）である。第 2 条件（平方の三分法）はのちに ",
-                            math(String.raw`R`),
-                            " へ順序を与えるために使い、第 4 条件（一意表示）はのちに零点と有理点の距離の二乗を定めるために使う。",
-                            "第 5 条件（平方根との整合）はのちに臨界点の順序の下界と上界、",
-                            "したがって臨界点を近似する有理数の符号を定めるために使う。",
-                            "ここでは組の固定だけを行う。実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                      },
-                  },
-                },
-                {
-                  role: "primary",
-                  element: {
-                    kind: "elementGroup",
-                    id: "group_of_zero_pinching_def_real_algebraic_strict_order",
-                    beforeFocus: [
-                      {
-                        role: "supportingClaim",
-                        element:
-                          {
-                            id: "zero_pinching_claim_rationals_are_real_algebraic",
-                            kind: "claim",
-                            title: { text: "有理数は実代数的数である" },
-                            labels: ["claim_rationals_are_real_algebraic"],
-                            habitat: "Qbar",
-                            lean: [
-                              "Ising2DLambda.FisherZero.rational_mem_realClosedCarrier",
-                              "Ising2DLambda.NecSuf.FisherZero.rational_mem_of_closure_necSuf",
-                              "Ising2DLambda.FisherZero.rational_mem_realClosedCarrier_from_necSuf",
-                            ],
-                            verification: ["sagemath/check/real-algebraic-order"],
-                            statement: [
-                              paragraph([
-                                math(String.raw`\mathbb{Q}`),
-                                " の任意の元 ",
-                                math(String.raw`q`),
-                                "（",
-                                ref("def_algebraic_numbers"),
-                                " の第 1 条件により ",
-                                math(String.raw`\overline{\mathbb{Q}}`),
-                                " の元でもある）は ",
-                                math(String.raw`R`),
-                                "（",
-                                ref("def_real_closed_subfield"),
-                                "）の元である。すなわち、部分集合として ",
-                                math(String.raw`\mathbb{Q}\subseteq R`),
-                                " が成り立つ。",
-                              ]),
-                            ],
-                            proof: [
-                              paragraph([ref("def_real_closed_subfield"), " の第一条件により、", math(String.raw`R\subseteq\overline{\mathbb Q}`), " は零元・単位元を含む部分体である。自然数 ", math(String.raw`n\in\mathbb N`), " の所属を帰納法で示す。後者の場合は ", math(String.raw`n\in R`), " を仮定する。"]),
-                              displayMath(String.raw`\begin{aligned}
-0&\in R&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の部分体条件}\bigr),\\
-1&\in R&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の部分体条件}\bigr),\\
-n+1&\in R&&\bigl(\because\ n,1\in R\text{ と部分体の加法閉性}\bigr).
-\end{aligned}`),
-                              paragraph(["零の場合と後者の場合から全ての自然数が ", math(String.raw`R`), " に属する。整数 ", math(String.raw`k\in\mathbb Z`), " は自然数、または自然数 ", math(String.raw`n\in\mathbb N`), " の加法逆元である。前者は上の帰納法で済み、後者では"]),
-                              displayMath(String.raw`\begin{aligned}
--n&\in R&&\bigl(\because\ n\in R\text{ と部分体の加法逆元への閉性}\bigr),\\
-k&\in R&&\bigl(\because\ k=-n\text{ の代入}\bigr).
-\end{aligned}`),
-                              paragraph(["有理数 ", math(String.raw`q\in\mathbb Q`), " を任意に取り、", math(String.raw`k\in\mathbb Z`), "、", math(String.raw`n\in\mathbb N`), "、", math(String.raw`1\le n`), " で ", math(String.raw`q=k\cdot n^{-1}`), " と表す。有理数の定義によるこの表示を使うと、"]),
-                              displayMath(String.raw`\begin{aligned}
-n&\ne0&&\bigl(\because\ 1\le n\text{ と自然数の順序}\bigr),\\
-n^{-1}&\in R&&\bigl(\because\ n\in R,\ n\ne0\text{ と部分体の乗法逆元への閉性}\bigr),\\
-k\cdot n^{-1}&\in R&&\bigl(\because\ k,n^{-1}\in R\text{ と部分体の乗法閉性}\bigr),\\
-q&\in R&&\bigl(\because\ q=k\cdot n^{-1}\text{ の代入}\bigr).
-\end{aligned}`),
-                              paragraph(["以上は部分体の四則だけで閉じ、実数体も複素数体も現れない。"]),
-                            ],
-                          },
-                      },
-                      {
-                        role: "supportingClaim",
-                        element:
-                          {
-                            id: "zero_pinching_claim_neg_one_not_square",
-                            kind: "claim",
-                            title: { text: "零元でない実代数的数の平方は -1 にならない" },
-                            labels: ["claim_neg_one_not_square"],
-                            habitat: "Qbar",
-                            lean: [
-                              "Ising2DLambda.FisherZero.negOne_not_square_realClosedCarrier",
-                              "Ising2DLambda.NecSuf.FisherZero.positive_negative_exclusive_necSuf",
-                              "Ising2DLambda.FisherZero.negOne_not_square_realClosedCarrier_from_necSuf",
-                            ],
-                            verification: ["sagemath/check/real-algebraic-order"],
-                            statement: [
-                              paragraph([
-                                math(String.raw`R`),
-                                "（",
-                                ref("def_real_closed_subfield"),
-                                "）の零元でない任意の元 ",
-                                math(String.raw`w`),
-                                " について、",
-                                math(String.raw`w\cdot w\ne-1`),
-                                " である。",
-                              ]),
-                            ],
-                            proof: [
-                              paragraph(["背理法による。", math(String.raw`w\in R`), " が ", math(String.raw`w\ne0`), " かつ ", math(String.raw`w\cdot w=-1`), " を満たすと仮定し、", math(String.raw`z:=1\in R`), " と置く。", ref("claim_rationals_are_real_algebraic"), " により ", math(String.raw`z\in R`), " である。"]),
-                              displayMath(String.raw`\begin{aligned}
-z&=1&&\bigl(\because\ z\text{ の定義}\bigr)\\
-&=1\cdot1&&\bigl(\because\ \text{乗法単位元則}\bigr).
-\end{aligned}`),
-                              paragraph([math(String.raw`1\ne0`), " は体の公理による。", ref("def_real_closed_subfield"), " の平方の三分法の第二の場合が ", math(String.raw`z`), " について成り立つ。証人は ", math(String.raw`w':=1\in R`), " であり、", math(String.raw`w'\ne0`), " である。一方、"]),
-                              displayMath(String.raw`\begin{aligned}
--z&=-1&&\bigl(\because\ z=1\bigr)\\
-&=w\cdot w&&\bigl(\because\ \text{背理法の仮定}\bigr).
-\end{aligned}`),
-                              paragraph([math(String.raw`w\in R`), " かつ ", math(String.raw`w\ne0`), " なので、", ref("def_real_closed_subfield"), " の平方の三分法の第三の場合も ", math(String.raw`z`), " について成り立つ。第二の場合と第三の場合の同時成立は三分法の排他性に反する。従って ", math(String.raw`w\cdot w\ne-1`), " である。"]),
-                            ],
-                          },
-                      },
-                    ],
-                    focus:
-                      {
-                        id: "zero_pinching_def_real_algebraic_strict_order",
-                        kind: "definition",
-                        title: { text: "実代数的数の狭義順序" },
-                        labels: ["def_real_algebraic_strict_order"],
-                        habitat: "Qbar",
-                        lean: [
-                          "Ising2DLambda.FisherZero.realAlgebraicLt",
-                          "Ising2DLambda.NecSuf.FisherZero.strictOrderOfDifference",
-                        ],
-                        verification: ["sagemath/check/real-algebraic-order"],
-                        statement: [
-                          paragraph([
-                            math(String.raw`R`),
-                            "（",
-                            ref("def_real_closed_subfield"),
-                            "）の元 ",
-                            math(String.raw`a,b`),
-                            " に対し、",
-                            math(String.raw`a<_{R}b`),
-                            " とは、ある零元でない ",
-                            math(String.raw`w\in R`),
-                            " が存在して ",
-                            math(String.raw`b-a=w\cdot w`),
-                            " となることをいう。",
-                          ]),
-                          paragraph([
-                            "この定義が意味をもつこと: ",
-                            math(String.raw`b-a\in R`),
-                            " である（",
-                            ref("def_real_closed_subfield"),
-                            " の第 1 条件。部分体は加法と加法逆元で閉じる）。",
-                            "全体は ",
-                            math(String.raw`\overline{\mathbb{Q}}`),
-                            " の部分集合 ",
-                            math(String.raw`R`),
-                            " の中の定義であり、実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                      },
-                  },
-                },
-                {
-                  role: "primary",
-                  element: {
-                    kind: "elementGroup",
-                    id: "group_of_zero_pinching_claim_real_algebraic_order_trichotomy",
-                    beforeFocus: [
-                      {
-                        role: "prerequisiteDefinition",
-                        element:
-                          {
-                            id: "zero_pinching_def_real_algebraic_nonstrict_order",
-                            kind: "definition",
-                            title: { text: "実代数的数の広義順序" },
-                            labels: ["def_real_algebraic_nonstrict_order"],
-                            habitat: "Qbar",
-                            lean: [
-                              "Ising2DLambda.FisherZero.realAlgebraicLe",
-                              "Ising2DLambda.NecSuf.FisherZero.nonstrictOrderOfDifference",
-                            ],
-                            verification: ["sagemath/check/real-algebraic-order"],
-                            statement: [
-                              paragraph([
-                                math(String.raw`R`),
-                                "（",
-                                ref("def_real_closed_subfield"),
-                                "）の元 ",
-                                math(String.raw`a,b`),
-                                " に対し、",
-                                math(String.raw`a\le_{R}b`),
-                                " とは、",
-                                math(String.raw`a<_{R}b`),
-                                " または ",
-                                math(String.raw`a=b`),
-                                " となることをいう。ここで ",
-                                math(String.raw`<_{R}`),
-                                " は ",
-                                ref("def_real_algebraic_strict_order"),
-                                " で定めた記号である。",
-                              ]),
-                            ],
-                          },
-                      },
-                    ],
-                    focus:
-                      {
-                        id: "zero_pinching_claim_real_algebraic_order_trichotomy",
-                        kind: "claim",
-                        standing: "mainTheorem",
-                        title: { text: "実代数的数の狭義順序の三分法" },
-                        labels: ["claim_real_algebraic_order_trichotomy"],
-                        habitat: "Qbar",
-                        lean: [
-                          "Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy",
-                          "Ising2DLambda.NecSuf.FisherZero.strictOrderOfDifference_trichotomy_necSuf",
-                          "Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy_from_necSuf",
-                        ],
-                        verification: ["sagemath/check/real-algebraic-order"],
-                        statement: [
-                          paragraph([
-                            "任意の ",
-                            math(String.raw`a,b\in R`),
-                            " について「",
-                            math(String.raw`a<_{R}b`),
-                            "」「",
-                            math(String.raw`a=b`),
-                            "」「",
-                            math(String.raw`b<_{R}a`),
-                            "」のちょうど 1 つが成り立つ。",
-                          ]),
-                        ],
-                        proof: [
-                          paragraph([
-                            ref("def_real_closed_subfield"),
-                            " の部分体条件より ",
-                            math(String.raw`z:=b-a\in R`),
-                            " である。この ",
-                            math(String.raw`z`),
-                            " に同定義の第 2 条件を適用する。第 1 の場合は",
-                          ]),
-                          displayMath(String.raw`\begin{aligned}
-z=0&\iff b-a=0&&\bigl(\because\ z=b-a\bigr)\\
-&\iff a=b&&\bigl(\because\ R\text{ の加法群の四則}\bigr).
-\end{aligned}`),
-                          paragraph(["第 2 の場合には零元でない ", math(String.raw`w\in R`), " が存在し、"]),
-                          displayMath(String.raw`\begin{aligned}
-b-a&=z&&\bigl(\because\ z=b-a\bigr)\\
-&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr)\\
-a&<_{R}b&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\bigr).
-\end{aligned}`),
-                          paragraph(["第 3 の場合にも零元でない ", math(String.raw`w\in R`), " が存在し、"]),
-                          displayMath(String.raw`\begin{aligned}
-a-b&=-z&&\bigl(\because\ z=b-a,\ R\text{ の加法群の四則}\bigr)\\
-&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr)\\
-b&<_{R}a&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\bigr).
-\end{aligned}`),
-                          paragraph([ref("def_real_algebraic_strict_order"), " により、", math(String.raw`a<_{R}b`), " の証人は第 2 の場合の証人となり、", math(String.raw`b<_{R}a`), " の証人は第 3 の場合の証人となる。", ref("def_real_closed_subfield"), " の第 2 条件は三つの場合の網羅性と排他性を与えるため、主張の三つの場合もちょうど一つだけ成り立つ。"]),
-                          paragraph([
-                            "この主張は場合分けの網羅性だけを与える。順序が加法・乗法と両立すること、および ",
-                            math(String.raw`\mathbb{Q}`),
-                            " の元どうしの ",
-                            math(String.raw`<_{R}`),
-                            " が ",
-                            math(String.raw`\mathbb{Q}`),
-                            " の通常の順序と一致することは、ここでは主張しない",
-                            "（必要になる箇所で個別に示す）。全体は ",
-                            math(String.raw`\overline{\mathbb{Q}}`),
-                            " の部分集合 ",
-                            math(String.raw`R`),
-                            " の中の言明であり、実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                      },
-                  },
-                },
-                {
-                  role: "primary",
-                  element: {
-                    kind: "elementGroup",
-                    id: "group_of_tools_zero_pinching_claim_real_algebraic_order_transitive",
-                    beforeFocus: [
-                      {
-                        role: "supportingClaim",
-                        element:
-                          {
-                            id: "zero_pinching_claim_real_closed_sum_of_two_squares_zero",
-                            kind: "claim",
-                            title: { text: "実閉部分体の二つの平方の和が零なら、両方が零である" },
-                            labels: ["claim_real_closed_sum_of_two_squares_zero"],
-                            habitat: "Qbar",
-                            verification: ["sagemath/check/real-closed-sum-of-two-squares-zero"],
-                            lean: [
-                              "Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero",
-                              "Ising2DLambda.NecSuf.FisherZero.sq_add_sq_eq_zero_factor_necSuf",
-                              "Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero_from_necSuf",
-                            ],
-                            statement: [
-                              paragraph([
-                                math(String.raw`x,y\in R`), "（", ref("def_real_closed_subfield"),
-                                "）が ", math(String.raw`x\cdot x+y\cdot y=0`), " を満たすならば ",
-                                math(String.raw`x=0`), " かつ ", math(String.raw`y=0`), " である。",
-                              ]),
-                              paragraph([
-                                "言い換えると、", math(String.raw`R`),
-                                " では零でない元の平方を足して零にすることはできない。",
-                                "この事実は、", ref("claim_real_algebraic_order_trichotomy"),
-                                " が与える場合分けの網羅性とは別の内容である（三分法は 1 つの元についての言明であり、",
-                                "和については何も言わない）。以後、順序が加法と両立することを示す段や、",
-                                math(String.raw`\mathbb{Q}`),
-                                " の元の平方性を判定する段で引く。",
-                              ]),
-                            ],
-                            proof: [
-                              paragraph([
-                                ref("def_real_closed_subfield"), " の第 3 条件 ",
-                                math(String.raw`\omega\cdot\omega=-1`), " により、",
-                                math(String.raw`\overline{\mathbb{Q}}`), " の中で次が成り立つ。",
-                              ]),
-                              displayMath(String.raw`\begin{aligned}
-(x+y\cdot\omega)\cdot(x-y\cdot\omega)
-&=x\cdot x-(y\cdot\omega)\cdot(y\cdot\omega)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則と積の可換則（差の積の展開）})\\
-&=x\cdot x-y\cdot y\cdot(\omega\cdot\omega)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則と結合則})\\
-&=x\cdot x-y\cdot y\cdot(-1)
-&&(\because\ \blkref{def_real_closed_subfield}\ \text{の第 3 条件})\\
-&=x\cdot x+y\cdot y
-&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元と積の単位元})\\
-&=0
-&&(\because\ \text{仮定})
-\end{aligned}`),
-                              paragraph([
-                                math(String.raw`\overline{\mathbb{Q}}`), " は体なので零因子を持たない。よって ",
-                                math(String.raw`x+y\cdot\omega=0`), " または ",
-                                math(String.raw`x-y\cdot\omega=0`), " である。",
-                              ]),
-                              paragraph([
-                                ref("def_real_closed_subfield"), " の第 4 条件を元 ",
-                                math(String.raw`0\in\overline{\mathbb{Q}}`),
-                                " へ適用する。", math(String.raw`0=0+0\cdot\omega`),
-                                " であり（", math(String.raw`(0,0)\in R\times R`),
-                                " は組として第 4 条件の等式を満たす）、そのような組はちょうど 1 つなので、",
-                                math(String.raw`(a,b)\in R\times R`), " が ",
-                                math(String.raw`0=a+b\cdot\omega`), " を満たせば ",
-                                math(String.raw`a=0`), " かつ ", math(String.raw`b=0`), " である。",
-                              ]),
-                              paragraph([math(String.raw`x+y\cdot\omega=0`), " の場合は"]),
-                              displayMath(String.raw`\begin{aligned}
-(x,y)&=(0,0)&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 4 条件の一意性}\bigr)\\
-x&=0,\quad y=0&&\bigl(\because\ \text{組の等号は各成分の等号}\bigr).
-\end{aligned}`),
-                              paragraph([math(String.raw`x-y\cdot\omega=0`), " の場合は ", math(String.raw`-y\in R`), "（", ref("def_real_closed_subfield"), " の部分体条件）であり、"]),
-                              displayMath(String.raw`\begin{aligned}
-x-y\cdot\omega&=x+(-y)\cdot\omega&&\bigl(\because\ R\text{ の加法の逆元}\bigr)\\
-(x,-y)&=(0,0)&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 4 条件の一意性}\bigr)\\
-x&=0,\quad -y=0&&\bigl(\because\ \text{組の等号は各成分の等号}\bigr)\\
-y&=0&&\bigl(\because\ R\text{ の加法の逆元}\bigr).
-\end{aligned}`),
-                              paragraph([
-                                "どちらの場合も ", math(String.raw`x=0`), " かつ ", math(String.raw`y=0`),
-                                " である。使ったのは ", math(String.raw`\overline{\mathbb{Q}}`),
-                                " が体であることと、固定した組 ", math(String.raw`(R,\omega)`),
-                                " の第 3・第 4 条件だけであり、実数体も複素数体も現れない。",
-                              ]),
-                            ],
-                          },
-                      },
-                      {
-                        role: "supportingClaim",
-                        element:
-                          {
-                            id: "zero_pinching_claim_real_closed_sum_of_two_squares_is_square",
-                            kind: "claim",
-                            title: { text: "実閉部分体では二つの平方の和がまた平方である" },
-                            labels: ["claim_real_closed_sum_of_two_squares_is_square"],
-                            habitat: "Qbar",
-                            verification: ["sagemath/check/real-closed-sum-of-two-squares-is-square"],
-                            lean: [
-                              "Ising2DLambda.FisherZero.realClosed_sum_of_two_squares_is_square",
-                              "Ising2DLambda.NecSuf.FisherZero.gauss_sum_of_two_squares_identity_necSuf",
-                              "Ising2DLambda.FisherZero.realClosed_sum_of_two_squares_is_square_from_necSuf",
-                            ],
-                            statement: [
-                              paragraph([
-                                "任意の ", math(String.raw`x,y\in R`), "（", ref("def_real_closed_subfield"),
-                                "）について、ある ", math(String.raw`c\in R`), " が存在して",
-                              ]),
-                              displayMath(String.raw`x\cdot x+y\cdot y=c\cdot c`),
-                              paragraph([
-                                "が成り立つ。すなわち ", math(String.raw`R`),
-                                " の平方の全体は和について閉じている。",
-                                ref("claim_real_algebraic_order_trichotomy"),
-                                " は 1 つの元についての場合分けしか与えないので、この事実はそこからは出ない。",
-                                "使うのは ", math(String.raw`\overline{\mathbb{Q}}`),
-                                " が代数閉であること（", ref("def_algebraic_numbers"),
-                                " の第 2 条件）と一意表示（", ref("def_real_closed_subfield"),
-                                " の第 4 条件）である。",
-                              ]),
-                            ],
-                            proof: [
-                              paragraph([
-                                math(String.raw`\overline{\mathbb{Q}}`), " は代数閉なので（",
-                                ref("def_algebraic_numbers"), " の第 2 条件を多項式 ",
-                                math(String.raw`t^{2}-(x+y\cdot\omega)\in\overline{\mathbb{Q}}[t]`),
-                                " へ当てる）、ある ", math(String.raw`u\in\overline{\mathbb{Q}}`), " が存在して ",
-                                math(String.raw`u\cdot u=x+y\cdot\omega`), " である。",
-                                ref("def_real_closed_subfield"), " の第 4 条件により ",
-                                math(String.raw`u=a+b\cdot\omega`), " を満たす組 ",
-                                math(String.raw`(a,b)\in R\times R`), " がちょうど 1 つ取れる。この ",
-                                math(String.raw`(a,b)`), " について",
-                              ]),
-                              displayMath(String.raw`\begin{aligned}
-x+y\cdot\omega
-&=u\cdot u
-&&(\because\ u\ \text{の取り方})\\
-&=(a+b\cdot\omega)\cdot(a+b\cdot\omega)
-&&(\because\ \text{上の一意表示})\\
-&=a\cdot a+(a\cdot b+b\cdot a)\cdot\omega+b\cdot b\cdot(\omega\cdot\omega)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則と積の可換則})\\
-&=a\cdot a+(a\cdot b+b\cdot a)\cdot\omega-b\cdot b
-&&(\because\ \blkref{def_real_closed_subfield}\ \text{の第 3 条件}\ \omega\cdot\omega=-1)\\
-&=(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot\omega
-&&(\because\ R\ \text{の積の可換則と加法の結合則、}2=1+1)
-\end{aligned}`),
-                              paragraph([
-                                "である。", math(String.raw`a\cdot a-b\cdot b`), " と ",
-                                math(String.raw`2\cdot a\cdot b`), " はいずれも ", math(String.raw`R`),
-                                " の元（部分体なので四則で閉じている）だから、",
-                                ref("def_real_closed_subfield"),
-                                " の第 4 条件の一意性を元 ", math(String.raw`x+y\cdot\omega`),
-                                " へ当てて",
-                              ]),
-                              displayMath(String.raw`x=a\cdot a-b\cdot b,\qquad y=2\cdot a\cdot b`),
-                              paragraph([
-                                "を得る。そこで ", math(String.raw`c:=a\cdot a+b\cdot b\in R`),
-                                " と置くと、次の恒等式が成り立つ。",
-                              ]),
-                              displayMath(String.raw`\begin{aligned}
-x\cdot x+y\cdot y
-&=(a\cdot a-b\cdot b)\cdot(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot(2\cdot a\cdot b)
-&&(\because\ \text{上の 2 つの等式})\\
-&=a^{4}-2\cdot a\cdot a\cdot b\cdot b+b^{4}+4\cdot a\cdot a\cdot b\cdot b
-&&(\because\ R\ \text{の分配則と積の可換則（展開）})\\
-&=a^{4}+2\cdot a\cdot a\cdot b\cdot b+b^{4}
-&&(\because\ R\ \text{の加法（同じ項をまとめる）})\\
-&=(a\cdot a+b\cdot b)\cdot(a\cdot a+b\cdot b)
-&&(\because\ R\ \text{の分配則と積の可換則（因数分解）})\\
-&=c\cdot c
-&&(\because\ c\ \text{の定め方})
-\end{aligned}`),
-                              paragraph([
-                                "これで主張を得た。",
-                                "議論は ", math(String.raw`\overline{\mathbb{Q}}`),
-                                " の代数閉性と固定した組 ", math(String.raw`(R,\omega)`),
-                                " の第 3・第 4 条件、および ", math(String.raw`R`),
-                                " が体であることだけを使う。実数体も複素数体も現れない。",
-                              ]),
-                            ],
-                          },
-                      },
-                    ],
-                    focus:
-                      {
-                        id: "zero_pinching_claim_real_algebraic_order_transitive",
-                        kind: "claim",
-                        title: { text: "実代数的数の狭義順序は推移的である" },
-                        labels: ["claim_real_algebraic_order_transitive"],
-                        habitat: "Qbar",
-                        verification: ["sagemath/check/real-algebraic-order-transitive"],
-                        lean: [
-                          "Ising2DLambda.FisherZero.realAlgebraicLt_trans",
-                          "Ising2DLambda.NecSuf.FisherZero.lt_of_difference_trans_necSuf",
-                          "Ising2DLambda.FisherZero.realAlgebraicLt_trans_from_necSuf",
-                        ],
-                        statement: [
-                          paragraph([
-                            math(String.raw`a,b,c\in R`), "（", ref("def_real_closed_subfield"),
-                            "）が ", math(String.raw`a<_{R}b`), " かつ ", math(String.raw`b<_{R}c`),
-                            " を満たすならば ", math(String.raw`a<_{R}c`), " である（",
-                            ref("def_real_algebraic_strict_order"), "）。",
-                          ]),
-                          paragraph([
-                            ref("claim_real_algebraic_order_trichotomy"),
-                            " は場合分けの網羅性だけを与えるので、推移律はそこからは出ない。",
-                            "証明は ", ref("claim_real_closed_sum_of_two_squares_is_square"), " と ",
-                            ref("claim_real_closed_sum_of_two_squares_zero"),
-                            " の 2 つに帰着する。最小元の存在（有限集合の中で「どの元以下」を言う段）で引く。",
-                          ]),
-                        ],
-                        proof: [
-                          paragraph([
-                            ref("def_real_algebraic_strict_order"), " により、零でない ",
-                            math(String.raw`u,v\in R`), " が存在して ",
-                            math(String.raw`b-a=u\cdot u`), " かつ ", math(String.raw`c-b=v\cdot v`),
-                            " である。このとき",
-                          ]),
-                          displayMath(String.raw`\begin{aligned}
-c-a
-&=(c-b)+(b-a)
-&&(\because\ R\ \text{の加法（}b\ \text{が相殺する）})\\
-&=v\cdot v+u\cdot u
-&&(\because\ \text{上の 2 つの等式})\\
-&=u\cdot u+v\cdot v
-&&(\because\ R\ \text{の加法の可換則})
-\end{aligned}`),
-                          paragraph([
-                            "である。", ref("claim_real_closed_sum_of_two_squares_is_square"),
-                            " を ", math(String.raw`x:=u`), "、", math(String.raw`y:=v`),
-                            " に当てると、ある ", math(String.raw`w\in R`), " が存在して ",
-                            math(String.raw`u\cdot u+v\cdot v=w\cdot w`), " である。",
-                          ]),
-                          paragraph([
-                            math(String.raw`w\ne0`), " を背理法で示す。", math(String.raw`w=0`), " と仮定すると",
-                          ]),
-                          displayMath(String.raw`\begin{aligned}
-u\cdot u+v\cdot v
-&=w\cdot w&&\bigl(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\bigr)\\
-&=0\cdot0&&\bigl(\because\ w=0\bigr)\\
-&=0&&\bigl(\because\ R\text{ の零元の積}\bigr).
-\end{aligned}`),
-                          paragraph([
-                            ref("claim_real_closed_sum_of_two_squares_zero"), " により ",
-                            math(String.raw`u=0`), " となるが、", math(String.raw`u\ne0`), " に反する。",
-                          ]),
-                          paragraph([
-                            "従って ", math(String.raw`w\ne0`), " であり、上で示した二つの等号から",
-                          ]),
-                          displayMath(String.raw`\begin{aligned}
-c-a
-&=u\cdot u+v\cdot v&&\bigl(\because\ R\text{ の加法による上の計算}\bigr)\\
-&=w\cdot w&&\bigl(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\bigr).
-\end{aligned}`),
-                          paragraph([
-                            "零でない ", math(String.raw`w\in R`), " が取れたので、",
-                            ref("def_real_algebraic_strict_order"), " により ",
-                            math(String.raw`a<_{R}c`), " である。",
-                            "使ったのは ", math(String.raw`R`),
-                            " の加法と、平方の和が平方であること、平方の和が零なら両方が零であることだけであり、",
-                            "実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                      },
-                  },
-                },
-              ],
-            },
-          },
         ],
       },
     },
@@ -47502,6 +46802,937 @@ g
                             " である。全過程は ",
                             math(String.raw`\overline{\mathbb{Q}}`),
                             " の部分体の元と、それを係数とする多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                          ]),
+                        ],
+                      },
+                  },
+                },
+              ],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "zero_pinching_heading_real_closed_subfield_exists",
+              labels: [],
+              title: { text: "実閉部分体と虚数単位の組の存在" },
+              children: [
+                {
+                  role: "primary",
+                  element: {
+                    kind: "elementGroup",
+                    id: "group_of_zero_pinching_claim_real_closed_subfield_exists",
+                    focus:
+                      {
+                        id: "zero_pinching_claim_real_closed_subfield_exists",
+                        kind: "claim",
+                        title: { text: "実閉部分体と虚数単位の組は存在する" },
+                        labels: ["claim_real_closed_subfield_exists"],
+                        habitat: "Qbar",
+                        verification: ["sagemath/check/real-closed-subfield-exists"],
+                        lean: [
+                          "Ising2DLambda.FisherZero.realClosedSubfield_exists",
+                          "Ising2DLambda.NecSuf.FisherZero.realClosedSubfield_exists_necSuf",
+                          "Ising2DLambda.FisherZero.realClosedSubfield_exists_from_necSuf",
+                        ],
+                        statement: [
+                          paragraph([
+                            math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                            " を有理数の包含（",
+                            ref("def_algebraic_numbers"),
+                            "）とし、",
+                            math(String.raw`s\in\overline{\mathbb{Q}}`),
+                            " を ",
+                            ref("claim_sqrt_two_exists"),
+                            " により存在が示された ",
+                            math(String.raw`s\cdot s=\iota(2)`),
+                            " を満たす元とする。",
+                            math(String.raw`\overline{\mathbb{Q}}`),
+                            " の部分集合 ",
+                            math(String.raw`R`),
+                            " と元 ",
+                            math(String.raw`\omega\in\overline{\mathbb{Q}}`),
+                            " の組 ",
+                            math(String.raw`(R,\omega)`),
+                            " であって、次の 5 条件を満たすものが存在する。この主張は存在だけを述べ、組を特定しない。",
+                          ]),
+                          list([
+                            [
+                              math(String.raw`R`),
+                              " は ",
+                              math(String.raw`\overline{\mathbb{Q}}`),
+                              " の部分体である。",
+                            ],
+                            [
+                              math(String.raw`R`),
+                              " の任意の元 ",
+                              math(String.raw`z`),
+                              " について、「",
+                              math(String.raw`z`),
+                              " は ",
+                              math(String.raw`R`),
+                              " の零元である」「ある零元でない ",
+                              math(String.raw`w\in R`),
+                              " が存在して ",
+                              math(String.raw`z=w\cdot w`),
+                              "」「ある零元でない ",
+                              math(String.raw`w\in R`),
+                              " が存在して ",
+                              math(String.raw`-z=w\cdot w`),
+                              "」のうちちょうど 1 つが成り立つ。",
+                            ],
+                            [
+                              math(String.raw`\omega\cdot\omega=-1`),
+                              " である。",
+                            ],
+                            [
+                              math(String.raw`\overline{\mathbb{Q}}`),
+                              " の任意の元 ",
+                              math(String.raw`\xi`),
+                              " について、",
+                              math(String.raw`\xi=a+b\cdot\omega`),
+                              " を満たす組 ",
+                              math(String.raw`(a,b)\in R\times R`),
+                              " がちょうど 1 つ存在する。",
+                            ],
+                            [
+                              "ある零元でない ",
+                              math(String.raw`w\in R`),
+                              " が存在して ",
+                              math(String.raw`s=w\cdot w`),
+                              "。",
+                            ],
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            "準備。",
+                            ref("claim_enumerated_ordered_subfield_is_maximal"),
+                            " を ",
+                            math(String.raw`s`),
+                            " に適用し、部分体 ",
+                            math(String.raw`R\subseteq\overline{\mathbb Q}`),
+                            " と正錐 ",
+                            math(String.raw`C_R\subseteq R`),
+                            "（",
+                            ref("def_subfield_positive_cone"),
+                            "）を取る。組 ",
+                            math(String.raw`(R,C_R)`),
+                            " は二次体と正錐の組 ",
+                            math(String.raw`(Q_s,P_s)`),
+                            " を延長し（",
+                            ref("def_positive_cone_extension"),
+                            "）、",
+                            math(String.raw`(R,C_R)`),
+                            " を延長する任意の正錐付き部分体 ",
+                            math(String.raw`(E,D)`),
+                            " について ",
+                            math(String.raw`E=R`),
+                            " である。",
+                            ref("claim_imaginary_unit_exists"),
+                            " により ",
+                            math(String.raw`\omega\cdot\omega=-1`),
+                            " を満たす ",
+                            math(String.raw`\omega\in\overline{\mathbb{Q}}`),
+                            " を取る。この組 ",
+                            math(String.raw`(R,\omega)`),
+                            " が 5 条件を満たすことを条件ごとに示す。",
+                          ]),
+                          paragraph([
+                            "第 1 条件。",
+                            math(String.raw`R`),
+                            " は ",
+                            ref("claim_enumerated_ordered_subfield_is_maximal"),
+                            " が与える部分体である。",
+                          ]),
+                          paragraph([
+                            "第 2 条件。",
+                            ref("claim_maximal_ordered_subfield_square_trichotomy"),
+                            " を ",
+                            math(String.raw`(R,C_R)`),
+                            " と ",
+                            math(String.raw`z`),
+                            " に適用した結論そのものである。",
+                          ]),
+                          paragraph([
+                            "第 3 条件。準備で選んだ ",
+                            math(String.raw`\omega`),
+                            " の条件である。",
+                          ]),
+                          paragraph([
+                            "第 4 条件の存在。",
+                            ref("claim_adjoin_imaginary_unit_gives_algebraic_numbers"),
+                            " を ",
+                            math(String.raw`F:=R`),
+                            "、",
+                            math(String.raw`C_F:=C_R`),
+                            "、",
+                            math(String.raw`\omega`),
+                            " に適用する。一つ目の仮定（",
+                            math(String.raw`C_R`),
+                            " の各元が ",
+                            math(String.raw`R`),
+                            " に平方根を持つ）は ",
+                            ref("claim_maximal_ordered_subfield_positive_is_square"),
+                            " が与え、二つ目の仮定（最高次の番号が奇数の ",
+                            math(String.raw`R`),
+                            " 係数の多項式が ",
+                            math(String.raw`R`),
+                            " に根を持つ）は ",
+                            ref("claim_maximal_ordered_subfield_odd_degree_root"),
+                            " が与える。結論により任意の ",
+                            math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+                            " は ",
+                            math(String.raw`\mathrm{Lin}_R(\omega)`),
+                            "（",
+                            ref("def_imaginary_unit_extension_conjugate"),
+                            "）に属するので、",
+                            math(String.raw`\xi=a+b\cdot\omega`),
+                            " を満たす ",
+                            math(String.raw`(a,b)\in R\times R`),
+                            " がある。",
+                          ]),
+                          paragraph([
+                            "第 4 条件の一意性。",
+                            math(String.raw`(a,b),(a',b')\in R\times R`),
+                            " がともに ",
+                            math(String.raw`\xi=a+b\cdot\omega`),
+                            "、",
+                            math(String.raw`\xi=a'+b'\cdot\omega`),
+                            " を満たすとする。",
+                            math(String.raw`a+b\cdot\omega=a'+b'\cdot\omega`),
+                            " に ",
+                            ref("claim_imaginary_unit_extension_unique_representation"),
+                            " を ",
+                            math(String.raw`(R,C_R)`),
+                            " と ",
+                            math(String.raw`\omega`),
+                            " について適用すると ",
+                            math(String.raw`a=a'`),
+                            " かつ ",
+                            math(String.raw`b=b'`),
+                            " である。",
+                          ]),
+                          paragraph([
+                            "第 5 条件。",
+                            math(String.raw`s=\iota(0)+\iota(1)\cdot s`),
+                            " なので ",
+                            math(String.raw`s\in Q_s`),
+                            "（",
+                            ref("def_quadratic_field_set"),
+                            "）であり、",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+s&\in P_s&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{。}\ \mathrm{rep}_s(s)=(0,1)\bigr)\\
+s&\in C_R\cap Q_s&&\bigl(\because\ P_s=C_R\cap Q_s\text{。}\ \blkref{claim_enumerated_ordered_subfield_is_maximal}\text{ の延長と }\blkref{def_positive_cone_extension}\bigr)\\
+s&\in C_R&&\bigl(\because\ \text{共通部分の定義}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "である。",
+                            ref("claim_maximal_ordered_subfield_positive_is_square"),
+                            " を ",
+                            math(String.raw`a:=s`),
+                            " に適用すると、零でない ",
+                            math(String.raw`w\in R`),
+                            " が ",
+                            math(String.raw`w\cdot w=s`),
+                            " を満たす。全過程は ",
+                            math(String.raw`\overline{\mathbb{Q}}`),
+                            " の部分集合と元だけで閉じ、実数体も複素数体も現れない。",
+                          ]),
+                        ],
+                      },
+                  },
+                },
+              ],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "tools_heading_zero_pinching_heading_real_closed_subfield",
+              labels: [],
+              title: { text: "実閉部分体での平方と実代数的数の順序" },
+              children: [
+                {
+                  role: "primary",
+                  element: {
+                    kind: "elementGroup",
+                    id: "group_of_zero_pinching_def_real_closed_subfield",
+                    focus:
+                      {
+                        id: "zero_pinching_def_real_closed_subfield",
+                        kind: "definition",
+                        title: { text: "実閉部分体と虚数単位" },
+                        labels: ["def_real_closed_subfield"],
+                        habitat: "Qbar",
+                        lean: [
+                          "Ising2DLambda.FisherZero.RealClosedSubfieldSqrtTwoData",
+                          "Ising2DLambda.FisherZero.realClosedOmega_pow_four",
+                          "Ising2DLambda.NecSuf.FisherZero.omega_pow_four_of_square_neg_one_necSuf",
+                          "Ising2DLambda.FisherZero.realClosedOmega_pow_four_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/real-closed-subfield"],
+                        statement: [
+                          paragraph([
+                            math(String.raw`\overline{\mathbb{Q}}`),
+                            "（",
+                            ref("def_algebraic_numbers"),
+                            "）の部分集合 ",
+                            math(String.raw`R`),
+                            " と元 ",
+                            math(String.raw`\omega\in\overline{\mathbb{Q}}`),
+                            " の組 ",
+                            math(String.raw`(R,\omega)`),
+                            " であって、次の 5 条件を満たすものを 1 つ固定する。",
+                            "ここで ",
+                            math(String.raw`s\in\overline{\mathbb{Q}}`),
+                            " は、",
+                            ref("claim_sqrt_two_exists"),
+                            " により存在が示され、本文全体で固定している ",
+                            math(String.raw`s\cdot s=2`),
+                            " を満たす元である。",
+                          ]),
+                          list([
+                            [
+                              math(String.raw`R`),
+                              " は ",
+                              math(String.raw`\overline{\mathbb{Q}}`),
+                              " の部分体である。",
+                            ],
+                            [
+                              math(String.raw`R`),
+                              " の任意の元 ",
+                              math(String.raw`z`),
+                              " について、次の 3 つのうちちょうど 1 つが成り立つ。",
+                              "「",
+                              math(String.raw`z`),
+                              " は ",
+                              math(String.raw`R`),
+                              " の零元である」「ある零元でない ",
+                              math(String.raw`w\in R`),
+                              " が存在して ",
+                              math(String.raw`z=w\cdot w`),
+                              "」「ある零元でない ",
+                              math(String.raw`w\in R`),
+                              " が存在して ",
+                              math(String.raw`-z=w\cdot w`),
+                              "」。",
+                            ],
+                            [
+                              math(String.raw`\omega\cdot\omega=-1`),
+                              " である。",
+                            ],
+                            [
+                              math(String.raw`\overline{\mathbb{Q}}`),
+                              " の任意の元 ",
+                              math(String.raw`\xi`),
+                              " について、",
+                              math(String.raw`\xi=a+b\cdot\omega`),
+                              " を満たす組 ",
+                              math(String.raw`(a,b)\in R\times R`),
+                              " がちょうど 1 つ存在する。",
+                            ],
+                            [
+                              "ある零元でない ",
+                              math(String.raw`w\in R`),
+                              " が存在して ",
+                              math(String.raw`s=w\cdot w`),
+                              "。",
+                            ],
+                          ]),
+                          paragraph([
+                            "第 5 条件は、固定済みの根 ",
+                            math(String.raw`s`),
+                            " と組 ",
+                            math(String.raw`(R,\omega)`),
+                            " の整合を要求する。第 1〜4 条件だけでは ",
+                            math(String.raw`s`),
+                            " と ",
+                            math(String.raw`-s`),
+                            " のどちらが ",
+                            math(String.raw`R`),
+                            " の平方かは組の選び方に依存して決まらず、",
+                            "のちに臨界点を有理数で近似するときの符号が主張として述べられない。",
+                            "第 5 条件はこの選び方を「",
+                            math(String.raw`s`),
+                            " が平方である側」に固定する。",
+                          ]),
+                          paragraph([
+                            "この 5 条件を満たす組は ",
+                            ref("claim_real_closed_subfield_exists"),
+                            " により存在する。",
+                            "以下ではその 1 つを固定して使い、どれを固定したかに依存する主張は述べない",
+                            "（2 つの組が互いにどう移り合うかは本文では示さず、使わない）。",
+                            math(String.raw`R`),
+                            " の元を実代数的数と呼ぶ。この名前は実数体を使うことを意味しない（",
+                            math(String.raw`R`),
+                            " は ",
+                            math(String.raw`\overline{\mathbb{Q}}`),
+                            " の部分集合であり、",
+                            math(String.raw`\overline{\mathbb{Q}}`),
+                            " が可算なので ",
+                            math(String.raw`R`),
+                            " も可算である）。",
+                          ]),
+                          paragraph([
+                            "また、冪の定義と第 3 条件から",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\omega^{4}
+&=\omega^{2}\cdot\omega^{2}
+&&(\because\ \text{自然数の指数法則 }4=2+2)\\
+&=(\omega\cdot\omega)\cdot(\omega\cdot\omega)
+&&(\because\ \text{二乗の定義})\\
+&=(-1)\cdot(-1)
+&&(\because\ \omega\cdot\omega=-1)\\
+&=1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の乗法})
+\end{aligned}`),
+                          paragraph([
+                            "である。したがって ",
+                            math(String.raw`\omega\in\mu_{4}`),
+                            "（",
+                            ref("def_root_of_unity_set"),
+                            "）である。第 2 条件（平方の三分法）はのちに ",
+                            math(String.raw`R`),
+                            " へ順序を与えるために使い、第 4 条件（一意表示）はのちに零点と有理点の距離の二乗を定めるために使う。",
+                            "第 5 条件（平方根との整合）はのちに臨界点の順序の下界と上界、",
+                            "したがって臨界点を近似する有理数の符号を定めるために使う。",
+                            "ここでは組の固定だけを行う。実数体も複素数体も現れない。",
+                          ]),
+                        ],
+                      },
+                  },
+                },
+                {
+                  role: "primary",
+                  element: {
+                    kind: "elementGroup",
+                    id: "group_of_zero_pinching_def_real_algebraic_strict_order",
+                    beforeFocus: [
+                      {
+                        role: "supportingClaim",
+                        element:
+                          {
+                            id: "zero_pinching_claim_rationals_are_real_algebraic",
+                            kind: "claim",
+                            title: { text: "有理数は実代数的数である" },
+                            labels: ["claim_rationals_are_real_algebraic"],
+                            habitat: "Qbar",
+                            lean: [
+                              "Ising2DLambda.FisherZero.rational_mem_realClosedCarrier",
+                              "Ising2DLambda.NecSuf.FisherZero.rational_mem_of_closure_necSuf",
+                              "Ising2DLambda.FisherZero.rational_mem_realClosedCarrier_from_necSuf",
+                            ],
+                            verification: ["sagemath/check/real-algebraic-order"],
+                            statement: [
+                              paragraph([
+                                math(String.raw`\mathbb{Q}`),
+                                " の任意の元 ",
+                                math(String.raw`q`),
+                                "（",
+                                ref("def_algebraic_numbers"),
+                                " の第 1 条件により ",
+                                math(String.raw`\overline{\mathbb{Q}}`),
+                                " の元でもある）は ",
+                                math(String.raw`R`),
+                                "（",
+                                ref("def_real_closed_subfield"),
+                                "）の元である。すなわち、部分集合として ",
+                                math(String.raw`\mathbb{Q}\subseteq R`),
+                                " が成り立つ。",
+                              ]),
+                            ],
+                            proof: [
+                              paragraph([ref("def_real_closed_subfield"), " の第一条件により、", math(String.raw`R\subseteq\overline{\mathbb Q}`), " は零元・単位元を含む部分体である。自然数 ", math(String.raw`n\in\mathbb N`), " の所属を帰納法で示す。後者の場合は ", math(String.raw`n\in R`), " を仮定する。"]),
+                              displayMath(String.raw`\begin{aligned}
+0&\in R&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の部分体条件}\bigr),\\
+1&\in R&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の部分体条件}\bigr),\\
+n+1&\in R&&\bigl(\because\ n,1\in R\text{ と部分体の加法閉性}\bigr).
+\end{aligned}`),
+                              paragraph(["零の場合と後者の場合から全ての自然数が ", math(String.raw`R`), " に属する。整数 ", math(String.raw`k\in\mathbb Z`), " は自然数、または自然数 ", math(String.raw`n\in\mathbb N`), " の加法逆元である。前者は上の帰納法で済み、後者では"]),
+                              displayMath(String.raw`\begin{aligned}
+-n&\in R&&\bigl(\because\ n\in R\text{ と部分体の加法逆元への閉性}\bigr),\\
+k&\in R&&\bigl(\because\ k=-n\text{ の代入}\bigr).
+\end{aligned}`),
+                              paragraph(["有理数 ", math(String.raw`q\in\mathbb Q`), " を任意に取り、", math(String.raw`k\in\mathbb Z`), "、", math(String.raw`n\in\mathbb N`), "、", math(String.raw`1\le n`), " で ", math(String.raw`q=k\cdot n^{-1}`), " と表す。有理数の定義によるこの表示を使うと、"]),
+                              displayMath(String.raw`\begin{aligned}
+n&\ne0&&\bigl(\because\ 1\le n\text{ と自然数の順序}\bigr),\\
+n^{-1}&\in R&&\bigl(\because\ n\in R,\ n\ne0\text{ と部分体の乗法逆元への閉性}\bigr),\\
+k\cdot n^{-1}&\in R&&\bigl(\because\ k,n^{-1}\in R\text{ と部分体の乗法閉性}\bigr),\\
+q&\in R&&\bigl(\because\ q=k\cdot n^{-1}\text{ の代入}\bigr).
+\end{aligned}`),
+                              paragraph(["以上は部分体の四則だけで閉じ、実数体も複素数体も現れない。"]),
+                            ],
+                          },
+                      },
+                      {
+                        role: "supportingClaim",
+                        element:
+                          {
+                            id: "zero_pinching_claim_neg_one_not_square",
+                            kind: "claim",
+                            title: { text: "零元でない実代数的数の平方は -1 にならない" },
+                            labels: ["claim_neg_one_not_square"],
+                            habitat: "Qbar",
+                            lean: [
+                              "Ising2DLambda.FisherZero.negOne_not_square_realClosedCarrier",
+                              "Ising2DLambda.NecSuf.FisherZero.positive_negative_exclusive_necSuf",
+                              "Ising2DLambda.FisherZero.negOne_not_square_realClosedCarrier_from_necSuf",
+                            ],
+                            verification: ["sagemath/check/real-algebraic-order"],
+                            statement: [
+                              paragraph([
+                                math(String.raw`R`),
+                                "（",
+                                ref("def_real_closed_subfield"),
+                                "）の零元でない任意の元 ",
+                                math(String.raw`w`),
+                                " について、",
+                                math(String.raw`w\cdot w\ne-1`),
+                                " である。",
+                              ]),
+                            ],
+                            proof: [
+                              paragraph(["背理法による。", math(String.raw`w\in R`), " が ", math(String.raw`w\ne0`), " かつ ", math(String.raw`w\cdot w=-1`), " を満たすと仮定し、", math(String.raw`z:=1\in R`), " と置く。", ref("claim_rationals_are_real_algebraic"), " により ", math(String.raw`z\in R`), " である。"]),
+                              displayMath(String.raw`\begin{aligned}
+z&=1&&\bigl(\because\ z\text{ の定義}\bigr)\\
+&=1\cdot1&&\bigl(\because\ \text{乗法単位元則}\bigr).
+\end{aligned}`),
+                              paragraph([math(String.raw`1\ne0`), " は体の公理による。", ref("def_real_closed_subfield"), " の平方の三分法の第二の場合が ", math(String.raw`z`), " について成り立つ。証人は ", math(String.raw`w':=1\in R`), " であり、", math(String.raw`w'\ne0`), " である。一方、"]),
+                              displayMath(String.raw`\begin{aligned}
+-z&=-1&&\bigl(\because\ z=1\bigr)\\
+&=w\cdot w&&\bigl(\because\ \text{背理法の仮定}\bigr).
+\end{aligned}`),
+                              paragraph([math(String.raw`w\in R`), " かつ ", math(String.raw`w\ne0`), " なので、", ref("def_real_closed_subfield"), " の平方の三分法の第三の場合も ", math(String.raw`z`), " について成り立つ。第二の場合と第三の場合の同時成立は三分法の排他性に反する。従って ", math(String.raw`w\cdot w\ne-1`), " である。"]),
+                            ],
+                          },
+                      },
+                    ],
+                    focus:
+                      {
+                        id: "zero_pinching_def_real_algebraic_strict_order",
+                        kind: "definition",
+                        title: { text: "実代数的数の狭義順序" },
+                        labels: ["def_real_algebraic_strict_order"],
+                        habitat: "Qbar",
+                        lean: [
+                          "Ising2DLambda.FisherZero.realAlgebraicLt",
+                          "Ising2DLambda.NecSuf.FisherZero.strictOrderOfDifference",
+                        ],
+                        verification: ["sagemath/check/real-algebraic-order"],
+                        statement: [
+                          paragraph([
+                            math(String.raw`R`),
+                            "（",
+                            ref("def_real_closed_subfield"),
+                            "）の元 ",
+                            math(String.raw`a,b`),
+                            " に対し、",
+                            math(String.raw`a<_{R}b`),
+                            " とは、ある零元でない ",
+                            math(String.raw`w\in R`),
+                            " が存在して ",
+                            math(String.raw`b-a=w\cdot w`),
+                            " となることをいう。",
+                          ]),
+                          paragraph([
+                            "この定義が意味をもつこと: ",
+                            math(String.raw`b-a\in R`),
+                            " である（",
+                            ref("def_real_closed_subfield"),
+                            " の第 1 条件。部分体は加法と加法逆元で閉じる）。",
+                            "全体は ",
+                            math(String.raw`\overline{\mathbb{Q}}`),
+                            " の部分集合 ",
+                            math(String.raw`R`),
+                            " の中の定義であり、実数体も複素数体も現れない。",
+                          ]),
+                        ],
+                      },
+                  },
+                },
+                {
+                  role: "primary",
+                  element: {
+                    kind: "elementGroup",
+                    id: "group_of_zero_pinching_claim_real_algebraic_order_trichotomy",
+                    beforeFocus: [
+                      {
+                        role: "prerequisiteDefinition",
+                        element:
+                          {
+                            id: "zero_pinching_def_real_algebraic_nonstrict_order",
+                            kind: "definition",
+                            title: { text: "実代数的数の広義順序" },
+                            labels: ["def_real_algebraic_nonstrict_order"],
+                            habitat: "Qbar",
+                            lean: [
+                              "Ising2DLambda.FisherZero.realAlgebraicLe",
+                              "Ising2DLambda.NecSuf.FisherZero.nonstrictOrderOfDifference",
+                            ],
+                            verification: ["sagemath/check/real-algebraic-order"],
+                            statement: [
+                              paragraph([
+                                math(String.raw`R`),
+                                "（",
+                                ref("def_real_closed_subfield"),
+                                "）の元 ",
+                                math(String.raw`a,b`),
+                                " に対し、",
+                                math(String.raw`a\le_{R}b`),
+                                " とは、",
+                                math(String.raw`a<_{R}b`),
+                                " または ",
+                                math(String.raw`a=b`),
+                                " となることをいう。ここで ",
+                                math(String.raw`<_{R}`),
+                                " は ",
+                                ref("def_real_algebraic_strict_order"),
+                                " で定めた記号である。",
+                              ]),
+                            ],
+                          },
+                      },
+                    ],
+                    focus:
+                      {
+                        id: "zero_pinching_claim_real_algebraic_order_trichotomy",
+                        kind: "claim",
+                        standing: "mainTheorem",
+                        title: { text: "実代数的数の狭義順序の三分法" },
+                        labels: ["claim_real_algebraic_order_trichotomy"],
+                        habitat: "Qbar",
+                        lean: [
+                          "Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy",
+                          "Ising2DLambda.NecSuf.FisherZero.strictOrderOfDifference_trichotomy_necSuf",
+                          "Ising2DLambda.FisherZero.realAlgebraicLt_trichotomy_from_necSuf",
+                        ],
+                        verification: ["sagemath/check/real-algebraic-order"],
+                        statement: [
+                          paragraph([
+                            "任意の ",
+                            math(String.raw`a,b\in R`),
+                            " について「",
+                            math(String.raw`a<_{R}b`),
+                            "」「",
+                            math(String.raw`a=b`),
+                            "」「",
+                            math(String.raw`b<_{R}a`),
+                            "」のちょうど 1 つが成り立つ。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("def_real_closed_subfield"),
+                            " の部分体条件より ",
+                            math(String.raw`z:=b-a\in R`),
+                            " である。この ",
+                            math(String.raw`z`),
+                            " に同定義の第 2 条件を適用する。第 1 の場合は",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+z=0&\iff b-a=0&&\bigl(\because\ z=b-a\bigr)\\
+&\iff a=b&&\bigl(\because\ R\text{ の加法群の四則}\bigr).
+\end{aligned}`),
+                          paragraph(["第 2 の場合には零元でない ", math(String.raw`w\in R`), " が存在し、"]),
+                          displayMath(String.raw`\begin{aligned}
+b-a&=z&&\bigl(\because\ z=b-a\bigr)\\
+&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr)\\
+a&<_{R}b&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\bigr).
+\end{aligned}`),
+                          paragraph(["第 3 の場合にも零元でない ", math(String.raw`w\in R`), " が存在し、"]),
+                          displayMath(String.raw`\begin{aligned}
+a-b&=-z&&\bigl(\because\ z=b-a,\ R\text{ の加法群の四則}\bigr)\\
+&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr)\\
+b&<_{R}a&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\bigr).
+\end{aligned}`),
+                          paragraph([ref("def_real_algebraic_strict_order"), " により、", math(String.raw`a<_{R}b`), " の証人は第 2 の場合の証人となり、", math(String.raw`b<_{R}a`), " の証人は第 3 の場合の証人となる。", ref("def_real_closed_subfield"), " の第 2 条件は三つの場合の網羅性と排他性を与えるため、主張の三つの場合もちょうど一つだけ成り立つ。"]),
+                          paragraph([
+                            "この主張は場合分けの網羅性だけを与える。順序が加法・乗法と両立すること、および ",
+                            math(String.raw`\mathbb{Q}`),
+                            " の元どうしの ",
+                            math(String.raw`<_{R}`),
+                            " が ",
+                            math(String.raw`\mathbb{Q}`),
+                            " の通常の順序と一致することは、ここでは主張しない",
+                            "（必要になる箇所で個別に示す）。全体は ",
+                            math(String.raw`\overline{\mathbb{Q}}`),
+                            " の部分集合 ",
+                            math(String.raw`R`),
+                            " の中の言明であり、実数体も複素数体も現れない。",
+                          ]),
+                        ],
+                      },
+                  },
+                },
+                {
+                  role: "primary",
+                  element: {
+                    kind: "elementGroup",
+                    id: "group_of_tools_zero_pinching_claim_real_algebraic_order_transitive",
+                    beforeFocus: [
+                      {
+                        role: "supportingClaim",
+                        element:
+                          {
+                            id: "zero_pinching_claim_real_closed_sum_of_two_squares_zero",
+                            kind: "claim",
+                            title: { text: "実閉部分体の二つの平方の和が零なら、両方が零である" },
+                            labels: ["claim_real_closed_sum_of_two_squares_zero"],
+                            habitat: "Qbar",
+                            verification: ["sagemath/check/real-closed-sum-of-two-squares-zero"],
+                            lean: [
+                              "Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero",
+                              "Ising2DLambda.NecSuf.FisherZero.sq_add_sq_eq_zero_factor_necSuf",
+                              "Ising2DLambda.FisherZero.realClosed_sq_add_sq_eq_zero_from_necSuf",
+                            ],
+                            statement: [
+                              paragraph([
+                                math(String.raw`x,y\in R`), "（", ref("def_real_closed_subfield"),
+                                "）が ", math(String.raw`x\cdot x+y\cdot y=0`), " を満たすならば ",
+                                math(String.raw`x=0`), " かつ ", math(String.raw`y=0`), " である。",
+                              ]),
+                              paragraph([
+                                "言い換えると、", math(String.raw`R`),
+                                " では零でない元の平方を足して零にすることはできない。",
+                                "この事実は、", ref("claim_real_algebraic_order_trichotomy"),
+                                " が与える場合分けの網羅性とは別の内容である（三分法は 1 つの元についての言明であり、",
+                                "和については何も言わない）。以後、順序が加法と両立することを示す段や、",
+                                math(String.raw`\mathbb{Q}`),
+                                " の元の平方性を判定する段で引く。",
+                              ]),
+                            ],
+                            proof: [
+                              paragraph([
+                                ref("def_real_closed_subfield"), " の第 3 条件 ",
+                                math(String.raw`\omega\cdot\omega=-1`), " により、",
+                                math(String.raw`\overline{\mathbb{Q}}`), " の中で次が成り立つ。",
+                              ]),
+                              displayMath(String.raw`\begin{aligned}
+(x+y\cdot\omega)\cdot(x-y\cdot\omega)
+&=x\cdot x-(y\cdot\omega)\cdot(y\cdot\omega)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則と積の可換則（差の積の展開）})\\
+&=x\cdot x-y\cdot y\cdot(\omega\cdot\omega)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則と結合則})\\
+&=x\cdot x-y\cdot y\cdot(-1)
+&&(\because\ \blkref{def_real_closed_subfield}\ \text{の第 3 条件})\\
+&=x\cdot x+y\cdot y
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元と積の単位元})\\
+&=0
+&&(\because\ \text{仮定})
+\end{aligned}`),
+                              paragraph([
+                                math(String.raw`\overline{\mathbb{Q}}`), " は体なので零因子を持たない。よって ",
+                                math(String.raw`x+y\cdot\omega=0`), " または ",
+                                math(String.raw`x-y\cdot\omega=0`), " である。",
+                              ]),
+                              paragraph([
+                                ref("def_real_closed_subfield"), " の第 4 条件を元 ",
+                                math(String.raw`0\in\overline{\mathbb{Q}}`),
+                                " へ適用する。", math(String.raw`0=0+0\cdot\omega`),
+                                " であり（", math(String.raw`(0,0)\in R\times R`),
+                                " は組として第 4 条件の等式を満たす）、そのような組はちょうど 1 つなので、",
+                                math(String.raw`(a,b)\in R\times R`), " が ",
+                                math(String.raw`0=a+b\cdot\omega`), " を満たせば ",
+                                math(String.raw`a=0`), " かつ ", math(String.raw`b=0`), " である。",
+                              ]),
+                              paragraph([math(String.raw`x+y\cdot\omega=0`), " の場合は"]),
+                              displayMath(String.raw`\begin{aligned}
+(x,y)&=(0,0)&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 4 条件の一意性}\bigr)\\
+x&=0,\quad y=0&&\bigl(\because\ \text{組の等号は各成分の等号}\bigr).
+\end{aligned}`),
+                              paragraph([math(String.raw`x-y\cdot\omega=0`), " の場合は ", math(String.raw`-y\in R`), "（", ref("def_real_closed_subfield"), " の部分体条件）であり、"]),
+                              displayMath(String.raw`\begin{aligned}
+x-y\cdot\omega&=x+(-y)\cdot\omega&&\bigl(\because\ R\text{ の加法の逆元}\bigr)\\
+(x,-y)&=(0,0)&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 4 条件の一意性}\bigr)\\
+x&=0,\quad -y=0&&\bigl(\because\ \text{組の等号は各成分の等号}\bigr)\\
+y&=0&&\bigl(\because\ R\text{ の加法の逆元}\bigr).
+\end{aligned}`),
+                              paragraph([
+                                "どちらの場合も ", math(String.raw`x=0`), " かつ ", math(String.raw`y=0`),
+                                " である。使ったのは ", math(String.raw`\overline{\mathbb{Q}}`),
+                                " が体であることと、固定した組 ", math(String.raw`(R,\omega)`),
+                                " の第 3・第 4 条件だけであり、実数体も複素数体も現れない。",
+                              ]),
+                            ],
+                          },
+                      },
+                      {
+                        role: "supportingClaim",
+                        element:
+                          {
+                            id: "zero_pinching_claim_real_closed_sum_of_two_squares_is_square",
+                            kind: "claim",
+                            title: { text: "実閉部分体では二つの平方の和がまた平方である" },
+                            labels: ["claim_real_closed_sum_of_two_squares_is_square"],
+                            habitat: "Qbar",
+                            verification: ["sagemath/check/real-closed-sum-of-two-squares-is-square"],
+                            lean: [
+                              "Ising2DLambda.FisherZero.realClosed_sum_of_two_squares_is_square",
+                              "Ising2DLambda.NecSuf.FisherZero.gauss_sum_of_two_squares_identity_necSuf",
+                              "Ising2DLambda.FisherZero.realClosed_sum_of_two_squares_is_square_from_necSuf",
+                            ],
+                            statement: [
+                              paragraph([
+                                "任意の ", math(String.raw`x,y\in R`), "（", ref("def_real_closed_subfield"),
+                                "）について、ある ", math(String.raw`c\in R`), " が存在して",
+                              ]),
+                              displayMath(String.raw`x\cdot x+y\cdot y=c\cdot c`),
+                              paragraph([
+                                "が成り立つ。すなわち ", math(String.raw`R`),
+                                " の平方の全体は和について閉じている。",
+                                ref("claim_real_algebraic_order_trichotomy"),
+                                " は 1 つの元についての場合分けしか与えないので、この事実はそこからは出ない。",
+                                "使うのは ", math(String.raw`\overline{\mathbb{Q}}`),
+                                " が代数閉であること（", ref("def_algebraic_numbers"),
+                                " の第 2 条件）と一意表示（", ref("def_real_closed_subfield"),
+                                " の第 4 条件）である。",
+                              ]),
+                            ],
+                            proof: [
+                              paragraph([
+                                math(String.raw`\overline{\mathbb{Q}}`), " は代数閉なので（",
+                                ref("def_algebraic_numbers"), " の第 2 条件を多項式 ",
+                                math(String.raw`t^{2}-(x+y\cdot\omega)\in\overline{\mathbb{Q}}[t]`),
+                                " へ当てる）、ある ", math(String.raw`u\in\overline{\mathbb{Q}}`), " が存在して ",
+                                math(String.raw`u\cdot u=x+y\cdot\omega`), " である。",
+                                ref("def_real_closed_subfield"), " の第 4 条件により ",
+                                math(String.raw`u=a+b\cdot\omega`), " を満たす組 ",
+                                math(String.raw`(a,b)\in R\times R`), " がちょうど 1 つ取れる。この ",
+                                math(String.raw`(a,b)`), " について",
+                              ]),
+                              displayMath(String.raw`\begin{aligned}
+x+y\cdot\omega
+&=u\cdot u
+&&(\because\ u\ \text{の取り方})\\
+&=(a+b\cdot\omega)\cdot(a+b\cdot\omega)
+&&(\because\ \text{上の一意表示})\\
+&=a\cdot a+(a\cdot b+b\cdot a)\cdot\omega+b\cdot b\cdot(\omega\cdot\omega)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則と積の可換則})\\
+&=a\cdot a+(a\cdot b+b\cdot a)\cdot\omega-b\cdot b
+&&(\because\ \blkref{def_real_closed_subfield}\ \text{の第 3 条件}\ \omega\cdot\omega=-1)\\
+&=(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot\omega
+&&(\because\ R\ \text{の積の可換則と加法の結合則、}2=1+1)
+\end{aligned}`),
+                              paragraph([
+                                "である。", math(String.raw`a\cdot a-b\cdot b`), " と ",
+                                math(String.raw`2\cdot a\cdot b`), " はいずれも ", math(String.raw`R`),
+                                " の元（部分体なので四則で閉じている）だから、",
+                                ref("def_real_closed_subfield"),
+                                " の第 4 条件の一意性を元 ", math(String.raw`x+y\cdot\omega`),
+                                " へ当てて",
+                              ]),
+                              displayMath(String.raw`x=a\cdot a-b\cdot b,\qquad y=2\cdot a\cdot b`),
+                              paragraph([
+                                "を得る。そこで ", math(String.raw`c:=a\cdot a+b\cdot b\in R`),
+                                " と置くと、次の恒等式が成り立つ。",
+                              ]),
+                              displayMath(String.raw`\begin{aligned}
+x\cdot x+y\cdot y
+&=(a\cdot a-b\cdot b)\cdot(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot(2\cdot a\cdot b)
+&&(\because\ \text{上の 2 つの等式})\\
+&=a^{4}-2\cdot a\cdot a\cdot b\cdot b+b^{4}+4\cdot a\cdot a\cdot b\cdot b
+&&(\because\ R\ \text{の分配則と積の可換則（展開）})\\
+&=a^{4}+2\cdot a\cdot a\cdot b\cdot b+b^{4}
+&&(\because\ R\ \text{の加法（同じ項をまとめる）})\\
+&=(a\cdot a+b\cdot b)\cdot(a\cdot a+b\cdot b)
+&&(\because\ R\ \text{の分配則と積の可換則（因数分解）})\\
+&=c\cdot c
+&&(\because\ c\ \text{の定め方})
+\end{aligned}`),
+                              paragraph([
+                                "これで主張を得た。",
+                                "議論は ", math(String.raw`\overline{\mathbb{Q}}`),
+                                " の代数閉性と固定した組 ", math(String.raw`(R,\omega)`),
+                                " の第 3・第 4 条件、および ", math(String.raw`R`),
+                                " が体であることだけを使う。実数体も複素数体も現れない。",
+                              ]),
+                            ],
+                          },
+                      },
+                    ],
+                    focus:
+                      {
+                        id: "zero_pinching_claim_real_algebraic_order_transitive",
+                        kind: "claim",
+                        title: { text: "実代数的数の狭義順序は推移的である" },
+                        labels: ["claim_real_algebraic_order_transitive"],
+                        habitat: "Qbar",
+                        verification: ["sagemath/check/real-algebraic-order-transitive"],
+                        lean: [
+                          "Ising2DLambda.FisherZero.realAlgebraicLt_trans",
+                          "Ising2DLambda.NecSuf.FisherZero.lt_of_difference_trans_necSuf",
+                          "Ising2DLambda.FisherZero.realAlgebraicLt_trans_from_necSuf",
+                        ],
+                        statement: [
+                          paragraph([
+                            math(String.raw`a,b,c\in R`), "（", ref("def_real_closed_subfield"),
+                            "）が ", math(String.raw`a<_{R}b`), " かつ ", math(String.raw`b<_{R}c`),
+                            " を満たすならば ", math(String.raw`a<_{R}c`), " である（",
+                            ref("def_real_algebraic_strict_order"), "）。",
+                          ]),
+                          paragraph([
+                            ref("claim_real_algebraic_order_trichotomy"),
+                            " は場合分けの網羅性だけを与えるので、推移律はそこからは出ない。",
+                            "証明は ", ref("claim_real_closed_sum_of_two_squares_is_square"), " と ",
+                            ref("claim_real_closed_sum_of_two_squares_zero"),
+                            " の 2 つに帰着する。最小元の存在（有限集合の中で「どの元以下」を言う段）で引く。",
+                          ]),
+                        ],
+                        proof: [
+                          paragraph([
+                            ref("def_real_algebraic_strict_order"), " により、零でない ",
+                            math(String.raw`u,v\in R`), " が存在して ",
+                            math(String.raw`b-a=u\cdot u`), " かつ ", math(String.raw`c-b=v\cdot v`),
+                            " である。このとき",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+c-a
+&=(c-b)+(b-a)
+&&(\because\ R\ \text{の加法（}b\ \text{が相殺する）})\\
+&=v\cdot v+u\cdot u
+&&(\because\ \text{上の 2 つの等式})\\
+&=u\cdot u+v\cdot v
+&&(\because\ R\ \text{の加法の可換則})
+\end{aligned}`),
+                          paragraph([
+                            "である。", ref("claim_real_closed_sum_of_two_squares_is_square"),
+                            " を ", math(String.raw`x:=u`), "、", math(String.raw`y:=v`),
+                            " に当てると、ある ", math(String.raw`w\in R`), " が存在して ",
+                            math(String.raw`u\cdot u+v\cdot v=w\cdot w`), " である。",
+                          ]),
+                          paragraph([
+                            math(String.raw`w\ne0`), " を背理法で示す。", math(String.raw`w=0`), " と仮定すると",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+u\cdot u+v\cdot v
+&=w\cdot w&&\bigl(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\bigr)\\
+&=0\cdot0&&\bigl(\because\ w=0\bigr)\\
+&=0&&\bigl(\because\ R\text{ の零元の積}\bigr).
+\end{aligned}`),
+                          paragraph([
+                            ref("claim_real_closed_sum_of_two_squares_zero"), " により ",
+                            math(String.raw`u=0`), " となるが、", math(String.raw`u\ne0`), " に反する。",
+                          ]),
+                          paragraph([
+                            "従って ", math(String.raw`w\ne0`), " であり、上で示した二つの等号から",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+c-a
+&=u\cdot u+v\cdot v&&\bigl(\because\ R\text{ の加法による上の計算}\bigr)\\
+&=w\cdot w&&\bigl(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\bigr).
+\end{aligned}`),
+                          paragraph([
+                            "零でない ", math(String.raw`w\in R`), " が取れたので、",
+                            ref("def_real_algebraic_strict_order"), " により ",
+                            math(String.raw`a<_{R}c`), " である。",
+                            "使ったのは ", math(String.raw`R`),
+                            " の加法と、平方の和が平方であること、平方の和が零なら両方が零であることだけであり、",
+                            "実数体も複素数体も現れない。",
                           ]),
                         ],
                       },
