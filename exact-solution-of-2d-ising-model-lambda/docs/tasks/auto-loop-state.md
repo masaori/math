@@ -25,27 +25,27 @@
 
 2026-11-19 の研究管理: 主経路は 11/18 に「正の元が平方である」の四行を済ませた後、表に到達点の閉包に入る行が無く、到達点に効かない行き止まりの判定を進めていた。最長の鎖 3 件（対称式の基本定理 → 虚数単位の添加 → 合成）は全て並列の表に直列に載る。鎖の行が引く部品のうち対称式に依らない五つを割って主経路の表の先頭へ置き（並列の Laplace の帰納法が引く二つを先に、合成が引く三つを後に）、一つ（二つの整数倍のずらし）を並列の表へ置いた。行き止まりの判定は五行の後に回す。
 
+2026-11-21 の研究管理: 一対一のずれの件数は、突き合わせの検査ができるまで数えられない（研究管理はずれの件数で直しの減りを判断する）。検査の行を先頭の Cauchy 性の行の次へ上げ、ずれを直す行は検査の台帳ができてから割る。置換の符号の鎖（符号 → 行列式・マッチングの向き → 必要十分版の側のマッチングの定義）を次に置き、鎖を持たない行（行シフト・冪の正値性・有限グラフ・脱出の章の宣言）をその後に置いた。離散 Whitney 系の三行は並列の表へ移した。
+
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
 | 熱力学極限 | 【繋がり・一対一】開境界密度の Cauchy 性の鎖を周期境界密度の到達点へ接続する | 未着手 | 先頭の行を「上限の存在証明を定義へ使う」と「Cauchy 性の鎖を到達点へ接続する」の二つの論法に割った。前者は完了。後者では、到達点の Lean 証明が本文で根拠にする開境界正方形の密度の Cauchy 性と下組の極限同定を実際に引くようにする。依存: なし。 |
+| （全章） | 【一対一】論文の引用と Lean の依存の突き合わせを検査にする | 未着手 | ブロックごとに、Lean 具体版の証明が使う登録済みの主張（登録の無い補助補題は通り抜けて辿る）と、本文の証明が根拠として引く主張（`\blkref` と式変形の行の参照）を比べる道具を `lean/scripts/` に作り、ずれを台帳に載せて減らすだけにする（分離の検査と同じ形）。2026-11-21 の点検の測り方では、主張・定理 867 件のうち一致は 480 件、Lean が論文の引かない主張を使うものが 194 件、論文が式の根拠として引く主張を Lean が使わないものが 90 件だった。依存: なし。 |
 | 道具（置換の符号） | 【分離】置換の符号と転倒数を具体版の定義で立て直す | 未着手 | 具体版の 55 宣言が `NecSuf.AlgebraicEigenvalue.sign`・`inversionCount`・`orderedPairs` を自分の定義として使う。本文 `def_permutation_sign` どおりの定義を具体版に置いて参照を移す。互換の符号・台の交わらない積の符号（`NecSuf.KacWard.PermutationSignOrbitProduct` の定理を使う具体版 10 宣言）も具体版で示す。依存: なし。 |
 | 道具（行列式） | 【未定義の記号・分離】行列式を論文の定義どおり置換の符号付き和で定義し直す | 未着手 | `IntegerMatrix.determinant A := Matrix.det A`、`kacWardDeterminant M := Matrix.det …` など、具体版の行列式が mathlib の `Matrix.det` の別名で、論文の和の形は後から補題で結んでいる。論文の和で定義し、`Matrix.det` との一致は補題一本に留める。具体版が使う導出の定理（`qbarPolynomial_det_row_expansion_from_necSuf`・`qbarPolynomial_det_mul_function_expansion_from_necSuf`・`qbarPolynomial_fixedPointFree_sum_sign_from_necSuf`）を具体版の証明に置き換える。依存: 置換の符号の行。 |
-| 道具（行シフトの軌道） | 【分離】行シフトの軌道と周期を具体版で示す | 未着手 | 具体版の 16 宣言が `NecSuf.AlgebraicEigenvalue` の `iterLeft`・`orbit`・`minimalPeriod` とその定理（`RowShiftOrbit`・`RowShiftPeriod`・`ShiftMatrixOrder`・`RowShiftOrbitPartition`）を使う。依存: なし。 |
-| 熱力学極限 | 【分離】正の有理数の冪の正値性と部分和を具体版で示す | 未着手 | 具体版の 28 宣言が `NecSuf.ThermodynamicLimit.pow_pos_by_induction` を、2 宣言が `NecSuf.FisherZero.nonemptyPartialSum` を使う。依存: なし。 |
-| 離散 Whitney 系 | 【分離】回転と回転値を具体版の定義で立て直す | 未着手 | 具体版の 58 宣言が `NecSuf.KacWard` の `Turn`・`turnValue`・`phaseOfTurn`・`reverseTurn` と `three_value_phase_ne_zero` を使う。依存: なし。 |
-| 離散 Whitney 系 | 【分離】方向の列と階段を具体版の定義で立て直す | 未着手 | `cyclicAdjacentSum`・`internalAdjacentSum`・`twoBlockSequence`・`joinDirectionSequence`・`repeatDirectionSequence`・`twoPhaseStaircase`・`orderedTwoPhaseStaircase`・`iteratedStaircase`・`oneSidedFourSegmentPath`・`fourJunctionPairs`・`fourPartClosure` とその定理を使う具体版（合わせて約 75 宣言）。依存: 回転の行。 |
-| 離散 Whitney 系 | 【分離】セルと格子の補題を具体版で示す | 未着手 | `FourCellsFormParityArcs`・`DiagonalCellPairsExcluded`・`activeVertices`・`exists_position_of_odd_count`・`periodic_closure_length_necSuf`・`firstHitStepSet` など、`NecSuf.KacWard` の残りの定義と定理を使う具体版。分離の台帳で `DEP\tconcrete` の行のうち `KacWard` の残り全部。依存: 方向の列の行。 |
 | 道具（マッチング） | 【分離】マッチングの向きの符号を具体版で示す | 未着手 | 具体版の 8 宣言が `NecSuf.AlgebraicEigenvalue` の `ascendingMatePair`・`orientationFactor`・`matchingPairWordOrientationSign` を使う。依存: 置換の符号の行。 |
 | Kac--Ward 行列の反対称化 | 【分離】必要十分版が使う具体版のマッチングと置換の定義を、必要十分版の側に立てる | 未着手 | `NecSuf.KacWard` の 98 定数が具体版の `PerfectMatching`・`FixedPointFreeInvolution`・`perfectMatchingMate`・`matchingPair*`・`finitePermutation*`・`finiteMapIterate`・`consecutivePairs` などを使う。必要十分版に一般の型の定義を置き、具体版への参照を外す。依存: マッチングの向きの符号の行（同じファイルを触る）。 |
-| （全章） | 【分離】導出の定理を導出のファイルへ移し、import を分ける | 未着手 | 具体版のファイルに置いた `*_from_necSuf`（例: `KacWard/ClosedWalkRotationPhase.lean`）を `*FromNecSuf.lean` へ移し、分離の台帳の `IMPORT` の行（具体版→必要十分版・導出、必要十分版→具体版）を全て消す。依存: 上の【分離】の行の全て。 |
-| （全章） | 【分離】分離の台帳の残りを零にする | 未着手 | 上の行で扱わなかった `concrete-necsuf-separation-ledger.txt` の行を一件ずつ直す。台帳が空になり、`check-concrete-necsuf-separation.sh` の四つの件数が全て 0 になったら済み。依存: 導出を移す行。 |
+| 道具（行シフトの軌道） | 【分離】行シフトの軌道と周期を具体版で示す | 未着手 | 具体版の 16 宣言が `NecSuf.AlgebraicEigenvalue` の `iterLeft`・`orbit`・`minimalPeriod` とその定理（`RowShiftOrbit`・`RowShiftPeriod`・`ShiftMatrixOrder`・`RowShiftOrbitPartition`）を使う。依存: なし。 |
+| 熱力学極限 | 【分離】正の有理数の冪の正値性と部分和を具体版で示す | 未着手 | 具体版の 28 宣言が `NecSuf.ThermodynamicLimit.pow_pos_by_induction` を、2 宣言が `NecSuf.FisherZero.nonemptyPartialSum` を使う。依存: なし。 |
 | 道具（有限グラフ） | 【未定義の記号】有限単純グラフ・道・閉路・木を論文の定義どおり具体版で定義する | 未着手 | `FiniteSimpleGraph n := SimpleGraph (Fin n)` で、道・閉路・木は mathlib の `Walk.IsPath`・`IsCycle`・`IsTree`。本文 `def_finite_simple_graph` ほかは $(V,E)$、$E$ を相異なる二頂点の組の集合として定義している。本文の定義どおりに具体版を定義し、mathlib との一致は補題一本に留める。依存: なし。 |
 | 実数体への脱出と熱力学極限 | 【未定義の記号】脱出の章で使う π・指数関数・余弦・正弦・積分・極限を本文で宣言する | 未着手 | 本文はこれらを定義しない。積分は「実数体上の連続関数の Riemann 積分」と書くが、Lean の具体版は `intervalIntegral`（Lebesgue 測度による区間積分）である。本文に宣言のブロックを置き、使う性質と Lean の対応先（`Real.pi`・`Complex.exp`・`Real.cos`・`intervalIntegral`・`Filter.Tendsto`）を登録し、積分の呼び名を Lean と一致させる。依存: なし。 |
-| （全章） | 【一対一】論文の引用と Lean の依存の突き合わせを検査にする | 未着手 | ブロックごとに、Lean 具体版の証明が使う登録済みの主張（登録の無い補助補題は通り抜けて辿る）と、本文の証明が根拠として引く主張（`\blkref` と式変形の行の参照）を比べる道具を `lean/scripts/` に作り、ずれを台帳に載せて減らすだけにする（分離の検査と同じ形）。2026-11-21 の点検の測り方では、主張・定理 867 件のうち一致は 480 件、Lean が論文の引かない主張を使うものが 194 件、論文が式の根拠として引く主張を Lean が使わないものが 90 件だった。依存: なし。 |
 | （全章） | 【一対一】突き合わせの台帳のずれを一件ずつ直す | 未着手 | runbook「Lean の点検で見つかった直し」の一対一の直し方で直す。台帳が空になったら済み。依存: 突き合わせの検査の行。 |
+| （全章） | 【分離】導出の定理を導出のファイルへ移し、import を分ける | 未着手 | 具体版のファイルに置いた `*_from_necSuf`（例: `KacWard/ClosedWalkRotationPhase.lean`）を `*FromNecSuf.lean` へ移し、分離の台帳の `IMPORT` の行（具体版→必要十分版・導出、必要十分版→具体版）を全て消す。依存: 上の【分離】の行の全てと、並列の表の【分離】の三行（回転・方向の列・セルと格子）。 |
+| （全章） | 【分離】分離の台帳の残りを零にする | 未着手 | 上の行で扱わなかった `concrete-necsuf-separation-ledger.txt` の行を一件ずつ直す。台帳が空になり、`check-concrete-necsuf-separation.sh` の四つの件数が全て 0 になったら済み。依存: 導出を移す行。 |
 | 臨界指数を零点列で書く | 先頭距離の列の可算な命題 | 保留 | $L=2,\dots,8$ の七点では定義多項式の次数も実対数へ脱出した読みも一般則・収束先を一意に定めない。命題候補が立つまで本文へ項目を追加しない。 |
 
 **並列の積み上げが受け持つもの**（連続実行「可算二次元イジング: 証明の積み上げ（並列）」が上から順に進める。runbook「二本の積み上げ」）。
+2026-11-21 の研究管理: 到達点の残りは合成の一行だけになった。並列は合成と通しの定理を済ませると表が空になるので、主経路の【分離】の行のうち置換の符号の鎖と独立な離散 Whitney 系の三行（回転 → 方向の列 → セルと格子。`NecSuf.KacWard` の回転・方向・セルのファイルと、その定義を使う具体版）を末尾へ移した。主経路の置換の符号・行列式・マッチングの行は `AlgebraicEigenvalue` と Pfaffian のファイルを触り、この三行と同じファイルを書かない。合成は到達点の四つの具体版の既存のファイル（主経路の先頭の Cauchy 性の行が書き換える）を避け、仮定を外した定理を新しいファイルに置く。
 2026-11-20 の研究管理: 並列の三行は全て主経路の「二次多項式が根を持つ」を待ち、並列は待つ間に Laplace の帰納法の部品を割って進めていた。主経路の表で鎖に載らず、もう着手できる「表示の一意性」と「共役の積」の二行を並列の先頭へ移した（「代数的数の全体になる」が引く）。主経路は鎖の起点「二次多項式が根を持つ」を先に済ませ、その後に合成が引く二行（奇数次の根、平方の三分法）を進める。
 2026-11-16 の研究管理: 並列は 11/15 23:39 UTC から約 9 時間、表の唯一の行が主経路の Riemann 和を待って空回りした（約 150 回、全て変更なし）。最長の鎖は 4 件（実対数 → Riemann 和 → 周期境界の密度 → Onsager 表示）で、Riemann 和の後半は実対数に依存しないので、Riemann 和を二段に割って並列へ移し、待っている間の行として有限トーラス公式も移した。主経路は実対数の行を続ける。
 2026-11-14 の研究管理: 並列の表は到達点への最長の鎖だけにした。平方恒等式から先の枝（有限トーラス公式、自己双対変換の二件、分散因子の有限積の実対数、Riemann 和）は主経路へ移した。並列は 24 時間に 13 回成功し、Lean の無いものを 4 件減らした（鎖は 16 件から 12 件）。鎖は直列にしか進まないので、鎖に載らない作業を並列に入れない。
@@ -60,6 +60,9 @@
 |---|---|---|---|
 | 零点の詰め寄り | 実閉部分体の存在の合成と到達点からのデータの引数の除去 | 未着手 | 主経路の「奇数次の多項式が根を持つ」「平方の三分法」の二行と、済んだ「代数的数の全体になる」（`claim_adjoin_imaginary_unit_gives_algebraic_numbers`）と「表示は一意」（`claim_imaginary_unit_extension_unique_representation`）が揃ってから。本文に `claim_real_closed_subfield_exists`（このラベル名は計測の道具が名指す）を立て、`def_real_closed_subfield` の「既知である」の段落をこの主張への参照に替える。Lean で `RealClosedSubfieldSqrtTwoData s` の値を作り、到達点の四つの具体版について、データ・$z$（$z^4=-1$ は `IsAlgClosed` から取れる）を引数に取らない形の定理を足して `lean:` に登録する。主経路の行を待つ間は表の先頭の行が全て済んでいれば何もしない。 |
 | （全章） | 【繋がり】到達点の四つを仮定の無い一つの通しの定理にまとめる | 未着手 | 到達点の Lean は四つの別々の定理で、実閉部分体のデータと $z^4=-1$ を満たす $z\in\overline{\mathbb{Q}}$ を引数で受け取る。上の行でデータの引数を外した後、$z$ の存在も示して引数を外し、四つの到達点を一つの Lean 定理として述べ、`check-no-sorry.sh` の対象に登録する。依存: 上の行。 |
+| 離散 Whitney 系 | 【分離】回転と回転値を具体版の定義で立て直す | 未着手 | 具体版の 58 宣言が `NecSuf.KacWard` の `Turn`・`turnValue`・`phaseOfTurn`・`reverseTurn` と `three_value_phase_ne_zero` を使う。依存: なし。 |
+| 離散 Whitney 系 | 【分離】方向の列と階段を具体版の定義で立て直す | 未着手 | `cyclicAdjacentSum`・`internalAdjacentSum`・`twoBlockSequence`・`joinDirectionSequence`・`repeatDirectionSequence`・`twoPhaseStaircase`・`orderedTwoPhaseStaircase`・`iteratedStaircase`・`oneSidedFourSegmentPath`・`fourJunctionPairs`・`fourPartClosure` とその定理を使う具体版（合わせて約 75 宣言）。依存: 回転の行。 |
+| 離散 Whitney 系 | 【分離】セルと格子の補題を具体版で示す | 未着手 | `FourCellsFormParityArcs`・`DiagonalCellPairsExcluded`・`activeVertices`・`exists_position_of_odd_count`・`periodic_closure_length_necSuf`・`firstHitStepSet` など、`NecSuf.KacWard` の残りの定義と定理を使う具体版。分離の台帳で `DEP\tconcrete` の行のうち `KacWard` の残り全部。依存: 方向の列の行。2026-11-21 の研究管理が、回転・方向の列とともに並列の表へ移した。 |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
 割り直した理由は「前進の記録」へ 1 行で残す。

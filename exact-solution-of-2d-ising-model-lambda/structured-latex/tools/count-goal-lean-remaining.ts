@@ -344,6 +344,7 @@ const BLKREF_RE = /\\blkref\{([^}]+)\}/g;
 type Block = {
   id: string;
   kind: string;
+  proof?: unknown;
   title?: { text?: string };
   labels?: readonly string[];
   lean?: readonly string[];
@@ -421,7 +422,13 @@ const ledger = new Set(
     .filter((line) => line !== "" && !line.startsWith("#")),
 );
 
-const counted = [...closure].filter((block) => COUNTED_KINDS.has(block.kind));
+// 注意は、証明を持つか Lean を宣言したときだけ数える。証明も Lean も無い注意（方針・案内）は
+// 数学の主張を持たず、Lean の対象にならない。
+const counted = [...closure].filter(
+  (block) =>
+    COUNTED_KINDS.has(block.kind) &&
+    (block.kind !== "remark" || block.proof !== undefined || (block.lean ?? []).length > 0),
+);
 const withoutLean = new Set(counted.filter((block) => (block.lean ?? []).length === 0));
 const delegating = counted.filter((block) => (block.lean ?? []).some((name) => ledger.has(name)));
 const missingDeps = (block: Block): Block[] =>
