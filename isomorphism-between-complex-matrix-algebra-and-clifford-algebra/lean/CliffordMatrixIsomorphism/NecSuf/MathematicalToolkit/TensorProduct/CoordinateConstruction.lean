@@ -19,7 +19,7 @@
 具体版と同じ手順では係数の交換法則を外せない（本文の構成は可換な係数の上でだけ k 重テンソル積を与える）。
 -/
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorProduct.MultilinearMap
-import CliffordMatrixIsomorphism.MathematicalToolkit.TensorProduct.BaseNNumbering
+import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorProduct.BaseNNumbering
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorProduct.ComplexValuedMaps
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorProduct.OrderedProduct
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.FiniteSetSum.SumOverFiniteSet

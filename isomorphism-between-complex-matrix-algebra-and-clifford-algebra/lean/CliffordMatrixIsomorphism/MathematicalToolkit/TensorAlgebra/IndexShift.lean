@@ -2,8 +2,7 @@
 節「テンソル代数」の、つなげた組の主張で使う番号の書き直し。本文の「r ∈ {1,…,k} は {1,…,k+l} の元でもある」と
 「k + r ∈ {1,…,k+l}」を、同じ番号の自然数を `Idx (k + l)` の元として書く写像に名前を付けたもの。
 
-このファイルは ℂ を含まないので、具体版（`Concatenation.lean`）と必要十分版
-（`NecSuf/MathematicalToolkit/TensorAlgebra/Concatenation.lean`）が同じものを引く。
+必要十分版は `NecSuf/MathematicalToolkit/TensorAlgebra/IndexShift.lean` に同じ形で置く。
 -/
 import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.Numbering
 

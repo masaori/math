@@ -2,7 +2,7 @@
 章「複素行列環」の、{1,2} で添字づけた行列の積の成分と、部分集合全体で添字づけたクロネッカー積とその三つの主張の必要十分版。
 具体版 `ComplexMatrixAlgebra/KroneckerProduct/KroneckerProduct.lean` と同じ def と calc の行で、係数 ℂ を型の変数 K に替えて書く。
 {1,2}・o_{M,T}(k)・(2, id_2)・{1,2} が有限集合であること（`MembershipIndex.lean`）と P_M（`PowerSetNumbering/`）は ℂ を含まないので、
-具体版と同じものを引く。
+必要十分版の側に同じ形で置いたもの（`NecSuf/ComplexMatrixAlgebra/`）を引く。
 
   本文のラベル                                                          このファイル                            使う K の性質
   claim_entry_of_product_of_matrices_indexed_by_two_element_set         entry_mul_two                           L（積を定めるためと、0 + a = a）
@@ -30,13 +30,13 @@ L : `ValuedMapsLaws K` は積 `Mat.mul L hX` を定めるのに要る。積の�
   λ を番号順の積の前の部分の積の前へ出せない（`NecSuf/MathematicalToolkit/TensorProduct/OrderedProduct.lean`）。
   K 全体の乗法の交換法則は要らない。
 -/
-import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.KroneckerProduct.MembershipIndex
+import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.KroneckerProduct.MembershipIndex
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.KroneckerProduct.SumOverPowerSet
 
 namespace CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet PowerSet.ext isFiniteSet_powerSet idxOne idxTwo
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet PowerSet.ext isFiniteSet_powerSet idxOne idxTwo
   idxOne_ne_idxTwo isNumbering_two isFiniteSet_two membershipIndex membershipIndex_of_mem membershipIndex_of_not_mem)
 
 universe uK

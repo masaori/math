@@ -4,7 +4,7 @@ K := ℂ、n := -1_ℂ への特殊化から得られることを示す導出版
 具体版の主張は、どれも具体版と同じ名前に `_of_necSuf` を付けて示す（必要十分版の主張も具体版と同じ名前）。
 
 クリフォード代数の中の主張は、`LocalIdentitiesFromNecSuf.lean` と同じく、Φ ∘ γ = γ' ∘（点を写す写像）を満たす
-準同型 Φ : Cl → Cl' で運ぶ（`eq_of_toN_eq`）。Φ はこの節の定義の四つ（a†_{U,≤m}・P_{≤m}・Q^{T,U}_m・u^S_i）を
+準同型 Φ : Cl → Cl' で運ぶ（`equal_of_toN_eq`）。Φ はこの節の定義の四つ（a†_{U,≤m}・P_{≤m}・Q^{T,U}_m・u^S_i）を
 必要十分版の同じ名前の元へ移す（`toN_…`）。1 の分解の和は、Φ が線型写像なので有限集合の上の和を値の和へ移す
 （`IsComplexLinearMap.map_sumOverFiniteSet`）。
 部分集合の和の主張（一般の ℂ-代数 B）は、B を必要十分版の K := ℂ の代数として読み（`ComplexAlgebra.toNecSuf`）、
@@ -16,6 +16,10 @@ import CliffordMatrixIsomorphism.Isomorphism.GlobalIdentities.GlobalIdentities
 import CliffordMatrixIsomorphism.Isomorphism.LocalIdentities.LocalIdentitiesFromNecSuf
 import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.FiniteSetSumFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.GlobalIdentities.GlobalIdentities
+
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
 
 namespace CliffordMatrixIsomorphism.ComplexAlgebra
 
@@ -106,7 +110,7 @@ theorem annihilation_commute_reversedPair_of_necSuf {i j : ℕ} (hi : 1 ≤ i �
     (hij : i ≠ j) :
     D.space.cliffordAlgebra.mul (D.annihilation i) (D.space.cliffordAlgebra.mul (D.creation j) (D.annihilation j))
       = D.space.cliffordAlgebra.mul (D.space.cliffordAlgebra.mul (D.creation j) (D.annihilation j)) (D.annihilation i) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, hΦ.map_mul, hΦ.map_mul, toN_annihilation hΦγ, toN_creation hΦγ, toN_annihilation hΦγ]
   exact D.toNecSuf.annihilation_commute_reversedPair complexCliffordLaws add_neg_cancel hi hj hij
@@ -115,7 +119,7 @@ theorem annihilation_commute_reversedPair_of_necSuf {i j : ℕ} (hi : 1 ≤ i �
 theorem vacuumFactor_commute_of_necSuf {i j : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) (hj : 1 ≤ j ∧ j ≤ D.M) (hij : i ≠ j) :
     D.space.cliffordAlgebra.mul (D.vacuumFactor i) (D.vacuumFactor j)
       = D.space.cliffordAlgebra.mul (D.vacuumFactor j) (D.vacuumFactor i) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, toN_vacuumFactor hΦ hΦγ, toN_vacuumFactor hΦ hΦγ]
   exact D.toNecSuf.vacuumFactor_commute complexCliffordLaws add_neg_cancel hi hj hij
@@ -123,7 +127,7 @@ theorem vacuumFactor_commute_of_necSuf {i j : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) 
 /-- 本文 `claim_vacuum_factor_times_annihilation_generator_is_annihilation_generator` を必要十分版から得る。 -/
 theorem vacuumFactor_mul_annihilation_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.vacuumFactor i) (D.annihilation i) = D.annihilation i := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_vacuumFactor hΦ hΦγ, toN_annihilation hΦγ]
   exact D.toNecSuf.vacuumFactor_mul_annihilation complexCliffordLaws add_neg_cancel hi
@@ -131,7 +135,7 @@ theorem vacuumFactor_mul_annihilation_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i �
 /-- 本文 `claim_creation_generator_times_vacuum_factor_is_creation_generator` を必要十分版から得る。 -/
 theorem creation_mul_vacuumFactor_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.creation i) (D.vacuumFactor i) = D.creation i := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_vacuumFactor hΦ hΦγ, toN_creation hΦγ]
   exact D.toNecSuf.creation_mul_vacuumFactor complexCliffordLaws add_neg_cancel hi
@@ -139,7 +143,7 @@ theorem creation_mul_vacuumFactor_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.
 /-- 本文 `claim_vacuum_factor_is_idempotent` を必要十分版から得る。 -/
 theorem vacuumFactor_mul_self_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.vacuumFactor i) (D.vacuumFactor i) = D.vacuumFactor i := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_vacuumFactor hΦ hΦγ]
   exact D.toNecSuf.vacuumFactor_mul_self complexCliffordLaws add_neg_cancel hi
@@ -148,7 +152,7 @@ theorem vacuumFactor_mul_self_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
 theorem initialCreationProduct_succ_of_necSuf (U : PowerSet D.M) (m : ℕ) :
     D.initialCreationProduct U (m + 1)
       = D.space.cliffordAlgebra.mul (D.initialCreationProduct U m) (D.selectedCreationFactor U (m + 1)) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_initialCreationProduct hΦ hΦγ, toN_initialCreationProduct hΦ hΦγ,
     toN_selectedCreationFactor hΦ hΦγ]
@@ -157,7 +161,7 @@ theorem initialCreationProduct_succ_of_necSuf (U : PowerSet D.M) (m : ℕ) :
 /-- 本文 `claim_initial_ordered_creation_product_up_to_last_number_is_whole_product` を必要十分版から得る。 -/
 theorem initialCreationProduct_last_of_necSuf (U : PowerSet D.M) :
     D.initialCreationProduct U D.M = D.orderedCreationProduct U := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_initialCreationProduct hΦ hΦγ, toN_orderedCreationProduct hΦ hΦγ]
   exact D.toNecSuf.initialCreationProduct_last complexCliffordLaws U
@@ -165,14 +169,14 @@ theorem initialCreationProduct_last_of_necSuf (U : PowerSet D.M) :
 /-- 本文 `claim_initial_part_of_vacuum_element_splits_off_last_factor` を必要十分版から得る。 -/
 theorem initialVacuumPart_succ_of_necSuf (m : ℕ) :
     D.initialVacuumPart (m + 1) = D.space.cliffordAlgebra.mul (D.initialVacuumPart m) (D.vacuumFactor (m + 1)) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_initialVacuumPart hΦ hΦγ, toN_initialVacuumPart hΦ hΦγ, toN_vacuumFactor hΦ hΦγ]
   exact D.toNecSuf.initialVacuumPart_succ complexCliffordLaws m
 
 /-- 本文 `claim_initial_part_of_vacuum_element_up_to_last_number_is_vacuum_element` を必要十分版から得る。 -/
 theorem initialVacuumPart_last_of_necSuf : D.initialVacuumPart D.M = D.vacuumElement := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_initialVacuumPart hΦ hΦγ, toN_vacuumElement hΦ hΦγ]
   exact D.toNecSuf.initialVacuumPart_last complexCliffordLaws
@@ -184,7 +188,7 @@ theorem vacuumSandwich_last_of_necSuf (T U : PowerSet D.M) :
           (D.space.cliffordAlgebra.mul D.vacuumElement
             (D.space.cliffordAlgebra.mul (D.reverseOrderedAnnihilationProduct T) (D.orderedCreationProduct U)))
           D.vacuumElement := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_vacuumSandwich hΦ hΦγ, hΦ.map_mul, hΦ.map_mul, hΦ.map_mul, toN_vacuumElement hΦ hΦγ,
     toN_reverseOrderedAnnihilationProduct hΦ hΦγ, toN_orderedCreationProduct hΦ hΦγ]
@@ -197,7 +201,7 @@ theorem vacuumFactor_commute_initialParts_of_necSuf (T U : PowerSet D.M) {m : �
       = D.space.cliffordAlgebra.mul
           (D.space.cliffordAlgebra.mul (D.initialReverseAnnihilationProduct T m) (D.initialCreationProduct U m))
           (D.vacuumFactor (m + 1)) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, hΦ.map_mul, hΦ.map_mul, toN_vacuumFactor hΦ hΦγ,
     toN_initialReverseAnnihilationProduct hΦ hΦγ, toN_initialCreationProduct hΦ hΦγ]
@@ -207,7 +211,7 @@ theorem vacuumFactor_commute_initialParts_of_necSuf (T U : PowerSet D.M) {m : �
 theorem vacuumFactor_commute_initialVacuumPart_of_necSuf {m : ℕ} (hm : m + 1 ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.vacuumFactor (m + 1)) (D.initialVacuumPart m)
       = D.space.cliffordAlgebra.mul (D.initialVacuumPart m) (D.vacuumFactor (m + 1)) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, toN_vacuumFactor hΦ hΦγ, toN_initialVacuumPart hΦ hΦγ]
   exact D.toNecSuf.vacuumFactor_commute_initialVacuumPart complexCliffordLaws add_neg_cancel hm
@@ -219,7 +223,7 @@ theorem initialParts_mul_succ_of_necSuf (T U : PowerSet D.M) (m : ℕ) :
           (D.space.cliffordAlgebra.mul
             (D.space.cliffordAlgebra.mul (D.initialReverseAnnihilationProduct T m) (D.initialCreationProduct U m))
             (D.selectedCreationFactor U (m + 1))) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, hΦ.map_mul, hΦ.map_mul, toN_initialReverseAnnihilationProduct hΦ hΦγ,
     toN_initialCreationProduct hΦ hΦγ, toN_selectedAnnihilationFactor hΦ hΦγ,
@@ -231,7 +235,7 @@ theorem initialParts_mul_succ_of_necSuf (T U : PowerSet D.M) (m : ℕ) :
 theorem vacuumSandwich_succ_of_exactlyOne_of_necSuf (T U : PowerSet D.M) {m : ℕ} (hm : m + 1 ≤ D.M)
     (h : (m + 1 ∈ T.1 ∧ m + 1 ∉ U.1) ∨ (m + 1 ∉ T.1 ∧ m + 1 ∈ U.1)) :
     D.vacuumSandwich T U (m + 1) = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_vacuumSandwich hΦ hΦγ, toN_zero hΦ]
   exact D.toNecSuf.vacuumSandwich_succ_of_exactlyOne complexCliffordLaws add_neg_cancel T U hm h
@@ -240,7 +244,7 @@ theorem vacuumSandwich_succ_of_exactlyOne_of_necSuf (T U : PowerSet D.M) {m : �
 theorem vacuumSandwich_succ_of_neither_of_necSuf (T U : PowerSet D.M) {m : ℕ} (hm : m + 1 ≤ D.M)
     (hT : m + 1 ∉ T.1) (hU : m + 1 ∉ U.1) :
     D.vacuumSandwich T U (m + 1) = D.space.cliffordAlgebra.mul (D.vacuumSandwich T U m) (D.vacuumFactor (m + 1)) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_vacuumSandwich hΦ hΦγ, toN_vacuumSandwich hΦ hΦγ, toN_vacuumFactor hΦ hΦγ]
   exact D.toNecSuf.vacuumSandwich_succ_of_neither complexCliffordLaws add_neg_cancel T U hm hT hU
@@ -251,7 +255,7 @@ theorem vacuumSandwich_succ_of_both_of_necSuf (T U : PowerSet D.M) {m : ℕ} (hm
     D.vacuumSandwich T U (m + 1)
       = D.space.cliffordAlgebra.mul (D.annihilation (m + 1))
           (D.space.cliffordAlgebra.mul (D.vacuumSandwich T U m) (D.creation (m + 1))) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, toN_vacuumSandwich hΦ hΦγ, toN_vacuumSandwich hΦ hΦγ, toN_annihilation hΦγ,
     toN_creation hΦγ]
@@ -262,7 +266,7 @@ theorem vacuumSandwich_of_agree_of_necSuf (T U : PowerSet D.M) :
     ∀ m : ℕ, m ≤ D.M → (∀ t : ℕ, 1 ≤ t → t ≤ m → (t ∈ T.1 ↔ t ∈ U.1)) →
       D.vacuumSandwich T U m = D.initialVacuumPart m := by
   intro m hm hagree
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_vacuumSandwich hΦ hΦγ, toN_initialVacuumPart hΦ hΦγ]
   exact D.toNecSuf.vacuumSandwich_of_agree complexCliffordLaws add_neg_cancel T U m hm hagree
@@ -272,7 +276,7 @@ theorem vacuumSandwich_of_disagree_of_necSuf (T U : PowerSet D.M) :
     ∀ m : ℕ, m ≤ D.M → (∃ t : ℕ, 1 ≤ t ∧ t ≤ m ∧ ((t ∈ T.1 ∧ t ∉ U.1) ∨ (t ∉ T.1 ∧ t ∈ U.1))) →
       D.vacuumSandwich T U m = D.space.cliffordAlgebra.zero := by
   intro m hm hdis
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_vacuumSandwich hΦ hΦγ, toN_zero hΦ]
   exact D.toNecSuf.vacuumSandwich_of_disagree complexCliffordLaws add_neg_cancel T U m hm hdis
@@ -285,7 +289,7 @@ theorem vacuumElement_sandwich_of_necSuf (T U : PowerSet D.M) :
           (D.space.cliffordAlgebra.mul (D.reverseOrderedAnnihilationProduct T) (D.orderedCreationProduct U)))
         D.vacuumElement
       = D.space.cliffordAlgebra.smul (kroneckerDelta T U) D.vacuumElement := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, hΦ.map_mul, hΦ.map_smul, toN_vacuumElement hΦ hΦγ,
     toN_reverseOrderedAnnihilationProduct hΦ hΦγ, toN_orderedCreationProduct hΦ hΦγ, kroneckerDelta_eq_necSuf]
@@ -297,7 +301,7 @@ theorem creation_vacuum_annihilation_factor_of_necSuf (S : PowerSet D.M) {i : �
         (D.space.cliffordAlgebra.mul (D.selectedCreationFactor S i) (D.vacuumFactor i))
         (D.selectedAnnihilationFactor S i)
       = D.selectedNumberFactor S i := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, toN_selectedCreationFactor hΦ hΦγ, toN_vacuumFactor hΦ hΦγ,
     toN_selectedAnnihilationFactor hΦ hΦγ, toN_selectedNumberFactor hΦ hΦγ]
@@ -311,7 +315,7 @@ theorem initialParts_product_eq_orderedProduct_of_necSuf (S : PowerSet D.M) :
           (D.initialReverseAnnihilationProduct S m)
         = ComplexAlgebra.orderedProduct D.space.cliffordAlgebra m (D.selectedNumberFactor S) := by
   intro m hm
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, toN_initialCreationProduct hΦ hΦγ, toN_initialVacuumPart hΦ hΦγ,
     toN_initialReverseAnnihilationProduct hΦ hΦγ,
@@ -326,7 +330,7 @@ theorem decomposition_of_unity_of_necSuf :
           (D.space.cliffordAlgebra.mul (D.orderedCreationProduct S) D.vacuumElement)
           (D.reverseOrderedAnnihilationProduct S))
       = D.space.cliffordAlgebra.one := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   let A' := (D.spaceN).cliffordAlgebra complexCliffordLaws
   have hterm : ∀ S : PowerSet D.M,
@@ -353,7 +357,7 @@ theorem decomposition_of_unity_of_necSuf :
             (D.toNecSuf.vacuumElement complexCliffordLaws))
             (D.toNecSuf.reverseOrderedAnnihilationProduct complexCliffordLaws S)) := by
         rw [funext hterm]
-    _ = NecSuf.VectorSpace.sumOverFiniteSet A'.toVectorSpace (isFiniteSet_powerSet D.M) (fun _ => 1)
+    _ = NecSuf.VectorSpace.sumOverFiniteSet A'.toVectorSpace (isFiniteSet_powerSet D.M).toNecSuf (fun _ => 1)
           (fun S => A'.mul (A'.mul (D.toNecSuf.orderedCreationProduct complexCliffordLaws S)
             (D.toNecSuf.vacuumElement complexCliffordLaws))
             (D.toNecSuf.reverseOrderedAnnihilationProduct complexCliffordLaws S)) :=

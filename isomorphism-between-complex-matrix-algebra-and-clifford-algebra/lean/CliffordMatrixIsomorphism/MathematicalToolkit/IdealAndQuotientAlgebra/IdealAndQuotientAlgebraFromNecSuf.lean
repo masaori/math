@@ -85,7 +85,7 @@ theorem quotientOne_eq_necSuf (SA : ComplexAlgebra A) (I : Set A) :
     quotientOne SA I = (NecSuf.AlgebraOver.quotientOne SA.toNecSuf (-1) I : QuotientSet SA I) := rfl
 
 theorem quotientRing_eq_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I) :
-    quotientRing hI
+    (quotientRing hI).toNecSuf
       = NecSuf.AlgebraOver.quotientRing ((isTwoSidedIdeal_iff_necSuf SA I).1 hI) complexCongruenceLaws :=
   rfl
 
@@ -274,7 +274,8 @@ theorem inducedMap_isComplexAlgebraHomomorphism_of_necSuf {SA : ComplexAlgebra A
   exact NecSuf.AlgebraOver.inducedMap_isAlgebraHomomorphism ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
     complexCongruenceLaws complexNegOneComm ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ) hφI
 
-theorem eq_inducedMap_of_comp_eq_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAlgebra B}
+/-- 本文 `claim_homomorphism_from_quotient_algebra_composing_with_projection_is_unique` を、必要十分版から得たもの（名前は `eq_` で始めない。分離の検査が自動生成の等式の補題と見なすため）。 -/
+theorem equal_inducedMap_of_comp_eq_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAlgebra B}
     {I : Set A} {φ : A → B} (hI : IsTwoSidedIdeal SA I) (hφ : IsComplexAlgebraHomomorphism SA SB φ)
     (hφI : ∀ x ∈ I, φ x = SB.zero) (ψ : QuotientSet SA I → B)
     (hψ : IsComplexAlgebraHomomorphism (quotientAlgebra hI) SB ψ)

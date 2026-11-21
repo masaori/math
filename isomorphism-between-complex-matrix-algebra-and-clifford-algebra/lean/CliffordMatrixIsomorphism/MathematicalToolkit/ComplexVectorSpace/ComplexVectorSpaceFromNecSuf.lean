@@ -237,7 +237,7 @@ def DualSpace.ofNecSuf {S : ComplexVectorSpace V} (f : NecSuf.VectorSpace.DualSp
   ⟨f.1, (isComplexLinearForm_iff_necSuf S f.1).2 f.2⟩
 
 /-- 必要十分版の双対空間の等式を、値の写像が同じ具体版の双対空間の元の等式として読む。 -/
-theorem DualSpace.eq_of_necSuf {S : ComplexVectorSpace V} {f g : DualSpace S}
+theorem DualSpace.equal_of_necSuf {S : ComplexVectorSpace V} {f g : DualSpace S}
     {f' g' : NecSuf.VectorSpace.DualSpace S.toNecSuf} (h : f' = g') (hf : f.1 = f'.1)
     (hg : g.1 = g'.1) : f = g :=
   Subtype.ext (hf.trans ((congrArg Subtype.val h).trans hg.symm))
@@ -249,30 +249,30 @@ def dualSpaceVectorSpace_of_necSuf (S : ComplexVectorSpace V) :
   add := DualSpace.add S
   smul := DualSpace.smul S
   zero := DualSpace.zero S
-  add_assoc f g h := DualSpace.eq_of_necSuf
+  add_assoc f g h := DualSpace.equal_of_necSuf
     ((NecSuf.VectorSpace.dualSpaceVectorSpace complexDualSpaceVectorSpaceLaws S.toNecSuf).add_assoc
       f.toNecSuf g.toNecSuf h.toNecSuf) rfl rfl
-  add_comm f g := DualSpace.eq_of_necSuf
+  add_comm f g := DualSpace.equal_of_necSuf
     ((NecSuf.VectorSpace.dualSpaceVectorSpace complexDualSpaceVectorSpaceLaws S.toNecSuf).add_comm
       f.toNecSuf g.toNecSuf) rfl rfl
-  add_zero f := DualSpace.eq_of_necSuf
+  add_zero f := DualSpace.equal_of_necSuf
     ((NecSuf.VectorSpace.dualSpaceVectorSpace complexDualSpaceVectorSpaceLaws S.toNecSuf).add_zero
       f.toNecSuf) rfl rfl
   exists_add_inverse f := by
     obtain ⟨f', hf'⟩ :=
       (NecSuf.VectorSpace.dualSpaceVectorSpace complexDualSpaceVectorSpaceLaws S.toNecSuf).exists_add_inverse
         f.toNecSuf
-    exact ⟨DualSpace.ofNecSuf f', DualSpace.eq_of_necSuf hf' rfl rfl⟩
-  smul_assoc l μ f := DualSpace.eq_of_necSuf
+    exact ⟨DualSpace.ofNecSuf f', DualSpace.equal_of_necSuf hf' rfl rfl⟩
+  smul_assoc l μ f := DualSpace.equal_of_necSuf
     ((NecSuf.VectorSpace.dualSpaceVectorSpace complexDualSpaceVectorSpaceLaws S.toNecSuf).smul_assoc
       l μ f.toNecSuf) rfl rfl
-  one_smul f := DualSpace.eq_of_necSuf
+  one_smul f := DualSpace.equal_of_necSuf
     ((NecSuf.VectorSpace.dualSpaceVectorSpace complexDualSpaceVectorSpaceLaws S.toNecSuf).one_smul
       f.toNecSuf) rfl rfl
-  smul_add l f g := DualSpace.eq_of_necSuf
+  smul_add l f g := DualSpace.equal_of_necSuf
     ((NecSuf.VectorSpace.dualSpaceVectorSpace complexDualSpaceVectorSpaceLaws S.toNecSuf).smul_add
       l f.toNecSuf g.toNecSuf) rfl rfl
-  add_smul l μ f := DualSpace.eq_of_necSuf
+  add_smul l μ f := DualSpace.equal_of_necSuf
     ((NecSuf.VectorSpace.dualSpaceVectorSpace complexDualSpaceVectorSpaceLaws S.toNecSuf).add_smul
       l μ f.toNecSuf) rfl rfl
 

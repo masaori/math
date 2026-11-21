@@ -20,6 +20,10 @@ import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.MatrixUnits.MatrixUnits
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.MatrixAlgebra.MatrixAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixUnits.MatrixUnits
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.ComplexMatrixAlgebra
 
 open CliffordMatrixIsomorphism.ComplexVectorSpace
@@ -54,7 +58,7 @@ theorem matrixUnit_mul_matrixUnit_of_necSuf (hX : IsFiniteSet X) [DecidableEq X]
     Mat.mul hX (matrixUnit x y) (matrixUnit z w) = Mat.smul (kroneckerDelta y z) (matrixUnit x w) := by
   rw [Mat.mul_eq_necSuf]
   exact NecSuf.ComplexMatrixAlgebra.matrixUnit_mul_matrixUnit complexValuedMapsLaws
-    MatrixUnits.complex_zero_mul_comm MatrixUnits.complex_one_mul_comm hX x y z w
+    MatrixUnits.complex_zero_mul_comm MatrixUnits.complex_one_mul_comm hX.toNecSuf x y z w
 
 /-- 本文 `claim_matrix_entry_map_is_linear_map` を必要十分版から得る。 -/
 theorem entryMap_isComplexLinearMap_of_necSuf (X : Type u) (p q : X) :
@@ -66,7 +70,7 @@ theorem entryMap_isComplexLinearMap_of_necSuf (X : Type u) (p q : X) :
 theorem sum_matrixUnit_diagonal_eq_one_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] :
     sumOverFiniteSet (matricesVectorSpace X) hX (fun _ => 1) (fun x => matrixUnit x x) = Mat.one := by
   rw [sumOverFiniteSet_eq_necSuf]
-  exact NecSuf.ComplexMatrixAlgebra.sum_matrixUnit_diagonal_eq_one complexValuedMapsLaws hX
+  exact NecSuf.ComplexMatrixAlgebra.sum_matrixUnit_diagonal_eq_one complexValuedMapsLaws hX.toNecSuf
 
 /-- 本文 `claim_matrix_is_double_sum_of_entries_times_matrix_units` を必要十分版から得る。 -/
 theorem eq_double_sum_entry_smul_matrixUnit_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] (F : Mat X) :
@@ -75,6 +79,6 @@ theorem eq_double_sum_entry_smul_matrixUnit_of_necSuf (hX : IsFiniteSet X) [Deci
         (fun y => matrixUnit x y)) := by
   simp only [sumOverFiniteSet_eq_necSuf]
   exact NecSuf.ComplexMatrixAlgebra.eq_double_sum_entry_smul_matrixUnit complexValuedMapsLaws
-    MatrixUnits.complex_zero_mul_comm MatrixUnits.complex_one_mul_comm hX F
+    MatrixUnits.complex_zero_mul_comm MatrixUnits.complex_one_mul_comm hX.toNecSuf F
 
 end CliffordMatrixIsomorphism.ComplexMatrixAlgebra

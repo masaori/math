@@ -17,6 +17,10 @@ import CliffordMatrixIsomorphism.Isomorphism.JordanWignerMatrices.JordanWignerCo
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.FirstSiteHighestDigitNumbering.FirstSiteHighestDigitNumberingFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.JordanWignerMatrices.IndexedByNumbers
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.Isomorphism
 
 open CliffordMatrixIsomorphism.ComplexMatrixAlgebra
@@ -24,32 +28,45 @@ open CliffordMatrixIsomorphism.ComplexVectorSpace
 
 /-! ### 定義の対応 -/
 
+/-- 具体版の {x, y, z} の元を、必要十分版の同じ名前の元へ送る（二つの版に同じ形で別に置いた帰納型の間の写像）。 -/
+def PauliLabel.toNecSuf : PauliLabel → NecSuf.Isomorphism.PauliLabel
+  | .x => .x
+  | .y => .y
+  | .z => .z
+
+/-- 具体版の {y, z} の元を、必要十分版の同じ名前の元へ送る。 -/
+def JordanWignerLabel.toNecSuf : JordanWignerLabel → NecSuf.Isomorphism.JordanWignerLabel
+  | .y => .y
+  | .z => .z
+
 /-- 本文 `def_site_pauli_matrices_indexed_by_numbers` の σ^{a} は、必要十分版の σ^{a} の i := imaginaryUnit の場合と同じ。 -/
-theorem pauliOf_eq_necSuf (a : PauliLabel) : pauliOf a = NecSuf.Isomorphism.pauliOf imaginaryUnit a := by
+theorem pauliOf_eq_necSuf (a : PauliLabel) : pauliOf a = NecSuf.Isomorphism.pauliOf imaginaryUnit a.toNecSuf := by
   cases a <;> rfl
 
 /-- 本文 `def_site_pauli_matrices_indexed_by_numbers` の右辺の族は、必要十分版の族の i := imaginaryUnit の場合と同じ。 -/
 theorem sitePauliFamily_eq_necSuf (a : PauliLabel) (k : ℕ) :
-    sitePauliFamily a k = NecSuf.Isomorphism.sitePauliFamily imaginaryUnit a k := by
+    sitePauliFamily a k = NecSuf.Isomorphism.sitePauliFamily imaginaryUnit a.toNecSuf k := by
   funext t
   cases a <;> rfl
 
 /-- 本文 `def_site_pauli_matrices_indexed_by_numbers` の σ^{a}_{k} は、必要十分版の σ^{a}_{k} の i := imaginaryUnit の場合と一致する。 -/
 theorem sitePauli_eq_necSuf (M : ℕ) (a : PauliLabel) (k : ℕ) :
-    sitePauli M a k = NecSuf.Isomorphism.sitePauli imaginaryUnit M a k := by
+    sitePauli M a k = NecSuf.Isomorphism.sitePauli imaginaryUnit M a.toNecSuf k := by
   rw [sitePauli, numberedKroneckerProduct_eq_necSuf, sitePauliFamily_eq_necSuf]
   rfl
 
 /-- 本文 `def_factors_of_jordan_wigner_matrices_indexed_by_numbers` の F^{(b)}_{m,j} は、必要十分版の F^{(b)}_{m,j} の
 i := imaginaryUnit の場合と一致する。 -/
 theorem numberedJordanWignerFactor_eq_necSuf (M : ℕ) (b : JordanWignerLabel) (m : ℕ) :
-    numberedJordanWignerFactor M b m = NecSuf.Isomorphism.numberedJordanWignerFactor imaginaryUnit M b m := by
+    numberedJordanWignerFactor M b m = NecSuf.Isomorphism.numberedJordanWignerFactor imaginaryUnit M b.toNecSuf m := by
   funext j
   by_cases hjm : j < m
   · rw [numberedJordanWignerFactor, NecSuf.Isomorphism.numberedJordanWignerFactor, if_pos hjm, if_pos hjm,
       sitePauli_eq_necSuf]
+    all_goals rfl
   · rw [numberedJordanWignerFactor, NecSuf.Isomorphism.numberedJordanWignerFactor, if_neg hjm, if_neg hjm,
       sitePauli_eq_necSuf]
+    all_goals (cases b <;> rfl)
 
 /-- 本文 `def_jordan_wigner_z_matrix_indexed_by_numbers` の Z^{(2^M)}_m は、必要十分版の Z^{(2^M)}_m と一致する。 -/
 theorem numberedJordanWignerZ_eq_necSuf (M m : ℕ) :

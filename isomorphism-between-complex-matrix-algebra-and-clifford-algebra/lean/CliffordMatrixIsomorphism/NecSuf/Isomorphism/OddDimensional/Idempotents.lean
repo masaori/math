@@ -320,7 +320,7 @@ namespace CliffordMatrixIsomorphism.NecSuf.Clifford.SplitData
 
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet)
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet)
 
 universe u uK
 

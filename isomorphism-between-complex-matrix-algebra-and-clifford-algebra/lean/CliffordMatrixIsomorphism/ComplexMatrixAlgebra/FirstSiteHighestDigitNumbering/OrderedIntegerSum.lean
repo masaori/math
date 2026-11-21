@@ -1,6 +1,6 @@
 /-
 章「複素行列環」の、整数の番号順の和とその三つの主張。人手証明と 1 対 1 に対応させる。
-ℂ を含まないので、具体版と必要十分版が同じこのファイルを引く（必要十分版・導出版を置かない）。
+必要十分版は `NecSuf/ComplexMatrixAlgebra/FirstSiteHighestDigitNumbering/OrderedIntegerSum.lean` に同じ形で置く。
 
   本文のラベル                                                      このファイル
   def_ordered_sum_of_integers                                       orderedIntSumAux・orderedIntSum（Σ_{t=a}^{b} n_t）・

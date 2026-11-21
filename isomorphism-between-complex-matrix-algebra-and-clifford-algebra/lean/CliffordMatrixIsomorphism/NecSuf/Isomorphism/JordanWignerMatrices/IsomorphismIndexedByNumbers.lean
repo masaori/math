@@ -39,7 +39,7 @@ open CliffordMatrixIsomorphism.NecSuf.VectorSpace
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.Isomorphism
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet twoPower
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet twoPower
   firstSiteHighestNumbering_isNumbering)
 
 universe u v uK

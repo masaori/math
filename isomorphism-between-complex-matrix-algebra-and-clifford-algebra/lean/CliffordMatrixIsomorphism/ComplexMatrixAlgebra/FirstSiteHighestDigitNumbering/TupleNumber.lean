@@ -1,6 +1,6 @@
 /-
 章「複素行列環」の、第 1 成分を最上位の桁として読んだ組の番号 num_M と、その四つの主張。人手証明と 1 対 1 に対応させる。
-ℂ を含まないので、具体版と必要十分版が同じこのファイルを引く（必要十分版・導出版を置かない）。
+必要十分版は `NecSuf/ComplexMatrixAlgebra/FirstSiteHighestDigitNumbering/TupleNumber.lean` に同じ形で置く。
 
   本文のラベル                                                                      このファイル
   def_number_of_tuple_with_first_site_as_highest_digit                              idxValue（{1,2} の元を ℤ の元として読む）・

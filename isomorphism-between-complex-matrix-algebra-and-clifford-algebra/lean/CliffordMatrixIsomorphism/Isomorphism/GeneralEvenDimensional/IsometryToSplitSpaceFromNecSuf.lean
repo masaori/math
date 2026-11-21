@@ -40,6 +40,10 @@ import CliffordMatrixIsomorphism.Isomorphism.MutuallyInverseHomomorphisms.Mutual
 import CliffordMatrixIsomorphism.CliffordAlgebra.SplitQuadraticSpace.GeneratorsFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.GeneralEvenDimensional.IsometryToSplitSpace
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.ComplexVectorSpace
 
 universe v
@@ -363,7 +367,7 @@ theorem splitToCl_inducedHom_mapToSplit (QY : QuadraticSpaceWithBasis Y) (e : �
             imaginaryUnit_mul_self QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm)
             e he.toNecSuf).map_form
           ((QuadraticSpaceWithBasis.transportToNecSuf QY).toCl a) :=
-  eq_of_agree_on_generators_of_necSuf
+  equal_of_agree_on_generators_of_necSuf
     (IsComplexAlgebraHomomorphism.comp_of_necSuf
       (QuadraticSpaceWithBasis.inducedHom_isHom_of_necSuf QY D.space _ (D.mapToSplit_isIsometry QY e he))
       D.splitTransport.toCl_isHom)
@@ -398,7 +402,7 @@ theorem toCl_inducedHom_mapFromSplit (QY : QuadraticSpaceWithBasis Y) (e : ℕ �
             imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
             ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf).map_form
           (D.splitTransport.toCl x) :=
-  eq_of_agree_on_generators_of_necSuf
+  equal_of_agree_on_generators_of_necSuf
     (IsComplexAlgebraHomomorphism.comp_of_necSuf
       (QuadraticSpaceWithBasis.inducedHom_isHom_of_necSuf D.space QY _ (D.mapFromSplit_isIsometry QY e he))
       (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl_isHom)

@@ -26,6 +26,10 @@ import CliffordMatrixIsomorphism.Isomorphism.CreationOperatorMatrices.CountAndSi
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.MatrixAlgebra.MatrixAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.CreationOperatorMatrices.Anticommutation
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.Isomorphism
 
 open CliffordMatrixIsomorphism.ComplexMatrixAlgebra
@@ -39,6 +43,7 @@ theorem creationMatrix_eq_necSuf (M i : ℕ) (hi : 1 ≤ i ∧ i ≤ M) :
   funext p
   unfold creationMatrix NecSuf.Isomorphism.creationMatrix
   rw [sign_eq_necSuf]
+  rfl
 
 /-- 具体版の c_i^T は、必要十分版の c_i^T の n := -1_ℂ の場合と同じ。 -/
 theorem annihilationMatrix_eq_necSuf (M i : ℕ) (hi : 1 ≤ i ∧ i ≤ M) :

@@ -9,10 +9,10 @@
   def_map_with_fixed_second_tuple                                       fixSecond                             なし
   claim_fixing_second_tuple_of_multilinear_map_gives_multilinear_map    fixSecond_isMultilinearMap            なし（K の公理を一つも使わない）
 
-本文の番号の書き直しは、具体版と同じ `IndexShift.lean` の `Idx.inFirst`・`Idx.inSecond` を引く。
+本文の番号の書き直しは、必要十分版の `NecSuf/MathematicalToolkit/TensorAlgebra/IndexShift.lean` の `Idx.inFirst`・`Idx.inSecond` を引く。
 -/
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorProduct.MultilinearMap
-import CliffordMatrixIsomorphism.MathematicalToolkit.TensorAlgebra.IndexShift
+import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorAlgebra.IndexShift
 
 namespace CliffordMatrixIsomorphism
 

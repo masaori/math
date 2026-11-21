@@ -53,8 +53,8 @@ namespace CliffordMatrixIsomorphism.NecSuf.Isomorphism
 
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
-open CliffordMatrixIsomorphism.Isomorphism (countBelow unionSingleton self_mem_unionSingleton)
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
+open CliffordMatrixIsomorphism.NecSuf.Isomorphism (countBelow unionSingleton self_mem_unionSingleton)
 
 universe uK
 
@@ -179,7 +179,7 @@ open CliffordMatrixIsomorphism.NecSuf.Isomorphism
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
 
 universe u uK
 

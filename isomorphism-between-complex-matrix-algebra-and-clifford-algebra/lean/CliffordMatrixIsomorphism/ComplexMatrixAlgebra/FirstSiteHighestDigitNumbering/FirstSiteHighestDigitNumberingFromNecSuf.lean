@@ -13,7 +13,7 @@
 
 ℂ から渡す性質は、`complexValuedMapsLaws`（ℂ^X を線型空間にする八つ）、乗法の交換法則 `mul_comm`、a · 0 = 0 の `mul_zero` と、
 0 と 1 の交換（`mul_comm` から）である。番号で添字づけたクロネッカー積の二つの主張には、ℂ の性質を一つも渡さない。
-ϱ_M・r_M・𝓘_M・ō_M・pos_M・整数の番号順の和・num_M は ℂ を含まないので、両版が同じものを使う（導出版を置かない）。
+ϱ_M・r_M・𝓘_M・ō_M・pos_M・整数の番号順の和・num_M は ℂ を含まず、両版に同じ形で別に置いてある。
 B の中の番号順の積は、具体版の ℂ-代数を必要十分版の代数として読んだもの（`toNecSuf`）が必要十分版の `matricesAlgebra` と
 一致すること（`matricesComplexAlgebra_toNecSuf`）を通して移す。
 -/
@@ -23,6 +23,10 @@ import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.KroneckerProduct.Kronecker
 import CliffordMatrixIsomorphism.MathematicalToolkit.ComplexAlgebra.ComplexAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.FirstSiteHighestDigitNumbering.NumberedKroneckerProduct
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.FirstSiteHighestDigitNumbering.SingleSiteKroneckerProducts
+
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
 
 namespace CliffordMatrixIsomorphism.ComplexMatrixAlgebra
 

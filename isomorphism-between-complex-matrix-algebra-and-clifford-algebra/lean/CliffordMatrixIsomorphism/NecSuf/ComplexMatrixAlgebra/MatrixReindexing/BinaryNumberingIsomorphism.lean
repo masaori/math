@@ -15,13 +15,13 @@
 K の性質が現れるのは、二つの行列の集合を代数にする `matricesAlgebra` を通して「準同型である」と述べる部分だけである。
 -/
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixReindexing.Reindexing
-import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.PowerSetNumbering.BinaryNumbering
+import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.PowerSetNumbering.BinaryNumbering
 
 namespace CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet twoPower binaryNumbering
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet twoPower binaryNumbering
   binaryNumbering_isNumbering isFiniteSet_powerSet)
 
 universe uK

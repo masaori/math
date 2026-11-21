@@ -37,14 +37,14 @@ L : `ValuedMapsLaws K` は {1,2} の行列の積 `Mat.mul L isFiniteSet_two` を
 -/
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.KroneckerProduct.KroneckerProduct
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixUnits.MatrixUnits
-import CliffordMatrixIsomorphism.Isomorphism.JordanWignerMatrices.TwoElementSetMembers
+import CliffordMatrixIsomorphism.NecSuf.Isomorphism.JordanWignerMatrices.TwoElementSetMembers
 
 namespace CliffordMatrixIsomorphism.NecSuf.Isomorphism
 
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (idxOne idxTwo idxOne_ne_idxTwo isFiniteSet_two)
-open CliffordMatrixIsomorphism.Isomorphism (idx_two_cases)
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (idxOne idxTwo idxOne_ne_idxTwo isFiniteSet_two)
+open CliffordMatrixIsomorphism.NecSuf.Isomorphism (idx_two_cases)
 
 universe uK
 

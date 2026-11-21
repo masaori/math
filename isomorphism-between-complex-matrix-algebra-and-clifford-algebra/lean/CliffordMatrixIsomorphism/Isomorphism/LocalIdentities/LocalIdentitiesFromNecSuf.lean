@@ -20,7 +20,7 @@ K := ℂ、n := -1_ℂ への特殊化から得られることを示す導出版
 
 具体版のクリフォード代数 Cl と、必要十分版の前提 `D.toNecSuf` のクリフォード代数 Cl' は別の集合なので、
 `GeneratorsFromNecSuf.lean` と同じく、Φ ∘ γ = γ' ∘（点を写す写像）を満たす準同型 Φ : Cl → Cl' で主張を運ぶ
-（`eq_of_toN_eq`。Φ で写した両辺が等しければ、Ψ ∘ Φ = 恒等写像なので両辺は等しい）。
+（`equal_of_toN_eq`。Φ で写した両辺が等しければ、Ψ ∘ Φ = 恒等写像なので両辺は等しい）。
 Φ は生成元を必要十分版の生成元へ、定義の七つと a_{T,≤m} を必要十分版の同じ名前の元へ移す（`toN_…`。
 番号順の積は、準同型が番号順の積を保つこと `IsComplexAlgebraHomomorphism.map_orderedProduct_of_necSuf` で移す）。
 したがって具体版の主張の両辺の Φ による像は、必要十分版の主張の両辺である。符号 ς は `sign_eq_necSuf` で移す。
@@ -30,6 +30,10 @@ import CliffordMatrixIsomorphism.Isomorphism.LocalIdentities.LocalIdentities
 import CliffordMatrixIsomorphism.Isomorphism.CreationOperatorMatrices.CountAndSignFromNecSuf
 import CliffordMatrixIsomorphism.CliffordAlgebra.SplitQuadraticSpace.GeneratorsFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.LocalIdentities.LocalIdentities
+
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
 
 namespace CliffordMatrixIsomorphism.Clifford.SplitData
 
@@ -139,7 +143,7 @@ theorem annihilation_commute_vacuumFactor_of_necSuf {i j : ℕ} (hi : 1 ≤ i �
     (hij : i ≠ j) :
     D.space.cliffordAlgebra.mul (D.annihilation i) (D.vacuumFactor j)
       = D.space.cliffordAlgebra.mul (D.vacuumFactor j) (D.annihilation i) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, toN_annihilation hΦγ, toN_vacuumFactor hΦ hΦγ]
   exact D.toNecSuf.annihilation_commute_vacuumFactor complexCliffordLaws add_neg_cancel hi hj hij
@@ -149,7 +153,7 @@ theorem creation_commute_vacuumFactor_of_necSuf {i j : ℕ} (hi : 1 ≤ i ∧ i 
     (hij : i ≠ j) :
     D.space.cliffordAlgebra.mul (D.creation i) (D.vacuumFactor j)
       = D.space.cliffordAlgebra.mul (D.vacuumFactor j) (D.creation i) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, toN_creation hΦγ, toN_vacuumFactor hΦ hΦγ]
   exact D.toNecSuf.creation_commute_vacuumFactor complexCliffordLaws add_neg_cancel hi hj hij
@@ -157,7 +161,7 @@ theorem creation_commute_vacuumFactor_of_necSuf {i j : ℕ} (hi : 1 ≤ i ∧ i 
 /-- 本文 `claim_annihilation_generator_times_vacuum_element_is_zero` を必要十分版から得る。 -/
 theorem annihilation_mul_vacuumElement_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.annihilation i) D.vacuumElement = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_annihilation hΦγ, toN_vacuumElement hΦ hΦγ, toN_zero hΦ]
   exact D.toNecSuf.annihilation_mul_vacuumElement complexCliffordLaws add_neg_cancel hi
@@ -165,7 +169,7 @@ theorem annihilation_mul_vacuumElement_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i �
 /-- 本文 `claim_vacuum_element_times_creation_generator_is_zero` を必要十分版から得る。 -/
 theorem vacuumElement_mul_creation_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul D.vacuumElement (D.creation i) = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_creation hΦγ, toN_vacuumElement hΦ hΦγ, toN_zero hΦ]
   exact D.toNecSuf.vacuumElement_mul_creation complexCliffordLaws add_neg_cancel hi
@@ -179,7 +183,7 @@ theorem creation_mul_initialCreationProduct_of_necSuf {i : ℕ} (T : PowerSet D.
             (D.space.cliffordAlgebra.mul (ComplexAlgebra.orderedProduct D.space.cliffordAlgebra m (D.selectedCreationFactor T))
               (D.creation i)) := by
   intro m hm
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_smul, hΦ.map_mul, toN_creation hΦγ,
     toN_orderedProduct hΦ m _ _ (toN_selectedCreationFactor hΦ hΦγ T), sign_eq_necSuf]
@@ -190,7 +194,7 @@ theorem creation_mul_orderedCreationProduct_of_not_mem_of_necSuf {i : ℕ} (hi :
     (T : PowerSet D.M) (hiT : i ∉ T.1) :
     D.space.cliffordAlgebra.mul (D.creation i) (D.orderedCreationProduct T)
       = D.space.cliffordAlgebra.smul (sign (countBelow T i)) (D.orderedCreationProduct (unionSingleton T i hi)) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_smul, toN_creation hΦγ, toN_orderedCreationProduct hΦ hΦγ,
     toN_orderedCreationProduct hΦ hΦγ, sign_eq_necSuf]
@@ -200,7 +204,7 @@ theorem creation_mul_orderedCreationProduct_of_not_mem_of_necSuf {i : ℕ} (hi :
 theorem creation_mul_orderedCreationProduct_of_mem_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M)
     (T : PowerSet D.M) (hiT : i ∈ T.1) :
     D.space.cliffordAlgebra.mul (D.creation i) (D.orderedCreationProduct T) = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_creation hΦγ, toN_orderedCreationProduct hΦ hΦγ, toN_zero hΦ]
   exact D.toNecSuf.creation_mul_orderedCreationProduct_of_mem complexCliffordLaws add_neg_cancel hi T hiT
@@ -209,7 +213,7 @@ theorem creation_mul_orderedCreationProduct_of_mem_of_necSuf {i : ℕ} (hi : 1 �
 theorem initialReverseAnnihilationProduct_succ_of_necSuf (T : PowerSet D.M) (m : ℕ) :
     D.initialReverseAnnihilationProduct T (m + 1)
       = D.space.cliffordAlgebra.mul (D.selectedAnnihilationFactor T (m + 1)) (D.initialReverseAnnihilationProduct T m) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_initialReverseAnnihilationProduct hΦ hΦγ, toN_initialReverseAnnihilationProduct hΦ hΦγ,
     toN_selectedAnnihilationFactor hΦ hΦγ]
@@ -218,7 +222,7 @@ theorem initialReverseAnnihilationProduct_succ_of_necSuf (T : PowerSet D.M) (m :
 /-- 本文 `claim_initial_reverse_ordered_annihilation_product_up_to_last_number_is_whole_product` を必要十分版から得る。 -/
 theorem initialReverseAnnihilationProduct_last_of_necSuf (T : PowerSet D.M) :
     D.initialReverseAnnihilationProduct T D.M = D.reverseOrderedAnnihilationProduct T := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_initialReverseAnnihilationProduct hΦ hΦγ, toN_reverseOrderedAnnihilationProduct hΦ hΦγ]
   exact D.toNecSuf.initialReverseAnnihilationProduct_last complexCliffordLaws T
@@ -230,7 +234,7 @@ theorem initialReverseAnnihilationProduct_mul_annihilation_of_necSuf {i : ℕ} (
         = D.space.cliffordAlgebra.smul (sign (countBelow T (m + 1)))
             (D.space.cliffordAlgebra.mul (D.annihilation i) (D.initialReverseAnnihilationProduct T m)) := by
   intro m hm
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_smul, hΦ.map_mul, toN_annihilation hΦγ, toN_initialReverseAnnihilationProduct hΦ hΦγ,
     sign_eq_necSuf]
@@ -243,7 +247,7 @@ theorem reverseOrderedAnnihilationProduct_singleOut_of_necSuf {i : ℕ} (hi : 1 
           (ComplexAlgebra.orderedProduct D.space.cliffordAlgebra (D.M - i) (D.reversedSelectedAnnihilationFactor T))
           (D.space.cliffordAlgebra.mul (D.selectedAnnihilationFactor T i)
             (D.initialReverseAnnihilationProduct T (i - 1))) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, toN_reverseOrderedAnnihilationProduct hΦ hΦγ,
     toN_orderedProduct hΦ (D.M - i) (D.reversedSelectedAnnihilationFactor T)
@@ -258,7 +262,7 @@ theorem reverseOrderedAnnihilationProduct_mul_annihilation_of_not_mem_of_necSuf 
     D.space.cliffordAlgebra.mul (D.reverseOrderedAnnihilationProduct T) (D.annihilation i)
       = D.space.cliffordAlgebra.smul (sign (countBelow T i))
           (D.reverseOrderedAnnihilationProduct (unionSingleton T i hi)) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_smul, toN_annihilation hΦγ, toN_reverseOrderedAnnihilationProduct hΦ hΦγ,
     toN_reverseOrderedAnnihilationProduct hΦ hΦγ, sign_eq_necSuf]
@@ -270,7 +274,7 @@ theorem reverseOrderedAnnihilationProduct_mul_annihilation_of_mem_of_necSuf {i :
     (T : PowerSet D.M) (hiT : i ∈ T.1) :
     D.space.cliffordAlgebra.mul (D.reverseOrderedAnnihilationProduct T) (D.annihilation i)
       = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_annihilation hΦγ, toN_reverseOrderedAnnihilationProduct hΦ hΦγ, toN_zero hΦ]
   exact D.toNecSuf.reverseOrderedAnnihilationProduct_mul_annihilation_of_mem complexCliffordLaws add_neg_cancel

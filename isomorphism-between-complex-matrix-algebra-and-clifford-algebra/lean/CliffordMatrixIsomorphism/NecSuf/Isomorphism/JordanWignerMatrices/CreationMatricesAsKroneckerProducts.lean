@@ -36,9 +36,9 @@ namespace CliffordMatrixIsomorphism.NecSuf.Isomorphism
 
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet PowerSet.ext idxOne idxTwo idxOne_ne_idxTwo isFiniteSet_two
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet PowerSet.ext idxOne idxTwo idxOne_ne_idxTwo isFiniteSet_two
   membershipIndex membershipIndex_of_mem membershipIndex_of_not_mem)
-open CliffordMatrixIsomorphism.Isomorphism (idx_two_cases membershipIndex_eq_of_iff membershipIndex_ne_of_not_iff
+open CliffordMatrixIsomorphism.NecSuf.Isomorphism (idx_two_cases membershipIndex_eq_of_iff membershipIndex_ne_of_not_iff
   countBelow countBelow_one countBelow_succ_succ_of_mem countBelow_succ_succ_of_not_mem unionSingleton
   mem_unionSingleton_iff_of_ne self_mem_unionSingleton)
 

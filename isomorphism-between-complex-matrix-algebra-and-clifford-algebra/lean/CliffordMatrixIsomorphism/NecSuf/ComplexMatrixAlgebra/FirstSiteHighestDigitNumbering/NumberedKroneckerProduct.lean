@@ -1,7 +1,7 @@
 /-
 章「複素行列環」の、番号 1 を最上位の桁にする番号付けによる行列の添字の付け替えと、番号で添字づけたクロネッカー積の必要十分版。
 具体版 `ComplexMatrixAlgebra/FirstSiteHighestDigitNumbering/NumberedKroneckerProduct.lean` と同じ def と calc の行で、係数 ℂ を型の変数 K に替えて書く。
-ϱ_M・r_M・𝓘_M・ō_M・pos_M・整数の番号順の和・num_M（`FirstSiteHighestDigitNumbering/` の ℂ を含まない 4 ファイル）は、具体版と同じものを引く。
+ϱ_M・r_M・𝓘_M・ō_M・pos_M・整数の番号順の和・num_M（`FirstSiteHighestDigitNumbering/` の ℂ を含まない 4 ファイル）は、必要十分版の側に同じ形で置いたものを引く。
 
   本文のラベル                                                                              このファイル                                    使う K の性質
   def_reindexing_of_matrices_by_numbering_with_first_site_as_highest_digit                  firstSiteHighestReindexMatrix                   なし（K の演算も使わない）
@@ -15,13 +15,13 @@
 分かったこと: 番号で添字づけたクロネッカー積と、それが部分集合全体で添字づけたクロネッカー積の付け替えであることは、
 係数の性質を一つも使わない。使うのは、num_M が全単射で ō_M ∘ r_M の逆写像であること（ℂ を含まない番号の計算）だけである。
 -/
-import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.FirstSiteHighestDigitNumbering.TupleNumber
+import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.FirstSiteHighestDigitNumbering.TupleNumber
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.KroneckerProduct.KroneckerProduct
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixReindexing.Reindexing
 
 namespace CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet twoPower idxOne membershipIndex OneTwoTuple
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet twoPower idxOne membershipIndex OneTwoTuple
   membershipTuple extendFamily_membershipTuple firstSiteHighestNumbering firstSiteHighestNumbering_isNumbering
   tupleNumber tupleNumberIdx tupleNumberInv tupleNumberInv_tupleNumberIdx
   tupleNumber_membershipTuple_firstSiteHighestNumbering)

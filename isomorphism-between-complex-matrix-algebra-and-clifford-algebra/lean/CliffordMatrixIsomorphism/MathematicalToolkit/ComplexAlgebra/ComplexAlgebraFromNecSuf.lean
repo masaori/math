@@ -13,6 +13,7 @@
 必要十分版の五つの主張は、係数 K の性質を一つも使わない。
 -/
 import CliffordMatrixIsomorphism.MathematicalToolkit.ComplexAlgebra.Homomorphisms
+import CliffordMatrixIsomorphism.MathematicalToolkit.Ring.UnitalRingFromNecSuf
 import CliffordMatrixIsomorphism.MathematicalToolkit.ComplexVectorSpace.ComplexVectorSpaceFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexAlgebra.Homomorphisms
 
@@ -26,7 +27,7 @@ variable {A : Type u} {B : Type v} {C : Type w}
 
 /-- 具体版の ℂ-代数を、必要十分版の K := ℂ の代数として読む（欄を写すだけ）。 -/
 def toNecSuf (SA : ComplexAlgebra A) : NecSuf.AlgebraOver ℂ A where
-  toUnitalRing := SA.toUnitalRing
+  toUnitalRing := SA.toUnitalRing.toNecSuf
   smul := SA.smul
   smul_assoc := SA.smul_assoc
   one_smul := SA.one_smul
@@ -42,8 +43,9 @@ theorem isComplexAlgebraHomomorphism_iff_necSuf (SA : ComplexAlgebra A) (SB : Co
     (φ : A → B) :
     IsComplexAlgebraHomomorphism SA SB φ
       ↔ NecSuf.AlgebraOver.IsAlgebraHomomorphism SA.toNecSuf SB.toNecSuf φ :=
-  ⟨fun h => ⟨h.isRingHomomorphism, ⟨h.isLinearMap.map_add, h.isLinearMap.map_smul⟩⟩,
-    fun h => ⟨h.isRingHomomorphism, ⟨h.isLinearMap.map_add, h.isLinearMap.map_smul⟩⟩⟩
+  ⟨fun h => ⟨h.isRingHomomorphism.toNecSuf, ⟨h.isLinearMap.map_add, h.isLinearMap.map_smul⟩⟩,
+    fun h => ⟨⟨h.isRingHomomorphism.map_add, h.isRingHomomorphism.map_mul, h.isRingHomomorphism.map_one⟩,
+      ⟨h.isLinearMap.map_add, h.isLinearMap.map_smul⟩⟩⟩
 
 theorem partialOrderedProduct_eq_necSuf (SA : ComplexAlgebra A) (x : ℕ → A) (m : ℕ) :
     partialOrderedProduct SA x m = NecSuf.AlgebraOver.partialOrderedProduct SA.toNecSuf x m := by
@@ -80,7 +82,7 @@ theorem orderedProduct_of_restricted_family_of_necSuf (SA : ComplexAlgebra A) (x
   rw [orderedProduct_eq_necSuf, partialOrderedProduct_eq_necSuf]
   exact NecSuf.AlgebraOver.orderedProduct_of_restricted_family SA.toNecSuf x x' m h
 
-theorem eq_of_agree_on_generators_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAlgebra B}
+theorem equal_of_agree_on_generators_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAlgebra B}
     {φ ψ : A → B} (hφ : IsComplexAlgebraHomomorphism SA SB φ)
     (hψ : IsComplexAlgebraHomomorphism SA SB ψ) (X : Set A) (hX : GeneratesAlgebra SA X)
     (hagree : ∀ x ∈ X, φ x = ψ x) (a : A) : φ a = ψ a :=

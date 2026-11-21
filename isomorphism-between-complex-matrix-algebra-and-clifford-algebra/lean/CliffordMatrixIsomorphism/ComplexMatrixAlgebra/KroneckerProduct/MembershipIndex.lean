@@ -1,6 +1,5 @@
 /-
-章「複素行列環」の、部分集合に番号が入るかどうかを 1・2 で表す添字の定義。ℂ を含まないので、具体版と必要十分版が
-同じこのファイルを引く（必要十分版・導出版を置かない）。
+章「複素行列環」の、部分集合に番号が入るかどうかを 1・2 で表す添字の定義。必要十分版は `NecSuf/ComplexMatrixAlgebra/KroneckerProduct/MembershipIndex.lean` に同じ形で置く。
 
   本文のラベル                       このファイル
   def_membership_index_of_subset     idxOne・idxTwo（{1,2} の二元）・membershipIndex（o_{M,T}(k)）・

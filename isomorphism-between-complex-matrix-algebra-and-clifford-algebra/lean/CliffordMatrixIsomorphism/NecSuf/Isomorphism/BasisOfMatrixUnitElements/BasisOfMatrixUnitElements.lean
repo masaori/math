@@ -20,7 +20,7 @@
 導出版は `Isomorphism/BasisOfMatrixUnitElements/BasisOfMatrixUnitElementsFromNecSuf.lean`。
 -/
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.MutuallyInverseHomomorphisms.MutuallyInverseHomomorphisms
-import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.PowerSetNumbering.PairNumbering
+import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.PowerSetNumbering.PairNumbering
 
 namespace CliffordMatrixIsomorphism.NecSuf.Clifford.SplitData
 
@@ -28,7 +28,7 @@ open CliffordMatrixIsomorphism.NecSuf.Isomorphism
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet pairCount pairNumbering
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet pairCount pairNumbering
   pairNumbering_isNumbering)
 
 universe u uK

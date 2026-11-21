@@ -121,14 +121,14 @@ theorem exists_ofN :
   exact ⟨Ψ, (isComplexAlgebraHomomorphism_iff_necSuf _ _ _).2 hΨ, hΨγ⟩
 
 /-- Φ で写した両辺が等しければ、具体版の両辺も等しい（Ψ ∘ Φ が恒等写像であるため）。 -/
-theorem eq_of_toN_eq {x y : D.space.Cl}
+theorem equal_of_toN_eq {x y : D.space.Cl}
     (h : ∀ Φ : D.space.Cl → D.spaceN.Cl complexCliffordLaws,
       IsComplexAlgebraHomomorphism D.space.cliffordAlgebra D.algebraN Φ → (∀ p, Φ (D.space.γ p) = D.mapToN p) →
         Φ x = Φ y) : x = y := by
   obtain ⟨Φ, hΦ, hΦγ⟩ := D.exists_toN
   obtain ⟨Ψ, hΨ, hΨγ⟩ := D.exists_ofN
   have hΨΦ : ∀ z, Ψ (Φ z) = z := fun z =>
-    eq_of_agree_on_generators_of_necSuf (IsComplexAlgebraHomomorphism.comp_of_necSuf hΦ hΨ)
+    equal_of_agree_on_generators_of_necSuf (IsComplexAlgebraHomomorphism.comp_of_necSuf hΦ hΨ)
       (isComplexAlgebraHomomorphism_id_of_necSuf D.space.cliffordAlgebra) (Set.range D.space.γ)
       D.space.γ_generates_of_necSuf
       (fun _ ⟨p, hp⟩ => by rw [← hp]; show Ψ (Φ (D.space.γ p)) = D.space.γ p; rw [hΦγ p]; exact hΨγ _) z
@@ -142,7 +142,7 @@ theorem annihilation_creation_anticommute_of_necSuf (i j : ℕ) (hi1 : 1 ≤ i) 
     D.space.cliffordAlgebra.add (D.space.cliffordAlgebra.mul (D.annihilation i) (D.creation j))
         (D.space.cliffordAlgebra.mul (D.creation j) (D.annihilation i))
       = D.space.cliffordAlgebra.smul (kroneckerDelta i j) D.space.cliffordAlgebra.one := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_add, hΦ.map_mul, hΦ.map_mul, hΦ.map_smul, hΦ.map_one]
   show D.algebraN.add (D.algebraN.mul (Φ (D.space.γ _)) (Φ (D.space.γ _)))
@@ -155,7 +155,7 @@ theorem creation_anticommute_of_necSuf (i j : ℕ) :
     D.space.cliffordAlgebra.add (D.space.cliffordAlgebra.mul (D.creation i) (D.creation j))
         (D.space.cliffordAlgebra.mul (D.creation j) (D.creation i))
       = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_add, hΦ.map_mul, hΦ.map_mul, show Φ D.space.cliffordAlgebra.zero = D.algebraN.zero from
     hΦ.isLinearMap.map_zero]
@@ -169,7 +169,7 @@ theorem annihilation_anticommute_of_necSuf (i j : ℕ) :
     D.space.cliffordAlgebra.add (D.space.cliffordAlgebra.mul (D.annihilation i) (D.annihilation j))
         (D.space.cliffordAlgebra.mul (D.annihilation j) (D.annihilation i))
       = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_add, hΦ.map_mul, hΦ.map_mul, show Φ D.space.cliffordAlgebra.zero = D.algebraN.zero from
     hΦ.isLinearMap.map_zero]
@@ -181,7 +181,7 @@ theorem annihilation_anticommute_of_necSuf (i j : ℕ) :
 /-- 本文 `claim_square_of_creation_generator_is_zero` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem creation_mul_self_of_necSuf (i : ℕ) :
     D.space.cliffordAlgebra.mul (D.creation i) (D.creation i) = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, show Φ D.space.cliffordAlgebra.zero = D.algebraN.zero from hΦ.isLinearMap.map_zero]
   show D.algebraN.mul (Φ (D.space.γ _)) (Φ (D.space.γ _)) = _
@@ -191,7 +191,7 @@ theorem creation_mul_self_of_necSuf (i : ℕ) :
 /-- 本文 `claim_square_of_annihilation_generator_is_zero` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem annihilation_mul_self_of_necSuf (i : ℕ) :
     D.space.cliffordAlgebra.mul (D.annihilation i) (D.annihilation i) = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, show Φ D.space.cliffordAlgebra.zero = D.algebraN.zero from hΦ.isLinearMap.map_zero]
   show D.algebraN.mul (Φ (D.space.γ _)) (Φ (D.space.γ _)) = _

@@ -7,10 +7,10 @@
   linearCombination_moveTermToLast   なし（K の演算は線型空間の公理の中にしか現れない）
   linearCombination_reindex          なし（左辺の族を {1,…,n} の外で 0 にするために、記号 0 だけを使う）
 
-番号付けの定義（`MathematicalToolkit/FiniteSetSum/Numbering.lean`）は ℂ を含まないので、具体版と同じものを引く。
+番号付けの定義は、必要十分版の `NecSuf/MathematicalToolkit/FiniteSetSum/Numbering.lean` を引く。
 -/
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexVectorSpace.LinearCombination
-import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.Numbering
+import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.FiniteSetSum.Numbering
 
 namespace CliffordMatrixIsomorphism.NecSuf.VectorSpace
 

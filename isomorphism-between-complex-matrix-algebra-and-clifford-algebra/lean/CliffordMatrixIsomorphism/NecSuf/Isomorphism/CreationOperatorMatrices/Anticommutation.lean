@@ -1,7 +1,7 @@
 /-
 章「同型の証明」の、生成作用素の行列・消滅作用素の行列の反交換関係の必要十分版。具体版
 `Isomorphism/CreationOperatorMatrices/Anticommutation.lean` と同じ calc の行のまま、係数 ℂ を型の変数 K に、-1_ℂ を K の元 n に替える。
-条件の同値（集合の操作）は ℂ を含まないので、具体版と同じ `IndexSetOperations.lean` を引く。
+条件の同値（集合の操作）は ℂ を含まないので、必要十分版の側に同じ形で置いた `NecSuf/Isomorphism/CreationOperatorMatrices/IndexSetOperations.lean` を引く。
 
   本文のラベル                                                    このファイル
   （ς の値どうしの交換）                                          sign_mul_sign_eq_sign_add・sign_mul_sign_comm
@@ -44,8 +44,8 @@ namespace CliffordMatrixIsomorphism.NecSuf.Isomorphism
 
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
-open CliffordMatrixIsomorphism.Isomorphism
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
+open CliffordMatrixIsomorphism.NecSuf.Isomorphism
   (countBelow countBelow_unionSingleton unionSingleton removeIndex creationCond creationCond_comm
     notMem_removeIndex unionSingleton_removeIndex cond1_iff_of_eq cond2_iff_of_eq cond1_iff_of_ne cond2_iff_of_ne
     mem_unionSingleton_iff)

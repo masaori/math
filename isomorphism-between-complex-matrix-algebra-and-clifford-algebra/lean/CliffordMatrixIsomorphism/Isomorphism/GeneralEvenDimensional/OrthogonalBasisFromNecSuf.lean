@@ -17,6 +17,10 @@ import CliffordMatrixIsomorphism.Isomorphism.GeneralEvenDimensional.OrthogonalBa
 import CliffordMatrixIsomorphism.MathematicalToolkit.QuadraticForm.QuadraticFormFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.GeneralEvenDimensional.OrthogonalBasis
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.ComplexVectorSpace
 
 universe u
@@ -91,7 +95,7 @@ theorem orderedSum_eq_zero_of_terms_eq_zero_of_necSuf (n : ℕ) (a : ℕ → ℂ
   exact NecSuf.VectorSpace.orderedSum_eq_zero_of_terms_eq_zero (_root_.add_zero 0) n a h
 
 /-- 本文 `claim_element_orthogonal_to_spanning_family_is_zero` を、必要十分版に ℂ の性質を渡して得たもの。 -/
-theorem eq_zero_of_polarization_eq_zero_on_spanning_of_necSuf (S : ComplexVectorSpace V) (q : V → ℂ)
+theorem equal_zero_of_polarization_eq_zero_on_spanning_of_necSuf (S : ComplexVectorSpace V) (q : V → ℂ)
     (hq : IsNondegenerateQuadraticForm S q) (n : ℕ) (b : ℕ → V) (hb : SpansByLinearCombination S n b)
     (x : V) (hx : ∀ k : ℕ, 1 ≤ k → k ≤ n → polarization S q x (b k) = 0) : x = S.zero :=
   NecSuf.VectorSpace.eq_zero_of_polarization_eq_zero_on_spanning _root_.add_assoc _root_.add_comm

@@ -4,7 +4,7 @@ K := ℂ、n := -1_ℂ への特殊化から得られることを示す導出版
 具体版の主張は、どれも具体版と同じ名前に `_of_necSuf` を付けて示す（必要十分版の主張も具体版と同じ名前）。
 
 クリフォード代数の中の主張は、`LocalIdentitiesFromNecSuf.lean` と同じく、Φ ∘ γ = γ' ∘（点を写す写像）を満たす
-準同型 Φ : Cl → Cl' で運ぶ（`eq_of_toN_eq`）。Φ は ℰ_{S,T} を ℰ'_{S,T} へ移し（`toN_matrixUnitElement`）、
+準同型 Φ : Cl → Cl' で運ぶ（`equal_of_toN_eq`）。Φ は ℰ_{S,T} を ℰ'_{S,T} へ移し（`toN_matrixUnitElement`）、
 Ψ(F) を Ψ'(F) へ移す（`toN_homomorphismFromMatrix`。Φ が線型写像なので二重の和を値の和へ移す）。
 行列の側は、具体版の Mat_{P_M}(ℂ) と必要十分版の Mat_{P_M}(ℂ) が同じ集合で、行列単位は定義どおりに同じ（`matrixUnit_eq_necSuf`）、
 ℂ-代数の構造は `matrixAlgebra_toNecSuf` で一致する。
@@ -15,6 +15,10 @@ import CliffordMatrixIsomorphism.Isomorphism.GlobalIdentities.GlobalIdentitiesFr
 import CliffordMatrixIsomorphism.Isomorphism.HomomorphismToMatrixAlgebra.HomomorphismToMatrixAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.MatrixUnits.MatrixUnitsFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.HomomorphismFromMatrixAlgebra.HomomorphismFromMatrixAlgebra
+
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
 
 namespace CliffordMatrixIsomorphism.Clifford.SplitData
 
@@ -72,7 +76,7 @@ end
 theorem matrixUnitElement_mul_of_necSuf (S T U R : PowerSet D.M) :
     D.space.cliffordAlgebra.mul (D.matrixUnitElement S T) (D.matrixUnitElement U R)
       = D.space.cliffordAlgebra.smul (kroneckerDelta T U) (D.matrixUnitElement S R) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_smul, toN_matrixUnitElement hΦ hΦγ, toN_matrixUnitElement hΦ hΦγ,
     toN_matrixUnitElement hΦ hΦγ]
@@ -85,13 +89,13 @@ theorem homomorphismFromMatrix_isLinearMap_of_necSuf :
   have hN := D.toNecSuf.homomorphismFromMatrix_isLinearMap complexCliffordLaws
   constructor
   · intro F G
-    apply D.eq_of_toN_eq
+    apply D.equal_of_toN_eq
     intro Φ hΦ hΦγ
     rw [hΦ.isLinearMap.map_add, toN_homomorphismFromMatrix hΦ hΦγ, toN_homomorphismFromMatrix hΦ hΦγ,
       toN_homomorphismFromMatrix hΦ hΦγ]
     exact hN.map_add F G
   · intro ρ F
-    apply D.eq_of_toN_eq
+    apply D.equal_of_toN_eq
     intro Φ hΦ hΦγ
     rw [hΦ.isLinearMap.map_smul, toN_homomorphismFromMatrix hΦ hΦγ, toN_homomorphismFromMatrix hΦ hΦγ]
     exact hN.map_smul ρ F
@@ -99,7 +103,7 @@ theorem homomorphismFromMatrix_isLinearMap_of_necSuf :
 /-- 本文 `claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_matrix_unit` を必要十分版から得る。 -/
 theorem homomorphismFromMatrix_matrixUnit_of_necSuf (S T : PowerSet D.M) :
     D.homomorphismFromMatrix (matrixUnit S T) = D.matrixUnitElement S T := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_homomorphismFromMatrix hΦ hΦγ, toN_matrixUnitElement hΦ hΦγ, matrixUnit_eq_necSuf]
   exact D.toNecSuf.homomorphismFromMatrix_matrixUnit complexCliffordLaws S T
@@ -111,7 +115,7 @@ theorem homomorphismFromMatrix_mul_matrixUnit_of_necSuf (S T U R : PowerSet D.M)
           (D.homomorphismFromMatrix (matrixUnit U R)) := by
   have hN := D.toNecSuf.homomorphismFromMatrix_mul_matrixUnit complexCliffordLaws add_neg_cancel S T U R
   rw [← D.matrixAlgebra_toNecSuf] at hN
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_homomorphismFromMatrix hΦ hΦγ, toN_homomorphismFromMatrix hΦ hΦγ,
     toN_homomorphismFromMatrix hΦ hΦγ]
@@ -127,13 +131,13 @@ theorem homomorphismFromMatrix_isHom_of_necSuf :
       D.homomorphismFromMatrix (D.matrixAlgebra.mul F G)
         = D.space.cliffordAlgebra.mul (D.homomorphismFromMatrix F) (D.homomorphismFromMatrix G) := by
     intro F G
-    apply D.eq_of_toN_eq
+    apply D.equal_of_toN_eq
     intro Φ hΦ hΦγ
     rw [hΦ.map_mul, toN_homomorphismFromMatrix hΦ hΦγ, toN_homomorphismFromMatrix hΦ hΦγ,
       toN_homomorphismFromMatrix hΦ hΦγ]
     exact hN.map_mul F G
   have hone : D.homomorphismFromMatrix D.matrixAlgebra.one = D.space.cliffordAlgebra.one := by
-    apply D.eq_of_toN_eq
+    apply D.equal_of_toN_eq
     intro Φ hΦ hΦγ
     rw [hΦ.map_one, toN_homomorphismFromMatrix hΦ hΦγ]
     exact hN.map_one

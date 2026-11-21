@@ -5,7 +5,7 @@
   claim_numbering_of_initial_segment_from_zero   UpTo（{0,…,N}）・upToNumbering（e）・upToNumbering_isNumbering・
                                                  isFiniteSet_upTo
 
-{0,…,N} は ℕ の部分型 `UpTo N` で表す。このファイルは ℂ を含まないので、具体版と必要十分版が同じものを引く。
+{0,…,N} は ℕ の部分型 `UpTo N` で表す。必要十分版は `NecSuf/MathematicalToolkit/TensorAlgebra/InitialSegmentFromZero.lean`、導出版は `TensorAlgebraFromNecSuf.lean`。
 -/
 import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.Numbering
 

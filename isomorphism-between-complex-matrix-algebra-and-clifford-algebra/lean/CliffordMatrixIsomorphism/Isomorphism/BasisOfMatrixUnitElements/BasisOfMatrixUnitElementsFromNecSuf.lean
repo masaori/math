@@ -13,6 +13,10 @@ import CliffordMatrixIsomorphism.Isomorphism.BasisOfMatrixUnitElements.BasisOfMa
 import CliffordMatrixIsomorphism.Isomorphism.MutuallyInverseHomomorphisms.MutuallyInverseHomomorphismsFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.BasisOfMatrixUnitElements.BasisOfMatrixUnitElements
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.Clifford.SplitData
 
 open CliffordMatrixIsomorphism.Isomorphism
@@ -86,7 +90,7 @@ theorem linearCombination_matrixUnitElementFamily_eq_of_necSuf (x : D.space.Cl) 
         (extendFamily (fun m : Idx (pairCount D.M) =>
           Mat.entry (D.homomorphismToMatrix x) (pairNumbering D.M m).1 (pairNumbering D.M m).2) 0)
         D.matrixUnitElementFamily = x := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [D.toN_linearCombination_matrixUnitElementFamily hΦ hΦγ]
   simp only [D.homomorphismToMatrix_eq_comp hΦ hΦγ x]

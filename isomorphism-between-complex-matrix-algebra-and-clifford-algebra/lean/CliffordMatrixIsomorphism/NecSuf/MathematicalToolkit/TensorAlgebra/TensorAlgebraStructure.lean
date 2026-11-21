@@ -27,7 +27,7 @@ D を線型空間として書く主張（和への分解と、それを使う結
 -/
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorAlgebra.AssociativityOfTensorProduct
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorAlgebra.DirectSumOfFamily
-import CliffordMatrixIsomorphism.MathematicalToolkit.TensorAlgebra.InitialSegmentFromZero
+import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorAlgebra.InitialSegmentFromZero
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorProduct.CoordinateConstruction
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexAlgebra.Definitions
 

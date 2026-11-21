@@ -90,7 +90,7 @@ open CliffordMatrixIsomorphism.NecSuf.Isomorphism
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
 
 universe u uK
 

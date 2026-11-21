@@ -13,11 +13,14 @@
   inducedLinearMap                       inducedLinearMap_eq_necSuf
   各主張                                 …_of_necSuf
 
-n 進の番号付け（`BaseNNumbering.lean`）は ℂ を含まないので、具体版と必要十分版が同じものを使う。
+n 進の番号付け（`BaseNNumbering.lean`）は ℂ を含まず、具体版と必要十分版に同じ式で別に置いてある。
+  natPower・baseNNumbering              natPower_eq_necSuf・baseNNumbering_eq_necSuf（同じ式）
+  baseNNumbering_isNumbering・isFiniteSet_maps  …_of_necSuf
 -/
 import CliffordMatrixIsomorphism.MathematicalToolkit.TensorProduct.CoordinateConstruction
 import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.FiniteSetSumFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorProduct.CoordinateConstruction
+import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.NumberingFromNecSuf
 
 namespace CliffordMatrixIsomorphism.ComplexVectorSpace
 
@@ -104,6 +107,7 @@ theorem coordinateFactors_eq_necSuf (S : ComplexVectorSpace V) (n : ℕ) (b : �
     coordinateFactors S n b hb v x
       = NecSuf.VectorSpace.coordinateFactors S.toNecSuf n b ((isBasisFamily_iff_necSuf S n b).1 hb) v x := by
   unfold coordinateFactors NecSuf.VectorSpace.coordinateFactors
+  rw [extendFamily_toNecSuf]
   congr 1
   funext r
   exact coordinate_eq_necSuf S n b hb (x r).1 (x r).2.1 (x r).2.2 (v r)
@@ -145,7 +149,8 @@ theorem coordinateTensor_basisTuple_of_necSuf (S : ComplexVectorSpace V) (n : �
   rw [coordinateTensor_eq_necSuf]
   exact NecSuf.VectorSpace.coordinateTensor_basisTuple complexUniquenessLaws S.toNecSuf n b _ k x y
 
-theorem eq_sum_coordinateTensor_basisTuple_of_necSuf (S : ComplexVectorSpace V) (n : ℕ)
+/-- 本文 `claim_coordinate_tensor_space_element_is_sum_of_basis_tensors` を、必要十分版から得たもの（名前は `eq_` で始めない。分離の検査が自動生成の等式の補題と見なすため）。 -/
+theorem equal_sum_coordinateTensor_basisTuple_of_necSuf (S : ComplexVectorSpace V) (n : ℕ)
     (b : ℕ → V) (hb : IsBasisFamily S n b) (k : ℕ) (F : MapsBetweenInitialSegments n k → ℂ) :
     F = sumOverFiniteSet (coordinateTensorSpace n k) (isFiniteSet_maps n k) F
       (fun x => coordinateTensor S n b hb k (basisTuple b x)) := by
@@ -231,5 +236,57 @@ theorem orderedProduct_eq_of_equal_factors_of_necSuf (k : ℕ) (a a' : ℕ → �
     orderedProduct k a = orderedProduct k a' := by
   rw [orderedProduct_eq_necSuf, orderedProduct_eq_necSuf]
   exact NecSuf.orderedProduct_eq_of_equal_factors k a a' h
+
+end CliffordMatrixIsomorphism
+
+namespace CliffordMatrixIsomorphism
+
+/-! ### n 進の番号付け -/
+
+theorem natPower_eq_necSuf (n : ℕ) : ∀ k : ℕ, natPower n k = NecSuf.natPower n k
+  | 0 => rfl
+  | k + 1 => congrArg (n * ·) (natPower_eq_necSuf n k)
+
+/-- 具体版の η_{n,k}(m)(s) と必要十分版の η_{n,k}(m')(s) は、m と m' の番号が同じなら同じ番号である（k の帰納法。
+各段は二つの版の同じ式の行 `baseNNumbering_succ_of_le`・`baseNNumbering_succ_last` を当てる）。 -/
+theorem baseNNumbering_val_eq_necSuf (n : ℕ) :
+    ∀ (k : ℕ) (m : Idx (natPower n k)) (m' : NecSuf.Idx (NecSuf.natPower n k)), m.1 = m'.1 →
+      ∀ s : Idx k, (baseNNumbering n k m s).1 = (NecSuf.baseNNumbering n k m' s).1
+  | 0, _, _, _, s => absurd (le_trans s.2.1 s.2.2) (by omega)
+  | k + 1, m, m', hm, s => by
+    by_cases hs : s.1 ≤ k
+    · rw [baseNNumbering_succ_of_le n k m s hs, NecSuf.baseNNumbering_succ_of_le n k m' s hs]
+      apply baseNNumbering_val_eq_necSuf n k
+      show digitLow n k m.1 = NecSuf.digitLow n k m'.1
+      simp only [digitLow, NecSuf.digitLow, hm, natPower_eq_necSuf]
+    · rw [baseNNumbering_succ_last n k m s hs, NecSuf.baseNNumbering_succ_last n k m' s hs]
+      simp only [digitHigh, NecSuf.digitHigh, hm, natPower_eq_necSuf]
+
+/-- 本文 `claim_base_n_numbering_is_numbering_of_maps` を、必要十分版から得たもの。
+番号の範囲 n^k が二つの版で同じ数であること（`natPower_eq_necSuf`）で番号を写し、単射と全射の条件を必要十分版から得る。 -/
+theorem baseNNumbering_isNumbering_of_necSuf (n k : ℕ) :
+    IsNumbering (natPower n k) (baseNNumbering n k) := by
+  have h := NecSuf.baseNNumbering_isNumbering n k
+  have hp := natPower_eq_necSuf n k
+  constructor
+  · intro m m' hmm'
+    let t : NecSuf.Idx (NecSuf.natPower n k) := ⟨m.1, m.2.1, by rw [← hp]; exact m.2.2⟩
+    let t' : NecSuf.Idx (NecSuf.natPower n k) := ⟨m'.1, m'.2.1, by rw [← hp]; exact m'.2.2⟩
+    have htt : NecSuf.baseNNumbering n k t = NecSuf.baseNNumbering n k t' := by
+      funext s
+      apply Subtype.ext
+      rw [← baseNNumbering_val_eq_necSuf n k m t rfl s, ← baseNNumbering_val_eq_necSuf n k m' t' rfl s, hmm']
+    have hval : t.1 = t'.1 := congrArg Subtype.val (h.injective t t' htt)
+    exact Subtype.ext hval
+  · intro x
+    obtain ⟨t, ht⟩ := h.surjective x
+    refine ⟨⟨t.1, t.2.1, by rw [hp]; exact t.2.2⟩, ?_⟩
+    funext s
+    apply Subtype.ext
+    rw [baseNNumbering_val_eq_necSuf n k _ t rfl s, ht]
+
+/-- 本文 `claim_base_n_numbering_is_numbering_of_maps` を、必要十分版から得たもの。 -/
+theorem isFiniteSet_maps_of_necSuf (n k : ℕ) : IsFiniteSet (MapsBetweenInitialSegments n k) :=
+  IsFiniteSet.ofNecSuf (NecSuf.isFiniteSet_maps n k)
 
 end CliffordMatrixIsomorphism

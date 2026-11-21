@@ -15,7 +15,7 @@ q := (m-1) / n^{k-1}、ρ := (m-1) mod n^{k-1}、a := q + 1、r := ρ + 1 と置
 Lean の帰納的定義は k + 1 の段を k の段から作るので、本文の n^{k-1}・η_{n,k-1} は n^k・η_{n,k} と読む。
 番号の整数の計算（ℕ の加減・積・割り算と順序）は `omega` と ℕ の割り算の補題で行う。本文も ℤ の算術を既知として使う。
 
-この節の定義と主張は ℂ を含まないので、必要十分版はこのファイルをそのまま引く（必要十分版を別に置かない）。
+必要十分版は `NecSuf/MathematicalToolkit/TensorProduct/BaseNNumbering.lean` に同じ形で置き、導出版は `TensorProductFromNecSuf.lean`。
 -/
 import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.Numbering
 import Mathlib.Data.Nat.Basic

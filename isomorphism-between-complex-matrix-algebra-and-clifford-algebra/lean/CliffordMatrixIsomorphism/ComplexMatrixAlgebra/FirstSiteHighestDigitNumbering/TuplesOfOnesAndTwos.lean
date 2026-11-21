@@ -1,7 +1,7 @@
 /-
 章「複素行列環」の、各成分が 1 か 2 である M 個組の全体 𝓘_M、部分集合に各番号が入るかどうかを並べた組 ō_M、
 組の成分が 2 である番号の集合 pos_M。人手証明と 1 対 1 に対応させる。
-ℂ を含まないので、具体版と必要十分版が同じこのファイルを引く（必要十分版・導出版を置かない）。
+必要十分版は `NecSuf/ComplexMatrixAlgebra/FirstSiteHighestDigitNumbering/TuplesOfOnesAndTwos.lean` に同じ形で置く。
 
   本文のラベル                                                          このファイル
   def_tuples_of_ones_and_twos                                           OneTwoTuple（𝓘_M）・OneTwoTuple.ext（写像の等しさ）

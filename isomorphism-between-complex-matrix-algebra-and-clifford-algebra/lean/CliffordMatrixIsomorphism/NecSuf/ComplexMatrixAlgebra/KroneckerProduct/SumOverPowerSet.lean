@@ -2,7 +2,7 @@
 章「複素行列環」の、部分集合ごとに因子を選んだ番号順の積を部分集合全体の上で足すと因子の和の番号順の積になる、
 という主張の必要十分版。具体版 `ComplexMatrixAlgebra/KroneckerProduct/SumOverPowerSet.lean` と同じ def と calc の行で、
 係数 ℂ を型の変数 K に替えて書く。和は K を自分自身の上の線型空間にした `coefficientsVec L`（具体版の ℂ^vec。証明の中では S）の中の和である。
-P_M・2 進の番号付け e_m（`PowerSetNumbering/`）は ℂ を含まないので、具体版と同じものを引く。
+P_M・2 進の番号付け e_m（`PowerSetNumbering/`）は ℂ を含まないので、必要十分版の側に同じ形で置いたものを引く。
 
   本文のラベル                                                                  このファイル                               使う K の性質
   claim_sum_over_power_set_of_selected_ordered_products_in_complex_numbers      selectedFactor                             なし
@@ -23,13 +23,13 @@ m = 0 の段の 0_K +_K 1_K = 1_K の行の 0 + a = a である。0 + a = a は 
 - a · 1 = a（（二））: r を (r ·_K 1_K) に書き直す行。和のスカラー倍の主張が係数を μ ·_K λ_k の形で返すので、係数 1_K に合わせる。
 - a · 0 = 0（（二））: 和のスカラー倍の主張 `smul_linearCombination` の仮定（ρ ·_V 0_V = 0_V を経由する）。
 -/
-import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.PowerSetNumbering.BinaryNumbering
+import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.PowerSetNumbering.BinaryNumbering
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixAlgebra.Definitions
 
 namespace CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet twoPower twoPower_succ binaryNumbering
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet twoPower twoPower_succ binaryNumbering
   binaryNumbering_isNumbering isFiniteSet_powerSet binaryNumbering_succ_of_le sub_twoPower_mem
   not_mem_binaryNumbering_succ_of_le mem_binaryNumbering_succ_of_gt mem_binaryNumbering_succ_iff_of_gt)
 

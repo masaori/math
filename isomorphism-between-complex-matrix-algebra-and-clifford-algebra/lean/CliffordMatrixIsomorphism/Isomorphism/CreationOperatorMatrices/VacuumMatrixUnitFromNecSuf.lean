@@ -22,6 +22,10 @@ import CliffordMatrixIsomorphism.Isomorphism.CreationOperatorMatrices.CreationMa
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.MatrixUnits.MatrixUnitsFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.CreationOperatorMatrices.VacuumMatrixUnit
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.Isomorphism
 
 open CliffordMatrixIsomorphism.ComplexMatrixAlgebra
@@ -44,6 +48,7 @@ theorem annihilationTimesCreation_eq_necSuf (M : ℕ) :
   · rw [annihilationTimesCreation_of_mem hi,
       NecSuf.Isomorphism.annihilationTimesCreation_of_mem complexValuedMapsLaws (-1 : ℂ) hi,
       Mat.mul_eq_necSuf, creationMatrix_eq_necSuf, annihilationMatrix_eq_necSuf]
+    rfl
   · show (if hi : 1 ≤ i ∧ i ≤ M then _ else Mat.one)
       = (if hi : 1 ≤ i ∧ i ≤ M then _ else NecSuf.ComplexMatrixAlgebra.Mat.one)
     rw [dif_neg hi, dif_neg hi]

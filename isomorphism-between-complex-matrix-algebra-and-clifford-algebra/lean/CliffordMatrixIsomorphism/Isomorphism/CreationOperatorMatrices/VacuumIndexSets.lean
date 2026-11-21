@@ -1,7 +1,6 @@
 /-
 章「同型の証明」の、空集合の位置の行列単位についての三つの主張の証明が置く P_M の元・条件と、その所属の同値。
-ℂ を含まないので、具体版 `VacuumMatrixUnit.lean` と必要十分版 `NecSuf/Isomorphism/CreationOperatorMatrices/VacuumMatrixUnit.lean`
-が同じこのファイルを引く（必要十分版・導出版は置かない）。
+必要十分版は `NecSuf/Isomorphism/CreationOperatorMatrices/VacuumIndexSets.lean` に同じ形で置く。
 
   本文のラベル                                                                           このファイル
   claim_ordered_product_of_annihilation_times_creation_matrices_is_vacuum_matrix_unit    emptyIndexSet（主張の ∅ ∈ P_M）・

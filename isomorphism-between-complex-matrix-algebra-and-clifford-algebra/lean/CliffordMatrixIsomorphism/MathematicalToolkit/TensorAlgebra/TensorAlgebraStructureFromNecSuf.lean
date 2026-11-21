@@ -24,6 +24,7 @@ import CliffordMatrixIsomorphism.MathematicalToolkit.TensorAlgebra.TensorAlgebra
 import CliffordMatrixIsomorphism.MathematicalToolkit.TensorAlgebra.MultiplicationInAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.MathematicalToolkit.ComplexAlgebra.ComplexAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorAlgebra.UniversalPropertyOfTensorAlgebra
+import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.NumberingFromNecSuf
 
 namespace CliffordMatrixIsomorphism.ComplexVectorSpace
 
@@ -74,7 +75,8 @@ theorem concatTuple_assoc_of_necSuf {k l p : ℕ} (u : Tuple V k) (u' : Tuple V 
 
 theorem oneElementTuple_eq_necSuf (x : V) : oneElementTuple x = NecSuf.VectorSpace.oneElementTuple x := rfl
 
-theorem eq_concatTuple_initialPart_of_necSuf {k : ℕ} (u : Tuple V (k + 1)) :
+/-- 本文 `claim_tuple_is_concatenation_of_initial_part_and_last_component` を、必要十分版から得たもの（名前は `eq_` で始めない。分離の検査が自動生成の等式の補題と見なすため）。 -/
+theorem equal_concatTuple_initialPart_of_necSuf {k : ℕ} (u : Tuple V (k + 1)) :
     u = concatTuple (initialPart u) (oneElementTuple (u (lastIdx k))) :=
   NecSuf.VectorSpace.eq_concatTuple_initialPart u
 
@@ -122,9 +124,10 @@ theorem sumOverFiniteSet_eq_zero_of_terms_eq_zero_of_necSuf {W : Type v} (S : Co
     sumOverFiniteSet S hX c v = S.zero := by
   rw [sumOverFiniteSet_eq_necSuf]
   exact NecSuf.VectorSpace.sumOverFiniteSet_eq_zero_of_terms_eq_zero S.toNecSuf (_root_.add_zero 0) mul_zero
-    hX c v h
+    hX.toNecSuf c v h
 
-theorem eq_sum_embedComponent_of_necSuf {E : ℕ → Type v} (S : ∀ j : ℕ, ComplexVectorSpace (E j))
+/-- 本文 `claim_element_of_direct_sum_of_family_is_sum_of_embedded_components` を、必要十分版から得たもの（名前は `eq_` で始めない。分離の検査が自動生成の等式の補題と見なすため）。 -/
+theorem equal_sum_embedComponent_of_necSuf {E : ℕ → Type v} (S : ∀ j : ℕ, ComplexVectorSpace (E j))
     (x : DirectSumOfFamily S) (N : ℕ) (hN : IsZeroBound S x.1 N) :
     x = sumOverFiniteSet (directSumOfFamilyVectorSpace S) (isFiniteSet_upTo N) (fun _ => 1)
       (fun i => embedComponent S i.1 (x.1 i.1)) := by
@@ -168,7 +171,7 @@ theorem tensorAlgebraMul_eq_necSuf (x y : DirectSumOfFamily P.space) :
   apply DirectSumOfFamily.ext
   intro p
   show sumOverFiniteSet (P.space p) (isFiniteSet_upTo p) (fun _ => 1) (P.convolutionTerm x y p)
-    = NecSuf.VectorSpace.sumOverFiniteSet (P.space p).toNecSuf (isFiniteSet_upTo p) (fun _ => 1)
+    = NecSuf.VectorSpace.sumOverFiniteSet (P.space p).toNecSuf (NecSuf.isFiniteSet_upTo p) (fun _ => 1)
         (P.toNecSuf.convolutionTerm mul_comm x y p)
   rw [sumOverFiniteSet_eq_necSuf, funext (P.convolutionTerm_eq_necSuf x y p)]
 
@@ -188,7 +191,7 @@ theorem convolution_eq_necSuf (x y : DirectSumOfFamily P.space) :
     P.convolution x y = P.toNecSuf.convolution mul_comm x y := by
   funext p
   show sumOverFiniteSet (P.space p) (isFiniteSet_upTo p) (fun _ => 1) (P.convolutionTerm x y p)
-    = NecSuf.VectorSpace.sumOverFiniteSet (P.space p).toNecSuf (isFiniteSet_upTo p) (fun _ => 1)
+    = NecSuf.VectorSpace.sumOverFiniteSet (P.space p).toNecSuf (NecSuf.isFiniteSet_upTo p) (fun _ => 1)
         (P.toNecSuf.convolutionTerm mul_comm x y p)
   rw [sumOverFiniteSet_eq_necSuf, funext (P.convolutionTerm_eq_necSuf x y p)]
 
@@ -267,7 +270,7 @@ theorem tensorAlgebra_toNecSuf :
 
 /-- 必要十分版の K := ℂ の代数を、具体版の ℂ-代数として読む（欄を写すだけ）。 -/
 def complexAlgebraOfNecSuf {A : Type v} (N : NecSuf.AlgebraOver ℂ A) : ComplexAlgebra A where
-  toUnitalRing := N.toUnitalRing
+  toUnitalRing := UnitalRing.ofNecSuf N.toUnitalRing
   smul := N.smul
   smul_assoc := N.smul_assoc
   one_smul := N.one_smul
@@ -461,3 +464,17 @@ theorem orderedProductOfValues_isMultilinear_of_necSuf {V : Type u} {A : Type w}
   exact NecSuf.VectorSpace.orderedProductOfValues_isMultilinear SA.toNecSuf (TensorPowers.hf_toNecSuf SA hf) k
 
 end CliffordMatrixIsomorphism.ComplexVectorSpace
+
+namespace CliffordMatrixIsomorphism
+
+/-! ### {0,…,N} の番号付け -/
+
+/-- 本文 `claim_numbering_of_initial_segment_from_zero` を、必要十分版から得たもの。 -/
+theorem upToNumbering_isNumbering_of_necSuf (N : ℕ) : IsNumbering (N + 1) (upToNumbering N) :=
+  IsNumbering.ofNecSuf (NecSuf.upToNumbering_isNumbering N)
+
+/-- 本文 `claim_numbering_of_initial_segment_from_zero` を、必要十分版から得たもの。 -/
+theorem isFiniteSet_upTo_of_necSuf (N : ℕ) : IsFiniteSet (UpTo N) :=
+  IsFiniteSet.ofNecSuf (NecSuf.isFiniteSet_upTo N)
+
+end CliffordMatrixIsomorphism

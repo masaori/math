@@ -1,7 +1,6 @@
 /-
 節「系：複素行列版イジングの Jordan–Wigner 行列への接続」の後半が添字に使う、Pauli 行列の名前の集合 {x, y, z} と、
-Jordan–Wigner 行列の因子の種類の集合 {y, z}。ℂ を含まないので、具体版と必要十分版が同じこのファイルを引く
-（必要十分版・導出版を置かない）。
+Jordan–Wigner 行列の因子の種類の集合 {y, z}。必要十分版は `NecSuf/Isomorphism/JordanWignerMatrices/PauliLabels.lean` に同じ形で置く。
 
   本文の箇所                                                                 このファイル
   def_site_pauli_matrices_indexed_by_numbers の a ∈ {x, y, z}                PauliLabel

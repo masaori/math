@@ -5,13 +5,17 @@
 
 具体版のクリフォード代数 Cl と、必要十分版の前提 `D.toNecSuf` のクリフォード代数 Cl' は別の集合なので、
 `LocalIdentitiesFromNecSuf.lean` と同じく、Φ ∘ γ = γ' ∘（点を写す写像）を満たす準同型 Φ : Cl → Cl' で主張を運ぶ
-（`eq_of_toN_eq`）。Φ は χ_i・ε を必要十分版の同じ名前の元へ移す（`toN_parityFactor`・`toN_parityElement`）ので、
+（`equal_of_toN_eq`）。Φ は χ_i・ε を必要十分版の同じ名前の元へ移す（`toN_parityFactor`・`toN_parityElement`）ので、
 具体版の主張の両辺の Φ による像は、必要十分版の主張の両辺である。y = a_k か y = a†_k の仮定は、場合を分けてから運ぶ。
 ℂ から渡す性質は、章「クリフォード代数」の仮定の組 `complexCliffordLaws` と a + (-a) = 0 の `add_neg_cancel` だけである。
 -/
 import CliffordMatrixIsomorphism.Isomorphism.OddDimensional.ParityElement
 import CliffordMatrixIsomorphism.Isomorphism.LocalIdentities.LocalIdentitiesFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.OddDimensional.ParityElement
+
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
 
 namespace CliffordMatrixIsomorphism.Clifford.SplitData
 
@@ -50,7 +54,7 @@ end
 /-- 本文 `claim_parity_factor_times_annihilation_generator` を必要十分版から得る。 -/
 theorem parityFactor_mul_annihilation_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.parityFactor i) (D.annihilation i) = D.annihilation i := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, toN_parityFactor hΦ hΦγ, toN_annihilation hΦγ]
   exact D.toNecSuf.parityFactor_mul_annihilation complexCliffordLaws add_neg_cancel hi
@@ -59,7 +63,7 @@ theorem parityFactor_mul_annihilation_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i �
 theorem annihilation_mul_parityFactor_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.annihilation i) (D.parityFactor i)
       = D.space.cliffordAlgebra.smul (-1) (D.space.cliffordAlgebra.mul (D.parityFactor i) (D.annihilation i)) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_smul, hΦ.map_mul, toN_parityFactor hΦ hΦγ, toN_annihilation hΦγ]
   exact D.toNecSuf.annihilation_mul_parityFactor complexCliffordLaws add_neg_cancel hi
@@ -68,7 +72,7 @@ theorem annihilation_mul_parityFactor_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i �
 theorem parityFactor_mul_creation_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.parityFactor i) (D.creation i)
       = D.space.cliffordAlgebra.smul (-1) (D.creation i) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_smul, toN_parityFactor hΦ hΦγ, toN_creation hΦγ]
   exact D.toNecSuf.parityFactor_mul_creation complexCliffordLaws add_neg_cancel hi
@@ -77,7 +81,7 @@ theorem parityFactor_mul_creation_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.
 theorem creation_mul_parityFactor_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.creation i) (D.parityFactor i)
       = D.space.cliffordAlgebra.smul (-1) (D.space.cliffordAlgebra.mul (D.parityFactor i) (D.creation i)) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_smul, hΦ.map_mul, toN_parityFactor hΦ hΦγ, toN_creation hΦγ]
   exact D.toNecSuf.creation_mul_parityFactor complexCliffordLaws add_neg_cancel hi
@@ -85,7 +89,7 @@ theorem creation_mul_parityFactor_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.
 /-- 本文 `claim_square_of_parity_factor_is_one` を必要十分版から得る。 -/
 theorem parityFactor_mul_self_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.space.cliffordAlgebra.mul (D.parityFactor i) (D.parityFactor i) = D.space.cliffordAlgebra.one := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_one, toN_parityFactor hΦ hΦγ]
   exact D.toNecSuf.parityFactor_mul_self complexCliffordLaws add_neg_cancel hi
@@ -95,11 +99,11 @@ theorem mul_parityFactor_comm_of_ne_of_necSuf {i k : ℕ} (hi : 1 ≤ i ∧ i �
     (hik : i ≠ k) {y : D.space.Cl} (hy : y = D.annihilation k ∨ y = D.creation k) :
     D.space.cliffordAlgebra.mul y (D.parityFactor i) = D.space.cliffordAlgebra.mul (D.parityFactor i) y := by
   rcases hy with rfl | rfl
-  · apply D.eq_of_toN_eq
+  · apply D.equal_of_toN_eq
     intro Φ hΦ hΦγ
     rw [hΦ.map_mul, hΦ.map_mul, toN_parityFactor hΦ hΦγ, toN_annihilation hΦγ]
     exact D.toNecSuf.mul_parityFactor_comm_of_ne complexCliffordLaws add_neg_cancel hi hk hik (Or.inl rfl)
-  · apply D.eq_of_toN_eq
+  · apply D.equal_of_toN_eq
     intro Φ hΦ hΦγ
     rw [hΦ.map_mul, hΦ.map_mul, toN_parityFactor hΦ hΦγ, toN_creation hΦγ]
     exact D.toNecSuf.mul_parityFactor_comm_of_ne complexCliffordLaws add_neg_cancel hi hk hik (Or.inr rfl)
@@ -108,7 +112,7 @@ theorem mul_parityFactor_comm_of_ne_of_necSuf {i k : ℕ} (hi : 1 ≤ i ∧ i �
 theorem parityFactor_comm_of_ne_of_necSuf {i k : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) (hk : 1 ≤ k ∧ k ≤ D.M) (hik : i ≠ k) :
     D.space.cliffordAlgebra.mul (D.parityFactor k) (D.parityFactor i)
       = D.space.cliffordAlgebra.mul (D.parityFactor i) (D.parityFactor k) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_mul, toN_parityFactor hΦ hΦγ, toN_parityFactor hΦ hΦγ]
   exact D.toNecSuf.parityFactor_comm_of_ne complexCliffordLaws add_neg_cancel hi hk hik
@@ -116,7 +120,7 @@ theorem parityFactor_comm_of_ne_of_necSuf {i k : ℕ} (hi : 1 ≤ i ∧ i ≤ D.
 /-- 本文 `claim_square_of_parity_element_is_one` を必要十分版から得る。 -/
 theorem parityElement_mul_self_of_necSuf :
     D.space.cliffordAlgebra.mul D.parityElement D.parityElement = D.space.cliffordAlgebra.one := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_mul, hΦ.map_one, toN_parityElement hΦ hΦγ]
   exact D.toNecSuf.parityElement_mul_self complexCliffordLaws add_neg_cancel
@@ -127,11 +131,11 @@ theorem mul_parityElement_of_generator_of_necSuf {k : ℕ} (hk : 1 ≤ k ∧ k �
     D.space.cliffordAlgebra.mul y D.parityElement
       = D.space.cliffordAlgebra.smul (-1) (D.space.cliffordAlgebra.mul D.parityElement y) := by
   rcases hy with rfl | rfl
-  · apply D.eq_of_toN_eq
+  · apply D.equal_of_toN_eq
     intro Φ hΦ hΦγ
     rw [hΦ.map_mul, hΦ.map_smul, hΦ.map_mul, toN_parityElement hΦ hΦγ, toN_annihilation hΦγ]
     exact D.toNecSuf.mul_parityElement_of_generator complexCliffordLaws add_neg_cancel hk (Or.inl rfl)
-  · apply D.eq_of_toN_eq
+  · apply D.equal_of_toN_eq
     intro Φ hΦ hΦγ
     rw [hΦ.map_mul, hΦ.map_smul, hΦ.map_mul, toN_parityElement hΦ hΦγ, toN_creation hΦγ]
     exact D.toNecSuf.mul_parityElement_of_generator complexCliffordLaws add_neg_cancel hk (Or.inr rfl)
@@ -141,7 +145,7 @@ theorem γ_anticommute_parityElement_of_necSuf (v : W × DualSpace D.spaceW) :
     D.space.cliffordAlgebra.add (D.space.cliffordAlgebra.mul (D.space.γ v) D.parityElement)
         (D.space.cliffordAlgebra.mul D.parityElement (D.space.γ v))
       = D.space.cliffordAlgebra.zero := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.map_add, hΦ.map_mul, hΦ.map_mul, hΦγ, toN_parityElement hΦ hΦγ, toN_zero hΦ]
   exact D.toNecSuf.γ_anticommute_parityElement complexCliffordLaws add_neg_cancel (splitPointToNecSuf D.spaceW v)

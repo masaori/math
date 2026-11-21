@@ -3,7 +3,7 @@
 `Isomorphism/CreationOperatorMatrices/VacuumMatrixUnit.lean` と同じ def と同じ calc の行のまま、係数 ℂ を型の変数 K に、
 -1_ℂ を K の元 n に替える（ς は `sign n`、c_i・c_i^T は `creationMatrix n`・`annihilationMatrix n`）。
 K には演算の記号 +・·・0・1 だけを与え、使う性質は仮定として渡す。集合と条件（∅・C_m(S,U)・R^{⟨m⟩}・T^{⟨m⟩}）は ℂ を含まないので、
-具体版と同じ `VacuumIndexSets.lean` を引く。
+必要十分版の側に同じ形で置いた `NecSuf/Isomorphism/CreationOperatorMatrices/VacuumIndexSets.lean` を引く。
 
   本文のラベル                                                                           このファイル
   claim_ordered_product_of_annihilation_times_creation_matrices_is_vacuum_matrix_unit    annihilationTimesCreation・notMemIndicator・
@@ -53,14 +53,14 @@ K には演算の記号 +・·・0・1 だけを与え、使う性質は仮定�
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.CreationOperatorMatrices.CreationMatrices
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixUnits.MatrixUnits
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixAlgebra.Algebra
-import CliffordMatrixIsomorphism.Isomorphism.CreationOperatorMatrices.VacuumIndexSets
+import CliffordMatrixIsomorphism.NecSuf.Isomorphism.CreationOperatorMatrices.VacuumIndexSets
 
 namespace CliffordMatrixIsomorphism.NecSuf.Isomorphism
 
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
-open CliffordMatrixIsomorphism.Isomorphism
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
+open CliffordMatrixIsomorphism.NecSuf.Isomorphism
   (countBelow unionSingleton removeIndex unionSingleton_cond_iff_eq_removeIndex self_mem_unionSingleton
     mem_unionSingleton_iff countBelow_eq_zero_of_forall_ge emptyIndexSet notMem_emptyIndexSet
     unionSingleton_eq_cond_iff vacuumCond vacuumCond_succ_iff vacuumCond_zero_iff vacuumCond_last_iff

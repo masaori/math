@@ -13,13 +13,17 @@
 ℂ から渡す性質は、`complexValuedMapsLaws`（ℂ^X を線型空間にする八つ）、乗法の交換法則 `mul_comm`、`mul_one`、`mul_zero`、
 `zero_mul`、`mul_assoc`、分配法則 `mul_add`・`add_mul` と、λ・λ' の交換・0 と 1 の交換（`mul_comm` から）である。
 0 + a = a は必要十分版が `complexValuedMapsLaws` から作るので渡さない。
-o_{M,T}(k)・{1,2}・P_M・2 進の番号付けは ℂ を含まないので、両版が同じものを使う。
+o_{M,T}(k)・{1,2}・P_M・2 進の番号付けは ℂ を含まず、両版に同じ形で別に置いてある。
 -/
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.KroneckerProduct.KroneckerProduct
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.KroneckerProduct.Conjugation
 import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.MatrixAlgebra.MatrixAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.KroneckerProduct.KroneckerProduct
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.KroneckerProduct.Conjugation
+
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
 
 namespace CliffordMatrixIsomorphism.ComplexMatrixAlgebra
 
@@ -45,7 +49,7 @@ theorem kroneckerProduct_eq_necSuf (M : ℕ) (A : ℕ → Mat (Idx 2)) :
 
 /-- 本文 `def_conjugation_of_matrices` の κ_{U,U'} は、必要十分版の κ_{U,U'} と一致する。 -/
 theorem conjugation_eq_necSuf (hX : IsFiniteSet X) (U U' : Mat X) :
-    conjugation hX U U' = NecSuf.ComplexMatrixAlgebra.conjugation complexValuedMapsLaws hX U U' :=
+    conjugation hX U U' = NecSuf.ComplexMatrixAlgebra.conjugation complexValuedMapsLaws hX.toNecSuf U U' :=
   funext fun F => by
     unfold conjugation NecSuf.ComplexMatrixAlgebra.conjugation
     rw [Mat.mul_eq_necSuf hX U F, Mat.mul_eq_necSuf]
@@ -131,7 +135,7 @@ theorem kroneckerProduct_congr_of_necSuf (M : ℕ) (A A' : ℕ → Mat (Idx 2))
 theorem conjugation_map_add_of_necSuf (hX : IsFiniteSet X) (U U' F G : Mat X) :
     conjugation hX U U' (Mat.add F G) = Mat.add (conjugation hX U U' F) (conjugation hX U U' G) := by
   rw [conjugation_eq_necSuf]
-  exact NecSuf.ComplexMatrixAlgebra.conjugation_map_add complexValuedMapsLaws hX U U' F G
+  exact NecSuf.ComplexMatrixAlgebra.conjugation_map_add complexValuedMapsLaws hX.toNecSuf U U' F G
 
 /-- 本文 `claim_conjugation_by_mutually_inverse_matrices_is_algebra_homomorphism` の乗法を保つことを必要十分版から得る。 -/
 theorem conjugation_map_mul_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] (U U' : Mat X)
@@ -140,7 +144,7 @@ theorem conjugation_map_mul_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] (U U'
   rw [conjugation_eq_necSuf]
   rw [Mat.mul_eq_necSuf] at hU'U
   simp only [Mat.mul_eq_necSuf]
-  exact NecSuf.ComplexMatrixAlgebra.conjugation_map_mul complexValuedMapsLaws mul_comm mul_zero hX U U' hU'U F G
+  exact NecSuf.ComplexMatrixAlgebra.conjugation_map_mul complexValuedMapsLaws mul_comm mul_zero hX.toNecSuf U U' hU'U F G
 
 /-- 本文 `claim_conjugation_by_mutually_inverse_matrices_is_algebra_homomorphism` の乗法の単位元を保つことを必要十分版から得る。 -/
 theorem conjugation_map_one_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] (U U' : Mat X)
@@ -148,13 +152,13 @@ theorem conjugation_map_one_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] (U U'
   rw [conjugation_eq_necSuf]
   rw [Mat.mul_eq_necSuf] at hUU'
   exact NecSuf.ComplexMatrixAlgebra.conjugation_map_one complexValuedMapsLaws (fun a => mul_comm 0 a)
-    (fun a => mul_comm 1 a) hX U U' hUU'
+    (fun a => mul_comm 1 a) hX.toNecSuf U U' hUU'
 
 /-- 本文 `claim_conjugation_by_mutually_inverse_matrices_is_algebra_homomorphism` のスカラー倍を保つことを必要十分版から得る。 -/
 theorem conjugation_map_smul_of_necSuf (hX : IsFiniteSet X) (U U' : Mat X) (l : ℂ) (F : Mat X) :
     conjugation hX U U' (Mat.smul l F) = Mat.smul l (conjugation hX U U' F) := by
   rw [conjugation_eq_necSuf]
-  exact NecSuf.ComplexMatrixAlgebra.conjugation_map_smul complexValuedMapsLaws mul_comm mul_zero hX U U' l F
+  exact NecSuf.ComplexMatrixAlgebra.conjugation_map_smul complexValuedMapsLaws mul_comm mul_zero hX.toNecSuf U U' l F
 
 /-- 本文 `claim_conjugation_by_mutually_inverse_matrices_is_algebra_homomorphism` を必要十分版から得る。 -/
 theorem conjugation_isComplexAlgebraHomomorphism_of_necSuf (hX : IsFiniteSet X) [DecidableEq X]
@@ -165,7 +169,7 @@ theorem conjugation_isComplexAlgebraHomomorphism_of_necSuf (hX : IsFiniteSet X) 
     conjugation_eq_necSuf]
   rw [Mat.mul_eq_necSuf] at hUU' hU'U
   exact NecSuf.ComplexMatrixAlgebra.conjugation_isAlgebraHomomorphism complexValuedMapsLaws mul_comm mul_zero
-    hX U U' hUU' hU'U
+    hX.toNecSuf U U' hUU' hU'U
 
 /-- 本文 `claim_conjugations_by_mutually_inverse_matrices_compose_to_identity` を必要十分版から得る。 -/
 theorem conjugation_conjugation_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] (U U' : Mat X)
@@ -173,7 +177,7 @@ theorem conjugation_conjugation_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] (
     conjugation hX U' U (conjugation hX U U' F) = F := by
   rw [conjugation_eq_necSuf, conjugation_eq_necSuf]
   rw [Mat.mul_eq_necSuf] at hU'U
-  exact NecSuf.ComplexMatrixAlgebra.conjugation_conjugation complexValuedMapsLaws mul_comm mul_zero hX U U'
+  exact NecSuf.ComplexMatrixAlgebra.conjugation_conjugation complexValuedMapsLaws mul_comm mul_zero hX.toNecSuf U U'
     hU'U F
 
 end CliffordMatrixIsomorphism.ComplexMatrixAlgebra

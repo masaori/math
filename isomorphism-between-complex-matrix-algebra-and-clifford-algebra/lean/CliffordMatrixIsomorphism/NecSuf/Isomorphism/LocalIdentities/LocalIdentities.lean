@@ -48,16 +48,16 @@
 -/
 import CliffordMatrixIsomorphism.NecSuf.CliffordAlgebra.SplitQuadraticSpace.Generators
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorAlgebra.MultiplicationInAlgebra
-import CliffordMatrixIsomorphism.Isomorphism.CreationOperatorMatrices.CountAndSign
+import CliffordMatrixIsomorphism.NecSuf.Isomorphism.CreationOperatorMatrices.CountAndSign
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.CreationOperatorMatrices.Sign
 
 namespace CliffordMatrixIsomorphism.NecSuf.Clifford.SplitData
 
 open CliffordMatrixIsomorphism.NecSuf.Isomorphism (sign sign_zero sign_succ)
-open CliffordMatrixIsomorphism.Isomorphism
+open CliffordMatrixIsomorphism.NecSuf.Isomorphism
   (countBelow countBelow_one countBelow_succ_succ_of_mem countBelow_succ_succ_of_not_mem unionSingleton
     self_mem_unionSingleton mem_unionSingleton_iff_of_ne)
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet)
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet)
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver
 
 universe u uK

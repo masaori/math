@@ -10,9 +10,9 @@
   def_subalgebra                                     IsSubalgebra
   def_subset_generates_algebra                       GeneratesAlgebra
 
-環の組は ℂ を含まないので、具体版の `UnitalRing`（`MathematicalToolkit/Ring/UnitalRing.lean`）を引く。
+環の組は、必要十分版の `UnitalRing`（`NecSuf/MathematicalToolkit/Ring/UnitalRing.lean`）を引く。
 -/
-import CliffordMatrixIsomorphism.MathematicalToolkit.Ring.UnitalRing
+import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.Ring.UnitalRing
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexVectorSpace.Definitions
 
 namespace CliffordMatrixIsomorphism.NecSuf

@@ -28,7 +28,7 @@ theorem IsSubalgebra.sumOverFiniteSet_mem_of_necSuf {SA : ComplexAlgebra A} {B :
     (hv : ∀ x : X, v x ∈ B) : sumOverFiniteSet SA.toComplexVectorSpace hX c v ∈ B := by
   rw [sumOverFiniteSet_eq_necSuf]
   exact NecSuf.AlgebraOver.IsSubalgebra.sumOverFiniteSet_mem (_root_.add_zero 0)
-    ((isSubalgebra_iff_necSuf SA B).1 hB) hX c v hv
+    ((isSubalgebra_iff_necSuf SA B).1 hB) hX.toNecSuf c v hv
 
 theorem leftMul_isLinearMap_of_necSuf (SA : ComplexAlgebra A) (a : A) :
     IsComplexLinearMap SA.toComplexVectorSpace SA.toComplexVectorSpace (fun x => SA.mul a x) :=

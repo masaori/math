@@ -9,7 +9,7 @@
   def_k_fold_tensor_product                                    IsTensorProduct                 同上
   claim_linear_map_after_k_multilinear_map_is_k_multilinear    IsMultilinearMap.comp_linearMap なし（K の公理を一つも使わない）
 -/
-import CliffordMatrixIsomorphism.MathematicalToolkit.FiniteSetSum.Numbering
+import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.FiniteSetSum.Numbering
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexVectorSpace.Definitions
 
 namespace CliffordMatrixIsomorphism.NecSuf.VectorSpace

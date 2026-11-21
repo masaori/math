@@ -6,8 +6,7 @@
   def_unital_ring              UnitalRing
   def_ring_homomorphism        IsRingHomomorphism
 
-必要十分版は置かない。二つの定義はどちらも ℂ を含まず、係数を型の変数に替える余地が無いので、
-具体版がそのまま必要十分である。
+必要十分版は `NecSuf/MathematicalToolkit/Ring/UnitalRing.lean` に同じ形で置く（二つの定義はどちらも ℂ を含まない）。
 -/
 namespace CliffordMatrixIsomorphism
 

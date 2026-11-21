@@ -1,6 +1,6 @@
 /-
 章「同型の証明」の、生成作用素の行列の成分の条件に現れる P_M の元の操作（T ∪ {j}・S' の所属、S' の定義）と、
-条件どうしの同値。ℂ を含まないので、具体版と必要十分版が同じこのファイルを引く（必要十分版は置かない）。
+条件どうしの同値。必要十分版は `NecSuf/Isomorphism/CreationOperatorMatrices/IndexSetOperations.lean` に同じ形で置く。
 
   本文のラベル                                                        このファイル
   （和集合と {j} の定義・S' の置き方による所属の書き換え）              mem_unionSingleton_iff・mem_removeIndex_iff

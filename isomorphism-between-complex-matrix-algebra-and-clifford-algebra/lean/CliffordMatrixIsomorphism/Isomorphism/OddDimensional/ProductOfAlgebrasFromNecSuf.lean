@@ -15,6 +15,10 @@ import CliffordMatrixIsomorphism.Isomorphism.OddDimensional.ProductOfAlgebras
 import CliffordMatrixIsomorphism.MathematicalToolkit.ComplexAlgebra.ComplexAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.OddDimensional.ProductOfAlgebras
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.ComplexAlgebra
 
 universe u v w
@@ -24,7 +28,7 @@ variable {A₁ : Type u} {A₂ : Type v} {C : Type w} {A : Type u}
 /-- 本文 `claim_product_of_two_complex_algebras_is_complex_algebra` を、必要十分版から得たもの。 -/
 def productAlgebra_of_necSuf (S₁ : ComplexAlgebra A₁) (S₂ : ComplexAlgebra A₂) : ComplexAlgebra (A₁ × A₂) :=
   let N := NecSuf.AlgebraOver.productAlgebra S₁.toNecSuf S₂.toNecSuf
-  { toUnitalRing := N.toUnitalRing
+  { toUnitalRing := UnitalRing.ofNecSuf N.toUnitalRing
     smul := N.smul
     smul_assoc := N.smul_assoc
     one_smul := N.one_smul

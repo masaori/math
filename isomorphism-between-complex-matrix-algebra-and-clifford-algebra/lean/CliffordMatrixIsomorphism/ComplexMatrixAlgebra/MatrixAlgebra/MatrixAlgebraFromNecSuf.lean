@@ -21,6 +21,10 @@ import CliffordMatrixIsomorphism.MathematicalToolkit.TensorProduct.TensorProduct
 import CliffordMatrixIsomorphism.MathematicalToolkit.ComplexAlgebra.ComplexAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixAlgebra.Algebra
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.ComplexMatrixAlgebra
 
 open CliffordMatrixIsomorphism.ComplexVectorSpace
@@ -48,7 +52,7 @@ theorem Mat.one_eq_necSuf [DecidableEq X] : (Mat.one : Mat X) = NecSuf.ComplexMa
 
 /-- 本文 `def_matrices_indexed_by_finite_set` の積は、必要十分版の積の K := ℂ の場合と一致する。 -/
 theorem Mat.mul_eq_necSuf (hX : IsFiniteSet X) (A B : Mat X) :
-    Mat.mul hX A B = NecSuf.ComplexMatrixAlgebra.Mat.mul complexValuedMapsLaws hX A B :=
+    Mat.mul hX A B = NecSuf.ComplexMatrixAlgebra.Mat.mul complexValuedMapsLaws hX.toNecSuf A B :=
   funext fun p => sumOverFiniteSet_eq_necSuf complexNumbersVectorSpace hX
     (fun z => Mat.entry A p.1 z) (fun z => Mat.entry B z p.2)
 
@@ -82,50 +86,50 @@ theorem matricesVectorSpace_toNecSuf (X : Type u) :
 theorem mat_mul_assoc_of_necSuf (hX : IsFiniteSet X) (A B C : Mat X) :
     Mat.mul hX (Mat.mul hX A B) C = Mat.mul hX A (Mat.mul hX B C) := by
   rw [Mat.mul_eq_necSuf hX A B, Mat.mul_eq_necSuf hX B C, Mat.mul_eq_necSuf, Mat.mul_eq_necSuf]
-  exact NecSuf.ComplexMatrixAlgebra.mat_mul_assoc complexValuedMapsLaws mul_comm mul_zero hX A B C
+  exact NecSuf.ComplexMatrixAlgebra.mat_mul_assoc complexValuedMapsLaws mul_comm mul_zero hX.toNecSuf A B C
 
 /-- 本文 `claim_matrix_product_distributes_over_sum_in_right_factor` を必要十分版から得る。 -/
 theorem mat_mul_add_of_necSuf (hX : IsFiniteSet X) (A B C : Mat X) :
     Mat.mul hX A (Mat.add B C) = Mat.add (Mat.mul hX A B) (Mat.mul hX A C) := by
   rw [Mat.mul_eq_necSuf, Mat.mul_eq_necSuf hX A B, Mat.mul_eq_necSuf hX A C]
-  exact NecSuf.ComplexMatrixAlgebra.mat_mul_add complexValuedMapsLaws hX A B C
+  exact NecSuf.ComplexMatrixAlgebra.mat_mul_add complexValuedMapsLaws hX.toNecSuf A B C
 
 /-- 本文 `claim_matrix_product_distributes_over_sum_in_left_factor` を必要十分版から得る。 -/
 theorem mat_add_mul_of_necSuf (hX : IsFiniteSet X) (A B C : Mat X) :
     Mat.mul hX (Mat.add A B) C = Mat.add (Mat.mul hX A C) (Mat.mul hX B C) := by
   rw [Mat.mul_eq_necSuf, Mat.mul_eq_necSuf hX A C, Mat.mul_eq_necSuf hX B C]
-  exact NecSuf.ComplexMatrixAlgebra.mat_add_mul complexValuedMapsLaws hX A B C
+  exact NecSuf.ComplexMatrixAlgebra.mat_add_mul complexValuedMapsLaws hX.toNecSuf A B C
 
 /-- 本文 `claim_identity_matrix_is_left_unit_of_matrix_product` を必要十分版から得る。 -/
 theorem mat_one_mul_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] (A : Mat X) :
     Mat.mul hX Mat.one A = A := by
   rw [Mat.mul_eq_necSuf]
-  exact NecSuf.ComplexMatrixAlgebra.mat_one_mul complexValuedMapsLaws hX A
+  exact NecSuf.ComplexMatrixAlgebra.mat_one_mul complexValuedMapsLaws hX.toNecSuf A
 
 /-- 本文 `claim_identity_matrix_is_right_unit_of_matrix_product` を必要十分版から得る。 -/
 theorem mat_mul_one_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] (A : Mat X) :
     Mat.mul hX A Mat.one = A := by
   rw [Mat.mul_eq_necSuf]
   exact NecSuf.ComplexMatrixAlgebra.mat_mul_one complexValuedMapsLaws (fun a => mul_comm 0 a) (fun a => mul_comm 1 a)
-    hX A
+    hX.toNecSuf A
 
 /-- 本文 `claim_scalar_multiple_is_compatible_with_matrix_product_in_left_factor` を必要十分版から得る。 -/
 theorem mat_smul_mul_left_of_necSuf (hX : IsFiniteSet X) (l : ℂ) (A B : Mat X) :
     Mat.smul l (Mat.mul hX A B) = Mat.mul hX (Mat.smul l A) B := by
   rw [Mat.mul_eq_necSuf, Mat.mul_eq_necSuf]
-  exact NecSuf.ComplexMatrixAlgebra.mat_smul_mul_left complexValuedMapsLaws mul_zero hX l A B
+  exact NecSuf.ComplexMatrixAlgebra.mat_smul_mul_left complexValuedMapsLaws mul_zero hX.toNecSuf l A B
 
 /-- 本文 `claim_scalar_multiple_is_compatible_with_matrix_product_in_right_factor` を必要十分版から得る。 -/
 theorem mat_smul_mul_right_of_necSuf (hX : IsFiniteSet X) (l : ℂ) (A B : Mat X) :
     Mat.smul l (Mat.mul hX A B) = Mat.mul hX A (Mat.smul l B) := by
   rw [Mat.mul_eq_necSuf, Mat.mul_eq_necSuf]
-  exact NecSuf.ComplexMatrixAlgebra.mat_smul_mul_right complexValuedMapsLaws mul_comm mul_zero hX l A B
+  exact NecSuf.ComplexMatrixAlgebra.mat_smul_mul_right complexValuedMapsLaws mul_comm mul_zero hX.toNecSuf l A B
 
 /-- 本文 `claim_matrices_indexed_by_finite_set_form_complex_algebra` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 noncomputable def matricesComplexAlgebra_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] :
     ComplexAlgebra (Mat X) :=
-  let N := NecSuf.ComplexMatrixAlgebra.matricesAlgebra complexValuedMapsLaws mul_comm mul_zero hX
-  { toUnitalRing := N.toUnitalRing
+  let N := NecSuf.ComplexMatrixAlgebra.matricesAlgebra complexValuedMapsLaws mul_comm mul_zero hX.toNecSuf
+  { toUnitalRing := UnitalRing.ofNecSuf N.toUnitalRing
     smul := N.smul
     smul_assoc := N.smul_assoc
     one_smul := N.one_smul
@@ -138,7 +142,7 @@ noncomputable def matricesComplexAlgebra_of_necSuf (hX : IsFiniteSet X) [Decidab
 ほかの欄は定義による）。 -/
 theorem matricesComplexAlgebra_eq_of_necSuf (hX : IsFiniteSet X) [DecidableEq X] :
     matricesComplexAlgebra hX = matricesComplexAlgebra_of_necSuf hX := by
-  have hmul : Mat.mul hX = NecSuf.ComplexMatrixAlgebra.Mat.mul complexValuedMapsLaws hX :=
+  have hmul : Mat.mul hX = NecSuf.ComplexMatrixAlgebra.Mat.mul complexValuedMapsLaws hX.toNecSuf :=
     funext fun A => funext fun B => Mat.mul_eq_necSuf hX A B
   unfold matricesComplexAlgebra matricesComplexAlgebra_of_necSuf
   -- 欄ごとに比べ、積の欄の等式 Mat.mul hX = …（congr が残す唯一の等式）を仮定 hmul で閉じる
@@ -147,7 +151,7 @@ theorem matricesComplexAlgebra_eq_of_necSuf (hX : IsFiniteSet X) [DecidableEq X]
 /-- 本文 `claim_matrices_indexed_by_finite_set_form_complex_algebra` の具体版の組を必要十分版の代数として読むと、必要十分版の組と同じ。 -/
 theorem matricesComplexAlgebra_toNecSuf (hX : IsFiniteSet X) [DecidableEq X] :
     (matricesComplexAlgebra hX).toNecSuf
-      = NecSuf.ComplexMatrixAlgebra.matricesAlgebra complexValuedMapsLaws mul_comm mul_zero hX := by
+      = NecSuf.ComplexMatrixAlgebra.matricesAlgebra complexValuedMapsLaws mul_comm mul_zero hX.toNecSuf := by
   rw [matricesComplexAlgebra_eq_of_necSuf hX]
   rfl
 

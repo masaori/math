@@ -30,6 +30,10 @@ import CliffordMatrixIsomorphism.Isomorphism.OddDimensional.ProductOfAlgebrasFro
 import CliffordMatrixIsomorphism.Isomorphism.HomomorphismToMatrixAlgebra.HomomorphismToMatrixAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.OddDimensional.HomomorphismToPairOfMatrices
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.Clifford.SplitData
 
 open CliffordMatrixIsomorphism.ComplexMatrixAlgebra
@@ -164,7 +168,7 @@ theorem homomorphismToPairOfMatrices_oddInclusionHom_of_necSuf (a : D.space.Cl) 
     exact e1.trans ((D.mapToPairOfMatrices_eq_necSuf _).trans (e2.trans (congrArg (fun x => (x, x)) h1).symm))
   calc Φ' (D.oddInclusionHom a)
       = pairMap Φ Φ a :=
-        eq_of_agree_on_generators_of_necSuf hcomp hΔ (Set.range D.space.γ) D.space.γ_generates_of_necSuf
+        equal_of_agree_on_generators_of_necSuf hcomp hΔ (Set.range D.space.γ) D.space.γ_generates_of_necSuf
           (fun _ ⟨v, hv⟩ => by rw [← hv]; exact hγ v) a
     _ = (Φ a, Φ a) := rfl
 

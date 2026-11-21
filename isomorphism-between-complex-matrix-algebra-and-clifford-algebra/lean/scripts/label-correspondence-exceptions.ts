@@ -35,31 +35,6 @@ export const withoutDeclaration: readonly Exception[] = [
 export const withoutNecSuf: readonly Exception[] = [
   {
     reason:
-      "主張が ℂ を含まない（番号付け・部分集合・ℕ と ℤ の計算だけの主張）ので、必要十分版は具体版と同じ宣言を引く",
-    labels: [
-      "claim_numbering_of_initial_segment_from_zero",
-      "claim_base_n_numbering_is_numbering_of_maps",
-      "claim_binary_numbering_is_numbering_of_power_set",
-      "claim_number_of_pairs_of_subsets_is_at_least_one",
-      "claim_numbering_of_pairs_of_subsets_is_numbering",
-      "claim_two_element_set_is_finite_set",
-      "claim_membership_in_reversed_subset",
-      "claim_reversal_of_subsets_is_involution",
-      "claim_numbering_with_first_site_as_highest_digit_is_numbering_of_power_set",
-      "claim_tuple_of_membership_indices_of_positions_of_two_is_original",
-      "claim_ordered_sum_of_integers_splits_off_first_term",
-      "claim_ordered_sum_of_integers_is_unchanged_by_shifting_index",
-      "claim_ordered_sums_of_integers_with_equal_terms_are_equal",
-      "claim_number_of_membership_tuple_of_reversed_subset_without_top_element",
-      "claim_number_of_membership_tuple_of_reversed_subset_with_top_element",
-      "claim_number_of_membership_tuple_after_numbering_with_first_site_as_highest_digit",
-      "claim_number_of_tuple_with_first_site_as_highest_digit_is_bijection",
-      "claim_count_below_index_after_adding_one_element",
-      "claim_count_below_index_vanishes_without_smaller_elements",
-    ],
-  },
-  {
-    reason:
       "ℂ についての事実で、必要十分版では係数 K についての仮定（1 + 1 ≠ 0、i · i = -1）になるので、" +
       "必要十分版と導出版の宣言を置かない（Isomorphism/GeneralEvenDimensional/OrthogonalBasisFromNecSuf.lean・" +
       "OrthonormalBasisFromNecSuf.lean の冒頭）",

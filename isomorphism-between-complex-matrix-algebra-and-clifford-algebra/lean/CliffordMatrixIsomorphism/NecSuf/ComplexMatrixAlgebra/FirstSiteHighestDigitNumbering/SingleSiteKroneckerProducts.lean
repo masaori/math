@@ -29,7 +29,7 @@ import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexAlgebra.Homom
 namespace CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet isFiniteSet_two)
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet isFiniteSet_two)
 
 universe uK
 

@@ -1,6 +1,6 @@
 /-
 章「複素行列環」の、部分集合の番号を逆順に付け替える写像 ϱ_M と、番号 1 を最上位の桁にする部分集合全体の番号付け r_M。
-人手証明と 1 対 1 に対応させる。ℂ を含まないので、具体版と必要十分版が同じこのファイルを引く（必要十分版・導出版を置かない）。
+人手証明と 1 対 1 に対応させる。必要十分版は `NecSuf/ComplexMatrixAlgebra/FirstSiteHighestDigitNumbering/SubsetReversal.lean` に同じ形で置く。
 
   本文のラベル                                                                  このファイル
   def_reversal_of_subsets                                                       reversal（ϱ_M）・reversal_subset（右辺が P_M の元であること）

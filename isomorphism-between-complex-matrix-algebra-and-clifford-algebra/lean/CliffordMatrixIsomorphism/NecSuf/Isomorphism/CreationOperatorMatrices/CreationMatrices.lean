@@ -25,15 +25,15 @@ L : `ValuedMapsLaws K` は積 `Mat.mul L hX` を定めるのに要る（和を�
 -/
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixAlgebra.Definitions
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.CreationOperatorMatrices.Sign
-import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.PowerSetNumbering.BinaryNumbering
-import CliffordMatrixIsomorphism.Isomorphism.CreationOperatorMatrices.IndexSetOperations
+import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.PowerSetNumbering.BinaryNumbering
+import CliffordMatrixIsomorphism.NecSuf.Isomorphism.CreationOperatorMatrices.IndexSetOperations
 
 namespace CliffordMatrixIsomorphism.NecSuf.Isomorphism
 
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
-open CliffordMatrixIsomorphism.Isomorphism
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet)
+open CliffordMatrixIsomorphism.NecSuf.Isomorphism
   (countBelow unionSingleton removeIndex unionSingleton_cond_iff_eq_removeIndex self_mem_unionSingleton)
 
 universe uK

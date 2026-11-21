@@ -6,7 +6,7 @@
                                  IsNumbering.inv（逆写像 e^{-1}）・IsNumbering.apply_inv（e(e^{-1}(x)) = x）・
                                  IsNumbering.inv_apply（e^{-1}(e(k)) = k）
 
-この定義は ℂ を含まないので、必要十分版はこのファイルをそのまま引く（必要十分版を別に置かない）。
+必要十分版は `NecSuf/MathematicalToolkit/FiniteSetSum/Numbering.lean` に同じ形で置く。
 
 {1,…,n} は部分型 `Idx n` で表す。X が空集合のときも番号付け（n = 0）が書けるように、
 番号付け e は `ℕ → X` ではなく `Idx n → X` とする。

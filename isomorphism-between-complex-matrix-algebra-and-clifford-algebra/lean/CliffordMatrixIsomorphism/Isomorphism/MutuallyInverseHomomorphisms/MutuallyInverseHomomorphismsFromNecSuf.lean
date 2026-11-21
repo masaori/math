@@ -4,7 +4,7 @@ K := ℂ、n := -1_ℂ への特殊化から得られることを示す導出版
 具体版の主張は、どれも具体版と同じ名前に `_of_necSuf` を付けて示す（必要十分版の主張も具体版と同じ名前）。
 
 クリフォード代数の中の主張は、`HomomorphismFromMatrixAlgebraFromNecSuf.lean` と同じく、準同型 Φ : Cl → Cl' で運ぶ
-（`eq_of_toN_eq`）。行列環への準同型 Φ_具体 は Φ' ∘ Φ に等しい（`homomorphismToMatrix_eq_comp`）ので、Φ_具体 の値の主張は
+（`equal_of_toN_eq`）。行列環への準同型 Φ_具体 は Φ' ∘ Φ に等しい（`homomorphismToMatrix_eq_comp`）ので、Φ_具体 の値の主張は
 必要十分版の Φ' の主張を Φ で写した元に当てて得る。生成作用素・消滅作用素の行列は `creationMatrix_eq_necSuf`・
 `annihilationMatrix_eq_necSuf`、座標の写像は `coordinate_eq_necSuf` で必要十分版のものへ移す。
 主定理は、必要十分版の主定理を特殊化し、互いに逆な準同型 T・S（`splitTransport`）で引き戻す
@@ -15,6 +15,10 @@ import CliffordMatrixIsomorphism.Isomorphism.MutuallyInverseHomomorphisms.Mutual
 import CliffordMatrixIsomorphism.Isomorphism.HomomorphismFromMatrixAlgebra.HomomorphismFromMatrixAlgebraFromNecSuf
 import CliffordMatrixIsomorphism.Isomorphism.CreationOperatorMatrices.CreationMatricesFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.MutuallyInverseHomomorphisms.MutuallyInverseHomomorphisms
+
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
 
 namespace CliffordMatrixIsomorphism.Clifford.SplitData
 
@@ -49,7 +53,7 @@ theorem sum_creationMatrix_entry_smul_matrixUnitElement_of_necSuf {i : ℕ} (hi 
     sumOverFiniteSet D.space.cliffordAlgebra.toComplexVectorSpace (isFiniteSet_powerSet D.M)
         (fun S => Mat.entry (creationMatrix D.M i hi) S T) (fun S => D.matrixUnitElement S T)
       = D.space.cliffordAlgebra.mul (D.creation i) (D.matrixUnitElement T T) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.isLinearMap.map_sumOverFiniteSet, hΦ.map_mul, toN_creation hΦγ, toN_matrixUnitElement hΦ hΦγ]
   simp only [toN_matrixUnitElement hΦ hΦγ]
@@ -59,7 +63,7 @@ theorem sum_creationMatrix_entry_smul_matrixUnitElement_of_necSuf {i : ℕ} (hi 
 /-- 本文 `claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_creation_operator_matrix` を必要十分版から得る。 -/
 theorem homomorphismFromMatrix_creationMatrix_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.homomorphismFromMatrix (creationMatrix D.M i hi) = D.creation i := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_homomorphismFromMatrix hΦ hΦγ, toN_creation hΦγ, creationMatrix_eq_necSuf]
   exact D.toNecSuf.homomorphismFromMatrix_creationMatrix complexCliffordLaws add_neg_cancel hi
@@ -70,7 +74,7 @@ theorem sum_annihilationMatrix_entry_smul_matrixUnitElement_of_necSuf {i : ℕ} 
     sumOverFiniteSet D.space.cliffordAlgebra.toComplexVectorSpace (isFiniteSet_powerSet D.M)
         (fun T => Mat.entry (annihilationMatrix D.M i hi) S T) (fun T => D.matrixUnitElement S T)
       = D.space.cliffordAlgebra.mul (D.matrixUnitElement S S) (D.annihilation i) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [hΦ.isLinearMap.map_sumOverFiniteSet, hΦ.map_mul, toN_annihilation hΦγ, toN_matrixUnitElement hΦ hΦγ]
   simp only [toN_matrixUnitElement hΦ hΦγ]
@@ -80,7 +84,7 @@ theorem sum_annihilationMatrix_entry_smul_matrixUnitElement_of_necSuf {i : ℕ} 
 /-- 本文 `claim_homomorphism_from_matrix_algebra_to_clifford_algebra_on_annihilation_operator_matrix` を必要十分版から得る。 -/
 theorem homomorphismFromMatrix_annihilationMatrix_of_necSuf {i : ℕ} (hi : 1 ≤ i ∧ i ≤ D.M) :
     D.homomorphismFromMatrix (annihilationMatrix D.M i hi) = D.annihilation i := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_homomorphismFromMatrix hΦ hΦγ, toN_annihilation hΦγ, annihilationMatrix_eq_necSuf]
   exact D.toNecSuf.homomorphismFromMatrix_annihilationMatrix complexCliffordLaws add_neg_cancel hi
@@ -93,7 +97,7 @@ theorem γ_pair_eq_creation_add_annihilation_of_necSuf (x : W) (g : DualSpace D.
           (linearCombination D.space.cliffordAlgebra.toComplexVectorSpace D.M
             (fun k => coordinate D.spaceW D.M D.w D.isBasis k x) D.creation)
           (linearCombination D.space.cliffordAlgebra.toComplexVectorSpace D.M (fun k => g.1 (D.w k)) D.annihilation) := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   have hN := D.toNecSuf.γ_pair_eq_creation_add_annihilation complexCliffordLaws x g.toNecSuf
   rw [hΦγ, hΦ.map_add, hΦ.isLinearMap.map_linearCombination, hΦ.isLinearMap.map_linearCombination]
@@ -101,15 +105,11 @@ theorem γ_pair_eq_creation_add_annihilation_of_necSuf (x : W) (g : DualSpace D.
   rw [linearCombination_eq_necSuf, linearCombination_eq_necSuf]
   refine hN.trans ?_
   congr 1
-  apply NecSuf.VectorSpace.linearCombination_eq_of_terms_eq
-  intro k hk1 hkM
-  rw [coordinate_eq_necSuf D.spaceW D.M D.w D.isBasis k hk1 hkM x]
-  rfl
 
 /-- 本文 `claim_homomorphism_to_clifford_algebra_after_homomorphism_to_matrix_algebra_is_identity` を必要十分版から得る。 -/
 theorem homomorphismFromMatrix_homomorphismToMatrix_of_necSuf (a : D.space.Cl) :
     D.homomorphismFromMatrix (D.homomorphismToMatrix a) = a := by
-  apply D.eq_of_toN_eq
+  apply D.equal_of_toN_eq
   intro Φ hΦ hΦγ
   rw [toN_homomorphismFromMatrix hΦ hΦγ, D.homomorphismToMatrix_eq_comp hΦ hΦγ]
   exact D.toNecSuf.homomorphismFromMatrix_homomorphismToMatrix complexCliffordLaws add_neg_cancel (Φ a)

@@ -2,7 +2,7 @@
 節「系：複素行列版イジングの Jordan–Wigner 行列への接続」の後半のうち、番号で添字づけたサイトごとの Pauli 行列、
 番号で添字づけた Jordan–Wigner 行列 Z^{(2^M)}_m・Y^{(2^M)}_m と、Z_m・Y_m を ν_{r_M} で付け替えるとそれになることの必要十分版。
 具体版 `Isomorphism/JordanWignerMatrices/IndexedByNumbers.lean` と同じ def と calc の行で、係数 ℂ を型の変数 K に、
-虚数単位 i を K の元の変数 i に替えて書く。a ∈ {x, y, z}・b ∈ {y, z} は具体版と同じ `PauliLabels.lean` のものを引く。
+虚数単位 i を K の元の変数 i に替えて書く。a ∈ {x, y, z}・b ∈ {y, z} は必要十分版の側に同じ形で置いた `NecSuf/Isomorphism/JordanWignerMatrices/PauliLabels.lean` のものを引く。
 
   本文のラベル                                                                       このファイル                         使う K の性質
   def_site_pauli_matrices_indexed_by_numbers                                         pauliOf・sitePauliFamily・sitePauli  なし（σy は i を一つ与えるだけ）
@@ -34,7 +34,7 @@ L : `ValuedMapsLaws K` は行列の積 `Mat.mul L hX` を定めるのに要る�
 - 本文の前提 M ∈ ℤ_{≥1} と m ∈ {1,…,M} は、どの主張も使わない（具体版と同じ）。
 -/
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.JordanWignerMatrices.JordanWignerConjugation
-import CliffordMatrixIsomorphism.Isomorphism.JordanWignerMatrices.PauliLabels
+import CliffordMatrixIsomorphism.NecSuf.Isomorphism.JordanWignerMatrices.PauliLabels
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.FirstSiteHighestDigitNumbering.NumberedKroneckerProduct
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.FirstSiteHighestDigitNumbering.SingleSiteKroneckerProducts
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.TensorAlgebra.MultiplicationInAlgebra
@@ -44,9 +44,9 @@ namespace CliffordMatrixIsomorphism.NecSuf.Isomorphism
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver (IsAlgebraHomomorphism)
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet twoPower
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet isFiniteSet_powerSet twoPower
   firstSiteHighestNumbering_isNumbering)
-open CliffordMatrixIsomorphism.Isomorphism (PauliLabel JordanWignerLabel JordanWignerLabel.toPauliLabel)
+open CliffordMatrixIsomorphism.NecSuf.Isomorphism (PauliLabel JordanWignerLabel JordanWignerLabel.toPauliLabel)
 
 universe uK
 

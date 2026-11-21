@@ -92,13 +92,13 @@ theorem ofCl_γ (v' : V') : P.ofCl (Q'.γ complexCliffordLaws v') = Q.γ (P.ofPo
 
 /-- S ∘ T は恒等写像である（γ(V) の上で一致する準同型）。 -/
 theorem ofCl_toCl (x : Q.Cl) : P.ofCl (P.toCl x) = x :=
-  eq_of_agree_on_generators_of_necSuf (IsComplexAlgebraHomomorphism.comp_of_necSuf P.toCl_isHom P.ofCl_isHom)
+  equal_of_agree_on_generators_of_necSuf (IsComplexAlgebraHomomorphism.comp_of_necSuf P.toCl_isHom P.ofCl_isHom)
     (isComplexAlgebraHomomorphism_id_of_necSuf Q.cliffordAlgebra) (Set.range Q.γ) Q.γ_generates_of_necSuf
     (fun _ ⟨v, hv⟩ => by rw [← hv, P.toCl_γ, P.ofCl_γ, P.ofPoint_toPoint]) x
 
 /-- T ∘ S は恒等写像である（γ_N(V'_N) の上で一致する準同型）。 -/
 theorem toCl_ofCl (y : Q'.Cl complexCliffordLaws) : P.toCl (P.ofCl y) = y :=
-  eq_of_agree_on_generators_of_necSuf (IsComplexAlgebraHomomorphism.comp_of_necSuf P.ofCl_isHom P.toCl_isHom)
+  equal_of_agree_on_generators_of_necSuf (IsComplexAlgebraHomomorphism.comp_of_necSuf P.ofCl_isHom P.toCl_isHom)
     (isComplexAlgebraHomomorphism_id_of_necSuf (algebraOfNecSuf Q')) (Set.range (Q'.γ complexCliffordLaws))
     ((generatesAlgebra_iff_necSuf _ _).2 (Q'.γ_generates complexCliffordLaws))
     (fun _ ⟨v', hv'⟩ => by rw [← hv', P.ofCl_γ, P.toCl_γ, P.toPoint_ofPoint]) y

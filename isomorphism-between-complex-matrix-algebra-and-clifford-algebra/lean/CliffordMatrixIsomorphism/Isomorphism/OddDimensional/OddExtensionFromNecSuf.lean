@@ -31,6 +31,10 @@ import CliffordMatrixIsomorphism.MathematicalToolkit.TensorProduct.TensorProduct
 import CliffordMatrixIsomorphism.MathematicalToolkit.ComplexVectorSpace.ComplexVectorSpaceFromNecSuf
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.OddDimensional.OddExtension
 
+-- 添字の再帰的な定義（2^M・個数 N_i(T)・整数の番号順の和など）は具体版と必要十分版に同じ式で別に置いてあり、
+-- 変数での値は再帰の展開でしか一致しないので、このファイルでは smartUnfolding を切って定義どおりに展開させる。
+set_option smartUnfolding false
+
 namespace CliffordMatrixIsomorphism.ComplexVectorSpace
 
 /-- 本文 `claim_family_of_unit_is_basis_of_complex_numbers` の準備の式を、必要十分版に ℂ の性質を渡して得たもの。 -/
@@ -130,7 +134,7 @@ def oddTransport : QuadraticSpaceWithBasis.PointTransport D.oddSpace (D.toNecSuf
 theorem oddToCl_oddInclusionHom (a : D.space.Cl) :
     D.oddTransport.toCl (D.oddInclusionHom a)
       = D.toNecSuf.oddInclusionHom complexCliffordLaws add_neg_cancel (D.splitTransport.toCl a) :=
-  eq_of_agree_on_generators_of_necSuf
+  equal_of_agree_on_generators_of_necSuf
     (IsComplexAlgebraHomomorphism.comp_of_necSuf D.oddInclusionHom_isHom_of_necSuf D.oddTransport.toCl_isHom)
     (IsComplexAlgebraHomomorphism.comp_of_necSuf D.splitTransport.toCl_isHom
       ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).2

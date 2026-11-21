@@ -26,13 +26,13 @@
 導出版は `Isomorphism/GlobalIdentities/GlobalIdentitiesFromNecSuf.lean`。
 -/
 import CliffordMatrixIsomorphism.NecSuf.Isomorphism.LocalIdentities.LocalIdentities
-import CliffordMatrixIsomorphism.ComplexMatrixAlgebra.PowerSetNumbering.BinaryNumbering
+import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.PowerSetNumbering.BinaryNumbering
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.FiniteSetSum.SumOverFiniteSet
 
 namespace CliffordMatrixIsomorphism.NecSuf.AlgebraOver
 
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 
 universe v uK
 
@@ -168,7 +168,7 @@ end CliffordMatrixIsomorphism.NecSuf.AlgebraOver
 
 namespace CliffordMatrixIsomorphism.NecSuf.Clifford.SplitData
 
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
 

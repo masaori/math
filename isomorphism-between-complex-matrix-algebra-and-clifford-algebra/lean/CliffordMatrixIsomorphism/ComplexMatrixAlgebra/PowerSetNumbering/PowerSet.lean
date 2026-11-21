@@ -1,5 +1,5 @@
 /-
-章「複素行列環」の、{1,…,M} の部分集合全体の集合 P_M の定義。ℂ を含まないので、具体版と必要十分版が同じこのファイルを引く。
+章「複素行列環」の、{1,…,M} の部分集合全体の集合 P_M の定義。必要十分版は `NecSuf/ComplexMatrixAlgebra/PowerSetNumbering/PowerSet.lean` に同じ形で置く。
 
   本文のラベル                                  このファイル
   def_power_set_of_first_m_positive_integers    PowerSet・PowerSet.ext

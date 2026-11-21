@@ -94,7 +94,7 @@ namespace CliffordMatrixIsomorphism.NecSuf.Clifford.SplitData
 open CliffordMatrixIsomorphism.NecSuf.VectorSpace
 open CliffordMatrixIsomorphism.NecSuf.AlgebraOver
 open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra
-open CliffordMatrixIsomorphism.ComplexMatrixAlgebra (PowerSet)
+open CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra (PowerSet)
 universe u v uK
 
 /-- 番号 k ∈ {1,…,M+M} は、m ∈ {1,…,M} によって k = m か k = M + m のどちらかの形に書ける（本文の場合分け。ℂ を含まない）。 -/
