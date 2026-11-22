@@ -34,7 +34,9 @@ theorem blockDiagonal_term_eq_prod_fiber_terms
           fiberPermutationSign block σ k =
               qbarPermutationSign (blockRestriction block σ k) := by
                 simp only [fiberPermutationSign, fiberInversionPairs,
-                  qbarPermutationSign]
+                  qbarPermutationSign, IndependentFiniteOrderedSign.finiteOrderedSign,
+                  IndependentFiniteOrderedSign.finiteOrderedInversionCount,
+                  IndependentFiniteOrderedSign.finiteOrderedPairs, Finset.filter_filter]
           _ = qbarPermutationSign (parts k) := by rw [hk]
           _ = (Equiv.Perm.sign (parts k) : ℤ) :=
                 qbarPermutationSign_eq_mathlibSign (parts k)

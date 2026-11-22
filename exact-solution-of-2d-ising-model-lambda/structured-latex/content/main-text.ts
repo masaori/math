@@ -12134,9 +12134,9 @@ w'
                         proof: [
                           paragraph([math(String.raw`n`), " について帰納法で示す。"]),
                           paragraph(["出発点として ", math(String.raw`n=0`), " とする。もし ", math(String.raw`s\ne\varnothing`),
-                            " ならば ", math(String.raw`w\in s`), " を 1 つ取れる。", ref("claim_qbar_factor_theorem"), " より、"]),
+                            " ならば ", math(String.raw`w\in s`), " を 1 つ取れる。"]),
                           displayMath(String.raw`g:=\widehat{\mathrm{ac}_0(f)}K_0(w)\in\overline{\mathbb{Q}}[t]`),
-                          paragraph(["と置くと ", math(String.raw`f=(t-\widehat w)g`), " である。一方、", ref("claim_qbar_factor_quotient_coeff_bound"),
+                          paragraph(["と置く。", ref("claim_qbar_factor_quotient_coeff_bound"),
                             " を任意の ", math(String.raw`j\in\mathbb{N}`), " に当てると ", math(String.raw`\mathrm{ac}_j(g)=0`),
                             " である。すべての係数が零である 2 つの多項式は等しいので ", math(String.raw`g=0`), " であり、"]),
                           displayMath(String.raw`\begin{aligned}

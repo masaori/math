@@ -13,16 +13,12 @@ open Finset
 /-- 行指定の置換展開に使う、転倒対の個数から定めた具体的な符号。 -/
 noncomputable def qbarPermutationSign {J : Type*} [Fintype J] [LinearOrder J]
     (σ : Equiv.Perm J) : ℤ :=
-  (-1) ^ ((Finset.univ.filter fun p : J × J => p.1 < p.2 ∧ σ p.2 < σ p.1).card)
+  IndependentFiniteOrderedSign.finiteOrderedSign σ
 
 theorem qbarPermutationSign_eq_mathlibSign {J : Type*} [Fintype J] [LinearOrder J]
     (σ : Equiv.Perm J) : qbarPermutationSign σ = (Equiv.Perm.sign σ : ℤ) := by
   classical
-  simpa [qbarPermutationSign,
-    IndependentFiniteOrderedSign.finiteOrderedSign,
-    IndependentFiniteOrderedSign.finiteOrderedInversionCount,
-    IndependentFiniteOrderedSign.finiteOrderedPairs, Finset.filter_filter] using
-    IntegerMatrix.inversionSignIndependent_eq_mathlibSign σ
+  exact IntegerMatrix.inversionSignIndependent_eq_mathlibSign σ
 
 /-- 転倒数の符号を定数多項式へ写した、本文の行指定の行列式定義との橋。
 線型順序はこの符号表示に必要であり、行列積の展開自体には使わない。 -/

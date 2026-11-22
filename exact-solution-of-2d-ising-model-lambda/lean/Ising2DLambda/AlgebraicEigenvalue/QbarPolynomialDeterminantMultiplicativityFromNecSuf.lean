@@ -26,7 +26,11 @@ theorem qbarPolynomial_bijective_inner_sum_from_necSuf
     (∑ σ : Equiv.Perm J, c σ * ∏ i : J, B (τ i) (σ i)) =
         c τ * (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)) :=
       NecSuf.AlgebraicEigenvalue.permutation_row_sum_reindex_necSuf B c
-        (fun π τ => qbarPolynomial_sign_comp π τ) τ
+        (fun π τ => by
+          change Polynomial.C ((qbarPermutationSign (π * τ) : ℤ) : Qbar) =
+            Polynomial.C ((qbarPermutationSign π : ℤ) : Qbar) *
+              Polynomial.C ((qbarPermutationSign τ : ℤ) : Qbar)
+          exact qbarPolynomial_sign_comp π τ) τ
     _ = c τ * Matrix.det B :=
       congrArg (c τ * ·) (qbarPolynomial_det_row_expansion_from_necSuf B).symm
 
@@ -46,7 +50,11 @@ theorem qbarPolynomial_det_mul_from_necSuf
     _ = (∑ τ : Equiv.Perm J, c τ * ∏ i : J, A i (τ i)) *
         (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)) :=
       NecSuf.AlgebraicEigenvalue.matrixProduct_permutationSum_mul_necSuf A B c
-        (fun π τ => qbarPolynomial_sign_comp π τ)
+        (fun π τ => by
+          change Polynomial.C ((qbarPermutationSign (π * τ) : ℤ) : Qbar) =
+            Polynomial.C ((qbarPermutationSign π : ℤ) : Qbar) *
+              Polynomial.C ((qbarPermutationSign τ : ℤ) : Qbar)
+          exact qbarPolynomial_sign_comp π τ)
         (fun a b hab σ => KacWard.finiteTranspositionPerm_eq_necSuf a b ▸
           qbarPolynomial_sign_right_transposition_neg a b hab σ)
     _ = Matrix.det A * (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)) :=

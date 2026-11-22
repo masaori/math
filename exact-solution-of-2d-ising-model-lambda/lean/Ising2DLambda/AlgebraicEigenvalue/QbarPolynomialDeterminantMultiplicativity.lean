@@ -5,36 +5,35 @@
 符号の乗法性は具体版 `finiteOrderedSign_comp`（`claim_permutation_sign_mul`）を引く。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialNoninjectiveCancellation
-import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansionFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansion
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Finset
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
 
 /-- 本文の符号の乗法性を整数の包含、定数多項式の写像の順で移す。 -/
 theorem qbarPolynomial_sign_comp
     {J : Type*} [Fintype J] [LinearOrder J] (π τ : Equiv.Perm J) :
-    Polynomial.C ((sign (fun i j : J => i < j) (π * τ) : ℤ) : Qbar) =
-      Polynomial.C ((sign (fun i j : J => i < j) π : ℤ) : Qbar) *
-        Polynomial.C ((sign (fun i j : J => i < j) τ : ℤ) : Qbar) := by
+    Polynomial.C ((qbarPermutationSign (π * τ) : ℤ) : Qbar) =
+      Polynomial.C ((qbarPermutationSign π : ℤ) : Qbar) *
+        Polynomial.C ((qbarPermutationSign τ : ℤ) : Qbar) := by
   let c : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar)
+    Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar)
   change c (π * τ) = c π * c τ
   calc
-    c (π * τ) = Polynomial.C ((sign (fun i j : J => i < j) (π * τ) : ℤ) : Qbar) := rfl
+    c (π * τ) = Polynomial.C ((qbarPermutationSign (π * τ) : ℤ) : Qbar) := rfl
     _ =
-        Polynomial.C (((sign (fun i j : J => i < j) π *
-          sign (fun i j : J => i < j) τ) : ℤ) : Qbar) := by
+        Polynomial.C (((qbarPermutationSign π *
+          qbarPermutationSign τ) : ℤ) : Qbar) := by
       change Polynomial.C ((IndependentFiniteOrderedSign.finiteOrderedSign (π * τ) : ℤ) : Qbar) =
         Polynomial.C (((IndependentFiniteOrderedSign.finiteOrderedSign π *
           IndependentFiniteOrderedSign.finiteOrderedSign τ) : ℤ) : Qbar)
       rw [IndependentFiniteOrderedSign.finiteOrderedSign_comp π τ]
-    _ = Polynomial.C (((sign (fun i j : J => i < j) π : ℤ) : Qbar) *
-        ((sign (fun i j : J => i < j) τ : ℤ) : Qbar)) := by rw [Int.cast_mul]
-    _ = Polynomial.C ((sign (fun i j : J => i < j) π : ℤ) : Qbar) *
-        Polynomial.C ((sign (fun i j : J => i < j) τ : ℤ) : Qbar) :=
+    _ = Polynomial.C (((qbarPermutationSign π : ℤ) : Qbar) *
+        ((qbarPermutationSign τ : ℤ) : Qbar)) := by rw [Int.cast_mul]
+    _ = Polynomial.C ((qbarPermutationSign π : ℤ) : Qbar) *
+        Polynomial.C ((qbarPermutationSign τ : ℤ) : Qbar) :=
       map_mul Polynomial.C _ _
     _ = c π * c τ := rfl
 
@@ -43,12 +42,12 @@ theorem qbarPolynomial_bijective_inner_sum
     {J : Type*} [Fintype J] [LinearOrder J]
     (B : Matrix J J (Polynomial Qbar)) (τ : Equiv.Perm J) :
     (∑ σ : Equiv.Perm J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+      Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
         ∏ i : J, B (τ i) (σ i)) =
-      Polynomial.C ((sign (fun i j : J => i < j) τ : ℤ) : Qbar) * Matrix.det B := by
+      Polynomial.C ((qbarPermutationSign τ : ℤ) : Qbar) * Matrix.det B := by
   classical
   let c : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar)
+    Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar)
   let I : (J → J) → Polynomial Qbar := fun f =>
     ∑ σ : Equiv.Perm J, c σ * ∏ i : J, B (f i) (σ i)
   let α : Equiv.Perm J → J → J := fun σ i => σ i
@@ -98,7 +97,7 @@ theorem qbarPolynomial_bijective_inner_sum
     _ = c τ * (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)) :=
       (Finset.mul_sum _ _ _).symm
     _ = c τ * Matrix.det B :=
-      congrArg (c τ * ·) (qbarPolynomial_det_row_expansion_from_necSuf B).symm
+      congrArg (c τ * ·) (qbarPolynomial_det_row_expansion B).symm
 
 /-- 非単射項を消し、全単射と置換の明示的な対応から二つの行列式を分離する。
 非空性は既存の本文の展開定理に合わせた仮定であり、この再添字付け自体は空でも成り立つ。 -/
@@ -108,7 +107,7 @@ theorem qbarPolynomial_det_mul
     Matrix.det (A * B) = Matrix.det A * Matrix.det B := by
   classical
   let c : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar)
+    Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar)
   let P : (J → J) → Polynomial Qbar := fun f => ∏ i : J, A i (f i)
   let I : (J → J) → Polynomial Qbar := fun f =>
     ∑ σ : Equiv.Perm J, c σ * ∏ i : J, B (f i) (σ i)
@@ -153,7 +152,7 @@ theorem qbarPolynomial_det_mul
       _ = 0 := mul_zero _
   calc
     Matrix.det (A * B) = ∑ f : J → J, P f * I f :=
-      qbarPolynomial_det_mul_function_expansion_from_necSuf A B
+      qbarPolynomial_det_mul_function_expansion A B
     _ = ∑ f ∈ U, P f * I f := by
       symm
       apply Finset.sum_subset (Finset.filter_subset _ _)
@@ -179,6 +178,6 @@ theorem qbarPolynomial_det_mul
     _ = (∑ τ : Equiv.Perm J, c τ * ∏ i : J, A i ((toFunction τ).val i)) * Matrix.det B := rfl
     _ = (∑ τ : Equiv.Perm J, c τ * ∏ i : J, A i (τ i)) * Matrix.det B := rfl
     _ = Matrix.det A * Matrix.det B :=
-      congrArg (· * Matrix.det B) (qbarPolynomial_det_row_expansion_from_necSuf A).symm
+      congrArg (· * Matrix.det B) (qbarPolynomial_det_row_expansion A).symm
 
 end Ising2DLambda.AlgebraicEigenvalue

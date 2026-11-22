@@ -22,9 +22,14 @@ theorem emptyPfaffianDeterminant
       Matrix.det A = ∑ σ : Equiv.Perm Empty,
           Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
             ∏ i : Empty, A i (σ i) := by
-              simp [Matrix.det_apply, qbarPermutationSign]
+              simp [Matrix.det_apply, qbarPermutationSign,
+                IndependentFiniteOrderedSign.finiteOrderedSign,
+                IndependentFiniteOrderedSign.finiteOrderedInversionCount,
+                IndependentFiniteOrderedSign.finiteOrderedPairs]
       _ = 1 := by
-        simp [qbarPermutationSign]
+        simp [qbarPermutationSign, IndependentFiniteOrderedSign.finiteOrderedSign,
+          IndependentFiniteOrderedSign.finiteOrderedInversionCount,
+          IndependentFiniteOrderedSign.finiteOrderedPairs]
   refine ⟨hpf, hdet, ?_⟩
   rw [hpf, hdet]
   norm_num

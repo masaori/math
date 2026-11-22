@@ -23,9 +23,6 @@ theorem qbarPolynomial_det_mul_function_expansion_from_necSuf
   apply congrArg ((∏ i : J, A i (f i)) * ·)
   apply Finset.sum_congr rfl
   intro σ _
-  congr 1
-  exact congrArg (fun z : ℤ => Polynomial.C (z : Qbar))
-    ((qbarPermutationSign_eq_mathlibSign σ).trans
-      (IntegerMatrix.inversionSign_eq_mathlibSign σ).symm)
+  rfl
 
 end Ising2DLambda.AlgebraicEigenvalue
