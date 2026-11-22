@@ -5848,14 +5848,19 @@ t+\iota\bigl(-A_{u,u}\bigr) & (u=u'\ \text{のとき})\\
                           ]),
                           paragraph([
                             math(String.raw`s`),
-                            " が空のとき、左辺は ",
-                            math(String.raw`\iota(\kappa(1))`),
-                            "、右辺は ",
-                            math(String.raw`\mathbb{Z}[x][t]`),
-                            " の単位元であり、",
+                            " が空のとき、",
+                            ref("def_constant_polynomial"),
+                            " と ",
                             ref("def_second_constant_embedding"),
-                            " により両者は等しい（空の積は単位元である）。",
+                            " により定数埋め込みは単位元を保つ。両辺をつなぐと",
                           ]),
+                          displayMath(String.raw`\begin{aligned}
+\iota\Bigl(\kappa\bigl(\textstyle\prod_{i\in\varnothing}n_i\bigr)\Bigr)
+&=\iota\bigl(\kappa(1)\bigr)
+&&(\because\ \mathbb Z\text{ の空積は }1)\\
+&=\prod_{i\in\varnothing}\iota\bigl(\kappa(n_i)\bigr)
+&&(\because\ \blkref{def_constant_polynomial},\ \blkref{def_second_constant_embedding},\ \text{空積の定義})
+\end{aligned}`),
                           paragraph([
                             math(String.raw`s`),
                             " について主張が成り立つとし、",
