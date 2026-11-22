@@ -18855,6 +18855,7 @@ R_{\mathrm{odd}}(\sigma)
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_sign",
+                      "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_finiteOrderedSign",
                       "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_sign",
                       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_sign",
                       "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_sign_from_necSuf",
@@ -18930,7 +18931,8 @@ q(p(i))&=q(i)&&\bigl(\because\ p\text{ の定義},\ i\notin C\bigr)\\
                       paragraph(["各点で値が等しいので ", math(String.raw`q\circ(q\circ\sigma)=\tau`), " である。符号の計算は整数の中で行う。"]),
                       displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}(q)&\in\{-1,1\}&&\bigl(\because\ \blkref{def_permutation_sign}\text{ の }(-1)\text{ の自然数冪}\bigr)\\
-\mathrm{sgn}(q)\cdot\mathrm{sgn}(q)&=1&&\bigl(\because\ -1,1\text{ の二つの場合の整数の積}\bigr)
+\mathrm{sgn}(q)\cdot\mathrm{sgn}(q)&=\mathrm{sgn}(q)^2&&\bigl(\because\ \text{整数の二乗の定義}\bigr)\\
+&=1&&\bigl(\because\ -1,1\text{ の二つの場合の整数の積}\bigr)
 \end{aligned}`),
                       displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}(\tau)

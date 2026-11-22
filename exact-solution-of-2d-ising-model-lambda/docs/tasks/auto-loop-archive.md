@@ -1,3 +1,25 @@
+## 現在地から移したもの
+- **2026-11-22（主経路）、空集合での Pfaffian と行列式の等式を具体版だけで閉じた。** 空の完全マッチングの一意性を具体版へ置き、空置換の符号を具体版の転倒数で計算した。必要十分版からの導出を別ファイルへ移し、分離の台帳から宣言二行と import 一行を外した。
+- **2026-11-22（並列・二十六回目）、並列の表の先頭「活性頂点と標識付き差を具体版で示す」を済ませた。** 必要十分版の活動点の型で述べた具体版の写し（二つの相手写像・二歩の置換・二つの対合・活動点の一致）は、具体版の活動点の上に同じものが既に在ったので、導出のファイル四つへ移した（重複していた `taggedActive_projectedClosedEdgeCycle_abstractActivity` は消した）。具体版の四ファイルから必要十分版の import を外し、分離の台帳は 366 行から 353 行になった（宣言 9 行、import 4 行）。並列の表の次は「周期持ち上げと閉包の残りの補題を具体版で示す」で、着手できる。
+
+## レビュー記録から移したもの
+- 2026-11-22（主経路）: 前回の完全マッチングの列挙符号と独立した有限順序集合の符号を、本文の転倒数の定義と乗法性の式鎖に照合した。定義と式鎖は一致し、修正は無かった。
+- 2026-11-22（並列・二十六回目）: 前回の並列の `KacWard/VertexSurroundingCellsParityArcs.lean` の結論の条件 `FourCellsFormParityArcs`（巡回列で内外の別がちょうど二回変わり、内側の個数が零でも四でもない）を本文の「内側セルと外側セルはそれぞれ空でない一つの巡回弧をなす」と照合し、同値であることを確かめた。一方、具体版は四辺の通過回数が高々一であることを仮定で受けており、本文が非後退性から導く段を飛ばしている。直しは大きいので並列の表の末尾へ行を足した。
+
+## 式変形の書き方の統一から移したもの
+- 2026-11-21（主経路）: 「熱力学極限の共通分母の存在」の証明で、自然数の積の可換性を独立した等式にし、根拠を行末に付けた。既存の SageMath 検査は同じ等号を含むが、この環境に SageMath が無いため再実行していない。
+- 2026-11-21（主経路）: 「全ての辺を調べた後は各辺の両端が接続する」で、辺集合の包含の式鎖を明示し、二行の根拠に辺選択の規則のラベル参照を付けた。
+- 2026-11-21（主経路）: 「開境界密度の実数極限は周期境界密度に等しい」の三行の等式で、根拠の括弧を統一した。
+- 2026-11-21（主経路）: 「対数の冪の法則」の帰納法で、対数順序群の整数倍を使う二行の行末に定義のラベル参照を付けた。
+- 2026-11-21（主経路）: 「対数順序群の Cauchy 列の実現像は実数極限を持つ」で、実現写像の有限和の加法性を独立した式にし、定義の根拠を行末に付けた。
+- 2026-11-21（主経路）: 「対数順序群の Cauchy 列の実現像は実数極限を持つ」の証明で、符号反転の等式を三段の式鎖にし、群の定義と実現写像のスカラー倍の根拠を各行末に付けた。
+- 2026-11-21（主経路）: 「有理係数の対数順序群の非負スカラー倍は順序を保つ」の証明で、有理数の積の可換性と結合則を別々の行に分け、八段の式鎖と SageMath 検査を一致させた。
+- 2026-11-21（主経路）: 「正の有理数より平方が小さい有理網幅」の証明で Archimedes 性の根拠を式へ付け、網幅の代入を一行ずつ示した。
+
+## 前進の記録から移したもの
+- 2026-11-22（主経路）: 先頭の符号の分離から空集合の Pfaffian と行列式の等式を、空和・空積という一つの論法として割り出した。具体版は自分の転倒数の符号で行列式を示し、空の完全マッチングの一意性を具体版へ置いた。必要十分版からの導出は別ファイルへ移した。
+- 2026-11-22（並列・二十六回目）: 表の先頭「活性頂点と標識付き差を具体版で示す」を、定義の置き換え一つの論法として割らずに済ませた。台帳の 9 宣言は、具体版の活動点 `concreteTaggedActiveVertices` の上に既に在る具体版（`taggedConcreteShortMate`・`taggedConcreteTwoStep`・`concreteShortInvolution` ほか）の、必要十分版の活動点 `NecSuf.KacWard.activeVertices` の上の写しだった。写しと `_from_necSuf` の定理を `KacWard/TaggedSymmetricDifferenceDegreeFromNecSuf.lean`・`TaggedDifferenceActiveVerticesFromNecSuf.lean`・`TaggedDifferenceTwoStepOrbitFromNecSuf.lean`・`TaggedDifferenceOrbitSeparationFromNecSuf.lean`・`ProjectedClosedEdgeCycleFromNecSuf.lean`・`ProjectedCycleNonbacktrackingFromNecSuf.lean` へ移し、具体版の写しと同じ証明だった `taggedActive_projectedClosedEdgeCycle_abstractActivity` は消した。導出が使う具体版の補題 `active_shortMate_successor` は私的だったので、`taggedActive_shortMate_mem_nonbacktrackingSuccessors` として公開した。本文の `lean:` の名前は変わらない。
+
 ## 前進の記録から移したもの
 - 2026-11-22（並列・二十六回目）: 表の先頭「活性頂点と標識付き差を具体版で示す」を、定義の置き換え一つの論法として割らずに済ませた。台帳の 9 宣言は、具体版の活動点 `concreteTaggedActiveVertices` の上に既に在る具体版（`taggedConcreteShortMate`・`taggedConcreteTwoStep`・`concreteShortInvolution` ほか）の、必要十分版の活動点 `NecSuf.KacWard.activeVertices` の上の写しだった。写しと `_from_necSuf` の定理を `KacWard/TaggedSymmetricDifferenceDegreeFromNecSuf.lean`・`TaggedDifferenceActiveVerticesFromNecSuf.lean`・`TaggedDifferenceTwoStepOrbitFromNecSuf.lean`・`TaggedDifferenceOrbitSeparationFromNecSuf.lean`・`ProjectedClosedEdgeCycleFromNecSuf.lean`・`ProjectedCycleNonbacktrackingFromNecSuf.lean` へ移し、具体版の写しと同じ証明だった `taggedActive_projectedClosedEdgeCycle_abstractActivity` は消した。導出が使う具体版の補題 `active_shortMate_successor` は私的だったので、`taggedActive_shortMate_mem_nonbacktrackingSuccessors` として公開した。本文の `lean:` の名前は変わらない。
 - 2026-11-22（並列・二十五回目）: 表の先頭「四つのセルの偶奇弧と対角セル対の除外を具体版で示す」を、四セルの奇偶の数え上げという一つの論法として割らずに済ませた。具体版 `VertexSurroundingCellsParityArcs`・`BoundaryVertexDiagonalContactExcluded` に結論の条件 `FourCellsFormParityArcs`・`DiagonalCellPairsExcluded` を本文の主張の言葉で置き、必要十分版の `four_cells_form_parity_arcs_necSuf` を呼んでいた最後の段は本文どおり「奇数回通る共有辺は二本で、各々で内外が変わる」を自然数の奇偶の計算で直接示した。具体版 `SmoothingTurningInvariance` に `Fin m` 上の整数値の二点更新の有限和保存 `two_point_preserved_sum`、`WalkLiftPointBoundaryVertex` に `exists_position_of_odd_count` を置いた。導出の二ファイルは定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を置いた。参照が移ったので `WalkSideInteriorBandConnected`・`WalkSideExteriorBandConnected` と内側セルの境界の補題群の 21 宣言も台帳から外れた。`trichotomous_of_linearOrder` を使う具体版二件（`PermutationSignOrbitProduct`・`ReversalMatrixDeterminant`）は同じ行で置換の符号の必要十分版も使うので、主経路の置換の符号の行に残した。

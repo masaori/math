@@ -2,23 +2,24 @@
 不変部分集合上の反転による符号保存の具体版。
 本文の部分置換の両側逆・二重合成・符号の六等号を独立に辿る。
 添字集合と部分集合が空の場合も含み、符号は自前の転倒数による整数値を使う。
-符号・転倒数は本文の定義を書いた `sign`・`inversionCount` を使い、乗法性は具体版
-`finiteOrderedSign_comp`（`claim_permutation_sign_mul`）を引く。必要十分版の定理は引かない。
+符号・転倒数は本文の定義を書いた `finiteOrderedSign` を使い、乗法性は具体版
+`finiteOrderedSign_comp`（`claim_permutation_sign_mul`）を引く。旧符号の定理は下流との橋である。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.SelectedOddOrbitReversal
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign inversionCount)
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
 /-- 部分逆置換を二回合成する表示から、反転の符号保存を得る。 -/
-theorem invariantSubsetReversal_sign (C : Finset J) (σ : Equiv.Perm J)
+theorem invariantSubsetReversal_finiteOrderedSign (C : Finset J) (σ : Equiv.Perm J)
     (hC : ∀ i : J, σ i ∈ C ↔ i ∈ C) :
-    sign (fun i j : J => i < j) (invariantSubsetReversal C σ hC) =
-      sign (fun i j : J => i < j) σ := by
+    finiteOrderedSign (invariantSubsetReversal C σ hC) =
+      finiteOrderedSign σ := by
   -- 逆像の所属は、本文と同じ二つの同値で移す。
   have hInv (i : J) : σ.symm i ∈ C ↔ i ∈ C := by
     calc
@@ -70,12 +71,10 @@ theorem invariantSubsetReversal_sign (C : Finset J) (σ : Equiv.Perm J)
         _ = invariantSubsetReversal C σ hC i := (if_neg hi).symm
   -- 本文の二行。一行目は `def_permutation_sign` の (-1) の自然数冪が 1 か -1 であること、
   -- 二行目は二つの場合の整数の積。
-  have hValues : sign (fun i j : J => i < j) q = 1 ∨
-      sign (fun i j : J => i < j) q = -1 := by
-    unfold sign
+  have hValues : finiteOrderedSign q = 1 ∨ finiteOrderedSign q = -1 := by
+    unfold finiteOrderedSign
     exact neg_one_pow_eq_or ℤ _
-  have hSquare : sign (fun i j : J => i < j) q *
-      sign (fun i j : J => i < j) q = 1 := by
+  have hSquare : finiteOrderedSign q * finiteOrderedSign q = 1 := by
     rcases hValues with hpos | hneg
     · rw [hpos]
       exact one_mul 1
@@ -83,21 +82,25 @@ theorem invariantSubsetReversal_sign (C : Finset J) (σ : Equiv.Perm J)
       decide
   -- 本文の符号保存の六等号。
   calc
-    sign (fun i j : J => i < j) (invariantSubsetReversal C σ hC) =
-        sign (fun i j : J => i < j) (q * (q * σ)) :=
-      congrArg (sign (fun i j : J => i < j)) hComposition.symm
-    _ = sign (fun i j : J => i < j) q *
-        sign (fun i j : J => i < j) (q * σ) :=
+    finiteOrderedSign (invariantSubsetReversal C σ hC) =
+        finiteOrderedSign (q * (q * σ)) :=
+      congrArg finiteOrderedSign hComposition.symm
+    _ = finiteOrderedSign q * finiteOrderedSign (q * σ) :=
       finiteOrderedSign_comp q (q * σ)
-    _ = sign (fun i j : J => i < j) q *
-        (sign (fun i j : J => i < j) q * sign (fun i j : J => i < j) σ) :=
-      congrArg (sign (fun i j : J => i < j) q * ·)
+    _ = finiteOrderedSign q * (finiteOrderedSign q * finiteOrderedSign σ) :=
+      congrArg (finiteOrderedSign q * ·)
         (finiteOrderedSign_comp q σ)
-    _ = (sign (fun i j : J => i < j) q * sign (fun i j : J => i < j) q) *
-        sign (fun i j : J => i < j) σ := (mul_assoc _ _ _).symm
-    _ = 1 * sign (fun i j : J => i < j) σ :=
-      congrArg (· * sign (fun i j : J => i < j) σ) hSquare
-    _ = sign (fun i j : J => i < j) σ := one_mul _
+    _ = (finiteOrderedSign q * finiteOrderedSign q) * finiteOrderedSign σ :=
+      (mul_assoc _ _ _).symm
+    _ = 1 * finiteOrderedSign σ := congrArg (· * finiteOrderedSign σ) hSquare
+    _ = finiteOrderedSign σ := one_mul _
+
+theorem invariantSubsetReversal_sign (C : Finset J) (σ : Equiv.Perm J)
+    (hC : ∀ i : J, σ i ∈ C ↔ i ∈ C) :
+    sign (fun i j : J => i < j) (invariantSubsetReversal C σ hC) =
+      sign (fun i j : J => i < j) σ := by
+  change finiteOrderedSign (invariantSubsetReversal C σ hC) = finiteOrderedSign σ
+  exact invariantSubsetReversal_finiteOrderedSign C σ hC
 
 /-- 選んだ奇数軌道の台の不変性を供給する、本文の二等号。 -/
 theorem selectedOddOrbitReversal_sign (σ : Equiv.Perm J)

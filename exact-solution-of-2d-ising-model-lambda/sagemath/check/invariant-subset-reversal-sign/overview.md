@@ -2,9 +2,10 @@
 
 **対象ラベル**: `claim_invariant_subset_reversal_sign`
 
-2026-10-11 実行済み。31計算行の886,243確認と独立検算、計32ファイルがすべて PASS。
+2026-10-11 に元の31計算行を実行済み。今回分けた平方の二行は SageMath が無いため未実行。
+今回の二行は `ZZ` を Python の整数に置き換えた同じコードで各11,823件を確認した。SageMath の実行状態は変えない。
 
-本文の証明にある31計算行を、それぞれ別ファイルで検算する。有限集合の点と符号の演算は整数による厳密計算であり、浮動小数点と実数体への脱出を使わない。
+本文の証明にある32計算行を、それぞれ別ファイルで検算する。有限集合の点と符号の演算は整数による厳密計算であり、浮動小数点と実数体への脱出を使わない。
 
 大きさ0〜6の全874置換と全5913個の不変部分集合との組を列挙し、自然順序と二元以上では逆順序も用いた11823事例を対象とする。空の添字集合と空の部分集合を含む。選んだ奇数軌道への適用は、不動点のない置換に奇数軌道が存在する172順序付き事例で検査する。有限例の検算であり、任意の有限集合についての証明は本文とLeanが担う。
 
@@ -32,7 +33,8 @@
 | `check_composition_outside_outer_q.sage` | 外側の合成で外側の q を展開: $q(\sigma(i))=\sigma(i)$ | PASS | 34,405 |
 | `check_composition_outside_reversal.sage` | 外側の反転の定義: $\sigma(i)=\tau(i)$ | PASS | 34,405 |
 | `check_sign_values.sage` | 符号が正負の一に属する: $\mathrm{sgn}(q)\in\{-1,1\}$ | PASS | 11,823 |
-| `check_sign_square.sage` | 符号の平方は一: $\mathrm{sgn}(q)\mathrm{sgn}(q)=1$ | PASS | 11,823 |
+| `check_sign_square_definition.sage` | 積を二乗で書く: $\mathrm{sgn}(q)\mathrm{sgn}(q)=\mathrm{sgn}(q)^2$ | 未実行 | - |
+| `check_sign_square.sage` | 符号の平方は一: $\mathrm{sgn}(q)^2=1$ | 未実行 | - |
 | `check_sign_composition_identity.sage` | 反転の合成表示を符号に代入: $\mathrm{sgn}(\tau)=\mathrm{sgn}(q\circ(q\circ\sigma))$ | PASS | 11,823 |
 | `check_sign_outer_multiplicativity.sage` | 外側の合成に符号の乗法性: $\mathrm{sgn}(q\circ(q\circ\sigma))=\mathrm{sgn}(q)\mathrm{sgn}(q\circ\sigma)$ | PASS | 11,823 |
 | `check_sign_inner_multiplicativity.sage` | 内側の合成に符号の乗法性: $\mathrm{sgn}(q)\mathrm{sgn}(q\circ\sigma)=\mathrm{sgn}(q)(\mathrm{sgn}(q)\mathrm{sgn}(\sigma))$ | PASS | 11,823 |
