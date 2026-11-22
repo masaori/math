@@ -14,3 +14,5 @@ sage sagemath/check/qbar-pow-diff-quotient-root-value/check.sage
 ```
 
 **2026-08-11 実行: すべて通過。**
+
+**2026-11-22 更新: 冪の法則と指数の算術の二段を追加。SageMath 本体が無いため更新後は未実行。**

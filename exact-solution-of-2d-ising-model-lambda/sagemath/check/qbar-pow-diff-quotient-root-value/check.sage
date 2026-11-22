@@ -33,6 +33,10 @@ def main():
         for n in range(1, 7):
             lhs = K(n + 1, w)(w)
             assert lhs == K(n, w)(w) * w + w**n
+            assert sum(w**(n - 1) * w for i in range(n)) + w**n == \
+                sum(w**((n - 1) + 1) for i in range(n)) + w**n
+            assert sum(w**((n - 1) + 1) for i in range(n)) + w**n == \
+                sum(w**n for i in range(n)) + w**n
     print("   通過")
 
     print("4. 主張: aev_w(K_n(w)) = i < n にわたる w^(n-1) の有限和（n = 1..7）")

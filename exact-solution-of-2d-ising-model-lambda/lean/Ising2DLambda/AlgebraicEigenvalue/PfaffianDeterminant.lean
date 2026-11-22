@@ -2,6 +2,7 @@ import Ising2DLambda.AlgebraicEigenvalue.MatchingPairEvenSum
 import Ising2DLambda.AlgebraicEigenvalue.OddOrbitSignedSumZero
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFixedPointsFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialPfaffian
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PfaffianDeterminant
 import Mathlib.Algebra.Ring.Parity
 
@@ -9,6 +10,7 @@ namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Classical
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
 private theorem orbitLength_one_of_fixed (σ : Equiv.Perm J) (i : J) (h : σ i = i) :
@@ -53,17 +55,17 @@ private theorem oddOrbit_iff_not_all_even (σ : Equiv.Perm J) :
 
 private theorem derangement_partition (A : Matrix J J (Polynomial Qbar)) :
     (∑ σ ∈ fixedPointFreePermutations J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) *
         ∏ i : J, A i (σ i)) =
     (∑ σ : EvenOrbitPermutation J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign σ.val : ℤ) : Qbar) *
         ∏ i : J, A i (σ.val i)) +
     (∑ σ : {σ : Equiv.Perm J // σ ∈ oddOrbitDerangements J},
-      Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign σ.val : ℤ) : Qbar) *
         ∏ i : J, A i (σ.val i)) := by
   classical
   let w : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) * ∏ i : J, A i (σ i)
+    Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) * ∏ i : J, A i (σ i)
   let p : Equiv.Perm J → Prop := fun σ => ∀ i, Even (finitePermutationOrbitLength σ i)
   have heven : (fixedPointFreePermutations J).filter p = Finset.univ.filter p := by
     ext σ

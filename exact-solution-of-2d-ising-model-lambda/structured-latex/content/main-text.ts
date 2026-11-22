@@ -12422,8 +12422,10 @@ n+1
 &&(\because\ \text{帰納法の仮定})\\
 &=\sum_{i:\ i<n}\bigl(w^{\,n-1}\cdot w\bigr)+w^{\,n}
 &&(\because\ \overline{\mathbb{Q}}\ \text{の分配則を有限和の各項へ同時に当てる})\\
+&=\sum_{i:\ i<n}w^{\,(n-1)+1}+w^{\,n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の元の冪の約束}\ w^{\,(n-1)+1}=w^{\,n-1}w)\\
 &=\sum_{i:\ i<n}w^{\,n}+w^{\,n}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の元の冪の約束}\ w^{\,(n-1)+1}=w^{\,n-1}w\ \text{と}\ (n-1)+1=n)\\
+&&(\because\ (n-1)+1=n)\\
 &=\sum_{i:\ i<n+1}w^{\,n}
 &&(\because\ \text{有限和へ添字}\ i=n\ \text{の項を 1 つ足す})\\
 &=\sum_{i:\ i<n+1}w^{\,(n+1)-1}
