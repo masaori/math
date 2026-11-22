@@ -20537,7 +20537,7 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
                       paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定し、", math(String.raw`S:=\operatorname{Orb}_\sigma(i)`), "、", math(String.raw`m:=m_\sigma(i)`), "、", math(String.raw`D:=C_{\tau,\upsilon}`), " と略す。", ref("claim_matching_pair_reverse_orbit"), " と有限集合の最小元の一意性により"]),
                       displayMath(String.raw`\begin{aligned}
 m_{\tau,\upsilon}(i)&=m_\sigma(i)&&\bigl(\because\ \blkref{claim_matching_pair_reverse_orbit},\ \blkref{def_matching_pair_component_minimum},\ \blkref{def_even_orbit_minimum}\bigr)\\
-&=m&&\bigl(\because\ m\text{ の略記}\bigr).
+&=m&&\bigl(\because\ m\text{ の略記}\bigr)
 \end{aligned}`),
                       paragraph([ref("claim_finite_permutation_orbit_basepoint"), " を最小元に適用すると ", math(String.raw`\operatorname{Orb}_\sigma(m)=S`), " なので、前行を始点 ", math(String.raw`m`), " にも適用できる。ゆえに"]),
                       displayMath(String.raw`\begin{aligned}
@@ -20555,9 +20555,9 @@ m&\in C_\sigma&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\bigr).
 &\Longleftrightarrow j\notin D&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates}\bigr).
 \end{aligned}`),
                       paragraph(["従って ", math(String.raw`D`), " は ", math(String.raw`\sigma`), " の一歩で反転する。", ref("claim_even_orbit_coloring"), " により ", math(String.raw`C_\sigma`), " も同じ性質を持つ。", math(String.raw`m\in D\cap C_\sigma`), " から、順方向の反復回数 ", math(String.raw`n\in\mathbb N`), " について帰納すると"]),
-                      displayMath(String.raw`\sigma^{[n]}(m)\in D\ \Longleftrightarrow\ \sigma^{[n]}(m)\in C_\sigma\qquad\bigl(\because\ \text{零回では }m\in D\cap C_\sigma\text{、後者では両色が反転}\bigr).`),
+                      displayMath(String.raw`\sigma^{[n]}(m)\in D\ \Longleftrightarrow\ \sigma^{[n]}(m)\in C_\sigma\qquad\bigl(\because\ \text{零回では }m\in D\cap C_\sigma\text{、後者では両色が反転}\bigr)`),
                       paragraph(["逆方向にも、", math(String.raw`\sigma(\sigma^{-1}(j))=j`), " に両方の色反転を適用して同じ帰納法を行うと"]),
-                      displayMath(String.raw`(\sigma^{-1})^{[n]}(m)\in D\ \Longleftrightarrow\ (\sigma^{-1})^{[n]}(m)\in C_\sigma\qquad\bigl(\because\ \text{零回の一致と逆方向の一歩ごとの反転}\bigr).`),
+                      displayMath(String.raw`(\sigma^{-1})^{[n]}(m)\in D\ \Longleftrightarrow\ (\sigma^{-1})^{[n]}(m)\in C_\sigma\qquad\bigl(\because\ \text{零回の一致と逆方向の一歩ごとの反転}\bigr)`),
                       paragraph([ref("def_finite_permutation_orbit"), " により ", math(String.raw`i\in\operatorname{Orb}_\sigma(m)`), " だから、二方向のいずれかの等号を ", math(String.raw`i`), " に適用して ", math(String.raw`i\in D\Longleftrightarrow i\in C_\sigma`), " を得る。", math(String.raw`i`), " は任意なので二集合は等しい。空集合では始点がなく、主張は空集合どうしの等号である。"]),
                     ],
                   },

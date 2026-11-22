@@ -6,6 +6,7 @@
 import Ising2DLambda.IntegerMatrix.Determinant
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 import Ising2DLambda.KacWard.ReversalMatrix
+import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 import Mathlib.Data.Prod.Lex
 
 namespace Ising2DLambda.KacWard
@@ -14,6 +15,7 @@ open scoped BigOperators
 open Ising2DLambda.PartitionPolynomial
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 open Ising2DLambda.NecSuf.KacWard
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
 
 /-- 辺の番号、向きの順に比較する辞書式順序。 -/
 instance orientedEdgeLinearOrder (L : ℕ) : LinearOrder (OrientedEdge L) :=
@@ -119,22 +121,50 @@ theorem reversalPerm_eq_transpositionProduct (L : ℕ) :
     exact directionTransposition_outside e x hx
   · exact directionPairs_cover
 
+private theorem finiteOrderedSign_noncommProd {J β : Type*} [Fintype J] [LinearOrder J]
+    (s : Finset β) (f : β → Equiv.Perm J)
+    (comm : (s : Set β).Pairwise fun b c => Commute (f b) (f c)) :
+    finiteOrderedSign (s.noncommProd f comm) =
+      ∏ b ∈ s, finiteOrderedSign (f b) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+    simp only [Finset.noncommProd_empty, Finset.prod_empty]
+    have hinv : finiteOrderedInversionCount (1 : Equiv.Perm J) = 0 := by
+      rw [finiteOrderedInversionCount, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+      intro p hp
+      have hlt : p.1 < p.2 := by simpa [finiteOrderedPairs] using hp
+      exact lt_asymm hlt
+    rw [finiteOrderedSign, hinv, pow_zero]
+  | insert a t ha ih =>
+    rw [Finset.noncommProd_insert_of_notMem t a f _ ha,
+      finiteOrderedSign_comp, Finset.prod_insert ha,
+      ih (comm.mono (Finset.subset_insert a t))]
+
+set_option maxHeartbeats 1000000
 /-- 反転の符号は、互換の個数 `2L²` が偶数であることから一になる。 -/
 theorem reversalPerm_sign (L : ℕ) :
-    sign (fun e f : OrientedEdge L => e < f) (reversalPerm L) = 1 := by
+    finiteOrderedSign (reversalPerm L) = 1 := by
+  classical
+  letI : LinearOrder (OrientedEdge L) := orientedEdgeLinearOrder L
   calc
-    sign (fun e f : OrientedEdge L => e < f) (reversalPerm L) =
-        sign (fun e f : OrientedEdge L => e < f)
+    finiteOrderedSign (reversalPerm L) =
+        finiteOrderedSign
           ((Finset.univ : Finset (Edge L)).noncommProd edgeDirectionTransposition
             (edgeDirectionTranspositions_pairwise_commute L)) := by
       rw [← reversalPerm_eq_transpositionProduct]
     _ = ∏ e ∈ (Finset.univ : Finset (Edge L)),
-        sign (fun x y : OrientedEdge L => x < y) (edgeDirectionTransposition e) :=
-      sign_noncommProd _ trichotomous_of_linearOrder _ _ _
+        finiteOrderedSign (edgeDirectionTransposition e) :=
+      finiteOrderedSign_noncommProd _ _ _
     _ = ∏ _e ∈ (Finset.univ : Finset (Edge L)), (-1 : ℤ) := by
       apply Finset.prod_congr rfl
       intro e _
-      exact sign_transposition (α := OrientedEdge L) (e, false) (e, true) (by
+      have hperm : edgeDirectionTransposition e =
+          finiteTranspositionPerm (J := OrientedEdge L) (e, false) (e, true) := by
+        ext x
+        rfl
+      rw [hperm]
+      exact finiteTransposition_sign (by
         intro h
         have hd := congrArg (fun x : OrientedEdge L => x.2) h
         exact Bool.noConfusion hd)
@@ -144,6 +174,7 @@ theorem reversalPerm_sign (L : ℕ) :
     _ = ((-1 : ℤ) ^ 2) ^ (L ^ 2) := pow_mul _ _ _
     _ = (1 : ℤ) ^ (L ^ 2) := by rw [neg_one_sq]
     _ = 1 := one_pow _
+set_option maxHeartbeats 200000
 
 /-- 本文の行指定置換展開では、反転置換の項以外は零になる。 -/
 theorem reversalMatrix_determinant (L : ℕ) :
@@ -182,6 +213,8 @@ theorem reversalMatrix_determinant (L : ℕ) :
     _ = sign (fun e f : OrientedEdge L => e < f) (reversalPerm L) * 1 := by
       rw [Finset.prod_const_one]
     _ = sign (fun e f : OrientedEdge L => e < f) (reversalPerm L) := mul_one _
-    _ = 1 := reversalPerm_sign L
+    _ = 1 := by
+      change finiteOrderedSign (reversalPerm L) = 1
+      exact reversalPerm_sign L
 
 end Ising2DLambda.KacWard
