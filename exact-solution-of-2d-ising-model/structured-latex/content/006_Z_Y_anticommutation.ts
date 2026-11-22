@@ -14,6 +14,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "Pauli 行列" },
     labels: ["def_pauli_matrices"],
+    lean: ["Ising2D.pauliX", "Ising2D.pauliY", "Ising2D.pauliZ"],
     statement: [
       paragraph([
         ref("def_imaginary_unit"),
@@ -49,6 +50,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/006_Z_Y_anticommutation.ts", ordinal: 1 },
     title: { text: "Pauli 行列の積" },
     labels: ["pauli_matrix_products"],
+    lean: ["Ising2D.pauliX_mul_pauliX", "Ising2D.pauliY_mul_pauliY", "Ising2D.pauliZ_mul_pauliZ", "Ising2D.pauliZ_mul_pauliX", "Ising2D.pauliY_mul_pauliX", "Ising2D.pauliY_mul_pauliZ_anticomm"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -388,6 +390,7 @@ i\cdot(-i)
     kind: "claim",
     title: { text: "2 次の単位行列の転置" },
     labels: ["transpose_of_identity_matrix_of_order_two"],
+    lean: ["Ising2D.identity_matrix_two_transpose"],
     statement: [
       paragraph([
         math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
@@ -431,6 +434,7 @@ I^\top
     kind: "claim",
     title: { tex: String.raw`\sigma^x \text{ の転置}` },
     labels: ["transpose_of_pauli_x"],
+    lean: ["Ising2D.pauliX_transpose"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -468,6 +472,7 @@ I^\top
     kind: "claim",
     title: { tex: String.raw`\sigma^z \text{ の転置}` },
     labels: ["transpose_of_pauli_z"],
+    lean: ["Ising2D.pauliZ_transpose"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -505,6 +510,7 @@ I^\top
     kind: "claim",
     title: { tex: String.raw`\sigma^y \text{ の転置}` },
     labels: ["transpose_of_pauli_y"],
+    lean: ["Ising2D.pauliY_transpose"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -550,6 +556,7 @@ I^\top
     kind: "claim",
     title: { text: "2 次の単位行列の成分はすべて実数" },
     labels: ["identity_matrix_of_order_two_has_real_entries"],
+    lean: ["Ising2D.identity_matrix_two_hasRealEntries", "Ising2D.identity_matrix_two_eq_ofReal"],
     statement: [
       paragraph([
         math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
@@ -610,6 +617,7 @@ I
     kind: "claim",
     title: { tex: String.raw`\sigma^x \text{ の成分はすべて実数}` },
     labels: ["pauli_x_has_real_entries"],
+    lean: ["Ising2D.pauliX_hasRealEntries", "Ising2D.pauliX_eq_ofReal"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -666,6 +674,7 @@ I
     kind: "claim",
     title: { tex: String.raw`\sigma^z \text{ の成分はすべて実数}` },
     labels: ["pauli_z_has_real_entries"],
+    lean: ["Ising2D.pauliZ_hasRealEntries", "Ising2D.pauliZ_eq_ofReal"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -726,6 +735,7 @@ I
     kind: "definition",
     title: { tex: String.raw`\sigma^y \text{ の実の因子 } R^y` },
     labels: ["def_real_factor_of_pauli_y"],
+    lean: ["Ising2D.pauliYReal"],
     statement: [
       paragraph([
         math(String.raw`R^y \in \mathrm{Mat}(2,\mathbb{C})`),
@@ -746,6 +756,7 @@ I
     kind: "claim",
     title: { tex: String.raw`\sigma^y = i R^y` },
     labels: ["pauli_y_is_i_times_real_factor"],
+    lean: ["Ising2D.pauliY_eq_I_smul_pauliYReal"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -801,6 +812,7 @@ I
     kind: "claim",
     title: { tex: String.raw`R^y \text{ の成分はすべて実数}` },
     labels: ["real_factor_of_pauli_y_has_real_entries"],
+    lean: ["Ising2D.pauliYReal_hasRealEntries", "Ising2D.pauliYReal_eq_ofReal"],
     statement: [
       paragraph([
         ref("def_real_factor_of_pauli_y"),
@@ -862,6 +874,7 @@ R^y
     origin: { path: "structured-latex/content/006_Z_Y_anticommutation.ts", ordinal: 2 },
     title: { text: "1 因子だけ反可換ならクロネッカー積は反交換する" },
     labels: ["tensor_anticommutation_from_single_site"],
+    lean: ["Ising2D.siteProd_anticomm_of_single_site"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
@@ -974,6 +987,7 @@ YX
     kind: "claim",
     title: { text: "全ての因子で可換ならクロネッカー積は可換" },
     labels: ["tensor_commutation_from_all_sites"],
+    lean: ["Ising2D.siteProd_commute_of_sitewise_commute"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
