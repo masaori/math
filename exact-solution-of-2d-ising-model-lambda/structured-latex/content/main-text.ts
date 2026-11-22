@@ -69493,6 +69493,9 @@ x_c
                           math(String.raw`s\in\overline{\mathbb Q}`), " を ",
                           math(String.raw`s\cdot s=\iota(2_{\mathbb Q})`),
                           " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
+                          "以下 ", math(String.raw`-1_{\overline{\mathbb Q}}-s`), " は ",
+                          math(String.raw`(-1_{\overline{\mathbb Q}})+(-s)`),
+                          " を表す（", ref("claim_self_dual_quadratic_roots"), " と同じ記法）。",
                           ref("claim_self_dual_root_minus_mem"),
                           " により ", math(String.raw`-1_{\overline{\mathbb Q}}-s\in Q_s`),
                           " であり、",
@@ -69521,7 +69524,7 @@ x_c
 &=-1_{\overline{\mathbb Q}}-s
 &&\bigl(\because\ \blkref{def_quadratic_representation_map}\bigr)\\
 &=(-1_{\overline{\mathbb Q}})+(-s)
-&&\bigl(\because\ \text{記法 }\blkref{claim_self_dual_quadratic_roots}\bigr)\\
+&&\bigl(\because\ \text{主張の文の記法}\bigr)\\
 &=\bigl(-\iota(1_{\mathbb Q})\bigr)+(-s)
 &&\bigl(\because\ \iota\text{ の一の保存}\ \blkref{def_algebraic_numbers}\bigr)\\
 &=\iota(-1_{\mathbb Q})+(-s)
