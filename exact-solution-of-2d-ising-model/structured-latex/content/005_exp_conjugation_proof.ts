@@ -15,6 +15,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/005_exp_conjugation_proof.ts", ordinal: 2 },
     title: { text: "複素共役" },
     labels: ["def_complex_conjugate"],
+    lean: ["Ising2D.complex_star_mk"],
     statement: [
       paragraph([ref("definition_of_cc"), " の ", math(String.raw`z=(x,y)\in\mathbf C=\mathbf R^2`), " に対して"]),
       displayMath(String.raw`\overline z:=(x,-y)\in\mathbf C`),

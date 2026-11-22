@@ -33,6 +33,7 @@
   mathlib の `Finset.mul_sum`・`Finset.sum_mul`・`Finset.sum_comm` を、人手と同じ 1 行に当たる段の中でだけ使う。
 - 人手の `n ∈ ℤ_{≥1}` は効かないので仮定に置かない（`n = 0` でも主張は成り立つ）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifferenceStarForm
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositive
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimits
@@ -96,8 +97,9 @@ theorem conjTranspose_conjTranspose_apply {n : ℕ} (B : Matrix (Fin n) (Fin n) 
   calc Bᴴᴴ k l
       = star (Bᴴ l k) := rfl                                                      -- `def_hermitian_positive_definite`
     _ = star (star (B k l)) := rfl                                                -- `def_hermitian_positive_definite`
-    _ = star (⟨(B k l).re, -(B k l).im⟩ : ℂ) := rfl                              -- `def_complex_conjugate`
-    _ = ⟨(B k l).re, -(-(B k l).im)⟩ := rfl                                      -- `def_complex_conjugate`
+    _ = star (⟨(B k l).re, -(B k l).im⟩ : ℂ) := congrArg star (complex_star_mk (B k l).re (B k l).im)
+                                                                                  -- `def_complex_conjugate`
+    _ = ⟨(B k l).re, -(-(B k l).im)⟩ := complex_star_mk _ _                         -- `def_complex_conjugate`
     _ = ⟨(B k l).re, (B k l).im⟩ := by rw [neg_neg]                              -- `ℝ` で `-(-b) = b`
     _ = B k l := rfl                                                              -- `B_{kl} = (a,b)` の置き方
 

@@ -17,6 +17,7 @@
 
 具体的な 2 次の行列の成分の計算なので、必要十分版は置かない（転置の `pauliX_transpose` ほかと同じ）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
@@ -127,7 +128,7 @@ theorem star_neg_I_eq_I : star (-Complex.I) = Complex.I :=
     _ = star (⟨0, (-1) * 1⟩ : ℂ) := by rw [add_zero]          -- 8 行目: `0` は `ℝ` の加法の単位元 `x + 0 = x`（`x → (-1) * 1`）
     _ = star (⟨0, -1⟩ : ℂ) := by rw [mul_one]                 -- 9 行目: `1` は `ℝ` の乗法の単位元 `x * 1 = x`（`x → -1`）
     _ = (starRingEnd ℂ) (⟨0, -1⟩ : ℂ) := rfl                  -- `star` を `starRingEnd ℂ` と読む
-    _ = (⟨0, -(-1)⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
+    _ = (⟨0, -(-1)⟩ : ℂ) := complex_star_mk _ _
                                                                -- 10 行目: `def_complex_conjugate`
     _ = (⟨0, 1⟩ : ℂ) := by rw [real_double_negation 1]        -- 11 行目: `real_double_negation`（`a → 1`）
     _ = Complex.I := rfl                                       -- 12 行目: `def_imaginary_unit` の `i := (0,1)`

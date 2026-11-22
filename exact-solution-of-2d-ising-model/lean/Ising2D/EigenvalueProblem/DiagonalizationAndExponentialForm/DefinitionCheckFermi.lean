@@ -31,6 +31,7 @@
   `gamma_2_theta_tilde_nonzero` の無条件版 `gamma2_thetaTilde_ne_zero` で `hga` を落とした版は `ClaimCheckFermiResultsUnconditional.lean` に置く。
   （`γ_2(-θ̃_μ) ≠ 0` は `gamma2_neg_eq_zero_iff` から従うので別に仮定しない。）
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
@@ -323,7 +324,7 @@ theorem checkR_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     _ = Real.sqrt (Complex.normSq ((-1 : ℂ) * (starRingEnd ℂ) a)) := by
           rw [neg_one_mul]                          -- `multiply_by_minus_one`
     _ = Real.sqrt (Complex.normSq ((-1 : ℂ) * ⟨x, -y⟩)) := by
-          rw [show (starRingEnd ℂ) a = ⟨x, -y⟩ from Complex.ext (Complex.conj_re a) (Complex.conj_im a)]
+          rw [show (starRingEnd ℂ) a = ⟨x, -y⟩ from complex_star_mk x y]
                                                     -- `def_complex_conjugate`
     _ = Real.sqrt (Complex.normSq ((⟨-1, 0⟩ : ℂ) * ⟨x, -y⟩)) := by
           rw [show (-1 : ℂ) = ⟨-1, 0⟩ from Complex.ext (by simp) (by simp)]

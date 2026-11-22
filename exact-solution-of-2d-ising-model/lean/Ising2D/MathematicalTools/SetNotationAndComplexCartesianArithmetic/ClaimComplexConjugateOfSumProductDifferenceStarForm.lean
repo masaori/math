@@ -44,6 +44,7 @@
 必要十分版は置かない。新しい主張が無く、読み替えの段だけだからである（和の主張の必要十分版は
 `NecSuf/AdditiveMapPreservesFiniteSum.lean`）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifference
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Logic.Equiv.Fin.Basic
@@ -80,7 +81,7 @@ theorem complex_conjugate_star_zero : star (0 : ℂ) = 0 :=
       = (starRingEnd ℂ) (((0 : ℝ)) : ℂ) :=
         rfl                                                     -- `star` を `starRingEnd ℂ` と、`0_ℂ` を `(0)_ℂ` と読む
     _ = (starRingEnd ℂ) (⟨0, 0⟩ : ℂ) := rfl                     -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 0`）
-    _ = (⟨0, -0⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
+    _ = (⟨0, -0⟩ : ℂ) := complex_star_mk _ _
                                                                 -- `def_complex_conjugate`
     _ = (⟨0, 0⟩ : ℂ) := by rw [real_negation_of_zero_is_zero]   -- `real_negation_of_zero_is_zero`
     _ = (((0 : ℝ)) : ℂ) := rfl                                  -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 0`）
@@ -92,7 +93,7 @@ theorem complex_conjugate_star_one : star (1 : ℂ) = 1 :=
       = (starRingEnd ℂ) (((1 : ℝ)) : ℂ) :=
         rfl                                                     -- `star` を `starRingEnd ℂ` と、`1_ℂ` を `(1)_ℂ` と読む
     _ = (starRingEnd ℂ) (⟨1, 0⟩ : ℂ) := rfl                     -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 1`）
-    _ = (⟨1, -0⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
+    _ = (⟨1, -0⟩ : ℂ) := complex_star_mk _ _
                                                                 -- `def_complex_conjugate`
     _ = (⟨1, 0⟩ : ℂ) := by rw [real_negation_of_zero_is_zero]   -- `real_negation_of_zero_is_zero`
     _ = (((1 : ℝ)) : ℂ) := rfl                                  -- `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = 1`）

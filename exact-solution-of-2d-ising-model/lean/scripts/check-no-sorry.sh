@@ -455,6 +455,7 @@ targets=(
   Ising2D.complex_one_eq_ofReal_one
   Ising2D.complex_neg_eq_ofReal_neg_one_mul
   Ising2D.complex_sub_eq_add_neg
+  Ising2D.complex_star_mk
   Ising2D.complex_I_mul_I
   Ising2D.complex_neg_I_mul_I
   Ising2D.complex_one_add_one

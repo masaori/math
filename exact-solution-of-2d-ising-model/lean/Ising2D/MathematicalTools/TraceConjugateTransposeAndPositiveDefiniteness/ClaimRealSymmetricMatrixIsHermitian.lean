@@ -16,12 +16,13 @@
 | 全ての成分が一致するので `A^* = A`（エルミートの条件） | `Matrix.ext` と `Matrix.IsHermitian` の定義（`Aᴴ = A`） |
 
 - 人手の共役転置（`def_hermitian_positive_definite`）は mathlib の `Matrix.conjTranspose`（`Aᴴ k l = star (A l k)` が定義から `rfl`）、
-  複素共役（`def_complex_conjugate`）は `ℂ` の `star`（`star ⟨x, y⟩ = ⟨x, -y⟩` が定義から `rfl`）である。
+  複素共役（`def_complex_conjugate`）は `ℂ` の `star`（`star ⟨x, y⟩ = ⟨x, -y⟩`。具体版 `complex_star_mk` で受ける）である。
 - 人手の添字 `k, l ∈ {1, …, n}` は添字の型 `n` の元である（`DefinitionRealSymmetricComplexMatrix.lean` の注意）。
 
 必要十分版は `Ising2D/NecSuf/HermitianOfStarFixedSymmetricEntries.lean`、
 具体版をその特殊化として得るのは `ClaimRealSymmetricMatrixIsHermitianFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionRealSymmetricComplexMatrix
 import Mathlib.LinearAlgebra.Matrix.Hermitian
@@ -34,7 +35,7 @@ open Matrix
 theorem complex_conjugate_of_real_inclusion (r : ℝ) : star (r : ℂ) = (r : ℂ) :=
   calc star (r : ℂ)
       = star (⟨r, 0⟩ : ℂ) := rfl                                            -- `inclusion_rr_to_cc`
-    _ = ⟨r, -0⟩ := rfl                                                      -- `def_complex_conjugate`
+    _ = ⟨r, -0⟩ := complex_star_mk _ _                                            -- `def_complex_conjugate`
     _ = ⟨r, 0⟩ := by rw [real_negation_of_zero_is_zero]                     -- `real_negation_of_zero_is_zero`
     _ = (r : ℂ) := rfl                                                      -- `inclusion_rr_to_cc`
 

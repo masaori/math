@@ -18,7 +18,7 @@
 | `A^⊤ = A` と合わせて `def_real_symmetric_complex_matrix` | `⟨_, hT⟩` |
 
 - 人手の共役転置（`def_hermitian_positive_definite`）は mathlib の `Matrix.conjTranspose`（`Aᴴ k l = star (A l k)` が定義から `rfl`）、
-  複素共役（`def_complex_conjugate`）は `ℂ` の `star`（`star ⟨x, y⟩ = ⟨x, -y⟩` が定義から `rfl`）、
+  複素共役（`def_complex_conjugate`）は `ℂ` の `star`（`star ⟨x, y⟩ = ⟨x, -y⟩`。具体版 `complex_star_mk` で受ける）、
   `inclusion_rr_to_cc` の `a_ℂ = (a, 0)` は `(a : ℂ) = ⟨a, 0⟩`（定義から `rfl`）である。
 - 人手は `a, b` を取ってから 7 行の 1 本の鎖を書く。Lean はこの 1 本の鎖を `\overline{A_{kl}}` の行で 2 か所に分けた。
   3〜6 行目（`\overline{A_{kl}} = A_{kl}`。仮定 `A^* = A`・`A^⊤ = A` を使う段）を主定理の `calc` に、
@@ -30,6 +30,7 @@
 必要十分版は `Ising2D/NecSuf/StarFixedEntriesOfHermitianSymmetric.lean`、
 具体版をその特殊化として得るのは `ClaimHermitianAndTransposeInvariantMatrixIsRealSymmetricFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionRealSymmetricComplexMatrix
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwoIsNonzero
@@ -46,7 +47,7 @@ theorem exists_real_of_star_eq (z : ℂ) (h : star z = z) : ∃ a : ℝ, z = (a 
   have hab : z = ⟨a, b⟩ := (Complex.eta z).symm                             -- `definition_of_cc` で `z = (a, b)` の `a, b` を取る
   have hpair : (⟨a, -b⟩ : ℂ) = ⟨a, b⟩ :=
     calc (⟨a, -b⟩ : ℂ)
-        = star (⟨a, b⟩ : ℂ) := rfl                                          -- 鎖の 1 行目 `def_complex_conjugate`（`x → a`, `y → b`）
+        = star (⟨a, b⟩ : ℂ) := (complex_star_mk a b).symm                                -- 鎖の 1 行目 `def_complex_conjugate`（`x → a`, `y → b`）
       _ = star z := by rw [← hab]                                           -- 鎖の 2 行目 `a, b` の取り方 `z = (a, b)`
       _ = z := h                                                            -- 鎖の 3〜6 行目（主定理の `calc`）
       _ = ⟨a, b⟩ := hab                                                     -- 鎖の 7 行目 `a, b` の取り方 `z = (a, b)`

@@ -57,6 +57,7 @@
    `μ = ±M/2` が `c_2s_1 = -c_1 < 0` と `c_1, s_1, c_2 > 0` の矛盾で排除されることが明記され、参照用ノートにもその形のまま在る）。
    Lean 側の `sin_thetaMu_eq_zero_iff` はその機械的な裏づけとして残す。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.RingTheory.RootsOfUnity.Complex
 import Mathlib.LinearAlgebra.Matrix.Notation
@@ -189,7 +190,7 @@ theorem AMat_eq : AMat K θ = !![gamma1 K θ, gamma2 K θ; -gamma2 K (-θ), gamm
 
 /-! ### 人手 `relation_of_gamma_2_theta_tilde` の「第一に」の `exp(iθ)` の表示と「第二に」「第四に」「(1)」
 
-人手の複素共役 `def_complex_conjugate` は Lean の `starRingEnd ℂ`（`star` と定義で一致する）である。
+人手の複素共役 `def_complex_conjugate` は Lean の `starRingEnd ℂ`（`star` と定義で一致する）である。`def_complex_conjugate` を当てる段は具体版 `complex_star_mk` で受ける。
 人手 `complex_conjugate_of_sum`（`m = 2`）・`complex_conjugate_of_product`・`complex_conjugate_of_difference` は具体版
 `complex_conjugate_of_sum_two`・`complex_conjugate_of_product_eq`・`complex_conjugate_of_difference_eq`
 （`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`）で受ける。各段は 1 回だけ当てる。
@@ -280,7 +281,7 @@ theorem conj_real_inclusion_mul (a b : ℝ) :
 theorem conj_I_eq_neg_I : (starRingEnd ℂ) Complex.I = -Complex.I :=
   calc (starRingEnd ℂ) Complex.I
       = (starRingEnd ℂ) (⟨0, 1⟩ : ℂ) := rfl       -- 1 行目: `def_imaginary_unit` の `i := (0,1)`
-    _ = (⟨0, -1⟩ : ℂ) := Complex.ext (Complex.conj_re _) (Complex.conj_im _)
+    _ = (⟨0, -1⟩ : ℂ) := complex_star_mk _ _
                                                   -- 2 行目: `def_complex_conjugate`
     _ = (⟨0, (-1) * 1⟩ : ℂ) := by rw [mul_one]    -- 3 行目: `1` は `ℝ` の乗法の単位元 `x * 1 = x`（`x → -1`）を右辺から左辺へ
     _ = (⟨0, (-1) * 1 + 0⟩ : ℂ) := by rw [add_zero]
