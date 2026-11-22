@@ -1,7 +1,6 @@
 # 具体版と必要十分版の分離の既知の違反。scripts/lean-concrete-necsuf-separation/check.sh（リポジトリ直下）が読む。
 # DEP 行は「使う側の分類・使う側の宣言」、IMPORT 行は「取り込む側の分類・モジュール・取り込まれる側の分類・モジュール」。
 # 行は減らすだけにする。直して違反でなくなった行は同じ回に消す。
-DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.blockDiagonal_term_eq_prod_fiber_terms
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_sign
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.matchingPairActualMonomial
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.matchingPairActualSignComposition

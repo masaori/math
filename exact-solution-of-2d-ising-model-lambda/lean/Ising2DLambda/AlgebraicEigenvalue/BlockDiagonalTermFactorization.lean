@@ -21,7 +21,7 @@ theorem blockDiagonal_term_eq_prod_fiber_terms
       ∏ k : K, (Equiv.Perm.sign (parts k) : ℤ) := by
     calc
       (Equiv.Perm.sign σ.1 : ℤ) = blockPermutationSign block σ := by
-        rw [← IntegerMatrix.inversionSign_eq_mathlibSign]
+        rw [← IntegerMatrix.inversionSignIndependent_eq_mathlibSign]
         rfl
       _ = ∏ k : K, fiberPermutationSign block σ k :=
         blockPreserving_sign_eq_prod block σ
