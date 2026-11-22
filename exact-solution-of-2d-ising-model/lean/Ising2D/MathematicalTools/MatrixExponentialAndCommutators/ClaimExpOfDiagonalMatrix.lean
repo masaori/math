@@ -12,8 +12,9 @@
 そこに書いたとおり、効いているのは
 「連続な環準同型は `exp` と可換」（`NormedSpace.map_exp`）の一点だけである。
 本ファイルでは
-* `matrixExp_diagonal`（人手証明と 1 対 1 対応する具体版。原文の成分表示は
-  `matrixExp_diagonal_apply`）
+* `matrixExp_diagonal`（本文の主張と同じ型の具体版。原文の成分表示は
+  `matrixExp_diagonal_apply`。証明は本文の冪の帰納法・部分和・極限の鎖と 1 対 1 でなく、
+  mathlib の `Matrix.exp_diagonal` で受ける）
 * `exp_pi_apply`（`matrixExp_diagonal` の成分ごとの段。**必要十分版の系として**、
   連続な環準同型 `Pi.evalRingHom` への特殊化から導いたもの）
 を置く。`diagonal` と `exp` の可換性の段に必要十分版をそのまま適用できない理由は、下の記録に書いた。

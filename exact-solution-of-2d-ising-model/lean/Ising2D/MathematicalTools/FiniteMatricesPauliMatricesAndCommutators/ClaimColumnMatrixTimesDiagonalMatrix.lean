@@ -17,7 +17,7 @@
 * 人手の前置きの 2 行（`j ≠ k` の `(b_j)_i D_{jk} = (b_j)_i 0_ℂ = 0_ℂ`）は `column_entry_mul_offdiag_eq_zero` の `calc` の 2 段、
   成分の鎖 6 行は `cols_mul_diagonal_matrix` の `calc` の 6 段と 1 対 1 である。
   1 行目の `mat_mult` は `matrix_mul_apply_sum`、2 行目と 6 行目の「列に並べた行列の成分の定め方」は `Matrix.of` の成分で `rfl`、
-  3 行目の `finite_sum_with_single_nonzero_term` は具体版が無く `Finset.sum_eq_single`（既存の慣行どおり）、
+  3 行目の `finite_sum_with_single_nonzero_term` は具体版 `finite_sum_with_single_nonzero_term_fintype` を引かず `Finset.sum_eq_single`、
   4 行目の積の可換律は `mul_comm`、5 行目の `def_matrix_scalar_multiple` は `vec_smul_apply`。
   人手の「各成分が一致することを示せばよい」は `ext i k` である。
 * 人手の `n, p ∈ ℤ_{≥1}` に対し、Lean は `ℕ` で `0` も許す（成分が無いだけで、主張はそのまま成り立つ）。

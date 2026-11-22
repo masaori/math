@@ -200,6 +200,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
     kind: "claim",
     title: { text: "列に並べた行列に対角行列を右から掛けると、各列が対角成分倍になる" },
     labels: ["column_matrix_times_diagonal_matrix_scales_columns"],
+    lean: ["Ising2D.cols_mul_diagonal_matrix", "Ising2D.column_entry_mul_offdiag_eq_zero"],
     statement: [
       paragraph([
         math(String.raw`n, p \in \mathbb{Z}_{\geq 1}`),
@@ -284,6 +285,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 5 },
     title: { text: "対角行列の指数関数" },
     labels: ["exp_of_diagonal_matrix"],
+    lean: ["Ising2D.matrixExp_diagonal_apply", "Ising2D.matrixExp_diagonal"],
     statement: [
       paragraph(["行列の積は ", ref("mat_mult"), "、複素成分の演算は ", ref("complex_numbers_form_a_field"), "、指数級数の部分和の実数の係数 ", math(String.raw`1/p!`), "（", math(String.raw`p \in \mathbb{Z}_{\ge 0}`), "）の複素数への包含は ", ref("inclusion_rr_to_cc"), " による。"]),
       paragraph([
