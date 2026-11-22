@@ -130,30 +130,30 @@ theorem kernel_isTwoSidedIdeal_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAl
 
 theorem IsTwoSidedIdeal.smul_mem_of_necSuf {SA : ComplexAlgebra A} {I : Set A}
     (hI : IsTwoSidedIdeal SA I) (l : ℂ) (x : A) (hx : x ∈ I) : SA.smul l x ∈ I :=
-  NecSuf.AlgebraOver.IsTwoSidedIdeal.smul_mem ((isTwoSidedIdeal_iff_necSuf SA I).1 hI) l x hx
+  NecSuf.AlgebraOver.IsTwoSidedIdeal.smul_mem ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).mul_mem_left l x hx
 
 /-! ### 合同・剰余類・射影の主張 -/
 
 theorem congruent_refl_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (a : A) : Congruent SA I a a :=
-  NecSuf.AlgebraOver.congruent_refl ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
+  NecSuf.AlgebraOver.congruent_refl ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).zero_mem
     complexCongruenceLaws.one_add_n complexCongruenceLaws.zero_add_zero a
 
 theorem congruent_symm_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (a b : A) (hab : Congruent SA I a b) : Congruent SA I b a :=
-  NecSuf.AlgebraOver.congruent_symm ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
+  NecSuf.AlgebraOver.congruent_symm ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).mul_mem_left
     complexCongruenceLaws.n_mul_n a b hab
 
 theorem congruent_trans_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (a b c : A) (hab : Congruent SA I a b) (hbc : Congruent SA I b c) : Congruent SA I a c :=
-  NecSuf.AlgebraOver.congruent_trans ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
+  NecSuf.AlgebraOver.congruent_trans ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).add_mem
     complexCongruenceLaws.n_add_one complexCongruenceLaws.one_add_n complexCongruenceLaws.zero_add_zero
     a b c hab hbc
 
 theorem residueClass_eq_iff_of_necSuf {SA : ComplexAlgebra A} {I : Set A}
     (hI : IsTwoSidedIdeal SA I) (a b : A) :
     residueClass SA I a = residueClass SA I b ↔ Congruent SA I a b :=
-  NecSuf.AlgebraOver.residueClass_eq_iff ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
+  NecSuf.AlgebraOver.residueClass_eq_iff ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal
     complexCongruenceLaws a b
 
 theorem projection_surjective_of_necSuf (SA : ComplexAlgebra A) (I : Set A) (X : QuotientSet SA I) :
@@ -163,19 +163,20 @@ theorem projection_surjective_of_necSuf (SA : ComplexAlgebra A) (I : Set A) (X :
 theorem congruent_add_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (a a' b b' : A) (ha : Congruent SA I a a') (hb : Congruent SA I b b') :
     Congruent SA I (SA.add a b) (SA.add a' b') :=
-  NecSuf.AlgebraOver.congruent_add ((isTwoSidedIdeal_iff_necSuf SA I).1 hI) a a' b b' ha hb
+  NecSuf.AlgebraOver.congruent_add ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).add_mem a a' b b' ha hb
 
 theorem congruent_mul_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (a a' b b' : A) (ha : Congruent SA I a a') (hb : Congruent SA I b b') :
     Congruent SA I (SA.mul a b) (SA.mul a' b') :=
-  NecSuf.AlgebraOver.congruent_mul ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
+  NecSuf.AlgebraOver.congruent_mul ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).add_mem
+    ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).mul_mem_left ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).mul_mem_right
     complexCongruenceLaws.n_add_one complexCongruenceLaws.one_add_n complexCongruenceLaws.zero_add_zero
     a a' b b' ha hb
 
 theorem congruent_smul_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (l : ℂ) (a a' : A) (ha : Congruent SA I a a') :
     Congruent SA I (SA.smul l a) (SA.smul l a') :=
-  NecSuf.AlgebraOver.congruent_smul ((isTwoSidedIdeal_iff_necSuf SA I).1 hI) complexNegOneComm l a a' ha
+  NecSuf.AlgebraOver.congruent_smul ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).mul_mem_left complexNegOneComm l a a' ha
 
 /-! ### 商代数の主張 -/
 
@@ -183,7 +184,7 @@ theorem projection_add_eq_of_projection_eq_of_necSuf {SA : ComplexAlgebra A} {I 
     (hI : IsTwoSidedIdeal SA I) (a a' b b' : A) (ha : projection SA I a = projection SA I a')
     (hb : projection SA I b = projection SA I b') :
     projection SA I (SA.add a b) = projection SA I (SA.add a' b') :=
-  NecSuf.AlgebraOver.projection_add_eq_of_projection_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
+  NecSuf.AlgebraOver.projection_add_eq_of_projection_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal
     complexCongruenceLaws a a' b b' ha hb
 
 theorem projection_mul_eq_of_projection_eq_of_necSuf {SA : ComplexAlgebra A} {I : Set A}
@@ -196,13 +197,13 @@ theorem projection_mul_eq_of_projection_eq_of_necSuf {SA : ComplexAlgebra A} {I 
 theorem projection_smul_eq_of_projection_eq_of_necSuf {SA : ComplexAlgebra A} {I : Set A}
     (hI : IsTwoSidedIdeal SA I) (l : ℂ) (a a' : A) (ha : projection SA I a = projection SA I a') :
     projection SA I (SA.smul l a) = projection SA I (SA.smul l a') :=
-  NecSuf.AlgebraOver.projection_smul_eq_of_projection_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
+  NecSuf.AlgebraOver.projection_smul_eq_of_projection_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal
     complexCongruenceLaws complexNegOneComm l a a' ha
 
 theorem quotientAdd_eq_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (X Y : QuotientSet SA I) (a b : A) (ha : projection SA I a = X) (hb : projection SA I b = Y) :
     quotientAdd SA I X Y = projection SA I (SA.add a b) :=
-  NecSuf.AlgebraOver.quotientAdd_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI) complexCongruenceLaws
+  NecSuf.AlgebraOver.quotientAdd_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal complexCongruenceLaws
     X Y a b ha hb
 
 theorem quotientMul_eq_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
@@ -214,13 +215,13 @@ theorem quotientMul_eq_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwo
 theorem quotientSmul_eq_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (l : ℂ) (X : QuotientSet SA I) (a : A) (ha : projection SA I a = X) :
     quotientSmul SA I l X = projection SA I (SA.smul l a) :=
-  NecSuf.AlgebraOver.quotientSmul_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI) complexCongruenceLaws
+  NecSuf.AlgebraOver.quotientSmul_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal complexCongruenceLaws
     complexNegOneComm l X a ha
 
 theorem projection_add_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (a b : A) :
     projection SA I (SA.add a b) = quotientAdd SA I (projection SA I a) (projection SA I b) :=
-  NecSuf.AlgebraOver.projection_add ((isTwoSidedIdeal_iff_necSuf SA I).1 hI) complexCongruenceLaws a b
+  NecSuf.AlgebraOver.projection_add ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal complexCongruenceLaws a b
 
 theorem projection_mul_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (a b : A) :
@@ -229,7 +230,7 @@ theorem projection_mul_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwo
 
 theorem projection_smul_of_necSuf {SA : ComplexAlgebra A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
     (l : ℂ) (a : A) : projection SA I (SA.smul l a) = quotientSmul SA I l (projection SA I a) :=
-  NecSuf.AlgebraOver.projection_smul ((isTwoSidedIdeal_iff_necSuf SA I).1 hI) complexCongruenceLaws
+  NecSuf.AlgebraOver.projection_smul ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal complexCongruenceLaws
     complexNegOneComm l a
 
 theorem projection_isComplexAlgebraHomomorphism_of_necSuf {SA : ComplexAlgebra A} {I : Set A}
@@ -241,7 +242,7 @@ theorem projection_isComplexAlgebraHomomorphism_of_necSuf {SA : ComplexAlgebra A
 
 theorem projection_eq_zero_of_mem_of_necSuf {SA : ComplexAlgebra A} {I : Set A}
     (hI : IsTwoSidedIdeal SA I) (x : A) (hx : x ∈ I) : projection SA I x = quotientZero SA I :=
-  NecSuf.AlgebraOver.projection_eq_zero_of_mem ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
+  NecSuf.AlgebraOver.projection_eq_zero_of_mem ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal
     complexCongruenceLaws (fun a => MulZeroClass.mul_zero a) x hx
 
 /-! ### 商代数の普遍性の主張 -/
@@ -249,7 +250,7 @@ theorem projection_eq_zero_of_mem_of_necSuf {SA : ComplexAlgebra A} {I : Set A}
 theorem map_eq_of_congruent_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAlgebra B} {I : Set A}
     {φ : A → B} (hφ : IsComplexAlgebraHomomorphism SA SB φ) (hφI : ∀ x ∈ I, φ x = SB.zero)
     (a a' : A) (haa' : Congruent SA I a a') : φ a = φ a' :=
-  NecSuf.AlgebraOver.map_eq_of_congruent ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ) hφI
+  NecSuf.AlgebraOver.map_eq_of_congruent ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ).isLinearMap hφI
     complexCongruenceLaws.n_add_one complexCongruenceLaws.one_add_n complexCongruenceLaws.zero_add_zero
     a a' haa'
 
@@ -257,14 +258,14 @@ theorem inducedMap_eq_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAlgebra B} 
     (hI : IsTwoSidedIdeal SA I) (hφ : IsComplexAlgebraHomomorphism SA SB φ)
     (hφI : ∀ x ∈ I, φ x = SB.zero) (X : QuotientSet SA I) (a : A) (ha : projection SA I a = X) :
     inducedMap SA I φ X = φ a :=
-  NecSuf.AlgebraOver.inducedMap_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI) complexCongruenceLaws
-    ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ) hφI X a ha
+  NecSuf.AlgebraOver.inducedMap_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal complexCongruenceLaws
+    ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ).isLinearMap hφI X a ha
 
 theorem inducedMap_projection_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAlgebra B} {I : Set A}
     {φ : A → B} (hI : IsTwoSidedIdeal SA I) (hφ : IsComplexAlgebraHomomorphism SA SB φ)
     (hφI : ∀ x ∈ I, φ x = SB.zero) (a : A) : inducedMap SA I φ (projection SA I a) = φ a :=
-  NecSuf.AlgebraOver.inducedMap_projection ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
-    complexCongruenceLaws ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ) hφI a
+  NecSuf.AlgebraOver.inducedMap_projection ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal
+    complexCongruenceLaws ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ).isLinearMap hφI a
 
 theorem inducedMap_isComplexAlgebraHomomorphism_of_necSuf {SA : ComplexAlgebra A}
     {SB : ComplexAlgebra B} {I : Set A} {φ : A → B} (hI : IsTwoSidedIdeal SA I)
@@ -278,14 +279,11 @@ theorem inducedMap_isComplexAlgebraHomomorphism_of_necSuf {SA : ComplexAlgebra A
 theorem equal_inducedMap_of_comp_eq_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAlgebra B}
     {I : Set A} {φ : A → B} (hI : IsTwoSidedIdeal SA I) (hφ : IsComplexAlgebraHomomorphism SA SB φ)
     (hφI : ∀ x ∈ I, φ x = SB.zero) (ψ : QuotientSet SA I → B)
-    (hψ : IsComplexAlgebraHomomorphism (quotientAlgebra hI) SB ψ)
+    (_hψ : IsComplexAlgebraHomomorphism (quotientAlgebra hI) SB ψ)
     (hψφ : ∀ a : A, ψ (projection SA I a) = φ a) (X : QuotientSet SA I) :
-    ψ X = inducedMap SA I φ X := by
-  have hψ' := (isComplexAlgebraHomomorphism_iff_necSuf _ SB ψ).1 hψ
-  rw [quotientAlgebra_eq_necSuf] at hψ'
-  exact NecSuf.AlgebraOver.eq_inducedMap_of_comp_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI)
-    complexCongruenceLaws complexNegOneComm ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ) hφI
-    ψ hψ' hψφ X
+    ψ X = inducedMap SA I φ X := NecSuf.AlgebraOver.eq_inducedMap_of_comp_eq ((isTwoSidedIdeal_iff_necSuf SA I).1 hI).toIsLeftIdeal
+    complexCongruenceLaws ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ).isLinearMap hφI
+    ψ hψφ X
 
 end CliffordMatrixIsomorphism.ComplexAlgebra
 

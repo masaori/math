@@ -16,6 +16,14 @@ K の元 n として合同の定義の引数に置く。n が 1 の加法の逆�
   congruent_mul      n + 1 = 1 + n、1 + n = 0、0 + 0 = 0
   congruent_smul     n · λ = λ · n（すべての λ。乗法の交換法則のうち n との交換だけ）
 
+各主張が使う両側イデアルの条件:
+
+  congruent_refl     零を含むこと
+  congruent_symm・congruent_smul   左から掛けて閉じること（スカラー倍で閉じることを経由する）
+  congruent_trans・congruent_add   和で閉じること
+  congruent_mul      和で閉じること・左から掛けて閉じること・右から掛けて閉じること
+  residueClass_eq_iff 零を含むこと・和で閉じること・左から掛けて閉じること（`IsLeftIdeal`）
+
 具体版の (-1)·(-1) = 1（`norm_num`）・(-1)+1 = 1+(-1)（加法の交換法則）・(-1)·λ = λ·(-1)（乗法の交換法則）の行が、
 それぞれ n · n = 1・n + 1 = 1 + n・n · λ = λ · n の仮定に当たる。
 -/
@@ -43,7 +51,7 @@ def Congruent (SA : AlgebraOver K A) (n : K) (I : Set A) (a b : A) : Prop :=
   SA.add a (SA.smul n b) ∈ I
 
 /-- 本文 `claim_congruence_modulo_two_sided_ideal_is_reflexive` の必要十分版。 -/
-theorem congruent_refl [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSidedIdeal SA I)
+theorem congruent_refl [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A} (hzero : SA.zero ∈ I)
     (h1n : 1 + n = 0) (h00 : (0 : K) + 0 = 0) (a : A) : Congruent SA n I a a := by
   have h : SA.add a (SA.smul n a) = SA.zero := calc
     SA.add a (SA.smul n a) = SA.add (SA.smul 1 a) (SA.smul n a) := by rw [SA.one_smul a]
@@ -52,11 +60,11 @@ theorem congruent_refl [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A} (hI :
     _ = SA.zero := zero_smul_eq_zero SA h00 a
   show SA.add a (SA.smul n a) ∈ I
   rw [h]
-  exact hI.zero_mem
+  exact hzero
 
 /-- 本文 `claim_congruence_modulo_two_sided_ideal_is_symmetric` の必要十分版。 -/
-theorem congruent_symm {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSidedIdeal SA I)
-    (hnn : n * n = 1) (a b : A) (hab : Congruent SA n I a b) : Congruent SA n I b a := by
+theorem congruent_symm {SA : AlgebraOver K A} {n : K} {I : Set A}
+    (hmulL : ∀ a x : A, x ∈ I → SA.mul a x ∈ I) (hnn : n * n = 1) (a b : A) (hab : Congruent SA n I a b) : Congruent SA n I b a := by
   let x : A := SA.add a (SA.smul n b)
   have hx : x ∈ I := hab
   have h : SA.add b (SA.smul n a) = SA.smul n x := calc
@@ -68,11 +76,11 @@ theorem congruent_symm {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSid
     _ = SA.smul n x := rfl
   show SA.add b (SA.smul n a) ∈ I
   rw [h]
-  exact hI.smul_mem n x hx
+  exact IsTwoSidedIdeal.smul_mem hmulL n x hx
 
 /-- 本文 `claim_congruence_modulo_two_sided_ideal_is_transitive` の必要十分版。 -/
-theorem congruent_trans [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSidedIdeal SA I)
-    (hn1 : n + 1 = 1 + n) (h1n : 1 + n = 0) (h00 : (0 : K) + 0 = 0) (a b c : A)
+theorem congruent_trans [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A}
+    (hadd : ∀ x y : A, x ∈ I → y ∈ I → SA.add x y ∈ I) (hn1 : n + 1 = 1 + n) (h1n : 1 + n = 0) (h00 : (0 : K) + 0 = 0) (a b c : A)
     (hab : Congruent SA n I a b) (hbc : Congruent SA n I b c) : Congruent SA n I a c := by
   let x : A := SA.add a (SA.smul n b)
   let y : A := SA.add b (SA.smul n c)
@@ -94,28 +102,28 @@ theorem congruent_trans [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A} (hI 
     _ = SA.add x y := rfl
   show SA.add a (SA.smul n c) ∈ I
   rw [h]
-  exact hI.add_mem x y hx hy
+  exact hadd x y hx hy
 
 /-- 本文 `def_residue_class_modulo_two_sided_ideal` の必要十分版。 -/
 def residueClass (SA : AlgebraOver K A) (n : K) (I : Set A) (a : A) : Set A :=
   {b : A | Congruent SA n I a b}
 
 /-- 本文 `claim_residue_classes_are_equal_iff_congruent` の必要十分版。 -/
-theorem residueClass_eq_iff [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSidedIdeal SA I)
+theorem residueClass_eq_iff [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsLeftIdeal SA I)
     (hL : CongruenceLaws K n) (a b : A) :
     residueClass SA n I a = residueClass SA n I b ↔ Congruent SA n I a b := by
   constructor
   · intro h
-    have hb : b ∈ residueClass SA n I b := congruent_refl hI hL.one_add_n hL.zero_add_zero b
+    have hb : b ∈ residueClass SA n I b := congruent_refl hI.zero_mem hL.one_add_n hL.zero_add_zero b
     have hb' : b ∈ residueClass SA n I a := by rw [h]; exact hb
     exact hb'
   · intro hab
-    have hba : Congruent SA n I b a := congruent_symm hI hL.n_mul_n a b hab
+    have hba : Congruent SA n I b a := congruent_symm hI.mul_mem_left hL.n_mul_n a b hab
     apply Set.Subset.antisymm
     · intro c hc
-      exact congruent_trans hI hL.n_add_one hL.one_add_n hL.zero_add_zero b a c hba hc
+      exact congruent_trans hI.add_mem hL.n_add_one hL.one_add_n hL.zero_add_zero b a c hba hc
     · intro c hc
-      exact congruent_trans hI hL.n_add_one hL.one_add_n hL.zero_add_zero a b c hab hc
+      exact congruent_trans hI.add_mem hL.n_add_one hL.one_add_n hL.zero_add_zero a b c hab hc
 
 /-- 本文 `def_quotient_set_modulo_two_sided_ideal` の必要十分版。 -/
 def QuotientSet (SA : AlgebraOver K A) (n : K) (I : Set A) : Type u :=
@@ -134,7 +142,8 @@ theorem projection_surjective (SA : AlgebraOver K A) (n : K) (I : Set A) (X : Qu
     _ = X.1 := ha.symm
 
 /-- 本文 `claim_congruence_modulo_two_sided_ideal_is_compatible_with_addition` の必要十分版。K の性質を使わない。 -/
-theorem congruent_add {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSidedIdeal SA I)
+theorem congruent_add {SA : AlgebraOver K A} {n : K} {I : Set A}
+    (hadd : ∀ x y : A, x ∈ I → y ∈ I → SA.add x y ∈ I)
     (a a' b b' : A) (ha : Congruent SA n I a a') (hb : Congruent SA n I b b') :
     Congruent SA n I (SA.add a b) (SA.add a' b') := by
   let x : A := SA.add a (SA.smul n a')
@@ -157,10 +166,12 @@ theorem congruent_add {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSide
     _ = SA.add x y := rfl
   show SA.add (SA.add a b) (SA.smul n (SA.add a' b')) ∈ I
   rw [h]
-  exact hI.add_mem x y hx hy
+  exact hadd x y hx hy
 
 /-- 本文 `claim_congruence_modulo_two_sided_ideal_is_compatible_with_multiplication` の必要十分版。 -/
-theorem congruent_mul [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSidedIdeal SA I)
+theorem congruent_mul [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A}
+    (hadd : ∀ x y : A, x ∈ I → y ∈ I → SA.add x y ∈ I) (hmulL : ∀ a x : A, x ∈ I → SA.mul a x ∈ I)
+    (hmulR : ∀ x a : A, x ∈ I → SA.mul x a ∈ I)
     (hn1 : n + 1 = 1 + n) (h1n : 1 + n = 0) (h00 : (0 : K) + 0 = 0)
     (a a' b b' : A) (ha : Congruent SA n I a a') (hb : Congruent SA n I b b') :
     Congruent SA n I (SA.mul a b) (SA.mul a' b') := by
@@ -203,11 +214,12 @@ theorem congruent_mul [Zero K] {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : 
     _ = SA.add (SA.mul x b) (SA.mul a' y) := rfl
   show SA.add (SA.mul a b) (SA.smul n (SA.mul a' b')) ∈ I
   rw [h]
-  exact hI.add_mem (SA.mul x b) (SA.mul a' y) (hI.mul_mem_right x b hx) (hI.mul_mem_left a' y hy)
+  exact hadd (SA.mul x b) (SA.mul a' y) (hmulR x b hx) (hmulL a' y hy)
 
 /-- 本文 `claim_congruence_modulo_two_sided_ideal_is_compatible_with_scalar_multiplication` の必要十分版。
 具体版の (-1)·λ = λ·(-1) の行が、n と λ の交換 `hcomm` に当たる。 -/
-theorem congruent_smul {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSidedIdeal SA I)
+theorem congruent_smul {SA : AlgebraOver K A} {n : K} {I : Set A}
+    (hmulL : ∀ a x : A, x ∈ I → SA.mul a x ∈ I)
     (hcomm : ∀ l : K, n * l = l * n) (l : K) (a a' : A) (ha : Congruent SA n I a a') :
     Congruent SA n I (SA.smul l a) (SA.smul l a') := by
   let x : A := SA.add a (SA.smul n a')
@@ -221,6 +233,6 @@ theorem congruent_smul {SA : AlgebraOver K A} {n : K} {I : Set A} (hI : IsTwoSid
     _ = SA.smul l x := rfl
   show SA.add (SA.smul l a) (SA.smul n (SA.smul l a')) ∈ I
   rw [h]
-  exact hI.smul_mem l x hx
+  exact IsTwoSidedIdeal.smul_mem hmulL l x hx
 
 end CliffordMatrixIsomorphism.NecSuf.AlgebraOver

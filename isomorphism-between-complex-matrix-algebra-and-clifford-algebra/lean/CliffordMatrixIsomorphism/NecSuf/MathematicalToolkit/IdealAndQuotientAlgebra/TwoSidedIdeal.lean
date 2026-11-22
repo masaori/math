@@ -10,6 +10,11 @@
   kernel_isTwoSidedIdeal             0 + 0 = 0 だけ（零のスカラー倍が零ベクトルであることを、
                                      B の c · 0 = 0・0 · c = 0 と φ(0_A) = 0_B の三か所で使う）
   IsTwoSidedIdeal.smul_mem           使わない（使うのは A の 1_A · x = x と、スカラー倍と乗法の両立だけ）
+
+両側イデアルの四つの条件のうち、各主張の証明が使うものだけを仮定に置く。
+`IsTwoSidedIdeal.smul_mem` は左から掛けて閉じることだけを使う。剰余類の同値と、それを引く商集合の上の加法・
+スカラー倍・射影の主張は、零を含むこと・和で閉じること・左から掛けて閉じることの三つ（`IsLeftIdeal`）を使い、
+右から掛けて閉じることは商集合の上の乗法と、それを引く主張だけが使う。
 -/
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexAlgebra.Definitions
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexVectorSpace.ZeroVector
@@ -36,6 +41,16 @@ structure IsTwoSidedIdeal (SA : AlgebraOver K A) (I : Set A) : Prop where
   add_mem : ∀ x y : A, x ∈ I → y ∈ I → SA.add x y ∈ I
   mul_mem_left : ∀ a x : A, x ∈ I → SA.mul a x ∈ I
   mul_mem_right : ∀ x a : A, x ∈ I → SA.mul x a ∈ I
+
+/-- 本文 `def_two_sided_ideal` の四つの条件のうち、零を含むこと・和で閉じること・左から掛けて閉じることの三つをもつ組。 -/
+structure IsLeftIdeal (SA : AlgebraOver K A) (I : Set A) : Prop where
+  zero_mem : SA.zero ∈ I
+  add_mem : ∀ x y : A, x ∈ I → y ∈ I → SA.add x y ∈ I
+  mul_mem_left : ∀ a x : A, x ∈ I → SA.mul a x ∈ I
+
+/-- 両側イデアルは、零を含み、和で閉じ、左から掛けて閉じる（`def_two_sided_ideal` の条件の三つ）。 -/
+theorem IsTwoSidedIdeal.toIsLeftIdeal {SA : AlgebraOver K A} {I : Set A} (hI : IsTwoSidedIdeal SA I) :
+    IsLeftIdeal SA I := ⟨hI.zero_mem, hI.add_mem, hI.mul_mem_left⟩
 
 /-- 本文 `def_two_sided_ideal_generated_by_subset` の必要十分版。 -/
 def generatedIdeal (SA : AlgebraOver K A) (X : Set A) : Set A :=
@@ -96,8 +111,10 @@ theorem kernel_isTwoSidedIdeal [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver
         _ = SB.mul SB.zero (φ a) := by rw [show φ x = SB.zero from hx]
         _ = SB.zero := hzero_mul (φ a) }
 
-/-- 本文 `claim_two_sided_ideal_is_closed_under_scalar_multiplication` の必要十分版。K の性質を使わない。 -/
-theorem IsTwoSidedIdeal.smul_mem {SA : AlgebraOver K A} {I : Set A} (hI : IsTwoSidedIdeal SA I)
+/-- 本文 `claim_two_sided_ideal_is_closed_under_scalar_multiplication` の必要十分版。K の性質を使わない。
+両側イデアルの条件のうち、左から掛けて閉じること `hmulL` だけを仮定に置く。 -/
+theorem IsTwoSidedIdeal.smul_mem {SA : AlgebraOver K A} {I : Set A}
+    (hmulL : ∀ a x : A, x ∈ I → SA.mul a x ∈ I)
     (l : K) (x : A) (hx : x ∈ I) : SA.smul l x ∈ I := by
   let a : A := SA.smul l SA.one
   have h : SA.smul l x = SA.mul a x := calc
@@ -105,6 +122,6 @@ theorem IsTwoSidedIdeal.smul_mem {SA : AlgebraOver K A} {I : Set A} (hI : IsTwoS
     _ = SA.mul (SA.smul l SA.one) x := SA.smul_mul_left l SA.one x
     _ = SA.mul a x := rfl
   rw [h]
-  exact hI.mul_mem_left a x hx
+  exact hmulL a x hx
 
 end CliffordMatrixIsomorphism.NecSuf.AlgebraOver

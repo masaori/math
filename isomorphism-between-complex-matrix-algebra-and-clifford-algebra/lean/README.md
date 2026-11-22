@@ -46,8 +46,8 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   Pauli 行列のラベルなど）も、必要十分版の名前空間に同じ形で別に置き、主張にも必要十分版と導出版を置く。
   検査はリポジトリ直下の `scripts/lean-concrete-necsuf-separation/check.sh`（違反の台帳 `concrete-necsuf-separation-ledger.txt` は空）。
 - 必要十分版の仮定は、主張ごとに証明が使う欄だけにする。前提の組（線型写像・基底・部分代数・準同型など）の一部の欄だけを使う主張は、
-  組を置かず、使う欄だけを引数に置く（例: 双対基底の主張の `SpansByLinearCombination`、部分代数の 1 と積の二つ）。暗黙の写像が
-  引数の型から推論できなくなるときは、使う欄だけをもつ組を置く（例: 零を零へ移す主張の `PreservesSmul`・`FormPreservesSmul`）。
+  組を置かず、使う欄だけを引数に置く（例: 双対基底の主張の `SpansByLinearCombination`、部分代数の 1 と積の二つ、合同の主張の両側イデアルの条件の一部、商代数の普遍性の φ が線型写像であること）。暗黙の写像が
+  引数の型から推論できなくなるときは、使う欄だけをもつ組を置く（例: 零を零へ移す主張の `PreservesSmul`・`FormPreservesSmul`）。三つ以上の欄を使う主張が多いときも、使う欄だけの組を置く（例: 剰余類の同値と商集合の加法・スカラー倍の主張の `IsLeftIdeal`。両側イデアルの条件のうち右から掛けて閉じることを除いた三つ）。
   点検は `scripts/necsuf-unused-assumptions/run.sh` で、既知の行は台帳 `necsuf-unused-assumptions-ledger.txt` に載せ、行は減らすだけにする。
 - **導出版**は、具体版の主張と同じ形の主張 `…_of_necSuf` を、必要十分版の主張に ℂ の性質を渡して示す。
   構造を作る主張（双対空間・直和・ℂ^vec が線型空間であること）は、必要十分版から作った構造が

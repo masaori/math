@@ -154,13 +154,13 @@ theorem γ_mul_self (hneg : ∀ a : K, a + -a = 0) (v : V) :
     _ = Q.proj C (T.add (T.add x (T.smul (-l) T.one)) (T.smul l T.one)) := by
         rw [T.add_assoc x (T.smul (-l) T.one) (T.smul l T.one)]
     _ = A.add (Q.proj C (T.add x (T.smul (-l) T.one))) (Q.proj C (T.smul l T.one)) :=
-        projection_add hI C.congruence _ _
+        projection_add hI.toIsLeftIdeal C.congruence _ _
     _ = A.add A.zero (Q.proj C (T.smul l T.one)) :=
         congrArg (fun X => A.add X (Q.proj C (T.smul l T.one)))
-          (projection_eq_zero_of_mem hI C.congruence C.uniqueness.mul_zero _ hmem)
+          (projection_eq_zero_of_mem hI.toIsLeftIdeal C.congruence C.uniqueness.mul_zero _ hmem)
     _ = A.add (Q.proj C (T.smul l T.one)) A.zero := A.add_comm A.zero _
     _ = Q.proj C (T.smul l T.one) := A.add_zero _
-    _ = A.smul l (Q.proj C T.one) := projection_smul hI C.congruence C.n_comm l T.one
+    _ = A.smul l (Q.proj C T.one) := projection_smul hI.toIsLeftIdeal C.congruence C.n_comm l T.one
     _ = A.smul l A.one := congrArg (fun X => A.smul l X) (Q.proj_isHom C).map_one
     _ = A.smul (Q.form v) A.one := rfl
 
@@ -290,7 +290,7 @@ theorem universalProperty (hneg : ∀ a : K, a + -a = 0) {A : Type w} (SA : Alge
     inducedMap_isAlgebraHomomorphism hI C.congruence C.n_comm hF hFI
   have hFbarγ : ∀ v : V, Fbar (Q.γ C v) = f v := fun v => calc
     Fbar (Q.γ C v) = Fbar (Q.proj C (Q.ι C v)) := rfl
-    _ = F (Q.ι C v) := inducedMap_projection hI C.congruence hF hFI (Q.ι C v)
+    _ = F (Q.ι C v) := inducedMap_projection hI.toIsLeftIdeal C.congruence hF.isLinearMap hFI (Q.ι C v)
     _ = f v := hFι v
   refine ⟨Fbar, ⟨hFbar, hFbarγ⟩, ?_⟩
   rintro Φ' ⟨hΦ', hΦ'γ⟩

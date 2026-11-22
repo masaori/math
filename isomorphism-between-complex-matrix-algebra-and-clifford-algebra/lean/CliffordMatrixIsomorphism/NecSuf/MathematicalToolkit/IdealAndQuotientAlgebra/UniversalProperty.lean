@@ -10,6 +10,15 @@
   inducedMap_eq・inducedMap_projection    `CongruenceLaws K n`（剰余類の同値と、上の主張を経由する）
   inducedMap_isAlgebraHomomorphism・eq_inducedMap_of_comp_eq
                                          `CongruenceLaws K n` と n · λ = λ · n（始域の商代数が K-代数であることに要る）
+  eq_inducedMap_of_comp_eq               `CongruenceLaws K n`（inducedMap_projection を経由する）
+
+各主張が使う φ・I・ψ の仮定:
+
+  map_eq_of_congruent・inducedMap_eq・inducedMap_projection・eq_inducedMap_of_comp_eq
+                                         φ は線型写像であること（加法とスカラー倍を保つことだけ。
+                                         積と 1 を保つことは使わない）。I は零を含み、和と左からの積で閉じること（`IsLeftIdeal`）。
+                                         eq_inducedMap_of_comp_eq は、ψ が準同型であることを使わない（ψ ∘ π_I = φ と π_I の全射性だけで決まる）。
+  inducedMap_isAlgebraHomomorphism       φ は代数の準同型、I は両側イデアル（積を保つことに要る）
 -/
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.IdealAndQuotientAlgebra.QuotientAlgebra
 
@@ -23,7 +32,7 @@ variable {K : Type uK} [Add K] [Mul K] [One K] {A : Type u} {B : Type v}
 I の上で 0_B をとる準同型 φ について、a ≡_I a' ならば φ(a) = φ(a')。
 x := a +_A ((-1_ℂ) ∗_A a')、y := φ(a') と置き、準備の ((-1_ℂ) ∗_B y) +_B y = 0_B を五行、φ(a) = φ(a') を十一行で示す。 -/
 theorem map_eq_of_congruent [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver K B} {n : K} {I : Set A} {φ : A → B}
-    (hφ : IsAlgebraHomomorphism SA SB φ) (hφI : ∀ x ∈ I, φ x = SB.zero) (hn1 : n + 1 = 1 + n) (h1n : 1 + n = 0)
+    (hφ : VectorSpace.IsLinearMap SA.toVectorSpace SB.toVectorSpace φ) (hφI : ∀ x ∈ I, φ x = SB.zero) (hn1 : n + 1 = 1 + n) (h1n : 1 + n = 0)
     (h00 : (0 : K) + 0 = 0) (a a' : A) (haa' : Congruent SA n I a a') : φ a = φ a' := by
   let x : A := SA.add a (SA.smul n a')
   have hx : x ∈ I := haa'
@@ -39,8 +48,8 @@ theorem map_eq_of_congruent [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver K 
     _ = SB.add (φ a) (SB.add (SB.smul n y) y) := by rw [hprep]
     _ = SB.add (SB.add (φ a) (SB.smul n y)) y := (SB.add_assoc (φ a) (SB.smul n y) y).symm
     _ = SB.add (SB.add (φ a) (SB.smul n (φ a'))) y := rfl
-    _ = SB.add (SB.add (φ a) (φ (SA.smul n a'))) y := by rw [hφ.map_smul n a']
-    _ = SB.add (φ (SA.add a (SA.smul n a'))) y := by rw [hφ.map_add a (SA.smul n a')]
+    _ = SB.add (SB.add (φ a) (φ (SA.smul n a'))) y := congrArg (fun t => SB.add (SB.add (φ a) t) y) (hφ.map_smul n a').symm
+    _ = SB.add (φ (SA.add a (SA.smul n a'))) y := congrArg (fun t => SB.add t y) (hφ.map_add a (SA.smul n a')).symm
     _ = SB.add (φ x) y := rfl
     _ = SB.add SB.zero y := by rw [hφx]
     _ = SB.add y SB.zero := SB.add_comm SB.zero y
@@ -54,7 +63,7 @@ noncomputable def inducedMap (SA : AlgebraOver K A) (n : K) (I : Set A) (φ : A 
 /-- 本文 `def_map_induced_on_quotient_algebra` の後半：右辺は代表のとり方によらない。
 [a]_I = π_I(a) = X = π_I(a') = [a']_I から a ≡_I a'（同値の ⇒）、合同な元に同じ値をとることで φ(a) = φ(a')。 -/
 theorem inducedMap_eq [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver K B} {n : K} {I : Set A} {φ : A → B}
-    (hI : IsTwoSidedIdeal SA I) (hL : CongruenceLaws K n) (hφ : IsAlgebraHomomorphism SA SB φ)
+    (hI : IsLeftIdeal SA I) (hL : CongruenceLaws K n) (hφ : VectorSpace.IsLinearMap SA.toVectorSpace SB.toVectorSpace φ)
     (hφI : ∀ x ∈ I, φ x = SB.zero) (X : QuotientSet SA n I) (a : A) (ha : projection SA n I a = X) :
     inducedMap SA n I φ X = φ a := by
   have hres : residueClass SA n I (rep X) = residueClass SA n I a := calc
@@ -67,7 +76,7 @@ theorem inducedMap_eq [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver K B} {n 
 /-- 本文 `claim_induced_map_composed_with_projection_is_original_homomorphism`：φ̄(π_I(a)) = φ(a)。
 X := π_I(a) の代表に a 自身をとる。 -/
 theorem inducedMap_projection [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver K B} {n : K} {I : Set A} {φ : A → B}
-    (hI : IsTwoSidedIdeal SA I) (hL : CongruenceLaws K n) (hφ : IsAlgebraHomomorphism SA SB φ)
+    (hI : IsLeftIdeal SA I) (hL : CongruenceLaws K n) (hφ : VectorSpace.IsLinearMap SA.toVectorSpace SB.toVectorSpace φ)
     (hφI : ∀ x ∈ I, φ x = SB.zero) (a : A) : inducedMap SA n I φ (projection SA n I a) = φ a :=
   inducedMap_eq hI hL hφ hφI (projection SA n I a) a rfl
 
@@ -78,14 +87,14 @@ theorem inducedMap_isAlgebraHomomorphism [Zero K] {SA : AlgebraOver K A} {SB : A
     (hcomm : ∀ l : K, n * l = l * n) (hφ : IsAlgebraHomomorphism SA SB φ)
     (hφI : ∀ x ∈ I, φ x = SB.zero) :
     IsAlgebraHomomorphism (quotientAlgebra hI hL hcomm) SB (inducedMap SA n I φ) := by
-  have hcomp := inducedMap_projection hI hL hφ hφI
+  have hcomp := inducedMap_projection hI.toIsLeftIdeal hL hφ.isLinearMap hφI
   have hadd : ∀ X Y : QuotientSet SA n I,
       inducedMap SA n I φ (quotientAdd SA n I X Y) = SB.add (inducedMap SA n I φ X) (inducedMap SA n I φ Y) := by
     intro X Y
     obtain ⟨a, rfl⟩ := projection_surjective SA n I X
     obtain ⟨b, rfl⟩ := projection_surjective SA n I Y
     calc inducedMap SA n I φ (quotientAdd SA n I (projection SA n I a) (projection SA n I b))
-        = inducedMap SA n I φ (projection SA n I (SA.add a b)) := by rw [projection_add hI hL a b]
+        = inducedMap SA n I φ (projection SA n I (SA.add a b)) := by rw [projection_add hI.toIsLeftIdeal hL a b]
       _ = φ (SA.add a b) := hcomp (SA.add a b)
       _ = SB.add (φ a) (φ b) := hφ.map_add a b
       _ = SB.add (inducedMap SA n I φ (projection SA n I a)) (inducedMap SA n I φ (projection SA n I b)) := by
@@ -110,19 +119,19 @@ theorem inducedMap_isAlgebraHomomorphism [Zero K] {SA : AlgebraOver K A} {SB : A
     intro l X
     obtain ⟨a, rfl⟩ := projection_surjective SA n I X
     calc inducedMap SA n I φ (quotientSmul SA n I l (projection SA n I a))
-        = inducedMap SA n I φ (projection SA n I (SA.smul l a)) := by rw [projection_smul hI hL hcomm l a]
+        = inducedMap SA n I φ (projection SA n I (SA.smul l a)) := by rw [projection_smul hI.toIsLeftIdeal hL hcomm l a]
       _ = φ (SA.smul l a) := hcomp (SA.smul l a)
       _ = SB.smul l (φ a) := hφ.map_smul l a
       _ = SB.smul l (inducedMap SA n I φ (projection SA n I a)) := by rw [hcomp a]
   exact ⟨⟨hadd, hmul, hone⟩, ⟨hadd, hsmul⟩⟩
 
 /-- 本文 `claim_homomorphism_from_quotient_algebra_composing_with_projection_is_unique`：
-商代数からの準同型 ψ が ψ(π_I(a)) = φ(a) を満たすなら ψ = φ̄。X の代表 a を全射性でとる。 -/
+商代数からの準同型 ψ が ψ(π_I(a)) = φ(a) を満たすなら ψ = φ̄。X の代表 a を全射性でとる。
+本文の前提のうち「ψ は ℂ-代数の準同型」は証明で使わないので置かない（ψ は A/I から B への写像であればよい）。 -/
 theorem eq_inducedMap_of_comp_eq [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver K B} {n : K} {I : Set A}
-    {φ : A → B} (hI : IsTwoSidedIdeal SA I) (hL : CongruenceLaws K n)
-    (hcomm : ∀ l : K, n * l = l * n) (hφ : IsAlgebraHomomorphism SA SB φ)
+    {φ : A → B} (hI : IsLeftIdeal SA I) (hL : CongruenceLaws K n)
+    (hφ : VectorSpace.IsLinearMap SA.toVectorSpace SB.toVectorSpace φ)
     (hφI : ∀ x ∈ I, φ x = SB.zero) (ψ : QuotientSet SA n I → B)
-    (_hψ : IsAlgebraHomomorphism (quotientAlgebra hI hL hcomm) SB ψ)
     (hψφ : ∀ a : A, ψ (projection SA n I a) = φ a) (X : QuotientSet SA n I) :
     ψ X = inducedMap SA n I φ X := by
   obtain ⟨a, rfl⟩ := projection_surjective SA n I X
