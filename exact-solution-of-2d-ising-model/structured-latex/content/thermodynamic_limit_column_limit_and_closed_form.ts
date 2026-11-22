@@ -2833,7 +2833,7 @@ c_+(M_{\mathrm{col}})
   {
     id: "maxeig_claim_W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice",
     kind: "claim",
-    title: { tex: "\\text{成分が非負のベクトル }u\\text{ について、成分が }u_k+(\\varepsilon_{\\mathbb{R}}u)_k\\text{ のベクトル }v\\text{ は }v^{\\top}W_{\\mathbb{R}}v\\ge 2(u^{\\top}W_{\\mathbb{R}}u)\\text{ を満たす}" },
+    title: { tex: "\\text{成分が非負の }u\\text{ について、}v_k:=u_k+(\\varepsilon_{\\mathbb{R}}u)_k\\text{ の }v\\text{ は }v^{\\top}W_{\\mathbb{R}}v\\ge 2(u^{\\top}W_{\\mathbb{R}}u)" },
     labels: ["W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice"],
     lean: ["Ising2D.W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice"],
     statement: [
@@ -4376,7 +4376,9 @@ p
         " 個の多重添字を単射 ",
         math(String.raw`\pi^{-1}`),
         " で送ったものなので、",
-        math(String.raw`q_Z(1),\dots,q_Z(M_{\mathrm{col}}),q_Y(1),\dots,q_Y(M_{\mathrm{col}})\in\{1,\dots,N\}`),
+        math(String.raw`q_Z(1),\dots,q_Z(M_{\mathrm{col}}),`),
+        " ",
+        math(String.raw`q_Y(1),\dots,q_Y(M_{\mathrm{col}})\in\{1,\dots,N\}`),
         " は相異なる。",
       ]),
       paragraph([

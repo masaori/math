@@ -143,7 +143,7 @@ u^\top Pv
 &=\sum_{l=1}^{n}\sum_{k=1}^{n} \bigl(v_l\,P_{lk}\bigr)\,u_k
 &&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to n,\ n_2 \to n,\ c_{k,l} \to (v_l\,P_{lk})\,u_k)\bigr)\\
 &=v^\top Pu
-&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to v,\ y \to u。\text{和の添字}\ k, l\ \text{を}\ l, k\ \text{と書く})\ \text{を右辺から左辺へ}\bigr)
+&&\bigl(\because\ \blkref{def_real_bilinear_value}\ (n \to n,\ P \to P,\ x \to v,\ y \to u\text{。和の添字}\ k, l\ \text{を}\ l, k\ \text{と書く})\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
     ],
     conversion: {
@@ -530,7 +530,7 @@ u^\top Pv
 &=\sum_{k=1}^{n} u_k\sum_{l=1}^{n} P_{kl}\,v_l
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to u_k,\ x_j \to P_{kj}\,v_j)\ \text{を各}\ k\ \text{へ}\bigr)\\
 &=\sum_{k=1}^{n} u_k\,(Pv)_k
-&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to P,\ x \to v,\ i \to k。\text{和の添字}\ j\ \text{を}\ l\ \text{と書く})\ \text{を右辺から左辺へ、各}\ k\ \text{へ}\bigr)
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to P,\ x \to v,\ i \to k\text{。和の添字}\ j\ \text{を}\ l\ \text{と書く})\ \text{を右辺から左辺へ、各}\ k\ \text{へ}\bigr)
 \end{aligned}`),
     ],
     conversion: {
@@ -586,7 +586,7 @@ u^\top Pv
       displayMath(String.raw`\begin{aligned}
 \sum_{k=1}^{n} (Qu)_k\,v_k
 &=\sum_{k=1}^{n} \Bigl(\sum_{l=1}^{n} Q_{kl}\,u_l\Bigr)\,v_k
-&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to Q,\ x \to u,\ i \to k。\text{和の添字}\ j\ \text{を}\ l\ \text{と書く})\ \text{を各}\ k\ \text{へ}\bigr)\\
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to Q,\ x \to u,\ i \to k\text{。和の添字}\ j\ \text{を}\ l\ \text{と書く})\ \text{を各}\ k\ \text{へ}\bigr)\\
 &=\sum_{k=1}^{n} v_k\sum_{l=1}^{n} Q_{kl}\,u_l
 &&\bigl(\because\ \mathbb{R}\ \text{の乗法の可換律を各}\ k\ \text{へ}\bigr)\\
 &=\sum_{k=1}^{n}\sum_{l=1}^{n} v_k\,\bigl(Q_{kl}\,u_l\bigr)
@@ -604,7 +604,7 @@ u^\top Pv
 &=\sum_{l=1}^{n} u_l\sum_{k=1}^{n} Q_{lk}\,v_k
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (m \to n,\ c \to u_l,\ x_j \to Q_{lj}\,v_j)\ \text{を各}\ l\ \text{へ}\bigr)\\
 &=\sum_{k=1}^{n} u_k\,(Qv)_k
-&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to Q,\ x \to v,\ i \to l。\text{和の添字}\ j\ \text{を}\ k\ \text{と書く})\ \text{を右辺から左辺へ、各}\ l\ \text{へ。外側の和の添字}\ l\ \text{を}\ k\ \text{と書く}\bigr)
+&&\bigl(\because\ \blkref{def_real_matrix_vector_product}\ (m \to n,\ n \to n,\ P \to Q,\ x \to v,\ i \to l\text{。和の添字}\ j\ \text{を}\ k\ \text{と書く})\ \text{を右辺から左辺へ、各}\ l\ \text{へ。外側の和の添字}\ l\ \text{を}\ k\ \text{と書く}\bigr)
 \end{aligned}`),
     ],
     conversion: {

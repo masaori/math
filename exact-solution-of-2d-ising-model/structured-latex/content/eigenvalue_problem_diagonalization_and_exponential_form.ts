@@ -5795,7 +5795,7 @@ c_2s_2^*
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
 &\quad= \bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
  + \bigl(s_1^2 + (-1_{\mathbb{C}})c_1^2 + 1_{\mathbb{C}}\bigr)\bigl((s_2^*)^2u^2\bigr)
-&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を右辺から左辺へ}\ ((c_2^*)^2\ \text{の 2 項に 1 回}、(s_2^*)^2u^2\ \text{の 3 項に 2 回}))\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を右辺から左辺へ}\ ((c_2^*)^2\ \text{の 2 項に 1 回、}(s_2^*)^2u^2\ \text{の 3 項に 2 回}))\\
 &\quad= \bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
  + \bigl((-1_{\mathbb{C}})c_1^2 + s_1^2 + 1_{\mathbb{C}}\bigr)\bigl((s_2^*)^2u^2\bigr)
 &&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\

@@ -149,8 +149,8 @@ export default defineBlocks([
         math(String.raw`1.02006 \leq \cosh\tfrac15 \leq 1.020067`),
         "、",
         math(String.raw`0.201336 \leq \sinh\tfrac15 \leq 0.2013361`),
-        "。示した桁までの不等式としてだけ使う（数値検証は ",
-        "sagemath/check/kappa_of_K_basic/ に置いた）。",
+        "。示した桁までの不等式としてだけ使う（数値検証は SageMath の検算のフォルダ ",
+        "kappa_of_K_basic に置いた）。",
       ]),
       paragraph([
         ref("second_derivative_log_divergence"),
@@ -166,8 +166,8 @@ export default defineBlocks([
         math(String.raw`0.6931 \leq \log 2 \leq 0.6932`),
         "、",
         math(String.raw`\log(2\pi) \leq 1.8380`),
-        "。示した桁までの不等式としてだけ使う（数値検証は ",
-        "sagemath/check/second_derivative_log_divergence/ に置いた）。",
+        "。示した桁までの不等式としてだけ使う（数値検証は SageMath の検算のフォルダ ",
+        "second_derivative_log_divergence に置いた）。",
       ]),
     ],
     conversion: {
