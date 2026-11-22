@@ -12,7 +12,7 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 1 行目: `def_complex_difference`（`z → a`, `w → b`） | `calc` の 1 段目（`sub_eq_add_neg`） |
+| 1 行目: `def_complex_difference`（`z → a`, `w → b`） | `calc` の 1 段目（`complex_sub_eq_add_neg`） |
 | 2 行目: 加法の結合律を右辺から左辺へ | 2 段目（`add_assoc` を右辺から左辺へ） |
 | 3 行目: 加法の結合律 | 3 段目（`add_assoc`） |
 | 4 行目: 加法の可換律 | 4 段目（`add_comm b a`） |
@@ -26,8 +26,8 @@
 
 `complex_sum_sub_difference`（人手 `sum_minus_difference_is_twice_second_in_cc` の 17 行）は、各段のコメントに人手の行を書いた。
 
-- 人手 `def_complex_difference`（`z - w := z + (-w)`）は mathlib の `sub_eq_add_neg`、`multiply_by_minus_one`（`-z := (-1_ℂ) z`）は
-  `neg_one_mul` で受ける（Lean の `ℂ` の差と符号反転は mathlib の定義なので、人手の定義の式はこの 2 つの等式で読む。同じフォルダの
+- 人手 `def_complex_difference`（`z - w := z + (-w)`）は `complex_sub_eq_add_neg`、`multiply_by_minus_one`（`-z := (-1_ℂ) z`、
+  `-1_ℂ` は `(-1)_ℂ`）は `complex_neg_eq_ofReal_neg_one_mul` で受ける（`DefinitionComplexNegationAndDifference.lean`。同じフォルダの
   `ClaimDoubleNegationAndReversedDifferenceInCC.lean` と同じ扱い）。`complex_numbers_form_a_field` の各公理は mathlib の
   `add_assoc`・`add_comm`・`add_neg_cancel`・`add_zero`・`one_mul`・`mul_assoc`・`mul_add`・`add_mul` を 1 段に 1 つずつ当てる。
   人手の「加法の逆元」の段の `-b` は `multiply_by_minus_one` の符号反転で、それが加法の逆元と一致することは
@@ -47,13 +47,14 @@ mathlib で受けている）。そのため、その鎖がこの 2 つの主張
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimOnePlusOneIsTwoInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNegationAndDifference
 
 namespace Ising2D
 
 /-- **人手 `sum_plus_difference_is_twice_first_in_cc`**: `a, b ∈ ℂ` で `(a+b) + (a-b) = 2_ℂ a`（人手の 11 行）。 -/
 theorem complex_sum_add_difference (a b : ℂ) : (a + b) + (a - b) = 2 * a :=
   calc (a + b) + (a - b)
-      = (a + b) + (a + -b) := by rw [sub_eq_add_neg a b]        -- 1 行目: `def_complex_difference`（`z → a`, `w → b`）
+      = (a + b) + (a + -b) := by rw [complex_sub_eq_add_neg a b] -- 1 行目: `def_complex_difference`（`z → a`, `w → b`）
     _ = ((a + b) + a) + -b := (add_assoc _ _ _).symm             -- 2 行目: 加法の結合律を右辺から左辺へ
     _ = (a + (b + a)) + -b := by rw [add_assoc a b a]            -- 3 行目: 加法の結合律
     _ = (a + (a + b)) + -b := by rw [add_comm b a]               -- 4 行目: 加法の可換律
@@ -68,23 +69,23 @@ theorem complex_sum_add_difference (a b : ℂ) : (a + b) + (a - b) = 2 * a :=
 /-- **人手 `sum_minus_difference_is_twice_second_in_cc`**: `a, b ∈ ℂ` で `(a+b) - (a-b) = 2_ℂ b`（人手の 17 行）。 -/
 theorem complex_sum_sub_difference (a b : ℂ) : (a + b) - (a - b) = 2 * b :=
   calc (a + b) - (a - b)
-      = (a + b) + (-(a - b)) := sub_eq_add_neg _ _
+      = (a + b) + (-(a - b)) := complex_sub_eq_add_neg _ _
                                       -- 1 行目: `def_complex_difference`（`z → a+b`, `w → a-b`）
-    _ = (a + b) + (-(a + (-b))) := by rw [sub_eq_add_neg a b]
+    _ = (a + b) + (-(a + (-b))) := by rw [complex_sub_eq_add_neg a b]
                                       -- 2 行目: `def_complex_difference`（`z → a`, `w → b`）
-    _ = (a + b) + (-1) * (a + (-b)) := by rw [neg_one_mul (a + (-b))]
+    _ = (a + b) + ((-1 : ℝ) : ℂ) * (a + (-b)) := by rw [complex_neg_eq_ofReal_neg_one_mul (a + (-b))]
                                       -- 3 行目: `multiply_by_minus_one`（`z → a+(-b)`）
-    _ = (a + b) + ((-1) * a + (-1) * (-b)) := by rw [mul_add]
+    _ = (a + b) + (((-1 : ℝ) : ℂ) * a + ((-1 : ℝ) : ℂ) * (-b)) := by rw [mul_add]
                                       -- 4 行目: 左からの分配律
-    _ = (a + b) + ((-1) * a + (-1) * ((-1) * b)) := by rw [neg_one_mul b]
+    _ = (a + b) + (((-1 : ℝ) : ℂ) * a + ((-1 : ℝ) : ℂ) * (((-1 : ℝ) : ℂ) * b)) := by rw [complex_neg_eq_ofReal_neg_one_mul b]
                                       -- 5 行目: `multiply_by_minus_one`（`z → b`）
-    _ = (a + b) + ((-1) * a + ((-1) * (-1)) * b) := by rw [← mul_assoc (-1 : ℂ) (-1) b]
+    _ = (a + b) + (((-1 : ℝ) : ℂ) * a + (((-1 : ℝ) : ℂ) * ((-1 : ℝ) : ℂ)) * b) := by rw [← mul_assoc ((-1 : ℝ) : ℂ) ((-1 : ℝ) : ℂ) b]
                                       -- 6 行目: 積の結合律を右辺から左辺へ
-    _ = (a + b) + ((-1) * a + 1 * b) := by rw [complex_minus_one_mul_minus_one]
+    _ = (a + b) + (((-1 : ℝ) : ℂ) * a + 1 * b) := by rw [complex_minus_one_mul_minus_one]
                                       -- 7 行目: `minus_one_times_minus_one_is_one_in_cc`
-    _ = (a + b) + ((-1) * a + b) := by rw [one_mul b]
+    _ = (a + b) + (((-1 : ℝ) : ℂ) * a + b) := by rw [one_mul b]
                                       -- 8 行目: 積の単位元
-    _ = (a + b) + ((-a) + b) := by rw [neg_one_mul a]
+    _ = (a + b) + ((-a) + b) := by rw [← complex_neg_eq_ofReal_neg_one_mul a]
                                       -- 9 行目: `multiply_by_minus_one`（`z → a`）を右辺から左辺へ
     _ = ((a + b) + (-a)) + b := (add_assoc _ _ _).symm
                                       -- 10 行目: 加法の結合律を右辺から左辺へ

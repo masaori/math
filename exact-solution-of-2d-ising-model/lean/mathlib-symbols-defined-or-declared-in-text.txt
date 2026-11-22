@@ -46,3 +46,7 @@ Complex.ofReal	inclusion_rr_to_cc
 Neg.neg@Complex@Complex.instNeg	multiply_by_minus_one
 # ℂ の差: def_complex_difference が z − w := z + (−w) と定める。Lean の ℂ の差もこの式と定義として等しい（complex_sub_eq_add_neg。rfl）。
 HSub.hSub@Complex,Complex,Complex@Complex.instSub	def_complex_difference
+# ℂ の零元と単位元: inclusion_rr_to_cc が略記 r_ℂ の特別な場合として 0_ℂ := (0_ℝ)_ℂ・1_ℂ := (1_ℝ)_ℂ と定める。
+# mathlib の ℂ の 0・1 も ((0 : ℝ) : ℂ)・((1 : ℝ) : ℂ) と定義されており、定義として等しい（complex_zero_eq_ofReal_zero・complex_one_eq_ofReal_one。rfl）。
+OfNat.ofNat@Complex,0@Zero.toOfNat0	inclusion_rr_to_cc
+OfNat.ofNat@Complex,1@One.toOfNat1	inclusion_rr_to_cc

@@ -18,9 +18,11 @@ Lean の `ℂ` は実部と虚部の二つの `ℝ` を欄に持つ構造体で�
 | `definition_of_cc` の積 | `complex_mk_mul_mk`（mathlib の `ℂ` の積の定義の式そのもので `rfl`） |
 | `def_imaginary_unit` の `i := (0_ℝ, 1_ℝ)` | `complex_I_eq_mk`（`rfl`） |
 | `inclusion_rr_to_cc` の `ι_{ℝ→ℂ}(x) := (x, 0)` | `complex_ofReal_eq_mk`（`rfl`。人手の `r_ℂ` は Lean の `(r : ℂ)`） |
+| `inclusion_rr_to_cc` の略記の `0_ℂ := (0_ℝ)_ℂ`・`1_ℂ := (1_ℝ)_ℂ` | `complex_zero_eq_ofReal_zero`・`complex_one_eq_ofReal_one`（`rfl`） |
 
 和と積と `i` と `ι_{ℝ→ℂ}` は、mathlib の定義が人手の定義の式と定義として等しいので、Lean の `+`・`*`・`Complex.I`・`Complex.ofReal` を
-そのまま人手の記号として使う。積の第 1 成分の差 `ac − bd` は `def_real_difference` の `ℝ` の差である。
+そのまま人手の記号として使う。Lean の `ℂ` の `0`・`1` も mathlib で `((0 : ℝ) : ℂ)`・`((1 : ℝ) : ℂ)` と定義されており、
+人手の `0_ℂ`・`1_ℂ` と定義として等しい。積の第 1 成分の差 `ac − bd` は `def_real_difference` の `ℝ` の差である。
 
 定義であり、主張に固有の構造は定義の式だけなので、必要十分版は置かない。
 -/
@@ -45,5 +47,11 @@ theorem complex_I_eq_mk : Complex.I = ⟨0, 1⟩ := rfl
 
 /-- **`inclusion_rr_to_cc`**: `ι_{ℝ→ℂ}(x) = (x, 0)`。 -/
 theorem complex_ofReal_eq_mk (x : ℝ) : (x : ℂ) = ⟨x, 0⟩ := rfl
+
+/-- **`inclusion_rr_to_cc`** の略記の `0_ℂ := (0_ℝ)_ℂ`。 -/
+theorem complex_zero_eq_ofReal_zero : (0 : ℂ) = ((0 : ℝ) : ℂ) := rfl
+
+/-- **`inclusion_rr_to_cc`** の略記の `1_ℂ := (1_ℝ)_ℂ`。 -/
+theorem complex_one_eq_ofReal_one : (1 : ℂ) = ((1 : ℝ) : ℂ) := rfl
 
 end Ising2D

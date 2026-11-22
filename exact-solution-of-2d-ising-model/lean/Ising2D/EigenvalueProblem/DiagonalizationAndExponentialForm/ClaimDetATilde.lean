@@ -51,6 +51,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesDifference
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNegationAndDifference
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
@@ -129,13 +130,13 @@ theorem det_AMat_eq_gamma1_sq_add (K : IsingConst) (θ : ℝ) :
                           -- 2 行目: `def_gamma1_gamma2_of_theta`
     _ = gamma1 K θ * gamma1 K θ - gamma2 K θ * (-gamma2 K (-θ)) := det_two_by_two_def _
                           -- 3 行目: `def_det_two_by_two`
-    _ = gamma1 K θ * gamma1 K θ + (-(gamma2 K θ * (-gamma2 K (-θ)))) := sub_eq_add_neg _ _
+    _ = gamma1 K θ * gamma1 K θ + (-(gamma2 K θ * (-gamma2 K (-θ)))) := complex_sub_eq_add_neg _ _
                           -- 4 行目: `def_complex_difference`
-    _ = gamma1 K θ * gamma1 K θ + (-1) * (gamma2 K θ * ((-1) * gamma2 K (-θ))) := by
-        rw [neg_one_mul, neg_one_mul]
+    _ = gamma1 K θ * gamma1 K θ + ((-1 : ℝ) : ℂ) * (gamma2 K θ * (((-1 : ℝ) : ℂ) * gamma2 K (-θ))) := by
+        rw [complex_neg_eq_ofReal_neg_one_mul, complex_neg_eq_ofReal_neg_one_mul]
                           -- 5 行目: `multiply_by_minus_one` を 2 箇所へ
-    _ = gamma1 K θ * gamma1 K θ + ((-1) * (-1)) * (gamma2 K θ * gamma2 K (-θ)) := by
-        rw [mul_left_comm (gamma2 K θ) (-1 : ℂ), ← mul_assoc]
+    _ = gamma1 K θ * gamma1 K θ + (((-1 : ℝ) : ℂ) * ((-1 : ℝ) : ℂ)) * (gamma2 K θ * gamma2 K (-θ)) := by
+        rw [mul_left_comm (gamma2 K θ) ((-1 : ℝ) : ℂ), ← mul_assoc]
                           -- 6 行目: `complex_numbers_form_a_field` の積の結合律・可換律
     _ = gamma1 K θ * gamma1 K θ + 1 * (gamma2 K θ * gamma2 K (-θ)) := by
         rw [complex_minus_one_mul_minus_one]
@@ -467,7 +468,7 @@ theorem gamma2_mul_gamma2_neg_sin_form (K : IsingConst) (θ : ℝ) (a₀ : ℂ)
 /-- **人手証明 `det_A_theta_tilde` の第 2 の等式の鎖の前半**（人手の 1〜29 行。左辺だけの行は数えず、等号の行を 1 行目から数える。SageMath の overview は左辺だけの行を第 1 行と数えるので、同じ行の番号が 1 つ大きい）:
 `γ_1(θ)^2 + γ_2(θ)γ_2(-θ)` を、`c_2` を (iii) `c_2s_2^* = c_2^*` で消した 8 項の和まで運ぶ。
 `a_0` は `gamma2_a0_form` と同じく、`ℂ` へ埋めた `c_1, u, s_1, c_2` の式とし、定義を仮定 `ha` で受ける。
-人手の `2_ℂ` は Lean の数字 `(2 : ℂ)`、`-1_ℂ` は `(-1 : ℂ)`（略記 `(-1)_ℂ`）である。
+人手の `2_ℂ` は Lean の数字 `(2 : ℂ)`、`-1_ℂ`（略記 `(-1)_ℂ`）は `(-1 : ℂ)` と書くが、Lean の `(-1 : ℂ)` は `-(1_ℂ)` で、`(-1)_ℂ` への読み替えはまだ書いていない（状態台帳の行「本文の引用と具体版の依存のずれを一件ずつ直す」）。
 積は人手の読みのとおり左から括る（`2_ℂc_1c_2^*s_1s_2^*u` は `((((2c_1)c_2^*)s_1)s_2^*)u`）。 -/
 theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
     (hdual : K.c2 * K.s2star = K.c2star) (a₀ : ℂ)
@@ -628,7 +629,7 @@ theorem gamma1_sq_add_gamma2_mul_chain_first_half (K : IsingConst) (θ : ℝ)
 /-- **人手証明 `det_A_theta_tilde` の第 2 の等式の鎖の後半**（人手の 30〜57 行。行の数え方は前半と同じ）:
 前半の 8 項の和から、`u` の 1 次の項の相殺、`(c_2^*)^2`・`(s_2^*)^2u^2` でのくくり出し、(i)(ii) の代入を経て `1` まで運ぶ。
 (i) `c_1^2 - s_1^2 = 1`、(ii) `(c_2^*)^2 - (s_2^*)^2 = 1` は `ℂ` の式として仮定 `H1`・`H2` で受ける。
-人手の `-1_ℂ` は Lean の `(-1 : ℂ)`（略記 `(-1)_ℂ`）、`1_ℂ`・`0_ℂ` は `(1 : ℂ)`・`(0 : ℂ)` である。積と和は人手の読みのとおり左から括る。
+人手の `-1_ℂ`（略記 `(-1)_ℂ`）は Lean の `(-1 : ℂ)`（`-(1_ℂ)`。読み替えは前半と同じく残り）、`1_ℂ`・`0_ℂ` は `(1 : ℂ)`・`(0 : ℂ)` である。積と和は人手の読みのとおり左から括る。
 人手の「和の結合律・可換律」（32・36 行目）は `ac_rfl`、差の定義（30 行目）・`-1` 倍（31 行目）・「積の結合律」（38 行目）・
 「和の結合律」（39 行目）・分配律（40 行目）は、その補題だけの `simp only`（同じ定理を複数箇所へ当てる）で受ける。 -/
 theorem gamma1_sq_add_gamma2_mul_chain_second_half (c₁ s₁ c₂' s₂' u : ℂ)

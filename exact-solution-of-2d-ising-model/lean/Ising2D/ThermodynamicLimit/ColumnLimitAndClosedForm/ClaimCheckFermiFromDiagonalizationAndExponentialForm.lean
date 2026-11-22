@@ -27,6 +27,7 @@ import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimCheckQHermitian
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimCheckFermiResultsUnconditional
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfInverse
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNegationAndDifference
 
 namespace Ising2D
 
@@ -108,7 +109,10 @@ theorem star_gamma2_neg_thetaTilde (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     _ = 1 * (starRingEnd ℂ) (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))) := (one_mul _).symm
                                       -- 3 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
     _ = ((-1) * (-1)) * (starRingEnd ℂ) (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))) := by
-        rw [complex_minus_one_mul_minus_one]
+        rw [show ((-1 : ℂ) * (-1)) = 1 by
+          rw [(complex_neg_eq_ofReal_neg_one_mul 1).trans (mul_one _)]
+          exact complex_minus_one_mul_minus_one]
+                                      -- Lean の `(-1 : ℂ)` は `-(1_ℂ)` で、`multiply_by_minus_one`（`z → 1_ℂ`）と積の単位元で `(-1)_ℂ` へ読み替える
                                       -- 4 行目: `minus_one_times_minus_one_is_one_in_cc` を右辺から左辺へ
     _ = (-1) * ((-1) * (starRingEnd ℂ) (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)))) := mul_assoc _ _ _
                                       -- 5 行目: `complex_numbers_form_a_field` の積の結合律
@@ -152,12 +156,15 @@ theorem check_hermitian_prep_neg_one_ne_zero : (-1 : ℂ) ≠ 0 := by
                                       -- 仮定 `-1_ℂ = 0_ℂ` の第 1 成分（`definition_of_cc` の等号は成分ごと）
   have h1 : (-1 : ℝ) = 0 :=
     calc (-1 : ℝ)
-        = ((-1 : ℝ) : ℂ).re := (Complex.ofReal_re _).symm
+        = ((-1 : ℝ) : ℂ).re := (congrArg Complex.re (complex_ofReal_eq_mk (-1))).symm
                                       -- `inclusion_rr_to_cc`: `-1_ℂ = (-1, 0)` の第 1 成分を右辺から左辺へ
-      _ = (-1 : ℂ).re := by rw [Complex.ofReal_neg, Complex.ofReal_one]
+      _ = (-1 : ℂ).re := by rw [(complex_neg_eq_ofReal_neg_one_mul 1).trans (mul_one _)]
                                       -- `-1_ℂ` は略記 `r_ℂ` の `r = -1`（Lean の `-1 : ℂ` との読み替え）
       _ = (0 : ℂ).re := hre           -- 仮定の第 1 成分
-      _ = 0 := Complex.zero_re        -- `0_ℂ = (0, 0)` の第 1 成分
+      _ = ((0 : ℝ) : ℂ).re := congrArg Complex.re complex_zero_eq_ofReal_zero
+                                      -- `0_ℂ` は略記 `r_ℂ` の `r = 0`（`inclusion_rr_to_cc`）
+      _ = 0 := congrArg Complex.re (complex_ofReal_eq_mk 0)
+                                      -- `inclusion_rr_to_cc`: `(0)_ℂ = (0, 0)` の第 1 成分
   exact (by norm_num : (-1 : ℝ) ≠ 0) h1
                                       -- 第 1 成分が `ℝ` で `-1 ≠ 0`
 
@@ -175,7 +182,11 @@ theorem check_hermitian_prep_neg_one_mul_inv {d : ℂ} (hd : d ≠ 0) :
                                       -- 5 行目: `complex_numbers_form_a_field` の積の結合律
     _ = ((-1) * (-1)) * (d * d⁻¹) := (mul_assoc _ _ _).symm
                                       -- 6 行目: `complex_numbers_form_a_field` の積の結合律を右辺から左辺へ
-    _ = 1 * (d * d⁻¹) := by rw [complex_minus_one_mul_minus_one]
+    _ = 1 * (d * d⁻¹) := by
+        rw [show ((-1 : ℂ) * (-1)) = 1 by
+          rw [(complex_neg_eq_ofReal_neg_one_mul 1).trans (mul_one _)]
+          exact complex_minus_one_mul_minus_one]
+                                      -- Lean の `(-1 : ℂ)` は `-(1_ℂ)` で、`multiply_by_minus_one`（`z → 1_ℂ`）と積の単位元で `(-1)_ℂ` へ読み替える
                                       -- 7 行目: `minus_one_times_minus_one_is_one_in_cc`
     _ = 1 * 1 := by rw [mul_inv_cancel₀ hd]
                                       -- 8 行目: `multiplicative_group_of_cc` の逆元（`d ∈ ℂ^×`）

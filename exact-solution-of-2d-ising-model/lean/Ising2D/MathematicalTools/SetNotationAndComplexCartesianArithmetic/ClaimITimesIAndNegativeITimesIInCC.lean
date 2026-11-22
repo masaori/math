@@ -29,7 +29,7 @@
 | 1 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → i`） | `calc` の 1 段目（`neg_I_mul_eq_neg_of_I_mul`） |
 | 2 行目: `i_times_i_is_minus_one_in_cc` | 2 段目（`complex_I_mul_I`） |
 | 3 行目: `multiply_by_minus_one`（`z → -1_ℂ`） | 3 段目（`complex_neg_eq_ofReal_neg_one_mul`） |
-| 4 行目: `minus_one_times_minus_one_is_one_in_cc` | 4 段目（`complex_minus_one_mul_minus_one`。その主張は `-1_ℂ` を `-(1 : ℂ)` と書くので、`Complex.ofReal_neg`・`Complex.ofReal_one` で読み替えてから当てる） |
+| 4 行目: `minus_one_times_minus_one_is_one_in_cc` | 4 段目（`complex_minus_one_mul_minus_one`） |
 
 - この 2 つの主張を引くのは、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` の
   `pauliComb_coeff_y_eq_zero`（人手 `Z_Y_linearly_independent` の Step 1 の `c_y = 0_ℂ` の鎖）と、人手 `Z_Y_generate_algebra` の
@@ -75,8 +75,6 @@ theorem complex_neg_I_mul_I : (-Complex.I) * Complex.I = 1 :=
       = -(Complex.I * Complex.I) := neg_I_mul_eq_neg_of_I_mul _         -- 1 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → i`）
     _ = -((-1 : ℝ) : ℂ) := by rw [complex_I_mul_I]                      -- 2 行目: `i_times_i_is_minus_one_in_cc`
     _ = ((-1 : ℝ) : ℂ) * ((-1 : ℝ) : ℂ) := complex_neg_eq_ofReal_neg_one_mul _ -- 3 行目: `multiply_by_minus_one`（`z → -1_ℂ`）
-    _ = 1 := by
-          rw [Complex.ofReal_neg, Complex.ofReal_one]                   -- 4 行目: `minus_one_times_minus_one_is_one_in_cc`
-          exact complex_minus_one_mul_minus_one                         -- （その具体版は `-1_ℂ` を `-(1 : ℂ)` と書くので読み替える）
+    _ = 1 := complex_minus_one_mul_minus_one                            -- 4 行目: `minus_one_times_minus_one_is_one_in_cc`
 
 end Ising2D

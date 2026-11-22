@@ -1319,15 +1319,31 @@ T_B(X - W)
     origin: { path: "_old/typst/parts/000_計算公式/007_definition_RRからCCへの包含写像.typ", ordinal: 8 },
     title: { tex: "\\mathbb{R}\\to\\mathbb{C}\\text{の包含写像}" },
     labels: ["inclusion_rr_to_cc"],
-    lean: ["Ising2D.complex_ofReal_eq_mk"],
+    lean: ["Ising2D.complex_ofReal_eq_mk", "Ising2D.complex_zero_eq_ofReal_zero", "Ising2D.complex_one_eq_ofReal_one"],
     statement: [
       paragraph([math("\\iota_{\\mathbb{R}\\to\\mathbb{C}}:\\mathbb{R}\\to\\mathbb{C}"), " を"]),
       displayMath("\\iota_{\\mathbb{R}\\to\\mathbb{C}}(x):=(x,0)"),
       paragraph(["として定める。これを ", math("\\mathbb{R}"), " から ", math("\\mathbb{C}"), " への包含写像と呼ぶ。"]),
       paragraph(["略記として、", math("r\\in\\mathbb{R}"), " について"]),
       displayMath("r_{\\mathbb{C}}:=\\iota_{\\mathbb{R}\\to\\mathbb{C}}(r)"),
+      paragraph([
+        "と書く。とくに ",
+        ref("set_and_algebra_notation"),
+        " の実数の零元 ",
+        math(String.raw`0_{\mathbb{R}}`),
+        " と単位元 ",
+        math(String.raw`1_{\mathbb{R}}`),
+        " の像を",
+      ]),
+      displayMath(String.raw`0_{\mathbb{C}} := (0_{\mathbb{R}})_{\mathbb{C}},\qquad 1_{\mathbb{C}} := (1_{\mathbb{R}})_{\mathbb{C}}`),
       paragraph(["と書く。"]),
     ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-11-22（Lean の点検の直し）: 本文は 0_ℂ・1_ℂ を略記 r_ℂ の r = 0・r = 1 として使っていたが、そう書いたブロックが無かったので、略記の特別な場合として 0_ℂ := (0_ℝ)_ℂ・1_ℂ := (1_ℝ)_ℂ を書き足した。定義の中身は変えていない。",
+      ],
+    },
   },
   {
     id: "calc_formulae_claim_inclusion_rr_to_cc_is_injective",
