@@ -2931,6 +2931,7 @@ z
     kind: "claim",
     title: { tex: String.raw`-(-z)=z` },
     labels: ["double_negation_in_cc"],
+    lean: ["Ising2D.complex_double_negation"],
     statement: [
       paragraph([
         math(String.raw`z\in\mathbb C`),
@@ -2982,6 +2983,7 @@ z
     kind: "claim",
     title: { tex: String.raw`b-a=-(a-b)` },
     labels: ["reversed_difference_is_negation_of_difference_in_cc"],
+    lean: ["Ising2D.complex_reversed_difference"],
     statement: [
       paragraph([
         math(String.raw`a,b\in\mathbb C`),
@@ -3043,6 +3045,7 @@ b-a
     kind: "claim",
     title: { tex: String.raw`z(-w)=-(zw)` },
     labels: ["complex_times_negation_is_negation_of_product_in_cc"],
+    lean: ["Ising2D.mul_neg_eq_neg_mul_complex"],
     statement: [
       paragraph([
         math(String.raw`z,w\in\mathbb C`),
@@ -3084,6 +3087,7 @@ z(-w)
     kind: "claim",
     title: { tex: String.raw`(-z)w=-(zw)` },
     labels: ["negation_times_complex_is_negation_of_product_in_cc"],
+    lean: ["Ising2D.neg_mul_eq_neg_mul_complex"],
     statement: [
       paragraph([
         math(String.raw`z,w\in\mathbb C`),
@@ -3121,6 +3125,7 @@ z(-w)
     kind: "claim",
     title: { tex: String.raw`(-x)+x=0_{\mathbb C}` },
     labels: ["negation_plus_self_is_zero_in_cc"],
+    lean: ["Ising2D.neg_add_self_complex"],
     statement: [
       paragraph([
         math(String.raw`x\in\mathbb C`),
@@ -3182,6 +3187,7 @@ z(-w)
     kind: "claim",
     title: { tex: String.raw`i(-\theta)_{\mathbb C}=-(i\theta_{\mathbb C})` },
     labels: ["i_times_negated_real_is_negation_of_i_times"],
+    lean: ["Ising2D.I_mul_real_neg_eq_neg_I_mul"],
     statement: [
       paragraph([
         math(String.raw`\theta\in\mathbb R`),
@@ -3248,6 +3254,7 @@ i(-\theta)_{\mathbb C}
     kind: "claim",
     title: { tex: String.raw`(a+b)+(a-b)=2_{\mathbb C}a` },
     labels: ["sum_plus_difference_is_twice_first_in_cc"],
+    lean: ["Ising2D.complex_sum_add_difference"],
     statement: [
       paragraph([
         math(String.raw`a,b\in\mathbb C`),
@@ -3323,6 +3330,7 @@ i(-\theta)_{\mathbb C}
     kind: "claim",
     title: { tex: String.raw`(a+b)-(a-b)=2_{\mathbb C}b` },
     labels: ["sum_minus_difference_is_twice_second_in_cc"],
+    lean: ["Ising2D.complex_sum_sub_difference"],
     statement: [
       paragraph([
         math(String.raw`a,b\in\mathbb C`),
@@ -3418,6 +3426,7 @@ i(-\theta)_{\mathbb C}
     kind: "claim",
     title: { tex: String.raw`(2_{\mathbb C}z)\,2_{\mathbb C}^{-1}=z` },
     labels: ["twice_times_inverse_of_two_is_original_in_cc"],
+    lean: ["Ising2D.complex_two_mul_mul_inv_two"],
     statement: [
       paragraph([
         math(String.raw`z\in\mathbb C`),
@@ -3638,6 +3647,7 @@ i(-\theta)_{\mathbb C}
     kind: "claim",
     title: { tex: String.raw`(-i)z=-(iz)` },
     labels: ["negative_i_times_complex_is_negation_of_i_times"],
+    lean: ["Ising2D.neg_I_mul_eq_neg_of_I_mul"],
     statement: [
       paragraph([
         math(String.raw`z\in\mathbb C`),
@@ -3679,6 +3689,7 @@ i(-\theta)_{\mathbb C}
     kind: "claim",
     title: { tex: String.raw`i\,i=-1_{\mathbb C}` },
     labels: ["i_times_i_is_minus_one_in_cc"],
+    lean: ["Ising2D.complex_I_mul_I"],
     statement: [
       paragraph([
         math(String.raw`i \in \mathbb{C}`),
@@ -3738,6 +3749,7 @@ i\,i
     kind: "claim",
     title: { tex: String.raw`(-i)\,i=1_{\mathbb C}` },
     labels: ["negative_i_times_i_is_one_in_cc"],
+    lean: ["Ising2D.complex_neg_I_mul_I"],
     statement: [
       paragraph([
         math(String.raw`i \in \mathbb{C}`),
@@ -3789,6 +3801,7 @@ i\,i
     kind: "claim",
     title: { tex: String.raw`-\bigl(i(-\theta)_{\mathbb C}\bigr)=i\theta_{\mathbb C}` },
     labels: ["negation_of_i_times_negated_real_is_i_times"],
+    lean: ["Ising2D.neg_I_mul_real_neg_eq_I_mul"],
     statement: [
       paragraph([
         math(String.raw`\theta\in\mathbb R`),
@@ -3821,6 +3834,7 @@ i\,i
     kind: "claim",
     title: { tex: String.raw`(\cos(-\theta))_{\mathbb C}=(\cos\theta)_{\mathbb C}` },
     labels: ["cos_of_negated_real"],
+    lean: ["Ising2D.real_inclusion_cos_neg"],
     statement: [
       paragraph([
         math(String.raw`\theta\in\mathbb R`),
@@ -3908,6 +3922,7 @@ i\,i
     kind: "claim",
     title: { tex: String.raw`(\sin(-\theta))_{\mathbb C}=-(\sin\theta)_{\mathbb C}` },
     labels: ["sin_of_negated_real"],
+    lean: ["Ising2D.real_inclusion_sin_neg"],
     statement: [
       paragraph([
         math(String.raw`\theta\in\mathbb R`),
@@ -4022,6 +4037,7 @@ i\,i
     kind: "claim",
     title: { tex: String.raw`i\,(2_{\mathbb C}i)^{-1}=2_{\mathbb C}^{-1}` },
     labels: ["i_times_inverse_of_two_i_is_inverse_of_two_in_cc"],
+    lean: ["Ising2D.complex_I_mul_inv_two_mul_I", "Ising2D.complex_I_ne_zero_by_im", "Ising2D.complex_two_mul_I_ne_zero"],
     statement: [
       paragraph([
         math(String.raw`i`),
@@ -4098,6 +4114,7 @@ i\,(2_{\mathbb C}i)^{-1}
     kind: "claim",
     title: { tex: String.raw`\exp(-i\theta_{\mathbb C})=(\cos\theta)_{\mathbb C}-i(\sin\theta)_{\mathbb C}` },
     labels: ["exp_of_negative_i_real_as_cos_minus_i_sin"],
+    lean: ["Ising2D.exp_neg_I_mul_real_eq_cos_sub_I_mul_sin"],
     statement: [
       paragraph([
         math(String.raw`\theta\in\mathbb R`),
