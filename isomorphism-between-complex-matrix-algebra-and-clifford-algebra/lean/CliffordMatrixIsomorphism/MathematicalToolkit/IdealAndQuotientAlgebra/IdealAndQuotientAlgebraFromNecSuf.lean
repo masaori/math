@@ -125,7 +125,9 @@ theorem generatedIdeal_subset_of_necSuf (SA : ComplexAlgebra A) (X J : Set A)
 theorem kernel_isTwoSidedIdeal_of_necSuf {SA : ComplexAlgebra A} {SB : ComplexAlgebra B} {φ : A → B}
     (hφ : IsComplexAlgebraHomomorphism SA SB φ) : IsTwoSidedIdeal SA (kernel SB φ) :=
   (isTwoSidedIdeal_iff_necSuf SA _).2
-    (NecSuf.AlgebraOver.kernel_isTwoSidedIdeal ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ)
+    (NecSuf.AlgebraOver.kernel_isTwoSidedIdeal ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ).map_add
+      ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ).map_mul
+      ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ).isLinearMap.toPreservesSmul
       complexCongruenceLaws.zero_add_zero)
 
 theorem IsTwoSidedIdeal.smul_mem_of_necSuf {SA : ComplexAlgebra A} {I : Set A}

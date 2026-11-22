@@ -68,21 +68,21 @@ theorem homomorphismToMatrixOfGeneral_first (hneg : ∀ a : K, a + -a = 0) (hneg
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (m : ℕ) (hm : 1 ≤ m ∧ m ≤ D.M) :
     D.homomorphismToMatrixOfGeneral C hneg hneg_mul hneg_neg i hi QY hQf e he (QY.γ C (e m))
       = (D.matrixAlgebra C).add (creationMatrix n D.M m hm) (annihilationMatrix n D.M m hm) := by
-  have hθ := D.mapToSplit_isIsometry C hneg hneg_mul hneg_neg i hi QY hQf e he
+  have hθ := D.mapToSplit_isIsometry C.splitSpaceLaws hneg hneg_mul hneg_neg i hi QY hQf e he
   let A := (D.space C).cliffordAlgebra C
   let B := D.matrixAlgebra C
   let S₂ := dualSpaceVectorSpace C.dualSpaceVectorSpaceLaws D.spaceW
   let Φ := D.homomorphismToMatrix C hneg
-  let θ := D.mapToSplit C i QY e he
+  let θ := D.mapToSplit C.splitSpaceLaws i QY e he.isBasis
   calc D.homomorphismToMatrixOfGeneral C hneg hneg_mul hneg_neg i hi QY hQf e he (QY.γ C (e m))
       = Φ (QuadraticSpaceWithBasis.inducedHom C hneg QY (D.space C) θ hθ.isLinearMap hθ.map_form (QY.γ C (e m))) :=
         rfl
     _ = Φ ((D.space C).γ C (θ (e m))) := by rw [QuadraticSpaceWithBasis.inducedHom_γ]
-    _ = Φ ((D.space C).γ C (D.splitFamily C i m)) := by
-        rw [show θ (e m) = D.splitFamily C i m from
-          mapByCoordinates_basis C.uniqueness QY.space (D.space C).space (D.M + D.M) e he.isBasis (D.splitFamily C i) m
+    _ = Φ ((D.space C).γ C (D.splitFamily C.splitSpaceLaws i m)) := by
+        rw [show θ (e m) = D.splitFamily C.splitSpaceLaws i m from
+          mapByCoordinates_basis C.uniqueness QY.space (D.space C).space (D.M + D.M) e he.isBasis (D.splitFamily C.splitSpaceLaws i) m
             hm.1 (by omega)]
-    _ = Φ ((D.space C).γ C (D.w m, D.f m)) := by rw [D.splitFamily_first C i m hm.2]
+    _ = Φ ((D.space C).γ C (D.w m, D.f m)) := by rw [D.splitFamily_first C.splitSpaceLaws i m hm.2]
     _ = Φ ((D.space C).γ C ((D.space C).space.add (embedFirst S₂ (D.w m)) (embedSecond D.spaceW (D.f m)))) :=
         congrArg (fun p => Φ ((D.space C).γ C p)) (pair_eq_add_embed D.spaceW S₂ (D.w m) (D.f m))
     _ = Φ (A.add ((D.space C).γ C (embedFirst S₂ (D.w m))) ((D.space C).γ C (embedSecond D.spaceW (D.f m)))) := by
@@ -102,13 +102,13 @@ theorem homomorphismToMatrixOfGeneral_second (hneg : ∀ a : K, a + -a = 0) (hne
     D.homomorphismToMatrixOfGeneral C hneg hneg_mul hneg_neg i hi QY hQf e he (QY.γ C (e (D.M + m)))
       = (D.matrixAlgebra C).add ((D.matrixAlgebra C).smul (-i) (creationMatrix n D.M m hm))
           ((D.matrixAlgebra C).smul i (annihilationMatrix n D.M m hm)) := by
-  have hθ := D.mapToSplit_isIsometry C hneg hneg_mul hneg_neg i hi QY hQf e he
+  have hθ := D.mapToSplit_isIsometry C.splitSpaceLaws hneg hneg_mul hneg_neg i hi QY hQf e he
   let A := (D.space C).cliffordAlgebra C
   let B := D.matrixAlgebra C
   let SV := (D.space C).space
   let S₂ := dualSpaceVectorSpace C.dualSpaceVectorSpaceLaws D.spaceW
   let Φ := D.homomorphismToMatrix C hneg
-  let θ := D.mapToSplit C i QY e he
+  let θ := D.mapToSplit C.splitSpaceLaws i QY e he.isBasis
   have h00 : (0 : K) + 0 = 0 := C.congruence.zero_add_zero
   have hin1 : embedFirst S₂ (D.spaceW.smul (-i) (D.w m)) = SV.smul (-i) (embedFirst S₂ (D.w m)) :=
     (embedFirst_isLinearMap D.spaceW S₂ h00 C.uniqueness.mul_zero).map_smul (-i) (D.w m)
@@ -118,12 +118,12 @@ theorem homomorphismToMatrixOfGeneral_second (hneg : ∀ a : K, a + -a = 0) (hne
       = Φ (QuadraticSpaceWithBasis.inducedHom C hneg QY (D.space C) θ hθ.isLinearMap hθ.map_form
           (QY.γ C (e (D.M + m)))) := rfl
     _ = Φ ((D.space C).γ C (θ (e (D.M + m)))) := by rw [QuadraticSpaceWithBasis.inducedHom_γ]
-    _ = Φ ((D.space C).γ C (D.splitFamily C i (D.M + m))) := by
-        rw [show θ (e (D.M + m)) = D.splitFamily C i (D.M + m) from
-          mapByCoordinates_basis C.uniqueness QY.space (D.space C).space (D.M + D.M) e he.isBasis (D.splitFamily C i)
+    _ = Φ ((D.space C).γ C (D.splitFamily C.splitSpaceLaws i (D.M + m))) := by
+        rw [show θ (e (D.M + m)) = D.splitFamily C.splitSpaceLaws i (D.M + m) from
+          mapByCoordinates_basis C.uniqueness QY.space (D.space C).space (D.M + D.M) e he.isBasis (D.splitFamily C.splitSpaceLaws i)
             (D.M + m) (by omega) (by omega)]
     _ = Φ ((D.space C).γ C (D.spaceW.smul (-i) (D.w m), S₂.smul i (D.f m))) := by
-        rw [D.splitFamily_second C i m hm.1]
+        rw [D.splitFamily_second C.splitSpaceLaws i m hm.1]
     _ = Φ ((D.space C).γ C (SV.add (embedFirst S₂ (D.spaceW.smul (-i) (D.w m)))
           (embedSecond D.spaceW (S₂.smul i (D.f m))))) :=
         congrArg (fun p => Φ ((D.space C).γ C p))

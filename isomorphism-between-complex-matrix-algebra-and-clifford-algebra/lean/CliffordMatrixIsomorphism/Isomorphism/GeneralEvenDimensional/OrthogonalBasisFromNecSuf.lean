@@ -67,13 +67,13 @@ theorem polarization_isLinearForm_right_of_necSuf (S : ComplexVectorSpace V) (q 
     (hq : IsQuadraticForm S q) (x : V) : IsComplexLinearForm S (fun y => polarization S q x y) :=
   (isComplexLinearForm_iff_necSuf S _).2
     (NecSuf.VectorSpace.polarization_isLinearForm_right _root_.add_assoc _root_.add_comm S.toNecSuf q
-      ((isQuadraticForm_iff_necSuf S q).1 hq) x)
+      ((isQuadraticForm_iff_necSuf S q).1 hq).polarization_isLinearForm x)
 
 /-- 本文 `claim_polarization_of_quadratic_form_on_diagonal_is_twice_value` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem polarization_self_of_necSuf (S : ComplexVectorSpace V) (q : V → ℂ) (hq : IsQuadraticForm S q) (x : V) :
     polarization S q x x = (1 + 1) * q x :=
   NecSuf.VectorSpace.polarization_self _root_.add_assoc _root_.add_comm add_neg_cancel neg_add_cancel
-    _root_.zero_add add_mul one_mul S.toNecSuf q ((isQuadraticForm_iff_necSuf S q).1 hq) x
+    _root_.zero_add add_mul one_mul S.toNecSuf q ((isQuadraticForm_iff_necSuf S q).1 hq).map_smul x
 
 /-- 本文 `claim_quadratic_form_at_sum_with_scalar_multiple` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem quadraticForm_add_smul_of_necSuf (S : ComplexVectorSpace V) (q : V → ℂ) (hq : IsQuadraticForm S q)
@@ -99,7 +99,9 @@ theorem equal_zero_of_polarization_eq_zero_on_spanning_of_necSuf (S : ComplexVec
     (hq : IsNondegenerateQuadraticForm S q) (n : ℕ) (b : ℕ → V) (hb : SpansByLinearCombination S n b)
     (x : V) (hx : ∀ k : ℕ, 1 ≤ k → k ≤ n → polarization S q x (b k) = 0) : x = S.zero :=
   NecSuf.VectorSpace.eq_zero_of_polarization_eq_zero_on_spanning _root_.add_assoc _root_.add_comm
-    (_root_.add_zero 0) mul_zero zero_mul S.toNecSuf q ((isNondegenerateQuadraticForm_iff_necSuf S q).1 hq) n b
+    (_root_.add_zero 0) mul_zero zero_mul S.toNecSuf q
+    ((isNondegenerateQuadraticForm_iff_necSuf S q).1 hq).isQuadraticForm.polarization_isLinearForm
+    ((isNondegenerateQuadraticForm_iff_necSuf S q).1 hq).nondegenerate n b
     ((spansByLinearCombination_iff_necSuf S n b).1 hb) x hx
 
 /-- 本文 `claim_member_of_family_adding_multiples_with_zero_coefficient_is_unchanged` を、必要十分版から得たもの。 -/
@@ -139,7 +141,7 @@ theorem polarization_self_ne_zero_of_necSuf (S : ComplexVectorSpace V) (q : V �
     (v : V) (hv : q v ≠ 0) : polarization S q v v ≠ 0 :=
   NecSuf.VectorSpace.polarization_self_ne_zero _root_.add_assoc _root_.add_comm add_neg_cancel neg_add_cancel
     _root_.zero_add add_mul one_mul complex_one_add_one_ne_zero (fun _ _ => mul_ne_zero) S.toNecSuf q
-    ((isQuadraticForm_iff_necSuf S q).1 hq) v hv
+    ((isQuadraticForm_iff_necSuf S q).1 hq).map_smul v hv
 
 /-- 本文 `claim_orthogonalization_step_extends_orthogonalized_part` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem orthogonalizationStep_isOrthogonalized_of_necSuf (S : ComplexVectorSpace V) (q : V → ℂ)

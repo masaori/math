@@ -82,7 +82,7 @@ theorem linearMap_eq_self_of_fixes_basis_of_necSuf (SV : ComplexVectorSpace V) (
     (hb : IsBasisFamily SV n b) (F : V → V) (hF : IsComplexLinearMap SV SV F)
     (hfix : ∀ k : ℕ, 1 ≤ k → k ≤ n → F (b k) = b k) (x : V) : F x = x :=
   NecSuf.VectorSpace.linearMap_eq_self_of_fixes_basis SV.toNecSuf (_root_.add_zero 0) n b
-    ((isBasisFamily_iff_necSuf SV n b).1 hb) F ((isComplexLinearMap_iff_necSuf SV SV F).1 hF) hfix x
+    ((isBasisFamily_iff_necSuf SV n b).1 hb).spans F ((isComplexLinearMap_iff_necSuf SV SV F).1 hF) hfix x
 
 /-- 本文 `claim_linear_right_inverse_of_isometry_is_isometry` を、必要十分版から得たもの。 -/
 theorem isIsometry_of_linear_rightInverse_of_necSuf {V' : Type w} (S : ComplexVectorSpace V)
@@ -91,7 +91,8 @@ theorem isIsometry_of_linear_rightInverse_of_necSuf {V' : Type w} (S : ComplexVe
     IsIsometry S' S q' q θ' :=
   (isIsometry_iff_necSuf S' S q' q θ').2
     (NecSuf.VectorSpace.isIsometry_of_linear_rightInverse S.toNecSuf S'.toNecSuf q q' θ θ'
-      ((isIsometry_iff_necSuf S S' q q' θ).1 hθ) ((isComplexLinearMap_iff_necSuf S' S θ').1 hθ') hright)
+      ((isIsometry_iff_necSuf S S' q q' θ).1 hθ).isQuadraticForm ((isIsometry_iff_necSuf S S' q q' θ).1 hθ).isQuadraticForm'
+      ((isIsometry_iff_necSuf S S' q q' θ).1 hθ).map_form ((isComplexLinearMap_iff_necSuf S' S θ').1 hθ') hright)
 
 end CliffordMatrixIsomorphism.ComplexVectorSpace
 

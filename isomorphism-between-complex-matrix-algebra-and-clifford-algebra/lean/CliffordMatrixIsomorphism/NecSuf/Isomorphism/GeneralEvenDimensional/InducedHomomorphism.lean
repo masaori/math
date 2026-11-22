@@ -11,8 +11,8 @@
                                         スカラー倍の行の 0 + 0 = 0・a · 0 = 0 もこの組の欄から出る
   mapByCoordinates_basis                `UniquenessLaws`（座標の写像の族が双対基底であること）。
                                         Σ δ_{k,j} ·_U u_k = u_j の行は 0 + 0 = 0 だけを使う
-  linearMap_eq_self_of_fixes_basis      0 + 0 = 0 だけ（線型写像が線型結合を移す主張から来る）。座標の写像の一つ目の性質
-                                        Σ β^b_k(x) ·_V b_k = x は選び方そのものなので、係数の一意性は使わない
+  linearMap_eq_self_of_fixes_basis      0 + 0 = 0 だけ（線型写像が線型結合を移す主張から来る）。b については張ることだけを
+                                        仮定に置く（座標 β^b_k(x) は、張ることから選んだ係数に当たる）。係数の一意性は使わない
   isIsometry_of_linear_rightInverse     なし
   existsUnique_inducedHom・inducedHom   章「クリフォード代数」の仮定 `CliffordLaws K n` と a + (-a) = 0（`hneg`）。
                                         どちらも γ'(θ(v))² の計算とクリフォード代数の普遍性から来る
@@ -22,7 +22,8 @@
 θ が線型であること（`hlin`）と q'(θ(x)) = q(x)（`hform`）の二つに分けて置く。普遍性の証明が q・q' について使うのは
 γ(v)² = q(v) ∗ 1 と I_q の生成元の形だけで、q・q' が二次形式であることはどの主張も使わない（章「クリフォード代数」の
 必要十分版の前提の組 `QuadraticSpaceWithBasis` も「q は二次形式」の欄を持たない）。結論が等長写像である
-`isIsometry_of_linear_rightInverse` だけは、結論の q・q' が二次形式である欄を仮定の θ から受け取るので `IsIsometry` で書く。
+`isIsometry_of_linear_rightInverse` は、結論の q・q' が二次形式である欄を受け取るために、q・q' が二次形式であることと
+q'(θ(x)) = q(x) を仮定に置く（θ が線型であることは使わない）。
 
 分かったこと:
   - 線型写像が基底を動かさなければ恒等写像であることは、係数の性質のうち 0 + 0 = 0 しか使わない。
@@ -99,29 +100,33 @@ theorem mapByCoordinates_basis (UL : UniquenessLaws K) (SV : VectorSpace K V) (S
         linearCombination_eq_of_terms_eq SU n u u _ _ fun k hk1 hkn => by rw [hδ k hk1 hkn]
     _ = u j := linearCombination_kroneckerDelta SU (UL.add_zero 0) n u j hj1 hjn
 
-/-- 本文 `claim_linear_map_fixing_basis_members_is_identity` の必要十分版。K に要るのは 0 + 0 = 0 だけ。 -/
+/-- 本文 `claim_linear_map_fixing_basis_members_is_identity` の必要十分版。K に要るのは 0 + 0 = 0 だけ。
+b が基底であることの二つの条件のうち、V を張ること `hs` だけを仮定に置く。具体版の座標 β^b_k(x) は、張ることから選んだ
+係数 c_k（`hs x` が与える Σ c_k ·_V b_k = x）に当たる（座標の写像 `coordinate` も同じ選び方で定まる）。 -/
 theorem linearMap_eq_self_of_fixes_basis (SV : VectorSpace K V) (h00 : (0 : K) + 0 = 0) (n : ℕ) (b : ℕ → V)
-    (hb : IsBasisFamily SV n b) (F : V → V) (hF : IsLinearMap SV SV F)
-    (hfix : ∀ k : ℕ, 1 ≤ k → k ≤ n → F (b k) = b k) (x : V) : F x = x := calc
-  F x = F (linearCombination SV n (fun k => coordinate SV n b hb k x) b) := by
-        rw [linearCombination_coordinate SV n b hb x]
-  _ = linearCombination SV n (fun k => coordinate SV n b hb k x) (fun k => F (b k)) :=
-        hF.map_linearCombination h00 n _ b
-  _ = linearCombination SV n (fun k => coordinate SV n b hb k x) b :=
+    (hs : SpansByLinearCombination SV n b) (F : V → V) (hF : IsLinearMap SV SV F)
+    (hfix : ∀ k : ℕ, 1 ≤ k → k ≤ n → F (b k) = b k) (x : V) : F x = x := by
+  obtain ⟨c, hc⟩ := hs x
+  calc F x = F (linearCombination SV n c b) := by rw [hc]
+    _ = linearCombination SV n c (fun k => F (b k)) := hF.map_linearCombination h00 n _ b
+    _ = linearCombination SV n c b :=
         linearCombination_eq_of_terms_eq SV n _ b _ _ fun k hk1 hkn => by rw [hfix k hk1 hkn]
-  _ = x := linearCombination_coordinate SV n b hb x
+    _ = x := hc
 
 omit [Zero K] in
-/-- 本文 `claim_linear_right_inverse_of_isometry_is_isometry` の必要十分版。K の性質を使わない。 -/
+/-- 本文 `claim_linear_right_inverse_of_isometry_is_isometry` の必要十分版。K の性質を使わない。
+θ が等長写像であることの四つの条件のうち、q・q' が二次形式であること（`hq`・`hq'`。結論の θ' の等長写像の条件へ渡す）と
+q'(θ(x)) = q(x)（`hform`）だけを仮定に置く。θ が線型であることは使わない。 -/
 theorem isIsometry_of_linear_rightInverse [Neg K] {V' : Type w} (S : VectorSpace K V) (S' : VectorSpace K V')
-    (q : V → K) (q' : V' → K) (θ : V → V') (θ' : V' → V) (hθ : IsIsometry S S' q q' θ)
+    (q : V → K) (q' : V' → K) (θ : V → V') (θ' : V' → V) (hq : IsQuadraticForm S q)
+    (hq' : IsQuadraticForm S' q') (hform : ∀ x : V, q' (θ x) = q x)
     (hθ' : IsLinearMap S' S θ') (hright : ∀ y : V', θ (θ' y) = y) :
     IsIsometry S' S q' q θ' where
-  isQuadraticForm := hθ.isQuadraticForm'
-  isQuadraticForm' := hθ.isQuadraticForm
+  isQuadraticForm := hq'
+  isQuadraticForm' := hq
   isLinearMap := hθ'
   map_form y := calc
-    q (θ' y) = q' (θ (θ' y)) := (hθ.map_form (θ' y)).symm
+    q (θ' y) = q' (θ (θ' y)) := (hform (θ' y)).symm
     _ = q' y := by rw [hright y]
 
 end CliffordMatrixIsomorphism.NecSuf.VectorSpace

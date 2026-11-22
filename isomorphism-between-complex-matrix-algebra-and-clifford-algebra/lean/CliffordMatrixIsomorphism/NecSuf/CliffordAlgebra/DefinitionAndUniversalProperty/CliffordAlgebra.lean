@@ -283,7 +283,7 @@ theorem universalProperty (hneg : ∀ a : K, a + -a = 0) {A : Type w} (SA : Alge
     exact hgen v
   have hIK : Q.ideal C ⊆ kernel SA F :=
     generatedIdeal_subset (Q.TA C) (Q.idealGenerators C) (kernel SA F)
-      (kernel_isTwoSidedIdeal hF C.congruence.zero_add_zero) hsubK
+      (kernel_isTwoSidedIdeal hF.map_add hF.map_mul hF.isLinearMap.toPreservesSmul C.congruence.zero_add_zero) hsubK
   have hFI : ∀ x ∈ Q.ideal C, F x = SA.zero := fun x hx => hIK hx
   let Fbar : Q.Cl C → A := inducedMap (Q.TA C) n (Q.ideal C) F
   have hFbar : IsAlgebraHomomorphism (Q.cliffordAlgebra C) SA Fbar :=

@@ -8,7 +8,8 @@
   generatedIdeal_isTwoSidedIdeal・subset_generatedIdeal・generatedIdeal_subset
                                      使わない（両側イデアルの定義に K は現れない）
   kernel_isTwoSidedIdeal             0 + 0 = 0 だけ（零のスカラー倍が零ベクトルであることを、
-                                     B の c · 0 = 0・0 · c = 0 と φ(0_A) = 0_B の三か所で使う）
+                                     B の c · 0 = 0・0 · c = 0 と φ(0_A) = 0_B の三か所で使う）。φ については和・積・
+                                     スカラー倍を保つことだけを使い、1 を保つことは使わない
   IsTwoSidedIdeal.smul_mem           使わない（使うのは A の 1_A · x = x と、スカラー倍と乗法の両立だけ）
 
 両側イデアルの四つの条件のうち、各主張の証明が使うものだけを仮定に置く。
@@ -76,9 +77,13 @@ theorem generatedIdeal_subset (SA : AlgebraOver K A) (X J : Set A) (hJ : IsTwoSi
 /-- 本文 `claim_kernel_of_algebra_homomorphism_is_two_sided_ideal` の K_φ。 -/
 def kernel (SB : AlgebraOver K B) (φ : A → B) : Set A := {x : A | φ x = SB.zero}
 
-/-- 本文 `claim_kernel_of_algebra_homomorphism_is_two_sided_ideal` の必要十分版。 -/
+/-- 本文 `claim_kernel_of_algebra_homomorphism_is_two_sided_ideal` の必要十分版。
+φ が K-代数の準同型であることの条件のうち、和・積・スカラー倍を保つこと（`hadd`・`hmul`・`hsmul`）だけを仮定に置く
+（1 を保つことは使わない）。 -/
 theorem kernel_isTwoSidedIdeal [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver K B} {φ : A → B}
-    (hφ : IsAlgebraHomomorphism SA SB φ) (h00 : (0 : K) + 0 = 0) :
+    (hadd : ∀ x y : A, φ (SA.add x y) = SB.add (φ x) (φ y))
+    (hmul : ∀ x y : A, φ (SA.mul x y) = SB.mul (φ x) (φ y))
+    (hsmul : VectorSpace.PreservesSmul SA.toVectorSpace SB.toVectorSpace φ) (h00 : (0 : K) + 0 = 0) :
     IsTwoSidedIdeal SA (kernel SB φ) := by
   have hmul_zero : ∀ c : B, SB.mul c SB.zero = SB.zero := fun c => calc
     SB.mul c SB.zero = SB.mul c (SB.smul 0 SB.zero) := by rw [zero_smul_eq_zero SB h00 SB.zero]
@@ -91,23 +96,23 @@ theorem kernel_isTwoSidedIdeal [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver
   exact {
     zero_mem := by
       show φ SA.zero = SB.zero
-      exact VectorSpace.IsLinearMap.map_zero hφ.isLinearMap_underlying.toPreservesSmul h00
+      exact VectorSpace.IsLinearMap.map_zero hsmul h00
     add_mem := by
       intro x y hx hy
       show φ (SA.add x y) = SB.zero
-      calc φ (SA.add x y) = SB.add (φ x) (φ y) := hφ.map_add x y
+      calc φ (SA.add x y) = SB.add (φ x) (φ y) := hadd x y
         _ = SB.add SB.zero SB.zero := by rw [show φ x = SB.zero from hx, show φ y = SB.zero from hy]
         _ = SB.zero := SB.add_zero SB.zero
     mul_mem_left := by
       intro a x hx
       show φ (SA.mul a x) = SB.zero
-      calc φ (SA.mul a x) = SB.mul (φ a) (φ x) := hφ.map_mul a x
+      calc φ (SA.mul a x) = SB.mul (φ a) (φ x) := hmul a x
         _ = SB.mul (φ a) SB.zero := by rw [show φ x = SB.zero from hx]
         _ = SB.zero := hmul_zero (φ a)
     mul_mem_right := by
       intro x a hx
       show φ (SA.mul x a) = SB.zero
-      calc φ (SA.mul x a) = SB.mul (φ x) (φ a) := hφ.map_mul x a
+      calc φ (SA.mul x a) = SB.mul (φ x) (φ a) := hmul x a
         _ = SB.mul SB.zero (φ a) := by rw [show φ x = SB.zero from hx]
         _ = SB.zero := hzero_mul (φ a) }
 

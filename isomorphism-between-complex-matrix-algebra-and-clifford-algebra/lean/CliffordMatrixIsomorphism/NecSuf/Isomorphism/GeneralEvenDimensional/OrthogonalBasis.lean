@@ -60,28 +60,32 @@ universe u uK
 variable {K : Type uK} [Add K] [Mul K] [One K] [Zero K] [Neg K] {V : Type u}
 
 omit [Zero K] in
-/-- 本文 `claim_polarization_of_quadratic_form_is_linear_in_second_argument` の必要十分版。 -/
+/-- 本文 `claim_polarization_of_quadratic_form_is_linear_in_second_argument` の必要十分版。
+q が二次形式であることの二つの条件のうち、偏極が第一引数について線型であること `hlin` だけを仮定に置く
+（q(λ x) = λ²q(x) は使わない）。 -/
 theorem polarization_isLinearForm_right (hassoc : ∀ a b c : K, (a + b) + c = a + (b + c))
     (hcomm : ∀ a b : K, a + b = b + a) (S : VectorSpace K V) (q : V → K)
-    (hq : IsQuadraticForm S q) (x : V) : IsLinearForm S (fun y => polarization S q x y) where
+    (hlin : ∀ y : V, IsLinearForm S (fun x => polarization S q x y)) (x : V) :
+    IsLinearForm S (fun y => polarization S q x y) where
   map_add y y' := calc
     polarization S q x (S.add y y') = polarization S q (S.add y y') x :=
         polarization_symm hassoc hcomm S q x (S.add y y')
-    _ = polarization S q y x + polarization S q y' x := (hq.polarization_isLinearForm x).map_add y y'
+    _ = polarization S q y x + polarization S q y' x := (hlin x).map_add y y'
     _ = polarization S q x y + polarization S q x y' := by
         rw [polarization_symm hassoc hcomm S q y x, polarization_symm hassoc hcomm S q y' x]
   map_smul l y := calc
     polarization S q x (S.smul l y) = polarization S q (S.smul l y) x :=
         polarization_symm hassoc hcomm S q x (S.smul l y)
-    _ = l * polarization S q y x := (hq.polarization_isLinearForm x).map_smul l y
+    _ = l * polarization S q y x := (hlin x).map_smul l y
     _ = l * polarization S q x y := by rw [polarization_symm hassoc hcomm S q y x]
 
-/-- 本文 `claim_polarization_of_quadratic_form_on_diagonal_is_twice_value` の必要十分版。 -/
+/-- 本文 `claim_polarization_of_quadratic_form_on_diagonal_is_twice_value` の必要十分版。
+q が二次形式であることの二つの条件のうち、q(λ x) = λ²q(x)（`hsmul`）だけを仮定に置く（偏極の線型性は使わない）。 -/
 theorem polarization_self (hassoc : ∀ a b c : K, (a + b) + c = a + (b + c))
     (hcomm : ∀ a b : K, a + b = b + a) (hneg : ∀ a : K, a + -a = 0) (hneg' : ∀ a : K, -a + a = 0)
     (hzero_add : ∀ a : K, 0 + a = a) (hrdistrib : ∀ a b c : K, (a + b) * c = a * c + b * c)
     (hone_mul : ∀ a : K, 1 * a = a)
-    (S : VectorSpace K V) (q : V → K) (hq : IsQuadraticForm S q) (x : V) :
+    (S : VectorSpace K V) (q : V → K) (hsmul : ∀ (l : K) (x : V), q (S.smul l x) = l * (l * q x)) (x : V) :
     polarization S q x x = (1 + 1) * q x := by
   let τ : K := 1 + 1
   let a : K := q x
@@ -101,7 +105,7 @@ theorem polarization_self (hassoc : ∀ a b c : K, (a + b) + c = a + (b + c))
     _ = -(τ * a) + ((a + a) + polarization S q x x) := by rw [hτ a]
     _ = -(τ * a) + q (S.add x x) := by rw [polarization_identity hassoc hcomm hneg hzero_add S q x x]
     _ = -(τ * a) + q (S.smul τ x) := by rw [hxx]
-    _ = -(τ * a) + τ * (τ * a) := by rw [hq.map_smul τ x]
+    _ = -(τ * a) + τ * (τ * a) := by rw [hsmul τ x]
     _ = -(τ * a) + (τ * a + τ * a) := by rw [hτ (τ * a)]
     _ = (-(τ * a) + τ * a) + τ * a := by rw [← hassoc (-(τ * a)) (τ * a) (τ * a)]
     _ = 0 + τ * a := by rw [hneg' (τ * a)]
@@ -117,7 +121,7 @@ theorem quadraticForm_add_smul (hassoc : ∀ a b c : K, (a + b) + c = a + (b + c
       (polarization_identity hassoc hcomm hneg hzero_add S q x (S.smul t y)).symm
   _ = (q x + t * (t * q y)) + polarization S q x (S.smul t y) := by rw [hq.map_smul t y]
   _ = (q x + t * (t * q y)) + t * polarization S q x y := by
-      rw [(polarization_isLinearForm_right hassoc hcomm S q hq x).map_smul t y]
+      rw [(polarization_isLinearForm_right hassoc hcomm S q hq.polarization_isLinearForm x).map_smul t y]
 
 omit [Neg K] in
 /-- 本文 `claim_member_of_linearly_independent_family_is_nonzero` の必要十分版。
@@ -155,14 +159,18 @@ theorem orderedSum_eq_zero_of_terms_eq_zero (h00 : (0 : K) + 0 = 0) (n : ℕ) (a
     (h : ∀ k : ℕ, 1 ≤ k → k ≤ n → a k = 0) : orderedSum n a = 0 :=
   partialOrderedSum_eq_zero_of_terms_eq_zero h00 n a h n le_rfl
 
-/-- 本文 `claim_element_orthogonal_to_spanning_family_is_zero` の必要十分版。 -/
+/-- 本文 `claim_element_orthogonal_to_spanning_family_is_zero` の必要十分版。
+q が非退化な二次形式であることの条件のうち、偏極が第一引数について線型であること `hlin` と非退化性 `hnd` だけを
+仮定に置く（q(λ x) = λ²q(x) は使わない）。 -/
 theorem eq_zero_of_polarization_eq_zero_on_spanning (hassoc : ∀ a b c : K, (a + b) + c = a + (b + c))
     (hcomm : ∀ a b : K, a + b = b + a) (h00 : (0 : K) + 0 = 0) (hmul0 : ∀ a : K, a * 0 = 0)
     (h0mul : ∀ a : K, 0 * a = 0)
     (S : VectorSpace K V) (q : V → K)
-    (hq : IsNondegenerateQuadraticForm S q) (n : ℕ) (b : ℕ → V) (hb : SpansByLinearCombination S n b)
+    (hlin : ∀ y : V, IsLinearForm S (fun x => polarization S q x y))
+    (hnd : ∀ x : V, (∀ y : V, polarization S q x y = 0) → x = S.zero) (n : ℕ) (b : ℕ → V)
+    (hb : SpansByLinearCombination S n b)
     (x : V) (hx : ∀ k : ℕ, 1 ≤ k → k ≤ n → polarization S q x (b k) = 0) : x = S.zero := by
-  apply hq.nondegenerate x
+  apply hnd x
   intro y
   obtain ⟨μ, hμ⟩ := hb y
   have hterm : ∀ k : ℕ, 1 ≤ k → k ≤ n → μ k * polarization S q x (b k) = 0 := fun k hk1 hkn => calc
@@ -171,7 +179,7 @@ theorem eq_zero_of_polarization_eq_zero_on_spanning (hassoc : ∀ a b c : K, (a 
   calc polarization S q x y
       = polarization S q x (linearCombination S n μ b) := by rw [hμ]
     _ = orderedSum n (fun k => μ k * polarization S q x (b k)) :=
-        (polarization_isLinearForm_right hassoc hcomm S q hq.isQuadraticForm x).map_linearCombination
+        (polarization_isLinearForm_right hassoc hcomm S q hlin x).map_linearCombination
           h00 h0mul n b μ
     _ = 0 := orderedSum_eq_zero_of_terms_eq_zero h00 n _ hterm
 
@@ -374,12 +382,13 @@ theorem exists_orthogonalized_with_nonzero_next (L : OrthogonalizationLaws K) (S
         calc polarization S q (e (k + 1)) (e (k + 1))
             = (1 + 1) * q (e (k + 1)) :=
               polarization_self L.add_assoc L.add_comm L.add_neg L.neg_add L.zero_add L.right_distrib
-                L.one_mul S q hq' (e (k + 1))
+                L.one_mul S q hq'.map_smul (e (k + 1))
           _ = (1 + 1) * 0 := by rw [hzero]
           _ = 0 := L.mul_zero (1 + 1 : K)
       · exact hafter j hgt hjn
     have hz : e (k + 1) = S.zero :=
-      eq_zero_of_polarization_eq_zero_on_spanning L.add_assoc L.add_comm h00 L.mul_zero L.zero_mul S q hq n e
+      eq_zero_of_polarization_eq_zero_on_spanning L.add_assoc L.add_comm h00 L.mul_zero L.zero_mul S q
+        hq.isQuadraticForm.polarization_isLinearForm hq.nondegenerate n e
         he.isBasis.spans (e (k + 1)) hall
     exact linearlyIndependent_member_ne_zero h00 L.one_ne_zero S n e he.isBasis.linearlyIndependent (k + 1)
       (Nat.succ_pos k) hk hz
@@ -452,10 +461,10 @@ theorem exists_orthogonalized_with_nonzero_next (L : OrthogonalizationLaws K) (S
       calc polarization S q (e i) (addMultiplesOfMember S e j ω (k + 1))
           = polarization S q (e i) (S.add (e (k + 1)) (S.smul t (e j))) := by rw [hnext]
         _ = polarization S q (e i) (e (k + 1)) + polarization S q (e i) (S.smul t (e j)) :=
-            (polarization_isLinearForm_right L.add_assoc L.add_comm S q hq' (e i)).map_add (e (k + 1))
+            (polarization_isLinearForm_right L.add_assoc L.add_comm S q hq'.polarization_isLinearForm (e i)).map_add (e (k + 1))
               (S.smul t (e j))
         _ = polarization S q (e i) (e (k + 1)) + t * polarization S q (e i) (e j) := by
-            rw [(polarization_isLinearForm_right L.add_assoc L.add_comm S q hq' (e i)).map_smul t (e j)]
+            rw [(polarization_isLinearForm_right L.add_assoc L.add_comm S q hq'.polarization_isLinearForm (e i)).map_smul t (e j)]
         _ = 0 + t * 0 := by
             rw [he.orthogonal_after i (k + 1) hi1 hik le_rfl hk,
               he.orthogonal_after i j hi1 hik (by omega) hjn]
@@ -465,15 +474,16 @@ theorem exists_orthogonalized_with_nonzero_next (L : OrthogonalizationLaws K) (S
       exact he.orthogonal_after i r hi1 hik hr1 hrn
 
 /-- 本文 `claim_polarization_on_diagonal_is_nonzero_when_value_is_nonzero` の必要十分版。
-1 + 1 ≠ 0（2 の可逆性）と、0 でない二元の積が 0 でないことを使う。 -/
+1 + 1 ≠ 0（2 の可逆性）と、0 でない二元の積が 0 でないことを使う。q が二次形式であることの条件のうち、
+q(λ x) = λ²q(x)（`hsmul`）だけを仮定に置く。 -/
 theorem polarization_self_ne_zero (hassoc : ∀ a b c : K, (a + b) + c = a + (b + c))
     (hcomm : ∀ a b : K, a + b = b + a) (hneg : ∀ a : K, a + -a = 0) (hneg' : ∀ a : K, -a + a = 0)
     (hzero_add : ∀ a : K, 0 + a = a) (hrdistrib : ∀ a b c : K, (a + b) * c = a * c + b * c)
     (hone_mul : ∀ a : K, 1 * a = a) (htwo : (1 : K) + 1 ≠ 0)
     (hmul_ne_zero : ∀ a b : K, a ≠ 0 → b ≠ 0 → a * b ≠ 0)
-    (S : VectorSpace K V) (q : V → K) (hq : IsQuadraticForm S q)
+    (S : VectorSpace K V) (q : V → K) (hsmul : ∀ (l : K) (x : V), q (S.smul l x) = l * (l * q x))
     (v : V) (hv : q v ≠ 0) : polarization S q v v ≠ 0 := by
-  rw [polarization_self hassoc hcomm hneg hneg' hzero_add hrdistrib hone_mul S q hq v]
+  rw [polarization_self hassoc hcomm hneg hneg' hzero_add hrdistrib hone_mul S q hsmul v]
   exact hmul_ne_zero (1 + 1) (q v) htwo hv
 
 omit [One K] in
@@ -507,7 +517,7 @@ theorem orthogonalizationStep_isOrthogonalized [Inv K]
   let d : K := polarization S q v v
   have hd : d ≠ 0 :=
     polarization_self_ne_zero hassoc hcomm hneg hneg' hzero_add hrdistrib hone_mul
-      htwo hmul_ne_zero S q hq v hv
+      htwo hmul_ne_zero S q hq.map_smul v hv
   let ω : ℕ → K := orthogonalizationCoefficient S q e k
   have hunchanged : ∀ r : ℕ, r ≤ k + 1 → addMultiplesOfMember S e (k + 1) ω r = e r :=
     fun r hr => addMultiplesOfMember_of_coefficient_eq_zero h00 S e (k + 1) ω r (if_pos hr)
@@ -547,9 +557,9 @@ theorem orthogonalizationStep_isOrthogonalized [Inv K]
     by_cases hik' : i ≤ k
     · calc polarization S q (e i) (S.add (e r) (S.smul (ω r) v))
           = polarization S q (e i) (e r) + polarization S q (e i) (S.smul (ω r) v) :=
-            (polarization_isLinearForm_right hassoc hcomm S q hq (e i)).map_add (e r) (S.smul (ω r) v)
+            (polarization_isLinearForm_right hassoc hcomm S q hq.polarization_isLinearForm (e i)).map_add (e r) (S.smul (ω r) v)
         _ = polarization S q (e i) (e r) + ω r * polarization S q (e i) v := by
-            rw [(polarization_isLinearForm_right hassoc hcomm S q hq (e i)).map_smul (ω r) v]
+            rw [(polarization_isLinearForm_right hassoc hcomm S q hq.polarization_isLinearForm (e i)).map_smul (ω r) v]
         _ = 0 + ω r * 0 := by
             rw [he.orthogonal_after i r hi1 hik' (by omega) hrn,
               he.orthogonal_after i (k + 1) hi1 hik' le_rfl hk]
@@ -562,9 +572,9 @@ theorem orthogonalizationStep_isOrthogonalized [Inv K]
       calc polarization S q (e (k + 1)) (S.add (e r) (S.smul (ω r) v))
           = polarization S q v (S.add (e r) (S.smul (ω r) v)) := rfl
         _ = polarization S q v (e r) + polarization S q v (S.smul (ω r) v) :=
-            (polarization_isLinearForm_right hassoc hcomm S q hq v).map_add (e r) (S.smul (ω r) v)
+            (polarization_isLinearForm_right hassoc hcomm S q hq.polarization_isLinearForm v).map_add (e r) (S.smul (ω r) v)
         _ = polarization S q v (e r) + ω r * polarization S q v v := by
-            rw [(polarization_isLinearForm_right hassoc hcomm S q hq v).map_smul (ω r) v]
+            rw [(polarization_isLinearForm_right hassoc hcomm S q hq.polarization_isLinearForm v).map_smul (ω r) v]
         _ = polarization S q (e r) v + ω r * polarization S q v v := by
             rw [polarization_symm hassoc hcomm S q v (e r)]
         _ = α + ω r * d := rfl

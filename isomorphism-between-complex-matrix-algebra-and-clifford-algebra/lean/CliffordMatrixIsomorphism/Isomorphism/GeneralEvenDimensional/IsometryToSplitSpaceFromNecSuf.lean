@@ -59,6 +59,10 @@ theorem IsOrthonormalBasisFamily.toNecSuf {S : ComplexVectorSpace Y} {q : Y → 
 theorem isInverseOfTwo_inverseOfTwo : NecSuf.VectorSpace.IsInverseOfTwo inverseOfTwo :=
   ⟨inverseOfTwo_mul, mul_inverseOfTwo⟩
 
+/-- θ・θ' の必要十分版が K に置く仮定の組を ℂ で満たすこと（章「クリフォード代数」の ℂ の仮定の組から欄を取り出す）。 -/
+theorem complexSplitSpaceLaws : NecSuf.Clifford.SplitData.SplitSpaceLaws ℂ :=
+  NecSuf.Clifford.CliffordLaws.splitSpaceLaws Clifford.complexCliffordLaws
+
 /-- 本文 `claim_negative_imaginary_unit_times_imaginary_unit_is_one` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem negImaginaryUnit_mul_imaginaryUnit_of_necSuf : (-imaginaryUnit) * imaginaryUnit = 1 :=
   NecSuf.VectorSpace.negImaginaryUnit_mul_imaginaryUnit neg_mul neg_neg imaginaryUnit imaginaryUnit_mul_self
@@ -117,7 +121,7 @@ theorem toNecSuf_linearCombination (n : ℕ) (c : ℕ → ℂ) (x : ℕ → W ×
 
 /-- 具体版の基底 d を写した点は、必要十分版の基底 d である。 -/
 theorem splitBasis_toNecSuf (k : ℕ) :
-    splitPointToNecSuf D.spaceW (D.splitBasis k) = D.toNecSuf.splitBasis complexCliffordLaws k := by
+    splitPointToNecSuf D.spaceW (D.splitBasis k) = D.toNecSuf.splitBasis complexSplitSpaceLaws k := by
   show splitPointToNecSuf D.spaceW (concatenatedFamily D.spaceW (dualSpaceVectorSpace D.spaceW) D.M D.w D.f k)
     = NecSuf.VectorSpace.concatenatedFamily D.toNecSuf.spaceW
       (NecSuf.VectorSpace.dualSpaceVectorSpace complexCliffordLaws.dualSpaceVectorSpaceLaws D.toNecSuf.spaceW)
@@ -127,7 +131,7 @@ theorem splitBasis_toNecSuf (k : ℕ) :
 
 /-- 具体版の族 u を写した点は、必要十分版の族 u（i := imaginaryUnit）である。 -/
 theorem splitFamily_toNecSuf (k : ℕ) :
-    splitPointToNecSuf D.spaceW (D.splitFamily k) = D.toNecSuf.splitFamily complexCliffordLaws imaginaryUnit k := by
+    splitPointToNecSuf D.spaceW (D.splitFamily k) = D.toNecSuf.splitFamily complexSplitSpaceLaws imaginaryUnit k := by
   unfold splitFamily NecSuf.Clifford.SplitData.splitFamily
   split_ifs with h1 h2 h2
   · rfl
@@ -138,16 +142,16 @@ theorem splitFamily_toNecSuf (k : ℕ) :
 /-- 具体版の d の座標の写像と、必要十分版の d の座標の写像を写した点で開いたものは、1,…,2M の番号で一致する（係数の一意性）。 -/
 theorem coordinate_splitBasis_eq_necSuf (y : W × DualSpace D.spaceW) (k : ℕ) (hk1 : 1 ≤ k) (hk : k ≤ D.M + D.M) :
     coordinate D.space.space (D.M + D.M) D.splitBasis D.splitBasis_isBasis k y
-      = NecSuf.VectorSpace.coordinate D.spaceN.space (D.M + D.M) (D.toNecSuf.splitBasis complexCliffordLaws)
-          (D.toNecSuf.splitBasis_isBasis complexCliffordLaws) k (splitPointToNecSuf D.spaceW y) := by
+      = NecSuf.VectorSpace.coordinate D.spaceN.space (D.M + D.M) (D.toNecSuf.splitBasis complexSplitSpaceLaws)
+          (D.toNecSuf.splitBasis_isBasis complexSplitSpaceLaws) k (splitPointToNecSuf D.spaceW y) := by
   have h := congrArg (splitPointToNecSuf D.spaceW)
     (linearCombination_coordinate D.space.space (D.M + D.M) D.splitBasis D.splitBasis_isBasis y)
   rw [toNecSuf_linearCombination] at h
-  have hd : (fun l => splitPointToNecSuf D.spaceW (D.splitBasis l)) = D.toNecSuf.splitBasis complexCliffordLaws :=
+  have hd : (fun l => splitPointToNecSuf D.spaceW (D.splitBasis l)) = D.toNecSuf.splitBasis complexSplitSpaceLaws :=
     funext D.splitBasis_toNecSuf
   rw [hd] at h
   exact (NecSuf.VectorSpace.coordinate_eq_of_linearCombination_eq D.spaceN.space complexUniquenessLaws (D.M + D.M)
-    _ (D.toNecSuf.splitBasis_isBasis complexCliffordLaws) _ _ h k hk1 hk).symm
+    _ (D.toNecSuf.splitBasis_isBasis complexSplitSpaceLaws) _ _ h k hk1 hk).symm
 
 /-! ### 基底 d と e -/
 
@@ -156,14 +160,14 @@ theorem splitBasis_first_of_necSuf (m : ℕ) (hmM : m ≤ D.M) :
     D.splitBasis m = embedFirst (dualSpaceVectorSpace D.spaceW) (D.w m) := by
   apply D.toNecSuf_injective
   rw [D.splitBasis_toNecSuf]
-  exact D.toNecSuf.splitBasis_first complexCliffordLaws m hmM
+  exact D.toNecSuf.splitBasis_first complexSplitSpaceLaws m hmM
 
 /-- 本文 `claim_members_of_basis_of_split_space_in_general_even_dimensional_corollary` の二つ目を、必要十分版から得たもの。 -/
 theorem splitBasis_second_of_necSuf (m : ℕ) (hm1 : 1 ≤ m) :
     D.splitBasis (D.M + m) = embedSecond D.spaceW (D.f m) := by
   apply D.toNecSuf_injective
   rw [D.splitBasis_toNecSuf]
-  exact D.toNecSuf.splitBasis_second complexCliffordLaws m hm1
+  exact D.toNecSuf.splitBasis_second complexSplitSpaceLaws m hm1
 
 /-- 本文 `def_orthonormal_basis_of_general_even_dimensional_space` の固定した e が三つの条件を満たすことを、
 存在の主張の導出版（`exists_orthonormal_basis_of_necSuf`。必要十分版に平方根の存在を渡したもの）から得たもの。 -/
@@ -181,8 +185,8 @@ theorem orthonormalBasis_spec_of_necSuf (QY : QuadraticSpaceWithBasis Y) (hdim :
 theorem form_splitFamily_of_necSuf (k : ℕ) (hk1 : 1 ≤ k) (hk : k ≤ D.M + D.M) :
     D.space.form (D.splitFamily k) = 1 := calc
   D.space.form (D.splitFamily k) = D.spaceN.form (splitPointToNecSuf D.spaceW (D.splitFamily k)) := rfl
-  _ = D.spaceN.form (D.toNecSuf.splitFamily complexCliffordLaws imaginaryUnit k) := by rw [D.splitFamily_toNecSuf k]
-  _ = 1 := D.toNecSuf.form_splitFamily complexCliffordLaws neg_mul neg_neg imaginaryUnit imaginaryUnit_mul_self k hk1 hk
+  _ = D.spaceN.form (D.toNecSuf.splitFamily complexSplitSpaceLaws imaginaryUnit k) := by rw [D.splitFamily_toNecSuf k]
+  _ = 1 := D.toNecSuf.form_splitFamily complexSplitSpaceLaws neg_mul neg_neg imaginaryUnit imaginaryUnit_mul_self k hk1 hk
 
 /-- 本文 `claim_family_in_split_space_is_orthogonal` の二つ目の場合を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem polarization_splitFamily_first_second_of_necSuf (m m' : ℕ) (hm1 : 1 ≤ m) (hmM : m ≤ D.M) (hm'1 : 1 ≤ m')
@@ -192,10 +196,10 @@ theorem polarization_splitFamily_first_second_of_necSuf (m m' : ℕ) (hm1 : 1 �
       = NecSuf.VectorSpace.polarization D.spaceN.space D.spaceN.form (splitPointToNecSuf D.spaceW (D.splitFamily m))
           (splitPointToNecSuf D.spaceW (D.splitFamily (D.M + m'))) := rfl
   _ = NecSuf.VectorSpace.polarization D.spaceN.space D.spaceN.form
-        (D.toNecSuf.splitFamily complexCliffordLaws imaginaryUnit m)
-        (D.toNecSuf.splitFamily complexCliffordLaws imaginaryUnit (D.M + m')) := by
+        (D.toNecSuf.splitFamily complexSplitSpaceLaws imaginaryUnit m)
+        (D.toNecSuf.splitFamily complexSplitSpaceLaws imaginaryUnit (D.M + m')) := by
       rw [D.splitFamily_toNecSuf m, D.splitFamily_toNecSuf (D.M + m')]
-  _ = 0 := D.toNecSuf.polarization_splitFamily_first_second complexCliffordLaws add_neg_cancel imaginaryUnit m m'
+  _ = 0 := D.toNecSuf.polarization_splitFamily_first_second complexSplitSpaceLaws add_neg_cancel imaginaryUnit m m'
       hm1 hmM hm'1 hm'M
 
 /-- 本文 `claim_family_in_split_space_is_orthogonal` を、必要十分版に ℂ の性質を渡して得たもの。 -/
@@ -206,10 +210,10 @@ theorem polarization_splitFamily_of_necSuf (k l : ℕ) (hk1 : 1 ≤ k) (hk : k �
       = NecSuf.VectorSpace.polarization D.spaceN.space D.spaceN.form (splitPointToNecSuf D.spaceW (D.splitFamily k))
           (splitPointToNecSuf D.spaceW (D.splitFamily l)) := rfl
   _ = NecSuf.VectorSpace.polarization D.spaceN.space D.spaceN.form
-        (D.toNecSuf.splitFamily complexCliffordLaws imaginaryUnit k)
-        (D.toNecSuf.splitFamily complexCliffordLaws imaginaryUnit l) := by
+        (D.toNecSuf.splitFamily complexSplitSpaceLaws imaginaryUnit k)
+        (D.toNecSuf.splitFamily complexSplitSpaceLaws imaginaryUnit l) := by
       rw [D.splitFamily_toNecSuf k, D.splitFamily_toNecSuf l]
-  _ = 0 := D.toNecSuf.polarization_splitFamily complexCliffordLaws add_neg_cancel imaginaryUnit k l hk1 hk hl1 hl hkl
+  _ = 0 := D.toNecSuf.polarization_splitFamily complexSplitSpaceLaws add_neg_cancel imaginaryUnit k l hk1 hk hl1 hl hkl
 
 /-! ### θ と θ' -/
 
@@ -217,12 +221,12 @@ theorem polarization_splitFamily_of_necSuf (k l : ℕ) (hk1 : 1 ≤ k) (hk : k �
 theorem mapToSplit_toNecSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (x : Y) :
     splitPointToNecSuf D.spaceW (D.mapToSplit QY e he x)
-      = D.toNecSuf.mapToSplit complexCliffordLaws imaginaryUnit QY.toNecSuf e he.toNecSuf x := by
+      = D.toNecSuf.mapToSplit complexSplitSpaceLaws imaginaryUnit QY.toNecSuf e he.toNecSuf.isBasis x := by
   show splitPointToNecSuf D.spaceW (linearCombination D.space.space (D.M + D.M)
       (fun k => coordinate QY.space (D.M + D.M) e he.isBasis k x) D.splitFamily)
     = NecSuf.VectorSpace.linearCombination D.spaceN.space (D.M + D.M)
       (fun k => NecSuf.VectorSpace.coordinate QY.space.toNecSuf (D.M + D.M) e he.toNecSuf.isBasis k x)
-      (D.toNecSuf.splitFamily complexCliffordLaws imaginaryUnit)
+      (D.toNecSuf.splitFamily complexSplitSpaceLaws imaginaryUnit)
   rw [toNecSuf_linearCombination]
   exact NecSuf.VectorSpace.linearCombination_eq_of_terms_eq _ (D.M + D.M) _ _ _ _ fun k hk1 hk => by
     rw [coordinate_eq_necSuf QY.space (D.M + D.M) e he.isBasis k hk1 hk x, D.splitFamily_toNecSuf k]
@@ -237,13 +241,13 @@ theorem inverseFamily_eq_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
 /-- 具体版の θ'(y) は、必要十分版の θ' に y を写した点を入れたものである。 -/
 theorem mapFromSplit_eq_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y) (y : W × DualSpace D.spaceW) :
     D.mapFromSplit QY e y
-      = D.toNecSuf.mapFromSplit complexCliffordLaws imaginaryUnit inverseOfTwo QY.toNecSuf e
+      = D.toNecSuf.mapFromSplit complexSplitSpaceLaws imaginaryUnit inverseOfTwo QY.toNecSuf e
           (splitPointToNecSuf D.spaceW y) := by
   show linearCombination QY.space (D.M + D.M)
       (fun l => coordinate D.space.space (D.M + D.M) D.splitBasis D.splitBasis_isBasis l y) (D.inverseFamily QY e)
     = NecSuf.VectorSpace.linearCombination QY.space.toNecSuf (D.M + D.M)
-      (fun l => NecSuf.VectorSpace.coordinate D.spaceN.space (D.M + D.M) (D.toNecSuf.splitBasis complexCliffordLaws)
-        (D.toNecSuf.splitBasis_isBasis complexCliffordLaws) l (splitPointToNecSuf D.spaceW y))
+      (fun l => NecSuf.VectorSpace.coordinate D.spaceN.space (D.M + D.M) (D.toNecSuf.splitBasis complexSplitSpaceLaws)
+        (D.toNecSuf.splitBasis_isBasis complexSplitSpaceLaws) l (splitPointToNecSuf D.spaceW y))
       (D.toNecSuf.inverseFamily imaginaryUnit inverseOfTwo QY.toNecSuf e)
   rw [linearCombination_eq_necSuf, D.inverseFamily_eq_necSuf QY e]
   exact NecSuf.VectorSpace.linearCombination_eq_of_terms_eq _ (D.M + D.M) _ _ _ _ fun l hl1 hl => by
@@ -253,12 +257,12 @@ theorem mapFromSplit_eq_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y) 
 theorem mapToSplit_isIsometry_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) :
     IsIsometry QY.space D.space.space QY.form D.space.form (D.mapToSplit QY e he) := by
-  have hN := D.toNecSuf.mapToSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+  have hN := D.toNecSuf.mapToSplit_isIsometry complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
     imaginaryUnit_mul_self QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e
     he.toNecSuf
   have heq : D.mapToSplit QY e he
-      = fun x => D.splitPointOfNecSuf (D.toNecSuf.mapToSplit complexCliffordLaws imaginaryUnit QY.toNecSuf e
-          he.toNecSuf x) :=
+      = fun x => D.splitPointOfNecSuf (D.toNecSuf.mapToSplit complexSplitSpaceLaws imaginaryUnit QY.toNecSuf e
+          he.toNecSuf.isBasis x) :=
     funext fun x => by rw [← D.mapToSplit_toNecSuf QY e he x]; rfl
   have hof : NecSuf.VectorSpace.IsLinearMap D.spaceN.space D.space.space.toNecSuf D.splitPointOfNecSuf :=
     ⟨fun _ _ => rfl, fun _ _ => rfl⟩
@@ -270,7 +274,7 @@ theorem mapToSplit_isIsometry_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : �
       exact NecSuf.VectorSpace.IsLinearMap.comp hN.isLinearMap hof
     map_form := fun x => calc
       D.space.form (D.mapToSplit QY e he x) = D.spaceN.form (splitPointToNecSuf D.spaceW (D.mapToSplit QY e he x)) := rfl
-      _ = D.spaceN.form (D.toNecSuf.mapToSplit complexCliffordLaws imaginaryUnit QY.toNecSuf e he.toNecSuf x) := by
+      _ = D.spaceN.form (D.toNecSuf.mapToSplit complexSplitSpaceLaws imaginaryUnit QY.toNecSuf e he.toNecSuf.isBasis x) := by
           rw [D.mapToSplit_toNecSuf QY e he x]
       _ = QY.form x := hN.map_form x }
 
@@ -278,7 +282,7 @@ theorem mapToSplit_isIsometry_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : �
 theorem mapFromSplit_splitFamily_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y) (k : ℕ) (hk1 : 1 ≤ k)
     (hk : k ≤ D.M + D.M) : D.mapFromSplit QY e (D.splitFamily k) = e k := by
   rw [D.mapFromSplit_eq_necSuf QY e, D.splitFamily_toNecSuf k]
-  exact D.toNecSuf.mapFromSplit_splitFamily complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+  exact D.toNecSuf.mapFromSplit_splitFamily complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
     imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf e k hk1 hk
 
 /-- 本文 `claim_map_to_split_quadratic_space_sends_family_to_basis` を、必要十分版に ℂ の性質を渡して得たもの。 -/
@@ -287,16 +291,16 @@ theorem mapToSplit_inverseFamily_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e :
     D.mapToSplit QY e he (D.inverseFamily QY e l) = D.splitBasis l := by
   apply D.toNecSuf_injective
   rw [D.mapToSplit_toNecSuf QY e he, D.splitBasis_toNecSuf, D.inverseFamily_eq_necSuf QY e]
-  exact D.toNecSuf.mapToSplit_inverseFamily complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
-    imaginaryUnit_mul_self inverseOfTwo inverseOfTwo_mul QY.toNecSuf e he.toNecSuf l hl1 hl
+  exact D.toNecSuf.mapToSplit_inverseFamily complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self inverseOfTwo inverseOfTwo_mul QY.toNecSuf e he.toNecSuf.isBasis l hl1 hl
 
 /-- 本文 `claim_map_from_split_after_map_to_split_is_identity` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem mapFromSplit_mapToSplit_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) (x : Y) :
     D.mapFromSplit QY e (D.mapToSplit QY e he x) = x := by
   rw [D.mapFromSplit_eq_necSuf QY e, D.mapToSplit_toNecSuf QY e he]
-  exact D.toNecSuf.mapFromSplit_mapToSplit complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
-    imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf e he.toNecSuf x
+  exact D.toNecSuf.mapFromSplit_mapToSplit complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf e he.toNecSuf.isBasis x
 
 /-- 本文 `claim_map_to_split_after_map_from_split_is_identity` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem mapToSplit_mapFromSplit_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
@@ -304,19 +308,19 @@ theorem mapToSplit_mapFromSplit_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : 
     D.mapToSplit QY e he (D.mapFromSplit QY e y) = y := by
   apply D.toNecSuf_injective
   rw [D.mapToSplit_toNecSuf QY e he, D.mapFromSplit_eq_necSuf QY e]
-  exact D.toNecSuf.mapToSplit_mapFromSplit complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
-    imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf e he.toNecSuf
+  exact D.toNecSuf.mapToSplit_mapFromSplit complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self inverseOfTwo inverseOfTwo_mul QY.toNecSuf e he.toNecSuf.isBasis
     (splitPointToNecSuf D.spaceW y)
 
 /-- 本文 `claim_map_from_split_quadratic_space_is_isometry` を、必要十分版に ℂ の性質を渡して得たもの。 -/
 theorem mapFromSplit_isIsometry_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : ℕ → Y)
     (he : IsOrthonormalBasisFamily QY.space QY.form (D.M + D.M) e) :
     IsIsometry D.space.space QY.space D.space.form QY.form (D.mapFromSplit QY e) := by
-  have hN := D.toNecSuf.mapFromSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
-    imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
+  have hN := D.toNecSuf.mapFromSplit_isIsometry complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+    imaginaryUnit_mul_self inverseOfTwo inverseOfTwo_mul QY.toNecSuf
     ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf
   have heq : D.mapFromSplit QY e
-      = fun y => D.toNecSuf.mapFromSplit complexCliffordLaws imaginaryUnit inverseOfTwo QY.toNecSuf e
+      = fun y => D.toNecSuf.mapFromSplit complexSplitSpaceLaws imaginaryUnit inverseOfTwo QY.toNecSuf e
           (splitPointToNecSuf D.spaceW y) :=
     funext (D.mapFromSplit_eq_necSuf QY e)
   have hto : NecSuf.VectorSpace.IsLinearMap D.space.space.toNecSuf D.spaceN.space (splitPointToNecSuf D.spaceW) :=
@@ -329,7 +333,7 @@ theorem mapFromSplit_isIsometry_of_necSuf (QY : QuadraticSpaceWithBasis Y) (e : 
       exact NecSuf.VectorSpace.IsLinearMap.comp hto hN.isLinearMap
     map_form := fun y => calc
       QY.form (D.mapFromSplit QY e y)
-          = QY.form (D.toNecSuf.mapFromSplit complexCliffordLaws imaginaryUnit inverseOfTwo QY.toNecSuf e
+          = QY.form (D.toNecSuf.mapFromSplit complexSplitSpaceLaws imaginaryUnit inverseOfTwo QY.toNecSuf e
               (splitPointToNecSuf D.spaceW y)) := by rw [D.mapFromSplit_eq_necSuf QY e y]
       _ = D.spaceN.form (splitPointToNecSuf D.spaceW y) := hN.map_form _
       _ = D.space.form y := rfl }
@@ -359,11 +363,11 @@ theorem splitToCl_inducedHom_mapToSplit (QY : QuadraticSpaceWithBasis Y) (e : �
     D.splitTransport.toCl
         (QuadraticSpaceWithBasis.inducedHom QY D.space (D.mapToSplit QY e he) (D.mapToSplit_isIsometry QY e he) a)
       = NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom complexCliffordLaws add_neg_cancel QY.toNecSuf D.spaceN
-          (D.toNecSuf.mapToSplit complexCliffordLaws imaginaryUnit QY.toNecSuf e he.toNecSuf)
-          (D.toNecSuf.mapToSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+          (D.toNecSuf.mapToSplit complexSplitSpaceLaws imaginaryUnit QY.toNecSuf e he.toNecSuf.isBasis)
+          (D.toNecSuf.mapToSplit_isIsometry complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
             imaginaryUnit_mul_self QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm)
             e he.toNecSuf).isLinearMap
-          (D.toNecSuf.mapToSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+          (D.toNecSuf.mapToSplit_isIsometry complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
             imaginaryUnit_mul_self QY.toNecSuf ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm)
             e he.toNecSuf).map_form
           ((QuadraticSpaceWithBasis.transportToNecSuf QY).toCl a) :=
@@ -394,12 +398,12 @@ theorem toCl_inducedHom_mapFromSplit (QY : QuadraticSpaceWithBasis Y) (e : ℕ �
     (QuadraticSpaceWithBasis.transportToNecSuf QY).toCl
         (QuadraticSpaceWithBasis.inducedHom D.space QY (D.mapFromSplit QY e) (D.mapFromSplit_isIsometry QY e he) x)
       = NecSuf.Clifford.QuadraticSpaceWithBasis.inducedHom complexCliffordLaws add_neg_cancel D.spaceN QY.toNecSuf
-          (D.toNecSuf.mapFromSplit complexCliffordLaws imaginaryUnit inverseOfTwo QY.toNecSuf e)
-          (D.toNecSuf.mapFromSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
-            imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
+          (D.toNecSuf.mapFromSplit complexSplitSpaceLaws imaginaryUnit inverseOfTwo QY.toNecSuf e)
+          (D.toNecSuf.mapFromSplit_isIsometry complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+            imaginaryUnit_mul_self inverseOfTwo inverseOfTwo_mul QY.toNecSuf
             ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf).isLinearMap
-          (D.toNecSuf.mapFromSplit_isIsometry complexCliffordLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
-            imaginaryUnit_mul_self inverseOfTwo isInverseOfTwo_inverseOfTwo QY.toNecSuf
+          (D.toNecSuf.mapFromSplit_isIsometry complexSplitSpaceLaws add_neg_cancel neg_mul neg_neg imaginaryUnit
+            imaginaryUnit_mul_self inverseOfTwo inverseOfTwo_mul QY.toNecSuf
             ((isQuadraticForm_iff_necSuf QY.space QY.form).1 QY.isQuadraticForm) e he.toNecSuf).map_form
           (D.splitTransport.toCl x) :=
   equal_of_agree_on_generators_of_necSuf

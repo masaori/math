@@ -219,7 +219,7 @@ theorem exists_orthonormal_basis [Inv K] (L : OrthogonalizationLaws K)
         = t i * polarization S q (e' i) (S.smul (t j) (e' j)) :=
           (hq.isQuadraticForm.polarization_isLinearForm (S.smul (t j) (e' j))).map_smul (t i) (e' i)
       _ = t i * (t j * polarization S q (e' i) (e' j)) := by
-          rw [(polarization_isLinearForm_right L.add_assoc L.add_comm S q hq.isQuadraticForm (e' i)).map_smul
+          rw [(polarization_isLinearForm_right L.add_assoc L.add_comm S q hq.isQuadraticForm.polarization_isLinearForm (e' i)).map_smul
             (t j) (e' j)]
       _ = t i * (t j * 0) := by rw [he'orth i j hi1 hin hj1 hjn hij]
       _ = 0 := by rw [L.mul_zero (t j), L.mul_zero (t i)]
