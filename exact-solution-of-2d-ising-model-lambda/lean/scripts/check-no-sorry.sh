@@ -296,7 +296,6 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit_skew_product_neg_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit_skew_signed_term_neg_from_necSuf
 
-  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_sign
   Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_sign
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_sign
   Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_sign_from_necSuf

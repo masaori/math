@@ -2425,10 +2425,11 @@ N\lambda\le_{\Lambda}N\mu
                                 " の共通分母であり、",
                                 math(String.raw`k\lambda_N`),
                                 " がその証人である。",
-                                ref("def_common_denominator"),
-                                " の一意性により、証人はこれに限るので ",
-                                math(String.raw`\lambda_{kN}=k\lambda_N`),
-                                " である。使ったのは有理数倍の結合則と、整数倍と ",
+                              ]),
+                              displayMath(String.raw`\lambda_{kN}=k\lambda_N
+\qquad\bigl(\because\ \blkref{def_common_denominator}\text{ の証人の一意性}\bigr)`),
+                              paragraph([
+                                "使ったのは有理数倍の結合則と、整数倍と ",
                                 math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}`),
                                 " の交換だけである。",
                               ]),
@@ -18864,7 +18865,6 @@ R_{\mathrm{odd}}(\sigma)
                     labels: ["claim_invariant_subset_reversal_sign"],
                     habitat: "Z",
                     lean: [
-                      "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_sign",
                       "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_finiteOrderedSign",
                       "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_sign",
                       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_sign",

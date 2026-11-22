@@ -10,7 +10,6 @@ import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
 open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
@@ -95,25 +94,18 @@ theorem invariantSubsetReversal_finiteOrderedSign (C : Finset J) (σ : Equiv.Per
     _ = 1 * finiteOrderedSign σ := congrArg (· * finiteOrderedSign σ) hSquare
     _ = finiteOrderedSign σ := one_mul _
 
-theorem invariantSubsetReversal_sign (C : Finset J) (σ : Equiv.Perm J)
-    (hC : ∀ i : J, σ i ∈ C ↔ i ∈ C) :
-    sign (fun i j : J => i < j) (invariantSubsetReversal C σ hC) =
-      sign (fun i j : J => i < j) σ := by
-  change finiteOrderedSign (invariantSubsetReversal C σ hC) = finiteOrderedSign σ
-  exact invariantSubsetReversal_finiteOrderedSign C σ hC
-
 /-- 選んだ奇数軌道の台の不変性を供給する、本文の二等号。 -/
 theorem selectedOddOrbitReversal_sign (σ : Equiv.Perm J)
     (hσ : σ ∈ oddOrbitDerangements J) :
-    sign (fun i j : J => i < j) (selectedOddOrbitReversal σ hσ.2) =
-      sign (fun i j : J => i < j) σ := by
+    finiteOrderedSign (selectedOddOrbitReversal σ hσ.2) =
+      finiteOrderedSign σ := by
   calc
-    sign (fun i j : J => i < j) (selectedOddOrbitReversal σ hσ.2) =
-        sign (fun i j : J => i < j)
+    finiteOrderedSign (selectedOddOrbitReversal σ hσ.2) =
+        finiteOrderedSign
           (invariantSubsetReversal (selectedOddOrbitFinset σ hσ.2) σ
             (selectedOddOrbitFinset_invariant σ hσ.2)) := rfl
-    _ = sign (fun i j : J => i < j) σ :=
-      invariantSubsetReversal_sign (selectedOddOrbitFinset σ hσ.2) σ
+    _ = finiteOrderedSign σ :=
+      invariantSubsetReversal_finiteOrderedSign (selectedOddOrbitFinset σ hσ.2) σ
         (selectedOddOrbitFinset_invariant σ hσ.2)
 
 end Ising2DLambda.AlgebraicEigenvalue
