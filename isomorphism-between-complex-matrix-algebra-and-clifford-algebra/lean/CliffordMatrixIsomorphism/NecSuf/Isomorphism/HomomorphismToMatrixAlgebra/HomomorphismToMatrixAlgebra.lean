@@ -496,7 +496,7 @@ theorem homomorphismToMatrix_annihilation (hneg : ∀ a : K, a + -a = 0) {i : �
     fun k hk1 hkM => calc
     Bv.smul (coordinate D.spaceW D.M D.w D.isBasis k D.spaceW.zero) (creationFamily n D.M k)
         = Bv.smul 0 (creationFamily n D.M k) := by
-          rw [(coordinate_isLinearForm D.spaceW C.uniqueness D.M D.w D.isBasis k hk1 hkM).map_zero h00
+          rw [VectorSpace.IsLinearForm.map_zero (coordinate_isLinearForm D.spaceW C.uniqueness D.M D.w D.isBasis k hk1 hkM).toPreservesSmul h00
             C.uniqueness.zero_mul]
     _ = Bv.zero := VectorSpace.zero_smul_eq_zero Bv h00 (creationFamily n D.M k)
   -- 準備の二つ目：f_i(w_k) ∗_B c_k^T = δ_{k,i} ∗_B c_k^T

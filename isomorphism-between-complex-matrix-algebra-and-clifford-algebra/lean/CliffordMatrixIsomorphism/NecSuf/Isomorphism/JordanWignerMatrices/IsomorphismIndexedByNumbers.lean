@@ -155,7 +155,7 @@ theorem numberedHomomorphisms_mutually_inverse_of_family (hneg : ∀ a : K, a + 
     -- claim_inverse_reindexing_after_reindexing_of_matrices_is_identity
     _ = Ω' (Ω a) := by
         rw [show μ (ν (Ω a)) = Ω a from
-          inverseReindexMatrix_reindexMatrix (firstSiteHighestNumbering_isNumbering D.M) (Ω a)]
+          inverseReindexMatrix_reindexMatrix (firstSiteHighestNumbering_isNumbering D.M).surjective (Ω a)]
     -- theorem_conjugated_homomorphisms_between_general_clifford_algebra_and_matrix_algebra_are_mutually_inverse_isomorphisms
     _ = a := hΩ'Ω a
   have hΩ₁Ω₁' : ∀ G : Mat K (Idx (twoPower D.M)), Ω₁ (Ω₁' G) = G := fun G => calc

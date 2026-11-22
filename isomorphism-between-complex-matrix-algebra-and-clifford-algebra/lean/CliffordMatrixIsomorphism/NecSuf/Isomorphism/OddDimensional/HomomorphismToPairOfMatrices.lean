@@ -211,7 +211,7 @@ theorem mapToPairOfMatrices_mul_self (hneg : ∀ a : K, a + -a = 0) (p : (W × D
     _ = Φ (A.add (A.mul ((D.space C).γ C p.1) (D.parityElement C)) (A.mul (D.parityElement C) ((D.space C).γ C p.1))) :=
           (hΦ.map_add _ _).symm
     _ = Φ A.zero := by rw [D.γ_anticommute_parityElement C hneg p.1]
-    _ = B.zero := hΦ.isLinearMap_underlying.map_zero C.congruence.zero_add_zero
+    _ = B.zero := VectorSpace.IsLinearMap.map_zero hΦ.isLinearMap_underlying.toPreservesSmul C.congruence.zero_add_zero
   have hsq := fun s => square_of_add_smul_of_anticommuting B X Y C.congruence.zero_add_zero C.uniqueness.mul_zero
     ((D.space C).form p.1) hX hY hXY s
   calc (D.pairOfMatricesAlgebra C).mul (D.mapToPairOfMatrices C hneg p) (D.mapToPairOfMatrices C hneg p)
@@ -309,8 +309,8 @@ theorem homomorphismToPairOfMatrices_addedGenerator (hneg : ∀ a : K, a + -a = 
   let γ := (D.space C).γ C
   let η := Φ (D.parityElement C)
   have h0 : Φ (γ (D.space C).space.zero) = B.zero :=
-    (IsLinearMap.comp ((D.space C).γ_isLinearMap C)
-      (D.homomorphismToMatrix_isHom C hneg).isLinearMap_underlying).map_zero C.congruence.zero_add_zero
+    VectorSpace.IsLinearMap.map_zero (IsLinearMap.comp ((D.space C).γ_isLinearMap C)
+      (D.homomorphismToMatrix_isHom C hneg).isLinearMap_underlying).toPreservesSmul C.congruence.zero_add_zero
   calc D.homomorphismToPairOfMatrices C hneg (D.addedGenerator C)
       = D.homomorphismToPairOfMatrices C hneg ((D.oddSpace C).γ C (D.addedUnitVector C)) := rfl
     _ = D.mapToPairOfMatrices C hneg (D.addedUnitVector C) := D.homomorphismToPairOfMatrices_γ C hneg _

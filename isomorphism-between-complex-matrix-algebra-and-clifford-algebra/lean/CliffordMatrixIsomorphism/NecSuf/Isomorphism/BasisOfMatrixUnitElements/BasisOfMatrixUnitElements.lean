@@ -140,7 +140,7 @@ theorem matrixUnitElementFamily_linearlyIndependent (hneg : ∀ a : K, a + -a = 
         (D.homomorphismToMatrix_linearCombination_entry C hneg h0 h1 c jj).symm
     _ = Mat.entry (Φ A.zero) (pairNumbering D.M jj).1 (pairNumbering D.M jj).2 := by rw [hc]; rfl
     _ = Mat.entry B.zero (pairNumbering D.M jj).1 (pairNumbering D.M jj).2 := by
-        rw [show Φ A.zero = B.zero from hΦ.map_zero h00]
+        rw [show Φ A.zero = B.zero from VectorSpace.IsLinearMap.map_zero hΦ.toPreservesSmul h00]
     _ = 0 := rfl
 
 /-- 本文 `claim_family_of_matrix_unit_elements_spans_clifford_algebra` の式の必要十分版。 -/

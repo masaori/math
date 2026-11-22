@@ -108,7 +108,7 @@ theorem IsComplexAlgebraHomomorphism.map_orderedProduct_of_necSuf {SA : ComplexA
     {SB : ComplexAlgebra B} {φ : A → B} (hφ : IsComplexAlgebraHomomorphism SA SB φ) (n : ℕ)
     (x : ℕ → A) : φ (orderedProduct SA n x) = orderedProduct SB n (fun k => φ (x k)) := by
   rw [orderedProduct_eq_necSuf, orderedProduct_eq_necSuf]
-  exact NecSuf.AlgebraOver.IsAlgebraHomomorphism.map_orderedProduct
-    ((isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ) n x
+  have hN := (isComplexAlgebraHomomorphism_iff_necSuf SA SB φ).1 hφ
+  exact NecSuf.AlgebraOver.IsAlgebraHomomorphism.map_orderedProduct hN.map_one hN.map_mul n x
 
 end CliffordMatrixIsomorphism.ComplexAlgebra

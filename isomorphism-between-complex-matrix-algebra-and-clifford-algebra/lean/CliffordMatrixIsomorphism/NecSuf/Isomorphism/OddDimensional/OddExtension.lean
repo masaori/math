@@ -257,7 +257,7 @@ theorem polarization_oddInclusion_oddSecondInclusion_one (L : ValuedMapsLaws K) 
   _ = polarization (oddVectorSpace L S) (oddForm q) (v, 0) (S.zero, 1) := rfl
   _ = polarization S q v S.zero + (0 * 1 + 1 * 0) := polarization_oddForm L hneg hzero_add S q v S.zero 0 1
   _ = polarization S q v S.zero := by rw [hzero_mul 1, L.one_mul 0, h00, L.add_zero (polarization S q v S.zero)]
-  _ = 0 := (polarization_isLinearForm_right L.add_assoc L.add_comm S q hq v).map_zero h00 hzero_mul
+  _ = 0 := VectorSpace.IsLinearForm.map_zero (polarization_isLinearForm_right L.add_assoc L.add_comm S q hq v).toPreservesSmul h00 hzero_mul
 
 end CliffordMatrixIsomorphism.NecSuf.VectorSpace
 

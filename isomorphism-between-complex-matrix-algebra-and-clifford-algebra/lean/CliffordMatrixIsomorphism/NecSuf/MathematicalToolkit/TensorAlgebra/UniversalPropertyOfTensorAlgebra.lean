@@ -171,7 +171,7 @@ theorem sum_extensionOnPower_eq_of_le (L : ScalarMultipleOfZeroLaws K) (x : Dire
       _ = SA.toVectorSpace.smul 1
             (P.extensionOnPower hP SA hf (N + 1 + t.1 - 1) (P.space (N + 1 + t.1 - 1)).zero) := by rw [hx0]
       _ = SA.toVectorSpace.smul 1 SA.toVectorSpace.zero := by
-          rw [(P.extensionOnPower_isLinearMap hP SA hf _).map_zero L.zero_add_zero]
+          rw [VectorSpace.IsLinearMap.map_zero (P.extensionOnPower_isLinearMap hP SA hf _).toPreservesSmul L.zero_add_zero]
       _ = SA.toVectorSpace.zero := smul_zero_eq_zero _ L.zero_add_zero L.mul_zero 1
   calc sumOverFiniteSet SA.toVectorSpace (isFiniteSet_upTo (N + d)) (fun _ => 1)
         (fun i => P.extensionOnPower hP SA hf i.1 (x.1 i.1))
@@ -286,7 +286,7 @@ theorem extension_embedComponent (L : ScalarMultipleOfZeroLaws K) (k : ℕ) (G :
         P.extensionOnPower hP SA hf i.1 ((embedComponent P.space k G).1 i.1)
             = P.extensionOnPower hP SA hf i.1 (P.space i.1).zero := by
               rw [embedComponent_of_ne P.space k G i.1 hik]
-        _ = SA.toVectorSpace.zero := (P.extensionOnPower_isLinearMap hP SA hf i.1).map_zero L.zero_add_zero
+        _ = SA.toVectorSpace.zero := VectorSpace.IsLinearMap.map_zero (P.extensionOnPower_isLinearMap hP SA hf i.1).toPreservesSmul L.zero_add_zero
       rw [kroneckerDelta, if_neg hi, hg, smul_zero_eq_zero _ L.zero_add_zero L.mul_zero,
         smul_zero_eq_zero _ L.zero_add_zero L.mul_zero]
   calc P.extension hP SA hf (embedComponent P.space k G)

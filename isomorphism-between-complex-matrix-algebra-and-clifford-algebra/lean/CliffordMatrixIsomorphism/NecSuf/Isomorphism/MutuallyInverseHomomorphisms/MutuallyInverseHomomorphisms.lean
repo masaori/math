@@ -100,11 +100,11 @@ theorem homomorphismToMatrix_matrixUnitElement (hneg : ∀ a : K, a + -a = 0) (S
   -- （ハ）三つの番号順の積の像
   have hcre : Φ ((D.orderedCreationProduct C) S) = AlgebraOver.orderedProduct B D.M Y := calc
     Φ ((D.orderedCreationProduct C) S) = Φ (AlgebraOver.orderedProduct A D.M ((D.selectedCreationFactor C) S)) := rfl
-    _ = AlgebraOver.orderedProduct B D.M (fun t => Φ ((D.selectedCreationFactor C) S t)) := hΦ.map_orderedProduct D.M _
+    _ = AlgebraOver.orderedProduct B D.M (fun t => Φ ((D.selectedCreationFactor C) S t)) := AlgebraOver.IsAlgebraHomomorphism.map_orderedProduct hΦ.map_one hΦ.map_mul D.M _
     _ = AlgebraOver.orderedProduct B D.M Y := orderedProduct_congr B D.M _ _ hY
   have hvac : Φ (D.vacuumElement C) = matrixUnit E0 E0 := calc
     Φ (D.vacuumElement C) = Φ (AlgebraOver.orderedProduct A D.M (D.vacuumFactor C)) := rfl
-    _ = AlgebraOver.orderedProduct B D.M (fun i => Φ ((D.vacuumFactor C) i)) := hΦ.map_orderedProduct D.M _
+    _ = AlgebraOver.orderedProduct B D.M (fun i => Φ ((D.vacuumFactor C) i)) := AlgebraOver.IsAlgebraHomomorphism.map_orderedProduct hΦ.map_one hΦ.map_mul D.M _
     _ = AlgebraOver.orderedProduct B D.M (annihilationTimesCreation C.valuedMaps n D.M) := orderedProduct_congr B D.M _ _ hx
     _ = matrixUnit E0 E0 := orderedProduct_annihilationTimesCreation_eq_vacuumMatrixUnit C.valuedMaps C.mul_comm
         C.uniqueness.mul_zero C.mul_one C.uniqueness.zero_mul n C.signLaws D.M
@@ -112,7 +112,7 @@ theorem homomorphismToMatrix_matrixUnitElement (hneg : ∀ a : K, a + -a = 0) (S
     Φ ((D.reverseOrderedAnnihilationProduct C) T)
         = Φ (AlgebraOver.orderedProduct A D.M ((D.reversedSelectedAnnihilationFactor C) T)) := rfl
     _ = AlgebraOver.orderedProduct B D.M (fun k => Φ ((D.reversedSelectedAnnihilationFactor C) T k)) :=
-        hΦ.map_orderedProduct D.M _
+        AlgebraOver.IsAlgebraHomomorphism.map_orderedProduct hΦ.map_one hΦ.map_mul D.M _
     _ = AlgebraOver.orderedProduct B D.M Zr := orderedProduct_congr B D.M _ _ hZr
   -- （ニ）E_{S,∅} ·_B E_{∅,∅} = E_{S,∅}
   have hD : B.mul (matrixUnit S E0) (matrixUnit E0 E0) = matrixUnit S E0 := calc
@@ -383,7 +383,7 @@ theorem γ_pair_eq_creation_add_annihilation (x : W) (g : DualSpace D.spaceW) :
       = linearCombination Av D.M (fun k => g.1 (D.w k)) (D.annihilation C) := calc
     ((D.space C).γ C) (embedSecond SW g) = (fun h => ((D.space C).γ C) (embedSecond SW h)) g := rfl
     _ = (fun h => ((D.space C).γ C) (embedSecond SW h)) (linearCombination SWd D.M (fun k => g.1 (D.w k)) D.f) :=
-        congrArg (fun h => ((D.space C).γ C) (embedSecond SW h)) (dualBasis_spans C.dualSpaceVectorSpaceLaws C.uniqueness.zero_add C.mul_one SW D.M D.w D.isBasis D.f D.isDualBasis g)
+        congrArg (fun h => ((D.space C).γ C) (embedSecond SW h)) (dualBasis_spans C.dualSpaceVectorSpaceLaws C.uniqueness.zero_add C.mul_one SW D.M D.w D.isBasis.spans D.f D.isDualBasis g)
     _ = linearCombination Av D.M (fun k => g.1 (D.w k)) (fun k => ((D.space C).γ C) (embedSecond SW (D.f k))) :=
         h2.map_linearCombination h00 _ _ _
     _ = linearCombination Av D.M (fun k => g.1 (D.w k)) (D.annihilation C) := rfl

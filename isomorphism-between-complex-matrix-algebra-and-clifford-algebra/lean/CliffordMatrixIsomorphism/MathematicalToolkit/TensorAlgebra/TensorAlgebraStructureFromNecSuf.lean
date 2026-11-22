@@ -302,7 +302,7 @@ theorem embedComponent_tau_mem_of_necSuf {B : Set (DirectSumOfFamily P.space)}
     (hB : ComplexAlgebra.IsSubalgebra P.tensorAlgebra B) (hsub : Set.range P.embedVector ⊆ B) :
     ∀ (k : ℕ) (u : Tuple V k), embedComponent P.space k (P.τ k u) ∈ B := by
   rw [ComplexAlgebra.isSubalgebra_iff_necSuf, P.tensorAlgebra_toNecSuf] at hB
-  exact P.toNecSuf.embedComponent_tau_mem mul_comm complexScalarMultipleOfZeroLaws (-1) (add_neg_cancel 1) hB hsub
+  exact P.toNecSuf.embedComponent_tau_mem mul_comm complexScalarMultipleOfZeroLaws (-1) (add_neg_cancel 1) hB.one_mem hB.mul_mem hsub
 
 end TensorPowers
 

@@ -145,13 +145,13 @@ theorem smul_zero_eq_zero_of_necSuf (S : ComplexVectorSpace V) (l : ℂ) :
 
 theorem IsComplexLinearForm.map_zero_of_necSuf {S : ComplexVectorSpace V} {g : V → ℂ}
     (hg : IsComplexLinearForm S g) : g S.zero = 0 :=
-  NecSuf.VectorSpace.IsLinearForm.map_zero ((isComplexLinearForm_iff_necSuf S g).1 hg)
+  NecSuf.VectorSpace.IsLinearForm.map_zero ((isComplexLinearForm_iff_necSuf S g).1 hg).toPreservesSmul
     (_root_.add_zero 0) zero_mul
 
 theorem IsComplexLinearMap.map_zero_of_necSuf {SV : ComplexVectorSpace V}
     {SU : ComplexVectorSpace U} {f : V → U} (hf : IsComplexLinearMap SV SU f) :
     f SV.zero = SU.zero :=
-  NecSuf.VectorSpace.IsLinearMap.map_zero ((isComplexLinearMap_iff_necSuf SV SU f).1 hf) (_root_.add_zero 0)
+  NecSuf.VectorSpace.IsLinearMap.map_zero ((isComplexLinearMap_iff_necSuf SV SU f).1 hf).toPreservesSmul (_root_.add_zero 0)
 
 /-! ### 線型結合 -/
 
@@ -387,7 +387,7 @@ theorem dualBasis_spans_of_necSuf (S : ComplexVectorSpace V) (n : ℕ) (b : ℕ 
     (hb : IsBasisFamily S n b) (f : ℕ → DualSpace S) (hf : IsDualBasis S n b f) (g : DualSpace S) :
     g = linearCombination (dualSpaceVectorSpace S) n (fun k => g.1 (b k)) f := by
   have hN := NecSuf.VectorSpace.dualBasis_spans complexDualSpaceVectorSpaceLaws zero_add mul_one
-    S.toNecSuf n b ((isBasisFamily_iff_necSuf S n b).1 hb) (fun k => (f k).toNecSuf) hf g.toNecSuf
+    S.toNecSuf n b ((isBasisFamily_iff_necSuf S n b).1 hb).spans (fun k => (f k).toNecSuf) hf g.toNecSuf
   apply Subtype.ext
   show g.1 = (partialLinearCombination (dualSpaceVectorSpace S) (fun k => g.1 (b k)) f n).1
   rw [dualSpace_partialLinearCombination_val_eq_necSuf]
@@ -411,7 +411,7 @@ theorem dualBasis_isBasis_of_necSuf (S : ComplexVectorSpace V) (n : ℕ) (b : �
     (hb : IsBasisFamily S n b) (f : ℕ → DualSpace S) (hf : IsDualBasis S n b f) :
     IsBasisFamily (dualSpaceVectorSpace S) n f := by
   have hN := NecSuf.VectorSpace.dualBasis_isBasis complexDualSpaceVectorSpaceLaws zero_add mul_one S.toNecSuf n b
-    ((isBasisFamily_iff_necSuf S n b).1 hb) (fun k => (f k).toNecSuf) hf
+    ((isBasisFamily_iff_necSuf S n b).1 hb).spans (fun k => (f k).toNecSuf) hf
   refine ⟨fun c hc => hN.linearlyIndependent c (Subtype.ext ?_), fun g => ?_⟩
   · exact (dualSpace_partialLinearCombination_val_eq_necSuf S f c n).symm.trans (congrArg Subtype.val hc)
   · obtain ⟨c, hc⟩ := hN.spans g.toNecSuf

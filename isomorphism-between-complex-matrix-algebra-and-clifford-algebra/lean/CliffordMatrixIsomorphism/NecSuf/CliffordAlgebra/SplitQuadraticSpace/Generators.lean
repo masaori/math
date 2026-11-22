@@ -43,7 +43,7 @@ def space : QuadraticSpaceWithBasis K (W × DualSpace D.spaceW) where
   basis := concatenatedFamily D.spaceW (dualSpaceVectorSpace C.dualSpaceVectorSpaceLaws D.spaceW) D.M D.w D.f
   isBasis := concatenatedFamily_isBasisFamily D.spaceW (dualSpaceVectorSpace C.dualSpaceVectorSpaceLaws D.spaceW) D.M D.M D.w D.f
     C.dualSpaceVectorSpaceLaws.zero_add_zero C.dualSpaceVectorSpaceLaws.mul_zero D.isBasis
-    (dualBasis_isBasis C.dualSpaceVectorSpaceLaws C.uniqueness.zero_add C.mul_one D.spaceW D.M D.w D.isBasis D.f D.isDualBasis)
+    (dualBasis_isBasis C.dualSpaceVectorSpaceLaws C.uniqueness.zero_add C.mul_one D.spaceW D.M D.w D.isBasis.spans D.f D.isDualBasis)
   form := splitQuadraticForm D.spaceW
 
 /-- 本文 `def_creation_generator_of_split_clifford_algebra` の必要十分版。 -/
@@ -132,7 +132,7 @@ theorem annihilation_anticommute (hneg : ∀ a : K, a + -a = 0) (i j : ℕ) :
     _ = A.smul ((D.f i).1 D.spaceW.zero + (D.f j).1 D.spaceW.zero) A.one := by
         rw [polarization_splitQuadraticForm C.dualSpaceVectorSpaceLaws D.spaceW hneg D.spaceW.zero D.spaceW.zero (D.f i) (D.f j)]
     _ = A.smul (0 + 0) A.one := by
-        rw [(D.f i).2.map_zero C.dualSpaceVectorSpaceLaws.zero_add_zero C.dualSpaceVectorSpaceLaws.zero_mul, (D.f j).2.map_zero C.dualSpaceVectorSpaceLaws.zero_add_zero C.dualSpaceVectorSpaceLaws.zero_mul]
+        rw [VectorSpace.IsLinearForm.map_zero (D.f i).2.toPreservesSmul C.dualSpaceVectorSpaceLaws.zero_add_zero C.dualSpaceVectorSpaceLaws.zero_mul, VectorSpace.IsLinearForm.map_zero (D.f j).2.toPreservesSmul C.dualSpaceVectorSpaceLaws.zero_add_zero C.dualSpaceVectorSpaceLaws.zero_mul]
     _ = A.smul 0 A.one := by rw [C.dualSpaceVectorSpaceLaws.zero_add_zero]
     _ = A.zero := AlgebraOver.zero_smul_eq_zero A C.congruence.zero_add_zero A.one
 

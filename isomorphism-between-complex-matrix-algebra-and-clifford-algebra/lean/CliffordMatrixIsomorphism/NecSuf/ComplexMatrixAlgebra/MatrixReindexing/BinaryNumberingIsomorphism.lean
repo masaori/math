@@ -34,7 +34,7 @@ def binaryReindexMatrix (M : ℕ) : Mat K (PowerSet M) → Mat K (Idx (twoPower 
 
 /-- 本文 `theorem_binary_numbering_gives_isomorphism_of_matrix_algebras` の μ_{e_M} の必要十分版。 -/
 noncomputable def binaryInverseReindexMatrix (M : ℕ) : Mat K (Idx (twoPower M)) → Mat K (PowerSet M) :=
-  inverseReindexMatrix (binaryNumbering_isNumbering M)
+  inverseReindexMatrix (binaryNumbering_isNumbering M).surjective
 
 /-- 本文 `theorem_binary_numbering_gives_isomorphism_of_matrix_algebras` の列挙した二つの主張の必要十分版。
 L・hcomm・hmul0 は二つの代数を作るためだけに要る。 -/
@@ -50,17 +50,17 @@ theorem binaryReindex_isomorphism [Add K] [Mul K] [One K] [Zero K] (L : ValuedMa
       (binaryNumbering_isNumbering M),
     inverseReindexMatrix_isAlgebraHomomorphism L hcomm hmul0 (isFiniteSet_powerSet M)
       (binaryNumbering_isNumbering M),
-    inverseReindexMatrix_reindexMatrix (binaryNumbering_isNumbering M),
+    inverseReindexMatrix_reindexMatrix (binaryNumbering_isNumbering M).surjective,
     reindexMatrix_inverseReindexMatrix (binaryNumbering_isNumbering M)⟩
 
 /-- 本文 `theorem_binary_numbering_gives_isomorphism_of_matrix_algebras` の証明の「単射であること」の必要十分版。 -/
 theorem binaryReindexMatrix_injective (M : ℕ) (F F' : Mat K (PowerSet M))
     (h : binaryReindexMatrix M F = binaryReindexMatrix M F') : F = F' := calc
   F = binaryInverseReindexMatrix M (binaryReindexMatrix M F) :=
-      (inverseReindexMatrix_reindexMatrix (binaryNumbering_isNumbering M) F).symm
+      (inverseReindexMatrix_reindexMatrix (binaryNumbering_isNumbering M).surjective F).symm
   -- ν_{e_M}(F) = ν_{e_M}(F')
   _ = binaryInverseReindexMatrix M (binaryReindexMatrix M F') := by rw [h]
-  _ = F' := inverseReindexMatrix_reindexMatrix (binaryNumbering_isNumbering M) F'
+  _ = F' := inverseReindexMatrix_reindexMatrix (binaryNumbering_isNumbering M).surjective F'
 
 /-- 本文 `theorem_binary_numbering_gives_isomorphism_of_matrix_algebras` の証明の「全射であること」の必要十分版。 -/
 theorem binaryReindexMatrix_surjective (M : ℕ) (G : Mat K (Idx (twoPower M))) :

@@ -76,7 +76,7 @@ theorem kernel_isTwoSidedIdeal [Zero K] {SA : AlgebraOver K A} {SB : AlgebraOver
   exact {
     zero_mem := by
       show φ SA.zero = SB.zero
-      exact hφ.isLinearMap_underlying.map_zero h00
+      exact VectorSpace.IsLinearMap.map_zero hφ.isLinearMap_underlying.toPreservesSmul h00
     add_mem := by
       intro x y hx hy
       show φ (SA.add x y) = SB.zero

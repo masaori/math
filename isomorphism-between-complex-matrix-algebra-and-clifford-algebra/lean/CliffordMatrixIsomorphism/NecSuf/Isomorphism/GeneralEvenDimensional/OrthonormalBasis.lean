@@ -246,7 +246,7 @@ theorem polarization_partialLinearCombination_eq_zero (h00 : (0 : K) + 0 = 0) (h
   induction j with
   | zero =>
     intro _
-    exact (hq.polarization_isLinearForm (e m)).map_zero h00 h0mul
+    exact VectorSpace.IsLinearForm.map_zero (hq.polarization_isLinearForm (e m)).toPreservesSmul h00 h0mul
   | succ j ih =>
     intro hj
     calc polarization S q (partialLinearCombination S ν e (j + 1)) (e m)

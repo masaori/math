@@ -90,12 +90,12 @@ theorem rightMul_isLinearMap (SA : AlgebraOver K A) (a : A) :
 /-- 本文 `claim_zero_times_element_in_algebra_is_zero`：0_A ·_A w = 0_A。 -/
 theorem zero_mul_eq_zero [Zero K] (h00 : (0 : K) + 0 = 0) (SA : AlgebraOver K A) (w : A) : SA.mul SA.zero w = SA.zero := calc
   SA.mul SA.zero w = (fun x => SA.mul x w) SA.zero := rfl
-  _ = SA.zero := (rightMul_isLinearMap SA w).map_zero h00
+  _ = SA.zero := VectorSpace.IsLinearMap.map_zero (rightMul_isLinearMap SA w).toPreservesSmul h00
 
 /-- 本文 `claim_element_times_zero_in_algebra_is_zero`：w ·_A 0_A = 0_A。 -/
 theorem mul_zero_eq_zero [Zero K] (h00 : (0 : K) + 0 = 0) (SA : AlgebraOver K A) (w : A) : SA.mul w SA.zero = SA.zero := calc
   SA.mul w SA.zero = (fun x => SA.mul w x) SA.zero := rfl
-  _ = SA.zero := (leftMul_isLinearMap SA w).map_zero h00
+  _ = SA.zero := VectorSpace.IsLinearMap.map_zero (leftMul_isLinearMap SA w).toPreservesSmul h00
 
 /-- 本文 `claim_anticommutator_with_linear_combination_in_algebra`：R := Σ_{l=1}^{n} μ_l ∗_A r_l について
 R ·_A a +_A a ·_A R = Σ_{l=1}^{n} μ_l ∗_A (r_l ·_A a +_A a ·_A r_l)。 -/

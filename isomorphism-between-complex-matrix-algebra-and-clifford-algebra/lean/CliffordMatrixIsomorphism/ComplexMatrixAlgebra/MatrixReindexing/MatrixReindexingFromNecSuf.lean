@@ -39,7 +39,7 @@ theorem reindexMatrix_eq_necSuf {n : ℕ} (e : Idx n → X) (F : Mat X) :
 /-- 本文 `def_reindexing_of_matrices_by_inverse_numbering` の μ_e は、必要十分版の μ_e と同じ式。 -/
 theorem inverseReindexMatrix_eq_necSuf {n : ℕ} {e : Idx n → X} (he : IsNumbering n e)
     (G : Mat (Idx n)) :
-    inverseReindexMatrix he G = NecSuf.ComplexMatrixAlgebra.inverseReindexMatrix he.toNecSuf G := rfl
+    inverseReindexMatrix he G = NecSuf.ComplexMatrixAlgebra.inverseReindexMatrix he.toNecSuf.surjective G := rfl
 
 /-- 本文 `theorem_binary_numbering_gives_isomorphism_of_matrix_algebras` の ν_{e_M} は、必要十分版の ν_{e_M} と同じ式。 -/
 theorem binaryReindexMatrix_eq_necSuf (M : ℕ) (F : Mat (PowerSet M)) :
@@ -88,7 +88,7 @@ theorem reindexMatrix_isComplexAlgebraHomomorphism_of_necSuf (hX : IsFiniteSet X
 
 theorem inverseReindexMatrix_reindexMatrix_of_necSuf {n : ℕ} {e : Idx n → X}
     (he : IsNumbering n e) (F : Mat X) : inverseReindexMatrix he (reindexMatrix e F) = F :=
-  NecSuf.ComplexMatrixAlgebra.inverseReindexMatrix_reindexMatrix he.toNecSuf F
+  NecSuf.ComplexMatrixAlgebra.inverseReindexMatrix_reindexMatrix he.toNecSuf.surjective F
 
 /-- 本文 `claim_reindexing_after_inverse_reindexing_of_matrices_is_identity` を必要十分版から得る。 -/
 theorem reindexMatrix_inverseReindexMatrix_of_necSuf {n : ℕ} {e : Idx n → X}

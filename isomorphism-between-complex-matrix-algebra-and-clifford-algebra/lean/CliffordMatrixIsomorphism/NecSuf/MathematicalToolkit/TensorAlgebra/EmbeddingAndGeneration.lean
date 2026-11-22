@@ -10,6 +10,9 @@
   claim_embedded_image_of_tuple_lies_in_subalgebra_containing_image_of_embedding      TensorPowers.embedComponent_tau_mem  T(V) が K-代数であることの仮定（乗法の交換法則・0 + 0 = 0・a · 0 = 0・1 + n = 0）
   claim_image_of_embedding_generates_tensor_algebra                                   coordinateTensorPowers_generates     同上と、座標の構成の性質（ValuedMapsLaws・UniquenessLaws）
 
+`embedComponent_tau_mem` は、B が部分代数であることの四つの条件のうち 1_{T(V)} を含むことと積で閉じていることだけを使う
+（和とスカラー倍で閉じていることは使わない）ので、`IsSubalgebra` の組ではなくその二つだけを仮定に置く。
+
 証明の中で新たに使う K の性質は、部分代数が有限集合の上の和で閉じていること・ω と emb_i が和を移すことの 0 + 0 = 0 だけである。
 ほかの仮定は、T(V) とその積、座標による構成を書くのに要る。座標の構成の n 元の基底の番号の長さ n と区別するため、
 生成の主張では 1 + n = 0 の n を ν と書く。
@@ -101,7 +104,9 @@ theorem embedVector_isLinearMap [Zero K] (hcomm : ∀ a b : K, a * b = b * a) (L
 /-- 本文 `claim_embedded_image_of_tuple_lies_in_subalgebra_containing_image_of_embedding`：ι(V) ⊆ B を満たす T(V) の部分代数 B は、
 すべての k と u ∈ V^{1,…,k} について emb_k(τ_k(u)) を含む。k の帰納法で示す。 -/
 theorem embedComponent_tau_mem [Zero K] (hcomm : ∀ a b : K, a * b = b * a) (L : ScalarMultipleOfZeroLaws K) (n : K) (h1n : 1 + n = 0) {B : Set (DirectSumOfFamily P.space)}
-    (hB : AlgebraOver.IsSubalgebra (P.tensorAlgebra hcomm L n h1n) B) (hsub : Set.range P.embedVector ⊆ B) :
+    (hone : (P.tensorAlgebra hcomm L n h1n).one ∈ B)
+    (hmul : ∀ x y : DirectSumOfFamily P.space, x ∈ B → y ∈ B → (P.tensorAlgebra hcomm L n h1n).mul x y ∈ B)
+    (hsub : Set.range P.embedVector ⊆ B) :
     ∀ (k : ℕ) (u : Tuple V k), embedComponent P.space k (P.τ k u) ∈ B := by
   intro k
   induction k with
@@ -114,7 +119,7 @@ theorem embedComponent_tau_mem [Zero K] (hcomm : ∀ a b : K, a * b = b * a) (L 
       _ = P.tensorAlgebraOne := rfl
       _ = (P.tensorAlgebra hcomm L n h1n).one := rfl
     rw [h1]
-    exact hB.one_mem
+    exact hone
   | succ k ih =>
     intro u
     have h1 : embedComponent P.space (k + 1) (P.τ (k + 1) u)
@@ -133,7 +138,7 @@ theorem embedComponent_tau_mem [Zero K] (hcomm : ∀ a b : K, a * b = b * a) (L 
       _ = (P.tensorAlgebra hcomm L n h1n).mul (embedComponent P.space k (P.τ k (initialPart u)))
             (P.embedVector (u (lastIdx k))) := rfl
     rw [h1]
-    exact hB.mul_mem _ _ (ih (initialPart u)) (hsub ⟨u (lastIdx k), rfl⟩)
+    exact hmul _ _ (ih (initialPart u)) (hsub ⟨u (lastIdx k), rfl⟩)
 
 end TensorPowers
 
@@ -164,7 +169,7 @@ theorem coordinateTensorPowers_generates [Zero K] (LV : ValuedMapsLaws K) (UL : 
           (embedComponent_isLinearMap P.space L ν h1ν i.1).map_sumOverFiniteSet L.zero_add_zero _ _ _
     rw [hxi]
     exact AlgebraOver.IsSubalgebra.sumOverFiniteSet_mem L.zero_add_zero hB _ _ _
-      (fun ξ => P.embedComponent_tau_mem hcomm L ν h1ν hB hsub i.1 (basisTuple b ξ))
+      (fun ξ => P.embedComponent_tau_mem hcomm L ν h1ν hB.one_mem hB.mul_mem hsub i.1 (basisTuple b ξ))
   rw [eq_sum_embedComponent P.space L ν h1ν x N hN]
   exact AlgebraOver.IsSubalgebra.sumOverFiniteSet_mem L.zero_add_zero hB _ _ _ hi
 

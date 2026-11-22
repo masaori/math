@@ -8,6 +8,10 @@
   smul_zero_eq_zero              0 + 0 = 0、a · 0 = 0
   IsLinearForm.map_zero          0 + 0 = 0、0 · a = 0
   IsLinearMap.map_zero           0 + 0 = 0
+
+線型写像・線型形式についての二つは、線型であることの二つの条件のうちスカラー倍を保つことだけを使うので、
+`IsLinearMap`・`IsLinearForm` の組ではなく、スカラー倍を保つことだけを欄にもつ組 `PreservesSmul`・`FormPreservesSmul` を
+仮定に置く。呼ぶ側は `hf.toPreservesSmul` を渡す（写像 f を組の型の引数に残すので、f を推論できる）。
 -/
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexVectorSpace.Definitions
 
@@ -16,6 +20,22 @@ namespace CliffordMatrixIsomorphism.NecSuf.VectorSpace
 universe u v w
 
 variable {K : Type u} [Add K] [Mul K] [One K] [Zero K] {V : Type v} {U : Type w}
+
+/-- 本文 `def_linear_map` の二つの条件のうち、スカラー倍を保つことだけをもつ組。 -/
+structure PreservesSmul (SV : VectorSpace K V) (SU : VectorSpace K U) (f : V → U) : Prop where
+  map_smul : ∀ (l : K) (x : V), f (SV.smul l x) = SU.smul l (f x)
+
+/-- 本文 `def_linear_form` の二つの条件のうち、スカラー倍を保つことだけをもつ組。 -/
+structure FormPreservesSmul (S : VectorSpace K V) (g : V → K) : Prop where
+  map_smul : ∀ (l : K) (x : V), g (S.smul l x) = l * g x
+
+/-- 線型写像はスカラー倍を保つ（`def_linear_map` の条件の一つ）。 -/
+theorem IsLinearMap.toPreservesSmul {SV : VectorSpace K V} {SU : VectorSpace K U} {f : V → U}
+    (hf : IsLinearMap SV SU f) : PreservesSmul SV SU f := ⟨hf.map_smul⟩
+
+/-- 線型形式はスカラー倍を保つ（`def_linear_form` の条件の一つ）。 -/
+theorem IsLinearForm.toPreservesSmul {S : VectorSpace K V} {g : V → K} (hg : IsLinearForm S g) :
+    FormPreservesSmul S g := ⟨hg.map_smul⟩
 
 /-- 本文 `claim_zero_scalar_multiple_is_zero_vector` の必要十分版。 -/
 theorem zero_smul_eq_zero (S : VectorSpace K V) (h00 : (0 : K) + 0 = 0) (x : V) :
@@ -39,7 +59,8 @@ theorem smul_zero_eq_zero (S : VectorSpace K V) (h00 : (0 : K) + 0 = 0)
   _ = S.zero := zero_smul_eq_zero S h00 S.zero
 
 /-- 本文 `claim_linear_form_sends_zero_vector_to_zero` の必要十分版。 -/
-theorem IsLinearForm.map_zero {S : VectorSpace K V} {g : V → K} (hg : IsLinearForm S g)
+theorem IsLinearForm.map_zero {S : VectorSpace K V} {g : V → K}
+    (hg : FormPreservesSmul S g)
     (h00 : (0 : K) + 0 = 0) (h0mul : ∀ a : K, 0 * a = 0) : g S.zero = 0 := calc
   g S.zero = g (S.smul 0 S.zero) := by rw [zero_smul_eq_zero S h00 S.zero]
   _ = 0 * g S.zero := by rw [hg.map_smul 0 S.zero]
@@ -47,7 +68,7 @@ theorem IsLinearForm.map_zero {S : VectorSpace K V} {g : V → K} (hg : IsLinear
 
 /-- 本文 `claim_linear_map_sends_zero_to_zero` の必要十分版。 -/
 theorem IsLinearMap.map_zero {SV : VectorSpace K V} {SU : VectorSpace K U} {f : V → U}
-    (hf : IsLinearMap SV SU f) (h00 : (0 : K) + 0 = 0) : f SV.zero = SU.zero := calc
+    (hf : PreservesSmul SV SU f) (h00 : (0 : K) + 0 = 0) : f SV.zero = SU.zero := calc
   f SV.zero = f (SV.smul 0 SV.zero) := by rw [zero_smul_eq_zero SV h00 SV.zero]
   _ = SU.smul 0 (f SV.zero) := by rw [hf.map_smul 0 SV.zero]
   _ = SU.zero := zero_smul_eq_zero SU h00 (f SV.zero)

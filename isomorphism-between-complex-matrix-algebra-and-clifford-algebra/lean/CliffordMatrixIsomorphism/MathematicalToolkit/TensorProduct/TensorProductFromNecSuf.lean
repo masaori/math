@@ -171,7 +171,7 @@ theorem multilinear_eq_of_basisTuple_of_necSuf (S : ComplexVectorSpace V)
     (hagree : ∀ x : MapsBetweenInitialSegments n k, g (basisTuple b x) = g' (basisTuple b x)) :
     g = g' :=
   NecSuf.VectorSpace.multilinear_eq_of_basisTuple (_root_.add_zero 0) S.toNecSuf SU.toNecSuf n b
-    ((isBasisFamily_iff_necSuf S n b).1 hb) k g g' ((isMultilinearMap_iff_necSuf S SU k g).1 hg)
+    ((isBasisFamily_iff_necSuf S n b).1 hb).spans k g g' ((isMultilinearMap_iff_necSuf S SU k g).1 hg)
     ((isMultilinearMap_iff_necSuf S SU k g').1 hg') hagree
 
 theorem inducedLinearMap_comp_coordinateTensor_of_necSuf (S : ComplexVectorSpace V)

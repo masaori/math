@@ -182,7 +182,7 @@ theorem firstSiteHighestReindexMatrix_jordanWignerZ (L : ValuedMapsLaws K) (hcom
         (congrArg (firstSiteHighestReindexMatrix M) (orderedProduct_singleSiteKroneckerProducts L hcomm hmul0 M 𝔷 m)).symm
     -- claim_algebra_homomorphism_maps_ordered_product_to_ordered_product
     _ = AlgebraOver.orderedProduct B' m (fun j => firstSiteHighestReindexMatrix M (ϑ j)) :=
-        hν.map_orderedProduct m ϑ
+        AlgebraOver.IsAlgebraHomomorphism.map_orderedProduct hν.map_one hν.map_mul m ϑ
     -- claim_ordered_products_with_equal_factors_are_equal。因子が等しいことは（一）
     _ = AlgebraOver.orderedProduct B' m (numberedJordanWignerFactor i M .z m) :=
         AlgebraOver.orderedProduct_congr B' m _ _ h1
@@ -281,7 +281,7 @@ theorem firstSiteHighestReindexMatrix_jordanWignerY (L : ValuedMapsLaws K) (hcom
         (congrArg (firstSiteHighestReindexMatrix M) (orderedProduct_singleSiteKroneckerProducts L hcomm hmul0 M 𝔶 m)).symm
     -- claim_algebra_homomorphism_maps_ordered_product_to_ordered_product
     _ = AlgebraOver.orderedProduct B' m (fun j => firstSiteHighestReindexMatrix M (ϖ j)) :=
-        hν.map_orderedProduct m ϖ
+        AlgebraOver.IsAlgebraHomomorphism.map_orderedProduct hν.map_one hν.map_mul m ϖ
     -- claim_ordered_products_with_equal_factors_are_equal。因子が等しいことは（一）
     _ = AlgebraOver.orderedProduct B' m (numberedJordanWignerFactor i M .y m) :=
         AlgebraOver.orderedProduct_congr B' m _ _ h1

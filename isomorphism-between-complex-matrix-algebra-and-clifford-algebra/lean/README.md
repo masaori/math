@@ -14,6 +14,7 @@ bash scripts/check-no-sorry.sh
 bash ../../scripts/lean-concrete-necsuf-separation/check.sh .   # 具体版と必要十分版が互いを参照していないこと（既知の違反は concrete-necsuf-separation-ledger.txt。行は減らすだけ）
 bash ../../scripts/lean-concrete-general-theory/check.sh .   # 具体版が mathlib の線型代数の一般論を使っていないこと（本文が「定義せずに用いる」と明示したものは declared-general-theory.txt で許す。既知の違反は concrete-general-theory-ledger.txt。行は減らすだけ）
 node scripts/verify-label-correspondence.ts   # 本文のラベルと具体版・必要十分版・導出版の対応（下の「本文のラベルとの対応の検査」）
+bash scripts/necsuf-unused-assumptions/run.sh   # 必要十分版の仮定のうち証明で使わないものが台帳 necsuf-unused-assumptions-ledger.txt と一致すること（行は減らすだけ。ゴールラインは台帳が空であること）
 ```
 
 `lean-toolchain`（`leanprover/lean4:v4.32.1`）と `lakefile.toml` の mathlib の `rev`（`v4.32.1`）は
@@ -44,6 +45,10 @@ import されていること、字面に `sorry`・`admit` が無いこと、名
   必要十分版は具体版の宣言を一つも引かない。ℂ を含まない定義（環の組・番号付け・部分集合全体と 2 進の番号付け・個数 N_i(T)・
   Pauli 行列のラベルなど）も、必要十分版の名前空間に同じ形で別に置き、主張にも必要十分版と導出版を置く。
   検査はリポジトリ直下の `scripts/lean-concrete-necsuf-separation/check.sh`（違反の台帳 `concrete-necsuf-separation-ledger.txt` は空）。
+- 必要十分版の仮定は、主張ごとに証明が使う欄だけにする。前提の組（線型写像・基底・部分代数・準同型など）の一部の欄だけを使う主張は、
+  組を置かず、使う欄だけを引数に置く（例: 双対基底の主張の `SpansByLinearCombination`、部分代数の 1 と積の二つ）。暗黙の写像が
+  引数の型から推論できなくなるときは、使う欄だけをもつ組を置く（例: 零を零へ移す主張の `PreservesSmul`・`FormPreservesSmul`）。
+  点検は `scripts/necsuf-unused-assumptions/run.sh` で、既知の行は台帳 `necsuf-unused-assumptions-ledger.txt` に載せ、行は減らすだけにする。
 - **導出版**は、具体版の主張と同じ形の主張 `…_of_necSuf` を、必要十分版の主張に ℂ の性質を渡して示す。
   構造を作る主張（双対空間・直和・ℂ^vec が線型空間であること）は、必要十分版から作った構造が
   具体版の構造と同じであること（`…_eq_of_necSuf`、`rfl`）も示す。

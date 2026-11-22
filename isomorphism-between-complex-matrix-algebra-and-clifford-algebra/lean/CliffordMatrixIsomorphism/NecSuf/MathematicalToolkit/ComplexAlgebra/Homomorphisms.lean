@@ -3,7 +3,8 @@
 `MathematicalToolkit/ComplexAlgebra/Homomorphisms.lean` と同じ帰納法と calc の行で、係数 ℂ を型の変数 K に替えて書く。
 
 五つの主張はどれも K の性質を一つも使わず、代数の公理（環の公理・スカラー倍の公理・両立の二つ）も一つも使わない。
-使うのは演算の定義と準同型の条件だけである。スカラー倍が現れるのは、生成元で一致する準同型が等しいことの
+使うのは演算の定義と準同型の条件だけである。準同型が番号順の積を移す主張は、準同型の条件のうち 1 と積を保つことだけを使う
+（和とスカラー倍を保つことは使わない）ので、`IsAlgebraHomomorphism` の組ではなくその二つだけを仮定に置く。スカラー倍が現れるのは、生成元で一致する準同型が等しいことの
 「スカラー倍で閉じている」の行と、合成の「スカラー倍を保つ」の行だけで、どちらも準同型の条件を当てるだけである。
 -/
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexAlgebra.Definitions
@@ -107,7 +108,8 @@ theorem isAlgebraHomomorphism_id (SA : AlgebraOver K A) :
 /-- 本文 `claim_algebra_homomorphism_maps_ordered_product_to_ordered_product`：
 φ(∏_{A,k=1}^{n} x_k) = ∏_{B,k=1}^{n} φ(x_k)。φ(Π^A_m) = Π^B_m を m の帰納法で示す。 -/
 theorem IsAlgebraHomomorphism.map_orderedProduct {SA : AlgebraOver K A}
-    {SB : AlgebraOver K B} {φ : A → B} (hφ : IsAlgebraHomomorphism SA SB φ) (n : ℕ)
+    {SB : AlgebraOver K B} {φ : A → B} (hφ_one : φ SA.one = SB.one)
+    (hφ_mul : ∀ x y : A, φ (SA.mul x y) = SB.mul (φ x) (φ y)) (n : ℕ)
     (x : ℕ → A) : φ (orderedProduct SA n x) = orderedProduct SB n (fun k => φ (x k)) := by
   have hm : ∀ m : ℕ, φ (partialOrderedProduct SA x m)
       = partialOrderedProduct SB (fun k => φ (x k)) m := by
@@ -115,12 +117,12 @@ theorem IsAlgebraHomomorphism.map_orderedProduct {SA : AlgebraOver K A}
     induction m with
     | zero => calc
         φ (partialOrderedProduct SA x 0) = φ SA.one := rfl
-        _ = SB.one := hφ.map_one
+        _ = SB.one := hφ_one
         _ = partialOrderedProduct SB (fun k => φ (x k)) 0 := rfl
     | succ m ih => calc
         φ (partialOrderedProduct SA x (m + 1))
             = φ (SA.mul (partialOrderedProduct SA x m) (x (m + 1))) := rfl
-        _ = SB.mul (φ (partialOrderedProduct SA x m)) (φ (x (m + 1))) := hφ.map_mul _ _
+        _ = SB.mul (φ (partialOrderedProduct SA x m)) (φ (x (m + 1))) := hφ_mul _ _
         _ = SB.mul (partialOrderedProduct SB (fun k => φ (x k)) m) (φ (x (m + 1))) := by rw [ih]
         _ = partialOrderedProduct SB (fun k => φ (x k)) (m + 1) := rfl
   exact hm n

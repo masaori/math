@@ -23,6 +23,8 @@
 - 「ℂ-代数の準同型である」という主張に L・乗法の交換法則・a · 0 = 0 が現れるのは、行列の集合を代数にする
   `matricesAlgebra`（`MatrixAlgebra/Algebra.lean`）がそれを要るからで、付け替えの証明が使うからではない。
 - 二つの付け替えが互いの逆であることは、K に演算の記号すら要らない（行列は写像 X × X → K で、付け替えは添字に e・e^{-1} を合成するだけ）。
+- μ_e ∘ ν_e = id は、e が番号付けであることの二つの条件のうち全射だけを使う（e(e^{-1}(x)) = x）。そこで μ_e と e^{-1} を
+  全射の条件だけから書き（`surjectiveInverse`）、この主張は全射だけを仮定に置く。ν_e ∘ μ_e = id は単射も使う（e^{-1}(e(k)) = k）。
 -/
 import CliffordMatrixIsomorphism.NecSuf.ComplexMatrixAlgebra.MatrixAlgebra.Algebra
 
@@ -42,14 +44,24 @@ def reindexMatrix {n : ℕ} (e : Idx n → X) (F : Mat K X) : Mat K (Idx n) := f
 theorem entry_reindexMatrix {n : ℕ} (e : Idx n → X) (F : Mat K X) (k l : Idx n) :
     Mat.entry (reindexMatrix e F) k l = Mat.entry F (e k) (e l) := rfl
 
+/-- 本文 `def_numbering_of_finite_set` の逆写像 e^{-1}：e(k) = x を満たす k を、e が全射であることだけから一つ選ぶ
+（`IsNumbering.inv` と同じ式）。μ_e を書くのにも μ_e ∘ ν_e = id を示すのにも e の単射性は要らないので、μ_e はこれで書く。 -/
+noncomputable def surjectiveInverse {n : ℕ} {e : Idx n → X} (he_surj : ∀ x : X, ∃ k : Idx n, e k = x) (x : X) : Idx n :=
+  Classical.choose (he_surj x)
+
+/-- 本文 `def_numbering_of_finite_set`：e(e^{-1}(x)) = x。 -/
+theorem apply_surjectiveInverse {n : ℕ} {e : Idx n → X} (he_surj : ∀ x : X, ∃ k : Idx n, e k = x) (x : X) :
+    e (surjectiveInverse he_surj x) = x :=
+  Classical.choose_spec (he_surj x)
+
 /-- 本文 `def_reindexing_of_matrices_by_inverse_numbering` の必要十分版：μ_e(G)_{x,y} := G_{e^{-1}(x),e^{-1}(y)}。 -/
-noncomputable def inverseReindexMatrix {n : ℕ} {e : Idx n → X} (he : IsNumbering n e)
+noncomputable def inverseReindexMatrix {n : ℕ} {e : Idx n → X} (he_surj : ∀ x : X, ∃ k : Idx n, e k = x)
     (G : Mat K (Idx n)) : Mat K X := fun p =>
-  Mat.entry G (he.inv p.1) (he.inv p.2)
+  Mat.entry G (surjectiveInverse he_surj p.1) (surjectiveInverse he_surj p.2)
 
 theorem entry_inverseReindexMatrix {n : ℕ} {e : Idx n → X} (he : IsNumbering n e)
     (G : Mat K (Idx n)) (x y : X) :
-    Mat.entry (inverseReindexMatrix he G) x y = Mat.entry G (he.inv x) (he.inv y) := rfl
+    Mat.entry (inverseReindexMatrix he.surjective G) x y = Mat.entry G (he.inv x) (he.inv y) := rfl
 
 /-! ### ν_e は代数の準同型である -/
 
@@ -154,21 +166,21 @@ theorem reindexMatrix_isAlgebraHomomorphism [Add K] [Mul K] [One K] [Zero K] (L 
 /-! ### ν_e と μ_e は互いの逆である -/
 
 /-- 本文 `claim_inverse_reindexing_after_reindexing_of_matrices_is_identity` の必要十分版：μ_e(ν_e(F)) = F。 -/
-theorem inverseReindexMatrix_reindexMatrix {n : ℕ} {e : Idx n → X} (he : IsNumbering n e)
-    (F : Mat K X) : inverseReindexMatrix he (reindexMatrix e F) = F :=
+theorem inverseReindexMatrix_reindexMatrix {n : ℕ} {e : Idx n → X} (he_surj : ∀ x : X, ∃ k : Idx n, e k = x)
+    (F : Mat K X) : inverseReindexMatrix he_surj (reindexMatrix e F) = F :=
   Mat.ext fun x y => calc
-    Mat.entry (inverseReindexMatrix he (reindexMatrix e F)) x y
-        = Mat.entry (reindexMatrix e F) (he.inv x) (he.inv y) := rfl
-    _ = Mat.entry F (e (he.inv x)) (e (he.inv y)) := rfl
+    Mat.entry (inverseReindexMatrix he_surj (reindexMatrix e F)) x y
+        = Mat.entry (reindexMatrix e F) (surjectiveInverse he_surj x) (surjectiveInverse he_surj y) := rfl
+    _ = Mat.entry F (e (surjectiveInverse he_surj x)) (e (surjectiveInverse he_surj y)) := rfl
     -- e(e^{-1}(u)) = u を u := x, y に。本文 def_numbering_of_finite_set
-    _ = Mat.entry F x y := by rw [he.apply_inv x, he.apply_inv y]
+    _ = Mat.entry F x y := by rw [apply_surjectiveInverse he_surj x, apply_surjectiveInverse he_surj y]
 
 /-- 本文 `claim_reindexing_after_inverse_reindexing_of_matrices_is_identity` の必要十分版：ν_e(μ_e(G)) = G。 -/
 theorem reindexMatrix_inverseReindexMatrix {n : ℕ} {e : Idx n → X} (he : IsNumbering n e)
-    (G : Mat K (Idx n)) : reindexMatrix e (inverseReindexMatrix he G) = G :=
+    (G : Mat K (Idx n)) : reindexMatrix e (inverseReindexMatrix he.surjective G) = G :=
   Mat.ext fun k l => calc
-    Mat.entry (reindexMatrix e (inverseReindexMatrix he G)) k l
-        = Mat.entry (inverseReindexMatrix he G) (e k) (e l) := rfl
+    Mat.entry (reindexMatrix e (inverseReindexMatrix he.surjective G)) k l
+        = Mat.entry (inverseReindexMatrix he.surjective G) (e k) (e l) := rfl
     _ = Mat.entry G (he.inv (e k)) (he.inv (e l)) := rfl
     -- e^{-1}(e(j)) = j を j := k, l に。本文 def_numbering_of_finite_set
     _ = Mat.entry G k l := by rw [he.inv_apply k, he.inv_apply l]
@@ -178,54 +190,54 @@ theorem reindexMatrix_inverseReindexMatrix {n : ℕ} {e : Idx n → X} (he : IsN
 /-- 本文 `claim_reindexing_of_matrices_by_inverse_numbering_is_algebra_homomorphism` の必要十分版：加法を保つこと。 -/
 theorem inverseReindexMatrix_add [Add K] {n : ℕ} {e : Idx n → X} (he : IsNumbering n e)
     (G H : Mat K (Idx n)) :
-    inverseReindexMatrix he (Mat.add G H)
-      = Mat.add (inverseReindexMatrix he G) (inverseReindexMatrix he H) := calc
-  inverseReindexMatrix he (Mat.add G H)
-      = inverseReindexMatrix he
-          (Mat.add (reindexMatrix e (inverseReindexMatrix he G))
-            (reindexMatrix e (inverseReindexMatrix he H))) := by
+    inverseReindexMatrix he.surjective (Mat.add G H)
+      = Mat.add (inverseReindexMatrix he.surjective G) (inverseReindexMatrix he.surjective H) := calc
+  inverseReindexMatrix he.surjective (Mat.add G H)
+      = inverseReindexMatrix he.surjective
+          (Mat.add (reindexMatrix e (inverseReindexMatrix he.surjective G))
+            (reindexMatrix e (inverseReindexMatrix he.surjective H))) := by
         rw [reindexMatrix_inverseReindexMatrix he G, reindexMatrix_inverseReindexMatrix he H]
-  _ = inverseReindexMatrix he
-        (reindexMatrix e (Mat.add (inverseReindexMatrix he G) (inverseReindexMatrix he H))) := by
-        rw [reindexMatrix_add e (inverseReindexMatrix he G) (inverseReindexMatrix he H)]
-  _ = Mat.add (inverseReindexMatrix he G) (inverseReindexMatrix he H) :=
-        inverseReindexMatrix_reindexMatrix he _
+  _ = inverseReindexMatrix he.surjective
+        (reindexMatrix e (Mat.add (inverseReindexMatrix he.surjective G) (inverseReindexMatrix he.surjective H))) := by
+        rw [reindexMatrix_add e (inverseReindexMatrix he.surjective G) (inverseReindexMatrix he.surjective H)]
+  _ = Mat.add (inverseReindexMatrix he.surjective G) (inverseReindexMatrix he.surjective H) :=
+        inverseReindexMatrix_reindexMatrix he.surjective _
 
 /-- 本文 `claim_reindexing_of_matrices_by_inverse_numbering_is_algebra_homomorphism` の必要十分版：乗法を保つこと。 -/
 theorem inverseReindexMatrix_mul [Add K] [Mul K] [One K] [Zero K] (L : ValuedMapsLaws K)
     (hX : IsFiniteSet X) {n : ℕ} {e : Idx n → X} (he : IsNumbering n e) (G H : Mat K (Idx n)) :
-    inverseReindexMatrix he (Mat.mul L (isFiniteSet_idx n) G H)
-      = Mat.mul L hX (inverseReindexMatrix he G) (inverseReindexMatrix he H) := calc
-  inverseReindexMatrix he (Mat.mul L (isFiniteSet_idx n) G H)
-      = inverseReindexMatrix he
-          (Mat.mul L (isFiniteSet_idx n) (reindexMatrix e (inverseReindexMatrix he G))
-            (reindexMatrix e (inverseReindexMatrix he H))) := by
+    inverseReindexMatrix he.surjective (Mat.mul L (isFiniteSet_idx n) G H)
+      = Mat.mul L hX (inverseReindexMatrix he.surjective G) (inverseReindexMatrix he.surjective H) := calc
+  inverseReindexMatrix he.surjective (Mat.mul L (isFiniteSet_idx n) G H)
+      = inverseReindexMatrix he.surjective
+          (Mat.mul L (isFiniteSet_idx n) (reindexMatrix e (inverseReindexMatrix he.surjective G))
+            (reindexMatrix e (inverseReindexMatrix he.surjective H))) := by
         rw [reindexMatrix_inverseReindexMatrix he G, reindexMatrix_inverseReindexMatrix he H]
-  _ = inverseReindexMatrix he
-        (reindexMatrix e (Mat.mul L hX (inverseReindexMatrix he G) (inverseReindexMatrix he H))) := by
-        rw [reindexMatrix_mul L hX he (inverseReindexMatrix he G) (inverseReindexMatrix he H)]
-  _ = Mat.mul L hX (inverseReindexMatrix he G) (inverseReindexMatrix he H) :=
-        inverseReindexMatrix_reindexMatrix he _
+  _ = inverseReindexMatrix he.surjective
+        (reindexMatrix e (Mat.mul L hX (inverseReindexMatrix he.surjective G) (inverseReindexMatrix he.surjective H))) := by
+        rw [reindexMatrix_mul L hX he (inverseReindexMatrix he.surjective G) (inverseReindexMatrix he.surjective H)]
+  _ = Mat.mul L hX (inverseReindexMatrix he.surjective G) (inverseReindexMatrix he.surjective H) :=
+        inverseReindexMatrix_reindexMatrix he.surjective _
 
 /-- 本文 `claim_reindexing_of_matrices_by_inverse_numbering_is_algebra_homomorphism` の必要十分版：乗法の単位元を保つこと。 -/
 theorem inverseReindexMatrix_one [Zero K] [One K] [DecidableEq X] {n : ℕ} {e : Idx n → X}
     (he : IsNumbering n e) :
-    inverseReindexMatrix he (Mat.one : Mat K (Idx n)) = (Mat.one : Mat K X) := calc
-  inverseReindexMatrix he (Mat.one : Mat K (Idx n))
-      = inverseReindexMatrix he (reindexMatrix e (Mat.one : Mat K X)) := by
+    inverseReindexMatrix he.surjective (Mat.one : Mat K (Idx n)) = (Mat.one : Mat K X) := calc
+  inverseReindexMatrix he.surjective (Mat.one : Mat K (Idx n))
+      = inverseReindexMatrix he.surjective (reindexMatrix e (Mat.one : Mat K X)) := by
         rw [reindexMatrix_one he]
-  _ = (Mat.one : Mat K X) := inverseReindexMatrix_reindexMatrix he _
+  _ = (Mat.one : Mat K X) := inverseReindexMatrix_reindexMatrix he.surjective _
 
 /-- 本文 `claim_reindexing_of_matrices_by_inverse_numbering_is_algebra_homomorphism` の必要十分版：スカラー倍を保つこと。 -/
 theorem inverseReindexMatrix_smul [Mul K] {n : ℕ} {e : Idx n → X} (he : IsNumbering n e) (l : K)
     (G : Mat K (Idx n)) :
-    inverseReindexMatrix he (Mat.smul l G) = Mat.smul l (inverseReindexMatrix he G) := calc
-  inverseReindexMatrix he (Mat.smul l G)
-      = inverseReindexMatrix he (Mat.smul l (reindexMatrix e (inverseReindexMatrix he G))) := by
+    inverseReindexMatrix he.surjective (Mat.smul l G) = Mat.smul l (inverseReindexMatrix he.surjective G) := calc
+  inverseReindexMatrix he.surjective (Mat.smul l G)
+      = inverseReindexMatrix he.surjective (Mat.smul l (reindexMatrix e (inverseReindexMatrix he.surjective G))) := by
         rw [reindexMatrix_inverseReindexMatrix he G]
-  _ = inverseReindexMatrix he (reindexMatrix e (Mat.smul l (inverseReindexMatrix he G))) := by
-        rw [reindexMatrix_smul e l (inverseReindexMatrix he G)]
-  _ = Mat.smul l (inverseReindexMatrix he G) := inverseReindexMatrix_reindexMatrix he _
+  _ = inverseReindexMatrix he.surjective (reindexMatrix e (Mat.smul l (inverseReindexMatrix he.surjective G))) := by
+        rw [reindexMatrix_smul e l (inverseReindexMatrix he.surjective G)]
+  _ = Mat.smul l (inverseReindexMatrix he.surjective G) := inverseReindexMatrix_reindexMatrix he.surjective _
 
 /-- 本文 `claim_reindexing_of_matrices_by_inverse_numbering_is_algebra_homomorphism` の必要十分版：
 μ_e : Mat_{1,…,n}(K) → Mat_X(K) は代数の準同型である。L・hcomm・hmul0 は二つの代数を作るためだけに要る。 -/
@@ -233,7 +245,7 @@ theorem inverseReindexMatrix_isAlgebraHomomorphism [Add K] [Mul K] [One K] [Zero
     (L : ValuedMapsLaws K) (hcomm : ∀ a b : K, a * b = b * a) (hmul0 : ∀ a : K, a * 0 = 0)
     (hX : IsFiniteSet X) [DecidableEq X] {n : ℕ} {e : Idx n → X} (he : IsNumbering n e) :
     IsAlgebraHomomorphism (matricesAlgebra L hcomm hmul0 (isFiniteSet_idx n))
-      (matricesAlgebra L hcomm hmul0 hX) (inverseReindexMatrix he) where
+      (matricesAlgebra L hcomm hmul0 hX) (inverseReindexMatrix he.surjective) where
   isRingHomomorphism :=
     { map_add := inverseReindexMatrix_add he
       map_mul := inverseReindexMatrix_mul L hX he

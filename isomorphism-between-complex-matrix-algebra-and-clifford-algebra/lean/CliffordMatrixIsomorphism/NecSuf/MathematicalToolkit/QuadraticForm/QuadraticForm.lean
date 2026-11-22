@@ -185,7 +185,7 @@ theorem splitQuadraticForm_embedSecond (h00 : (0 : K) + 0 = 0) (h0mul : ∀ a : 
     (g : DualSpace SW) : splitQuadraticForm SW (embedSecond SW g) = 0 := calc
   splitQuadraticForm SW (embedSecond SW g) = splitQuadraticForm SW (SW.zero, g) := rfl
   _ = g.1 SW.zero := rfl
-  _ = 0 := g.2.map_zero h00 h0mul
+  _ = 0 := VectorSpace.IsLinearForm.map_zero g.2.toPreservesSmul h00 h0mul
 
 end Split
 

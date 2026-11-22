@@ -19,6 +19,9 @@
 `dualSpace_linearCombination_apply` と `dualBasis_*` が抱える `DualSpaceVectorSpaceLaws` のうち、
 証明の行で当てるのは a + 0 = a・a · 0 = 0・0 · a = 0 だけである。残りの欄（1 + n = 0 となる n の存在など）は、
 V^* の中の線型結合を作るために V^* を線型空間にする構造の側で要る（本文も線型結合を線型空間について定める）。
+
+`dualBasis_spans`・`dualBasis_isBasis` は、b が基底であることの二つの条件のうち V を張ることだけを使う
+（一次独立は使わない）ので、`IsBasisFamily` の組ではなく `SpansByLinearCombination` だけを仮定に置く。
 -/
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexVectorSpace.DualSpace
 import CliffordMatrixIsomorphism.NecSuf.MathematicalToolkit.ComplexVectorSpace.LinearCombination
@@ -314,7 +317,7 @@ theorem orderedSum_mul_kroneckerDelta (hadd_zero : ∀ a : K, a + 0 = a)
 /-- 本文 `claim_dual_basis_spans_dual_space`：g = Σ g(b_k) ·_{V^*} f_k（V^* の等式）。 -/
 theorem dualBasis_spans (L : DualSpaceVectorSpaceLaws K) (hzero_add : ∀ a : K, 0 + a = a)
     (hmul_one : ∀ a : K, a * 1 = a)
-    (S : VectorSpace K V) (n : ℕ) (b : ℕ → V) (hb : IsBasisFamily S n b)
+    (S : VectorSpace K V) (n : ℕ) (b : ℕ → V) (hb_spans : SpansByLinearCombination S n b)
     (f : ℕ → DualSpace S) (hf : IsDualBasis S n b f) (g : DualSpace S) :
     g = linearCombination (dualSpaceVectorSpace L S) n (fun k => g.1 (b k)) f := by
   -- h := Σ g(b_k) ·_{V^*} f_k
@@ -330,7 +333,7 @@ theorem dualBasis_spans (L : DualSpaceVectorSpaceLaws K) (hzero_add : ∀ a : K,
   symm
   apply DualSpace.ext
   intro x
-  obtain ⟨μ, hμ⟩ := hb.spans x
+  obtain ⟨μ, hμ⟩ := hb_spans x
   calc (linearCombination (dualSpaceVectorSpace L S) n (fun k => g.1 (b k)) f).1 x
       = (linearCombination (dualSpaceVectorSpace L S) n (fun k => g.1 (b k)) f).1
           (linearCombination S n μ b) := by rw [hμ]
@@ -363,10 +366,10 @@ theorem dualBasis_linearlyIndependent (L : DualSpaceVectorSpaceLaws K)
 /-- 本文 `claim_dual_basis_is_basis_of_dual_space`。 -/
 theorem dualBasis_isBasis (L : DualSpaceVectorSpaceLaws K) (hzero_add : ∀ a : K, 0 + a = a)
     (hmul_one : ∀ a : K, a * 1 = a)
-    (S : VectorSpace K V) (n : ℕ) (b : ℕ → V) (hb : IsBasisFamily S n b)
+    (S : VectorSpace K V) (n : ℕ) (b : ℕ → V) (hb_spans : SpansByLinearCombination S n b)
     (f : ℕ → DualSpace S) (hf : IsDualBasis S n b f) :
     IsBasisFamily (dualSpaceVectorSpace L S) n f where
   linearlyIndependent := dualBasis_linearlyIndependent L hzero_add hmul_one S n b f hf
-  spans g := ⟨fun k => g.1 (b k), (dualBasis_spans L hzero_add hmul_one S n b hb f hf g).symm⟩
+  spans g := ⟨fun k => g.1 (b k), (dualBasis_spans L hzero_add hmul_one S n b hb_spans f hf g).symm⟩
 
 end CliffordMatrixIsomorphism.NecSuf.VectorSpace

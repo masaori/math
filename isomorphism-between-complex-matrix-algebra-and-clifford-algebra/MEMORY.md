@@ -12,15 +12,17 @@
 
 ## 次回やること
 
-- 状態台帳の「次の一歩」の未着手の四行（2026-11-22 に研究管理が足した「Lean の必要十分版の仮定」）を上から進める。必要十分版の 46 主張が、証明で使わない仮定（章の仮定の組の使わない欄、弱い前提で足りる前提）を持つ。最初の行で点検 lean/scripts/necsuf-unused-assumptions を台帳 lean/necsuf-unused-assumptions-ledger.txt と突き合わせて落ちる検査にし、以後の行で主張ごとに仮定を絞って台帳の行を消す。本文の前提は変えない。分離の検査の件数は全て 0 のまま保つ。
+- 状態台帳の「次の一歩」の未着手の三行（「Lean の必要十分版の仮定」の両側イデアル・商代数、一般の偶数次元、Φ の構成と奇数次元）を上から進める。点検 `bash lean/scripts/necsuf-unused-assumptions/run.sh`（lake build の後。18 分ほどかかる）が台帳 lean/necsuf-unused-assumptions-ledger.txt と一致することを Lean の検証に含める。絞った主張の行は台帳から消す。欄を引数にすると暗黙の写像が推論できない呼び出しがあるので、そのときは使う欄だけの組を置く（ZeroVector.lean の PreservesSmul）。
 - 二つの版に同じ形で別に置いた定義は、導出版で toNecSuf/ofNecSuf の写像を通して行き来する。再帰で定めた添字（2^M・個数など）を含む導出版は set_option smartUnfolding false を置く（lean/README.md の「置き場と名前空間」）。導出版の名前を eq_ で始めない。
 - Lean の対応の検査（`lean/scripts/verify-label-correspondence.ts`）は、導出版が対応する必要十分版の宣言を `NecSuf.…`・`….toNecSuf.…` の形で引くことを求める。導出版を足すときは、各段の導出版から組み立てず、必要十分版の主張を特殊化して T・S（`PointTransport`）で引き戻す。
 
 ## 未解決問題・確認事項
 
-- 2026-11-22: 必要十分版の仮定が主張ごとに絞られていない（本文の主張 376 件のうち 46 件が、証明で使わない仮定を持つ）。状態台帳の「研究管理への申し送り」に書いた。点検は `bash lean/scripts/necsuf-unused-assumptions/run.sh`（lake build の後）。
+- 2026-11-22: 必要十分版の仮定が主張ごとに絞られていない（本文の主張 376 件のうち 38 件が、証明で使わない仮定を持つ。台帳 lean/necsuf-unused-assumptions-ledger.txt）。状態台帳の「研究管理への申し送り」に書いた。点検は `bash lean/scripts/necsuf-unused-assumptions/run.sh`（lake build の後）。
 
 ## 完了済み
+
+- 2026-11-22: 状態台帳の「Lean の必要十分版の仮定」の一行目（点検を台帳と突き合わせる検査にし、数学的道具立ての 8 主張の仮定を絞る）を書き切った。点検は 46 主張から 38 主張。中身は台帳の前進の記録。
 
 - 2026-11-21: 状態台帳の「Lean の分離」の四行を書き切った。分離の検査の件数は全て 0、台帳の違反の行は無い。中身は台帳の前進の記録。
 

@@ -85,7 +85,8 @@ theorem addedGenerator_comm_image_parityElement (hneg : ∀ a : K, a + -a = 0) :
   -- claim_algebra_homomorphism_maps_ordered_product_to_ordered_product
   have hε : D.oddInclusionHom C hneg (D.parityElement C)
       = NecSuf.AlgebraOver.orderedProduct A' D.M (fun k => D.oddInclusionHom C hneg (D.parityFactor C k)) :=
-    (D.oddInclusionHom_isHom C hneg).map_orderedProduct D.M (D.parityFactor C)
+    NecSuf.AlgebraOver.IsAlgebraHomomorphism.map_orderedProduct (D.oddInclusionHom_isHom C hneg).map_one
+      (D.oddInclusionHom_isHom C hneg).map_mul D.M (D.parityFactor C)
   rw [hε]
   -- claim_element_commuting_with_each_factor_commutes_with_ordered_product
   exact commute_orderedProduct A' (D.addedGenerator C) D.M _

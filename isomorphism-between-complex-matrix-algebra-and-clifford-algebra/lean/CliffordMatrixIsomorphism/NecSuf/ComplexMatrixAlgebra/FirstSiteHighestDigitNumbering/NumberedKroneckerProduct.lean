@@ -38,7 +38,7 @@ def firstSiteHighestReindexMatrix (M : ℕ) : Mat K (PowerSet M) → Mat K (Idx 
 /-- 本文 `def_reindexing_of_matrices_by_inverse_of_numbering_with_first_site_as_highest_digit` の必要十分版：
 μ_{r_M}(G)_{S,T} = G_{r_M^{-1}(S), r_M^{-1}(T)}（μ_e を X := P_M、(n, e) := (2^M, r_M) に当てた写像）。 -/
 noncomputable def firstSiteHighestInverseReindexMatrix (M : ℕ) : Mat K (Idx (twoPower M)) → Mat K (PowerSet M) :=
-  inverseReindexMatrix (firstSiteHighestNumbering_isNumbering M)
+  inverseReindexMatrix (firstSiteHighestNumbering_isNumbering M).surjective
 
 /-- 本文 `def_kronecker_product_indexed_by_numbers` の番号順の積の因子：t に (A_t)_{I(t), J(t)} を与える族。 -/
 noncomputable def numberedKroneckerFactor {M : ℕ} (A : ℕ → Mat K (Idx 2)) (I J : OneTwoTuple M) (t : ℕ) : K :=

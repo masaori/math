@@ -10,7 +10,8 @@
   evaluationAt_isLinearMap                  `ValuedMapsLaws`（T と K^vec を線型空間にするため。行では使わない）
   eq_sum_coordinateTensor_basisTuple        `ValuedMapsLaws`・`UniquenessLaws`（0 + 0 = 0 と双対基底）・乗法の交換法則
   inducedLinearMap_isLinearMap              `ValuedMapsLaws`（T）・0 + 0 = 0・a · 0 = 0（和のスカラー倍）
-  multilinear_eq_of_basisTuple              0 + 0 = 0（線型写像が線型結合を移すこと）
+  multilinear_eq_of_basisTuple              0 + 0 = 0（線型写像が線型結合を移すこと）。b については V を張ることだけを
+                                            仮定に置く（基底の一次独立は使わない）
   inducedLinearMap_comp_coordinateTensor・coordinateTensor_isTensorProduct
                                             上のすべて
 
@@ -333,7 +334,7 @@ theorem IsMultilinearMap.linearMap_in_component {SV : VectorSpace K V}
 /-- 本文 `claim_k_multilinear_maps_agreeing_on_basis_tuples_are_equal` の帰納法の主張：
 すべての v ∈ B_j で g(v) = g'(v)（j ≤ k）。 -/
 theorem multilinear_eq_of_basisTuple_aux (h00 : (0 : K) + 0 = 0) (S : VectorSpace K V) (SU : VectorSpace K U)
-    (n : ℕ) (b : ℕ → V) (hb : IsBasisFamily S n b) (k : ℕ) (g g' : Tuple V k → U)
+    (n : ℕ) (b : ℕ → V) (hb_spans : SpansByLinearCombination S n b) (k : ℕ) (g g' : Tuple V k → U)
     (hg : IsMultilinearMap S SU k g) (hg' : IsMultilinearMap S SU k g')
     (hagree : ∀ x : MapsBetweenInitialSegments n k, g (basisTuple b x) = g' (basisTuple b x)) :
     ∀ j : ℕ, j ≤ k → ∀ v : Tuple V k, TuplesWithBasisTail b n j v → g v = g' v
@@ -348,10 +349,10 @@ theorem multilinear_eq_of_basisTuple_aux (h00 : (0 : K) + 0 = 0) (S : VectorSpac
       _ = g' v := by rw [hvx]
   | j + 1, hj, v, hv => by
     -- 帰納法の仮定
-    have ih := multilinear_eq_of_basisTuple_aux h00 S SU n b hb k g g' hg hg' hagree j (by omega)
+    have ih := multilinear_eq_of_basisTuple_aux h00 S SU n b hb_spans k g g' hg hg' hagree j (by omega)
     set r : Idx k := ⟨j + 1, Nat.succ_pos j, hj⟩ with hr
     -- Σ_{i=1}^{n} μ_i ·_V b_i = v(j)
-    obtain ⟨μ, hμ⟩ := hb.spans (v r)
+    obtain ⟨μ, hμ⟩ := hb_spans (v r)
     -- v[j ↦ b_i] ∈ B_{j-1}（i ∈ {1,…,n}）
     have hmem : ∀ i : ℕ, 1 ≤ i → i ≤ n →
         TuplesWithBasisTail b n j (replaceComponent v r (b i)) := by
@@ -381,11 +382,11 @@ theorem multilinear_eq_of_basisTuple_aux (h00 : (0 : K) + 0 = 0) (S : VectorSpac
 /-- 本文 `claim_k_multilinear_maps_agreeing_on_basis_tuples_are_equal`：
 すべての x ∈ X で g(b ∘ x) = g'(b ∘ x) なら g = g'。B_k は V^{1,…,k} 全体である。 -/
 theorem multilinear_eq_of_basisTuple (h00 : (0 : K) + 0 = 0) (S : VectorSpace K V) (SU : VectorSpace K U)
-    (n : ℕ) (b : ℕ → V) (hb : IsBasisFamily S n b) (k : ℕ) (g g' : Tuple V k → U)
+    (n : ℕ) (b : ℕ → V) (hb_spans : SpansByLinearCombination S n b) (k : ℕ) (g g' : Tuple V k → U)
     (hg : IsMultilinearMap S SU k g) (hg' : IsMultilinearMap S SU k g')
     (hagree : ∀ x : MapsBetweenInitialSegments n k, g (basisTuple b x) = g' (basisTuple b x)) :
     g = g' :=
-  funext fun v => multilinear_eq_of_basisTuple_aux h00 S SU n b hb k g g' hg hg' hagree k (le_refl k) v
+  funext fun v => multilinear_eq_of_basisTuple_aux h00 S SU n b hb_spans k g g' hg hg' hagree k (le_refl k) v
     (fun s hs => absurd hs (by have := s.2.2; omega))
 
 /-- 本文 `claim_map_from_coordinate_tensor_space_composed_with_tau_is_original`：h̄ ∘ τ = h。 -/
@@ -399,7 +400,7 @@ theorem inducedLinearMap_comp_coordinateTensor (L : ValuedMapsLaws K) (UL : Uniq
       (fun v => inducedLinearMap SU n b k h (coordinateTensor S n b hb k v)) :=
     (coordinateTensor_isMultilinear L UL hcomm S n b hb k).comp_linearMap
       (inducedLinearMap_isLinearMap L (UL.add_zero 0) UL.mul_zero SU n b k h)
-  apply multilinear_eq_of_basisTuple (UL.add_zero 0) S SU n b hb k _ h hcomp hh
+  apply multilinear_eq_of_basisTuple (UL.add_zero 0) S SU n b hb.spans k _ h hcomp hh
   intro x
   calc inducedLinearMap SU n b k h (coordinateTensor S n b hb k (basisTuple b x))
       = sumOverFiniteSet SU (isFiniteSet_maps n k) (coordinateTensor S n b hb k (basisTuple b x))
