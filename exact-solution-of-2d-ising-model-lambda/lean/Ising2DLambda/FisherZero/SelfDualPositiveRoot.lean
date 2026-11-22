@@ -33,10 +33,13 @@ noncomputable def selfDualRootPlus (s : Qbar) : QuadraticFieldElement s :=
 theorem selfDualRootPlus_representation (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :
     quadraticRepresentation s (selfDualRootPlus s) = (-1, 1) := by
-  let p : ℚ × ℚ := quadraticRepresentation s (selfDualRootPlus s)
+  -- 本文の第一の所属 `-1+s ∈ Q_s`。表示写像の値の所属は表示対の型で担う。
+  have hmem : -1 + s ∈ quadraticFieldSet s := selfDualRootPlus_mem s
+  let root : QuadraticFieldElement s := ⟨-1 + s, hmem⟩
+  let p : ℚ × ℚ := quadraticRepresentation s root
   have hvalue : algebraMap ℚ Qbar p.1 + algebraMap ℚ Qbar p.2 * s =
       algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar 1 * s := calc
-    _ = -1 + s := (quadraticRepresentation_spec s (selfDualRootPlus s)).symm
+    _ = -1 + s := (quadraticRepresentation_spec s root).symm
     _ = (-(algebraMap ℚ Qbar 1)) + s :=
       congrArg (fun x : Qbar => -x + s) (map_one (algebraMap ℚ Qbar)).symm
     _ = algebraMap ℚ Qbar (-1) + s :=
