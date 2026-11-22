@@ -1,4 +1,13 @@
 ## 現在地から移したもの
+- **2026-11-22（並列・二十七回目）、並列の表の先頭「周期持ち上げと閉包の残りの補題を具体版で示す」を論法ごとに五つに割り、先頭の周期並進の整数座標の補題（正の周期倍の並進が点を動かすこと・閉包の長さ・一周期ずらした平行座標の増分）を済ませた。** 具体版は整数の積が零なら因子が零であること、自然数の和の並べ替え、スカラー倍の分配則で直接示し、具体版の三ファイル（`PeriodicLiftClosurePeriodCount`・`PeriodicPlaneLiftParallelIncrease`・`PeriodicPlaneLiftDistinct`）から必要十分版の import を外した。分離の台帳は 342 行から 336 行になった（宣言 3 行、import 3 行）。並列の表の次は「四区間の道が頂点単純な閉歩道をなすことを具体版で示す」で、着手できる。
+
+## レビュー記録から移したもの
+- 2026-11-22（並列・二十七回目）: 前回の並列の具体版の活動点 `concreteTaggedActiveVertices`（`KacWard/TaggedSymmetricDifferenceDegree.lean`）を本文 `def_tagged_difference_active_vertices` の $V_{\mathcal A}=\{\vec e\mid\exists q\in\mathcal A(D,T),\ \vec e\in U(q)\}$ と照合した。標識付き対称差を標識を付けた後に取ることも本文と一致し、修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-22（並列・二十七回目）: 表の先頭「周期持ち上げと閉包の残りの補題を具体版で示す」は、周期並進の整数座標の算術、四区間の道の単純閉歩道、平面単純閉路の射影の非後退性、回転和の区間分割、一セル追加の Euler 数の増分という別々の論法を持つので五つに割り、先頭を済ませた。導出の `PeriodicLiftClosurePeriodCountFromNecSuf`・`PeriodicPlaneLiftParallelIncreaseFromNecSuf`・`PeriodicPlaneLiftDistinctFromNecSuf` は、具体版を呼ぶだけだったので必要十分版を import して特殊化で導く形に直した（持ち上げ点の相異なりは `periodic_lift_injective_necSuf` に格子剰余の射影・周期並進の無ねじれ・商余りの単射性を渡す）。`PeriodicPlaneLiftDistinct` が必要十分版経由で得ていた Mathlib は直接 import した。下流の `PeriodicLiftStepRepetition`・`PeriodicPlaneLiftTransverseBounded` の使っていない `open Ising2DLambda.NecSuf.KacWard` を外した。
+
+## 現在地から移したもの
 - **2026-11-22（主経路）、空集合での Pfaffian と行列式の等式を具体版だけで閉じた。** 空の完全マッチングの一意性を具体版へ置き、空置換の符号を具体版の転倒数で計算した。必要十分版からの導出を別ファイルへ移し、分離の台帳から宣言二行と import 一行を外した。
 - **2026-11-22（並列・二十六回目）、並列の表の先頭「活性頂点と標識付き差を具体版で示す」を済ませた。** 必要十分版の活動点の型で述べた具体版の写し（二つの相手写像・二歩の置換・二つの対合・活動点の一致）は、具体版の活動点の上に同じものが既に在ったので、導出のファイル四つへ移した（重複していた `taggedActive_projectedClosedEdgeCycle_abstractActivity` は消した）。具体版の四ファイルから必要十分版の import を外し、分離の台帳は 366 行から 353 行になった（宣言 9 行、import 4 行）。並列の表の次は「周期持ち上げと閉包の残りの補題を具体版で示す」で、着手できる。
 

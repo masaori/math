@@ -1342,6 +1342,7 @@ import Ising2DLambda.NecSuf.KacWard.SmoothingClosedWalkSplit
 import Ising2DLambda.KacWard.SmoothingClosedWalkSplit
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitTurningSum
 import Ising2DLambda.KacWard.SmoothingSplitTurningSum
+import Ising2DLambda.KacWard.SmoothingSplitTurningSumFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitWalkTurningSum
 import Ising2DLambda.KacWard.SmoothingSplitWalkTurningSum
 import Ising2DLambda.NecSuf.KacWard.SmoothingCyclicTurningInvarianceWalk

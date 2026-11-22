@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-22（並列・三十回目）、並列の表の先頭「平滑化の回転和の区間分割を具体版で示す」を済ませた。** 具体版 `smoothing_split_turning_sum` の最後の段（三つの辺添字区間 $(k,l]$・$(l,m]$・$(0,k]$ の和が $(0,m]$ の和に等しいこと）を、必要十分版 `interval_split_sum_necSuf` の呼び出しから、具体版のファイル内の補題 `contactSplit_turning_interval_sum`（連続する区間の和の連結を二回）に替え、具体版のファイルから必要十分版の import を外した。導出 `smoothing_split_turning_sum_from_necSuf` は新しいファイル `SmoothingSplitTurningSumFromNecSuf.lean` へ移し、必要十分版の特殊化で導く形にした。分離の台帳は 322 行から 320 行になった（宣言 1 行、import 1 行）。並列の表の次は「一セル追加による Euler 数の増分を具体版で示す」で、着手できる。
 - **2026-11-22（並列・二十九回目）、並列の表の先頭「平面単純閉路のトーラス射影が閉じた非後退辺列であることを具体版で示す」を済ませた。** 具体版 `planeSimpleCycleProjection_closedNonbacktracking` の証明を、必要十分版 `simple_cycle_projection_closed_nonbacktracking_necSuf` の呼び出しから、巡回接続は射影辺の終点と次の辺の始点が同じ格子点の射影であること、非後退性は反転なら二歩先の格子点が元に戻り頂点単純性で添字が戻ることという直接の証明に替えた。具体版のファイルから必要十分版の import を外し、導出のファイルは必要十分版を import して特殊化で導く形に直した。分離の台帳は 333 行から 331 行になった（宣言 1 行、import 1 行）。並列の表の次は「平滑化の回転和の区間分割を具体版で示す」で、着手できる。
 - **2026-11-22（主経路）、不変部分集合上の反転による符号保存を独立した転倒数の符号で示した。** 旧符号の定理は後続の具体版が参照するため定義上の橋として残し、分離の台帳の行数は変わらない。次は残る具体版の符号と転倒数の移行を続ける。
 - **2026-11-22（主経路）、有限線型順序集合の置換符号を独立した具体版へ切り替えた。** 既存の転倒数・順序対・符号の独立した証明を旧名から参照できるようにし、分離の台帳は統合後 321 行になった（今回、宣言 9 行が消えた）。ほかの具体版が使う必要十分版の import は残る。
 - **2026-11-22（並列・二十八回目）、並列の表の先頭「四区間の道が頂点単純な閉歩道をなすことを具体版で示す」を済ませた。** 具体版 `periodicLiftClosureVertex` を四部分への場合分けで直接定義し、頂点の相異なりを同じ部分の単射性と六組の像の分離から示した（`periodicLiftClosureVertex_injective`）。具体版のファイルから必要十分版の import を外し、導出のファイルは定義の一致（`periodicLiftClosureVertex_eq_necSuf`）を置いて必要十分版の特殊化で導く形に直した。分離の台帳は 336 行から 333 行になった（宣言 2 行、import 1 行）。並列の表の次は「平面単純閉路のトーラス射影が閉じた非後退辺列であることを具体版で示す」で、着手できる。
-- **2026-11-22（並列・二十七回目）、並列の表の先頭「周期持ち上げと閉包の残りの補題を具体版で示す」を論法ごとに五つに割り、先頭の周期並進の整数座標の補題（正の周期倍の並進が点を動かすこと・閉包の長さ・一周期ずらした平行座標の増分）を済ませた。** 具体版は整数の積が零なら因子が零であること、自然数の和の並べ替え、スカラー倍の分配則で直接示し、具体版の三ファイル（`PeriodicLiftClosurePeriodCount`・`PeriodicPlaneLiftParallelIncrease`・`PeriodicPlaneLiftDistinct`）から必要十分版の import を外した。分離の台帳は 342 行から 336 行になった（宣言 3 行、import 3 行）。並列の表の次は「四区間の道が頂点単純な閉歩道をなすことを具体版で示す」で、着手できる。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -57,7 +57,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 離散 Whitney 系 | 【分離】平滑化の回転和の区間分割を具体版で示す | 未着手 | 具体版 `smoothing_split_turning_sum` が `interval_split_sum_necSuf` を使う。同じファイルに導出 `smoothing_split_turning_sum_from_necSuf` が在るので導出のファイルへ移す。依存: なし。2026-11-22 に割った。 |
 | 離散 Whitney 系 | 【分離】一セル追加による Euler 数の増分を具体版で示す | 未着手 | 具体版 `CellComplexOneCellIncrement` が `cellComplex_oneCellIncrement_necSuf` を使う。本文の主張は参照用ノートへ退避済みで、Lean は保管。依存: なし。2026-11-22 に割った。 |
 | 離散 Whitney 系 | 【分離】ねじれの符号と形式平方根の定義を具体版で立て直す | 未着手 | 具体版が `NecSuf.KacWard` の `twistSign`・`quadraticParity`・`parity`・`arfParity`・`boolSign`、`sqrtCoeff`・`mk_sqrtCoeff_mul_self`・`constantCoeff_mk_sqrtCoeff`・`formalSquareRoot_unique_necSuf`、導出の `walkTwistSign_product_from_necSuf` を使う。置換の符号・互換・行シフトの軌道（`sign`・`transposition*`・`iterLeft`・`orbit`）は主経路の行が受け持つので含めない。依存: なし。2026-11-22 に割った。 |
 | 離散 Whitney 系 | 【一対一】四セルの偶奇弧の具体版の辺単純性の仮定を、非後退性から導く | 未着手 | 具体版 `vertexSurroundingCells_formParityArcs` は、接する四辺の通過回数が高々一であること（`hleft`・`hright`・`hdown`・`hup`）を仮定で受け取る。本文 `claim_vertex_surrounding_cells_form_parity_arcs` は、四辺の通過回数の和が二であることと、訪問へ入る辺と出る辺が非後退性で相異なることから導く。仮定に本文の前提（閉じた非後退辺列）だけを置き、本文どおり導く。依存: なし。2026-11-22 のレビューで見つけた。 |
@@ -67,11 +66,11 @@
 
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
+- 2026-11-22（並列・三十回目）: 前回の並列の具体版 `planeSimpleCycleProjection_closedNonbacktracking`（`KacWard/PlaneSimpleCycleTorusProjection.lean`）の巡回接続と非後退性の二段を、端点の仮定・反転の仮定・頂点単純性の仮定の使い方で読み直し、今回の区間分割の具体版を本文 `claim_smoothing_split_turning_sum` の最後の行（$A$ と補集合の項の合併）と照合した。一致し、修正は無かった。
 - 2026-11-22（並列・二十九回目）: 前回の並列の具体版 `periodicLiftClosureVertex_injective`（`KacWard/PeriodicLiftClosureCycle.lean`）の十六の場合を、参照用ノート「接続階段の周期並進による単純閉路」の各部分内の相異なりと六組の分離と照合し、導出の定義の一致 `periodicLiftClosureVertex_eq_necSuf` が四部分の場合分けの順と一致することを確かめた。修正は無かった。
 - 2026-11-22（主経路）: 有限順序集合の符号の具体版を本文の転倒数・符号の定義と照合し、独立した乗法性の証明に必要十分版の定理への委譲がないことを確かめた。修正は無かった。
 - 2026-11-22（主経路）: 空集合での Pfaffian・行列式の具体版を、本文の空和・空積・転倒数の定義と照合し、修正は無かった。
 - 2026-11-22（並列・二十八回目）: 前回の並列の具体版 `positivePeriodicMultiple_movesPoint`・`periodicLiftClosure_length`（`KacWard/PeriodicLiftClosurePeriodCount.lean`）を本文 `def_periodic_lift_closure_cycle` の $c\ge1$・$N:=2h+2cm$ と照合し、今回の四部分の合成を参照用ノート「接続階段の周期並進による単純閉路」の論法（各部分内の相異なりと全ての組の分離、閉性と単位性は別に渡す）と照合した。一致し、修正は無かった。
-- 2026-11-22（並列・二十七回目）: 前回の並列の具体版の活動点 `concreteTaggedActiveVertices`（`KacWard/TaggedSymmetricDifferenceDegree.lean`）を本文 `def_tagged_difference_active_vertices` の $V_{\mathcal A}=\{\vec e\mid\exists q\in\mathcal A(D,T),\ \vec e\in U(q)\}$ と照合した。標識付き対称差を標識を付けた後に取ることも本文と一致し、修正は無かった。
 
 ## 式変形の書き方の統一
 - 2026-11-22（主経路）: 「不変部分集合上の反転は置換の符号を保つ」で、符号の積から二乗への等号と、二乗が一になる等号を分け、各行末へ根拠を付けた。二行とも整数の全11,823例で確認し、SageMath 本体は未実行と記録した。
@@ -81,8 +80,8 @@
 - 2026-11-22（主経路）: 「符号は合成について乗法的である」の式鎖で、符号を転倒数の冪へ展開する行の根拠を本文の定義へのラベル参照にした。
 
 ## 前進の記録
+- 2026-11-22（並列・三十回目）: 表の先頭「平滑化の回転和の区間分割を具体版で示す」を、区間の連結一つの論法として割らずに済ませた。同じ形の補題が切断線偶奇の具体版 `SmoothingSplitSeamParity` に自然数値で私的に在ったので、同じ証明を整数値で回転和の具体版のファイルに置いた。導出のファイルは、各項を平滑化後の出辺の項へ書き換える段を具体版と同じに書き、区間の合併だけを必要十分版で行う。
 - 2026-11-22（並列・二十九回目）: 表の先頭「平面単純閉路のトーラス射影が閉じた非後退辺列であることを具体版で示す」を、端点の一致と単射性の一つの論法として割らずに済ませた。本文の主張の `lean:` が挙げる具体版 `planeUnitPathTorusProjection_closedNonbacktracking` は元から必要十分版を使っておらず、変えていない。必要十分版を使っていたのは導出だけが引く一般形の具体版で、その証明を直接の証明に替えた。導出 `PlaneUnitPathTorusProjectionEndpointsFromNecSuf` は具体版を経由して必要十分版を得ていたので、必要十分版を直接 import した。
 - 2026-11-22（主経路）: 先頭の符号と転倒数の移行から、不変部分集合上の反転による符号保存を一つの論法として済ませた。具体版は独立した転倒数の符号とその乗法性を使い、旧符号の定理は下流との橋として残した。分離の台帳の行数はまだ変わらない。
 - 2026-11-22（主経路）: 符号参照の移行を有限線型順序集合の証明と残る具体版の参照に割り、先頭の一論法を済ませた。既存の独立した符号の証明を旧名で公開し、多項式へ持ち上げる符号等式も独立した定義へ展開した。分離の台帳から宣言 9 行を消した。ほかの具体版が使う必要十分版の import は後続の行に残した。
 - 2026-11-22（並列・二十八回目）: 表の先頭「四区間の道が頂点単純な閉歩道をなすことを具体版で示す」を、四部分の和の場合分け一つの論法として割らずに済ませた。必要十分版の `fourSegmentVertex` の別名だった具体版の定義を整数格子の上の場合分けで定義し直し、`four_segments_form_simple_closed_walk_necSuf` を呼んでいた証明を十六の場合の直接の証明に替えた。導出 `periodicLiftClosure_is_simple_cycle_from_necSuf` は具体版を呼ぶだけだったので、必要十分版を import して特殊化で導く形に直した。本文の主張は参照用ノートに退避済みで、本文の `lean:` は変わらない。
-- 2026-11-22（並列・二十七回目）: 表の先頭「周期持ち上げと閉包の残りの補題を具体版で示す」は、周期並進の整数座標の算術、四区間の道の単純閉歩道、平面単純閉路の射影の非後退性、回転和の区間分割、一セル追加の Euler 数の増分という別々の論法を持つので五つに割り、先頭を済ませた。導出の `PeriodicLiftClosurePeriodCountFromNecSuf`・`PeriodicPlaneLiftParallelIncreaseFromNecSuf`・`PeriodicPlaneLiftDistinctFromNecSuf` は、具体版を呼ぶだけだったので必要十分版を import して特殊化で導く形に直した（持ち上げ点の相異なりは `periodic_lift_injective_necSuf` に格子剰余の射影・周期並進の無ねじれ・商余りの単射性を渡す）。`PeriodicPlaneLiftDistinct` が必要十分版経由で得ていた Mathlib は直接 import した。下流の `PeriodicLiftStepRepetition`・`PeriodicPlaneLiftTransverseBounded` の使っていない `open Ising2DLambda.NecSuf.KacWard` を外した。
