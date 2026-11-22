@@ -11,7 +11,7 @@ namespace Ising2DLambda.KacWard
 
 open scoped BigOperators
 open Ising2DLambda.AlgebraicEigenvalue Ising2DLambda.PartitionPolynomial
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
 
 /-- 整数包含と定数多項式への埋め込みの合成。 -/
 noncomputable def integerConstantPolynomialHom : ℤ →+* QbarPoly :=
@@ -21,7 +21,7 @@ noncomputable def integerConstantPolynomialHom : ℤ →+* QbarPoly :=
 theorem qbarPolynomialDeterminant_eq_signedPermutationSum
     {ι : Type} [Fintype ι] [LinearOrder ι] (A : QbarPolynomialMatrix ι) :
     Matrix.det A = ∑ σ : Equiv.Perm ι,
-      integerConstantPolynomialHom (sign (fun i j : ι => i < j) σ) *
+      integerConstantPolynomialHom (finiteOrderedSign σ) *
         ∏ i, A i (σ i) := by
   classical
   calc
@@ -29,9 +29,9 @@ theorem qbarPolynomialDeterminant_eq_signedPermutationSum
     _ = ∑ σ : Equiv.Perm ι, ((Equiv.Perm.sign σ : ℤ) : QbarPoly) *
         ∏ i, A.transpose (σ i) i := Matrix.det_apply' _
     _ = ∑ σ : Equiv.Perm ι,
-        integerConstantPolynomialHom (sign (fun i j : ι => i < j) σ) *
+        integerConstantPolynomialHom (finiteOrderedSign σ) *
           ∏ i, A i (σ i) := by
-      simp only [IntegerMatrix.inversionSign_eq_mathlibSign, Matrix.transpose_apply,
+      simp only [IntegerMatrix.inversionSignIndependent_eq_mathlibSign, Matrix.transpose_apply,
         integerConstantPolynomialHom, RingHom.coe_comp, Function.comp_apply,
         Int.coe_castRingHom, map_intCast]
 
@@ -42,26 +42,26 @@ theorem polynomialReversalMatrix_determinant (L : ℕ) :
   calc
     Matrix.det (polynomialReversalMatrix L) =
         ∑ σ : Equiv.Perm (OrientedEdge L),
-          integerConstantPolynomialHom (sign (fun e f => e < f) σ) *
+          integerConstantPolynomialHom (finiteOrderedSign σ) *
             ∏ e, polynomialReversalMatrix L e (σ e) :=
       qbarPolynomialDeterminant_eq_signedPermutationSum _
     _ = ∑ σ : Equiv.Perm (OrientedEdge L),
-        integerConstantPolynomialHom (sign (fun e f => e < f) σ) *
+        integerConstantPolynomialHom (finiteOrderedSign σ) *
           ∏ e, integerConstantPolynomialHom (reversalMatrix L e (σ e)) := rfl
     _ = ∑ σ : Equiv.Perm (OrientedEdge L),
-        integerConstantPolynomialHom (sign (fun e f => e < f) σ) *
+        integerConstantPolynomialHom (finiteOrderedSign σ) *
           integerConstantPolynomialHom (∏ e, reversalMatrix L e (σ e)) := by
       simp only [map_prod]
     _ = ∑ σ : Equiv.Perm (OrientedEdge L),
         integerConstantPolynomialHom
-          (sign (fun e f => e < f) σ * ∏ e, reversalMatrix L e (σ e)) := by
+          (finiteOrderedSign σ * ∏ e, reversalMatrix L e (σ e)) := by
       simp only [map_mul]
     _ = integerConstantPolynomialHom
         (∑ σ : Equiv.Perm (OrientedEdge L),
-          sign (fun e f => e < f) σ * ∏ e, reversalMatrix L e (σ e)) := by
+          finiteOrderedSign σ * ∏ e, reversalMatrix L e (σ e)) := by
       rw [map_sum]
     _ = integerConstantPolynomialHom (IntegerMatrix.determinant (reversalMatrix L)) := by
-      rw [IntegerMatrix.determinant_eq_signedPermutationSum]
+      rw [IntegerMatrix.determinant_eq_independentSignedPermutationSum]
     _ = integerConstantPolynomialHom 1 := by rw [reversalMatrix_determinant]
     _ = 1 := map_one _
 
