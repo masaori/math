@@ -10,7 +10,7 @@ namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Finset
 open scoped Classical
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 /-- 本文の二点除去、残余集合の閉性、対の相殺、総和の六等号。
 対象集合が空の場合も空和を用いるため、添字集合の非空性は仮定しない。 -/
@@ -18,13 +18,13 @@ theorem oddOrbit_signed_sum_zero
     {J : Type*} [Fintype J] [LinearOrder J]
     (A : Matrix J J (Polynomial Qbar)) (hA : ∀ i j, A j i = -A i j) :
     (∑ σ : {σ : Equiv.Perm J // σ ∈ oddOrbitDerangements J},
-      Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign σ.val : ℤ) : Qbar) *
         ∏ i : J, A i (σ.val i)) = 0 := by
   classical
   let D := {σ : Equiv.Perm J // σ ∈ oddOrbitDerangements J}
   let F : D → D := selectedOddOrbitInvolution
   let w : D → Polynomial Qbar := fun σ =>
-    Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
+    Polynomial.C ((finiteOrderedSign σ.val : ℤ) : Qbar) *
       ∏ i : J, A i (σ.val i)
   have hF (σ : D) : F (F σ) = σ := selectedOddOrbitInvolution_twice σ
   have hfixed (σ : D) : F σ ≠ σ := selectedOddOrbitInvolution_no_fixed σ

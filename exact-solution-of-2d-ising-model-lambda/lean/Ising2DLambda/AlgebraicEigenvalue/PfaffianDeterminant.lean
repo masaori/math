@@ -123,19 +123,19 @@ theorem qbarPolynomialPfaffian_sq_eq_det
       Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
         ∏ i : J, A i (σ i) := qbarPolynomial_det_eq_sum_fixedPointFree A hA.1
     _ = ∑ σ ∈ fixedPointFreePermutations J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
-        ∏ i : J, A i (σ i) := qbarPolynomial_fixedPointFree_sum_sign_from_necSuf A
+      Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) *
+        ∏ i : J, A i (σ i) := rfl
     _ = (∑ σ : EvenOrbitPermutation J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign σ.val : ℤ) : Qbar) *
         ∏ i : J, A i (σ.val i)) +
       (∑ σ : {σ : Equiv.Perm J // σ ∈ oddOrbitDerangements J},
-        Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
+        Polynomial.C ((finiteOrderedSign σ.val : ℤ) : Qbar) *
           ∏ i : J, A i (σ.val i)) := hpartition
     _ = (∑ σ : EvenOrbitPermutation J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign σ.val : ℤ) : Qbar) *
         ∏ i : J, A i (σ.val i)) + 0 := congrArg (_ + ·) hcancel
     _ = ∑ σ : EvenOrbitPermutation J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign σ.val : ℤ) : Qbar) *
         ∏ i : J, A i (σ.val i) := add_zero _
     _ = ∑ p : PerfectMatching J × PerfectMatching J,
         (matchingSignPolynomial p.1 * matchingSignPolynomial p.2) *

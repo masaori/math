@@ -10,7 +10,7 @@ import Mathlib.Algebra.Ring.Parity
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
@@ -111,19 +111,25 @@ theorem selectedOddOrbit_skew_product_neg
 theorem selectedOddOrbit_skew_signed_term_neg
     (A : Matrix J J (Polynomial Qbar)) (hA : ∀ i j, A j i = -A i j)
     (σ : Equiv.Perm J) (hσ : σ ∈ oddOrbitDerangements J) :
-    Polynomial.C ((sign (fun i j : J => i < j) (selectedOddOrbitReversal σ hσ.2) : ℤ) : Qbar) *
+    Polynomial.C ((finiteOrderedSign (selectedOddOrbitReversal σ hσ.2) : ℤ) : Qbar) *
         (∏ i : J, A i (selectedOddOrbitReversal σ hσ.2 i)) =
-      -(Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+      -(Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) *
         (∏ i : J, A i (σ i))) := by
   classical
   let τ := selectedOddOrbitReversal σ hσ.2
   let c : Equiv.Perm J → Polynomial Qbar := fun π =>
-    Polynomial.C ((sign (fun i j : J => i < j) π : ℤ) : Qbar)
+    Polynomial.C ((finiteOrderedSign π : ℤ) : Qbar)
+  have hsign : finiteOrderedSign τ = finiteOrderedSign σ := by
+    change finiteOrderedSign
+      (invariantSubsetReversal (selectedOddOrbitFinset σ hσ.2) σ
+        (selectedOddOrbitFinset_invariant σ hσ.2)) = finiteOrderedSign σ
+    exact invariantSubsetReversal_finiteOrderedSign
+      (selectedOddOrbitFinset σ hσ.2) σ (selectedOddOrbitFinset_invariant σ hσ.2)
   have hc : c τ = c σ := by
     calc
-      c τ = Polynomial.C ((sign (fun i j : J => i < j) τ : ℤ) : Qbar) := rfl
-      _ = Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) := by
-        rw [selectedOddOrbitReversal_sign σ hσ]
+      c τ = Polynomial.C ((finiteOrderedSign τ : ℤ) : Qbar) := rfl
+      _ = Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) := by
+        rw [hsign]
       _ = c σ := rfl
   calc
     c τ * (∏ i : J, A i (τ i)) = c σ * (∏ i : J, A i (τ i)) := by rw [hc]
