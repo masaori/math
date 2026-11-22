@@ -95775,8 +95775,16 @@ T(f,d)
                         " を満たす ", math(String.raw`\vec w\in\vec E_L`), " がある。"]),
                       displayMath(String.raw`(J_L)_{\vec w,\sigma(\vec w)}=0
 \qquad\bigl(\because\ \blkref{def_reversal_matrix},\ \sigma(\vec w)\ne\iota(\vec w)\bigr)`),
-                      displayMath(String.raw`\prod_{\vec e\in\vec E_L}(J_L)_{\vec e,\sigma(\vec e)}=0
-\qquad\bigl(\because\ \text{零の因子を含む整数の有限積}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+\prod_{\vec e\in\vec E_L}(J_L)_{\vec e,\sigma(\vec e)}
+&=(J_L)_{\vec w,\sigma(\vec w)}
+  \prod_{\vec e\in\vec E_L\setminus\{\vec w\}}(J_L)_{\vec e,\sigma(\vec e)}
+&&\bigl(\because\ \vec w\in\vec E_L\text{ で有限積を分ける}\bigr)\\
+&=0\cdot\prod_{\vec e\in\vec E_L\setminus\{\vec w\}}(J_L)_{\vec e,\sigma(\vec e)}
+&&\bigl(\because\ \text{直前の零因子を代入}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の零元との積}\bigr)
+\end{aligned}`),
                       displayMath(String.raw`\begin{aligned}
 \operatorname{sgn}(\sigma)\prod_{\vec e\in\vec E_L}(J_L)_{\vec e,\sigma(\vec e)}
 &=\operatorname{sgn}(\sigma)\cdot0
