@@ -101,6 +101,7 @@ export default defineBlocks([
     kind: "claim",
     title: { tex: "\\text{対称な実数の行列について、}u^{\\top}Pv\\text{ と }v^{\\top}Pu\\text{ は等しい}" },
     labels: ["real_bilinear_value_of_symmetric_matrix_is_symmetric"],
+    lean: ["Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -159,6 +160,7 @@ u^\top Pv
     kind: "claim",
     title: { tex: "\\text{右のベクトルが成分ごとの和なら、実数の双線型値 }x^{\\top}Pw\\text{ は和に分かれる}" },
     labels: ["real_bilinear_value_is_additive_in_right_vector"],
+    lean: ["Ising2D.real_bilinear_value_is_additive_in_right_vector"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -229,6 +231,7 @@ x^\top Pw
     kind: "claim",
     title: { tex: "\\text{左のベクトルが成分ごとの和なら、実数の双線型値 }w^{\\top}Px\\text{ は和に分かれる}" },
     labels: ["real_bilinear_value_is_additive_in_left_vector"],
+    lean: ["Ising2D.real_bilinear_value_is_additive_in_left_vector"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -303,6 +306,7 @@ w^\top Px
       tex: "\\text{成分が非負の実数の行列と、成分が非負の二つの実数のベクトルについて、}x^{\\top}Py\\text{ は非負である}",
     },
     labels: ["real_bilinear_value_with_nonnegative_entries_is_nonnegative"],
+    lean: ["Ising2D.real_bilinear_value_with_nonnegative_entries_is_nonnegative"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -392,6 +396,7 @@ x^\top Py
       tex: "\\text{ベクトルを実数倍すると、実数の双線型値 }w^{\\top}Pw\\text{ はその実数どうしの積の倍になる}",
     },
     labels: ["real_bilinear_value_of_scalar_multiple_vector"],
+    lean: ["Ising2D.real_bilinear_value_of_scalar_multiple_vector"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -482,6 +487,7 @@ w^\top Pw
       tex: "\\text{実数の双線型値 }u^{\\top}Pv\\text{ は、}u\\text{ の成分と }Pv\\text{ の成分の積の和である}",
     },
     labels: ["real_bilinear_value_is_sum_with_real_matrix_vector_product"],
+    lean: ["Ising2D.real_bilinear_value_is_sum_with_real_matrix_vector_product"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -548,6 +554,7 @@ u^\top Pv
       text: "対称な実数の行列は、成分の積の和で左の因子から右の因子へ移せる",
     },
     labels: ["real_symmetric_matrix_moves_between_factors_of_sum_of_products"],
+    lean: ["Ising2D.real_symmetric_matrix_moves_between_factors_of_sum_of_products"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -622,6 +629,7 @@ u^\top Pv
       tex: "\\text{成分が非負の実数の行列について、}x^{\\top}Px\\text{ は成分の絶対値を並べたベクトルでの値以下である}",
     },
     labels: ["real_bilinear_value_at_most_value_at_absolute_vector"],
+    lean: ["Ising2D.real_bilinear_value_at_most_value_at_absolute_vector", "Ising2D.abs_real_bilinear_row_le_row_abs_sum"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -719,6 +727,7 @@ x^\top P x
       text: "成分の絶対値を並べたベクトルのノルムは、もとのベクトルのノルムに等しい",
     },
     labels: ["norm_of_vector_of_absolute_values_equals_norm"],
+    lean: ["Ising2D.norm_of_vector_of_absolute_values_equals_norm"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -773,6 +782,7 @@ x^\top P x
       text: "零でない実数のベクトルの各成分をそのノルムで割ったベクトルは、ノルムが 1 である",
     },
     labels: ["norm_of_normalized_real_vector_is_one"],
+    lean: ["Ising2D.norm_of_normalized_real_vector_is_one", "Ising2D.vecNorm_pos_of_ne_zero"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -929,6 +939,7 @@ x^\top P x
       text: "実数の行列が動かさない零でない実数のベクトルは、各成分をそのノルムで割っても、その行列で動かない",
     },
     labels: ["real_matrix_fixed_vector_stays_fixed_after_normalization"],
+    lean: ["Ising2D.real_matrix_fixed_vector_stays_fixed_after_normalization"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -1045,6 +1056,7 @@ x^\top P x
       text: "零でない実数のベクトルの各成分をそのノルムで割ると、実数の双線型値はノルムの二乗で割ったものになる",
     },
     labels: ["real_bilinear_value_of_normalized_vector"],
+    lean: ["Ising2D.real_bilinear_value_of_normalized_vector"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
