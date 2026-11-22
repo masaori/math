@@ -1,5 +1,6 @@
 /- 具体版が必要十分版の有限路の座標評価の特殊化として得られることの導出。 -/
 import Ising2DLambda.KacWard.ParallelStaircaseTransverseWidth
+import Ising2DLambda.NecSuf.KacWard.ParallelStaircaseTransverseWidth
 
 namespace Ising2DLambda.KacWard
 

@@ -8,12 +8,9 @@
 -/
 import Ising2DLambda.KacWard.WindingParallelStaircase
 import Ising2DLambda.KacWard.PeriodicPlaneLiftTransverseBounded
-import Ising2DLambda.NecSuf.KacWard.ParallelStaircaseTransverseWidth
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 private lemma windingParallelStaircase_transverse_between
     (L : ℕ) (wh wv : ℤ) (s : ℕ)

@@ -1,5 +1,6 @@
 /- 具体版が必要十分版の整数格子上の反復階段と周期並進への特殊化であることの導出。 -/
 import Ising2DLambda.KacWard.PeriodTranslatesOfIteratedStaircase
+import Ising2DLambda.NecSuf.KacWard.PeriodTranslatesOfIteratedStaircase
 
 namespace Ising2DLambda.KacWard
 

@@ -1,10 +1,13 @@
 ## 現在地から移したもの
+- **2026-11-21（並列・二十一回目）、表の先頭「方向の列と階段を具体版の定義で立て直す」を三つの論法（方向の列・階段・一側閉包の四区間）に割り、方向の列を済ませた。** 具体版のファイル `KacWard/DirectionSequence.lean`（必要十分版を import しない）に本文の連結・内部和 $I_n$・循環隣接和 $C_n$（値は ℤ）・二区間の列・余りによる反復と、循環隣接和の移送と範囲内の一致の補題を置き、具体版の参照を移した。分離の台帳は 468 行から 432 行になった（宣言 33 行、import 3 行）。並列の表の次は「二相の階段と反復階段を具体版の定義で立て直す」で、着手できる。
 - **2026-11-21（並列・二十回目）、表の先頭「回転と回転値を具体版の定義で立て直す」を済ませた。** 具体版のファイル `KacWard/Turn.lean` に本文の表どおりの `Turn`・`turnValue`・`phaseOfTurn`（値は代数的数）・`reverseTurn` を置き、具体版の参照を全て移した。`three_value_phase_ne_zero` を使っていた具体版は三つの値を直接調べる証明にした。分離の台帳は 511 行から 468 行になった（宣言 39 行、import 4 行）。並列の表の次は「方向の列と階段を具体版の定義で立て直す」で、着手できる。
 
 ## レビュー記録から移したもの
+- 2026-11-21（並列・二十一回目）: 前回の並列の `KacWard/Turn.lean` と、`ReversalRotationPhase`・`TotalTurning`・`ShortPairRotationPhaseNonzero` の三つの場合の直接の証明と値の一致の補題を読み直した。本文の表（直進 0／1、左回転 1／$z$、右回転 $-1$／$z^{-1}$）と一致し、修正は無かった。
 - 2026-11-21（並列・二十回目）: 前回の並列の `claim_eighth_root_exists`（準備の $s\ne0$ と $s^{-1}$、$\zeta\cdot\zeta=\omega$ の十三行、$\zeta^4$ からの七行）を読み直した。各行の根拠と記号の宣言を確かめ、修正は無かった。
 
 ## 前進の記録から移したもの
+- 2026-11-21（並列・二十一回目）: 表の先頭「方向の列と階段を具体版の定義で立て直す」は、方向の列（連結・内部和・循環隣接和・二区間・反復）、二相の階段と反復階段、一側閉包の四区間の道・接合対・四部分の閉包という、定義を置き換える三つの論法を持つ（一側閉包は階段を区間に持つ）。三行に割り、方向の列を済ませた。具体版の定義は重みの値を本文どおり ℤ に固定し、列の項の型は引数で受ける（本文は整数ベクトルの列にも方向の列にも同じ記法を使う）。具体版 `OneSidedClosurePeriodDifferenceTurning` が呼んでいた必要十分版の `cyclicAdjacentSum_transport_necSuf`・`cyclicAdjacentSum_congr_range`、`OneSidedClosureNonbacktracking` の `repeatDirectionSequence_last` は具体版の補題に替えた。導出の五ファイルは `KacWard/DirectionSequenceFromNecSuf.lean` の定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を通して必要十分版を呼ぶ。具体版の `FourPartAdjacentSum`・`RepeatedAdjacentSum`・`OneSidedClosureStepSequence` から必要十分版の import を外した。
 - 2026-11-21（並列・二十回目）: 表の先頭「回転と回転値を具体版の定義で立て直す」を一つの論法（定義の置き換え）として割らずに済ませた。新しい具体版のファイル `KacWard/Turn.lean`（必要十分版を import しない）に四つの定義を置き、名前空間 `Ising2DLambda.KacWard` の中の名前が開いた必要十分版の名前より先に解決されることで、14 の具体版のファイルの参照を移した。具体版の `reversal_rotation_phase_product` と `shortPairRotationPhase_ne_zero_of_direction_ne` は必要十分版の定理を呼ばず三つの場合を直接調べる証明にした。導出の定理（`*_from_necSuf`）は、具体版の場合を必要十分版の場合へ送る `Turn.toNecSuf` と、値の一致の補題（`phaseOfTurn_eq_necSuf`・`turnValue_eq_necSuf` とその列版）を通して必要十分版を呼ぶ。四つの具体版のファイルから必要十分版 `TotalTurning` の import を外した。本文 `def_step_turning` の `lean:` を具体版の `turnValue` に替えた。
 
 ## 現在地から移したもの

@@ -1,4 +1,6 @@
 ## 2026-11-21 に移動した記録
+2026-11-21（並列・二十一回目）: 離散 Whitney 系の方向の列（連結・内部和・循環隣接和・二区間の列・余りによる反復）を具体版の定義として `KacWard/DirectionSequence.lean` に置き、具体版の参照を必要十分版から移した。表の行は方向の列・階段・一側閉包の四区間の三行に割った。分離の台帳は 468 行から 432 行（宣言 33、import 3 が消えた）。lake build・check-no-sorry・分離・一般論の検査・npm run check・verify-check-linkage 通過。
+
 2026-11-21（並列・二十回目）: 離散 Whitney 系の回転の三つの場合 `Turn` と、その上の一歩の回転数・回転位相・逆順の表を具体版の定義として `KacWard/Turn.lean` に置き、具体版の 14 ファイルの参照を必要十分版から移した。分離の台帳は 511 行から 468 行（宣言 39、import 4 が消えた）。lake build・check-no-sorry・分離・一般論の検査・npm run check・verify-check-linkage 通過。
 
 ## 2026-11-21 に移動した記録

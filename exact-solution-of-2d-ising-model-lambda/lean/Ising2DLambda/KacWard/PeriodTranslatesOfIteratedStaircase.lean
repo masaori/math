@@ -7,12 +7,9 @@
 -/
 import Ising2DLambda.KacWard.IteratedTransverseStaircase
 import Ising2DLambda.KacWard.PeriodicPlaneLiftParallelIncrease
-import Ising2DLambda.NecSuf.KacWard.PeriodTranslatesOfIteratedStaircase
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 private lemma signed_prefix_between (a b : ℤ) (n : ℕ) (hn : n ≤ a.natAbs) :
     min 0 (a * b) ≤ b * ((n : ℤ) * Int.sign a) ∧
@@ -157,16 +154,24 @@ theorem iteratedTransverseStaircase_ne_period_translate
     have hLz : 1 ≤ (L : ℤ) := by omega
     have hmul : wv ^ 2 + wh ^ 2 ≤ (L : ℤ) * (wv ^ 2 + wh ^ 2) := by nlinarith
     exact lt_of_lt_of_le hsumDominates hmul
-  exact bounded_family_avoids_nonzero_integer_translates_necSuf
-    (iteratedTransverseStaircase wh wv base)
-    (fun z point => point + z • windingShift L wv wh)
-    (windingParallelCoordinate wv wh)
-    |wh * wv| ((L : ℤ) * (wv ^ 2 + wh ^ 2))
-    (fun i j => iteratedTransverseStaircase_parallel_pair_width wh wv base hwind i j)
-    (by
-      intro z point
-      rw [map_add, map_zsmul, windingParallelCoordinate_windingShift]
-      ring)
-    hperiod s s' z hz
+  -- 二点が等しいと仮定して平行座標を取ると、差が周期並進の増分の整数倍になる。
+  intro heq
+  have hcoordinate := congrArg (windingParallelCoordinate wv wh) heq
+  rw [map_add, map_zsmul, windingParallelCoordinate_windingShift] at hcoordinate
+  -- 幅の上界: 階段の二点の平行座標差は |w_h w_v| 以下である。
+  have hbound := iteratedTransverseStaircase_parallel_pair_width wh wv base hwind s s'
+  -- 増分の下界: |z| ≥ 1 なので |z|·L(w_v²+w_h²) ≥ L(w_v²+w_h²) > |w_h w_v|。
+  have habsz : 1 ≤ |z| := Int.one_le_abs hz
+  have hperiodNonneg : 0 ≤ (L : ℤ) * (wv ^ 2 + wh ^ 2) := by positivity
+  have hlower : (L : ℤ) * (wv ^ 2 + wh ^ 2) ≤ |z| * ((L : ℤ) * (wv ^ 2 + wh ^ 2)) := by
+    nlinarith
+  have hsame :
+      |windingParallelCoordinate wv wh (iteratedTransverseStaircase wh wv base s) -
+          windingParallelCoordinate wv wh (iteratedTransverseStaircase wh wv base s')| =
+        |z| * ((L : ℤ) * (wv ^ 2 + wh ^ 2)) := by
+    rw [hcoordinate, smul_eq_mul, add_sub_cancel_left, abs_mul,
+      abs_of_nonneg hperiodNonneg]
+  rw [hsame] at hbound
+  exact (not_lt_of_ge hbound) (lt_of_lt_of_le hperiod hlower)
 
 end Ising2DLambda.KacWard

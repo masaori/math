@@ -8,22 +8,21 @@
 -/
 import Ising2DLambda.KacWard.StaircaseFromBandTopAvoidsPeriodicPlaneLift
 import Ising2DLambda.KacWard.TransverseTranslatedPeriodicPlaneLift
-import Ising2DLambda.NecSuf.KacWard.FirstHitConnectingStaircase
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
-
-/-- 実際の閉歩道の持ち上げから、移動後の持ち上げに当たる歩数を集める。 -/
+/-- 本文の当たり歩数の集合 `S(γ,k₀,u)`。`1` 以上 `u·n_⊥` 以下の歩数のうち、反復横断階段の点が
+移動後の持ち上げのどれかに等しいものを集める。 -/
 noncomputable def firstHitStepSetFromWalk {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L) (k0 : ℤ) (u : ℕ) : Finset ℕ :=
-  firstHitStepSet
-    (iteratedTransverseStaircase (horizontalDirectedWindingNumber γ)
-      (verticalDirectedWindingNumber γ) (periodicPlaneLiftFromWalk γ k0))
-    (transverseTranslatedPeriodicPlaneLiftFromWalk γ (u : ℤ))
-    (u * (horizontalDirectedWindingNumber γ).natAbs +
-      u * (verticalDirectedWindingNumber γ).natAbs)
+    (γ : Fin (m + 1) → OrientedEdge L) (k0 : ℤ) (u : ℕ) : Finset ℕ := by
+  classical
+  exact (Finset.Icc 1 (u * (horizontalDirectedWindingNumber γ).natAbs +
+      u * (verticalDirectedWindingNumber γ).natAbs)).filter
+    (fun s => ∃ k : ℤ,
+      iteratedTransverseStaircase (horizontalDirectedWindingNumber γ)
+          (verticalDirectedWindingNumber γ) (periodicPlaneLiftFromWalk γ k0) s =
+        transverseTranslatedPeriodicPlaneLiftFromWalk γ (u : ℤ) k)
 
 /-- 正の移動回数では、階段の終端が移動後の持ち上げの基点に当たる。 -/
 theorem firstHitStepSetFromWalk_nonempty {L m : ℕ}
@@ -50,7 +49,7 @@ theorem firstHitStepSetFromWalk_nonempty {L m : ℕ}
       windingTransverseStaircase, twoPhaseStaircase,
       transverseTranslatedPeriodicPlaneLiftFromWalk]
   refine ⟨u * n, ?_⟩
-  simp only [firstHitStepSetFromWalk, firstHitStepSet, Finset.mem_filter,
+  simp only [firstHitStepSetFromWalk, Finset.mem_filter,
     Finset.mem_Icc]
   refine ⟨⟨by exact Nat.mul_pos hu hn, by simp [n, wh, wv, Nat.mul_add]⟩, ⟨k0, ?_⟩⟩
   simpa [n, Nat.mul_add, wh, wv] using hend
@@ -68,17 +67,6 @@ noncomputable def firstHitConnectingStaircaseFromWalk {L m : ℕ}
     Fin (firstHitStepFromWalk γ k0 u hnonempty + 1) → ℤ × ℤ :=
   fun s => iteratedTransverseStaircase (horizontalDirectedWindingNumber γ)
     (verticalDirectedWindingNumber γ) (periodicPlaneLiftFromWalk γ k0) s.val
-
-theorem firstHitConnectingStaircaseFromWalk_eq_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L) (k0 : ℤ) (u : ℕ)
-    (hnonempty : (firstHitStepSetFromWalk γ k0 u).Nonempty) :
-    firstHitConnectingStaircaseFromWalk γ k0 u hnonempty =
-      firstHitPrefix
-        (iteratedTransverseStaircase (horizontalDirectedWindingNumber γ)
-          (verticalDirectedWindingNumber γ) (periodicPlaneLiftFromWalk γ k0))
-        (transverseTranslatedPeriodicPlaneLiftFromWalk γ (u : ℤ))
-        (u * (horizontalDirectedWindingNumber γ).natAbs +
-          u * (verticalDirectedWindingNumber γ).natAbs) hnonempty := rfl
 
 /-- `claim_first_hit_connecting_staircase_meets_lifts_only_at_ends`。 -/
 theorem firstHitConnectingStaircase_meets_lifts_only_at_ends
