@@ -63,11 +63,13 @@ theorem trace_identity_eq_sum_one : (1 : Matrix n n ℂ).trace = ∑ _k : n, (1 
         Finset.sum_congr rfl fun _ _ => Matrix.one_apply              -- `def_identity_matrix`（成分は `δ_{kk}`）
     _ = ∑ _k : n, (1 : ℂ) := Finset.sum_congr rfl fun _ _ => if_pos rfl   -- `def_kronecker_delta` の `i = j` の場合
 
-/-- **原文 `trace_basic_properties` (3)**: `tr(I_n) = n`。 -/
+/-- `tr(I_n) = n`（右辺は `Fintype.card n` の `ℂ` への像）。人手 `trace_basic_properties` (3) は右辺を `Σ_{k=1}^{n} 1_ℂ` で述べる
+（整数を `ℂ` の元へ移す写像が本文に無いため）ので、その具体版ではない。人手の形は `trace_identity_eq_sum_one`。 -/
 theorem trace_one_eq_card : (1 : Matrix n n ℂ).trace = (Fintype.card n : ℂ) :=
   Matrix.trace_one
 
-/-- **原文 `trace_basic_properties` (4)**: 共役でトレースは変わらない。
+/-- 共役でトレースは変わらない（左辺を `(PA)Q` で受け取る旧い形。人手 `trace_basic_properties` (4) の形 `tr(P(AP'))` は
+`trace_similarity_invariant`）。
 
 原文は `P` が可逆であることを仮定するが、証明が使うのは `P^{-1}P = I` だけなので、
 逆行列の存在ではなく「左逆元 `Q`」の形で述べる（可逆な `P` に対しては `Q = P^{-1}`）。 -/

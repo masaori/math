@@ -18,6 +18,7 @@ export default defineBlocks([
     origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\text{トレース } \mathrm{tr}` },
     labels: ["def_trace"],
+    lean: ["Ising2D.trace_eq_sum_diag"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -39,6 +40,7 @@ export default defineBlocks([
     origin: { path: SRC, ordinal: 4 },
     title: { text: "トレースの基本性質" },
     labels: ["trace_basic_properties"],
+    lean: ["Ising2D.trace_linear", "Ising2D.trace_cyclic", "Ising2D.trace_similarity_invariant", "Ising2D.trace_identity_eq_sum_one", "Ising2D.trace_similarity_invariant_of_columns"],
     statement: [
       paragraph([
         "トレースは ", ref("def_trace"), "、行列の積は ", ref("mat_mult"), "、行列の和は ", ref("def_matrix_sum"),
@@ -162,6 +164,7 @@ export default defineBlocks([
     kind: "claim",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和のトレース}` },
     labels: ["trace_of_sum_over_binary_words"],
+    lean: ["Ising2D.trace_binaryWordMatrixSum", "Ising2D.trace_add_matrix"],
     statement: [
       paragraph([
         math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
@@ -249,6 +252,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "行列のスカラー倍のトレース" },
     labels: ["trace_of_scalar_multiple"],
+    lean: ["Ising2D.trace_of_scalar_multiple"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -294,6 +298,7 @@ export default defineBlocks([
     origin: { path: SRC, ordinal: 5 },
     title: { text: "冪等行列のトレースは像の次元" },
     labels: ["trace_of_idempotent"],
+    lean: ["Ising2D.trace_of_idempotent", "Ising2D.isCompl_range_ker_of_idempotent", "Ising2D.idempotent_sq_eq_mul_self", "Ising2D.idempotent_decomposition_apply", "Ising2D.idempotent_mulVec_of_eq_mulVec", "Ising2D.idempotent_mul_columns_eq", "Ising2D.idempotent_mul_self_of_sq", "Ising2D.idempotent_decomposition", "Ising2D.idempotent_sub_mem_ker", "Ising2D.idempotent_range_inter_ker_eq_zero", "Ising2D.idempotentAdaptedBasis_mem_range", "Ising2D.idempotentAdaptedBasis_mem_ker"],
     statement: [
       paragraph([
         "トレースは ", ref("def_trace"), "、行列の積は ", ref("mat_mult"), "、行列の冪 ",
@@ -630,6 +635,7 @@ Qv_j
     kind: "definition",
     title: { tex: String.raw`\text{数ベクトルと行列から作る数 } x^*Ay` },
     labels: ["def_conjugate_bilinear_value"],
+    lean: ["Ising2D.conjugateBilinearValue", "Ising2D.dotProduct_mulVec_eq_conjugateBilinearValue"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -670,6 +676,7 @@ Qv_j
     origin: { path: SRC, ordinal: 13 },
     title: { text: "共役転置・エルミート行列・正定値行列" },
     labels: ["def_hermitian_positive_definite"],
+    lean: ["Ising2D.posDef_conjugateBilinearValue_pos", "Ising2D.posDef_of_conjugateBilinearValue_pos"],
     statement: [
       paragraph(["行列の積は ", ref("mat_mult"), "、実数の複素数への包含は ", ref("inclusion_rr_to_cc"), " を用いる。"]),
       paragraph([
@@ -742,6 +749,7 @@ Qv_j
     kind: "claim",
     title: { text: "2 次の単位行列の共役転置" },
     labels: ["conjugate_transpose_of_identity_matrix_of_order_two"],
+    lean: ["Ising2D.identity_matrix_two_conjTranspose"],
     statement: [
       paragraph([
         math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
@@ -789,6 +797,7 @@ I^*
     kind: "claim",
     title: { tex: String.raw`\sigma^x \text{ の共役転置}` },
     labels: ["conjugate_transpose_of_pauli_x"],
+    lean: ["Ising2D.pauliX_conjTranspose"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -831,6 +840,7 @@ I^*
     kind: "claim",
     title: { tex: String.raw`\sigma^z \text{ の共役転置}` },
     labels: ["conjugate_transpose_of_pauli_z"],
+    lean: ["Ising2D.pauliZ_conjTranspose"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -885,6 +895,7 @@ I^*
     kind: "claim",
     title: { tex: String.raw`\sigma^y \text{ の共役転置}` },
     labels: ["conjugate_transpose_of_pauli_y"],
+    lean: ["Ising2D.pauliY_conjTranspose", "Ising2D.star_neg_I_eq_I"],
     statement: [
       paragraph([
         ref("def_pauli_matrices"),
@@ -998,6 +1009,7 @@ I^*
     kind: "definition",
     title: { text: "実対称な複素行列" },
     labels: ["def_real_symmetric_complex_matrix"],
+    lean: ["Ising2D.MatrixIsRealSymmetric"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -1031,6 +1043,7 @@ I^*
     kind: "claim",
     title: { text: "実対称な複素行列はエルミート" },
     labels: ["real_symmetric_matrix_is_hermitian"],
+    lean: ["Ising2D.real_symmetric_isHermitian"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -1106,6 +1119,7 @@ I^*
     kind: "claim",
     title: { text: "エルミートかつ転置で不変な複素行列は実対称" },
     labels: ["hermitian_and_transpose_invariant_matrix_is_real_symmetric"],
+    lean: ["Ising2D.hermitian_and_transpose_invariant_matrix_is_real_symmetric", "Ising2D.exists_real_of_star_eq"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -1269,6 +1283,7 @@ A_{kl}
     kind: "claim",
     title: { text: "実対称な複素行列の冪は実対称" },
     labels: ["power_of_real_symmetric_complex_matrix_is_real_symmetric"],
+    lean: ["Ising2D.power_of_real_symmetric_complex_matrix_is_real_symmetric", "Ising2D.matrix_pow_one_eq_self_tensorPow", "Ising2D.identity_matrix_entry_cases_tensorPow", "Ising2D.identity_matrix_isRealSymmetric_tensorPow", "Ising2D.matrix_pow_succ_transpose_apply_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -1423,6 +1438,7 @@ A^1
     origin: { path: SRC, ordinal: 14 },
     title: { tex: String.raw`\|A^*\| = \|A\| \text{ と極限の共役転置}` },
     labels: ["star_preserves_norm_and_limits"],
+    lean: ["Ising2D.matrix_conjTranspose_mul", "Ising2D.matrix_conjTranspose_add_smul", "Ising2D.matrix_conjTranspose_norm", "Ising2D.matrix_conjTranspose_tendsto", "Ising2D.matrix_conjTranspose_mul_apply", "Ising2D.matrix_conjTranspose_add_smul_apply", "Ising2D.matrix_conjTranspose_sub", "Ising2D.matrix_conjTranspose_sub_apply"],
     statement: [
       paragraph(["共役転置は ", ref("def_hermitian_positive_definite"), "、複素共役は ", ref("def_complex_conjugate"), "、行列積は ", ref("mat_mult"), "、行列の和・スカラー倍・差は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "・", ref("def_matrix_difference"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " のものとする。"]),
       paragraph([
@@ -1610,6 +1626,7 @@ A^1
     kind: "claim",
     title: { tex: String.raw`\|A^{\top}\| = \|A\|` },
     labels: ["transpose_preserves_matrix_norm"],
+    lean: ["Ising2D.matrix_transpose_norm"],
     statement: [
       paragraph(["転置は ", ref("def_matrix_transpose"), "、ノルムは ", ref("def_matrix_norm"), "（", math(String.raw`K = \mathbb{C}`), "）のものとする。"]),
       paragraph([
@@ -1657,6 +1674,7 @@ A^1
     kind: "claim",
     title: { text: "収束する行列の列の転置は極限の転置へ収束する" },
     labels: ["transpose_preserves_matrix_limits"],
+    lean: ["Ising2D.matrix_transpose_tendsto"],
     statement: [
       paragraph(["転置は ", ref("def_matrix_transpose"), "、差は ", ref("def_matrix_difference"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), "（", math(String.raw`K = \mathbb{C}`), "）のものとする。"]),
       paragraph([
@@ -1731,6 +1749,7 @@ A^1
     kind: "claim",
     title: { text: "エルミート行列の実数倍はエルミート" },
     labels: ["real_multiple_of_hermitian_is_hermitian"],
+    lean: ["Ising2D.real_multiple_isHermitian"],
     statement: [
       paragraph(["共役転置とエルミート性は ", ref("def_hermitian_positive_definite"), "、スカラー倍は ", ref("def_matrix_scalar_multiple"), "、", math(String.raw`\alpha_{\mathbb{C}}`), " は ", ref("inclusion_rr_to_cc"), " の略記による。"]),
       paragraph([
@@ -1780,6 +1799,7 @@ A^1
     kind: "claim",
     title: { tex: String.raw`x^*(B^*(AB))y = (Bx)^*A(By)` },
     labels: ["conjugate_bilinear_value_of_congruence"],
+    lean: ["Ising2D.conjugate_bilinear_value_of_congruence"],
     statement: [
       paragraph(["記号 ", math(String.raw`x^*Ay`), " は ", ref("def_conjugate_bilinear_value"), "、共役転置は ", ref("def_hermitian_positive_definite"), "、行列の積と行列と数ベクトルの積は ", ref("mat_mult"), " による。"]),
       paragraph([
@@ -1842,6 +1862,7 @@ x^*\bigl(B^*(AB)\bigr)y
     kind: "claim",
     title: { tex: String.raw`\text{左逆行列をもつ } B \text{ による } B^*(AB) \text{ は正定値}` },
     labels: ["congruence_preserves_positive_definite"],
+    lean: ["Ising2D.congruence_preserves_positive_definite", "Ising2D.conjTranspose_conjTranspose_apply", "Ising2D.conjTranspose_conjTranspose_eq", "Ising2D.mulVec_zero_apply", "Ising2D.mulVec_zero_eq", "Ising2D.congruence_isHermitian", "Ising2D.mulVec_ne_zero_of_left_inverse"],
     statement: [
       paragraph(["共役転置・エルミート性・正定値性は ", ref("def_hermitian_positive_definite"), "、行列の積は ", ref("mat_mult"), "、単位行列 ", math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`), " は ", ref("def_identity_matrix"), " による。"]),
       paragraph([
@@ -2084,6 +2105,7 @@ x^*Ix
     kind: "claim",
     title: { text: "正定値行列の正の実数倍は正定値" },
     labels: ["positive_real_multiple_preserves_positive_definite"],
+    lean: ["Ising2D.positive_real_multiple_preserves_positive_definite", "Ising2D.conjugate_bilinear_value_of_positive_real_multiple"],
     statement: [
       paragraph(["正定値性は ", ref("def_hermitian_positive_definite"), "、スカラー倍は ", ref("def_matrix_scalar_multiple"), "、", math(String.raw`\alpha_{\mathbb{C}}`), " は ", ref("inclusion_rr_to_cc"), " の略記による。"]),
       paragraph([
@@ -2171,6 +2193,7 @@ x^*(\alpha_{\mathbb{C}}A)x
     kind: "claim",
     title: { text: "正定値行列のトレースは正" },
     labels: ["trace_of_positive_definite_is_positive"],
+    lean: ["Ising2D.trace_of_positive_definite_is_positive", "Ising2D.conjugate_bilinear_value_basis_eq_diag", "Ising2D.standardBasisVec_ne_zero", "Ising2D.kroneckerDelta_comm"],
     statement: [
       paragraph(["正定値性は ", ref("def_hermitian_positive_definite"), "、トレースは ", ref("def_trace"), " による。"]),
       paragraph([
@@ -2287,6 +2310,7 @@ b^{(k)*}Ab^{(k)}
     kind: "claim",
     title: { tex: String.raw`\exp(-A)\exp(A) = I` },
     labels: ["exp_of_negative_is_left_inverse"],
+    lean: ["Ising2D.matrixExp_neg_mul_matrixExp", "Ising2D.neg_matrix_add_self_apply", "Ising2D.neg_matrix_mul_self_apply", "Ising2D.neg_matrix_add_self", "Ising2D.neg_matrix_mul_self_comm"],
     statement: [
       paragraph(["指数は ", ref("def_exp"), "、符号反転は ", ref("def_matrix_negation"), "、行列の積は ", ref("mat_mult"), "、単位行列 ", math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`), " は ", ref("def_identity_matrix"), " による。"]),
       paragraph([
@@ -2381,6 +2405,7 @@ b^{(k)*}Ab^{(k)}
     kind: "claim",
     title: { text: "エルミート行列の exp はエルミート" },
     labels: ["exp_of_hermitian_is_hermitian"],
+    lean: ["Ising2D.matExp_conjTranspose_of_conjTranspose_eq", "Ising2D.tensorPow_pow_conjTranspose_of_conjTranspose_eq", "Ising2D.star_inv_factorial", "Ising2D.expPartialSum_conjTranspose_apply", "Ising2D.expPartialSum_conjTranspose"],
     statement: [
       paragraph(["指数と冪は ", ref("def_exp"), "、共役転置は ", ref("def_hermitian_positive_definite"), "、行列の積は ", ref("mat_mult"), "、和とスカラー倍は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " による。"]),
       paragraph([
@@ -2566,6 +2591,7 @@ SS^{m+1}
     kind: "claim",
     title: { text: "転置で不変な行列の exp は転置で不変" },
     labels: ["exp_of_symmetric_is_symmetric"],
+    lean: ["Ising2D.matExp_transpose_of_transpose_eq", "Ising2D.tensorPow_pow_transpose_of_transpose_eq", "Ising2D.expPartialSum_transpose_apply", "Ising2D.expPartialSum_transpose"],
     statement: [
       paragraph(["指数と冪は ", ref("def_exp"), "、転置は ", ref("def_matrix_transpose"), "、行列の積は ", ref("mat_mult"), "、和とスカラー倍は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " による。"]),
       paragraph([
@@ -2765,6 +2791,7 @@ SS^{m+1}
     kind: "claim",
     title: { text: "実対称な複素行列の exp は実対称" },
     labels: ["exp_of_real_symmetric_is_real_symmetric"],
+    lean: ["Ising2D.exp_of_real_symmetric_is_real_symmetric"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -2824,6 +2851,7 @@ SS^{m+1}
     origin: { path: SRC, ordinal: 15 },
     title: { tex: String.raw`\text{エルミート行列の } \exp \text{ は正定値}` },
     labels: ["exp_hermitian_is_positive_definite"],
+    lean: ["Ising2D.posDef_exp_of_isHermitian"],
     statement: [
       paragraph(["指数は ", ref("def_exp"), "、共役転置と正定値性は ", ref("def_hermitian_positive_definite"), "、スカラー倍は ", ref("def_matrix_scalar_multiple"), " による。"]),
       paragraph([
