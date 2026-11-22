@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-22（並列・二十五回目）、並列の表の先頭「四つのセルの偶奇弧と対角セル対の除外を具体版で示す」を済ませた。** 具体版に本文の結論どおりの四セルの偶奇弧の条件と対角二セルの除外の条件を置き、二点更新の有限和保存と奇数個数からの歩数の存在も具体版で示した。具体版の四ファイルから必要十分版の import を外し、分離の台帳は 391 行から 366 行になった（宣言 21 行、import 4 行）。並列の表の次は「活性頂点と標識付き差を具体版で示す」で、着手できる。
 - **2026-11-22（主経路）、有限線型順序集合の符号の乗法性を、独立した Lean 具体版で示した。** 順序対・転倒数・整数値の符号を本文の式どおりに定義し、対の並べ替えと各対の偶奇によって乗法性を示し、必要十分版からの導出も接続した。既存の 55 宣言への移行は担当表の次の行に残る。
 - **2026-11-22（並列・二十四回目）、表の最後の行「セルと格子の補題を具体版で示す」を論法ごとに五つに割り、先頭の階段の点族の補題（接続階段の当たり歩数の集合・平行階段の横断幅・反復横断階段と周期並進の分離）を済ませた。** 具体版の三ファイルから必要十分版の import を外した。分離の台帳は 396 行から 391 行になった（宣言 2 行、import 3 行）。並列の表の次は「四つのセルの偶奇弧と対角セル対の除外を具体版で示す」で、着手できる。
 - **2026-11-21（並列・二十三回目）、表の先頭「一側閉包の四区間の道・接合対・四部分の閉包を具体版の定義で立て直す」を済ませた。** 具体版のファイル `KacWard/OneSidedClosureFourParts.lean`（必要十分版を import しない）に本文の一側閉包・接続階段の閉路・四接合が共有する四区間の道・四部分の閉包・接合対（値は ℤ×ℤ）を置き、具体版の四ファイルから必要十分版の import を外した。分離の台帳は 408 行から 396 行になった（宣言 8 行、import 4 行）。並列の表に残るのは「セルと格子の補題を具体版で示す」で、着手できる。
 - **2026-11-21（主経路）、論文の引用と Lean の依存の差分台帳を検査できるようにした。** 具体版を登録した主張・定理 874 件のうち 519 件で引用と依存が一致する。差分台帳は引用元・引用先の組を 762 行（論文側のみ 310、Lean 側のみ 452）持つ。次は置換の符号と転倒数の分離である。
-- **2026-11-21（並列・二十二回目）、表の先頭「二相の階段と反復階段を具体版の定義で立て直す」を済ませた。** 具体版のファイル `KacWard/Staircase.lean`（必要十分版を import しない）に本文の階段が共有する二相の階段・順序付き二相の階段・反復階段（点は ℤ×ℤ）を置き、具体版の六ファイルから必要十分版の import を外した。分離の台帳は 432 行から 408 行になった（宣言 18 行、import 6 行）。並列の表の次は「一側閉包の四区間の道・接合対・四部分の閉包を具体版の定義で立て直す」で、着手できる。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -57,7 +57,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 離散 Whitney 系 | 【分離】四つのセルの偶奇弧と対角セル対の除外を具体版で示す | 未着手 | 具体版の 10 宣言が `NecSuf.KacWard.FourCellsFormParityArcs`、10 宣言が `DiagonalCellPairsExcluded` を使う（`VertexSurroundingCellsParityArcs`・`BoundaryVertexDiagonalContactExcluded`・`WalkSideInteriorBandConnected`・`WalkSideExteriorBandConnected` ほか）。同じ論法の `four_cells_form_parity_arcs_necSuf`・`two_point_preserved_sum_necSuf`・`trichotomous_of_linearOrder`・`exists_position_of_odd_count` も具体版で示す。依存: なし。2026-11-22 に「セルと格子の補題を具体版で示す」から割った。 |
 | 離散 Whitney 系 | 【分離】活性頂点と標識付き差を具体版で示す | 未着手 | 具体版の 9 宣言が `NecSuf.KacWard.activeVertices` を、ほかに `taggedEdges`・`taggedPairAt` と導出の `taggedDifference_active_mates_from_necSuf`・`taggedDifference_incident_iff_from_necSuf` を使う（`ProjectedClosedEdgeCycle`・`ProjectedCycleNonbacktracking`・`TaggedDifference*`）。依存: なし。2026-11-22 に割った。 |
 | 離散 Whitney 系 | 【分離】周期持ち上げと閉包の残りの補題を具体版で示す | 未着手 | 具体版が `periodic_closure_length_necSuf`・`positive_period_multiple_moves_point_necSuf`・`periodic_lift_coordinate_next_period_necSuf`・`simple_cycle_projection_closed_nonbacktracking_necSuf`・`four_segments_form_simple_closed_walk_necSuf`・`fourSegmentVertex`・`interval_split_sum_necSuf`・`cellComplex_oneCellIncrement_necSuf` を使う。依存: なし。2026-11-22 に割った。 |
 | 離散 Whitney 系 | 【分離】ねじれの符号と形式平方根の定義を具体版で立て直す | 未着手 | 具体版が `NecSuf.KacWard` の `twistSign`・`quadraticParity`・`parity`・`arfParity`・`boolSign`、`sqrtCoeff`・`mk_sqrtCoeff_mul_self`・`constantCoeff_mk_sqrtCoeff`・`formalSquareRoot_unique_necSuf`、導出の `walkTwistSign_product_from_necSuf` を使う。置換の符号・互換・行シフトの軌道（`sign`・`transposition*`・`iterLeft`・`orbit`）は主経路の行が受け持つので含めない。依存: なし。2026-11-22 に割った。 |
@@ -67,11 +66,11 @@
 
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
+- 2026-11-22（並列・二十五回目）: 前回の並列の `KacWard/FirstHitConnectingStaircase.lean` の当たり歩数の集合 `firstHitStepSetFromWalk` を本文 $S(\gamma,k_0,u)$（歩数の範囲 $\{1,\ldots,u\,n_\perp\}$、ある $k\in\mathbb Z$ で $D^{\gamma,Q,u}_s=\widetilde P^{[u]}_k(\gamma)$）と照合した。範囲・条件・基点が一致し、修正は無かった。
 - 2026-11-22（主経路）: 前回の引用と Lean 依存の差分検査を読み直し、ラベルの正準化と差分の完全一致判定を確かめた。修正は無かった。
 - 2026-11-22（並列・二十四回目）: 前回の並列の `KacWard/OneSidedClosureFourParts.lean` の四区間の道を本文の一側閉包（長さ $cm$・$tn_\perp$・$cn_\parallel$・$tn_\perp$、第四部分は $D^{\gamma,S,t}_{N-j}$ の逆向き）と照合した。区間の境界と逆向きの添字 $a+2b+c-j$ が一致し、修正は無かった。
 - 2026-11-21（並列・二十三回目）: 前回の並列の `KacWard/Staircase.lean` を本文の横断階段・平行階段・反復横断階段（$D^{\gamma,Q,t}_s=Q+q\cdot(w_{\mathrm h},-w_{\mathrm v})+C^{\gamma}_r$）と照合した。点の型・場合分け・除法の取り方が一致し、修正は無かった。
 - 2026-11-21（主経路）: 前回の依存追跡器と直接依存の抽出器を読み直し、証明本体の依存だけを補助定理の先まで追い、登録済み主張で止めることを確かめた。修正は無かった。
-- 2026-11-21（並列・二十二回目）: 前回の並列の `KacWard/DirectionSequence.lean`（連結・内部和・循環隣接和・二区間・反復と、移送・範囲内の一致・周期・末項の補題）を読み直した。循環隣接和は内部和に閉じ目の重みを足した形で、docstring と定義が一致し、修正は無かった。
 
 ## 式変形の書き方の統一
 - 2026-11-22（主経路）: 「符号は合成について乗法的である」の式鎖で、符号を転倒数の冪へ展開する行の根拠を本文の定義へのラベル参照にした。
@@ -85,8 +84,8 @@
 - 2026-11-21（主経路）: 「正の有理数より平方が小さい有理網幅」の証明で Archimedes 性の根拠を式へ付け、網幅の代入を一行ずつ示した。
 
 ## 前進の記録
+- 2026-11-22（並列・二十五回目）: 表の先頭「四つのセルの偶奇弧と対角セル対の除外を具体版で示す」を、四セルの奇偶の数え上げという一つの論法として割らずに済ませた。具体版 `VertexSurroundingCellsParityArcs`・`BoundaryVertexDiagonalContactExcluded` に結論の条件 `FourCellsFormParityArcs`・`DiagonalCellPairsExcluded` を本文の主張の言葉で置き、必要十分版の `four_cells_form_parity_arcs_necSuf` を呼んでいた最後の段は本文どおり「奇数回通る共有辺は二本で、各々で内外が変わる」を自然数の奇偶の計算で直接示した。具体版 `SmoothingTurningInvariance` に `Fin m` 上の整数値の二点更新の有限和保存 `two_point_preserved_sum`、`WalkLiftPointBoundaryVertex` に `exists_position_of_odd_count` を置いた。導出の二ファイルは定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を置いた。参照が移ったので `WalkSideInteriorBandConnected`・`WalkSideExteriorBandConnected` と内側セルの境界の補題群の 21 宣言も台帳から外れた。`trichotomous_of_linearOrder` を使う具体版二件（`PermutationSignOrbitProduct`・`ReversalMatrixDeterminant`）は同じ行で置換の符号の必要十分版も使うので、主経路の置換の符号の行に残した。
 - 2026-11-22（主経路）: 先頭の符号の分離を、独立な有限線型順序集合の乗法性、既存の具体版の符号参照の移行、互換と台の交わらない積の符号の三つに割った。今回は第一の論法を済ませ、必要十分版との定義の一致と導出を登録した。
 - 2026-11-22（並列・二十四回目）: 表の最後の行「セルと格子の補題を具体版で示す」は、階段の点族、四つのセルの偶奇弧と対角セル対、活性頂点と標識付き差、周期持ち上げと閉包の残り、ねじれの符号と形式平方根という別々の論法を持つので五つに割り、先頭の階段の点族を済ませた。具体版 `FirstHitConnectingStaircase` は当たり歩数の集合を本文 $S(\gamma,k_0,u)$ どおりに直接定義し、定義の一致の補題 `firstHitStepSetFromWalk_eq_necSuf`・`firstHitConnectingStaircaseFromWalk_eq_necSuf`（どちらも `rfl`）を導出のファイルへ移した。`PeriodTranslatesOfIteratedStaircase` は退避済みの主張の参照用ノートの論法（平行座標の差が $|z|L(w_{\mathrm v}^2+w_{\mathrm h}^2)$ で幅 $|w_{\mathrm h}w_{\mathrm v}|$ を超える）を具体版の中で直接書いた。`ParallelStaircaseTransverseWidth` は必要十分版を使っていなかったので import を外すだけだった。置換の符号・互換・行シフトの軌道を使う具体版は主経路の行が受け持つので、割った行に含めなかった。
 - 2026-11-21（並列・二十三回目）: 表の先頭「一側閉包の四区間の道・接合対・四部分の閉包を具体版の定義で立て直す」を一つの論法（定義の置き換え）として割らずに済ませた。具体版の証明は既に四区間の定義を展開して自分で示していたので、定義を `KacWard/OneSidedClosureFourParts.lean` へ移すと参照が移った。具体版 `OneSidedClosureNonbacktracking` が推移的な import で呼んでいた必要十分版の `fourPartSequence_congr_range` は、具体版 `OneSidedClosureCyclicSum` の私的な補題 `fourPartSequence_congr_range_concrete` を公開して替えた。導出の `OneSidedClosureJunctionsFromNecSuf`・`OneSidedClosureCyclicSumFromNecSuf`・`OneSidedClosureStepSequenceFromNecSuf` は `KacWard/OneSidedClosureFourPartsFromNecSuf.lean` の定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）で書き換えてから必要十分版を呼ぶ（定義の展開に任せると循環隣接和の導出が時間切れになった）。本文 `def_one_sided_periodic_lift_closure`・`def_periodic_lift_closure_cycle` の `lean:` の必要十分版の名前を具体版に替えた。
 - 2026-11-21（主経路）: 論文の証明中の主張引用と Lean の追跡済み依存を、引用元・引用先の主ラベルの組で比較する検査を置いた。複数ラベルは主ラベルに揃え、具体版の登録が無い 2 件は比較から除いた。対象 874 件のうち完全一致 519 件、差分は論文側のみ 310 行、Lean 側のみ 452 行。差分を台帳に固定し、以後の再計算との完全一致を要求する。
-- 2026-11-21（並列・二十二回目）: 表の先頭「二相の階段と反復階段を具体版の定義で立て直す」を一つの論法（定義の置き換え）として割らずに済ませた。具体版の証明は既に階段の定義を展開して自分で示しており、必要十分版の定理を呼ぶ具体版は無かったので、定義を `KacWard/Staircase.lean` に移すだけで参照が移った。本文の三つの階段はどれも ℤ×ℤ の有限列なので、点の型を ℤ×ℤ に固定した。導出の `NegatedParallelStaircaseTurningFromNecSuf`・`ReversedParallelStaircaseTurningFromNecSuf`・`OneSidedTransverseStepsFromNecSuf` は必要十分版の import を自分で持ち、`KacWard/StaircaseFromNecSuf.lean` の定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を置いた。本文 `def_winding_parallel_staircase` の `lean:` の必要十分版の名前を具体版の `orderedTwoPhaseStaircase` に替えた。`FirstHitConnectingStaircase`・`ParallelStaircaseTransverseWidth`・`PeriodTranslatesOfIteratedStaircase` の必要十分版の import は階段の定義でなく点族の補題のためなので、セルと格子の行に残した。

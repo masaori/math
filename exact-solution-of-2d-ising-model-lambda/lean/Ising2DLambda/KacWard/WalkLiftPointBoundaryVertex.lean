@@ -1,10 +1,25 @@
 import Ising2DLambda.KacWard.WalkHorizontalBoundaryParity
 import Ising2DLambda.KacWard.CellBoundaryVertices
-import Ising2DLambda.NecSuf.KacWard.WalkLiftPointBoundaryVertex
 import Ising2DLambda.KacWard.PlaneLiftEndpointWinding
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
+
+/-- 有限個の歩数のうち条件を満たすものの個数が奇数なら、条件を満たす歩数が在る
+（個数が零なら奇数でない）。辺の通過回数が奇数である辺を、ある歩数で通ることに使う。 -/
+theorem exists_position_of_odd_count
+    (n : ℕ) (selected : ℕ → Prop) [DecidablePred selected]
+    (hodd : Odd (∑ k ∈ Finset.range n, if selected k then 1 else 0)) :
+    ∃ k < n, selected k := by
+  by_contra h
+  have hzero : (∑ k ∈ Finset.range n, if selected k then 1 else 0) = 0 := by
+    apply Finset.sum_eq_zero
+    intro k hk
+    simp [show ¬ selected k from by
+      intro hs
+      exact h ⟨k, Finset.mem_range.mp hk, hs⟩]
+  rw [hzero] at hodd
+  exact Nat.not_odd_zero hodd
 
 /-- Every departure point of the actual simple closed lifted walk is a vertex
 of the boundary of its interior cells. -/
@@ -122,7 +137,7 @@ theorem interiorCellsOfWalk_boundaryEdge_has_departure
   cases axis
   · change Odd (horizontalEdgeTraversalCount (m + 1) row col r c) at hodd
     obtain ⟨k, hk, hselected⟩ :=
-      Ising2DLambda.NecSuf.KacWard.exists_position_of_odd_count
+      exists_position_of_odd_count
         (m + 1) (fun k => crossesColLevel col c k ∧ row k = r) hodd
     refine ⟨⟨k, hk⟩, ?_⟩
     have hindex : Fin.ofNat (m + 2) k = (⟨k, hk⟩ : Fin (m + 1)).castSucc := by
@@ -142,7 +157,7 @@ theorem interiorCellsOfWalk_boundaryEdge_has_departure
     · simp [gridEdgeEndpoints, hselected.2, hrow, hbackward.1, hbackward.2]
   · change Odd (verticalEdgeTraversalCount (m + 1) row col r c) at hodd
     obtain ⟨k, hk, hselected⟩ :=
-      Ising2DLambda.NecSuf.KacWard.exists_position_of_odd_count
+      exists_position_of_odd_count
         (m + 1) (fun k => crossesRowLevel row r k ∧ col k = c) hodd
     refine ⟨⟨k, hk⟩, ?_⟩
     have hindex : Fin.ofNat (m + 2) k = (⟨k, hk⟩ : Fin (m + 1)).castSucc := by

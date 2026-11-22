@@ -7,12 +7,16 @@
 持ち上げ点の相異性が与える各辺の高々一回という局所条件と、隣接セルの境界奇偶を合成する。
 -/
 import Ising2DLambda.KacWard.VertexIncidentEdgeTraversalEven
-import Ising2DLambda.NecSuf.KacWard.VertexSurroundingCellsParityArcs
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
+/-- 本文の主張の結論「四セル $C_0,C_1,C_2,C_3$ の内側セルと外側セルはそれぞれ空でない一つの巡回弧をなす」。
+`c_i` は $C_i$ の右向き半直線の交差数の偶奇（$1$ が内側）である。巡回列 $C_0,C_1,C_2,C_3,C_0$ で内外の別が
+ちょうど二回変わり、内側セルの個数が $0$ でも $4$ でもないことで述べる。 -/
+def FourCellsFormParityArcs (c0 c1 c2 c3 : ℕ) : Prop :=
+  (c0 + c1) % 2 + (c1 + c2) % 2 + (c2 + c3) % 2 + (c3 + c0) % 2 = 2 ∧
+    0 < c0 + c1 + c2 + c3 ∧ c0 + c1 + c2 + c3 < 4
 
 /-- 訪問回数が一回である頂点についての局所計算。 -/
 theorem vertexSurroundingCells_formParityArcs_local
@@ -72,8 +76,12 @@ theorem vertexSurroundingCells_formParityArcs_local
     simp only [Int.sub_add_cancel] at hparity
     simp [c3, c0, e3]
     omega
-  exact four_cells_form_parity_arcs_necSuf c0 c1 c2 c3 e0 e1 e2 e3
-    hc0 hc1 hc2 hc3 hedges h01 h12 h23 h30
+  -- 本文の最後の段: 奇数回通る共有辺はちょうど二本で、その各々で内外の別が変わるので、
+  -- 巡回列で内外の別はちょうど二回変わり、内側と外側はともに空でない。
+  change FourCellsFormParityArcs c0 c1 c2 c3
+  clear_value c0 c1 c2 c3 e0 e1 e2 e3
+  unfold FourCellsFormParityArcs
+  refine ⟨?_, ?_, ?_⟩ <;> omega
 
 /-- `claim_vertex_surrounding_cells_form_parity_arcs` の具体版。 -/
 theorem vertexSurroundingCells_formParityArcs

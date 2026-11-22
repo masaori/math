@@ -8,12 +8,21 @@
 四辺の通過回数が零なので四セルの内外がすべて一致することを使う。
 -/
 import Ising2DLambda.KacWard.VertexSurroundingCellsParityArcs
-import Ising2DLambda.NecSuf.KacWard.BoundaryVertexDiagonalContactExcluded
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
+/-- 本文の主張の結論「頂点に接する四セル $C_0,C_1,C_2,C_3$ の内側セルが対角の二セル
+（$\{C_0,C_2\}$ または $\{C_1,C_3\}$）だけになることは無く、内側セルが二つなら巡回順で隣り合う」。
+`c_i` は $C_i$ の右向き半直線の交差数の偶奇（$1$ が内側）である。 -/
+def DiagonalCellPairsExcluded (c0 c1 c2 c3 : ℕ) : Prop :=
+  ¬ (c0 = 1 ∧ c1 = 0 ∧ c2 = 1 ∧ c3 = 0) ∧
+    ¬ (c0 = 0 ∧ c1 = 1 ∧ c2 = 0 ∧ c3 = 1) ∧
+    (c0 + c1 + c2 + c3 = 2 →
+      (c0 = 1 ∧ c1 = 1 ∧ c2 = 0 ∧ c3 = 0) ∨
+      (c0 = 0 ∧ c1 = 1 ∧ c2 = 1 ∧ c3 = 0) ∨
+      (c0 = 0 ∧ c1 = 0 ∧ c2 = 1 ∧ c3 = 1) ∨
+      (c0 = 1 ∧ c1 = 0 ∧ c2 = 0 ∧ c3 = 1))
 
 set_option maxHeartbeats 1000000 in
 /-- `claim_boundary_vertex_diagonal_contact_excluded` の具体版。 -/

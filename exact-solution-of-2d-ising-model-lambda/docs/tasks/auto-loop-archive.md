@@ -1,4 +1,13 @@
 ## 現在地から移したもの
+- **2026-11-21（並列・二十二回目）、表の先頭「二相の階段と反復階段を具体版の定義で立て直す」を済ませた。** 具体版のファイル `KacWard/Staircase.lean`（必要十分版を import しない）に本文の階段が共有する二相の階段・順序付き二相の階段・反復階段（点は ℤ×ℤ）を置き、具体版の六ファイルから必要十分版の import を外した。分離の台帳は 432 行から 408 行になった（宣言 18 行、import 6 行）。並列の表の次は「一側閉包の四区間の道・接合対・四部分の閉包を具体版の定義で立て直す」で、着手できる。
+
+## レビュー記録から移したもの
+- 2026-11-21（並列・二十二回目）: 前回の並列の `KacWard/DirectionSequence.lean`（連結・内部和・循環隣接和・二区間・反復と、移送・範囲内の一致・周期・末項の補題）を読み直した。循環隣接和は内部和に閉じ目の重みを足した形で、docstring と定義が一致し、修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-21（並列・二十二回目）: 表の先頭「二相の階段と反復階段を具体版の定義で立て直す」を一つの論法（定義の置き換え）として割らずに済ませた。具体版の証明は既に階段の定義を展開して自分で示しており、必要十分版の定理を呼ぶ具体版は無かったので、定義を `KacWard/Staircase.lean` に移すだけで参照が移った。本文の三つの階段はどれも ℤ×ℤ の有限列なので、点の型を ℤ×ℤ に固定した。導出の `NegatedParallelStaircaseTurningFromNecSuf`・`ReversedParallelStaircaseTurningFromNecSuf`・`OneSidedTransverseStepsFromNecSuf` は必要十分版の import を自分で持ち、`KacWard/StaircaseFromNecSuf.lean` の定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を置いた。本文 `def_winding_parallel_staircase` の `lean:` の必要十分版の名前を具体版の `orderedTwoPhaseStaircase` に替えた。`FirstHitConnectingStaircase`・`ParallelStaircaseTransverseWidth`・`PeriodTranslatesOfIteratedStaircase` の必要十分版の import は階段の定義でなく点族の補題のためなので、セルと格子の行に残した。
+
+## 現在地から移したもの
 - **2026-11-21（主経路）、Lean の直接依存から登録済み主張への依存を追跡できるようにした。** 登録のない補助定理を通り、登録済み主張に到達したらそこで止める。次は論文の引用との差分台帳の検査である。
 
 ## レビュー記録から移したもの

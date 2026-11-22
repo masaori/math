@@ -4,8 +4,13 @@
 四セルの交差数の奇偶、持ち上げ点の相異性と四辺の通過回数に対する仮定を具体版へ渡す。
 -/
 import Ising2DLambda.KacWard.BoundaryVertexDiagonalContactExcluded
+import Ising2DLambda.NecSuf.KacWard.BoundaryVertexDiagonalContactExcluded
 
 namespace Ising2DLambda.KacWard
+
+/-- 具体版の対角二セルの除外の条件は、必要十分版の同名の条件と一致する。 -/
+theorem diagonalCellPairsExcluded_eq_necSuf :
+    DiagonalCellPairsExcluded = Ising2DLambda.NecSuf.KacWard.DiagonalCellPairsExcluded := rfl
 
 /-- `claim_boundary_vertex_diagonal_contact_excluded` を必要十分版から導く。 -/
 theorem boundaryVertex_diagonalContactExcluded_from_necSuf
@@ -22,8 +27,9 @@ theorem boundaryVertex_diagonalContactExcluded_from_necSuf
       (rightRayCrossingCount n row col (a - 1) (b - 1) % 2)
       (rightRayCrossingCount n row col (a - 1) b % 2)
       (rightRayCrossingCount n row col a b % 2)
-      (rightRayCrossingCount n row col a (b - 1) % 2) :=
-  boundaryVertex_diagonalContactExcluded n row col a b hclosedRow hclosedCol hunit
+      (rightRayCrossingCount n row col a (b - 1) % 2) := by
+  rw [← diagonalCellPairsExcluded_eq_necSuf]
+  exact boundaryVertex_diagonalContactExcluded n row col a b hclosedRow hclosedCol hunit
     hdistinct hleft hright hdown hup
 
 end Ising2DLambda.KacWard
