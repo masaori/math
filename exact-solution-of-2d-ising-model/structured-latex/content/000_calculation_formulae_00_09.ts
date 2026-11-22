@@ -50,7 +50,7 @@ export default defineBlocks([
         math(String.raw`\mathbb{Z}`),
         " は整数環、",
         math(String.raw`\mathbb{R}`),
-        " は順序体を表す。たとえば ",
+        " は完備順序体（下の体の公理と順序の条件を満たす順序体）を表す。たとえば ",
         math(String.raw`n\in\mathbb{Z}`),
         " は厳密には ",
         math(String.raw`n\in\mathbf{Z}`),
@@ -110,6 +110,54 @@ export default defineBlocks([
         " は逆数）。本文の証明で「",
         math(String.raw`\mathbb{R}`),
         " の加法の交換律」などと引くのは、この一覧の該当する行である。",
+      ]),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " の順序 ",
+        math(String.raw`\le_{\mathbb{R}}`),
+        " が満たす性質として、証明が使うのは次の条件だけである。任意の ",
+        math(String.raw`x,y,t\in\mathbf{R}`),
+        " と部分集合 ",
+        math(String.raw`S\subset\mathbf{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&x\le x
+&&\text{（順序の反射律）},\\
+&(x\le y\ \wedge\ y\le x)\ \Rightarrow\ x=y
+&&\text{（順序の反対称律）},\\
+&(x\le y\ \wedge\ y\le t)\ \Rightarrow\ x\le t
+&&\text{（順序の推移律）},\\
+&x\le y\ \vee\ y\le x
+&&\text{（全順序）},\\
+&x\le y\ \Rightarrow\ x+t\le y+t
+&&\text{（順序と加法の両立）},\\
+&(0_{\mathbb{R}}\le x\ \wedge\ 0_{\mathbb{R}}\le y)\ \Rightarrow\ 0_{\mathbb{R}}\le x\cdot y
+&&\text{（順序と乗法の両立）},\\
+&\bigl(S\neq\emptyset\ \wedge\ \exists v\in\mathbf{R},\ \forall s\in S,\ s\le v\bigr)\\
+&\quad\Rightarrow\ \exists b\in\mathbf{R},\ \bigl(\forall s\in S,\ s\le b\bigr)\ \wedge\ \bigl(\forall u\in\mathbf{R},\ (\forall s\in S,\ s\le u)\Rightarrow b\le u\bigr)
+&&\text{（上限の存在）}.
+\end{aligned}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`x\le y`),
+        " は ",
+        math(String.raw`(x,y)\in\le_{\mathbb{R}}`),
+        " の略記であり、",
+        math(String.raw`x\ge y`),
+        " は ",
+        math(String.raw`y\le x`),
+        " の略記とする。最後の行は、空でなく上に有界な部分集合が最小の上界を持つことを述べる。この行を使う証明は、使う箇所で非可算集合 ",
+        math(String.raw`\mathbf{R}`),
+        " の完備性へ移行することを明示する。狭義の順序 ",
+        math(String.raw`<`),
+        "・",
+        math(String.raw`>`),
+        " は ",
+        ref("def_real_strict_order"),
+        " で定める。本文の証明で「",
+        math(String.raw`\mathbb{R}`),
+        " の順序の推移律」などと引くのは、この一覧の該当する行である。",
       ]),
       paragraph([
         "命題をつなぐ論理の記号（否定 ",
@@ -218,6 +266,7 @@ export default defineBlocks([
         "main.md 冒頭の記号方針を、集合と代数構造を混同しない本文定義として追加した。複素数は既存定義と重複させていない。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認）: ℝ を「順序体」とだけ書いて体の等式を並べていなかったので、本文の証明が「ℝ の加法の交換律 p + q = q + p（set_and_algebra_notation）」のように引く等式（加法・乗法の結合律と交換律、単位元と逆元の左右両側、分配律の左右両側、0_ℝ ≠ 1_ℝ）を名前つきで並べた。引く側が使う別名（加法の可換律、和の可換律、積の結合律、乗法の交換律、積の可換律）も挙げた。一覧の −x と x^{-1} が写像の値であることを示すため、組に符号反転 −_ℝ と逆数 (·)^{-1}_ℝ を足して型を宣言した（逆元の一意性の主張に頼らない）。順序の公理の形と < の定義はまだ並べていない。",
         "2026-11-22（Lean の点検の直し、未定義の記号）: 本文の証明が名前だけで引いていた等号の反射律・対称律・推移律と、論理の記号（¬・∧・∨・⇒・⇔・⊥・∀・∃）と ≠ を、外から持ち込むと宣言し、証明が使う規則（直積の元の等号は成分ごと、写像の等号は点ごと、を含む）を名前つきで並べた。本文の証明が引く「行列の等号は成分ごと」も、行列の集合 Mat(m,n,ℂ) を定める定義のブロックがまだ無いので、外から持ち込む規則としてここに並べた。新しいブロックにせずここに足したのは、一対一の検査で対応する具体版の宣言の無いブロックを増やさないためである。",
+        "2026-11-22（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序）: 本文の証明が「ℝ の順序の推移律（set_and_algebra_notation）」のように名前だけで引いていた ℝ の順序の性質を、反射律・反対称律・推移律・全順序・加法との両立・乗法との両立・上限の存在として名前つきで並べ、≥ を ≤ の略記と定めた（上限の存在は sqrt_nonnegative_existence_uniqueness などが使う箇所で宣言していた性質で、レビューの指摘で足した）。狭義の順序 < は def_real_strict_order で定める。これで Lean の ℝ の ≤・≥ は外から持ち込み使う性質を列挙した記号として、<・> は本文の定義との一致を補題一本で示した記号として、許可の一覧に載せられる。アルキメデス性は上限の存在から導ける主張なのでここに並べていない。一覧の行から導けるが主張として示していない順序の性質（狭義の順序と加法の両立、正の数どうしの積は正など）を set_and_algebra_notation の名前で引く箇所が残っており、状態台帳の行「ℝ の数・順序・差・商」に直す項目として書いた。",
       ],
     },
   },
@@ -258,6 +307,43 @@ export default defineBlocks([
       notes: [
         "2026-11-10（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℝ の差は本文全体で使われていたが、set_and_algebra_notation の ℝ の演算は和・積・零元・単位元・順序だけで、差を定めるブロックが無かった（def_A_theta の (1,1)・(2,2) 成分の差、real_inclusion_preserves_difference の右辺など）。ℂ の def_complex_difference と同じ形で足し、ℝ の差を最初に使う definition_of_cc より前（set_and_algebra_notation の直後）に置いた。符号反転は、本文の ℝ の計算（cos_of_negated_real の準備など）が加法の逆元として読んでいるので、ℂ の multiply_by_minus_one のように (-1) 倍で定めず、順序体の加法の逆元とした。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)。体の法則の式と名前を並べる件）: set_and_algebra_notation の ℝ の組に符号反転 −_ℝ を足したので、−z をその値 −_ℝ(z) として指す形にし、証明の要る「体の加法の逆元はただ一つに定まる」を消した。定義の式は不変。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_definition_real_strict_order",
+    kind: "definition",
+    title: { text: "実数の狭義の順序" },
+    labels: ["def_real_strict_order"],
+    lean: ["Ising2D.real_lt_iff_le_and_ne"],
+    statement: [
+      paragraph([
+        math(String.raw`x, y \in \mathbb{R}`),
+        " について、",
+        math(String.raw`x < y`),
+        " を",
+      ]),
+      displayMath(String.raw`x < y\ :\Leftrightarrow\ \bigl(x \le y\ \wedge\ x \neq y\bigr)`),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`\le`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序 ",
+        math(String.raw`\le_{\mathbb{R}}`),
+        "、",
+        math(String.raw`\neq`),
+        " は同じブロックの等号の否定である。",
+        math(String.raw`x > y`),
+        " は ",
+        math(String.raw`y < x`),
+        " の略記とする。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-22（Lean の点検の直し、未定義の記号）: 原文（Typst）に対応ブロックは無い。< は本文全体で使われ、real_less_than_is_asymmetric が主張の中で「x < y は x ≤ y かつ x ≠ y のこと」と断っていたが、定めるブロックが無かった。def_real_difference と同じ形で、set_and_algebra_notation の直後の def_real_difference の後に置いた。Lean の具体版は Ising2D.real_lt_iff_le_and_ne（MathematicalTools/SetNotationAndComplexCartesianArithmetic/DefinitionRealStrictOrder.lean）。mathlib の ℝ の < は ≤ から定めたものではないので、一致を補題一本で示す。",
       ],
     },
   },

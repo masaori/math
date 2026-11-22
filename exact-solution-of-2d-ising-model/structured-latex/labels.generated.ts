@@ -286,6 +286,7 @@ export const ALL_LABELS = [
   "def_real_matrix_product",
   "def_real_matrix_vector_product",
   "def_real_quotient",
+  "def_real_strict_order",
   "def_real_symmetric_complex_matrix",
   "def_real_symmetric_matrix",
   "def_real_two",

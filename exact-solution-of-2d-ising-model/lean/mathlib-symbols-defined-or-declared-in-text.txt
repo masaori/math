@@ -4,7 +4,7 @@
 # 本文が外から持ち込み、使う性質を列挙している記号だけである。型クラスの演算は「演算@型@インスタンス」で書く（UndefinedSymbols.lean）。
 #
 # 集合と代数構造の記号: ℕ・ℤ・ℝ を構成せず既知の集合として持ち込み、ℝ の +・·・− について体の公理を列挙している。
-# ℕ・ℤ の演算と順序 ≤、ℝ の順序と逆数は、本文が使う性質をまだ列挙していないので載せない
+# ℕ・ℤ の演算と順序 ≤、ℝ の逆数は、本文が使う性質をまだ列挙していないので載せない
 # （ℝ の逆数は本文では ℝ∖{0} 上の写像で、Lean の Inv.inv は 0⁻¹ = 0 と定める全域の写像である）。
 Nat	set_and_algebra_notation
 Int	set_and_algebra_notation
@@ -30,6 +30,14 @@ OfNat.ofNat@Real,0@Zero.toOfNat0	set_and_algebra_notation
 OfNat.ofNat@Real,1@One.toOfNat1	set_and_algebra_notation
 # ℝ の差: def_real_difference が y − z := y + (−z) と定める。Lean の ℝ の差も y + -z と定義として等しい（real_sub_eq_add_neg。rfl）。
 HSub.hSub@Real,Real,Real@Real.instSub	def_real_difference
+# ℝ の順序 ≤ と ≥: set_and_algebra_notation が ≤_ℝ を外から持ち込み、証明が使う性質（反射律・反対称律・推移律・全順序・加法との両立・乗法との両立・上限の存在）を列挙し、
+# x ≥ y を y ≤ x の略記と定めている。Lean の GE.ge x y も LE.le y x と定義として等しい。
+LE.le@Real@Real.instLE	set_and_algebra_notation
+GE.ge@Real@Real.instLE	set_and_algebra_notation
+# ℝ の狭義の順序 < と >: def_real_strict_order が x < y :⟺ (x ≤ y ∧ x ≠ y) と定め、x > y を y < x の略記とする。mathlib の ℝ の < は ≤ から定めたものではないが、
+# 一致を補題一本 real_lt_iff_le_and_ne（DefinitionRealStrictOrder.lean）で示した。Lean の GT.gt x y も LT.lt y x と定義として等しい。
+LT.lt@Real@Real.instLT	def_real_strict_order
+GT.gt@Real@Real.instLT	def_real_strict_order
 #
 # ℂ とその和・積、虚数単位、ℝ から ℂ への包含写像: 本文が定義し、mathlib の定義が本文の定義の式と定義として等しい
 # （DefinitionComplexNumbers.lean の complex_mk_eq_mk_iff・complex_mk_add_mk・complex_mk_mul_mk・complex_I_eq_mk・complex_ofReal_eq_mk）。

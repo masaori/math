@@ -9,7 +9,7 @@
 | 人手 | Lean |
 | --- | --- |
 | `b < a` と仮定する | `intro hba` |
-| `a < b` の定義から `a ≤ b` と `a ≠ b`、`b < a` の定義から `b ≤ a` | `hab.le`・`hab.ne`・`hba.le`（`<` の意味 `x < y ⟺ x ≤ y ∧ x ≠ y` は mathlib の `lt_iff_le_and_ne` で、その 2 つの向きの読み出し） |
+| `a < b` の定義（`def_real_strict_order`）から `a ≤ b` と `a ≠ b`、`b < a` の定義から `b ≤ a` | `(real_lt_iff_le_and_ne a b).1 hab` の二つの成分と `(real_lt_iff_le_and_ne b a).1 hba` の第一成分 |
 | 鎖の 1 行 `a = b`（`a ≤ b` と `b ≤ a` に ℝ の順序の反対称律） | `le_antisymm hab_le hba_le` |
 | `a ≠ b` に反する | `hab_ne heq` |
 
@@ -18,7 +18,7 @@
 必要十分版は `Ising2D/NecSuf/NotLtOfLtOfAntisymm.lean`、具体版をその系として導くのは
 `ClaimRealLessThanIsAsymmetricFromNecSuf.lean`。
 -/
-import Mathlib.Data.Real.Basic
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealStrictOrder
 
 namespace Ising2D
 
@@ -26,9 +26,9 @@ namespace Ising2D
 （人手の論法: `b < a` と仮定すると `a ≤ b`・`a ≠ b`・`b ≤ a`、反対称律で `a = b` となり `a ≠ b` に反する）。 -/
 theorem real_less_than_is_asymmetric (a b : ℝ) (hab : a < b) : ¬ b < a := by
   intro hba                                                  -- `b < a` と仮定する
-  have hab_le : a ≤ b := hab.le                              -- `a < b` の定義の前半
-  have hab_ne : a ≠ b := hab.ne                              -- `a < b` の定義の後半
-  have hba_le : b ≤ a := hba.le                              -- `b < a` の定義の前半
+  have hab_le : a ≤ b := ((real_lt_iff_le_and_ne a b).1 hab).1  -- `a < b` の定義（`def_real_strict_order`）の前半
+  have hab_ne : a ≠ b := ((real_lt_iff_le_and_ne a b).1 hab).2  -- `a < b` の定義の後半
+  have hba_le : b ≤ a := ((real_lt_iff_le_and_ne b a).1 hba).1  -- `b < a` の定義の前半
   have heq : a = b := le_antisymm hab_le hba_le              -- ℝ の順序の反対称律
   exact hab_ne heq                                           -- `a ≠ b` に反する
 
