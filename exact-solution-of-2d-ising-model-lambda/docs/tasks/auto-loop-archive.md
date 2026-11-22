@@ -23253,3 +23253,12 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 
 ## 前進の記録（2026-11-21 に移動）
 - 2026-11-21（並列・十三回目）: 表の先頭「一次因子の積である」は、$K$ 係数の多項式が $K$ に根を持つ段（$g\cdot\mathrm{cjp}_\omega(g)\in F[t]$ の根を共役で戻す場合分け）と次数の帰納法の段の二つの論法を持つので、runbook「打ち切られたときの扱い」と同じく論法で割った。前者を節「虚数単位を足した体を係数とする多項式の根」に本文一ブロック（準備: $\mathrm{cj}_\omega(0)=0$・$\mathrm{cj}_\omega(1)=1$、$\mathrm{cjp}_\omega(g)$ の係数の上界と番号 $d$ の係数、$h\in F[t]$、$h$ の番号 $d+d$ の係数と上界、$F(\omega)=\mathrm{Lin}_F(\omega)$）・SageMath 一件（PASS 131、$F$ を実代数的数として二つの場合の両方を確かめた）・Lean 具体版・必要十分版（零因子の無い可換環、$0,1\in S$、$\mathrm{cj}(a+b\omega)=a-b\omega$、$T$ の共役での閉性、三つの部品の結論だけ。$\omega\cdot\omega=-1$・逆元・正錐は使わない）・導出版で済ませた。計測の道具の `PLANNED_PARTS` に足し、一次因子の積の依存をこの主張と商の係数にした。
+
+## 現在地から移したもの
+- **2026-11-22（並列・二十八回目）、並列の表の先頭「四区間の道が頂点単純な閉歩道をなすことを具体版で示す」を済ませた。** 具体版 `periodicLiftClosureVertex` を四部分への場合分けで直接定義し、頂点の相異なりを同じ部分の単射性と六組の像の分離から示した（`periodicLiftClosureVertex_injective`）。具体版のファイルから必要十分版の import を外し、導出のファイルは定義の一致（`periodicLiftClosureVertex_eq_necSuf`）を置いて必要十分版の特殊化で導く形に直した。分離の台帳は 336 行から 333 行になった（宣言 2 行、import 1 行）。並列の表の次は「平面単純閉路のトーラス射影が閉じた非後退辺列であることを具体版で示す」で、着手できる。
+
+## レビュー記録から移したもの
+- 2026-11-22（並列・二十八回目）: 前回の並列の具体版 `positivePeriodicMultiple_movesPoint`・`periodicLiftClosure_length`（`KacWard/PeriodicLiftClosurePeriodCount.lean`）を本文 `def_periodic_lift_closure_cycle` の $c\ge1$・$N:=2h+2cm$ と照合し、今回の四部分の合成を参照用ノート「接続階段の周期並進による単純閉路」の論法（各部分内の相異なりと全ての組の分離、閉性と単位性は別に渡す）と照合した。一致し、修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-22（並列・二十八回目）: 表の先頭「四区間の道が頂点単純な閉歩道をなすことを具体版で示す」を、四部分の和の場合分け一つの論法として割らずに済ませた。必要十分版の `fourSegmentVertex` の別名だった具体版の定義を整数格子の上の場合分けで定義し直し、`four_segments_form_simple_closed_walk_necSuf` を呼んでいた証明を十六の場合の直接の証明に替えた。導出 `periodicLiftClosure_is_simple_cycle_from_necSuf` は具体版を呼ぶだけだったので、必要十分版を import して特殊化で導く形に直した。本文の主張は参照用ノートに退避済みで、本文の `lean:` は変わらない。
