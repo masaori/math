@@ -15,6 +15,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "クロネッカーのデルタ" },
     labels: ["def_kronecker_delta"],
+    lean: ["Ising2D.kroneckerDelta"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -49,6 +50,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "単位行列" },
     labels: ["def_identity_matrix"],
+    lean: ["Ising2D.identity_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -80,6 +82,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "行列のスカラー倍" },
     labels: ["def_matrix_scalar_multiple"],
+    lean: ["Ising2D.matrix_smul_apply", "Ising2D.vec_smul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -119,6 +122,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "行列の和" },
     labels: ["def_matrix_sum"],
+    lean: ["Ising2D.matrix_sum_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -296,6 +300,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "零行列を右から足しても行列は変わらない" },
     labels: ["matrix_plus_zero_matrix"],
+    lean: ["Ising2D.matrix_add_zero_matrix", "Ising2D.matrix_add_zero_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -365,6 +370,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "零行列を左から足しても行列は変わらない" },
     labels: ["zero_matrix_plus_matrix"],
+    lean: ["Ising2D.zero_matrix_add_matrix", "Ising2D.zero_matrix_add_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -434,6 +440,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "零行列を引いても行列は変わらない" },
     labels: ["matrix_minus_zero_matrix"],
+    lean: ["Ising2D.matrix_sub_zero_matrix", "Ising2D.matrix_sub_zero_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -515,6 +522,7 @@ X - O
     kind: "claim",
     title: { text: "零行列の有限和は零行列" },
     labels: ["finite_sum_of_zero_matrices"],
+    lean: ["Ising2D.finite_sum_of_zero_matrices"],
     statement: [
       paragraph([
         math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
@@ -564,6 +572,7 @@ X - O
     kind: "claim",
     title: { text: "零行列のスカラー倍は零行列" },
     labels: ["scalar_multiple_of_zero_matrix"],
+    lean: ["Ising2D.matrix_smul_zero_matrix", "Ising2D.matrix_smul_zero_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -618,6 +627,7 @@ X - O
     kind: "claim",
     title: { text: "行列の 0 倍は零行列" },
     labels: ["zero_scalar_multiple_is_zero_matrix"],
+    lean: ["Ising2D.matrix_zero_smul", "Ising2D.matrix_zero_smul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -670,6 +680,7 @@ X - O
     kind: "claim",
     title: { text: "行列の和の可換律" },
     labels: ["matrix_sum_is_commutative"],
+    lean: ["Ising2D.matrix_add_comm", "Ising2D.matrix_add_comm_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -780,6 +791,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "単位行列を左から掛けても変わらない" },
     labels: ["identity_matrix_is_left_unit_of_mat_mult"],
+    lean: ["Ising2D.identity_matrix_mul", "Ising2D.identity_matrix_mulVec", "Ising2D.identity_matrix_mulVec_apply", "Ising2D.identity_matrix_mul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -837,6 +849,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "単位行列を右から掛けても変わらない" },
     labels: ["identity_matrix_is_right_unit_of_mat_mult"],
+    lean: ["Ising2D.mul_identity_matrix", "Ising2D.mul_identity_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -896,6 +909,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "左の因子のスカラー倍は行列の積の外へ出せる" },
     labels: ["scalar_multiple_factors_out_of_left_factor"],
+    lean: ["Ising2D.smul_mul_matrix", "Ising2D.smul_mul_matrix_apply", "Ising2D.smul_mulVec_eq", "Ising2D.smul_mulVec_eq_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -955,6 +969,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "右の因子のスカラー倍は行列の積の外へ出せる" },
     labels: ["scalar_multiple_factors_out_of_right_factor"],
+    lean: ["Ising2D.mul_smul_matrix", "Ising2D.mul_smul_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -1017,6 +1032,7 @@ X - O
     kind: "claim",
     title: { text: "左の因子の符号反転は行列の積の外へ出る" },
     labels: ["negation_factors_out_of_left_factor"],
+    lean: ["Ising2D.neg_mul_matrix", "Ising2D.neg_mul_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -1077,6 +1093,7 @@ X - O
     kind: "claim",
     title: { text: "右の因子の符号反転は行列の積の外へ出る" },
     labels: ["negation_factors_out_of_right_factor"],
+    lean: ["Ising2D.mul_neg_matrix", "Ising2D.mul_neg_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -1141,6 +1158,7 @@ X - O
     kind: "claim",
     title: { text: "複素数の和の有限和は有限和の和" },
     labels: ["finite_sum_of_complex_sums"],
+    lean: ["Ising2D.finite_sum_of_complex_sums_succ", "Ising2D.finite_sum_of_complex_sums_step", "Ising2D.finite_sum_of_complex_sums"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -1216,6 +1234,7 @@ X - O
     kind: "claim",
     title: { text: "行列の和の有限和は有限和の和に等しい" },
     labels: ["finite_sum_of_matrix_sums"],
+    lean: ["Ising2D.finite_sum_of_matrix_sums", "Ising2D.finite_sum_of_matrix_sums_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
@@ -1267,6 +1286,7 @@ X - O
     kind: "claim",
     title: { text: "行列の積は右の因子の和に分配する" },
     labels: ["mat_mult_distributes_over_sum_in_right_factor"],
+    lean: ["Ising2D.mul_add_matrix", "Ising2D.mul_add_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -1323,6 +1343,7 @@ X - O
     kind: "claim",
     title: { text: "行列の積は左の因子の和に分配する" },
     labels: ["mat_mult_distributes_over_sum_in_left_factor"],
+    lean: ["Ising2D.add_mul_matrix", "Ising2D.add_mul_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -1379,6 +1400,7 @@ X - O
     kind: "claim",
     title: { text: "行列の符号反転は −1 倍に等しい" },
     labels: ["negation_is_scalar_multiple_by_minus_one"],
+    lean: ["Ising2D.neg_eq_neg_one_smul_matrix", "Ising2D.neg_eq_neg_one_smul_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1427,6 +1449,7 @@ X - O
     kind: "claim",
     title: { text: "符号反転した行列のスカラー倍はスカラー倍の符号反転に等しい" },
     labels: ["scalar_multiple_of_negated_matrix"],
+    lean: ["Ising2D.smul_neg_matrix", "Ising2D.smul_neg_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1489,6 +1512,7 @@ X - O
     kind: "claim",
     title: { text: "行列の符号反転を二回施すと元に戻る" },
     labels: ["matrix_double_negation"],
+    lean: ["Ising2D.neg_neg_matrix", "Ising2D.neg_neg_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1541,6 +1565,7 @@ X - O
     kind: "claim",
     title: { text: "行列の和の符号反転は符号反転の和に等しい" },
     labels: ["negation_distributes_over_matrix_sum"],
+    lean: ["Ising2D.neg_add_matrix", "Ising2D.neg_add_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1597,6 +1622,7 @@ X - O
     kind: "claim",
     title: { text: "符号反転した行列の有限和は有限和の符号反転に等しい" },
     labels: ["finite_sum_of_negated_matrices"],
+    lean: ["Ising2D.neg_finite_sum_of_matrices"],
     statement: [
       paragraph([
         math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
@@ -1652,6 +1678,7 @@ X - O
     kind: "claim",
     title: { text: "行列の差は符号反転した行列との和に等しい" },
     labels: ["matrix_difference_is_sum_with_negation"],
+    lean: ["Ising2D.matrix_sub_eq_add_neg", "Ising2D.matrix_sub_eq_add_neg_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1704,6 +1731,7 @@ X - O
     kind: "claim",
     title: { text: "符号反転した行列の差は差の符号反転に等しい" },
     labels: ["difference_of_negated_matrices"],
+    lean: ["Ising2D.neg_sub_neg_matrix"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1742,6 +1770,7 @@ X - O
     kind: "claim",
     title: { text: "スカラー倍は行列の差に分配する" },
     labels: ["scalar_multiple_distributes_over_matrix_difference"],
+    lean: ["Ising2D.matrix_smul_sub", "Ising2D.matrix_smul_sub_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -1809,6 +1838,7 @@ X - O
     kind: "claim",
     title: { text: "スカラー倍は行列の和に分配する" },
     labels: ["scalar_multiple_distributes_over_matrix_sum"],
+    lean: ["Ising2D.matrix_smul_add", "Ising2D.matrix_smul_add_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1863,6 +1893,7 @@ X - O
     kind: "claim",
     title: { text: "係数の和によるスカラー倍は各係数のスカラー倍の和に等しい" },
     labels: ["scalar_sum_distributes_over_matrix"],
+    lean: ["Ising2D.matrix_add_smul", "Ising2D.matrix_add_smul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1914,6 +1945,7 @@ X - O
     kind: "claim",
     title: { text: "スカラー倍した行列の有限和は有限和のスカラー倍に等しい" },
     labels: ["finite_sum_of_scalar_multiples"],
+    lean: ["Ising2D.finite_sum_smul_of_matrices"],
     statement: [
       paragraph([
         math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
@@ -1972,6 +2004,7 @@ X - O
     kind: "claim",
     title: { text: "一つの行列のスカラー倍の有限和は係数の有限和によるスカラー倍に等しい" },
     labels: ["finite_sum_of_scalar_multiples_of_one_matrix"],
+    lean: ["Ising2D.finite_sum_smul_one_matrix", "Ising2D.finite_sum_smul_one_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
@@ -2025,6 +2058,7 @@ X - O
     kind: "claim",
     title: { text: "行列の有限和を左の因子とする積は各項の積の有限和に等しい" },
     labels: ["finite_sum_of_matrices_distributes_in_left_factor"],
+    lean: ["Ising2D.finite_sum_mul_of_matrices"],
     statement: [
       paragraph([
         math(String.raw`m, n, p, r \in \mathbb{Z}_{\geq 1}`),
@@ -2082,6 +2116,7 @@ X - O
     kind: "claim",
     title: { text: "行列の有限和を右の因子とする積は各項の積の有限和に等しい" },
     labels: ["finite_sum_of_matrices_distributes_in_right_factor"],
+    lean: ["Ising2D.mul_finite_sum_of_matrices"],
     statement: [
       paragraph([
         math(String.raw`m, n, p, r \in \mathbb{Z}_{\geq 1}`),
@@ -2139,6 +2174,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     kind: "claim",
     title: { text: "一つの行列のスカラー倍の差は係数の差によるスカラー倍に等しい" },
     labels: ["difference_of_scalar_multiples_of_one_matrix"],
+    lean: ["Ising2D.smul_sub_smul_matrix", "Ising2D.smul_sub_smul_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -2202,6 +2238,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     kind: "claim",
     title: { text: "行列の二重の有限和は和の順序を入れ替えても等しい" },
     labels: ["finite_double_sum_of_matrices_interchange"],
+    lean: ["Ising2D.finite_double_sum_of_matrices_interchange", "Ising2D.finite_double_sum_of_matrices_interchange_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, r, s \in \mathbb{Z}_{\geq 1}`),
@@ -2255,6 +2292,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     kind: "claim",
     title: { text: "一つを除く項が零行列である行列の有限和は、その一つの項に等しい" },
     labels: ["finite_sum_of_matrices_with_single_nonzero_term"],
+    lean: ["Ising2D.finite_sum_of_matrices_with_single_nonzero_term", "Ising2D.finite_sum_of_matrices_with_single_nonzero_term_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
@@ -2366,6 +2404,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "1 倍しても行列は変わらない" },
     labels: ["scalar_multiple_by_one"],
+    lean: ["Ising2D.matrix_one_smul", "Ising2D.matrix_one_smul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -2414,6 +2453,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     kind: "claim",
     title: { text: "和が零行列なら一方は他方の符号反転" },
     labels: ["matrix_equals_negation_if_sum_is_zero"],
+    lean: ["Ising2D.matrix_eq_neg_of_add_eq_zero", "Ising2D.matrix_sub_neg_eq_zero_of_add_eq_zero"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -2468,6 +2508,7 @@ X - (-Y)
     kind: "definition",
     title: { text: "行列の反交換子" },
     labels: ["def_matrix_anticommutator"],
+    lean: ["Ising2D.matAnticomm"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -2498,6 +2539,7 @@ X - (-Y)
     kind: "claim",
     title: { text: "スカラー倍の有限和どうしの反交換子は反交換子の二重和に等しい" },
     labels: ["anticommutator_of_finite_sums_of_scalar_multiples"],
+    lean: ["Ising2D.acomm_sum_smul"],
     statement: [
       paragraph([
         math(String.raw`n, r, s \in \mathbb{Z}_{\geq 1}`),
@@ -2602,6 +2644,7 @@ X - (-Y)
     kind: "claim",
     title: { text: "零行列を左から掛けると零行列" },
     labels: ["zero_matrix_is_left_zero_of_mat_mult"],
+    lean: ["Ising2D.zero_matrix_mul", "Ising2D.zero_matrix_mul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -2657,6 +2700,7 @@ X - (-Y)
     kind: "claim",
     title: { text: "零行列を右から掛けると零行列" },
     labels: ["zero_matrix_is_right_zero_of_mat_mult"],
+    lean: ["Ising2D.matrix_mul_zero_matrix", "Ising2D.matrix_mul_zero_matrix_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),

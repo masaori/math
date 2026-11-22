@@ -66,11 +66,9 @@ end Ring
 
 /-! ## 反交換子の双線型性（線型結合の展開）
 
-原文には対応する主張が無い**補助補題**。
-`parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` と
-`parts/007_hatZとhatYの反交換関係/000_claim_....typ` の計算は、いずれも
-「反交換子の中の有限線型結合を外へ出す」操作を暗黙に使っているので、
-その操作をここで一度だけ証明しておく。 -/
+`acomm_sum_smul` は、本文の `anticommutator_of_finite_sums_of_scalar_multiples`（`Mat(n, ℂ)` の反交換子
+`[X, W]_+` についての主張）を任意の環 `R` へ一般化した形である。本文どおりの `Mat(n, ℂ)` と `matAnticomm` についての
+具体版は無く、証明も本文の成分ごとの計算ではなく `Finset.sum_mul_sum` による。 -/
 
 section Bilinear
 
