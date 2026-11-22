@@ -324,7 +324,7 @@ theorem diagonal_bound_odd (n a : ℕ) (hn : n = 2 * a + 1) (k : Conf M) :
     _ = c ^ (2 * a + 1) := (pow_succ' c (2 * a)).symm                       -- `ℝ` の冪の指数法則
     _ = c ^ n := by rw [hn]                                                 -- `n = 2a + 1`
 
-/-- **人手 `trace_power_upper_bound`**: `n ≥ 1` について `Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`。
+/-- **仮定 `hW`・`hWRsymm`・`hpd` を持つ任意の `W` についての一般形**（人手 `trace_power_upper_bound`。本文の `W` の版は `trace_power_upper_bound_physical`）: `n ≥ 1` について `Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`。
 `n` の偶奇で各 `k` の `e_k^⊤(W_ℝ)^ne_k ≤ c^n` を出し、最後のトレースの 5 行で足し合わせる。
 仮定 `1 ≤ n` は人手の主張に合わせて置いたもので、証明は使わない（`n = 0` でも `Σ_k (I_ℝ)_kk = 2^{M_col}` で成り立つ）。 -/
 theorem trace_power_upper_bound {n : ℕ} (_hn : 1 ≤ n) :

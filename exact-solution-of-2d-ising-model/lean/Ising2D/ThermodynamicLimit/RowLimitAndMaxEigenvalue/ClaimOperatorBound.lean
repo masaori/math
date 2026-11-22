@@ -48,7 +48,7 @@ theorem matBilin_one_mulVecLin_pow (W : Matrix n n ℝ) (x : n → ℝ) (k : ℕ
     matBilin (1 : Matrix n n ℝ) x ((W.mulVecLin ^ k) x) = x ⬝ᵥ W ^ k *ᵥ x := by
   rw [mulVecLin_pow_apply, matBilin_one_apply]
 
-/-- **人手 `W_real_is_positive_semidefinite`**（`W_ℝ` を仮定 `hpd` を持つ実行列 `W` で表した形）: `W_ℝ` は半正定値。
+/-- **仮定 `hpd` を持つ任意の実行列 `W` についての一般形**（人手 `W_real_is_positive_semidefinite` の `W_ℝ` を `W` で表した形）: `W_ℝ` は半正定値。
 `u ≠ 0` なら正定値性（人手 `W_real_is_positive_definite`）、`u = 0` なら人手の 5 行の鎖で `u^⊤W_ℝu = 0`。
 本文の `W_ℝ` に当てたものは `PhysicalPartitionFunctionSandwich.lean` の `Ising2D.W_real_is_positive_semidefinite`。 -/
 theorem psd_of_pd {W : Matrix n n ℝ} (hpd : ∀ x : n → ℝ, x ≠ 0 → 0 < x ⬝ᵥ W *ᵥ x)

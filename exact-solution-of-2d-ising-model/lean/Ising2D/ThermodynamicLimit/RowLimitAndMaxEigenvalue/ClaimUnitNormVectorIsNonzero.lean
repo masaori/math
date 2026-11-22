@@ -29,7 +29,7 @@ namespace Ising2D
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- 人手 `unit_norm_vector_is_nonzero`（「`‖x‖ = 1` なら `x ≠ 0`」。`def_rayleigh_sup` の `𝓡 ⊆ ℝ_{>0}` の段・
+/-- **人手 `unit_norm_vector_is_nonzero`**（「`‖x‖ = 1` なら `x ≠ 0`」。`def_rayleigh_sup` の `𝓡 ⊆ ℝ_{>0}` の段・
 `moment_log_convexity`・`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の準備が引く）: `x = 0` と仮定すると
 `‖x‖ = √(Σ_j|x_j|^2) = √(Σ_j|0|^2) = √(Σ_j 0^2) = √(Σ_j 0) = √0 = 0` の 6 行の鎖になり、`ℝ` で `0 ≠ 1` なので `‖x‖ = 1` と矛盾する。
 人手の `d ∈ ℤ_{≥1}`・`x ∈ ℝ^d` は、ここでは任意の有限型の添字 `n` の `x : n → ℝ` で受ける（鎖は `d ≥ 1` を使わない）。 -/

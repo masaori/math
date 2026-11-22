@@ -120,6 +120,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 4 },
     title: { tex: String.raw`Z_{\mathbb{C}} = \mathrm{tr}(W^{N_{\mathrm{row}}})` },
     labels: ["Z_equals_trace_of_W"],
+    lean: ["Ising2D.trace_mul_pow_eq_trace_symmetrized_pow", "Ising2D.partition_function_eq_trace_physicalSymTransferC"],
     statement: [
       paragraph([
         ref("partition_function_via_transfer_matrix"),
@@ -360,6 +361,7 @@ W^{k+2}
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 5 },
     title: { tex: String.raw`W \text{ は実対称正定値}` },
     labels: ["W_is_real_symmetric_positive_definite"],
+    lean: ["Ising2D.physicalSymTransferC_isRealSymmetric", "Ising2D.physicalSymTransferC_posDef", "Ising2D.physicalSymTransferC_isUnit", "Ising2D.physicalSymTransferC_hasRealEntries", "Ising2D.physicalSymTransferC_transpose", "Ising2D.physicalSymTransferC_eq_smul_congruence"],
     statement: [
       paragraph([
         math(String.raw`W`),
@@ -909,6 +911,7 @@ W
     kind: "definition",
     title: { tex: String.raw`W \text{ の実数の行列 } W_{\mathbb{R}}` },
     labels: ["def_W_real"],
+    lean: ["Ising2D.physicalSymTransferR", "Ising2D.physicalSymTransferR_eq_realMatrixOfRealEntries"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -960,6 +963,7 @@ W
     kind: "claim",
     title: { tex: String.raw`W_{\mathbb{R}} \text{ は対称}` },
     labels: ["W_real_is_symmetric"],
+    lean: ["Ising2D.W_real_is_symmetric", "Ising2D.W_real_entry_symm", "Ising2D.physicalSymTransferR_isSymm"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -1031,6 +1035,7 @@ W
     kind: "claim",
     title: { tex: String.raw`x \neq 0 \text{ なら } x^\top W_{\mathbb{R}} x > 0` },
     labels: ["W_real_is_positive_definite"],
+    lean: ["Ising2D.W_real_is_positive_definite", "Ising2D.conjugate_bilinear_value_of_real_vector_W", "Ising2D.physicalSymTransferR_posDef"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -1149,6 +1154,7 @@ W
     kind: "claim",
     title: { tex: String.raw`u^\top W_{\mathbb{R}} u \geq 0` },
     labels: ["W_real_is_positive_semidefinite"],
+    lean: ["Ising2D.W_real_is_positive_semidefinite"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -1229,6 +1235,7 @@ u^\top W_{\mathbb{R}} u
     kind: "claim",
     title: { tex: String.raw`\mathrm{tr}(W^q) = \Bigl(\sum_k ((W_{\mathbb{R}})^q)_{kk}\Bigr)_{\mathbb{C}}` },
     labels: ["trace_of_W_power_via_W_real"],
+    lean: ["Ising2D.trace_of_W_power_via_W_real"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -1323,6 +1330,7 @@ u^\top W_{\mathbb{R}} u
     kind: "claim",
     title: { tex: String.raw`\|x\| = 1 \text{ なら } x \neq 0` },
     labels: ["unit_norm_vector_is_nonzero"],
+    lean: ["Ising2D.ne_zero_of_unit_norm"],
     statement: [
       paragraph([
         math(String.raw`d \in \mathbb{Z}_{\geq 1}`),
@@ -1400,6 +1408,7 @@ u^\top W_{\mathbb{R}} u
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 8 },
     title: { tex: String.raw`c(M_{\mathrm{col}}) := \sup_{\|x\|=1} x^\top W_{\mathbb{R}} x` },
     labels: ["def_rayleigh_sup"],
+    lean: ["Ising2D.rayleighSup", "Ising2D.rayleighSet", "Ising2D.rayleighSet_bddAbove", "Ising2D.rayleighSup_pos", "Ising2D.rayleighSup_physicalSymTransferR_eq"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -1678,6 +1687,7 @@ c(M_{\mathrm{col}})
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 9 },
     title: { tex: String.raw`\|W_{\mathbb{R}}x\| \leq c(M_{\mathrm{col}})\,\|x\|` },
     labels: ["rayleigh_bounds_operator_norm"],
+    lean: ["Ising2D.rayleigh_bounds_operator_norm", "Ising2D.vecNorm_mulVec_sq_eq_bilinear", "Ising2D.rayleigh_bounds_operator_norm_pow"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -1890,6 +1900,7 @@ c(M_{\mathrm{col}})
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 10 },
     title: { tex: String.raw`\sum_{k} ((W_{\mathbb{R}})^{n})_{kk} \leq 2^{M_{\mathrm{col}}} c(M_{\mathrm{col}})^{n}` },
     labels: ["trace_power_upper_bound"],
+    lean: ["Ising2D.trace_power_upper_bound_physical"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -2409,6 +2420,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 10 },
     title: { text: "モーメント列の正値性と対数凸性" },
     labels: ["moment_log_convexity"],
+    lean: ["Ising2D.moment_log_convexity_physical"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -3196,6 +3208,7 @@ a+b+1 &= p+(p+1)+1
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 10 },
     title: { tex: String.raw`c(M_{\mathrm{col}})^{n} \leq \sum_{k} ((W_{\mathbb{R}})^{n})_{kk} \leq 2^{M_{\mathrm{col}}} c(M_{\mathrm{col}})^{n}` },
     labels: ["trace_power_sandwich"],
+    lean: ["Ising2D.trace_power_sandwich_physical"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -4105,6 +4118,7 @@ T
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 11 },
     title: { text: "分配関数の挟み撃ち" },
     labels: ["partition_function_sandwich"],
+    lean: ["Ising2D.partition_function_sandwich_physical", "Ising2D.partition_function_eq_sum_diag_W_real_pow"],
     statement: [
       paragraph([
         ref("partition_function_via_transfer_matrix"),
@@ -4239,6 +4253,7 @@ Z(K_1,K_2)
     origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 5 },
     title: { tex: String.raw`N_{\mathrm{row}} \to \infty \text{ の極限}` },
     labels: ["limit_of_log_Z_in_N_row"],
+    lean: ["Ising2D.onsager_limit_in_N_row_physical"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -4520,6 +4535,7 @@ Z(K_1,K_2)
       tex: String.raw`c(M_{\mathrm{col}})^{N_{\mathrm{row}}} \leq Z \leq 2^{M_{\mathrm{col}}}c(M_{\mathrm{col}})^{N_{\mathrm{row}}} \text{ と } \lim_{N_{\mathrm{row}}\to\infty}\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z = \frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`,
     },
     labels: ["partition_function_sandwich_and_limit_in_N_row"],
+    lean: ["Ising2D.partition_function_sandwich_and_limit_in_N_row"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),

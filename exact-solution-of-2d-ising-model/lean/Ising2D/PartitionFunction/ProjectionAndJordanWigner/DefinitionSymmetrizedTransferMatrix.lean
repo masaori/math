@@ -126,7 +126,7 @@ theorem symmetrized_pow_succ {B V1 V2 W : Matrix n n ℂ} (hBB : B * B = V1)
           rw [Matrix.mul_assoc B ((V2 * V1) ^ k) (V2 * V1)]   -- `mat_mult_associative`
       _ = ((B * (V2 * V1) ^ (k + 1)) * V2) * B := by rw [← pow_succ] -- `def_exp` (1) の `(V_2V_1)^{k+1} := (V_2V_1)^k(V_2V_1)`
 
-/-- **人手 `Z_equals_trace_of_W` の本体**: `n ∈ ℤ_{≥1}` について `tr((V_1V_2)^n) = tr(W^n)`。
+/-- **人手 `Z_equals_trace_of_W` の本体**（任意の `B, V_1, V_2, W` についての一般形。本文の `V_1, V_2, W` について全ての `n` で述べた版は無い）: `n ∈ ℤ_{≥1}` について `tr((V_1V_2)^n) = tr(W^n)`。
 `k := n - 1` と置いて（`k + 1 = n`）、人手の 6 行と同じ段の calc で示す。`B * B = V₁`（準備 1）だけを仮定する。 -/
 theorem trace_mul_pow_eq_trace_symmetrized_pow {B V1 V2 W : Matrix n n ℂ} (hBB : B * B = V1)
     (hW : W = (B * V2) * B) (N : ℕ) (hN : 1 ≤ N) :

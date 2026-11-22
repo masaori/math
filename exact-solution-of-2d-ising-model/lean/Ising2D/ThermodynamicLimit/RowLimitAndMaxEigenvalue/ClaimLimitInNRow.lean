@@ -63,7 +63,7 @@ namespace Ising2D
 open Filter
 open scoped Topology
 
-/-- **人手証明 `limit_of_log_Z_in_N_row` の含意の鎖**:
+/-- **任意の `c, Z` についての含意の鎖**（人手証明 `limit_of_log_Z_in_N_row` の証明の途中）:
 `|(1/(ι(M)ι(N))) log Z - (1/ι(M)) log c| ≤ (log 2)/ι(N)`。 -/
 theorem abs_log_Z_sub_log_c_le
     {M : ℕ} (hM : 2 ≤ M) {c : ℝ} (hc : 0 < c) {Z : ℕ → ℝ}
@@ -129,7 +129,7 @@ theorem abs_log_Z_sub_log_c_le
   rw [abs_of_nonneg s9.1]
   exact s9.2
 
-/-- **人手証明 `limit_of_log_Z_in_N_row` の準備**: `log 2 > 0`。 -/
+/-- **`log 2 > 0`**（人手証明 `limit_of_log_Z_in_N_row` の準備）。 -/
 theorem log_two_pos : Real.log 2 > 0 :=
   calc Real.log 2 > Real.log 1 := real_log_strictly_increasing one_pos two_pos one_lt_two
                                         -- `real_log_strictly_increasing` を `1 < 2` に
@@ -138,7 +138,7 @@ theorem log_two_pos : Real.log 2 > 0 :=
     _ = 0 := Real.log_exp 0
                                         -- `def_real_logarithm_positive` の `log(exp x) = x`
 
-/-- **人手証明 `limit_of_log_Z_in_N_row` そのもの**:
+/-- **任意の `c, Z` についての一般形**（人手証明 `limit_of_log_Z_in_N_row`。本文の `Z`・`c(M)` の版は `onsager_limit_in_N_row_physical`）:
 `(1/(ι(M)ι(N_row))) log Z → (1/ι(M)) log c(M)`。 -/
 theorem limit_of_log_Z_in_N_row
     {M : ℕ} (hM : 2 ≤ M) {c : ℝ} (hc : 0 < c) {Z : ℕ → ℝ}

@@ -425,7 +425,7 @@ theorem moment_sq_le_with_real_identity (x : Conf M → ℝ) (a b : ℕ) :
         rw [Nat.two_mul, Nat.two_mul]                                       -- `ℤ` で `a + a = 2a`, `b + b = 2b`
     _ = momentWReal W hW x (2 * a) * momentWReal W hW x (2 * b) := rfl      -- `m_k := x^⊤(W_ℝ)^kx` を両因子へ同時に
 
-/-- **人手 `moment_log_convexity`**: 単位ベクトル `x`（`‖x‖ = 1`）について、すべての `k ≥ 0` で `m_k > 0`、
+/-- **仮定 `hW`・`hWRsymm`・`hpd` を持つ任意の `W` についての一般形**（人手 `moment_log_convexity`。本文の `W` の版は `moment_log_convexity_physical`）: 単位ベクトル `x`（`‖x‖ = 1`）について、すべての `k ≥ 0` で `m_k > 0`、
 すべての `k ≥ 1` で `m_k^2 ≤ m_{k-1}m_{k+1}`（`m_k := x^⊤(W_ℝ)^kx`）。 -/
 theorem moment_log_convexity
     (hWRsymm : (realMatrixOfRealEntries W hW.1).IsSymm)

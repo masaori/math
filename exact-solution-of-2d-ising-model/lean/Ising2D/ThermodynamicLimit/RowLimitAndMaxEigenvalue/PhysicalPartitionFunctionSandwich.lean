@@ -469,7 +469,7 @@ theorem physicalSymTransferC_isRealSymmetric (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2
     MatrixIsRealSymmetric (physicalSymTransferC M K1 K2) :=
   ⟨physicalSymTransferC_hasRealEntries K1 hK2, physicalSymTransferC_transpose K1 hK2⟩
 
-/-- **人手 `def_rayleigh_sup` の冒頭 `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`）を具体的な `W` について**:
+/-- **人手 `def_W_real` の `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`）を具体的な `W` について**:
 成分がすべて実数の `W = physicalSymTransferC`（`physicalSymTransferC_hasRealEntries`）を `ϱ` で実数の行列へ移すと、
 実成分で組んだ `physicalSymTransferR` になる（各成分で `W_pq = (physicalSymTransferR_pq)_ℂ`（`physicalSymTransferC_eq_map`）に
 `realMatrixOfRealEntries_apply_eq` を当てる）。Lean の `c(M_col) = rayleighSup (physicalSymTransferR …)` は、この等式で人手の

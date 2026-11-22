@@ -180,7 +180,7 @@ theorem rayleighSup_pow_le_trace_of_power {n : ℕ} (hn : 1 ≤ n) :
       _ = T := by ring                                                      -- `ℝ` の加法
   exact lt_irrefl T hTT                                                     -- `T > T` で矛盾
 
-/-- **人手 `trace_power_sandwich`**: `n ≥ 1` について `c(M_col)^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`。
+/-- **仮定 `hW`・`hWRsymm`・`hpd` を持つ任意の `W` についての一般形**（人手 `trace_power_sandwich`。本文の `W` の版は `trace_power_sandwich_physical`）: `n ≥ 1` について `c(M_col)^n ≤ Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`。
 下からの評価は【上限への移行】、上からの評価は `trace_power_upper_bound`。 -/
 theorem trace_power_sandwich {n : ℕ} (hn : 1 ≤ n) :
     rayleighSup (realMatrixOfRealEntries W hW.1) ^ n
