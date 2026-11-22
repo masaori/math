@@ -20,7 +20,8 @@ import Mathlib.Data.List.Sort
 namespace Ising2DLambda.KacWard
 
 open Finset Ising2DLambda.AlgebraicEigenvalue Ising2DLambda.PartitionPolynomial
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign inversionCount orderedPairs)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
+  (finiteOrderedSign finiteOrderedInversionCount finiteOrderedPairs)
 
 /-- 本文の基準完全マッチング 𝒟₀ を、完全マッチングの型の元として置く。 -/
 def referenceLongMatching (L : ℕ) : PerfectMatching (OrientedEdge L) :=
@@ -109,15 +110,15 @@ theorem matchingWordPermutation_baseWord {J : Type*} [Fintype J] [LinearOrder J]
 
 /-- 恒等置換の符号は一。恒等置換は昇順の対の順序を入れ替えないので、転倒数は零である。 -/
 lemma sign_identity_eq_one {J : Type*} [Fintype J] [LinearOrder J] :
-    sign (fun x y : J => x < y) (1 : Equiv.Perm J) = 1 := by
-  have hinv : inversionCount (fun x y : J => x < y) (1 : Equiv.Perm J) = 0 := by
-    rw [NecSuf.AlgebraicEigenvalue.inversionCount, Finset.card_eq_zero,
+    finiteOrderedSign (1 : Equiv.Perm J) = 1 := by
+  have hinv : finiteOrderedInversionCount (1 : Equiv.Perm J) = 0 := by
+    rw [finiteOrderedInversionCount, Finset.card_eq_zero,
       Finset.filter_eq_empty_iff]
     intro p hp
     have hlt : p.1 < p.2 := by
-      simpa [NecSuf.AlgebraicEigenvalue.orderedPairs] using hp
+      simpa [finiteOrderedPairs] using hp
     exact lt_asymm hlt
-  rw [NecSuf.AlgebraicEigenvalue.sign, hinv, pow_zero]
+  rw [finiteOrderedSign, hinv, pow_zero]
 
 /-- 本文の符号の二等号。sgn(𝒟₀) = sgn(id) = 1。 -/
 theorem referenceLongMatching_sign (L : ℕ) :
@@ -128,10 +129,10 @@ theorem referenceLongMatching_sign (L : ℕ) :
       (perfectMatchingSign_enumeration_independent _ _ (referenceLongEnumeration_spec L)).symm
     _ = matchingWordSign (matchingBaseWord (OrientedEdge L)) := by
       rw [referenceLongPairWord_eq_base]
-    _ = sign (fun x y : OrientedEdge L => x < y)
+    _ = finiteOrderedSign
           (matchingWordPermutation (matchingBaseWord (OrientedEdge L))
             matchingBaseWord_complete) := matchingWordSign_eq _ _
-    _ = sign (fun x y : OrientedEdge L => x < y) 1 := by
+    _ = finiteOrderedSign 1 := by
       rw [matchingWordPermutation_baseWord]
     _ = 1 := sign_identity_eq_one
 

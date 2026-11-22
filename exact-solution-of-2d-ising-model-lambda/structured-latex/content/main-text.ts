@@ -17154,7 +17154,9 @@ p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_i
  &=t_{a,b}(w_k)&&\bigl(\because\ \text{各位置での値の交換}\bigr)\\
  &=t_{a,b}(\pi_w(j_k))&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)
 \end{aligned}`),
-                          paragraph(["基準列が全元を含むから、これは置換そのものの等号 ", math(String.raw`\pi_{w'}=t_{a,b}\circ\pi_w`), " である。したがって、"]),
+                          paragraph(["基準列が全元を含むので、置換の外延性から次の等号を得る。"]),
+                          displayMath(String.raw`\pi_{w'}=t_{a,b}\circ\pi_w\qquad\bigl(\because\ \text{全ての }j_k\text{ での上記等号と基準列の完全性}\bigr)`),
+                          paragraph(["したがって、"]),
                           displayMath(String.raw`\begin{aligned}
 \varepsilon(w')&=\operatorname{sgn}(\pi_{w'})&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)\\
  &=\operatorname{sgn}(t_{a,b}\circ\pi_w)&&\bigl(\because\ \text{上で得た置換の等号}\bigr)\\
