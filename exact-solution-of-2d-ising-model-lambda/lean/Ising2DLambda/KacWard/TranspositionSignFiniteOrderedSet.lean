@@ -13,17 +13,17 @@
   sgn(t_{a,b}) の四行                              finiteTransposition_sign
 
 符号・転倒数・順序対の集合は、本文の定義 `def_permutation_sign` をそのまま書いた定義
-（`sign`・`inversionCount`・`orderedPairs`）を使う。定理は一つも引かない。
+（`finiteOrderedSign`・`finiteOrderedInversionCount`・`finiteOrderedPairs`）を使う。定理は一つも引かない。
 mathlib の `Equiv.swap` と `Equiv.Perm.sign` の一般論も引かない（引くと数え上げが消える）。
 
 住処: 有限集合の数え上げと整数 -1 の冪だけで、ℝ / ℂ は現れない。
 -/
-import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PermutationSign
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 
 namespace Ising2DLambda.KacWard
 
 open Finset
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign inversionCount orderedPairs)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
 
 variable {J : Type*} [LinearOrder J]
 
@@ -91,7 +91,7 @@ def transpositionRightPairs (a b : J) : Finset (J × J) :=
 
 /-- 人手証明の `I = { (u,v) ∈ P | t(v) ≺ t(u) }`。 -/
 def transpositionInversionSet (a b : J) : Finset (J × J) :=
-  (orderedPairs (fun x y : J => x < y)).filter fun p =>
+  (finiteOrderedPairs (J := J)).filter fun p =>
     finiteTransposition a b p.2 < finiteTransposition a b p.1
 
 theorem mem_transpositionBetween {a b u : J} :
@@ -101,7 +101,7 @@ theorem mem_transpositionBetween {a b u : J} :
 theorem mem_transpositionInversionSet {a b : J} {p : J × J} :
     p ∈ transpositionInversionSet a b ↔
       p.1 < p.2 ∧ finiteTransposition a b p.2 < finiteTransposition a b p.1 := by
-  simp [transpositionInversionSet, orderedPairs]
+  simp [transpositionInversionSet, finiteOrderedPairs]
 
 /-- 人手証明の集合の等号 `I = A ∪ B ∪ C`。`⊆` は人手証明の五つの場合分け、
 `⊇` は三集合それぞれの確認に対応する。 -/
@@ -163,7 +163,7 @@ theorem transpositionInversionSet_eq {a b : J} (hab : a < b) :
 /-- 人手証明の転倒数の二行 `inv(t_{a,b}) = |M| + |M| + 1 = 2|M| + 1`。
 互いに素であることと `|A| = |B| = |M|`、`|C| = 1` を先に示す。 -/
 theorem finiteTransposition_inversionCount {a b : J} (hab : a < b) :
-    inversionCount (fun x y : J => x < y) (finiteTranspositionPerm a b) =
+    finiteOrderedInversionCount (finiteTranspositionPerm a b) =
       2 * (transpositionBetween a b).card + 1 := by
   have hAB : Disjoint (transpositionLeftPairs a b) (transpositionRightPairs a b) := by
     rw [Finset.disjoint_left]
@@ -187,7 +187,7 @@ theorem finiteTransposition_inversionCount {a b : J} (hab : a < b) :
     card_image_of_injective _ (fun _ _ h => congrArg Prod.snd h)
   have hBcard : (transpositionRightPairs a b).card = (transpositionBetween a b).card :=
     card_image_of_injective _ (fun _ _ h => congrArg Prod.fst h)
-  calc inversionCount (fun x y : J => x < y) (finiteTranspositionPerm a b)
+  calc finiteOrderedInversionCount (finiteTranspositionPerm a b)
       = (transpositionInversionSet a b).card := rfl
     _ = (transpositionLeftPairs a b ∪ transpositionRightPairs a b ∪ {(a, b)}).card := by
         rw [transpositionInversionSet_eq hab]
@@ -199,9 +199,9 @@ theorem finiteTransposition_inversionCount {a b : J} (hab : a < b) :
 
 /-- 人手証明の符号の四行。`a ≺ b` の場合。 -/
 theorem finiteTransposition_sign_of_lt {a b : J} (hab : a < b) :
-    sign (fun x y : J => x < y) (finiteTranspositionPerm a b) = -1 := by
-  calc sign (fun x y : J => x < y) (finiteTranspositionPerm a b)
-      = (-1 : ℤ) ^ inversionCount (fun x y : J => x < y) (finiteTranspositionPerm a b) := rfl
+    finiteOrderedSign (finiteTranspositionPerm a b) = -1 := by
+  calc finiteOrderedSign (finiteTranspositionPerm a b)
+      = (-1 : ℤ) ^ finiteOrderedInversionCount (finiteTranspositionPerm a b) := rfl
     _ = (-1 : ℤ) ^ (2 * (transpositionBetween a b).card + 1) := by
         rw [finiteTransposition_inversionCount hab]
     _ = ((-1 : ℤ) ^ 2) ^ (transpositionBetween a b).card * (-1) := by
@@ -210,7 +210,7 @@ theorem finiteTransposition_sign_of_lt {a b : J} (hab : a < b) :
 
 /-- 主張の本体。三分律で `a ≺ b` か `b ≺ a` に分け、後者は名前を交換して前者へ帰着する。 -/
 theorem finiteTransposition_sign {a b : J} (hab : a ≠ b) :
-    sign (fun x y : J => x < y) (finiteTranspositionPerm a b) = -1 := by
+    finiteOrderedSign (finiteTranspositionPerm a b) = -1 := by
   rcases lt_or_gt_of_ne hab with hlt | hgt
   · exact finiteTransposition_sign_of_lt hlt
   · rw [finiteTranspositionPerm_comm]

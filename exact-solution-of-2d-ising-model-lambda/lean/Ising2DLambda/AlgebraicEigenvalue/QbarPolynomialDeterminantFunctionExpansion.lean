@@ -18,10 +18,11 @@ noncomputable def qbarPermutationSign {J : Type*} [Fintype J] [LinearOrder J]
 theorem qbarPermutationSign_eq_mathlibSign {J : Type*} [Fintype J] [LinearOrder J]
     (σ : Equiv.Perm J) : qbarPermutationSign σ = (Equiv.Perm.sign σ : ℤ) := by
   classical
-  simpa [qbarPermutationSign, NecSuf.AlgebraicEigenvalue.sign,
-    NecSuf.AlgebraicEigenvalue.inversionCount,
-    NecSuf.AlgebraicEigenvalue.orderedPairs, Finset.filter_filter] using
-    IntegerMatrix.inversionSign_eq_mathlibSign σ
+  simpa [qbarPermutationSign,
+    IndependentFiniteOrderedSign.finiteOrderedSign,
+    IndependentFiniteOrderedSign.finiteOrderedInversionCount,
+    IndependentFiniteOrderedSign.finiteOrderedPairs, Finset.filter_filter] using
+    IntegerMatrix.inversionSignIndependent_eq_mathlibSign σ
 
 /-- 転倒数の符号を定数多項式へ写した、本文の行指定の行列式定義との橋。
 線型順序はこの符号表示に必要であり、行列積の展開自体には使わない。 -/

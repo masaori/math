@@ -12,27 +12,28 @@ import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 namespace Ising2DLambda.IntegerMatrix
 
 open scoped BigOperators
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign inversionCount orderedPairs)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
 
 /-- 恒等置換は転倒を持たないので、符号は `(-1)^0 = 1`。 -/
 private theorem inversionSign_one {ι : Type*} [Fintype ι] [LinearOrder ι] :
-    sign (fun x y : ι => x < y) (1 : Equiv.Perm ι) = 1 := by
-  have hcount : inversionCount (fun x y : ι => x < y) (1 : Equiv.Perm ι) = 0 := by
-    unfold inversionCount
+    finiteOrderedSign (1 : Equiv.Perm ι) = 1 := by
+  have hcount : finiteOrderedInversionCount (1 : Equiv.Perm ι) = 0 := by
+    unfold finiteOrderedInversionCount
     rw [Finset.card_eq_zero, Finset.filter_eq_empty_iff]
     intro p hp hrev
-    have hlt : p.1 < p.2 := AlgebraicEigenvalue.finiteOrdered_mem_orderedPairs.mp hp
+    have hlt : p.1 < p.2 := finiteOrdered_mem_orderedPairs.mp hp
     exact lt_asymm hlt (by simpa using hrev)
-  rw [sign, hcount, pow_zero]
+  rw [finiteOrderedSign, hcount, pow_zero]
 
 /-- 転倒数で定めた人手証明の符号を、行列式ライブラリの符号へ結ぶ準同型。 -/
 private noncomputable def inversionSignHom {ι : Type*} [Fintype ι] [LinearOrder ι] :
     Equiv.Perm ι →* ℤˣ where
   toFun σ := {
-    val := sign (fun x y : ι => x < y) σ
-    inv := sign (fun x y : ι => x < y) σ
-    val_inv := AlgebraicEigenvalue.finiteOrderedSign_mul_self σ
-    inv_val := AlgebraicEigenvalue.finiteOrderedSign_mul_self σ
+    val := finiteOrderedSign σ
+    inv := finiteOrderedSign σ
+    val_inv := finiteOrderedSign_mul_self σ
+    inv_val := finiteOrderedSign_mul_self σ
   }
   map_one' := by
     apply Units.ext
@@ -40,12 +41,12 @@ private noncomputable def inversionSignHom {ι : Type*} [Fintype ι] [LinearOrde
   map_mul' := by
     intro σ τ
     apply Units.ext
-    exact AlgebraicEigenvalue.finiteOrderedSign_comp σ τ
+    exact finiteOrderedSign_comp σ τ
 
 /-- 転倒数の偶奇で定めた符号は、行列式ライブラリの置換符号と一致する。 -/
-theorem inversionSign_eq_mathlibSign {ι : Type*} [Fintype ι] [LinearOrder ι]
+theorem inversionSignIndependent_eq_mathlibSign {ι : Type*} [Fintype ι] [LinearOrder ι]
     (σ : Equiv.Perm ι) :
-    sign (fun x y : ι => x < y) σ = (Equiv.Perm.sign σ : ℤ) := by
+    finiteOrderedSign σ = (Equiv.Perm.sign σ : ℤ) := by
   classical
   have hhom : inversionSignHom (ι := ι) = Equiv.Perm.sign := by
     by_cases h : Nontrivial ι
@@ -59,7 +60,7 @@ theorem inversionSign_eq_mathlibSign {ι : Type*} [Fintype ι] [LinearOrder ι]
       · obtain ⟨a, b, hab⟩ := exists_pair_ne ι
         refine ⟨KacWard.finiteTranspositionPerm a b, ?_⟩
         apply Units.ext
-        simp [inversionSignHom, KacWard.finiteTransposition_sign hab, hu]
+        simpa [inversionSignHom, hu] using KacWard.finiteTransposition_sign hab
     · haveI : Subsingleton ι := not_nontrivial_iff_subsingleton.mp h
       ext τ
       have hτ : τ = 1 := Subsingleton.elim _ _
@@ -68,22 +69,40 @@ theorem inversionSign_eq_mathlibSign {ι : Type*} [Fintype ι] [LinearOrder ι]
   have hvalue := DFunLike.congr_fun hhom σ
   exact congrArg Units.val hvalue
 
+/-- 既存の転倒数の符号表示と独立な具体版との一致。 -/
+theorem inversionSign_eq_mathlibSign {ι : Type*} [Fintype ι] [LinearOrder ι]
+    (σ : Equiv.Perm ι) :
+    sign (fun x y : ι => x < y) σ =
+      (Equiv.Perm.sign σ : ℤ) := by
+  change finiteOrderedSign σ = (Equiv.Perm.sign σ : ℤ)
+  exact inversionSignIndependent_eq_mathlibSign σ
+
 /-- 有限添字の整数行列式。本文の行指定展開との一致は直後の補題で保証する。 -/
 noncomputable def determinant {ι : Type*} [Fintype ι] [DecidableEq ι]
     (A : Square ι) : ℤ := Matrix.det A
 
 /-- mathlib の列指定展開を転置で行指定へ直し、転倒数の符号へ結ぶ。 -/
-theorem determinant_eq_signedPermutationSum {ι : Type*} [Fintype ι] [LinearOrder ι]
+theorem determinant_eq_independentSignedPermutationSum {ι : Type*} [Fintype ι] [LinearOrder ι]
     (A : Square ι) :
     determinant A = ∑ σ : Equiv.Perm ι,
-      sign (fun i j : ι => i < j) σ * ∏ i, A i (σ i) := by
+      finiteOrderedSign σ * ∏ i, A i (σ i) := by
   classical
   calc
     determinant A = Matrix.det A := rfl
     _ = Matrix.det A.transpose := (Matrix.det_transpose A).symm
     _ = ∑ σ : Equiv.Perm ι, (Equiv.Perm.sign σ : ℤ) * ∏ i, A.transpose (σ i) i :=
       Matrix.det_apply' _
-    _ = ∑ σ : Equiv.Perm ι, sign (fun i j : ι => i < j) σ * ∏ i, A i (σ i) := by
-      simp only [inversionSign_eq_mathlibSign, Matrix.transpose_apply]
+    _ = ∑ σ : Equiv.Perm ι, finiteOrderedSign σ * ∏ i, A i (σ i) := by
+      simp only [inversionSignIndependent_eq_mathlibSign, Matrix.transpose_apply]
+
+/-- 既存の行指定展開と必要十分版の符号定義を結ぶ互換表示。 -/
+theorem determinant_eq_signedPermutationSum {ι : Type*} [Fintype ι] [LinearOrder ι]
+    (A : Square ι) :
+    determinant A = ∑ σ : Equiv.Perm ι,
+      sign (fun i j : ι => i < j) σ *
+        ∏ i, A i (σ i) := by
+  change determinant A = ∑ σ : Equiv.Perm ι,
+    finiteOrderedSign σ * ∏ i, A i (σ i)
+  exact determinant_eq_independentSignedPermutationSum A
 
 end Ising2DLambda.IntegerMatrix

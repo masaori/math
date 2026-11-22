@@ -12,7 +12,7 @@ import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Finset
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
+open IndependentFiniteOrderedSign (finiteOrderedSign finiteOrderedSign_comp)
 open Ising2DLambda.KacWard
   (finiteTranspositionPerm finiteTransposition_apply_left finiteTransposition_apply_right
     finiteTransposition_apply_of_ne finiteTransposition_sign)
@@ -21,23 +21,23 @@ open Ising2DLambda.KacWard
 theorem qbarPolynomial_sign_right_transposition_neg
     {J : Type*} [Fintype J] [LinearOrder J]
     (a b : J) (hab : a ≠ b) (σ : Equiv.Perm J) :
-    Polynomial.C ((sign (fun i j : J => i < j) (σ * finiteTranspositionPerm a b) : ℤ) : Qbar) =
-      -Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) := by
-  have hsign : sign (fun i j : J => i < j) (σ * finiteTranspositionPerm a b) =
-      -sign (fun i j : J => i < j) σ := by
+    Polynomial.C ((finiteOrderedSign (σ * finiteTranspositionPerm a b) : ℤ) : Qbar) =
+      -Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) := by
+  have hsign : finiteOrderedSign (σ * finiteTranspositionPerm a b) =
+      -finiteOrderedSign σ := by
     calc
-      sign (fun i j : J => i < j) (σ * finiteTranspositionPerm a b) =
-          sign (fun i j : J => i < j) σ *
-            sign (fun i j : J => i < j) (finiteTranspositionPerm a b) :=
+      finiteOrderedSign (σ * finiteTranspositionPerm a b) =
+          finiteOrderedSign σ *
+            finiteOrderedSign (finiteTranspositionPerm a b) :=
         finiteOrderedSign_comp σ _
-      _ = sign (fun i j : J => i < j) σ * (-1) := by rw [finiteTransposition_sign hab]
-      _ = -sign (fun i j : J => i < j) σ := mul_neg_one _
+      _ = finiteOrderedSign σ * (-1) := by rw [finiteTransposition_sign hab]
+      _ = -finiteOrderedSign σ := mul_neg_one _
   calc
-    Polynomial.C ((sign (fun i j : J => i < j) (σ * finiteTranspositionPerm a b) : ℤ) : Qbar) =
-        Polynomial.C (((-sign (fun i j : J => i < j) σ) : ℤ) : Qbar) := by rw [hsign]
-    _ = Polynomial.C (-((sign (fun i j : J => i < j) σ : ℤ) : Qbar)) := by
+    Polynomial.C ((finiteOrderedSign (σ * finiteTranspositionPerm a b) : ℤ) : Qbar) =
+        Polynomial.C (((-finiteOrderedSign σ) : ℤ) : Qbar) := by rw [hsign]
+    _ = Polynomial.C (-((finiteOrderedSign σ : ℤ) : Qbar)) := by
       rw [Int.cast_neg]
-    _ = -Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) :=
+    _ = -Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) :=
       map_neg Polynomial.C _
 
 /-- 本文の有限集合に関する帰納法。二項を除いた集合の閉性も対合性から証明する。 -/
@@ -96,14 +96,14 @@ theorem qbarPolynomial_noninjective_inner_sum_zero
     {J : Type*} [Fintype J] [LinearOrder J]
     (B : Matrix J J (Polynomial Qbar)) (f : J → J) (h : ¬Function.Injective f) :
     (∑ σ : Equiv.Perm J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) *
         ∏ i : J, B (f i) (σ i)) = 0 := by
   classical
   obtain ⟨a, b, hf, hab⟩ := Function.not_injective_iff.mp h
   let t : Equiv.Perm J := finiteTranspositionPerm a b
   let F : Equiv.Perm J → Equiv.Perm J := fun σ => σ * t
   let c : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar)
+    Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar)
   let P : Equiv.Perm J → Polynomial Qbar := fun σ => ∏ i : J, B (f i) (σ i)
   let u : Equiv.Perm J → Polynomial Qbar := fun σ => c σ * P σ
   -- 衝突する二点とそれ以外の三場合で、添字写像は互換の前後で変わらない。
@@ -174,7 +174,7 @@ theorem qbarPolynomial_noninjective_inner_sum_zero
       u σ + u (F σ) = u σ + (-u σ) := congrArg (u σ + ·) (hu σ)
       _ = 0 := add_neg_cancel _
   calc
-    (∑ σ : Equiv.Perm J, Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+    (∑ σ : Equiv.Perm J, Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) *
         ∏ i : J, B (f i) (σ i)) = ∑ σ : Equiv.Perm J, u σ := rfl
     _ = 0 := qbarPolynomial_sum_of_paired_terms_zero u F hF hfixed hpair univ
       (fun σ _ => mem_univ (F σ))
