@@ -2756,6 +2756,7 @@ X - (-Y)
     kind: "definition",
     title: { text: "行列の有限積" },
     labels: ["def_finite_product_of_matrices"],
+    lean: ["Ising2D.finiteMatrixProduct", "Ising2D.finiteMatrixProduct_zero", "Ising2D.finiteMatrixProduct_succ"],
     statement: [
       paragraph([
         math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
@@ -2793,6 +2794,7 @@ X - (-Y)
     kind: "claim",
     title: { text: "単位行列の有限積は単位行列" },
     labels: ["finite_product_of_identity_matrices"],
+    lean: ["Ising2D.finite_product_of_identity_matrices"],
     statement: [
       paragraph([
         math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
@@ -2839,6 +2841,7 @@ X - (-Y)
     kind: "definition",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の行列の和}` },
     labels: ["def_sum_over_binary_words"],
+    lean: ["Ising2D.binaryWordMatrixSum", "Ising2D.binaryWordMatrixSum_zero", "Ising2D.binaryWordMatrixSum_succ"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
@@ -2920,6 +2923,7 @@ X - (-Y)
     kind: "definition",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の複素数の和}` },
     labels: ["def_sum_over_binary_words_of_complex_numbers"],
+    lean: ["Ising2D.binaryWordComplexSum", "Ising2D.binaryWordComplexSum_zero", "Ising2D.binaryWordComplexSum_succ"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
@@ -2970,6 +2974,7 @@ X - (-Y)
     kind: "definition",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の実数の和}` },
     labels: ["def_sum_over_binary_words_of_real_numbers"],
+    lean: ["Ising2D.binaryWordRealSum", "Ising2D.binaryWordRealSum_zero", "Ising2D.binaryWordRealSum_succ"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
@@ -3020,6 +3025,7 @@ X - (-Y)
     kind: "claim",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の実数の和の包含は、包含の和に等しい}` },
     labels: ["real_inclusion_preserves_sum_over_binary_words"],
+    lean: ["Ising2D.binaryWordComplexSum_ofReal"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
@@ -3096,6 +3102,7 @@ X - (-Y)
     kind: "claim",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の実数の和に右から実数を掛けると、各項に掛けた和になる}` },
     labels: ["real_sum_over_binary_words_distributes_in_left_factor"],
+    lean: ["Ising2D.binaryWordRealSum_mul"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
@@ -3164,6 +3171,7 @@ X - (-Y)
     kind: "claim",
     title: { text: "実数の二項の和の有限積の展開" },
     labels: ["expansion_of_finite_product_of_two_term_sums_of_real_numbers"],
+    lean: ["Ising2D.expansion_of_finite_product_of_two_term_sums_of_real"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
@@ -3246,6 +3254,7 @@ X - (-Y)
     kind: "claim",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和に右から行列を掛けると、各項に掛けた和になる}` },
     labels: ["sum_over_binary_words_distributes_in_left_factor"],
+    lean: ["Ising2D.binaryWordMatrixSum_mul"],
     statement: [
       paragraph([
         math(String.raw`m, n, p, r \in \mathbb{Z}_{\geq 1}`),
@@ -3316,6 +3325,7 @@ X - (-Y)
     kind: "claim",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和に左から行列を掛けると、各項に掛けた和になる}` },
     labels: ["sum_over_binary_words_distributes_in_right_factor"],
+    lean: ["Ising2D.mul_binaryWordMatrixSum"],
     statement: [
       paragraph([
         math(String.raw`m, n, p, r \in \mathbb{Z}_{\geq 1}`),
@@ -3460,6 +3470,7 @@ C \Bigl(\sum_{\epsilon \in \{0,1\}^{r+1}} X_\epsilon\Bigr)
     kind: "claim",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和で、一つの項以外が零行列なら、和はその項に等しい}` },
     labels: ["sum_over_binary_words_with_one_nonzero_term"],
+    lean: ["Ising2D.binaryWordMatrixSum_eq_of_eq_zero"],
     statement: [
       paragraph([
         math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
@@ -3683,6 +3694,7 @@ B_{(\delta,1)} + B_{(\delta,0)}
     kind: "claim",
     title: { text: "二項の和の有限積の展開" },
     labels: ["expansion_of_finite_product_of_two_term_sums"],
+    lean: ["Ising2D.expansion_of_finite_product_of_two_term_sums"],
     statement: [
       paragraph([
         math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
@@ -3768,6 +3780,7 @@ B_{(\delta,1)} + B_{(\delta,0)}
     kind: "claim",
     title: { text: "各因子と可換な行列は有限積とも可換" },
     labels: ["matrix_commuting_with_each_factor_commutes_with_finite_product"],
+    lean: ["Ising2D.matrix_commuting_with_each_factor_commutes_with_finite_product"],
     statement: [
       paragraph([
         math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
@@ -3849,6 +3862,7 @@ X\prod_{j=1}^{r+1} A_j
     kind: "claim",
     title: { text: "二つの有限積の積は、因子ごとの積の有限積" },
     labels: ["product_of_two_finite_products_of_matrices"],
+    lean: ["Ising2D.product_of_two_finite_products_of_matrices"],
     statement: [
       paragraph([
         math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
@@ -3942,6 +3956,7 @@ X\prod_{j=1}^{r+1} A_j
     kind: "definition",
     title: { text: "一つの添字を除いた行列の有限積" },
     labels: ["def_finite_product_of_matrices_omitting_one_index"],
+    lean: ["Ising2D.finiteMatrixProductOmitting", "Ising2D.finiteMatrixProductOmitting_def"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -4001,6 +4016,7 @@ X\prod_{j=1}^{r+1} A_j
     kind: "claim",
     title: { text: "有限積の一つの因子を末尾へ寄せる" },
     labels: ["moving_one_factor_of_finite_product_to_the_end"],
+    lean: ["Ising2D.moving_one_factor_of_finite_product_to_the_end", "Ising2D.moving_one_factor_of_finite_product_to_the_end_two_first", "Ising2D.moving_one_factor_of_finite_product_to_the_end_two_second"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -4178,6 +4194,7 @@ X\prod_{j=1}^{r+1} A_j
     kind: "claim",
     title: { text: "自分自身との和が零行列なら零行列" },
     labels: ["matrix_sum_with_itself_zero_implies_zero"],
+    lean: ["Ising2D.matrix_eq_zero_of_add_self_eq_zero", "Ising2D.matrix_eq_zero_of_add_self_eq_zero_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -4269,6 +4286,7 @@ X_{ik}
     kind: "claim",
     title: { text: "和の等式から右の項を差で表す" },
     labels: ["matrix_summand_from_sum_equation"],
+    lean: ["Ising2D.matrix_eq_sub_of_add_eq", "Ising2D.matrix_eq_sub_of_add_eq_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -4330,6 +4348,7 @@ B_{ik}
     kind: "claim",
     title: { text: "行列 A と差 B − A の和は B" },
     labels: ["matrix_plus_difference_cancels"],
+    lean: ["Ising2D.matrix_add_sub_cancel", "Ising2D.matrix_add_sub_cancel_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -4388,6 +4407,7 @@ B_{ik}
     kind: "claim",
     title: { text: "反可換な二つの行列の積は可換" },
     labels: ["product_of_anticommuting_matrices_commutes"],
+    lean: ["Ising2D.matrix_mul_comm_of_anticomm_pair"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -4439,6 +4459,7 @@ G(XY)
     kind: "claim",
     title: { text: "可換な行列のスカラー倍とも可換" },
     labels: ["commuting_with_scalar_multiple"],
+    lean: ["Ising2D.matrix_mul_smul_comm_of_commute"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -4552,6 +4573,7 @@ G\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     kind: "claim",
     title: { text: "可換な二つの行列の差とも可換" },
     labels: ["commuting_with_difference"],
+    lean: ["Ising2D.matrix_mul_sub_eq_sub_mul_of_commute"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -4603,6 +4625,7 @@ G(X - W)
     kind: "definition",
     title: { text: "部分空間" },
     labels: ["def_subspace"],
+    lean: ["Ising2D.IsSubspaceMat", "Ising2D.isSubspaceMat_univ"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -4675,6 +4698,7 @@ G(X - W)
     kind: "definition",
     title: { text: "有限族の線型結合" },
     labels: ["def_linear_combination"],
+    lean: ["Ising2D.matLinComb", "Ising2D.MatIsLinComb"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -4746,6 +4770,7 @@ G(X - W)
     kind: "definition",
     title: { text: "族が部分空間を張る" },
     labels: ["def_spanning_family"],
+    lean: ["Ising2D.MatSpans"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -4786,6 +4811,7 @@ G(X - W)
     kind: "definition",
     title: { text: "線型独立" },
     labels: ["def_linearly_independent"],
+    lean: ["Ising2D.MatLinIndep"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -4834,6 +4860,7 @@ G(X - W)
     kind: "definition",
     title: { text: "基底" },
     labels: ["def_basis"],
+    lean: ["Ising2D.MatIsBasis"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -4876,6 +4903,7 @@ G(X - W)
     kind: "definition",
     title: { text: "有限集合を添字とする族の基底" },
     labels: ["def_basis_indexed_by_finite_set"],
+    lean: ["Ising2D.MatIsBasisIndexed"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -4928,6 +4956,7 @@ G(X - W)
     kind: "claim",
     title: { text: "複素数の有限和に右から複素数を掛けると、各項に掛けた和になる" },
     labels: ["finite_sum_of_complex_numbers_times_complex_number"],
+    lean: ["Ising2D.finite_sum_of_complex_numbers_times_complex_number"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -4988,6 +5017,7 @@ G(X - W)
     kind: "claim",
     title: { text: "線型結合から最後の項を切り離す" },
     labels: ["linear_combination_splits_off_last_term"],
+    lean: ["Ising2D.linear_combination_splits_off_last_term"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -5043,6 +5073,7 @@ G(X - W)
     kind: "claim",
     title: { text: "行列の和の結合律" },
     labels: ["matrix_sum_is_associative"],
+    lean: ["Ising2D.matrix_sum_is_associative"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -5089,6 +5120,7 @@ G(X - W)
     kind: "claim",
     title: { text: "線型結合を前の部分と後ろの部分に分ける" },
     labels: ["linear_combination_splits_into_two_blocks"],
+    lean: ["Ising2D.linear_combination_splits_into_two_blocks"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -5161,6 +5193,7 @@ G(X - W)
     kind: "claim",
     title: { text: "部分空間の元の線型結合は部分空間に属する" },
     labels: ["linear_combination_of_subspace_elements_stays_in_subspace"],
+    lean: ["Ising2D.linear_combination_of_subspace_elements_stays_in_subspace"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -5237,6 +5270,7 @@ G(X - W)
     kind: "claim",
     title: { text: "線型独立な族の元は零行列でない" },
     labels: ["linearly_independent_family_has_no_zero_element"],
+    lean: ["Ising2D.linearly_independent_family_has_no_zero_element"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -5329,6 +5363,7 @@ c_s u_s
     kind: "claim",
     title: { text: "未知数が式より多い斉次連立一次方程式は、0 でない解を持つ" },
     labels: ["homogeneous_linear_equations_with_more_unknowns_have_nonzero_solution"],
+    lean: ["Ising2D.homogeneous_linear_equations_with_more_unknowns_have_nonzero_solution"],
     statement: [
       paragraph([
         math(String.raw`q \in \mathbb{Z}_{\geq 0}`),
@@ -5595,6 +5630,7 @@ c_p := -(S\alpha)`),
     kind: "claim",
     title: { text: "線型独立な族の元の個数は、それらを線型結合で表す族の元の個数以下" },
     labels: ["linearly_independent_family_is_no_longer_than_spanning_family"],
+    lean: ["Ising2D.linearly_independent_family_is_no_longer_than_spanning_family"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -5701,6 +5737,7 @@ c_p := -(S\alpha)`),
     kind: "claim",
     title: { text: "線型独立な族に、その線型結合でない元を足しても線型独立" },
     labels: ["extending_independent_family_by_element_outside_span"],
+    lean: ["Ising2D.extending_independent_family_by_element_outside_span"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -5857,6 +5894,7 @@ L
     kind: "claim",
     title: { text: "行列単位を並べた族は行列全体の基底" },
     labels: ["matrix_units_form_basis"],
+    lean: ["Ising2D.matrix_units_form_basis", "Ising2D.matUnit_linComb_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -6042,6 +6080,7 @@ c_{t_0}
     kind: "claim",
     title: { text: "部分空間は基底を持つ" },
     labels: ["subspace_has_basis"],
+    lean: ["Ising2D.subspace_has_basis"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -6170,6 +6209,7 @@ c_{t_0}
     kind: "claim",
     title: { text: "同じ部分空間の二つの基底は元の個数が等しい" },
     labels: ["bases_of_subspace_have_same_number_of_elements"],
+    lean: ["Ising2D.bases_of_subspace_have_same_number_of_elements", "Ising2D.linearly_independent_family_is_no_longer_than_spanning_family_of_zero"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -6275,6 +6315,7 @@ c_{t_0}
     kind: "definition",
     title: { text: "次元" },
     labels: ["def_dimension"],
+    lean: ["Ising2D.matDim", "Ising2D.matDim_eq_of_isBasis"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -6338,6 +6379,7 @@ c_{t_0}
     kind: "claim",
     title: { text: "行列全体と数ベクトル全体の次元" },
     labels: ["dimension_of_matrix_space"],
+    lean: ["Ising2D.dimension_of_matrix_space"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -6392,6 +6434,7 @@ c_{t_0}
     kind: "claim",
     title: { text: "行列の像は部分空間" },
     labels: ["image_of_matrix_is_subspace"],
+    lean: ["Ising2D.image_of_matrix_is_subspace"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
