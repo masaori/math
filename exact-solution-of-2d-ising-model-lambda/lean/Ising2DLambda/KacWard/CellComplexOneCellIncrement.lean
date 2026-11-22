@@ -5,12 +5,9 @@
 人手証明と同じく、単位正方形の四頂点と四辺、セル集合の合併に対する
 頂点集合と辺集合の分配、有限集合の包除から増分等式を得る。
 -/
-import Ising2DLambda.NecSuf.KacWard.CellComplexOneCellIncrement
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 abbrev GridCell := ℤ × ℤ
 abbrev GridVertex := ℤ × ℤ
@@ -40,11 +37,11 @@ def cellEdges (cells : Finset GridCell) : Finset GridEdge :=
 def cellEulerNumber (cells : Finset GridCell) : ℤ :=
   ((cellVertices cells).card : ℤ) - ((cellEdges cells).card : ℤ) + (cells.card : ℤ)
 
-private theorem verticesOfCell_card (x : GridCell) : (verticesOfCell x).card = 4 := by
+theorem verticesOfCell_card (x : GridCell) : (verticesOfCell x).card = 4 := by
   rcases x with ⟨r, c⟩
   simp [verticesOfCell]
 
-private theorem edgesOfCell_card (x : GridCell) : (edgesOfCell x).card = 4 := by
+theorem edgesOfCell_card (x : GridCell) : (edgesOfCell x).card = 4 := by
   rcases x with ⟨r, c⟩
   simp [edgesOfCell]
 
@@ -54,12 +51,33 @@ theorem cellEulerNumber_insert
     cellEulerNumber (insert x cells) =
       cellEulerNumber cells + 1 + (cellEdges cells ∩ cellEdges {x}).card -
         (cellVertices cells ∩ cellVertices {x}).card := by
+  -- 頂点集合と辺集合はセル集合の合併を保つ。
+  have hverticesInsert :
+      cellVertices (insert x cells) = cellVertices cells ∪ cellVertices {x} := by
+    simp [cellVertices, Finset.union_comm]
+  have hedgesInsert :
+      cellEdges (insert x cells) = cellEdges cells ∪ cellEdges {x} := by
+    simp [cellEdges, Finset.union_comm]
+  -- 単一セルの頂点と辺は各四つである。
+  have hverticesSingleton : (cellVertices {x}).card = 4 := by
+    simpa [cellVertices] using verticesOfCell_card x
+  have hedgesSingleton : (cellEdges {x}).card = 4 := by
+    simpa [cellEdges] using edgesOfCell_card x
+  -- 有限集合の包除: 追加後の頂点数は追加前に 4 - v_x(S) を加えた数。
+  have hverticesCard :
+      (cellVertices (insert x cells)).card + (cellVertices cells ∩ cellVertices {x}).card =
+        (cellVertices cells).card + 4 := by
+    rw [hverticesInsert, Finset.card_union_add_card_inter, hverticesSingleton]
+  -- 有限集合の包除: 追加後の辺数は追加前に 4 - e_x(S) を加えた数。
+  have hedgesCard :
+      (cellEdges (insert x cells)).card + (cellEdges cells ∩ cellEdges {x}).card =
+        (cellEdges cells).card + 4 := by
+    rw [hedgesInsert, Finset.card_union_add_card_inter, hedgesSingleton]
+  -- セル数は一増える。
+  have hcellsCard : (insert x cells).card = cells.card + 1 :=
+    Finset.card_insert_of_notMem hx
+  -- Euler 数の定義へ代入する。
   unfold cellEulerNumber
-  exact cellComplex_oneCellIncrement_necSuf
-    cells x cellVertices cellEdges hx
-    (by simp [cellVertices, Finset.union_comm])
-    (by simp [cellEdges, Finset.union_comm])
-    (by simpa [cellVertices] using verticesOfCell_card x)
-    (by simpa [cellEdges] using edgesOfCell_card x)
+  omega
 
 end Ising2DLambda.KacWard

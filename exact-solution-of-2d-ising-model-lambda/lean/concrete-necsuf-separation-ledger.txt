@@ -29,7 +29,6 @@ DEP	concrete	Ising2DLambda.FisherZero.criticalPartitionPartialSum_coe
 DEP	concrete	Ising2DLambda.IntegerMatrix.determinant_eq_signedPermutationSum
 DEP	concrete	Ising2DLambda.IntegerMatrix.inversionSign_eq_mathlibSign
 DEP	concrete	Ising2DLambda.KacWard.arfFourierSignProjection
-DEP	concrete	Ising2DLambda.KacWard.cellEulerNumber_insert
 DEP	concrete	Ising2DLambda.KacWard.directionTransposition_outside
 DEP	concrete	Ising2DLambda.KacWard.edgeDirectionTransposition
 DEP	concrete	Ising2DLambda.KacWard.edgeDirectionTranspositions_pairwise_commute
@@ -181,7 +180,6 @@ IMPORT	concrete	Ising2DLambda.KacWard.ArfFourierSignProjection	necsuf	Ising2DLam
 IMPORT	concrete	Ising2DLambda.KacWard.Basic	necsuf	Ising2DLambda.NecSuf.KacWard.Basic
 IMPORT	concrete	Ising2DLambda.KacWard.CellBoundaryEvenEdgeBijection	necsuf	Ising2DLambda.NecSuf.KacWard.CellBoundaryEvenEdgeBijection
 IMPORT	concrete	Ising2DLambda.KacWard.CellBoundaryEvenEdgeCount	necsuf	Ising2DLambda.NecSuf.KacWard.CellBoundaryEvenEdgeCount
-IMPORT	concrete	Ising2DLambda.KacWard.CellComplexOneCellIncrement	necsuf	Ising2DLambda.NecSuf.KacWard.CellComplexOneCellIncrement
 IMPORT	concrete	Ising2DLambda.KacWard.CellCornerConnected	necsuf	Ising2DLambda.NecSuf.KacWard.CellCornerConnected
 IMPORT	concrete	Ising2DLambda.KacWard.CellGraphEvenEdgeBijection	necsuf	Ising2DLambda.NecSuf.KacWard.CellGraphEvenEdgeBijection
 IMPORT	concrete	Ising2DLambda.KacWard.CellGridIncidentParity	necsuf	Ising2DLambda.NecSuf.KacWard.FourEdgeMembershipParity
