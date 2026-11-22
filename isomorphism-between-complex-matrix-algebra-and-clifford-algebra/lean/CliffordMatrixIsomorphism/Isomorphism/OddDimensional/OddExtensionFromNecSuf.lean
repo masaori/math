@@ -105,7 +105,7 @@ theorem polarization_oddInclusion_oddSecondInclusion_one_of_necSuf (v : W × Dua
     polarization D.oddVectorSpace D.oddForm (D.oddInclusion v) (D.oddSecondInclusion 1) = 0 :=
   NecSuf.VectorSpace.polarization_oddInclusion_oddSecondInclusion_one complexValuedMapsLaws add_neg_cancel zero_add
     zero_mul (add_zero 0) D.space.space.toNecSuf D.space.form
-    ((isQuadraticForm_iff_necSuf D.space.space D.space.form).1 D.space.isQuadraticForm) v
+    ((isQuadraticForm_iff_necSuf D.space.space D.space.form).1 D.space.isQuadraticForm).polarization_isLinearForm v
 
 /-- 本文 `def_induced_homomorphism_into_odd_extension_clifford_algebra` の「j は ℂ-代数の準同型」を必要十分版から得る
 （等長写像が誘導する準同型の導出版 `inducedHom_isHom_of_necSuf` を θ := in'_1 に当てる）。 -/

@@ -111,61 +111,10 @@ noncomputable section
 variable {K : Type uK} [Add K] [Mul K] [One K] [Zero K] [Neg K] {n : K} (C : CliffordLaws K n)
   {W : Type u} (D : SplitData K W) {Y : Type v}
 
-/-- 系「一般の偶数次元」の等長写像 θ・θ' の主張が K に置く仮定：V := W ⊕ W^* を K-線型空間にし、その基底 d を作るのに
-使う性質。章の仮定の組 `CliffordLaws K n` の欄のうち、n の三つの性質（1 + n = 0、n + 1 = 1 + n、n · n = 1）と、
-`ValuedMapsLaws` の六つの欄（加法の結合法則・交換法則、a + 0 = a、加法の逆元の存在、1 · a = a、右分配法則。
-同じ性質は係数の一意性の組 `UniquenessLaws` の欄にある）を除いたもの。 -/
-structure SplitSpaceLaws (K : Type uK) [Add K] [Mul K] [One K] [Zero K] : Prop where
-  uniqueness : UniquenessLaws K
-  mul_comm : ∀ a b : K, a * b = b * a
-  mul_assoc : ∀ a b c : K, (a * b) * c = a * (b * c)
-  left_distrib : ∀ a b c : K, a * (b + c) = a * b + a * c
-
-namespace SplitSpaceLaws
-
-omit [Neg K] in
-/-- 双対空間を線型空間にする性質は、どれもこの組の欄から出る（`CliffordLaws.dualSpaceVectorSpaceLaws` と同じ欄の当て方。
-0 + 0 = 0 は a + 0 = a の a := 0）。 -/
-theorem dualSpaceVectorSpaceLaws (L : SplitSpaceLaws K) : DualSpaceVectorSpaceLaws K where
-  add_assoc := L.uniqueness.add_assoc
-  add_comm := L.uniqueness.add_comm
-  left_distrib := L.left_distrib
-  mul_assoc := L.mul_assoc
-  mul_comm := L.mul_comm
-  zero_add_zero := L.uniqueness.add_zero 0
-  mul_zero := L.uniqueness.mul_zero
-  add_zero := L.uniqueness.add_zero
-  exists_neg_one := L.uniqueness.exists_neg_one
-  one_mul := L.uniqueness.one_mul
-  right_distrib := L.uniqueness.right_distrib
-  zero_mul := L.uniqueness.zero_mul
-
-omit [Neg K] in
-/-- a · 1 = a は、乗法の交換法則と 1 · a = a から出る。 -/
-theorem mul_one (L : SplitSpaceLaws K) : ∀ a : K, a * 1 = a := fun a =>
-  (L.mul_comm a 1).trans (L.uniqueness.one_mul a)
-
-end SplitSpaceLaws
-
-omit [Neg K] in
-/-- 章の仮定の組から、この組の欄を取り出す。 -/
-theorem _root_.CliffordMatrixIsomorphism.NecSuf.Clifford.CliffordLaws.splitSpaceLaws {n : K}
-    (C : CliffordLaws K n) : SplitSpaceLaws K :=
-  ⟨C.uniqueness, C.mul_comm, C.valuedMaps.mul_assoc, C.valuedMaps.left_distrib⟩
+-- V := W ⊕ W^* を作る仮定の組 `SplitSpaceLaws K` と、それから V を作る `spaceOf` は、節「クリフォード代数から行列環への準同型」の
+-- φ の主張も使うので、`NecSuf/CliffordAlgebra/SplitQuadraticSpace/Generators.lean` に置く。
 
 variable (L : SplitSpaceLaws K)
-
-omit [Neg K] in
-/-- 本文 `def_clifford_algebra_of_split_quadratic_space` の V := W ⊕ W^* と q_W の必要十分版を、`SplitSpaceLaws` から作ったもの
-（`SplitData.space` と同じ欄の値。`SplitData.space C` とは、欄の証明だけが違うので定義により等しい）。 -/
-def spaceOf : QuadraticSpaceWithBasis K (W × DualSpace D.spaceW) where
-  space := splitSpace L.dualSpaceVectorSpaceLaws D.spaceW
-  dim := D.M + D.M
-  basis := concatenatedFamily D.spaceW (dualSpaceVectorSpace L.dualSpaceVectorSpaceLaws D.spaceW) D.M D.w D.f
-  isBasis := concatenatedFamily_isBasisFamily D.spaceW (dualSpaceVectorSpace L.dualSpaceVectorSpaceLaws D.spaceW) D.M D.M D.w D.f
-    L.dualSpaceVectorSpaceLaws.zero_add_zero L.dualSpaceVectorSpaceLaws.mul_zero D.isBasis
-    (dualBasis_isBasis L.dualSpaceVectorSpaceLaws L.uniqueness.zero_add L.mul_one D.spaceW D.M D.w D.isBasis.spans D.f D.isDualBasis)
-  form := splitQuadraticForm D.spaceW
 
 /-! ### 分裂した二次空間の基底 d -/
 

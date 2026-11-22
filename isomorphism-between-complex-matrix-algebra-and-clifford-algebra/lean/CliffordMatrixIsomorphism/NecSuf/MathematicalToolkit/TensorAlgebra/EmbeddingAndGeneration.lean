@@ -168,9 +168,9 @@ theorem coordinateTensorPowers_generates [Zero K] (LV : ValuedMapsLaws K) (UL : 
             (fun ξ => embedComponent P.space i.1 (P.τ i.1 (basisTuple b ξ))) :=
           (embedComponent_isLinearMap P.space L ν h1ν i.1).map_sumOverFiniteSet L.zero_add_zero _ _ _
     rw [hxi]
-    exact AlgebraOver.IsSubalgebra.sumOverFiniteSet_mem L.zero_add_zero hB _ _ _
+    exact AlgebraOver.IsSubalgebra.sumOverFiniteSet_mem L.zero_add_zero hB.one_mem hB.add_mem hB.smul_mem _ _ _
       (fun ξ => P.embedComponent_tau_mem hcomm L ν h1ν hB.one_mem hB.mul_mem hsub i.1 (basisTuple b ξ))
   rw [eq_sum_embedComponent P.space L ν h1ν x N hN]
-  exact AlgebraOver.IsSubalgebra.sumOverFiniteSet_mem L.zero_add_zero hB _ _ _ hi
+  exact AlgebraOver.IsSubalgebra.sumOverFiniteSet_mem L.zero_add_zero hB.one_mem hB.add_mem hB.smul_mem _ _ _ hi
 
 end CliffordMatrixIsomorphism.NecSuf.VectorSpace

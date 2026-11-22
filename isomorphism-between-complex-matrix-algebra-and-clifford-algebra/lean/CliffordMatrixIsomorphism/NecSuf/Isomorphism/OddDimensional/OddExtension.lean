@@ -24,7 +24,7 @@
   oddForm_oddSecondInclusion_one         q の一つ目の条件 q(λ ·_V x) = λ(λ q(x)) だけ（二つ目の条件は使わない）、0 + 0 = 0・a · 0 = 0
                                          （λ ·_V 0_V = 0_V）、0 · a = 0、1 · 1 = 1、0 + a = a
   polarization_oddInclusion_oddSecondInclusion_one
-                                         polarization_oddForm の性質、q が二次形式であること（B_q(v, •) が線型形式）、
+                                         polarization_oddForm の性質、q の二つ目の条件 B_q(•, y) が線型形式であることだけ（一つ目の条件は使わない）、
                                          0 · a = 0、1 · 0 = 0、0 + 0 = 0、a + 0 = a
   oddSpace・oddInclusionHom・addedUnitVector・addedGenerator
                                          `CliffordLaws K n`（V を作るため）と、j を作るための a + (-a) = 0（等長写像が誘導する準同型の存在）
@@ -247,17 +247,19 @@ theorem oddForm_oddSecondInclusion_one (h00 : (0 : K) + 0 = 0) (hmul_zero : ∀ 
   _ = 0 * (0 * q S.zero) + 1 * 1 := by rw [hsmul 0 S.zero]
   _ = 1 := by rw [hzero_mul (0 * q S.zero), hone_mul 1, hzero_add 1]
 
-/-- 本文 `claim_polarization_of_odd_extension_between_first_component_and_added_unit_vector_is_zero` の必要十分版。 -/
+/-- 本文 `claim_polarization_of_odd_extension_between_first_component_and_added_unit_vector_is_zero` の必要十分版。
+q が二次形式であることの二つの条件のうち、偏極 B_q(•, y) が線型形式であることだけを使う（q(λ ·_V x) = λ(λ q(x)) は使わない）ので、
+`IsQuadraticForm` の組ではなくその条件だけを仮定に置く。 -/
 theorem polarization_oddInclusion_oddSecondInclusion_one (L : ValuedMapsLaws K) (hneg : ∀ a : K, a + -a = 0)
     (hzero_add : ∀ a : K, 0 + a = a) (hzero_mul : ∀ a : K, 0 * a = 0) (h00 : (0 : K) + 0 = 0)
-    (S : VectorSpace K V) (q : V → K) (hq : IsQuadraticForm S q) (v : V) :
+    (S : VectorSpace K V) (q : V → K) (hpol : ∀ y : V, IsLinearForm S (fun x => polarization S q x y)) (v : V) :
     polarization (oddVectorSpace L S) (oddForm q) (oddInclusion L v) (oddSecondInclusion S 1) = 0 := calc
   polarization (oddVectorSpace L S) (oddForm q) (oddInclusion L v) (oddSecondInclusion S 1)
       = polarization (oddVectorSpace L S) (oddForm q) (v, (coefficientsVec L).zero) (S.zero, 1) := rfl
   _ = polarization (oddVectorSpace L S) (oddForm q) (v, 0) (S.zero, 1) := rfl
   _ = polarization S q v S.zero + (0 * 1 + 1 * 0) := polarization_oddForm L hneg hzero_add S q v S.zero 0 1
   _ = polarization S q v S.zero := by rw [hzero_mul 1, L.one_mul 0, h00, L.add_zero (polarization S q v S.zero)]
-  _ = 0 := VectorSpace.IsLinearForm.map_zero (polarization_isLinearForm_right L.add_assoc L.add_comm S q hq.polarization_isLinearForm v).toPreservesSmul h00 hzero_mul
+  _ = 0 := VectorSpace.IsLinearForm.map_zero (polarization_isLinearForm_right L.add_assoc L.add_comm S q hpol v).toPreservesSmul h00 hzero_mul
 
 end CliffordMatrixIsomorphism.NecSuf.VectorSpace
 
@@ -380,7 +382,7 @@ theorem addedGenerator_anticommute (hneg : ∀ a : K, a + -a = 0) (v : W × Dual
     _ = A'.smul 0 A'.one := by
         rw [polarization_oddInclusion_oddSecondInclusion_one C.valuedMaps hneg C.uniqueness.zero_add
           C.uniqueness.zero_mul C.congruence.zero_add_zero (D.space C).space (D.space C).form
-          (D.space_form_isQuadraticForm C hneg) v]
+          (D.space_form_isQuadraticForm C hneg).polarization_isLinearForm v]
     _ = A'.zero := AlgebraOver.zero_smul_eq_zero A' C.congruence.zero_add_zero A'.one
 
 end

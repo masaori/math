@@ -36,7 +36,7 @@ h := ½（本文 `def_inverse_of_two_in_complex_numbers`）は K の元の変数
 
 主張ごとに使う K の性質（前半の仮定。本文が「ℂ の四則」「σ ∈ {1, -1} なので」「h の定義」とした行がどの仮定になるか）:
 
-  map_mul_of_diagonal_and_signed_values   なし（Φ・Φ' が準同型、ε · ε = 1、Φ'(j(ε))・Φ'(g) の値だけ）
+  map_mul_of_diagonal_and_signed_values   なし（Φ が乗法と 1 を保つこと、Φ' が乗法を保つこと、ε · ε = 1、Φ'(j(ε))・Φ'(g) の値だけ）
   idempotentOfSquareRootOfOne             なし（定義）
   …_mul_self                              σ · σ = 1、h · (1 + 1) = 1、乗法の結合法則と a · 1 = a（(h·h)·(1+1) = h の行）
   …_mul_neg                               σ · σ = 1、a · (-b) = -(a · b)、-1 = n、1 + n = 0・-a + a = 0（ℂ の四則の行）、
@@ -44,7 +44,7 @@ h := ½（本文 `def_inverse_of_two_in_complex_numbers`）は K の元の変数
   …_add                                   1 + n = 0、0 + 0 = 0、h · (1 + 1) = 1
   …_sub                                   n · h = h · n、n · n = 1、1 + n = 0、0 + 0 = 0、h · (1 + 1) = 1
   …_comm                                  なし（z が y と交換することだけ）
-  map_idempotentOfSquareRootOfOne         a · n = -a（σ · (-1) = -σ の行）
+  map_idempotentOfSquareRootOfOne         a · n = -a（σ · (-1) = -σ の行）。F については和・スカラー倍・1 を保つことだけ（乗法は使わない）
 
 分かったこと:
 - 2 の可逆性（h · (1 + 1) = 1 となる h の存在）が要るのは、e_σ の平方・e_+ + e_-・e_+ + n ∗ e_- の三つの主張だけである。
@@ -72,15 +72,18 @@ variable {K : Type uK} [Add K] [Mul K] [One K] {A : Type u} {A' : Type v} {B : T
 
 /-- 本文 `claim_homomorphism_to_pair_of_matrices_on_central_element` の必要十分版：Φ : A → B と Φ' : A' → B × B が
 準同型で、ε · ε = 1、Φ'(x) = (Φ(ε), Φ(ε))、Φ'(g) = (Φ(ε), n ∗_B Φ(ε)) なら、Φ'(x ·_{A'} g) = (1_B, n ∗_B 1_B)。
-本文では x := j(ε)、x ·_{A'} g = z である。 -/
+本文では x := j(ε)、x ·_{A'} g = z である。
+Φ が準同型であることのうち乗法と 1 を保つことだけ、Φ' が準同型であることのうち乗法を保つことだけを使うので、
+`IsAlgebraHomomorphism` の組ではなくその三つを仮定に置く。 -/
 theorem map_mul_of_diagonal_and_signed_values (SA : AlgebraOver K A) (SA' : AlgebraOver K A') (SB : AlgebraOver K B)
-    {Φ : A → B} {Φ' : A' → B × B} (hΦ : IsAlgebraHomomorphism SA SB Φ)
-    (hΦ' : IsAlgebraHomomorphism SA' (productAlgebra SB SB) Φ') {n : K} (ε : A) (x g : A')
+    {Φ : A → B} {Φ' : A' → B × B} (hΦmul : ∀ a b : A, Φ (SA.mul a b) = SB.mul (Φ a) (Φ b))
+    (hΦone : Φ SA.one = SB.one)
+    (hΦ'mul : ∀ a b : A', Φ' (SA'.mul a b) = (productAlgebra SB SB).mul (Φ' a) (Φ' b)) {n : K} (ε : A) (x g : A')
     (hε : SA.mul ε ε = SA.one) (hx : Φ' x = (Φ ε, Φ ε)) (hg : Φ' g = (Φ ε, SB.smul n (Φ ε))) :
     Φ' (SA'.mul x g) = (SB.one, SB.smul n SB.one) := by
   let BB := productAlgebra SB SB
   calc Φ' (SA'.mul x g)
-      = BB.mul (Φ' x) (Φ' g) := hΦ'.map_mul _ _
+      = BB.mul (Φ' x) (Φ' g) := hΦ'mul _ _
     _ = BB.mul (Φ ε, Φ ε) (Φ' g) := by rw [hx]
     _ = BB.mul (Φ ε, Φ ε) (Φ ε, SB.smul n (Φ ε)) := by rw [hg]
     _ = (SB.mul (Φ ε) (Φ ε), SB.mul (Φ ε) (SB.smul n (Φ ε))) := rfl
@@ -89,11 +92,11 @@ theorem map_mul_of_diagonal_and_signed_values (SA : AlgebraOver K A) (SA' : Alge
         rw [← SB.smul_mul_right n (Φ ε) (Φ ε)]
     _ = (Φ (SA.mul ε ε), SB.smul n (Φ (SA.mul ε ε))) := by
         -- Φ は乗法を保つ
-        rw [hΦ.map_mul ε ε]
+        rw [hΦmul ε ε]
     _ = (Φ SA.one, SB.smul n (Φ SA.one)) := by rw [hε]
     _ = (SB.one, SB.smul n SB.one) := by
         -- Φ は乗法の単位元を保つ
-        rw [hΦ.map_one]
+        rw [hΦone]
 
 /-! ### 冪等元 e_σ -/
 
@@ -282,19 +285,23 @@ theorem idempotentOfSquareRootOfOne_comm (SA : AlgebraOver K A) (h : K) {z : A} 
 
 /-- 本文 `claim_homomorphism_to_pair_of_matrices_on_idempotents` の必要十分版：F : A → B × B が準同型で
 F(z) = (1_B, n ∗_B 1_B)、a · n = -a なら F(e_σ) = ((h·(1+σ)) ∗ 1_B, (h·(1+(-σ))) ∗ 1_B)。
-h・σ は K の任意の元でよい（2 の可逆性も σ · σ = 1 も使わない）。 -/
+h・σ は K の任意の元でよい（2 の可逆性も σ · σ = 1 も使わない）。
+F が準同型であることのうち、和・スカラー倍・1 を保つことだけを使う（乗法を保つことは使わない）ので、
+`IsAlgebraHomomorphism` の組ではなくその三つを仮定に置く。 -/
 theorem map_idempotentOfSquareRootOfOne [Neg K] (SA : AlgebraOver K A) (SB : AlgebraOver K B) {F : A → B × B}
-    (hF : IsAlgebraHomomorphism SA (productAlgebra SB SB) F) {z : A} {n : K}
+    (hFadd : ∀ x y : A, F (SA.add x y) = (productAlgebra SB SB).add (F x) (F y))
+    (hFsmul : ∀ (l : K) (x : A), F (SA.smul l x) = (productAlgebra SB SB).smul l (F x))
+    (hFone : F SA.one = (productAlgebra SB SB).one) {z : A} {n : K}
     (hFz : F z = (SB.one, SB.smul n SB.one)) (hmul_n : ∀ a : K, a * n = -a) (h σ : K) :
     F (idempotentOfSquareRootOfOne SA h z σ)
       = (SB.smul (h * (1 + σ)) SB.one, SB.smul (h * (1 + -σ)) SB.one) := by
   let BB := productAlgebra SB SB
   calc F (idempotentOfSquareRootOfOne SA h z σ)
       = F (SA.smul h (SA.add SA.one (SA.smul σ z))) := rfl
-    _ = BB.smul h (F (SA.add SA.one (SA.smul σ z))) := hF.map_smul _ _
-    _ = BB.smul h (BB.add (F SA.one) (F (SA.smul σ z))) := by rw [hF.map_add SA.one (SA.smul σ z)]
-    _ = BB.smul h (BB.add (F SA.one) (BB.smul σ (F z))) := by rw [hF.map_smul σ z]
-    _ = BB.smul h (BB.add BB.one (BB.smul σ (F z))) := by rw [hF.map_one]
+    _ = BB.smul h (F (SA.add SA.one (SA.smul σ z))) := hFsmul _ _
+    _ = BB.smul h (BB.add (F SA.one) (F (SA.smul σ z))) := by rw [hFadd SA.one (SA.smul σ z)]
+    _ = BB.smul h (BB.add (F SA.one) (BB.smul σ (F z))) := by rw [hFsmul σ z]
+    _ = BB.smul h (BB.add BB.one (BB.smul σ (F z))) := by rw [hFone]
     _ = BB.smul h (BB.add (SB.one, SB.one) (BB.smul σ (F z))) := rfl
     _ = BB.smul h (BB.add (SB.one, SB.one) (BB.smul σ (SB.one, SB.smul n SB.one))) := by rw [hFz]
     _ = BB.smul h (BB.add (SB.one, SB.one) (SB.smul σ SB.one, SB.smul σ (SB.smul n SB.one))) := rfl
@@ -336,8 +343,8 @@ theorem homomorphismToPairOfMatrices_centralElement (hneg : ∀ a : K, a + -a = 
     D.homomorphismToPairOfMatrices C hneg (D.centralElement C hneg)
       = ((D.matrixAlgebra C).one, (D.matrixAlgebra C).smul n (D.matrixAlgebra C).one) :=
   map_mul_of_diagonal_and_signed_values ((D.space C).cliffordAlgebra C) ((D.oddSpace C).cliffordAlgebra C)
-    (D.matrixAlgebra C) (D.homomorphismToMatrix_isHom C hneg) (D.homomorphismToPairOfMatrices_isHom C hneg)
-    (D.parityElement C) (D.oddInclusionHom C hneg (D.parityElement C)) (D.addedGenerator C)
+    (D.matrixAlgebra C) (D.homomorphismToMatrix_isHom C hneg).map_mul (D.homomorphismToMatrix_isHom C hneg).map_one
+    (D.homomorphismToPairOfMatrices_isHom C hneg).map_mul (D.parityElement C) (D.oddInclusionHom C hneg (D.parityElement C)) (D.addedGenerator C)
     (D.parityElement_mul_self C hneg) (D.homomorphismToPairOfMatrices_oddInclusionHom C hneg (D.parityElement C))
     (D.homomorphismToPairOfMatrices_addedGenerator C hneg)
 
@@ -445,7 +452,8 @@ theorem homomorphismToPairOfMatrices_idempotent (hneg : ∀ a : K, a + -a = 0) (
     D.homomorphismToPairOfMatrices C hneg (D.idempotent C hneg h σ)
       = ((D.matrixAlgebra C).smul (h * (1 + σ)) (D.matrixAlgebra C).one,
           (D.matrixAlgebra C).smul (h * (1 + -σ)) (D.matrixAlgebra C).one) :=
-  map_idempotentOfSquareRootOfOne _ (D.matrixAlgebra C) (D.homomorphismToPairOfMatrices_isHom C hneg)
+  map_idempotentOfSquareRootOfOne _ (D.matrixAlgebra C) (D.homomorphismToPairOfMatrices_isHom C hneg).map_add
+    (D.homomorphismToPairOfMatrices_isHom C hneg).map_smul (D.homomorphismToPairOfMatrices_isHom C hneg).map_one
     (D.homomorphismToPairOfMatrices_centralElement C hneg) (mul_n_eq_neg C hneg) h σ
 
 end

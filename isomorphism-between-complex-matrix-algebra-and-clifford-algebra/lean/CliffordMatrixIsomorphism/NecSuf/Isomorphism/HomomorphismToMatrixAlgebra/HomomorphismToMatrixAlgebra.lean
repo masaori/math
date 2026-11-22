@@ -23,17 +23,20 @@ K には演算の記号 +・·・0・1・- だけを与え、使う性質は仮�
 主張ごとに使う K の性質（L : `ValuedMapsLaws K` は積 `Mat.mul L hX` を定めるのに要る八つ）:
   c_i · c_i = 0                       L・a · 1 = a・a · 0 = 0・0 · a = 0（右から生成作用素の行列を掛けた成分の主張と、0 · ς = 0 の行）
   c_i^T · c_i^T = 0                   上の性質・乗法の結合法則と 1 · a = a（L。成分 (c_i)_{T,S}・(c_i)_{U,T} の入れ替え）
-  φ（定義）と φ が線型                章「クリフォード代数」の仮定 `CliffordLaws K n`（V := W ⊕ W^* と行列環を作るため）。
+  φ（定義）と φ が線型                `CliffordLaws K n` から合同の組 `CongruenceLaws K n` を除いた組 `MatrixValuedMapLaws K`
+                                      （V := W ⊕ W^* と行列環を作るため）。n の性質は使わない（n は K の任意の元でよい）。
                                       行の中で使うのは、座標 β^w_k が線型形式であること（係数の一意性 `UniquenessLaws`）と、
                                       和のスカラー倍に要る 0 + 0 = 0・a · 0 = 0 だけ
-  φ(v)² = q(v) ∗ 1                    `CliffordLaws K n` だけ（n についての性質も、その欄から出る `CliffordLaws.signLaws`）
+  φ(v)² = q(v) ∗ 1                    `MatrixValuedMapLaws K` と 1 + n = 0・n + 1 = 1 + n（ς の性質 `SignLaws K n` はこれらから出る
+                                      `MatrixValuedMapLaws.signLaws`）。n · n = 1 は使わない
   Φ の存在と一意性・Φ の定義          `CliffordLaws K n` と a + (-a) = 0（hneg。クリフォード代数の普遍性の必要十分版の仮定）
   Φ(a†_i) = c_i、Φ(a_i) = c_i^T       Φ の定義の仮定のほかに足さない
 
 分かったこと:
 - 行列環の n（ς を定める元）と、クリフォード代数の合同に使う n（1 + n = 0）は同じ K の元でよく、ς についての性質
   `SignLaws K n` は、どの欄も `CliffordLaws K n` の欄から出る（`CliffordLaws.signLaws`）。したがって φ(v)² = q(v) ∗ 1 は
-  章「クリフォード代数」の仮定のほかに K の性質を足さない。
+  章「クリフォード代数」の仮定のほかに K の性質を足さない。φ(v)² = q(v) ∗ 1 が n について使うのは 1 + n = 0 と n + 1 = 1 + n
+  だけで、n · n = 1（合同の対称性に要る性質）は使わない。φ が線型であることは n について何も使わない。
 - 行列の集合を K の上の代数にするには乗法の交換法則が要る（行列の積の結合法則）。`CliffordLaws` の欄 mul_comm をそのまま渡す。
   反交換関係の主張の中の行（ς の値どうしの交換、δ との交換）は乗法の交換法則を使わないが、主張が代数の中の積と和で
   書かれているので、代数を作る段階で交換法則が入る。φ(v)² の計算の μ_l · δ = δ · μ_l の行も、δ の値が 0 か 1 なので
@@ -188,112 +191,174 @@ noncomputable section
 variable {K : Type uK} [Add K] [Mul K] [One K] [Zero K] [Neg K] {n : K} (C : CliffordLaws K n)
   {W : Type u} (D : SplitData K W)
 
-/-- Mat_{P_M}(K) の K の上の代数（本文 claim_matrices_indexed_by_finite_set_form_complex_algebra の必要十分版）。
-代数にするのに要る K の性質は、章「クリフォード代数」の仮定の欄から渡す。 -/
-abbrev matrixAlgebra : AlgebraOver K (Mat K (PowerSet D.M)) :=
-  matricesAlgebra C.valuedMaps C.mul_comm C.uniqueness.mul_zero (isFiniteSet_powerSet D.M)
+/-- φ の定義と、φ が線型であること・φ(v)² = q(v) ∗ 1 の主張が K に置く仮定：行列環 Mat_{P_M}(K) を K の上の代数にし、
+V := W ⊕ W^* を K-線型空間にするのに使う性質。章の仮定の組 `CliffordLaws K n` の欄のうち、合同の組 `CongruenceLaws K n`
+（n の三つの性質 1 + n = 0・n + 1 = 1 + n・n · n = 1 と 0 + 0 = 0）を除いたもの。0 + 0 = 0 は a + 0 = a の a := 0 から出る。
+φ が線型であることは n の性質を使わない。φ(v)² = q(v) ∗ 1 は 1 + n = 0 と n + 1 = 1 + n を引数で足し、n · n = 1 は使わない。 -/
+structure MatrixValuedMapLaws (K : Type uK) [Add K] [Mul K] [One K] [Zero K] : Prop where
+  valuedMaps : ValuedMapsLaws K
+  uniqueness : UniquenessLaws K
+  mul_comm : ∀ a b : K, a * b = b * a
 
+namespace MatrixValuedMapLaws
+
+omit [Neg K] in
+/-- V := W ⊕ W^* を作る組 `SplitSpaceLaws K` の欄は、どれもこの組の欄から出る。 -/
+theorem splitSpaceLaws (L : MatrixValuedMapLaws K) : SplitSpaceLaws K :=
+  ⟨L.uniqueness, L.mul_comm, L.valuedMaps.mul_assoc, L.valuedMaps.left_distrib⟩
+
+omit [Neg K] in
+/-- a · 1 = a は、乗法の交換法則と 1 · a = a から出る。 -/
+theorem mul_one (L : MatrixValuedMapLaws K) : ∀ a : K, a * 1 = a := fun a =>
+  (L.mul_comm a 1).trans (L.uniqueness.one_mul a)
+
+omit [Neg K] in
+/-- ς についての性質 `SignLaws K n` は、この組の欄と 1 + n = 0・n + 1 = 1 + n から出る（n · n = 1 は使わない）。 -/
+theorem signLaws (L : MatrixValuedMapLaws K) {n : K} (h1n : 1 + n = 0) (hn1 : n + 1 = 1 + n) : SignLaws K n where
+  one_add_n := h1n
+  n_mul_one := L.mul_one n
+  mul_add_n := L.valuedMaps.left_distrib n n 1
+  n_add_one := hn1
+  n_mul_zero := L.uniqueness.mul_zero n
+  add_zero_nn := L.uniqueness.add_zero (n * n)
+  add_assoc_nn := (L.uniqueness.add_assoc (n * n) n 1).symm
+  zero_add_one := L.uniqueness.zero_add 1
+  one_mul_one := L.uniqueness.one_mul 1
+  mul_assoc := L.valuedMaps.mul_assoc
+  mul_n_comm := fun x => L.mul_comm x n
+
+end MatrixValuedMapLaws
+
+omit [Neg K] in
+/-- 章の仮定の組から、この組の欄を取り出す。 -/
+theorem _root_.CliffordMatrixIsomorphism.NecSuf.Clifford.CliffordLaws.matrixValuedMapLaws {n : K}
+    (C : CliffordLaws K n) : MatrixValuedMapLaws K :=
+  ⟨C.valuedMaps, C.uniqueness, C.mul_comm⟩
+
+omit [Neg K] in
+/-- Mat_{P_M}(K) の K の上の代数（本文 claim_matrices_indexed_by_finite_set_form_complex_algebra の必要十分版）を、
+`MatrixValuedMapLaws` の欄から作ったもの。 -/
+abbrev matrixAlgebraOf (L : MatrixValuedMapLaws K) : AlgebraOver K (Mat K (PowerSet D.M)) :=
+  matricesAlgebra L.valuedMaps L.mul_comm L.uniqueness.mul_zero (isFiniteSet_powerSet D.M)
+
+/-- Mat_{P_M}(K) の K の上の代数を、章「クリフォード代数」の仮定の組から作ったもの（`matrixAlgebraOf` に欄を渡す）。 -/
+abbrev matrixAlgebra : AlgebraOver K (Mat K (PowerSet D.M)) :=
+  D.matrixAlgebraOf C.matrixValuedMapLaws
+
+omit [Neg K] in
 /-- 本文 `claim_matrix_valued_map_on_split_quadratic_space_is_linear_map` の証明の C(y) := Σ_{k=1}^{M} β^w_k(y) ∗_B c_k の必要十分版。 -/
-def creationPart (y : W) : Mat K (PowerSet D.M) :=
-  linearCombination (D.matrixAlgebra C).toVectorSpace D.M (fun k => coordinate D.spaceW D.M D.w D.isBasis k y)
+def creationPartOf (L : MatrixValuedMapLaws K) (n : K) (y : W) : Mat K (PowerSet D.M) :=
+  linearCombination (D.matrixAlgebraOf L).toVectorSpace D.M (fun k => coordinate D.spaceW D.M D.w D.isBasis k y)
     (creationFamily n D.M)
 
+omit [Neg K] in
 /-- 本文 `claim_matrix_valued_map_on_split_quadratic_space_is_linear_map` の証明の D(h) := Σ_{k=1}^{M} h(w_k) ∗_B c_k^T の必要十分版。 -/
-def annihilationPart (h : DualSpace D.spaceW) : Mat K (PowerSet D.M) :=
-  linearCombination (D.matrixAlgebra C).toVectorSpace D.M (fun k => h.1 (D.w k)) (annihilationFamily n D.M)
+def annihilationPartOf (L : MatrixValuedMapLaws K) (n : K) (h : DualSpace D.spaceW) : Mat K (PowerSet D.M) :=
+  linearCombination (D.matrixAlgebraOf L).toVectorSpace D.M (fun k => h.1 (D.w k)) (annihilationFamily n D.M)
 
+omit [Neg K] in
 /-- 本文 `def_matrix_valued_map_on_split_quadratic_space` の必要十分版：
 φ((x, g)) := (Σ_{k=1}^{M} β^w_k(x) ∗ c_k) + (Σ_{k=1}^{M} g(w_k) ∗ c_k^T)。 -/
-def matrixValuedMap (p : W × DualSpace D.spaceW) : Mat K (PowerSet D.M) :=
-  (D.matrixAlgebra C).add (D.creationPart C p.1) (D.annihilationPart C p.2)
+def matrixValuedMapOf (L : MatrixValuedMapLaws K) (n : K) (p : W × DualSpace D.spaceW) : Mat K (PowerSet D.M) :=
+  (D.matrixAlgebraOf L).add (D.creationPartOf L n p.1) (D.annihilationPartOf L n p.2)
+
+/-- C(y) を、章「クリフォード代数」の仮定の組から作ったもの。 -/
+abbrev creationPart (y : W) : Mat K (PowerSet D.M) := D.creationPartOf C.matrixValuedMapLaws n y
+
+/-- D(h) を、章「クリフォード代数」の仮定の組から作ったもの。 -/
+abbrev annihilationPart (h : DualSpace D.spaceW) : Mat K (PowerSet D.M) := D.annihilationPartOf C.matrixValuedMapLaws n h
+
+/-- φ を、章「クリフォード代数」の仮定の組から作ったもの（本文 `def_matrix_valued_map_on_split_quadratic_space`）。 -/
+abbrev matrixValuedMap (p : W × DualSpace D.spaceW) : Mat K (PowerSet D.M) := D.matrixValuedMapOf C.matrixValuedMapLaws n p
 
 omit [Neg K] in
 /-- 本文 `claim_matrix_valued_map_on_split_quadratic_space_is_linear_map` の必要十分版：φ は V から U_vec(Mat_{P_M}(K)) への線型写像。 -/
-theorem matrixValuedMap_isLinearMap :
-    IsLinearMap (D.space C).space (D.matrixAlgebra C).toVectorSpace (D.matrixValuedMap C) := by
-  let B := D.matrixAlgebra C
+theorem matrixValuedMap_isLinearMap (L : MatrixValuedMapLaws K) (n : K) :
+    IsLinearMap (D.spaceOf L.splitSpaceLaws).space (D.matrixAlgebraOf L).toVectorSpace (D.matrixValuedMapOf L n) := by
+  let B := D.matrixAlgebraOf L
   let Bv := B.toVectorSpace
   let β := fun k => coordinate D.spaceW D.M D.w D.isBasis k
-  let SWd := dualSpaceVectorSpace C.dualSpaceVectorSpaceLaws D.spaceW
+  let SWd := dualSpaceVectorSpace L.splitSpaceLaws.dualSpaceVectorSpaceLaws D.spaceW
   -- 準備の四つの等式
-  have hC_add : ∀ x x' : W, D.creationPart C (D.spaceW.add x x')
-      = B.add (D.creationPart C x) (D.creationPart C x') := fun x x' => calc
-    D.creationPart C (D.spaceW.add x x')
+  have hC_add : ∀ x x' : W, D.creationPartOf L n (D.spaceW.add x x')
+      = B.add (D.creationPartOf L n x) (D.creationPartOf L n x') := fun x x' => calc
+    D.creationPartOf L n (D.spaceW.add x x')
         = linearCombination Bv D.M (fun k => β k x + β k x') (creationFamily n D.M) :=
           linearCombination_eq_of_terms_eq Bv D.M _ _ _ _ fun k hk1 hkM => by
-            rw [(coordinate_isLinearForm D.spaceW C.uniqueness D.M D.w D.isBasis k hk1 hkM).map_add x x']
-    _ = B.add (D.creationPart C x) (D.creationPart C x') :=
+            rw [(coordinate_isLinearForm D.spaceW L.uniqueness D.M D.w D.isBasis k hk1 hkM).map_add x x']
+    _ = B.add (D.creationPartOf L n x) (D.creationPartOf L n x') :=
           (linearCombination_add_of_same_family Bv D.M (creationFamily n D.M) (fun k => β k x)
             (fun k => β k x')).symm
-  have hD_add : ∀ g g' : DualSpace D.spaceW, D.annihilationPart C (SWd.add g g')
-      = B.add (D.annihilationPart C g) (D.annihilationPart C g') := fun g g' => calc
-    D.annihilationPart C (SWd.add g g')
+  have hD_add : ∀ g g' : DualSpace D.spaceW, D.annihilationPartOf L n (SWd.add g g')
+      = B.add (D.annihilationPartOf L n g) (D.annihilationPartOf L n g') := fun g g' => calc
+    D.annihilationPartOf L n (SWd.add g g')
         = linearCombination Bv D.M (fun k => g.1 (D.w k) + g'.1 (D.w k)) (annihilationFamily n D.M) :=
           linearCombination_eq_of_terms_eq Bv D.M _ _ _ _ fun _ _ _ => rfl
-    _ = B.add (D.annihilationPart C g) (D.annihilationPart C g') :=
+    _ = B.add (D.annihilationPartOf L n g) (D.annihilationPartOf L n g') :=
           (linearCombination_add_of_same_family Bv D.M (annihilationFamily n D.M) (fun k => g.1 (D.w k))
             (fun k => g'.1 (D.w k))).symm
-  have hC_smul : ∀ (l : K) (x : W), D.creationPart C (D.spaceW.smul l x) = B.smul l (D.creationPart C x) :=
+  have hC_smul : ∀ (l : K) (x : W), D.creationPartOf L n (D.spaceW.smul l x) = B.smul l (D.creationPartOf L n x) :=
     fun l x => calc
-    D.creationPart C (D.spaceW.smul l x)
+    D.creationPartOf L n (D.spaceW.smul l x)
         = linearCombination Bv D.M (fun k => l * β k x) (creationFamily n D.M) :=
           linearCombination_eq_of_terms_eq Bv D.M _ _ _ _ fun k hk1 hkM => by
-            rw [(coordinate_isLinearForm D.spaceW C.uniqueness D.M D.w D.isBasis k hk1 hkM).map_smul l x]
-    _ = B.smul l (D.creationPart C x) :=
-          (smul_linearCombination Bv C.congruence.zero_add_zero C.uniqueness.mul_zero D.M (creationFamily n D.M)
+            rw [(coordinate_isLinearForm D.spaceW L.uniqueness D.M D.w D.isBasis k hk1 hkM).map_smul l x]
+    _ = B.smul l (D.creationPartOf L n x) :=
+          (smul_linearCombination Bv (L.uniqueness.add_zero 0) L.uniqueness.mul_zero D.M (creationFamily n D.M)
             (fun k => β k x) l).symm
   have hD_smul : ∀ (l : K) (g : DualSpace D.spaceW),
-      D.annihilationPart C (SWd.smul l g) = B.smul l (D.annihilationPart C g) :=
+      D.annihilationPartOf L n (SWd.smul l g) = B.smul l (D.annihilationPartOf L n g) :=
     fun l g => calc
-    D.annihilationPart C (SWd.smul l g)
+    D.annihilationPartOf L n (SWd.smul l g)
         = linearCombination Bv D.M (fun k => l * g.1 (D.w k)) (annihilationFamily n D.M) :=
           linearCombination_eq_of_terms_eq Bv D.M _ _ _ _ fun _ _ _ => rfl
-    _ = B.smul l (D.annihilationPart C g) :=
-          (smul_linearCombination Bv C.congruence.zero_add_zero C.uniqueness.mul_zero D.M (annihilationFamily n D.M)
+    _ = B.smul l (D.annihilationPartOf L n g) :=
+          (smul_linearCombination Bv (L.uniqueness.add_zero 0) L.uniqueness.mul_zero D.M (annihilationFamily n D.M)
             (fun k => g.1 (D.w k)) l).symm
   refine ⟨fun p p' => ?_, fun l p => ?_⟩
   · -- 加法を保つこと
-    calc D.matrixValuedMap C ((D.space C).space.add p p')
-        = D.matrixValuedMap C (D.spaceW.add p.1 p'.1, SWd.add p.2 p'.2) := rfl
-      _ = B.add (D.creationPart C (D.spaceW.add p.1 p'.1)) (D.annihilationPart C (SWd.add p.2 p'.2)) := rfl
-      _ = B.add (B.add (D.creationPart C p.1) (D.creationPart C p'.1))
-            (D.annihilationPart C (SWd.add p.2 p'.2)) := by rw [hC_add]
-      _ = B.add (B.add (D.creationPart C p.1) (D.creationPart C p'.1))
-            (B.add (D.annihilationPart C p.2) (D.annihilationPart C p'.2)) := by rw [hD_add]
-      _ = B.add (D.creationPart C p.1) (B.add (D.creationPart C p'.1)
-            (B.add (D.annihilationPart C p.2) (D.annihilationPart C p'.2))) := by
-          rw [B.add_assoc (D.creationPart C p.1) (D.creationPart C p'.1)]
-      _ = B.add (D.creationPart C p.1) (B.add (B.add (D.creationPart C p'.1) (D.annihilationPart C p.2))
-            (D.annihilationPart C p'.2)) := by
-          rw [B.add_assoc (D.creationPart C p'.1) (D.annihilationPart C p.2) (D.annihilationPart C p'.2)]
-      _ = B.add (D.creationPart C p.1) (B.add (B.add (D.annihilationPart C p.2) (D.creationPart C p'.1))
-            (D.annihilationPart C p'.2)) := by
-          rw [B.add_comm (D.creationPart C p'.1) (D.annihilationPart C p.2)]
-      _ = B.add (D.creationPart C p.1) (B.add (D.annihilationPart C p.2)
-            (B.add (D.creationPart C p'.1) (D.annihilationPart C p'.2))) := by
-          rw [B.add_assoc (D.annihilationPart C p.2) (D.creationPart C p'.1) (D.annihilationPart C p'.2)]
-      _ = B.add (B.add (D.creationPart C p.1) (D.annihilationPart C p.2))
-            (B.add (D.creationPart C p'.1) (D.annihilationPart C p'.2)) := by
-          rw [← B.add_assoc (D.creationPart C p.1) (D.annihilationPart C p.2)]
-      _ = B.add (D.matrixValuedMap C p) (D.matrixValuedMap C p') := rfl
+    calc D.matrixValuedMapOf L n ((D.spaceOf L.splitSpaceLaws).space.add p p')
+        = D.matrixValuedMapOf L n (D.spaceW.add p.1 p'.1, SWd.add p.2 p'.2) := rfl
+      _ = B.add (D.creationPartOf L n (D.spaceW.add p.1 p'.1)) (D.annihilationPartOf L n (SWd.add p.2 p'.2)) := rfl
+      _ = B.add (B.add (D.creationPartOf L n p.1) (D.creationPartOf L n p'.1))
+            (D.annihilationPartOf L n (SWd.add p.2 p'.2)) := by rw [hC_add]
+      _ = B.add (B.add (D.creationPartOf L n p.1) (D.creationPartOf L n p'.1))
+            (B.add (D.annihilationPartOf L n p.2) (D.annihilationPartOf L n p'.2)) := by rw [hD_add]
+      _ = B.add (D.creationPartOf L n p.1) (B.add (D.creationPartOf L n p'.1)
+            (B.add (D.annihilationPartOf L n p.2) (D.annihilationPartOf L n p'.2))) := by
+          rw [B.add_assoc (D.creationPartOf L n p.1) (D.creationPartOf L n p'.1)]
+      _ = B.add (D.creationPartOf L n p.1) (B.add (B.add (D.creationPartOf L n p'.1) (D.annihilationPartOf L n p.2))
+            (D.annihilationPartOf L n p'.2)) := by
+          rw [B.add_assoc (D.creationPartOf L n p'.1) (D.annihilationPartOf L n p.2) (D.annihilationPartOf L n p'.2)]
+      _ = B.add (D.creationPartOf L n p.1) (B.add (B.add (D.annihilationPartOf L n p.2) (D.creationPartOf L n p'.1))
+            (D.annihilationPartOf L n p'.2)) := by
+          rw [B.add_comm (D.creationPartOf L n p'.1) (D.annihilationPartOf L n p.2)]
+      _ = B.add (D.creationPartOf L n p.1) (B.add (D.annihilationPartOf L n p.2)
+            (B.add (D.creationPartOf L n p'.1) (D.annihilationPartOf L n p'.2))) := by
+          rw [B.add_assoc (D.annihilationPartOf L n p.2) (D.creationPartOf L n p'.1) (D.annihilationPartOf L n p'.2)]
+      _ = B.add (B.add (D.creationPartOf L n p.1) (D.annihilationPartOf L n p.2))
+            (B.add (D.creationPartOf L n p'.1) (D.annihilationPartOf L n p'.2)) := by
+          rw [← B.add_assoc (D.creationPartOf L n p.1) (D.annihilationPartOf L n p.2)]
+      _ = B.add (D.matrixValuedMapOf L n p) (D.matrixValuedMapOf L n p') := rfl
   · -- スカラー倍を保つこと
-    calc D.matrixValuedMap C ((D.space C).space.smul l p)
-        = D.matrixValuedMap C (D.spaceW.smul l p.1, SWd.smul l p.2) := rfl
-      _ = B.add (D.creationPart C (D.spaceW.smul l p.1)) (D.annihilationPart C (SWd.smul l p.2)) := rfl
-      _ = B.add (B.smul l (D.creationPart C p.1)) (D.annihilationPart C (SWd.smul l p.2)) := by rw [hC_smul]
-      _ = B.add (B.smul l (D.creationPart C p.1)) (B.smul l (D.annihilationPart C p.2)) := by rw [hD_smul]
-      _ = B.smul l (B.add (D.creationPart C p.1) (D.annihilationPart C p.2)) :=
-          (B.smul_add l (D.creationPart C p.1) (D.annihilationPart C p.2)).symm
-      _ = B.smul l (D.matrixValuedMap C p) := rfl
+    calc D.matrixValuedMapOf L n ((D.spaceOf L.splitSpaceLaws).space.smul l p)
+        = D.matrixValuedMapOf L n (D.spaceW.smul l p.1, SWd.smul l p.2) := rfl
+      _ = B.add (D.creationPartOf L n (D.spaceW.smul l p.1)) (D.annihilationPartOf L n (SWd.smul l p.2)) := rfl
+      _ = B.add (B.smul l (D.creationPartOf L n p.1)) (D.annihilationPartOf L n (SWd.smul l p.2)) := by rw [hC_smul]
+      _ = B.add (B.smul l (D.creationPartOf L n p.1)) (B.smul l (D.annihilationPartOf L n p.2)) := by rw [hD_smul]
+      _ = B.smul l (B.add (D.creationPartOf L n p.1) (D.annihilationPartOf L n p.2)) :=
+          (B.smul_add l (D.creationPartOf L n p.1) (D.annihilationPartOf L n p.2)).symm
+      _ = B.smul l (D.matrixValuedMapOf L n p) := rfl
 
 omit [Neg K] in
 /-- 本文 `claim_square_of_matrix_valued_map_on_split_quadratic_space` の必要十分版：φ(v) ·_{Mat} φ(v) = q(v) ∗_{Mat} 1_{Mat}。 -/
-theorem matrixValuedMap_mul_self (p : W × DualSpace D.spaceW) :
-    (D.matrixAlgebra C).mul (D.matrixValuedMap C p) (D.matrixValuedMap C p)
-      = (D.matrixAlgebra C).smul ((D.space C).form p) (D.matrixAlgebra C).one := by
-  let B := D.matrixAlgebra C
+theorem matrixValuedMap_mul_self (L : MatrixValuedMapLaws K) {n : K} (h1n : 1 + n = 0) (hn1 : n + 1 = 1 + n)
+    (p : W × DualSpace D.spaceW) :
+    (D.matrixAlgebraOf L).mul (D.matrixValuedMapOf L n p) (D.matrixValuedMapOf L n p)
+      = (D.matrixAlgebraOf L).smul ((D.spaceOf L.splitSpaceLaws).form p) (D.matrixAlgebraOf L).one := by
+  let B := D.matrixAlgebraOf L
   let Bv := B.toVectorSpace
-  have h00 : (0 : K) + 0 = 0 := C.congruence.zero_add_zero
+  have h00 : (0 : K) + 0 = 0 := (L.uniqueness.add_zero 0)
   let x := p.1
   let g := p.2
   let lam : ℕ → K := fun k => coordinate D.spaceW D.M D.w D.isBasis k x
@@ -302,26 +367,26 @@ theorem matrixValuedMap_mul_self (p : W × DualSpace D.spaceW) :
   let E := linearCombination Bv D.M mu (annihilationFamily n D.M)
   -- 準備の一つ目：C ·_B C = 0_B
   have h1 : B.mul Cc Cc = B.zero :=
-    square_linearCombination_eq_zero h00 C.uniqueness.mul_zero B D.M lam (creationFamily n D.M)
+    square_linearCombination_eq_zero h00 L.uniqueness.mul_zero B D.M lam (creationFamily n D.M)
       (fun k hk1 hkM => by
         rw [creationFamily_of_mem n ⟨hk1, hkM⟩]
-        exact creationMatrix_mul_self C.valuedMaps C.mul_one C.uniqueness.mul_zero C.uniqueness.zero_mul n
+        exact creationMatrix_mul_self L.valuedMaps L.mul_one L.uniqueness.mul_zero L.uniqueness.zero_mul n
           ⟨hk1, hkM⟩)
       (fun k l hk1 hkM hl1 hlM _ => by
         rw [creationFamily_of_mem n ⟨hk1, hkM⟩, creationFamily_of_mem n ⟨hl1, hlM⟩]
-        exact creationMatrices_anticommute C.valuedMaps C.mul_one C.uniqueness.mul_zero C.uniqueness.zero_mul n
-          C.congruence.one_add_n C.congruence.n_add_one ⟨hk1, hkM⟩ ⟨hl1, hlM⟩)
+        exact creationMatrices_anticommute L.valuedMaps L.mul_one L.uniqueness.mul_zero L.uniqueness.zero_mul n
+          h1n hn1 ⟨hk1, hkM⟩ ⟨hl1, hlM⟩)
   -- 準備の二つ目：D ·_B D = 0_B
   have h2 : B.mul E E = B.zero :=
-    square_linearCombination_eq_zero h00 C.uniqueness.mul_zero B D.M mu (annihilationFamily n D.M)
+    square_linearCombination_eq_zero h00 L.uniqueness.mul_zero B D.M mu (annihilationFamily n D.M)
       (fun k hk1 hkM => by
         rw [annihilationFamily_of_mem n ⟨hk1, hkM⟩]
-        exact annihilationMatrix_mul_self C.valuedMaps C.mul_one C.uniqueness.mul_zero C.uniqueness.zero_mul n
+        exact annihilationMatrix_mul_self L.valuedMaps L.mul_one L.uniqueness.mul_zero L.uniqueness.zero_mul n
           ⟨hk1, hkM⟩)
       (fun k l hk1 hkM hl1 hlM _ => by
         rw [annihilationFamily_of_mem n ⟨hk1, hkM⟩, annihilationFamily_of_mem n ⟨hl1, hlM⟩]
-        exact annihilationMatrices_anticommute C.valuedMaps C.mul_one C.uniqueness.mul_zero C.uniqueness.zero_mul n
-          C.congruence.one_add_n C.congruence.n_add_one ⟨hk1, hkM⟩ ⟨hl1, hlM⟩)
+        exact annihilationMatrices_anticommute L.valuedMaps L.mul_one L.uniqueness.mul_zero L.uniqueness.zero_mul n
+          h1n hn1 ⟨hk1, hkM⟩ ⟨hl1, hlM⟩)
   -- 準備の三つ目：各 k で c_k ·_B D +_B D ·_B c_k = μ_k ∗_B 1_B
   have h3 : ∀ k : ℕ, 1 ≤ k → k ≤ D.M →
       B.add (B.mul (creationFamily n D.M k) E) (B.mul E (creationFamily n D.M k)) = B.smul (mu k) B.one := by
@@ -340,8 +405,8 @@ theorem matrixValuedMap_mul_self (p : W × DualSpace D.spaceW) :
               (B.mul (annihilationMatrix n D.M l ⟨hl1, hlM⟩) (creationMatrix n D.M k hk)) :=
             B.add_comm _ _
         _ = B.smul (kroneckerDelta (⟨k, hk⟩ : Idx D.M) (⟨l, ⟨hl1, hlM⟩⟩ : Idx D.M)) B.one :=
-            creationMatrix_annihilationMatrix_anticommute C.valuedMaps C.mul_one C.uniqueness.mul_zero
-              C.uniqueness.zero_mul n C.signLaws hk ⟨hl1, hlM⟩
+            creationMatrix_annihilationMatrix_anticommute L.valuedMaps L.mul_one L.uniqueness.mul_zero
+              L.uniqueness.zero_mul n (L.signLaws h1n hn1) hk ⟨hl1, hlM⟩
     have hterm2 : ∀ l : ℕ, (hl : 1 ≤ l ∧ l ≤ D.M) →
         B.smul (mu l) (B.smul (kroneckerDelta (⟨k, hk⟩ : Idx D.M) (⟨l, hl⟩ : Idx D.M)) B.one)
           = B.smul (kroneckerDelta l k) (B.smul (mu l) B.one) := by
@@ -350,7 +415,7 @@ theorem matrixValuedMap_mul_self (p : W × DualSpace D.spaceW) :
           = B.smul (mu l * kroneckerDelta (⟨k, hk⟩ : Idx D.M) (⟨l, hl⟩ : Idx D.M)) B.one :=
             (B.smul_assoc _ _ _).symm
         _ = B.smul (kroneckerDelta (⟨k, hk⟩ : Idx D.M) (⟨l, hl⟩ : Idx D.M) * mu l) B.one := by
-            rw [C.mul_comm (mu l)]
+            rw [L.mul_comm (mu l)]
         _ = B.smul (kroneckerDelta (⟨k, hk⟩ : Idx D.M) (⟨l, hl⟩ : Idx D.M)) (B.smul (mu l) B.one) :=
             B.smul_assoc _ _ _
         _ = B.smul (kroneckerDelta l k) (B.smul (mu l) B.one) := by rw [kroneckerDelta_idx_eq_swap hk hl]
@@ -399,7 +464,7 @@ theorem matrixValuedMap_mul_self (p : W × DualSpace D.spaceW) :
         hh.map_linearCombination h00 D.M _ D.w
     _ = linearCombination Bv D.M lam (fun k => B.smul (mu k) B.one) := rfl
   -- 本題
-  calc B.mul (D.matrixValuedMap C p) (D.matrixValuedMap C p)
+  calc B.mul (D.matrixValuedMapOf L n p) (D.matrixValuedMapOf L n p)
       = B.mul (B.add Cc E) (B.add Cc E) := rfl
     _ = B.add (B.mul Cc (B.add Cc E)) (B.mul E (B.add Cc E)) := B.right_distrib Cc E (B.add Cc E)
     _ = B.add (B.add (B.mul Cc Cc) (B.mul Cc E)) (B.add (B.mul E Cc) (B.mul E E)) := by
@@ -411,7 +476,7 @@ theorem matrixValuedMap_mul_self (p : W × DualSpace D.spaceW) :
     _ = linearCombination Bv D.M lam (fun k => B.smul (mu k) B.one) := h4
     _ = B.smul (g.1 x) B.one := h5.symm
     _ = B.smul (splitQuadraticForm D.spaceW (x, g)) B.one := rfl
-    _ = B.smul ((D.space C).form p) B.one := rfl
+    _ = B.smul ((D.spaceOf L.splitSpaceLaws).form p) B.one := rfl
 
 /-! ### クリフォード代数から行列環への準同型 -/
 
@@ -425,8 +490,8 @@ theorem existsUnique_homomorphismToMatrix (hneg : ∀ a : K, a + -a = 0) :
       ∀ Φ' : (D.space C).Cl C → Mat K (PowerSet D.M),
         (IsAlgebraHomomorphism ((D.space C).cliffordAlgebra C) (D.matrixAlgebra C) Φ' ∧
           ∀ v, Φ' ((D.space C).γ C v) = D.matrixValuedMap C v) → Φ' = Φ :=
-  (D.space C).universalProperty C hneg (D.matrixAlgebra C) (D.matrixValuedMap C) (D.matrixValuedMap_isLinearMap C)
-    (D.matrixValuedMap_mul_self C)
+  (D.space C).universalProperty C hneg (D.matrixAlgebra C) (D.matrixValuedMap C) (D.matrixValuedMap_isLinearMap C.matrixValuedMapLaws n)
+    (D.matrixValuedMap_mul_self C.matrixValuedMapLaws C.congruence.one_add_n C.congruence.n_add_one)
 
 /-- 本文 `def_homomorphism_from_clifford_algebra_to_matrix_algebra` の必要十分版：存在と一意性の主張のただ一つの準同型 Φ。 -/
 def homomorphismToMatrix (hneg : ∀ a : K, a + -a = 0) : (D.space C).Cl C → Mat K (PowerSet D.M) :=

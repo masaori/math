@@ -53,8 +53,9 @@ theorem homomorphismToPairOfMatrices_centralElement_of_necSuf :
       = (D.matrixAlgebra.one, D.matrixAlgebra.smul (-1) D.matrixAlgebra.one) :=
   NecSuf.AlgebraOver.map_mul_of_diagonal_and_signed_values D.space.cliffordAlgebra.toNecSuf
     D.oddSpace.cliffordAlgebra.toNecSuf D.matrixAlgebra.toNecSuf
-    ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 D.homomorphismToMatrix_isHom_of_necSuf)
-    ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 D.homomorphismToPairOfMatrices_isHom_of_necSuf)
+    ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 D.homomorphismToMatrix_isHom_of_necSuf).map_mul
+    ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 D.homomorphismToMatrix_isHom_of_necSuf).map_one
+    ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 D.homomorphismToPairOfMatrices_isHom_of_necSuf).map_mul
     D.parityElement (D.oddInclusionHom D.parityElement) D.addedGenerator D.parityElement_mul_self_of_necSuf
     (D.homomorphismToPairOfMatrices_oddInclusionHom_of_necSuf D.parityElement)
     D.homomorphismToPairOfMatrices_addedGenerator_of_necSuf
@@ -128,7 +129,9 @@ theorem homomorphismToPairOfMatrices_idempotent_of_necSuf (σ : ℂ) :
       = (D.matrixAlgebra.smul (inverseOfTwo * (1 + σ)) D.matrixAlgebra.one,
           D.matrixAlgebra.smul (inverseOfTwo * (1 + -σ)) D.matrixAlgebra.one) :=
   NecSuf.AlgebraOver.map_idempotentOfSquareRootOfOne D.oddSpace.cliffordAlgebra.toNecSuf D.matrixAlgebra.toNecSuf
-    ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 D.homomorphismToPairOfMatrices_isHom_of_necSuf)
+    ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 D.homomorphismToPairOfMatrices_isHom_of_necSuf).map_add
+    ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 D.homomorphismToPairOfMatrices_isHom_of_necSuf).map_smul
+    ((isComplexAlgebraHomomorphism_iff_necSuf _ _ _).1 D.homomorphismToPairOfMatrices_isHom_of_necSuf).map_one
     D.homomorphismToPairOfMatrices_centralElement_of_necSuf (fun a => mul_neg_one a) inverseOfTwo σ
 
 end

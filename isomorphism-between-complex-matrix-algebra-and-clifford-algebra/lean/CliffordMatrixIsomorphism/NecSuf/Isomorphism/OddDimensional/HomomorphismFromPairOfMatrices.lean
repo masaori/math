@@ -190,7 +190,7 @@ theorem map_idempotentOfSquareRootOfOne_one [Zero K] [Neg K] (h00 : (0 : K) + 0 
   F (idempotentOfSquareRootOfOne SA h z 1)
       = (SB.smul (h * (1 + 1)) SB.one, SB.smul (h * (1 + -1)) SB.one) :=
         -- claim_homomorphism_to_pair_of_matrices_on_idempotents（σ := 1）
-        map_idempotentOfSquareRootOfOne SA SB hF hFz hmul_n h 1
+        map_idempotentOfSquareRootOfOne SA SB hF.map_add hF.map_smul hF.map_one hFz hmul_n h 1
   _ = (SB.smul 1 SB.one, SB.smul (h * (1 + -1)) SB.one) := by
         -- h は 1 + 1 の乗法の逆元。2 の可逆性はここで要る
         rw [hh]
@@ -214,7 +214,7 @@ theorem map_idempotentOfSquareRootOfOne_n [Zero K] [Neg K] (h00 : (0 : K) + 0 = 
   F (idempotentOfSquareRootOfOne SA h z n)
       = (SB.smul (h * (1 + n)) SB.one, SB.smul (h * (1 + -n)) SB.one) :=
         -- claim_homomorphism_to_pair_of_matrices_on_idempotents（σ := n）
-        map_idempotentOfSquareRootOfOne SA SB hF hFz hmul_n h n
+        map_idempotentOfSquareRootOfOne SA SB hF.map_add hF.map_smul hF.map_one hFz hmul_n h n
   _ = (SB.smul (h * (1 + n)) SB.one, SB.smul (h * (1 + 1)) SB.one) := by
         -- 本文の「-_ℂ(-1_ℂ) = 1_ℂ」の行
         rw [hn1]

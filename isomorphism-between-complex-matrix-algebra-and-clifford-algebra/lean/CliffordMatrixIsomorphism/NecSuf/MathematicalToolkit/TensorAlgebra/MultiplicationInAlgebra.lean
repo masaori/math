@@ -42,9 +42,12 @@ variable {K : Type uK} [Add K] [Mul K] [One K] {A : Type u}
 
 /-- 本文 `claim_subalgebra_is_closed_under_sums_over_finite_sets`：部分代数 B の元の族 v について、
 U_vec(A) の中の有限集合の上の和 Σ_{x∈X} λ_x ∗_A v_x は B の元である。番号付け (n, e) で和を L_n に開き、
-L_m ∈ B（m ≤ n）を m の帰納法で示す。 -/
+L_m ∈ B（m ≤ n）を m の帰納法で示す。
+B が部分代数であることの四つの条件のうち、積で閉じていることは使わないので、`IsSubalgebra` の組ではなく
+1_A を含むこと・和で閉じていること・スカラー倍で閉じていることの三つだけを仮定に置く。 -/
 theorem IsSubalgebra.sumOverFiniteSet_mem [Zero K] (h00 : (0 : K) + 0 = 0) {SA : AlgebraOver K A}
-    {B : Set A} (hB : IsSubalgebra SA B) {X : Type w} (hX : IsFiniteSet X) (c : X → K) (v : X → A)
+    {B : Set A} (hone : SA.one ∈ B) (hadd : ∀ x y : A, x ∈ B → y ∈ B → SA.add x y ∈ B)
+    (hsmul : ∀ (l : K) (x : A), x ∈ B → SA.smul l x ∈ B) {X : Type w} (hX : IsFiniteSet X) (c : X → K) (v : X → A)
     (hv : ∀ x : X, v x ∈ B) : sumOverFiniteSet SA.toVectorSpace hX c v ∈ B := by
   obtain ⟨n, e, he⟩ := id hX
   have hL : ∀ m : ℕ, m ≤ n →
@@ -59,15 +62,15 @@ theorem IsSubalgebra.sumOverFiniteSet_mem [Zero K] (h00 : (0 : K) + 0 = 0) {SA :
         (zero_smul_eq_zero SA.toVectorSpace h00 SA.one).symm
       show SA.zero ∈ B
       rw [h0]
-      exact hB.smul_mem 0 SA.one hB.one_mem
+      exact hsmul 0 SA.one hone
     | succ m ih =>
       intro hm
       -- L_m = L_{m-1} +_A (μ_m ∗_A y_m)
       show SA.add (partialLinearCombination SA.toVectorSpace (numberedFamily e c 0)
           (numberedFamily e v SA.zero) m)
         (SA.smul (numberedFamily e c 0 (m + 1)) (numberedFamily e v SA.zero (m + 1))) ∈ B
-      apply hB.add_mem _ _ (ih (Nat.le_of_succ_le hm))
-      apply hB.smul_mem
+      apply hadd _ _ (ih (Nat.le_of_succ_le hm))
+      apply hsmul
       rw [numberedFamily_of_le e v SA.zero (m + 1) (Nat.succ_pos m) hm]
       exact hv _
   rw [sumOverFiniteSet_eq SA.toVectorSpace hX c v n e he]

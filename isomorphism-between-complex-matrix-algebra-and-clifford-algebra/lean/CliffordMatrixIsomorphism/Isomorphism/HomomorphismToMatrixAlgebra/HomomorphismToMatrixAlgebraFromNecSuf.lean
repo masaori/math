@@ -105,7 +105,7 @@ theorem matrixAlgebra_toNecSuf : D.matrixAlgebra.toNecSuf = D.toNecSuf.matrixAlg
 
 /-- 具体版の C(y) は、必要十分版の C(y) と同じ。 -/
 theorem creationPart_eq_necSuf (y : W) : D.creationPart y = D.toNecSuf.creationPart complexCliffordLaws y := by
-  unfold creationPart NecSuf.Clifford.SplitData.creationPart
+  unfold creationPart NecSuf.Clifford.SplitData.creationPart NecSuf.Clifford.SplitData.creationPartOf
   rw [linearCombination_eq_necSuf, creationFamily_eq_necSuf]
   exact NecSuf.VectorSpace.linearCombination_eq_of_terms_eq _ D.M _ _ _ _ fun k hk1 hkM => by
     rw [coordinate_eq_necSuf D.spaceW D.M D.w D.isBasis k hk1 hkM y]
@@ -114,14 +114,14 @@ theorem creationPart_eq_necSuf (y : W) : D.creationPart y = D.toNecSuf.creationP
 /-- 具体版の D(h) は、必要十分版の D(h) と同じ。 -/
 theorem annihilationPart_eq_necSuf (h : DualSpace D.spaceW) :
     D.annihilationPart h = D.toNecSuf.annihilationPart complexCliffordLaws h.toNecSuf := by
-  unfold annihilationPart NecSuf.Clifford.SplitData.annihilationPart
+  unfold annihilationPart NecSuf.Clifford.SplitData.annihilationPart NecSuf.Clifford.SplitData.annihilationPartOf
   rw [linearCombination_eq_necSuf, annihilationFamily_eq_necSuf]
   rfl
 
 /-- 具体版の φ は、必要十分版の φ に点を写す写像を先に当てたものと同じ。 -/
 theorem matrixValuedMap_eq_necSuf (p : W × DualSpace D.spaceW) :
     D.matrixValuedMap p = D.toNecSuf.matrixValuedMap complexCliffordLaws (splitPointToNecSuf D.spaceW p) := by
-  unfold matrixValuedMap NecSuf.Clifford.SplitData.matrixValuedMap
+  unfold matrixValuedMap NecSuf.Clifford.SplitData.matrixValuedMap NecSuf.Clifford.SplitData.matrixValuedMapOf
   rw [creationPart_eq_necSuf, annihilationPart_eq_necSuf]
   rfl
 
@@ -131,7 +131,10 @@ theorem matrixValuedMap_eq_necSuf (p : W × DualSpace D.spaceW) :
 theorem matrixValuedMap_isLinearMap_of_necSuf :
     IsComplexLinearMap D.space.space D.matrixAlgebra.toComplexVectorSpace D.matrixValuedMap := by
   rw [isComplexLinearMap_iff_necSuf]
-  have hN := D.toNecSuf.matrixValuedMap_isLinearMap complexCliffordLaws
+  -- 必要十分版の主張は、章の仮定の組から取り出した組 `matrixValuedMapLaws` と n := -1_ℂ に当てる
+  have hN : NecSuf.VectorSpace.IsLinearMap (D.toNecSuf.space complexCliffordLaws).space
+      (D.toNecSuf.matrixAlgebra complexCliffordLaws).toVectorSpace (D.toNecSuf.matrixValuedMap complexCliffordLaws) :=
+    D.toNecSuf.matrixValuedMap_isLinearMap complexCliffordLaws.matrixValuedMapLaws (-1 : ℂ)
   have hpt : NecSuf.VectorSpace.IsLinearMap D.space.space.toNecSuf D.spaceN.space (splitPointToNecSuf D.spaceW) :=
     ⟨fun _ _ => rfl, fun _ _ => rfl⟩
   have h := NecSuf.VectorSpace.IsLinearMap.comp hpt hN
@@ -146,7 +149,14 @@ theorem matrixValuedMap_mul_self_of_necSuf (p : W × DualSpace D.spaceW) :
     D.matrixAlgebra.mul (D.matrixValuedMap p) (D.matrixValuedMap p)
       = D.matrixAlgebra.smul (D.space.form p) D.matrixAlgebra.one := by
   -- 必要十分版の主張の行列環を具体版の行列環に、φ' ∘（点を写す写像）を φ に書き戻す
-  have hN := D.toNecSuf.matrixValuedMap_mul_self complexCliffordLaws (splitPointToNecSuf D.spaceW p)
+  have hN : (D.toNecSuf.matrixAlgebra complexCliffordLaws).mul
+        (D.toNecSuf.matrixValuedMap complexCliffordLaws (splitPointToNecSuf D.spaceW p))
+        (D.toNecSuf.matrixValuedMap complexCliffordLaws (splitPointToNecSuf D.spaceW p))
+      = (D.toNecSuf.matrixAlgebra complexCliffordLaws).smul
+          ((D.toNecSuf.space complexCliffordLaws).form (splitPointToNecSuf D.spaceW p))
+          (D.toNecSuf.matrixAlgebra complexCliffordLaws).one :=
+    D.toNecSuf.matrixValuedMap_mul_self complexCliffordLaws.matrixValuedMapLaws complexCliffordLaws.congruence.one_add_n
+      complexCliffordLaws.congruence.n_add_one (splitPointToNecSuf D.spaceW p)
   rw [← D.matrixAlgebra_toNecSuf, ← D.matrixValuedMap_eq_necSuf p] at hN
   exact hN
 

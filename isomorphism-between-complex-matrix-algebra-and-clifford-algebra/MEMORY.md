@@ -12,15 +12,17 @@
 
 ## 次回やること
 
-- 状態台帳の「次の一歩」の未着手の一行（「Lean の必要十分版の仮定」の Φ の構成と奇数次元。台帳を空にする）を進める。台帳に残る 10 行には、行の括弧に名の無い claim_subalgebra_is_closed_under_sums_over_finite_sets（IsSubalgebra.mul_mem）も含む。点検 `bash lean/scripts/necsuf-unused-assumptions/run.sh`（lake build の後。18 分ほどかかる）が台帳 lean/necsuf-unused-assumptions-ledger.txt と一致することを Lean の検証に含める。絞った主張の行は台帳から消す。欄を引数にすると暗黙の写像が推論できない呼び出しがあるので、そのときは使う欄だけの組を置く（ZeroVector.lean の PreservesSmul、TwoSidedIdeal.lean の IsLeftIdeal）。準同型の仮定を線型写像に替えると、SA.add と SA.toVectorSpace.add の書き方の違いで rw が当たらないので congrArg で書く。
+- 状態台帳の「次の一歩」に未着手の行は無い（2026-11-22 に必要十分版の仮定の四行を済ませ、台帳 lean/necsuf-unused-assumptions-ledger.txt は空）。次の行は研究管理が足す。Lean を変えたら、点検 `bash lean/scripts/necsuf-unused-assumptions/run.sh`（lake build の後。10 分ほど）が空の台帳と一致することを確かめる。欄を引数にすると暗黙の写像が推論できない呼び出しがあるので、そのときは使う欄だけの組を置く（ZeroVector.lean の PreservesSmul、TwoSidedIdeal.lean の IsLeftIdeal、HomomorphismToMatrixAlgebra.lean の MatrixValuedMapLaws）。準同型の仮定を線型写像に替えると、SA.add と SA.toVectorSpace.add の書き方の違いで rw が当たらないので congrArg で書く。
 - 二つの版に同じ形で別に置いた定義は、導出版で toNecSuf/ofNecSuf の写像を通して行き来する。再帰で定めた添字（2^M・個数など）を含む導出版は set_option smartUnfolding false を置く（lean/README.md の「置き場と名前空間」）。導出版の名前を eq_ で始めない。
 - Lean の対応の検査（`lean/scripts/verify-label-correspondence.ts`）は、導出版が対応する必要十分版の宣言を `NecSuf.…`・`….toNecSuf.…` の形で引くことを求める。導出版を足すときは、各段の導出版から組み立てず、必要十分版の主張を特殊化して T・S（`PointTransport`）で引き戻す。
 
 ## 未解決問題・確認事項
 
-- 2026-11-22: 必要十分版の仮定が主張ごとに絞られていない（本文の主張 376 件のうち 6 件が、証明で使わない仮定を持つ。台帳 lean/necsuf-unused-assumptions-ledger.txt）。状態台帳の「研究管理への申し送り」に書いた。点検は `bash lean/scripts/necsuf-unused-assumptions/run.sh`（lake build の後）。
+- 2026-11-22: 必要十分版の仮定が主張ごとに絞られていない件は解決した（点検の行 0、台帳は空）。
 
 ## 完了済み
+
+- 2026-11-22: 状態台帳の「Lean の必要十分版の仮定」の四行目（Φ の構成と系「奇数次元」の 5 主張と、部分代数が和で閉じる主張の仮定を絞り、台帳を空にする）を書き切った。点検は 6 主張 10 行から 0 行。中身は台帳の前進の記録。
 
 - 2026-11-22: 状態台帳の「Lean の必要十分版の仮定」の三行目（系「一般の偶数次元」の 15 主張と、準同型の核の主張の仮定を絞る）を書き切った。点検は 22 主張 110 行から 6 主張 10 行。中身は台帳の前進の記録。
 
