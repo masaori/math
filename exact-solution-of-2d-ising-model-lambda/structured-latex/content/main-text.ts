@@ -20703,7 +20703,10 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
                       displayMath(String.raw`\begin{aligned}
 \det_x(A)
 &=\sum_{\sigma\in\{\operatorname{id}_{\varnothing}\}}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\varnothing}A_{i,\sigma(i)}&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)\\
-&=1\cdot1&&\bigl(\because\ \text{空置換の符号と空積}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\operatorname{id}_{\varnothing}))}\prod_{i\in\varnothing}A_{i,\operatorname{id}_{\varnothing}(i)}&&\bigl(\because\ \text{一項の和}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(1)}\prod_{i\in\varnothing}A_{i,\operatorname{id}_{\varnothing}(i)}&&\bigl(\because\ \blkref{def_permutation_sign},\ \text{空の転倒数}\bigr)\\
+&=1\cdot\prod_{i\in\varnothing}A_{i,\operatorname{id}_{\varnothing}(i)}&&\bigl(\because\ \blkref{def_qbar_constant_embedding},\ \text{単位元の保存}\bigr)\\
+&=1\cdot1&&\bigl(\because\ \text{空積}\bigr)\\
 &=1&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の単位元則}\bigr)
 \end{aligned}`),
                       displayMath(String.raw`\begin{aligned}

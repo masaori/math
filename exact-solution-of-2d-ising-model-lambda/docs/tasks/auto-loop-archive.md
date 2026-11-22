@@ -1,4 +1,19 @@
 ## 現在地から移したもの
+- **2026-11-22（並列・二十四回目）、表の最後の行「セルと格子の補題を具体版で示す」を論法ごとに五つに割り、先頭の階段の点族の補題（接続階段の当たり歩数の集合・平行階段の横断幅・反復横断階段と周期並進の分離）を済ませた。** 具体版の三ファイルから必要十分版の import を外した。分離の台帳は 396 行から 391 行になった（宣言 2 行、import 3 行）。並列の表の次は「四つのセルの偶奇弧と対角セル対の除外を具体版で示す」で、着手できる。
+
+## レビュー記録から移したもの
+- 2026-11-22（並列・二十四回目）: 前回の並列の `KacWard/OneSidedClosureFourParts.lean` の四区間の道を本文の一側閉包（長さ $cm$・$tn_\perp$・$cn_\parallel$・$tn_\perp$、第四部分は $D^{\gamma,S,t}_{N-j}$ の逆向き）と照合した。区間の境界と逆向きの添字 $a+2b+c-j$ が一致し、修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-22（並列・二十四回目）: 表の最後の行「セルと格子の補題を具体版で示す」は、階段の点族、四つのセルの偶奇弧と対角セル対、活性頂点と標識付き差、周期持ち上げと閉包の残り、ねじれの符号と形式平方根という別々の論法を持つので五つに割り、先頭の階段の点族を済ませた。具体版 `FirstHitConnectingStaircase` は当たり歩数の集合を本文 $S(\gamma,k_0,u)$ どおりに直接定義し、定義の一致の補題 `firstHitStepSetFromWalk_eq_necSuf`・`firstHitConnectingStaircaseFromWalk_eq_necSuf`（どちらも `rfl`）を導出のファイルへ移した。`PeriodTranslatesOfIteratedStaircase` は退避済みの主張の参照用ノートの論法（平行座標の差が $|z|L(w_{\mathrm v}^2+w_{\mathrm h}^2)$ で幅 $|w_{\mathrm h}w_{\mathrm v}|$ を超える）を具体版の中で直接書いた。`ParallelStaircaseTransverseWidth` は必要十分版を使っていなかったので import を外すだけだった。置換の符号・互換・行シフトの軌道を使う具体版は主経路の行が受け持つので、割った行に含めなかった。
+
+## レビュー記録から移したもの
+- 2026-11-21（並列・二十三回目）: 前回の並列の `KacWard/Staircase.lean` を本文の横断階段・平行階段・反復横断階段（$D^{\gamma,Q,t}_s=Q+q\cdot(w_{\mathrm h},-w_{\mathrm v})+C^{\gamma}_r$）と照合した。点の型・場合分け・除法の取り方が一致し、修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-21（並列・二十三回目）: 表の先頭「一側閉包の四区間の道・接合対・四部分の閉包を具体版の定義で立て直す」を一つの論法（定義の置き換え）として割らずに済ませた。具体版の証明は既に四区間の定義を展開して自分で示していたので、定義を `KacWard/OneSidedClosureFourParts.lean` へ移すと参照が移った。具体版 `OneSidedClosureNonbacktracking` が推移的な import で呼んでいた必要十分版の `fourPartSequence_congr_range` は、具体版 `OneSidedClosureCyclicSum` の私的な補題 `fourPartSequence_congr_range_concrete` を公開して替えた。導出の `OneSidedClosureJunctionsFromNecSuf`・`OneSidedClosureCyclicSumFromNecSuf`・`OneSidedClosureStepSequenceFromNecSuf` は `KacWard/OneSidedClosureFourPartsFromNecSuf.lean` の定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）で書き換えてから必要十分版を呼ぶ（定義の展開に任せると循環隣接和の導出が時間切れになった）。本文 `def_one_sided_periodic_lift_closure`・`def_periodic_lift_closure_cycle` の `lean:` の必要十分版の名前を具体版に替えた。
+
+## 現在地から移したもの
 - **2026-11-21（主経路）、論文の引用と Lean の依存の差分台帳を検査できるようにした。** 具体版を登録した主張・定理 874 件のうち 519 件で引用と依存が一致する。差分台帳は引用元・引用先の組を 762 行（論文側のみ 310、Lean 側のみ 452）持つ。次は置換の符号と転倒数の分離である。
 
 ## レビュー記録から移したもの

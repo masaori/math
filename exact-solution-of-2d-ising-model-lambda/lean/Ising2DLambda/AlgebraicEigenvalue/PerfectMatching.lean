@@ -19,6 +19,21 @@ def IsPerfectMatching {J : Type*} [Fintype J] (D : Set (Set J)) : Prop :=
 def PerfectMatching (J : Type*) [Fintype J] :=
   {D : Set (Set J) // IsPerfectMatching D}
 
+/-- 空集合上の完全マッチングは空集合だけである。 -/
+noncomputable instance : Unique (PerfectMatching Empty) := by
+  classical
+  let D₀ : PerfectMatching Empty :=
+    ⟨∅, ⟨by intro p hp; simp at hp, by intro i; exact i.elim⟩⟩
+  refine ⟨⟨D₀⟩, ?_⟩
+  intro D
+  apply Subtype.ext
+  ext p
+  constructor
+  · intro hp
+    obtain ⟨i, _, _, _⟩ := D.property.1 p hp
+    exact i.elim
+  · simp [D₀]
+
 /-- 各点を動かし、二回の適用で元へ戻す写像全体。 -/
 def FixedPointFreeInvolution (J : Type*) [Fintype J] :=
   {τ : J → J // (∀ i : J, τ i ≠ i) ∧ Function.Involutive τ}
