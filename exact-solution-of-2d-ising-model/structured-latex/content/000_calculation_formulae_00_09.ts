@@ -259,6 +259,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "正の実数の二乗の一意性" },
     labels: ["positive_real_square_injective"],
+    lean: ["Ising2D.positive_real_square_injective", "Ising2D.factor_difference_of_squares_eq_zero"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}_{>0}`),
@@ -820,6 +821,7 @@ y^2>x\ \land\ x>0
     origin: { path: "_old/typst/parts/000_計算公式/003_theorem_行列の分解.typ", ordinal: 4 },
     title: { text: "行列の積の成分による定義" },
     labels: ["mat_mult"],
+    lean: ["Ising2D.matrix_mul_apply_sum", "Ising2D.mulVec_apply_sum", "Ising2D.mul_two_apply", "Ising2D.mulVec_two_zero", "Ising2D.mulVec_two_one"],
     statement: [
       paragraph([
         math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
@@ -870,6 +872,7 @@ y^2>x\ \land\ x>0
     origin: { path: "_old/typst/parts/000_計算公式/004_theorem_行列の組みへの作用.typ", ordinal: 5 },
     title: { text: "行列の積は列ごとに作用する" },
     labels: ["mat_columnwise"],
+    lean: ["Ising2D.matrix_mul_columns"],
     statement: [
       paragraph([
         math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
@@ -925,6 +928,7 @@ y^2>x\ \land\ x>0
     origin: { path: "_old/typst/parts/000_計算公式/005_theorem_行列の共役.typ", ordinal: 6 },
     title: { text: "行列の共役" },
     labels: ["mat_conj"],
+    lean: ["Ising2D.conj_add_matrix", "Ising2D.conj_smul_matrix"],
     statement: [
       paragraph([
         math("n\\in\\mathbb{Z}_{\\geq 1}"),
@@ -1021,6 +1025,7 @@ T_B(\alpha A)
     kind: "claim",
     title: { text: "行列の共役は有限和を保つ" },
     labels: ["matrix_conjugation_preserves_finite_sum"],
+    lean: ["Ising2D.conj_finite_sum_of_matrices"],
     statement: [
       paragraph([
         math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
@@ -1081,6 +1086,7 @@ T_B\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     kind: "claim",
     title: { text: "行列の共役は符号反転を保つ" },
     labels: ["matrix_conjugation_preserves_negation"],
+    lean: ["Ising2D.conj_neg_matrix"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -1131,6 +1137,7 @@ T_B(-W)
     kind: "claim",
     title: { text: "行列の共役は差を保つ" },
     labels: ["matrix_conjugation_preserves_difference"],
+    lean: ["Ising2D.conj_sub_matrix"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -1239,6 +1246,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{R}\to\mathbb{C}}\ \text{は単射}` },
     labels: ["inclusion_rr_to_cc_is_injective"],
+    lean: ["Ising2D.inclusion_rr_to_cc_is_injective"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -1284,6 +1292,7 @@ T_B(X - W)
     kind: "definition",
     title: { tex: String.raw`\mathbb{Z}\to\mathbb{R}\text{の包含写像}` },
     labels: ["inclusion_zz_to_rr"],
+    lean: ["Ising2D.inclusion_zz_to_rr_zero", "Ising2D.inclusion_zz_to_rr_succ", "Ising2D.inclusion_zz_to_rr_neg", "Ising2D.inclusion_zz_to_rr_zero_intCast", "Ising2D.inclusion_zz_to_rr_succ_intCast"],
     statement: [
       paragraph([
         ref("set_and_algebra_notation"),
@@ -1350,6 +1359,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}}) = 1_{\mathbb{R}}` },
     labels: ["inclusion_zz_to_rr_of_one"],
+    lean: ["Ising2D.inclusion_zz_to_rr_of_one", "Ising2D.inclusion_zz_to_rr_of_one_intCast"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
@@ -1385,6 +1395,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a+b) = \iota_{\mathbb{Z}\to\mathbb{R}}(a)+\iota_{\mathbb{Z}\to\mathbb{R}}(b)\quad(a, b \geq 0)` },
     labels: ["inclusion_zz_to_rr_preserves_sum_of_nonnegatives"],
+    lean: ["Ising2D.inclusion_zz_to_rr_preserves_sum_of_nonnegatives", "Ising2D.inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
@@ -1449,6 +1460,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n+1) = \iota_{\mathbb{Z}\to\mathbb{R}}(n)+1\quad(n \in \mathbb{Z})` },
     labels: ["inclusion_zz_to_rr_of_successor"],
+    lean: ["Ising2D.inclusion_zz_to_rr_of_successor"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
@@ -1563,6 +1575,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a+b) = \iota_{\mathbb{Z}\to\mathbb{R}}(a)+\iota_{\mathbb{Z}\to\mathbb{R}}(b)\quad(a, b \in \mathbb{Z})` },
     labels: ["inclusion_zz_to_rr_preserves_sum"],
+    lean: ["Ising2D.inclusion_zz_to_rr_preserves_sum"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
@@ -1685,6 +1698,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(ab) = \iota_{\mathbb{Z}\to\mathbb{R}}(a)\,\iota_{\mathbb{Z}\to\mathbb{R}}(b)\quad(a, b \in \mathbb{Z})` },
     labels: ["inclusion_zz_to_rr_preserves_product"],
+    lean: ["Ising2D.inclusion_zz_to_rr_preserves_product"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
@@ -1815,6 +1829,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(a - b) = \iota_{\mathbb{Z}\to\mathbb{R}}(a) - \iota_{\mathbb{Z}\to\mathbb{R}}(b)\quad(a, b \in \mathbb{Z})` },
     labels: ["inclusion_zz_to_rr_preserves_difference"],
+    lean: ["Ising2D.inclusion_zz_to_rr_preserves_difference"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
@@ -1864,6 +1879,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(-a) = -\iota_{\mathbb{Z}\to\mathbb{R}}(a)\quad(a \in \mathbb{Z})` },
     labels: ["inclusion_zz_to_rr_preserves_negation"],
+    lean: ["Ising2D.inclusion_zz_to_rr_preserves_negation"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
@@ -1923,6 +1939,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n) \geq 1_{\mathbb{R}}\quad(n \geq 1)` },
     labels: ["inclusion_zz_to_rr_of_positive_is_at_least_one"],
+    lean: ["Ising2D.inclusion_zz_to_rr_of_positive_is_at_least_one"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
@@ -1981,6 +1998,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(n) \leq 0_{\mathbb{R}}\quad(n \leq 0)` },
     labels: ["inclusion_zz_to_rr_of_nonpositive_is_nonpositive"],
+    lean: ["Ising2D.inclusion_zz_to_rr_of_nonpositive_is_nonpositive"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
@@ -2046,6 +2064,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`a \leq b \Rightarrow \iota_{\mathbb{Z}\to\mathbb{R}}(a) \leq \iota_{\mathbb{Z}\to\mathbb{R}}(b)\quad(a, b \geq 0)` },
     labels: ["inclusion_zz_to_rr_is_monotone_on_nonnegatives"],
+    lean: ["Ising2D.inclusion_zz_to_rr_is_monotone_on_nonnegatives"],
     statement: [
       paragraph([
         ref("inclusion_zz_to_rr"),
