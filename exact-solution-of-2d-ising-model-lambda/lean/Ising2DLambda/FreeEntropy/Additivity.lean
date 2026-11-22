@@ -91,12 +91,14 @@ lemma logRat_one : logRat 1 = 0 := by
   simp [logRat]
 
 /-- 冪の法則。`log(q^k) = k • log q`。`k` についての帰納法の 2 つの段に対応する。 -/
-theorem logRat_pow {q : ℚ} (hq : 0 < q) : ∀ k : ℕ, logRat (q ^ k) = k • logRat q
-  | 0 => by rw [pow_zero, logRat_one, zero_nsmul]
-  | k + 1 => by
+theorem logRat_pow {q : ℚ} (hq : 0 < q) : ∀ k : ℕ, logRat (q ^ k) = k • logRat q := by
+  intro k
+  induction k with
+  | zero => rw [pow_zero, logRat_one, zero_nsmul]
+  | succ k ih =>
     -- 帰納段の第 1・第 2 の等号。q^(k+1) = q^k · q へ加法性を適用する（正の有理数の積は正の有理数）。
     rw [pow_succ, logRat_mul (pow_pos hq k) hq]
     -- 帰納段の第 3・第 4 の等号。帰納法の仮定を代入し、k • g + g = (k+1) • g で括る。
-    rw [logRat_pow hq k, succ_nsmul]
+    rw [ih, succ_nsmul]
 
 end Ising2DLambda.FreeEntropy
