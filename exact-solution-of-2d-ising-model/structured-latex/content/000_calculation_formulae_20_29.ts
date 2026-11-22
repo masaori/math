@@ -1712,6 +1712,7 @@ t
     kind: "claim",
     title: { tex: String.raw`\bigl(\tfrac12\bigr)_{\mathbb{C}} = 2_{\mathbb{C}}^{-1}` },
     labels: ["real_inclusion_of_one_half_is_inverse_of_two"],
+    lean: ["Ising2D.real_inclusion_half_eq_inv_two"],
     statement: [
       paragraph([
         math(String.raw`r_{\mathbb{C}}`),
@@ -1767,6 +1768,7 @@ t
     kind: "claim",
     title: { tex: String.raw`\bigl(r^{-1}\bigr)_{\mathbb{C}} = \bigl(r_{\mathbb{C}}\bigr)^{-1}` },
     labels: ["real_inclusion_preserves_inverse"],
+    lean: ["Ising2D.real_inclusion_inv", "Ising2D.real_inclusion_ne_zero"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{R}`),
@@ -1855,6 +1857,7 @@ t
     kind: "claim",
     title: { text: "実数に 0 を左から掛けると 0 になる" },
     labels: ["real_zero_times_is_zero"],
+    lean: ["Ising2D.real_zero_times_is_zero"],
     statement: [
       paragraph([
         math(String.raw`x \in \mathbb{R}`),
@@ -1908,6 +1911,7 @@ t
     kind: "claim",
     title: { text: "実数に 0 を右から掛けると 0 になる" },
     labels: ["real_times_zero_is_zero"],
+    lean: ["Ising2D.real_times_zero_is_zero"],
     statement: [
       paragraph([
         math(String.raw`x \in \mathbb{R}`),
@@ -1961,6 +1965,7 @@ x\cdot 0
     kind: "claim",
     title: { text: "実数の 0 の符号を反転しても 0 である" },
     labels: ["real_negation_of_zero_is_zero"],
+    lean: ["Ising2D.real_negation_of_zero_is_zero"],
     statement: [
       paragraph([
         math(String.raw`-0`),
@@ -2003,6 +2008,7 @@ x\cdot 0
     kind: "claim",
     title: { text: "実数から 0 を引いても変わらない" },
     labels: ["real_minus_zero_is_self"],
+    lean: ["Ising2D.real_minus_zero_is_self"],
     statement: [
       paragraph([
         math(String.raw`a \in \mathbb{R}`),
@@ -2043,6 +2049,7 @@ a - 0
     kind: "claim",
     title: { text: "実数に −1 を左から掛けると符号が反転する" },
     labels: ["real_minus_one_times_is_negation"],
+    lean: ["Ising2D.real_minus_one_times_is_negation"],
     statement: [
       paragraph([
         math(String.raw`a \in \mathbb{R}`),
@@ -2107,6 +2114,7 @@ a - 0
     kind: "claim",
     title: { text: "実数の符号を 2 度反転するともとに戻る" },
     labels: ["real_double_negation"],
+    lean: ["Ising2D.real_double_negation"],
     statement: [
       paragraph([
         math(String.raw`a \in \mathbb{R}`),
@@ -2165,6 +2173,7 @@ a - 0
     kind: "claim",
     title: { text: "符号を反転した実数どうしの積は、もとの実数どうしの積に等しい" },
     labels: ["real_negation_times_negation_is_product"],
+    lean: ["Ising2D.real_negation_times_negation_is_product"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -2222,6 +2231,7 @@ a - 0
     kind: "claim",
     title: { text: "−1 か 1 の実数は、自分自身との積が 1" },
     labels: ["real_plus_or_minus_one_times_itself_is_one"],
+    lean: ["Ising2D.real_plus_or_minus_one_times_itself_is_one"],
     statement: [
       paragraph([
         math(String.raw`\sigma \in \{-1,1\} \subset \mathbb{R}`),
@@ -2288,6 +2298,7 @@ a - 0
     kind: "claim",
     title: { text: "符号を反転した実数に右から実数を掛けると、積の符号が反転する" },
     labels: ["real_negation_times_is_negation_of_product"],
+    lean: ["Ising2D.real_negation_times_is_negation_of_product"],
     statement: [
       paragraph([
         math(String.raw`x, t \in \mathbb{R}`),
@@ -2333,6 +2344,7 @@ a - 0
     kind: "claim",
     title: { text: "実数に右から符号を反転した実数を掛けると、積の符号が反転する" },
     labels: ["real_times_negation_is_negation_of_product"],
+    lean: ["Ising2D.real_times_negation_is_negation_of_product"],
     statement: [
       paragraph([
         math(String.raw`x, t \in \mathbb{R}`),
@@ -2378,6 +2390,7 @@ x\cdot(-t)
     kind: "claim",
     title: { text: "実数の和の符号を反転すると、符号を反転した実数の和になる" },
     labels: ["real_negation_of_sum_is_sum_of_negations"],
+    lean: ["Ising2D.real_negation_of_sum_is_sum_of_negations"],
     statement: [
       paragraph([
         math(String.raw`x, y \in \mathbb{R}`),
@@ -2435,6 +2448,7 @@ x\cdot(-t)
     kind: "claim",
     title: { text: "0 を 0 でない実数で割ると 0 になる" },
     labels: ["real_zero_divided_is_zero"],
+    lean: ["Ising2D.real_zero_divided_is_zero"],
     statement: [
       paragraph([
         math(String.raw`x \in \mathbb{R}`),
@@ -2478,6 +2492,7 @@ x\cdot(-t)
     kind: "claim",
     title: { text: "0 でない実数どうしの積は 0 でない" },
     labels: ["real_product_of_nonzero_is_nonzero"],
+    lean: ["Ising2D.real_product_of_nonzero_is_nonzero"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -2547,6 +2562,7 @@ b
     kind: "claim",
     title: { text: "0 でない実数の逆元どうしの積は積の逆元" },
     labels: ["real_product_of_inverses_is_inverse_of_product"],
+    lean: ["Ising2D.real_product_of_inverses_is_inverse_of_product"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -2633,6 +2649,7 @@ a^{-1}\cdot b^{-1}
     kind: "claim",
     title: { text: "実数の 0 は 1 より小さい" },
     labels: ["real_zero_less_than_one"],
+    lean: ["Ising2D.real_zero_less_than_one"],
     statement: [
       paragraph([
         math(String.raw`0`),
@@ -2730,6 +2747,7 @@ a^{-1}\cdot b^{-1}
     kind: "claim",
     title: { text: "実数の 0 は 2 より小さい" },
     labels: ["real_zero_less_than_two"],
+    lean: ["Ising2D.real_zero_less_than_two"],
     statement: [
       paragraph([
         math(String.raw`0`),
@@ -2791,6 +2809,7 @@ a^{-1}\cdot b^{-1}
     kind: "claim",
     title: { text: "実数の 2 は 0 でない" },
     labels: ["real_two_is_nonzero"],
+    lean: ["Ising2D.real_two_is_nonzero"],
     statement: [
       paragraph([
         math(String.raw`0`),
@@ -2838,6 +2857,7 @@ a^{-1}\cdot b^{-1}
     kind: "claim",
     title: { text: "実数で 1 から 1/2 を引くと 1/2 になる" },
     labels: ["real_one_minus_half_is_half"],
+    lean: ["Ising2D.real_one_minus_half_is_half"],
     statement: [
       paragraph([
         "和・積・",
@@ -2908,6 +2928,7 @@ a^{-1}\cdot b^{-1}
     kind: "claim",
     title: { text: "実数に 1/2 を掛けると 2 で割った商になる" },
     labels: ["real_times_half_is_quotient_by_two"],
+    lean: ["Ising2D.real_times_half_is_quotient_by_two"],
     statement: [
       paragraph([
         math(String.raw`a \in \mathbb{R}`),
@@ -2968,6 +2989,7 @@ a\cdot\tfrac12
     kind: "claim",
     title: { text: "実数を 2 で割った商に 2 を掛けるともとの実数に戻る" },
     labels: ["real_twice_quotient_by_two_is_original"],
+    lean: ["Ising2D.real_twice_quotient_by_two_is_original"],
     statement: [
       paragraph([
         math(String.raw`b \in \mathbb{R}`),
@@ -3028,6 +3050,7 @@ a\cdot\tfrac12
     kind: "claim",
     title: { text: "同じ実数を二つ足すと 2 倍になる" },
     labels: ["real_sum_of_two_equal_terms_is_twice"],
+    lean: ["Ising2D.real_sum_of_two_equal_terms_is_twice"],
     statement: [
       paragraph([
         math(String.raw`a \in \mathbb{R}`),
@@ -3071,6 +3094,7 @@ a + a
     kind: "claim",
     title: { text: "実数を 2 で割った商を二つ足すともとの実数に戻る" },
     labels: ["real_half_plus_half_is_original"],
+    lean: ["Ising2D.real_half_plus_half_is_original"],
     statement: [
       paragraph([
         math(String.raw`b \in \mathbb{R}`),
@@ -3124,6 +3148,7 @@ a + a
     kind: "claim",
     title: { text: "正の実数の乗法の逆元は正" },
     labels: ["real_inverse_of_positive_is_positive"],
+    lean: ["Ising2D.real_inverse_of_positive_is_positive"],
     statement: [
       paragraph([
         math(String.raw`a \in \mathbb{R}`),
@@ -3319,6 +3344,7 @@ a^{-1} \neq 0
     kind: "claim",
     title: { text: "正の実数の加法の逆元は負" },
     labels: ["real_negation_of_positive_is_negative"],
+    lean: ["Ising2D.real_negation_of_positive_is_negative"],
     statement: [
       paragraph([
         math(String.raw`a \in \mathbb{R}`),
@@ -3373,6 +3399,7 @@ a^{-1} \neq 0
     kind: "claim",
     title: { text: "実数の狭義の順序は非対称" },
     labels: ["real_less_than_is_asymmetric"],
+    lean: ["Ising2D.real_less_than_is_asymmetric"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -3705,6 +3732,7 @@ z - 0_{\mathbb{C}}
     kind: "claim",
     title: { text: "正の実数の有限積は正" },
     labels: ["finite_product_of_positive_reals_is_positive"],
+    lean: ["Ising2D.finite_product_of_positive_reals_is_positive"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3773,6 +3801,7 @@ z - 0_{\mathbb{C}}
     kind: "claim",
     title: { text: "実数の定数の有限積は冪に等しい" },
     labels: ["finite_product_of_constant_real_is_power"],
+    lean: ["Ising2D.finite_product_of_constant_real_is_power"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3844,6 +3873,7 @@ z - 0_{\mathbb{C}}
     kind: "claim",
     title: { text: "同じ指数の実数の冪の積は積の冪に等しい" },
     labels: ["product_of_real_powers_is_power_of_product"],
+    lean: ["Ising2D.product_of_real_powers_is_power_of_product"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -3905,6 +3935,7 @@ a^{m+1}\, b^{m+1}
     kind: "claim",
     title: { text: "実数の 1 の冪は 1" },
     labels: ["power_of_real_one_is_one"],
+    lean: ["Ising2D.power_of_real_one_is_one"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
@@ -3960,6 +3991,7 @@ a^{m+1}\, b^{m+1}
     kind: "claim",
     title: { text: "1 の平方根は 1" },
     labels: ["sqrt_of_real_one_is_one"],
+    lean: ["Ising2D.sqrt_of_real_one_is_one"],
     statement: [
       paragraph([
         math(String.raw`1 \in \mathbb{R}`),
@@ -4042,6 +4074,7 @@ a^{m+1}\, b^{m+1}
     kind: "claim",
     title: { text: "0 の平方根は 0" },
     labels: ["sqrt_of_real_zero_is_zero"],
+    lean: ["Ising2D.sqrt_of_real_zero_is_zero"],
     statement: [
       paragraph([
         math(String.raw`0 \in \mathbb{R}`),
@@ -4127,6 +4160,7 @@ a^{m+1}\, b^{m+1}
     kind: "claim",
     title: { text: "正の実数の平方根は正" },
     labels: ["sqrt_of_positive_real_is_positive"],
+    lean: ["Ising2D.sqrt_of_positive_real_is_positive"],
     statement: [
       paragraph([
         math(String.raw`x \in \mathbb{R}_{>0}`),
@@ -4224,6 +4258,7 @@ x
     kind: "claim",
     title: { text: "実数の有限積の包含は包含の有限積に等しい" },
     labels: ["real_inclusion_preserves_finite_product"],
+    lean: ["Ising2D.real_inclusion_preserves_finite_product"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -4290,6 +4325,7 @@ x
     kind: "claim",
     title: { text: "実数の積の有限積は有限積の積" },
     labels: ["finite_product_of_real_products"],
+    lean: ["Ising2D.finite_product_of_real_products"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -4346,6 +4382,7 @@ x
     kind: "claim",
     title: { text: "実数の有限積から先頭の因子を外へ出せる" },
     labels: ["finite_product_of_real_numbers_splits_off_first_factor"],
+    lean: ["Ising2D.finite_product_of_real_numbers_splits_off_first_factor"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -4422,6 +4459,7 @@ x
     kind: "claim",
     title: { text: "実数の 1 の有限積は 1" },
     labels: ["finite_product_of_real_ones"],
+    lean: ["Ising2D.finite_product_of_real_ones"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -4521,6 +4559,7 @@ z^{m+1} := z^m\, z`),
     kind: "claim",
     title: { text: "複素数の二乗は、その複素数を二つ掛けた積に等しい" },
     labels: ["square_of_complex_number_is_product"],
+    lean: ["Ising2D.square_of_complex_number_is_product"],
     statement: [
       paragraph([
         math(String.raw`z \in \mathbb{C}`),
@@ -4689,6 +4728,7 @@ z^2
     kind: "claim",
     title: { text: "実数の包含の有限積は実数の包含" },
     labels: ["finite_product_of_real_inclusions_is_real"],
+    lean: ["Ising2D.finite_product_of_real_inclusions_is_real"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -4783,6 +4823,7 @@ z^2
     kind: "claim",
     title: { text: "一つの項のほかが 0 の有限和はその項に等しい" },
     labels: ["finite_sum_with_single_nonzero_term"],
+    lean: ["Ising2D.finite_sum_with_single_nonzero_term_succ", "Ising2D.finite_sum_with_single_nonzero_term_fintype"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
