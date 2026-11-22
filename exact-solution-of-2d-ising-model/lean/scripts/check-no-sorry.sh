@@ -451,6 +451,8 @@ targets=(
   Ising2D.complex_mk_eq_mk_iff
   Ising2D.complex_mk_mul_mk
   Ising2D.complex_ofReal_eq_mk
+  Ising2D.complex_neg_eq_ofReal_neg_one_mul
+  Ising2D.complex_sub_eq_add_neg
   Ising2D.complex_I_mul_I
   Ising2D.complex_neg_I_mul_I
   Ising2D.complex_one_add_one

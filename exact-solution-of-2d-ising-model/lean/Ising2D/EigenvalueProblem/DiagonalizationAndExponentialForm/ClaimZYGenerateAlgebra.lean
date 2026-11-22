@@ -37,6 +37,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatrices
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimTwiceTimesInverseOfTwoIsOriginalInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimSumPlusAndMinusDifferenceInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNegationAndDifference
 
 namespace Ising2D
 
@@ -499,11 +500,12 @@ theorem pauliDecompRhs_apply_10 (a b c d : ℂ) : pauliDecompRhs a b c d 1 0 = c
           rw [← mul_assoc Complex.I (Complex.I * (b - c))]                  -- 積の結合律を右辺から左辺へ
     _ = (b + c) * 2⁻¹ + ((Complex.I * Complex.I) * (b - c)) * 2⁻¹ := by
           rw [← mul_assoc Complex.I Complex.I]                              -- 積の結合律を右辺から左辺へ
-    _ = (b + c) * 2⁻¹ + ((-1) * (b - c)) * 2⁻¹ := by
+    _ = (b + c) * 2⁻¹ + (((-1 : ℝ) : ℂ) * (b - c)) * 2⁻¹ := by
           rw [complex_I_mul_I]                                          -- `i_times_i_is_minus_one_in_cc`
-    _ = (b + c) * 2⁻¹ + (-(b - c)) * 2⁻¹ := by rw [neg_one_mul]        -- `multiply_by_minus_one` を右辺から左辺へ
+    _ = (b + c) * 2⁻¹ + (-(b - c)) * 2⁻¹ := by
+          rw [← complex_neg_eq_ofReal_neg_one_mul]                             -- `multiply_by_minus_one` を右辺から左辺へ
     _ = ((b + c) + -(b - c)) * 2⁻¹ := (add_mul _ _ _).symm             -- 分配律を右辺から左辺へ
-    _ = ((b + c) - (b - c)) * 2⁻¹ := by rw [← sub_eq_add_neg]          -- `def_complex_difference` を右辺から左辺へ
+    _ = ((b + c) - (b - c)) * 2⁻¹ := by rw [← complex_sub_eq_add_neg]  -- `def_complex_difference` を右辺から左辺へ
     _ = (2 * c) * 2⁻¹ := by rw [complex_sum_sub_difference b c]         -- `sum_minus_difference_is_twice_second_in_cc`（`a → a₁₂, b → a₂₁`）
     _ = c := complex_two_mul_mul_inv_two c                               -- `twice_times_inverse_of_two_is_original_in_cc`（`z → a₂₁`）
 
@@ -544,7 +546,7 @@ theorem pauliDecompRhs_apply_11 (a b c d : ℂ) : pauliDecompRhs a b c d 1 1 = d
           rw [← mul_assoc (-1 : ℂ) (a - d)]                             -- 積の結合律を右辺から左辺へ
     _ = (a + d) * 2⁻¹ + (-(a - d)) * 2⁻¹ := by rw [neg_one_mul]        -- `multiply_by_minus_one` を右辺から左辺へ
     _ = ((a + d) + -(a - d)) * 2⁻¹ := (add_mul _ _ _).symm             -- 分配律を右辺から左辺へ
-    _ = ((a + d) - (a - d)) * 2⁻¹ := by rw [← sub_eq_add_neg]          -- `def_complex_difference` を右辺から左辺へ
+    _ = ((a + d) - (a - d)) * 2⁻¹ := by rw [← complex_sub_eq_add_neg]  -- `def_complex_difference` を右辺から左辺へ
     _ = (2 * d) * 2⁻¹ := by rw [complex_sum_sub_difference a d]         -- `sum_minus_difference_is_twice_second_in_cc`（`a → a₁₁, b → a₂₂`）
     _ = d := complex_two_mul_mul_inv_two d                               -- `twice_times_inverse_of_two_is_original_in_cc`（`z → a₂₂`）
 

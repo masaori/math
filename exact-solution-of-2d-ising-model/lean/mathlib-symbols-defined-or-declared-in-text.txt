@@ -40,3 +40,9 @@ HAdd.hAdd@Complex,Complex,Complex@Complex.instAdd	definition_of_cc
 HMul.hMul@Complex,Complex,Complex@Complex.instMul	definition_of_cc
 Complex.I	def_imaginary_unit
 Complex.ofReal	inclusion_rr_to_cc
+#
+# ℂ の符号反転: multiply_by_minus_one が -z := (-1_ℂ)·z（-1_ℂ は (-1)_ℂ）と定める。mathlib の ℂ の符号反転は成分ごとの式で、
+# 人手の式とは定義として等しくないが、一致を補題一本 complex_neg_eq_ofReal_neg_one_mul（DefinitionComplexNegationAndDifference.lean）で示した。
+Neg.neg@Complex@Complex.instNeg	multiply_by_minus_one
+# ℂ の差: def_complex_difference が z − w := z + (−w) と定める。Lean の ℂ の差もこの式と定義として等しい（complex_sub_eq_add_neg。rfl）。
+HSub.hSub@Complex,Complex,Complex@Complex.instSub	def_complex_difference

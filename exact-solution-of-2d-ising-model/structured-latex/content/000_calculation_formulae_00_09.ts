@@ -2234,16 +2234,37 @@ T_B(X - W)
     origin: { path: "_old/typst/parts/000_計算公式/008_definition_マイナス1倍.typ", ordinal: 9 },
     title: { tex: "-1\\text{倍}" },
     labels: ["multiply_by_minus_one"],
+    lean: ["Ising2D.complex_neg_eq_ofReal_neg_one_mul"],
     statement: [
       paragraph([math("z\\in\\mathbb{C}"), " について、"]),
       displayMath("-z:=(-1_{\\mathbb{C}})\\cdot z"),
+      paragraph([
+        "と定める。右辺の ",
+        math(String.raw`-1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " の ",
+        math(String.raw`r = -1`),
+        "、積は ",
+        ref("definition_of_cc"),
+        " の積である。",
+      ]),
     ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-11-22（Lean の点検の直し）: 右辺の -1_ℂ が何であるかを書いていなかったので、minus_one_times_minus_one_is_one_in_cc と同じく inclusion_rr_to_cc の略記 r_ℂ の r = -1 であること、積が definition_of_cc の積であることを書き足した。定義の中身は変えていない。",
+      ],
+    },
   },
   {
     id: "calc_formulae_008b_definition_complex_difference",
     kind: "definition",
     title: { text: "複素数の差" },
     labels: ["def_complex_difference"],
+    lean: ["Ising2D.complex_sub_eq_add_neg"],
     statement: [
       paragraph([
         math(String.raw`z, w \in \mathbb{C}`),

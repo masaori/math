@@ -4,7 +4,7 @@
 具体版 `ClaimSumPlusAndMinusDifferenceInCC.lean` の主張を、必要十分版
 `Ising2D/NecSuf/SumPlusAndMinusDifference.lean` の係数 `R := ℂ`・`two := 2_ℂ` の特殊化として得る。
 人手のラベルは `sum_plus_difference_is_twice_first_in_cc`・`sum_minus_difference_is_twice_second_in_cc`。
-仮定 `hsub`・`hleft` は `ClaimDoubleNegationAndReversedDifferenceInCCFromNecSuf.lean` の `complex_sub_eq_add_neg`・`complex_one_mul`、
+仮定 `hsub` は `DefinitionComplexNegationAndDifference.lean` の `complex_sub_eq_add_neg`（人手 `def_complex_difference` の具体版）、`hleft` は `ClaimDoubleNegationAndReversedDifferenceInCCFromNecSuf.lean` の `complex_one_mul`、
 `hneg`・`hmm` は `ClaimMatrixDoubleNegationFromNecSuf.lean` の `complex_neg_eq_neg_one_mul`・`complex_neg_one_mul_neg_one`、
 `htwo` は `ClaimOnePlusOneIsTwoInCC.lean` の `complex_one_add_one`、`hinv`・`hzero` はこのファイルで与える。
 -/
