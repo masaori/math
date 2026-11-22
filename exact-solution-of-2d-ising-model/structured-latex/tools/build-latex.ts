@@ -264,9 +264,9 @@ ${DIAGRAM_TIKZ_PREAMBLE}
 \\usepackage{xeCJK}
 \\setCJKmainfont{${cjkMainFont}}
 \\setCJKsansfont{${cjkSansFont}}
-% 欧文フォントに無い記号（★ = 実数解析への移行点の印、′ = 章 C' のプライム、⇒ ⇐ = 同値の証明の向き）は
-% 和文フォント側で組む。指定が無いと**無言で消える**（実測: Missing character 3 件）。
-\\xeCJKDeclareCharClass{CJK}{"2605, "2032, "2033, "21D0, "21D2}
+% 欧文フォントに無い記号（★ = 実数解析への移行点の印、′ = 章 C' のプライム、⇒ ⇐ = 同値の証明の向き、
+% ブロックの題の平文に書く ε π ≤ ≥ と句読点「、」「。」）は和文フォント側で組む。指定が無いと**無言で消える**。
+\\xeCJKDeclareCharClass{CJK}{"2605, "2032, "2033, "21D0, "21D2, "03B5, "03C0, "2264, "2265, "3001, "3002}
 \\usepackage[hidelinks]{hyperref}
 \\usepackage[nameinlink]{cleveref}
 

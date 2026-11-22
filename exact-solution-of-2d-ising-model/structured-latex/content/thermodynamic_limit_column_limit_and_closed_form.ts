@@ -964,7 +964,7 @@ w
   {
     id: "maxeig_claim_epsilon_real_fixes_sum_of_vector_and_its_image",
     kind: "claim",
-    title: { text: "成分が u_k + (ε_ℝu)_k のベクトルは ε_ℝ を掛けても変わらない" },
+    title: { tex: "\\text{成分が }u_k+(\\varepsilon_{\\mathbb{R}}u)_k\\text{ のベクトルは }\\varepsilon_{\\mathbb{R}}\\text{ を掛けても変わらない}" },
     labels: ["epsilon_real_fixes_sum_of_vector_and_its_image"],
     lean: ["Ising2D.epsilon_real_fixes_sum_of_vector_and_its_image"],
     statement: [
@@ -1503,7 +1503,7 @@ w
   {
     id: "maxeig_claim_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero",
     kind: "claim",
-    title: { text: "成分が非負で 0 でないベクトル u について、成分が u_k + (ε_ℝu)_k のベクトルは 0 でない" },
+    title: { tex: "\\text{成分が非負で }0\\text{ でないベクトル }u\\text{ について、成分が }u_k+(\\varepsilon_{\\mathbb{R}}u)_k\\text{ のベクトルは }0\\text{ でない}" },
     labels: ["sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero"],
     lean: ["Ising2D.sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero"],
     statement: [
@@ -1783,7 +1783,7 @@ k
   {
     id: "maxeig_claim_norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four",
     kind: "claim",
-    title: { text: "‖u‖ = 1 のとき、成分が u_k + (ε_ℝu)_k のベクトル v について ‖v‖^2 ≤ 4" },
+    title: { tex: "\\lVert u\\rVert=1\\text{ のとき、成分が }u_k+(\\varepsilon_{\\mathbb{R}}u)_k\\text{ のベクトル }v\\text{ について }\\lVert v\\rVert^2\\le 4" },
     labels: ["norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four"],
     lean: ["Ising2D.norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four"],
     statement: [
@@ -2833,7 +2833,7 @@ c_+(M_{\mathrm{col}})
   {
     id: "maxeig_claim_W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice",
     kind: "claim",
-    title: { text: "成分が非負のベクトル u について、成分が u_k + (ε_ℝu)_k のベクトル v は v^⊤W_ℝv ≥ 2(u^⊤W_ℝu) を満たす" },
+    title: { tex: "\\text{成分が非負のベクトル }u\\text{ について、成分が }u_k+(\\varepsilon_{\\mathbb{R}}u)_k\\text{ のベクトル }v\\text{ は }v^{\\top}W_{\\mathbb{R}}v\\ge 2(u^{\\top}W_{\\mathbb{R}}u)\\text{ を満たす}" },
     labels: ["W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice"],
     lean: ["Ising2D.W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice"],
     statement: [

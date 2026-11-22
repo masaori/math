@@ -99,7 +99,7 @@ export default defineBlocks([
   {
     id: "maxeig_claim_real_bilinear_value_of_symmetric_matrix_is_symmetric",
     kind: "claim",
-    title: { text: "対称な実数の行列について、u^⊤Pv と v^⊤Pu は等しい" },
+    title: { tex: "\\text{対称な実数の行列について、}u^{\\top}Pv\\text{ と }v^{\\top}Pu\\text{ は等しい}" },
     labels: ["real_bilinear_value_of_symmetric_matrix_is_symmetric"],
     statement: [
       paragraph([
@@ -157,7 +157,7 @@ u^\top Pv
   {
     id: "maxeig_claim_real_bilinear_value_is_additive_in_right_vector",
     kind: "claim",
-    title: { text: "右のベクトルが成分ごとの和なら、実数の双線型値 x^⊤Pw は和に分かれる" },
+    title: { tex: "\\text{右のベクトルが成分ごとの和なら、実数の双線型値 }x^{\\top}Pw\\text{ は和に分かれる}" },
     labels: ["real_bilinear_value_is_additive_in_right_vector"],
     statement: [
       paragraph([
@@ -227,7 +227,7 @@ x^\top Pw
   {
     id: "maxeig_claim_real_bilinear_value_is_additive_in_left_vector",
     kind: "claim",
-    title: { text: "左のベクトルが成分ごとの和なら、実数の双線型値 w^⊤Px は和に分かれる" },
+    title: { tex: "\\text{左のベクトルが成分ごとの和なら、実数の双線型値 }w^{\\top}Px\\text{ は和に分かれる}" },
     labels: ["real_bilinear_value_is_additive_in_left_vector"],
     statement: [
       paragraph([
@@ -300,7 +300,7 @@ w^\top Px
     id: "maxeig_claim_real_bilinear_value_with_nonnegative_entries_is_nonnegative",
     kind: "claim",
     title: {
-      text: "成分が非負の実数の行列と、成分が非負の二つの実数のベクトルについて、x^⊤Py は非負である",
+      tex: "\\text{成分が非負の実数の行列と、成分が非負の二つの実数のベクトルについて、}x^{\\top}Py\\text{ は非負である}",
     },
     labels: ["real_bilinear_value_with_nonnegative_entries_is_nonnegative"],
     statement: [
@@ -389,7 +389,7 @@ x^\top Py
     id: "maxeig_claim_real_bilinear_value_of_scalar_multiple_vector",
     kind: "claim",
     title: {
-      text: "ベクトルを実数倍すると、実数の双線型値 w^⊤Pw はその実数どうしの積の倍になる",
+      tex: "\\text{ベクトルを実数倍すると、実数の双線型値 }w^{\\top}Pw\\text{ はその実数どうしの積の倍になる}",
     },
     labels: ["real_bilinear_value_of_scalar_multiple_vector"],
     statement: [
@@ -479,7 +479,7 @@ w^\top Pw
     id: "maxeig_claim_real_bilinear_value_is_sum_with_real_matrix_vector_product",
     kind: "claim",
     title: {
-      text: "実数の双線型値 u^⊤Pv は、u の成分と Pv の成分の積の和である",
+      tex: "\\text{実数の双線型値 }u^{\\top}Pv\\text{ は、}u\\text{ の成分と }Pv\\text{ の成分の積の和である}",
     },
     labels: ["real_bilinear_value_is_sum_with_real_matrix_vector_product"],
     statement: [
@@ -619,7 +619,7 @@ u^\top Pv
     id: "maxeig_claim_real_bilinear_value_at_most_value_at_absolute_vector",
     kind: "claim",
     title: {
-      text: "成分が非負の実数の行列について、x^⊤Px は成分の絶対値を並べたベクトルでの値以下である",
+      tex: "\\text{成分が非負の実数の行列について、}x^{\\top}Px\\text{ は成分の絶対値を並べたベクトルでの値以下である}",
     },
     labels: ["real_bilinear_value_at_most_value_at_absolute_vector"],
     statement: [

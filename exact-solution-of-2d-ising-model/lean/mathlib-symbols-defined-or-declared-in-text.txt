@@ -12,3 +12,15 @@ Real	set_and_algebra_notation
 HAdd.hAdd@Real,Real,Real@Real.instAdd	set_and_algebra_notation
 HMul.hMul@Real,Real,Real@Real.instMul	set_and_algebra_notation
 Neg.neg@Real@Real.instNeg	set_and_algebra_notation
+#
+# 論理と等号の記号: 等号・論理結合子・量化子・偽の命題と ≠ を外から持ち込み、証明が使う規則（等号の反射律・対称律・推移律・代入、
+# 直積の元と写像の等号の成分ごと・点ごとの判定、各結合子の導入と除去、排中律）を列挙している。≠ は ¬(a = b)、¬P は P ⇒ ⊥ と書いており、Lean の Ne・Not の定義と同じ形である。
+Eq	set_and_algebra_notation
+Ne	set_and_algebra_notation
+And	set_and_algebra_notation
+Or	set_and_algebra_notation
+Not	set_and_algebra_notation
+Iff	set_and_algebra_notation
+Exists	set_and_algebra_notation
+# False（本文の ⊥）は 2026-11-22 の時点で具体版の定義と主張に現れないが、本文が宣言したので載せておく。
+False	set_and_algebra_notation

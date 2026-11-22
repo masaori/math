@@ -112,6 +112,89 @@ export default defineBlocks([
         " の加法の交換律」などと引くのは、この一覧の該当する行である。",
       ]),
       paragraph([
+        "命題をつなぐ論理の記号（否定 ",
+        math(String.raw`\neg`),
+        "、かつ ",
+        math(String.raw`\wedge`),
+        "、または ",
+        math(String.raw`\vee`),
+        "、ならば ",
+        math(String.raw`\Rightarrow`),
+        "、同値 ",
+        math(String.raw`\Leftrightarrow`),
+        "、偽の命題 ",
+        math(String.raw`\bot`),
+        "）、量化子（任意の ",
+        math(String.raw`\forall`),
+        "、存在する ",
+        math(String.raw`\exists`),
+        "）と、一つの集合の二つの元の等号 ",
+        math(String.raw`=`),
+        " は、この論文では定義せず外から持ち込む。証明が使う性質は次の規則だけである。任意の集合 ",
+        math(String.raw`X,\ Y`),
+        "、元 ",
+        math(String.raw`a,b,c\in X`),
+        "、",
+        math(String.raw`a',b'\in Y`),
+        "、写像 ",
+        math(String.raw`f,g:X\to Y`),
+        "、命題 ",
+        math(String.raw`P,\ Q,\ R`),
+        "、",
+        math(String.raw`X`),
+        " の元についての命題 ",
+        math(String.raw`\varphi(x)`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&a=a
+&&\text{（等号の反射律）},\\
+&a=b\ \Rightarrow\ b=a
+&&\text{（等号の対称律）},\\
+&(a=b\ \wedge\ b=c)\ \Rightarrow\ a=c
+&&\text{（等号の推移律）},\\
+&a=b\ \Rightarrow\ f(a)=f(b),\qquad (a=b\ \wedge\ \varphi(a))\ \Rightarrow\ \varphi(b)
+&&\text{（等しいものの代入）},\\
+&(a,a')=(b,b')\ \Leftrightarrow\ (a=b\ \wedge\ a'=b')
+&&\text{（直積の元の等号は成分ごとの等号）},\\
+&f=g\ \Leftrightarrow\ (\forall x\in X,\ f(x)=g(x))
+&&\text{（写像の等号は全ての点での値の等号）},\\
+&A=B\ \Leftrightarrow\ \bigl(\forall i\in\{1,\dots,m\},\ \forall j\in\{1,\dots,n\},\ A_{ij}=B_{ij}\bigr)\quad (A,B\in\mathrm{Mat}(m,n,\mathbb{C}))
+&&\text{（行列の等号は成分ごとの等号）},\\
+&(P\wedge Q)\ \Rightarrow\ P,\qquad (P\wedge Q)\ \Rightarrow\ Q,\qquad P\ \text{と}\ Q\ \text{から}\ P\wedge Q
+&&\text{（かつの除去と導入）},\\
+&P\ \Rightarrow\ (P\vee Q),\qquad Q\ \Rightarrow\ (P\vee Q),\qquad
+\bigl((P\vee Q)\wedge(P\Rightarrow R)\wedge(Q\Rightarrow R)\bigr)\ \Rightarrow\ R
+&&\text{（またはの導入と場合分け）},\\
+&\bigl(P\wedge(P\Rightarrow Q)\bigr)\ \Rightarrow\ Q,\qquad P\ \text{を仮定して}\ Q\ \text{を導けば}\ P\Rightarrow Q
+&&\text{（ならばの除去と導入）},\\
+&(P\Leftrightarrow Q)\ :\Leftrightarrow\ \bigl((P\Rightarrow Q)\wedge(Q\Rightarrow P)\bigr)
+&&\text{（同値）},\\
+&\bot\ \Rightarrow\ P
+&&\text{（偽からは任意の命題が従う）},\\
+&\neg P\ :\Leftrightarrow\ (P\Rightarrow\bot)
+&&\text{（否定）},\\
+&P\vee\neg P
+&&\text{（排中律）},\\
+&a\neq b\ :\Leftrightarrow\ \neg(a=b)
+&&\text{（等号の否定）},\\
+&(\forall x\in X,\ \varphi(x))\ \Rightarrow\ \varphi(a),\qquad
+\text{仮定に現れない}\ x\in X\ \text{について}\ \varphi(x)\ \text{を導けば}\ \forall x\in X,\ \varphi(x)
+&&\text{（任意の除去と導入）},\\
+&\varphi(a)\ \Rightarrow\ (\exists x\in X,\ \varphi(x)),\qquad
+\bigl((\exists x\in X,\ \varphi(x))\wedge(\forall x\in X,\ (\varphi(x)\Rightarrow Q))\bigr)\ \Rightarrow\ Q\ \ (Q\ \text{は}\ x\ \text{を含まない})
+&&\text{（存在の導入と除去）}.
+\end{aligned}`),
+      paragraph([
+        "否定の定義とならばの除去から、",
+        math(String.raw`P`),
+        " と ",
+        math(String.raw`\neg P`),
+        " からは ",
+        math(String.raw`\bot`),
+        " が従う。背理法と、対偶からもとの命題を得る推論は、排中律と場合分けから従う。等号は同じ集合の二つの元のあいだにだけ書く。本文の証明で「等号の対称律」などと引くのは、この一覧の該当する行である。",
+      ]),
+      paragraph([
         math(String.raw`\mathbb{Z}_{\ge k}`),
         "、",
         math(String.raw`\mathbb{R}_{\ge 0}`),
@@ -134,6 +217,7 @@ export default defineBlocks([
       notes: [
         "main.md 冒頭の記号方針を、集合と代数構造を混同しない本文定義として追加した。複素数は既存定義と重複させていない。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認）: ℝ を「順序体」とだけ書いて体の等式を並べていなかったので、本文の証明が「ℝ の加法の交換律 p + q = q + p（set_and_algebra_notation）」のように引く等式（加法・乗法の結合律と交換律、単位元と逆元の左右両側、分配律の左右両側、0_ℝ ≠ 1_ℝ）を名前つきで並べた。引く側が使う別名（加法の可換律、和の可換律、積の結合律、乗法の交換律、積の可換律）も挙げた。一覧の −x と x^{-1} が写像の値であることを示すため、組に符号反転 −_ℝ と逆数 (·)^{-1}_ℝ を足して型を宣言した（逆元の一意性の主張に頼らない）。順序の公理の形と < の定義はまだ並べていない。",
+        "2026-11-22（Lean の点検の直し、未定義の記号）: 本文の証明が名前だけで引いていた等号の反射律・対称律・推移律と、論理の記号（¬・∧・∨・⇒・⇔・⊥・∀・∃）と ≠ を、外から持ち込むと宣言し、証明が使う規則（直積の元の等号は成分ごと、写像の等号は点ごと、を含む）を名前つきで並べた。本文の証明が引く「行列の等号は成分ごと」も、行列の集合 Mat(m,n,ℂ) を定める定義のブロックがまだ無いので、外から持ち込む規則としてここに並べた。新しいブロックにせずここに足したのは、一対一の検査で対応する具体版の宣言の無いブロックを増やさないためである。",
       ],
     },
   },
