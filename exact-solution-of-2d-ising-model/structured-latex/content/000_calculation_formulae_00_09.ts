@@ -226,6 +226,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "実数の差" },
     labels: ["def_real_difference"],
+    lean: ["Ising2D.real_sub_eq_add_neg"],
     statement: [
       paragraph([
         math(String.raw`y, z \in \mathbb{R}`),
@@ -1266,6 +1267,7 @@ T_B(X - W)
     origin: { path: "_old/typst/parts/000_計算公式/006_definition_CCの定義.typ", ordinal: 7 },
     title: { tex: "\\mathbb{C}\\text{の定義}" },
     labels: ["definition_of_cc"],
+    lean: ["Ising2D.complex_mk_eq_mk_iff", "Ising2D.complex_mk_add_mk", "Ising2D.complex_mk_mul_mk"],
     statement: [
       paragraph([ref("set_and_algebra_notation"), " の実数の台集合と演算を使う。"]),
       paragraph([math(String.raw`\mathbf{C}:=\mathbf{R}^2`), " を複素数の台集合とし、その上に以下の演算を入れた構造を ", math(String.raw`\mathbb C`), " と書く。"]),
@@ -1289,6 +1291,7 @@ T_B(X - W)
     kind: "definition",
     title: { tex: String.raw`\text{虚数単位}` },
     labels: ["def_imaginary_unit"],
+    lean: ["Ising2D.complex_I_eq_mk"],
     statement: [
       paragraph([
         ref("set_and_algebra_notation"),
@@ -1316,6 +1319,7 @@ T_B(X - W)
     origin: { path: "_old/typst/parts/000_計算公式/007_definition_RRからCCへの包含写像.typ", ordinal: 8 },
     title: { tex: "\\mathbb{R}\\to\\mathbb{C}\\text{の包含写像}" },
     labels: ["inclusion_rr_to_cc"],
+    lean: ["Ising2D.complex_ofReal_eq_mk"],
     statement: [
       paragraph([math("\\iota_{\\mathbb{R}\\to\\mathbb{C}}:\\mathbb{R}\\to\\mathbb{C}"), " を"]),
       displayMath("\\iota_{\\mathbb{R}\\to\\mathbb{C}}(x):=(x,0)"),

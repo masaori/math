@@ -24,3 +24,19 @@ Iff	set_and_algebra_notation
 Exists	set_and_algebra_notation
 # False（本文の ⊥）は 2026-11-22 の時点で具体版の定義と主張に現れないが、本文が宣言したので載せておく。
 False	set_and_algebra_notation
+#
+# ℝ の零元と単位元: set_and_algebra_notation が ℝ の構造の一部として 0_ℝ・1_ℝ を外から持ち込み、体の公理で使う性質を列挙している。
+OfNat.ofNat@Real,0@Zero.toOfNat0	set_and_algebra_notation
+OfNat.ofNat@Real,1@One.toOfNat1	set_and_algebra_notation
+# ℝ の差: def_real_difference が y − z := y + (−z) と定める。Lean の ℝ の差も y + -z と定義として等しい（real_sub_eq_add_neg。rfl）。
+HSub.hSub@Real,Real,Real@Real.instSub	def_real_difference
+#
+# ℂ とその和・積、虚数単位、ℝ から ℂ への包含写像: 本文が定義し、mathlib の定義が本文の定義の式と定義として等しい
+# （DefinitionComplexNumbers.lean の complex_mk_eq_mk_iff・complex_mk_add_mk・complex_mk_mul_mk・complex_I_eq_mk・complex_ofReal_eq_mk）。
+# Lean の ℂ は実部と虚部の二つの ℝ を欄に持つ構造体で、本文の (a, b) ∈ 𝐑² は構成子 ⟨a, b⟩（Complex.mk）である。
+Complex	definition_of_cc
+Complex.mk	definition_of_cc
+HAdd.hAdd@Complex,Complex,Complex@Complex.instAdd	definition_of_cc
+HMul.hMul@Complex,Complex,Complex@Complex.instMul	definition_of_cc
+Complex.I	def_imaginary_unit
+Complex.ofReal	inclusion_rr_to_cc
