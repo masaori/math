@@ -46,8 +46,8 @@ theorem acomm_comm (a b : R) : acomm a b = acomm b a := by
 theorem sub_mul_comm_eq_lie (a b : R) : a * b - b * a = ⁅a, b⁆ :=
   (Ring.lie_def a b).symm
 
-/-- **`<commutator_via_anticommutators>` の形式化**:
-`[a b, c] = a [b, c]₊ - [a, c]₊ b`。
+/-- 任意の環 `R` の上の `[a b, c] = a [b, c]₊ - [a, c]₊ b`（本文 `commutator_via_anticommutators` の具体版は下の
+`matComm_mul_eq_matAcomm_sub_matAcomm`）。
 
 原文の証明（右辺を反交換子の定義で展開し、分配律・結合律で整理する）と同じ内容を
 `noncomm_ring`（非可換環の正規化）で実行する。 -/

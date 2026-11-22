@@ -7,6 +7,7 @@ export default defineBlocks([
     origin: { path: "_old/typst/parts/000_計算公式/045_claim_共役写像は環準同型.typ", ordinal: 46 },
     title: { text: "共役写像は環準同型" },
     labels: ["conjugation_is_ring_homomorphism"],
+    lean: ["Ising2D.Conjugation.conj_mul_matrix", "Ising2D.Conjugation.conj_one_matrix", "Ising2D.Conjugation.conj_comp_matrix", "Ising2D.Conjugation.conj_comp_matrix_of_chains", "Ising2D.Conjugation.mul_mul_inv_rev_matrix", "Ising2D.Conjugation.inv_rev_mul_mul_matrix", "Ising2D.Conjugation.units_mul_inv_rev_matrix"],
     statement: [
       paragraph([math(String.raw`n \in \mathbb{Z}_{\geq 1}`), " とする。"]),
       paragraph([
@@ -215,6 +216,7 @@ T_B(I)
     origin: { path: "_old/typst/parts/000_計算公式/046_claim_交換子と反交換子の関係.typ", ordinal: 47 },
     title: { text: "交換子と反交換子の関係" },
     labels: ["commutator_via_anticommutators"],
+    lean: ["Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -256,6 +258,7 @@ T_B(I)
     kind: "definition",
     title: { text: "行列の差" },
     labels: ["def_matrix_difference"],
+    lean: ["Ising2D.matrix_sub_apply", "Ising2D.vec_sub_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -289,6 +292,7 @@ T_B(I)
     kind: "definition",
     title: { text: "零行列" },
     labels: ["def_zero_matrix"],
+    lean: ["Ising2D.matrix_zero_apply", "Ising2D.vec_zero_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -318,6 +322,7 @@ T_B(I)
     kind: "definition",
     title: { text: "行列の符号反転" },
     labels: ["def_matrix_negation"],
+    lean: ["Ising2D.matrix_neg_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -349,6 +354,7 @@ T_B(I)
     kind: "claim",
     title: { text: "行列の差が零行列であることと等しいことの同値" },
     labels: ["matrix_difference_zero_iff_equal"],
+    lean: ["Ising2D.matrix_sub_eq_zero_iff", "Ising2D.vec_sub_eq_zero_iff"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -407,6 +413,7 @@ T_B(I)
     kind: "claim",
     title: { text: "行列の差と数ベクトルの積の分配律" },
     labels: ["matrix_difference_mul_vector"],
+    lean: ["Ising2D.sub_mulVec_eq", "Ising2D.sub_mulVec_eq_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -515,6 +522,7 @@ T_B(I)
     kind: "definition",
     title: { text: "固有ベクトル" },
     labels: ["def_eigenvector"],
+    lean: ["Ising2D.IsEigenvector"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -563,6 +571,7 @@ T_B(I)
     kind: "definition",
     title: { text: "固有値" },
     labels: ["def_eigenvalue"],
+    lean: ["Ising2D.IsEigenvalue"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -599,6 +608,7 @@ T_B(I)
     kind: "definition",
     title: { text: "単純固有値" },
     labels: ["def_simple_eigenvalue"],
+    lean: ["Ising2D.IsSimpleEigenvalue", "Ising2D.eigenSubspace"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -662,6 +672,7 @@ T_B(I)
     kind: "definition",
     title: { tex: String.raw`2 \times 2 \text{ 行列の行列式}` },
     labels: ["def_det_two_by_two"],
+    lean: ["Ising2D.det_two_by_two_def"],
     statement: [
       paragraph([
         math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
@@ -688,6 +699,7 @@ T_B(I)
     kind: "claim",
     title: { tex: String.raw`2 \times 2 \text{ 行列が } 0 \text{ でないベクトルを } 0 \text{ へ送ることと行列式が } 0 \text{ であることの同値}` },
     labels: ["nonzero_kernel_iff_det_zero_two_by_two"],
+    lean: ["Ising2D.exists_ne_zero_mulVec_eq_zero_iff_det_fin_two"],
     statement: [
       paragraph([
         math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
@@ -950,6 +962,7 @@ T_B(I)
     kind: "definition",
     title: { tex: String.raw`2 \times 2 \text{ 行列の余因子行列}` },
     labels: ["def_adjugate_two_by_two"],
+    lean: ["Ising2D.adjTwo"],
     statement: [
       paragraph([
         math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
@@ -982,6 +995,7 @@ T_B(I)
     kind: "claim",
     title: { tex: String.raw`2 \times 2 \text{ 行列に右から余因子行列を掛けると行列式倍の単位行列になる}` },
     labels: ["matrix_times_adjugate_two_by_two"],
+    lean: ["Ising2D.mul_adjTwo"],
     statement: [
       paragraph([
         math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
@@ -1117,6 +1131,7 @@ T_B(I)
     kind: "claim",
     title: { tex: String.raw`2 \times 2 \text{ 行列に左から余因子行列を掛けると行列式倍の単位行列になる}` },
     labels: ["adjugate_times_matrix_two_by_two"],
+    lean: ["Ising2D.adjTwo_mul"],
     statement: [
       paragraph([
         math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
@@ -1254,6 +1269,7 @@ T_B(I)
     kind: "claim",
     title: { tex: String.raw`\text{行列式が } 0 \text{ でない } 2 \times 2 \text{ 行列の両側逆元}` },
     labels: ["two_sided_inverse_of_two_by_two_with_nonzero_det"],
+    lean: ["Ising2D.two_sided_inverse_of_two_by_two", "Ising2D.mul_detInv_smul_adjTwo", "Ising2D.detInv_smul_adjTwo_mul"],
     statement: [
       paragraph([
         math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),

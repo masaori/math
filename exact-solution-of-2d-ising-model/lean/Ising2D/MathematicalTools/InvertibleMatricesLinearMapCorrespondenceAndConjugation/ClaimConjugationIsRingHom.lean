@@ -254,7 +254,7 @@ theorem inv_rev_mul_mul_matrix (G H : (Matrix (Fin n) (Fin n) ℂ)ˣ) :
         rw [identity_matrix_mul]                                              -- `identity_matrix_is_left_unit_of_mat_mult`
     _ = 1 := H.inv_mul                                                        -- `H^{-1}H = I`
 
-/-- **`conjugation_is_ring_homomorphism` の合成則の準備（`GH` は正則）**: 右逆元・左逆元の 2 本の鎖から組んだ、
+/-- `conjugation_is_ring_homomorphism` の合成則の準備（`GH` は正則）: 右逆元・左逆元の 2 本の鎖から組んだ、
 `GH` を値に、`H^{-1}G^{-1}` を逆元に持つ単元。人手の「`H^{-1}G^{-1}` は `GH` の両側逆元であり、`GH` は正則」。 -/
 def mulUnitOfChains (G H : (Matrix (Fin n) (Fin n) ℂ)ˣ) : (Matrix (Fin n) (Fin n) ℂ)ˣ :=
   ⟨(G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ),
