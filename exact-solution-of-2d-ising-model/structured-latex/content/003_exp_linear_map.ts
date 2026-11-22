@@ -1222,6 +1222,7 @@ s_i
     kind: "claim",
     title: { tex: String.raw`\text{行列の冪の指数法則 } A^{p+q} = A^pA^q` },
     labels: ["matrix_power_exponent_law"],
+    lean: ["Ising2D.matrix_power_exponent_law"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -2657,6 +2658,7 @@ S_N([0]_K)
     kind: "claim",
     title: { text: "実数の有限和の exp は exp の有限積" },
     labels: ["real_exp_of_finite_sum"],
+    lean: ["Ising2D.real_exp_of_finite_sum"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -2726,6 +2728,7 @@ S_N([0]_K)
     origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 10 },
     title: { tex: String.raw`\exp(x) > 0` },
     labels: ["real_exp_positive"],
+    lean: ["Ising2D.real_exp_positive", "Ising2D.real_exp_mul_exp_neg", "Ising2D.real_exp_ne_zero", "Ising2D.real_exp_nonneg"],
     statement: [
       paragraph([
         math(String.raw`x \in \mathbb{R}`),
@@ -3464,6 +3467,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
     origin: { path: "structured-latex/content/000_calculation_formulae_00_09.ts", ordinal: 1 },
     title: { tex: String.raw`\cosh,\ \sinh\text{ の基本性質}` },
     labels: ["cosh_sinh_basic_properties"],
+    lean: ["Ising2D.cosh_sinh_basic_properties_1", "Ising2D.cosh_sinh_basic_properties_2", "Ising2D.cosh_sinh_basic_properties_3", "Ising2D.cosh_sub_sinh_eq_exp_neg", "Ising2D.cosh_add_sinh_eq_exp", "Ising2D.cosh_sub_sinh_pos", "Ising2D.real_cosh_gt_sinh", "Ising2D.two_cosh_pos", "Ising2D.cosh_pos_of_two_cosh_pos", "Ising2D.real_neg_lt_zero_of_pos", "Ising2D.real_exp_neg_lt_one", "Ising2D.real_one_lt_exp", "Ising2D.real_exp_sub_exp_neg_pos", "Ising2D.real_sinh_pos_of_pos"],
     statement: [
       paragraph([
         ref("def_cosh_sinh"), " の ", math(String.raw`x\in\mathbb R`), " における値について、次が成り立つ。",
