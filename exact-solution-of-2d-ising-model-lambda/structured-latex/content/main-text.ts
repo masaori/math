@@ -16107,6 +16107,9 @@ N_{k,l}
 &=\widehat{\iota_{\mathbb Z}\left(\prod_{k\in\mathcal K}\operatorname{sgn}(\tau_k)\right)}
   \prod_{i\in\mathcal J}B_{i,\sigma(i)}
 &&(\because\ \blkref{claim_block_preserving_permutation_sign})\\
+&=\widehat{\prod_{k\in\mathcal K}\iota_{\mathbb Z}(\operatorname{sgn}(\tau_k))}
+  \prod_{i\in\mathcal J}B_{i,\sigma(i)}
+&&(\because\ \iota_{\mathbb Z}\text{ は積を保つ})\\
 &=\left(\prod_{k\in\mathcal K}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau_k))}\right)
   \prod_{i\in\mathcal J}B_{i,\sigma(i)}
 &&(\because\ \blkref{def_qbar_constant_embedding}\text{ は積を保つ})\\

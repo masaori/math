@@ -5,6 +5,6 @@ if not os.path.isfile(prelude):
 load(prelude)
 cases = 0
 for values in term_values():
-    assert values[1] == values[2]
+    assert values[5] == values[2]
     cases += 1
 print(f"PASS: constant embedding, {cases} terms")

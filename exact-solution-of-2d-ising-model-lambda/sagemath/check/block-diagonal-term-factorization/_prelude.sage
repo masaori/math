@@ -29,4 +29,5 @@ def term_values():
                     prod((R(s) for s in signs), R.one()) * full_product,
                     prod(fiber_products, R.one()) * prod((R(s) for s in signs), R.one()),
                     prod((R(s) * p for s, p in zip(signs, fiber_products)), R.one()),
+                    R(prod((QQ(s) for s in signs), QQ.one())) * full_product,
                 )
