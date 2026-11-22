@@ -7,14 +7,15 @@
 四つの隣接交換および先頭を合わせる帰納法を本文どおりに記す。住処は有限集合と ℤ。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.PerfectMatching
-import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 import Mathlib.Data.List.NodupEquivFin
 import Mathlib.Data.Finset.Sort
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign inversionCount orderedPairs)
+open IndependentFiniteOrderedSign (finiteOrderedSign finiteOrderedInversionCount finiteOrderedPairs
+  finiteOrderedSign_comp)
 open Ising2DLambda.KacWard (finiteTranspositionPerm finiteTranspositionPerm_apply
   finiteTransposition_apply_left finiteTransposition_apply_right finiteTransposition_apply_of_ne
   finiteTransposition_sign)
@@ -101,11 +102,11 @@ theorem matchingWordPermutation_apply_get (w : List J) (h : IsCompleteWord w)
 /-- 有効な列の符号。無効な列での零は Lean の全域化だけに用いる。 -/
 noncomputable def matchingWordSign (w : List J) : ℤ := by
   classical
-  exact if h : IsCompleteWord w then sign (fun x y : J => x < y) (matchingWordPermutation w h)
+  exact if h : IsCompleteWord w then finiteOrderedSign (matchingWordPermutation w h)
   else 0
 
 theorem matchingWordSign_eq (w : List J) (h : IsCompleteWord w) :
-    matchingWordSign w = sign (fun x y : J => x < y) (matchingWordPermutation w h) := by
+    matchingWordSign w = finiteOrderedSign (matchingWordPermutation w h) := by
   classical
   simp only [matchingWordSign, dif_pos h]
 
@@ -139,7 +140,7 @@ theorem matchingWordPermutation_map (w : List J) (h : IsCompleteWord w)
 /-- 既存の転倒符号の乗法性を、上の実際の置換の等号へ適用する。 -/
 theorem matchingWordSign_map (w : List J) (h : IsCompleteWord w) (p : Equiv.Perm J) :
     matchingWordSign (w.map p) =
-      sign (fun x y : J => x < y) p * matchingWordSign w := by
+      finiteOrderedSign p * matchingWordSign w := by
   rw [matchingWordSign_eq _ (completeWord_map w h p), matchingWordPermutation_map,
     finiteOrderedSign_comp, matchingWordSign_eq _ h]
 
@@ -187,18 +188,21 @@ theorem matchingWordSign_swap (u : List J) (a b : J) (v : List J)
     exact fun he => (List.nodup_cons.mp hn).1 (List.mem_cons.mpr (Or.inl he))
   calc
     matchingWordSign (u ++ b :: a :: v)
-        = sign (fun x y : J => x < y)
+        = finiteOrderedSign
             (matchingWordPermutation (u ++ b :: a :: v) (completeWord_swap u a b v h)) :=
           matchingWordSign_eq _ _
-    _ = sign (fun x y : J => x < y)
+    _ = finiteOrderedSign
           (finiteTranspositionPerm a b * matchingWordPermutation (u ++ a :: b :: v) h) := by
             rw [matchingWordPermutation_swap]
-    _ = sign (fun x y : J => x < y) (finiteTranspositionPerm a b) *
-          sign (fun x y : J => x < y) (matchingWordPermutation (u ++ a :: b :: v) h) :=
+    _ = finiteOrderedSign (finiteTranspositionPerm a b) *
+          finiteOrderedSign (matchingWordPermutation (u ++ a :: b :: v) h) :=
             finiteOrderedSign_comp _ _
-    _ = (-1) * sign (fun x y : J => x < y)
-          (matchingWordPermutation (u ++ a :: b :: v) h) := by rw [finiteTransposition_sign hab]
-    _ = - sign (fun x y : J => x < y)
+    _ = (-1) * finiteOrderedSign
+          (matchingWordPermutation (u ++ a :: b :: v) h) := by
+            have ht : finiteOrderedSign (finiteTranspositionPerm a b) = -1 :=
+              finiteTransposition_sign hab
+            rw [ht]
+    _ = - finiteOrderedSign
           (matchingWordPermutation (u ++ a :: b :: v) h) := neg_one_mul _
     _ = - matchingWordSign (u ++ a :: b :: v) := by rw [matchingWordSign_eq _ h]
 
@@ -340,12 +344,12 @@ theorem perfectMatchingSign_eq_one_or_neg_one (D : PerfectMatching J) :
     perfectMatchingSign D = 1 ∨ perfectMatchingSign D = -1 := by
   have hc := matchingEnumeration_complete D _ (matchingCanonicalEnumeration_spec D)
   have he : perfectMatchingSign D =
-      (-1 : ℤ) ^ inversionCount (fun x y : J => x < y) (matchingWordPermutation _ hc) :=
+      (-1 : ℤ) ^ finiteOrderedInversionCount (matchingWordPermutation _ hc) :=
     calc
       perfectMatchingSign D = matchingWordSign (matchingPairWord (matchingCanonicalEnumeration D)) :=
         rfl
-      _ = sign (fun x y : J => x < y) (matchingWordPermutation _ hc) := matchingWordSign_eq _ hc
-      _ = (-1 : ℤ) ^ inversionCount (fun x y : J => x < y) (matchingWordPermutation _ hc) := rfl
+      _ = finiteOrderedSign (matchingWordPermutation _ hc) := matchingWordSign_eq _ hc
+      _ = (-1 : ℤ) ^ finiteOrderedInversionCount (matchingWordPermutation _ hc) := rfl
   rw [he]
   exact neg_one_pow_eq_or ℤ _
 
@@ -364,12 +368,12 @@ theorem perfectMatchingSign_empty [IsEmpty J] (D : PerfectMatching J) :
       (matchingEnumeration_complete D _ (matchingCanonicalEnumeration_spec D)) =
         (1 : Equiv.Perm J) := Subsingleton.elim _ _
   calc
-    perfectMatchingSign D = sign (fun x y : J => x < y) (1 : Equiv.Perm J) := by
+    perfectMatchingSign D = finiteOrderedSign (1 : Equiv.Perm J) := by
       rw [perfectMatchingSign, matchingWordSign_eq _
         (matchingEnumeration_complete D _ (matchingCanonicalEnumeration_spec D)), hp]
     _ = (-1 : ℤ) ^ 0 := by
       apply congrArg (fun k : ℕ => (-1 : ℤ) ^ k)
-      simp [inversionCount, orderedPairs]
+      simp [finiteOrderedInversionCount, finiteOrderedPairs]
     _ = 1 := pow_zero _
 
 end Ising2DLambda.AlgebraicEigenvalue

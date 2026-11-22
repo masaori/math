@@ -111,11 +111,13 @@ theorem matchingWordPermutation_baseWord {J : Type*} [Fintype J] [LinearOrder J]
 lemma sign_identity_eq_one {J : Type*} [Fintype J] [LinearOrder J] :
     sign (fun x y : J => x < y) (1 : Equiv.Perm J) = 1 := by
   have hinv : inversionCount (fun x y : J => x < y) (1 : Equiv.Perm J) = 0 := by
-    rw [inversionCount, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+    rw [NecSuf.AlgebraicEigenvalue.inversionCount, Finset.card_eq_zero,
+      Finset.filter_eq_empty_iff]
     intro p hp
-    have hlt : p.1 < p.2 := by simpa [orderedPairs] using hp
+    have hlt : p.1 < p.2 := by
+      simpa [NecSuf.AlgebraicEigenvalue.orderedPairs] using hp
     exact lt_asymm hlt
-  rw [sign, hinv, pow_zero]
+  rw [NecSuf.AlgebraicEigenvalue.sign, hinv, pow_zero]
 
 /-- 本文の符号の二等号。sgn(𝒟₀) = sgn(id) = 1。 -/
 theorem referenceLongMatching_sign (L : ℕ) :
