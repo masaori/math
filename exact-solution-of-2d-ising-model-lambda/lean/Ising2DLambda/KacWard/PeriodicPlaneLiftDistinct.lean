@@ -7,7 +7,7 @@
 商を区別し、最後に商余り表示から整数添字を復元する。住処は ℕ・ℤ と有限剰余環であり、
 ℝ / ℂ は現れない。
 -/
-import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftDistinct
+import Mathlib
 import Mathlib.Data.ZMod.Basic
 import Mathlib.Tactic
 

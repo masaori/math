@@ -12,8 +12,6 @@ import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
-
 /-- `def_winding_transverse_coordinate`。巻き付きベクトルに直交する整数座標。 -/
 def windingTransverseCoordinate (wh wv : ℤ) : (ℤ × ℤ) →+ ℤ where
   toFun p := wh * p.1 - wv * p.2

@@ -7,12 +7,9 @@
 巻き付きに平行な整数座標で読む。住処は ℤ だけであり、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.KacWard.PeriodicPlaneLiftTransverseBounded
-import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftParallelIncrease
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `def_winding_parallel_coordinate`。巻き付きベクトルに平行な整数座標。 -/
 def windingParallelCoordinate (wv wh : ℤ) : (ℤ × ℤ) →+ ℤ where
@@ -59,8 +56,8 @@ theorem periodicPlaneLift_parallelCoordinate_add_period
     exact Int.add_emod_right k (m : ℤ)
   rw [show (k + m : ℤ) = k + (m : ℤ) by rfl]
   simp only [periodicPlaneLift, hquot, hrem]
-  rw [periodic_lift_coordinate_next_period_necSuf]
-  rw [windingParallelCoordinate_windingShift]
+  rw [add_smul, one_smul, ← add_assoc, map_add,
+    windingParallelCoordinate_windingShift]
 
 /-- 非零巻き付きと正の格子幅の下で、一周期の平行座標の増分は正である。 -/
 theorem windingParallelCoordinate_windingShift_pos

@@ -1,4 +1,7 @@
 ## 2026-11-22 に移動した記録
+2026-11-22（並列・二十四回目）: 離散 Whitney 系の階段の点族の補題を具体版で示した。接続階段の当たり歩数の集合を本文どおり具体版で定義し、反復横断階段と周期並進の分離は具体版の中で平行座標の差を直接評価した。具体版の三ファイル（`FirstHitConnectingStaircase`・`ParallelStaircaseTransverseWidth`・`PeriodTranslatesOfIteratedStaircase`）から必要十分版の import を外した。分離の台帳は 396 行から 391 行。lake build・check-no-sorry・分離・一般論の検査・npm run check・build:pdf・verify-check-linkage 通過。
+
+## 2026-11-22 に移動した記録
 2026-11-21（並列・二十三回目）: 離散 Whitney 系の一側閉包の四区間の道・四部分の閉包・接合対を具体版の定義として `KacWard/OneSidedClosureFourParts.lean` に置き（値は ℤ×ℤ）、具体版の四ファイルから必要十分版の import を外した。具体版 `OneSidedClosureNonbacktracking` が使っていた必要十分版の補題も具体版の補題に替えた。分離の台帳は 408 行から 396 行（宣言 8、import 4 が消えた）。lake build・check-no-sorry・分離・一般論の検査・npm run check・build:pdf・verify-check-linkage 通過。
 2026-11-21（主経路）: 論文の証明中の主張引用と Lean の追跡済み依存を突き合わせる差分台帳と検査を置いた。具体版を登録した 874 件のうち 519 件が完全一致し、差分は引用元・引用先の組で論文側のみ 310 行、Lean 側のみ 452 行。自然数の積の可換性を本文で独立した等式にした。lake build・check-no-sorry・分離・一般論の検査・npm run check・verify-check-linkage 通過。SageMath は本体未設置で再実行していない。
 2026-11-21（並列・二十二回目）: 離散 Whitney 系の二相の階段・順序付き二相の階段・反復階段を具体版の定義として `KacWard/Staircase.lean` に置き（点は ℤ×ℤ）、具体版の六ファイルから必要十分版の import を外した。分離の台帳は 432 行から 408 行（宣言 18、import 6 が消えた）。lake build・check-no-sorry・分離・一般論の検査・npm run check・build:pdf・verify-check-linkage 通過。

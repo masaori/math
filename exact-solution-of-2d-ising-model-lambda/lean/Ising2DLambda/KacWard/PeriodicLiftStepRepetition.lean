@@ -2,8 +2,6 @@ import Ising2DLambda.KacWard.PeriodicPlaneLiftDistinct
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
-
 theorem periodicPlaneLift_translate
     (m L : ℕ) (hm : 0 < m) (base : ℤ → ℤ × ℤ) (wv wh j a : ℤ) :
     periodicPlaneLift m base L wv wh (j + a * m) =

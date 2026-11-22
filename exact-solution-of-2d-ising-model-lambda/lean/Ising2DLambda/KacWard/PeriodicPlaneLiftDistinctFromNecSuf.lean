@@ -5,6 +5,7 @@
 必要十分版へ渡す。
 -/
 import Ising2DLambda.KacWard.PeriodicPlaneLiftDistinct
+import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftDistinct
 
 namespace Ising2DLambda.KacWard
 
@@ -15,7 +16,15 @@ theorem periodicPlaneLift_injective_from_necSuf
     (hbase : ∀ k k' : ℤ,
       residuePoint L (base (k % (m : ℤ))) = residuePoint L (base (k' % (m : ℤ))) →
         k % (m : ℤ) = k' % (m : ℤ)) :
-    Function.Injective (periodicPlaneLift m base L wv wh) :=
-  periodicPlaneLift_injective m L hm hL base wv wh hwind hbase
+    Function.Injective (periodicPlaneLift m base L wv wh) := by
+  have hcore := Ising2DLambda.NecSuf.KacWard.periodic_lift_injective_necSuf
+    base (windingShift L wv wh) (fun k : ℤ => k / (m : ℤ)) (fun k : ℤ => k % (m : ℤ))
+    (residuePoint L)
+    (fun r q => residuePoint_add_windingShift L (base r) q wv wh)
+    hbase
+    (windingShift_zsmul_eq_zero_imp L hL wv wh hwind)
+    (edivEmodPair_injective m hm)
+  intro k k' heq
+  exact hcore heq
 
 end Ising2DLambda.KacWard
