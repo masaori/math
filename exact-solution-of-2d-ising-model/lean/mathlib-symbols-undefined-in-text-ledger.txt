@@ -13741,7 +13741,6 @@ Ising2D.riemann_sum_to_integral	Finset.Icc@Nat@Nat.instPreorder,Nat.instLocallyF
 Ising2D.riemann_sum_to_integral	Finset.sum@Nat,Real@Real.instAddCommMonoid
 Ising2D.riemann_sum_to_integral	HDiv.hDiv@Real,Real,Real@Real.instDivInvMonoid
 Ising2D.riemann_sum_to_integral	LE.le@Real@Real.instLE
-Ising2D.riemann_sum_to_integral	LT.lt@Real@Real.instLT
 Ising2D.riemann_sum_to_integral	MeasureTheory.MeasureSpace.volume@Real@Real.measureSpace
 Ising2D.riemann_sum_to_integral	Nat.cast@Real@Real.instNatCast
 Ising2D.riemann_sum_to_integral	OfNat.ofNat@Nat,1@instOfNatNat
@@ -13754,7 +13753,6 @@ Ising2D.riemann_sum_to_integral_error	Finset.Icc@Nat@Nat.instPreorder,Nat.instLo
 Ising2D.riemann_sum_to_integral_error	Finset.sum@Nat,Real@Real.instAddCommMonoid
 Ising2D.riemann_sum_to_integral_error	HDiv.hDiv@Real,Real,Real@Real.instDivInvMonoid
 Ising2D.riemann_sum_to_integral_error	LE.le@Real@Real.instLE
-Ising2D.riemann_sum_to_integral_error	LT.lt@Real@Real.instLT
 Ising2D.riemann_sum_to_integral_error	MeasureTheory.MeasureSpace.volume@Real@Real.measureSpace
 Ising2D.riemann_sum_to_integral_error	Nat.cast@Real@Real.instNatCast
 Ising2D.riemann_sum_to_integral_error	OfNat.ofNat@Nat,0@instOfNatNat
@@ -13770,7 +13768,6 @@ Ising2D.riemann_sum_to_integral_indep_delta	Finset.Icc@Nat@Nat.instPreorder,Nat.
 Ising2D.riemann_sum_to_integral_indep_delta	Finset.sum@Nat,Real@Real.instAddCommMonoid
 Ising2D.riemann_sum_to_integral_indep_delta	HDiv.hDiv@Real,Real,Real@Real.instDivInvMonoid
 Ising2D.riemann_sum_to_integral_indep_delta	LE.le@Real@Real.instLE
-Ising2D.riemann_sum_to_integral_indep_delta	LT.lt@Real@Real.instLT
 Ising2D.riemann_sum_to_integral_indep_delta	Nat.cast@Real@Real.instNatCast
 Ising2D.riemann_sum_to_integral_indep_delta	OfNat.ofNat@Nat,1@instOfNatNat
 Ising2D.riemann_sum_to_integral_indep_delta	nhds@Real@Real.pseudoMetricSpace

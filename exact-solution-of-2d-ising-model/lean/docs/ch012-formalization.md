@@ -38,9 +38,9 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | `Ising2D.tagPoint` | `t^{(M)}_μ = 2π(μ-δ)/M` | `riemann_sum_to_integral` |
 | `Ising2D.sum_Icc_one_eq_sum_range` / `sum_Icc_eq_sum_range_tag`（`TheoremRiemannSumToIntegral.lean`） | 添字の付け替え `μ = k+1` | 同上（記法の橋渡し） |
 | `Ising2D.riemann_sum_to_integral_error` | **`\|(1/M)Σγ(t_μ) - (1/2π)∫₀^{2π}γ\| ≤ ω(2π/M)`** | `riemann_sum_to_integral` statement の評価 |
-| `Ising2D.tendsto_modulus_gamma` | `ω(2π/M) → 0`（(R1) の帰結） | 同 Step 4 |
+| `Ising2D.tendsto_modulus_gamma` | `ω(2π/M) → 0`（外部前提の一様連続性の帰結） | 同 Step 6 |
 | `Ising2D.riemann_sum_to_integral` | **`(1/M)Σ g(t^{(M)}_μ) → (1/2π)∫₀^{2π} g`（★実数解析への移行点）** | `riemann_sum_to_integral` |
-| `Ising2D.riemann_sum_to_integral_indep_delta` | 極限は `δ ∈ [0,1)` に依らない | 同 statement 末尾 |
+| `Ising2D.riemann_sum_to_integral_indep_delta` | 極限は `δ ∈ [0,1]` に依らない | 同 statement 末尾 |
 | `Ising2D.LambdaM` | `Λ^{(δ)}_M = (2 sinh 2K_2)^{M/2}\exp((1/2)Σγ)` | `def_Lambda_delta_M` |
 | `Ising2D.two_sinh_pos` / `LambdaM_pos`（`TheoremOnsagerFreeEnergy.lean`） | `2 sinh 2K_2 > 0`、`Λ^{(δ)}_M > 0` | `onsager_free_energy_expression` の proof 冒頭 |
 | `Ising2D.log_LambdaM` | `log Λ = (M/2)log(2 sinh 2K_2) + (1/2)Σγ` | `onsager_free_energy_expression` の proof 第 1 式 |

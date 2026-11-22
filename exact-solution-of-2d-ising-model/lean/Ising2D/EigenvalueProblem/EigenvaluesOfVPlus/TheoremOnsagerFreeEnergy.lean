@@ -78,7 +78,7 @@ theorem onsager_free_energy_expression (P : IsingParam) {δ : ℝ} (hδ0 : 0 ≤
         + 1 / (4 * Real.pi) * ∫ θ in (0:ℝ)..(2 * Real.pi), gammaFn P θ)) := by
   have hpi : (0 : ℝ) < Real.pi := Real.pi_pos
   -- 第 2 項は riemann_sum_to_integral（実数解析への移行点）から
-  have hsum := riemann_sum_to_integral (gamma_is_continuous P) hδ0 hδ1
+  have hsum := riemann_sum_to_integral (gamma_is_continuous P) hδ0 hδ1.le
   -- 収束列のアフィン変換（必要十分版 tendsto_affine）
   have haff := NecSuf.tendsto_affine
     (1 / 2 * Real.log (2 * Real.sinh (2 * P.K2))) (1 / 2) hsum

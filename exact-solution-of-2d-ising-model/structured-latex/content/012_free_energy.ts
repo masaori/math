@@ -18,6 +18,7 @@ export default defineBlocks([
     origin: { path: SRC, ordinal: 6 },
     title: { text: "等間隔点の平均は積分に収束する" },
     labels: ["riemann_sum_to_integral"],
+    lean: ["Ising2D.riemann_sum_to_integral", "Ising2D.riemann_sum_to_integral_error", "Ising2D.tendsto_modulus_gamma", "Ising2D.riemann_sum_to_integral_indep_delta"],
     statement: [
       paragraph([
         "以下では、次を外部前提として用いる。有界閉区間 ",
