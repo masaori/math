@@ -115,8 +115,8 @@ theorem lambdaMinusR_ofReal :
 
 /-- `abs_basic_properties` の `a ā = |a|^2`（`a := γ_2(θ)`、`r := |a|`）。 -/
 theorem gamma2_mul_conj_eq_absGamma2_sq :
-    gamma2 K θ * (starRingEnd ℂ) (gamma2 K θ) = ((absGamma2 K θ : ℝ) : ℂ) ^ 2 := by
-  rw [Complex.mul_conj, ← Complex.ofReal_pow, absGamma2_sq]
+    gamma2 K θ * star (gamma2 K θ) = ((absGamma2 K θ : ℝ) : ℂ) ^ 2 := by
+  rw [← starRingEnd_apply, Complex.mul_conj, ← Complex.ofReal_pow, absGamma2_sq]
 
 /-- `relation_of_gamma_2_theta_tilde` (2) を `ab = -r^2` の形で書いたもの。 -/
 theorem gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq :
@@ -386,8 +386,8 @@ theorem AMat_mulVec_eigen_pos :
   set a := gamma2 K θ with ha
   set b := gamma2 K (-θ) with hb₀
   set r : ℂ := ((absGamma2 K θ : ℝ) : ℂ)
-  have hb : b = -(starRingEnd ℂ) a := gamma2_neg_eq_neg_conj K θ
-  have haa : a * (starRingEnd ℂ) a = r ^ 2 := gamma2_mul_conj_eq_absGamma2_sq K θ
+  have hb : b = -star a := gamma2_neg_eq_neg_conj K θ
+  have haa : a * star a = r ^ 2 := gamma2_mul_conj_eq_absGamma2_sq K θ
   rw [lambdaPlusR_ofReal]
   ext i
   fin_cases i
@@ -396,7 +396,7 @@ theorem AMat_mulVec_eigen_pos :
         = g₁ * (-r) + a * b := by
           -- `def_gamma1_gamma2_of_theta` と行列とベクトルの積の定義
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
-      _ = -(g₁ * r) + a * (-(starRingEnd ℂ) a) := by rw [hb, mul_neg]           -- `b = -ā`
+      _ = -(g₁ * r) + a * (-star a) := by rw [hb, mul_neg]           -- `b = -ā`
       _ = -(g₁ * r) - r ^ 2 := by rw [mul_neg, haa, ← sub_eq_add_neg]          -- `a ā = r^2`
       _ = (g₁ + r) * (-r) := by ring                                          -- 分配律
       _ = ((g₁ + r) • ![-r, b]) 0 := by simp                                   -- `(v_+)_1 = -r`
@@ -419,8 +419,8 @@ theorem AMat_mulVec_eigen_neg :
   set a := gamma2 K θ with ha
   set b := gamma2 K (-θ) with hb₀
   set r : ℂ := ((absGamma2 K θ : ℝ) : ℂ)
-  have hb : b = -(starRingEnd ℂ) a := gamma2_neg_eq_neg_conj K θ
-  have haa : a * (starRingEnd ℂ) a = r ^ 2 := gamma2_mul_conj_eq_absGamma2_sq K θ
+  have hb : b = -star a := gamma2_neg_eq_neg_conj K θ
+  have haa : a * star a = r ^ 2 := gamma2_mul_conj_eq_absGamma2_sq K θ
   rw [lambdaMinusR_ofReal]
   ext i
   fin_cases i
@@ -429,7 +429,7 @@ theorem AMat_mulVec_eigen_neg :
         = g₁ * r + a * b := by
           -- `def_gamma1_gamma2_of_theta` と行列とベクトルの積の定義
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
-      _ = g₁ * r + a * (-(starRingEnd ℂ) a) := by rw [hb]                      -- `b = -ā`
+      _ = g₁ * r + a * (-star a) := by rw [hb]                      -- `b = -ā`
       _ = g₁ * r - r ^ 2 := by rw [mul_neg, haa, ← sub_eq_add_neg]             -- `a ā = r^2`
       _ = (g₁ - r) * r := by ring                                             -- 分配律
       _ = ((g₁ - r) • ![r, b]) 0 := by simp                                    -- `(v_-)_1 = +r`

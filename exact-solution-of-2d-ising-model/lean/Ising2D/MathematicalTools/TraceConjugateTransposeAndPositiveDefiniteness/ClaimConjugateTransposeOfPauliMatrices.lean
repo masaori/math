@@ -104,10 +104,6 @@ theorem pauliZ_conjTranspose : pauliZᴴ = pauliZ := by
     -- `def_pauli_matrices` の σ^z
     _ = pauliZ := rfl
 
-/-- 人手 `conjugate_transpose_of_pauli_y` の準備の `\bar i = -i`（人手 `relation_of_gamma_2_theta_tilde` の「第二に」と同じ 11 行の鎖。
-その具体版 `conj_I_eq_neg_I` を `star` の形で読む）。 -/
-theorem star_I_eq_neg_I : star Complex.I = -Complex.I := conj_I_eq_neg_I
-
 /-- 人手 `conjugate_transpose_of_pauli_y` の準備の `\overline{-i} = i`（12 行の鎖）。 -/
 theorem star_neg_I_eq_I : star (-Complex.I) = Complex.I :=
   calc star (-Complex.I)
@@ -127,7 +123,6 @@ theorem star_neg_I_eq_I : star (-Complex.I) = Complex.I :=
         rw [real_minus_zero_is_self 0]                         -- 7 行目: `real_minus_zero_is_self`（`a → 0`）
     _ = star (⟨0, (-1) * 1⟩ : ℂ) := by rw [add_zero]          -- 8 行目: `0` は `ℝ` の加法の単位元 `x + 0 = x`（`x → (-1) * 1`）
     _ = star (⟨0, -1⟩ : ℂ) := by rw [mul_one]                 -- 9 行目: `1` は `ℝ` の乗法の単位元 `x * 1 = x`（`x → -1`）
-    _ = (starRingEnd ℂ) (⟨0, -1⟩ : ℂ) := rfl                  -- `star` を `starRingEnd ℂ` と読む
     _ = (⟨0, -(-1)⟩ : ℂ) := complex_star_mk _ _
                                                                -- 10 行目: `def_complex_conjugate`
     _ = (⟨0, 1⟩ : ℂ) := by rw [real_double_negation 1]        -- 11 行目: `real_double_negation`（`a → 1`）
@@ -147,9 +142,9 @@ theorem pauliY_conjTranspose : pauliYᴴ = pauliY := by
     -- `complex_conjugate_of_real_inclusion` を `r = 0` で 2 成分へ同時に
     _ = !![(0 : ℂ), star Complex.I; star (-Complex.I), 0] := by
       rw [star_of_real_inclusion_abbrev 0 0 real_inclusion_zero_abbrev]
-    -- 準備の `\bar i = -i`
+    -- 準備の `\bar i = -i`（人手 `relation_of_gamma_2_theta_tilde` の「第二に」と同じ 11 行の鎖。具体版は `conj_I_eq_neg_I`）
     _ = !![(0 : ℂ), -Complex.I; star (-Complex.I), 0] := by
-      rw [star_I_eq_neg_I]
+      rw [conj_I_eq_neg_I]
     -- 準備の `\overline{-i} = i`
     _ = !![(0 : ℂ), -Complex.I; Complex.I, 0] := by
       rw [star_neg_I_eq_I]

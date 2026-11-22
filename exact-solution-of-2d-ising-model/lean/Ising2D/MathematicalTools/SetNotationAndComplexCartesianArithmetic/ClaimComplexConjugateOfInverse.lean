@@ -12,7 +12,7 @@
 | 準備（`\overline{w}\,\overline{w^{-1}} = 1_ℂ`）の 3 行 | `complex_conjugate_mul_complex_conjugate_inv` の `calc` の 3 段 |
 | 主張の 5 行 | `complex_conjugate_of_inverse` の `calc` の 5 段 |
 
-- 人手の複素共役 `def_complex_conjugate` は Lean の `starRingEnd ℂ`（定義を開くと `star`。`def_complex_conjugate` の段は具体版 `complex_star_mk` の成分で受ける）、`multiplicative_group_of_cc` の逆元は `ℂ` の `⁻¹`
+- 人手の複素共役 `def_complex_conjugate` は Lean の `ℂ` の `star`（`def_complex_conjugate` の段は具体版 `complex_star_mk` の成分で受ける）、`multiplicative_group_of_cc` の逆元は `ℂ` の `⁻¹`
   （`w ≠ 0` のもとで `mul_inv_cancel₀`・`inv_mul_cancel₀` が逆元の性質）である。
 - 人手 `complex_numbers_form_a_field` の積の単位元・結合律は `one_mul`・`mul_one`・`mul_assoc` で 1 段ずつ受ける。
 
@@ -31,18 +31,18 @@ namespace Ising2D
 
 /-- 人手 `complex_conjugate_of_inverse` の準備: `w ∈ ℂ^×` なら `\overline{w} ∈ ℂ^×`。
 `w = (x,y)`、`\overline{w} = (x,-y)` が `(0,0)` なら、成分ごとに `x = 0`・`-y = 0`、`ℝ` で `y = -(-y) = -0 = 0` となり `w = (0,0)` に反する。 -/
-theorem complex_conjugate_ne_zero {w : ℂ} (hw : w ≠ 0) : (starRingEnd ℂ) w ≠ 0 := by
+theorem complex_conjugate_ne_zero {w : ℂ} (hw : w ≠ 0) : star w ≠ 0 := by
   intro h
   have hx : w.re = 0 :=
     calc w.re
-        = ((starRingEnd ℂ) w).re := (congrArg Complex.re (complex_star_mk w.re w.im)).symm
+        = (star w).re := (congrArg Complex.re (complex_star_mk w.re w.im)).symm
                                       -- `def_complex_conjugate`: `\overline{w} = (x,-y)` の第 1 成分は `x`
       _ = (0 : ℂ).re := congrArg Complex.re h
                                       -- 仮定 `\overline{w} = (0,0)` の第 1 成分（`definition_of_cc` の等号は成分ごと）
       _ = 0 := Complex.zero_re
   have hy' : -w.im = 0 :=
     calc -w.im
-        = ((starRingEnd ℂ) w).im := (congrArg Complex.im (complex_star_mk w.re w.im)).symm
+        = (star w).im := (congrArg Complex.im (complex_star_mk w.re w.im)).symm
                                       -- `def_complex_conjugate`: `\overline{w}` の第 2 成分は `-y`
       _ = (0 : ℂ).im := congrArg Complex.im h
                                       -- 仮定の第 2 成分
@@ -59,13 +59,13 @@ theorem complex_conjugate_ne_zero {w : ℂ} (hw : w ≠ 0) : (starRingEnd ℂ) w
 
 /-- 人手 `complex_conjugate_of_inverse` の準備: `\overline{w}\,\overline{w^{-1}} = 1_ℂ`（人手の 3 行）。 -/
 theorem complex_conjugate_mul_complex_conjugate_inv {w : ℂ} (hw : w ≠ 0) :
-    (starRingEnd ℂ) w * (starRingEnd ℂ) w⁻¹ = 1 :=
-  calc (starRingEnd ℂ) w * (starRingEnd ℂ) w⁻¹
-      = (starRingEnd ℂ) (w * w⁻¹) := (complex_conjugate_of_product_eq w w⁻¹).symm
+    star w * star w⁻¹ = 1 :=
+  calc star w * star w⁻¹
+      = star (w * w⁻¹) := (complex_conjugate_of_product_eq w w⁻¹).symm
                                       -- 1 行目: `complex_conjugate_of_product`（`z → w`, `w → w^{-1}` を同時に）を右辺から左辺へ
-    _ = (starRingEnd ℂ) 1 := by rw [mul_inv_cancel₀ hw]
+    _ = star 1 := by rw [mul_inv_cancel₀ hw]
                                       -- 2 行目: `multiplicative_group_of_cc` の逆元（`w ∈ ℂ^×`）
-    _ = (starRingEnd ℂ) ((1 : ℝ) : ℂ) := by rw [Complex.ofReal_one]
+    _ = star ((1 : ℝ) : ℂ) := by rw [Complex.ofReal_one]
                                       -- `1_ℂ` は略記 `r_ℂ` の `r = 1`（Lean のリテラル `(1 : ℂ)` との読み替え）
     _ = ((1 : ℝ) : ℂ) := complex_conjugate_of_real_inclusion 1
                                       -- 3 行目: `complex_conjugate_of_real_inclusion`（`r → 1`）
@@ -73,18 +73,18 @@ theorem complex_conjugate_mul_complex_conjugate_inv {w : ℂ} (hw : w ≠ 0) :
 
 /-- **人手 `complex_conjugate_of_inverse`**: `w ∈ ℂ^×` について `\overline{w^{-1}} = (\overline{w})^{-1}`（人手の 5 行）。 -/
 theorem complex_conjugate_of_inverse {w : ℂ} (hw : w ≠ 0) :
-    (starRingEnd ℂ) w⁻¹ = ((starRingEnd ℂ) w)⁻¹ :=
-  calc (starRingEnd ℂ) w⁻¹
-      = 1 * (starRingEnd ℂ) w⁻¹ := (one_mul _).symm
+    star w⁻¹ = (star w)⁻¹ :=
+  calc star w⁻¹
+      = 1 * star w⁻¹ := (one_mul _).symm
                                       -- 1 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
-    _ = (((starRingEnd ℂ) w)⁻¹ * (starRingEnd ℂ) w) * (starRingEnd ℂ) w⁻¹ := by
+    _ = ((star w)⁻¹ * star w) * star w⁻¹ := by
         rw [inv_mul_cancel₀ (complex_conjugate_ne_zero hw)]
                                       -- 2 行目: `multiplicative_group_of_cc` の逆元（`\overline{w} ∈ ℂ^×`）を右辺から左辺へ
-    _ = ((starRingEnd ℂ) w)⁻¹ * ((starRingEnd ℂ) w * (starRingEnd ℂ) w⁻¹) := mul_assoc _ _ _
+    _ = (star w)⁻¹ * (star w * star w⁻¹) := mul_assoc _ _ _
                                       -- 3 行目: `complex_numbers_form_a_field` の積の結合律
-    _ = ((starRingEnd ℂ) w)⁻¹ * 1 := by rw [complex_conjugate_mul_complex_conjugate_inv hw]
+    _ = (star w)⁻¹ * 1 := by rw [complex_conjugate_mul_complex_conjugate_inv hw]
                                       -- 4 行目: 準備の `\overline{w}\,\overline{w^{-1}} = 1_ℂ`
-    _ = ((starRingEnd ℂ) w)⁻¹ := mul_one _
+    _ = (star w)⁻¹ := mul_one _
                                       -- 5 行目: `complex_numbers_form_a_field` の積の単位元
 
 end Ising2D

@@ -319,12 +319,12 @@ theorem checkR_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
                                                     -- `r_ν` の定義（`r_ν = |a_ν|`）
     _ = Real.sqrt (Complex.normSq (gamma2 K (-thetaTilde M μ))) := by
           rw [gamma2_thetaTilde_conj K hM]          -- 上の `a_ν = b_μ`（`periodicity_of_check_fermi` (3)）
-    _ = Real.sqrt (Complex.normSq (-(starRingEnd ℂ) a)) := by
+    _ = Real.sqrt (Complex.normSq (-star a)) := by
           rw [gamma2_neg_eq_neg_conj]               -- `relation_of_gamma_2_theta_tilde` (1)
-    _ = Real.sqrt (Complex.normSq ((-1 : ℂ) * (starRingEnd ℂ) a)) := by
+    _ = Real.sqrt (Complex.normSq ((-1 : ℂ) * star a)) := by
           rw [neg_one_mul]                          -- `multiply_by_minus_one`
     _ = Real.sqrt (Complex.normSq ((-1 : ℂ) * ⟨x, -y⟩)) := by
-          rw [show (starRingEnd ℂ) a = ⟨x, -y⟩ from complex_star_mk x y]
+          rw [show star a = ⟨x, -y⟩ from complex_star_mk x y]
                                                     -- `def_complex_conjugate`
     _ = Real.sqrt (Complex.normSq ((⟨-1, 0⟩ : ℂ) * ⟨x, -y⟩)) := by
           rw [show (-1 : ℂ) = ⟨-1, 0⟩ from Complex.ext (by simp) (by simp)]

@@ -1,3 +1,5 @@
+2026-11-22: 状態台帳の先頭の表の行「ℂ とその演算を…許可の一覧に載せる」の続きとして、共役を環の準同型 `(starRingEnd ℂ) z` で書いていた具体版の 23 宣言の主張を、本文の共役の具体版 `star z` の形に言い直した。同じ主張になった別名 5 本（`complex_conjugate_star_mul`・`_add`・`_sub`・`conj_real_inclusion`・`star_I_eq_neg_I`）を消して使う側を元の具体版へ付け替え、未定義の記号の台帳は 16,527 → 16,458 行。残り（ℂ の 2・冪、共役の段を mathlib の補題で閉じている箇所、`(-1 : ℂ)` の読み替え）は状態台帳の行に書いた。
+
 2026-11-22: 状態台帳の先頭の表の行「ℂ とその演算を…許可の一覧に載せる」の続きとして、ℂ の複素共役を済ませた。具体版 `complex_star_mk`（`DefinitionComplexConjugate.lean`。`star ⟨x, y⟩ = ⟨x, -y⟩`、`rfl`）を本文 `def_complex_conjugate` の欄 `lean` に書き、共役の定義を当てる段をこれを引く形に直し、許可の一覧に `Star.star@Complex@StarRing.toStarAddMonoid` を載せた。`(starRingEnd ℂ) z` で書く 23 宣言の主張に残る環の準同型の記号は、状態台帳の行の残りに書いた。
 
 2026-11-22: 状態台帳の先頭の表の行「ℂ とその演算を…許可の一覧に載せる」の続きとして、ℂ の 0・1 を済ませた。本文 `inclusion_rr_to_cc` に `0_ℂ := (0_ℝ)_ℂ`・`1_ℂ := (1_ℝ)_ℂ` を書き足し、具体版 `complex_zero_eq_ofReal_zero`・`complex_one_eq_ofReal_one`（`rfl`）を置いて許可の一覧に載せた（未定義の記号の台帳 17,003 → 16,581 行）。`complex_minus_one_mul_minus_one` を本文どおり `((-1 : ℝ) : ℂ) * ((-1 : ℝ) : ℂ) = 1` に直し、呼び出し元 6 つの鎖を `complex_neg_eq_ofReal_neg_one_mul`・`complex_sub_eq_add_neg` を引く形にした。残り（ℂ の 2・冪・共役、Fermi の準備と `det_A_theta_tilde` の第 2 の鎖の `(-1 : ℂ)` の読み替え）は状態台帳の行に書いた。

@@ -362,8 +362,7 @@ theorem H2_transpose : (H2 M)ᵀ = H2 M := by
 private theorem star_I_mul {c : ℂ} (hc : star c = c) :
     star (Complex.I * c) = -(Complex.I * c) :=
   calc star (Complex.I * c)
-      = star Complex.I * star c := complex_conjugate_star_mul _ _   -- `complex_conjugate_of_product`
-    _ = (starRingEnd ℂ) Complex.I * star c := rfl                   -- `star` を `starRingEnd ℂ` と読む
+      = star Complex.I * star c := complex_conjugate_of_product_eq _ _   -- `complex_conjugate_of_product`
     _ = (-Complex.I) * star c := by
         rw [conj_I_eq_neg_I]                                        -- `relation_of_gamma_2_theta_tilde` の `\bar i = -i`
     _ = (-Complex.I) * c := by rw [hc]                              -- 仮定 `\bar c = c`

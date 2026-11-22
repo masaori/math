@@ -5,8 +5,9 @@
 必要十分版 `Ising2D/NecSuf/StarPreservesNormAndLimits.lean` の係数 `R, α := ℂ`、添字 `Fin n`、列の添字 `ι := ℕ`、フィルタ `atTop` の
 特殊化として得る。人手のラベルは `star_preserves_norm_and_limits`。
 共役の仮定には、人手の `complex_conjugate_of_sum`（`hsum`、`hadd` は `m = 2`）・`complex_conjugate_of_product`（`hmul`）・
-`complex_conjugate_of_difference`（`hsub`）の具体版を `star` の形・添字 `Fin n` へ読み替えた `complex_conjugate_star_finite_sum`・
-`complex_conjugate_star_add`・`complex_conjugate_star_mul`・`complex_conjugate_star_sub`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`）を渡す。
+`complex_conjugate_of_difference`（`hsub`）の具体版 `complex_conjugate_of_sum_two`・`complex_conjugate_of_product_eq`・
+`complex_conjugate_of_difference_eq`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`）と、和の具体版を添字 `Fin n` へ読み替えた
+`complex_conjugate_star_finite_sum`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`）を渡す。
 `abs_of_complex_conjugate`（`hnorm`）は具体版と同じく、Lean の具体版が無いので mathlib の `norm_star` を渡す。
 
 `TensorPow M`（添字 `Conf M`）の系 `conjTranspose_mul_tensorPow`・`conjTranspose_add_smul_tensorPow`・`conjTranspose_tendsto_tensorPow` も同じ必要十分版の特殊化として置く。
@@ -26,12 +27,12 @@ attribute [local instance] Matrix.frobeniusNormedAddCommGroup
 
 /-- `matrix_conjTranspose_mul` を `NecSuf.conjTranspose_mul_matrix'` の特殊化として得る。 -/
 theorem matrix_conjTranspose_mul_of_necSuf {n : ℕ} (A B : Matrix (Fin n) (Fin n) ℂ) : (A * B)ᴴ = Bᴴ * Aᴴ :=
-  NecSuf.conjTranspose_mul_matrix' (complex_conjugate_star_finite_sum n) complex_conjugate_star_mul A B
+  NecSuf.conjTranspose_mul_matrix' (complex_conjugate_star_finite_sum n) complex_conjugate_of_product_eq A B
 
 /-- `matrix_conjTranspose_add_smul` を `NecSuf.conjTranspose_add_smul_matrix'` の特殊化として得る。 -/
 theorem matrix_conjTranspose_add_smul_of_necSuf {n : ℕ} (α β : ℂ) (A B : Matrix (Fin n) (Fin n) ℂ) :
     (α • A + β • B)ᴴ = star α • Aᴴ + star β • Bᴴ :=
-  NecSuf.conjTranspose_add_smul_matrix' complex_conjugate_star_add complex_conjugate_star_mul α β A B
+  NecSuf.conjTranspose_add_smul_matrix' complex_conjugate_of_sum_two complex_conjugate_of_product_eq α β A B
 
 /-- `matrix_conjTranspose_norm` を `NecSuf.conjTranspose_norm'` の特殊化として得る。 -/
 theorem matrix_conjTranspose_norm_of_necSuf {n : ℕ} (A : Matrix (Fin n) (Fin n) ℂ) : ‖Aᴴ‖ = ‖A‖ :=
@@ -41,21 +42,21 @@ theorem matrix_conjTranspose_norm_of_necSuf {n : ℕ} (A : Matrix (Fin n) (Fin n
 theorem matrix_conjTranspose_tendsto_of_necSuf {n : ℕ} (A : ℕ → Matrix (Fin n) (Fin n) ℂ)
     (Alim : Matrix (Fin n) (Fin n) ℂ) (h : Tendsto (fun N => ‖A N - Alim‖) atTop (𝓝 0)) :
     Tendsto (fun N => ‖(A N)ᴴ - Alimᴴ‖) atTop (𝓝 0) :=
-  NecSuf.conjTranspose_tendsto' norm_star complex_conjugate_star_sub A Alim h
+  NecSuf.conjTranspose_tendsto' norm_star complex_conjugate_of_difference_eq A Alim h
 
 /-- `star_preserves_norm_and_limits` (1) の第 1 式の `TensorPow M` での系（`NecSuf.conjTranspose_mul_matrix'` の添字 `Conf M` の特殊化）。 -/
 theorem conjTranspose_mul_tensorPow {M : ℕ} (A B : TensorPow M) : (A * B)ᴴ = Bᴴ * Aᴴ :=
-  NecSuf.conjTranspose_mul_matrix' (complex_conjugate_star_sum_conf M) complex_conjugate_star_mul A B
+  NecSuf.conjTranspose_mul_matrix' (complex_conjugate_star_sum_conf M) complex_conjugate_of_product_eq A B
 
 /-- `star_preserves_norm_and_limits` (1) の第 2 式の `TensorPow M` での系（`NecSuf.conjTranspose_add_smul_matrix'` の添字 `Conf M` の特殊化）。 -/
 theorem conjTranspose_add_smul_tensorPow {M : ℕ} (α β : ℂ) (A B : TensorPow M) :
     (α • A + β • B)ᴴ = star α • Aᴴ + star β • Bᴴ :=
-  NecSuf.conjTranspose_add_smul_matrix' complex_conjugate_star_add complex_conjugate_star_mul α β A B
+  NecSuf.conjTranspose_add_smul_matrix' complex_conjugate_of_sum_two complex_conjugate_of_product_eq α β A B
 
 /-- `star_preserves_norm_and_limits` (3) の `TensorPow M` での系（`NecSuf.conjTranspose_tendsto'` の添字 `Conf M` の特殊化）。 -/
 theorem conjTranspose_tendsto_tensorPow {M : ℕ} (A : ℕ → TensorPow M) (Alim : TensorPow M)
     (h : Tendsto (fun N => ‖A N - Alim‖) atTop (𝓝 0)) :
     Tendsto (fun N => ‖(A N)ᴴ - Alimᴴ‖) atTop (𝓝 0) :=
-  NecSuf.conjTranspose_tendsto' norm_star complex_conjugate_star_sub A Alim h
+  NecSuf.conjTranspose_tendsto' norm_star complex_conjugate_of_difference_eq A Alim h
 
 end Ising2D

@@ -1,5 +1,5 @@
 /-
-# `γ_2(-θ~_μ) = -conj(γ_2(θ~_μ))` とその帰結（**具体版**）
+# `γ_2(-θ~_μ) = -\overline{γ_2(θ~_μ)}` とその帰結（**具体版**）
 
 対応する人手証明のラベル: `relation_of_gamma_2_theta_tilde`
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
@@ -52,9 +52,9 @@ theorem absGamma2_nonneg : 0 ≤ absGamma2 K θ := Real.sqrt_nonneg _
 theorem absGamma2_sq : absGamma2 K θ ^ 2 = Complex.normSq (gamma2 K θ) :=
   Real.sq_sqrt (Complex.normSq_nonneg _)
 
-/-- **人手証明 (1)**: `γ_2(-θ~_μ) = -conj(γ_2(θ~_μ))`（既存の定理の特殊化）。 -/
+/-- **人手証明 (1)**: `γ_2(-θ~_μ) = -\overline{γ_2(θ~_μ)}`（既存の定理の特殊化）。 -/
 theorem gamma2_neg_thetaTilde_eq (M : ℕ) (μ : ℤ) :
-    gamma2 K (-thetaTilde M μ) = -(starRingEnd ℂ) (gamma2 K (thetaTilde M μ)) :=
+    gamma2 K (-thetaTilde M μ) = -star (gamma2 K (thetaTilde M μ)) :=
   gamma2_neg_eq_neg_conj K (thetaTilde M μ)
 
 /-- **人手証明 (2)**: `γ_2(θ)γ_2(-θ) = (-|γ_2(θ)|^2)_ℂ`（右辺は実数 `-|γ_2(θ)|^2` の像。人手の (2) と同じ形）。

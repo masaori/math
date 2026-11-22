@@ -19,11 +19,9 @@
 | 同じ主張の 7 行 | `complex_conjugate_of_difference_eq` の `calc` の 7 段 |
 
 - 人手の複素共役 `def_complex_conjugate`（`\overline{(x,y)} := (x,-y)`）は Lean の `ℂ` の `star` である（`DefinitionComplexConjugate.lean`）。
-  このファイルの主張は共役を `(starRingEnd ℂ) z` と書く。これは定義を開くと `star z` で、主張を `star z` の形に言い直すまでの読み替えである。
   `definition_of_cc` の台集合 `ℝ^2` の元 `(x,y)` は Lean の `⟨x, y⟩ : ℂ`（実部 `x`、虚部 `y` の構造体）で、
   `definition_of_cc` の和・積は mathlib の ℂ の和・積の定義と同じ式なので、それを開く段は `rfl` である。
   `def_complex_conjugate` を当てる段は、その具体版 `complex_star_mk`（`DefinitionComplexConjugate.lean`。`star ⟨x, y⟩ = ⟨x, -y⟩`）で受ける。
-  Lean の `(starRingEnd ℂ) z` は定義を開くと `star z` なので、`complex_star_mk` はそのまま `(starRingEnd ℂ) ⟨x, y⟩ = ⟨x, -y⟩` の段に当たる。
 - 人手の `m ∈ ℤ_{≥1}` は Lean の `m + 1`、`z_1, …, z_m` は `z : Fin (m + 1) → ℂ` である。
   `def_finite_sum_of_complex_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
   （`KroneckerProductAndMultiFactorBasis/ClaimRealInclusionPreservesFiniteSum.lean` の `real_inclusion_of_finite_sum_succ` と同じ読み替え）。
@@ -60,9 +58,9 @@ namespace Ising2D
 /-- 人手 `complex_conjugate_of_sum` の準備（二つの和）: `\overline{z + w} = \overline{z} + \overline{w}`（人手の 5 行）。
 `z = (x,y)`、`w = (u,v)` は Lean の `⟨z.re, z.im⟩`・`⟨w.re, w.im⟩`。 -/
 theorem complex_conjugate_of_add (z w : ℂ) :
-    (starRingEnd ℂ) (z + w) = (starRingEnd ℂ) z + (starRingEnd ℂ) w :=
-  calc (starRingEnd ℂ) (z + w)
-      = (starRingEnd ℂ) (⟨z.re + w.re, z.im + w.im⟩ : ℂ) := rfl
+    star (z + w) = star z + star w :=
+  calc star (z + w)
+      = star (⟨z.re + w.re, z.im + w.im⟩ : ℂ) := rfl
                                                   -- 1 行目: `definition_of_cc` の和
     _ = (⟨z.re + w.re, -(z.im + w.im)⟩ : ℂ) :=
         complex_star_mk _ _
@@ -72,7 +70,7 @@ theorem complex_conjugate_of_add (z w : ℂ) :
                                                   -- 3 行目: `real_negation_of_sum_is_sum_of_negations`（文字を `p, q` に替え `p → y`、`q → v`）
     _ = (⟨z.re, -z.im⟩ : ℂ) + (⟨w.re, -w.im⟩ : ℂ) := rfl
                                                   -- 4 行目: `definition_of_cc` の和
-    _ = (starRingEnd ℂ) z + (starRingEnd ℂ) w :=
+    _ = star z + star w :=
         congrArg₂ (· + ·)
           (complex_star_mk z.re z.im).symm
           (complex_star_mk w.re w.im).symm
@@ -81,42 +79,42 @@ theorem complex_conjugate_of_add (z w : ℂ) :
 /-- **人手 `complex_conjugate_of_sum`**: `\overline{Σ_{j=1}^{m} z_j} = Σ_{j=1}^{m} \overline{z_j}`
 （`m ∈ ℤ_{≥1}` は Lean の `m + 1`）。`m` についての帰納法。 -/
 theorem complex_conjugate_of_finite_sum_succ (m : ℕ) (z : Fin (m + 1) → ℂ) :
-    (starRingEnd ℂ) (∑ j, z j) = ∑ j, (starRingEnd ℂ) (z j) := by
+    star (∑ j, z j) = ∑ j, star (z j) := by
   induction m with
   | zero =>                                                                        -- 人手の `m = 1`
-    calc (starRingEnd ℂ) (∑ j : Fin 1, z j)
-        = (starRingEnd ℂ) (z 0) := by rw [Fin.sum_univ_one]                        -- `def_finite_sum_of_complex_numbers`
-      _ = ∑ j : Fin 1, (starRingEnd ℂ) (z j) := by rw [Fin.sum_univ_one]           -- `def_finite_sum_of_complex_numbers`
+    calc star (∑ j : Fin 1, z j)
+        = star (z 0) := by rw [Fin.sum_univ_one]                        -- `def_finite_sum_of_complex_numbers`
+      _ = ∑ j : Fin 1, star (z j) := by rw [Fin.sum_univ_one]           -- `def_finite_sum_of_complex_numbers`
   | succ m ih =>                                                                   -- 人手の `m → m + 1`
-    calc (starRingEnd ℂ) (∑ j : Fin (m + 2), z j)
-        = (starRingEnd ℂ) ((∑ j : Fin (m + 1), z j.castSucc) + z (Fin.last (m + 1))) := by
+    calc star (∑ j : Fin (m + 2), z j)
+        = star ((∑ j : Fin (m + 1), z j.castSucc) + z (Fin.last (m + 1))) := by
           rw [Fin.sum_univ_castSucc]                                               -- `def_finite_sum_of_complex_numbers`
-      _ = (starRingEnd ℂ) (∑ j : Fin (m + 1), z j.castSucc) + (starRingEnd ℂ) (z (Fin.last (m + 1))) :=
+      _ = star (∑ j : Fin (m + 1), z j.castSucc) + star (z (Fin.last (m + 1))) :=
           complex_conjugate_of_add _ _                                             -- 準備の二つの和
-      _ = (∑ j : Fin (m + 1), (starRingEnd ℂ) (z j.castSucc)) + (starRingEnd ℂ) (z (Fin.last (m + 1))) := by
+      _ = (∑ j : Fin (m + 1), star (z j.castSucc)) + star (z (Fin.last (m + 1))) := by
           rw [ih (fun j => z j.castSucc)]                                          -- 帰納法の仮定
-      _ = ∑ j : Fin (m + 2), (starRingEnd ℂ) (z j) :=
-          (Fin.sum_univ_castSucc (fun j => (starRingEnd ℂ) (z j))).symm            -- `def_finite_sum_of_complex_numbers`
+      _ = ∑ j : Fin (m + 2), star (z j) :=
+          (Fin.sum_univ_castSucc (fun j => star (z j))).symm            -- `def_finite_sum_of_complex_numbers`
 
 /-- 人手 `complex_conjugate_of_sum` を `m = 2` で引く形: `\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}`。
 `z_1 + z_2` を `def_finite_sum_of_complex_numbers` の `Σ_{j=1}^{2}` と読み、主張を当て、読みを戻す。 -/
 theorem complex_conjugate_of_sum_two (z₁ z₂ : ℂ) :
-    (starRingEnd ℂ) (z₁ + z₂) = (starRingEnd ℂ) z₁ + (starRingEnd ℂ) z₂ :=
-  calc (starRingEnd ℂ) (z₁ + z₂)
-      = (starRingEnd ℂ) (∑ j : Fin 2, ![z₁, z₂] j) := by
+    star (z₁ + z₂) = star z₁ + star z₂ :=
+  calc star (z₁ + z₂)
+      = star (∑ j : Fin 2, ![z₁, z₂] j) := by
         rw [Fin.sum_univ_two]; rfl                -- `def_finite_sum_of_complex_numbers` の `m = 2` を右辺から左辺へ
-    _ = ∑ j : Fin 2, (starRingEnd ℂ) (![z₁, z₂] j) :=
+    _ = ∑ j : Fin 2, star (![z₁, z₂] j) :=
         complex_conjugate_of_finite_sum_succ 1 ![z₁, z₂]
                                                   -- `complex_conjugate_of_sum` の `m = 2`
-    _ = (starRingEnd ℂ) z₁ + (starRingEnd ℂ) z₂ := by
+    _ = star z₁ + star z₂ := by
         rw [Fin.sum_univ_two]; rfl                -- `def_finite_sum_of_complex_numbers` の `m = 2`
 
 /-- **人手 `complex_conjugate_of_product`**: `\overline{zw} = \overline{z}\,\overline{w}`（人手の 8 行）。
 `z = (x,y)`、`w = (u,v)` は Lean の `⟨z.re, z.im⟩`・`⟨w.re, w.im⟩`。 -/
 theorem complex_conjugate_of_product_eq (z w : ℂ) :
-    (starRingEnd ℂ) (z * w) = (starRingEnd ℂ) z * (starRingEnd ℂ) w :=
-  calc (starRingEnd ℂ) (z * w)
-      = (starRingEnd ℂ) (⟨z.re * w.re - z.im * w.im, z.re * w.im + z.im * w.re⟩ : ℂ) := rfl
+    star (z * w) = star z * star w :=
+  calc star (z * w)
+      = star (⟨z.re * w.re - z.im * w.im, z.re * w.im + z.im * w.re⟩ : ℂ) := rfl
                                                   -- 1 行目: `definition_of_cc` の積
     _ = (⟨z.re * w.re - z.im * w.im, -(z.re * w.im + z.im * w.re)⟩ : ℂ) :=
         complex_star_mk _ _
@@ -134,18 +132,18 @@ theorem complex_conjugate_of_product_eq (z w : ℂ) :
                                                   -- 6 行目: `real_negation_times_is_negation_of_product`（文字を `p, q` に替え `p → y`、`q → u`）を右辺から左辺へ
     _ = (⟨z.re, -z.im⟩ : ℂ) * (⟨w.re, -w.im⟩ : ℂ) := rfl
                                                   -- 7 行目: `definition_of_cc` の積
-    _ = (starRingEnd ℂ) z * (starRingEnd ℂ) w :=
+    _ = star z * star w :=
         congrArg₂ (· * ·)
           (complex_star_mk z.re z.im).symm
           (complex_star_mk w.re w.im).symm
                                                   -- 8 行目: `def_complex_conjugate`（2 因子へ）
 
 /-- 人手 `complex_conjugate_of_difference` の準備: `\overline{-1_ℂ} = -1_ℂ`（人手の 4 行と、略記の読み替えの 2 段）。 -/
-theorem complex_conjugate_of_neg_one : (starRingEnd ℂ) (-1 : ℂ) = -1 :=
-  calc (starRingEnd ℂ) (-1 : ℂ)
-      = (starRingEnd ℂ) (((-1 : ℝ)) : ℂ) := by
+theorem complex_conjugate_of_neg_one : star (-1 : ℂ) = -1 :=
+  calc star (-1 : ℂ)
+      = star (((-1 : ℝ)) : ℂ) := by
         rw [Complex.ofReal_neg, Complex.ofReal_one] -- `-1_ℂ` を `(-1)_ℂ` と読む（`inclusion_rr_to_cc` の略記）
-    _ = (starRingEnd ℂ) (⟨-1, 0⟩ : ℂ) := rfl     -- 1 行目: `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = -1`）
+    _ = star (⟨-1, 0⟩ : ℂ) := rfl     -- 1 行目: `inclusion_rr_to_cc` の `r_ℂ = (r, 0)`（`r = -1`）
     _ = (⟨-1, -0⟩ : ℂ) := complex_star_mk _ _
                                                   -- 2 行目: `def_complex_conjugate`
     _ = (⟨-1, 0⟩ : ℂ) := by rw [real_negation_of_zero_is_zero] -- 3 行目: `real_negation_of_zero_is_zero`
@@ -155,21 +153,21 @@ theorem complex_conjugate_of_neg_one : (starRingEnd ℂ) (-1 : ℂ) = -1 :=
 
 /-- **人手 `complex_conjugate_of_difference`**: `\overline{z - w} = \overline{z} - \overline{w}`（人手の 7 行）。 -/
 theorem complex_conjugate_of_difference_eq (z w : ℂ) :
-    (starRingEnd ℂ) (z - w) = (starRingEnd ℂ) z - (starRingEnd ℂ) w :=
-  calc (starRingEnd ℂ) (z - w)
-      = (starRingEnd ℂ) (z + -w) := by
+    star (z - w) = star z - star w :=
+  calc star (z - w)
+      = star (z + -w) := by
         rw [sub_eq_add_neg]                       -- 1 行目: `def_complex_difference`
-    _ = (starRingEnd ℂ) z + (starRingEnd ℂ) (-w) :=
+    _ = star z + star (-w) :=
         complex_conjugate_of_sum_two z (-w)       -- 2 行目: `complex_conjugate_of_sum` の `m = 2`
-    _ = (starRingEnd ℂ) z + (starRingEnd ℂ) ((-1 : ℂ) * w) := by
+    _ = star z + star ((-1 : ℂ) * w) := by
         rw [neg_one_mul]                          -- 3 行目: `multiply_by_minus_one`（`z → w`）
-    _ = (starRingEnd ℂ) z + (starRingEnd ℂ) (-1 : ℂ) * (starRingEnd ℂ) w := by
+    _ = star z + star (-1 : ℂ) * star w := by
         rw [complex_conjugate_of_product_eq]      -- 4 行目: `complex_conjugate_of_product`
-    _ = (starRingEnd ℂ) z + (-1 : ℂ) * (starRingEnd ℂ) w := by
+    _ = star z + (-1 : ℂ) * star w := by
         rw [complex_conjugate_of_neg_one]         -- 5 行目: 準備の `\overline{-1_ℂ} = -1_ℂ`
-    _ = (starRingEnd ℂ) z + -((starRingEnd ℂ) w) := by
+    _ = star z + -(star w) := by
         rw [neg_one_mul]                          -- 6 行目: `multiply_by_minus_one`（`z → \overline{w}`）
-    _ = (starRingEnd ℂ) z - (starRingEnd ℂ) w := by
+    _ = star z - star w := by
         rw [← sub_eq_add_neg]                     -- 7 行目: `def_complex_difference`
 
 end Ising2D

@@ -14,8 +14,8 @@
 mathlib の `ℂ` の `star` は `star z := ⟨z.re, -z.im⟩` と定義されており、人手の `\overline{(x,y)} := (x,-y)` と定義として等しい。
 そこで Lean の `star`（`ℂ` の上のもの）をそのまま人手の複素共役として使う。式の `-y` は `ℝ` の符号反転である。
 
-Lean の `starRingEnd ℂ` を `z` に当てた `(starRingEnd ℂ) z` も、定義を開くと `star z` になる（mathlib の `starRingEnd_apply` は `rfl`）。
-`(starRingEnd ℂ) z` は環の準同型を関数として当てる形で、環の準同型は本文に定義が無いので、許可の一覧には `star` だけを載せる。
+具体版の定義と主張は、共役を `star z` で書く。mathlib の `conj z`（環の準同型 `starRingEnd ℂ` を `z` に当てる形）では書かない。
+環の準同型は本文に定義が無いからである。証明の中で `conj` の形の mathlib の補題を使う段は、`starRingEnd_apply`（`rfl`）で行き来する。
 
 定義であり、主張に固有の構造は定義の式だけなので、必要十分版は置かない。
 -/

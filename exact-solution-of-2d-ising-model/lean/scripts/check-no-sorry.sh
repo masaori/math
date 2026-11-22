@@ -175,7 +175,6 @@ targets=(
   Ising2D.identity_matrix_two_conjTranspose
   Ising2D.pauliX_conjTranspose
   Ising2D.pauliZ_conjTranspose
-  Ising2D.star_I_eq_neg_I
   Ising2D.star_neg_I_eq_I
   Ising2D.pauliY_conjTranspose
   Ising2D.siteProd_conjTranspose_apply
@@ -476,9 +475,6 @@ targets=(
   Ising2D.complex_conjugate_mul_complex_conjugate_inv
   Ising2D.complex_conjugate_of_inverse
   Ising2D.complex_conjugate_of_difference_eq
-  Ising2D.complex_conjugate_star_mul
-  Ising2D.complex_conjugate_star_add
-  Ising2D.complex_conjugate_star_sub
   Ising2D.complex_conjugate_star_zero
   Ising2D.complex_conjugate_star_one
   Ising2D.complex_conjugate_star_finite_prod

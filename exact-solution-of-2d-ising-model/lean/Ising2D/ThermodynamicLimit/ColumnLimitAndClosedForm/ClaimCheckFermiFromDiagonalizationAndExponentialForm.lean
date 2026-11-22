@@ -38,15 +38,15 @@ variable {M : ℕ}
 /-! ## 係数の複素共役 -/
 
 /-- 人手 `check_number_operator_is_hermitian` (3) の準備 (b): `\overline{u} = u`（`u := 2_ℂ s`、`s := (√M_col)_ℂ`。人手の 5 行）。 -/
-theorem star_two_mul_sqrtM (M : ℕ) : (starRingEnd ℂ) (2 * sqrtM M) = 2 * sqrtM M :=
-  calc (starRingEnd ℂ) (2 * sqrtM M)
-      = (starRingEnd ℂ) 2 * (starRingEnd ℂ) (sqrtM M) := complex_conjugate_of_product_eq 2 (sqrtM M)
+theorem star_two_mul_sqrtM (M : ℕ) : star (2 * sqrtM M) = 2 * sqrtM M :=
+  calc star (2 * sqrtM M)
+      = star 2 * star (sqrtM M) := complex_conjugate_of_product_eq 2 (sqrtM M)
                                       -- 2 行目: `complex_conjugate_of_product`（`z → 2_ℂ`, `w → s`）（1 行目の `u` の定義は `rfl`）
-    _ = (starRingEnd ℂ) ((2 : ℝ) : ℂ) * (starRingEnd ℂ) (sqrtM M) := by rw [Complex.ofReal_ofNat]
+    _ = star ((2 : ℝ) : ℂ) * star (sqrtM M) := by rw [Complex.ofReal_ofNat]
                                       -- `2_ℂ` は略記 `r_ℂ` の `r = 2`（Lean のリテラル `(2 : ℂ)` との読み替え）
-    _ = ((2 : ℝ) : ℂ) * (starRingEnd ℂ) (sqrtM M) := by rw [conj_real_inclusion 2]
+    _ = ((2 : ℝ) : ℂ) * star (sqrtM M) := by rw [complex_conjugate_of_real_inclusion 2]
                                       -- 3 行目: `complex_conjugate_of_real_inclusion`（`r → 2`）
-    _ = ((2 : ℝ) : ℂ) * sqrtM M := by rw [sqrtM, conj_real_inclusion (Real.sqrt M)]
+    _ = ((2 : ℝ) : ℂ) * sqrtM M := by rw [sqrtM, complex_conjugate_of_real_inclusion (Real.sqrt M)]
                                       -- 4 行目: `complex_conjugate_of_real_inclusion`（`r → √M_col`。`s` の定義）
     _ = 2 * sqrtM M := by rw [Complex.ofReal_ofNat]
                                       -- 略記の読み替え（5 行目の `u` の定義は `rfl`）
@@ -57,19 +57,19 @@ theorem star_two_mul_sqrtM (M : ℕ) : (starRingEnd ℂ) (2 * sqrtM M) = 2 * sqr
 `complex_conjugate_of_inverse`（`w → u`）がそれを仮定に取るからである。 -/
 theorem star_checkQ (hM : M ≠ 0) : star (checkQ M) = checkQ M :=
   calc star (checkQ M)
-      = (starRingEnd ℂ) (1 / (2 * sqrtM M)) := rfl
+      = star (1 / (2 * sqrtM M)) := rfl
                                       -- 1 行目: 前置きの `β = 1_ℂ/u`（Lean の `checkQ` の定義）
-    _ = (starRingEnd ℂ) (1 * (2 * sqrtM M)⁻¹) := by rw [div_eq_mul_inv]
+    _ = star (1 * (2 * sqrtM M)⁻¹) := by rw [div_eq_mul_inv]
                                       -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → u`）
-    _ = (starRingEnd ℂ) 1 * (starRingEnd ℂ) (2 * sqrtM M)⁻¹ := complex_conjugate_of_product_eq _ _
+    _ = star 1 * star (2 * sqrtM M)⁻¹ := complex_conjugate_of_product_eq _ _
                                       -- 3 行目: `complex_conjugate_of_product`（`z → 1_ℂ`, `w → u^{-1}`）
-    _ = (starRingEnd ℂ) ((1 : ℝ) : ℂ) * (starRingEnd ℂ) (2 * sqrtM M)⁻¹ := by rw [Complex.ofReal_one]
+    _ = star ((1 : ℝ) : ℂ) * star (2 * sqrtM M)⁻¹ := by rw [Complex.ofReal_one]
                                       -- `1_ℂ` は略記 `r_ℂ` の `r = 1`（`inclusion_rr_to_cc`）
-    _ = ((1 : ℝ) : ℂ) * (starRingEnd ℂ) (2 * sqrtM M)⁻¹ := by rw [conj_real_inclusion 1]
+    _ = ((1 : ℝ) : ℂ) * star (2 * sqrtM M)⁻¹ := by rw [complex_conjugate_of_real_inclusion 1]
                                       -- 4 行目: `complex_conjugate_of_real_inclusion`（`r → 1`）
-    _ = 1 * (starRingEnd ℂ) (2 * sqrtM M)⁻¹ := by rw [Complex.ofReal_one]
+    _ = 1 * star (2 * sqrtM M)⁻¹ := by rw [Complex.ofReal_one]
                                       -- 略記の読み替え
-    _ = 1 * ((starRingEnd ℂ) (2 * sqrtM M))⁻¹ := by
+    _ = 1 * (star (2 * sqrtM M))⁻¹ := by
         rw [complex_conjugate_of_inverse (checkU_ne_zero hM)]
                                       -- 5 行目: `complex_conjugate_of_inverse`（`w → u`）
     _ = 1 * (2 * sqrtM M)⁻¹ := by rw [star_two_mul_sqrtM]
@@ -80,43 +80,43 @@ theorem star_checkQ (hM : M ≠ 0) : star (checkQ M) = checkQ M :=
                                       -- 8 行目: 前置きの `β = 1_ℂ/u` を右辺から左辺へ
 
 /-- 人手 `check_number_operator_is_hermitian` (3) の準備 (a): `r ∈ ℝ` について `\overline{-(r_ℂ)} = -(r_ℂ)`（人手の 5 行）。 -/
-theorem star_neg_real_inclusion (r : ℝ) : (starRingEnd ℂ) (-(r : ℂ)) = -(r : ℂ) :=
-  calc (starRingEnd ℂ) (-(r : ℂ))
-      = (starRingEnd ℂ) ((-1) * (r : ℂ)) := by rw [neg_one_mul]
+theorem star_neg_real_inclusion (r : ℝ) : star (-(r : ℂ)) = -(r : ℂ) :=
+  calc star (-(r : ℂ))
+      = star ((-1) * (r : ℂ)) := by rw [neg_one_mul]
                                       -- 1 行目: `multiply_by_minus_one`
-    _ = (starRingEnd ℂ) (-1) * (starRingEnd ℂ) (r : ℂ) := complex_conjugate_of_product_eq _ _
+    _ = star (-1) * star (r : ℂ) := complex_conjugate_of_product_eq _ _
                                       -- 2 行目: `complex_conjugate_of_product`（`z → -1_ℂ`, `w → r_ℂ`）
-    _ = (starRingEnd ℂ) ((-1 : ℝ) : ℂ) * (starRingEnd ℂ) (r : ℂ) := by
+    _ = star ((-1 : ℝ) : ℂ) * star (r : ℂ) := by
         rw [Complex.ofReal_neg, Complex.ofReal_one]
                                       -- `-1_ℂ` は略記 `r_ℂ` の `r = -1`（`inclusion_rr_to_cc`）
-    _ = ((-1 : ℝ) : ℂ) * (starRingEnd ℂ) (r : ℂ) := by rw [conj_real_inclusion (-1)]
+    _ = ((-1 : ℝ) : ℂ) * star (r : ℂ) := by rw [complex_conjugate_of_real_inclusion (-1)]
                                       -- 3 行目: `complex_conjugate_of_real_inclusion`（`r → -1`）
-    _ = (-1) * (starRingEnd ℂ) (r : ℂ) := by rw [Complex.ofReal_neg, Complex.ofReal_one]
+    _ = (-1) * star (r : ℂ) := by rw [Complex.ofReal_neg, Complex.ofReal_one]
                                       -- 略記の読み替え
-    _ = (-1) * (r : ℂ) := by rw [conj_real_inclusion r]
+    _ = (-1) * (r : ℂ) := by rw [complex_conjugate_of_real_inclusion r]
                                       -- 4 行目: `complex_conjugate_of_real_inclusion`（`r → r`）
     _ = -(r : ℂ) := neg_one_mul _     -- 5 行目: `multiply_by_minus_one` を右辺から左辺へ
 
 /-- 人手 `check_number_operator_is_hermitian` (3) の準備 (c) の前半: `\overline{b_μ} = (-1_ℂ)γ_2(θ̃_μ)`
 （`b_μ := γ_2(-θ̃_μ)`、`ν := M_col+1-μ`。人手の 8 行）。 -/
 theorem star_gamma2_neg_thetaTilde (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
-    (starRingEnd ℂ) (gamma2 K (-thetaTilde M μ)) = (-1) * gamma2 K (thetaTilde M μ) :=
-  calc (starRingEnd ℂ) (gamma2 K (-thetaTilde M μ))
-      = (starRingEnd ℂ) (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))) := by
+    star (gamma2 K (-thetaTilde M μ)) = (-1) * gamma2 K (thetaTilde M μ) :=
+  calc star (gamma2 K (-thetaTilde M μ))
+      = star (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))) := by
         rw [gamma2_thetaTilde_conj K hM μ]
                                       -- 2 行目: `periodicity_of_check_fermi` (3) の `γ_2(θ̃_ν) = γ_2(-θ̃_μ)` を右辺から左辺へ
                                       -- （1 行目の `b_μ` の定義は `rfl`）
-    _ = 1 * (starRingEnd ℂ) (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))) := (one_mul _).symm
+    _ = 1 * star (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))) := (one_mul _).symm
                                       -- 3 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
-    _ = ((-1) * (-1)) * (starRingEnd ℂ) (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))) := by
+    _ = ((-1) * (-1)) * star (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ))) := by
         rw [show ((-1 : ℂ) * (-1)) = 1 by
           rw [(complex_neg_eq_ofReal_neg_one_mul 1).trans (mul_one _)]
           exact complex_minus_one_mul_minus_one]
                                       -- Lean の `(-1 : ℂ)` は `-(1_ℂ)` で、`multiply_by_minus_one`（`z → 1_ℂ`）と積の単位元で `(-1)_ℂ` へ読み替える
                                       -- 4 行目: `minus_one_times_minus_one_is_one_in_cc` を右辺から左辺へ
-    _ = (-1) * ((-1) * (starRingEnd ℂ) (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)))) := mul_assoc _ _ _
+    _ = (-1) * ((-1) * star (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)))) := mul_assoc _ _ _
                                       -- 5 行目: `complex_numbers_form_a_field` の積の結合律
-    _ = (-1) * (-(starRingEnd ℂ) (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)))) :=
+    _ = (-1) * (-star (gamma2 K (thetaTilde M ((M : ℤ) + 1 - μ)))) :=
         congrArg ((-1) * ·) (neg_one_mul _)
                                       -- 6 行目: `multiply_by_minus_one` を右辺から左辺へ
     _ = (-1) * gamma2 K (-thetaTilde M ((M : ℤ) + 1 - μ)) := by
@@ -128,13 +128,13 @@ theorem star_gamma2_neg_thetaTilde (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
 /-- 人手 `check_number_operator_is_hermitian` (3) の準備 (c): `\overline{d_μ} = (-1_ℂ)d_ν`
 （`d_μ := u b_μ`、`d_ν := u b_ν`、`u := 2_ℂ s`。人手の 10 行）。 -/
 theorem star_checkD (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
-    (starRingEnd ℂ) (2 * sqrtM M * gamma2 K (-thetaTilde M μ))
+    star (2 * sqrtM M * gamma2 K (-thetaTilde M μ))
       = (-1) * (2 * sqrtM M * gamma2 K (-thetaTilde M ((M : ℤ) + 1 - μ))) :=
-  calc (starRingEnd ℂ) (2 * sqrtM M * gamma2 K (-thetaTilde M μ))
-      = (starRingEnd ℂ) (2 * sqrtM M) * (starRingEnd ℂ) (gamma2 K (-thetaTilde M μ)) :=
+  calc star (2 * sqrtM M * gamma2 K (-thetaTilde M μ))
+      = star (2 * sqrtM M) * star (gamma2 K (-thetaTilde M μ)) :=
         complex_conjugate_of_product_eq _ _
                                       -- 2 行目: `complex_conjugate_of_product`（`z → u`, `w → b_μ`）（1 行目の `d_μ` の定義は `rfl`）
-    _ = (2 * sqrtM M) * (starRingEnd ℂ) (gamma2 K (-thetaTilde M μ)) := by rw [star_two_mul_sqrtM]
+    _ = (2 * sqrtM M) * star (gamma2 K (-thetaTilde M μ)) := by rw [star_two_mul_sqrtM]
                                       -- 3 行目: 準備 (b)
     _ = (2 * sqrtM M) * ((-1) * gamma2 K (thetaTilde M μ)) := by rw [star_gamma2_neg_thetaTilde K hM μ]
                                       -- 4 行目: 上の `\overline{b_μ}` の鎖
@@ -223,15 +223,15 @@ theorem star_checkP (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
   have hdν0 : dν ≠ 0 := checkD_ne_zero P hM ((M : ℤ) + 1 - μ)
                                       -- `d_ν ∈ ℂ^×`（同じ Step 1 を `ν` に）
   calc star (checkP P.const M μ)
-      = (starRingEnd ℂ) ((-r) / dμ) := rfl
+      = star ((-r) / dμ) := rfl
                                       -- 1 行目: 前置きの `α_μ = (-(r_ℂ))/d_μ`（`def_check_fermi` の読み。Lean の `checkP` の定義）
-    _ = (starRingEnd ℂ) ((-r) * dμ⁻¹) := by rw [div_eq_mul_inv]
+    _ = star ((-r) * dμ⁻¹) := by rw [div_eq_mul_inv]
                                       -- 2 行目: `def_complex_quotient`（`z → -(r_ℂ)`, `w → d_μ`）
-    _ = (starRingEnd ℂ) (-r) * (starRingEnd ℂ) dμ⁻¹ := complex_conjugate_of_product_eq _ _
+    _ = star (-r) * star dμ⁻¹ := complex_conjugate_of_product_eq _ _
                                       -- 3 行目: `complex_conjugate_of_product`（`z → -(r_ℂ)`, `w → d_μ^{-1}`）
-    _ = (-r) * (starRingEnd ℂ) dμ⁻¹ := by rw [hr, star_neg_real_inclusion]
+    _ = (-r) * star dμ⁻¹ := by rw [hr, star_neg_real_inclusion]
                                       -- 4 行目: 準備 (a)
-    _ = (-r) * ((starRingEnd ℂ) dμ)⁻¹ := by rw [complex_conjugate_of_inverse hdμ0]
+    _ = (-r) * (star dμ)⁻¹ := by rw [complex_conjugate_of_inverse hdμ0]
                                       -- 5 行目: `complex_conjugate_of_inverse`（`w → d_μ`）
     _ = (-r) * ((-1) * dν)⁻¹ := by rw [hdμ, star_checkD P.const hM μ]
                                       -- 6 行目: 準備 (c)

@@ -24,8 +24,8 @@
 | 正値性の `Bx = 0` を仮定した 5 行の鎖（背理法） | `mulVec_ne_zero_of_left_inverse` の `calc` の 5 段 |
 | 正値性の最後の 2 行の鎖と `x^*(B^*(AB))x ∈ ℝ_{>0}` | `congruence_preserves_positive_definite` の `calc` の 2 段 |
 
-- 人手の `complex_conjugate_of_product`・`complex_conjugate_of_sum` は、具体版を `star` の形と添字 `Fin n`（`n = 0` を含む）へ読み替えた
-  `complex_conjugate_star_mul`・`complex_conjugate_star_finite_sum`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`）を引く。
+- 人手の `complex_conjugate_of_product`・`complex_conjugate_of_sum` は、積の具体版 `complex_conjugate_of_product_eq`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`）と、
+  和の具体版を添字 `Fin n`（`n = 0` を含む）へ読み替えた `complex_conjugate_star_finite_sum`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`）を引く。
   `star_preserves_norm_and_limits` (1) の第 1 式（`(AB)^* = B^*A^*`）は具体版
   `matrix_conjTranspose_mul`（`ClaimStarPreservesNormAndLimits.lean`）を引く。`mat_mult_associative` も具体版が無いので、既存の慣行どおり `Matrix.mul_assoc`
   （行列と数ベクトルの積では `Matrix.mulVec_mulVec`）を 1 段に 1 回ずつ引く。
@@ -83,7 +83,7 @@ theorem conjugate_bilinear_value_of_congruence {n : ℕ} (A B : Matrix (Fin n) (
         refine Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun m _ => ?_
         rw [Finset.sum_mul, Finset.sum_mul_sum]
     _ = ∑ j, ∑ m, (∑ k, star (B j k * x k)) * A j m * (∑ l, B m l * y l) := by
-        simp only [complex_conjugate_star_mul]                                    -- `complex_conjugate_of_product` を各項へ
+        simp only [complex_conjugate_of_product_eq]                                    -- `complex_conjugate_of_product` を各項へ
     _ = ∑ j, ∑ m, star (∑ k, B j k * x k) * A j m * (∑ l, B m l * y l) := by
         simp only [complex_conjugate_star_finite_sum]                             -- `complex_conjugate_of_sum` の `m = n`
     _ = ∑ j, ∑ m, star ((B *ᵥ x) j) * A j m * (B *ᵥ y) m := by

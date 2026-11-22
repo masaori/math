@@ -30,17 +30,17 @@ open Matrix
 
 variable {M : ℕ}
 
-/-- 位相因子の複素共役: `conj(e^{-2πik/M}) = e^{2πik/M}`。 -/
+/-- 位相因子の複素共役: `\overline{e^{-2πik/M}} = e^{2πik/M}`。 -/
 theorem expPhase_conj (M : ℕ) (k : ℤ) :
-    (starRingEnd ℂ) (expPhase M k) = expPhase M (-k) := by
-  rw [expPhase, expPhase, ← Complex.exp_conj]
+    star (expPhase M k) = expPhase M (-k) := by
+  rw [expPhase, expPhase, ← starRingEnd_apply, ← Complex.exp_conj]
   congr 1
   simp only [map_div₀, map_neg, map_mul, map_ofNat, Complex.conj_I, Complex.conj_ofReal,
     map_intCast, map_natCast, Int.cast_neg]
   ring
 
 theorem checkPhase_conj_star (hM : M ≠ 0) (k μ : ℤ) :
-    (starRingEnd ℂ) (checkPhase M k μ) = checkPhase M k ((M : ℤ) + 1 - μ) := by
+    star (checkPhase M k μ) = checkPhase M k ((M : ℤ) + 1 - μ) := by
   rw [checkPhase, expPhase_conj, checkPhase_conj hM]
 
 /-- **人手証明 (2)**: `Ž_μ^* = Ž_{M+1-μ}`。 -/
@@ -48,13 +48,13 @@ theorem checkZ_conjTranspose (hM : M ≠ 0) (μ : ℤ) :
     (checkZ M μ)ᴴ = checkZ M ((M : ℤ) + 1 - μ) := by
   rw [checkZ, checkZ, Matrix.conjTranspose_sum]
   refine Finset.sum_congr rfl fun j _ => ?_
-  rw [Matrix.conjTranspose_smul, Z_conjTranspose, Complex.star_def, checkPhase_conj_star hM]
+  rw [Matrix.conjTranspose_smul, Z_conjTranspose, checkPhase_conj_star hM]
 
 /-- **人手証明 (2)**: `Y̌_μ^* = Y̌_{M+1-μ}`。 -/
 theorem checkY_conjTranspose (hM : M ≠ 0) (μ : ℤ) :
     (checkY M μ)ᴴ = checkY M ((M : ℤ) + 1 - μ) := by
   rw [checkY, checkY, Matrix.conjTranspose_sum]
   refine Finset.sum_congr rfl fun j _ => ?_
-  rw [Matrix.conjTranspose_smul, Y_conjTranspose, Complex.star_def, checkPhase_conj_star hM]
+  rw [Matrix.conjTranspose_smul, Y_conjTranspose, checkPhase_conj_star hM]
 
 end Ising2D
