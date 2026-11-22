@@ -7,9 +7,8 @@
 必要十分版は `Ising2D/NecSuf/TensorPowerBasis.lean`。本ファイルは
 `exact-solution-of-2d-ising-model/README.md` 4 節の規約
 「必要十分版から具体版が特殊化で得られる場合は、その導出を明示的に書く」に従って、
-既存の具体版（`Ising2D.tensorPowBasis` / `Ising2D.matTensorPowBasis` /
-`Ising2D.matrixUnitBasis`）が必要十分版の特殊化であることを明示する。
-**既存の `TheoremTensorBasis.lean` と `Representation.lean` は編集していない。**
+既存の宣言（抽象テンソル冪の基底 `Ising2D.tensorPowBasis` / `Ising2D.matTensorPowBasis` と
+`Ising2D.matrixUnitBasis`）が必要十分版の特殊化であることを明示する。どれも本文の `tensor_basis` の具体版ではない。
 
 ## 何が具体で何が抽象か（判断の根拠）
 
@@ -17,8 +16,8 @@
 **具体的な Kronecker 表現 `TensorPow M = Matrix (Conf M) (Conf M) ℂ`** で扱う（README 2 節）。
 人手証明 `<tensor_basis>` (1) が使われるのは
 `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` Step 1 の
-「`cal(E) = { E_{IJ} }` は基底である」であり、その具体版は
-`Ising2D.matrixUnitBasis`（行列単位の族）である。
+「`cal(E) = { E_{IJ} }` は基底である」である。`Ising2D.matrixUnitBasis`（行列単位の族。mathlib の `Matrix.stdBasis`）は
+族の元が `Matrix.single` で、本文 (1) のクロネッカー積の族とは型が違うので、その具体版ではない。
 本ファイルではこれを、テンソル積を一切使わない必要十分版
 `NecSuf.matrixUnitBasis` の特殊化として得る（`matrixUnitBasis_eq_necSuf`）。
 

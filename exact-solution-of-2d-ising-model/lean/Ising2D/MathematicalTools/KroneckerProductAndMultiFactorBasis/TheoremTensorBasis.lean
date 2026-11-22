@@ -1,27 +1,12 @@
 /-
-# テンソル積の基底は基底のテンソル積
+# 抽象テンソル冪の基底
 
-対応する人手証明:
-`parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ` (`<tensor_basis>`)
+mathlib の抽象テンソル冪 `⨂[K] (_ : Fin M), V` の基底を、`V` の基底から作る。
+`Ising2D/Representation.lean` の `toMatrixAlgHom_basis` が使う。
 
-## 原文ステートメントについての注意（要修正点）
-
-原文は
-
-> $V$: $m$次元$K$-線型空間、$E = {e_1, …, e_m}$: $V$の基底とするとき、
-> $forall (i_1, …, i_m) in {1, …, m}^m$、$e_{i_1} ⊗ … ⊗ e_{i_m}$ は $V^{⊗m}$ の基底である
-
-と書かれているが、これは 2 点で不正確である。
-
-1. 「各 $(i_1, …, i_m)$ について $e_{i_1} ⊗ … ⊗ e_{i_m}$ が基底」ではない。基底なのは
-   **族全体** $\{e_{i_1} ⊗ ⋯ ⊗ e_{i_M}\}_{(i_1,…,i_M)}$ であって、その個々の元ではない。
-2. 添字 $m$ が「$V$ の次元」と「テンソル冪の階数」の両方に使われている。両者は独立なので
-   区別しなければならない（以下では基底の添字集合を `ι`、階数を `M` とする）。
-
-実際に本プロジェクトが使うのは修正後の主張（族が基底）であり
-（`parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` の Step 1 で
-`cal(E) = { E_(I J) : I, J ∈ {1,2}^M }` が基底であることの根拠として引用される）、
-以下ではそれを形式化する。
+本文の `tensor_basis`（`structured-latex/content/002_linear_space_general.ts`）は、行列単位のクロネッカー積の族が
+`Mat(2^M, ℂ)` の基底であり、標準基底のクロネッカー積の族が `ℂ^{2^M}` の基底であるという具体的な主張で、
+抽象テンソル積を置かない。このファイルの宣言はその具体版ではない。
 -/
 import Mathlib.LinearAlgebra.PiTensorProduct.Basis
 import Mathlib.LinearAlgebra.Matrix.StdBasis
@@ -36,7 +21,8 @@ variable {K : Type*} [CommSemiring K]
 variable {V : Type*} [AddCommMonoid V] [Module K V]
 variable {ι : Type*}
 
-/-- **`<tensor_basis>` の形式化（一般形）**。
+/-- **抽象テンソル冪の基底（一般形）**。本文の `tensor_basis`（行列単位のクロネッカー積の族が `Mat(2^M, ℂ)` の基底）の
+具体版ではない（本文は抽象テンソル積を置かない）。
 
 `b : Module.Basis ι K V` が `K`-加群 `V` の基底ならば、
 `p ↦ b (p 0) ⊗ b (p 1) ⊗ ⋯ ⊗ b (p (M-1))`（`p : Fin M → ι`）は
@@ -61,13 +47,12 @@ theorem tensorPowBasis_repr_tprod_apply (M : ℕ) (b : Basis ι K V)
     (tensorPowBasis M b).repr (⨂ₜ[K] i, x i) p = ∏ i : Fin M, b.repr (x i) (p i) :=
   Basis.piTensorProduct_repr_tprod_apply _ _ _
 
-/-- **`<tensor_basis>` を `Mat(2, ℂ)` に適用した系**。
+/-- **`tensorPowBasis` を `Mat(2, ℂ)` に適用した系**。本文の `tensor_basis` の具体版ではない。
 
 `Mat(2, ℂ)` の標準基底（行列単位 `E_{ij}`）から作られる族
 `p ↦ E_{p(0)} ⊗ ⋯ ⊗ E_{p(M-1)}` は `Mat(2, ℂ)^{⊗M}` の ℂ-基底である。
 
-これは `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` の Step 1 で
-「`cal(E)` は `Mat(2,ℂ)^{⊗M}` の基底である」と主張されているものそのもの。 -/
+`toMatrixAlgHom_basis`（`Ising2D/Representation.lean`）が、行列表現の行列単位へ写ることを述べる。 -/
 noncomputable def matTensorPowBasis (M : ℕ) :
     Basis (Fin M → Fin 2 × Fin 2) ℂ (AbstractTensorPow M) :=
   tensorPowBasis M (Matrix.stdBasis ℂ (Fin 2) (Fin 2))

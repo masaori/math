@@ -813,8 +813,8 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 
 | Lean の名前 | 内容 | 対応する人手証明 |
 | --- | --- | --- |
-| `Ising2D.tensorPowBasis` | 基底のテンソル冪はテンソル冪の基底 | `<tensor_basis>` |
-| `Ising2D.matTensorPowBasis` | 上を `Mat(2,ℂ)` に適用したもの | `<tensor_basis>` の系 |
+| `Ising2D.tensorPowBasis` | 基底のテンソル冪はテンソル冪の基底（抽象テンソル冪。本文の `<tensor_basis>` の具体版ではない） | なし |
+| `Ising2D.matTensorPowBasis` | 上を `Mat(2,ℂ)` に適用したもの（本文の `<tensor_basis>` の具体版ではない） | なし |
 | `Ising2D.tensorPowAlgEquiv` | 抽象テンソル冪 ≃ₐ[ℂ] 行列表現 | 表現の選択（新規） |
 | `Ising2D.toFinPowAlgEquiv` | 行列表現 ≃ₐ[ℂ] `Matrix (Fin (2^M)) (Fin (2^M)) ℂ` | 表現の選択（新規） |
 | `Ising2D.E_mul_E` | 行列単位の積公式 `E_IJ E_KL = δ_JK E_IL` | `<centralizer_is_scalar>` Step 2 |

@@ -5,8 +5,8 @@
 
 | | ファイル | 主な宣言 |
 | --- | --- | --- |
-| 具体版（本文が実際に使う形） | `Ising2D/Representation.lean` | `Ising2D.matrixUnitBasis`（`E_{IJ}` の族） |
-| 具体版（抽象テンソル積での表現） | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean` | `Ising2D.tensorPowBasis` / `Ising2D.matTensorPowBasis` |
+| 行列単位の族（mathlib の `Matrix.stdBasis`。本文の `tensor_basis` の具体版ではない） | `Ising2D/Representation.lean` | `Ising2D.matrixUnitBasis`（`E_{IJ}` の族） |
+| 抽象テンソル積での表現（本文の `tensor_basis` の具体版ではない） | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean` | `Ising2D.tensorPowBasis` / `Ising2D.matTensorPowBasis` |
 | **必要十分版** | `Ising2D/NecSuf/TensorPowerBasis.lean` | `NecSuf.matrix_eq_sum_smul_single` / `NecSuf.sum_smul_single_apply` / `NecSuf.linearIndependent_single` / `NecSuf.matrixUnitBasis` / `NecSuf.basisOfLinearEquiv` |
 | 対応づけ（導出） | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasisFromNecSuf.lean` | `Ising2D.EBasis` / `EBasis_apply` / `coe_EBasis_eq_matrixUnitBasis` / `matrix_eq_sum_E` / `kroneckerTensorPowBasis` |
 

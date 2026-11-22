@@ -6502,6 +6502,7 @@ c_{t_0}
     kind: "claim",
     title: { text: "行列の核は部分空間" },
     labels: ["kernel_of_matrix_is_subspace"],
+    lean: ["Ising2D.kernel_of_matrix_is_subspace"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -6581,6 +6582,7 @@ Q(ax)
     kind: "claim",
     title: { tex: String.raw`E_\lambda(A) = \{x \mid Ax = \lambda x\}\ \text{は部分空間}` },
     labels: ["eigenvalue_equation_solution_set_is_subspace"],
+    lean: ["Ising2D.eigenvalue_equation_solution_set_is_subspace"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -6668,6 +6670,7 @@ A(ax)
     kind: "definition",
     title: { text: "二つの部分空間の直和" },
     labels: ["def_direct_sum_of_two_subspaces"],
+    lean: ["Ising2D.IsDirectSumOfTwoMat"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -6728,6 +6731,7 @@ A(ax)
     kind: "definition",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{で添字付けた有限個の部分空間の直和}` },
     labels: ["def_direct_sum_over_binary_words"],
+    lean: ["Ising2D.IsDirectSumOverBinaryWordsMat"],
     statement: [
       paragraph([
         math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
@@ -6801,6 +6805,7 @@ A(ax)
     kind: "claim",
     title: { text: "直和の二つの部分空間の基底をつなぐと全体の基底になる" },
     labels: ["concatenated_bases_of_direct_sum_form_basis"],
+    lean: ["Ising2D.concatenated_bases_of_direct_sum_form_basis"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -6996,6 +7001,7 @@ w
     kind: "claim",
     title: { text: "基底を列に並べた行列は逆行列を持つ" },
     labels: ["matrix_of_basis_columns_has_inverse"],
+    lean: ["Ising2D.matrix_of_basis_columns_has_inverse"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -7214,6 +7220,7 @@ Py
     kind: "claim",
     title: { text: "1 次元の部分空間は、0 でない一つの元の倍数の全体" },
     labels: ["one_dimensional_subspace_is_multiples_of_nonzero_element"],
+    lean: ["Ising2D.one_dimensional_subspace_is_multiples_of_nonzero_element"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -7310,6 +7317,7 @@ u
     kind: "claim",
     title: { tex: String.raw`\mathbb{C}^n\ \text{の}\ n\ \text{個の元の線型独立な族は基底}` },
     labels: ["linearly_independent_family_of_n_vectors_is_basis"],
+    lean: ["Ising2D.linearly_independent_family_of_n_vectors_is_basis"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -7389,6 +7397,7 @@ u
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "クロネッカー積（2 次の複素行列・2 次元数ベクトルの M 個の積）" },
     labels: ["def_kronecker"],
+    lean: ["Ising2D.vecKron", "Ising2D.siteProd", "Ising2D.vecKron_apply", "Ising2D.siteProd_apply"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
@@ -7689,6 +7698,7 @@ u
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "クロネッカー積の積の規則（各因子ごとの積になること）" },
     labels: ["kronecker_product_rule"],
+    lean: ["Ising2D.kronecker_product_rule_mulVec", "Ising2D.sum_over_multi_index_of_product_eq_product_of_sums"],
     statement: [
       paragraph([
         ref("def_kronecker"),
@@ -7888,6 +7898,7 @@ u
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "クロネッカー積の各因子についての線型性" },
     labels: ["kronecker_multilinear"],
+    lean: ["Ising2D.siteProd_update_sum_smul", "Ising2D.siteProd_update_sum_smul_apply", "Ising2D.siteProd_update_smul", "Ising2D.vecKron_update_sum_smul", "Ising2D.vecKron_update_sum_smul_apply", "Ising2D.vecKron_update_smul"],
     statement: [
       paragraph([
         ref("def_kronecker"),
@@ -7987,6 +7998,7 @@ u
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "行列の転置" },
     labels: ["def_matrix_transpose"],
+    lean: ["Ising2D.matrix_transpose_apply"],
     statement: [
       paragraph([
         math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
@@ -8029,6 +8041,7 @@ u
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "クロネッカー積の転置（因子ごとの転置になること）" },
     labels: ["kronecker_transpose"],
+    lean: ["Ising2D.siteProd_transpose", "Ising2D.siteProd_transpose_apply"],
     statement: [
       paragraph([
         ref("def_kronecker"),
@@ -8100,6 +8113,7 @@ u
     kind: "claim",
     title: { text: "行列の和の転置は転置の和" },
     labels: ["transpose_of_matrix_sum"],
+    lean: ["Ising2D.matrix_transpose_add", "Ising2D.matrix_transpose_add_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -8151,6 +8165,7 @@ u
     kind: "claim",
     title: { text: "行列のスカラー倍の転置は転置のスカラー倍" },
     labels: ["transpose_of_matrix_scalar_multiple"],
+    lean: ["Ising2D.matrix_transpose_smul", "Ising2D.matrix_transpose_smul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -8204,6 +8219,7 @@ u
     kind: "claim",
     title: { text: "行列の差の転置は転置の差" },
     labels: ["transpose_of_matrix_difference"],
+    lean: ["Ising2D.matrix_transpose_sub", "Ising2D.matrix_transpose_sub_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -8255,6 +8271,7 @@ u
     kind: "claim",
     title: { text: "行列の有限和の転置は転置の有限和" },
     labels: ["transpose_of_finite_sum_of_matrices"],
+    lean: ["Ising2D.finite_sum_transpose_of_matrices"],
     statement: [
       paragraph([
         math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
@@ -8323,6 +8340,7 @@ u
     kind: "claim",
     title: { text: "行列の積の転置は転置を逆の順に掛けた積" },
     labels: ["transpose_of_matrix_product"],
+    lean: ["Ising2D.matrix_transpose_mul", "Ising2D.matrix_transpose_mul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -8378,6 +8396,7 @@ u
     kind: "definition",
     title: { text: "成分がすべて実数の行列" },
     labels: ["def_matrix_with_real_entries"],
+    lean: ["Ising2D.MatrixHasRealEntries"],
     statement: [
       paragraph([
         math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
@@ -8416,6 +8435,7 @@ u
     kind: "definition",
     title: { text: "成分がすべて実数の複素行列から実数の行列への写像" },
     labels: ["def_real_matrix_of_real_entry_matrix"],
+    lean: ["Ising2D.realMatrixOfRealEntries", "Ising2D.ofReal_realMatrixOfRealEntries_apply", "Ising2D.realMatrixOfRealEntries_apply_eq"],
     statement: [
       paragraph([
         math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
@@ -8503,6 +8523,7 @@ u
     kind: "claim",
     title: { text: "成分がすべて実数の行列のクロネッカー積は成分がすべて実数" },
     labels: ["kronecker_of_real_entry_matrices_has_real_entries"],
+    lean: ["Ising2D.siteProd_hasRealEntries"],
     statement: [
       paragraph([
         ref("def_kronecker"),
@@ -8581,6 +8602,7 @@ u
     kind: "claim",
     title: { text: "成分がすべて実数の行列の実数倍は成分がすべて実数" },
     labels: ["real_scalar_multiple_of_real_entry_matrix_has_real_entries"],
+    lean: ["Ising2D.real_smul_hasRealEntries"],
     statement: [
       paragraph([
         math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
@@ -8648,6 +8670,7 @@ u
     kind: "claim",
     title: { text: "成分がすべて実数の行列の和は成分がすべて実数" },
     labels: ["sum_of_real_entry_matrices_has_real_entries"],
+    lean: ["Ising2D.matrix_add_hasRealEntries"],
     statement: [
       paragraph([
         math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
@@ -8719,6 +8742,7 @@ u
     kind: "claim",
     title: { text: "成分がすべて実数の行列の差は成分がすべて実数" },
     labels: ["difference_of_real_entry_matrices_has_real_entries"],
+    lean: ["Ising2D.matrix_sub_hasRealEntries", "Ising2D.matrix_sub_eq_add_real_neg_one_smul", "Ising2D.sub_hasRealEntries_tensorPow", "Ising2D.sub_eq_add_real_neg_one_smul_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
@@ -8779,6 +8803,7 @@ A - B
     kind: "claim",
     title: { text: "成分がすべて実数の行列の有限和は成分がすべて実数" },
     labels: ["finite_sum_of_real_entry_matrices_has_real_entries"],
+    lean: ["Ising2D.finite_sum_hasRealEntries"],
     statement: [
       paragraph([
         math(String.raw`m,n,r \in \mathbb{Z}_{\geq 1}`),
@@ -8843,6 +8868,7 @@ A - B
     kind: "claim",
     title: { text: "成分がすべて実数の行列の積は成分がすべて実数" },
     labels: ["product_of_real_entry_matrices_has_real_entries"],
+    lean: ["Ising2D.matrix_mul_hasRealEntries"],
     statement: [
       paragraph([
         math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
@@ -8987,6 +9013,7 @@ A - B
     kind: "definition",
     title: { text: "実数のベクトルから複素数のベクトルへの包含" },
     labels: ["def_real_vector_inclusion"],
+    lean: ["Ising2D.cvec", "Ising2D.cvec_apply"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -9029,6 +9056,7 @@ A - B
     kind: "claim",
     title: { tex: String.raw`\iota^{n}_{\mathbb{R}\to\mathbb{C}}\ \text{は単射}` },
     labels: ["real_vector_inclusion_is_injective"],
+    lean: ["Ising2D.real_vector_inclusion_is_injective"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -9085,6 +9113,7 @@ A - B
     kind: "claim",
     title: { tex: String.raw`\iota^{m}_{\mathbb{R}\to\mathbb{C}}(B_{\mathbb{R}}x) = B\,\iota^{n}_{\mathbb{R}\to\mathbb{C}}(x)` },
     labels: ["real_vector_inclusion_intertwines_matrix_vector_product"],
+    lean: ["Ising2D.real_vector_inclusion_intertwines_matrix_vector_product"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -9182,6 +9211,7 @@ A - B
     kind: "claim",
     title: { text: "実数の行列の積と実数のベクトルへの積の結合律" },
     labels: ["real_matrix_vector_product_is_associative"],
+    lean: ["Ising2D.real_matrix_vector_product_is_associative"],
     statement: [
       paragraph([
         math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
@@ -9266,6 +9296,7 @@ A - B
     kind: "claim",
     title: { text: "実数の単位行列を実数のベクトルに掛けても変わらない" },
     labels: ["real_identity_matrix_is_left_unit_of_real_matrix_vector_product"],
+    lean: ["Ising2D.real_identity_matrix_is_left_unit_of_real_matrix_vector_product"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -9372,6 +9403,7 @@ r_i
     kind: "claim",
     title: { text: "実数のベクトルを実数倍してから実数の行列を掛けると、積の各成分が同じ実数倍になる" },
     labels: ["real_matrix_vector_product_commutes_with_real_scalar_multiple"],
+    lean: ["Ising2D.real_matrix_vector_product_commutes_with_real_scalar_multiple"],
     statement: [
       paragraph([
         math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
@@ -9452,6 +9484,7 @@ r_i
     kind: "claim",
     title: { tex: String.raw`\varrho_{\mathbb{C}\to\mathbb{R}} \text{ は積を保つ}` },
     labels: ["real_matrix_of_real_entry_matrix_preserves_product"],
+    lean: ["Ising2D.real_matrix_of_real_entry_matrix_preserves_product"],
     statement: [
       paragraph([
         math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
@@ -9537,6 +9570,7 @@ r_i
     kind: "claim",
     title: { tex: String.raw`\varrho_{\mathbb{C}\to\mathbb{R}} \text{ は冪を保つ}` },
     labels: ["real_matrix_of_real_entry_matrix_preserves_power"],
+    lean: ["Ising2D.real_matrix_of_real_entry_matrix_preserves_power", "Ising2D.matrix_pow_hasRealEntries", "Ising2D.identity_matrix_hasRealEntries", "Ising2D.identity_matrix_entry_eq_real_identity_entry"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -9958,6 +9992,7 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "張る族のクロネッカー積の族は全体を張る" },
     labels: ["kronecker_family_of_spanning_family_spans"],
+    lean: ["Ising2D.kronecker_family_of_spanning_family_spans"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
@@ -10274,6 +10309,7 @@ A_1\boxtimes\cdots\boxtimes A_M
     kind: "claim",
     title: { text: "線型独立な族のクロネッカー積の族は線型独立" },
     labels: ["kronecker_family_of_independent_family_is_independent"],
+    lean: ["Ising2D.kronecker_family_of_independent_family_is_independent"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
@@ -10905,6 +10941,7 @@ d_{q_0}
     origin: { path: "_old/typst/parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ", ordinal: 2 },
     title: { tex: String.raw`c \cdot I \text{ は全行列と可換}` },
     labels: ["scalar_identity_commutes"],
+    lean: ["Ising2D.scalar_identity_commutes"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -10971,6 +11008,7 @@ d_{q_0}
     origin: { path: "_old/typst/parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ", ordinal: 4 },
     title: { tex: String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \text{ の中で全元と可換な元はスカラー}` },
     labels: ["centralizer_is_scalar"],
+    lean: ["Ising2D.centralizer_is_scalar"],
     statement: [
       paragraph(["行列単位の成分積は ", ref("mat_mult"), "、複素係数の演算は ", ref("complex_numbers_form_a_field"), " による。"]),
       paragraph([
@@ -12503,6 +12541,7 @@ z_N-z_M&=(x_N-x_M,\ y_N-y_M)
     origin: { path: "_old/typst/parts/002_線型空間の一般論/002_claim_行列ノルムの劣乗法性.typ", ordinal: 3 },
     title: { text: "行列乗算の連続性" },
     labels: ["matrix_multiplication_continuity"],
+    lean: ["Ising2D.matrix_mul_right_tendsto"],
     statement: [
       paragraph(["ノルムと収束は ", ref("def_matrix_norm"), "、行列積は ", ref("mat_mult"), "、積のノルムの評価は ", ref("matrix_norm_submultiplicativity"), " による。", math(String.raw`(A_N)_{N\in\mathbb Z_{\ge0}}`), " は以下の行列空間の列とする。"]),
       paragraph([
@@ -12550,6 +12589,7 @@ z_N-z_M&=(x_N-x_M,\ y_N-y_M)
     kind: "claim",
     title: { text: "行列乗算の右の因子についての連続性" },
     labels: ["matrix_multiplication_continuity_in_right_factor"],
+    lean: ["Ising2D.matrix_mul_left_tendsto"],
     statement: [
       paragraph(["ノルムと収束は ", ref("def_matrix_norm"), "、行列積は ", ref("mat_mult"), "、積のノルムの評価は ", ref("matrix_norm_submultiplicativity"), " による。", math(String.raw`(A_N)_{N\in\mathbb Z_{\ge0}}`), " は以下の行列空間の列とする。"]),
       paragraph([
@@ -12587,6 +12627,7 @@ z_N-z_M&=(x_N-x_M,\ y_N-y_M)
     kind: "claim",
     title: { text: "収束する複素数の列による行列のスカラー倍は収束する" },
     labels: ["scalar_sequence_times_matrix_converges"],
+    lean: ["Ising2D.smul_matrix_tendsto"],
     statement: [
       paragraph([
         "ノルムと収束は ",
