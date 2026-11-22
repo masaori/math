@@ -5,9 +5,10 @@
 
 * `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`（本文の正本）
   * `TV1_hatZ_hatY_011_definition_T_g`（ラベル `def_T_g`）
-    — `g ∈ (Mat(2,ℂ)^{⊗M})^×` に対し `T_g : h ↦ g h g⁻¹`
+    — `g ∈ (Mat(2^M,ℂ))^×` に対し `T_g : h ↦ g h g⁻¹`（`TConj`・`TConj_apply`）
   * `TV1_hatZ_hatY_015_claim_linearity_of_T`（ラベル `linearity_of_T`）
-    — `T` の ℂ-線型性
+    — `T` の ℂ-線型性。本文の 6 行の鎖と 1 対 1 の具体版は `ClaimTActionsOnCheck.lean` の `linearity_of_T_on_check`。
+      本ファイルの `TConj_linear` は任意の ℂ 上の環の上の形で、本文と 1 対 1 ではない
   * `TV1_hatZ_hatY_017_definition_A_theta`（ラベル `def_A_theta`）— `A(θ)`。
     章立ての組み直しで `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` へ移った
 * 参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts`（整数運動量の経路。本文から退避した）
@@ -25,8 +26,8 @@
 * `T_g` は既存の `Ising2D.Conjugation.*`（`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean`）を
   再利用する。あちらで `T B (A) = B A B⁻¹` が環自己同型であることまで証明済みなので、
   ここでは `commutes'`（スカラーを固定すること）だけを足して **ℂ-代数自己同型 `A ≃ₐ[ℂ] A`**
-  に持ち上げる（`TConj`）。ℂ-線型性（原文 `linearity_of_T`）・乗法性・単位性は
-  `AlgEquiv` の構造からただちに従う。
+  に持ち上げる（`TConj`）。乗法性・単位性は `AlgEquiv` の構造からただちに従う
+  （ℂ-線型性の本文どおりの具体版は `linearity_of_T_on_check`）。
 * 原文の行ベクトル記法 `(T z, T y) = (z, y) B` を述語 `ActsBy T z y B` として定義する。
   この記法のもとで合成則は `ActsBy T z y P → ActsBy S z y Q → ActsBy (S ∘ₗ T) z y (Q * P)`
   となる（`ActsBy.comp`）。原文が `T_{(V)} = T_{V_1^{1/2}} ∘ T_{V_2} ∘ T_{V_1^{1/2}}` の
@@ -86,7 +87,7 @@ def TConj (g : Aˣ) : A ≃ₐ[ℂ] A :=
 @[simp]
 theorem TConj_apply (g : Aˣ) (x : A) : TConj g x = (g : A) * x * ((g⁻¹ : Aˣ) : A) := rfl
 
-/-- **原文 `linearity_of_T`**: `T_g` は ℂ-線型。 -/
+/-- `T_g` は ℂ-線型（任意の ℂ 上の環 `A` の上の形。本文 `linearity_of_T` の 6 行の鎖と 1 対 1 の具体版は `linearity_of_T_on_check`）。 -/
 theorem TConj_linear (g : Aˣ) (a b : ℂ) (z y : A) :
     TConj g (a • z + b • y) = a • TConj g z + b • TConj g y := by
   change (g : A) * (a • z + b • y) * ((g⁻¹ : Aˣ) : A)
@@ -119,7 +120,7 @@ theorem TV_apply (g1 g2 : Aˣ) (x : A) :
 theorem TV_eq_TConj (g1 g2 : Aˣ) : TV g1 g2 = TConj (g1 * g2 * g1) := by
   rw [TV, TConj_trans, TConj_trans]
 
-/-- **原文 `linearity_of_T`**（`T_{(V)}` 版）: ℂ-線型。 -/
+/-- `T_{(V)}` は ℂ-線型（`T_{(V)}` が ℂ 代数の自己同型であることから `map_add`・`map_smul` で。本文 `linearity_of_T` の具体版は `linearity_of_T_on_check`）。 -/
 theorem TV_linear (g1 g2 : Aˣ) (a b : ℂ) (z y : A) :
     TV g1 g2 (a • z + b • y) = a • TV g1 g2 z + b • TV g1 g2 y := by
   rw [map_add, map_smul, map_smul]

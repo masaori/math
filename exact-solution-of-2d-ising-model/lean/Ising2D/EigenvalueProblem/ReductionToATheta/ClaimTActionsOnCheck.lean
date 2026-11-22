@@ -369,7 +369,7 @@ theorem linearity_of_T_on_check (g : (TensorPow M)ˣ) (a b : ℂ) (X W : TensorP
     _ = a • TConj g X + b • TConj g W := by
         rw [TConj_apply, TConj_apply]                                            -- `def_T_g` を 2 か所
 
-/-- 具体版が必要十分版 `TConj_linear` の有限複素行列への特殊化であることを記録する。 -/
+/-- 具体版の主張が、任意の ℂ 上の環の上の `TConj_linear` を有限複素行列へ特殊化したものと同じであることを記録する。 -/
 theorem linearity_of_T_on_check_from_general (g : (TensorPow M)ˣ)
     (a b : ℂ) (X W : TensorPow M) :
     TConj g (a • X + b • W) = a • TConj g X + b • TConj g W :=

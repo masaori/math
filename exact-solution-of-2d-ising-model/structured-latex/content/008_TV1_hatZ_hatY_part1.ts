@@ -44,6 +44,7 @@ export default defineBlocks([
     },
     title: { tex: String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \text{ の可逆元}` },
     labels: ["def_invertible_elements_of_R"],
+    lean: ["Ising2D.invertible_product_isUnit", "Ising2D.invertible_product_right_inverse", "Ising2D.invertible_product_left_inverse"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
@@ -289,6 +290,7 @@ h(g_1g_2)
     },
     title: { tex: String.raw`T_g \text{ の定義}` },
     labels: ["def_T_g"],
+    lean: ["Ising2D.TConj", "Ising2D.TConj_apply"],
     statement: [
       paragraph([
         ref("def_invertible_elements_of_R"),
@@ -316,6 +318,7 @@ h(g_1g_2)
     },
     title: { tex: String.raw`T_g \text{ の } \mathbb{C} \text{ 線型性}` },
     labels: ["linearity_of_T"],
+    lean: ["Ising2D.linearity_of_T_on_check"],
     statement: [
       paragraph([
         "任意の ",
