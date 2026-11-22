@@ -5,12 +5,10 @@
 -/
 import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven
 import Ising2DLambda.KacWard.PlaneProjectionCyclicTurning
-import Ising2DLambda.NecSuf.KacWard.PlaneSimpleCycleTorusProjection
 
 namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 平面格子点を成分ごとの自然な射影でトーラス頂点へ送る。 -/
 def planeVertexProjection (L : ℕ) (w : ℤ × ℤ) : Vertex L :=
@@ -157,7 +155,10 @@ theorem planeUnitPathTorusProjection_closedNonbacktracking
   · intro j
     simpa only [hedge] using hcyc.2.2 j
 
-/-- `claim_plane_simple_cycle_projection_closed_nonbacktracking` の具体版。 -/
+/-- `claim_plane_simple_cycle_projection_closed_nonbacktracking` の具体版。
+巡回接続は、射影辺の終点と次の射影辺の始点がともに次の格子点の射影であることから、
+非後退性は、反転が現れれば二歩先の格子点が元の格子点に戻り、頂点単純性から
+二歩先の添字が元の添字に等しくなることから従う。 -/
 theorem planeSimpleCycleProjection_closedNonbacktracking
     (L : ℕ) [NeZero L] {I : Type*}
     (next : I → I) (W : I → ℤ × ℤ) (projectedEdge : I → OrientedEdge L)
@@ -169,11 +170,14 @@ theorem planeSimpleCycleProjection_closedNonbacktracking
     (hnextTwo : ∀ i, next (next i) ≠ i) :
     (∀ i, orientedTarget (projectedEdge i) = orientedSource (projectedEdge (next i))) ∧
       (∀ i, projectedEdge (next i) ≠ reversal (projectedEdge i)) := by
-  apply simple_cycle_projection_closed_nonbacktracking_necSuf
-    next W (planeVertexProjection L) projectedEdge
-    orientedSource orientedTarget reversal hsource htarget
-  · exact hvertex
-  · exact hreverse
-  · exact hnextTwo
+  constructor
+  · intro i
+    calc
+      orientedTarget (projectedEdge i) = planeVertexProjection L (W (next i)) := htarget i
+      _ = orientedSource (projectedEdge (next i)) := (hsource (next i)).symm
+  · intro i hback
+    have hpointEq : W (next (next i)) = W i := hreverse i hback
+    have hindexEq : next (next i) = i := hvertex hpointEq
+    exact hnextTwo i hindexEq
 
 end Ising2DLambda.KacWard

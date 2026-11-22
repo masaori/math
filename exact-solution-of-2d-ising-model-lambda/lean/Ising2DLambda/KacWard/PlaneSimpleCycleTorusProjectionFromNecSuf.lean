@@ -1,9 +1,11 @@
 /- 具体版が必要十分版の平面格子点・トーラス辺への特殊化として得られることの導出。 -/
 import Ising2DLambda.KacWard.PlaneSimpleCycleTorusProjection
+import Ising2DLambda.NecSuf.KacWard.PlaneSimpleCycleTorusProjection
 
 namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.PartitionPolynomial
+open Ising2DLambda.NecSuf.KacWard
 
 /-- `claim_plane_simple_cycle_projection_closed_nonbacktracking` を必要十分版から導いたもの。 -/
 theorem planeSimpleCycleProjection_closedNonbacktracking_from_necSuf
@@ -17,7 +19,8 @@ theorem planeSimpleCycleProjection_closedNonbacktracking_from_necSuf
     (hnextTwo : ∀ i, next (next i) ≠ i) :
     (∀ i, orientedTarget (projectedEdge i) = orientedSource (projectedEdge (next i))) ∧
       (∀ i, projectedEdge (next i) ≠ reversal (projectedEdge i)) :=
-  planeSimpleCycleProjection_closedNonbacktracking
-    L next W projectedEdge hsource htarget hvertex hreverse hnextTwo
+  simple_cycle_projection_closed_nonbacktracking_necSuf
+    next W (planeVertexProjection L) projectedEdge
+    orientedSource orientedTarget reversal hsource htarget hvertex hreverse hnextTwo
 
 end Ising2DLambda.KacWard

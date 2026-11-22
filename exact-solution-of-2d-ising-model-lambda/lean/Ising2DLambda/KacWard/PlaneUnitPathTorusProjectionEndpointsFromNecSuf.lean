@@ -1,4 +1,5 @@
 import Ising2DLambda.KacWard.PlaneSimpleCycleTorusProjection
+import Ising2DLambda.NecSuf.KacWard.PlaneSimpleCycleTorusProjection
 
 namespace Ising2DLambda.KacWard
 

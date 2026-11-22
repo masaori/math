@@ -60,7 +60,6 @@ DEP	concrete	Ising2DLambda.KacWard.orbitChainPerm
 DEP	concrete	Ising2DLambda.KacWard.orbitPeriod
 DEP	concrete	Ising2DLambda.KacWard.perm_return
 DEP	concrete	Ising2DLambda.KacWard.permutation_iterLeft_return
-DEP	concrete	Ising2DLambda.KacWard.planeSimpleCycleProjection_closedNonbacktracking
 DEP	concrete	Ising2DLambda.KacWard.polynomialReversalMatrix_determinant
 DEP	concrete	Ising2DLambda.KacWard.qbarPolynomialDeterminant_eq_signedPermutationSum
 DEP	concrete	Ising2DLambda.KacWard.reversalMatrix_determinant
@@ -245,7 +244,6 @@ IMPORT	concrete	Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning	necsuf	Isin
 IMPORT	concrete	Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning	necsuf	Ising2DLambda.NecSuf.KacWard.PlaneDisplacement
 IMPORT	concrete	Ising2DLambda.KacWard.PermutationSignOrbitProduct	necsuf	Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 IMPORT	concrete	Ising2DLambda.KacWard.PlaneCellBoundaryInjective	necsuf	Ising2DLambda.NecSuf.KacWard.PlaneCellBoundaryInjective
-IMPORT	concrete	Ising2DLambda.KacWard.PlaneSimpleCycleTorusProjection	necsuf	Ising2DLambda.NecSuf.KacWard.PlaneSimpleCycleTorusProjection
 IMPORT	concrete	Ising2DLambda.KacWard.PrimitiveIntegerPair	necsuf	Ising2DLambda.NecSuf.KacWard.PrimitiveIntegerPair
 IMPORT	concrete	Ising2DLambda.KacWard.ReconnectionTurningDifference	necsuf	Ising2DLambda.NecSuf.KacWard.ReconnectionTurningDifference
 IMPORT	concrete	Ising2DLambda.KacWard.ReferenceLongMatching	necsuf	Ising2DLambda.NecSuf.KacWard.ReferenceLongMatching
