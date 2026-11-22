@@ -22,7 +22,7 @@
   - **分離**: リポジトリ直下から `bash scripts/lean-concrete-necsuf-separation/check.sh exact-solution-of-2d-ising-model/lean` が出す四つの件数が全て 0 で、台帳 `lean/concrete-necsuf-separation-ledger.txt` が空である。
   - **繋がり**: 具体版の宣言（`Ising2D/RoutesNotAdopted/` を除く）が全て、ただ一つの最終定理の依存に入っている。判定は `lean/` で `lake build` の後に `bash scripts/connection-to-final-theorem/check.sh` を通し、台帳 `lean/unconnected-concrete-declarations-ledger.txt` が空であることで行う。
   - **未定義の記号**: 具体版の定義と主張に出る mathlib の記号は、本文に定義のブロックがあってその具体版が本文の定義どおりに定義されているか（mathlib の構成の別名にしない。一致は補題一本）、本文が「外から持ち込み、使う性質はこれだけ」と宣言したものだけである。判定は `lean/` で `lake build` の後に `bash scripts/mathlib-symbols-undefined-in-text/check.sh` を通し、台帳 `lean/mathlib-symbols-undefined-in-text-ledger.txt` が空であることで行う。許してよい記号は許可の一覧 `lean/mathlib-symbols-defined-or-declared-in-text.txt` に、それを定義か宣言する本文の定義のブロックのラベルと組にして載せる。
-  - **一対一**: 本文の定義・主張・定理の全てに、対応する具体版の宣言が機械で読める形で書かれ、本文の証明が根拠として引く主張と、具体版の証明が使う対応先が一致する。判定は `lean/` で `lake build` の後に `bash scripts/text-and-concrete-one-to-one/check.sh` を通し、台帳 `lean/text-and-concrete-one-to-one-ledger.txt` が空であることで行う（対応の正本は本文のブロックの欄 `lean`（具体版の宣言の完全な名前の列。主の宣言を先頭に置く）である。欄の無いブロックは移行の間だけ docstring の先頭の太字のラベルで対応を取り、台帳の `NO_LEAN_FIELD` の行に出る。読み方と突き合わせの規則は `lean/scripts/text-and-concrete-one-to-one/compare.ts`）。
+  - **一対一**: 本文の定義・主張・定理の全てに、対応する具体版の宣言が機械で読める形で書かれ、本文の証明が根拠として引く主張と、具体版の証明が使う対応先が一致する。判定は `lean/` で `lake build` の後に `bash scripts/text-and-concrete-one-to-one/check.sh` を通し、台帳 `lean/text-and-concrete-one-to-one-ledger.txt` が空であることで行う（対応の正本は本文のブロックの欄 `lean`（具体版の宣言の完全な名前の列。主の宣言を先頭に置く）である。欄の無いブロックは具体版の宣言を持たないとみなし、台帳の `NO_CONCRETE_DECLARATION` の行に出る。docstring の先頭の太字は対応を決めず、欄と食い違わないことだけを確かめる。読み方と突き合わせの規則は `lean/scripts/text-and-concrete-one-to-one/compare.ts`）。
 
 ## 作業の順序
 
@@ -82,7 +82,7 @@
 ## Lean の点検で見つかった直し（2026-11-21、代表の指示）
 
 点検の測り方: ビルド後の Lean の環境から各定数が直接使う定数と docstring を書き出し、本文の参照（`ref` と `\blkref`）と突き合わせた。
-具体版の宣言と本文のブロックの対応は、docstring の先頭の太字にあるラベルで取った（本文に Lean の対応先を書く欄が無いため）。
+当時は、具体版の宣言と本文のブロックの対応を docstring の先頭の太字にあるラベルで取った（本文に Lean の対応先を書く欄が無かったため。いまは欄 `lean` だけで取る）。
 2026-11-21 の数: 通しの定理が使わない具体版の宣言 1,298／3,441（どの宣言も使われないファイル 98、うち `RoutesNotAdopted` 26）、
 対応が機械で読めるブロック 469／737、比べた主張・定理 395 のうち引く主張の一致 246・Lean が本文の引かない主張を使う 89・本文が根拠に引く主張を Lean が使わない 111、
 分離の違反は具体版 407 宣言・必要十分版 57 宣言・import 212 組。

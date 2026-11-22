@@ -15,8 +15,7 @@ if grep -q '^LEAN_FIELD_' "$dump"; then
 fi
 {
   printf '# 本文のブロックと具体版の宣言の既知の食い違いの一覧。scripts/text-and-concrete-one-to-one/check.sh が読む。\n'
-  printf '# NO_CONCRETE_DECLARATION <ブロック>: 対応する具体版の宣言が無い。\n'
-  printf '# NO_LEAN_FIELD <ブロック>: 本文のブロックに欄 lean が無く、docstring の太字でだけ対応が取れる。\n'
+  printf '# NO_CONCRETE_DECLARATION <ブロック>: 欄 lean が無い。\n'
   printf '# UNKNOWN_LABEL_IN_DOCSTRING <具体版の宣言> <語>: docstring の先頭の太字が本文に無いラベルを指す。\n'
   printf '# CITED_ONLY_IN_TEXT <ブロック> <主張>: 本文の証明か主張が引くのに具体版の証明が使わない。\n'
   printf '# USED_ONLY_IN_LEAN <ブロック> <主張>: 具体版の証明が使うのに本文の証明も主張も引かない。\n'

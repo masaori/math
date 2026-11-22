@@ -6,10 +6,10 @@
 #   bash scripts/text-and-concrete-one-to-one/check.sh
 #
 # Lean の側はビルド後の環境から書き出す（Dependencies.lean）。本文の側の読み方と突き合わせの規則は compare.ts にある。
-# 具体版の宣言とブロックの対応の正本は、本文のブロックの欄 `lean`（具体版の宣言の完全な名前）である。
-# 欄の無いブロックは、移行の間だけ docstring の先頭の太字に書いたラベルで対応を取り、NO_LEAN_FIELD の行に出す。
+# 具体版の宣言とブロックの対応は、本文のブロックの欄 `lean`（具体版の宣言の完全な名前）だけで決める。
+# 欄の無いブロックは具体版の宣言を持たないとみなし、NO_CONCRETE_DECLARATION の行に出す。
 # 欄の誤りの行（`LEAN_FIELD_` で始まる行。具体版でない名前、二つのブロックの欄に同じ宣言、欄と docstring が別のブロックを指す、
-# docstring が欄を持つブロックを指すのに欄に無い宣言。規則は compare.ts）は台帳に載せられない。出たら欄か docstring を直す。
+# docstring がブロックを指すのにどの欄にも無い宣言。規則は compare.ts）は台帳に載せられない。出たら欄か docstring を直す。
 #
 # 既に在る食い違いは lean/text-and-concrete-one-to-one-ledger.txt に一行ずつ載せる（行の形は compare.ts の書き出しと同じ）。
 #   - 台帳に無い食い違いが現れたら落ちる。
@@ -57,7 +57,6 @@ stale="$(LC_ALL=C comm -13 "$tmp/now.txt" "$tmp/ledger.txt")"
 
 while IFS=$'\t' read -r k v; do echo "Ising2D: $k: $v"; done < "$work/counts.tsv"
 echo "Ising2D: 具体版の宣言が無いブロック: $(grep -c $'^NO_CONCRETE_DECLARATION\t' "$tmp/now.txt" || true)"
-echo "Ising2D: 欄 lean が無く docstring でだけ対応が取れるブロック: $(grep -c $'^NO_LEAN_FIELD\t' "$tmp/now.txt" || true)"
 echo "Ising2D: docstring が本文に無いラベルを指す具体版の宣言: $(grep -c $'^UNKNOWN_LABEL_IN_DOCSTRING\t' "$tmp/now.txt" || true)"
 echo "Ising2D: 本文が引くのに具体版が使わない組: $(grep -c $'^CITED_ONLY_IN_TEXT\t' "$tmp/now.txt" || true)"
 echo "Ising2D: 具体版が使うのに本文が引かない組: $(grep -c $'^USED_ONLY_IN_LEAN\t' "$tmp/now.txt" || true)"
