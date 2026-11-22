@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-22（主経路）、有限線型順序集合の置換符号を独立した具体版へ切り替えた。** 既存の転倒数・順序対・符号の独立した証明を旧名から参照できるようにし、分離の台帳は統合後 321 行になった（今回、宣言 9 行が消えた）。ほかの具体版が使う必要十分版の import は残る。
 - **2026-11-22（並列・二十八回目）、並列の表の先頭「四区間の道が頂点単純な閉歩道をなすことを具体版で示す」を済ませた。** 具体版 `periodicLiftClosureVertex` を四部分への場合分けで直接定義し、頂点の相異なりを同じ部分の単射性と六組の像の分離から示した（`periodicLiftClosureVertex_injective`）。具体版のファイルから必要十分版の import を外し、導出のファイルは定義の一致（`periodicLiftClosureVertex_eq_necSuf`）を置いて必要十分版の特殊化で導く形に直した。分離の台帳は 336 行から 333 行になった（宣言 2 行、import 1 行）。並列の表の次は「平面単純閉路のトーラス射影が閉じた非後退辺列であることを具体版で示す」で、着手できる。
 - **2026-11-22（並列・二十七回目）、並列の表の先頭「周期持ち上げと閉包の残りの補題を具体版で示す」を論法ごとに五つに割り、先頭の周期並進の整数座標の補題（正の周期倍の並進が点を動かすこと・閉包の長さ・一周期ずらした平行座標の増分）を済ませた。** 具体版は整数の積が零なら因子が零であること、自然数の和の並べ替え、スカラー倍の分配則で直接示し、具体版の三ファイル（`PeriodicLiftClosurePeriodCount`・`PeriodicPlaneLiftParallelIncrease`・`PeriodicPlaneLiftDistinct`）から必要十分版の import を外した。分離の台帳は 342 行から 336 行になった（宣言 3 行、import 3 行）。並列の表の次は「四区間の道が頂点単純な閉歩道をなすことを具体版で示す」で、着手できる。
 - **2026-11-22（主経路）、空集合での Pfaffian と行列式の等式を具体版だけで閉じた。** 空の完全マッチングの一意性を具体版へ置き、空置換の符号を具体版の転倒数で計算した。必要十分版からの導出を別ファイルへ移し、分離の台帳から宣言二行と import 一行を外した。
 - **2026-11-22（並列・二十六回目）、並列の表の先頭「活性頂点と標識付き差を具体版で示す」を済ませた。** 必要十分版の活動点の型で述べた具体版の写し（二つの相手写像・二歩の置換・二つの対合・活動点の一致）は、具体版の活動点の上に同じものが既に在ったので、導出のファイル四つへ移した（重複していた `taggedActive_projectedClosedEdgeCycle_abstractActivity` は消した）。具体版の四ファイルから必要十分版の import を外し、分離の台帳は 366 行から 353 行になった（宣言 9 行、import 4 行）。並列の表の次は「周期持ち上げと閉包の残りの補題を具体版で示す」で、着手できる。
-- **2026-11-22（並列・二十五回目）、並列の表の先頭「四つのセルの偶奇弧と対角セル対の除外を具体版で示す」を済ませた。** 具体版に本文の結論どおりの四セルの偶奇弧の条件と対角二セルの除外の条件を置き、二点更新の有限和保存と奇数個数からの歩数の存在も具体版で示した。具体版の四ファイルから必要十分版の import を外し、分離の台帳は 391 行から 366 行になった（宣言 21 行、import 4 行）。並列の表の次は「活性頂点と標識付き差を具体版で示す」で、着手できる。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -29,7 +29,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 道具（置換の符号） | 【分離】完全マッチング以外の具体版の符号と転倒数を自分の定義へ移す | 未着手 | 完全列挙と基準マッチングの符号の八宣言、および空集合の Pfaffian と行列式の等式は移行済み。残る具体版の `NecSuf.AlgebraicEigenvalue.sign`・`inversionCount`・`orderedPairs` への依存を、一つの論法ごとに移す。 |
+| 道具（置換の符号） | 【分離】残る具体版の符号と転倒数を自分の定義へ移す | 未着手 | 完全列挙と基準マッチングの符号の八宣言、空集合の Pfaffian と行列式の等式、有限線型順序集合の符号の証明は移行済み。残る具体版の `NecSuf.AlgebraicEigenvalue.sign`・`inversionCount`・`orderedPairs` への依存を、一つの論法ごとに移す。 |
 | 道具（置換の符号） | 【分離】互換の符号と台の交わらない積の符号を具体版で示す | 未着手 | `NecSuf.KacWard.PermutationSignOrbitProduct` の定理を使う具体版 10 宣言を、本文の論法と一対一の証明へ移す。依存: 具体版で使う符号と転倒数の行。 |
 | 道具（行列式） | 【未定義の記号・分離】行列式を論文の定義どおり置換の符号付き和で定義し直す | 未着手 | `IntegerMatrix.determinant A := Matrix.det A`、`kacWardDeterminant M := Matrix.det …` など、具体版の行列式が mathlib の `Matrix.det` の別名で、論文の和の形は後から補題で結んでいる。論文の和で定義し、`Matrix.det` との一致は補題一本に留める。具体版が使う導出の定理（`qbarPolynomial_det_row_expansion_from_necSuf`・`qbarPolynomial_det_mul_function_expansion_from_necSuf`・`qbarPolynomial_fixedPointFree_sum_sign_from_necSuf`）を具体版の証明に置き換える。依存: 置換の符号の行。 |
 | 道具（マッチング） | 【分離】マッチングの向きの符号を具体版で示す | 未着手 | 具体版の 8 宣言が `NecSuf.AlgebraicEigenvalue` の `ascendingMatePair`・`orientationFactor`・`matchingPairWordOrientationSign` を使う。依存: 置換の符号の行。 |
@@ -68,13 +68,14 @@
 
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
+- 2026-11-22（主経路）: 空集合での Pfaffian・行列式の具体版を、本文の空和・空積・転倒数の定義と照合し、修正は無かった。
 - 2026-11-22（並列・二十八回目）: 前回の並列の具体版 `positivePeriodicMultiple_movesPoint`・`periodicLiftClosure_length`（`KacWard/PeriodicLiftClosurePeriodCount.lean`）を本文 `def_periodic_lift_closure_cycle` の $c\ge1$・$N:=2h+2cm$ と照合し、今回の四部分の合成を参照用ノート「接続階段の周期並進による単純閉路」の論法（各部分内の相異なりと全ての組の分離、閉性と単位性は別に渡す）と照合した。一致し、修正は無かった。
 - 2026-11-22（並列・二十七回目）: 前回の並列の具体版の活動点 `concreteTaggedActiveVertices`（`KacWard/TaggedSymmetricDifferenceDegree.lean`）を本文 `def_tagged_difference_active_vertices` の $V_{\mathcal A}=\{\vec e\mid\exists q\in\mathcal A(D,T),\ \vec e\in U(q)\}$ と照合した。標識付き対称差を標識を付けた後に取ることも本文と一致し、修正は無かった。
 - 2026-11-22（主経路）: 前回の完全マッチングの列挙符号と独立した有限順序集合の符号を、本文の転倒数の定義と乗法性の式鎖に照合した。定義と式鎖は一致し、修正は無かった。
 - 2026-11-22（並列・二十六回目）: 前回の並列の `KacWard/VertexSurroundingCellsParityArcs.lean` の結論の条件 `FourCellsFormParityArcs`（巡回列で内外の別がちょうど二回変わり、内側の個数が零でも四でもない）を本文の「内側セルと外側セルはそれぞれ空でない一つの巡回弧をなす」と照合し、同値であることを確かめた。一方、具体版は四辺の通過回数が高々一であることを仮定で受けており、本文が非後退性から導く段を飛ばしている。直しは大きいので並列の表の末尾へ行を足した。
-- 2026-11-22（並列・二十五回目）: 前回の並列の `KacWard/FirstHitConnectingStaircase.lean` の当たり歩数の集合 `firstHitStepSetFromWalk` を本文 $S(\gamma,k_0,u)$（歩数の範囲 $\{1,\ldots,u\,n_\perp\}$、ある $k\in\mathbb Z$ で $D^{\gamma,Q,u}_s=\widetilde P^{[u]}_k(\gamma)$）と照合した。範囲・条件・基点が一致し、修正は無かった。
 
 ## 式変形の書き方の統一
+- 2026-11-22（主経路）: 「有限線型順序集合の相異なる二点の互換の符号は -1 である」の最終式を、$(-1)^2=1$ と $1^{|M|}=1$ の二段に分け、根拠を各行末に付けた。既存の SageMath 検査は転倒数と最終値を確かめるが、この環境に SageMath が無いため再実行していない。
 - 2026-11-22（主経路）: 「空の添字集合では Pfaffian も行列式も一である」の行列式の式鎖で、一項の和・空置換の符号・定数埋込みの単位元・空積を別々の行にした。SageMath 検査は各等号に対応させたが、更新後は未実行。
 - 2026-11-22（主経路）: 「完全列挙の隣接交換は符号を反転する」の証明で、基準列の各位置での等号から置換の等号を得る段を独立した式にし、根拠を行末に付けた。既存の SageMath 検査は同じ等号を含むが、この環境に SageMath が無いため再実行していない。
 - 2026-11-22（主経路）: 「符号は合成について乗法的である」の式鎖で、符号を転倒数の冪へ展開する行の根拠を本文の定義へのラベル参照にした。
@@ -88,8 +89,8 @@
 - 2026-11-21（主経路）: 「正の有理数より平方が小さい有理網幅」の証明で Archimedes 性の根拠を式へ付け、網幅の代入を一行ずつ示した。
 
 ## 前進の記録
+- 2026-11-22（主経路）: 符号参照の移行を有限線型順序集合の証明と残る具体版の参照に割り、先頭の一論法を済ませた。既存の独立した符号の証明を旧名で公開し、多項式へ持ち上げる符号等式も独立した定義へ展開した。分離の台帳から宣言 9 行を消した。ほかの具体版が使う必要十分版の import は後続の行に残した。
 - 2026-11-22（並列・二十八回目）: 表の先頭「四区間の道が頂点単純な閉歩道をなすことを具体版で示す」を、四部分の和の場合分け一つの論法として割らずに済ませた。必要十分版の `fourSegmentVertex` の別名だった具体版の定義を整数格子の上の場合分けで定義し直し、`four_segments_form_simple_closed_walk_necSuf` を呼んでいた証明を十六の場合の直接の証明に替えた。導出 `periodicLiftClosure_is_simple_cycle_from_necSuf` は具体版を呼ぶだけだったので、必要十分版を import して特殊化で導く形に直した。本文の主張は参照用ノートに退避済みで、本文の `lean:` は変わらない。
 - 2026-11-22（並列・二十七回目）: 表の先頭「周期持ち上げと閉包の残りの補題を具体版で示す」は、周期並進の整数座標の算術、四区間の道の単純閉歩道、平面単純閉路の射影の非後退性、回転和の区間分割、一セル追加の Euler 数の増分という別々の論法を持つので五つに割り、先頭を済ませた。導出の `PeriodicLiftClosurePeriodCountFromNecSuf`・`PeriodicPlaneLiftParallelIncreaseFromNecSuf`・`PeriodicPlaneLiftDistinctFromNecSuf` は、具体版を呼ぶだけだったので必要十分版を import して特殊化で導く形に直した（持ち上げ点の相異なりは `periodic_lift_injective_necSuf` に格子剰余の射影・周期並進の無ねじれ・商余りの単射性を渡す）。`PeriodicPlaneLiftDistinct` が必要十分版経由で得ていた Mathlib は直接 import した。下流の `PeriodicLiftStepRepetition`・`PeriodicPlaneLiftTransverseBounded` の使っていない `open Ising2DLambda.NecSuf.KacWard` を外した。
 - 2026-11-22（主経路）: 先頭の符号の分離から空集合の Pfaffian と行列式の等式を、空和・空積という一つの論法として割り出した。具体版は自分の転倒数の符号で行列式を示し、空の完全マッチングの一意性を具体版へ置いた。必要十分版からの導出は別ファイルへ移した。
 - 2026-11-22（並列・二十六回目）: 表の先頭「活性頂点と標識付き差を具体版で示す」を、定義の置き換え一つの論法として割らずに済ませた。台帳の 9 宣言は、具体版の活動点 `concreteTaggedActiveVertices` の上に既に在る具体版（`taggedConcreteShortMate`・`taggedConcreteTwoStep`・`concreteShortInvolution` ほか）の、必要十分版の活動点 `NecSuf.KacWard.activeVertices` の上の写しだった。写しと `_from_necSuf` の定理を `KacWard/TaggedSymmetricDifferenceDegreeFromNecSuf.lean`・`TaggedDifferenceActiveVerticesFromNecSuf.lean`・`TaggedDifferenceTwoStepOrbitFromNecSuf.lean`・`TaggedDifferenceOrbitSeparationFromNecSuf.lean`・`ProjectedClosedEdgeCycleFromNecSuf.lean`・`ProjectedCycleNonbacktrackingFromNecSuf.lean` へ移し、具体版の写しと同じ証明だった `taggedActive_projectedClosedEdgeCycle_abstractActivity` は消した。導出が使う具体版の補題 `active_shortMate_successor` は私的だったので、`taggedActive_shortMate_mem_nonbacktrackingSuccessors` として公開した。本文の `lean:` の名前は変わらない。
-- 2026-11-22（並列・二十五回目）: 表の先頭「四つのセルの偶奇弧と対角セル対の除外を具体版で示す」を、四セルの奇偶の数え上げという一つの論法として割らずに済ませた。具体版 `VertexSurroundingCellsParityArcs`・`BoundaryVertexDiagonalContactExcluded` に結論の条件 `FourCellsFormParityArcs`・`DiagonalCellPairsExcluded` を本文の主張の言葉で置き、必要十分版の `four_cells_form_parity_arcs_necSuf` を呼んでいた最後の段は本文どおり「奇数回通る共有辺は二本で、各々で内外が変わる」を自然数の奇偶の計算で直接示した。具体版 `SmoothingTurningInvariance` に `Fin m` 上の整数値の二点更新の有限和保存 `two_point_preserved_sum`、`WalkLiftPointBoundaryVertex` に `exists_position_of_odd_count` を置いた。導出の二ファイルは定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を置いた。参照が移ったので `WalkSideInteriorBandConnected`・`WalkSideExteriorBandConnected` と内側セルの境界の補題群の 21 宣言も台帳から外れた。`trichotomous_of_linearOrder` を使う具体版二件（`PermutationSignOrbitProduct`・`ReversalMatrixDeterminant`）は同じ行で置換の符号の必要十分版も使うので、主経路の置換の符号の行に残した。

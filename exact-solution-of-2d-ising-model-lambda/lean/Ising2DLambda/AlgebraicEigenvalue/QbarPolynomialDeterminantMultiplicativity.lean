@@ -27,7 +27,10 @@ theorem qbarPolynomial_sign_comp
     _ =
         Polynomial.C (((sign (fun i j : J => i < j) π *
           sign (fun i j : J => i < j) τ) : ℤ) : Qbar) := by
-      rw [finiteOrderedSign_comp π τ]
+      change Polynomial.C ((IndependentFiniteOrderedSign.finiteOrderedSign (π * τ) : ℤ) : Qbar) =
+        Polynomial.C (((IndependentFiniteOrderedSign.finiteOrderedSign π *
+          IndependentFiniteOrderedSign.finiteOrderedSign τ) : ℤ) : Qbar)
+      rw [IndependentFiniteOrderedSign.finiteOrderedSign_comp π τ]
     _ = Polynomial.C (((sign (fun i j : J => i < j) π : ℤ) : Qbar) *
         ((sign (fun i j : J => i < j) τ : ℤ) : Qbar)) := by rw [Int.cast_mul]
     _ = Polynomial.C ((sign (fun i j : J => i < j) π : ℤ) : Qbar) *

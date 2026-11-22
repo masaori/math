@@ -4710,11 +4710,10 @@ h_N\cdot h_N
                         lean: [
                           "Ising2DLambda.AlgebraicEigenvalue.permSign_comp",
                           "Ising2DLambda.AlgebraicEigenvalue.permSign_comp_from_necSuf",
-                          "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedPairMap",
-                          "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedInversionCount_eq_card_pairMap",
-                          "Ising2DLambda.AlgebraicEigenvalue.finiteOrdered_parity_at_pair",
-                          "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_comp_mul_mul",
-                          "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_comp",
+                          "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrderedPairMap",
+                          "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrderedInversionCount_eq_card_pairMap",
+                          "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrdered_parity_at_pair",
+                          "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrderedSign_comp_mul_mul",
                           "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrderedSign_comp",
                           "Ising2DLambda.AlgebraicEigenvalue.independentFiniteOrderedSign_comp_from_necSuf",
                           "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_comp_from_necSuf",
@@ -5084,8 +5083,10 @@ C:=\{(a,b)\}
 &&\bigl(\because\ \mathrm{inv}(t_{a,b})=2\lvert M\rvert+1\bigr)\\
 &=\bigl((-1)^2\bigr)^{\lvert M\rvert}(-1)
 &&\bigl(\because\ \mathbb Z\text{ の指数法則}\bigr)\\
+&=1^{\lvert M\rvert}(-1)
+&&\bigl(\because\ (-1)^2=1\bigr)\\
 &=-1
-&&\bigl(\because\ (-1)^2=1\text{ と }1^{\lvert M\rvert}=1\bigr)
+&&\bigl(\because\ 1^{\lvert M\rvert}=1\bigr)
 \end{aligned}`),
                         paragraph(["を得る。"]),
                       ],

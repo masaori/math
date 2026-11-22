@@ -1,8 +1,8 @@
 ## 2026-11-22 に移動した記録
+2026-11-22（並列・二十五回目）: 離散 Whitney 系の四つのセルの偶奇弧と対角二セルの除外を具体版で示した。結論の条件を具体版に本文の言葉で置き、最後の段を必要十分版に委ねず奇偶の計算で直接示した。二点更新の有限和保存と奇数個数からの歩数の存在も具体版に置いた。分離の台帳は 391 行から 366 行。
 2026-11-22（主経路）: 置換の符号の行を三つの論法へ割り、有限線型順序集合の順序対・転倒数・整数値の符号を本文の式どおりに定義した独立の Lean 具体版で、対の並べ替えと各対の偶奇による乗法性を示し、必要十分版からの導出も接続した。既存の具体版の参照の移行は次の行に残る。
 2026-11-22（並列・二十四回目）: 離散 Whitney 系の階段の点族の補題を具体版で示した。接続階段の当たり歩数の集合を本文どおり具体版で定義し、反復横断階段と周期並進の分離は具体版の中で平行座標の差を直接評価した。具体版の三ファイル（`FirstHitConnectingStaircase`・`ParallelStaircaseTransverseWidth`・`PeriodTranslatesOfIteratedStaircase`）から必要十分版の import を外した。分離の台帳は 396 行から 391 行。lake build・check-no-sorry・分離・一般論の検査・npm run check・build:pdf・verify-check-linkage 通過。
 
-## 2026-11-22 に移動した記録
 2026-11-21（並列・二十三回目）: 離散 Whitney 系の一側閉包の四区間の道・四部分の閉包・接合対を具体版の定義として `KacWard/OneSidedClosureFourParts.lean` に置き（値は ℤ×ℤ）、具体版の四ファイルから必要十分版の import を外した。具体版 `OneSidedClosureNonbacktracking` が使っていた必要十分版の補題も具体版の補題に替えた。分離の台帳は 408 行から 396 行（宣言 8、import 4 が消えた）。lake build・check-no-sorry・分離・一般論の検査・npm run check・build:pdf・verify-check-linkage 通過。
 2026-11-21（主経路）: 論文の証明中の主張引用と Lean の追跡済み依存を突き合わせる差分台帳と検査を置いた。具体版を登録した 874 件のうち 519 件が完全一致し、差分は引用元・引用先の組で論文側のみ 310 行、Lean 側のみ 452 行。自然数の積の可換性を本文で独立した等式にした。lake build・check-no-sorry・分離・一般論の検査・npm run check・verify-check-linkage 通過。SageMath は本体未設置で再実行していない。
 2026-11-21（並列・二十二回目）: 離散 Whitney 系の二相の階段・順序付き二相の階段・反復階段を具体版の定義として `KacWard/Staircase.lean` に置き（点は ℤ×ℤ）、具体版の六ファイルから必要十分版の import を外した。分離の台帳は 432 行から 408 行（宣言 18、import 6 が消えた）。lake build・check-no-sorry・分離・一般論の検査・npm run check・build:pdf・verify-check-linkage 通過。

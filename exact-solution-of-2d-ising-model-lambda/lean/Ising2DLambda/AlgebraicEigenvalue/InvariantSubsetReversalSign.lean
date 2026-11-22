@@ -72,9 +72,7 @@ theorem invariantSubsetReversal_sign (C : Finset J) (σ : Equiv.Perm J)
   -- 二行目は二つの場合の整数の積。
   have hValues : sign (fun i j : J => i < j) q = 1 ∨
       sign (fun i j : J => i < j) q = -1 := by
-    have he : sign (fun i j : J => i < j) q =
-        (-1 : ℤ) ^ inversionCount (fun i j : J => i < j) q := rfl
-    rw [he]
+    unfold sign
     exact neg_one_pow_eq_or ℤ _
   have hSquare : sign (fun i j : J => i < j) q *
       sign (fun i j : J => i < j) q = 1 := by
