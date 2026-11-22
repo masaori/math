@@ -4603,6 +4603,9 @@ h_N\cdot h_N
                           "Ising2DLambda.AlgebraicEigenvalue.orderedPairs",
                           "Ising2DLambda.AlgebraicEigenvalue.inversionCount",
                           "Ising2DLambda.AlgebraicEigenvalue.permSign",
+                          "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrderedPairs",
+                          "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrderedInversionCount",
+                          "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrderedSign",
                         ],
                         verification: ["sagemath/check/permutation-sign"],
                         statement: [
@@ -4712,6 +4715,8 @@ h_N\cdot h_N
                           "Ising2DLambda.AlgebraicEigenvalue.finiteOrdered_parity_at_pair",
                           "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_comp_mul_mul",
                           "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_comp",
+                          "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrderedSign_comp",
+                          "Ising2DLambda.AlgebraicEigenvalue.independentFiniteOrderedSign_comp_from_necSuf",
                           "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_comp_from_necSuf",
                           "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_comp",
                         ],
@@ -4915,7 +4920,7 @@ C&:=\bigl\{\,(u,u')\in P_L \bigm| \varphi\bigl(\Psi(u,u')_2\bigr)\prec\varphi\bi
                           displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
 &=(-1)^{\mathrm{inv}(\varphi\circ\psi)}\cdot(-1)^{\mathrm{inv}(\varphi)}\cdot(-1)^{\mathrm{inv}(\psi)}
-&&\bigl(\because\ \text{符号の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_permutation_sign}\bigr)\\
 &=(-1)^{|A|}\cdot(-1)^{|C|}\cdot(-1)^{|B|}
 &&\bigl(\because\ |A|=\mathrm{inv}(\varphi\circ\psi),\ |C|=\mathrm{inv}(\varphi),\ |B|=\mathrm{inv}(\psi)\bigr)\\
 &=\prod_{(u,u')\in P_L}f_A(u,u')\cdot\prod_{(u,u')\in P_L}f_C(u,u')\cdot\prod_{(u,u')\in P_L}f_B(u,u')

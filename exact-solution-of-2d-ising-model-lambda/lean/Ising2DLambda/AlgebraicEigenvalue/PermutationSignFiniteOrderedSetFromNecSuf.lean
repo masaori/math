@@ -4,6 +4,7 @@
 特殊化として得られることを示す導出版。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSet
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 
 namespace Ising2DLambda.AlgebraicEigenvalue
@@ -15,5 +16,19 @@ theorem finiteOrderedSign_comp_from_necSuf (φ ψ : Equiv.Perm J) :
       = NecSuf.AlgebraicEigenvalue.sign (fun x y : J => x < y) φ
           * NecSuf.AlgebraicEigenvalue.sign (fun x y : J => x < y) ψ :=
   NecSuf.AlgebraicEigenvalue.sign_comp _ NecSuf.KacWard.trichotomous_of_linearOrder φ ψ
+
+theorem independentFiniteOrderedSign_eq_necSuf (φ : Equiv.Perm J) :
+    IndependentFiniteOrderedSign.finiteOrderedSign φ =
+      NecSuf.AlgebraicEigenvalue.sign (fun x y : J => x < y) φ := rfl
+
+theorem independentFiniteOrderedSign_comp_from_necSuf (φ ψ : Equiv.Perm J) :
+    IndependentFiniteOrderedSign.finiteOrderedSign (φ * ψ) =
+      IndependentFiniteOrderedSign.finiteOrderedSign φ *
+        IndependentFiniteOrderedSign.finiteOrderedSign ψ := by
+  rw [independentFiniteOrderedSign_eq_necSuf,
+    independentFiniteOrderedSign_eq_necSuf,
+    independentFiniteOrderedSign_eq_necSuf]
+  exact NecSuf.AlgebraicEigenvalue.sign_comp _
+    NecSuf.KacWard.trichotomous_of_linearOrder φ ψ
 
 end Ising2DLambda.AlgebraicEigenvalue
