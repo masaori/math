@@ -74,6 +74,7 @@
   - 直し方: 具体版が必要十分版の定義を使っているなら、論文の定義どおりの定義を具体版の側に置いて参照を移す（必要十分版の定義の別名にしない）。具体版が必要十分版の定理で証明しているなら、具体版の対象について論文の証明と一対一に書き直す。必要十分版が具体版の定義を使っているなら、必要十分版の側に一般の型の定義を置く。具体版が必要十分版の特殊化であることは導出のファイルだけが述べる。
 - **論文で未定義の記号**: 具体版の定義を mathlib の構成の別名にしない（`determinant A := Matrix.det A`、`FiniteSimpleGraph n := SimpleGraph (Fin n)` が点検で見つかった）。論文の定義どおりに定義し、mathlib の構成との一致は補題一本に留める。実数体への脱出の章で使う π・指数関数・余弦・正弦・積分・極限は、本文に宣言のブロックを置いて、使う性質と Lean の対応先を書く。
 - **一対一**: 論文の証明が根拠として引く主張と、Lean 具体版の証明が使う登録済みの主張は一致させる。Lean が使うのに論文が引かないなら、論文に根拠を足すか Lean を論文の経路に直す。論文が引くのに Lean が使わないなら、Lean を論文の経路に直す（同じ内容を Lean のファイル内の補題として作り直すことも、一致しないものに数える）。証明の後の注で触れるだけの参照は、根拠に数えない。
+  差分の正本 `lean/one-to-one-dependency-ledger.tsv` は `PAPER_ONLY`（論文の証明だけが引用）と `LEAN_ONLY`（具体版の証明だけが依存）の各行を、引用元と引用先の主ラベルで持つ。`lean/scripts/check-proof-correspondence.sh` は証明中の引用と、登録されていない補助定理を越えた Lean の依存を取り直し、台帳との完全一致を要求する。ずれを直したら該当行を消し、新しいずれは追加せずに原因を直す。
 
 ## 実閉部分体の存在の経路（2026-11-17 の研究管理の決定）
 
@@ -351,6 +352,7 @@ sage sagemath/check/<対象名>/check.sage          # その tick で触れた�
 node sagemath/tools/verify-check-linkage.ts     # 検証 ↔ 証明 の対応
 (cd lean && bash scripts/use-shared-dependencies.sh && lake build && bash scripts/check-no-sorry.sh)   # lean/ に中身がある場合
 (cd lean && bash scripts/check-concrete-necsuf-separation.sh)   # lake build の後。具体版と必要十分版の分離（下の「Lean の点検で見つかった直し」）
+bash lean/scripts/check-proof-correspondence.sh      # lake build の後。本文の主張引用と Lean 具体版の依存を差分台帳へ照合
 ```
 
 Lean の依存（mathlib を含む `lean/.lake/packages`）は `scripts/use-shared-dependencies.sh` だけで用意する。

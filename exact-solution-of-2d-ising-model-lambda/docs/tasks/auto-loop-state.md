@@ -6,10 +6,10 @@
 
 ## 現在地
 - **2026-11-21（並列・二十三回目）、表の先頭「一側閉包の四区間の道・接合対・四部分の閉包を具体版の定義で立て直す」を済ませた。** 具体版のファイル `KacWard/OneSidedClosureFourParts.lean`（必要十分版を import しない）に本文の一側閉包・接続階段の閉路・四接合が共有する四区間の道・四部分の閉包・接合対（値は ℤ×ℤ）を置き、具体版の四ファイルから必要十分版の import を外した。分離の台帳は 408 行から 396 行になった（宣言 8 行、import 4 行）。並列の表に残るのは「セルと格子の補題を具体版で示す」で、着手できる。
+- **2026-11-21（主経路）、論文の引用と Lean の依存の差分台帳を検査できるようにした。** 具体版を登録した主張・定理 874 件のうち 519 件で引用と依存が一致する。差分台帳は引用元・引用先の組を 762 行（論文側のみ 310、Lean 側のみ 452）持つ。次は置換の符号と転倒数の分離である。
 - **2026-11-21（並列・二十二回目）、表の先頭「二相の階段と反復階段を具体版の定義で立て直す」を済ませた。** 具体版のファイル `KacWard/Staircase.lean`（必要十分版を import しない）に本文の階段が共有する二相の階段・順序付き二相の階段・反復階段（点は ℤ×ℤ）を置き、具体版の六ファイルから必要十分版の import を外した。分離の台帳は 432 行から 408 行になった（宣言 18 行、import 6 行）。並列の表の次は「一側閉包の四区間の道・接合対・四部分の閉包を具体版の定義で立て直す」で、着手できる。
 - **2026-11-21（主経路）、Lean の直接依存から登録済み主張への依存を追跡できるようにした。** 登録のない補助定理を通り、登録済み主張に到達したらそこで止める。次は論文の引用との差分台帳の検査である。
 - **2026-11-21（並列・二十一回目）、表の先頭「方向の列と階段を具体版の定義で立て直す」を三つの論法（方向の列・階段・一側閉包の四区間）に割り、方向の列を済ませた。** 具体版のファイル `KacWard/DirectionSequence.lean`（必要十分版を import しない）に本文の連結・内部和 $I_n$・循環隣接和 $C_n$（値は ℤ）・二区間の列・余りによる反復と、循環隣接和の移送と範囲内の一致の補題を置き、具体版の参照を移した。分離の台帳は 468 行から 432 行になった（宣言 33 行、import 3 行）。並列の表の次は「二相の階段と反復階段を具体版の定義で立て直す」で、着手できる。
-- **2026-11-21（並列・二十回目）、表の先頭「回転と回転値を具体版の定義で立て直す」を済ませた。** 具体版のファイル `KacWard/Turn.lean` に本文の表どおりの `Turn`・`turnValue`・`phaseOfTurn`（値は代数的数）・`reverseTurn` を置き、具体版の参照を全て移した。`three_value_phase_ne_zero` を使っていた具体版は三つの値を直接調べる証明にした。分離の台帳は 511 行から 468 行になった（宣言 39 行、import 4 行）。並列の表の次は「方向の列と階段を具体版の定義で立て直す」で、着手できる。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -29,7 +29,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| （全章） | 【一対一】論文の引用と Lean の追跡済み依存の差分台帳を検査する | 未着手 | 証明中の引用と追跡済みの登録済み主張を比べ、ずれを台帳に載せて減らすだけにする。2026-11-21 の点検では主張・定理 867 件のうち一致 480 件、Lean 側にのみあるもの 194 件、論文側にのみあるもの 90 件。依存: 引用の抽出と補助定理を越える依存追跡（完了）。 |
 | 道具（置換の符号） | 【分離】置換の符号と転倒数を具体版の定義で立て直す | 未着手 | 具体版の 55 宣言が `NecSuf.AlgebraicEigenvalue.sign`・`inversionCount`・`orderedPairs` を自分の定義として使う。本文 `def_permutation_sign` どおりの定義を具体版に置いて参照を移す。互換の符号・台の交わらない積の符号（`NecSuf.KacWard.PermutationSignOrbitProduct` の定理を使う具体版 10 宣言）も具体版で示す。依存: なし。 |
 | 道具（行列式） | 【未定義の記号・分離】行列式を論文の定義どおり置換の符号付き和で定義し直す | 未着手 | `IntegerMatrix.determinant A := Matrix.det A`、`kacWardDeterminant M := Matrix.det …` など、具体版の行列式が mathlib の `Matrix.det` の別名で、論文の和の形は後から補題で結んでいる。論文の和で定義し、`Matrix.det` との一致は補題一本に留める。具体版が使う導出の定理（`qbarPolynomial_det_row_expansion_from_necSuf`・`qbarPolynomial_det_mul_function_expansion_from_necSuf`・`qbarPolynomial_fixedPointFree_sum_sign_from_necSuf`）を具体版の証明に置き換える。依存: 置換の符号の行。 |
 | 道具（マッチング） | 【分離】マッチングの向きの符号を具体版で示す | 未着手 | 具体版の 8 宣言が `NecSuf.AlgebraicEigenvalue` の `ascendingMatePair`・`orientationFactor`・`matchingPairWordOrientationSign` を使う。依存: 置換の符号の行。 |
@@ -65,11 +64,13 @@
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
 - 2026-11-21（並列・二十三回目）: 前回の並列の `KacWard/Staircase.lean` を本文の横断階段・平行階段・反復横断階段（$D^{\gamma,Q,t}_s=Q+q\cdot(w_{\mathrm h},-w_{\mathrm v})+C^{\gamma}_r$）と照合した。点の型・場合分け・除法の取り方が一致し、修正は無かった。
+- 2026-11-21（主経路）: 前回の依存追跡器と直接依存の抽出器を読み直し、証明本体の依存だけを補助定理の先まで追い、登録済み主張で止めることを確かめた。修正は無かった。
 - 2026-11-21（並列・二十二回目）: 前回の並列の `KacWard/DirectionSequence.lean`（連結・内部和・循環隣接和・二区間・反復と、移送・範囲内の一致・周期・末項の補題）を読み直した。循環隣接和は内部和に閉じ目の重みを足した形で、docstring と定義が一致し、修正は無かった。
 - 2026-11-21（主経路）: 前回の引用抽出器を読み直し、証明フィールドだけを訪問して注を除くことと、複数ラベル・複数登録名を保持することを確かめた。修正は無かった。
 - 2026-11-21（並列・二十一回目）: 前回の並列の `KacWard/Turn.lean` と、`ReversalRotationPhase`・`TotalTurning`・`ShortPairRotationPhaseNonzero` の三つの場合の直接の証明と値の一致の補題を読み直した。本文の表（直進 0／1、左回転 1／$z$、右回転 $-1$／$z^{-1}$）と一致し、修正は無かった。
-- 2026-11-21（並列・二十回目）: 前回の並列の `claim_eighth_root_exists`（準備の $s\ne0$ と $s^{-1}$、$\zeta\cdot\zeta=\omega$ の十三行、$\zeta^4$ からの七行）を読み直した。各行の根拠と記号の宣言を確かめ、修正は無かった。
+
 ## 式変形の書き方の統一
+- 2026-11-21（主経路）: 「熱力学極限の共通分母の存在」の証明で、自然数の積の可換性を独立した等式にし、根拠を行末に付けた。既存の SageMath 検査は同じ等号を含むが、この環境に SageMath が無いため再実行していない。
 - 2026-11-21（主経路）: 「全ての辺を調べた後は各辺の両端が接続する」で、辺集合の包含の式鎖を明示し、二行の根拠に辺選択の規則のラベル参照を付けた。
 - 2026-11-21（主経路）: 「開境界密度の実数極限は周期境界密度に等しい」の三行の等式で、根拠の括弧を統一した。
 - 2026-11-21（主経路）: 「対数の冪の法則」の帰納法で、対数順序群の整数倍を使う二行の行末に定義のラベル参照を付けた。
@@ -80,7 +81,7 @@
 
 ## 前進の記録
 - 2026-11-21（並列・二十三回目）: 表の先頭「一側閉包の四区間の道・接合対・四部分の閉包を具体版の定義で立て直す」を一つの論法（定義の置き換え）として割らずに済ませた。具体版の証明は既に四区間の定義を展開して自分で示していたので、定義を `KacWard/OneSidedClosureFourParts.lean` へ移すと参照が移った。具体版 `OneSidedClosureNonbacktracking` が推移的な import で呼んでいた必要十分版の `fourPartSequence_congr_range` は、具体版 `OneSidedClosureCyclicSum` の私的な補題 `fourPartSequence_congr_range_concrete` を公開して替えた。導出の `OneSidedClosureJunctionsFromNecSuf`・`OneSidedClosureCyclicSumFromNecSuf`・`OneSidedClosureStepSequenceFromNecSuf` は `KacWard/OneSidedClosureFourPartsFromNecSuf.lean` の定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）で書き換えてから必要十分版を呼ぶ（定義の展開に任せると循環隣接和の導出が時間切れになった）。本文 `def_one_sided_periodic_lift_closure`・`def_periodic_lift_closure_cycle` の `lean:` の必要十分版の名前を具体版に替えた。
+- 2026-11-21（主経路）: 論文の証明中の主張引用と Lean の追跡済み依存を、引用元・引用先の主ラベルの組で比較する検査を置いた。複数ラベルは主ラベルに揃え、具体版の登録が無い 2 件は比較から除いた。対象 874 件のうち完全一致 519 件、差分は論文側のみ 310 行、Lean 側のみ 452 行。差分を台帳に固定し、以後の再計算との完全一致を要求する。
 - 2026-11-21（並列・二十二回目）: 表の先頭「二相の階段と反復階段を具体版の定義で立て直す」を一つの論法（定義の置き換え）として割らずに済ませた。具体版の証明は既に階段の定義を展開して自分で示しており、必要十分版の定理を呼ぶ具体版は無かったので、定義を `KacWard/Staircase.lean` に移すだけで参照が移った。本文の三つの階段はどれも ℤ×ℤ の有限列なので、点の型を ℤ×ℤ に固定した。導出の `NegatedParallelStaircaseTurningFromNecSuf`・`ReversedParallelStaircaseTurningFromNecSuf`・`OneSidedTransverseStepsFromNecSuf` は必要十分版の import を自分で持ち、`KacWard/StaircaseFromNecSuf.lean` の定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を置いた。本文 `def_winding_parallel_staircase` の `lean:` の必要十分版の名前を具体版の `orderedTwoPhaseStaircase` に替えた。`FirstHitConnectingStaircase`・`ParallelStaircaseTransverseWidth`・`PeriodTranslatesOfIteratedStaircase` の必要十分版の import は階段の定義でなく点族の補題のためなので、セルと格子の行に残した。
 - 2026-11-21（主経路）: 先頭の突き合わせの行を、補助定理を越える依存追跡と差分台帳の検査に割った。今回は前者を済ませた。Lean 環境の宣言の種類を記録し、各登録済み具体版から証明本体の依存をたどり、未登録の補助定理を越えて別の登録済み主張に到達したら止める道具を置いた。共有された Lean 宣言の複数登録と、`FromNecSuf` のファイル内の具体版の登録も処理した。実データ 876 件の追跡が通り、登録済み主張への依存は計 1,931 件だった。論文との比較は次の行に残した。
 - 2026-11-21（並列・二十一回目）: 表の先頭「方向の列と階段を具体版の定義で立て直す」は、方向の列（連結・内部和・循環隣接和・二区間・反復）、二相の階段と反復階段、一側閉包の四区間の道・接合対・四部分の閉包という、定義を置き換える三つの論法を持つ（一側閉包は階段を区間に持つ）。三行に割り、方向の列を済ませた。具体版の定義は重みの値を本文どおり ℤ に固定し、列の項の型は引数で受ける（本文は整数ベクトルの列にも方向の列にも同じ記法を使う）。具体版 `OneSidedClosurePeriodDifferenceTurning` が呼んでいた必要十分版の `cyclicAdjacentSum_transport_necSuf`・`cyclicAdjacentSum_congr_range`、`OneSidedClosureNonbacktracking` の `repeatDirectionSequence_last` は具体版の補題に替えた。導出の五ファイルは `KacWard/DirectionSequenceFromNecSuf.lean` の定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を通して必要十分版を呼ぶ。具体版の `FourPartAdjacentSum`・`RepeatedAdjacentSum`・`OneSidedClosureStepSequence` から必要十分版の import を外した。
-- 2026-11-21（並列・二十回目）: 表の先頭「回転と回転値を具体版の定義で立て直す」を一つの論法（定義の置き換え）として割らずに済ませた。新しい具体版のファイル `KacWard/Turn.lean`（必要十分版を import しない）に四つの定義を置き、名前空間 `Ising2DLambda.KacWard` の中の名前が開いた必要十分版の名前より先に解決されることで、14 の具体版のファイルの参照を移した。具体版の `reversal_rotation_phase_product` と `shortPairRotationPhase_ne_zero_of_direction_ne` は必要十分版の定理を呼ばず三つの場合を直接調べる証明にした。導出の定理（`*_from_necSuf`）は、具体版の場合を必要十分版の場合へ送る `Turn.toNecSuf` と、値の一致の補題（`phaseOfTurn_eq_necSuf`・`turnValue_eq_necSuf` とその列版）を通して必要十分版を呼ぶ。四つの具体版のファイルから必要十分版 `TotalTurning` の import を外した。本文 `def_step_turning` の `lean:` を具体版の `turnValue` に替えた。

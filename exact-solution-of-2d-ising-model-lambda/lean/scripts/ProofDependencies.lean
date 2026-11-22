@@ -21,8 +21,16 @@ def isConcreteConstant (env : Environment) (n : Name) : Bool :=
   let env ← getEnv
   let out ← IO.FS.Handle.mk
     (System.FilePath.mk ".lake/one-to-one/direct-dependencies.unsorted.tsv") .write
-  for (n, ci) in env.constants.toList do
+  let roots := (← IO.FS.readFile ".lake/one-to-one/concrete-names.txt").splitOn "\n"
+  let mut pending : Array Name := (roots.filter (· != "")).map String.toName |>.toArray
+  let mut visited : Std.HashSet Name := {}
+  while !pending.isEmpty do
+    let n := pending.back!
+    pending := pending.pop
+    if visited.contains n then continue
+    visited := visited.insert n
     unless isConcreteConstant env n do continue
+    let some ci := env.find? n | throwError "具体版の宣言が Lean 環境にありません: {n}"
     let kind := match ci with
       | .thmInfo _ => "theorem"
       | _ => "other"
@@ -34,3 +42,6 @@ def isConcreteConstant (env : Environment) (n : Name) : Bool :=
       for d in value.getUsedConstants do
         if isProjectConstant env d && n != d then
           out.putStrLn s!"{n}\tvalue\t{d}"
+          if isConcreteConstant env d then
+            if let some (.thmInfo _) := env.find? d then
+              pending := pending.push d

@@ -2495,11 +2495,15 @@ N\lambda\le_{\Lambda}N\mu
                                 math(String.raw`N_{\mu}N_{\lambda}`),
                                 " は ",
                                 math(String.raw`\lambda`),
-                                " の共通分母であり、",
-                                math(String.raw`\mathbb{N}`),
-                                " の積の可換性 ",
-                                math(String.raw`N_{\mu}N_{\lambda}=N_{\lambda}N_{\mu}`),
-                                " により ",
+                                " の共通分母である。ここで",
+                              ]),
+                              displayMath(String.raw`\begin{aligned}
+N_{\mu}N_{\lambda}
+&=N_{\lambda}N_{\mu}
+&&\bigl(\because\ \mathbb N\text{ の積の可換性}\bigr)
+\end{aligned}`),
+                              paragraph([
+                                "なので ",
                                 math(String.raw`N_{\lambda}N_{\mu}`),
                                 " は ",
                                 math(String.raw`\lambda`),
