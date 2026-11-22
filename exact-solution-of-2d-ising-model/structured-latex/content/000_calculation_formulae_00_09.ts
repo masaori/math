@@ -2341,6 +2341,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\sum_{j=1}^{m} r = \iota_{\mathbb{Z}\to\mathbb{R}}(m)\, r` },
     labels: ["finite_sum_of_constant_real_number"],
+    lean: ["Ising2D.finite_sum_of_constant_real_number_succ", "Ising2D.finite_sum_of_constant_real_number_fintype"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -2414,6 +2415,7 @@ T_B(X - W)
     kind: "claim",
     title: { text: "一つの項のほかが 0 の実数の有限和はその項に等しい" },
     labels: ["finite_sum_of_real_numbers_with_single_nonzero_term"],
+    lean: ["Ising2D.finite_sum_of_real_numbers_with_single_nonzero_term_succ"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -2543,6 +2545,7 @@ T_B(X - W)
     kind: "claim",
     title: { text: "実数の有限和の包含は包含の有限和に等しい" },
     labels: ["real_inclusion_preserves_finite_sum"],
+    lean: ["Ising2D.real_inclusion_of_finite_sum_succ", "Ising2D.real_inclusion_of_finite_sum_fintype", "Ising2D.real_inclusion_of_finite_sum_fintype_or_empty", "Ising2D.real_inclusion_of_finite_sum_finset"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -2614,6 +2617,7 @@ T_B(X - W)
     kind: "claim",
     title: { text: "実数の和の包含は包含の和に等しい" },
     labels: ["real_inclusion_preserves_sum"],
+    lean: ["Ising2D.real_inclusion_add"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -2658,6 +2662,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "claim",
     title: { text: "実数の差の有限和は有限和の差" },
     labels: ["finite_sum_of_real_differences"],
+    lean: ["Ising2D.finite_sum_of_real_differences_succ", "Ising2D.finite_sum_of_real_differences_step", "Ising2D.finite_sum_of_real_differences"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -2741,6 +2746,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "claim",
     title: { text: "実数の和の有限和は有限和の和" },
     labels: ["finite_sum_of_real_sums"],
+    lean: ["Ising2D.finite_sum_of_real_sums_succ", "Ising2D.finite_sum_of_real_sums_step", "Ising2D.finite_sum_of_real_sums", "Ising2D.finite_sum_of_real_sums_fintype"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -2819,6 +2825,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "claim",
     title: { text: "実数の二重の有限和は和の順序を入れ替えても等しい" },
     labels: ["finite_double_sum_of_real_numbers_interchange"],
+    lean: ["Ising2D.finite_double_sum_of_real_numbers_interchange_succ", "Ising2D.finite_double_sum_of_real_numbers_interchange", "Ising2D.finite_double_sum_of_real_numbers_interchange_fintype"],
     statement: [
       paragraph([
         math(String.raw`n_1, n_2 \in \mathbb{Z}_{\geq 1}`),
@@ -2894,6 +2901,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "claim",
     title: { text: "実数の符号反転の有限和は有限和の符号反転" },
     labels: ["finite_sum_of_negated_real_numbers"],
+    lean: ["Ising2D.finite_sum_of_negated_real_numbers_succ", "Ising2D.finite_sum_of_negated_real_numbers"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -2954,6 +2962,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "claim",
     title: { text: "実数の共通の因子は有限和の外へ出せる" },
     labels: ["finite_sum_of_real_scalar_multiples"],
+    lean: ["Ising2D.finite_sum_of_real_scalar_multiples_succ", "Ising2D.finite_sum_of_real_scalar_multiples", "Ising2D.finite_sum_of_real_scalar_multiples_fintype"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3015,6 +3024,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "claim",
     title: { text: "非負の実数の有限和は各項以上" },
     labels: ["finite_sum_of_nonnegative_reals_is_at_least_each_term"],
+    lean: ["Ising2D.finite_sum_of_nonnegative_reals_ge_term_succ", "Ising2D.finite_sum_of_nonnegative_reals_ge_term", "Ising2D.finite_sum_of_nonnegative_reals_ge_term_fintype"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3128,6 +3138,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "definition",
     title: { text: "一つの添字を飛ばす写像" },
     labels: ["def_index_skipping_map"],
+    lean: ["Ising2D.skipIndex"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3179,6 +3190,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "claim",
     title: { text: "実数の有限和の一つの項は末尾へ移せる" },
     labels: ["finite_sum_of_real_numbers_moves_one_term_to_end"],
+    lean: ["Ising2D.finite_sum_of_real_numbers_moves_one_term_to_end"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3366,6 +3378,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "claim",
     title: { text: "一つの添字を飛ばす写像は飛ばした添字を値に取らない" },
     labels: ["index_skipping_map_never_takes_skipped_index"],
+    lean: ["Ising2D.skipIndex_ne"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3429,6 +3442,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     kind: "claim",
     title: { text: "一つの添字を飛ばす写像は単射である" },
     labels: ["index_skipping_map_is_injective"],
+    lean: ["Ising2D.skipIndex_injective"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3542,6 +3556,7 @@ j
     kind: "claim",
     title: { text: "一つの添字を飛ばす写像は飛ばした添字以外のすべてを値に取る" },
     labels: ["index_skipping_map_reaches_every_other_index"],
+    lean: ["Ising2D.skipIndex_reaches_every_other_index"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3643,6 +3658,7 @@ j
     kind: "claim",
     title: { text: "最後の添字へ送られる添字を飛ばしてから全単射で送ると、最後の添字には届かない" },
     labels: ["bijection_composed_with_index_skipping_map_stays_in_lower_indices"],
+    lean: ["Ising2D.bijection_comp_skipIndex_ne_last"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3706,6 +3722,7 @@ j
     kind: "definition",
     title: { text: "最後の添字へ送られる添字を飛ばしてから全単射で送る写像" },
     labels: ["def_bijection_composed_with_index_skipping_map"],
+    lean: ["Ising2D.bijectionCompSkipIndex", "Ising2D.bijectionCompSkipIndex_castSucc"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3745,6 +3762,7 @@ j
     kind: "claim",
     title: { text: "最後の添字へ送られる添字を飛ばしてから全単射で送る写像は全単射である" },
     labels: ["bijection_composed_with_index_skipping_map_is_bijective"],
+    lean: ["Ising2D.bijectionCompSkipIndex_bijective"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3854,6 +3872,7 @@ i
     kind: "claim",
     title: { text: "実数の有限和は添字の全単射による付け替えで変わらない" },
     labels: ["finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing"],
+    lean: ["Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing", "Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_fintype"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -3998,6 +4017,7 @@ q & (q \geq 0),\\
     kind: "claim",
     title: { text: "実数は絶対値以下" },
     labels: ["real_number_is_at_most_its_absolute_value"],
+    lean: ["Ising2D.real_number_is_at_most_its_absolute_value"],
     statement: [
       paragraph([
         math(String.raw`q \in \mathbb{R}`),
@@ -4049,6 +4069,7 @@ q
     kind: "claim",
     title: { text: "絶対値の符号反転は実数以下" },
     labels: ["negative_absolute_value_is_at_most_real_number"],
+    lean: ["Ising2D.negative_absolute_value_is_at_most_real_number"],
     statement: [
       paragraph([
         math(String.raw`q \in \mathbb{R}`),
@@ -4102,6 +4123,7 @@ q
     kind: "claim",
     title: { text: "0 以下の実数の絶対値は符号反転" },
     labels: ["real_absolute_value_of_nonpositive"],
+    lean: ["Ising2D.real_absolute_value_of_nonpositive"],
     statement: [
       paragraph([
         math(String.raw`q \in \mathbb{R}`),
@@ -4154,6 +4176,7 @@ q
     kind: "claim",
     title: { text: "実数の絶対値の三角不等式" },
     labels: ["real_abs_triangle_inequality"],
+    lean: ["Ising2D.real_abs_triangle_inequality"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -4239,6 +4262,7 @@ q
     kind: "claim",
     title: { text: "実数の積の絶対値は絶対値の積" },
     labels: ["real_abs_of_product"],
+    lean: ["Ising2D.real_abs_of_product"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -4388,6 +4412,7 @@ ab
     kind: "claim",
     title: { text: "実数の二乗は、その実数を二つ掛けた積に等しい" },
     labels: ["square_of_real_number_is_product"],
+    lean: ["Ising2D.square_of_real_number_is_product"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{R}`),
@@ -4430,6 +4455,7 @@ r^2
     kind: "claim",
     title: { text: "実数の絶対値の二乗は、もとの実数の二乗に等しい" },
     labels: ["square_of_real_absolute_value"],
+    lean: ["Ising2D.square_of_real_absolute_value"],
     statement: [
       paragraph([
         math(String.raw`q \in \mathbb{R}`),
@@ -4487,6 +4513,7 @@ r^2
     kind: "claim",
     title: { text: "二つの実数の和の二乗は、二乗の和の 2 倍以下" },
     labels: ["square_of_real_sum_is_at_most_twice_sum_of_squares"],
+    lean: ["Ising2D.square_of_real_sum_is_at_most_twice_sum_of_squares"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -4535,6 +4562,7 @@ r^2
     kind: "claim",
     title: { text: "実数の有限和の三角不等式" },
     labels: ["finite_sum_of_real_numbers_triangle_inequality"],
+    lean: ["Ising2D.finite_sum_of_real_numbers_triangle_inequality_succ", "Ising2D.finite_sum_of_real_numbers_triangle_inequality", "Ising2D.finite_sum_of_real_numbers_triangle_inequality_fintype"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -4598,6 +4626,7 @@ r^2
     kind: "claim",
     title: { text: "項ごとの大小は実数の有限和の大小に移る" },
     labels: ["finite_sum_of_real_numbers_is_monotone"],
+    lean: ["Ising2D.finite_sum_of_real_numbers_is_monotone_succ", "Ising2D.finite_sum_of_real_numbers_is_monotone", "Ising2D.finite_sum_of_real_numbers_is_monotone_fintype"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -4667,6 +4696,7 @@ r^2
     kind: "definition",
     title: { text: "実数の族の最大値" },
     labels: ["def_maximum_value_of_real_family"],
+    lean: ["Ising2D.IsMaxValueOfRealFamily"],
     statement: [
       paragraph([
         "集合 ",
@@ -4709,6 +4739,7 @@ r^2
     kind: "claim",
     title: { text: "実数の族の最大値は一つしかない" },
     labels: ["maximum_value_of_real_family_is_unique"],
+    lean: ["Ising2D.maximum_value_of_real_family_is_unique"],
     statement: [
       paragraph([
         "集合 ",
@@ -4772,6 +4803,7 @@ m'
     kind: "definition",
     title: { text: "実数の族の最大値の記号 max" },
     labels: ["def_max_of_real_family"],
+    lean: ["Ising2D.maxOfRealFamily", "Ising2D.maxOfRealFamily_eq"],
     statement: [
       paragraph([
         "集合 ",
@@ -4806,6 +4838,7 @@ m'
     kind: "claim",
     title: { text: "実数の積の包含は包含の積に等しい" },
     labels: ["real_inclusion_preserves_product"],
+    lean: ["Ising2D.real_inclusion_mul"],
     statement: [
       paragraph([
         math(String.raw`a, b \in \mathbb{R}`),
@@ -4855,6 +4888,7 @@ a_{\mathbb{C}}\, b_{\mathbb{C}}
     kind: "claim",
     title: { text: "実数の差の包含は包含の差に等しい" },
     labels: ["real_inclusion_preserves_difference"],
+    lean: ["Ising2D.real_inclusion_sub"],
     statement: [
       paragraph([
         math(String.raw`y, z \in \mathbb{R}`),
@@ -4905,6 +4939,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
     kind: "claim",
     title: { tex: String.raw`(-1_{\mathbb{C}})(-1_{\mathbb{C}})=1_{\mathbb{C}}` },
     labels: ["minus_one_times_minus_one_is_one_in_cc"],
+    lean: ["Ising2D.complex_minus_one_mul_minus_one"],
     statement: [
       paragraph([
         math(String.raw`-1_{\mathbb{C}}`),
@@ -4950,6 +4985,7 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
     kind: "claim",
     title: { tex: String.raw`1_{\mathbb{C}}+1_{\mathbb{C}}=2_{\mathbb{C}}` },
     labels: ["one_plus_one_is_two_in_cc"],
+    lean: ["Ising2D.complex_one_add_one", "Ising2D.complex_one_add_one_eq_ofReal_two"],
     statement: [
       paragraph([
         math(String.raw`1_{\mathbb{C}}`),
