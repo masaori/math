@@ -67,8 +67,6 @@ DEP	concrete	Ising2DLambda.KacWard.movedOrbit_mapsTo
 DEP	concrete	Ising2DLambda.KacWard.nodup_cons_orbitTail
 DEP	concrete	Ising2DLambda.KacWard.orbitChainPerm
 DEP	concrete	Ising2DLambda.KacWard.orbitPeriod
-DEP	concrete	Ising2DLambda.KacWard.periodicLiftClosureVertex
-DEP	concrete	Ising2DLambda.KacWard.periodicLiftClosure_is_simple_cycle
 DEP	concrete	Ising2DLambda.KacWard.perm_return
 DEP	concrete	Ising2DLambda.KacWard.permutation_iterLeft_return
 DEP	concrete	Ising2DLambda.KacWard.planeSimpleCycleProjection_closedNonbacktracking
@@ -252,7 +250,6 @@ IMPORT	concrete	Ising2DLambda.KacWard.MovedOrbitWeightPhaseTwist	necsuf	Ising2DL
 IMPORT	concrete	Ising2DLambda.KacWard.OddRayInteriorCells	necsuf	Ising2DLambda.NecSuf.KacWard.OddRayInteriorCells
 IMPORT	concrete	Ising2DLambda.KacWard.OneSidedClosureNonbacktracking	necsuf	Ising2DLambda.NecSuf.KacWard.ClosedWalkPeriodicDirectionNonbacktracking
 IMPORT	concrete	Ising2DLambda.KacWard.OneSidedClosurePeriodDifferenceTurning	necsuf	Ising2DLambda.NecSuf.KacWard.OneSidedClosurePeriodDifferenceTurning
-IMPORT	concrete	Ising2DLambda.KacWard.PeriodicLiftClosureCycle	necsuf	Ising2DLambda.NecSuf.KacWard.PeriodicLiftClosureCycle
 IMPORT	concrete	Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning	necsuf	Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftPeriodTurning
 IMPORT	concrete	Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning	necsuf	Ising2DLambda.NecSuf.KacWard.PlaneDisplacement
 IMPORT	concrete	Ising2DLambda.KacWard.PermutationSignOrbitProduct	necsuf	Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct

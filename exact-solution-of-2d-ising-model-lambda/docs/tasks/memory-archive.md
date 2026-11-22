@@ -1,4 +1,5 @@
 ## 2026-11-22 に移動した記録
+2026-11-22（主経路）: 置換の符号の行を三つの論法へ割り、有限線型順序集合の順序対・転倒数・整数値の符号を本文の式どおりに定義した独立の Lean 具体版で、対の並べ替えと各対の偶奇による乗法性を示し、必要十分版からの導出も接続した。既存の具体版の参照の移行は次の行に残る。
 2026-11-22（並列・二十四回目）: 離散 Whitney 系の階段の点族の補題を具体版で示した。接続階段の当たり歩数の集合を本文どおり具体版で定義し、反復横断階段と周期並進の分離は具体版の中で平行座標の差を直接評価した。具体版の三ファイル（`FirstHitConnectingStaircase`・`ParallelStaircaseTransverseWidth`・`PeriodTranslatesOfIteratedStaircase`）から必要十分版の import を外した。分離の台帳は 396 行から 391 行。lake build・check-no-sorry・分離・一般論の検査・npm run check・build:pdf・verify-check-linkage 通過。
 
 ## 2026-11-22 に移動した記録
