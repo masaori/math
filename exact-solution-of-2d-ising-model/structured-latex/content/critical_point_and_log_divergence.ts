@@ -364,6 +364,7 @@ s_1c_2>0\ \land\ c_1>0\ \land\ (s_1c_2)^2=c_1^2
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 4 },
     title: { tex: String.raw`\kappa := 2K_1 - 2K_2^*` },
     labels: ["def_kappa"],
+    lean: ["Ising2D.kappaP"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -382,6 +383,7 @@ s_1c_2>0\ \land\ c_1>0\ \land\ (s_1c_2)^2=c_1^2
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 4 },
     title: { tex: String.raw`A := \sinh 2K_1\sinh 2K_2^*` },
     labels: ["def_critical_sinh_product_A"],
+    lean: ["Ising2D.AP", "Ising2D.AP_pos"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -423,6 +425,7 @@ A &= s_1 s_2^*
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 5 },
     title: { tex: String.raw`\sinh^2\!\left(\tfrac{\gamma(\theta)}{2}\right) = \sinh^2\!\left(\tfrac{\kappa}{2}\right) + A\sin^2\!\left(\tfrac{\theta}{2}\right)` },
     labels: ["gamma_kappa_identity"],
+    lean: ["Ising2D.sinh_half_gammaFn_sq", "Ising2D.gamma1R_eq_cosh_kappa_add", "Ising2D.gammaFn_eq_two_arsinh", "Ising2D.Sparam_even"],
     statement: [
       paragraph([
         ref("def_kappa"),
@@ -652,6 +655,7 @@ S
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 6 },
     title: { tex: String.raw`\sinh 2K_1\sinh 2K_2 = 1 \iff K_1 = K_2^* \iff \kappa = 0` },
     labels: ["critical_point_iff_kappa_zero"],
+    lean: ["Ising2D.critical_point_iff_kappa_zero"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -819,6 +823,7 @@ c_1 = s_1c_2
     kind: "definition",
     title: { tex: String.raw`\kappa(K) := 2K - 2K^*` },
     labels: ["def_isotropic_kappa_of_K"],
+    lean: ["Ising2D.kappaK"],
     statement: [
       paragraph([
         math(String.raw`K \in \mathbb{R}_{>0}`),
@@ -844,6 +849,7 @@ c_1 = s_1c_2
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 7 },
     title: { tex: String.raw`\text{等方な場合 } K_1 = K_2 = K \text{ では } A = 1` },
     labels: ["isotropic_A_equals_one"],
+    lean: ["Ising2D.AP_isoParam"],
     statement: [
       paragraph([
         "**等方な場合** ",
@@ -895,6 +901,7 @@ A
     kind: "claim",
     title: { tex: String.raw`\text{等方な場合 } \kappa = \kappa(K)` },
     labels: ["isotropic_kappa_equals_kappa_of_K"],
+    lean: ["Ising2D.kappaP_isoParam"],
     statement: [
       paragraph([
         "**等方な場合** ",
@@ -962,6 +969,7 @@ K_2^*
     kind: "claim",
     title: { tex: String.raw`\text{等方な場合 } \gamma(\theta) = 2\,\mathrm{arcsinh}\sqrt{\sinh^2(\kappa(K)/2) + \sin^2(\theta/2)}` },
     labels: ["isotropic_gamma_in_kappa"],
+    lean: ["Ising2D.gammaFn_isoParam"],
     statement: [
       paragraph([
         "**等方な場合** ",
@@ -1035,6 +1043,7 @@ K_2^*
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 8 },
     title: { tex: String.raw`\kappa(K) \text{ の基本性質と臨界点 } K_c` },
     labels: ["kappa_of_K_basic"],
+    lean: ["Ising2D.hasDerivAt_kappaK", "Ising2D.kappaK_Kc", "Ising2D.kappaK_eq_zero_iff", "Ising2D.hasDerivAt_kappaDeriv", "Ising2D.sinh_two_K_bounds", "Ising2D.kappaDeriv_bounds", "Ising2D.abs_kappaSecond_le", "Ising2D.abs_kappaK_bounds", "Ising2D.abs_kappaDerivSq_sub_le", "Ising2D.abs_deriv_kappaDerivSq_le", "Ising2D.pos_of_mem_Dnbhd", "Ising2D.Kc_pos", "Ising2D.sinh_two_Kc"],
     statement: [
       paragraph([
         ref("def_isotropic_kappa_of_K"),
@@ -1742,6 +1751,7 @@ h(b) - h(a)
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 9 },
     title: { tex: String.raw`\frac{\partial\gamma}{\partial\kappa} = \frac{\sinh\kappa}{\sinh\gamma},\quad \left|\frac{\partial\gamma}{\partial\kappa}\right| \leq 1` },
     labels: ["gamma_derivatives_in_kappa"],
+    lean: ["Ising2D.hasDerivAt_gammaK", "Ising2D.hasDerivAt_dgammaK", "Ising2D.abs_dgammaK_le_one", "Ising2D.continuousOn_dgammaK", "Ising2D.continuousOn_d2gammaK", "Ising2D.sinh_half_gammaK", "Ising2D.cosh_half_gammaK", "Ising2D.sinh_gammaK", "Ising2D.cosh_gammaK", "Ising2D.dgammaK_eq_sinh_div_sinh", "Ising2D.d2gammaK_eq", "Ising2D.Sfun_pos_of_ne_zero", "Ising2D.continuous_gammaK"],
     statement: [
       paragraph([
         ref("isotropic_gamma_in_kappa"),
@@ -2232,6 +2242,7 @@ S
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 13 },
     title: { tex: String.raw`\left|G''(\kappa) - \frac{1}{2\pi}\log\frac{1}{|\kappa|}\right| \leq \frac{6}{5} \quad \left(0 < |\kappa| \leq \tfrac12\right)` },
     labels: ["second_derivative_log_divergence"],
+    lean: ["Ising2D.second_derivative_log_divergence", "Ising2D.second_derivative_log_divergence_pos", "Ising2D.Gsecond_ge", "Ising2D.abs_Gfirst_le"],
     statement: [
       paragraph([
         ref("gamma_derivatives_in_kappa"),
@@ -3071,6 +3082,7 @@ G''(\kappa)
     origin: { path: "structured-latex/content/020_critical_point.ts", ordinal: 14 },
     title: { tex: String.raw`\left|\frac{d^2f}{dK^2} - \frac{8}{\pi}\log\frac{1}{|\kappa(K)|}\right| \leq 45` },
     labels: ["specific_heat_log_divergence"],
+    lean: ["Ising2D.specific_heat_log_divergence", "Ising2D.abs_fSecond_sub_le", "Ising2D.fSecond_ge", "Ising2D.specific_heat_log_divergence_dist", "Ising2D.specific_heat_ratio_tendsto"],
     statement: [
       paragraph([
         ref("onsager_exact_solution"),
@@ -3396,6 +3408,7 @@ G''(\kappa)
       tex: String.raw`\sinh 2K_c = 1\text{ と }\left|\frac{d^2f}{dK^2}(K) - \frac{8}{\pi}\log\frac{1}{|K-K_c|}\right| \leq 49`,
     },
     labels: ["critical_point_sinh_K_c_and_second_derivative_log_divergence"],
+    lean: ["Ising2D.critical_point_sinh_K_c_and_second_derivative_log_divergence", "Ising2D.Kc_eq_half_log_and_unique"],
     statement: [
       paragraph([
         math(String.raw`K \in \mathbb{R}_{>0}`),
