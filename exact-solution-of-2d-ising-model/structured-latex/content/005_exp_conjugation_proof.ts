@@ -28,6 +28,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "複素共役は有限和を保つ" },
     labels: ["complex_conjugate_of_sum"],
+    lean: ["Ising2D.complex_conjugate_of_finite_sum_succ", "Ising2D.complex_conjugate_of_add", "Ising2D.complex_conjugate_of_sum_two"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -113,6 +114,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "複素共役は積を保つ" },
     labels: ["complex_conjugate_of_product"],
+    lean: ["Ising2D.complex_conjugate_of_product_eq"],
     statement: [
       paragraph([
         math(String.raw`z, w \in \mathbb{C}`),
@@ -173,6 +175,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "複素共役は差を保つ" },
     labels: ["complex_conjugate_of_difference"],
+    lean: ["Ising2D.complex_conjugate_of_difference_eq", "Ising2D.complex_conjugate_of_neg_one"],
     statement: [
       paragraph([
         math(String.raw`z, w \in \mathbb{C}`),
@@ -279,6 +282,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "実数の包含の複素共役は自分自身" },
     labels: ["complex_conjugate_of_real_inclusion"],
+    lean: ["Ising2D.complex_conjugate_of_real_inclusion"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{R}`),
@@ -326,6 +330,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "逆元の複素共役は複素共役の逆元" },
     labels: ["complex_conjugate_of_inverse"],
+    lean: ["Ising2D.complex_conjugate_of_inverse", "Ising2D.complex_conjugate_ne_zero", "Ising2D.complex_conjugate_mul_complex_conjugate_inv"],
     statement: [
       paragraph([
         math(String.raw`w \in \mathbb{C}^{\times}`),
