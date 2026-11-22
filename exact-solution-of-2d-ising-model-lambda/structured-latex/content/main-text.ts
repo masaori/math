@@ -19153,7 +19153,7 @@ c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
                       displayMath(String.raw`\begin{aligned}
 R&\subseteq S\setminus\{\sigma\}
 &&\bigl(\because\ \text{一点を除くと部分集合になる}\bigr)\\
-S\setminus\{\sigma\}&\subsetneq S
+&\subsetneq S
 &&\bigl(\because\ \sigma\in S\bigr)
 \end{aligned}`),
                       paragraph(["したがって ", math(String.raw`R\subsetneq S`), " であり、有限集合の個数を比べると、"]),
