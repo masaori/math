@@ -83,8 +83,8 @@ theorem smul_mem_evenEigenvectors (M : ℕ) (hM : 1 ≤ M)
     _ = a * f r := by rw [congrFun hf r]
     _ = (a • f) r := rfl
 
-/-- **人手本文 `even_eigenspace_is_complex_subspace`**:
-`evenEigenvectors M hM` を台集合とする `ℂ`-部分加群。 -/
+/-- **`evenEigenvectors M hM` を台集合とする `ℂ`-部分加群**（人手 `even_eigenspace_is_complex_subspace` の結びの「複素部分線型空間である」。
+主張の三つの閉性は `zero_mem_evenEigenvectors`・`add_mem_evenEigenvectors`・`smul_mem_evenEigenvectors`）。 -/
 def evenEigenspace (M : ℕ) (hM : 1 ≤ M) : Submodule ℂ (Conf M → ℂ) where
   carrier := evenEigenvectors M hM
   zero_mem' := zero_mem_evenEigenvectors M hM

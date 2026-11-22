@@ -39,8 +39,8 @@ namespace Ising2D
 open Filter
 open scoped Topology
 
-/-- **人手 `c_plus_value_c_sandwich_and_double_limit_of_log_Z` の (1)**:
-`c_+(M_col) = Λ^{(1/2)}_{M_col}`（人手 `c_plus_equals_Lambda_half_integer`）。仮定は `M_col ≥ 2` だけ。 -/
+/-- **人手 `c_plus_equals_Lambda_half_integer`**（`c_plus_value_c_sandwich_and_double_limit_of_log_Z` の (1) が引く）:
+`c_+(M_col) = Λ^{(1/2)}_{M_col}`。仮定は `M_col ≥ 2` だけ。 -/
 theorem c_plus_eq_LambdaM_half_physical (P : IsingParam) {M : ℕ} (hM2 : 2 ≤ M) :
     evenSectorRayleighSup (physicalSymTransferR M P.K1 P.K2) (epsilonR M) = LambdaM P (1 / 2) M :=
   have hM : M ≠ 0 := by omega

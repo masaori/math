@@ -289,6 +289,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 6 },
     title: { tex: String.raw`W \text{ の成分はすべて正}` },
     labels: ["W_has_positive_entries"],
+    lean: ["Ising2D.W_has_positive_entries", "Ising2D.W_has_positive_entries_as_inclusion"],
     statement: [
       paragraph([
         ref("def_config_basis_iso"),
@@ -642,6 +643,7 @@ w
     kind: "claim",
     title: { tex: String.raw`W_{\mathbb{R}} \text{ の成分はすべて正}` },
     labels: ["W_real_has_positive_entries"],
+    lean: ["Ising2D.W_real_has_positive_entries"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -714,6 +716,7 @@ w
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 12 },
     title: { tex: String.raw`\varepsilon^\top = \varepsilon` },
     labels: ["epsilon_is_real_symmetric"],
+    lean: ["Ising2D.epsilon_is_real_symmetric", "Ising2D.epsilon_hasRealEntries", "Ising2D.epsilon_transpose"],
     statement: [
       paragraph([
         ref("def_global_spin_flip_matrix"),
@@ -771,6 +774,7 @@ w
     kind: "definition",
     title: { tex: String.raw`\varepsilon \text{ の実数の行列 } \varepsilon_{\mathbb{R}}` },
     labels: ["def_epsilon_real"],
+    lean: ["Ising2D.epsilonReal", "Ising2D.ofReal_epsilonReal_apply", "Ising2D.epsilonR", "Ising2D.epsilonR_eq_epsilonReal"],
     statement: [
       paragraph([
         ref("epsilon_is_real_symmetric"),
@@ -813,6 +817,7 @@ w
     kind: "claim",
     title: { tex: String.raw`\varepsilon_{\mathbb{R}} \text{ は対称}` },
     labels: ["epsilon_real_is_symmetric"],
+    lean: ["Ising2D.epsilon_real_is_symmetric", "Ising2D.epsilon_real_entry_symm"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -877,6 +882,7 @@ w
     kind: "claim",
     title: { tex: String.raw`\varepsilon_{\mathbb{R}}\varepsilon_{\mathbb{R}} = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{R})}` },
     labels: ["epsilon_real_square_is_identity"],
+    lean: ["Ising2D.epsilon_real_square_is_identity"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -960,6 +966,7 @@ w
     kind: "claim",
     title: { text: "成分が u_k + (ε_ℝu)_k のベクトルは ε_ℝ を掛けても変わらない" },
     labels: ["epsilon_real_fixes_sum_of_vector_and_its_image"],
+    lean: ["Ising2D.epsilon_real_fixes_sum_of_vector_and_its_image"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -1054,6 +1061,7 @@ w
     kind: "definition",
     title: { tex: String.raw`\text{符号を反転したスピン配置 } -s` },
     labels: ["def_negated_row_configuration"],
+    lean: ["Ising2D.negSpinConf", "Ising2D.negSpinVal"],
     statement: [
       paragraph([
         ref("def_row_configurations"),
@@ -1086,6 +1094,7 @@ w
     kind: "claim",
     title: { tex: String.raw`-(-s) = s` },
     labels: ["negated_row_configuration_is_involutive"],
+    lean: ["Ising2D.negSpinConf_negSpinConf"],
     statement: [
       paragraph([
         ref("def_row_configurations"),
@@ -1142,6 +1151,7 @@ w
     kind: "claim",
     title: { tex: String.raw`\varepsilon \text{ の成分を 1 行ぶんのスピン配置の番号で読む}` },
     labels: ["epsilon_entries_in_row_configuration_numbering"],
+    lean: ["Ising2D.epsilon_entries_in_row_configuration_numbering"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -1288,6 +1298,7 @@ w
     kind: "claim",
     title: { tex: String.raw`(\varepsilon_{\mathbb{R}}u)_{\mathrm{ord}(s)} = u_{\mathrm{ord}(-s)}` },
     labels: ["epsilon_real_permutes_entries_by_spin_flip"],
+    lean: ["Ising2D.epsilon_real_permutes_entries_by_spin_flip"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -1418,6 +1429,7 @@ w
     kind: "claim",
     title: { tex: String.raw`u_k \geq 0\ (\forall k) \Longrightarrow (\varepsilon_{\mathbb{R}}u)_k \geq 0\ (\forall k)` },
     labels: ["epsilon_real_preserves_nonnegative_vectors"],
+    lean: ["Ising2D.epsilon_real_preserves_nonnegative_vectors"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -1493,6 +1505,7 @@ w
     kind: "claim",
     title: { text: "成分が非負で 0 でないベクトル u について、成分が u_k + (ε_ℝu)_k のベクトルは 0 でない" },
     labels: ["sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero"],
+    lean: ["Ising2D.sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -1610,6 +1623,7 @@ v_{k_0}
     kind: "claim",
     title: { tex: String.raw`\|\varepsilon_{\mathbb{R}}u\| = \|u\|` },
     labels: ["epsilon_real_preserves_norm"],
+    lean: ["Ising2D.epsilon_real_preserves_norm"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -1771,6 +1785,7 @@ k
     kind: "claim",
     title: { text: "‖u‖ = 1 のとき、成分が u_k + (ε_ℝu)_k のベクトル v について ‖v‖^2 ≤ 4" },
     labels: ["norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four"],
+    lean: ["Ising2D.norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -1905,6 +1920,7 @@ k
     kind: "claim",
     title: { tex: String.raw`\varepsilon_{\mathbb{R}}x = x \iff \iota^{2^{M_{\mathrm{col}}}}_{\mathbb{R}\to\mathbb{C}}(x) \in \mathcal{F}^{(+)}` },
     labels: ["epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors"],
+    lean: ["Ising2D.epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -2020,6 +2036,7 @@ k
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 12 },
     title: { tex: String.raw`c_+(M_{\mathrm{col}}) := \sup \mathcal{R}_+ \text{（}\varepsilon_{\mathbb{R}}x = x\text{ を満たす単位ベクトルでの上限）}` },
     labels: ["def_sector_rayleigh_sup"],
+    lean: ["Ising2D.evenSectorRayleighSup", "Ising2D.evenSectorSet", "Ising2D.evenSectorSet_epsilonR_nonempty", "Ising2D.evenSectorSet_bddAbove", "Ising2D.evenSectorSet_subset"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -2481,6 +2498,7 @@ b_+ := \iota^{2}(a_+) \in \mathbb{C}^2`,
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 12 },
     title: { tex: String.raw`c_+(M_{\mathrm{col}}) \leq c(M_{\mathrm{col}})` },
     labels: ["c_plus_le_c"],
+    lean: ["Ising2D.c_plus_le_c"],
     statement: [
       paragraph([
         ref("def_sector_rayleigh_sup"),
@@ -2566,6 +2584,7 @@ c_+(M_{\mathrm{col}})
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 12 },
     title: { tex: String.raw`\varepsilon W = W\varepsilon` },
     labels: ["epsilon_commutes_with_W"],
+    lean: ["Ising2D.epsilon_commute_physicalSymTransferC"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -2733,6 +2752,7 @@ c_+(M_{\mathrm{col}})
     kind: "claim",
     title: { tex: String.raw`\varepsilon_{\mathbb{R}} W_{\mathbb{R}} = W_{\mathbb{R}} \varepsilon_{\mathbb{R}}` },
     labels: ["epsilon_real_commutes_with_W_real"],
+    lean: ["Ising2D.epsilon_real_commutes_with_W_real"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -2815,6 +2835,7 @@ c_+(M_{\mathrm{col}})
     kind: "claim",
     title: { text: "成分が非負のベクトル u について、成分が u_k + (ε_ℝu)_k のベクトル v は v^⊤W_ℝv ≥ 2(u^⊤W_ℝu) を満たす" },
     labels: ["W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice"],
+    lean: ["Ising2D.W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_image_is_at_least_twice"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -3134,6 +3155,7 @@ v^\top W_{\mathbb{R}}v
     origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 4 },
     title: { tex: String.raw`\gamma \text{ は } \mathbb{R} \text{ 上で連続}` },
     labels: ["gamma_is_continuous"],
+    lean: ["Ising2D.gamma_is_continuous"],
     statement: [
       paragraph([
         ref("def_gamma_theta"),
@@ -3290,6 +3312,7 @@ v^\top W_{\mathbb{R}}v
     origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 7 },
     title: { text: "Onsager の自由エネルギーの表式" },
     labels: ["onsager_free_energy_expression"],
+    lean: ["Ising2D.onsager_free_energy_expression", "Ising2D.onsager_free_energy_expression_indep_delta"],
     statement: [
       paragraph([
         math(String.raw`\delta \in [0,1)`),
@@ -3610,6 +3633,7 @@ v^\top W_{\mathbb{R}}v
     origin: { path: "_old/typst/parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ", ordinal: 2 },
     title: { tex: String.raw`Z_m, Y_m \text{ は線型独立}` },
     labels: ["Z_Y_linearly_independent"],
+    lean: ["Ising2D.ZY_linearIndependent", "Ising2D.zy_step6_coeffs_eq_zero"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
@@ -4623,6 +4647,7 @@ p
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 10 },
     title: { tex: String.raw`\check{n}_\mu, \check{Q}_\epsilon \text{ はエルミート}` },
     labels: ["check_number_operator_is_hermitian"],
+    lean: ["Ising2D.Z_conjTranspose", "Ising2D.Y_conjTranspose", "Ising2D.checkZ_conjTranspose", "Ising2D.checkY_conjTranspose", "Ising2D.checkPsiDag_conjTranspose", "Ising2D.star_checkP", "Ising2D.siteProd_conjTranspose", "Ising2D.siteProd_conjTranspose_apply", "Ising2D.siteOp_conjTranspose_of_conjTranspose_eq", "Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq", "Ising2D.CheckFermi.nOp_conjTranspose", "Ising2D.CheckFermi.Qproj_conjTranspose", "Ising2D.CheckFermi.ann_conjTranspose"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -5332,6 +5357,7 @@ x^*\check{Q}_\epsilon x
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 11 },
     title: { tex: String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}` },
     labels: ["c_plus_equals_Lambda_half_integer"],
+    lean: ["Ising2D.c_plus_eq_LambdaM_half_physical", "Ising2D.epsProjPlus_mulVec_of_even", "Ising2D.W_mulVec_eq_VPlus_mulVec_of_even", "Ising2D.hWV_physical"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -6115,6 +6141,7 @@ c_+(M_{\mathrm{col}})
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
     title: { tex: String.raw`\mathcal{F}^{(+)}\text{ の複素部分線型空間性}` },
     labels: ["even_eigenspace_is_complex_subspace"],
+    lean: ["Ising2D.zero_mem_evenEigenvectors", "Ising2D.add_mem_evenEigenvectors", "Ising2D.smul_mem_evenEigenvectors"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
@@ -6262,6 +6289,7 @@ c_+(M_{\mathrm{col}})
       tex: String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}} \leq c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`,
     },
     labels: ["c_between_Lambda_half_and_twice_Lambda_half"],
+    lean: ["Ising2D.rayleighSup_sandwich_LambdaM_physical", "Ising2D.c_le_twice_c_plus_physical"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -6591,6 +6619,7 @@ c(M_{\mathrm{col}})
     origin: { path: "structured-latex/content/018_even_sector_closing.ts", ordinal: 12 },
     title: { text: "2 次元 Ising 模型の厳密解（Onsager の自由エネルギー）" },
     labels: ["onsager_exact_solution"],
+    lean: ["Ising2D.onsager_exact_solution_end_to_end", "Ising2D.onsager_exact_solution_unconditional"],
     statement: [
       paragraph([
         ref("partition_function_via_transfer_matrix"),
@@ -6707,6 +6736,7 @@ c(M_{\mathrm{col}})
       tex: String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}\text{、}\Lambda^{(1/2)}_{M_{\mathrm{col}}} \leq c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}\text{ と }\lim_{M_{\mathrm{col}}\to\infty}\lim_{N_{\mathrm{row}}\to\infty}\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z\text{ の閉形式}`,
     },
     labels: ["c_plus_value_c_sandwich_and_double_limit_of_log_Z"],
+    lean: ["Ising2D.c_plus_value_c_sandwich_and_double_limit_of_log_Z"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),

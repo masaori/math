@@ -200,7 +200,7 @@ theorem lamMax_eq_LambdaM (P : IsingParam)
   exact Finset.sum_congr rfl fun μ _ => by
     rw [if_pos (Finset.mem_univ μ)]; ring
 
-/-- **人手証明 `c_between_Lambda_half_and_twice_Lambda_half` Step 1**: `c(M) ≥ c_+(M) = Λ^{(1/2)}_M`
+/-- **任意の橋渡し `B`・固有値の構造体 `D` についての一般形**（人手証明 `c_between_Lambda_half_and_twice_Lambda_half` Step 1。本文の `W` の版は `rayleighSup_sandwich_LambdaM_physical` の前半）: `c(M) ≥ c_+(M) = Λ^{(1/2)}_M`
 （`c_plus_le_c` と `c_plus_equals_Lambda_half_integer`）。 -/
 theorem LambdaM_le_rayleighSup (P : IsingParam)
     (htr : 0 < ((epsilon M * D.V).trace).re)
@@ -247,7 +247,7 @@ end EvenSectorBridge
 
 /-! ## 2 重極限（人手証明 `onsager_exact_solution`） -/
 
-/-- **人手証明 `onsager_exact_solution` Step 1**（章 012 の再掲）:
+/-- **仮定 `hc`・`hZ1`・`hZ2` を持つ任意の `Z, c` についての一般形**（人手証明 `onsager_exact_solution` Step 1。章 012 の再掲。本文の `Z`・`c(M)` の版は `onsager_limit_in_N_row_physical`）:
 `M` を固定したときの `N_row → ∞` の極限は `(1/M) log c(M)`。 -/
 theorem onsager_limit_in_N_row (P : IsingParam) {Z : ℕ → ℕ → ℝ} {cM : ℕ → ℝ}
     (hc : ∀ m : ℕ, 2 ≤ m → LambdaM P (1 / 2) m ≤ cM m ∧ cM m ≤ 2 * LambdaM P (1 / 2) m)
@@ -259,7 +259,7 @@ theorem onsager_limit_in_N_row (P : IsingParam) {Z : ℕ → ℕ → ℝ} {cM : 
   have hpos : 0 < cM m := lt_of_lt_of_le (LambdaM_pos P (1 / 2) m) (hc m hm).1
   exact limit_of_log_Z_in_N_row hm hpos (hZ1 m hm) (hZ2 m hm)
 
-/-- **人手証明 `onsager_exact_solution` Step 3**: `Λ ≤ c(M) ≤ 2Λ` と `log` の単調性から
+/-- **仮定 `hc` を持つ任意の `c` についての一般形**（人手証明 `onsager_exact_solution` Step 3。本文の `c(M)` に当てたものは `onsager_exact_solution_unconditional` の中）: `Λ ≤ c(M) ≤ 2Λ` と `log` の単調性から
 `(1/M)log Λ ≤ (1/M)log c(M) ≤ (1/M)log Λ + (log 2)/M`。`(log 2)/M → 0` と
 `onsager_free_energy_expression`（`δ = 1/2`）で挟み撃ちにして、`M → ∞` の極限が Onsager の表式になる。 -/
 theorem onsager_limit_in_M (P : IsingParam) {cM : ℕ → ℝ}
@@ -287,7 +287,7 @@ theorem onsager_limit_in_M (P : IsingParam) {cM : ℕ → ℝ}
           mul_le_mul_of_nonneg_left hlog hm0
       _ = 1 / (m : ℝ) * Real.log (LambdaM P (1 / 2) m) + Real.log 2 / (m : ℝ) := by ring
 
-/-- **人手証明 `onsager_exact_solution` そのもの**:
+/-- **仮定 `hc`・`hZ1`・`hZ2` を持つ任意の `Z, c` についての一般形**（人手証明 `onsager_exact_solution`。本文の `Z` の版は `onsager_exact_solution_unconditional`・`onsager_exact_solution_end_to_end`）:
 
   `lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`
 

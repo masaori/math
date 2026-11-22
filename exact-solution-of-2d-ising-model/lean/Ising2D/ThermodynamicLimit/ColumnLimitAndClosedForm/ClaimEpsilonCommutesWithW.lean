@@ -39,7 +39,8 @@ theorem epsilon_commute_physicalSymTransferC (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2
   rw [physicalSymTransferC]
   exact (hB.mul_right hV).mul_right hB
 
-/-- **人手本文 `epsilon_commutes_with_W` の前半**: `εW = Wε`（実行列として）。 -/
+/-- **`εW = Wε` を実行列 `epsilonR`・`physicalSymTransferR` に移した形**（人手に無い言い換え。人手 `epsilon_commutes_with_W` の前半は
+`epsilon_commute_physicalSymTransferC`）。 -/
 theorem epsilon_commutes_with_W (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
     epsilonR M * physicalSymTransferR M K1 K2 = physicalSymTransferR M K1 K2 * epsilonR M := by
   apply Matrix.map_injective (f := Complex.ofRealHom) Complex.ofReal_injective
@@ -52,8 +53,8 @@ theorem epsilon_commutes_with_W (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
   rw [Matrix.map_mul, Matrix.map_mul, hε, hW]
   exact (epsilon_commute_physicalSymTransferC K1 hK2).eq
 
-/-- **人手本文 `epsilon_commutes_with_W` の後半**: `W` は `𝓕^{(+)}` を保つ
-（`f ∈ 𝓕^{(+)} ∩ ℝ^{2^M}`、すなわち `ε f = f` なら `ε(Wf) = Wf`）。 -/
+/-- **実ベクトルに限った形**（人手 `epsilon_commutes_with_W` の後半「`W` は `𝓕^{(+)}` を保つ」を `f ∈ 𝓕^{(+)} ∩ ℝ^{2^M}` に限ったもの。
+複素ベクトルの版は無い）: `ε f = f` なら `ε(Wf) = Wf`。 -/
 theorem epsilonR_mulVec_physicalSymTransferR_of_mem (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2)
     {f : Conf M → ℝ} (hf : epsilonR M *ᵥ f = f) :
     epsilonR M *ᵥ (physicalSymTransferR M K1 K2 *ᵥ f) = physicalSymTransferR M K1 K2 *ᵥ f := by

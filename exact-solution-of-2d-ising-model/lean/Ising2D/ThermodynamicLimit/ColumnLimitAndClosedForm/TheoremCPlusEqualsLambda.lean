@@ -250,7 +250,7 @@ theorem exists_real_max_eigenvector (htr : 0 < ((epsilon M * D.V).trace).re) :
 
 /-! ## Step 3: `c_+(M) = Λ̌_max` -/
 
-/-- **人手証明 `c_plus_equals_Lambda_half_integer` そのもの**: `c_+(M) = Λ̌_max`。
+/-- **任意の橋渡し `B`・固有値の構造体 `D` についての一般形**（人手証明 `c_plus_equals_Lambda_half_integer`。本文の `W` の版は `c_plus_eq_LambdaM_half_physical`）: `c_+(M) = Λ̌_max`。
 
 さらに上限は達成される（`x_0` が最大値を与える）。 -/
 theorem c_plus_equals_lamMax (htr : 0 < ((epsilon M * D.V).trace).re) :
