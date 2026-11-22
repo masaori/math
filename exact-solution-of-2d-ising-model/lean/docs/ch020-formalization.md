@@ -145,13 +145,13 @@
 | `Ising2D.sinh_sq_div_four_le_Qfun` | `sinh²(κ/2)·(…)/4 ≤ Q`（下界評価） | (4) の評価 |
 | `Ising2D.continuous_*`（10 本） | `S, Q, γ, ∂γ/∂κ, ∂²γ/∂κ²` の（2 変数・1 変数固定の）連続性 | (R5) 適用のため |
 
-### 1.5 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimElementarySineBounds.lean`（ラベル `elementary_sine_bounds`）
+### 1.5 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimElementarySineBounds.lean`（ラベル `elementary_sine_bounds`・`sine_half_angle_linear_bounds`・`def_sine_bound_constant`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.c0` / `c0_bounds` / `c0_pos` / `c0_le_one` | **`c_0 := 1 - π²/24`**、`0.5887 ≤ c_0 ≤ 0.5888` | (2) |
-| `Ising2D.elementary_sine_bounds_cube` | **`0 ≤ θ/2 - sin(θ/2) ≤ θ³/48`**（`0 ≤ θ ≤ π`） | (1) |
-| `Ising2D.elementary_sine_bounds_linear` | **`c_0(θ/2) ≤ sin(θ/2) ≤ θ/2`**（`0 ≤ θ ≤ π`） | (2) |
+| `Ising2D.c0` / `c0_bounds` / `c0_pos` / `c0_le_one` | **`c_0 := 1 - π²/24`**、`0.5887 ≤ c_0 ≤ 0.5888` | `def_sine_bound_constant`・`sine_bound_constant_numerical_bounds` |
+| `Ising2D.elementary_sine_bounds_cube` | **`θ/2 - sin(θ/2) ≤ θ³/48`**（`0 ≤ θ ≤ π`） | `elementary_sine_bounds` |
+| `Ising2D.elementary_sine_bounds_linear` | **`c_0(θ/2) ≤ sin(θ/2) ≤ θ/2`**（`0 ≤ θ ≤ π`） | `sine_half_angle_linear_bounds`（証明は人手の鎖と 1 対 1 でない） |
 
 ### 1.6 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`（ラベル `closed_form_log_integral`・`arcsinh_two_sided_log_bounds`・`log_integral_two_sided_bounds`・`three_halves_power_integral_bound`）
 

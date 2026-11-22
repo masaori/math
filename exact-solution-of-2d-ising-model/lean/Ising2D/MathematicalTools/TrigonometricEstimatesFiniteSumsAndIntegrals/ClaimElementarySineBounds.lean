@@ -1,8 +1,8 @@
 /-
-# `0 ≤ θ/2 - sin(θ/2) ≤ θ³/48`（`0 ≤ θ ≤ π`）
+# `θ/2 - sin(θ/2) ≤ θ³/48` と `c_0 θ/2 ≤ sin(θ/2) ≤ θ/2`（`0 ≤ θ ≤ π`）
 
 人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
-- `critical_008_claim_elementary_sine_bounds`（ラベル `elementary_sine_bounds`）
+- `critical_008_claim_elementary_sine_bounds`（ラベル `elementary_sine_bounds`）と `critical_claim_sine_half_angle_linear_bounds`（ラベル `sine_half_angle_linear_bounds`）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は不要（後述）。
 
@@ -39,18 +39,16 @@ theorem c0_pos : 0 < c0 := by have := c0_bounds; linarith [this.1]
 
 theorem c0_le_one : c0 ≤ 1 := by have := c0_bounds; linarith [this.2]
 
-/-- **人手証明 `elementary_sine_bounds` の第 1 式**: `0 ≤ θ/2 - sin(θ/2) ≤ θ³/48`
-（`0 ≤ θ ≤ π`）。 -/
+/-- **人手証明 `elementary_sine_bounds`**: `θ/2 - sin(θ/2) ≤ θ³/48`（`0 ≤ θ ≤ π`）。 -/
 theorem elementary_sine_bounds_cube {θ : ℝ} (h0 : 0 ≤ θ) (_hπ : θ ≤ Real.pi) :
-    0 ≤ θ / 2 - Real.sin (θ / 2) ∧ θ / 2 - Real.sin (θ / 2) ≤ θ ^ 3 / 48 := by
+    θ / 2 - Real.sin (θ / 2) ≤ θ ^ 3 / 48 := by
   have hh : (0:ℝ) ≤ θ / 2 := by linarith
-  constructor
-  · linarith [Real.sin_le hh]
-  · have := Real.sin_ge_sub_cube hh
-    nlinarith [this]
+  have := Real.sin_ge_sub_cube hh
+  nlinarith [this]
 
-/-- **人手証明 `elementary_sine_bounds` の第 2 式**: `c_0 θ/2 ≤ sin(θ/2) ≤ θ/2`
-（`0 ≤ θ ≤ π`）。 -/
+/-- **人手 `sine_half_angle_linear_bounds`**: `c_0 θ/2 ≤ sin(θ/2) ≤ θ/2`（`0 ≤ θ ≤ π`）。
+証明は mathlib の `Real.sin_le`・`Real.sin_ge_sub_cube` と `nlinarith` で、人手の鎖（`argument_minus_sine_nonnegative`・
+`sine_cubic_lower_bound`・`pi_is_positive`・`real_minus_zero_is_self` を引く）と 1 対 1 でない。 -/
 theorem elementary_sine_bounds_linear {θ : ℝ} (h0 : 0 ≤ θ) (hπ : θ ≤ Real.pi) :
     c0 * (θ / 2) ≤ Real.sin (θ / 2) ∧ Real.sin (θ / 2) ≤ θ / 2 := by
   have hh : (0:ℝ) ≤ θ / 2 := by linarith

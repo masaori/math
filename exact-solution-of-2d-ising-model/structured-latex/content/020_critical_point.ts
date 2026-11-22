@@ -242,6 +242,7 @@ export default defineBlocks([
     kind: "claim",
     title: { tex: String.raw`\cosh \text{ は偶関数}` },
     labels: ["cosh_is_even"],
+    lean: ["Ising2D.cosh_is_even"],
     statement: [
       paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x \in \mathbb{R}`), " について"]),
       displayMath(String.raw`\cosh(-x) = \cosh x`),
@@ -281,6 +282,7 @@ export default defineBlocks([
     kind: "claim",
     title: { tex: String.raw`\sinh \text{ は奇関数}` },
     labels: ["sinh_is_odd"],
+    lean: ["Ising2D.sinh_is_odd"],
     statement: [
       paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x \in \mathbb{R}`), " について"]),
       displayMath(String.raw`\sinh(-x) = -\sinh x`),
@@ -336,6 +338,7 @@ export default defineBlocks([
     origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\cosh \text{ の加法定理}` },
     labels: ["cosh_addition_formula"],
+    lean: ["Ising2D.cosh_add_formula", "Ising2D.cosh_sub_formula"],
     statement: [
       paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x, y \in \mathbb{R}`), " について（複号同順）"]),
       displayMath(String.raw`\cosh(x \pm y) = \cosh x\cosh y \pm \sinh x\sinh y`),
@@ -418,6 +421,7 @@ export default defineBlocks([
     kind: "claim",
     title: { tex: String.raw`\sinh \text{ の加法定理}` },
     labels: ["sinh_addition_formula"],
+    lean: ["Ising2D.sinh_add_formula", "Ising2D.sinh_sub_formula"],
     statement: [
       paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x, y \in \mathbb{R}`), " について（複号同順）"]),
       displayMath(String.raw`\sinh(x \pm y) = \sinh x\cosh y \pm \cosh x\sinh y`),
@@ -540,6 +544,7 @@ export default defineBlocks([
     kind: "claim",
     title: { tex: String.raw`\sinh \text{ の倍角公式}` },
     labels: ["sinh_double_angle_formula"],
+    lean: ["Ising2D.sinh_eq_two_sinh_half_mul_cosh_half"],
     statement: [
       paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x \in \mathbb{R}`), " について"]),
       displayMath(String.raw`\sinh x = 2\sinh\!\left(\tfrac{x}{2}\right)\cosh\!\left(\tfrac{x}{2}\right)`),
@@ -619,6 +624,7 @@ export default defineBlocks([
     kind: "claim",
     title: { tex: String.raw`\sinh \text{ は狭義単調増加}` },
     labels: ["sinh_strictly_increasing"],
+    lean: ["Ising2D.sinh_strictly_increasing", "Ising2D.real_neg_lt_neg_of_lt"],
     statement: [
       paragraph([
         ref("def_cosh_sinh"),
@@ -692,6 +698,7 @@ x < y
     kind: "claim",
     title: { tex: String.raw`\sinh \text{ は単射}` },
     labels: ["sinh_is_injective"],
+    lean: ["Ising2D.sinh_injective_real"],
     statement: [
       paragraph([
         ref("def_cosh_sinh"),
@@ -1039,6 +1046,7 @@ p < 0\ \land\ q < 0
     kind: "definition",
     title: { tex: String.raw`\mathrm{arcsinh}` },
     labels: ["def_arcsinh"],
+    lean: ["Ising2D.arsinh_eq_log_form"],
     statement: [
       paragraph([
         math(String.raw`y \in \mathbb{R}`),
@@ -1287,6 +1295,7 @@ s'(y)
     kind: "claim",
     title: { tex: String.raw`\cosh x \geq 1` },
     labels: ["cosh_at_least_one"],
+    lean: ["Ising2D.cosh_at_least_one"],
     statement: [
       paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x \in \mathbb{R}`), " について ", math(String.raw`\cosh x \geq 1`), "。"]),
       paragraph([
@@ -2282,6 +2291,7 @@ t - \sin t
     kind: "definition",
     title: { tex: String.raw`c_0 := 1 - \tfrac{\pi^2}{24}` },
     labels: ["def_sine_bound_constant"],
+    lean: ["Ising2D.c0"],
     statement: [
       paragraph([
         math(String.raw`c_0 := 1 - \dfrac{\pi^2}{24} \in \mathbb{R}`),
@@ -2369,6 +2379,7 @@ c_0
     origin: { path: SRC, ordinal: 10 },
     title: { tex: String.raw`\tfrac{\theta}{2} - \sin\tfrac{\theta}{2} \leq \tfrac{\theta^3}{48} \quad (0 \leq \theta \leq \pi)` },
     labels: ["elementary_sine_bounds"],
+    lean: ["Ising2D.elementary_sine_bounds_cube"],
     statement: [
       paragraph([
         ref("def_sin"),
@@ -2416,6 +2427,7 @@ c_0
     kind: "claim",
     title: { tex: String.raw`c_0\tfrac{\theta}{2} \leq \sin\tfrac{\theta}{2} \leq \tfrac{\theta}{2} \quad (0 \leq \theta \leq \pi)` },
     labels: ["sine_half_angle_linear_bounds"],
+    lean: ["Ising2D.elementary_sine_bounds_linear"],
     statement: [
       paragraph([
         ref("def_sin"),
@@ -2512,6 +2524,7 @@ c_0
     kind: "claim",
     title: { tex: String.raw`\log(ab) = \log a + \log b` },
     labels: ["real_log_of_product"],
+    lean: ["Ising2D.real_log_of_product"],
     statement: [
       paragraph([
         ref("def_real_logarithm_positive"),
@@ -2649,6 +2662,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
     kind: "claim",
     title: { tex: String.raw`2_{\mathbb{Z}}^{\,M} \geq 1_{\mathbb{Z}}` },
     labels: ["power_of_two_in_integers_is_at_least_one"],
+    lean: ["Ising2D.power_of_two_in_integers_is_at_least_one"],
     statement: [
       paragraph([
         ref("def_power_of_integer"),
@@ -2715,6 +2729,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(2_{\mathbb{Z}}^{\,M}) = 2_{\mathbb{R}}^{\,M}` },
     labels: ["inclusion_zz_to_rr_of_power_of_two"],
+    lean: ["Ising2D.inclusion_zz_to_rr_of_power_of_two"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 0}`),
@@ -2807,6 +2822,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
     kind: "claim",
     title: { tex: String.raw`(r^m)_{\mathbb{C}} = (r_{\mathbb{C}})^m` },
     labels: ["real_inclusion_preserves_power"],
+    lean: ["Ising2D.real_inclusion_of_power"],
     statement: [
       paragraph([
         math(String.raw`r \in \mathbb{R}`),
@@ -2880,6 +2896,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
     kind: "claim",
     title: { tex: String.raw`\log(a^n) = \iota_{\mathbb{Z}\to\mathbb{R}}(n)\log a` },
     labels: ["real_log_of_power"],
+    lean: ["Ising2D.real_log_of_power"],
     statement: [
       paragraph([
         ref("def_real_logarithm_positive"),
@@ -3197,6 +3214,7 @@ y + s
     kind: "claim",
     title: { tex: String.raw`\log(2y) \leq \mathrm{arcsinh}(y) \leq \log(2y) + \tfrac{1}{4y^2} \quad (y > 0)` },
     labels: ["arcsinh_two_sided_log_bounds"],
+    lean: ["Ising2D.arsinh_log_bounds"],
     statement: [
       paragraph([
         ref("def_arcsinh"),
@@ -3273,6 +3291,7 @@ y + s
     origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}} = 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right)` },
     labels: ["closed_form_log_integral"],
+    lean: ["Ising2D.integral_inv_sqrt_pi"],
     statement: [
       paragraph([
         "非負実数の平方根は ",
@@ -3413,6 +3432,7 @@ F(0)
     kind: "claim",
     title: { tex: String.raw`2\log\frac{\pi}{\delta} \leq \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}} \leq 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2}` },
     labels: ["log_integral_two_sided_bounds"],
+    lean: ["Ising2D.integral_inv_sqrt_pi_bounds"],
     statement: [
       paragraph([
         "非負実数の平方根は ",
@@ -3520,6 +3540,7 @@ F(0)
     kind: "claim",
     title: { tex: String.raw`\int_0^{\pi}\frac{d\theta}{\left(\delta^2 + a^2\theta^2/4\right)^{3/2}} \leq \frac{2}{a\,\delta^2}` },
     labels: ["three_halves_power_integral_bound"],
+    lean: ["Ising2D.integral_inv_pow_three_half_pi"],
     statement: [
       paragraph([
         ref("def_three_halves_power"),
@@ -3710,6 +3731,7 @@ r(\pi)^2
     kind: "claim",
     title: { tex: String.raw`u^2 \leq v^2 \Longrightarrow u \leq v \quad (u, v \in \mathbb{R}_{\geq 0})` },
     labels: ["nonnegative_real_order_from_squares"],
+    lean: ["Ising2D.nonnegative_real_order_from_squares"],
     statement: [
       paragraph([
         math(String.raw`u, v \in \mathbb{R}_{\geq 0}`),
@@ -3759,6 +3781,7 @@ v^2
     kind: "definition",
     title: { tex: String.raw`B := \tfrac{\pi^2}{12\,c_0(1+c_0)}` },
     labels: ["def_sine_integral_constant"],
+    lean: ["Ising2D.Bconst"],
     statement: [
       paragraph([
         ref("def_sine_bound_constant"),
@@ -3868,6 +3891,7 @@ B
     origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`2\log\frac{\pi}{\delta} \leq \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\sin^2(\theta/2)}} \leq 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2} + B` },
     labels: ["sine_integral_two_sided"],
+    lean: ["Ising2D.sine_integral_two_sided"],
     statement: [
       paragraph([
         "平方根は ",

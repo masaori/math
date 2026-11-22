@@ -86,7 +86,7 @@ theorem sine_integral_two_sided (hδ : 0 < δ) :
       have := (elementary_sine_bounds_linear h0 hπ).2
       linarith
     have hcube : (1/2 : ℝ) * θ - Real.sin (θ / 2) ≤ (1/48 : ℝ) * θ ^ 3 := by
-      have := (elementary_sine_bounds_cube h0 hπ).2
+      have := elementary_sine_bounds_cube h0 hπ
       linarith
     obtain ⟨hup, hlo⟩ := NecSuf.inv_sqrt_diff_bound (δ := δ) (a := 1/2) (c₀ := c0)
       (C := 1/48) (θ := θ) (w := Real.sin (θ / 2)) hδ (by norm_num) hc0 h0 hlow hhigh hcube

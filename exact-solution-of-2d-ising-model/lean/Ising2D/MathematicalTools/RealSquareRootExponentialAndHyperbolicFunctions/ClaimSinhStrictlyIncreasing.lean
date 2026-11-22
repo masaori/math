@@ -62,7 +62,7 @@ theorem sinh_strictly_increasing {x y : ℝ} (h : x < y) : Real.sinh x < Real.si
     add_lt_add_left hd (Real.sinh x)                    -- 両辺に `sinh x` を加える
   rwa [zero_add, sub_add_cancel] at h4
 
-/-- **人手の「`x ≤ y` と `sinh_strictly_increasing`（等号のときは等しい）」の読み方**:
+/-- 人手の「`x ≤ y` と `sinh_strictly_increasing`（等号のときは等しい）」の読み方:
 `x ≤ y` ならば `sinh x ≤ sinh y`。`x < y` なら `sinh_strictly_increasing`、`x = y` なら等号で出す。 -/
 theorem sinh_le_sinh_of_le {x y : ℝ} (h : x ≤ y) : Real.sinh x ≤ Real.sinh y := by
   rcases lt_or_eq_of_le h with hlt | heq
