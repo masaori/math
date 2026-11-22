@@ -83,6 +83,7 @@
 - **各定理の docstring に、対応する本文のラベルを書く。** 一つの行で、その節の本文のブロックを全部形式化する。
 - Lean の行の検証は、`lake build` と、`sorry` が残っていないことの検査（`bash lean/scripts/check-no-sorry.sh`）と、本文のラベルとの対応の検査（`node lean/scripts/verify-label-correspondence.ts`）である。本文を直したら `npm run check` も通す。
 - **具体版と必要十分版は互いを参照しない。** リポジトリ直下から `bash scripts/lean-concrete-necsuf-separation/check.sh isomorphism-between-complex-matrix-algebra-and-clifford-algebra/lean`（`lake build` の後）を Lean の行の検証に含める。両方を使ってよいのは導出（`*FromNecSuf.lean` と、名前の最後の成分に `necSuf` を含む必要十分版でない宣言）だけである。Lean のゴールラインは、この検査の四つの件数が全て 0 で、`lean/concrete-necsuf-separation-ledger.txt` に違反の行が無いことを含む。台帳の行は減らすだけにし、違反を足して通さない。必要十分版が具体版の定義を使っているなら、必要十分版の側に定義を置いて参照を移す（係数を含まない定義でも共有しない）。導出の宣言の名前の最後の成分を `eq_` で始めない（検査が自動生成の等式の補題と見なし、親の具体版の宣言の違反に数える）。
+- **必要十分版の仮定は、その主張の証明が実際に使う性質だけにする。** 章の仮定の組（K の法則の組、両側イデアルや基底の条件の組）をまるごと置かず、主張ごとに使う欄だけを仮定する。点検 `bash lean/scripts/necsuf-unused-assumptions/run.sh`（`lake build` の後）を Lean の行の検証に含め、結果が台帳 `lean/necsuf-unused-assumptions-ledger.txt` と一致することを確かめる。台帳の行は減らすだけにし、使わない仮定を足して通さない。Lean のゴールラインは、この台帳が空であること（同じ手順の証明に要ると Lean のコメントに理由を書いて残した行を除く）を含む。本文の前提は変えない。
 - Lean で本文の誤りや、本文が書いていない前提が見つかったら、本文を直す（同じ行の中で）。主張が偽なら、台帳の「研究管理への申し送り」に書いて止まる。
 
 ## 止まってよい場合
