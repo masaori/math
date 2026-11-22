@@ -104,8 +104,9 @@ theorem selfDualRootMinus_representation (s : Qbar)
 theorem selfDualRootPlus_mem_positiveCone (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :
     selfDualRootPlus s ∈ quadraticPositiveCone s := by
-  -- 本文の三所属は根の部分型、表示対の型、二つの射影の型で担う。
-  let root : QuadraticFieldElement s := selfDualRootPlus s
+  -- 本文の第一の所属 `-1+s ∈ Q_s`。残る二所属は表示対の型と二つの射影の型で担う。
+  have hmem : -1 + s ∈ quadraticFieldSet s := selfDualRootPlus_mem s
+  let root : QuadraticFieldElement s := ⟨-1 + s, hmem⟩
   let p : ℚ × ℚ := quadraticRepresentation s root
   let a : ℚ := p.1
   let b : ℚ := p.2
