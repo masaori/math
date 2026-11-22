@@ -5,6 +5,7 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-22（並列・二十六回目）、並列の表の先頭「活性頂点と標識付き差を具体版で示す」を済ませた。** 必要十分版の活動点の型で述べた具体版の写し（二つの相手写像・二歩の置換・二つの対合・活動点の一致）は、具体版の活動点の上に同じものが既に在ったので、導出のファイル四つへ移した（重複していた `taggedActive_projectedClosedEdgeCycle_abstractActivity` は消した）。具体版の四ファイルから必要十分版の import を外し、分離の台帳は 366 行から 353 行になった（宣言 9 行、import 4 行）。並列の表の次は「周期持ち上げと閉包の残りの補題を具体版で示す」で、着手できる。
 - **2026-11-22（並列・二十五回目）、並列の表の先頭「四つのセルの偶奇弧と対角セル対の除外を具体版で示す」を済ませた。** 具体版に本文の結論どおりの四セルの偶奇弧の条件と対角二セルの除外の条件を置き、二点更新の有限和保存と奇数個数からの歩数の存在も具体版で示した。具体版の四ファイルから必要十分版の import を外し、分離の台帳は 391 行から 366 行になった（宣言 21 行、import 4 行）。並列の表の次は「活性頂点と標識付き差を具体版で示す」で、着手できる。
 - **2026-11-22（主経路）、完全マッチングの列挙符号を独立した有限順序集合の定義へ移した。** 完全列挙と基準マッチングの符号を自前の転倒数で表し、具体版から必要十分版の符号定義への直接依存を八宣言で除いた。空集合の行列式展開に残る符号参照は例外台帳に載せた。
 - **2026-11-22（主経路）、有限線型順序集合の符号の乗法性を、独立した Lean 具体版で示した。** 順序対・転倒数・整数値の符号を本文の式どおりに定義し、対の並べ替えと各対の偶奇によって乗法性を示し、必要十分版からの導出も接続した。既存の 55 宣言への移行は担当表の次の行に残る。
@@ -57,15 +58,16 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 離散 Whitney 系 | 【分離】活性頂点と標識付き差を具体版で示す | 未着手 | 具体版の 9 宣言が `NecSuf.KacWard.activeVertices` を、ほかに `taggedEdges`・`taggedPairAt` と導出の `taggedDifference_active_mates_from_necSuf`・`taggedDifference_incident_iff_from_necSuf` を使う（`ProjectedClosedEdgeCycle`・`ProjectedCycleNonbacktracking`・`TaggedDifference*`）。依存: なし。2026-11-22 に割った。 |
 | 離散 Whitney 系 | 【分離】周期持ち上げと閉包の残りの補題を具体版で示す | 未着手 | 具体版が `periodic_closure_length_necSuf`・`positive_period_multiple_moves_point_necSuf`・`periodic_lift_coordinate_next_period_necSuf`・`simple_cycle_projection_closed_nonbacktracking_necSuf`・`four_segments_form_simple_closed_walk_necSuf`・`fourSegmentVertex`・`interval_split_sum_necSuf`・`cellComplex_oneCellIncrement_necSuf` を使う。依存: なし。2026-11-22 に割った。 |
 | 離散 Whitney 系 | 【分離】ねじれの符号と形式平方根の定義を具体版で立て直す | 未着手 | 具体版が `NecSuf.KacWard` の `twistSign`・`quadraticParity`・`parity`・`arfParity`・`boolSign`、`sqrtCoeff`・`mk_sqrtCoeff_mul_self`・`constantCoeff_mk_sqrtCoeff`・`formalSquareRoot_unique_necSuf`、導出の `walkTwistSign_product_from_necSuf` を使う。置換の符号・互換・行シフトの軌道（`sign`・`transposition*`・`iterLeft`・`orbit`）は主経路の行が受け持つので含めない。依存: なし。2026-11-22 に割った。 |
+| 離散 Whitney 系 | 【一対一】四セルの偶奇弧の具体版の辺単純性の仮定を、非後退性から導く | 未着手 | 具体版 `vertexSurroundingCells_formParityArcs` は、接する四辺の通過回数が高々一であること（`hleft`・`hright`・`hdown`・`hup`）を仮定で受け取る。本文 `claim_vertex_surrounding_cells_form_parity_arcs` は、四辺の通過回数の和が二であることと、訪問へ入る辺と出る辺が非後退性で相異なることから導く。仮定に本文の前提（閉じた非後退辺列）だけを置き、本文どおり導く。依存: なし。2026-11-22 のレビューで見つけた。 |
 
 **セクションを割り直したら、この表を書き換える。** 番号は振らない（内容の分かる名前で書く）。
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 ## レビュー記録
+- 2026-11-22（並列・二十六回目）: 前回の並列の `KacWard/VertexSurroundingCellsParityArcs.lean` の結論の条件 `FourCellsFormParityArcs`（巡回列で内外の別がちょうど二回変わり、内側の個数が零でも四でもない）を本文の「内側セルと外側セルはそれぞれ空でない一つの巡回弧をなす」と照合し、同値であることを確かめた。一方、具体版は四辺の通過回数が高々一であることを仮定で受けており、本文が非後退性から導く段を飛ばしている。直しは大きいので並列の表の末尾へ行を足した。
 - 2026-11-22（並列・二十五回目）: 前回の並列の `KacWard/FirstHitConnectingStaircase.lean` の当たり歩数の集合 `firstHitStepSetFromWalk` を本文 $S(\gamma,k_0,u)$（歩数の範囲 $\{1,\ldots,u\,n_\perp\}$、ある $k\in\mathbb Z$ で $D^{\gamma,Q,u}_s=\widetilde P^{[u]}_k(\gamma)$）と照合した。範囲・条件・基点が一致し、修正は無かった。
 - 2026-11-22（主経路）: 前回の独立した有限順序集合の符号の証明を本文の順序対・転倒数・乗法性と照合した。修正は無かった。
 - 2026-11-22（主経路）: 前回の引用と Lean 依存の差分検査を読み直し、ラベルの正準化と差分の完全一致判定を確かめた。修正は無かった。
@@ -85,6 +87,7 @@
 - 2026-11-21（主経路）: 「正の有理数より平方が小さい有理網幅」の証明で Archimedes 性の根拠を式へ付け、網幅の代入を一行ずつ示した。
 
 ## 前進の記録
+- 2026-11-22（並列・二十六回目）: 表の先頭「活性頂点と標識付き差を具体版で示す」を、定義の置き換え一つの論法として割らずに済ませた。台帳の 9 宣言は、具体版の活動点 `concreteTaggedActiveVertices` の上に既に在る具体版（`taggedConcreteShortMate`・`taggedConcreteTwoStep`・`concreteShortInvolution` ほか）の、必要十分版の活動点 `NecSuf.KacWard.activeVertices` の上の写しだった。写しと `_from_necSuf` の定理を `KacWard/TaggedSymmetricDifferenceDegreeFromNecSuf.lean`・`TaggedDifferenceActiveVerticesFromNecSuf.lean`・`TaggedDifferenceTwoStepOrbitFromNecSuf.lean`・`TaggedDifferenceOrbitSeparationFromNecSuf.lean`・`ProjectedClosedEdgeCycleFromNecSuf.lean`・`ProjectedCycleNonbacktrackingFromNecSuf.lean` へ移し、具体版の写しと同じ証明だった `taggedActive_projectedClosedEdgeCycle_abstractActivity` は消した。導出が使う具体版の補題 `active_shortMate_successor` は私的だったので、`taggedActive_shortMate_mem_nonbacktrackingSuccessors` として公開した。本文の `lean:` の名前は変わらない。
 - 2026-11-22（並列・二十五回目）: 表の先頭「四つのセルの偶奇弧と対角セル対の除外を具体版で示す」を、四セルの奇偶の数え上げという一つの論法として割らずに済ませた。具体版 `VertexSurroundingCellsParityArcs`・`BoundaryVertexDiagonalContactExcluded` に結論の条件 `FourCellsFormParityArcs`・`DiagonalCellPairsExcluded` を本文の主張の言葉で置き、必要十分版の `four_cells_form_parity_arcs_necSuf` を呼んでいた最後の段は本文どおり「奇数回通る共有辺は二本で、各々で内外が変わる」を自然数の奇偶の計算で直接示した。具体版 `SmoothingTurningInvariance` に `Fin m` 上の整数値の二点更新の有限和保存 `two_point_preserved_sum`、`WalkLiftPointBoundaryVertex` に `exists_position_of_odd_count` を置いた。導出の二ファイルは定義の一致の補題（`*_eq_necSuf`、どれも `rfl`）を置いた。参照が移ったので `WalkSideInteriorBandConnected`・`WalkSideExteriorBandConnected` と内側セルの境界の補題群の 21 宣言も台帳から外れた。`trichotomous_of_linearOrder` を使う具体版二件（`PermutationSignOrbitProduct`・`ReversalMatrixDeterminant`）は同じ行で置換の符号の必要十分版も使うので、主経路の置換の符号の行に残した。
 - 2026-11-22（主経路）: 先頭の符号の分離は複数の論法を持つため、完全マッチングの列挙符号と残る具体版に割った。完全列挙と基準マッチングの八宣言を独立した転倒数の定義へ移し、分離の台帳から八行を消した。空集合の行列式展開は必要十分版の符号をまだ使うため、例外台帳へ明記した。
 - 2026-11-22（主経路）: 先頭の符号の分離を、独立な有限線型順序集合の乗法性、既存の具体版の符号参照の移行、互換と台の交わらない積の符号の三つに割った。今回は第一の論法を済ませ、必要十分版との定義の一致と導出を登録した。

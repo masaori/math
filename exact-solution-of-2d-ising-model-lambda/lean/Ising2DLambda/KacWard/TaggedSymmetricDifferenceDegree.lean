@@ -1,6 +1,5 @@
 import Ising2DLambda.KacWard.NonzeroLongPairReference
 import Ising2DLambda.KacWard.TaggedMatchingEvenComplement
-import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceDegree
 import Mathlib.Data.Set.SymmDiff
 
 namespace Ising2DLambda.KacWard
@@ -199,23 +198,5 @@ theorem taggedDifference_incident_iff {L : ℕ}
       refine ⟨Set.mem_symmDiff.mpr (Or.inr ⟨((hR q).mpr hq).1, ?_⟩), he⟩
       intro ha
       exact hne (((hD q).mp ⟨ha, he⟩).symm.trans hq)
-
-theorem taggedDifference_incident_iff_from_necSuf {L : ℕ}
-    (D : PerfectMatching (OrientedEdge L))
-    (t : Finset (OrientedEdge L × OrientedEdge L))
-    (e : OrientedEdge L) (q : Set (OrientedEdge L) × Bool) :
-    let R : PerfectMatching (OrientedEdge L) :=
-      ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-    (q ∈ (Ising2DLambda.NecSuf.KacWard.taggedEdges D (shortUnderlyingPairs t) ∆
-      Ising2DLambda.NecSuf.KacWard.taggedEdges R ∅) ∧ e ∈ q.1) ↔
-      let d := Ising2DLambda.NecSuf.KacWard.taggedPairAt D
-        (shortUnderlyingPairs t) e
-      let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ e
-      d ≠ r ∧ (q = d ∨ q = r) := by
-  simpa [concreteTaggedDifference, concreteTaggedPairs,
-    concreteReferenceTaggedPairs, concreteTaggedPairAt,
-    Ising2DLambda.NecSuf.KacWard.taggedEdges,
-    Ising2DLambda.NecSuf.KacWard.taggedPairAt, shortUnderlyingPairs_empty] using
-    taggedDifference_incident_iff D t e q
 
 end Ising2DLambda.KacWard
