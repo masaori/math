@@ -4473,10 +4473,20 @@ Z(K_1,K_2)
 &&\left(\because\ \text{上の行と }N_0\text{ の取り方}\right)\\
 \Longrightarrow\ &0 < \iota_{\mathbb{Z}\to\mathbb{R}}(N_0)
 &&\left(\because\ \text{不等号の推移律}\right)\\
-\Longrightarrow\ &N_0 > 0
+\Longrightarrow\ &\neg\,(N_0 \le 0_{\mathbb{Z}})
 &&\left(\because\ \blkref{inclusion_zz_to_rr_of_nonpositive_is_nonpositive}\text{ の対偶を }n=N_0\text{ に}\right)\\
-\Longrightarrow\ &N_0 \geq 1
-&&\left(\because\ N_0 \in \mathbb{Z}\text{。}0\text{ と }1\text{ の間に整数は無い}\right),
+\Longrightarrow\ &0_{\mathbb{Z}} \le N_0
+&&\left(\because\ \mathbb{Z}\text{ の全順序 }x \le y \vee y \le x\ (x \to N_0,\ y \to 0_{\mathbb{Z}})\text{ の左を前の行が否定する}\right)\\
+\Longrightarrow\ &N_0 = 0_{\mathbb{Z}}\ \vee\ \exists n \in \mathbf{Z},\ \bigl(0_{\mathbb{Z}} \le n\ \wedge\ N_0 = n +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+&&\left(\because\ \mathbb{Z}\text{ の }0_{\mathbb{Z}}\text{ 以上の元の分解 }(x \to N_0)\right)\\
+\Longrightarrow\ &\exists n \in \mathbf{Z},\ \bigl(0_{\mathbb{Z}} \le n\ \wedge\ N_0 = n +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+&&\left(\because\ N_0 = 0_{\mathbb{Z}}\text{ なら }\mathbb{Z}\text{ の順序の反射律で }N_0 \le 0_{\mathbb{Z}}\text{ となり、3 行上と矛盾する}\right)\\
+\Longrightarrow\ &0_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}} \le n +_{\mathbb{Z}} 1_{\mathbb{Z}}
+&&\left(\because\ \mathbb{Z}\text{ の順序と加法の両立 }(x \to 0_{\mathbb{Z}},\ y \to n,\ t \to 1_{\mathbb{Z}})\text{ を前の行の }0_{\mathbb{Z}} \le n\text{ に}\right)\\
+\Longrightarrow\ &0_{\mathbb{Z}} +_{\mathbb{Z}} 1_{\mathbb{Z}} \le N_0
+&&\left(\because\ \text{2 行上の }N_0 = n +_{\mathbb{Z}} 1_{\mathbb{Z}}\text{ を等号の代入で右辺へ}\right)\\
+\Longrightarrow\ &1_{\mathbb{Z}} \le N_0
+&&\left(\because\ 0_{\mathbb{Z}}\text{ は }\mathbb{Z}\text{ の和の単位元 }0_{\mathbb{Z}} +_{\mathbb{Z}} x = x\ (x \to 1_{\mathbb{Z}})\right),
 \end{aligned}`,
       ),
       displayMath(
@@ -4533,6 +4543,7 @@ Z(K_1,K_2)
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 含意の鎖の最後の行の根拠「非負の実数の絶対値はそれ自身」を def_real_absolute_value の q ≥ 0 の場合への参照にした。「ℝ のアルキメデス性より N_0ε > log 2 となる N_0 ∈ ℤ_{≥1} を取る」を、アルキメデス性の述べ方（任意の t ∈ ℝ に t < m となる m ∈ ℤ がある）と適用先 t = log 2/ε の文と、log 2/ε > 0・0 < N_0・N_0 ≥ 1・N_0ε > log 2 の表示式の鎖にした（アルキメデス性は ℝ の性質で、本文に引ける主張は無い）。正の数で割る・共通の因子を約す・引く・u ≤ v の場合分けの行は、高校教科書レベルの四則と順序の操作なので名前のまま残した。値と手順は変えていない。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: ℤ の元 M_col・N_row・N_0 を ℝ の式に入れる箇所と ℝ の元と比べる箇所を、inclusion_zz_to_rr の ι_{ℤ→ℝ} を通して書いた（証明の書き方の「同一視をしない」）。real_log_of_power の右辺が ι(n) log a になったのに合わせ、ι(M_col), ι(N_row) ∈ ℝ_{>0} を新しい主張 inclusion_zz_to_rr_of_positive_is_at_least_one で、アルキメデス性で取る N_0 ∈ ℤ について 0 < ι(N_0) から N_0 > 0 を inclusion_zz_to_rr_of_nonpositive_is_nonpositive の対偶で、ι(N_0) ≤ ι(N_row) を inclusion_zz_to_rr_is_monotone_on_nonnegatives で引いた。主張の M_col N_row は ι(M_col)ι(N_row) の略記と書いた。値・手順は不変。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 証明の準備で 2^{M_col} を def_power_of_real_number の冪とだけ書き、底の 2 がどの集合の元かを書いていなかった。2_ℝ := 1_ℝ +_ℝ 1_ℝ とその冪 2_ℝ^{M_col} ∈ ℝ を置き、以下 2・2^{M_col} と略記すること、def_power_of_integer の ℤ の元 2_ℤ^{M_col} とは別の元で partition_function_sandwich の右辺と同じ元であることを書いた（証明に出る 2^{M_col} の 9 か所と log 2・a=2 はこの略記で読む）。値と手順は変えていない。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の差・狭義の順序・数字」）: 0 < ι(N_0) から N_0 > 0 を経て N_0 ≥ 1 を得る 2 行（N_0 > 0 は ℤ の狭義の順序を定めずに書いており、N_0 ≥ 1 の根拠は名前だけの「0 と 1 の間に整数は無い」）を、¬(N_0 ≤ 0_ℤ)・0_ℤ ≤ N_0・0 以上の元の分解・N_0 = 0_ℤ の場合を除く行・0_ℤ + 1_ℤ ≤ n + 1_ℤ・0_ℤ + 1_ℤ ≤ N_0・1_ℤ ≤ N_0 の 7 行にし、どの行も set_and_algebra_notation の ℤ の一覧の行（全順序、0 以上の元の分解、反射律、順序と加法の両立、等号の代入、和の単位元）か既存の主張を引く形にした。ℤ の狭義の順序を使わなくなった。Lean の具体版の hN0gt・hN0 も同じ 7 段にした。",
       ],
     },
   },

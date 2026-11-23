@@ -26,8 +26,13 @@
 | `ε > 0` を取り、`log 2/ε > 0`（正の数を正の数で割る） | `intro ε hε`、`ht` |
 | アルキメデス性を `t = log 2/ε` に使い、`log 2/ε < ι(N_0)` の `N_0 ∈ ℤ` を取る | `exists_int_gt`（`N_0` は `ℤ` の `n`、`ι(N_0)` は `Int.cast`） |
 | `0 < log 2/ε < ι(N_0) ⟹ 0 < ι(N_0)`（推移律） | `hN0pos` |
-| `⟹ N_0 > 0`（`inclusion_zz_to_rr_of_nonpositive_is_nonpositive` の対偶） | `hN0gt` |
-| `⟹ N_0 ≥ 1`（`0` と `1` の間に整数は無い） | `hN0` |
+| `⟹ ¬(N_0 ≤ 0_ℤ)`（`inclusion_zz_to_rr_of_nonpositive_is_nonpositive` の対偶） | `hN0not` |
+| `⟹ 0_ℤ ≤ N_0`（`ℤ` の全順序） | `hN0nn` |
+| `⟹ N_0 = 0_ℤ ∨ ∃ n, 0_ℤ ≤ n ∧ N_0 = n + 1_ℤ`（`ℤ` の `0_ℤ` 以上の元の分解） | `hN0dec` |
+| `⟹ ∃ n, 0_ℤ ≤ n ∧ N_0 = n + 1_ℤ`（`N_0 = 0_ℤ` なら反射律で 3 行上と矛盾。本文の `n` は Lean の `m`） | `m`・`hm0`・`hmn` |
+| `⟹ 0_ℤ + 1_ℤ ≤ n + 1_ℤ`（`ℤ` の順序と加法の両立） | `hm01` |
+| `⟹ 0_ℤ + 1_ℤ ≤ N_0`（等号の代入） | `hN01` |
+| `⟹ 1_ℤ ≤ N_0`（`ℤ` の和の単位元） | `hN0` |
 | `log 2 = (log 2/ε)ε < ι(N_0)ε`（`ε ≠ 0` を約す、両辺に `ε > 0` を掛ける） | `hN0eps` の 2 段の `calc` |
 | `N_row ∈ ℤ_{≥N_0}` について | `N_0 ∈ ℤ_{≥1}` を `ℕ` の `k` で書き直し（`ι(N_0) = (k : ℝ)` は `inclusion_zz_to_rr_of_natCast`）、`refine ⟨k, …⟩`。Lean の列は `ℕ` で添字づけるための段で、人手には無い |
 | `|a_N − a| ≤ log 2/ι(N) ≤ log 2/ι(N_0) < ε`（`ι(N_0) ≤ ι(N_row)` は `inclusion_zz_to_rr_is_monotone_on_nonnegatives` を `1 ≤ N_0 ≤ N_row` に） | `hNR` と 3 段の `calc` |
@@ -150,16 +155,25 @@ theorem limit_of_log_Z_in_N_row
   have ht : 0 < Real.log 2 / ε := div_pos log_two_pos hε         -- `log 2/ε > 0`（準備の `log 2 > 0` と `ε > 0`。正の数を正の数で割る）
   obtain ⟨n, hn⟩ := exists_int_gt (Real.log 2 / ε)                -- ℝ のアルキメデス性を `t = log 2/ε` に: `log 2/ε < ι(N_0)`（`N_0 ∈ ℤ`）
   have hN0pos : (0 : ℝ) < (n : ℝ) := lt_trans ht hn               -- `0 < log 2/ε < ι(N_0) ⟹ 0 < ι(N_0)`（推移律）
-  have hN0gt : 0 < n := lt_of_not_ge fun h =>
+  have hN0not : ¬ (n ≤ 0) := fun h =>
     (not_lt.2 (inclusion_zz_to_rr_of_nonpositive_is_nonpositive n h)) hN0pos
-                                                                  -- `N_0 > 0`（`inclusion_zz_to_rr_of_nonpositive_is_nonpositive` の対偶を `n = N_0` に）
-  have hN0 : 1 ≤ n := hN0gt                                       -- `N_0 ≥ 1`（`N_0 ∈ ℤ`。`0` と `1` の間に整数は無い）
+                                                                  -- `⟹ ¬(N_0 ≤ 0_ℤ)`（`inclusion_zz_to_rr_of_nonpositive_is_nonpositive` の対偶を `n = N_0` に）
+  have hN0nn : 0 ≤ n := (le_total n 0).resolve_left hN0not        -- `⟹ 0_ℤ ≤ N_0`（`ℤ` の全順序 `x ≤ y ∨ y ≤ x`、`x → N_0`, `y → 0_ℤ`）
+  have hN0dec : n = 0 ∨ ∃ m : ℤ, 0 ≤ m ∧ n = m + 1 := by         -- `⟹ N_0 = 0_ℤ ∨ ∃ n, 0_ℤ ≤ n ∧ N_0 = n + 1_ℤ`
+    rcases eq_or_lt_of_le hN0nn with h | h                        --   （`set_and_algebra_notation` が外から持ち込む `ℤ` の `0_ℤ` 以上の元の分解）
+    · exact Or.inl h.symm
+    · exact Or.inr ⟨n - 1, by omega, by omega⟩
+  obtain ⟨m, hm0, hmn⟩ : ∃ m : ℤ, 0 ≤ m ∧ n = m + 1 :=
+    hN0dec.resolve_left fun h => hN0not (h ▸ le_refl n)          -- `⟹ ∃ n, …`（`N_0 = 0_ℤ` なら `ℤ` の順序の反射律で `N_0 ≤ 0_ℤ`。本文の `n` は Lean の `m`）
+  have hm01 : 0 + 1 ≤ m + 1 := add_le_add_left hm0 1             -- `⟹ 0_ℤ + 1_ℤ ≤ n + 1_ℤ`（`ℤ` の順序と加法の両立、`x → 0_ℤ`, `y → n`（Lean の `m`）, `t → 1_ℤ`）
+  have hN01 : 0 + 1 ≤ n := by rw [hmn]; exact hm01               -- `⟹ 0_ℤ + 1_ℤ ≤ N_0`（2 行上の `N_0 = n + 1_ℤ` を等号の代入で右辺へ）
+  have hN0 : 1 ≤ n := by rw [zero_add] at hN01; exact hN01       -- `⟹ 1_ℤ ≤ N_0`（`0_ℤ` は `ℤ` の和の単位元 `0_ℤ + x = x`、`x → 1_ℤ`）
   have hN0eps : Real.log 2 < (n : ℝ) * ε :=
     calc Real.log 2 = Real.log 2 / ε * ε := (div_mul_cancel₀ _ hε.ne').symm
                                                                   -- ℝ の四則。`ε ≠ 0` を約す
       _ < (n : ℝ) * ε := mul_lt_mul_of_pos_right hn hε           -- `log 2/ε < ι(N_0)` の両辺に `ε > 0` を掛ける
   -- Lean の列は `ℕ` で添字づけるので、`N_0 ∈ ℤ_{≥1}` を `ℕ` の `k` で書き直す（人手には無い段）
-  obtain ⟨k, hk⟩ : ∃ k : ℕ, ((k : ℤ)) = n := ⟨n.toNat, Int.toNat_of_nonneg hN0gt.le⟩
+  obtain ⟨k, hk⟩ : ∃ k : ℕ, ((k : ℤ)) = n := ⟨n.toNat, Int.toNat_of_nonneg hN0nn⟩
   have hkR : (n : ℝ) = (k : ℝ) := by rw [← hk, inclusion_zz_to_rr_of_natCast]
   have hk1 : 1 ≤ k := by omega
   refine ⟨k, fun N hN => ?_⟩                                      -- `N_row ∈ ℤ_{≥N_0}` について

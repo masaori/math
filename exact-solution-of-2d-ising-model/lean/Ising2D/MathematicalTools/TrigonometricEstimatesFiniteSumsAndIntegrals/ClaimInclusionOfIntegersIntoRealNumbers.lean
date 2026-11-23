@@ -38,7 +38,8 @@
 * `inclusion_zz_to_rr_preserves_product` は人手と同じく `a` を固定した `b` についての 2 方向の帰納法（`Int.induction_on`）で、`b = 0` の 4 行、
   `b → b + 1` の 7 行、`b → b − 1` の 15 行が人手の行と 1 対 1 の `calc` である。`b = 0` の `x · 0 = 0` は人手と同じく `real_times_zero_is_zero`。
   `ℤ` の分配律・積の単位元・四則の段は `mul_sub`・`mul_one`・`sub_add_cancel`・`omega`（`b = (b − 1) + 1`）で閉じる。
-* `inclusion_zz_to_rr_preserves_difference` は人手の 6 行と 1 対 1 の `calc` である。`ℤ` の四則 `(x − b) + b = x` の段は `sub_add_cancel`、
+* `inclusion_zz_to_rr_preserves_difference` は人手の 9 行と 1 対 1 の `calc` である。`def_int_difference` は `int_sub_eq_add_neg`、
+  `ℤ` の和の結合律・加法逆元 `(−x) + x = 0`・和の単位元は `add_assoc`・`neg_add_cancel`・`add_zero`、
   `def_real_difference`（`y − z := y + (−z)`）は `sub_eq_add_neg` で当てる。
 * `inclusion_zz_to_rr_preserves_negation` は人手の 5 行と 1 対 1 の `calc` である。`ℤ` の四則 `-x = 0 - x` の段は `zero_sub`、
   `ι(0_ℤ) := 0_ℝ` は `inclusion_zz_to_rr_zero_intCast`、`def_real_difference` は `sub_eq_add_neg`、`0_ℝ` が和の単位元であることは `zero_add` で当てる。
@@ -61,6 +62,7 @@
   人手の `2_ℝ := 1_ℝ + 1_ℝ` は `def_real_two` の具体版 `real_two_eq_one_add_one`（Lean の `(2 : ℝ)` は数字の `2`）で読む。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerDifference
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
@@ -283,7 +285,7 @@ theorem inclusion_zz_to_rr_preserves_product (a b : ℤ) :
       _ = ((a : ℤ) : ℝ) * ((-(i : ℤ) - 1 : ℤ) : ℝ) := add_zero _          -- `0_ℝ` は `ℝ` の和の単位元
 
 /-- **人手 `inclusion_zz_to_rr_preserves_difference`**: `a, b ∈ ℤ` なら `ι(a - b) = ι(a) - ι(b)`。
-人手の 6 行と 1 対 1 の `calc` で、`inclusion_zz_to_rr_preserves_sum` だけを引く。 -/
+人手の 9 行と 1 対 1 の `calc` で、主張は `inclusion_zz_to_rr_preserves_sum` だけを引き、定義は `def_int_difference`（`int_sub_eq_add_neg`）を引く。 -/
 theorem inclusion_zz_to_rr_preserves_difference (a b : ℤ) :
     ((a - b : ℤ) : ℝ) = ((a : ℤ) : ℝ) - ((b : ℤ) : ℝ) :=
   calc ((a - b : ℤ) : ℝ)
@@ -294,7 +296,12 @@ theorem inclusion_zz_to_rr_preserves_difference (a b : ℤ) :
                                                                            -- `ℝ` の和の結合律を右辺から左辺へ
     _ = ((a - b + b : ℤ) : ℝ) + -((b : ℤ) : ℝ) := by
         rw [inclusion_zz_to_rr_preserves_sum (a - b) b]                    -- `inclusion_zz_to_rr_preserves_sum`（`a → a - b`, `b → b`）を右辺から左辺へ
-    _ = ((a : ℤ) : ℝ) + -((b : ℤ) : ℝ) := by rw [sub_add_cancel]          -- `ℤ` の四則 `(x - b) + b = x`（`x → a`）
+    _ = ((a + -b + b : ℤ) : ℝ) + -((b : ℤ) : ℝ) := by
+        rw [int_sub_eq_add_neg a b]                                        -- `def_int_difference`（`y → a`, `z → b`）
+    _ = ((a + (-b + b) : ℤ) : ℝ) + -((b : ℤ) : ℝ) := by rw [add_assoc a (-b) b]
+                                                                           -- `ℤ` の和の結合律
+    _ = ((a + 0 : ℤ) : ℝ) + -((b : ℤ) : ℝ) := by rw [neg_add_cancel b]     -- `ℤ` の加法逆元 `(-x) + x = 0`（`x → b`）
+    _ = ((a : ℤ) : ℝ) + -((b : ℤ) : ℝ) := by rw [add_zero a]              -- `0_ℤ` は `ℤ` の和の単位元
     _ = ((a : ℤ) : ℝ) - ((b : ℤ) : ℝ) := (sub_eq_add_neg _ _).symm        -- `def_real_difference`（`y → ι(a)`, `z → ι(b)`）を右辺から左辺へ
 
 /-- **人手 `inclusion_zz_to_rr_preserves_negation`**: `a ∈ ℤ` なら `ι(-a) = -ι(a)`（`a` の符号を問わない）。

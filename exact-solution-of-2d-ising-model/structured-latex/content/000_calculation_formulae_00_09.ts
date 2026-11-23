@@ -514,6 +514,43 @@ export default defineBlocks([
     },
   },
   {
+    id: "calc_formulae_definition_integer_difference",
+    kind: "definition",
+    title: { text: "整数の差" },
+    labels: ["def_int_difference"],
+    lean: ["Ising2D.int_sub_eq_add_neg"],
+    statement: [
+      paragraph([
+        math(String.raw`y, z \in \mathbb{Z}`),
+        " について、差 ",
+        math(String.raw`y -_{\mathbb{Z}} z \in \mathbb{Z}`),
+        " を",
+      ]),
+      displayMath(String.raw`y -_{\mathbb{Z}} z := y +_{\mathbb{Z}} (-z)`),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`-z`),
+        " は、",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の符号反転の値 ",
+        math(String.raw`-_{\mathbb{Z}}(z)`),
+        "（",
+        math(String.raw`z +_{\mathbb{Z}} (-z) = 0_{\mathbb{Z}}`),
+        " を満たす）であり、和は ",
+        math(String.raw`+_{\mathbb{Z}}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の差・狭義の順序・数字」）: 原文（Typst）に対応ブロックは無い。ℤ の差は本文全体で使われていたが、set_and_algebra_notation の ℤ の組は和・積・零元・単位元・符号反転・順序だけで、差を定めるブロックが無かった。def_real_difference と同じ形で、def_real_strict_order の後に置いた。ℤ の狭義の順序と 2 以上の数字は、それを引く最終定理の経路の証明と同じ回に別のブロックで定める（状態台帳の行「ℤ の狭義の順序・数字」）。Lean の具体版は Ising2D.int_sub_eq_add_neg（MathematicalTools/SetNotationAndComplexCartesianArithmetic/DefinitionIntegerDifference.lean）。Lean の ℤ の差も y + -z と定義として等しい（rfl）。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_real_less_than_preserved_by_adding_on_right",
     kind: "claim",
     title: { text: "実数の狭義の順序は右から同じ数を足しても保たれる" },
@@ -2313,8 +2350,14 @@ T_B(X - W)
   &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律を右辺から左辺へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((a -_{\mathbb{Z}} b) +_{\mathbb{Z}} b\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr)
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a \to a -_{\mathbb{Z}} b,\ b \to b)\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((a +_{\mathbb{Z}} (-b)) +_{\mathbb{Z}} b\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr)
+  &&\bigl(\because\ \blkref{def_int_difference}\ (y \to a,\ z \to b)\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a +_{\mathbb{Z}} ((-b) +_{\mathbb{Z}} b)\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の和の結合律}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} 0_{\mathbb{Z}}) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の加法逆元}\ (-x) +_{\mathbb{Z}} x = 0_{\mathbb{Z}}\ (x \to b)\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ (x -_{\mathbb{Z}} b) +_{\mathbb{Z}} b = x\ (x \to a)\bigr)\\
+  &&\bigl(\because\ 0_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の和の単位元}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) -_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)
   &&\bigl(\because\ \blkref{def_real_difference}\ (y \to \iota_{\mathbb{Z}\to\mathbb{R}}(a),\ z \to \iota_{\mathbb{Z}\to\mathbb{R}}(b))\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -2324,6 +2367,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b4)）: 原文（Typst）に対応ブロックは無い。def_half_integer_modes (3)・conjugate_index_of_check_Z_Y (1) の鎖の 2 行目と recover_Z_Y_from_check_Z_Y の準備 2 の実数の鎖の 4 行目（いずれも eigenvalue_problem_diagonalization_and_exponential_form.ts）が「ι_{ℤ→ℝ} は和と零を保つので差を保つ」を名前だけで使っていたので、ℤ 全体の主張として足した。証明は inclusion_zz_to_rr_preserves_sum だけを引く 6 行の鎖である。Lean の具体版は Ising2D.inclusion_zz_to_rr_preserves_difference、必要十分版は Ising2D.NecSuf.int_cast_sub'。数値検証: sagemath/check/inclusion_zz_to_rr_preserves_difference/。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の差・狭義の順序・数字」）: 鎖の 5 行目の名前だけの根拠「ℤ の四則 (x − b) + b = x」を、def_int_difference・ℤ の和の結合律・ℤ の加法逆元 (−x) + x = 0・ℤ の和の単位元の 4 行に割った（鎖は 9 行）。Lean の具体版の sub_add_cancel の 1 段も同じ 4 段にした。",
       ],
     },
   },

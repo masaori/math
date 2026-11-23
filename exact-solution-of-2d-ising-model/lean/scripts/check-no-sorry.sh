@@ -446,6 +446,7 @@ targets=(
   "Ising2D.NecSuf.mul_mul_right_inverse_of_commute'"
   Ising2D.complex_I_eq_mk
   Ising2D.real_sub_eq_add_neg
+  Ising2D.int_sub_eq_add_neg
   Ising2D.complex_mk_add_mk
   Ising2D.complex_mk_eq_mk_iff
   Ising2D.complex_mk_mul_mk

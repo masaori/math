@@ -83,10 +83,12 @@ HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid	def_complex_quotient
 #
 # ℤ の演算・順序・数: set_and_algebra_notation が ℤ の +・·・0・1・符号反転 −・≤ を外から持ち込み、証明が使う性質（可換環の等式、0 ≠ 1、
 # 順序の反射律・反対称律・推移律・全順序、加法・乗法との両立、0 以上の元の分解、k から始める数学的帰納法）を列挙し、数字 0・1 が 0_ℤ・1_ℤ を表すと書いている。
-# ℤ の差・狭義の順序・2 以上の数字は、本文の別の定義のブロックと一致の補題を置くまで載せない（状態台帳の行「ℤ の差・狭義の順序・数字」）。
+# 狭義の順序と 2 以上の数字は、本文の別の定義のブロックと一致の補題を置くまで載せない（状態台帳の行「ℤ の狭義の順序・数字」）。
 HAdd.hAdd@Int,Int,Int@Int.instAdd	set_and_algebra_notation
 HMul.hMul@Int,Int,Int@Int.instMul	set_and_algebra_notation
 Neg.neg@Int@Int.instNegInt	set_and_algebra_notation
 OfNat.ofNat@Int,0@instOfNat	set_and_algebra_notation
 OfNat.ofNat@Int,1@instOfNat	set_and_algebra_notation
 LE.le@Int@Int.instLEInt	set_and_algebra_notation
+# ℤ の差: def_int_difference が y − z := y + (−z) と定める。Lean の ℤ の差 Int.sub m n も m + -n と定義されており、定義として等しい（int_sub_eq_add_neg。rfl）。
+HSub.hSub@Int,Int,Int@Int.instSub	def_int_difference

@@ -1,5 +1,5 @@
 # 対象ラベル: limit_of_log_Z_in_N_row
-# 証明の含意の鎖（十行）と、極限の段（log 2 > 0 の準備の三行と、log 2/ε > 0 の一行と N_0 ≥ 1 の三行と log 2 < N_0ε の二行と、N_row ≥ N_0 の三行の鎖）を、本文の Z と c で確かめる。
+# 証明の含意の鎖（十行）と、極限の段（log 2 > 0 の準備の三行と、log 2/ε > 0 の一行と 1 ≤ N_0 までの九行と log 2 < N_0ε の二行と、N_row ≥ N_0 の三行の鎖）を、本文の Z と c で確かめる。
 # 帰属:
 # - K_1 := 2 log y、K_2 := log x（x, y ∈ QQ_{>1} なので K_1, K_2 > 0）と置くと、def_partition_function_2d_ising の Z は
 #   Σ_s y^{2h(s)} x^{v(s)}（h は同じ行の隣り合う組の積の和、v は隣り合う行の同じ列の組の積の和）で QQ の元になる。
@@ -113,9 +113,15 @@ def check_limit_step(eps, N0, Ns, a_of, a):
     iN0 = iota_zz_to_rr(N0)
     assert surely_lt(t, RBF512(iN0))                                        # N_0 の取り方: log 2/ε < ι(N_0)
     assert iN0 > 0                                                          # 0 < log 2/ε < ι(N_0) ⟹ 0 < ι(N_0)（推移律）
-    # ⟹ N_0 > 0（inclusion_zz_to_rr_of_nonpositive_is_nonpositive の対偶）: N_0 の近くの ℤ_{≤0} の元は ι ≤ 0 なので N_0 はそこに無い
-    assert all(iota_zz_to_rr(n) <= 0 for n in range(-50, 1)) and N0 > 0
-    assert N0 >= 1                                                          # ⟹ N_0 ≥ 1（0 と 1 の間に整数は無い）
+    # ⟹ ¬(N_0 ≤ 0)（inclusion_zz_to_rr_of_nonpositive_is_nonpositive の対偶）: ℤ_{≤0} の -50..0 は ι ≤ 0 なので、0 < ι(N_0) の N_0 はそこに無い
+    assert all(iota_zz_to_rr(n) <= 0 for n in range(-50, 1)) and not (N0 <= 0)
+    assert (N0 <= 0) or (0 <= N0)                                           # ℤ の全順序（x → N_0, y → 0）
+    assert 0 <= N0                                                          # ⟹ 0 ≤ N_0（全順序の左を否定）
+    assert N0 == 0 or (0 <= N0 - 1 and N0 == (N0 - 1) + 1)                  # ⟹ 0 以上の元の分解（n := N_0 − 1）
+    assert N0 != 0 and 0 <= N0 - 1 and N0 == (N0 - 1) + 1                  # ⟹ ∃ n, 0 ≤ n ∧ N_0 = n + 1（N_0 = 0 は 2 行上と矛盾）
+    assert ZZ(0) + ZZ(1) <= (N0 - 1) + ZZ(1)                                # ⟹ 0 + 1 ≤ n + 1（順序と加法の両立、t → 1）
+    assert (N0 - 1) + ZZ(1) == N0 and ZZ(0) + ZZ(1) <= N0                   # ⟹ 0 + 1 ≤ N_0（N_0 = n + 1 の代入）
+    assert ZZ(0) + ZZ(1) == ZZ(1) and ZZ(1) <= N0                           # ⟹ 1 ≤ N_0（ℤ の和の単位元 0 + 1 = 1）
     assert surely_equal(t * RBF512(eps), l2)                                 # log 2 = (log 2/ε)ε
     assert surely_lt(t * RBF512(eps), RBF512(iN0) * RBF512(eps))            # (log 2/ε)ε < ι(N_0)ε
     assert surely_lt(l2, iN0 * eps)
