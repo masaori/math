@@ -462,6 +462,8 @@ export const ALL_LABELS = [
   "image_of_matrix_is_subspace",
   "inclusion_nn_to_zz",
   "inclusion_nn_to_zz_image_is_nonnegative",
+  "inclusion_nn_to_zz_preserves_product",
+  "inclusion_nn_to_zz_preserves_sum",
   "inclusion_rr_to_cc",
   "inclusion_rr_to_cc_is_injective",
   "inclusion_zz_to_rr",

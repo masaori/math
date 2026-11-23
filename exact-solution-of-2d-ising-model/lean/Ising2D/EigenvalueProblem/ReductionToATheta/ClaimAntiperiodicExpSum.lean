@@ -52,6 +52,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimI
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueOfProductWithNonnegative
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerLessThanOneOfProductLessThanNonnegativeFactor
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimInclusionOfNaturalNumbersIntoIntegersImageIsNonnegative
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimInclusionOfNaturalNumbersIntoIntegersPreservesProduct
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -419,15 +420,30 @@ theorem antiperiodic_complex_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
 /-- **`antiperiodic_exp_sum` の `M ∤ k` の場合**: 和は `0`。 -/
 theorem antiperiodic_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ} (hk : ¬ (M : ℤ) ∣ k) :
     ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) = 0 := by
-  have hk2 : ¬ ((2 * M : ℕ) : ℤ) ∣ k := by
+  -- 人手証明の準備の鎖 `(2(M_col)_ℕ)_ℤ = 2_ℤ·M_col` の 11 行。
+  -- 1 行目（略記 `n_ℤ`）は Lean の `((2 * M : ℕ) : ℤ)` が `Nat.cast` なので `inclusionNNtoZZ_eq_natCast` で `ι_{ℕ→ℤ}` の形へ移す段、
+  -- 最後の 2 行（略記 `n_ℤ` を右辺から左辺へ、`(M_col)_ℕ` の定義）は同じ補題で `Nat.cast` の形へ戻す 1 段である。
+  have h2M : ((2 * M : ℕ) : ℤ) = 2 * (M : ℤ) :=
+    calc ((2 * M : ℕ) : ℤ)
+        = inclusionNNtoZZ (2 * M) := (inclusionNNtoZZ_eq_natCast (2 * M)).symm  -- 略記 `n_ℤ := ι_{ℕ→ℤ}(n)`（`n → 2·(M_col)_ℕ`）
+      _ = inclusionNNtoZZ 2 * inclusionNNtoZZ M :=
+          inclusion_nn_to_zz_preserves_product 2 M                          -- `inclusion_nn_to_zz_preserves_product`（`x → 2, y → (M_col)_ℕ`）
+      _ = inclusionNNtoZZ (1 + 1) * inclusionNNtoZZ M := rfl               -- ℕ の数字 `2 := 1 + 1`
+      _ = (inclusionNNtoZZ 1 + 1) * inclusionNNtoZZ M := rfl               -- `inclusion_nn_to_zz` の `ι(n + 1_ℕ) := ι(n) + 1_ℤ`（`n → 1_ℕ`）
+      _ = (inclusionNNtoZZ (0 + 1) + 1) * inclusionNNtoZZ M := by
+          rw [Nat.zero_add 1]                                               -- ℕ の加法の単位元 `0 + x = x`（`x → 1_ℕ`）を右辺から左辺へ
+      _ = ((inclusionNNtoZZ 0 + 1) + 1) * inclusionNNtoZZ M := rfl         -- `inclusion_nn_to_zz` の `ι(n + 1_ℕ) := ι(n) + 1_ℤ`（`n → 0_ℕ`）
+      _ = ((0 + 1) + 1) * inclusionNNtoZZ M := rfl                         -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`
+      _ = (1 + 1) * inclusionNNtoZZ M := by rw [zero_add (1 : ℤ)]          -- ℤ の和の単位元 `0 + x = x`（`x → 1_ℤ`）
+      _ = 2 * inclusionNNtoZZ M := rfl                                     -- `def_power_of_integer` の `2_ℤ := 1_ℤ + 1_ℤ` を右辺から左辺へ
+      _ = 2 * (M : ℤ) := by rw [inclusionNNtoZZ_eq_natCast M]              -- 略記 `n_ℤ` を右辺から左辺へ・`(M_col)_ℕ` の定義
+  -- 人手の「`2M_col ∣ k` なら `M_col ∣ k` となることの対偶から `2M_col ∤ k`」。`M_col ∣ 2M_col` は ℤ の乗法の交換律 `2M_col = M_col·2`。
+  have hk2 : ¬ (2 * (M : ℤ)) ∣ k := by
     intro hd
     apply hk
-    apply dvd_trans (b := ((2 * M : ℕ) : ℤ))
-    · use 2
-      push_cast
-      ring
-    · exact hd
-  have hdelta2 : deltaMod (2 * M) k 0 = 0 := by rw [deltaMod, sub_zero, if_neg hk2]
+    exact dvd_trans ⟨2, mul_comm 2 (M : ℤ)⟩ hd
+  have hdelta2 : deltaMod (2 * M) k 0 = 0 := by
+    rw [deltaMod, sub_zero, if_neg (by rw [h2M]; exact hk2)]
   have hdelta : deltaMod M k 0 = 0 := by rw [deltaMod, sub_zero, if_neg hk]
   calc ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1)
       = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 :=

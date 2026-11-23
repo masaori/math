@@ -2854,6 +2854,208 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_claim_inclusion_nn_to_zz_preserves_sum",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}\text{ は和を保つ}` },
+    labels: ["inclusion_nn_to_zz_preserves_sum"],
+    lean: ["Ising2D.inclusion_nn_to_zz_preserves_sum"],
+    statement: [
+      paragraph([
+        "すべての ",
+        math(String.raw`x, y \in \mathbf{N}`),
+        " について、",
+        ref("inclusion_nn_to_zz"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}`),
+        " は",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}(x +_{\mathbb{N}} y) = \iota_{\mathbb{N}\to\mathbb{Z}}(x) +_{\mathbb{Z}} \iota_{\mathbb{N}\to\mathbb{Z}}(y)`),
+      paragraph([
+        "を満たす。",
+        math(String.raw`+_{\mathbb{N}}`),
+        "・",
+        math(String.raw`+_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{N}`),
+        "・",
+        math(String.raw`\mathbb{Z}`),
+        " の和である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x \in \mathbf{N}`),
+        " を固定し、",
+        math(String.raw`\mathbf{N}`),
+        " の元についての命題 ",
+        math(String.raw`\varphi(y) :\Leftrightarrow \iota_{\mathbb{N}\to\mathbb{Z}}(x +_{\mathbb{N}} y) = \iota_{\mathbb{N}\to\mathbb{Z}}(x) +_{\mathbb{Z}} \iota_{\mathbb{N}\to\mathbb{Z}}(y)`),
+        " に ",
+        math(String.raw`\mathbb{N}`),
+        " の数学的帰納法（",
+        ref("set_and_algebra_notation"),
+        "）を使う。以下では ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}`),
+        " を ",
+        math(String.raw`\iota`),
+        " と略す。",
+        math(String.raw`y = 0_{\mathbb{N}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota(x +_{\mathbb{N}} 0_{\mathbb{N}})
+&= \iota(x)
+&&\bigl(\because\ \mathbb{N}\ \text{の和の再帰の式}\ x + 0_{\mathbb{N}} = x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota(x) +_{\mathbb{Z}} 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x + 0_{\mathbb{Z}} = x\ (x \to \iota(x))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \iota(x) +_{\mathbb{Z}} \iota(0_{\mathbb{N}})
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota(0_{\mathbb{N}}) := 0_{\mathbb{Z}}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`y \in \mathbf{N}`),
+        " で ",
+        math(String.raw`\varphi(y)`),
+        " が成り立つとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota\bigl(x +_{\mathbb{N}} (y +_{\mathbb{N}} 1_{\mathbb{N}})\bigr)
+&= \iota\bigl((x +_{\mathbb{N}} y) +_{\mathbb{N}} 1_{\mathbb{N}}\bigr)
+&&\bigl(\because\ \mathbb{N}\ \text{の和の再帰の式}\ x + (y + 1_{\mathbb{N}}) = (x + y) + 1_{\mathbb{N}}\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota(x +_{\mathbb{N}} y) +_{\mathbb{Z}} 1_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota(n +_{\mathbb{N}} 1_{\mathbb{N}}) := \iota(n) +_{\mathbb{Z}} 1_{\mathbb{Z}}\ (n \to x +_{\mathbb{N}} y)\bigr)\\
+&= \bigl(\iota(x) +_{\mathbb{Z}} \iota(y)\bigr) +_{\mathbb{Z}} 1_{\mathbb{Z}}
+&&\bigl(\because\ \text{帰納法の仮定}\ \varphi(y)\bigr)\\
+&= \iota(x) +_{\mathbb{Z}} \bigl(\iota(y) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to \iota(x),\ y \to \iota(y),\ t \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota(x) +_{\mathbb{Z}} \iota(y +_{\mathbb{N}} 1_{\mathbb{N}})
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota(n +_{\mathbb{N}} 1_{\mathbb{N}}) := \iota(n) +_{\mathbb{Z}} 1_{\mathbb{Z}}\ (n \to y)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\varphi(y +_{\mathbb{N}} 1_{\mathbb{N}})`),
+        " も成り立つ。数学的帰納法により、すべての ",
+        math(String.raw`y \in \mathbf{N}`),
+        " で ",
+        math(String.raw`\varphi(y)`),
+        " である。",
+        math(String.raw`x`),
+        " は任意だったので、主張が従う。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum の主張の前置きが「ι_{ℕ→ℤ} は和を保つ」を仮定として置き、証明が名前だけで引いていた。inclusion_nn_to_zz_preserves_product の証明が使う部品として、inclusion_nn_to_zz の二つの式と set_and_algebra_notation の ℕ・ℤ の行から示す主張として足した。Lean の具体版は Ising2D.inclusion_nn_to_zz_preserves_sum（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimInclusionOfNaturalNumbersIntoIntegersPreservesSum.lean）、必要十分版は Ising2D.NecSuf.map_add_of_rec_add_one（NecSuf/MapAddOfRecAddOne.lean）。数値検証: sagemath/check/inclusion_nn_to_zz_preserves_sum/。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_inclusion_nn_to_zz_preserves_product",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}\text{ は積を保つ}` },
+    labels: ["inclusion_nn_to_zz_preserves_product"],
+    lean: ["Ising2D.inclusion_nn_to_zz_preserves_product"],
+    statement: [
+      paragraph([
+        "すべての ",
+        math(String.raw`x, y \in \mathbf{N}`),
+        " について、",
+        ref("inclusion_nn_to_zz"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}`),
+        " は",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}(x \cdot_{\mathbb{N}} y) = \iota_{\mathbb{N}\to\mathbb{Z}}(x) \cdot_{\mathbb{Z}} \iota_{\mathbb{N}\to\mathbb{Z}}(y)`),
+      paragraph([
+        "を満たす。",
+        math(String.raw`\cdot_{\mathbb{N}}`),
+        "・",
+        math(String.raw`\cdot_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{N}`),
+        "・",
+        math(String.raw`\mathbb{Z}`),
+        " の積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x \in \mathbf{N}`),
+        " を固定し、",
+        math(String.raw`\mathbf{N}`),
+        " の元についての命題 ",
+        math(String.raw`\varphi(y) :\Leftrightarrow \iota_{\mathbb{N}\to\mathbb{Z}}(x \cdot_{\mathbb{N}} y) = \iota_{\mathbb{N}\to\mathbb{Z}}(x) \cdot_{\mathbb{Z}} \iota_{\mathbb{N}\to\mathbb{Z}}(y)`),
+        " に ",
+        math(String.raw`\mathbb{N}`),
+        " の数学的帰納法（",
+        ref("set_and_algebra_notation"),
+        "）を使う。以下では ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}`),
+        " を ",
+        math(String.raw`\iota`),
+        " と略す。",
+        math(String.raw`y = 0_{\mathbb{N}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota(x \cdot_{\mathbb{N}} 0_{\mathbb{N}})
+&= \iota(0_{\mathbb{N}})
+&&\bigl(\because\ \mathbb{N}\ \text{の積の再帰の式}\ x \cdot 0_{\mathbb{N}} = 0_{\mathbb{N}}\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota(0_{\mathbb{N}}) := 0_{\mathbb{Z}}\bigr)\\
+&= 0_{\mathbb{Z}} \cdot_{\mathbb{Z}} \iota(x)
+&&\bigl(\because\ \blkref{int_zero_times_is_zero}\ (x \to \iota(x))\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota(x) \cdot_{\mathbb{Z}} 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の交換律}\ x \cdot y = y \cdot x\ (x \to 0_{\mathbb{Z}},\ y \to \iota(x))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota(x) \cdot_{\mathbb{Z}} \iota(0_{\mathbb{N}})
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota(0_{\mathbb{N}}) := 0_{\mathbb{Z}}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`y \in \mathbf{N}`),
+        " で ",
+        math(String.raw`\varphi(y)`),
+        " が成り立つとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota\bigl(x \cdot_{\mathbb{N}} (y +_{\mathbb{N}} 1_{\mathbb{N}})\bigr)
+&= \iota(x \cdot_{\mathbb{N}} y +_{\mathbb{N}} x)
+&&\bigl(\because\ \mathbb{N}\ \text{の積の再帰の式}\ x \cdot (y + 1_{\mathbb{N}}) = x \cdot y + x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota(x \cdot_{\mathbb{N}} y) +_{\mathbb{Z}} \iota(x)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz_preserves_sum}\ (x \to x \cdot_{\mathbb{N}} y,\ y \to x)\bigr)\\
+&= \iota(x) \cdot_{\mathbb{Z}} \iota(y) +_{\mathbb{Z}} \iota(x)
+&&\bigl(\because\ \text{帰納法の仮定}\ \varphi(y)\bigr)\\
+&= \iota(x) \cdot_{\mathbb{Z}} \iota(y) +_{\mathbb{Z}} \iota(x) \cdot_{\mathbb{Z}} 1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の単位元}\ x \cdot 1_{\mathbb{Z}} = x\ (x \to \iota(x))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \iota(x) \cdot_{\mathbb{Z}} \bigl(\iota(y) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ x \cdot (y + t) = x \cdot y + x \cdot t\ (x \to \iota(x),\ y \to \iota(y),\ t \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \iota(x) \cdot_{\mathbb{Z}} \iota(y +_{\mathbb{N}} 1_{\mathbb{N}})
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota(n +_{\mathbb{N}} 1_{\mathbb{N}}) := \iota(n) +_{\mathbb{Z}} 1_{\mathbb{Z}}\ (n \to y)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\varphi(y +_{\mathbb{N}} 1_{\mathbb{N}})`),
+        " も成り立つ。数学的帰納法により、すべての ",
+        math(String.raw`y \in \mathbf{N}`),
+        " で ",
+        math(String.raw`\varphi(y)`),
+        " である。",
+        math(String.raw`x`),
+        " は任意だったので、主張が従う。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum の準備の鎖が (2(M_col)_ℕ)_ℤ = 2M_col の根拠を「ι_{ℕ→ℤ} は積を保つ」と主張の前置きの仮定で引いていた。inclusion_nn_to_zz の二つの式、inclusion_nn_to_zz_preserves_sum、int_zero_times_is_zero と set_and_algebra_notation の ℕ・ℤ の行から示す主張として足した。Lean の具体版は Ising2D.inclusion_nn_to_zz_preserves_product（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimInclusionOfNaturalNumbersIntoIntegersPreservesProduct.lean）、必要十分版は Ising2D.NecSuf.map_mul_of_rec_add_one（NecSuf/MapMulOfRecAddOne.lean）。数値検証: sagemath/check/inclusion_nn_to_zz_preserves_product/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_definition_inclusion_zz_to_rr",
     kind: "definition",
     title: { tex: String.raw`\mathbb{Z}\to\mathbb{R}\text{の包含写像}` },

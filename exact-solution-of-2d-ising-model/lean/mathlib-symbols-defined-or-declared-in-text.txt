@@ -4,7 +4,7 @@
 # 本文が外から持ち込み、使う性質を列挙している記号だけである。型クラスの演算は「演算@型@インスタンス」で書く（UndefinedSymbols.lean）。
 #
 # 集合と代数構造の記号: ℕ・ℤ・ℝ を構成せず既知の集合として持ち込み、ℝ の +・·・− について体の公理を列挙している。
-# ℕ の演算と順序 ≤ は、本文の ℤ_{≥k} と Lean の ℕ の間の写像を本文に置くまで載せない。ℤ の演算と順序は下の ℤ の行に載せる。ℝ の逆数は下の ℝ の商の行に載せる。
+# ℕ の和と積は下の ℕ の行に載せる。ℕ の順序 ≤・<・≥・数字・差は、ι_{ℕ→ℤ} が順序を保つ主張と ℤ_{≥0} への全射の主張を置くまで載せない。ℤ の演算と順序は下の ℤ の行に載せる。ℝ の逆数は下の ℝ の商の行に載せる。
 Nat	set_and_algebra_notation
 Int	set_and_algebra_notation
 Real	set_and_algebra_notation
@@ -97,6 +97,13 @@ HSub.hSub@Int,Int,Int@Int.instSub	def_int_difference
 # （DefinitionInclusionOfNaturalNumbersIntoIntegers.lean）。載せる前に台帳に在った Nat.cast の 121 行（本文が ι_{ℕ→ℤ} を書かない位置で
 # Lean だけが ℕ を ℤ へ送っている宣言を含む）は、状態台帳の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」が git の履歴から引く手順を持つ。
 Nat.cast@Int@instNatCastInt	inclusion_nn_to_zz
+# ℕ の和と積: set_and_algebra_notation が ℕ の +・· を外から持ち込み、証明が使う性質（和と積の再帰の式、結合律・交換律・単位元、分配律、加法の簡約律）を列挙している。
+# Lean の ℕ の和・積も同じ再帰の式で定義されている（x + 0 = x・x + (y + 1) = (x + y) + 1、x·0 = 0・x·(y + 1) = x·y + x が rfl）。
+# 本文の ℤ_{≥0} の元を Lean が ℕ で書く箇所の行き来は、ι_{ℕ→ℤ} が和と積を保つこと（inclusion_nn_to_zz_preserves_sum・inclusion_nn_to_zz_preserves_product）で書く。
+# 載せる前に台帳に在った ℕ の和の 343 行・積の 58 行は、本文が ℤ_{≥k} の元として計算している位置で Lean だけが ℕ の演算を使っている宣言を含む。
+# 状態台帳の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」が、git の履歴（載せる前の main の先端 5a22df01a）から引く手順を持つ。
+HAdd.hAdd@Nat,Nat,Nat@instAddNat	set_and_algebra_notation
+HMul.hMul@Nat,Nat,Nat@instMulNat	set_and_algebra_notation
 # ℤ の狭義の順序: def_int_strict_order が x < y :⇔ x + 1 ≤ y と定める。Lean の ℤ の < も Int.lt m n := m + 1 ≤ n と定義されており、定義として等しい（int_lt_iff_add_one_le。Iff.rfl）。
 LT.lt@Int@Int.instLTInt	def_int_strict_order
 # ℤ の絶対値: def_int_absolute_value が 0 ≤ x なら |x| := x、そうでなければ |x| := −x と場合分けで定める。mathlib の ℤ の |x| は束の上限 x ⊔ (−x) として

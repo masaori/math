@@ -1892,8 +1892,28 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
       displayMath(
         String.raw`\begin{aligned}
 (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}
-&=2M_{\mathrm{col}}
-&&\bigl(\because\ \iota_{\mathbb N\to\mathbb Z}\text{ は積を保つ},\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
+&=\iota_{\mathbb N\to\mathbb Z}\bigl(2\cdot_{\mathbb N}(M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \text{略記}\ n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\ (n\to2\cdot_{\mathbb N}(M_{\mathrm{col}})_{\mathbb N})\bigr)\\
+&=\iota_{\mathbb N\to\mathbb Z}(2)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz_preserves_product}\ (x\to2,\ y\to(M_{\mathrm{col}})_{\mathbb N})\bigr)\\
+&=\iota_{\mathbb N\to\mathbb Z}(1_{\mathbb N}+_{\mathbb N}1_{\mathbb N})\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \mathbb N\ \text{の数字}\ 2:=1+1\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=\bigl(\iota_{\mathbb N\to\mathbb Z}(1_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(n+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(n)+_{\mathbb Z}1_{\mathbb Z}\ (n\to1_{\mathbb N})\bigr)\\
+&=\bigl(\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}+_{\mathbb N}1_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \mathbb N\ \text{の加法の単位元}\ 0_{\mathbb N}+x=x\ (x\to1_{\mathbb N})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&=\bigl((\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(n+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(n)+_{\mathbb Z}1_{\mathbb Z}\ (n\to0_{\mathbb N})\bigr)\\
+&=\bigl((0_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}):=0_{\mathbb Z}\bigr)\\
+&=(1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \mathbb Z\ \text{の和の単位元}\ 0_{\mathbb Z}+x=x\ (x\to1_{\mathbb Z})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=2_{\mathbb Z}\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb Z}:=1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z}\ \text{を右辺から左辺へ}\bigr)\\
+&=2_{\mathbb Z}\cdot_{\mathbb Z}((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}
+&&\bigl(\because\ \text{略記}\ n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\ (n\to(M_{\mathrm{col}})_{\mathbb N})\ \text{を右辺から左辺へ}\bigr)\\
+&=2_{\mathbb Z}\cdot_{\mathbb Z}M_{\mathrm{col}}
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb N}\ \text{の定義}\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
 ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}
 &=(M_{\mathrm{col}})_{\mathbb R}
 &&\bigl(\because\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
@@ -2321,6 +2341,7 @@ k
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」）: 「とくに」の |l| = 0 の行は根拠が「|l| ∈ ℤ_{≥0}, |l| < 1」と名前だけで、ℤ の < を定めるブロックも無かった。def_int_strict_order を足し、|l| < 1_ℤ をその定義で |l| + 1_ℤ ≤ 1_ℤ と書き直す行、|l| ≤ 0_ℤ を set_and_algebra_notation の ℤ の行（和の単位元・加法逆元・加法の結合律・順序と加法の両立）で導く 5 行、反対称律で |l| = 0_ℤ とする行に割った。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の先頭）: 主張の前置きが ι_{ℕ→ℤ} を「標準包含」と名前だけで置き、0_ℤ ≤ M_col の鎖の 1 行目が「ι_{ℕ→ℤ} は零を保つ」と仮定を引いていた。ι_{ℕ→ℤ} の定義のブロック inclusion_nn_to_zz を足し、前置きをそのブロックの参照にし、1 行目をその定義の式 ι(0_ℕ) := 0_ℤ を右辺から左辺へ当てる形にした。単位元・和・積・順序を保つことはまだ前置きの仮定のまま残る（状態台帳の同じ行の続きで主張に替える）。Lean の具体版の同じ段の Nat.cast_zero を inclusion_nn_to_zz の零の式に替えた。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 0_ℤ ≤ M_col の鎖が「ι_{ℕ→ℤ} は順序を保つ」と前置きの仮定を引き、そのために 0_ℕ ≤ (M_col)_ℕ の 2 行を置いていた。新しい主張 inclusion_nn_to_zz_image_is_nonnegative（n → (M_col)_ℕ）を引く 1 行にし、ℕ の 2 行と ι(0_ℕ) := 0_ℤ の行を外した（鎖は 6 行から 3 行）。前置きの「ι_{ℕ→ℤ} が零を保つことは定義の式 ι(0_ℕ) := 0_ℤ である」の括弧書きも、それを使う行が無くなったので外した。前置きの「順序を保つ」の仮定は、「順序を保つ包含写像により (M_col)_ℝ ≥ 2_ℝ」などがまだ使うので残る。Lean の具体版の同じ段の Nat.zero_add・Nat.le.intro・Nat.cast_le を新しい具体版に替えた。主張は不変。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 準備の鎖の (2(M_col)_ℕ)_ℤ = 2M_col が根拠を「ι_{ℕ→ℤ} は積を保つ」と主張の前置きの仮定で引き、ℤ の数字 2 と ℕ の数字 2 の行き来も書いていなかった。新しい主張 inclusion_nn_to_zz_preserves_product（x → 2, y → (M_col)_ℕ）、inclusion_nn_to_zz の二つの式、set_and_algebra_notation の ℕ の数字 2 := 1 + 1・ℕ の加法の単位元・ℤ の和の単位元、def_power_of_integer の 2_ℤ := 1_ℤ + 1_ℤ、略記 n_ℤ を引く 11 行に割った。Lean の具体版 antiperiodic_exp_sum_not_dvd の 2M ∤ k の段が push_cast で示していた ((2M)_ℕ)_ℤ = M·2 を、同じ 11 段の calc（証明の中の have。主張の型に数字 2 が出る補題にすると未定義の記号の台帳に行が増えるため）と ℤ の乗法の交換律に替えた。前置きの「ι_{ℕ→ℤ} は和・積を保つ」の仮定は、(2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ の行と奇偶の分割の行がまだ名前だけで引くので残る。主張は不変。",
       ],
     },
   },

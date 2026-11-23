@@ -1,0 +1,3 @@
+x, y = 0..60: y = 0 の鎖 3 段を 61 個の x で、y + 1 の鎖 5 段を 3660 組の (x, y) で ZZ で確かめた
+negative controls (broken lines detected): 2
+RESULT: PASS
