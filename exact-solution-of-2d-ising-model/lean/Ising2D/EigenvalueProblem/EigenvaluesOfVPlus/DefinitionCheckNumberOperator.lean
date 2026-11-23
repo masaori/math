@@ -42,6 +42,8 @@
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 import Ising2D.NecSuf.PairedFermion
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerDifference
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerNegationOfSumIsSumOfNegations
 import Ising2D.NecSuf.NumberOperator
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDifferenceIsSumWithNegationFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSumFromNecSuf
@@ -115,11 +117,29 @@ theorem conjIdx_eq_iff {M : ℕ} (i j : CheckIdx M) :
   · intro h; rw [h]; rfl
   · intro h; exact Subtype.ext h
 
-/-- **原文 `def_check_number_operator` (1)**: `μ ↦ M+1-μ` は `𝓜̌` 上の対合。 -/
+/-- **原文 `def_check_number_operator` (1)**: `μ ↦ M+1-μ` は `𝓜̌` 上の対合
+（人手の `σ(σ(μ)) = μ` の 13 行の鎖と 1 対 1 の `calc`）。 -/
 theorem conjIdx_involutive (M : ℕ) : Function.Involutive (conjIdx M) := by
   intro i
   apply Subtype.ext
-  simp
+  calc (conjIdx M (conjIdx M i)).1
+      = (M : ℤ) + 1 - (conjIdx M i).1 := conjIdx_val (conjIdx M i)           -- `σ` の定義（`μ → σ(μ)`）
+    _ = (M : ℤ) + 1 - ((M : ℤ) + 1 - i.1) := by rw [conjIdx_val i]           -- `σ` の定義
+    _ = ((M : ℤ) + 1) + -((M : ℤ) + 1 - i.1) :=
+        int_sub_eq_add_neg ((M : ℤ) + 1) ((M : ℤ) + 1 - i.1)                 -- `def_int_difference`（`y → M+1`, `z → (M+1) − μ`）
+    _ = ((M : ℤ) + 1) + -(((M : ℤ) + 1) + -i.1) := by
+        rw [int_sub_eq_add_neg ((M : ℤ) + 1) i.1]                            -- `def_int_difference`（`y → M+1`, `z → μ`）
+    _ = ((M : ℤ) + 1) + (-((M : ℤ) + 1) + -(-i.1)) := by
+        rw [int_negation_of_sum_is_sum_of_negations ((M : ℤ) + 1) (-i.1)]    -- `int_negation_of_sum_is_sum_of_negations`（`x → M+1`, `y → −μ`）
+    _ = (((M : ℤ) + 1) + -((M : ℤ) + 1)) + -(-i.1) :=
+        (add_assoc ((M : ℤ) + 1) (-((M : ℤ) + 1)) (-(-i.1))).symm             -- ℤ の加法の結合律を右辺から左辺へ
+    _ = 0 + -(-i.1) := by rw [add_neg_cancel ((M : ℤ) + 1)]                  -- ℤ の加法の逆元 `x + (−x) = 0`（`x → M+1`）
+    _ = -(-i.1) := zero_add (-(-i.1))                                         -- ℤ の和の単位元 `0 + x = x`（`x → −(−μ)`）
+    _ = -(-i.1) + 0 := (add_zero (-(-i.1))).symm                              -- ℤ の和の単位元 `x + 0 = x`（`x → −(−μ)`）を右辺から左辺へ
+    _ = -(-i.1) + (-i.1 + i.1) := by rw [neg_add_cancel i.1]                  -- ℤ の加法の逆元 `(−x) + x = 0`（`x → μ`）を右辺から左辺へ
+    _ = (-(-i.1) + -i.1) + i.1 := (add_assoc (-(-i.1)) (-i.1) i.1).symm       -- ℤ の加法の結合律を右辺から左辺へ
+    _ = 0 + i.1 := by rw [neg_add_cancel (-i.1)]                              -- ℤ の加法の逆元 `(−x) + x = 0`（`x → −μ`）
+    _ = i.1 := zero_add i.1                                                   -- ℤ の和の単位元 `0 + x = x`（`x → μ`）
 
 theorem conjIdx_injective (M : ℕ) : Function.Injective (conjIdx M) :=
   (conjIdx_involutive M).injective

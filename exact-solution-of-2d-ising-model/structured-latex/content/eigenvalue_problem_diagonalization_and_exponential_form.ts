@@ -10647,12 +10647,28 @@ V^{(+)}
 &&(\because\ \sigma\ \text{の定義}\ (\mu \to \sigma(\mu))) \\
 &= M_{\mathrm{col}}+1-\left(M_{\mathrm{col}}+1-\mu\right)
 &&(\because\ \sigma\ \text{の定義}) \\
-&= \left(M_{\mathrm{col}}+1\right)-\left(M_{\mathrm{col}}+1\right)+\mu
-&&(\because\ \mathbb{Z}\ \text{の減法}\ a-(b-c) = a-b+c) \\
-&= 0+\mu
-&&(\because\ \mathbb{Z}\ \text{の加法の逆元}\ a-a = 0) \\
+&= \left(M_{\mathrm{col}}+1\right) + \bigl(-\bigl(\left(M_{\mathrm{col}}+1\right)-\mu\bigr)\bigr)
+&&(\because\ \blkref{def_int_difference}\ (y \to M_{\mathrm{col}}+1,\ z \to \left(M_{\mathrm{col}}+1\right)-\mu)) \\
+&= \left(M_{\mathrm{col}}+1\right) + \bigl(-\bigl(\left(M_{\mathrm{col}}+1\right)+(-\mu)\bigr)\bigr)
+&&(\because\ \blkref{def_int_difference}\ (y \to M_{\mathrm{col}}+1,\ z \to \mu)) \\
+&= \left(M_{\mathrm{col}}+1\right) + \bigl(\bigl(-\left(M_{\mathrm{col}}+1\right)\bigr)+\bigl(-(-\mu)\bigr)\bigr)
+&&(\because\ \blkref{int_negation_of_sum_is_sum_of_negations}\ (x \to M_{\mathrm{col}}+1,\ y \to -\mu)) \\
+&= \bigl(\left(M_{\mathrm{col}}+1\right)+\bigl(-\left(M_{\mathrm{col}}+1\right)\bigr)\bigr)+\bigl(-(-\mu)\bigr)
+&&(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to M_{\mathrm{col}}+1,\ y \to -\left(M_{\mathrm{col}}+1\right),\ t \to -(-\mu))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ \text{を右辺から左辺へ}) \\
+&= 0_{\mathbb{Z}}+\bigl(-(-\mu)\bigr)
+&&(\because\ \mathbb{Z}\ \text{の加法の逆元}\ x + (-x) = 0_{\mathbb{Z}}\ (x \to M_{\mathrm{col}}+1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}) \\
+&= -(-\mu)
+&&(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + x = x\ (x \to -(-\mu))\ \text{（}\blkref{set_and_algebra_notation}\text{）}) \\
+&= \bigl(-(-\mu)\bigr)+0_{\mathbb{Z}}
+&&(\because\ \mathbb{Z}\ \text{の和の単位元}\ x + 0_{\mathbb{Z}} = x\ (x \to -(-\mu))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ \text{を右辺から左辺へ}) \\
+&= \bigl(-(-\mu)\bigr)+\bigl((-\mu)+\mu\bigr)
+&&(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-x) + x = 0_{\mathbb{Z}}\ (x \to \mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ \text{を右辺から左辺へ}) \\
+&= \bigl(\bigl(-(-\mu)\bigr)+(-\mu)\bigr)+\mu
+&&(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to -(-\mu),\ y \to -\mu,\ t \to \mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ \text{を右辺から左辺へ}) \\
+&= 0_{\mathbb{Z}}+\mu
+&&(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-x) + x = 0_{\mathbb{Z}}\ (x \to -\mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）}) \\
 &= \mu
-&&(\because\ \mathbb{Z}\ \text{の加法の単位元}\ 0+a = a)
+&&(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + x = x\ (x \to \mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）})
 \end{aligned}`,
       ),
       paragraph([
@@ -10759,6 +10775,7 @@ V^{(+)}
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01。対を −μ に取り違えると冪等性が残差 2.59 で破れることも対照として確認した。",
         "2026-11-03: 全証明の SageMath 検算で、証明の (1) を σ(σ(μ)) = μ の等号の鎖と単射・全射の鎖に、(2) を def_check_Vprime の X̌ から始まる鎖に書き直し、主張 (2) の実数係数を包含の像 (·)_C で書いた（中身は不変）。検算は sagemath/check/def_check_number_operator/。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の減法」）: 証明の (1) の σ(σ(μ)) の鎖の 3〜5 行目が「ℤ の減法 a−(b−c) = a−b+c」「ℤ の加法の逆元 a−a = 0」「ℤ の加法の単位元 0+a = a」と名前だけで引いていた（a−b+c の結合の向きも書かれていなかった）ので、def_int_difference（2 行）・int_negation_of_sum_is_sum_of_negations・set_and_algebra_notation の ℤ の加法の結合律・加法の逆元・和の単位元の 11 行に割った（鎖は 5 行から 13 行）。−(−μ) = μ を別の主張に切り出さず鎖の中で示したのは、ℤ の側に対応する主張が無く、立てると一対一と繋がりの台帳を確かめる宣言が増えるため。Lean の具体版 conjIdx_involutive の simp を同じ 13 段の calc に替えた。鎖の両端と主張は不変。",
       ],
     },
   },

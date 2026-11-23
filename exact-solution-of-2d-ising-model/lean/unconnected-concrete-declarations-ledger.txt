@@ -360,7 +360,6 @@ Ising2D.confPairEquiv
 Ising2D.config_numbering_equals_kronecker_numbering
 Ising2D.congruence_isHermitian
 Ising2D.congruence_preserves_positive_definite
-Ising2D.conjIdx_val
 Ising2D.conjTranspose_conjTranspose_apply
 Ising2D.conjTranspose_conjTranspose_eq
 Ising2D.conj_add_matrix

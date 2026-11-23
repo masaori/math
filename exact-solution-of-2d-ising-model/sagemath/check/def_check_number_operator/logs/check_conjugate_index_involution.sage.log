@@ -3,7 +3,21 @@ PASS σ(σ(μ)) の鎖の第 2 等号（ZZ[M, μ]）
 PASS σ(σ(μ)) の鎖の第 3 等号（ZZ[M, μ]）
 PASS σ(σ(μ)) の鎖の第 4 等号（ZZ[M, μ]）
 PASS σ(σ(μ)) の鎖の第 5 等号（ZZ[M, μ]）
+PASS σ(σ(μ)) の鎖の第 6 等号（ZZ[M, μ]）
+PASS σ(σ(μ)) の鎖の第 7 等号（ZZ[M, μ]）
+PASS σ(σ(μ)) の鎖の第 8 等号（ZZ[M, μ]）
+PASS σ(σ(μ)) の鎖の第 9 等号（ZZ[M, μ]）
+PASS σ(σ(μ)) の鎖の第 10 等号（ZZ[M, μ]）
+PASS σ(σ(μ)) の鎖の第 11 等号（ZZ[M, μ]）
+PASS σ(σ(μ)) の鎖の第 12 等号（ZZ[M, μ]）
+PASS σ(σ(μ)) の鎖の第 13 等号（ZZ[M, μ]）
+PASS σ(σ(μ)) の鎖は 13 個の等号
 PASS σ(σ(μ)) = μ（ZZ[M, μ]）
-PASS ℤ の a - (b - c) = a - b + c、a - a = 0、0 + a = a（ZZ[a, b, c]）
+PASS def_int_difference の x - y = x + (-y)（ZZ[x, y]）
+PASS int_negation_of_sum_is_sum_of_negations（ZZ[x, y]）
+PASS ℤ の加法の結合律（ZZ[x, y, t]）
+PASS ℤ の加法の逆元の 2 つの形（ZZ[x]）
+PASS ℤ の和の単位元の 2 つの形（ZZ[x]）
+PASS 対照: a - (b - c) ≠ a - b - c（ZZ[x, y, t]）
 M_col = 2..40 の具体の確認: 済
 RESULT: PASS
