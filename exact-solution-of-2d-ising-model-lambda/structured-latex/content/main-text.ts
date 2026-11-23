@@ -10627,6 +10627,54 @@ S&=(S-T)+T
                     id: "group_of_algebraic_eigenvalue_claim_qbar_factor_quotient_other_root_zero",
                     beforeFocus: [
                       {
+                        role: "prerequisiteDefinition",
+                        element:
+                          {
+                            id: "algebraic_eigenvalue_definition_qbar_poly_power_difference_quotient",
+                            kind: "definition",
+                            title: {
+                              text: "不定元と定数の冪の差を割る多項式",
+                            },
+                            labels: ["def_qbar_poly_power_difference_quotient"],
+                            habitat: "Qbar",
+                            lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarPolyPowDiffSum"],
+                            statement: [
+                              paragraph([
+                                math(String.raw`w\in\overline{\mathbb{Q}}`),
+                                "（",
+                                ref("def_algebraic_numbers"),
+                                "）を任意に取る。任意の ",
+                                math(String.raw`n\in\mathbb{N}`),
+                                " について、",
+                                ref("def_qbar_polynomial_ring"),
+                                " の元 ",
+                                math(String.raw`K_{n}(w)\in\overline{\mathbb{Q}}[t]`),
+                                " を ",
+                                math(String.raw`n`),
+                                " についての次の約束で定める（",
+                                math(String.raw`\widehat{w}`),
+                                " は ",
+                                ref("def_qbar_constant_embedding"),
+                                " による定数多項式、",
+                                math(String.raw`t^{\,n}`),
+                                " は ",
+                                ref("def_qbar_polynomial_ring"),
+                                " の冪の約束による）。",
+                              ]),
+                              displayMath(
+                                String.raw`K_{0}(w):=0,\qquad K_{n+1}(w):=K_{n}(w)\,\widehat{w}+t^{\,n}`,
+                              ),
+                              paragraph([
+                                "右辺は ",
+                                math(String.raw`\overline{\mathbb{Q}}[t]`),
+                                " の有限回の積と和だけで書かれ、",
+                                math(String.raw`n`),
+                                " ごとにただ一つの元が決まる。",
+                              ]),
+                            ],
+                          },
+                      },
+                      {
                         role: "supportingClaim",
                         element:
                           {
@@ -10651,22 +10699,14 @@ S&=(S-T)+T
                                 "）を任意に取り、",
                                 math(String.raw`n\in\mathbb{N}`),
                                 " を任意に取る。",
-                                ref("def_qbar_polynomial_ring"),
-                                " の元 ",
                                 math(String.raw`K_{n}(w)\in\overline{\mathbb{Q}}[t]`),
                                 " を ",
-                                math(String.raw`n`),
-                                " についての次の約束で定める（",
+                                ref("def_qbar_poly_power_difference_quotient"),
+                                " の多項式とし、",
                                 math(String.raw`\widehat{w}`),
-                                " は ",
+                                " を ",
                                 ref("def_qbar_constant_embedding"),
-                                " による定数多項式である）。",
-                              ]),
-                              displayMath(
-                                String.raw`K_{0}(w):=0,\qquad K_{n+1}(w):=K_{n}(w)\,\widehat{w}+t^{\,n}`,
-                              ),
-                              paragraph([
-                                "このとき",
+                                " による定数多項式とする。このとき",
                               ]),
                               displayMath(String.raw`(t-\widehat{w})\,K_{n}(w)=t^{\,n}-\widehat{w}^{\,n}`),
                               paragraph([
@@ -10734,7 +10774,7 @@ t\,t^{k+1}&=t\bigl(t^{k}t\bigr)
                               ]),
                               displayMath(String.raw`\begin{aligned}
 (t-\widehat{w})\,K_{0}(w)&=(t-\widehat{w})\cdot 0
-&&(\because\ K_{0}(w)=0\ \text{の約束})\\
+&&(\because\ \blkref{def_qbar_poly_power_difference_quotient}\ \text{の約束}\ K_{0}(w)=0)\\
 &=0
 &&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}[t]\ \text{の積の零元})\\
 &=1-1
@@ -10755,7 +10795,7 @@ t\,t^{k+1}&=t\bigl(t^{k}t\bigr)
                               ]),
                               displayMath(String.raw`\begin{aligned}
 (t-\widehat{w})\,K_{n+1}(w)&=(t-\widehat{w})\bigl(K_{n}(w)\,\widehat{w}+t^{\,n}\bigr)
-&&(\because\ K_{n+1}(w)\ \text{の約束})\\
+&&(\because\ \blkref{def_qbar_poly_power_difference_quotient}\ \text{の約束}\ K_{n+1}(w)=K_{n}(w)\,\widehat{w}+t^{\,n})\\
 &=(t-\widehat{w})\bigl(K_{n}(w)\,\widehat{w}\bigr)+(t-\widehat{w})t^{\,n}
 &&\bigl(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則}\bigr)\\
 &=\bigl((t-\widehat{w})K_{n}(w)\bigr)\widehat{w}+(t-\widehat{w})t^{\,n}
@@ -11668,7 +11708,7 @@ a & (j=k)\\
                                 "、",
                                 math(String.raw`K_k(w)`),
                                 " は ",
-                                ref("claim_qbar_poly_power_difference_factorization"),
+                                ref("def_qbar_poly_power_difference_quotient"),
                                 " の約束）、",
                               ]),
                               displayMath(String.raw`f=(t-\widehat{w})g`),
@@ -11746,7 +11786,7 @@ f
                                 " を任意に取り、",
                                 math(String.raw`K_{n}(w)\in\overline{\mathbb{Q}}[t]`),
                                 " を ",
-                                ref("claim_qbar_poly_power_difference_factorization"),
+                                ref("def_qbar_poly_power_difference_quotient"),
                                 " の約束（",
                                 math(String.raw`K_{0}(w)=0`),
                                 "、",
@@ -11801,7 +11841,7 @@ f
                               displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_{j}\bigl(K_{0}(w)\bigr)
 &=\mathrm{ac}_{j}(0)
-&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{0}(w)=0)\\
+&&(\because\ \blkref{def_qbar_poly_power_difference_quotient}\ \text{の約束}\ K_{0}(w)=0)\\
 &=0
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の零元はすべての係数が零の族である})
 \end{aligned}`),
@@ -11829,7 +11869,7 @@ f
                               displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_{j}\bigl(K_{n+1}(w)\bigr)
 &=\mathrm{ac}_{j}\bigl(K_{n}(w)\,\widehat{w}+t^{\,n}\bigr)
-&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{n+1}(w)=K_{n}(w)\,\widehat{w}+t^{\,n})\\
+&&(\because\ \blkref{def_qbar_poly_power_difference_quotient}\ \text{の約束}\ K_{n+1}(w)=K_{n}(w)\,\widehat{w}+t^{\,n})\\
 &=\mathrm{ac}_{j}\bigl(K_{n}(w)\,\widehat{w}\bigr)+\mathrm{ac}_{j}\bigl(t^{\,n}\bigr)
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数})\\
 &=\mathrm{ac}_{j}\bigl(K_{n}(w)\,\widehat{w}\bigr)+0
@@ -11911,7 +11951,7 @@ f
                                 " の定数として送る写像で送った定数多項式、",
                                 math(String.raw`K_k(w)`),
                                 " は ",
-                                ref("claim_qbar_poly_power_difference_factorization"),
+                                ref("def_qbar_poly_power_difference_quotient"),
                                 " の約束）。このとき、",
                                 math(String.raw`j\in\mathbb{N}`),
                                 " が ",
@@ -12362,7 +12402,7 @@ n+1
                                 " を満たすとし、", math(String.raw`w\in\overline{\mathbb{Q}}`), "（",
                                 ref("def_algebraic_numbers"), "）を任意に取る。",
                                 "冪の差の因数分解の商 ", math(String.raw`K_{n}(w)\in\overline{\mathbb{Q}}[t]`), "（",
-                                ref("claim_qbar_poly_power_difference_factorization"), " の約束）の、",
+                                ref("def_qbar_poly_power_difference_quotient"), " の約束）の、",
                                 math(String.raw`w`), " における値（", ref("def_qbar_poly_evaluation"), "）について",
                               ]),
                               displayMath(
@@ -12387,9 +12427,9 @@ n+1
                               displayMath(String.raw`\begin{aligned}
 \mathrm{aev}_{w}\bigl(K_{1}(w)\bigr)
 &=\mathrm{aev}_{w}\bigl(K_{0}(w)\,\widehat{w}+t^{\,0}\bigr)
-&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{1}(w)=K_{0}(w)\,\widehat{w}+t^{\,0})\\
+&&(\because\ \blkref{def_qbar_poly_power_difference_quotient}\ \text{の約束}\ K_{1}(w)=K_{0}(w)\,\widehat{w}+t^{\,0})\\
 &=\mathrm{aev}_{w}\bigl(0\cdot\widehat{w}+t^{\,0}\bigr)
-&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{0}(w)=0)\\
+&&(\because\ \blkref{def_qbar_poly_power_difference_quotient}\ \text{の約束}\ K_{0}(w)=0)\\
 &=\mathrm{aev}_{w}\bigl(0+t^{\,0}\bigr)
 &&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}[t]\ \text{の積の零元})\\
 &=\mathrm{aev}_{w}\bigl(t^{\,0}\bigr)
@@ -12410,7 +12450,7 @@ n+1
                               displayMath(String.raw`\begin{aligned}
 \mathrm{aev}_{w}\bigl(K_{n+1}(w)\bigr)
 &=\mathrm{aev}_{w}\bigl(K_{n}(w)\,\widehat{w}+t^{\,n}\bigr)
-&&(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\ \text{の約束}\ K_{n+1}(w)=K_{n}(w)\,\widehat{w}+t^{\,n})\\
+&&(\because\ \blkref{def_qbar_poly_power_difference_quotient}\ \text{の約束}\ K_{n+1}(w)=K_{n}(w)\,\widehat{w}+t^{\,n})\\
 &=\mathrm{aev}_{w}\bigl(K_{n}(w)\,\widehat{w}\bigr)+\mathrm{aev}_{w}\bigl(t^{\,n}\bigr)
 &&(\because\ \mathrm{aev}_{w}\ \text{は和を保つ（}\blkref{def_qbar_poly_evaluation}\text{）})\\
 &=\mathrm{aev}_{w}\bigl(K_{n}(w)\bigr)\cdot\mathrm{aev}_{w}\bigl(\widehat{w}\bigr)+\mathrm{aev}_{w}\bigl(t^{\,n}\bigr)
@@ -12862,7 +12902,7 @@ n
                               displayMath(String.raw`g:=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)\in\overline{\mathbb{Q}}[t]`),
                               paragraph([
                                 "と置く。このとき ", math(String.raw`g=K_n(w)`), " である。",
-                                math(String.raw`K_k(w)`), " は ", ref("claim_qbar_poly_power_difference_factorization"),
+                                math(String.raw`K_k(w)`), " は ", ref("def_qbar_poly_power_difference_quotient"),
                                 " の約束による。すべての和・積・係数は ",
                                 math(String.raw`\overline{\mathbb{Q}}[t]`), " のものである。",
                               ]),
@@ -12873,7 +12913,7 @@ n
                                 math(String.raw`n`), " の係数は 1 である。また、番号 ",
                                 math(String.raw`k<n`), " の項について、", math(String.raw`k=0`),
                                 " ならば ", math(String.raw`K_0(w)=0`), "（",
-                                ref("claim_qbar_poly_power_difference_factorization"), " の約束）であり、",
+                                ref("def_qbar_poly_power_difference_quotient"), " の約束）であり、",
                                 math(String.raw`1\leq k<n`), " ならば ", math(String.raw`\mathrm{ac}_k(f)=0`),
                                 "（", ref("claim_qbar_poly_indeterminate_power_coefficient"), " と ",
                                 ref("def_qbar_constant_embedding"), "）である。したがって、有限和の番号 ",
@@ -13560,7 +13600,7 @@ F_{m+1}
                               displayMath(String.raw`g:=\sum_{k=0}^{n}\widehat{\mathrm{ac}_k(f)}\,K_k(w)\in\overline{\mathbb{Q}}[t]`),
                               paragraph([
                                 "と置くと（", math(String.raw`K_k(w)`), " は ",
-                                ref("claim_qbar_poly_power_difference_factorization"), " の約束）、",
+                                ref("def_qbar_poly_power_difference_quotient"), " の約束）、",
                                 math(String.raw`f=(t-\widehat{w})g`), " である。また ",
                                 ref("claim_qbar_factor_quotient_coeff_bound"), " より、",
                                 math(String.raw`j\in\mathbb{N}`), " が ", math(String.raw`n\le j`),
@@ -44677,7 +44717,7 @@ a-b\cdot\omega
                             "、",
                             math(String.raw`K_k(w)`),
                             " は ",
-                            ref("claim_qbar_poly_power_difference_factorization"),
+                            ref("def_qbar_poly_power_difference_quotient"),
                             " の約束）。このとき、任意の ",
                             math(String.raw`j\in\mathbb{N}`),
                             " で ",
@@ -44849,7 +44889,7 @@ a-b\cdot\omega
                           displayMath(String.raw`\begin{aligned}
 K_{k+1}(w)
 &=K_k(w)\,\widehat{w}+t^{\,k}
-&&\bigl(\because\ \blkref{claim_qbar_poly_power_difference_factorization}\text{ の約束}\bigr)\\
+&&\bigl(\because\ \blkref{def_qbar_poly_power_difference_quotient}\text{ の約束}\bigr)\\
 &\in\mathcal{P}
 &&\bigl(\because\ \text{帰納法の仮定・}\widehat{w}\in\mathcal{P}\text{ と (四)、(六) と (三)}\bigr)
 \end{aligned}`),

@@ -1091,6 +1091,7 @@ export const ALL_LABELS = [
   "def_qbar_multivariate_total_degree",
   "def_qbar_multivariate_weighted_degree",
   "def_qbar_poly_evaluation",
+  "def_qbar_poly_power_difference_quotient",
   "def_qbar_polynomial_determinant",
   "def_qbar_polynomial_evaluation",
   "def_qbar_polynomial_matrix",
