@@ -5,7 +5,8 @@
 # (3) l が偶数の鎖の 10 等号、l が奇数の鎖の 8 等号を、各行をその行の形のまま UCF で厳密に組み、隣の行と比べる。
 #     鎖の始まりの S は主張の左辺の式（S_claim_form）で、鎖の終わりは (M)_C(-1_C)^l（minus_one_power）。
 # (4) 「とくに」: |k| < M かつ k ≠ 0 のとき M ∤ k であること、その背理法の鎖
-#     |lM| = |l||M| = |l|M = |k| < M、|l| < 1、|l| = 0、l = 0、k = lM = 0·M = 0 を、仮定を外した全ての (l, k) で
+#     |lM| = |l||M| = |l|M = |k| < M、|l| < 1、|l| + 1 ≤ 1（def_int_strict_order）、|l| = |l| + 0 = |l| + (1 + (−1)) = (|l| + 1) + (−1) ≤ 1 + (−1) = 0、
+#     |l| = 0（反対称律）、l = 0、k = lM = 0·M = 0 を、仮定を外した全ての (l, k) で
 #     各等号・不等号として確かめ、仮定 |k| < M が成り立つのは l = 0 だけであることを見る。k = 0 の鎖の 2 等号。
 load("_prelude.sage")
 one, zero = UCF(1), UCF(0)
@@ -64,7 +65,17 @@ for M in M_RANGE:
         k = l * M
         assert abs(l * M) == abs(l) * abs(M) == abs(l) * M == abs(k)
         if abs(k) < M:
-            assert abs(l) * M < 1 * M and abs(l) < 1 and abs(l) == 0 and l == 0
+            assert abs(l) * M < 1 * M and abs(l) < 1
+            # def_int_strict_order: |l| < 1_Z を |l| + 1_Z <= 1_Z と書き直す（ZZ の < と同値であることも見る）
+            assert (abs(l) < 1) == (abs(l) + 1 <= 1) and abs(l) + 1 <= 1
+            # |l| <= 0_Z を導く 5 行（和の単位元・加法逆元・結合律・順序と加法の両立・加法逆元）
+            a0 = ZZ(abs(l))
+            chain = [a0, a0 + 0, a0 + (1 + (-1)), (a0 + 1) + (-1)]
+            for a, b in zip(chain, chain[1:]):
+                assert a == b
+            assert (a0 + 1) + (-1) <= 1 + (-1) and 1 + (-1) == 0
+            # 反対称律: |l| <= 0 と 0 <= |l| から |l| = 0
+            assert a0 <= 0 and 0 <= a0 and a0 == 0 and l == 0
             assert k == l * M == 0 * M == 0
     for k in K_RANGE(M):
         if abs(k) < M and k != 0:

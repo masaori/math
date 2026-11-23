@@ -238,6 +238,7 @@ export const ALL_LABELS = [
   "def_index_skipping_map",
   "def_indexed_hyperbolic_abbreviations",
   "def_int_difference",
+  "def_int_strict_order",
   "def_inverse_trig_functions",
   "def_invertible_elements_of_R",
   "def_isotropic_dual_coupling",

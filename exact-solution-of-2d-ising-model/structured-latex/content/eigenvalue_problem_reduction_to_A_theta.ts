@@ -2218,16 +2218,37 @@ S_{M_{\mathrm{col}},k}
       paragraph([
         "一方、整数 ",
         math(String.raw`l`),
-        " の絶対値は非負整数なので、",
+        " の絶対値は非負整数なので ",
+        math(String.raw`0_{\mathbb{Z}}\le|l|`),
+        " であり、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
+|l|+1_{\mathbb{Z}}
+&\le 1_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{def_int_strict_order}\ (x\to|l|,\ y\to1_{\mathbb{Z}})\ \text{で}\ |l|<1_{\mathbb{Z}}\ \text{を書き直す}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["である。これを使うと"]),
+      displayMath(
+        String.raw`\begin{aligned}
 |l|
-&=0
-&&\bigl(\because\ |l|\in\mathbb{Z}_{\ge0},\ |l|<1\bigr) \\
+&=|l|+0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x+0_{\mathbb{Z}}=x\ (x\to|l|)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr) \\
+&=|l|+\bigl(1_{\mathbb{Z}}+(-1_{\mathbb{Z}})\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法逆元}\ x+(-x)=0_{\mathbb{Z}}\ (x\to1_{\mathbb{Z}})\bigr) \\
+&=\bigl(|l|+1_{\mathbb{Z}}\bigr)+(-1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x\to|l|,\ y\to1_{\mathbb{Z}},\ t\to-1_{\mathbb{Z}})\bigr) \\
+&\le 1_{\mathbb{Z}}+(-1_{\mathbb{Z}})
+&&\bigl(\because\ |l|+1_{\mathbb{Z}}\le1_{\mathbb{Z}}\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ (x\to|l|+1_{\mathbb{Z}},\ y\to1_{\mathbb{Z}},\ t\to-1_{\mathbb{Z}})\bigr) \\
+&=0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法逆元}\ x+(-x)=0_{\mathbb{Z}}\ (x\to1_{\mathbb{Z}})\bigr) \\
+|l|
+&=0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の順序の反対称律}\ (x\to|l|,\ y\to0_{\mathbb{Z}})\ \text{に}\ |l|\le0_{\mathbb{Z}}\ \text{と}\ 0_{\mathbb{Z}}\le|l|\bigr) \\
 l
 &=0
-&&\bigl(\because\ |l|=0\bigr).
+&&\bigl(\because\ |l|=0_{\mathbb{Z}}\bigr).
 \end{aligned}`,
       ),
       paragraph([
@@ -2275,6 +2296,7 @@ k
       notes: [
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: k ≢ 0 (mod M) の鎖と l が奇数の鎖で、左から足す 0_C を消す行（0_C + (−0_C) = −0_C と 0_C + (−(M_col)_C) = −(M_col)_C）の根拠を、complex_numbers_form_a_field の「和の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 二つの鎖で右から 0_C を掛ける行（(2M_col)_C·0_C = 0_C の 2 行、(M_col)_C·0_C = 0_C、(−1_C)·0_C = 0_C）の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → (2M_col)_C、(M_col)_C、−1_C）に替えた。式は不変。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」）: 「とくに」の |l| = 0 の行は根拠が「|l| ∈ ℤ_{≥0}, |l| < 1」と名前だけで、ℤ の < を定めるブロックも無かった。def_int_strict_order を足し、|l| < 1_ℤ をその定義で |l| + 1_ℤ ≤ 1_ℤ と書き直す行、|l| ≤ 0_ℤ を set_and_algebra_notation の ℤ の行（和の単位元・加法逆元・加法の結合律・順序と加法の両立）で導く 5 行、反対称律で |l| = 0_ℤ とする行に割った。主張は不変。",
       ],
     },
   },

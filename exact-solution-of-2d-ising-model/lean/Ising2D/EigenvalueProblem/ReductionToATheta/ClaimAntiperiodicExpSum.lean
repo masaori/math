@@ -45,6 +45,7 @@
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerStrictOrder
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -463,8 +464,17 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
   have hl_abs_lt_one : |l| < 1 := by
     exact (Int.mul_lt_mul_right hMpos).mp (by simpa using habs_mul)
   have hl_abs_nonneg : 0 ≤ |l| := abs_nonneg l
-  -- 人手証明の「非負整数で 1 未満なら 0」に対応する。
-  have hl_abs_zero : |l| = 0 := by omega
+  -- 人手証明の `|l| + 1_ℤ ≤ 1_ℤ`（`def_int_strict_order` で `|l| < 1_ℤ` を書き直す）。
+  have hl_add_one_le : |l| + 1 ≤ 1 := (int_lt_iff_add_one_le |l| 1).mp hl_abs_lt_one
+  -- 人手証明の `|l| ≤ 0_ℤ` を導く 5 行。
+  have hl_abs_nonpos : |l| ≤ 0 :=
+    calc |l| = |l| + 0 := (add_zero |l|).symm                         -- `ℤ` の和の単位元（`x → |l|`）
+      _ = |l| + (1 + -1) := by rw [add_neg_cancel 1]                  -- `ℤ` の加法逆元（`x → 1_ℤ`）
+      _ = (|l| + 1) + -1 := (add_assoc |l| 1 (-1)).symm               -- `ℤ` の加法の結合律
+      _ ≤ 1 + -1 := add_le_add_left hl_add_one_le (-1)                -- `ℤ` の順序と加法の両立（`t → -1_ℤ`）
+      _ = 0 := add_neg_cancel 1                                       -- `ℤ` の加法逆元（`x → 1_ℤ`）
+  -- 人手証明の `|l| = 0_ℤ`（`ℤ` の順序の反対称律）。
+  have hl_abs_zero : |l| = 0 := le_antisymm hl_abs_nonpos hl_abs_nonneg
   have hl_zero : l = 0 := abs_eq_zero.mp hl_abs_zero
   have hk_zero : k = 0 := by rw [hl, hl_zero, mul_zero]
   exact hk0 hk_zero

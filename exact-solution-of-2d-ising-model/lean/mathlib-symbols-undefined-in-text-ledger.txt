@@ -4648,7 +4648,6 @@ Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	Fin.val
 Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	Finset.sum@Fin,Complex@Complex.instAddCommMonoid
 Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	Finset.univ@Fin@Fin.fintype
 Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	Int.cast@Complex@Complex.instIntCast
-Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	LT.lt@Int@Int.instLTInt
 Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	Nat.cast@Int@instNatCastInt
 Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	abs@Int@instLatticeInt,Int.instAddGroup
@@ -4699,7 +4698,6 @@ Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	Fin
 Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	Fin.val
 Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	Finset.sum@Fin,Complex@Complex.instAddCommMonoid
 Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	Finset.univ@Fin@Fin.fintype
-Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	LT.lt@Int@Int.instLTInt
 Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	Nat.cast@Int@instNatCastInt
 Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	abs@Int@instLatticeInt,Int.instAddGroup
@@ -12283,7 +12281,6 @@ Ising2D.rowConfigOrd_mem_Icc	Set
 Ising2D.rowConfigOrd_mem_Icc	Set.Icc@Int@Lattice.toSemilatticeInf
 Ising2D.rowConfigOrd_sub_pos_of_first_diff	Fin
 Ising2D.rowConfigOrd_sub_pos_of_first_diff	LT.lt@Fin@instLTFin
-Ising2D.rowConfigOrd_sub_pos_of_first_diff	LT.lt@Int@Int.instLTInt
 Ising2D.rowMul	AddCommMonoid
 Ising2D.rowMul	Fin
 Ising2D.rowMul	HAdd.hAdd@?,?,?@AddCommSemigroup.toAddCommMagma

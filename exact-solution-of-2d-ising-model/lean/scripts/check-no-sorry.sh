@@ -447,6 +447,7 @@ targets=(
   Ising2D.complex_I_eq_mk
   Ising2D.real_sub_eq_add_neg
   Ising2D.int_sub_eq_add_neg
+  Ising2D.int_lt_iff_add_one_le
   Ising2D.complex_mk_add_mk
   Ising2D.complex_mk_eq_mk_iff
   Ising2D.complex_mk_mul_mk
