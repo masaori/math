@@ -1113,7 +1113,7 @@ w
       paragraph([
         math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
         " を取る（",
-        math(String.raw`s(m) \in \{-1,1\} \subset \mathbb{Z}`),
+        math(String.raw`s(m) \in \{-1,1\} \subset \mathbb{R}`),
         "）。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -1123,7 +1123,7 @@ w
 &= -\bigl(-s(m)\bigr)
   &&\bigl(\because\ \blkref{def_negated_row_configuration}\ (s \to s)\bigr)\\
 &= s(m)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の符号反転を 2 回行うと元に戻る}\bigr)
+  &&\bigl(\because\ \blkref{real_double_negation}\ (a \to s(m))\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
@@ -1143,6 +1143,7 @@ w
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_of_epsilon_V_plus の証明 Step 3 の (b)・Step 4 は δ_{-(-s)=s} = 1_ℂ として証明の中で使っていたが、引ける主張ではなかった。epsilon_real_preserves_norm の準備で添字の付け替え χ(k) := ord(-ord^{-1}(k)) が χ(χ(k)) = k を満たすことを示すのに引くので主張として足した。Lean は Ising2D.negSpinConf_negSpinConf（EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusMatrixEntries.lean）。数値検証: sagemath/check/negated_row_configuration_is_involutive/。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の符号反転を 2 回行うと元に戻る」）: 3 行目が名前だけで引いていた根拠を real_double_negation（a → s(m)）の参照にした。あわせて準備の s(m) ∈ {−1,1} ⊂ ℤ を ⊂ ℝ にした。def_row_configurations の {−1,1} は、partition_function_transfer_matrix_representation の V_1・V_2 の成分の式と Lean の SpinVal（ℝ の部分型）がどちらも ℝ の部分集合として扱っており、この証明だけが ℤ と書いていたため。鎖の両端と主張は不変。",
       ],
     },
   },
