@@ -37,9 +37,10 @@
 * `inclusion_zz_to_rr_preserves_sum` は人手と同じく `a` を固定した `b` についての 2 方向の帰納法（`Int.induction_on`）で、`b = 0` の 3 行、
   `b → b + 1` の 5 行、`b → b − 1` の 13 行が人手の行と 1 対 1 の `calc` である。`ℤ` の `(x − y) + y = x` の段は
   `int_difference_plus_subtrahend_is_original`、`ℤ` の加法の結合律の段は `add_assoc` で当てる。
-* `inclusion_zz_to_rr_preserves_product` は人手と同じく `a` を固定した `b` についての 2 方向の帰納法（`Int.induction_on`）で、`b = 0` の 4 行、
-  `b → b + 1` の 7 行、`b → b − 1` の 15 行が人手の行と 1 対 1 の `calc` である。`b = 0` の `x · 0 = 0` は人手と同じく `real_times_zero_is_zero`。
-  `ℤ` の分配律・積の単位元の段は `mul_sub`・`mul_one`、`(x − a) + a = x` と `b = (b − 1) + 1` の段は `int_difference_plus_subtrahend_is_original` で当てる。
+* `inclusion_zz_to_rr_preserves_product` は人手と同じく `a` を固定した `b` についての 2 方向の帰納法（`Int.induction_on`）で、`b = 0` の 5 行、
+  `b → b + 1` の 7 行、`b → b − 1` の 20 行が人手の行と 1 対 1 の `calc` である。`b = 0` の `ℤ` の `a · 0 = 0` は人手と同じく `ℤ` の乗法の交換律（`mul_comm`）と
+  `int_zero_times_is_zero` の 2 段、`ℝ` の `x · 0 = 0` は人手と同じく `real_times_zero_is_zero`。
+  `ℤ` の `a(b − 1) = ab − a·1` は人手と同じく `def_int_difference`（`int_sub_eq_add_neg`）・分配律（`mul_add`）・乗法の交換律（`mul_comm`）・`int_negation_times_is_negation_of_product`・乗法の交換律・`def_int_difference` の 6 段、`ℤ` の分配律 `x(y + t) = xy + xt`・積の単位元の段は `mul_add`・`mul_one`、`(x − a) + a = x` と `b = (b − 1) + 1` の段は `int_difference_plus_subtrahend_is_original` で当てる。
 * `inclusion_zz_to_rr_preserves_difference` は人手の 9 行と 1 対 1 の `calc` である。`def_int_difference` は `int_sub_eq_add_neg`、
   `ℤ` の和の結合律・加法逆元 `(−x) + x = 0`・和の単位元は `add_assoc`・`neg_add_cancel`・`add_zero`、
   `def_real_difference`（`y − z := y + (−z)`）は `sub_eq_add_neg` で当てる。
@@ -67,6 +68,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.Defini
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerDifference
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerDifferencePlusSubtrahendIsOriginal
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerNegationOfSumIsSumOfNegations
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerNegationTimesIsNegationOfProduct
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
@@ -239,12 +241,13 @@ theorem inclusion_zz_to_rr_preserves_sum (a b : ℤ) :
 /-- **人手 `inclusion_zz_to_rr_preserves_product`**: `a, b ∈ ℤ` なら `ι(ab) = ι(a)ι(b)`。
 人手と同じく `a` を固定し、`b ∈ ℤ_{≥0}` は `0` から `1` を足す帰納法、`b ∈ ℤ_{≤0}` は `0` から `1` を引く帰納法で示す
 （Lean では `Int.induction_on`。`b ∈ ℤ_{≤0}` の段の `b` は `ℕ` の元 `i` の像の符号反転 `-(i : ℤ)` である）。
-`b = 0` の 4 行、`b → b + 1` の 7 行、`b → b - 1` の 15 行が人手の行と 1 対 1 の `calc` である。 -/
+`b = 0` の 5 行、`b → b + 1` の 7 行、`b → b - 1` の 20 行が人手の行と 1 対 1 の `calc` である。 -/
 theorem inclusion_zz_to_rr_preserves_product (a b : ℤ) :
     ((a * b : ℤ) : ℝ) = ((a : ℤ) : ℝ) * ((b : ℤ) : ℝ) := by
   refine Int.induction_on b ?_ ?_ ?_
   · -- `b = 0_ℤ` のとき
-    calc ((a * 0 : ℤ) : ℝ) = ((0 : ℤ) : ℝ) := by rw [mul_zero]            -- `ℤ` で `a · 0 = 0`
+    calc ((a * 0 : ℤ) : ℝ) = ((0 * a : ℤ) : ℝ) := by rw [mul_comm a 0]     -- `ℤ` の乗法の交換律（`x → a`, `y → 0`）
+      _ = ((0 : ℤ) : ℝ) := by rw [int_zero_times_is_zero a]                -- `int_zero_times_is_zero`（`x → a`）
       _ = 0 := inclusion_zz_to_rr_zero_intCast                             -- `inclusion_zz_to_rr` の `ι(0) := 0`
       _ = ((a : ℤ) : ℝ) * 0 := (real_times_zero_is_zero _).symm            -- `real_times_zero_is_zero`（`x → ι(a)`）を右辺から左辺へ
       _ = ((a : ℤ) : ℝ) * ((0 : ℤ) : ℝ) := by rw [inclusion_zz_to_rr_zero_intCast]
@@ -272,8 +275,18 @@ theorem inclusion_zz_to_rr_preserves_product (a b : ℤ) :
                                                                            -- `ℝ` の和の結合律を右辺から左辺へ
       _ = ((a * (-(i : ℤ) - 1) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by
           rw [inclusion_zz_to_rr_preserves_sum (a * (-(i : ℤ) - 1)) a]    -- `inclusion_zz_to_rr_preserves_sum`（`a → a(b - 1)`, `b → a`）を右辺から左辺へ
-      _ = (((a * -(i : ℤ) - a * 1) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by rw [mul_sub]
-                                                                           -- `ℤ` の分配律
+      _ = (((a * (-(i : ℤ) + -1)) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by
+          rw [int_sub_eq_add_neg (-(i : ℤ)) 1]                              -- `def_int_difference`（`y → b`, `z → 1`）
+      _ = (((a * -(i : ℤ) + a * -1) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by
+          rw [mul_add a (-(i : ℤ)) (-1)]                                  -- `ℤ` の分配律 `x(y+t) = xy+xt`（`x → a`, `y → b`, `t → −1`）
+      _ = (((a * -(i : ℤ) + -1 * a) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by
+          rw [mul_comm a (-1)]                                             -- `ℤ` の乗法の交換律（`x → a`, `y → −1`）
+      _ = (((a * -(i : ℤ) + -(1 * a)) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by
+          rw [int_negation_times_is_negation_of_product 1 a]           -- `int_negation_times_is_negation_of_product`（`x → 1`, `t → a`）
+      _ = (((a * -(i : ℤ) + -(a * 1)) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by
+          rw [mul_comm 1 a]                                                -- `ℤ` の乗法の交換律（`x → 1`, `y → a`）
+      _ = (((a * -(i : ℤ) - a * 1) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by
+          rw [int_sub_eq_add_neg (a * -(i : ℤ)) (a * 1)]                  -- `def_int_difference`（`y → ab`, `z → a·1`）を右辺から左辺へ
       _ = (((a * -(i : ℤ) - a) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by rw [mul_one]
                                                                            -- `1_ℤ` は `ℤ` の積の単位元
       _ = ((a * -(i : ℤ) : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by

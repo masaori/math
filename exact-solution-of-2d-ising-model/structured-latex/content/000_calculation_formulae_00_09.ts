@@ -3163,8 +3163,10 @@ T_B(X - W)
       ]),
       displayMath(String.raw`\begin{aligned}
 \iota_{\mathbb{Z}\to\mathbb{R}}(a \cdot_{\mathbb{Z}} 0_{\mathbb{Z}})
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}} \cdot_{\mathbb{Z}} a)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の乗法の交換律}\ x \cdot y = y \cdot x\ (x \to a,\ y \to 0_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}})
-  &&\bigl(\because\ \mathbb{Z}\ \text{で}\ a \cdot_{\mathbb{Z}} 0_{\mathbb{Z}} = 0_{\mathbb{Z}}\bigr)\\
+  &&\bigl(\because\ \blkref{int_zero_times_is_zero}\ (x \to a)\bigr)\\
 &= 0_{\mathbb{R}}
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) \cdot_{\mathbb{R}} 0_{\mathbb{R}}
@@ -3180,9 +3182,9 @@ T_B(X - W)
       displayMath(String.raw`\begin{aligned}
 \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a \cdot_{\mathbb{Z}} (b +_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a \cdot_{\mathbb{Z}} b +_{\mathbb{Z}} a \cdot_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\bigr)\\
+  &&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ x \cdot (y + t) = x \cdot y + x \cdot t\ (x \to a,\ y \to b,\ t \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a \cdot_{\mathbb{Z}} b +_{\mathbb{Z}} a\bigr)
-  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の積の単位元}\bigr)\\
+  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の積の単位元}\ x \cdot 1_{\mathbb{Z}} = x\ (x \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a \cdot_{\mathbb{Z}} b) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(a)
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a \to a \cdot_{\mathbb{Z}} b,\ b \to a)\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) \cdot_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(a)
@@ -3209,10 +3211,20 @@ T_B(X - W)
   &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律を右辺から左辺へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a \cdot_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} a\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a \to a \cdot_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}}),\ b \to a)\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(a \cdot_{\mathbb{Z}} \bigl(b +_{\mathbb{Z}} (-1_{\mathbb{Z}})\bigr) +_{\mathbb{Z}} a\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
+  &&\bigl(\because\ \blkref{def_int_difference}\ (y \to b,\ z \to 1_{\mathbb{Z}})\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(\bigl(a \cdot_{\mathbb{Z}} b +_{\mathbb{Z}} a \cdot_{\mathbb{Z}} (-1_{\mathbb{Z}})\bigr) +_{\mathbb{Z}} a\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ x \cdot (y + t) = x \cdot y + x \cdot t\ (x \to a,\ y \to b,\ t \to -1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(\bigl(a \cdot_{\mathbb{Z}} b +_{\mathbb{Z}} (-1_{\mathbb{Z}}) \cdot_{\mathbb{Z}} a\bigr) +_{\mathbb{Z}} a\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の乗法の交換律}\ x \cdot y = y \cdot x\ (x \to a,\ y \to -1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(\bigl(a \cdot_{\mathbb{Z}} b +_{\mathbb{Z}} \bigl(-(1_{\mathbb{Z}} \cdot_{\mathbb{Z}} a)\bigr)\bigr) +_{\mathbb{Z}} a\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
+  &&\bigl(\because\ \blkref{int_negation_times_is_negation_of_product}\ (x \to 1_{\mathbb{Z}},\ t \to a)\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(\bigl(a \cdot_{\mathbb{Z}} b +_{\mathbb{Z}} \bigl(-(a \cdot_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)\bigr) +_{\mathbb{Z}} a\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の乗法の交換律}\ x \cdot y = y \cdot x\ (x \to 1_{\mathbb{Z}},\ y \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((a \cdot_{\mathbb{Z}} b -_{\mathbb{Z}} a \cdot_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} a\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\bigr)\\
+  &&\bigl(\because\ \blkref{def_int_difference}\ (y \to a \cdot_{\mathbb{Z}} b,\ z \to a \cdot_{\mathbb{Z}} 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((a \cdot_{\mathbb{Z}} b -_{\mathbb{Z}} a) +_{\mathbb{Z}} a\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
-  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の積の単位元}\bigr)\\
+  &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の積の単位元}\ x \cdot 1_{\mathbb{Z}} = x\ (x \to a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a \cdot_{\mathbb{Z}} b) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
   &&\bigl(\because\ \blkref{int_difference_plus_subtrahend_is_original}\ (x \to a \cdot_{\mathbb{Z}} b,\ y \to a)\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) \cdot_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
@@ -3239,6 +3251,7 @@ T_B(X - W)
       notes: [
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b3)）: 原文（Typst）に対応ブロックは無い。periodicity_of_check_fermi (2) の θ̃_{μ+kM_col} の鎖の 3 行目が、符号の決まっていない k ∈ ℤ と M_col の積について「ι_{ℤ→ℝ} は積を保つ」を名前だけで使っていたので、ℤ 全体の主張として足した。証明は inclusion_zz_to_rr_preserves_sum と同じ 2 方向の帰納法で、和の保存と後者の主張だけを引く。b = 0 の行が引く real_times_zero_is_zero は後ろのファイル 000_calculation_formulae_20_29.ts にあり、前方参照になる（状態台帳の定義より前の参照の件で扱う）。Lean の具体版は Ising2D.inclusion_zz_to_rr_preserves_product、必要十分版は Ising2D.NecSuf.int_cast_mul'。数値検証: sagemath/check/inclusion_zz_to_rr_preserves_product/。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の四則」）: b ∈ ℤ_{≤0} の段で「ℤ の四則」と名前だけで引いていた (x − a) + a = x（x → ab）と b = (b − 1) + 1 の 2 か所を、int_difference_plus_subtrahend_is_original を引く形にした。鎖の両端と主張は不変。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の分配律」）: b ∈ ℤ_{≤0} の段で「ℤ の分配律」と名前だけで引いていた a(b − 1) = ab − a·1 の 1 行を、def_int_difference・set_and_algebra_notation の ℤ の分配律と乗法の交換律・int_negation_times_is_negation_of_product（x → 1, t → a）・def_int_difference を右辺から左辺への 6 行に割った（b ∈ ℤ_{≤0} の段は 20 行になった。x(y − z) = xy − xz を別の主張に切り出さないのは、この主張が最終定理に繋がっておらず、切り出した主張の具体版が繋がりの台帳に新しい行を足すため）。b = 0 の段の「ℤ で a·0 = 0」と名前だけで引いていた 1 行を、set_and_algebra_notation の ℤ の乗法の交換律と int_zero_times_is_zero（x → a）の 2 行に割った（b = 0 の段は 5 行になった）。b ∈ ℤ_{≥0} の段の ℤ の分配律と、両方の段の ℤ の積の単位元の行には set_and_algebra_notation の参照と一覧の形を書いた。鎖の両端と主張は不変。",
       ],
     },
   },

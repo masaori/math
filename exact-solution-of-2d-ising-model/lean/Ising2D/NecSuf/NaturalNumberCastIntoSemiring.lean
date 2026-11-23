@@ -27,7 +27,7 @@
 | `inclusion_zz_to_rr_is_monotone_on_nonnegatives` | `k := b − a`、`ι(k) ≥ 0`（`k = 0` と `k ≥ 1`）、`ι(a) = ι(a) + 0 ≤ ι(a) + ι(k) = ι(a + k) = ι(b)` | `cast_mono'`（同じ段） | `cast_add'`、`one_le_cast'`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元 |
 | `inclusion_zz_to_rr_of_successor` | `n ∈ ℤ_{≥0}` は定義、`n = -1` は `ι(-1 + 1) = ι(0) = 0 = (-1) + 1 = (-ι(1)) + 1 = ι(-1) + 1`、`n = -(p + 1)`（`p ≥ 1`）は `ι(-(p+1) + 1) = ι(((-p) + (-1)) + 1) = ι((-p) + ((-1) + 1)) = ι((-p) + 0) = ι(-p) = -ι(p) = -ι(p) + 0 = -ι(p) + ((-1) + 1) = (-ι(p) + (-1)) + 1 = -(ι(p) + 1) + 1 = -ι(p + 1) + 1 = ι(-(p + 1)) + 1` | `int_cast_succ'`（同じ段） | `ℤ` の埋め込みの `ι(0) = 0`・`ι(1) = 1`・`ι(-n) = -ι(n)` と `ℤ_{≥0}` での一致・`Nat.cast_succ`、`0` が和の右単位元、加法逆元、和の結合律、`-(x + y) = (-x) + (-y)`（加法の可換性） |
 | `inclusion_zz_to_rr_preserves_sum` | `b` について `0` から足す帰納法（3 行と 5 行）と引く帰納法（13 行）。足す段・引く段とも `inclusion_zz_to_rr_of_successor` を使う | `int_cast_add'`（同じ段） | `int_cast_succ'`、`ι(0) = 0`、`0` が和の右単位元、加法逆元、和の結合律 |
-| `inclusion_zz_to_rr_preserves_product` | `b` について `0` から足す帰納法（4 行と 7 行）と引く帰納法（15 行）。`b = 0` は `x · 0 = 0`、足す段・引く段とも `inclusion_zz_to_rr_preserves_sum`・`inclusion_zz_to_rr_of_successor` を使う | `int_cast_mul'`（同じ段） | `int_cast_add'`・`int_cast_succ'`、`ι(0) = 0`、`x · 0 = 0`、`1` が乗法の右単位元、左からの分配律 `x(y + z) = xy + xz`、`0` が和の右単位元、加法逆元、和の結合律 |
+| `inclusion_zz_to_rr_preserves_product` | `b` について `0` から足す帰納法（5 行と 7 行）と引く帰納法（20 行）。`b = 0` は `ℤ` の乗法の交換律と `0 · a = 0`、`R` の `x · 0 = 0`、引く段の `a(b − 1) = ab − a·1` は `ℤ` の差の定義・分配律・乗法の交換律・`(−x)t = −(xt)` の 6 段、足す段・引く段とも `inclusion_zz_to_rr_preserves_sum`・`inclusion_zz_to_rr_of_successor` を使う | `int_cast_mul'`（同じ段） | `int_cast_add'`・`int_cast_succ'`、`ι(0) = 0`、`x · 0 = 0`、`1` が乗法の右単位元、左からの分配律 `x(y + z) = xy + xz`、`0` が和の右単位元、加法逆元、和の結合律（`R` の側）。`ℤ` の側: 乗法の交換律・分配律・差の定義・`0·a = 0`・`(−x)t = −(xt)` |
 | `inclusion_zz_to_rr_preserves_difference` | `ι(a − b) = ι(a − b) + 0 = ι(a − b) + (ι(b) + (−ι(b))) = (ι(a − b) + ι(b)) + (−ι(b)) = ι((a − b) + b) + (−ι(b)) = ι((a + (−b)) + b) + (−ι(b)) = ι(a + ((−b) + b)) + (−ι(b)) = ι(a + 0) + (−ι(b)) = ι(a) + (−ι(b)) = ι(a) − ι(b)` | `int_cast_sub'`（同じ段） | `int_cast_add'`、`0` が和の右単位元、加法逆元、和の結合律、差が加法の逆元の和であること（`ℤ` と `R` の両方） |
 | `inclusion_zz_to_rr_preserves_negation` | `ι(−a) = ι(0 + (−a)) = ι(0 − a) = ι(0) − ι(a) = 0 − ι(a) = 0 + (−ι(a)) = −ι(a)` | `int_cast_neg'`（同じ段） | `int_cast_sub'`、埋め込みの `ι(0) = 0`、差が加法の逆元の和であること、`0` が和の左単位元 |
 
@@ -58,6 +58,7 @@ import Mathlib.Algebra.Ring.Defs
 import Mathlib.Algebra.Order.Ring.Defs
 import Ising2D.NecSuf.SubAddCancelOfAddGroup
 import Ising2D.NecSuf.NegAddOfAddCommGroup
+import Ising2D.NecSuf.NegMulOfAddGroupRightDistrib
 
 namespace Ising2D.NecSuf
 
@@ -267,7 +268,8 @@ theorem int_cast_add' {R : Type*} [AddCommGroupWithOne R] (a b : ℤ) :
 theorem int_cast_mul' {R : Type*} [NonAssocRing R] (a b : ℤ) :
     ((a * b : ℤ) : R) = ((a : ℤ) : R) * ((b : ℤ) : R) := by
   refine Int.induction_on b ?_ ?_ ?_
-  · calc ((a * 0 : ℤ) : R) = ((0 : ℤ) : R) := by rw [mul_zero]            -- `ℤ` で `a · 0 = 0`
+  · calc ((a * 0 : ℤ) : R) = ((0 * a : ℤ) : R) := by rw [mul_comm a 0]     -- `ℤ` の乗法の交換律
+      _ = ((0 : ℤ) : R) := by rw [zero_mul_of_rightDistrib a]              -- `ℤ` で `0 · a = 0`
       _ = 0 := Int.cast_zero                                               -- 埋め込みの `ι(0) = 0`
       _ = ((a : ℤ) : R) * 0 := (mul_zero _).symm                           -- `x · 0 = 0` を右辺から左辺へ
       _ = ((a : ℤ) : R) * ((0 : ℤ) : R) := by rw [Int.cast_zero]           -- 埋め込みの `ι(0) = 0` を右辺から左辺へ
@@ -291,8 +293,18 @@ theorem int_cast_mul' {R : Type*} [NonAssocRing R] (a b : ℤ) :
                                                                            -- 和の結合律を右辺から左辺へ
       _ = ((a * (-(i : ℤ) - 1) + a : ℤ) : R) + -((a : ℤ) : R) := by
           rw [int_cast_add' (a * (-(i : ℤ) - 1)) a]                        -- `int_cast_add'` を右辺から左辺へ
-      _ = (((a * -(i : ℤ) - a * 1) + a : ℤ) : R) + -((a : ℤ) : R) := by rw [mul_sub]
-                                                                           -- `ℤ` の分配律
+      _ = (((a * (-(i : ℤ) + -1)) + a : ℤ) : R) + -((a : ℤ) : R) := by
+          rw [sub_eq_add_neg (-(i : ℤ)) 1]                                  -- `ℤ` の差は加法の逆元の和
+      _ = (((a * -(i : ℤ) + a * -1) + a : ℤ) : R) + -((a : ℤ) : R) := by
+          rw [mul_add a (-(i : ℤ)) (-1)]                                  -- `ℤ` の左からの分配律
+      _ = (((a * -(i : ℤ) + -1 * a) + a : ℤ) : R) + -((a : ℤ) : R) := by
+          rw [mul_comm a (-1)]                                             -- `ℤ` の乗法の交換律
+      _ = (((a * -(i : ℤ) + -(1 * a)) + a : ℤ) : R) + -((a : ℤ) : R) := by
+          rw [neg_mul_of_addGroup_rightDistrib 1 a]                    -- `ℤ` で `(−x)·t = −(x·t)`
+      _ = (((a * -(i : ℤ) + -(a * 1)) + a : ℤ) : R) + -((a : ℤ) : R) := by
+          rw [mul_comm 1 a]                                                -- `ℤ` の乗法の交換律
+      _ = (((a * -(i : ℤ) - a * 1) + a : ℤ) : R) + -((a : ℤ) : R) := by
+          rw [sub_eq_add_neg (a * -(i : ℤ)) (a * 1)]                      -- `ℤ` の差は加法の逆元の和を右辺から左辺へ
       _ = (((a * -(i : ℤ) - a) + a : ℤ) : R) + -((a : ℤ) : R) := by rw [mul_one]
                                                                            -- `ℤ` の積の単位元
       _ = ((a * -(i : ℤ) : ℤ) : R) + -((a : ℤ) : R) := by
