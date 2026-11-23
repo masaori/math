@@ -5,7 +5,7 @@
 
 人手証明と同じ順で進む。
 1. 各軌道の基点 `e` からの反復列（基点を除く）`φ(e), …, φ^{∘(m-1)}(e)` を作り、
-   互換の鎖 `transpositionChain` がその軌道上で `σ` と一致し、軌道外を動かさないことを示す。
+   互換の鎖 `finiteTranspositionChain` がその軌道上で `σ` と一致し、軌道外を動かさないことを示す。
 2. 互換の鎖の符号 `(-1)^{m-1}` と軌道の元の個数 `m`（`card_orbit`）を結ぶ。
 3. 互いに素な台・軌道上の一致・軌道外の恒等・被覆から合成を元の置換へ戻し、
    具体版の符号の有限積則を適用して積表示を得る。
@@ -142,11 +142,100 @@ private lemma nodup_cons_orbitTail (σ : Equiv.Perm ι) (e : ι) :
     intro hcontra
     exact hdistinct (i + 1) (j + 1) (by omega) (by omega) (Option.some_injective ι hcontra)
 
+/-- 基点と反復列の各点を順に交換する、本文の互換鎖。 -/
+private def finiteTranspositionChain (a : ι) : List ι → Equiv.Perm ι
+  | [] => 1
+  | b :: l => finiteTranspositionChain a l * finiteTranspositionPerm a b
+
+private lemma finiteTranspositionChain_apply_of_notMem (a : ι) (l : List ι) {x : ι}
+    (hxa : x ≠ a) (hxl : x ∉ l) : finiteTranspositionChain a l x = x := by
+  induction l with
+  | nil => rfl
+  | cons b t ih =>
+    rw [List.mem_cons, not_or] at hxl
+    obtain ⟨hxb, hxt⟩ := hxl
+    change (finiteTranspositionChain a t * finiteTranspositionPerm a b) x = x
+    rw [Equiv.Perm.mul_apply, finiteTranspositionPerm_apply,
+      finiteTransposition_apply_of_ne a b hxa hxb]
+    exact ih hxt
+
+private lemma finiteTranspositionChain_apply_head (a : ι) (l : List ι)
+    (hnd : (a :: l).Nodup) : finiteTranspositionChain a l a = l.headD a := by
+  cases l with
+  | nil => rfl
+  | cons b t =>
+    rw [List.nodup_cons, List.mem_cons, not_or] at hnd
+    obtain ⟨⟨hab, hat⟩, hnd'⟩ := hnd
+    have hbt : b ∉ t := (List.nodup_cons.mp hnd').1
+    change (finiteTranspositionChain a t * finiteTranspositionPerm a b) a = b
+    rw [Equiv.Perm.mul_apply, finiteTranspositionPerm_apply,
+      finiteTransposition_apply_left]
+    exact finiteTranspositionChain_apply_of_notMem a t (fun h => hab h.symm) hbt
+
+private lemma finiteTranspositionChain_apply_getElem (a : ι) (l : List ι)
+    (hnd : (a :: l).Nodup) {i : ℕ} (hi : i + 1 < l.length) :
+    finiteTranspositionChain a l (l[i]'(Nat.lt_of_succ_lt hi)) = l[i + 1]'hi := by
+  induction l generalizing i with
+  | nil => simp at hi
+  | cons b t ih =>
+    rw [List.nodup_cons, List.mem_cons, not_or] at hnd
+    obtain ⟨⟨hab, hat⟩, hnd'⟩ := hnd
+    have hbt : b ∉ t := (List.nodup_cons.mp hnd').1
+    have hndat : (a :: t).Nodup := List.nodup_cons.mpr ⟨hat, (List.nodup_cons.mp hnd').2⟩
+    cases i with
+    | zero =>
+      have ht : 0 < t.length := by simpa using hi
+      simp only [List.getElem_cons_zero, List.getElem_cons_succ]
+      change (finiteTranspositionChain a t * finiteTranspositionPerm a b) b = t[0]'ht
+      rw [Equiv.Perm.mul_apply, finiteTranspositionPerm_apply,
+        finiteTransposition_apply_right, finiteTranspositionChain_apply_head a t hndat]
+      cases t with
+      | nil => simp at ht
+      | cons c u => rfl
+    | succ j =>
+      have hj : j + 1 < t.length := by simpa using hi
+      simp only [List.getElem_cons_succ]
+      change (finiteTranspositionChain a t * finiteTranspositionPerm a b)
+        (t[j]'(Nat.lt_of_succ_lt hj)) = t[j + 1]'hj
+      have htja : t[j]'(Nat.lt_of_succ_lt hj) ≠ a := fun h => hat (h ▸ List.getElem_mem _)
+      have htjb : t[j]'(Nat.lt_of_succ_lt hj) ≠ b := fun h => hbt (h ▸ List.getElem_mem _)
+      rw [Equiv.Perm.mul_apply, finiteTranspositionPerm_apply,
+        finiteTransposition_apply_of_ne a b htja htjb]
+      exact ih hndat hj
+
+private lemma finiteTranspositionChain_apply_getLast (a : ι) (l : List ι)
+    (hnd : (a :: l).Nodup) (hne : l ≠ []) :
+    finiteTranspositionChain a l (l.getLast hne) = a := by
+  induction l with
+  | nil => exact absurd rfl hne
+  | cons b t ih =>
+    rw [List.nodup_cons, List.mem_cons, not_or] at hnd
+    obtain ⟨⟨hab, hat⟩, hnd'⟩ := hnd
+    have hbt : b ∉ t := (List.nodup_cons.mp hnd').1
+    have hndat : (a :: t).Nodup := List.nodup_cons.mpr ⟨hat, (List.nodup_cons.mp hnd').2⟩
+    cases t with
+    | nil =>
+      change (finiteTranspositionChain a [] * finiteTranspositionPerm a b) b = a
+      rw [Equiv.Perm.mul_apply, finiteTranspositionPerm_apply,
+        finiteTransposition_apply_right]
+      rfl
+    | cons c u =>
+      have htne : (c :: u : List ι) ≠ [] := by simp
+      rw [List.getLast_cons htne]
+      have hlast_mem : (c :: u).getLast htne ∈ c :: u := List.getLast_mem htne
+      have hxa : (c :: u).getLast htne ≠ a := fun h => hat (h ▸ hlast_mem)
+      have hxb : (c :: u).getLast htne ≠ b := fun h => hbt (h ▸ hlast_mem)
+      change (finiteTranspositionChain a (c :: u) * finiteTranspositionPerm a b)
+        ((c :: u).getLast htne) = a
+      rw [Equiv.Perm.mul_apply, finiteTranspositionPerm_apply,
+        finiteTransposition_apply_of_ne a b hxa hxb]
+      exact ih hndat htne
+
 /-- 互換の鎖は軌道上で `σ` と一致する。人手証明の
 「`φ_C` は `m_C - 1` 個の互換の合成に等しい」の作用の側である。 -/
 private lemma transpositionChain_orbitTail_eq_apply (σ : Equiv.Perm ι) {e : ι}
     (he : σ e ≠ e) {x : ι} (hx : x ∈ movedOrbit σ e) :
-    transpositionChain e (orbitTail σ e) x = σ x := by
+    finiteTranspositionChain e (orbitTail σ e) x = σ x := by
   have hm2 : 2 ≤ orbitPeriod σ e := two_le_orbitPeriod σ he
   have hnodup := nodup_cons_orbitTail σ e
   have hlen := orbitTail_length σ e
@@ -162,7 +251,7 @@ private lemma transpositionChain_orbitTail_eq_apply (σ : Equiv.Perm ι) {e : ι
       omega
     have h0 : 0 < (orbitTail σ e).length := List.length_pos_iff.mpr hne
     have hb : (orbitTail σ e)[0]'h0 = (⇑σ)^[1] e := orbitTail_getElem σ e h0
-    rw [Function.iterate_zero_apply, transpositionChain_apply_head e _ hnodup]
+    rw [Function.iterate_zero_apply, finiteTranspositionChain_apply_head e _ hnodup]
     cases hcase : orbitTail σ e with
     | nil => exact absurd hcase hne
     | cons b t =>
@@ -179,7 +268,7 @@ private lemma transpositionChain_orbitTail_eq_apply (σ : Equiv.Perm ι) {e : ι
         rw [orbitTail_getElem σ e hi]
         congr 1
         omega
-      have hchainstep := transpositionChain_apply_getElem e (orbitTail σ e) hnodup hij
+      have hchainstep := finiteTranspositionChain_apply_getElem e (orbitTail σ e) hnodup hij
       rw [hxj] at hchainstep
       rw [hchainstep, orbitTail_getElem σ e hij,
         ← Function.iterate_succ_apply' (⇑σ) j e]
@@ -198,7 +287,7 @@ private lemma transpositionChain_orbitTail_eq_apply (σ : Equiv.Perm ι) {e : ι
         · congr 1
           rw [orbitTail_length]
           omega
-      have hchainstep := transpositionChain_apply_getLast e (orbitTail σ e) hnodup hne
+      have hchainstep := finiteTranspositionChain_apply_getLast e (orbitTail σ e) hnodup hne
       rw [hlast] at hchainstep
       rw [hchainstep, ← Function.iterate_succ_apply' (⇑σ) j e]
       have hjm : j.succ = orbitPeriod σ e := by omega
@@ -207,8 +296,8 @@ private lemma transpositionChain_orbitTail_eq_apply (σ : Equiv.Perm ι) {e : ι
 /-- 互換の鎖は軌道の外を動かさない。人手証明の「軌道外では恒等写像」である。 -/
 private lemma transpositionChain_orbitTail_fix (σ : Equiv.Perm ι) (e : ι) {x : ι}
     (hx : x ∉ movedOrbit σ e) :
-    transpositionChain e (orbitTail σ e) x = x := by
-  apply transpositionChain_apply_of_notMem
+    finiteTranspositionChain e (orbitTail σ e) x = x := by
+  apply finiteTranspositionChain_apply_of_notMem
   · intro hxe
     exact hx (hxe ▸ self_mem_orbit (⇑σ) e)
   · intro hmem
@@ -218,13 +307,13 @@ private lemma transpositionChain_orbitTail_fix (σ : Equiv.Perm ι) (e : ι) {x 
 /-- 互換の鎖の符号は `(-1)^{|C|-1}` である。人手証明の
 「この巡回置換の符号は `(-1)^{m_C-1}` である」と `m_C = |C|`（`card_orbit`）を結ぶ。 -/
 private lemma sign_transpositionChain_orbitTail (σ : Equiv.Perm ι) (e : ι) :
-    finiteOrderedSign (transpositionChain e (orbitTail σ e)) =
+    finiteOrderedSign (finiteTranspositionChain e (orbitTail σ e)) =
       (-1 : ℤ) ^ ((movedOrbit σ e).card - 1) := by
   have hcard : (movedOrbit σ e).card = orbitPeriod σ e :=
     card_orbit (⇑σ) σ.injective e (perm_return σ e)
   have hnotmem : e ∉ orbitTail σ e := (List.nodup_cons.mp (nodup_cons_orbitTail σ e)).1
   have hsign : ∀ (l : List ι), e ∉ l →
-      finiteOrderedSign (transpositionChain e l) = (-1 : ℤ) ^ l.length := by
+      finiteOrderedSign (finiteTranspositionChain e l) = (-1 : ℤ) ^ l.length := by
     intro l
     induction l with
     | nil =>
@@ -234,17 +323,13 @@ private lemma sign_transpositionChain_orbitTail (σ : Equiv.Perm ι) (e : ι) :
         intro p hp
         have hlt : p.1 < p.2 := by simpa [finiteOrderedPairs] using hp
         exact lt_asymm hlt
-      simp only [transpositionChain, List.length_nil, pow_zero, finiteOrderedSign, hinv]
+      simp only [finiteTranspositionChain, List.length_nil, pow_zero, finiteOrderedSign, hinv]
     | cons b t ih =>
       intro hal
       rw [List.mem_cons, not_or] at hal
       obtain ⟨hab, hat⟩ := hal
-      have hswap : transpositionPerm e b = finiteTranspositionPerm e b := by
-        ext x
-        simp only [transpositionPerm, transpositionOn, finiteTranspositionPerm,
-          finiteTransposition, Equiv.coe_fn_mk]
-      change finiteOrderedSign (transpositionChain e t * transpositionPerm e b) = _
-      rw [finiteOrderedSign_comp, hswap, finiteTransposition_sign hab,
+      change finiteOrderedSign (finiteTranspositionChain e t * finiteTranspositionPerm e b) = _
+      rw [finiteOrderedSign_comp, finiteTransposition_sign hab,
         ih hat, List.length_cons, pow_succ]
   rw [hsign (orbitTail σ e) hnotmem, orbitTail_length, hcard]
 
@@ -253,7 +338,7 @@ private lemma sign_transpositionChain_orbitTail (σ : Equiv.Perm ι) (e : ι) :
 private noncomputable def orbitChainPerm (σ : Equiv.Perm ι) (O : Finset ι) : Equiv.Perm ι :=
   open Classical in
   if h : ∃ e, σ e ≠ e ∧ movedOrbit σ e = O then
-    transpositionChain h.choose (orbitTail σ h.choose)
+    finiteTranspositionChain h.choose (orbitTail σ h.choose)
   else 1
 
 /-- 置換符号は動く軌道の符号因子の積である。具体版。
@@ -278,7 +363,7 @@ theorem sign_movedEdgeOrbit_product (σ : Equiv.Perm ι) :
     have h := hex O hO
     obtain ⟨hemoved, horb⟩ := h.choose_spec
     have hperm : orbitChainPerm σ O =
-        transpositionChain h.choose (orbitTail σ h.choose) := by
+        finiteTranspositionChain h.choose (orbitTail σ h.choose) := by
       rw [orbitChainPerm, dif_pos h]
     refine ⟨?_, ?_, ?_⟩
     · intro x hx
