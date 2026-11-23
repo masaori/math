@@ -46,7 +46,7 @@
   `sqrtM_ne_zero`（`DefinitionCheckFermi.lean`）を引く。`2_ℂ = (2,0) ≠ 0_ℂ` は成分の比較の `complex_two_ne_zero_by_re`。
   `u := 2_ℂ s ∈ ℂ^×`・`d := u b ∈ ℂ^×`（群の積）は `checkU_ne_zero`・`checkD_ne_zero`［置かない］。
   `c = 1_ℂ/d = 1_ℂ d^{-1} = d^{-1}`（3 行）は `checkC_eq_inv`、`c ∈ ℂ^×` は `checkC_ne_zero`［置かない］。
-  `P̌_μ`・`c` もこの `sqrtM` で書き、分数は `def_complex_quotient` の商（`div_eq_mul_inv` で開く）と読む。
+  `P̌_μ`・`c` もこの `sqrtM` で書き、分数は `def_complex_quotient` の商（具体版 `complex_div_eq_mul_inv` に分母が 0 でない根拠を渡して開く）と読む。
 * `diagonalization_check_P_D` Step 2: 第 1 成分の 5 行の鎖 `checkC_mul`（`c x = x/d`）、第 2 成分の 13 行の鎖 `checkC_mul_b`
   （どちらも人手と 1 段ずつの `calc`）、列が `v_{±,μ}` に一致すること
   `checkPmat_col_pos`・`checkPmat_col_neg`［置かない。`c` の具体形の確認］、前置きの `P̌ = [v_+ v_-]`（`mat_columnwise` の記法）の
@@ -88,6 +88,8 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimN
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimSumPlusAndMinusDifferenceInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimDoubleNegationAndReversedDifferenceInCC
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfComplexNumberIsProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexQuotient
 
 namespace Ising2D
 
@@ -532,20 +534,22 @@ theorem checkD_ne_zero (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     (2 : ℂ) * sqrtM M * gamma2 P.const (-thetaTilde M μ) ≠ 0 :=
   mul_ne_zero (checkU_ne_zero hM) (gamma2_neg_thetaTilde_ne_zero P hM μ)
 
-/-- **人手証明 Step 2 の第 1 成分の鎖**: `x ∈ ℂ` について `c x = x/d`（5 行）。 -/
-theorem checkC_mul (K : IsingConst) (M : ℕ) (μ : ℤ) (x : ℂ) :
+/-- **人手証明 Step 2 の第 1 成分の鎖**: `x ∈ ℂ` について `c x = x/d`（5 行）。
+仮定 `hdne` は Step 1 の `d ∈ ℂ^×`（商 `1_ℂ/d`・`x/d` の定義域。`checkD_ne_zero`）である。 -/
+theorem checkC_mul (K : IsingConst) (M : ℕ) (μ : ℤ) (x : ℂ)
+    (hdne : 2 * sqrtM M * gamma2 K (-thetaTilde M μ) ≠ 0) :
     checkC K M μ * x = x / (2 * sqrtM M * gamma2 K (-thetaTilde M μ)) := by
   set d : ℂ := 2 * sqrtM M * gamma2 K (-thetaTilde M μ) with hd
   calc checkC K M μ * x
       = 1 / d * x := rfl                    -- 1 行目: `c` の定義
     _ = (1 * d⁻¹) * x := by
-        rw [div_eq_mul_inv]                 -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → d`）
+        rw [complex_div_eq_mul_inv 1 d hdne]               -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → d`）
     _ = d⁻¹ * x := by
         rw [one_mul]                        -- 3 行目: `complex_numbers_form_a_field` の積の単位元
     _ = x * d⁻¹ := by
         rw [mul_comm]                       -- 4 行目: `complex_numbers_form_a_field` の積の可換律
     _ = x / d := by
-        rw [← div_eq_mul_inv]               -- 5 行目: `def_complex_quotient`（`z → x`, `w → d`）を右辺から左辺へ
+        rw [← complex_div_eq_mul_inv x d hdne]             -- 5 行目: `def_complex_quotient`（`z → x`, `w → d`）を右辺から左辺へ
 
 /-- **人手証明 Step 2 の第 2 成分**: `c b = 1/(2√M)`（13 行。`u := 2_ℂ s`、`d := u b`）。 -/
 theorem checkC_mul_b (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
@@ -558,13 +562,13 @@ theorem checkC_mul_b (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
   calc checkC P.const M μ * b
       = 1 / d * b := rfl                    -- 1 行目: `c` の定義
     _ = (1 * d⁻¹) * b := by
-        rw [div_eq_mul_inv]                 -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → d`）
+        rw [complex_div_eq_mul_inv 1 d hd0]               -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → d`）
     _ = d⁻¹ * b := by
         rw [one_mul]                        -- 3 行目: `complex_numbers_form_a_field` の積の単位元
     _ = 1 * (d⁻¹ * b) := by
         rw [one_mul]                        -- 4 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
     _ = (u⁻¹ * u) * (d⁻¹ * b) := by
-        rw [inv_mul_cancel₀ hu0]            -- 5 行目: `multiplicative_group_of_cc` の逆元（`u ∈ ℂ^×`）を右辺から左辺へ
+        rw [complex_inv_mul_cancel u hu0]          -- 5 行目: `multiplicative_group_of_cc` の逆元（`u ∈ ℂ^×`）を右辺から左辺へ
     _ = u⁻¹ * (u * (d⁻¹ * b)) := by
         rw [mul_assoc u⁻¹ u]                -- 6 行目: `complex_numbers_form_a_field` の積の結合律
     _ = u⁻¹ * ((u * d⁻¹) * b) := by
@@ -575,11 +579,11 @@ theorem checkC_mul_b (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
         rw [mul_assoc d⁻¹ u b]              -- 9 行目: `complex_numbers_form_a_field` の積の結合律
     _ = u⁻¹ * (d⁻¹ * d) := rfl              -- 10 行目: `d` の定義を右辺から左辺へ
     _ = u⁻¹ * 1 := by
-        rw [inv_mul_cancel₀ hd0]            -- 11 行目: `multiplicative_group_of_cc` の逆元（`d ∈ ℂ^×`）
+        rw [complex_inv_mul_cancel d hd0]          -- 11 行目: `multiplicative_group_of_cc` の逆元（`d ∈ ℂ^×`）
     _ = 1 * u⁻¹ := by
         rw [mul_comm]                       -- 12 行目: `complex_numbers_form_a_field` の積の可換律
     _ = 1 / u := by
-        rw [← div_eq_mul_inv]               -- 13 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → u`）を右辺から左辺へ
+        rw [← complex_div_eq_mul_inv 1 u hu0]             -- 13 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → u`）を右辺から左辺へ
 
 /-- **人手証明 Step 2**: `P̌_μ` の第 1 列は `v_{+,μ} = c(-r, b)` である
 （第 1 成分は `checkC_mul` を `x → -r_ℂ` に、第 2 成分は `checkC_mul_b`）。 -/
@@ -590,7 +594,7 @@ theorem checkPmat_col_pos (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
   ext k
   fin_cases k
   · simp only [Pi.smul_apply, smul_eq_mul]
-    rw [checkC_mul]
+    rw [checkC_mul _ _ _ _ (checkD_ne_zero P hM μ)]
     rfl
   · show (1 : ℂ) / (2 * sqrtM M) = checkC P.const M μ * gamma2 P.const (-thetaTilde M μ)
     rw [checkC_mul_b P hM μ]
@@ -604,7 +608,7 @@ theorem checkPmat_col_neg (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
   ext k
   fin_cases k
   · simp only [Pi.smul_apply, smul_eq_mul]
-    rw [checkC_mul]
+    rw [checkC_mul _ _ _ _ (checkD_ne_zero P hM μ)]
     rfl
   · show (1 : ℂ) / (2 * sqrtM M) = checkC P.const M μ * gamma2 P.const (-thetaTilde M μ)
     rw [checkC_mul_b P hM μ]
@@ -737,19 +741,20 @@ theorem checkD_mul_checkU (K : IsingConst) (M : ℕ) (μ : ℤ) :
                                                 -- 11 行目: 積の結合律
     _ = 2 * q := by rw [hq]                     -- 12 行目: `q` の定義を右辺から左辺へ
 
-/-- **人手証明 Step 1**: `c = 1_ℂ/d = 1_ℂ d^{-1} = d^{-1}`（3 行）。 -/
-theorem checkC_eq_inv (K : IsingConst) (M : ℕ) (μ : ℤ) :
+/-- **人手証明 Step 1**: `c = 1_ℂ/d = 1_ℂ d^{-1} = d^{-1}`（3 行）。仮定 `hdne` は同じ Step 1 の `d ∈ ℂ^×`（`checkD_ne_zero`）である。 -/
+theorem checkC_eq_inv (K : IsingConst) (M : ℕ) (μ : ℤ)
+    (hdne : 2 * sqrtM M * gamma2 K (-thetaTilde M μ) ≠ 0) :
     checkC K M μ = (2 * sqrtM M * gamma2 K (-thetaTilde M μ))⁻¹ := by
   set d : ℂ := 2 * sqrtM M * gamma2 K (-thetaTilde M μ) with hd
   calc checkC K M μ
       = 1 / d := rfl                    -- 1 行目: `c` の定義
-    _ = 1 * d⁻¹ := div_eq_mul_inv _ _   -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → d`）
+    _ = 1 * d⁻¹ := complex_div_eq_mul_inv 1 d hdne -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → d`）
     _ = d⁻¹ := one_mul _                -- 3 行目: `complex_numbers_form_a_field` の積の単位元
 
 /-- **人手証明 Step 1**: `c ∈ ℂ^×`（`c = d^{-1}` は `multiplicative_group_of_cc` の逆元）。 -/
 theorem checkC_ne_zero (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     checkC P.const M μ ≠ 0 := by
-  rw [checkC_eq_inv]
+  rw [checkC_eq_inv _ _ _ (checkD_ne_zero P hM μ)]
   exact inv_ne_zero (checkD_ne_zero P hM μ)
 
 /-- **人手証明 Step 3 の鎖の 1〜28 行目**: `det P̌_μ = (-ρ) q^{-1}`（`ρ := r_ℂ`、`q := (2_ℂ ℓ) b`）。
@@ -771,7 +776,8 @@ theorem det_checkPmat_eq_mul_inv (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ :
         Matrix.det_fin_two_of _ _ _ _
                                         -- 1 行目: `def_det_two_by_two`（`B → P̌_μ`）
     _ = ((-ρ) * d⁻¹) * (1 * u⁻¹) - (ρ * d⁻¹) * (1 * u⁻¹) := by
-        simp only [div_eq_mul_inv]      -- 2 行目: `def_complex_quotient` を 4 か所へ
+        rw [complex_div_eq_mul_inv (-ρ) d hd0, complex_div_eq_mul_inv ρ d hd0,
+          complex_div_eq_mul_inv 1 u hu0] -- 2 行目: `def_complex_quotient` を 4 か所へ
     _ = ((-ρ) * d⁻¹) * u⁻¹ - (ρ * d⁻¹) * u⁻¹ := by
         simp only [one_mul]             -- 3 行目: 積の単位元を 2 か所へ
     _ = (-ρ) * (d⁻¹ * u⁻¹) - ρ * (d⁻¹ * u⁻¹) := by
@@ -800,7 +806,7 @@ theorem det_checkPmat_eq_mul_inv (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ :
     _ = (-ρ) * (1 * (2 * (d⁻¹ * u⁻¹))) := by
         rw [one_mul]                    -- 15 行目: 積の単位元を右辺から左辺へ
     _ = (-ρ) * ((q⁻¹ * q) * (2 * (d⁻¹ * u⁻¹))) := by
-        rw [inv_mul_cancel₀ hq0]        -- 16 行目: `multiplicative_group_of_cc` の逆元（`q ∈ ℂ^×`）を右辺から左辺へ
+        rw [complex_inv_mul_cancel q hq0]        -- 16 行目: `multiplicative_group_of_cc` の逆元（`q ∈ ℂ^×`）を右辺から左辺へ
     _ = (-ρ) * (q⁻¹ * (q * (2 * (d⁻¹ * u⁻¹)))) := by
         rw [mul_assoc q⁻¹ q]            -- 17 行目: 積の結合律
     _ = (-ρ) * (q⁻¹ * ((q * 2) * (d⁻¹ * u⁻¹))) := by
@@ -818,11 +824,11 @@ theorem det_checkPmat_eq_mul_inv (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ :
     _ = (-ρ) * (q⁻¹ * (d * (d⁻¹ * (u * u⁻¹)))) := by
         rw [mul_assoc d⁻¹ u]            -- 24 行目: 積の結合律
     _ = (-ρ) * (q⁻¹ * (d * (d⁻¹ * 1))) := by
-        rw [mul_inv_cancel₀ hu0]        -- 25 行目: `multiplicative_group_of_cc` の逆元（`u ∈ ℂ^×`）
+        rw [complex_mul_inv_cancel u hu0]        -- 25 行目: `multiplicative_group_of_cc` の逆元（`u ∈ ℂ^×`）
     _ = (-ρ) * (q⁻¹ * (d * d⁻¹)) := by
         rw [mul_one]                    -- 26 行目: 積の単位元
     _ = (-ρ) * (q⁻¹ * 1) := by
-        rw [mul_inv_cancel₀ hd0]        -- 27 行目: `multiplicative_group_of_cc` の逆元（`d ∈ ℂ^×`）
+        rw [complex_mul_inv_cancel d hd0]        -- 27 行目: `multiplicative_group_of_cc` の逆元（`d ∈ ℂ^×`）
     _ = (-ρ) * q⁻¹ := by
         rw [mul_one]                    -- 28 行目: 積の単位元
 
@@ -832,7 +838,7 @@ theorem det_checkPmat (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
       = -((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) /
           (2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ)) := by
   rw [det_checkPmat_eq_mul_inv P hM μ]  -- 1〜28 行目
-  exact (div_eq_mul_inv _ _).symm       -- 29 行目: `def_complex_quotient`（`z → -ρ`, `w → q`）を右辺から左辺へ
+  exact (complex_div_eq_mul_inv _ _ (checkW_ne_zero P hM μ)).symm -- 29 行目: `def_complex_quotient`（`z → -ρ`, `w → q`）を右辺から左辺へ
 
 /-- **人手証明 Step 3 の結論**: `det P̌_μ ≠ 0_ℂ`（`ρ = (r,0)`・`-1_ℂ = (-1,0)` の第 1 成分が 0 でないことと、
 `multiplicative_group_of_cc` の群の積・逆元）。 -/

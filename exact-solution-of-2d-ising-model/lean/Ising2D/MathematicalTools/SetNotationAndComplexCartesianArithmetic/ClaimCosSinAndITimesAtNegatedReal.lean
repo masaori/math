@@ -18,7 +18,8 @@
   具体版が Lean に無く、mathlib の `neg_one_mul`・`mul_assoc` で 1 段ずつ受ける。
 - 人手 `double_negation_in_cc`（`-(-z) = z`）・`reversed_difference_is_negation_of_difference_in_cc`（`b - a = -(a - b)`）は、
   同じフォルダの `ClaimDoubleNegationAndReversedDifferenceInCC.lean` の `complex_double_negation`・`complex_reversed_difference` で引く。
-- 人手 `def_complex_quotient`（`z/w := zw^{-1}`）は Lean の `/` で、`div_eq_mul_inv` で受ける。
+- 人手 `def_complex_quotient`（`z/w := zw^{-1}`）は Lean の `/` で、具体版 `complex_div_eq_mul_inv` に、人手 `sin_of_negated_real` の前置きの
+  `2_ℂ i ≠ 0_ℂ`（`sin_neg_prep_two_mul_I_ne_zero`）を渡して受ける。
 
 必要十分版は置かない。`I_mul_real_neg_eq_neg_I_mul`・`neg_I_mul_real_neg_eq_I_mul` は積の結合律・可換律と `-x = (-1)x`、
 `double_negation_in_cc`（`-(-z) = z`）を 1 回ずつ当てるだけで、可換環で同じ段が通る（取り払える構造をこの説明以上に示す計算が無い）。
@@ -28,6 +29,8 @@ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimDoubleNegationAndReversedDifferenceInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexQuotient
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimITimesInverseOfTwoIIsInverseOfTwoInCC
 
 namespace Ising2D
 
@@ -74,6 +77,23 @@ theorem real_inclusion_cos_neg (θ : ℝ) :
     _ = ((Real.cos θ : ℝ) : ℂ) :=
         (euler_cos_real_inclusion θ).symm         -- 5 行目: `euler_formula_cos_sin`
 
+/-- 人手 `sin_of_negated_real` の前置きの `2_ℂ i ∈ ℂ^×`（`2_ℂ = (2,0) ≠ 0_ℂ` と `i = (0,1) ≠ 0_ℂ` を成分で比べ、
+`multiplicative_group_of_cc` の群の積で `2_ℂ i ∈ ℂ^×`）。`2_ℂ ≠ 0_ℂ` は成分の比較の `complex_two_ne_zero_by_re`。 -/
+theorem sin_neg_prep_two_mul_I_ne_zero : (2 : ℂ) * Complex.I ≠ 0 := by
+  have hI : Complex.I ≠ 0 := by
+    intro h
+    have h1 : (1 : ℝ) = 0 :=
+      calc (1 : ℝ)
+          = Complex.I.im := Complex.I_im.symm
+                                      -- `def_imaginary_unit`: `i = (0, 1)` の第 2 成分を右辺から左辺へ
+        _ = (0 : ℂ).im := congrArg Complex.im h
+                                      -- 仮定 `i = 0_ℂ` の第 2 成分
+        _ = 0 := Complex.zero_im
+                                      -- `0_ℂ = (0, 0)` の第 2 成分
+    exact one_ne_zero h1              -- 第 2 成分が `ℝ` で `1 ≠ 0`
+  exact mul_ne_zero complex_two_ne_zero_by_re hI
+                                      -- `multiplicative_group_of_cc` の群の積（`2_ℂ, i ∈ ℂ^×`）
+
 /-- 人手 `sin_of_negated_real`: `(sin(-θ))_ℂ = -(sin θ)_ℂ`（人手の 10 行）。 -/
 theorem real_inclusion_sin_neg (θ : ℝ) :
     ((Real.sin (-θ) : ℝ) : ℂ) = -((Real.sin θ : ℝ) : ℂ) :=
@@ -90,7 +110,8 @@ theorem real_inclusion_sin_neg (θ : ℝ) :
         rw [complex_reversed_difference]          -- 4 行目: `reversed_difference_is_negation_of_difference_in_cc`
                                                   -- （`a → exp(iθ)`, `b → exp(-(iθ))`）
     _ = (-(Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ))))) * (2 * Complex.I)⁻¹ := by
-        rw [div_eq_mul_inv]                       -- 5 行目: `def_complex_quotient`（`z → -(…)`, `w → 2i`）
+        rw [complex_div_eq_mul_inv _ (2 * Complex.I) sin_neg_prep_two_mul_I_ne_zero]
+                                                  -- 5 行目: `def_complex_quotient`（`z → -(…)`, `w → 2i`）
     _ = ((-1 : ℂ) * (Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))))
           * (2 * Complex.I)⁻¹ := by
         rw [neg_one_mul]                          -- 6 行目: `multiply_by_minus_one`（`z → exp(iθ) - exp(-(iθ))`）
@@ -100,7 +121,8 @@ theorem real_inclusion_sin_neg (θ : ℝ) :
     _ = -((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))) * (2 * Complex.I)⁻¹) := by
         rw [neg_one_mul]                          -- 8 行目: `multiply_by_minus_one`（`z → (…)(2i)^{-1}`）を右辺から左辺へ
     _ = -((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))) / (2 * Complex.I)) := by
-        rw [div_eq_mul_inv]                       -- 9 行目: `def_complex_quotient`（`z → exp(iθ) - exp(-(iθ))`, `w → 2i`）を右辺から左辺へ
+        rw [complex_div_eq_mul_inv _ (2 * Complex.I) sin_neg_prep_two_mul_I_ne_zero]
+                                                  -- 9 行目: `def_complex_quotient`（`z → exp(iθ) - exp(-(iθ))`, `w → 2i`）を右辺から左辺へ
     _ = -((Real.sin θ : ℝ) : ℂ) := by
         rw [euler_sin_real_inclusion θ]           -- 10 行目: `euler_formula_cos_sin`
 

@@ -38,6 +38,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Defin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimTwiceTimesInverseOfTwoIsOriginalInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimSumPlusAndMinusDifferenceInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNegationAndDifference
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexQuotient
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimITimesInverseOfTwoIIsInverseOfTwoInCC
 
 namespace Ising2D
 
@@ -353,8 +355,8 @@ theorem sigmaX_mem_adjoin (k : Fin M) : sigmaX k ∈ Algebra.adjoin ℂ (ZYSet M
 `complex_two_mul_mul_inv_two`（`twice_times_inverse_of_two_is_original_in_cc`）・`complex_sum_add_difference`
 （`sum_plus_difference_is_twice_first_in_cc`）・`complex_sum_sub_difference`（`sum_minus_difference_is_twice_second_in_cc`）・
 `complex_I_mul_I`（`i_times_i_is_minus_one_in_cc`）・`complex_neg_I_mul_I`（`negative_i_times_i_is_one_in_cc`）である。
-Lean の `z / 2` は `div_eq_mul_inv`（`def_complex_quotient`）で `z * 2⁻¹` に開く。人手の前置きの `2_ℂ ∈ ℂ^×` は
-`complex_two_ne_zero_by_re`（`inclusion_rr_to_cc` の第 1 成分の比較）で、`complex_two_mul_mul_inv_two` の中で使う。 -/
+Lean の `z / 2` は `def_complex_quotient` の具体版 `complex_div_eq_mul_inv`（`w → 2_ℂ`）で `z * 2⁻¹` に開く。人手の前置きの `2_ℂ ∈ ℂ^×` は
+`complex_two_ne_zero_by_re`（`inclusion_rr_to_cc` の第 1 成分の比較）で、その仮定と `complex_two_mul_mul_inv_two` の中で使う。 -/
 
 /-- 人手 `def_pauli_matrices` で定めた Pauli 行列の成分（人手の証明の冒頭がこの定めを引く）。 -/
 theorem pauliX_apply_00 : pauliX 0 0 = 0 := rfl
@@ -414,7 +416,8 @@ theorem pauliDecompRhs_apply_00 (a b c d : ℂ) : pauliDecompRhs a b c d 0 0 = a
     _ = kappa0 a d + kappaZ a d := by rw [mul_one, mul_one]           -- 積の単位元を 2 か所へ
     _ = (a + d) / 2 + (a - d) / 2 := rfl                              -- `κ_0`・`κ_z` の定義
     _ = (a + d) * 2⁻¹ + (a - d) * 2⁻¹ := by
-          rw [div_eq_mul_inv, div_eq_mul_inv]                           -- `def_complex_quotient` を 2 か所へ
+          rw [complex_div_eq_mul_inv _ 2 complex_two_ne_zero_by_re,
+            complex_div_eq_mul_inv _ 2 complex_two_ne_zero_by_re]         -- `def_complex_quotient` を 2 か所へ（`w → 2_ℂ`）
     _ = ((a + d) + (a - d)) * 2⁻¹ := (add_mul _ _ _).symm              -- 分配律を右辺から左辺へ
     _ = (2 * a) * 2⁻¹ := by rw [complex_sum_add_difference a d]         -- `sum_plus_difference_is_twice_first_in_cc`（`a → a₁₁, b → a₂₂`）
     _ = a := complex_two_mul_mul_inv_two a                               -- `twice_times_inverse_of_two_is_original_in_cc`（`z → a₁₁`）
@@ -449,7 +452,8 @@ theorem pauliDecompRhs_apply_01 (a b c d : ℂ) : pauliDecompRhs a b c d 0 1 = b
     _ = kappaX b c + kappaY b c * (-Complex.I) := by rw [mul_one]             -- 積の単位元
     _ = (b + c) / 2 + ((Complex.I * (b - c)) / 2) * (-Complex.I) := rfl        -- `κ_x`・`κ_y` の定義
     _ = (b + c) * 2⁻¹ + ((Complex.I * (b - c)) * 2⁻¹) * (-Complex.I) := by
-          rw [div_eq_mul_inv, div_eq_mul_inv]                           -- `def_complex_quotient` を 2 か所へ
+          rw [complex_div_eq_mul_inv _ 2 complex_two_ne_zero_by_re,
+            complex_div_eq_mul_inv _ 2 complex_two_ne_zero_by_re]         -- `def_complex_quotient` を 2 か所へ（`w → 2_ℂ`）
     _ = (b + c) * 2⁻¹ + (-Complex.I) * ((Complex.I * (b - c)) * 2⁻¹) := by
           rw [mul_comm ((Complex.I * (b - c)) * 2⁻¹) (-Complex.I)]             -- 積の可換律
     _ = (b + c) * 2⁻¹ + ((-Complex.I) * (Complex.I * (b - c))) * 2⁻¹ := by
@@ -493,7 +497,8 @@ theorem pauliDecompRhs_apply_10 (a b c d : ℂ) : pauliDecompRhs a b c d 1 0 = c
     _ = kappaX b c + kappaY b c * Complex.I := by rw [mul_one]             -- 積の単位元
     _ = (b + c) / 2 + ((Complex.I * (b - c)) / 2) * Complex.I := rfl        -- `κ_x`・`κ_y` の定義
     _ = (b + c) * 2⁻¹ + ((Complex.I * (b - c)) * 2⁻¹) * Complex.I := by
-          rw [div_eq_mul_inv, div_eq_mul_inv]                           -- `def_complex_quotient` を 2 か所へ
+          rw [complex_div_eq_mul_inv _ 2 complex_two_ne_zero_by_re,
+            complex_div_eq_mul_inv _ 2 complex_two_ne_zero_by_re]         -- `def_complex_quotient` を 2 か所へ（`w → 2_ℂ`）
     _ = (b + c) * 2⁻¹ + Complex.I * ((Complex.I * (b - c)) * 2⁻¹) := by
           rw [mul_comm ((Complex.I * (b - c)) * 2⁻¹) Complex.I]             -- 積の可換律
     _ = (b + c) * 2⁻¹ + (Complex.I * (Complex.I * (b - c))) * 2⁻¹ := by
@@ -541,7 +546,8 @@ theorem pauliDecompRhs_apply_11 (a b c d : ℂ) : pauliDecompRhs a b c d 1 1 = d
           rw [mul_comm (kappaZ a d) (-1)]                               -- 積の可換律
     _ = (a + d) / 2 + (-1) * ((a - d) / 2) := rfl                     -- `κ_0`・`κ_z` の定義
     _ = (a + d) * 2⁻¹ + (-1) * ((a - d) * 2⁻¹) := by
-          rw [div_eq_mul_inv, div_eq_mul_inv]                           -- `def_complex_quotient` を 2 か所へ
+          rw [complex_div_eq_mul_inv _ 2 complex_two_ne_zero_by_re,
+            complex_div_eq_mul_inv _ 2 complex_two_ne_zero_by_re]         -- `def_complex_quotient` を 2 か所へ（`w → 2_ℂ`）
     _ = (a + d) * 2⁻¹ + ((-1) * (a - d)) * 2⁻¹ := by
           rw [← mul_assoc (-1 : ℂ) (a - d)]                             -- 積の結合律を右辺から左辺へ
     _ = (a + d) * 2⁻¹ + (-(a - d)) * 2⁻¹ := by rw [neg_one_mul]        -- `multiply_by_minus_one` を右辺から左辺へ

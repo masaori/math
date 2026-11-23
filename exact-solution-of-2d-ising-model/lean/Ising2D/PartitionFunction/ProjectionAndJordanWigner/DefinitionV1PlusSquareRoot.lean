@@ -40,7 +40,7 @@
   `Fin.sum_univ_castSucc`・`Fin.sum_univ_one` で出す。`finite_sum_of_scalar_multiples_of_one_matrix`（`r → 2`）は
   `TensorPow M` の系 `finite_sum_smul_one_tensorPow`（人手の `r` は Lean の `r + 1`）。
 - `ℂ` の体の公理（`complex_numbers_form_a_field`）は mathlib の `mul_add`・`mul_one`・`mul_comm`・`mul_assoc`・`one_mul`。
-  `2_ℂ ∈ ℂ^×` の逆元の性質 `2_ℂ^{-1}2_ℂ = 1_ℂ`（`multiplicative_group_of_cc`）は `inv_mul_cancel₀`、`2_ℂ ≠ 0_ℂ` は `real_inclusion_two_ne_zero`。
+  `2_ℂ ∈ ℂ^×` の逆元の性質 `2_ℂ^{-1}2_ℂ = 1_ℂ`（`multiplicative_group_of_cc`）は `def_complex_inverse` の具体版 `complex_inv_mul_cancel`、`2_ℂ ≠ 0_ℂ` は `real_inclusion_two_ne_zero`。
 - 人手の主張の前置き `M_col ≥ 2` は証明で使わないので、Lean の主張は `M` に条件を付けない。
 
 必要十分版は置かない。平方根性の核「可換な `X, X` について `exp X exp X = exp(X+X)`」は mathlib の
@@ -50,6 +50,7 @@ import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransfer
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimOnePlusOneIsTwoInCC
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionOfOneHalfIsInverseOfTwo
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrixFromNecSuf
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
 
 namespace Ising2D
 
@@ -86,7 +87,7 @@ theorem c_add_c_eq_I_mul (κ c : ℂ) (hc : c = (Complex.I * ((2 : ℝ) : ℂ)�
     _ = Complex.I * ((((2 : ℝ) : ℂ)⁻¹ * ((2 : ℝ) : ℂ)) * κ) := by
         rw [mul_assoc]                                  -- 積の結合律
     _ = Complex.I * (1 * κ) := by
-        rw [inv_mul_cancel₀ real_inclusion_two_ne_zero] -- `2_ℂ^{-1}` は `2_ℂ ∈ ℂ^×` の逆元（`multiplicative_group_of_cc`）
+        rw [complex_inv_mul_cancel _ real_inclusion_two_ne_zero] -- `2_ℂ^{-1}` は `2_ℂ ∈ ℂ^×` の逆元（`multiplicative_group_of_cc`）
     _ = Complex.I * κ := by
         rw [one_mul]                                    -- `1_ℂ` は積の単位元
 

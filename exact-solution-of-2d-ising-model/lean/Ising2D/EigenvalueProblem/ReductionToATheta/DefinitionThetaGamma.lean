@@ -73,6 +73,8 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusZeroIsSelf
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexQuotient
 
 namespace Ising2D
 
@@ -202,8 +204,8 @@ theorem AMat_eq : AMat K θ = !![gamma1 K θ, gamma2 K θ; -gamma2 K (-θ), gamm
 /-- 人手 `relation_of_gamma_2_theta_tilde` の「第一に」の最後の鎖: `cos θ + i sin θ = exp(iθ)`（人手の 22 行）。
 人手 `periodicity_of_check_fermi` の準備の第一の鎖（`θ` を `x` と書いた同じ 22 行）もこの補題で受ける。
 分母の `2`・`2i` は `2_ℂ`・`2_ℂi`（Lean の `(2 : ℂ)`・`(2 : ℂ) * Complex.I`）、`1_ℂ` は `inclusion_rr_to_cc` の像 `(1)_ℂ` の略記で、
-行き来は略記の読み替えの段で行う。人手 `def_complex_quotient`（`z/w := zw^{-1}`）は mathlib の `div_eq_mul_inv`、
-`multiplicative_group_of_cc` の逆元（`ww^{-1} = 1_ℂ`）は `mul_inv_cancel₀` で受け、
+行き来は略記の読み替えの段で行う。人手 `def_complex_quotient`（`z/w := zw^{-1}`）は具体版 `complex_div_eq_mul_inv`（分母が 0 でない根拠を渡す）、
+`multiplicative_group_of_cc` の逆元（`ww^{-1} = 1_ℂ`）は `def_complex_inverse` の具体版 `complex_mul_inv_cancel` で受け、
 `euler_formula_cos_sin` の主張の `2_ℂ ∈ ℂ^×`（成分の比較）は `complex_two_ne_zero_by_re` である。
 6 行目の人手 `i_times_inverse_of_two_i_is_inverse_of_two_in_cc`（`i(2_ℂi)^{-1} = 2_ℂ^{-1}`）は `complex_I_mul_inv_two_mul_I`
 （`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimITimesInverseOfTwoIIsInverseOfTwoInCC.lean`）である。 -/
@@ -216,7 +218,8 @@ theorem real_inclusion_cos_add_I_mul_sin (θ : ℝ) :
       = (eP + eM) / 2 + Complex.I * ((eP - eM) / (2 * Complex.I)) := by
         rw [euler_cos_real_inclusion θ, euler_sin_real_inclusion θ]  -- 1 行目: `euler_formula_cos_sin`
     _ = (eP + eM) * (2 : ℂ)⁻¹ + Complex.I * ((eP - eM) * ((2 : ℂ) * Complex.I)⁻¹) := by
-        rw [div_eq_mul_inv, div_eq_mul_inv]       -- 2 行目: `def_complex_quotient` を 2 箇所へ（`w → 2_ℂ`・`w → 2_ℂi`）
+        rw [complex_div_eq_mul_inv _ 2 h2, complex_div_eq_mul_inv _ (2 * Complex.I) complex_two_mul_I_ne_zero]
+                                                  -- 2 行目: `def_complex_quotient` を 2 箇所へ（`w → 2_ℂ`・`w → 2_ℂi`）
     _ = (eP + eM) * (2 : ℂ)⁻¹ + (Complex.I * (eP - eM)) * ((2 : ℂ) * Complex.I)⁻¹ := by
         rw [← mul_assoc Complex.I (eP - eM)]      -- 3 行目: `complex_numbers_form_a_field` の積の結合律を右辺から左辺へ
     _ = (eP + eM) * (2 : ℂ)⁻¹ + ((eP - eM) * Complex.I) * ((2 : ℂ) * Complex.I)⁻¹ := by
@@ -258,7 +261,7 @@ theorem real_inclusion_cos_add_I_mul_sin (θ : ℝ) :
     _ = eP * ((2 : ℂ) * (2 : ℂ)⁻¹) := by
         rw [mul_assoc eP]                         -- 20 行目: `complex_numbers_form_a_field` の積の結合律
     _ = eP * 1 := by
-        rw [mul_inv_cancel₀ h2]                   -- 21 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）
+        rw [complex_mul_inv_cancel 2 h2]          -- 21 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）
     _ = eP := by
         rw [mul_one]                              -- 22 行目: `complex_numbers_form_a_field` の積の単位元
 

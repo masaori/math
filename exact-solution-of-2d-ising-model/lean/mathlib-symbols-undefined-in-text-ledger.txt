@@ -99,7 +99,6 @@ Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_fo
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	Finset.univ@Fin@Fin.fintype
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	HAdd.hAdd@Int,Int,Int@Int.instAdd
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
-Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	HMul.hMul@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
@@ -1000,7 +999,6 @@ Ising2D.CheckFermiSetup.Qproj_mul_nOp_step3	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_step3	ite@Complex,Membership.mem@Finset.decidableMem
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	Fin
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	Finset
-Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
@@ -1009,7 +1007,6 @@ Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	OfNat.ofNat@Ising2D.TensorPow,1@O
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	Fin
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	Finset
-Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
@@ -1019,7 +1016,6 @@ Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	OfNat.ofNat@Ising2D.Tensor
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	Fin
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	Finset
-Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
@@ -1029,7 +1025,6 @@ Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	OfNat.ofNat@Ising2D.Tensor
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_not_mem	Fin
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_not_mem	Finset
-Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_not_mem	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_not_mem	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_not_mem	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_not_mem	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
@@ -1042,7 +1037,6 @@ Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	Finset
 Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	Finset.range
 Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	Finset.sum@Nat,Complex@Complex.instAddCommMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	HAdd.hAdd@Nat,Nat,Nat@instAddNat
-Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
@@ -1124,7 +1118,6 @@ Ising2D.CheckFermiSetup.Vprime_neg_mul_Vprime	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.Xop	Fin
 Ising2D.CheckFermiSetup.Xop	Finset.sum@Ising2D.CheckIdx,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.CheckFermiSetup.Xop	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
-Ising2D.CheckFermiSetup.Xop	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.Xop	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.Xop	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.Xop	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
@@ -1132,7 +1125,6 @@ Ising2D.CheckFermiSetup.Xop	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.Xop_eq_sum_fin	Fin
 Ising2D.CheckFermiSetup.Xop_eq_sum_fin	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.CheckFermiSetup.Xop_eq_sum_fin	Finset.univ@Fin@Fin.fintype
-Ising2D.CheckFermiSetup.Xop_eq_sum_fin	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.Xop_eq_sum_fin	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.Xop_eq_sum_fin	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.Xop_eq_sum_fin	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
@@ -1296,7 +1288,6 @@ Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto	Filter.atTop@Nat@Nat.ins
 Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto	Finset.range
 Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto	Finset.sum@Nat,Complex@Complex.instAddCommMonoid
 Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto	HAdd.hAdd@Nat,Nat,Nat@instAddNat
-Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto	Nat.cast@Complex@Complex.instNatCast
 Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto	Nat.factorial
@@ -1322,8 +1313,6 @@ Ising2D.CheckFermiSetup.cre_sq	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Mat
 Ising2D.CheckFermiSetup.cre_sq	Matrix
 Ising2D.CheckFermiSetup.cre_sq	OfNat.ofNat@Ising2D.TensorPow,0@Zero.toOfNat0
 Ising2D.CheckFermiSetup.cre_sq	OfNat.ofNat@Nat,2@instOfNatNat
-Ising2D.CheckFermiSetup.eq_inv_two_mul_add_inv_two_mul_prep4	Inv.inv@Complex@Complex.instInv
-Ising2D.CheckFermiSetup.eq_inv_two_mul_two_mul_prep4	Inv.inv@Complex@Complex.instInv
 Ising2D.CheckFermiSetup.eq_zero_of_binWordSum_eq_zero_step5	Fin
 Ising2D.CheckFermiSetup.eq_zero_of_binWordSum_eq_zero_step5	HAdd.hAdd@Nat,Nat,Nat@instAddNat
 Ising2D.CheckFermiSetup.eq_zero_of_binWordSum_eq_zero_step5	HMul.hMul@Ising2D.TensorPow,Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
@@ -1447,7 +1436,6 @@ Ising2D.CheckFermiSetup.iSup_range_Qproj_eq_top	RingHom.id@Complex@Semiring.toNo
 Ising2D.CheckFermiSetup.iSup_range_Qproj_eq_top	Submodule@Complex,→@Complex.instCommSemiring,Pi.addCommMonoid,Pi.Function.module
 Ising2D.CheckFermiSetup.iSup_range_Qproj_eq_top	Top.top@Submodule@Submodule.instTop
 Ising2D.CheckFermiSetup.iSup_range_Qproj_eq_top	iSup@Submodule,Finset@ConditionallyCompleteLattice.toConditionallyCompletePartialOrder
-Ising2D.CheckFermiSetup.inv_two_mul_two_prep4	Inv.inv@Complex@Complex.instInv
 Ising2D.CheckFermiSetup.isInternal_range_Qproj	AlgEquiv@Complex,Matrix[Complex],LinearMap@Complex.instCommSemiring,Matrix.semiring,Module.End.instSemiring,Matrix.instAlgebra,Module.End.instAlgebra
 Ising2D.CheckFermiSetup.isInternal_range_Qproj	DFunLike.coe@AlgEquiv,Matrix[Complex],fun@AlgEquiv.instFunLike
 Ising2D.CheckFermiSetup.isInternal_range_Qproj	DirectSum.IsInternal@Finset,→,Submodule@?,Pi.addCommMonoid,Submodule.setLike,Submodule.addSubmonoidClass
@@ -1639,7 +1627,6 @@ Ising2D.CheckFermiSetup.nOp_sq	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow
 Ising2D.CheckFermiSetup.nOp_sq	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	Fin
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	Finset
-Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
@@ -1648,7 +1635,6 @@ Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	OfNat.ofNat@Ising2D.TensorPow,1@O
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	Fin
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	Finset
-Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
@@ -1658,7 +1644,6 @@ Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	OfNat.ofNat@Ising2D.Tensor
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	Fin
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	Finset
-Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
@@ -1668,7 +1653,6 @@ Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	OfNat.ofNat@Ising2D.Tensor
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_not_mem	Fin
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_not_mem	Finset
-Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_not_mem	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_not_mem	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_not_mem	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_not_mem	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
@@ -1717,7 +1701,6 @@ Ising2D.CheckFermiSetup.partialExpSum	Fin
 Ising2D.CheckFermiSetup.partialExpSum	Finset.range
 Ising2D.CheckFermiSetup.partialExpSum	Finset.sum@Nat,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.CheckFermiSetup.partialExpSum	HAdd.hAdd@Nat,Nat,Nat@instAddNat
-Ising2D.CheckFermiSetup.partialExpSum	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.partialExpSum	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow
 Ising2D.CheckFermiSetup.partialExpSum	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.CheckFermiSetup.partialExpSum	Nat.cast@Complex@Complex.instNatCast
@@ -1729,7 +1712,6 @@ Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj	Finset
 Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj	Finset.range
 Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj	Finset.sum@Nat,Complex@Complex.instAddCommMonoid
 Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj	HAdd.hAdd@Nat,Nat,Nat@instAddNat
-Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
@@ -1919,7 +1901,6 @@ Ising2D.CheckFermiSetup.trace_mul_nOp_chain	Matrix.trace@Ising2D.Conf,Complex@Pi
 Ising2D.CheckFermiSetup.trace_mul_nOp_chain	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.CheckFermiSetup.trace_mul_nOp_eq_half	Fin
 Ising2D.CheckFermiSetup.trace_mul_nOp_eq_half	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
-Ising2D.CheckFermiSetup.trace_mul_nOp_eq_half	Inv.inv@Complex@Complex.instInv
 Ising2D.CheckFermiSetup.trace_mul_nOp_eq_half	Matrix
 Ising2D.CheckFermiSetup.trace_mul_nOp_eq_half	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid
 Ising2D.CheckFermiSetup.trace_mul_nOp_eq_half	OfNat.ofNat@Nat,2@instOfNatNat
@@ -1933,7 +1914,6 @@ Ising2D.CheckFermiSetup.trace_mul_one_sub_nOp_prep3	OfNat.ofNat@Nat,2@instOfNatN
 Ising2D.CheckFermiSetup.trace_mul_projFactor_eq_half	Fin
 Ising2D.CheckFermiSetup.trace_mul_projFactor_eq_half	Finset
 Ising2D.CheckFermiSetup.trace_mul_projFactor_eq_half	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
-Ising2D.CheckFermiSetup.trace_mul_projFactor_eq_half	Inv.inv@Complex@Complex.instInv
 Ising2D.CheckFermiSetup.trace_mul_projFactor_eq_half	Matrix
 Ising2D.CheckFermiSetup.trace_mul_projFactor_eq_half	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid
 Ising2D.CheckFermiSetup.trace_mul_projFactor_eq_half	OfNat.ofNat@Nat,2@instOfNatNat
@@ -3204,7 +3184,6 @@ Ising2D.Uflip_conj_expPartialSum	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorP
 Ising2D.Uflip_conj_expPartialSum	HPow.hPow@Matrix[Complex],Nat,Matrix[Complex]@NPow.toPow
 Ising2D.Uflip_conj_expPartialSum	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.Uflip_conj_expPartialSum	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
-Ising2D.Uflip_conj_expPartialSum	Inv.inv@Complex@Complex.instInv
 Ising2D.Uflip_conj_expPartialSum	Matrix
 Ising2D.Uflip_conj_expPartialSum	Nat.cast@Complex@Complex.instNatCast
 Ising2D.Uflip_conj_expPartialSum	Nat.factorial
@@ -3385,7 +3364,6 @@ Ising2D.V1_generator_partialSums_mulVec_eq	Finset.sum@Nat,→@Pi.addCommMonoid
 Ising2D.V1_generator_partialSums_mulVec_eq	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow
 Ising2D.V1_generator_partialSums_mulVec_eq	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.V1_generator_partialSums_mulVec_eq	HSMul.hSMul@Complex,→,→@Function.hasSMul
-Ising2D.V1_generator_partialSums_mulVec_eq	Inv.inv@Complex@Complex.instInv
 Ising2D.V1_generator_partialSums_mulVec_eq	LE.le@Nat@instLENat
 Ising2D.V1_generator_partialSums_mulVec_eq	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.V1_generator_partialSums_mulVec_eq	Nat.cast@Complex@Complex.instNatCast
@@ -3437,10 +3415,8 @@ Ising2D.V1plus	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Mat
 Ising2D.V1plus	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.V1plus	Matrix
 Ising2D.V1plus	OfNat.ofNat@Nat,2@instOfNatNat
-Ising2D.V1plusHalf	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.V1plusHalf	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.V1plusHalfUnits	Fin
-Ising2D.V1plusHalfUnits	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.V1plusHalfUnits	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.V1plusHalfUnits	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.V1plusHalfUnits	Units@Ising2D.TensorPow@Matrix.semiring
@@ -3450,8 +3426,6 @@ Ising2D.V1plusHalfUnits_eq_V1pmHalfUnits	Units@Ising2D.TensorPow@Matrix.semiring
 Ising2D.V1plusHalfUnits_val	Fin
 Ising2D.V1plusHalfUnits_val	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.V1plusHalfUnits_val	Units.val@Ising2D.TensorPow@Matrix.semiring
-Ising2D.V1plusHalf_coeff_eq	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
-Ising2D.V1plusHalf_coeff_eq	Inv.inv@Complex@Complex.instInv
 Ising2D.V1plusUnits	Fin
 Ising2D.V1plusUnits	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.V1plusUnits	OfNat.ofNat@Nat,2@instOfNatNat
@@ -3476,10 +3450,8 @@ Ising2D.V1pmFromDefinition	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[
 Ising2D.V1pmFromDefinition	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.V1pmFromDefinition	Matrix
 Ising2D.V1pmFromDefinition	OfNat.ofNat@Nat,2@instOfNatNat
-Ising2D.V1pmHalf	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.V1pmHalf	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.V1pmHalfUnits	Fin
-Ising2D.V1pmHalfUnits	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.V1pmHalfUnits	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.V1pmHalfUnits	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.V1pmHalfUnits	Units@Ising2D.TensorPow@Matrix.semiring
@@ -3804,7 +3776,6 @@ Ising2D.VPlusData.trace_pos_of_eta_univ_eq_one_step7	OfNat.ofNat@Nat,2@instOfNat
 Ising2D.VPlusData.two_sinh_gam_half_pos	Fin
 Ising2D.VPlusData.two_sinh_gam_half_pos	Real.sinh
 Ising2D.VPlusInv	Fin
-Ising2D.VPlusInv	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.VPlusInv	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.VPlusInv	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.VPlusInv	HPow.hPow@Real,Real,Real@Real.instPow
@@ -3838,7 +3809,6 @@ Ising2D.VPlusUnits_val	Fin
 Ising2D.VPlusUnits_val	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.VPlusUnits_val	Units.val@Ising2D.TensorPow@Matrix.semiring
 Ising2D.VPlus_eq_smul	Fin
-Ising2D.VPlus_eq_smul	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.VPlus_eq_smul	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.VPlus_eq_smul	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.VPlus_eq_smul	HPow.hPow@Real,Real,Real@Real.instPow
@@ -3929,7 +3899,6 @@ Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset.sum@Fin,Ising2
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset.sum@Fin,Real@Real.instAddCommMonoid
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset.univ@Fin@Fin.fintype
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
-Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	HPow.hPow@Real,Real,Real@Real.instPow
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
@@ -3946,7 +3915,6 @@ Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Subtype.val
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	Fin
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	Finset.univ@Fin@Fin.fintype
-Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
@@ -3954,7 +3922,6 @@ Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	OfNat.ofNat@Nat,0@instOf
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	Real.sinh
 Ising2D.V_plus_exponential_form	Fin
-Ising2D.V_plus_exponential_form	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.V_plus_exponential_form	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.V_plus_exponential_form	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.V_plus_exponential_form	HPow.hPow@Real,Real,Real@Real.instPow
@@ -3973,7 +3940,6 @@ Ising2D.Vmat_posDef	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.
 Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	Complex.ofRealHom
 Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	DFunLike.coe@RingHom,Real,fun@RingHom.instFunLike
 Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	Fin
-Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	HPow.hPow@Real,Real,Real@Real.instPow
@@ -4051,7 +4017,6 @@ Ising2D.Y_eq_inverse_dft_check	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMo
 Ising2D.Y_eq_inverse_dft_check	Finset.univ@Fin@Fin.fintype
 Ising2D.Y_eq_inverse_dft_check	HAdd.hAdd@Int,Int,Int@Int.instAdd
 Ising2D.Y_eq_inverse_dft_check	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.Y_eq_inverse_dft_check	Inv.inv@Complex@Complex.instInv
 Ising2D.Y_eq_inverse_dft_check	Nat.cast@Complex@Complex.instNatCast
 Ising2D.Y_eq_inverse_dft_check	Nat.cast@Int@instNatCastInt
 Ising2D.Y_eq_inverse_dft_check	Neg.neg@Int@Int.instNegInt
@@ -4201,7 +4166,6 @@ Ising2D.Z_eq_inverse_dft_check	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMo
 Ising2D.Z_eq_inverse_dft_check	Finset.univ@Fin@Fin.fintype
 Ising2D.Z_eq_inverse_dft_check	HAdd.hAdd@Int,Int,Int@Int.instAdd
 Ising2D.Z_eq_inverse_dft_check	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.Z_eq_inverse_dft_check	Inv.inv@Complex@Complex.instInv
 Ising2D.Z_eq_inverse_dft_check	Nat.cast@Complex@Complex.instNatCast
 Ising2D.Z_eq_inverse_dft_check	Nat.cast@Int@instNatCastInt
 Ising2D.Z_eq_inverse_dft_check	Neg.neg@Int@Int.instNegInt
@@ -4545,11 +4509,9 @@ Ising2D.actsBy_iff_rowApply_eq_rowMul	RingHom.id@Complex@Semiring.toNonAssocSemi
 Ising2D.adPow	Nat.succ
 Ising2D.adPow	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.adPow_G1_checkY_of_even	Even@Nat@instAddNat
-Ising2D.adPow_G1_checkY_of_even	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.adPow_G1_checkY_of_even	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.adPow_G1_checkY_of_even	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.adPow_G1_checkY_of_even	OfNat.ofNat@Nat,0@instOfNatNat
-Ising2D.adPow_G1_checkY_of_odd	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.adPow_G1_checkY_of_odd	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.adPow_G1_checkY_of_odd	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.adPow_G1_checkY_of_odd	Neg.neg@Int@Int.instNegInt
@@ -4557,11 +4519,9 @@ Ising2D.adPow_G1_checkY_of_odd	Odd@Nat@Nat.instSemiring
 Ising2D.adPow_G1_checkY_of_odd	OfNat.ofNat@Int,1@instOfNat
 Ising2D.adPow_G1_checkY_of_odd	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.adPow_G1_checkZ_of_even	Even@Nat@instAddNat
-Ising2D.adPow_G1_checkZ_of_even	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.adPow_G1_checkZ_of_even	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.adPow_G1_checkZ_of_even	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.adPow_G1_checkZ_of_even	OfNat.ofNat@Nat,0@instOfNatNat
-Ising2D.adPow_G1_checkZ_of_odd	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.adPow_G1_checkZ_of_odd	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.adPow_G1_checkZ_of_odd	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.adPow_G1_checkZ_of_odd	Odd@Nat@Nat.instSemiring
@@ -5161,7 +5121,6 @@ Ising2D.c0_bounds	Bool.true
 Ising2D.c0_bounds	OfScientific.ofScientific@Real@NNRatCast.toOfScientific
 Ising2D.c2star_eq_c2_div_s2	Real.cosh
 Ising2D.c2star_eq_c2_div_s2	Real.sinh
-Ising2D.c_add_c_eq_I_mul	Inv.inv@Complex@Complex.instInv
 Ising2D.c_le_twice_c_plus_physical	Fin
 Ising2D.c_le_twice_c_plus_physical	HAdd.hAdd@Nat,Nat,Nat@instAddNat
 Ising2D.c_le_twice_c_plus_physical	OfNat.ofNat@Nat,1@instOfNatNat
@@ -5324,10 +5283,6 @@ Ising2D.checkBigLambda_univ_eq_LambdaM	Finset.univ@Ising2D.CheckIdx@Ising2D.Chec
 Ising2D.checkBigLambda_univ_eq_LambdaM	Membership.mem@Int,Finset@SetLike.instMembership
 Ising2D.checkBigLambda_univ_eq_LambdaM	Real.sinh
 Ising2D.checkBigLambda_univ_eq_LambdaM	Subtype.val
-Ising2D.checkC	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
-Ising2D.checkC_eq_inv	Inv.inv@Complex@Complex.instInv
-Ising2D.checkC_mul	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
-Ising2D.checkC_mul_b	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkC_mul_b	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.checkC_ne_zero	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.checkCols	Fin
@@ -5475,10 +5430,7 @@ Ising2D.checkLambdas	OfNat.ofNat@Nat,1@instOfNatNat
 Ising2D.checkLambdas	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.checkM_ne_zero	Nat.cast@Complex@Complex.instNatCast
 Ising2D.checkM_ne_zero	OfNat.ofNat@Nat,0@instOfNatNat
-Ising2D.checkP	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
-Ising2D.checkPPlus	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkP_mul_checkP_conj	HAdd.hAdd@Int,Int,Int@Int.instAdd
-Ising2D.checkP_mul_checkP_conj	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkP_mul_checkP_conj	HSub.hSub@Int,Int,Int@Int.instSub
 Ising2D.checkP_mul_checkP_conj	Nat.cast@Complex@Complex.instNatCast
 Ising2D.checkP_mul_checkP_conj	Nat.cast@Int@instNatCastInt
@@ -5567,7 +5519,6 @@ Ising2D.checkPhase_zero_left	OfNat.ofNat@Int,0@instOfNat
 Ising2D.checkPmat	DFunLike.coe@Equiv,→,fun@EquivLike.toFunLike
 Ising2D.checkPmat	Equiv
 Ising2D.checkPmat	Fin
-Ising2D.checkPmat	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkPmat	Matrix
 Ising2D.checkPmat	Matrix.of
 Ising2D.checkPmat	Matrix.vecCons
@@ -5595,7 +5546,6 @@ Ising2D.checkPmat_conj	DFunLike.coe@Equiv,→,fun@EquivLike.toFunLike
 Ising2D.checkPmat_conj	Equiv
 Ising2D.checkPmat_conj	Fin
 Ising2D.checkPmat_conj	HAdd.hAdd@Int,Int,Int@Int.instAdd
-Ising2D.checkPmat_conj	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkPmat_conj	HSub.hSub@Int,Int,Int@Int.instSub
 Ising2D.checkPmat_conj	Matrix
 Ising2D.checkPmat_conj	Matrix.of
@@ -5626,7 +5576,6 @@ Ising2D.checkPsiDag_conjTranspose	Nat.cast@Int@instNatCastInt
 Ising2D.checkPsiDag_conjTranspose	OfNat.ofNat@Int,1@instOfNat
 Ising2D.checkPsiDag_conjTranspose	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.checkPsiDag_eq	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
-Ising2D.checkPsiDag_eq	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkPsiDag_eq	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.checkPsiDag_eq_checkPmat_col	Fin
 Ising2D.checkPsiDag_eq_checkPmat_col	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
@@ -5657,7 +5606,6 @@ Ising2D.checkPsi_car'	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.checkPsi_car'	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.checkPsi_car'	ite@Complex,Eq@Int.instDecidableEq
 Ising2D.checkPsi_eq	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
-Ising2D.checkPsi_eq	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkPsi_eq	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.checkPsi_eq_checkPmat_col	Fin
 Ising2D.checkPsi_eq_checkPmat_col	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
@@ -5669,8 +5617,6 @@ Ising2D.checkPsi_eq_neg_checkP	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Isi
 Ising2D.checkPsi_eq_neg_checkP	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.checkPsi_row_eq_rowMul_checkPmat	Prod
 Ising2D.checkPsi_row_eq_rowMul_checkPmat	Prod.mk
-Ising2D.checkQ	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
-Ising2D.checkQ_mul_checkQ	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkQ_mul_checkQ	Nat.cast@Complex@Complex.instNatCast
 Ising2D.checkQ_mul_checkQ	OfNat.ofNat@Complex,4@instOfNatAtLeastTwo
 Ising2D.checkQ_mul_checkQ	OfNat.ofNat@Nat,0@instOfNatNat
@@ -5740,7 +5686,6 @@ Ising2D.checkX	Fin
 Ising2D.checkX	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.checkX	Finset.univ@Fin@Fin.fintype
 Ising2D.checkX	HAdd.hAdd@Int,Int,Int@Int.instAdd
-Ising2D.checkX	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkX	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.checkX	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.checkX	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
@@ -5753,7 +5698,6 @@ Ising2D.checkX	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
 Ising2D.checkX	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.checkX_eq_carHam	Fin
 Ising2D.checkX_eq_carHam	Fin.rev
-Ising2D.checkX_eq_carHam	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.checkX_eq_carHam	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.checkX_mul_Qproj	Fin
 Ising2D.checkX_mul_Qproj	Finset
@@ -5895,8 +5839,6 @@ Ising2D.checkZ_mem_adjoin	Subalgebra@Complex,Ising2D.TensorPow@Complex.instCommS
 Ising2D.checkZ_period	HAdd.hAdd@Int,Int,Int@Int.instAdd
 Ising2D.checkZ_period	Nat.cast@Int@instNatCastInt
 Ising2D.checkZ_period	OfNat.ofNat@Nat,0@instOfNatNat
-Ising2D.check_hermitian_prep_inv_neg_one_mul	Inv.inv@Complex@Complex.instInv
-Ising2D.check_hermitian_prep_neg_one_mul_inv	Inv.inv@Complex@Complex.instInv
 Ising2D.closed_form_of_trace_epsilon_V_plus_pos	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.closed_form_of_trace_epsilon_V_plus_pos	LE.le@Nat@instLENat
 Ising2D.closed_form_of_trace_epsilon_V_plus_pos	OfNat.ofNat@Nat,2@instOfNatNat
@@ -6020,14 +5962,11 @@ Ising2D.commute_xString_of_commute_sigmaX	LE.le@Nat@instLENat
 Ising2D.commute_xString_of_commute_sigmaX	LT.lt@Nat@instLTNat
 Ising2D.commute_xString_of_commute_sigmaX	Matrix
 Ising2D.commute_xString_of_commute_sigmaX	OfNat.ofNat@Nat,2@instOfNatNat
-Ising2D.complex_I_mul_inv_two_mul_I	Inv.inv@Complex@Complex.instInv
-Ising2D.complex_conjugate_mul_complex_conjugate_inv	Inv.inv@Complex@Complex.instInv
 Ising2D.complex_conjugate_of_finite_sum_succ	Fin
 Ising2D.complex_conjugate_of_finite_sum_succ	Finset.sum@Fin,Complex@Complex.instAddCommMonoid
 Ising2D.complex_conjugate_of_finite_sum_succ	Finset.univ@Fin@Fin.fintype
 Ising2D.complex_conjugate_of_finite_sum_succ	HAdd.hAdd@Nat,Nat,Nat@instAddNat
 Ising2D.complex_conjugate_of_finite_sum_succ	OfNat.ofNat@Nat,1@instOfNatNat
-Ising2D.complex_conjugate_of_inverse	Inv.inv@Complex@Complex.instInv
 Ising2D.complex_conjugate_star_finite_prod	Fin
 Ising2D.complex_conjugate_star_finite_prod	Finset.prod@Fin,Complex@CommRing.toCommMonoid
 Ising2D.complex_conjugate_star_finite_prod	Finset.univ@Fin@Fin.fintype
@@ -6047,7 +5986,6 @@ Ising2D.complex_sub_I_mul_mul_add_I_mul	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.complex_sub_I_mul_mul_add_I_mul	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.complex_sub_sq_chain	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.complex_sub_sq_chain	OfNat.ofNat@Nat,2@instOfNatNat
-Ising2D.complex_two_mul_mul_inv_two	Inv.inv@Complex@Complex.instInv
 Ising2D.concatenated_bases_of_direct_sum_form_basis	Fin
 Ising2D.concatenated_bases_of_direct_sum_form_basis	Fin.append
 Ising2D.concatenated_bases_of_direct_sum_form_basis	Fintype
@@ -6187,12 +6125,10 @@ Ising2D.conjugate_bilinear_value_of_real_vector_W	Finset.univ@Ising2D.Conf@Pi.in
 Ising2D.conjugate_bilinear_value_of_real_vector_W	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.constantCW	Fin
 Ising2D.constantCW	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.constantCW	Inv.inv@Complex@Complex.instInv
 Ising2D.constantCW	Inv.inv@Units@Units.instInv
 Ising2D.constantCW	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.constantCW	Units.val@Ising2D.TensorPow@Matrix.semiring
 Ising2D.constantCW	Units@Ising2D.TensorPow@Matrix.semiring
-Ising2D.constant_c_steps_four_five	Inv.inv@Complex@Complex.instInv
 Ising2D.constant_c_value_even_sector	HPow.hPow@Real,Real,Real@Real.instPow
 Ising2D.constant_c_value_even_sector	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.constant_c_value_even_sector	Nat.cast@Real@Real.instNatCast
@@ -6254,14 +6190,12 @@ Ising2D.continuous_sineIntegrand	Real.sin
 Ising2D.continuous_sineIntegrand	Real.sqrt
 Ising2D.continuous_sqrtQfun_fixed	Continuous@Real,Real@Real.pseudoMetricSpace,Real.pseudoMetricSpace
 Ising2D.continuous_sqrtQfun_fixed	Real.sqrt
-Ising2D.conversion_H1Plus_checkY_even	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.conversion_H1Plus_checkY_even	HMul.hMul@Nat,Nat,Nat@instMulNat
 Ising2D.conversion_H1Plus_checkY_even	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.conversion_H1Plus_checkY_even	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.conversion_H1Plus_checkY_even	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.conversion_H1Plus_checkY_even	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.conversion_H1Plus_checkY_odd	HAdd.hAdd@Nat,Nat,Nat@instAddNat
-Ising2D.conversion_H1Plus_checkY_odd	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.conversion_H1Plus_checkY_odd	HMul.hMul@Nat,Nat,Nat@instMulNat
 Ising2D.conversion_H1Plus_checkY_odd	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.conversion_H1Plus_checkY_odd	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
@@ -6270,14 +6204,12 @@ Ising2D.conversion_H1Plus_checkY_odd	OfNat.ofNat@Int,1@instOfNat
 Ising2D.conversion_H1Plus_checkY_odd	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.conversion_H1Plus_checkY_odd	OfNat.ofNat@Nat,1@instOfNatNat
 Ising2D.conversion_H1Plus_checkY_odd	OfNat.ofNat@Nat,2@instOfNatNat
-Ising2D.conversion_H1Plus_checkZ_even	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.conversion_H1Plus_checkZ_even	HMul.hMul@Nat,Nat,Nat@instMulNat
 Ising2D.conversion_H1Plus_checkZ_even	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.conversion_H1Plus_checkZ_even	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.conversion_H1Plus_checkZ_even	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.conversion_H1Plus_checkZ_even	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.conversion_H1Plus_checkZ_odd	HAdd.hAdd@Nat,Nat,Nat@instAddNat
-Ising2D.conversion_H1Plus_checkZ_odd	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.conversion_H1Plus_checkZ_odd	HMul.hMul@Nat,Nat,Nat@instMulNat
 Ising2D.conversion_H1Plus_checkZ_odd	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.conversion_H1Plus_checkZ_odd	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
@@ -6444,7 +6376,6 @@ Ising2D.deriv_kappaK_on	deriv@Real@DenselyNormedField.toNontriviallyNormedField,
 Ising2D.detInv_smul_adjTwo_mul	Fin
 Ising2D.detInv_smul_adjTwo_mul	HMul.hMul@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.detInv_smul_adjTwo_mul	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
-Ising2D.detInv_smul_adjTwo_mul	Inv.inv@Complex@Complex.instInv
 Ising2D.detInv_smul_adjTwo_mul	Matrix
 Ising2D.detInv_smul_adjTwo_mul	Matrix.det@Fin@instDecidableEqFin,Fin.fintype,Complex.commRing
 Ising2D.detInv_smul_adjTwo_mul	OfNat.ofNat@Matrix[Complex],1@One.toOfNat1
@@ -6464,13 +6395,11 @@ Ising2D.det_AMat_thetaTilde_eq_one	Fin
 Ising2D.det_AMat_thetaTilde_eq_one	Matrix.det@Fin@instDecidableEqFin,Fin.fintype,Complex.commRing
 Ising2D.det_AMat_thetaTilde_eq_one	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.det_checkPmat	Fin
-Ising2D.det_checkPmat	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.det_checkPmat	Matrix.det@Fin@instDecidableEqFin,Fin.fintype,Complex.commRing
 Ising2D.det_checkPmat	Nat.cast@Complex@Complex.instNatCast
 Ising2D.det_checkPmat	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.det_checkPmat	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.det_checkPmat_eq_mul_inv	Fin
-Ising2D.det_checkPmat_eq_mul_inv	Inv.inv@Complex@Complex.instInv
 Ising2D.det_checkPmat_eq_mul_inv	Matrix.det@Fin@instDecidableEqFin,Fin.fintype,Complex.commRing
 Ising2D.det_checkPmat_eq_mul_inv	Nat.cast@Complex@Complex.instNatCast
 Ising2D.det_checkPmat_eq_mul_inv	OfNat.ofNat@Nat,0@instOfNatNat
@@ -6740,13 +6669,11 @@ Ising2D.endpoint_mul_exp_openChainEnergy_eq_prod	Real.exp
 Ising2D.endpoint_mul_exp_openChainEnergy_eq_prod	Subtype.val
 Ising2D.epsProj	Fin
 Ising2D.epsProj	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
-Ising2D.epsProj	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.epsProj	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.epsProj	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
 Ising2D.epsProj	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.epsProjPlus	Fin
 Ising2D.epsProjPlus	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
-Ising2D.epsProjPlus	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.epsProjPlus	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.epsProjPlus	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
 Ising2D.epsProjPlus	OfNat.ofNat@Nat,2@instOfNatNat
@@ -7199,10 +7126,8 @@ Ising2D.eta_smul_epsilon_sq	Matrix
 Ising2D.eta_smul_epsilon_sq	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
 Ising2D.eta_smul_epsilon_sq	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.euler_cos_real_inclusion	Complex.exp
-Ising2D.euler_cos_real_inclusion	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.euler_cos_real_inclusion	Real.cos
 Ising2D.euler_sin_real_inclusion	Complex.exp
-Ising2D.euler_sin_real_inclusion	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.euler_sin_real_inclusion	Real.sin
 Ising2D.evenEigenspace	AddSubmonoid.mk@→@AddMonoid.toAddZeroClass
 Ising2D.evenEigenspace	AddSubsemigroup.mk@→@AddMonoid.toAddZeroClass
@@ -7476,7 +7401,6 @@ Ising2D.exists_smul_of_TConj_eq	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.exists_smul_of_TConj_eq	Units.val@Ising2D.TensorPow@Matrix.semiring
 Ising2D.exists_smul_of_TConj_eq	Units@Ising2D.TensorPow@Matrix.semiring
 Ising2D.expHalfS1plus_mul_expNegHalfS1plus	Fin
-Ising2D.expHalfS1plus_mul_expNegHalfS1plus	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.expHalfS1plus_mul_expNegHalfS1plus	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.expHalfS1plus_mul_expNegHalfS1plus	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.expHalfS1plus_mul_expNegHalfS1plus	Matrix
@@ -7484,7 +7408,6 @@ Ising2D.expHalfS1plus_mul_expNegHalfS1plus	Neg.neg@Ising2D.TensorPow@Matrix.neg
 Ising2D.expHalfS1plus_mul_expNegHalfS1plus	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
 Ising2D.expHalfS1plus_mul_expNegHalfS1plus	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.expNegHalfS1plus_mul_expHalfS1plus	Fin
-Ising2D.expNegHalfS1plus_mul_expHalfS1plus	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.expNegHalfS1plus_mul_expHalfS1plus	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.expNegHalfS1plus_mul_expHalfS1plus	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.expNegHalfS1plus_mul_expHalfS1plus	Matrix
@@ -7504,7 +7427,6 @@ Ising2D.expPartialSum	Finset.sum@Nat,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.expPartialSum	HAdd.hAdd@Nat,Nat,Nat@instAddNat
 Ising2D.expPartialSum	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow
 Ising2D.expPartialSum	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.expPartialSum	Inv.inv@Complex@Complex.instInv
 Ising2D.expPartialSum	Nat.cast@Complex@Complex.instNatCast
 Ising2D.expPartialSum	Nat.factorial
 Ising2D.expPartialSum	OfNat.ofNat@Nat,1@instOfNatNat
@@ -7527,7 +7449,6 @@ Ising2D.expPartialSum_apply	Finset.range
 Ising2D.expPartialSum_apply	Finset.sum@Nat,Complex@Complex.instAddCommMonoid
 Ising2D.expPartialSum_apply	HAdd.hAdd@Nat,Nat,Nat@instAddNat
 Ising2D.expPartialSum_apply	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow
-Ising2D.expPartialSum_apply	Inv.inv@Complex@Complex.instInv
 Ising2D.expPartialSum_apply	Nat.cast@Complex@Complex.instNatCast
 Ising2D.expPartialSum_apply	Nat.factorial
 Ising2D.expPartialSum_apply	OfNat.ofNat@Nat,1@instOfNatNat
@@ -7541,7 +7462,6 @@ Ising2D.expPartialSum_transpose	Matrix.transpose
 Ising2D.expPartialSum_transpose_apply	Matrix
 Ising2D.expPartialSum_transpose_apply	Matrix.transpose
 Ising2D.expPhase	Complex.exp
-Ising2D.expPhase	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.expPhase	Int.cast@Complex@Complex.instIntCast
 Ising2D.expPhase	Nat.cast@Complex@Complex.instNatCast
 Ising2D.expPhase	Real.pi
@@ -7551,7 +7471,6 @@ Ising2D.expPhase_eq_one_iff	Dvd.dvd@Int@Int.instDvd
 Ising2D.expPhase_eq_one_iff	Nat.cast@Int@instNatCastInt
 Ising2D.expPhase_eq_one_iff	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.expPhase_eq_zpow	Complex.exp
-Ising2D.expPhase_eq_zpow	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.expPhase_eq_zpow	HPow.hPow@Complex,Int,Complex@ZPow.toPow
 Ising2D.expPhase_eq_zpow	Nat.cast@Complex@Complex.instNatCast
 Ising2D.expPhase_eq_zpow	Neg.neg@Int@Int.instNegInt
@@ -7559,7 +7478,6 @@ Ising2D.expPhase_eq_zpow	Real.pi
 Ising2D.expPhase_natCast_mul	HMul.hMul@Int,Int,Int@Int.instMul
 Ising2D.expPhase_natCast_mul	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.expPhase_natCast_mul	Nat.cast@Int@instNatCastInt
-Ising2D.expPhase_neg	Inv.inv@Complex@Complex.instInv
 Ising2D.expPhase_neg	Neg.neg@Int@Int.instNegInt
 Ising2D.expPhase_sum	Fin
 Ising2D.expPhase_sum	Fin.val
@@ -7688,7 +7606,6 @@ Ising2D.exp_smul_pauliX_hasSum	Fin
 Ising2D.exp_smul_pauliX_hasSum	HPow.hPow@Matrix[Complex],Nat,Matrix[Complex]@NPow.toPow
 Ising2D.exp_smul_pauliX_hasSum	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.exp_smul_pauliX_hasSum	HasSum@Matrix[Complex],Nat@Matrix.addCommMonoid,instTopologicalSpaceMatrix
-Ising2D.exp_smul_pauliX_hasSum	Inv.inv@Complex@Complex.instInv
 Ising2D.exp_smul_pauliX_hasSum	Matrix
 Ising2D.exp_smul_pauliX_hasSum	Nat.cast@Complex@Complex.instNatCast
 Ising2D.exp_smul_pauliX_hasSum	Nat.factorial
@@ -7773,10 +7690,8 @@ Ising2D.extract_taylor_H1Plus_checkY	Filter.Tendsto
 Ising2D.extract_taylor_H1Plus_checkY	Filter.atTop@Nat@Nat.instPreorder
 Ising2D.extract_taylor_H1Plus_checkY	Fin
 Ising2D.extract_taylor_H1Plus_checkY	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
-Ising2D.extract_taylor_H1Plus_checkY	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.extract_taylor_H1Plus_checkY	HPow.hPow@Nat,Nat,Nat@NPow.toPow
 Ising2D.extract_taylor_H1Plus_checkY	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.extract_taylor_H1Plus_checkY	Inv.inv@Complex@Complex.instInv
 Ising2D.extract_taylor_H1Plus_checkY	Matrix
 Ising2D.extract_taylor_H1Plus_checkY	Nat.cast@Complex@Complex.instNatCast
 Ising2D.extract_taylor_H1Plus_checkY	Nat.factorial
@@ -7795,10 +7710,8 @@ Ising2D.extract_taylor_H1Plus_checkZ	Filter.Tendsto
 Ising2D.extract_taylor_H1Plus_checkZ	Filter.atTop@Nat@Nat.instPreorder
 Ising2D.extract_taylor_H1Plus_checkZ	Fin
 Ising2D.extract_taylor_H1Plus_checkZ	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
-Ising2D.extract_taylor_H1Plus_checkZ	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.extract_taylor_H1Plus_checkZ	HPow.hPow@Nat,Nat,Nat@NPow.toPow
 Ising2D.extract_taylor_H1Plus_checkZ	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.extract_taylor_H1Plus_checkZ	Inv.inv@Complex@Complex.instInv
 Ising2D.extract_taylor_H1Plus_checkZ	Matrix
 Ising2D.extract_taylor_H1Plus_checkZ	Nat.cast@Complex@Complex.instNatCast
 Ising2D.extract_taylor_H1Plus_checkZ	Nat.factorial
@@ -7818,7 +7731,6 @@ Ising2D.extract_taylor_H2_checkY	Fin
 Ising2D.extract_taylor_H2_checkY	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
 Ising2D.extract_taylor_H2_checkY	HPow.hPow@Nat,Nat,Nat@NPow.toPow
 Ising2D.extract_taylor_H2_checkY	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.extract_taylor_H2_checkY	Inv.inv@Complex@Complex.instInv
 Ising2D.extract_taylor_H2_checkY	Matrix
 Ising2D.extract_taylor_H2_checkY	Nat.cast@Complex@Complex.instNatCast
 Ising2D.extract_taylor_H2_checkY	Nat.factorial
@@ -7836,7 +7748,6 @@ Ising2D.extract_taylor_H2_checkZ	Fin
 Ising2D.extract_taylor_H2_checkZ	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
 Ising2D.extract_taylor_H2_checkZ	HPow.hPow@Nat,Nat,Nat@NPow.toPow
 Ising2D.extract_taylor_H2_checkZ	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.extract_taylor_H2_checkZ	Inv.inv@Complex@Complex.instInv
 Ising2D.extract_taylor_H2_checkZ	Matrix
 Ising2D.extract_taylor_H2_checkZ	Nat.cast@Complex@Complex.instNatCast
 Ising2D.extract_taylor_H2_checkZ	Nat.factorial
@@ -8651,8 +8562,6 @@ Ising2D.halfK1SmulD	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.halfK1SmulD_eq_diagonal	Fin
 Ising2D.halfK1SmulD_eq_diagonal	Matrix.diagonal@Ising2D.Conf,Complex@?,Complex.instZero
 Ising2D.halfK1SmulD_eq_diagonal	OfNat.ofNat@Nat,2@instOfNatNat
-Ising2D.halfS1plus_coeff_eq	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
-Ising2D.halfS1plus_isRealSymmetric	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.halfS1plus_isRealSymmetric	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.halfSign	Fin
 Ising2D.halfSign	OfNat.ofNat@Fin,1@Fin.instOfNat
@@ -8674,11 +8583,8 @@ Ising2D.halfSign_sub_zero_nonneg	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.halfSign_zero	Fin
 Ising2D.halfSign_zero	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.halfSign_zero	OfNat.ofNat@Nat,2@instOfNatNat
-Ising2D.half_I_pow	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.half_I_pow	HPow.hPow@Complex,Nat,Complex@NPow.toPow
-Ising2D.half_I_pow	Inv.inv@Complex@Complex.instInv
 Ising2D.half_smul_add_half_smul	HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add
-Ising2D.half_smul_add_half_smul	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.half_smul_add_half_smul	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.hasDerivAt_Gfirst	HasDerivAt@Real@DenselyNormedField.toNontriviallyNormedField,Real.instAddCommGroup,Semiring.toModule,Real.pseudoMetricSpace,IsModuleTopology.toContinuousSMul
 Ising2D.hasDerivAt_Gfun	HasDerivAt@Real@DenselyNormedField.toNontriviallyNormedField,Real.instAddCommGroup,Semiring.toModule,Real.pseudoMetricSpace,IsModuleTopology.toContinuousSMul
@@ -8727,7 +8633,6 @@ Ising2D.hasSum_matExp_conj	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[
 Ising2D.hasSum_matExp_conj	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.hasSum_matExp_conj	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.hasSum_matExp_conj	HasSum@Ising2D.TensorPow,Nat@Matrix.addCommMonoid,instTopologicalSpaceMatrix
-Ising2D.hasSum_matExp_conj	Inv.inv@Complex@Complex.instInv
 Ising2D.hasSum_matExp_conj	Matrix
 Ising2D.hasSum_matExp_conj	Nat.cast@Complex@Complex.instNatCast
 Ising2D.hasSum_matExp_conj	Nat.factorial
@@ -8739,7 +8644,6 @@ Ising2D.hasSum_matExp_conj_aux	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Mat
 Ising2D.hasSum_matExp_conj_aux	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.hasSum_matExp_conj_aux	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.hasSum_matExp_conj_aux	HasSum@Ising2D.TensorPow,Nat@Matrix.addCommMonoid,instTopologicalSpaceMatrix
-Ising2D.hasSum_matExp_conj_aux	Inv.inv@Complex@Complex.instInv
 Ising2D.hasSum_matExp_conj_aux	Matrix
 Ising2D.hasSum_matExp_conj_aux	Nat.cast@Complex@Complex.instNatCast
 Ising2D.hasSum_matExp_conj_aux	Nat.factorial
@@ -9113,7 +9017,6 @@ Ising2D.instFintypeSpinVal	Fintype.subtype
 Ising2D.instFintypeSpinVal	Insert.insert@Real,Finset@Finset.instInsert
 Ising2D.instFintypeSpinVal	Singleton.singleton@Real,Finset@Finset.instSingleton
 Ising2D.instInvertibleTwoTensorPow	Fin
-Ising2D.instInvertibleTwoTensorPow	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.instInvertibleTwoTensorPow	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.instInvertibleTwoTensorPow	Invertible.mk@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid,Matrix.one
 Ising2D.instInvertibleTwoTensorPow	Invertible@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid,Matrix.one
@@ -9160,14 +9063,12 @@ Ising2D.interior_Dnbhd	Set
 Ising2D.interior_Dnbhd	Set.Ioo@Real@Real.instPreorder
 Ising2D.interior_Dnbhd	interior@Real@Real.pseudoMetricSpace
 Ising2D.invOf_two_endConf_apply	DFunLike.coe@Module.End,→,fun@LinearMap.instFunLike
-Ising2D.invOf_two_endConf_apply	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.invOf_two_endConf_apply	HSMul.hSMul@Complex,→,→@Function.hasSMul
 Ising2D.invOf_two_endConf_apply	Invertible.invOf@Module.End,Module.End.instMul,Module.End.instOne,OfNat.ofNat@Ising2D.invertibleTwoEndConf
 Ising2D.invOf_two_endConf_apply	Module.End@Complex,→@Complex.instSemiring,Pi.addCommMonoid,Pi.Function.module
 Ising2D.invOf_two_endConf_apply	OfNat.ofNat@Module.End,2@instOfNatAtLeastTwo
 Ising2D.invOf_two_endConf_apply	RingHom.id@Complex@Semiring.toNonAssocSemiring
 Ising2D.invOf_two_tensorPow	Fin
-Ising2D.invOf_two_tensorPow	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.invOf_two_tensorPow	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.invOf_two_tensorPow	Invertible.invOf@Ising2D.TensorPow,Matrix.instMulOfFintypeOfAddCommMonoid,Matrix.one,OfNat.ofNat@Ising2D.instInvertibleTwoTensorPow
 Ising2D.invOf_two_tensorPow	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
@@ -9182,7 +9083,6 @@ Ising2D.inv_M_log_LambdaM	Real.log
 Ising2D.inv_M_log_LambdaM	Real.sinh
 Ising2D.inv_eq_detInv_smul_adjTwo	Fin
 Ising2D.inv_eq_detInv_smul_adjTwo	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
-Ising2D.inv_eq_detInv_smul_adjTwo	Inv.inv@Complex@Complex.instInv
 Ising2D.inv_eq_detInv_smul_adjTwo	Inv.inv@Matrix[Complex]@Matrix.inv
 Ising2D.inv_eq_detInv_smul_adjTwo	Matrix
 Ising2D.inv_eq_detInv_smul_adjTwo	Matrix.det@Fin@instDecidableEqFin,Fin.fintype,Complex.commRing
@@ -9406,7 +9306,6 @@ Ising2D.jw_sq	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.instSemir
 Ising2D.jw_sq	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
 Ising2D.jw_sq	OfNat.ofNat@Matrix[Complex],1@One.toOfNat1
 Ising2D.jw_sq	OfNat.ofNat@Nat,2@instOfNatNat
-Ising2D.kappa0	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.kappaDeriv	Real.sinh
 Ising2D.kappaDerivSq	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.kappaDerivSq	OfNat.ofNat@Nat,2@instOfNatNat
@@ -9420,9 +9319,6 @@ Ising2D.kappaSecond	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.kappaSecond	OfNat.ofNat@Real,4@instOfNatAtLeastTwo
 Ising2D.kappaSecond	Real.cosh
 Ising2D.kappaSecond	Real.sinh
-Ising2D.kappaX	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
-Ising2D.kappaY	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
-Ising2D.kappaZ	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.kernel_of_matrix_is_subspace	Fin
 Ising2D.kernel_of_matrix_is_subspace	Fintype
 Ising2D.kernel_of_matrix_is_subspace	HMul.hMul@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
@@ -9880,7 +9776,6 @@ Ising2D.matExpUnits_conj_eq_tsum	Fin
 Ising2D.matExpUnits_conj_eq_tsum	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.matExpUnits_conj_eq_tsum	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.matExpUnits_conj_eq_tsum	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.matExpUnits_conj_eq_tsum	Inv.inv@Complex@Complex.instInv
 Ising2D.matExpUnits_conj_eq_tsum	Inv.inv@Units@Units.instInv
 Ising2D.matExpUnits_conj_eq_tsum	Matrix
 Ising2D.matExpUnits_conj_eq_tsum	Nat.cast@Complex@Complex.instNatCast
@@ -9924,7 +9819,6 @@ Ising2D.matExp_conj_eq_tsum	Fin
 Ising2D.matExp_conj_eq_tsum	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.matExp_conj_eq_tsum	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.matExp_conj_eq_tsum	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.matExp_conj_eq_tsum	Inv.inv@Complex@Complex.instInv
 Ising2D.matExp_conj_eq_tsum	Matrix
 Ising2D.matExp_conj_eq_tsum	Nat.cast@Complex@Complex.instNatCast
 Ising2D.matExp_conj_eq_tsum	Nat.factorial
@@ -9983,7 +9877,6 @@ Ising2D.matExp_diagonal	Fin
 Ising2D.matExp_diagonal	Matrix.diagonal@Ising2D.Conf,Complex@?,Complex.instZero
 Ising2D.matExp_diagonal	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.matExp_half_mul_matExp_half	Fin
-Ising2D.matExp_half_mul_matExp_half	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.matExp_half_mul_matExp_half	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.matExp_half_mul_matExp_half	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.matExp_half_mul_matExp_half	Matrix
@@ -9992,7 +9885,6 @@ Ising2D.matExp_hasSum	Fin
 Ising2D.matExp_hasSum	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow
 Ising2D.matExp_hasSum	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.matExp_hasSum	HasSum@Ising2D.TensorPow,Nat@Matrix.addCommMonoid,instTopologicalSpaceMatrix
-Ising2D.matExp_hasSum	Inv.inv@Complex@Complex.instInv
 Ising2D.matExp_hasSum	Nat.cast@Complex@Complex.instNatCast
 Ising2D.matExp_hasSum	Nat.factorial
 Ising2D.matExp_hasSum	OfNat.ofNat@Nat,2@instOfNatNat
@@ -10009,7 +9901,6 @@ Ising2D.matExp_mul_matExp_neg_eq_one	Neg.neg@Ising2D.TensorPow@Matrix.neg
 Ising2D.matExp_mul_matExp_neg_eq_one	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
 Ising2D.matExp_mul_matExp_neg_eq_one	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.matExp_neg_half_mul_matExp_neg_half	Fin
-Ising2D.matExp_neg_half_mul_matExp_neg_half	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.matExp_neg_half_mul_matExp_neg_half	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.matExp_neg_half_mul_matExp_neg_half	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.matExp_neg_half_mul_matExp_neg_half	Matrix
@@ -10481,7 +10372,6 @@ Ising2D.matrix_transpose_tendsto	Norm.norm@Matrix[Complex]@Matrix.frobeniusNorme
 Ising2D.matrix_transpose_tendsto	nhds@Real@Real.pseudoMetricSpace
 Ising2D.matrix_two_decomp	Fin
 Ising2D.matrix_two_decomp	HAdd.hAdd@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.add
-Ising2D.matrix_two_decomp	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.matrix_two_decomp	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.matrix_two_decomp	Matrix
 Ising2D.matrix_two_decomp	OfNat.ofNat@Fin,0@Fin.instOfNat
@@ -10844,7 +10734,6 @@ Ising2D.mul_binaryWordMatrixSum	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.mul_detInv_smul_adjTwo	Fin
 Ising2D.mul_detInv_smul_adjTwo	HMul.hMul@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.mul_detInv_smul_adjTwo	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
-Ising2D.mul_detInv_smul_adjTwo	Inv.inv@Complex@Complex.instInv
 Ising2D.mul_detInv_smul_adjTwo	Matrix
 Ising2D.mul_detInv_smul_adjTwo	Matrix.det@Fin@instDecidableEqFin,Fin.fintype,Complex.commRing
 Ising2D.mul_detInv_smul_adjTwo	OfNat.ofNat@Matrix[Complex],1@One.toOfNat1
@@ -12549,8 +12438,6 @@ Ising2D.real_inclusion_cos_add_I_mul_sin	Complex.exp
 Ising2D.real_inclusion_cos_add_I_mul_sin	Real.cos
 Ising2D.real_inclusion_cos_add_I_mul_sin	Real.sin
 Ising2D.real_inclusion_cos_neg	Real.cos
-Ising2D.real_inclusion_half_eq_inv_two	Inv.inv@Complex@Complex.instInv
-Ising2D.real_inclusion_inv	Inv.inv@Complex@Complex.instInv
 Ising2D.real_inclusion_of_finite_sum_finset	Finset
 Ising2D.real_inclusion_of_finite_sum_finset	Finset.sum@?,Complex@Complex.instAddCommMonoid
 Ising2D.real_inclusion_of_finite_sum_finset	Finset.sum@?,Real@Real.instAddCommMonoid
@@ -13760,7 +13647,6 @@ Ising2D.skipIndex_reaches_every_other_index	OfNat.ofNat@Nat,1@instOfNatNat
 Ising2D.skipIndex_reaches_every_other_index	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.smulUnits	Fin
 Ising2D.smulUnits	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.smulUnits	Inv.inv@Complex@Complex.instInv
 Ising2D.smulUnits	Inv.inv@Units@Units.instInv
 Ising2D.smulUnits	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.smulUnits	Units.mk@Ising2D.TensorPow@Matrix.semiring
@@ -13780,7 +13666,6 @@ Ising2D.smul_conj_smul_inv_eq	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matr
 Ising2D.smul_conj_smul_inv_eq	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.smul_conj_smul_inv_eq	HPow.hPow@Real,Real,Real@Real.instPow
 Ising2D.smul_conj_smul_inv_eq	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.smul_conj_smul_inv_eq	Inv.inv@Complex@Complex.instInv
 Ising2D.smul_conj_smul_inv_eq	Matrix
 Ising2D.smul_conj_smul_inv_eq	Nat.cast@Real@Real.instNatCast
 Ising2D.smul_conj_smul_inv_eq	Neg.neg@Ising2D.TensorPow@Matrix.neg
@@ -14044,7 +13929,6 @@ Ising2D.star_gamma2_neg_thetaTilde	OfNat.ofNat@Nat,0@instOfNatNat
 Ising2D.star_identity_entry_tensorPow	Fin
 Ising2D.star_identity_entry_tensorPow	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.star_identity_entry_tensorPow	ite@Complex,Eq@Fintype.decidablePiFintype
-Ising2D.star_inv_factorial	Inv.inv@Complex@Complex.instInv
 Ising2D.star_inv_factorial	Nat.cast@Complex@Complex.instNatCast
 Ising2D.star_inv_factorial	Nat.factorial
 Ising2D.star_kroneckerDelta	Fin
@@ -14320,7 +14204,6 @@ Ising2D.symmetrized_pow_succ	OfNat.ofNat@Nat,1@instOfNatNat
 Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form	Complex.ofRealHom
 Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form	DFunLike.coe@RingHom,Real,fun@RingHom.instFunLike
 Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form	Fin
-Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form	HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid
 Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form	HPow.hPow@Real,Real,Real@Real.instPow
@@ -14540,7 +14423,6 @@ Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum	Fin
 Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum	HPow.hPow@Nat,Nat,Nat@NPow.toPow
 Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum	HasSum@Ising2D.TensorPow,Nat@Matrix.addCommMonoid,instTopologicalSpaceMatrix
-Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum	Inv.inv@Complex@Complex.instInv
 Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum	Matrix
 Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum	Nat.cast@Complex@Complex.instNatCast
 Ising2D.toFinPow_eq_evenOddSeriesSum_of_hasSum	Nat.factorial
@@ -14583,7 +14465,6 @@ Ising2D.toMatrixAlgHom_tprod	PiTensorProduct.tprod@Fin,Complex@Complex.instCommS
 Ising2D.toMatrixAlgHom_tprod	PiTensorProduct@Fin,Complex@Complex.instCommSemiring,?,?
 Ising2D.trace_VPlusInv_eq_cinv_mul	Fin
 Ising2D.trace_VPlusInv_eq_cinv_mul	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.trace_VPlusInv_eq_cinv_mul	Inv.inv@Complex@Complex.instInv
 Ising2D.trace_VPlusInv_eq_cinv_mul	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid
 Ising2D.trace_VPlusInv_eq_cinv_mul	OfNat.ofNat@Nat,2@instOfNatNat
 Ising2D.trace_VPlusInv_eq_tauPlusPrime	Fin
@@ -14951,11 +14832,9 @@ Ising2D.two_cosh_pos	Real.cosh
 Ising2D.two_pi_mul_Gsecond	Real.cosh
 Ising2D.two_pi_mul_Gsecond	Real.pi
 Ising2D.two_pow_inv_mul	HPow.hPow@Complex,Nat,Complex@NPow.toPow
-Ising2D.two_pow_inv_mul	Inv.inv@Complex@Complex.instInv
 Ising2D.two_sided_inverse_of_two_by_two	Fin
 Ising2D.two_sided_inverse_of_two_by_two	HMul.hMul@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.two_sided_inverse_of_two_by_two	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
-Ising2D.two_sided_inverse_of_two_by_two	Inv.inv@Complex@Complex.instInv
 Ising2D.two_sided_inverse_of_two_by_two	Matrix
 Ising2D.two_sided_inverse_of_two_by_two	Matrix.det@Fin@instDecidableEqFin,Fin.fintype,Complex.commRing
 Ising2D.two_sided_inverse_of_two_by_two	OfNat.ofNat@Matrix[Complex],1@One.toOfNat1

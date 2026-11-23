@@ -15,9 +15,9 @@
   `multiply_by_minus_one`（`-z := (-1_ℂ) z`）は mathlib の `neg_one_mul` を右辺から左辺へ当てて受ける
   （Lean の `ℂ` の差と符号反転は mathlib の定義なので、人手の定義の式はこの 2 つの等式で読む。ほかのファイルと同じ）。
   `complex_numbers_form_a_field` の各公理は mathlib の `add_mul`・`mul_assoc`・`mul_comm`・`one_mul` を 1 段に 1 つずつ当てる。
-- 人手 `def_complex_quotient`（`z/w := zw^{-1}`）は mathlib の `div_eq_mul_inv`、`multiplicative_group_of_cc` の逆元
-  `2_ℂ^{-1}2_ℂ = 1_ℂ`（主鎖の 2 行目）は `inv_mul_cancel₀` で受ける（Lean の `ℂ` の商と逆元は mathlib の定義なので、
-  人手の定義の式はこの等式で読む）。前置きの `2_ℂ ∈ ℂ^×` は、人手 `i_times_inverse_of_two_i_is_inverse_of_two_in_cc` の主張の前置きの
+- 人手 `def_complex_quotient`（`z/w := zw^{-1}`）は具体版 `complex_div_eq_mul_inv`（`DefinitionComplexQuotient.lean`。分母が 0 でない根拠を渡す）、
+  `multiplicative_group_of_cc` の逆元 `2_ℂ^{-1}2_ℂ = 1_ℂ`（主鎖の 2 行目）は `def_complex_inverse` の具体版 `complex_inv_mul_cancel`
+  （`DefinitionComplexInverse.lean`）で受ける。前置きの `2_ℂ ∈ ℂ^×` は、人手 `i_times_inverse_of_two_i_is_inverse_of_two_in_cc` の主張の前置きの
   具体版 `complex_two_ne_zero_by_re`（`ClaimITimesInverseOfTwoIIsInverseOfTwoInCC.lean`）である。前置きの `i, 2_ℂi ∈ ℂ^×` は
   主鎖の商 `(a-b)/(2_ℂi)` が定まることのためで、Lean の段では `complex_I_mul_inv_two_mul_I` の中で使う。
 - 主鎖の 17 行目が右辺から左辺へ引く人手 `i_times_inverse_of_two_i_is_inverse_of_two_in_cc`（`i(2_ℂi)^{-1} = 2_ℂ^{-1}`）は、
@@ -29,6 +29,8 @@
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimEulerFormulaCosSin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimSumPlusAndMinusDifferenceInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimITimesInverseOfTwoIIsInverseOfTwoInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexQuotient
 
 namespace Ising2D
 
@@ -40,17 +42,17 @@ theorem exp_neg_I_mul_real_eq_cos_sub_I_mul_sin (θ : ℝ) :
   calc b
       = 1 * b := (one_mul b).symm
                                                   -- 1 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
-    _ = ((2 : ℂ)⁻¹ * 2) * b := by rw [inv_mul_cancel₀ complex_two_ne_zero_by_re]
+    _ = ((2 : ℂ)⁻¹ * 2) * b := by rw [complex_inv_mul_cancel 2 complex_two_ne_zero_by_re]
                                                   -- 2 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）を右辺から左辺へ
     _ = (2 : ℂ)⁻¹ * (2 * b) := mul_assoc _ _ _
                                                   -- 3 行目: `complex_numbers_form_a_field` の積の結合律
     _ = (2 * b) * (2 : ℂ)⁻¹ := mul_comm _ _
                                                   -- 4 行目: `complex_numbers_form_a_field` の積の可換律
-    _ = (2 * b) / 2 := (div_eq_mul_inv _ _).symm
+    _ = (2 * b) / 2 := (complex_div_eq_mul_inv _ _ complex_two_ne_zero_by_re).symm
                                                   -- 5 行目: `def_complex_quotient`（`z → 2_ℂb`, `w → 2_ℂ`）を右辺から左辺へ
     _ = ((a + b) - (a - b)) / 2 := by rw [complex_sum_sub_difference a b]
                                                   -- 6 行目: `sum_minus_difference_is_twice_second_in_cc` を右辺から左辺へ
-    _ = ((a + b) - (a - b)) * (2 : ℂ)⁻¹ := div_eq_mul_inv _ _
+    _ = ((a + b) - (a - b)) * (2 : ℂ)⁻¹ := complex_div_eq_mul_inv _ _ complex_two_ne_zero_by_re
                                                   -- 7 行目: `def_complex_quotient`（`z → (a+b)-(a-b)`, `w → 2_ℂ`）
     _ = ((a + b) + (-(a - b))) * (2 : ℂ)⁻¹ := by rw [sub_eq_add_neg (a + b) (a - b)]
                                                   -- 8 行目: `def_complex_difference`（`z → a+b`, `w → a-b`）
@@ -64,11 +66,14 @@ theorem exp_neg_I_mul_real_eq_cos_sub_I_mul_sin (θ : ℝ) :
                                                   -- 12 行目: `multiply_by_minus_one`（`z → (a-b)2_ℂ^{-1}`）を右辺から左辺へ
     _ = (a + b) * (2 : ℂ)⁻¹ - (a - b) * (2 : ℂ)⁻¹ := (sub_eq_add_neg _ _).symm
                                                   -- 13 行目: `def_complex_difference` を右辺から左辺へ
-    _ = (a + b) / 2 - (a - b) / 2 := by rw [div_eq_mul_inv (a + b), div_eq_mul_inv (a - b)]
+    _ = (a + b) / 2 - (a - b) / 2 := by
+        rw [complex_div_eq_mul_inv (a + b) 2 complex_two_ne_zero_by_re,
+          complex_div_eq_mul_inv (a - b) 2 complex_two_ne_zero_by_re]
                                                   -- 14 行目: `def_complex_quotient` を 2 か所へ右辺から左辺へ
     _ = ((Real.cos θ : ℝ) : ℂ) - (a - b) / 2 := by rw [euler_cos_real_inclusion θ]
                                                   -- 15 行目: `euler_formula_cos_sin` の第 1 の等式を右辺から左辺へ
-    _ = ((Real.cos θ : ℝ) : ℂ) - (a - b) * (2 : ℂ)⁻¹ := by rw [div_eq_mul_inv (a - b)]
+    _ = ((Real.cos θ : ℝ) : ℂ) - (a - b) * (2 : ℂ)⁻¹ := by
+        rw [complex_div_eq_mul_inv (a - b) 2 complex_two_ne_zero_by_re]
                                                   -- 16 行目: `def_complex_quotient`（`z → a-b`, `w → 2_ℂ`）
     _ = ((Real.cos θ : ℝ) : ℂ) - (a - b) * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹) := by
         rw [complex_I_mul_inv_two_mul_I]   -- 17 行目: `i_times_inverse_of_two_i_is_inverse_of_two_in_cc` を右辺から左辺へ
@@ -79,7 +84,7 @@ theorem exp_neg_I_mul_real_eq_cos_sub_I_mul_sin (θ : ℝ) :
     _ = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((a - b) * ((2 : ℂ) * Complex.I)⁻¹) := by
         rw [mul_assoc Complex.I (a - b)]          -- 20 行目: `complex_numbers_form_a_field` の積の結合律
     _ = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((a - b) / (2 * Complex.I)) := by
-        rw [div_eq_mul_inv (a - b)]               -- 21 行目: `def_complex_quotient`（`z → a-b`, `w → 2_ℂi`）を右辺から左辺へ
+        rw [complex_div_eq_mul_inv (a - b) (2 * Complex.I) complex_two_mul_I_ne_zero] -- 21 行目: `def_complex_quotient`（`z → a-b`, `w → 2_ℂi`）を右辺から左辺へ
     _ = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
         rw [euler_sin_real_inclusion θ]           -- 22 行目: `euler_formula_cos_sin` の第 2 の等式を右辺から左辺へ
 

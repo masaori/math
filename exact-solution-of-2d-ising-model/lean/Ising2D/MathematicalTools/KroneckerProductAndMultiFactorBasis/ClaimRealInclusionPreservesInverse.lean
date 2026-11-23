@@ -13,7 +13,7 @@
 
 - 人手の `r_ℂ` は Lean の `((r : ℝ) : ℂ)`、`(r_ℂ)^{-1}` は `((r : ℝ) : ℂ)⁻¹`（`multiplicative_group_of_cc` の逆元。Lean では
   mathlib の `ℂ` の体の構造の逆元）、`r^{-1}` は ℝ の逆数 `r⁻¹` である。
-- 2 段目の逆元は `mul_inv_cancel₀` で、その仮定 `r_ℂ ≠ 0_ℂ` は人手の準備に当たる。5 段目の `r^{-1}r = 1` は ℝ の `inv_mul_cancel₀`。
+- 2 段目の逆元は `def_complex_inverse` の具体版 `complex_mul_inv_cancel` で、その仮定 `r_ℂ ≠ 0_ℂ` は人手の準備に当たる。5 段目の `r^{-1}r = 1` は ℝ の `inv_mul_cancel₀`。
 
 `real_inclusion_half_eq_inv_two`（`ClaimRealInclusionOfOneHalfIsInverseOfTwo.lean`）と同じ鎖を一般の `r ≠ 0` で書いたもの。
 calc が実際に使うのは、終域の積の結合律と単位元、終域での `r_ℂ` の右逆元、包含が積と `1` を保つこと、
@@ -22,6 +22,7 @@ calc が実際に使うのは、終域の積の結合律と単位元、終域で
 この鎖の 7 段以外に効いている構造を示さない（効いている性質は上に挙げたとおりである）。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
 
 namespace Ising2D
 
@@ -37,7 +38,7 @@ theorem real_inclusion_inv {r : ℝ} (hr : r ≠ 0) : ((r⁻¹ : ℝ) : ℂ) = (
   calc ((r⁻¹ : ℝ) : ℂ)
       = ((r⁻¹ : ℝ) : ℂ) * 1 := (mul_one _).symm                              -- 積の単位元
     _ = ((r⁻¹ : ℝ) : ℂ) * (((r : ℝ) : ℂ) * ((r : ℝ) : ℂ)⁻¹) := by
-        rw [mul_inv_cancel₀ (real_inclusion_ne_zero hr)]                     -- `(r_ℂ)^{-1}` は `r_ℂ` の逆元
+        rw [complex_mul_inv_cancel _ (real_inclusion_ne_zero hr)] -- `(r_ℂ)^{-1}` は `r_ℂ` の逆元
     _ = (((r⁻¹ : ℝ) : ℂ) * ((r : ℝ) : ℂ)) * ((r : ℝ) : ℂ)⁻¹ :=
         (mul_assoc _ _ _).symm                                               -- 積の結合律
     _ = ((r⁻¹ * r : ℝ) : ℂ) * ((r : ℝ) : ℂ)⁻¹ := by

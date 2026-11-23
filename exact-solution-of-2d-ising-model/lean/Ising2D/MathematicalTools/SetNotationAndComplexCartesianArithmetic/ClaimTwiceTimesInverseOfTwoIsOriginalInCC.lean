@@ -11,11 +11,11 @@
 | 主張の前置き: `2_ℂ = (2,0) ≠ (0,0) = 0_ℂ` なので `2_ℂ ∈ ℂ^×` | `complex_two_ne_zero_by_re`（`ClaimITimesInverseOfTwoIIsInverseOfTwoInCC.lean`） |
 | 1 行目: `complex_numbers_form_a_field` の積の可換律 | `calc` の 1 段目（`mul_comm 2 z`） |
 | 2 行目: 積の結合律 | 2 段目（`mul_assoc`） |
-| 3 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`） | 3 段目（`mul_inv_cancel₀ complex_two_ne_zero_by_re`） |
+| 3 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`） | 3 段目（`def_complex_inverse` の具体版 `complex_mul_inv_cancel 2 complex_two_ne_zero_by_re`） |
 | 4 行目: 積の単位元 | 4 段目（`mul_one`） |
 
-- Lean の `ℂ` の逆元は mathlib の定義なので、人手の逆元の式 `2_ℂ 2_ℂ^{-1} = 1_ℂ` は `mul_inv_cancel₀` で読む
-  （`ClaimITimesInverseOfTwoIIsInverseOfTwoInCC.lean` と同じ扱い）。
+- 人手の逆元の式 `2_ℂ 2_ℂ^{-1} = 1_ℂ` は、`multiplicative_group_of_cc` の逆元を定める `def_complex_inverse` の具体版
+  `complex_mul_inv_cancel`（`DefinitionComplexInverse.lean`）で読む（`ClaimITimesInverseOfTwoIIsInverseOfTwoInCC.lean` と同じ扱い）。
 - この主張を引くのは、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` の
   `pauliComb_coeff_zero_eq_zero`・`_z_`・`_x_`・`_I_mul_y_`（人手 `Z_Y_linearly_independent` の Step 1 の係数が零になる鎖）と、
   `EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` の `pauliDecompRhs_apply_00`〜`_11`
@@ -25,6 +25,7 @@
 `ClaimTwiceTimesInverseOfTwoIsOriginalInCCFromNecSuf.lean` にある。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimITimesInverseOfTwoIIsInverseOfTwoInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
 
 namespace Ising2D
 
@@ -33,7 +34,7 @@ theorem complex_two_mul_mul_inv_two (z : ℂ) : (2 * z) * 2⁻¹ = z :=
   calc (2 * z) * 2⁻¹
       = (z * 2) * 2⁻¹ := by rw [mul_comm 2 z]                         -- 1 行目: 積の可換律
     _ = z * (2 * 2⁻¹) := mul_assoc _ _ _                              -- 2 行目: 積の結合律
-    _ = z * 1 := by rw [mul_inv_cancel₀ complex_two_ne_zero_by_re]   -- 3 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）
+    _ = z * 1 := by rw [complex_mul_inv_cancel 2 complex_two_ne_zero_by_re]   -- 3 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）
     _ = z := mul_one z                                                -- 4 行目: 積の単位元
 
 end Ising2D

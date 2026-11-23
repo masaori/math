@@ -74,3 +74,9 @@ OfNat.ofNat@Complex,2@instOfNatAtLeastTwo	inclusion_rr_to_cc
 # 0 での値は人手の定義の外なので、具体版が 0 になりうる値の逆数・商を使う主張は、本文の主張（分母が 0_ℝ でないことを仮定に持つ）と一対一でない。
 Inv.inv@Real@Real.instInv	set_and_algebra_notation
 HDiv.hDiv@Real,Real,Real@Real.instDivInvMonoid	def_real_quotient
+# ℂ の逆数と商: def_complex_inverse が z ∈ ℂ^× の逆数 z^{-1} を z w = 1_ℂ かつ w z = 1_ℂ を満たす w ∈ ℂ^×（multiplicative_group_of_cc の群の逆元。ただ一つ）と定め、
+# def_complex_quotient が w ≠ 0_ℂ について z/w := z w^{-1} と定める。Lean の Inv.inv と / は 0 でも値を持つ全域の写像で、人手の写像はその ℂ∖{0} への制限に当たる。
+# z ≠ 0 での一致を DefinitionComplexInverse.lean の complex_mul_inv_cancel・complex_inv_mul_cancel（二つの式を満たす w は一つしかない）と
+# DefinitionComplexQuotient.lean の complex_div_eq_mul_inv（z / w = z * w⁻¹）で示した。0 での値の扱いは ℝ と同じ。
+Inv.inv@Complex@Complex.instInv	def_complex_inverse
+HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid	def_complex_quotient

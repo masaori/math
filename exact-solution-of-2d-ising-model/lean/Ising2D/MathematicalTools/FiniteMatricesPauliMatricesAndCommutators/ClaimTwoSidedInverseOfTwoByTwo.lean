@@ -27,7 +27,7 @@
 * `two_sided_inverse_of_two_by_two_with_nonzero_det`: 2 本の 6 行の鎖 `mul_detInv_smul_adjTwo`・`detInv_smul_adjTwo_mul`。
   `scalar_multiple_factors_out_of_right_factor`・`..._left_factor` は具体版 `mul_smul_matrix`・`smul_mul_matrix`、
   `scalar_multiple_is_associative` は具体版が無く既存の慣行どおり mathlib の `smul_smul`、
-  `multiplicative_group_of_cc` の逆元 `(det B)^{-1} det B = 1_ℂ` は `inv_mul_cancel₀`、`scalar_multiple_by_one` は `matrix_one_smul`。
+  `multiplicative_group_of_cc` の逆元 `(det B)^{-1} det B = 1_ℂ` は `def_complex_inverse` の具体版 `complex_inv_mul_cancel`、`scalar_multiple_by_one` は `matrix_one_smul`。
 * 行列式は `ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` と同じく mathlib の `Matrix.det` を使い、人手の定義との接点は
   `det_two_by_two_def` の 1 か所だけである。
 * 後段の Lean は逆行列を mathlib の `⁻¹`（`Matrix.nonsing_inv`）で書いている。人手の `def_invertible_elements_of_R` の
@@ -39,6 +39,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOne
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
 
 namespace Ising2D
 
@@ -209,7 +210,7 @@ theorem mul_detInv_smul_adjTwo (B : Matrix (Fin 2) (Fin 2) ℂ) (hB : B.det ≠ 
           -- `matrix_times_adjugate_two_by_two`
     _ = (B.det⁻¹ * B.det) • (1 : Matrix (Fin 2) (Fin 2) ℂ) := smul_smul _ _ _
           -- `scalar_multiple_is_associative`
-    _ = (1 : ℂ) • (1 : Matrix (Fin 2) (Fin 2) ℂ) := by rw [inv_mul_cancel₀ hB]
+    _ = (1 : ℂ) • (1 : Matrix (Fin 2) (Fin 2) ℂ) := by rw [complex_inv_mul_cancel _ hB]
           -- `multiplicative_group_of_cc` の逆元（`det B ∈ ℂ^×`）
     _ = 1 := matrix_one_smul _
           -- `scalar_multiple_by_one`
@@ -224,7 +225,7 @@ theorem detInv_smul_adjTwo_mul (B : Matrix (Fin 2) (Fin 2) ℂ) (hB : B.det ≠ 
           -- `adjugate_times_matrix_two_by_two`
     _ = (B.det⁻¹ * B.det) • (1 : Matrix (Fin 2) (Fin 2) ℂ) := smul_smul _ _ _
           -- `scalar_multiple_is_associative`
-    _ = (1 : ℂ) • (1 : Matrix (Fin 2) (Fin 2) ℂ) := by rw [inv_mul_cancel₀ hB]
+    _ = (1 : ℂ) • (1 : Matrix (Fin 2) (Fin 2) ℂ) := by rw [complex_inv_mul_cancel _ hB]
           -- `multiplicative_group_of_cc` の逆元（`det B ∈ ℂ^×`）
     _ = 1 := matrix_one_smul _
           -- `scalar_multiple_by_one`

@@ -13,7 +13,7 @@
 | 主張の 5 行 | `complex_conjugate_of_inverse` の `calc` の 5 段 |
 
 - 人手の複素共役 `def_complex_conjugate` は Lean の `ℂ` の `star`（`def_complex_conjugate` の段は具体版 `complex_star_mk` の成分で受ける）、`multiplicative_group_of_cc` の逆元は `ℂ` の `⁻¹`
-  （`w ≠ 0` のもとで `mul_inv_cancel₀`・`inv_mul_cancel₀` が逆元の性質）である。
+  （`w ≠ 0` のもとで逆元の性質は `def_complex_inverse` の具体版 `complex_mul_inv_cancel`・`complex_inv_mul_cancel`）である。
 - 人手 `complex_numbers_form_a_field` の積の単位元・結合律は `one_mul`・`mul_one`・`mul_assoc` で 1 段ずつ受ける。
 
 ## 必要十分版
@@ -22,6 +22,7 @@
 取り払える構造をこの説明以上に示す計算が無い（`complex_minus_one_mul_minus_one` と同じ扱い）。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifference
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealDoubleNegation
@@ -63,7 +64,7 @@ theorem complex_conjugate_mul_complex_conjugate_inv {w : ℂ} (hw : w ≠ 0) :
   calc star w * star w⁻¹
       = star (w * w⁻¹) := (complex_conjugate_of_product_eq w w⁻¹).symm
                                       -- 1 行目: `complex_conjugate_of_product`（`z → w`, `w → w^{-1}` を同時に）を右辺から左辺へ
-    _ = star 1 := by rw [mul_inv_cancel₀ hw]
+    _ = star 1 := by rw [complex_mul_inv_cancel w hw]
                                       -- 2 行目: `multiplicative_group_of_cc` の逆元（`w ∈ ℂ^×`）
     _ = star ((1 : ℝ) : ℂ) := by rw [Complex.ofReal_one]
                                       -- `1_ℂ` は略記 `r_ℂ` の `r = 1`（Lean のリテラル `(1 : ℂ)` との読み替え）
@@ -78,7 +79,7 @@ theorem complex_conjugate_of_inverse {w : ℂ} (hw : w ≠ 0) :
       = 1 * star w⁻¹ := (one_mul _).symm
                                       -- 1 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
     _ = ((star w)⁻¹ * star w) * star w⁻¹ := by
-        rw [inv_mul_cancel₀ (complex_conjugate_ne_zero hw)]
+        rw [complex_inv_mul_cancel _ (complex_conjugate_ne_zero hw)]
                                       -- 2 行目: `multiplicative_group_of_cc` の逆元（`\overline{w} ∈ ℂ^×`）を右辺から左辺へ
     _ = (star w)⁻¹ * (star w * star w⁻¹) := mul_assoc _ _ _
                                       -- 3 行目: `complex_numbers_form_a_field` の積の結合律

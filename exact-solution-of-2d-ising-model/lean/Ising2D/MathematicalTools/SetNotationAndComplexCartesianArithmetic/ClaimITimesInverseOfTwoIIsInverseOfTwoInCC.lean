@@ -14,7 +14,7 @@
   `i = (0, 1)`（`def_imaginary_unit`）の第 2 成分は `Complex.I_im`、`0_ℂ = (0, 0)` の成分は `Complex.zero_re`・`Complex.zero_im` である。
 - 証明の鎖の 6 行は `complex_I_mul_inv_two_mul_I` の `calc` の 6 段と 1 段ずつ対応する。`complex_numbers_form_a_field` の積の公理は
   mathlib の `one_mul`・`mul_one`・`mul_assoc` を 1 段に 1 つずつ当て、`multiplicative_group_of_cc` の逆元（`w^{-1}w = 1_ℂ`・`ww^{-1} = 1_ℂ`）は
-  `inv_mul_cancel₀`・`mul_inv_cancel₀` で受ける（Lean の `ℂ` の逆元は mathlib の定義なので、人手の逆元の式はこの等式で読む）。
+  それを定める `def_complex_inverse` の具体版 `complex_inv_mul_cancel`・`complex_mul_inv_cancel`（`DefinitionComplexInverse.lean`）で受ける。
 - この主張を引くのは `exp_neg_I_mul_real_eq_cos_sub_I_mul_sin` の 17 段目（`ClaimExpOfNegativeIRealAsCosMinusISin.lean`）と、
   `real_inclusion_cos_add_I_mul_sin` の 6 段目（`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean`。人手
   `relation_of_gamma_2_theta_tilde`・`periodicity_of_check_fermi` の準備の第一の鎖）である。
@@ -24,6 +24,7 @@
 -/
 import Mathlib.Analysis.Complex.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNumbers
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
 
 namespace Ising2D
 
@@ -69,14 +70,14 @@ theorem complex_I_mul_inv_two_mul_I : Complex.I * ((2 : ℂ) * Complex.I)⁻¹ =
       = 1 * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹) := (one_mul _).symm
                                       -- 1 行目: `complex_numbers_form_a_field` の積の単位元を右辺から左辺へ
     _ = ((2 : ℂ)⁻¹ * 2) * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹) := by
-        rw [inv_mul_cancel₀ complex_two_ne_zero_by_re]
+        rw [complex_inv_mul_cancel 2 complex_two_ne_zero_by_re]
                                       -- 2 行目: `multiplicative_group_of_cc` の逆元（`2_ℂ ∈ ℂ^×`）を右辺から左辺へ
     _ = (2 : ℂ)⁻¹ * (2 * (Complex.I * ((2 : ℂ) * Complex.I)⁻¹)) := mul_assoc _ _ _
                                       -- 3 行目: `complex_numbers_form_a_field` の積の結合律
     _ = (2 : ℂ)⁻¹ * (((2 : ℂ) * Complex.I) * ((2 : ℂ) * Complex.I)⁻¹) := by
         rw [← mul_assoc (2 : ℂ) Complex.I]
                                       -- 4 行目: `complex_numbers_form_a_field` の積の結合律を右辺から左辺へ
-    _ = (2 : ℂ)⁻¹ * 1 := by rw [mul_inv_cancel₀ complex_two_mul_I_ne_zero]
+    _ = (2 : ℂ)⁻¹ * 1 := by rw [complex_mul_inv_cancel _ complex_two_mul_I_ne_zero]
                                       -- 5 行目: `multiplicative_group_of_cc` の逆元（`2_ℂi ∈ ℂ^×`）
     _ = (2 : ℂ)⁻¹ := mul_one _
                                       -- 6 行目: `complex_numbers_form_a_field` の積の単位元

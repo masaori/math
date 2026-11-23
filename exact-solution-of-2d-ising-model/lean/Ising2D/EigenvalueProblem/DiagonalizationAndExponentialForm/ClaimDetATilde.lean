@@ -53,6 +53,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimExpOfNegativeIRealAsCosMinusISin
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNegationAndDifference
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexQuotient
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
 
@@ -292,6 +293,19 @@ theorem complex_sub_sq_chain (x y : ℂ) :
     _ = x ^ 2 - 2 * (x * y) + y ^ 2 := by rw [square_of_complex_number_is_product x, square_of_complex_number_is_product y]
                           -- 18 行目: `square_of_complex_number_is_product` の `z^2 = zz` を 2 箇所へ右辺から左辺へ
 
+/-- 人手証明 `det_A_theta_tilde` の前置きの `2_ℂ i = (2·0 − 0·1, 2·1 + 0·0) = (0, 2) ≠ 0_ℂ`
+（`definition_of_cc` の積で成分を出し、第 2 成分が `0` でないので `0_ℂ = (0, 0)` と異なる）。 -/
+theorem det_prep_two_mul_I_ne_zero : (2 : ℂ) * Complex.I ≠ 0 := by
+  intro h
+  have hmk : (2 : ℂ) * Complex.I = ⟨2 * 0 - 0 * 1, 2 * 1 + 0 * 0⟩ := by
+    rw [complex_two_eq_ofReal_two, complex_ofReal_eq_mk, complex_I_eq_mk, complex_mk_mul_mk]
+                          -- `2_ℂ = (2, 0)`（`inclusion_rr_to_cc`）・`i = (0, 1)`（`def_imaginary_unit`）と `definition_of_cc` の積
+  have him : (2 * 1 + 0 * 0 : ℝ) = 0 := congrArg Complex.im (hmk.symm.trans h)
+                          -- 仮定 `2_ℂ i = 0_ℂ` の第 2 成分（`0_ℂ = (0, 0)`）
+  rw [mul_one, mul_zero, add_zero] at him
+                          -- 第 2 成分 `2·1 + 0·0 = 2`（`ℝ` の計算）
+  exact two_ne_zero him   -- `ℝ` で `2 ≠ 0`
+
 /-- **人手証明 `det_A_theta_tilde` の第一の準備の `u + iv = e_+`**（`u = (cos θ)_ℂ`、`v = (sin θ)_ℂ`、
 `e_+ = exp(iθ)`、人手の 19 行）。`e_- = exp(-iθ)` の `-iθ` は `-(iθ)`（Lean の `-(Complex.I * (θ : ℂ))`）。 -/
 theorem complex_cos_add_I_mul_sin_chain (θ : ℝ) :
@@ -304,8 +318,8 @@ theorem complex_cos_add_I_mul_sin_chain (θ : ℝ) :
         rw [euler_cos_real_inclusion θ, euler_sin_real_inclusion θ]
                           -- 1 行目: `euler_formula_cos_sin` を 2 箇所へ
     _ = (ep + em) * (2 : ℂ)⁻¹ + Complex.I * ((ep - em) * (2 * Complex.I)⁻¹) := by
-        rw [div_eq_mul_inv, div_eq_mul_inv]
-                          -- 2 行目: `def_complex_quotient`（`z/w := zw^{-1}`）を 2 箇所へ（`div_eq_mul_inv`）
+        rw [complex_div_eq_mul_inv _ _ h2, complex_div_eq_mul_inv _ _ det_prep_two_mul_I_ne_zero]
+                          -- 2 行目: `def_complex_quotient`（`z/w := zw^{-1}`）を 2 箇所へ（具体版 `complex_div_eq_mul_inv`。前置きの `2_ℂ ≠ 0_ℂ`・`2_ℂ i ≠ 0_ℂ` を渡す）
     _ = (ep + em) * (2 : ℂ)⁻¹ + (ep - em) * (Complex.I * (2 * Complex.I)⁻¹) := by
         rw [mul_left_comm Complex.I (ep - em)]
                           -- 3 行目: `complex_numbers_form_a_field` の積の結合律・可換律

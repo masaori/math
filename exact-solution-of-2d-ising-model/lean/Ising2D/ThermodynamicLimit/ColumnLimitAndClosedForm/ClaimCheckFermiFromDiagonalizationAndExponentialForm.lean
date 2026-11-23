@@ -28,6 +28,8 @@ import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimCheckFer
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfInverse
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNegationAndDifference
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexInverse
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexQuotient
 
 namespace Ising2D
 
@@ -59,7 +61,7 @@ theorem star_checkQ (hM : M ≠ 0) : star (checkQ M) = checkQ M :=
   calc star (checkQ M)
       = star (1 / (2 * sqrtM M)) := rfl
                                       -- 1 行目: 前置きの `β = 1_ℂ/u`（Lean の `checkQ` の定義）
-    _ = star (1 * (2 * sqrtM M)⁻¹) := by rw [div_eq_mul_inv]
+    _ = star (1 * (2 * sqrtM M)⁻¹) := by rw [complex_div_eq_mul_inv 1 _ (checkU_ne_zero hM)]
                                       -- 2 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → u`）
     _ = star 1 * star (2 * sqrtM M)⁻¹ := complex_conjugate_of_product_eq _ _
                                       -- 3 行目: `complex_conjugate_of_product`（`z → 1_ℂ`, `w → u^{-1}`）
@@ -74,7 +76,7 @@ theorem star_checkQ (hM : M ≠ 0) : star (checkQ M) = checkQ M :=
                                       -- 5 行目: `complex_conjugate_of_inverse`（`w → u`）
     _ = 1 * (2 * sqrtM M)⁻¹ := by rw [star_two_mul_sqrtM]
                                       -- 6 行目: 準備 (b)
-    _ = 1 / (2 * sqrtM M) := by rw [div_eq_mul_inv]
+    _ = 1 / (2 * sqrtM M) := (complex_div_eq_mul_inv 1 _ (checkU_ne_zero hM)).symm
                                       -- 7 行目: `def_complex_quotient`（`z → 1_ℂ`, `w → u`）を右辺から左辺へ
     _ = checkQ M := rfl
                                       -- 8 行目: 前置きの `β = 1_ℂ/u` を右辺から左辺へ
@@ -188,7 +190,7 @@ theorem check_hermitian_prep_neg_one_mul_inv {d : ℂ} (hd : d ≠ 0) :
           exact complex_minus_one_mul_minus_one]
                                       -- Lean の `(-1 : ℂ)` は `-(1_ℂ)` で、`multiply_by_minus_one`（`z → 1_ℂ`）と積の単位元で `(-1)_ℂ` へ読み替える
                                       -- 7 行目: `minus_one_times_minus_one_is_one_in_cc`
-    _ = 1 * 1 := by rw [mul_inv_cancel₀ hd]
+    _ = 1 * 1 := by rw [complex_mul_inv_cancel d hd]
                                       -- 8 行目: `multiplicative_group_of_cc` の逆元（`d ∈ ℂ^×`）
     _ = 1 := one_mul 1                -- 9 行目: `complex_numbers_form_a_field` の積の単位元
 
@@ -204,7 +206,7 @@ theorem check_hermitian_prep_inv_neg_one_mul {d : ℂ} (hd : d ≠ 0) :
                                       -- 2 行目: 第一の鎖を右辺から左辺へ
     _ = (((-1) * d)⁻¹ * ((-1) * d)) * ((-1) * d⁻¹) := (mul_assoc _ _ _).symm
                                       -- 3 行目: `complex_numbers_form_a_field` の積の結合律を右辺から左辺へ
-    _ = 1 * ((-1) * d⁻¹) := by rw [inv_mul_cancel₀ ht]
+    _ = 1 * ((-1) * d⁻¹) := by rw [complex_inv_mul_cancel _ ht]
                                       -- 4 行目: `multiplicative_group_of_cc` の逆元（`t ∈ ℂ^×`）
     _ = (-1) * d⁻¹ := one_mul _       -- 5 行目: `complex_numbers_form_a_field` の積の単位元
 
@@ -225,7 +227,7 @@ theorem star_checkP (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
   calc star (checkP P.const M μ)
       = star ((-r) / dμ) := rfl
                                       -- 1 行目: 前置きの `α_μ = (-(r_ℂ))/d_μ`（`def_check_fermi` の読み。Lean の `checkP` の定義）
-    _ = star ((-r) * dμ⁻¹) := by rw [div_eq_mul_inv]
+    _ = star ((-r) * dμ⁻¹) := by rw [complex_div_eq_mul_inv _ _ hdμ0]
                                       -- 2 行目: `def_complex_quotient`（`z → -(r_ℂ)`, `w → d_μ`）
     _ = star (-r) * star dμ⁻¹ := complex_conjugate_of_product_eq _ _
                                       -- 3 行目: `complex_conjugate_of_product`（`z → -(r_ℂ)`, `w → d_μ^{-1}`）
@@ -243,7 +245,7 @@ theorem star_checkP (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
                                       -- 9 行目: `complex_numbers_form_a_field` の積の可換律
     _ = (-1) * ((-r) * dν⁻¹) := mul_assoc _ _ _
                                       -- 10 行目: `complex_numbers_form_a_field` の積の結合律
-    _ = (-1) * ((-r) / dν) := by rw [div_eq_mul_inv]
+    _ = (-1) * ((-r) / dν) := by rw [complex_div_eq_mul_inv _ _ hdν0]
                                       -- 11 行目: `def_complex_quotient`（`z → -(r_ℂ)`, `w → d_ν`）を右辺から左辺へ
     _ = (-1) * checkP P.const M ((M : ℤ) + 1 - μ) := by
         rw [checkP, checkR_conj P.const hM μ]
