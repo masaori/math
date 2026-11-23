@@ -29062,7 +29062,7 @@ q
 &=\iota(a)^2-\iota(b)^2s^2
 &&\bigl(\because\ \text{平方差の公式}\bigr)\\
 &=\iota(a)^2-2\iota(b)^2
-&&\bigl(\because\ s^2=\iota(2),\ \blkref{claim_sqrt_two_exists}\bigr)\\
+&&\bigl(\because\ s^2=s\cdot s=\iota(2)\text{（主張の仮定）}\bigr)\\
 &=\iota(a^2-2b^2)
 &&\bigl(\because\ \iota\text{ は体の演算を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
 &=\iota(d)
