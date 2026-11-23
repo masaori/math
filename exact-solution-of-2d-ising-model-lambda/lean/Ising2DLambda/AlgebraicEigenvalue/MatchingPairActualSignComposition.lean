@@ -7,6 +7,7 @@ namespace Ising2DLambda.AlgebraicEigenvalue
 
 open scoped Classical
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign ascendingMatePair)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
@@ -17,7 +18,7 @@ theorem matchingPairActualSignComposition (τ υ : FixedPointFreeInvolution J)
     let C := matchingPairColor τ υ
     let lτ := w.map (ascendingMatePair τ.val)
     let lυ := (w.map τ.val).map (ascendingMatePair υ.val)
-    sign (fun x y : J => x < y) (matchingPairPermutation τ υ) =
+    finiteOrderedSign (matchingPairPermutation τ υ) =
       orientationSign lτ C * orientationSign lυ {i | i ∉ C} *
         perfectMatchingSign (involutionToPerfectMatching τ) *
           perfectMatchingSign (involutionToPerfectMatching υ) := by

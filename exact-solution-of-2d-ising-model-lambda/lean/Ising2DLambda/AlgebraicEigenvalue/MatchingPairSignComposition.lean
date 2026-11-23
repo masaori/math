@@ -4,7 +4,8 @@ import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairSignComposition
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign sign_mul_self)
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 open scoped Classical
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
@@ -50,7 +51,7 @@ theorem matchingPairSignComposition (τ υ : FixedPointFreeInvolution J)
     (hsecond : w.flatMap (fun i => [τ.val i, υ.val (τ.val i)]) =
       lE.flatMap (fun p =>
         if p.1 ∈ T then [p.1, p.2] else [p.2, p.1])) :
-    sign (fun x y : J => x < y) (matchingPairPermutation τ υ) =
+    finiteOrderedSign (matchingPairPermutation τ υ) =
       orientationSign lD S * orientationSign lE T *
         perfectMatchingSign D * perfectMatchingSign E := by
   have hmap := matchingPairWordSignMap τ υ w hw hcomplete
@@ -60,22 +61,22 @@ theorem matchingPairSignComposition (τ υ : FixedPointFreeInvolution J)
   rw [hsecond] at hmap
   change matchingWordSign (lE.flatMap (fun p =>
       if p.1 ∈ T then [p.1, p.2] else [p.2, p.1])) =
-    sign (fun x y : J => x < y) (matchingPairPermutation τ υ) *
+    finiteOrderedSign (matchingPairPermutation τ υ) *
       matchingWordSign (lD.flatMap (fun p =>
         if p.1 ∈ S then [p.1, p.2] else [p.2, p.1])) at hmap
   calc
-    sign (fun x y : J => x < y) (matchingPairPermutation τ υ) =
-        sign (fun x y : J => x < y) (matchingPairPermutation τ υ) *
+    finiteOrderedSign (matchingPairPermutation τ υ) =
+        finiteOrderedSign (matchingPairPermutation τ υ) *
           (orientationSign lD S * orientationSign lD S) := by
       rw [orientationSign_mul_self]; ring
-    _ = sign (fun x y : J => x < y) (matchingPairPermutation τ υ) *
+    _ = finiteOrderedSign (matchingPairPermutation τ υ) *
           (orientationSign lD S * orientationSign lD S) *
           (perfectMatchingSign D * perfectMatchingSign D) := by
       rw [perfectMatchingSign_mul_self]; ring
-    _ = sign (fun x y : J => x < y) (matchingPairPermutation τ υ) *
+    _ = finiteOrderedSign (matchingPairPermutation τ υ) *
           ((orientationSign lD S * perfectMatchingSign D) *
            (orientationSign lD S * perfectMatchingSign D)) := by ring
-    _ = sign (fun x y : J => x < y) (matchingPairPermutation τ υ) *
+    _ = finiteOrderedSign (matchingPairPermutation τ υ) *
           (matchingWordSign (lD.flatMap (fun p =>
             if p.1 ∈ S then [p.1, p.2] else [p.2, p.1])) *
            matchingWordSign (lD.flatMap (fun p =>

@@ -120,6 +120,7 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
     simpa only [Sυ, Finset.mem_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq]
       using orientationSign_cast_eq_product υ.val {i | i ∉ C} w₂ hw₂ hcolor₂ hυmate
   have hsign := matchingPairActualSignComposition τ υ w hw hcolor
+  change sign (fun x y : J => x < y) (matchingPairPermutation τ υ) = _ at hsign
   have hsignPoly := congrArg (fun z : ℤ => Polynomial.C (z : Qbar)) hsign
   have hατsq : Polynomial.C ((ατ : ℤ) : Qbar) * Polynomial.C ((ατ : ℤ) : Qbar) = 1 := by
     have h := congrArg (fun z : ℤ => Polynomial.C (z : Qbar))

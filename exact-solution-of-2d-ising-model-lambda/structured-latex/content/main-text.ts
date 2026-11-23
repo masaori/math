@@ -21001,7 +21001,9 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
                     proof: [
                       paragraph([ref("claim_matching_pair_word_map"), " により、", math(String.raw`W_\upsilon(w)=\sigma(W_\tau(w))`), " である。", ref("def_matching_word_sign"), " の昇順基準列の各元 ", math(String.raw`j_k\in\mathcal J`), " について"]),
                       displayMath(String.raw`\pi_{\sigma(W_\tau(w))}(j_k)=\sigma(\pi_{W_\tau(w)}(j_k))\quad\bigl(\because\ \text{列の各元への写像の定義}\bigr)`),
-                      paragraph(["が成り立つ。すべての ", math(String.raw`j_k\in\mathcal J`), " で値が等しいので ", math(String.raw`\pi_{\sigma(W_\tau(w))}=\sigma\circ\pi_{W_\tau(w)}`), " である。よって"]),
+                      paragraph(["が成り立つ。すべての ", math(String.raw`j_k\in\mathcal J`), " で値が等しいので"]),
+                      displayMath(String.raw`\pi_{\sigma(W_\tau(w))}=\sigma\circ\pi_{W_\tau(w)}\quad\bigl(\because\ \text{写像は各元での値が等しければ等しい}\bigr)`),
+                      paragraph(["を得る。よって"]),
                       displayMath(String.raw`\begin{aligned}
 \varepsilon(W_\upsilon(w))
 &=\varepsilon(\sigma(W_\tau(w)))
