@@ -2222,11 +2222,9 @@ S_{M_{\mathrm{col}},k}
       paragraph(["である。このとき"]),
       displayMath(
         String.raw`\begin{aligned}
-|lM_{\mathrm{col}}|
-&=|l|\,|M_{\mathrm{col}}|
-&&\bigl(\because\ \text{積の絶対値}\bigr)\\
-&=|l|M_{\mathrm{col}}
-&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ 0_{\mathbb{Z}}\le x\ \text{の場合の式}\ (x\to M_{\mathrm{col}})\ \text{に、上の}\ 0_{\mathbb{Z}}\le M_{\mathrm{col}}\bigr)\\
+|l|M_{\mathrm{col}}
+&=|lM_{\mathrm{col}}|
+&&\bigl(\because\ \blkref{int_absolute_value_of_product_with_nonnegative}\ (x\to l,\ y\to M_{\mathrm{col}})\ \text{に、上の}\ 0_{\mathbb{Z}}\le M_{\mathrm{col}}\ \text{を右辺から左辺へ}\bigr)\\
 &= |k|
 &&\bigl(\because\ k=lM_{\mathrm{col}}\bigr) \\
 &< M_{\mathrm{col}}
@@ -2327,6 +2325,7 @@ k
       notes: [
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: k ≢ 0 (mod M) の鎖と l が奇数の鎖で、左から足す 0_C を消す行（0_C + (−0_C) = −0_C と 0_C + (−(M_col)_C) = −(M_col)_C）の根拠を、complex_numbers_form_a_field の「和の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 二つの鎖で右から 0_C を掛ける行（(2M_col)_C·0_C = 0_C の 2 行、(M_col)_C·0_C = 0_C、(−1_C)·0_C = 0_C）の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → (2M_col)_C、(M_col)_C、−1_C）に替えた。式は不変。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち積の絶対値）: 「とくに」の |lM_col| = |l||M_col|（根拠「積の絶対値」の名前だけ）= |l|M_col（def_int_absolute_value に 0 ≤ M_col）の 2 行を、主張 int_absolute_value_of_product_with_nonnegative（x → l, y → M_col）に 0 ≤ M_col を使う 1 行にした。あわせて鎖を |l|M_col = |lM_col| = |k| < M_col の向きに並べ直した（もとは |lM_col| から始まり、次の行が使う |l|M_col < M_col が鎖の両端に出ていなかった）。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち 0 を掛けた整数）: 「とくに」の鎖 k = lM_col = 0_ℤ·M_col = 0_ℤ の最後の等号の根拠が「0_ℤ·M_col = 0_ℤ」と結論そのものだった。int_zero_times_is_zero を足し、その主張（x → M_col）を引く形にした。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値が 0 の整数）: 「とくに」の「l = 0 (∵ |l| = 0_ℤ)」は名前だけの根拠だった。int_absolute_value_zero_implies_zero を足し、その主張（x → l）を引く形にした。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値）: 「とくに」の「M_col > 0 なので |M_col| = M_col」と「整数 l の絶対値は非負整数なので 0_ℤ ≤ |l|」は名前だけの根拠で、ℤ の絶対値を定めるブロックも無かった。def_int_absolute_value と int_absolute_value_is_nonnegative を足し、|M_col| = M_col をその定義の 0_ℤ ≤ x の場合の式で、0_ℤ ≤ |l| をその主張で引くようにした。0_ℕ ≤ (M_col)_ℕ を ℕ の加法の単位元と順序と和の 2 行で、0_ℤ ≤ M_col を主張の前置きにある ι_{ℕ→ℤ} が零と順序を保つことと略記 n_ℤ の 4 行で先に示した。「積の絶対値」「|l| = 0_ℤ なので l = 0」「整数における正数倍は狭義順序を反映する」の名前だけの根拠は残っている（状態台帳の行「ℤ の狭義の順序・数字」）。主張は不変。",

@@ -457,6 +457,12 @@ targets=(
   Ising2D.NecSuf.eq_zero_of_abs_cases_eq_zero
   Ising2D.int_zero_times_is_zero
   Ising2D.int_zero_times_is_zero_of_necSuf
+  Ising2D.int_negation_times_is_negation_of_product
+  Ising2D.int_negation_times_is_negation_of_product_of_necSuf
+  Ising2D.NecSuf.neg_mul_of_addGroup_rightDistrib
+  Ising2D.int_absolute_value_of_product_with_nonnegative
+  Ising2D.int_absolute_value_of_product_with_nonnegative_of_necSuf
+  Ising2D.NecSuf.abs_mul_of_nonneg_right_of_cases
   Ising2D.complex_mk_add_mk
   Ising2D.complex_mk_eq_mk_iff
   Ising2D.complex_mk_mul_mk

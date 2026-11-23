@@ -854,6 +854,205 @@ x
     },
   },
   {
+    id: "calc_formulae_claim_integer_negation_times_is_negation_of_product",
+    kind: "claim",
+    title: { text: "符号を反転した整数に右から整数を掛けると、積の符号が反転する" },
+    labels: ["int_negation_times_is_negation_of_product"],
+    lean: ["Ising2D.int_negation_times_is_negation_of_product"],
+    statement: [
+      paragraph([
+        math(String.raw`x, t \in \mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`(-x) \cdot t = -(x \cdot t)`),
+      paragraph([
+        "である。和・積・符号反転は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(-x) \cdot t
+&= (-x) \cdot t + 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ y + 0_{\mathbb{Z}} = y\ (y \to (-x) \cdot t)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= (-x) \cdot t + \bigl(x \cdot t + (-(x \cdot t))\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ y + (-y) = 0_{\mathbb{Z}}\ (y \to x \cdot t)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl((-x) \cdot t + x \cdot t\bigr) + (-(x \cdot t))
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (y + z) + s = y + (z + s)\ (y \to (-x) \cdot t,\ z \to x \cdot t,\ s \to -(x \cdot t))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl((-x) + x\bigr) \cdot t + (-(x \cdot t))
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ (y + z) \cdot s = y \cdot s + z \cdot s\ (y \to -x,\ z \to x,\ s \to t)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{Z}} \cdot t + (-(x \cdot t))
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-y) + y = 0_{\mathbb{Z}}\ (y \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0_{\mathbb{Z}} + (-(x \cdot t))
+&&\bigl(\because\ \blkref{int_zero_times_is_zero}\ (x \to t)\bigr)\\
+&= -(x \cdot t)
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + y = y\ (y \to -(x \cdot t))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち antiperiodic_exp_sum の「とくに」の「積の絶対値」）: 原文（Typst）に対応ブロックは無い。int_absolute_value_of_product_with_nonnegative の証明が使う部品として足した。real_negation_times_is_negation_of_product は (−1)·x を経る経路で示すが、ℤ の側には (−1)·x = −x の主張が無いので、int_zero_times_is_zero と set_and_algebra_notation の ℤ の一覧の行（和の単位元・加法の逆元・加法の結合律・分配律）だけで示す。Lean の具体版は Ising2D.int_negation_times_is_negation_of_product（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimIntegerNegationTimesIsNegationOfProduct.lean）、必要十分版は Ising2D.NecSuf.neg_mul_of_addGroup_rightDistrib（NecSuf/NegMulOfAddGroupRightDistrib.lean）。数値検証: sagemath/check/int_negation_times_is_negation_of_product/。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_integer_absolute_value_of_product_with_nonnegative",
+    kind: "claim",
+    title: { text: "0 以上の整数との積の絶対値" },
+    labels: ["int_absolute_value_of_product_with_nonnegative"],
+    lean: ["Ising2D.int_absolute_value_of_product_with_nonnegative"],
+    statement: [
+      paragraph([
+        math(String.raw`x, y \in \mathbb{Z}`),
+        " が ",
+        math(String.raw`0_{\mathbb{Z}} \le y`),
+        " を満たすなら、",
+        ref("def_int_absolute_value"),
+        " の絶対値について",
+      ]),
+      displayMath(String.raw`|x \cdot y| = |x| \cdot y`),
+      paragraph([
+        "である。積・",
+        math(String.raw`0_{\mathbb{Z}}`),
+        "・",
+        math(String.raw`\le`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`0_{\mathbb{Z}} \le x`),
+        " の場合と、そうでない場合に分ける。",
+        math(String.raw`0_{\mathbb{Z}} \le x`),
+        " のとき、",
+        math(String.raw`\mathbb{Z}`),
+        " の順序と乗法の両立（",
+        ref("set_and_algebra_notation"),
+        "。",
+        math(String.raw`x \to x,\ y \to y`),
+        "）に場合の仮定 ",
+        math(String.raw`0_{\mathbb{Z}} \le x`),
+        " と主張の仮定 ",
+        math(String.raw`0_{\mathbb{Z}} \le y`),
+        " を使って ",
+        math(String.raw`0_{\mathbb{Z}} \le x \cdot y`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|x \cdot y|
+&= x \cdot y
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ 0_{\mathbb{Z}} \le x\ \text{の場合の式}\ (x \to x \cdot y)\ \text{に、上の}\ 0_{\mathbb{Z}} \le x \cdot y\bigr)\\
+&= |x| \cdot y
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ 0_{\mathbb{Z}} \le x\ \text{の場合の式}\ (x \to x)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\neg\,(0_{\mathbb{Z}} \le x)`),
+        " のとき、まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|x| \cdot y
+&= (-x) \cdot y
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ \neg\,(0_{\mathbb{Z}} \le x)\ \text{の場合の式}\ (x \to x)\bigr)\\
+&= -(x \cdot y)
+&&\bigl(\because\ \blkref{int_negation_times_is_negation_of_product}\ (x \to x,\ t \to y)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        ref("int_absolute_value_is_nonnegative"),
+        "（",
+        math(String.raw`x \to x`),
+        "）より ",
+        math(String.raw`0_{\mathbb{Z}} \le |x|`),
+        " であり、",
+        math(String.raw`\mathbb{Z}`),
+        " の順序と乗法の両立（",
+        ref("set_and_algebra_notation"),
+        "。",
+        math(String.raw`x \to |x|,\ y \to y`),
+        "）と主張の仮定 ",
+        math(String.raw`0_{\mathbb{Z}} \le y`),
+        " から ",
+        math(String.raw`0_{\mathbb{Z}} \le |x| \cdot y`),
+        "、すなわち上の式で ",
+        math(String.raw`0_{\mathbb{Z}} \le -(x \cdot y)`),
+        " である。ここで ",
+        math(String.raw`0_{\mathbb{Z}} \le x \cdot y`),
+        " かどうかで分ける（排中律。",
+        ref("set_and_algebra_notation"),
+        "）。",
+        math(String.raw`\neg\,(0_{\mathbb{Z}} \le x \cdot y)`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|x \cdot y|
+&= -(x \cdot y)
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ \neg\,(0_{\mathbb{Z}} \le x)\ \text{の場合の式}\ (x \to x \cdot y)\bigr)\\
+&= |x| \cdot y
+&&\bigl(\because\ \text{上の}\ |x| \cdot y = -(x \cdot y)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0_{\mathbb{Z}} \le x \cdot y`),
+        " のとき、まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x \cdot y
+&= 0_{\mathbb{Z}} + x \cdot y
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + z = z\ (z \to x \cdot y)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\le (-(x \cdot y)) + x \cdot y
+&&\bigl(\because\ 0_{\mathbb{Z}} \le -(x \cdot y)\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ (x \to 0_{\mathbb{Z}},\ y \to -(x \cdot y),\ t \to x \cdot y)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-z) + z = 0_{\mathbb{Z}}\ (z \to x \cdot y)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        math(String.raw`\mathbb{Z}`),
+        " の順序の反対称律（",
+        ref("set_and_algebra_notation"),
+        "。",
+        math(String.raw`x \to x \cdot y,\ y \to 0_{\mathbb{Z}}`),
+        "）に ",
+        math(String.raw`x \cdot y \le 0_{\mathbb{Z}}`),
+        " と ",
+        math(String.raw`0_{\mathbb{Z}} \le x \cdot y`),
+        " を使って ",
+        math(String.raw`x \cdot y = 0_{\mathbb{Z}}`),
+        " である。これを使うと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|x \cdot y|
+&= x \cdot y
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ 0_{\mathbb{Z}} \le x\ \text{の場合の式}\ (x \to x \cdot y)\ \text{に、場合の仮定}\ 0_{\mathbb{Z}} \le x \cdot y\bigr)\\
+&= 0_{\mathbb{Z}}
+&&\bigl(\because\ \text{上の}\ x \cdot y = 0_{\mathbb{Z}}\bigr)\\
+&= x \cdot y + (-(x \cdot y))
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ z + (-z) = 0_{\mathbb{Z}}\ (z \to x \cdot y)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{Z}} + (-(x \cdot y))
+&&\bigl(\because\ \text{上の}\ x \cdot y = 0_{\mathbb{Z}}\bigr)\\
+&= -(x \cdot y)
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + z = z\ (z \to -(x \cdot y))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= |x| \cdot y
+&&\bigl(\because\ \text{上の}\ |x| \cdot y = -(x \cdot y)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。どの場合も ", math(String.raw`|x \cdot y| = |x| \cdot y`), " が成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち antiperiodic_exp_sum の「とくに」の「積の絶対値」）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum の「とくに」が |lM_col| = |l||M_col| の根拠を「積の絶対値」と名前だけで引いていた（Lean は abs_mul）。本文が使うのは M_col ≥ 0 の形だけなので、0 ≤ y の形に限った主張として足し、「とくに」の 2 行 |lM_col| = |l||M_col| = |l|M_col をこの主張の 1 行にした。証明は def_int_absolute_value の場合分け、int_absolute_value_is_nonnegative、int_negation_times_is_negation_of_product と set_and_algebra_notation の ℤ の一覧の行（順序と乗法の両立・順序と加法の両立・反対称律・和の単位元・加法の逆元・排中律）による。Lean の具体版は Ising2D.int_absolute_value_of_product_with_nonnegative（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimIntegerAbsoluteValueOfProductWithNonnegative.lean）、必要十分版は Ising2D.NecSuf.abs_mul_of_nonneg_right_of_cases（NecSuf/AbsMulOfNonnegRightOfCases.lean）。数値検証: sagemath/check/int_absolute_value_of_product_with_nonnegative/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_real_less_than_preserved_by_adding_on_right",
     kind: "claim",
     title: { text: "実数の狭義の順序は右から同じ数を足しても保たれる" },

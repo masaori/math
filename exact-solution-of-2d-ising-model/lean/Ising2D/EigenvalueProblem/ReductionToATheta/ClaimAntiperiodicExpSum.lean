@@ -49,6 +49,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.Defini
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueIsNonnegative
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueZeroImpliesZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerZeroTimesIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueOfProductWithNonnegative
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -453,11 +454,9 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
   intro hd
   rcases hd with ⟨l, hl⟩
   have hMpos : (0 : ℤ) < (M : ℤ) := by exact_mod_cast Nat.pos_of_ne_zero hM
-  -- 人手証明の `|l|M = |lM| = |k| < M` に対応する。
   -- 人手証明の `k = lM_col`。Lean の整除 `M ∣ k` は `k = M·l` を与えるので、ℤ の乗法の交換律で並べ替える。
   have hk_lM : k = l * (M : ℤ) := by rw [hl, mul_comm]
   have hk_abs : |k| = |l * (M : ℤ)| := by rw [hk_lM]
-  have habs_product : |l * (M : ℤ)| = |l| * |(M : ℤ)| := abs_mul l (M : ℤ)
   -- 人手証明の `0_ℕ ≤ (M_col)_ℕ` の 2 行（ℕ の加法の単位元 `0 + x = x`、ℕ の順序と和 `d → (M_col)_ℕ`）。
   have hM_nat_sum : 0 + M = M := Nat.zero_add M                         -- ℕ の加法の単位元（`x → (M_col)_ℕ`）
   have hM_nat_nonneg : 0 ≤ M := Nat.le.intro hM_nat_sum                 -- ℕ の順序と和（`x → 0, y → (M_col)_ℕ, d → (M_col)_ℕ`）
@@ -465,12 +464,13 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
   have hM_nonneg : (0 : ℤ) ≤ (M : ℤ) :=
     calc (0 : ℤ) = ((0 : ℕ) : ℤ) := Nat.cast_zero.symm               -- `ι_{ℕ→ℤ}` は零を保つ
       _ ≤ (M : ℤ) := Nat.cast_le.mpr hM_nat_nonneg                     -- `ι_{ℕ→ℤ}` は順序を保つ。`0_ℕ ≤ (M_col)_ℕ`
-  -- 人手証明の `|M_col| = M_col`（`def_int_absolute_value` の `0 ≤ x` の場合の式、`x → M_col`）。
-  have habs_M : |(M : ℤ)| = (M : ℤ) := (int_abs_of_nonneg_and_of_not_nonneg (M : ℤ)).1 hM_nonneg
+  -- 人手証明の `|lM_col| = |l|M_col`（`int_absolute_value_of_product_with_nonnegative`、`x → l, y → M_col`、`0 ≤ M_col`）。
+  have habs_product : |l * (M : ℤ)| = |l| * (M : ℤ) :=
+    int_absolute_value_of_product_with_nonnegative l (M : ℤ) hM_nonneg
+  -- 人手証明の鎖 `|l|M_col = |lM_col| = |k| < M_col`。
   have habs_mul : |l| * (M : ℤ) < (M : ℤ) := by
     calc
-      |l| * (M : ℤ) = |l| * |(M : ℤ)| := by rw [habs_M]
-      _ = |l * (M : ℤ)| := habs_product.symm
+      |l| * (M : ℤ) = |l * (M : ℤ)| := habs_product.symm
       _ = |k| := hk_abs.symm
       _ < (M : ℤ) := hklt
   -- 人手証明の「正数 `M` で割って `|l| < 1`」に対応する。

@@ -1,0 +1,4 @@
+ZZ[x, t, o] で恒等的な段 5 個と、o = 0 でだけ成り立つ段 2 個を確かめた（等号 7 個）
+各段の根拠の形の両辺を 6 つ確かめた。整数の標本 961 件で全ての行が -(xt) に等しかった
+negative controls (broken lines detected): 2
+RESULT: PASS

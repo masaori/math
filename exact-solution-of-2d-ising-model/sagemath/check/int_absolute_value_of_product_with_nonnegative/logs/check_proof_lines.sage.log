@@ -1,0 +1,4 @@
+枝ごとの標本数: {'x_nonneg': 961, 'x_neg_xy_neg': 900, 'x_neg_xy_nonneg': 30}（0 ≤ y の整数の組 1891 件）
+全ての枝で鎖の全ての行が等しく、主張 |xy| = |x|y が成り立った
+negative controls (broken lines detected): 2
+RESULT: PASS
