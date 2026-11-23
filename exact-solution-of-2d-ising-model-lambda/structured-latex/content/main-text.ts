@@ -21381,7 +21381,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
                       displayMath(String.raw`\begin{aligned}
 \widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}A_{i,\sigma(i)}
 &=\widehat{\iota_{\mathbb Z}(\alpha_\tau\alpha_\upsilon\operatorname{sgn}(D)\operatorname{sgn}(E))}\prod_{i\in\mathcal J}A_{i,\sigma(i)}&&\bigl(\because\ \blkref{claim_matching_pair_actual_sign_composition}\bigr)\\
-&=\widehat{\iota_{\mathbb Z}(\alpha_\tau\alpha_\upsilon\operatorname{sgn}(D)\operatorname{sgn}(E))}\widehat{\iota_{\mathbb Z}(\alpha_\tau\alpha_\upsilon)}b_Db_E&&\bigl(\because\ \text{直前の単項式の等号}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(\alpha_\tau\alpha_\upsilon\operatorname{sgn}(D)\operatorname{sgn}(E))}\widehat{\iota_{\mathbb Z}(\alpha_\tau\alpha_\upsilon)}b_Db_E&&\bigl(\because\ \blkref{claim_matching_pair_actual_monomial}\bigr)\\
 &=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(D)\operatorname{sgn}(E))}b_Db_E&&\bigl(\because\ \alpha_\tau^2=\alpha_\upsilon^2=1\bigr)\\
 &=(c_Dc_E)(b_Db_E)&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr).
 \end{aligned}`),

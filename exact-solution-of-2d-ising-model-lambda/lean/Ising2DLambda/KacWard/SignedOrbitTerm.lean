@@ -31,11 +31,9 @@ theorem kacWardSignedPermutationTerm_orbit_product
       ∏ O ∈ movedEdgeOrbitSet σ,
         (-(Polynomial.X ^ O.card) * ∏ e ∈ O, Polynomial.C (M e (σ e))) := by
   classical
-  have hsign : finiteOrderedSign σ =
-      Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign (fun x y : ι => x < y) σ := rfl
   rw [kacWardSignedPermutationTerm,
     kacWardEntryProduct_orbit_factorization M σ,
-    hsign, sign_movedEdgeOrbit_product σ]
+    sign_movedEdgeOrbit_product σ]
   have hfixed :
       (∏ e ∈ univ.filter fun e => σ e = e, kacWardPolynomialMatrix M e (σ e)) = 1 := by
     apply Finset.prod_eq_one

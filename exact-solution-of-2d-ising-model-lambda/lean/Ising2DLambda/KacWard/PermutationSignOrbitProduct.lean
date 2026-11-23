@@ -11,12 +11,14 @@
 -/
 import Ising2DLambda.KacWard.MovedOrbitPartition
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 
 namespace Ising2DLambda.KacWard
 
 open Finset
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 open Ising2DLambda.NecSuf.KacWard
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 variable {ι : Type} [Fintype ι] [LinearOrder ι]
 
@@ -231,9 +233,10 @@ private noncomputable def orbitChainPerm (σ : Equiv.Perm ι) (O : Finset ι) : 
 人手証明（`claim_permutation_sign_moved_orbit_product` の証明）と同じ順で、
 軌道ごとの互換の鎖・その符号・互いに素な台の合成を結ぶ。 -/
 theorem sign_movedEdgeOrbit_product (σ : Equiv.Perm ι) :
-    sign (fun x y : ι => x < y) σ =
+    finiteOrderedSign σ =
       ∏ O ∈ movedEdgeOrbitSet σ, (-1 : ℤ) ^ (O.card - 1) := by
   classical
+  change sign (fun x y : ι => x < y) σ = _
   -- 各軌道の基点の存在（軌道族の定義から従う）。
   have hex : ∀ O ∈ movedEdgeOrbitSet σ, ∃ e, σ e ≠ e ∧ movedOrbit σ e = O := by
     intro O hO
