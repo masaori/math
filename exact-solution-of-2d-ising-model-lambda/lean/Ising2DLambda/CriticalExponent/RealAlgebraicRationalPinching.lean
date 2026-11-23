@@ -9,6 +9,7 @@
   a <_R (j₀+1)/n（最大性で (j₀+1)/n ≤_R a でなく、三分法）            `realAlgebraic_lt_of_not_le`
   r <_R j₀/n（狭義順序の定義と正の有理数の正値性）                     `realAlgebraic_rat_lt_of_sub_pos`
   r <_R a（j₀/n ≤_R a の二つの場合と推移律）                           `realAlgebraic_lt_of_lt_of_le`
+  有理数 r, s は R の元（`claim_rationals_are_real_algebraic`）         `rational_mem_realClosedCarrier`
   s − r = 2/n、0 < s − r < ε                                           本定理の末尾
 
 必要十分版の定理・定義は使わない。住処: Q と Qbar（実閉部分体 R ⊂ Qbar）。実数体・複素数体は現れない。
@@ -137,7 +138,22 @@ theorem realAlgebraic_rational_pinching (data : RealClosedSubfieldData) (a : dat
     push_cast
     field_simp
     ring
-  refine ⟨((j₀ - 1 : ℤ) : ℚ) / n, ((j₀ + 1 : ℤ) : ℚ) / n, hra, has, ?_, ?_⟩
+  -- 有理数 r, s は R の元でもある（`claim_rationals_are_real_algebraic`）。
+  have hrmem : (((((j₀ - 1 : ℤ) : ℚ) / n : ℚ)) : Qbar) ∈ data.carrier :=
+    rational_mem_realClosedCarrier data (((j₀ - 1 : ℤ) : ℚ) / n)
+  have hsmem : (((((j₀ + 1 : ℤ) : ℚ) / n : ℚ)) : Qbar) ∈ data.carrier :=
+    rational_mem_realClosedCarrier data (((j₀ + 1 : ℤ) : ℚ) / n)
+  have hrR : realClosedRat data (((j₀ - 1 : ℤ) : ℚ) / n)
+      = ⟨(((((j₀ - 1 : ℤ) : ℚ) / n : ℚ)) : Qbar), hrmem⟩ := rfl
+  have hsR : realClosedRat data (((j₀ + 1 : ℤ) : ℚ) / n)
+      = ⟨(((((j₀ + 1 : ℤ) : ℚ) / n : ℚ)) : Qbar), hsmem⟩ := rfl
+  rw [hrR] at hra
+  rw [hsR] at has
+  refine ⟨((j₀ - 1 : ℤ) : ℚ) / n, ((j₀ + 1 : ℤ) : ℚ) / n, ?_, ?_, ?_, ?_⟩
+  · rw [hrR]
+    exact hra
+  · rw [hsR]
+    exact has
   · rw [hdiff]
     exact hwidth0
   · rw [hdiff]

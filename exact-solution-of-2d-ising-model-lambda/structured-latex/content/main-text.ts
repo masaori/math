@@ -111552,6 +111552,13 @@ const chapter_critical_exponent = defineSection({
                       ],
                       proof: [
                         paragraph([
+                          math(String.raw`d_{1}(L)`), " は、", ref("claim_fisher_zero_set_nonempty"),
+                          " により空でなく ", ref("claim_fisher_zero_set_finite_card_bound"),
+                          " により有限な ", math(String.raw`D_L`), " へ ",
+                          ref("claim_real_algebraic_min_unique"), " を当てて得た最小元である（",
+                          ref("def_leading_distance"), "）。",
+                        ]),
+                        paragraph([
                           ref("def_leading_distance"), " により ", math(String.raw`d_{1}(L)\in D_L`),
                           " だから、ある ", math(String.raw`\xi\in\mathcal{F}_{L}`),
                           " が存在して",
@@ -111662,6 +111669,14 @@ d_{1}(L)-0
                         ]),
                       ],
                       proof: [
+                        paragraph([
+                          math(String.raw`d_{1}(L)`), " は、", ref("claim_fisher_zero_set_nonempty"),
+                          " により空でなく ", ref("claim_fisher_zero_set_finite_card_bound"),
+                          " により有限な ", math(String.raw`D_L`), " へ ",
+                          ref("claim_real_algebraic_min_unique"), " を当てて得た最小元である（",
+                          ref("def_leading_distance"), "）。所属 ", math(String.raw`d_{1}(L)\in D_L`),
+                          " と最小性はこの最小元の条件である。",
+                        ]),
                         paragraph([
                           "第一条件から第二条件を示す。", math(String.raw`d_{1}(L)<_{R}t`),
                           " と仮定する。", ref("def_leading_distance"), " により ",
@@ -111885,7 +111900,7 @@ s+1
                         displayMath(String.raw`\begin{aligned}
 x_c
 &=s-1
-&&(\because\ \blkref{def_critical_point})\\
+&&(\because\ \blkref{def_critical_point}\text{ と }\blkref{claim_critical_point_mem_real_closed})\\
 &=(s-1)\cdot1
 &&(\because\ R\text{ の乗法単位元})\\
 &=(s-1)\cdot\bigl((s+1)\cdot(v^{-1}\cdot v^{-1})\bigr)
@@ -111902,7 +111917,8 @@ x_c
 &&(\because\ R\text{ の乗法単位元})
 \end{aligned}`),
                         paragraph([
-                          "を得る。ゆえに差 ", math(String.raw`x_c-0=x_c`), " は零元でない ",
+                          "を得る。", math(String.raw`x_c\in R`), "（", ref("claim_critical_point_mem_real_closed"),
+                          "）であり、差 ", math(String.raw`x_c-0=x_c`), " は零元でない ",
                           math(String.raw`v^{-1}`), " の平方であるから、",
                           ref("def_real_algebraic_strict_order"), " により ",
                           math(String.raw`0<_{R}x_c`), " である。全過程は ",
@@ -112051,7 +112067,9 @@ s+1
                         paragraph([
                           "有限集合 ",
                           math(String.raw`S_N:=\left\{j\in\mathbb{N}\ \middle|\ j\le N,\ \frac{j}{N}\le_R x_c\right\}`),
-                          " を置く。", ref("claim_critical_point_positive"), " より ",
+                          " を置く（有理数 ", math(String.raw`j/N`), " は ",
+                          ref("claim_rationals_are_real_algebraic"), " により ", math(String.raw`R`),
+                          " の元である）。", ref("claim_critical_point_positive"), " より ",
                           math(String.raw`0<_R x_c`), " なので ", math(String.raw`0\in S_N`),
                           " であり、", math(String.raw`S_N`), " は空でない。しかも ",
                           math(String.raw`S_N\subseteq\{0,1,\ldots,N\}`),
@@ -112125,7 +112143,9 @@ s+1
                     ]),
                     displayMath(String.raw`k+1\le N,\qquad p:=\frac{k}{N}\le_Rx_c<_Rq:=\frac{k+1}{N}`),
                     paragraph([
-                      "となる。", math(String.raw`k+1\ge1`), " と ", math(String.raw`N\ge1`),
+                      "となる。", math(String.raw`p,q`), " は ", ref("claim_rationals_are_real_algebraic"),
+                      " により ", math(String.raw`R`), " の元である。",
+                      math(String.raw`k+1\ge1`), " と ", math(String.raw`N\ge1`),
                       " より ", math(String.raw`q\in\mathbb{Q}_{>0}`), " である。さらに",
                     ]),
                     displayMath(String.raw`\begin{aligned}

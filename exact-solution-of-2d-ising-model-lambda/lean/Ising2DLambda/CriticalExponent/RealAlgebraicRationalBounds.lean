@@ -16,6 +16,7 @@
   主鎖 x^d + Σα_j x^j = x^{d−1}(x−S) + Σ(…) >_R 0                    `realAlgebraic_monic_pos_of_rootBound_le`
   p(x) = c_d·(x^d + Σα_j x^j) ≠ 0、B ≤_R a の矛盾と三分法で a <_R B   `realAlgebraic_root_lt_rootBound`
   p(−X) の係数比の絶対値の和は S、−a <_R B から −B <_R a              `realAlgebraic_rational_bounds`
+  有理数 ±B は R の元（`claim_rationals_are_real_algebraic`）           `rational_mem_realClosedCarrier`
 
 必要十分版の定理・定義は使わない。住処: Q と Qbar（実閉部分体 R ⊂ Qbar）。実数体・複素数体は現れない。
 -/
@@ -355,10 +356,19 @@ theorem realAlgebraic_rational_bounds (data : RealClosedSubfieldData) (a : data.
       ring
     rw [h]
     exact hlowerNeg
+  -- 有理数 ±B は R の元でもある（`claim_rationals_are_real_algebraic`）。
+  have hBmem : ((B : ℚ) : Qbar) ∈ data.carrier := rational_mem_realClosedCarrier data B
+  have hnegBmem : ((-B : ℚ) : Qbar) ∈ data.carrier := rational_mem_realClosedCarrier data (-B)
+  have hBR : (⟨((B : ℚ) : Qbar), hBmem⟩ : data.carrier) = (B : data.carrier) :=
+    realClosedRat_eq_cast data B
+  have hnegBR : (⟨((-B : ℚ) : Qbar), hnegBmem⟩ : data.carrier) = ((-B : ℚ) : data.carrier) :=
+    realClosedRat_eq_cast data (-B)
   refine ⟨B, hB, ?_, ?_⟩
-  · rw [realClosedRat_eq_cast]
+  · show realAlgebraicLt data ⟨((-B : ℚ) : Qbar), hnegBmem⟩ a
+    rw [hnegBR]
     exact hlower
-  · rw [realClosedRat_eq_cast]
+  · show realAlgebraicLt data a ⟨((B : ℚ) : Qbar), hBmem⟩
+    rw [hBR]
     exact hupper
 
 end Ising2DLambda.CriticalExponent

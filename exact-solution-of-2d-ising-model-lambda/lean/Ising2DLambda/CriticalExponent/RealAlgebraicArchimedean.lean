@@ -8,6 +8,7 @@
   0 <_R N − B（正の有理数の正値性を N − B に）                        `realAlgebraic_rat_sub_pos`
   B <_R N（狭義順序の定義）                                           `realAlgebraic_rat_lt_of_sub_pos`
   −N <_R −B（狭義順序の定義と (−B) − (−N) = N − B）                   `realAlgebraic_neg_rat_lt_of_sub_pos`
+  有理数 ±N は R の元（`claim_rationals_are_real_algebraic`）           `rational_mem_realClosedCarrier`
   −N <_R a、a <_R N（推移律）                                         `realAlgebraic_archimedean`
 
 必要十分版の定理・定義は使わない。住処: Q と Qbar（実閉部分体 R ⊂ Qbar）。実数体・複素数体は現れない。
@@ -76,10 +77,20 @@ theorem realAlgebraic_archimedean (data : RealClosedSubfieldData) (a : data.carr
   -- B <_R N と −N <_R −B。
   have hBltN := realAlgebraic_rat_lt_of_sub_pos data hpos
   have hnegN := realAlgebraic_neg_rat_lt_of_sub_pos data hpos
+  -- 有理数 ±N は R の元でもある（`claim_rationals_are_real_algebraic`）。
+  have hNmem : ((N : ℚ) : Qbar) ∈ data.carrier := rational_mem_realClosedCarrier data N
+  have hnegNmem : ((-(N : ℚ) : ℚ) : Qbar) ∈ data.carrier :=
+    rational_mem_realClosedCarrier data (-(N : ℚ))
+  have hNR : realClosedRat data (N : ℚ) = ⟨((N : ℚ) : Qbar), hNmem⟩ := rfl
+  have hnegNR : realClosedRat data (-(N : ℚ)) = ⟨((-(N : ℚ) : ℚ) : Qbar), hnegNmem⟩ := rfl
   refine ⟨N, Nat.succ_pos _, ?_, ?_⟩
   · -- −N <_R −B <_R a（推移律）。
+    rw [hnegNR]
+    rw [hnegNR] at hnegN
     exact realAlgebraicLt_trans data _ _ _ hnegN hlower
   · -- a <_R B <_R N（推移律）。
+    rw [hNR]
+    rw [hNR] at hBltN
     exact realAlgebraicLt_trans data _ _ _ hupper hBltN
 
 end Ising2DLambda.CriticalExponent

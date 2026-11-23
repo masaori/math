@@ -7,6 +7,7 @@
   上界の同値の第一→第二で ξ ∈ F_L を取る                        `leadingDistance_lt_iff` の mp
   有理近似で q ∈ Q_{>0} を取る                                  `criticalPoint_exists_positiveRational_squareDiff_lt`
   一意表示 ξ = α + β·ω                                          `realClosedComponents`
+  x_c ∈ R、q ∈ R（臨界点の所属・有理数の所属）                   `criticalPoint_mem_realClosed`・`rational_mem_realClosedCarrier`
   証人 c₁・c₂・g の用意                                          `hCrit`・`hApprox`・`hSquare`
   t·t = 2 と式変形の鎖（z₁, z₂, z₃ の合成）                     `calc` の各段
   ε² = 4·η の書き戻しと Pinch の証人の提示                       本定理の結び
@@ -50,17 +51,19 @@ theorem leadingDistance_pinching_implies_predicate
     criticalPoint_exists_positiveRational_squareDiff_lt data hs etaQ hetaQ
   -- 一意表示の係数と臨界点・有理点・η の R への埋め込み。
   let ab := realClosedComponents base xi
-  let xc := criticalPointRealClosed base s hs
+  -- x_c ∈ R（`claim_critical_point_mem_real_closed`）の元。
+  let xc : base.carrier := Classical.choose (criticalPoint_mem_realClosed base s hs)
   let qR : base.carrier := ⟨(q : Qbar), rational_mem_realClosedCarrier base q⟩
   let etaR : base.carrier := ⟨(etaQ : Qbar), rational_mem_realClosedCarrier base etaQ⟩
   -- 証人 c₁: η − dsq_c(ξ) の零元でない平方表示（狭義順序の定義そのもの）。
   have hCrit : ∃ c1 : base.carrier, c1 ≠ 0 ∧
       etaR - ((ab.1 - xc) * (ab.1 - xc) + ab.2 * ab.2) = c1 * c1 := by
-    simpa [distanceSquaredToCriticalPoint, realAlgebraicLt, ab, xc, etaR] using hdsq
+    simpa [distanceSquaredToCriticalPoint, criticalPointRealClosed, realAlgebraicLt, ab, xc, etaR]
+      using hdsq
   -- 証人 c₂: η − (x_c − q)² の零元でない平方表示。
   have hApprox : ∃ c2 : base.carrier, c2 ≠ 0 ∧
       etaR - (xc - qR) * (xc - qR) = c2 * c2 := by
-    simpa [realAlgebraicLt, xc, qR, etaR] using happrox
+    simpa [criticalPointRealClosed, realAlgebraicLt, xc, qR, etaR] using happrox
   -- 証人 g: 和の平方の評価の差の平方表示（等号の枝は g := 0）。
   have hSquare : ∃ g : base.carrier,
       ((1 + 1) * ((ab.1 - xc) * (ab.1 - xc)) + (1 + 1) * ((xc - qR) * (xc - qR)))
