@@ -27,7 +27,6 @@ DEP	concrete	Ising2DLambda.KacWard.iterLeft_eq_iterate'
 DEP	concrete	Ising2DLambda.KacWard.iterLeft_perm_eq
 DEP	concrete	Ising2DLambda.KacWard.iterate_ne_of_lt_orbitPeriod
 DEP	concrete	Ising2DLambda.KacWard.iterate_orbitPeriod
-DEP	concrete	Ising2DLambda.KacWard.kacWardSignedPermutationTerm
 DEP	concrete	Ising2DLambda.KacWard.kacWardSignedPermutationTerm_orbit_product
 DEP	concrete	Ising2DLambda.KacWard.mem_movedOrbit_iff_iterate
 DEP	concrete	Ising2DLambda.KacWard.movedEdgeOrbitSet_partition
@@ -225,7 +224,6 @@ IMPORT	concrete	Ising2DLambda.KacWard.ReversalRotationPhase	necsuf	Ising2DLambda
 IMPORT	concrete	Ising2DLambda.KacWard.RightRayVerticalCrossingCount	necsuf	Ising2DLambda.NecSuf.KacWard.RightRayVerticalCrossingCount
 IMPORT	concrete	Ising2DLambda.KacWard.ShortPairCoefficientNonzero	necsuf	Ising2DLambda.NecSuf.KacWard.ShortPairCoefficientNonzero
 IMPORT	concrete	Ising2DLambda.KacWard.ShortPairRotationPhaseNonzero	necsuf	Ising2DLambda.NecSuf.KacWard.ShortPairRotationPhaseNonzero
-IMPORT	concrete	Ising2DLambda.KacWard.SignedOrbitTerm	necsuf	Ising2DLambda.NecSuf.KacWard.SignedOrbitTerm
 IMPORT	concrete	Ising2DLambda.KacWard.SmoothedCrossingNumber	necsuf	Ising2DLambda.NecSuf.KacWard.SmoothedCrossingNumber
 IMPORT	concrete	Ising2DLambda.KacWard.SmoothedCyclicTotalTurning	necsuf	Ising2DLambda.NecSuf.KacWard.SmoothedCyclicTotalTurning
 IMPORT	concrete	Ising2DLambda.KacWard.SmoothedSplitClosedWalks	necsuf	Ising2DLambda.NecSuf.KacWard.SmoothedSplitClosedWalks

@@ -18049,7 +18049,10 @@ j\in\operatorname{Orb}_{\sigma^{-1}}(i)
 &=\sigma^{-1}(j)&&\bigl(\because\ j\notin C,\ \blkref{def_invariant_subset_reversal}\bigr)\\
 &=\rho_C(\sigma^{-1})(j)&&\bigl(\because\ j\notin C,\ \blkref{def_invariant_subset_reversal}\bigr)
 \end{aligned}`),
-                      paragraph(["どの点でも値が等しいので ", math(String.raw`\rho^{-1}=\rho_C(\sigma^{-1})`), " である。この等号を使って台を比較する。始点 ", math(String.raw`i\in\mathcal J`), " と判定する点 ", math(String.raw`j\in\mathcal J`), " を固定する。", math(String.raw`i\in C`), " の場合、"]),
+                      paragraph(["どの点でも値が等しいので、"]),
+                      displayMath(String.raw`\rho^{-1}=\rho_C(\sigma^{-1})
+\qquad\bigl(\because\ \text{すべての }j\in\mathcal J\text{ で上の二場合の値が等しい}\bigr)`),
+                      paragraph(["この等号を使って台を比較する。始点 ", math(String.raw`i\in\mathcal J`), " と判定する点 ", math(String.raw`j\in\mathcal J`), " を固定する。", math(String.raw`i\in C`), " の場合、"]),
                       displayMath(String.raw`\begin{aligned}
 j\in\operatorname{Orb}_{\rho}(i)
 &\ \Longleftrightarrow\

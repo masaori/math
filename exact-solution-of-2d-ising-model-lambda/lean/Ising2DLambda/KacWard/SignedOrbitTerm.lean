@@ -7,20 +7,20 @@
 -/
 import Ising2DLambda.KacWard.TermOrbitWeightFactorization
 import Ising2DLambda.KacWard.PermutationSignOrbitProduct
-import Ising2DLambda.NecSuf.KacWard.SignedOrbitTerm
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 
 namespace Ising2DLambda.KacWard
 
 open Finset Polynomial
 open Ising2DLambda.AlgebraicEigenvalue
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
 
 variable {ι : Type} [Fintype ι] [LinearOrder ι]
 
 /-- 人手証明の置換項 `T_σ(x)`。 -/
 noncomputable def kacWardSignedPermutationTerm
     (M : Matrix ι ι Qbar) (σ : Equiv.Perm ι) : QbarPoly :=
-  Polynomial.C ((sign (fun x y : ι => x < y) σ : ℤ) : Qbar) *
+  Polynomial.C ((finiteOrderedSign σ : ℤ) : Qbar) *
     kacWardDeterminantEntryProduct M σ
 
 /-- 置換項は動く各軌道の `-x^|C|` 倍の重みの積である。 -/
@@ -31,9 +31,11 @@ theorem kacWardSignedPermutationTerm_orbit_product
       ∏ O ∈ movedEdgeOrbitSet σ,
         (-(Polynomial.X ^ O.card) * ∏ e ∈ O, Polynomial.C (M e (σ e))) := by
   classical
+  have hsign : finiteOrderedSign σ =
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign (fun x y : ι => x < y) σ := rfl
   rw [kacWardSignedPermutationTerm,
     kacWardEntryProduct_orbit_factorization M σ,
-    sign_movedEdgeOrbit_product σ]
+    hsign, sign_movedEdgeOrbit_product σ]
   have hfixed :
       (∏ e ∈ univ.filter fun e => σ e = e, kacWardPolynomialMatrix M e (σ e)) = 1 := by
     apply Finset.prod_eq_one
