@@ -31975,7 +31975,7 @@ B&:=\sum_{i\in I}2c(i)u(i)v(i).
 &=A+\sum_{i\in I}(2c(i)u(i)v(i))b
 &&\bigl(\because\ A\text{ の定義}\bigr)\\
 &=A+Bb
-&&\bigl(\because\ B\text{ の定義と有限和の分配律}\bigr).
+&&\bigl(\because\ B\text{ の定義と有限和の分配律}\bigr)
 \end{aligned}`),
                       paragraph([
                         "共役側も同じく各項を展開する。",
@@ -31993,7 +31993,7 @@ B&:=\sum_{i\in I}2c(i)u(i)v(i).
 &=A-\sum_{i\in I}(2c(i)u(i)v(i))b
 &&\bigl(\because\ A\text{ の定義}\bigr)\\
 &=A-Bb
-&&\bigl(\because\ B\text{ の定義と有限和の分配律}\bigr).
+&&\bigl(\because\ B\text{ の定義と有限和の分配律}\bigr)
 \end{aligned}`),
                       paragraph([
                         math(String.raw`-1,0\in F`), " かつ ", math(String.raw`-1=(-1)+0b`),
@@ -32009,9 +32009,9 @@ B&:=\sum_{i\in I}2c(i)u(i)v(i).
 &=\sum_{i\in I}c(i)(u(i)+v(i)b)^2+\sum_{i\in I}c(i)(u(i)-v(i)b)^2
 &&\bigl(\because\ \text{上の二つの和}\bigr)\\
 &=2A
-&&\bigl(\because\ \blkref{claim_quadratic_conjugate_square_sum_identity}\bigr),\\
+&&\bigl(\because\ \blkref{claim_quadratic_conjugate_square_sum_identity}\bigr)\\
 A&=-1
-&&\bigl(\because\ 2\ne0\text{ の除法}\bigr).
+&&\bigl(\because\ 2\ne0\text{ の除法}\bigr)
 \end{aligned}`),
                       paragraph([
                         math(String.raw`A`), " は添字集合 ", math(String.raw`I\sqcup I`),

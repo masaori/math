@@ -23,7 +23,6 @@ DEP	concrete	Ising2DLambda.KacWard.movedOrbitWeight_phase_twist
 DEP	concrete	Ising2DLambda.KacWard.movedOrbit_mapsTo
 DEP	concrete	Ising2DLambda.KacWard.nodup_cons_orbitTail
 DEP	concrete	Ising2DLambda.KacWard.permutation_iterLeft_return
-DEP	concrete	Ising2DLambda.KacWard.reversalPerm_eq_transpositionProduct
 DEP	concrete	Ising2DLambda.KacWard.sign_transpositionChain_orbitTail
 DEP	concrete	Ising2DLambda.KacWard.sqrtCoeff
 DEP	concrete	Ising2DLambda.KacWard.transpositionChain_orbitTail_fix

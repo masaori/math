@@ -88,14 +88,6 @@ private theorem directionTransposition_stays {L : ℕ} (e : Edge L) (x : Oriente
   apply (mem_edgeDirectionPair e _).mpr
   exact (mem_edgeDirectionPair e x).mp hx
 
-private theorem directionPairs_cover {L : ℕ} (x : OrientedEdge L) :
-    reversalPerm L x ≠ x ↔ ∃ e ∈ (Finset.univ : Finset (Edge L)), x ∈ edgeDirectionPair e := by
-  constructor
-  · intro _
-    exact ⟨x.1, Finset.mem_univ _, (mem_edgeDirectionPair x.1 x).mpr rfl⟩
-  · intro _
-    exact reversal_ne x
-
 /-- 相異なる台の辺の互換は互いに素な二点を動かすため可換である。 -/
 theorem edgeDirectionTranspositions_pairwise_commute (L : ℕ) :
     ((Finset.univ : Finset (Edge L)) : Set (Edge L)).Pairwise
@@ -126,16 +118,32 @@ theorem edgeDirectionTranspositions_pairwise_commute (L : ℕ) :
 theorem reversalPerm_eq_transpositionProduct (L : ℕ) :
     reversalPerm L = (Finset.univ : Finset (Edge L)).noncommProd
       edgeDirectionTransposition (edgeDirectionTranspositions_pairwise_commute L) := by
-  symm
-  apply noncommProd_eq_of_disjoint_supports Finset.univ edgeDirectionPair
-    edgeDirectionTransposition (edgeDirectionTranspositions_pairwise_commute L)
-  · intro e _ f _ hef
-    exact directionPair_disjoint hef
-  · intro e _ x hx
-    exact directionTransposition_local e x hx
-  · intro e _ x hx
-    exact directionTransposition_outside e x hx
-  · exact directionPairs_cover
+  classical
+  apply Equiv.ext
+  intro x
+  let s : Finset (Edge L) := Finset.univ
+  let comm : (s : Set (Edge L)).Pairwise
+      (fun e f => Commute (edgeDirectionTransposition e) (edgeDirectionTransposition f)) :=
+    edgeDirectionTranspositions_pairwise_commute L
+  let commErase : ((s.erase x.1 : Finset (Edge L)) : Set (Edge L)).Pairwise
+      (fun e f => Commute (edgeDirectionTransposition e) (edgeDirectionTransposition f)) :=
+    fun _ he _ hf hne => comm (s.mem_of_mem_erase he) (s.mem_of_mem_erase hf) hne
+  have hrest : ((s.erase x.1).noncommProd edgeDirectionTransposition commErase) x = x := by
+    apply Finset.noncommProd_induction (s.erase x.1) edgeDirectionTransposition
+      commErase (fun g => g x = x)
+    · intro g h hg hh
+      simp only [Equiv.Perm.mul_apply, hh, hg]
+    · rfl
+    · intro e he
+      apply directionTransposition_outside e x
+      intro hx
+      have hex : x.1 = e := (mem_edgeDirectionPair e x).mp hx
+      exact (Finset.mem_erase.mp he).1 hex.symm
+  rw [← Finset.mul_noncommProd_erase s (Finset.mem_univ x.1)
+    edgeDirectionTransposition comm]
+  simp only [Equiv.Perm.mul_apply, hrest]
+  exact (directionTransposition_local x.1 x
+    ((mem_edgeDirectionPair x.1 x).mpr rfl)).symm
 
 set_option maxHeartbeats 1000000
 /-- 反転の符号は、互換の個数 `2L²` が偶数であることから一になる。 -/
