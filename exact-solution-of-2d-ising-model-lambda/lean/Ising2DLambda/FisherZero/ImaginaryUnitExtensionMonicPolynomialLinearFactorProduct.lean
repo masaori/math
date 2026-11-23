@@ -85,7 +85,9 @@ theorem imaginaryUnitExtension_monicPolynomial_linearFactorProduct
       (∀ k : ℕ, d < k → g.coeff k = 0) → g.coeff d = 1 →
       ∃ α : ℕ → Qbar, (∀ i : ℕ, α i ∈ imaginaryUnitLinearValues F omega) ∧
         g = ∏ i ∈ Finset.range d, (Polynomial.X - qbarConst (α i)) := by
-  obtain ⟨h0, _, _, _⟩ := imaginaryUnitLinearValues_ringClosed F omega homega
+  -- 0 ∈ F と 0 = 0 + 0·ω から 0 ∈ Lin_F(ω)。
+  have h0 : (0 : Qbar) ∈ imaginaryUnitLinearValues F omega :=
+    ⟨0, 0, F.zero_mem, F.zero_mem, by ring⟩
   induction d with
   | zero =>
       intro g _ hbound hlead

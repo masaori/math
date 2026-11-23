@@ -29351,6 +29351,8 @@ x^{-1}&\in F_\infty&&\bigl(\because\ F_i\subseteq F_\infty\bigr)
                       ],
                       proof: [
                         paragraph([
+                          ref("claim_increasing_subfield_union_is_subfield"), " により ",
+                          math(String.raw`F_\infty`), " は部分体である。",
                           ref("def_positive_cone_extension"), " より各 ",
                           math(String.raw`n\in\mathbb N`), " で ",
                           math(String.raw`C_n\subseteq C_{n+1}`), " である。",
@@ -29658,7 +29660,9 @@ z&\in C_{j-1}&&\bigl(\because\ C_j\cap F_{j-1}=C_{j-1},\ \blkref{def_positive_co
                           " を延長し、", math(String.raw`\xi(n)\in E`), " なら、",
                           math(String.raw`\xi(n)\in F_{n+1}`), " と仮定する。",
                           math(String.raw`R:=\bigcup_{n\in\mathbb N}F_n`), " と ",
-                          math(String.raw`C_R:=\bigcup_{n\in\mathbb N}C_n`), " を置く。",
+                          math(String.raw`C_R:=\bigcup_{n\in\mathbb N}C_n`), " を置く（",
+                          math(String.raw`C_R`), " が ", math(String.raw`R`), " の正錐であることは ",
+                          ref("claim_increasing_positive_cone_union_is_positive_cone"), "）。",
                           "各 ", math(String.raw`n\in\mathbb N`), " で ",
                           math(String.raw`C_R\cap F_n=C_n`), " も仮定する。",
                           "このとき ", math(String.raw`(R,C_R)`), " を延長する任意の ",
@@ -29667,8 +29671,7 @@ z&\in C_{j-1}&&\bigl(\because\ C_j\cap F_{j-1}=C_{j-1},\ \blkref{def_positive_co
                       ],
                       proof: [
                         paragraph([ref("claim_increasing_subfield_union_is_subfield"), " により ", math(String.raw`R`),
-                          " は部分体であり、", ref("claim_increasing_positive_cone_union_is_positive_cone"),
-                          " により ", math(String.raw`C_R`), " はその正錐である。",
+                          " は部分体である。",
                           math(String.raw`(E,D)`), " を ", math(String.raw`(R,C_R)`),
                           " の延長として固定する。" ]),
                         paragraph(["任意の ", math(String.raw`z\in E`), " を取る。",
@@ -29759,6 +29762,10 @@ z&\in R&&\bigl(\because\ F_{n+1}\subseteq R\bigr)
                         paragraph([
                           math(String.raw`R:=\bigcup_{n\in\mathbb N}F_n`), "、",
                           math(String.raw`C_R:=\bigcup_{n\in\mathbb N}C_n`), " と置く。",
+                          ref("claim_increasing_subfield_union_is_subfield"), " により ",
+                          math(String.raw`R`), " は部分体であり、",
+                          ref("claim_increasing_positive_cone_union_is_positive_cone"), " により ",
+                          math(String.raw`C_R`), " は ", math(String.raw`R`), " の正錐である。",
                           "任意の ", math(String.raw`n\in\mathbb N`), " について",
                         ]),
                         displayMath(String.raw`\begin{aligned}
@@ -31990,7 +31997,7 @@ B&:=\sum_{i\in I}2c(i)u(i)v(i).
 \end{aligned}`),
                       paragraph([
                         math(String.raw`-1,0\in F`), " かつ ", math(String.raw`-1=(-1)+0b`),
-                        " と上の仮定に ", ref("claim_quadratic_representation_unique"),
+                        " と上の仮定に ", ref("claim_square_root_adjoined_subfield_quadratic_representation"),
                         " を適用すると ", math(String.raw`A=-1`), "、", math(String.raw`B=0`),
                         "。よって共役側の和も ", math(String.raw`-1`), " である。",
                       ]),
@@ -32161,8 +32168,13 @@ b&\in R&&(\because\ E=R)
                         "これは ", math(String.raw`b\notin R`), " に矛盾する。従って ",
                         math(String.raw`b\in R`), " であり、", math(String.raw`b\ne0`),
                         " と ", math(String.raw`b^2=a`), " は選んだ平方根の条件である。",
-                        "また ", math(String.raw`s\in P_s`), "（",
-                        ref("def_quadratic_positive_cone"), "）と ",
+                        "また ", math(String.raw`s=\iota(0)+\iota(1)\cdot s`), "（",
+                        math(String.raw`\iota`), " は ", ref("claim_enumerated_ordered_subfield_is_maximal"),
+                        " の有理数の包含）の表示 ",
+                        math(String.raw`(0,1)`), " は ", ref("claim_quadratic_representation_unique"),
+                        " により一意なので ", math(String.raw`s\in P_s`), "（",
+                        ref("def_quadratic_positive_cone"), "）であり、部分体 ",
+                        math(String.raw`Q_s`), "（", ref("claim_quadratic_field_set_is_subfield"), "）について ",
                         math(String.raw`P_s=C_R\cap Q_s`), "（",
                         ref("claim_enumerated_ordered_subfield_is_maximal"),
                         "）から ", math(String.raw`s\in C_R`), " なので、",
@@ -44261,7 +44273,11 @@ a-b\cdot\omega
                             ref("def_imaginary_unit_extension_conjugate_polynomial"),
                             " と ",
                             ref("def_imaginary_unit_extension_conjugate"),
-                            " により ",
+                            "（値が表示 ",
+                            math(String.raw`a_i+b_i\cdot\omega`),
+                            " の取り方に依らないことは ",
+                            ref("claim_imaginary_unit_extension_unique_representation"),
+                            "）により ",
                             math(String.raw`\mathrm{ac}_i\bigl(\mathrm{cjp}_{\omega}(g)\bigr)=\mathrm{cj}_{\omega}(a_i+b_i\cdot\omega)=a_i-b_i\cdot\omega`),
                             " である。",
                             math(String.raw`k\in\mathbb{N}`),
@@ -44487,7 +44503,11 @@ a-b\cdot\omega
                             math(String.raw`0,1\in F`),
                             " と ",
                             ref("def_imaginary_unit_extension_conjugate"),
-                            " により ",
+                            "（値が表示 ",
+                            math(String.raw`1+0\cdot\omega`),
+                            " の取り方に依らないことは ",
+                            ref("claim_imaginary_unit_extension_unique_representation"),
+                            "）により ",
                             math(String.raw`\mathrm{cj}_{\omega}(z^{0})=\mathrm{cj}_{\omega}(1+0\cdot\omega)=1-0\cdot\omega=1=\mathrm{cj}_{\omega}(z)^{0}`),
                             "。一歩: ",
                             math(String.raw`z^{k+1}=z^{k}\cdot z\in\mathrm{Lin}_F(\omega)`),
@@ -44523,7 +44543,11 @@ a-b\cdot\omega
                             ref("def_imaginary_unit_extension_conjugate_polynomial"),
                             " の中で示した ",
                             math(String.raw`\mathrm{cj}_{\omega}(0)=0`),
-                            " は右辺の空の和に等しい。一歩: 最後の項を分けると、所属は (一) と帰納法の仮定から、等号は (二) を ",
+                            "（",
+                            math(String.raw`0=0+0\cdot\omega`),
+                            " の表示の一意性 ",
+                            ref("claim_imaginary_unit_extension_unique_representation"),
+                            " による）は右辺の空の和に等しい。一歩: 最後の項を分けると、所属は (一) と帰納法の仮定から、等号は (二) を ",
                             math(String.raw`u:=\sum_{k=0}^{m-1}x(k)`),
                             "、",
                             math(String.raw`v:=x(m)`),
@@ -46322,7 +46346,7 @@ d
 &=\mathrm{cj}_{\omega}(0+0\cdot\omega)
 &&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
 &=0-0\cdot\omega
-&&\bigl(\because\ 0\in F\text{ と }\blkref{def_imaginary_unit_extension_conjugate}\bigr)\\
+&&\bigl(\because\ 0\in F\text{ と }\blkref{def_imaginary_unit_extension_conjugate}\text{（表示の取り方に依らないことは }\blkref{claim_imaginary_unit_extension_unique_representation}\text{）}\bigr)\\
 &=0
 &&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)
 \end{aligned}`),
@@ -46331,7 +46355,7 @@ d
 &=\mathrm{cj}_{\omega}(1+0\cdot\omega)
 &&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)\\
 &=1-0\cdot\omega
-&&\bigl(\because\ 1\in F\text{、}0\in F\text{ と }\blkref{def_imaginary_unit_extension_conjugate}\bigr)\\
+&&\bigl(\because\ 1\in F\text{、}0\in F\text{ と }\blkref{def_imaginary_unit_extension_conjugate}\text{（表示の取り方に依らないことは }\blkref{claim_imaginary_unit_extension_unique_representation}\text{）}\bigr)\\
 &=1
 &&\bigl(\because\ \overline{\mathbb{Q}}\text{ の四則}\bigr)
 \end{aligned}`),
@@ -47261,8 +47285,8 @@ g
                             "）であり、",
                           ]),
                           displayMath(String.raw`\begin{aligned}
-s&\in P_s&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{。}\ \mathrm{rep}_s(s)=(0,1)\bigr)\\
-s&\in C_R\cap Q_s&&\bigl(\because\ P_s=C_R\cap Q_s\text{。}\ \blkref{claim_enumerated_ordered_subfield_is_maximal}\text{ の延長と }\blkref{def_positive_cone_extension}\bigr)\\
+s&\in P_s&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{。}\ \mathrm{rep}_s(s)=(0,1)\text{ は表示の一意性 }\blkref{claim_quadratic_representation_unique}\text{ による}\bigr)\\
+s&\in C_R\cap Q_s&&\bigl(\because\ P_s=C_R\cap Q_s\text{。}\ \blkref{claim_enumerated_ordered_subfield_is_maximal}\text{ の延長と、部分体 }Q_s\text{（}\blkref{claim_quadratic_field_set_is_subfield}\text{）への }\blkref{def_positive_cone_extension}\bigr)\\
 s&\in C_R&&\bigl(\because\ \text{共通部分の定義}\bigr)
 \end{aligned}`),
                           paragraph([

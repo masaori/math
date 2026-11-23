@@ -22,16 +22,23 @@ private theorem imaginaryUnitExtension_monicQuadraticRoot
       r * r + p * r + q = 0 := by
   obtain ⟨a, b, ha, hb, hp⟩ := hp
   obtain ⟨c, d, hc, hd, hq⟩ := hq
+  -- 人手: F の単位元と和から 2 = 1 + 1 ∈ F、積から 4 = 2·2 ∈ F。
+  have h2 : (2 : Qbar) ∈ F := by
+    have h : (1 : Qbar) + 1 ∈ F := F.add_mem F.one_mem F.one_mem
+    rwa [one_add_one_eq_two] at h
+  have h4 : (4 : Qbar) ∈ F := by
+    have h : (2 : Qbar) * 2 ∈ F := F.mul_mem h2 h2
+    rwa [show (2 : Qbar) * 2 = 4 by norm_num] at h
   let A : Qbar := a * a - b * b - 4 * c
   let B : Qbar := 2 * a * b - 4 * d
   have hA : A ∈ F := by
     dsimp [A]
     exact F.sub_mem (F.sub_mem (F.mul_mem ha ha) (F.mul_mem hb hb))
-      (F.mul_mem (natCast_mem_subfield F 4) hc)
+      (F.mul_mem (h4) hc)
   have hB : B ∈ F := by
     dsimp [B]
-    exact F.sub_mem (F.mul_mem (F.mul_mem (natCast_mem_subfield F 2) ha) hb)
-      (F.mul_mem (natCast_mem_subfield F 4) hd)
+    exact F.sub_mem (F.mul_mem (F.mul_mem (h2) ha) hb)
+      (F.mul_mem (h4) hd)
   have hdisc : p * p - 4 * q = A + B * omega := by
     dsimp [A, B]
     rw [hp, hq]
@@ -46,10 +53,10 @@ private theorem imaginaryUnitExtension_monicQuadraticRoot
   let y : Qbar := (-b + v) / 2
   have hx : x ∈ F := by
     dsimp [x]
-    exact F.div_mem (F.add_mem (F.neg_mem ha) hu) (natCast_mem_subfield F 2)
+    exact F.div_mem (F.add_mem (F.neg_mem ha) hu) (h2)
   have hy : y ∈ F := by
     dsimp [y]
-    exact F.div_mem (F.add_mem (F.neg_mem hb) hv) (natCast_mem_subfield F 2)
+    exact F.div_mem (F.add_mem (F.neg_mem hb) hv) (h2)
   let r : Qbar := (-p + s) / 2
   have hr : r = x + y * omega := by
     dsimp [r, x, y, s]
