@@ -20548,14 +20548,14 @@ m_{\tau,\upsilon}(m)&=m_\sigma(m)&&\bigl(\because\ \text{最小元の一致を }
 &=m&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\text{ の最小元の一致}\bigr),\\
 m&\in\operatorname{Orb}_p(m)&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の零回の反復}\bigr),\\
 m&\in D&&\bigl(\because\ \blkref{def_matching_pair_coloring},\ m_{\tau,\upsilon}(m)=m\bigr),\\
-m&\in C_\sigma&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\bigr).
+m&\in C_\sigma&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\bigr)
 \end{aligned}`),
                       paragraph(["ここで ", math(String.raw`p:=\upsilon\circ\tau`), " は ", ref("def_matching_pair_step"), " の二歩置換である。任意の ", math(String.raw`j\in\mathcal J`), " について、", ref("def_alternating_neighbor_pairs"), " の二場合と、", ref("claim_matching_pair_coloring_alternates"), " および第二の相手写像による色反転から"]),
                       displayMath(String.raw`\begin{aligned}
 \sigma(j)\in D&\Longleftrightarrow\tau(j)\in D&&\bigl(\because\ j\in C_\sigma\text{ の場合、}\blkref{def_alternating_neighbor_pairs}\bigr)\\
 &\Longleftrightarrow j\notin D&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates}\bigr),\\
 \sigma(j)\in D&\Longleftrightarrow\upsilon(j)\in D&&\bigl(\because\ j\notin C_\sigma\text{ の場合、}\blkref{def_alternating_neighbor_pairs}\bigr)\\
-&\Longleftrightarrow j\notin D&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates}\bigr).
+&\Longleftrightarrow j\notin D&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates}\bigr)
 \end{aligned}`),
                       paragraph(["従って ", math(String.raw`D`), " は ", math(String.raw`\sigma`), " の一歩で反転する。", ref("claim_even_orbit_coloring"), " により ", math(String.raw`C_\sigma`), " も同じ性質を持つ。", math(String.raw`m\in D\cap C_\sigma`), " から、順方向の反復回数 ", math(String.raw`n\in\mathbb N`), " について帰納すると"]),
                       displayMath(String.raw`\sigma^{[n]}(m)\in D\ \Longleftrightarrow\ \sigma^{[n]}(m)\in C_\sigma\qquad\bigl(\because\ \text{零回では }m\in D\cap C_\sigma\text{、後者では両色が反転}\bigr)`),

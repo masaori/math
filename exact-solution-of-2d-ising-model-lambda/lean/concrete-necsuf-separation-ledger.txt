@@ -12,7 +12,6 @@ DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.orientationSign_eq_finset_product
 DEP	concrete	Ising2DLambda.FisherZero.criticalPartitionPartialSum
 DEP	concrete	Ising2DLambda.FisherZero.criticalPartitionPartialSum_coe
 DEP	concrete	Ising2DLambda.KacWard.arfFourierSignProjection
-DEP	concrete	Ising2DLambda.KacWard.edgeDirectionTranspositions_pairwise_commute
 DEP	concrete	Ising2DLambda.KacWard.formalSquareRoot_exists
 DEP	concrete	Ising2DLambda.KacWard.formalSquareRoot_unique
 DEP	concrete	Ising2DLambda.KacWard.iterLeft_eq_iterate'

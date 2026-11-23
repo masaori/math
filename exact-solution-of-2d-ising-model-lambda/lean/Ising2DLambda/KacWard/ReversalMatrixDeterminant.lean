@@ -101,12 +101,26 @@ theorem edgeDirectionTranspositions_pairwise_commute (L : ℕ) :
     ((Finset.univ : Finset (Edge L)) : Set (Edge L)).Pairwise
       (fun e f => Commute (edgeDirectionTransposition e) (edgeDirectionTransposition f)) := by
   intro e _ f _ hef
-  apply commute_of_disjoint_supports edgeDirectionPair edgeDirectionTransposition
-    (directionPair_disjoint hef)
-  · intro d _ x hx
-    exact directionTransposition_stays d x hx
-  · intro d _ x hx
-    exact directionTransposition_outside d x hx
+  have hdisj := directionPair_disjoint hef
+  apply Equiv.ext
+  intro x
+  simp only [Equiv.Perm.mul_apply]
+  by_cases hxe : x ∈ edgeDirectionPair e
+  · have hxf : x ∉ edgeDirectionPair f :=
+      fun hxf => Finset.disjoint_left.mp hdisj hxe hxf
+    have htxe := directionTransposition_stays e x hxe
+    have htxf : edgeDirectionTransposition e x ∉ edgeDirectionPair f :=
+      fun h => Finset.disjoint_left.mp hdisj htxe h
+    rw [directionTransposition_outside f x hxf,
+      directionTransposition_outside f _ htxf]
+  · by_cases hxf : x ∈ edgeDirectionPair f
+    · have htxf := directionTransposition_stays f x hxf
+      have htxe : edgeDirectionTransposition f x ∉ edgeDirectionPair e :=
+        fun h => Finset.disjoint_left.mp hdisj h htxf
+      rw [directionTransposition_outside e x hxe,
+        directionTransposition_outside e _ htxe]
+    · simp only [directionTransposition_outside e x hxe,
+        directionTransposition_outside f x hxf]
 
 /-- 反転は各辺の二方向の互換をすべて合成した置換である。 -/
 theorem reversalPerm_eq_transpositionProduct (L : ℕ) :
