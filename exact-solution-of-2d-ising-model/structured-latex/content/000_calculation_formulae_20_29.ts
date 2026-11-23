@@ -2773,7 +2773,7 @@ a^{-1}\cdot b^{-1}
 &= 1 + (-1)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 1)\ \text{を右辺から左辺へ}\bigr)\\
 &< 0 + (-1)
-&&\bigl(\because\ \text{場合の仮定}\ 1 < 0\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 1,\ y \to 0,\ c \to -1\bigr)\\
+&&\bigl(\because\ \text{場合の仮定}\ 1 < 0\ \text{と、}\blkref{real_less_than_preserved_by_adding_on_right}\ \text{の}\ x < y \Rightarrow x + c < y + c\ (x \to 1,\ y \to 0,\ c \to -1)\bigr)\\
 &= -1
 &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
@@ -2797,6 +2797,7 @@ a^{-1}\cdot b^{-1}
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 0 < 1・0 < 2・2 ≠ 0 を名前だけで根拠にしており（zero_in_closed_interval_from_minus_half_pi_to_half_pi・inverse_of_sqrt_cc・relation_of_gamma_2_theta_tilde ほか）、0 < 1 は順序体の公理に含まれないので、ℝ の 2 を定めて 0 < 2 を示す前段として示す主張にした。Lean の具体版は Ising2D.real_zero_less_than_one（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroLessThanOne.lean）、必要十分版は Ising2D.NecSuf.zero_lt_one_of_orderedAxioms（NecSuf/ZeroLtOneOfOrderedAxioms.lean）。数値検証: sagemath/check/real_zero_less_than_one/。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: 0 + (−1) = −1（0 + x = x の x → −1）と 1·1 = 1（x·1 = x の x → 1）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a)）: 狭義の順序と加法の両立 x < y ⇒ x + c < y + c を「ℝ の順序と加法の両立（ℝ は順序体 set_and_algebra_notation）」として名前だけで引いていた行の根拠を、この回に足した主張 real_less_than_preserved_by_adding_on_right への参照に替えた（1 < 0 の場合の第 1 の鎖の 2 行目）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -2843,7 +2844,7 @@ a^{-1}\cdot b^{-1}
 &= 0 + 1
 &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &< 1 + 1
-&&\bigl(\because\ \blkref{real_zero_less_than_one}\ \text{の}\ 0 < 1\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to 1,\ c \to 1\bigr)\\
+&&\bigl(\because\ \blkref{real_zero_less_than_one}\ \text{の}\ 0 < 1\ \text{と、}\blkref{real_less_than_preserved_by_adding_on_right}\ \text{の}\ x < y \Rightarrow x + c < y + c\ (x \to 0,\ y \to 1,\ c \to 1)\bigr)\\
 &= 2
 &&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -2859,6 +2860,7 @@ a^{-1}\cdot b^{-1}
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 0 < 2 を名前だけで根拠にしており（zero_in_closed_interval_from_minus_half_pi_to_half_pi の準備の 0 < 2^{-1} など）、2 を def_real_two で定めたので、その 2 について 0 < 2 を real_zero_less_than_one から示す主張にした。Lean の具体版は Ising2D.real_zero_less_than_two（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroLessThanTwo.lean）、必要十分版は Ising2D.NecSuf.zero_lt_two_of_orderedAxioms（NecSuf/ZeroLtTwoOfOrderedAxioms.lean）。数値検証: sagemath/check/real_zero_less_than_two/。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: 1 = 0 + 1（0 + x = x の x → 1 を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a)）: 狭義の順序と加法の両立 x < y ⇒ x + c < y + c を「ℝ の順序と加法の両立（ℝ は順序体 set_and_algebra_notation）」として名前だけで引いていた行の根拠を、この回に足した主張 real_less_than_preserved_by_adding_on_right への参照に替えた（準備の鎖の 2 行目）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -3338,7 +3340,7 @@ a^{-1} \neq 0
 &= a^{-1} + (-a^{-1})
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to a^{-1})\ \text{を右辺から左辺へ}\bigr)\\
 &< 0 + (-a^{-1})
-&&\bigl(\because\ \text{場合の仮定}\ a^{-1} < 0\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to a^{-1},\ y \to 0,\ c \to -a^{-1}\bigr)\\
+&&\bigl(\because\ \text{場合の仮定}\ a^{-1} < 0\ \text{と、}\blkref{real_less_than_preserved_by_adding_on_right}\ \text{の}\ x < y \Rightarrow x + c < y + c\ (x \to a^{-1},\ y \to 0,\ c \to -a^{-1})\bigr)\\
 &= -a^{-1}
 &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -a^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
@@ -3364,7 +3366,7 @@ a^{-1} \neq 0
 &= 0 + 1
 &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &< (-1) + 1
-&&\bigl(\because\ \text{上の鎖の}\ 0 < -1\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to -1,\ c \to 1\bigr)\\
+&&\bigl(\because\ \text{上の鎖の}\ 0 < -1\ \text{と、}\blkref{real_less_than_preserved_by_adding_on_right}\ \text{の}\ x < y \Rightarrow x + c < y + c\ (x \to 0,\ y \to -1,\ c \to 1)\bigr)\\
 &= 1 + (-1)
 &&\bigl(\because\ \mathbb{R}\ \text{の加法の可換律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 0
@@ -3394,6 +3396,7 @@ a^{-1} \neq 0
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。正の数の乗法の逆元が正であることは順序体の公理に含まれないのに、zero_in_closed_interval_from_minus_half_pi_to_half_pi の準備の 0 < 2^{-1} ほかが「ℝ で正の数の逆数は正（ℝ は順序体）」を名前だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_inverse_of_positive_is_positive（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealInverseOfPositiveIsPositive.lean）、必要十分版は Ising2D.NecSuf.inv_pos_of_orderedAxioms（NecSuf/InvPosOfOrderedAxioms.lean）。数値検証: sagemath/check/real_inverse_of_positive_is_positive/。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: 0 + (−a^{-1}) = −a^{-1}（0 + x = x の x → −a^{-1}）と 1 = 0 + 1（x → 1 を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a)）: 狭義の順序と加法の両立 x < y ⇒ x + c < y + c を「ℝ の順序と加法の両立（ℝ は順序体 set_and_algebra_notation）」として名前だけで引いていた行の根拠を、この回に足した主張 real_less_than_preserved_by_adding_on_right への参照に替えた（第 1 の鎖の 2 行目と第 3 の鎖の 2 行目）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -3439,7 +3442,7 @@ a^{-1} \neq 0
 &= 0 + (-a)
 &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -a)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
 &< a + (-a)
-&&\bigl(\because\ \text{主張の仮定}\ 0 < a\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to a,\ c \to -a\bigr)\\
+&&\bigl(\because\ \text{主張の仮定}\ 0 < a\ \text{と、}\blkref{real_less_than_preserved_by_adding_on_right}\ \text{の}\ x < y \Rightarrow x + c < y + c\ (x \to 0,\ y \to a,\ c \to -a)\bigr)\\
 &= 0
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to a)\bigr)
 \end{aligned}`),
@@ -3449,6 +3452,7 @@ a^{-1} \neq 0
       notes: [
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。正の数の加法の逆元が負であることは順序体の公理に含まれないのに、trace_of_epsilon_V_plus_via_check_eigenvalues の Step 7 の ȟ = −1 の背理の鎖の 4 行目が「ℝ で a > 0 なら −a < 0」を名前だけで根拠にしていたので、示す主張として足した。Lean の具体版は Ising2D.real_negation_of_positive_is_negative（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealNegationOfPositiveIsNegative.lean）、必要十分版は Ising2D.NecSuf.neg_lt_zero_of_zero_lt（NecSuf/NegLtZeroOfZeroLt.lean）。数値検証: sagemath/check/real_negation_of_positive_is_negative/。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: −a = 0 + (−a)（0 + x = x の x → −a を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a)）: 狭義の順序と加法の両立 x < y ⇒ x + c < y + c を「ℝ の順序と加法の両立（ℝ は順序体 set_and_algebra_notation）」として名前だけで引いていた行の根拠を、この回に足した主張 real_less_than_preserved_by_adding_on_right への参照に替えた（鎖の 2 行目）。式・鎖の両端・段数は不変。",
       ],
     },
   },
@@ -6291,7 +6295,7 @@ x - \pi/2
 &= 0 + \pi
 &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to \pi)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &< \pi + \pi
-&&\bigl(\because\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a < b \Rightarrow a + c < b + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to 0,\ b \to \pi,\ c \to \pi\bigr)\\
+&&\bigl(\because\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{と、}\blkref{real_less_than_preserved_by_adding_on_right}\ \text{の}\ x < y \Rightarrow x + c < y + c\ (x \to 0,\ y \to \pi,\ c \to \pi)\bigr)\\
 &= 2\pi
 &&\bigl(\because\ \blkref{real_sum_of_two_equal_terms_is_twice}\ (a \to \pi)\bigr)
 \end{aligned}`),
@@ -6330,6 +6334,7 @@ s_{[0,2\pi)}\!\left([\theta + \pi/2]_{\sim_{\mathrm{angle}}}\right)
       status: "added",
       notes: [
         "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_angle_section_of_theta_plus_half_pi の ξ_θ が主値区間の θ で θ + π/2 になることを、sin_on_all_reals_agrees_on_principal_interval・cos_on_all_reals_agrees_on_principal_interval の共通の準備として足した。Lean の具体版は無い（Lean は角度表現の切断 s_{[0,2π)} を形式化していない。angle_section_of_zero_is_zero と同じ理由）。数値検証: sagemath/check/angle_section_of_principal_angle_plus_half_pi/。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a)）: 狭義の順序と加法の両立 x < y ⇒ x + c < y + c を「ℝ の順序と加法の両立（ℝ は順序体 set_and_algebra_notation）」として名前だけで引いていた行の根拠を、この回に足した主張 real_less_than_preserved_by_adding_on_right への参照に替えた（準備の第三の鎖の 3 行目。代入の変数名を a, b から x, y に替えた）。式・鎖の両端・段数は不変。",
       ],
     },
   },

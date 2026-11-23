@@ -467,7 +467,7 @@ f(0)
 &= -\pi/2 + \pi/2
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ -a + a = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to \pi/2\bigr)\\
 &< \pi/2 + \pi/2
-&&\bigl(\because\ \text{上の}\ -\pi/2 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow x + c < y + c\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ c \to \pi/2\bigr)\\
+&&\bigl(\because\ \text{上の}\ -\pi/2 < \pi/2\ \text{と、}\blkref{real_less_than_preserved_by_adding_on_right}\ \text{の}\ x < y \Rightarrow x + c < y + c\ (x \to -\pi/2,\ y \to \pi/2,\ c \to \pi/2)\bigr)\\
 &= \pi
 &&\bigl(\because\ \mathbb{R}\ \text{で}\ a/2 + a/2 = a\ \text{の}\ a \to \pi\bigr)
 \end{aligned}`),
@@ -478,6 +478,7 @@ f(0)
         "2026-11-08: zero_in_closed_interval_from_minus_half_pi_to_half_pi の証明の中の 0 < π の鎖と、relation_of_gamma_2_theta_tilde の準備の第五の 0 < π の鎖（arcsin(0) = 0 を経ていた）が同じ事実を別の道筋で示していたので、前者の鎖を独立の主張にして両方から引く。arcsin(0) を経ずに arcsin(−1) < arcsin(1) から示すので、sine_zero との循環は無い。",
         "2026-11-09: 数学的道具立ての angle_section_existence_uniqueness・sine_integral_two_sided から引けるよう、臨界点の章の冒頭（020_critical_point.ts）から arcsin_is_bijection の直後へ移した。arcsin(1) = π/2 の根拠を remark_real_analysis_facts_R3_R4 の円周率の項から、齋藤微積分 命題 2.1.5 で示す arcsin_of_one_is_half_pi に替えた。鎖の式は不変。",
         "四層のうち記述と SageMath まで。Lean は置かない: 本文の π は弧の長さで定めた実数（arcsin(1) = π/2）で、Lean の Real.pi は定義が違い、本文の arcsin・弧の長さの具体版も Lean に無いので、人手と 1 対 1 の具体版を置けない。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a)）: 狭義の順序と加法の両立 x < y ⇒ x + c < y + c を「ℝ の順序と加法の両立（ℝ は順序体 set_and_algebra_notation）」として名前だけで引いていた行の根拠を、この回に足した主張 real_less_than_preserved_by_adding_on_right への参照に替えた（本体の鎖の 2 行目。代入 x → −π/2, y → π/2 を書き足した）。式・鎖の両端・段数は不変。",
       ],
     },
   },

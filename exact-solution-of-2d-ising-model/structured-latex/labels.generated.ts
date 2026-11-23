@@ -640,6 +640,7 @@ export const ALL_LABELS = [
   "real_inclusion_preserves_sum_over_binary_words",
   "real_inverse_of_positive_is_positive",
   "real_less_than_is_asymmetric",
+  "real_less_than_preserved_by_adding_on_right",
   "real_log_negative_below_one",
   "real_log_of_power",
   "real_log_of_product",

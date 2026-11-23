@@ -3101,6 +3101,9 @@ targets=(
   Ising2D.real_less_than_is_asymmetric
   Ising2D.NecSuf.not_lt_of_lt_of_antisymm
   Ising2D.real_less_than_is_asymmetric_of_necSuf
+  Ising2D.real_less_than_preserved_by_adding_on_right
+  Ising2D.NecSuf.add_lt_add_right_of_le_compat
+  Ising2D.real_less_than_preserved_by_adding_on_right_of_necSuf
   Ising2D.square_of_complex_number_is_product
   Ising2D.square_of_complex_number_is_product_of_necSuf
   Ising2D.finite_product_of_real_products

@@ -348,6 +348,96 @@ export default defineBlocks([
     },
   },
   {
+    id: "calc_formulae_claim_real_less_than_preserved_by_adding_on_right",
+    kind: "claim",
+    title: { text: "実数の狭義の順序は右から同じ数を足しても保たれる" },
+    labels: ["real_less_than_preserved_by_adding_on_right"],
+    lean: ["Ising2D.real_less_than_preserved_by_adding_on_right"],
+    statement: [
+      paragraph([
+        math(String.raw`x, y, c \in \mathbb{R}`),
+        " とする。和・順序 ",
+        math(String.raw`\leq`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、",
+        math(String.raw`<`),
+        " は ",
+        ref("def_real_strict_order"),
+        " の狭義の順序である。",
+        math(String.raw`x < y`),
+        " ならば",
+      ]),
+      displayMath(String.raw`x + c < y + c`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x < y`),
+        " の定義（",
+        ref("def_real_strict_order"),
+        "）から ",
+        math(String.raw`x \leq y`),
+        " と ",
+        math(String.raw`x \neq y`),
+        " である。",
+        math(String.raw`-c \in \mathbb{R}`),
+        " は ",
+        ref("def_real_difference"),
+        " の加法の逆元（",
+        math(String.raw`z \to c`),
+        "）である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x + c
+&\leq y + c
+&&\bigl(\because\ x \leq y\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x \leq y \Rightarrow x + t \leq y + t\ (x \to x,\ y \to y,\ t \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x + c = y + c`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x
+&= x + 0
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&= x + (c + (-c))
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to c)\ \text{を右辺から左辺へ}\bigr)\\
+&= (x + c) + (-c)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to x,\ y \to c,\ t \to -c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&= (y + c) + (-c)
+&&\bigl(\because\ \text{仮定}\ x + c = y + c\bigr)\\
+&= y + (c + (-c))
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to y,\ y \to c,\ t \to -c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= y + 0
+&&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to c)\bigr)\\
+&= y
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to y)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`x \neq y`),
+        " に反する。よって ",
+        math(String.raw`x + c \neq y + c`),
+        " であり、上の ",
+        math(String.raw`x + c \leq y + c`),
+        " と合わせて、",
+        ref("def_real_strict_order"),
+        " から ",
+        math(String.raw`x + c < y + c`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a)）: 原文（Typst）に対応ブロックは無い。set_and_algebra_notation の順序の条件が述べる加法との両立は ≤ についてだけなのに、pi_is_positive・real_zero_less_than_one・real_zero_less_than_two・real_inverse_of_positive_is_positive（2 か所）・real_negation_of_positive_is_negative・angle_section_of_principal_angle_plus_half_pi の 7 か所が狭義の順序の形 x < y ⇒ x + c < y + c を「ℝ の順序と加法の両立（ℝ は順序体）」として名前だけで引いていたので、≤ の両立と体の加法の法則と def_real_strict_order から示す主張として足し、7 か所の根拠をこのブロックへの参照に替えた。左から足す形 c + x < c + y は別に扱う。Lean の具体版は Ising2D.real_less_than_preserved_by_adding_on_right（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealLessThanPreservedByAddingOnRight.lean）、必要十分版は Ising2D.NecSuf.add_lt_add_right_of_le_compat（NecSuf/AddLtAddRightOfLeCompat.lean）。数値検証: sagemath/check/real_less_than_preserved_by_adding_on_right/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_definition_real_quotient",
     kind: "definition",
     title: { text: "実数の商" },
