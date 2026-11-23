@@ -274,34 +274,60 @@ theorem sign_movedEdgeOrbit_product (σ : Equiv.Perm ι) :
     exact horb ▸ movedOrbit_mapsTo σ e (horb.symm ▸ hx)
   have hcomm : (s : Set (Finset ι)).Pairwise fun O₁ O₂ => Commute (f O₁) (f O₂) := by
     intro O₁ h₁ O₂ h₂ hne
-    apply commute_of_disjoint_supports (fun O : Finset ι => O) f
-      (hdisjoint O₁ h₁ O₂ h₂ hne)
-    · intro O hO x hx
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hO
-      rcases hO with hO | hO
-      · subst O; exact hstay O₁ h₁ x hx
-      · subst O; exact hstay O₂ h₂ x hx
-    · intro O hO x hx
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hO
-      rcases hO with hO | hO
-      · subst O; exact (hchain O₁ h₁).2.1 x hx
-      · subst O; exact (hchain O₂ h₂).2.1 x hx
+    have hdisj := hdisjoint O₁ h₁ O₂ h₂ hne
+    apply Equiv.ext
+    intro x
+    simp only [Equiv.Perm.mul_apply]
+    by_cases hx₁ : x ∈ O₁
+    · have hx₂ : x ∉ O₂ := fun hx₂ => Finset.disjoint_left.mp hdisj hx₁ hx₂
+      have hfx₁ : f O₁ x ∈ O₁ := hstay O₁ h₁ x hx₁
+      have hfx₂ : f O₁ x ∉ O₂ := fun hx₂ => Finset.disjoint_left.mp hdisj hfx₁ hx₂
+      rw [(hchain O₂ h₂).2.1 x hx₂, (hchain O₂ h₂).2.1 (f O₁ x) hfx₂]
+    · by_cases hx₂ : x ∈ O₂
+      · have hfx₂ : f O₂ x ∈ O₂ := hstay O₂ h₂ x hx₂
+        have hfx₁ : f O₂ x ∉ O₁ := fun hx₁ => Finset.disjoint_left.mp hdisj hx₁ hfx₂
+        rw [(hchain O₁ h₁).2.1 x hx₁, (hchain O₁ h₁).2.1 (f O₂ x) hfx₁]
+      · calc
+          f O₁ (f O₂ x) = f O₁ x := by rw [(hchain O₂ h₂).2.1 x hx₂]
+          _ = x := (hchain O₁ h₁).2.1 x hx₁
+          _ = f O₂ (f O₁ x) := by
+            rw [(hchain O₁ h₁).2.1 x hx₁, (hchain O₂ h₂).2.1 x hx₂]
   have hproduct : s.noncommProd f hcomm = σ := by
-    apply noncommProd_eq_of_disjoint_supports s (fun O : Finset ι => O) f hcomm
-    · exact fun O₁ h₁ O₂ h₂ hne => hdisjoint O₁ h₁ O₂ h₂ hne
-    · exact fun O hO x hx => (hchain O hO).1 x hx
-    · exact fun O hO x hx => (hchain O hO).2.1 x hx
-    · intro x
-      constructor
-      · intro hmoved
-        have hx : x ∈ movedEdgeSet σ := mem_movedEdgeSet.mpr hmoved
-        rw [← hcover] at hx
-        obtain ⟨O, hO, hxO⟩ := mem_biUnion.mp hx
-        exact ⟨O, hO, hxO⟩
-      · rintro ⟨O, hO, hxO⟩
-        apply mem_movedEdgeSet.mp
-        rw [← hcover]
-        exact mem_biUnion.mpr ⟨O, hO, hxO⟩
+    apply Equiv.ext
+    intro x
+    by_cases hx : σ x = x
+    · have hfix : ∀ O ∈ s, f O x = x := by
+        intro O hO
+        apply (hchain O hO).2.1 x
+        intro hxO
+        have hxunion : x ∈ s.biUnion id := mem_biUnion.mpr ⟨O, hO, hxO⟩
+        change x ∈ (movedEdgeOrbitSet σ).biUnion id at hxunion
+        rw [hcover] at hxunion
+        exact (mem_movedEdgeSet.mp hxunion) hx
+      exact (Finset.noncommProd_induction s f hcomm
+        (fun g => g x = x)
+        (fun g h hg hh => by simp only [Equiv.Perm.mul_apply, hh, hg])
+        rfl hfix).trans hx.symm
+    · have hmoved : x ∈ movedEdgeSet σ := mem_movedEdgeSet.mpr hx
+      rw [← hcover] at hmoved
+      obtain ⟨O, hO, hxO⟩ := mem_biUnion.mp hmoved
+      let commErase : ((s.erase O : Finset (Finset ι)) : Set (Finset ι)).Pairwise
+          (Function.onFun Commute f) :=
+        fun _ hy _ hz hne => hcomm (s.mem_of_mem_erase hy) (s.mem_of_mem_erase hz) hne
+      have herase : ((s.erase O).noncommProd f commErase) x = x := by
+        apply Finset.noncommProd_induction (s.erase O) f commErase (fun g => g x = x)
+        · intro g h hg hh
+          simp only [Equiv.Perm.mul_apply, hh, hg]
+        · rfl
+        · intro P hP
+          apply (hchain P (s.mem_of_mem_erase hP)).2.1 x
+          intro hxP
+          have hPO : P ≠ O := (Finset.mem_erase.mp hP).1
+          exact Finset.disjoint_left.mp
+            (hdisjoint P (s.mem_of_mem_erase hP) O hO hPO) hxP hxO
+      rw [← Finset.mul_noncommProd_erase s hO f hcomm]
+      simp only [Equiv.Perm.mul_apply, herase]
+      exact (hchain O hO).1 x hxO
   -- 人手証明の最後の三段: 局所置換の合成、符号の有限積、軌道ごとの符号。
   calc
     finiteOrderedSign σ = finiteOrderedSign (s.noncommProd f hcomm) := by rw [hproduct]
