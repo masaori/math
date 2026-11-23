@@ -69447,7 +69447,7 @@ x_c
                         "Ising2DLambda.FisherZero.selfDualRootMinus_mem_from_necSuf",
                       ],
                       statement: [
-                        paragraph(["有理数の包含を ", math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`), "（", ref("def_algebraic_numbers"), "）、両体の一を ", math(String.raw`1_{\mathbb Q},1_{\overline{\mathbb Q}}`), " と書く。", math(String.raw`s\in\overline{\mathbb Q}`), " は ", math(String.raw`s\cdot s=\iota(2)`), " を満たすとする（", ref("claim_sqrt_two_exists"), "）。根 ", math(String.raw`-1_{\overline{\mathbb Q}}-s`), "（", ref("claim_self_dual_quadratic_roots"), " の記法）は ", math(String.raw`Q_s`), "（", ref("def_quadratic_field_set"), "）に属する。" ]),
+                        paragraph(["有理数の包含を ", math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`), "（", ref("def_algebraic_numbers"), "）、両体の一を ", math(String.raw`1_{\mathbb Q},1_{\overline{\mathbb Q}}`), " と書く。", math(String.raw`s\in\overline{\mathbb Q}`), " は ", math(String.raw`s\cdot s=\iota(2)`), " を満たすとする（", ref("claim_sqrt_two_exists"), "）。根 ", math(String.raw`-1_{\overline{\mathbb Q}}-s`), "（", math(String.raw`(-1_{\overline{\mathbb Q}})+(-s)`), " を表す。", ref("claim_self_dual_quadratic_roots"), " と同じ記法）は ", math(String.raw`Q_s`), "（", ref("def_quadratic_field_set"), "）に属する。" ]),
                       ],
                       proof: [
                         paragraph(["係数の組を先に取る。"]),
@@ -69458,7 +69458,7 @@ x_c
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 -1_{\overline{\mathbb Q}}-s
-&=(-1_{\overline{\mathbb Q}})+(-s)&&\bigl(\because\ \text{記法 }\blkref{claim_self_dual_quadratic_roots}\bigr)\\
+&=(-1_{\overline{\mathbb Q}})+(-s)&&\bigl(\because\ \text{主張の文の記法}\bigr)\\
 &=\bigl(-\iota(1_{\mathbb Q})\bigr)+(-s)&&\bigl(\because\ \iota(1_{\mathbb Q})=1_{\overline{\mathbb Q}},\ \blkref{def_algebraic_numbers}\bigr)\\
 &=\iota(-1_{\mathbb Q})+(-s)&&\bigl(\because\ \text{包含の負号保存},\ \blkref{def_algebraic_numbers}\bigr)\\
 &=\iota(-1_{\mathbb Q})+\bigl(-(1_{\overline{\mathbb Q}}\cdot s)\bigr)&&\bigl(\because\ \text{左単位元則}\bigr)\\
