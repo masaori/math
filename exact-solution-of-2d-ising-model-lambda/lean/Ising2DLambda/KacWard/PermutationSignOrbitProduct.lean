@@ -43,17 +43,16 @@ private lemma perm_return (σ : Equiv.Perm ι) (e : ι) :
 
 /-- 人手証明の最小周期 `m_C`。 -/
 private noncomputable def orbitPeriod (σ : Equiv.Perm ι) (e : ι) : ℕ :=
-  minimalPeriod (⇑σ) e (perm_return σ e)
+  minimalReturnTime σ e
 
 private lemma iterate_orbitPeriod (σ : Equiv.Perm ι) (e : ι) :
     (⇑σ)^[orbitPeriod σ e] e = e :=
-  (iterLeft_eq_iterate' σ (orbitPeriod σ e) e).symm.trans
-    (iterLeft_minimalPeriod (⇑σ) e (perm_return σ e))
+  minimalReturnTime_return σ e
 
 /-- 動く基点の最小周期は 2 以上である（1 なら `σ e = e` となり矛盾）。 -/
 private lemma two_le_orbitPeriod (σ : Equiv.Perm ι) {e : ι} (he : σ e ≠ e) :
     2 ≤ orbitPeriod σ e := by
-  have h1 : 1 ≤ orbitPeriod σ e := minimalPeriod_pos (⇑σ) e (perm_return σ e)
+  have h1 : 1 ≤ orbitPeriod σ e := minimalReturnTime_pos σ e
   rcases Nat.lt_or_ge (orbitPeriod σ e) 2 with h2 | h2
   · have hm1 : orbitPeriod σ e = 1 := by omega
     have hret := iterate_orbitPeriod σ e
@@ -64,8 +63,7 @@ private lemma two_le_orbitPeriod (σ : Equiv.Perm ι) {e : ι} (he : σ e ≠ e)
 /-- 最小周期より小さい 1 以上の回数では戻らない（反復記法へ移送）。 -/
 private lemma iterate_ne_of_lt_orbitPeriod (σ : Equiv.Perm ι) (e : ι) {k : ℕ}
     (hk1 : 1 ≤ k) (hk : k < orbitPeriod σ e) : (⇑σ)^[k] e ≠ e := by
-  rw [← iterLeft_eq_iterate' σ k e]
-  exact not_iterLeft_of_lt_minimalPeriod (⇑σ) e (perm_return σ e) hk1 hk
+  exact minimalReturnTime_min σ e k hk1 hk
 
 /-- 軌道の元は基点の `orbitPeriod σ e` 未満の反復で尽くされる。 -/
 private lemma mem_movedOrbit_iff_iterate (σ : Equiv.Perm ι) (e : ι) {x : ι} :
@@ -74,12 +72,13 @@ private lemma mem_movedOrbit_iff_iterate (σ : Equiv.Perm ι) (e : ι) {x : ι} 
   · intro hx
     obtain ⟨k, hk⟩ := mem_orbit.mp hx
     rw [iterLeft_eq_iterate' σ k e] at hk
-    have hmpos : 0 < orbitPeriod σ e := minimalPeriod_pos (⇑σ) e (perm_return σ e)
+    have hmpos : 0 < orbitPeriod σ e := minimalReturnTime_pos σ e
     refine ⟨k % orbitPeriod σ e, Nat.mod_lt k hmpos, ?_⟩
     have hmul : (⇑σ)^[orbitPeriod σ e * (k / orbitPeriod σ e)] e = e := by
       rw [← iterLeft_eq_iterate' σ _ e]
       exact iterLeft_mul (⇑σ) e (orbitPeriod σ e)
-        (iterLeft_minimalPeriod (⇑σ) e (perm_return σ e)) (k / orbitPeriod σ e)
+        (by rw [iterLeft_eq_iterate' σ]; exact iterate_orbitPeriod σ e)
+        (k / orbitPeriod σ e)
     calc x = (⇑σ)^[k] e := hk
       _ = (⇑σ)^[k % orbitPeriod σ e + orbitPeriod σ e * (k / orbitPeriod σ e)] e := by
           rw [Nat.mod_add_div]
@@ -310,7 +309,22 @@ private lemma sign_transpositionChain_orbitTail (σ : Equiv.Perm ι) (e : ι) :
     finiteOrderedSign (finiteTranspositionChain e (orbitTail σ e)) =
       (-1 : ℤ) ^ ((movedOrbit σ e).card - 1) := by
   have hcard : (movedOrbit σ e).card = orbitPeriod σ e :=
-    card_orbit (⇑σ) σ.injective e (perm_return σ e)
+    by
+      have hperiod : minimalPeriod (⇑σ) e (perm_return σ e) = orbitPeriod σ e := by
+        apply Nat.le_antisymm
+        · by_contra h
+          have hlt : orbitPeriod σ e < minimalPeriod (⇑σ) e (perm_return σ e) := by omega
+          exact not_iterLeft_of_lt_minimalPeriod (⇑σ) e (perm_return σ e)
+            (minimalReturnTime_pos σ e) hlt (by
+              rw [iterLeft_eq_iterate' σ]
+              exact minimalReturnTime_return σ e)
+        · by_contra h
+          have hlt : minimalPeriod (⇑σ) e (perm_return σ e) < orbitPeriod σ e := by omega
+          exact minimalReturnTime_min σ e _
+            (minimalPeriod_pos (⇑σ) e (perm_return σ e)) hlt (by
+              rw [← iterLeft_eq_iterate' σ]
+              exact iterLeft_minimalPeriod (⇑σ) e (perm_return σ e))
+      exact (card_orbit (⇑σ) σ.injective e (perm_return σ e)).trans hperiod
   have hnotmem : e ∉ orbitTail σ e := (List.nodup_cons.mp (nodup_cons_orbitTail σ e)).1
   have hsign : ∀ (l : List ι), e ∉ l →
       finiteOrderedSign (finiteTranspositionChain e l) = (-1 : ℤ) ^ l.length := by
