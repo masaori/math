@@ -2189,15 +2189,44 @@ S_{M_{\mathrm{col}},k}
         math(String.raw`l\in\mathbb{Z}`),
         " が存在して ",
         math(String.raw`k=lM_{\mathrm{col}}`),
-        " である。このとき",
+        " である。",
+        math(String.raw`0_{\mathbb{Z}}\le M_{\mathrm{col}}`),
+        " を先に確かめておく。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0_{\mathbb N}+(M_{\mathrm{col}})_{\mathbb N}
+&=(M_{\mathrm{col}})_{\mathbb N}
+&&\bigl(\because\ \mathbb N\ \text{の加法の単位元}\ 0_{\mathbb N}+x=x\ (x\to(M_{\mathrm{col}})_{\mathbb N})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+0_{\mathbb N}
+&\le(M_{\mathrm{col}})_{\mathbb N}
+&&\bigl(\because\ \mathbb N\ \text{の順序と和}\ x\le y\Leftrightarrow\exists d\in\mathbf N,\ x+d=y\ (x\to0_{\mathbb N},\ y,d\to(M_{\mathrm{col}})_{\mathbb N})\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0_{\mathbb{Z}}
+&=\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N})
+&&\bigl(\because\ \iota_{\mathbb N\to\mathbb Z}\ \text{は零を保つ}\bigr)\\
+&\le\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
+&&\bigl(\because\ \iota_{\mathbb N\to\mathbb Z}\ \text{は順序を保つ。}0_{\mathbb N}\le(M_{\mathrm{col}})_{\mathbb N}\bigr)\\
+&=((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}
+&&\bigl(\because\ \text{略記}\ n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\ (n\to(M_{\mathrm{col}})_{\mathbb N})\ \text{を右辺から左辺へ}\bigr)\\
+&=M_{\mathrm{col}}
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb N}\ \text{の定義}\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["である。このとき"]),
       displayMath(
         String.raw`\begin{aligned}
 |lM_{\mathrm{col}}|
 &=|l|\,|M_{\mathrm{col}}|
 &&\bigl(\because\ \text{積の絶対値}\bigr)\\
 &=|l|M_{\mathrm{col}}
-&&\bigl(\because\ M_{\mathrm{col}}>0\text{ なので }|M_{\mathrm{col}}|=M_{\mathrm{col}}\bigr)\\
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ 0_{\mathbb{Z}}\le x\ \text{の場合の式}\ (x\to M_{\mathrm{col}})\ \text{に、上の}\ 0_{\mathbb{Z}}\le M_{\mathrm{col}}\bigr)\\
 &= |k|
 &&\bigl(\because\ k=lM_{\mathrm{col}}\bigr) \\
 &< M_{\mathrm{col}}
@@ -2216,9 +2245,11 @@ S_{M_{\mathrm{col}},k}
 \end{aligned}`,
       ),
       paragraph([
-        "一方、整数 ",
-        math(String.raw`l`),
-        " の絶対値は非負整数なので ",
+        "一方、",
+        ref("int_absolute_value_is_nonnegative"),
+        "（",
+        math(String.raw`x\to l`),
+        "）より ",
         math(String.raw`0_{\mathbb{Z}}\le|l|`),
         " であり、",
       ]),
@@ -2296,6 +2327,7 @@ k
       notes: [
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: k ≢ 0 (mod M) の鎖と l が奇数の鎖で、左から足す 0_C を消す行（0_C + (−0_C) = −0_C と 0_C + (−(M_col)_C) = −(M_col)_C）の根拠を、complex_numbers_form_a_field の「和の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 二つの鎖で右から 0_C を掛ける行（(2M_col)_C·0_C = 0_C の 2 行、(M_col)_C·0_C = 0_C、(−1_C)·0_C = 0_C）の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → (2M_col)_C、(M_col)_C、−1_C）に替えた。式は不変。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値）: 「とくに」の「M_col > 0 なので |M_col| = M_col」と「整数 l の絶対値は非負整数なので 0_ℤ ≤ |l|」は名前だけの根拠で、ℤ の絶対値を定めるブロックも無かった。def_int_absolute_value と int_absolute_value_is_nonnegative を足し、|M_col| = M_col をその定義の 0_ℤ ≤ x の場合の式で、0_ℤ ≤ |l| をその主張で引くようにした。0_ℕ ≤ (M_col)_ℕ を ℕ の加法の単位元と順序と和の 2 行で、0_ℤ ≤ M_col を主張の前置きにある ι_{ℕ→ℤ} が零と順序を保つことと略記 n_ℤ の 4 行で先に示した。「積の絶対値」「|l| = 0_ℤ なので l = 0」「整数における正数倍は狭義順序を反映する」の名前だけの根拠は残っている（状態台帳の行「ℤ の狭義の順序・数字」）。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」）: 「とくに」の |l| = 0 の行は根拠が「|l| ∈ ℤ_{≥0}, |l| < 1」と名前だけで、ℤ の < を定めるブロックも無かった。def_int_strict_order を足し、|l| < 1_ℤ をその定義で |l| + 1_ℤ ≤ 1_ℤ と書き直す行、|l| ≤ 0_ℤ を set_and_algebra_notation の ℤ の行（和の単位元・加法逆元・加法の結合律・順序と加法の両立）で導く 5 行、反対称律で |l| = 0_ℤ とする行に割った。主張は不変。",
       ],
     },

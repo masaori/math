@@ -94,3 +94,6 @@ LE.le@Int@Int.instLEInt	set_and_algebra_notation
 HSub.hSub@Int,Int,Int@Int.instSub	def_int_difference
 # ℤ の狭義の順序: def_int_strict_order が x < y :⇔ x + 1 ≤ y と定める。Lean の ℤ の < も Int.lt m n := m + 1 ≤ n と定義されており、定義として等しい（int_lt_iff_add_one_le。Iff.rfl）。
 LT.lt@Int@Int.instLTInt	def_int_strict_order
+# ℤ の絶対値: def_int_absolute_value が 0 ≤ x なら |x| := x、そうでなければ |x| := −x と場合分けで定める。mathlib の ℤ の |x| は束の上限 x ⊔ (−x) として
+# 定められており場合分けの式と定義として等しくないが、場合分けの二つの式が成り立つことを補題一本 int_abs_of_nonneg_and_of_not_nonneg（DefinitionIntegerAbsoluteValue.lean）で示した。
+abs@Int@instLatticeInt,Int.instAddGroup	def_int_absolute_value

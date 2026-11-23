@@ -4650,7 +4650,6 @@ Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	Finset.univ@Fin@Fin.finty
 Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	Int.cast@Complex@Complex.instIntCast
 Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	Nat.cast@Int@instNatCastInt
 Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	OfNat.ofNat@Nat,0@instOfNatNat
-Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt	abs@Int@instLatticeInt,Int.instAddGroup
 Ising2D.antiperiodic_complex_exp_sum_not_dvd	Complex.exp
 Ising2D.antiperiodic_complex_exp_sum_not_dvd	Dvd.dvd@Int@Int.instDvd
 Ising2D.antiperiodic_complex_exp_sum_not_dvd	Fin
@@ -4700,7 +4699,6 @@ Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	Finset.sum@Fin,Complex@Complex.in
 Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	Finset.univ@Fin@Fin.fintype
 Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	Nat.cast@Int@instNatCastInt
 Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	OfNat.ofNat@Nat,0@instOfNatNat
-Ising2D.antiperiodic_exp_sum_nonzero_of_abs_lt	abs@Int@instLatticeInt,Int.instAddGroup
 Ising2D.antiperiodic_exp_sum_not_dvd	Dvd.dvd@Int@Int.instDvd
 Ising2D.antiperiodic_exp_sum_not_dvd	Fin
 Ising2D.antiperiodic_exp_sum_not_dvd	Fin.val

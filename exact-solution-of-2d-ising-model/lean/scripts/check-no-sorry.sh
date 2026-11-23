@@ -448,6 +448,10 @@ targets=(
   Ising2D.real_sub_eq_add_neg
   Ising2D.int_sub_eq_add_neg
   Ising2D.int_lt_iff_add_one_le
+  Ising2D.int_abs_of_nonneg_and_of_not_nonneg
+  Ising2D.int_absolute_value_is_nonnegative
+  Ising2D.int_absolute_value_is_nonnegative_of_necSuf
+  Ising2D.NecSuf.abs_nonneg_of_cases
   Ising2D.complex_mk_add_mk
   Ising2D.complex_mk_eq_mk_iff
   Ising2D.complex_mk_mul_mk

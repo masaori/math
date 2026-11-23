@@ -5,10 +5,18 @@
 # (3) l が偶数の鎖の 10 等号、l が奇数の鎖の 8 等号を、各行をその行の形のまま UCF で厳密に組み、隣の行と比べる。
 #     鎖の始まりの S は主張の左辺の式（S_claim_form）で、鎖の終わりは (M)_C(-1_C)^l（minus_one_power）。
 # (4) 「とくに」: |k| < M かつ k ≠ 0 のとき M ∤ k であること、その背理法の鎖
-#     |lM| = |l||M| = |l|M = |k| < M、|l| < 1、|l| + 1 ≤ 1（def_int_strict_order）、|l| = |l| + 0 = |l| + (1 + (−1)) = (|l| + 1) + (−1) ≤ 1 + (−1) = 0、
+#     0_N + (M)_N = (M)_N、0_N ≤ (M)_N（順序と和）、0_Z = ι(0_N) ≤ ι((M)_N) = ((M)_N)_Z = M（ι_{N→Z} は零と順序を保つ、略記 n_Z）、|·| は def_int_absolute_value の場合分けの式（int_abs_cases）、
+#     |lM| = |l||M| = |l|M（|M| = M は 0 ≤ M の場合の式）= |k| < M、0_Z ≤ |l|（int_absolute_value_is_nonnegative）、|l| < 1、|l| + 1 ≤ 1（def_int_strict_order）、|l| = |l| + 0 = |l| + (1 + (−1)) = (|l| + 1) + (−1) ≤ 1 + (−1) = 0、
 #     |l| = 0（反対称律）、l = 0、k = lM = 0·M = 0 を、仮定を外した全ての (l, k) で
 #     各等号・不等号として確かめ、仮定 |k| < M が成り立つのは l = 0 だけであることを見る。k = 0 の鎖の 2 等号。
 load("_prelude.sage")
+
+def int_abs_cases(x):
+    # def_int_absolute_value: 0 <= x なら x、そうでなければ -x（Sage の abs と一致することも見る）
+    x = ZZ(x)
+    v = x if 0 <= x else -x
+    assert v == abs(x)
+    return v
 one, zero = UCF(1), UCF(0)
 for M in M_RANGE:
     MN = Integer(M)
@@ -61,9 +69,18 @@ for M in M_RANGE:
         for a, b in zip(L, L[1:]):
             assert a == b
     # (4)
+    # 0_N ≤ (M)_N の 2 行と 0_Z ≤ M_col の 4 行: 0_N + (M)_N = (M)_N、0_N ≤ (M)_N（順序と和、d = (M)_N）、
+    # 0_Z = ι(0_N) ≤ ι((M)_N) = ((M)_N)_Z = M_col
+    MN = NN(M)
+    assert NN(0) + MN == MN and NN(0) <= MN                       # 0_N + (M)_N = (M)_N、順序と和（d -> (M)_N）
+    assert ZZ(NN(0)) == 0 and ZZ(NN(0)) <= ZZ(MN) and ZZ(MN) == M   # ι は零と順序を保つ、略記 n_Z、(M)_N の定義
+    # |M_col| = M_col: def_int_absolute_value の 0 <= x の場合の式（x -> M_col）
+    assert 0 <= M and int_abs_cases(ZZ(M)) == ZZ(M)
     for l in range(-6, 7):
         k = l * M
-        assert abs(l * M) == abs(l) * abs(M) == abs(l) * M == abs(k)
+        assert int_abs_cases(l * M) == int_abs_cases(l) * int_abs_cases(M) == int_abs_cases(l) * M == int_abs_cases(k)
+        # int_absolute_value_is_nonnegative（x -> l）
+        assert 0 <= int_abs_cases(l)
         if abs(k) < M:
             assert abs(l) * M < 1 * M and abs(l) < 1
             # def_int_strict_order: |l| < 1_Z を |l| + 1_Z <= 1_Z と書き直す（ZZ の < と同値であることも見る）

@@ -46,6 +46,7 @@
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerStrictOrder
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueIsNonnegative
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -453,7 +454,15 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
   -- 人手証明の `|l|M = |lM| = |k| < M` に対応する。
   have hk_abs : |k| = |l * (M : ℤ)| := by rw [hl, mul_comm]
   have habs_product : |l * (M : ℤ)| = |l| * |(M : ℤ)| := abs_mul l (M : ℤ)
-  have habs_M : |(M : ℤ)| = (M : ℤ) := abs_of_pos hMpos
+  -- 人手証明の `0_ℕ ≤ (M_col)_ℕ` の 2 行（ℕ の加法の単位元 `0 + x = x`、ℕ の順序と和 `d → (M_col)_ℕ`）。
+  have hM_nat_sum : 0 + M = M := Nat.zero_add M                         -- ℕ の加法の単位元（`x → (M_col)_ℕ`）
+  have hM_nat_nonneg : 0 ≤ M := Nat.le.intro hM_nat_sum                 -- ℕ の順序と和（`x → 0, y → (M_col)_ℕ, d → (M_col)_ℕ`）
+  -- 人手証明の `0_ℤ ≤ M_col` の 4 行。3 行目（略記 `n_ℤ`）と 4 行目（`(M_col)_ℕ` の定義）は、Lean の `(M : ℤ)` が `ι_{ℕ→ℤ}(M)` そのものなので段が要らない。
+  have hM_nonneg : (0 : ℤ) ≤ (M : ℤ) :=
+    calc (0 : ℤ) = ((0 : ℕ) : ℤ) := Nat.cast_zero.symm               -- `ι_{ℕ→ℤ}` は零を保つ
+      _ ≤ (M : ℤ) := Nat.cast_le.mpr hM_nat_nonneg                     -- `ι_{ℕ→ℤ}` は順序を保つ。`0_ℕ ≤ (M_col)_ℕ`
+  -- 人手証明の `|M_col| = M_col`（`def_int_absolute_value` の `0 ≤ x` の場合の式、`x → M_col`）。
+  have habs_M : |(M : ℤ)| = (M : ℤ) := (int_abs_of_nonneg_and_of_not_nonneg (M : ℤ)).1 hM_nonneg
   have habs_mul : |l| * (M : ℤ) < (M : ℤ) := by
     calc
       |l| * (M : ℤ) = |l| * |(M : ℤ)| := by rw [habs_M]
@@ -463,7 +472,7 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
   -- 人手証明の「正数 `M` で割って `|l| < 1`」に対応する。
   have hl_abs_lt_one : |l| < 1 := by
     exact (Int.mul_lt_mul_right hMpos).mp (by simpa using habs_mul)
-  have hl_abs_nonneg : 0 ≤ |l| := abs_nonneg l
+  have hl_abs_nonneg : 0 ≤ |l| := int_absolute_value_is_nonnegative l   -- `int_absolute_value_is_nonnegative`（`x → l`）
   -- 人手証明の `|l| + 1_ℤ ≤ 1_ℤ`（`def_int_strict_order` で `|l| < 1_ℤ` を書き直す）。
   have hl_add_one_le : |l| + 1 ≤ 1 := (int_lt_iff_add_one_le |l| 1).mp hl_abs_lt_one
   -- 人手証明の `|l| ≤ 0_ℤ` を導く 5 行。

@@ -596,6 +596,134 @@ export default defineBlocks([
     },
   },
   {
+    id: "calc_formulae_definition_integer_absolute_value",
+    kind: "definition",
+    title: { text: "整数の絶対値" },
+    labels: ["def_int_absolute_value"],
+    lean: ["Ising2D.int_abs_of_nonneg_and_of_not_nonneg"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{Z}`),
+        " について、絶対値 ",
+        math(String.raw`|x| \in \mathbb{Z}`),
+        " を",
+      ]),
+      displayMath(String.raw`|x| :=
+\begin{cases}
+  x & (0_{\mathbb{Z}} \le_{\mathbb{Z}} x), \\
+  -_{\mathbb{Z}}(x) & (\neg\,(0_{\mathbb{Z}} \le_{\mathbb{Z}} x))
+\end{cases}`),
+      paragraph([
+        "で定める。",
+        math(String.raw`0_{\mathbb{Z}}`),
+        "・",
+        math(String.raw`\le_{\mathbb{Z}}`),
+        "・",
+        math(String.raw`-_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の零元・順序・符号反転、",
+        math(String.raw`\neg`),
+        " は同じく ",
+        ref("set_and_algebra_notation"),
+        " の否定である。どの ",
+        math(String.raw`x`),
+        " でも二つの場合の少なくとも一方が成り立ち（排中律）、両方は成り立たない（",
+        math(String.raw`P`),
+        " と ",
+        math(String.raw`\neg P`),
+        " から ",
+        math(String.raw`\bot`),
+        "）ので、",
+        math(String.raw`|x|`),
+        " は一つに定まる。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum の「とくに」が ℤ の絶対値 |k|・|l|・|M_col| を使い、「絶対値は非負整数」「M_col > 0 なので |M_col| = M_col」を名前だけで引いていたが、ℤ の絶対値を定めるブロックが無かった。def_int_strict_order の後に置いた。Lean の具体版は Ising2D.int_abs_of_nonneg_and_of_not_nonneg（MathematicalTools/SetNotationAndComplexCartesianArithmetic/DefinitionIntegerAbsoluteValue.lean）。mathlib の ℤ の |x| は束の上限 x ⊔ (−x) として定められており、場合分けの式と定義として等しくはないので、場合分けの二つの式が成り立つことを補題一本で示す。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_integer_absolute_value_is_nonnegative",
+    kind: "claim",
+    title: { text: "整数の絶対値は 0 以上" },
+    labels: ["int_absolute_value_is_nonnegative"],
+    lean: ["Ising2D.int_absolute_value_is_nonnegative"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{Z}`),
+        " について、",
+        ref("def_int_absolute_value"),
+        " の絶対値は",
+      ]),
+      displayMath(String.raw`0_{\mathbb{Z}} \le_{\mathbb{Z}} |x|`),
+      paragraph([
+        "を満たす。",
+        math(String.raw`0_{\mathbb{Z}}`),
+        "・",
+        math(String.raw`\le_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の零元・順序である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`0_{\mathbb{Z}} \le x`),
+        " の場合と、そうでない場合に分ける。",
+        math(String.raw`0_{\mathbb{Z}} \le x`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{Z}}
+&\le x
+&&\bigl(\because\ \text{場合の仮定}\ 0_{\mathbb{Z}} \le x\bigr)\\
+&= |x|
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ 0_{\mathbb{Z}} \le x\ \text{の場合の式を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\neg\,(0_{\mathbb{Z}} \le x)`),
+        " のとき、",
+        math(String.raw`\mathbb{Z}`),
+        " の全順序 ",
+        math(String.raw`0_{\mathbb{Z}} \le x \vee x \le 0_{\mathbb{Z}}`),
+        "（",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`x \to 0_{\mathbb{Z}},\ y \to x`),
+        "）の左が成り立たないので ",
+        math(String.raw`x \le 0_{\mathbb{Z}}`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{Z}}
+&= x + (-x)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ x + (-x) = 0_{\mathbb{Z}}\ (x \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\text{を右辺から左辺へ}\bigr)\\
+&\le 0_{\mathbb{Z}} + (-x)
+&&\bigl(\because\ x \le 0_{\mathbb{Z}}\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ x \le y \Rightarrow x + t \le y + t\ (x \to x,\ y \to 0_{\mathbb{Z}},\ t \to -x)\bigr)\\
+&= -x
+&&\bigl(\because\ 0_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + x = x\ (x \to -x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= |x|
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ \neg\,(0_{\mathbb{Z}} \le x)\ \text{の場合の式を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。どちらの場合も ", math(String.raw`0_{\mathbb{Z}} \le |x|`), " が成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum の「とくに」が「整数 l の絶対値は非負整数なので 0_ℤ ≤ |l|」と名前だけで引いていた性質を、def_int_absolute_value と set_and_algebra_notation の ℤ の行（全順序・加法の逆元・順序と加法の両立・和の単位元）から示す主張として足した。Lean の具体版は Ising2D.int_absolute_value_is_nonnegative（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimIntegerAbsoluteValueIsNonnegative.lean）、必要十分版は Ising2D.NecSuf.abs_nonneg_of_cases（NecSuf/AbsNonnegOfCases.lean）。数値検証: sagemath/check/int_absolute_value_is_nonnegative/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_real_less_than_preserved_by_adding_on_right",
     kind: "claim",
     title: { text: "実数の狭義の順序は右から同じ数を足しても保たれる" },
