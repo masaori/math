@@ -3,6 +3,7 @@
 行指定の行列式への橋と成分定義でつなぎ、具体版のスカラー倍定理は使わない。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansion
+import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansionFromNecSuf
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.WeightedProductScale
 
 namespace Ising2DLambda.AlgebraicEigenvalue

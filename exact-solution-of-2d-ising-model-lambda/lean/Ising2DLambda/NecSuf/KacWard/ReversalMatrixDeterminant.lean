@@ -12,6 +12,7 @@ namespace Ising2DLambda.NecSuf.KacWard
 
 open scoped BigOperators
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 /-- 各組の第二成分を反転する。 -/
 def pairedReversal (B : Type*) (x : B × Bool) : B × Bool := (x.1, !x.2)
@@ -187,7 +188,11 @@ theorem pairedReversalMatrix_determinant_of_even (B : Type*) [Fintype B] [Linear
         ∑ σ : Equiv.Perm (B × Bool),
           sign (fun e f : B × Bool => e < f) σ *
             ∏ e, pairedReversalMatrix B e (σ e) :=
-      IntegerMatrix.determinant_eq_signedPermutationSum _
+      by
+        change IntegerMatrix.determinant (pairedReversalMatrix B) =
+          ∑ σ : Equiv.Perm (B × Bool),
+            finiteOrderedSign σ * ∏ e, pairedReversalMatrix B e (σ e)
+        exact IntegerMatrix.determinant_eq_independentSignedPermutationSum _
     _ = sign (fun e f : B × Bool => e < f) (pairedReversalPerm B) *
         ∏ e, pairedReversalMatrix B e (pairedReversalPerm B e) :=
       Fintype.sum_eq_single (pairedReversalPerm B) hzero

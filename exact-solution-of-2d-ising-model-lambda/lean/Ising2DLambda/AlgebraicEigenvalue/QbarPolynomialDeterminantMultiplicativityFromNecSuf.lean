@@ -3,6 +3,7 @@
 具体版の乗法性を使わず、行指定の定義橋と、係数の合成保存・互換反転を使う。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantMultiplicativity
+import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansionFromNecSuf
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.DeterminantMultiplicativity
 import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSetFromNecSuf
 

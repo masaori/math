@@ -1,6 +1,6 @@
 /- 整数行列式と、転倒数の符号を使う行指定の置換展開。
 
-符号・転倒数は本文の定義 `def_permutation_sign` をそのまま書いた定義（`sign`・`inversionCount`）を使う。
+符号・転倒数は本文の定義 `def_permutation_sign` をそのまま書いた具体版の定義を使う。
 符号の性質は具体版の補題だけを引く: 二乗が 1（`finiteOrderedSign_mul_self`）、乗法性
 （`finiteOrderedSign_comp`）、互換の符号（`KacWard.finiteTransposition_sign`）。必要十分版の定理は引かない。
 mathlib の `Matrix.det` と `Equiv.Perm.sign` は、本文の行列式の定義との対応（定義どうしの橋渡し）にだけ使う。 -/
@@ -13,7 +13,6 @@ namespace Ising2DLambda.IntegerMatrix
 
 open scoped BigOperators
 open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
 
 /-- 恒等置換は転倒を持たないので、符号は `(-1)^0 = 1`。 -/
 private theorem inversionSign_one {ι : Type*} [Fintype ι] [LinearOrder ι] :
@@ -69,14 +68,6 @@ theorem inversionSignIndependent_eq_mathlibSign {ι : Type*} [Fintype ι] [Linea
   have hvalue := DFunLike.congr_fun hhom σ
   exact congrArg Units.val hvalue
 
-/-- 既存の転倒数の符号表示と独立な具体版との一致。 -/
-theorem inversionSign_eq_mathlibSign {ι : Type*} [Fintype ι] [LinearOrder ι]
-    (σ : Equiv.Perm ι) :
-    sign (fun x y : ι => x < y) σ =
-      (Equiv.Perm.sign σ : ℤ) := by
-  change finiteOrderedSign σ = (Equiv.Perm.sign σ : ℤ)
-  exact inversionSignIndependent_eq_mathlibSign σ
-
 /-- 有限添字の整数行列式。本文の行指定展開との一致は直後の補題で保証する。 -/
 noncomputable def determinant {ι : Type*} [Fintype ι] [DecidableEq ι]
     (A : Square ι) : ℤ := Matrix.det A
@@ -94,15 +85,5 @@ theorem determinant_eq_independentSignedPermutationSum {ι : Type*} [Fintype ι]
       Matrix.det_apply' _
     _ = ∑ σ : Equiv.Perm ι, finiteOrderedSign σ * ∏ i, A i (σ i) := by
       simp only [inversionSignIndependent_eq_mathlibSign, Matrix.transpose_apply]
-
-/-- 既存の行指定展開と必要十分版の符号定義を結ぶ互換表示。 -/
-theorem determinant_eq_signedPermutationSum {ι : Type*} [Fintype ι] [LinearOrder ι]
-    (A : Square ι) :
-    determinant A = ∑ σ : Equiv.Perm ι,
-      sign (fun i j : ι => i < j) σ *
-        ∏ i, A i (σ i) := by
-  change determinant A = ∑ σ : Equiv.Perm ι,
-    finiteOrderedSign σ * ∏ i, A i (σ i)
-  exact determinant_eq_independentSignedPermutationSum A
 
 end Ising2DLambda.IntegerMatrix

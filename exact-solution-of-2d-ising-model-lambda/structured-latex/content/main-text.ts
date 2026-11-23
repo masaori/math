@@ -5762,8 +5762,8 @@ t+\iota\bigl(-A_{u,u}\bigr) & (u=u'\ \text{のとき})\\
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.IntegerMatrix.determinant",
-                      "Ising2DLambda.IntegerMatrix.determinant_eq_signedPermutationSum",
-                      "Ising2DLambda.IntegerMatrix.inversionSign_eq_mathlibSign",
+                      "Ising2DLambda.IntegerMatrix.determinant_eq_independentSignedPermutationSum",
+                      "Ising2DLambda.IntegerMatrix.inversionSignIndependent_eq_mathlibSign",
                     ],
                     verification: ["sagemath/check/reversal-matrix-determinant"],
                     statement: [
@@ -20599,13 +20599,13 @@ m&\in C_\sigma&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\bigr).
                       displayMath(String.raw`\begin{aligned}
 \sigma_{\tau,\upsilon}(i)
 &=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\in C_{\tau,\upsilon}\bigr)\\
-&=\sigma(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs},\ i\in C_\sigma\bigr).
+&=\sigma(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs},\ i\in C_\sigma\bigr)
 \end{aligned}`),
                       paragraph(["次に ", math(String.raw`i\notin C_\sigma`), " の場合、"]),
                       displayMath(String.raw`\begin{aligned}
 \sigma_{\tau,\upsilon}(i)
 &=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\notin C_{\tau,\upsilon}\bigr)\\
-&=\sigma(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\text{ を }\sigma^{-1}\text{ に適用},\ i\notin C_\sigma\bigr).
+&=\sigma(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\text{ を }\sigma^{-1}\text{ に適用},\ i\notin C_\sigma\bigr)
 \end{aligned}`),
                       paragraph(["二場合で任意の ", math(String.raw`i\in\mathcal J`), " の像が一致するため、二つの置換は等しい。", math(String.raw`\mathcal J=\varnothing`), " の場合も、空集合上の二写像の外延性によって同じ結論になる。"]),
                     ],

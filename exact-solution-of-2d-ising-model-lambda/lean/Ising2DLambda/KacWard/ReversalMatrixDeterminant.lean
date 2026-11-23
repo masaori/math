@@ -181,7 +181,7 @@ theorem reversalMatrix_determinant (L : ℕ) :
     IntegerMatrix.determinant (reversalMatrix L) = 1 := by
   classical
   have hzero (σ : Equiv.Perm (OrientedEdge L)) (hσ : σ ≠ reversalPerm L) :
-      sign (fun e f : OrientedEdge L => e < f) σ *
+      finiteOrderedSign σ *
         ∏ e, reversalMatrix L e (σ e) = 0 := by
     obtain ⟨e, he⟩ : ∃ e, σ e ≠ reversalPerm L e := by
       by_contra h
@@ -191,30 +191,28 @@ theorem reversalMatrix_determinant (L : ℕ) :
     have hproduct : (∏ e, reversalMatrix L e (σ e)) = 0 :=
       Finset.prod_eq_zero (Finset.mem_univ e) hentry
     calc
-      sign (fun e f : OrientedEdge L => e < f) σ *
+      finiteOrderedSign σ *
           ∏ e, reversalMatrix L e (σ e) =
-          sign (fun e f : OrientedEdge L => e < f) σ * 0 := by rw [hproduct]
+          finiteOrderedSign σ * 0 := by rw [hproduct]
       _ = 0 := mul_zero _
   calc
     IntegerMatrix.determinant (reversalMatrix L) =
         ∑ σ : Equiv.Perm (OrientedEdge L),
-          sign (fun e f : OrientedEdge L => e < f) σ *
+          finiteOrderedSign σ *
             ∏ e, reversalMatrix L e (σ e) :=
-      IntegerMatrix.determinant_eq_signedPermutationSum _
-    _ = sign (fun e f : OrientedEdge L => e < f) (reversalPerm L) *
+      IntegerMatrix.determinant_eq_independentSignedPermutationSum _
+    _ = finiteOrderedSign (reversalPerm L) *
         ∏ e, reversalMatrix L e (reversalPerm L e) :=
       Fintype.sum_eq_single (reversalPerm L) hzero
-    _ = sign (fun e f : OrientedEdge L => e < f) (reversalPerm L) *
+    _ = finiteOrderedSign (reversalPerm L) *
         ∏ _e : OrientedEdge L, (1 : ℤ) := by
       congr 1
       apply Finset.prod_congr rfl
       intro e _
       exact if_pos rfl
-    _ = sign (fun e f : OrientedEdge L => e < f) (reversalPerm L) * 1 := by
+    _ = finiteOrderedSign (reversalPerm L) * 1 := by
       rw [Finset.prod_const_one]
-    _ = sign (fun e f : OrientedEdge L => e < f) (reversalPerm L) := mul_one _
-    _ = 1 := by
-      change finiteOrderedSign (reversalPerm L) = 1
-      exact reversalPerm_sign L
+    _ = finiteOrderedSign (reversalPerm L) := mul_one _
+    _ = 1 := reversalPerm_sign L
 
 end Ising2DLambda.KacWard

@@ -614,8 +614,8 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.powerPairDiagonal_mul_inverse_necSuf
   Ising2DLambda.KacWard.diagonalGauge_mul_inverse_from_necSuf
   Ising2DLambda.FisherZero.edgeSubsetIncidenceCount_four_incident_edges
-  Ising2DLambda.IntegerMatrix.inversionSign_eq_mathlibSign
-  Ising2DLambda.IntegerMatrix.determinant_eq_signedPermutationSum
+  Ising2DLambda.IntegerMatrix.inversionSignIndependent_eq_mathlibSign
+  Ising2DLambda.IntegerMatrix.determinant_eq_independentSignedPermutationSum
   Ising2DLambda.KacWard.orientedEdge_lt_iff
   Ising2DLambda.KacWard.edgeDirectionTranspositions_pairwise_commute
   Ising2DLambda.KacWard.reversalPerm_eq_transpositionProduct

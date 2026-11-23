@@ -21,7 +21,7 @@ open Ising2DLambda.NecSuf.KacWard
 theorem inversionSign_eq_mathlibSign {ι : Type} [Fintype ι] [LinearOrder ι]
     (σ : Equiv.Perm ι) :
     sign (fun x y : ι => x < y) σ = (Equiv.Perm.sign σ : ℤ) :=
-  IntegerMatrix.inversionSign_eq_mathlibSign σ
+  IntegerMatrix.inversionSignIndependent_eq_mathlibSign σ
 
 /-- `det(I-XM)` は人手証明で定めた符号付き置換項の有限和である。 -/
 theorem kacWardDeterminant_eq_signedPermutationSum {ι : Type} [Fintype ι]

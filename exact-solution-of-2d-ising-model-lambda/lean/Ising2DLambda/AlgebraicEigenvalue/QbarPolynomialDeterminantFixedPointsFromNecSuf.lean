@@ -3,6 +3,7 @@
 具体版の消去定理は呼ばず、不動点なしの置換集合の定義だけを共有する。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFixedPoints
+import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansionFromNecSuf
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.WeightedProductFilterZero
 
 namespace Ising2DLambda.AlgebraicEigenvalue
@@ -21,9 +22,7 @@ theorem qbarPolynomial_fixedPointFree_sum_sign_from_necSuf
   classical
   apply Finset.sum_congr rfl
   intro σ _
-  exact congrArg (fun z : ℤ => Polynomial.C (z : Qbar) * ∏ i : J, A i (σ i))
-    ((qbarPermutationSign_eq_mathlibSign σ).trans
-      (IntegerMatrix.inversionSign_eq_mathlibSign σ).symm)
+  rfl
 
 theorem qbarPolynomial_det_eq_sum_fixedPointFree_from_necSuf
     {J : Type*} [Fintype J] [LinearOrder J]

@@ -3,8 +3,6 @@
 `PermutationSignFiniteOrderedSetIndependent` に置く。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
--- このモジュールを取り込む具体版が必要十分版の符号定義を参照する。
-import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PermutationSign
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 

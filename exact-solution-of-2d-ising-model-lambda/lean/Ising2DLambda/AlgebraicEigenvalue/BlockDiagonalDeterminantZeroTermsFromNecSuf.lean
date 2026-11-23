@@ -1,4 +1,5 @@
 import Ising2DLambda.AlgebraicEigenvalue.BlockDiagonalDeterminantZeroTerms
+import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansionFromNecSuf
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.BlockDiagonalZeroTerms
 
 namespace Ising2DLambda.AlgebraicEigenvalue

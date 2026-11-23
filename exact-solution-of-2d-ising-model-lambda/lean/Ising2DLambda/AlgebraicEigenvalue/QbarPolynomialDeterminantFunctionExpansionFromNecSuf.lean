@@ -2,10 +2,24 @@
 行列積の具体的な添字写像展開から、必要十分版の符号による表示を導く。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansion
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PermutationSign
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Finset
+
+/-- The row expansion with the necessary-and-sufficient sign convention. -/
+theorem qbarPolynomial_det_row_expansion_from_necSuf
+    {J : Type*} [Fintype J] [LinearOrder J]
+    (A : Matrix J J (Polynomial Qbar)) :
+    Matrix.det A = ∑ σ : Equiv.Perm J,
+      Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+        ∏ i : J, A i (σ i) := by
+  classical
+  rw [qbarPolynomial_det_row_expansion]
+  apply Finset.sum_congr rfl
+  intro σ _
+  rfl
 
 /-- 順序は転倒数の符号の指定に、置換は列指定に用いる。
 可換半環には Polynomial Qbar を取り、行列式の乗法性を使わない。 -/
