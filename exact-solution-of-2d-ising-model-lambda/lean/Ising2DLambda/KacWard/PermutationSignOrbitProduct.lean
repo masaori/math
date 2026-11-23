@@ -36,11 +36,6 @@ private lemma iterLeft_eq_iterate' (σ : Equiv.Perm ι) (n : ℕ) (e : ι) :
     simp only [iterLeft, Function.iterate_succ_apply']
     rw [ih]
 
-private lemma perm_return (σ : Equiv.Perm ι) (e : ι) :
-    ∃ k, 1 ≤ k ∧ iterLeft (⇑σ) k e = e := by
-  obtain ⟨k, hk, hreturn⟩ := permutation_power_return σ e
-  exact ⟨k, hk, (iterLeft_eq_iterate' σ k e).trans hreturn⟩
-
 /-- 人手証明の最小周期 `m_C`。 -/
 private noncomputable def orbitPeriod (σ : Equiv.Perm ι) (e : ι) : ℕ :=
   minimalReturnTime σ e
@@ -310,21 +305,26 @@ private lemma sign_transpositionChain_orbitTail (σ : Equiv.Perm ι) (e : ι) :
       (-1 : ℤ) ^ ((movedOrbit σ e).card - 1) := by
   have hcard : (movedOrbit σ e).card = orbitPeriod σ e :=
     by
-      have hperiod : minimalPeriod (⇑σ) e (perm_return σ e) = orbitPeriod σ e := by
-        apply Nat.le_antisymm
-        · by_contra h
-          have hlt : orbitPeriod σ e < minimalPeriod (⇑σ) e (perm_return σ e) := by omega
-          exact not_iterLeft_of_lt_minimalPeriod (⇑σ) e (perm_return σ e)
-            (minimalReturnTime_pos σ e) hlt (by
-              rw [iterLeft_eq_iterate' σ]
-              exact minimalReturnTime_return σ e)
-        · by_contra h
-          have hlt : minimalPeriod (⇑σ) e (perm_return σ e) < orbitPeriod σ e := by omega
-          exact minimalReturnTime_min σ e _
-            (minimalPeriod_pos (⇑σ) e (perm_return σ e)) hlt (by
-              rw [← iterLeft_eq_iterate' σ]
-              exact iterLeft_minimalPeriod (⇑σ) e (perm_return σ e))
-      exact (card_orbit (⇑σ) σ.injective e (perm_return σ e)).trans hperiod
+      have hset : (e :: orbitTail σ e).toFinset = movedOrbit σ e := by
+        ext x
+        simp only [List.mem_toFinset, List.mem_cons]
+        constructor
+        · rintro (hx | hx)
+          · rw [hx]
+            exact self_mem_orbit (⇑σ) e
+          · obtain ⟨i, hi, rfl⟩ := (mem_orbitTail_iff σ e).mp hx
+            exact (mem_movedOrbit_iff_iterate σ e).mpr ⟨i + 1, by omega, rfl⟩
+        · intro hx
+          obtain ⟨j, hj, hxe⟩ := (mem_movedOrbit_iff_iterate σ e).mp hx
+          rcases Nat.eq_zero_or_pos j with hzero | hpos
+          · left
+            simpa [hzero] using hxe
+          · right
+            exact (mem_orbitTail_iff σ e).mpr ⟨j - 1, by omega, by simpa [Nat.sub_add_cancel hpos] using hxe⟩
+      rw [← hset, List.toFinset_card_of_nodup (nodup_cons_orbitTail σ e), List.length_cons,
+        orbitTail_length]
+      have hpos : 0 < orbitPeriod σ e := minimalReturnTime_pos σ e
+      omega
   have hnotmem : e ∉ orbitTail σ e := (List.nodup_cons.mp (nodup_cons_orbitTail σ e)).1
   have hsign : ∀ (l : List ι), e ∉ l →
       finiteOrderedSign (finiteTranspositionChain e l) = (-1 : ℤ) ^ l.length := by
