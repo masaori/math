@@ -160,6 +160,91 @@ export default defineBlocks([
         " の順序の推移律」などと引くのは、この一覧の該当する行である。",
       ]),
       paragraph([
+        math(String.raw`\mathbb{N}`),
+        " の演算と順序は外から持ち込み、使う性質は次の条件だけとする。任意の ",
+        math(String.raw`x,y,t\in\mathbf{N}`),
+        " と、",
+        math(String.raw`\mathbf{N}`),
+        " の元についての命題 ",
+        math(String.raw`\varphi(n)`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&x+0_{\mathbb{N}}=x,\qquad x+(y+1_{\mathbb{N}})=(x+y)+1_{\mathbb{N}}
+&&\text{（和の再帰の式）},\\
+&x\cdot 0_{\mathbb{N}}=0_{\mathbb{N}},\qquad x\cdot(y+1_{\mathbb{N}})=x\cdot y+x
+&&\text{（積の再帰の式）},\\
+&x+1_{\mathbb{N}}\neq 0_{\mathbb{N}},\qquad x+1_{\mathbb{N}}=y+1_{\mathbb{N}}\ \Rightarrow\ x=y
+&&\text{（後者の性質）},\\
+&\Bigl(\varphi(0_{\mathbb{N}})\ \wedge\ \bigl(\forall n\in\mathbf{N},\ \varphi(n)\Rightarrow\varphi(n+1_{\mathbb{N}})\bigr)\Bigr)\ \Rightarrow\ \forall n\in\mathbf{N},\ \varphi(n)
+&&\text{（数学的帰納法）},\\
+&(x+y)+t=x+(y+t),\qquad x+y=y+x,\qquad 0_{\mathbb{N}}+x=x
+&&\text{（加法の結合律・交換律・単位元）},\\
+&(x\cdot y)\cdot t=x\cdot(y\cdot t),\qquad x\cdot y=y\cdot x,\qquad x\cdot 1_{\mathbb{N}}=x,\qquad 1_{\mathbb{N}}\cdot x=x
+&&\text{（乗法の結合律・交換律・単位元）},\\
+&x\cdot(y+t)=x\cdot y+x\cdot t,\qquad (x+y)\cdot t=x\cdot t+y\cdot t
+&&\text{（分配律）},\\
+&x+t=y+t\ \Rightarrow\ x=y
+&&\text{（加法の簡約律）},\\
+&x\le y\ \Leftrightarrow\ \exists d\in\mathbf{N},\ x+d=y
+&&\text{（順序と和）},\\
+&x\le x,\qquad (x\le y\ \wedge\ y\le x)\ \Rightarrow\ x=y,\qquad (x\le y\ \wedge\ y\le t)\ \Rightarrow\ x\le t
+&&\text{（順序の反射律・反対称律・推移律）},\\
+&x\le y\ \vee\ y\le x
+&&\text{（全順序）},\\
+&x\le y\ \Rightarrow\ x+t\le y+t
+&&\text{（順序と加法の両立）}.
+\end{aligned}`),
+      paragraph([
+        "ここで ",
+        math(String.raw`x\le y`),
+        " は ",
+        math(String.raw`(x,y)\in\le_{\mathbb{N}}`),
+        " の略記である。",
+        math(String.raw`\mathbb{N}`),
+        " の狭義の順序と、逆向きの記号を",
+      ]),
+      displayMath(String.raw`x<y\ :\Leftrightarrow\ x+1_{\mathbb{N}}\le y,\qquad x>y\ :\Leftrightarrow\ y<x,\qquad x\ge y\ :\Leftrightarrow\ y\le x`),
+      paragraph([
+        "で定める。",
+        math(String.raw`x\le y`),
+        " のとき、",
+        math(String.raw`x+d=y`),
+        " を満たす ",
+        math(String.raw`d\in\mathbf{N}`),
+        " は順序と和の行により存在し、加法の簡約律と加法の交換律によりただ一つである。これを ",
+        math(String.raw`\mathbb{N}`),
+        " の差 ",
+        math(String.raw`y-x`),
+        " と書く（",
+        math(String.raw`x\le y`),
+        " でない組には差を定めない）。",
+        math(String.raw`\mathbb{N}`),
+        " の元を十進の数字で書くとき、",
+        math(String.raw`0`),
+        " と ",
+        math(String.raw`1`),
+        " は ",
+        math(String.raw`0_{\mathbb{N}}`),
+        " と ",
+        math(String.raw`1_{\mathbb{N}}`),
+        " であり、元 ",
+        math(String.raw`n`),
+        " を表す数字の次の数字が表す元は ",
+        math(String.raw`n+1_{\mathbb{N}}`),
+        " である（次の行の和は ",
+        math(String.raw`+_{\mathbb{N}}`),
+        "）。",
+      ]),
+      displayMath(String.raw`2:=1+1,\qquad 3:=2+1,\qquad 4:=3+1,\qquad \dots`),
+      paragraph([
+        "本文の証明が ",
+        math(String.raw`\mathbb{N}`),
+        " の性質を根拠に引くときは、この一覧の該当する行を「",
+        math(String.raw`\mathbb{N}`),
+        " の加法の結合律」「数学的帰納法」などの名前で引く。",
+      ]),
+      paragraph([
         "命題をつなぐ論理の記号（否定 ",
         math(String.raw`\neg`),
         "、かつ ",
@@ -267,6 +352,7 @@ export default defineBlocks([
         "2026-11-19（Lean の通しの証明のゴールラインの確認）: ℝ を「順序体」とだけ書いて体の等式を並べていなかったので、本文の証明が「ℝ の加法の交換律 p + q = q + p（set_and_algebra_notation）」のように引く等式（加法・乗法の結合律と交換律、単位元と逆元の左右両側、分配律の左右両側、0_ℝ ≠ 1_ℝ）を名前つきで並べた。引く側が使う別名（加法の可換律、和の可換律、積の結合律、乗法の交換律、積の可換律）も挙げた。一覧の −x と x^{-1} が写像の値であることを示すため、組に符号反転 −_ℝ と逆数 (·)^{-1}_ℝ を足して型を宣言した（逆元の一意性の主張に頼らない）。順序の公理の形と < の定義はまだ並べていない。",
         "2026-11-22（Lean の点検の直し、未定義の記号）: 本文の証明が名前だけで引いていた等号の反射律・対称律・推移律と、論理の記号（¬・∧・∨・⇒・⇔・⊥・∀・∃）と ≠ を、外から持ち込むと宣言し、証明が使う規則（直積の元の等号は成分ごと、写像の等号は点ごと、を含む）を名前つきで並べた。本文の証明が引く「行列の等号は成分ごと」も、行列の集合 Mat(m,n,ℂ) を定める定義のブロックがまだ無いので、外から持ち込む規則としてここに並べた。新しいブロックにせずここに足したのは、一対一の検査で対応する具体版の宣言の無いブロックを増やさないためである。",
         "2026-11-22（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序）: 本文の証明が「ℝ の順序の推移律（set_and_algebra_notation）」のように名前だけで引いていた ℝ の順序の性質を、反射律・反対称律・推移律・全順序・加法との両立・乗法との両立・上限の存在として名前つきで並べ、≥ を ≤ の略記と定めた（上限の存在は sqrt_nonnegative_existence_uniqueness などが使う箇所で宣言していた性質で、レビューの指摘で足した）。狭義の順序 < は def_real_strict_order で定める。これで Lean の ℝ の ≤・≥ は外から持ち込み使う性質を列挙した記号として、<・> は本文の定義との一致を補題一本で示した記号として、許可の一覧に載せられる。アルキメデス性は上限の存在から導ける主張なのでここに並べていない。一覧の行から導けるが主張として示していない順序の性質（狭義の順序と加法の両立、正の数どうしの積は正など）を set_and_algebra_notation の名前で引く箇所が残っており、状態台帳の行「ℝ の数・順序・差・商」に直す項目として書いた。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℕ の数・和・積・順序」のうち本文の宣言）: 組 ℕ の演算と順序について、外から持ち込み使う性質（和と積の再帰の式、後者の性質、数学的帰納法、加法・乗法の結合律・交換律・単位元、分配律、加法の簡約律、順序と和、順序の反射律・反対称律・推移律、全順序、順序と加法の両立）を名前つきで並べ、狭義の順序 x < y を x + 1 ≤ y、> と ≥ を逆向きの略記、x ≤ y のときの差 y − x を x + d = y を満たすただ一つの d と定め、十進の数字を「n を表す数字の次の数字は n + 1 を表す」と定めた。Lean の ℕ の < は Nat.lt n m := Nat.le (Nat.succ n) m で Nat.succ n は n + 1 と定義として等しく、数字 k+1 は k + 1 と定義として等しく、Lean の ℕ の差は x ≤ y の組でこの差と値が一致する（Nat.add_sub_cancel'。x ≤ y でない組では 0 を返す全域の写像で、その値は本文の定義の外）。新しいブロックにせずここに足したのは、一対一の検査で対応する具体版の宣言の無いブロックを増やさないためである。Lean の ℕ の記号はまだ許可の一覧に載せていない。本文の冪の指数・添字・帰納法の変数は ℤ_{≥k}（𝐙 の部分集合）の元として ℤ の演算で書かれており、Lean の ℕ との間の写像を置くまでは、許可すると ℕ と ℤ_{≥0} の暗黙の同一視が検査から見えなくなるからである（レビューの指摘）。",
       ],
     },
   },
