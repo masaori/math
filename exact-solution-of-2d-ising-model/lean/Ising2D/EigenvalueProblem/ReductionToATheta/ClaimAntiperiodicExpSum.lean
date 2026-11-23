@@ -48,6 +48,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerStrictOrder
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueIsNonnegative
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueZeroImpliesZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerZeroTimesIsZero
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -453,7 +454,9 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
   rcases hd with ⟨l, hl⟩
   have hMpos : (0 : ℤ) < (M : ℤ) := by exact_mod_cast Nat.pos_of_ne_zero hM
   -- 人手証明の `|l|M = |lM| = |k| < M` に対応する。
-  have hk_abs : |k| = |l * (M : ℤ)| := by rw [hl, mul_comm]
+  -- 人手証明の `k = lM_col`。Lean の整除 `M ∣ k` は `k = M·l` を与えるので、ℤ の乗法の交換律で並べ替える。
+  have hk_lM : k = l * (M : ℤ) := by rw [hl, mul_comm]
+  have hk_abs : |k| = |l * (M : ℤ)| := by rw [hk_lM]
   have habs_product : |l * (M : ℤ)| = |l| * |(M : ℤ)| := abs_mul l (M : ℤ)
   -- 人手証明の `0_ℕ ≤ (M_col)_ℕ` の 2 行（ℕ の加法の単位元 `0 + x = x`、ℕ の順序と和 `d → (M_col)_ℕ`）。
   have hM_nat_sum : 0 + M = M := Nat.zero_add M                         -- ℕ の加法の単位元（`x → (M_col)_ℕ`）
@@ -486,7 +489,11 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
   -- 人手証明の `|l| = 0_ℤ`（`ℤ` の順序の反対称律）。
   have hl_abs_zero : |l| = 0 := le_antisymm hl_abs_nonpos hl_abs_nonneg
   have hl_zero : l = 0 := int_absolute_value_zero_implies_zero l hl_abs_zero   -- `int_absolute_value_zero_implies_zero`（`x → l`）
-  have hk_zero : k = 0 := by rw [hl, hl_zero, mul_zero]
+  -- 人手証明の `k = lM_col = 0_ℤ·M_col = 0_ℤ`。
+  have hk_zero : k = 0 :=
+    calc k = l * (M : ℤ) := hk_lM                                         -- `k = lM_col`
+      _ = 0 * (M : ℤ) := by rw [hl_zero]                                  -- `l = 0_ℤ`
+      _ = 0 := int_zero_times_is_zero (M : ℤ)                             -- `int_zero_times_is_zero`（`x → M_col`）
   exact hk0 hk_zero
 
 /-- **原文と同じ `Complex.exp` で書いた「とくに」の非零の場合**。 -/

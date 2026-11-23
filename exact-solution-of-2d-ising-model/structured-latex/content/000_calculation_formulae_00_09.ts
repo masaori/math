@@ -795,6 +795,65 @@ x
     },
   },
   {
+    id: "calc_formulae_claim_integer_zero_times_is_zero",
+    kind: "claim",
+    title: { text: "整数に 0 を左から掛けると 0 になる" },
+    labels: ["int_zero_times_is_zero"],
+    lean: ["Ising2D.int_zero_times_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`0_{\mathbb{Z}} \cdot x = 0_{\mathbb{Z}}`),
+      paragraph([
+        "である。和・積・",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中の ",
+        math(String.raw`-y`),
+        "（",
+        math(String.raw`y \in \mathbb{Z}`),
+        "）は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の符号反転 ",
+        math(String.raw`-_{\mathbb{Z}}(y)`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{Z}} \cdot x
+&= 0_{\mathbb{Z}} \cdot x + 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ y + 0_{\mathbb{Z}} = y\ (y \to 0_{\mathbb{Z}} \cdot x)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{Z}} \cdot x + \bigl(0_{\mathbb{Z}} \cdot x + (-(0_{\mathbb{Z}} \cdot x))\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ y + (-y) = 0_{\mathbb{Z}}\ (y \to 0_{\mathbb{Z}} \cdot x)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= (0_{\mathbb{Z}} \cdot x + 0_{\mathbb{Z}} \cdot x) + (-(0_{\mathbb{Z}} \cdot x))
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (y + z) + t = y + (z + t)\ (y, z \to 0_{\mathbb{Z}} \cdot x,\ t \to -(0_{\mathbb{Z}} \cdot x))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= (0_{\mathbb{Z}} + 0_{\mathbb{Z}}) \cdot x + (-(0_{\mathbb{Z}} \cdot x))
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ (y + z) \cdot t = y \cdot t + z \cdot t\ (y, z \to 0_{\mathbb{Z}},\ t \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{Z}} \cdot x + (-(0_{\mathbb{Z}} \cdot x))
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ y + 0_{\mathbb{Z}} = y\ (y \to 0_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ y + (-y) = 0_{\mathbb{Z}}\ (y \to 0_{\mathbb{Z}} \cdot x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち antiperiodic_exp_sum の「とくに」の名前だけの根拠）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum の「とくに」の鎖 k = lM_col = 0_ℤ·M_col = 0_ℤ が、最後の等号の根拠を「0_ℤ·M_col = 0_ℤ」と結論そのもので書いていた。0 を掛けると 0 になることは set_and_algebra_notation の ℤ の一覧の行に含まれないので、real_zero_times_is_zero と同じ手順で、その一覧の行（和の単位元・加法の逆元・加法の結合律・分配律）から示す主張として足した。Lean の具体版は Ising2D.int_zero_times_is_zero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimIntegerZeroTimesIsZero.lean）、必要十分版は real_zero_times_is_zero と同じ Ising2D.NecSuf.zero_mul_of_rightDistrib（NecSuf/ZeroMulOfRightDistrib.lean）。数値検証: sagemath/check/int_zero_times_is_zero/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_real_less_than_preserved_by_adding_on_right",
     kind: "claim",
     title: { text: "実数の狭義の順序は右から同じ数を足しても保たれる" },

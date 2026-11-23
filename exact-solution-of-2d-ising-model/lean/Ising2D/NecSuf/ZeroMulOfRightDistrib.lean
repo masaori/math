@@ -4,6 +4,8 @@
 具体版: `Ising2D/MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroTimesIsZero.lean`
 （人手 `real_zero_times_is_zero`）。具体版をこのファイルの系として導くのは
 `Ising2D/MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroTimesIsZeroFromNecSuf.lean`。
+同じ手順の `ℤ` の具体版 `ClaimIntegerZeroTimesIsZero.lean`（人手 `int_zero_times_is_zero`）も、同じフォルダの
+`ClaimIntegerZeroTimesIsZeroFromNecSuf.lean` でこのファイルの系として導く。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |

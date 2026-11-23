@@ -480,6 +480,7 @@ export const ALL_LABELS = [
   "indexed_hyperbolic_abbreviations_positive",
   "int_absolute_value_is_nonnegative",
   "int_absolute_value_zero_implies_zero",
+  "int_zero_times_is_zero",
   "inverse_in_polar_representation",
   "inverse_of_sqrt_cc",
   "isomorphism_of_phi_cartesian",
