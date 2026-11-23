@@ -30,6 +30,7 @@
 必要十分版は `Ising2D/NecSuf/StarFixedEntriesOfHermitianSymmetric.lean`、
 具体版をその特殊化として得るのは `ClaimHermitianAndTransposeInvariantMatrixIsRealSymmetricFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionRealSymmetricComplexMatrix
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
@@ -57,7 +58,7 @@ theorem exists_real_of_star_eq (z : ℂ) (h : star z = z) : ∃ a : ℝ, z = (a 
         = 1 * b := (one_mul b).symm                                         -- 乗法の単位元 `1·a = a`（`a → b`）を右辺から左辺へ
       _ = (2⁻¹ * 2) * b := by rw [inv_mul_cancel₀ real_two_is_nonzero]      -- 乗法の逆元 `a^{-1}·a = 1`（`a → 2`。`real_two_is_nonzero`）を右辺から左辺へ
       _ = 2⁻¹ * (2 * b) := mul_assoc _ _ _                                  -- 乗法の結合律
-      _ = 2⁻¹ * ((1 + 1) * b) := by rw [one_add_one_eq_two]                 -- `def_real_two`
+      _ = 2⁻¹ * ((1 + 1) * b) := by rw [← real_two_eq_one_add_one]                 -- `def_real_two`
       _ = 2⁻¹ * (1 * b + 1 * b) := by rw [add_mul]                          -- 分配律 `(x + y)c = xc + yc`（`x, y → 1`, `c → b`）
       _ = 2⁻¹ * (b + b) := by rw [one_mul]                                  -- 乗法の単位元（`a → b`）を 2 か所へ同時に
       _ = 2⁻¹ * ((-b) + b) := by rw [hneg]                                  -- `-b = b` を右辺から左辺へ（和の第 1 項）

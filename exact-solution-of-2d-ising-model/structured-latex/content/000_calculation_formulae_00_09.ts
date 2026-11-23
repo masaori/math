@@ -395,6 +395,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "実数の 2" },
     labels: ["def_real_two"],
+    lean: ["Ising2D.real_two_eq_one_add_one"],
     statement: [
       paragraph([
         "本文で ",
@@ -422,6 +423,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 2 を def_real_quotient の分母（π/2 など）や係数に使い、0 < 2・2 ≠ 0・1 + 1 = 2 を名前だけで根拠にしていたが、set_and_algebra_notation は ℝ の元として 0_ℝ・1_ℝ しか挙げず、2 を定めるブロックが無かった。def_real_difference・def_real_quotient と同じく set_and_algebra_notation の直後の定義の並びに置いた。0 < 2 は real_zero_less_than_two で示す。Lean では ℝ の数字 2 を mathlib の one_add_one_eq_two（1 + 1 = 2）で読む。",
+        "2026-11-22（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち数 2）: Lean の具体版を Ising2D.real_two_eq_one_add_one（MathematicalTools/SetNotationAndComplexCartesianArithmetic/DefinitionRealTwo.lean）とし、欄 lean に書いた。mathlib の ℝ の数字 2 は Nat.cast 2 を通して定められており 1 + 1 と定義として等しくないので、一致を補題一本で示す。定義の式は不変。",
       ],
     },
   },

@@ -35,6 +35,7 @@
 それらの必要十分版の外に新しい抽象的な内容を持たない（同じ章の `sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero`・
 `norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four` と同じ扱い）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealCommutesWithWRealAndWRealHasPositiveEntries
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealPreservesNonnegativeVectors
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixVectorProductAssociativityAndIdentity
@@ -122,6 +123,6 @@ theorem W_real_bilinear_value_at_sum_of_nonnegative_vector_and_its_epsilon_real_
     _ = u ⬝ᵥ W *ᵥ u + u ⬝ᵥ W *ᵥ u := by rw [zero_add]                       -- `0` は ℝ の加法の単位元 `0 + x = x`（`x → A`）
     _ = 1 * (u ⬝ᵥ W *ᵥ u) + 1 * (u ⬝ᵥ W *ᵥ u) := by rw [one_mul]            -- `1` は ℝ の乗法の単位元 `1x = x`（`x → A`）を 2 か所へ同時に右辺から左辺へ
     _ = (1 + 1) * (u ⬝ᵥ W *ᵥ u) := (add_mul 1 1 _).symm                       -- ℝ の分配律 `(a + b)c = ac + bc`（`a, b → 1`、`c → A`）を右辺から左辺へ
-    _ = 2 * (u ⬝ᵥ W *ᵥ u) := by rw [one_add_one_eq_two]                      -- `def_real_two` を右辺から左辺へ
+    _ = 2 * (u ⬝ᵥ W *ᵥ u) := by rw [← real_two_eq_one_add_one]                      -- `def_real_two` を右辺から左辺へ
 
 end Ising2D

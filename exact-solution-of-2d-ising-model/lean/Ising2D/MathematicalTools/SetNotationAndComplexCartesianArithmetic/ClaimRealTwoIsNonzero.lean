@@ -12,7 +12,7 @@
 | 2 行目 `0 ≠ 2 ⇒ 2 ≠ 0`（等号の対称律 `x = y ⇒ y = x`（`x → 2, y → 0`）の対偶） | `fun h20 => h02 h20.symm` |
 
 - 人手の `<` の意味（`x ≤ y` かつ `x ≠ y`）は、mathlib の `lt_iff_le_and_ne` で読む。
-- 人手の `def_real_two`（`2 := 1 + 1`）は、`real_zero_less_than_two` の中で mathlib の `one_add_one_eq_two` で読んでいる。
+- 人手の `def_real_two`（`2 := 1 + 1`）は、`real_zero_less_than_two` の中で具体版 `real_two_eq_one_add_one` で読んでいる。
 - mathlib の `two_ne_zero`・`ne_of_gt` は使わない（人手の 2 行をそのまま書くため）。
 
 必要十分版は `Ising2D/NecSuf/NeZeroOfZeroLt.lean`、具体版をその系として導くのは

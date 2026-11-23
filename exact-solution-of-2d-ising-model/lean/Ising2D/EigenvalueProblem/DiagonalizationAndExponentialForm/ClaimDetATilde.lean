@@ -42,6 +42,7 @@
   本章に固有なのは `g^2` の鎖（`γ_1^2 = 1 + |γ_2|^2 > 1`、`gamma_2_theta_tilde_nonzero` による）と、
   背理の鎖（`0 < g ∧ g ≤ 1 ⟹ g^2 ≤ 1`）と結論の段（`g^2 > 1` と背理の鎖から `g > 1`）である。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimEigenATildeDiag
 import Ising2D.NecSuf.GammaDetIdentity
 import Ising2D.NecSuf.ArcoshExp
@@ -337,7 +338,7 @@ theorem complex_cos_add_I_mul_sin_chain (θ : ℝ) :
         rw [← real_inclusion_add, Complex.ofReal_one]
                           -- 15 行目: `real_inclusion_preserves_finite_sum` を `m = 2` で（`1_ℂ` は略記 `(1)_ℂ`）
     _ = ((2 : ℂ) * ep) * (2 : ℂ)⁻¹ := by
-        rw [one_add_one_eq_two, Complex.ofReal_ofNat]
+        rw [← real_two_eq_one_add_one, Complex.ofReal_ofNat]
                           -- 16 行目: `def_real_two` を右辺から左辺へ（`2_ℂ` は略記 `(2)_ℂ`）
     _ = ep * ((2 : ℂ) * (2 : ℂ)⁻¹) := by rw [mul_comm (2 : ℂ) ep, mul_assoc]
                           -- 17 行目: `complex_numbers_form_a_field` の積の結合律・可換律

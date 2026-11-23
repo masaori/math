@@ -62,3 +62,6 @@ OfNat.ofNat@Complex,1@One.toOfNat1	inclusion_rr_to_cc
 # 定義として等しい（DefinitionComplexConjugate.lean の complex_star_mk。rfl）。Lean の starRingEnd ℂ を当てた形は環の準同型を関数として
 # 当てる形で、環の準同型は本文に定義が無いので載せない（starRingEnd・RingHom・DFunLike.coe の行は台帳に残る）。
 Star.star@Complex@StarRing.toStarAddMonoid	def_complex_conjugate
+# ℝ の 2: def_real_two が 2 := 1 + 1 と定める。mathlib の ℝ の数字 2 は Nat.cast 2 を通して定められており 1 + 1 と定義として等しくないが、
+# 一致を補題一本 real_two_eq_one_add_one（DefinitionRealTwo.lean）で示した。
+OfNat.ofNat@Real,2@instOfNatAtLeastTwo	def_real_two

@@ -11,7 +11,7 @@
 | 準備の鎖（`1 = 0 + 1`（加法の単位元を右辺から左辺へ）→ `< 1 + 1`（`real_zero_less_than_one` と順序と加法の両立（`x → 0, y → 1, c → 1`））→ `= 2`（`def_real_two` を右辺から左辺へ）） | `h12` の `calc` の 3 段 |
 | 本体（`0 < 1` と `1 < 2` に順序の推移律） | `lt_trans real_zero_less_than_one h12` |
 
-- 人手の `def_real_two`（`2 := 1 + 1`）は、mathlib の `ℝ` の数字 `2` を `one_add_one_eq_two`（`1 + 1 = 2`）で読む。
+- 人手の `def_real_two`（`2 := 1 + 1`）は、mathlib の `ℝ` の数字 `2` を具体版 `real_two_eq_one_add_one`（`2 = 1 + 1`）で読む。
 - 人手の順序体の公理は、順序と加法の両立 `add_lt_add_left`（`x < y ⇒ x + c < y + c`）、
   順序の推移律 `lt_trans` で読む。
 - mathlib の `zero_lt_two`・`two_pos` は使わない（人手の鎖をそのまま書くため）。
@@ -19,6 +19,7 @@
 必要十分版は `Ising2D/NecSuf/ZeroLtTwoOfOrderedAxioms.lean`、具体版をその系として導くのは
 `ClaimRealZeroLessThanTwoFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanOne
 
 namespace Ising2D
@@ -30,7 +31,7 @@ theorem real_zero_less_than_two : (0 : ℝ) < 2 := by
     calc (1 : ℝ)
         = 0 + 1 := (zero_add (1 : ℝ)).symm                          -- 加法の単位元を右辺から左辺へ
       _ < 1 + 1 := add_lt_add_left real_zero_less_than_one 1          -- `0 < 1` と順序と加法の両立（`x → 0, y → 1, c → 1`）
-      _ = 2 := one_add_one_eq_two                                     -- `def_real_two` を右辺から左辺へ
+      _ = 2 := real_two_eq_one_add_one.symm                                     -- `def_real_two` を右辺から左辺へ
   exact lt_trans real_zero_less_than_one h12                          -- 本体: 順序の推移律
 
 end Ising2D

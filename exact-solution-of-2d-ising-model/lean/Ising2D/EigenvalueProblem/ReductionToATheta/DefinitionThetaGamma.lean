@@ -57,6 +57,7 @@
    `μ = ±M/2` が `c_2s_1 = -c_1 < 0` と `c_1, s_1, c_2 > 0` の矛盾で排除されることが明記され、参照用ノートにもその形のまま在る）。
    Lean 側の `sin_thetaMu_eq_zero_iff` はその機械的な裏づけとして残す。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.RingTheory.RootsOfUnity.Complex
@@ -249,7 +250,7 @@ theorem real_inclusion_cos_add_I_mul_sin (θ : ℝ) :
     _ = ((((1 + 1 : ℝ)) : ℂ) * eP) * (2 : ℂ)⁻¹ := by
         rw [real_inclusion_add]                   -- 17 行目: `real_inclusion_preserves_sum`（`a → 1`, `b → 1`）
     _ = ((((2 : ℝ)) : ℂ) * eP) * (2 : ℂ)⁻¹ := by
-        rw [one_add_one_eq_two]                   -- 18 行目: `def_real_two` を右辺から左辺へ
+        rw [← real_two_eq_one_add_one]                   -- 18 行目: `def_real_two` を右辺から左辺へ
     _ = ((2 : ℂ) * eP) * (2 : ℂ)⁻¹ := by
         rw [Complex.ofReal_ofNat]                 -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
     _ = (eP * (2 : ℂ)) * (2 : ℂ)⁻¹ := by

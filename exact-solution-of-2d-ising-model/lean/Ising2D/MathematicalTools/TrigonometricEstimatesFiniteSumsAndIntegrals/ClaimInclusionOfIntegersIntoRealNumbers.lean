@@ -58,8 +58,9 @@
   人手の `2_ℤ := 1_ℤ + 1_ℤ` は `ℕ` の数字の `2` が `1 + 1` であること（`rfl`）である。
 * `power_of_two_in_integers_is_at_least_one` は人手と同じく `M` についての帰納法で、`M = 0` の 2 行と帰納法の段の 8 行が人手の行と 1 対 1 の `calc` である。
 * `inclusion_zz_to_rr_of_power_of_two` は人手と同じく `M` についての帰納法で、`M = 0` の 3 行と帰納法の段の 10 行が人手の行と 1 対 1 の `calc` である。
-  人手の `2_ℝ := 1_ℝ + 1_ℝ` は `one_add_one_eq_two`（Lean の `(2 : ℝ)` は数字の `2`）である。
+  人手の `2_ℝ := 1_ℝ + 1_ℝ` は `def_real_two` の具体版 `real_two_eq_one_add_one`（Lean の `(2 : ℝ)` は数字の `2`）で読む。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
@@ -370,7 +371,7 @@ theorem inclusion_zz_to_rr_of_power_of_two (M : ℕ) : ((2 ^ M : ℕ) : ℝ) = (
       _ = (2 : ℝ) ^ M + (2 : ℝ) ^ M := by rw [ih]                          -- 帰納法の仮定を二か所へ同時に
       _ = (2 : ℝ) ^ M * 1 + (2 : ℝ) ^ M * 1 := by rw [mul_one]             -- `1_ℝ` は `ℝ` の乗法の単位元を二か所へ同時に
       _ = (2 : ℝ) ^ M * (1 + 1) := (mul_add _ _ _).symm                    -- `ℝ` の分配律
-      _ = (2 : ℝ) ^ M * 2 := by rw [one_add_one_eq_two]                    -- `2_ℝ := 1_ℝ + 1_ℝ`
+      _ = (2 : ℝ) ^ M * 2 := by rw [← real_two_eq_one_add_one]                    -- `2_ℝ := 1_ℝ + 1_ℝ`
       _ = (2 : ℝ) ^ (M + 1) := (pow_succ _ _).symm                         -- `def_power_of_real_number` の `a^{m+1} := a^ma`（`a → 2_ℝ`, `m → M`）を右辺から左辺へ
 
 /-- **人手 `inclusion_zz_to_rr_of_positive_is_at_least_one`**: `n ∈ ℤ_{≥1}` なら `ι(n) ≥ 1_ℝ`。`n` についての帰納法。 -/

@@ -2748,8 +2748,10 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
         "）、右辺の ",
         math(String.raw`2_{\mathbb{R}}^{\,M} \in \mathbb{R}`),
         " は ",
-        math(String.raw`2_{\mathbb{R}} := 1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}}`),
-        " の ",
+        math(String.raw`2_{\mathbb{R}}`),
+        "（",
+        ref("def_real_two"),
+        "）の ",
         ref("def_power_of_real_number"),
         " の冪、",
         math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
@@ -2802,7 +2804,7 @@ a^{m+1} := a^m \cdot_{\mathbb{Z}} a`),
 &= 2_{\mathbb{R}}^{\,M}\,(1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}})
   &&\bigl(\because\ \mathbb{R}\ \text{の分配律}\bigr)\\
 &= 2_{\mathbb{R}}^{\,M}\, 2_{\mathbb{R}}
-  &&\bigl(\because\ 2_{\mathbb{R}} := 1_{\mathbb{R}} +_{\mathbb{R}} 1_{\mathbb{R}}\bigr)\\
+  &&\bigl(\because\ \blkref{def_real_two}\ \text{を右辺から左辺へ}\bigr)\\
 &= 2_{\mathbb{R}}^{\,M+1}
   &&\bigl(\because\ \blkref{def_power_of_real_number}\ \text{の}\ a^{m+1} := a^m\, a\ (a \to 2_{\mathbb{R}},\ m \to M)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
