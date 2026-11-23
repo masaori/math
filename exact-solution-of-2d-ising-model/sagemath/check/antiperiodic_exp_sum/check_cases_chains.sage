@@ -7,7 +7,7 @@
 # (4) 「とくに」: |k| < M かつ k ≠ 0 のとき M ∤ k であること、その背理法の鎖
 #     0_N + (M)_N = (M)_N、0_N ≤ (M)_N（順序と和）、0_Z = ι(0_N) ≤ ι((M)_N) = ((M)_N)_Z = M（ι_{N→Z} は零と順序を保つ、略記 n_Z）、|·| は def_int_absolute_value の場合分けの式（int_abs_cases）、
 #     |lM| = |l||M| = |l|M（|M| = M は 0 ≤ M の場合の式）= |k| < M、0_Z ≤ |l|（int_absolute_value_is_nonnegative）、|l| < 1、|l| + 1 ≤ 1（def_int_strict_order）、|l| = |l| + 0 = |l| + (1 + (−1)) = (|l| + 1) + (−1) ≤ 1 + (−1) = 0、
-#     |l| = 0（反対称律）、l = 0、k = lM = 0·M = 0 を、仮定を外した全ての (l, k) で
+#     |l| = 0（反対称律）、l = 0（int_absolute_value_zero_implies_zero）、k = lM = 0·M = 0 を、仮定を外した全ての (l, k) で
 #     各等号・不等号として確かめ、仮定 |k| < M が成り立つのは l = 0 だけであることを見る。k = 0 の鎖の 2 等号。
 load("_prelude.sage")
 
@@ -92,7 +92,9 @@ for M in M_RANGE:
                 assert a == b
             assert (a0 + 1) + (-1) <= 1 + (-1) and 1 + (-1) == 0
             # 反対称律: |l| <= 0 と 0 <= |l| から |l| = 0
-            assert a0 <= 0 and 0 <= a0 and a0 == 0 and l == 0
+            assert a0 <= 0 and 0 <= a0 and a0 == 0
+            # int_absolute_value_zero_implies_zero（x -> l）: |l| = 0 から l = 0
+            assert int_abs_cases(l) == 0 and l == 0
             assert k == l * M == 0 * M == 0
     for k in K_RANGE(M):
         if abs(k) < M and k != 0:

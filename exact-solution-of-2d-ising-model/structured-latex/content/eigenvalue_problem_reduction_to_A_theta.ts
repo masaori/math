@@ -2278,8 +2278,8 @@ S_{M_{\mathrm{col}},k}
 &=0_{\mathbb{Z}}
 &&\bigl(\because\ \mathbb{Z}\ \text{の順序の反対称律}\ (x\to|l|,\ y\to0_{\mathbb{Z}})\ \text{に}\ |l|\le0_{\mathbb{Z}}\ \text{と}\ 0_{\mathbb{Z}}\le|l|\bigr) \\
 l
-&=0
-&&\bigl(\because\ |l|=0_{\mathbb{Z}}\bigr).
+&=0_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{int_absolute_value_zero_implies_zero}\ (x\to l)\ \text{に}\ |l|=0_{\mathbb{Z}}\bigr).
 \end{aligned}`,
       ),
       paragraph([
@@ -2290,10 +2290,10 @@ l
 k
 &=lM_{\mathrm{col}}
 &&\bigl(\because\ k=lM_{\mathrm{col}}\bigr) \\
-&=0\cdot M_{\mathrm{col}}
-&&\bigl(\because\ l=0\bigr) \\
-&=0
-&&\bigl(\because\ 0\cdot M_{\mathrm{col}}=0\bigr),
+&=0_{\mathbb{Z}}\cdot M_{\mathrm{col}}
+&&\bigl(\because\ l=0_{\mathbb{Z}}\bigr) \\
+&=0_{\mathbb{Z}}
+&&\bigl(\because\ 0_{\mathbb{Z}}\cdot M_{\mathrm{col}}=0_{\mathbb{Z}}\bigr),
 \end{aligned}`,
       ),
       paragraph([
@@ -2327,6 +2327,7 @@ k
       notes: [
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: k ≢ 0 (mod M) の鎖と l が奇数の鎖で、左から足す 0_C を消す行（0_C + (−0_C) = −0_C と 0_C + (−(M_col)_C) = −(M_col)_C）の根拠を、complex_numbers_form_a_field の「和の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 二つの鎖で右から 0_C を掛ける行（(2M_col)_C·0_C = 0_C の 2 行、(M_col)_C·0_C = 0_C、(−1_C)·0_C = 0_C）の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → (2M_col)_C、(M_col)_C、−1_C）に替えた。式は不変。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値が 0 の整数）: 「とくに」の「l = 0 (∵ |l| = 0_ℤ)」は名前だけの根拠だった。int_absolute_value_zero_implies_zero を足し、その主張（x → l）を引く形にした。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値）: 「とくに」の「M_col > 0 なので |M_col| = M_col」と「整数 l の絶対値は非負整数なので 0_ℤ ≤ |l|」は名前だけの根拠で、ℤ の絶対値を定めるブロックも無かった。def_int_absolute_value と int_absolute_value_is_nonnegative を足し、|M_col| = M_col をその定義の 0_ℤ ≤ x の場合の式で、0_ℤ ≤ |l| をその主張で引くようにした。0_ℕ ≤ (M_col)_ℕ を ℕ の加法の単位元と順序と和の 2 行で、0_ℤ ≤ M_col を主張の前置きにある ι_{ℕ→ℤ} が零と順序を保つことと略記 n_ℤ の 4 行で先に示した。「積の絶対値」「|l| = 0_ℤ なので l = 0」「整数における正数倍は狭義順序を反映する」の名前だけの根拠は残っている（状態台帳の行「ℤ の狭義の順序・数字」）。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」）: 「とくに」の |l| = 0 の行は根拠が「|l| ∈ ℤ_{≥0}, |l| < 1」と名前だけで、ℤ の < を定めるブロックも無かった。def_int_strict_order を足し、|l| < 1_ℤ をその定義で |l| + 1_ℤ ≤ 1_ℤ と書き直す行、|l| ≤ 0_ℤ を set_and_algebra_notation の ℤ の行（和の単位元・加法逆元・加法の結合律・順序と加法の両立）で導く 5 行、反対称律で |l| = 0_ℤ とする行に割った。主張は不変。",
       ],

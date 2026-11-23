@@ -452,6 +452,9 @@ targets=(
   Ising2D.int_absolute_value_is_nonnegative
   Ising2D.int_absolute_value_is_nonnegative_of_necSuf
   Ising2D.NecSuf.abs_nonneg_of_cases
+  Ising2D.int_absolute_value_zero_implies_zero
+  Ising2D.int_absolute_value_zero_implies_zero_of_necSuf
+  Ising2D.NecSuf.eq_zero_of_abs_cases_eq_zero
   Ising2D.complex_mk_add_mk
   Ising2D.complex_mk_eq_mk_iff
   Ising2D.complex_mk_mul_mk

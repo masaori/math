@@ -47,6 +47,7 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerStrictOrder
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueIsNonnegative
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueZeroImpliesZero
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -484,7 +485,7 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
       _ = 0 := add_neg_cancel 1                                       -- `ℤ` の加法逆元（`x → 1_ℤ`）
   -- 人手証明の `|l| = 0_ℤ`（`ℤ` の順序の反対称律）。
   have hl_abs_zero : |l| = 0 := le_antisymm hl_abs_nonpos hl_abs_nonneg
-  have hl_zero : l = 0 := abs_eq_zero.mp hl_abs_zero
+  have hl_zero : l = 0 := int_absolute_value_zero_implies_zero l hl_abs_zero   -- `int_absolute_value_zero_implies_zero`（`x → l`）
   have hk_zero : k = 0 := by rw [hl, hl_zero, mul_zero]
   exact hk0 hk_zero
 

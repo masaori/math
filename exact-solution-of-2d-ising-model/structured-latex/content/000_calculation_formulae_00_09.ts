@@ -724,6 +724,77 @@ export default defineBlocks([
     },
   },
   {
+    id: "calc_formulae_claim_integer_absolute_value_zero_implies_zero",
+    kind: "claim",
+    title: { text: "絶対値が 0 の整数は 0" },
+    labels: ["int_absolute_value_zero_implies_zero"],
+    lean: ["Ising2D.int_absolute_value_zero_implies_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{Z}`),
+        " が ",
+        ref("def_int_absolute_value"),
+        " の絶対値について ",
+        math(String.raw`|x| = 0_{\mathbb{Z}}`),
+        " を満たすなら、",
+      ]),
+      displayMath(String.raw`x = 0_{\mathbb{Z}}`),
+      paragraph([
+        "である。",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の零元である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`0_{\mathbb{Z}} \le x`),
+        " の場合と、そうでない場合に分ける。",
+        math(String.raw`0_{\mathbb{Z}} \le x`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x
+&= |x|
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ 0_{\mathbb{Z}} \le x\ \text{の場合の式を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{Z}}
+&&\bigl(\because\ \text{主張の仮定}\ |x| = 0_{\mathbb{Z}}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\neg\,(0_{\mathbb{Z}} \le x)`),
+        " のとき、まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-x
+&= |x|
+&&\bigl(\because\ \blkref{def_int_absolute_value}\ \text{の}\ \neg\,(0_{\mathbb{Z}} \le x)\ \text{の場合の式を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{Z}}
+&&\bigl(\because\ \text{主張の仮定}\ |x| = 0_{\mathbb{Z}}\bigr)
+\end{aligned}`),
+      paragraph(["であり、これを使うと"]),
+      displayMath(String.raw`\begin{aligned}
+x
+&= x + 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x + 0_{\mathbb{Z}} = x\ (x \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= x + (-x)
+&&\bigl(\because\ \text{上の}\ -x = 0_{\mathbb{Z}}\ \text{を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ x + (-x) = 0_{\mathbb{Z}}\ (x \to x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph(["である。どちらの場合も ", math(String.raw`x = 0_{\mathbb{Z}}`), " が成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum の「とくに」が「|l| = 0_ℤ なので l = 0」と名前だけで引いていた性質を、def_int_absolute_value と set_and_algebra_notation の ℤ の行（和の単位元・加法の逆元）から示す主張として足した。Lean の具体版は Ising2D.int_absolute_value_zero_implies_zero（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimIntegerAbsoluteValueZeroImpliesZero.lean）、必要十分版は Ising2D.NecSuf.eq_zero_of_abs_cases_eq_zero（NecSuf/EqZeroOfAbsCasesEqZero.lean）。数値検証: sagemath/check/int_absolute_value_zero_implies_zero/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_real_less_than_preserved_by_adding_on_right",
     kind: "claim",
     title: { text: "実数の狭義の順序は右から同じ数を足しても保たれる" },
