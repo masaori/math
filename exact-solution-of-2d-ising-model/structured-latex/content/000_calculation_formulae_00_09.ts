@@ -30,7 +30,7 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`\begin{aligned}
 \mathbb{N}&:=\left(\mathbf{N},+_{\mathbb{N}},\cdot_{\mathbb{N}},0_{\mathbb{N}},1_{\mathbb{N}},\le_{\mathbb{N}}\right),\\
-\mathbb{Z}&:=\left(\mathbf{Z},+_{\mathbb{Z}},\cdot_{\mathbb{Z}},0_{\mathbb{Z}},1_{\mathbb{Z}},\le_{\mathbb{Z}}\right),\\
+\mathbb{Z}&:=\left(\mathbf{Z},+_{\mathbb{Z}},\cdot_{\mathbb{Z}},0_{\mathbb{Z}},1_{\mathbb{Z}},-_{\mathbb{Z}},\le_{\mathbb{Z}}\right),\\
 \mathbb{R}&:=\left(\mathbf{R},+_{\mathbb{R}},\cdot_{\mathbb{R}},0_{\mathbb{R}},1_{\mathbb{R}},-_{\mathbb{R}},(\cdot)^{-1}_{\mathbb{R}},\le_{\mathbb{R}}\right).
 \end{aligned}`),
       paragraph(["各演算と順序の所属は次のとおりである。"]),
@@ -38,6 +38,7 @@ export default defineBlocks([
 +_{\mathbb{N}},\cdot_{\mathbb{N}}&:\mathbf{N}\times\mathbf{N}\to\mathbf{N},\\
 +_{\mathbb{Z}},\cdot_{\mathbb{Z}}&:\mathbf{Z}\times\mathbf{Z}\to\mathbf{Z},\\
 +_{\mathbb{R}},\cdot_{\mathbb{R}}&:\mathbf{R}\times\mathbf{R}\to\mathbf{R},\\
+-_{\mathbb{Z}}&:\mathbf{Z}\to\mathbf{Z},\\
 -_{\mathbb{R}}&:\mathbf{R}\to\mathbf{R},\qquad
 (\cdot)^{-1}_{\mathbb{R}}:\mathbf{R}\setminus\{0_{\mathbb{R}}\}\to\mathbf{R},\\
 \le_{\mathbb{N}}&\subset\mathbf{N}\times\mathbf{N},\qquad
@@ -245,6 +246,84 @@ export default defineBlocks([
         " の加法の結合律」「数学的帰納法」などの名前で引く。",
       ]),
       paragraph([
+        math(String.raw`\mathbb{Z}`),
+        " の演算と順序も外から持ち込み、使う性質は次の条件だけとする。",
+        math(String.raw`-x`),
+        " は ",
+        math(String.raw`-_{\mathbb{Z}}(x)`),
+        " の略記であり（",
+        math(String.raw`-_{\mathbb{Z}}`),
+        " は符号反転）、",
+        math(String.raw`x\le y`),
+        " は ",
+        math(String.raw`(x,y)\in\le_{\mathbb{Z}}`),
+        " の略記である。任意の ",
+        math(String.raw`x,y,t,k\in\mathbf{Z}`),
+        " と、",
+        math(String.raw`\mathbf{Z}`),
+        " の元についての命題 ",
+        math(String.raw`\varphi(n)`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&(x+y)+t=x+(y+t)
+&&\text{（加法の結合律。和の結合律とも書く）},\\
+&x+y=y+x
+&&\text{（加法の交換律。加法の可換律とも書く）},\\
+&x+0_{\mathbb{Z}}=x,\qquad 0_{\mathbb{Z}}+x=x
+&&\text{（}0_{\mathbb{Z}}\ \text{は加法の単位元。和の単位元とも書く）},\\
+&x+(-x)=0_{\mathbb{Z}},\qquad (-x)+x=0_{\mathbb{Z}}
+&&\text{（加法の逆元。加法逆元とも書く）},\\
+&(x\cdot y)\cdot t=x\cdot(y\cdot t),\qquad x\cdot y=y\cdot x
+&&\text{（乗法の結合律・交換律）},\\
+&x\cdot 1_{\mathbb{Z}}=x,\qquad 1_{\mathbb{Z}}\cdot x=x
+&&\text{（}1_{\mathbb{Z}}\ \text{は乗法の単位元。積の単位元とも書く）},\\
+&x\cdot(y+t)=x\cdot y+x\cdot t,\qquad (x+y)\cdot t=x\cdot t+y\cdot t
+&&\text{（分配律）},\\
+&0_{\mathbb{Z}}\neq 1_{\mathbb{Z}}
+&&\text{（零元と単位元の相違）},\\
+&x\le x,\qquad (x\le y\ \wedge\ y\le x)\ \Rightarrow\ x=y,\qquad (x\le y\ \wedge\ y\le t)\ \Rightarrow\ x\le t
+&&\text{（順序の反射律・反対称律・推移律）},\\
+&x\le y\ \vee\ y\le x
+&&\text{（全順序）},\\
+&x\le y\ \Rightarrow\ x+t\le y+t
+&&\text{（順序と加法の両立）},\\
+&(0_{\mathbb{Z}}\le x\ \wedge\ 0_{\mathbb{Z}}\le y)\ \Rightarrow\ 0_{\mathbb{Z}}\le x\cdot y
+&&\text{（順序と乗法の両立）},\\
+&0_{\mathbb{Z}}\le x\ \Rightarrow\ \bigl(x=0_{\mathbb{Z}}\ \vee\ \exists n\in\mathbf{Z},\ (0_{\mathbb{Z}}\le n\ \wedge\ x=n+1_{\mathbb{Z}})\bigr)
+&&\text{（}0_{\mathbb{Z}}\ \text{以上の元は}\ 0_{\mathbb{Z}}\ \text{か、}0_{\mathbb{Z}}\ \text{以上の元に}\ 1_{\mathbb{Z}}\ \text{を足したもの）},\\
+&\Bigl(\varphi(k)\ \wedge\ \bigl(\forall n\in\mathbf{Z},\ (k\le n\ \wedge\ \varphi(n))\Rightarrow\varphi(n+1_{\mathbb{Z}})\bigr)\Bigr)\ \Rightarrow\ \forall n\in\mathbf{Z},\ \bigl(k\le n\Rightarrow\varphi(n)\bigr)
+&&\text{（}k\ \text{から始める数学的帰納法）}.
+\end{aligned}`),
+      paragraph([
+        "最後から二つ目の行は最後の行（",
+        math(String.raw`k=0_{\mathbb{Z}}`),
+        "）から導けるが、",
+        ref("inclusion_zz_to_rr"),
+        " が ",
+        math(String.raw`\mathbb{Z}_{\ge 0}`),
+        " の上の帰納的な定義に引くので並べておく。",
+        math(String.raw`\mathbb{Z}`),
+        " の元を数字で書くとき、",
+        math(String.raw`0`),
+        " と ",
+        math(String.raw`1`),
+        " は ",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " と ",
+        math(String.raw`1_{\mathbb{Z}}`),
+        " である。",
+      ]),
+      paragraph([
+        "本文の証明が ",
+        math(String.raw`\mathbb{Z}`),
+        " の性質を根拠に引くときは、この一覧の該当する行を「",
+        math(String.raw`\mathbb{Z}`),
+        " の加法の結合律」「",
+        math(String.raw`\mathbb{Z}`),
+        " の分配律」などの名前で引く。",
+      ]),
+      paragraph([
         "命題をつなぐ論理の記号（否定 ",
         math(String.raw`\neg`),
         "、かつ ",
@@ -353,6 +432,7 @@ export default defineBlocks([
         "2026-11-22（Lean の点検の直し、未定義の記号）: 本文の証明が名前だけで引いていた等号の反射律・対称律・推移律と、論理の記号（¬・∧・∨・⇒・⇔・⊥・∀・∃）と ≠ を、外から持ち込むと宣言し、証明が使う規則（直積の元の等号は成分ごと、写像の等号は点ごと、を含む）を名前つきで並べた。本文の証明が引く「行列の等号は成分ごと」も、行列の集合 Mat(m,n,ℂ) を定める定義のブロックがまだ無いので、外から持ち込む規則としてここに並べた。新しいブロックにせずここに足したのは、一対一の検査で対応する具体版の宣言の無いブロックを増やさないためである。",
         "2026-11-22（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序）: 本文の証明が「ℝ の順序の推移律（set_and_algebra_notation）」のように名前だけで引いていた ℝ の順序の性質を、反射律・反対称律・推移律・全順序・加法との両立・乗法との両立・上限の存在として名前つきで並べ、≥ を ≤ の略記と定めた（上限の存在は sqrt_nonnegative_existence_uniqueness などが使う箇所で宣言していた性質で、レビューの指摘で足した）。狭義の順序 < は def_real_strict_order で定める。これで Lean の ℝ の ≤・≥ は外から持ち込み使う性質を列挙した記号として、<・> は本文の定義との一致を補題一本で示した記号として、許可の一覧に載せられる。アルキメデス性は上限の存在から導ける主張なのでここに並べていない。一覧の行から導けるが主張として示していない順序の性質（狭義の順序と加法の両立、正の数どうしの積は正など）を set_and_algebra_notation の名前で引く箇所が残っており、状態台帳の行「ℝ の数・順序・差・商」に直す項目として書いた。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℕ の数・和・積・順序」のうち本文の宣言）: 組 ℕ の演算と順序について、外から持ち込み使う性質（和と積の再帰の式、後者の性質、数学的帰納法、加法・乗法の結合律・交換律・単位元、分配律、加法の簡約律、順序と和、順序の反射律・反対称律・推移律、全順序、順序と加法の両立）を名前つきで並べ、狭義の順序 x < y を x + 1 ≤ y、> と ≥ を逆向きの略記、x ≤ y のときの差 y − x を x + d = y を満たすただ一つの d と定め、十進の数字を「n を表す数字の次の数字は n + 1 を表す」と定めた。Lean の ℕ の < は Nat.lt n m := Nat.le (Nat.succ n) m で Nat.succ n は n + 1 と定義として等しく、数字 k+1 は k + 1 と定義として等しく、Lean の ℕ の差は x ≤ y の組でこの差と値が一致する（Nat.add_sub_cancel'。x ≤ y でない組では 0 を返す全域の写像で、その値は本文の定義の外）。新しいブロックにせずここに足したのは、一対一の検査で対応する具体版の宣言の無いブロックを増やさないためである。Lean の ℕ の記号はまだ許可の一覧に載せていない。本文の冪の指数・添字・帰納法の変数は ℤ_{≥k}（𝐙 の部分集合）の元として ℤ の演算で書かれており、Lean の ℕ との間の写像を置くまでは、許可すると ℕ と ℤ_{≥0} の暗黙の同一視が検査から見えなくなるからである（レビューの指摘）。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の数・和・積・順序」）: 本文の証明が「ℤ の加法の結合律」「ℤ の分配律」「ℤ の和の単位元」などと名前だけで引いていた ℤ の性質の基になる性質を、外から持ち込み使う性質として名前つきで並べた（可換環の等式、0 ≠ 1、順序の反射律・反対称律・推移律・全順序、加法・乗法との両立、0 以上の元は 0 か 0 以上の元に 1 を足したもの、k から始める数学的帰納法）。引く側が使う別名（和の結合律、加法の可換律、和の単位元、加法逆元、積の単位元）も挙げた。一覧の −x が写像の値であることを示すため、組に符号反転 −_ℤ を足して型を宣言した。数字 0・1 は 0_ℤ・1_ℤ を表すと書いた。ℤ の差・狭義の順序・2 以上の数字は、1 ブロック 1 主張に従い ℝ と同じく別の定義のブロックで定める（状態台帳の行「ℤ の差・狭義の順序・数字」。2_ℤ は def_power_of_integer が既に定めている）。0 以上の元の分解と k から始める帰納法は、inclusion_zz_to_rr が ℤ_{≥0} の上の帰納的な定義に使い、本文の証明が ℤ_{≥1} の上の帰納法として使っていた性質である。一覧の行から導けるが一行ではない根拠（「ℤ の四則」「ℤ の符号反転を 2 回行うと元に戻る」「ℤ の減法」「ℤ の計算」、根拠の無い 1_ℤ ≥ 0_ℤ など）を名前だけで引く箇所が残っており、状態台帳の行「ℤ の差・狭義の順序・数字」に直す項目として書いた。新しいブロックにせずここに足したのは、一対一の検査で対応する具体版の宣言の無いブロックを増やさないためである。",
       ],
     },
   },
