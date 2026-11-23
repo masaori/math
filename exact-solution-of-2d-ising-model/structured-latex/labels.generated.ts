@@ -483,6 +483,7 @@ export const ALL_LABELS = [
   "int_absolute_value_zero_implies_zero",
   "int_difference_plus_subtrahend_is_original",
   "int_less_than_one_of_product_less_than_nonnegative_factor",
+  "int_negation_of_sum_is_sum_of_negations",
   "int_negation_times_is_negation_of_product",
   "int_zero_at_most_one",
   "int_zero_times_is_zero",

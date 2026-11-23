@@ -1,5 +1,5 @@
 # 対象ラベル: inclusion_zz_to_rr_of_successor
-# n ∈ ℤ について ι(n + 1) = ι(n) + 1 を、n ∈ ℤ_{≥0} の 1 行、n = -1 の 5 行、n = -(p + 1)（p ∈ ℤ_{≥1}）の 8 行の場合分けで一行ずつ確かめる
+# n ∈ ℤ について ι(n + 1) = ι(n) + 1 を、n ∈ ℤ_{≥0} の 1 行、n = -1 の 5 行、n = -(p + 1)（p ∈ ℤ_{≥1}）の 11 行の場合分けで一行ずつ確かめる
 # （ι は定義の再帰、比較は QQ の厳密な等号）。
 load("../../_shared/inclusion_zz_to_rr_by_definition.sage")
 io = iota_zz_to_rr
@@ -13,7 +13,7 @@ for x, y in zip(L, L[1:]):
     assert x == y; cnt += 1
 # n = -(p + 1)（p ∈ ℤ_{≥1}）:
 for p in range(1, 200):
-    L = [io(-(p + 1) + 1), io(-p), -io(p), (-io(p)) + QQ(0), (-io(p)) + (QQ(-1) + QQ(1)),
+    L = [io(-(p + 1) + 1), io(((-p) + (-1)) + 1), io((-p) + ((-1) + 1)), io((-p) + 0), io(-p), -io(p), (-io(p)) + QQ(0), (-io(p)) + (QQ(-1) + QQ(1)),
          ((-io(p)) + QQ(-1)) + QQ(1), -(io(p) + QQ(1)) + QQ(1), -io(p + 1) + QQ(1), io(-(p + 1)) + QQ(1)]
     for x, y in zip(L, L[1:]):
         assert x == y; cnt += 1

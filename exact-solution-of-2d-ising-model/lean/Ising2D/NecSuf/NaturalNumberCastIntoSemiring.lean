@@ -25,7 +25,7 @@
 | `inclusion_zz_to_rr_of_positive_is_at_least_one` | `n` の帰納法。`ι(1) = 1 ≥ 1`、`ι(n + 1) = ι(n) + 1 ≥ 1 + 1 ≥ 1 + 0 = 1` | `one_le_cast'`（同じ段） | `cast_one'`、埋め込みの `ι(n + 1) = ι(n) + 1`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元、反射律 |
 | `inclusion_zz_to_rr_of_nonpositive_is_nonpositive` | `n = 0` は `ι(0) = 0 ≤ 0`、`n = -m`（`m ≥ 1`）は `ι(-m) = -ι(m) ≤ -1 ≤ -0 = 0` | `int_cast_nonpos'`（同じ段） | `ℤ` の埋め込みの `ι(-n) = -ι(n)`（`Int.cast_neg`）と `ℤ_{≥0}` での一致（`Int.cast_natCast`）、`one_le_cast'`、符号反転が順序を逆にすること（加法の単調性から出る）、`0 ≤ 1` |
 | `inclusion_zz_to_rr_is_monotone_on_nonnegatives` | `k := b − a`、`ι(k) ≥ 0`（`k = 0` と `k ≥ 1`）、`ι(a) = ι(a) + 0 ≤ ι(a) + ι(k) = ι(a + k) = ι(b)` | `cast_mono'`（同じ段） | `cast_add'`、`one_le_cast'`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元 |
-| `inclusion_zz_to_rr_of_successor` | `n ∈ ℤ_{≥0}` は定義、`n = -1` は `ι(-1 + 1) = ι(0) = 0 = (-1) + 1 = (-ι(1)) + 1 = ι(-1) + 1`、`n = -(p + 1)`（`p ≥ 1`）は `ι(-(p+1) + 1) = ι(-p) = -ι(p) = -ι(p) + 0 = -ι(p) + ((-1) + 1) = (-ι(p) + (-1)) + 1 = -(ι(p) + 1) + 1 = -ι(p + 1) + 1 = ι(-(p + 1)) + 1` | `int_cast_succ'`（同じ段） | `ℤ` の埋め込みの `ι(0) = 0`・`ι(1) = 1`・`ι(-n) = -ι(n)` と `ℤ_{≥0}` での一致・`Nat.cast_succ`、`0` が和の右単位元、加法逆元、和の結合律、`-(x + y) = (-x) + (-y)`（加法の可換性） |
+| `inclusion_zz_to_rr_of_successor` | `n ∈ ℤ_{≥0}` は定義、`n = -1` は `ι(-1 + 1) = ι(0) = 0 = (-1) + 1 = (-ι(1)) + 1 = ι(-1) + 1`、`n = -(p + 1)`（`p ≥ 1`）は `ι(-(p+1) + 1) = ι(((-p) + (-1)) + 1) = ι((-p) + ((-1) + 1)) = ι((-p) + 0) = ι(-p) = -ι(p) = -ι(p) + 0 = -ι(p) + ((-1) + 1) = (-ι(p) + (-1)) + 1 = -(ι(p) + 1) + 1 = -ι(p + 1) + 1 = ι(-(p + 1)) + 1` | `int_cast_succ'`（同じ段） | `ℤ` の埋め込みの `ι(0) = 0`・`ι(1) = 1`・`ι(-n) = -ι(n)` と `ℤ_{≥0}` での一致・`Nat.cast_succ`、`0` が和の右単位元、加法逆元、和の結合律、`-(x + y) = (-x) + (-y)`（加法の可換性） |
 | `inclusion_zz_to_rr_preserves_sum` | `b` について `0` から足す帰納法（3 行と 5 行）と引く帰納法（13 行）。足す段・引く段とも `inclusion_zz_to_rr_of_successor` を使う | `int_cast_add'`（同じ段） | `int_cast_succ'`、`ι(0) = 0`、`0` が和の右単位元、加法逆元、和の結合律 |
 | `inclusion_zz_to_rr_preserves_product` | `b` について `0` から足す帰納法（4 行と 7 行）と引く帰納法（15 行）。`b = 0` は `x · 0 = 0`、足す段・引く段とも `inclusion_zz_to_rr_preserves_sum`・`inclusion_zz_to_rr_of_successor` を使う | `int_cast_mul'`（同じ段） | `int_cast_add'`・`int_cast_succ'`、`ι(0) = 0`、`x · 0 = 0`、`1` が乗法の右単位元、左からの分配律 `x(y + z) = xy + xz`、`0` が和の右単位元、加法逆元、和の結合律 |
 | `inclusion_zz_to_rr_preserves_difference` | `ι(a − b) = ι(a − b) + 0 = ι(a − b) + (ι(b) + (−ι(b))) = (ι(a − b) + ι(b)) + (−ι(b)) = ι((a − b) + b) + (−ι(b)) = ι((a + (−b)) + b) + (−ι(b)) = ι(a + ((−b) + b)) + (−ι(b)) = ι(a + 0) + (−ι(b)) = ι(a) + (−ι(b)) = ι(a) − ι(b)` | `int_cast_sub'`（同じ段） | `int_cast_add'`、`0` が和の右単位元、加法逆元、和の結合律、差が加法の逆元の和であること（`ℤ` と `R` の両方） |
@@ -57,6 +57,7 @@ import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Algebra.Ring.Defs
 import Mathlib.Algebra.Order.Ring.Defs
 import Ising2D.NecSuf.SubAddCancelOfAddGroup
+import Ising2D.NecSuf.NegAddOfAddCommGroup
 
 namespace Ising2D.NecSuf
 
@@ -199,19 +200,24 @@ theorem int_cast_succ' {R : Type*} [AddCommGroupWithOne R] (n : ℤ) : ((n + 1 :
   · obtain ⟨m, hm, rfl⟩ : ∃ m : ℤ, 1 ≤ m ∧ n = -m := ⟨-n, by omega, by omega⟩
     rcases eq_or_lt_of_le hm with h1 | h2
     · subst h1
-      calc ((-(1 : ℤ) + 1 : ℤ) : R) = ((0 : ℤ) : R) := by rw [neg_add_cancel]  -- `ℤ` の加法逆元
+      calc ((-(1 : ℤ) + 1 : ℤ) : R) = ((0 : ℤ) : R) := by rw [neg_add_cancel]  -- `ℤ` の加法逆元 `(−x) + x = 0`（`x → 1`）
         _ = 0 := Int.cast_zero                                             -- 埋め込みの `ι(0) = 0`
         _ = -(1 : R) + 1 := (neg_add_cancel 1).symm                        -- 加法逆元を右辺から左辺へ
         _ = -((1 : ℤ) : R) + 1 := by rw [Int.cast_one]                     -- 埋め込みの `ι(1) = 1` を右辺から左辺へ
         _ = ((-(1 : ℤ) : ℤ) : R) + 1 := by rw [Int.cast_neg]               -- 埋め込みの `ι(-n) = -ι(n)` を右辺から左辺へ
     · obtain ⟨q, hq, rfl⟩ : ∃ q : ℕ, 1 ≤ q ∧ m = (q : ℤ) + 1 := ⟨(m - 1).toNat, by omega, by omega⟩
-      calc ((-((q : ℤ) + 1) + 1 : ℤ) : R) = ((-(q : ℤ) : ℤ) : R) := by
-            rw [show -((q : ℤ) + 1) + 1 = -(q : ℤ) by omega]                -- `ℤ` の四則
+      calc ((-((q : ℤ) + 1) + 1 : ℤ) : R) = (((-(q : ℤ) + -1) + 1 : ℤ) : R) := by
+            rw [neg_add_of_addCommGroup (q : ℤ) 1]                         -- `ℤ` で `−(x + y) = (−x) + (−y)`（`x → p`, `y → 1`）
+        _ = ((-(q : ℤ) + (-1 + 1) : ℤ) : R) := by
+            rw [add_assoc (-(q : ℤ)) (-1) 1]                               -- `ℤ` の和の結合律
+        _ = ((-(q : ℤ) + 0 : ℤ) : R) := by rw [neg_add_cancel (1 : ℤ)]     -- `ℤ` の加法逆元
+        _ = ((-(q : ℤ) : ℤ) : R) := by rw [add_zero (-(q : ℤ))]            -- `0` は `ℤ` の和の右単位元
         _ = -((q : ℤ) : R) := Int.cast_neg _                               -- 埋め込みの `ι(-n) = -ι(n)`
         _ = -((q : ℤ) : R) + 0 := (add_zero _).symm                        -- `0` は和の右単位元
         _ = -((q : ℤ) : R) + (-(1 : R) + 1) := by rw [neg_add_cancel]      -- 加法逆元を右辺から左辺へ
         _ = (-((q : ℤ) : R) + -(1 : R)) + 1 := (add_assoc _ _ _).symm       -- 和の結合律を右辺から左辺へ
-        _ = -(((q : ℤ) : R) + 1) + 1 := by rw [neg_add]                    -- `-(x + y) = (-x) + (-y)` を右辺から左辺へ（加法の可換性が効く）
+        _ = -(((q : ℤ) : R) + 1) + 1 := by
+            rw [neg_add_of_addCommGroup ((q : ℤ) : R) 1]                    -- `-(x + y) = (-x) + (-y)` を右辺から左辺へ（加法の可換性が効く）
         _ = -((((q : ℤ) + 1 : ℤ)) : R) + 1 := by rw [hsucc q]              -- 埋め込みの `ι(n + 1) = ι(n) + 1` を右辺から左辺へ
         _ = ((-((q : ℤ) + 1) : ℤ) : R) + 1 := by rw [Int.cast_neg]         -- 埋め込みの `ι(-n) = -ι(n)` を右辺から左辺へ
 

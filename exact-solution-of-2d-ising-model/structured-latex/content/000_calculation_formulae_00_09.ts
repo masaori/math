@@ -606,6 +606,62 @@ export default defineBlocks([
     },
   },
   {
+    id: "calc_formulae_claim_integer_negation_of_sum_is_sum_of_negations",
+    kind: "claim",
+    title: { tex: String.raw`-_{\mathbb{Z}}(x +_{\mathbb{Z}} y) = (-_{\mathbb{Z}} x) +_{\mathbb{Z}} (-_{\mathbb{Z}} y)` },
+    labels: ["int_negation_of_sum_is_sum_of_negations"],
+    lean: ["Ising2D.int_negation_of_sum_is_sum_of_negations"],
+    statement: [
+      paragraph([
+        math(String.raw`x, y \in \mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`-(x +_{\mathbb{Z}} y) = (-x) +_{\mathbb{Z}} (-y)`),
+      paragraph([
+        "である。和・符号反転 ",
+        math(String.raw`-z = -_{\mathbb{Z}}(z)`),
+        "・",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+-(x + y)
+&= \bigl(-(x + y)\bigr) + 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x + 0_{\mathbb{Z}} = x\ (x \to -(x + y))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(-(x + y)\bigr) + \bigl(x + (-x)\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ x + (-x) = 0_{\mathbb{Z}}\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(-(x + y)\bigr) + \bigl((x + 0_{\mathbb{Z}}) + (-x)\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x + 0_{\mathbb{Z}} = x\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(-(x + y)\bigr) + \Bigl(\bigl(x + (y + (-y))\bigr) + (-x)\Bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ x + (-x) = 0_{\mathbb{Z}}\ (x \to y)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(-(x + y)\bigr) + \Bigl(\bigl((x + y) + (-y)\bigr) + (-x)\Bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (t \to -y)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(-(x + y)\bigr) + \Bigl((x + y) + \bigl((-y) + (-x)\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to x + y,\ y \to -y,\ t \to -x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \Bigl(\bigl(-(x + y)\bigr) + (x + y)\Bigr) + \bigl((-y) + (-x)\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to -(x + y),\ y \to x + y,\ t \to (-y) + (-x))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{Z}} + \bigl((-y) + (-x)\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-x) + x = 0_{\mathbb{Z}}\ (x \to x + y)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (-y) + (-x)
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + x = x\ (x \to (-y) + (-x))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (-x) + (-y)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\ x + y = y + x\ (x \to -y,\ y \to -x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の四則」）: 原文（Typst）に対応ブロックは無い。inclusion_zz_to_rr_of_successor の n = −(p + 1) の場合が「ℤ の四則 −(p + 1) + 1 = −p」と名前だけで引いていた等式の部品として、set_and_algebra_notation の ℤ の一覧の行（和の単位元・加法の逆元・加法の結合律・加法の交換律）だけから示す主張として足した。real_negation_of_sum_is_sum_of_negations は (−1)·z = −z を経る経路で示すが、ℤ の側には (−1)·z = −z の主張が無いので、加法だけの経路にした。Lean の具体版は Ising2D.int_negation_of_sum_is_sum_of_negations（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimIntegerNegationOfSumIsSumOfNegations.lean）、必要十分版は Ising2D.NecSuf.neg_add_of_addCommGroup（NecSuf/NegAddOfAddCommGroup.lean）。数値検証: sagemath/check/int_negation_of_sum_is_sum_of_negations/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_definition_integer_strict_order",
     kind: "definition",
     title: { text: "整数の狭義の順序" },
@@ -2872,7 +2928,7 @@ T_B(X - W)
       displayMath(String.raw`\begin{aligned}
 \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((-1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}})
-  &&\bigl(\because\ \mathbb{Z}\ \text{の加法逆元}\ (-1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}} = 0_{\mathbb{Z}}\bigr)\\
+  &&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-x) + x = 0_{\mathbb{Z}}\ (x \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 0_{\mathbb{R}}
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\bigr)\\
 &= (-1_{\mathbb{R}}) +_{\mathbb{R}} 1_{\mathbb{R}}
@@ -2895,8 +2951,14 @@ T_B(X - W)
       ]),
       displayMath(String.raw`\begin{aligned}
 \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(-(p +_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\Bigl(\bigl((-p) +_{\mathbb{Z}} (-1_{\mathbb{Z}})\bigr) +_{\mathbb{Z}} 1_{\mathbb{Z}}\Bigr)
+  &&\bigl(\because\ \blkref{int_negation_of_sum_is_sum_of_negations}\ (x \to p,\ y \to 1_{\mathbb{Z}})\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\Bigl((-p) +_{\mathbb{Z}} \bigl((-1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)\Bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to -p,\ y \to -1_{\mathbb{Z}},\ t \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((-p) +_{\mathbb{Z}} 0_{\mathbb{Z}}\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-x) + x = 0_{\mathbb{Z}}\ (x \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(-p)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ -(p +_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}} = -p\bigr)\\
+  &&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x + 0_{\mathbb{Z}} = x\ (x \to -p)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= -\iota_{\mathbb{Z}\to\mathbb{R}}(p)
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(-n) := -\iota_{\mathbb{Z}\to\mathbb{R}}(n)\ (n \to p)\bigr)\\
 &= \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(p)\bigr) +_{\mathbb{R}} 0_{\mathbb{R}}
@@ -2918,6 +2980,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b2)）: 原文（Typst）に対応ブロックは無い。inclusion_zz_to_rr は ι(n + 1) := ι(n) + 1 を n ∈ ℤ_{≥0} についてだけ定めるので、ℤ 全体で和を保つ主張 inclusion_zz_to_rr_preserves_sum の帰納法の段で引けるよう、ℤ 全体の場合を示す主張として足した。Lean の具体版は Ising2D.inclusion_zz_to_rr_of_successor、必要十分版は Ising2D.NecSuf.int_cast_succ'。数値検証: sagemath/check/inclusion_zz_to_rr_of_successor/。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の四則」）: n = −(p + 1) の場合で「ℤ の四則 −(p + 1) + 1 = −p」と名前だけで引いていた 1 行を、int_negation_of_sum_is_sum_of_negations（x → p, y → 1）と set_and_algebra_notation の ℤ の加法の結合律・加法の逆元・和の単位元の 4 行に割った。n = −1 の場合の「ℤ の加法逆元」の行にも set_and_algebra_notation の参照と一覧の形を書いた。鎖の両端と主張は不変。",
       ],
     },
   },

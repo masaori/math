@@ -472,6 +472,9 @@ targets=(
   Ising2D.int_difference_plus_subtrahend_is_original
   Ising2D.int_difference_plus_subtrahend_is_original_of_necSuf
   Ising2D.NecSuf.sub_add_cancel_of_addGroup
+  Ising2D.int_negation_of_sum_is_sum_of_negations
+  Ising2D.int_negation_of_sum_is_sum_of_negations_of_necSuf
+  Ising2D.NecSuf.neg_add_of_addCommGroup
   Ising2D.complex_mk_add_mk
   Ising2D.complex_mk_eq_mk_iff
   Ising2D.complex_mk_mul_mk
