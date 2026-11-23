@@ -19,13 +19,14 @@
 
 - 人手の順序体の公理は、mathlib の `ℝ` の全順序の場合分け（`lt_or_gt_of_ne`）、順序と加法の両立
   `add_lt_add_left`（`x < y ⇒ x + c < y + c`）、正の数どうしの積は正 `mul_pos`、推移律 `lt_trans` で読む。
-  `a` の乗法の逆元 `a·a⁻¹ = 1` は体の公理 `mul_inv_cancel₀` で読む。
+  `a` の乗法の逆元 `a·a⁻¹ = 1` は体の公理の具体版 `real_mul_inv_cancel`（`DefinitionRealQuotient.lean`）で読む。
 - 人手の `<` の意味（`x ≤ y` かつ `x ≠ y`）は `lt_iff_le_and_ne` で読む。
 - mathlib の `inv_pos`・`inv_pos_of_pos` は使わない（人手の鎖をそのまま書くため）。
 
 必要十分版は `Ising2D/NecSuf/InvPosOfOrderedAxioms.lean`、具体版をその系として導くのは
 `ClaimRealInverseOfPositiveIsPositiveFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanOne
@@ -38,7 +39,7 @@ theorem real_inverse_of_positive_is_positive (a : ℝ) (ha : 0 < a) : 0 < a⁻¹
   have ha0 : a ≠ 0 := by
     have h0a : (0 : ℝ) ≠ a := (lt_iff_le_and_ne.mp ha).2      -- 準備 1 行目: `<` の意味の後半（`x → 0, y → a`）
     exact fun h => h0a h.symm                                -- 準備 2 行目: 等号の対称律（`x → a, y → 0`）の対偶
-  have hinv : a * a⁻¹ = 1 := mul_inv_cancel₀ ha0             -- `a` の乗法の逆元（体の公理）
+  have hinv : a * a⁻¹ = 1 := real_mul_inv_cancel a ha0      -- `a` の乗法の逆元（体の公理）
   have hinv0 : a⁻¹ ≠ 0 := by
     intro h
     have h10 : (1 : ℝ) = 0 :=

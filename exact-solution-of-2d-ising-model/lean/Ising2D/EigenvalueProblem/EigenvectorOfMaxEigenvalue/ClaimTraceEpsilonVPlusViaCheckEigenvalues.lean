@@ -41,6 +41,7 @@ Step 7 の `⟹` の 2 行目と `η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行目�
 | Step 6 の 5 本の鎖（(2) の不等号）`γ(θ̃_μ)/2 > 0`、`sinh(γ(θ̃_μ)/2) > 0`、`2sinh(γ(θ̃_μ)/2) > 0`、`Π_μ2sinh(γ(θ̃_μ)/2) > 0`、`ϰ > 0` | `VPlusData.gam_half_pos`・`VPlusData.sinh_gam_half_pos`・`VPlusData.two_sinh_gam_half_pos`・`VPlusData.prod_two_sinh_gam_half_pos`・`VPlusData.traceFactor_pos_step6`（1・3・5 本目は同じ行の calc（3 本目は 1 段）、2 本目は `cosh_sinh_basic_properties` (3) の適用 1 つ、4 本目は `finite_product_of_positive_reals_is_positive` の適用 1 つ（どちらも人手で 1 行）。人手の `M_col` が `r + 1`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.traceFactor_pos`（人手の範囲外の `M = 0` は mathlib の `simp`） |
 | Step 7 の同値（(3)）: `⟹` の 2 行の鎖 `tr(εV^{(+)}) = 1_ℂϰ_ℂ = ϰ_ℂ`、`⟸` の 2 行の鎖 `r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ`、`ȟ = −1` の背理の 4 行（1 行目は `inclusion_rr_to_cc_is_injective`）と `real_less_than_is_asymmetric` による矛盾、`η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行 | `VPlusData.trace_pos_of_eta_univ_eq_one_step7`・`VPlusData.eta_univ_eq_one_of_trace_pos_step7`・`VPlusData.eta_univ_eq_one_iff_trace_pos_step7`（各鎖は同じ行の calc。人手の `M_col` が `r + 1`、人手の `r` が `s`。`⟸` の 2 行目が引く Step 5 の鎖の 1〜6 行目は `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.eta_univ_eq_one_iff_trace_pos`（人手の範囲外の `M = 0` は `Complex.ofReal_injective` と `linarith`）。下流が渡す `0 < Re tr(εV^{(+)})` の形で読む運ぶ段が `VPlusData.eta_univ_eq_one_of_trace_pos`（`VPlusData.trace_epsilon_mul_V_eq_ofReal` を通す） |
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWords
@@ -631,15 +632,15 @@ theorem trace_epsilon_mul_V :
 
 /-- **原文 Step 6** の 1 本目の鎖: `γ(θ̃_μ)/2 = γ(θ̃_μ)·2^{-1} > 0`（`γ(θ̃_μ)` が `D.gam μ`。
 `gamma_theta_tilde_mu_positive` の `γ(θ̃_μ) > 0` は `VPlusData` の入力 `D.hgam μ`）。
-鎖の前の準備の `2 ≠ 0` は `real_two_is_nonzero` で、人手の `def_real_quotient` の段の `z ≠ 0` に当たる
-（Lean の `div_eq_mul_inv` は `z ≠ 0` を要らない）。`0 < 2^{-1}` は `real_inverse_of_positive_is_positive`（`a → 2`）に
+鎖の前の準備の `2 ≠ 0` は `real_two_is_nonzero` で、人手の `def_real_quotient` の段の `z ≠ 0` に当たり、
+具体版 `real_div_eq_mul_inv` の仮定（商の定義域）へ渡す。`0 < 2^{-1}` は `real_inverse_of_positive_is_positive`（`a → 2`）に
 `real_zero_less_than_two` を当てたもの。 -/
 theorem gam_half_pos (μ : Fin M) : D.gam μ / 2 > 0 :=
-  have _h2 : (2 : ℝ) ≠ 0 := real_two_is_nonzero                       -- 準備: `real_two_is_nonzero`
+  have h2 : (2 : ℝ) ≠ 0 := real_two_is_nonzero                        -- 準備: `real_two_is_nonzero`
   have h2inv : (0 : ℝ) < 2⁻¹ :=
     real_inverse_of_positive_is_positive 2 real_zero_less_than_two     -- 準備: `real_inverse_of_positive_is_positive`（`a → 2`）
   calc D.gam μ / 2
-      = D.gam μ * 2⁻¹ := div_eq_mul_inv _ _             -- `def_real_quotient`（`y → γ(θ̃_μ)`、`z → 2`）
+      = D.gam μ * 2⁻¹ := real_div_eq_mul_inv _ _ h2     -- `def_real_quotient`（`y → γ(θ̃_μ)`、`z → 2`）
     _ > 0 := mul_pos (D.hgam μ) h2inv                   -- ℝ で正の数どうしの積は正（順序体）に、
                                                         -- `γ(θ̃_μ) > 0` と `0 < 2^{-1}` を当てる
 

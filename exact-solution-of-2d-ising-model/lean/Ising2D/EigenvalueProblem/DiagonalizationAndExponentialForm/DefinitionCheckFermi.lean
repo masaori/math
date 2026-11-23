@@ -31,6 +31,7 @@
   `gamma_2_theta_tilde_nonzero` の無条件版 `gamma2_thetaTilde_ne_zero` で `hga` を落とした版は `ClaimCheckFermiResultsUnconditional.lean` に置く。
   （`γ_2(-θ̃_μ) ≠ 0` は `gamma2_neg_eq_zero_iff` から従うので別に仮定しない。）
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
@@ -74,8 +75,8 @@ theorem gamma1R_add_two_pi_mul_int (K : IsingConst) (θ : ℝ) (k : ℤ) :
 （`thetaTilde` の分母と、分子の `(kM_col)_ℝ` から 3 行目で分ける因子の両方）。
 人手の `2π` は 1 つの実数で、Lean の `2 * Real.pi` に当たる。9 行目の分配律が作る形は `2π(k_ℝ(M_col)_ℝ)` である。
 人手 `def_real_difference`（`y − z := y + (−z)`）は mathlib の `sub_eq_add_neg`、
-人手 `def_real_quotient`（`y/z := y z^{-1}`）は mathlib の `div_eq_mul_inv`、その乗法の逆元（`z z^{-1} = 1_ℝ`）は
-`mul_inv_cancel₀` で受ける。 -/
+人手 `def_real_quotient`（`y/z := y z^{-1}`）は具体版 `real_div_eq_mul_inv`、その乗法の逆元（`z z^{-1} = 1_ℝ`）は
+`real_mul_inv_cancel` で受ける（どちらも分母 `(M_col)_ℝ ≠ 0_ℝ` を渡す）。 -/
 theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     thetaTilde M (μ + k * M) = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
   have hM' : ((M : ℤ) : ℝ) ≠ 0 := Int.cast_ne_zero.2 (Int.natCast_ne_zero.2 hM)
@@ -105,14 +106,14 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
         rw [mul_add]                              -- 9 行目: ℝ の分配律
     _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ))) * ((M : ℤ) : ℝ)⁻¹ := by
-        rw [div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)))]
+        rw [real_div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ))) _ hM']
                                                   -- 10 行目: `def_real_quotient`
     _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) * ((M : ℤ) : ℝ)⁻¹
           + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) * ((M : ℤ) : ℝ)⁻¹ := by
         rw [add_mul]                              -- 11 行目: ℝ の右からの分配律
     _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)
           + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) * ((M : ℤ) : ℝ)⁻¹ := by
-        rw [← div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2))]
+        rw [← real_div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2)) _ hM']
                                                   -- 12 行目: `def_real_quotient` を右辺から左辺へ
     _ = thetaTilde M μ + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) * ((M : ℤ) : ℝ)⁻¹ := rfl
                                                   -- 13 行目: `θ̃_μ` の定義（`antiperiodic_exp_sum`）
@@ -121,7 +122,7 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) * (((M : ℤ) : ℝ) * ((M : ℤ) : ℝ)⁻¹) := by
         rw [mul_assoc (2 * Real.pi * (k : ℝ))]   -- 15 行目: ℝ の乗法の結合律
     _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) * 1 := by
-        rw [mul_inv_cancel₀ hM']                  -- 16 行目: `def_real_quotient` の乗法の逆元（`(M_col)_ℝ ≠ 0_ℝ`）
+        rw [real_mul_inv_cancel _ hM']                -- 16 行目: `def_real_quotient` の乗法の逆元（`(M_col)_ℝ ≠ 0_ℝ`）
     _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
         rw [mul_one]                              -- 17 行目: ℝ の乗法の単位元
 

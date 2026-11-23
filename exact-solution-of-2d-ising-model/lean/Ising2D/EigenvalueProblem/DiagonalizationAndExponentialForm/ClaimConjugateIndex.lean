@@ -20,6 +20,7 @@
 (1)(2) は `μ ∈ ℤ` 全体で成り立つので、Lean でも `μ : ℤ` のまま述べる
 （`𝓜̌` への制限は必要ない）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesSum
@@ -40,7 +41,7 @@ variable {M : ℕ}
 人手の `M_col+1-μ ∈ ℤ` は `(M_col+1)-μ` と左から括る（Lean の `+`・`-` の括りと同じ）。
 差の定義 `def_real_difference`（`y - z := y + (-z)`）は `sub_eq_add_neg` で当てる。
 人手の `2π` は 1 つの実数で、Lean の `2 * Real.pi` に当たる。商の定義 `def_real_quotient`（`y/z := y z^{-1}`）は
-`div_eq_mul_inv`、その乗法の逆元（`z z^{-1} = 1_ℝ`）は `mul_inv_cancel₀` で受ける。 -/
+具体版 `real_div_eq_mul_inv`、その乗法の逆元（`z z^{-1} = 1_ℝ`）は `real_mul_inv_cancel` で受ける（どちらも分母 `(M_col)_ℝ ≠ 0_ℝ` を渡す）。 -/
 theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     thetaTilde M ((M : ℤ) + 1 - μ) = 2 * Real.pi - thetaTilde M μ := by
   have hMR : ((M : ℤ) : ℝ) ≠ 0 := Int.cast_ne_zero.mpr (Int.natCast_ne_zero.mpr hM)
@@ -83,7 +84,7 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi * (((M : ℤ) : ℝ) + -((μ : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ) := by
         rw [← neg_sub (μ : ℝ) (1 / 2)]            -- 15 行目: ℝ で `½ - μ_ℝ = -(μ_ℝ - ½)`
     _ = 2 * Real.pi * (((M : ℤ) : ℝ) + -((μ : ℝ) - 1 / 2)) * ((M : ℤ) : ℝ)⁻¹ := by
-        rw [div_eq_mul_inv (2 * Real.pi * (((M : ℤ) : ℝ) + -((μ : ℝ) - 1 / 2)))]
+        rw [real_div_eq_mul_inv (2 * Real.pi * (((M : ℤ) : ℝ) + -((μ : ℝ) - 1 / 2))) _ hMR]
                                                   -- 16 行目: `def_real_quotient`
     _ = (2 * Real.pi * ((M : ℤ) : ℝ) + 2 * Real.pi * -((μ : ℝ) - 1 / 2)) * ((M : ℤ) : ℝ)⁻¹ := by
         rw [mul_add (2 * Real.pi)]                -- 17 行目: ℝ の分配律
@@ -93,7 +94,7 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi * (((M : ℤ) : ℝ) * ((M : ℤ) : ℝ)⁻¹) + 2 * Real.pi * -((μ : ℝ) - 1 / 2) * ((M : ℤ) : ℝ)⁻¹ := by
         rw [mul_assoc (2 * Real.pi) ((M : ℤ) : ℝ)]  -- 19 行目: ℝ の乗法の結合律
     _ = 2 * Real.pi * 1 + 2 * Real.pi * -((μ : ℝ) - 1 / 2) * ((M : ℤ) : ℝ)⁻¹ := by
-        rw [mul_inv_cancel₀ hMR]                  -- 20 行目: `def_real_quotient` の乗法の逆元（`(M_col)_ℝ ≠ 0_ℝ`）
+        rw [real_mul_inv_cancel _ hMR]                -- 20 行目: `def_real_quotient` の乗法の逆元（`(M_col)_ℝ ≠ 0_ℝ`）
     _ = 2 * Real.pi + 2 * Real.pi * -((μ : ℝ) - 1 / 2) * ((M : ℤ) : ℝ)⁻¹ := by
         rw [mul_one (2 * Real.pi)]                -- 21 行目: ℝ の乗法の単位元
     _ = 2 * Real.pi + -(2 * Real.pi * ((μ : ℝ) - 1 / 2)) * ((M : ℤ) : ℝ)⁻¹ := by
@@ -102,7 +103,7 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi + -(2 * Real.pi * ((μ : ℝ) - 1 / 2) * ((M : ℤ) : ℝ)⁻¹) := by
         rw [real_negation_times_is_negation_of_product (2 * Real.pi * ((μ : ℝ) - 1 / 2))]  -- 23 行目: `real_negation_times_is_negation_of_product`（`x → 2π(μ_ℝ−1/2)`、`t → (M_col)_ℝ^{-1}`）
     _ = 2 * Real.pi + -(2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) := by
-        rw [← div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2))]
+        rw [← real_div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2)) _ hMR]
                                                   -- 24 行目: `def_real_quotient` を右辺から左辺へ
     _ = 2 * Real.pi + -thetaTilde M μ := rfl     -- 25 行目: `θ~_μ` の定義（`antiperiodic_exp_sum`）
     _ = 2 * Real.pi - thetaTilde M μ := by

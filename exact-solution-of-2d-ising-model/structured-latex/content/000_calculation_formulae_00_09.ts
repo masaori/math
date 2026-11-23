@@ -352,6 +352,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "実数の商" },
     labels: ["def_real_quotient"],
+    lean: ["Ising2D.real_div_eq_mul_inv"],
     statement: [
       paragraph([
         math(String.raw`y \in \mathbb{R}`),
@@ -387,6 +388,7 @@ export default defineBlocks([
       notes: [
         "2026-11-11（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。ℝ の分数は本文全体で使われていたが、set_and_algebra_notation の ℝ の演算は和・積・零元・単位元・順序だけで、商を定めるブロックが無く、periodicity_of_check_fermi (2) の θ̃_{μ+kM} の鎖が「(M_col)_ℝ ≠ 0_ℝ を分母とする分数の和」「約分」を名前だけで当てていた。一ステップ一定理に割るために、ℂ の def_complex_quotient と同じ形で def_real_difference の直後に足した。",
         "2026-11-19（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w30)。体の法則の式と名前を並べる件）: set_and_algebra_notation の ℝ の組に逆数 (·)^{-1}_ℝ を足したので、z^{-1} をその値 (z)^{-1}_ℝ として指す形にし、証明の要る「0_ℝ でない元の乗法の逆元はただ一つに定まる」を消した。定義の式は不変。",
+        "2026-11-23（Lean の点検の直し、未定義の記号）: 欄 lean に具体版 Ising2D.real_div_eq_mul_inv（MathematicalTools/SetNotationAndComplexCartesianArithmetic/DefinitionRealQuotient.lean。z ≠ 0 を仮定に置いた y/z = y z^{-1}）を書いた。Lean の / と ⁻¹ は 0 でも値を持つ全域の写像で、この定義の商と set_and_algebra_notation の逆数はその ℝ∖{0} への制限に当たる。逆元の式 z z^{-1} = 1_ℝ は同じファイルの Ising2D.real_mul_inv_cancel で読む。定義の式は不変。",
       ],
     },
   },

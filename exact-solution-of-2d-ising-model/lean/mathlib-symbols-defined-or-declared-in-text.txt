@@ -4,8 +4,7 @@
 # 本文が外から持ち込み、使う性質を列挙している記号だけである。型クラスの演算は「演算@型@インスタンス」で書く（UndefinedSymbols.lean）。
 #
 # 集合と代数構造の記号: ℕ・ℤ・ℝ を構成せず既知の集合として持ち込み、ℝ の +・·・− について体の公理を列挙している。
-# ℕ・ℤ の演算と順序 ≤、ℝ の逆数は、本文が使う性質をまだ列挙していないので載せない
-# （ℝ の逆数は本文では ℝ∖{0} 上の写像で、Lean の Inv.inv は 0⁻¹ = 0 と定める全域の写像である）。
+# ℕ・ℤ の演算と順序 ≤ は、本文が使う性質をまだ列挙していないので載せない。ℝ の逆数は下の ℝ の商の行に載せる。
 Nat	set_and_algebra_notation
 Int	set_and_algebra_notation
 Real	set_and_algebra_notation
@@ -68,3 +67,10 @@ OfNat.ofNat@Real,2@instOfNatAtLeastTwo	def_real_two
 # ℂ の 2: inclusion_rr_to_cc が略記 r_ℂ の特別な場合として 2_ℂ := (2_ℝ)_ℂ と定める（2_ℝ は def_real_two）。mathlib の ℂ の数字 2 は
 # Nat.cast 2 を通して定められており ((2 : ℝ) : ℂ) と定義として等しくないが、一致を補題一本 complex_two_eq_ofReal_two（DefinitionComplexNumbers.lean）で示した。
 OfNat.ofNat@Complex,2@instOfNatAtLeastTwo	inclusion_rr_to_cc
+# ℝ の逆数と商: set_and_algebra_notation が逆数 (·)^{-1}_ℝ : ℝ∖{0_ℝ} → ℝ を外から持ち込み、x ≠ 0_ℝ ⇒ (x·x^{-1} = 1_ℝ かつ x^{-1}·x = 1_ℝ) を列挙している。
+# def_real_quotient が z ≠ 0_ℝ について y/z := y z^{-1} と定める。Lean の Inv.inv と / は 0 でも値を持つ（0⁻¹ = 0）全域の写像で、
+# 人手の写像はその ℝ∖{0} への制限に当たる。z ≠ 0 での一致を DefinitionRealQuotient.lean の real_div_eq_mul_inv（y / z = y * z⁻¹）と
+# real_mul_inv_cancel（z * z⁻¹ = 1。逆元は体で一つに定まるので、これで人手の逆数と値が一致する）で示した。
+# 0 での値は人手の定義の外なので、具体版が 0 になりうる値の逆数・商を使う主張は、本文の主張（分母が 0_ℝ でないことを仮定に持つ）と一対一でない。
+Inv.inv@Real@Real.instInv	set_and_algebra_notation
+HDiv.hDiv@Real,Real,Real@Real.instDivInvMonoid	def_real_quotient

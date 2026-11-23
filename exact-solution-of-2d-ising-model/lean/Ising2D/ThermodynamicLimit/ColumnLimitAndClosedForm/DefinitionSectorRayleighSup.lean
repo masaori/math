@@ -56,6 +56,7 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない。章 011 の
 `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealFixedVectorIffInclusionInEvenEigenvectors
@@ -202,8 +203,7 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
   have hs2ne : Real.sqrt 2 ≠ 0 := fun h => (lt_iff_le_and_ne.mp hs2pos).2 h.symm
                           -- `<` の意味の後半（`x → 0`、`y → √2`）で `0 ≠ √2`、等号の対称律の対偶で `√2 ≠ 0`
   have hs2s2ne : Real.sqrt 2 * Real.sqrt 2 ≠ 0 := real_product_of_nonzero_is_nonzero _ _ hs2ne hs2ne
-                          -- `real_product_of_nonzero_is_nonzero`（`a, b → √2`）の `√2√2 ≠ 0`。人手の最後の `def_real_quotient` の段の `z ≠ 0` に当たる。
-                          -- Lean の `div_eq_mul_inv` は `z ≠ 0` を求めない（`⁻¹` が全域）ので、`calc` では使わない
+                          -- `real_product_of_nonzero_is_nonzero`（`a, b → √2`）の `√2√2 ≠ 0`。人手の `def_real_quotient`（`z → √2√2`）の段の `z ≠ 0` に当たる
   calc vecNorm (evenUnit (n + 1)) ^ 2
       = (Real.sqrt (∑ I, |evenUnit (n + 1) I| ^ 2)) ^ 2 := by
         rw [vecNorm_eq_sqrt_sum_abs_sq]
@@ -233,7 +233,7 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
         rw [product_of_real_powers_is_power_of_product]
                           -- `product_of_real_powers_is_power_of_product`（`a, b → 1/√2`、`m → M_col`）
     _ = (2 : ℝ) ^ (n + 1) * ((1 * (Real.sqrt 2)⁻¹) * (1 * (Real.sqrt 2)⁻¹)) ^ (n + 1) := by
-        rw [div_eq_mul_inv]
+        rw [real_div_eq_mul_inv 1 (Real.sqrt 2) hs2ne]
                           -- `def_real_quotient`（`y → 1`、`z → √2 ≠ 0`）を 2 つの因子へ同時に適用
     _ = (2 : ℝ) ^ (n + 1) * ((Real.sqrt 2)⁻¹ * (Real.sqrt 2)⁻¹) ^ (n + 1) := by
         rw [one_mul]
@@ -245,7 +245,7 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
         rw [one_mul]
                           -- `1` は `ℝ` の乗法の単位元 `1·x = x`（`x → (√2√2)^{-1}`）（`set_and_algebra_notation`）を右辺から左辺へ
     _ = (2 : ℝ) ^ (n + 1) * (1 / (Real.sqrt 2 * Real.sqrt 2)) ^ (n + 1) := by
-        rw [div_eq_mul_inv]
+        rw [real_div_eq_mul_inv 1 (Real.sqrt 2 * Real.sqrt 2) hs2s2ne]
                           -- `def_real_quotient`（`y → 1`、`z → √2√2 ≠ 0`）を右辺から左辺へ
     _ = (2 : ℝ) ^ (n + 1) * (1 / Real.sqrt 2 ^ 2) ^ (n + 1) := by
         rw [← square_of_real_number_is_product]
@@ -257,13 +257,13 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
         product_of_real_powers_is_power_of_product (n + 1) 2 (1 / 2)
                           -- `product_of_real_powers_is_power_of_product`（`a → 2_ℝ`、`b → 1/2_ℝ`、`m → M_col`）
     _ = (2 * (1 * 2⁻¹) : ℝ) ^ (n + 1) := by
-        rw [div_eq_mul_inv]
+        rw [real_div_eq_mul_inv 1 2 h2ne]
                           -- `def_real_quotient`（`y → 1`、`z → 2_ℝ ≠ 0`）
     _ = (2 * 2⁻¹ : ℝ) ^ (n + 1) := by
         rw [one_mul]
                           -- `1` は `ℝ` の乗法の単位元 `1·x = x`（`x → 2_ℝ^{-1}`）（`set_and_algebra_notation`）
     _ = (1 : ℝ) ^ (n + 1) := by
-        rw [mul_inv_cancel₀ h2ne]
+        rw [real_mul_inv_cancel 2 h2ne]
                           -- `def_real_quotient` の乗法の逆元 `z z^{-1} = 1_ℝ`（`z → 2_ℝ ≠ 0`）
     _ = 1 := power_of_real_one_is_one (n + 1)
                           -- `power_of_real_one_is_one`（`m → M_col`）
