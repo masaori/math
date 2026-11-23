@@ -21370,7 +21370,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
                       paragraph(["である。空の添字集合も含む。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_matching_pair_entry_product"), " と ", ref("claim_matching_pair_orientation_product"), " により、", math(String.raw`\alpha_\tau,\alpha_\upsilon`), " を各色の向きの整数符号の積とすると、"]),
+                      paragraph([ref("claim_matching_pair_entry_product"), " と ", ref("claim_matching_pair_orientation_product"), " により、", math(String.raw`\alpha_\tau,\alpha_\upsilon`), " を各色の向きの整数符号の積とする。各向きの符号は ", math(String.raw`1`), " または ", math(String.raw`-1`), " なので二乗が一である。"]),
                       displayMath(String.raw`\begin{aligned}
 \prod_{i\in\mathcal J}A_{i,\sigma(i)}
 &=\left(\prod_{i\in C}A_{i,\tau(i)}\right)\left(\prod_{i\in\mathcal J\setminus C}A_{i,\upsilon(i)}\right)&&\bigl(\because\ \blkref{claim_matching_pair_entry_product}\bigr)\\
@@ -21385,7 +21385,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
 &=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(D)\operatorname{sgn}(E))}b_Db_E&&\bigl(\because\ \alpha_\tau^2=\alpha_\upsilon^2=1\bigr)\\
 &=(c_Dc_E)(b_Db_E)&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr)
 \end{aligned}`),
-                      paragraph(["各向きの符号は ", math(String.raw`1`), " または ", math(String.raw`-1`), " なので二乗が一である。空集合では四つの積とすべての符号が一になる。有限集合と代数的数係数多項式だけを使い、実数体への脱出はない。"]),
+                      paragraph(["空集合では四つの積とすべての符号が一になる。有限集合と代数的数係数多項式だけを使い、実数体への脱出はない。"]),
                     ],
                   },
                 },

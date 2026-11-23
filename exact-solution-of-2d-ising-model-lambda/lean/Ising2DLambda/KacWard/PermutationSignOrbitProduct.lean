@@ -13,6 +13,7 @@
 import Ising2DLambda.KacWard.MovedOrbitPartition
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
+import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 
 namespace Ising2DLambda.KacWard
 
@@ -20,7 +21,8 @@ open Finset
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 open Ising2DLambda.NecSuf.KacWard
 open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
-  (finiteOrderedSign finiteOrderedSign_noncommProd)
+  (finiteOrderedPairs finiteOrderedInversionCount finiteOrderedSign
+    finiteOrderedSign_comp finiteOrderedSign_noncommProd)
 
 variable {ι : Type} [Fintype ι] [LinearOrder ι]
 
@@ -216,12 +218,35 @@ private lemma transpositionChain_orbitTail_fix (σ : Equiv.Perm ι) (e : ι) {x 
 /-- 互換の鎖の符号は `(-1)^{|C|-1}` である。人手証明の
 「この巡回置換の符号は `(-1)^{m_C-1}` である」と `m_C = |C|`（`card_orbit`）を結ぶ。 -/
 private lemma sign_transpositionChain_orbitTail (σ : Equiv.Perm ι) (e : ι) :
-    sign (fun x y : ι => x < y) (transpositionChain e (orbitTail σ e)) =
+    finiteOrderedSign (transpositionChain e (orbitTail σ e)) =
       (-1 : ℤ) ^ ((movedOrbit σ e).card - 1) := by
   have hcard : (movedOrbit σ e).card = orbitPeriod σ e :=
     card_orbit (⇑σ) σ.injective e (perm_return σ e)
   have hnotmem : e ∉ orbitTail σ e := (List.nodup_cons.mp (nodup_cons_orbitTail σ e)).1
-  rw [sign_transpositionChain e _ hnotmem, orbitTail_length, hcard]
+  have hsign : ∀ (l : List ι), e ∉ l →
+      finiteOrderedSign (transpositionChain e l) = (-1 : ℤ) ^ l.length := by
+    intro l
+    induction l with
+    | nil =>
+      intro _
+      have hinv : finiteOrderedInversionCount (1 : Equiv.Perm ι) = 0 := by
+        rw [finiteOrderedInversionCount, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+        intro p hp
+        have hlt : p.1 < p.2 := by simpa [finiteOrderedPairs] using hp
+        exact lt_asymm hlt
+      simp only [transpositionChain, List.length_nil, pow_zero, finiteOrderedSign, hinv]
+    | cons b t ih =>
+      intro hal
+      rw [List.mem_cons, not_or] at hal
+      obtain ⟨hab, hat⟩ := hal
+      have hswap : transpositionPerm e b = finiteTranspositionPerm e b := by
+        ext x
+        simp only [transpositionPerm, transpositionOn, finiteTranspositionPerm,
+          finiteTransposition, Equiv.coe_fn_mk]
+      change finiteOrderedSign (transpositionChain e t * transpositionPerm e b) = _
+      rw [finiteOrderedSign_comp, hswap, finiteTransposition_sign hab,
+        ih hat, List.length_cons, pow_succ]
+  rw [hsign (orbitTail σ e) hnotmem, orbitTail_length, hcard]
 
 /-- 各軌道に、基点からの互換の鎖を割り当てる（軌道でない集合には恒等置換）。
 人手証明の `φ_C`（軌道上は `φ`、軌道外は恒等写像）の実装である。 -/
@@ -262,8 +287,7 @@ theorem sign_movedEdgeOrbit_product (σ : Equiv.Perm ι) :
     · intro x hx
       rw [hperm]
       exact transpositionChain_orbitTail_fix σ h.choose (fun hmem => hx (horb ▸ hmem))
-    · change sign (fun x y : ι => x < y) (orbitChainPerm σ O) = _
-      rw [hperm, sign_transpositionChain_orbitTail σ h.choose, horb]
+    · rw [hperm, sign_transpositionChain_orbitTail σ h.choose, horb]
   -- 軌道の台は互いに素で、各鎖は自分の台だけを動かす。
   let s := movedEdgeOrbitSet σ
   let f := orbitChainPerm σ
