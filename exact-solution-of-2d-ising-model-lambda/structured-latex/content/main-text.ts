@@ -3628,7 +3628,7 @@ s\cdot\nu\le_{\Lambda_{\mathbb{Q}}}r\cdot\nu`),
                           displayMath(String.raw`\begin{aligned}
 s\cdot\nu
 &=(c+r)\cdot\nu
-&&(\because\ c+r=(s-r)+r=s\text{。}\mathbb{Q}\text{ の四則})\\
+&&(\because\ c+r=(s-r)+r=s\text{、}\mathbb{Q}\text{ の四則})\\
 &=c\cdot\nu+r\cdot\nu
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }(r+s)\cdot\lambda=r\cdot\lambda+s\cdot\lambda)\\
 &\le_{\Lambda_{\mathbb{Q}}}0+r\cdot\nu
