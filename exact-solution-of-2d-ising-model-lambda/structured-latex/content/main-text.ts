@@ -66781,7 +66781,7 @@ d_{A_\sigma}(i,j)
 &\quad+a_\sigma\bigl(n_{\mathrm v}(i,j)\bigr)
  +a_\sigma\bigl(n_{\mathrm v}(i-\bar1,j)\bigr)
 \end{aligned}
-&&(\because\ \blkref{def_boundary_maps})\\
+&&(\because\ \blkref{claim_edge_row_partition},\ \blkref{def_boundary_maps})\\
 &=\begin{aligned}[t]
 &q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j)\bigr)
  +q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j-\bar1)\bigr)\\
@@ -66856,6 +66856,7 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                       verification: ["sagemath/check/dual-broken-edges-winding-zero"],
                       lean: [
                         "Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero",
+                        "Ising2DLambda.FisherZero.dualBrokenEdgeSet_mem_trivialSector",
                         "Ising2DLambda.NecSuf.FisherZero.cyclic_change_parity_zero_necSuf",
                         "Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero_from_necSuf",
                       ],
@@ -66896,7 +66897,7 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
 &=\left(\sum_i q_\sigma\bigl(\delta_L^{-1}(n_{\mathrm h}(i,\pi(-1)))\bigr)\right)\bmod2
 &&\bigl(\because\ A_\sigma=\delta_L(\mathcal B_L(\sigma)),\ \blkref{claim_dual_edge_map_bijective}\bigr)\\
 &=\left(\sum_i q_\sigma(n_{\mathrm v}(i-\bar1,\pi(-1)))\right)\bmod2
-&&\bigl(\because\ \blkref{def_dual_edge_map}\bigr)\\
+&&\bigl(\because\ \blkref{def_dual_edge_map},\ \blkref{claim_edge_row_partition}\bigr)\\
 &=\left(\sum_i q_\sigma(n_{\mathrm v}(i,\pi(-1)))\right)\bmod2
 &&\bigl(\because\ i\mapsto i-\bar1\ \text{は全単射}\bigr)\\
 &=\left(\sum_i\left[\bigl(c(\sigma(\partial_0(n_{\mathrm v}(i,\pi(-1)))))+c(\sigma(\partial_1(n_{\mathrm v}(i,\pi(-1)))))\bigr)\bmod2\right]\right)\bmod2
@@ -66924,7 +66925,7 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
 &=\left(\sum_j q_\sigma\bigl(\delta_L^{-1}(n_{\mathrm v}(\pi(-1),j))\bigr)\right)\bmod2
 &&\bigl(\because\ A_\sigma=\delta_L(\mathcal B_L(\sigma)),\ \blkref{claim_dual_edge_map_bijective}\bigr)\\
 &=\left(\sum_j q_\sigma(n_{\mathrm h}(\pi(-1),j-\bar1))\right)\bmod2
-&&\bigl(\because\ \blkref{def_dual_edge_map}\bigr)\\
+&&\bigl(\because\ \blkref{def_dual_edge_map},\ \blkref{claim_edge_row_partition}\bigr)\\
 &=\left(\sum_j q_\sigma(n_{\mathrm h}(\pi(-1),j))\right)\bmod2
 &&\bigl(\because\ j\mapsto j-\bar1\ \text{は全単射}\bigr)\\
 &=\left(\sum_j\left[\bigl(c(\sigma(\partial_0(n_{\mathrm h}(\pi(-1),j))))+c(\sigma(\partial_1(n_{\mathrm h}(\pi(-1),j))))\bigr)\bmod2\right]\right)\bmod2
@@ -67069,7 +67070,7 @@ d_A(v)
 &a(n_{\mathrm h}(i+\bar1,j+\bar1))+a(n_{\mathrm h}(i+\bar1,j))\\
 &\quad+a(n_{\mathrm v}(i+\bar1,j+\bar1))+a(n_{\mathrm v}(i,j+\bar1))
 \end{aligned}
-&&\bigl(\because\ \blkref{def_boundary_maps}\bigr)\\
+&&\bigl(\because\ \blkref{claim_edge_row_partition},\ \blkref{def_boundary_maps}\bigr)\\
 &=\begin{aligned}[t]
 &q(\delta_L^{-1}(n_{\mathrm h}(i+\bar1,j+\bar1)))+q(\delta_L^{-1}(n_{\mathrm h}(i+\bar1,j)))\\
 &\quad+q(\delta_L^{-1}(n_{\mathrm v}(i+\bar1,j+\bar1)))+q(\delta_L^{-1}(n_{\mathrm v}(i,j+\bar1)))

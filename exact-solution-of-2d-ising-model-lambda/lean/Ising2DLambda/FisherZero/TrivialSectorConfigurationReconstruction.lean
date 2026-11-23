@@ -23,7 +23,9 @@ noncomputable def reconstructedEdgeSet (L : ℕ) [NeZero L] (A : Finset (Edge L)
   · rintro ⟨a, ha, rfl⟩
     simpa using ha
   · intro he
-    exact ⟨dualEdgeEquiv L e, he, (dualEdgeEquiv L).symm_apply_apply e⟩
+    -- 本文の `δ_L⁻¹` は「双対辺写像は全単射である」の逆写像。単射性で往復を確かめる。
+    refine ⟨dualEdgeEquiv L e, he, (dualEdgeEquiv_bijective L).1 ?_⟩
+    exact (dualEdgeEquiv L).apply_symm_apply (dualEdgeEquiv L e)
 
 /-- 人手証明の `δ_L(B) = A`（`B = δ_L⁻¹(A)` の往復）。 -/
 lemma image_reconstructedEdgeSet (L : ℕ) [NeZero L] (A : Finset (Edge L)) :

@@ -59,8 +59,13 @@ noncomputable def dualBrokenEdgeSet (L : ℕ) [NeZero L] (σ : Config L) : Finse
   classical
   rw [dualBrokenEdgeSet, Finset.mem_image]
   constructor
-  · rintro ⟨a, ha, rfl⟩
-    simpa using ha
+  · rintro ⟨a, ha, hae⟩
+    -- 本文の「双対辺の唯一の原像」: 全単射性の単射の側で原像を `δ_L⁻¹(e)` に定める。
+    have hpre : (dualEdgeEquiv L).symm e = a := by
+      apply (dualEdgeEquiv_bijective L).1
+      rw [(dualEdgeEquiv L).apply_symm_apply, hae]
+    rw [hpre]
+    exact ha
   · intro he
     exact ⟨(dualEdgeEquiv L).symm e, he, (dualEdgeEquiv L).apply_symm_apply e⟩
 

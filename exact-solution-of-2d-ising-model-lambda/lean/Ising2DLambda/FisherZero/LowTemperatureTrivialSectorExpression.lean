@@ -18,10 +18,11 @@ noncomputable def sectorGeneratingPolynomial (L : ℕ) [NeZero L]
   exact ∑ A ∈ univ.filter (fun A : Finset (Edge L) => IsInTorusHomologySector L A sector),
     Polynomial.X ^ A.card
 
-/-- 双対辺写像は辺の有限部分集合の元数を保つ。 -/
+/-- 双対辺写像は辺の有限部分集合の元数を保つ（本文: 「双対辺写像は全単射である」と、
+単射写像は有限集合の元の個数を保つこと）。 -/
 theorem card_image_dualEdgeEquiv (L : ℕ) [NeZero L] (B : Finset (Edge L)) :
     (B.image (dualEdgeEquiv L)).card = B.card := by
-  exact card_image_iff.mpr fun _ _ _ _ h => (dualEdgeEquiv L).injective h
+  exact card_image_iff.mpr fun _ _ _ _ h => (dualEdgeEquiv_bijective L).1 h
 
 /-- `claim_low_temperature_trivial_sector_expression` の具体版。 -/
 theorem partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial

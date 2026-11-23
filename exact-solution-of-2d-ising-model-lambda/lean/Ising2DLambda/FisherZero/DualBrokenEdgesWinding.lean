@@ -147,4 +147,10 @@ theorem dualBrokenEdgeSet_winding_zero (L : ℕ) [NeZero L] (sigma : Config L) :
   exact Prod.ext (horizontalWindingParity_dualBrokenEdgeSet_zero L sigma)
     (verticalWindingParity_dualBrokenEdgeSet_zero L sigma)
 
+/-- `claim_dual_broken_edges_winding_zero` の結びの具体版。本文どおり
+「破れた辺の双対像は偶部分グラフである」とセクターの定義から `A_σ ∈ 𝓔^{0,0}_L` を得る。 -/
+theorem dualBrokenEdgeSet_mem_trivialSector (L : ℕ) [NeZero L] (sigma : Config L) :
+    IsInTorusHomologySector L (dualBrokenEdgeSet L sigma) (0, 0) :=
+  ⟨dualBrokenEdgeSet_isEven L sigma, dualBrokenEdgeSet_winding_zero L sigma⟩
+
 end Ising2DLambda.FisherZero
