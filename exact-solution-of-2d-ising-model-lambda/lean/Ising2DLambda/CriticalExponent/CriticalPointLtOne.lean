@@ -6,6 +6,7 @@
   w*w + 1*1 = v*v                                               `realClosed_sum_of_two_squares_is_square`
   v = 0 なら二平方和の零性から 1 = 0                           `realClosed_sq_add_sq_eq_zero`
   u := w*v⁻¹ ≠ 0（体は零因子を持たない）                        `mul_ne_zero`
+  x_c ∈ R（claim_critical_point_mem_real_closed）                `criticalPointRealClosed`
   1 - x_c = u*u を体の四則で導く                                `one_sub_criticalPoint_eq_square`
   u ≠ 0 を狭義順序の定義へ当てる                                結論
 

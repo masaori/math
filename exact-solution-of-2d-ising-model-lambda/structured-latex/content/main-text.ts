@@ -111975,7 +111975,7 @@ s+1
                         displayMath(String.raw`\begin{aligned}
 1-x_c
 &=1-(-1+s)
-&&(\because\ \blkref{def_critical_point})\\
+&&(\because\ \blkref{def_critical_point}\text{ と }\blkref{claim_critical_point_mem_real_closed})\\
 &=2-s
 &&(\because\ R\text{ の四則})\\
 &=(2-s)\cdot1
@@ -111998,7 +111998,8 @@ s+1
 &&(\because\ u\text{ の定義})
 \end{aligned}`),
                         paragraph([
-                          "を得る。ゆえに差 ", math(String.raw`1-x_c`), " は零元でない ",
+                          "を得る。", math(String.raw`x_c\in R`), "（", ref("claim_critical_point_mem_real_closed"),
+                          "）であり、差 ", math(String.raw`1-x_c`), " は零元でない ",
                           math(String.raw`u`), " の平方であるから、",
                           ref("def_real_algebraic_strict_order"), " により ",
                           math(String.raw`x_c<_{R}1`), " である。全過程は ",

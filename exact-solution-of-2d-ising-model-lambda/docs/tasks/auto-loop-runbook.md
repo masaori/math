@@ -74,6 +74,9 @@
   - 直し方: 具体版が必要十分版の定義を使っているなら、論文の定義どおりの定義を具体版の側に置いて参照を移す（必要十分版の定義の別名にしない）。具体版が必要十分版の定理で証明しているなら、具体版の対象について論文の証明と一対一に書き直す。必要十分版が具体版の定義を使っているなら、必要十分版の側に一般の型の定義を置く。具体版が必要十分版の特殊化であることは導出のファイルだけが述べる。
 - **論文で未定義の記号**: 具体版の定義を mathlib の構成の別名にしない（`determinant A := Matrix.det A`、`FiniteSimpleGraph n := SimpleGraph (Fin n)` が点検で見つかった）。論文の定義どおりに定義し、mathlib の構成との一致は補題一本に留める。実数体への脱出の章で使う π・指数関数・余弦・正弦・積分・極限は、本文に宣言のブロックを置いて、使う性質と Lean の対応先を書く。
 - **一対一**: 論文の証明が根拠として引く主張と、Lean 具体版の証明が使う登録済みの主張は一致させる。Lean が使うのに論文が引かないなら、論文に根拠を足すか Lean を論文の経路に直す。論文が引くのに Lean が使わないなら、Lean を論文の経路に直す（同じ内容を Lean のファイル内の補題として作り直すことも、一致しないものに数える）。証明の後の注で触れるだけの参照は、根拠に数えない。
+  **一回に直す引用元のブロックは一つに限らない**（2026-11-23 の研究管理）。検証（`lake build`・`npm run check`・突き合わせの検査）は
+  一回ごとにかかり、直す行の数ではほとんど変わらない。一回に一ブロックでは、台帳の 752 行（引用元のブロック 346 個）が一日約十行しか減らなかった。
+  同じ Lean のファイル、または同じ章のディレクトリを引用元に持つ行をまとめ、台帳の十行を目安に一回で直す。打ち切られたら、まとめる行を減らす。
   差分の正本 `lean/one-to-one-dependency-ledger.tsv` は `PAPER_ONLY`（論文の証明だけが引用）と `LEAN_ONLY`（具体版の証明だけが依存）の各行を、引用元と引用先の主ラベルで持つ。`lean/scripts/check-proof-correspondence.sh` は証明中の引用と、登録されていない補助定理を越えた Lean の依存を取り直し、台帳との完全一致を要求する。ずれを直したら該当行を消し、新しいずれは追加せずに原因を直す。
 
 ## 実閉部分体の存在の経路（2026-11-17 の研究管理の決定）
@@ -350,7 +353,7 @@ Lean だけが未了なら `done` にせず `記述と SageMath まで` と書�
 (cd structured-latex && npm run build:pdf)      # PDF まで組めること（組めない文字・未解決参照を検出）
 sage sagemath/check/<対象名>/check.sage          # その tick で触れた検証
 node sagemath/tools/verify-check-linkage.ts     # 検証 ↔ 証明 の対応
-(cd lean && bash scripts/use-shared-dependencies.sh && lake build && bash scripts/check-no-sorry.sh)   # lean/ に中身がある場合
+(cd lean && bash scripts/use-shared-dependencies.sh && bash scripts/seed-build-from-other-worktrees.sh && lake build && bash scripts/check-no-sorry.sh)   # lean/ に中身がある場合
 (cd lean && bash scripts/check-concrete-necsuf-separation.sh)   # lake build の後。具体版と必要十分版の分離（下の「Lean の点検で見つかった直し」）
 bash lean/scripts/check-proof-correspondence.sh      # lake build の後。本文の主張引用と Lean 具体版の依存を差分台帳へ照合
 ```
@@ -358,6 +361,12 @@ bash lean/scripts/check-proof-correspondence.sh      # lake build の後。本�
 Lean の依存（mathlib を含む `lean/.lake/packages`）は `scripts/use-shared-dependencies.sh` だけで用意する。
 マシンに 1 つだけ置いた書き込み禁止の共有のディレクトリを指すので、`lake update` を打たない（権限で失敗する）。
 `lake exe cache get` も要らない。理由と mathlib の版を上げる手順は [lean/README.md](../../lean/README.md) の「セットアップと検証」。
+
+**ビルド済みの成果物は `scripts/seed-build-from-other-worktrees.sh` で別の作業ツリーから写す**（2026-11-23 の研究管理）。
+tick ごとに新しい作業ツリーが作られ、`lake build` はこのプロジェクトの約 2,400 ファイルを毎回一から作っていた。
+同じマシンで複数のビルドが走ると一回の検証が一時間を超え、並列の一回が rebase のたびに検証をやり直して打ち切られた。
+lake は入力のハッシュが一致する成果物だけを使うので、写した成果物が別のコミットのものでも、変わったモジュールと下流だけが作り直される
+（実測: 写した後の `lake build` は約 60 モジュールだけを作り直した）。
 
 ## 並列の作業ストリーム: 式変形の書き方の統一（ユーザーの明示指示）
 
@@ -424,6 +433,13 @@ git fetch origin && git merge-base --is-ancestor HEAD origin/main && echo INCLUD
 ```
 
 non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/main` してから push する。
+
+**rebase の後に検証を全部やり直さない**（2026-11-23 の研究管理）。取り込んだコミットが、自分の変えた Lean のファイルと
+本文のブロックを変えていなければ（衝突が台帳・MEMORY・記録・差分台帳の別の行だけなら）、検証をやり直さずにすぐ push する。
+どちらの変更もそれぞれの土台で検証済みで、重ならない変更を合わせただけだからである。合わせた状態は次の tick の
+「レビューと修正」の検証が確かめ、落ちたら先に直す。取り込んだコミットが同じ Lean のファイルか本文のブロックを変えたときだけ、
+`lake build` と、その変更に関わる検査をやり直す。2026-11-23 に並列の一回が、rebase のたびに一時間を超える検証をやり直す間に
+main が進み、push できないまま 6 時間で打ち切られた（済んだ直し一件が push されずに残った）。
 
 ## 止まってよい場合
 
