@@ -5,7 +5,7 @@
 # (3) l が偶数の鎖の 10 等号、l が奇数の鎖の 8 等号を、各行をその行の形のまま UCF で厳密に組み、隣の行と比べる。
 #     鎖の始まりの S は主張の左辺の式（S_claim_form）で、鎖の終わりは (M)_C(-1_C)^l（minus_one_power）。
 # (4) 「とくに」: |k| < M かつ k ≠ 0 のとき M ∤ k であること、その背理法の鎖
-#     0_N + (M)_N = (M)_N、0_N ≤ (M)_N（順序と和）、0_Z = ι(0_N) ≤ ι((M)_N) = ((M)_N)_Z = M（ι_{N→Z} は零と順序を保つ、略記 n_Z）、|·| は def_int_absolute_value の場合分けの式（int_abs_cases）、
+#     0_Z ≤ ι((M)_N) = ((M)_N)_Z = M（inclusion_nn_to_zz_image_is_nonnegative、略記 n_Z）、|·| は def_int_absolute_value の場合分けの式（int_abs_cases）、
 #     |l|M = |lM|（int_absolute_value_of_product_with_nonnegative、x → l, y → M、0 ≤ M）= |k| < M、0_Z ≤ |l|（int_absolute_value_is_nonnegative）、|l| < 1（int_less_than_one_of_product_less_than_nonnegative_factor、x → |l|, c → M、0 ≤ M）、|l| + 1 ≤ 1（def_int_strict_order）、|l| = |l| + 0 = |l| + (1 + (−1)) = (|l| + 1) + (−1) ≤ 1 + (−1) = 0、
 #     |l| = 0（反対称律）、l = 0（int_absolute_value_zero_implies_zero）、k = lM = 0·M = 0（int_zero_times_is_zero、x → M）を、仮定を外した全ての (l, k) で
 #     各等号・不等号として確かめ、仮定 |k| < M が成り立つのは l = 0 だけであることを見る。k = 0 の鎖の 2 等号。
@@ -69,11 +69,9 @@ for M in M_RANGE:
         for a, b in zip(L, L[1:]):
             assert a == b
     # (4)
-    # 0_N ≤ (M)_N の 2 行と 0_Z ≤ M_col の 4 行: 0_N + (M)_N = (M)_N、0_N ≤ (M)_N（順序と和、d = (M)_N）、
-    # 0_Z = ι(0_N) ≤ ι((M)_N) = ((M)_N)_Z = M_col
+    # 0_Z ≤ M_col の 3 行: 0_Z ≤ ι((M)_N) = ((M)_N)_Z = M_col
     MN = NN(M)
-    assert NN(0) + MN == MN and NN(0) <= MN                       # 0_N + (M)_N = (M)_N、順序と和（d -> (M)_N）
-    assert ZZ(NN(0)) == 0 and ZZ(NN(0)) <= ZZ(MN) and ZZ(MN) == M   # ι は零と順序を保つ、略記 n_Z、(M)_N の定義
+    assert 0 <= ZZ(MN) and ZZ(MN) == M                             # inclusion_nn_to_zz_image_is_nonnegative（n -> (M)_N）、略記 n_Z、(M)_N の定義
     # int_absolute_value_of_product_with_nonnegative の仮定 0 <= M_col
     assert 0 <= M
     for l in range(-6, 7):

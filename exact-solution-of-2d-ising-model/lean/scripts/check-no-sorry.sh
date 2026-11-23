@@ -466,6 +466,9 @@ targets=(
   Ising2D.int_zero_at_most_one
   Ising2D.int_zero_at_most_one_of_necSuf
   Ising2D.NecSuf.zero_le_one_of_cases
+  Ising2D.inclusion_nn_to_zz_image_is_nonnegative
+  Ising2D.inclusion_nn_to_zz_image_is_nonnegative_of_necSuf
+  Ising2D.NecSuf.zero_le_of_rec_add_one
   Ising2D.int_less_than_one_of_product_less_than_nonnegative_factor
   Ising2D.int_less_than_one_of_product_less_than_nonnegative_factor_of_necSuf
   Ising2D.NecSuf.lt_one_of_mul_lt_self_of_cases

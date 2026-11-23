@@ -2760,6 +2760,100 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_claim_inclusion_nn_to_zz_image_is_nonnegative",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}\text{ の像は } 0_{\mathbb{Z}} \text{ 以上}` },
+    labels: ["inclusion_nn_to_zz_image_is_nonnegative"],
+    lean: ["Ising2D.inclusion_nn_to_zz_image_is_nonnegative"],
+    statement: [
+      paragraph([
+        "すべての ",
+        math(String.raw`n \in \mathbf{N}`),
+        " について、",
+        ref("inclusion_nn_to_zz"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}`),
+        " は",
+      ]),
+      displayMath(String.raw`0_{\mathbb{Z}} \le_{\mathbb{Z}} \iota_{\mathbb{N}\to\mathbb{Z}}(n)`),
+      paragraph([
+        "を満たす。",
+        math(String.raw`0_{\mathbb{Z}}`),
+        "・",
+        math(String.raw`\le_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の零元・順序である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathbf{N}`),
+        " の元についての命題 ",
+        math(String.raw`\varphi(n) :\Leftrightarrow 0_{\mathbb{Z}} \le_{\mathbb{Z}} \iota_{\mathbb{N}\to\mathbb{Z}}(n)`),
+        " に ",
+        math(String.raw`\mathbb{N}`),
+        " の数学的帰納法（",
+        ref("set_and_algebra_notation"),
+        "）を使う。以下の二つの鎖の ",
+        math(String.raw`\le`),
+        " と ",
+        math(String.raw`=`),
+        " の連なりは ",
+        math(String.raw`\mathbb{Z}`),
+        " の順序の推移律（",
+        ref("set_and_algebra_notation"),
+        "）でつなぐ。",
+        math(String.raw`n = 0_{\mathbb{N}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{Z}}
+&\le 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の順序の反射律}\ x \le x\ (x \to 0_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota_{\mathbb{N}\to\mathbb{Z}}(0_{\mathbb{N}})
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb{N}\to\mathbb{Z}}(0_{\mathbb{N}}) := 0_{\mathbb{Z}}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n \in \mathbf{N}`),
+        " で ",
+        math(String.raw`0_{\mathbb{Z}} \le \iota_{\mathbb{N}\to\mathbb{Z}}(n)`),
+        " が成り立つとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{Z}}
+&= 0_{\mathbb{Z}} + 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + x = x\ (x \to 0_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\le 1_{\mathbb{Z}} + 0_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{int_zero_at_most_one}\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ x \le y \Rightarrow x + t \le y + t\ (x \to 0_{\mathbb{Z}},\ y \to 1_{\mathbb{Z}},\ t \to 0_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0_{\mathbb{Z}} + 1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\ x + y = y + x\ (x \to 1_{\mathbb{Z}},\ y \to 0_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\le \iota_{\mathbb{N}\to\mathbb{Z}}(n) + 1_{\mathbb{Z}}
+&&\bigl(\because\ \text{帰納法の仮定}\ 0_{\mathbb{Z}} \le \iota_{\mathbb{N}\to\mathbb{Z}}(n)\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ (x \to 0_{\mathbb{Z}},\ y \to \iota_{\mathbb{N}\to\mathbb{Z}}(n),\ t \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota_{\mathbb{N}\to\mathbb{Z}}(n +_{\mathbb{N}} 1_{\mathbb{N}})
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb{N}\to\mathbb{Z}}(n +_{\mathbb{N}} 1_{\mathbb{N}}) := \iota_{\mathbb{N}\to\mathbb{Z}}(n) +_{\mathbb{Z}} 1_{\mathbb{Z}}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`n +_{\mathbb{N}} 1_{\mathbb{N}}`),
+        " でも成り立つ。数学的帰納法により、すべての ",
+        math(String.raw`n \in \mathbf{N}`),
+        " で ",
+        math(String.raw`0_{\mathbb{Z}} \le \iota_{\mathbb{N}\to\mathbb{Z}}(n)`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum の 0_ℤ ≤ M_col の鎖が「ι_{ℕ→ℤ} は順序を保つ」と主張の前置きの仮定を引いていたが、そこで要るのは像が 0_ℤ 以上であることだけなので、その形の主張として足した（順序を保つことは、ほかの引く箇所と同じ回に別の主張で足す）。Lean の具体版は Ising2D.inclusion_nn_to_zz_image_is_nonnegative（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimInclusionOfNaturalNumbersIntoIntegersImageIsNonnegative.lean）、必要十分版は Ising2D.NecSuf.zero_le_of_rec_add_one（NecSuf/ZeroLeOfRecAddOne.lean）。数値検証: sagemath/check/inclusion_nn_to_zz_image_is_nonnegative/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_definition_inclusion_zz_to_rr",
     kind: "definition",
     title: { tex: String.raw`\mathbb{Z}\to\mathbb{R}\text{の包含写像}` },

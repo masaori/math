@@ -1796,13 +1796,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         math(String.raw`\iota_{\mathbb Z\to\mathbb R}:\mathbb Z\to\mathbb R`),
         " は単位元、和、積、順序を保つものとし、",
         math(String.raw`\iota_{\mathbb Z\to\mathbb R}`),
-        " は零も保つものとする（",
-        math(String.raw`\iota_{\mathbb N\to\mathbb Z}`),
-        " が零を保つことは、",
-        ref("inclusion_nn_to_zz"),
-        " の定義の式 ",
-        math(String.raw`\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}) := 0_{\mathbb Z}`),
-        " である）。また、",
+        " は零も保つものとする。また、",
         ref("inclusion_rr_to_cc"),
         " の実数から複素数への包含を用いる。",
       ]),
@@ -2205,24 +2199,9 @@ S_{M_{\mathrm{col}},k}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-0_{\mathbb N}+(M_{\mathrm{col}})_{\mathbb N}
-&=(M_{\mathrm{col}})_{\mathbb N}
-&&\bigl(\because\ \mathbb N\ \text{の加法の単位元}\ 0_{\mathbb N}+x=x\ (x\to(M_{\mathrm{col}})_{\mathbb N})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
-0_{\mathbb N}
-&\le(M_{\mathrm{col}})_{\mathbb N}
-&&\bigl(\because\ \mathbb N\ \text{の順序と和}\ x\le y\Leftrightarrow\exists d\in\mathbf N,\ x+d=y\ (x\to0_{\mathbb N},\ y,d\to(M_{\mathrm{col}})_{\mathbb N})\bigr)
-\end{aligned}`,
-      ),
-      paragraph([
-        "であり、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
 0_{\mathbb{Z}}
-&=\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N})
-&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}) := 0_{\mathbb Z}\ \text{を右辺から左辺へ}\bigr)\\
 &\le\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \iota_{\mathbb N\to\mathbb Z}\ \text{は順序を保つ。}0_{\mathbb N}\le(M_{\mathrm{col}})_{\mathbb N}\bigr)\\
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz_image_is_nonnegative}\ (n\to(M_{\mathrm{col}})_{\mathbb N})\bigr)\\
 &=((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}
 &&\bigl(\because\ \text{略記}\ n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\ (n\to(M_{\mathrm{col}})_{\mathbb N})\ \text{を右辺から左辺へ}\bigr)\\
 &=M_{\mathrm{col}}
@@ -2341,6 +2320,7 @@ k
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値）: 「とくに」の「M_col > 0 なので |M_col| = M_col」と「整数 l の絶対値は非負整数なので 0_ℤ ≤ |l|」は名前だけの根拠で、ℤ の絶対値を定めるブロックも無かった。def_int_absolute_value と int_absolute_value_is_nonnegative を足し、|M_col| = M_col をその定義の 0_ℤ ≤ x の場合の式で、0_ℤ ≤ |l| をその主張で引くようにした。0_ℕ ≤ (M_col)_ℕ を ℕ の加法の単位元と順序と和の 2 行で、0_ℤ ≤ M_col を主張の前置きにある ι_{ℕ→ℤ} が零と順序を保つことと略記 n_ℤ の 4 行で先に示した。「積の絶対値」「|l| = 0_ℤ なので l = 0」「整数における正数倍は狭義順序を反映する」の名前だけの根拠は残っている（状態台帳の行「ℤ の狭義の順序・数字」）。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」）: 「とくに」の |l| = 0 の行は根拠が「|l| ∈ ℤ_{≥0}, |l| < 1」と名前だけで、ℤ の < を定めるブロックも無かった。def_int_strict_order を足し、|l| < 1_ℤ をその定義で |l| + 1_ℤ ≤ 1_ℤ と書き直す行、|l| ≤ 0_ℤ を set_and_algebra_notation の ℤ の行（和の単位元・加法逆元・加法の結合律・順序と加法の両立）で導く 5 行、反対称律で |l| = 0_ℤ とする行に割った。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の先頭）: 主張の前置きが ι_{ℕ→ℤ} を「標準包含」と名前だけで置き、0_ℤ ≤ M_col の鎖の 1 行目が「ι_{ℕ→ℤ} は零を保つ」と仮定を引いていた。ι_{ℕ→ℤ} の定義のブロック inclusion_nn_to_zz を足し、前置きをそのブロックの参照にし、1 行目をその定義の式 ι(0_ℕ) := 0_ℤ を右辺から左辺へ当てる形にした。単位元・和・積・順序を保つことはまだ前置きの仮定のまま残る（状態台帳の同じ行の続きで主張に替える）。Lean の具体版の同じ段の Nat.cast_zero を inclusion_nn_to_zz の零の式に替えた。主張は不変。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 0_ℤ ≤ M_col の鎖が「ι_{ℕ→ℤ} は順序を保つ」と前置きの仮定を引き、そのために 0_ℕ ≤ (M_col)_ℕ の 2 行を置いていた。新しい主張 inclusion_nn_to_zz_image_is_nonnegative（n → (M_col)_ℕ）を引く 1 行にし、ℕ の 2 行と ι(0_ℕ) := 0_ℤ の行を外した（鎖は 6 行から 3 行）。前置きの「ι_{ℕ→ℤ} が零を保つことは定義の式 ι(0_ℕ) := 0_ℤ である」の括弧書きも、それを使う行が無くなったので外した。前置きの「順序を保つ」の仮定は、「順序を保つ包含写像により (M_col)_ℝ ≥ 2_ℝ」などがまだ使うので残る。Lean の具体版の同じ段の Nat.zero_add・Nat.le.intro・Nat.cast_le を新しい具体版に替えた。主張は不変。",
       ],
     },
   },

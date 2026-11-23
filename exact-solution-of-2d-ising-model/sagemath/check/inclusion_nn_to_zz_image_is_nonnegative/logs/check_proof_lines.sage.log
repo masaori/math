@@ -1,0 +1,3 @@
+n = 0..200: 0_Z <= ι(n) と、n = 0 の 2 行・n + 1 の 5 行の各段が ZZ で成り立った（200 個の n で後者の鎖）
+negative controls (broken lines detected): 2
+RESULT: PASS

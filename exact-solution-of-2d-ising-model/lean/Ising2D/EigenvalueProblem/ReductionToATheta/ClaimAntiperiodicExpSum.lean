@@ -51,7 +51,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimI
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueOfProductWithNonnegative
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerLessThanOneOfProductLessThanNonnegativeFactor
-import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionInclusionOfNaturalNumbersIntoIntegers
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimInclusionOfNaturalNumbersIntoIntegersImageIsNonnegative
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -458,14 +458,10 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
   -- 人手証明の `k = lM_col`。Lean の整除 `M ∣ k` は `k = M·l` を与えるので、ℤ の乗法の交換律で並べ替える。
   have hk_lM : k = l * (M : ℤ) := by rw [hl, mul_comm]
   have hk_abs : |k| = |l * (M : ℤ)| := by rw [hk_lM]
-  -- 人手証明の `0_ℕ ≤ (M_col)_ℕ` の 2 行（ℕ の加法の単位元 `0 + x = x`、ℕ の順序と和 `d → (M_col)_ℕ`）。
-  have hM_nat_sum : 0 + M = M := Nat.zero_add M                         -- ℕ の加法の単位元（`x → (M_col)_ℕ`）
-  have hM_nat_nonneg : 0 ≤ M := Nat.le.intro hM_nat_sum                 -- ℕ の順序と和（`x → 0, y → (M_col)_ℕ, d → (M_col)_ℕ`）
-  -- 人手証明の `0_ℤ ≤ M_col` の 4 行。3 行目（略記 `n_ℤ`）と 4 行目（`(M_col)_ℕ` の定義）は、Lean の `(M : ℤ)` は `Nat.cast M` で、`inclusionNNtoZZ_eq_natCast` により `ι_{ℕ→ℤ}(M)` と等しいので段が要らない。
+  -- 人手証明の `0_ℤ ≤ M_col` の 3 行。2 行目（略記 `n_ℤ`）と 3 行目（`(M_col)_ℕ` の定義）は、Lean の `(M : ℤ)` は `Nat.cast M` で、`inclusionNNtoZZ_eq_natCast` により `ι_{ℕ→ℤ}(M)` と等しいので段が要らない。
   have hM_nonneg : (0 : ℤ) ≤ (M : ℤ) :=
-    calc (0 : ℤ) = inclusionNNtoZZ 0 := rfl                          -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ` を右辺から左辺へ
-      _ = ((0 : ℕ) : ℤ) := inclusionNNtoZZ_eq_natCast 0             -- 具体版の `ι_{ℕ→ℤ}` を `Nat.cast` の形へ移す（Lean だけの段）
-      _ ≤ (M : ℤ) := Nat.cast_le.mpr hM_nat_nonneg                     -- `ι_{ℕ→ℤ}` は順序を保つ。`0_ℕ ≤ (M_col)_ℕ`
+    calc (0 : ℤ) ≤ inclusionNNtoZZ M := inclusion_nn_to_zz_image_is_nonnegative M  -- `inclusion_nn_to_zz_image_is_nonnegative`（`n → (M_col)_ℕ`）
+      _ = (M : ℤ) := inclusionNNtoZZ_eq_natCast M                      -- 具体版の `ι_{ℕ→ℤ}` を `Nat.cast` の形へ移す（Lean だけの段）
   -- 人手証明の `|lM_col| = |l|M_col`（`int_absolute_value_of_product_with_nonnegative`、`x → l, y → M_col`、`0 ≤ M_col`）。
   have habs_product : |l * (M : ℤ)| = |l| * (M : ℤ) :=
     int_absolute_value_of_product_with_nonnegative l (M : ℤ) hM_nonneg
