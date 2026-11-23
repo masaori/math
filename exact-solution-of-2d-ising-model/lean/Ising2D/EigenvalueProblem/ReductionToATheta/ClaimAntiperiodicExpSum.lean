@@ -50,6 +50,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimI
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueZeroImpliesZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerAbsoluteValueOfProductWithNonnegative
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerLessThanOneOfProductLessThanNonnegativeFactor
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -453,7 +454,6 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
   apply antiperiodic_exp_sum_not_dvd hM
   intro hd
   rcases hd with ⟨l, hl⟩
-  have hMpos : (0 : ℤ) < (M : ℤ) := by exact_mod_cast Nat.pos_of_ne_zero hM
   -- 人手証明の `k = lM_col`。Lean の整除 `M ∣ k` は `k = M·l` を与えるので、ℤ の乗法の交換律で並べ替える。
   have hk_lM : k = l * (M : ℤ) := by rw [hl, mul_comm]
   have hk_abs : |k| = |l * (M : ℤ)| := by rw [hk_lM]
@@ -473,9 +473,9 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
       |l| * (M : ℤ) = |l * (M : ℤ)| := habs_product.symm
       _ = |k| := hk_abs.symm
       _ < (M : ℤ) := hklt
-  -- 人手証明の「正数 `M` で割って `|l| < 1`」に対応する。
-  have hl_abs_lt_one : |l| < 1 := by
-    exact (Int.mul_lt_mul_right hMpos).mp (by simpa using habs_mul)
+  -- 人手証明の `|l| < 1_ℤ`（`int_less_than_one_of_product_less_than_nonnegative_factor`、`x → |l|, c → M_col`、`0 ≤ M_col` と `|l|M_col < M_col`）。
+  have hl_abs_lt_one : |l| < 1 :=
+    int_less_than_one_of_product_less_than_nonnegative_factor |l| (M : ℤ) hM_nonneg habs_mul
   have hl_abs_nonneg : 0 ≤ |l| := int_absolute_value_is_nonnegative l   -- `int_absolute_value_is_nonnegative`（`x → l`）
   -- 人手証明の `|l| + 1_ℤ ≤ 1_ℤ`（`def_int_strict_order` で `|l| < 1_ℤ` を書き直す）。
   have hl_add_one_le : |l| + 1 ≤ 1 := (int_lt_iff_add_one_le |l| 1).mp hl_abs_lt_one

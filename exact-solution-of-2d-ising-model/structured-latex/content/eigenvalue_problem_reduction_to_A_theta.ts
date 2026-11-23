@@ -2232,14 +2232,13 @@ S_{M_{\mathrm{col}},k}
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`M_{\mathrm{col}}>0`),
-        " なので、整数における正数倍は狭義順序を反映する。したがって",
+        "したがって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 |l|
-&<1
-&&\bigl(\because\ |l|M_{\mathrm{col}}<1\cdot M_{\mathrm{col}},\ M_{\mathrm{col}}>0\bigr).
+&<1_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{int_less_than_one_of_product_less_than_nonnegative_factor}\ (x\to|l|,\ c\to M_{\mathrm{col}})\ \text{に、上の}\ 0_{\mathbb{Z}}\le M_{\mathrm{col}}\ \text{と}\ |l|M_{\mathrm{col}}<M_{\mathrm{col}}\bigr).
 \end{aligned}`,
       ),
       paragraph([
@@ -2325,6 +2324,7 @@ k
       notes: [
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: k ≢ 0 (mod M) の鎖と l が奇数の鎖で、左から足す 0_C を消す行（0_C + (−0_C) = −0_C と 0_C + (−(M_col)_C) = −(M_col)_C）の根拠を、complex_numbers_form_a_field の「和の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 二つの鎖で右から 0_C を掛ける行（(2M_col)_C·0_C = 0_C の 2 行、(M_col)_C·0_C = 0_C、(−1_C)·0_C = 0_C）の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → (2M_col)_C、(M_col)_C、−1_C）に替えた。式は不変。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち正数倍と狭義の順序）: 「とくに」の |l| < 1 の行は根拠が「M_col > 0 なので、整数における正数倍は狭義順序を反映する」（|l|M_col < 1·M_col, M_col > 0）と名前だけで、M_col > 0 も示していなかった。int_less_than_one_of_product_less_than_nonnegative_factor（0 ≤ c かつ x·c < c なら x < 1_ℤ）を足し、その主張（x → |l|, c → M_col）に既に示した 0_ℤ ≤ M_col と |l|M_col < M_col を使う 1 行にした（M_col > 0 は要らなくなった）。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち積の絶対値）: 「とくに」の |lM_col| = |l||M_col|（根拠「積の絶対値」の名前だけ）= |l|M_col（def_int_absolute_value に 0 ≤ M_col）の 2 行を、主張 int_absolute_value_of_product_with_nonnegative（x → l, y → M_col）に 0 ≤ M_col を使う 1 行にした。あわせて鎖を |l|M_col = |lM_col| = |k| < M_col の向きに並べ直した（もとは |lM_col| から始まり、次の行が使う |l|M_col < M_col が鎖の両端に出ていなかった）。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち 0 を掛けた整数）: 「とくに」の鎖 k = lM_col = 0_ℤ·M_col = 0_ℤ の最後の等号の根拠が「0_ℤ·M_col = 0_ℤ」と結論そのものだった。int_zero_times_is_zero を足し、その主張（x → M_col）を引く形にした。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の絶対値が 0 の整数）: 「とくに」の「l = 0 (∵ |l| = 0_ℤ)」は名前だけの根拠だった。int_absolute_value_zero_implies_zero を足し、その主張（x → l）を引く形にした。主張は不変。",

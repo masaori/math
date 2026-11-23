@@ -1,0 +1,3 @@
+0_Z <= 1_Z が成り立ち、1 <= 0 の側の鎖の全ての等号が ZZ の値と ZZ[y] の恒等式で成り立った
+negative controls (broken lines detected): 2
+RESULT: PASS

@@ -1053,6 +1053,310 @@ x \cdot y
     },
   },
   {
+    id: "calc_formulae_claim_integer_zero_at_most_one",
+    kind: "claim",
+    title: { text: "整数の 0 は 1 以下" },
+    labels: ["int_zero_at_most_one"],
+    lean: ["Ising2D.int_zero_at_most_one"],
+    statement: [
+      displayMath(String.raw`0_{\mathbb{Z}} \le_{\mathbb{Z}} 1_{\mathbb{Z}}`),
+      paragraph([
+        "である。",
+        math(String.raw`0_{\mathbb{Z}}`),
+        "・",
+        math(String.raw`1_{\mathbb{Z}}`),
+        "・",
+        math(String.raw`\le_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の零元・乗法の単位元・順序である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中の ",
+        math(String.raw`-y`),
+        "（",
+        math(String.raw`y \in \mathbb{Z}`),
+        "）は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の符号反転 ",
+        math(String.raw`-_{\mathbb{Z}}(y)`),
+        " である。",
+        math(String.raw`\mathbb{Z}`),
+        " の全順序 ",
+        math(String.raw`0_{\mathbb{Z}} \le 1_{\mathbb{Z}} \vee 1_{\mathbb{Z}} \le 0_{\mathbb{Z}}`),
+        "（",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`x \to 0_{\mathbb{Z}},\ y \to 1_{\mathbb{Z}}`),
+        "）で分ける。",
+        math(String.raw`0_{\mathbb{Z}} \le 1_{\mathbb{Z}}`),
+        " のときは主張そのものである。",
+        math(String.raw`1_{\mathbb{Z}} \le 0_{\mathbb{Z}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{Z}}
+&= 1_{\mathbb{Z}} + (-1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ y + (-y) = 0_{\mathbb{Z}}\ (y \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\le 0_{\mathbb{Z}} + (-1_{\mathbb{Z}})
+&&\bigl(\because\ 1_{\mathbb{Z}} \le 0_{\mathbb{Z}}\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ (x \to 1_{\mathbb{Z}},\ y \to 0_{\mathbb{Z}},\ t \to -1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= -1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + y = y\ (y \to -1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\mathbb{Z}`),
+        " の順序と乗法の両立（",
+        ref("set_and_algebra_notation"),
+        "。",
+        math(String.raw`x, y \to -1_{\mathbb{Z}}`),
+        "）に ",
+        math(String.raw`0_{\mathbb{Z}} \le -1_{\mathbb{Z}}`),
+        " を二度使って ",
+        math(String.raw`0_{\mathbb{Z}} \le (-1_{\mathbb{Z}}) \cdot (-1_{\mathbb{Z}})`),
+        " である。これを使うと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{Z}}
+&\le (-1_{\mathbb{Z}}) \cdot (-1_{\mathbb{Z}})
+&&\bigl(\because\ \text{上の}\ 0_{\mathbb{Z}} \le (-1_{\mathbb{Z}}) \cdot (-1_{\mathbb{Z}})\bigr)\\
+&= -\bigl(1_{\mathbb{Z}} \cdot (-1_{\mathbb{Z}})\bigr)
+&&\bigl(\because\ \blkref{int_negation_times_is_negation_of_product}\ (x \to 1_{\mathbb{Z}},\ t \to -1_{\mathbb{Z}})\bigr)\\
+&= -(-1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の単位元}\ 1_{\mathbb{Z}} \cdot y = y\ (y \to -1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= -(-1_{\mathbb{Z}}) + 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ y + 0_{\mathbb{Z}} = y\ (y \to -(-1_{\mathbb{Z}}))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= -(-1_{\mathbb{Z}}) + \bigl((-1_{\mathbb{Z}}) + 1_{\mathbb{Z}}\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-y) + y = 0_{\mathbb{Z}}\ (y \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl(-(-1_{\mathbb{Z}}) + (-1_{\mathbb{Z}})\bigr) + 1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (y + z) + s = y + (z + s)\ (y \to -(-1_{\mathbb{Z}}),\ z \to -1_{\mathbb{Z}},\ s \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= 0_{\mathbb{Z}} + 1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-y) + y = 0_{\mathbb{Z}}\ (y \to -1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + y = y\ (y \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph(["である。どちらの場合も ", math(String.raw`0_{\mathbb{Z}} \le 1_{\mathbb{Z}}`), " が成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち antiperiodic_exp_sum の「とくに」の「正数倍は狭義順序を反映する」）: 原文（Typst）に対応ブロックは無い。int_less_than_one_of_product_less_than_nonnegative_factor の証明が、1_ℤ ≤ 0_ℤ から矛盾を導くのに使う部品として足した。set_and_algebra_notation の ℤ の一覧の行は 0_ℤ ≤ 1_ℤ を含まないので、全順序で分け、1_ℤ ≤ 0_ℤ の側では順序と乗法の両立で (−1)·(−1) が 0 以上になることから示す。Lean の具体版は Ising2D.int_zero_at_most_one（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimIntegerZeroAtMostOne.lean）、必要十分版は Ising2D.NecSuf.zero_le_one_of_cases（NecSuf/ZeroLeOneOfCases.lean）。数値検証: sagemath/check/int_zero_at_most_one/。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_integer_less_than_one_of_product_less_than_nonnegative_factor",
+    kind: "claim",
+    title: { text: "0 以上の整数 c について x·c < c なら x < 1" },
+    labels: ["int_less_than_one_of_product_less_than_nonnegative_factor"],
+    lean: ["Ising2D.int_less_than_one_of_product_less_than_nonnegative_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`x, c \in \mathbb{Z}`),
+        " が ",
+        math(String.raw`0_{\mathbb{Z}} \le c`),
+        " と ",
+        ref("def_int_strict_order"),
+        " の狭義の順序について ",
+        math(String.raw`x \cdot c < c`),
+        " を満たすなら、",
+      ]),
+      displayMath(String.raw`x < 1_{\mathbb{Z}}`),
+      paragraph([
+        "である。積・",
+        math(String.raw`0_{\mathbb{Z}}`),
+        "・",
+        math(String.raw`1_{\mathbb{Z}}`),
+        "・",
+        math(String.raw`\le`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中の ",
+        math(String.raw`-y`),
+        "（",
+        math(String.raw`y \in \mathbb{Z}`),
+        "）は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の符号反転 ",
+        math(String.raw`-_{\mathbb{Z}}(y)`),
+        " である。まず ",
+        math(String.raw`x \le 0_{\mathbb{Z}}`),
+        " を示す。",
+        math(String.raw`\mathbb{Z}`),
+        " の全順序 ",
+        math(String.raw`x \le 0_{\mathbb{Z}} \vee 0_{\mathbb{Z}} \le x`),
+        "（",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`x \to x,\ y \to 0_{\mathbb{Z}}`),
+        "）で分ける。",
+        math(String.raw`x \le 0_{\mathbb{Z}}`),
+        " のときはそれである。",
+        math(String.raw`0_{\mathbb{Z}} \le x`),
+        " のとき、",
+        math(String.raw`\mathbb{Z}`),
+        " の ",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " 以上の元の分解（",
+        ref("set_and_algebra_notation"),
+        "。",
+        math(String.raw`x \to x`),
+        "）により、",
+        math(String.raw`x = 0_{\mathbb{Z}}`),
+        " であるか、",
+        math(String.raw`0_{\mathbb{Z}} \le n`),
+        " かつ ",
+        math(String.raw`x = n + 1_{\mathbb{Z}}`),
+        " を満たす ",
+        math(String.raw`n \in \mathbb{Z}`),
+        " がある。",
+        math(String.raw`x = 0_{\mathbb{Z}}`),
+        " のときは、",
+        math(String.raw`\mathbb{Z}`),
+        " の順序の反射律 ",
+        math(String.raw`0_{\mathbb{Z}} \le 0_{\mathbb{Z}}`),
+        "（",
+        ref("set_and_algebra_notation"),
+        "）の左辺を、等しいものの代入（",
+        ref("set_and_algebra_notation"),
+        "）で ",
+        math(String.raw`x`),
+        " に替えて ",
+        math(String.raw`x \le 0_{\mathbb{Z}}`),
+        " である。",
+        math(String.raw`x = n + 1_{\mathbb{Z}}`),
+        " のとき、",
+        math(String.raw`\mathbb{Z}`),
+        " の順序と乗法の両立（",
+        ref("set_and_algebra_notation"),
+        "。",
+        math(String.raw`x \to n,\ y \to c`),
+        "）に ",
+        math(String.raw`0_{\mathbb{Z}} \le n`),
+        " と主張の仮定 ",
+        math(String.raw`0_{\mathbb{Z}} \le c`),
+        " を使って ",
+        math(String.raw`0_{\mathbb{Z}} \le n \cdot c`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c
+&= 0_{\mathbb{Z}} + c
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + y = y\ (y \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\le n \cdot c + c
+&&\bigl(\because\ 0_{\mathbb{Z}} \le n \cdot c\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ (x \to 0_{\mathbb{Z}},\ y \to n \cdot c,\ t \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= n \cdot c + 1_{\mathbb{Z}} \cdot c
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の単位元}\ 1_{\mathbb{Z}} \cdot y = y\ (y \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= (n + 1_{\mathbb{Z}}) \cdot c
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ (y + z) \cdot s = y \cdot s + z \cdot s\ (y \to n,\ z \to 1_{\mathbb{Z}},\ s \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= x \cdot c
+&&\bigl(\because\ \text{場合の仮定}\ x = n + 1_{\mathbb{Z}}\ \text{を右辺から左辺へ、等しいものの代入（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。主張の仮定 ",
+        math(String.raw`x \cdot c < c`),
+        " は ",
+        ref("def_int_strict_order"),
+        "（",
+        math(String.raw`x \to x \cdot c,\ y \to c`),
+        "）により ",
+        math(String.raw`x \cdot c + 1_{\mathbb{Z}} \le c`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c + 1_{\mathbb{Z}}
+&\le x \cdot c + 1_{\mathbb{Z}}
+&&\bigl(\because\ \text{上の}\ c \le x \cdot c\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ (x \to c,\ y \to x \cdot c,\ t \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\le c
+&&\bigl(\because\ \text{上の}\ x \cdot c + 1_{\mathbb{Z}} \le c\ \text{と}\ \mathbb{Z}\ \text{の順序の推移律}\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph(["である。これを使うと"]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{Z}}
+&= 0_{\mathbb{Z}} + 1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + y = y\ (y \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= \bigl((-c) + c\bigr) + 1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-y) + y = 0_{\mathbb{Z}}\ (y \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&= (-c) + (c + 1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (y + z) + s = y + (z + s)\ (y \to -c,\ z \to c,\ s \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (c + 1_{\mathbb{Z}}) + (-c)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\ y + z = z + y\ (y \to -c,\ z \to c + 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\le c + (-c)
+&&\bigl(\because\ \text{上の}\ c + 1_{\mathbb{Z}} \le c\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ (x \to c + 1_{\mathbb{Z}},\ y \to c,\ t \to -c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ y + (-y) = 0_{\mathbb{Z}}\ (y \to c)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\mathbb{Z}`),
+        " の順序の反対称律（",
+        ref("set_and_algebra_notation"),
+        "。",
+        math(String.raw`x \to 0_{\mathbb{Z}},\ y \to 1_{\mathbb{Z}}`),
+        "）に ",
+        ref("int_zero_at_most_one"),
+        " の ",
+        math(String.raw`0_{\mathbb{Z}} \le 1_{\mathbb{Z}}`),
+        " と上の ",
+        math(String.raw`1_{\mathbb{Z}} \le 0_{\mathbb{Z}}`),
+        " を使うと ",
+        math(String.raw`0_{\mathbb{Z}} = 1_{\mathbb{Z}}`),
+        " となり、",
+        math(String.raw`\mathbb{Z}`),
+        " の零元と単位元の相違 ",
+        math(String.raw`0_{\mathbb{Z}} \neq 1_{\mathbb{Z}}`),
+        "（",
+        ref("set_and_algebra_notation"),
+        "）と合わせて ",
+        math(String.raw`\bot`),
+        " である。偽からは任意の命題が従う（",
+        ref("set_and_algebra_notation"),
+        "）ので、この場合も ",
+        math(String.raw`x \le 0_{\mathbb{Z}}`),
+        " である。どの場合も ",
+        math(String.raw`x \le 0_{\mathbb{Z}}`),
+        " が成り立つので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x + 1_{\mathbb{Z}}
+&\le 0_{\mathbb{Z}} + 1_{\mathbb{Z}}
+&&\bigl(\because\ x \le 0_{\mathbb{Z}}\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ (x \to x,\ y \to 0_{\mathbb{Z}},\ t \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + y = y\ (y \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("def_int_strict_order"),
+        "（",
+        math(String.raw`x \to x,\ y \to 1_{\mathbb{Z}}`),
+        "）により ",
+        math(String.raw`x < 1_{\mathbb{Z}}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち antiperiodic_exp_sum の「とくに」の「正数倍は狭義順序を反映する」）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum の「とくに」が |l|M_col < M_col から |l| < 1 を「M_col > 0 なので、整数における正数倍は狭義順序を反映する」と名前だけの根拠で導いていた（M_col > 0 自体も示していなかった）。本文が使う形だけを、仮定を 0 ≤ c に弱めた主張として足した（c = 0 では仮定 x·c < c が成り立たない）。証明は set_and_algebra_notation の ℤ の一覧の行（全順序・0 以上の元の分解・反射律・順序と乗法の両立・和の単位元・乗法の単位元・分配律・順序と加法の両立・推移律・加法の逆元・結合律・交換律・反対称律・零元と単位元の相違・偽からは任意の命題が従う）と def_int_strict_order と int_zero_at_most_one だけを使う。Lean の具体版は Ising2D.int_less_than_one_of_product_less_than_nonnegative_factor（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimIntegerLessThanOneOfProductLessThanNonnegativeFactor.lean）、必要十分版は Ising2D.NecSuf.lt_one_of_mul_lt_self_of_cases（NecSuf/LtOneOfMulLtSelfOfCases.lean）。数値検証: sagemath/check/int_less_than_one_of_product_less_than_nonnegative_factor/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_real_less_than_preserved_by_adding_on_right",
     kind: "claim",
     title: { text: "実数の狭義の順序は右から同じ数を足しても保たれる" },

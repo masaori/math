@@ -1,0 +1,4 @@
+枝ごとの標本数: {'x_le_0': 930, 'x_eq_0': 30, 'x_succ_hyp': 930}
+仮定を満たす全ての組で x <= 0 と x + 1 <= 0 + 1 = 1 が成り立ち、x = n + 1 の枝では c <= x·c の鎖が成り立って仮定が崩れた
+negative controls (broken lines detected): 2
+RESULT: PASS

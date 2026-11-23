@@ -6,7 +6,7 @@
 #     鎖の始まりの S は主張の左辺の式（S_claim_form）で、鎖の終わりは (M)_C(-1_C)^l（minus_one_power）。
 # (4) 「とくに」: |k| < M かつ k ≠ 0 のとき M ∤ k であること、その背理法の鎖
 #     0_N + (M)_N = (M)_N、0_N ≤ (M)_N（順序と和）、0_Z = ι(0_N) ≤ ι((M)_N) = ((M)_N)_Z = M（ι_{N→Z} は零と順序を保つ、略記 n_Z）、|·| は def_int_absolute_value の場合分けの式（int_abs_cases）、
-#     |lM| = |l|M（int_absolute_value_of_product_with_nonnegative、x → l, y → M、0 ≤ M）= |k| < M、0_Z ≤ |l|（int_absolute_value_is_nonnegative）、|l| < 1、|l| + 1 ≤ 1（def_int_strict_order）、|l| = |l| + 0 = |l| + (1 + (−1)) = (|l| + 1) + (−1) ≤ 1 + (−1) = 0、
+#     |l|M = |lM|（int_absolute_value_of_product_with_nonnegative、x → l, y → M、0 ≤ M）= |k| < M、0_Z ≤ |l|（int_absolute_value_is_nonnegative）、|l| < 1（int_less_than_one_of_product_less_than_nonnegative_factor、x → |l|, c → M、0 ≤ M）、|l| + 1 ≤ 1（def_int_strict_order）、|l| = |l| + 0 = |l| + (1 + (−1)) = (|l| + 1) + (−1) ≤ 1 + (−1) = 0、
 #     |l| = 0（反対称律）、l = 0（int_absolute_value_zero_implies_zero）、k = lM = 0·M = 0（int_zero_times_is_zero、x → M）を、仮定を外した全ての (l, k) で
 #     各等号・不等号として確かめ、仮定 |k| < M が成り立つのは l = 0 だけであることを見る。k = 0 の鎖の 2 等号。
 load("_prelude.sage")
@@ -83,7 +83,8 @@ for M in M_RANGE:
         # int_absolute_value_is_nonnegative（x -> l）
         assert 0 <= int_abs_cases(l)
         if abs(k) < M:
-            assert abs(l) * M < 1 * M and abs(l) < 1
+            # int_less_than_one_of_product_less_than_nonnegative_factor（x -> |l|, c -> M_col）: 仮定 0 <= M_col と |l|M_col < M_col から |l| < 1_Z
+            assert 0 <= M and int_abs_cases(l) * M < M and int_abs_cases(l) < 1
             # def_int_strict_order: |l| < 1_Z を |l| + 1_Z <= 1_Z と書き直す（ZZ の < と同値であることも見る）
             assert (abs(l) < 1) == (abs(l) + 1 <= 1) and abs(l) + 1 <= 1
             # |l| <= 0_Z を導く 5 行（和の単位元・加法逆元・結合律・順序と加法の両立・加法逆元）
