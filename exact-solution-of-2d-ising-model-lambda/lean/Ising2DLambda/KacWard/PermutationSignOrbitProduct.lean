@@ -18,7 +18,6 @@ import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 namespace Ising2DLambda.KacWard
 
 open Finset
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
   (finiteOrderedPairs finiteOrderedInversionCount finiteOrderedSign
     finiteOrderedSign_comp finiteOrderedSign_noncommProd)
@@ -26,14 +25,6 @@ open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
 variable {ι : Type} [Fintype ι] [LinearOrder ι]
 
 set_option linter.unusedSectionVars false
-
-private lemma iterLeft_eq_iterate' (σ : Equiv.Perm ι) (n : ℕ) (e : ι) :
-    iterLeft (⇑σ) n e = (⇑σ)^[n] e := by
-  induction n with
-  | zero => rfl
-  | succ n ih =>
-    simp only [iterLeft, Function.iterate_succ_apply']
-    rw [ih]
 
 /-- 人手証明の最小周期 `m_C`。 -/
 private noncomputable def orbitPeriod (σ : Equiv.Perm ι) (e : ι) : ℕ :=
@@ -68,8 +59,7 @@ private lemma mem_movedOrbit_iff_iterate (σ : Equiv.Perm ι) (e : ι) {x : ι} 
     x ∈ movedOrbit σ e ↔ ∃ j, j < orbitPeriod σ e ∧ x = (⇑σ)^[j] e := by
   constructor
   · intro hx
-    obtain ⟨k, hk⟩ := mem_orbit.mp hx
-    rw [iterLeft_eq_iterate' σ k e] at hk
+    obtain ⟨k, hk⟩ := mem_movedOrbit.mp hx
     have hmpos : 0 < orbitPeriod σ e :=
       (Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec σ e).1
     refine ⟨k % orbitPeriod σ e, Nat.mod_lt k hmpos, ?_⟩
@@ -83,15 +73,14 @@ private lemma mem_movedOrbit_iff_iterate (σ : Equiv.Perm ι) (e : ι) {x : ι} 
           Function.iterate_add_apply (⇑σ) _ _ e
       _ = (⇑σ)^[k % orbitPeriod σ e] e := by rw [hmul]
   · rintro ⟨j, -, rfl⟩
-    exact mem_orbit.mpr ⟨j, (iterLeft_eq_iterate' σ j e).symm⟩
+    exact mem_movedOrbit.mpr ⟨j, rfl⟩
 
 /-- 軌道は `σ` で閉じている。 -/
 private lemma movedOrbit_mapsTo (σ : Equiv.Perm ι) (e : ι) {x : ι}
     (hx : x ∈ movedOrbit σ e) : σ x ∈ movedOrbit σ e := by
-  obtain ⟨k, hk⟩ := mem_orbit.mp hx
-  refine mem_orbit.mpr ⟨k + 1, ?_⟩
-  show σ x = iterLeft (⇑σ) (k + 1) e
-  rw [show iterLeft (⇑σ) (k + 1) e = σ (iterLeft (⇑σ) k e) from rfl, ← hk]
+  obtain ⟨k, hk⟩ := mem_movedOrbit.mp hx
+  refine mem_movedOrbit.mpr ⟨k + 1, ?_⟩
+  rw [hk, ← Function.iterate_succ_apply' (⇑σ) k e]
 
 /-- 人手証明の反復列 `φ(e_C), φ^{∘2}(e_C), …, φ^{∘(m_C-1)}(e_C)`（基点を除く）。 -/
 private noncomputable def orbitTail (σ : Equiv.Perm ι) (e : ι) : List ι :=
@@ -301,7 +290,7 @@ private lemma transpositionChain_orbitTail_fix (σ : Equiv.Perm ι) (e : ι) {x 
     finiteTranspositionChain e (orbitTail σ e) x = x := by
   apply finiteTranspositionChain_apply_of_notMem
   · intro hxe
-    exact hx (hxe ▸ self_mem_orbit (⇑σ) e)
+    exact hx (hxe ▸ self_mem_movedOrbit σ e)
   · intro hmem
     obtain ⟨i, hi, rfl⟩ := (mem_orbitTail_iff σ e).mp hmem
     exact hx ((mem_movedOrbit_iff_iterate σ e).mpr ⟨i + 1, by omega, rfl⟩)
@@ -319,7 +308,7 @@ private lemma sign_transpositionChain_orbitTail (σ : Equiv.Perm ι) (e : ι) :
         constructor
         · rintro (hx | hx)
           · rw [hx]
-            exact self_mem_orbit (⇑σ) e
+            exact self_mem_movedOrbit σ e
           · obtain ⟨i, hi, rfl⟩ := (mem_orbitTail_iff σ e).mp hx
             exact (mem_movedOrbit_iff_iterate σ e).mpr ⟨i + 1, by omega, rfl⟩
         · intro hx

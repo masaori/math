@@ -1374,6 +1374,7 @@ import Ising2DLambda.NecSuf.KacWard.MovedOrbitClosedWalk
 import Ising2DLambda.KacWard.MovedOrbitClosedWalk
 import Ising2DLambda.NecSuf.KacWard.MovedOrbitPartition
 import Ising2DLambda.KacWard.MovedOrbitPartition
+import Ising2DLambda.KacWard.MovedOrbitPartitionFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.TermOrbitWeightFactorization
 import Ising2DLambda.KacWard.TermOrbitWeightFactorization
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
