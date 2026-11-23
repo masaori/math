@@ -95514,7 +95514,7 @@ a+2\cdot b&=t_{\circ}(\Gamma_1)+t_{\circ}(\gamma)
 a+3\cdot b&=t_{\circ}(\Gamma_2)+t_{\circ}(\gamma)
 &&\bigl(\because\ a,b\text{ の定義、上の }a+2b=t_{\circ}(\Gamma_2)\text{、}\mathbb Z\text{ の四則}\bigr)\\
 &=t_{\circ}(\Gamma_3)
-&&\bigl(\because\ \blkref{claim_one_sided_closure_period_difference_turning}\text{ の }c=2\text{ の差の等式}\bigr).
+&&\bigl(\because\ \blkref{claim_one_sided_closure_period_difference_turning}\text{ の }c=2\text{ の差の等式}\bigr)
 \end{aligned}`),
                       paragraph([
                         "一方、", math(String.raw`\gamma`), " は ",
@@ -95527,7 +95527,7 @@ a+3\cdot b&=t_{\circ}(\Gamma_2)+t_{\circ}(\gamma)
 a+cb&=t_{\circ}(\Gamma_c)
 &&\bigl(\because\ \text{上の三つの等式}\bigr)\\
 &\in\{4,-4\}\qquad(c=1,2,3)
-&&\bigl(\because\ \blkref{claim_one_sided_closure_projection_cyclic_turning}\bigr).
+&&\bigl(\because\ \blkref{claim_one_sided_closure_projection_cyclic_turning}\bigr)
 \end{aligned}`),
                       paragraph([
                         "である。従って ", ref("claim_three_term_pm_four_difference_zero"),

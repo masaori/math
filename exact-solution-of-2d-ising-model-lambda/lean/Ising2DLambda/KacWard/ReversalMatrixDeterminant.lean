@@ -35,7 +35,7 @@ def reversalPerm (L : ℕ) : Equiv.Perm (OrientedEdge L) where
 
 /-- 一つの台の辺に付く二方向だけを交換する。 -/
 def edgeDirectionTransposition {L : ℕ} (e : Edge L) : Equiv.Perm (OrientedEdge L) :=
-  transpositionPerm (e, false) (e, true)
+  finiteTranspositionPerm (e, false) (e, true)
 
 private def edgeDirectionPair {L : ℕ} (e : Edge L) : Finset (OrientedEdge L) :=
   {(e, false), (e, true)}
@@ -69,12 +69,14 @@ private theorem directionTransposition_local {L : ℕ} (e : Edge L) (x : Oriente
   rcases x with ⟨f, d⟩
   change f = e at he
   subst f
-  cases d <;> simp [edgeDirectionTransposition, transpositionPerm, transpositionOn,
-    reversalPerm, reversal, reverseBool]
+  cases d <;> simp [edgeDirectionTransposition, finiteTranspositionPerm_apply,
+    finiteTransposition,
+    reversalPerm, reversal]
 
 private theorem directionTransposition_outside {L : ℕ} (e : Edge L) (x : OrientedEdge L)
     (hx : x ∉ edgeDirectionPair e) : edgeDirectionTransposition e x = x := by
-  apply transpositionPerm_apply_of_ne
+  change finiteTransposition _ _ x = x
+  apply finiteTransposition_apply_of_ne
   · intro he
     exact hx ((mem_edgeDirectionPair e x).mpr (by rw [he]))
   · intro he
