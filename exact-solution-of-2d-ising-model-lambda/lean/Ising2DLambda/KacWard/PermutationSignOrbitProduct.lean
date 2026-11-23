@@ -1,13 +1,14 @@
 /-
 章「Kac--Ward 行列式の置換展開」の
-「置換符号は動く軌道の符号因子の積である」（`claim_permutation_sign_moved_orbit_product`）の具体版。
+参照用ノート「不採用経路: 置換符号の動く軌道ごとの分解」に退避した
+「置換符号は動く軌道の符号因子の積である」の具体版。
 
 人手証明と同じ順で進む。
 1. 各軌道の基点 `e` からの反復列（基点を除く）`φ(e), …, φ^{∘(m-1)}(e)` を作り、
    互換の鎖 `transpositionChain` がその軌道上で `σ` と一致し、軌道外を動かさないことを示す。
 2. 互換の鎖の符号 `(-1)^{m-1}` と軌道の元の個数 `m`（`card_orbit`）を結ぶ。
-3. 互いに素な台・軌道上の一致・軌道外の恒等・被覆を
-   必要十分版 `sign_eq_prod_of_disjoint_supports` へ渡して積表示を得る。
+3. 互いに素な台・軌道上の一致・軌道外の恒等・被覆から合成を元の置換へ戻し、
+   具体版の符号の有限積則を適用して積表示を得る。
 -/
 import Ising2DLambda.KacWard.MovedOrbitPartition
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
@@ -18,7 +19,8 @@ namespace Ising2DLambda.KacWard
 open Finset
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 open Ising2DLambda.NecSuf.KacWard
-open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
+  (finiteOrderedSign finiteOrderedSign_noncommProd)
 
 variable {ι : Type} [Fintype ι] [LinearOrder ι]
 
@@ -230,13 +232,12 @@ private noncomputable def orbitChainPerm (σ : Equiv.Perm ι) (O : Finset ι) : 
   else 1
 
 /-- 置換符号は動く軌道の符号因子の積である。具体版。
-人手証明（`claim_permutation_sign_moved_orbit_product` の証明）と同じ順で、
+参照用ノートに残した元の人手証明と同じ順で、
 軌道ごとの互換の鎖・その符号・互いに素な台の合成を結ぶ。 -/
 theorem sign_movedEdgeOrbit_product (σ : Equiv.Perm ι) :
     finiteOrderedSign σ =
       ∏ O ∈ movedEdgeOrbitSet σ, (-1 : ℤ) ^ (O.card - 1) := by
   classical
-  change sign (fun x y : ι => x < y) σ = _
   -- 各軌道の基点の存在（軌道族の定義から従う）。
   have hex : ∀ O ∈ movedEdgeOrbitSet σ, ∃ e, σ e ≠ e ∧ movedOrbit σ e = O := by
     intro O hO
@@ -247,7 +248,7 @@ theorem sign_movedEdgeOrbit_product (σ : Equiv.Perm ι) :
   have hchain : ∀ O ∈ movedEdgeOrbitSet σ,
       (∀ x ∈ O, orbitChainPerm σ O x = σ x)
         ∧ (∀ x, x ∉ O → orbitChainPerm σ O x = x)
-        ∧ sign (fun x y : ι => x < y) (orbitChainPerm σ O) = (-1 : ℤ) ^ (O.card - 1) := by
+        ∧ finiteOrderedSign (orbitChainPerm σ O) = (-1 : ℤ) ^ (O.card - 1) := by
     intro O hO
     have h := hex O hO
     obtain ⟨hemoved, horb⟩ := h.choose_spec
@@ -261,36 +262,52 @@ theorem sign_movedEdgeOrbit_product (σ : Equiv.Perm ι) :
     · intro x hx
       rw [hperm]
       exact transpositionChain_orbitTail_fix σ h.choose (fun hmem => hx (horb ▸ hmem))
-    · rw [hperm, sign_transpositionChain_orbitTail σ h.choose, horb]
-  -- 必要十分版へ渡す（人手証明の最後の三つの等号）。
-  refine sign_eq_prod_of_disjoint_supports (fun x y : ι => x < y)
-    trichotomous_of_linearOrder (movedEdgeOrbitSet σ) (fun O => O) (orbitChainPerm σ)
-    σ Finset.card ?_ ?_ ?_ ?_ ?_ ?_
-  · -- 互いに素（`claim_moved_orbit_partition`）。
-    exact fun O₁ h₁ O₂ h₂ hne => hdisjoint O₁ h₁ O₂ h₂ hne
-  · -- 台を保つ: 軌道上では `σ` と一致し、軌道は `σ` で閉じている。
+    · change sign (fun x y : ι => x < y) (orbitChainPerm σ O) = _
+      rw [hperm, sign_transpositionChain_orbitTail σ h.choose, horb]
+  -- 軌道の台は互いに素で、各鎖は自分の台だけを動かす。
+  let s := movedEdgeOrbitSet σ
+  let f := orbitChainPerm σ
+  have hstay : ∀ O ∈ s, ∀ x, x ∈ O → f O x ∈ O := by
     intro O hO x hx
-    obtain ⟨e, hemoved, horb⟩ := hex O hO
+    obtain ⟨e, _, horb⟩ := hex O hO
     rw [(hchain O hO).1 x hx]
     exact horb ▸ movedOrbit_mapsTo σ e (horb.symm ▸ hx)
-  · -- 台の上の一致。
-    exact fun O hO x hx => (hchain O hO).1 x hx
-  · -- 台の外の恒等。
-    exact fun O hO x hx => (hchain O hO).2.1 x hx
-  · -- 被覆: 動く点は必ずどれかの軌道に属する（`claim_moved_orbit_partition`）。
-    intro x
-    constructor
-    · intro hmoved
-      have hx : x ∈ movedEdgeSet σ := mem_movedEdgeSet.mpr hmoved
-      rw [← hcover] at hx
-      obtain ⟨O, hO, hxO⟩ := mem_biUnion.mp hx
-      exact ⟨O, hO, hxO⟩
-    · rintro ⟨O, hO, hxO⟩
-      apply mem_movedEdgeSet.mp
-      rw [← hcover]
-      exact mem_biUnion.mpr ⟨O, hO, hxO⟩
-  · -- 軌道ごとの符号（互換の鎖の符号と `card_orbit`）。
-    exact fun O hO => (hchain O hO).2.2
+  have hcomm : (s : Set (Finset ι)).Pairwise fun O₁ O₂ => Commute (f O₁) (f O₂) := by
+    intro O₁ h₁ O₂ h₂ hne
+    apply commute_of_disjoint_supports (fun O : Finset ι => O) f
+      (hdisjoint O₁ h₁ O₂ h₂ hne)
+    · intro O hO x hx
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hO
+      rcases hO with hO | hO
+      · subst O; exact hstay O₁ h₁ x hx
+      · subst O; exact hstay O₂ h₂ x hx
+    · intro O hO x hx
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hO
+      rcases hO with hO | hO
+      · subst O; exact (hchain O₁ h₁).2.1 x hx
+      · subst O; exact (hchain O₂ h₂).2.1 x hx
+  have hproduct : s.noncommProd f hcomm = σ := by
+    apply noncommProd_eq_of_disjoint_supports s (fun O : Finset ι => O) f hcomm
+    · exact fun O₁ h₁ O₂ h₂ hne => hdisjoint O₁ h₁ O₂ h₂ hne
+    · exact fun O hO x hx => (hchain O hO).1 x hx
+    · exact fun O hO x hx => (hchain O hO).2.1 x hx
+    · intro x
+      constructor
+      · intro hmoved
+        have hx : x ∈ movedEdgeSet σ := mem_movedEdgeSet.mpr hmoved
+        rw [← hcover] at hx
+        obtain ⟨O, hO, hxO⟩ := mem_biUnion.mp hx
+        exact ⟨O, hO, hxO⟩
+      · rintro ⟨O, hO, hxO⟩
+        apply mem_movedEdgeSet.mp
+        rw [← hcover]
+        exact mem_biUnion.mpr ⟨O, hO, hxO⟩
+  -- 人手証明の最後の三段: 局所置換の合成、符号の有限積、軌道ごとの符号。
+  calc
+    finiteOrderedSign σ = finiteOrderedSign (s.noncommProd f hcomm) := by rw [hproduct]
+    _ = ∏ O ∈ s, finiteOrderedSign (f O) := finiteOrderedSign_noncommProd s f hcomm
+    _ = ∏ O ∈ s, (-1 : ℤ) ^ (O.card - 1) := by
+      exact Finset.prod_congr rfl (fun O hO => (hchain O hO).2.2)
 
 /-- 導出版: 同じ積表示を必要十分版から得たことの明示。 -/
 theorem sign_movedEdgeOrbit_product_from_necSuf (σ : Equiv.Perm ι) :
