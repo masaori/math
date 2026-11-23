@@ -115,8 +115,12 @@ theorem quadraticRepresentation_neg
       _ = algebraMap ℚ Qbar (-a) + algebraMap ℚ Qbar (-b) * s :=
         congrArg (fun z : Qbar => algebraMap ℚ Qbar (-a) + z * s)
           (map_neg (algebraMap ℚ Qbar) b).symm
+  -- 本文: `claim_quadratic_negation_mem` により `-xi ∈ Q_s` なので表示写像を適用できる。
   calc
-    quadraticRepresentation s (quadraticNegElement s xi) = (-a, -b) :=
-      quadraticRepresentation_eq s hs (quadraticNegElement s xi) (-a) (-b) hneg
+    quadraticRepresentation s (quadraticNegElement s xi) =
+        quadraticRepresentation s ⟨-(xi : Qbar), quadraticNeg_mem s xi⟩ :=
+      congrArg (quadraticRepresentation s) (Subtype.ext rfl)
+    _ = (-a, -b) :=
+      quadraticRepresentation_eq s hs ⟨-(xi : Qbar), quadraticNeg_mem s xi⟩ (-a) (-b) hneg
 
 end Ising2DLambda.FisherZero

@@ -24675,12 +24675,10 @@ r\cdot r
                                 "（",
                                 ref("def_quadratic_representation_map"),
                                 "）と置く。",
-                                ref("claim_quadratic_negation_mem"),
+                                ref("claim_quadratic_negation_representation"),
                                 " により ",
                                 math(String.raw`-\xi\in Q_s`),
                                 " であり、",
-                                ref("claim_quadratic_negation_representation"),
-                                " により ",
                                 math(String.raw`\mathrm{rep}_s(-\xi)=(-a,-b)`),
                                 " である。有理数の順序の三分律により、",
                                 math(String.raw`a`),
@@ -25032,12 +25030,10 @@ a\cdot a
                                 "（",
                                 ref("def_quadratic_representation_map"),
                                 "）と置く。",
-                                ref("claim_quadratic_negation_mem"),
+                                ref("claim_quadratic_negation_representation"),
                                 " により ",
                                 math(String.raw`-\xi\in Q_s`),
                                 " であり、",
-                                ref("claim_quadratic_negation_representation"),
-                                " により ",
                                 math(String.raw`\mathrm{rep}_s(-\xi)=(-a,-b)`),
                                 " である。三つの場合から二つを選ぶ組み合わせは三通りであり、そのそれぞれが",
                                 "同時には成り立たないことを示す。場合分けは一続きの式変形にできない議論なので",
@@ -25516,7 +25512,7 @@ A\cdot(B'\cdot s)
 &=(B\cdot B')\cdot(s\cdot s)
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
 &=(B\cdot B')\cdot j(2)
-&&\bigl(\because\ s\cdot s=j(2)\text{（仮定}\ \blkref{claim_sqrt_two_exists}\text{）}\bigr)\\
+&&\bigl(\because\ s\cdot s=j(2)\text{（主張の仮定）}\bigr)\\
 &=j(2)\cdot(B\cdot B')
 &&\bigl(\because\ \text{乗法の可換則}\bigr)
 \end{aligned}`),
@@ -26706,7 +26702,7 @@ A\cdot A&=C\cdot C
                             proof: [
                               paragraph([
                                 math(String.raw`(a,b),(a',b')\in\mathbb Q^2`), " は主張の表示係数とする。",
-                                ref("claim_quadratic_multiplication_mem"), " により積は ",
+                                ref("claim_quadratic_multiplication_representation"), " により積は ",
                                 math(String.raw`Q_s`), " に属するので、",
                                 math(String.raw`(A,B):=\mathrm{rep}_s(\xi\cdot\eta)\in\mathbb Q^2`),
                                 " と置く。以下、", math(String.raw`\top`), " は常に真である命題を表す。",
@@ -28289,7 +28285,7 @@ A \cdot A &< 2 \cdot (B \cdot B)\quad(\because\ \text{上で示した平方の�
                             ],
                             proof: [
                               paragraph([math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`), "、", math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)\in\mathbb Q\times\mathbb Q`), " と置く（", ref("def_quadratic_representation_map"), "）。", ref("def_quadratic_positive_cone"), " により、各係数対は非負係数条件・負の第二係数条件・負の第一係数条件の少なくとも一つを満たす。以下で二つの係数対の九通りの組合せを尽くす。"]),
-                              paragraph(["先に ", math(String.raw`\xi`), " と ", math(String.raw`\eta`), " の役割を入れ替える転送を準備する。", ref("claim_quadratic_addition_mem"), " により ", math(String.raw`\xi+\eta,\eta+\xi\in Q_s`), " であり、表示は ", math(String.raw`\mathbb Q\times\mathbb Q`), " の中で次のように計算できる。"]),
+                              paragraph(["先に ", math(String.raw`\xi`), " と ", math(String.raw`\eta`), " の役割を入れ替える転送を準備する。", ref("claim_quadratic_addition_representation"), " により ", math(String.raw`\xi+\eta,\eta+\xi\in Q_s`), " であり、表示は ", math(String.raw`\mathbb Q\times\mathbb Q`), " の中で次のように計算できる。"]),
                               displayMath(String.raw`\begin{aligned}
 \mathrm{rep}_s(\xi+\eta)
 &=(a+a',b+b')
@@ -28362,7 +28358,7 @@ A \cdot A &< 2 \cdot (B \cdot B)\quad(\because\ \text{上で示した平方の�
                             ],
                             proof: [
                               paragraph([math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`), "、", math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)\in\mathbb Q\times\mathbb Q`), " と置く（", ref("def_quadratic_representation_map"), "）。", ref("def_quadratic_positive_cone"), " により、各係数対は非負係数条件・負の第二係数条件・負の第一係数条件の少なくとも一つを満たす。以下で二つの係数対の九通りの組合せを尽くす。"]),
-                              paragraph(["先に ", math(String.raw`\xi`), " と ", math(String.raw`\eta`), " の役割を入れ替える転送を準備する。", ref("claim_quadratic_multiplication_mem"), " により ", math(String.raw`\xi\cdot\eta,\eta\cdot\xi\in Q_s`), " であり、表示は ", math(String.raw`\mathbb Q\times\mathbb Q`), " の中で次のように計算できる。"]),
+                              paragraph(["先に ", math(String.raw`\xi`), " と ", math(String.raw`\eta`), " の役割を入れ替える転送を準備する。", ref("claim_quadratic_multiplication_representation"), " により ", math(String.raw`\xi\cdot\eta,\eta\cdot\xi\in Q_s`), " であり、表示は ", math(String.raw`\mathbb Q\times\mathbb Q`), " の中で次のように計算できる。"]),
                               displayMath(String.raw`\begin{aligned}
 \mathrm{rep}_s(\xi\cdot\eta)
 &=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')
@@ -29224,10 +29220,15 @@ q
                         ]),
                       ],
                       proof: [
+                        displayMath(String.raw`Q_s\text{ は }\overline{\mathbb Q}\text{ の部分体}\qquad\bigl(\because\ \blkref{claim_quadratic_field_set_is_subfield}\bigr)`),
                         displayMath(String.raw`P_s\subseteq Q_s\qquad\bigl(\because\ \blkref{def_quadratic_positive_cone}\bigr)`),
                         paragraph(["任意の ", math(String.raw`x,y\in P_s`), " を取る。"]),
-                        displayMath(String.raw`x+y\in P_s\qquad\bigl(\because\ \blkref{claim_quadratic_positive_cone_add_closed}\bigr)`),
-                        displayMath(String.raw`x\cdot y\in P_s\qquad\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}\bigr)`),
+                        displayMath(String.raw`\begin{aligned}
+x+y&\in Q_s&&\bigl(\because\ x,y\in Q_s,\ \blkref{claim_quadratic_addition_mem}\bigr)\\
+x+y&\in P_s&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_add_closed}\bigr)\\
+x\cdot y&\in Q_s&&\bigl(\because\ x,y\in Q_s,\ \blkref{claim_quadratic_multiplication_mem}\bigr)\\
+x\cdot y&\in P_s&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}\bigr)
+\end{aligned}`),
                         paragraph([
                           "任意の ", math(String.raw`z\in Q_s`), " について、",
                           "零・正・負のちょうど一つが成り立つ（", ref("claim_quadratic_positive_cone_ambient_trichotomy"), "）。",

@@ -66,6 +66,10 @@ theorem quadraticRepresentation_add
   let b := (quadraticRepresentation s xi).2
   let a' := (quadraticRepresentation s eta).1
   let b' := (quadraticRepresentation s eta).2
+  -- 本文: `claim_quadratic_addition_mem` により `xi + eta ∈ Q_s` なので表示写像を適用できる。
+  refine (congrArg (quadraticRepresentation s)
+    (Subtype.ext rfl : quadraticAddElement s xi eta =
+      ⟨(xi : Qbar) + (eta : Qbar), quadraticAdd_mem s xi eta⟩)).trans ?_
   apply quadraticRepresentation_eq s hs
   change (xi : Qbar) + (eta : Qbar) =
     algebraMap ℚ Qbar (a + a') + algebraMap ℚ Qbar (b + b') * s
