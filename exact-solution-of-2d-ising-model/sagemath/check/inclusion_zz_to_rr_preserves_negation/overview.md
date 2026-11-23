@@ -6,16 +6,16 @@
 
 - ファイル: `structured-latex/content/000_calculation_formulae_00_09.ts`
 - ブロック: `calc_formulae_claim_inclusion_zz_to_rr_preserves_negation`（`a ∈ ℤ` なら `ι(-a) = -ι(a)`。`ι` は `inclusion_zz_to_rr`）
-- 範囲: 証明の 5 行、主張
+- 範囲: 証明の 6 行、主張
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス |
 |---|---|---|---|
-| `ι(-a) = ι(0-a) = ι(0)-ι(a) = 0-ι(a) = 0+(-ι(a)) = -ι(a)` | `check_proof_lines.sage` | `a = -200..200` で 5 個の等号（QQ。差は `inclusion_zz_to_rr_preserves_difference`、`ι(0) = 0` は定義、4 行目は `def_real_difference`） | **PASS** |
+| `ι(-a) = ι(0+(-a)) = ι(0-a) = ι(0)-ι(a) = 0-ι(a) = 0+(-ι(a)) = -ι(a)` | `check_proof_lines.sage` | `a = -200..200` で 6 個の等号（QQ。1・2 行目は ℤ の和の単位元と `def_int_difference`、差は `inclusion_zz_to_rr_preserves_difference`、`ι(0) = 0` は定義、5 行目は `def_real_difference`） | **PASS** |
 | 主張 | `check_proof_lines.sage` | `a = -200..200` で主張と、組み込みの埋め込み `QQ(-a)` との一致 | **PASS** |
 
-等号は 2807 個。否定コントロール: 定義の符号反転の節を `ι''(-n) := ι(n)` に取り違えた写像（`ι''(n) = |n|`）では `ι''(-3) = 3 ≠ -3 = -ι''(3)`。
+等号は 3208 個。否定コントロール: 定義の符号反転の節を `ι''(-n) := ι(n)` に取り違えた写像（`ι''(n) = |n|`）では `ι''(-3) = 3 ≠ -3 = -ι''(3)`。
 
 ## 計算の帰属と範囲
 

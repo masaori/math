@@ -34,14 +34,15 @@
   `n = -(p + 1_ℤ)` の 8 行が人手の行と 1 対 1 の `calc` である。人手の定義の `ι(n + 1) := ι(n) + 1`（`n ∈ ℤ_{≥0}`）の `Int.cast` の形は
   `inclusion_zz_to_rr_succ_intCast`（`inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形へ移して当てる）。
 * `inclusion_zz_to_rr_preserves_sum` は人手と同じく `a` を固定した `b` についての 2 方向の帰納法（`Int.induction_on`）で、`b = 0` の 3 行、
-  `b → b + 1` の 5 行、`b → b − 1` の 12 行が人手の行と 1 対 1 の `calc` である。`ℤ` の四則の段は `omega` で閉じる。
+  `b → b + 1` の 5 行、`b → b − 1` の 13 行が人手の行と 1 対 1 の `calc` である。`ℤ` の `(x − y) + y = x` の段は
+  `int_difference_plus_subtrahend_is_original`、`ℤ` の加法の結合律の段は `add_assoc` で当てる。
 * `inclusion_zz_to_rr_preserves_product` は人手と同じく `a` を固定した `b` についての 2 方向の帰納法（`Int.induction_on`）で、`b = 0` の 4 行、
   `b → b + 1` の 7 行、`b → b − 1` の 15 行が人手の行と 1 対 1 の `calc` である。`b = 0` の `x · 0 = 0` は人手と同じく `real_times_zero_is_zero`。
-  `ℤ` の分配律・積の単位元・四則の段は `mul_sub`・`mul_one`・`sub_add_cancel`・`omega`（`b = (b − 1) + 1`）で閉じる。
+  `ℤ` の分配律・積の単位元の段は `mul_sub`・`mul_one`、`(x − a) + a = x` と `b = (b − 1) + 1` の段は `int_difference_plus_subtrahend_is_original` で当てる。
 * `inclusion_zz_to_rr_preserves_difference` は人手の 9 行と 1 対 1 の `calc` である。`def_int_difference` は `int_sub_eq_add_neg`、
   `ℤ` の和の結合律・加法逆元 `(−x) + x = 0`・和の単位元は `add_assoc`・`neg_add_cancel`・`add_zero`、
   `def_real_difference`（`y − z := y + (−z)`）は `sub_eq_add_neg` で当てる。
-* `inclusion_zz_to_rr_preserves_negation` は人手の 5 行と 1 対 1 の `calc` である。`ℤ` の四則 `-x = 0 - x` の段は `zero_sub`、
+* `inclusion_zz_to_rr_preserves_negation` は人手の 6 行と 1 対 1 の `calc` である。`ℤ` の和の単位元 `0 + y = y` の段は `zero_add`、`def_int_difference` の段は `int_sub_eq_add_neg`、
   `ι(0_ℤ) := 0_ℝ` は `inclusion_zz_to_rr_zero_intCast`、`def_real_difference` は `sub_eq_add_neg`、`0_ℝ` が和の単位元であることは `zero_add` で当てる。
 * `finite_sum_of_constant_real_number_succ` は人手の `m ∈ ℤ_{≥1}` を Lean の `m + 1`（`Fin (m + 1)` の上の和）で書き、`m = 1` の 3 行と
   帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。`def_finite_sum_of_real_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
@@ -63,6 +64,7 @@
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerDifference
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerDifferencePlusSubtrahendIsOriginal
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
@@ -183,7 +185,7 @@ theorem inclusion_zz_to_rr_of_successor (n : ℤ) : ((n + 1 : ℤ) : ℝ) = ((n 
 /-- **人手 `inclusion_zz_to_rr_preserves_sum`**: `a, b ∈ ℤ` なら `ι(a + b) = ι(a) + ι(b)`。
 人手と同じく `a` を固定し、`b ∈ ℤ_{≥0}` は `0` から `1` を足す帰納法、`b ∈ ℤ_{≤0}` は `0` から `1` を引く帰納法で示す
 （Lean では `Int.induction_on`。`b ∈ ℤ_{≤0}` の段の `b` は `ℕ` の元 `i` の像の符号反転 `-(i : ℤ)` である）。
-`b = 0` の 3 行、`b → b + 1` の 5 行、`b → b - 1` の 12 行が人手の行と 1 対 1 の `calc` である。 -/
+`b = 0` の 3 行、`b → b + 1` の 5 行、`b → b - 1` の 13 行が人手の行と 1 対 1 の `calc` である。 -/
 theorem inclusion_zz_to_rr_preserves_sum (a b : ℤ) :
     ((a + b : ℤ) : ℝ) = ((a : ℤ) : ℝ) + ((b : ℤ) : ℝ) := by
   refine Int.induction_on b ?_ ?_ ?_
@@ -211,13 +213,15 @@ theorem inclusion_zz_to_rr_preserves_sum (a b : ℤ) :
                                                                            -- `ℝ` の和の結合律を右辺から左辺へ
       _ = (((a + (-(i : ℤ) - 1)) + 1 : ℤ) : ℝ) + -(1 : ℝ) := by
           rw [inclusion_zz_to_rr_of_successor (a + (-(i : ℤ) - 1))]        -- `inclusion_zz_to_rr_of_successor`（`n → a + (b - 1)`）を右辺から左辺へ
+      _ = ((a + ((-(i : ℤ) - 1) + 1) : ℤ) : ℝ) + -(1 : ℝ) := by
+          rw [add_assoc a (-(i : ℤ) - 1) 1]                                -- `ℤ` の加法の結合律（`x → a`, `y → b - 1`, `t → 1`）
       _ = ((a + -(i : ℤ) : ℤ) : ℝ) + -(1 : ℝ) := by
-          rw [show (a + (-(i : ℤ) - 1)) + 1 = a + -(i : ℤ) by omega]        -- `ℤ` の四則 `(a + (b - 1)) + 1 = a + b`
+          rw [int_difference_plus_subtrahend_is_original (-(i : ℤ)) 1]     -- `int_difference_plus_subtrahend_is_original`（`x → b`, `y → 1`）
       _ = (((a : ℤ) : ℝ) + ((-(i : ℤ) : ℤ) : ℝ)) + -(1 : ℝ) := by rw [ih]  -- 帰納法の仮定
       _ = ((a : ℤ) : ℝ) + (((-(i : ℤ) : ℤ) : ℝ) + -(1 : ℝ)) := add_assoc _ _ _
                                                                            -- `ℝ` の和の結合律
       _ = ((a : ℤ) : ℝ) + ((((-(i : ℤ) - 1) + 1 : ℤ) : ℝ) + -(1 : ℝ)) := by
-          rw [show (-(i : ℤ) - 1) + 1 = -(i : ℤ) by omega]                  -- `ℤ` の四則 `b = (b - 1) + 1`
+          rw [int_difference_plus_subtrahend_is_original (-(i : ℤ)) 1]     -- `int_difference_plus_subtrahend_is_original`（`x → b`, `y → 1`）を右辺から左辺へ
       _ = ((a : ℤ) : ℝ) + ((((-(i : ℤ) - 1 : ℤ) : ℝ) + 1) + -(1 : ℝ)) := by
           rw [inclusion_zz_to_rr_of_successor (-(i : ℤ) - 1)]              -- `inclusion_zz_to_rr_of_successor`（`n → b - 1`）
       _ = ((a : ℤ) : ℝ) + (((-(i : ℤ) - 1 : ℤ) : ℝ) + (1 + -(1 : ℝ))) := by
@@ -266,12 +270,12 @@ theorem inclusion_zz_to_rr_preserves_product (a b : ℤ) :
                                                                            -- `ℤ` の分配律
       _ = (((a * -(i : ℤ) - a) + a : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by rw [mul_one]
                                                                            -- `1_ℤ` は `ℤ` の積の単位元
-      _ = ((a * -(i : ℤ) : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by rw [sub_add_cancel]
-                                                                           -- `ℤ` の四則 `(x - a) + a = x`（`x → ab`）
+      _ = ((a * -(i : ℤ) : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by
+          rw [int_difference_plus_subtrahend_is_original (a * -(i : ℤ)) a] -- `int_difference_plus_subtrahend_is_original`（`x → ab`, `y → a`）
       _ = ((a : ℤ) : ℝ) * ((-(i : ℤ) : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by rw [ih]
                                                                            -- 帰納法の仮定
       _ = ((a : ℤ) : ℝ) * (((-(i : ℤ) - 1) + 1 : ℤ) : ℝ) + -((a : ℤ) : ℝ) := by
-          rw [show (-(i : ℤ) - 1) + 1 = -(i : ℤ) by omega]                  -- `ℤ` の四則 `b = (b - 1) + 1`
+          rw [int_difference_plus_subtrahend_is_original (-(i : ℤ)) 1]     -- `int_difference_plus_subtrahend_is_original`（`x → b`, `y → 1`）を右辺から左辺へ
       _ = ((a : ℤ) : ℝ) * (((-(i : ℤ) - 1 : ℤ) : ℝ) + 1) + -((a : ℤ) : ℝ) := by
           rw [inclusion_zz_to_rr_of_successor (-(i : ℤ) - 1)]              -- `inclusion_zz_to_rr_of_successor`（`n → b - 1`）
       _ = (((a : ℤ) : ℝ) * ((-(i : ℤ) - 1 : ℤ) : ℝ) + ((a : ℤ) : ℝ) * 1) + -((a : ℤ) : ℝ) := by
@@ -305,11 +309,12 @@ theorem inclusion_zz_to_rr_preserves_difference (a b : ℤ) :
     _ = ((a : ℤ) : ℝ) - ((b : ℤ) : ℝ) := (sub_eq_add_neg _ _).symm        -- `def_real_difference`（`y → ι(a)`, `z → ι(b)`）を右辺から左辺へ
 
 /-- **人手 `inclusion_zz_to_rr_preserves_negation`**: `a ∈ ℤ` なら `ι(-a) = -ι(a)`（`a` の符号を問わない）。
-人手の 5 行と 1 対 1 の `calc` で、`inclusion_zz_to_rr_preserves_difference` と定義の `ι(0) := 0` を引く。 -/
+人手の 6 行と 1 対 1 の `calc` で、`inclusion_zz_to_rr_preserves_difference` と定義の `ι(0) := 0` を引く。 -/
 theorem inclusion_zz_to_rr_preserves_negation (a : ℤ) :
     ((-a : ℤ) : ℝ) = -((a : ℤ) : ℝ) :=
   calc ((-a : ℤ) : ℝ)
-      = ((0 - a : ℤ) : ℝ) := by rw [zero_sub]                              -- `ℤ` の四則 `-x = 0 - x`（`x → a`）
+      = ((0 + -a : ℤ) : ℝ) := by rw [zero_add (-a)]                        -- `ℤ` の和の単位元 `0 + x = x`（`x → -a`）を右辺から左辺へ
+    _ = ((0 - a : ℤ) : ℝ) := by rw [int_sub_eq_add_neg 0 a]                -- `def_int_difference`（`y → 0`, `z → a`）を右辺から左辺へ
     _ = ((0 : ℤ) : ℝ) - ((a : ℤ) : ℝ) :=
         inclusion_zz_to_rr_preserves_difference 0 a                       -- `inclusion_zz_to_rr_preserves_difference`（`a → 0`, `b → a`）
     _ = 0 - ((a : ℤ) : ℝ) := by rw [inclusion_zz_to_rr_zero_intCast]      -- `inclusion_zz_to_rr` の `ι(0_ℤ) := 0_ℝ`

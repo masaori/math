@@ -1,0 +1,4 @@
+ZZ[x, y] で鎖の等号 4 個と、各段の根拠の形の両辺 4 つを確かめた
+整数の標本 6561 件で全ての行と主張が x に一致した
+negative controls (broken lines detected): 2
+RESULT: PASS

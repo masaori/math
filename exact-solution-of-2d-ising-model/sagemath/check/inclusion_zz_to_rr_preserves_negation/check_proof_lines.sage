@@ -1,5 +1,5 @@
 # 対象ラベル: inclusion_zz_to_rr_preserves_negation
-# a ∈ ℤ について ι(-a) = -ι(a) を、証明の 5 行で一行ずつ確かめる
+# a ∈ ℤ について ι(-a) = -ι(a) を、証明の 6 行で一行ずつ確かめる
 # （ι は定義の再帰、比較は QQ の厳密な等号。inclusion_zz_to_rr_preserves_difference の行は ι の再帰で計算した両辺を比べる）。
 load("../../_shared/inclusion_zz_to_rr_by_definition.sage")
 io = iota_zz_to_rr
@@ -7,7 +7,7 @@ cnt = 0
 for a in range(-200, 201):
     a = ZZ(a)
     A = io(a)
-    L = [io(-a), io(ZZ(0) - a), io(ZZ(0)) - A, QQ(0) - A, QQ(0) + (-A), -A]
+    L = [io(-a), io(ZZ(0) + (-a)), io(ZZ(0) - a), io(ZZ(0)) - A, QQ(0) - A, QQ(0) + (-A), -A]
     for x, y in zip(L, L[1:]):
         assert x == y; cnt += 1
     assert io(-a) == -io(a); cnt += 1                        # 主張

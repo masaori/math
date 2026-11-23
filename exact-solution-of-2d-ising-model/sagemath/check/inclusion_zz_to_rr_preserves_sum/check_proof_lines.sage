@@ -22,7 +22,7 @@ for a in R:
         if b <= 0:
             # b ∈ ℤ_{≤0} から b - 1 へ
             L = [io(a + (b - 1)), io(a + (b - 1)) + QQ(0), io(a + (b - 1)) + (QQ(1) + QQ(-1)),
-                 (io(a + (b - 1)) + QQ(1)) + QQ(-1), io((a + (b - 1)) + 1) + QQ(-1), io(a + b) + QQ(-1),
+                 (io(a + (b - 1)) + QQ(1)) + QQ(-1), io((a + (b - 1)) + 1) + QQ(-1), io(a + ((b - 1) + 1)) + QQ(-1), io(a + b) + QQ(-1),
                  (io(a) + io(b)) + QQ(-1), io(a) + (io(b) + QQ(-1)), io(a) + (io((b - 1) + 1) + QQ(-1)),
                  io(a) + ((io(b - 1) + QQ(1)) + QQ(-1)), io(a) + (io(b - 1) + (QQ(1) + QQ(-1))),
                  io(a) + (io(b - 1) + QQ(0)), io(a) + io(b - 1)]

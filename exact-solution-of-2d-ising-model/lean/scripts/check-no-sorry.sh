@@ -469,6 +469,9 @@ targets=(
   Ising2D.int_less_than_one_of_product_less_than_nonnegative_factor
   Ising2D.int_less_than_one_of_product_less_than_nonnegative_factor_of_necSuf
   Ising2D.NecSuf.lt_one_of_mul_lt_self_of_cases
+  Ising2D.int_difference_plus_subtrahend_is_original
+  Ising2D.int_difference_plus_subtrahend_is_original_of_necSuf
+  Ising2D.NecSuf.sub_add_cancel_of_addGroup
   Ising2D.complex_mk_add_mk
   Ising2D.complex_mk_eq_mk_iff
   Ising2D.complex_mk_mul_mk

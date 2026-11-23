@@ -551,6 +551,61 @@ export default defineBlocks([
     },
   },
   {
+    id: "calc_formulae_claim_integer_difference_plus_subtrahend_is_original",
+    kind: "claim",
+    title: { tex: String.raw`(x -_{\mathbb{Z}} y) +_{\mathbb{Z}} y = x` },
+    labels: ["int_difference_plus_subtrahend_is_original"],
+    lean: ["Ising2D.int_difference_plus_subtrahend_is_original"],
+    statement: [
+      paragraph([
+        math(String.raw`x, y \in \mathbb{Z}`),
+        " について",
+      ]),
+      displayMath(String.raw`(x -_{\mathbb{Z}} y) +_{\mathbb{Z}} y = x`),
+      paragraph([
+        "である。差は ",
+        ref("def_int_difference"),
+        " のもの、和と ",
+        math(String.raw`0_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中の ",
+        math(String.raw`-y`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{Z}`),
+        " の符号反転 ",
+        math(String.raw`-_{\mathbb{Z}}(y)`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x -_{\mathbb{Z}} y) +_{\mathbb{Z}} y
+&= \bigl(x +_{\mathbb{Z}} (-y)\bigr) +_{\mathbb{Z}} y
+&&\bigl(\because\ \blkref{def_int_difference}\ (y \to x,\ z \to y)\bigr)\\
+&= x +_{\mathbb{Z}} \bigl((-y) +_{\mathbb{Z}} y\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (y \to -y,\ t \to y)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= x +_{\mathbb{Z}} 0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ (-x) + x = 0_{\mathbb{Z}}\ (x \to y)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= x
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x + 0_{\mathbb{Z}} = x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の四則」）: 原文（Typst）に対応ブロックは無い。inclusion_zz_to_rr_preserves_sum・inclusion_zz_to_rr_preserves_product の証明が「ℤ の四則 b = (b − 1) + 1」「ℤ の四則 (x − a) + a = x」「ℤ の四則 (a + (b − 1)) + 1 = a + b」と名前だけで引いていた ℤ の等式の共通の部品として、def_int_difference と set_and_algebra_notation の ℤ の一覧の行（加法の結合律・加法の逆元・和の単位元）から示す主張として足した。Lean の具体版は Ising2D.int_difference_plus_subtrahend_is_original（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimIntegerDifferencePlusSubtrahendIsOriginal.lean）、必要十分版は Ising2D.NecSuf.sub_add_cancel_of_addGroup（NecSuf/SubAddCancelOfAddGroup.lean）。数値検証: sagemath/check/int_difference_plus_subtrahend_is_original/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_definition_integer_strict_order",
     kind: "definition",
     title: { text: "整数の狭義の順序" },
@@ -2963,14 +3018,16 @@ T_B(X - W)
   &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律を右辺から左辺へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\Bigl(\bigl(a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr) +_{\mathbb{Z}} 1_{\mathbb{Z}}\Bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_successor}\ (n \to a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}}))\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\Bigl(a +_{\mathbb{Z}} \bigl((b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)\Bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})
+  &&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x + y) + t = x + (y + t)\ (x \to a,\ y \to b -_{\mathbb{Z}} 1_{\mathbb{Z}},\ t \to 1_{\mathbb{Z}})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a +_{\mathbb{Z}} b) +_{\mathbb{R}} (-1_{\mathbb{R}})
-  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ \bigl(a +_{\mathbb{Z}} (b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr) +_{\mathbb{Z}} 1_{\mathbb{Z}} = a +_{\mathbb{Z}} b\bigr)\\
+  &&\bigl(\because\ \blkref{int_difference_plus_subtrahend_is_original}\ (x \to b,\ y \to 1_{\mathbb{Z}})\bigr)\\
 &= \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b)\bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})
   &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b) +_{\mathbb{R}} (-1_{\mathbb{R}})\bigr)
   &&\bigl(\because\ \mathbb{R}\ \text{の和の結合律}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \Bigl(\iota_{\mathbb{Z}\to\mathbb{R}}\bigl((b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})\Bigr)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ b = (b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)\\
+  &&\bigl(\because\ \blkref{int_difference_plus_subtrahend_is_original}\ (x \to b,\ y \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \Bigl(\bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr) +_{\mathbb{R}} (-1_{\mathbb{R}})\Bigr)
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_successor}\ (n \to b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) +_{\mathbb{R}} \Bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{R}} \bigl(1_{\mathbb{R}} +_{\mathbb{R}} (-1_{\mathbb{R}})\bigr)\Bigr)
@@ -2986,6 +3043,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b2)）: 原文（Typst）に対応ブロックは無い。periodicity_of_check_fermi の準備の第二と (2) の θ̃_{μ+kM_col} の鎖、half_integer_phase_periodicity の準備の鎖が、符号の決まっていない ℤ の元の和について「ι_{ℤ→ℝ} は和を保つ」を名前だけで使っていた（inclusion_zz_to_rr_preserves_sum_of_nonnegatives は a, b ∈ ℤ_{≥0} だけ）ので、ℤ 全体の主張として足した。Lean の具体版は Ising2D.inclusion_zz_to_rr_preserves_sum、必要十分版は Ising2D.NecSuf.int_cast_add'。数値検証: sagemath/check/inclusion_zz_to_rr_preserves_sum/。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の四則」）: b ∈ ℤ_{≤0} の段で「ℤ の四則」と名前だけで引いていた 2 か所を直した。(a + (b − 1)) + 1 = a + b の行は、ℤ の加法の結合律（set_and_algebra_notation）の行と int_difference_plus_subtrahend_is_original（x → b, y → 1）の行の 2 行に割り、b = (b − 1) + 1 の行は int_difference_plus_subtrahend_is_original を右辺から左辺へ引く形にした。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -3093,11 +3151,11 @@ T_B(X - W)
 &= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((a \cdot_{\mathbb{Z}} b -_{\mathbb{Z}} a) +_{\mathbb{Z}} a\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
   &&\bigl(\because\ 1_{\mathbb{Z}}\ \text{は}\ \mathbb{Z}\ \text{の積の単位元}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a \cdot_{\mathbb{Z}} b) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ (x -_{\mathbb{Z}} a) +_{\mathbb{Z}} a = x\ (x \to a \cdot_{\mathbb{Z}} b)\bigr)\\
+  &&\bigl(\because\ \blkref{int_difference_plus_subtrahend_is_original}\ (x \to a \cdot_{\mathbb{Z}} b,\ y \to a)\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) \cdot_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
   &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) \cdot_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}\bigl((b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ b = (b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{Z}} 1_{\mathbb{Z}}\bigr)\\
+  &&\bigl(\because\ \blkref{int_difference_plus_subtrahend_is_original}\ (x \to b,\ y \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(a) \cdot_{\mathbb{R}} \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{R}} 1_{\mathbb{R}}\bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_successor}\ (n \to b -_{\mathbb{Z}} 1_{\mathbb{Z}})\bigr)\\
 &= \Bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(a) \cdot_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(b -_{\mathbb{Z}} 1_{\mathbb{Z}}) +_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(a) \cdot_{\mathbb{R}} 1_{\mathbb{R}}\Bigr) +_{\mathbb{R}} \bigl(-\iota_{\mathbb{Z}\to\mathbb{R}}(a)\bigr)
@@ -3117,6 +3175,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b3)）: 原文（Typst）に対応ブロックは無い。periodicity_of_check_fermi (2) の θ̃_{μ+kM_col} の鎖の 3 行目が、符号の決まっていない k ∈ ℤ と M_col の積について「ι_{ℤ→ℝ} は積を保つ」を名前だけで使っていたので、ℤ 全体の主張として足した。証明は inclusion_zz_to_rr_preserves_sum と同じ 2 方向の帰納法で、和の保存と後者の主張だけを引く。b = 0 の行が引く real_times_zero_is_zero は後ろのファイル 000_calculation_formulae_20_29.ts にあり、前方参照になる（状態台帳の定義より前の参照の件で扱う）。Lean の具体版は Ising2D.inclusion_zz_to_rr_preserves_product、必要十分版は Ising2D.NecSuf.int_cast_mul'。数値検証: sagemath/check/inclusion_zz_to_rr_preserves_product/。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の四則」）: b ∈ ℤ_{≤0} の段で「ℤ の四則」と名前だけで引いていた (x − a) + a = x（x → ab）と b = (b − 1) + 1 の 2 か所を、int_difference_plus_subtrahend_is_original を引く形にした。鎖の両端と主張は不変。",
       ],
     },
   },
@@ -3217,8 +3276,10 @@ T_B(X - W)
       paragraph(["主張の左辺から"]),
       displayMath(String.raw`\begin{aligned}
 \iota_{\mathbb{Z}\to\mathbb{R}}(-a)
+&= \iota_{\mathbb{Z}\to\mathbb{R}}\bigl(0_{\mathbb{Z}} +_{\mathbb{Z}} (-a)\bigr)
+  &&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + x = x\ (x \to -a)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}} -_{\mathbb{Z}} a)
-  &&\bigl(\because\ \mathbb{Z}\ \text{の四則}\ -x = 0_{\mathbb{Z}} -_{\mathbb{Z}} x\ (x \to a)\bigr)\\
+  &&\bigl(\because\ \blkref{def_int_difference}\ (y \to 0_{\mathbb{Z}},\ z \to a)\ \text{を右辺から左辺へ}\bigr)\\
 &= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) -_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(a)
   &&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_difference}\ (a \to 0_{\mathbb{Z}},\ b \to a)\bigr)\\
 &= 0_{\mathbb{R}} -_{\mathbb{R}} \iota_{\mathbb{Z}\to\mathbb{R}}(a)
@@ -3234,6 +3295,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-20（Lean の通しの証明のゴールラインの確認、状態台帳の (d4c44p15f15p38w49b5)）: 原文（Typst）に対応ブロックは無い。anticommutator_of_check_Z_Y の準備 2 の実数の鎖（eigenvalue_problem_diagonalization_and_exponential_form.ts）が「ι_{ℤ→ℝ} は和・零・単位元を保つので差と加法の逆元を保ち」を 1 行で名前だけで使っていたので、その行を割るために、符号を問わない ℤ の元の符号反転を保つ主張として足した。証明は inclusion_zz_to_rr_preserves_difference と定義の ι(0_ℤ) := 0_ℝ を引く 5 行の鎖である。Lean の具体版は Ising2D.inclusion_zz_to_rr_preserves_negation、必要十分版は Ising2D.NecSuf.int_cast_neg'。数値検証: sagemath/check/inclusion_zz_to_rr_preserves_negation/。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち「ℤ の四則」）: 最初の行の「ℤ の四則 −x = 0 − x」を、ℤ の和の単位元 0 + y = y（set_and_algebra_notation）を右辺から左辺へ引く行と def_int_difference を右辺から左辺へ引く行の 2 行に割った。鎖の両端と主張は不変。",
       ],
     },
   },
