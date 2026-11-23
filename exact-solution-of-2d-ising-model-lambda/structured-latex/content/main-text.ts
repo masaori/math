@@ -20420,14 +20420,14 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
 \tau_{\sigma^{-1},C}(i)
 &=\sigma^{-1}(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
 &=\eta_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{claim_matching_pair_permutation}\bigr)\\
-&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_predecessor}\bigr).
+&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_predecessor}\bigr)
 \end{aligned}`),
                       paragraph([math(String.raw`i\notin C`), " なら、"]),
                       displayMath(String.raw`\begin{aligned}
 \tau_{\sigma^{-1},C}(i)
 &=(\sigma^{-1})^{-1}(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
 &=\sigma(i)&&\bigl(\because\ \sigma\text{ は全単射}\bigr)\\
-&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_successor}\bigr).
+&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_successor}\bigr)
 \end{aligned}`),
                       paragraph(["二場合で任意の ", math(String.raw`i\in\mathcal J`), " に対し ", math(String.raw`\tau_{\sigma^{-1},C}(i)=\upsilon(i)`), " を得た。対の族の定義に代入すると、"]),
                       displayMath(String.raw`\begin{aligned}
@@ -20437,7 +20437,7 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
 &=\bigl\{\{i,\upsilon(i)\}\mid i\in\mathcal J\bigr\}
 &&\bigl(\because\ \text{上で示した各点の等号}\bigr)\\
 &=\mathcal D_\upsilon
-&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr).
+&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr)
 \end{aligned}`),
                       paragraph(["空集合では二つの族はともに空である。共有対でも二場合の値は変わらない。有限集合とその写像だけを扱い、実数体への脱出はない。"]),
                     ],
