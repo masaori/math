@@ -6,7 +6,7 @@
 # 多項式環は式を正規化するので、形の左右と向きはこの検算では区別できない（レビューの目視で確かめた）。
 # π は記号のまま扱う: 不定元 p を π に置き、−π/2 を −p/2 として QQ[p] で比べる（π の値は使わない）。
 R.<p> = QQ[]
-def add_right(s): return (s + 0, s)   # x + 0 = x
+def add_left(s): return (0 + s, s)    # 0 + x = x
 def check(name, prev, nxt, ctx, form, subs, rtl=False):
     ls = [form(s)[0] for s in subs]
     rs = [form(s)[1] for s in subs]
@@ -19,8 +19,8 @@ def check(name, prev, nxt, ctx, form, subs, rtl=False):
     print("row", name)
 m = -(p / 2)   # −π/2 は −(π/2)
 # −π/2 < 0 の鎖の 1 行目。文脈は式全体の穴。
-check("−π/2 の鎖: −π/2 = −π/2 + 0（x + 0 = x の x → −π/2 を右辺から左辺へ）",
-      m, m + 0, lambda u: u, add_right, [m], rtl=True)
-assert add_right(p)[0] == add_right(p)[1]
+check("−π/2 の鎖: −π/2 = 0 + (−π/2)（0 + x = x の x → −π/2 を右辺から左辺へ）",
+      m, 0 + m, lambda u: u, add_left, [m], rtl=True)
+assert add_left(p)[0] == add_left(p)[1]
 assert m + 1 != m   # 対照: 単位元でない元を足すと変わる
 print("RESULT: PASS")

@@ -5821,8 +5821,12 @@ x - \pi/2
 (\pi + \pi/2) - x
 &= (\pi + \pi/2) + (-x)
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to \pi + \pi/2,\ z \to x)\bigr)\\
-&< (\pi + \pi/2) + (-\pi)
-&&\bigl(\because\ \text{準備の第一の}\ -x < -\pi\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a < b \Rightarrow c + a < c + b\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to -x,\ b \to -\pi,\ c \to \pi + \pi/2\bigr)\\
+&= (-x) + (\pi + \pi/2)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ x + y = y + x\ (x \to \pi + \pi/2,\ y \to -x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&< (-\pi) + (\pi + \pi/2)
+&&\bigl(\because\ \text{準備の第一の}\ -x < -\pi\ \text{に}\ \blkref{real_less_than_preserved_by_adding_on_right}\ (x \to -x,\ y \to -\pi,\ c \to \pi + \pi/2)\bigr)\\
+&= (\pi + \pi/2) + (-\pi)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ x + y = y + x\ (x \to -\pi,\ y \to \pi + \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= \pi/2
 &&\bigl(\because\ \text{準備の第二}\bigr)
 \end{aligned}`),
@@ -5831,8 +5835,12 @@ x - \pi/2
 (\pi + \pi/2) - x
 &= (\pi + \pi/2) + (-x)
 &&\bigl(\because\ \blkref{def_real_difference}\ (y \to \pi + \pi/2,\ z \to x)\bigr)\\
-&> (\pi + \pi/2) + \bigl(-(2\pi)\bigr)
-&&\bigl(\because\ \text{準備の第一の}\ -(2\pi) < -x\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ a < b \Rightarrow c + a < c + b\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ a \to -(2\pi),\ b \to -x,\ c \to \pi + \pi/2\bigr)\\
+&= (-x) + (\pi + \pi/2)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ x + y = y + x\ (x \to \pi + \pi/2,\ y \to -x)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&> \bigl(-(2\pi)\bigr) + (\pi + \pi/2)
+&&\bigl(\because\ \text{準備の第一の}\ -(2\pi) < -x\ \text{に}\ \blkref{real_less_than_preserved_by_adding_on_right}\ (x \to -(2\pi),\ y \to -x,\ c \to \pi + \pi/2)\bigr)\\
+&= (\pi + \pi/2) + \bigl(-(2\pi)\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ x + y = y + x\ (x \to -(2\pi),\ y \to \pi + \pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (\pi + \pi/2) + \bigl(-(\pi + \pi)\bigr)
 &&\bigl(\because\ \blkref{real_sum_of_two_equal_terms_is_twice}\ (a \to \pi)\ \text{を右辺から左辺へ}\bigr)\\
 &= (\pi + \pi/2) + \bigl((-\pi) + (-\pi)\bigr)
@@ -5874,6 +5882,7 @@ x - \pi/2
       status: "added",
       notes: [
         "2026-11-21（Lean の通しの証明のゴールラインの確認、状態台帳の「本文が定義のブロック無しに使っている語の解消」の全実数上の sin・cos の件）: 原文（Typst）に対応ブロックは無い。def_sin_on_all_reals・def_cos_on_all_reals の二つ目の場合の引数が def_sin・def_cos の定義域に入ることを示すために足した。Lean の具体版はまだ無い。証明は π の性質を使わない（0 < π も使わない）ので、π を実数の変数に置いた形で人手と 1 対 1 の具体版を置ける。状態台帳の同じ件の次の一歩とした。数値検証: sagemath/check/reflected_real_section_in_principal_interval/。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a) の左から足す形）: 右側・左側の鎖の不等号の行は、左から足す形 a < b ⇒ c + a < c + b を「ℝ の順序と加法の両立（ℝ は順序体 set_and_algebra_notation）」として名前だけで引いていた（set_and_algebra_notation の両立は ≤ の右から足す形だけ）。それぞれを、加法の交換律（c + (−x) を (−x) + c へ）・real_less_than_preserved_by_adding_on_right（右から c を足す）・加法の交換律（戻す）の 3 行に割った（各鎖は 1 行が 3 行）。鎖の両端と主張は不変。Lean の具体版は無い。数値検証: sagemath/check/reflected_real_section_in_principal_interval/check_proof_lines.sage",
       ],
     },
   },

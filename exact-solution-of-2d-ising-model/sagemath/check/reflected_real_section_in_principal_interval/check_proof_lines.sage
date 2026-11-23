@@ -1,6 +1,7 @@
 # 対象ラベル: reflected_real_section_in_principal_interval
 # pi < x < 2pi なら -pi/2 <= (pi + pi/2) - x <= pi/2。準備の第一（符号反転 2 件）・第二（4 行）、
-# 右側の鎖（3 行）・左側の鎖（11 行）を確かめる。
+# 右側の鎖（5 行）・左側の鎖（13 行）を確かめる。不等号の行は、加法の可換律で足す数を右へ移し、
+# real_less_than_preserved_by_adding_on_right（x < y ⇒ x + c < y + c）を当て、可換律で戻す 3 行である。
 # 帰属: 等号は QQ[pi_, x_] で厳密。不等号の行は差の多項式で当てはめを確かめ、x = q*pi（1 < q < 2）の点で符号を QQ で判定する。
 R.<pi_, x_> = PolynomialRing(QQ)
 h = pi_ / 2
@@ -15,13 +16,13 @@ assert (-pi_) - (-x_) == x_ - pi_ and (-x_) - (-(2 * pi_)) == 2 * pi_ - x_
 # 準備の第二
 eq_chain([c + (-pi_), (h + pi_) + (-pi_), h + (pi_ + (-pi_)), h + 0, h])
 # 右側
-eq_chain([c - x_, c + (-x_)])
-assert (c + (-pi_)) - (c + (-x_)) == (-pi_) - (-x_)     # 2 行目の当てはめ（a -> -x, b -> -pi）
-eq_chain([c + (-pi_), h])
+eq_chain([c - x_, c + (-x_), (-x_) + c])                 # def_real_difference、加法の交換律
+assert ((-pi_) + c) - ((-x_) + c) == (-pi_) - (-x_)     # 3 行目の当てはめ（x -> -x, y -> -pi, c -> pi + pi/2 を右から足す）
+eq_chain([(-pi_) + c, c + (-pi_), h])                   # 加法の交換律、準備の第二
 # 左側
-eq_chain([c - x_, c + (-x_)])
-assert (c + (-x_)) - (c + (-(2 * pi_))) == (-x_) - (-(2 * pi_))   # 2 行目の当てはめ（a -> -(2pi), b -> -x）
-eq_chain([c + (-(2 * pi_)), c + (-(pi_ + pi_)), c + ((-pi_) + (-pi_)),
+eq_chain([c - x_, c + (-x_), (-x_) + c])                 # def_real_difference、加法の交換律
+assert ((-x_) + c) - ((-(2 * pi_)) + c) == (-x_) - (-(2 * pi_))   # 3 行目の当てはめ（x -> -(2pi), y -> -x, c -> pi + pi/2 を右から足す）
+eq_chain([(-(2 * pi_)) + c, c + (-(2 * pi_)), c + (-(pi_ + pi_)), c + ((-pi_) + (-pi_)),
           (c + (-pi_)) + (-pi_), h + (-pi_), h + (-(h + h)), h + ((-h) + (-h)),
           (h + (-h)) + (-h), 0 + (-h), -h])
 for k in range(1, 16):

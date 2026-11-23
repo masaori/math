@@ -14,8 +14,8 @@
 |---|---|---|---|---|
 | 準備の第一（符号反転 `−x < −π`、`−(2π) < −x`） | `check_proof_lines.sage` | 差が仮定の差 `x − π`・`2π − x` に一致 | **PASS** | 厳密 |
 | 準備の第二の 4 行（交換律、結合律、逆元、単位元） | 同上 | `QQ[π, x]` で一致 | **PASS** | 厳密 |
-| 右側の鎖 3 行（`def_real_difference`、順序と加法の両立、準備の第二） | 同上 | 等号は多項式、不等号は差が `(−π) − (−x)` に一致 | **PASS** | 厳密 |
-| 左側の鎖 11 行（`def_real_difference`、順序と加法の両立、`real_sum_of_two_equal_terms_is_twice`、`real_negation_of_sum_is_sum_of_negations`、結合律、準備の第二、`real_half_plus_half_is_original`、逆元、単位元） | 同上 | 等号は多項式、不等号は差が `(−x) − (−(2π))` に一致 | **PASS** | 厳密 |
+| 右側の鎖 5 行（`def_real_difference`、加法の交換律、`real_less_than_preserved_by_adding_on_right`（右から `π + π/2` を足す）、加法の交換律、準備の第二） | 同上 | 等号は多項式、不等号は差が `(−π) − (−x)` に一致 | **PASS** | 厳密 |
+| 左側の鎖 13 行（`def_real_difference`、加法の交換律、`real_less_than_preserved_by_adding_on_right`（右から `π + π/2` を足す）、加法の交換律、`real_sum_of_two_equal_terms_is_twice`、`real_negation_of_sum_is_sum_of_negations`、結合律、準備の第二、`real_half_plus_half_is_original`、逆元、単位元） | 同上 | 等号は多項式、不等号は差が `(−x) − (−(2π))` に一致 | **PASS** | 厳密 |
 | 主張 | 同上 | `x = (1 + k/16)π`（`1 ≤ k ≤ 15`）で狭義の両側の不等号 | **PASS** | 15 点 |
 | 否定の対照 | 同上 | 準備の第二で `−π/2` を足すと `π/2` にならない。`x = π/2` で右側が、`x = 9π/4` で左側が崩れる | **PASS** | 3 件 |
 
@@ -30,4 +30,4 @@
 bash sagemath/tools/run-all-checks.sh reflected_real_section_in_principal_interval
 ```
 
-実行ログは `logs/` に保存する（2026-11-21、SageMath 10.9）。
+実行ログは `logs/` に保存する（2026-11-23、SageMath 10.9）。

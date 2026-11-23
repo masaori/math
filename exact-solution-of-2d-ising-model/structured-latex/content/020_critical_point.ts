@@ -1630,12 +1630,10 @@ t
       paragraph(["主張の左側の不等号 ", math(String.raw`-\pi/2 \leq 0`), " を示す。"]),
       displayMath(String.raw`\begin{aligned}
 -\pi/2
-&= -\pi/2 + 0
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ x + 0 = x\ (x \to -\pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
-&< -\pi/2 + \pi/2
-&&\bigl(\because\ \text{上の}\ 0 < \pi/2\ \text{と、}\mathbb{R}\ \text{の順序と加法の両立}\ x < y \Rightarrow c + x < c + y\ \text{（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）の}\ x \to 0,\ y \to \pi/2,\ c \to -\pi/2\bigr)\\
-&= \pi/2 + (-\pi/2)
-&&\bigl(\because\ \mathbb{R}\ \text{の加法の可換律}\ a + b = b + a\ \text{（}\blkref{set_and_algebra_notation}\text{）の}\ a \to -\pi/2,\ b \to \pi/2\bigr)\\
+&= 0 + (-\pi/2)
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -\pi/2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&< \pi/2 + (-\pi/2)
+&&\bigl(\because\ \text{上の}\ 0 < \pi/2\ \text{に}\ \blkref{real_less_than_preserved_by_adding_on_right}\ (x \to 0,\ y \to \pi/2,\ c \to -\pi/2)\bigr)\\
 &= 0
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to \pi/2)\bigr)
 \end{aligned}`),
@@ -1660,6 +1658,7 @@ t
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 0 < π/2 の鎖の根拠「x < y, c > 0 ⇒ x/c < y/c」は順序体の公理ではなく導いた事実だったので、準備に 0 < 2^{-1}（正の数の逆数は正）を置き、鎖を 0 < π·2^{-1}（正の数どうしの積は正）= π/2（def_real_quotient を右辺から左辺へ）の 2 行に替えた（1 行目の 0 = 0/2 は要らなくなったので外した）。−π/2 < 0 の鎖の a + 0 = a・順序と加法の両立に set_and_algebra_notation の参照を付け、「−a + a = 0」の 1 行を加法の可換則と def_real_difference の加法の逆元の 2 行に割った。鎖の両端と主張は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 準備の 2 ≠ 0・0 < 2 と「ℝ で正の数の逆数は正」の名前だけの根拠を、2 を def_real_two の 1 + 1 と明記したうえで real_two_is_nonzero・real_zero_less_than_two・新しく足した主張 real_inverse_of_positive_is_positive（a → 2）の参照に替えた。準備の結論 0 < 2^{-1} と鎖・主張は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: −π/2 < 0 の鎖の 1 行目で、ℝ の加法の単位元を set_and_algebra_notation で引く根拠が、使った式 −π/2 + 0 = −π/2 を参照の後ろに置き、形と代入を書いていなかったので、000_calculation_formulae_20_29.ts の同じ行と同じ「0 は ℝ の加法の単位元 形 (代入)（参照）」の並びにした（x + 0 = x の x → −π/2 を右辺から左辺へ）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
+        "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a) の左から足す形）: −π/2 < 0 の鎖は、左から足す形 x < y ⇒ c + x < c + y を「ℝ の順序と加法の両立（ℝ は順序体 set_and_algebra_notation）」として名前だけで引いていた（set_and_algebra_notation の両立は ≤ の右から足す形だけ）。1 行目を加法の単位元 0 + x = x（x → −π/2）を右辺から左辺へ当てる −π/2 = 0 + (−π/2) にし、不等号の行を real_less_than_preserved_by_adding_on_right（x → 0, y → π/2, c → −π/2）で 0 + (−π/2) < π/2 + (−π/2) とした。これで加法の可換律の行が要らなくなった（4 行が 3 行）。鎖の両端と主張は不変。数値検証: sagemath/check/zero_in_closed_interval_from_minus_half_pi_to_half_pi/",
       ],
     },
   },
