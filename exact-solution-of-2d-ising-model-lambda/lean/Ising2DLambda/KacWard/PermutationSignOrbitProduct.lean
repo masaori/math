@@ -118,9 +118,15 @@ private lemma mem_orbitTail_iff (σ : Equiv.Perm ι) (e : ι) {x : ι} :
 /-- 人手証明の「右辺の向き付き辺は相異なり」。基点と反復列を合わせた列は重複しない。 -/
 private lemma nodup_cons_orbitTail (σ : Equiv.Perm ι) (e : ι) :
     (e :: orbitTail σ e).Nodup := by
-  have hdistinct : ∀ j l, j < l → l < orbitPeriod σ e → (⇑σ)^[j] e ≠ (⇑σ)^[l] e :=
-    orbit_iterates_distinct σ.injective
-      (fun k hk1 hk => iterate_ne_of_lt_orbitPeriod σ e hk1 hk)
+  have hdistinct : ∀ j l, j < l → l < orbitPeriod σ e → (⇑σ)^[j] e ≠ (⇑σ)^[l] e := by
+    intro j l hjl hl hsame
+    have hsplit : (⇑σ)^[j] ((⇑σ)^[l - j] e) = (⇑σ)^[l] e := by
+      rw [← Function.iterate_add_apply]
+      congr 1
+      omega
+    have hreturn : (⇑σ)^[l - j] e = e :=
+      (σ.injective.iterate j) (by rw [hsplit, ← hsame])
+    exact iterate_ne_of_lt_orbitPeriod σ e (by omega) (by omega) hreturn
   rw [List.nodup_cons]
   constructor
   · intro hmem
