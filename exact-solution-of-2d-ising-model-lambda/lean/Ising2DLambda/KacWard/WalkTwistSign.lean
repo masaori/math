@@ -6,7 +6,6 @@
 ねじれ符号を使う。証明は本文と同じ有限積の帰納法である。
 -/
 import Ising2DLambda.KacWard.TerminalMatrix
-import Ising2DLambda.NecSuf.KacWard.WalkTwistSign
 
 namespace Ising2DLambda.KacWard
 
@@ -19,12 +18,6 @@ theorem edgeSequenceSeamParities_apply {L : ℕ} (walk : List (OrientedEdge L)) 
     edgeSequenceSeamParities walk =
       ((walk.map horizontalSeamParity).sum % 2,
         (walk.map verticalSeamParity).sum % 2) := rfl
-
-theorem edgeSequenceSeamParities_from_necSuf {L : ℕ}
-    (walk : List (OrientedEdge L)) :
-    edgeSequenceSeamParities walk =
-      Ising2DLambda.NecSuf.KacWard.edgeSequenceSeamParities
-        horizontalSeamParity verticalSeamParity walk := rfl
 
 private lemma negOnePow_mod_two (n : ℕ) :
     (-1 : ℤ) ^ n = (-1 : ℤ) ^ (n % 2) := by
@@ -53,14 +46,5 @@ theorem walkTwistSign_product {L : ℕ} (s : SpinStructure)
   congr 1
   rcases s with ⟨a, b⟩
   cases a <;> cases b <;> simp [Bool.toNat, Nat.add_mod]
-
-theorem walkTwistSign_product_from_necSuf {L : ℕ} (a b : Bool)
-    (horizontal vertical : OrientedEdge L → Bool) (walk : List (OrientedEdge L)) :
-    (walk.map (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical)).prod =
-      Ising2DLambda.NecSuf.KacWard.boolSign
-        (Bool.xor
-          (a && Ising2DLambda.NecSuf.KacWard.parity horizontal walk)
-          (b && Ising2DLambda.NecSuf.KacWard.parity vertical walk)) :=
-  Ising2DLambda.NecSuf.KacWard.walkTwistSign_product_necSuf a b horizontal vertical walk
 
 end Ising2DLambda.KacWard

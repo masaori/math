@@ -1267,10 +1267,13 @@ import Ising2DLambda.NecSuf.KacWard.DeterminantTermNonzero
 import Ising2DLambda.KacWard.DeterminantTermNonzero
 import Ising2DLambda.NecSuf.KacWard.FormalSquareRootUniqueness
 import Ising2DLambda.KacWard.FormalSquareRootUniqueness
+import Ising2DLambda.KacWard.FormalSquareRootUniquenessFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.FormalSquareRootExistence
 import Ising2DLambda.KacWard.FormalSquareRootExistence
+import Ising2DLambda.KacWard.FormalSquareRootExistenceFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.WalkTwistSign
 import Ising2DLambda.KacWard.WalkTwistSign
+import Ising2DLambda.KacWard.WalkTwistSignFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.ReversalDirectionShift
 import Ising2DLambda.KacWard.ReversalDirectionShift
 import Ising2DLambda.KacWard.Turn
@@ -1381,6 +1384,7 @@ import Ising2DLambda.NecSuf.KacWard.SignedOrbitTerm
 import Ising2DLambda.KacWard.SignedOrbitTerm
 import Ising2DLambda.NecSuf.KacWard.MovedOrbitWeightPhaseTwist
 import Ising2DLambda.KacWard.MovedOrbitWeightPhaseTwist
+import Ising2DLambda.KacWard.MovedOrbitWeightPhaseTwistFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.SignedEvenSubgraphSectorSum
 import Ising2DLambda.KacWard.SignedEvenSubgraphSectorSum
 import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven
@@ -1785,6 +1789,7 @@ import Ising2DLambda.NecSuf.KacWard.TaggedMatchingLabelRecovery
 import Ising2DLambda.NecSuf.KacWard.GaugePairWeightNonzero
 import Ising2DLambda.KacWard.GaugePairWeightNonzero
 import Ising2DLambda.KacWard.TwistSignNonzero
+import Ising2DLambda.KacWard.TwistSignNonzeroFromNecSuf
 import Ising2DLambda.KacWard.ShortPairRotationPhaseNonzero
 import Ising2DLambda.NecSuf.KacWard.TwistSignNonzero
 import Ising2DLambda.NecSuf.KacWard.ShortPairRotationPhaseNonzero
