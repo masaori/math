@@ -49555,7 +49555,6 @@ Z_L(q)
                   lean: [
                     "Ising2DLambda.FreeEntropy.freeEntropy_at_one",
                     "Ising2DLambda.FreeEntropy.partitionPolynomial_eval_one",
-                    "Ising2DLambda.FreeEntropy.logRat_two",
                   ],
                   verification: ["sagemath/check/free-entropy-additivity"],
                   statement: [
@@ -70058,11 +70057,21 @@ H^{a,b}_L(\xi)
 &&\bigl(\because\ s^2=2\ne0\bigr)
 \end{aligned}`),
                         paragraph([
-                          "また、",
-                          ref("def_critical_point"), " の不動点性により",
+                          "また、", math(String.raw`x_{\mathrm{sd}}`), " は自己双対方程式を満たす。",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+x_{\mathrm{sd}}^2+2x_{\mathrm{sd}}-1
+&=(-1+s)^2+2(-1+s)-1
+&&\bigl(\because\ x_{\mathrm{sd}}=-1+s\bigr)\\
+&=s\cdot s-2
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の環の演算}\bigr)\\
+&=2-2
+&&\bigl(\because\ s^2=2\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の加法}\bigr)
+\end{aligned}`),
                         displayMath(String.raw`\mathrm{KW}(x_{\mathrm{sd}})=x_{\mathrm{sd}}
-\qquad\bigl(\because\ \blkref{def_critical_point}\text{ の自己双対性}\bigr)`),
+\qquad\bigl(\because\ \blkref{claim_kw_self_dual_quadratic_equivalence}\text{、}1+x_{\mathrm{sd}}\ne0\text{、}x_{\mathrm{sd}}^2+2x_{\mathrm{sd}}-1=0\bigr)`),
                         paragraph([
                           "以上を使って、セクター双対関係へ ",
                           math(String.raw`\xi=x_{\mathrm{sd}}`), " を代入する。",
@@ -70302,13 +70311,21 @@ q&<1&&\bigl(\because\ \blkref{def_unit_interval_rationals}\bigr),\\
                       math(String.raw`0<q`),
                       " かつ ",
                       math(String.raw`q<1`),
-                      " であり、",
-                      ref("claim_kw_dual_preserves_unit_interval"),
-                      " の準備のとおり ",
-                      math(String.raw`1+q\ne0`),
-                      " であって ",
-                      math(String.raw`\mathrm{KW}(q)`),
-                      " が定義され、その値は ",
+                      " である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+1&<1+q&&\bigl(\because\ 0<q\text{ に }1\text{ を加える}\bigr),\\
+0&<1+q&&\bigl(\because\ 0<1<1+q\text{ と推移律}\bigr),\\
+1+q&\ne0&&\bigl(\because\ 0<1+q\text{ と狭義順序}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "よって ",
+                      ref("def_kw_dual_transform"),
+                      " の ",
+                      math(String.raw`\mathrm{KW}(q)=(1-q)\cdot(1+q)^{-1}`),
+                      " が定義され、",
+                      math(String.raw`\mathbb{Q}`),
+                      " の四則で閉じるので、その値は ",
                       math(String.raw`\mathbb{Q}`),
                       " の元である。まず等式 ",
                       math(String.raw`(1+q)\cdot\mathrm{KW}(q)=1-q`),
@@ -70446,10 +70463,10 @@ H^{a,b}_L(q)
                           " より ",
                           math(String.raw`q\in\mathbb{Q}_{>0}`),
                           " であり、",
-                          ref("claim_kw_dual_preserves_unit_interval"),
-                          " より ",
+                          ref("claim_sector_value_duality"),
+                          " の主張のとおり ",
                           math(String.raw`\mathrm{KW}(q)`),
-                          " が定義されて ",
+                          " は ",
                           math(String.raw`\mathbb{Q}`),
                           " の元である。以下の式変形はすべて ",
                           math(String.raw`\mathbb{Q}`),

@@ -10,6 +10,7 @@ Qbar の代数閉性で根を取る。
 -/
 import Ising2DLambda.ThermodynamicLimit.FisherZeroFinsetCardBound
 import Ising2DLambda.ThermodynamicLimit.IntegerPolynomialQbarLiftEvaluation
+import Ising2DLambda.PartitionPolynomial.CoefficientRepresentation
 
 namespace Ising2DLambda.FisherZero
 
@@ -74,6 +75,16 @@ theorem positive_multiplicity_exists (L : ℕ) [NeZero L] (hL : 2 ≤ L) :
   apply Finset.card_pos.mpr
   exact ⟨σ, by simp [m]⟩
 
+/-- 人手証明の「`claim_coefficient_representation` により `Z_L` の `m` 次の係数は `Ω_L(m)`」。
+`m ≤ 2L^2` の次数の係数を、係数表示の有限和から読む。 -/
+theorem partitionPolynomial_coeff_eq_multiplicity_of_le (L : ℕ) [NeZero L] {m : ℕ}
+    (hm : m ≤ 2 * L ^ 2) :
+    (partitionPolynomial L).coeff m = (PartitionPolynomial.multiplicity L m : ℤ) := by
+  rw [partitionPolynomial_eq_sum_multiplicity, Polynomial.finsetSum_coeff]
+  simp only [Polynomial.coeff_C_mul_X_pow]
+  rw [Finset.sum_ite_eq]
+  simp [Finset.mem_range, Nat.lt_succ_of_le hm]
+
 /-- `L ≥ 2` なら有限格子の Fisher 零点集合は空でない。 -/
 theorem fisherZeroSet_nonempty (L : ℕ) [NeZero L] (hL : 2 ≤ L) :
     (FisherZeroSet L).Nonempty := by
@@ -85,7 +96,7 @@ theorem fisherZeroSet_nonempty (L : ℕ) [NeZero L] (hL : 2 ≤ L) :
     rw [← hσ]
     exact brokenBondCount_le L σ
   have hcoeff : g.coeff m = (PartitionPolynomial.multiplicity L m : Qbar) := by
-    simp only [g, integerPolynomialQbarLift_coeff, partitionPolynomial_coeff L m, if_pos hmle]
+    simp only [g, integerPolynomialQbarLift_coeff, partitionPolynomial_coeff_eq_multiplicity_of_le L hmle]
     norm_num
   have hcoeffne : g.coeff m ≠ 0 := by
     rw [hcoeff]

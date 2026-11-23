@@ -1,6 +1,7 @@
 /-
 「分配多項式の値の双対分解」と「双対な点どうしの自由エントロピーの関係」の具体版。
-人手証明と同じく、四セクターの多項式恒等式を有理点で評価して共通因子を括り出し、
+人手証明と同じく、高温展開の多項式恒等式とセクター分解を有理点で評価し、
+四セクターの値の双対関係を適用して共通因子を括り出し、
 正値性を確認してから対数の加法性と冪の法則を一段ずつ適用する。
 住処は Q と Lambda であり、R / C は現れない。
 -/
@@ -25,42 +26,42 @@ lemma intPolynomialEval_eq_aeval (q : ℚ) (f : Polynomial ℤ) :
   rw [Polynomial.aeval_def]
   rfl
 
-/-- `claim_partition_value_dual_factorization` の具体版。 -/
+/-- `claim_partition_value_dual_factorization` の具体版。
+人手証明の鎖と同じく、高温展開の多項式恒等式（第 1 の等号）、セクター分解（第 2 の等号）、
+四つのセクターへのセクター多項式の値の双対関係（第 4 の等号）、共通因子の括り出し（第 5 の等号）の順に進む。 -/
 theorem partitionValueDualFactorization (L : ℕ) [NeZero L]
     {q : ℚ} (hq : q ∈ unitIntervalRationals) :
     2 ^ (L ^ 2) * Polynomial.aeval q (partitionPolynomial L) =
       (1 + q) ^ (2 * L ^ 2) * dualSectorValueSum L q := by
-  have hLow := congrArg (intPolynomialEval q)
-    (partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial L)
-  have hMixed := congrArg (intPolynomialEval q) (highTemperatureSectorSum_eq_twoPow_mul_trivialSector L)
-  simp only [intPolynomialEval_add, intPolynomialEval_mul, intPolynomialEval_pow] at hLow hMixed
-  have hLow' : Polynomial.aeval q (partitionPolynomial L) =
-      2 * intPolynomialEval q (sectorGeneratingPolynomial L (0, 0)) := by
+  have hHigh := congrArg (intPolynomialEval q) (highTemperaturePolynomial_identity L)
+  have hDecomposition := congrArg (intPolynomialEval q) (highTemperatureSectorDecomposition L)
+  simp only [intPolynomialEval_add] at hDecomposition
+  simp only [intPolynomialEval_mul, intPolynomialEval_pow] at hHigh
+  have hTwo : intPolynomialEval q 2 = 2 := by
+    simp [intPolynomialEval]
+  rw [hTwo] at hHigh
+  have hHigh' : 2 ^ (L ^ 2) * Polynomial.aeval q (partitionPolynomial L) =
+      intPolynomialEval q (highTemperaturePolynomial L) := by
     rw [← intPolynomialEval_eq_aeval]
-    simpa [intPolynomialEval] using hLow
-  have hMixed' :
-      intPolynomialEval q (highTemperatureSectorPolynomial L (0, 0)) +
-          intPolynomialEval q (highTemperatureSectorPolynomial L (0, 1)) +
-          intPolynomialEval q (highTemperatureSectorPolynomial L (1, 0)) +
-          intPolynomialEval q (highTemperatureSectorPolynomial L (1, 1)) =
-        2 ^ (L ^ 2 + 1) *
-          intPolynomialEval q (sectorGeneratingPolynomial L (0, 0)) := by
-    simpa [intPolynomialEval] using hMixed
+    exact hHigh
   calc
     2 ^ (L ^ 2) * Polynomial.aeval q (partitionPolynomial L) =
-        2 ^ (L ^ 2) *
-          (2 * intPolynomialEval q (sectorGeneratingPolynomial L (0, 0))) := by rw [hLow']
-    _ = (2 ^ (L ^ 2) * 2) *
-          intPolynomialEval q (sectorGeneratingPolynomial L (0, 0)) := by rw [mul_assoc]
-    _ = 2 ^ (L ^ 2 + 1) *
-          intPolynomialEval q (sectorGeneratingPolynomial L (0, 0)) := by rw [← pow_succ]
+        intPolynomialEval q (highTemperaturePolynomial L) := hHigh'
     _ = intPolynomialEval q (highTemperatureSectorPolynomial L (0, 0)) +
           intPolynomialEval q (highTemperatureSectorPolynomial L (0, 1)) +
           intPolynomialEval q (highTemperatureSectorPolynomial L (1, 0)) +
-          intPolynomialEval q (highTemperatureSectorPolynomial L (1, 1)) := hMixed'.symm
-    _ = (1 + q) ^ (2 * L ^ 2) * dualSectorValueSum L q := by
+          intPolynomialEval q (highTemperatureSectorPolynomial L (1, 1)) := hDecomposition
+    _ = (1 + q) ^ (2 * L ^ 2) *
+            intPolynomialEval (kwDualRational q) (sectorGeneratingPolynomial L (0, 0)) +
+          (1 + q) ^ (2 * L ^ 2) *
+            intPolynomialEval (kwDualRational q) (sectorGeneratingPolynomial L (0, 1)) +
+          (1 + q) ^ (2 * L ^ 2) *
+            intPolynomialEval (kwDualRational q) (sectorGeneratingPolynomial L (1, 0)) +
+          (1 + q) ^ (2 * L ^ 2) *
+            intPolynomialEval (kwDualRational q) (sectorGeneratingPolynomial L (1, 1)) := by
       rw [sectorValueDuality L (0, 0) hq, sectorValueDuality L (0, 1) hq,
         sectorValueDuality L (1, 0) hq, sectorValueDuality L (1, 1) hq]
+    _ = (1 + q) ^ (2 * L ^ 2) * dualSectorValueSum L q := by
       simp only [dualSectorValueSum]
       ring
 
