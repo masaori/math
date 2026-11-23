@@ -142,10 +142,15 @@ theorem pairShiftValues_mem_subfieldCoefficientMvPolys (F : Subfield Qbar) {d N 
     pairShiftValues c π r ∈ subfieldCoefficientMvPolys F d := by
   have hi := X_mem_subfieldCoefficientMvPolys F (n := d) (π r).1.1
   have hj := X_mem_subfieldCoefficientMvPolys F (n := d) (π r).1.2
-  -- mk_d(c) · X_i · X_j ∈ F[X_{<d}]（積の閉性を二回）。
-  have hprod : C c * X (π r).1.1 * X (π r).1.2 ∈ subfieldCoefficientMvPolys F d :=
-    mul_mem_subfieldCoefficientMvPolys F
-      (mul_mem_subfieldCoefficientMvPolys F (C_mem_subfieldCoefficientMvPolys F hc) hi) hj
+  -- mk_d(c) · X_i · X_j ∈ F[X_{<d}]（三元の添字集合についての有限積の閉性）。
+  have hprod : C c * X (π r).1.1 * X (π r).1.2 ∈ subfieldCoefficientMvPolys F d := by
+    have h := prod_mem_subfieldCoefficientMvPolys F (Finset.univ : Finset (Fin 3))
+      ![C c, X (π r).1.1, X (π r).1.2]
+      (fun i _ => by
+        fin_cases i
+        exacts [C_mem_subfieldCoefficientMvPolys F hc, hi, hj])
+    simpa only [Fin.prod_univ_three, Matrix.cons_val_zero, Matrix.cons_val_one,
+      Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons] using h
   -- 三項の和（二元の和の閉性を二回）。
   have hadd : ∀ A B : QbarMvPoly d, A ∈ subfieldCoefficientMvPolys F d →
       B ∈ subfieldCoefficientMvPolys F d → A + B ∈ subfieldCoefficientMvPolys F d := by
@@ -167,11 +172,23 @@ theorem pairShiftElementarySymmetric_mem_subfieldCoefficientMvPolys (F : Subfiel
   -- T_a ∈ F[X_{<d}]。
   have hT : ∀ a ∈ (qbarElementarySymmetric N k).support,
       C (coeff a (qbarElementarySymmetric N k)) * ∏ r, pairShiftValues c π r ^ a r ∈
-        subfieldCoefficientMvPolys F d := fun a _ =>
-    mul_mem_subfieldCoefficientMvPolys F (C_mem_subfieldCoefficientMvPolys F (hes a))
-      (prod_mem_subfieldCoefficientMvPolys F Finset.univ _ (fun r _ =>
-        pow_mem_subfieldCoefficientMvPolys F
-          (pairShiftValues_mem_subfieldCoefficientMvPolys F hc π r) (a r)))
+        subfieldCoefficientMvPolys F d := by
+    intro a _
+    -- 冪 y(r)^{a_r} は a_r 個の同じ因子の有限積。
+    have hpow : ∀ r, pairShiftValues c π r ^ a r ∈ subfieldCoefficientMvPolys F d := by
+      intro r
+      have h := prod_mem_subfieldCoefficientMvPolys F (Finset.univ : Finset (Fin (a r)))
+        (fun _ => pairShiftValues c π r)
+        (fun _ _ => pairShiftValues_mem_subfieldCoefficientMvPolys F hc π r)
+      simpa only [Finset.prod_const, Finset.card_univ, Fintype.card_fin] using h
+    have hall := prod_mem_subfieldCoefficientMvPolys F Finset.univ _ (fun r _ => hpow r)
+    -- 定数と積の二元の積。
+    have h := prod_mem_subfieldCoefficientMvPolys F (Finset.univ : Finset (Fin 2))
+      ![C (coeff a (qbarElementarySymmetric N k)), ∏ r, pairShiftValues c π r ^ a r]
+      (fun i _ => by
+        fin_cases i
+        exacts [C_mem_subfieldCoefficientMvPolys F (hes a), hall])
+    simpa only [Fin.prod_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one] using h
   -- ms_y(es_{N,k}) = Σ_{a ∈ A} T_a ∈ F[X_{<d}]。
   have hexp : qbarMvSubst (pairShiftValues c π) (qbarElementarySymmetric N k) =
       ∑ a ∈ (qbarElementarySymmetric N k).support,

@@ -35849,12 +35849,6 @@ a\cdot a&=(-a)\cdot(-a)&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}
                             "この議論は ",
                             math(String.raw`\overline{\mathbb{Q}}`),
                             " の有限和と積だけで閉じ、実数体も複素数体も現れない。",
-                            math(String.raw`f=g`),
-                            "、",
-                            math(String.raw`a=b`),
-                            " とした場合が ",
-                            ref("claim_qbar_poly_square_top_coefficient"),
-                            " である。",
                           ]),
                         ],
                       },
@@ -36937,8 +36931,12 @@ T&:=\mathrm{Sq}(C_F;E)
                       "Ising2DLambda.FisherZero.maximalOrderedSubfield_oddDegreeRoot_from_necSuf",
                     ],
                     statement: [paragraph([
-                      ref("claim_enumerated_ordered_subfield_is_maximal"), " の極大な正錐付き部分体 ",
-                      math(String.raw`(R,C_R)`), " を取る。",
+                      "正錐付き部分体 ", math(String.raw`(R,C_R)`), "（",
+                      ref("def_subfield_positive_cone"), "）が極大である、すなわち ",
+                      math(String.raw`(R,C_R)`), " を延長する（", ref("def_positive_cone_extension"),
+                      "）任意の正錐付き部分体 ", math(String.raw`(E,D)`), " について ",
+                      math(String.raw`E=R`), " であるとする（", ref("claim_enumerated_ordered_subfield_is_maximal"),
+                      " の ", math(String.raw`(R,C_R)`), " はこれを満たす）。",
                       math(String.raw`n\in\mathbb N`), " と ", math(String.raw`f\in R[t]`),
                       "（", ref("def_subfield_coefficient_polynomials"), "）について、",
                       "ある ", math(String.raw`j\in\mathbb N`), " が ",
@@ -36970,7 +36968,7 @@ T&:=\mathrm{Sq}(C_F;E)
                         math(String.raw`(R,C_R)`), " を延長する。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
-E&=R&&(\because\ \blkref{claim_enumerated_ordered_subfield_is_maximal}\text{ の極大性})\\
+E&=R&&(\because\ (R,C_R)\text{ の極大性の仮定})\\
 \beta&\in E&&(\because\ \blkref{claim_subfield_polynomial_values_contains_element})\\
 \beta&\in R&&(\because\ E=R)
 \end{aligned}`),
@@ -47558,7 +47556,7 @@ q&\in R&&\bigl(\because\ q=k\cdot n^{-1}\text{ の代入}\bigr).
                               ]),
                             ],
                             proof: [
-                              paragraph(["背理法による。", math(String.raw`w\in R`), " が ", math(String.raw`w\ne0`), " かつ ", math(String.raw`w\cdot w=-1`), " を満たすと仮定し、", math(String.raw`z:=1\in R`), " と置く。", ref("claim_rationals_are_real_algebraic"), " により ", math(String.raw`z\in R`), " である。"]),
+                              paragraph(["背理法による。", math(String.raw`w\in R`), " が ", math(String.raw`w\ne0`), " かつ ", math(String.raw`w\cdot w=-1`), " を満たすと仮定し、", math(String.raw`z:=1`), " と置く。", math(String.raw`R`), " は部分体なので乗法単位元を含み（", ref("def_real_closed_subfield"), " の第 1 条件）、", math(String.raw`z\in R`), " である。"]),
                               displayMath(String.raw`\begin{aligned}
 z&=1&&\bigl(\because\ z\text{ の定義}\bigr)\\
 &=1\cdot1&&\bigl(\because\ \text{乗法単位元則}\bigr).
@@ -71185,8 +71183,7 @@ m&=b(\sigma_{\mathrm{flip}})
                       ref("def_real_closed_subfield"), " の第 4 条件により ",
                       math(String.raw`s=a+b\cdot\omega`), " を満たす組 ",
                       math(String.raw`(a,b)\in R\times R`), " がちょうど 1 つ取れる。",
-                      ref("claim_real_closed_sum_of_two_squares_is_square"),
-                      " の証明と同じ展開により",
+                      "積を展開して",
                     ]),
                     displayMath(String.raw`\begin{aligned}
 2&=s\cdot s&&\bigl(\because\ s\cdot s=2\bigr)\\

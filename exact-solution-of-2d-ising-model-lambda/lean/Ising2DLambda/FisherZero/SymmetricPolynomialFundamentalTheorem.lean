@@ -59,7 +59,11 @@ theorem fundamentalRemainder_mem (F : Subfield Qbar) {n : ℕ} {P Q₁ : QbarMvP
   -- se_{n+1}(Q_1) ∈ F[X_{<n+1}]（claim_elementary_symmetric_substitution_subfield_coefficient）。
   have hse := elementarySymmetricSubst_mem_subfieldCoefficientMvPolys F Q₁ hQ₁
   -- 積（claim_subfield_coefficient_multivariate_finite_product の二元の場合）。
-  have hmul := mul_mem_subfieldCoefficientMvPolys F hC hse
+  have hmul : (C (-1) : QbarMvPoly (n + 1)) * elementarySymmetricSubst (n + 1) Q₁ ∈
+      subfieldCoefficientMvPolys F (n + 1) := by
+    have h := prod_mem_subfieldCoefficientMvPolys F (Finset.univ : Finset (Fin 2))
+      ![C (-1), elementarySymmetricSubst (n + 1) Q₁] (fun i _ => by fin_cases i; exacts [hC, hse])
+    simpa only [Fin.prod_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one] using h
   -- 和（claim_subfield_coefficient_multivariate_finite_sum の二元の場合）。
   have h := sum_mem_subfieldCoefficientMvPolys F (Finset.univ : Finset (Fin 2))
     ![P, C (-1) * elementarySymmetricSubst (n + 1) Q₁] (fun i _ => by fin_cases i; exacts [hP, hmul])
@@ -216,8 +220,13 @@ theorem symmetricPolynomialFundamental_succ (F : Subfield Qbar) (n : ℕ)
         _ ≤ d := hRdeg
     obtain ⟨Q₂, hQ₂F, hQ₂eq, hQ₂deg⟩ := ihd (qbarTotalDegree S) hSlt S rfl hSF hSsym
     -- Q := Q_1 + X^{(n+1)}_n · Q_2 の所属（変数・二元の積・二元の和）。
-    have hXQ₂F := mul_mem_subfieldCoefficientMvPolys F (X_mem_subfieldCoefficientMvPolys F (Fin.last n))
-      hQ₂F
+    have hXQ₂F : X (Fin.last n) * Q₂ ∈ subfieldCoefficientMvPolys F (n + 1) := by
+      have h := prod_mem_subfieldCoefficientMvPolys F (Finset.univ : Finset (Fin 2))
+        ![X (Fin.last n), Q₂]
+        (fun i _ => by
+          fin_cases i
+          exacts [X_mem_subfieldCoefficientMvPolys F (Fin.last n), hQ₂F])
+      simpa only [Fin.prod_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one] using h
     have hQF : Q₁ + X (Fin.last n) * Q₂ ∈ subfieldCoefficientMvPolys F (n + 1) := by
       have h := sum_mem_subfieldCoefficientMvPolys F (Finset.univ : Finset (Fin 2))
         ![Q₁, X (Fin.last n) * Q₂] (fun i _ => by fin_cases i; exacts [hQ₁F, hXQ₂F])
