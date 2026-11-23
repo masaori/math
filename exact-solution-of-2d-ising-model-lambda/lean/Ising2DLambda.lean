@@ -1378,6 +1378,7 @@ import Ising2DLambda.NecSuf.KacWard.TermOrbitWeightFactorization
 import Ising2DLambda.KacWard.TermOrbitWeightFactorization
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 import Ising2DLambda.KacWard.PermutationSignOrbitProduct
+import Ising2DLambda.KacWard.PermutationSignOrbitProductFromNecSuf
 import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSetFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.SignedOrbitTerm

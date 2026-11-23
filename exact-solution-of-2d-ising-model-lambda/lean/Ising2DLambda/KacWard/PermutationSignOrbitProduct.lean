@@ -11,7 +11,6 @@
    具体版の符号の有限積則を適用して積表示を得る。
 -/
 import Ising2DLambda.KacWard.MovedOrbitPartition
-import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationMinimalPeriod
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
@@ -20,7 +19,6 @@ namespace Ising2DLambda.KacWard
 
 open Finset
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue
-open Ising2DLambda.NecSuf.KacWard
 open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
   (finiteOrderedPairs finiteOrderedInversionCount finiteOrderedSign
     finiteOrderedSign_comp finiteOrderedSign_noncommProd)
@@ -468,11 +466,5 @@ theorem sign_movedEdgeOrbit_product (σ : Equiv.Perm ι) :
     _ = ∏ O ∈ s, finiteOrderedSign (f O) := finiteOrderedSign_noncommProd s f hcomm
     _ = ∏ O ∈ s, (-1 : ℤ) ^ (O.card - 1) := by
       exact Finset.prod_congr rfl (fun O hO => (hchain O hO).2.2)
-
-/-- 導出版: 同じ積表示を必要十分版から得たことの明示。 -/
-theorem sign_movedEdgeOrbit_product_from_necSuf (σ : Equiv.Perm ι) :
-    sign (fun x y : ι => x < y) σ =
-      ∏ O ∈ movedEdgeOrbitSet σ, (-1 : ℤ) ^ (O.card - 1) :=
-  sign_movedEdgeOrbit_product σ
 
 end Ising2DLambda.KacWard

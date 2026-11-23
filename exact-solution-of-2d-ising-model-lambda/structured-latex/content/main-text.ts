@@ -3519,7 +3519,7 @@ r\cdot\nu
 &=(c+r)\cdot\nu
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }(r+s)\cdot\lambda=r\cdot\lambda+s\cdot\lambda)\\
 &=s\cdot\nu
-&&(\because\ c+r=(s-r)+r=s\text{。}\mathbb{Q}\text{ の四則})
+&&(\because\ c+r=(s-r)+r=s\text{、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                               paragraph([
                                 "等号の行は左辺と右辺が ",
