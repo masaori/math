@@ -58,6 +58,11 @@ theorem matchingPairSignComposition (τ υ : FixedPointFreeInvolution J)
   have hE := matchingPairWordOrientationSign_forEnumeration E lE hEenum T
   rw [hfirst] at hmap
   rw [hsecond] at hmap
+  change matchingWordSign (lE.flatMap (fun p =>
+      if p.1 ∈ T then [p.1, p.2] else [p.2, p.1])) =
+    sign (fun x y : J => x < y) (matchingPairPermutation τ υ) *
+      matchingWordSign (lD.flatMap (fun p =>
+        if p.1 ∈ S then [p.1, p.2] else [p.2, p.1])) at hmap
   calc
     sign (fun x y : J => x < y) (matchingPairPermutation τ υ) =
         sign (fun x y : J => x < y) (matchingPairPermutation τ υ) *

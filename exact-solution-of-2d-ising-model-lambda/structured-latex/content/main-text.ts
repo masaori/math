@@ -20999,7 +20999,9 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
                       paragraph(["が成り立つ。空集合では三つの符号は一である。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_matching_pair_word_map"), " により、", math(String.raw`W_\upsilon(w)=\sigma(W_\tau(w))`), " である。", ref("def_matching_word_sign"), " の昇順基準列の各元 ", math(String.raw`j_k\in\mathcal J`), " において、", math(String.raw`\pi_{\sigma(W_\tau(w))}(j_k)=\sigma(\pi_{W_\tau(w)}(j_k))`), " だから、二つの置換は ", math(String.raw`\pi_{\sigma(W_\tau(w))}=\sigma\circ\pi_{W_\tau(w)}`), " と等しい。よって"]),
+                      paragraph([ref("claim_matching_pair_word_map"), " により、", math(String.raw`W_\upsilon(w)=\sigma(W_\tau(w))`), " である。", ref("def_matching_word_sign"), " の昇順基準列の各元 ", math(String.raw`j_k\in\mathcal J`), " について"]),
+                      displayMath(String.raw`\pi_{\sigma(W_\tau(w))}(j_k)=\sigma(\pi_{W_\tau(w)}(j_k))\quad\bigl(\because\ \text{列の各元への写像の定義}\bigr)`),
+                      paragraph(["が成り立つ。すべての ", math(String.raw`j_k\in\mathcal J`), " で値が等しいので ", math(String.raw`\pi_{\sigma(W_\tau(w))}=\sigma\circ\pi_{W_\tau(w)}`), " である。よって"]),
                       displayMath(String.raw`\begin{aligned}
 \varepsilon(W_\upsilon(w))
 &=\varepsilon(\sigma(W_\tau(w)))
