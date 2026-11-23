@@ -65,3 +65,6 @@ Star.star@Complex@StarRing.toStarAddMonoid	def_complex_conjugate
 # ℝ の 2: def_real_two が 2 := 1 + 1 と定める。mathlib の ℝ の数字 2 は Nat.cast 2 を通して定められており 1 + 1 と定義として等しくないが、
 # 一致を補題一本 real_two_eq_one_add_one（DefinitionRealTwo.lean）で示した。
 OfNat.ofNat@Real,2@instOfNatAtLeastTwo	def_real_two
+# ℂ の 2: inclusion_rr_to_cc が略記 r_ℂ の特別な場合として 2_ℂ := (2_ℝ)_ℂ と定める（2_ℝ は def_real_two）。mathlib の ℂ の数字 2 は
+# Nat.cast 2 を通して定められており ((2 : ℝ) : ℂ) と定義として等しくないが、一致を補題一本 complex_two_eq_ofReal_two（DefinitionComplexNumbers.lean）で示した。
+OfNat.ofNat@Complex,2@instOfNatAtLeastTwo	inclusion_rr_to_cc

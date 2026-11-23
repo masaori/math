@@ -14,7 +14,7 @@
 * `zero_matrix_is_left_zero_of_mat_mult` の成分の鎖の 5 行は、`zero_matrix_mul_apply` の `calc` の 5 段と 1 対 1 である。
   `0_ℂ z = 0_ℂ`（`complex_zero_times_is_zero`）は `zero_mul`、`Σ_{j=1}^{n} 0_ℂ = 0_ℂ`（`finite_sum_of_complex_zeros`）は
   `Finset.sum_const_zero` で出す（どちらも人手の主張に Lean の具体版が無い。`identity_matrix_mul_apply` と同じ扱い）。
-* `matrix_sum_with_itself_zero_implies_zero` の準備の `2_ℂ := ι(2)` は `complexTwo`、成分の鎖の 4 行目が引く `one_plus_one_is_two_in_cc`
+* `matrix_sum_with_itself_zero_implies_zero` の準備の `2_ℂ = ι(2)` は `complexTwo`、成分の鎖の 4 行目が引く `one_plus_one_is_two_in_cc`
   は、具体版 `complex_one_add_one` を `complexTwo` の書き方へ読む `one_add_one_eq_complexTwo`、
   `2_ℂ ≠ 0_ℂ` の鎖は `complexTwo_ne_zero`、逆元 `2_ℂ^{-1}` の取り方（`complex_numbers_form_a_field` の逆元の存在）は `inv_mul_cancel₀` である。
   成分の鎖の 11 行は `matrix_eq_zero_of_add_self_eq_zero_apply` の 11 段と 1 対 1 である。
@@ -49,7 +49,7 @@ theorem zero_matrix_mul {m n p : ℕ} (B : Matrix (Fin n) (Fin p) ℂ) :
     (0 : Matrix (Fin m) (Fin n) ℂ) * B = 0 :=
   Matrix.ext (zero_matrix_mul_apply B)   -- 全ての成分が一致する
 
-/-- 人手 `matrix_sum_with_itself_zero_implies_zero` の証明の `2_ℂ := ι_{ℝ→ℂ}(2) = (2, 0)`（`inclusion_rr_to_cc` の略記）。 -/
+/-- 人手 `matrix_sum_with_itself_zero_implies_zero` の証明の `2_ℂ = ι_{ℝ→ℂ}(2) = (2, 0)`（`inclusion_rr_to_cc` の略記）。 -/
 def complexTwo : ℂ := ⟨2, 0⟩
 
 /-- `one_plus_one_is_two_in_cc`（`1_ℂ + 1_ℂ = 2_ℂ`）を、右辺の `2_ℂ` を `complexTwo := (2, 0)` と書いて読んだもの。

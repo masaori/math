@@ -91,13 +91,13 @@ theorem c_add_c_eq_I_mul (κ c : ℂ) (hc : c = (Complex.I * ((2 : ℝ) : ℂ)�
         rw [one_mul]                                    -- `1_ℂ` は積の単位元
 
 /-- `def_V1_plus_square_root` の `i/2` の読み `i·2_ℂ^{-1}`: Lean の定義の係数 `(1/2 : ℂ) * √-1` を人手の `i·2_ℂ^{-1}` へ直す。
-Lean の `(1 / 2 : ℂ)` を `((1/2 : ℝ) : ℂ)` と読み（包含が商・`1`・`2` を保つ mathlib の `Complex.ofReal_div`・`Complex.ofReal_one`・`Complex.ofReal_ofNat`）、
+Lean の `(1 / 2 : ℂ)` を `((1/2 : ℝ) : ℂ)` と読み（包含が商・`1`・`2` を保つ mathlib の `Complex.ofReal_div`・`Complex.ofReal_one` と、`2_ℂ := (2_ℝ)_ℂ` の `complex_two_eq_ofReal_two`）、
 `real_inclusion_of_one_half_is_inverse_of_two` と積の可換律を引く。 -/
 theorem V1plusHalf_coeff_eq (K1 : ℂ) :
     (1 / 2 : ℂ) * Complex.I * K1 = (Complex.I * ((2 : ℝ) : ℂ)⁻¹) * K1 :=
   calc (1 / 2 : ℂ) * Complex.I * K1
       = ((1 / 2 : ℝ) : ℂ) * Complex.I * K1 := by
-        rw [Complex.ofReal_div, Complex.ofReal_one, Complex.ofReal_ofNat]
+        rw [Complex.ofReal_div, Complex.ofReal_one, ← complex_two_eq_ofReal_two]
                                                         -- Lean の `(1/2 : ℂ)` を `(1/2)_ℂ` と読む
     _ = ((2 : ℝ) : ℂ)⁻¹ * Complex.I * K1 := by
         rw [real_inclusion_half_eq_inv_two]             -- `real_inclusion_of_one_half_is_inverse_of_two`

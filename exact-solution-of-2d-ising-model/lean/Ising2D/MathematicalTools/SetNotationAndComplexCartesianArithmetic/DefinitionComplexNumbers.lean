@@ -19,10 +19,11 @@ Lean の `ℂ` は実部と虚部の二つの `ℝ` を欄に持つ構造体で�
 | `def_imaginary_unit` の `i := (0_ℝ, 1_ℝ)` | `complex_I_eq_mk`（`rfl`） |
 | `inclusion_rr_to_cc` の `ι_{ℝ→ℂ}(x) := (x, 0)` | `complex_ofReal_eq_mk`（`rfl`。人手の `r_ℂ` は Lean の `(r : ℂ)`） |
 | `inclusion_rr_to_cc` の略記の `0_ℂ := (0_ℝ)_ℂ`・`1_ℂ := (1_ℝ)_ℂ` | `complex_zero_eq_ofReal_zero`・`complex_one_eq_ofReal_one`（`rfl`） |
+| `inclusion_rr_to_cc` の略記の `2_ℂ := (2_ℝ)_ℂ` | `complex_two_eq_ofReal_two`（mathlib の数字 `2` との一致の補題一本） |
 
 和と積と `i` と `ι_{ℝ→ℂ}` は、mathlib の定義が人手の定義の式と定義として等しいので、Lean の `+`・`*`・`Complex.I`・`Complex.ofReal` を
 そのまま人手の記号として使う。Lean の `ℂ` の `0`・`1` も mathlib で `((0 : ℝ) : ℂ)`・`((1 : ℝ) : ℂ)` と定義されており、
-人手の `0_ℂ`・`1_ℂ` と定義として等しい。積の第 1 成分の差 `ac − bd` は `def_real_difference` の `ℝ` の差である。
+人手の `0_ℂ`・`1_ℂ` と定義として等しい。Lean の `ℂ` の数字 `2` は `Nat.cast 2` を通すので、人手の `2_ℂ` との一致は補題で述べる。積の第 1 成分の差 `ac − bd` は `def_real_difference` の `ℝ` の差である。
 
 定義であり、主張に固有の構造は定義の式だけなので、必要十分版は置かない。
 -/
@@ -53,5 +54,10 @@ theorem complex_zero_eq_ofReal_zero : (0 : ℂ) = ((0 : ℝ) : ℂ) := rfl
 
 /-- **`inclusion_rr_to_cc`** の略記の `1_ℂ := (1_ℝ)_ℂ`。 -/
 theorem complex_one_eq_ofReal_one : (1 : ℂ) = ((1 : ℝ) : ℂ) := rfl
+
+/-- **`inclusion_rr_to_cc`** の略記の `2_ℂ := (2_ℝ)_ℂ`（`2_ℝ` は `def_real_two`）。
+mathlib の `ℂ` の数字 `2` は `Nat.cast 2` を通して定められており `((2 : ℝ) : ℂ)` と定義として等しくはないので、
+一致を mathlib の `Complex.ofReal_ofNat` の一本で述べる。 -/
+theorem complex_two_eq_ofReal_two : (2 : ℂ) = ((2 : ℝ) : ℂ) := (Complex.ofReal_ofNat 2).symm
 
 end Ising2D

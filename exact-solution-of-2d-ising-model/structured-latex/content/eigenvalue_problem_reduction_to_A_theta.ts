@@ -4651,7 +4651,7 @@ T_{(V^{(+)})}(X)
         " の元であり、係数に現れる ",
         math(String.raw`2`),
         " は ",
-        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}}`),
+        math(String.raw`2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}}`),
         "（",
         ref("inclusion_rr_to_cc"),
         "）を表す。",
@@ -5148,7 +5148,7 @@ F_{n+1}
         "（",
         ref("multiply_by_minus_one"),
         "）とし、",
-        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}} = (2,0) \neq (0,0) = 0_{\mathbb{C}}`),
+        math(String.raw`2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}} = (2,0) \neq (0,0) = 0_{\mathbb{C}}`),
         "（",
         ref("inclusion_rr_to_cc"),
         "。第 1 成分が ",
@@ -6100,7 +6100,7 @@ b_n
         String.raw`\begin{aligned}
 2\,(K_2^*)_{\mathbb{C}}
 &= (2_{\mathbb{R}})_{\mathbb{C}}\,(K_2^*)_{\mathbb{C}}
-&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{の}\ 2 = 2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}}) \\
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{の}\ 2 = 2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}}) \\
 &= (2K_2^*)_{\mathbb{C}}
 &&(\because \blkref{real_inclusion_preserves_product})
 \end{aligned}`,

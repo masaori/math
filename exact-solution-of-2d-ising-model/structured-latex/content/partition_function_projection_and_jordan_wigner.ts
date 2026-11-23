@@ -3517,7 +3517,7 @@ P^{(+)} f
         " は ",
         ref("def_imaginary_unit"),
         " の虚数単位である。",
-        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}} = (2,0) \neq (0,0) = 0_{\mathbb{C}}`),
+        math(String.raw`2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}} = (2,0) \neq (0,0) = 0_{\mathbb{C}}`),
         "（",
         ref("inclusion_rr_to_cc"),
         "。第 1 成分が ",

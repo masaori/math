@@ -183,7 +183,7 @@ theorem TConj_V2H2Form_checkZ {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℝ) (μ : ℤ
     _ = Complex.cosh (2 * K2star) • checkZ M μ
           + (-Complex.I * Complex.sinh (2 * K2star)) • checkY M μ :=
         (extract_taylor_H2_checkZ K2star μ).2.trans (by
-          simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, Complex.ofReal_ofNat])
+          simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, ← complex_two_eq_ofReal_two])
           -- 右の `simp only` は値の像 `(cosh 2K_2^*)_ℂ` を mathlib の `Complex.cosh` で書き直す段（人手の行ではない）
 
 /-- **原文 第 4 式**（`V_2` を `V2H2Form` で書いた形）:
@@ -211,7 +211,7 @@ theorem TConj_V2H2Form_checkY {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℝ) (μ : ℤ
     _ = (Complex.I * Complex.sinh (2 * K2star)) • checkZ M μ
           + Complex.cosh (2 * K2star) • checkY M μ :=
         (extract_taylor_H2_checkY K2star μ).2.trans (by
-          simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, Complex.ofReal_ofNat])
+          simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, ← complex_two_eq_ofReal_two])
           -- 右の `simp only` は値の像 `(cosh 2K_2^*)_ℂ` を mathlib の `Complex.cosh` で書き直す段（人手の行ではない）
 
 /-- **原文 第 3 式**（`V_2` は `def_transfer_matrix` の `V_2`、`K_2^*` はその双対結合定数）:
@@ -340,11 +340,11 @@ theorem actsBy_TConj_V2_check {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
     rw [TConj_V2_checkZ hK2 μ, B2mat_zero_zero, B2mat_one_zero]
     -- Lean の `B2mat` の成分は複素数の `cosh`・`sinh` で、人手 `def_B1_theta_B2` の像 `(cosh 2K_2^*)_ℂ` と定義が違う。
     -- その読み替えの段（人手の行ではない）
-    simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, Complex.ofReal_ofNat]
+    simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, ← complex_two_eq_ofReal_two]
   · change TConj (V2Units M hK2) (checkY M μ) = _
     rw [TConj_V2_checkY hK2 μ, B2mat_zero_one, B2mat_one_one]
     -- `B2mat` の成分の読み替えの段（上と同じ。人手の行ではない）
-    simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, Complex.ofReal_ofNat]
+    simp only [Complex.ofReal_cosh, Complex.ofReal_sinh, Complex.ofReal_mul, ← complex_two_eq_ofReal_two]
 
 /-! ## 共役写像の一般線型性と半指数行列への特殊化 -/
 

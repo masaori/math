@@ -11,7 +11,7 @@
 | 1 行目: `1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = 1` を 2 か所へ | `calc` の 1 段目（`Complex.ofReal_one` を右辺から左辺へ） |
 | 2 行目: `real_inclusion_preserves_sum`（`a → 1`, `b → 1`） | 2 段目（`real_inclusion_add`） |
 | 3 行目: `def_real_two` を右辺から左辺へ | 3 段目（ℝ の等式を包含の引数へ渡す） |
-| 4 行目: `2_ℂ` は同じ略記の `r = 2` | 4 段目（`Complex.ofReal_ofNat`） |
+| 4 行目: `2_ℂ` は同じ略記の `r = 2` | 4 段目（`complex_two_eq_ofReal_two`） |
 
 - 人手の `1_ℂ`・`2_ℂ` は Lean で `1 : ℂ`・`2 : ℂ` と書き、略記の像 `((1 : ℝ) : ℂ)`・`((2 : ℝ) : ℂ)` との行き来は
   1 段目と 4 段目の読み替えだけで行う。`2_ℂ` を `((2 : ℝ) : ℂ)`（`def_V1_plus_square_root` の `(2_ℝ)_ℂ`）や
@@ -33,13 +33,13 @@ theorem complex_one_add_one : (1 : ℂ) + 1 = 2 :=
       = ((1 : ℝ) : ℂ) + ((1 : ℝ) : ℂ) := by rw [Complex.ofReal_one]   -- 1 行目: `1_ℂ` は略記 `r_ℂ` の `r = 1` を 2 か所へ
     _ = ((1 + 1 : ℝ) : ℂ) := real_inclusion_add 1 1                   -- 2 行目: `real_inclusion_preserves_sum`（`a → 1`, `b → 1`）
     _ = ((2 : ℝ) : ℂ) := by rw [← real_two_eq_one_add_one]                    -- 3 行目: `def_real_two` を右辺から左辺へ
-    _ = 2 := Complex.ofReal_ofNat 2                                    -- 4 行目: `2_ℂ` は略記 `r_ℂ` の `r = 2`
+    _ = 2 := complex_two_eq_ofReal_two.symm                                    -- 4 行目: `2_ℂ` は略記 `r_ℂ` の `r = 2`
 
 /-- `one_plus_one_is_two_in_cc` の右辺 `2_ℂ` を、略記の像 `((2 : ℝ) : ℂ)`（`def_V1_plus_square_root` の `(2_ℝ)_ℂ`）で書いたもの。
-人手では同じ記号 `2_ℂ` なので、読み替えの段 `Complex.ofReal_ofNat` だけを足す。 -/
+人手では同じ記号 `2_ℂ` なので、読み替えの段 `complex_two_eq_ofReal_two` だけを足す。 -/
 theorem complex_one_add_one_eq_ofReal_two : (1 : ℂ) + 1 = ((2 : ℝ) : ℂ) :=
   calc (1 : ℂ) + 1
       = 2 := complex_one_add_one                                       -- `one_plus_one_is_two_in_cc`
-    _ = ((2 : ℝ) : ℂ) := (Complex.ofReal_ofNat 2).symm                 -- `2_ℂ` は略記 `r_ℂ` の `r = 2`
+    _ = ((2 : ℝ) : ℂ) := complex_two_eq_ofReal_two                 -- `2_ℂ` は略記 `r_ℂ` の `r = 2`
 
 end Ising2D

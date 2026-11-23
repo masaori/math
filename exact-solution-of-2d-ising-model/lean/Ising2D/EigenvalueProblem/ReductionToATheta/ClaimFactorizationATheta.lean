@@ -41,7 +41,7 @@ Lean 側の `factorization_of_A_theta_general` は `K_2^*` を任意の実数と
 
 積の像は具体版 `real_inclusion_mul`（人手 `real_inclusion_preserves_product`）、二項の和の像は具体版 `real_inclusion_add`
 （人手 `real_inclusion_preserves_finite_sum` の `m = 2`。二項の和は `real_inclusion_preserves_sum` と同じ式）で受ける。
-`-1_ℂ = (-1)_ℂ`・`2 = (2)_ℂ` は人手どおり `inclusion_rr_to_cc` の略記として `Complex.ofReal_neg`・`Complex.ofReal_one`・`Complex.ofReal_ofNat` で読む（`-1_ℂ = (-1)_ℂ` は `real_inclusion_sub` の 3 段目と同じ）。
+`-1_ℂ = (-1)_ℂ`・`2 = (2)_ℂ` は人手どおり `inclusion_rr_to_cc` の略記として `Complex.ofReal_neg`・`Complex.ofReal_one`・`complex_two_eq_ofReal_two` で読む（`-1_ℂ = (-1)_ℂ` は `real_inclusion_sub` の 3 段目と同じ）。
 
 `cosh_addition_formula` は `cosh_add_formula`、`sinh_double_angle_formula` は `sinh_eq_two_sinh_half_mul_cosh_half`
 （どちらも `ClaimCoshAdditionAndHalfAngle.lean`）で受ける。どちらも人手の鎖と 1 対 1 の `calc` である（`sinh` の側は、最後に Lean にだけ乗法の結合律の段がある）。
@@ -141,7 +141,7 @@ theorem factorization_prep_two_mul_mul (K1 : ℝ) :
     2 * (Real.cosh K1 : ℂ) * (Real.sinh K1 : ℂ) = ((Real.sinh (2 * K1) : ℝ) : ℂ) :=
   calc 2 * (Real.cosh K1 : ℂ) * (Real.sinh K1 : ℂ)
       = ((2 : ℝ) : ℂ) * (Real.cosh K1 : ℂ) * (Real.sinh K1 : ℂ) := by
-        rw [Complex.ofReal_ofNat]                                  -- `a, b` の定義と `2 = (2)_ℂ`（`inclusion_rr_to_cc`）
+        rw [← complex_two_eq_ofReal_two]                                  -- `a, b` の定義と `2 = (2)_ℂ`（`inclusion_rr_to_cc`）
     _ = ((2 * Real.cosh K1 : ℝ) : ℂ) * (Real.sinh K1 : ℂ) := by
         rw [real_inclusion_mul]                                    -- `real_inclusion_preserves_product`
     _ = ((2 * Real.cosh K1 * Real.sinh K1 : ℝ) : ℂ) :=
@@ -208,7 +208,7 @@ theorem factorization_prep_exp_add_exp_neg (θ : ℝ) :
         rw [neg_I_mul_eq_neg_of_I_mul]                             -- 3 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → (θ)_ℂ`）
     _ = ((2 : ℝ) : ℂ)
           * ((Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / 2) := by
-        rw [Complex.ofReal_ofNat]                                  -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
+        rw [← complex_two_eq_ofReal_two]                                  -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
     _ = ((2 : ℝ) : ℂ) * ((Real.cos θ : ℝ) : ℂ) := by
         rw [← euler_cos_real_inclusion]                            -- 4 行目: `euler_formula_cos_sin` の第 1 式
 
@@ -223,14 +223,14 @@ theorem factorization_prep_exp_eq_cos_add_sin (θ : ℝ) :
           + Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp ((-Complex.I) * (θ : ℂ)))
               / (((2 : ℝ) : ℂ) * Complex.I)) := by
         have h2 : ((2 : ℝ) : ℂ) ≠ 0 := by norm_num
-        field_simp; rw [Complex.ofReal_ofNat]; ring                -- 1 行目: `(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則
+        field_simp; rw [← complex_two_eq_ofReal_two]; ring                -- 1 行目: `(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則
     _ = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / ((2 : ℝ) : ℂ)
           + Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ))))
               / (((2 : ℝ) : ℂ) * Complex.I)) := by
         rw [neg_I_mul_eq_neg_of_I_mul]                             -- 3 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → (θ)_ℂ`）を 2 箇所へ
     _ = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / 2
           + Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))) / (2 * Complex.I)) := by
-        rw [Complex.ofReal_ofNat]                                  -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
+        rw [← complex_two_eq_ofReal_two]                                  -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
     _ = ((Real.cos θ : ℝ) : ℂ) + Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
         rw [← euler_cos_real_inclusion, ← euler_sin_real_inclusion] -- 4 行目: `euler_formula_cos_sin` の第 1 式と第 2 式
 
@@ -245,14 +245,14 @@ theorem factorization_prep_exp_neg_eq_cos_sub_sin (θ : ℝ) :
           - Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp ((-Complex.I) * (θ : ℂ)))
               / (((2 : ℝ) : ℂ) * Complex.I)) := by
         have h2 : ((2 : ℝ) : ℂ) ≠ 0 := by norm_num
-        field_simp; rw [Complex.ofReal_ofNat]; ring                -- 1 行目: `(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則
+        field_simp; rw [← complex_two_eq_ofReal_two]; ring                -- 1 行目: `(2)_ℂ ≠ 0_ℂ`・`(2)_ℂ i ≠ 0_ℂ` と ℂ の四則
     _ = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / ((2 : ℝ) : ℂ)
           - Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ))))
               / (((2 : ℝ) : ℂ) * Complex.I)) := by
         rw [neg_I_mul_eq_neg_of_I_mul]                             -- 3 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → (θ)_ℂ`）を 2 箇所へ
     _ = (Complex.exp (Complex.I * (θ : ℂ)) + Complex.exp (-(Complex.I * (θ : ℂ)))) / 2
           - Complex.I * ((Complex.exp (Complex.I * (θ : ℂ)) - Complex.exp (-(Complex.I * (θ : ℂ)))) / (2 * Complex.I)) := by
-        rw [Complex.ofReal_ofNat]                                  -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
+        rw [← complex_two_eq_ofReal_two]                                  -- `(2)_ℂ` を `2_ℂ` と書く（`inclusion_rr_to_cc` の略記）
     _ = ((Real.cos θ : ℝ) : ℂ) - Complex.I * ((Real.sin θ : ℝ) : ℂ) := by
         rw [← euler_cos_real_inclusion, ← euler_sin_real_inclusion] -- 4 行目: `euler_formula_cos_sin` の第 1 式と第 2 式
 
@@ -386,7 +386,7 @@ theorem factorization_B2mat_eq_symbols (K2star : ℝ) :
     B2mat (K2star : ℂ)
       = factorizationB2Symbols ((Real.cosh (2 * K2star) : ℝ) : ℂ) ((Real.sinh (2 * K2star) : ℝ) : ℂ) := by
   have h2 : (2 : ℂ) * (K2star : ℂ) = ((2 * K2star : ℝ) : ℂ) := by
-    rw [← Complex.ofReal_ofNat 2, real_inclusion_mul]                        -- `2 = (2)_ℂ`、`real_inclusion_preserves_product`
+    rw [complex_two_eq_ofReal_two, real_inclusion_mul]                        -- `2 = (2)_ℂ`、`real_inclusion_preserves_product`
   rw [B2mat, factorizationB2Symbols, h2, Complex.ofReal_cosh, Complex.ofReal_sinh]
 
 /-! ## Step 1: `N := B_2 B_1(θ)` の成分 -/
@@ -479,7 +479,7 @@ theorem factorization_step2_P11 (a b C S ep em c1 s1 cθ : ℂ)
     _ = C * c1 - S * a * b * (((2 : ℝ) : ℂ) * cθ) := by
         rw [hsum]                                                    -- `e_+ + e_- = (2)_ℂ(cos θ)_ℂ`
     _ = C * c1 - S * (2 * a * b) * cθ := by
-        rw [Complex.ofReal_ofNat]; ring                              -- ℂ の積の交換律・結合律（と `(2)_ℂ = 2`。準備の `2ab` が `2 ∈ ℂ` で述べられているため）
+        rw [← complex_two_eq_ofReal_two]; ring                              -- ℂ の積の交換律・結合律（と `(2)_ℂ = 2`。準備の `2ab` が `2 ∈ ℂ` で述べられているため）
     _ = C * c1 - S * s1 * cθ := by
         rw [h2ab]                                                    -- `2ab = (s_1)_ℂ`
     _ = c1 * C - s1 * S * cθ := by
@@ -514,7 +514,7 @@ theorem factorization_step3_P22 (a b C S ep em c1 s1 cθ : ℂ)
     _ = C * c1 - S * a * b * (((2 : ℝ) : ℂ) * cθ) := by
         rw [hsum]                                                    -- `e_+ + e_- = (2)_ℂ(cos θ)_ℂ`
     _ = C * c1 - S * (2 * a * b) * cθ := by
-        rw [Complex.ofReal_ofNat]; ring                              -- ℂ の積の交換律・結合律（と `(2)_ℂ = 2`。準備の `2ab` が `2 ∈ ℂ` で述べられているため）
+        rw [← complex_two_eq_ofReal_two]; ring                              -- ℂ の積の交換律・結合律（と `(2)_ℂ = 2`。準備の `2ab` が `2 ∈ ℂ` で述べられているため）
     _ = C * c1 - S * s1 * cθ := by
         rw [h2ab]                                                    -- `2ab = (s_1)_ℂ`
     _ = c1 * C - s1 * S * cθ := by
@@ -755,12 +755,12 @@ theorem factorization_of_A_theta_general (K : IsingConst) (K1 K2star θ : ℝ)
 `Complex.cosh (x)_ℂ = (cosh x)_ℂ`（mathlib `Complex.ofReal_cosh`）と `2(K)_ℂ = (2K)_ℂ`（`2 = (2)_ℂ` と `real_inclusion_preserves_product`）、`inclusion_rr_to_cc` の単射性で受ける。 -/
 theorem factorization_real_cosh_of_complex {c K : ℝ} (h : (c : ℂ) = Complex.cosh (2 * (K : ℂ))) :
     c = Real.cosh (2 * K) :=
-  Complex.ofReal_injective (by rw [h, Complex.ofReal_cosh, ← real_inclusion_mul, Complex.ofReal_ofNat])
+  Complex.ofReal_injective (by rw [h, Complex.ofReal_cosh, ← real_inclusion_mul, ← complex_two_eq_ofReal_two])
 
 /-- `factorization_real_cosh_of_complex` の `sinh` 版。 -/
 theorem factorization_real_sinh_of_complex {s K : ℝ} (h : (s : ℂ) = Complex.sinh (2 * (K : ℂ))) :
     s = Real.sinh (2 * K) :=
-  Complex.ofReal_injective (by rw [h, Complex.ofReal_sinh, ← real_inclusion_mul, Complex.ofReal_ofNat])
+  Complex.ofReal_injective (by rw [h, Complex.ofReal_sinh, ← real_inclusion_mul, ← complex_two_eq_ofReal_two])
 
 /-- `factorization_of_A_theta_general` を、利用箇所の持つ ℂ の等式の形の仮定で述べたもの
 （仮定の形を `factorization_real_cosh_of_complex`・`factorization_real_sinh_of_complex` と

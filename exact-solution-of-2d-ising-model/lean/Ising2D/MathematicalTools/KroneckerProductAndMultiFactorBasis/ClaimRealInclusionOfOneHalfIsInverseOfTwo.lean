@@ -10,7 +10,7 @@
 | --- | --- |
 | 7 行の鎖（積の単位元 → 逆元 → 積の結合律 → `real_inclusion_preserves_product`（`a → 1/2`、`b → 2`）→ ℝ で `1/2·2 = 1` → `1_ℂ = (1)_ℂ` → 積の単位元） | `real_inclusion_half_eq_inv_two` の `calc` の 7 段 |
 
-- 人手の `2_ℂ := (2)_ℂ` は Lean の `((2 : ℝ) : ℂ)`、`2_ℂ^{-1}` は `((2 : ℝ) : ℂ)⁻¹`（`complex_numbers_form_a_field` の逆元。Lean では
+- 人手の `2_ℂ = (2)_ℂ`（`inclusion_rr_to_cc`） は Lean の `((2 : ℝ) : ℂ)`、`2_ℂ^{-1}` は `((2 : ℝ) : ℂ)⁻¹`（`complex_numbers_form_a_field` の逆元。Lean では
   mathlib の `ℂ` の体の構造の逆元）、`(1/2)_ℂ` は `((1 / 2 : ℝ) : ℂ)` である。
 - 2 段目の逆元は `mul_inv_cancel₀` で、その仮定 `2_ℂ ≠ 0_ℂ` は人手の主張の前置き（`(2, 0) ≠ (0, 0)`）に当たる。
 

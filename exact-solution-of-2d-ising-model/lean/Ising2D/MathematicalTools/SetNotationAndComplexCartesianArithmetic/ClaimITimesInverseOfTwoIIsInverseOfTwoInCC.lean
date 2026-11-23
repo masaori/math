@@ -10,7 +10,7 @@
   `ℝ` の `2 = 0` に帰す）、`i = (0,1) ≠ 0_ℂ` は `complex_I_ne_zero_by_im`（第 2 成分 `Complex.im` を取り、`ℝ` の `1 = 0` に帰す）、
   `2_ℂi ∈ ℂ^×` は `complex_two_mul_I_ne_zero`（`mul_ne_zero`。人手の `multiplicative_group_of_cc` の群の積）である。
   `ℂ` の元の等号は成分ごと（`definition_of_cc` の `ℝ^2` の元の等号）である。`2_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = 2`
-  （Lean の `((2 : ℝ) : ℂ)`。リテラル `(2 : ℂ)` との読み替えは `Complex.ofReal_ofNat`）、`(2, 0)` の第 1 成分は `Complex.ofReal_re`、
+  （Lean の `((2 : ℝ) : ℂ)`。リテラル `(2 : ℂ)` との読み替えは `complex_two_eq_ofReal_two`）、`(2, 0)` の第 1 成分は `Complex.ofReal_re`、
   `i = (0, 1)`（`def_imaginary_unit`）の第 2 成分は `Complex.I_im`、`0_ℂ = (0, 0)` の成分は `Complex.zero_re`・`Complex.zero_im` である。
 - 証明の鎖の 6 行は `complex_I_mul_inv_two_mul_I` の `calc` の 6 段と 1 段ずつ対応する。`complex_numbers_form_a_field` の積の公理は
   mathlib の `one_mul`・`mul_one`・`mul_assoc` を 1 段に 1 つずつ当て、`multiplicative_group_of_cc` の逆元（`w^{-1}w = 1_ℂ`・`ww^{-1} = 1_ℂ`）は
@@ -23,6 +23,7 @@
 取り払える構造をこの説明以上に示す計算が無い（`complex_one_add_one` と同じ扱い）。
 -/
 import Mathlib.Analysis.Complex.Basic
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNumbers
 
 namespace Ising2D
 
@@ -35,7 +36,7 @@ theorem complex_two_ne_zero_by_re : (2 : ℂ) ≠ 0 := by
     calc (2 : ℝ)
         = ((2 : ℝ) : ℂ).re := (Complex.ofReal_re 2).symm
                                       -- `inclusion_rr_to_cc`: `2_ℂ = (2, 0)` の第 1 成分を右辺から左辺へ
-      _ = (2 : ℂ).re := by rw [Complex.ofReal_ofNat]
+      _ = (2 : ℂ).re := by rw [← complex_two_eq_ofReal_two]
                                       -- `2_ℂ` は略記 `r_ℂ` の `r = 2`（Lean のリテラル `(2 : ℂ)` との読み替え）
       _ = (0 : ℂ).re := hre
                                       -- 仮定の第 1 成分

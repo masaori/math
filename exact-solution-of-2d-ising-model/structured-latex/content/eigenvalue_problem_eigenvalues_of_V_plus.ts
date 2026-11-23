@@ -2865,7 +2865,7 @@ X\,\check{n}_\nu
         " の冪で、底の ",
         math(String.raw`2`),
         " は ",
-        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}}`),
+        math(String.raw`2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}}`),
         "（",
         ref("inclusion_rr_to_cc"),
         "）である（",
@@ -2970,7 +2970,7 @@ X\,\check{n}_\nu
 &= \bigl((2_{\mathbb{R}})_{\mathbb{C}}\bigr)^{M_{\mathrm{col}}}
    \quad \left(\because\ \blkref{real_inclusion_preserves_power}\ (r \to 2_{\mathbb{R}},\ m \to M_{\mathrm{col}})\right) \\
 &= 2^{M_{\mathrm{col}}}
-   \quad (\because\ \text{主張の右辺の底}\ 2 := 2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}}) \\
+   \quad (\because\ \text{主張の右辺の底}\ 2 = 2_{\mathbb{C}} = (2_{\mathbb{R}})_{\mathbb{C}}) \\
 &= 2^{M_{\mathrm{col}}-0}
    \quad (\because \mathbb{Z}\ \text{の計算}\ M_{\mathrm{col}} - 0 = M_{\mathrm{col}})
 \end{aligned}`,

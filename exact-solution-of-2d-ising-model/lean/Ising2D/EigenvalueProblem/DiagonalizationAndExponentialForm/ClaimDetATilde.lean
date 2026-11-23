@@ -279,7 +279,7 @@ theorem complex_sub_sq_chain (x y : ℂ) :
           Complex.ofReal_one]
                           -- 12 行目: ℝ の四則を 2 箇所へ（`1_ℂ` は略記 `(1)_ℂ`）
     _ = x * x + ((-1) * 2) * (x * y) + 1 * (y * y) := by
-        rw [← real_inclusion_mul (-1) 2, Complex.ofReal_neg, Complex.ofReal_one, Complex.ofReal_ofNat]
+        rw [← real_inclusion_mul (-1) 2, Complex.ofReal_neg, Complex.ofReal_one, ← complex_two_eq_ofReal_two]
                           -- 13 行目: `real_inclusion_preserves_product` を右辺から左辺へ（`2_ℂ` は略記 `(2)_ℂ`）
     _ = x * x + (-1) * (2 * (x * y)) + 1 * (y * y) := by rw [mul_assoc (-1 : ℂ) 2 (x * y)]
                           -- 14 行目: `complex_numbers_form_a_field` の積の結合律
@@ -338,7 +338,7 @@ theorem complex_cos_add_I_mul_sin_chain (θ : ℝ) :
         rw [← real_inclusion_add, Complex.ofReal_one]
                           -- 15 行目: `real_inclusion_preserves_finite_sum` を `m = 2` で（`1_ℂ` は略記 `(1)_ℂ`）
     _ = ((2 : ℂ) * ep) * (2 : ℂ)⁻¹ := by
-        rw [← real_two_eq_one_add_one, Complex.ofReal_ofNat]
+        rw [← real_two_eq_one_add_one, ← complex_two_eq_ofReal_two]
                           -- 16 行目: `def_real_two` を右辺から左辺へ（`2_ℂ` は略記 `(2)_ℂ`）
     _ = ep * ((2 : ℂ) * (2 : ℂ)⁻¹) := by rw [mul_comm (2 : ℂ) ep, mul_assoc]
                           -- 17 行目: `complex_numbers_form_a_field` の積の結合律・可換律

@@ -30,7 +30,7 @@
   （`n = 2k`・`2k + 1` の形）を `(K1 : ℂ)`・`(K2star : ℂ)` で引く。人手の「`n` が偶数」「奇数」から `n = 2k`・`2k + 1` を取り出す段は
   同じ行の中で行う。
 - `complex_numbers_form_a_field` の積の結合律・可換律は Lean の具体版が無いので、既存の慣行どおり mathlib の `mul_assoc`・`mul_comm`。
-- 準備の 1 行目の約束 `2 = 2_ℂ := (2_ℝ)_ℂ` は `Complex.ofReal_ofNat`、2 行目の `real_inclusion_preserves_product` は `real_inclusion_mul`。
+- 準備の 1 行目の約束 `2 = 2_ℂ = (2_ℝ)_ℂ` は `complex_two_eq_ofReal_two`（`inclusion_rr_to_cc` の略記）、2 行目の `real_inclusion_preserves_product` は `real_inclusion_mul`。
 - `matrix_sum_is_commutative` は `matrix_add_comm`（添字が `Fin (2^M)` の行列で当てる）。
 
 `exponential_series_of_even_odd_power_terms` の具体版は行列の添字を `Fin d` に取る。`TensorPow M` の行列は添字が `Conf M` なので、
@@ -65,7 +65,7 @@ attribute [local instance] Matrix.frobeniusNormedAddCommGroup Matrix.frobeniusNo
 theorem two_mul_real_inclusion (y : ℝ) : (2 : ℂ) * (y : ℂ) = ((2 * y : ℝ) : ℂ) :=
   calc (2 : ℂ) * (y : ℂ)
       = ((2 : ℝ) : ℂ) * (y : ℂ) := by
-        rw [Complex.ofReal_ofNat]                             -- 人手 1: `2 = 2_ℂ := (2_ℝ)_ℂ`
+        rw [← complex_two_eq_ofReal_two]                             -- 人手 1: `2 = 2_ℂ = (2_ℝ)_ℂ`
     _ = ((2 * y : ℝ) : ℂ) := real_inclusion_mul 2 y          -- 人手 2: `real_inclusion_preserves_product`
 
 /-! ## 各項（`cosh_sinh_coefficient_conversion_for_check` を `exponential_series_of_even_odd_power_terms` の仮定の形へ） -/

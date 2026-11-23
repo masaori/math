@@ -143,7 +143,7 @@ theorem trace_identity_base_case : (1 : TensorPow M).trace = (2 : ℂ) ^ (M - 0)
     _ = (((2 : ℝ) ^ M : ℝ) : ℂ) := by rw [inclusion_zz_to_rr_of_power_of_two]
                                                                      -- `inclusion_zz_to_rr_of_power_of_two`（`M → M_col`）
     _ = ((2 : ℝ) : ℂ) ^ M := real_inclusion_of_power 2 M                  -- `real_inclusion_preserves_power`（`r → 2_ℝ`、`m → M_col`）
-    _ = (2 : ℂ) ^ M := by rw [Complex.ofReal_ofNat]                  -- 主張の右辺の底 `2 := 2_ℂ := (2_ℝ)_ℂ`
+    _ = (2 : ℂ) ^ M := by rw [← complex_two_eq_ofReal_two]                  -- 主張の右辺の底 `2 = 2_ℂ = (2_ℝ)_ℂ`
     _ = (2 : ℂ) ^ (M - 0) := by rw [Nat.sub_zero]                    -- `M_col - 0 = M_col`
 
 /-- **人手の準備 2** の単位行列との積の鎖（2 行）: `ψ̌_{M_col+1-μ_k} I = ψ̌_{M_col+1-μ_k} = I ψ̌_{M_col+1-μ_k}`。 -/

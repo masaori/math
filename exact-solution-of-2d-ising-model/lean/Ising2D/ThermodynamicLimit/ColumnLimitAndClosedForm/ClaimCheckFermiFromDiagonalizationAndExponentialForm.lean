@@ -42,13 +42,13 @@ theorem star_two_mul_sqrtM (M : ℕ) : star (2 * sqrtM M) = 2 * sqrtM M :=
   calc star (2 * sqrtM M)
       = star 2 * star (sqrtM M) := complex_conjugate_of_product_eq 2 (sqrtM M)
                                       -- 2 行目: `complex_conjugate_of_product`（`z → 2_ℂ`, `w → s`）（1 行目の `u` の定義は `rfl`）
-    _ = star ((2 : ℝ) : ℂ) * star (sqrtM M) := by rw [Complex.ofReal_ofNat]
+    _ = star ((2 : ℝ) : ℂ) * star (sqrtM M) := by rw [← complex_two_eq_ofReal_two]
                                       -- `2_ℂ` は略記 `r_ℂ` の `r = 2`（Lean のリテラル `(2 : ℂ)` との読み替え）
     _ = ((2 : ℝ) : ℂ) * star (sqrtM M) := by rw [complex_conjugate_of_real_inclusion 2]
                                       -- 3 行目: `complex_conjugate_of_real_inclusion`（`r → 2`）
     _ = ((2 : ℝ) : ℂ) * sqrtM M := by rw [sqrtM, complex_conjugate_of_real_inclusion (Real.sqrt M)]
                                       -- 4 行目: `complex_conjugate_of_real_inclusion`（`r → √M_col`。`s` の定義）
-    _ = 2 * sqrtM M := by rw [Complex.ofReal_ofNat]
+    _ = 2 * sqrtM M := by rw [← complex_two_eq_ofReal_two]
                                       -- 略記の読み替え（5 行目の `u` の定義は `rfl`）
 
 /-- 人手 `check_number_operator_is_hermitian` (3) の準備 (f): `\overline{β} = β`

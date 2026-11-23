@@ -4215,10 +4215,10 @@ X\prod_{j=1}^{r+1} A_j
     ],
     proof: [
       paragraph([
-        math(String.raw`2_{\mathbb{C}} := \iota_{\mathbb{R}\to\mathbb{C}}(2)`),
-        " は ",
+        math(String.raw`2_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(2)`),
+        " である（",
         ref("inclusion_rr_to_cc"),
-        " の略記である。",
+        " の略記）。",
       ]),
       displayMath(String.raw`\begin{aligned}
 2_{\mathbb{C}}
