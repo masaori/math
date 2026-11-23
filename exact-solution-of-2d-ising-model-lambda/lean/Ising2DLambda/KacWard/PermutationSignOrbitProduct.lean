@@ -12,6 +12,7 @@
 -/
 import Ising2DLambda.KacWard.MovedOrbitPartition
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
+import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationMinimalPeriod
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 
@@ -38,16 +39,17 @@ private lemma iterLeft_eq_iterate' (σ : Equiv.Perm ι) (n : ℕ) (e : ι) :
 
 /-- 人手証明の最小周期 `m_C`。 -/
 private noncomputable def orbitPeriod (σ : Equiv.Perm ι) (e : ι) : ℕ :=
-  minimalReturnTime σ e
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod σ e
 
 private lemma iterate_orbitPeriod (σ : Equiv.Perm ι) (e : ι) :
     (⇑σ)^[orbitPeriod σ e] e = e :=
-  minimalReturnTime_return σ e
+  (Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec σ e).2.1
 
 /-- 動く基点の最小周期は 2 以上である（1 なら `σ e = e` となり矛盾）。 -/
 private lemma two_le_orbitPeriod (σ : Equiv.Perm ι) {e : ι} (he : σ e ≠ e) :
     2 ≤ orbitPeriod σ e := by
-  have h1 : 1 ≤ orbitPeriod σ e := minimalReturnTime_pos σ e
+  have h1 : 1 ≤ orbitPeriod σ e :=
+    (Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec σ e).1
   rcases Nat.lt_or_ge (orbitPeriod σ e) 2 with h2 | h2
   · have hm1 : orbitPeriod σ e = 1 := by omega
     have hret := iterate_orbitPeriod σ e
@@ -58,7 +60,10 @@ private lemma two_le_orbitPeriod (σ : Equiv.Perm ι) {e : ι} (he : σ e ≠ e)
 /-- 最小周期より小さい 1 以上の回数では戻らない（反復記法へ移送）。 -/
 private lemma iterate_ne_of_lt_orbitPeriod (σ : Equiv.Perm ι) (e : ι) {k : ℕ}
     (hk1 : 1 ≤ k) (hk : k < orbitPeriod σ e) : (⇑σ)^[k] e ≠ e := by
-  exact minimalReturnTime_min σ e k hk1 hk
+  intro hreturn
+  have hmin := (Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec σ e).2.2
+    k hk1 hreturn
+  exact (not_le_of_gt hk) hmin
 
 /-- 軌道の元は基点の `orbitPeriod σ e` 未満の反復で尽くされる。 -/
 private lemma mem_movedOrbit_iff_iterate (σ : Equiv.Perm ι) (e : ι) {x : ι} :
@@ -67,13 +72,12 @@ private lemma mem_movedOrbit_iff_iterate (σ : Equiv.Perm ι) (e : ι) {x : ι} 
   · intro hx
     obtain ⟨k, hk⟩ := mem_orbit.mp hx
     rw [iterLeft_eq_iterate' σ k e] at hk
-    have hmpos : 0 < orbitPeriod σ e := minimalReturnTime_pos σ e
+    have hmpos : 0 < orbitPeriod σ e :=
+      (Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec σ e).1
     refine ⟨k % orbitPeriod σ e, Nat.mod_lt k hmpos, ?_⟩
     have hmul : (⇑σ)^[orbitPeriod σ e * (k / orbitPeriod σ e)] e = e := by
-      rw [← iterLeft_eq_iterate' σ _ e]
-      exact iterLeft_mul (⇑σ) e (orbitPeriod σ e)
-        (by rw [iterLeft_eq_iterate' σ]; exact iterate_orbitPeriod σ e)
-        (k / orbitPeriod σ e)
+      rw [Function.iterate_mul]
+      exact Function.iterate_fixed (iterate_orbitPeriod σ e) _
     calc x = (⇑σ)^[k] e := hk
       _ = (⇑σ)^[k % orbitPeriod σ e + orbitPeriod σ e * (k / orbitPeriod σ e)] e := by
           rw [Nat.mod_add_div]
@@ -329,7 +333,8 @@ private lemma sign_transpositionChain_orbitTail (σ : Equiv.Perm ι) (e : ι) :
             exact (mem_orbitTail_iff σ e).mpr ⟨j - 1, by omega, by simpa [Nat.sub_add_cancel hpos] using hxe⟩
       rw [← hset, List.toFinset_card_of_nodup (nodup_cons_orbitTail σ e), List.length_cons,
         orbitTail_length]
-      have hpos : 0 < orbitPeriod σ e := minimalReturnTime_pos σ e
+      have hpos : 0 < orbitPeriod σ e :=
+        (Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec σ e).1
       omega
   have hnotmem : e ∉ orbitTail σ e := (List.nodup_cons.mp (nodup_cons_orbitTail σ e)).1
   have hsign : ∀ (l : List ι), e ∉ l →

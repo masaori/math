@@ -3339,11 +3339,11 @@ c\cdot\lambda\le_{\Lambda_{\mathbb{Q}}}c\cdot\mu`),
 &=\bigl((vc)N\bigr)\cdot\lambda
 &&(\because\ \mathbb{Q}\text{ の積の結合則})\\
 &=(uN)\cdot\lambda
-&&(\because\ v\cdot c=u\text{。}\blkref{claim_common_denominator_exists}\text{ の }\operatorname{den}(r)\cdot r=\operatorname{num}(r))\\
+&&(\because\ v\cdot c=u\text{ と }\blkref{claim_common_denominator_exists}\text{ の }\operatorname{den}(r)\cdot r=\operatorname{num}(r))\\
 &=u\cdot(N\cdot\lambda)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
 &=u\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)
-&&(\because\ N\text{ は }\lambda\text{ の共通分母、証人 }\lambda_N\text{。}\blkref{def_common_denominator})\\
+&&(\because\ N\text{ は }\lambda\text{ の共通分母、証人 }\lambda_N\text{ と }\blkref{def_common_denominator})\\
 &=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(u\lambda_N)
 &&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})
 \end{aligned}`),
