@@ -2,12 +2,14 @@ import Ising2DLambda.AlgebraicEigenvalue.MatchingPairActualSignComposition
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairActualMonomial
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairEntryProduct
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairOrientationProduct
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairTermEquality
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
 open scoped Classical
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue (ascendingMatePair orientationFactor sign)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
@@ -71,7 +73,7 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
     (hcolor : ∀ i : J, i ∈ w ↔ i ∈ matchingPairColor τ υ) :
     ∃ α β : Polynomial Qbar,
       α * α = 1 ∧ β * β = 1 ∧
-      Polynomial.C ((sign (fun x y : J => x < y) (matchingPairPermutation τ υ) : ℤ) : Qbar) =
+      Polynomial.C ((finiteOrderedSign (matchingPairPermutation τ υ) : ℤ) : Qbar) =
         α * β * matchingSignPolynomial (involutionToPerfectMatching τ) *
           matchingSignPolynomial (involutionToPerfectMatching υ) ∧
       (∏ i : J, A i (matchingPairPermutation τ υ i)) =
@@ -120,7 +122,6 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
     simpa only [Sυ, Finset.mem_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq]
       using orientationSign_cast_eq_product υ.val {i | i ∉ C} w₂ hw₂ hcolor₂ hυmate
   have hsign := matchingPairActualSignComposition τ υ w hw hcolor
-  change sign (fun x y : J => x < y) (matchingPairPermutation τ υ) = _ at hsign
   have hsignPoly := congrArg (fun z : ℤ => Polynomial.C (z : Qbar)) hsign
   have hατsq : Polynomial.C ((ατ : ℤ) : Qbar) * Polynomial.C ((ατ : ℤ) : Qbar) = 1 := by
     have h := congrArg (fun z : ℤ => Polynomial.C (z : Qbar))
@@ -171,7 +172,7 @@ theorem matchingPairTermEquality (τ υ : FixedPointFreeInvolution J)
     (hA : IsZeroDiagonalSkewQbarPolynomialMatrix A)
     (w : List J) (hw : w.Nodup)
     (hcolor : ∀ i : J, i ∈ w ↔ i ∈ matchingPairColor τ υ) :
-    Polynomial.C ((sign (fun x y : J => x < y) (matchingPairPermutation τ υ) : ℤ) : Qbar) *
+    Polynomial.C ((finiteOrderedSign (matchingPairPermutation τ υ) : ℤ) : Qbar) *
         (∏ i : J, A i (matchingPairPermutation τ υ i)) =
       (matchingSignPolynomial (involutionToPerfectMatching τ) *
         matchingSignPolynomial (involutionToPerfectMatching υ)) *

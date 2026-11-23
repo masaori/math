@@ -1,11 +1,13 @@
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairTermEquality
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairBijection
+import Ising2DLambda.AlgebraicEigenvalue.PermutationSignFiniteOrderedSetIndependent
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEvenSum
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Classical
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
+open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
 noncomputable instance evenOrbitPermutationFintype : Fintype (EvenOrbitPermutation J) := by
@@ -17,7 +19,7 @@ theorem matchingPair_even_term
     (A : Matrix J J (Polynomial Qbar))
     (hA : IsZeroDiagonalSkewQbarPolynomialMatrix A)
     (p : PerfectMatching J × PerfectMatching J) :
-    Polynomial.C ((sign (fun x y : J => x < y)
+    Polynomial.C ((finiteOrderedSign
       (perfectMatchingPairEvenOrbitEquiv p).val : ℤ) : Qbar) *
         (∏ i : J, A i ((perfectMatchingPairEvenOrbitEquiv p).val i)) =
       (matchingSignPolynomial p.1 * matchingSignPolynomial p.2) *
@@ -39,7 +41,7 @@ theorem matchingPair_even_sum
     (A : Matrix J J (Polynomial Qbar))
     (hA : IsZeroDiagonalSkewQbarPolynomialMatrix A) :
     (∑ s : EvenOrbitPermutation J,
-      Polynomial.C ((sign (fun x y : J => x < y) s.val : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign s.val : ℤ) : Qbar) *
         ∏ i : J, A i (s.val i)) =
       ∑ p : PerfectMatching J × PerfectMatching J,
         (matchingSignPolynomial p.1 * matchingSignPolynomial p.2) *
@@ -47,10 +49,10 @@ theorem matchingPair_even_sum
   let e := perfectMatchingPairEvenOrbitEquiv (J := J)
   calc
     (∑ s : EvenOrbitPermutation J,
-      Polynomial.C ((sign (fun x y : J => x < y) s.val : ℤ) : Qbar) *
+      Polynomial.C ((finiteOrderedSign s.val : ℤ) : Qbar) *
         ∏ i : J, A i (s.val i)) =
       ∑ p : PerfectMatching J × PerfectMatching J,
-        Polynomial.C ((sign (fun x y : J => x < y) (e p).val : ℤ) : Qbar) *
+        Polynomial.C ((finiteOrderedSign (e p).val : ℤ) : Qbar) *
           ∏ i : J, A i ((e p).val i) :=
         (Equiv.sum_comp e _).symm
     _ = ∑ p : PerfectMatching J × PerfectMatching J,
