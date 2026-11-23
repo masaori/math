@@ -69333,7 +69333,7 @@ x_c
                         displayMath(String.raw`\begin{aligned}
 -1_{\overline{\mathbb Q}}+s
 &=(-1_{\overline{\mathbb Q}})+s
-&&\bigl(\because\ \text{記法}\ \blkref{claim_self_dual_quadratic_roots}\bigr)\\
+&&\bigl(\because\ \text{主張の文の記法}\bigr)\\
 &=(-\iota(1_{\mathbb Q}))+s
 &&\bigl(\because\ \iota\text{ の一の保存}\ \blkref{def_algebraic_numbers}\bigr)\\
 &=\iota(-1_{\mathbb Q})+s
