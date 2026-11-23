@@ -121,26 +121,6 @@ theorem reversalPerm_eq_transpositionProduct (L : ℕ) :
     exact directionTransposition_outside e x hx
   · exact directionPairs_cover
 
-private theorem finiteOrderedSign_noncommProd {J β : Type*} [Fintype J] [LinearOrder J]
-    (s : Finset β) (f : β → Equiv.Perm J)
-    (comm : (s : Set β).Pairwise fun b c => Commute (f b) (f c)) :
-    finiteOrderedSign (s.noncommProd f comm) =
-      ∏ b ∈ s, finiteOrderedSign (f b) := by
-  classical
-  induction s using Finset.induction_on with
-  | empty =>
-    simp only [Finset.noncommProd_empty, Finset.prod_empty]
-    have hinv : finiteOrderedInversionCount (1 : Equiv.Perm J) = 0 := by
-      rw [finiteOrderedInversionCount, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
-      intro p hp
-      have hlt : p.1 < p.2 := by simpa [finiteOrderedPairs] using hp
-      exact lt_asymm hlt
-    rw [finiteOrderedSign, hinv, pow_zero]
-  | insert a t ha ih =>
-    rw [Finset.noncommProd_insert_of_notMem t a f _ ha,
-      finiteOrderedSign_comp, Finset.prod_insert ha,
-      ih (comm.mono (Finset.subset_insert a t))]
-
 set_option maxHeartbeats 1000000
 /-- 反転の符号は、互換の個数 `2L²` が偶数であることから一になる。 -/
 theorem reversalPerm_sign (L : ℕ) :

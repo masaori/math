@@ -775,7 +775,7 @@ v_p(a)-v_p(b)
 &=\bigl(v_p(a_1)+v_p(a_2)\bigr)-\bigl(v_p(b_1)+v_p(b_2)\bigr)
 &&\bigl(\because\ \blkref{def_prime_exponent}\bigr)\\
 &=\bigl(v_p(a_1)-v_p(b_1)\bigr)+\bigl(v_p(a_2)-v_p(b_2)\bigr)
-&&\bigl(\because\ \mathbb{Z}\ \text{の加法の可換性と結合性}\bigr)\\
+&&\bigl(\because\ \mathbb{Z}\text{ の加法の可換性と結合性}\bigr)\\
 &=w_p(q_1)+w_p(q_2)
 &&\bigl(\because\ \blkref{def_rational_log}\bigr)\\
 &=\bigl(\log q_1+\log q_2\bigr)(p)

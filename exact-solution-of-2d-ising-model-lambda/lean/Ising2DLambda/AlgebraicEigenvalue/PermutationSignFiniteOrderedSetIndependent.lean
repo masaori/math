@@ -29,6 +29,7 @@
 -/
 import Ising2DLambda.AlgebraicEigenvalue.PermutationSign
 import Mathlib.Data.Finset.Card
+import Mathlib.Data.Finset.NoncommProd
 
 namespace Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
 
@@ -188,5 +189,26 @@ theorem finiteOrderedSign_comp (φ ψ : Equiv.Perm J) :
     _ = 1 * finiteOrderedSign φ * finiteOrderedSign ψ := by
         rw [finiteOrderedSign_comp_mul_mul]
     _ = finiteOrderedSign φ * finiteOrderedSign ψ := by ring
+
+/-- 互いに可換な置換の有限積の符号。空積と一元の追加ごとに、本文の符号の乗法性を適用する。 -/
+theorem finiteOrderedSign_noncommProd {β : Type*} (s : Finset β)
+    (f : β → Equiv.Perm J)
+    (comm : (s : Set β).Pairwise fun b c => Commute (f b) (f c)) :
+    finiteOrderedSign (s.noncommProd f comm) =
+      ∏ b ∈ s, finiteOrderedSign (f b) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+    simp only [Finset.noncommProd_empty, Finset.prod_empty]
+    have hinv : finiteOrderedInversionCount (1 : Equiv.Perm J) = 0 := by
+      rw [finiteOrderedInversionCount, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+      intro p hp
+      have hlt : p.1 < p.2 := by simpa [finiteOrderedPairs] using hp
+      exact lt_asymm hlt
+    rw [finiteOrderedSign, hinv, pow_zero]
+  | insert a t ha ih =>
+    rw [Finset.noncommProd_insert_of_notMem t a f _ ha,
+      finiteOrderedSign_comp, Finset.prod_insert ha,
+      ih (comm.mono (Finset.subset_insert a t))]
 
 end Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
