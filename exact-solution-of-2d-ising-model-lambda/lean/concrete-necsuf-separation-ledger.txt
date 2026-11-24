@@ -6,7 +6,6 @@ DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWordOrientationS
 DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWordSignMap_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientationSignWithPrefix
 DEP	necsuf	Ising2DLambda.NecSuf.CriticalExponent.criticalPoint_rationalPartitionInterval_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.activeTwoStep_orbits_disjoint
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.activeTwoStep_periodic
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.alternatingCycle
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.alternatingCycle_cover
@@ -32,7 +31,6 @@ DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycle_pairs_reference_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycle_period_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.iterate_color_parity_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.iterate_succ_val_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.longInvolution
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.matchingSignOf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.matchingSignOf_enumeration
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.minimum_self_and_color
@@ -43,7 +41,6 @@ DEP	necsuf	Ising2DLambda.NecSuf.KacWard.projectedClosedEdgeCycle
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.projectedCycleSupportUnion_eq_range
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.projectedCycle_edges_injective
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.projectedCycle_nonbacktracking
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.shortInvolution
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.tagged_alternating_cycles_matching_sign_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.tagged_cycle_term_split_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.tagged_matching_term_oriented_necSuf
@@ -176,7 +173,6 @@ IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedAlternatingCycleMatchingSign	co
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedCyclePairWalk	concrete	Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSign
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedDifferenceAlternatingCycle	concrete	Ising2DLambda.AlgebraicEigenvalue.MatchingPairEvenOrbit
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedDifferenceAlternatingCycle	concrete	Ising2DLambda.AlgebraicEigenvalue.MatchingPairReconstructedOrbit
-IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedDifferenceOrbitSeparation	concrete	Ising2DLambda.AlgebraicEigenvalue.MatchingPairOrbitSeparation
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedDifferenceTwoStepOrbit	concrete	Ising2DLambda.AlgebraicEigenvalue.FinitePermutationMinimalPeriod
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedMatchingTermOrientation	concrete	Ising2DLambda.KacWard.AlternatingCycleMatchingSign
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TwistedModeRatioRoot	concrete	Ising2DLambda.AlgebraicEigenvalue.RootOfUnity

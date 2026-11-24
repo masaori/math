@@ -76558,7 +76558,7 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
                     displayMath(String.raw`\begin{aligned}
 \frac{1}{(ka)^2}\cdot\iota\bigl(2k(k-1)a\,\log q+k^2\,\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
 &=\frac{1}{(ka)^2}\cdot\bigl(\iota(2k(k-1)a\,\log q)+\iota(k^2\,\log Z^{\mathrm{op}}_{a,a}(q))\bigr)
-&&(\because\ \iota\text{ は加法を保つ。}\blkref{claim_rational_log_order_group_embedding})\\
+&&(\because\ \iota\text{ は加法を保つ}\blkref{claim_rational_log_order_group_embedding})\\
 &=\frac{1}{(ka)^2}\cdot\iota(2k(k-1)a\,\log q)+\frac{1}{(ka)^2}\cdot\iota(k^2\,\log Z^{\mathrm{op}}_{a,a}(q))
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則 }r\cdot(\lambda+\mu)=r\cdot\lambda+r\cdot\mu)\\
 &=\frac{1}{(ka)^2}\cdot\bigl(2k(k-1)a\cdot\iota(\log q)\bigr)+\frac{1}{(ka)^2}\cdot\iota(k^2\,\log Z^{\mathrm{op}}_{a,a}(q))

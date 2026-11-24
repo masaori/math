@@ -1,9 +1,10 @@
 import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceTwoStepOrbit
-import Ising2DLambda.AlgebraicEigenvalue.MatchingPairOrbitSeparation
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairOrbitSeparation
 
 namespace Ising2DLambda.NecSuf.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 attribute [local instance] Classical.propDecidable
 
 variable {J : Type*} [Fintype J]
@@ -22,8 +23,8 @@ private noncomputable def longInvolution (D R : PerfectMatching J) (T : Set (Set
 
 theorem activeTwoStep_orbits_disjoint (D R : PerfectMatching J) (T : Set (Set J))
     (i : {i : J // i ∈ activeVertices D R T}) :
-    Disjoint (finitePermutationOrbit (activeTwoStep D R T) i)
-      (finitePermutationOrbit (activeTwoStep D R T)
+    Disjoint (permutationOrbit (activeTwoStep D R T) i)
+      (permutationOrbit (activeTwoStep D R T)
         (activeMate D R T D (fun j hj => (activeVertices_mates D R T j hj).1) i)) := by
   let τ := shortInvolution D R T
   let υ := longInvolution D R T
