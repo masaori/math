@@ -119,7 +119,11 @@ theorem recover_off_diagonal_term (hM : M ≠ 0) {j k : Fin M} (hkj : k ≠ j) (
             * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ))) • A
       = (0 : ℂ) • A := by
         simp_rw [exp_I_mul_int_mul_real]
-        rw [antiperiodic_complex_exp_sum_nonzero_of_abs_lt hM habs hne]
+        -- `antiperiodic_exp_sum` の具体版の和の添字は人手の添字の像 `finIndexToZZ M μ`。ここの和は `checkZ`・`checkY` の位相の添字と同じく
+        -- Lean の添字の値に 1 を足した形で書くので、像を値へ戻す（Lean だけの段）
+        have h := antiperiodic_complex_exp_sum_nonzero_of_abs_lt hM habs hne
+        simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
+        rw [h]
                                 -- `antiperiodic_exp_sum` の「とくに」を `0 < |j_ℤ - k_ℤ| < M_col` の整数で
     _ = 0 := zero_smul _ A      -- `zero_scalar_multiple_is_zero_matrix`
 
@@ -189,7 +193,11 @@ theorem inverse_dft_check (hM : M ≠ 0) (x : Fin M → TensorPow M) (m : Fin M)
       -- (∵ antiperiodic_exp_sum の「とくに」を整数 0 で。和を Lean の形へ読む段を含む)
     _ = (M : ℂ) • x m := by
         simp_rw [exp_I_mul_int_mul_real]
-        rw [Int.cast_zero, antiperiodic_complex_exp_sum_zero hM]
+        -- `antiperiodic_exp_sum` の具体版の和の添字は人手の添字の像 `finIndexToZZ M μ`。ここの和は Lean の添字の値に 1 を足した形なので、
+        -- 像を値へ戻す（Lean だけの段）
+        have h := antiperiodic_complex_exp_sum_zero hM
+        simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
+        rw [Int.cast_zero, h]
 
 /-- **原文第 1 式（分母を払った形）**: `∑_{μ=1}^{M} check(Z)_μ e^{ij θ~_μ} = M Z_j`。 -/
 theorem recover_checkZ (hM : M ≠ 0) (m : Fin M) :

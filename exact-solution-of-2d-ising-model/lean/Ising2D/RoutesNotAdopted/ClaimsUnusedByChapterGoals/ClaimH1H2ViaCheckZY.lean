@@ -43,6 +43,14 @@ private theorem dvd_sub_iff_eq_valInH1H2ViaCheckZY {M : ℕ} (j m : Fin M) :
   simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, add_sub_add_right_eq_sub] at h
   exact h
 
+/-- 本文から退避した経路の記録の中だけで使う読み替え: `sum_checkPhase` の和の添字の人手の像 `finIndexToZZ M μ` を、Lean の添字の値に 1 を足した形へ戻した形。 -/
+private theorem sum_checkPhase_valInH1H2ViaCheckZY (hM : M ≠ 0) (n : ℤ) :
+    ∑ μ : Fin M, checkPhase M n (((μ : ℕ) : ℤ) + 1)
+      = expPhase (2 * M) n * ((M : ℂ) * deltaMod M n 0) := by
+  have h := sum_checkPhase hM n
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
+  exact h
+
 
 /-- **境界の符号が反周期性から出ることの中身**:
 
@@ -89,7 +97,7 @@ theorem H2_eq_check_sum (hM : M ≠ 0) :
         = (expPhase (2 * M) (((k₂ : ℕ) : ℤ) - ((k₁ : ℕ) : ℤ)) *
             ((M : ℂ) * deltaMod M (((k₂ : ℕ) : ℤ) - ((k₁ : ℕ) : ℤ)) 0)) • (Z k₁ * Y k₂) := by
     intro k₁ k₂
-    rw [← Finset.sum_smul, sum_checkPhase hM]
+    rw [← Finset.sum_smul, sum_checkPhase_valInH1H2ViaCheckZY hM]
   have houter : ∀ k₁ : Fin M,
       ∑ k₂ : Fin M,
           (expPhase (2 * M) (((k₂ : ℕ) : ℤ) - ((k₁ : ℕ) : ℤ)) *
@@ -144,7 +152,7 @@ theorem H1Plus_eq_check_sum (hM : M ≠ 0) :
             ((M : ℂ) * deltaMod M (((k₁ : ℕ) : ℤ) - ((k₂ : ℕ) : ℤ) + 1) 0)) •
               (Y k₁ * Z k₂) := by
     intro k₁ k₂
-    rw [← Finset.sum_smul, sum_checkPhase hM]
+    rw [← Finset.sum_smul, sum_checkPhase_valInH1H2ViaCheckZY hM]
   have houter : ∀ k₁ : Fin M,
       ∑ k₂ : Fin M,
           (expPhase (2 * M) (((k₁ : ℕ) : ℤ) - ((k₂ : ℕ) : ℤ) + 1) *

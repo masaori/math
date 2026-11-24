@@ -30,7 +30,8 @@
   （必要十分版の冒頭コメント参照）。
 * 実数の `θ~_μ` は `Ising2D.thetaTilde` として定義し、
   `checkPhase_eq_exp` で `checkPhase` と一致することを示す（原文の記号との橋渡し）。
-* 和の添字は `Fin M`（`0,…,M-1`）で、原文の `μ` は `(μ : ℕ) + 1`。
+* 和の添字は `Fin M`（`0,…,M-1`）で、原文の `μ` の整数像 `μ_ℤ` は名前を付けた写像の像 `finIndexToZZ M μ`（`ι_{ℕ→ℤ}(μ.val) + 1_ℤ`、
+  `def_index_set_from_one_to_n`）と書く。
 * 原文は `M ≥ 2` を仮定しているが、本ファイルの主張に必要なのは `M ≠ 0` だけである。
 * `antiperiodic_exp_sum_not_dvd`（`M ∤ k`）の `calc` と `antiperiodic_exp_sum_dvd` の `l` が偶数・奇数の 2 本の `calc` は、
   人手の鎖（7 行・10 行・8 行）と 1 段ずつ対応する（段のコメントに人手の行を書いた）。ただし偶数の 10 行目・奇数の 8 行目の
@@ -260,7 +261,7 @@ private theorem sum_range_even_odd {A : Type*} [AddCommMonoid A] (f : ℕ → A)
 
 `2M` 項の整数運動量指数和から偶数番目の `M` 項を引くと、半整数運動量指数和になる。 -/
 theorem antiperiodic_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
-    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) =
+    ∑ μ : Fin M, checkPhase M (-k) (finIndexToZZ M μ) =
       ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 := by
   have h2M : 2 * M ≠ 0 := by omega
   -- 人手証明の準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n ∈ ℕ`）。
@@ -276,102 +277,88 @@ theorem antiperiodic_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
       _ = ((0 + 1) + 1) * inclusionNNtoZZ n := rfl                         -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`
       _ = (1 + 1) * inclusionNNtoZZ n := by rw [zero_add (1 : ℤ)]          -- ℤ の和の単位元 `0 + x = x`（`x → 1_ℤ`）
       _ = 2 * inclusionNNtoZZ n := rfl                                     -- `def_power_of_integer` の `2_ℤ := 1_ℤ + 1_ℤ` を右辺から左辺へ（最後の行の略記 `n_ℤ` は Lean では同じ項）
-  -- 人手証明の準備の鎖 `(2μ - 1)_ℤ = 2_ℤ·μ_ℤ - 1_ℤ`（`μ ∈ ℕ`, `1 ≤ μ`）の 7 行。Lean の和の添字は `0` 始まりなので、
-  -- 人手の `μ` を `μ + 1` と書き、人手の ℕ の差 `2μ - 1` は ℕ の差を使わずに `2μ + 1` と書く
-  -- （人手の `(2μ - 1) + 1 = 2μ` は、Lean では ℕ の和と積の再帰の式で `(2μ + 1) + 1 = 2(μ + 1)` が定義として成り立つこと）。
-  have hoddZ : ∀ μ : ℕ, ((2 * μ + 1 : ℕ) : ℤ) = 2 * (((μ : ℕ) : ℤ) + 1) - 1 := fun μ =>
-    calc ((2 * μ + 1 : ℕ) : ℤ)
-        = inclusionNNtoZZ (2 * μ + 1) := (inclusionNNtoZZ_eq_natCast _).symm  -- 略記 `n_ℤ := ι_{ℕ→ℤ}(n)`（`n → 2μ - 1`）
-      _ = inclusionNNtoZZ (2 * μ + 1) + 0 := (add_zero _).symm             -- ℤ の和の単位元
+  -- 人手証明の準備の鎖 `(2μ - 1)_ℤ = 2_ℤ·μ_ℤ - 1_ℤ`（`μ ∈ ℕ`, `1 ≤ μ`）の 7 行と、Lean だけの 1 段（下の 8 段目）。以下のコードの束縛変数 `μ` は Lean の和の添字 `μ' ∈ {0,…,M-1}` で、人手の `μ` は `μ' + 1_ℕ` で、
+  -- その像 `μ_ℤ = ι_{ℕ→ℤ}(μ' + 1_ℕ)` は `inclusion_nn_to_zz` の定義の式で `ι_{ℕ→ℤ}(μ') + 1_ℤ`（`finIndexToZZ` の値）。人手の ℕ の差 `2μ - 1` は
+  -- ℕ の差を使わずに `2μ' + 1` と書く（人手の `(2μ - 1) + 1 = 2μ` は、Lean では ℕ の和と積の再帰の式で `(2μ' + 1) + 1 = 2(μ' + 1)` が定義として成り立つこと）。
+  -- コメントの中では Lean の添字を `μ'`、人手の添字を `μ` と書き分ける。
+  have hoddZ : ∀ μ : ℕ, inclusionNNtoZZ (2 * μ + 1) = 2 * (inclusionNNtoZZ μ + 1) - 1 := fun μ =>
+    calc inclusionNNtoZZ (2 * μ + 1)
+        = inclusionNNtoZZ (2 * μ + 1) + 0 := (add_zero _).symm             -- ℤ の和の単位元
       _ = inclusionNNtoZZ (2 * μ + 1) + (1 + (-1)) := by
           rw [add_neg_cancel (1 : ℤ)]                                       -- ℤ の加法の逆元
       _ = (inclusionNNtoZZ (2 * μ + 1) + 1) + (-1) := (add_assoc _ _ _).symm  -- ℤ の加法の結合律
       _ = inclusionNNtoZZ (2 * μ + 1 + 1) + (-1) := rfl                    -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ` を右辺から左辺へ
       _ = inclusionNNtoZZ (2 * (μ + 1)) + (-1) := rfl                      -- `(2μ - 1) + 1 = 2μ`
-      _ = 2 * inclusionNNtoZZ (μ + 1) + (-1) := by rw [htwoZ (μ + 1)]      -- 準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n → μ`）
-      _ = 2 * (((μ : ℕ) : ℤ) + 1) + (-1) := by
-          rw [inclusionNNtoZZ_eq_natCast]; rfl                              -- 略記 `n_ℤ` を右辺から左辺へ（Lean の添字 `μ + 1` の像）
-      _ = 2 * (((μ : ℕ) : ℤ) + 1) - 1 := (int_sub_eq_add_neg _ _).symm    -- `def_int_difference` を右辺から左辺へ
+      _ = 2 * inclusionNNtoZZ (μ + 1) + (-1) := by rw [htwoZ (μ + 1)]      -- 準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n → μ`。人手の `μ` は Lean の `μ' + 1_ℕ`）
+      _ = 2 * (inclusionNNtoZZ μ + 1) + (-1) := rfl                        -- Lean だけの段: 人手の `μ_ℤ` を `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → μ'`）で `finIndexToZZ` の値の形に書く
+      _ = 2 * (inclusionNNtoZZ μ + 1) - 1 := (int_sub_eq_add_neg _ _).symm -- `def_int_difference` を右辺から左辺へ
+  -- 人手の `T_{2M}` の項の番号 `r ∈ {1,…,2(M_col)_ℕ}` の像 `r_ℤ` は、Lean の添字 `r'` に対して `ι_{ℕ→ℤ}(r') + 1_ℤ` と書く。
   have hsplit := sum_range_even_odd
-    (fun r : ℕ => expPhase (2 * M) ((((r + 1 : ℕ) : ℤ)) * (-k))) M
+    (fun r : ℕ => expPhase (2 * M) ((inclusionNNtoZZ r + 1) * (-k))) M
   have hodd :
       ∑ μ ∈ Finset.range M,
-          expPhase (2 * M) (((2 * μ + 1 : ℕ) : ℤ) * (-k)) =
-        ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) := by
-    rw [Fin.sum_univ_eq_sum_range
-      (fun μ : ℕ => checkPhase M (-k) ((μ : ℤ) + 1))]
+          expPhase (2 * M) ((inclusionNNtoZZ (2 * μ) + 1) * (-k)) =
+        ∑ μ : Fin M, checkPhase M (-k) (finIndexToZZ M μ) := by
+    -- 和の添字を、Lean の `Fin M` から ℕ の範囲 `{0,…,M-1}` へ移す（`finIndexToZZ` の定義 `i ↦ ι(i.val) + 1_ℤ`。Lean だけの段）
+    rw [show (∑ μ : Fin M, checkPhase M (-k) (finIndexToZZ M μ))
+        = ∑ μ ∈ Finset.range M, checkPhase M (-k) (inclusionNNtoZZ μ + 1) from
+      Fin.sum_univ_eq_sum_range (fun μ : ℕ => checkPhase M (-k) (inclusionNNtoZZ μ + 1)) M]
     apply Finset.sum_congr rfl
-    intro μ hμ
+    intro μ _
     rw [checkPhase]
     congr 1
-    -- 人手の奇偶の分割の行の `(2μ - 1)_ℤ = 2_ℤμ_ℤ - 1_ℤ`（準備の鎖）。最後は ℤ の乗法の交換律。
-    rw [hoddZ μ, mul_comm]
+    -- 人手の奇偶の分割の行の `(2μ - 1)_ℤ = 2_ℤμ_ℤ - 1_ℤ`（準備の鎖）。`ι(2μ') + 1_ℤ = ι(2μ' + 1_ℕ)` は `inclusion_nn_to_zz` の定義の式、
+    -- 最後は ℤ の乗法の交換律。
+    rw [show inclusionNNtoZZ (2 * μ) + 1 = inclusionNNtoZZ (2 * μ + 1) from rfl, hoddZ μ, mul_comm]
   have heven :
       ∑ μ ∈ Finset.range M,
-          expPhase (2 * M) (((2 * μ + 2 : ℕ) : ℤ) * (-k)) =
-        ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) := by
-    calc
-      ∑ μ ∈ Finset.range M,
-          expPhase (2 * M) (((2 * μ + 2 : ℕ) : ℤ) * (-k)) =
-          ∑ μ ∈ Finset.range M,
-            expPhase M (((μ + 1 : ℕ) : ℤ) * (-k)) := by
-              apply Finset.sum_congr rfl
-              intro μ hμ
-              rw [← expPhase_two_mul hM]
-              congr 1
-              -- 人手の奇偶の分割の行の `(2μ)_ℤ = 2_ℤμ_ℤ`（準備の鎖。Lean の添字は `μ + 1`）。最後は ℤ の乗法の結合律。
-              rw [show (2 * μ + 2 : ℕ) = 2 * (μ + 1) from rfl, ← inclusionNNtoZZ_eq_natCast (2 * (μ + 1)),
-                htwoZ (μ + 1), inclusionNNtoZZ_eq_natCast (μ + 1), mul_assoc]
-      _ = ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) := by
-            exact (Fin.sum_univ_eq_sum_range
-              (fun μ : ℕ => expPhase M (((μ + 1 : ℕ) : ℤ) * (-k))) M).symm
+          expPhase (2 * M) ((inclusionNNtoZZ (2 * μ + 1) + 1) * (-k)) =
+        ∑ μ : Fin M, expPhase M (finIndexToZZ M μ * (-k)) := by
+    -- 和の添字を、Lean の `Fin M` から ℕ の範囲へ移す（`finIndexToZZ` の定義。Lean だけの段）
+    rw [show (∑ μ : Fin M, expPhase M (finIndexToZZ M μ * (-k)))
+        = ∑ μ ∈ Finset.range M, expPhase M ((inclusionNNtoZZ μ + 1) * (-k)) from
+      Fin.sum_univ_eq_sum_range (fun μ : ℕ => expPhase M ((inclusionNNtoZZ μ + 1) * (-k))) M]
+    apply Finset.sum_congr rfl
+    intro μ _
+    rw [← expPhase_two_mul hM]
+    congr 1
+    -- 人手の奇偶の分割の行の `(2μ)_ℤ = 2_ℤμ_ℤ`（準備の鎖）。`ι(2μ' + 1) + 1_ℤ = ι(2(μ' + 1))` と `ι(μ' + 1) = ι(μ') + 1_ℤ` は
+    -- `inclusion_nn_to_zz` の定義の式、最後は ℤ の乗法の結合律。
+    rw [show inclusionNNtoZZ (2 * μ + 1) + 1 = inclusionNNtoZZ (2 * (μ + 1)) from rfl, htwoZ (μ + 1),
+      show inclusionNNtoZZ (μ + 1) = inclusionNNtoZZ μ + 1 from rfl, mul_assoc]
   have hfull :
       ∑ r ∈ Finset.range (2 * M),
-          expPhase (2 * M) (((r + 1 : ℕ) : ℤ) * (-k)) =
+          expPhase (2 * M) ((inclusionNNtoZZ r + 1) * (-k)) =
         ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 := by
-    calc
-      ∑ r ∈ Finset.range (2 * M),
-          expPhase (2 * M) (((r + 1 : ℕ) : ℤ) * (-k)) =
-          ∑ r : Fin (2 * M),
-            expPhase (2 * M) (((r : ℕ) + 1 : ℤ) * (-k)) := by
-              exact (Fin.sum_univ_eq_sum_range
-                (fun r : ℕ => expPhase (2 * M) (((r + 1 : ℕ) : ℤ) * (-k)))
-                (2 * M)).symm
-      _ = ∑ r : Fin (2 * M),
-            expPhase (2 * M) ((((r : ℕ) : ℤ) + 1) * (-k)) := by
-              apply Finset.sum_congr rfl
-              intro r hr
-              congr 1
-      _ = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 := by
-            have h := expPhase_sum h2M (-k)
-            -- `exp_sum` の和の添字は人手の添字 `finIndexToZZ` の像。ここの和は Lean の添字の値に 1 を足した形で書くので、像を値へ戻す
-            simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
-            rw [deltaMod, sub_zero] at h ⊢
-            simpa only [dvd_neg] using h
+    -- 和の添字を ℕ の範囲から Lean の `Fin (2M)` へ移し（`finIndexToZZ` の定義。Lean だけの段）、`exp_sum` を `2(M_col)_ℕ` に当てる
+    rw [show (∑ r ∈ Finset.range (2 * M), expPhase (2 * M) ((inclusionNNtoZZ r + 1) * (-k)))
+        = ∑ r : Fin (2 * M), expPhase (2 * M) (finIndexToZZ (2 * M) r * (-k)) from
+      (Fin.sum_univ_eq_sum_range
+        (fun r : ℕ => expPhase (2 * M) ((inclusionNNtoZZ r + 1) * (-k))) (2 * M)).symm,
+      expPhase_sum h2M (-k), deltaMod, deltaMod, sub_zero, sub_zero]
+    simp only [dvd_neg]   -- Lean だけの段: `expPhase` の符号の向き（`k ↦ -k`）を `M ∣ -k ⟺ M ∣ k` で戻す
+  -- `exp_sum` を `(M_col)_ℕ` に当てる
   have hMsum :
-      ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) =
+      ∑ μ : Fin M, expPhase M (finIndexToZZ M μ * (-k)) =
         (M : ℂ) * deltaMod M k 0 := by
-    have h := expPhase_sum hM (-k)
-    -- `exp_sum` の和の添字は人手の添字 `finIndexToZZ` の像。ここの和は Lean の添字の値に 1 を足した形で書くので、像を値へ戻す
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
-    rw [deltaMod, sub_zero] at h ⊢
-    simpa only [dvd_neg] using h
+    rw [expPhase_sum hM (-k), deltaMod, deltaMod, sub_zero, sub_zero]
+    simp only [dvd_neg]   -- Lean だけの段: `expPhase` の符号の向き（`k ↦ -k`）を `M ∣ -k ⟺ M ∣ k` で戻す
   calc
-    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1)
+    ∑ μ : Fin M, checkPhase M (-k) (finIndexToZZ M μ)
         = ∑ μ ∈ Finset.range M,
-            expPhase (2 * M) (((2 * μ + 1 : ℕ) : ℤ) * (-k)) := hodd.symm
+            expPhase (2 * M) ((inclusionNNtoZZ (2 * μ) + 1) * (-k)) := hodd.symm
     _
         = (∑ r ∈ Finset.range (2 * M),
-            expPhase (2 * M) (((r + 1 : ℕ) : ℤ) * (-k))) -
+            expPhase (2 * M) ((inclusionNNtoZZ r + 1) * (-k))) -
           ∑ μ ∈ Finset.range M,
-            expPhase (2 * M) (((2 * μ + 2 : ℕ) : ℤ) * (-k)) := by
+            expPhase (2 * M) ((inclusionNNtoZZ (2 * μ + 1) + 1) * (-k)) := by
               rw [hsplit]
               ring
     _ = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 -
           ∑ μ ∈ Finset.range M,
-            expPhase (2 * M) (((2 * μ + 2 : ℕ) : ℤ) * (-k)) := by rw [hfull]
+            expPhase (2 * M) ((inclusionNNtoZZ (2 * μ + 1) + 1) * (-k)) := by rw [hfull]
     _ = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 -
-          ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) := by rw [heven]
+          ∑ μ : Fin M, expPhase M (finIndexToZZ M μ * (-k)) := by rw [heven]
     _ = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 -
           (M : ℂ) * deltaMod M k 0 := by rw [hMsum]
 
@@ -381,7 +368,7 @@ theorem antiperiodic_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
 
   `∑_{μ=1}^{M} e^{i k θ~_μ} = e^{-iπk/M} · M δ^M_{(k,0)}`
 
-（左辺の `e^{ikθ~_μ}` は `checkPhase M (-k) μ`。）
+（左辺の `e^{ikθ~_μ}` は `checkPhase M (-k) (finIndexToZZ M μ)`。）
 
 原文は右辺を「`k = lM` なら `M(-1)^l`、そうでなければ `0`」と場合分けして書いているが、
 `M ∤ k` のときは `δ^M_{(k,0)} = 0` で両者は一致し、`k = lM` のときの前因子
@@ -390,14 +377,16 @@ theorem antiperiodic_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
 これは定数位相を括り出す補助的な閉形式であり、人手証明の奇偶分割は
 `antiperiodic_exp_sum_delta_difference` が直接形式化する。 -/
 theorem antiperiodic_exp_sum (hM : M ≠ 0) (k : ℤ) :
-    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1)
+    ∑ μ : Fin M, checkPhase M (-k) (finIndexToZZ M μ)
       = expPhase (2 * M) (-k) * ((M : ℂ) * deltaMod M k 0) := by
   have hterm : ∀ μ : Fin M,
-      checkPhase M (-k) (((μ : ℕ) : ℤ) + 1)
+      checkPhase M (-k) (finIndexToZZ M μ)
         = expPhase (2 * M) (-k) * expPhase M (((μ : ℕ) : ℤ) * (-k)) := by
     intro μ
     rw [checkPhase, ← expPhase_two_mul hM (((μ : ℕ) : ℤ) * (-k)), ← expPhase_add]
     congr 1
+    -- 人手の添字の像 `finIndexToZZ M μ` を Lean の添字の値へ戻して `0` 始まりの和に揃える（この補助的な閉形式だけの Lean の段）
+    rw [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
     ring
   rw [Finset.sum_congr rfl fun μ _ => hterm μ, ← Finset.mul_sum,
     expPhase_sum_zero_based hM (-k)]
@@ -408,8 +397,8 @@ theorem antiperiodic_exp_sum (hM : M ≠ 0) (k : ℤ) :
 /-- 原文の `Complex.exp` の有限和と、計算に使う `checkPhase` の有限和は同じである。 -/
 theorem antiperiodic_complex_exp_sum_eq_checkPhase (hM : M ≠ 0) (k : ℤ) :
     ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
-        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
-      = ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) := by
+        (thetaTilde M (finIndexToZZ M μ) : ℂ))
+      = ∑ μ : Fin M, checkPhase M (-k) (finIndexToZZ M μ) := by
   have hMC : ((M : ℕ) : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hM
   -- 人手証明の準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n ∈ ℕ`）。
   have htwoZ : ∀ n : ℕ, inclusionNNtoZZ (2 * n) = 2 * inclusionNNtoZZ n := fun n =>
@@ -458,7 +447,7 @@ theorem antiperiodic_complex_exp_sum_eq_checkPhase (hM : M ≠ 0) (k : ℤ) :
   -- 人手の奇偶の分割の行の `((2μ - 1)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ - 1_ℝ` と T_{2M} の鎖の `(2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ`
   -- （`inclusion_zz_to_rr_preserves_product` で `((-k)(2μ - 1))_ℝ = (-k)_ℝ((2μ - 1))_ℝ`）。残りの `push_cast`・`field_simp` は、
   -- 人手の `k_ℝθ~_μ` の鎖（分子と分母に `2_ℝ` を掛ける段と ℝ の積の交換律・結合律）である。
-  rw [← Complex.ofReal_intCast (-k * (2 * (((μ : ℕ) : ℤ) + 1) - 1)), inclusion_zz_to_rr_preserves_product,
+  rw [← Complex.ofReal_intCast (-k * (2 * (finIndexToZZ M μ) - 1)), inclusion_zz_to_rr_preserves_product,
     hoddR, ← Complex.ofReal_natCast (2 * M), h2MR]
   push_cast
   field_simp
@@ -466,7 +455,7 @@ theorem antiperiodic_complex_exp_sum_eq_checkPhase (hM : M ≠ 0) (k : ℤ) :
 /-- **本文と同じ `Complex.exp` で書いた、奇偶分割によるデルタ差**。 -/
 theorem antiperiodic_complex_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
     ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
-        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+        (thetaTilde M (finIndexToZZ M μ) : ℂ))
       = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 := by
   rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k,
     antiperiodic_exp_sum_delta_difference hM k]
@@ -474,14 +463,14 @@ theorem antiperiodic_complex_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
 /-- **原文と同じ `Complex.exp` で書いた `antiperiodic_exp_sum`**。 -/
 theorem antiperiodic_complex_exp_sum (hM : M ≠ 0) (k : ℤ) :
     ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
-        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+        (thetaTilde M (finIndexToZZ M μ) : ℂ))
       = expPhase (2 * M) (-k) * ((M : ℂ) * deltaMod M k 0) := by
   rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k, antiperiodic_exp_sum hM k]
 
 /-- `antiperiodic_exp_sum` を、周波数をそのまま（符号を反転せずに）書いた形。
 以降の計算ではこちらの形で使う。 -/
 theorem sum_checkPhase (hM : M ≠ 0) (n : ℤ) :
-    ∑ μ : Fin M, checkPhase M n (((μ : ℕ) : ℤ) + 1)
+    ∑ μ : Fin M, checkPhase M n (finIndexToZZ M μ)
       = expPhase (2 * M) n * ((M : ℂ) * deltaMod M n 0) := by
   have h := antiperiodic_exp_sum hM (-n)
   rw [neg_neg] at h
@@ -503,7 +492,7 @@ theorem two_real_inclusion_sub_one : ((2 : ℝ) : ℂ) - 1 = 1 :=
 
 /-- **`antiperiodic_exp_sum` の `k = lM` の場合**: `∑_{μ=1}^{M} e^{i l M θ~_μ} = M(-1)^l`。 -/
 theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
-    ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1)
+    ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (finIndexToZZ M μ)
       = (M : ℂ) * (-1 : ℂ) ^ l := by
   have hdelta : deltaMod M (l * (M : ℤ)) 0 = 1 := by
     rw [deltaMod, sub_zero, if_pos ⟨l, by ring⟩]
@@ -552,7 +541,7 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
         _ = 2 * (M : ℤ) * q := by ring
     have hpow : (-1 : ℂ) ^ l = 1 := hl.neg_one_zpow
     calc
-      ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1) =
+      ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (finIndexToZZ M μ) =
           ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) (l * (M : ℤ)) 0 -
             (M : ℂ) * deltaMod M (l * (M : ℤ)) 0 := hsum              -- 人手の直前の鎖「`S = T_{2M} - T_M`」の結果
       _ = ((2 * M : ℕ) : ℂ) * 1 - (M : ℂ) * 1 := by rw [hdelta2, hdelta]       -- 1 行目
@@ -583,7 +572,7 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
       exact hl ⟨q, by rw [hlq, two_mul]⟩
     have hpow : (-1 : ℂ) ^ l = -1 := hodd.neg_one_zpow
     calc
-      ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1) =
+      ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (finIndexToZZ M μ) =
           ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) (l * (M : ℤ)) 0 -
             (M : ℂ) * deltaMod M (l * (M : ℤ)) 0 := hsum              -- 人手の直前の鎖「`S = T_{2M} - T_M`」の結果
       _ = ((2 * M : ℕ) : ℂ) * 0 - (M : ℂ) * 1 := by rw [hdelta2, hdelta]       -- 1 行目
@@ -598,14 +587,14 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
 /-- **原文と同じ `Complex.exp` で書いた `k = lM` の場合**。 -/
 theorem antiperiodic_complex_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
     ∑ μ : Fin M, Complex.exp (Complex.I * ((l * (M : ℤ) : ℤ) : ℂ) *
-        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+        (thetaTilde M (finIndexToZZ M μ) : ℂ))
       = (M : ℂ) * (-1 : ℂ) ^ l := by
   rw [antiperiodic_complex_exp_sum_eq_checkPhase hM (l * (M : ℤ)),
     antiperiodic_exp_sum_dvd hM l]
 
 /-- **`antiperiodic_exp_sum` の `M ∤ k` の場合**: 和は `0`。 -/
 theorem antiperiodic_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ} (hk : ¬ (M : ℤ) ∣ k) :
-    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) = 0 := by
+    ∑ μ : Fin M, checkPhase M (-k) (finIndexToZZ M μ) = 0 := by
   -- 人手証明の準備の鎖 `(2(M_col)_ℕ)_ℤ = 2_ℤ·M_col` の 11 行。
   -- 1 行目（略記 `n_ℤ`）は Lean の `((2 * M : ℕ) : ℤ)` が `Nat.cast` なので `inclusionNNtoZZ_eq_natCast` で `ι_{ℕ→ℤ}` の形へ移す段、
   -- 最後の 2 行（略記 `n_ℤ` を右辺から左辺へ、`(M_col)_ℕ` の定義）は同じ補題で `Nat.cast` の形へ戻す 1 段である。
@@ -631,7 +620,7 @@ theorem antiperiodic_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ} (hk : ¬ (M : ℤ)
   have hdelta2 : deltaMod (2 * M) k 0 = 0 := by
     rw [deltaMod, sub_zero, if_neg (by rw [h2M]; exact hk2)]
   have hdelta : deltaMod M k 0 = 0 := by rw [deltaMod, sub_zero, if_neg hk]
-  calc ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1)
+  calc ∑ μ : Fin M, checkPhase M (-k) (finIndexToZZ M μ)
       = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 :=
         antiperiodic_exp_sum_delta_difference hM k                    -- 人手の直前の鎖「`S = T_{2M} - T_M`」の結果
     _ = ((2 * M : ℕ) : ℂ) * 0 - (M : ℂ) * 0 := by rw [hdelta2, hdelta]  -- 1 行目
@@ -646,14 +635,14 @@ theorem antiperiodic_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ} (hk : ¬ (M : ℤ)
 theorem antiperiodic_complex_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ}
     (hk : ¬ (M : ℤ) ∣ k) :
     ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
-        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) = 0 := by
+        (thetaTilde M (finIndexToZZ M μ) : ℂ)) = 0 := by
   rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k,
     antiperiodic_exp_sum_not_dvd hM hk]
 
 /-- **原文の「とくに」の非零の場合**: `|k| < M` かつ `k ≠ 0` なら和は `0`。 -/
 theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
     (hklt : |k| < (M : ℤ)) (hk0 : k ≠ 0) :
-    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) = 0 := by
+    ∑ μ : Fin M, checkPhase M (-k) (finIndexToZZ M μ) = 0 := by
   apply antiperiodic_exp_sum_not_dvd hM
   intro hd
   rcases hd with ⟨l, hl⟩
@@ -700,15 +689,15 @@ theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
 theorem antiperiodic_complex_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
     (hklt : |k| < (M : ℤ)) (hk0 : k ≠ 0) :
     ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
-        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) = 0 := by
+        (thetaTilde M (finIndexToZZ M μ) : ℂ)) = 0 := by
   rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k,
     antiperiodic_exp_sum_nonzero_of_abs_lt hM hklt hk0]
 
 /-- **原文の「とくに」の零の場合**: `k = 0` なら和は `M`。 -/
 theorem antiperiodic_exp_sum_zero (_hM : M ≠ 0) :
-    ∑ μ : Fin M, checkPhase M 0 (((μ : ℕ) : ℤ) + 1) = (M : ℂ) := by
+    ∑ μ : Fin M, checkPhase M 0 (finIndexToZZ M μ) = (M : ℂ) := by
   calc
-    ∑ μ : Fin M, checkPhase M 0 (((μ : ℕ) : ℤ) + 1)
+    ∑ μ : Fin M, checkPhase M 0 (finIndexToZZ M μ)
         = (M : ℂ) * (-1 : ℂ) ^ (0 : ℤ) := by
             simpa using antiperiodic_exp_sum_dvd _hM 0
     _ = (M : ℂ) * 1 := by rw [zpow_zero]
@@ -717,11 +706,11 @@ theorem antiperiodic_exp_sum_zero (_hM : M ≠ 0) :
 /-- **原文と同じ `Complex.exp` で書いた「とくに」の零の場合**。 -/
 theorem antiperiodic_complex_exp_sum_zero (hM : M ≠ 0) :
     ∑ μ : Fin M, Complex.exp (Complex.I * (0 : ℂ) *
-        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) = (M : ℂ) := by
+        (thetaTilde M (finIndexToZZ M μ) : ℂ)) = (M : ℂ) := by
   calc
     ∑ μ : Fin M, Complex.exp (Complex.I * (0 : ℂ) *
-        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
-        = ∑ μ : Fin M, checkPhase M 0 (((μ : ℕ) : ℤ) + 1) := by
+        (thetaTilde M (finIndexToZZ M μ) : ℂ))
+        = ∑ μ : Fin M, checkPhase M 0 (finIndexToZZ M μ) := by
             simpa only [Int.cast_zero, neg_zero] using
               antiperiodic_complex_exp_sum_eq_checkPhase hM 0
     _ = (M : ℂ) := antiperiodic_exp_sum_zero hM
