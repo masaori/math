@@ -17,44 +17,46 @@ private theorem orientationSign_eq_finset_product (m : J → J) (S : Set J)
     (w : List J) (hw : w.Nodup)
     (hS : ∀ i, i ∈ w ↔ i ∈ S)
     (hm : ∀ i ∈ w, m i ∉ S) :
-    orientationSign (w.map (ascendingMatePair m)) S =
-      ∏ i ∈ Finset.univ.filter (· ∈ S), (orientationFactor m i : ℤ) := by
+    orientationSign (w.map (concreteAscendingMatePair m)) S =
+      ∏ i ∈ Finset.univ.filter (· ∈ S),
+        (if i < m i then (1 : ℤ) else -1) := by
   classical
   have hpoint (i : J) (hi : i ∈ w) :
-      (if (ascendingMatePair m i).1 ∈ S then (1 : ℤ) else -1) =
-        orientationFactor m i := by
+      (if (concreteAscendingMatePair m i).1 ∈ S then (1 : ℤ) else -1) =
+        (if i < m i then (1 : ℤ) else -1) := by
     by_cases hlt : i < m i
-    · simp [ascendingMatePair, orientationFactor, hlt, (hS i).mp hi]
-    · simp [ascendingMatePair, orientationFactor, hlt, hm i hi]
+    · simp [concreteAscendingMatePair, hlt, (hS i).mp hi]
+    · simp [concreteAscendingMatePair, hlt, hm i hi]
   have hset : w.toFinset = Finset.univ.filter (· ∈ S) := by
     ext i
     simp [hS i]
   calc
-    orientationSign (w.map (ascendingMatePair m)) S =
-        (w.map (fun i => orientationFactor m i : J → ℤ)).prod := by
+    orientationSign (w.map (concreteAscendingMatePair m)) S =
+        (w.map (fun i => if i < m i then (1 : ℤ) else -1)).prod := by
           unfold orientationSign
           simp only [List.map_map]
           congr 1
           apply List.map_congr_left
           intro i hi
           exact hpoint i hi
-    _ = ∏ i ∈ w.toFinset, (orientationFactor m i : ℤ) :=
+    _ = ∏ i ∈ w.toFinset, (if i < m i then (1 : ℤ) else -1) :=
       (List.prod_toFinset _ hw).symm
-    _ = ∏ i ∈ Finset.univ.filter (· ∈ S), (orientationFactor m i : ℤ) := by rw [hset]
+    _ = ∏ i ∈ Finset.univ.filter (· ∈ S),
+        (if i < m i then (1 : ℤ) else -1) := by rw [hset]
 
 private theorem orientationSign_cast_eq_product (m : J → J) (S : Set J)
     (w : List J) (hw : w.Nodup)
     (hS : ∀ i, i ∈ w ↔ i ∈ S)
     (hm : ∀ i ∈ w, m i ∉ S) :
-    Polynomial.C ((orientationSign (w.map (ascendingMatePair m)) S : ℤ) : Qbar) =
+    Polynomial.C ((orientationSign (w.map (concreteAscendingMatePair m)) S : ℤ) : Qbar) =
       ∏ i ∈ Finset.univ.filter (· ∈ S),
-        (orientationFactor m i : Polynomial Qbar) := by
+        concreteOrientationFactor m i := by
   classical
   rw [orientationSign_eq_finset_product m S w hw hS hm]
   simp only [Int.cast_prod, map_prod]
   apply Finset.prod_congr rfl
   intro i hi
-  by_cases hlt : i < m i <;> simp [orientationFactor, hlt]
+  by_cases hlt : i < m i <;> simp [concreteOrientationFactor, hlt]
 
 private theorem orientationSign_sq (l : List (J × J)) (S : Set J) :
     orientationSign l S * orientationSign l S = 1 := by
@@ -119,7 +121,12 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
     exact orientationSign_cast_eq_product τ.val C w hw hcolor hτmate
   have hαυ : Polynomial.C ((αυ : ℤ) : Qbar) =
       ∏ i ∈ Sυ, (orientationFactor υ.val i : Polynomial Qbar) := by
-    simpa only [Sυ, Finset.mem_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq]
+    dsimp [αυ, lυ]
+    rw [show ascendingMatePair υ.val = concreteAscendingMatePair υ.val from by
+      funext i
+      rfl]
+    simpa only [Sυ, Finset.mem_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq,
+      orientationFactor, concreteOrientationFactor]
       using orientationSign_cast_eq_product υ.val {i | i ∉ C} w₂ hw₂ hcolor₂ hυmate
   have hsign := matchingPairActualSignComposition τ υ w hw hcolor
   have hsignPoly := congrArg (fun z : ℤ => Polynomial.C (z : Qbar)) hsign
