@@ -3103,75 +3103,120 @@ m_{2a+1}
         math(String.raw`p\in\mathbb{Z}_{\geq0}`),
         "）の場合は ",
         math(String.raw`(a,b)=(p,p+1)`),
-        " と取る。このとき",
+        " と取る。添字は",
       ]),
+      displayMath(String.raw`\begin{aligned}
+a+b &= p+(p+1_{\mathbb{Z}})
+&&(\because\ a=p,\ b=p+1_{\mathbb{Z}})\\
+&= (p+p)+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x+y)+t=x+(y+t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to p,\ y \to p,\ t \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
+&= (1_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}}\cdot p)+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の単位元}\ 1_{\mathbb{Z}}\cdot x=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to p)\ \text{を右辺から左辺へ 2 か所へ}\bigr)\\
+&= (1_{\mathbb{Z}}+1_{\mathbb{Z}})\cdot p+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ (x+y)\cdot t=x\cdot t+y\cdot t\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}},\ y \to 1_{\mathbb{Z}},\ t \to p)\ \text{を右辺から左辺へ}\bigr)\\
+&= 2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}}:=1_{\mathbb{Z}}+1_{\mathbb{Z}}\ \text{を右辺から左辺へ}\bigr)\\
+&= k
+&&(\because\ k=2p+1\ \text{を右辺から左辺へ}),\\
+2a &= 2_{\mathbb{Z}}\cdot p
+&&(\because\ a=p)\\
+&= 2_{\mathbb{Z}}\cdot p+0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x+0_{\mathbb{Z}}=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}}\cdot p)\ \text{を右辺から左辺へ}\bigr)\\
+&= 2_{\mathbb{Z}}\cdot p+\bigl(1_{\mathbb{Z}}+(-1_{\mathbb{Z}})\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ x+(-x)=0_{\mathbb{Z}}\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
+&= (2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}})+(-1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x+y)+t=x+(y+t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}}\cdot p,\ y \to 1_{\mathbb{Z}},\ t \to -1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
+&= k+(-1_{\mathbb{Z}})
+&&(\because\ k=2p+1\ \text{を右辺から左辺へ})\\
+&= k-1_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{def_int_difference}\ (y \to k,\ z \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr),\\
+2b &= 2_{\mathbb{Z}}\cdot(p+1_{\mathbb{Z}})
+&&(\because\ b=p+1)\\
+&= 2_{\mathbb{Z}}\cdot p+2_{\mathbb{Z}}\cdot 1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ x\cdot(y+t)=x\cdot y+x\cdot t\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}},\ y \to p,\ t \to 1_{\mathbb{Z}})\bigr)\\
+&= 2_{\mathbb{Z}}\cdot p+2_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の単位元}\ x\cdot 1_{\mathbb{Z}}=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}})\bigr)\\
+&= 2_{\mathbb{Z}}\cdot p+(1_{\mathbb{Z}}+1_{\mathbb{Z}})
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}}:=1_{\mathbb{Z}}+1_{\mathbb{Z}}\ \text{を項}\ 2_{\mathbb{Z}}\cdot p\ \text{の外の}\ 2_{\mathbb{Z}}\ \text{へ}\bigr)\\
+&= (2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}})+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x+y)+t=x+(y+t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}}\cdot p,\ y \to 1_{\mathbb{Z}},\ t \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
+&= k+1_{\mathbb{Z}}
+&&(\because\ k=2p+1\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph(["である。このとき"]),
       displayMath(String.raw`\begin{aligned}
 m_k^{\,2}
 &=\left(m_{a+b}\right)^2
-&&(\because\ k=2p+1=a+b)\\
+&&(\because\ \text{上の}\ a+b=k\ \text{を右辺から左辺へ})\\
 &\leq m_{2a}\,m_{2b}
 &&(\because\ \text{【}P = I_{\mathbb{R}}\text{ の不等式】})\\
-&=m_{2p}\,m_{2p+2}
-&&(\because\ a=p,\ b=p+1)\\
+&=m_{k-1}\,m_{2b}
+&&(\because\ \text{上の}\ 2a=k-1_{\mathbb{Z}})\\
 &=m_{k-1}\,m_{k+1}
-&&(\because\ k=2p+1)
+&&(\because\ \text{上の}\ 2b=k+1_{\mathbb{Z}})
 \end{aligned}`),
       paragraph([
+        "である。",
         math(String.raw`k=2p+2`),
         "（偶数、",
         math(String.raw`p\in\mathbb{Z}_{\geq0}`),
         "）の場合も ",
         math(String.raw`(a,b)=(p,p+1)`),
-        " と取る。このとき",
+        " と取る。添字は",
       ]),
       displayMath(String.raw`\begin{aligned}
+(a+b)+1_{\mathbb{Z}} &= \bigl(p+(p+1_{\mathbb{Z}})\bigr)+1_{\mathbb{Z}}
+&&(\because\ a=p,\ b=p+1)\\
+&= \bigl((p+p)+1_{\mathbb{Z}}\bigr)+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x+y)+t=x+(y+t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to p,\ y \to p,\ t \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((1_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}}\cdot p)+1_{\mathbb{Z}}\bigr)+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の単位元}\ 1_{\mathbb{Z}}\cdot x=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to p)\ \text{を右辺から左辺へ 2 か所へ}\bigr)\\
+&= \bigl((1_{\mathbb{Z}}+1_{\mathbb{Z}})\cdot p+1_{\mathbb{Z}}\bigr)+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ (x+y)\cdot t=x\cdot t+y\cdot t\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}},\ y \to 1_{\mathbb{Z}},\ t \to p)\ \text{を右辺から左辺へ}\bigr)\\
+&= (2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}})+1_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}}:=1_{\mathbb{Z}}+1_{\mathbb{Z}}\ \text{を右辺から左辺へ}\bigr)\\
+&= 2_{\mathbb{Z}}\cdot p+(1_{\mathbb{Z}}+1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x+y)+t=x+(y+t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}}\cdot p,\ y \to 1_{\mathbb{Z}},\ t \to 1_{\mathbb{Z}})\bigr)\\
+&= 2_{\mathbb{Z}}\cdot p+2_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}}:=1_{\mathbb{Z}}+1_{\mathbb{Z}}\ \text{を右辺から左辺へ}\bigr)\\
+&= k
+&&(\because\ k=2p+2\ \text{を右辺から左辺へ}),\\
+2a+1_{\mathbb{Z}} &= 2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}}
+&&(\because\ a=p)\\
+&= (2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}})+0_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x+0_{\mathbb{Z}}=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
+&= (2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}})+\bigl(1_{\mathbb{Z}}+(-1_{\mathbb{Z}})\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の逆元}\ x+(-x)=0_{\mathbb{Z}}\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}})+1_{\mathbb{Z}}\bigr)+(-1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x+y)+t=x+(y+t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}}\cdot p+1_{\mathbb{Z}},\ y \to 1_{\mathbb{Z}},\ t \to -1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(2_{\mathbb{Z}}\cdot p+(1_{\mathbb{Z}}+1_{\mathbb{Z}})\bigr)+(-1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x+y)+t=x+(y+t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}}\cdot p,\ y \to 1_{\mathbb{Z}},\ t \to 1_{\mathbb{Z}})\bigr)\\
+&= (2_{\mathbb{Z}}\cdot p+2_{\mathbb{Z}})+(-1_{\mathbb{Z}})
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}}:=1_{\mathbb{Z}}+1_{\mathbb{Z}}\ \text{を右辺から左辺へ}\bigr)\\
+&= k+(-1_{\mathbb{Z}})
+&&(\because\ k=2p+2\ \text{を右辺から左辺へ})\\
+&= k-1_{\mathbb{Z}}
+&&\bigl(\because\ \blkref{def_int_difference}\ (y \to k,\ z \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr),\\
+2b+1_{\mathbb{Z}} &= 2_{\mathbb{Z}}\cdot(p+1_{\mathbb{Z}})+1_{\mathbb{Z}}
+&&(\because\ b=p+1)\\
+&= (2_{\mathbb{Z}}\cdot p+2_{\mathbb{Z}}\cdot 1_{\mathbb{Z}})+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ x\cdot(y+t)=x\cdot y+x\cdot t\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}},\ y \to p,\ t \to 1_{\mathbb{Z}})\bigr)\\
+&= (2_{\mathbb{Z}}\cdot p+2_{\mathbb{Z}})+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の単位元}\ x\cdot 1_{\mathbb{Z}}=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 2_{\mathbb{Z}})\bigr)\\
+&= k+1_{\mathbb{Z}}
+&&(\because\ k=2p+2\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph(["である。このとき"]),
+      displayMath(String.raw`\begin{aligned}
 m_k^{\,2}
-&=\left(m_{a+b+1}\right)^2
-&&(\because\ k=2p+2=a+b+1)\\
+&=\left(m_{(a+b)+1}\right)^2
+&&(\because\ \text{上の}\ (a+b)+1_{\mathbb{Z}}=k\ \text{を右辺から左辺へ})\\
 &\leq m_{2a+1}\,m_{2b+1}
 &&(\because\ \text{【}P = W_{\mathbb{R}}\text{ の不等式】})\\
-&=m_{2p+1}\,m_{2p+3}
-&&(\because\ a=p,\ b=p+1)\\
+&=m_{k-1}\,m_{2b+1}
+&&(\because\ \text{上の}\ 2a+1_{\mathbb{Z}}=k-1_{\mathbb{Z}})\\
 &=m_{k-1}\,m_{k+1}
-&&(\because\ k=2p+2)
-\end{aligned}`),
-      paragraph(["（添字の確認。奇数の場合は"]),
-      displayMath(String.raw`\begin{aligned}
-a+b &= p+(p+1)
-&&(\because\ a=p,\ b=p+1)\\
-&= 2p+1
-&&(\because\ \mathbb{Z}\text{ の加法})\\
-&= k
-&&(\because\ k=2p+1)\\
-2a &= 2p
-&&(\because\ a=p)\\
-&= k-1
-&&(\because\ k=2p+1\ \text{の両辺から }1\text{ を引く})\\
-2b &= 2(p+1)
-&&(\because\ b=p+1)\\
-&= 2p+2
-&&(\because\ \mathbb{Z}\text{ の分配律})\\
-&= k+1
-&&(\because\ k=2p+1\ \text{の両辺へ }1\text{ を足す})
-\end{aligned}`),
-      paragraph(["であり、偶数の場合は"]),
-      displayMath(String.raw`\begin{aligned}
-a+b+1 &= p+(p+1)+1
-&&(\because\ a=p,\ b=p+1)\\
-&= 2p+2
-&&(\because\ \mathbb{Z}\text{ の加法})\\
-&= k
-&&(\because\ k=2p+2)\\
-2a+1 &= 2p+1
-&&(\because\ a=p)\\
-&= k-1
-&&(\because\ k=2p+2\ \text{の両辺から }1\text{ を引く})\\
-2b+1 &= 2(p+1)+1
-&&(\because\ b=p+1)\\
-&= 2p+3
-&&(\because\ \mathbb{Z}\text{ の分配律と加法})\\
-&= k+1
-&&(\because\ k=2p+2\ \text{の両辺へ }1\text{ を足す})
+&&(\because\ \text{上の}\ 2b+1_{\mathbb{Z}}=k+1_{\mathbb{Z}})
 \end{aligned}`),
       paragraph([
         "である。また ",
@@ -3188,12 +3233,13 @@ a+b+1 &= p+(p+1)+1
         math(String.raw`\mathbb{Z}_{\geq 0}`),
         " に収まるので、",
         math(String.raw`m_j`),
-        " はいずれも定義済みである。）",
+        " はいずれも定義済みである。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りの「ℤ の根拠を名前だけで引く残り」）: 奇数・偶数の場合の添字の確認は、根拠を名前だけの「ℤ の加法」「ℤ の分配律」「ℤ の分配律と加法」「両辺から 1 を引く」「両辺へ 1 を足す」で書き、主の鎖の後ろに括弧書きで置いていた。添字の確認を各場合の主の鎖の前に移し、set_and_algebra_notation の ℤ の加法の結合律・乗法の単位元・分配律・和の単位元・加法の逆元の行と def_power_of_integer の 2_ℤ := 1_ℤ + 1_ℤ、def_int_difference を一行ずつ引く鎖にした（等号の行は奇数の a+b・2a・2b が 6・6・6 行、偶数の (a+b)+1・2a+1・2b+1 が 8・8・4 行）。偶数の場合の 2p+3 は ℤ の数字 3 を定めていないので (2p+2)+1 のまま書き、主の鎖の m_{2p}m_{2p+2}・m_{2p+1}m_{2p+3} の行は、添字の確認の等式を一つずつ引く 2 行にした（主張と主の鎖の両端は不変）。Lean の具体版 moment_log_convexity の添字の確認の omega も、ℕ の同じ段の calc にした。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^a x は零でない】の x ≠ 0 を、def_rayleigh_sup の中の 6 行の鎖を散文で指す書き方から、主張 unit_norm_vector_is_nonzero（d → d、x → x）を引く形にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^a x は零でない】の √0 = 0 の根拠（definition_of_sqrt_r_positive の 0 ≥ 0, 0^2 = 0）を sqrt_of_real_zero_is_zero の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^a x は零でない】の x ≠ 0 は「def_matrix_norm より ‖x‖ = √0 = 0」の 1 文で |0| = 0・0^2 = 0・和の計算をまとめて使っていたので、def_rayleigh_sup の同じ段（x = 0 と仮定して ‖x‖ = 0 に着く 6 行の鎖）を引く形にした（値は不変）。",

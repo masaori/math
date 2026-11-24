@@ -41,7 +41,7 @@
 | 【正値性】`m_{2a} > 0`・`m_{2a+1} > 0` の 5 行ずつ | `moment_even_pos`・`moment_odd_pos` の `calc` の 5 段 |
 | 【`P = W_ℝ` の不等式】8 行 | `moment_sq_le_with_W_real` の `calc` の 8 段 |
 | 【`P = I_ℝ` の不等式】8 行 | `moment_sq_le_with_real_identity` の `calc` の 8 段 |
-| 奇数 `k = 2p+1`・偶数 `k = 2p+2` の 4 行ずつと添字の確認 | `moment_log_convexity` の二つの `calc` の 4 段（人手と同じく奇数・偶数の順。添字の確認は `omega`） |
+| 奇数 `k = 2p+1`・偶数 `k = 2p+2` の添字の確認（奇数は 6・6・6 行、偶数は 8・8・4 行）と 4 行ずつの主の鎖 | `moment_log_convexity` の `hab`・`h2a`・`h2b` の `calc` と二つの主の `calc` の 4 段（人手と同じく奇数・偶数の順。人手の各鎖の 1 行目（`a = p`・`b = p + 1` の代入）は、Lean が `a`・`b` を `p`・`p + 1` と直接書くので段が無い。人手の `ℤ_{≥0}` の元は Lean の `ℕ` で書き、人手の `k − 1_ℤ` に着く段（`x + 0 = x`・`x + (−x) = 0`・結合律と `def_int_difference`）は、`set_and_algebra_notation` の `ℕ` の差（`Nat.add_sub_cancel`）の 1 段と `k` の代入の段。`k = 2p+1 ∨ k = 2p+2` の `p` を取る段は `omega`） |
 
 - 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`。`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one`）である。一般の `W` で述べ、人手が引く主張を仮定に置く:
   `hW` は `W_is_real_symmetric_positive_definite` の実対称性、`hWRsymm`・`hpd` は `W_real_is_symmetric`・`W_real_is_positive_definite`。
@@ -441,26 +441,65 @@ theorem moment_log_convexity
     · exact moment_odd_pos W hW hpd hx0 a
   · obtain ⟨p, hp | hp⟩ : ∃ p, k = 2 * p + 1 ∨ k = 2 * p + 2 := ⟨(k - 1) / 2, by omega⟩
                                                                             -- `k ≥ 1` なので `p = ⌊(k−1)/2⌋ ∈ ℤ_{≥0}`
-    · -- 奇数 `k = 2p + 1`、`(a, b) = (p, p + 1)`
+    · -- 奇数 `k = 2p + 1`、`(a, b) = (p, p + 1)`。人手の添字の確認の三つの鎖（`ℤ_{≥0}` の元を Lean の `ℕ` で書く）
+      have hab : p + (p + 1) = k :=
+        calc p + (p + 1)
+            = (p + p) + 1 := (Nat.add_assoc p p 1).symm                     -- 加法の結合律を右辺から左辺へ
+          _ = (1 * p + 1 * p) + 1 := by rw [Nat.one_mul]                   -- 乗法の単位元 `1·x = x`（`x → p`）を右辺から左辺へ 2 か所へ
+          _ = (1 + 1) * p + 1 := by rw [Nat.add_mul]                       -- 分配律 `(x+y)t = xt + yt` を右辺から左辺へ
+          _ = 2 * p + 1 := rfl                                             -- `2 := 1 + 1` を右辺から左辺へ
+          _ = k := hp.symm                                                 -- `k = 2p + 1`
+      have h2a : 2 * p = k - 1 :=
+        calc 2 * p
+            = (2 * p + 1) - 1 := (Nat.add_sub_cancel (2 * p) 1).symm        -- 人手の `x + 0 = x`・`x + (−x) = 0`・結合律の 3 段は、
+                                                                            --   `set_and_algebra_notation` の `ℕ` の差（`1 + d = y` の `d` を `y − 1`）の 1 段（Lean だけの段。`ℕ` に符号反転は無い）
+          _ = k - 1 := by rw [← hp]                                        -- `k = 2p + 1`（人手の `def_int_difference` の段は `ℕ` の差に含まれる）
+      have h2b : 2 * (p + 1) = k + 1 :=
+        calc 2 * (p + 1)
+            = 2 * p + 2 * 1 := Nat.mul_add 2 p 1                           -- 分配律 `x(y+t) = xy + xt`
+          _ = 2 * p + 2 := by rw [Nat.mul_one]                             -- 乗法の単位元 `x·1 = x`
+          _ = 2 * p + (1 + 1) := rfl                                       -- `2 := 1 + 1`
+          _ = (2 * p + 1) + 1 := (Nat.add_assoc (2 * p) 1 1).symm          -- 加法の結合律を右辺から左辺へ
+          _ = k + 1 := by rw [← hp]                                        -- `k = 2p + 1`
       calc momentWReal W hW x k ^ 2
-          = momentWReal W hW x (p + (p + 1)) ^ 2 := by
-            rw [show k = p + (p + 1) by omega]                              -- `k = 2p + 1 = a + b`（添字の確認）
+          = momentWReal W hW x (p + (p + 1)) ^ 2 := by rw [hab]             -- 上の `a + b = k` を右辺から左辺へ
         _ ≤ momentWReal W hW x (2 * p) * momentWReal W hW x (2 * (p + 1)) :=
             moment_sq_le_with_real_identity W hW x p (p + 1)                -- 【`P = I_ℝ` の不等式】
-        _ = momentWReal W hW x (2 * p) * momentWReal W hW x (2 * p + 2) := by
-            rw [show 2 * (p + 1) = 2 * p + 2 by omega]                      -- `a = p`, `b = p + 1`（`2(p+1) = 2p + 2`）
+        _ = momentWReal W hW x (k - 1) * momentWReal W hW x (2 * (p + 1)) := by
+            rw [h2a]                                                        -- 上の `2a = k − 1`
         _ = momentWReal W hW x (k - 1) * momentWReal W hW x (k + 1) := by
-            rw [show 2 * p + 2 = k + 1 by omega, show 2 * p = k - 1 by omega]  -- `k = 2p + 1`（添字の確認）
-    · -- 偶数 `k = 2p + 2`、`(a, b) = (p, p + 1)`
+            rw [h2b]                                                        -- 上の `2b = k + 1`
+    · -- 偶数 `k = 2p + 2`、`(a, b) = (p, p + 1)`。人手の添字の確認の三つの鎖
+      have hab : p + (p + 1) + 1 = k :=
+        calc p + (p + 1) + 1
+            = ((p + p) + 1) + 1 := by rw [← Nat.add_assoc p p 1]           -- 加法の結合律を右辺から左辺へ
+          _ = ((1 * p + 1 * p) + 1) + 1 := by rw [Nat.one_mul]             -- 乗法の単位元 `1·x = x`（`x → p`）を右辺から左辺へ 2 か所へ
+          _ = ((1 + 1) * p + 1) + 1 := by rw [Nat.add_mul]                 -- 分配律 `(x+y)t = xt + yt` を右辺から左辺へ
+          _ = (2 * p + 1) + 1 := rfl                                       -- `2 := 1 + 1` を右辺から左辺へ
+          _ = 2 * p + (1 + 1) := Nat.add_assoc (2 * p) 1 1                 -- 加法の結合律
+          _ = 2 * p + 2 := rfl                                             -- `2 := 1 + 1` を右辺から左辺へ
+          _ = k := hp.symm                                                 -- `k = 2p + 2`
+      have h2a : 2 * p + 1 = k - 1 :=
+        calc 2 * p + 1
+            = ((2 * p + 1) + 1) - 1 := (Nat.add_sub_cancel (2 * p + 1) 1).symm
+                                                                            -- 人手の `x + 0 = x`・`x + (−x) = 0`・結合律の 3 段は、
+                                                                            --   `set_and_algebra_notation` の `ℕ` の差の 1 段（Lean だけの段）
+          _ = (2 * p + (1 + 1)) - 1 := by rw [Nat.add_assoc (2 * p) 1 1]   -- 加法の結合律
+          _ = (2 * p + 2) - 1 := rfl                                       -- `2 := 1 + 1` を右辺から左辺へ
+          _ = k - 1 := by rw [← hp]                                        -- `k = 2p + 2`（人手の `def_int_difference` の段は `ℕ` の差に含まれる）
+      have h2b : 2 * (p + 1) + 1 = k + 1 :=
+        calc 2 * (p + 1) + 1
+            = (2 * p + 2 * 1) + 1 := by rw [Nat.mul_add 2 p 1]             -- 分配律 `x(y+t) = xy + xt`
+          _ = (2 * p + 2) + 1 := by rw [Nat.mul_one]                       -- 乗法の単位元 `x·1 = x`
+          _ = k + 1 := by rw [← hp]                                        -- `k = 2p + 2`
       calc momentWReal W hW x k ^ 2
-          = momentWReal W hW x (p + (p + 1) + 1) ^ 2 := by
-            rw [show k = p + (p + 1) + 1 by omega]                          -- `k = 2p + 2 = a + b + 1`（添字の確認）
+          = momentWReal W hW x (p + (p + 1) + 1) ^ 2 := by rw [hab]         -- 上の `(a + b) + 1 = k` を右辺から左辺へ
         _ ≤ momentWReal W hW x (2 * p + 1) * momentWReal W hW x (2 * (p + 1) + 1) :=
             moment_sq_le_with_W_real W hW hWRsymm hpd x p (p + 1)           -- 【`P = W_ℝ` の不等式】
-        _ = momentWReal W hW x (2 * p + 1) * momentWReal W hW x (2 * p + 3) := by
-            rw [show 2 * (p + 1) + 1 = 2 * p + 3 by omega]                  -- `a = p`, `b = p + 1`（`2(p+1) + 1 = 2p + 3`）
+        _ = momentWReal W hW x (k - 1) * momentWReal W hW x (2 * (p + 1) + 1) := by
+            rw [h2a]                                                        -- 上の `2a + 1 = k − 1`
         _ = momentWReal W hW x (k - 1) * momentWReal W hW x (k + 1) := by
-            rw [show 2 * p + 1 = k - 1 by omega, show 2 * p + 3 = k + 1 by omega]  -- `k = 2p + 2`（添字の確認）
+            rw [h2b]                                                        -- 上の `2b + 1 = k + 1`
 
 end General
 
