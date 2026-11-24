@@ -344,7 +344,9 @@ theorem walkSideExteriorBand_nonempty_edgeConnected_local
     (Relation.ReflTransGen.mono (r := Function.swap step) hstepSwap base q) hbqSwap
   exact hpb.trans hbq
 
-/-- `claim_walk_side_exterior_band_edge_connected` の具体版。 -/
+/-- 持ち上げ座標の一周期について、四辺の通過回数が高々一なら歩道沿いの外側帯は空でなく辺連結である。
+本文の主張の具体版 `walkSideExteriorBandFromWalk_nonempty_edgeConnected` が、通過回数の仮定を
+`liftedWalkCoordinates_incident_counts_le_one` で満たして使う。 -/
 theorem walkSideExteriorBand_nonempty_edgeConnected
     (n : ℕ) (row col : ℕ → ℤ) (hn : 0 < n)
     (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)

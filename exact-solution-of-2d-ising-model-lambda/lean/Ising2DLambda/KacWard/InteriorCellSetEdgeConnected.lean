@@ -76,41 +76,8 @@ theorem interiorCellSet_nonempty_edgeConnected_local
   · exact hband.2
   · exact hreaches
 
-/-- `claim_interior_cell_set_edge_connected` の具体版。 -/
-theorem interiorCellSet_nonempty_edgeConnected
-    (n : ℕ) (row col : ℕ → ℤ) (hn : 0 < n)
-    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
-    (hunit : IsUnitGridWalk n row col)
-    (hdistinct : ∀ k l, k < n → l < n →
-      row k = row l → col k = col l → k = l)
-    (hedgeSimple : ∀ k, k < n →
-      verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
-      verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
-      horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
-      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1)
-    (hbridge : ∀ k, k + 1 < n → ∃ p,
-      p ∈ surroundingInteriorCells n row col k ∧
-      p ∈ surroundingInteriorCells n row col (k + 1))
-    (hreaches : ∀ x ∈ oddRayInteriorCells n row col, ∃ b ∈ walkSideInteriorBand n row col,
-      Relation.ReflTransGen
-        (fun a b =>
-          a ∈ oddRayInteriorCells n row col ∧
-          b ∈ oddRayInteriorCells n row col ∧
-          CellEdgeAdjacent a b)
-        x b) :
-    (oddRayInteriorCells n row col).Nonempty ∧
-      EdgeConnectedCellSet (oddRayInteriorCells n row col) := by
-  have hband := walkSideInteriorBand_nonempty_edgeConnected n row col hn
-    hclosedRow hclosedCol hunit hdistinct hedgeSimple
-  apply edgeConnected_of_band_reaches
-    (oddRayInteriorCells n row col) (walkSideInteriorBand n row col)
-    hband.1
-  · rintro p ⟨k, hk, hp⟩
-    exact hp.2
-  · exact hband.2
-  · exact hreaches
-
-/-- 実際の閉歩道では、内側帯と各セルから帯への有限路が内側全体をつなぐ。 -/
+/-- `claim_interior_cell_set_edge_connected` の具体版。
+実際の閉歩道では、内側帯と各セルから帯への有限路が内側全体をつなぐ。 -/
 theorem interiorCellSetOfWalk_nonempty_edgeConnected {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
     (hγ : closedNonbacktrackingWalk γ)

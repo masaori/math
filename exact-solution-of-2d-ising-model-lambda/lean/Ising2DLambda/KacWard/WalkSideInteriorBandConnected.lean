@@ -453,7 +453,9 @@ theorem walkSideInteriorBand_nonempty_edgeConnected_local
     (Relation.ReflTransGen.mono (r := Function.swap step) hstepSwap base q) hbqSwap
   exact hpb.trans hbq
 
-/-- `claim_walk_side_interior_band_edge_connected` の具体版。 -/
+/-- 持ち上げ座標の一周期について、四辺の通過回数が高々一なら歩道沿いの内側帯は空でなく辺連結である。
+本文の主張の具体版 `walkSideInteriorBandFromWalk_nonempty_edgeConnected` が、通過回数の仮定を
+`liftedWalkCoordinates_incident_counts_le_one` で満たして使う。 -/
 theorem walkSideInteriorBand_nonempty_edgeConnected
     (n : ℕ) (row col : ℕ → ℤ) (hn : 0 < n)
     (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
@@ -494,7 +496,8 @@ theorem walkSideInteriorBand_nonempty_edgeConnected
   exact walkSideInteriorBand_nonempty_edgeConnected_local n row col hn
     hnonempty hlocal hbridge
 
-/-- 実際の閉歩道について、歩道沿いの内側帯は空でなく辺連結である。 -/
+/-- `claim_walk_side_interior_band_edge_connected` の具体版。
+実際の閉歩道について、歩道沿いの内側帯は空でなく辺連結である。 -/
 theorem walkSideInteriorBandFromWalk_nonempty_edgeConnected {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
     (hγ : closedNonbacktrackingWalk γ)

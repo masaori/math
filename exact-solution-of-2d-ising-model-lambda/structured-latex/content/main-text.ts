@@ -88493,7 +88493,6 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     labels: ["claim_walk_side_interior_band_edge_connected"],
                     habitat: "Z",
                     lean: [
-                      "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_step_mem_interiorBoundary",
                       "Ising2DLambda.NecSuf.KacWard.simple_step_boundary_of_four_cases",
@@ -88643,7 +88642,6 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                     labels: ["claim_interior_cell_set_edge_connected"],
                     habitat: "Z",
                     lean: [
-                      "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.interiorCellSetOfWalk_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_reaches_band",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_planeLift_injective",
@@ -88764,7 +88762,6 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.surroundingExteriorCells_edgeConnected",
-                      "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.walkSideExteriorBandFromWalk_nonempty_edgeConnected",
                       "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
                       "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected_from_necSuf",
@@ -88912,7 +88909,6 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                     labels: ["claim_exterior_cell_set_edge_connected"],
                     habitat: "Z",
                     lean: [
-                      "Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.outsideBoundingRectangle_edgeConnected",
                       "Ising2DLambda.KacWard.closedLift_boundingRectangle_endpoints",
                       "Ising2DLambda.KacWard.outsideBoundingRectangle_subset_exteriorCells",

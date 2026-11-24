@@ -113,7 +113,8 @@ theorem walkSideExteriorBandFromWalk_eq_coordinateBand {L m : ℕ}
     refine ⟨hinside ▸ hpOutside, i, ?_⟩
     simpa only [row, col, i, hi, Set.mem_setOf_eq, Prod.mk.eta] using hpCorner
 
-/-- 実際の零巻き付き閉歩道に沿う外側帯は空でなく辺連結である。 -/
+/-- `claim_walk_side_exterior_band_edge_connected` の具体版。
+実際の零巻き付き閉歩道に沿う外側帯は空でなく辺連結である。 -/
 theorem walkSideExteriorBandFromWalk_nonempty_edgeConnected {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
     (hγ : closedNonbacktrackingWalk γ)
@@ -242,7 +243,8 @@ theorem exteriorCellSetOfWalk_nonempty_edgeConnected_of_bandConnected
     (outsideBoundingRectangle_edgeConnected rMin rMax cMin cMax)
     hbandConnected hoverlap hreach
 
-/-- The complement of the interior cells of the actual simple lifted walk is connected. -/
+/-- `claim_exterior_cell_set_edge_connected` の具体版。
+The complement of the interior cells of the actual simple lifted walk is connected. -/
 theorem exteriorCellSetOfWalk_nonempty_edgeConnected {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
     (hγ : closedNonbacktrackingWalk γ)

@@ -4,34 +4,26 @@
 歩道沿いの内側帯を核とし、各内側セルから帯へ至る有限列を必要十分版へ渡す。
 -/
 import Ising2DLambda.KacWard.InteriorCellSetEdgeConnected
+import Ising2DLambda.NecSuf.KacWard.InteriorCellSetEdgeConnected
 
 namespace Ising2DLambda.KacWard
 
 /-- `claim_interior_cell_set_edge_connected` を必要十分版から導く。 -/
-theorem interiorCellSet_nonempty_edgeConnected_from_necSuf
-    (n : ℕ) (row col : ℕ → ℤ) (hn : 0 < n)
-    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
-    (hunit : IsUnitGridWalk n row col)
-    (hdistinct : ∀ k l, k < n → l < n →
-      row k = row l → col k = col l → k = l)
-    (hedgeSimple : ∀ k, k < n →
-      verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
-      verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
-      horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
-      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1)
-    (hbridge : ∀ k, k + 1 < n → ∃ p,
-      p ∈ surroundingInteriorCells n row col k ∧
-      p ∈ surroundingInteriorCells n row col (k + 1))
-    (hreaches : ∀ x ∈ oddRayInteriorCells n row col, ∃ b ∈ walkSideInteriorBand n row col,
-      Relation.ReflTransGen
-        (fun a b =>
-          a ∈ oddRayInteriorCells n row col ∧
-          b ∈ oddRayInteriorCells n row col ∧
-          CellEdgeAdjacent a b)
-        x b) :
-    (oddRayInteriorCells n row col).Nonempty ∧
-      EdgeConnectedCellSet (oddRayInteriorCells n row col) :=
-  interiorCellSet_nonempty_edgeConnected
-    n row col hn hclosedRow hclosedCol hunit hdistinct hedgeSimple hbridge hreaches
+theorem interiorCellSet_nonempty_edgeConnected_from_necSuf {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc)) :
+    (oddRayInteriorCellsOfWalk γ hγ hh hv).Nonempty ∧
+      Ising2DLambda.NecSuf.KacWard.ConnectedBy CellEdgeAdjacent
+        (oddRayInteriorCellsOfWalk γ hγ hh hv) := by
+  have hband := walkSideInteriorBandFromWalk_nonempty_edgeConnected γ hγ hh hv hdistinct
+  exact Ising2DLambda.NecSuf.KacWard.connected_of_connected_core_and_reaches_necSuf
+    CellEdgeAdjacent cellEdgeAdjacent_symmetric
+    (oddRayInteriorCellsOfWalk γ hγ hh hv) (walkSideInteriorBandFromWalk γ hγ hh hv)
+    hband.1 (fun _ hp => hp.1) hband.2
+    (fun ⟨r, c⟩ hinside => interiorCellOfWalk_reaches_band γ hγ hh hv r c hinside)
 
 end Ising2DLambda.KacWard
