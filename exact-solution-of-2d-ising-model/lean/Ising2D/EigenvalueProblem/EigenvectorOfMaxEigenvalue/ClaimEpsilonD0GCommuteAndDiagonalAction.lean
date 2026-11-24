@@ -81,12 +81,17 @@ theorem epsilon_mul_sigmaZ_mul_sigmaZ (j k : Fin M) :
 
 /-- **人手 `epsilon_D0_G_pairwise_commute` の準備（`σ^z` どうしの可換）** `σ^z_jσ^z_k = σ^z_kσ^z_j`。
 
-人手どおり `j ≠ k` と `j = k` に場合を分ける。`j ≠ k` は `distinct_site_pauli_matrices_commute`（`a = b = z`）の具体版
-`siteOp_mul_comm`、`j = k` は両辺が同じ行列である。 -/
+人手どおり `j ≠ k` と `j = k` に場合を分ける。人手の `j, k ∈ {1,…,M_col}` は Lean のサイト `j, k : Fin M` の
+写像 `finIndexToZZ M`（`def_index_set_from_one_to_n`）による像なので、場合分けは像の ℤ の等号で行う。
+`j = k` は像が等しいサイトが等しいこと（`finIndexToZZ_bijective_onto_index_set` の単射）から両辺が同じ行列、
+`j ≠ k` は `distinct_site_pauli_matrices_commute`（`a = b = z`）の具体版 `siteOp_mul_comm` である
+（本文は `j ≠ k` を先に書くが、`by_cases` は `j = k` の場合を先に扱う）。 -/
 theorem sigmaZ_mul_sigmaZ_comm (j k : Fin M) : sigmaZ j * sigmaZ k = sigmaZ k * sigmaZ j := by
-  by_cases h : j = k
-  · rw [h]                                              -- `j = k`: 両辺は同じ行列
-  · exact siteOp_mul_comm h pauliZ pauliZ               -- `distinct_site_pauli_matrices_commute`（`a = b = z`）
+  by_cases h : finIndexToZZ M j = finIndexToZZ M k
+  · rw [(finIndexToZZ_bijective_onto_index_set M).1 j k h]
+                                                        -- `j = k`: 両辺は同じ行列
+  · exact siteOp_mul_comm (fun hjk => h (congrArg (finIndexToZZ M) hjk)) pauliZ pauliZ
+                                                        -- `j ≠ k`: `distinct_site_pauli_matrices_commute`（`a = b = z`）
 
 /-- **人手 `epsilon_D0_G_pairwise_commute` の準備（`σ^z` の対と `G` の可換）**
 `(σ^z_aσ^z_b)G = ⋯ = G(σ^z_aσ^z_b)` の 14 行。
@@ -213,9 +218,14 @@ theorem sigmaZ_mul_self (k : Fin M) : sigmaZ k * sigmaZ k = 1 :=
 theorem epsilon_mul_boundaryG_sq (hM : 2 ≤ M) :
     (epsilon M * boundaryG M (by omega)) ^ 2 = 1 := by
   have hM0 : M ≠ 0 := by omega
-  have hne : firstSite M hM0 ≠ lastSite M hM0 :=
-    Fin.ne_of_val_ne (by simp [firstSite, lastSite]; omega)
-                                                        -- `M_col ≥ 2` より `M_col ≠ 1`
+  have hne : firstSite M hM0 ≠ lastSite M hM0 := by
+    -- `M_col ≥ 2` より `M_col ≠ 1`。サイト `1` と `M_col` の像 `1_ℤ`・`ι_{ℕ→ℤ}(M)`（`finIndexToZZ_firstSite`・`finIndexToZZ_lastSite`）が
+    -- 異なるので、二つのサイトは異なる
+    intro h
+    have h1 : (1 : ℤ) = inclusionNNtoZZ M := by
+      rw [← finIndexToZZ_firstSite hM0, ← finIndexToZZ_lastSite hM0, h]
+    rw [inclusionNNtoZZ_eq_natCast] at h1
+    omega
   calc (epsilon M * boundaryG M hM0) ^ 2
       = (epsilon M * boundaryG M hM0) * (epsilon M * boundaryG M hM0) :=
         sq _                                            -- `X^2 := XX`
