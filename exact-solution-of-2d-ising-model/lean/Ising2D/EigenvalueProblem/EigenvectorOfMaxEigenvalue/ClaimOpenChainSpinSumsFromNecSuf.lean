@@ -16,14 +16,38 @@
 `open_chain_endpoint_product_sum` の `人手 12`・`人手 13`）は `NecSuf.sum_spinVal_const`）で、
 重みに固有の行（`open_chain_partition_sum` の `人手 1`・`人手 6`〜`人手 8`・`人手 11`・`人手 12`、`open_chain_endpoint_product_sum` の
 `人手 1`・`人手 6`〜`人手 11`・`人手 14`・`人手 15`）と冪の行を具体版と同じ根拠で置く。
+
+必要十分版は `{-1,1}`・`𝔐`・`t_m(s)`・`Φ`・`ς` を必要十分版の側の同じ式の定義（`NecSuf.SpinVal'`・`NecSuf.SpinConf'`・
+`NecSuf.bondSpin'`・`NecSuf.openChainPhiEquiv'`・`NecSuf.varsigma'`・`NecSuf.varsigmaWordEquiv'`）で述べる。
+具体版との一致は、`{-1,1}` と `𝔐` は `DefinitionRowConfigurationsFromNecSuf.lean`、残りはこのファイルの
+`bondSpin_eq_bondSpin_necSuf`・`openChainPhiEquiv_eq_openChainPhiEquiv_necSuf`・`varsigma_eq_varsigma_necSuf`・
+`varsigmaWordEquiv_eq_varsigmaWordEquiv_necSuf`（いずれも定義上の一致）である。下の導出は、この定義上の一致により、必要十分版の主張を
+そのまま具体版の型で読む（Lean は型の照合で両者を同じものとして受け取るので、四つの補題を書き換えに引く段は無い）。
 -/
 import Ising2D.NecSuf.OpenChainSpinSum
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimOpenChainSpinSums
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionRowConfigurationsFromNecSuf
 
 namespace Ising2D
 
 open Finset
 
 variable {M : ℕ}
+
+/-- 具体版の `t_m(s)` は、必要十分版の側の `t_m(s)` と一致する（同じ式の定義）。 -/
+theorem bondSpin_eq_bondSpin_necSuf {n : ℕ} (s : SpinConf (n + 2)) (m : Fin (n + 1)) :
+    bondSpin s m = NecSuf.bondSpin' s m := rfl
+
+/-- 具体版の `Φ` は、必要十分版の側の `Φ` と一致する（同じ式の定義）。 -/
+theorem openChainPhiEquiv_eq_openChainPhiEquiv_necSuf {n : ℕ} :
+    (openChainPhiEquiv : SpinConf (n + 2) ≃ SpinVal × (Fin (n + 1) → SpinVal)) = NecSuf.openChainPhiEquiv' := rfl
+
+/-- 具体版の `ς` は、必要十分版の側の `ς` と一致する（同じ式の定義）。 -/
+theorem varsigma_eq_varsigma_necSuf (e : Fin 2) : varsigma e = NecSuf.varsigma' e := rfl
+
+/-- 具体版の `ε ↦ (ς(ε_1),…)` は、必要十分版の側のものと一致する（同じ式の定義）。 -/
+theorem varsigmaWordEquiv_eq_varsigmaWordEquiv_necSuf {n : ℕ} :
+    (varsigmaWordEquiv : (Fin (n + 1) → Fin 2) ≃ (Fin (n + 1) → SpinVal)) = NecSuf.varsigmaWordEquiv' := rfl
 
 /-- `prod_bondSpin_eq_first_mul_last` を `NecSuf.prod_mul_succ_eq_first_mul_last`（`G = ℝ`、`x(m) = s(m)`、
 中間のサイトの `s(m)s(m) = 1` は `spinVal_mul_self`）から得る。 -/

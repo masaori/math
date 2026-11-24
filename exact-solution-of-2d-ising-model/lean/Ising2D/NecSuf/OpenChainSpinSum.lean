@@ -6,7 +6,9 @@
 `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean`。
 
 具体版と同じく、人手の `M_col` は Lean の `n + 2`、結合の添字 `m = 1,…,M_col-1` は `m : Fin (n + 1)`、
-人手の `t_m(s)`・`Φ`・`ς` は具体版の `bondSpin`・`openChainPhiEquiv`・`varsigmaWordEquiv` である。
+人手の `{-1,1}`・`𝔐`・`t_m(s)`・`Φ`・`ς` は、具体版の `SpinVal`・`SpinConf`・`bondSpin`・`openChainPhiEquiv`・`varsigmaWordEquiv` と
+同じ式で必要十分版の側に置いた `SpinVal'`・`SpinConf'`（`NecSuf/SpinValues.lean`）・`bondSpin'`・`openChainPhiEquiv'`・`varsigmaWordEquiv'`
+（このファイルの最初の節）である。このファイルは具体版の定義を参照しない。具体版との一致（いずれも定義上の一致）は導出のファイルだけが述べる。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
@@ -32,7 +34,7 @@
     `Finset.sum` の上で行う。`{0,1}^{M_col-1}` の上の和 `binWordSum` を `Finset.sum` で読む `binWordSum_eq_sum` もこれを使う。
   - 二つの分配律: `人手 4` の展開（`finProdLeft_add_eq_binWordSum` が仮定するのは `Distrib` だけ）と、`人手 10`（端点の主張では `人手 13`）の `c + c = 2c`（`add_self_eq_two_mul'` に渡す右からの分配律。同じ段で乗法の左単位元 `1·x = x` と `1 + 1 = 2` も渡す）。
   - `{-1,1}` が相異なる 2 元から成ること: `人手 9`（端点の主張では `人手 12`）の `{-1,1}` 上の和を `c + c` と読む段（`sum_spinVal_addCommMonoid` が
-    `{0,1}` と `{-1,1}` の全単射 `spinIdxEquiv` を使う）。
+    `{0,1}` と `{-1,1}` の全単射 `spinIdxEquiv'` を使う）。
   - 乗法の可換モノイド: 具体版と同じく有限積を足す順序を持たない `Finset.prod` で書くので、その定まり方に要る。展開の段は
     `Finset.prod` と左から掛ける有限積 `finProdLeft` をつなぐ `finset_prod_eq_finProdLeft'`（運ぶ段）を通すだけである。
     `人手 13`（端点の主張では `人手 16`）の冪は、人手の `x^n := Π_{j=1}^{n} x` を `Fin.prod_const` で読む。
@@ -40,10 +42,10 @@
   半環の系列しかないので、`CommSemiring` で受ける。
   重みの値について、実数であること、指数関数、`cosh`・`sinh` は効いていない。二つのスピン和は、重みを
   `g(t) = exp(Kt)` と `g(t) = t·exp(Kt)` に取った特殊化にすぎない。
-  スピンの側 `𝔐 = Map({1,…,M_col},{-1,1})` は、具体版の `Φ`・`ς` をそのまま使うために人手の定義のまま固定した。
+  スピンの側 `𝔐 = Map({1,…,M_col},{-1,1})` は、具体版の `Φ`・`ς` と同じ手順を踏むために人手の定義のまま（`ℝ` の部分集合 `{-1,1}` の上の写像として）固定した。
   そこで効くのは、`{-1,1}` が乗法で閉じることと `s·s = 1`（`Φ` の逆写像）、`ς` が `{0,1}` と `{-1,1}` の全単射であること、
-  `{-1,1}` の元の個数 `2` だけで、
-  `ℝ` の加法と順序は効いていない。
+  `{-1,1}` の元の個数 `2` だけである。主張の鎖で `ℝ` の加法と順序は効いておらず、`ℝ` の加法は `s·s = 1` の証明
+  （`spinVal'_mul_self` が引く `mul_self_eq_one_of_eq_one_or_eq_neg_one` の `(-1)(-1) = 1`）と `ς(e) := 2e - 1` の定義、`{-1,1}` が乗法で閉じること（`spinMul'`）と `1 ≠ -1`（`varsigmaEquiv'` など）の証明の中でだけ使う。
   `M_col ≥ 2` は、具体版と同じく結合の添字を `Fin (n + 1)` に取る手順のために置いた（主張そのものは `M_col = 1` でも
   `2 = 2·(g(1)+g(-1))^0` として成り立つ）。
 - **端点因子の書き替え（`prod_mul_succ_eq_first_mul_last`）。** 効いているのは、値が可換モノイドに在ることと、
@@ -52,7 +54,8 @@
   （`finset_prod_const_one'`・`mul_one`）と中間のサイトの `x(m)x(m) = 1` を使う。両端のサイトの `x·x = 1`、実数であること、値が `±1` であることは効いていない。
   `M_col ≥ 2` は具体版と同じく `M_col` を `n + 2` に取る形で入っている（`M_col = 1` では主張の積が空になる）。
 -/
-import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimOpenChainSpinSums
+import Ising2D.NecSuf.SpinValues
+import Ising2D.NecSuf.MulSelfEqOneOfEqOneOrEqNegOne
 import Ising2D.NecSuf.BinaryWordSumAsFinsetSum
 import Ising2D.NecSuf.FiniteProductOfProducts
 import Ising2D.NecSuf.FiniteProductLeftFirstFactor
@@ -60,12 +63,120 @@ import Ising2D.NecSuf.AddSelfEqTwoMul
 
 namespace Ising2D.NecSuf
 
-open Finset Ising2D
+open Finset
+
+/-! ## 具体版と同じ式の `{-1,1}` の積、`t_m(s)`、`Φ`、`ς`
+
+具体版 `ClaimOpenChainSpinSums.lean` の `spinVal_mul_self`・`spinMul`・`bondSpin`・`openChainPhi`・`openChainPhiInv`・
+`openChainPhiEquiv`・`varsigma`・`coe_varsigma_one`・`coe_varsigma_zero`・`varsigmaEquiv`・`varsigmaWordEquiv` を、
+同じ式と同じ手順で必要十分版の側に置く（`{-1,1}` と `𝔐` は `NecSuf/SpinValues.lean` の `SpinVal'`・`SpinConf'`）。
+具体版との一致（いずれも定義上の一致）は導出 `ClaimOpenChainSpinSumsFromNecSuf.lean` だけが述べる。 -/
+
+/-- 具体版 `spinVal_mul_self` と同じ主張: 人手の `s(m)s(m) = 1`（`mul_self_eq_one_of_eq_one_or_eq_neg_one` の `σ → s(m)`。
+`s(m) ∈ {-1,1}` は `SpinVal'` の条件）。 -/
+theorem spinVal'_mul_self (a : SpinVal') : (a : ℝ) * (a : ℝ) = 1 :=
+  mul_self_eq_one_of_eq_one_or_eq_neg_one (fun c : ℝ => one_mul c) (a : ℝ) a.2
+
+/-- 具体版 `spinMul` と同じ式: `{-1,1}` の二元の積は `{-1,1}` の元（人手の `t_m = s(m)s(m+1) ∈ {-1,1}`）。 -/
+def spinMul' (a b : SpinVal') : SpinVal' :=
+  ⟨(a : ℝ) * (b : ℝ), by rcases a.2 with h | h <;> rcases b.2 with h' | h' <;> simp [h, h']⟩
+
+section OpenChainMaps
+
+variable {n : ℕ}
+
+/-- 具体版 `bondSpin` と同じ式: 人手 Step 1 の `t_m(s) := s(m)s(m+1) ∈ {-1,1}`（`m = 1,…,M_col-1`）。 -/
+def bondSpin' (s : SpinConf' (n + 2)) (m : Fin (n + 1)) : SpinVal' :=
+  spinMul' (s m.castSucc) (s m.succ)
+
+/-- 具体版 `openChainPhi` と同じ式: 人手 Step 1 の `Φ(s) := (s(1); t_1(s),…,t_{M_col-1}(s))`。 -/
+def openChainPhi' (s : SpinConf' (n + 2)) : SpinVal' × (Fin (n + 1) → SpinVal') :=
+  (s 0, bondSpin' s)
+
+/-- 具体版 `openChainPhiInv` と同じ式: `(u; τ_1,…,τ_{M_col-1})` から `s(1) := u`、`s(m+1) := s(m)τ_m` で順に定める。 -/
+def openChainPhiInv' (y : SpinVal' × (Fin (n + 1) → SpinVal')) : SpinConf' (n + 2) :=
+  fun k => Fin.induction (motive := fun _ => SpinVal') y.1 (fun m sm => spinMul' sm (y.2 m)) k
+
+/-- 具体版 `openChainPhiInv_zero` と同じ主張: 人手の `s(1) := u`。 -/
+theorem openChainPhiInv'_zero (y : SpinVal' × (Fin (n + 1) → SpinVal')) : openChainPhiInv' y 0 = y.1 := rfl
+
+/-- 具体版 `openChainPhiInv_succ` と同じ主張: 人手の `s(m+1) := s(m)τ_m`。 -/
+theorem openChainPhiInv'_succ (y : SpinVal' × (Fin (n + 1) → SpinVal')) (m : Fin (n + 1)) :
+    openChainPhiInv' y m.succ = spinMul' (openChainPhiInv' y m.castSucc) (y.2 m) := rfl
+
+/-- 具体版 `openChainPhiEquiv` と同じ式と同じ手順: `Φ` は全単射で、逆写像は `s(1) := u`、`s(m+1) := s(m)τ_m`。
+`left_inv` は人手の「`s(m)s(m) = 1` なので `s(m+1) = s(m)τ_m` は `τ_m = s(m)s(m+1)` と同値」の `⇐`（`m` に関する帰納法）、
+`right_inv` は人手の「この手続きで作った `s` は `Φ(s)` として元の組を与える」である。 -/
+def openChainPhiEquiv' : SpinConf' (n + 2) ≃ SpinVal' × (Fin (n + 1) → SpinVal') where
+  toFun := openChainPhi'
+  invFun := openChainPhiInv'
+  left_inv s := by
+    funext k
+    induction k using Fin.induction with
+    | zero => rfl                                       -- `s(1) := u = s(1)`
+    | succ m ih =>
+      apply Subtype.ext
+      calc (openChainPhiInv' (openChainPhi' s) m.succ : ℝ)
+          = (openChainPhiInv' (openChainPhi' s) m.castSucc : ℝ) * (bondSpin' s m : ℝ) := by
+            rw [openChainPhiInv'_succ]; rfl             -- `s(m+1) := s(m)τ_m`（`τ_m → t_m(s)`）
+        _ = (s m.castSucc : ℝ) * ((s m.castSucc : ℝ) * (s m.succ : ℝ)) := by
+            rw [ih]; rfl                                -- 帰納法の仮定と `t_m(s) := s(m)s(m+1)`
+        _ = ((s m.castSucc : ℝ) * (s m.castSucc : ℝ)) * (s m.succ : ℝ) :=
+            (mul_assoc _ _ _).symm                      -- ℝ の乗法の結合性
+        _ = (s m.succ : ℝ) := by
+            rw [spinVal'_mul_self, one_mul]             -- `s(m)s(m) = 1`
+  right_inv y := by
+    refine Prod.ext (openChainPhiInv'_zero y) (funext fun m => Subtype.ext ?_)
+    calc (bondSpin' (openChainPhiInv' y) m : ℝ)
+        = (openChainPhiInv' y m.castSucc : ℝ) * (openChainPhiInv' y m.succ : ℝ) := rfl
+                                                        -- `t_m(s) := s(m)s(m+1)`
+      _ = (openChainPhiInv' y m.castSucc : ℝ) * ((openChainPhiInv' y m.castSucc : ℝ) * (y.2 m : ℝ)) := by
+          rw [openChainPhiInv'_succ]; rfl               -- `s(m+1) := s(m)τ_m`
+      _ = ((openChainPhiInv' y m.castSucc : ℝ) * (openChainPhiInv' y m.castSucc : ℝ)) * (y.2 m : ℝ) :=
+          (mul_assoc _ _ _).symm                        -- ℝ の乗法の結合性
+      _ = (y.2 m : ℝ) := by
+          rw [spinVal'_mul_self, one_mul]               -- `s(m)s(m) = 1`
+
+end OpenChainMaps
+
+/-- 具体版 `varsigma` と同じ式: 人手 Step 1 の `ς(e) := 2e - 1`（`{0,1} → {-1,1}`）。 -/
+def varsigma' (e : Fin 2) : SpinVal' :=
+  ⟨2 * ((e : ℕ) : ℝ) - 1, by fin_cases e <;> norm_num⟩
+
+/-- 具体版 `coe_varsigma_one` と同じ主張: 人手の `ς(1) = 1`。 -/
+theorem coe_varsigma_one' : (varsigma' 1 : ℝ) = 1 := by
+  simp only [varsigma']; norm_num
+
+/-- 具体版 `coe_varsigma_zero` と同じ主張: 人手の `ς(0) = -1`。 -/
+theorem coe_varsigma_zero' : (varsigma' 0 : ℝ) = -1 := by
+  simp only [varsigma']; norm_num
+
+/-- 具体版 `varsigmaEquiv` と同じ式: 人手 Step 1 の「`ς` は全単射」。逆写像は人手の `τ ↦ (τ+1)/2`（`1 ↦ 1`、`-1 ↦ 0`）で、
+値で場合を分けて書く。 -/
+noncomputable def varsigmaEquiv' : Fin 2 ≃ SpinVal' where
+  toFun := varsigma'
+  invFun τ := if (τ : ℝ) = 1 then 1 else 0
+  left_inv e := by
+    fin_cases e
+    · show (if (varsigma' 0 : ℝ) = 1 then (1 : Fin 2) else 0) = 0
+      rw [coe_varsigma_zero', if_neg (by norm_num)]
+    · show (if (varsigma' 1 : ℝ) = 1 then (1 : Fin 2) else 0) = 1
+      rw [coe_varsigma_one', if_pos rfl]
+  right_inv τ := by
+    apply Subtype.ext
+    show (varsigma' (if (τ : ℝ) = 1 then 1 else 0) : ℝ) = τ
+    rcases τ.2 with h | h
+    · rw [if_pos h, coe_varsigma_one', h]
+    · rw [if_neg (by rw [h]; norm_num), coe_varsigma_zero', h]
+
+/-- 具体版 `varsigmaWordEquiv` と同じ式: 人手 Step 1 の全単射 `ε ↦ (ς(ε_1),…,ς(ε_{M_col-1}))`（成分ごとに `ς`）。 -/
+noncomputable def varsigmaWordEquiv' {n : ℕ} : (Fin (n + 1) → Fin 2) ≃ (Fin (n + 1) → SpinVal') :=
+  Equiv.piCongrRight fun _ => varsigmaEquiv'
 
 /-- `{-1,1}` 上の有限和（値は任意の加法可換モノイド）: `∑_{t∈{-1,1}} f(t) = f(1) + f(-1)`。 -/
-theorem sum_spinVal_addCommMonoid {R : Type*} [AddCommMonoid R] (f : SpinVal → R) :
-    ∑ x : SpinVal, f x = f ⟨1, Or.inl rfl⟩ + f ⟨-1, Or.inr rfl⟩ := by
-  rw [← spinIdxEquiv.symm.sum_comp, Fin.sum_univ_two]
+theorem sum_spinVal_addCommMonoid {R : Type*} [AddCommMonoid R] (f : SpinVal' → R) :
+    ∑ x : SpinVal', f x = f ⟨1, Or.inl rfl⟩ + f ⟨-1, Or.inr rfl⟩ := by
+  rw [← spinIdxEquiv'.symm.sum_comp, Fin.sum_univ_two]
   congr 2
 
 /-- 運ぶ段（人手の行は無い）: 乗法の可換モノイドの `Finset.prod` は左から掛ける有限積 `finProdLeft` である
@@ -107,51 +218,51 @@ theorem finset_prod_const_one' {G : Type*} [CommMonoid G] (m : ℕ) : ∏ _j : F
   exact finProdLeft_const_one' (mul_one 1) m
 
 /-- 人手の `ς(1) = 1` を `{-1,1}` の元の等式として読む。 -/
-theorem varsigma_one_eq : varsigma 1 = (⟨1, Or.inl rfl⟩ : SpinVal) := Subtype.ext coe_varsigma_one
+theorem varsigma_one_eq : varsigma' 1 = (⟨1, Or.inl rfl⟩ : SpinVal') := Subtype.ext coe_varsigma_one'
 
 /-- 人手の `ς(0) = -1` を `{-1,1}` の元の等式として読む。 -/
-theorem varsigma_zero_eq : varsigma 0 = (⟨-1, Or.inr rfl⟩ : SpinVal) := Subtype.ext coe_varsigma_zero
+theorem varsigma_zero_eq : varsigma' 0 = (⟨-1, Or.inr rfl⟩ : SpinVal') := Subtype.ext coe_varsigma_zero'
 
 /-- **必要十分版の本体の前半**: 値が可換半環 `R` の重み `g : {-1,1} → R` について
 `∑_{s∈𝔐} Π_{m=1}^{M_col-1} g(t_m(s)) = ∑_{u∈{-1,1}} Π_{m=1}^{M_col-1}(g(1)+g(-1))`（人手の `M_col` は Lean の `n + 2`）。
 具体版の二つの主張の最後の鎖の `人手 2`〜`人手 5` を、印を揃えて同じ並びで踏む。 -/
-theorem open_chain_weighted_sum_eq_sum_prod {R : Type*} [CommSemiring R] {n : ℕ} (g : SpinVal → R) :
-    ∑ s : SpinConf (n + 2), ∏ m : Fin (n + 1), g (bondSpin s m)
-      = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) :=
-  calc ∑ s : SpinConf (n + 2), ∏ m : Fin (n + 1), g (bondSpin s m)
-      = ∑ u : SpinVal, ∑ τ : Fin (n + 1) → SpinVal, ∏ m : Fin (n + 1), g (τ m) := by
+theorem open_chain_weighted_sum_eq_sum_prod {R : Type*} [CommSemiring R] {n : ℕ} (g : SpinVal' → R) :
+    ∑ s : SpinConf' (n + 2), ∏ m : Fin (n + 1), g (bondSpin' s m)
+      = ∑ _u : SpinVal', ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) :=
+  calc ∑ s : SpinConf' (n + 2), ∏ m : Fin (n + 1), g (bondSpin' s m)
+      = ∑ u : SpinVal', ∑ τ : Fin (n + 1) → SpinVal', ∏ m : Fin (n + 1), g (τ m) := by
         rw [← Fintype.sum_prod_type']
-        exact openChainPhiEquiv.sum_comp (fun y => ∏ m : Fin (n + 1), g (y.2 m))
+        exact openChainPhiEquiv'.sum_comp (fun y => ∏ m : Fin (n + 1), g (y.2 m))
                                                         -- 人手 2: Step 1 の全単射 `Φ` で和の添字を `s` から `(u; τ) = Φ(s)` へ付け替える
                                                         -- （`Fintype.sum_prod_type'` は組の上の和を `u` と `τ` の二重の和に読む運ぶ段）
-    _ = ∑ u : SpinVal, binWordSum n (fun ε => ∏ m : Fin (n + 1), g (varsigma (ε m))) := by
+    _ = ∑ u : SpinVal', binWordSum n (fun ε => ∏ m : Fin (n + 1), g (varsigma' (ε m))) := by
         refine Finset.sum_congr rfl fun u _ => ?_
         rw [binWordSum_eq_sum]
-        exact (varsigmaWordEquiv.sum_comp (fun τ => ∏ m : Fin (n + 1), g (τ m))).symm
+        exact (varsigmaWordEquiv'.sum_comp (fun τ => ∏ m : Fin (n + 1), g (τ m))).symm
                                                         -- 人手 3: Step 1 の全単射 `ε ↦ (ς(ε_1),…)` で内側の和の添字を付け替える
                                                         -- （`binWordSum_eq_sum` は `{0,1}^{M_col-1}` の上の和を `Finset.sum` で読む運ぶ段）
-    _ = ∑ u : SpinVal, ∏ m : Fin (n + 1), (g (varsigma 1) + g (varsigma 0)) :=
+    _ = ∑ u : SpinVal', ∏ m : Fin (n + 1), (g (varsigma' 1) + g (varsigma' 0)) :=
         Finset.sum_congr rfl fun u _ =>
-          (prod_add_eq_binWordSum' n (fun _ e => g (varsigma e))).symm
+          (prod_add_eq_binWordSum' n (fun _ e => g (varsigma' e))).symm
                                                         -- 人手 4: 二項の和の有限積の展開（`a_j^{(e)} → g(ς(e))`）を右辺から左辺へ、各 `u` の項へ
-    _ = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) := by
+    _ = ∑ _u : SpinVal', ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) := by
         rw [varsigma_one_eq, varsigma_zero_eq]          -- 人手 5: `ς(1) = 1`、`ς(0) = -1` を各因子へ
 
 /-- 具体版の `open_chain_partition_sum` の `人手 9`・`人手 10`、`open_chain_endpoint_product_sum` の `人手 12`・`人手 13` の
 必要十分版: `u` に依らない `c` の `{-1,1}` 上の和は `c + c`、それは `2c`。 -/
-theorem sum_spinVal_const {R : Type*} [CommSemiring R] (c : R) : ∑ _u : SpinVal, c = 2 * c :=
-  calc ∑ _u : SpinVal, c
+theorem sum_spinVal_const {R : Type*} [CommSemiring R] (c : R) : ∑ _u : SpinVal', c = 2 * c :=
+  calc ∑ _u : SpinVal', c
       = c + c := sum_spinVal_addCommMonoid _          -- 人手 9（端点の主張では 人手 12）: `{-1,1}` 上の和は `c + c`
     _ = 2 * c := add_self_eq_two_mul' c 2 one_mul add_mul one_add_one_eq_two
                                                       -- 人手 10（端点の主張では 人手 13）: `c + c = 2c`（具体版の `real_sum_of_two_equal_terms_is_twice`）
 
 /-- **必要十分版の本体**: `∑_{s∈𝔐} Π_{m=1}^{M_col-1} g(t_m(s)) = 2(g(1)+g(-1))^{M_col-1}`。
 前半 `open_chain_weighted_sum_eq_sum_prod`（`人手 2`〜`人手 5`）、`sum_spinVal_const`（`{-1,1}` の上の和）、冪の行をつなぐ。 -/
-theorem open_chain_weighted_sum {R : Type*} [CommSemiring R] {n : ℕ} (g : SpinVal → R) :
-    ∑ s : SpinConf (n + 2), ∏ m : Fin (n + 1), g (bondSpin s m)
+theorem open_chain_weighted_sum {R : Type*} [CommSemiring R] {n : ℕ} (g : SpinVal' → R) :
+    ∑ s : SpinConf' (n + 2), ∏ m : Fin (n + 1), g (bondSpin' s m)
       = 2 * (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) ^ (n + 1) :=
-  calc ∑ s : SpinConf (n + 2), ∏ m : Fin (n + 1), g (bondSpin s m)
-      = ∑ _u : SpinVal, ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) :=
+  calc ∑ s : SpinConf' (n + 2), ∏ m : Fin (n + 1), g (bondSpin' s m)
+      = ∑ _u : SpinVal', ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) :=
         open_chain_weighted_sum_eq_sum_prod g          -- 人手 2〜人手 5
     _ = 2 * ∏ _m : Fin (n + 1), (g ⟨1, Or.inl rfl⟩ + g ⟨-1, Or.inr rfl⟩) :=
         sum_spinVal_const _                             -- 人手 9・人手 10（端点の主張では 人手 12・人手 13）: `{-1,1}` の上の和と `c + c = 2c`

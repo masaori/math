@@ -3354,6 +3354,22 @@ targets=(
   Ising2D.NecSuf.prod_mul_succ_of_two
   Ising2D.NecSuf.prod_mul_succ_of_ge_three
   Ising2D.NecSuf.prod_mul_succ_eq_first_mul_last
+  "Ising2D.NecSuf.spinVal'_mul_self"
+  "Ising2D.NecSuf.openChainPhiEquiv'"
+  "Ising2D.NecSuf.coe_varsigma_one'"
+  "Ising2D.NecSuf.coe_varsigma_zero'"
+  "Ising2D.NecSuf.varsigmaEquiv'"
+  "Ising2D.NecSuf.varsigmaWordEquiv'"
+  "Ising2D.NecSuf.spinIdxEquiv'"
+  "Ising2D.NecSuf.sgn'_idxOfSpin'"
+  Ising2D.spinVal_eq_spinVal_necSuf
+  Ising2D.fintype_spinVal_eq_necSuf
+  Ising2D.spinConf_eq_spinConf_necSuf
+  Ising2D.spinIdxEquiv_eq_spinIdxEquiv_necSuf
+  Ising2D.bondSpin_eq_bondSpin_necSuf
+  Ising2D.openChainPhiEquiv_eq_openChainPhiEquiv_necSuf
+  Ising2D.varsigma_eq_varsigma_necSuf
+  Ising2D.varsigmaWordEquiv_eq_varsigmaWordEquiv_necSuf
   Ising2D.prod_bondSpin_eq_first_mul_last_of_necSuf
   Ising2D.endpoint_mul_exp_openChainEnergy_eq_prod_of_necSuf
   Ising2D.open_chain_partition_sum_of_necSuf
