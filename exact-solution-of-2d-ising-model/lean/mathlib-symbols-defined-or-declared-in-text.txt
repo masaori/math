@@ -97,6 +97,15 @@ HSub.hSub@Int,Int,Int@Int.instSub	def_int_difference
 # （DefinitionInclusionOfNaturalNumbersIntoIntegers.lean）。載せる前に台帳に在った Nat.cast の 121 行（本文が ι_{ℕ→ℤ} を書かない位置で
 # Lean だけが ℕ を ℤ へ送っている宣言を含む）は、状態台帳の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」が git の履歴から引く手順を持つ。
 Nat.cast@Int@instNatCastInt	inclusion_nn_to_zz
+# 添字の型 Fin n: def_index_set_from_one_to_n が添字の集合 {1,…,n} := {k ∈ ℤ_{≥1} | k ≤_ℤ n} を定める。Lean の具体版は添字に Fin n（v < n の v ∈ ℕ と証明の組）を使い、
+# 名前を付けた写像 finIndexToZZ n : Fin n → ℤ（i ↦ ι_{ℕ→ℤ}(i.val) + 1_ℤ）が {k ∈ ℤ | 1 ≤ k ∧ k ≤ ι_{ℕ→ℤ}(n)} への全単射であることを
+# 補題一本 finIndexToZZ_bijective_onto_index_set で示した（DefinitionIndexSetFromOneToN.lean）。Fin.val は Fin n の元から ℕ の元を取り出す射影で、写像の定義の式に現れる。
+# 載せる前に台帳に在った Fin・Fin.val の行は、本文の添字と Lean の Fin n の元を写像を通さずに行き来している宣言と、Fin 2 で本文の二値の集合 {0,1}
+# （添字の集合ではない）を表している宣言（スピン配置 Conf、二値の語の上の和など）を含む。状態台帳の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」と
+# 行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が、git の履歴（載せる前の main の先端 722368b1d）から引く手順を持つ。
+# Fin の数字（OfNat.ofNat@Fin）は、添字の 1 つずれた値（(0 : Fin n) は添字 1）と二値の 0・1 の両方に使われているので、まだ載せない。
+Fin	def_index_set_from_one_to_n
+Fin.val	def_index_set_from_one_to_n
 # ℕ の和と積: set_and_algebra_notation が ℕ の +・· を外から持ち込み、証明が使う性質（和と積の再帰の式、結合律・交換律・単位元、分配律、加法の簡約律）を列挙している。
 # Lean の ℕ の和・積も同じ再帰の式で定義されている（x + 0 = x・x + (y + 1) = (x + y) + 1、x·0 = 0・x·(y + 1) = x·y + x が rfl）。
 # 本文の ℤ_{≥0} の元を Lean が ℕ で書く箇所の行き来は、ι_{ℕ→ℤ} が和と積を保つこと（inclusion_nn_to_zz_preserves_sum・inclusion_nn_to_zz_preserves_product）で書く。

@@ -235,6 +235,7 @@ export const ALL_LABELS = [
   "def_hermitian_positive_definite",
   "def_identity_matrix",
   "def_imaginary_unit",
+  "def_index_set_from_one_to_n",
   "def_index_skipping_map",
   "def_indexed_hyperbolic_abbreviations",
   "def_int_absolute_value",

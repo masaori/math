@@ -39,6 +39,7 @@ Lean では `Fin M` 上の `deltaM μ ν = if μ = ν then 1 else 0` として�
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIndexSetFromOneToN
 
 namespace Ising2D
 
@@ -128,7 +129,10 @@ theorem jw_anticomm (μ ν : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ)
       · -- `Iσ = σ`・`σI = σ`（`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`）
         rw [jwFamily_of_gt h1, identity_matrix_mul, mul_identity_matrix]
   · -- `μ = ν`: 食い違うのはサイト `μ`（`A` と `B`）
-    have he : μ = ν := Fin.val_injective h
+    -- `h` は Lean の場合分けが比べた ℕ の値 `μ.val = ν.val` の等号である（本文は添字の集合 `{1,…,M}` の元 `μ, ν` を直接比べる）。
+    -- `h` を名前を付けた写像 `finIndexToZZ`（`def_index_set_from_one_to_n`）の像の等号に作り直し、その単射性で `Fin M` の元の等号へ移す。
+    -- 場合分けそのものを写像の像の ℤ の比較で行う直しは、状態台帳の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」の二単位目以降に回した。
+    have he : μ = ν := (finIndexToZZ_bijective_onto_index_set M).1 μ ν (by rw [finIndexToZZ, finIndexToZZ, h])
     refine siteProd_anticomm_of_single_site _ _ μ ?_ ?_
     · rw [← he, jwFamily_self, jwFamily_self]
       exact hAB he
