@@ -35,6 +35,7 @@ theorem fourier_similarity_preserves_determinant {L : ℕ} [NeZero L]
   -- 本文の相似等式、二回の乗法性、行列式の積の相殺。
   calc
     kacWardDeterminant (kacWardTransitionMatrix L z s) = Matrix.det (F * T * G) := by
+      rw [kacWardDeterminant_eq_mathlib]
       exact congrArg Matrix.det (polynomial_fourier_similarity z s κ)
     _ = Matrix.det (F * T) * Matrix.det G :=
       qbarPolynomial_det_mul (F * T) G

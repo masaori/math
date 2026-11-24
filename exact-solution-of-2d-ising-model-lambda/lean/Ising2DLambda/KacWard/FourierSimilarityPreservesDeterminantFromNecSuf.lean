@@ -27,8 +27,9 @@ theorem fourier_similarity_preserves_determinant_from_necSuf {L : ℕ} [NeZero L
   have hdetMul (A B : Matrix (OrientedEdge L) (OrientedEdge L) QbarPoly) :
       Matrix.det (A * B) = Matrix.det A * Matrix.det B := qbarPolynomial_det_mul A B
   calc
-    kacWardDeterminant (kacWardTransitionMatrix L z s) = Matrix.det (F * T * G) :=
-      congrArg Matrix.det (polynomial_fourier_similarity z s κ)
+    kacWardDeterminant (kacWardTransitionMatrix L z s) = Matrix.det (F * T * G) := by
+      rw [kacWardDeterminant_eq_mathlib]
+      exact congrArg Matrix.det (polynomial_fourier_similarity z s κ)
     _ = Matrix.det T :=
       NecSuf.KacWard.similarity_preserves_determinant_necSuf F T G hFG hdetMul
         (polynomialOrientedIdentity_determinant L)

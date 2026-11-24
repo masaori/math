@@ -34152,7 +34152,7 @@ g&=g'+\widehat{c}\cdot t^{m}\cdot h&&\bigl(\because\ g'\ \text{の置き方}\big
                           ]),
                           displayMath(String.raw`\begin{aligned}
 n-1&\in D_F(\alpha)&&\bigl(\because\ q\in F[t],\ q\ne0,\ \mathrm{aev}_{\alpha}(q)=0,\ k>n-1\Rightarrow\mathrm{ac}_k(q)=0\ \text{と}\ \blkref{def_degree_over_subfield}\ \text{の}\ D_F(\alpha)\bigr),\\
-n&\le n-1&&\bigl(\because\ n=\min D_F(\alpha)\ \text{（}\blkref{def_degree_over_subfield}\text{。}D_F(\alpha)\ne\varnothing\text{ は }\blkref{claim_subfield_coefficient_vanishing_polynomial_exists}\text{）}\bigr)
+n&\le n-1&&\bigl(\because\ n=\min D_F(\alpha)\ \text{（}\blkref{def_degree_over_subfield}\text{、}D_F(\alpha)\ne\varnothing\text{ は }\blkref{claim_subfield_coefficient_vanishing_polynomial_exists}\text{）}\bigr)
 \end{aligned}`),
                           paragraph([
                             "となり、",
@@ -80388,7 +80388,7 @@ c_{\mathrm v}(e,d):=
                       kind: "definition",
                       title: { text: "四つの Kac--Ward 行列式" },
                       labels: ["def_kac_ward_determinants"],
-                      lean: ["Ising2DLambda.KacWard.kacWardDeterminant"],
+                      lean: ["Ising2DLambda.KacWard.kacWardDeterminant", "Ising2DLambda.KacWard.kacWardDeterminant_eq_qbarPolynomialDeterminant", "Ising2DLambda.KacWard.kacWardDeterminant_eq_mathlib"],
                       habitat: "Qbar",
                       statement: [
                         paragraph([

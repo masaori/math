@@ -7,7 +7,7 @@ Qbar[x] 成分の有限行列                         `QbarPolynomialMatrix`
 K(x) = I - x C(M)（成分ごとの定義）            `kacWardPolynomialMatrix`
 D(x) = det K(x)                              `kacWardDeterminant`
 定数項 = 0 での評価（k=0 の項だけが残る）      `Polynomial.coeff_zero_eq_eval_zero`
-行列式の置換展開                              `Matrix.det_apply'`
+行列式の置換展開                              `kacWardDeterminant` の定義
 評価は有限和を保つ                            `Polynomial.eval_finsetSum`
 評価は有限積を保つ・符号の定数は値へ戻る       `Polynomial.eval_mul`・`Polynomial.eval_prod`・`Polynomial.eval_intCast`
 成分の 0 での値は対角 1・非対角 0             成分ごとの同じ計算（simp の場合分け）
@@ -17,6 +17,7 @@ D(x) = det K(x)                              `kacWardDeterminant`
 住処は Qbar と Qbar[x] であり、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolyPowerDifferenceFactorization
+import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansion
 import Ising2DLambda.NecSuf.KacWard.DeterminantConstantTerm
 import Mathlib.LinearAlgebra.Matrix.Polynomial
 
@@ -32,10 +33,28 @@ noncomputable def kacWardPolynomialMatrix {ι : Type} [DecidableEq ι]
     (M : Matrix ι ι Qbar) : QbarPolynomialMatrix ι :=
   1 - (Polynomial.X : QbarPoly) • M.map Polynomial.C
 
-/-- 本文の `D(x) = det K(x)`。 -/
+/-- 本文の行指定の置換和。線型順序がある場合は転倒数で定めた符号と一致する。 -/
 noncomputable def kacWardDeterminant {ι : Type} [Fintype ι] [DecidableEq ι]
     (M : Matrix ι ι Qbar) : QbarPoly :=
-  Matrix.det (kacWardPolynomialMatrix M)
+  ∑ σ : Equiv.Perm ι,
+    Polynomial.C ((Equiv.Perm.sign σ : ℤ) : Qbar) *
+      ∏ i : ι, kacWardPolynomialMatrix M i (σ i)
+
+/-- 本文の転倒数による行指定の定義との一致。 -/
+theorem kacWardDeterminant_eq_qbarPolynomialDeterminant
+    {ι : Type} [Fintype ι] [LinearOrder ι] (M : Matrix ι ι Qbar) :
+    kacWardDeterminant M = qbarPolynomialDeterminant (kacWardPolynomialMatrix M) := by
+  classical
+  simp only [kacWardDeterminant, qbarPolynomialDeterminant,
+    qbarPermutationSign_eq_mathlibSign]
+
+/-- mathlib の行列式との定義橋。 -/
+theorem kacWardDeterminant_eq_mathlib
+    {ι : Type} [Fintype ι] [DecidableEq ι] (M : Matrix ι ι Qbar) :
+    kacWardDeterminant M = Matrix.det (kacWardPolynomialMatrix M) := by
+  classical
+  rw [kacWardDeterminant, ← Matrix.det_transpose]
+  simp only [Matrix.det_apply', Matrix.transpose_apply, map_intCast]
 
 /-- 人手証明の置換展開と同じ経路の具体版。 -/
 theorem kacWardDeterminant_coeff_zero {ι : Type} [Fintype ι] [DecidableEq ι]
@@ -44,7 +63,7 @@ theorem kacWardDeterminant_coeff_zero {ι : Type} [Fintype ι] [DecidableEq ι]
   -- 人手証明: 定数項は 0 での評価（係数の有限和のうち k=0 の項だけが残る）
   rw [Polynomial.coeff_zero_eq_eval_zero]
   -- 人手証明: 行列式の置換展開
-  rw [kacWardDeterminant, Matrix.det_apply']
+  rw [kacWardDeterminant]
   -- 人手証明: 評価は有限和を保つ
   rw [Polynomial.eval_finsetSum]
   -- 人手証明: 恒等置換の項だけが残る
@@ -59,8 +78,8 @@ theorem kacWardDeterminant_coeff_zero {ι : Type} [Fintype ι] [DecidableEq ι]
       exact hσ (Equiv.ext h)
     rw [Polynomial.eval_mul, Polynomial.eval_prod]
     have hzero :
-        Polynomial.eval (0 : Qbar) (kacWardPolynomialMatrix M (σ i) i) = 0 := by
-      simp [kacWardPolynomialMatrix, hi]
+        Polynomial.eval (0 : Qbar) (kacWardPolynomialMatrix M i (σ i)) = 0 := by
+      simp [kacWardPolynomialMatrix, Ne.symm hi]
     rw [Finset.prod_eq_zero (Finset.mem_univ i) hzero, mul_zero]
   · -- 恒等置換は必ず和の添字に入っている
     intro h
@@ -70,6 +89,7 @@ theorem kacWardDeterminant_coeff_zero {ι : Type} [Fintype ι] [DecidableEq ι]
 theorem kacWardDeterminant_coeff_zero_from_necSuf {ι : Type}
     [Fintype ι] [DecidableEq ι] (M : Matrix ι ι Qbar) :
     (kacWardDeterminant M).coeff 0 = 1 := by
+  rw [kacWardDeterminant_eq_mathlib]
   exact Ising2DLambda.NecSuf.KacWard.det_one_sub_X_mul_coeff_zero M
 
 end Ising2DLambda.KacWard

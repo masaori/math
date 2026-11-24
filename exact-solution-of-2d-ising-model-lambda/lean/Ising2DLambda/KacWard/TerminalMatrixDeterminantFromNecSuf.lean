@@ -17,8 +17,14 @@ theorem polynomialReversalMatrix_determinant_from_necSuf (L : ℕ) :
 theorem terminalMatrix_determinant_from_necSuf (L : ℕ) (z : Qbar) (s : SpinStructure) :
     Matrix.det (terminalMatrix L z s) =
       kacWardDeterminant (kacWardTransitionMatrix L z s) := by
-  exact NecSuf.KacWard.mappedMatrix_mul_determinant_necSuf
-    integerConstantPolynomialHom (reversalMatrix L) (spinKacWardPolynomialMatrix L z s)
-    (by simpa only [IntegerMatrix.determinant_eq_mathlib] using reversalMatrix_determinant L)
+  calc
+    Matrix.det (terminalMatrix L z s) =
+        Matrix.det (spinKacWardPolynomialMatrix L z s) :=
+      NecSuf.KacWard.mappedMatrix_mul_determinant_necSuf
+        integerConstantPolynomialHom (reversalMatrix L) (spinKacWardPolynomialMatrix L z s)
+        (by simpa only [IntegerMatrix.determinant_eq_mathlib] using reversalMatrix_determinant L)
+    _ = kacWardDeterminant (kacWardTransitionMatrix L z s) := by
+      rw [kacWardDeterminant_eq_mathlib]
+      rfl
 
 end Ising2DLambda.KacWard

@@ -82,6 +82,8 @@ theorem terminalMatrix_determinant (L : ℕ) (z : Qbar) (s : SpinStructure) :
     _ = 1 * Matrix.det (spinKacWardPolynomialMatrix L z s) := by
       rw [polynomialReversalMatrix_determinant]
     _ = Matrix.det (spinKacWardPolynomialMatrix L z s) := one_mul _
-    _ = kacWardDeterminant (kacWardTransitionMatrix L z s) := rfl
+    _ = kacWardDeterminant (kacWardTransitionMatrix L z s) := by
+      rw [kacWardDeterminant_eq_mathlib]
+      rfl
 
 end Ising2DLambda.KacWard
