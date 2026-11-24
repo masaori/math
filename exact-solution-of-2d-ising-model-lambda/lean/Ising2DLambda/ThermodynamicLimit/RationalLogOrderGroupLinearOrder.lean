@@ -1,8 +1,9 @@
 /-
 人手証明「有理係数の対数順序群の順序は線形順序である」（`claim_rational_log_order_group_linear_order`）の具体版。
 
-四つとも、`λ, μ, ν` の三つに共通の共通分母 `N := N_λ N_μ N_ν`（`claim_common_denominator_multiple` を
-各元について一度ずつ、計三度）を取り、順序の定義を「すべての両方の共通分母で」の形（`rationalLogOrderLE_iff_forall`）で読んで
+四つとも、`λ, μ, ν` の三つに共通の共通分母 `N`（`claim_rational_log_order_group_three_common_denominator` =
+`commonDenominator_three_exists`）を取り、順序を「すべての両方の共通分母で」の形
+（`claim_rational_log_order_group_order_some_iff_all` = `rationalLogOrderLE_iff_forall`）で読んで
 `Λ` の順序の同じ名前の性質（`claim_log_order_group_linear_order`）へ落とす。反対称律だけは、
 `λ_N = μ_N` から `N·λ = ι(λ_N) = ι(μ_N) = N·μ` を経て `N⁻¹` 倍で `λ = μ` へ戻す一段を要する。
 住処は ℕ・ℤ・ℚ・Λ・Λ_ℚ のみで、ℝ / ℂ は現れない。
@@ -13,8 +14,8 @@ namespace Ising2DLambda.ThermodynamicLimit
 
 open FreeEntropy
 
-/-- 準備: 三元 `λ, μ, ν` には共通の共通分母 `N_λ N_μ N_ν` がある
-（`claim_common_denominator_multiple` を各元について一度ずつ）。 -/
+/-- `claim_rational_log_order_group_three_common_denominator`。三元 `λ, μ, ν` には共通の共通分母
+`N_λ N_μ N_ν` がある（`claim_common_denominator_multiple` を各元について一度ずつ）。 -/
 theorem commonDenominator_three_exists (l m n : RationalLogOrderGroup) :
     ∃ (N : ℕ) (lN mN nN : LogOrderGroup),
       1 ≤ N ∧ IsCommonDenominator N l lN ∧ IsCommonDenominator N m mN ∧
@@ -59,10 +60,10 @@ theorem eq_of_commonDenominator_witness_eq (N : ℕ) (hN : 1 ≤ N) (l m : Ratio
     _ = ((N : ℚ)⁻¹ * (N : ℚ)) • m := smul_smul _ _ _              -- 有理数倍の結合則
     _ = m := by rw [inv_mul_cancel₀ hNq, one_smul]
 
-/-- 反射律。 -/
-theorem rationalLogOrderLE_refl (l : RationalLogOrderGroup) : rationalLogOrderLE l l :=
-  ⟨denominatorProduct l, _, _, denominatorProduct_pos l, commonDenominator_exists l,
-    commonDenominator_exists l, logOrderLE_refl _⟩
+/-- 反射律。準備の共通の共通分母 `N` の証人を `Λ` の反射律で比べる。 -/
+theorem rationalLogOrderLE_refl (l : RationalLogOrderGroup) : rationalLogOrderLE l l := by
+  obtain ⟨N, lN, _, _, hN, hl, _, _⟩ := commonDenominator_three_exists l l l
+  exact ⟨N, lN, lN, hN, hl, hl, logOrderLE_refl _⟩
 
 /-- 推移律。三元の共通の共通分母 `N` で ∀ 形に読み、`Λ` の推移律へ落とす。 -/
 theorem rationalLogOrderLE_trans {l m n : RationalLogOrderGroup}

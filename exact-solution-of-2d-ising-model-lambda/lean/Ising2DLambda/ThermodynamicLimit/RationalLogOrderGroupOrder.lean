@@ -18,7 +18,7 @@ def rationalLogOrderLE (l m : RationalLogOrderGroup) : Prop :=
   ∃ (N : ℕ) (lN mN : LogOrderGroup),
     1 ≤ N ∧ IsCommonDenominator N l lN ∧ IsCommonDenominator N m mN ∧ logOrderLE lN mN
 
-/-- 「ある共通分母で成り立つ」は「すべての共通分母で成り立つ」と言い換えられる。 -/
+/-- `claim_rational_log_order_group_order_some_iff_all`。「ある共通分母で成り立つ」は「すべての共通分母で成り立つ」と言い換えられる。 -/
 theorem rationalLogOrderLE_iff_forall (l m : RationalLogOrderGroup) :
     rationalLogOrderLE l m ↔
       ∀ (N : ℕ) (lN mN : LogOrderGroup),
