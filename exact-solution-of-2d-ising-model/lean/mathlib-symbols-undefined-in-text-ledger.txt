@@ -2724,7 +2724,6 @@ Ising2D.Yflat	Fin.mk
 Ising2D.Yflat	Neg.neg@Ising2D.TensorPow@Matrix.neg
 Ising2D.Yflat	OfNat.ofNat@Ising2D.TensorPow,0@Zero.toOfNat0
 Ising2D.Yflat	dite@Ising2D.TensorPow,And@instDecidableAnd
-Ising2D.Yflat_zero	Fin.mk
 Ising2D.Yflat_zero	Neg.neg@Ising2D.TensorPow@Matrix.neg
 Ising2D.Z	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
 Ising2D.Z	Matrix
@@ -2796,7 +2795,6 @@ Ising2D.Zflat	Fin.mk
 Ising2D.Zflat	Neg.neg@Ising2D.TensorPow@Matrix.neg
 Ising2D.Zflat	OfNat.ofNat@Ising2D.TensorPow,0@Zero.toOfNat0
 Ising2D.Zflat	dite@Ising2D.TensorPow,And@instDecidableAnd
-Ising2D.Zflat_last	Fin.mk
 Ising2D.Zflat_last	Neg.neg@Ising2D.TensorPow@Matrix.neg
 Ising2D.aPlus	Real.sqrt
 Ising2D.absGamma2	Complex.normSq

@@ -44,7 +44,8 @@
   名前の根拠「零行列の和は零行列」（一つの添字を除いた集合の上の和の 4 か所。`M = 2` では空の和）である。
   具体版（`ClaimAddAndSubtractZeroMatrix.lean`）は添字が `Fin m` の行列についてのもので、`TensorPow M` の添字 `Conf M` に当てはまらない。
   加えて有限和の添字の付け方が本文でまだ定まっていない（状態台帳の「有限和の添字の付け方」の件）ので、`Finset.sum_eq_single` にまとめたままにしてある。
-* Step 3 の添字の付け替え `l = j - 1` は、Lean の 0 始まりの `Fin` の値がそのまま人手の `l` なので、行が無い。
+* Step 3 の添字の付け替え `l = j - 1` は、和の添字 `j : Fin M` の `ι_{ℕ→ℤ}(j.val)`（`= finIndexToZZ M j − 1_ℤ`）がそのまま人手の `l` なので、行が無い
+  （`checkZ`・`checkY` の位相の添字は `((j : ℕ) : ℤ) + 1` で書いてあり、まだ `finIndexToZZ M j` を通していない）。
   Step 4 の付け替え `l = j + 1` は `checkPhase_add_left`（`theorem_exp_product`）と同じ行で行う。
 * 人手の「分配律」の行では、`2` と `e^{∓iθ~_μ}` を 1 つのスカラーにまとめる。
   人手の最後の 2 行（`1 ≤ l ≤ M` で延長を外す行と `def_half_integer_checkY`・`def_half_integer_checkZ` の行）は 1 行にまとめる。
@@ -59,8 +60,16 @@
 
 ## 添字の扱い
 
-site 添字は `Fin M` で、人手の `j` は `(j : ℕ) + 1`。延長 `Y♭_l`（`l = 0, …, M`）・`Z♭_l`（`l = 1, …, M+1`）は
-人手と同じ自然数の添字 `l` で持つ。モード添字 `μ` は `ℤ` のまま扱う（4 式とも `μ ∈ ℤ` で成り立つ）。
+site 添字は `Fin M` で、人手の添字 `j ∈ {1,…,M}` は `finIndexToZZ M k = j`（`def_index_set_from_one_to_n`）を満たす `k : Fin M` である。
+`lie_H1Plus_Z`・`lie_H1Plus_Y` の場合分け（人手の `j = 1` と `2 ≤ j ≤ M`、`j = M` と `1 ≤ j ≤ M-1`）は、この像を `1_ℤ`・`ι_{ℕ→ℤ}(M)` と ℤ で比べて行う。
+人手の `m = j - 1`・`j + 1` のサイトは全単射の補題 `finIndexToZZ_bijective_onto_index_set` の全射で取り、サイトの等号はその単射で得る。
+人手のサイト `1`・`M` は `firstSite`・`lastSite`、次のサイトの像は `finIndexToZZ_nextSite_of_lt`・`finIndexToZZ_nextSite_of_last` で求める。
+Lean の定義 `lastSign`・`nextSite` の仮定（値の `m.val + 1 = M` など）へは `finIndexToZZ_eq_iff_val_add_one_eq` で移す。
+延長 `Y♭_l`（`l = 0, …, M`）・`Z♭_l`（`l = 1, …, M+1`）は人手と同じ自然数の添字 `l` で持つ。定義の場合分けは延長の添字 `l` どうしの ℕ の比較で、
+本文の添字と `Fin M` の元の行き来ではない。行き来は定義の中の `Y ⟨l - 1, _⟩`・`Z ⟨l - 1, _⟩` で、これを写像経由にするには `finIndexToZZ` の逆写像に
+名前を付けて置く必要があるので、この定義は残す。人手の添字から `l` へ移る段は `finIndexToZZ_eq_inclusion_add_one_iff_val_eq`（像が `ι_{ℕ→ℤ}(l) + 1_ℤ`
+であることと値が `l` であることの同値）で行い、境界の `Y♭_0 = -Y_M`・`Z♭_{M+1} = -Z_1` の右辺は `lastSite`・`firstSite` で書く。
+モード添字 `μ` は `ℤ` のまま扱う（4 式とも `μ ∈ ℤ` で成り立つ）。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
@@ -216,18 +225,20 @@ theorem Yflat_succ (k : Fin M) : Yflat M ((k : ℕ) + 1) = Y k := by
   rw [Yflat, dif_pos ⟨by omega, k.isLt⟩]
   congr 1
 
-/-- `Y♭_0 = -Y_M`。 -/
-theorem Yflat_zero (hM : 0 < M) : Yflat M 0 = -Y ⟨M - 1, by omega⟩ := by
-  rw [Yflat, dif_neg (by omega), dif_pos ⟨rfl, hM⟩]
+/-- `Y♭_0 = -Y_M`（人手のサイト `M` は `lastSite`）。 -/
+theorem Yflat_zero (hM : M ≠ 0) : Yflat M 0 = -Y (lastSite M hM) := by
+  rw [Yflat, dif_neg (by omega), dif_pos ⟨rfl, Nat.pos_of_ne_zero hM⟩]
+  rfl
 
 /-- `1 ≤ l ≤ M` では `Z♭_l = Z_l`（Lean の添字では `Zflat M (k+1) = Z k`）。 -/
 theorem Zflat_succ (k : Fin M) : Zflat M ((k : ℕ) + 1) = Z k := by
   rw [Zflat, dif_pos ⟨by omega, k.isLt⟩]
   congr 1
 
-/-- `Z♭_{M+1} = -Z_1`。 -/
-theorem Zflat_last (hM : 0 < M) : Zflat M (M + 1) = -Z ⟨0, hM⟩ := by
-  rw [Zflat, dif_neg (by omega), dif_pos ⟨rfl, hM⟩]
+/-- `Z♭_{M+1} = -Z_1`（人手のサイト `1` は `firstSite`）。 -/
+theorem Zflat_last (hM : M ≠ 0) : Zflat M (M + 1) = -Z (firstSite M hM) := by
+  rw [Zflat, dif_neg (by omega), dif_pos ⟨rfl, Nat.pos_of_ne_zero hM⟩]
+  rfl
 
 /-! ## Step 1: 和へまとめる -/
 
@@ -266,84 +277,134 @@ theorem lie_H2_Y (j : Fin M) : ⁅H2 M, Y j⁆ = (2 : ℂ) • Z j := by
           (fun h => absurd (Finset.mem_univ j) h)
     _ = (2 : ℂ) • Z j := lie_ZY_Y_self j
 
-/-- **Step 1 の第 3 式** `[H_1^{(+)}, Z_j] = 2 Y♭_{j-1}`（Lean の添字 `k = j - 1`）。
+/-- **Step 1 の第 3 式** `[H_1^{(+)}, Z_j] = 2 Y♭_{j-1}`。人手の添字 `j` は `finIndexToZZ M k`（`def_index_set_from_one_to_n`）で、
+延長の自然数の添字 `ι_{ℕ→ℤ}(k.val) = finIndexToZZ M k − 1_ℤ` が人手の `j − 1` である。
 
-人手は `2 ≤ j ≤ M`（`k ≠ 0`）と `j = 1`（`k = 0`）に分ける。どちらも、`Z_j` を右因子に持つ
-ただ 1 つの項（`k ≠ 0` なら `m = j - 1`、`k = 0` なら境界項 `-Y_M Z_1`）以外は
+人手は `2 ≤ j ≤ M` と `j = 1` に分ける。Lean は `finIndexToZZ M k = 1`（`j = 1`）とその否定（`2 ≤ j ≤ M`）で分けるので、
+二つの場合の並びは人手と逆である。どちらも、`Z_j` を右因子に持つただ 1 つの項（`2 ≤ j ≤ M` なら `m = j - 1`、`j = 1` なら境界項 `-Y_M Z_1`）以外は
 `[Y_a Z_b, Z_j] = 0 (b ≠ j)` で消える。 -/
 theorem lie_H1Plus_Z (k : Fin M) : ⁅H1plus M, Z k⁆ = (2 : ℂ) • Yflat M (k : ℕ) := by
   have hM : 0 < M := Fin.pos k
+  -- 人手の添字 `j ∈ {1,…,M}` は `finIndexToZZ M k`、和の添字 `m` は `finIndexToZZ M m`（`def_index_set_from_one_to_n`）。
+  -- 場合分けはこの像の ℤ の比較で行い、分けた後のサイトの等号は全単射の補題の単射で、`m = j - 1` のサイトは全射で得る
+  have hinj := (finIndexToZZ_bijective_onto_index_set M).1
+  have hrange := (finIndexToZZ_bijective_onto_index_set M).2.1
+  have hsurj := (finIndexToZZ_bijective_onto_index_set M).2.2
   rw [H1plus, lie_sum_smul_left']
-  by_cases hk : (k : ℕ) = 0
-  · -- `j = 1`: 境界項 `m = M` だけが残る
-    set last : Fin M := ⟨M - 1, by omega⟩
-    have hlast : (last : ℕ) + 1 = M := by simp [last]; omega
-    have hnext : nextSite last = k := Fin.ext (by rw [nextSite_val_of_last hlast, hk])
+  by_cases hk : finIndexToZZ M k = 1
+  · -- `j = 1`: 境界項 `m = M`（人手のサイト `M` は `lastSite`）だけが残る
+    set last : Fin M := lastSite M hM.ne'
+    have hlastZ : finIndexToZZ M last = inclusionNNtoZZ M := finIndexToZZ_lastSite hM.ne'
+    have hlast : (last : ℕ) + 1 = M := (finIndexToZZ_eq_iff_val_add_one_eq M last).1 hlastZ
+    have hnext : nextSite last = k := hinj _ _ (by rw [finIndexToZZ_nextSite_of_last hlast, hk])
+    -- 延長 `Y♭` の添字（ℕ）へ移す: 人手の `j - 1 = 0`
+    have hk0 : (k : ℕ) = 0 :=
+      (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M k 0).1 (by rw [inclusionNNtoZZ_eq_natCast]; omega)
     rw [Finset.sum_eq_single last]
-    · rw [lastSign_of_last hlast, hnext, lie_YZ_Z_right, hk, Yflat_zero hM, smul_smul,
+    · rw [lastSign_of_last hlast, hnext, lie_YZ_Z_right, hk0, Yflat_zero hM.ne', smul_smul,
         smul_neg, ← neg_smul]
       congr 1
       norm_num
     · intro m _ hm
+      -- 人手の `m + 1 = 1` となる和の添字は `m = M` だけ
       have hne : nextSite m ≠ k := by
         intro he
         apply hm
-        apply Fin.ext
-        have hlt : (m : ℕ) + 1 ≤ M := m.isLt
-        rcases Nat.lt_or_ge ((m : ℕ) + 1) M with h | h
-        · have := congrArg Fin.val he
-          rw [nextSite_val_of_lt h] at this
+        by_cases hmlast : finIndexToZZ M m = inclusionNNtoZZ M
+        · exact hinj _ _ (by rw [hmlast, hlastZ])
+        · have hlt : (m : ℕ) + 1 < M := by
+            have := (finIndexToZZ_eq_iff_val_add_one_eq M m).not.1 hmlast
+            have := m.isLt
+            omega
+          have h1 := finIndexToZZ_nextSite_of_lt hlt
+          rw [he, hk] at h1
+          have := (hrange m).1
           omega
-        · simp [last]; omega
       rw [lie_YZ_Z_of_ne _ hne, smul_zero]
     · exact fun h => absurd (Finset.mem_univ _) h
   · -- `2 ≤ j ≤ M`: `m = j - 1` の項だけが残る
-    set prev : Fin M := ⟨(k : ℕ) - 1, by omega⟩
-    have hprev : (prev : ℕ) + 1 < M := by simp [prev]; omega
-    have hnext : nextSite prev = k := Fin.ext (by rw [nextSite_val_of_lt hprev]; simp [prev]; omega)
+    have hkr := hrange k
+    obtain ⟨prev, hprevZ⟩ := hsurj (finIndexToZZ M k - 1) (by omega) (by omega)
+    have hprevNotLast : (prev : ℕ) + 1 ≠ M := fun h => by
+      have := (finIndexToZZ_eq_iff_val_add_one_eq M prev).2 h
+      omega
+    have hprev : (prev : ℕ) + 1 < M := by have := prev.isLt; omega
+    have hnext : nextSite prev = k :=
+      hinj _ _ (by rw [finIndexToZZ_nextSite_of_lt hprev, hprevZ]; ring)
+    -- 延長 `Y♭` の添字（ℕ）へ移す: 人手の `j - 1 = m`
+    have hkval : (k : ℕ) = (prev : ℕ) + 1 := by
+      have hprevval := (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M prev prev).2 rfl
+      refine (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M k ((prev : ℕ) + 1)).1 ?_
+      rw [inclusionNNtoZZ_eq_natCast] at hprevval ⊢
+      push_cast
+      omega
     rw [Finset.sum_eq_single prev]
-    · rw [lastSign_of_not_last (by omega), hnext, lie_YZ_Z_right, one_smul]
+    · rw [lastSign_of_not_last hprevNotLast, hnext, lie_YZ_Z_right, one_smul]
       congr 1
-      rw [show (k : ℕ) = (prev : ℕ) + 1 by simp [prev]; omega, Yflat_succ]
+      rw [hkval, Yflat_succ]
     · intro m _ hm
+      -- 人手の `m + 1 = j`（`j ≥ 2`）となる和の添字は `m = j - 1` だけ
       have hne : nextSite m ≠ k := by
         intro he
         apply hm
-        apply Fin.ext
-        have := congrArg Fin.val he
-        rcases Nat.lt_or_ge ((m : ℕ) + 1) M with h | h
-        · rw [nextSite_val_of_lt h] at this
-          simp [prev]; omega
-        · have hl : (m : ℕ) + 1 = M := by have := m.isLt; omega
-          rw [nextSite_val_of_last hl] at this
+        apply hinj
+        by_cases hmlast : finIndexToZZ M m = inclusionNNtoZZ M
+        · have h1 := finIndexToZZ_nextSite_of_last ((finIndexToZZ_eq_iff_val_add_one_eq M m).1 hmlast)
+          rw [he] at h1
+          exact absurd h1 hk
+        · have hlt : (m : ℕ) + 1 < M := by
+            have := (finIndexToZZ_eq_iff_val_add_one_eq M m).not.1 hmlast
+            have := m.isLt
+            omega
+          have h1 := finIndexToZZ_nextSite_of_lt hlt
+          rw [he] at h1
           omega
       rw [lie_YZ_Z_of_ne _ hne, smul_zero]
     · exact fun h => absurd (Finset.mem_univ _) h
 
-/-- **Step 1 の第 4 式** `[H_1^{(+)}, Y_j] = -2 Z♭_{j+1}`（Lean の添字 `k = j - 1`、`j + 1 = k + 2`）。
+/-- **Step 1 の第 4 式** `[H_1^{(+)}, Y_j] = -2 Z♭_{j+1}`。人手の添字 `j` は `finIndexToZZ M k`（`def_index_set_from_one_to_n`）で、
+延長の自然数の添字 `ι_{ℕ→ℤ}(k.val + 2) = finIndexToZZ M k + 1_ℤ` が人手の `j + 1` である。
 
-人手は `1 ≤ j ≤ M-1` と `j = M` に分ける。どちらも、`Y_j` を左因子に持つただ 1 つの項
+人手は `1 ≤ j ≤ M-1` と `j = M` に分ける。Lean は `finIndexToZZ M k = ι_{ℕ→ℤ}(M)`（`j = M`）とその否定（`1 ≤ j ≤ M-1`）で分けるので、
+二つの場合の並びは人手と逆である。どちらも、`Y_j` を左因子に持つただ 1 つの項
 （`m = j`。`j = M` なら境界項 `-Y_M Z_1`）以外は `[Y_a Z_b, Y_j] = 0 (a ≠ j)` で消える。 -/
 theorem lie_H1Plus_Y (k : Fin M) : ⁅H1plus M, Y k⁆ = (-2 : ℂ) • Zflat M ((k : ℕ) + 2) := by
   have hM : 0 < M := Fin.pos k
+  -- 人手の添字 `j ∈ {1,…,M}` は `finIndexToZZ M k`（`def_index_set_from_one_to_n`）。
+  -- 場合分けはこの像と `ι_{ℕ→ℤ}(M)` の比較で行い、人手の `j + 1` のサイトは全単射の補題の全射で、その等号は単射で得る
+  have hinj := (finIndexToZZ_bijective_onto_index_set M).1
+  have hrange := (finIndexToZZ_bijective_onto_index_set M).2.1
+  have hsurj := (finIndexToZZ_bijective_onto_index_set M).2.2
   rw [H1plus, lie_sum_smul_left',
     Finset.sum_eq_single k (fun m _ hm => by rw [lie_YZ_Y_of_ne _ hm, smul_zero])
       (fun h => absurd (Finset.mem_univ k) h),
     lie_YZ_Y_left, smul_smul]
-  by_cases hk : (k : ℕ) + 1 = M
-  · -- `j = M`: 境界項
-    rw [lastSign_of_last hk, show (k : ℕ) + 2 = M + 1 by omega, Zflat_last hM, smul_neg,
+  by_cases hkZ : finIndexToZZ M k = inclusionNNtoZZ M
+  · -- `j = M`: 境界項。次のサイトは人手のサイト `1`（`firstSite`）
+    have hk : (k : ℕ) + 1 = M := (finIndexToZZ_eq_iff_val_add_one_eq M k).1 hkZ
+    rw [lastSign_of_last hk, show (k : ℕ) + 2 = M + 1 by omega, Zflat_last hM.ne', smul_neg,
       ← neg_smul]
-    have hnext : nextSite k = ⟨0, hM⟩ := Fin.ext (nextSite_val_of_last hk)
+    have hnext : nextSite k = firstSite M hM.ne' :=
+      hinj _ _ (by rw [finIndexToZZ_nextSite_of_last hk, finIndexToZZ_firstSite])
     rw [hnext]
     congr 1
     norm_num
-  · -- `1 ≤ j ≤ M - 1`
+  · -- `1 ≤ j ≤ M - 1`: 次のサイトは人手の添字 `j + 1` のサイト
+    have hk : (k : ℕ) + 1 ≠ M := fun h => hkZ ((finIndexToZZ_eq_iff_val_add_one_eq M k).2 h)
     have hlt : (k : ℕ) + 1 < M := by have := k.isLt; omega
-    set nk : Fin M := ⟨(k : ℕ) + 1, hlt⟩
-    have hnext : nextSite k = nk := Fin.ext (nextSite_val_of_lt hlt)
-    rw [lastSign_of_not_last hk, hnext, show (k : ℕ) + 2 = (nk : ℕ) + 1 by simp [nk],
-      Zflat_succ, one_mul]
+    have hkr := hrange k
+    obtain ⟨nk, hnkZ⟩ := hsurj (finIndexToZZ M k + 1) (by omega) (by omega)
+    have hnext : nextSite k = nk := hinj _ _ (by rw [finIndexToZZ_nextSite_of_lt hlt, hnkZ])
+    -- 延長 `Z♭` の添字（ℕ）へ移す: 人手の `j + 1`
+    have hnkval : (k : ℕ) + 2 = (nk : ℕ) + 1 := by
+      have hkval := (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M k k).2 rfl
+      have hnk : (nk : ℕ) = (k : ℕ) + 1 := by
+        refine (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M nk ((k : ℕ) + 1)).1 ?_
+        rw [inclusionNNtoZZ_eq_natCast] at hkval ⊢
+        push_cast
+        omega
+      omega
+    rw [lastSign_of_not_last hk, hnext, hnkval, Zflat_succ, one_mul]
 
 /-! ## Step 2: (C)(D) -/
 
@@ -381,11 +442,12 @@ theorem checkPhase_smul_Yflat_boundary (hM : M ≠ 0) (ν : ℤ) :
   have hM0 : 0 < M := Nat.pos_of_ne_zero hM
   calc checkPhase M 0 ν • Yflat M 0
       = (1 : ℂ) • Yflat M 0 := by rw [checkPhase_zero_left]
-    _ = (1 : ℂ) • (-Y ⟨M - 1, by omega⟩) := by rw [Yflat_zero hM0]
-    _ = (-1 : ℂ) • Y ⟨M - 1, by omega⟩ := by rw [one_smul, neg_one_smul]
-    _ = checkPhase M (M : ℤ) ν • Y ⟨M - 1, by omega⟩ := by rw [checkPhase_antiperiodic hM]
+    _ = (1 : ℂ) • (-Y (lastSite M hM)) := by rw [Yflat_zero hM]
+    _ = (-1 : ℂ) • Y (lastSite M hM) := by rw [one_smul, neg_one_smul]
+    _ = checkPhase M (M : ℤ) ν • Y (lastSite M hM) := by rw [checkPhase_antiperiodic hM]
     _ = checkPhase M (M : ℤ) ν • Yflat M M := by
           rw [Yflat, dif_pos ⟨hM0, le_refl M⟩]
+          rfl
 
 /-- **原文 (A) の形式化**: `[H_1^{(+)}, check(Z)_μ] = 2 e^{-iθ~_μ} check(Y)_μ`。 -/
 theorem lie_H1Plus_checkZ (hM : M ≠ 0) (ν : ℤ) :
@@ -443,11 +505,11 @@ theorem checkPhase_smul_Zflat_boundary (hM : M ≠ 0) (ν : ℤ) :
   calc checkPhase M ((M : ℤ) + 1) ν • Zflat M (M + 1)
       = (checkPhase M (M : ℤ) ν * checkPhase M 1 ν) • Zflat M (M + 1) := by
           rw [checkPhase_add_left]
-    _ = (checkPhase M (M : ℤ) ν * checkPhase M 1 ν) • (-Z ⟨0, hM0⟩) := by rw [Zflat_last hM0]
-    _ = ((-1) * checkPhase M 1 ν) • (-Z ⟨0, hM0⟩) := by rw [checkPhase_antiperiodic hM]
-    _ = checkPhase M 1 ν • Z ⟨0, hM0⟩ := by rw [smul_neg, ← neg_smul]; congr 1; ring
+    _ = (checkPhase M (M : ℤ) ν * checkPhase M 1 ν) • (-Z (firstSite M hM)) := by rw [Zflat_last hM]
+    _ = ((-1) * checkPhase M 1 ν) • (-Z (firstSite M hM)) := by rw [checkPhase_antiperiodic hM]
+    _ = checkPhase M 1 ν • Z (firstSite M hM) := by rw [smul_neg, ← neg_smul]; congr 1; ring
     _ = checkPhase M 1 ν • Zflat M 1 := by
-          rw [show (1 : ℕ) = ((⟨0, hM0⟩ : Fin M) : ℕ) + 1 from rfl, Zflat_succ]
+          rw [show (1 : ℕ) = ((firstSite M hM : Fin M) : ℕ) + 1 from rfl, Zflat_succ]
 
 /-- **原文 (B) の形式化**: `[H_1^{(+)}, check(Y)_μ] = -2 e^{iθ~_μ} check(Z)_μ`
 （`e^{iθ~_μ} = checkPhase M (-1) μ`）。 -/

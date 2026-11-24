@@ -10,6 +10,8 @@ Lean の具体版は添字の型に `Fin n`（`v < n` を満たす `v ∈ ℕ` �
 それが `Fin n` から `{k ∈ ℤ | 1_ℤ ≤ k ∧ k ≤ ι_{ℕ→ℤ}(n)}` への全単射であることを補題一本 `finIndexToZZ_bijective_onto_index_set` で示す。
 像の ℤ の順序が `Fin n` の元の値の順序と一致することを `finIndexToZZ_lt_iff_val_lt` で、像と `ι_{ℕ→ℤ}(k)` の比較・等号が値の比較・等号と一致することを
 `finIndexToZZ_le_inclusion_iff_val_lt`・`finIndexToZZ_eq_iff_val_add_one_eq` で示す（人手の添字の比較を Lean の定義の場合分けへ移す）。
+像が `ι_{ℕ→ℤ}(l) + 1_ℤ` に等しいことが値の等号 `i.val = l` と同値であることを `finIndexToZZ_eq_inclusion_add_one_iff_val_eq` で示す
+（人手の添字から、自然数の添字を持つ Lean の定義（`Yflat`・`Zflat` など）の添字へ移す）。
 人手の添字 `i ∈ {1,…,n}` と Lean の添字 `i' : Fin n` の行き来は、この写像（とその逆）を通す。Lean の `Fin n` の数字 `(k : Fin n)`（`k < n`）は
 `Fin.ofNat` で `⟨k % n, _⟩` と定義され、`k % n = k` なので人手の添字 `k + 1` に当たる（`finIndexToZZ n ⟨k, _⟩ = ι(k) + 1` は定義どおり）。
 
@@ -70,6 +72,13 @@ theorem finIndexToZZ_eq_iff_val_add_one_eq (n : ℕ) (m : Fin n) :
 （Lean だけの段の補題。人手の「第 `1` から第 `k` 因子」は、添字が `ι_{ℕ→ℤ}(k)` 以下であることに当たる。Lean の定義 `prefixKroneckerFamily` などは値の `< k` で場合を分けるので、移すために置く）。 -/
 theorem finIndexToZZ_le_inclusion_iff_val_lt (n : ℕ) (i : Fin n) (k : ℕ) :
     finIndexToZZ n i ≤ inclusionNNtoZZ k ↔ (i : ℕ) < k := by
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+  omega
+
+/-- **`def_index_set_from_one_to_n`**: 人手の添字 `finIndexToZZ n i` が `ι_{ℕ→ℤ}(l) +_ℤ 1_ℤ` に等しいことは、Lean の `Fin n` の元の値の等号 `i.val = l` と同値である
+（Lean だけの段の補題。人手の添字 `j` から、自然数の添字 `l = j - 1` を取る Lean の定義（`Yflat`・`Zflat` など）の添字へ移すために置く）。 -/
+theorem finIndexToZZ_eq_inclusion_add_one_iff_val_eq (n : ℕ) (i : Fin n) (l : ℕ) :
+    finIndexToZZ n i = inclusionNNtoZZ l + 1 ↔ (i : ℕ) = l := by
   simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
   omega
 
