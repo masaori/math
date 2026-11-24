@@ -9943,7 +9943,7 @@ A\cdot P_{A,z}(v)
                       kind: "definition",
                       title: { text: "代数的数係数多項式行列の行列式" },
                       labels: ["def_qbar_polynomial_determinant"],
-                      lean: ["Ising2DLambda.KacWard.qbarPolynomialDeterminant_eq_signedPermutationSum", "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_row_expansion"],
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialDeterminant", "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialDeterminant_eq_signedPermutationSum", "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialDeterminant_eq_mathlib", "Ising2DLambda.KacWard.qbarPolynomialDeterminant_eq_signedPermutationSum", "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_row_expansion"],
                       verification: ["sagemath/check/qbar-determinant-fixed-points"],
                       habitat: "Qbar",
                       statement: [
@@ -32262,7 +32262,7 @@ b&\in R&&(\because\ E=R)
                         math(String.raw`z\in R`), " を固定する。正錐の三分法は次の形になる。",
                       ]),
                       displayMath(String.raw`z=0\quad\text{または}\quad z\in C_R\quad\text{または}\quad -z\in C_R
-\qquad(\because\ \blkref{def_subfield_positive_cone}\text{ の三分法。三つは互いに排他的})`),
+\qquad(\because\ \blkref{def_subfield_positive_cone}\text{ の三分法、三つは互いに排他的})`),
                       paragraph([
                         math(String.raw`z\in C_R`), " の場合、零でない ", math(String.raw`w\in R`),
                         " を取ると、次が成り立つ。",

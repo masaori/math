@@ -20,23 +20,41 @@ theorem qbarPermutationSign_eq_mathlibSign {J : Type*} [Fintype J] [LinearOrder 
   classical
   exact IntegerMatrix.inversionSignIndependent_eq_mathlibSign σ
 
-/-- 転倒数の符号を定数多項式へ写した、本文の行指定の行列式定義との橋。
-線型順序はこの符号表示に必要であり、行列積の展開自体には使わない。 -/
+/-- 本文の定義どおり、転倒数の符号による行指定の有限和。 -/
+noncomputable def qbarPolynomialDeterminant {J : Type*} [Fintype J] [LinearOrder J]
+    (A : Matrix J J (Polynomial Qbar)) : Polynomial Qbar :=
+  ∑ σ : Equiv.Perm J,
+    Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) * ∏ i : J, A i (σ i)
+
+theorem qbarPolynomialDeterminant_eq_signedPermutationSum
+    {J : Type*} [Fintype J] [LinearOrder J]
+    (A : Matrix J J (Polynomial Qbar)) :
+    qbarPolynomialDeterminant A = ∑ σ : Equiv.Perm J,
+      Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
+        ∏ i : J, A i (σ i) := rfl
+
+/-- mathlib の列指定展開を転置で行指定へ直し、本文の定義に結ぶ。 -/
+theorem qbarPolynomialDeterminant_eq_mathlib {J : Type*} [Fintype J] [LinearOrder J]
+    (A : Matrix J J (Polynomial Qbar)) :
+    qbarPolynomialDeterminant A = Matrix.det A := by
+  classical
+  calc
+    qbarPolynomialDeterminant A = ∑ σ : Equiv.Perm J,
+        Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
+          ∏ i : J, A i (σ i) := rfl
+    _ = ∑ σ : Equiv.Perm J, ((Equiv.Perm.sign σ : ℤ) : Polynomial Qbar) *
+        ∏ i : J, A.transpose (σ i) i := by
+      simp only [qbarPermutationSign_eq_mathlibSign, Matrix.transpose_apply, map_intCast]
+    _ = Matrix.det A.transpose := (Matrix.det_apply' _).symm
+    _ = Matrix.det A := Matrix.det_transpose A
+
 theorem qbarPolynomial_det_row_expansion {J : Type*} [Fintype J] [LinearOrder J]
     (A : Matrix J J (Polynomial Qbar)) :
     Matrix.det A = ∑ σ : Equiv.Perm J,
       Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
         ∏ i : J, A i (σ i) := by
-  classical
-  calc
-    Matrix.det A = Matrix.det A.transpose := (Matrix.det_transpose A).symm
-    _ = ∑ σ : Equiv.Perm J, ((Equiv.Perm.sign σ : ℤ) : Polynomial Qbar) *
-        ∏ i : J, A.transpose (σ i) i := Matrix.det_apply' _
-    _ = ∑ σ : Equiv.Perm J,
-        Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
-          ∏ i : J, A i (σ i) := by
-      simp only [qbarPermutationSign_eq_mathlibSign, Matrix.transpose_apply,
-        map_intCast]
+  rw [← qbarPolynomialDeterminant_eq_mathlib]
+  exact qbarPolynomialDeterminant_eq_signedPermutationSum A
 
 /-- 本文の十等号。非空性は本文の対象に合わせた仮定で、有限和・有限積の展開は
 空添字でも成り立つ。減法、除法、代数閉性、次数は使わない。 -/
