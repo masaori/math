@@ -8,7 +8,7 @@ import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairTermEquality
 namespace Ising2DLambda.AlgebraicEigenvalue
 
 open scoped Classical
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (ascendingMatePair orientationFactor sign)
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
 open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
@@ -86,9 +86,9 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
   let C := matchingPairColor τ υ
   let Sτ := Finset.univ.filter (· ∈ C)
   let Sυ := Finset.univ.filter (· ∉ C)
-  let lτ := w.map (ascendingMatePair τ.val)
+  let lτ := w.map (concreteAscendingMatePair τ.val)
   let w₂ := w.map τ.val
-  let lυ := w₂.map (ascendingMatePair υ.val)
+  let lυ := w₂.map (concreteAscendingMatePair υ.val)
   let ατ := orientationSign lτ C
   let αυ := orientationSign lυ {i | i ∉ C}
   have hτmate : ∀ i ∈ w, τ.val i ∉ C := by
@@ -117,16 +117,12 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
     have hfirst : υ.val i ∈ C := (matchingPairSecondColor_alternates τ υ i).mpr hsecond
     simpa only [Set.mem_setOf_eq, not_not] using hfirst
   have hατ : Polynomial.C ((ατ : ℤ) : Qbar) =
-      ∏ i ∈ Sτ, (orientationFactor τ.val i : Polynomial Qbar) := by
+      ∏ i ∈ Sτ, concreteOrientationFactor τ.val i := by
     exact orientationSign_cast_eq_product τ.val C w hw hcolor hτmate
   have hαυ : Polynomial.C ((αυ : ℤ) : Qbar) =
-      ∏ i ∈ Sυ, (orientationFactor υ.val i : Polynomial Qbar) := by
+      ∏ i ∈ Sυ, concreteOrientationFactor υ.val i := by
     dsimp [αυ, lυ]
-    rw [show ascendingMatePair υ.val = concreteAscendingMatePair υ.val from by
-      funext i
-      rfl]
-    simpa only [Sυ, Finset.mem_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq,
-      orientationFactor, concreteOrientationFactor]
+    simpa only [Sυ, Finset.mem_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq]
       using orientationSign_cast_eq_product υ.val {i | i ∉ C} w₂ hw₂ hcolor₂ hυmate
   have hsign := matchingPairActualSignComposition τ υ w hw hcolor
   have hsignPoly := congrArg (fun z : ℤ => Polynomial.C (z : Qbar)) hsign
@@ -145,17 +141,6 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
     rw [matchingPairEntryProduct τ υ A]
     rw [matchingPairOrientationProduct τ υ A hA.2]
     rw [matchingPairSecondOrientationProduct τ υ A hA.2]
-    have hτFactor : (∏ i ∈ Sτ, concreteOrientationFactor τ.val i) =
-        (∏ i ∈ Sτ, orientationFactor τ.val i) := by
-      apply Finset.prod_congr rfl
-      intro i _
-      rfl
-    have hυFactor : (∏ i ∈ Sυ, concreteOrientationFactor υ.val i) =
-        (∏ i ∈ Sυ, orientationFactor υ.val i) := by
-      apply Finset.prod_congr rfl
-      intro i _
-      rfl
-    rw [hτFactor, hυFactor]
     rw [← hατ, ← hαυ]
     rw [selectedAscendingPairs_eq_matchingOrientedPairs τ Sτ (by
       intro i
@@ -170,9 +155,7 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
   simp only [Int.cast_mul, map_mul] at hsignPoly
   refine ⟨Polynomial.C ((ατ : ℤ) : Qbar), Polynomial.C ((αυ : ℤ) : Qbar),
     hατsq, hαυsq, ?_, hprod⟩
-  simpa only [matchingSignPolynomial, ατ, αυ, lτ, lυ,
-    show ascendingMatePair τ.val = concreteAscendingMatePair τ.val from rfl,
-    show ascendingMatePair υ.val = concreteAscendingMatePair υ.val from rfl] using hsignPoly
+  simpa only [matchingSignPolynomial, ατ, αυ, lτ, lυ] using hsignPoly
 
 /-- The determinant summand of an even-orbit permutation equals the summand of
 the two matchings recovered from its alternating coloring. -/
