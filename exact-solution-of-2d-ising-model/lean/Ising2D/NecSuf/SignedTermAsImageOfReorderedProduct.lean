@@ -5,7 +5,7 @@
 `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`）。
 具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean` の
 `VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH`（7 行の calc）で、その特殊化
-`VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf` を同じファイルに置く。
+`VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf` を導出 `ClaimTraceEpsilonVPlusViaCheckEigenvaluesFromNecSuf.lean` に置く。
 
 | 具体版の行 | 必要十分版 |
 | --- | --- |

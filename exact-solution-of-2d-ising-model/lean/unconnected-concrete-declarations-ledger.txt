@@ -588,10 +588,8 @@ Ising2D.integral_inv_pow_three_half_pi
 Ising2D.integral_inv_sqrt_pi
 Ising2D.integral_inv_sqrt_pi_bounds
 Ising2D.interior_Dnbhd
-Ising2D.invOf_two_endConf_apply
 Ising2D.inv_pow_three_half_mono
 Ising2D.inv_sqrt_diff_S_Q
-Ising2D.invertibleTwoEndConf
 Ising2D.invertible_product_isUnit
 Ising2D.invertible_product_left_inverse
 Ising2D.invertible_product_right_inverse
@@ -736,7 +734,6 @@ Ising2D.moment_log_convexity_physical
 Ising2D.moving_one_factor_of_finite_product_to_the_end
 Ising2D.moving_one_factor_of_finite_product_to_the_end_two_first
 Ising2D.moving_one_factor_of_finite_product_to_the_end_two_second
-Ising2D.mulVecLin_epsProjPlus
 Ising2D.mulVecLin_pow
 Ising2D.mulVecLin_pow_apply
 Ising2D.mulVec_dotProduct_selfadjoint

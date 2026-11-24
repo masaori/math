@@ -9,8 +9,8 @@
 `NecSuf.commute_parity_projOn`・`NecSuf.commute_parity_finProdLeft_defFactor`。(4) の具体版と必要十分版の特殊化は
 `CheckFermiInput.lean` に置く（`CheckFermi` がこのファイルを import するため）。(2) は人手の鎖と同じ行の calc（`epsilon_anticomm_phase_sum`）で示し、
 必要十分版の特殊化として得られることは `epsilon_anticomm_checkZ_of_necSuf` / `epsilon_anticomm_checkY_of_necSuf`
-に別に書く。(3) も人手の鎖と同じ行の calc（`epsilon_anticomm_two_term`）で示し、必要十分版
-`NecSuf.anticomm_add_smul` の特殊化は `epsilon_anticomm_checkPsiDag_of_necSuf` / `epsilon_anticomm_checkPsi_of_necSuf` に別に書く。
+（導出 `ClaimEpsilonAnticommutesWithCheckZYFromNecSuf.lean`）に別に書く。(3) も人手の鎖と同じ行の calc（`epsilon_anticomm_two_term`）で示し、必要十分版
+`NecSuf.anticomm_add_smul` の特殊化は `epsilon_anticomm_checkPsiDag_of_necSuf` / `epsilon_anticomm_checkPsi_of_necSuf`（同じ導出のファイル）に別に書く。
 
 ## 人手証明との対応
 
@@ -118,19 +118,6 @@ theorem epsilon_anticomm_checkY (M : ℕ) (μ : ℤ) :
   | zero => simp [checkY]
   | succ r => exact epsilon_anticomm_checkY_succ r μ
 
-/-- 人手 (2) が必要十分版 `Ising2D.NecSuf.anticomm_sum_smul` の特殊化として得られること
-（`Ž_μ` は `Z_j` の ℂ 係数有限和である）。 -/
-theorem epsilon_anticomm_checkZ_of_necSuf (M : ℕ) (μ : ℤ) :
-    epsilon M * checkZ M μ = -(checkZ M μ * epsilon M) := by
-  rw [checkZ]
-  exact NecSuf.anticomm_sum_smul (𝕜 := ℂ) (fun j => epsilon_anticomm_Z j) Finset.univ _
-
-/-- 人手 (2) の `Y̌_μ` の側が必要十分版の特殊化として得られること。 -/
-theorem epsilon_anticomm_checkY_of_necSuf (M : ℕ) (μ : ℤ) :
-    epsilon M * checkY M μ = -(checkY M μ * epsilon M) := by
-  rw [checkY]
-  exact NecSuf.anticomm_sum_smul (𝕜 := ℂ) (fun j => epsilon_anticomm_Y j) Finset.univ _
-
 /-- **人手証明 (3) の鎖**。`(Ψ, p, q)` を `def_check_fermi` の二つの組
 `(ψ̌_μ^†, −r/(2√M_col b), 1/(2√M_col))`・`(ψ̌_μ, +r/(2√M_col b), 1/(2√M_col))` のどちらかとし、
 `Ψ = p Ž_μ + q Y̌_μ` とする。本補題の `X`・`Y` は人手の `Ž_μ`・`Y̌_μ`、仮定 `hX`・`hY` は人手の (2) である。
@@ -186,16 +173,6 @@ theorem epsilon_anticomm_checkPsi (K : IsingConst) (M : ℕ) (μ : ℤ) :
                                                         -- 人手の鎖の 2〜8 行目
     _ = -(checkPsi K M μ * epsilon M) := rfl
                                                         -- `def_check_fermi`
-
-/-- 人手 (3) の `ψ̌_μ^†` の側が必要十分版 `Ising2D.NecSuf.anticomm_add_smul` の特殊化として得られること。 -/
-theorem epsilon_anticomm_checkPsiDag_of_necSuf (K : IsingConst) (M : ℕ) (μ : ℤ) :
-    epsilon M * checkPsiDag K M μ = -(checkPsiDag K M μ * epsilon M) :=
-  NecSuf.anticomm_add_smul (𝕜 := ℂ) (epsilon_anticomm_checkZ M μ) (epsilon_anticomm_checkY M μ) _ _
-
-/-- 人手 (3) の `ψ̌_μ` の側が必要十分版の特殊化として得られること。 -/
-theorem epsilon_anticomm_checkPsi_of_necSuf (K : IsingConst) (M : ℕ) (μ : ℤ) :
-    epsilon M * checkPsi K M μ = -(checkPsi K M μ * epsilon M) :=
-  NecSuf.anticomm_add_smul (𝕜 := ℂ) (epsilon_anticomm_checkZ M μ) (epsilon_anticomm_checkY M μ) _ _
 
 /-- 原文 `def_check_fermi` の「`ψ̌_μ^†`・`ψ̌_μ` は `Ž_μ, Y̌_μ` の ℂ 係数 1 次結合」。
 `CheckFermi`（`CheckFermiInput.lean`）が生成・消滅演算子を受け取る形で、具体的な `checkPsiDag`・`checkPsi` は

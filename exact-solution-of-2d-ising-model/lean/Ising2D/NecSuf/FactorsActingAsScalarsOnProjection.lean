@@ -6,7 +6,7 @@
 具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonEigenvalueOnCheckQ.lean` の
 `CheckFermi.parityFactor_mul_Qproj`（共通の 6 行）・`parityFactor_mul_Qproj_of_mem`（`ε(μ) = 1` の 4 行）・
 `parityFactor_mul_Qproj_of_notMem`（`ε(μ) = 0` の 3 行）・`CheckFermi.finProdLeft_mul_Qproj`（`P_k` の帰納法）で、
-その特殊化 `*_of_necSuf` を同じファイルに置く。
+その特殊化 `*_of_necSuf` を導出 `ClaimEpsilonEigenvalueOnCheckQFromNecSuf.lean` に置く。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |

@@ -32,7 +32,6 @@
 -/
 import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionFermiPsi
 import Ising2D.NecSuf.NumberOperator
-import Ising2D.NecSuf.JointEigenspace
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.DefinitionCheckNumberOperator
 

@@ -10,6 +10,7 @@
 
 **必要十分版**: `Ising2D/NecSuf/TwoByTwoKernelAndDeterminant.lean`
 （`Ising2D.NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det`）。
+導出は `ClaimNonzeroKernelIffDetZeroTwoByTwoFromNecSuf.lean`。
 
 ## 人手証明との対応
 
@@ -32,7 +33,6 @@ import Mathlib.Data.Fin.VecNotation
 import Mathlib.Data.Complex.Basic
 import Mathlib.Tactic.Ring
 import Mathlib.Tactic.FinCases
-import Ising2D.NecSuf.TwoByTwoKernelAndDeterminant
 
 namespace Ising2D
 
@@ -185,11 +185,5 @@ theorem exists_ne_zero_mulVec_eq_zero_iff_det_fin_two (B : Matrix (Fin 2) (Fin 2
       refine ⟨![B 0 1, -B 0 0], fun h => hrow0 ⟨?_, ?_⟩, mulVec_row0_ne_zero B hdet⟩
       · simpa using congrFun h 1
       · simpa using congrFun h 0
-
-/-- `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` を必要十分版
-`NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det`（係数 `R := ℂ`）の特殊化として得る。 -/
-theorem exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf (B : Matrix (Fin 2) (Fin 2) ℂ) :
-    (∃ v : Fin 2 → ℂ, v ≠ 0 ∧ B *ᵥ v = 0) ↔ B.det = 0 :=
-  NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det B
 
 end Ising2D

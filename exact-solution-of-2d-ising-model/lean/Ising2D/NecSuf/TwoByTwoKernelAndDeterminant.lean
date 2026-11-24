@@ -4,7 +4,7 @@
 具体版: `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` の
 `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`（人手 `nonzero_kernel_iff_det_zero_two_by_two`。
 `eigenvector_of_A_theta_tilde` Step 1 の「`λ` が固有値であることは `det(A(θ) - λI) = 0` と同値」の最後の段で引く）。具体版をこのファイルの系として導くのは、
-同じファイルの `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf`。
+導出 `ClaimNonzeroKernelIffDetZeroTwoByTwoFromNecSuf.lean` の `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf`。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |

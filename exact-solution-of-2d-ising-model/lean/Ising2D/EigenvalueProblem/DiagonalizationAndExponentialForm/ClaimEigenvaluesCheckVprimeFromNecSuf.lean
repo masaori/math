@@ -7,6 +7,7 @@ Step 3・Step 3' の極限の鎖と 1 対 1 の calc）と同じ主張を、必�
 （ℂ 上の完備ノルム環で、`XQ = gQ ⇒ exp(X)Q = e^gQ` とその左右反転）の特殊化として得る。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimEigenvaluesCheckVprime
+import Ising2D.NecSuf.SimpleEigenvalue
 
 namespace Ising2D
 

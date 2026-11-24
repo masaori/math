@@ -4,7 +4,7 @@
 対応する人手証明: `trace_of_epsilon_V_plus_via_check_eigenvalues` の Step 2（正本は
 `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`）。
 具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean` の
-`checkU_prod_eq_neg_one_pow`（`k` の帰納法）で、その特殊化 `checkU_prod_eq_neg_one_pow_of_necSuf` を同じファイルに置く。
+`checkU_prod_eq_neg_one_pow`（`k` の帰納法）で、その特殊化 `checkU_prod_eq_neg_one_pow_of_necSuf` を導出 `ClaimTraceEpsilonVPlusViaCheckEigenvaluesFromNecSuf.lean` に置く。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |

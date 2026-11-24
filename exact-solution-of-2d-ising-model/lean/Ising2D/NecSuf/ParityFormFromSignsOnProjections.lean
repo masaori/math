@@ -5,7 +5,7 @@
 `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`）。
 具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonEigenvalueOnCheckQ.lean` の
 `CheckFermi.epsilon_mul_Qproj_eq_smul_parityProd_mul`（7 行の鎖）・`CheckFermi.epsilon_eq_parityProd_succ`（9 行の鎖）で、
-その特殊化 `*_of_necSuf` を同じファイルに置く。
+その特殊化 `*_of_necSuf` を導出 `ClaimEpsilonEigenvalueOnCheckQFromNecSuf.lean` に置く。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |

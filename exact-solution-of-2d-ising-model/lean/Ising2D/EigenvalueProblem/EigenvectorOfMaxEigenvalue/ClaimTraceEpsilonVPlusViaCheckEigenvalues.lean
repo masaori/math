@@ -5,7 +5,7 @@
 （`closing_003_claim_trace_epsilon_V_plus_via_eigenvalues`、
 ラベル **`trace_of_epsilon_V_plus_via_check_eigenvalues`**）
 
-必要十分版は Step ごとに置く（下の対応表）。`Ising2D/NecSuf/ParityFermion.lean` の
+必要十分版は Step ごとに置く（下の対応表）。必要十分版の特殊化 `*_of_necSuf` は導出 `ClaimTraceEpsilonVPlusViaCheckEigenvaluesFromNecSuf.lean` に置く。`Ising2D/NecSuf/ParityFermion.lean` の
 `Ising2D.NecSuf.sum_powerset_signed_exp`（冪集合の上の和を一度に積へ変える）は人手の Step 2〜5 と手順が違い、
 本ファイルの具体版はもう使っていない。
 
@@ -46,9 +46,6 @@ import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenval
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWords
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
-import Ising2D.NecSuf.PowerFromProductOfTwoValuedFactors
-import Ising2D.NecSuf.SignedTermAsImageOfReorderedProduct
-import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSumFromNecSuf
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfRealProducts
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimRealInclusionPreservesSumOverBinaryWords
@@ -65,6 +62,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfPositiveIsNegative
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
 
 namespace Ising2D
 
@@ -318,15 +316,6 @@ theorem checkU_prod_eq_neg_one_pow :
         _ = (-1 : ℂ) ^ ((n + 1 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hk]
                                                         -- `(k+1) − |ε|_{k+1} = (k − |ε|_k) + 1`
 
-/-- `checkU_prod_eq_neg_one_pow` を必要十分版 `NecSuf.map_prod_two_valued_eq_pow'`（`f → (·)_ℂ`、`u → ǔ`、`s → −1_ℂ`）の
-特殊化として。`Finset.prod` と左から掛ける有限積の一致は `real_finset_prod_eq_finProdLeft`、`|ε|` は `wordCount'` と同じ数である。 -/
-theorem checkU_prod_eq_neg_one_pow_of_necSuf (n : ℕ) (ε : Fin (n + 1) → Fin 2) :
-    ((∏ μ, checkU (ε μ) : ℝ) : ℂ) = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord ε).card) := by
-  rw [real_finset_prod_eq_finProdLeft n (fun μ => checkU (ε μ))]
-  exact NecSuf.map_prod_two_valued_eq_pow' (fun a : ℝ => (a : ℂ)) (fun a b => (real_inclusion_mul a b).symm)
-    checkU (-1 : ℂ) (by rw [checkU_one, Complex.ofReal_one])
-    (by rw [checkU_zero, Complex.ofReal_neg, Complex.ofReal_one]) n ε
-
 /-- **原文 Step 2 の最後の 3 行の鎖**: `(Π_{μ∈𝓜̌}ǔ^{(ε(μ))})_ℂ = (Π_{μ=1}^{M_col}ǔ^{(ε(μ))})_ℂ = (−1_ℂ)^{M_col−|ε|_{M_col}}
 = (−1_ℂ)^{M_col−|ε|}`（人手の `M_col` が Lean の `r + 1`。1 行目の `def_product_over_check_index_set` と 3 行目の
 `|ε|_{M_col} = |ε|` は、Lean では `∏ μ` と `(finsetOfWord ε).card` が同じ項なので `rfl` の段）。 -/
@@ -398,15 +387,6 @@ theorem eta_mul_checkLambda_eq_checkT_mul_checkH {r : ℕ} {F : CheckFermi (r + 
     _ = ((((∏ μ, checkU (ε μ)) * checkLambda D.C D.gam (CheckFermi.finsetOfWord ε)) * F.checkH : ℝ) : ℂ) := by
         rw [mul_assoc, mul_comm]                        -- ℝ で `(ab)c = (bc)a`（乗法の交換律と結合律）
     _ = ((D.checkT ε * F.checkH : ℝ) : ℂ) := rfl        -- `ť_ε` の置き方
-
-/-- `eta_mul_checkLambda_eq_checkT_mul_checkH` を必要十分版 `NecSuf.signed_term_eq_map_mul'`
-（`f → (·)_ℂ`、`h → ȟ`、`u → Π_μǔ^{(ε(μ))}`、`l → Λ̌_ε`）の特殊化として。 -/
-theorem eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf {r : ℕ} {F : CheckFermi (r + 1)}
-    (D : VPlusData (r + 1) F) (ε : Fin (r + 1) → Fin 2) :
-    F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)
-      = ((D.checkT ε * F.checkH : ℝ) : ℂ) :=
-  NecSuf.signed_term_eq_map_mul' (fun a : ℝ => (a : ℂ)) real_inclusion_mul
-    (F.eta_eq_eta_univ_mul _) (checkU_prod_eq_neg_one_pow r ε) F.checkH_ofReal
 
 end VPlusData
 

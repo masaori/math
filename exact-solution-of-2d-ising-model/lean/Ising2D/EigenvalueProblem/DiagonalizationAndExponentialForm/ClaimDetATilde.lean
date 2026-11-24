@@ -44,7 +44,6 @@
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimEigenATildeDiag
-import Ising2D.NecSuf.GammaDetIdentity
 import Ising2D.NecSuf.ArcoshExp
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfComplexNumberIsProduct
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
@@ -786,27 +785,6 @@ theorem gamma1_sq_add_gamma2_mul_thetaTilde
 theorem det_AMat_thetaTilde_eq_one (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (M : ℕ) (μ : ℤ) : (AMat P.const (thetaTilde M μ)).det = 1 := by
   rw [det_AMat_eq_gamma1_sq_add, gamma1_sq_add_gamma2_mul_thetaTilde P hdual M μ]
-
-/-- **必要十分版からの導出**（同じ主張の別証明）: `det A(θ~_μ) = 1` は
-`NecSuf.gamma_det_identity`（任意の可換環の多項式恒等式）を ℂ に特殊化したものである。 -/
-theorem det_AMat_thetaTilde_eq_one_of_necSuf
-    (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (M : ℕ) (μ : ℤ) :
-    (AMat P.const (thetaTilde M μ)).det = 1 := by
-  set θ := thetaTilde M μ with hθ
-  have H1 : (P.const.c1 : ℂ) ^ 2 - (P.const.s1 : ℂ) ^ 2 = 1 := P.c1_sq_sub_s1_sq_inclusion
-  have H2 : (P.const.c2star : ℂ) ^ 2 - (P.const.s2star : ℂ) ^ 2 = 1 :=
-    P.c2star_sq_sub_s2star_sq_inclusion
-  have H3 : (P.const.c2 : ℂ) * (P.const.s2star : ℂ) = (P.const.c2star : ℂ) :=
-    c2_mul_s2star_inclusion P.const hdual
-  have HPy : (Real.cos θ : ℂ) ^ 2 + (Real.sin θ : ℂ) ^ 2 = 1 := by
-    rw [real_inclusion_sq_via_product, real_inclusion_sq_via_product, real_inclusion_add,
-      Real.cos_sq_add_sin_sq, Complex.ofReal_one]
-      -- 準備の像の読み方の和: `real_inclusion_preserves_sum`
-  rw [det_AMat_eq_gamma1_sq_add, gamma2_mul_gamma2_neg_sin_form P.const θ _ rfl, gamma1_eq_inclusion_form]
-  linear_combination
-    NecSuf.gamma_det_identity (P.const.c1 : ℂ) (P.const.s1 : ℂ) (P.const.c2 : ℂ)
-      (P.const.c2star : ℂ) (P.const.s2star : ℂ) (Real.cos θ : ℂ) (Real.sin θ : ℂ)
-      HPy H1 H2 H3
 
 /-- **人手証明 `det_A_theta_tilde` の第 3 式**: `λ_{+,μ} λ_{-,μ} = 1`。
 人手の「まず ℂ の中で」の 24 行の鎖（左辺だけの行を 1 行目と数える）と 1 段ずつの `calc` で `((λ_+λ_- : ℝ) : ℂ) = ((1 : ℝ) : ℂ)` を示し、
