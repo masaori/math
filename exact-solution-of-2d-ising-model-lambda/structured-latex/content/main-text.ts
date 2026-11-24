@@ -802,6 +802,7 @@ v_p(a)-v_p(b)
                             habitat: "Lambda",
                             lean: [
                               "Ising2DLambda.FreeEntropy.logRat_pow",
+                              "Ising2DLambda.FreeEntropy.logRat_one",
                               "Ising2DLambda.FreeEntropy.logRat_pow_from_necSuf",
                               "Ising2DLambda.NecSuf.FreeEntropy.map_pow_eq_nsmul",
                             ],
@@ -108901,6 +108902,25 @@ b
                     ref("def_real_logarithm"), " の狭義単調性により ",
                     math(String.raw`c=\log_{\mathbb R}2>0`), " である。",
                   ]),
+                  paragraph([
+                    "また ", math(String.raw`0\le_{\Lambda_{\mathbb Q}}e`), " である。",
+                    "ここで ", math(String.raw`\iota_{\Lambda\to\Lambda_{\mathbb Q}}(0)=0`),
+                    "（各素数 ", math(String.raw`p`), " での値が ", math(String.raw`0(p)/1=0`),
+                    "。", ref("def_rational_log_order_group"), "）を使う。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+0
+&=\iota_{\Lambda\to\Lambda_{\mathbb Q}}(0)
+&&(\because\ \iota_{\Lambda\to\Lambda_{\mathbb Q}}(0)=0\text{ を右辺から左辺の向きに読む})\\
+&=\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\log1)
+&&(\because\ \blkref{claim_log_power}\text{ の }k=0\text{ で }\log1=0)\\
+&\le_{\Lambda_{\mathbb Q}}\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\log2)
+&&(\because\ \blkref{claim_rational_embedded_log_order_iff}\text{ を }(q,q'):=(1,2)\text{ で読み、}1\le2\text{ を移す})\\
+&=\iota_{\Lambda\to\Lambda_{\mathbb Q}}(\ell_2)
+&&(\because\ 2\text{ は素数なので }\log2=\ell_2\text{、}\blkref{def_rational_log})\\
+&=e
+&&(\because\ e\text{ の置き方})
+\end{aligned}`),
                   paragraph([
                     "任意の ", math(String.raw`\delta\in\mathbb R_{>0}`), " を取る。",
                     "有理数の稠密性で ", math(String.raw`0<r<\delta/c`),
