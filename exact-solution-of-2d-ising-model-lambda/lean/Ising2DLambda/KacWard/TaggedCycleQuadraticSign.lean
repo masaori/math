@@ -22,7 +22,7 @@
                                                          `taggedCyclePhase_quadraticSign`
 
 `claim_closed_walk_rotation_phase` の一行は、隣接二辺の回転位相 `ρ(e, f)` が一歩の回転数 `t(e, f)` の
-`ζ_8` 冪であること（回転位相と一歩の回転数の定義が同じ方向番号の場合分けを持つ）と、整数指数の加法則で行う。
+`ζ_8` 冪であること（方向番号が一歩の回転数だけ進むこと `step_advances_direction` から読む）と、整数指数の加法則で行う。
 住処は有限集合・`ℕ`・`ℤ`・`Qbar` で、ℝ / ℂ は現れない。必要十分版を呼ばない。
 -/
 import Ising2DLambda.KacWard.EdgeDistinctWalkQuadraticSign
@@ -37,33 +37,29 @@ open scoped Classical
 variable {L : ℕ}
 
 /-- 隣接二辺の回転位相は、一歩の回転数を指数とする `z` の整数冪である。
-    反対方向の組は非後退の条件で除かれる。 -/
+    方向番号の進み方は「一歩で方向番号は一歩の回転数だけ進む」（`claim_step_advances_direction`）から読む。 -/
 theorem rotationPhase_eq_zpow_stepTurning [NeZero L] (z : Qbar)
     (e f : OrientedEdge L) (hf : f ∈ nonbacktrackingSuccessors e) :
     rotationPhase z e f = z ^ stepTurning e f := by
   have hadv := step_advances_direction e f hf
-  have htable : ∀ a b : ZMod 4,
-      b = a ∨ b = a + 1 ∨ b = a - 1 ∨ b = a + 2 := by decide
-  have hreverse : directionNumber f ≠ directionNumber e + 2 := by
-    intro h
-    have hs : orientedSource f = orientedTarget e := (Finset.mem_filter.mp hf).2.1.symm
-    have hr : orientedSource (reversal e) = orientedTarget e := by
-      rcases e with ⟨edge, false | true⟩ <;> rfl
-    have heq : f = reversal e := sourceDirection_bijective.1
-      (Prod.ext (hs.trans hr.symm) (h.trans (directionNumber_reversal e).symm))
-    exact (Finset.mem_filter.mp hf).2.2 heq
-  clear hadv
-  rcases htable (directionNumber e) (directionNumber f) with h | h | h | h
-  · simp [rotationPhase, stepTurning, hf, h]
-  · have h1 : directionNumber e + 1 ≠ directionNumber e := by
+  have hval : stepTurning e f = 0 ∨ stepTurning e f = 1 ∨ stepTurning e f = -1 := by
+    unfold stepTurning
+    split_ifs <;> simp
+  rcases hval with h | h | h <;> rw [h] at hadv ⊢
+  · simp [directionResidueProjection] at hadv
+    simp [rotationPhase, hadv]
+  · simp [directionResidueProjection] at hadv
+    have h1 : directionNumber e + 1 ≠ directionNumber e := by
       generalize directionNumber e = a; revert a; decide
-    simp [rotationPhase, stepTurning, hf, h, h1]
-  · have h1 : directionNumber e - 1 ≠ directionNumber e := by
+    simp [rotationPhase, hadv, h1]
+  · have hadv' : directionNumber f = directionNumber e - 1 := by
+      rw [hadv, sub_eq_add_neg]
+      simp [directionResidueProjection]
+    have h1 : directionNumber e - 1 ≠ directionNumber e := by
       generalize directionNumber e = a; revert a; decide
     have h2 : directionNumber e - 1 ≠ directionNumber e + 1 := by
       generalize directionNumber e = a; revert a; decide
-    simp [rotationPhase, stepTurning, hf, h, h1, h2]
-  · exact (hreverse h).elim
+    simp [rotationPhase, hadv', h1, h2]
 
 /-- 整数指数の加法則（`Finset.range` 上の有限和）。 -/
 theorem zpow_sum_range {z : Qbar} (hz : z ≠ 0) (f : ℕ → ℤ) (k : ℕ) :

@@ -88169,7 +88169,7 @@ c_{\max}&:=\max_{0\le k\le m}p_k^{\mathrm{col}}
                         "巻き付き数が零なので、持ち上げの終点は始点に一致する（", ref("claim_plane_lift_endpoint_winding"), "）。",
                         "したがって整数列 ", math(String.raw`a=(p_0^{\mathrm{row}},\ldots,p_m^{\mathrm{row}})`),
                         " は ", math(String.raw`a_1=a_{m+1}`), " を満たし、隣接差は持ち上げの単位格子歩なので ",
-                        math(String.raw`\{-1,0,1\}`), " に属する（", ref("def_plane_lift"), "、", ref("claim_displacement_is_direction_unit"), "）。",
+                        math(String.raw`\{-1,0,1\}`), " に属する（", ref("def_plane_lift"), "、", ref("def_plane_displacement"), "）。",
                         "任意の ", math(String.raw`r\in\mathbb Z`), " に水準横断数の恒等式を適用すると",
                       ]),
                       displayMath(String.raw`\begin{aligned}
@@ -88432,15 +88432,37 @@ N_{r,c}^{\rightarrow}(\gamma)\bmod 2
                       paragraph([
                         "行 ", math(String.raw`r+1`), " の半直線上にある格子頂点の集合を ",
                         math(String.raw`S:=\{(r+1,j)\in\mathbb Z\times\mathbb Z\mid c<j\}`),
-                        " とする。零巻き付きなので持ち上げの終点は始点に一致する（",
-                        ref("claim_plane_lift_endpoint_winding"), "）。したがって各持ち上げ点が一本の入辺と一本の出辺に接するので、",
-                        "辺列の各項について両端のうち ", math(String.raw`S`),
-                        " に属する端点の個数を足した総和は偶数である。両端が ", math(String.raw`S`),
-                        " に属する辺はこの総和へ二回、どちらも属さない辺は零回、ちょうど一端だけが属する辺は一回寄与する。",
+                        " とし、整数の有限列 ", math(String.raw`s=(s_1,\ldots,s_{m+1})`), " を",
+                      ]),
+                      displayMath(String.raw`s_{k+1}:=\begin{cases}1,&P_k(\gamma)\in S,\\0,&P_k(\gamma)\notin S\end{cases}\qquad(k\in\{0,\ldots,m\})`),
+                      paragraph([
+                        "で定める。各項は ", math(String.raw`0`), " か ", math(String.raw`1`),
+                        " なので、隣接差は ", math(String.raw`\{-1,0,1\}`),
+                        " に属する。零巻き付きなので持ち上げの終点は始点に一致し（",
+                        ref("claim_plane_lift_endpoint_winding"), "）、",
+                        math(String.raw`s_{m+1}=s_1`), " である。辺列の第 ", math(String.raw`k`),
+                        " 項の両端のうちちょうど一端だけが ", math(String.raw`S`),
+                        " に属することは、",
+                        math(String.raw`s`), " がその項で水準 ", math(String.raw`0`),
+                        " を上または下に横断することと同じである（",
+                        ref("def_integer_sequence_level_crossing_counts"), "）。ゆえに、そのような項の個数を ",
+                        math(String.raw`X\in\mathbb N`), " と書けば",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+X&=U_0(s)+D_0(s)
+&&\bigl(\because\ \blkref{def_integer_sequence_level_crossing_counts}\bigr)\\
+&=\bigl(U_0(s)-D_0(s)\bigr)+2D_0(s)
+&&\bigl(\because\ \mathbb Z\text{ の加減}\bigr)\\
+&=0+2D_0(s)
+&&\bigl(\because\ \blkref{claim_integer_sequence_level_crossing}\text{ と }s_{m+1}=s_1\bigr)\\
+&=2D_0(s)
+\end{aligned}`),
+                      paragraph([
+                        "であり、", math(String.raw`X`), " は偶数である。",
                       ]),
                       paragraph([
                         "持ち上げの各歩は縦または横の単位辺である（", ref("def_plane_lift"), "、",
-                        ref("claim_displacement_is_direction_unit"), "）。したがって、ちょうど一端だけが ",
+                        ref("def_plane_displacement"), "）。したがって、ちょうど一端だけが ",
                         math(String.raw`S`), " に属する項は、互いに重ならない次の三種類に尽きる。",
                         "行 ", math(String.raw`r`), " と ", math(String.raw`r+1`), " を列 ",
                         math(String.raw`j>c`), " で結ぶ縦辺、行 ", math(String.raw`r+1`), " と ",
@@ -88453,15 +88475,14 @@ N_{r,c}^{\rightarrow}(\gamma)\bmod 2
                       displayMath(String.raw`\begin{aligned}
 N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)+H_{r+1,c}(\gamma)
 &\equiv0\pmod2
-&&\bigl(\because\ \text{上の端点数の偶奇と三種類への互いに素な分割}\bigr)\\
+&&\bigl(\because\ X\text{ は偶数で、三種類への互いに素な分割}\bigr)\\
 N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
 &\equiv H_{r+1,c}(\gamma)\pmod2
 &&\bigl(\because\ \mathbb Z\text{ の偶奇}\bigr)
 \end{aligned}`),
                       paragraph([
                         "後半の同値は最後の合同式を読むだけである。使ったのは有限な辺列の端点の数え上げと奇偶だけであり、",
-                        "実数体も複素数体も現れない。", ref("claim_adjacent_cells_ray_crossing_difference"),
-                        " と合わせると、内側セルと外側セルが辺を共有することは、その共有辺を閉格子路が奇数回通ることと全方向で同値になる。",
+                        "実数体も複素数体も現れない。",
                       ]),
                     ],
                   },
@@ -88605,10 +88626,10 @@ V_{r,g}(\gamma)
                       paragraph([
                         "と置く。準備として、各番号 ", math(String.raw`k\in\{1,\ldots,m\}`),
                         " の変位 ", math(String.raw`P_k(\gamma)-P_{k-1}(\gamma)`),
-                        " は方向単位ベクトル、すなわち ",
+                        " は、",
                         math(String.raw`(0,1),(0,-1),(1,0),(-1,0)`),
                         " のいずれかである（", ref("def_plane_lift"), " の漸化式と ",
-                        ref("claim_displacement_is_direction_unit"), "）。したがって第一に ",
+                        ref("def_plane_displacement"), "）。したがって第一に ",
                         math(String.raw`P_{k-1}(\gamma)\ne P_k(\gamma)`),
                         " である。第二に ", math(String.raw`k\in T`),
                         " なら、", math(String.raw`Q`), " でない側の端点は ", math(String.raw`Q`),
@@ -89019,8 +89040,8 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                         math(String.raw`A_j\cap A_{j+1}`),
                         " が空でないことを示す。歩の単位辺を ",
                         math(String.raw`E_{j+1}:=\{P_j(\gamma),P_{j+1}(\gamma)\}`),
-                        " と置く。変位が方向単位ベクトルなので、これは平面の隣り合う二格子点を結ぶ単位辺である（",
-                        ref("def_plane_lift"), "、", ref("claim_displacement_is_direction_unit"),
+                        " と置く。変位は四つの単位ベクトルのいずれかなので、これは平面の隣り合う二格子点を結ぶ単位辺である（",
+                        ref("def_plane_lift"), "、", ref("def_plane_displacement"),
                         "）。", math(String.raw`E_{j+1}`), " は歩 ", math(String.raw`j+1`),
                         " で通過されるので、その通過回数は ", math(String.raw`1`), " 以上である（",
                         ref("def_vertical_edge_traversal_count"), "、", ref("def_horizontal_edge_traversal_count"),
@@ -89286,8 +89307,8 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                         math(String.raw`A'_j\cap A'_{j+1}`),
                         " が空でないことを示す。歩の単位辺を ",
                         math(String.raw`E_{j+1}:=\{P_j(\gamma),P_{j+1}(\gamma)\}`),
-                        " と置く。変位が方向単位ベクトルなので、これは平面の隣り合う二格子点を結ぶ単位辺である（",
-                        ref("def_plane_lift"), "、", ref("claim_displacement_is_direction_unit"),
+                        " と置く。変位は四つの単位ベクトルのいずれかなので、これは平面の隣り合う二格子点を結ぶ単位辺である（",
+                        ref("def_plane_lift"), "、", ref("def_plane_displacement"),
                         "）。", math(String.raw`E_{j+1}`), " は歩 ", math(String.raw`j+1`),
                         " で通過されるので、その通過回数は ", math(String.raw`1`), " 以上である（",
                         ref("def_vertical_edge_traversal_count"), "、", ref("def_horizontal_edge_traversal_count"),
@@ -91578,7 +91599,7 @@ P_m(\gamma)
                         "である。また、一周期の点 ", math(String.raw`P_0(\gamma),\ldots,P_{m-1}(\gamma)`),
                         " は仮定により二つずつ相異なる。",
                         "各辺は整数格子の隣り合う二点を結ぶ単位線分である（", ref("def_plane_lift"), "、",
-                        ref("claim_displacement_is_direction_unit"), "）。二本の単位格子線分が内部で交わるなら、",
+                        ref("def_plane_displacement"), "）。二本の単位格子線分が内部で交わるなら、",
                         "横線分の内部に整数の列座標、または縦線分の内部に整数の行座標が必要になるが、隣り合う二整数の間に整数は無い。",
                         "同一直線上で内部が重なるなら二本は同じ単位線分となり、端点の相異なりに反する。",
                         "したがって、これらの線分は平面の単純閉格子多角形を作る。",
@@ -101008,7 +101029,7 @@ w_{\iota(\vec e_{r-1}),\vec e_r}
                       paragraph(["左辺は ", ref("claim_tagged_matching_expansion"), " の当該項である。空積は一であり、辺長一の一歩閉路も含む。実数体・複素数体は使わない。"]),
                     ],
                     proof: [
-                      paragraph(["各閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{C,r-1}),\vec e_{C,r})`), "、基準の長い標識の対を ", math(String.raw`(\vec e_{C,r},\iota(\vec e_{C,r}))`), " の向きで取る。各対を辞書式の昇順へ直す符号は、順に ", math(String.raw`\alpha_D(C),\alpha_0(C)`), " である（", ref("claim_alternating_cycle_matching_sign"), "）。", ref("def_tagged_matching_contributions"), " より、短い対には ", math(String.raw`-xw_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})`), "、長い対には ", math(String.raw`w_{\vec e_{C,r},\iota(\vec e_{C,r})}`), " が対応する。"]),
+                      paragraph(["各閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{C,r-1}),\vec e_{C,r})`), "、基準の長い標識の対を ", math(String.raw`(\vec e_{C,r},\iota(\vec e_{C,r}))`), " の向きで取る。各対を辞書式の昇順へ直す符号は、順に ", math(String.raw`\alpha_D(C),\alpha_0(C)`), " である（", ref("claim_alternating_cycle_matching_sign"), "）。反転は対合なので、短い対の第一成分の反転は ", math(String.raw`\iota(\iota(\vec e_{C,r-1}))=\vec e_{C,r-1}`), " である（", ref("claim_reversal_is_involution"), "）。", ref("def_tagged_matching_contributions"), " より、短い対には ", math(String.raw`-xw_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})`), "、長い対には ", math(String.raw`w_{\vec e_{C,r},\iota(\vec e_{C,r})}`), " が対応する。"]),
                       paragraph([ref("claim_tagged_difference_cycle_cover"), " により、閉路の対は重複しない。", ref("claim_tagged_matching_short_pair_count"), " と ", ref("claim_projected_cycle_support_union"), " より短い対の総数は ", math(String.raw`|T|=\sum_C k_C`), " である。活動点の外の長い対は基準項と一致し、", ref("claim_reference_matching_constant_term"), " より基準項は一である。従って各閉路の項の比を掛ければ ", math(String.raw`M_{D,T}(x)`), " を得る。"]),
                       displayMath(String.raw`\begin{aligned}
 M_{D,T}(x)
@@ -101080,13 +101101,13 @@ M_{D,T}(x)
 &=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}
 &&\bigl(\because\ \text{上の横断対の分割}\bigr).
 \end{aligned}`),
-                      paragraph(["求めたい左辺から始める。各閉路の回転位相積には ", ref("claim_closed_walk_rotation_phase"), "、位相と二次符号には ", ref("claim_edge_distinct_walk_quadratic_sign"), " を適用する。" ]),
+                      paragraph(["求めたい左辺から始める。各閉路の回転位相積には ", ref("claim_closed_walk_rotation_phase"), " を適用する。その際、閉歩道の隣接二辺 ", math(String.raw`(\vec e_{C,r-1},\vec e_{C,r})`), " の方向番号が一歩の回転数だけ進むこと（", ref("claim_step_advances_direction"), "）から、回転位相 ", math(String.raw`\rho(\vec e_{C,r-1},\vec e_{C,r})`), " は一歩の回転数を指数とする ", math(String.raw`\zeta_8`), " の冪である。位相と二次符号には ", ref("claim_edge_distinct_walk_quadratic_sign"), " を適用する。" ]),
                       displayMath(String.raw`\begin{aligned}
 M_{D,T}(x)
 &=\prod_C\left[-x^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
 &&\bigl(\because\ \blkref{claim_tagged_matching_cycle_weight}\bigr)\\
 &=x^{\sum_C k_C}\prod_C\left[-\Bigl(\prod_r\varepsilon_{a,b}(\vec e_{C,r})\Bigr)\zeta_8^{\,t_{\circ}(\gamma_C)}\right]
-&&\bigl(\because\ \blkref{claim_closed_walk_rotation_phase}\text{ と有限積の分配律}\bigr)\\
+&&\bigl(\because\ \blkref{claim_step_advances_direction},\ \blkref{claim_closed_walk_rotation_phase}\text{ と有限積の分配律}\bigr)\\
 &=x^{\sum_C k_C}\prod_C\chi_{a,b}(h(P_C),v(P_C))(-1)^{c_C}
 &&\bigl(\because\ \blkref{claim_edge_distinct_walk_quadratic_sign}\text{ を各閉路へ適用}\bigr)\\
 &=x^{\sum_C k_C}\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}
