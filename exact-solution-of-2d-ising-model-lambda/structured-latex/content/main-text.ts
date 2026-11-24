@@ -14817,8 +14817,11 @@ k
                                 math(String.raw`i>n_f`), " ならば ", math(String.raw`\mathrm{ac}_i(f)=0`), " である。",
                                 "この上界 ", math(String.raw`n_f`), " と仮定 ", math(String.raw`\mathrm{aev}_{w}(f)=0`),
                                 " のもとで ", ref("def_qbar_linear_factor_power_divides"),
-                                " の二つめの読み取りを当てると ", math(String.raw`(t-\widehat{w})^{1}\mid f`), " である。",
-                                "そこで ", ref("def_qbar_root_multiplicity"), " の二つめの読み取りを ",
+                                " の二つめの読み取り（", ref("claim_qbar_factor_theorem"), " を当てたもの）を当てると ",
+                                math(String.raw`(t-\widehat{w})^{1}\mid f`), " である。",
+                                "そこで ", ref("def_qbar_root_multiplicity"), " の二つめの読み取り（",
+                                math(String.raw`\mathcal{K}_{w}(f)`), " が最大元を持つのは ",
+                                ref("claim_qbar_linear_factor_pow_divides_exponent_le"), " による）を ",
                                 math(String.raw`k:=1`), " へ当てて ", math(String.raw`1\le\mathrm{mult}_{w}(f)`), " を得る。",
                               ]),
                               paragraph([
@@ -15193,7 +15196,9 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                               paragraph([
                                 "を得る。これは ", ref("def_qbar_linear_factor_power_divides"), " の意味で ",
                                 math(String.raw`(t-\widehat{w})^{M'}\mid g`), " を与えるので、",
-                                ref("def_qbar_root_multiplicity"), " の二つめの読み取りにより ",
+                                ref("def_qbar_root_multiplicity"), " の二つめの読み取り（",
+                                math(String.raw`\mathcal{K}_{w}(g)`), " が最大元を持つのは ",
+                                ref("claim_qbar_linear_factor_pow_divides_exponent_le"), " による）により ",
                                 math(String.raw`M'\le\mathrm{mult}_{w}(g)`), " である。両辺へ 1 を足して ",
                                 math(String.raw`M=M'+1\le\mathrm{mult}_{w}(g)+1`), " を得る。",
                                 "使ったのは代数的数係数多項式の環の演算則と一次因子の消去だけであり、実数体も複素数体も現れない。",
@@ -15256,7 +15261,9 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                                 "を得る。", ref("claim_qbar_coprime_divides_cofactor"), " を ",
                                 math(String.raw`k:=0`), "、", math(String.raw`m:=M'`),
                                 " として当てると ", math(String.raw`(t-\widehat w)^{M'+1}\mid g`), " である。よって ",
-                                ref("def_qbar_root_multiplicity"), " の二つめの読み取りにより ",
+                                ref("def_qbar_root_multiplicity"), " の二つめの読み取り（",
+                                math(String.raw`\mathcal{K}_{w}(g)`), " が最大元を持つのは ",
+                                ref("claim_qbar_linear_factor_pow_divides_exponent_le"), " による）により ",
                                 math(String.raw`M'+1\le\mathrm{mult}_{w}(g)`), " であり、",
                                 math(String.raw`M= M'+1`), " から主張を得る。",
                                 "使ったのは代数的数係数多項式の整除と相異なる一次因子の Bezout 恒等式だけであり、実数体も複素数体も現れない。",
@@ -15296,7 +15303,8 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                           paragraph([math(String.raw`n`), " について帰納法で示す。"]),
                           paragraph([
                             "出発点 ", math(String.raw`n=0`), " では、", ref("def_qbar_root_multiplicity"),
-                            " の三つめの読み取りを各 ", math(String.raw`w\in s`), " に当てると ",
+                            " の三つめの読み取り（", ref("claim_qbar_linear_factor_pow_divides_exponent_le"),
+                            " を当てたもの）を各 ", math(String.raw`w\in s`), " に当てると ",
                             math(String.raw`\mathrm{mult}_{w}(f)\le0`), " である。重複度は自然数なので各項は 0 であり、和も 0 である。",
                           ]),
                           paragraph([
@@ -74655,6 +74663,8 @@ q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
                   lean: [
                     "Ising2DLambda.ThermodynamicLimit.openScaledFreeEntropy",
                     "Ising2DLambda.ThermodynamicLimit.openScaledFreeEntropy_apply",
+                    "Ising2DLambda.ThermodynamicLimit.openSquareDensitySequence",
+                    "Ising2DLambda.ThermodynamicLimit.openSquareDensitySequence_of_ne_zero",
                   ],
                   statement: [
                     paragraph([
@@ -79712,8 +79722,6 @@ Y
                   habitat: "Lambda",
                   verification: ["sagemath/check/open-square-density-sequence-cauchy"],
                   lean: [
-                    "Ising2DLambda.ThermodynamicLimit.openSquareDensitySequence",
-                    "Ising2DLambda.ThermodynamicLimit.openSquareDensitySequence_of_ne_zero",
                     "Ising2DLambda.ThermodynamicLimit.isCauchyRationalLogOrder_openSquareDensitySequence_of_le_one",
                     "Ising2DLambda.NecSuf.ThermodynamicLimit.cauchy_of_uniform_difference_bounds_necSuf",
                     "Ising2DLambda.ThermodynamicLimit.isCauchyRationalLogOrder_openSquareDensitySequence_of_le_one_from_necSuf",
