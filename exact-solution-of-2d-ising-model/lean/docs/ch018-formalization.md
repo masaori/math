@@ -443,9 +443,11 @@
 | `u_k := |x_k|`, `uᵀWu ≥ |xᵀWx| ≥ xᵀWx` | `NecSuf.quad_le_quad_absVec`（`NecSuf/PermMatrix.lean`） |
 | `ε` は置換行列（`trace_of_epsilon_V_plus` Step 3 (b)）、`‖εu‖ = ‖u‖ = ‖x‖ = 1` | `epsilonR M = permMat flipConf`、`NecSuf.vecNormSq_permMat_mulVec`、`NecSuf.vecNormSq_absVec` |
 | `εv = v`（`ε² = I`）、`v ≠ 0` | `permMat_mul_self`、`v ≥ u` から `‖v‖² ≥ ‖u‖² = 1` |
-| `‖v‖² = 2 + 2uᵀεu ≤ 4`（Cauchy–Schwarz） | `Ising2D.psd_cauchy_schwarz` を `P = I` で |
-| `vᵀWv = 2uᵀWu + 2uᵀWεu ≥ 2uᵀWu`（`εᵀ = ε`, `εW = Wε`, `ε² = I`） | `mulVec_dotProduct_selfadjoint`（`εᵀ = ε`）、仮定 `hcomm`、`NecSuf.bilin_nonneg_of_nonneg` |
-| `c_+ ≥ v̂ᵀWv̂ = vᵀWv/‖v‖² ≥ ⋯ ≥ xᵀWx/2` | `le_evenSectorRayleighSup` と同じ順の `calc` |
+| `‖v‖² = 2 + 2uᵀεu ≤ 4`（Cauchy–Schwarz） | 必要十分版 `NecSuf.psd_cauchy_schwarz` を内積の双線型形式 `NecSuf.dotProductBilin'` で |
+| `vᵀWv = 2uᵀWu + 2uᵀWεu ≥ 2uᵀWu`（`εᵀ = ε`, `εW = Wε`, `ε² = I`） | `NecSuf.mulVec_dotProduct_selfadjoint'`（`εᵀ = ε`）、仮定 `hcomm`、`NecSuf.bilin_nonneg_of_nonneg` |
+| `c_+ ≥ v̂ᵀWv̂ = vᵀWv/‖v‖² ≥ ⋯ ≥ xᵀWx/2` | `NecSuf.le_evenSectorRayleighSup'` と同じ順の `calc` |
+
+記録はノルム・`𝓡`・`c(M)`・`𝓡_+`・`c_+(M)` を、具体版と同じ式で必要十分版の側に置いた `NecSuf.vecNorm'`（`NecSuf/RealVectorNorm.lean`）・`NecSuf.rayleighSet'`・`rayleighSup'`・`evenSectorSet'`・`evenSectorRayleighSup'`（`NecSuf/RayleighSupAndSectorRayleighSup.lean`）で述べ、具体版を参照しない。具体版との定義上の一致は導出 `RowLimitAndMaxEigenvalue/DefinitionRayleighSupFromNecSuf.lean`・`ColumnLimitAndClosedForm/DefinitionSectorRayleighSupFromNecSuf.lean`・`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNormFromNecSuf.lean` だけが述べる。
 
 この表は記録 `NecSuf/EvenSectorUpperBound.lean` の手順で、今の Step 2 の必要十分版ではない（手順が今の具体版と違い、具体版をその特殊化として導いていない）。記録は `v ≠ 0` を「`v ≥ u ≥ 0` と `u ≠ 0`」から直接でなく
 `‖v‖² ≥ ‖u‖² = 1 > 0` の形で示し、`v̂ := v/‖v‖` の代わりに `(1/√‖v‖²)·v` を使う。

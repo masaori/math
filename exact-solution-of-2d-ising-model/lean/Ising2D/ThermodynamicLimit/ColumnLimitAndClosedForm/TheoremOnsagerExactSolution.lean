@@ -30,6 +30,9 @@
 任意の橋渡し `EvenSectorBridge` の `W` について、記録 `NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup`
 （`NecSuf/EvenSectorUpperBound.lean`。人手の Step 2 が `W_ℝ`・`ε_ℝ` で書き直される前の形の形式化で、今の Step 2 の必要十分版ではない）を
 `ε = epsilonR M` で特殊化したもので、人手の鎖と 1 対 1 ではない。形式化の記録として残し、通しの定理はこれらを使わない。
+記録は `c(M)`・`c_+(M)` を必要十分版の側の同じ式の定義 `NecSuf.rayleighSup'`・`evenSectorRayleighSup'` で述べる。
+`onsager_step3_c_le_two_c_plus` はそれを具体版の `rayleighSup`・`evenSectorRayleighSup` の主張として受け取る（同じ式なので
+定義を開けば一致する。一致を述べる補題は導出 `DefinitionSectorRayleighSupFromNecSuf.lean` にある）。
 
 以前の形式化は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
 章 019 の `c_equals_c_plus`（`c(M) = max(c_+, c_-) = c_+(M)`）を使って挟み撃ちなしに

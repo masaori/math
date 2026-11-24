@@ -14,7 +14,10 @@
 人手の主張の冒頭の `d := 2_ℤ^{M_col}`（行列の大きさ・ベクトルの次元・添字の範囲 `{1,…,d}`）は、ここでは任意の有限型の添字 `n` で受ける。
 具体的な `W`（`physicalSymTransferR M K_1 K_2`）に当てるときの添字は `Conf M` で、`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one` である。
 
-`def_rayleigh_sup`（`sSup`）の必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない）。
+`def_rayleigh_sup`（`sSup`）を一般化した必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない）。
+具体版と必要十分版を互いに参照させないため、それを使う必要十分版の記録（`NecSuf/EvenSectorUpperBound.lean`）のために、
+同じ式・同じ手順の `NecSuf.rayleighSet'`・`rayleighSup'` とその性質を `NecSuf/RayleighSupAndSectorRayleighSup.lean` に置いた
+（上界の 4 行・6 行・2 行の補題は係数を順序環へ上げてある）。一致は導出 `DefinitionRayleighSupFromNecSuf.lean` が述べる。
 
 上に有界であることを示す人手の鎖と Lean の対応:
 

@@ -53,8 +53,10 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
   同じ理由で、各成分の値の `M = 0` の行（空の積は `1 = (1/√2)^0`）も人手に無く、`evenUnit_apply` の `zero` の節だけが扱う。
   ノルムの `M = 0` の行も人手に無く、`vecNorm_evenUnit` の `zero` の節だけが扱う。
 
-必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない。章 011 の
-`ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ）。
+一般化した必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない。章 011 の
+`ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ）。具体版と必要十分版を互いに参照させないため、
+同じ式・同じ手順の `NecSuf.evenSectorSet'`・`evenSectorRayleighSup'` とその性質を `NecSuf/RayleighSupAndSectorRayleighSup.lean` に置いた。
+一致は導出 `DefinitionSectorRayleighSupFromNecSuf.lean` が述べる。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup

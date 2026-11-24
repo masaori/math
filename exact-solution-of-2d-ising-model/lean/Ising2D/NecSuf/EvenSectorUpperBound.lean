@@ -11,7 +11,7 @@ README 4 節の要件を次のとおり満たさない。
 * 要件 1（具体版と同じ手順）: 今の人手と 1 対 1 の具体版 `Ising2D.c_le_twice_c_plus_physical`
   （`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolution.lean`）と手順が違う。
   本ファイルは `v̂ := v/‖v‖` の代わりに `(1/√‖v‖²)·v` を使い、`v ≠ 0` を `‖v‖² ≥ ‖u‖² = 1` から、`‖v‖² ≤ 4` を
-  Cauchy–Schwarz（`psd_cauchy_schwarz`）から出し、`uᵀWu ≥ xᵀWx` を `quad_le_quad_absVec` で出す。
+  Cauchy–Schwarz（必要十分版 `psd_cauchy_schwarz` を内積の双線型形式で）から出し、`uᵀWu ≥ xᵀWx` を `quad_le_quad_absVec` で出す。
 * 要件 4（具体版が特殊化として得られる）: `c_le_twice_c_plus_physical` は本ファイルから導いていない。
 * 要件 2: 本ファイルは `W` の対称性を仮定する（`uᵀWεu = (εu)ᵀWu` の入れ替え）が、今の具体版の鎖は使わない。
 
@@ -24,6 +24,12 @@ README 4 節の要件を次のとおり満たさない。
 引いた主張の外に取り払える構造を持たない。`ε_ℝ`・`W_ℝ` のどの性質が効くかは、引いた各主張のファイルが書いている
 （同じ章の `sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero`・`epsilon_real_fixes_sum_of_vector_and_its_image`・
 `norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four` が必要十分版を置かないのと同じ判断）。
+
+ノルム・`𝓡`・`c(M)`・`𝓡_+`・`c_+(M)` は、具体版と同じ式で必要十分版の側に置いた `vecNorm'`（`RealVectorNorm.lean`）・
+`rayleighSet'`・`rayleighSup'`・`evenSectorSet'`・`evenSectorRayleighSup'`（`RayleighSupAndSectorRayleighSup.lean`）で述べ、具体版を参照しない
+（具体版と必要十分版は互いを参照しない。`lean/README.md`）。具体版との定義上の一致は導出
+`ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSupFromNecSuf.lean`・
+`ThermodynamicLimit/ColumnLimitAndClosedForm/DefinitionSectorRayleighSupFromNecSuf.lean` だけが述べる。
 
 本ファイルは、`(−)` セクターの記録 `NecSuf/PermSector.lean` と同じく形式化の記録として残し、ビルドは通し続ける。
 通しの定理 `Ising2D.onsager_exact_solution_end_to_end` は本ファイルを使わない。本ファイルを使うのは、任意の橋渡しの `W`
@@ -47,13 +53,14 @@ README 4 節の要件を次のとおり満たさない。
   `ε` が `σ^x_1 ⋯ σ^x_M` であることも、添字集合がスピン配置であることも効いていない。
 * `W` が対称であること（`uᵀWεu = (εu)ᵀWu` の入れ替え）、`εW = Wε`、
   成分が**非負**であること。半正定値性は効いていない（`c(M)`, `c_+(M)` の上限が定まることは、`𝓡` の上界 `Σ_iΣ_j|W_ij|`
-  （`DefinitionRayleighSup.lean` の `rayleighSet_bddAbove`）から仮定なしに出る）。人手は `W_has_positive_entries`（正）を引くが、使うのは
+  （`RayleighSupAndSectorRayleighSup.lean` の `rayleighSet'_bddAbove`）から仮定なしに出る）。人手は `W_has_positive_entries`（正）を引くが、使うのは
   `0 ≤ W_{kl}`（三角不等式と `uᵀWεu ≥ 0`）だけである。
 * `π` が不動点をもたないことは使っていない。
 -/
 import Ising2D.NecSuf.PermMatrix
-import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.DefinitionSectorRayleighSup
-import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPsdCauchySchwarz
+import Ising2D.NecSuf.RayleighSupAndSectorRayleighSup
+import Ising2D.NecSuf.PsdCauchySchwarz
+import Ising2D.NecSuf.BilinearValueOfSymmetricMatrixIsSymmetric
 
 set_option linter.unusedSectionVars false
 
@@ -63,10 +70,22 @@ open Matrix
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
+/-- 内積 `(x, y) ↦ xᵀy` の双線型形式。Cauchy–Schwarz の必要十分版 `psd_cauchy_schwarz`（`NecSuf/PsdCauchySchwarz.lean`）へ
+`uᵀεu ≤ ‖u‖‖εu‖` を渡すために置く（記録の前の形は、具体版の `psd_cauchy_schwarz` を単位行列 `P = 1` で引いていた。
+`xᵀ1y = xᵀy` なので、同じ双線型形式である）。 -/
+def dotProductBilin' : (n → ℝ) →ₗ[ℝ] (n → ℝ) →ₗ[ℝ] ℝ :=
+  LinearMap.mk₂ ℝ (fun x y => x ⬝ᵥ y)
+    (fun _ _ _ => add_dotProduct _ _ _)
+    (fun _ _ _ => smul_dotProduct _ _ _)
+    (fun _ _ _ => dotProduct_add _ _ _)
+    (fun _ _ _ => dotProduct_smul _ _ _)
+
+@[simp] theorem dotProductBilin'_apply (x y : n → ℝ) : dotProductBilin' x y = x ⬝ᵥ y := rfl
+
 /-- 置換行列の作用はノルムを保つ（成分の並べ替えは二乗和を変えない）。 -/
 theorem vecNormSq_permMat_mulVec {π : n → n} (hπ : Function.Involutive π) (x : n → ℝ) :
-    vecNormSq (permMat π *ᵥ x) = vecNormSq x := by
-  rw [vecNormSq_eq_sum, vecNormSq_eq_sum]
+    vecNormSq' (permMat π *ᵥ x) = vecNormSq' x := by
+  rw [vecNormSq'_eq_sum, vecNormSq'_eq_sum]
   simp only [permMat_mulVec]
   exact Equiv.sum_comp (Function.Involutive.toPerm π hπ) (fun i => x i ^ 2)
 
@@ -81,10 +100,10 @@ theorem bilin_nonneg_of_nonneg {W : Matrix n n ℝ} (hW : ∀ k l, 0 ≤ W k l) 
 theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n n ℝ}
     (hW : W.IsSymm) (hWnn : ∀ k l, 0 ≤ W k l)
     {π : n → n} (hπ : Function.Involutive π) (hcomm : permMat π * W = W * permMat π) :
-    rayleighSup W ≤ 2 * evenSectorRayleighSup W (permMat π) := by
-  refine csSup_le (rayleighSet_nonempty W) ?_
+    rayleighSup' W ≤ 2 * evenSectorRayleighSup' W (permMat π) := by
+  refine csSup_le (rayleighSet'_nonempty W) ?_
   rintro r ⟨x, hxn, rfl⟩
-  have hx : vecNormSq x = 1 := vecNormSq_eq_one_of_vecNorm_eq_one hxn
+  have hx : vecNormSq' x = 1 := vecNormSq'_eq_one_of_vecNorm'_eq_one hxn
   set ε : Matrix n n ℝ := permMat π with hεdef
   set u : n → ℝ := absVec x with hudef
   set v : n → ℝ := u + ε *ᵥ u with hvdef
@@ -96,15 +115,15 @@ theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n 
     rw [hεdef, permMat_mulVec]
     exact hu0 _
   -- `‖u‖ = ‖x‖ = 1`、`‖εu‖ = ‖u‖ = 1`
-  have hun : vecNormSq u = 1 := by rw [hudef, show vecNormSq (absVec x) = vecNormSq x from vecNormSq_absVec x, hx]
-  have hεun : vecNormSq (ε *ᵥ u) = 1 := by rw [hεdef, vecNormSq_permMat_mulVec hπ, hun]
+  have hun : vecNormSq' u = 1 := by rw [hudef, show vecNormSq' (absVec x) = vecNormSq' x from vecNormSq_absVec x, hx]
+  have hεun : vecNormSq' (ε *ᵥ u) = 1 := by rw [hεdef, vecNormSq_permMat_mulVec hπ, hun]
   -- `εv = εu + ε²u = εu + u = v`
   have hεv : ε *ᵥ v = v := by
     rw [hvdef, Matrix.mulVec_add, Matrix.mulVec_mulVec, hεε, Matrix.one_mulVec, add_comm]
   -- `v ≥ u ≥ 0` かつ `u ≠ 0` より `v ≠ 0`（ここでは `‖v‖² ≥ ‖u‖² = 1 > 0` の形）
-  have hvpos : 0 < vecNormSq v := by
-    have hle : vecNormSq u ≤ vecNormSq v := by
-      rw [vecNormSq_eq_sum, vecNormSq_eq_sum]
+  have hvpos : 0 < vecNormSq' v := by
+    have hle : vecNormSq' u ≤ vecNormSq' v := by
+      rw [vecNormSq'_eq_sum, vecNormSq'_eq_sum]
       refine Finset.sum_le_sum fun i _ => ?_
       have hi : u i ≤ v i := by
         rw [hvdef, Pi.add_apply]
@@ -113,24 +132,25 @@ theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n 
     linarith
   -- Cauchy–Schwarz: `uᵀεu ≤ ‖u‖‖εu‖ = 1`
   have hcs : u ⬝ᵥ (ε *ᵥ u) ≤ 1 := by
-    have h := Ising2D.psd_cauchy_schwarz (P := (1 : Matrix n n ℝ)) Matrix.isSymm_one
-      (fun y => by simpa [vecNormSq] using vecNormSq_nonneg y) (ε *ᵥ u) u
-    simp only [Matrix.one_mulVec] at h
+    have h := psd_cauchy_schwarz (dotProductBilin' (n := n)) (fun a b => dotProduct_comm a b)
+      (fun y => vecNormSq'_nonneg y) (ε *ᵥ u) u
+    simp only [dotProductBilin'_apply] at h
     rw [show (ε *ᵥ u) ⬝ᵥ (ε *ᵥ u) = 1 from hεun, show u ⬝ᵥ u = 1 from hun, one_mul] at h
     exact le_of_abs_le ((sq_le_one_iff_abs_le_one _).1 h)
   -- `‖v‖² = ‖u‖² + 2uᵀεu + ‖εu‖² = 2 + 2uᵀεu ≤ 4`
-  have hvn : vecNormSq v = 2 + 2 * (u ⬝ᵥ (ε *ᵥ u)) := by
+  have hvn : vecNormSq' v = 2 + 2 * (u ⬝ᵥ (ε *ᵥ u)) := by
     have h1 : u ⬝ᵥ u = 1 := hun
     have h2 : (ε *ᵥ u) ⬝ᵥ (ε *ᵥ u) = 1 := hεun
-    rw [vecNormSq, hvdef, add_dotProduct, dotProduct_add, dotProduct_add,
+    rw [vecNormSq', hvdef, add_dotProduct, dotProduct_add, dotProduct_add,
       dotProduct_comm (ε *ᵥ u) u, h1, h2]
     ring
-  have hv4 : vecNormSq v ≤ 4 := by rw [hvn]; linarith
+  have hv4 : vecNormSq' v ≤ 4 := by rw [hvn]; linarith
   -- `(εu)ᵀW(εu) = uᵀεWεu = uᵀWε²u = uᵀWu`
   have hεWε : (ε *ᵥ u) ⬝ᵥ W *ᵥ (ε *ᵥ u) = u ⬝ᵥ W *ᵥ u := by
-    rw [← mulVec_dotProduct_selfadjoint hεsymm u (W *ᵥ (ε *ᵥ u)), Matrix.mulVec_mulVec,
+    rw [← mulVec_dotProduct_selfadjoint' hεsymm u (W *ᵥ (ε *ᵥ u)), Matrix.mulVec_mulVec,
       Matrix.mulVec_mulVec, hcomm, Matrix.mul_assoc, hεε, Matrix.mul_one]
-  have hcross : (ε *ᵥ u) ⬝ᵥ W *ᵥ u = u ⬝ᵥ W *ᵥ (ε *ᵥ u) := dotProduct_mulVec_comm hW _ _
+  have hcross : (ε *ᵥ u) ⬝ᵥ W *ᵥ u = u ⬝ᵥ W *ᵥ (ε *ᵥ u) :=
+    bilinear_value_of_symmetric_matrix_is_symmetric' W hW _ _
   -- `vᵀWv = 2uᵀWu + 2uᵀWεu ≥ 2uᵀWu`
   have hvW : v ⬝ᵥ W *ᵥ v = 2 * (u ⬝ᵥ W *ᵥ u) + 2 * (u ⬝ᵥ W *ᵥ (ε *ᵥ u)) := by
     rw [hvdef, Matrix.mulVec_add, add_dotProduct, dotProduct_add, dotProduct_add, hεWε, hcross]
@@ -139,23 +159,23 @@ theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n 
   have huWu : 0 ≤ u ⬝ᵥ W *ᵥ u := bilin_nonneg_of_nonneg hWnn hu0 hu0
   have hvW2 : 2 * (u ⬝ᵥ W *ᵥ u) ≤ v ⬝ᵥ W *ᵥ v := by rw [hvW]; linarith
   -- `v̂ := v/‖v‖` は `𝓕^{(+)}` の単位ベクトル
-  set a : ℝ := vecNormSq v with hadef
+  set a : ℝ := vecNormSq' v with hadef
   set c : ℝ := (Real.sqrt a)⁻¹ with hcdef
   have hc2 : c ^ 2 = a⁻¹ := by rw [hcdef, inv_pow, Real.sq_sqrt hvpos.le]
-  have hunit : vecNormSq (c • v) = 1 := by
-    rw [vecNormSq_smul, ← hadef, hc2, inv_mul_cancel₀ hvpos.ne']
+  have hunit : vecNormSq' (c • v) = 1 := by
+    rw [vecNormSq'_smul, ← hadef, hc2, inv_mul_cancel₀ hvpos.ne']
   have hsec : ε *ᵥ (c • v) = c • v := by rw [Matrix.mulVec_smul, hεv]
-  have hmax : (c • v) ⬝ᵥ W *ᵥ (c • v) ≤ evenSectorRayleighSup W ε :=
-    le_evenSectorRayleighSup hsec (vecNorm_eq_one_of_vecNormSq_eq_one hunit)
-  have hchain : x ⬝ᵥ W *ᵥ x / 2 ≤ evenSectorRayleighSup W ε :=
+  have hmax : (c • v) ⬝ᵥ W *ᵥ (c • v) ≤ evenSectorRayleighSup' W ε :=
+    le_evenSectorRayleighSup' hsec (vecNorm'_eq_one_of_vecNormSq'_eq_one hunit)
+  have hchain : x ⬝ᵥ W *ᵥ x / 2 ≤ evenSectorRayleighSup' W ε :=
     calc x ⬝ᵥ W *ᵥ x / 2
         ≤ u ⬝ᵥ W *ᵥ u / 2 := by linarith [quad_le_quad_absVec hWnn x]
       _ = 2 * (u ⬝ᵥ W *ᵥ u) / 4 := by ring
       _ ≤ 2 * (u ⬝ᵥ W *ᵥ u) / a :=
           div_le_div_of_nonneg_left (by linarith) hvpos hv4
       _ ≤ v ⬝ᵥ W *ᵥ v / a := div_le_div_of_nonneg_right hvW2 hvpos.le
-      _ = (c • v) ⬝ᵥ W *ᵥ (c • v) := by rw [quad_smul, hc2, div_eq_inv_mul]
-      _ ≤ evenSectorRayleighSup W ε := hmax
+      _ = (c • v) ⬝ᵥ W *ᵥ (c • v) := by rw [quad_smul', hc2, div_eq_inv_mul]
+      _ ≤ evenSectorRayleighSup' W ε := hmax
   linarith
 
 end Ising2D.NecSuf
