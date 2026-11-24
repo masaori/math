@@ -81020,7 +81020,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &=(-1)^{\left(a\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)+b\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2}
 &&\bigl(\because\ (-1)^{n+2}=(-1)^n\text{ を二で割った商の回数だけ当てる}\bigr)\\
 &=(-1)^{\left(a\,h(\gamma)+b\,v(\gamma)\right)\bmod2}
-&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\text{。法 }2\text{ で合同な因子に取り換えても }\bmod2\text{ の値は変わらない}\bigr)\\
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\text{、法 }2\text{ で合同な因子に取り換えても }\bmod2\text{ の値は変わらない}\bigr)\\
 &=(-1)^{a\,h(\gamma)+b\,v(\gamma)}
 &&\bigl(\because\ (-1)^{n+2}=(-1)^n\text{ を二で割った商の回数だけ当てる}\bigr)
 \end{aligned}`),
