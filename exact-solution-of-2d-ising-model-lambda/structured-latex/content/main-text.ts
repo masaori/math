@@ -46242,7 +46242,7 @@ d
 &=\prod_{r=0}^{d-1}\bigl(z-\alpha(r)\bigr)
 &&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\text{ の }\mathrm{aev}_{z}(t)=z\text{ と }\mathrm{aev}_{z}(\widehat{a})=a\bigr)\\
 &=\bigl(z-\alpha(i)\bigr)\cdot\prod_{\substack{r=0\\ r\ne i}}^{d-1}\bigl(z-\alpha(r)\bigr)
-&&\bigl(\because\ i<d\text{ なので有限積から番号 }i\text{ の因子を分ける。}\overline{\mathbb{Q}}\text{ の積の可換則と結合則}\bigr)\\
+&&\bigl(\because\ i<d\text{ なので有限積から番号 }i\text{ の因子を分ける、}\overline{\mathbb{Q}}\text{ の積の可換則と結合則}\bigr)\\
 &=0\cdot\prod_{\substack{r=0\\ r\ne i}}^{d-1}\bigl(z-\alpha(r)\bigr)
 &&\bigl(\because\ z=\alpha(i)\text{ と }\overline{\mathbb{Q}}\text{ の加法の逆元}\bigr)\\
 &=0
