@@ -153,7 +153,7 @@
 | `Ising2D.sectorSet` / `sectorRayleighSup` / `sectorSet_one_eq` / `sectorRayleighSup_one_eq` | 符号つきの `𝓡_±`, `c_±(M)`（`s = 1` で本文の `𝓡_+`, `c_+`） | ノート（`sector_decomposition_of_rayleigh_sup`） |
 | `Ising2D.sector_invariant` / `sector_orthogonal` / `projPlus` / `projMinus` / `proj_add_eq_one` / `projPlus_mulVec_eigen` / `projMinus_mulVec_eigen` / `sector_quad_le` / `sectorRayleighSup_le`（`ClaimRayleighSupSectorDecomposition.lean`） | `W` は `F^{(±)}` を保つ、直交性、実行列の `P^{(±)}`、セクター内の評価 | ノート（同上） |
 | `Ising2D.sector_decomposition_of_rayleigh_sup` | `c(M) = max(c₊(M), c₋(M))` | ノート `sector_decomposition_of_rayleigh_sup` (3) |
-| `Ising2D.matBilin` / `dotProduct_mulVec_comm` / `mulVec_dotProduct_selfadjoint` / `single_dotProduct_mulVec_single` / `vecNormSq` 系 / `vecNorm_eq_sqrt_sum_abs_sq` / `mulVecLin_pow` / `isPsdPair_of_matrix` / `isPdPair_of_matrix`（`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`） | 実行列の双線型形式、実ベクトルの二乗ノルム、Lean の `vecNorm` を `def_matrix_norm`（`K = ℝ`）の `√(Σ\|w_i\|^2)` の形に書く読み替え、必要十分版の半正定値・正定値の対への受け渡し | 補助（対応する人手の項目は無い） |
+| `Ising2D.matBilin` / `dotProduct_mulVec_comm` / `mulVec_dotProduct_selfadjoint` / `single_dotProduct_mulVec_single` / `vecNormSq` 系 / `vecNorm_eq_sqrt_sum_abs_sq` / `mulVecLin_pow` / `isPsdPair_of_matrix` / `isPdPair_of_matrix`（`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`） | 実行列の双線型形式、実ベクトルの二乗ノルム（必要十分版の側の同じ定義は `NecSuf/RealVectorSquaredNorm.lean` の `vecNormSq'`、二つの一致は同じフォルダの `RealMatrixBilinearFormAndNormFromNecSuf.lean`）、Lean の `vecNorm` を `def_matrix_norm`（`K = ℝ`）の `√(Σ\|w_i\|^2)` の形に書く読み替え、必要十分版の半正定値・正定値の対への受け渡し | 補助（対応する人手の項目は無い） |
 
 ### 1.2 必要十分版（`lean/Ising2D/NecSuf/`）
 

@@ -19,10 +19,17 @@
 2. 三角不等式 `|Σ x_k x_l W_{kl}| ≤ Σ |x_k||x_l|W_{kl}` に必要なのは `0 ≤ W_{kl}` だけで、
    狭義の正値性は使っていない。
 
+ノルムの二乗は必要十分版の側の定義 `vecNormSq'`（`NecSuf/RealVectorSquaredNorm.lean`）で述べ、
+具体版の `Ising2D.vecNormSq` を参照しない（具体版と必要十分版は互いを参照しない。`lean/README.md`）。
+
 本ファイルの内容はもと `Ising2D/NecSuf/PermSector.lean`（人手の本文から参照用ノートへ退避した
 章 019 の必要十分版）にあった。本文の主張が使う部分だけをここへ移した。
 -/
-import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.RealMatrixBilinearFormAndNorm
+import Ising2D.NecSuf.RealVectorSquaredNorm
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Logic.Function.Basic
+import Mathlib.Algebra.Order.Ring.Abs
+import Mathlib.LinearAlgebra.Matrix.Symmetric
 
 set_option linter.unusedSectionVars false
 
@@ -103,8 +110,8 @@ def absVec (x : n → ℝ) : n → ℝ := fun i => |x i|
 @[simp] theorem absVec_apply (x : n → ℝ) (i : n) : absVec x i = |x i| := rfl
 
 /-- `‖u‖ = ‖x‖`（`u_k := |x_k|`。ノルムは成分の絶対値だけで決まる。ここでは `‖·‖²` の形で述べる）。 -/
-theorem vecNormSq_absVec (x : n → ℝ) : vecNormSq (absVec x) = vecNormSq x := by
-  rw [vecNormSq_eq_sum, vecNormSq_eq_sum]
+theorem vecNormSq_absVec (x : n → ℝ) : vecNormSq' (absVec x) = vecNormSq' x := by
+  rw [vecNormSq'_eq_sum, vecNormSq'_eq_sum]
   refine Finset.sum_congr rfl fun i _ => ?_
   rw [absVec_apply, sq_abs]
 

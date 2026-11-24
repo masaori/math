@@ -167,7 +167,9 @@ theorem sectorRayleighSup_neg_le_pos [Nonempty n] {W : Matrix n n ℝ}
     rintro r ⟨x, hx, hx1, rfl⟩
     have h1 : permMat π *ᵥ absVec x = (1 : ℝ) • absVec x := permMat_mulVec_absVec hx
     have h2 : vecNorm (absVec x) = 1 :=
-      vecNorm_eq_one_of_vecNormSq_eq_one (by rw [vecNormSq_absVec, vecNormSq_eq_one_of_vecNorm_eq_one hx1])
+      vecNorm_eq_one_of_vecNormSq_eq_one
+        (by rw [show vecNormSq (absVec x) = vecNormSq x from vecNormSq_absVec x,
+          vecNormSq_eq_one_of_vecNorm_eq_one hx1])
     refine le_trans (quad_le_quad_absVec hWnn x) ?_
     exact le_csSup (sectorSet_bddAbove W _ _) ⟨absVec x, h1, h2, rfl⟩
 

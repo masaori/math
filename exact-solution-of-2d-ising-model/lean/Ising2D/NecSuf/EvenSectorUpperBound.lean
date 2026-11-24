@@ -96,7 +96,7 @@ theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n 
     rw [hεdef, permMat_mulVec]
     exact hu0 _
   -- `‖u‖ = ‖x‖ = 1`、`‖εu‖ = ‖u‖ = 1`
-  have hun : vecNormSq u = 1 := by rw [hudef, vecNormSq_absVec, hx]
+  have hun : vecNormSq u = 1 := by rw [hudef, show vecNormSq (absVec x) = vecNormSq x from vecNormSq_absVec x, hx]
   have hεun : vecNormSq (ε *ᵥ u) = 1 := by rw [hεdef, vecNormSq_permMat_mulVec hπ, hun]
   -- `εv = εu + ε²u = εu + u = v`
   have hεv : ε *ᵥ v = v := by
