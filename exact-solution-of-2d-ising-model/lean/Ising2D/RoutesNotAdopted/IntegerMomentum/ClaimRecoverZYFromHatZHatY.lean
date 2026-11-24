@@ -34,6 +34,22 @@ namespace Ising2D
 
 variable {M : ℕ}
 
+/-- 本文から退避した経路の記録の中だけで使う読み替え: `exp_sum` の具体版 `expPhase_sum` の和の添字（人手の添字 `finIndexToZZ M j`）を、
+この経路の記録が書く Lean の添字の値 `j.val + 1` へ戻した形。 -/
+private theorem expPhase_sum_valInRecoverZYFromHatZHatY {M : ℕ} (hM : M ≠ 0) (k : ℤ) :
+    ∑ j : Fin M, expPhase M ((((j : ℕ) : ℤ) + 1) * k) = (M : ℂ) * deltaMod M k 0 := by
+  have h := expPhase_sum hM k
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
+  exact h
+
+/-- 本文から退避した経路の記録の中だけで使う読み替え: `dvd_sub_iff_eq` の人手の添字の差を、Lean の添字の値の差へ戻した形。 -/
+private theorem dvd_sub_iff_eq_valInRecoverZYFromHatZHatY {M : ℕ} (j m : Fin M) :
+    ((M : ℤ) ∣ ((j : ℕ) : ℤ) - ((m : ℕ) : ℤ)) ↔ j = m := by
+  have h := dvd_sub_iff_eq j m
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, add_sub_add_right_eq_sub] at h
+  exact h
+
+
 /-- **離散フーリエ逆変換（原文 Step 1・Step 2 に共通の計算）**。
 
 族 `x : Fin M → Mat(2,ℂ)^{⊗M}` の変換 `hat(x)_μ = ∑_j x_j exp(-√-1 · 2π j μ/M)` に対し
@@ -67,14 +83,14 @@ theorem inverse_dft (hM : M ≠ 0) (x : Fin M → TensorPow M) (m : Fin M) :
     intro j
     rw [← Finset.sum_smul]
     congr 1
-    rw [← expPhase_sum hM]
+    rw [← expPhase_sum_valInRecoverZYFromHatZHatY hM]
     exact Finset.sum_congr rfl fun μ _ => by rw [mul_comm]
   simp_rw [step2]
   -- Step 3: `δ` で `j = m` の項だけ残る
   rw [Finset.sum_eq_single_of_mem m (Finset.mem_univ m)]
   · rw [sub_self, deltaMod, sub_zero, if_pos (dvd_zero _), mul_one]
   · intro j _ hj
-    rw [deltaMod, sub_zero, if_neg (fun h => hj ((dvd_sub_iff_eq j m).1 h)), mul_zero, zero_smul]
+    rw [deltaMod, sub_zero, if_neg (fun h => hj ((dvd_sub_iff_eq_valInRecoverZYFromHatZHatY j m).1 h)), mul_zero, zero_smul]
 
 /-- **`<recover_Z_Y_from_hatZ_hatY>` Step 1 の形式化**:
 `∑_{μ=1}^M hat(Y)_μ exp(√-1 m · 2πμ/M) = M Y_m`。 -/

@@ -39,6 +39,22 @@ namespace Ising2D
 
 variable {M : ℕ}
 
+/-- 本文から退避した経路の記録の中だけで使う読み替え: `exp_sum` の具体版 `expPhase_sum` の和の添字（人手の添字 `finIndexToZZ M j`）を、
+この経路の記録が書く Lean の添字の値 `j.val + 1` へ戻した形。 -/
+private theorem expPhase_sum_valInH1H2ViaHatZHatY {M : ℕ} (hM : M ≠ 0) (k : ℤ) :
+    ∑ j : Fin M, expPhase M ((((j : ℕ) : ℤ) + 1) * k) = (M : ℂ) * deltaMod M k 0 := by
+  have h := expPhase_sum hM k
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
+  exact h
+
+/-- 本文から退避した経路の記録の中だけで使う読み替え: `dvd_sub_iff_eq` の人手の添字の差を、Lean の添字の値の差へ戻した形。 -/
+private theorem dvd_sub_iff_eq_valInH1H2ViaHatZHatY {M : ℕ} (j m : Fin M) :
+    ((M : ℤ) ∣ ((j : ℕ) : ℤ) - ((m : ℕ) : ℤ)) ↔ j = m := by
+  have h := dvd_sub_iff_eq j m
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, add_sub_add_right_eq_sub] at h
+  exact h
+
+
 /-! ## 位相因子・`hat` の合同による一致（`M` 周期性の一般形）
 
 `ClaimHatZHatYPeriodicity.lean` の `hatZ_periodic` / `hatY_periodic` は「`+M` で不変」の形。
@@ -170,7 +186,7 @@ theorem H1_eq_hat_sum (hM : M ≠ 0) (η : ℂ) :
         = (firstSign η k₂ *
             ((M : ℂ) * deltaMod M (((k₁ : ℕ) : ℤ) - ((k₂ : ℕ) : ℤ) + 1) 0)) • (Y k₁ * Z k₂) := by
     intro k₁ k₂
-    rw [← Finset.sum_smul, ← Finset.mul_sum, expPhase_sum hM]
+    rw [← Finset.sum_smul, ← Finset.mul_sum, expPhase_sum_valInH1H2ViaHatZHatY hM]
   -- (3) `δ` により `k₂ = nextSite k₁` の項だけが残る（原文の場合分けに対応）
   have houter : ∀ k₁ : Fin M,
       ∑ k₂ : Fin M,
@@ -220,16 +236,16 @@ theorem H2_eq_hat_sum (hM : M ≠ 0) :
             (((k₂ : ℕ) : ℤ) - ((k₁ : ℕ) : ℤ)))) • (Z k₁ * Y k₂)
         = ((M : ℂ) * deltaMod M (((k₂ : ℕ) : ℤ) - ((k₁ : ℕ) : ℤ)) 0) • (Z k₁ * Y k₂) := by
     intro k₁ k₂
-    rw [← Finset.sum_smul, expPhase_sum hM]
+    rw [← Finset.sum_smul, expPhase_sum_valInH1H2ViaHatZHatY hM]
   have houter : ∀ k₁ : Fin M,
       ∑ k₂ : Fin M,
           ((M : ℂ) * deltaMod M (((k₂ : ℕ) : ℤ) - ((k₁ : ℕ) : ℤ)) 0) • (Z k₁ * Y k₂)
         = (M : ℂ) • (Z k₁ * Y k₁) := by
     intro k₁
     rw [Finset.sum_eq_single_of_mem k₁ (Finset.mem_univ _)]
-    · rw [deltaMod, sub_zero, if_pos ((dvd_sub_iff_eq k₁ k₁).2 rfl), mul_one]
+    · rw [deltaMod, sub_zero, if_pos ((dvd_sub_iff_eq_valInH1H2ViaHatZHatY k₁ k₁).2 rfl), mul_one]
     · intro k₂ _ hk₂
-      rw [deltaMod, sub_zero, if_neg (fun hd => hk₂ ((dvd_sub_iff_eq k₂ k₁).1 hd)), mul_zero,
+      rw [deltaMod, sub_zero, if_neg (fun hd => hk₂ ((dvd_sub_iff_eq_valInH1H2ViaHatZHatY k₂ k₁).1 hd)), mul_zero,
         zero_smul]
   symm
   rw [Finset.sum_congr rfl fun j _ => hterm j, Finset.sum_comm,

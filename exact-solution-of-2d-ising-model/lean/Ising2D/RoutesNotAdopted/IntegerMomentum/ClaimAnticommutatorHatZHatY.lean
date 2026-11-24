@@ -39,6 +39,15 @@ namespace Ising2D
 
 variable {M : ℕ}
 
+/-- 本文から退避した経路の記録の中だけで使う読み替え: `exp_sum` の具体版 `expPhase_sum` の和の添字（人手の添字 `finIndexToZZ M j`）を、
+この経路の記録が書く Lean の添字の値 `j.val + 1` へ戻した形。 -/
+private theorem expPhase_sum_valInAnticommutatorHatZHatY {M : ℕ} (hM : M ≠ 0) (k : ℤ) :
+    ∑ j : Fin M, expPhase M ((((j : ℕ) : ℤ) + 1) * k) = (M : ℂ) * deltaMod M k 0 := by
+  have h := expPhase_sum hM k
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
+  exact h
+
+
 /-! ## 補助: Clifford 関係を満たす族の線型結合どうしの反交換子 -/
 
 section Clifford
@@ -108,7 +117,7 @@ theorem acomm_hatZ_hatZ_same (hM : M ≠ 0) {η : ℂ} (hη : η * η = 1) (μ �
       _ = 1 * expPhase M ((((j : ℕ) : ℤ) + 1) * (μ + ν)) * 2 := by
             rw [hs, expPhase_site_mul]
       _ = 2 * expPhase M ((((j : ℕ) : ℤ) + 1) * (μ + ν)) := by ring
-  rw [Finset.sum_congr rfl fun j _ => hterm j, ← Finset.mul_sum, expPhase_sum hM]
+  rw [Finset.sum_congr rfl fun j _ => hterm j, ← Finset.mul_sum, expPhase_sum_valInAnticommutatorHatZHatY hM]
   ring
 
 /-- **原文 2 の形式化**: `[hat(Z)_μ^{(±)}, hat(Z)_ν^{(∓)}]₊`。
@@ -148,7 +157,7 @@ theorem acomm_hatZ_hatZ_opp (hM : M ≠ 0) {η : ℂ} (hη : η * η = 1) (μ ν
         _ = 2 * expPhase M ((((j : ℕ) : ℤ) + 1) * (μ + ν)) := by
               rw [expPhase_site_mul]; ring
   rw [Finset.sum_congr rfl fun j _ => hterm j, Finset.sum_add_distrib, ← Finset.mul_sum,
-    expPhase_sum hM]
+    expPhase_sum_valInAnticommutatorHatZHatY hM]
   have hsingle : ∑ j : Fin M, (if (j : ℕ) = 0 then -(4 * expPhase M (μ + ν)) else 0)
       = -(4 * expPhase M (μ + ν)) := by
     rw [Finset.sum_eq_single_of_mem z (Finset.mem_univ z)]
@@ -183,7 +192,7 @@ theorem acomm_hatY_hatY (hM : M ≠ 0) (μ ν : ℤ) :
     intro j
     rw [expPhase_site_mul]
     ring
-  rw [Finset.sum_congr rfl fun j _ => hterm j, ← Finset.mul_sum, expPhase_sum hM]
+  rw [Finset.sum_congr rfl fun j _ => hterm j, ← Finset.mul_sum, expPhase_sum_valInAnticommutatorHatZHatY hM]
   ring
 
 /-! ## 原文の `(±)` 記法での言い換え -/

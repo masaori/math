@@ -54,10 +54,12 @@ theorem expPhase_eq_zetaM_zpow_neg (M : ℕ) (a k : ℤ) :
 必要十分版 `NecSuf.sum_zpow_primitiveRoot` に `K := ℂ`, `ζ := zetaM M`, `k := -k` を代入し、
 `M ∣ -k ⟺ M ∣ k` で整理すると、原文 `exp_sum` の主張がそのまま出る。 -/
 theorem expPhase_sum_of_necSuf {M : ℕ} (hM : M ≠ 0) (k : ℤ) :
-    ∑ j : Fin M, expPhase M (((j : ℕ) + 1 : ℤ) * k) = (M : ℂ) * deltaMod M k 0 := by
-  have hrw : ∀ j : Fin M, expPhase M (((j : ℕ) + 1 : ℤ) * k)
-      = zetaM M ^ ((((j : ℕ) : ℤ) + 1) * (-k)) := fun j =>
-    expPhase_eq_zetaM_zpow_neg M (((j : ℕ) : ℤ) + 1) k
+    ∑ j : Fin M, expPhase M (finIndexToZZ M j * k) = (M : ℂ) * deltaMod M k 0 := by
+  -- 人手の添字 `finIndexToZZ M j` を、必要十分版の和の添字 `j.val + 1` へ戻す
+  have hrw : ∀ j : Fin M, expPhase M (finIndexToZZ M j * k)
+      = zetaM M ^ ((((j : ℕ) : ℤ) + 1) * (-k)) := fun j => by
+    rw [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+    exact expPhase_eq_zetaM_zpow_neg M (((j : ℕ) : ℤ) + 1) k
   rw [Finset.sum_congr rfl fun j _ => hrw j,
     NecSuf.sum_zpow_primitiveRoot hM (isPrimitiveRoot_zetaM hM) (-k), deltaMod, sub_zero]
   congr 1

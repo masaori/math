@@ -162,9 +162,10 @@ theorem exp_sum_as_I_mul_real (hM : M ≠ 0) (κ : ℤ) :
   have hterm : ∀ j : Fin M,
       Complex.exp (Complex.I
           * ((2 * Real.pi * ((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * (κ : ℝ) / ((M : ℤ) : ℝ) : ℝ) : ℂ))
-        = expPhase M (((j : ℕ) + 1 : ℤ) * (-κ)) := by
+        = expPhase M (finIndexToZZ M j * (-κ)) := by
     intro j
-    rw [expPhase]
+    -- `exp_sum` の具体版の和の添字は人手の添字 `finIndexToZZ M j = ι_{ℕ→ℤ}(j.val) + 1_ℤ`（`def_index_set_from_one_to_n`）
+    rw [expPhase, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
     congr 1
     push_cast
     ring

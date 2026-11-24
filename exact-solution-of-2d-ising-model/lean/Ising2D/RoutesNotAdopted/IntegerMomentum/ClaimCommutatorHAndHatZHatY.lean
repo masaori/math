@@ -67,6 +67,22 @@ namespace Ising2D
 
 variable {M : ℕ}
 
+/-- 本文から退避した経路の記録の中だけで使う読み替え: `exp_sum` の具体版 `expPhase_sum` の和の添字（人手の添字 `finIndexToZZ M j`）を、
+この経路の記録が書く Lean の添字の値 `j.val + 1` へ戻した形。 -/
+private theorem expPhase_sum_valInCommutatorHAndHatZHatY {M : ℕ} (hM : M ≠ 0) (k : ℤ) :
+    ∑ j : Fin M, expPhase M ((((j : ℕ) : ℤ) + 1) * k) = (M : ℂ) * deltaMod M k 0 := by
+  have h := expPhase_sum hM k
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
+  exact h
+
+/-- 本文から退避した経路の記録の中だけで使う読み替え: `dvd_sub_iff_eq` の人手の添字の差を、Lean の添字の値の差へ戻した形。 -/
+private theorem dvd_sub_iff_eq_valInCommutatorHAndHatZHatY {M : ℕ} (j m : Fin M) :
+    ((M : ℤ) ∣ ((j : ℕ) : ℤ) - ((m : ℕ) : ℤ)) ↔ j = m := by
+  have h := dvd_sub_iff_eq j m
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, add_sub_add_right_eq_sub] at h
+  exact h
+
+
 /-! site 添字 `1` と `M` の `firstSite`・`lastSite` は
 `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` にある。 -/
 
@@ -153,7 +169,7 @@ theorem sum_deltaMod_select {A : Type*} [AddCommMonoid A] [Module ℂ A]
       have heq : (μ - (((j : ℕ) : ℤ) + 1)) - (μ - (((j₀ : ℕ) : ℤ) + 1))
           = ((j₀ : ℕ) : ℤ) - ((j : ℕ) : ℤ) := by ring
       rwa [heq] at h
-    exact ((dvd_sub_iff_eq j₀ j).1 hsub).symm
+    exact ((dvd_sub_iff_eq_valInCommutatorHAndHatZHatY j₀ j).1 hsub).symm
 
 /-! ## 合同不変性（`sum_deltaMod_select` に渡す `F` たち） -/
 
@@ -195,7 +211,7 @@ theorem sum_hatY (hM : M ≠ 0) :
       expPhase M ((((j : ℕ) : ℤ) + 1) * (((k : ℕ) : ℤ) + 1))) • Y k
       = ((M : ℂ) * (if k = lastSite M hM then 1 else 0)) • Y k := by
     intro k
-    rw [expPhase_sum hM, deltaMod_succ_eq hM]
+    rw [expPhase_sum_valInCommutatorHAndHatZHatY hM, deltaMod_succ_eq hM]
   rw [Finset.sum_congr rfl fun k _ => this k,
     Finset.sum_eq_single_of_mem (lastSite M hM) (Finset.mem_univ _)]
   · rw [if_pos rfl, mul_one]
@@ -223,7 +239,7 @@ theorem sum_expPhase_neg_smul_hatY (hM : M ≠ 0) :
       expPhase M ((((j : ℕ) : ℤ) + 1) * ((k : ℕ) : ℤ))) • Y k
       = ((M : ℂ) * (if k = firstSite M hM then 1 else 0)) • Y k := by
     intro k
-    rw [expPhase_sum hM, deltaMod_val_eq hM]
+    rw [expPhase_sum_valInCommutatorHAndHatZHatY hM, deltaMod_val_eq hM]
   rw [Finset.sum_congr rfl fun k _ => this k,
     Finset.sum_eq_single_of_mem (firstSite M hM) (Finset.mem_univ _)]
   · rw [if_pos rfl, mul_one]

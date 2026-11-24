@@ -251,10 +251,15 @@ theorem commute_xString_of_commute_sigmaX (A : TensorPow M) :
 
 /-- 人手の「`σ_j^a` を `σ_1^x⋯σ_{j-1}^x` の右へ移す」（人手の添字）: `distinct_site_pauli_matrices_commute`（Lean のサイト `j` と `i < j`。人手のサイト `j+1` と `i+1 ≤ j`）の反復適用。 -/
 theorem siteOp_mul_xString (j : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
-    siteOp j A * xString M (j : ℕ) = xString M (j : ℕ) * siteOp j A :=
-  commute_xString_of_commute_sigmaX (siteOp j A) (j : ℕ) (Nat.le_of_lt j.isLt)
-    (fun i hi => siteOp_mul_comm (Fin.ne_of_val_ne (by simp only; omega)) A pauliX)
-                                                          -- `distinct_site_pauli_matrices_commute`（Lean のサイト `j ≠ i`）
+    siteOp j A * xString M (j : ℕ) = xString M (j : ℕ) * siteOp j A := by
+  -- 人手の添字 `finIndexToZZ M j` は `ι_{ℕ→ℤ}(M)` 以下（全単射の補題の値の範囲）なので、前に掛かる `σ^x` の個数 `j.val` は `M` 以下
+  have hjM : (j : ℕ) ≤ M := Nat.le_of_lt ((finIndexToZZ_le_inclusion_iff_val_lt M j M).1
+    ((finIndexToZZ_bijective_onto_index_set M).2.1 j).2)
+  exact commute_xString_of_commute_sigmaX (siteOp j A) (j : ℕ) hjM
+    (fun i hi => siteOp_mul_comm
+      (fun he => absurd (congrArg (finIndexToZZ M) he)
+        (ne_of_gt ((finIndexToZZ_lt_iff_val_lt M _ j).2 hi))) A pauliX)
+                                                          -- `distinct_site_pauli_matrices_commute`（人手のサイト `i+1 < j+1` なので相異なる）
 
 /-- 人手の「`σ_r^x⋯σ_1^x = σ_1^x⋯σ_r^x`」（人手の添字）: `distinct_site_pauli_matrices_commute`（Lean のサイト `r` と `i < r`。人手のサイト `r+1` と `i+1 ≤ r`）の反復適用（`r` の帰納法）。 -/
 theorem revSiteProduct_sigmaX_eq_xString : ∀ r : ℕ, r ≤ M →
@@ -268,23 +273,28 @@ theorem revSiteProduct_sigmaX_eq_xString : ∀ r : ℕ, r ≤ M →
           rw [revSiteProduct_sigmaX_eq_xString r (Nat.le_of_succ_le h)]     -- 帰納法の仮定
       _ = xString M r * sigmaX ⟨r, h⟩ :=
           commute_xString_of_commute_sigmaX (sigmaX ⟨r, h⟩) r (Nat.le_of_succ_le h)
-            (fun i hi => siteOp_mul_comm (Fin.ne_of_val_ne (by simp only; omega)) pauliX pauliX)
-                                                          -- `distinct_site_pauli_matrices_commute`（Lean のサイト `r ≠ i`）
+            (fun i hi => siteOp_mul_comm
+              (fun he => absurd (congrArg (finIndexToZZ M) he)
+                (ne_of_gt ((finIndexToZZ_lt_iff_val_lt M _ ⟨r, h⟩).2 hi))) pauliX pauliX)
+                                                          -- `distinct_site_pauli_matrices_commute`（人手のサイト `i+1 < r+1` なので相異なる）
       _ = xString M (r + 1) := (xString_succ r h).symm                       -- `P_{r+1} = P_rσ_{r+1}^x`
 
 /-- **人手 `check_number_operator_is_hermitian` の (1) の `Z_j^*` の 5 行の鎖**（第 `j` サイトの因子 `A` と `(σ_j^A)^* = σ_j^A` について。
 `Z_j` は `A → σ^z`、`Y_j` は `A → σ^y`）。 -/
 theorem jw_conjTranspose_of_siteOp_conjTranspose_eq (j : Fin M) {A : Matrix (Fin 2) (Fin 2) ℂ}
     (hA : (siteOp j A)ᴴ = siteOp j A) :
-    (xString M (j : ℕ) * siteOp j A)ᴴ = xString M (j : ℕ) * siteOp j A :=
+    (xString M (j : ℕ) * siteOp j A)ᴴ = xString M (j : ℕ) * siteOp j A := by
+  -- 人手の添字 `finIndexToZZ M j` は `ι_{ℕ→ℤ}(M)` 以下（全単射の補題の値の範囲）なので、前に掛かる `σ^x` の個数 `j.val` は `M` 以下
+  have hjM : (j : ℕ) ≤ M := Nat.le_of_lt ((finIndexToZZ_le_inclusion_iff_val_lt M j M).1
+    ((finIndexToZZ_bijective_onto_index_set M).2.1 j).2)
   calc (xString M (j : ℕ) * siteOp j A)ᴴ
       = (siteOp j A)ᴴ * revSiteProduct (fun i => (sigmaXAt M i)ᴴ) (j : ℕ) := by
-        rw [conjTranspose_mul_tensorPow, xString_conjTranspose (j : ℕ) (Nat.le_of_lt j.isLt)]
+        rw [conjTranspose_mul_tensorPow, xString_conjTranspose (j : ℕ) hjM]
                                                           -- `star_preserves_norm_and_limits` (1) の `(XW)^* = W^*X^*` の反復適用
     _ = siteOp j A * revSiteProduct (sigmaXAt M) (j : ℕ) := by
-        rw [hA, revSiteProduct_sigmaXAt_conjTranspose (j : ℕ) (Nat.le_of_lt j.isLt)]   -- `(σ_k^a)^* = σ_k^a`
+        rw [hA, revSiteProduct_sigmaXAt_conjTranspose (j : ℕ) hjM]   -- `(σ_k^a)^* = σ_k^a`
     _ = xString M (j : ℕ) * siteOp j A := by
-        rw [revSiteProduct_sigmaX_eq_xString (j : ℕ) (Nat.le_of_lt j.isLt), siteOp_mul_xString]
+        rw [revSiteProduct_sigmaX_eq_xString (j : ℕ) hjM, siteOp_mul_xString]
                                                           -- `distinct_site_pauli_matrices_commute` の反復適用
 
 /-- **人手 `check_number_operator_is_hermitian` の (1) の `Z_j^* = Z_j`**。 -/

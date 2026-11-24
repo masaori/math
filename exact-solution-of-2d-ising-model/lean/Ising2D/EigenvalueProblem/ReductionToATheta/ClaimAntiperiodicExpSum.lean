@@ -232,10 +232,11 @@ theorem expPhase_sum_zero_based (hM : M ≠ 0) (k : ℤ) :
     ∑ μ : Fin M, expPhase M (((μ : ℕ) : ℤ) * k) = (M : ℂ) * deltaMod M k 0 := by
   have hterm : ∀ μ : Fin M,
       expPhase M (((μ : ℕ) : ℤ) * k)
-        = expPhase M ((((μ : ℕ) : ℤ) + 1) * k) * expPhase M (-k) := by
+        = expPhase M (finIndexToZZ M μ * k) * expPhase M (-k) := by
     intro μ
     rw [← expPhase_add]
     congr 1
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
     ring
   rw [Finset.sum_congr rfl fun μ _ => hterm μ, ← Finset.sum_mul, expPhase_sum hM]
   by_cases hd : (M : ℤ) ∣ k
@@ -343,12 +344,16 @@ theorem antiperiodic_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
               congr 1
       _ = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 := by
             have h := expPhase_sum h2M (-k)
+            -- `exp_sum` の和の添字は人手の添字 `finIndexToZZ` の像。ここの和は Lean の添字の値に 1 を足した形で書くので、像を値へ戻す
+            simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
             rw [deltaMod, sub_zero] at h ⊢
             simpa only [dvd_neg] using h
   have hMsum :
       ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) =
         (M : ℂ) * deltaMod M k 0 := by
     have h := expPhase_sum hM (-k)
+    -- `exp_sum` の和の添字は人手の添字 `finIndexToZZ` の像。ここの和は Lean の添字の値に 1 を足した形で書くので、像を値へ戻す
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
     rw [deltaMod, sub_zero] at h ⊢
     simpa only [dvd_neg] using h
   calc

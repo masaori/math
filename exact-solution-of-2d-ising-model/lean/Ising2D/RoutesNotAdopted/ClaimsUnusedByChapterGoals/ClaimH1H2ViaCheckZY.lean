@@ -36,6 +36,14 @@ namespace Ising2D
 
 variable {M : ℕ}
 
+/-- 本文から退避した経路の記録の中だけで使う読み替え: `dvd_sub_iff_eq` の人手の添字の差を、Lean の添字の値の差へ戻した形。 -/
+private theorem dvd_sub_iff_eq_valInH1H2ViaCheckZY {M : ℕ} (j m : Fin M) :
+    ((M : ℤ) ∣ ((j : ℕ) : ℤ) - ((m : ℕ) : ℤ)) ↔ j = m := by
+  have h := dvd_sub_iff_eq j m
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, add_sub_add_right_eq_sub] at h
+  exact h
+
+
 /-- **境界の符号が反周期性から出ることの中身**:
 
   `e^{-i(k₁ - nextSite(k₁) + 1)θ~} = (k₁ が最終サイトなら -1、そうでなければ 1)`
@@ -91,7 +99,7 @@ theorem H2_eq_check_sum (hM : M ≠ 0) :
     rw [Finset.sum_eq_single_of_mem k₁ (Finset.mem_univ _)]
     · rw [sub_self, deltaMod, sub_zero, if_pos (dvd_zero _), mul_one, expPhase_zero, one_mul]
     · intro k₂ _ hk₂
-      rw [deltaMod, sub_zero, if_neg (fun hd => hk₂ ((dvd_sub_iff_eq k₂ k₁).1 hd)),
+      rw [deltaMod, sub_zero, if_neg (fun hd => hk₂ ((dvd_sub_iff_eq_valInH1H2ViaCheckZY k₂ k₁).1 hd)),
         mul_zero, mul_zero, zero_smul]
   symm
   rw [Finset.sum_congr rfl fun μ _ => hterm μ, Finset.sum_comm,
