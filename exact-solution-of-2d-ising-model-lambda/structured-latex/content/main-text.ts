@@ -78275,7 +78275,7 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 \frac{(ka)^2}{L^2}+\frac{L^2-(ka)^2}{L^2}
 &=\frac{L^2}{L^2}
-&&(\because\ \mathbb{Q}\text{ の四則。分母が同じ分数の和})\\
+&&(\because\ \mathbb{Q}\text{ の四則、分母が同じ分数の和})\\
 &=1
 &&(\because\ L^2\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
