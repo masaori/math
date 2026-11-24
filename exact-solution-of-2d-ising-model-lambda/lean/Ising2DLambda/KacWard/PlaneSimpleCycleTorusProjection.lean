@@ -41,18 +41,35 @@ theorem planeUnitPathTorusProjection_endpoints (L n : ℕ) [NeZero L]
   have h := projectedUnitStep_endpoints L p (q - p) hunit
   simpa [planeUnitPathTorusProjection, p, q, add_sub_cancel_left] using h
 
-/-- 四方向の場合分けで、反転した射影辺の歩ベクトルを復元する。 -/
+/-- 本文「一歩の逆向きの射影は反転である」。四方向の場合ごとに、対になる場合の値を計算する。 -/
+private theorem projectedUnitStep_reversal (L : ℕ) [NeZero L] (p u : ℤ × ℤ)
+    (hu : u = (0, 1) ∨ u = (1, 0) ∨ u = (0, -1) ∨ u = (-1, 0)) :
+    reversal (projectedUnitStep L p u) = projectedUnitStep L (p + u) (-u) := by
+  rcases hu with rfl | rfl | rfl | rfl <;>
+    simp [projectedUnitStep, reversal, Prod.ext_iff]
+
+/-- 本文「同じ点から出る一歩の射影は差を復元する」。四つの場合の値は
+（横か縦か、向き）の組が相異なり、方向番号がその組を読み分ける。 -/
+private theorem projectedUnitStep_direction_injective (L : ℕ) [NeZero L] (q v w : ℤ × ℤ)
+    (hv : v = (0, 1) ∨ v = (1, 0) ∨ v = (0, -1) ∨ v = (-1, 0))
+    (hw : w = (0, 1) ∨ w = (1, 0) ∨ w = (0, -1) ∨ w = (-1, 0))
+    (h : projectedUnitStep L q v = projectedUnitStep L q w) : v = w := by
+  have hd := congrArg directionNumber h
+  rw [projectedUnitStep_direction, projectedUnitStep_direction] at hd
+  rcases hv with rfl | rfl | rfl | rfl <;>
+    rcases hw with rfl | rfl | rfl | rfl <;>
+    norm_num [unitStepDirection] at hd ⊢ <;> (revert hd; decide)
+
+/-- 反転した射影辺の歩ベクトルを、上の二つで復元する。 -/
 private theorem projectedUnitStep_reverse_vector (L : ℕ) [NeZero L]
-    (p q u v : ℤ × ℤ)
+    (p q u v : ℤ × ℤ) (hq : q = p + u)
     (hu : u = (0, 1) ∨ u = (1, 0) ∨ u = (0, -1) ∨ u = (-1, 0))
     (hv : v = (0, 1) ∨ v = (1, 0) ∨ v = (0, -1) ∨ v = (-1, 0))
     (h : projectedUnitStep L q v = reversal (projectedUnitStep L p u)) : v = -u := by
-  have hd := congrArg directionNumber h
-  rw [projectedUnitStep_direction, directionNumber_reversal,
-    projectedUnitStep_direction] at hd
-  rcases hu with rfl | rfl | rfl | rfl <;>
-    rcases hv with rfl | rfl | rfl | rfl <;>
-    norm_num [unitStepDirection] at hd ⊢ <;> (revert hd; decide)
+  rw [projectedUnitStep_reversal L p u hu, ← hq] at h
+  have hneg : -u = (0, 1) ∨ -u = (1, 0) ∨ -u = (0, -1) ∨ -u = (-1, 0) := by
+    rcases hu with rfl | rfl | rfl | rfl <;> simp
+  exact projectedUnitStep_direction_injective L q v (-u) hv hneg h
 
 /-- 頂点単純な閉単位格子路の実際の射影は、巡回接続し反転しない。 -/
 theorem planeSimpleCycleProjection_actual_nonbacktracking
@@ -93,7 +110,7 @@ theorem planeSimpleCycleProjection_actual_nonbacktracking
     exact (hend i).2.trans (hend (i + 1)).1.symm
   · intro i hback
     have hvec := projectedUnitStep_reverse_vector L (W i) (W (i + 1))
-      (W (i + 1) - W i) (W (i + 1 + 1) - W (i + 1))
+      (W (i + 1) - W i) (W (i + 1 + 1) - W (i + 1)) (by abel)
       (hunit i) (hunit (i + 1)) hback
     have hpoint : W (i + 1 + 1) = W i := by
       calc

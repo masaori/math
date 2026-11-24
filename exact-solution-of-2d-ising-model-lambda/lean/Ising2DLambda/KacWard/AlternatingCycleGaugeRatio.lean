@@ -15,12 +15,21 @@ namespace Ising2DLambda.KacWard
 open Ising2DLambda.AlgebraicEigenvalue
 open scoped BigOperators
 
-/-- 本文の v_e = u_e⁻¹。対角変換の両側逆行列の成分の等式（九等号）から得る。 -/
-lemma diagonalGaugeInverseWeight_eq_inv {L : ℕ} (z : Qbar) (hz : z ≠ 0)
+/-- 本文の v_e = u_e⁻¹。claim_diagonal_gauge_inverse の UV = I の (e,e) 成分から得る。 -/
+lemma diagonalGaugeInverseWeight_eq_inv {L : ℕ} (z : Qbar) (hz : z ^ (4 : ℕ) = -1)
     (s : SpinStructure) (e : OrientedEdge L) :
-    diagonalGaugeInverseWeight z s e = (diagonalGaugeWeight z s e)⁻¹ :=
-  eq_inv_of_mul_eq_one_right
-    (diagonalGauge_powerPair_cancel z hz (directionGaugeExponent e) (twistGaugeExponent s e))
+    diagonalGaugeInverseWeight z s e = (diagonalGaugeWeight z s e)⁻¹ := by
+  have h := congrFun (congrFun (diagonalGauge_mul_inverse L z hz s).1 e) e
+  have hentry : (diagonalGauge L z s * diagonalGaugeInverse L z s) e e =
+      diagonalGaugeWeight z s e * diagonalGaugeInverseWeight z s e := by
+    rw [Matrix.mul_apply, Finset.sum_eq_single e]
+    · simp [diagonalGauge, diagonalGaugeInverse]
+    · intro g _ hg
+      simp [diagonalGauge, hg]
+    · intro he
+      exact absurd (Finset.mem_univ e) he
+  rw [hentry, Matrix.one_apply_eq] at h
+  exact eq_inv_of_mul_eq_one_right h
 
 /-- u_e は零でない。 -/
 lemma diagonalGaugeWeight_ne_zero {L : ℕ} (z : Qbar) (hz : z ≠ 0)
@@ -117,7 +126,7 @@ theorem alternating_cycle_gauge_ratio_quotient {L : ℕ} (z : Qbar) (hz : z ^ (4
       refine Finset.prod_congr rfl fun r _ => ?_
       have hu := diagonalGaugeWeight_ne_zero z hnz s (γ r)
       have hu' := diagonalGaugeWeight_ne_zero z hnz s (reversal (γ r))
-      simp only [v, u, diagonalGaugeInverseWeight_eq_inv z hnz]
+      simp only [v, u, diagonalGaugeInverseWeight_eq_inv z hz]
       field_simp
     _ = ∏ _r : Fin (m + 1), (-1 : Qbar) := by
       refine Finset.prod_congr rfl fun r _ => ?_

@@ -89780,6 +89780,12 @@ E(G_S)
                         ],
                         proof: [
                           paragraph([
+                            "任意の ", math(String.raw`e\in\widetilde{\mathcal E}_{\square}(S)`), " について、",
+                            math(String.raw`\operatorname{end}_{\square}(e)`), " の二点は ",
+                            math(String.raw`\mathcal V_{\square}(S)`), " に属する（",
+                            ref("claim_cell_edge_endpoints_belong_to_cell_vertices"), "）ので、",
+                            math(String.raw`\theta_S(e)`), " は ", math(String.raw`G_S`),
+                            " の頂点の二元集合である。",
                             "任意の ", math(String.raw`e,f\in\widetilde{\mathcal E}_{\square}(S)`),
                             " について ", math(String.raw`\theta_S(e)=\theta_S(f)`),
                             " と仮定する。",
@@ -89834,7 +89840,9 @@ e&=f
                           paragraph([
                             math(String.raw`\theta_S(e)`), " は ", math(String.raw`\operatorname{end}_{\square}(e)`),
                             " の両端点を ", math(String.raw`\mathcal V_{\square}(S)`),
-                            " の元として記した二元集合である（", ref("claim_cell_graph_edge_bijection"), "）。",
+                            " の元として記した二元集合である（", ref("claim_cell_graph_edge_bijection"), "。両端点が ",
+                            math(String.raw`\mathcal V_{\square}(S)`), " に属することは ",
+                            ref("claim_cell_edge_endpoints_belong_to_cell_vertices"), "）。",
                             "頂点集合は整数座標の集合の部分集合なので、この二元集合の二点は元の端点と同じである（",
                             ref("def_cell_vertex_set"), "）。",
                           ]),
@@ -91066,7 +91074,10 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                             math(String.raw`u`), " から ", math(String.raw`v`),
                             " への歩道が得られる。各歩道の辺は ",
                             math(String.raw`\mathcal E_{\square}(S)`), " に属する（", ref("def_cell_edge_set"),
-                            "）。重複する頂点の間の閉部分を除くと頂点単純な路になる（",
+                            "）。その両端点は ", math(String.raw`\mathcal V_{\square}(S)`), " に属する（",
+                            ref("claim_cell_edge_endpoints_belong_to_cell_vertices"), "）ので、各辺は ",
+                            math(String.raw`G_S`), " の辺であり、歩道の頂点はすべて ", math(String.raw`\mathcal V_{\square}(S)`),
+                            " に留まる。重複する頂点の間の閉部分を除くと頂点単純な路になる（",
                             ref("def_vertex_simple_path"), "）。", math(String.raw`u,v`),
                             " は任意で頂点集合は空でないので、", ref("def_finite_graph_connected"),
                             " により連結である。",
@@ -91714,7 +91725,14 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                         math(String.raw`-1,0,1`), " になる。内側セルを右に置く向きに巡ると凸頂点の一歩の回転数はすべて ", math(String.raw`1`),
                         "、凹頂点では ", math(String.raw`-1`), "、直進頂点では ", math(String.raw`0`),
                         " である。逆向きに巡ると隣接二歩 ", math(String.raw`(\vec e,\vec f)`), " は ",
-                        math(String.raw`(\iota(\vec f),\iota(\vec e))`), " に替わり、その方向番号の差は",
+                        math(String.raw`(\iota(\vec f),\iota(\vec e))`), " に替わる。これも隣接二歩である: ",
+                        math(String.raw`\operatorname{tgt}(\iota(\vec f))=\operatorname{src}(\vec f)=\operatorname{tgt}(\vec e)=\operatorname{src}(\iota(\vec e))`),
+                        "（", ref("def_edge_reversal"), "、", ref("def_nonbacktracking_successors"), "）であり、",
+                        math(String.raw`\iota(\vec e)=\iota(\iota(\vec f))`), " とすると、",
+                        math(String.raw`\iota(\iota(\vec f))=\vec f`), "（", ref("claim_reversal_is_involution"), "）より ",
+                        math(String.raw`\vec f=\iota(\vec e)`), " となって ", math(String.raw`\vec f\in\operatorname{Next}(\vec e)`),
+                        " に反するので、", math(String.raw`\iota(\vec e)\in\operatorname{Next}(\iota(\vec f))`),
+                        " である。その方向番号の差は",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \operatorname{dir}(\iota(\vec e))-\operatorname{dir}(\iota(\vec f))
@@ -100270,7 +100288,13 @@ c(\gamma)\bmod2
                           math(String.raw`\vec e_{\sigma(r)}`), " とする（", ref("def_edge_reversal"), "）。",
                           "第一に、一つの通過の二半辺は異なる: ", math(String.raw`\vec e_{\sigma(r)}\ne\iota(\vec e_r)`),
                           " は非後退の条件そのものである（", ref("def_nonbacktracking_successors"), "）。",
-                          "第二に、相異なる二つの通過は半辺を共有しない: 共有すれば二つの向き付き辺の台の辺が等しく、",
+                          "第二に、相異なる二つの通過は半辺を共有しない: 共有する半辺が一方の ",
+                          math(String.raw`\iota(\vec e_r)`), " と他方の ", math(String.raw`\vec e_{\sigma(r')}`),
+                          " なら、両辺に ", math(String.raw`\iota`), " を施して ",
+                          math(String.raw`\vec e_r=\iota(\iota(\vec e_r))=\iota(\vec e_{\sigma(r')})`),
+                          "（", ref("claim_reversal_is_involution"), "）となり、二つの向き付き辺 ",
+                          math(String.raw`\vec e_r,\vec e_{\sigma(r')}`), " の台の辺が等しい。",
+                          "共有する半辺が同じ種類どうしでも台の辺が等しい。",
                           "台の辺が相異なるという仮定から二つの添字が等しくなるか、",
                           math(String.raw`\vec e_r=\iota(\vec e_r)`), " の形の矛盾に至る（",
                           ref("claim_edge_simple_contact_split"), " の証明と同じ論法）。",
@@ -100888,13 +100912,13 @@ w_{\iota(\vec e_{r-1}),\vec e_r}
                       paragraph(["積は対の向きを上記の順に固定したものであり、昇順対への向き直しの符号は含めない。辺長一の一歩閉路も含む。実数体と複素数体は使わない。"]),
                     ],
                     proof: [
-                      paragraph(["各 ", math(String.raw`\vec e\in\vec E_L`), " について ", ref("def_diagonal_gauge"), " と ", ref("claim_diagonal_gauge_inverse"), " より ", math(String.raw`v_{\vec e}=u_{\vec e}^{-1}`), " である。", ref("def_twist_parity"), " より反転辺のねじれ偶奇は同じである。", ref("def_oriented_edge_direction"), " と ", ref("def_direction_standard_representative"), " より、反転した方向の代表と元の方向の代表の差は ", math(String.raw`2`), " または ", math(String.raw`-2`), " である。従って各 ", math(String.raw`r\in\mathbb Z/k\mathbb Z`), " で"]),
+                      paragraph(["各 ", math(String.raw`\vec e\in\vec E_L`), " について ", ref("def_diagonal_gauge"), " と ", ref("claim_diagonal_gauge_inverse"), " より ", math(String.raw`v_{\vec e}=u_{\vec e}^{-1}`), " である。", ref("def_twist_parity"), " より反転辺のねじれ偶奇は同じである。", ref("claim_reversal_direction_shift"), " より ", math(String.raw`\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`), " なので、", ref("def_direction_standard_representative"), " の四つの値を比べると、反転した方向の代表と元の方向の代表の差は ", math(String.raw`2`), " または ", math(String.raw`-2`), " である。従って各 ", math(String.raw`r\in\mathbb Z/k\mathbb Z`), " で"]),
                       displayMath(String.raw`\begin{aligned}
 \left(\frac{u_{\vec e_r}}{u_{\iota(\vec e_r)}}\right)^2
 &=\zeta_8^{\,2(r_4(\operatorname{dir}(\iota(\vec e_r)))-r_4(\operatorname{dir}(\vec e_r)))}
 &&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ と反転でのねじれ偶奇の一致}\bigr)\\
 &=\zeta_8^{\,4}\text{ または }\zeta_8^{\,-4}
-&&\bigl(\because\ \blkref{def_oriented_edge_direction}\bigr)\\
+&&\bigl(\because\ \blkref{claim_reversal_direction_shift}\text{ と }\blkref{def_direction_standard_representative}\bigr)\\
 &=-1
 &&\bigl(\because\ \blkref{def_rotation_phase}\text{ と }\zeta_8^{\,-4}=\zeta_8^{\,4}\bigr).
 \end{aligned}`),
@@ -101148,7 +101172,7 @@ M_{D,T}(x)
 &&\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr).
 \end{aligned}`),
                       paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。逆に ", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、", ref("claim_local_pairing_matching_complement_recovery"), " によりその補辺は固定した ", math(String.raw`P`), " に等しい。", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。"]),
-                      paragraph(["対合族 ", math(String.raw`\boldsymbol\kappa`), " から作った項 ", math(String.raw`(D,T)`), " の短い対は、", ref("claim_vertex_port_bijection"), " の全単射で、頂点 ", math(String.raw`v`), " の方向番号 ", math(String.raw`i\in S_v(P)`), " の半辺 ", math(String.raw`\vec e`), " と方向番号 ", math(String.raw`\kappa_v(i)`), " の半辺 ", math(String.raw`\vec f`), " の組である。その通過 ", math(String.raw`\iota(\vec e)\to\vec f`), " が直進するのは ", math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`), " のときである（", ref("claim_reversal_direction_shift"), "）。", ref("def_transverse_crossing"), " により、二つの短い対が横断するのは、始点が等しく、ともに直進し、方向軸が異なるときである。方向番号 ", math(String.raw`I`), " の上の有限の確認により、そのような二つの対が頂点 ", math(String.raw`v`), " にあるのは ", math(String.raw`c_v(\kappa_v)=1`), " のときだけで、そのとき ", math(String.raw`v`), " を始点とする短い対は方向番号 ", math(String.raw`\{0,2\}`), " と ", math(String.raw`\{1,3\}`), " の二つだけであり、この二つは横断する。ゆえに頂点 ", math(String.raw`v`), " を始点とする横断する順序のない対の個数は ", math(String.raw`c_v(\kappa_v)`), " であり、"]),
+                      paragraph(["対合族 ", math(String.raw`\boldsymbol\kappa`), " から作った項 ", math(String.raw`(D,T)`), " の短い対は、", ref("claim_vertex_port_bijection"), " の全単射で、頂点 ", math(String.raw`v`), " の方向番号 ", math(String.raw`i\in S_v(P)`), " の半辺 ", math(String.raw`\vec e`), " と方向番号 ", math(String.raw`\kappa_v(i)`), " の半辺 ", math(String.raw`\vec f`), " の組である。", math(String.raw`\operatorname{tgt}(\iota(\vec e))=\operatorname{src}(\vec e)=\operatorname{src}(\vec f)`), "（", ref("def_edge_reversal"), "）であり、", math(String.raw`\vec f\ne\vec e=\iota(\iota(\vec e))`), "（", ref("claim_reversal_is_involution"), "）なので ", math(String.raw`\vec f\in\operatorname{Next}(\iota(\vec e))`), "（", ref("def_nonbacktracking_successors"), "）である。その通過 ", math(String.raw`\iota(\vec e)\to\vec f`), " が直進するのは ", math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`), " のときである（", ref("claim_reversal_direction_shift"), "）。", ref("def_transverse_crossing"), " により、二つの短い対が横断するのは、始点が等しく、ともに直進し、方向軸が異なるときである。方向番号 ", math(String.raw`I`), " の上の有限の確認により、そのような二つの対が頂点 ", math(String.raw`v`), " にあるのは ", math(String.raw`c_v(\kappa_v)=1`), " のときだけで、そのとき ", math(String.raw`v`), " を始点とする短い対は方向番号 ", math(String.raw`\{0,2\}`), " と ", math(String.raw`\{1,3\}`), " の二つだけであり、この二つは横断する。ゆえに頂点 ", math(String.raw`v`), " を始点とする横断する順序のない対の個数は ", math(String.raw`c_v(\kappa_v)`), " であり、"]),
                       displayMath(String.raw`\begin{aligned}
 t(D,T)
 &=\sum_{v\in V_L}\bigl|\{\text{頂点 }v\text{ を始点とする横断する順序のない対}\}\bigr|
@@ -101235,7 +101259,7 @@ t(D,T)
                     labels: ["claim_edge_set_horizontal_seam_parity_equals_winding_parity"],
                     habitat: "N",
                     verification: ["sagemath/check/edge-set-seam-parity-equals-winding-parity"],
-                    lean: ["Ising2DLambda.KacWard.residueVal_eq_pred_iff", "Ising2DLambda.KacWard.horizontalSeamParity_eq_seamRowSum", "Ising2DLambda.KacWard.edgeSetHorizontalSeamParity_eq_windingParity", "Ising2DLambda.NecSuf.KacWard.line_indicator_sum_eq_line_count", "Ising2DLambda.KacWard.edgeSetHorizontalSeamParity_eq_windingParity_from_necSuf"],
+                    lean: ["Ising2DLambda.KacWard.horizontalSeamParity_eq_seamRowSum", "Ising2DLambda.KacWard.edgeSetHorizontalSeamParity_eq_windingParity", "Ising2DLambda.NecSuf.KacWard.line_indicator_sum_eq_line_count", "Ising2DLambda.KacWard.edgeSetHorizontalSeamParity_eq_windingParity_from_necSuf"],
                     statement: [
                       paragraph(["任意の ", math(String.raw`L\in\mathbb N_{>0}`), " と辺の部分集合 ", math(String.raw`A\subseteq E_L`), " を取る。", ref("def_seam_parities"), " の指示子と ", ref("def_torus_winding_parities"), " の巻き付き偶奇について、", math(String.raw`\mathbb N`), " の等式"]),
                       displayMath(String.raw`\Bigl(\sum_{e\in A}c_{\mathrm h}(e,0)\Bigr)\bmod 2=\varepsilon_{L,\mathrm{h}}(A)`),

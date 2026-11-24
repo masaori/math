@@ -19,7 +19,8 @@ open Finset Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix Ising
 
 variable {L : ℕ} [NeZero L]
 
-/-- 証明の冒頭の同値: `y ∈ ℤ/Lℤ` について `s(y) = L - 1` と `y = π(-1)` は同値である。 -/
+/-- 横・縦の二つの証明の冒頭に本文がそれぞれ書く同値: `y ∈ ℤ/Lℤ` について `s(y) = L - 1` と
+`y = π(-1)` は同値である。どちらの主張にも登録しない補助定理として両方が使う。 -/
 theorem residueVal_eq_pred_iff (y : ZMod L) : y.val = L - 1 ↔ y = -1 := by
   have hL : 0 < L := Nat.pos_of_ne_zero (NeZero.ne L)
   have hlast : L - 1 < L := by omega
