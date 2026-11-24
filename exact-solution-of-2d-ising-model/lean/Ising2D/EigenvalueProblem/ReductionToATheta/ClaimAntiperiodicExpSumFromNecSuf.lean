@@ -281,12 +281,12 @@ theorem checkZ_period_of_necSuf (hM : M ≠ 0) (μ : ℤ) :
     checkZ M (μ + (M : ℤ)) = checkZ M μ := by
   have hζ : IsPrimitiveRoot (expPhase M 1) M := isPrimitiveRoot_expPhase_one hM
   have h := NecSuf.transform_periodic (K := ℂ) (V := TensorPow M) hM hζ
-      (fun j : Fin M => ((j : ℕ) : ℤ) + 1)
-      (fun j : Fin M => expPhase (2 * M) (-(((j : ℕ) : ℤ) + 1)))
+      (fun j : Fin M => finIndexToZZ M j)
+      (fun j : Fin M => expPhase (2 * M) (-(finIndexToZZ M j)))
       (fun j : Fin M => Z j) μ
   have hL : ∀ ν : ℤ, checkZ M ν
-      = ∑ j : Fin M, (expPhase (2 * M) (-(((j : ℕ) : ℤ) + 1)) *
-          (expPhase M 1) ^ ((((j : ℕ) : ℤ) + 1) * ν)) • Z j := by
+      = ∑ j : Fin M, (expPhase (2 * M) (-(finIndexToZZ M j)) *
+          (expPhase M 1) ^ ((finIndexToZZ M j) * ν)) • Z j := by
     intro ν
     rw [checkZ]
     exact Finset.sum_congr rfl fun j _ => by rw [checkPhase_eq_weight_mul hM]
@@ -298,12 +298,12 @@ theorem checkY_period_of_necSuf (hM : M ≠ 0) (μ : ℤ) :
     checkY M (μ + (M : ℤ)) = checkY M μ := by
   have hζ : IsPrimitiveRoot (expPhase M 1) M := isPrimitiveRoot_expPhase_one hM
   have h := NecSuf.transform_periodic (K := ℂ) (V := TensorPow M) hM hζ
-      (fun j : Fin M => ((j : ℕ) : ℤ) + 1)
-      (fun j : Fin M => expPhase (2 * M) (-(((j : ℕ) : ℤ) + 1)))
+      (fun j : Fin M => finIndexToZZ M j)
+      (fun j : Fin M => expPhase (2 * M) (-(finIndexToZZ M j)))
       (fun j : Fin M => Y j) μ
   have hL : ∀ ν : ℤ, checkY M ν
-      = ∑ j : Fin M, (expPhase (2 * M) (-(((j : ℕ) : ℤ) + 1)) *
-          (expPhase M 1) ^ ((((j : ℕ) : ℤ) + 1) * ν)) • Y j := by
+      = ∑ j : Fin M, (expPhase (2 * M) (-(finIndexToZZ M j)) *
+          (expPhase M 1) ^ ((finIndexToZZ M j) * ν)) • Y j := by
     intro ν
     rw [checkY]
     exact Finset.sum_congr rfl fun j _ => by rw [checkPhase_eq_weight_mul hM]

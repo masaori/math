@@ -87,7 +87,8 @@ theorem H2_eq_check_sum (hM : M ≠ 0) :
     refine Finset.sum_congr rfl fun k₁ _ => ?_
     refine Finset.sum_congr rfl fun k₂ _ => ?_
     congr 1
-    simp only [checkPhase]
+    -- `checkZ`・`checkY` の位相の添字は人手の添字の像 `finIndexToZZ M k`。この退避した経路は値で書くので値へ戻す
+    simp only [checkPhase, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
     rw [← expPhase_add]
     congr 1
     ring
@@ -140,7 +141,8 @@ theorem H1Plus_eq_check_sum (hM : M ≠ 0) :
     refine Finset.sum_congr rfl fun k₂ _ => ?_
     rw [smul_smul]
     congr 1
-    simp only [checkPhase]
+    -- `checkZ`・`checkY` の位相の添字は人手の添字の像 `finIndexToZZ M k`。この退避した経路は値で書くので値へ戻す
+    simp only [checkPhase, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
     rw [← expPhase_add, ← expPhase_add]
     congr 1
     ring

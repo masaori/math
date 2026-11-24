@@ -23,7 +23,7 @@
 に対する一般形（`inverse_dft_check`）を証明し、それを `Z`, `Y` に適用する。
 `inverse_dft_check` は人手の第 1 式の鎖のうち、`c = (M_col)_ℂ^{-1}` を掛ける前の部分（`def_half_integer_checkZ` で開いた後から
 `antiperiodic_exp_sum` の「とくに」を整数 `0` で当てるまで）と 1 行ずつ対応する `calc` で書く。人手の `j`・`k` は Lean の
-`m`・`j` で、人手の `j_ℤ` は Lean の `((m : ℕ) : ℤ) + 1` である。最初の行（`def_half_integer_checkZ`・`def_half_integer_checkY`
+`m`・`j` で、人手の `j_ℤ` は Lean の `m` の像 `finIndexToZZ M m`（`def_index_set_from_one_to_n`）、人手の `μ_ℤ` は和の添字 `μ : Fin M` の像 `finIndexToZZ M μ` である。最初の行（`def_half_integer_checkZ`・`def_half_integer_checkY`
 で開く行）は `recover_checkZ`・`recover_checkY` の `simp_rw [checkZ]`・`simp_rw [checkY]` が、最後の 3 行（`scalar_multiple_is_associative`、
 `c` は逆元、`scalar_multiple_by_one`）は `Z_eq_inverse_dft_check`・`Y_eq_inverse_dft_check` が受け持つ。
 
@@ -101,29 +101,28 @@ theorem exp_I_mul_int_mul_real (n : ℤ) (x : ℝ) :
   rw [← real_inclusion_mul, Complex.ofReal_intCast, mul_assoc]
 
 /-- **準備 1**（`k ≠ j` の項）: `(∑_{μ=1}^{N} exp(i((j_ℤ - k_ℤ)_ℝ θ~_μ)_ℂ)) A = O`。
-`j, k ∈ Fin M` は人手の `j - 1, k - 1` で、人手の `j_ℤ` は `((j : ℕ) : ℤ) + 1`。
+`j, k ∈ Fin M` に当たる人手の `j_ℤ`・`k_ℤ` は像 `finIndexToZZ M j`・`finIndexToZZ M k`（`def_index_set_from_one_to_n`）。
 `k ≠ j` なら `j_ℤ - k_ℤ ≠ 0` かつ `|j_ℤ - k_ℤ| ≤ M_col - 1 < M_col` なので、`antiperiodic_exp_sum` の「とくに」
 （`antiperiodic_complex_exp_sum_nonzero_of_abs_lt`）で和は `0_ℂ`、`zero_scalar_multiple_is_zero_matrix` で `O`。 -/
 theorem recover_off_diagonal_term (hM : M ≠ 0) {j k : Fin M} (hkj : k ≠ j) (A : TensorPow M) :
     (∑ μ : Fin M, Complex.exp (Complex.I
-        * ((((((j : ℕ) : ℤ) + 1 - (((k : ℕ) : ℤ) + 1) : ℤ) : ℝ)
-          * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ))) • A = 0 := by
-  have hval : (k : ℕ) ≠ (j : ℕ) := fun h => hkj (Fin.ext h)
-  have hj := j.isLt
-  have hk := k.isLt
-  have hne : (((j : ℕ) : ℤ) + 1 - (((k : ℕ) : ℤ) + 1)) ≠ 0 := by omega
-  have habs : |(((j : ℕ) : ℤ) + 1 - (((k : ℕ) : ℤ) + 1))| < (M : ℤ) :=
+        * ((((finIndexToZZ M j - finIndexToZZ M k : ℤ) : ℝ)
+          * thetaTilde M (finIndexToZZ M μ) : ℝ) : ℂ))) • A = 0 := by
+  -- 人手の `j_ℤ, k_ℤ ∈ {1,…,M_col}` は像 `finIndexToZZ M j`・`finIndexToZZ M k`（`def_index_set_from_one_to_n`）。
+  -- `k ≠ j` から像が異なること（単射）、像が `1_ℤ` 以上 `ι_{ℕ→ℤ}(M)` 以下であること（値の範囲）を全単射の補題から取る
+  have hinj := (finIndexToZZ_bijective_onto_index_set M).1
+  have hj := (finIndexToZZ_bijective_onto_index_set M).2.1 j
+  have hk := (finIndexToZZ_bijective_onto_index_set M).2.1 k
+  rw [inclusionNNtoZZ_eq_natCast] at hj hk
+  have hne : finIndexToZZ M j - finIndexToZZ M k ≠ 0 := fun h => hkj (hinj k j (by omega))
+  have habs : |finIndexToZZ M j - finIndexToZZ M k| < (M : ℤ) :=
     abs_lt.mpr ⟨by omega, by omega⟩
   calc (∑ μ : Fin M, Complex.exp (Complex.I
-          * ((((((j : ℕ) : ℤ) + 1 - (((k : ℕ) : ℤ) + 1) : ℤ) : ℝ)
-            * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ))) • A
+          * ((((finIndexToZZ M j - finIndexToZZ M k : ℤ) : ℝ)
+            * thetaTilde M (finIndexToZZ M μ) : ℝ) : ℂ))) • A
       = (0 : ℂ) • A := by
         simp_rw [exp_I_mul_int_mul_real]
-        -- `antiperiodic_exp_sum` の具体版の和の添字は人手の添字の像 `finIndexToZZ M μ`。ここの和は `checkZ`・`checkY` の位相の添字と同じく
-        -- Lean の添字の値に 1 を足した形で書くので、像を値へ戻す（Lean だけの段）
-        have h := antiperiodic_complex_exp_sum_nonzero_of_abs_lt hM habs hne
-        simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
-        rw [h]
+        rw [antiperiodic_complex_exp_sum_nonzero_of_abs_lt hM habs hne]
                                 -- `antiperiodic_exp_sum` の「とくに」を `0 < |j_ℤ - k_ℤ| < M_col` の整数で
     _ = 0 := zero_smul _ A      -- `zero_scalar_multiple_is_zero_matrix`
 
@@ -135,82 +134,78 @@ theorem recover_off_diagonal_term (hM : M ≠ 0) {j k : Fin M} (hkj : k ≠ j) (
 
 人手の第 1 式の 2 行目から `antiperiodic_exp_sum` の「とくに」を整数 `0` で当てる行までと 1 段ずつ対応する。 -/
 theorem inverse_dft_check (hM : M ≠ 0) (x : Fin M → TensorPow M) (m : Fin M) :
-    ∑ μ : Fin M, checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) •
-        (∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) (((μ : ℕ) : ℤ) + 1) • x j)
+    ∑ μ : Fin M, checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) •
+        (∑ j : Fin M, checkPhase M (finIndexToZZ M j) (finIndexToZZ M μ) • x j)
       = (M : ℂ) • x m :=
-  calc ∑ μ : Fin M, checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) •
-        (∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) (((μ : ℕ) : ℤ) + 1) • x j)
+  calc ∑ μ : Fin M, checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) •
+        (∑ j : Fin M, checkPhase M (finIndexToZZ M j) (finIndexToZZ M μ) • x j)
       -- (∵ finite_sum_of_scalar_multiples を右辺から左辺へ、各 μ へ同時適用)
-      = ∑ μ : Fin M, ∑ j : Fin M, checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) •
-          (checkPhase M (((j : ℕ) : ℤ) + 1) (((μ : ℕ) : ℤ) + 1) • x j) := by
+      = ∑ μ : Fin M, ∑ j : Fin M, checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) •
+          (checkPhase M (finIndexToZZ M j) (finIndexToZZ M μ) • x j) := by
         simp_rw [Finset.smul_sum]
       -- (∵ scalar_multiple_is_associative を N^2 個の項へ同時適用)
-    _ = ∑ μ : Fin M, ∑ j : Fin M, (checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1)
-          * checkPhase M (((j : ℕ) : ℤ) + 1) (((μ : ℕ) : ℤ) + 1)) • x j := by
+    _ = ∑ μ : Fin M, ∑ j : Fin M, (checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ)
+          * checkPhase M (finIndexToZZ M j) (finIndexToZZ M μ)) • x j := by
         simp_rw [smul_smul]
       -- (∵ finite_double_sum_of_matrices_interchange (r = s = N))
-    _ = ∑ j : Fin M, ∑ μ : Fin M, (checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1)
-          * checkPhase M (((j : ℕ) : ℤ) + 1) (((μ : ℕ) : ℤ) + 1)) • x j :=
+    _ = ∑ j : Fin M, ∑ μ : Fin M, (checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ)
+          * checkPhase M (finIndexToZZ M j) (finIndexToZZ M μ)) • x j :=
         Finset.sum_comm
       -- (∵ finite_sum_of_scalar_multiples_of_one_matrix を各 k へ同時適用)
-    _ = ∑ j : Fin M, (∑ μ : Fin M, checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1)
-          * checkPhase M (((j : ℕ) : ℤ) + 1) (((μ : ℕ) : ℤ) + 1)) • x j := by
+    _ = ∑ j : Fin M, (∑ μ : Fin M, checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ)
+          * checkPhase M (finIndexToZZ M j) (finIndexToZZ M μ)) • x j := by
         simp_rw [Finset.sum_smul]
       -- （読み）checkPhase M (-j) λ は f_{j,λ}、checkPhase M k λ は e_{k,λ}
     _ = ∑ j : Fin M, (∑ μ : Fin M,
-          Complex.exp (Complex.I * ((((((m : ℕ) : ℤ) + 1 : ℤ) : ℝ)
-            * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ))
-          * Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ)
-            * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ))) • x j := by
+          Complex.exp (Complex.I * ((((finIndexToZZ M m : ℤ) : ℝ)
+            * thetaTilde M (finIndexToZZ M μ) : ℝ) : ℂ))
+          * Complex.exp ((-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ)
+            * thetaTilde M (finIndexToZZ M μ) : ℝ) : ℂ))) • x j := by
         simp_rw [checkPhase_neg_eq_exp_I_mul hM, checkPhase_eq_exp_neg_I_mul hM]
       -- (∵ scalar_exp_product を K = ℂ で N^2 個の項へ同時適用。Lean は mathlib の Complex.exp_add)
     _ = ∑ j : Fin M, (∑ μ : Fin M,
-          Complex.exp (Complex.I * ((((((m : ℕ) : ℤ) + 1 : ℤ) : ℝ)
-            * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ)
-          + (-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ)
-            * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ))) • x j := by
+          Complex.exp (Complex.I * ((((finIndexToZZ M m : ℤ) : ℝ)
+            * thetaTilde M (finIndexToZZ M μ) : ℝ) : ℂ)
+          + (-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ)
+            * thetaTilde M (finIndexToZZ M μ) : ℝ) : ℂ))) • x j := by
         simp_rw [← Complex.exp_add]
       -- (∵ 準備 2 の複素数の鎖を全ての (k, μ) へ同時適用)
     _ = ∑ j : Fin M, (∑ μ : Fin M,
-          Complex.exp (Complex.I * ((((((m : ℕ) : ℤ) + 1 - (((j : ℕ) : ℤ) + 1) : ℤ) : ℝ)
-            * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ))) • x j := by
+          Complex.exp (Complex.I * ((((finIndexToZZ M m - finIndexToZZ M j : ℤ) : ℝ)
+            * thetaTilde M (finIndexToZZ M μ) : ℝ) : ℂ))) • x j := by
         refine Finset.sum_congr rfl fun j _ => ?_
         congr 1
         refine Finset.sum_congr rfl fun μ _ => ?_
         rw [recover_exponent_complex_chain (recover_exponent_real_chain _ _ _)]
       -- (∵ finite_sum_of_matrices_with_single_nonzero_term (q = j)。k ≠ j の項は準備 1 の鎖で O)
     _ = (∑ μ : Fin M,
-          Complex.exp (Complex.I * ((((((m : ℕ) : ℤ) + 1 - (((m : ℕ) : ℤ) + 1) : ℤ) : ℝ)
-            * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ))) • x m := by
+          Complex.exp (Complex.I * ((((finIndexToZZ M m - finIndexToZZ M m : ℤ) : ℝ)
+            * thetaTilde M (finIndexToZZ M μ) : ℝ) : ℂ))) • x m := by
         rw [Finset.sum_eq_single_of_mem m (Finset.mem_univ m)]
         intro j _ hj
         exact recover_off_diagonal_term hM hj (x j)
       -- (∵ ℤ で j_ℤ - j_ℤ = 0)
     _ = (∑ μ : Fin M,
           Complex.exp (Complex.I * ((((0 : ℤ) : ℝ)
-            * thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℝ) : ℂ))) • x m := by
+            * thetaTilde M (finIndexToZZ M μ) : ℝ) : ℂ))) • x m := by
         rw [sub_self]
       -- (∵ antiperiodic_exp_sum の「とくに」を整数 0 で。和を Lean の形へ読む段を含む)
     _ = (M : ℂ) • x m := by
         simp_rw [exp_I_mul_int_mul_real]
-        -- `antiperiodic_exp_sum` の具体版の和の添字は人手の添字の像 `finIndexToZZ M μ`。ここの和は Lean の添字の値に 1 を足した形なので、
-        -- 像を値へ戻す（Lean だけの段）
-        have h := antiperiodic_complex_exp_sum_zero hM
-        simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
-        rw [Int.cast_zero, h]
+        rw [Int.cast_zero, antiperiodic_complex_exp_sum_zero hM]
 
 /-- **原文第 1 式（分母を払った形）**: `∑_{μ=1}^{M} check(Z)_μ e^{ij θ~_μ} = M Z_j`。 -/
 theorem recover_checkZ (hM : M ≠ 0) (m : Fin M) :
-    ∑ μ : Fin M, checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) •
-        checkZ M (((μ : ℕ) : ℤ) + 1)
+    ∑ μ : Fin M, checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) •
+        checkZ M (finIndexToZZ M μ)
       = (M : ℂ) • Z m := by
   simp_rw [checkZ]
   exact inverse_dft_check hM Z m
 
 /-- **原文第 2 式（分母を払った形）**: `∑_{μ=1}^{M} check(Y)_μ e^{ij θ~_μ} = M Y_j`。 -/
 theorem recover_checkY (hM : M ≠ 0) (m : Fin M) :
-    ∑ μ : Fin M, checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) •
-        checkY M (((μ : ℕ) : ℤ) + 1)
+    ∑ μ : Fin M, checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) •
+        checkY M (finIndexToZZ M μ)
       = (M : ℂ) • Y m := by
   simp_rw [checkY]
   exact inverse_dft_check hM Y m
@@ -218,13 +213,13 @@ theorem recover_checkY (hM : M ≠ 0) (m : Fin M) :
 /-- **原文第 1 式**: `Z_j = (1/M) ∑_{μ=1}^{M} check(Z)_μ e^{ij θ~_μ}`。 -/
 theorem Z_eq_inverse_dft_check (hM : M ≠ 0) (m : Fin M) :
     Z m = ((M : ℂ))⁻¹ • ∑ μ : Fin M,
-      checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) • checkZ M (((μ : ℕ) : ℤ) + 1) := by
+      checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) • checkZ M (finIndexToZZ M μ) := by
   rw [recover_checkZ hM, smul_smul, inv_mul_cancel₀ (Nat.cast_ne_zero.2 hM), one_smul]
 
 /-- **原文第 2 式**: `Y_j = (1/M) ∑_{μ=1}^{M} check(Y)_μ e^{ij θ~_μ}`。 -/
 theorem Y_eq_inverse_dft_check (hM : M ≠ 0) (m : Fin M) :
     Y m = ((M : ℂ))⁻¹ • ∑ μ : Fin M,
-      checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) • checkY M (((μ : ℕ) : ℤ) + 1) := by
+      checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) • checkY M (finIndexToZZ M μ) := by
   rw [recover_checkY hM, smul_smul, inv_mul_cancel₀ (Nat.cast_ne_zero.2 hM), one_smul]
 
 /-! ## 生成性 -/
@@ -234,13 +229,18 @@ noncomputable def checkZYSet (M : ℕ) : Set (TensorPow M) :=
   (Set.range fun μ : Fin M => checkZ M (((μ : ℕ) : ℤ) + 1)) ∪
     (Set.range fun μ : Fin M => checkY M (((μ : ℕ) : ℤ) + 1))
 
+/-- 人手の `check(Z)_{μ_ℤ}`（`μ_ℤ` は和の添字 `μ : Fin M` の像 `finIndexToZZ M μ`）は生成系 `checkZYSet M` の生成する代数に入る。
+`checkZYSet` の添字は `checkIdx`（`DefinitionCheckVprime.lean`）と同じく値に 1 を足した形なので、像を値へ戻す（Lean だけの段）。 -/
 theorem checkZ_mem_adjoin (μ : Fin M) :
-    checkZ M (((μ : ℕ) : ℤ) + 1) ∈ Algebra.adjoin ℂ (checkZYSet M) :=
-  Algebra.subset_adjoin (Or.inl ⟨μ, rfl⟩)
+    checkZ M (finIndexToZZ M μ) ∈ Algebra.adjoin ℂ (checkZYSet M) := by
+  rw [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+  exact Algebra.subset_adjoin (Or.inl ⟨μ, rfl⟩)
 
+/-- 人手の `check(Y)_μ` について、`checkZ_mem_adjoin` と同じ。 -/
 theorem checkY_mem_adjoin (μ : Fin M) :
-    checkY M (((μ : ℕ) : ℤ) + 1) ∈ Algebra.adjoin ℂ (checkZYSet M) :=
-  Algebra.subset_adjoin (Or.inr ⟨μ, rfl⟩)
+    checkY M (finIndexToZZ M μ) ∈ Algebra.adjoin ℂ (checkZYSet M) := by
+  rw [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+  exact Algebra.subset_adjoin (Or.inr ⟨μ, rfl⟩)
 
 /-- **原文の「とくに」**: `check(Z), check(Y)` は `Mat(2^M, ℂ)` を単位的 `ℂ` 代数として生成する。
 

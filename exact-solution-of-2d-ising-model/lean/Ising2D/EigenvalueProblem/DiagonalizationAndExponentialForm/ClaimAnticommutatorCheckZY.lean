@@ -29,8 +29,7 @@
   `checkPhase M j λ` を人手の `e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ)` と読む段（`checkPhase_eq_exp_neg_I_mul`。`ReductionToATheta/DefinitionHalfIntegerModes.lean`）と、
   `exp_sum` の Lean の形 `expPhase_sum`（`exp(-√-1·2π jk/M)` の和）を人手の読み
   「左辺の指数 `2πijκ/N` は `i(y_j)_ℂ`」の形に直した `exp_sum_as_I_mul_real`（`k ↦ -κ` で当て、`M ∣ x ⟺ M ∣ -x`）。
-  `exp_sum_as_I_mul_real` の和の添字は人手の添字の像 `finIndexToZZ M j` で、`checkZ`・`checkY` の位相の添字は Lean の添字の値に 1 を足した形のままなので、
-  当てる直前に像を値へ戻す段（Lean だけの段）を置く。
+  `exp_sum_as_I_mul_real` の和の添字と `checkZ`・`checkY` の位相の添字は、どちらも人手の添字の像 `finIndexToZZ M j`（`def_index_set_from_one_to_n`）である。
 * 指数法則 `scalar_exp_product` の行は、`def_scalar_exp` の具体版が Lean に無いので mathlib の `Complex.exp_add` で表す
   （`ClaimConjugateIndex.lean` と同じ扱い）。
 * 準備 2 の 2 本の鎖が実際に使うのは、実数の鎖では標数 2 でない体の等式（`1/2 + 1/2 = 1`）と `ℤ` からの環準同型が
@@ -183,51 +182,47 @@ theorem acomm_checkZ_checkZ (hM : M ≠ 0) (μ ν : ℤ) :
       = (2 * (M : ℂ) * deltaMod M (μ + ν) 1) • (1 : TensorPow M) := by
   calc acomm (checkZ M μ) (checkZ M ν)
       -- (∵ def_half_integer_checkZ)
-      = acomm (∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Z j)
-          (∑ k : Fin M, checkPhase M (((k : ℕ) : ℤ) + 1) ν • Z k) := by
+      = acomm (∑ j : Fin M, checkPhase M (finIndexToZZ M j) μ • Z j)
+          (∑ k : Fin M, checkPhase M (finIndexToZZ M k) ν • Z k) := by
         rw [checkZ, checkZ]
       -- (∵ 反交換子の ℂ 双線型性)
     _ = ∑ j : Fin M, ∑ k : Fin M,
-          (checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((k : ℕ) : ℤ) + 1) ν)
+          (checkPhase M (finIndexToZZ M j) μ * checkPhase M (finIndexToZZ M k) ν)
             • acomm (Z j) (Z k) :=
         acomm_sum_smul _ _ _ _
       -- (∵ anticommutator_of_Z_and_Y)
     _ = ∑ j : Fin M, ∑ k : Fin M,
-          (checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((k : ℕ) : ℤ) + 1) ν)
+          (checkPhase M (finIndexToZZ M j) μ * checkPhase M (finIndexToZZ M k) ν)
             • ((2 * deltaM j k) • (1 : TensorPow M)) := by
         simp_rw [anticomm_Z_Z]
       -- (∵ 1 ≤ j, k ≤ M では δ^M_{(j,k)} = 1 ⟺ j = k)
     _ = (2 * ∑ j : Fin M,
-          checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((j : ℕ) : ℤ) + 1) ν)
+          checkPhase M (finIndexToZZ M j) μ * checkPhase M (finIndexToZZ M j) ν)
             • (1 : TensorPow M) :=
         sum_sum_smul_two_deltaM_smul_one _ _
       -- （読み）checkPhase M j λ は人手の e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ) そのもの
     _ = (2 * ∑ j : Fin M,
-          Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ))
-            * Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
+          Complex.exp ((-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ))
+            * Complex.exp ((-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         simp_rw [checkPhase_eq_exp_neg_I_mul hM]
       -- (∵ scalar_exp_product を K = ℂ で各 j へ同時適用。Lean は mathlib の Complex.exp_add)
     _ = (2 * ∑ j : Fin M,
-          Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ)
-            + (-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
+          Complex.exp ((-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ)
+            + (-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         simp_rw [← Complex.exp_add]
       -- (∵ 準備 2 の複素数の鎖を各 j へ同時適用)
     _ = (2 * ∑ j : Fin M,
-          Complex.exp (Complex.I * ((2 * Real.pi * ((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ)
+          Complex.exp (Complex.I * ((2 * Real.pi * ((finIndexToZZ M j : ℤ) : ℝ)
             * ((-(μ + ν - 1) : ℤ) : ℝ) / ((M : ℤ) : ℝ) : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         congr 2
         refine Finset.sum_congr rfl fun j _ => ?_
-        rw [anticomm_exponent_complex_chain (anticomm_exponent_real_chain (((j : ℕ) : ℤ) + 1) μ ν)]
+        rw [anticomm_exponent_complex_chain (anticomm_exponent_real_chain (finIndexToZZ M j) μ ν)]
       -- (∵ exp_sum を N と κ で。準備 2 の読み)
     _ = (2 * ((M : ℂ) * deltaMod M (-(μ + ν - 1)) 0)) • (1 : TensorPow M) := by
-        -- `checkZ`・`checkY` の位相の添字は Lean の添字の値に 1 を足した形のままなので、`exp_sum_as_I_mul_real` の和の添字の
-        -- 人手の像 `finIndexToZZ M j` を値へ戻して当てる（Lean だけの段）
-        have h := exp_sum_as_I_mul_real hM (-(μ + ν - 1))
-        simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
-        rw [h]
+        rw [exp_sum_as_I_mul_real hM]
       -- (∵ def_delta_M)
     _ = (2 * ((M : ℂ) * deltaMod M (μ + ν) 1)) • (1 : TensorPow M) := by
         rw [deltaMod_neg_sub_one]
@@ -241,51 +236,47 @@ theorem acomm_checkY_checkY (hM : M ≠ 0) (μ ν : ℤ) :
       = (2 * (M : ℂ) * deltaMod M (μ + ν) 1) • (1 : TensorPow M) := by
   calc acomm (checkY M μ) (checkY M ν)
       -- (∵ def_half_integer_checkY)
-      = acomm (∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Y j)
-          (∑ k : Fin M, checkPhase M (((k : ℕ) : ℤ) + 1) ν • Y k) := by
+      = acomm (∑ j : Fin M, checkPhase M (finIndexToZZ M j) μ • Y j)
+          (∑ k : Fin M, checkPhase M (finIndexToZZ M k) ν • Y k) := by
         rw [checkY, checkY]
       -- (∵ 反交換子の ℂ 双線型性)
     _ = ∑ j : Fin M, ∑ k : Fin M,
-          (checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((k : ℕ) : ℤ) + 1) ν)
+          (checkPhase M (finIndexToZZ M j) μ * checkPhase M (finIndexToZZ M k) ν)
             • acomm (Y j) (Y k) :=
         acomm_sum_smul _ _ _ _
       -- (∵ anticommutator_of_Z_and_Y)
     _ = ∑ j : Fin M, ∑ k : Fin M,
-          (checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((k : ℕ) : ℤ) + 1) ν)
+          (checkPhase M (finIndexToZZ M j) μ * checkPhase M (finIndexToZZ M k) ν)
             • ((2 * deltaM j k) • (1 : TensorPow M)) := by
         simp_rw [anticomm_Y_Y]
       -- (∵ 1 ≤ j, k ≤ M では δ^M_{(j,k)} = 1 ⟺ j = k)
     _ = (2 * ∑ j : Fin M,
-          checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((j : ℕ) : ℤ) + 1) ν)
+          checkPhase M (finIndexToZZ M j) μ * checkPhase M (finIndexToZZ M j) ν)
             • (1 : TensorPow M) :=
         sum_sum_smul_two_deltaM_smul_one _ _
       -- （読み）checkPhase M j λ は人手の e_{j,λ} = exp((-i)(j_ℝ θ~_λ)_ℂ) そのもの
     _ = (2 * ∑ j : Fin M,
-          Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ))
-            * Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
+          Complex.exp ((-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ))
+            * Complex.exp ((-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         simp_rw [checkPhase_eq_exp_neg_I_mul hM]
       -- (∵ scalar_exp_product を K = ℂ で各 j へ同時適用。Lean は mathlib の Complex.exp_add)
     _ = (2 * ∑ j : Fin M,
-          Complex.exp ((-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ)
-            + (-Complex.I) * ((((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
+          Complex.exp ((-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ) * thetaTilde M μ : ℝ) : ℂ)
+            + (-Complex.I) * ((((finIndexToZZ M j : ℤ) : ℝ) * thetaTilde M ν : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         simp_rw [← Complex.exp_add]
       -- (∵ 準備 2 の複素数の鎖を各 j へ同時適用)
     _ = (2 * ∑ j : Fin M,
-          Complex.exp (Complex.I * ((2 * Real.pi * ((((j : ℕ) : ℤ) + 1 : ℤ) : ℝ)
+          Complex.exp (Complex.I * ((2 * Real.pi * ((finIndexToZZ M j : ℤ) : ℝ)
             * ((-(μ + ν - 1) : ℤ) : ℝ) / ((M : ℤ) : ℝ) : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         congr 2
         refine Finset.sum_congr rfl fun j _ => ?_
-        rw [anticomm_exponent_complex_chain (anticomm_exponent_real_chain (((j : ℕ) : ℤ) + 1) μ ν)]
+        rw [anticomm_exponent_complex_chain (anticomm_exponent_real_chain (finIndexToZZ M j) μ ν)]
       -- (∵ exp_sum を N と κ で。準備 2 の読み)
     _ = (2 * ((M : ℂ) * deltaMod M (-(μ + ν - 1)) 0)) • (1 : TensorPow M) := by
-        -- `checkZ`・`checkY` の位相の添字は Lean の添字の値に 1 を足した形のままなので、`exp_sum_as_I_mul_real` の和の添字の
-        -- 人手の像 `finIndexToZZ M j` を値へ戻して当てる（Lean だけの段）
-        have h := exp_sum_as_I_mul_real hM (-(μ + ν - 1))
-        simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast] at h
-        rw [h]
+        rw [exp_sum_as_I_mul_real hM]
       -- (∵ def_delta_M)
     _ = (2 * ((M : ℂ) * deltaMod M (μ + ν) 1)) • (1 : TensorPow M) := by
         rw [deltaMod_neg_sub_one]
@@ -297,17 +288,17 @@ theorem acomm_checkY_checkY (hM : M ≠ 0) (μ ν : ℤ) :
 theorem acomm_checkZ_checkY (μ ν : ℤ) : acomm (checkZ M μ) (checkY M ν) = 0 := by
   calc acomm (checkZ M μ) (checkY M ν)
       -- (∵ def_half_integer_checkZ, def_half_integer_checkY)
-      = acomm (∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Z j)
-          (∑ k : Fin M, checkPhase M (((k : ℕ) : ℤ) + 1) ν • Y k) := by
+      = acomm (∑ j : Fin M, checkPhase M (finIndexToZZ M j) μ • Z j)
+          (∑ k : Fin M, checkPhase M (finIndexToZZ M k) ν • Y k) := by
         rw [checkZ, checkY]
       -- (∵ 反交換子の ℂ 双線型性)
     _ = ∑ j : Fin M, ∑ k : Fin M,
-          (checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((k : ℕ) : ℤ) + 1) ν)
+          (checkPhase M (finIndexToZZ M j) μ * checkPhase M (finIndexToZZ M k) ν)
             • acomm (Z j) (Y k) :=
         acomm_sum_smul _ _ _ _
       -- (∵ anticommutator_of_Z_and_Y)
     _ = ∑ j : Fin M, ∑ k : Fin M,
-          (checkPhase M (((j : ℕ) : ℤ) + 1) μ * checkPhase M (((k : ℕ) : ℤ) + 1) ν)
+          (checkPhase M (finIndexToZZ M j) μ * checkPhase M (finIndexToZZ M k) ν)
             • (0 : TensorPow M) := by
         simp_rw [anticomm_Z_Y]
       -- (∵ ℂ の四則)

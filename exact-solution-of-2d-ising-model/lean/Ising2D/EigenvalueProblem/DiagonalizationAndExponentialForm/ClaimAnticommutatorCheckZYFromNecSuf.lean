@@ -26,14 +26,18 @@ theorem checkZ_eq_zpow_sum (_hM : M ≠ 0) (ρ : ℤ) :
     checkZ M ρ
       = ∑ j : Fin M, (expPhase (2 * M) 1) ^ ((((j : ℕ) : ℤ) + 1) * (2 * ρ - 1)) • Z j := by
   rw [checkZ]
-  exact Finset.sum_congr rfl fun j _ => by rw [checkPhase, expPhase_eq_zpow_one]
+  -- 必要十分版の周波数は Lean の添字の値で書いてあるので、位相の添字の像 `finIndexToZZ M j` を値へ戻す（Lean だけの段）
+  exact Finset.sum_congr rfl fun j _ => by
+    rw [checkPhase, expPhase_eq_zpow_one, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
 
 /-- `check(Y)_μ` を必要十分版の形に書き直す。 -/
 theorem checkY_eq_zpow_sum (_hM : M ≠ 0) (ρ : ℤ) :
     checkY M ρ
       = ∑ j : Fin M, (expPhase (2 * M) 1) ^ ((((j : ℕ) : ℤ) + 1) * (2 * ρ - 1)) • Y j := by
   rw [checkY]
-  exact Finset.sum_congr rfl fun j _ => by rw [checkPhase, expPhase_eq_zpow_one]
+  -- 必要十分版の周波数は Lean の添字の値で書いてあるので、位相の添字の像 `finIndexToZZ M j` を値へ戻す（Lean だけの段）
+  exact Finset.sum_congr rfl fun j _ => by
+    rw [checkPhase, expPhase_eq_zpow_one, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
 
 /-- **原文第 1 式を必要十分版の系として導いたもの**:
 `[check(Z)_μ, check(Z)_ν]₊ = 2M δ^M_{(μ+ν,1)} I`。 -/

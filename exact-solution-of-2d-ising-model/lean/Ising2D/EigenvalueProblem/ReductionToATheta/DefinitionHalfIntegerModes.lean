@@ -30,7 +30,7 @@
 ## 形式化の方針
 
 * 位相因子は `Ising2D.checkPhase`（`EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSum.lean`）。
-* site 添字は `Fin M` で、原文の `j` は `(j : ℕ) + 1`。
+* site 添字は `Fin M` で、原文の和の添字 `j ∈ {1,…,(M_col)_ℕ}` の整数への像 `j_ℤ` は、名前を付けた写像の像 `finIndexToZZ M j`（`def_index_set_from_one_to_n`）。
 * 添字 `μ` は `ℤ` のまま扱う（原文が (2) と `periodicity_of_check_fermi` のために
   定義域を `ℤ` にしているのと同じ）。
 -/
@@ -46,12 +46,12 @@ variable {M : ℕ}
 /-- **`def_half_integer_checkZ`**:
 原文の `check(Z)_μ := ∑_{j=1}^{M} Z_j e^{-i j θ~_μ}`。 -/
 noncomputable def checkZ (M : ℕ) (μ : ℤ) : TensorPow M :=
-  ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Z j
+  ∑ j : Fin M, checkPhase M (finIndexToZZ M j) μ • Z j
 
 /-- **`def_half_integer_checkY`**:
 原文の `check(Y)_μ := ∑_{j=1}^{M} Y_j e^{-i j θ~_μ}`。 -/
 noncomputable def checkY (M : ℕ) (μ : ℤ) : TensorPow M :=
-  ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Y j
+  ∑ j : Fin M, checkPhase M (finIndexToZZ M j) μ • Y j
 
 /-! ## 独立させた反周期性・Z/Y 行列の周期性と `def_half_integer_modes` に残した共役添字 -/
 
@@ -146,8 +146,8 @@ theorem checkPhase_period_for_checkZY (hM : M ≠ 0) (j μ : ℤ) :
 theorem checkZ_period (hM : M ≠ 0) (μ : ℤ) : checkZ M (μ + (M : ℤ)) = checkZ M μ := by
   calc
     checkZ M (μ + (M : ℤ)) =
-        ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) (μ + (M : ℤ)) • Z j := rfl
-    _ = ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Z j :=
+        ∑ j : Fin M, checkPhase M (finIndexToZZ M j) (μ + (M : ℤ)) • Z j := rfl
+    _ = ∑ j : Fin M, checkPhase M (finIndexToZZ M j) μ • Z j :=
       Finset.sum_congr rfl fun j _ => by rw [checkPhase_period_for_checkZY hM]
     _ = checkZ M μ := rfl
 
@@ -155,8 +155,8 @@ theorem checkZ_period (hM : M ≠ 0) (μ : ℤ) : checkZ M (μ + (M : ℤ)) = ch
 theorem checkY_period (hM : M ≠ 0) (μ : ℤ) : checkY M (μ + (M : ℤ)) = checkY M μ := by
   calc
     checkY M (μ + (M : ℤ)) =
-        ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) (μ + (M : ℤ)) • Y j := rfl
-    _ = ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Y j :=
+        ∑ j : Fin M, checkPhase M (finIndexToZZ M j) (μ + (M : ℤ)) • Y j := rfl
+    _ = ∑ j : Fin M, checkPhase M (finIndexToZZ M j) μ • Y j :=
       Finset.sum_congr rfl fun j _ => by rw [checkPhase_period_for_checkZY hM]
     _ = checkY M μ := rfl
 

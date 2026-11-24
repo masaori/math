@@ -14,8 +14,8 @@
 
 * `Z, Y` が `SiteZY` の 5 つの欄を満たすこと（`zySiteZY`。欄はすべて `ClaimCommutatorHCheckZY.lean` の
   準備の補題と `anticommutator_of_Z_and_Y` の `Z_mul_self`・`Y_mul_self`）。
-* `H_2`・`H_1^{(+)}`・`check(Z)`・`check(Y)` が必要十分版の `h2`・`h1 (-1)`・`checkZ`・`checkY` と定義で一致すること
-  （`lastSign` と `bdSign`、`nextSite` と `nextIdx` は同じ定義）。
+* `H_2`・`H_1^{(+)}`・`check(Z)`・`check(Y)` が必要十分版の `h2`・`h1 (-1)`・`checkZ`・`checkY` と一致すること
+  （`lastSign` と `bdSign`、`nextSite` と `nextIdx` は同じ定義。`check(Z)`・`check(Y)` は位相の添字の像 `finIndexToZZ M j` を値 `j.val + 1` へ戻して一致する）。
 * 位相 `p k := checkPhase M k ν` について、`checkPhase_add_left`・`checkPhase_zero_left` と、
   反周期性 `checkPhase_antiperiodic` から出る `η = p(M)`（`-1 = -1`）・`p(M) η = 1`（`(-1)(-1) = 1`）。
 -/
@@ -41,27 +41,36 @@ theorem H2_eq_zySiteZY_h2 : H2 M = (zySiteZY M).h2 := rfl
 theorem H1plus_eq_zySiteZY_h1 : H1plus M = (zySiteZY M).h1 (-1 : ℂ) := rfl
 
 theorem checkZ_eq_zySiteZY_checkZ (ν : ℤ) :
-    checkZ M ν = (zySiteZY M).checkZ (fun k => checkPhase M k ν) := rfl
+    checkZ M ν = (zySiteZY M).checkZ (fun k => checkPhase M k ν) := by
+  -- 具体版の位相の添字は人手の添字の像 `finIndexToZZ M j`、必要十分版は Lean の添字の値に 1 を足した形なので、像を値へ戻す
+  simp only [checkZ, NecSuf.SiteZY.checkZ, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+  rfl
 
 theorem checkY_eq_zySiteZY_checkY (ν : ℤ) :
-    checkY M ν = (zySiteZY M).checkY (fun k => checkPhase M k ν) := rfl
+    checkY M ν = (zySiteZY M).checkY (fun k => checkPhase M k ν) := by
+  -- 具体版の位相の添字は人手の添字の像 `finIndexToZZ M j`、必要十分版は Lean の添字の値に 1 を足した形なので、像を値へ戻す
+  simp only [checkY, NecSuf.SiteZY.checkY, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+  rfl
 
 /-- **(C) を必要十分版の特殊化として導出した形**: `[H_2, check(Z)_μ] = -2 check(Y)_μ`。 -/
 theorem lie_H2_checkZ_of_necSuf (ν : ℤ) :
-    ⁅H2 M, checkZ M ν⁆ = (-2 : ℂ) • checkY M ν :=
-  (zySiteZY M).lie_h2_checkZ (fun k => checkPhase M k ν)
+    ⁅H2 M, checkZ M ν⁆ = (-2 : ℂ) • checkY M ν := by
+  rw [checkZ_eq_zySiteZY_checkZ, checkY_eq_zySiteZY_checkY]
+  exact (zySiteZY M).lie_h2_checkZ (fun k => checkPhase M k ν)
 
 /-- **(D) を必要十分版の特殊化として導出した形**: `[H_2, check(Y)_μ] = 2 check(Z)_μ`。 -/
 theorem lie_H2_checkY_of_necSuf (ν : ℤ) :
-    ⁅H2 M, checkY M ν⁆ = (2 : ℂ) • checkZ M ν :=
-  (zySiteZY M).lie_h2_checkY (fun k => checkPhase M k ν)
+    ⁅H2 M, checkY M ν⁆ = (2 : ℂ) • checkZ M ν := by
+  rw [checkZ_eq_zySiteZY_checkZ, checkY_eq_zySiteZY_checkY]
+  exact (zySiteZY M).lie_h2_checkY (fun k => checkPhase M k ν)
 
 /-- **(A) を必要十分版の特殊化として導出した形**:
 `[H_1^{(+)}, check(Z)_μ] = 2 e^{-iθ~_μ} check(Y)_μ`。
 境界の符号 `η = -1` が位相の一周 `checkPhase M M ν = -1` と一致することを渡す。 -/
 theorem lie_H1Plus_checkZ_of_necSuf (hM : M ≠ 0) (ν : ℤ) :
-    ⁅H1plus M, checkZ M ν⁆ = (2 * checkPhase M 1 ν) • checkY M ν :=
-  (zySiteZY M).lie_h1_checkZ hM (fun k => checkPhase M k ν) (-1)
+    ⁅H1plus M, checkZ M ν⁆ = (2 * checkPhase M 1 ν) • checkY M ν := by
+  rw [checkZ_eq_zySiteZY_checkZ, checkY_eq_zySiteZY_checkY]
+  exact (zySiteZY M).lie_h1_checkZ hM (fun k => checkPhase M k ν) (-1)
     (fun k l => checkPhase_add_left M k l ν) (checkPhase_zero_left M ν)
     (checkPhase_antiperiodic hM ν).symm
 
@@ -69,8 +78,9 @@ theorem lie_H1Plus_checkZ_of_necSuf (hM : M ≠ 0) (ν : ℤ) :
 `[H_1^{(+)}, check(Y)_μ] = -2 e^{iθ~_μ} check(Z)_μ`。
 境界の符号 `η = -1` と位相の一周 `checkPhase M M ν = -1` の積が `1` であることを渡す。 -/
 theorem lie_H1Plus_checkY_of_necSuf (hM : M ≠ 0) (ν : ℤ) :
-    ⁅H1plus M, checkY M ν⁆ = (-2 * checkPhase M (-1) ν) • checkZ M ν :=
-  (zySiteZY M).lie_h1_checkY hM (fun k => checkPhase M k ν) (-1)
+    ⁅H1plus M, checkY M ν⁆ = (-2 * checkPhase M (-1) ν) • checkZ M ν := by
+  rw [checkZ_eq_zySiteZY_checkZ, checkY_eq_zySiteZY_checkY]
+  exact (zySiteZY M).lie_h1_checkY hM (fun k => checkPhase M k ν) (-1)
     (fun k l => checkPhase_add_left M k l ν)
     (by show checkPhase M (M : ℤ) ν * (-1) = 1
         rw [checkPhase_antiperiodic hM]; norm_num)

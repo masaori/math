@@ -266,13 +266,13 @@ theorem checkY_conj (hM : M ≠ 0) (μ : ℤ) : checkY M ((M : ℤ) + 1 - μ) = 
 `check(Z)_{M+1-μ} = ∑_{k=1}^{M} Z_k e^{ik θ~_μ}`。 -/
 theorem checkZ_conj_eq (hM : M ≠ 0) (μ : ℤ) :
     checkZ M ((M : ℤ) + 1 - μ)
-      = ∑ k : Fin M, expPhase (2 * M) (-((((k : ℕ) : ℤ) + 1) * (2 * μ - 1))) • Z k :=
+      = ∑ k : Fin M, expPhase (2 * M) (-(finIndexToZZ M k * (2 * μ - 1))) • Z k :=
   Finset.sum_congr rfl fun k _ => by rw [checkPhase_conj hM]
 
 /-- 共役添字での `check(Y)` の展開。 -/
 theorem checkY_conj_eq (hM : M ≠ 0) (μ : ℤ) :
     checkY M ((M : ℤ) + 1 - μ)
-      = ∑ k : Fin M, expPhase (2 * M) (-((((k : ℕ) : ℤ) + 1) * (2 * μ - 1))) • Y k :=
+      = ∑ k : Fin M, expPhase (2 * M) (-(finIndexToZZ M k * (2 * μ - 1))) • Y k :=
   Finset.sum_congr rfl fun k _ => by rw [checkPhase_conj hM]
 
 end Ising2D

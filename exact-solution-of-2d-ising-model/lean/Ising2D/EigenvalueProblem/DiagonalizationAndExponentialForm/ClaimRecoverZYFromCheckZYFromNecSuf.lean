@@ -22,25 +22,29 @@ variable {M : ℕ}
 
 /-- **`inverse_dft_check` を `NecSuf.inverse_dft_antiperiodic` の特殊化として導いたもの**。 -/
 theorem inverse_dft_check_of_necSuf (hM : M ≠ 0) (x : Fin M → TensorPow M) (m : Fin M) :
-    ∑ μ : Fin M, checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) •
-        (∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) (((μ : ℕ) : ℤ) + 1) • x j)
+    ∑ μ : Fin M, checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) •
+        (∑ j : Fin M, checkPhase M (finIndexToZZ M j) (finIndexToZZ M μ) • x j)
       = (M : ℂ) • x m := by
   have hξ : IsPrimitiveRoot (expPhase (2 * M) (-1)) (2 * M) :=
     isPrimitiveRoot_expPhase_neg_one (by omega)
   have h := NecSuf.inverse_dft_antiperiodic (K := ℂ) (V := TensorPow M) hM hξ x m
   refine Eq.trans ?_ h
   refine Finset.sum_congr rfl fun μ _ => ?_
-  have houter : checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1)
+  have houter : checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ)
       = (expPhase (2 * M) (-1)) ^ ((((m : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1)) := by
+    -- 必要十分版の指数は Lean の添字の値で書いてあるので、像 `finIndexToZZ` を値へ戻す（Lean だけの段）
     rw [checkPhase, ← expPhase_neg_eq_zpow_neg_one]
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
     congr 1
     ring
   rw [houter]
   congr 1
   refine Finset.sum_congr rfl fun j _ => ?_
-  have hinner : checkPhase M (((j : ℕ) : ℤ) + 1) (((μ : ℕ) : ℤ) + 1)
+  have hinner : checkPhase M (finIndexToZZ M j) (finIndexToZZ M μ)
       = (expPhase (2 * M) (-1)) ^ (-((((j : ℕ) : ℤ) + 1) * (2 * ((μ : ℕ) : ℤ) + 1))) := by
+    -- `houter` と同じく、像 `finIndexToZZ` を値へ戻す（Lean だけの段）
     rw [checkPhase, ← expPhase_neg_eq_zpow_neg_one]
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
     congr 1
     ring
   rw [hinner]
@@ -48,8 +52,8 @@ theorem inverse_dft_check_of_necSuf (hM : M ≠ 0) (x : Fin M → TensorPow M) (
 /-- **原文第 1 式を必要十分版の系として導いたもの**:
 `∑_{μ=1}^{M} check(Z)_μ e^{ij θ~_μ} = M Z_j`。 -/
 theorem recover_checkZ_of_necSuf (hM : M ≠ 0) (m : Fin M) :
-    ∑ μ : Fin M, checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) •
-        checkZ M (((μ : ℕ) : ℤ) + 1)
+    ∑ μ : Fin M, checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) •
+        checkZ M (finIndexToZZ M μ)
       = (M : ℂ) • Z m := by
   simp_rw [checkZ]
   exact inverse_dft_check_of_necSuf hM Z m
@@ -57,8 +61,8 @@ theorem recover_checkZ_of_necSuf (hM : M ≠ 0) (m : Fin M) :
 /-- **原文第 2 式を必要十分版の系として導いたもの**:
 `∑_{μ=1}^{M} check(Y)_μ e^{ij θ~_μ} = M Y_j`。 -/
 theorem recover_checkY_of_necSuf (hM : M ≠ 0) (m : Fin M) :
-    ∑ μ : Fin M, checkPhase M (-(((m : ℕ) : ℤ) + 1)) (((μ : ℕ) : ℤ) + 1) •
-        checkY M (((μ : ℕ) : ℤ) + 1)
+    ∑ μ : Fin M, checkPhase M (-(finIndexToZZ M m)) (finIndexToZZ M μ) •
+        checkY M (finIndexToZZ M μ)
       = (M : ℂ) • Y m := by
   simp_rw [checkY]
   exact inverse_dft_check_of_necSuf hM Y m

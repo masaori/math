@@ -47,9 +47,9 @@ variable {M : ℕ}
 
 /-- **人手証明 (2) の鎖**（`M_col = r + 1`）。`(W̌_μ, W)` を `(Ž_μ, Z)` と `(Y̌_μ, Y)` のどちらかとし、
 `c_j` を位相因子 `exp(-i(j_ℝ θ~_μ)_ℂ)`（Lean では `checkPhase`）とする。
-`W̌_μ = Σ_{j=1}^{M_col} (c_j W_{j_ℤ})` の人手の添字 `j ∈ {1,…,M_col}` は、Lean の `j : Fin (r + 1)` の
-`(j : ℕ) + 1` にあたる（`DefinitionHalfIntegerModes.lean` の site 添字の規約）。したがって `W j` は人手の
-`W_{((j:ℕ)+1)_ℤ}` にあたる。仮定 `hW` は人手の (1)（`epsilon_anticommutes_with_jordan_wigner_Z`・`_Y`）である。
+`W̌_μ = Σ_{j=1}^{M_col} (c_j W_{j_ℤ})` の人手の添字 `j ∈ {1,…,M_col}` の整数への像 `j_ℤ` は、Lean の `j : Fin (r + 1)` の
+写像の像 `finIndexToZZ (r + 1) j`（`def_index_set_from_one_to_n`。`DefinitionHalfIntegerModes.lean` の位相の添字）にあたる。
+Lean の `W j` は `Fin (r + 1)` の元 `j` で添字づけてあり、人手の `W_{j_ℤ}` にあたる。仮定 `hW` は人手の (1)（`epsilon_anticommutes_with_jordan_wigner_Z`・`_Y`）である。
 calc の 7 段は人手の鎖の 2〜8 行目と同じ順に並ぶ。必要十分版 `NecSuf.anticomm_sum_smul` も同じ 7 段である。 -/
 theorem epsilon_anticomm_phase_sum (r : ℕ) (c : Fin (r + 1) → ℂ) (W : Fin (r + 1) → TensorPow (r + 1))
     (hW : ∀ j, epsilon (r + 1) * W j = -(W j * epsilon (r + 1))) :
@@ -80,9 +80,9 @@ calc の 1 段目と 3 段目は人手の鎖の 1 行目と 9 行目（`Ž_μ` �
 theorem epsilon_anticomm_checkZ_succ (r : ℕ) (μ : ℤ) :
     epsilon (r + 1) * checkZ (r + 1) μ = -(checkZ (r + 1) μ * epsilon (r + 1)) := by
   calc epsilon (r + 1) * checkZ (r + 1) μ
-      = epsilon (r + 1) * (∑ j : Fin (r + 1), checkPhase (r + 1) (((j : ℕ) : ℤ) + 1) μ • Z j) := rfl
+      = epsilon (r + 1) * (∑ j : Fin (r + 1), checkPhase (r + 1) (finIndexToZZ (r + 1) j) μ • Z j) := rfl
                                                         -- `Ž_μ` の定義（`def_half_integer_checkZ`）
-    _ = -((∑ j : Fin (r + 1), checkPhase (r + 1) (((j : ℕ) : ℤ) + 1) μ • Z j) * epsilon (r + 1)) :=
+    _ = -((∑ j : Fin (r + 1), checkPhase (r + 1) (finIndexToZZ (r + 1) j) μ • Z j) * epsilon (r + 1)) :=
         epsilon_anticomm_phase_sum r _ _ fun j => epsilon_anticomm_Z j
                                                         -- 人手の鎖の 2〜8 行目
     _ = -(checkZ (r + 1) μ * epsilon (r + 1)) := rfl
@@ -92,9 +92,9 @@ theorem epsilon_anticomm_checkZ_succ (r : ℕ) (μ : ℤ) :
 theorem epsilon_anticomm_checkY_succ (r : ℕ) (μ : ℤ) :
     epsilon (r + 1) * checkY (r + 1) μ = -(checkY (r + 1) μ * epsilon (r + 1)) := by
   calc epsilon (r + 1) * checkY (r + 1) μ
-      = epsilon (r + 1) * (∑ j : Fin (r + 1), checkPhase (r + 1) (((j : ℕ) : ℤ) + 1) μ • Y j) := rfl
+      = epsilon (r + 1) * (∑ j : Fin (r + 1), checkPhase (r + 1) (finIndexToZZ (r + 1) j) μ • Y j) := rfl
                                                         -- `Y̌_μ` の定義（`def_half_integer_checkY`）
-    _ = -((∑ j : Fin (r + 1), checkPhase (r + 1) (((j : ℕ) : ℤ) + 1) μ • Y j) * epsilon (r + 1)) :=
+    _ = -((∑ j : Fin (r + 1), checkPhase (r + 1) (finIndexToZZ (r + 1) j) μ • Y j) * epsilon (r + 1)) :=
         epsilon_anticomm_phase_sum r _ _ fun j => epsilon_anticomm_Y j
                                                         -- 人手の鎖の 2〜8 行目
     _ = -(checkY (r + 1) μ * epsilon (r + 1)) := rfl

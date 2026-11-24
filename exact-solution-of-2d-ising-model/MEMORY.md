@@ -1,3 +1,4 @@
+2026-11-24: Lean の点検の直しの表の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」の十四単位目を済ませた。`checkZ`・`checkY` の位相の添字と `recover_Z_Y_from_check_Z_Y` の具体版の添字（`thetaTilde` の添字を含む）を `finIndexToZZ` の像にし、`antiperiodic_exp_sum`・`exp_sum_as_I_mul_real` を当てる前に像を値へ戻す段を消した。次は `checkIdx`（名前の無い `j ↦ j+1`）と `checkZYSet` などを像で書く件。
 2026-11-24: Lean の点検の直しの表の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」の十三単位目を済ませた。`antiperiodic_exp_sum` の具体版の主張の和の添字と `exp_sum_as_I_mul_real` の主張の添字を `finIndexToZZ` の像にし、`expPhase_sum` を当てる前に像を値へ戻す段を消した。次は `checkZ`・`checkY` の位相の添字を像で書く件。
 2026-11-24（並列）: Lean の点検の直しの表の分離の行「具体版の宣言が使わない必要十分版・導出の import を外す」（三行目から割り出した、依存の無い部分）を済ませた。具体版のファイルに同居していた `_of_necSuf` の導出の定理 31 本を導出のファイル（新しい 5 つと既存の `ClaimDetATildeFromNecSuf.lean`）へ主張も証明も変えずに移し、具体版の宣言が使わない import 16 組を外した。分離の台帳 608→591 行（import 198→182、具体版の依存の宣言 407→406）。分離の先頭の二行は未定義の記号の行「行列とその演算」を待ち、三行目の残り（import 182 組・宣言 406）は使う側の具体版を本文どおりに書き直す作業である。
 
