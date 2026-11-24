@@ -26,7 +26,8 @@
   `cos θ~_μ < 1`（`0 < θ~_μ < 2π` による）  かつ  `sinh 2K_1 · sinh 2K_2^* > 0`
 
 から `γ_1(θ~_μ) > cosh(2K_1 - 2K_2^*) ≥ 1` が**すべての `μ ∈ 𝓜̌`、
-すべての `K_1, K_2 > 0`（臨界点を含む）で**成り立ち、`NecSuf.arcosh_pos_of_one_lt`（人手 `gamma_theta_tilde_mu_positive` と同じ背理法の鎖）により
+すべての `K_1, K_2 > 0`（臨界点を含む）で**成り立ち、人手 `gamma_theta_tilde_mu_positive` の背理法の鎖
+（`gammaFn_thetaTilde_pos`。必要十分版 `NecSuf.arcosh_pos_of_one_lt` も同じ手順）により
 `γ(θ~_μ) > 0` が従う。これが本章の最終結論を可能にしている。
 
 ## 依存
@@ -38,9 +39,9 @@
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.TheoremEigenvaluesVPlus
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.TheoremOnsagerFreeEnergy
-import Ising2D.NecSuf.ArcoshExp
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 
 namespace Ising2D
 
@@ -85,10 +86,45 @@ theorem one_lt_gamma1R_thetaTilde_checkIndex (P : IsingParam) (hM : M ≠ 0) {μ
 
 /-- **章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `gamma_theta_tilde_mu_positive`**: `γ(θ~_μ) > 0`（`μ ∈ 𝓜̌`）。
 
-章 009 の `γ(θ_μ) ≥ 0` との違いがここにあり、単純性の根拠である。 -/
+章 009 の `γ(θ_μ) ≥ 0` との違いがここにあり、単純性の根拠である。
+人手の準備（`g := γ_1(θ~_μ)`、`t := γ(θ~_μ)`、`g > 1`、`t = arccosh g`、`t ≥ 0`、`cosh t = g`）と、
+背理の鎖 `g = cosh t = cosh 0 = (exp 0 + exp(−0))/2 = (exp 0 + exp 0)/2 = (1 + 1)/2 = 1` の 6 行と、
+`1 > 1` の矛盾から `t ≠ 0`、`t ≥ 0` と合わせて `t > 0` とする結論に 1 対 1 に対応する。
+`arccosh_properties` (1)・(2)・`def_cosh_sinh`・`scalar_exp_zero` は本文に具体版の宣言が無く、mathlib の
+`Real.arcosh_nonneg`・`Real.cosh_arcosh`・`Real.cosh_eq`・`Real.exp_zero` で受け取る。
+必要十分版 `NecSuf.arcosh_pos_of_one_lt` は同じ手順で、その特殊化は
+`ClaimGammaThetaTildeMuPositiveFromNecSuf.lean` の `gammaFn_thetaTilde_pos_of_necSuf`。 -/
 theorem gammaFn_thetaTilde_pos (P : IsingParam) (hM : M ≠ 0) {μ : ℤ}
-    (hμ : CheckIndex M μ) : 0 < gammaFn P (thetaTilde M μ) :=
-  NecSuf.arcosh_pos_of_one_lt (one_lt_gamma1R_thetaTilde_checkIndex P hM hμ)
+    (hμ : CheckIndex M μ) : 0 < gammaFn P (thetaTilde M μ) := by
+  -- 準備: `g := γ_1(θ~_μ)`、`t := γ(θ~_μ)`
+  have hg : 1 < gamma1R P.const (thetaTilde M μ) := one_lt_gamma1R_thetaTilde_checkIndex P hM hμ
+    -- `gamma1_gt_1_theta_tilde`
+  have hg1 : 1 ≤ gamma1R P.const (thetaTilde M μ) := hg.le
+    -- とくに `g ≥ 1`
+  have ht : gammaFn P (thetaTilde M μ) = Real.arcosh (gamma1R P.const (thetaTilde M μ)) := rfl
+    -- `def_gamma_theta`
+  have ht0 : 0 ≤ gammaFn P (thetaTilde M μ) := by rw [ht]; exact Real.arcosh_nonneg hg1
+    -- `arccosh_properties` (1)（`y = g`）
+  have hcosh : Real.cosh (gammaFn P (thetaTilde M μ)) = gamma1R P.const (thetaTilde M μ) := by
+    rw [ht]; exact Real.cosh_arcosh hg1
+    -- `arccosh_properties` (2)（`y = g`）
+  -- `t = 0` と仮定すると `g = 1`
+  have hne : gammaFn P (thetaTilde M μ) ≠ 0 := by
+    intro h0
+    have hchain : gamma1R P.const (thetaTilde M μ) = 1 :=
+      calc gamma1R P.const (thetaTilde M μ)
+          = Real.cosh (gammaFn P (thetaTilde M μ)) := hcosh.symm  -- 準備の `cosh t = g`
+        _ = Real.cosh 0 := by rw [h0]                            -- 仮定 `t = 0`
+        _ = (Real.exp 0 + Real.exp (-0)) / 2 := Real.cosh_eq 0   -- `def_cosh_sinh`
+        _ = (Real.exp 0 + Real.exp 0) / 2 := by
+            rw [real_negation_of_zero_is_zero]                    -- `real_negation_of_zero_is_zero`
+        _ = (1 + 1) / 2 := by rw [Real.exp_zero]                 -- `scalar_exp_zero`（`K = ℝ`）
+        _ = 1 := by norm_num                                     -- ℝ の四則
+    -- 準備の `g > 1` と合わせて `1 > 1`（ℝ の順序に矛盾）
+    have h11 : (1 : ℝ) < 1 := by rw [hchain] at hg; exact hg
+    exact lt_irrefl (1 : ℝ) h11
+  -- `t ≠ 0` と準備の `t ≥ 0` から `t > 0`
+  exact lt_of_le_of_ne ht0 (Ne.symm hne)
 
 end GammaPos
 

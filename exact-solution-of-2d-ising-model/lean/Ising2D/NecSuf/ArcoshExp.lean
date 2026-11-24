@@ -5,7 +5,9 @@
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_008_claim_gamma_theta_tilde_positive`, `Athetatilde_009_claim_lambda_eq_exp_gamma`）
 
-具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/DefinitionGammaTildeMu.lean`。
+具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/DefinitionGammaTildeMu.lean`（`gammaTilde_pos` と
+`λ_{±,μ} = e^{±γ(θ~_μ)}`）と `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/TheoremMaxEigenvalueSimple.lean`
+（`gammaFn_thetaTilde_pos`）。
 
 ## mathlib の状況
 
@@ -105,17 +107,28 @@ theorem exp_neg_arcosh_of_sq {g r : ℝ} (hg : 1 ≤ g) (hr : 0 ≤ r) (h : g ^ 
 
 /-- **必要十分版**: `1 < g` なら `arcosh g > 0`（人手証明 `gamma_theta_tilde_mu_positive`）。
 
-人手証明と同じ手順: `arcosh g ≥ 0`（`def_gamma_theta`）で、`arcosh g = 0` と仮定すると
-`g = cosh(arcosh g) = cosh 0 = 1` となり `1 < g` に矛盾する。
-使うのは `cosh ∘ arcosh = id`（`[1,∞)` 上）・`arcosh ≥ 0`・`cosh 0 = 1` だけである。 -/
+具体版 `gammaFn_thetaTilde_pos`・`gammaTilde_pos` と同じ手順: 準備の `arcosh g ≥ 0`・`cosh(arcosh g) = g`
+（`arccosh_properties` (1)・(2)）、`arcosh g = 0` と仮定したときの鎖
+`g = cosh(arcosh g) = cosh 0 = (exp 0 + exp(−0))/2 = (exp 0 + exp 0)/2 = (1 + 1)/2 = 1` の 6 行、
+`1 > 1` の矛盾から `arcosh g ≠ 0`、`arcosh g ≥ 0` と合わせて `arcosh g > 0`。
+使うのは `cosh ∘ arcosh = id`（`[1,∞)` 上）・`arcosh ≥ 0`・`cosh` の定義・`−0 = 0`・`exp 0 = 1`・ℝ の四則と順序だけで、
+`g` が Ising 模型の量 `γ_1(θ~_μ)` であることは効いていない。 -/
 theorem arcosh_pos_of_one_lt {g : ℝ} (hg : 1 < g) : 0 < Real.arcosh g := by
-  rcases lt_or_eq_of_le (Real.arcosh_nonneg hg.le) with h | h
-  · exact h
-  · exfalso
-    have hchain : g = 1 := by
-      calc g = Real.cosh (Real.arcosh g) := (Real.cosh_arcosh hg.le).symm
-        _ = Real.cosh 0 := by rw [← h]
-        _ = 1 := Real.cosh_zero
-    linarith
+  -- 人手の `t := γ(θ~_μ)` は、ここでは `t := arcosh g` である（以下の注の `t` はこれを指す）
+  have hg1 : 1 ≤ g := hg.le                                          -- とくに `g ≥ 1`
+  have ht0 : 0 ≤ Real.arcosh g := Real.arcosh_nonneg hg1             -- `arccosh_properties` (1)
+  have hcosh : Real.cosh (Real.arcosh g) = g := Real.cosh_arcosh hg1  -- `arccosh_properties` (2)
+  have hne : Real.arcosh g ≠ 0 := by
+    intro h0
+    have hchain : g = 1 :=
+      calc g = Real.cosh (Real.arcosh g) := hcosh.symm              -- 準備の `cosh t = g`
+        _ = Real.cosh 0 := by rw [h0]                                -- 仮定 `t = 0`
+        _ = (Real.exp 0 + Real.exp (-0)) / 2 := Real.cosh_eq 0       -- `def_cosh_sinh`
+        _ = (Real.exp 0 + Real.exp 0) / 2 := by rw [neg_zero]        -- `real_negation_of_zero_is_zero`
+        _ = (1 + 1) / 2 := by rw [Real.exp_zero]                     -- `scalar_exp_zero`（`K = ℝ`）
+        _ = 1 := by norm_num                                         -- ℝ の四則
+    have h11 : (1 : ℝ) < 1 := by rw [hchain] at hg; exact hg        -- 準備の `g > 1` と合わせて `1 > 1`
+    exact lt_irrefl (1 : ℝ) h11
+  exact lt_of_le_of_ne ht0 (Ne.symm hne)                            -- `t ≠ 0` と `t ≥ 0` から `t > 0`
 
 end Ising2D.NecSuf
