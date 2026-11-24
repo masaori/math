@@ -110828,9 +110828,7 @@ const chapter_fisher_zero_density = defineSection({
                           math(String.raw`\operatorname{Lift}^{F}(f)`),
                           " の根であるとは ",
                           math(String.raw`\mathrm{aev}_{\xi}(\operatorname{Lift}^{F}(f))=0`),
-                          " のことなので（",
-                          ref("claim_qbar_distinct_roots_card_bound"),
-                          " の仮定と同じ書き方）、いま示した等号から従う。",
+                          " のことなので、いま示した等号から従う。",
                         ]),
                       ],
                     },
@@ -110845,6 +110843,7 @@ const chapter_fisher_zero_density = defineSection({
                   habitat: "Qbar",
                   verification: ["sagemath/check/partition-polynomial-qbar-lift-nonzero-coeff-bound"],
                   lean: [
+                    "Ising2DLambda.ThermodynamicLimit.partitionPolynomial_coeff",
                     "Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_partitionPolynomial_ne_zero",
                     "Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_partitionPolynomial_coeff_eq_zero_of_lt",
                   ],
@@ -110981,9 +110980,6 @@ const chapter_fisher_zero_density = defineSection({
                       labels: ["claim_fisher_zero_finset_card_bound"],
                       habitat: "Qbar",
                       lean: [
-                        "Ising2DLambda.ThermodynamicLimit.partitionPolynomial_coeff",
-                        "Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_partitionPolynomial_ne_zero",
-                        "Ising2DLambda.ThermodynamicLimit.integerPolynomialQbarLift_partitionPolynomial_coeff_eq_zero_of_lt",
                         "Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finset_card_le",
                         "Ising2DLambda.NecSuf.ThermodynamicLimit.finset_card_le_of_subset_root_set_necSuf",
                         "Ising2DLambda.ThermodynamicLimit.fisherZeroSet_finset_card_le_from_necSuf",
@@ -111107,9 +111103,7 @@ const chapter_fisher_zero_density = defineSection({
                   ],
                   proof: [
                     paragraph([
-                      "まず有限性を背理法で示す（",
-                      ref("claim_root_of_unity_finite_card_bound"),
-                      " と同じ形）。",
+                      "まず有限性を背理法で示す。",
                       math(String.raw`\mathcal{F}_{L}`),
                       " が無限集合であると仮定する。無限集合から任意の有限個数の相異なる元を取れるので、",
                       math(String.raw`\mathcal{F}_{L}`),
@@ -111646,7 +111640,7 @@ N_{L}(c,r)
 &=\bigl\lvert\mathcal{F}_{L}\cap D(c,r)\bigr\rvert
 &&\bigl(\because\ \blkref{def_fisher_zero_count_in_rational_disc}\bigr)\\
 &=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}1
-&&\bigl(\because\ \text{有限集合の元の個数は各元を 1 と数えた有限和}\bigr)\\
+&&\bigl(\because\ \mathcal{F}_{L}\cap D(c,r)\subset\mathcal{F}_{L}\text{ は有限集合（}\blkref{claim_fisher_zero_set_finite_card_bound}\text{）、有限集合の元の個数は各元を 1 と数えた有限和}\bigr)\\
 &\le\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
 &&\bigl(\because\ \text{準備の各項 }1\le\mathrm{mult}_{\xi}\text{ と有限和の単調性}\bigr)\\
 &=N^{\mathrm{mult}}_{L}(c,r)

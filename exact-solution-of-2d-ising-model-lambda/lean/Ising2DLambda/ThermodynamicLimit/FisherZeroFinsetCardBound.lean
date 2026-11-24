@@ -2,10 +2,13 @@
 章「熱力学極限」の「有限格子の Fisher 零点の有限部分集合の個数は 2L^2 を超えない」
 （`claim_fisher_zero_finset_card_bound`）の具体版。
 
+前半の三つの定理は、本文で前に置いた主張「持ち上げた分配多項式は零でなく、係数は 2L^2 より上の番号で零である」
+（`claim_partition_polynomial_qbar_lift_nonzero_coeff_bound`）の具体版で、本文の主張と同じくこのファイルの主張が引く。
+
   人手証明                                                          このファイル
-  準備: ac_k(Ẑ_L^F) = Ω_L(k) (k ≤ 2L^2) / 0 (2L^2 < k)              `partitionPolynomial_coeff`＋`integerPolynomialQbarLift_coeff`
-  第 1 の仮定: Ẑ_L^F ≠ 0（零なら Ω_L(m) = 0、総和 2^{L^2} = 0 で矛盾）  `integerPolynomialQbarLift_partitionPolynomial_ne_zero`
-  第 2 の仮定: 2L^2 < k なら ac_k(Ẑ_L^F) = 0                          `integerPolynomialQbarLift_partitionPolynomial_coeff_eq_zero_of_lt`
+  （前の主張）ac_k(Ẑ_L^F) = Ω_L(k) (k ≤ 2L^2) / 0 (2L^2 < k)        `partitionPolynomial_coeff`＋`integerPolynomialQbarLift_coeff`
+  （前の主張）Ẑ_L^F ≠ 0（零なら Ω_L(m) = 0、総和 2^{L^2} = 0 で矛盾）  `integerPolynomialQbarLift_partitionPolynomial_ne_zero`
+  第 1・第 2 の仮定: Ẑ_L^F ≠ 0 と 2L^2 < k なら ac_k(Ẑ_L^F) = 0      前の主張の二つの定理
   第 3 の仮定: w ∈ S ⊂ F_L なら aev_w(Ẑ_L^F) = Ev^F_w(Z_L) = 0        `fisherZeroSet_finset_card_le` の中の `hroot`
   `claim_qbar_distinct_roots_card_bound` を当てる                     `qbarDistinctRootsCardLe`
 
