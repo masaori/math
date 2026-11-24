@@ -32,8 +32,8 @@
    `W` が転送行列であることも、指数関数で書けることも効いていない。
 3. **`W` が半正定値であること。** これは `c_±(M) ≥ 0`（`sectorRayleighSup_nonneg`）と、
    `c(M) = max(c_+(M), c_-(M))` の `≤` の側で空のセクターの上限 `0` と比べる段にだけ使う。
-   `c_±(M)` が上に有界であること（退避先 `ClaimRayleighSupSectorDecomposition.lean` の `sectorSet_bddAbove`）は、
-   `𝓡` の上界 `Σ_iΣ_j|W_ij|`（`DefinitionRayleighSup.lean` の `rayleighSet_bddAbove`）から出るので仮定が要らない。
+   `c_±(M)` が上に有界であること（`SignedSectorRayleighSupDecomposition.lean` の `sectorSet'_bddAbove`）は、
+   `𝓡` の上界 `Σ_iΣ_j|W_ij|`（`RayleighSupAndSectorRayleighSup.lean` の `rayleighSet'_bddAbove`）から出るので仮定が要らない。
    `W` が対称であることは効いていない。
 
 逆に、**人手証明 `epsilon_is_sign_flip_permutation` (2) の「`π` は不動点をもたない」は
@@ -44,29 +44,31 @@
 `sectorSet_neg_nonempty`（不動点をもたない点だけを使う）に分けて明示した。
 
 また、Perron–Frobenius 系の定理・スペクトル定理・行列の対角化可能性は一切使っていない
-（本文の Rayleigh 上限 `rayleighSup` の議論と同じ方針）。使うのは有限個の実数の和・積・絶対値と三角不等式、
+（本文の Rayleigh 上限 `c(M)` の議論と同じ方針）。使うのは有限個の実数の和・積・絶対値と三角不等式、
 および実数の上限（`sSup`）だけである。
 
-## 「必要十分版」がなぜ本文と退避先の定義の上に乗っているか
+## 本ファイルが使う定義（必要十分版の側の定義）
 
-本ファイルが使う定義と主張は、次の 2 か所にある。
+ノルム・`𝓡`・`c(M)`・符号つきの `𝓡_±`・`c_±(M)` と、退避した主張 `sector_decomposition_of_rayleigh_sup`
+（`c(M) = max(c_+(M), c_-(M))`）は、具体版と同じ式・同じ手順で必要十分版の側に置いた次のものを使い、具体版を参照しない
+（具体版と必要十分版は互いを参照しない。`lean/README.md`）。
 
-* 本文の `Ising2D.rayleighSup`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean`）。
-* 退避先 `Ising2D/RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecomposition.lean` の、
-  (−) セクターの定義（符号つきの `𝓡_±`・`c_±(M)`。`sectorSet`・`sectorRayleighSup`）、
-  その補題（`sectorSet_bddAbove`・`sector_smul`）、退避した主張 `sector_decomposition_of_rayleigh_sup`
-  （`c(M) = max(c_+(M), c_-(M))`）。`rayleighSup` も、このファイルの import を通して届く。
+* `vecNorm'`・`vecNormSq'`（`RealVectorNorm.lean`・`RealVectorSquaredNorm.lean`）。
+* `rayleighSet'`・`rayleighSup'`（`RayleighSupAndSectorRayleighSup.lean`）。
+* `sectorSet'`・`sectorRayleighSup'`・`sectorSet'_bddAbove`・`sector_smul'`・`sector_decomposition_of_rayleigh_sup'`
+  （`SignedSectorRayleighSupDecomposition.lean`）。
 
 どれも**任意の実行列 `W : Matrix n n ℝ` と任意の実行列 `ε`** について述べられており、
 Ising 模型の構造を含んでいない。したがって本ファイルの必要十分版は、その上に
 「`ε` が対合の置換行列である」という仮定だけを追加した形になる。
+具体版の定義（退避先 `ClaimRayleighSupSectorDecomposition.lean` の `sectorSet`・`sectorRayleighSup`、本文の `rayleighSup`）と
+これらが同じ集合・同じ値であることは、導出 `RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecompositionFromNecSuf.lean`・
+`ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSupFromNecSuf.lean` だけが述べる。
 
-退避先の定義と主張は (−) セクターの経路そのものなので、本文や `Ising2D/NecSuf/` の別のファイルへは移さない。
-本ファイルは必要十分版の置き場の規約により `Ising2D/NecSuf/` に置き、必要十分版のうち本ファイルだけが退避先を import する。
 ライブラリの入口 `Ising2D.lean` を除けば、本ファイルを import するのは `Ising2D/RoutesNotAdopted/MinusSector/` のファイルだけで、
 本文の Lean は本ファイルに依存しない。
 -/
-import Ising2D.RoutesNotAdopted.MinusSector.ClaimRayleighSupSectorDecomposition
+import Ising2D.NecSuf.SignedSectorRayleighSupDecomposition
 import Ising2D.NecSuf.PermMatrix
 
 set_option linter.unusedSectionVars false
@@ -93,21 +95,21 @@ theorem permMat_mulVec_absVec {π : n → n} {x : n → ℝ}
 
 /-- セクターに非零ベクトルが 1 つでもあれば、正規化して `𝓡_s` の元が作れる。 -/
 theorem sectorSet_nonempty_of_mem [Nonempty n] {W ε : Matrix n n ℝ} {s : ℝ} {v : n → ℝ}
-    (hv : ε *ᵥ v = s • v) (hv0 : v ≠ 0) : (sectorSet W ε s).Nonempty := by
-  have ha : 0 < vecNormSq v := vecNormSq_pos hv0
-  set c : ℝ := (Real.sqrt (vecNormSq v))⁻¹ with hc
-  have hc2 : c ^ 2 = (vecNormSq v)⁻¹ := by
+    (hv : ε *ᵥ v = s • v) (hv0 : v ≠ 0) : (sectorSet' W ε s).Nonempty := by
+  have ha : 0 < vecNormSq' v := vecNormSq'_pos hv0
+  set c : ℝ := (Real.sqrt (vecNormSq' v))⁻¹ with hc
+  have hc2 : c ^ 2 = (vecNormSq' v)⁻¹ := by
     rw [hc, inv_pow, Real.sq_sqrt ha.le]
-  have hunit : vecNormSq (c • v) = 1 := by
-    rw [vecNormSq_smul, hc2, inv_mul_cancel₀ ha.ne']
-  exact ⟨_, ⟨c • v, sector_smul hv, vecNorm_eq_one_of_vecNormSq_eq_one hunit, rfl⟩⟩
+  have hunit : vecNormSq' (c • v) = 1 := by
+    rw [vecNormSq'_smul, hc2, inv_mul_cancel₀ ha.ne']
+  exact ⟨_, ⟨c • v, sector_smul' hv, vecNorm'_eq_one_of_vecNormSq'_eq_one hunit, rfl⟩⟩
 
 /-- 偶セクター `𝓡_+` は空でない。
 
 `π` に不動点があってもなくても、`e_i + e_{π(i)}` は `π` で不変な非零ベクトルである。 -/
 theorem sectorSet_pos_nonempty [hn : Nonempty n] (W : Matrix n n ℝ) {π : n → n}
     (hπ : Function.Involutive π) :
-    (sectorSet W (permMat π) (1 : ℝ)).Nonempty := by
+    (sectorSet' W (permMat π) (1 : ℝ)).Nonempty := by
   obtain ⟨i⟩ := id hn
   set v : n → ℝ := Pi.single i 1 + Pi.single (π i) 1 with hv
   have hinv : permMat π *ᵥ v = (1 : ℝ) • v := by
@@ -130,7 +132,7 @@ theorem sectorSet_pos_nonempty [hn : Nonempty n] (W : Matrix n n ℝ) {π : n �
 `x_0 = (1/√2)(e_i - e_{π(i)})` が単位ベクトルとして取れる。 -/
 theorem sectorSet_neg_nonempty [Nonempty n] (W : Matrix n n ℝ) {π : n → n} (hπ : Function.Involutive π)
     {i : n} (hfix : π i ≠ i) :
-    (sectorSet W (permMat π) (-1 : ℝ)).Nonempty := by
+    (sectorSet' W (permMat π) (-1 : ℝ)).Nonempty := by
   set v : n → ℝ := Pi.single i 1 - Pi.single (π i) 1 with hv
   have hinv : permMat π *ᵥ v = (-1 : ℝ) • v := by
     rw [hv, Matrix.mulVec_sub, permMat_mulVec_single π hπ, permMat_mulVec_single π hπ,
@@ -147,10 +149,10 @@ theorem sectorSet_neg_nonempty [Nonempty n] (W : Matrix n n ℝ) {π : n → n} 
 
 theorem sectorRayleighSup_nonneg [Nonempty n] {W ε : Matrix n n ℝ}
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) {s : ℝ}
-    (hne : (sectorSet W ε s).Nonempty) : 0 ≤ sectorRayleighSup W ε s := by
+    (hne : (sectorSet' W ε s).Nonempty) : 0 ≤ sectorRayleighSup' W ε s := by
   obtain ⟨r, hr⟩ := hne
   obtain ⟨x, _, _, rfl⟩ := hr
-  exact le_trans (hpsd x) (le_csSup (sectorSet_bddAbove W ε s) ⟨x, ‹_›, ‹_›, rfl⟩)
+  exact le_trans (hpsd x) (le_csSup (sectorSet'_bddAbove W ε s) ⟨x, ‹_›, ‹_›, rfl⟩)
 
 /-- **人手証明 `c_minus_le_c_plus` の必要十分版** `c_-(M) ≤ c_+(M)`。
 
@@ -159,27 +161,27 @@ theorem sectorRayleighSup_nonneg [Nonempty n] {W ε : Matrix n n ℝ}
 theorem sectorRayleighSup_neg_le_pos [Nonempty n] {W : Matrix n n ℝ}
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hWnn : ∀ k l, 0 ≤ W k l)
     {π : n → n} (hπ : Function.Involutive π) :
-    sectorRayleighSup W (permMat π) (-1 : ℝ) ≤ sectorRayleighSup W (permMat π) 1 := by
-  rcases Set.eq_empty_or_nonempty (sectorSet W (permMat π) (-1 : ℝ)) with hemp | hne
-  · rw [sectorRayleighSup, hemp, Real.sSup_empty]
+    sectorRayleighSup' W (permMat π) (-1 : ℝ) ≤ sectorRayleighSup' W (permMat π) 1 := by
+  rcases Set.eq_empty_or_nonempty (sectorSet' W (permMat π) (-1 : ℝ)) with hemp | hne
+  · rw [sectorRayleighSup', hemp, Real.sSup_empty]
     exact sectorRayleighSup_nonneg hpsd (sectorSet_pos_nonempty W hπ)
   · refine csSup_le hne ?_
     rintro r ⟨x, hx, hx1, rfl⟩
     have h1 : permMat π *ᵥ absVec x = (1 : ℝ) • absVec x := permMat_mulVec_absVec hx
-    have h2 : vecNorm (absVec x) = 1 :=
-      vecNorm_eq_one_of_vecNormSq_eq_one
-        (by rw [show vecNormSq (absVec x) = vecNormSq x from vecNormSq_absVec x,
-          vecNormSq_eq_one_of_vecNorm_eq_one hx1])
+    have h2 : vecNorm' (absVec x) = 1 :=
+      vecNorm'_eq_one_of_vecNormSq'_eq_one
+        (by rw [show vecNormSq' (absVec x) = vecNormSq' x from vecNormSq_absVec x,
+          vecNormSq'_eq_one_of_vecNorm'_eq_one hx1])
     refine le_trans (quad_le_quad_absVec hWnn x) ?_
-    exact le_csSup (sectorSet_bddAbove W _ _) ⟨absVec x, h1, h2, rfl⟩
+    exact le_csSup (sectorSet'_bddAbove W _ _) ⟨absVec x, h1, h2, rfl⟩
 
 /-- **人手証明 `c_equals_c_plus` Step 1 の必要十分版** `c(M) = c_+(M)`。 -/
 theorem rayleighSup_eq_sectorRayleighSup_pos [Nonempty n] {W : Matrix n n ℝ}
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hWnn : ∀ k l, 0 ≤ W k l)
     {π : n → n} (hπ : Function.Involutive π)
     (hcomm : permMat π * W = W * permMat π) :
-    rayleighSup W = sectorRayleighSup W (permMat π) 1 := by
-  rw [sector_decomposition_of_rayleigh_sup hpsd (permMat_isSymm hπ)
+    rayleighSup' W = sectorRayleighSup' W (permMat π) 1 := by
+  rw [sector_decomposition_of_rayleigh_sup' hpsd (permMat_isSymm hπ)
     (permMat_mul_self hπ) hcomm]
   exact max_eq_left (sectorRayleighSup_neg_le_pos hpsd hWnn hπ)
 

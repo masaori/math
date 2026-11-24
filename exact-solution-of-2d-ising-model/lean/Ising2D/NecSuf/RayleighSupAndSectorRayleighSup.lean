@@ -30,6 +30,7 @@
 | `rayleighSet_bddAbove`（上界 `Σ_iΣ_j\|W_ij\|`） | `rayleighSet'_bddAbove`（同じ上界） | `ℝ`。`W` に仮定を置かない |
 | `vecNorm_single`（3 行の鎖 2 本と 4 行の鎖） | `vecNorm'_single`（同じ鎖） | `ℝ` |
 | `rayleighSet_nonempty`（`e_1ᵀWe_1 ∈ 𝓡`） | `rayleighSet'_nonempty`（同じ） | `n` が空でないこと（具体版と同じ。空なら単位ベクトルが無い） |
+| `le_rayleighSup`（単位ベクトルの `xᵀWx ≤ c(M)`）・`rayleighSup_nonneg`（`0 ≤ e_1ᵀWe_1 ≤ c(M)`） | 同じ名前に `'`（同じ手順） | `ℝ`。`rayleighSup'_nonneg` は `W` の半正定値性と `n` が空でないこと |
 | `evenSectorSet`・`evenSectorRayleighSup` | `evenSectorSet'`・`evenSectorRayleighSup'`（同じ式） | `ℝ` |
 | `evenSectorSet_subset`・`evenSectorSet_bddAbove`・`le_evenSectorRayleighSup` | 同じ名前に `'`（同じ手順） | `ℝ` |
 
@@ -191,6 +192,17 @@ theorem vecNorm'_single [DecidableEq n] (i₁ : n) : vecNorm' (Pi.single i₁ (1
 theorem rayleighSet'_nonempty [DecidableEq n] [Nonempty n] (W : Matrix n n ℝ) : (rayleighSet' W).Nonempty := by
   obtain ⟨i⟩ := (inferInstance : Nonempty n)
   exact ⟨_, ⟨Pi.single i 1, vecNorm'_single i, rfl⟩⟩
+
+/-- 単位ベクトルに対する `xᵀWx ≤ c(M)`（具体版 `Ising2D.le_rayleighSup` と同じ手順: 上限は上界）。 -/
+theorem le_rayleighSup' {W : Matrix n n ℝ} {x : n → ℝ} (hx : vecNorm' x = 1) :
+    x ⬝ᵥ W *ᵥ x ≤ rayleighSup' W :=
+  le_csSup (rayleighSet'_bddAbove W) ⟨x, hx, rfl⟩
+
+/-- `c(M) ≥ 0`（具体版 `Ising2D.rayleighSup_nonneg` と同じ手順: `0 ≤ e_1ᵀWe_1 ≤ c(M)`。`W` の半正定値性だけを使う）。 -/
+theorem rayleighSup'_nonneg [DecidableEq n] [Nonempty n] {W : Matrix n n ℝ}
+    (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) : 0 ≤ rayleighSup' W := by
+  obtain ⟨i⟩ := (inferInstance : Nonempty n)
+  exact le_trans (hpsd (Pi.single i 1)) (le_rayleighSup' (W := W) (vecNorm'_single i))
 
 /-! ## `𝓡_+` と `c_+(M) := sup 𝓡_+`（係数は `ℝ`） -/
 

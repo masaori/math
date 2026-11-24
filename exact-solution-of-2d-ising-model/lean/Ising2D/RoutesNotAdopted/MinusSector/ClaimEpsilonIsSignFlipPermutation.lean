@@ -37,6 +37,7 @@
 `ε` の成分が `0` と `1` しかない（人手証明 (1)）ので、この橋渡しは値の落ちない同一視である。
 -/
 import Ising2D.NecSuf.PermSector
+import Ising2D.RoutesNotAdopted.MinusSector.ClaimRayleighSupSectorDecomposition
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 
 set_option linter.unusedSectionVars false

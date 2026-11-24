@@ -146,8 +146,8 @@
      指数関数で書けることも、Ising 模型のパラメータ `K_1, K_2` も効いていない。
   3. **`W` が半正定値であること。** これは `c_±(M) ≥ 0`（`sectorRayleighSup_nonneg`）と、
      `c(M) = max(c_+(M), c_-(M))` で空のセクターの上限 `0` と比べる段にだけ使う。
-     `c_±(M)` が上に有界であること（章 011 の `sectorSet_bddAbove`）は、`𝓡` の上界 `Σ_iΣ_j|W_ij|`
-     （`rayleighSet_bddAbove`）から仮定なしに出る。`W` の対称性は効いていない。
+     `c_±(M)` が上に有界であること（必要十分版の側の `sectorSet'_bddAbove`、`NecSuf/SignedSectorRayleighSupDecomposition.lean`）は、`𝓡` の上界 `Σ_iΣ_j|W_ij|`
+     （`rayleighSet'_bddAbove`、`NecSuf/RayleighSupAndSectorRayleighSup.lean`）から仮定なしに出る。`W` の対称性は効いていない。
 
 - **人手証明 (2) の「`π` は不動点をもたない」は `c_-(M) ≤ c_+(M)` には効いていない。**
   必要十分版 `NecSuf.sectorRayleighSup_neg_le_pos` は不動点について何も仮定していない。

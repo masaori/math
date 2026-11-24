@@ -1543,6 +1543,7 @@ targets=(
   Ising2D.NecSuf.sectorSet_neg_nonempty
   Ising2D.NecSuf.sectorRayleighSup_neg_le_pos
   Ising2D.NecSuf.rayleighSup_eq_sectorRayleighSup_pos
+  "Ising2D.NecSuf.sector_decomposition_of_rayleigh_sup'"
   Ising2D.flipConf_involutive
   Ising2D.epsilon_apply
   Ising2D.epsilon_eq_ofReal_epsilonR
@@ -3728,6 +3729,7 @@ targets=(
   Ising2D.projPlus_mulVec_eigen
   Ising2D.projMinus_mulVec_eigen
   Ising2D.sector_decomposition_of_rayleigh_sup
+  Ising2D.sector_decomposition_of_rayleigh_sup_of_necSuf
   Ising2D.flipConf_ne_self
   Ising2D.epsilonR_entry_zero_or_one
   Ising2D.epsilonR_row_sum

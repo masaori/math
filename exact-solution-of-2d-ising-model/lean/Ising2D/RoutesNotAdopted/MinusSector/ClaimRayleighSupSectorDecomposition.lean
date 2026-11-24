@@ -21,13 +21,15 @@
 * `W P^{(+)} = V^{(+)} P^{(+)}` → `Ising2D.symmetrized_transfer_matrix_on_sectors`
   （`PartitionFunction/ProjectionAndJordanWigner/PhysicalSymTransferBridge.lean`）
 
-## この主張に効いている構造（必要十分版を別に置かない理由）
+## この主張に効いている構造
 
 この主張は「対合 `ε`（`ε² = 1`、対称）で `W` と可換なもの」があれば成り立ち、
 `ε` が `σ^x` の積であることも、`W` が転送行列であることも効いていない。
 本ファイルの定理はすでにその一般性で述べてある（`ε : Matrix n n ℝ` は
-`ε.IsSymm`, `ε * ε = 1`, `ε * W = W * ε` しか仮定していない）ので、
-これ以上ほどく余地がない（`sSup` は ℝ の完備性そのもの）。
+`ε.IsSymm`, `ε * ε = 1`, `ε * W = W * ε` しか仮定していない）ので、係数を `ℝ` から上げる余地も無い
+（`sSup` は ℝ の完備性そのもの）。必要十分版の側には、`(−)` セクターの必要十分版 `NecSuf/PermSector.lean` が
+具体版を参照せずに済むように、同じ式・同じ手順の写し `NecSuf/SignedSectorRayleighSupDecomposition.lean` を置いた。
+一致は導出 `ClaimRayleighSupSectorDecompositionFromNecSuf.lean` だけが述べ、本ファイルはそれを import しない。
 -/
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.DefinitionSectorRayleighSup
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound

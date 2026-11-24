@@ -171,8 +171,9 @@
 | `NecSuf.IsPdPair.moment_pos` / `W_ker` / `pow_ne_zero_of_ne_zero`（`RayleighMoments.lean`） | `m_k > 0`、`W` の核は `{0}`（`m_k > 0` を示すための補助） | `moment_log_convexity` の【(W_ℝ)^ax は零でない】と【正値性】（人手も `W_ℝu = 0` なら `u^⊤W_ℝu = 0` で正定値性に反するという `a` の帰納法で、同じ論法） |
 | `NecSuf.IsPdPair.moment_ratio_le` / `moment_pow_le` | `m_1m_k ≤ m_{k+1}` と `(xᵀWx)^n ≤ m_n` | `trace_power_sandwich` の【単位ベクトルでの評価】の `m_k ≥ m_1m_{k-1}`・`m_p ≥ m_1^p`（具体版は `Ising2D.moment_ge_moment_one_mul_prev`・`Ising2D.moment_ge_moment_one_pow`。一歩の論法は、具体版が商を経て、必要十分版は掛けてから約す。具体版と同じ型での導出は `Ising2D.moment_ge_moment_one_pow_of_necSuf`、`ClaimTracePowerSandwichUnitVectorBoundFromNecSuf.lean`） |
 | `Ising2D.NecSuf.sandwich_mul_proj_eq` | 任意の半群で `BP=CP` と `C,V` の `P` との可換性から `BVB P=CVC P` | `symmetrized_transfer_matrix_on_sectors` |
-| `Ising2D.NecSuf.vecNorm'` / `vecNormSq'_nonneg` / `vecNormSq'_smul` / `vecNorm'_sq` / `vecNorm'_eq_one_of_vecNormSq'_eq_one` / `vecNormSq'_eq_one_of_vecNorm'_eq_one`（`RealVectorNorm.lean`） | 実ベクトルのノルム `√(xᵀx)` とその性質を、具体版 `RealMatrixBilinearFormAndNorm.lean` と同じ式・同じ手順で必要十分版の側に置いたもの（具体版と必要十分版を互いに参照させないため。一致は導出 `RealMatrixBilinearFormAndNormFromNecSuf.lean` の `vecNorm_eq_vecNorm_necSuf`） | 補助（対応する人手の項目は無い） |
+| `Ising2D.NecSuf.vecNorm'` / `vecNormSq'_nonneg` / `vecNormSq'_eq_zero_iff` / `vecNormSq'_pos` / `vecNormSq'_smul` / `vecNorm'_sq` / `vecNorm'_eq_one_of_vecNormSq'_eq_one` / `vecNormSq'_eq_one_of_vecNorm'_eq_one`（`RealVectorNorm.lean`） | 実ベクトルのノルム `√(xᵀx)` とその性質を、具体版 `RealMatrixBilinearFormAndNorm.lean` と同じ式・同じ手順で必要十分版の側に置いたもの（具体版と必要十分版を互いに参照させないため。一致は導出 `RealMatrixBilinearFormAndNormFromNecSuf.lean` の `vecNorm_eq_vecNorm_necSuf`） | 補助（対応する人手の項目は無い） |
 | `Ising2D.NecSuf.rayleighSet'` / `rayleighSup'` / `rayleighSet'_bddAbove` / `rayleighSet'_nonempty` / `evenSectorSet'` / `evenSectorRayleighSup'` / `le_evenSectorRayleighSup'` ほか（`RayleighSupAndSectorRayleighSup.lean`） | `𝓡`・`c(M)`・`𝓡_+`・`c_+(M)` とその性質を、具体版 `DefinitionRayleighSup.lean`・`DefinitionSectorRayleighSup.lean` と同じ式・同じ手順で必要十分版の側に置いたもの（上界の 4 行・6 行・2 行の補題は係数を順序環へ上げた。一致は導出 `DefinitionRayleighSupFromNecSuf.lean`・`DefinitionSectorRayleighSupFromNecSuf.lean`。使うのは記録 `NecSuf/EvenSectorUpperBound.lean`） | `def_rayleigh_sup`・`def_sector_rayleigh_sup` |
+| `Ising2D.NecSuf.sectorSet'` / `sectorRayleighSup'` / `sectorSet'_bddAbove` / `sectorRayleighSup'_le` / `sector_quad_le'` / `projPlus'` / `projMinus'` / `sector_decomposition_of_rayleigh_sup'` ほか（`SignedSectorRayleighSupDecomposition.lean`） | 符号つきの `𝓡_±`・`c_±(M)` とその性質、`c(M) = max(c_+(M), c_-(M))` を、退避先の具体版 `RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecomposition.lean` と同じ式・同じ手順で必要十分版の側に置いたもの（一致と特殊化は導出 `RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecompositionFromNecSuf.lean`。使うのは記録 `NecSuf/PermSector.lean`） | ノート `sector_decomposition_of_rayleigh_sup`（参照用ノート `minus_sector_not_adopted.ts` へ退避） |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
@@ -192,7 +193,7 @@
 | `def_sector_rayleigh_sup` / `c_plus_le_c` | `Ising2D.evenSectorRayleighSup` / `Ising2D.c_plus_le_c` | なし（`sSup` とその単調性は ℝ の完備性そのもの） | — |
 | `epsilon_is_real_symmetric` | `Ising2D.epsilon_is_real_symmetric` | なし（`ε` の具体的な成分の計算。置換行列の一般的な性質は `NecSuf/PermMatrix.lean`） | — |
 | `epsilon_commutes_with_W` | `Ising2D.epsilon_commutes_with_W` | なし（結合律だけの鎖。置き換えた構造は章 010 の具体的な反交換関係） | — |
-| ノート `sector_decomposition_of_rayleigh_sup` | `Ising2D.sector_decomposition_of_rayleigh_sup` | なし（下記） | — |
+| ノート `sector_decomposition_of_rayleigh_sup` | `Ising2D.sector_decomposition_of_rayleigh_sup` | `Ising2D.NecSuf.sector_decomposition_of_rayleigh_sup'`（`NecSuf/SignedSectorRayleighSupDecomposition.lean`。具体版と同じ式・同じ手順の写し。下記） | **はい**（`sector_decomposition_of_rayleigh_sup_of_necSuf`、`RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecompositionFromNecSuf.lean`） |
 
 ### 必要十分版で判明した本質
 
@@ -237,8 +238,10 @@
 
 - （ノートへ退避したセクター分解について）**セクター分解に効いているのは「対称な対合 `ε`（`ε² = 1`）で `W` と可換なもの」だけ**である。
   `ε` が `σ^x` の積であることも、`W` が転送行列であることも効いていない。
-  Lean 側の `Ising2D.sector_decomposition_of_rayleigh_sup` はすでにその一般性で述べてあるので、
-  別途の必要十分版は置いていない。
+  Lean 側の `Ising2D.sector_decomposition_of_rayleigh_sup` はすでにその一般性で述べてあり、係数を `ℝ` から上げる余地も無い
+  （`sSup` は ℝ の完備性そのもの）。必要十分版の側の `NecSuf.sector_decomposition_of_rayleigh_sup'`
+  （`NecSuf/SignedSectorRayleighSupDecomposition.lean`）は、`(−)` セクターの必要十分版 `NecSuf/PermSector.lean` が具体版を参照せずに
+  済むように置いた同じ式・同じ手順の写しである。
 
 ## 3. 他章に仮定として置いた事実
 

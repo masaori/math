@@ -506,6 +506,8 @@ import Ising2D.NecSuf.RealVectorSquaredNorm
 import Ising2D.NecSuf.RealVectorNorm
 import Ising2D.NecSuf.RayleighSupAndSectorRayleighSup
 import Ising2D.NecSuf.PermMatrix
+import Ising2D.NecSuf.SignedSectorRayleighSupDecomposition
+import Ising2D.RoutesNotAdopted.MinusSector.ClaimRayleighSupSectorDecompositionFromNecSuf
 import Ising2D.NecSuf.PermSector
 import Ising2D.RoutesNotAdopted.MinusSector.ClaimEpsilonIsSignFlipPermutation
 import Ising2D.RoutesNotAdopted.MinusSector.ClaimAbsVectorMovesToEvenSector

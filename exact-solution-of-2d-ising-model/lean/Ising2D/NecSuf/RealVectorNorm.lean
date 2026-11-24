@@ -2,7 +2,7 @@
 # 実ベクトルのノルム `‖x‖ = √(xᵀx)`（**必要十分版**の側の定義）
 
 具体版の同じ定義と性質は `Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`
-の `Ising2D.vecNorm`・`vecNormSq_nonneg`・`vecNormSq_smul`・`vecNorm_sq`・`vecNorm_eq_one_of_vecNormSq_eq_one`・`vecNormSq_eq_one_of_vecNorm_eq_one` である
+の `Ising2D.vecNorm`・`vecNormSq_nonneg`・`vecNormSq_eq_zero_iff`・`vecNormSq_pos`・`vecNormSq_smul`・`vecNorm_sq`・`vecNorm_eq_one_of_vecNormSq_eq_one`・`vecNormSq_eq_one_of_vecNorm_eq_one` である
 （対応する人手の項目は無い補助の定義。人手の `def_matrix_norm` の `K = ℝ` の数ベクトルのノルムを Lean で書いたもの）。
 具体版の `vecNorm` とこのファイルの `vecNorm'` が同じ値であることは、具体版と同じフォルダの
 `RealMatrixBilinearFormAndNormFromNecSuf.lean` が述べる。
@@ -14,12 +14,13 @@
 | `sqrt_of_real_one_is_one`（`√1 = 1`。`ClaimSqrtOfRealOneIsOne.lean`） | `sqrt_one'`（同じ手順） | なし（具体版と同じ） |
 | `vecNorm`（`√(x ⬝ᵥ x)`） | `vecNorm'`（同じ式） | なし（具体版と同じ） |
 | `vecNormSq_nonneg`（二乗の和は非負） | `vecNormSq'_nonneg`（同じ手順） | なし（具体版と同じ） |
+| `vecNormSq_eq_zero_iff`・`vecNormSq_pos`（`‖x‖² = 0 ↔ x = 0`、`x ≠ 0` なら `‖x‖² > 0`） | `vecNormSq'_eq_zero_iff`・`vecNormSq'_pos`（同じ手順） | なし（具体版と同じ） |
 | `vecNormSq_smul`（`‖cx‖² = c²‖x‖²`） | `vecNormSq'_smul`（同じ手順） | なし（具体版と同じ） |
 | `vecNorm_sq`（`‖x‖^2 = ‖x‖²`） | `vecNorm'_sq`（同じ手順） | なし（具体版と同じ） |
 | `vecNorm_eq_one_of_vecNormSq_eq_one`・`vecNormSq_eq_one_of_vecNorm_eq_one` | `vecNorm'_eq_one_of_vecNormSq'_eq_one`・`vecNormSq'_eq_one_of_vecNorm'_eq_one`（同じ手順） | なし（具体版と同じ） |
 
 * 係数は具体版と同じ `ℝ` に固定する。`√` が `ℝ` の平方根なので、係数を一般の順序体へ上げる余地は無い。
-* このファイルを置くのは、ノルムを使う必要十分版（`RayleighSupAndSectorRayleighSup.lean`・`EvenSectorUpperBound.lean`）が
+* このファイルを置くのは、ノルムを使う必要十分版（`RayleighSupAndSectorRayleighSup.lean`・`EvenSectorUpperBound.lean`・`SignedSectorRayleighSupDecomposition.lean`・`PermSector.lean`）が
   具体版の定義を参照せずに済むようにするためである（具体版と必要十分版は互いを参照しない。`lean/README.md`）。
 -/
 import Ising2D.NecSuf.RealVectorSquaredNorm
@@ -42,6 +43,22 @@ noncomputable def vecNorm' (x : n → ℝ) : ℝ := Real.sqrt (vecNormSq' x)
 theorem vecNormSq'_nonneg (x : n → ℝ) : 0 ≤ vecNormSq' x := by
   rw [vecNormSq'_eq_sum]
   exact Finset.sum_nonneg fun i _ => sq_nonneg _
+
+/-- `‖x‖² = 0 ↔ x = 0`（具体版 `Ising2D.vecNormSq_eq_zero_iff` と同じ手順: 和に開き、非負の項の和が `0` なら各項の二乗が `0`）。 -/
+theorem vecNormSq'_eq_zero_iff {x : n → ℝ} : vecNormSq' x = 0 ↔ x = 0 := by
+  rw [vecNormSq'_eq_sum]
+  constructor
+  · intro h
+    funext i
+    have := (Finset.sum_eq_zero_iff_of_nonneg (fun j _ => sq_nonneg (x j))).mp h i
+      (Finset.mem_univ i)
+    simpa using pow_eq_zero_iff (n := 2) (by norm_num) |>.mp this
+  · rintro rfl
+    simp
+
+/-- `x ≠ 0` なら `‖x‖² > 0`（具体版 `Ising2D.vecNormSq_pos` と同じ手順: `‖x‖² ≥ 0` と `‖x‖² = 0 ↔ x = 0`）。 -/
+theorem vecNormSq'_pos {x : n → ℝ} (hx : x ≠ 0) : 0 < vecNormSq' x :=
+  lt_of_le_of_ne (vecNormSq'_nonneg x) (fun h => hx (vecNormSq'_eq_zero_iff.mp h.symm))
 
 /-- `‖cx‖² = c²‖x‖²`（具体版 `Ising2D.vecNormSq_smul` と同じ手順: 和に開き、各項の `(c x_i)² = c² x_i²` を外へ出す）。 -/
 theorem vecNormSq'_smul (c : ℝ) (x : n → ℝ) :
