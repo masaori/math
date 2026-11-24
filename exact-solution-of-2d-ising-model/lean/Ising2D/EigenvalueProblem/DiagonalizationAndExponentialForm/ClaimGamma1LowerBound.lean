@@ -8,7 +8,7 @@
 **具体版**（人手証明と同じ抽象度）。必要十分版は `Ising2D/NecSuf/CoshLowerBound.lean`
 （`Ising2D.NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub`）と
 `Ising2D/NecSuf/Arcosh.lean`（`Ising2D.NecSuf.continuous_arcosh_comp`）。
-具体版は必要十分版の系として導出してある（`gamma1R_ge_cosh_sub` の証明を参照）。
+`gamma1R_ge_cosh_sub` を必要十分版の特殊化として得る導出は `ClaimGamma1LowerBoundFromNecSuf.lean`。
 
 ## 形式化の方針
 
@@ -36,7 +36,8 @@
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimDualityC2StarEqS2StarC2
 import Ising2D.NecSuf.Arcosh
-import Ising2D.NecSuf.CoshLowerBound
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealDifference
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
 
@@ -89,17 +90,46 @@ theorem IsingParam.s2star_pos (P : IsingParam) : 0 < P.const.s2star :=
   (indexedHyperbolicAbbreviations_pos P.K1_pos P.K2_pos (Kstar_pos P.K1_pos) P.K2star_pos).2.2.2.2.2.2.2
 
 /-- **人手証明 `gamma1_lower_bound_all_theta` の第 1 の不等式**（`∀θ ∈ ℝ`）:
-`γ_1(θ) ≥ cosh(2K_1 - 2K_2^*)`。必要十分版 `NecSuf.cosh_sub_le_cosh_mul_cosh_sub` の系。 -/
+`γ_1(θ) ≥ cosh(2K_1 - 2K_2^*)`。人手の準備（`s_1s_2^* > 0` の 2 行と、`cos θ ≤ 1` からの 2 つの含意）と、
+`γ_1(θ)` から `cosh(2K_1 − 2K_2^*)` までの 5 行の鎖に 1 対 1 に対応する。
+人手の鎖の最後の行 `cosh(2K_1 − 2K_2^*) ≥ 1` は `one_le_gamma1R` が持つ。
+全実数上の `cos θ ≤ 1` は、人手の主張が前提とする性質で、mathlib の `Real.cos_le_one` で受け取る。 -/
 theorem gamma1R_ge_cosh_sub (P : IsingParam) (θ : ℝ) :
     Real.cosh (2 * P.K1 - 2 * P.K2star) ≤ gamma1R P.const θ := by
-  have hs : 0 ≤ Real.sinh (2 * P.K1) * Real.sinh (2 * P.K2star) := by
-    have h1 := P.s1_pos
-    have h2 := P.s2star_pos
-    simp only [IsingParam.const] at h1 h2
-    positivity
-  simpa [gamma1R, IsingParam.const] using
-    NecSuf.cosh_sub_le_cosh_mul_cosh_sub (u := 2 * P.K1) (v := 2 * P.K2star)
-      (x := Real.cos θ) (Real.cos_le_one θ) hs
+  -- 準備: `s_1s_2^* > 0`
+  have hs : P.const.s1 * P.const.s2star > 0 :=
+    calc P.const.s1 * P.const.s2star
+        > 0 * P.const.s2star := mul_lt_mul_of_pos_right P.s1_pos P.s2star_pos
+          -- `s_1 > 0` の両辺に `s_2^* > 0` を掛ける
+      _ = 0 := zero_mul P.const.s2star
+          -- ℝ では `0` との積は `0`
+  -- 準備: `cos θ ≤ 1 ⟹ s_1s_2^* cos θ ≤ s_1s_2^*·1 ⟹ −s_1s_2^*·1 ≤ −s_1s_2^* cos θ`
+  have hcos : Real.cos θ ≤ 1 := Real.cos_le_one θ
+    -- 主張の前提（全実数上の `cos` の性質）
+  have h1 : P.const.s1 * P.const.s2star * Real.cos θ ≤ P.const.s1 * P.const.s2star * 1 :=
+    mul_le_mul_of_nonneg_left hcos (le_of_lt hs)
+    -- 両辺に `s_1s_2^* > 0` を掛ける
+  have h2 : -(P.const.s1 * P.const.s2star * 1) ≤ -(P.const.s1 * P.const.s2star * Real.cos θ) :=
+    neg_le_neg h1
+    -- 両辺に `−1 < 0` を掛ける（向きが変わる）
+  have key : gamma1R P.const θ ≥ Real.cosh (2 * P.K1 - 2 * P.K2star) :=
+    calc gamma1R P.const θ
+        = P.const.c1 * P.const.c2star - P.const.s1 * P.const.s2star * Real.cos θ := rfl
+          -- `def_gamma1_gamma2_of_theta`
+      _ ≥ P.const.c1 * P.const.c2star - P.const.s1 * P.const.s2star * 1 := by
+          rw [real_sub_eq_add_neg, real_sub_eq_add_neg]
+          exact (add_le_add_iff_left (P.const.c1 * P.const.c2star)).mpr h2
+          -- 準備の `−s_1s_2^*·1 ≤ −s_1s_2^* cos θ` の両辺に `c_1c_2^*` を加える。
+          -- 差を和と符号反転に読む `rw` は `def_real_difference`（`y − z := y + (−z)`）を 2 箇所へ
+      _ = P.const.c1 * P.const.c2star - P.const.s1 * P.const.s2star := by
+          rw [mul_one (P.const.s1 * P.const.s2star)]
+          -- ℝ では `1` は積の単位元
+      _ = Real.cosh (2 * P.K1) * Real.cosh (2 * P.K2star)
+            - Real.sinh (2 * P.K1) * Real.sinh (2 * P.K2star) := rfl
+          -- `def_indexed_hyperbolic_abbreviations`（`IsingParam.const` の欄）
+      _ = Real.cosh (2 * P.K1 - 2 * P.K2star) := (cosh_sub_formula (2 * P.K1) (2 * P.K2star)).symm
+          -- `cosh_addition_formula` の複号 `−` を `x = 2K_1`, `y = 2K_2^*` に適用
+  exact key
 
 /-- **人手証明 `gamma1_lower_bound_all_theta` の第 2 の不等式**: `γ_1(θ) ≥ 1`（`∀θ ∈ ℝ`）。 -/
 theorem one_le_gamma1R (P : IsingParam) (θ : ℝ) : 1 ≤ gamma1R P.const θ :=

@@ -22,6 +22,7 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | `Ising2D.gamma1R` | `γ_1(θ) = c_1c_2^* - s_1s_2^*\cos θ` の実数版 | `def_A_theta` |
 | `Ising2D.gamma1_eq_ofReal` | 既存の ℂ 版 `gamma1` が `gamma1R` の埋め込みであること | 定義の突き合わせ |
 | `Ising2D.gamma1R_ge_cosh_sub` | `γ_1(θ) ≥ cosh(2K_1-2K_2^*)`（`∀θ ∈ ℝ`） | `gamma1_lower_bound_all_theta` 第 1 式 |
+| `Ising2D.gamma1R_ge_cosh_sub_of_necSuf`（`ClaimGamma1LowerBoundFromNecSuf.lean`） | 上を必要十分版 `NecSuf.cosh_sub_le_cosh_mul_cosh_sub` の `u := 2K_1`, `v := 2K_2^*`, `x := cos θ` の特殊化として導出した版 | 同 第 1 式 |
 | `Ising2D.one_le_gamma1R` | `γ_1(θ) ≥ 1`（`∀θ ∈ ℝ`） | 同 第 2 式 |
 | `Ising2D.gamma1_lower_bound_all_theta` | 上 2 つを並べた形 | `gamma1_lower_bound_all_theta` |
 | `Ising2D.gammaFn` | `γ(θ) := arcosh(γ_1(θ))` | `def_gamma_theta` |
@@ -73,7 +74,7 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 
 | 人手証明のラベル | 具体版 | 必要十分版 | 具体版を必要十分版の系として導出しているか |
 | --- | --- | --- | --- |
-| `gamma1_lower_bound_all_theta` | `Ising2D.gamma1R_ge_cosh_sub` / `one_le_gamma1R` | `NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub` | **している**（`gamma1R_ge_cosh_sub` の証明が必要十分版の特殊化） |
+| `gamma1_lower_bound_all_theta` | `Ising2D.gamma1R_ge_cosh_sub` / `one_le_gamma1R` | `NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub` | **している**（`ClaimGamma1LowerBoundFromNecSuf.lean` の `gamma1R_ge_cosh_sub_of_necSuf`。具体版 `gamma1R_ge_cosh_sub` は人手の鎖と 1 対 1 で、必要十分版を使わない） |
 | `gamma_is_continuous` | `Ising2D.gamma_is_continuous` | `NecSuf.continuous_arcosh_comp` | **している**（1 行の特殊化） |
 | `limit_of_log_Z_in_N_row` | `Ising2D.abs_log_Z_sub_log_c_le` / `limit_of_log_Z_in_N_row` | `NecSuf.abs_div_sub_le_of_sandwich` / `NecSuf.tendsto_of_abs_sub_le_div` | **している**（`ClaimLimitInNRowFromNecSuf.lean`。`L := log`、`b := 2`、`C := log 2`） |
 | `riemann_sum_to_integral` | `Ising2D.riemann_sum_to_integral_error` / `riemann_sum_to_integral` | `NecSuf.abs_integral_sub_riemann_sum_le_modulus` / `NecSuf.tendsto_riemann_sum` | **している**（`a = 0`, `b = 2π` の特殊化と添字の付け替え） |

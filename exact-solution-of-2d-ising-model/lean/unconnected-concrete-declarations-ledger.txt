@@ -397,7 +397,6 @@ Ising2D.cosh_gammaK
 Ising2D.cosh_gammaTilde
 Ising2D.cosh_half_gammaK
 Ising2D.cosh_sinh_basic_properties_1
-Ising2D.cosh_sub_formula
 Ising2D.cosh_two_Kc
 Ising2D.cosh_two_Kc_sub_fifth_le
 Ising2D.coshgamma_div_sinhgamma_cube_le
@@ -859,7 +858,6 @@ Ising2D.sinh_gammaTilde
 Ising2D.sinh_half_gammaFn_sq
 Ising2D.sinh_half_gammaK
 Ising2D.sinh_injective_real
-Ising2D.sinh_is_odd
 Ising2D.sinh_le_mul_cosh_of_nonneg
 Ising2D.sinh_le_sinh_of_le
 Ising2D.sinh_sq_div_four_le_Qfun

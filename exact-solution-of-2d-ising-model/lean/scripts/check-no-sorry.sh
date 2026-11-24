@@ -2063,6 +2063,7 @@ targets=(
   Ising2D.NecSuf.pos_of_nonneg_of_sq_eq_pos
   Ising2D.absGamma2_pos_of_ne_zero
   Ising2D.absGamma2_pos_of_ne_zero_of_necSuf
+  Ising2D.gamma1R_ge_cosh_sub_of_necSuf
   Ising2D.vec_sub_eq_zero_iff_tensorPow
   Ising2D.identity_matrix_mulVec_tensorPow
   Ising2D.mul_comm_of_anticomm_pair_tensorPow

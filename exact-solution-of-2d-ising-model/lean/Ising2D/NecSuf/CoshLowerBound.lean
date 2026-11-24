@@ -3,6 +3,7 @@
 
 対応する人手証明のラベル: `gamma1_lower_bound_all_theta`
 具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`
+具体版をこの必要十分版の特殊化として得る導出: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBoundFromNecSuf.lean`
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）
 
