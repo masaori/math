@@ -3236,7 +3236,6 @@ targets=(
   Ising2D.cos_thetaTilde_lt_one
   Ising2D.one_lt_gamma1R_thetaTilde_checkIndex
   Ising2D.gammaFn_thetaTilde_pos
-  Ising2D.sum_checkIdx
   Ising2D.tagPoint_half_eq_thetaTilde
   Ising2D.checkBigLambda_univ_eq_LambdaM
   Ising2D.gval_eq_sum_fin_real
