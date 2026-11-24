@@ -77951,7 +77951,7 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 \frac{2}{a}\cdot\iota(\log q)
 &\le_{\Lambda_{\mathbb{Q}}}\frac{2(k-1)}{ka}\cdot\iota(\log q)
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonpos}\text{ を }r:=\tfrac{2(k-1)}{ka}\text{、}s:=\tfrac{2}{a}\text{、}\nu:=\iota(\log q)\text{ で読む。}r\le s\text{ は第一、}\nu\le_{\Lambda_{\mathbb{Q}}}0\text{ は第二})
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonpos}\text{ を }r:=\tfrac{2(k-1)}{ka}\text{、}s:=\tfrac{2}{a}\text{、}\nu:=\iota(\log q)\text{ で読む、}r\le s\text{ は第一、}\nu\le_{\Lambda_{\mathbb{Q}}}0\text{ は第二})
 \end{aligned}`),
                         paragraph([
                           "主張の左の不等式を、その左辺から始める次の一続きで示す。二つの ",

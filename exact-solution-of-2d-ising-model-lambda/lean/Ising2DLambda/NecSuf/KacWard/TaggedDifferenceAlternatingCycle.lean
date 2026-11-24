@@ -1,4 +1,4 @@
-import Ising2DLambda.AlgebraicEigenvalue.MatchingPairReconstructedOrbit
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairReconstructedOrbit
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairEvenOrbit
 import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceOrbitSeparation
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEvenOrbit
@@ -36,7 +36,14 @@ theorem alternatingCycle (τ υ : FixedPointFreeInvolution J) (i : J) :
       finitePermutationOrbit (matchingPairPermutation τ υ)
           (matchingPairComponentMinimum τ υ i) =
           matchingPairComponent τ υ (matchingPairComponentMinimum τ υ i) :=
-        matchingPairPermutation_orbit_eq_component τ υ _
+        by
+          let C : J → Prop := fun j => j ∈ matchingPairColor τ υ
+          have hτcolor (j : J) : C (τ.val j) ↔ ¬ C j :=
+            matchingPairColor_alternates τ υ j
+          have hυcolor (j : J) : C (υ.val j) ↔ ¬ C j :=
+            matchingPairSecondColor_alternates τ υ j
+          exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairPermutation_orbit_eq_component
+            τ.val υ.val C τ.property.2 υ.property.2 hτcolor hυcolor _
       _ = matchingPairComponent τ υ i :=
         matchingPairComponent_basepoint τ υ i _ hm
   constructor
