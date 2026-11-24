@@ -3,7 +3,6 @@
 # 行は減らすだけにする。直して違反でなくなった行は同じ回に消す。
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.matchingPairActualMonomial
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.matchingPairActualSignComposition
-DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.matchingPairFirstEnumeration
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.matchingPairSecondEnumeration
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.matchingPairTermData
 DEP	concrete	Ising2DLambda.AlgebraicEigenvalue.orientationSign_cast_eq_product

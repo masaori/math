@@ -25,7 +25,12 @@ theorem matchingPairActualMonomial (τ υ : FixedPointFreeInvolution J)
   constructor
   · have hset : (w.map (ascendingMatePair τ.val)).toFinset =
         matchingOrientedPairs (involutionToPerfectMatching τ) :=
-      Finset.ext fun p => by simpa only [List.mem_toFinset] using hτ.2 p
+      Finset.ext fun p => by
+        have hpair : concreteAscendingMatePair τ.val = ascendingMatePair τ.val := by
+          funext i
+          rfl
+        rw [← hpair]
+        simpa only [List.mem_toFinset] using hτ.2 p
     calc
       ((w.map (ascendingMatePair τ.val)).map (fun p => A p.1 p.2)).prod =
           ∏ p ∈ (w.map (ascendingMatePair τ.val)).toFinset, A p.1 p.2 :=

@@ -47324,8 +47324,8 @@ g
                             "）であり、",
                           ]),
                           displayMath(String.raw`\begin{aligned}
-s&\in P_s&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{。}\ \mathrm{rep}_s(s)=(0,1)\text{ は表示の一意性 }\blkref{claim_quadratic_representation_unique}\text{ による}\bigr)\\
-s&\in C_R\cap Q_s&&\bigl(\because\ P_s=C_R\cap Q_s\text{。}\ \blkref{claim_enumerated_ordered_subfield_is_maximal}\text{ の延長と、部分体 }Q_s\text{（}\blkref{claim_quadratic_field_set_is_subfield}\text{）への }\blkref{def_positive_cone_extension}\bigr)\\
+s&\in P_s&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{、}\ \mathrm{rep}_s(s)=(0,1)\text{ は表示の一意性 }\blkref{claim_quadratic_representation_unique}\text{ による}\bigr)\\
+s&\in C_R\cap Q_s&&\bigl(\because\ P_s=C_R\cap Q_s\text{、}\ \blkref{claim_enumerated_ordered_subfield_is_maximal}\text{ の延長と、部分体 }Q_s\text{（}\blkref{claim_quadratic_field_set_is_subfield}\text{）への }\blkref{def_positive_cone_extension}\bigr)\\
 s&\in C_R&&\bigl(\because\ \text{共通部分の定義}\bigr)
 \end{aligned}`),
                           paragraph([
