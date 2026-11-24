@@ -1,4 +1,6 @@
 import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityPowerSumValue
+import Ising2DLambda.KacWard.HorizontalTwistedModesCoset
+import Ising2DLambda.KacWard.VerticalTwistedModesCoset
 import Mathlib
 
 namespace Ising2DLambda.KacWard
@@ -59,6 +61,82 @@ theorem twistedMode_powerSum {L : ℕ} (hL : 1 ≤ L)
       change ξ ^ k * powerSum L k = _
       rw [powerSumValue hL k]
       rfl
+
+/-- 本文の冪和の証明の一方向分。境界符号が 1 なら冪根集合の上の乗法の全単射で、
+-1 なら剰余類の表示 `hcoset` と乗法の単射で再添字付けする。 -/
+theorem twistedModes_powerSum_of_coset {L : ℕ} (hL : 1 ≤ L)
+    [Fintype (RootOfUnity L)] (U : Set Qbar) [Fintype U] (b : Bool) {ξ : Qbar}
+    (hmem : ∀ z : Qbar, z ∈ U ↔ z ^ L = if b then -1 else 1)
+    (hcoset : b = true → U = (fun y : Qbar => ξ * y) '' RootOfUnity L)
+    (hξ : ξ ^ L = if b then -1 else 1) (k : ℕ) :
+    (∑ z : U, z.1 ^ k) =
+      ξ ^ k * (if L ∣ k then algebraMap ℚ Qbar (L : ℚ) else 0) := by
+  classical
+  cases b with
+  | false =>
+    have hξ1 : ξ ^ L = 1 := by simpa using hξ
+    let e : U ≃ {z : Qbar // z ^ L = 1} :=
+      Equiv.subtypeEquivRight (fun z => by simpa using hmem z)
+    letI : Fintype {z : Qbar // z ^ L = 1} :=
+      Fintype.ofEquiv (RootOfUnity L) (twistedModeRootEquiv hL one_ne_zero hξ1)
+    calc
+      (∑ z : U, z.1 ^ k) = ∑ z : {z : Qbar // z ^ L = 1}, z.1 ^ k :=
+        Fintype.sum_equiv e _ _ (fun _ => rfl)
+      _ = ξ ^ k * (if L ∣ k then algebraMap ℚ Qbar (L : ℚ) else 0) :=
+        twistedMode_powerSum hL one_ne_zero hξ1 k
+  | true =>
+    have hξm : ξ ^ L = -1 := by simpa using hξ
+    have hξne : ξ ≠ 0 := by
+      intro hzero
+      rw [hzero, zero_pow (Nat.ne_of_gt hL)] at hξm
+      norm_num at hξm
+    have hinj : Function.Injective (fun y : Qbar => ξ * y) :=
+      fun y y' h => mul_left_cancel₀ hξne h
+    let e : RootOfUnity L ≃ U :=
+      (Equiv.Set.image (fun y : Qbar => ξ * y) (RootOfUnity L) hinj).trans
+        (Equiv.setCongr (hcoset rfl).symm)
+    calc
+      (∑ z : U, z.1 ^ k) = ∑ y : RootOfUnity L, (ξ * y.1) ^ k :=
+        (Fintype.sum_equiv e _ _ (fun _ => rfl)).symm
+      _ = ∑ y : RootOfUnity L, ξ ^ k * y.1 ^ k := by
+        apply Finset.sum_congr rfl
+        intro y _
+        rw [mul_pow]
+      _ = ξ ^ k * (∑ y : RootOfUnity L, y.1 ^ k) := by rw [Finset.mul_sum]
+      _ = ξ ^ k * (if L ∣ k then algebraMap ℚ Qbar (L : ℚ) else 0) := by
+        change ξ ^ k * powerSum L k = _
+        rw [powerSumValue hL k]
+        rfl
+
+/-- `claim_twisted_mode_power_sum` の横方向。`ξ` は本文の `ξ_a` である。 -/
+theorem horizontalTwistedModes_powerSum {L : ℕ} (hL : 1 ≤ L)
+    [Fintype (RootOfUnity L)] (s : SpinStructure)
+    [Fintype (horizontalTwistedModes L s)] {ξ : Qbar}
+    (hξ : ξ ^ L = if s.1 then -1 else 1) (k : ℕ) :
+    (∑ z : horizontalTwistedModes L s, z.1 ^ k) =
+      ξ ^ k * (if L ∣ k then algebraMap ℚ Qbar (L : ℚ) else 0) := by
+  refine twistedModes_powerSum_of_coset hL (horizontalTwistedModes L s) s.1
+    (fun z => Iff.rfl) (fun hs => ?_) hξ k
+  have hset : horizontalTwistedModes L s = horizontalTwistedModes L (true, false) := by
+    ext z
+    simp [horizontalTwistedModes, hs]
+  rw [hset]
+  exact (horizontalTwistedModes_eq_coset L ξ (by simpa [hs] using hξ)).2
+
+/-- `claim_twisted_mode_power_sum` の縦方向。`ξ` は本文の `η_b` である。 -/
+theorem verticalTwistedModes_powerSum {L : ℕ} (hL : 1 ≤ L)
+    [Fintype (RootOfUnity L)] (s : SpinStructure)
+    [Fintype (verticalTwistedModes L s)] {ξ : Qbar}
+    (hξ : ξ ^ L = if s.2 then -1 else 1) (k : ℕ) :
+    (∑ z : verticalTwistedModes L s, z.1 ^ k) =
+      ξ ^ k * (if L ∣ k then algebraMap ℚ Qbar (L : ℚ) else 0) := by
+  refine twistedModes_powerSum_of_coset hL (verticalTwistedModes L s) s.2
+    (fun z => Iff.rfl) (fun hs => ?_) hξ k
+  have hset : verticalTwistedModes L s = verticalTwistedModes L (false, true) := by
+    ext z
+    simp [verticalTwistedModes, hs]
+  rw [hset]
+  exact (verticalTwistedModes_eq_coset L ξ (by simpa [hs] using hξ)).2
 
 /-- The twisted power sum evaluates a pair of target-coordinate monomials. -/
 theorem twistedMode_coordinateKernel {L : ℕ} (hL : 1 ≤ L)

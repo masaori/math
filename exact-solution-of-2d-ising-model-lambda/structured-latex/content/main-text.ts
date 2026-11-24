@@ -97455,7 +97455,7 @@ r=2&1&z&0&z^{-1}\\
 r=3&z^{-1}&1&z&0
 \end{array}`),
                       paragraph([math(String.raw`\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e`),
-                        " のとき、", ref("claim_terminal_matrix_entries"), " の位相は ",
+                        " のとき、", ref("claim_gauged_terminal_matrix_entries"), " の短い項の位相は ",
                         math(String.raw`\rho(\iota(\vec e),\vec f)=R(r_{\vec e},r_{\vec f})`),
                         " となる。この条件を課さない補助計算では、右辺の全域で定義した値を用いる。表の各項を指数で書けば、"]),
                       displayMath(String.raw`R(r,t)=\begin{cases}
@@ -97639,7 +97639,6 @@ K^{\mathrm{as}}_{\vec e,\vec e}
                     habitat: "Qbar",
                     verification: ["sagemath/check/gauged-terminal-matrix-determinant"],
                     lean: [
-                      "Ising2DLambda.KacWard.polynomialOrientedIdentity_determinant",
                       "Ising2DLambda.KacWard.gaugeScalar_pow_card",
                       "Ising2DLambda.KacWard.gaugedTerminalMatrix_determinant",
                       "Ising2DLambda.NecSuf.KacWard.mapped_eighthRoot_square_power_necSuf",
@@ -102543,6 +102542,8 @@ y^L
                 lean: [
                   "Ising2DLambda.KacWard.twistedModeRootEquiv",
                   "Ising2DLambda.KacWard.twistedMode_powerSum",
+                  "Ising2DLambda.KacWard.horizontalTwistedModes_powerSum",
+                  "Ising2DLambda.KacWard.verticalTwistedModes_powerSum",
                   "Ising2DLambda.NecSuf.KacWard.twistedMode_powerSum_necSuf",
                 ],
                 verification: ["sagemath/check/twisted-mode-power-sum"],

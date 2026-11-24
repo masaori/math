@@ -30,7 +30,22 @@ theorem admissibleDirectionPermutationInversionCounts :
                   (σ 0 = 3 ∧ σ 1 = 0 ∧ σ 2 = 1 ∧ σ 3 = 2) then 3
           else if σ 0 = 3 ∧ σ 1 = 1 ∧ σ 2 = 2 ∧ σ 3 = 0 then 5
           else 6) := by
-  decide
+  intro σ hσ
+  -- 六つの位置対の比較（本文の右欄）。
+  have hpairs : ∀ τ : Equiv.Perm (ZMod 4), directionInversionCount τ =
+      (if (τ 1).val < (τ 0).val then 1 else 0) +
+      (if (τ 2).val < (τ 0).val then 1 else 0) +
+      (if (τ 3).val < (τ 0).val then 1 else 0) +
+      (if (τ 2).val < (τ 1).val then 1 else 0) +
+      (if (τ 3).val < (τ 1).val then 1 else 0) +
+      (if (τ 3).val < (τ 2).val then 1 else 0) := by
+    decide
+  rw [hpairs σ]
+  -- 列挙の完全性は `claim_admissible_direction_permutations`。
+  rcases (admissibleDirectionPermutations σ).1 hσ with
+    h | h | h | h | h | h | h | h | h <;>
+    obtain ⟨h0, h1, h2, h3⟩ := h <;>
+    simp only [h0, h1, h2, h3] <;> decide
 
 /-- The same inversion counts give three positive signs and six negative signs. -/
 theorem admissibleDirectionPermutationSigns :
