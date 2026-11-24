@@ -81142,6 +81142,65 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                     },
                   },
                 },
+                {
+                  role: "primary",
+                  element: {
+                    kind: "elementGroup",
+                    id: "group_of_kac_ward_claim_source_direction_bijection",
+                    focus: {
+                      id: "kac_ward_claim_source_direction_bijection",
+                      kind: "claim",
+                      title: { text: "始点と方向は向き付き辺を一意に定める" },
+                      labels: ["claim_source_direction_bijection"],
+                      habitat: "N",
+                      verification: ["sagemath/check/source-direction-bijection"],
+                      lean: [
+                        "Ising2DLambda.KacWard.sourceDirection_bijective",
+                        "Ising2DLambda.NecSuf.KacWard.sourceDirection_bijective_necSuf",
+                        "Ising2DLambda.KacWard.sourceDirection_bijective_from_necSuf",
+                      ],
+                      statement: [
+                        paragraph([
+                          "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " に対し、",
+                          ref("def_oriented_edges"), " の向き付き辺から始点と方向番号を取る写像",
+                        ]),
+                        displayMath(String.raw`\vec E_L\longrightarrow V_L\times\mathbb Z/4\mathbb Z,\qquad
+\vec f\longmapsto(\operatorname{src}(\vec f),\operatorname{dir}(\vec f))`),
+                        paragraph(["は全単射である。始点と方向番号はそれぞれ ", ref("def_oriented_edge_endpoints"), " と ", ref("def_oriented_edge_direction"), " に従う。"]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "任意の頂点 ", math(String.raw`(i,j)\in V_L`), " を取る。",
+                          ref("def_lattice"), " の辺の番号と ", ref("def_boundary_maps"),
+                          " の端点から、始点が ", math(String.raw`(i,j)`), " である四方向の辺を次のように構成する。",
+                        ]),
+                        displayMath(String.raw`\begin{array}{c|c}
+\operatorname{dir}&\text{台の辺の始点側座標と向き}\\\hline
+0&(i,j),\ 0\\
+1&(i,j),\ 0\\
+2&(i,j-1),\ 1\\
+3&(i-1,j),\ 1
+\end{array}`),
+                        paragraph([
+                          "方向 ", math(String.raw`0,2`), " では横辺、方向 ", math(String.raw`1,3`),
+                          " では縦辺を選ぶ。表の減算は ", math(String.raw`\mathbb Z/L\mathbb Z`),
+                          " の中で行う。", ref("def_oriented_edge_endpoints"), " と ", ref("def_oriented_edge_direction"),
+                          " により、各行の始点と方向は指定どおりである。よって写像は全射である。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+|\vec E_L|&=4L^2&&\bigl(\because\ \blkref{def_oriented_edges}\bigr)\\
+|V_L\times\mathbb Z/4\mathbb Z|&=|V_L|\cdot4&&\bigl(\because\ \text{有限集合の直積の濃度}\bigr)\\
+&=L^2\cdot4&&\bigl(\because\ \blkref{def_lattice}\bigr)\\
+&=4L^2&&\bigl(\because\ \mathbb N\text{ の乗法の交換律}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "同じ濃度の有限集合の間の全射は単射でもある。したがって写像は全単射である。",
+                          "辺長一でも辺の番号と向きは区別される。実数体と複素数体は使わない。",
+                        ]),
+                      ],
+                    },
+                  },
+                },
               ],
             },
           },
@@ -81623,8 +81682,38 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           ],
                           proof: [
                             paragraph([
-                              "一歩の回転数の定義（", ref("def_step_turning"),
-                              "）の三つの場合で確かめる。直進の場合（",
+                              "まず ", math(String.raw`\operatorname{dir}(\vec f)\ne\operatorname{dir}(\vec e)+2`),
+                              " を背理法で示す。",
+                              math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)+2`),
+                              " と仮定すると、始点と方向番号はそれぞれ",
+                            ]),
+                            displayMath(String.raw`\begin{aligned}
+\operatorname{src}(\vec f)
+&=\operatorname{tgt}(\vec e)
+&&\bigl(\because\ \vec f\in\operatorname{Next}(\vec e)\text{ と }\blkref{def_nonbacktracking_successors}\bigr)\\
+&=\operatorname{src}(\iota(\vec e))
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の向き }d=0,1\text{ の場合}\bigr)
+\end{aligned}`),
+                            displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec f)
+&=\operatorname{dir}(\vec e)+2
+&&\bigl(\because\ \text{背理法の仮定}\bigr)\\
+&=\operatorname{dir}(\iota(\vec e))
+&&\bigl(\because\ \blkref{claim_reversal_direction_shift}\bigr)
+\end{aligned}`),
+                            paragraph([
+                              "を満たす。始点と方向番号の組を取る写像は単射なので（",
+                              ref("claim_source_direction_bijection"), "）、",
+                              math(String.raw`\vec f=\iota(\vec e)`), " となり、",
+                              math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " が ",
+                              math(String.raw`\vec f\ne\iota(\vec e)`), " を要求すること（",
+                              ref("def_nonbacktracking_successors"), "）に反する。",
+                              math(String.raw`\mathbb Z/4\mathbb Z`), " の元は ",
+                              math(String.raw`\operatorname{dir}(\vec e),\ \operatorname{dir}(\vec e)+1,\ \operatorname{dir}(\vec e)-1,\ \operatorname{dir}(\vec e)+2`),
+                              " の四つで尽くされるので、",
+                              math(String.raw`\operatorname{dir}(\vec f)`), " は残りの三つのいずれかであり、",
+                              "それは一歩の回転数の定義（", ref("def_step_turning"),
+                              "）の三つの場合に当たる。その三つの場合で確かめる。直進の場合（",
                               math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)`),
                               "、", math(String.raw`\tau(\vec e,\vec f)=0`), "）は",
                             ]),
@@ -81670,8 +81759,8 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &&\bigl(\because\ \text{右回転の場合 }\tau(\vec e,\vec f)=-1\blkref{def_step_turning}\bigr)
 \end{aligned}`),
                             paragraph([
-                              "である。三つの場合は後続辺を尽くす（", ref("def_step_turning"),
-                              "）。全過程は ", math(String.raw`\mathbb Z/4\mathbb Z`),
+                              "である。三つの場合で主張を得る。全過程は有限集合 ",
+                              math(String.raw`\vec E_L`), " の元の比較と ", math(String.raw`\mathbb Z/4\mathbb Z`),
                               " の加法だけで閉じ、実数体も複素数体も現れない。",
                             ]),
                           ],
@@ -87532,16 +87621,30 @@ u\bigl(\operatorname{dir}(\vec f)\bigr)
                       paragraph([
                         ref("def_direction_unit_vector"), " の四つの値は相異なるので ", math(String.raw`u`),
                         " は単射であり、", math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)+2`),
-                        " を得る。一方、", math(String.raw`\vec f\in\operatorname{Next}(\vec e)`),
-                        " に対する方向差は直進・左回転・右回転のいずれかなので（",
-                        ref("def_rotation_phase"), "）、",
+                        " を得る。このとき始点と方向番号はそれぞれ",
                       ]),
-                      displayMath(String.raw`\operatorname{dir}(\vec f)\in
-\bigl\{\operatorname{dir}(\vec e),\,\operatorname{dir}(\vec e)+1,\,\operatorname{dir}(\vec e)-1\bigr\}`),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{src}(\vec f)
+&=\operatorname{tgt}(\vec e)
+&&\bigl(\because\ \vec f\in\operatorname{Next}(\vec e)\text{ と }\blkref{def_nonbacktracking_successors}\bigr)\\
+&=\operatorname{src}(\iota(\vec e))
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の向き }d=0,1\text{ の場合}\bigr)
+\end{aligned}`),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec f)
+&=\operatorname{dir}(\vec e)+2
+&&\bigl(\because\ \text{上で得た等式}\bigr)\\
+&=\operatorname{dir}(\iota(\vec e))
+&&\bigl(\because\ \blkref{claim_reversal_direction_shift}\bigr)
+\end{aligned}`),
                       paragraph([
-                        "である。", math(String.raw`\mathbb Z/4\mathbb Z`), " では ",
-                        math(String.raw`2\ne0,1,-1`), " なので矛盾する。ゆえに主張が成り立つ。",
-                        "全過程は四元集合の有限な場合分けと整数の組の符号反転だけで閉じ、実数体も複素数体も現れない。",
+                        "を満たす。始点と方向番号の組を取る写像は単射なので（",
+                        ref("claim_source_direction_bijection"), "）、",
+                        math(String.raw`\vec f=\iota(\vec e)`), " となり、",
+                        math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " が ",
+                        math(String.raw`\vec f\ne\iota(\vec e)`), " を要求すること（",
+                        ref("def_nonbacktracking_successors"), "）に矛盾する。ゆえに主張が成り立つ。",
+                        "全過程は有限集合の元の比較と整数の組の符号反転だけで閉じ、実数体も複素数体も現れない。",
                       ]),
                     ],
                   },
@@ -91512,11 +91615,36 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                         "最後と最初の二歩も零巻き付きによる端点一致を使って等しい。最初の歩から有限回の帰納法で全歩の真偽値は等しい。",
                       ]),
                       paragraph([
+                        "歩道の隣接二歩 ", math(String.raw`\vec e`), "、", math(String.raw`\vec f\in\operatorname{Next}(\vec e)`),
+                        " について ", math(String.raw`\operatorname{dir}(\vec f)\ne\operatorname{dir}(\vec e)+2`),
+                        " である。等号が成り立つなら、", math(String.raw`\vec f`), " は始点 ",
+                        math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{src}(\iota(\vec e))`),
+                        "（", ref("def_nonbacktracking_successors"), "、", ref("def_edge_reversal"), "、",
+                        ref("def_oriented_edge_endpoints"), "）と方向番号 ",
+                        math(String.raw`\operatorname{dir}(\vec e)+2=\operatorname{dir}(\iota(\vec e))`),
+                        "（", ref("claim_reversal_direction_shift"), "）を ", math(String.raw`\iota(\vec e)`),
+                        " と共有し、始点と方向番号の組の単射性（", ref("claim_source_direction_bijection"), "）から ",
+                        math(String.raw`\vec f=\iota(\vec e)`), " となって ", ref("def_nonbacktracking_successors"),
+                        " の条件 ", math(String.raw`\vec f\ne\iota(\vec e)`), " に反するからである。",
+                        "したがって表の各行の入出方向の差は ", math(String.raw`0,1,-1`), " のいずれかであり、",
                         "表の各行に一歩の回転数の定義（", ref("def_step_turning"),
                         "）を適用すると、内側セルを左に置く向きでは接続数一・二・三の回転数がそれぞれ ",
                         math(String.raw`-1,0,1`), " になる。内側セルを右に置く向きに巡ると凸頂点の一歩の回転数はすべて ", math(String.raw`1`),
                         "、凹頂点では ", math(String.raw`-1`), "、直進頂点では ", math(String.raw`0`),
-                        " であり、逆向きに巡ると各曲がりの符号が反転する（", ref("def_step_turning"), "）。したがって",
+                        " である。逆向きに巡ると隣接二歩 ", math(String.raw`(\vec e,\vec f)`), " は ",
+                        math(String.raw`(\iota(\vec f),\iota(\vec e))`), " に替わり、その方向番号の差は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\iota(\vec e))-\operatorname{dir}(\iota(\vec f))
+&=(\operatorname{dir}(\vec e)+2)-(\operatorname{dir}(\vec f)+2)
+&&\bigl(\because\ \blkref{claim_reversal_direction_shift}\bigr)\\
+&=\operatorname{dir}(\vec e)-\operatorname{dir}(\vec f)
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の加法}\bigr)\\
+&=-(\operatorname{dir}(\vec f)-\operatorname{dir}(\vec e))
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の加法}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "なので、各曲がりの符号が反転する（", ref("def_step_turning"), "）。したがって",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 t_{\circ}(\gamma)
@@ -99746,7 +99874,13 @@ I_L(C,D)
                     ],
                     proof: [
                       paragraph([
-                        "各頂点の四つの半辺を左・上・右・下と呼ぶ。閉歩道が半辺を使うときは入辺と出辺を一つずつ使う。",
+                        "各頂点 ", math(String.raw`v\in V_L`), " の四つの半辺を左・上・右・下と呼び、それぞれ方向番号 ",
+                        math(String.raw`2,3,0,1\in\mathbb Z/4\mathbb Z`), " を対応させる（", ref("def_oriented_edge_direction"), "）。",
+                        "始点 ", math(String.raw`v`), "、方向番号 ", math(String.raw`d`), " の向き付き辺はただ一つである（",
+                        ref("claim_source_direction_bijection"), "）。方向 ", math(String.raw`d`),
+                        " の半辺を出る通過はこの辺を出辺に使い、その半辺から入る通過はこの辺の反転を入辺に使う。",
+                        "反転の方向番号は ", math(String.raw`d+2`), " である（", ref("claim_reversal_direction_shift"), "）。",
+                        "閉歩道が半辺を使うときは入辺と出辺を一つずつ使う。",
                         "二本を通じて辺の標識が相異なるので、同じ頂点で両方の歩道が通過する場合、",
                         "それぞれが相異なる二半辺を使い、四半辺を使い尽くす。",
                         "少なくとも一方が通過しない頂点では、混合横断も ",
@@ -99757,6 +99891,16 @@ I_L(C,D)
                         " の局所項は「左を ", math(String.raw`C`), "、上を ",
                         math(String.raw`D`), " が使う」と「下を ", math(String.raw`C`),
                         "、右を ", math(String.raw`D`), " が使う」の二つの真偽値の和である。",
+                        "通過の入辺 ", math(String.raw`\vec e`), " と出辺 ", math(String.raw`\vec f\in\operatorname{Next}(\vec e)`),
+                        " について ", math(String.raw`\operatorname{dir}(\vec f)\ne\operatorname{dir}(\vec e)+2`),
+                        " である。等号なら ", math(String.raw`\vec f`), " は ", math(String.raw`\iota(\vec e)`),
+                        " と始点 ", math(String.raw`\operatorname{tgt}(\vec e)`), " と方向番号を共有し（",
+                        ref("def_nonbacktracking_successors"), "、", ref("def_edge_reversal"), "、",
+                        ref("claim_reversal_direction_shift"), "）、始点と方向番号の組の単射性（",
+                        ref("claim_source_direction_bijection"), "）から ", math(String.raw`\vec f=\iota(\vec e)`),
+                        " となって ", ref("def_nonbacktracking_successors"), " に反する。",
+                        "よって一歩の回転数が零であること（直進）は ", math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)`),
+                        " と同値である（", ref("def_step_turning"), "）。",
                         "両歩道が直進すると、一方が左右、他方が上下を使い、二真偽値の一方だけが一となる。",
                         "両歩道が曲がると、二真偽値はともに零、またはともに一となる。",
                         "これらは二半辺の選び方六通りを尽くす。従って局所項の偶奇は、",
@@ -102035,65 +102179,6 @@ y^L
 &&\bigl(\because\ \blkref{def_dual_endpoint_mode_vector},\ \blkref{def_endpoint_mode_vector}\text{ と }\delta\ne\delta'\bigr)\\
 &=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の有限和の零元}\bigr).
 \end{aligned}`),
-                ],
-              },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_finite_fourier_claim_source_direction_bijection",
-              focus: {
-                id: "finite_fourier_claim_source_direction_bijection",
-                kind: "claim",
-                title: { text: "始点と方向は向き付き辺を一意に定める" },
-                labels: ["claim_source_direction_bijection"],
-                habitat: "N",
-                verification: ["sagemath/check/source-direction-bijection"],
-                lean: [
-                  "Ising2DLambda.KacWard.sourceDirection_bijective",
-                  "Ising2DLambda.NecSuf.KacWard.sourceDirection_bijective_necSuf",
-                  "Ising2DLambda.KacWard.sourceDirection_bijective_from_necSuf",
-                ],
-                statement: [
-                  paragraph([
-                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " に対し、",
-                    ref("def_oriented_edges"), " の向き付き辺から始点と方向番号を取る写像",
-                  ]),
-                  displayMath(String.raw`\vec E_L\longrightarrow V_L\times\mathbb Z/4\mathbb Z,\qquad
-\vec f\longmapsto(\operatorname{src}(\vec f),\operatorname{dir}(\vec f))`),
-                  paragraph(["は全単射である。始点と方向番号はそれぞれ ", ref("def_oriented_edge_endpoints"), " と ", ref("def_oriented_edge_direction"), " に従う。"]),
-                ],
-                proof: [
-                  paragraph([
-                    "任意の頂点 ", math(String.raw`(i,j)\in V_L`), " を取る。",
-                    ref("def_lattice"), " の辺の番号と ", ref("def_boundary_maps"),
-                    " の端点から、始点が ", math(String.raw`(i,j)`), " である四方向の辺を次のように構成する。",
-                  ]),
-                  displayMath(String.raw`\begin{array}{c|c}
-\operatorname{dir}&\text{台の辺の始点側座標と向き}\\\hline
-0&(i,j),\ 0\\
-1&(i,j),\ 0\\
-2&(i,j-1),\ 1\\
-3&(i-1,j),\ 1
-\end{array}`),
-                  paragraph([
-                    "方向 ", math(String.raw`0,2`), " では横辺、方向 ", math(String.raw`1,3`),
-                    " では縦辺を選ぶ。表の減算は ", math(String.raw`\mathbb Z/L\mathbb Z`),
-                    " の中で行う。", ref("def_oriented_edge_endpoints"), " と ", ref("def_oriented_edge_direction"),
-                    " により、各行の始点と方向は指定どおりである。よって写像は全射である。",
-                  ]),
-                  displayMath(String.raw`\begin{aligned}
-|\vec E_L|&=4L^2&&\bigl(\because\ \blkref{def_oriented_edges}\bigr)\\
-|V_L\times\mathbb Z/4\mathbb Z|&=|V_L|\cdot4&&\bigl(\because\ \text{有限集合の直積の濃度}\bigr)\\
-&=L^2\cdot4&&\bigl(\because\ \blkref{def_lattice}\bigr)\\
-&=4L^2&&\bigl(\because\ \mathbb N\text{ の乗法の交換律}\bigr).
-\end{aligned}`),
-                  paragraph([
-                    "同じ濃度の有限集合の間の全射は単射でもある。したがって写像は全単射である。",
-                    "辺長一でも辺の番号と向きは区別される。実数体と複素数体は使わない。",
-                  ]),
                 ],
               },
             },
