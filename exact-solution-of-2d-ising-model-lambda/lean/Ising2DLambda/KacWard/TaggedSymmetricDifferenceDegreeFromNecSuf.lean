@@ -1,4 +1,4 @@
-/- 具体版の標識付き対称差に接する対の判定が、必要十分版の標識付き辺の特殊化であることの導出。 -/
+/- 向き付き辺の集合へ必要十分版の標識付き対の入射判定を適用する。 -/
 import Ising2DLambda.KacWard.TaggedSymmetricDifferenceDegree
 import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceDegree
 
@@ -19,10 +19,8 @@ theorem taggedDifference_incident_iff_from_necSuf {L : ℕ}
         (shortUnderlyingPairs t) e
       let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ e
       d ≠ r ∧ (q = d ∨ q = r) := by
-  simpa [concreteTaggedDifference, concreteTaggedPairs,
-    concreteReferenceTaggedPairs, concreteTaggedPairAt,
-    Ising2DLambda.NecSuf.KacWard.taggedEdges,
-    Ising2DLambda.NecSuf.KacWard.taggedPairAt, shortUnderlyingPairs_empty] using
-    taggedDifference_incident_iff D t e q
+  exact Ising2DLambda.NecSuf.KacWard.taggedDifference_incident_iff
+    D ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
+    (shortUnderlyingPairs t) e q
 
 end Ising2DLambda.KacWard

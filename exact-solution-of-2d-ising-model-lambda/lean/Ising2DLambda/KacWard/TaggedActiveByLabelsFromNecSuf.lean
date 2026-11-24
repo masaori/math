@@ -8,6 +8,14 @@ namespace Ising2DLambda.KacWard
 open Ising2DLambda.AlgebraicEigenvalue
 attribute [local instance] Classical.propDecidable
 
+private theorem concreteMate_eq_necSuf {J : Type*} [Fintype J]
+    (D : PerfectMatching J) (i : J) :
+    perfectMatchingMate D i =
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.perfectMatchingMate D i := by
+  apply perfectMatchingMate_eq_of_pair D i
+  · exact (Ising2DLambda.NecSuf.AlgebraicEigenvalue.perfectMatchingMate_spec D i).1
+  · exact (Ising2DLambda.NecSuf.AlgebraicEigenvalue.perfectMatchingMate_spec D i).2
+
 /-- The concrete labelled-pair comparison specializes the abstract activity predicate. -/
 theorem taggedActiveByLabels_eq_activeVertices {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
@@ -19,6 +27,7 @@ theorem taggedActiveByLabels_eq_activeVertices {L : ℕ}
   ext e
   simp only [taggedActiveByLabels, Ising2DLambda.NecSuf.KacWard.activeVertices,
     Ising2DLambda.NecSuf.KacWard.taggedPairAt, Set.mem_setOf_eq]
+  simp only [← concreteMate_eq_necSuf]
   rw [referenceLongMate_eq_reversal]
   simp
 

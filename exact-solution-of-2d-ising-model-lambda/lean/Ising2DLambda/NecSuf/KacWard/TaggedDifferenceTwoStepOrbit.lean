@@ -8,6 +8,8 @@ import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationMinimalPeriod
 namespace Ising2DLambda.NecSuf.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
+  (PerfectMatching perfectMatchingMate perfectMatchingMate_involutive)
 
 variable {J : Type*} [Fintype J]
 

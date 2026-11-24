@@ -23,6 +23,10 @@ theorem reversalMatrix_determinant_from_necSuf (L : ℕ) :
     IntegerMatrix.determinant (reversalMatrix L) =
         IntegerMatrix.determinant (NecSuf.KacWard.pairedReversalMatrix (Edge L)) := by
       exact congrArg IntegerMatrix.determinant hmatrix
+    _ = ∑ σ : Equiv.Perm (OrientedEdge L),
+          NecSuf.AlgebraicEigenvalue.sign (fun e f : OrientedEdge L => e < f) σ *
+            ∏ e, NecSuf.KacWard.pairedReversalMatrix (Edge L) e (σ e) := by
+      exact IntegerMatrix.determinant_eq_independentSignedPermutationSum _
     _ = 1 := NecSuf.KacWard.pairedReversalMatrix_determinant_of_even (Edge L) hcard
 
 end Ising2DLambda.KacWard

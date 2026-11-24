@@ -3,7 +3,7 @@ import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceActiveVertices
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Ising2DLambda.AlgebraicEigenvalue
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 
 variable {J : Type*} [Fintype J]
 

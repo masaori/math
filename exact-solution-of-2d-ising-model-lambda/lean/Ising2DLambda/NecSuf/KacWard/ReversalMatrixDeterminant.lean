@@ -5,14 +5,14 @@
 濃度の偶性を除くと組が一つの場合に行列式が -1 になるため、偶性は削れない。
 互換分解、符号の積、反転以外の零項、行指定展開の順序は具体版と同じである。
 -/
-import Ising2DLambda.IntegerMatrix.Determinant
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
+import Mathlib.Data.Matrix.Mul
+import Mathlib.Data.Fintype.Perm
 
 namespace Ising2DLambda.NecSuf.KacWard
 
 open scoped BigOperators
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue
-open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 
 /-- 各組の第二成分を反転する。 -/
 def pairedReversal (B : Type*) (x : B × Bool) : B × Bool := (x.1, !x.2)
@@ -34,7 +34,7 @@ variable {B : Type*} [Fintype B] [LinearOrder (B × Bool)]
 
 /-- 実際に定義した二方向反転の整数置換行列。 -/
 def pairedReversalMatrix (B : Type*) [DecidableEq (B × Bool)] :
-    IntegerMatrix.Square (B × Bool) :=
+    Matrix (B × Bool) (B × Bool) ℤ :=
   fun e f => if f = pairedReversal B e then 1 else 0
 
 /-- B の一つの要素に付く二方向だけを交換する。 -/
@@ -156,7 +156,9 @@ theorem pairedReversalPerm_sign (B : Type*) [Fintype B] [LinearOrder (B × Bool)
 /-- 本文の行指定置換展開では、反転置換の項以外は零になる。 -/
 theorem pairedReversalMatrix_determinant_of_even (B : Type*) [Fintype B] [LinearOrder (B × Bool)]
     (hcard : Even (Fintype.card B)) :
-    IntegerMatrix.determinant (pairedReversalMatrix B) = 1 := by
+    (∑ σ : Equiv.Perm (B × Bool),
+      sign (fun e f : B × Bool => e < f) σ *
+        ∏ e, pairedReversalMatrix B e (σ e)) = 1 := by
   obtain ⟨m, hm⟩ := hcard
   have hsign : sign (fun e f : B × Bool => e < f) (pairedReversalPerm B) = 1 := by
     calc
@@ -184,16 +186,10 @@ theorem pairedReversalMatrix_determinant_of_even (B : Type*) [Fintype B] [Linear
           sign (fun e f : B × Bool => e < f) σ * 0 := by rw [hproduct]
       _ = 0 := mul_zero _
   calc
-    IntegerMatrix.determinant (pairedReversalMatrix B) =
-        ∑ σ : Equiv.Perm (B × Bool),
-          sign (fun e f : B × Bool => e < f) σ *
-            ∏ e, pairedReversalMatrix B e (σ e) :=
-      by
-        change IntegerMatrix.determinant (pairedReversalMatrix B) =
-          ∑ σ : Equiv.Perm (B × Bool),
-            finiteOrderedSign σ * ∏ e, pairedReversalMatrix B e (σ e)
-        exact IntegerMatrix.determinant_eq_independentSignedPermutationSum _
-    _ = sign (fun e f : B × Bool => e < f) (pairedReversalPerm B) *
+    (∑ σ : Equiv.Perm (B × Bool),
+        sign (fun e f : B × Bool => e < f) σ *
+          ∏ e, pairedReversalMatrix B e (σ e)) =
+      sign (fun e f : B × Bool => e < f) (pairedReversalPerm B) *
         ∏ e, pairedReversalMatrix B e (pairedReversalPerm B e) :=
       Fintype.sum_eq_single (pairedReversalPerm B) hzero
     _ = sign (fun e f : B × Bool => e < f) (pairedReversalPerm B) *

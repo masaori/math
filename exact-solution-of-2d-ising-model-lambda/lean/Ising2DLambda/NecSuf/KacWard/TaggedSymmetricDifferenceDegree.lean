@@ -1,10 +1,10 @@
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PerfectMatching
-import Ising2DLambda.AlgebraicEigenvalue.PerfectMatching
+import Mathlib.Data.Fintype.Basic
 import Mathlib.Data.Set.SymmDiff
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Ising2DLambda.AlgebraicEigenvalue
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 open scoped symmDiff
 
 variable {J : Type*} [Fintype J]

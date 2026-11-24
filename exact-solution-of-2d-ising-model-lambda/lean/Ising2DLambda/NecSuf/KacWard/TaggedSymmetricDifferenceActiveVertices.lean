@@ -2,7 +2,7 @@ import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceDegree
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Ising2DLambda.AlgebraicEigenvalue
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 open scoped symmDiff
 
 variable {J : Type*} [Fintype J]
