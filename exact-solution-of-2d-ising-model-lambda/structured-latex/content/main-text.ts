@@ -34716,7 +34716,7 @@ p&=\widehat{\mathrm{ac}_0(p)}+t\cdot p'
 \mathrm{ac}_k(f)+\mathrm{ac}_k(g)&\in F&&\bigl(\because\ \mathrm{ac}_k(f)\in F,\ \mathrm{ac}_k(g)\in F\ \text{と}\ F\ \text{は和で閉じる}\bigr),\\[4pt]
 \mathrm{ac}_k(f\cdot g)&=\sum_{i=0}^{k}\mathrm{ac}_i(f)\cdot\mathrm{ac}_{k-i}(g)&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の積の係数}\bigr),\\
 \mathrm{ac}_i(f)\cdot\mathrm{ac}_{k-i}(g)&\in F\quad(0\le i\le k)&&\bigl(\because\ \mathrm{ac}_i(f)\in F,\ \mathrm{ac}_{k-i}(g)\in F\ \text{と}\ F\ \text{は積で閉じる}\bigr),\\
-\sum_{i=0}^{k}\mathrm{ac}_i(f)\cdot\mathrm{ac}_{k-i}(g)&\in F&&\bigl(\because\ \text{項の個数についての帰納法。空の和}\ 0\in F\text{、一項足す段は}\ F\ \text{が和で閉じること}\bigr),\\[4pt]
+\sum_{i=0}^{k}\mathrm{ac}_i(f)\cdot\mathrm{ac}_{k-i}(g)&\in F&&\bigl(\because\ \text{項の個数についての帰納法、空の和}\ 0\in F\text{、一項足す段は}\ F\ \text{が和で閉じること}\bigr),\\[4pt]
 \mathrm{ac}_k(-f)&=\mathrm{ac}_k(-f)+\mathrm{ac}_k(f)-\mathrm{ac}_k(f)&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
 &=\mathrm{ac}_k\bigl((-f)+f\bigr)-\mathrm{ac}_k(f)&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数}\bigr)\\
 &=\mathrm{ac}_k(0)-\mathrm{ac}_k(f)&&\bigl(\because\ (-f)+f=0\bigr)\\
