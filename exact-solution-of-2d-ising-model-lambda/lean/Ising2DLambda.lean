@@ -1990,6 +1990,7 @@ import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceAlternatingCycle
 import Ising2DLambda.KacWard.TaggedDifferenceAlternatingCycle
 import Ising2DLambda.NecSuf.KacWard.AlternatingComponentCover
 import Ising2DLambda.NecSuf.KacWard.AlternatingComponentSuccessor
+import Ising2DLambda.NecSuf.KacWard.AlternatingComponentOrbitClosure
 import Ising2DLambda.NecSuf.KacWard.TaggedDifferencePairComponent
 import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceCycleCover
 import Ising2DLambda.KacWard.TaggedDifferenceCycleCover

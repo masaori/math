@@ -78536,7 +78536,7 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 ka
 &\le ka+r
-&&(\because\ 0\le r\text{。}\mathbb{N}\text{ の加法単調性})\\
+&&(\because\ 0\le r\text{、}\mathbb{N}\text{ の加法単調性})\\
 &=L-1
 &&(\because\ \text{除法の等式})\\
 &<L
