@@ -78117,9 +78117,9 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 \frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
 &\le_{\Lambda_{\mathbb{Q}}}1\cdot\Psi^{\mathrm{op}}_{ka}(q)
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{(ka)^2}{L^2}\text{、}s:=1\text{、}\nu:=\Psi^{\mathrm{op}}_{ka}(q)\text{ で読む。}r\le s\text{ は第一、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第二})\\
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{(ka)^2}{L^2}\text{、}s:=1\text{、}\nu:=\Psi^{\mathrm{op}}_{ka}(q)\text{ で読む、}r\le s\text{ は第一、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第二})\\
 &=\Psi^{\mathrm{op}}_{ka}(q)
-&&(\because\ 1\cdot\lambda=\lambda\text{（}\blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }1\text{ を掛ける）})\\
+&&(\because\ 1\cdot\lambda=\lambda\text{（}\blkref{def_rational_log_order_group}\text{ の有理数倍、各素数の成分に }1\text{ を掛ける）})\\
 &\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_{a}(q)
 &&(\because\ \blkref{claim_open_square_multiple_side_density_vs_base_side_le_one}\text{ の右の不等式})
 \end{aligned}`),

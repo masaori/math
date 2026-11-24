@@ -1,0 +1,39 @@
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairReconstructedOrbit
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.FiniteInjectiveMinimalPeriod
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PeriodicTwoWayOrbit
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEvenOrbit
+
+namespace Ising2DLambda.NecSuf.KacWard
+
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
+
+variable {J : Type*} [Fintype J]
+
+/-- 相手写像が色を反転するなら、後続置換の最小周期は偶数であり、
+    周期未満の反復は交互成分をちょうど一度ずつ列挙する。 -/
+theorem alternatingCycleEnumeration_necSuf (τ υ : J → J) (C : J → Prop)
+    (hτ : Function.Involutive τ) (hυ : Function.Involutive υ)
+    (hτcolor : ∀ j, C (τ j) ↔ ¬ C j)
+    (hυcolor : ∀ j, C (υ j) ↔ ¬ C j) (i : J) :
+    let σ := matchingPairPermutation τ υ C hτ hυ hτcolor hυcolor
+    let p := finiteInjectiveMinimalPeriod σ σ.injective i
+    Even p ∧
+      Function.Bijective (twoWayOrbitEnumeration σ σ.symm i p) ∧
+      twoWayOrbit σ σ.symm i = matchingPairComponent τ υ hτ hυ i ∧
+      σ^[p] i = i := by
+  dsimp
+  let σ := matchingPairPermutation τ υ C hτ hυ hτcolor hυcolor
+  let p := finiteInjectiveMinimalPeriod σ σ.injective i
+  have hp := finiteInjectiveMinimalPeriod_spec σ σ.injective i
+  have hflip (j : J) : C (σ j) ↔ ¬ C j :=
+    matchingPairSuccessor_color_necSuf τ υ C hτcolor hυcolor j
+  constructor
+  · exact even_of_color_flip σ C hflip p i hp.2.1
+  constructor
+  · exact twoWayOrbitEnumeration_bijective_necSuf σ σ.symm
+      σ.symm_apply_apply i p hp.1 hp.2.1 hp.2.2
+  constructor
+  · exact matchingPairPermutation_orbit_eq_component τ υ C hτ hυ hτcolor hυcolor i
+  · exact hp.2.1
+
+end Ising2DLambda.NecSuf.KacWard
