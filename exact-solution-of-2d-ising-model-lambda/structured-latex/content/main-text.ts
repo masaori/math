@@ -78547,18 +78547,18 @@ L
 &=ka+r+1
 &&(\because\ \text{除法の等式}L-1=ka+r\text{ の両辺に }1\text{ を足す})\\
 &\le ka+(a-1)+1
-&&(\because\ r<a\text{ から }r\le a-1\text{（}\mathbb{N}\text{ の順序）。}\mathbb{N}\text{ の加法単調性})\\
+&&(\because\ r<a\text{ から }r\le a-1\text{（}\mathbb{N}\text{ の順序）、}\mathbb{N}\text{ の加法単調性})\\
 &=ka+a
-&&(\because\ a\ge1\text{。}\mathbb{N}\text{ の加法})
+&&(\because\ a\ge1\text{、}\mathbb{N}\text{ の加法})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 a
 &\le L-1
-&&(\because\ a<L\text{。}\mathbb{N}\text{ の順序})\\
+&&(\because\ a<L\text{、}\mathbb{N}\text{ の順序})\\
 &=ka+r
 &&(\because\ \text{除法の等式})\\
 &<ka+a
-&&(\because\ r<a\text{。}\mathbb{N}\text{ の加法単調性})\\
+&&(\because\ r<a\text{、}\mathbb{N}\text{ の加法単調性})\\
 &=(k+1)a
 &&(\because\ \mathbb{N}\text{ の分配則})
 \end{aligned}`),
@@ -78594,16 +78594,16 @@ a
                         displayMath(String.raw`\begin{aligned}
 \frac{2a}{L}
 &\le\frac{2a}{a^2}
-&&(\because\ a^2\le L\text{ と }2a>0\text{。}\mathbb{Q}\text{ の順序。正の分子の分数は分母が大きいほど小さい})\\
+&&(\because\ a^2\le L\text{ と }2a>0\text{、}\mathbb{Q}\text{ の順序、正の分子の分数は分母が大きいほど小さい})\\
 &=\frac{2}{a}
-&&(\because\ a\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+&&(\because\ a\ne0\text{ による約分、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \frac{4a}{L}
 &\le\frac{4a}{a^2}
-&&(\because\ a^2\le L\text{ と }4a>0\text{。}\mathbb{Q}\text{ の順序。正の分子の分数は分母が大きいほど小さい})\\
+&&(\because\ a^2\le L\text{ と }4a>0\text{、}\mathbb{Q}\text{ の順序、正の分子の分数は分母が大きいほど小さい})\\
 &=\frac{4}{a}
-&&(\because\ a\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+&&(\because\ a\ne0\text{ による約分、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         paragraph([
                           "第三に、符号 ",
@@ -78637,12 +78637,12 @@ a
                         displayMath(String.raw`\begin{aligned}
 \frac{2a}{L}\cdot\iota(\ell_2)
 &\le_{\Lambda_{\mathbb{Q}}}\frac{2}{a}\cdot\iota(\ell_2)
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{2a}{L}\text{、}s:=\tfrac{2}{a}\text{、}\nu:=\iota(\ell_2)\text{ で読む。}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{2a}{L}\text{、}s:=\tfrac{2}{a}\text{、}\nu:=\iota(\ell_2)\text{ で読む、}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \frac{4a}{L}\cdot\iota(\log(1+q))
 &\le_{\Lambda_{\mathbb{Q}}}\frac{4}{a}\cdot\iota(\log(1+q))
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{4a}{L}\text{、}s:=\tfrac{4}{a}\text{、}\nu:=\iota(\log(1+q))\text{ で読む。}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{4a}{L}\text{、}s:=\tfrac{4}{a}\text{、}\nu:=\iota(\log(1+q))\text{ で読む、}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
 \end{aligned}`),
                         paragraph([
                           "本体は、第一で取った ",
