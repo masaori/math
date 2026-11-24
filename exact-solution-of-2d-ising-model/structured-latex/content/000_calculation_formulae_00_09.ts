@@ -3065,7 +3065,7 @@ T_B(X - W)
     kind: "definition",
     title: { tex: String.raw`\mathbb{Z}\to\mathbb{R}\text{の包含写像}` },
     labels: ["inclusion_zz_to_rr"],
-    lean: ["Ising2D.inclusion_zz_to_rr_zero", "Ising2D.inclusion_zz_to_rr_succ", "Ising2D.inclusion_zz_to_rr_neg", "Ising2D.inclusion_zz_to_rr_zero_intCast", "Ising2D.inclusion_zz_to_rr_succ_intCast"],
+    lean: ["Ising2D.inclusionZZtoRR", "Ising2D.inclusionZZtoRRNonneg", "Ising2D.inclusionZZtoRR_eq_intCast", "Ising2D.inclusion_zz_to_rr_zero", "Ising2D.inclusion_zz_to_rr_succ", "Ising2D.inclusion_zz_to_rr_neg", "Ising2D.inclusion_zz_to_rr_zero_intCast", "Ising2D.inclusion_zz_to_rr_succ_intCast"],
     statement: [
       paragraph([
         ref("set_and_algebra_notation"),
@@ -3124,6 +3124,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の最後の鎖が、行列の大きさ d := 2^{M_col} ∈ ℤ と ℝ の冪 2^{M_col} を「d := 2^{M_col}」の一行で等号で結び、同じ記号を ℤ と ℝ の元に使い回していた（証明の書き方の「同一視をしない」）。ℤ の元を ℝ の計算に入れる写像に名前を付けるために足した。負の元の節 ι(-n) := -ι(n) はこの時点では使われないが、limit_of_log_Z_in_N_row がアルキメデス性で取る N_0 ∈ ℤ（比べる時点では正と分かっていない）を ℝ の元と比べるのに使うので、ℤ 全体で定める。",
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の前提）: 本文は変えていない。Lean にこの定義どおりの具体版 inclusionZZtoRR（ℤ_{≥0} の側は inclusionZZtoRRNonneg）と Lean の Int.cast との一致の補題 inclusionZZtoRR_eq_intCast を置き、欄 lean の先頭に足した。定義の式 ι(-n) := -ι(n) の具体版 inclusion_zz_to_rr_neg は inclusionZZtoRR の定義の式を一致の補題で移す形にした。Lean の Int.cast（ℝ へ）を許可の一覧にこのブロックのラベルで載せた。",
       ],
     },
   },
