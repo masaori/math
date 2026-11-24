@@ -7005,8 +7005,6 @@ Ising2D.norm_sq_power_of_W_real_mulVec_standard_basis_le	dotProduct@Ising2D.Conf
 Ising2D.norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four	OfNat.ofNat@Real,4@instOfNatAtLeastTwo
-Ising2D.odd_two_mul_sub_one	Odd@Int@Int.instSemiring
-Ising2D.odd_two_mul_sub_one	OfNat.ofNat@Int,2@instOfNat
 Ising2D.ofReal_realMatrixOfRealEntries_apply	Matrix
 Ising2D.one_dimensional_subspace_is_multiples_of_nonzero_element	Fintype
 Ising2D.one_dimensional_subspace_is_multiples_of_nonzero_element	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
@@ -9144,9 +9142,6 @@ Ising2D.thetaTilde_add_int_mul	Real.pi
 Ising2D.thetaTilde_conj	Real.pi
 Ising2D.thetaTilde_conj_eq_neg_add_two_pi	Real.pi
 Ising2D.thetaTilde_lt_two_pi	Real.pi
-Ising2D.thetaTilde_mul_M	Nat.cast@Real@Real.instNatCast
-Ising2D.thetaTilde_mul_M	OfNat.ofNat@Int,2@instOfNat
-Ising2D.thetaTilde_mul_M	Real.pi
 Ising2D.thetaTilde_of_self_conj	OfNat.ofNat@Int,2@instOfNat
 Ising2D.thetaTilde_of_self_conj	Real.pi
 Ising2D.thetaTilde_period_for_checkZY	Real.pi

@@ -18,9 +18,10 @@
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
 | `Ising2D.AMat_thetaTilde_eq`（`DefinitionGamma1Gamma2OfThetaTilde.lean`） | `A(θ~_μ) = !![γ_1, γ_2(θ~); -γ_2(-θ~), γ_1]` | `def_gamma1_gamma2_of_theta` |
-| `Ising2D.thetaTilde_mul_M` | `M·θ~_μ = (2μ-1)π`（**奇数**倍。015 章の要） | 同上（Step 2 の前提） |
 | `Ising2D.gamma2_step1_first_equation_iff`（`ClaimGamma2TildeNonzero.lean`） | `c_1cos θ − s_1c_2 = 0 ⟺ c_1cos θ = s_1c_2`（人手の 8 行と 3 行の鎖に 1 段ずつ対応） | `gamma_2_theta_tilde_nonzero` Step 1 の同値の鎖の 5 行目の根拠 |
 | `Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero`（`ClaimGamma2TildeNonzero.lean`） | `sin θ~_μ = 0 ⟹ cos θ~_μ = -1` | `gamma_2_theta_tilde_nonzero` Step 2+3 |
+| `Ising2D.thetaTilde_mul_M` / `Ising2D.odd_two_mul_sub_one`（`ClaimGamma2TildeNonzeroFromNecSuf.lean`） | `M·θ~_μ = (2μ-1)π`（**奇数**倍）と `2μ-1` が奇数であること | 無し（導出で必要十分版の仮定へ渡すためだけ） |
+| `Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero_of_necSuf`（`ClaimGamma2TildeNonzeroFromNecSuf.lean`） | `cos_thetaTilde_eq_neg_one_of_sin_eq_zero` を必要十分版 `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` の `N := M`, `m := 2μ-1` の特殊化として導出した版 | `gamma_2_theta_tilde_nonzero` Step 2+3 |
 | **`Ising2D.gamma2_thetaTilde_ne_zero`** | **`γ_2(θ~_μ) ≠ 0`（無条件・全 `μ ∈ ℤ`）** | **`gamma_2_theta_tilde_nonzero`** |
 | `Ising2D.gamma2_neg_thetaTilde_ne_zero` | `γ_2(-θ~_μ) ≠ 0` | 同上（statement 末尾） |
 | `Ising2D.gamma2_thetaTilde_ne_zero_checkIndex` | 同上の `μ ∈ 𝓜̌` 版（人手証明と 1 対 1） | 同上 |
@@ -103,7 +104,7 @@
 
 | 人手証明のラベル | 具体版 | 必要十分版 | 必要十分版から具体版の導出 |
 | --- | --- | --- | --- |
-| `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `cos_thetaTilde_eq_neg_one_of_sin_eq_zero`（必要十分版へ `N := M`, `m := 2μ-1` を代入） |
+| `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `ClaimGamma2TildeNonzeroFromNecSuf.lean` の `cos_thetaTilde_eq_neg_one_of_sin_eq_zero_of_necSuf`（必要十分版へ `N := M`, `m := 2μ-1` を代入。具体版 `cos_thetaTilde_eq_neg_one_of_sin_eq_zero` は人手の Step 2・Step 3 の鎖と 1 対 1 で、必要十分版を使わない） |
 | `relation_of_gamma_2_theta_tilde` | `gamma2_mul_gamma2_neg_eq_neg_absSq`, `sq_absGamma2`, `sq_I_absGamma2` | `NecSuf.mul_of_eq_neg_conj`, `sq_absOf_eq_neg_mul`, `sq_I_mul_absOf_eq_mul` | 具体版はいずれも必要十分版に `gamma2_neg_eq_neg_conj` を渡しただけ |
 | `relation_of_gamma_2_theta_tilde` (2) の狭義の負の鎖 | `absGamma2_thetaTilde_sq_pos`, `neg_absGamma2_thetaTilde_sq_neg` | `NecSuf.sq_pos_of_pos_chain`（`Monoid`・`Zero`・`Preorder`・`MulPosStrictMono` と `a` での `0·a = 0` だけ）, `neg_neg_of_pos_chain`（`AddGroup`・`LT`・`AddLeftStrictMono`・`AddRightStrictMono` だけ。第一の鎖の結論を入力に取る） | `*_of_necSuf`（`ClaimRelationGamma2TildeFromNecSuf.lean`。`R := ℝ`） |
 | `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D` | `charPoly_factor_thetaTilde`, `det_AMat_sub_smul_eq_zero_iff`, `eigenvalue_AMat_iff`, `lambdaPlusR_ne_lambdaMinusR`, `AMat_mulVec_eigen_pos/neg`, `AMat_mulVec_smul_eigen_pos/neg`, `AMat_mul_checkPmat`, `det_checkPmat_eq_mul_inv`, `det_checkPmat(_ne_zero)`, `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` | `NecSuf.skew2_charPoly`, `skew2_charPoly_factor`, `skew2_det_eq_zero_iff`, `skew2_eigenvalue_iff`, `skew2_eigenvalues_ne`, `skew2_mulVec_pos/neg`, `mulVec_smul_of_mulVec_eq`, `skew2_diag_offdiag`, `skew2_mul_of_cols`, `det_of_quotient_entries_eq_mul_inv`, `det_of_quotient_entries(_ne_zero)`, `eq_conj_of_mul_eq` | 各具体版の `*_of_necSuf`（`ClaimEigenATildeDiagFromNecSuf.lean`。`γ_2` の関係は `a b = -|γ_2|^2` だけを仮定として渡し、`b = -ā` と `a ā = r^2` は渡さない） |

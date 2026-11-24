@@ -20,9 +20,8 @@ Lean 側では 008 章の時点で既に `θ ∈ ℝ` 全体の関数として
 半整数運動量 `θ~_μ`（`Ising2D.thetaTilde`、`EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSum.lean`）
 への特殊化だけをここに置く。**
 
-本ファイルではさらに、以降の章で繰り返し使う
-`M · θ~_μ = (2μ-1)π`（半整数運動量が `π` の**奇数**倍になること）を用意する。
-これが 015 章全体の要である（整数運動量では `M · θ_μ = 2μπ` で偶数倍）。
+`M · θ~_μ = (2μ-1)π`（半整数運動量が `π` の**奇数**倍になること）の `thetaTilde_mul_M` は、必要十分版の仮定へ渡すためだけに使うので
+導出のファイル `ClaimGamma2TildeNonzeroFromNecSuf.lean` に置く。
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
@@ -41,19 +40,5 @@ theorem AMat_thetaTilde_eq (M : ℕ) (μ : ℤ) :
       = !![gamma1 K (thetaTilde M μ), gamma2 K (thetaTilde M μ);
           -gamma2 K (-thetaTilde M μ), gamma1 K (thetaTilde M μ)] :=
   AMat_eq K (thetaTilde M μ)
-
-/-- **015 章の要**: `M · θ~_μ = (2μ-1)π`。右辺の係数 `2μ-1` は**奇数**である。
-
-整数運動量では `M · θ_μ = 2μ · π`（偶数倍）であり、この違いが
-`gamma_2_theta_tilde_nonzero` の例外の有無を生む。 -/
-theorem thetaTilde_mul_M (M : ℕ) (hM : M ≠ 0) (μ : ℤ) :
-    (M : ℝ) * thetaTilde M μ = ((2 * μ - 1 : ℤ) : ℝ) * Real.pi := by
-  have hM' : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hM
-  rw [thetaTilde]
-  push_cast
-  field_simp
-
-/-- `2μ-1` が奇数であること（`thetaTilde_mul_M` と組で使う）。 -/
-theorem odd_two_mul_sub_one (μ : ℤ) : Odd (2 * μ - 1) := ⟨μ - 1, by ring⟩
 
 end Ising2D

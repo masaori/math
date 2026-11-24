@@ -7,7 +7,7 @@
 
 **必要十分版**: `Ising2D/NecSuf/OddModePhase.lean`
 （`Ising2D.NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd`）。
-具体版はその系として導出する（`gamma2_thetaTilde_ne_zero` の証明を参照）。
+`cos_thetaTilde_eq_neg_one_of_sin_eq_zero` をその特殊化として得る導出は `ClaimGamma2TildeNonzeroFromNecSuf.lean`。
 
 ## この章の最大の価値
 
@@ -16,8 +16,9 @@
 臨界点 `c_1 = s_1c_2` かつ `θ_μ = 0`）ため、008 章・009 章はそこを例外として
 別扱いしていた。**半整数運動量ではこの例外が起こらない。**
 
-理由は 1 行に集約できる: `sin θ~_μ = 0` は `M θ~_μ = (2μ-1)π` が `π` の**奇数**倍であることから
-`cos θ~_μ = -1` を強制し（必要十分版）、そのとき Step 1 の連立条件の第 1 式
+理由は次のとおりである: `sin θ~_μ = 0` なら `θ~_μ = kπ`（`k ∈ ℤ`）で、`θ~_μ` の定義から `2μ − 1 = kM` となり、
+`2μ − 1` が奇数なので `k` も奇数、ゆえに `cos θ~_μ = cos(kπ) = −1`（`cos_thetaTilde_eq_neg_one_of_sin_eq_zero`）。
+そのとき Step 1 の連立条件の第 1 式
 `c_1 cos θ~_μ = s_1c_2` は `-c_1 = s_1c_2` となるが、`K_1, K_2 > 0` の下で
 左辺は負・右辺は正で矛盾する。
 
@@ -35,7 +36,6 @@
   （`gamma2_thetaTilde_ne_zero_checkIndex`）。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionGamma1Gamma2OfThetaTilde
-import Ising2D.NecSuf.OddModePhase
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 
 namespace Ising2D
@@ -53,11 +53,69 @@ theorem IsingParam.c2_pos : 0 < P.const.c2 :=
   (indexedHyperbolicAbbreviations_pos P.K1_pos P.K2_pos (Kstar_pos P.K1_pos) P.K2star_pos).2.2.2.2.1
 
 /-- **人手証明 `gamma_2_theta_tilde_nonzero` の Step 2 + Step 3**:
-`sin θ~_μ = 0` なら `cos θ~_μ = -1`。必要十分版 `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` の系。 -/
+`sin θ~_μ = 0` なら `cos θ~_μ = -1`。人手の Step 2 の鎖（`sin θ~_μ = 0` から `2μ − 1 = kM_col` までの 5 行）と、
+`k` が奇数であることの鎖（3 行）と、Step 3 の鎖（3 行）に 1 対 1 に対応する。人手の鎖は `⟺` で書かれているが、
+ここで使うのは左から右への向きだけである。
+必要十分版 `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` との対応: 1 行目は同じ、2〜5 行目は必要十分版の `N·k = m` の段、
+`k` が奇数であることの鎖と Step 3 の鎖は同じである。
+`sin t = 0 ⟹ ∃k ∈ ℤ, t = kπ` と `cos(kπ) = (−1)^k` は人手が名前で引く ℝ の三角関数の性質で、mathlib の
+`Real.sin_eq_zero_iff`・`Real.cos_int_mul_pi` で受け取る。
+`thetaTilde_mul_M` を必要十分版 `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` に渡す導出は
+`ClaimGamma2TildeNonzeroFromNecSuf.lean` の `cos_thetaTilde_eq_neg_one_of_sin_eq_zero_of_necSuf`。 -/
 theorem cos_thetaTilde_eq_neg_one_of_sin_eq_zero {M : ℕ} (hM : M ≠ 0) (μ : ℤ)
-    (hsin : Real.sin (thetaTilde M μ) = 0) : Real.cos (thetaTilde M μ) = -1 :=
-  NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd (N := (M : ℤ)) (m := 2 * μ - 1)
-    (odd_two_mul_sub_one μ) (by exact_mod_cast thetaTilde_mul_M M hM μ) hsin
+    (hsin : Real.sin (thetaTilde M μ) = 0) : Real.cos (thetaTilde M μ) = -1 := by
+  have hMR : ((M : ℤ) : ℝ) ≠ 0 := by exact_mod_cast hM
+  have hpi : Real.pi ≠ 0 := ne_of_gt Real.pi_pos
+    -- `pi_is_positive`
+  -- Step 2 の鎖の 1 行目: `sin θ~_μ = 0 ⟹ ∃k ∈ ℤ, θ~_μ = kπ`
+  obtain ⟨k, hk⟩ : ∃ k : ℤ, thetaTilde M μ = (k : ℝ) * Real.pi := by
+    obtain ⟨n, hn⟩ := Real.sin_eq_zero_iff.1 hsin
+    exact ⟨n, hn.symm⟩
+    -- `sin t = 0 ⟺ ∃k ∈ ℤ, t = kπ`（`t → θ~_μ`）
+  -- 2 行目: `2π(μ − 1/2)/M_col = kπ`
+  have h2 : 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) = (k : ℝ) * Real.pi := hk
+    -- `antiperiodic_exp_sum` の `θ~_μ` の定義
+  -- 3 行目: `2(μ − 1/2)/M_col = k`
+  have h3 : 2 * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) = (k : ℝ) :=
+    calc 2 * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)
+        = Real.pi * (2 * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) / Real.pi :=
+          (mul_div_cancel_left₀ _ hpi).symm
+      _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) / Real.pi := by
+          rw [← mul_div_assoc, mul_left_comm, ← mul_assoc]
+      _ = ((k : ℝ) * Real.pi) / Real.pi := by rw [h2]
+      _ = (k : ℝ) := mul_div_cancel_right₀ (k : ℝ) hpi
+    -- 両辺を `π > 0`（`pi_is_positive`）で割る（両辺の `π · ( ) / π` の約分に `π ≠ 0` を使う）
+  -- 4 行目: `2(μ − 1/2) = kM_col`
+  have h4 : 2 * ((μ : ℝ) - 1 / 2) = (k : ℝ) * ((M : ℤ) : ℝ) := (div_eq_iff hMR).1 h3
+    -- 両辺を `M_col ≠ 0` 倍する
+  -- 5 行目: `2μ − 1 = kM_col`
+  have h5 : 2 * (μ : ℝ) - 1 = (k : ℝ) * ((M : ℤ) : ℝ) := by
+    rw [← h4]; ring
+    -- 分配律 `2(μ − 1/2) = 2μ − 1`
+  -- Lean だけの段: 5 行目の両辺は整数の像なので、ℤ の等式として読む（`ι_{ℤ→ℝ}` の単射と和・積の保存）。
+  -- 人手はこの段を書かずに 5 行目を ℤ の等式として次の鎖で使っている（状態台帳の残る件）
+  have h5Z : 2 * μ - 1 = k * (M : ℤ) := by exact_mod_cast h5
+  -- `k` が奇数であることの鎖の 1 行目: `kM_col = 2(μ − 1) + 1`
+  have h6 : k * (M : ℤ) = 2 * (μ - 1) + 1 := by
+    rw [← h5Z]; ring
+    -- `2μ − 1 = 2(μ − 1) + 1`
+  -- 2 行目: `kM_col` は奇数
+  have h7 : Odd (k * (M : ℤ)) := ⟨μ - 1, h6⟩
+    -- 奇数の定義
+  -- 3 行目: `k` は奇数
+  have hkodd : Odd k := by
+    rcases Int.even_or_odd k with ⟨l, hl⟩ | h
+    · exact absurd h7 (Int.not_odd_iff_even.2 ⟨l * (M : ℤ), by rw [hl]; ring⟩)
+      -- `k = 2l` なら `kM_col = 2(lM_col)` は偶数で、整数は偶数か奇数のどちらか一方
+      -- （mathlib の `Even k` は `k = l + l` の形で与えられる）
+    · exact h
+  -- Step 3 の鎖
+  calc Real.cos (thetaTilde M μ)
+      = Real.cos ((k : ℝ) * Real.pi) := by rw [hk]
+                                        -- Step 2 の `θ~_μ = kπ`
+    _ = (-1 : ℝ) ^ k := Real.cos_int_mul_pi k
+                                        -- `k ∈ ℤ` に対し `cos(kπ) = (−1)^k`
+    _ = -1 := hkodd.neg_one_zpow        -- Step 2 より `k` は奇数
 
 /-- **人手証明 `gamma_2_theta_tilde_nonzero` の Step 1**: `c_1 cos θ − s_1c_2 = 0` と `c_1 cos θ = s_1c_2` の
 同値を示す二つの鎖（同値の鎖の 5 行目の根拠）。人手の 8 行と 3 行に 1 段ずつ対応する。

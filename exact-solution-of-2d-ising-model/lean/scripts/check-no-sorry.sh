@@ -1801,6 +1801,7 @@ targets=(
   Ising2D.NecSuf.arcosh_pos_of_one_lt
   Ising2D.AMat_thetaTilde_eq
   Ising2D.thetaTilde_mul_M
+  Ising2D.odd_two_mul_sub_one
   Ising2D.gamma2_thetaTilde_ne_zero
   Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero
   Ising2D.gamma2_neg_thetaTilde_ne_zero
@@ -2064,6 +2065,7 @@ targets=(
   Ising2D.absGamma2_pos_of_ne_zero
   Ising2D.absGamma2_pos_of_ne_zero_of_necSuf
   Ising2D.gamma1R_ge_cosh_sub_of_necSuf
+  Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero_of_necSuf
   Ising2D.vec_sub_eq_zero_iff_tensorPow
   Ising2D.identity_matrix_mulVec_tensorPow
   Ising2D.mul_comm_of_anticomm_pair_tensorPow

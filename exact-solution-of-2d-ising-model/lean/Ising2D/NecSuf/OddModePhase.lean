@@ -23,8 +23,14 @@
 整数運動量 `θ_μ = 2πμ/M` が `M·θ_μ = 2μ·π`（**偶数**倍）であることと対比すると、
 半整数運動量で例外が消える理由がこの 1 行に凝縮されていることが分かる。
 
-証明も `cos^2 + sin^2 = 1`（`cos θ = ±1` に絞る）と
-`cos θ = 1 ⟺ θ ∈ 2πℤ`（`m` の偶奇で排除する）の 2 つしか使っていない。
+証明の手順は具体版 `cos_thetaTilde_eq_neg_one_of_sin_eq_zero` と同じである:
+`sin θ = 0` から `θ = kπ`（`k ∈ ℤ`）、`N·kπ = m·π` の両辺を `π ≠ 0` で割って `N·k = m`、
+`N·k` が奇数なので `k` は奇数（`k = 2l` なら `N·k = 2(N·l)` は偶数）、`cos θ = cos(kπ) = (−1)^k = −1`。
+具体版の `2(μ − 1/2)/M_col = k` を経る段（割る・掛ける・分配律）は、ここでは `N·k = m` を直接得る段にまとまる。
+`π ≠ 0` は割る段に要る（具体版の `pi_is_positive`）。
+`N` が整数であることは「`k = 2l` なら `N·k = 2(N·l)` は偶数」の段に要る。`N` を有理数に広げると成り立たない
+（`N = 1/2`、`θ = 2π` では `N·θ = π`、`m = 1` は奇数、`sin θ = 0` だが `cos θ = 1`）。
+具体版の仮定 `M ≠ 0` は要らない。仮定の形 `N·θ = m·π` が、具体版の `M_col` を掛ける段を既に済ませているからである。
 -/
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 
@@ -37,26 +43,25 @@ theorem cos_eq_neg_one_of_sin_eq_zero_of_odd {θ : ℝ} {N m : ℤ} (hodd : Odd 
     (hθ : (N : ℝ) * θ = (m : ℝ) * Real.pi) (hsin : Real.sin θ = 0) :
     Real.cos θ = -1 := by
   have hpi : Real.pi ≠ 0 := Real.pi_ne_zero
-  have hsq : Real.cos θ ^ 2 = 1 := by
-    have h := Real.sin_sq_add_cos_sq θ
-    rw [hsin] at h
-    nlinarith [h]
-  have hfac : (Real.cos θ - 1) * (Real.cos θ + 1) = 0 := by nlinarith [hsq]
-  rcases mul_eq_zero.1 hfac with h | h
-  · -- `cos θ = 1` すなわち `θ ∈ 2πℤ` の場合は `m` が偶数になり、奇数性に反する
-    exfalso
-    have hcos1 : Real.cos θ = 1 := by linarith
-    obtain ⟨n, hn⟩ := (Real.cos_eq_one_iff θ).1 hcos1
-    rw [← hn] at hθ
-    have hcast : ((2 * N * n : ℤ) : ℝ) * Real.pi = ((m : ℤ) : ℝ) * Real.pi := by
-      push_cast
-      linear_combination hθ
-    have hNM : (2 * N * n : ℤ) = m := by
-      have h' := mul_right_cancel₀ hpi hcast
-      exact_mod_cast h'
-    obtain ⟨j, hj⟩ := hodd
-    have hdvd : (2 : ℤ) ∣ m := ⟨N * n, by linear_combination -hNM⟩
-    omega
-  · linarith
+  -- 具体版の Step 2 の 1 行目: `sin θ = 0 ⟹ ∃k ∈ ℤ, θ = kπ`
+  obtain ⟨k, hk⟩ : ∃ k : ℤ, θ = (k : ℝ) * Real.pi := by
+    obtain ⟨n, hn⟩ := Real.sin_eq_zero_iff.1 hsin
+    exact ⟨n, hn.symm⟩
+  -- 具体版の Step 2 の 2〜5 行目に当たる: `N·k = m`（`N·(kπ) = m·π` の両辺を `π ≠ 0` で割る）
+  have hNk : (N : ℝ) * (k : ℝ) = (m : ℝ) := by
+    apply mul_right_cancel₀ hpi
+    rw [mul_assoc, ← hk]
+    exact hθ
+  have hNkZ : N * k = m := by exact_mod_cast hNk
+  -- `k` が奇数であることの鎖: `N·k = m` は奇数、`k = 2l` なら `N·k = 2(N·l)` は偶数
+  have hkodd : Odd k := by
+    rcases Int.even_or_odd k with ⟨l, hl⟩ | h
+    · exact absurd (hNkZ ▸ hodd) (Int.not_odd_iff_even.2 ⟨N * l, by rw [hl]; ring⟩)
+    · exact h
+  -- 具体版の Step 3 の鎖
+  calc Real.cos θ
+      = Real.cos ((k : ℝ) * Real.pi) := by rw [hk]
+    _ = (-1 : ℝ) ^ k := Real.cos_int_mul_pi k
+    _ = -1 := hkodd.neg_one_zpow
 
 end Ising2D.NecSuf
