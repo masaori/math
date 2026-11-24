@@ -1,19 +1,23 @@
-import Ising2DLambda.AlgebraicEigenvalue.PerfectMatchingSign
-import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairWordMap
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PerfectMatchingSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PermutationSign
 
 namespace Ising2DLambda.NecSuf.AlgebraicEigenvalue
 
-open Ising2DLambda.AlgebraicEigenvalue
-
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
-/-- A complete endpoint word and its image have signs related by the sign of the map. -/
-theorem matchingPairWordSignMap_necSuf (σ : Equiv.Perm J) (first second : List J)
-    (hcomplete : IsCompleteWord first) (hmap : second = first.map σ) :
-    matchingWordSign second =
-      sign (fun x y : J => x < y) σ * matchingWordSign first := by
-  rw [hmap]
-  exact matchingWordSign_map first hcomplete σ
+/-- 全元列への置換作用の等式に、転倒符号の乗法性を適用する。 -/
+theorem matchingPairWordSignMap_necSuf (base first : List J)
+    (hb : IsCompleteWord base) (hf : IsCompleteWord first) (σ : Equiv.Perm J) :
+    sign (fun x y : J => x < y)
+        (completeWordPermutation base (first.map σ) hb (completeWord_map first hf σ)) =
+      sign (fun x y : J => x < y) σ *
+        sign (fun x y : J => x < y) (completeWordPermutation base first hb hf) := by
+  have htri : Trichotomous (fun x y : J => x < y) := by
+    intro x y
+    rcases lt_trichotomy x y with h | h | h
+    · exact Or.inl ⟨h, h.ne, h.not_gt⟩
+    · exact Or.inr (Or.inl ⟨by simp [h], h, by simp [h]⟩)
+    · exact Or.inr (Or.inr ⟨h.not_gt, h.ne', h⟩)
+  rw [completeWordPermutation_map, sign_comp _ htri]
 
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue

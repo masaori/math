@@ -76940,7 +76940,7 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
 &=N\cdot0
 &&(\because\ \text{零写像の値})\\
 &=0
-&&(\because\ \mathbb{Q}\text{ の積。}0\text{ 倍は }0)\\
+&&(\because\ \mathbb{Q}\text{ の積、}0\text{ 倍は }0)\\
 &=0/1
 &&(\because\ \text{分母 }1\text{ の有理数})\\
 &=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(0)\bigr)(p)
