@@ -76,13 +76,13 @@ variable {M : ℕ}
 /-- `j ≠ k` なら `Z_j Z_k = -Z_k Z_j`。 -/
 theorem Z_mul_Z_of_ne {j k : Fin M} (h : j ≠ k) : Z j * Z k = -(Z k * Z j) := by
   have := anticomm_Z_Z j k
-  rw [acomm, deltaM, if_neg h, mul_zero, zero_smul] at this
+  rw [acomm, deltaM_of_ne h, mul_zero, zero_smul] at this
   exact eq_neg_of_add_eq_zero_left this
 
 /-- `j ≠ k` なら `Y_j Y_k = -Y_k Y_j`。 -/
 theorem Y_mul_Y_of_ne {j k : Fin M} (h : j ≠ k) : Y j * Y k = -(Y k * Y j) := by
   have := anticomm_Y_Y j k
-  rw [acomm, deltaM, if_neg h, mul_zero, zero_smul] at this
+  rw [acomm, deltaM_of_ne h, mul_zero, zero_smul] at this
   exact eq_neg_of_add_eq_zero_left this
 
 /-- 任意の `j, k` で `Z_j Y_k = -Y_k Z_j`。 -/

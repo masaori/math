@@ -409,7 +409,6 @@ Ising2D.cvec_smul
 Ising2D.d2gammaK
 Ising2D.d2gammaK_eq
 Ising2D.d2gammaK_two_pi_sub
-Ising2D.deltaMod_self
 Ising2D.deriv_deriv_fFun
 Ising2D.deriv_kappaK_on
 Ising2D.detInv_smul_adjTwo_mul

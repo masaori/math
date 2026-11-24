@@ -61,11 +61,11 @@ theorem sum_sum_smul_two_deltaM_smul_one (c d : Fin M → ℂ) :
   rw [Finset.mul_sum, Finset.sum_smul]
   refine Finset.sum_congr rfl fun j _ => ?_
   rw [Finset.sum_eq_single_of_mem j (Finset.mem_univ j)]
-  · rw [deltaM, if_pos rfl, smul_smul]
+  · rw [deltaM_self, smul_smul]
     congr 1
     ring
   · intro k _ hkj
-    rw [deltaM, if_neg (Ne.symm hkj), mul_zero, zero_smul, smul_zero]
+    rw [deltaM_of_ne (Ne.symm hkj), mul_zero, zero_smul, smul_zero]
 
 /-- 人手の行 `δ^{(M_col)}_{(κ,0)} = δ^{(M_col)}_{(μ+ν,1)}`（`κ = -((μ+ν)-1)`。`def_delta_M`）:
 `κ - 0 = -((μ+ν)-1)` なので `κ ≡ 0 ⟺ μ+ν ≡ 1 (mod M_col)`。 -/

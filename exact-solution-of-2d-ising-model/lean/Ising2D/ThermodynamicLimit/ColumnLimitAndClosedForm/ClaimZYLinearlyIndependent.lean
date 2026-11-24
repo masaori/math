@@ -123,10 +123,10 @@ theorem acomm_ZY (a b : Fin M ⊕ Fin M) :
   | inl μ =>
       cases b with
       | inl ν =>
-          rw [ZY_inl, ZY_inl, anticomm_Z_Z, deltaM]
+          rw [ZY_inl, ZY_inl, anticomm_Z_Z]
           by_cases h : μ = ν
-          · rw [if_pos h, if_pos (congrArg Sum.inl h), mul_one]
-          · rw [if_neg h, if_neg (fun he => h (Sum.inl.inj he)), mul_zero]
+          · rw [h, deltaM_self, if_pos rfl, mul_one]
+          · rw [deltaM_of_ne h, if_neg (fun he => h (Sum.inl.inj he)), mul_zero]
       | inr ν =>
           rw [ZY_inl, ZY_inr, anticomm_Z_Y, if_neg (by simp), zero_smul]
   | inr μ =>
@@ -134,10 +134,10 @@ theorem acomm_ZY (a b : Fin M ⊕ Fin M) :
       | inl ν =>
           rw [ZY_inr, ZY_inl, anticomm_Y_Z, if_neg (by simp), zero_smul]
       | inr ν =>
-          rw [ZY_inr, ZY_inr, anticomm_Y_Y, deltaM]
+          rw [ZY_inr, ZY_inr, anticomm_Y_Y]
           by_cases h : μ = ν
-          · rw [if_pos h, if_pos (congrArg Sum.inr h), mul_one]
-          · rw [if_neg h, if_neg (fun he => h (Sum.inr.inj he)), mul_zero]
+          · rw [h, deltaM_self, if_pos rfl, mul_one]
+          · rw [deltaM_of_ne h, if_neg (fun he => h (Sum.inr.inj he)), mul_zero]
 
 /-- Clifford 関係を満たす族は線型独立、という一般補題（原文が省略した論証そのもの）。
 

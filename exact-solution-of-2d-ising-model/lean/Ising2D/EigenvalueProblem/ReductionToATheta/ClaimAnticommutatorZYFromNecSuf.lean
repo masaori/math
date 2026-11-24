@@ -77,11 +77,11 @@ theorem anticomm_Z_Z_of_necSuf (μ ν : Fin M) :
       rw [h]; exact jw_sq_of_necSuf ν pauliZ pauliZ_mul_pauliZ
     have h2 : Z ν * Z μ = 1 := by
       rw [h]; exact jw_sq_of_necSuf ν pauliZ pauliZ_mul_pauliZ
-    rw [acomm, h1, h2, deltaM, if_pos h, mul_one, two_smul]
+    rw [acomm, h1, h2, h, deltaM_self, mul_one, two_smul]
   · have h0 : acomm (Z μ) (Z ν) = 0 :=
       jw_anticomm_of_necSuf μ ν pauliZ pauliZ pauliZ_mul_pauliX pauliZ_mul_pauliX
         fun he => absurd he h
-    rw [h0, deltaM, if_neg h, mul_zero, zero_smul]
+    rw [h0, deltaM_of_ne h, mul_zero, zero_smul]
 
 /-- **`[Z_μ, Y_ν]₊ = 0` を必要十分版の特殊化として導出した形**
 （`<anticommutator_of_Z_and_Y>` 第 2 式）。 -/
@@ -98,10 +98,10 @@ theorem anticomm_Y_Y_of_necSuf (μ ν : Fin M) :
       rw [h]; exact jw_sq_of_necSuf ν pauliY pauliY_mul_pauliY
     have h2 : Y ν * Y μ = 1 := by
       rw [h]; exact jw_sq_of_necSuf ν pauliY pauliY_mul_pauliY
-    rw [acomm, h1, h2, deltaM, if_pos h, mul_one, two_smul]
+    rw [acomm, h1, h2, h, deltaM_self, mul_one, two_smul]
   · have h0 : acomm (Y μ) (Y ν) = 0 :=
       jw_anticomm_of_necSuf μ ν pauliY pauliY pauliY_mul_pauliX pauliY_mul_pauliX
         fun he => absurd he h
-    rw [h0, deltaM, if_neg h, mul_zero, zero_smul]
+    rw [h0, deltaM_of_ne h, mul_zero, zero_smul]
 
 end Ising2D

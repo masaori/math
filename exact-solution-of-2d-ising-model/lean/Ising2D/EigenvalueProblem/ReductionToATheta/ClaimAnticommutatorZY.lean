@@ -9,9 +9,10 @@
 
   `[Z_μ, Z_ν]₊ = 2 I δ^M_{(μ,ν)}`,  `[Z_μ, Y_ν]₊ = 0`,  `[Y_μ, Y_ν]₊ = 2 I δ^M_{(μ,ν)}`
 
-（`δ^M` は `parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ`。
-添字を `{1, …, M}` の代表元にとれば `μ ≡ ν (mod M) ⟺ μ = ν` なので、
-Lean では `Fin M` 上の `deltaM μ ν = if μ = ν then 1 else 0` として形式化する。）
+（`δ^M` は本文の `def_delta_M`。具体版は `ClaimExpSum.lean` の `deltaMod`（ℤ×ℤ の上の合同で定義）。
+人手は添字の代表元を `{1, …, M}`（`def_index_set_from_one_to_n`）の元にとる。Lean の添字 `μ, ν : Fin M` は
+名前を付けた写像 `finIndexToZZ`（`Fin M → ℤ`）で人手の添字 `finIndexToZZ M μ, finIndexToZZ M ν` へ送り、`deltaM μ ν := deltaMod M (finIndexToZZ M μ) (finIndexToZZ M ν)` とする。
+人手の行「この範囲では `μ ≡ ν (mod M) ⟺ μ = ν` であるから δ は `μ = ν` で 1、そうでなければ 0」は `deltaM_of_image_eq`・`deltaM_of_image_ne` である。）
 
 ## 原文の証明の状態
 
@@ -40,6 +41,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIndexSetFromOneToN
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
 
 namespace Ising2D
 
@@ -162,23 +164,55 @@ theorem jw_anticomm (μ ν : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ)
 
 /-! ## 原文の 3 つの反交換関係 -/
 
-/-- 原文 `parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ` の `δ^M_{(μ,ν)}`。
+/-- 人手の `δ^{(M)}_{(μ,ν)}`（`def_delta_M`、具体版 `deltaMod`）に、Lean の添字 `μ, ν : Fin M` を
+名前を付けた写像 `finIndexToZZ`（`def_index_set_from_one_to_n`）で人手の添字 `finIndexToZZ M μ, finIndexToZZ M ν ∈ {1, …, M}` へ送って入れたもの。 -/
+noncomputable def deltaM (μ ν : Fin M) : ℂ := deltaMod M (finIndexToZZ M μ) (finIndexToZZ M ν)
 
-原文は `μ ≡ ν (mod M)` で定義しているが、添字を `{1, …, M}`（Lean では `Fin M`）の
-代表元にとれば `μ ≡ ν (mod M) ⟺ μ = ν` なので、こう定義してよい。 -/
-def deltaM (μ ν : Fin M) : ℂ := if μ = ν then 1 else 0
+/-- 人手の証明（`anticommutator_of_Z_and_Y`）の行「`δ^{(M)}_{(μ,ν)}` は `μ = ν` で 1」（`∵ def_delta_M の定義`）。
+人手の添字は `finIndexToZZ M μ`・`finIndexToZZ M ν` で、等しければ `M ∣ 0` なので `deltaMod_self` の値 1 になる。 -/
+theorem deltaM_of_image_eq (μ ν : Fin M) (h : finIndexToZZ M μ = finIndexToZZ M ν) : deltaM μ ν = 1 := by
+  rw [deltaM, h]
+  exact deltaMod_self M (finIndexToZZ M ν)
 
-/-- **`[Z_μ, Z_ν]₊ = 2 I δ^M_{(μ,ν)}`**（`<anticommutator_of_Z_and_Y>` 第 1 式）。 -/
+/-- 人手の証明（`anticommutator_of_Z_and_Y`）の行「`μ, ν ∈ {1, …, M}` の範囲では `μ ≡ ν (mod M) ⟺ μ = ν` であるから、
+`δ^{(M)}_{(μ,ν)}` は `μ ≠ ν` で 0」（`∵ def_delta_M の定義`）。人手の添字 `finIndexToZZ M μ`・`finIndexToZZ M ν` の範囲 `1 ≤ · ≤ M` は
+`finIndexToZZ_bijective_onto_index_set` の二つ目である。二つの差が `M` の倍数 `M c` なら、`c ≥ 1` でも `c ≤ −1` でも範囲に反し、
+`c = 0` なら二つは等しい。 -/
+theorem deltaM_of_image_ne (μ ν : Fin M) (h : finIndexToZZ M μ ≠ finIndexToZZ M ν) : deltaM μ ν = 0 := by
+  rw [deltaM, deltaMod, if_neg]
+  obtain ⟨hμ1, hμM⟩ := (finIndexToZZ_bijective_onto_index_set M).2.1 μ
+  obtain ⟨hν1, hνM⟩ := (finIndexToZZ_bijective_onto_index_set M).2.1 ν
+  rw [inclusionNNtoZZ_eq_natCast] at hμM hνM
+  rintro ⟨c, hc⟩
+  apply h
+  rcases lt_trichotomy c 0 with hc0 | hc0 | hc0
+  · nlinarith
+  · rw [hc0, mul_zero] at hc
+    linarith
+  · nlinarith
+
+/-- `deltaM μ μ = 1`（`deltaM_of_image_eq` で、像の等号が `rfl` で成り立つ場合）。 -/
+theorem deltaM_self (μ : Fin M) : deltaM μ μ = 1 := deltaM_of_image_eq μ μ rfl
+
+/-- `μ ≠ ν` なら `deltaM μ ν = 0`（`deltaM_of_image_ne` と、`finIndexToZZ` の単射性
+`finIndexToZZ_bijective_onto_index_set` の一つ目）。 -/
+theorem deltaM_of_ne {μ ν : Fin M} (h : μ ≠ ν) : deltaM μ ν = 0 :=
+  deltaM_of_image_ne μ ν fun he => h ((finIndexToZZ_bijective_onto_index_set M).1 μ ν he)
+
+/-- **`[Z_μ, Z_ν]₊ = 2 I δ^M_{(μ,ν)}`**（`<anticommutator_of_Z_and_Y>` 第 1 式）。
+人手の添字 `finIndexToZZ M μ, finIndexToZZ M ν ∈ {1, …, M}` の等号で場合を分ける。 -/
 theorem anticomm_Z_Z (μ ν : Fin M) :
     acomm (Z μ) (Z ν) = (2 * deltaM μ ν) • (1 : TensorPow M) := by
   rw [acomm]
-  by_cases h : μ = ν
-  · have h1 : Z μ * Z ν = 1 := by rw [h]; exact jw_sq ν pauliZ pauliZ_mul_pauliZ
-    have h2 : Z ν * Z μ = 1 := by rw [h]; exact jw_sq ν pauliZ pauliZ_mul_pauliZ
-    rw [h1, h2, deltaM, if_pos h, mul_one, two_smul]
+  by_cases h : finIndexToZZ M μ = finIndexToZZ M ν
+  · have he : μ = ν := (finIndexToZZ_bijective_onto_index_set M).1 μ ν h
+    have h1 : Z μ * Z ν = 1 := by rw [he]; exact jw_sq ν pauliZ pauliZ_mul_pauliZ
+    have h2 : Z ν * Z μ = 1 := by rw [he]; exact jw_sq ν pauliZ pauliZ_mul_pauliZ
+    rw [h1, h2, deltaM_of_image_eq μ ν h, mul_one, two_smul]
   · have h0 : Z μ * Z ν + Z ν * Z μ = 0 :=
-      jw_anticomm μ ν pauliZ pauliZ pauliZ_mul_pauliX pauliZ_mul_pauliX fun he => absurd he h
-    rw [h0, deltaM, if_neg h, mul_zero, zero_smul]
+      jw_anticomm μ ν pauliZ pauliZ pauliZ_mul_pauliX pauliZ_mul_pauliX
+        fun he => absurd (congrArg (finIndexToZZ M) he) h
+    rw [h0, deltaM_of_image_ne μ ν h, mul_zero, zero_smul]
 
 /-- **`[Z_μ, Y_ν]₊ = 0`**（`<anticommutator_of_Z_and_Y>` 第 2 式、原文では TODO）。
 
@@ -189,21 +223,24 @@ theorem anticomm_Z_Y (μ ν : Fin M) : acomm (Z μ) (Y ν) = 0 := by
   exact jw_anticomm μ ν pauliZ pauliY pauliZ_mul_pauliX pauliY_mul_pauliX
     fun _ => pauliY_mul_pauliZ_anticomm
 
-/-- **`[Y_μ, Y_ν]₊ = 2 I δ^M_{(μ,ν)}`**（`<anticommutator_of_Z_and_Y>` 第 3 式、原文では TODO）。 -/
+/-- **`[Y_μ, Y_ν]₊ = 2 I δ^M_{(μ,ν)}`**（`<anticommutator_of_Z_and_Y>` 第 3 式、原文では TODO）。
+人手の添字 `finIndexToZZ M μ, finIndexToZZ M ν ∈ {1, …, M}` の等号で場合を分ける。 -/
 theorem anticomm_Y_Y (μ ν : Fin M) :
     acomm (Y μ) (Y ν) = (2 * deltaM μ ν) • (1 : TensorPow M) := by
   rw [acomm]
-  by_cases h : μ = ν
-  · have h1 : Y μ * Y ν = 1 := by rw [h]; exact jw_sq ν pauliY pauliY_mul_pauliY
-    have h2 : Y ν * Y μ = 1 := by rw [h]; exact jw_sq ν pauliY pauliY_mul_pauliY
-    rw [h1, h2, deltaM, if_pos h, mul_one, two_smul]
+  by_cases h : finIndexToZZ M μ = finIndexToZZ M ν
+  · have he : μ = ν := (finIndexToZZ_bijective_onto_index_set M).1 μ ν h
+    have h1 : Y μ * Y ν = 1 := by rw [he]; exact jw_sq ν pauliY pauliY_mul_pauliY
+    have h2 : Y ν * Y μ = 1 := by rw [he]; exact jw_sq ν pauliY pauliY_mul_pauliY
+    rw [h1, h2, deltaM_of_image_eq μ ν h, mul_one, two_smul]
   · have h0 : Y μ * Y ν + Y ν * Y μ = 0 :=
-      jw_anticomm μ ν pauliY pauliY pauliY_mul_pauliX pauliY_mul_pauliX fun he => absurd he h
-    rw [h0, deltaM, if_neg h, mul_zero, zero_smul]
+      jw_anticomm μ ν pauliY pauliY pauliY_mul_pauliX pauliY_mul_pauliX
+        fun he => absurd (congrArg (finIndexToZZ M) he) h
+    rw [h0, deltaM_of_image_ne μ ν h, mul_zero, zero_smul]
 
 /-! ## `Z, Y` の反交換関係を Clifford 形に書き直す
 
-`deltaM` を展開して `[Z_μ, Z_ν]₊ = (if μ = ν then 2 else 0) I` の形にしたもの。
+`deltaM_self`・`deltaM_of_ne` で `[Z_μ, Z_ν]₊ = (if μ = ν then 2 else 0) I` の形にしたもの。
 人手証明のどの行にも当たらない Lean 側だけの言い換えで、Clifford 関係を仮定に取る補題
 （必要十分版や、本文から退避した整数運動量の経路の汎用補題）へ `Z, Y` を渡すために置く。
 言い換える元の主張が `anticommutator_of_Z_and_Y` なので、その形式化である本ファイルに置く。 -/
@@ -211,18 +248,18 @@ theorem anticomm_Y_Y (μ ν : Fin M) :
 /-- `[Z_μ, Z_ν]₊ = 2 δ_{μν} I`（`anticomm_Z_Z` の言い換え）。 -/
 theorem acomm_Z_Z_clifford (μ ν : Fin M) :
     acomm (Z μ) (Z ν) = (if μ = ν then (2 : ℂ) else 0) • (1 : TensorPow M) := by
-  rw [anticomm_Z_Z, deltaM]
+  rw [anticomm_Z_Z]
   by_cases h : μ = ν
-  · rw [if_pos h, if_pos h, mul_one]
-  · rw [if_neg h, if_neg h, mul_zero]
+  · rw [h, deltaM_self, if_pos rfl, mul_one]
+  · rw [deltaM_of_ne h, if_neg h, mul_zero]
 
 /-- `[Y_μ, Y_ν]₊ = 2 δ_{μν} I`（`anticomm_Y_Y` の言い換え）。 -/
 theorem acomm_Y_Y_clifford (μ ν : Fin M) :
     acomm (Y μ) (Y ν) = (if μ = ν then (2 : ℂ) else 0) • (1 : TensorPow M) := by
-  rw [anticomm_Y_Y, deltaM]
+  rw [anticomm_Y_Y]
   by_cases h : μ = ν
-  · rw [if_pos h, if_pos h, mul_one]
-  · rw [if_neg h, if_neg h, mul_zero]
+  · rw [h, deltaM_self, if_pos rfl, mul_one]
+  · rw [deltaM_of_ne h, if_neg h, mul_zero]
 
 /-- `[Y_μ, Z_ν]₊ = 0`（`anticomm_Z_Y` の対称版）。 -/
 theorem anticomm_Y_Z (μ ν : Fin M) : acomm (Y μ) (Z ν) = 0 := by

@@ -38,9 +38,8 @@ namespace Ising2D
 
 原文の `M ∈ ℕ`, `M ≥ 1` は本ファイルの `M : ℕ`, `hM : M ≠ 0` に直接対応する。
 
-`parts/006_...` 側では添字を `Fin M` の代表元にとって `Ising2D.deltaM` として定義したが、
-`hatZ, hatY` の添字 `μ ∈ ℳ = {-M, …, -1, 1, …, M}` は `Fin M` に収まらないので、
-ここでは整数添字のまま合同で定義する。 -/
+本文どおり整数添字のまま合同で定義する。`ClaimAnticommutatorZY.lean` の `Ising2D.deltaM` は、
+Lean の添字 `Fin M` を名前を付けた写像 `finIndexToZZ` で人手の添字 `{1, …, M}` へ送ってこれに入れたものである。 -/
 noncomputable def deltaMod (M : ℕ) (μ ν : ℤ) : ℂ := if (M : ℤ) ∣ (μ - ν) then 1 else 0
 
 theorem deltaMod_self (M : ℕ) (μ : ℤ) : deltaMod M μ μ = 1 := by

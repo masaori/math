@@ -3938,7 +3938,6 @@ Ising2D.d2gammaK_eq	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.d2gammaK_eq	Real.cosh
 Ising2D.d2gammaK_eq	Real.sinh
 Ising2D.d2gammaK_two_pi_sub	Real.pi
-Ising2D.deltaM	ite@Complex,Eq@instDecidableEqFin
 Ising2D.deltaMod	Dvd.dvd@Int@Int.instDvd
 Ising2D.deltaMod	ite@Complex,Dvd.dvd@Int.decidableDvd
 Ising2D.deltaMod_add_one_eq	ite@Complex,Eq@Int.instDecidableEq
