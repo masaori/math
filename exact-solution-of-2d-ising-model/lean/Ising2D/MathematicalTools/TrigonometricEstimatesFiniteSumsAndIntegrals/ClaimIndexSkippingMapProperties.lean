@@ -16,7 +16,8 @@
 * `index_skipping_map_reaches_every_other_index` の `i > k` の場合の `j := i − 1` は、Lean では `⟨i.val − 1, _⟩ : Fin (n + 1)`。
   人手の `i − 1 ≥ 1` は、Lean では 0 始まりなので `i.val ≥ 1`（`i.val > k.val ≥ 0` から）に当たり、`(i.val − 1) + 1 = i.val` の段で使う。
 * 人手の `m ≥ 1` は、`DefinitionIndexSkippingMap.lean` の約束どおり Lean の `n + 1`（`k : Fin (n + 2)`、`j : Fin (n + 1)`）で立てる。
-* 添字の集合の上の写像の性質だけで、係数の環を持たないので、必要十分版は置かない（仮定に削れる構造が無い）。
+* 添字の集合の上の写像の性質だけで、係数の環を持たないので、仮定に削れる構造は無い。それでも、添字を飛ばす写像を使う
+  必要十分版が具体版を参照しないように、同じ主張と証明を必要十分版の側 `Ising2D/NecSuf/IndexSkippingMap.lean` にも置く。
 -/
 import Mathlib.Order.Basic
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionIndexSkippingMap

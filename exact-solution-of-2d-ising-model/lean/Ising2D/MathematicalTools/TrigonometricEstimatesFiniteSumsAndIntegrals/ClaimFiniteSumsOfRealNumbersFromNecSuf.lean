@@ -10,6 +10,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.NecSuf.FiniteSumDifferenceAndNonnegativeTerm
 import Ising2D.NecSuf.FiniteSumSubadditiveAndMonotone
 import Ising2D.NecSuf.FiniteSumMovesOneTermToEnd
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionIndexSkippingMapFromNecSuf
 import Ising2D.NecSuf.MatMulDistribSum
 import Ising2D.NecSuf.FiniteDoubleSumInterchange
 import Ising2D.NecSuf.FiniteSumWithSingleNonzeroTerm
@@ -73,10 +74,12 @@ theorem finite_sum_of_real_numbers_is_monotone_of_necSuf (m : ℕ) (a b : Fin m 
     (hab : ∀ j, a j ≤ b j) : ∑ j, a j ≤ ∑ j, b j :=
   NecSuf.finite_sum_le_fin' (R := ℝ) m a b hab
 
-/-- `finite_sum_of_real_numbers_moves_one_term_to_end` を `NecSuf.finite_sum_skip_index_succ'`（係数 `ℝ`）の特殊化として得る。 -/
+/-- `finite_sum_of_real_numbers_moves_one_term_to_end` を `NecSuf.finite_sum_skip_index_succ'`（係数 `ℝ`）の特殊化として得る。
+具体版の `skipIndex` は `skipIndex_eq_skipIndex_necSuf` で必要十分版の `NecSuf.skipIndex'` へ読み替える。 -/
 theorem finite_sum_of_real_numbers_moves_one_term_to_end_of_necSuf (n : ℕ) (b : Fin (n + 2) → ℝ) (k : Fin (n + 2)) :
-    ∑ j, b j = (∑ j : Fin (n + 1), b (skipIndex k j)) + b k :=
-  NecSuf.finite_sum_skip_index_succ' (R := ℝ) n b k
+    ∑ j, b j = (∑ j : Fin (n + 1), b (skipIndex k j)) + b k := by
+  simp only [skipIndex_eq_skipIndex_necSuf]
+  exact NecSuf.finite_sum_skip_index_succ' (R := ℝ) n b k
 
 /-- `finite_sum_of_real_numbers_with_single_nonzero_term_succ` を `NecSuf.finSumLeft_single_via_first'`（`G := ℝ`。仮定は `0` が加法の左右の単位元であることだけ）の特殊化として得る。 -/
 theorem finite_sum_of_real_numbers_with_single_nonzero_term_succ_of_necSuf (m : ℕ) (r : Fin (m + 1) → ℝ) (k : Fin (m + 1))

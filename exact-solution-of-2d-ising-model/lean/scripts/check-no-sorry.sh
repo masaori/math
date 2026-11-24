@@ -1256,6 +1256,16 @@ targets=(
   Ising2D.skipIndex_ne
   Ising2D.skipIndex_injective
   Ising2D.skipIndex_reaches_every_other_index
+  "Ising2D.NecSuf.skipIndex'"
+  "Ising2D.NecSuf.skipIndex'_of_lt"
+  "Ising2D.NecSuf.skipIndex'_of_le"
+  "Ising2D.NecSuf.skipIndex'_ne"
+  "Ising2D.NecSuf.skipIndex'_injective"
+  "Ising2D.NecSuf.skipIndex'_reaches_every_other_index"
+  Ising2D.skipIndex_eq_skipIndex_necSuf
+  Ising2D.skipIndex_ne_of_necSuf
+  Ising2D.skipIndex_injective_of_necSuf
+  Ising2D.skipIndex_reaches_every_other_index_of_necSuf
   Ising2D.bijection_comp_skipIndex_ne_last
   Ising2D.bijectionCompSkipIndex
   Ising2D.bijectionCompSkipIndex_castSucc

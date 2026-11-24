@@ -41,9 +41,9 @@ theorem finite_sum_reindex_bijective' [AddCommMonoid R] (n : ℕ) (a : Fin (n + 
     let b : Fin (n + 2) → R := fun j => a (π j)                               -- `b_j := a_{π(j)}`
     calc ∑ j, a (π j)
         = ∑ j, b j := rfl                                                     -- `b` の置き方
-      _ = (∑ j : Fin (n + 1), b (Ising2D.skipIndex k j)) + b k :=
+      _ = (∑ j : Fin (n + 1), b (skipIndex' k j)) + b k :=
           finite_sum_skip_index_succ' n b k                                   -- 一つの項を末尾へ移す
-      _ = (∑ j : Fin (n + 1), a (π (Ising2D.skipIndex k j))) + a (π k) := rfl -- `b` の置き方
+      _ = (∑ j : Fin (n + 1), a (π (skipIndex' k j))) + a (π k) := rfl -- `b` の置き方
       _ = (∑ j : Fin (n + 1), a (compSkipIndex π hπ.1 k hk j).castSucc) + a (π k) := by
           simp only [compSkipIndex_castSucc]                                  -- `τ^{π}_{k}` の定義を右辺から左辺へ
       _ = (∑ j : Fin (n + 1), a (compSkipIndex π hπ.1 k hk j).castSucc) + a (Fin.last (n + 1)) := by

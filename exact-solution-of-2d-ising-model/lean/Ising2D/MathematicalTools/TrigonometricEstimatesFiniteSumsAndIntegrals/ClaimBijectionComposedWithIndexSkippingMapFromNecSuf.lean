@@ -6,17 +6,20 @@
 `bijection_composed_with_index_skipping_map_stays_in_lower_indices`, `def_bijection_composed_with_index_skipping_map`,
 `bijection_composed_with_index_skipping_map_is_bijective`。人手証明と 1 対 1 に対応する形は具体版のほうである。
 特殊化は、全単射の仮定 `hπ` から単射の部分 `hπ.1` を取り出して必要十分版へ渡すことである。
+具体版の `skipIndex` と必要十分版の `NecSuf.skipIndex'` の一致は `DefinitionIndexSkippingMapFromNecSuf.lean` の `skipIndex_eq_skipIndex_necSuf`。
 -/
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimBijectionComposedWithIndexSkippingMap
 import Ising2D.NecSuf.BijectionComposedWithIndexSkippingMap
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionIndexSkippingMapFromNecSuf
 
 namespace Ising2D
 
 /-- `bijection_comp_skipIndex_ne_last` を `NecSuf.comp_skipIndex_ne_last`（`hπ.1` だけを渡す）の特殊化として得る。 -/
 theorem bijection_comp_skipIndex_ne_last_of_necSuf {n : ℕ} (π : Fin (n + 2) → Fin (n + 2)) (hπ : Function.Bijective π)
     (k : Fin (n + 2)) (hk : π k = Fin.last (n + 1)) (j : Fin (n + 1)) :
-    π (skipIndex k j) ≠ Fin.last (n + 1) :=
-  NecSuf.comp_skipIndex_ne_last π hπ.1 k hk j
+    π (skipIndex k j) ≠ Fin.last (n + 1) := by
+  rw [skipIndex_eq_skipIndex_necSuf]                     -- 具体版の `δ^{m}_{k}` を必要十分版の `δ^{m}_{k}` へ読み替える
+  exact NecSuf.comp_skipIndex_ne_last π hπ.1 k hk j
 
 /-- 具体版の `τ^{π}_{k}` は、必要十分版の `τ^{π}_{k}` に `hπ.1` を渡したものと一致する。 -/
 theorem bijectionCompSkipIndex_eq_necSuf {n : ℕ} (π : Fin (n + 2) → Fin (n + 2)) (hπ : Function.Bijective π)
