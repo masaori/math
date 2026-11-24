@@ -9,11 +9,37 @@ import Ising2DLambda.NecSuf.KacWard.ReferenceMatchingConstantTerm
 namespace Ising2DLambda.KacWard
 
 open Finset Ising2DLambda.AlgebraicEigenvalue Ising2DLambda.PartitionPolynomial
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign sign_one)
+
+/-- 昇順の全元列が定める置換は恒等置換である。 -/
+theorem referenceBaseWord_permutation_eq_one {J : Type*} [Fintype J] [LinearOrder J] :
+    matchingWordPermutation (matchingBaseWord J) matchingBaseWord_complete = 1 := by
+  ext x
+  obtain ⟨k, hk⟩ := List.mem_iff_get.mp (matchingBaseWord_complete.2 x)
+  rw [← hk, matchingWordPermutation_apply_get]
+  rfl
 
 theorem referenceLongMatching_sign_from_necSuf (L : ℕ) :
-    perfectMatchingSign (referenceLongMatching L) = 1 :=
-  Ising2DLambda.NecSuf.KacWard.ascending_enumeration_sign_necSuf _ _
-    (referenceLongEnumeration_spec L) (referenceLongPairWord_sortedLT L)
+    perfectMatchingSign (referenceLongMatching L) = 1 := by
+  have hc := matchingEnumeration_complete _ _ (referenceLongEnumeration_spec L)
+  have hbase : matchingPairWord (referenceLongEnumeration L) =
+      matchingBaseWord (OrientedEdge L) := by
+    simpa [matchingBaseWord] using
+      Ising2DLambda.NecSuf.KacWard.sorted_complete_word_eq_base
+        (matchingPairWord (referenceLongEnumeration L))
+        (referenceLongPairWord_sortedLT L) hc.2
+  calc
+    perfectMatchingSign (referenceLongMatching L) =
+        matchingWordSign (matchingPairWord (referenceLongEnumeration L)) :=
+      (perfectMatchingSign_enumeration_independent _ _ (referenceLongEnumeration_spec L)).symm
+    _ = matchingWordSign (matchingBaseWord (OrientedEdge L)) := by rw [hbase]
+    _ = sign (fun x y : OrientedEdge L => x < y)
+          (matchingWordPermutation (matchingBaseWord (OrientedEdge L))
+            matchingBaseWord_complete) := matchingWordSign_eq _ _
+    _ = sign (fun x y : OrientedEdge L => x < y) 1 := by
+      rw [referenceBaseWord_permutation_eq_one]
+    _ = 1 := Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_one _
+      Ising2DLambda.NecSuf.KacWard.trichotomous_of_linearOrder
 
 theorem referenceLong_gaugePairWeight_from_necSuf {L : ℕ} (z : Qbar) (hz : z ^ (4 : ℕ) = -1)
     (s : SpinStructure) (e : Edge L) :

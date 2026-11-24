@@ -3,10 +3,8 @@
 具体版と同じ三段（端点列が昇順の全元列に一致することによる符号、重みの指数の消去、
 長い寄与と項の積）を、次の一般の対象で行う。
 
-* 符号の段: 任意の有限線型順序 J 上の任意の完全マッチング D と、その列挙 l。
-  仮定は「l の端点列が狭義増加である」だけである。各対が反転の対であること、
-  対が辺番号で並ぶことは使わない。外すと端点列が昇順の全元列に一致せず、符号は −1 になりうる
-  （J = {0,1,2,3}、D = {{0,2},{1,3}} では端点列 0,2,1,3 の符号は −1）。
+* 列挙の段: 任意の有限線型順序 J の全元を含む狭義増加列。
+  完全マッチングと符号は使わず、その列が昇順の全元列に一致することだけを示す。
 * 重みの段: 可換な零付き群 G、z ≠ 0、指数 p q : E → ℤ と二元 e f。
   仮定は q f = q e と p f = p e − 2 だけで、z⁴ = −1 も反転の対合性も使わない。
   z ≠ 0 は整数冪の加法則 `zpow_add₀` に要る。p f = p e − 2 を外すと指数 2 − p e + p f が零にならない。
@@ -14,9 +12,9 @@
   単射 a で対の集合 P がその像であること、各 a i で長い寄与の条件が成り立ち重みが一であること。
   a の単射性は P 上の積を I 上の積へ移すのに要る。
 -/
-import Ising2DLambda.AlgebraicEigenvalue.PerfectMatchingSign
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 import Mathlib.Data.List.Sort
+import Mathlib.Data.Finset.Sort
 import Mathlib.Algebra.Group.Basic
 import Mathlib.Algebra.GroupWithZero.Basic
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
@@ -25,34 +23,14 @@ import Mathlib.Tactic.Ring
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Finset Ising2DLambda.AlgebraicEigenvalue
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign sign_one)
+open Finset
 
-/-- 昇順の全元列が定める置換は恒等置換である。 -/
-theorem baseWord_permutation_eq_one {J : Type*} [Fintype J] [LinearOrder J] :
-    matchingWordPermutation (matchingBaseWord J) matchingBaseWord_complete = 1 := by
-  ext x
-  obtain ⟨k, hk⟩ := List.mem_iff_get.mp (matchingBaseWord_complete.2 x)
-  rw [← hk, matchingWordPermutation_apply_get]
-  rfl
-
-/-- 符号の段。端点列が狭義増加な列挙を持つ完全マッチングの符号は一である。 -/
-theorem ascending_enumeration_sign_necSuf {J : Type*} [Fintype J] [LinearOrder J]
-    (D : PerfectMatching J) (l : List (J × J)) (hl : IsMatchingEnumeration D l)
-    (hs : (matchingPairWord l).SortedLT) : perfectMatchingSign D = 1 := by
-  have hc := matchingEnumeration_complete D l hl
-  have hbase : matchingPairWord l = matchingBaseWord J :=
-    hs.eq_of_mem_iff (Finset.sortedLT_sort univ)
-      (fun x => iff_of_true (hc.2 x) (matchingBaseWord_complete.2 x))
-  calc
-    perfectMatchingSign D = matchingWordSign (matchingPairWord l) :=
-      (perfectMatchingSign_enumeration_independent D l hl).symm
-    _ = matchingWordSign (matchingBaseWord J) := by rw [hbase]
-    _ = sign (fun x y : J => x < y)
-          (matchingWordPermutation (matchingBaseWord J) matchingBaseWord_complete) :=
-      matchingWordSign_eq _ _
-    _ = sign (fun x y : J => x < y) 1 := by rw [baseWord_permutation_eq_one]
-    _ = 1 := sign_one _ trichotomous_of_linearOrder
+/-- 全元を含む狭義増加列は、順序だけで定まる昇順の全元列である。 -/
+theorem sorted_complete_word_eq_base {J : Type*} [Fintype J] [LinearOrder J]
+    (w : List J) (hs : w.SortedLT) (hc : ∀ x : J, x ∈ w) :
+    w = Finset.univ.sort (· ≤ ·) := by
+  exact hs.eq_of_mem_iff (Finset.sortedLT_sort univ)
+    (fun x => iff_of_true (hc x) (by simp))
 
 /-- 重みの段。z² (z^{-q e} z^{-p e}) (z^{p f} z^{q f}) = z^{2 - p e + p f} = z⁰ = 1。 -/
 theorem reference_pair_weight_necSuf {G E : Type*} [CommGroupWithZero G]

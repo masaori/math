@@ -100429,7 +100429,7 @@ n_{\mathrm{ct}}(\gamma_A)
                       "Ising2DLambda.KacWard.referenceLong_gaugePairWeight",
                       "Ising2DLambda.KacWard.referenceLong_longContribution",
                       "Ising2DLambda.KacWard.referenceMatching_constantTerm",
-                      "Ising2DLambda.NecSuf.KacWard.ascending_enumeration_sign_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.sorted_complete_word_eq_base",
                       "Ising2DLambda.NecSuf.KacWard.reference_pair_weight_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.reference_term_necSuf",
                     ],
