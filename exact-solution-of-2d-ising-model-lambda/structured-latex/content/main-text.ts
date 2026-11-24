@@ -21394,7 +21394,7 @@ B_C(\mathcal L_\tau(w))
 B_{C^{\mathrm c}}(\mathcal L_\upsilon(w_2))
 &=\mathop{\mathbin{+\!+}}_{r=1}^{m}B_{C^{\mathrm c}}(q_\upsilon(\tau(c_r)))&&\bigl(\because\ B_{C^{\mathrm c}},\mathcal L_\upsilon\text{ の定義}\bigr)\\
 &=\mathop{\mathbin{+\!+}}_{r=1}^{m}[\tau(c_r),\upsilon(\tau(c_r))]&&\bigl(\because\ \text{昇順の二場合}\bigr)\\
-&=W_\upsilon(w_2)&&\bigl(\because\ W_\upsilon\text{ の定義}\bigr).
+&=W_\upsilon(w_2)&&\bigl(\because\ W_\upsilon\text{ の定義}\bigr)
 \end{aligned}`),
                       paragraph(["空集合ではどちらも空列である。有限集合の演算だけであり、実数体への脱出はない。"]),
                     ],

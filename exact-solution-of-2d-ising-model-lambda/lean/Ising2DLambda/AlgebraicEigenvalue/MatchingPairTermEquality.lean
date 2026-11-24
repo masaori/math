@@ -170,7 +170,9 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
   simp only [Int.cast_mul, map_mul] at hsignPoly
   refine ⟨Polynomial.C ((ατ : ℤ) : Qbar), Polynomial.C ((αυ : ℤ) : Qbar),
     hατsq, hαυsq, ?_, hprod⟩
-  simpa only [matchingSignPolynomial] using hsignPoly
+  simpa only [matchingSignPolynomial, ατ, αυ, lτ, lυ,
+    show ascendingMatePair τ.val = concreteAscendingMatePair τ.val from rfl,
+    show ascendingMatePair υ.val = concreteAscendingMatePair υ.val from rfl] using hsignPoly
 
 /-- The determinant summand of an even-orbit permutation equals the summand of
 the two matchings recovered from its alternating coloring. -/
