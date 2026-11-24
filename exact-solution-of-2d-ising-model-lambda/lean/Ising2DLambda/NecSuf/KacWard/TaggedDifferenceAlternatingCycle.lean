@@ -49,7 +49,13 @@ theorem alternatingCycle (τ υ : FixedPointFreeInvolution J) (i : J) :
   constructor
   · exact (finitePermutationMinimalPeriod_spec _ _).2.1
   constructor
-  · exact matchingPairSuccessor_color τ υ
+  · let C : J → Prop := fun j => j ∈ matchingPairColor τ υ
+    have hτcolor (j : J) : C (τ.val j) ↔ ¬ C j :=
+      matchingPairColor_alternates τ υ j
+    have hυcolor (j : J) : C (υ.val j) ↔ ¬ C j :=
+      matchingPairSecondColor_alternates τ υ j
+    exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSuccessor_color_necSuf
+      τ.val υ.val C hτcolor hυcolor
   · intro j
     rfl
 

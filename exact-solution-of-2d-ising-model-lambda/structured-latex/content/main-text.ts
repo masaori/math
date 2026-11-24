@@ -78799,7 +78799,7 @@ a
                         displayMath(String.raw`\begin{aligned}
 ka
 &\le ka+r
-&&(\because\ 0\le r\text{。}\mathbb{N}\text{ の加法単調性})\\
+&&(\because\ 0\le r\text{、}\mathbb{N}\text{ の加法単調性})\\
 &=L-1
 &&(\because\ \text{除法の等式})\\
 &<L
@@ -78810,9 +78810,9 @@ L
 &=ka+r+1
 &&(\because\ \text{除法の等式}L-1=ka+r\text{ の両辺に }1\text{ を足す})\\
 &\le ka+(a-1)+1
-&&(\because\ r<a\text{ から }r\le a-1\text{（}\mathbb{N}\text{ の順序）。}\mathbb{N}\text{ の加法単調性})\\
+&&(\because\ r<a\text{ から }r\le a-1\text{（}\mathbb{N}\text{ の順序）、}\mathbb{N}\text{ の加法単調性})\\
 &=ka+a
-&&(\because\ a\ge1\text{。}\mathbb{N}\text{ の加法})
+&&(\because\ a\ge1\text{、}\mathbb{N}\text{ の加法})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 a
