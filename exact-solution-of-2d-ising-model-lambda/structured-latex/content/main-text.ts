@@ -90910,9 +90910,9 @@ I_{a,b}
                       ]),
                       paragraph([
                         "どの ", math(String.raw`j\in\{0,\ldots,m-1\}`), " についても ",
-                        math(String.raw`P_j(\gamma)\ne(a,b)`), " である場合。閉性 ",
-                        math(String.raw`P_m(\gamma)=P_0(\gamma)`), "（", ref("def_plane_lift"),
-                        "）により ", math(String.raw`P_k(\gamma)=(a,b)`),
+                        math(String.raw`P_j(\gamma)\ne(a,b)`), " である場合。零巻き付きなので ",
+                        math(String.raw`P_m(\gamma)=P_0(\gamma)`), "（", ref("claim_plane_lift_endpoint_winding"),
+                        "）であり、持ち上げ点の列は一周期で閉じる。", math(String.raw`P_k(\gamma)=(a,b)`),
                         " を満たす ", math(String.raw`k\in\{0,\ldots,m-1\}`), " は存在しないので、",
                         ref("claim_vertex_incident_edge_traversal_even"), " の右辺は ",
                         math(String.raw`0`), " であり、",

@@ -1,7 +1,7 @@
 /-
 具体版が必要十分版の特殊化として得られることの導出。
 
-四セルの交差数の奇偶、持ち上げ点の相異性と四辺の通過回数に対する仮定を具体版へ渡す。
+閉じた非後退辺列・零巻き付き・持ち上げ点の相異性を具体版へ渡す。
 -/
 import Ising2DLambda.KacWard.BoundaryVertexDiagonalContactExcluded
 import Ising2DLambda.NecSuf.KacWard.BoundaryVertexDiagonalContactExcluded
@@ -13,23 +13,22 @@ theorem diagonalCellPairsExcluded_eq_necSuf :
     DiagonalCellPairsExcluded = Ising2DLambda.NecSuf.KacWard.DiagonalCellPairsExcluded := rfl
 
 /-- `claim_boundary_vertex_diagonal_contact_excluded` を必要十分版から導く。 -/
-theorem boundaryVertex_diagonalContactExcluded_from_necSuf
-    (n : ℕ) (row col : ℕ → ℤ) (a b : ℤ)
-    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
-    (hunit : IsUnitGridWalk n row col)
-    (hdistinct : ∀ k l, k < n → l < n →
-      row k = row l → col k = col l → k = l)
-    (hleft : verticalEdgeTraversalCount n row col (a - 1) b ≤ 1)
-    (hright : verticalEdgeTraversalCount n row col a b ≤ 1)
-    (hdown : horizontalEdgeTraversalCount n row col a (b - 1) ≤ 1)
-    (hup : horizontalEdgeTraversalCount n row col a b ≤ 1) :
+theorem boundaryVertex_diagonalContactExcluded_from_necSuf {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc))
+    (a b : ℤ) :
+    let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
+    let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
     Ising2DLambda.NecSuf.KacWard.DiagonalCellPairsExcluded
-      (rightRayCrossingCount n row col (a - 1) (b - 1) % 2)
-      (rightRayCrossingCount n row col (a - 1) b % 2)
-      (rightRayCrossingCount n row col a b % 2)
-      (rightRayCrossingCount n row col a (b - 1) % 2) := by
+      (rightRayCrossingCount (m + 1) row col (a - 1) (b - 1) % 2)
+      (rightRayCrossingCount (m + 1) row col (a - 1) b % 2)
+      (rightRayCrossingCount (m + 1) row col a b % 2)
+      (rightRayCrossingCount (m + 1) row col a (b - 1) % 2) := by
   rw [← diagonalCellPairsExcluded_eq_necSuf]
-  exact boundaryVertex_diagonalContactExcluded n row col a b hclosedRow hclosedCol hunit
-    hdistinct hleft hright hdown hup
+  exact boundaryVertex_diagonalContactExcluded γ hγ hh hv hdistinct a b
 
 end Ising2DLambda.KacWard

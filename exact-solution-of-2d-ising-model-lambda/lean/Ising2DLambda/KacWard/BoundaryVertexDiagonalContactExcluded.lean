@@ -3,8 +3,8 @@
 「持ち上げ点が相異なる閉路で頂点まわりの内側セルが対角の二セルだけになることは無い」
 （`claim_boundary_vertex_diagonal_contact_excluded`）の具体版。
 
-人手証明と同じく、持ち上げ点の相異性から各格子点の訪問回数が零か一であることを導く。
-頂点を一回訪問する場合は四セルが二つの巡回弧を作ることを使い、訪問しない場合は
+人手証明と同じく、格子点が一周期の持ち上げ点かどうかで場合を分ける。
+持ち上げ点である場合は四セルが二つの巡回弧を作ることを使い、そうでない場合は
 四辺の通過回数が零なので四セルの内外がすべて一致することを使う。
 -/
 import Ising2DLambda.KacWard.VertexSurroundingCellsParityArcs
@@ -25,61 +25,73 @@ def DiagonalCellPairsExcluded (c0 c1 c2 c3 : ℕ) : Prop :=
       (c0 = 1 ∧ c1 = 0 ∧ c2 = 0 ∧ c3 = 1))
 
 set_option maxHeartbeats 1000000 in
-/-- `claim_boundary_vertex_diagonal_contact_excluded` の具体版。 -/
-theorem boundaryVertex_diagonalContactExcluded
-    (n : ℕ) (row col : ℕ → ℤ) (a b : ℤ)
-    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
-    (hunit : IsUnitGridWalk n row col)
-    (hdistinct : ∀ k l, k < n → l < n →
-      row k = row l → col k = col l → k = l)
-    (hleft : verticalEdgeTraversalCount n row col (a - 1) b ≤ 1)
-    (hright : verticalEdgeTraversalCount n row col a b ≤ 1)
-    (hdown : horizontalEdgeTraversalCount n row col a (b - 1) ≤ 1)
-    (hup : horizontalEdgeTraversalCount n row col a b ≤ 1) :
+/-- `claim_boundary_vertex_diagonal_contact_excluded` の具体版。
+仮定は本文の前提だけである: 閉じた非後退辺列 `γ`、零の整数巻き付き数、一周期の持ち上げ点の相異性。
+訪問する頂点では四セルの偶奇弧（`vertexSurroundingCells_formParityArcs`）を引き、
+訪問しない頂点では四辺の通過回数の和が零であること（`vertexIncidentEdgeTraversal_even`）を引く。 -/
+theorem boundaryVertex_diagonalContactExcluded {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc))
+    (a b : ℤ) :
+    let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
+    let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
     DiagonalCellPairsExcluded
-      (rightRayCrossingCount n row col (a - 1) (b - 1) % 2)
-      (rightRayCrossingCount n row col (a - 1) b % 2)
-      (rightRayCrossingCount n row col a b % 2)
-      (rightRayCrossingCount n row col a (b - 1) % 2) := by
-  let c0 := rightRayCrossingCount n row col (a - 1) (b - 1) % 2
-  let c1 := rightRayCrossingCount n row col (a - 1) b % 2
-  let c2 := rightRayCrossingCount n row col a b % 2
-  let c3 := rightRayCrossingCount n row col a (b - 1) % 2
+      (rightRayCrossingCount (m + 1) row col (a - 1) (b - 1) % 2)
+      (rightRayCrossingCount (m + 1) row col (a - 1) b % 2)
+      (rightRayCrossingCount (m + 1) row col a b % 2)
+      (rightRayCrossingCount (m + 1) row col a (b - 1) % 2) := by
+  intro row col
+  -- 持ち上げの終点の主張から P_{m+1} = P_0、持ち上げの各歩は単位格子歩。
+  have hclosed := liftedWalkCoordinates_closed γ hγ hh hv
+  have hunit := liftedWalkCoordinates_unit γ
+  let c0 := rightRayCrossingCount (m + 1) row col (a - 1) (b - 1) % 2
+  let c1 := rightRayCrossingCount (m + 1) row col (a - 1) b % 2
+  let c2 := rightRayCrossingCount (m + 1) row col a b % 2
+  let c3 := rightRayCrossingCount (m + 1) row col a (b - 1) % 2
   have hc0 : c0 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
   have hc1 : c1 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
   have hc2 : c2 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
   have hc3 : c3 ≤ 1 := Nat.le_of_lt_succ (Nat.mod_lt _ (by omega))
   have hshape : FourCellsFormParityArcs c0 c1 c2 c3 ∨
       (c0 = c1 ∧ c1 = c2 ∧ c2 = c3) := by
-    by_cases hv : ∃ j, j < n ∧ row j = a ∧ col j = b
-    · left
-      rcases hv with ⟨j, hj, hrow, hcol⟩
-      have hvisit : vertexVisitCount n row col a b = 1 := by
-        rw [← hrow, ← hcol]
-        exact vertexVisitCount_eq_one_of_distinct n row col j hj hdistinct
-      exact vertexSurroundingCells_formParityArcs_local n row col a b hclosedRow hclosedCol
-        hunit hvisit hleft hright hdown hup
-    · right
-      have hvisit0 : vertexVisitCount n row col a b = 0 := by
+    by_cases hvisited : ∃ j, j < m + 1 ∧ row j = a ∧ col j = b
+    · -- (a,b) = P_j の場合: 四セルの偶奇弧の主張。
+      left
+      rcases hvisited with ⟨j, hj, hrow, hcol⟩
+      have harcs : FourCellsFormParityArcs
+          (rightRayCrossingCount (m + 1) row col (row j - 1) (col j - 1) % 2)
+          (rightRayCrossingCount (m + 1) row col (row j - 1) (col j) % 2)
+          (rightRayCrossingCount (m + 1) row col (row j) (col j) % 2)
+          (rightRayCrossingCount (m + 1) row col (row j) (col j - 1) % 2) :=
+        vertexSurroundingCells_formParityArcs γ hγ hh hv hdistinct j hj
+      rw [hrow, hcol] at harcs
+      exact harcs
+    · -- どの P_k も (a,b) でない場合: 四辺の通過回数の和は 2·0。
+      right
+      have hvisit0 : vertexVisitCount (m + 1) row col a b = 0 := by
         unfold vertexVisitCount
         apply Finset.sum_eq_zero
         intro k hk
-        have hklt : k < n := Finset.mem_range.mp hk
+        have hklt : k < m + 1 := Finset.mem_range.mp hk
         simp only [ite_eq_right_iff]
         intro hpoint
-        exact False.elim (hv ⟨k, hklt, hpoint⟩)
+        exact False.elim (hvisited ⟨k, hklt, hpoint⟩)
       have hsum := vertexIncidentEdgeTraversal_even
-        n row col a b hunit hclosedRow hclosedCol
-      have hleft0 : verticalEdgeTraversalCount n row col (a - 1) b = 0 := by omega
-      have hright0 : verticalEdgeTraversalCount n row col a b = 0 := by omega
-      have hdown0 : horizontalEdgeTraversalCount n row col a (b - 1) = 0 := by omega
-      have hup0 : horizontalEdgeTraversalCount n row col a b = 0 := by omega
-      have h01 := rightRayCrossingCount_adjacent n row col (a - 1) (b - 1)
+        (m + 1) row col a b hunit hclosed.1 hclosed.2
+      have hleft0 : verticalEdgeTraversalCount (m + 1) row col (a - 1) b = 0 := by omega
+      have hright0 : verticalEdgeTraversalCount (m + 1) row col a b = 0 := by omega
+      have hdown0 : horizontalEdgeTraversalCount (m + 1) row col a (b - 1) = 0 := by omega
+      have hup0 : horizontalEdgeTraversalCount (m + 1) row col a b = 0 := by omega
+      have h01 := rightRayCrossingCount_adjacent (m + 1) row col (a - 1) (b - 1)
       have h12 := verticallyAdjacentCells_boundaryParity
-        n row col (a - 1) b hclosedRow hclosedCol hunit
-      have h23 := rightRayCrossingCount_adjacent n row col a (b - 1)
+        (m + 1) row col (a - 1) b hclosed.1 hclosed.2 hunit
+      have h23 := rightRayCrossingCount_adjacent (m + 1) row col a (b - 1)
       have h30 := verticallyAdjacentCells_boundaryParity
-        n row col (a - 1) (b - 1) hclosedRow hclosedCol hunit
+        (m + 1) row col (a - 1) (b - 1) hclosed.1 hclosed.2 hunit
       simp only [Int.sub_add_cancel] at h01 h12 h23 h30
       change c0 = c1 ∧ c1 = c2 ∧ c2 = c3
       simp [hleft0, hright0, hdown0, hup0] at h01 h12 h23 h30
