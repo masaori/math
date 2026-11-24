@@ -103,7 +103,7 @@ theorem epsilon_anticomm_sigmaY (k : Fin M) :
 
 /-- 原文 Step 4 の `ε Z_m = -Z_m ε`。 -/
 theorem epsilon_anticomm_Z (m : Fin M) : epsilon M * Z m = -(Z m * epsilon M) := by
-  -- 人手の `Z_m` の 4 行の鎖（人手の `m` は Lean の `m + 1`）
+  -- 人手の `Z_m` の 4 行の鎖（人手の添字 `m` は `finIndexToZZ M m`。`def_index_set_from_one_to_n`）
   have hZ : Z m = siteProd M (jwFamily m pauliZ) :=
     calc Z m = finiteMatrixProduct (m : ℕ) (jwFactor m pauliZ) :=
           Z_eq_finiteMatrixProduct m                             -- `def_jordan_wigner_Z_matrices`（Lean の `Z` の定義（クロネッカー積）を人手の定義（有限積）へ読み替える橋渡しの段）
@@ -112,15 +112,18 @@ theorem epsilon_anticomm_Z (m : Fin M) : epsilon M * Z m = -(Z m * epsilon M) :=
   rw [hZ]
   refine epsilon_anticomm_of_single_site _ m ?_ ?_
   · rw [jwFamily_self, pauliZ_mul_pauliX]
-  · intro i hi
-    rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-    · rw [jwFamily_of_lt h]
-    · exact absurd (Fin.val_injective h) hi
-    · rw [jwFamily_of_gt h, one_mul, mul_one]
+  · -- 人手の添字 `finIndexToZZ M i, finIndexToZZ M m ∈ {1,…,M}`（`def_index_set_from_one_to_n`）を ℤ の順序で比べ、
+    -- `i < m` で `σ^x`、`i > m` で `I` の因子（人手の `v_i`）。像が等しければ単射性で `i = m`（`Fin M` の元）となり、仮定 `hi` に反する
+    intro i hi
+    rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with h | h | h
+    · rw [jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M i m).1 h)]
+    · exact absurd ((finIndexToZZ_bijective_onto_index_set M).1 i m h) hi
+    · rw [jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt M m i).1 h), identity_matrix_mul, mul_identity_matrix]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`（`A → σ^x`）
 
 /-- 原文 Step 4 の `ε Y_m = -Y_m ε`。 -/
 theorem epsilon_anticomm_Y (m : Fin M) : epsilon M * Y m = -(Y m * epsilon M) := by
-  -- 人手の `Y_m` の 4 行の鎖（人手の `m` は Lean の `m + 1`）
+  -- 人手の `Y_m` の 4 行の鎖（人手の添字 `m` は `finIndexToZZ M m`。`def_index_set_from_one_to_n`）
   have hY : Y m = siteProd M (jwFamily m pauliY) :=
     calc Y m = finiteMatrixProduct (m : ℕ) (jwFactor m pauliY) :=
           Y_eq_finiteMatrixProduct m                             -- `def_jordan_wigner_Y_matrices`（Lean の `Y` の定義（クロネッカー積）を人手の定義（有限積）へ読み替える橋渡しの段）
@@ -129,11 +132,14 @@ theorem epsilon_anticomm_Y (m : Fin M) : epsilon M * Y m = -(Y m * epsilon M) :=
   rw [hY]
   refine epsilon_anticomm_of_single_site _ m ?_ ?_
   · rw [jwFamily_self, pauliY_mul_pauliX]
-  · intro i hi
-    rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-    · rw [jwFamily_of_lt h]
-    · exact absurd (Fin.val_injective h) hi
-    · rw [jwFamily_of_gt h, one_mul, mul_one]
+  · -- 人手の添字 `finIndexToZZ M i, finIndexToZZ M m ∈ {1,…,M}`（`def_index_set_from_one_to_n`）を ℤ の順序で比べ、
+    -- `i < m` で `σ^x`、`i > m` で `I` の因子（人手の `v_i`）。像が等しければ単射性で `i = m`（`Fin M` の元）となり、仮定 `hi` に反する
+    intro i hi
+    rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with h | h | h
+    · rw [jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M i m).1 h)]
+    · exact absurd ((finIndexToZZ_bijective_onto_index_set M).1 i m h) hi
+    · rw [jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt M m i).1 h), identity_matrix_mul, mul_identity_matrix]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`（`A → σ^x`）
 
 /-- 反交換する 2 つを掛けると可換になる（符号が 2 回反転する）。 -/
 theorem commute_of_two_anticomm {a b c : TensorPow M}
