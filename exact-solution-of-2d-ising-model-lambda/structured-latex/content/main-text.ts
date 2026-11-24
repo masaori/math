@@ -77414,13 +77414,13 @@ L^2
                         displayMath(String.raw`\begin{aligned}
 \tfrac1a\cdot\mu
 &\le_{\Lambda_{\mathbb{Q}}}\tfrac1a\cdot(n\cdot\varepsilon)
-&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=\tfrac1a\text{、}\lambda:=\mu\text{、}\mu:=n\cdot\varepsilon\text{ で読む。}0\le\tfrac1a\text{ は準備、}\mu\le_{\Lambda_{\mathbb{Q}}}n\cdot\varepsilon\text{ は仮定})\\
+&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=\tfrac1a\text{、}\lambda:=\mu\text{、}\mu:=n\cdot\varepsilon\text{ で読む、}0\le\tfrac1a\text{ は準備、}\mu\le_{\Lambda_{\mathbb{Q}}}n\cdot\varepsilon\text{ は仮定})\\
 &=\bigl(\tfrac1a\cdot n\bigr)\cdot\varepsilon
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則 }(rs)\cdot\lambda=r\cdot(s\cdot\lambda)\text{ を }r:=\tfrac1a\text{、}s:=n\text{ で右から左へ読む})\\
 &=\tfrac na\cdot\varepsilon
 &&(\because\ \mathbb{Q}\text{ の四則 }\tfrac1a\cdot n=\tfrac na)\\
 &\le_{\Lambda_{\mathbb{Q}}}1\cdot\varepsilon
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac na\text{、}s:=1\text{、}\nu:=\varepsilon\text{ で読む。}\tfrac na\le1\text{ は準備、}0\le_{\Lambda_{\mathbb{Q}}}\varepsilon\text{ は仮定})\\
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac na\text{、}s:=1\text{、}\nu:=\varepsilon\text{ で読む、}\tfrac na\le1\text{ は準備、}0\le_{\Lambda_{\mathbb{Q}}}\varepsilon\text{ は仮定})\\
 &=\varepsilon
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の単位 }1\cdot\lambda=\lambda)
 \end{aligned}`),
