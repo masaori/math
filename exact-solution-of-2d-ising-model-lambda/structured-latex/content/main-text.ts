@@ -45209,7 +45209,7 @@ N
 &=\mathrm{mev}_{m,\alpha}\Bigl(\sum_{a\in A}\mathrm{mk}_m\bigl(\mathrm{mco}_a(P)\bigr)\cdot\prod_{r\in\mathbb{N}_{<n}}y(r)^{a(r)}\Bigr)
 &&\bigl(\because\ \blkref{def_qbar_multivariate_substitution}\text{ の }\mathrm{ms}_y\bigr)\\
 &=\sum_{a\in A}\mathrm{mev}_{m,\alpha}\Bigl(\mathrm{mk}_m\bigl(\mathrm{mco}_a(P)\bigr)\Bigr)\cdot\prod_{r\in\mathbb{N}_{<n}}\mathrm{mev}_{m,\alpha}\bigl(y(r)\bigr)^{a(r)}
-&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\text{ の値は有限和・積・有限積を保つ。冪は積の繰り返し}\bigr)\\
+&&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\text{ の値は有限和・積・有限積を保つ、冪は積の繰り返し}\bigr)\\
 &=\sum_{a\in A}\mathrm{mco}_a(P)\cdot\prod_{r\in\mathbb{N}_{<n}}\mathrm{mev}_{m,\alpha}\bigl(y(r)\bigr)^{a(r)}
 &&\bigl(\because\ \blkref{def_qbar_multivariate_point_value}\text{ の }\mathrm{mev}_{m,\alpha}(\mathrm{mk}_m(c))=c\text{、各項へ同時に当てる}\bigr)\\
 &=\sum_{a\in A}\mathrm{mco}_a(P)\cdot\prod_{r\in\mathbb{N}_{<n}}\bigl((\mathrm{mev}_{m,\alpha}\circ y)(r)\bigr)^{a(r)}
