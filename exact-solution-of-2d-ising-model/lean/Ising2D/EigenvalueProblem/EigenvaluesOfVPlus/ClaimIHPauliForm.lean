@@ -46,7 +46,10 @@ Step 3 の最後の文（`S_1^{(+)}`・`S_2` は実対称なので `real_symmetr
   係数の実性を使う成分の実性（`S2_hasRealEntries`・`S1plus_hasRealEntries`）では `K1 K2star : ℝ` として受け取り、人手の主張の前置きの読み方
   `(K_1)_ℂ`・`(K_2^*)_ℂ`（`inclusion_rr_to_cc` の略記）どおり `(K1 : ℂ)`・`(K2star : ℂ)` を係数にする。
 - 人手の主張は `M_col ≥ 2`（`def_H1_plus` の範囲）を主張の文に書いている。`H_2`・`S_2` の鎖は `M = r + 1`、`S_1^{(+)}` の鎖は `M = r + 2` の場合を述べる
-  （Lean の添字は 0 始まりなので、人手の `m` は `Fin.castSucc m`、`m + 1` は `Fin.succ m`、`M_col` は `Fin.last (r + 1)`、`1` は `0`）。
+  （人手の添字 `k ∈ {1,…,M_col}` は `finIndexToZZ M i = k`（`def_index_set_from_one_to_n`）を満たす `i : Fin M` である。人手の添字 `finIndexToZZ (r + 2) (Fin.castSucc m)` のサイトは `Fin.castSucc m`、その次の添字（像に `1_ℤ` を足したもの）のサイトは `Fin.succ m`、
+  人手の添字 `M_col` と `1` のサイトは `Fin.last (r + 1)` と `0` である。
+  `Y_castSucc_mul_Z_succ` の場合分けは人手の添字を `finIndexToZZ` の像の ℤ の順序で比べる。境界の因子（第 `1` 因子・第 `M_col` 因子）は `Fin` の元の等号で場合を分け、
+  分けた後の因子の比較を、像の値（第 `1` 因子は `1_ℤ`、第 `M_col` 因子は `ι_{ℕ→ℤ}(M_col)`）と全単射の補題 `finIndexToZZ_bijective_onto_index_set` の単射と値の範囲で行う。どちらも、Lean の定義 `jwFamily` の `Fin` の元の値の比較へは `finIndexToZZ_lt_iff_val_lt` で移す）。
   人手の `H_1^{(+)}` の差の形は `H1plus_eq_sub`（`def_H1_plus`）で読み替える。
 - 人手の `G` は主張で行列の有限積 `∏_{j=1}^{M_col}F_j^{(G)}` と定めてあるが、Lean の `G` は、サイトごとの因子の族 `boundaryYXYFamily` をクロネッカー積 `siteProd` に入れたものとして書く
   （`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`）。両者が等しいことは、人手の準備の `G` の表示の 4 行と 1 対 1 の `boundaryG_kronecker_form` が示す。`Y_last_mul_Z_zero` の右辺は人手どおり有限積の `G` で、
@@ -88,8 +91,9 @@ theorem Z_mul_Y_same_by_kronecker_form {M : ℕ} (m : Fin M) : Z m * Y m = (-Com
         rw [Y_prefix_kronecker_form m]                         -- 準備の `Y_m` の表示
     _ = (-Complex.I) • sigmaX m := Z_mul_Y_same m       -- `Z_mul_Y_same` の 3〜8 段
 
-/-- 人手 `iH_is_real_symmetric` の主張の `G` の因子 `F_j^{(G)}`（`M_col = r + 2`。Lean の 0 始まりの `j` が人手の `F_{j+1}^{(G)}`）:
-第 1 因子（`j = 0`）と第 `M_col` 因子（`j = Fin.last (r + 1)`）は `σ_j^y`、それ以外は `σ_j^x`。 -/
+/-- 人手 `iH_is_real_symmetric` の主張の `G` の因子 `F_k^{(G)}`（`M_col = r + 2`）: Lean の `j : Fin (r + 2)` の因子が人手の `F_k^{(G)}`
+（`k = finIndexToZZ (r + 2) j`。`def_index_set_from_one_to_n`）である。第 1 因子（像が `1_ℤ` の `j = 0`）と第 `M_col` 因子
+（像が `ι_{ℕ→ℤ}(M_col)` の `j = Fin.last (r + 1)`）は `σ_j^y`、それ以外は `σ_j^x`。 -/
 noncomputable def boundaryGFactor (r : ℕ) : Fin (r + 2) → TensorPow (r + 2) :=
   fun j => if j = 0 ∨ j = Fin.last (r + 1) then sigmaY j else sigmaX j
 
@@ -120,8 +124,16 @@ theorem boundaryG_kronecker_form (r : ℕ) :
         -- `a_j^{(G)}` の定義を `M_col` か所へ（`r = M_col` なので `I` の因子は無い）
         congr 1
         funext i
-        have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) := Fin.ext (by simp [firstSite])
-        have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) := Fin.ext (by simp [lastSite])
+        -- 人手のサイト `1`・`M_col` の添字は `1_ℤ`・`ι_{ℕ→ℤ}(M_col)`（`def_index_set_from_one_to_n`）で、`0`・`Fin.last (r + 1)` の像も同じ値
+        have hinj := (finIndexToZZ_bijective_onto_index_set (r + 2)).1
+        have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
+          simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
+        have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
+          simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+        have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) :=
+          hinj _ _ (by rw [finIndexToZZ_firstSite, hzeroZ])
+        have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) :=
+          hinj _ _ (by rw [finIndexToZZ_lastSite, hlastZ])
         rw [prefixKroneckerFamily, dif_pos (show (i : ℕ) < r + 1 + 1 by omega)]
         simp only [boundaryGLetter, boundaryYXYFamily, hf, hl, Fin.eta]
 
@@ -155,13 +167,19 @@ theorem S2_eq_K2star_smul_sum_sigmaX (K2star : ℂ) (r : ℕ) :
         rw [one_mul]                                                         -- ℂ の乗法の単位元
 
 /-- **人手 `iH_is_real_symmetric` Step 2 の準備の `σ^z_mσ^z_{m+1}` のクロネッカー積表示**（6 行。`1 ≤ m ≤ M_col - 1`、`M = r + 2`）。
-人手の `m` は Lean の `Fin.castSucc m`、`m + 1` は `Fin.succ m`。人手の「第 `m` 因子と第 `m+1` 因子以外の因子」は Lean の
+人手の添字 `finIndexToZZ (r + 2) (Fin.castSucc m)` のサイトは Lean の `Fin.castSucc m`、その次の添字（像に `1_ℤ` を足したもの）のサイトは `Fin.succ m` である
+（`def_index_set_from_one_to_n`）。人手の「第 `m` 因子と第 `m+1` 因子以外の因子」は Lean の
 `i ≠ Fin.castSucc m` かつ `i ≠ Fin.succ m` で、`calc` の終わりの因子の並び `I⊠⋯⊠I⊠σ^z⊠σ^z⊠I⊠⋯⊠I` は `Function.update` を 2 回重ねて書く。 -/
 theorem sigmaZ_castSucc_mul_sigmaZ_succ_kronecker {r : ℕ} (m : Fin (r + 1)) :
     sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)
       = siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
           (Fin.succ m) pauliZ) (Fin.castSucc m) pauliZ) := by
-  have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := Fin.ne_of_val_ne (by simp)
+  -- 人手の `m` と `m+1` の添字（`finIndexToZZ` の像）は `1_ℤ` だけ違う（`def_index_set_from_one_to_n`）
+  have hsuccZ : finIndexToZZ (r + 2) (Fin.succ m) = finIndexToZZ (r + 2) (Fin.castSucc m) + 1 := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_succ, Fin.val_castSucc]; push_cast; ring
+  have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := fun h => by
+    have := congrArg (finIndexToZZ (r + 2)) h
+    omega
   calc
     sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)
         = siteProd (r + 2) (Function.update 1 (Fin.castSucc m) pauliZ) * sigmaZ (Fin.succ m) := rfl
@@ -207,13 +225,18 @@ theorem sigmaZ_castSucc_mul_sigmaZ_succ_kronecker {r : ℕ} (m : Fin (r + 1)) :
 
 人手との対応: 人手の準備の `Y_m`・`Z_{m+1}` のクロネッカー積表示（Step 1 の準備の `Y_m`・`Z_m` の表示を `m → m`・`m+1` で引く）は、
 `calc` の 1・2 段の `Y_prefix_kronecker_form`・`Z_prefix_kronecker_form` である。準備の `σ^z_mσ^z_{m+1}` の表示は `sigmaZ_castSucc_mul_sigmaZ_succ_kronecker`。
-人手の「第 `1` から第 `m-1` 因子」「第 `m+2` 以降の因子」は Lean の `i < Fin.castSucc m`・それ以外（`i ≠ Fin.castSucc m`, `i ≠ Fin.succ m`）である。
+人手の「第 `1` から第 `m-1` 因子」「第 `m+2` 以降の因子」は Lean の `finIndexToZZ (r + 2) i < finIndexToZZ (r + 2) (Fin.castSucc m)`（人手の添字の ℤ の比較。`def_index_set_from_one_to_n`）・それ以外（`i ≠ Fin.castSucc m`, `i ≠ Fin.succ m`）である。
 `V1_in_Z_Y_epsilon` の Step 2 の鎖は別の 5 行の鎖で、Lean の `Y_mul_Z_next_of_not_last` が持つ。 -/
 theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
     Y (Fin.castSucc m) * Z (Fin.succ m)
       = (-Complex.I) • (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)) := by
-  have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := Fin.ne_of_val_ne (by simp)
-  have hsucc : ((Fin.succ m : Fin (r + 2)) : ℕ) = ((Fin.castSucc m : Fin (r + 2)) : ℕ) + 1 := by simp
+  -- 人手の `m` と `m+1` の添字（`finIndexToZZ` の像）は `1_ℤ` だけ違う（`def_index_set_from_one_to_n`）
+  have hsuccZ : finIndexToZZ (r + 2) (Fin.succ m) = finIndexToZZ (r + 2) (Fin.castSucc m) + 1 := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_succ, Fin.val_castSucc]; push_cast; ring
+  have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := fun h => by
+    have := congrArg (finIndexToZZ (r + 2)) h
+    omega
+  have hinj := (finIndexToZZ_bijective_onto_index_set (r + 2)).1
   calc
     Y (Fin.castSucc m) * Z (Fin.succ m)
         = siteProd (r + 2) (jwFamily (Fin.castSucc m) pauliY) * Z (Fin.succ m) := by
@@ -222,32 +245,38 @@ theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
           * siteProd (r + 2) (jwFamily (Fin.succ m) pauliZ) := by
           rw [Z_prefix_kronecker_form (Fin.succ m)]            -- 準備の `Z_{m+1}` の表示（Step 1 の準備の `Z_m` の表示（`m → m+1`））
     _ = siteProd (r + 2) (fun i =>
-          if (i : ℕ) < (Fin.castSucc m : ℕ) then pauliX * pauliX
+          if finIndexToZZ (r + 2) i < finIndexToZZ (r + 2) (Fin.castSucc m) then pauliX * pauliX
           else if i = Fin.castSucc m then pauliY * pauliX
           else if i = Fin.succ m then 1 * pauliZ else 1 * 1) := by
       rw [← siteProd_mul]                               -- `kronecker_product_rule` (1)（`M → M_col`）
       congr 1
       funext i
       simp only [Pi.mul_apply]
-      rcases lt_trichotomy (i : ℕ) (Fin.castSucc m : ℕ) with h | h | h
-      · rw [jwFamily_of_lt h, jwFamily_of_lt (by omega), if_pos h]
-      · have he : i = Fin.castSucc m := Fin.val_injective h
-        rw [he, jwFamily_self, jwFamily_of_lt (by omega), if_neg (lt_irrefl _), if_pos rfl]
-      · have hne : i ≠ Fin.castSucc m := fun he => absurd (congrArg Fin.val he) (by omega)
-        rw [jwFamily_of_gt h, if_neg (by omega), if_neg hne]
-        rcases lt_trichotomy (i : ℕ) (Fin.succ m : ℕ) with h' | h' | h'
+      -- 人手の添字 `finIndexToZZ (r + 2) i` を ℤ の順序で人手の `m`・`m+1`（`hsuccZ`）の添字と比べ、
+      -- `i < m` で `σ^xσ^x`、`i = m` で `σ^yσ^x`、`i = m+1` で `Iσ^z`、`i > m+1` で `II` の因子。
+      -- Lean の定義 `jwFamily` は `Fin` の元の値（ℕ）で比べるので、`finIndexToZZ_lt_iff_val_lt` で移す
+      rcases lt_trichotomy (finIndexToZZ (r + 2) i) (finIndexToZZ (r + 2) (Fin.castSucc m)) with h | h | h
+      · rw [jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt (r + 2) _ _).1 h),
+          jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt (r + 2) i (Fin.succ m)).1 (by omega)), if_pos h]
+      · have he : i = Fin.castSucc m := hinj i (Fin.castSucc m) h
+        rw [he, jwFamily_self,
+          jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt (r + 2) (Fin.castSucc m) (Fin.succ m)).1 (by omega)),
+          if_neg (lt_irrefl _), if_pos rfl]
+      · have hne : i ≠ Fin.castSucc m := fun he => by rw [he] at h; exact lt_irrefl _ h
+        rw [jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt (r + 2) _ _).1 h), if_neg (lt_asymm h), if_neg hne]
+        rcases lt_trichotomy (finIndexToZZ (r + 2) i) (finIndexToZZ (r + 2) (Fin.succ m)) with h' | h' | h'
         · omega
-        · have he : i = Fin.succ m := Fin.val_injective h'
+        · have he : i = Fin.succ m := hinj i (Fin.succ m) h'
           rw [he, jwFamily_self, if_pos rfl]
-        · have hne' : i ≠ Fin.succ m := fun he => absurd (congrArg Fin.val he) (by omega)
-          rw [jwFamily_of_gt h', if_neg hne']
+        · have hne' : i ≠ Fin.succ m := fun he => by rw [he] at h'; exact lt_irrefl _ h'
+          rw [jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt (r + 2) _ _).1 h'), if_neg hne']
     _ = siteProd (r + 2) (fun i =>
-          if (i : ℕ) < (Fin.castSucc m : ℕ) then 1
+          if finIndexToZZ (r + 2) i < finIndexToZZ (r + 2) (Fin.castSucc m) then 1
           else if i = Fin.castSucc m then pauliY * pauliX
           else if i = Fin.succ m then 1 * pauliZ else 1 * 1) := by
       rw [pauliX_mul_pauliX]                            -- `pauli_matrix_products` の `σ^xσ^x = I`（第 1 から第 `m-1` 因子へ同時に適用）
     _ = siteProd (r + 2) (fun i =>
-          if (i : ℕ) < (Fin.castSucc m : ℕ) then 1
+          if finIndexToZZ (r + 2) i < finIndexToZZ (r + 2) (Fin.castSucc m) then 1
           else if i = Fin.castSucc m then pauliY * pauliX
           else if i = Fin.succ m then pauliZ else 1 * 1) := by
       rw [identity_matrix_mul pauliZ]                   -- `identity_matrix_is_left_unit_of_mat_mult`（`m, n → 2`, `A → σ^z`。第 `m+1` 因子へ）
@@ -263,7 +292,7 @@ theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
         by_cases hb : i = Fin.succ m
         · rw [hb, Function.update_self, if_neg (by omega), if_pos rfl]
         · rw [Function.update_of_ne hb, if_neg hb]
-          by_cases hlt : (i : ℕ) < (Fin.castSucc m : ℕ)
+          by_cases hlt : finIndexToZZ (r + 2) i < finIndexToZZ (r + 2) (Fin.castSucc m)
           · rw [if_pos hlt]; rfl
           · rw [if_neg hlt]; rfl
     _ = siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
@@ -285,11 +314,24 @@ theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
 `∏_{j=1}^{M_col}F_j^{(G)}` に等しいことと準備の `G` の表示の 4 行は `boundaryG_kronecker_form` が持つ。人手の最後の行
 「準備の `G` の表示」は `calc` の 8・9 段で、8 段は因子の並びの書き方（`ite` と `boundaryYXYFamily` の `∨`）を揃え、9 段が `boundaryG_kronecker_form`
 で主張の有限積の `G` に着く。主張の右辺は人手どおり有限積の `G`（`finiteMatrixProduct (r + 1) (boundaryGFactor r)`）である。
-人手の第 `1` 因子は Lean の `i = 0`、第 `M_col` 因子は `i = Fin.last (r + 1)`、第 `2` から第 `M_col-1` 因子はそれ以外である。 -/
+人手の第 `1` 因子は Lean の `i = 0`（像 `finIndexToZZ (r + 2) 0 = 1_ℤ`）、第 `M_col` 因子は `i = Fin.last (r + 1)`（像 `ι_{ℕ→ℤ}(M_col)`）、
+第 `2` から第 `M_col-1` 因子はそれ以外である（`def_index_set_from_one_to_n`）。 -/
 theorem Y_last_mul_Z_zero (r : ℕ) :
     Y (Fin.last (r + 1)) * Z (0 : Fin (r + 2))
       = (-Complex.I) • finiteMatrixProduct (r + 1) (boundaryGFactor r) := by
-  have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := Fin.ne_of_val_ne (by simp)
+  have hinj := (finIndexToZZ_bijective_onto_index_set (r + 2)).1
+  have hrange := (finIndexToZZ_bijective_onto_index_set (r + 2)).2.1
+  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
+  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+  have hM2 : 2 ≤ inclusionNNtoZZ (r + 2) := by rw [inclusionNNtoZZ_eq_natCast]; omega
+  -- 人手の第 `1` 因子と第 `M_col` 因子は異なる（人手の添字 `1_ℤ` と `ι_{ℕ→ℤ}(M_col)`。`def_index_set_from_one_to_n`）
+  have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := by
+    intro h
+    have := congrArg (finIndexToZZ (r + 2)) h
+    rw [hzeroZ, hlastZ] at this
+    omega
   calc
     Y (Fin.last (r + 1)) * Z (0 : Fin (r + 2))
         = siteProd (r + 2) (jwFamily (Fin.last (r + 1)) pauliY) * Z (0 : Fin (r + 2)) := by
@@ -304,15 +346,23 @@ theorem Y_last_mul_Z_zero (r : ℕ) :
       congr 1
       funext i
       simp only [Pi.mul_apply]
+      -- 人手の添字 `finIndexToZZ (r + 2) i ∈ {1,…,M_col}` を、第 `1` 因子の `1_ℤ`（`hzeroZ`）と第 `M_col` 因子の `ι_{ℕ→ℤ}(M_col)`（`hlastZ`）と比べる。
+      -- Lean の定義 `jwFamily` は `Fin` の元の値（ℕ）で比べるので、`finIndexToZZ_lt_iff_val_lt` で移す
       by_cases h0 : i = 0
-      · rw [h0, jwFamily_of_lt (by simp), jwFamily_self, if_pos rfl]
-      · have hpos : 0 < (i : ℕ) := Nat.pos_of_ne_zero (fun h => h0 (Fin.ext h))
-        rw [jwFamily_of_gt (A := pauliZ) (by simpa using hpos), if_neg h0]
+      · rw [h0, jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt (r + 2) _ _).1 (by rw [hzeroZ, hlastZ]; omega)),
+          jwFamily_self, if_pos rfl]
+      · have hgt : finIndexToZZ (r + 2) (0 : Fin (r + 2)) < finIndexToZZ (r + 2) i := by
+          have := (hrange i).1
+          have : finIndexToZZ (r + 2) i ≠ finIndexToZZ (r + 2) (0 : Fin (r + 2)) := fun h => h0 (hinj _ _ h)
+          omega
+        rw [jwFamily_of_gt (A := pauliZ) ((finIndexToZZ_lt_iff_val_lt (r + 2) _ _).1 hgt), if_neg h0]
         by_cases hl : i = Fin.last (r + 1)
         · rw [hl, jwFamily_self, if_pos rfl]
-        · have hlt : (i : ℕ) < ((Fin.last (r + 1) : Fin (r + 2)) : ℕ) :=
-            lt_of_le_of_ne (Fin.le_last i) (fun h => hl (Fin.ext h))
-          rw [jwFamily_of_lt hlt, if_neg hl]
+        · have hlt : finIndexToZZ (r + 2) i < finIndexToZZ (r + 2) (Fin.last (r + 1)) := by
+            have := (hrange i).2
+            have : finIndexToZZ (r + 2) i ≠ finIndexToZZ (r + 2) (Fin.last (r + 1)) := fun h => hl (hinj _ _ h)
+            omega
+          rw [jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt (r + 2) _ _).1 hlt), if_neg hl]
     _ = siteProd (r + 2) (fun i =>
           if i = 0 then pauliX * pauliZ
           else if i = Fin.last (r + 1) then pauliY * 1 else pauliX) := by
@@ -346,8 +396,11 @@ theorem Y_last_mul_Z_zero (r : ℕ) :
     _ = (-Complex.I) • siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
       congr 2                                           -- 準備の `G` の表示（`boundaryYXYFamily` の `∨` と `ite` の書き方の違いだけ）
       funext i
-      have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) := Fin.ext (by simp [firstSite])
-      have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) := Fin.ext (by simp [lastSite])
+      -- 人手のサイト `1`・`M_col` の添字は `1_ℤ`・`ι_{ℕ→ℤ}(M_col)`（`def_index_set_from_one_to_n`）で、`0`・`Fin.last (r + 1)` の像（`hzeroZ`・`hlastZ`）も同じ値
+      have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) :=
+        hinj _ _ (by rw [finIndexToZZ_firstSite, hzeroZ])
+      have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) :=
+        hinj _ _ (by rw [finIndexToZZ_lastSite, hlastZ])
       simp only [boundaryYXYFamily, hf, hl]
       by_cases h0 : i = 0
       · rw [if_pos h0, if_pos (Or.inl h0)]
@@ -402,7 +455,7 @@ theorem S1plus_eq_K1_smul_sub (K1 : ℂ) (r : ℕ) :
 Step 2 の準備の表示は `Function.update` で書いてあるので、`kronecker_transpose`（`siteProd_transpose`）の段と最後の段で、
 因子の族の書き方（`Function.update` と `ite`）を揃える（等式の変形ではなく書き方の違いだけ）。 -/
 
-/-- **人手 `iH_is_real_symmetric` Step 3 の `(σ^x_m)^⊤ = σ^x_m` の 5 行の鎖**（`m ∈ {1, …, M_col}`）。 -/
+/-- **人手 `iH_is_real_symmetric` Step 3 の `(σ^x_m)^⊤ = σ^x_m` の 5 行の鎖**（人手の添字 `finIndexToZZ M m ∈ {1, …, M_col}`。`def_index_set_from_one_to_n`）。 -/
 theorem sigmaX_transpose {M : ℕ} (m : Fin M) : (sigmaX m)ᵀ = sigmaX m := by
   have hform : ∀ A : Matrix (Fin 2) (Fin 2) ℂ,
       Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m A = fun k => if k = m then A else 1 := by
@@ -431,10 +484,15 @@ theorem sigmaX_transpose {M : ℕ} (m : Fin M) : (sigmaX m)ᵀ = sigmaX m := by
       rw [← hform]; rfl                                 -- `def_site_pauli_matrices`（`k → m`, `a → x`）
 
 /-- **人手 `iH_is_real_symmetric` Step 3 の `(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}` の 5 行の鎖**（`1 ≤ m ≤ M_col - 1`、`M = r + 2`）。
-人手の `m` は Lean の `Fin.castSucc m`、`m + 1` は `Fin.succ m`。 -/
+人手の添字 `finIndexToZZ (r + 2) (Fin.castSucc m)` のサイトは Lean の `Fin.castSucc m`、その次の添字のサイトは `Fin.succ m` である（`def_index_set_from_one_to_n`）。 -/
 theorem sigmaZ_castSucc_mul_sigmaZ_succ_transpose {r : ℕ} (m : Fin (r + 1)) :
     (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))ᵀ = sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m) := by
-  have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := Fin.ne_of_val_ne (by simp)
+  -- 人手の `m` と `m+1` の添字（`finIndexToZZ` の像）は `1_ℤ` だけ違う（`def_index_set_from_one_to_n`）
+  have hsuccZ : finIndexToZZ (r + 2) (Fin.succ m) = finIndexToZZ (r + 2) (Fin.castSucc m) + 1 := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_succ, Fin.val_castSucc]; push_cast; ring
+  have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := fun h => by
+    have := congrArg (finIndexToZZ (r + 2)) h
+    omega
   have hform : Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
       (Fin.succ m) pauliZ) (Fin.castSucc m) pauliZ
         = fun i => if i = Fin.castSucc m then pauliZ else if i = Fin.succ m then pauliZ else 1 := by
@@ -509,8 +567,16 @@ theorem boundaryYXYFamily_eq_ite (r : ℕ) :
     boundaryYXYFamily (r + 2) (by omega)
       = fun i : Fin (r + 2) => if i = 0 then pauliY else if i = Fin.last (r + 1) then pauliY else pauliX := by
   funext i
-  have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) := Fin.ext (by simp [firstSite])
-  have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) := Fin.ext (by simp [lastSite])
+  -- 人手のサイト `1`・`M_col` の添字は `1_ℤ`・`ι_{ℕ→ℤ}(M_col)`（`def_index_set_from_one_to_n`）で、`0`・`Fin.last (r + 1)` の像も同じ値
+  have hinj := (finIndexToZZ_bijective_onto_index_set (r + 2)).1
+  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
+  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+  have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) :=
+    hinj _ _ (by rw [finIndexToZZ_firstSite, hzeroZ])
+  have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) :=
+    hinj _ _ (by rw [finIndexToZZ_lastSite, hlastZ])
   simp only [boundaryYXYFamily, hf, hl]
   by_cases h0 : i = 0
   · rw [if_pos (Or.inl h0), if_pos h0]
@@ -520,11 +586,22 @@ theorem boundaryYXYFamily_eq_ite (r : ℕ) :
     · rw [if_neg (by tauto), if_neg hl']
 
 /-- **人手 `iH_is_real_symmetric` Step 3 の `G^⊤ = G` の 11 行の鎖**（`M_col = r + 2 ≥ 2`）。
-人手の第 `1` 因子は Lean の `i = 0`、第 `M_col` 因子は `i = Fin.last (r + 1)`、第 `2` から第 `M_col-1` 因子はそれ以外である。 -/
+人手の第 `1` 因子は Lean の `i = 0`（像 `finIndexToZZ (r + 2) 0 = 1_ℤ`）、第 `M_col` 因子は `i = Fin.last (r + 1)`（像 `ι_{ℕ→ℤ}(M_col)`）、
+第 `2` から第 `M_col-1` 因子はそれ以外である（`def_index_set_from_one_to_n`）。 -/
 theorem boundaryYXY_transpose (r : ℕ) :
     (siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)))ᵀ
       = siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
-  have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := Fin.ne_of_val_ne (by simp)
+  -- 人手の第 `1` 因子と第 `M_col` 因子は異なる（人手の添字 `1_ℤ` と `ι_{ℕ→ℤ}(M_col)`。`def_index_set_from_one_to_n`）
+  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
+  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+  have hM2 : 2 ≤ inclusionNNtoZZ (r + 2) := by rw [inclusionNNtoZZ_eq_natCast]; omega
+  have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := by
+    intro h
+    have := congrArg (finIndexToZZ (r + 2)) h
+    rw [hzeroZ, hlastZ] at this
+    omega
   -- 因子の並び `A⊠σ^x⊠⋯⊠σ^x⊠B`（第 `1` 因子 `A`、第 `M_col` 因子 `B`）
   let F : Matrix (Fin 2) (Fin 2) ℂ → Matrix (Fin 2) (Fin 2) ℂ → Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ :=
     fun A B i => if i = 0 then A else if i = Fin.last (r + 1) then B else pauliX
@@ -587,12 +664,23 @@ theorem boundaryYXY_transpose (r : ℕ) :
 
 /-- **人手 `iH_is_real_symmetric` Step 3 の `G` の成分の実性の 7 行の鎖**（`M_col = r + 2 ≥ 2`）:
 `G = σ^y⊠σ^x⊠⋯⊠σ^x⊠σ^y = (iR^y)⊠σ^x⊠⋯⊠σ^x⊠(iR^y) = ⋯ = (-1)_ℂ(R^y⊠σ^x⊠⋯⊠σ^x⊠R^y)`。
-人手の第 `1` 因子は Lean の `i = 0`、第 `M_col` 因子は `i = Fin.last (r + 1)`、第 `2` から第 `M_col-1` 因子はそれ以外である。 -/
+人手の第 `1` 因子は Lean の `i = 0`（像 `finIndexToZZ (r + 2) 0 = 1_ℤ`）、第 `M_col` 因子は `i = Fin.last (r + 1)`（像 `ι_{ℕ→ℤ}(M_col)`）、
+第 `2` から第 `M_col-1` 因子はそれ以外である（`def_index_set_from_one_to_n`）。 -/
 theorem boundaryYXY_eq_neg_one_smul_real (r : ℕ) :
     siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega))
       = ((-1 : ℝ) : ℂ) • siteProd (r + 2) (fun i : Fin (r + 2) =>
           if i = 0 then pauliYReal else if i = Fin.last (r + 1) then pauliYReal else pauliX) := by
-  have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := Fin.ne_of_val_ne (by simp)
+  -- 人手の第 `1` 因子と第 `M_col` 因子は異なる（人手の添字 `1_ℤ` と `ι_{ℕ→ℤ}(M_col)`。`def_index_set_from_one_to_n`）
+  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
+  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
+    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+  have hM2 : 2 ≤ inclusionNNtoZZ (r + 2) := by rw [inclusionNNtoZZ_eq_natCast]; omega
+  have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := by
+    intro h
+    have := congrArg (finIndexToZZ (r + 2)) h
+    rw [hzeroZ, hlastZ] at this
+    omega
   -- 因子の並び `A⊠σ^x⊠⋯⊠σ^x⊠B`（第 `1` 因子 `A`、第 `M_col` 因子 `B`）。`boundaryYXY_transpose` と同じ書き方
   let F : Matrix (Fin 2) (Fin 2) ℂ → Matrix (Fin 2) (Fin 2) ℂ → Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ :=
     fun A B i => if i = 0 then A else if i = Fin.last (r + 1) then B else pauliX
