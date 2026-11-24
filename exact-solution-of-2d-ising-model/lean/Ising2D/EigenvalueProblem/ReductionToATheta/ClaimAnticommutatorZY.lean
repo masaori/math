@@ -99,10 +99,13 @@ theorem jw_sq (m : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A * A = 1) :
   have h : (jwFamily m A * jwFamily m A : Fin M → Matrix (Fin 2) (Fin 2) ℂ) = 1 := by
     funext i
     rw [Pi.mul_apply, Pi.one_apply]
-    rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-    · rw [jwFamily_of_lt h, pauliX_mul_pauliX]
-    · rw [Fin.val_injective h, jwFamily_self, hA]
-    · rw [jwFamily_of_gt h, identity_matrix_mul]  -- `II = I`（`identity_matrix_is_left_unit_of_mat_mult` を `A = I` に）
+    -- 人手の添字 `i, m ∈ {1,…,M}` の ℤ の比較で場合を分ける。Lean の添字 `i, m : Fin M` から人手の添字へは、
+    -- 名前を付けた写像 `finIndexToZZ`（`def_index_set_from_one_to_n`）を通す。
+    rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with h | h | h
+    · rw [jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M i m).1 h), pauliX_mul_pauliX]
+    · rw [(finIndexToZZ_bijective_onto_index_set M).1 i m h, jwFamily_self, hA]
+    · -- `II = I`（`identity_matrix_is_left_unit_of_mat_mult` を `A = I` に）
+      rw [jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt M m i).1 h), identity_matrix_mul]
   rw [h, siteProd_one]
 
 /-- **Jordan–Wigner 文字列どうしの反交換**（原文の計算の一般形）。
@@ -118,41 +121,44 @@ theorem jw_anticomm (μ ν : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ)
     (hAB : μ = ν → B * A = -(A * B)) :
     siteProd M (jwFamily μ A) * siteProd M (jwFamily ν B) +
       siteProd M (jwFamily ν B) * siteProd M (jwFamily μ A) = 0 := by
-  rcases lt_trichotomy (μ : ℕ) (ν : ℕ) with h | h | h
+  -- 人手の添字 `μ, ν ∈ {1,…,M}` の ℤ の比較で場合を分ける。Lean の添字 `μ, ν : Fin M` から人手の添字へは、
+  -- 名前を付けた写像 `finIndexToZZ`（`def_index_set_from_one_to_n`）を通す。
+  -- Lean の定義 `jwFamily` は `Fin M` の元の値（ℕ）で比べるので、`jwFamily_of_lt`・`jwFamily_of_gt` へ渡す前に
+  -- `finIndexToZZ_lt_iff_val_lt` で移す。等号は写像の単射性（`finIndexToZZ_bijective_onto_index_set` の一つ目）で `Fin M` の元の等号へ移す。
+  have hinj := (finIndexToZZ_bijective_onto_index_set M).1
+  have hlt := finIndexToZZ_lt_iff_val_lt M
+  rcases lt_trichotomy (finIndexToZZ M μ) (finIndexToZZ M ν) with h | h | h
   · -- `μ < ν`: 食い違うのはサイト `μ`（`σ^x` と `A`）
     refine siteProd_anticomm_of_single_site _ _ μ ?_ ?_
-    · rw [jwFamily_of_lt h, jwFamily_self, hAx, neg_neg]
+    · rw [jwFamily_of_lt ((hlt μ ν).1 h), jwFamily_self, hAx, neg_neg]
     · intro i hi
-      rcases lt_trichotomy (i : ℕ) (μ : ℕ) with h1 | h1 | h1
-      · rw [jwFamily_of_lt h1, jwFamily_of_lt (by omega : (i : ℕ) < (ν : ℕ))]
-      · exact absurd (Fin.val_injective h1) hi
+      rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M μ) with h1 | h1 | h1
+      · rw [jwFamily_of_lt ((hlt i μ).1 h1), jwFamily_of_lt ((hlt i ν).1 (lt_trans h1 h))]
+      · exact absurd (hinj i μ h1) hi
       · -- `Iσ = σ`・`σI = σ`（`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`）
-        rw [jwFamily_of_gt h1, identity_matrix_mul, mul_identity_matrix]
+        rw [jwFamily_of_gt ((hlt μ i).1 h1), identity_matrix_mul, mul_identity_matrix]
   · -- `μ = ν`: 食い違うのはサイト `μ`（`A` と `B`）
-    -- `h` は Lean の場合分けが比べた ℕ の値 `μ.val = ν.val` の等号である（本文は添字の集合 `{1,…,M}` の元 `μ, ν` を直接比べる）。
-    -- `h` を名前を付けた写像 `finIndexToZZ`（`def_index_set_from_one_to_n`）の像の等号に作り直し、その単射性で `Fin M` の元の等号へ移す。
-    -- 場合分けそのものを写像の像の ℤ の比較で行う直しは、状態台帳の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」の二単位目以降に回した。
-    have he : μ = ν := (finIndexToZZ_bijective_onto_index_set M).1 μ ν (by rw [finIndexToZZ, finIndexToZZ, h])
+    have he : μ = ν := hinj μ ν h
     refine siteProd_anticomm_of_single_site _ _ μ ?_ ?_
     · rw [← he, jwFamily_self, jwFamily_self]
       exact hAB he
     · intro i hi
       rw [← he]
-      rcases lt_trichotomy (i : ℕ) (μ : ℕ) with h1 | h1 | h1
-      · rw [jwFamily_of_lt h1, jwFamily_of_lt h1]
-      · exact absurd (Fin.val_injective h1) hi
+      rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M μ) with h1 | h1 | h1
+      · rw [jwFamily_of_lt ((hlt i μ).1 h1), jwFamily_of_lt ((hlt i μ).1 h1)]
+      · exact absurd (hinj i μ h1) hi
       · -- `Iσ = σ`・`σI = σ`（`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`）
-        rw [jwFamily_of_gt h1, identity_matrix_mul, mul_identity_matrix]
+        rw [jwFamily_of_gt ((hlt μ i).1 h1), identity_matrix_mul, mul_identity_matrix]
   · -- `μ > ν`: 食い違うのはサイト `ν`（`B` と `σ^x`）
     refine siteProd_anticomm_of_single_site _ _ ν ?_ ?_
-    · rw [jwFamily_of_lt h, jwFamily_self]
+    · rw [jwFamily_of_lt ((hlt ν μ).1 h), jwFamily_self]
       exact hBx
     · intro i hi
-      rcases lt_trichotomy (i : ℕ) (ν : ℕ) with h1 | h1 | h1
-      · rw [jwFamily_of_lt h1, jwFamily_of_lt (by omega : (i : ℕ) < (μ : ℕ))]
-      · exact absurd (Fin.val_injective h1) hi
+      rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M ν) with h1 | h1 | h1
+      · rw [jwFamily_of_lt ((hlt i ν).1 h1), jwFamily_of_lt ((hlt i μ).1 (lt_trans h1 h))]
+      · exact absurd (hinj i ν h1) hi
       · -- `Iσ = σ`・`σI = σ`（`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`）
-        rw [jwFamily_of_gt h1, identity_matrix_mul, mul_identity_matrix]
+        rw [jwFamily_of_gt ((hlt ν i).1 h1), identity_matrix_mul, mul_identity_matrix]
 
 /-! ## 原文の 3 つの反交換関係 -/
 

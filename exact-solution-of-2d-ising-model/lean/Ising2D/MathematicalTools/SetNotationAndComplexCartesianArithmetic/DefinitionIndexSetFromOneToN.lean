@@ -8,6 +8,7 @@
 Lean の具体版は添字の型に `Fin n`（`v < n` を満たす `v ∈ ℕ` と、その証明の組）を使う。二つの集合は別の集合なので、
 名前を付けた写像 `finIndexToZZ n : Fin n → ℤ`（`i ↦ ι_{ℕ→ℤ}(i.val) +_ℤ 1_ℤ`。`ι_{ℕ→ℤ}` は `inclusion_nn_to_zz` の具体版 `inclusionNNtoZZ`）を置き、
 それが `Fin n` から `{k ∈ ℤ | 1_ℤ ≤ k ∧ k ≤ ι_{ℕ→ℤ}(n)}` への全単射であることを補題一本 `finIndexToZZ_bijective_onto_index_set` で示す。
+像の ℤ の順序が `Fin n` の元の値の順序と一致することを `finIndexToZZ_lt_iff_val_lt` で示す（人手の添字の比較を Lean の定義の場合分けへ移す）。
 人手の添字 `i ∈ {1,…,n}` と Lean の添字 `i' : Fin n` の行き来は、この写像（とその逆）を通す。Lean の `Fin n` の数字 `(k : Fin n)`（`k < n`）は
 `Fin.ofNat` で `⟨k % n, _⟩` と定義され、`k % n = k` なので人手の添字 `k + 1` に当たる（`finIndexToZZ n ⟨k, _⟩ = ι(k) + 1` は定義どおり）。
 
@@ -47,5 +48,14 @@ theorem finIndexToZZ_bijective_onto_index_set (n : ℕ) :
     refine ⟨⟨m, by omega⟩, ?_⟩
     simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
     omega
+
+/-- **`def_index_set_from_one_to_n`**: `finIndexToZZ n` の像の ℤ の順序は、`Fin n` の元の値（ℕ）の順序と一致する:
+`ι_{ℕ→ℤ}(i.val) + 1_ℤ < ι_{ℕ→ℤ}(j.val) + 1_ℤ ⇔ i.val < j.val`。
+人手は添字 `i, j ∈ {1,…,n}` を ℤ の順序で直接比べ、Lean の具体版の定義（`jwFamily` など）は `Fin n` の元の値を ℕ の順序で比べるので、
+人手の比較から Lean の定義の場合分けへ移すために置く（Lean だけの段の補題）。 -/
+theorem finIndexToZZ_lt_iff_val_lt (n : ℕ) (i j : Fin n) :
+    finIndexToZZ n i < finIndexToZZ n j ↔ (i : ℕ) < (j : ℕ) := by
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+  omega
 
 end Ising2D
