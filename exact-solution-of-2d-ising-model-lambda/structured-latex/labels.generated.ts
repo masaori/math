@@ -894,6 +894,7 @@ export const ALL_LABELS = [
   "def_broken_edge_set",
   "def_broken_edge_set_polynomial",
   "def_cardinality_notation",
+  "def_cell_boundary_edge_sequence",
   "def_cell_edge_adjacency",
   "def_cell_edge_set",
   "def_cell_euler_number",

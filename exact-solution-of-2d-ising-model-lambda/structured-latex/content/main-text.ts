@@ -86014,7 +86014,33 @@ N_\gamma(n_{\mathrm v}(0,0))
                 element: {
                   kind: "elementGroup",
                   id: "group_of_kac_ward_claim_cell_boundary_winding_zero",
-                  beforeFocus: [],
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_cell_boundary_edge_sequence",
+                      kind: "definition",
+                      title: { text: "セルの境界の四項の列" },
+                      labels: ["def_cell_boundary_edge_sequence"],
+                      habitat: "N",
+                      lean: ["Ising2DLambda.KacWard.cellBoundaryEdges"],
+                      statement: [
+                        paragraph([
+                          "任意の ", math(String.raw`L\ge1`), " と ",
+                          math(String.raw`i,j\in\mathbb Z/L\mathbb Z`), " について、セル ",
+                          math(String.raw`(i,j)`), " の境界の四項の列 ",
+                          math(String.raw`B_L(i,j)\in\vec E_L\times\vec E_L\times\vec E_L\times\vec E_L`),
+                          " を、横辺 ", math(String.raw`n_{\mathrm h}(i,j)`), "、縦辺 ",
+                          math(String.raw`n_{\mathrm v}(i,j+1)`), "、横辺 ",
+                          math(String.raw`n_{\mathrm h}(i+1,j)`), " の反転、縦辺 ",
+                          math(String.raw`n_{\mathrm v}(i,j)`), " の反転をこの順に並べた列と定める（",
+                          ref("def_lattice"), "、", ref("def_oriented_edges"), "）。",
+                          "第 ", math(String.raw`t`), " 項（", math(String.raw`t\in\{1,2,3,4\}`),
+                          "）を ", math(String.raw`B_L(i,j)_t`), " と書く。",
+                          math(String.raw`L=1`), " で二つの項が同じ基底辺を持っても、四項を重複を保って残す。",
+                        ]),
+                      ],
+                    },
+                  }],
                   focus: {
                     id: "kac_ward_claim_cell_boundary_winding_zero",
                     kind: "claim",
@@ -86023,8 +86049,6 @@ N_\gamma(n_{\mathrm v}(0,0))
                     habitat: "Z",
                     verification: ["sagemath/check/cell-boundary-winding-zero"],
                     lean: [
-                      "Ising2DLambda.KacWard.cellBoundaryEdges",
-                      "Ising2DLambda.KacWard.cellBoundaryEdges_connected",
                       "Ising2DLambda.KacWard.cellBoundary_horizontalSeam_sum_zero",
                       "Ising2DLambda.KacWard.cellBoundary_verticalSeam_sum_zero",
                       "Ising2DLambda.NecSuf.KacWard.fourSideBoundaryEvaluation_zero",
@@ -86033,13 +86057,8 @@ N_\gamma(n_{\mathrm v}(0,0))
                       paragraph([
                         "任意の ", math(String.raw`L\ge1`), " と ",
                         math(String.raw`i,j\in\mathbb Z/L\mathbb Z`), " について、セル ",
-                        math(String.raw`(i,j)`), " の境界を、横辺 ",
-                        math(String.raw`n_{\mathrm h}(i,j)`), "、縦辺 ",
-                        math(String.raw`n_{\mathrm v}(i,j+1)`), "、横辺 ",
-                        math(String.raw`n_{\mathrm h}(i+1,j)`), " の反転、縦辺 ",
-                        math(String.raw`n_{\mathrm v}(i,j)`), " の反転の順にたどる。",
-                        "この四項の列を ", math(String.raw`B_L(i,j)`), " とする（",
-                        ref("def_lattice"), "、", ref("def_oriented_edges"), "）。",
+                        math(String.raw`(i,j)`), " の境界の四項の列 ", math(String.raw`B_L(i,j)`),
+                        "（", ref("def_cell_boundary_edge_sequence"), "）は次を満たす。",
                       ]),
                       displayMath(String.raw`\sum_{t=1}^{4}c_{\mathrm h}(B_L(i,j)_t)(1-2d(B_L(i,j)_t))=0,
 \qquad
@@ -86053,7 +86072,7 @@ N_\gamma(n_{\mathrm v}(0,0))
                       paragraph([
                         "横切断線の指示値は横辺の列座標だけで決まり、二つの横辺は同じ ",
                         math(String.raw`j`), " を持つ。縦辺の横切断線指示値は零である（",
-                        ref("def_seam_parities"), "、", ref("claim_edge_row_partition"), "）。したがって",
+                        ref("def_seam_parities"), "、", ref("def_lattice"), " の辺の番号の座標）。したがって",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \sum_{t=1}^{4}c_{\mathrm h}(B_L(i,j)_t)(1-2d(B_L(i,j)_t))
@@ -86113,7 +86132,7 @@ N_\gamma(n_{\mathrm v}(0,0))
                         " を、各 ", math(String.raw`(i,j)\in S`), " の四項列 ",
                         math(String.raw`B_L(i,j)`), " を重複を保って足した向き付き辺の形式和と定める。",
                         "辺の反転は同じ辺の負として扱う（",
-                        ref("claim_cell_boundary_winding_zero"), "）。",
+                        ref("def_cell_boundary_edge_sequence"), "）。",
                         "内部辺には互いに逆向きの二項が現れ、係数が零となる。",
                         math(String.raw`L=1`), " で二項が同じセルから現れても、両方を残して相殺する。",
                       ]),
@@ -86128,7 +86147,7 @@ N_\gamma(n_{\mathrm v}(0,0))
                         " の係数は ", math(String.raw`\mathbf1_{(i,j)\in S}-\mathbf1_{(i-1,j)\in S}`),
                         "、縦辺 ", math(String.raw`n_{\mathrm v}(i,j)`), " の係数は ",
                         math(String.raw`\mathbf1_{(i,j-1)\in S}-\mathbf1_{(i,j)\in S}`),
-                        " である（", ref("claim_cell_boundary_winding_zero"),
+                        " である（", ref("def_cell_boundary_edge_sequence"),
                         " の四辺の列を数える）。両側のセルが属する内部辺の係数は零である。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
@@ -86358,7 +86377,7 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
                         " で横辺 ", math(String.raw`n_{\mathrm h}(i,j)`),
                         " に寄与するのは ", math(String.raw`(r,c)=(i,j)`),
                         " の正向きの辺と ", math(String.raw`(r,c)=(i-1,j)`),
-                        " の逆向きの辺だけである（", ref("claim_cell_boundary_winding_zero"),
+                        " の逆向きの辺だけである（", ref("def_cell_boundary_edge_sequence"),
                         "、", ref("claim_edge_row_partition"), "）。よって",
                       ]),
                       displayMath(String.raw`\begin{aligned}
@@ -86367,7 +86386,7 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
 &&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と境界鎖の定義}\bigr)\\
 &=\sum_{(r,c)\in S}
   \bigl(\mathbf1_{(r,c)=(i,j)}-\mathbf1_{(r,c)=(i-1,j)}\bigr)
-&&\bigl(\because\ \blkref{claim_cell_boundary_winding_zero}\text{ の四辺と }\blkref{claim_edge_row_partition}\bigr)\\
+&&\bigl(\because\ \blkref{def_cell_boundary_edge_sequence}\text{ の四辺と }\blkref{claim_edge_row_partition}\bigr)\\
 &=\mathbf1_{(i,j)\in S}-\mathbf1_{(i-1,j)\in S}
 &&\bigl(\because\ \text{有限集合における指示値の和}\bigr)
 \end{aligned}`),
@@ -86383,7 +86402,7 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
 &&\bigl(\because\ \blkref{def_signed_edge_coefficient}\text{ と境界鎖の定義}\bigr)\\
 &=\sum_{(r,c)\in S}
   \bigl(\mathbf1_{(r,c)=(i,j-1)}-\mathbf1_{(r,c)=(i,j)}\bigr)
-&&\bigl(\because\ \blkref{claim_cell_boundary_winding_zero}\text{ の四辺と }\blkref{claim_edge_row_partition}\bigr)\\
+&&\bigl(\because\ \blkref{def_cell_boundary_edge_sequence}\text{ の四辺と }\blkref{claim_edge_row_partition}\bigr)\\
 &=\mathbf1_{(i,j-1)\in S}-\mathbf1_{(i,j)\in S}
 &&\bigl(\because\ \text{有限集合における指示値の和}\bigr)
 \end{aligned}`),
@@ -86744,6 +86763,7 @@ N_\gamma(n_{\mathrm v}(0,0))
                     verification: ["sagemath/check/cell-boundary-vertex-balance"],
                     lean: [
                       "Ising2DLambda.KacWard.cellSetBoundary_vertex_balance",
+                      "Ising2DLambda.KacWard.cellBoundaryEdges_connected",
                       "Ising2DLambda.NecSuf.KacWard.closedFourEdgeBoundary_vertex_balance",
                     ],
                     statement: [
@@ -86752,14 +86772,14 @@ N_\gamma(n_{\mathrm v}(0,0))
                         math(String.raw`v\in V_L`), " に対し、境界鎖の標識付き辺の始点寄与と終点寄与は等しい。すなわち"]),
                       displayMath(String.raw`\sum_{(i,j)\in S}\sum_{t=1}^{4}
 \left(\mathbf1_{\operatorname{src}(B_L(i,j)_t)=v}-\mathbf1_{\operatorname{tgt}(B_L(i,j)_t)=v}\right)=0\quad\text{in }\mathbb Z`),
-                      paragraph(["四辺列は ", ref("claim_cell_boundary_winding_zero"),
+                      paragraph(["四辺列は ", ref("def_cell_boundary_edge_sequence"),
                         "、境界鎖の重複を保つ和は ", ref("claim_finite_cell_set_boundary_winding_zero"),
                         " による。辺長一でも四項の標識を残す。"]),
                     ],
                     proof: [
                       paragraph(["任意の ", math(String.raw`(i,j)\in S`), " を取る。",
-                        ref("claim_cell_boundary_winding_zero"), " の四辺列について、",
-                        ref("def_lattice"), " の端点写像と ", ref("def_oriented_edges"),
+                        ref("def_cell_boundary_edge_sequence"), " の四辺列について、",
+                        ref("def_lattice"), " の端点写像（", ref("claim_edge_row_partition"), " の端点の式）と ", ref("def_oriented_edges"),
                         " の反転の定義から、各項の終点は次項の始点に等しく、末項の終点は初項の始点に等しい。従って"]),
                       displayMath(String.raw`\begin{aligned}
 \sum_{t=1}^{4}\mathbf1_{\operatorname{src}(B_L(i,j)_t)=v}
@@ -87038,12 +87058,18 @@ D_v(\operatorname{base}(\vec b))&=1-2d(\vec b)
                         " を通る標識付きの項が少なくとも一つある。",
                         math(String.raw`D_{v_k}(e)\ne0`),
                         " なので、この項の端点の一方は ", math(String.raw`v_k`), " である。"]),
-                      paragraph(["一方、前後の項 ", math(String.raw`\vec a,\vec b`),
-                        " は ", math(String.raw`v_k`), " への標識付き端点寄与を一つずつ持つ（",
-                        ref("def_closed_walk_passes"), "）。", ref("claim_vertex_simple_incident_edges"),
-                        " によれば全項の端点寄与は二である。",
-                        "基底辺が前後二辺と異なる第三の項は寄与できず、矛盾する。",
-                        "前後の項が同一の場合も、その項の始点と終点を別々に数えた二寄与が既に全体を占める。"]),
+                      paragraph(["一方、接触対数が零なので、終点が ", math(String.raw`v_k`),
+                        " である項は第 ", math(String.raw`k`), " 項 ", math(String.raw`\vec a`), " だけである（",
+                        ref("claim_zero_contact_iff_distinct_pass_vertices"), "）。",
+                        ref("claim_vertex_simple_incident_edges"),
+                        " によれば始点寄与と終点寄与の和は二なので、始点が ", math(String.raw`v_k`),
+                        " である項もただ一つである。", ref("def_closed_walk_passes"), " により ",
+                        math(String.raw`\operatorname{src}(\vec b)=v_k`), " なので、その項は第 ",
+                        math(String.raw`k+1`), " 項 ", math(String.raw`\vec b`), " である。",
+                        "基底辺 ", math(String.raw`e`), " を通る上の項は端点の一方が ", math(String.raw`v_k`),
+                        " なので ", math(String.raw`\vec a`), " か ", math(String.raw`\vec b`), " であり、",
+                        math(String.raw`e\in\{\operatorname{base}(\vec a),\operatorname{base}(\vec b)\}`),
+                        " となって仮定に反する。前後の項が同一の場合も、同じ数え上げで矛盾する。"]),
                     ],
                   },
                 },
@@ -87921,8 +87947,9 @@ s(i_j)-s(i_k)
                         math(String.raw`v_r`), "（", math(String.raw`1\le r\le m-1`),
                         "）は第 ", math(String.raw`r`), " 項の通過の頂点である（", ref("def_closed_walk_passes"),
                         "）。", math(String.raw`0\le j<k\le m-1`), " なら対応する二つの通過添字は相異なるので、",
-                        math(String.raw`v_j=v_k`), " は ", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
-                        " に反する。ゆえに一周期の持ち上げ点は二つずつ相異なる。全過程は整数の剰余と有限集合の相異なりだけで閉じ、実数体も複素数体も現れない。",
+                        math(String.raw`v_j=v_k`), " は、", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
+                        " から相異なる通過添字の通過頂点が相異なること（", ref("claim_zero_contact_iff_distinct_pass_vertices"),
+                        "）に反する。ゆえに一周期の持ち上げ点は二つずつ相異なる。全過程は整数の剰余と有限集合の相異なりだけで閉じ、実数体も複素数体も現れない。",
                       ]),
                     ],
                   },
@@ -88037,6 +88064,7 @@ P_m(\gamma)_{\mathrm{col}}
                         habitat: "N",
                         lean: [
                           "Ising2DLambda.KacWard.rightRayVerticalCrossingCount",
+                          "Ising2DLambda.KacWard.rightRayVerticalCrossingCount_eq_coordinateSum",
                           "Ising2DLambda.NecSuf.KacWard.rightRayVerticalCrossingCount",
                           "Ising2DLambda.KacWard.rightRayVerticalCrossingCount_from_necSuf",
                         ],
@@ -88109,9 +88137,10 @@ N_{r,c}^{\rightarrow}(\gamma)\equiv1\pmod 2
                     verification: ["sagemath/check/odd-ray-interior-cells-bounded"],
                     lean: [
                       "Ising2DLambda.KacWard.oddRayInteriorCells_finite",
+                      "Ising2DLambda.KacWard.oddRayInteriorCells_subset_boundingRectangle",
+                      "Ising2DLambda.KacWard.rightRayCrossingCount_eq_zero_of_col_ge",
                       "Ising2DLambda.NecSuf.KacWard.odd_support_finite_necSuf",
                       "Ising2DLambda.KacWard.oddRayInteriorCells_finite_from_necSuf",
-                      "Ising2DLambda.KacWard.rightRayVerticalCrossingCount_eq_coordinateSum",
                       "Ising2DLambda.KacWard.oddRayInteriorCellsOfWalk_finite",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_finite",
                     ],
@@ -91869,8 +91898,9 @@ s(i_r)-s(i_{r'})
                         "）は第 ", math(String.raw`t`), " 項の通過の頂点である（", ref("def_closed_walk_passes"),
                         "）。もし ", math(String.raw`r\ne r'`),
                         " なら、対応する二つの通過添字は相異なるので、", math(String.raw`v_r=v_{r'}`),
-                        " は接触対を与え、", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
-                        "（", ref("def_contact_pair_count"), "）に反する。ゆえに ",
+                        " は、", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
+                        " から相異なる通過添字の通過頂点が相異なること（", ref("claim_zero_contact_iff_distinct_pass_vertices"),
+                        "）に反する。ゆえに ",
                         math(String.raw`r=r'`), " である。次に ", math(String.raw`q=q'`),
                         " を示す。", math(String.raw`r=r'`), " なので",
                       ]),
@@ -93940,7 +93970,6 @@ P_n(\gamma)
                       "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_injective",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_closed",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_winding_zero",
-                      "Ising2DLambda.KacWard.vertexSimpleWalk_cyclicTotalTurning_four",
                       "Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf",
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning_from_necSuf",
                     ],

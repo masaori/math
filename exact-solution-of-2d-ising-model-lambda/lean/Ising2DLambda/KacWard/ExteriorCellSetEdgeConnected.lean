@@ -67,24 +67,11 @@ theorem outsideBoundingRectangle_subset_exteriorCells
       row (k + 1) - row k = 0 ∨ row (k + 1) - row k = 1) :
     outsideBoundingRectangle rMin rMax cMin cMax ⊆ exteriorCells n row col := by
   rintro ⟨r, c⟩ houtside hinside
-  change Odd (rightRayCrossingCount n row col r c) at hinside
+  have hrect := oddRayInteriorCells_subset_boundingRectangle n row col rMin rMax cMin cMax
+    hrow hcol hclosed hstep hinside
+  simp only [Set.mem_prod, Set.mem_Ico] at hrect
   change r < rMin ∨ rMax ≤ r ∨ c < cMin ∨ cMax ≤ c at houtside
-  rcases houtside with hr | hr | hc | hc
-  · have hz := rightRayCrossingCount_eq_zero_of_row_lt n row col rMin r c
-      (fun k hk => (hrow k hk).1) hr
-    rw [hz] at hinside
-    norm_num at hinside
-  · have hz := rightRayCrossingCount_eq_zero_of_row_ge n row col rMax r c
-      (fun k hk => (hrow k hk).2) hr
-    rw [hz] at hinside
-    norm_num at hinside
-  · exact (Nat.not_odd_iff_even.mpr
-      (rightRayCrossingCount_even_of_col_lt n row col cMin r c
-        (fun k hk => (hcol k hk).1) hc hclosed hstep)) hinside
-  · have hz := rightRayCrossingCount_eq_zero_of_col_ge n row col cMax r c
-      (fun k hk => (hcol k hk).2) hc
-    rw [hz] at hinside
-    norm_num at hinside
+  omega
 
 /-- 横の有限区間に奇数回通過した縦辺がなければ、外側セルのまま進める。 -/
 theorem exteriorCells_horizontalPath_of_even_vertical_edges

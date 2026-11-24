@@ -113,17 +113,16 @@ theorem rightRayCrossingCount_even_of_col_lt
   rw [hcount, hud]
   exact ⟨downCrossingCount n row r, by omega⟩
 
-/-- `claim_odd_ray_interior_cells_bounded` の具体版。 -/
-theorem oddRayInteriorCells_finite
+/-- `claim_odd_ray_interior_cells_bounded` の具体版（主張の包含）。
+内側セルは外接長方形 `{rMin,…,rMax-1} × {cMin,…,cMax-1}` に含まれる。 -/
+theorem oddRayInteriorCells_subset_boundingRectangle
     (n : ℕ) (row col : ℕ → ℤ) (rMin rMax cMin cMax : ℤ)
     (hrow : ∀ k ≤ n, rMin ≤ row k ∧ row k ≤ rMax)
     (hcol : ∀ k < n, cMin ≤ col k ∧ col k ≤ cMax)
     (hclosed : row n = row 0)
     (hstep : ∀ k < n, row (k + 1) - row k = -1 ∨
       row (k + 1) - row k = 0 ∨ row (k + 1) - row k = 1) :
-    (oddRayInteriorCells n row col).Finite := by
-  apply Set.Finite.subset
-    (Set.Finite.prod (Set.finite_Ico rMin rMax) (Set.finite_Ico cMin cMax))
+    oddRayInteriorCells n row col ⊆ Set.Ico rMin rMax ×ˢ Set.Ico cMin cMax := by
   rintro ⟨r, c⟩ hodd
   change Odd (rightRayCrossingCount n row col r c) at hodd
   constructor
@@ -146,5 +145,19 @@ theorem oddRayInteriorCells_finite
       exact odd_ne_zero hodd
         (rightRayCrossingCount_eq_zero_of_col_ge n row col cMax r c
           (fun k hk => (hcol k hk).2) (le_of_not_gt h))
+
+/-- `claim_odd_ray_interior_cells_bounded` の具体版（有限性）。右辺の長方形が有限集合であることから従う。 -/
+theorem oddRayInteriorCells_finite
+    (n : ℕ) (row col : ℕ → ℤ) (rMin rMax cMin cMax : ℤ)
+    (hrow : ∀ k ≤ n, rMin ≤ row k ∧ row k ≤ rMax)
+    (hcol : ∀ k < n, cMin ≤ col k ∧ col k ≤ cMax)
+    (hclosed : row n = row 0)
+    (hstep : ∀ k < n, row (k + 1) - row k = -1 ∨
+      row (k + 1) - row k = 0 ∨ row (k + 1) - row k = 1) :
+    (oddRayInteriorCells n row col).Finite :=
+  Set.Finite.subset
+    (Set.Finite.prod (Set.finite_Ico rMin rMax) (Set.finite_Ico cMin cMax))
+    (oddRayInteriorCells_subset_boundingRectangle n row col rMin rMax cMin cMax
+      hrow hcol hclosed hstep)
 
 end Ising2DLambda.KacWard
