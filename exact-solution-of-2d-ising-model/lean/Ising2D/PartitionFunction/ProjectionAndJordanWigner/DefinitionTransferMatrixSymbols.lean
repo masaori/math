@@ -28,9 +28,17 @@ Pauli 行列の積の 6 式（`pauliX_mul_pauliX`・`pauliY_mul_pauliY`・`pauli
 ## 添字づけの規約（原文との差）
 
 原文はサイトを `1, …, M` で番号づけるが、Lean では `Fin M`（`0, …, M-1`）を使う。
-対応は `原文の m` ↔ `Lean の ⟨m-1, _⟩`。したがって原文の `Z_1 = σ^z_1`（空の文字列）は
-Lean では `Z 0 = sigmaZ 0` にあたり、`xString` の値が `1` になることで自動的に満たされる
+原文の添字 `m ∈ {1,…,M}` は、`finIndexToZZ M ⟨m', _⟩ = m`（`def_index_set_from_one_to_n`）を満たす Lean の `⟨m', _⟩ : Fin M` である（下の段落）。
+したがって原文の `Z_1 = σ^z_1`（空の文字列）は、像が `1_ℤ` の `Z ⟨0, _⟩ = sigmaZ ⟨0, _⟩` にあたり、`xString` の値が `1` になることで自動的に満たされる
 （旧 Typst の原文が場合分けとして書いている `Z_1 := σ^z_1` は、Lean では特別扱い不要。いまの人手 `def_jordan_wigner_Z_matrices` も場合分けを置かず、`Z_1 = σ_1^z` を有限積の `r = 1` の場合として導く）。
+
+人手の添字 `j ∈ {1,…,M}` と Lean の `i : Fin M` の行き来は、名前を付けた写像 `finIndexToZZ M`（`def_index_set_from_one_to_n`。`i ↦ ι_{ℕ→ℤ}(i.val) + 1_ℤ`）を通す。
+証明の因子ごとの場合分け（人手のサイト `k ∈ {1,…,M}` について「第 `1` から第 `k-1` 因子」「第 `k` 因子」「第 `k+1` 以降の因子」）は、
+`finIndexToZZ M m = k` を満たす `m : Fin M` を取り、像 `finIndexToZZ M i` と `finIndexToZZ M m` を
+ℤ の三分律で比べて行い、分けた後のサイトの等号は全単射の補題 `finIndexToZZ_bijective_onto_index_set` の単射で得る。人手の `P_m = σ^x_1 ⋯ σ^x_m` の
+「第 `1` から第 `m` 因子」（`m ∈ ℕ`）は `finIndexToZZ M i ≤ ι_{ℕ→ℤ}(m)` である。Lean の定義 `jwFamily`・`xString` は `Fin` の元の値（ℕ）で比べるので、
+定義の場合へは橋の補題 `finIndexToZZ_lt_iff_val_lt`・`finIndexToZZ_le_inclusion_iff_val_lt` で移す（定義を像の ℤ の比較で書き直すことは、
+場合分けの `ite` が許可の一覧に載るまで待つ）。
 
 原文の `Z_{M+1} := Z_1`（周期性）は `Fin M` 上では添字の巡回そのものなので、
 定義としては現れない（必要になる箇所で `Fin M` の演算として扱う）。
@@ -58,6 +66,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimE
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimMinusOneTimesMinusOneIsOneInCC
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimITimesIAndNegativeITimesIInCC
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIndexSetFromOneToN
 
 namespace Ising2D
 
@@ -607,14 +616,15 @@ theorem jwFamily_of_gt {m i : Fin M} {A : Matrix (Fin 2) (Fin 2) ℂ}
   simp [jwFamily, h1, h2]
 
 /-- 旧 Typst の原文の `Z_m := σ^x_1 ⋯ σ^x_{m-1} σ^z_m`（`Z_1 := σ^z_1`）。
-Lean の添字は 0 始まりで、`Z 0 = σ^z_0` が原文の `Z_1` にあたる。 -/
+原文の添字 `k ∈ {1,…,M}` の `Z_k` は、`finIndexToZZ M m = k`（`def_index_set_from_one_to_n`）を満たす `m : Fin M` の `Z m` で、像が `1_ℤ` の `Z ⟨0, _⟩` が原文の `Z_1` にあたる。 -/
 noncomputable def Z (m : Fin M) : TensorPow M := siteProd M (jwFamily m pauliZ)
 
 /-- 旧 Typst の原文の `Y_m := σ^x_1 ⋯ σ^x_{m-1} σ^y_m`（`Y_1 := σ^y_1`）。 -/
 noncomputable def Y (m : Fin M) : TensorPow M := siteProd M (jwFamily m pauliY)
 
-/-- Jordan–Wigner 文字列。人手の 1 始まりのサイトで `P_m = σ^x_1 ⋯ σ^x_m`（Lean の 0 始まりの添字で `i < m` なるサイト全部）。
-人手の `Z_m = P_{m-1}σ_m^z` の `P_{m-1}` は、Lean の `Z ⟨m-1, _⟩` では `xString M (m-1)` にあたる。 -/
+/-- Jordan–Wigner 文字列。人手の `P_m = σ^x_1 ⋯ σ^x_m`（`m ∈ ℕ`）で、因子 `σ^x` を置くのは人手の添字 `finIndexToZZ M i` が `ι_{ℕ→ℤ}(m)` 以下のサイト
+（`finIndexToZZ_le_inclusion_iff_val_lt` で定義の条件 `(i : ℕ) < m` と同値）。
+人手の `Z_m = P_{m-1}σ_m^z` の `P_{m-1}` は、像が人手の `m` の `Z m'`（`finIndexToZZ M m' = m`）では `xString M m'.val` にあたる。 -/
 noncomputable def xString (M : ℕ) (m : ℕ) : TensorPow M :=
   siteProd M (fun i => if (i : ℕ) < m then pauliX else 1)
 
@@ -626,20 +636,24 @@ theorem xString_zero : xString M 0 = 1 := by
     funext i; simp
   rw [h, siteProd_one]
 
-/-- 文字列は 1 サイトずつ伸ばせる: 人手の `P_{m+1} = P_m σ^x_{m+1}`（Lean の 0 始まりのサイト `m` が人手のサイト `m+1`）。 -/
+/-- 文字列は 1 サイトずつ伸ばせる: 人手の `P_{m+1} = P_m σ^x_{m+1}`（人手のサイト `m+1` は、像 `finIndexToZZ M ⟨m, h⟩ = ι_{ℕ→ℤ}(m) + 1_ℤ` の `⟨m, h⟩`）。 -/
 theorem xString_succ (m : ℕ) (h : m < M) :
     xString M (m + 1) = xString M m * sigmaX ⟨m, h⟩ := by
   rw [xString, xString, sigmaX, siteOp_apply, ← siteProd_mul]
   congr 1
   funext i
   simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
-  rcases lt_trichotomy (i : ℕ) m with hi | hi | hi
-  · have hne : i ≠ (⟨m, h⟩ : Fin M) := Fin.ne_of_val_ne (show (i : ℕ) ≠ m by omega)
-    rw [if_pos (by omega : (i : ℕ) < m + 1), if_pos hi, if_neg hne, mul_one]
-  · have he : i = (⟨m, h⟩ : Fin M) := Fin.val_injective hi
+  -- 人手の添字 `finIndexToZZ M i` を人手の `m+1` の添字 `finIndexToZZ M ⟨m, h⟩` と ℤ で比べる（`def_index_set_from_one_to_n`）
+  rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M ⟨m, h⟩) with hi | hi | hi
+  · have hv : (i : ℕ) < m := (finIndexToZZ_lt_iff_val_lt M i ⟨m, h⟩).1 hi
+    have hne : i ≠ (⟨m, h⟩ : Fin M) := fun he => by rw [he] at hi; exact lt_irrefl _ hi
+    rw [if_pos (by omega : (i : ℕ) < m + 1), if_pos hv, if_neg hne, mul_one]
+  · have he : i = (⟨m, h⟩ : Fin M) := (finIndexToZZ_bijective_onto_index_set M).1 _ _ hi
+    have hv : (i : ℕ) = m := by rw [he]
     rw [if_pos (by omega : (i : ℕ) < m + 1), if_neg (by omega : ¬ ((i : ℕ) < m)),
       if_pos he, one_mul]
-  · have hne : i ≠ (⟨m, h⟩ : Fin M) := Fin.ne_of_val_ne (show (i : ℕ) ≠ m by omega)
+  · have hv : m < (i : ℕ) := (finIndexToZZ_lt_iff_val_lt M ⟨m, h⟩ i).1 hi
+    have hne : i ≠ (⟨m, h⟩ : Fin M) := fun he => by rw [he] at hi; exact lt_irrefl _ hi
     rw [if_neg (by omega : ¬ ((i : ℕ) < m + 1)), if_neg (by omega : ¬ ((i : ℕ) < m)),
       if_neg hne, mul_one]
 
@@ -651,7 +665,12 @@ theorem xString_mul_self (m : ℕ) : xString M m * xString M m = 1 := by
   have h : ((fun i : Fin M => if (i : ℕ) < m then pauliX else 1) *
       (fun i : Fin M => if (i : ℕ) < m then pauliX else 1)) = 1 := by
     funext i
-    by_cases hi : (i : ℕ) < m <;> simp [Pi.mul_apply, hi]
+    -- 人手の「第 `1` から第 `m` 因子」は人手の添字 `finIndexToZZ M i` が `ι_{ℕ→ℤ}(m)` 以下であること（`def_index_set_from_one_to_n`）
+    by_cases hi : finIndexToZZ M i ≤ inclusionNNtoZZ m
+    · have hv : (i : ℕ) < m := (finIndexToZZ_le_inclusion_iff_val_lt M i m).1 hi
+      simp [Pi.mul_apply, hv]
+    · have hv : ¬ (i : ℕ) < m := fun hv => hi ((finIndexToZZ_le_inclusion_iff_val_lt M i m).2 hv)
+      simp [Pi.mul_apply, hv]
   rw [h, siteProd_one]
 
 /-- 原文どおりの分解 `σ^x_1 ⋯ σ^x_{m-1} A_m = (σ^x_1 ⋯ σ^x_{m-1}) · A_m`。
@@ -662,14 +681,17 @@ theorem jw_eq_xString_mul (m : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
   congr 1
   funext i
   simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
-  rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-  · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-    rw [jwFamily_of_lt h, if_pos h, if_neg hne, mul_one]
-  · have he : i = m := Fin.val_injective h
+  -- 人手の添字 `finIndexToZZ M i` を人手の `m` の添字 `finIndexToZZ M m` と ℤ で比べる（`def_index_set_from_one_to_n`）。定義 `jwFamily` へは `finIndexToZZ_lt_iff_val_lt` で移す
+  rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with h | h | h
+  · have hv : (i : ℕ) < (m : ℕ) := (finIndexToZZ_lt_iff_val_lt M i m).1 h
+    have hne : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+    rw [jwFamily_of_lt hv, if_pos hv, if_neg hne, mul_one]
+  · have he : i = m := (finIndexToZZ_bijective_onto_index_set M).1 _ _ h
     subst he
     rw [jwFamily_self, if_neg (lt_irrefl _), if_pos rfl, one_mul]
-  · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-    rw [jwFamily_of_gt h, if_neg (by omega : ¬ ((i : ℕ) < (m : ℕ))), if_neg hne, mul_one]
+  · have hv : (m : ℕ) < (i : ℕ) := (finIndexToZZ_lt_iff_val_lt M m i).1 h
+    have hne : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+    rw [jwFamily_of_gt hv, if_neg (by omega : ¬ ((i : ℕ) < (m : ℕ))), if_neg hne, mul_one]
 
 /-- 原文どおりの分解 `Z_m = (σ^x_1 ⋯ σ^x_{m-1}) σ^z_m`。 -/
 theorem Z_eq_xString_mul (m : Fin M) : Z m = xString M (m : ℕ) * sigmaZ m := by
@@ -682,14 +704,17 @@ theorem Z_eq_xString_mul (m : Fin M) : Z m = xString M (m : ℕ) * sigmaZ m := b
       congr 1
       funext i
       simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
-      rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-        rw [jwFamily_of_lt h, if_pos h, if_neg hne, mul_one]
-      · have he : i = m := Fin.val_injective h
+      -- 人手の添字 `finIndexToZZ M i` を人手の `m` の添字 `finIndexToZZ M m` と ℤ で比べる（`def_index_set_from_one_to_n`）。定義 `jwFamily` へは `finIndexToZZ_lt_iff_val_lt` で移す
+      rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with h | h | h
+      · have hv : (i : ℕ) < (m : ℕ) := (finIndexToZZ_lt_iff_val_lt M i m).1 h
+        have hne : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+        rw [jwFamily_of_lt hv, if_pos hv, if_neg hne, mul_one]
+      · have he : i = m := (finIndexToZZ_bijective_onto_index_set M).1 _ _ h
         subst i
         rw [jwFamily_self, if_neg (lt_irrefl _), if_pos rfl, one_mul]
-      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-        rw [jwFamily_of_gt h, if_neg (by omega), if_neg hne, mul_one]
+      · have hv : (m : ℕ) < (i : ℕ) := (finIndexToZZ_lt_iff_val_lt M m i).1 h
+        have hne : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+        rw [jwFamily_of_gt hv, if_neg (by omega), if_neg hne, mul_one]
     -- 本文: クロネッカー積の積の規則を逆向きに適用する。
     _ = siteProd M (fun i : Fin M => if (i : ℕ) < (m : ℕ) then pauliX else 1) *
         siteProd M (Function.update 1 m pauliZ) := siteProd_mul M _ _
@@ -709,14 +734,17 @@ theorem Y_eq_xString_mul (m : Fin M) : Y m = xString M (m : ℕ) * sigmaY m := b
       congr 1
       funext i
       simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
-      rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-        rw [jwFamily_of_lt h, if_pos h, if_neg hne, mul_one]
-      · have he : i = m := Fin.val_injective h
+      -- 人手の添字 `finIndexToZZ M i` を人手の `m` の添字 `finIndexToZZ M m` と ℤ で比べる（`def_index_set_from_one_to_n`）。定義 `jwFamily` へは `finIndexToZZ_lt_iff_val_lt` で移す
+      rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with h | h | h
+      · have hv : (i : ℕ) < (m : ℕ) := (finIndexToZZ_lt_iff_val_lt M i m).1 h
+        have hne : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+        rw [jwFamily_of_lt hv, if_pos hv, if_neg hne, mul_one]
+      · have he : i = m := (finIndexToZZ_bijective_onto_index_set M).1 _ _ h
         subst i
         rw [jwFamily_self, if_neg (lt_irrefl _), if_pos rfl, one_mul]
-      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-        rw [jwFamily_of_gt h, if_neg (by omega), if_neg hne, mul_one]
+      · have hv : (m : ℕ) < (i : ℕ) := (finIndexToZZ_lt_iff_val_lt M m i).1 h
+        have hne : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+        rw [jwFamily_of_gt hv, if_neg (by omega), if_neg hne, mul_one]
     -- 本文: クロネッカー積の積の規則を逆向きに適用する。
     _ = siteProd M (fun i : Fin M => if (i : ℕ) < (m : ℕ) then pauliX else 1) *
         siteProd M (Function.update 1 m pauliY) := siteProd_mul M _ _
@@ -744,12 +772,15 @@ theorem jw_mul_jw_same (m : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
   congr 1
   funext i
   simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
-  rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-  · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-    rw [jwFamily_of_lt h, jwFamily_of_lt h, pauliX_mul_pauliX, if_neg hne]
-  · rw [Fin.val_injective h, jwFamily_self, jwFamily_self, if_pos rfl]
-  · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-    rw [jwFamily_of_gt h, jwFamily_of_gt h, mul_one, if_neg hne]
+  -- 人手の添字 `finIndexToZZ M i` を人手の `m` の添字 `finIndexToZZ M m` と ℤ で比べる（`def_index_set_from_one_to_n`）。定義 `jwFamily` へは `finIndexToZZ_lt_iff_val_lt` で移す
+  rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with h | h | h
+  · have hv : (i : ℕ) < (m : ℕ) := (finIndexToZZ_lt_iff_val_lt M i m).1 h
+    have hne : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+    rw [jwFamily_of_lt hv, jwFamily_of_lt hv, pauliX_mul_pauliX, if_neg hne]
+  · rw [(finIndexToZZ_bijective_onto_index_set M).1 _ _ h, jwFamily_self, jwFamily_self, if_pos rfl]
+  · have hv : (m : ℕ) < (i : ℕ) := (finIndexToZZ_lt_iff_val_lt M m i).1 h
+    have hne : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+    rw [jwFamily_of_gt hv, jwFamily_of_gt hv, mul_one, if_neg hne]
 
 /-- **`Z_mY_m = (-i)σ^x_m` の 8 行の鎖**（人手 `iH_is_real_symmetric` Step 1 ほかが共有する）（`global_spin_flip_jordan_wigner_representation` の
 `Z_mY_m` の鎖も同じ道で、そちらは 1・2 行目を 1 行にまとめている）。
@@ -758,7 +789,8 @@ theorem jw_mul_jw_same (m : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
 `site_pauli_prefix_product_kronecker_form`）は、Lean では `Z`・`Y` の定義そのもの（`siteProd` に `jwFamily` を入れたもの）なので、
 `calc` の 1・2 段は `rfl` である（Lean の `Z`・`Y` が人手の積 `∏_{j=1}^{m}F_j^{(z)}`・`∏_{j=1}^{m}F_j^{(y)}` に等しいことは、
 `site_pauli_prefix_product_kronecker_form` の具体版を使う `Z_eq_finiteMatrixProduct`・`Y_eq_finiteMatrixProduct`（`ClaimSitePauliPrefixProductKroneckerForm.lean`）が持つ）。
-人手の `m` は Lean の `m`（0 始まり）で、人手の「第 `1` から第 `m-1` 因子」「第 `m+1` 以降の因子」は Lean の `i < m`・`m < i` である。 -/
+人手の添字 `k ∈ {1,…,M}`（人手の鎖では `m`）は `finIndexToZZ M m = k`（`def_index_set_from_one_to_n`）を満たす Lean の `m : Fin M` で、人手の「第 `1` から第 `k-1` 因子」「第 `k+1` 以降の因子」は
+像の ℤ の比較 `finIndexToZZ M i < finIndexToZZ M m`・`finIndexToZZ M m < finIndexToZZ M i` である（定義 `jwFamily` へは `finIndexToZZ_lt_iff_val_lt` で移す）。 -/
 theorem Z_mul_Y_same (m : Fin M) : Z m * Y m = (-Complex.I) • sigmaX m := by
   calc
     Z m * Y m = siteProd M (jwFamily m pauliZ) * Y m := rfl
@@ -766,20 +798,23 @@ theorem Z_mul_Y_same (m : Fin M) : Z m * Y m = (-Complex.I) • sigmaX m := by
     _ = siteProd M (jwFamily m pauliZ) * siteProd M (jwFamily m pauliY) := rfl
                                                         -- 準備の `Y_m` の表示
     _ = siteProd M (fun i =>
-        if (i : ℕ) < (m : ℕ) then pauliX * pauliX
+        if finIndexToZZ M i < finIndexToZZ M m then pauliX * pauliX
         else if i = m then pauliZ * pauliY else 1 * 1) := by
       rw [← siteProd_mul]                               -- `kronecker_product_rule` (1)（`M → M_col`）
       congr 1
       funext i
       simp only [Pi.mul_apply]
-      rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-      · rw [jwFamily_of_lt h, jwFamily_of_lt h, if_pos h]
-      · have he : i = m := Fin.val_injective h
+      -- 人手の添字 `finIndexToZZ M i` を人手の `m` の添字 `finIndexToZZ M m` と ℤ で比べる（`def_index_set_from_one_to_n`）
+      rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with h | h | h
+      · have hv : (i : ℕ) < (m : ℕ) := (finIndexToZZ_lt_iff_val_lt M i m).1 h
+        rw [jwFamily_of_lt hv, jwFamily_of_lt hv, if_pos h]
+      · have he : i = m := (finIndexToZZ_bijective_onto_index_set M).1 _ _ h
         rw [he, jwFamily_self, jwFamily_self, if_neg (lt_irrefl _), if_pos rfl]
-      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-        rw [jwFamily_of_gt h, jwFamily_of_gt h, if_neg (by omega), if_neg hne]
+      · have hv : (m : ℕ) < (i : ℕ) := (finIndexToZZ_lt_iff_val_lt M m i).1 h
+        have hne : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+        rw [jwFamily_of_gt hv, jwFamily_of_gt hv, if_neg (not_lt_of_gt h), if_neg hne]
     _ = siteProd M (fun i =>
-        if (i : ℕ) < (m : ℕ) then 1
+        if finIndexToZZ M i < finIndexToZZ M m then 1
         else if i = m then pauliZ * pauliY else 1 * 1) := by
       rw [pauliX_mul_pauliX]                            -- `pauli_matrix_products` の `σ^xσ^x = I`（第 1 から第 `m-1` 因子へ同時に適用）
     _ = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m (pauliZ * pauliY)) := by
@@ -790,7 +825,7 @@ theorem Z_mul_Y_same (m : Fin M) : Z m * Y m = (-Complex.I) • sigmaX m := by
       by_cases he : i = m
       · rw [he, Function.update_self, if_neg (lt_irrefl _), if_pos rfl]
       · rw [Function.update_of_ne he, if_neg he]
-        by_cases hlt : (i : ℕ) < (m : ℕ)
+        by_cases hlt : finIndexToZZ M i < finIndexToZZ M m
         · rw [if_pos hlt]; rfl
         · rw [if_neg hlt]; rfl
     _ = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m ((-Complex.I) • pauliX)) := by
@@ -859,14 +894,16 @@ theorem sigmaXPrefixProduct_eq_xString (m : ℕ) (hm : m ≤ M) :
           congr 1
           funext i
           simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
-          rcases lt_trichotomy (i : ℕ) m with hi | hi | hi
-          · have hne : i ≠ (⟨m, hlt⟩ : Fin M) :=
-              Fin.ne_of_val_ne (show (i : ℕ) ≠ m by omega)
-            rw [if_pos hi, if_neg hne, mul_one, if_pos (by omega)]
-          · have he : i = (⟨m, hlt⟩ : Fin M) := Fin.val_injective hi
+          -- 人手の添字 `finIndexToZZ M i` を人手の `r+1` の添字 `finIndexToZZ M ⟨m, hlt⟩` と ℤ で比べる（Lean の帰納法の変数 `m` が人手の `r`。`def_index_set_from_one_to_n`）
+          rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M ⟨m, hlt⟩) with hi | hi | hi
+          · have hv : (i : ℕ) < m := (finIndexToZZ_lt_iff_val_lt M i ⟨m, hlt⟩).1 hi
+            have hne : i ≠ (⟨m, hlt⟩ : Fin M) := fun he => by rw [he] at hi; exact lt_irrefl _ hi
+            rw [if_pos hv, if_neg hne, mul_one, if_pos (by omega)]
+          · have he : i = (⟨m, hlt⟩ : Fin M) := (finIndexToZZ_bijective_onto_index_set M).1 _ _ hi
+            have hv : (i : ℕ) = m := by rw [he]
             rw [if_neg (by omega), if_pos he, one_mul, if_pos (by omega)]
-          · have hne : i ≠ (⟨m, hlt⟩ : Fin M) :=
-              Fin.ne_of_val_ne (show (i : ℕ) ≠ m by omega)
+          · have hv : m < (i : ℕ) := (finIndexToZZ_lt_iff_val_lt M ⟨m, hlt⟩ i).1 hi
+            have hne : i ≠ (⟨m, hlt⟩ : Fin M) := fun he => by rw [he] at hi; exact lt_irrefl _ hi
             rw [if_neg (by omega), if_neg hne, mul_one, if_neg (by omega)]
         _ = xString M (m + 1) := rfl
 
@@ -880,7 +917,9 @@ theorem epsilon_eq_siteProd_pauliX_by_induction :
       rw [xString]
       congr 1
       funext i
-      rw [if_pos i.isLt]
+      -- 人手の添字 `finIndexToZZ M i` は `ι_{ℕ→ℤ}(M)` 以下（全単射の補題の値の範囲）なので、第 `1` から第 `M` 因子の全てが `σ^x`
+      rw [if_pos ((finIndexToZZ_le_inclusion_iff_val_lt M i M).1
+        ((finIndexToZZ_bijective_onto_index_set M).2.1 i).2)]
 
 /-- **`<epsilon_square_identity>` の人手証明と一対一に対応する具体版**:
 有限帰納法でサイト積を全 `σˣ` 因子へ直し、クロネッカー積の積、`(σˣ)²=I₂`、
