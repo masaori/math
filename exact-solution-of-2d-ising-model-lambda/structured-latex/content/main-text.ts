@@ -77145,11 +77145,11 @@ A-1
 &=1+(A-1)
 &&(\because\ \mathbb{Q}\text{ の四則})\\
 &\le1+n\,h
-&&(\because\ \text{準備の第四。}\mathbb{Q}\text{ の加法単調性})\\
+&&(\because\ \text{準備の第四、}\mathbb{Q}\text{ の加法単調性})\\
 &\le(1+h)^{n}
 &&(\because\ \blkref{claim_rational_bernoulli_inequality}\text{ を }h\text{（}0\le h\text{）と }n\text{ で読む})\\
 &=\bigl(\operatorname{rat}_{\Lambda}(\varepsilon_N)\bigr)^{n}
-&&(\because\ h\text{ の定義。}1+h=\operatorname{rat}_{\Lambda}(\varepsilon_N)\text{、}\mathbb{Q}\text{ の四則})\\
+&&(\because\ h\text{ の定義、}1+h=\operatorname{rat}_{\Lambda}(\varepsilon_N)\text{、}\mathbb{Q}\text{ の四則})\\
 &=\operatorname{rat}_{\Lambda}(n\varepsilon_N)
 &&(\because\ \blkref{claim_log_order_group_positive_multiple_invariant}\text{ の補助等式 }\operatorname{rat}_{\Lambda}(N\lambda)=(\operatorname{rat}_{\Lambda}(\lambda))^{N}\text{ を }N:=n\text{、}\lambda:=\varepsilon_N\text{ で読む})
 \end{aligned}`),

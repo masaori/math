@@ -9,7 +9,7 @@ open scoped Classical
 variable {J R : Type*} [CommRing R]
 
 /-- 処理済みの端点を前置列に残し、各対の反転を完全列挙上の隣接交換へ還元する。 -/
-private theorem orientationSignWithPrefix (F : List J → R)
+theorem orientationSignWithPrefix (F : List J → R)
     (hswap : ∀ (u : List J) (a b : J) (v : List J),
       IsCompleteWord (u ++ a :: b :: v) → F (u ++ b :: a :: v) = -F (u ++ a :: b :: v))
     (S : Set J) (l : List (J × J)) :

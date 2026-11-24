@@ -29,7 +29,6 @@ DEP	necsuf	Ising2DLambda.NecSuf.KacWard.iterate_succ_val_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.matchingSignOf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.matchingSignOf_enumeration
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.minimum_self_and_color
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.orientationAux
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.orientedPairWord_value
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.outside_mate_outside
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.projectedClosedEdgeCycle
