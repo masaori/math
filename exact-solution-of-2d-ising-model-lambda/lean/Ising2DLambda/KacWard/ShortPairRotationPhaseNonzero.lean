@@ -1,7 +1,7 @@
 /-
 本文「短い対に現れる回転位相は零でない」の具体版。
-四方向の辺の構成と個数比較が `sourceDirection_surjective` と
-`shortPair_direction_ne`、三方向の場合分けが `shortPairRotationPhase_three_values`、
+同じ始点の相異なる辺の方向の相異が `shortPair_direction_ne`（本文「始点と方向は向き付き辺を一意に定める」の
+`sourceDirection_bijective` を引く）、三方向の場合分けが `shortPairRotationPhase_three_values`、
 原始八乗根の非零性と三値の零でなさが最後の二定理に対応する。
 住処は有限集合、ℤ/4ℤ、Qbar である。
 -/

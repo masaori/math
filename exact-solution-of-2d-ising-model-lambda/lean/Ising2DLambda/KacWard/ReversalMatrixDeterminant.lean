@@ -180,14 +180,18 @@ theorem reversalPerm_sign (L : ℕ) :
     _ = 1 := one_pow _
 set_option maxHeartbeats 200000
 
-/-- 本文の行指定置換展開では、反転置換の項以外は零になる。 -/
+/-- 本文の行指定置換展開では、反転置換の項以外は零になる。
+反転が置換であること（本文「反転は置換である」）は、対合性から逆写像を自身に取って作る。 -/
 theorem reversalMatrix_determinant (L : ℕ) :
     IntegerMatrix.determinant (reversalMatrix L) = 1 := by
   classical
-  have hzero (σ : Equiv.Perm (OrientedEdge L)) (hσ : σ ≠ reversalPerm L) :
+  let ι : Equiv.Perm (OrientedEdge L) :=
+    ⟨reversal, reversal, reversal_involutive, reversal_involutive⟩
+  have hι : ι = reversalPerm L := rfl
+  have hzero (σ : Equiv.Perm (OrientedEdge L)) (hσ : σ ≠ ι) :
       finiteOrderedSign σ *
         ∏ e, reversalMatrix L e (σ e) = 0 := by
-    obtain ⟨e, he⟩ : ∃ e, σ e ≠ reversalPerm L e := by
+    obtain ⟨e, he⟩ : ∃ e, σ e ≠ ι e := by
       by_contra h
       push Not at h
       exact hσ (Equiv.ext h)
@@ -205,18 +209,18 @@ theorem reversalMatrix_determinant (L : ℕ) :
           finiteOrderedSign σ *
             ∏ e, reversalMatrix L e (σ e) :=
       IntegerMatrix.determinant_eq_independentSignedPermutationSum _
-    _ = finiteOrderedSign (reversalPerm L) *
-        ∏ e, reversalMatrix L e (reversalPerm L e) :=
-      Fintype.sum_eq_single (reversalPerm L) hzero
-    _ = finiteOrderedSign (reversalPerm L) *
+    _ = finiteOrderedSign ι *
+        ∏ e, reversalMatrix L e (ι e) :=
+      Fintype.sum_eq_single ι hzero
+    _ = finiteOrderedSign ι *
         ∏ _e : OrientedEdge L, (1 : ℤ) := by
       congr 1
       apply Finset.prod_congr rfl
       intro e _
       exact if_pos rfl
-    _ = finiteOrderedSign (reversalPerm L) * 1 := by
+    _ = finiteOrderedSign ι * 1 := by
       rw [Finset.prod_const_one]
-    _ = finiteOrderedSign (reversalPerm L) := mul_one _
-    _ = 1 := reversalPerm_sign L
+    _ = finiteOrderedSign ι := mul_one _
+    _ = 1 := by rw [hι]; exact reversalPerm_sign L
 
 end Ising2DLambda.KacWard

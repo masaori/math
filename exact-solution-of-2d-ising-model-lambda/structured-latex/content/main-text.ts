@@ -81184,8 +81184,11 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                         paragraph([
                           "方向 ", math(String.raw`0,2`), " では横辺、方向 ", math(String.raw`1,3`),
                           " では縦辺を選ぶ。表の減算は ", math(String.raw`\mathbb Z/L\mathbb Z`),
-                          " の中で行う。", ref("def_oriented_edge_endpoints"), " と ", ref("def_oriented_edge_direction"),
-                          " により、各行の始点と方向は指定どおりである。よって写像は全射である。",
+                          " の中で行う。", ref("claim_edge_row_partition"), " の五つ目の主張が与える横辺・縦辺の両端点と、",
+                          ref("def_oriented_edge_endpoints"), "・", ref("def_oriented_edge_direction"),
+                          " により、各行の始点と方向は指定どおりである（方向 ", math(String.raw`2,3`), " では、",
+                          math(String.raw`(i,j-1)`), " の横辺と ", math(String.raw`(i-1,j)`), " の縦辺の終点側の端点が ",
+                          math(String.raw`(i,j)`), " である）。よって写像は全射である。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 |\vec E_L|&=4L^2&&\bigl(\because\ \blkref{def_oriented_edges}\bigr)\\
@@ -87680,7 +87683,21 @@ u\bigl(\operatorname{dir}(\vec f)\bigr)
                         math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " が ",
                         math(String.raw`\vec f\ne\iota(\vec e)`), " を要求すること（",
                         ref("def_nonbacktracking_successors"), "）に矛盾する。ゆえに主張が成り立つ。",
-                        "全過程は有限集合の元の比較と整数の組の符号反転だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+                      paragraph([
+                        "持ち上げた隣接二歩の変位で読むと、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\bigl(\delta_{\mathrm{row}}(\vec f),\,\delta_{\mathrm{col}}(\vec f)\bigr)
+&=u\bigl(\operatorname{dir}(\vec f)\bigr)
+&&\bigl(\because\ \blkref{claim_displacement_is_direction_unit}\bigr)\\
+&\ne-u\bigl(\operatorname{dir}(\vec e)\bigr)
+&&\bigl(\because\ \text{上で示した主張}\bigr)\\
+&=-\bigl(\delta_{\mathrm{row}}(\vec e),\,\delta_{\mathrm{col}}(\vec e)\bigr)
+&&\bigl(\because\ \blkref{claim_displacement_is_direction_unit}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。全過程は有限集合の元の比較と整数の組の符号反転だけで閉じ、実数体も複素数体も現れない。",
                       ]),
                     ],
                   },
@@ -97844,8 +97861,8 @@ c_D(-1)^{|T|}
                       paragraph(["が成り立つ。"]),
                     ],
                     proof: [
-                      paragraph(["任意の ", math(String.raw`e\in P(D,T)`), " を取る。", ref("claim_tagged_matching_nonzero_support"), " より、長い標識の対は反転対に限る。完全マッチングでは各向き付き辺がちょうど一つの対に属するので、", math(String.raw`\vec e_0,\vec e_1`), " はいずれも短い標識の対に属する。逆に ", math(String.raw`e\notin P(D,T)`), " では二つとも長い標識の対に属する。したがって各頂点 ", math(String.raw`v\in V_L`), " で、", ref("def_edge_subset_incidence_count"), " の端点番号つき集合と、始点が ", math(String.raw`v`), " で短い標識の対に属する向き付き辺の集合は、", math(String.raw`(e,a)\mapsto\vec e_a`), " で全単射になる。"]),
-                      paragraph(["短い標識の各対の二辺は同じ始点を持ち、相異なる（", ref("claim_tagged_matching_nonzero_support"), "）。完全マッチングの対は重ならないので、始点が ", math(String.raw`v`), " である短い標識の対の個数を ", math(String.raw`k_v\in\mathbb N`), " と置くと、"]),
+                      paragraph(["任意の ", math(String.raw`e\in P(D,T)`), " を取る。", ref("claim_tagged_matching_nonzero_support"), " より、長い標識の対は反転対に限る。完全マッチングでは各向き付き辺がちょうど一つの昇順対に属する（", ref("claim_perfect_matching_enumeration_complete"), " の完全列挙）ので、", math(String.raw`\vec e_0,\vec e_1`), " はいずれも短い標識の対に属する。逆に ", math(String.raw`e\notin P(D,T)`), " では二つとも長い標識の対に属する。したがって各頂点 ", math(String.raw`v\in V_L`), " で、", ref("def_edge_subset_incidence_count"), " の端点番号つき集合と、始点が ", math(String.raw`v`), " で短い標識の対に属する向き付き辺の集合は、", math(String.raw`(e,a)\mapsto\vec e_a`), " で全単射になる。"]),
+                      paragraph(["短い標識の各対の二辺は同じ始点を持ち、相異なる（", ref("claim_tagged_matching_nonzero_support"), "）。完全マッチングの昇順対は端点を共有しない（", ref("claim_perfect_matching_enumeration_complete"), " の完全列挙）ので、始点が ", math(String.raw`v`), " である短い標識の対の個数を ", math(String.raw`k_v\in\mathbb N`), " と置くと、"]),
                       displayMath(String.raw`\begin{aligned}
 d_{P(D,T)}(v)
 &=\#\{\vec e\in\vec E_L\mid\operatorname{src}(\vec e)=v,\ \vec e\text{ が短い標識の対に属する}\}
@@ -98183,8 +98200,7 @@ w_{\vec e,\vec f}&\ne0
                       displayMath(String.raw`\rho(\iota(\vec e),\vec f)\in\{1,\zeta_8,\zeta_8^{-1}\}\subset\overline{\mathbb Q}\setminus\{0\}.`),
                     ],
                     proof: [
-                      paragraph([ref("def_lattice"), " と ", ref("def_oriented_edge_direction"), " により、各頂点 ", math(String.raw`v=(i,j)\in V_L`), " には方向 ", math(String.raw`0,1,2,3`), " の向き付き辺がそれぞれ存在する。台の横辺を ", math(String.raw`(i,j),(i,j-1)`), "、縦辺を ", math(String.raw`(i,j),(i-1,j)`), " に取って向きを選べば四つを構成できる。座標の減算は ", math(String.raw`\mathbb Z/L\mathbb Z`), " で行う。"]),
-                      paragraph(["写像 ", math(String.raw`\vec g\mapsto(\operatorname{src}(\vec g),\operatorname{dir}(\vec g))`), " は上の構成で全射である。", ref("def_oriented_edges"), " より定義域と値域はともに ", math(String.raw`4L^2`), " 元の有限集合なので、この全射は単射でもある。ゆえに同じ始点を持つ ", math(String.raw`\vec f\ne\vec e`), " について ", math(String.raw`\operatorname{dir}(\vec f)\ne\operatorname{dir}(\vec e)`), " である。辺長一でも方向番号は四つのままである。"]),
+                      paragraph([ref("claim_source_direction_bijection"), " により、写像 ", math(String.raw`\vec g\mapsto(\operatorname{src}(\vec g),\operatorname{dir}(\vec g))`), " は単射である。ゆえに同じ始点を持つ ", math(String.raw`\vec f\ne\vec e`), " について ", math(String.raw`\operatorname{dir}(\vec f)\ne\operatorname{dir}(\vec e)`), " である。辺長一でも方向番号は四つのままである。"]),
                       paragraph([ref("claim_reversal_direction_shift"), " より ", math(String.raw`\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`), " である。", math(String.raw`\mathbb Z/4\mathbb Z`), " の四元から ", math(String.raw`\operatorname{dir}(\vec e)`), " を除くと、反転辺の方向との差は ", math(String.raw`0,1,-1`), " のいずれかである。", ref("def_nonbacktracking_successors"), " より ", math(String.raw`\vec f\in\operatorname{Next}(\iota(\vec e))`), " なので、", ref("def_rotation_phase"), " の三つの場合を適用できる。"]),
                       displayMath(String.raw`\rho(\iota(\vec e),\vec f)=\begin{cases}1,&\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e)),\\\zeta_8,&\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e))+1,\\\zeta_8^{-1},&\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e))-1.\end{cases}\quad(\because\ \blkref{def_rotation_phase})`),
                       paragraph([ref("def_rotation_phase"), " の ", math(String.raw`\zeta_8^4=-1`), " より ", math(String.raw`\zeta_8\ne0`), " である。体 ", math(String.raw`\overline{\mathbb Q}`), " の非零元の逆元も非零なので、三つの値はいずれも零でない。実数体と複素数体は現れない。"]),
@@ -98398,7 +98414,7 @@ q_{\vec e,\vec f}
                       paragraph(["を満たす。端点番号と長短の標識を別のデータとして扱うので、辺長一でも成立する。実数体と複素数体は現れない。"]),
                     ],
                     proof: [
-                      paragraph(["向き付き辺 ", math(String.raw`\vec e`), " を含む完全マッチングの昇順対を ", math(String.raw`r=(\vec f,\vec g)\in E_D`), " と置く。完全マッチングの定義により、この対はただ一つで、", math(String.raw`\vec e=\vec f`), " または ", math(String.raw`\vec e=\vec g`), " である。仮定 ", math(String.raw`p(\vec e)\notin P(D,T)`), " と ", ref("def_tagged_matching_complement_edges"), " より、その台の長い標識の対が存在する。", ref("claim_tagged_matching_nonzero_support"), " より、この長い対は両向きの反転対なので ", math(String.raw`\vec e`), " を含む。もし ", math(String.raw`r\in T`), " なら ", math(String.raw`\vec e`), " は長短の二対に属して完全マッチングの一意性に反する。ゆえに ", math(String.raw`r\in E_D\setminus T`), " である。"]),
+                      paragraph(["向き付き辺 ", math(String.raw`\vec e`), " を含む完全マッチングの昇順対を ", math(String.raw`r=(\vec f,\vec g)\in E_D`), " と置く。", ref("claim_perfect_matching_enumeration_complete"), " により昇順対の端点の連結列は完全列挙で、各向き付き辺はちょうど一度現れるので、この対はただ一つで、", math(String.raw`\vec e=\vec f`), " または ", math(String.raw`\vec e=\vec g`), " である。仮定 ", math(String.raw`p(\vec e)\notin P(D,T)`), " と ", ref("def_tagged_matching_complement_edges"), " より、その台の長い標識の対が存在する。", ref("claim_tagged_matching_nonzero_support"), " より、この長い対は両向きの反転対なので ", math(String.raw`\vec e`), " を含む。もし ", math(String.raw`r\in T`), " なら ", math(String.raw`\vec e`), " は長短の二対に属して完全マッチングの一意性に反する。ゆえに ", math(String.raw`r\in E_D\setminus T`), " である。"]),
                       paragraph([ref("claim_tagged_matching_nonzero_support"), " の長い対の支持から ", math(String.raw`\vec g=\iota(\vec f)`), " を得る。", math(String.raw`\vec e=\vec f`), " なら、"]),
                       displayMath(String.raw`\begin{aligned}
 \operatorname{mate}_D(\vec e)
@@ -98628,9 +98644,7 @@ q_{\vec e,\vec f}
                       paragraph(["選択添字集合 ", math(String.raw`S_v(P):=d_v(H_v(P))\subseteq I`), " への制限 ", math(String.raw`d_v|_{H_v(P)}:H_v(P)\to S_v(P)`), " も全単射である。辺長一でも半辺の端点番号 ", math(String.raw`d\in\{0,1\}`), " を保ち、同じ頂点にある二つの端点を同一視しない。"]),
                     ],
                     proof: [
-                      paragraph(["任意の ", math(String.raw`v=(i,j)\in V_L`), " を取る。", ref("def_boundary_maps"), " により、", math(String.raw`(i,j)`), " を始点とする横辺と縦辺を向き ", math(String.raw`0`), " で一つずつ取れる。また、", math(String.raw`(i,j-1)`), " の横辺と ", math(String.raw`(i-1,j)`), " の縦辺を向き ", math(String.raw`1`), " で取れば始点はいずれも ", math(String.raw`v`), " となる。座標の減算は ", math(String.raw`\mathbb Z/L\mathbb Z`), " で行う。", ref("def_oriented_edge_direction"), " の四つの場合により、それらの方向番号は順に ", math(String.raw`0,1,2,3`), " である。従って写像 ", math(String.raw`(e,d)\mapsto(\operatorname{src}(e,d),\operatorname{dir}(e,d))`), " は全射である。"]),
-                      paragraph([ref("def_oriented_edges"), " により定義域は ", math(String.raw`4L^2`), " 元であり、", ref("def_lattice"), " により値域 ", math(String.raw`V_L\times I`), " も ", math(String.raw`L^2\cdot4=4L^2`), " 元である。有限集合の全射で同じ個数なら単射なので、この写像は全単射である。"]),
-                      paragraph(["頂点 ", math(String.raw`v`), " を固定すると、全単射の逆像により、各 ", math(String.raw`i\in I`), " に対して ", math(String.raw`\operatorname{src}(e,d)=v`), " かつ ", math(String.raw`\operatorname{dir}(e,d)=i`), " を満たす半辺がちょうど一つある。従って ", math(String.raw`d_v`), " は全射かつ単射である。"]),
+                      paragraph(["頂点 ", math(String.raw`v`), " を固定する。", ref("claim_source_direction_bijection"), " により写像 ", math(String.raw`(e,d)\mapsto(\operatorname{src}(e,d),\operatorname{dir}(e,d))`), " は ", math(String.raw`\vec E_L`), " から ", math(String.raw`V_L\times\mathbb Z/4\mathbb Z`), " への全単射である。その逆像により、各 ", math(String.raw`i\in I`), " に対して ", math(String.raw`\operatorname{src}(e,d)=v`), " かつ ", math(String.raw`\operatorname{dir}(e,d)=i`), " を満たす半辺がちょうど一つある。従って ", math(String.raw`d_v`), " は全射かつ単射である。"]),
                       paragraph(["制限写像の値は ", math(String.raw`S_v(P)`), " の定義からそこに属する。", math(String.raw`d_v`), " の単射性から制限も単射であり、", math(String.raw`S_v(P)`), " を像として定めたので全射である。", math(String.raw`L=1`), " でも ", math(String.raw`(e,0)\ne(e,1)`), " であり、二つの向きの区別は消えない。"]),
                     ],
                   },
@@ -98841,7 +98855,7 @@ q_{\vec e,\vec f}
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。任意の ", math(String.raw`\vec e\in\vec E_L`), " に対し、", ref("def_tagged_symmetric_difference"), " の ", math(String.raw`\mathcal A(D,T)`), " で ", math(String.raw`\vec e`), " を含む標識付き対は、存在しないか、長い対と短い対が各一本ずつの二本である。二本の場合は ", math(String.raw`\vec e`), " を含む ", math(String.raw`D`), " の唯一の短い対と、", math(String.raw`\mathcal D_0`), " の唯一の長い対である。"]),
                     ],
                     proof: [
-                      paragraph(["点 ", math(String.raw`\vec e`), " を固定する。", ref("def_finite_perfect_matching"), " により、", math(String.raw`D`), " と ", ref("claim_reference_long_matching"), " の ", math(String.raw`\mathcal D_0`), " には、それぞれ ", math(String.raw`\vec e`), " を含む対がちょうど一つある。それらを ", math(String.raw`d_{\vec e}`), "、", math(String.raw`r_{\vec e}`), " と書く。前者の標識を ", math(String.raw`t_{\vec e}`), " と書き、後者の標識は長い。"]),
+                      paragraph(["点 ", math(String.raw`\vec e`), " を固定する。", ref("def_finite_perfect_matching"), " により、", math(String.raw`D`), " と ", ref("claim_reference_long_matching"), " の ", math(String.raw`\mathcal D_0`), " には、それぞれ ", math(String.raw`\vec e`), " を含む対がちょうど一つある。", ref("claim_perfect_matching_involution"), " の相手写像で書けば、その台はそれぞれ ", math(String.raw`\{\vec e,m_D(\vec e)\}`), "、", math(String.raw`\{\vec e,m_{\mathcal D_0}(\vec e)\}`), " である。それらの標識付き対を ", math(String.raw`d_{\vec e}`), "、", math(String.raw`r_{\vec e}`), " と書く。前者の標識を ", math(String.raw`t_{\vec e}`), " と書き、後者の標識は長い。"]),
                       paragraph(["もし ", math(String.raw`t_{\vec e}=\mathsf{long}`), " なら、", ref("claim_nonzero_long_pair_reference"), " より ", math(String.raw`d_{\vec e}\in\mathcal D_0`), " である。", math(String.raw`\mathcal D_0`), " における対の一意性から次を得る。"]),
                       displayMath(String.raw`\begin{aligned}
 d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ の対の一意性})
@@ -103142,6 +103156,11 @@ G^{a,b,\kappa}_{\vec g,\vec f}
                     ref("claim_successor_direction_selection"), " により、始点が ",
                     math(String.raw`(i,j)`), " で方向が ", math(String.raw`\delta_0`),
                     " の辺 ", math(String.raw`\vec f`), " は一意である。",
+                    "したがって、始点が ", math(String.raw`(i,j)`), " で方向が ", math(String.raw`\delta_0`),
+                    " の向き付き辺 ", math(String.raw`\vec g`), " は ", math(String.raw`\vec g=\vec f`),
+                    " を満たす（", ref("claim_source_direction_bijection"), " の単射性）。",
+                    math(String.raw`\vec g\in\operatorname{Next}(\vec e)`), " なら ",
+                    math(String.raw`\operatorname{src}(\vec g)=(i,j)`), " である（", ref("def_nonbacktracking_successors"), "）。",
                   ]),
                   paragraph([
                     "まず ", math(String.raw`\delta_0=\delta+2`), " とする。",
