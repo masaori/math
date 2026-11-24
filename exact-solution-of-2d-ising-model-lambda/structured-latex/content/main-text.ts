@@ -46455,7 +46455,7 @@ d
 &=\mathrm{ac}_{d+d}\bigl(g\cdot\mathrm{cjp}_{\omega}(g)\bigr)
 &&\bigl(\because\ h\text{ の置き方}\bigr)\\
 &=\mathrm{ac}_d(g)\cdot\mathrm{ac}_d\bigl(\mathrm{cjp}_{\omega}(g)\bigr)
-&&\bigl(\because\ \blkref{claim_qbar_poly_product_top_coefficient}\text{ を }a:=d,\ b:=d\text{ へ当てる。仮定は }g\text{ の仮定と (二)}\bigr)\\
+&&\bigl(\because\ \blkref{claim_qbar_poly_product_top_coefficient}\text{ を }a:=d,\ b:=d\text{ へ当てる、仮定は }g\text{ の仮定と (二)}\bigr)\\
 &=1\cdot1
 &&\bigl(\because\ g\text{ の仮定と (二)}\bigr)\\
 &=1
