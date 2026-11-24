@@ -2,6 +2,8 @@
 
 2026-11-24（並列）: Lean の点検の直しの表の分離の三行目から、行「行列に依らない必要十分版の定理を証明だけで使う具体版を、新しい宣言を立てずに本文どおりに書き直す」を割り出し（証明だけの書き直しは未定義の記号の台帳に行を足さないので、行「行列とその演算」を待たない）、一単位目を済ませた。具体版 `gamma1R_ge_cosh_sub`（本文 `gamma1_lower_bound_all_theta` の第 1 の不等式）を必要十分版の特殊化から人手の準備と 5 行の鎖に 1 対 1 の `calc` に書き直し、導出を新しい `ClaimGamma1LowerBoundFromNecSuf.lean` へ移して `NecSuf/CoshLowerBound.lean` の import を外した。分離の台帳 589→587 行、繋がりの台帳 2 行・一対一の台帳 1 行を消した。次は同じ行の候補（状態台帳の表の備考）の先頭から。
 
+2026-11-24: Lean の点検の直しの表の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」の十七単位目を済ませた。`lie_H1Plus_checkZ`・`lie_H1Plus_checkY`（`ClaimCommutatorHCheckZY.lean`）の準備 `hsumM`・`hsum0`・`hsumLast`・`hsumFirst` と添字の付け替えの段の位相の添字を写像の像 `finIndexToZZ`（`∓ 1_ℤ` を含む）で書き、付け替えと最後の段で像の定義を開く段を消した。次は同じ行の残る件（境界の補題の `M` を `inclusionNNtoZZ M` で述べ直す件、`Yflat`・`Zflat` の逆写像の件など。状態台帳の表の行）。
+
 2026-11-24: Lean の点検の直しの表の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」の十六単位目を済ませた。`checkIdxOfFin` を写像の像 `finIndexToZZ M j` で、`checkIdxFinset` を `k ↦ ι_{ℕ→ℤ}(k) + 1_ℤ` の像で書き、`finCheckIdxEquiv` を `checkIdxOfFin` から作り、`tagPoint_half_eq_thetaTilde` の主張を像で述べた。使われていない `sum_checkIdx` を消した。未定義の記号の台帳 9,632 → 9,621 行、繋がりの台帳 −1 行。詳細は状態台帳の現在地の同じ日の行。
 
 2026-11-24: Lean の点検の直しの表の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」の十五単位目を済ませた。`checkIdx`（名前の無い行き来 `j ↦ j+1`）を消して `def_check_Vprime` の具体版とそれを使う具体版の添字を写像の像 `finIndexToZZ M j` にし、`checkZYSet` の添字も像にした。補題名 `checkIdx_rev` などは未定義の記号の台帳に合わせて残した。未定義の記号の台帳 9,636 → 9,635 行。次は `checkIdxOfFin`・`checkIdxFinset` を像で書く件。

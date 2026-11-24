@@ -44,12 +44,13 @@
   名前の根拠「零行列の和は零行列」（一つの添字を除いた集合の上の和の 4 か所。`M = 2` では空の和）である。
   具体版（`ClaimAddAndSubtractZeroMatrix.lean`）は添字が `Fin m` の行列についてのもので、`TensorPow M` の添字 `Conf M` に当てはまらない。
   加えて有限和の添字の付け方が本文でまだ定まっていない（状態台帳の「有限和の添字の付け方」の件）ので、`Finset.sum_eq_single` にまとめたままにしてある。
-* Step 3 の添字の付け替え `l = j - 1` は、`checkZ`・`checkY` の位相の添字（人手の `j_ℤ` に当たる像 `finIndexToZZ M j`）を定義
-  `ι_{ℕ→ℤ}(j.val) + 1_ℤ` に開く段で、`checkPhase_add_left`（`theorem_exp_product`）と同じ行で行う（`ι_{ℕ→ℤ}(j.val)` が人手の `l`。
-  `ι_{ℕ→ℤ}` を Lean の `Nat.cast` へ移す `inclusionNNtoZZ_eq_natCast` は Lean だけの段）。
-  Step 4 の付け替え `l = j + 1` も同じ行で行う（人手の `l = j + 1` は Lean の `((l : ℕ) : ℤ) + 2`）。
-* 人手の `∑_{l=1}^{M}` の項を分ける準備（`hsumM`・`hsumFirst` など）は、位相の添字をまだ値 `((k : ℕ) : ℤ) + 1` で書いており、
-  最後の段（`def_half_integer_checkY`・`def_half_integer_checkZ`）で像 `finIndexToZZ` の定義を開いて合わせる（Lean だけの段）。
+* Step 3 の添字の付け替え `l = j - 1` と Step 4 の `l = j + 1` は、人手の `j_ℤ` に当たる像 `finIndexToZZ M j` のまま、位相の添字を
+  `finIndexToZZ M j - 1_ℤ`・`finIndexToZZ M j + 1_ℤ` と書き、`checkPhase_add_left`（`theorem_exp_product`）と同じ行で行う（像の定義を開かない）。
+* 人手の項を分ける準備（`hsumM`・`hsum0`・`hsumLast`・`hsumFirst`）は、人手の位相の添字 `l ∈ {1,…,M}` を像 `finIndexToZZ (n+1) k`、
+  `l ∈ {0,…,M-1}` を `finIndexToZZ (n+1) k - 1_ℤ`、分けた残りの `l ∈ {1,…,M-1}` を像 `finIndexToZZ n i` で書く
+  （`l = j + 1` の形は像に `1_ℤ` を足す）。`Fin (n+1)` の和を `Fin n` の和と端の元に分ける `Fin.sum_univ_castSucc`・`Fin.sum_univ_succ` の後に、
+  端の元の像（最初の元は `finIndexToZZ_firstSite` の `1_ℤ`（`hsum0` では `1_ℤ` を引いて `0_ℤ`）、最後の元は `finIndexToZZ_lastSite` の `ι_{ℕ→ℤ}(M)` を `inclusionNNtoZZ_eq_natCast` で `Nat.cast` へ移した値）と残りの元の像の対応を
+  証明の中で示す段は Lean だけの段である。最後の段（`def_half_integer_checkY`・`def_half_integer_checkZ`）では像の定義を開かない。
 * 人手の「分配律」の行では、`2` と `e^{∓iθ~_μ}` を 1 つのスカラーにまとめる。
   人手の最後の 2 行（`1 ≤ l ≤ M` で延長を外す行と `def_half_integer_checkY`・`def_half_integer_checkZ` の行）は 1 行にまとめる。
 
@@ -456,22 +457,33 @@ theorem checkPhase_smul_Yflat_boundary (hM : M ≠ 0) (ν : ℤ) :
 theorem lie_H1Plus_checkZ (hM : M ≠ 0) (ν : ℤ) :
     ⁅H1plus M, checkZ M ν⁆ = (2 * checkPhase M 1 ν) • checkY M ν := by
   obtain ⟨n, rfl⟩ : ∃ n, M = n + 1 := Nat.exists_eq_succ_of_ne_zero hM
-  -- 人手の `∑_{l=1}^{M} e^{-ilθ~} Y♭_l` を、最後の項 `l = M` を分けた形で
-  have hsumM : ∑ k : Fin (n + 1), checkPhase (n + 1) (((k : ℕ) : ℤ) + 1) ν • Yflat (n + 1) ((k : ℕ) + 1)
-      = ∑ i : Fin n, checkPhase (n + 1) (((i : ℕ) : ℤ) + 1) ν • Yflat (n + 1) ((i : ℕ) + 1)
+  -- 人手の `∑_{l=1}^{M} e^{-ilθ~} Y♭_l` を、最後の項 `l = M` を分けた形で。人手の `l ∈ {1,…,M}` は像 `finIndexToZZ (n+1) k`、
+  -- 分けた残りの `l ∈ {1,…,M-1}` は像 `finIndexToZZ n i`（`def_index_set_from_one_to_n`）。延長の自然数の添字は値 `k.val + 1`
+  have hsumM : ∑ k : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) k) ν • Yflat (n + 1) ((k : ℕ) + 1)
+      = ∑ i : Fin n, checkPhase (n + 1) (finIndexToZZ n i) ν • Yflat (n + 1) ((i : ℕ) + 1)
         + checkPhase (n + 1) ((n + 1 : ℕ) : ℤ) ν • Yflat (n + 1) (n + 1) := by
     rw [Fin.sum_univ_castSucc]
-    simp only [Fin.val_castSucc, Fin.val_last]
-    push_cast
-    rfl
-  -- 人手の `∑_{l=0}^{M-1} e^{-ilθ~} Y♭_l` を、最初の項 `l = 0` を分けた形で
-  have hsum0 : ∑ k : Fin (n + 1), checkPhase (n + 1) ((k : ℕ) : ℤ) ν • Yflat (n + 1) (k : ℕ)
+    -- Lean だけの段: `Fin (n+1)` の和を `Fin n` の和と最後の元に分けたときの像の対応
+    -- （`castSucc i` の像は `i` の像、最後の元の像は `ι_{ℕ→ℤ}(n+1)` を `inclusionNNtoZZ_eq_natCast` で `Nat.cast` へ移した値）
+    have hcast : ∀ i : Fin n, finIndexToZZ (n + 1) (Fin.castSucc i) = finIndexToZZ n i := fun _ => rfl
+    have hlast : finIndexToZZ (n + 1) (Fin.last n) = ((n + 1 : ℕ) : ℤ) := by
+      rw [← inclusionNNtoZZ_eq_natCast]; exact finIndexToZZ_lastSite (M := n + 1) (Nat.succ_ne_zero n)
+    simp only [hcast, hlast, Fin.val_castSucc, Fin.val_last]
+  -- 人手の `∑_{l=0}^{M-1} e^{-ilθ~} Y♭_l` を、最初の項 `l = 0` を分けた形で。人手の `l ∈ {0,…,M-1}` は `finIndexToZZ (n+1) k - 1_ℤ`、
+  -- 分けた残りの `l ∈ {1,…,M-1}` は像 `finIndexToZZ n i`（`def_index_set_from_one_to_n`）。延長の自然数の添字は値 `k.val`
+  have hsum0 : ∑ k : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) k - 1) ν • Yflat (n + 1) (k : ℕ)
       = checkPhase (n + 1) 0 ν • Yflat (n + 1) 0
-        + ∑ i : Fin n, checkPhase (n + 1) (((i : ℕ) : ℤ) + 1) ν • Yflat (n + 1) ((i : ℕ) + 1) := by
+        + ∑ i : Fin n, checkPhase (n + 1) (finIndexToZZ n i) ν • Yflat (n + 1) ((i : ℕ) + 1) := by
     rw [Fin.sum_univ_succ]
+    -- Lean だけの段: 最初の元の像から `1_ℤ` を引くと `0_ℤ`、`succ i` の像から `1_ℤ` を引くと `i` の像
+    have hzero : finIndexToZZ (n + 1) 0 - 1 = 0 := by
+      have h1 : finIndexToZZ (n + 1) 0 = 1 := finIndexToZZ_firstSite (M := n + 1) (Nat.succ_ne_zero n)
+      rw [h1]; ring
+    have hsucc : ∀ i : Fin n, finIndexToZZ (n + 1) (Fin.succ i) - 1 = finIndexToZZ n i := by
+      intro i; rw [finIndexToZZ, finIndexToZZ, inclusionNNtoZZ_eq_natCast, inclusionNNtoZZ_eq_natCast, Fin.val_succ]
+      push_cast; ring
+    simp only [hzero, hsucc]
     simp only [Fin.val_zero, Fin.val_succ]
-    push_cast
-    rfl
   calc ⁅H1plus (n + 1), checkZ (n + 1) ν⁆
       = ⁅H1plus (n + 1), ∑ j : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) j) ν • Z j⁆ := rfl
     _ = ∑ j : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) j) ν • ⁅H1plus (n + 1), Z j⁆ :=
@@ -482,26 +494,28 @@ theorem lie_H1Plus_checkZ (hM : M ≠ 0) (ν : ℤ) :
           Yflat (n + 1) (j : ℕ) := by
           rw [Finset.smul_sum]
           exact Finset.sum_congr rfl fun j _ => smul_comm _ _ _
-    -- 人手の添字の付け替え `l = j - 1`: 人手の `j_ℤ` は像 `finIndexToZZ (n+1) l = ι_{ℕ→ℤ}(l.val) + 1_ℤ`
-    -- （`def_index_set_from_one_to_n`）で、延長の自然数の添字 `l.val` の像 `ι_{ℕ→ℤ}(l.val)` が人手の `l`
-    -- （`ι_{ℕ→ℤ}` を `Nat.cast` へ移す `inclusionNNtoZZ_eq_natCast` は Lean だけの段）。続けて `theorem_exp_product`
-    _ = (2 : ℂ) • ∑ l : Fin (n + 1), (checkPhase (n + 1) 1 ν * checkPhase (n + 1) ((l : ℕ) : ℤ) ν) •
-          Yflat (n + 1) (l : ℕ) := by
+    -- 人手の添字の付け替え `l = j - 1` と `theorem_exp_product`: 人手の `j_ℤ` は像 `finIndexToZZ (n+1) j`
+    -- （`def_index_set_from_one_to_n`）で、人手の `l = j - 1` は Lean の `finIndexToZZ (n+1) j - 1_ℤ`
+    _ = (2 : ℂ) • ∑ j : Fin (n + 1),
+          (checkPhase (n + 1) 1 ν * checkPhase (n + 1) (finIndexToZZ (n + 1) j - 1) ν) •
+          Yflat (n + 1) (j : ℕ) := by
           congr 1
-          refine Finset.sum_congr rfl fun l _ => ?_
-          rw [finIndexToZZ, inclusionNNtoZZ_eq_natCast, ← checkPhase_add_left, add_comm (1 : ℤ)]
-    _ = (2 * checkPhase (n + 1) 1 ν) • ∑ l : Fin (n + 1), checkPhase (n + 1) ((l : ℕ) : ℤ) ν •
-          Yflat (n + 1) (l : ℕ) := by
+          refine Finset.sum_congr rfl fun j _ => ?_
+          rw [← checkPhase_add_left]
+          congr 2
+          ring
+    _ = (2 * checkPhase (n + 1) 1 ν) • ∑ j : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) j - 1) ν •
+          Yflat (n + 1) (j : ℕ) := by
           simp only [Finset.smul_sum, mul_smul]
-    _ = (2 * checkPhase (n + 1) 1 ν) • ∑ k : Fin (n + 1), checkPhase (n + 1) (((k : ℕ) : ℤ) + 1) ν •
+    _ = (2 * checkPhase (n + 1) 1 ν) • ∑ k : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) k) ν •
           Yflat (n + 1) ((k : ℕ) + 1) := by
           rw [hsum0, hsumM, checkPhase_smul_Yflat_boundary hM]
           congr 1
           exact add_comm _ _
     -- 人手の最後の 2 行（`1 ≤ l ≤ M` で延長を外す行と `def_half_integer_checkY`）。和の添字 `k` の人手の値は像
-    -- `finIndexToZZ (n+1) k = ι_{ℕ→ℤ}(k.val) + 1_ℤ`（`def_index_set_from_one_to_n`）。像の定義を開いて値の形の準備に合わせる段は Lean だけの段
+    -- `finIndexToZZ (n+1) k`（`def_index_set_from_one_to_n`）
     _ = (2 * checkPhase (n + 1) 1 ν) • checkY (n + 1) ν := by
-          simp only [Yflat_succ, checkY, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+          simp only [Yflat_succ, checkY]
 
 /-! ## Step 4: (B) -/
 
@@ -523,22 +537,30 @@ theorem checkPhase_smul_Zflat_boundary (hM : M ≠ 0) (ν : ℤ) :
 theorem lie_H1Plus_checkY (hM : M ≠ 0) (ν : ℤ) :
     ⁅H1plus M, checkY M ν⁆ = (-2 * checkPhase M (-1) ν) • checkZ M ν := by
   obtain ⟨n, rfl⟩ : ∃ n, M = n + 1 := Nat.exists_eq_succ_of_ne_zero hM
-  -- 人手の `∑_{l=2}^{M+1} e^{-ilθ~} Z♭_l` を、最後の項 `l = M+1` を分けた形で
-  have hsumLast : ∑ k : Fin (n + 1), checkPhase (n + 1) (((k : ℕ) : ℤ) + 2) ν • Zflat (n + 1) ((k : ℕ) + 2)
-      = ∑ i : Fin n, checkPhase (n + 1) (((i : ℕ) : ℤ) + 2) ν • Zflat (n + 1) ((i : ℕ) + 2)
+  -- 人手の `∑_{l=2}^{M+1} e^{-ilθ~} Z♭_l` を、最後の項 `l = M+1` を分けた形で。人手の `l = j + 1`（`j ∈ {1,…,M}`）は
+  -- 像 `finIndexToZZ (n+1) k + 1_ℤ`、分けた残りの `l = j + 1`（`j ∈ {1,…,M-1}`）は `finIndexToZZ n i + 1_ℤ`（`def_index_set_from_one_to_n`）。
+  -- 延長の自然数の添字は値 `k.val + 2`
+  have hsumLast : ∑ k : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) k + 1) ν • Zflat (n + 1) ((k : ℕ) + 2)
+      = ∑ i : Fin n, checkPhase (n + 1) (finIndexToZZ n i + 1) ν • Zflat (n + 1) ((i : ℕ) + 2)
         + checkPhase (n + 1) (((n + 1 : ℕ) : ℤ) + 1) ν • Zflat (n + 1) (n + 1 + 1) := by
     rw [Fin.sum_univ_castSucc]
-    simp only [Fin.val_castSucc, Fin.val_last]
-    push_cast
-    congr 2
-  -- 人手の `∑_{l=1}^{M} e^{-ilθ~} Z♭_l` を、最初の項 `l = 1` を分けた形で
-  have hsumFirst : ∑ k : Fin (n + 1), checkPhase (n + 1) (((k : ℕ) : ℤ) + 1) ν • Zflat (n + 1) ((k : ℕ) + 1)
+    -- Lean だけの段: `castSucc i` の像は `i` の像、最後の元の像は `ι_{ℕ→ℤ}(n+1)` を `inclusionNNtoZZ_eq_natCast` で `Nat.cast` へ移した値
+    have hcast : ∀ i : Fin n, finIndexToZZ (n + 1) (Fin.castSucc i) = finIndexToZZ n i := fun _ => rfl
+    have hlast : finIndexToZZ (n + 1) (Fin.last n) = ((n + 1 : ℕ) : ℤ) := by
+      rw [← inclusionNNtoZZ_eq_natCast]; exact finIndexToZZ_lastSite (M := n + 1) (Nat.succ_ne_zero n)
+    simp only [hcast, hlast, Fin.val_castSucc, Fin.val_last]
+  -- 人手の `∑_{l=1}^{M} e^{-ilθ~} Z♭_l` を、最初の項 `l = 1` を分けた形で。人手の `l ∈ {1,…,M}` は像 `finIndexToZZ (n+1) k`、
+  -- 分けた残りの `l = j + 1`（`j ∈ {1,…,M-1}`）は `finIndexToZZ n i + 1_ℤ`（`def_index_set_from_one_to_n`）
+  have hsumFirst : ∑ k : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) k) ν • Zflat (n + 1) ((k : ℕ) + 1)
       = checkPhase (n + 1) 1 ν • Zflat (n + 1) 1
-        + ∑ i : Fin n, checkPhase (n + 1) (((i : ℕ) : ℤ) + 2) ν • Zflat (n + 1) ((i : ℕ) + 2) := by
+        + ∑ i : Fin n, checkPhase (n + 1) (finIndexToZZ n i + 1) ν • Zflat (n + 1) ((i : ℕ) + 2) := by
     rw [Fin.sum_univ_succ]
-    simp only [Fin.val_zero, Fin.val_succ]
-    push_cast
-    congr 2
+    -- Lean だけの段: 最初の元の像は `1_ℤ`、`succ i` の像は `i` の像に `1_ℤ` を足したもの
+    have hzero : finIndexToZZ (n + 1) 0 = 1 := finIndexToZZ_firstSite (M := n + 1) (Nat.succ_ne_zero n)
+    have hsucc : ∀ i : Fin n, finIndexToZZ (n + 1) (Fin.succ i) = finIndexToZZ n i + 1 := by
+      intro i; rw [finIndexToZZ, finIndexToZZ, inclusionNNtoZZ_eq_natCast, inclusionNNtoZZ_eq_natCast, Fin.val_succ]
+      push_cast; rfl
+    simp only [hzero, hsucc, Fin.val_zero, Fin.val_succ]
   calc ⁅H1plus (n + 1), checkY (n + 1) ν⁆
       = ⁅H1plus (n + 1), ∑ j : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) j) ν • Y j⁆ := rfl
     _ = ∑ j : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) j) ν • ⁅H1plus (n + 1), Y j⁆ :=
@@ -549,29 +571,27 @@ theorem lie_H1Plus_checkY (hM : M ≠ 0) (ν : ℤ) :
           Zflat (n + 1) ((j : ℕ) + 2) := by
           rw [Finset.smul_sum]
           exact Finset.sum_congr rfl fun j _ => smul_comm _ _ _
-    -- 人手の添字の付け替え `l = j + 1` と `theorem_exp_product`: 人手の `j_ℤ` は像
-    -- `finIndexToZZ (n+1) l = ι_{ℕ→ℤ}(l.val) + 1_ℤ`（`def_index_set_from_one_to_n`）で、人手の `l = j + 1` は Lean の `((l : ℕ) : ℤ) + 2`
-    -- （`ι_{ℕ→ℤ}` を `Nat.cast` へ移す `inclusionNNtoZZ_eq_natCast` は Lean だけの段）
-    _ = (-2 : ℂ) • ∑ l : Fin (n + 1),
-          (checkPhase (n + 1) (-1) ν * checkPhase (n + 1) (((l : ℕ) : ℤ) + 2) ν) •
-          Zflat (n + 1) ((l : ℕ) + 2) := by
+    -- 人手の添字の付け替え `l = j + 1` と `theorem_exp_product`: 人手の `j_ℤ` は像 `finIndexToZZ (n+1) j`
+    -- （`def_index_set_from_one_to_n`）で、人手の `l = j + 1` は Lean の `finIndexToZZ (n+1) j + 1_ℤ`
+    _ = (-2 : ℂ) • ∑ j : Fin (n + 1),
+          (checkPhase (n + 1) (-1) ν * checkPhase (n + 1) (finIndexToZZ (n + 1) j + 1) ν) •
+          Zflat (n + 1) ((j : ℕ) + 2) := by
           congr 1
-          refine Finset.sum_congr rfl fun l _ => ?_
-          rw [finIndexToZZ, inclusionNNtoZZ_eq_natCast, ← checkPhase_add_left]
+          refine Finset.sum_congr rfl fun j _ => ?_
+          rw [← checkPhase_add_left]
           congr 2
           ring
-    _ = (-2 * checkPhase (n + 1) (-1) ν) • ∑ l : Fin (n + 1),
-          checkPhase (n + 1) (((l : ℕ) : ℤ) + 2) ν • Zflat (n + 1) ((l : ℕ) + 2) := by
+    _ = (-2 * checkPhase (n + 1) (-1) ν) • ∑ j : Fin (n + 1),
+          checkPhase (n + 1) (finIndexToZZ (n + 1) j + 1) ν • Zflat (n + 1) ((j : ℕ) + 2) := by
           simp only [Finset.smul_sum, mul_smul]
     _ = (-2 * checkPhase (n + 1) (-1) ν) • ∑ k : Fin (n + 1),
-          checkPhase (n + 1) (((k : ℕ) : ℤ) + 1) ν • Zflat (n + 1) ((k : ℕ) + 1) := by
-          rw [hsumLast, hsumFirst, show (((n + 1 : ℕ) : ℤ) + 1) = ((n + 1 : ℕ) : ℤ) + 1 from rfl,
-            checkPhase_smul_Zflat_boundary hM]
+          checkPhase (n + 1) (finIndexToZZ (n + 1) k) ν • Zflat (n + 1) ((k : ℕ) + 1) := by
+          rw [hsumLast, hsumFirst, checkPhase_smul_Zflat_boundary hM]
           congr 1
           exact add_comm _ _
     -- 人手の最後の 2 行（`1 ≤ l ≤ M` で延長を外す行と `def_half_integer_checkZ`）。和の添字 `k` の人手の値は像
-    -- `finIndexToZZ (n+1) k = ι_{ℕ→ℤ}(k.val) + 1_ℤ`（`def_index_set_from_one_to_n`）。像の定義を開いて値の形の準備に合わせる段は Lean だけの段
+    -- `finIndexToZZ (n+1) k`（`def_index_set_from_one_to_n`）
     _ = (-2 * checkPhase (n + 1) (-1) ν) • checkZ (n + 1) ν := by
-          simp only [Zflat_succ, checkZ, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+          simp only [Zflat_succ, checkZ]
 
 end Ising2D
