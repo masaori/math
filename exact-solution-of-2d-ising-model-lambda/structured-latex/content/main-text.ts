@@ -77270,15 +77270,15 @@ L^2
 &=L\cdot L
 &&(\because\ \text{冪の定義})\\
 &\le(ka+a)\cdot L
-&&(\because\ L\le ka+a\text{ の両辺に }L\text{ を掛ける。}\mathbb{N}\text{ の乗法単調性})\\
+&&(\because\ L\le ka+a\text{ の両辺に }L\text{ を掛ける、}\mathbb{N}\text{ の乗法単調性})\\
 &=ka\cdot L+a\cdot L
 &&(\because\ \text{分配則})\\
 &\le ka\cdot(ka+a)+a\cdot L
-&&(\because\ L\le ka+a\text{ の両辺に }ka\text{ を掛ける。}\mathbb{N}\text{ の乗法単調性})\\
+&&(\because\ L\le ka+a\text{ の両辺に }ka\text{ を掛ける、}\mathbb{N}\text{ の乗法単調性})\\
 &=(ka)^2+a\cdot ka+a\cdot L
 &&(\because\ \text{分配則・積の可換性・冪の定義})\\
 &\le(ka)^2+a\cdot L+a\cdot L
-&&(\because\ ka\le L\text{ の両辺に }a\text{ を掛ける。}\mathbb{N}\text{ の乗法単調性})\\
+&&(\because\ ka\le L\text{ の両辺に }a\text{ を掛ける、}\mathbb{N}\text{ の乗法単調性})\\
 &=(ka)^2+2aL
 &&(\because\ \mathbb{N}\text{ の四則})
 \end{aligned}`),
