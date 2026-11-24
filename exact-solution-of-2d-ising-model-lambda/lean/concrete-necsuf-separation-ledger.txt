@@ -35,7 +35,6 @@ DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycleWords_complete_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycleWords_flatten_nodup_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycle_pairs_D_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycle_pairs_reference_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycle_pairs_walk_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycle_period_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.iterate_color_parity_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.iterate_succ_val_necSuf

@@ -19798,10 +19798,10 @@ t\bmod2&=(r+1)\bmod2&&\bigl(\because\ t=r+1\text{ の代入}\bigr)\\
                         displayMath(String.raw`\begin{aligned}
 q(p(i))&=\tau(\upsilon(\upsilon(\tau(i))))&&\bigl(\because\ p,q\text{ の定義}\bigr)\\
 &=\tau(\tau(i))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr)\\
-&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr),\\
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr)\\
 p(q(i))&=\upsilon(\tau(\tau(\upsilon(i))))&&\bigl(\because\ p,q\text{ の定義}\bigr)\\
 &=\upsilon(\upsilon(i))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr)\\
-&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr).
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr)
 \end{aligned}`),
                         paragraph(["したがって ", math(String.raw`p\in\operatorname{Perm}(\mathcal J)`), " であり、", math(String.raw`p^{-1}=q`), " である。二つのマッチングが同じ対を含んでも、この定義を変えない。"]),
                       ],

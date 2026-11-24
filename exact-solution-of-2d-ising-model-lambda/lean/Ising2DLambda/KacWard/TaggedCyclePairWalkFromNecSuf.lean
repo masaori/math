@@ -10,6 +10,11 @@ import Ising2DLambda.NecSuf.KacWard.TaggedCyclePairWalk
 
 namespace Ising2DLambda.KacWard
 
+private theorem consecutivePairs_eq_pairChunks_map_range {K : Type*} (k : ℕ) (f : ℕ → K) :
+    consecutivePairs ((List.range (2 * k)).map f) =
+      NecSuf.KacWard.pairChunks ((List.range (2 * k)).map f) := by
+  rw [consecutivePairs_map_range, NecSuf.KacWard.pairChunks_map_range]
+
 open Ising2DLambda.AlgebraicEigenvalue
 attribute [local instance] Classical.propDecidable
 
@@ -79,7 +84,8 @@ theorem taggedMatchingTerm_cycleWalk_from_necSuf {L : ℕ} (z : Qbar) (hz : z ^ 
       exact referenceLongMate_eq_reversal _
     simp only [Function.comp]
     unfold taggedCyclePoints
-    rw [hk2, NecSuf.KacWard.cycle_pairs_walk_necSuf reversal reversal_involutive
+    rw [hk2, consecutivePairs_eq_pairChunks_map_range,
+      NecSuf.KacWard.cycle_pairs_walk_necSuf reversal reversal_involutive
       (fun r => (finiteMapIterate (concreteAlternatingSuccessor D t) r m).1) k hstep, hlen,
       List.map_map]
     rfl
