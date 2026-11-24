@@ -26,6 +26,7 @@
 | 同じ段の `I_ℝ = (W_ℝ)^0 = (W^0)_ℝ = ϱ(I)` の 3 行 | `real_identity_matrix_eq_real_matrix_of_identity` の `calc` の 3 段 |
 | 【冪の対称性】6 行と単射性 | `power_of_W_real_entry_symm`（`ClaimTracePowerUpperBound.lean`）をそのまま引く |
 | 【`(W_ℝ)^ax` の成分】`u^{(a)}_l = Σ_m ((W_ℝ)^a)_lm x_m` | `*ᵥ` の定義（`rfl`） |
+| 【添字の等式】`(a+b)+1 = b+(1+a)` の 3 行・`1 = 0+1`・`a+1 = (a+0)+1` の 1 行ずつ・`2a = a+a` の 3 行・`2a+1 = (a+a)+1` の 1 行 | `moment_index_add_add_one_eq` の `calc` の 3 段・`moment_index_one_eq_zero_add_one`・`moment_index_add_one_eq_add_zero_add_one`・`moment_index_two_mul_eq_add` の `calc` の 3 段・`moment_index_two_mul_add_one_eq`（人手の `ℤ_{≥0}` の元を Lean の `ℕ` で書く） |
 | 【冪の分け方】`W^{a+b} = W^b(IW^a)` の 3 行 | `power_of_W_split_with_identity` の `calc` の 3 段 |
 | 同じ段の `W^{a+b+1} = W^b(WW^a)` の 7 行 | `power_of_W_split_with_W` の `calc` の 7 段 |
 | 同じ段の `(W_ℝ)^s = (W_ℝ)^b(C_ℝ(W_ℝ)^a)` の 5 行 | `power_of_W_real_split` の `calc` の 5 段（`C = I` は `power_of_W_real_split_with_identity`、`C = W` は `power_of_W_real_split_with_W_real`） |
@@ -143,20 +144,46 @@ theorem real_identity_matrix_eq_real_matrix_of_identity :
     _ = realMatrixOfRealEntries (1 : TensorPow M) identity_matrix_hasRealEntries_tensorPow :=
         realMatrixOfRealEntries_congr (pow_zero W) _ _                      -- `def_exp` (1) の `A^0 := I`（`K = ℂ`）
 
+/-- 人手【添字の等式】の一つ目の 3 行: `(a + b) + 1 = b + (1 + a)`（人手の `ℤ_{≥0}` の元を Lean の `ℕ` で書く）。 -/
+theorem moment_index_add_add_one_eq (a b : ℕ) : a + b + 1 = b + (1 + a) :=
+  calc a + b + 1
+      = b + a + 1 := by rw [Nat.add_comm a b]                              -- 加法の交換律 `x + y = y + x`（`x → a`, `y → b`）
+    _ = b + (a + 1) := Nat.add_assoc b a 1                                 -- 加法の結合律（`x → b`, `y → a`, `t → 1`）
+    _ = b + (1 + a) := by rw [Nat.add_comm a 1]                            -- 加法の交換律（`x → a`, `y → 1`）
+
+/-- 人手【添字の等式】の二つ目の 1 行: `1 = 0 + 1`。 -/
+theorem moment_index_one_eq_zero_add_one : (1 : ℕ) = 0 + 1 :=
+  (Nat.zero_add 1).symm                                                     -- 和の単位元 `0 + x = x`（`x → 1`）を右辺から左辺へ
+
+/-- 人手【添字の等式】の三つ目の 1 行: `a + 1 = (a + 0) + 1`。 -/
+theorem moment_index_add_one_eq_add_zero_add_one (a : ℕ) : a + 1 = a + 0 + 1 := by
+  rw [Nat.add_zero a]                                                       -- 和の単位元 `x + 0 = x`（`x → a`）を右辺から左辺へ
+
+/-- 人手【添字の等式】の四つ目の 3 行: `2a = a + a`。 -/
+theorem moment_index_two_mul_eq_add (a : ℕ) : 2 * a = a + a :=
+  calc 2 * a
+      = (1 + 1) * a := rfl                                                  -- `2 := 1 + 1`
+    _ = 1 * a + 1 * a := Nat.add_mul 1 1 a                                 -- 分配律 `(x+y)t = xt + yt`（`x → 1`, `y → 1`, `t → a`）
+    _ = a + a := by rw [Nat.one_mul]                                       -- 乗法の単位元 `1·x = x`（`x → a`）を 2 か所へ
+
+/-- 人手【添字の等式】の五つ目の 1 行: `2a + 1 = (a + a) + 1`。 -/
+theorem moment_index_two_mul_add_one_eq (a : ℕ) : 2 * a + 1 = a + a + 1 := by
+  rw [moment_index_two_mul_eq_add a]                                       -- 上の `2a = a + a`
+
 /-- 人手【冪の分け方】の `Mat(d,ℂ)` の一つ目の 3 行: `W^{a+b} = W^b(IW^a)`。 -/
 theorem power_of_W_split_with_identity (a b : ℕ) : W ^ (a + b) = W ^ b * (1 * W ^ a) :=
   calc W ^ (a + b)
-      = W ^ (b + a) := by rw [Nat.add_comm]                                 -- `ℤ` の加法の交換律
+      = W ^ (b + a) := by rw [Nat.add_comm a b]                             -- 加法の交換律（`x → a`, `y → b`）
     _ = W ^ b * W ^ a := matrix_power_exponent_law W b a                    -- `matrix_power_exponent_law`（`p → b`, `q → a`）
     _ = W ^ b * (1 * W ^ a) := by rw [identity_matrix_mul_tensorPow]        -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-- 人手【冪の分け方】の `Mat(d,ℂ)` の二つ目の 7 行: `W^{a+b+1} = W^b(WW^a)`。 -/
 theorem power_of_W_split_with_W (a b : ℕ) : W ^ (a + b + 1) = W ^ b * (W * W ^ a) :=
   calc W ^ (a + b + 1)
-      = W ^ (b + (1 + a)) := by rw [show a + b + 1 = b + (1 + a) by omega]  -- `ℤ` で `a + b + 1 = b + (1 + a)`
+      = W ^ (b + (1 + a)) := by rw [moment_index_add_add_one_eq a b]        -- 【添字の等式】の `(a + b) + 1 = b + (1 + a)`
     _ = W ^ b * W ^ (1 + a) := matrix_power_exponent_law W b (1 + a)       -- `matrix_power_exponent_law`（`p → b`, `q → 1 + a`）
     _ = W ^ b * (W ^ 1 * W ^ a) := by rw [matrix_power_exponent_law W 1 a]  -- `matrix_power_exponent_law`（`p → 1`, `q → a`）
-    _ = W ^ b * (W ^ (0 + 1) * W ^ a) := by rw [Nat.zero_add]               -- `ℤ` で `1 = 0 + 1`
+    _ = W ^ b * (W ^ (0 + 1) * W ^ a) := by rw [← moment_index_one_eq_zero_add_one]  -- 【添字の等式】の `1 = 0 + 1`
     _ = W ^ b * ((W ^ 0 * W) * W ^ a) := by rw [pow_succ W 0]               -- `def_exp` (1) の `A^{m+1} := A^mA`（`m = 0`）
     _ = W ^ b * ((1 * W) * W ^ a) := by rw [pow_zero]                       -- `def_exp` (1) の `A^0 := I`
     _ = W ^ b * (W * W ^ a) := by rw [identity_matrix_mul_tensorPow W]      -- `identity_matrix_is_left_unit_of_mat_mult`
@@ -271,7 +298,8 @@ theorem power_succ_of_W_real (a : ℕ) :
       = realMatrixOfRealEntries (W ^ (a + 1)) (matrix_pow_hasRealEntries W hW.1 (a + 1)) :=
         (real_matrix_of_real_entry_matrix_preserves_power W hW.1 (a + 1)).symm  -- 【冪の実数の行列】（`p → a + 1`）
     _ = realMatrixOfRealEntries (W ^ (a + 0 + 1)) (matrix_pow_hasRealEntries W hW.1 (a + 0 + 1)) :=
-        realMatrixOfRealEntries_congr (by rw [Nat.add_zero]) _ _            -- `ℤ` で `a + 1 = a + 0 + 1`
+        realMatrixOfRealEntries_congr (by rw [← moment_index_add_one_eq_add_zero_add_one a]) _ _
+                                                                            -- 【添字の等式】の `a + 1 = (a + 0) + 1`
     _ = realMatrixOfRealEntries (W ^ 0 * (W * W ^ a))
           (matrix_mul_hasRealEntries _ _ (matrix_pow_hasRealEntries W hW.1 0) hWWa) :=
         realMatrixOfRealEntries_congr (power_of_W_split_with_W W a 0) _ _   -- 【冪の分け方】の `Mat(d,ℂ)` の二つ目の鎖（`b → 0`）
@@ -348,7 +376,7 @@ theorem moment_even_pos
   set WR := realMatrixOfRealEntries W hW.1
   calc momentWReal W hW x (2 * a)
       = x ⬝ᵥ (WR ^ (2 * a)) *ᵥ x := rfl                                     -- `m_k := x^⊤(W_ℝ)^kx`
-    _ = x ⬝ᵥ (WR ^ (a + a)) *ᵥ x := by rw [Nat.two_mul]                     -- `ℤ` で `2a = a + a`
+    _ = x ⬝ᵥ (WR ^ (a + a)) *ᵥ x := by rw [moment_index_two_mul_eq_add a]   -- 【添字の等式】の `2a = a + a`
     _ = x ⬝ᵥ (WR ^ a * ((1 : Matrix (Conf M) (Conf M) ℝ) * WR ^ a)) *ᵥ x := by
         rw [power_of_W_real_split_with_identity W hW a a]                   -- 【冪の分け方】の一つ目（`b → a`）
     _ = ((WR ^ a) *ᵥ x) ⬝ᵥ (1 : Matrix (Conf M) (Conf M) ℝ) *ᵥ ((WR ^ a) *ᵥ x) :=
@@ -364,7 +392,7 @@ theorem moment_odd_pos
   set WR := realMatrixOfRealEntries W hW.1
   calc momentWReal W hW x (2 * a + 1)
       = x ⬝ᵥ (WR ^ (2 * a + 1)) *ᵥ x := rfl                                 -- `m_k := x^⊤(W_ℝ)^kx`
-    _ = x ⬝ᵥ (WR ^ (a + a + 1)) *ᵥ x := by rw [Nat.two_mul]                 -- `ℤ` で `2a + 1 = a + a + 1`
+    _ = x ⬝ᵥ (WR ^ (a + a + 1)) *ᵥ x := by rw [moment_index_two_mul_add_one_eq a]  -- 【添字の等式】の `2a + 1 = (a + a) + 1`
     _ = x ⬝ᵥ (WR ^ a * (WR * WR ^ a)) *ᵥ x := by
         rw [power_of_W_real_split_with_W_real W hW a a]                     -- 【冪の分け方】の二つ目（`b → a`）
     _ = ((WR ^ a) *ᵥ x) ⬝ᵥ WR *ᵥ ((WR ^ a) *ᵥ x) :=
@@ -395,7 +423,8 @@ theorem moment_sq_le_with_W_real
         rw [power_of_W_real_split_with_W_real W hW a a,
           power_of_W_real_split_with_W_real W hW b b]                       -- 【冪の分け方】の二つ目を両因子へ同時に
     _ = (x ⬝ᵥ (WR ^ (2 * a + 1)) *ᵥ x) * (x ⬝ᵥ (WR ^ (2 * b + 1)) *ᵥ x) := by
-        rw [Nat.two_mul, Nat.two_mul]                                       -- `ℤ` で `a + a + 1 = 2a + 1`, `b + b + 1 = 2b + 1`
+        rw [moment_index_two_mul_add_one_eq a, moment_index_two_mul_add_one_eq b]
+                                                                            -- 【添字の等式】の `2a + 1 = (a + a) + 1` を右辺から左辺へ `(a → a)`, `(a → b)` で両因子へ
     _ = momentWReal W hW x (2 * a + 1) * momentWReal W hW x (2 * b + 1) := rfl
                                                                             -- `m_k := x^⊤(W_ℝ)^kx` を両因子へ同時に
 
@@ -422,7 +451,7 @@ theorem moment_sq_le_with_real_identity (x : Conf M → ℝ) (a b : ℕ) :
         rw [power_of_W_real_split_with_identity W hW a a,
           power_of_W_real_split_with_identity W hW b b]                     -- 【冪の分け方】の一つ目を両因子へ同時に
     _ = (x ⬝ᵥ (WR ^ (2 * a)) *ᵥ x) * (x ⬝ᵥ (WR ^ (2 * b)) *ᵥ x) := by
-        rw [Nat.two_mul, Nat.two_mul]                                       -- `ℤ` で `a + a = 2a`, `b + b = 2b`
+        rw [moment_index_two_mul_eq_add a, moment_index_two_mul_eq_add b]  -- 【添字の等式】の `2a = a + a` を右辺から左辺へ `(a → a)`, `(a → b)` で両因子へ
     _ = momentWReal W hW x (2 * a) * momentWReal W hW x (2 * b) := rfl      -- `m_k := x^⊤(W_ℝ)^kx` を両因子へ同時に
 
 /-- **仮定 `hW`・`hWRsymm`・`hpd` を持つ任意の `W` についての一般形**（人手 `moment_log_convexity`。本文の `W` の版は `moment_log_convexity_physical`）: 単位ベクトル `x`（`‖x‖ = 1`）について、すべての `k ≥ 0` で `m_k > 0`、

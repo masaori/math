@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 - ブロック: `maxeig_008b_claim_moment_log_convexity`（モーメント列 `m_k := x^⊤(W_ℝ)^kx` の正値性 `m_k > 0` と対数凸性 `m_k^2 ≤ m_{k−1}m_{k+1}`。`W_ℝ := ϱ(W)` は `def_W_real`）
-- 範囲: 証明の七つの準備（【冪の実数の行列】【冪の対称性】【(W_ℝ)^ax の成分】【冪の分け方】【二つの冪で挟んだ値】【I_ℝ と W_ℝ の正値性】【(W_ℝ)^ax は零でない】）、
+- 範囲: 証明の八つの準備（【冪の実数の行列】【冪の対称性】【(W_ℝ)^ax の成分】【添字の等式】【冪の分け方】【二つの冪で挟んだ値】【I_ℝ と W_ℝ の正値性】【(W_ℝ)^ax は零でない】）、
   【正値性】の二つの鎖、【P = W_ℝ の不等式】【P = I_ℝ の不等式】の鎖、奇数・偶数の場合分けの鎖と添字の確認、主張そのもの。
 - 記号は証明のとおり `d := 2_ℤ^{M_col} ∈ ℤ_{≥1}`（`def_power_of_integer` の ℤ の冪。`power_of_two_in_integers_is_at_least_one` より `ℤ_{≥1}` の元）、`u^(a) := (W_ℝ)^ax`、`I := I_{Mat(d,C)}`、`I_ℝ := I_{Mat(d,R)}`、`C ∈ {I, W}`。
 - `check_proof_lines` は実数の側の行を、`W_ℝ` を QQ の行列 `P` として確かめる。`check_varrho_lines` は複素行列 `W`（QQbar）と `W_ℝ = ϱ(W)`（AA）を別々に作り、`ϱ` で運ぶ行を確かめる。
@@ -18,6 +18,7 @@
 | 【冪の実数の行列】（`(W^p)_ℝ = (W_ℝ)^p`、`I_ℝ = (W_ℝ)^0 = (W^0)_ℝ = ϱ(I)`） | `check_varrho_lines`: 両側を `def_exp` (1) の漸化式で組んだ冪の比較と、3 段の等号 | **PASS** |
 | 【冪の対称性】（`((W_ℝ)^p)_kl` の `r_ℂ` から `((W_ℝ)^p)_lk` の `r_ℂ` までの 6 段と単射性の結論） | `check_varrho_lines`: 6 段の等号を全成分で、`(W^p)^⊤ = W^p`、結論の `((W_ℝ)^p)_kl = ((W_ℝ)^p)_lk`。`check_proof_lines`: `def_matrix_transpose` の式で作った転置と一致 | **PASS** |
 | 【(W_ℝ)^ax の成分】（`u^(a)_l = Σ_m ((W_ℝ)^a)_lm x_m`） | 成分の式と組み込みの積 `P^a x` | **PASS** |
+| 【添字の等式】（`(a+b)+1 = (b+a)+1 = b+(a+1) = b+(1+a)`、`1 = 0+1`、`a+1 = (a+0)+1`、`2a = (1+1)a = 1·a+1·a = a+a`、`2a+1 = (a+a)+1`） | `check_proof_lines`: 各段の等号を ZZ で、確かめる最大の指数以下の全ての `a`, `b` で | **PASS** |
 | 【冪の分け方】の `Mat(d,ℂ)` の鎖（`W^{a+b} = W^{b+a} = W^bW^a = W^b(IW^a)`、`W^{a+b+1} = … = W^b(WW^a)` の 7 段） | `check_varrho_lines`: 3 段・7 段の行列の等号（QQbar） | **PASS** |
 | 【冪の分け方】の `ϱ` で運ぶ鎖（`(W_ℝ)^s = (W^s)_ℝ = (W^b(CW^a))_ℝ = (W^b)_ℝ(CW^a)_ℝ = (W^b)_ℝ(C_ℝ(W^a)_ℝ) = (W_ℝ)^b(C_ℝ(W_ℝ)^a)`、`C = I, W`） | `check_varrho_lines`: `(CW^a)_ℝ = C_ℝ(W^a)_ℝ` と 5 段の等号。`check_proof_lines`: 結論の 2 式を QQ で | **PASS** |
 | 【二つの冪で挟んだ値】（`x^⊤((W_ℝ)^b(C_ℝ(W_ℝ)^a))x = ΣΣx_i(…)_ijx_j = … = ΣΣu^(b)_l(C_ℝ)_lmu^(a)_m = (u^(b))^⊤C_ℝu^(a)`） | 10 段の等号を `C_ℝ = I_ℝ, W_ℝ` と全ての `(a, b)` で。別の経路として、組み込みの積の `(P^bx)^⊤C_ℝ(P^ax)` と、左辺が `m_{a+b}`・`m_{a+b+1}` に等しいこと | **PASS** |
@@ -31,9 +32,9 @@
 `_lines.sage` の `check_proof_lines` と `check_varrho_lines` を二つの検算が呼ぶ（`check_varrho_lines` は行列ごとに 1 回）。
 
 - `check_generic_positive_definite_matrices.sage`: 証明が使う `W` の性質は「成分が実数で対称」「正定値（実の `y ≠ 0` で `y^⊤Wy > 0`）」だけなので、
-  `P := A^⊤A`（`A` は列が一次独立な整数行列、`n = 1..5`）の有理行列 20 個と、`x = e_1` と逆立体射影で作った有理の単位ベクトル 2 本（`n = 1` では `x = (−1)` の 1 本）の 56 組で確かめる。等号 174238 個、不等号 5792 個。
+  `P := A^⊤A`（`A` は列が一次独立な整数行列、`n = 1..5`）の有理行列 20 個と、`x = e_1` と逆立体射影で作った有理の単位ベクトル 2 本（`n = 1` では `x = (−1)` の 1 本）の 56 組で確かめる。等号 186398 個、不等号 5792 個。
 - `check_symmetrized_transfer_matrix.sage`: 本文の `W = (BV_2)B`（`def_symmetrized_transfer_matrix`）を `K_1 := 2 log y`、`K_2 := log x`
-  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。`x` は `e_1` と逆立体射影の有理の単位ベクトル。等号 93358 個、不等号 1296 個。
+  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。`x` は `e_1` と逆立体射影の有理の単位ベクトル。等号 95694 個、不等号 1296 個。
 
 `W` の作り方、ノルム・`x^⊤Py`・行列とベクトルの積・冪・正定値性の判定（実対称な行列の特性多項式の係数の符号）の関数は、
 `sagemath/check/rayleigh_bounds_operator_norm/_prelude.sage` を読み込んで使う。

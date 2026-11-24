@@ -2642,6 +2642,49 @@ I_{\mathbb{R}}
         " である。",
       ]),
       paragraph([
+        "【添字の等式】",
+        math(String.raw`a, b \in \mathbb{Z}_{\geq 0}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a+b)+1_{\mathbb{Z}}
+&=(b+a)+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\ x+y=y+x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to a,\ y \to b)\bigr)\\
+&=b+(a+1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x+y)+t=x+(y+t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to b,\ y \to a,\ t \to 1_{\mathbb{Z}})\bigr)\\
+&=b+(1_{\mathbb{Z}}+a)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\ x+y=y+x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to a,\ y \to 1_{\mathbb{Z}})\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{Z}}
+&=0_{\mathbb{Z}}+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}}+x=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+a+1_{\mathbb{Z}}
+&=(a+0_{\mathbb{Z}})+1_{\mathbb{Z}}
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ x+0_{\mathbb{Z}}=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to a)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+2_{\mathbb{Z}}\cdot a
+&=(1_{\mathbb{Z}}+1_{\mathbb{Z}})\cdot a
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}}:=1_{\mathbb{Z}}+1_{\mathbb{Z}}\bigr)\\
+&=1_{\mathbb{Z}}\cdot a+1_{\mathbb{Z}}\cdot a
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ (x+y)\cdot t=x\cdot t+y\cdot t\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}},\ y \to 1_{\mathbb{Z}},\ t \to a)\bigr)\\
+&=a+a
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の単位元}\ 1_{\mathbb{Z}}\cdot x=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to a)\ \text{を 2 か所へ}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+2_{\mathbb{Z}}\cdot a+1_{\mathbb{Z}}
+&=(a+a)+1_{\mathbb{Z}}
+&&\bigl(\because\ \text{上の}\ 2_{\mathbb{Z}}\cdot a=a+a\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+      paragraph([
         "【冪の分け方】",
         math(String.raw`a, b \in \mathbb{Z}_{\geq 0}`),
         " について、",
@@ -2651,7 +2694,7 @@ I_{\mathbb{R}}
       displayMath(String.raw`\begin{aligned}
 W^{a+b}
 &=W^{b+a}
-&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\bigr)\\
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\ x+y=y+x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to a,\ y \to b)\bigr)\\
 &=W^bW^a
 &&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to b,\ q \to a)\bigr)\\
 &=W^b\bigl(IW^a\bigr)
@@ -2661,13 +2704,13 @@ W^{a+b}
       displayMath(String.raw`\begin{aligned}
 W^{a+b+1}
 &=W^{b+(1+a)}
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ a+b+1 = b+(1+a)\bigr)\\
+&&\bigl(\because\ \text{【添字の等式】の}\ (a+b)+1_{\mathbb{Z}}=b+(1_{\mathbb{Z}}+a)\bigr)\\
 &=W^bW^{1+a}
 &&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to b,\ q \to 1+a)\bigr)\\
 &=W^b\bigl(W^1W^a\bigr)
 &&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to 1,\ q \to a)\bigr)\\
 &=W^b\bigl(W^{0+1}W^a\bigr)
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 1 = 0+1\bigr)\\
+&&\bigl(\because\ \text{【添字の等式】の}\ 1_{\mathbb{Z}}=0_{\mathbb{Z}}+1_{\mathbb{Z}}\bigr)\\
 &=W^b\bigl((W^0W)W^a\bigr)
 &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}\bigr)\\
 &=W^b\bigl((IW)W^a\bigr)
@@ -2904,7 +2947,7 @@ u^{(0)}_l
 &=(W^{a+1})_{\mathbb{R}}
 &&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to a+1)\bigr)\\
 &=(W^{a+0+1})_{\mathbb{R}}
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ a+1 = a+0+1\bigr)\\
+&&\bigl(\because\ \text{【添字の等式】の}\ a+1_{\mathbb{Z}}=(a+0_{\mathbb{Z}})+1_{\mathbb{Z}}\bigr)\\
 &=\bigl(W^0(WW^a)\bigr)_{\mathbb{R}}
 &&\bigl(\because\ \text{【冪の分け方】の}\ \mathrm{Mat}(d,\mathbb{C})\ \text{の二つ目の鎖}\ (b \to 0)\bigr)\\
 &=\bigl(I(WW^a)\bigr)_{\mathbb{R}}
@@ -2995,7 +3038,7 @@ m_{2a}
 &=x^\top (W_{\mathbb{R}})^{2a}x
 &&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\bigr)\\
 &=x^\top (W_{\mathbb{R}})^{a+a}x
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a = a+a\bigr)\\
+&&\bigl(\because\ \text{【添字の等式】の}\ 2_{\mathbb{Z}}\cdot a=a+a\bigr)\\
 &=x^\top\Bigl((W_{\mathbb{R}})^a\bigl(I_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)x
 &&\bigl(\because\ \text{【冪の分け方】の一つ目}\ (b \to a)\bigr)\\
 &=\bigl(u^{(a)}\bigr)^\top I_{\mathbb{R}}\,u^{(a)}
@@ -3013,7 +3056,7 @@ m_{2a+1}
 &=x^\top (W_{\mathbb{R}})^{2a+1}x
 &&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\bigr)\\
 &=x^\top (W_{\mathbb{R}})^{a+a+1}x
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a+1 = a+a+1\bigr)\\
+&&\bigl(\because\ \text{【添字の等式】の}\ 2_{\mathbb{Z}}\cdot a+1_{\mathbb{Z}}=(a+a)+1_{\mathbb{Z}}\bigr)\\
 &=x^\top\Bigl((W_{\mathbb{R}})^a\bigl(W_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)x
 &&\bigl(\because\ \text{【冪の分け方】の二つ目}\ (b \to a)\bigr)\\
 &=\bigl(u^{(a)}\bigr)^\top W_{\mathbb{R}}\,u^{(a)}
@@ -3046,7 +3089,7 @@ m_{2a+1}
 &=\left(x^\top (W_{\mathbb{R}})^{a+a+1}x\right)\left(x^\top (W_{\mathbb{R}})^{b+b+1}x\right)
 &&\bigl(\because\ \text{【冪の分け方】の二つ目を両因子へ同時に適用}\bigr)\\
 &=\left(x^\top (W_{\mathbb{R}})^{2a+1}x\right)\left(x^\top (W_{\mathbb{R}})^{2b+1}x\right)
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ a+a+1 = 2a+1,\ b+b+1 = 2b+1\bigr)\\
+&&\bigl(\because\ \text{【添字の等式】の}\ 2_{\mathbb{Z}}\cdot a+1_{\mathbb{Z}}=(a+a)+1_{\mathbb{Z}}\ \text{を右辺から左辺へ}\ (a \to a),\ (a \to b)\ \text{で両因子へ同時に適用}\bigr)\\
 &=m_{2a+1}\,m_{2b+1}
 &&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\ \text{を両因子へ同時に適用}\bigr)
 \end{aligned}`),
@@ -3073,7 +3116,7 @@ m_{2a+1}
 &=\left(x^\top (W_{\mathbb{R}})^{a+a}x\right)\left(x^\top (W_{\mathbb{R}})^{b+b}x\right)
 &&\bigl(\because\ \text{【冪の分け方】の一つ目を両因子へ同時に適用}\bigr)\\
 &=\left(x^\top (W_{\mathbb{R}})^{2a}x\right)\left(x^\top (W_{\mathbb{R}})^{2b}x\right)
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ a+a = 2a,\ b+b = 2b\bigr)\\
+&&\bigl(\because\ \text{【添字の等式】の}\ 2_{\mathbb{Z}}\cdot a=a+a\ \text{を右辺から左辺へ}\ (a \to a),\ (a \to b)\ \text{で両因子へ同時に適用}\bigr)\\
 &=m_{2a}\,m_{2b}
 &&\bigl(\because\ m_k := x^\top (W_{\mathbb{R}})^kx\ \text{を両因子へ同時に適用}\bigr)
 \end{aligned}`),
@@ -3239,6 +3282,7 @@ m_k^{\,2}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りの「ℤ の根拠を名前だけで引く残り」、その二）: 【冪の分け方】【(W_ℝ)^ax は零でない】【正値性】【P = W_ℝ の不等式】【P = I_ℝ の不等式】の鎖は、冪の指数の等式を名前だけの「ℤ の加法の交換律」「ℤ で a+b+1 = b+(1+a)」「ℤ で 1 = 0+1」「ℤ で a+1 = a+0+1」「ℤ で 2a = a+a」「ℤ で 2a+1 = a+a+1」「ℤ で a+a+1 = 2a+1, b+b+1 = 2b+1」「ℤ で a+a = 2a, b+b = 2b」で引いていた。【冪の分け方】の前に準備【添字の等式】を置き、(a+b)+1 = b+(1+a)（交換律・結合律・交換律の 3 行）、1 = 0+1（和の単位元の 1 行）、a+1 = (a+0)+1（和の単位元の 1 行）、2a = a+a（def_power_of_integer の 2_ℤ := 1_ℤ + 1_ℤ・分配律・乗法の単位元の 3 行）、2a+1 = (a+a)+1（前の等式の 1 行）を set_and_algebra_notation の ℤ の行と def_power_of_integer を一行ずつ引く鎖で示し、主の鎖の 7 か所をその参照にした。W^{a+b} = W^{b+a} の交換律には set_and_algebra_notation の参照と代入を書いた。主張と主の鎖の値は不変。Lean の具体版の指数の omega・Nat.zero_add・Nat.add_zero・Nat.two_mul の段も、同じ鎖の補題（moment_index_*）にした。",
         "2026-11-24（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りの「ℤ の根拠を名前だけで引く残り」）: 奇数・偶数の場合の添字の確認は、根拠を名前だけの「ℤ の加法」「ℤ の分配律」「ℤ の分配律と加法」「両辺から 1 を引く」「両辺へ 1 を足す」で書き、主の鎖の後ろに括弧書きで置いていた。添字の確認を各場合の主の鎖の前に移し、set_and_algebra_notation の ℤ の加法の結合律・乗法の単位元・分配律・和の単位元・加法の逆元の行と def_power_of_integer の 2_ℤ := 1_ℤ + 1_ℤ、def_int_difference を一行ずつ引く鎖にした（等号の行は奇数の a+b・2a・2b が 6・6・6 行、偶数の (a+b)+1・2a+1・2b+1 が 8・8・4 行）。偶数の場合の 2p+3 は ℤ の数字 3 を定めていないので (2p+2)+1 のまま書き、主の鎖の m_{2p}m_{2p+2}・m_{2p+1}m_{2p+3} の行は、添字の確認の等式を一つずつ引く 2 行にした（主張と主の鎖の両端は不変）。Lean の具体版 moment_log_convexity の添字の確認の omega も、ℕ の同じ段の calc にした。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^a x は零でない】の x ≠ 0 を、def_rayleigh_sup の中の 6 行の鎖を散文で指す書き方から、主張 unit_norm_vector_is_nonzero（d → d、x → x）を引く形にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^a x は零でない】の √0 = 0 の根拠（definition_of_sqrt_r_positive の 0 ≥ 0, 0^2 = 0）を sqrt_of_real_zero_is_zero の参照にした（値は不変）。",

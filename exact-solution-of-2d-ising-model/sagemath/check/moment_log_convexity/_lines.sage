@@ -227,6 +227,15 @@ def check_proof_lines(P, x, kmax, what):
         for s, t in zip(L, L[1:]):
             eq(s, t, f"{what}: 背理法の鎖の 5〜7 行目 a={a}")
         assert u != 0 and Wu != 0, f"{what}: W^ax ≠ 0 a={a}"
+    # 【添字の等式】: (a+b)+1 = (b+a)+1 = b+(a+1) = b+(1+a)、1 = 0+1、a+1 = (a+0)+1、
+    # 2a = (1+1)a = 1·a+1·a = a+a、2a+1 = (a+a)+1（ZZ で各段の等号）
+    chain(ZZ, [1, 0 + 1], "【添字の等式】の 1 = 0+1")
+    for a in range(K + 1):
+        chain(ZZ, [a + 1, (a + 0) + 1], f"【添字の等式】の a+1 a={a}")
+        chain(ZZ, [2 * a, (1 + 1) * a, 1 * a + 1 * a, a + a], f"【添字の等式】の 2a a={a}")
+        chain(ZZ, [2 * a + 1, (a + a) + 1], f"【添字の等式】の 2a+1 a={a}")
+        for b in range(K + 1):
+            chain(ZZ, [(a + b) + 1, (b + a) + 1, b + (a + 1), b + (1 + a)], f"【添字の等式】の (a+b)+1 a={a}, b={b}")
     # 【正値性】: m_{2a} = x^⊤(W_ℝ)^{a+a}x = x^⊤(W^a(IW^a))x = (u^(a))^⊤Iu^(a) > 0、m_{2a+1} も同様に W で
     for a in range(K // 2 + 1):
         if 2 * a <= K:
