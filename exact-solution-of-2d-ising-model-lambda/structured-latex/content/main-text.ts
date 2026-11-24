@@ -77122,11 +77122,11 @@ A:=\operatorname{rat}_{\Lambda}(\mu_N)\in\mathbb{Q},\qquad 0\le A-1`),
                     displayMath(String.raw`\begin{aligned}
 A-1
 &=r\,h
-&&(\because\ r=(A-1)/h\text{ と }h\ne0\text{。}\mathbb{Q}\text{ の四則})\\
+&&(\because\ r=(A-1)/h\text{ と }h\ne0\text{、}\mathbb{Q}\text{ の四則})\\
 &=\frac{\operatorname{num}(r)}{\operatorname{den}(r)}\,h
 &&(\because\ r\text{ の既約分数表示})\\
 &\le\operatorname{num}(r)\,h
-&&(\because\ \text{上の }\tfrac{\operatorname{num}(r)}{\operatorname{den}(r)}\le\operatorname{num}(r)\text{ に }0<h\text{ を掛ける。}\mathbb{Q}\text{ の非負元による乗法単調性})\\
+&&(\because\ \text{上の }\tfrac{\operatorname{num}(r)}{\operatorname{den}(r)}\le\operatorname{num}(r)\text{ に }0<h\text{ を掛け、}\mathbb{Q}\text{ の非負元による乗法単調性})\\
 &=n\,h
 &&(\because\ n\text{ の定義})
 \end{aligned}`),

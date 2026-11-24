@@ -1,19 +1,23 @@
-import Ising2DLambda.AlgebraicEigenvalue.PerfectMatchingSign
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PerfectMatchingSign
+import Mathlib.Algebra.Ring.Defs
+import Mathlib.Tactic.Ring
 
 namespace Ising2DLambda.NecSuf.AlgebraicEigenvalue
 
-open Ising2DLambda.AlgebraicEigenvalue
 open scoped Classical
 
-variable {J : Type*} [Fintype J] [LinearOrder J]
+variable {J R : Type*} [CommRing R]
 
-/-- 処理済みの端点を前置列に残すことで、隣接交換を完全列挙へ適用する。 -/
-private theorem orientationSignWithPrefix (S : Set J) (l : List (J × J)) :
+/-- 処理済みの端点を前置列に残し、各対の反転を完全列挙上の隣接交換へ還元する。 -/
+private theorem orientationSignWithPrefix (F : List J → R)
+    (hswap : ∀ (u : List J) (a b : J) (v : List J),
+      IsCompleteWord (u ++ a :: b :: v) → F (u ++ b :: a :: v) = -F (u ++ a :: b :: v))
+    (S : Set J) (l : List (J × J)) :
     ∀ u : List J, IsCompleteWord (u ++ matchingPairWord l) →
-      matchingWordSign (u ++ l.flatMap (fun p =>
+      F (u ++ l.flatMap (fun p =>
         if p.1 ∈ S then [p.1, p.2] else [p.2, p.1])) =
-      (l.map (fun p => if p.1 ∈ S then (1 : ℤ) else -1)).prod *
-        matchingWordSign (u ++ matchingPairWord l) := by
+      (l.map (fun p => if p.1 ∈ S then (1 : R) else -1)).prod *
+        F (u ++ matchingPairWord l) := by
   classical
   induction l with
   | nil =>
@@ -28,20 +32,23 @@ private theorem orientationSignWithPrefix (S : Set J) (l : List (J × J)) :
         simpa [matchingPairWord, hp, List.append_assoc] using hstep
       · have hswapped := completeWord_swap u p.1 p.2 (matchingPairWord rest) hbase
         have hstep := ih (u ++ [p.2, p.1]) (by simpa using hswapped)
-        have hswap := matchingWordSign_swap u p.1 p.2 (matchingPairWord rest) hbase
+        have hsign := hswap u p.1 p.2 (matchingPairWord rest) hbase
         simp only [matchingPairWord, List.flatMap_cons, List.map_cons, List.prod_cons,
           if_neg hp] at hstep ⊢
-        simp only [matchingPairWord] at hswap
-        simp only [List.append_assoc, List.cons_append, List.nil_append] at hstep hswap ⊢
-        rw [hstep, hswap]
+        simp only [matchingPairWord] at hsign
+        simp only [List.append_assoc, List.cons_append, List.nil_append] at hstep hsign ⊢
+        rw [hstep, hsign]
         ring
 
-/-- 各対を昇順へ向け直すたびに、端点列の符号が一つ反転する。 -/
-theorem matchingPairWordOrientationSign (l : List (J × J)) (S : Set J)
+/-- 各対を向け直すたびに端点列の値が一つ反転する。 -/
+theorem matchingPairWordOrientationSign (F : List J → R)
+    (hswap : ∀ (u : List J) (a b : J) (v : List J),
+      IsCompleteWord (u ++ a :: b :: v) → F (u ++ b :: a :: v) = -F (u ++ a :: b :: v))
+    (l : List (J × J)) (S : Set J)
     (hcomplete : IsCompleteWord (matchingPairWord l)) :
-    matchingWordSign (l.flatMap fun p => if p.1 ∈ S then [p.1, p.2] else [p.2, p.1]) =
-      (l.map fun p => if p.1 ∈ S then (1 : ℤ) else -1).prod *
-        matchingWordSign (matchingPairWord l) := by
-  simpa using orientationSignWithPrefix S l [] (by simpa using hcomplete)
+    F (l.flatMap fun p => if p.1 ∈ S then [p.1, p.2] else [p.2, p.1]) =
+      (l.map fun p => if p.1 ∈ S then (1 : R) else -1).prod *
+        F (matchingPairWord l) := by
+  simpa using orientationSignWithPrefix F hswap S l [] (by simpa using hcomplete)
 
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue

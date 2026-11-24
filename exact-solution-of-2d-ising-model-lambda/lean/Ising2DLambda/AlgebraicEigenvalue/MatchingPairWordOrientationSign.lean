@@ -50,7 +50,9 @@ theorem matchingPairWordOrientationSign_from_necSuf (D : PerfectMatching J) (S :
       if p.1 ∈ S then [p.1, p.2] else [p.2, p.1])) =
       ((matchingCanonicalEnumeration D).map (fun p =>
         if p.1 ∈ S then (1 : ℤ) else -1)).prod * perfectMatchingSign D := by
-  exact NecSuf.AlgebraicEigenvalue.matchingPairWordOrientationSign _ _
-    (matchingEnumeration_complete D _ (matchingCanonicalEnumeration_spec D))
+  apply NecSuf.AlgebraicEigenvalue.matchingPairWordOrientationSign matchingWordSign
+  · intro u a b v h
+    exact matchingWordSign_swap u a b v h
+  · exact matchingEnumeration_complete D _ (matchingCanonicalEnumeration_spec D)
 
 end Ising2DLambda.AlgebraicEigenvalue

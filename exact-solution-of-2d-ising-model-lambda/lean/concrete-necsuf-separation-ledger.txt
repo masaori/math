@@ -2,9 +2,7 @@
 # DEP 行は「使う側の分類・使う側の宣言」、IMPORT 行は「取り込む側の分類・モジュール・取り込まれる側の分類・モジュール」。
 # 行は減らすだけにする。直して違反でなくなった行は同じ回に消す。
 DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.emptyWeightedPfaffianDeterminant
-DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWordOrientationSign
 DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWordSignMap_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientationSignWithPrefix
 DEP	necsuf	Ising2DLambda.NecSuf.CriticalExponent.criticalPoint_rationalPartitionInterval_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.activeTwoStep_periodic
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.alternatingCycle
@@ -156,7 +154,6 @@ IMPORT	concrete	Ising2DLambda.KacWard.VertexSimpleBoundaryNonloopPropagation	nec
 IMPORT	concrete	Ising2DLambda.KacWard.VertexwiseCrossingNumber	necsuf	Ising2DLambda.NecSuf.KacWard.VertexwiseCrossingNumber
 IMPORT	concrete	Ising2DLambda.KacWard.WalkSideInteriorBandConnected	necsuf	Ising2DLambda.NecSuf.KacWard.WalkSideInteriorBandConnected
 IMPORT	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.EmptyPfaffianDeterminant	concrete	Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialPfaffian
-IMPORT	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairWordOrientationSign	concrete	Ising2DLambda.AlgebraicEigenvalue.PerfectMatchingSign
 IMPORT	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairWordSignMap	concrete	Ising2DLambda.AlgebraicEigenvalue.PerfectMatchingSign
 IMPORT	necsuf	Ising2DLambda.NecSuf.CriticalExponent.CriticalPointRationalPartitionInterval	concrete	Ising2DLambda.FisherZero.RealClosedSubfield
 IMPORT	necsuf	Ising2DLambda.NecSuf.FisherZero.QuadraticLinearValuesAdjoin	concrete	Ising2DLambda.FisherZero.QuadraticLinearValuesAdjoin
