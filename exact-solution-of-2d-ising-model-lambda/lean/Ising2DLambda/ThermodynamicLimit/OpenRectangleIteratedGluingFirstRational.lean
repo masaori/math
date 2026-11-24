@@ -21,7 +21,6 @@ import Ising2DLambda.ThermodynamicLimit.OpenRectangleGluingInequalityRational
 
 namespace Ising2DLambda.ThermodynamicLimit
 
-open NecSuf.ThermodynamicLimit
 
 variable (a b : ℕ)
 
@@ -75,7 +74,7 @@ theorem openPartitionValueRat_iteratedGlueFirst_bounds_of_le_one
                 openPartitionValueRat a b q) := by
               rw [mul_assoc, ← mul_assoc (q ^ ((k - 1) * b))]
           _ ≤ q ^ b * (openPartitionValueRat (k * a) b q * openPartitionValueRat a b q) := by
-              apply mul_le_mul_of_nonneg_left _ (pow_pos_by_induction hq0 b).le
+              apply mul_le_mul_of_nonneg_left _ (pow_pos_by_induction_rat hq0 b).le
               exact mul_le_mul_of_nonneg_right ih.1 hz0
           _ ≤ openPartitionValueRat (k * a + a) b q := hglue.1
           _ = openPartitionValueRat ((k + 1) * a) b q := by rw [Nat.succ_mul]
@@ -135,7 +134,7 @@ theorem openPartitionValueRat_iteratedGlueFirst_bounds_of_one_le
               hglue.2
           _ ≤ q ^ b * (q ^ ((k - 1) * b) * openPartitionValueRat a b q ^ k *
                 openPartitionValueRat a b q) := by
-              apply mul_le_mul_of_nonneg_left _ (pow_pos_by_induction hq0 b).le
+              apply mul_le_mul_of_nonneg_left _ (pow_pos_by_induction_rat hq0 b).le
               exact mul_le_mul_of_nonneg_right ih.2 hz0
           _ = q ^ b * q ^ ((k - 1) * b) *
                 (openPartitionValueRat a b q ^ k * openPartitionValueRat a b q) := by

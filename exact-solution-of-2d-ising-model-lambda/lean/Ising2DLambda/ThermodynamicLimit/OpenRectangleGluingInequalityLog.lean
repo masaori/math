@@ -21,7 +21,6 @@ import Ising2DLambda.ThermodynamicLimit.OpenRectangleGluingInequalityRational
 namespace Ising2DLambda.ThermodynamicLimit
 
 open FreeEntropy
-open NecSuf.ThermodynamicLimit
 
 /-- 準備の第二（前半）: 下端の値の対数を Λ の中で開く三段
 `log(q^n·(Z₁·Z₂)) = n·log q + log Z₁ + log Z₂`（`Z₁, Z₂ > 0`）。 -/
@@ -32,7 +31,7 @@ theorem logRat_gluingLowerValue_eq (n : ℕ) {q Z₁ Z₂ : ℚ}
     logRat (q ^ n * (Z₁ * Z₂))
         -- 対数の加法性（claim_log_additive）
         = logRat (q ^ n) + logRat (Z₁ * Z₂) :=
-          logRat_mul (pow_pos_by_induction hq0 _) (mul_pos h1 h2)
+          logRat_mul (pow_pos_by_induction_rat hq0 _) (mul_pos h1 h2)
     -- 対数の冪（claim_log_power を k := n で）
     _ = n • logRat q + logRat (Z₁ * Z₂) := by rw [logRat_pow hq0]
     -- 対数の加法性（claim_log_additive）
@@ -60,7 +59,7 @@ theorem logOrderLE_openRectangleGlueFirstLog_bounds_of_le_one
   have hZ : 0 < openPartitionValueRat (a + c) b q := openPartitionValueRat_pos (a + c) b hq0
   have hup : 0 < openPartitionValueRat a b q * openPartitionValueRat c b q := mul_pos hZab hZcb
   have hlow : 0 < q ^ b * (openPartitionValueRat a b q * openPartitionValueRat c b q) :=
-    mul_pos (pow_pos_by_induction hq0 _) hup
+    mul_pos (pow_pos_by_induction_rat hq0 _) hup
   -- 接合不等式（claim_open_rectangle_gluing_inequality_rational の第一の座標の向き・0<q≤1）
   have hbounds := openPartitionValueRat_glueFirst_bounds_of_le_one (a := a) (b := b) (c := c)
     ha hc hq0 hq1
@@ -87,7 +86,7 @@ theorem logOrderLE_openRectangleGlueFirstLog_bounds_of_one_le
   have hZ : 0 < openPartitionValueRat (a + c) b q := openPartitionValueRat_pos (a + c) b hq0
   have hup : 0 < openPartitionValueRat a b q * openPartitionValueRat c b q := mul_pos hZab hZcb
   have hlow : 0 < q ^ b * (openPartitionValueRat a b q * openPartitionValueRat c b q) :=
-    mul_pos (pow_pos_by_induction hq0 _) hup
+    mul_pos (pow_pos_by_induction_rat hq0 _) hup
   have hbounds := openPartitionValueRat_glueFirst_bounds_of_one_le (a := a) (b := b) (c := c)
     ha hc hq
   constructor
@@ -112,7 +111,7 @@ theorem logOrderLE_openRectangleGlueSecondLog_bounds_of_le_one
   have hZ : 0 < openPartitionValueRat a (b + c) q := openPartitionValueRat_pos a (b + c) hq0
   have hup : 0 < openPartitionValueRat a b q * openPartitionValueRat a c q := mul_pos hZab hZac
   have hlow : 0 < q ^ a * (openPartitionValueRat a b q * openPartitionValueRat a c q) :=
-    mul_pos (pow_pos_by_induction hq0 _) hup
+    mul_pos (pow_pos_by_induction_rat hq0 _) hup
   have hbounds := openPartitionValueRat_glueSecond_bounds_of_le_one (a := a) (b := b) (c := c)
     hb hc hq0 hq1
   constructor
@@ -136,7 +135,7 @@ theorem logOrderLE_openRectangleGlueSecondLog_bounds_of_one_le
   have hZ : 0 < openPartitionValueRat a (b + c) q := openPartitionValueRat_pos a (b + c) hq0
   have hup : 0 < openPartitionValueRat a b q * openPartitionValueRat a c q := mul_pos hZab hZac
   have hlow : 0 < q ^ a * (openPartitionValueRat a b q * openPartitionValueRat a c q) :=
-    mul_pos (pow_pos_by_induction hq0 _) hup
+    mul_pos (pow_pos_by_induction_rat hq0 _) hup
   have hbounds := openPartitionValueRat_glueSecond_bounds_of_one_le (a := a) (b := b) (c := c)
     hb hc hq
   constructor

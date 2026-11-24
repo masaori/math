@@ -21,7 +21,6 @@ import Ising2DLambda.ThermodynamicLimit.OpenRectangleIteratedGluingSecondRationa
 
 namespace Ising2DLambda.ThermodynamicLimit
 
-open NecSuf.ThermodynamicLimit
 
 /-- `claim_open_square_block_tiling_rational` の `0 < q ≤ 1` の場合。 -/
 theorem openPartitionValueRat_squareBlockTiling_bounds_of_le_one
@@ -37,8 +36,8 @@ theorem openPartitionValueRat_squareBlockTiling_bounds_of_le_one
     (k * a) a ha hq0 hq1 k hk
   -- 準備: 底は正
   have hlower0 : 0 < q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k := by
-    exact mul_pos (pow_pos_by_induction hq0 _)
-      (pow_pos_by_induction (openPartitionValueRat_pos a a hq0) _)
+    exact mul_pos (pow_pos_by_induction_rat hq0 _)
+      (pow_pos_by_induction_rat (openPartitionValueRat_pos a a hq0) _)
   -- 準備: 正の底の自然数冪は順序を保つ（両辺の k 乗）
   have hlowerPow := pow_le_pow_of_pos_of_le_by_induction_rat hlower0 hfirst.1 k
   have hupperPow := pow_le_pow_of_pos_of_le_by_induction_rat
@@ -47,7 +46,7 @@ theorem openPartitionValueRat_squareBlockTiling_bounds_of_le_one
   · calc q ^ ((k - 1) * (k * a)) *
           (q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k) ^ k
         ≤ q ^ ((k - 1) * (k * a)) * openPartitionValueRat (k * a) a q ^ k :=
-          mul_le_mul_of_nonneg_left hlowerPow (pow_pos_by_induction hq0 _).le
+          mul_le_mul_of_nonneg_left hlowerPow (pow_pos_by_induction_rat hq0 _).le
       _ ≤ openPartitionValueRat (k * a) (k * a) q := hsecond.1
   · calc openPartitionValueRat (k * a) (k * a) q
         ≤ openPartitionValueRat (k * a) a q ^ k := hsecond.2
@@ -65,7 +64,7 @@ theorem openPartitionValueRat_squareBlockTiling_bounds_of_one_le
   have hsecond := openPartitionValueRat_iteratedGlueSecond_bounds_of_one_le
     (k * a) a ha hq k hk
   have hbase0 : 0 < openPartitionValueRat a a q ^ k :=
-    pow_pos_by_induction (openPartitionValueRat_pos a a hq0) _
+    pow_pos_by_induction_rat (openPartitionValueRat_pos a a hq0) _
   have hstrip0 : 0 < openPartitionValueRat (k * a) a q := openPartitionValueRat_pos _ _ hq0
   have hlowerPow := pow_le_pow_of_pos_of_le_by_induction_rat hbase0 hfirst.1 k
   have hupperPow := pow_le_pow_of_pos_of_le_by_induction_rat hstrip0 hfirst.2 k
@@ -77,6 +76,6 @@ theorem openPartitionValueRat_squareBlockTiling_bounds_of_one_le
         ≤ q ^ ((k - 1) * (k * a)) * openPartitionValueRat (k * a) a q ^ k := hsecond.2
       _ ≤ q ^ ((k - 1) * (k * a)) *
           (q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k) ^ k :=
-          mul_le_mul_of_nonneg_left hupperPow (pow_pos_by_induction hq0 _).le
+          mul_le_mul_of_nonneg_left hupperPow (pow_pos_by_induction_rat hq0 _).le
 
 end Ising2DLambda.ThermodynamicLimit

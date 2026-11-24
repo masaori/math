@@ -21,7 +21,6 @@ import Ising2DLambda.ThermodynamicLimit.OpenSquareSubsquareComparisonRational
 namespace Ising2DLambda.ThermodynamicLimit
 
 open FreeEntropy
-open NecSuf.ThermodynamicLimit
 
 /-- 準備の第三（前半）: 下端の値の対数を Λ の中で開く二段
 `log(q^m·Z) = m·log q + log Z`（`Z > 0`）。 -/
@@ -30,7 +29,7 @@ theorem logRat_subsquareLowerValue_eq (m : ℕ) {q Z : ℚ} (hq0 : 0 < q) (hZ : 
   calc
     logRat (q ^ m * Z)
         -- 対数の加法性（claim_log_additive）
-        = logRat (q ^ m) + logRat Z := logRat_mul (pow_pos_by_induction hq0 _) hZ
+        = logRat (q ^ m) + logRat Z := logRat_mul (pow_pos_by_induction_rat hq0 _) hZ
     -- 対数の冪（claim_log_power を k := m で）
     _ = m • logRat q + logRat Z := by rw [logRat_pow hq0]
 
@@ -72,7 +71,7 @@ theorem logOrderLE_openSquareSubsquareLog_bounds_of_le_one
   have hZa : 0 < openPartitionValueRat a a q := openPartitionValueRat_pos a a hq0
   have hZL : 0 < openPartitionValueRat L L q := openPartitionValueRat_pos L L hq0
   have hlow : 0 < q ^ (a + L) * openPartitionValueRat a a q :=
-    mul_pos (pow_pos_by_induction hq0 _) hZa
+    mul_pos (pow_pos_by_induction_rat hq0 _) hZa
   have hup : 0 < ((2 ^ (L ^ 2 - a ^ 2) : ℕ) : ℚ) * (1 + q) ^ (2 * (L ^ 2 - a ^ 2)) *
       openPartitionValueRat a a q :=
     mul_pos (mul_pos (by positivity) (pow_pos h1q _)) hZa

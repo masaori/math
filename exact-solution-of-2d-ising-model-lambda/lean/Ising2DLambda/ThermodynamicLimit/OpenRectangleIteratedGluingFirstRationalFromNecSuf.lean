@@ -23,7 +23,7 @@ theorem openPartitionValueRat_iteratedGlueFirst_bounds_of_le_one_from_necSuf
   have h := NecSuf.ThermodynamicLimit.iterated_glue_pow_bounds_necSuf
     (fun n => openPartitionValueRat (n * a) b q) (openPartitionValueRat a b q)
     (q ^ b) 1
-    (openPartitionValueRat_pos a b hq0).le (pow_pos_by_induction hq0 b).le zero_le_one
+    (openPartitionValueRat_pos a b hq0).le (pow_pos_by_induction_rat hq0 b).le zero_le_one
     (by rw [Nat.one_mul])
     (fun m hm => by
       show q ^ b * (openPartitionValueRat (m * a) b q * openPartitionValueRat a b q) ≤
@@ -60,7 +60,7 @@ theorem openPartitionValueRat_iteratedGlueFirst_bounds_of_one_le_from_necSuf
   have h := NecSuf.ThermodynamicLimit.iterated_glue_pow_bounds_necSuf
     (fun n => openPartitionValueRat (n * a) b q) (openPartitionValueRat a b q)
     1 (q ^ b)
-    (openPartitionValueRat_pos a b hq0).le zero_le_one (pow_pos_by_induction hq0 b).le
+    (openPartitionValueRat_pos a b hq0).le zero_le_one (pow_pos_by_induction_rat hq0 b).le
     (by rw [Nat.one_mul])
     (fun m hm => by
       show (1 : ℚ) * (openPartitionValueRat (m * a) b q * openPartitionValueRat a b q) ≤

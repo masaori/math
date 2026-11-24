@@ -25,12 +25,12 @@ theorem logOrderLE_openSquareBlockTilingLog_bounds_of_le_one_from_necSuf
   have hZka : 0 < openPartitionValueRat (k * a) (k * a) q :=
     openPartitionValueRat_pos (k * a) (k * a) hq0
   have hinner : 0 < q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k :=
-    mul_pos (pow_pos_by_induction hq0 _) (pow_pos_by_induction hZa _)
+    mul_pos (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hZa _)
   have hlow : 0 < q ^ ((k - 1) * (k * a)) *
       (q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k) ^ k :=
-    mul_pos (pow_pos_by_induction hq0 _) (pow_pos_by_induction hinner _)
+    mul_pos (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hinner _)
   have hup : 0 < (openPartitionValueRat a a q ^ k) ^ k :=
-    pow_pos_by_induction (pow_pos_by_induction hZa _) _
+    pow_pos_by_induction_rat (pow_pos_by_induction_rat hZa _) _
   -- ブロック敷き詰め評価（claim_open_square_block_tiling_rational の 0<q≤1 の場合）
   have hbounds := openPartitionValueRat_squareBlockTiling_bounds_of_le_one a k ha hk hq0 hq1
   exact NecSuf.ThermodynamicLimit.twoSided_bounds_transport_through_monotone_map_necSuf
@@ -62,12 +62,12 @@ theorem logOrderLE_openSquareBlockTilingLog_bounds_of_one_le_from_necSuf
   have hZka : 0 < openPartitionValueRat (k * a) (k * a) q :=
     openPartitionValueRat_pos (k * a) (k * a) hq0
   have hinner : 0 < q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k :=
-    mul_pos (pow_pos_by_induction hq0 _) (pow_pos_by_induction hZa _)
+    mul_pos (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hZa _)
   have hlow : 0 < q ^ ((k - 1) * (k * a)) *
       (q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k) ^ k :=
-    mul_pos (pow_pos_by_induction hq0 _) (pow_pos_by_induction hinner _)
+    mul_pos (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hinner _)
   have hup : 0 < (openPartitionValueRat a a q ^ k) ^ k :=
-    pow_pos_by_induction (pow_pos_by_induction hZa _) _
+    pow_pos_by_induction_rat (pow_pos_by_induction_rat hZa _) _
   -- ブロック敷き詰め評価（claim_open_square_block_tiling_rational の 1≤q の場合）
   have hbounds := openPartitionValueRat_squareBlockTiling_bounds_of_one_le a k ha hk hq
   -- lower・upper の役割を 0<q≤1 の場合から入れ替えて、同じ必要十分版を引く

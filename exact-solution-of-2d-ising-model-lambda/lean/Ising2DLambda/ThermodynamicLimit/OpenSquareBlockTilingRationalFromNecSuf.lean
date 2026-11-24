@@ -24,7 +24,7 @@ theorem openPartitionValueRat_squareBlockTiling_bounds_of_le_one_from_necSuf
       (openPartitionValueRat (k * a) (k * a) q)
       (q ^ ((k - 1) * a)) 1 (q ^ ((k - 1) * (k * a))) 1 k
       (openPartitionValueRat_pos a a hq0).le (openPartitionValueRat_pos (k * a) a hq0).le
-      (pow_pos_by_induction hq0 _).le (pow_pos_by_induction hq0 _).le zero_le_one
+      (pow_pos_by_induction_rat hq0 _).le (pow_pos_by_induction_rat hq0 _).le zero_le_one
       (by simpa [one_mul] using hfirst) (by simpa [one_mul] using hsecond))
 
 theorem openPartitionValueRat_squareBlockTiling_bounds_of_one_le_from_necSuf
@@ -43,7 +43,7 @@ theorem openPartitionValueRat_squareBlockTiling_bounds_of_one_le_from_necSuf
       (openPartitionValueRat (k * a) (k * a) q)
       1 (q ^ ((k - 1) * a)) 1 (q ^ ((k - 1) * (k * a))) k
       (openPartitionValueRat_pos a a hq0).le (openPartitionValueRat_pos (k * a) a hq0).le
-      zero_le_one zero_le_one (pow_pos_by_induction hq0 _).le
+      zero_le_one zero_le_one (pow_pos_by_induction_rat hq0 _).le
       (by simpa [one_mul] using hfirst) (by simpa [one_mul] using hsecond))
 
 end Ising2DLambda.ThermodynamicLimit

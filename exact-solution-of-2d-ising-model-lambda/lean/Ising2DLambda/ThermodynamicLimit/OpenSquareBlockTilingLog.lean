@@ -20,7 +20,6 @@ import Ising2DLambda.ThermodynamicLimit.OpenSquareBlockTilingRational
 namespace Ising2DLambda.ThermodynamicLimit
 
 open FreeEntropy
-open NecSuf.ThermodynamicLimit
 
 /-- 準備の第二: 下からの評価の側の値の対数を Λ の中で開く六段
 `log(q^{(k-1)(ka)}·(q^{(k-1)a}·Z^op_{a,a}(q)^k)^k) = 2k(k-1)a·log q + k²·log Z^op_{a,a}(q)`。 -/
@@ -31,7 +30,7 @@ theorem logRat_blockTilingLowerValue_eq (a k : ℕ) {q : ℚ} (hq0 : 0 < q) :
         (k * k) • logRat (openPartitionValueRat a a q) := by
   have hZa : 0 < openPartitionValueRat a a q := openPartitionValueRat_pos a a hq0
   have hinner : 0 < q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k :=
-    mul_pos (pow_pos_by_induction hq0 _) (pow_pos_by_induction hZa _)
+    mul_pos (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hZa _)
   -- 整数の計算 (k-1)(ka) + k(k-1)a = 2k(k-1)a（k-1 はひとつの自然数として扱う）
   have hcoef : (k - 1) * (k * a) + k * ((k - 1) * a) = 2 * (k * ((k - 1) * a)) := by
     generalize k - 1 = m
@@ -42,7 +41,7 @@ theorem logRat_blockTilingLowerValue_eq (a k : ℕ) {q : ℚ} (hq0 : 0 < q) :
         -- 対数の加法性（claim_log_additive）
         = logRat (q ^ ((k - 1) * (k * a))) +
             logRat ((q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k) ^ k) :=
-          logRat_mul (pow_pos_by_induction hq0 _) (pow_pos_by_induction hinner _)
+          logRat_mul (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hinner _)
     -- 対数の冪（claim_log_power を二項へ同時適用）
     _ = ((k - 1) * (k * a)) • logRat q +
           k • logRat (q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k) := by
@@ -50,7 +49,7 @@ theorem logRat_blockTilingLowerValue_eq (a k : ℕ) {q : ℚ} (hq0 : 0 < q) :
     -- 対数の加法性（claim_log_additive）
     _ = ((k - 1) * (k * a)) • logRat q +
           k • (logRat (q ^ ((k - 1) * a)) + logRat (openPartitionValueRat a a q ^ k)) := by
-          rw [logRat_mul (pow_pos_by_induction hq0 _) (pow_pos_by_induction hZa _)]
+          rw [logRat_mul (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hZa _)]
     -- 対数の冪（claim_log_power を二項へ同時適用）
     _ = ((k - 1) * (k * a)) • logRat q +
           k • (((k - 1) * a) • logRat q + k • logRat (openPartitionValueRat a a q)) := by
@@ -76,7 +75,7 @@ theorem logRat_blockTilingUpperValue_eq (a k : ℕ) {q : ℚ} (hq0 : 0 < q) :
       (k * k) • logRat (openPartitionValueRat a a q) := by
   have hZa : 0 < openPartitionValueRat a a q := openPartitionValueRat_pos a a hq0
   -- claim_log_power ×2 と整数倍の結合則
-  rw [logRat_pow (pow_pos_by_induction hZa k), logRat_pow hZa, smul_smul]
+  rw [logRat_pow (pow_pos_by_induction_rat hZa k), logRat_pow hZa, smul_smul]
 
 /-- `claim_open_square_block_tiling_log` の `0 < q ≤ 1` の場合:
 `2k(k-1)a·log q + k²·log Z^op_{a,a}(q) ≤_Λ log Z^op_{ka,ka}(q) ≤_Λ k²·log Z^op_{a,a}(q)`。 -/
@@ -93,12 +92,12 @@ theorem logOrderLE_openSquareBlockTilingLog_bounds_of_le_one
   have hZka : 0 < openPartitionValueRat (k * a) (k * a) q :=
     openPartitionValueRat_pos (k * a) (k * a) hq0
   have hinner : 0 < q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k :=
-    mul_pos (pow_pos_by_induction hq0 _) (pow_pos_by_induction hZa _)
+    mul_pos (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hZa _)
   have hlow : 0 < q ^ ((k - 1) * (k * a)) *
       (q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k) ^ k :=
-    mul_pos (pow_pos_by_induction hq0 _) (pow_pos_by_induction hinner _)
+    mul_pos (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hinner _)
   have hup : 0 < (openPartitionValueRat a a q ^ k) ^ k :=
-    pow_pos_by_induction (pow_pos_by_induction hZa _) _
+    pow_pos_by_induction_rat (pow_pos_by_induction_rat hZa _) _
   -- ブロック敷き詰め評価（claim_open_square_block_tiling_rational の 0<q≤1 の場合）
   have hbounds := openPartitionValueRat_squareBlockTiling_bounds_of_le_one a k ha hk hq0 hq1
   constructor
@@ -124,12 +123,12 @@ theorem logOrderLE_openSquareBlockTilingLog_bounds_of_one_le
   have hZka : 0 < openPartitionValueRat (k * a) (k * a) q :=
     openPartitionValueRat_pos (k * a) (k * a) hq0
   have hinner : 0 < q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k :=
-    mul_pos (pow_pos_by_induction hq0 _) (pow_pos_by_induction hZa _)
+    mul_pos (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hZa _)
   have hlow : 0 < q ^ ((k - 1) * (k * a)) *
       (q ^ ((k - 1) * a) * openPartitionValueRat a a q ^ k) ^ k :=
-    mul_pos (pow_pos_by_induction hq0 _) (pow_pos_by_induction hinner _)
+    mul_pos (pow_pos_by_induction_rat hq0 _) (pow_pos_by_induction_rat hinner _)
   have hup : 0 < (openPartitionValueRat a a q ^ k) ^ k :=
-    pow_pos_by_induction (pow_pos_by_induction hZa _) _
+    pow_pos_by_induction_rat (pow_pos_by_induction_rat hZa _) _
   -- ブロック敷き詰め評価（claim_open_square_block_tiling_rational の 1≤q の場合）
   have hbounds := openPartitionValueRat_squareBlockTiling_bounds_of_one_le a k ha hk hq
   constructor

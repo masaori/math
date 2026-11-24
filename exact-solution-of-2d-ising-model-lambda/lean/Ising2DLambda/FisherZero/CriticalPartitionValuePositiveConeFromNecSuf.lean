@@ -1,9 +1,21 @@
 /- 具体版の有限和の帰納法が必要十分版の特殊化であることを記録する。 -/
 import Ising2DLambda.FisherZero.CriticalPartitionValuePositiveCone
+import Ising2DLambda.NecSuf.FisherZero.CriticalPartitionValuePositiveCone
 
 namespace Ising2DLambda.FisherZero
 
 open Ising2DLambda.AlgebraicEigenvalue Ising2DLambda.PartitionPolynomial
+
+/-- 具体版の部分和は、必要十分版の非空な部分和を二次体の加法と係数項で特殊化したものである。 -/
+theorem criticalPartitionPartialSum_eq_nonemptyPartialSum_necSuf (L : ℕ) [NeZero L]
+    (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2) (n : ℕ) :
+    criticalPartitionPartialSum L s hs n =
+      Ising2DLambda.NecSuf.FisherZero.nonemptyPartialSum
+        (quadraticAddElement s) (criticalCoefficientTerm L s hs) n := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+      rw [criticalPartitionPartialSum, Ising2DLambda.NecSuf.FisherZero.nonemptyPartialSum, ih]
 
 theorem criticalPartitionValue_mem_positiveCone_from_necSuf (L : ℕ) [NeZero L]
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2) :
@@ -30,7 +42,10 @@ theorem criticalPartitionValue_mem_positiveCone_from_necSuf (L : ℕ) [NeZero L]
     (fun x => by apply Subtype.ext; simp [quadraticAddElement, positiveRationalElement])
     (fun x y hx hy => quadraticPositiveCone_add_mem s hs x y hx hy)
     hfirst hterm (2 * L ^ 2)
-  refine ⟨criticalPartitionPartialSum L s hs (2 * L ^ 2), ?_, hpositive⟩
+  refine ⟨criticalPartitionPartialSum L s hs (2 * L ^ 2), ?_, ?_⟩
+  rotate_left
+  · rw [criticalPartitionPartialSum_eq_nonemptyPartialSum_necSuf]
+    exact hpositive
   rw [criticalPartitionPartialSum_coe]
   exact (qbarPolynomialEval_partitionPolynomial_eq_sum_multiplicity_qbar L
     (criticalPoint s : Qbar)).symm

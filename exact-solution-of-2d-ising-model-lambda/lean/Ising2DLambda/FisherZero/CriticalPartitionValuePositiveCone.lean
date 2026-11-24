@@ -5,7 +5,6 @@ import Ising2DLambda.FisherZero.SelfDualPositiveRoot
 import Ising2DLambda.FisherZero.QuadraticPositiveConeAddClosed
 import Ising2DLambda.FisherZero.PositiveRationalNotFisherZero
 import Ising2DLambda.ThermodynamicLimit.ConstantPlusConfiguration
-import Ising2DLambda.NecSuf.FisherZero.CriticalPartitionValuePositiveCone
 
 namespace Ising2DLambda.FisherZero
 
@@ -43,10 +42,12 @@ theorem criticalCoefficientTerm_zero_or_positive (L : ℕ) [NeZero L] (s : Qbar)
   · exact Or.inl (h.1 hz)
   · exact Or.inr (h.2 hp)
 
+/-- 本文の部分和 S₀ := c₀ξ⁰、Sₙ₊₁ := Sₙ + cₙ₊₁ξⁿ⁺¹（加法は二次体の元の加法）。 -/
 noncomputable def criticalPartitionPartialSum (L : ℕ) [NeZero L] (s : Qbar)
-    (hs : s * s = algebraMap ℚ Qbar 2) : ℕ → QuadraticFieldElement s :=
-  Ising2DLambda.NecSuf.FisherZero.nonemptyPartialSum
-    (quadraticAddElement s) (criticalCoefficientTerm L s hs)
+    (hs : s * s = algebraMap ℚ Qbar 2) : ℕ → QuadraticFieldElement s
+  | 0 => criticalCoefficientTerm L s hs 0
+  | n + 1 => quadraticAddElement s (criticalPartitionPartialSum L s hs n)
+      (criticalCoefficientTerm L s hs (n + 1))
 
 theorem criticalPartitionPartialSum_coe (L : ℕ) [NeZero L] (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) (n : ℕ) :
@@ -54,11 +55,9 @@ theorem criticalPartitionPartialSum_coe (L : ℕ) [NeZero L] (s : Qbar)
       ∑ m ∈ Finset.range (n + 1),
         (PartitionPolynomial.multiplicity L m : Qbar) * (criticalPoint s : Qbar) ^ m := by
   induction n with
-  | zero => simp [criticalPartitionPartialSum,
-      Ising2DLambda.NecSuf.FisherZero.nonemptyPartialSum, criticalCoefficientTerm_coe]
+  | zero => simp [criticalPartitionPartialSum, criticalCoefficientTerm_coe]
   | succ n ih =>
-      rw [criticalPartitionPartialSum,
-        Ising2DLambda.NecSuf.FisherZero.nonemptyPartialSum]
+      rw [criticalPartitionPartialSum]
       change (criticalPartitionPartialSum L s hs n : Qbar) +
           (criticalCoefficientTerm L s hs (n + 1) : Qbar) = _
       rw [ih, criticalCoefficientTerm_coe]

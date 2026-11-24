@@ -24,7 +24,7 @@ theorem logOrderLE_openSquareSubsquareLog_bounds_of_le_one_from_necSuf
   have hZa : 0 < openPartitionValueRat a a q := openPartitionValueRat_pos a a hq0
   have hZL : 0 < openPartitionValueRat L L q := openPartitionValueRat_pos L L hq0
   have hlow : 0 < q ^ (a + L) * openPartitionValueRat a a q :=
-    mul_pos (pow_pos_by_induction hq0 _) hZa
+    mul_pos (pow_pos_by_induction_rat hq0 _) hZa
   have hup : 0 < ((2 ^ (L ^ 2 - a ^ 2) : ℕ) : ℚ) * (1 + q) ^ (2 * (L ^ 2 - a ^ 2)) *
       openPartitionValueRat a a q :=
     mul_pos (mul_pos (by positivity) (pow_pos h1q _)) hZa

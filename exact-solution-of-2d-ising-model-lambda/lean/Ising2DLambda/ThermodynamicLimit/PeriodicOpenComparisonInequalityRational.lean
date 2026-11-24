@@ -14,7 +14,7 @@
     並べ替え・破れボンド数の分解・q^{m+n}=q^m q^n   partitionValueRat_eq_open_double_product
   0<q≤1 での自然数冪の順序 q^{2L} ≤ q^{s^bd} ≤ 1    pow_le_pow_of_le_one_of_exp_le_by_induction_rat /
                                                    pow_le_one_by_induction_rat（接合不等式（正の有理点）と同じ補題）
-  「各項は正」                                     pow_pos_by_induction（正の有理数の冪は正）
+  「各項は正」                                     pow_pos_by_induction_rat（正の有理数の冪は正）
   項ごとの評価の有限和と有限和の分配則
     （0<q≤1 の二つの不等式）                        partitionValueRat_periodicOpen_bounds_of_le_one
   1≤q での自然数冪の順序 1 ≤ q^{s^bd} ≤ q^{2L}
@@ -34,7 +34,7 @@ import Ising2DLambda.FreeEntropy.ValuePositive
 
 namespace Ising2DLambda.ThermodynamicLimit
 
-open Finset PartitionPolynomial NecSuf.ThermodynamicLimit
+open Finset PartitionPolynomial
 
 variable (L : ℕ) [NeZero L]
 
@@ -68,14 +68,14 @@ theorem partitionValueRat_periodicOpen_bounds_of_le_one
         mul_le_mul_of_nonneg_left
           (pow_le_pow_of_le_one_of_exp_le_by_induction_rat hq0 hq1
             (periodicBoundaryBrokenCount_le L τ))
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
   · rw [openPartitionValueRat_eq_sum, partitionValueRat_eq_open_double_product L q]
     refine sum_le_sum fun τ _ => ?_
     calc
       q ^ openBrokenBondCount L L τ * q ^ periodicBoundaryBrokenCount L τ
           ≤ q ^ openBrokenBondCount L L τ * 1 :=
         mul_le_mul_of_nonneg_left (pow_le_one_by_induction_rat hq0.le hq1 _)
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
       _ = q ^ openBrokenBondCount L L τ := mul_one _
 
 /-- `claim_periodic_open_boundary_comparison_rational` の `1 ≤ q` の場合:
@@ -94,7 +94,7 @@ theorem partitionValueRat_periodicOpen_bounds_of_one_le
           = q ^ openBrokenBondCount L L τ * 1 := (mul_one _).symm
       _ ≤ q ^ openBrokenBondCount L L τ * q ^ periodicBoundaryBrokenCount L τ :=
         mul_le_mul_of_nonneg_left (one_le_pow_by_induction_rat hq _)
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
   · rw [openPartitionValueRat_eq_sum, partitionValueRat_eq_open_double_product L q, mul_sum]
     refine sum_le_sum fun τ _ => ?_
     calc
@@ -103,7 +103,7 @@ theorem partitionValueRat_periodicOpen_bounds_of_one_le
         mul_le_mul_of_nonneg_left
           (pow_le_pow_of_one_le_of_exp_le_by_induction_rat hq
             (periodicBoundaryBrokenCount_le L τ))
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
       _ = q ^ (2 * L) * q ^ openBrokenBondCount L L τ := mul_comm _ _
 
 end Ising2DLambda.ThermodynamicLimit

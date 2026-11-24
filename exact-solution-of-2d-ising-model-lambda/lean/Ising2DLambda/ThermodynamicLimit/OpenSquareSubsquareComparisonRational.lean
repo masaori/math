@@ -24,7 +24,6 @@ import Ising2DLambda.ThermodynamicLimit.OpenRectangleValueUpperBoundRational
 
 namespace Ising2DLambda.ThermodynamicLimit
 
-open NecSuf.ThermodynamicLimit
 
 /-- `claim_open_square_subsquare_comparison_rational_le_one` の具体版。 -/
 theorem openPartitionValueRat_square_subsquare_bounds_of_le_one
@@ -43,10 +42,10 @@ theorem openPartitionValueRat_square_subsquare_bounds_of_le_one
   have hZaa := (openPartitionValueRat_pos a a hq0).le
   have hZaL := (openPartitionValueRat_pos a (a + c) hq0).le
   have hZcL := (openPartitionValueRat_pos c (a + c) hq0).le
-  have hpL : 0 ≤ q ^ (a + c) := (pow_pos_by_induction hq0 _).le
-  have hpa : 0 ≤ q ^ a := (pow_pos_by_induction hq0 _).le
+  have hpL : 0 ≤ q ^ (a + c) := (pow_pos_by_induction_rat hq0 _).le
+  have hpa : 0 ≤ q ^ a := (pow_pos_by_induction_rat hq0 _).le
   have hBac : 0 ≤ ((2 ^ (a * c) : ℕ) : ℚ) * (1 + q) ^ (2 * (a * c)) :=
-    mul_nonneg (Nat.cast_nonneg _) (pow_pos_by_induction (by linarith) _).le
+    mul_nonneg (Nat.cast_nonneg _) (pow_pos_by_induction_rat (by linarith) _).le
   have h1ac := one_le_openPartitionValueRat a c hq0
   have h1cL := one_le_openPartitionValueRat c (a + c) hq0
   obtain ⟨hsecond_lo, hsecond_hi⟩ :=

@@ -27,10 +27,10 @@ theorem openPartitionValueRat_square_subsquare_bounds_of_le_one_from_necSuf
   obtain ⟨hfirst_lo, hfirst_hi⟩ :=
     openPartitionValueRat_glueFirst_bounds_of_le_one (a := a) (b := a + c) (c := c) ha hc hq0 hq1
   obtain ⟨hlo, hhi⟩ := NecSuf.ThermodynamicLimit.split_twice_bounds_necSuf
-    (pow_pos_by_induction hq0 (a + c)).le (pow_pos_by_induction hq0 a).le
+    (pow_pos_by_induction_rat hq0 (a + c)).le (pow_pos_by_induction_rat hq0 a).le
     (openPartitionValueRat_pos a a hq0).le (openPartitionValueRat_pos a (a + c) hq0).le
     (openPartitionValueRat_pos c (a + c) hq0).le
-    (mul_nonneg (Nat.cast_nonneg _) (pow_pos_by_induction (by linarith) _).le)
+    (mul_nonneg (Nat.cast_nonneg _) (pow_pos_by_induction_rat (by linarith) _).le)
     (one_le_openPartitionValueRat a c hq0) (one_le_openPartitionValueRat c (a + c) hq0)
     hsecond_lo hsecond_hi hfirst_lo hfirst_hi
     (openPartitionValueRat_le_upperBound a c hq0)

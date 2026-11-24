@@ -11,7 +11,7 @@
     書き換えと q^{m+n} = q^m q^n                   openPartitionValueRat_glueFirst_eq
   0<q≤1 での自然数冪の順序 q^b ≤ q^s ≤ 1           pow_le_one_by_induction_rat /
                                                    pow_le_pow_of_le_one_of_exp_le_by_induction_rat
-  「各項は正」                                     pow_pos_by_induction（正の有理数の冪は正）
+  「各項は正」                                     pow_pos_by_induction_rat（正の有理数の冪は正）
   項ごとの評価の有限和と有限和の分配則
     （第一方向・0<q≤1 の二つの不等式）             openPartitionValueRat_glueFirst_bounds_of_le_one
   1≤q での自然数冪の順序 1 ≤ q^s ≤ q^b
@@ -35,7 +35,7 @@ import Ising2DLambda.ThermodynamicLimit.PartitionValueUpperBoundRational
 
 namespace Ising2DLambda.ThermodynamicLimit
 
-open Finset PartitionPolynomial NecSuf.ThermodynamicLimit
+open Finset PartitionPolynomial
 
 variable (a b c : ℕ)
 
@@ -59,7 +59,7 @@ lemma pow_le_pow_of_le_one_of_exp_le_by_induction_rat {q : ℚ} (hq0 : 0 < q) (h
     q ^ (m + d) = q ^ m * q ^ d := pow_add q m d
     _ ≤ q ^ m * 1 :=
       mul_le_mul_of_nonneg_left (pow_le_one_by_induction_rat hq0.le hq1 d)
-        (pow_pos_by_induction hq0 m).le
+        (pow_pos_by_induction_rat hq0 m).le
     _ = q ^ m := mul_one _
 
 /-- 人手証明の「上の全単射と破れボンド数の分解」と「`q^{m+n} = q^m q^n`」の二段:
@@ -109,7 +109,7 @@ theorem openPartitionValueRat_glueFirst_bounds_of_le_one
         mul_le_mul_of_nonneg_left
           (pow_le_pow_of_le_one_of_exp_le_by_induction_rat hq0 hq1
             (openSeamBrokenCountFirst_le a b c ha hc σ τ))
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
   · rw [openPartitionValueRat_mul_eq_double_sum a b c b q,
       openPartitionValueRat_glueFirst_eq a b c ha hc q]
     refine sum_le_sum fun σ _ => sum_le_sum fun τ _ => ?_
@@ -118,7 +118,7 @@ theorem openPartitionValueRat_glueFirst_bounds_of_le_one
             q ^ openSeamBrokenCountFirst a b c ha hc σ τ
           ≤ q ^ (openBrokenBondCount a b σ + openBrokenBondCount c b τ) * 1 :=
         mul_le_mul_of_nonneg_left (pow_le_one_by_induction_rat hq0.le hq1 _)
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
       _ = q ^ (openBrokenBondCount a b σ + openBrokenBondCount c b τ) := mul_one _
 
 /-- `claim_open_rectangle_gluing_inequality_rational` の第一の座標の向き、`1 ≤ q` の場合:
@@ -141,7 +141,7 @@ theorem openPartitionValueRat_glueFirst_bounds_of_one_le
       _ ≤ q ^ (openBrokenBondCount a b σ + openBrokenBondCount c b τ) *
             q ^ openSeamBrokenCountFirst a b c ha hc σ τ :=
         mul_le_mul_of_nonneg_left (one_le_pow_by_induction_rat hq _)
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
   · rw [openPartitionValueRat_mul_eq_double_sum a b c b q,
       openPartitionValueRat_glueFirst_eq a b c ha hc q, mul_sum]
     refine sum_le_sum fun σ _ => ?_
@@ -154,7 +154,7 @@ theorem openPartitionValueRat_glueFirst_bounds_of_one_le
         mul_le_mul_of_nonneg_left
           (pow_le_pow_of_one_le_of_exp_le_by_induction_rat hq
             (openSeamBrokenCountFirst_le a b c ha hc σ τ))
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
       _ = q ^ b * q ^ (openBrokenBondCount a b σ + openBrokenBondCount c b τ) :=
         mul_comm _ _
 
@@ -196,7 +196,7 @@ theorem openPartitionValueRat_glueSecond_bounds_of_le_one
         mul_le_mul_of_nonneg_left
           (pow_le_pow_of_le_one_of_exp_le_by_induction_rat hq0 hq1
             (openSeamBrokenCountSecond_le a b c hb hc σ τ))
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
   · rw [openPartitionValueRat_mul_eq_double_sum a b a c q,
       openPartitionValueRat_glueSecond_eq a b c hb hc q]
     refine sum_le_sum fun σ _ => sum_le_sum fun τ _ => ?_
@@ -205,7 +205,7 @@ theorem openPartitionValueRat_glueSecond_bounds_of_le_one
             q ^ openSeamBrokenCountSecond a b c hb hc σ τ
           ≤ q ^ (openBrokenBondCount a b σ + openBrokenBondCount a c τ) * 1 :=
         mul_le_mul_of_nonneg_left (pow_le_one_by_induction_rat hq0.le hq1 _)
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
       _ = q ^ (openBrokenBondCount a b σ + openBrokenBondCount a c τ) := mul_one _
 
 /-- `claim_open_rectangle_gluing_inequality_rational` の第二の座標の向き、`1 ≤ q` の場合:
@@ -228,7 +228,7 @@ theorem openPartitionValueRat_glueSecond_bounds_of_one_le
       _ ≤ q ^ (openBrokenBondCount a b σ + openBrokenBondCount a c τ) *
             q ^ openSeamBrokenCountSecond a b c hb hc σ τ :=
         mul_le_mul_of_nonneg_left (one_le_pow_by_induction_rat hq _)
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
   · rw [openPartitionValueRat_mul_eq_double_sum a b a c q,
       openPartitionValueRat_glueSecond_eq a b c hb hc q, mul_sum]
     refine sum_le_sum fun σ _ => ?_
@@ -241,7 +241,7 @@ theorem openPartitionValueRat_glueSecond_bounds_of_one_le
         mul_le_mul_of_nonneg_left
           (pow_le_pow_of_one_le_of_exp_le_by_induction_rat hq
             (openSeamBrokenCountSecond_le a b c hb hc σ τ))
-          (pow_pos_by_induction hq0 _).le
+          (pow_pos_by_induction_rat hq0 _).le
       _ = q ^ a * q ^ (openBrokenBondCount a b σ + openBrokenBondCount a c τ) :=
         mul_comm _ _
 

@@ -4,7 +4,7 @@
 
 `a, b ≥ 1`、`q ∈ ℚ_{>0}` について `Z^op_{a,b}(q) ≤ 2^{ab}·(1+q)^{2ab}`。
 準備の第一〜第四は周期境界の `PartitionValueUpperBoundRational.lean` と同じ
-（冪の正値性 `pow_pos_by_induction`、底の単調性 `pow_le_pow_of_pos_of_le_by_induction_rat`、
+（冪の正値性 `pow_pos_by_induction_rat`、底の単調性 `pow_le_pow_of_pos_of_le_by_induction_rat`、
 指数の単調性 `pow_le_pow_of_one_le_of_exp_le_by_induction_rat`、定数の有限和 `Finset.sum_const`）。
 準備の第五: `b^op_{a,b}(σ) ≤ |E^op_{a,b}| = a(b-1)+(a-1)b ≤ 2ab`（`openBrokenBondCount_le` と ℕ の計算）。
 式変形は人手証明と同じ五段:

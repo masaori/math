@@ -27,7 +27,7 @@ theorem logOrderLE_openRectangleGlueFirstLog_bounds_of_le_one_from_necSuf
   have hZ : 0 < openPartitionValueRat (a + c) b q := openPartitionValueRat_pos (a + c) b hq0
   have hup : 0 < openPartitionValueRat a b q * openPartitionValueRat c b q := mul_pos hZab hZcb
   have hlow : 0 < q ^ b * (openPartitionValueRat a b q * openPartitionValueRat c b q) :=
-    mul_pos (pow_pos_by_induction hq0 _) hup
+    mul_pos (pow_pos_by_induction_rat hq0 _) hup
   have hbounds := openPartitionValueRat_glueFirst_bounds_of_le_one a b c ha hc hq0 hq1
   exact twoSided_bounds_transport_through_monotone_map_necSuf
     (K := {r : ℚ // 0 < r})
@@ -58,7 +58,7 @@ theorem logOrderLE_openRectangleGlueFirstLog_bounds_of_one_le_from_necSuf
   have hZ : 0 < openPartitionValueRat (a + c) b q := openPartitionValueRat_pos (a + c) b hq0
   have hup : 0 < openPartitionValueRat a b q * openPartitionValueRat c b q := mul_pos hZab hZcb
   have hlow : 0 < q ^ b * (openPartitionValueRat a b q * openPartitionValueRat c b q) :=
-    mul_pos (pow_pos_by_induction hq0 _) hup
+    mul_pos (pow_pos_by_induction_rat hq0 _) hup
   have hbounds := openPartitionValueRat_glueFirst_bounds_of_one_le a b c ha hc hq
   exact twoSided_bounds_transport_through_monotone_map_necSuf
     (K := {r : ℚ // 0 < r})
@@ -88,7 +88,7 @@ theorem logOrderLE_openRectangleGlueSecondLog_bounds_of_le_one_from_necSuf
   have hZ : 0 < openPartitionValueRat a (b + c) q := openPartitionValueRat_pos a (b + c) hq0
   have hup : 0 < openPartitionValueRat a b q * openPartitionValueRat a c q := mul_pos hZab hZac
   have hlow : 0 < q ^ a * (openPartitionValueRat a b q * openPartitionValueRat a c q) :=
-    mul_pos (pow_pos_by_induction hq0 _) hup
+    mul_pos (pow_pos_by_induction_rat hq0 _) hup
   have hbounds := openPartitionValueRat_glueSecond_bounds_of_le_one a b c hb hc hq0 hq1
   exact twoSided_bounds_transport_through_monotone_map_necSuf
     (K := {r : ℚ // 0 < r})
@@ -119,7 +119,7 @@ theorem logOrderLE_openRectangleGlueSecondLog_bounds_of_one_le_from_necSuf
   have hZ : 0 < openPartitionValueRat a (b + c) q := openPartitionValueRat_pos a (b + c) hq0
   have hup : 0 < openPartitionValueRat a b q * openPartitionValueRat a c q := mul_pos hZab hZac
   have hlow : 0 < q ^ a * (openPartitionValueRat a b q * openPartitionValueRat a c q) :=
-    mul_pos (pow_pos_by_induction hq0 _) hup
+    mul_pos (pow_pos_by_induction_rat hq0 _) hup
   have hbounds := openPartitionValueRat_glueSecond_bounds_of_one_le a b c hb hc hq
   exact twoSided_bounds_transport_through_monotone_map_necSuf
     (K := {r : ℚ // 0 < r})

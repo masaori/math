@@ -2,7 +2,7 @@
 人手証明「正の有理点での分配多項式の値の上からの評価」（`claim_partition_value_upper_bound_at_positive_rational`）の具体版。
 
 `L ≥ 1`、`q ∈ ℚ_{>0}` について `Z_L(q) ≤ 2^{L²}·(1+q)^{2L²}`。
-準備の第一: 正の有理数の冪は正（`pow_pos_by_induction`。指数についての帰納法）。
+準備の第一: 正の有理数の冪は正（`pow_pos_by_induction_rat`。指数についての帰納法）。
 準備の第二: 底の単調性 `0 < u ≤ v → u^k ≤ v^k`（`pow_le_pow_of_pos_of_le_by_induction_rat`。指数についての帰納法）。
 準備の第三: 指数の単調性 `1 ≤ w → m ≤ n → w^m ≤ w^n`（`one_le_pow_by_induction_rat`・`pow_le_pow_of_one_le_of_exp_le_by_induction_rat`）。
 準備の第四: 定数の有限和 `Σ_{s∈S} c = |S|·c`（`Finset.sum_const` と `card_config`）。
@@ -15,11 +15,17 @@
 住処は ℕ・ℚ のみで、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.FreeEntropy.ValuePositive
-import Ising2DLambda.NecSuf.ThermodynamicLimit.PartitionValuePositive
 
 namespace Ising2DLambda.ThermodynamicLimit
 
-open Finset PartitionPolynomial FreeEntropy NecSuf.ThermodynamicLimit
+open Finset PartitionPolynomial FreeEntropy
+
+/-- 準備の第一: 正の有理数の自然数冪は正である。人手証明どおり指数について帰納する。 -/
+lemma pow_pos_by_induction_rat {w : ℚ} (hw : 0 < w) : ∀ k : ℕ, 0 < w ^ k
+  | 0 => by rw [pow_zero]; exact zero_lt_one                     -- w^0 = 1 と 0 < 1
+  | k + 1 => by
+      rw [pow_succ]                                              -- w^{k+1} = w^k·w
+      exact mul_pos (pow_pos_by_induction_rat hw k) hw           -- 正の元どうしの積は正
 
 /-- 準備の第二: 正の底を大きくすると自然数冪は減らない。人手証明どおり指数について帰納する。 -/
 lemma pow_le_pow_of_pos_of_le_by_induction_rat {u v : ℚ} (hu : 0 < u) (huv : u ≤ v) :
@@ -29,7 +35,7 @@ lemma pow_le_pow_of_pos_of_le_by_induction_rat {u v : ℚ} (hu : 0 < u) (huv : u
       rw [pow_succ, pow_succ]
       -- u^k·u ≤ v^k·u（帰納法の仮定と 0 < u）、v^k·u ≤ v^k·v（u ≤ v と 0 < v^k）
       exact mul_le_mul (pow_le_pow_of_pos_of_le_by_induction_rat hu huv k) huv hu.le
-        (pow_pos_by_induction (lt_of_lt_of_le hu huv) k).le
+        (pow_pos_by_induction_rat (lt_of_lt_of_le hu huv) k).le
 
 /-- 準備の第三の前半: 一以上の底の自然数冪は一以上である。指数について帰納する。 -/
 lemma one_le_pow_by_induction_rat {w : ℚ} (hw : 1 ≤ w) : ∀ k : ℕ, 1 ≤ w ^ k
@@ -43,7 +49,7 @@ lemma one_le_pow_by_induction_rat {w : ℚ} (hw : 1 ≤ w) : ∀ k : ℕ, 1 ≤ 
           rw [mul_one, mul_one]; exact one_le_pow_by_induction_rat hw k
         _ ≤ w ^ k * w :=
           mul_le_mul_of_nonneg_left hw
-            (pow_pos_by_induction (lt_of_lt_of_le zero_lt_one hw) k).le
+            (pow_pos_by_induction_rat (lt_of_lt_of_le zero_lt_one hw) k).le
 
 /-- 準備の第三の後半: 一以上の底では指数を大きくすると冪は減らない。 -/
 lemma pow_le_pow_of_one_le_of_exp_le_by_induction_rat {w : ℚ} (hw : 1 ≤ w) :
@@ -54,7 +60,7 @@ lemma pow_le_pow_of_one_le_of_exp_le_by_induction_rat {w : ℚ} (hw : 1 ≤ w) :
     w ^ m = w ^ m * 1 := (mul_one _).symm
     _ ≤ w ^ m * w ^ d :=
       mul_le_mul_of_nonneg_left (one_le_pow_by_induction_rat hw d)
-        (pow_pos_by_induction (lt_of_lt_of_le zero_lt_one hw) m).le
+        (pow_pos_by_induction_rat (lt_of_lt_of_le zero_lt_one hw) m).le
     _ = w ^ (m + d) := (pow_add w m d).symm                        -- 冪の指数法則
 
 /-- `claim_partition_value_upper_bound_at_positive_rational`。人手証明の五段の鎖を同じ順序で辿る。 -/
