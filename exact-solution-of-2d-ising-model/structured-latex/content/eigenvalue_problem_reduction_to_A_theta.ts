@@ -1792,11 +1792,11 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         math(String.raw`\iota_{\mathbb N\to\mathbb Z}:\mathbb N\to\mathbb Z`),
         "（",
         ref("inclusion_nn_to_zz"),
-        "）と整数を実数へ送る標準包含 ",
+        "）と整数を実数へ送る包含 ",
         math(String.raw`\iota_{\mathbb Z\to\mathbb R}:\mathbb Z\to\mathbb R`),
-        " は単位元、和、積、順序を保つものとし、",
-        math(String.raw`\iota_{\mathbb Z\to\mathbb R}`),
-        " は零も保つものとする。また、",
+        "（",
+        ref("inclusion_zz_to_rr"),
+        "）は順序を保つものとする。また、",
         ref("inclusion_rr_to_cc"),
         " の実数から複素数への包含を用いる。",
       ]),
@@ -1819,7 +1819,26 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         " を用いる。",
       ]),
       paragraph([
-        "順序を保つ包含写像により ",
+        math(String.raw`M_{\mathrm{col}}\ge2_{\mathbb Z}`),
+        " と、順序を保つ包含写像により ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\ge(2_{\mathbb Z})_{\mathbb R}`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(2_{\mathbb Z})_{\mathbb R}
+&=(1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb Z}:=1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z}\bigr)\\
+&=(1_{\mathbb Z})_{\mathbb R}+_{\mathbb R}(1_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a,b\to1_{\mathbb Z})\bigr)\\
+&=1_{\mathbb R}+_{\mathbb R}1_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{を 2 か所へ}\bigr)\\
+&=2_{\mathbb R}
+&&\bigl(\because\ \blkref{def_real_two}\ \text{の}\ 2:=1+1\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので ",
         math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\ge2_{\mathbb R}>0_{\mathbb R}`),
         " である。したがって ",
         math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\ne0_{\mathbb R}`),
@@ -1888,41 +1907,161 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
       ]),
     ],
     proof: [
-      paragraph(["最初に、自然数の項数と整数の格子幅の像を対応させる。包含写像の保存性より"]),
+      paragraph([
+        "最初に、包含写像の像を計算する。",
+        math(String.raw`n\in\mathbb N`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(2n)_{\mathbb Z}
+&=\iota_{\mathbb N\to\mathbb Z}\bigl(2\cdot_{\mathbb N}n\bigr)
+&&\bigl(\because\ \text{略記}\ n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\ (n\to2\cdot_{\mathbb N}n)\bigr)\\
+&=\iota_{\mathbb N\to\mathbb Z}(2)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}(n)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz_preserves_product}\ (x\to2,\ y\to n)\bigr)\\
+&=\iota_{\mathbb N\to\mathbb Z}(1_{\mathbb N}+_{\mathbb N}1_{\mathbb N})\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}(n)
+&&\bigl(\because\ \mathbb N\ \text{の数字}\ 2:=1+1\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=\bigl(\iota_{\mathbb N\to\mathbb Z}(1_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}(n)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(m+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(m)+_{\mathbb Z}1_{\mathbb Z}\ (m\to1_{\mathbb N})\bigr)\\
+&=\bigl(\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}+_{\mathbb N}1_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}(n)
+&&\bigl(\because\ \mathbb N\ \text{の加法の単位元}\ 0_{\mathbb N}+x=x\ (x\to1_{\mathbb N})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&=\bigl((\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}(n)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(m+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(m)+_{\mathbb Z}1_{\mathbb Z}\ (m\to0_{\mathbb N})\bigr)\\
+&=\bigl((0_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}(n)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}):=0_{\mathbb Z}\bigr)\\
+&=(1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}(n)
+&&\bigl(\because\ \mathbb Z\ \text{の和の単位元}\ 0_{\mathbb Z}+x=x\ (x\to1_{\mathbb Z})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=2_{\mathbb Z}\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}(n)
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb Z}:=1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z}\ \text{を右辺から左辺へ}\bigr)\\
+&=2_{\mathbb Z}\cdot_{\mathbb Z}n_{\mathbb Z}
+&&\bigl(\because\ \text{略記}\ n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`a\in\mathbb Z`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(2_{\mathbb Z}\cdot_{\mathbb Z}a)_{\mathbb R}
+&=(2_{\mathbb Z})_{\mathbb R}\cdot_{\mathbb R}a_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_product}\ (a\to2_{\mathbb Z},\ b\to a)\bigr)\\
+&=(1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})_{\mathbb R}\cdot_{\mathbb R}a_{\mathbb R}
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb Z}:=1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z}\bigr)\\
+&=\bigl((1_{\mathbb Z})_{\mathbb R}+_{\mathbb R}(1_{\mathbb Z})_{\mathbb R}\bigr)\cdot_{\mathbb R}a_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_sum}\ (a,b\to1_{\mathbb Z})\bigr)\\
+&=(1_{\mathbb R}+_{\mathbb R}1_{\mathbb R})\cdot_{\mathbb R}a_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\ \text{を 2 か所へ}\bigr)\\
+&=2_{\mathbb R}\cdot_{\mathbb R}a_{\mathbb R}
+&&\bigl(\because\ \blkref{def_real_two}\ \text{の}\ 2:=1+1\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`\mu\in\mathbb N`),
+        "、",
+        math(String.raw`1_{\mathbb N}\le\mu`),
+        " について、",
+        ref("set_and_algebra_notation"),
+        " の順序と和の行により ",
+        math(String.raw`1_{\mathbb N}+_{\mathbb N}d=\mu`),
+        " を満たす ",
+        math(String.raw`d\in\mathbb N`),
+        " があり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2\mu
+&=(1_{\mathbb N}+_{\mathbb N}1_{\mathbb N})\cdot_{\mathbb N}\mu
+&&\bigl(\because\ \mathbb N\ \text{の数字}\ 2:=1+1\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=1_{\mathbb N}\cdot_{\mathbb N}\mu+_{\mathbb N}1_{\mathbb N}\cdot_{\mathbb N}\mu
+&&\bigl(\because\ \mathbb N\ \text{の分配律}\ (x+y)\cdot t=x\cdot t+y\cdot t\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=\mu+_{\mathbb N}\mu
+&&\bigl(\because\ \mathbb N\ \text{の乗法の単位元}\ 1_{\mathbb N}\cdot x=x\ (x\to\mu)\ \text{を 2 か所へ（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=(1_{\mathbb N}+_{\mathbb N}d)+_{\mathbb N}\mu
+&&\bigl(\because\ 1_{\mathbb N}+_{\mathbb N}d=\mu\ \text{を左の}\ \mu\ \text{へ右辺から左辺へ}\bigr)\\
+&=1_{\mathbb N}+_{\mathbb N}(d+_{\mathbb N}\mu)
+&&\bigl(\because\ \mathbb N\ \text{の加法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので、順序と和の行により ",
+        math(String.raw`1_{\mathbb N}\le2\mu`),
+        " であり、",
+        math(String.raw`\mathbb N`),
+        " の差 ",
+        math(String.raw`2\mu-1`),
+        " が定まる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(2\mu-1)+_{\mathbb N}1_{\mathbb N}
+&=1_{\mathbb N}+_{\mathbb N}(2\mu-1)
+&&\bigl(\because\ \mathbb N\ \text{の加法の交換律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=2\mu
+&&\bigl(\because\ \mathbb N\ \text{の差の定義}\ x+(y-x)=y\ (x\to1_{\mathbb N},\ y\to2\mu)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。これと上の二つの鎖から",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(2\mu-1)_{\mathbb Z}
+&=(2\mu-1)_{\mathbb Z}+_{\mathbb Z}0_{\mathbb Z}
+&&\bigl(\because\ \mathbb Z\ \text{の和の単位元（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=(2\mu-1)_{\mathbb Z}+_{\mathbb Z}\bigl(1_{\mathbb Z}+_{\mathbb Z}(-1_{\mathbb Z})\bigr)
+&&\bigl(\because\ \mathbb Z\ \text{の加法の逆元（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=\bigl((2\mu-1)_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z}\bigr)+_{\mathbb Z}(-1_{\mathbb Z})
+&&\bigl(\because\ \mathbb Z\ \text{の加法の結合律（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=\bigl((2\mu-1)+_{\mathbb N}1_{\mathbb N}\bigr)_{\mathbb Z}+_{\mathbb Z}(-1_{\mathbb Z})
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(m+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(m)+_{\mathbb Z}1_{\mathbb Z}\ (m\to2\mu-1)\ \text{を右辺から左辺へ}\bigr)\\
+&=(2\mu)_{\mathbb Z}+_{\mathbb Z}(-1_{\mathbb Z})
+&&\bigl(\because\ (2\mu-1)+_{\mathbb N}1_{\mathbb N}=2\mu\bigr)\\
+&=2_{\mathbb Z}\cdot_{\mathbb Z}\mu_{\mathbb Z}+_{\mathbb Z}(-1_{\mathbb Z})
+&&\bigl(\because\ \text{上の鎖}\ (2n)_{\mathbb Z}=2_{\mathbb Z}\cdot_{\mathbb Z}n_{\mathbb Z}\ (n\to\mu)\bigr)\\
+&=2_{\mathbb Z}\cdot_{\mathbb Z}\mu_{\mathbb Z}-_{\mathbb Z}1_{\mathbb Z}
+&&\bigl(\because\ \blkref{def_int_difference}\ \text{を右辺から左辺へ}\bigr)\\
+((2\mu-1)_{\mathbb Z})_{\mathbb R}
+&=(2_{\mathbb Z}\cdot_{\mathbb Z}\mu_{\mathbb Z}-_{\mathbb Z}1_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \text{直前の鎖}\bigr)\\
+&=(2_{\mathbb Z}\cdot_{\mathbb Z}\mu_{\mathbb Z})_{\mathbb R}-_{\mathbb R}(1_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_preserves_difference}\ (a\to2_{\mathbb Z}\cdot_{\mathbb Z}\mu_{\mathbb Z},\ b\to1_{\mathbb Z})\bigr)\\
+&=2_{\mathbb R}\cdot_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}-_{\mathbb R}(1_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \text{上の鎖}\ (2_{\mathbb Z}\cdot_{\mathbb Z}a)_{\mathbb R}=2_{\mathbb R}\cdot_{\mathbb R}a_{\mathbb R}\ (a\to\mu_{\mathbb Z})\bigr)\\
+&=2_{\mathbb R}\cdot_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}-_{\mathbb R}1_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\bigr)\\
+((2\mu)_{\mathbb Z})_{\mathbb R}
+&=(2_{\mathbb Z}\cdot_{\mathbb Z}\mu_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \text{上の鎖}\ (2n)_{\mathbb Z}=2_{\mathbb Z}\cdot_{\mathbb Z}n_{\mathbb Z}\ (n\to\mu)\bigr)\\
+&=2_{\mathbb R}\cdot_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \text{上の鎖}\ (2_{\mathbb Z}\cdot_{\mathbb Z}a)_{\mathbb R}=2_{\mathbb R}\cdot_{\mathbb R}a_{\mathbb R}\ (a\to\mu_{\mathbb Z})\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。これらにより、自然数の項数と整数の格子幅の像を対応させる。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}
-&=\iota_{\mathbb N\to\mathbb Z}\bigl(2\cdot_{\mathbb N}(M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \text{略記}\ n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\ (n\to2\cdot_{\mathbb N}(M_{\mathrm{col}})_{\mathbb N})\bigr)\\
-&=\iota_{\mathbb N\to\mathbb Z}(2)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \blkref{inclusion_nn_to_zz_preserves_product}\ (x\to2,\ y\to(M_{\mathrm{col}})_{\mathbb N})\bigr)\\
-&=\iota_{\mathbb N\to\mathbb Z}(1_{\mathbb N}+_{\mathbb N}1_{\mathbb N})\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \mathbb N\ \text{の数字}\ 2:=1+1\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
-&=\bigl(\iota_{\mathbb N\to\mathbb Z}(1_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(n+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(n)+_{\mathbb Z}1_{\mathbb Z}\ (n\to1_{\mathbb N})\bigr)\\
-&=\bigl(\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}+_{\mathbb N}1_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \mathbb N\ \text{の加法の単位元}\ 0_{\mathbb N}+x=x\ (x\to1_{\mathbb N})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
-&=\bigl((\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(n+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(n)+_{\mathbb Z}1_{\mathbb Z}\ (n\to0_{\mathbb N})\bigr)\\
-&=\bigl((0_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})+_{\mathbb Z}1_{\mathbb Z}\bigr)\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}):=0_{\mathbb Z}\bigr)\\
-&=(1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \mathbb Z\ \text{の和の単位元}\ 0_{\mathbb Z}+x=x\ (x\to1_{\mathbb Z})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
-&=2_{\mathbb Z}\cdot_{\mathbb Z}\iota_{\mathbb N\to\mathbb Z}\bigl((M_{\mathrm{col}})_{\mathbb N}\bigr)
-&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb Z}:=1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z}\ \text{を右辺から左辺へ}\bigr)\\
 &=2_{\mathbb Z}\cdot_{\mathbb Z}((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}
-&&\bigl(\because\ \text{略記}\ n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\ (n\to(M_{\mathrm{col}})_{\mathbb N})\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \text{上の鎖}\ (2n)_{\mathbb Z}=2_{\mathbb Z}\cdot_{\mathbb Z}n_{\mathbb Z}\ (n\to(M_{\mathrm{col}})_{\mathbb N})\bigr)\\
 &=2_{\mathbb Z}\cdot_{\mathbb Z}M_{\mathrm{col}}
 &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb N}\ \text{の定義}\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
 ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}
 &=(M_{\mathrm{col}})_{\mathbb R}
 &&\bigl(\because\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
-(2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}
-&=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}
-&&\bigl(\because\ \iota_{\mathbb N\to\mathbb Z},\iota_{\mathbb Z\to\mathbb R}\text{ は積を保つ}\bigr)\\
 (2M_{\mathrm{col}})_{\mathbb R}
 &=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}
-&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は積を保つ}\bigr)\\
+&&\bigl(\because\ \text{上の鎖}\ (2_{\mathbb Z}\cdot_{\mathbb Z}a)_{\mathbb R}=2_{\mathbb R}\cdot_{\mathbb R}a_{\mathbb R}\ (a\to M_{\mathrm{col}})\bigr)\\
+(2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}
+&=((2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \text{略記}\ n_{\mathbb R}:=(n_{\mathbb Z})_{\mathbb R}\bigr)\\
+&=(2_{\mathbb Z}\cdot_{\mathbb Z}M_{\mathrm{col}})_{\mathbb R}
+&&\bigl(\because\ (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=2_{\mathbb Z}\cdot_{\mathbb Z}M_{\mathrm{col}}\bigr)\\
+&=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}
+&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb R}=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\bigr)\\
 ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb C}
 &=(M_{\mathrm{col}})_{\mathbb C}
 &&\bigl(\because\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}=(M_{\mathrm{col}})_{\mathbb R}\bigr)\\
@@ -1988,9 +2127,33 @@ S_{M_{\mathrm{col}},k}
       paragraph([
         "また、正の自然数 ",
         math(String.raw`N\in\mathbb N_{\ge1}`),
-        " については、順序を保つ包含写像により ",
+        " については、",
+        math(String.raw`N\ge1_{\mathbb N}`),
+        " と順序を保つ包含写像により ",
+        math(String.raw`N_{\mathbb R}\ge((1_{\mathbb N})_{\mathbb Z})_{\mathbb R}`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+((1_{\mathbb N})_{\mathbb Z})_{\mathbb R}
+&=\bigl(\iota_{\mathbb N\to\mathbb Z}(1_{\mathbb N})\bigr)_{\mathbb R}
+&&\bigl(\because\ \text{略記}\ n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\ (n\to1_{\mathbb N})\bigr)\\
+&=\bigl(\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}+_{\mathbb N}1_{\mathbb N})\bigr)_{\mathbb R}
+&&\bigl(\because\ \mathbb N\ \text{の加法の単位元}\ 0_{\mathbb N}+x=x\ (x\to1_{\mathbb N})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&=\bigl(\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z}\bigr)_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(m+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(m)+_{\mathbb Z}1_{\mathbb Z}\ (m\to0_{\mathbb N})\bigr)\\
+&=(0_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}):=0_{\mathbb Z}\bigr)\\
+&=(1_{\mathbb Z})_{\mathbb R}
+&&\bigl(\because\ \mathbb Z\ \text{の和の単位元}\ 0_{\mathbb Z}+x=x\ (x\to1_{\mathbb Z})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=1_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_of_one}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので ",
         math(String.raw`N_{\mathbb R}\ge1_{\mathbb R}>0_{\mathbb R}`),
-        " なので ",
+        " であり、",
         math(String.raw`N_{\mathbb R}\ne0_{\mathbb R}`),
         " である。したがって",
       ]),
@@ -2021,7 +2184,7 @@ T_{2(M_{\mathrm{col}})_{\mathbb N},k}
 &&\bigl(\because\ r\text{ の奇偶による有限和の分割}\bigr)\\
 &=\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}-1_{\mathbb R})k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
 +\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
-&&\bigl(\because\ (2\mu-1)+1=2\mu\text{ と、}\iota_{\mathbb N\to\mathbb Z},\iota_{\mathbb Z\to\mathbb R}\text{ が単位元・和・積を保つことから }((2\mu-1)_{\mathbb Z})_{\mathbb R}+1_{\mathbb R}=2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}\bigr)\\
+&&\bigl(\because\ \text{準備の鎖}\ ((2\mu-1)_{\mathbb Z})_{\mathbb R}=2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}-1_{\mathbb R}\ \text{と}\ ((2\mu)_{\mathbb Z})_{\mathbb R}=2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}\ \text{を各項へ}\bigr)\\
 &=S_{M_{\mathrm{col}},k}+\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ S_{M_{\mathrm{col}},k}\text{ の上の式}\bigr)\\
 &=S_{M_{\mathrm{col}},k}+\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2_{\mathbb R}\left(2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}\right)}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
@@ -2342,6 +2505,7 @@ k
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の先頭）: 主張の前置きが ι_{ℕ→ℤ} を「標準包含」と名前だけで置き、0_ℤ ≤ M_col の鎖の 1 行目が「ι_{ℕ→ℤ} は零を保つ」と仮定を引いていた。ι_{ℕ→ℤ} の定義のブロック inclusion_nn_to_zz を足し、前置きをそのブロックの参照にし、1 行目をその定義の式 ι(0_ℕ) := 0_ℤ を右辺から左辺へ当てる形にした。単位元・和・積・順序を保つことはまだ前置きの仮定のまま残る（状態台帳の同じ行の続きで主張に替える）。Lean の具体版の同じ段の Nat.cast_zero を inclusion_nn_to_zz の零の式に替えた。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 0_ℤ ≤ M_col の鎖が「ι_{ℕ→ℤ} は順序を保つ」と前置きの仮定を引き、そのために 0_ℕ ≤ (M_col)_ℕ の 2 行を置いていた。新しい主張 inclusion_nn_to_zz_image_is_nonnegative（n → (M_col)_ℕ）を引く 1 行にし、ℕ の 2 行と ι(0_ℕ) := 0_ℤ の行を外した（鎖は 6 行から 3 行）。前置きの「ι_{ℕ→ℤ} が零を保つことは定義の式 ι(0_ℕ) := 0_ℤ である」の括弧書きも、それを使う行が無くなったので外した。前置きの「順序を保つ」の仮定は、「順序を保つ包含写像により (M_col)_ℝ ≥ 2_ℝ」などがまだ使うので残る。Lean の具体版の同じ段の Nat.zero_add・Nat.le.intro・Nat.cast_le を新しい具体版に替えた。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 準備の鎖の (2(M_col)_ℕ)_ℤ = 2M_col が根拠を「ι_{ℕ→ℤ} は積を保つ」と主張の前置きの仮定で引き、ℤ の数字 2 と ℕ の数字 2 の行き来も書いていなかった。新しい主張 inclusion_nn_to_zz_preserves_product（x → 2, y → (M_col)_ℕ）、inclusion_nn_to_zz の二つの式、set_and_algebra_notation の ℕ の数字 2 := 1 + 1・ℕ の加法の単位元・ℤ の和の単位元、def_power_of_integer の 2_ℤ := 1_ℤ + 1_ℤ、略記 n_ℤ を引く 11 行に割った。Lean の具体版 antiperiodic_exp_sum_not_dvd の 2M ∤ k の段が push_cast で示していた ((2M)_ℕ)_ℤ = M·2 を、同じ 11 段の calc（証明の中の have。主張の型に数字 2 が出る補題にすると未定義の記号の台帳に行が増えるため）と ℤ の乗法の交換律に替えた。前置きの「ι_{ℕ→ℤ} は和・積を保つ」の仮定は、(2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ の行と奇偶の分割の行がまだ名前だけで引くので残る。主張は不変。",
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 主張の前置きが ι_{ℕ→ℤ}・ι_{ℤ→ℝ} について「単位元、和、積を保つ」「ι_{ℤ→ℝ} は零も保つ」と仮定し、準備の鎖の (2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ・(2M_col)_ℝ = 2_ℝ(M_col)_ℝ と奇偶の分割の行の ((2μ−1)_ℤ)_ℝ + 1_ℝ = 2_ℝ(μ_ℤ)_ℝ がそれを名前だけで引いていた。準備の鎖を、n ∈ ℕ の (2n)_ℤ = 2_ℤ n_ℤ（inclusion_nn_to_zz_preserves_product ほかの 10 行）、a ∈ ℤ の (2_ℤ a)_ℝ = 2_ℝ a_ℝ（inclusion_zz_to_rr_preserves_product・inclusion_zz_to_rr_preserves_sum・inclusion_zz_to_rr_of_one・def_real_two の 5 行）、1 ≤ μ の μ ∈ ℕ について ℕ の差 2μ−1 が定まること（2μ = 1 + (d + μ) の 5 行）と (2μ−1) + 1 = 2μ、(2μ−1)_ℤ = 2_ℤμ_ℤ − 1_ℤ（7 行）、((2μ−1)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ − 1_ℝ（inclusion_zz_to_rr_preserves_difference ほかの 4 行）、((2μ)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ（2 行）に書き直し、二つの行をこれらの参照にした。前置きの仮定は順序を保つことだけになった。順序を保つことを使う「(M_col)_ℝ ≥ 2_ℝ」「N_ℝ ≥ 1_ℝ」は、順序からは (M_col)_ℝ ≥ (2_ℤ)_ℝ・N_ℝ ≥ ((1_ℕ)_ℤ)_ℝ までしか出ないので、(2_ℤ)_ℝ = 2_ℝ（def_power_of_integer・inclusion_zz_to_rr_preserves_sum・inclusion_zz_to_rr_of_one・def_real_two の 4 行）と ((1_ℕ)_ℤ)_ℝ = 1_ℝ（略記・ℕ の加法の単位元・inclusion_nn_to_zz の二つの式・ℤ の和の単位元・inclusion_zz_to_rr_of_one の 6 行）の鎖を足した。ι_{ℤ→ℝ} に inclusion_zz_to_rr の参照を足した。Lean の具体版は、同じ鎖を使う証明の中の have（htwoZ・htwoR・h2MR・hoddZ・hoddR）として置き、expPhase_two_mul・antiperiodic_exp_sum_delta_difference の奇偶の分割・antiperiodic_complex_exp_sum_eq_checkPhase・antiperiodic_exp_sum_dvd の 4 行目の push_cast と Nat.cast_mul の段をこれらに替えた（定理にしないのは、型の ℕ・ℤ の数字と Int.cast が未定義の記号の台帳に行を足すため）。checkPhase_eq_exp はほかの章の主張も使うので変えていない。Lean は M ≠ 0 だけを使うので、(M_col)_ℝ ≥ 2_ℝ・N_ℝ ≥ 1_ℝ の段は持たない。",
       ],
     },
   },

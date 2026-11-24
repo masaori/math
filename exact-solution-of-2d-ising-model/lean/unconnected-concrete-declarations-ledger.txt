@@ -575,7 +575,6 @@ Ising2D.identity_matrix_mulVec
 Ising2D.identity_matrix_mulVec_apply
 Ising2D.idxOfSpin_val_eq_spinBit
 Ising2D.image_of_matrix_is_subspace
-Ising2D.inclusion_zz_to_rr_preserves_product
 Ising2D.independenceStatement_pred
 Ising2D.independenceStatement_top
 Ising2D.independenceStatement_zero

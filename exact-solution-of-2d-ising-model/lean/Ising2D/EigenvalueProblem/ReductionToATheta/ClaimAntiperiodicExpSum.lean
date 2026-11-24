@@ -38,8 +38,18 @@
   `Odd.neg_one_zpow` を当てた `hpow` のままで、人手の手順と対応していない。偶数の 5 行目の `real_inclusion_preserves_product` は具体版 `real_inclusion_mul`、
   8 行目の `2_ℂ - 1_ℂ = 1_ℂ` は `two_real_inclusion_sub_one` である。人手の `n_ℂ := (n_ℝ)_ℂ` は、Lean では
   `(n : ℂ)`（`Nat.cast`）と `((n : ℝ) : ℂ)` が別の項なので、4 行目・5 行目で `Complex.ofReal_natCast` により読み替える。
-  人手のこのブロックで実数の包含の性質の主張（`real_inclusion_preserves_*`）を引くのはこの 5 行目だけである。ほかの `push_cast`（`checkPhase_eq_exp` の
-  `θ~_μ` の像、`expPhase` の周波数の自然数・整数の包含など）は、`expPhase` で書くための Lean 側の橋の計算である。
+  人手のこのブロックで実数の包含の性質の主張（`real_inclusion_preserves_*`）を引くのはこの 5 行目だけである。
+* 人手の準備の鎖（`(2n)_ℤ = 2_ℤ·n_ℤ`、`(2_ℤ·a)_ℝ = 2_ℝ·a_ℝ`、`(2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ`、`(2μ − 1)_ℤ = 2_ℤμ_ℤ − 1_ℤ`、
+  `((2μ − 1)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ − 1_ℝ`）は、使う証明の中の `have`（`htwoZ`・`htwoR`・`h2MR`・`hoddZ`・`hoddR`）として
+  `ι_{ℕ→ℤ}`・`ι_{ℤ→ℝ}` の主張を引いて示す（主張の形の定理にすると、その型の ℕ・ℤ の数字と `Int.cast` が未定義の記号の台帳に行を足すため）。
+  使う所は、`expPhase_two_mul`（T_{2M} の分母と偶数番目の周波数）、奇偶の分割（`hodd`・`heven`）、`antiperiodic_complex_exp_sum_eq_checkPhase`
+  （奇数番目の項と分母）、整除の段の `(2M)_ℝ` である。`checkPhase_eq_exp` はほかの章の主張も使うので、`push_cast` のまま残す。
+  `antiperiodic_complex_exp_sum_eq_checkPhase` で `((-k)(2μ − 1))_ℝ` を `inclusion_zz_to_rr_preserves_product` で積に割る段は Lean だけの段
+  （人手は `k_ℝ` と `(r_ℤ)_ℝ` を初めから別に書く）で、その後の `field_simp` は人手の `k_ℝθ~_μ` の 6 行の鎖を 1 手でまとめており、未対応である。
+  人手の ℕ の差 `2μ − 1` が定まることの段（`2μ = 1 + (d + μ)` の 5 行と `(2μ − 1) + 1 = 2μ` の 2 行）は、Lean が `2μ + 1` と書いて差を使わないので持たない。
+  人手の前置きの `(M_col)_ℝ ≥ 2_ℝ` と証明の `N_ℝ ≥ 1_ℝ` の段も、Lean は `M ≠ 0` だけを使うので持たない。
+  残りの `push_cast`（`k` の像、`expPhase_zpow`・`expPhase_two_mul_half` の周波数、`2_ℝ` による約分の前の整理）は、
+  `expPhase` で書くための Lean 側の橋の計算である。
   ただし整除の補題（`antiperiodic_exp_sum_dvd` の 2 本の `hdelta2`、`antiperiodic_exp_sum_not_dvd` の `hk2`）の
   `push_cast`・`ring` は、人手の整除の行（`2M ∣ lM ⟺ 2 ∣ l`・`M ≠ 0` による約分・`2M ∣ k` なら `M ∣ k` の対偶）と未対応である。
 -/
@@ -53,6 +63,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimI
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerLessThanOneOfProductLessThanNonnegativeFactor
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimInclusionOfNaturalNumbersIntoIntegersImageIsNonnegative
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimInclusionOfNaturalNumbersIntoIntegersPreservesProduct
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D
@@ -71,8 +82,44 @@ theorem expPhase_zpow (N : ℕ) (l a : ℤ) : expPhase N (l * a) = (expPhase N a
 /-- `2M` 乗根の偶数周波数は `M` 乗根そのもの: `expPhase (2M) (2n) = expPhase M n`。 -/
 theorem expPhase_two_mul (hM : M ≠ 0) (n : ℤ) : expPhase (2 * M) (2 * n) = expPhase M n := by
   have hMC : ((M : ℕ) : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hM
+  -- 人手証明の準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n ∈ ℕ`）。
+  have htwoZ : ∀ n : ℕ, inclusionNNtoZZ (2 * n) = 2 * inclusionNNtoZZ n := fun n =>
+    calc inclusionNNtoZZ (2 * n)
+        = inclusionNNtoZZ 2 * inclusionNNtoZZ n :=
+          inclusion_nn_to_zz_preserves_product 2 n                          -- `inclusion_nn_to_zz_preserves_product`（`x → 2, y → n`）
+      _ = inclusionNNtoZZ (1 + 1) * inclusionNNtoZZ n := rfl               -- ℕ の数字 `2 := 1 + 1`
+      _ = (inclusionNNtoZZ 1 + 1) * inclusionNNtoZZ n := rfl               -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → 1_ℕ`）
+      _ = (inclusionNNtoZZ (0 + 1) + 1) * inclusionNNtoZZ n := by
+          rw [Nat.zero_add 1]                                               -- ℕ の加法の単位元 `0 + x = x`（`x → 1_ℕ`）を右辺から左辺へ
+      _ = ((inclusionNNtoZZ 0 + 1) + 1) * inclusionNNtoZZ n := rfl         -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → 0_ℕ`）
+      _ = ((0 + 1) + 1) * inclusionNNtoZZ n := rfl                         -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`
+      _ = (1 + 1) * inclusionNNtoZZ n := by rw [zero_add (1 : ℤ)]          -- ℤ の和の単位元 `0 + x = x`（`x → 1_ℤ`）
+      _ = 2 * inclusionNNtoZZ n := rfl                                     -- `def_power_of_integer` の `2_ℤ := 1_ℤ + 1_ℤ` を右辺から左辺へ（最後の行の略記 `n_ℤ` は Lean では同じ項）
+  -- 人手証明の準備の鎖 `(2_ℤ·a)_ℝ = 2_ℝ·a_ℝ`（`a ∈ ℤ`）。
+  have htwoR : ∀ a : ℤ, (((2 : ℤ) * a : ℤ) : ℝ) = 2 * (a : ℝ) := fun a =>
+    calc (((2 : ℤ) * a : ℤ) : ℝ)
+        = ((2 : ℤ) : ℝ) * (a : ℝ) := inclusion_zz_to_rr_preserves_product 2 a  -- `inclusion_zz_to_rr_preserves_product`（`a → 2_ℤ, b → a`）
+      _ = (((1 : ℤ) + 1 : ℤ) : ℝ) * (a : ℝ) := rfl                          -- `def_power_of_integer` の `2_ℤ := 1_ℤ + 1_ℤ`
+      _ = (((1 : ℤ) : ℝ) + ((1 : ℤ) : ℝ)) * (a : ℝ) := by
+          rw [inclusion_zz_to_rr_preserves_sum 1 1]                         -- `inclusion_zz_to_rr_preserves_sum`（`a, b → 1_ℤ`）
+      _ = ((1 : ℝ) + 1) * (a : ℝ) := by
+          rw [inclusion_zz_to_rr_of_one_intCast]                            -- `inclusion_zz_to_rr_of_one` を 2 か所へ
+      _ = 2 * (a : ℝ) := by rw [← real_two_eq_one_add_one]                 -- `def_real_two` の `2 := 1 + 1` を右辺から左辺へ
+  -- 人手証明の準備の鎖 `(2(M_col)_ℕ)_ℝ = ((2(M_col)_ℕ)_ℤ)_ℝ = (2_ℤM_col)_ℝ = 2_ℝ(M_col)_ℝ`。Lean の `(n : ℝ)` は `Nat.cast` なので、
+  -- 人手の略記 `n_ℝ := (n_ℤ)_ℝ` へは `Int.cast_natCast` と `inclusionNNtoZZ_eq_natCast` で移す（Lean だけの段）。
+  have h2MR : ((2 * M : ℕ) : ℝ) = 2 * (M : ℝ) :=
+    calc ((2 * M : ℕ) : ℝ)
+        = ((inclusionNNtoZZ (2 * M) : ℤ) : ℝ) := by
+          rw [inclusionNNtoZZ_eq_natCast, Int.cast_natCast]                 -- 略記 `n_ℝ := (n_ℤ)_ℝ`（`n → 2(M_col)_ℕ`）
+      _ = (((2 : ℤ) * inclusionNNtoZZ M : ℤ) : ℝ) := by rw [htwoZ M]       -- `(2(M_col)_ℕ)_ℤ = 2_ℤ·M_col`
+      _ = 2 * ((inclusionNNtoZZ M : ℤ) : ℝ) := htwoR (inclusionNNtoZZ M)    -- `(2M_col)_ℝ = 2_ℝ(M_col)_ℝ`
+      _ = 2 * (M : ℝ) := by
+          rw [inclusionNNtoZZ_eq_natCast, Int.cast_natCast]                 -- `(M_col)_ℕ` の定義と略記 `n_ℝ` を右辺から左辺へ
   rw [expPhase, expPhase]
   congr 1
+  -- 人手の T_{2M} の鎖の `(2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ` と、奇偶の分割の行の `((2μ)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ`（周波数 `2n`）。
+  -- `n_ℂ := (n_ℝ)_ℂ` の読みは `Complex.ofReal_natCast`・`Complex.ofReal_intCast`。残りの `push_cast`・`field_simp` は人手の「`2_ℝ ≠ 0_ℝ` による約分」の段である。
+  rw [← Complex.ofReal_natCast (2 * M), h2MR, ← Complex.ofReal_intCast (2 * n), htwoR n]
   push_cast
   field_simp
 
@@ -190,6 +237,35 @@ theorem antiperiodic_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
     ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) =
       ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 := by
   have h2M : 2 * M ≠ 0 := by omega
+  -- 人手証明の準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n ∈ ℕ`）。
+  have htwoZ : ∀ n : ℕ, inclusionNNtoZZ (2 * n) = 2 * inclusionNNtoZZ n := fun n =>
+    calc inclusionNNtoZZ (2 * n)
+        = inclusionNNtoZZ 2 * inclusionNNtoZZ n :=
+          inclusion_nn_to_zz_preserves_product 2 n                          -- `inclusion_nn_to_zz_preserves_product`（`x → 2, y → n`）
+      _ = inclusionNNtoZZ (1 + 1) * inclusionNNtoZZ n := rfl               -- ℕ の数字 `2 := 1 + 1`
+      _ = (inclusionNNtoZZ 1 + 1) * inclusionNNtoZZ n := rfl               -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → 1_ℕ`）
+      _ = (inclusionNNtoZZ (0 + 1) + 1) * inclusionNNtoZZ n := by
+          rw [Nat.zero_add 1]                                               -- ℕ の加法の単位元 `0 + x = x`（`x → 1_ℕ`）を右辺から左辺へ
+      _ = ((inclusionNNtoZZ 0 + 1) + 1) * inclusionNNtoZZ n := rfl         -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → 0_ℕ`）
+      _ = ((0 + 1) + 1) * inclusionNNtoZZ n := rfl                         -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`
+      _ = (1 + 1) * inclusionNNtoZZ n := by rw [zero_add (1 : ℤ)]          -- ℤ の和の単位元 `0 + x = x`（`x → 1_ℤ`）
+      _ = 2 * inclusionNNtoZZ n := rfl                                     -- `def_power_of_integer` の `2_ℤ := 1_ℤ + 1_ℤ` を右辺から左辺へ（最後の行の略記 `n_ℤ` は Lean では同じ項）
+  -- 人手証明の準備の鎖 `(2μ - 1)_ℤ = 2_ℤ·μ_ℤ - 1_ℤ`（`μ ∈ ℕ`, `1 ≤ μ`）の 7 行。Lean の和の添字は `0` 始まりなので、
+  -- 人手の `μ` を `μ + 1` と書き、人手の ℕ の差 `2μ - 1` は ℕ の差を使わずに `2μ + 1` と書く
+  -- （人手の `(2μ - 1) + 1 = 2μ` は、Lean では ℕ の和と積の再帰の式で `(2μ + 1) + 1 = 2(μ + 1)` が定義として成り立つこと）。
+  have hoddZ : ∀ μ : ℕ, ((2 * μ + 1 : ℕ) : ℤ) = 2 * (((μ : ℕ) : ℤ) + 1) - 1 := fun μ =>
+    calc ((2 * μ + 1 : ℕ) : ℤ)
+        = inclusionNNtoZZ (2 * μ + 1) := (inclusionNNtoZZ_eq_natCast _).symm  -- 略記 `n_ℤ := ι_{ℕ→ℤ}(n)`（`n → 2μ - 1`）
+      _ = inclusionNNtoZZ (2 * μ + 1) + 0 := (add_zero _).symm             -- ℤ の和の単位元
+      _ = inclusionNNtoZZ (2 * μ + 1) + (1 + (-1)) := by
+          rw [add_neg_cancel (1 : ℤ)]                                       -- ℤ の加法の逆元
+      _ = (inclusionNNtoZZ (2 * μ + 1) + 1) + (-1) := (add_assoc _ _ _).symm  -- ℤ の加法の結合律
+      _ = inclusionNNtoZZ (2 * μ + 1 + 1) + (-1) := rfl                    -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ` を右辺から左辺へ
+      _ = inclusionNNtoZZ (2 * (μ + 1)) + (-1) := rfl                      -- `(2μ - 1) + 1 = 2μ`
+      _ = 2 * inclusionNNtoZZ (μ + 1) + (-1) := by rw [htwoZ (μ + 1)]      -- 準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n → μ`）
+      _ = 2 * (((μ : ℕ) : ℤ) + 1) + (-1) := by
+          rw [inclusionNNtoZZ_eq_natCast]; rfl                              -- 略記 `n_ℤ` を右辺から左辺へ（Lean の添字 `μ + 1` の像）
+      _ = 2 * (((μ : ℕ) : ℤ) + 1) - 1 := (int_sub_eq_add_neg _ _).symm    -- `def_int_difference` を右辺から左辺へ
   have hsplit := sum_range_even_odd
     (fun r : ℕ => expPhase (2 * M) ((((r + 1 : ℕ) : ℤ)) * (-k))) M
   have hodd :
@@ -202,8 +278,8 @@ theorem antiperiodic_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
     intro μ hμ
     rw [checkPhase]
     congr 1
-    push_cast
-    ring
+    -- 人手の奇偶の分割の行の `(2μ - 1)_ℤ = 2_ℤμ_ℤ - 1_ℤ`（準備の鎖）。最後は ℤ の乗法の交換律。
+    rw [hoddZ μ, mul_comm]
   have heven :
       ∑ μ ∈ Finset.range M,
           expPhase (2 * M) (((2 * μ + 2 : ℕ) : ℤ) * (-k)) =
@@ -217,8 +293,9 @@ theorem antiperiodic_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
               intro μ hμ
               rw [← expPhase_two_mul hM]
               congr 1
-              push_cast
-              ring
+              -- 人手の奇偶の分割の行の `(2μ)_ℤ = 2_ℤμ_ℤ`（準備の鎖。Lean の添字は `μ + 1`）。最後は ℤ の乗法の結合律。
+              rw [show (2 * μ + 2 : ℕ) = 2 * (μ + 1) from rfl, ← inclusionNNtoZZ_eq_natCast (2 * (μ + 1)),
+                htwoZ (μ + 1), inclusionNNtoZZ_eq_natCast (μ + 1), mul_assoc]
       _ = ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) := by
             exact (Fin.sum_univ_eq_sum_range
               (fun μ : ℕ => expPhase M (((μ + 1 : ℕ) : ℤ) * (-k))) M).symm
@@ -303,12 +380,58 @@ theorem antiperiodic_complex_exp_sum_eq_checkPhase (hM : M ≠ 0) (k : ℤ) :
     ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
         (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
       = ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) := by
+  have hMC : ((M : ℕ) : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hM
+  -- 人手証明の準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n ∈ ℕ`）。
+  have htwoZ : ∀ n : ℕ, inclusionNNtoZZ (2 * n) = 2 * inclusionNNtoZZ n := fun n =>
+    calc inclusionNNtoZZ (2 * n)
+        = inclusionNNtoZZ 2 * inclusionNNtoZZ n :=
+          inclusion_nn_to_zz_preserves_product 2 n                          -- `inclusion_nn_to_zz_preserves_product`（`x → 2, y → n`）
+      _ = inclusionNNtoZZ (1 + 1) * inclusionNNtoZZ n := rfl               -- ℕ の数字 `2 := 1 + 1`
+      _ = (inclusionNNtoZZ 1 + 1) * inclusionNNtoZZ n := rfl               -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → 1_ℕ`）
+      _ = (inclusionNNtoZZ (0 + 1) + 1) * inclusionNNtoZZ n := by
+          rw [Nat.zero_add 1]                                               -- ℕ の加法の単位元 `0 + x = x`（`x → 1_ℕ`）を右辺から左辺へ
+      _ = ((inclusionNNtoZZ 0 + 1) + 1) * inclusionNNtoZZ n := rfl         -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → 0_ℕ`）
+      _ = ((0 + 1) + 1) * inclusionNNtoZZ n := rfl                         -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`
+      _ = (1 + 1) * inclusionNNtoZZ n := by rw [zero_add (1 : ℤ)]          -- ℤ の和の単位元 `0 + x = x`（`x → 1_ℤ`）
+      _ = 2 * inclusionNNtoZZ n := rfl                                     -- `def_power_of_integer` の `2_ℤ := 1_ℤ + 1_ℤ` を右辺から左辺へ（最後の行の略記 `n_ℤ` は Lean では同じ項）
+  -- 人手証明の準備の鎖 `(2_ℤ·a)_ℝ = 2_ℝ·a_ℝ`（`a ∈ ℤ`）。
+  have htwoR : ∀ a : ℤ, (((2 : ℤ) * a : ℤ) : ℝ) = 2 * (a : ℝ) := fun a =>
+    calc (((2 : ℤ) * a : ℤ) : ℝ)
+        = ((2 : ℤ) : ℝ) * (a : ℝ) := inclusion_zz_to_rr_preserves_product 2 a  -- `inclusion_zz_to_rr_preserves_product`（`a → 2_ℤ, b → a`）
+      _ = (((1 : ℤ) + 1 : ℤ) : ℝ) * (a : ℝ) := rfl                          -- `def_power_of_integer` の `2_ℤ := 1_ℤ + 1_ℤ`
+      _ = (((1 : ℤ) : ℝ) + ((1 : ℤ) : ℝ)) * (a : ℝ) := by
+          rw [inclusion_zz_to_rr_preserves_sum 1 1]                         -- `inclusion_zz_to_rr_preserves_sum`（`a, b → 1_ℤ`）
+      _ = ((1 : ℝ) + 1) * (a : ℝ) := by
+          rw [inclusion_zz_to_rr_of_one_intCast]                            -- `inclusion_zz_to_rr_of_one` を 2 か所へ
+      _ = 2 * (a : ℝ) := by rw [← real_two_eq_one_add_one]                 -- `def_real_two` の `2 := 1 + 1` を右辺から左辺へ
+  -- 人手証明の準備の鎖 `(2(M_col)_ℕ)_ℝ = ((2(M_col)_ℕ)_ℤ)_ℝ = (2_ℤM_col)_ℝ = 2_ℝ(M_col)_ℝ`。Lean の `(n : ℝ)` は `Nat.cast` なので、
+  -- 人手の略記 `n_ℝ := (n_ℤ)_ℝ` へは `Int.cast_natCast` と `inclusionNNtoZZ_eq_natCast` で移す（Lean だけの段）。
+  have h2MR : ((2 * M : ℕ) : ℝ) = 2 * (M : ℝ) :=
+    calc ((2 * M : ℕ) : ℝ)
+        = ((inclusionNNtoZZ (2 * M) : ℤ) : ℝ) := by
+          rw [inclusionNNtoZZ_eq_natCast, Int.cast_natCast]                 -- 略記 `n_ℝ := (n_ℤ)_ℝ`（`n → 2(M_col)_ℕ`）
+      _ = (((2 : ℤ) * inclusionNNtoZZ M : ℤ) : ℝ) := by rw [htwoZ M]       -- `(2(M_col)_ℕ)_ℤ = 2_ℤ·M_col`
+      _ = 2 * ((inclusionNNtoZZ M : ℤ) : ℝ) := htwoR (inclusionNNtoZZ M)    -- `(2M_col)_ℝ = 2_ℝ(M_col)_ℝ`
+      _ = 2 * (M : ℝ) := by
+          rw [inclusionNNtoZZ_eq_natCast, Int.cast_natCast]                 -- `(M_col)_ℕ` の定義と略記 `n_ℝ` を右辺から左辺へ
+  -- 人手証明の準備の鎖 `((2μ - 1)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ - 1_ℝ` の 4 行（`m → μ_ℤ`）。
+  have hoddR : ∀ m : ℤ, (((2 : ℤ) * m - 1 : ℤ) : ℝ) = 2 * (m : ℝ) - 1 := fun m =>
+    calc (((2 : ℤ) * m - 1 : ℤ) : ℝ)
+        = (((2 : ℤ) * m : ℤ) : ℝ) - ((1 : ℤ) : ℝ) :=
+          inclusion_zz_to_rr_preserves_difference _ _                       -- `inclusion_zz_to_rr_preserves_difference`（`a → 2_ℤm, b → 1_ℤ`）
+      _ = 2 * (m : ℝ) - ((1 : ℤ) : ℝ) := by rw [htwoR m]                   -- 準備の鎖 `(2_ℤ·a)_ℝ = 2_ℝ·a_ℝ`（`a → m`）
+      _ = 2 * (m : ℝ) - 1 := by rw [inclusion_zz_to_rr_of_one_intCast]      -- `inclusion_zz_to_rr_of_one`
   apply Finset.sum_congr rfl
   intro μ _
-  rw [checkPhase_eq_exp hM]
+  rw [checkPhase, expPhase, thetaTilde]
   congr 1
+  -- 人手の奇偶の分割の行の `((2μ - 1)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ - 1_ℝ` と T_{2M} の鎖の `(2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ`
+  -- （`inclusion_zz_to_rr_preserves_product` で `((-k)(2μ - 1))_ℝ = (-k)_ℝ((2μ - 1))_ℝ`）。残りの `push_cast`・`field_simp` は、
+  -- 人手の `k_ℝθ~_μ` の鎖（分子と分母に `2_ℝ` を掛ける段と ℝ の積の交換律・結合律）である。
+  rw [← Complex.ofReal_intCast (-k * (2 * (((μ : ℕ) : ℤ) + 1) - 1)), inclusion_zz_to_rr_preserves_product,
+    hoddR, ← Complex.ofReal_natCast (2 * M), h2MR]
   push_cast
-  ring
+  field_simp
 
 /-- **本文と同じ `Complex.exp` で書いた、奇偶分割によるデルタ差**。 -/
 theorem antiperiodic_complex_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
@@ -355,6 +478,39 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
   have hdelta : deltaMod M (l * (M : ℤ)) 0 = 1 := by
     rw [deltaMod, sub_zero, if_pos ⟨l, by ring⟩]
   have hsum := antiperiodic_exp_sum_delta_difference hM (l * (M : ℤ))
+  -- 人手証明の準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n ∈ ℕ`）。
+  have htwoZ : ∀ n : ℕ, inclusionNNtoZZ (2 * n) = 2 * inclusionNNtoZZ n := fun n =>
+    calc inclusionNNtoZZ (2 * n)
+        = inclusionNNtoZZ 2 * inclusionNNtoZZ n :=
+          inclusion_nn_to_zz_preserves_product 2 n                          -- `inclusion_nn_to_zz_preserves_product`（`x → 2, y → n`）
+      _ = inclusionNNtoZZ (1 + 1) * inclusionNNtoZZ n := rfl               -- ℕ の数字 `2 := 1 + 1`
+      _ = (inclusionNNtoZZ 1 + 1) * inclusionNNtoZZ n := rfl               -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → 1_ℕ`）
+      _ = (inclusionNNtoZZ (0 + 1) + 1) * inclusionNNtoZZ n := by
+          rw [Nat.zero_add 1]                                               -- ℕ の加法の単位元 `0 + x = x`（`x → 1_ℕ`）を右辺から左辺へ
+      _ = ((inclusionNNtoZZ 0 + 1) + 1) * inclusionNNtoZZ n := rfl         -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → 0_ℕ`）
+      _ = ((0 + 1) + 1) * inclusionNNtoZZ n := rfl                         -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`
+      _ = (1 + 1) * inclusionNNtoZZ n := by rw [zero_add (1 : ℤ)]          -- ℤ の和の単位元 `0 + x = x`（`x → 1_ℤ`）
+      _ = 2 * inclusionNNtoZZ n := rfl                                     -- `def_power_of_integer` の `2_ℤ := 1_ℤ + 1_ℤ` を右辺から左辺へ（最後の行の略記 `n_ℤ` は Lean では同じ項）
+  -- 人手証明の準備の鎖 `(2_ℤ·a)_ℝ = 2_ℝ·a_ℝ`（`a ∈ ℤ`）。
+  have htwoR : ∀ a : ℤ, (((2 : ℤ) * a : ℤ) : ℝ) = 2 * (a : ℝ) := fun a =>
+    calc (((2 : ℤ) * a : ℤ) : ℝ)
+        = ((2 : ℤ) : ℝ) * (a : ℝ) := inclusion_zz_to_rr_preserves_product 2 a  -- `inclusion_zz_to_rr_preserves_product`（`a → 2_ℤ, b → a`）
+      _ = (((1 : ℤ) + 1 : ℤ) : ℝ) * (a : ℝ) := rfl                          -- `def_power_of_integer` の `2_ℤ := 1_ℤ + 1_ℤ`
+      _ = (((1 : ℤ) : ℝ) + ((1 : ℤ) : ℝ)) * (a : ℝ) := by
+          rw [inclusion_zz_to_rr_preserves_sum 1 1]                         -- `inclusion_zz_to_rr_preserves_sum`（`a, b → 1_ℤ`）
+      _ = ((1 : ℝ) + 1) * (a : ℝ) := by
+          rw [inclusion_zz_to_rr_of_one_intCast]                            -- `inclusion_zz_to_rr_of_one` を 2 か所へ
+      _ = 2 * (a : ℝ) := by rw [← real_two_eq_one_add_one]                 -- `def_real_two` の `2 := 1 + 1` を右辺から左辺へ
+  -- 人手証明の準備の鎖 `(2(M_col)_ℕ)_ℝ = ((2(M_col)_ℕ)_ℤ)_ℝ = (2_ℤM_col)_ℝ = 2_ℝ(M_col)_ℝ`。Lean の `(n : ℝ)` は `Nat.cast` なので、
+  -- 人手の略記 `n_ℝ := (n_ℤ)_ℝ` へは `Int.cast_natCast` と `inclusionNNtoZZ_eq_natCast` で移す（Lean だけの段）。
+  have h2MR : ((2 * M : ℕ) : ℝ) = 2 * (M : ℝ) :=
+    calc ((2 * M : ℕ) : ℝ)
+        = ((inclusionNNtoZZ (2 * M) : ℤ) : ℝ) := by
+          rw [inclusionNNtoZZ_eq_natCast, Int.cast_natCast]                 -- 略記 `n_ℝ := (n_ℤ)_ℝ`（`n → 2(M_col)_ℕ`）
+      _ = (((2 : ℤ) * inclusionNNtoZZ M : ℤ) : ℝ) := by rw [htwoZ M]       -- `(2(M_col)_ℕ)_ℤ = 2_ℤ·M_col`
+      _ = 2 * ((inclusionNNtoZZ M : ℤ) : ℝ) := htwoR (inclusionNNtoZZ M)    -- `(2M_col)_ℝ = 2_ℝ(M_col)_ℝ`
+      _ = 2 * (M : ℝ) := by
+          rw [inclusionNNtoZZ_eq_natCast, Int.cast_natCast]                 -- `(M_col)_ℕ` の定義と略記 `n_ℝ` を右辺から左辺へ
   by_cases hl : Even l
   · have hdelta2 : deltaMod (2 * M) (l * (M : ℤ)) 0 = 1 := by
       rw [deltaMod, sub_zero, if_pos]
@@ -373,8 +529,8 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
       _ = ((2 * M : ℕ) : ℂ) - (M : ℂ) * 1 := by rw [mul_one]                    -- 2 行目
       _ = ((2 * M : ℕ) : ℂ) - (M : ℂ) := by rw [mul_one]                        -- 3 行目
       _ = (((2 : ℝ) * (M : ℝ) : ℝ) : ℂ) - (M : ℂ) := by                         -- 4 行目
-            -- `n_ℂ := (n_ℝ)_ℂ` の読み（`Complex.ofReal_natCast`）と `(2M)_ℝ = 2_ℝ(M)_ℝ`
-            rw [← Complex.ofReal_natCast (2 * M), Nat.cast_mul, Nat.cast_ofNat]
+            -- `n_ℂ := (n_ℝ)_ℂ` の読み（`Complex.ofReal_natCast`）と準備の鎖 `(2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ`
+            rw [← Complex.ofReal_natCast (2 * M), h2MR]
       _ = ((2 : ℝ) : ℂ) * (M : ℂ) - (M : ℂ) := by                               -- 5 行目
             -- `real_inclusion_preserves_product`。`((M)_ℝ)_ℂ` を `(M)_ℂ` と読む
             rw [← real_inclusion_mul, Complex.ofReal_natCast]
