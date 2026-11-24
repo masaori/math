@@ -96,19 +96,12 @@ end GammaPos
 
 section Reindex
 
-/-- `𝓜̌` 上の和は `{0,…,M-1}` 上の和に付け替えられる（`μ = k+1`）。 -/
-theorem sum_checkIdx {β : Type*} [AddCommMonoid β] (f : ℤ → β) (M : ℕ) :
-    ∑ i : CheckIdx M, f i.1 = ∑ k ∈ Finset.range M, f ((k : ℤ) + 1) := by
-  have h : ∑ i : CheckIdx M, f i.1 = ∑ μ ∈ checkIdxFinset M, f μ :=
-    Finset.sum_coe_sort (checkIdxFinset M) f
-  rw [h, checkIdxFinset]
-  exact Finset.sum_image fun x _ y _ hxy => checkIdxFinset_injOn hxy
-
 /-- 代表点の一致: `t^{(M)}_μ` を `δ = 1/2` で取ったものが `θ~_μ` である
 （人手の `θ~_μ = θ^{(1/2)}_{M,μ}`。`def_Theta_delta_M` と `antiperiodic_exp_sum` の `θ~_μ` の定義。Lean では `ℕ` と `ℤ` の添字の実数への包含と、分母の `(M : ℝ)`（`tagPoint`）と `((M : ℤ) : ℝ)`（`thetaTilde`）を付け替える）。 -/
-theorem tagPoint_half_eq_thetaTilde (M : ℕ) (k : ℕ) :
-    tagPoint (1 / 2) M (k + 1) = thetaTilde M ((k : ℤ) + 1) := by
-  unfold tagPoint thetaTilde
+theorem tagPoint_half_eq_thetaTilde (M : ℕ) (j : Fin M) :
+    tagPoint (1 / 2) M ((j : ℕ) + 1) = thetaTilde M (finIndexToZZ M j) := by
+  unfold tagPoint thetaTilde finIndexToZZ
+  rw [inclusionNNtoZZ_eq_natCast]                        -- `ι_{ℕ→ℤ}` を Lean の `Nat.cast` へ（Lean だけの段）
   push_cast
   ring
 
@@ -147,7 +140,7 @@ section MaxSimple
 
 variable {M : ℕ}
 
-/-- `def_Lambda_delta_M` の添字 `μ = 1, …, M_col` の和を、人手の有限和の Lean での書き方（`Fin M` の上の和、`μ = j + 1`。
+/-- `def_Lambda_delta_M` の添字 `μ = 1, …, M_col` の和を、人手の有限和の Lean での書き方（`Fin M` の上の和、`μ` は写像の像 `finIndexToZZ M j`。
 `ClaimFiniteSumsOfRealNumbers.lean` の冒頭）へ付け替える。`LambdaM` は `Finset.Icc 1 M` の上の和で書いてあるので、
 その読み替えの段で、人手の鎖の行ではない。 -/
 theorem sum_Icc_one_gammaFn_tagPoint_eq_sum_fin (P : IsingParam) (δ : ℝ) (M : ℕ) :
@@ -159,28 +152,27 @@ theorem sum_Icc_one_gammaFn_tagPoint_eq_sum_fin (P : IsingParam) (δ : ℝ) (M :
 
 人手の `Λ̌_max` は Lean の `checkBigLambda … Finset.univ`（`ε = (1,…,1)`）である。1 行目の `eigenvalues_of_V_plus` (2) の表式は、
 Lean では `checkBigLambda` の定義と `ǧ(1,…,1) = (1/2)Σ_{μ=1}^{M_col} γ(θ~_μ)` の展開で出す（`eigenvalues_of_V_plus` (2) の Lean の主張は無い）。
-人手の `Σ_{μ=1}^{M_col}` は `Fin M` の上の和（`μ = j + 1`）、`γ(θ~_μ)` は仮定 `hg` の `g`（`gammaFn P (thetaTilde M μ)`）である。
+人手の `Σ_{μ=1}^{M_col}` は `Fin M` の上の和（`μ` は写像の像 `finIndexToZZ M j`）、`γ(θ~_μ)` は仮定 `hg` の `g`（`gammaFn P (thetaTilde M μ)`）である。
 最後の行は `LambdaM` の定義と、その和の添字の付け替え `sum_Icc_one_gammaFn_tagPoint_eq_sum_fin`（人手の鎖の行ではない）。 -/
 theorem checkBigLambda_univ_eq_LambdaM (F : CheckFermiSetup M) (P : IsingParam)
     (g : CheckIdx M → ℝ) (hg : ∀ i : CheckIdx M, g i = gammaFn P (thetaTilde M i.1)) :
     checkBigLambda F g (Real.sinh (2 * P.K2)) Finset.univ = LambdaM P (1 / 2) M :=
   calc checkBigLambda F g (Real.sinh (2 * P.K2)) Finset.univ
       = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
-          * Real.exp (1 / 2 * ∑ j : Fin M, gammaFn P (thetaTilde M ((j : ℤ) + 1))) := by
+          * Real.exp (1 / 2 * ∑ j : Fin M, gammaFn P (thetaTilde M (finIndexToZZ M j))) := by
         rw [checkBigLambda, gval_eq_sum_fin_real, Finset.mul_sum]
         congr 2
         refine Finset.sum_congr rfl fun j _ => ?_
         rw [hg (CheckFermiSetup.checkIdxOfFin j), binOfMem_of_mem (Finset.mem_univ _), halfSign_one]
-        simp only [CheckFermiSetup.checkIdxOfFin]
-        ring
+        exact mul_comm _ _                              -- `checkIdxOfFin j` の値は写像の像 `finIndexToZZ M j`
                                                         -- `eigenvalues_of_V_plus` (2)
     _ = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
           * Real.exp (1 / 2 * ∑ j : Fin M,
-              gammaFn P (2 * Real.pi * ((((j : ℤ) + 1 : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ))) := rfl
+              gammaFn P (2 * Real.pi * (((finIndexToZZ M j : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ))) := rfl
                                                         -- `antiperiodic_exp_sum` の `θ~_μ` の定義を各項へ同時適用
     _ = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
           * Real.exp (1 / 2 * ∑ j : Fin M, gammaFn P (tagPoint (1 / 2) M ((j : ℕ) + 1))) := by
-        have h : ∀ j : Fin M, gammaFn P (2 * Real.pi * ((((j : ℤ) + 1 : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ))
+        have h : ∀ j : Fin M, gammaFn P (2 * Real.pi * (((finIndexToZZ M j : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ))
             = gammaFn P (tagPoint (1 / 2) M ((j : ℕ) + 1)) := fun j => by
           rw [tagPoint_half_eq_thetaTilde M j]
           rfl

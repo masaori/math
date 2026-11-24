@@ -20,7 +20,7 @@ Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`）は `Ne
 指数法則の 3 行（`ǧ` の定義・`def_sum_over_check_index_set`・`real_exp_of_finite_sum`）と展開の 2 行は `sum_exp_gval_step2_expansion`
 （各項に `exp_gval_step2_product`、展開は `expansion_of_finite_product_of_two_term_sums_of_real`）、続く 6 行は `prod_step2_cosh`
 （`def_half_sign_of_binary_value` の `h(1) := ½`・`h(0) := −(½)`（`halfSign_one`・`halfSign_zero`）と、ℝ の計算規則を 1 行に 1 つと、
-`def_cosh_sinh` の `cosh` を右辺から左辺へ）である。人手の `h(ε(μ))` は `halfSign (ε j)`（`ε j` は人手の `ε(j + 1)`）である。
+`def_cosh_sinh` の `cosh` を右辺から左辺へ）である。人手の `h(ε(μ))` は `halfSign (ε j)`（`ε j` は人手の `ε(finIndexToZZ M j)`）である。
 `trace_Vprime`（積の添字が `𝓜̌`）は、`M = r + 1` では Step 5 の鎖 `trace_Vprime_step5` に積の添字を `𝓜̌` へ戻す運ぶ段を足したもので、
 人手に対応する行は無い。このファイルで `trace_Vprime` を使うのは人手の範囲外の `M = 0` の枝（`trace_Vprime_inv`・`trace_Vprime_pos`）だけで、
 人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` と `sum_exp_gval` で閉じる。
@@ -160,8 +160,8 @@ theorem Vprime_inv_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) 
 
 /-- **原文 `trace_of_check_Vprime` Step 2 の指数法則の 3 行の鎖**:
 `exp(ǧ(ε)) = exp(Σ_{μ∈𝓜̌} γ(θ̃_μ)h(ε(μ))) = exp(Σ_{μ=1}^{M_col} γ(θ̃_μ)h(ε(μ))) = Π_{μ=1}^{M_col} exp(γ(θ̃_μ)h(ε(μ)))`
-（人手の `M_col` が Lean の `r + 1`、人手の `μ` が Lean の `checkIdxOfFin j`（`μ = j + 1`）、人手の `ε(μ)` が Lean の語の値 `ε j`、
-`h` が `halfSign`）。3 行目（`def_sum_over_check_index_set`）は、Lean では `μ = j + 1` の全単射で和の添字を付け替える段である。 -/
+（人手の `M_col` が Lean の `r + 1`、人手の `μ` が Lean の `checkIdxOfFin j`（`μ = finIndexToZZ M j`）、人手の `ε(μ)` が Lean の語の値 `ε j`、
+`h` が `halfSign`）。3 行目（`def_sum_over_check_index_set`）は、Lean では `μ = finIndexToZZ M j` の全単射で和の添字を付け替える段である。 -/
 theorem exp_gval_step2_product {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ)
     (ε : Fin (r + 1) → Fin 2) :
     Real.exp (F.gval g (finsetOfBinWord ε))
@@ -179,7 +179,7 @@ theorem exp_gval_step2_product {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : Chec
         congrArg Real.exp
           (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _ hterm).symm
                                                         -- `def_sum_over_check_index_set`（`Σ_{μ∈𝓜̌}` を `Σ_{μ=1}^{M_col}` へ。
-                                                        -- Lean は `μ = j + 1` の全単射で添字を付け替える）
+                                                        -- Lean は `μ = finIndexToZZ M j` の全単射で添字を付け替える）
     _ = ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * halfSign (ε j)) :=
         real_exp_of_finite_sum r _                      -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → γ(θ̃_μ)h(ε(μ))`）
 
@@ -379,7 +379,7 @@ theorem trace_Vprime (g : CheckIdx M → ℝ) :
       _ = ((∏ i : CheckIdx (r + 1), (2 * Real.cosh (g i / 2)) : ℝ) : ℂ) :=
           congrArg (fun x : ℝ => (x : ℂ))
             (Fintype.prod_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
-              fun _ => rfl)                             -- 積の添字を `μ = j + 1` の全単射で `𝓜̌` へ戻す（運ぶ段。人手の行は無い）
+              fun _ => rfl)                             -- 積の添字を `μ = finIndexToZZ M j` の全単射で `𝓜̌` へ戻す（運ぶ段。人手の行は無い）
 
 /-- **原文 `trace_of_check_Vprime` Step 3 のトレースの 9 行の鎖**:
 `tr((V̌')^{-1}) = tr((V̌')^{-1}I) = tr((V̌')^{-1}Σ_εQ̌_ε) = tr(Σ_ε(V̌')^{-1}Q̌_ε) = Σ_εtr((V̌')^{-1}Q̌_ε)
@@ -438,7 +438,7 @@ theorem exp_neg_gval_step3_product {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : 
         congrArg (fun s : ℝ => Real.exp (-s))
           (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _ hterm).symm
                                                         -- `def_sum_over_check_index_set`（`Σ_{μ∈𝓜̌}` を `Σ_{μ=1}^{M_col}` へ。
-                                                        -- Lean は `μ = j + 1` の全単射で添字を付け替える）
+                                                        -- Lean は `μ = finIndexToZZ M j` の全単射で添字を付け替える）
     _ = Real.exp (∑ j : Fin (r + 1), -(g (checkIdxOfFin j) * halfSign (ε j))) := by
         rw [finite_sum_of_negated_real_numbers_succ r]  -- `finite_sum_of_negated_real_numbers`（`m → M_col`、`j → μ`、
                                                         -- `x_j → γ(θ̃_μ)h(ε(μ))`）を右辺から左辺へ

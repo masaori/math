@@ -5005,9 +5005,6 @@ Ising2D.filter_last_eq_singleton	Finset.univ@Fin@Fin.fintype
 Ising2D.filter_last_eq_singleton	Singleton.singleton@Fin,Finset@Finset.instSingleton
 Ising2D.finCheckIdxEquiv	Equiv
 Ising2D.finCheckIdxEquiv	Equiv.ofBijective
-Ising2D.finCheckIdxEquiv	Finset
-Ising2D.finCheckIdxEquiv	Membership.mem@Int,Finset@SetLike.instMembership
-Ising2D.finCheckIdxEquiv	Subtype.mk
 Ising2D.finCheckIdxEquiv_val	DFunLike.coe@Equiv,Fin,fun@EquivLike.toFunLike
 Ising2D.finCheckIdxEquiv_val	Equiv
 Ising2D.finCheckIdxEquiv_val	Finset
@@ -8913,14 +8910,6 @@ Ising2D.sum_checkGam	Finset.Icc@Nat@Nat.instPreorder,Nat.instLocallyFiniteOrder
 Ising2D.sum_checkGam	Finset.sum@Fin,Real@Real.instAddCommMonoid
 Ising2D.sum_checkGam	Finset.sum@Nat,Real@Real.instAddCommMonoid
 Ising2D.sum_checkGam	Finset.univ@Fin@Fin.fintype
-Ising2D.sum_checkIdx	AddCommMonoid
-Ising2D.sum_checkIdx	Finset
-Ising2D.sum_checkIdx	Finset.range
-Ising2D.sum_checkIdx	Finset.sum@Ising2D.CheckIdx,?@?
-Ising2D.sum_checkIdx	Finset.sum@Nat,?@?
-Ising2D.sum_checkIdx	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
-Ising2D.sum_checkIdx	Membership.mem@Int,Finset@SetLike.instMembership
-Ising2D.sum_checkIdx	Subtype.val
 Ising2D.sum_checkIdx_eq_sum_fin_real	Finset.sum@Fin,Real@Real.instAddCommMonoid
 Ising2D.sum_checkIdx_eq_sum_fin_real	Finset.sum@Ising2D.CheckIdx,Real@Real.instAddCommMonoid
 Ising2D.sum_checkIdx_eq_sum_fin_real	Finset.univ@Fin@Fin.fintype

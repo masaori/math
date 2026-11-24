@@ -44,14 +44,10 @@ variable {M : ℕ}
 
 /-! ## `Fin M ≃ 𝓜̌` -/
 
-/-- `Fin M` と章 017 の添字型 `CheckIdx M = 𝓜̌` の間の全単射（`j` を写像の像 `finIndexToZZ M j` へ送る）。 -/
+/-- `Fin M` と章 017 の添字型 `CheckIdx M = 𝓜̌` の間の全単射（`j` を写像の像 `finIndexToZZ M j` へ送る `CheckFermiSetup.checkIdxOfFin`）。 -/
 noncomputable def finCheckIdxEquiv (M : ℕ) : Fin M ≃ CheckIdx M :=
-  Equiv.ofBijective (fun j => ⟨finIndexToZZ M j, mem_checkIdxFinset.2 (checkIndex_checkIdx M j)⟩)
-    (by
-      refine (Fintype.bijective_iff_injective_and_card _).2 ⟨?_, ?_⟩
-      · intro i j h
-        exact (finIndexToZZ_bijective_onto_index_set M).1 _ _ (congrArg Subtype.val h)
-      · simp [CheckIdx.card])
+  Equiv.ofBijective CheckFermiSetup.checkIdxOfFin
+    ⟨CheckFermiSetup.checkIdxOfFin_injective, CheckFermiSetup.checkIdxOfFin_surjective⟩
 
 @[simp]
 theorem finCheckIdxEquiv_val (M : ℕ) (j : Fin M) :

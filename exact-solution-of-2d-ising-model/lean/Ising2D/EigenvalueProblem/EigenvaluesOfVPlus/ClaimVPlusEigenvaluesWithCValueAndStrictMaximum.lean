@@ -28,7 +28,7 @@
 - (3) 前の鎖 2 行: `max_eigenvalue_of_V_plus_simple` (1) を右辺から左辺へ（`checkBigLambda_univ_eq_LambdaM`）、
   `eigenvalues_of_V_plus` (2) の `Λ̌_max := Λ̌_{(1,…,1)}`（Lean の `Λ̌_max` は `checkBigLambda … Finset.univ`
   そのものなので `rfl`）。後の鎖 2 行: 同じ置き方を右辺から左辺へ（`rfl`）、`eigenvalues_of_V_plus` (2) の
-  `Λ̌_max` の値（`checkBigLambda_max_eq`。人手の `Σ_{μ=1}^{M_col}` は `Fin M` の上の和で、`μ = j + 1` は `checkIdxOfFin`）
+  `Λ̌_max` の値（`checkBigLambda_max_eq`。人手の `Σ_{μ=1}^{M_col}` は `Fin M` の上の和で、`μ` は写像の像 `finIndexToZZ M j`（`checkIdxOfFin`））
 - (4) 前半の鎖 2 行: `max_eigenvalue_of_V_plus_simple` (2)（`checkBigLambda_lt_max_of_gammaFn`）、
   `Λ̌_max := Λ̌_{(1,…,1)}`（Lean では同じ項）。Lean の (4) は前半を第 5 の連言、後半を第 6 の連言に置く。
 - (4) 後半: `def_maximum_value_of_real_family` の (1)（`ε = (1,…,1)`、Lean の `Finset.univ` で `rfl`）と (2)

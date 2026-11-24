@@ -62,22 +62,27 @@ open Matrix
 
 /-! ## 添字集合 `𝓜̌ = {1,…,M}` -/
 
-/-- 原文 `def_check_index_set` の `𝓜̌ = {1,…,M}` を `Finset ℤ` として
-（`{1,…,M}` を `{0,…,M-1}` の像として作ると、後段の和の付け替えがそのまま使える）。 -/
-def checkIdxFinset (M : ℕ) : Finset ℤ := (Finset.range M).image (fun k : ℕ => (k : ℤ) + 1)
+/-- 原文 `def_check_index_set` の `𝓜̌ = {1,…,M}`（`def_index_set_from_one_to_n` の添字の集合）を `Finset ℤ` として。
+`{0,…,M−1} ⊂ ℕ` の、写像 `k ↦ ι_{ℕ→ℤ}(k) +_ℤ 1_ℤ`（`ι_{ℕ→ℤ}` は `inclusion_nn_to_zz` の具体版 `inclusionNNtoZZ`）による像として作る。
+`Fin M` の元 `j` の値 `j.val` の像は、`def_index_set_from_one_to_n` の写像の像 `finIndexToZZ M j` そのもの（定義の式が同じ）である。 -/
+def checkIdxFinset (M : ℕ) : Finset ℤ := (Finset.range M).image (fun k : ℕ => inclusionNNtoZZ k + 1)
 
-theorem checkIdxFinset_injOn : Function.Injective (fun k : ℕ => (k : ℤ) + 1) := by
+theorem checkIdxFinset_injOn : Function.Injective (fun k : ℕ => inclusionNNtoZZ k + 1) := by
   intro a b h
-  have h' : (a : ℤ) + 1 = (b : ℤ) + 1 := h
+  have h' : inclusionNNtoZZ a + 1 = inclusionNNtoZZ b + 1 := h
+  rw [inclusionNNtoZZ_eq_natCast, inclusionNNtoZZ_eq_natCast] at h'
   omega
 
+/-- `μ ∈ checkIdxFinset M ⟺ μ ∈ 𝓜̌`。像の元 `ι_{ℕ→ℤ}(k) + 1_ℤ`（`k < M`）は `finIndexToZZ M ⟨k, _⟩` なので、
+`finIndexToZZ_bijective_onto_index_set` の値の範囲（→）と全射（←）で示す。 -/
 theorem mem_checkIdxFinset {M : ℕ} {μ : ℤ} : μ ∈ checkIdxFinset M ↔ CheckIndex M μ := by
-  simp only [checkIdxFinset, Finset.mem_image, Finset.mem_range, CheckIndex]
+  rw [checkIdxFinset, Finset.mem_image, CheckIndex, ← inclusionNNtoZZ_eq_natCast M]
   constructor
   · rintro ⟨k, hk, rfl⟩
-    omega
+    exact (finIndexToZZ_bijective_onto_index_set M).2.1 ⟨k, Finset.mem_range.1 hk⟩
   · rintro ⟨h1, h2⟩
-    exact ⟨(μ - 1).toNat, by omega, by omega⟩
+    obtain ⟨j, rfl⟩ := (finIndexToZZ_bijective_onto_index_set M).2.2 μ h1 h2
+    exact ⟨j.val, Finset.mem_range.2 j.isLt, rfl⟩
 
 theorem checkIdxFinset_card (M : ℕ) : (checkIdxFinset M).card = M := by
   rw [checkIdxFinset, Finset.card_image_of_injective _ checkIdxFinset_injOn, Finset.card_range]

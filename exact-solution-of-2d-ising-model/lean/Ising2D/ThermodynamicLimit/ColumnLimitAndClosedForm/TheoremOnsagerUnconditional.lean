@@ -72,10 +72,9 @@ theorem sum_checkGam (P : IsingParam) (M : ℕ) :
       = ∑ μ ∈ Finset.Icc 1 M, gammaFn P (tagPoint (1 / 2) M μ) := by
   rw [Ising2D.sum_Icc_one_eq_sum_range,
     ← Fin.sum_univ_eq_sum_range (fun k : ℕ => gammaFn P (tagPoint (1 / 2) M (k + 1))) M]
-  -- 右辺は `Icc 1 M` の ℕ の添字を `Fin M` の値 `j.val + 1` に付け替えた和で、`tagPoint_half_eq_thetaTilde` も値の形 `(j.val : ℤ) + 1` を返すので、
-  -- 左辺の像 `finIndexToZZ M j` を値へ戻す（Lean だけの段）
+  -- 右辺は `Icc 1 M` の ℕ の添字を `Fin M` の値 `j.val + 1` に付け替えた和で、`tagPoint_half_eq_thetaTilde` がそれを像 `finIndexToZZ M j` の `θ~` へ送る
   exact Finset.sum_congr rfl fun j _ => by
-    rw [tagPoint_half_eq_thetaTilde, checkGam, gammaTilde, finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+    rw [tagPoint_half_eq_thetaTilde, checkGam, gammaTilde]
 
 /-! ## 挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` -/
 

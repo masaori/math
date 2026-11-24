@@ -215,7 +215,7 @@ theorem checkFermiOf_Qproj_eq (P : IsingParam) {r : ℕ} (T : Finset (Fin (r + 1
       NecSuf.projFactor F.nOp T j
         = NecSuf.projFactor Fs.nOp (T.map e.toEmbedding) (CheckFermiSetup.checkIdxOfFin j) := by
     intro j
-    have hj : CheckFermiSetup.checkIdxOfFin j = e j := Subtype.ext (by simp [CheckFermiSetup.checkIdxOfFin, e, finIndexToZZ, inclusionNNtoZZ_eq_natCast])
+    have hj : CheckFermiSetup.checkIdxOfFin j = e j := rfl   -- どちらも `⟨finIndexToZZ (r + 1) j, _⟩`
     have hn : Fs.nOp (e j) = F.nOp j := rfl
     rw [hj]
     by_cases hT : j ∈ T

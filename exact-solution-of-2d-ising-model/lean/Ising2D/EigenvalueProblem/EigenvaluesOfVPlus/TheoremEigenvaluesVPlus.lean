@@ -138,7 +138,7 @@ theorem checkBigLambda_pos (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) {s2 
 
 open CheckFermiSetup in
 /-- `def_sum_over_check_index_set`（`Σ_{μ∈𝓜̌}` を `Σ_{μ=1}^{M_col}` へ開く）を `ǧ(ε)` の和に当てたもの（`ℝ` の値）:
-`ǧ(ε) = Σ_{μ=1}^{M_col} γ(θ~_μ) h(ε(μ))`（人手の添字 `μ = j + 1` は `checkIdxOfFin`）。 -/
+`ǧ(ε) = Σ_{μ=1}^{M_col} γ(θ~_μ) h(ε(μ))`（人手の添字 `μ` は写像の像 `finIndexToZZ M j`（`checkIdxOfFin j`））。 -/
 theorem gval_eq_sum_fin_real (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
     F.gval g T = ∑ j : Fin M, g (checkIdxOfFin j) * halfSign (binOfMem T (checkIdxOfFin j)) := by
   rw [CheckFermiSetup.gval]
@@ -178,7 +178,7 @@ open CheckFermiSetup in
 /-- **原文 `eigenvalues_of_V_plus` (2) の大小の比較の `ǧ(1,…,1) − ǧ(ε) ≥ 0` の鎖**: `γ(θ~_μ) > 0` なら `ǧ(ε) ≤ ǧ(1,…,1)`。
 人手の 8 行と 1 対 1 の calc（人手の `ε(μ)` は Lean の `binOfMem T μ`、`ε = (1,…,1)` は `T = univ`、`h` は `halfSign`）。5 行目までは
 `max_eigenvalue_of_V_plus_simple` (2) の `gval_lt_gval_univ` と同じ段である。人手の `r_μ` は `let r` で置き、「`r_μ` の置き方」は `rfl` の段にした。
-人手の `k → 1` は `Fin M` の `0`（`μ = j + 1`）で、`M_col ≥ 1` は `F.hM` から出す。最後の「移項」は `sub_nonneg`。
+人手の `k → 1` は `Fin M` の `0`（`μ = finIndexToZZ M j`）で、`M_col ≥ 1` は `F.hM` から出す。最後の「移項」は `sub_nonneg`。
 必要十分版 `NecSuf.sum_weight_le_univ` は同じ並びの calc である。 -/
 theorem gval_le_gval_univ (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (hgpos : ∀ i, 0 < g i)
     (T : Finset (CheckIdx M)) :
@@ -329,7 +329,7 @@ theorem checkBigLambda_min_le (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
 
 open CheckFermiSetup in
 /-- **原文 `eigenvalues_of_V_plus` (2) の `ǧ(1,…,1)` の鎖**: `ǧ(1,…,1) = ½ Σ_{μ=1}^{M_col} γ(θ~_μ)`。人手の 6 行と 1 対 1 の calc
-（人手の `Σ_{μ=1}^{M_col}` は Lean の `Fin M` の上の和で、`def_sum_over_check_index_set` の行は添字 `μ = j + 1` の付け替え）。 -/
+（人手の `Σ_{μ=1}^{M_col}` は Lean の `Fin M` の上の和で、`def_sum_over_check_index_set` の行は添字 `μ = finIndexToZZ M j` の付け替え）。 -/
 theorem gval_univ_eq_half_sum (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) :
     F.gval g Finset.univ = (1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j) :=
   calc F.gval g Finset.univ

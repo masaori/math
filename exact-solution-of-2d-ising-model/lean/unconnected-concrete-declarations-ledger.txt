@@ -907,7 +907,6 @@ Ising2D.suffixLetterIndicator_of_le
 Ising2D.suffixLetterIndicator_of_lt
 Ising2D.suffixLetterIndicator_update_of_lt
 Ising2D.sum_Icc_one_gammaFn_tagPoint_eq_sum_fin
-Ising2D.sum_checkIdx
 Ising2D.sum_checkIdx_eq_sum_fin_real
 Ising2D.sum_checkPhase
 Ising2D.sum_two_pow_rev

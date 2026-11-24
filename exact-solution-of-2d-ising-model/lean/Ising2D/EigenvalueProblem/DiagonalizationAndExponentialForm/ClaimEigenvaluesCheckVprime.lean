@@ -81,7 +81,7 @@ noncomputable def gval (_F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (T : Finset (CheckIdx M)) : ℝ :=
   ∑ i : CheckIdx M, g i * halfSign (binOfMem T i)
 
-/-- 語 `ε : Fin M → Fin 2`（人手の写像 `ε : 𝓜̌ → {0,1}` の `ε(j + 1) = ε j`）で添字付けた `Qproj` の添字 `finsetOfBinWord ε` から
+/-- 語 `ε : Fin M → Fin 2`（人手の写像 `ε : 𝓜̌ → {0,1}` の `ε(finIndexToZZ M j) = ε j`）で添字付けた `Qproj` の添字 `finsetOfBinWord ε` から
 読んだ値 `binOfMem` は、語の値 `ε j` に戻る。 -/
 theorem binOfMem_finsetOfBinWord (ε : Fin M → Fin 2) (j : Fin M) :
     binOfMem (finsetOfBinWord ε) (checkIdxOfFin j) = ε j := by
@@ -103,7 +103,7 @@ theorem gval_neg (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
   ring
 
 /-- 人手の Step 1 の前置き「`𝓜̌ = {1, …, M_col}` なので `X̌` の和は `Σ_{μ=1}^{M_col}`」: `Xop`（`CheckIdx M` の上の `Finset.sum`）を、
-人手の添字 `μ = j + 1`（`checkIdxOfFin`）で `Fin M` の上の和へ付け替える。添字を付け替える段で、人手の鎖の行ではない。 -/
+人手の添字 `μ = finIndexToZZ M j`（`checkIdxOfFin`）で `Fin M` の上の和へ付け替える。添字を付け替える段で、人手の鎖の行ではない。 -/
 theorem Xop_eq_sum_fin (g : CheckIdx M → ℝ) :
     F.Xop g = ∑ j : Fin M, ((g (checkIdxOfFin j) : ℂ)) • (F.nOp (checkIdxOfFin j) - (1 / 2 : ℂ) • 1) :=
   (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
@@ -122,7 +122,7 @@ theorem gval_eq_sum_fin (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
   rfl
 
 /-- `def_sum_over_check_index_set`（`Σ_{μ∈𝓜̌} r_μ := Σ_{μ=1}^{M_col} r_μ`）: Lean の `𝓜̌` の上の和（`Finset.univ`）と、
-人手の添字 `μ = j + 1`（`checkIdxOfFin`）の `Fin M` の上の和は等しい。 -/
+人手の添字 `μ = finIndexToZZ M j`（`checkIdxOfFin`）の `Fin M` の上の和は等しい。 -/
 theorem sum_fin_eq_sum_checkIdx (f : CheckIdx M → ℂ) :
     ∑ j : Fin M, f (checkIdxOfFin j) = ∑ i : CheckIdx M, f i :=
   Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _ (fun _ => rfl)

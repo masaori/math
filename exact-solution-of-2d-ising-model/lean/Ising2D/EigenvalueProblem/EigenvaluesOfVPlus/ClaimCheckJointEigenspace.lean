@@ -18,9 +18,9 @@ Step 0 の異なる添字の因子の可換性の鎖（`YI = IY` の 2 行と、
 `mul_identity_eq_identity_mul_step0`・`nOp_mul_nOp_comm_step0`・`nOp_mul_one_sub_nOp_comm_step0`・`one_sub_nOp_mul_nOp_comm_step0`・
 `one_sub_nOp_mul_one_sub_nOp_comm_step0` に人手の行と 1 対 1 の `calc` で置き、まとめた「Step 0 の可換性」を `projFactor_mul_comm_step0` に置く。
 人手の写像 `ε : 𝓜̌ → {0,1}`（`def_binary_assignments_on_check_index_set`）は、Lean の `Qproj` では `ε(μ) = 1` となる `μ` の集合 `T`、
-語として書く鎖（Step 2・Step 5）では `ε : Fin M → Fin 2`（`ε(j + 1) = ε j`）である。
+語として書く鎖（Step 2・Step 5）では `ε : Fin M → Fin 2`（`ε(finIndexToZZ M j) = ε j`）である。
 `Qproj`（`Finset.noncommProd`）が人手の冒頭の `Q̌_ε = ∏_{μ∈𝓜̌} R_μ^{(ε(μ))} = ∏_{μ=1}^{M_col} R_μ^{(ε(μ))}`（`def_check_Q_epsilon`・
-`def_product_over_check_index_set`。左から掛ける積）に等しいことは `Qproj_eq_finProdLeft` に置く（人手の `μ = j + 1` は `checkIdxOfFin j`）。
+`def_product_over_check_index_set`。左から掛ける積）に等しいことは `Qproj_eq_finProdLeft` に置く（人手の添字 `μ` は写像の像 `finIndexToZZ M j`（`checkIdxOfFin j`））。
 語で添字付けた形 `Q̌_ε = ∏R_μ^{(ε(μ))}`（`R_μ^{(e)}` は `rFactor`）は `Qproj_eq_finProdLeft_rFactor` に置き、これを経るのは Step 2 の `sum_Qproj_step2` である。
 Step 1・Step 3〜Step 5 の鎖の「`Q̌_ε` の定義（冒頭）」の行は、Lean の `Qproj` から `Qproj_eq_finProdLeft` で `R_μ^{(ε(μ))}` の積へ移る。
 Step 1 の `ε ≠ ε'` の鎖（`R_ν^{(ε(ν))}` と `Q̌_{ε'}` の因子の可換性と、10 行の鎖）は
@@ -252,23 +252,22 @@ noncomputable def Qproj (T : Finset (CheckIdx M)) : TensorPow M :=
 noncomputable def Qproj' (ε : CheckIdx M → Bool) : TensorPow M :=
   F.Qproj (Finset.univ.filter fun i => ε i)
 
-/-- 人手の添字 `μ = j + 1 ∈ 𝓜̌ = {1, …, M_col}`（`def_check_index_set`）。Lean の `j : Fin M` を人手の `μ` へ送る。 -/
+/-- Lean の添字 `j : Fin M` を、写像の像 `finIndexToZZ M j ∈ 𝓜̌ = {1, …, M_col}`（`def_index_set_from_one_to_n`・`def_check_index_set`）へ送る。 -/
 def checkIdxOfFin (j : Fin M) : CheckIdx M :=
-  ⟨(j : ℤ) + 1, Finset.mem_image.2 ⟨j, Finset.mem_range.2 j.2, rfl⟩⟩
+  ⟨finIndexToZZ M j, Finset.mem_image.2 ⟨j, Finset.mem_range.2 j.2, rfl⟩⟩
 
-theorem checkIdxOfFin_injective : Function.Injective (checkIdxOfFin (M := M)) := by
-  intro j k h
-  have h' : (j : ℤ) + 1 = (k : ℤ) + 1 := congrArg Subtype.val h
-  exact Fin.ext (by omega)
+theorem checkIdxOfFin_injective : Function.Injective (checkIdxOfFin (M := M)) :=
+  fun j k h => (finIndexToZZ_bijective_onto_index_set M).1 j k (congrArg Subtype.val h)
 
 theorem checkIdxOfFin_surjective : Function.Surjective (checkIdxOfFin (M := M)) := by
   rintro ⟨μ, hμ⟩
-  obtain ⟨k, hk, rfl⟩ := Finset.mem_image.1 hμ
-  exact ⟨⟨k, Finset.mem_range.1 hk⟩, rfl⟩
+  obtain ⟨j, hj⟩ := (finIndexToZZ_bijective_onto_index_set M).2.2 μ
+    (mem_checkIdxFinset.1 hμ).1 ((inclusionNNtoZZ_eq_natCast M).symm ▸ (mem_checkIdxFinset.1 hμ).2)
+  exact ⟨j, Subtype.ext hj⟩
 
 /-- **人手の `Q̌_ε = ∏_{μ=1}^{M_col} R_μ^{(ε(μ))}`**（証明の冒頭）: `Qproj`（`Finset.noncommProd`）は、
 `def_finite_product_of_matrices`（`r → M_col`）の左から掛ける積 `NecSuf.finProdLeft` に等しい。
-人手の `M_col` が Lean の `r + 1`、人手の因子 `R_μ^{(ε(μ))}`（`μ = j + 1`）が `NecSuf.projFactor F.nOp T (checkIdxOfFin j)` である。
+人手の `M_col` が Lean の `r + 1`、人手の因子 `R_μ^{(ε(μ))}`（`μ = finIndexToZZ M j`）が `NecSuf.projFactor F.nOp T (checkIdxOfFin j)` である。
 必要十分版 `NecSuf.finProdLeft_eq_noncommProd_image`（`Ising2D/NecSuf/FiniteProductLeftAsNoncommProd.lean`）の特殊化で、
 `𝓜̌` 全体が `checkIdxOfFin` の像であること（全射）で添字集合を付け替える。
 `M_col = r + 1` の形でだけ述べる（人手の `M_col ≥ 2` から従う）。`F : CheckFermiSetup M` の主張へ戻すときは `M = r + 1` に分ける。 -/
@@ -282,7 +281,7 @@ theorem Qproj_eq_finProdLeft {r : ℕ} (F : CheckFermiSetup (r + 1)) (T : Finset
           (NecSuf.projFactor F.nOp T)
           (fun i _ j _ _ => NecSuf.commute_projFactor F.commute_nOp_nOp T T i j) :=
         Finset.noncommProd_congr (Finset.image_univ_of_surjective checkIdxOfFin_surjective).symm
-          (fun _ _ => rfl) _                            -- `𝓜̌ = {j + 1 | j ∈ Fin M_col}`（全射）
+          (fun _ _ => rfl) _                            -- `𝓜̌ = {finIndexToZZ M j | j ∈ Fin M_col}`（全射）
     _ = NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (checkIdxOfFin j)) :=
         (NecSuf.finProdLeft_eq_noncommProd_image (NecSuf.projFactor F.nOp T)
           (fun i j => NecSuf.commute_projFactor F.commute_nOp_nOp T T i j) r
@@ -473,12 +472,12 @@ theorem Qproj_mul_Qproj_of_ne {T T' : Finset (CheckIdx M)} (h : T ≠ T') :
       by_contra hc
       push_neg at hc
       exact h (Finset.ext fun μ => hc μ)               -- `ε ≠ ε'` なら、ある `ν` で `ε(ν) ≠ ε'(ν)`
-    obtain ⟨ν, rfl⟩ := checkIdxOfFin_surjective μ      -- 人手の `ν = j + 1`
+    obtain ⟨ν, rfl⟩ := checkIdxOfFin_surjective μ      -- 人手の `ν = finIndexToZZ M j`
     exact Qproj_mul_Qproj_of_ne_step1 F ν hμ
 
 /-! ## 原文 Step 2（(2) の証明）
 
-人手の和 `Σ_{ε∈{0,1}^𝓜̌}` は `def_sum_over_binary_words`（Lean の `NecSuf.binWordSum`）で、語 `ε` の成分 `ε(j + 1)` が Lean の `ε j : Fin 2` である。
+人手の和 `Σ_{ε∈{0,1}^𝓜̌}` は `def_sum_over_binary_words`（Lean の `NecSuf.binWordSum`）で、語 `ε` の成分 `ε(finIndexToZZ M j)` が Lean の `ε j : Fin 2` である。
 Lean の `Qproj` は `𝓜̌` の部分集合 `T`（`ε(μ) = 1` となる `μ` の集合）で添字付けるので、語 `ε` を部分集合 `finsetOfBinWord ε` へ送る。
 人手の `R_μ^{(e)}`（`R_μ^{(1)} := ň_μ`、`R_μ^{(0)} := I - ň_μ`）は `rFactor μ e` である。各行の右のコメントは、人手の鎖の同じ行の根拠である。 -/
 
@@ -486,7 +485,7 @@ Lean の `Qproj` は `𝓜̌` の部分集合 `T`（`ε(μ) = 1` となる `μ` 
 noncomputable def rFactor (μ : CheckIdx M) (e : Fin 2) : TensorPow M :=
   if e = 1 then F.nOp μ else 1 - F.nOp μ
 
-/-- 人手の語 `ε ∈ {0,1}^𝓜̌`（`ε(j + 1) = ε j`）に、`ε(μ) = 1` となる `μ` の集合を対応させる（Lean の `Qproj` の添字）。 -/
+/-- 人手の語 `ε ∈ {0,1}^𝓜̌`（`ε(finIndexToZZ M j) = ε j`）に、`ε(μ) = 1` となる `μ` の集合を対応させる（Lean の `Qproj` の添字）。 -/
 def finsetOfBinWord (ε : Fin M → Fin 2) : Finset (CheckIdx M) :=
   (Finset.univ.filter fun j => ε j = 1).image checkIdxOfFin
 
@@ -510,7 +509,7 @@ theorem finsetOfBinWord_bijective : Function.Bijective (finsetOfBinWord (M := M)
     rw [checkIdxOfFin_mem_finsetOfBinWord]
     by_cases hj : checkIdxOfFin j ∈ T <;> simp [hj]
 
-/-- `Q̌_ε` の因子 `R_{j+1}^{(ε(j + 1))}`: Lean の `NecSuf.projFactor F.nOp (finsetOfBinWord ε) (checkIdxOfFin j)` は `rFactor (checkIdxOfFin j) (ε j)` である。 -/
+/-- `Q̌_ε` の因子 `R_μ^{(ε(μ))}`（`μ = finIndexToZZ M j`）: Lean の `NecSuf.projFactor F.nOp (finsetOfBinWord ε) (checkIdxOfFin j)` は `rFactor (checkIdxOfFin j) (ε j)` である。 -/
 theorem projFactor_finsetOfBinWord (ε : Fin M → Fin 2) (j : Fin M) :
     NecSuf.projFactor F.nOp (finsetOfBinWord ε) (checkIdxOfFin j) = F.rFactor (checkIdxOfFin j) (ε j) := by
   by_cases h : ε j = 1
@@ -521,7 +520,7 @@ theorem projFactor_finsetOfBinWord (ε : Fin M → Fin 2) (j : Fin M) :
 
 人手は `Q̌_ε := ∏_{μ∈𝓜̌} R_μ^{(ε(μ))}`（`def_check_Q_epsilon`）を、`def_product_over_check_index_set` で
 `∏_{μ=1}^{M_col} R_μ^{(ε(μ))}`（`def_finite_product_of_matrices` の左から掛ける積）へ開く 2 行の鎖を置く。
-人手の写像 `ε : 𝓜̌ → {0,1}` は Lean の語 `ε : Fin M → Fin 2`（`ε(j + 1) = ε j`）で、`Qproj` の添字は `finsetOfBinWord ε` である。 -/
+人手の写像 `ε : 𝓜̌ → {0,1}` は Lean の語 `ε : Fin M → Fin 2`（`ε(finIndexToZZ M j) = ε j`）で、`Qproj` の添字は `finsetOfBinWord ε` である。 -/
 
 /-- **原文の証明の冒頭**の 2 行の鎖 `Q̌_ε = ∏_{μ∈𝓜̌} R_μ^{(ε(μ))} = ∏_{μ=1}^{M_col} R_μ^{(ε(μ))}`（人手の `M_col` が Lean の `r + 1`）。
 以下の鎖の「`Q̌_ε` の定義（冒頭）」はこの等式である。Lean の `Qproj` は `𝓜̌` 全体の上の `Finset.noncommProd` で、人手の
@@ -556,7 +555,7 @@ theorem sum_Qproj_step2 {r : ℕ} (F : CheckFermiSetup (r + 1)) :
         (expansion_of_finite_product_of_two_term_sums_tensorPow r (fun j e => F.rFactor (checkIdxOfFin j) e)).symm
                                                         -- `expansion_of_finite_product_of_two_term_sums`
                                                         -- （`n → 2^{M_col}`、`r → M_col`、`A_j^{(e)} → R_j^{(e)}`）を右辺から左辺へ
-                                                        -- （人手の `R_{j+1}^{(e)}` が `rFactor (checkIdxOfFin j) e`）
+                                                        -- （人手の `R_μ^{(e)}`（`μ = finIndexToZZ M j`）が `rFactor (checkIdxOfFin j) e`）
     _ = NecSuf.finProdLeft r (fun _ => (1 : TensorPow (r + 1))) :=
         congrArg (NecSuf.finProdLeft r) (funext fun j => F.rFactor_one_add_rFactor_zero (checkIdxOfFin j))
                                                         -- Step 0 の和が単位行列であることを各因子へ同時に適用
@@ -770,7 +769,7 @@ theorem nOp_mul_Qproj_of_mem {ν : CheckIdx M} {T : Finset (CheckIdx M)} (hν : 
   | 0, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_pos hν, one_smul_tensorPow]
   | 1, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_pos hν, one_smul_tensorPow]
   | r + 2, F, ν, T, hν =>
-    obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective ν       -- 人手の `ν = j + 1`
+    obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective ν       -- 人手の `ν = finIndexToZZ M j`
     exact nOp_mul_Qproj_of_mem_step3 F j hν
 
 /-- **原文 (3)** の `ε(ν) = 0` の場合の `ň_ν Q̌_ε = O`（人手の `ε(ν) = 0` は Lean の `ν ∉ T`）。
@@ -781,7 +780,7 @@ theorem nOp_mul_Qproj_of_not_mem {ν : CheckIdx M} {T : Finset (CheckIdx M)} (h�
   | 0, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_neg hν, zero_smul_tensorPow]
   | 1, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_neg hν, zero_smul_tensorPow]
   | r + 2, F, ν, T, hν =>
-    obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective ν       -- 人手の `ν = j + 1`
+    obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective ν       -- 人手の `ν = finIndexToZZ M j`
     exact nOp_mul_Qproj_of_not_mem_step3 F j hν
 
 /-- `ň_ν Q̌_ε` の係数の形 `(if ν ∈ T then 1 else 0) • Q̌_ε`（Lean の他の章が使う形）。人手の (3) の二つの場合
@@ -807,7 +806,7 @@ theorem commute_nOp_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
   | 0, F, ν, T => exact F.commute_nOp_Qproj_of_necSuf ν T
   | 1, F, ν, T => exact F.commute_nOp_Qproj_of_necSuf ν T
   | r + 2, F, ν, T =>
-    obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective ν       -- 人手の `ν = j + 1`
+    obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective ν       -- 人手の `ν = finIndexToZZ M j`
     exact (Qproj_mul_nOp_eq_nOp_mul_Qproj_step3 F j T).symm
                                                         -- 右から掛けた側の鎖を右辺から左辺へ
 
