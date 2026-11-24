@@ -4,9 +4,10 @@
 本文の添字 `r ∈ I_{m+1}` は Lean の `r - 1`（`closedWalkTextIndex`）。
 
 人手証明との対応:
-- `def_smoothed_cyclic_total_turning` の冒頭「`r = k` の場合」の確認（始点は横断の頂点の一致から、
-  反転でないことは背理法: 反転なら方向番号が二ずれて軸が同じになり、直進の `γ_l → γ_{σ(l)}` と
-  合わせて二つの軸が一致する）: `swappedExit_mem_nonbacktrackingSuccessors`。
+- `claim_smoothed_exit_nonbacktracking` の「`r = k` の場合」（始点は横断の頂点の一致から、
+  反転でないことは背理法: 反転なら方向番号が二ずれて軸が同じになり（`claim_reversal_direction_shift`）、
+  直進の `γ_l → γ_{σ(l)}` は方向番号を変えない（`claim_step_advances_direction`）ので
+  二つの軸が一致する）: `swappedExit_mem_nonbacktrackingSuccessors`。
   `r = l` の場合は対称: `swappedExit_mem_nonbacktrackingSuccessors'`。三つの場合をまとめたものが
   `smoothedExitEdge_mem_nonbacktrackingSuccessors`。
 - `def_smoothed_split_edge_sequences` の二本の辺列 `γ_A = (e_{k+1}, …, e_l)`、
@@ -46,8 +47,11 @@ theorem swappedExit_mem_nonbacktrackingSuccessors {e f e' f' : OrientedEdge L}
       = directionAxis (directionNumber e + 2) := (directionAxis_add_two _).symm
     _ = directionAxis (directionNumber (reversal e)) := by rw [directionNumber_reversal]
     _ = directionAxis (directionNumber f') := by rw [hrev]
+    _ = directionAxis (directionNumber e' + directionResidueProjection (stepTurning e' f')) := by
+        rw [step_advances_direction e' f' hf']
     _ = directionAxis (directionNumber e') := by
-        rw [(stepTurning_eq_zero_iff e' f' hf').1 hst']
+        rw [hst']
+        simp [directionResidueProjection]
 
 /-- 対称な場合: `e'` の出辺を `f` に付け替えた接続も非後退である。 -/
 theorem swappedExit_mem_nonbacktrackingSuccessors' {e f e' f' : OrientedEdge L}
@@ -56,7 +60,7 @@ theorem swappedExit_mem_nonbacktrackingSuccessors' {e f e' f' : OrientedEdge L}
   exact swappedExit_mem_nonbacktrackingSuccessors
     ⟨hf', hf, htgt.symm, hst', hst, Ne.symm hax⟩
 
-/-- 平滑化後の出辺はどの添字でも非後退接続である（`def_smoothed_cyclic_total_turning` の冒頭）。 -/
+/-- 平滑化後の出辺はどの添字でも非後退接続である（`claim_smoothed_exit_nonbacktracking`）。 -/
 theorem smoothedExitEdge_mem_nonbacktrackingSuccessors {m : ℕ}
     (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
     {k l : Fin (m + 1)} (hcross : indexPairCrossing γ hγ k l) (r : Fin (m + 1)) :
