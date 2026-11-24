@@ -77685,16 +77685,16 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 \frac{ka+L}{L^2}
 &\le\frac{L+L}{L^2}
-&&(\because\ ka<L\text{ から }ka+L\le L+L\text{（}\mathbb{N}\text{ の加法単調性）。}L^2>0\text{ で割る（}\mathbb{Q}\text{ の順序と正数による除法）})\\
+&&(\because\ ka<L\text{ から }ka+L\le L+L\text{（}\mathbb{N}\text{ の加法単調性）、}L^2>0\text{ で割る（}\mathbb{Q}\text{ の順序と正数による除法）})\\
 &=\frac{2}{L}
-&&(\because\ L+L=2L\text{ と }L\ne0\text{ による約分 }\tfrac{2L}{L^2}=\tfrac{2}{L}\text{。}\mathbb{Q}\text{ の四則})
+&&(\because\ L+L=2L\text{ と }L\ne0\text{ による約分 }\tfrac{2L}{L^2}=\tfrac{2}{L}\text{、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \frac{L^2-(ka)^2}{L^2}
 &\le\frac{2aL}{L^2}
 &&(\because\ \blkref{claim_square_difference_from_multiple_side_bound}\text{ を }ka\le L\le ka+a\text{ で読み、}L^2>0\text{ で割る})\\
 &=\frac{2a}{L}
-&&(\because\ L\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+&&(\because\ L\ne0\text{ による約分、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \frac{2(L^2-(ka)^2)}{L^2}
