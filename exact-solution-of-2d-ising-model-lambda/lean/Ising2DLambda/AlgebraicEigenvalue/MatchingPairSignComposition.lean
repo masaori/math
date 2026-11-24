@@ -33,10 +33,11 @@ private theorem matchingPairWordOrientationSign_forEnumeration
     matchingWordSign (l.flatMap (fun p =>
       if p.1 ∈ S then [p.1, p.2] else [p.2, p.1])) =
       orientationSign l S * perfectMatchingSign D := by
-  have h := NecSuf.AlgebraicEigenvalue.matchingPairWordOrientationSign l S
-    (matchingEnumeration_complete D l hl)
+  have h := matchingOrientationSignAux S l []
+    (by simpa using matchingEnumeration_complete D l hl)
+  simp only [List.nil_append] at h
   rw [perfectMatchingSign_enumeration_independent D l hl] at h
-  exact h
+  simpa [orientationSign] using h
 
 /-- Compose the two endpoint word identities before identifying the actual pair enumerations. -/
 theorem matchingPairSignComposition (τ υ : FixedPointFreeInvolution J)

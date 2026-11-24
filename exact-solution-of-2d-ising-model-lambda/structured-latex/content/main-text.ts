@@ -21095,7 +21095,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
                       paragraph(["が成り立つ。列挙との二つの一致は仮定であり、実際の二色のマッチングについては次の節で示す。空集合ではすべての列・積・符号は空の値一である。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_matching_pair_word_orientation_sign"), " を二つの向き付き列挙へ適用し、仮定した列の一致を代入すると"]),
+                      paragraph([ref("claim_matching_pair_word_orientation_sign"), " を二つの向き付き列挙へ適用する。その証明の各対の反転は ", ref("claim_matching_word_sign_swap"), " による。仮定した列の一致を代入すると"]),
                       displayMath(String.raw`\begin{aligned}
 \varepsilon(W_\tau(w))&=\alpha_{\mathcal D}\operatorname{sgn}(\mathcal D)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr)\\
 \varepsilon(W_\upsilon(w))&=\alpha_{\mathcal E}\operatorname{sgn}(\mathcal E)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr).
@@ -46792,7 +46792,7 @@ g
                           displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_{d}(q)
 &=\mathrm{ac}_{d+1}\bigl((t-\widehat{w})\,q\bigr)
-&&\bigl(\because\ \blkref{claim_qbar_poly_linear_factor_leading_coeff}\text{ を }C:=q,\ m:=d\text{ へ当てる。仮定は (四)}\bigr)\\
+&&\bigl(\because\ \blkref{claim_qbar_poly_linear_factor_leading_coeff}\text{ を }C:=q,\ m:=d\text{ へ当て、仮定は (四)}\bigr)\\
 &=\mathrm{ac}_{d+1}(g)
 &&\bigl(\because\ \text{(二) の }g=(t-\widehat{w})\,q\bigr)\\
 &=1
