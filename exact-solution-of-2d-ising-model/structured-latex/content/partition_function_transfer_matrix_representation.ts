@@ -950,7 +950,7 @@ s(i,M_{\mathrm{col}}+1)
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 2 },
     title: { text: "サイトごとの Pauli 行列族の周期的な延長" },
     labels: ["def_site_pauli_periodic_extension"],
-    lean: ["Ising2D.nextSite", "Ising2D.sigmaZ_nextSite_of_last"],
+    lean: ["Ising2D.nextSite", "Ising2D.sigmaZ_nextSite_of_last", "Ising2D.finIndexToZZ_nextSite_of_lt", "Ising2D.finIndexToZZ_nextSite_of_last"],
     statement: [
       paragraph([
         ref("def_site_pauli_matrices"),

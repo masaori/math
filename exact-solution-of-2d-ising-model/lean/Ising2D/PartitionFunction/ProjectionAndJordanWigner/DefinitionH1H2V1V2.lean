@@ -79,6 +79,7 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
 これを指数の肩の等式として使う。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIndexSetFromOneToN
 import Ising2D.Representation
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
@@ -101,6 +102,23 @@ theorem nextSite_val_of_lt {m : Fin M} (h : (m : ℕ) + 1 < M) :
 theorem nextSite_val_of_last {m : Fin M} (h : (m : ℕ) + 1 = M) :
     ((nextSite m : Fin M) : ℕ) = 0 := by
   simp [nextSite, ← h]
+
+/-- **`def_site_pauli_periodic_extension`**: 人手の添字 `m ∈ {1,…,M}`（`finIndexToZZ M m`。`def_index_set_from_one_to_n`）が
+`ι_{ℕ→ℤ}(M)` より小さければ、次のサイトの人手の添字は `m + 1_ℤ` である。周期的な延長を使わない側で、`nextSite`（このブロックの具体版）の値が
+ℤ の加法と一致することを述べる（Lean だけの段の補題。仮定は Lean の `Fin M` の元の値 `m.val + 1 < M` で書く）。 -/
+theorem finIndexToZZ_nextSite_of_lt {m : Fin M} (h : (m : ℕ) + 1 < M) :
+    finIndexToZZ M (nextSite m) = finIndexToZZ M m + 1 := by
+  have hv := nextSite_val_of_lt h
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+  omega
+
+/-- **`def_site_pauli_periodic_extension`**: 人手の添字 `m ∈ {1,…,M}`（`finIndexToZZ M m`）が `M` なら、
+次のサイトの人手の添字は周期的な延長により `1_ℤ` である（Lean だけの段の補題）。 -/
+theorem finIndexToZZ_nextSite_of_last {m : Fin M} (h : (m : ℕ) + 1 = M) :
+    finIndexToZZ M (nextSite m) = 1 := by
+  have hv := nextSite_val_of_last h
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+  omega
 
 /-- 原文の site 添字 `1`（Lean の `Fin M` では `0`）。 -/
 def firstSite (M : ℕ) (hM : M ≠ 0) : Fin M := ⟨0, Nat.pos_of_ne_zero hM⟩

@@ -58,4 +58,11 @@ theorem finIndexToZZ_lt_iff_val_lt (n : ℕ) (i j : Fin n) :
   simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
   omega
 
+/-- **`def_index_set_from_one_to_n`**: 人手の添字 `finIndexToZZ n m` と `ι_{ℕ→ℤ}(n)` の等号は、Lean の `Fin n` の元の値の等号 `m.val + 1 = n` と同値である
+（Lean だけの段の補題。Lean の定義が最後のサイトを値の等号で判定するので、人手の添字の比較から移すために置く）。 -/
+theorem finIndexToZZ_eq_iff_val_add_one_eq (n : ℕ) (m : Fin n) :
+    finIndexToZZ n m = inclusionNNtoZZ n ↔ (m : ℕ) + 1 = n := by
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
+  omega
+
 end Ising2D

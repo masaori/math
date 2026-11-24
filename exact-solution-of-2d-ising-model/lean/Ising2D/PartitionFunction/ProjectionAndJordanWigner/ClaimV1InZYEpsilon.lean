@@ -143,9 +143,10 @@ theorem pauliX_mul_pauliY_eq : pauliX * pauliY = Complex.I • pauliZ := by
 `σʸσˣ = -iσᶻ` を作り、他の文字列部分は `σˣσˣ = I` で消える。 -/
 theorem Y_mul_Z_next_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
     Y m * Z (nextSite m) = (-Complex.I) • (sigmaZ m * sigmaZ (nextSite m)) := by
-  have hnext : ((nextSite m : Fin M) : ℕ) = (m : ℕ) + 1 := by
-    apply nextSite_val_of_lt
-    omega
+  -- 人手の添字は `finIndexToZZ M m ∈ {1,…,M−1}` と次のサイトの `finIndexToZZ M m + 1`（`def_index_set_from_one_to_n`・`def_site_pauli_periodic_extension`）
+  have hnext : finIndexToZZ M (nextSite m) = finIndexToZZ M m + 1 :=
+    finIndexToZZ_nextSite_of_lt (by omega)
+  have hinj := (finIndexToZZ_bijective_onto_index_set M).1
   rw [Y, Z, ← siteProd_mul, sigmaZ, sigmaZ, siteOp_apply, siteOp_apply, ← siteProd_mul]
   let c : Fin M → ℂ := Function.update 1 m (-Complex.I)
   let base : Fin M → Matrix (Fin 2) (Fin 2) ℂ :=
@@ -155,27 +156,32 @@ theorem Y_mul_Z_next_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
       fun i => c i • base i := by
     funext i
     simp only [Pi.mul_apply]
-    rcases lt_trichotomy (i : ℕ) (m : ℕ) with hi | hi | hi
-    · have hinext : (i : ℕ) < (nextSite m : ℕ) := by omega
-      have him : i ≠ m := Fin.ne_of_val_ne (by omega)
-      have hin : i ≠ nextSite m := Fin.ne_of_val_ne (by omega)
-      rw [jwFamily_of_lt hi, jwFamily_of_lt hinext]
+    -- 人手の Step 2 の因子ごとの計算: 人手の添字 `finIndexToZZ M i` を ℤ の順序で `finIndexToZZ M m`・`finIndexToZZ M m + 1` と比べ、
+    -- `i < m` で `σ^xσ^x`、`i = m` で `σ^yσ^x`、`i = m+1` で `Iσ^z`、`i > m+1` で `II` の因子
+    rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with hi | hi | hi
+    · have him : i ≠ m := fun h => by rw [h] at hi; exact lt_irrefl _ hi
+      have hin : i ≠ nextSite m := fun h => by rw [h, hnext] at hi; omega
+      rw [jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M i m).1 hi),
+        jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M i (nextSite m)).1 (by omega))]
       simp [c, base, him, hin]
-    · have hieq : i = m := Fin.val_injective hi
+    · have hieq : i = m := hinj i m hi
       subst i
-      have hmn : m ≠ nextSite m := Fin.ne_of_val_ne (by omega)
-      rw [jwFamily_self, jwFamily_of_lt (by omega)]
+      have hmn : m ≠ nextSite m := fun h => by
+        have := congrArg (finIndexToZZ M) h
+        omega
+      rw [jwFamily_self, jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M m (nextSite m)).1 (by omega))]
       simp [c, base, hmn, pauliY_mul_pauliX_eq]
-    · rcases lt_trichotomy (i : ℕ) (nextSite m : ℕ) with hin | hin | hin
+    · rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M (nextSite m)) with hin | hin | hin
       · omega
-      · have hieq : i = nextSite m := Fin.val_injective hin
+      · have hieq : i = nextSite m := hinj i (nextSite m) hin
         subst i
-        have hnm : nextSite m ≠ m := Fin.ne_of_val_ne (by omega)
-        rw [jwFamily_of_gt (by omega), jwFamily_self]
+        have hnm : nextSite m ≠ m := fun h => by rw [h] at hi; exact lt_irrefl _ hi
+        rw [jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt M m (nextSite m)).1 hi), jwFamily_self]
         simp [c, base, hnm]
-      · have him : i ≠ m := Fin.ne_of_val_ne (by omega)
-        have hin' : i ≠ nextSite m := Fin.ne_of_val_ne (by omega)
-        rw [jwFamily_of_gt (by omega), jwFamily_of_gt hin, one_mul]
+      · have him : i ≠ m := fun h => by rw [h] at hi; exact lt_irrefl _ hi
+        have hin' : i ≠ nextSite m := fun h => by rw [h] at hin; exact lt_irrefl _ hin
+        rw [jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt M m i).1 hi),
+          jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt M (nextSite m) i).1 hin), one_mul]
         simp [c, base, him, hin']
   rw [hfamily, siteProd_smul_family_for_jordanWigner]
   have hprod : (∏ i, c i) = -Complex.I := by
@@ -189,8 +195,12 @@ theorem epsilon_mul_Y_mul_Z_next_of_last (hM : 2 ≤ M) (m : Fin M)
     (hm : (m : ℕ) + 1 = M) :
     epsilon M * Y m * Z (nextSite m) =
       Complex.I • (sigmaZ m * sigmaZ (nextSite m)) := by
-  have hnext : ((nextSite m : Fin M) : ℕ) = 0 := nextSite_val_of_last hm
-  have hmpos : 0 < (m : ℕ) := by omega
+  -- 人手の添字は `finIndexToZZ M m = M` と、周期的な延長による次のサイトの `1`（`def_index_set_from_one_to_n`・`def_site_pauli_periodic_extension`）
+  have hnext : finIndexToZZ M (nextSite m) = 1 := finIndexToZZ_nextSite_of_last hm
+  have hmM : finIndexToZZ M m = inclusionNNtoZZ M := (finIndexToZZ_eq_iff_val_add_one_eq M m).2 hm
+  have hM2 : 2 ≤ inclusionNNtoZZ M := by rw [inclusionNNtoZZ_eq_natCast]; omega
+  have hinj := (finIndexToZZ_bijective_onto_index_set M).1
+  have hrange := (finIndexToZZ_bijective_onto_index_set M).2.1
   rw [epsilon_eq_siteProd_for_jordanWigner, Y, Z, ← siteProd_mul, ← siteProd_mul,
     sigmaZ, sigmaZ, siteOp_apply, siteOp_apply, ← siteProd_mul]
   let c : Fin M → ℂ := Function.update 1 m Complex.I
@@ -201,24 +211,33 @@ theorem epsilon_mul_Y_mul_Z_next_of_last (hM : 2 ≤ M) (m : Fin M)
       jwFamily (nextSite m) pauliZ = fun i => c i • base i := by
     funext i
     simp only [Pi.mul_apply]
-    rcases lt_trichotomy (i : ℕ) (m : ℕ) with hi | hi | hi
-    · by_cases hi0 : (i : ℕ) = 0
-      · have hieq : i = nextSite m := Fin.val_injective (by omega)
+    -- 人手の Step 3 の因子ごとの計算: 人手の添字 `finIndexToZZ M i ∈ {1,…,M}` が `1` で `σ^xσ^xσ^z`、
+    -- `2,…,M−1` で `σ^xσ^xI`、`M` で `σ^xσ^yI` の因子（`M ≥ 2` で `1 ≠ M`）
+    rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with hi | hi | hi
+    · by_cases hi1 : finIndexToZZ M i = 1
+      · have hieq : i = nextSite m := hinj i (nextSite m) (by rw [hi1, hnext])
         subst i
-        have hnm : nextSite m ≠ m := Fin.ne_of_val_ne (by omega)
-        rw [jwFamily_of_lt (by omega), jwFamily_self]
+        have hnm : nextSite m ≠ m := fun h => by rw [h] at hi; exact lt_irrefl _ hi
+        rw [jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M (nextSite m) m).1 hi), jwFamily_self]
         simp [c, base, hnm]
-      · have hin_gt : (nextSite m : ℕ) < (i : ℕ) := by omega
-        have him : i ≠ m := Fin.ne_of_val_ne (by omega)
-        have hin : i ≠ nextSite m := Fin.ne_of_val_ne (by omega)
-        rw [jwFamily_of_lt hi, jwFamily_of_gt hin_gt]
+      · have hin_gt : finIndexToZZ M (nextSite m) < finIndexToZZ M i := by
+          have := (hrange i).1
+          omega
+        have him : i ≠ m := fun h => by rw [h] at hi; exact lt_irrefl _ hi
+        have hin : i ≠ nextSite m := fun h => by rw [h] at hin_gt; exact lt_irrefl _ hin_gt
+        rw [jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M i m).1 hi),
+          jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt M (nextSite m) i).1 hin_gt)]
         simp [c, base, him, hin]
-    · have hieq : i = m := Fin.val_injective hi
+    · have hieq : i = m := hinj i m hi
       subst i
-      have hmn : m ≠ nextSite m := Fin.ne_of_val_ne (by omega)
-      rw [jwFamily_self, jwFamily_of_gt (by omega)]
+      have hmn : m ≠ nextSite m := fun h => by
+        have := congrArg (finIndexToZZ M) h
+        omega
+      rw [jwFamily_self, jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt M (nextSite m) m).1 (by omega))]
       simp [c, base, hmn, pauliX_mul_pauliY_eq]
-    · omega
+    · -- 人手の添字は `M` を超えない（`finIndexToZZ_bijective_onto_index_set` の値の範囲）
+      have := (hrange i).2
+      omega
   rw [hfamily, siteProd_smul_family_for_jordanWigner]
   have hprod : (∏ i, c i) = Complex.I := by
     simp [c, Finset.prod_update_of_mem]
