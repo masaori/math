@@ -173,7 +173,8 @@ theorem limit_of_log_Z_in_N_row
                                                                   -- ℝ の四則。`ε ≠ 0` を約す
       _ < (n : ℝ) * ε := mul_lt_mul_of_pos_right hn hε           -- `log 2/ε < ι(N_0)` の両辺に `ε > 0` を掛ける
   -- Lean の列は `ℕ` で添字づけるので、`N_0 ∈ ℤ_{≥1}` を `ℕ` の `k` で書き直す（人手には無い段）
-  obtain ⟨k, hk⟩ : ∃ k : ℕ, ((k : ℤ)) = n := ⟨n.toNat, Int.toNat_of_nonneg hN0nn⟩
+  obtain ⟨k, hk⟩ := inclusionNNtoZZ_exists_preimage_of_nonneg n hN0nn  -- `N_0 = ι_{ℕ→ℤ}(k)`
+  rw [inclusionNNtoZZ_eq_natCast] at hk
   have hk1 : 1 ≤ k := by omega
   refine ⟨k, fun N hN => ?_⟩                                      -- `N_row ∈ ℤ_{≥N_0}` について
   have hNR : (n : ℝ) ≤ N :=

@@ -4,7 +4,7 @@
 # 本文が外から持ち込み、使う性質を列挙している記号だけである。型クラスの演算は「演算@型@インスタンス」で書く（UndefinedSymbols.lean）。
 #
 # 集合と代数構造の記号: ℕ・ℤ・ℝ を構成せず既知の集合として持ち込み、ℝ の +・·・− について体の公理を列挙している。
-# ℕ の和と積と順序 ≤ は下の ℕ の行に載せる。ℕ の <・≥・数字・差は、ℤ_{≥0} への全射の主張を置くまで載せない。ℤ の演算と順序は下の ℤ の行に載せる。ℝ の逆数は下の ℝ の商の行に載せる。
+# ℕ の和・積・順序 ≤・狭義の順序 <・≥・数字・差は下の ℕ の行に載せる。ℤ の演算と順序は下の ℤ の行に載せる。ℝ の逆数は下の ℝ の商の行に載せる。
 Nat	set_and_algebra_notation
 Int	set_and_algebra_notation
 Real	set_and_algebra_notation
@@ -109,6 +109,22 @@ HMul.hMul@Nat,Nat,Nat@instMulNat	set_and_algebra_notation
 # 載せる前に台帳に在った ℕ の ≤ の 125 行は、本文が ℤ_{≥k} の元の順序として書いている位置で Lean だけが ℕ の ≤ を使っている宣言を含む。
 # 状態台帳の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」が、git の履歴（載せる前の main の先端 e652b185c）から引く手順を持つ。
 LE.le@Nat@instLENat	set_and_algebra_notation
+# ℕ の狭義の順序 <: set_and_algebra_notation が x < y :⇔ x + 1_ℕ ≤ y と定める。Lean の ℕ の < は Nat.lt n m := Nat.le (Nat.succ n) m と定義されており、Nat.succ n は n + 1 と定義として等しいので、本文の定義と定義として等しい。
+LT.lt@Nat@instLTNat	set_and_algebra_notation
+# ℕ の ≥: set_and_algebra_notation が x ≥ y :⇔ y ≤ x と定める。Lean の GE.ge x y も LE.le y x と定義として等しい。
+GE.ge@Nat@instLENat	set_and_algebra_notation
+# ℕ の差: set_and_algebra_notation が x ≤ y のときだけ、x + d = y を満たすただ一つの d を y − x と定める。Lean の ℕ の差 Nat.sub は全ての組に値を持つ全域の写像で、
+# x ≤ y のときの値は本文の差と一致する（Nat.add_sub_cancel'）。x ≤ y でない組では 0 を返すが、その値は本文の定義の外であり、その値を使う具体版の主張は本文の主張と一対一でない。
+HSub.hSub@Nat,Nat,Nat@instSubNat	set_and_algebra_notation
+# ℕ の数字: set_and_algebra_notation が 0・1 を 0_ℕ・1_ℕ とし、n を表す数字の次の数字を n + 1_ℕ と定める（2 := 1 + 1、3 := 2 + 1、4 := 3 + 1）。
+# Lean の ℕ の数字は自然数の値そのもの（instOfNatNat n := ⟨n⟩）で、(2 : ℕ) = 1 + 1・(3 : ℕ) = 2 + 1・(4 : ℕ) = 3 + 1 は定義として等しい（rfl）。
+# 載せる前に台帳に在った ℕ の数字・<・≥・差の 2,401 行は、本文が ℤ_{≥k} の元として書いている位置で Lean だけが ℕ を使っている宣言を含む。
+# 状態台帳の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」が、git の履歴（載せる前の main の先端 cb5432303）から引く手順を持つ。
+OfNat.ofNat@Nat,0@instOfNatNat	set_and_algebra_notation
+OfNat.ofNat@Nat,1@instOfNatNat	set_and_algebra_notation
+OfNat.ofNat@Nat,2@instOfNatNat	set_and_algebra_notation
+OfNat.ofNat@Nat,3@instOfNatNat	set_and_algebra_notation
+OfNat.ofNat@Nat,4@instOfNatNat	set_and_algebra_notation
 # ℤ の狭義の順序: def_int_strict_order が x < y :⇔ x + 1 ≤ y と定める。Lean の ℤ の < も Int.lt m n := m + 1 ≤ n と定義されており、定義として等しい（int_lt_iff_add_one_le。Iff.rfl）。
 LT.lt@Int@Int.instLTInt	def_int_strict_order
 # ℤ の絶対値: def_int_absolute_value が 0 ≤ x なら |x| := x、そうでなければ |x| := −x と場合分けで定める。mathlib の ℤ の |x| は束の上限 x ⊔ (−x) として

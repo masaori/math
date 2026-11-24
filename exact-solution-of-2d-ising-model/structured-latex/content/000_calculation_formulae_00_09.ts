@@ -2722,7 +2722,7 @@ T_B(X - W)
     kind: "definition",
     title: { tex: String.raw`\mathbb{N}\to\mathbb{Z}\text{の包含写像}` },
     labels: ["inclusion_nn_to_zz"],
-    lean: ["Ising2D.inclusionNNtoZZ", "Ising2D.inclusionNNtoZZ_eq_natCast"],
+    lean: ["Ising2D.inclusionNNtoZZ", "Ising2D.inclusionNNtoZZ_eq_natCast", "Ising2D.inclusionNNtoZZ_exists_preimage_of_nonneg"],
     statement: [
       paragraph([
         ref("set_and_algebra_notation"),
@@ -2761,6 +2761,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の先頭）: 原文（Typst）に対応ブロックは無い。ι_{ℕ→ℤ} は antiperiodic_exp_sum の主張の前置きで「零、単位元、和、積、順序を保つものとする」と置かれているだけで、写像そのものを定めるブロックが無かった。inclusion_zz_to_rr の ℤ_{≥0} の節と同じ形で、その前に置いた。単位元・和・積・順序を保つことの主張は、同じ行の続きで 1 ブロック 1 主張で足す。set_and_algebra_notation に ℕ の再帰による定義（存在と一意性）の宣言を足し、この定義はそれを引く。Lean の具体版は Ising2D.inclusionNNtoZZ（MathematicalTools/SetNotationAndComplexCartesianArithmetic/DefinitionInclusionOfNaturalNumbersIntoIntegers.lean。同じ二つの式を Nat.rec で定める）で、Lean の Nat.cast（ℕ → ℤ）との一致は補題一本 Ising2D.inclusionNNtoZZ_eq_natCast である。",
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 欄 lean に Ising2D.inclusionNNtoZZ_exists_preimage_of_nonneg（0_ℤ ≤ a の a ∈ ℤ はある n ∈ ℕ の像 ι_{ℕ→ℤ}(n) である）を足した。本文は ℤ_{≥0} の元を ℤ の元のまま扱うが、Lean の具体版は ℤ_{≥0} の元を ℕ の元の像として書き直す段を持つ（inclusion_zz_to_rr_neg・inclusion_zz_to_rr_of_successor・inclusion_zz_to_rr_of_nonpositive_is_nonpositive・inclusion_zz_to_rr_is_monotone_on_nonnegatives・limit_of_log_Z_in_N_row の具体版）。その Lean だけの段を mathlib の Int.toNat・Int.eq_ofNat_of_zero_le から、名前を付けた写像 ι_{ℕ→ℤ} を通すこの補題へ替えた。いまは本文の主張のブロックではないので本文の証明は無いが、同じ内容（ℤ_{≥0} への全射）を antiperiodic_exp_sum の前置きが証明なしに使っている。antiperiodic_exp_sum の主張の前置きの「(M_col)_ℕ が一意に在る」を引く主張（ℤ_{≥0} への全射と順序の逆向き）は、Lean の antiperiodic_exp_sum の族が初めから M : ℕ を取るため、族の仮定を ℤ の M_col に寄せる回に置き、この補題をそのブロックの欄 lean へ移す。",
       ],
     },
   },

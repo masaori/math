@@ -68,6 +68,7 @@
   人手の `2_ℝ := 1_ℝ + 1_ℝ` は `def_real_two` の具体版 `real_two_eq_one_add_one`（Lean の `(2 : ℝ)` は数字の `2`）で読む。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionInclusionOfNaturalNumbersIntoIntegers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionInclusionOfIntegersIntoRealNumbers
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerDifference
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerDifferencePlusSubtrahendIsOriginal
@@ -90,7 +91,10 @@ theorem inclusion_zz_to_rr_succ (n : ℕ) : ((n + 1 : ℕ) : ℝ) = (n : ℝ) + 
 /-- **`inclusion_zz_to_rr`** の `ι(-n) := -ι(n)`（`n ∈ ℤ_{≥1}`）。具体版 `inclusionZZtoRR` の定義の式（`rfl`）を、
 一致の補題 `inclusionZZtoRR_eq_intCast` で `Int.cast` の形へ移したもの。`n ∈ ℤ_{≥1}` を Lean では `ℕ` の元 `m` の像 `((m + 1 : ℕ) : ℤ)` で書く。 -/
 theorem inclusion_zz_to_rr_neg (n : ℤ) (hn : 1 ≤ n) : ((-n : ℤ) : ℝ) = -((n : ℤ) : ℝ) := by
-  obtain ⟨m, rfl⟩ : ∃ m : ℕ, n = ((m + 1 : ℕ) : ℤ) := ⟨(n - 1).toNat, by omega⟩
+  obtain ⟨m, hm⟩ := inclusionNNtoZZ_exists_preimage_of_nonneg (n - 1) (by omega)
+                                                                           -- `n − 1 ∈ ℤ_{≥0}` を `ι_{ℕ→ℤ}(m)` と書く（Lean だけの段）
+  rw [inclusionNNtoZZ_eq_natCast] at hm
+  obtain rfl : n = ((m + 1 : ℕ) : ℤ) := by omega
   calc ((-((m + 1 : ℕ) : ℤ) : ℤ) : ℝ) = inclusionZZtoRR (-((m + 1 : ℕ) : ℤ)) :=
         (inclusionZZtoRR_eq_intCast _).symm                                -- 具体版の `ι_{ℤ→ℝ}` を `Int.cast` の形から戻す（Lean だけの段）
     _ = -inclusionZZtoRR ((m + 1 : ℕ) : ℤ) := rfl                          -- `inclusion_zz_to_rr` の `ι(-n) := -ι(n)`（`n → m + 1`）
@@ -168,7 +172,9 @@ theorem inclusion_zz_to_rr_succ_intCast (k : ℕ) : (((k : ℤ) + 1 : ℤ) : ℝ
 theorem inclusion_zz_to_rr_of_successor (n : ℤ) : ((n + 1 : ℤ) : ℝ) = ((n : ℤ) : ℝ) + 1 := by
   rcases le_or_gt 0 n with hn | hn
   · -- `n ∈ ℤ_{≥0}` のとき
-    obtain ⟨k, rfl⟩ := Int.eq_ofNat_of_zero_le hn
+    obtain ⟨k, hk⟩ := inclusionNNtoZZ_exists_preimage_of_nonneg n hn    -- `n ∈ ℤ_{≥0}` を `ι_{ℕ→ℤ}(k)` と書く（Lean だけの段）
+    rw [inclusionNNtoZZ_eq_natCast] at hk
+    subst hk
     exact inclusion_zz_to_rr_succ_intCast k                                -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`
   · obtain ⟨m, hm, rfl⟩ : ∃ m : ℤ, 1 ≤ m ∧ n = -m := ⟨-n, by omega, by omega⟩
     rcases eq_or_lt_of_le hm with h1 | h2
@@ -181,7 +187,10 @@ theorem inclusion_zz_to_rr_of_successor (n : ℤ) : ((n + 1 : ℤ) : ℝ) = ((n 
         _ = ((-(1 : ℤ) : ℤ) : ℝ) + 1 := by rw [inclusion_zz_to_rr_neg 1 le_rfl]
                                                                            -- `inclusion_zz_to_rr` の `ι(-n) := -ι(n)`（`n → 1`）を右辺から左辺へ
     · -- `n = -(p + 1_ℤ)`（`p ∈ ℤ_{≥1}`）のとき
-      obtain ⟨q, hq, rfl⟩ : ∃ q : ℕ, 1 ≤ q ∧ m = (q : ℤ) + 1 := ⟨(m - 1).toNat, by omega, by omega⟩
+      obtain ⟨q, hq'⟩ := inclusionNNtoZZ_exists_preimage_of_nonneg (m - 1) (by omega)
+                                                                           -- `p := m − 1 ∈ ℤ_{≥1}` を `ι_{ℕ→ℤ}(q)` と書く（Lean だけの段）
+      rw [inclusionNNtoZZ_eq_natCast] at hq'
+      obtain ⟨hq, rfl⟩ : 1 ≤ q ∧ m = (q : ℤ) + 1 := ⟨by omega, by omega⟩
       calc ((-((q : ℤ) + 1) + 1 : ℤ) : ℝ) = (((-(q : ℤ) + -1) + 1 : ℤ) : ℝ) := by
             rw [int_negation_of_sum_is_sum_of_negations (q : ℤ) 1]         -- `int_negation_of_sum_is_sum_of_negations`（`x → p`, `y → 1`）
         _ = ((-(q : ℤ) + (-1 + 1) : ℤ) : ℝ) := by
@@ -433,7 +442,9 @@ theorem inclusion_zz_to_rr_of_positive_is_at_least_one (n : ℕ) (hn : 1 ≤ n) 
 theorem inclusion_zz_to_rr_of_nonpositive_is_nonpositive (n : ℤ) (hn : n ≤ 0) : ((n : ℤ) : ℝ) ≤ 0 := by
   rcases hn.lt_or_eq with hneg | hzero
   · -- `n = -m`（`m ∈ ℤ_{≥1}`）のとき
-    obtain ⟨k, hk⟩ : ∃ k : ℕ, ((k : ℤ)) = -n := ⟨(-n).toNat, Int.toNat_of_nonneg (by omega)⟩
+    obtain ⟨k, hk⟩ := inclusionNNtoZZ_exists_preimage_of_nonneg (-n) (by omega)
+                                                                           -- `m := −n ∈ ℤ_{≥1}` を `ι_{ℕ→ℤ}(k)` と書く（Lean だけの段）
+    rw [inclusionNNtoZZ_eq_natCast] at hk
     have hk1 : 1 ≤ k := by omega
     have hm : n = -((k : ℤ)) := by omega
     calc ((n : ℤ) : ℝ) = ((-((k : ℤ)) : ℤ) : ℝ) := by rw [hm]
@@ -459,20 +470,21 @@ theorem inclusion_zz_to_rr_is_monotone_on_nonnegatives (a b : ℤ) (ha : 0 ≤ a
   have hk0 : 0 ≤ k := by omega                                             -- `a ≤ b` より `k ∈ ℤ_{≥0}`
   have hbk : b = a + k := by omega                                         -- `ℤ` の四則
   -- 人手の `ℤ_{≥0}` の元 `a`・`k` を、Lean の `ℕ` の元 `p`・`m` の像で書く（Lean だけの段。`ℤ_{≥0}` を `ℕ` で書くのはほかの主張と同じ）
-  obtain ⟨p, hp⟩ := Int.eq_ofNat_of_zero_le ha
-  obtain ⟨m, hm⟩ := Int.eq_ofNat_of_zero_le hk0
+  obtain ⟨p, hp⟩ := inclusionNNtoZZ_exists_preimage_of_nonneg a ha        -- `ι_{ℕ→ℤ}(p) = a`
+  obtain ⟨m, hm⟩ := inclusionNNtoZZ_exists_preimage_of_nonneg k hk0       -- `ι_{ℕ→ℤ}(m) = k`
+  rw [inclusionNNtoZZ_eq_natCast] at hp hm
   have hk : (0 : ℝ) ≤ ((k : ℤ) : ℝ) := by
     rcases Nat.eq_zero_or_pos m with h0 | h1
     · calc (0 : ℝ) ≤ 0 := le_refl 0                                        -- `≤_ℝ` の反射律
         _ = ((0 : ℤ) : ℝ) := inclusion_zz_to_rr_zero_intCast.symm          -- `inclusion_zz_to_rr` の `ι(0) := 0`
-        _ = ((k : ℤ) : ℝ) := by rw [hm, h0]; rfl                          -- `k = 0_ℤ`
+        _ = ((k : ℤ) : ℝ) := by rw [← hm, h0]; rfl                        -- `k = 0_ℤ`
     · calc (0 : ℝ) ≤ 1 := zero_le_one                                      -- `1_ℝ ≥ 0_ℝ`
         _ ≤ (m : ℝ) := inclusion_zz_to_rr_of_positive_is_at_least_one m h1 -- `inclusion_zz_to_rr_of_positive_is_at_least_one`（`n → k`）
-        _ = ((k : ℤ) : ℝ) := by rw [hm, inclusion_zz_to_rr_of_natCast]     -- `ℤ_{≥0}` の上で `Int.cast` と `Nat.cast` は一致する（Lean だけの段）
+        _ = ((k : ℤ) : ℝ) := by rw [← hm, inclusion_zz_to_rr_of_natCast]   -- `ℤ_{≥0}` の上で `Int.cast` と `Nat.cast` は一致する（Lean だけの段）
   calc ((a : ℤ) : ℝ) = ((a : ℤ) : ℝ) + 0 := (add_zero _).symm              -- `0_ℝ` は `ℝ` の和の単位元
     _ ≤ ((a : ℤ) : ℝ) + ((k : ℤ) : ℝ) := add_le_add (le_refl _) hk         -- 上の `ι(k) ≥ 0_ℝ` の両辺に `ι(a)` を足す
     _ = ((a + k : ℤ) : ℝ) := by
-        rw [hp, hm]
+        rw [← hp, ← hm]
         exact (inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast p m).symm
                                                                            -- `inclusion_zz_to_rr_preserves_sum_of_nonnegatives`（`b → k`）
     _ = ((b : ℤ) : ℝ) := by rw [← hbk]                                     -- `b = a +_ℤ k`
