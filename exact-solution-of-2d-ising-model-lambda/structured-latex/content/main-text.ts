@@ -77911,9 +77911,9 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 \frac{2(k-1)}{ka}
 &\le\frac{2k}{ka}
-&&(\because\ k-1\le k\text{（}\mathbb{N}\text{ の順序。}k\ge1\text{ なので }k-1\in\mathbb{N}\text{）に正数 }\tfrac{2}{ka}\text{ を掛ける（}\mathbb{Q}\text{ の順序）})\\
+&&(\because\ k-1\le k\text{（}\mathbb{N}\text{ の順序、}k\ge1\text{ なので }k-1\in\mathbb{N}\text{）に正数 }\tfrac{2}{ka}\text{ を掛ける（}\mathbb{Q}\text{ の順序）})\\
 &=\frac{2}{a}
-&&(\because\ k\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+&&(\because\ k\ne0\text{ による約分、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         paragraph([
                           "第二に、埋め込んだ対数の符号を ",
