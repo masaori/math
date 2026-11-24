@@ -7,24 +7,26 @@
             （`openPartitionValueRat_le_upperBound` を `a := L`、`b := L` で）。
 準備の第二: `log 2 = ℓ_2`（`logRat_two`）。
 準備の第三: `n·ι(ν) = ι(nν)`（`toRational_intSmul`）。
-Λ の鎖（`logOrderLE_logRat_openPartitionValueRat_upperBound`。上界の対数を開く三段は周期境界の
-`logRat_upperBound_eq` をそのまま共有する。上界の式は L と q だけで決まり、格子の境界条件に依らない）:
+Λ の鎖（`logOrderLE_logRat_openPartitionValueRat_upperBound`）:
   log Z^op_{L,L}(q) ≤_Λ log(2^{L²}·(1+q)^{2L²})              （`logRat_le_iff` の →。準備の第一を移す）
                     = log 2^{L²} + log (1+q)^{2L²}            （`logRat_mul`）
                     = L²·log 2 + 2L²·log(1+q)                 （`logRat_pow` を二項へ）
                     = L²·ℓ_2 + 2L²·log(1+q)                   （準備の第二）
-Λ_ℚ の鎖（`rationalLogOrderLE_openScaledFreeEntropy_upperBound`。第三〜八段は周期境界の
-`scaled_toRational_upperBound_eq` をそのまま共有する）:
+Λ_ℚ の鎖（`rationalLogOrderLE_openScaledFreeEntropy_upperBound`）:
   Ψ^op_L(q) = (1/L²)·ι(log Z^op_{L,L}(q))                    （定義 `openScaledFreeEntropy`）
             ≤_{Λ_ℚ} (1/L²)·ι(L²ℓ_2 + 2L² log(1+q))            （`rationalLogOrderLE_scaled_toRational_iff` の ←）
-            = ι(ℓ_2) + 2·ι(log(1+q))                          （`scaled_toRational_upperBound_eq`）
-周期境界の `FiniteFreeEntropyDensityUpperBound.lean` と同じ手順で、`freeEntropy L q` の代わりに
-`logRat (openPartitionValueRat L L q)` を、値の上界を開境界のものへ置いたものである。
+            = (1/L²)·(ι(L²ℓ_2) + ι(2L² log(1+q)))            （`toRational_add`）
+            = (1/L²)·ι(L²ℓ_2) + (1/L²)·ι(2L² log(1+q))       （有理数倍の分配則 `smul_add`）
+            = (1/L²)·(L²·ι(ℓ_2)) + (1/L²)·(2L²·ι(log(1+q)))  （準備の第三を二項へ）
+            = ((1/L²)·L²)·ι(ℓ_2) + ((1/L²)·2L²)·ι(log(1+q))  （有理数倍の結合則 `smul_smul`）
+            = 1·ι(ℓ_2) + 2·ι(log(1+q))                       （ℚ の約分）
+            = ι(ℓ_2) + 2·ι(log(1+q))                         （`one_smul`）
 住処は ℕ・ℚ・Λ・Λ_ℚ のみで、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.FreeEntropy.RationalLogOrderIff
 import Ising2DLambda.ThermodynamicLimit.ScaledEmbeddingOrderTransfer
-import Ising2DLambda.ThermodynamicLimit.FiniteFreeEntropyDensityUpperBound
+import Ising2DLambda.FreeEntropy.AtOne
+import Ising2DLambda.ThermodynamicLimit.RationalLogOrderGroup
 import Ising2DLambda.ThermodynamicLimit.OpenSquareFreeEntropyDensity
 import Ising2DLambda.ThermodynamicLimit.OpenRectangleValueUpperBoundRational
 
@@ -46,8 +48,20 @@ theorem logOrderLE_logRat_openPartitionValueRat_upperBound (L : ℕ) {q : ℚ} (
     simpa [sq] using h
   -- log Z^op_{L,L}(q) ≤_Λ log(2^{L²}(1+q)^{2L²})（対数は順序を保つ）
   have h := (logRat_le_iff hZpos hBpos).mp hZle
-  -- 上界の対数を二項へ開く（周期境界と共有）
-  rw [logRat_upperBound_eq L hq] at h
+  have h2 : (0 : ℚ) < 2 := by norm_num
+  -- 上界の対数を二項へ開く
+  have hOpen : logRat (((2 ^ L ^ 2 : ℕ) : ℚ) * (1 + q) ^ (2 * L ^ 2)) =
+      (L ^ 2) • generator ⟨2, Nat.prime_two⟩ + (2 * L ^ 2) • logRat (1 + q) := by
+    calc
+      logRat (((2 ^ L ^ 2 : ℕ) : ℚ) * (1 + q) ^ (2 * L ^ 2))
+          = logRat ((2 : ℚ) ^ (L ^ 2) * (1 + q) ^ (2 * L ^ 2)) := by push_cast; rfl
+      _ = logRat ((2 : ℚ) ^ (L ^ 2)) + logRat ((1 + q) ^ (2 * L ^ 2)) :=
+            logRat_mul (pow_pos h2 _) (pow_pos h1q _)            -- claim_log_additive
+      _ = (L ^ 2) • logRat 2 + (2 * L ^ 2) • logRat (1 + q) := by
+            rw [logRat_pow h2, logRat_pow h1q]                   -- claim_log_power（二項へ同時適用）
+      _ = (L ^ 2) • generator ⟨2, Nat.prime_two⟩ + (2 * L ^ 2) • logRat (1 + q) := by
+            rw [logRat_two]                                      -- 準備の第二
+  rw [hOpen] at h
   exact h
 
 /-- `claim_open_square_free_entropy_density_upper_bound`。`Ψ^op_L(q) ≤_{Λ_ℚ} ι(ℓ_2) + 2·ι(log(1+q))`。 -/
@@ -61,8 +75,37 @@ theorem rationalLogOrderLE_openScaledFreeEntropy_upperBound (L : ℕ) [NeZero L]
         toRational ((L ^ 2) • generator ⟨2, Nat.prime_two⟩ + (2 * L ^ 2) • logRat (1 + q))) :=
     (rationalLogOrderLE_scaled_toRational_iff L _ _).mpr
       (logOrderLE_logRat_openPartitionValueRat_upperBound L hq)
-  -- 右辺を ι(ℓ_2) + 2·ι(log(1+q)) へ（周期境界と共有）
-  rw [scaled_toRational_upperBound_eq] at h
+  have hL0 : (L : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr (NeZero.ne L)
+  -- 右辺を ι(ℓ_2) + 2·ι(log(1+q)) へ
+  have hRight : ((1 : ℚ) / ((L : ℚ) ^ 2)) •
+        toRational ((L ^ 2) • generator ⟨2, Nat.prime_two⟩ + (2 * L ^ 2) • logRat (1 + q)) =
+      toRational (generator ⟨2, Nat.prime_two⟩) + (2 : ℚ) • toRational (logRat (1 + q)) := by
+    calc
+      ((1 : ℚ) / ((L : ℚ) ^ 2)) •
+          toRational ((L ^ 2) • generator ⟨2, Nat.prime_two⟩ + (2 * L ^ 2) • logRat (1 + q))
+          = ((1 : ℚ) / ((L : ℚ) ^ 2)) •
+              (toRational ((L ^ 2) • generator ⟨2, Nat.prime_two⟩) +
+                toRational ((2 * L ^ 2) • logRat (1 + q))) := by
+            rw [toRational_add]                                  -- claim_rational_log_order_group_embedding（加法）
+      _ = ((1 : ℚ) / ((L : ℚ) ^ 2)) • toRational ((L ^ 2) • generator ⟨2, Nat.prime_two⟩) +
+            ((1 : ℚ) / ((L : ℚ) ^ 2)) • toRational ((2 * L ^ 2) • logRat (1 + q)) := by
+            rw [smul_add]                                        -- 有理数倍の分配則
+      _ = ((1 : ℚ) / ((L : ℚ) ^ 2)) •
+              ((((L ^ 2 : ℕ) : ℤ) : ℚ) • toRational (generator ⟨2, Nat.prime_two⟩)) +
+            ((1 : ℚ) / ((L : ℚ) ^ 2)) •
+              ((((2 * L ^ 2 : ℕ) : ℤ) : ℚ) • toRational (logRat (1 + q))) := by
+            rw [toRational_intSmul, toRational_intSmul, natCast_zsmul, natCast_zsmul]  -- 準備の第三（二項へ）
+      _ = (((1 : ℚ) / ((L : ℚ) ^ 2)) * (((L ^ 2 : ℕ) : ℤ) : ℚ)) •
+              toRational (generator ⟨2, Nat.prime_two⟩) +
+            (((1 : ℚ) / ((L : ℚ) ^ 2)) * (((2 * L ^ 2 : ℕ) : ℤ) : ℚ)) •
+              toRational (logRat (1 + q)) := by
+            rw [smul_smul, smul_smul]                            -- 有理数倍の結合則
+      _ = (1 : ℚ) • toRational (generator ⟨2, Nat.prime_two⟩) +
+            (2 : ℚ) • toRational (logRat (1 + q)) := by
+            congr 2 <;> push_cast <;> field_simp                 -- ℚ の約分
+      _ = toRational (generator ⟨2, Nat.prime_two⟩) + (2 : ℚ) • toRational (logRat (1 + q)) := by
+            rw [one_smul]                                        -- 1·λ = λ
+  rw [hRight] at h
   exact h
 
 end Ising2DLambda.ThermodynamicLimit

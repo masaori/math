@@ -3,6 +3,7 @@
 `emb := λ ↦ (1/L²)·ι(λ)`（`Λ → Λ_ℚ`）、上界 `Z^op_{L,L}(q) ≤ 2^{L²}(1+q)^{2L²}`、
 二つの等式 `logRat_upperBound_eq`・`scaled_toRational_upperBound_eq` へ特殊化する。 -/
 import Ising2DLambda.ThermodynamicLimit.OpenSquareFreeEntropyDensityUpperBound
+import Ising2DLambda.ThermodynamicLimit.FiniteFreeEntropyDensityUpperBound
 import Ising2DLambda.NecSuf.ThermodynamicLimit.FiniteFreeEntropyDensityUpperBound
 
 namespace Ising2DLambda.ThermodynamicLimit

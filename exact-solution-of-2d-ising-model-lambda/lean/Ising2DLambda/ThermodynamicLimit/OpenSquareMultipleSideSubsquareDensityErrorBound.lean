@@ -29,7 +29,7 @@ namespace Ising2DLambda.ThermodynamicLimit
 
 open FreeEntropy
 
-/-- `ι(0) = 0`（`claim_rational_log_order_group_embedding`。加法を保つ写像は単位元を単位元へ移す）。 -/
+/-- `ι(0) = 0`（`def_rational_log_order_group` の `ι` の定義により、各素数での値は `0/1 = 0`）。 -/
 theorem toRational_zero : toRational (0 : LogOrderGroup) = 0 := by
   ext p
   rw [toRational_apply, Finsupp.zero_apply, Int.cast_zero, Finsupp.zero_apply]

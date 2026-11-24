@@ -57,7 +57,17 @@ theorem rationalLogOrderLE_openSquareLargeSideDensity_lower_vs_baseSide_of_le_on
   have hneg : -((2 : ℚ) / (a : ℚ)) ≤ -((2 * (a : ℚ)) / (L : ℚ)) := neg_le_neg hc2
   -- 準備の第三: 符号
   have hv0 : rationalLogOrderLE v 0 := rationalLogOrderLE_toRational_logRat_nonpos_of_le_one hq0 hq1
-  have hC0 : rationalLogOrderLE 0 C := rationalLogOrderLE_zero_openSquareUpperBoundConstant hq0
+  have hC0 : rationalLogOrderLE 0 C := by
+    have h2 := rationalLogOrderLE_zero_toRational_generator_two
+    have h3 := rationalLogOrderLE_zero_toRational_logRat_one_add hq0
+    -- 0 = 2·0 ≤ 2·ι(log(1+q))（非負有理数倍の順序保存を c := 2、λ := 0、μ := ι(log(1+q)) で読む）
+    have hs : rationalLogOrderLE 0 ((2 : ℚ) • toRational (logRat (1 + q))) := by
+      have h := rationalLogOrderLE_ratSmul_of_nonneg (by norm_num : (0 : ℚ) ≤ 2) h3
+      rwa [smul_zero] at h
+    -- 0 + 2·ι(log(1+q)) ≤ ι(ℓ_2) + 2·ι(log(1+q))（加法単調性）、単位元
+    have ha := rationalLogOrderLE_add_right h2 ((2 : ℚ) • toRational (logRat (1 + q)))
+    rw [zero_add] at ha
+    exact rationalLogOrderLE_trans hs ha
   -- 準備の第四: 非正の元の係数比較 (2/a)·v ≤ (2/L)·v
   have hA : rationalLogOrderLE (((2 : ℚ) / (a : ℚ)) • v) (((2 : ℚ) / (L : ℚ)) • v) :=
     rationalLogOrderLE_ratSmul_le_ratSmul_of_le_of_nonpos hcL hv0
