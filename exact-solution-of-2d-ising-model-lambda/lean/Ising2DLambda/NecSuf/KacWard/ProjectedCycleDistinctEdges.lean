@@ -25,8 +25,10 @@ theorem projectedCycle_edges_injective (τ υ : FixedPointFreeInvolution J)
   let k := n / 2
   have hneven : Even n := by
     change Even (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) i)
-    rw [finitePermutationMinimalPeriod_eq_orbitLength]
-    exact matchingPairPermutation_even_orbit τ υ i
+    exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.even_of_color_flip
+      (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+      (matchingPairSuccessor_color τ υ) _ _
+      (finitePermutationMinimalPeriod_spec _ _).2.1
   have hnk : n = 2 * k := by
     obtain ⟨a, ha⟩ := hneven
     dsimp [k]

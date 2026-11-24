@@ -38,8 +38,9 @@ theorem projectedClosedEdgeCycle (τ υ : FixedPointFreeInvolution J) (i : J)
     (finitePermutationMinimalPeriod_spec σ i).2.1
   have hneven : Even n := by
     change Even (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) i)
-    rw [finitePermutationMinimalPeriod_eq_orbitLength]
-    exact matchingPairPermutation_even_orbit τ υ i
+    exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.even_of_color_flip
+      (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+      (matchingPairSuccessor_color τ υ) _ _ hnreturn
   obtain ⟨k, hk⟩ := hneven
   have hkpos : 0 < k := by omega
   refine ⟨k, hkpos, ?_, ?_⟩

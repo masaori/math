@@ -77767,7 +77767,7 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 \frac{2}{L}\cdot\iota(\log q)
 &\le_{\Lambda_{\mathbb{Q}}}\frac{ka+L}{L^2}\cdot\iota(\log q)
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonpos}\text{ を }r:=\tfrac{ka+L}{L^2}\text{、}s:=\tfrac{2}{L}\text{、}\nu:=\iota(\log q)\text{ で読む。}r\le s\text{ は第二、}\nu\le_{\Lambda_{\mathbb{Q}}}0\text{ は第三})
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonpos}\text{ を }r:=\tfrac{ka+L}{L^2}\text{、}s:=\tfrac{2}{L}\text{、}\nu:=\iota(\log q)\text{ で読む、}r\le s\text{ は第二、}\nu\le_{\Lambda_{\mathbb{Q}}}0\text{ は第三})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \frac{L^2-(ka)^2}{L^2}\cdot\iota(\ell_2)
