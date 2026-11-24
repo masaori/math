@@ -95,9 +95,9 @@ theorem interiorCellsOfWalk_boundaryEdge_odd_traversal
     dsimp at hdiff
     have hparity := verticallyAdjacentCells_boundaryParity
       (m + 1) row col (r - 1) c
-      (walkSideInteriorBandFromWalk_coordinate_closed γ hγ hh hv).1
-      (walkSideInteriorBandFromWalk_coordinate_closed γ hγ hh hv).2
-      (walkSideInteriorBandFromWalk_coordinate_unit γ)
+      (liftedWalkCoordinates_closed γ hγ hh hv).1
+      (liftedWalkCoordinates_closed γ hγ hh hv).2
+      (liftedWalkCoordinates_unit γ)
     simp only [sub_add_cancel] at hparity
     rw [hcell r c, hcell (r - 1) c] at hdiff
     simp only [Nat.odd_iff] at hdiff ⊢
@@ -131,7 +131,7 @@ theorem interiorCellsOfWalk_boundaryEdge_has_departure
   let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
   let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
   have hunit : IsUnitGridWalk (m + 1) row col :=
-    walkSideInteriorBandFromWalk_coordinate_unit γ
+    liftedWalkCoordinates_unit γ
   have hodd := interiorCellsOfWalk_boundaryEdge_odd_traversal γ hγ hh hv edge hedge
   rcases edge with ⟨axis, ⟨r, c⟩⟩
   cases axis

@@ -54,8 +54,8 @@ theorem horizontalEdge_oddRay_boundary_ofWalk
       (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset := by
   let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
   let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
-  have hclosed := walkSideInteriorBandFromWalk_coordinate_closed γ hγ hh hv
-  have hunit := walkSideInteriorBandFromWalk_coordinate_unit γ
+  have hclosed := liftedWalkCoordinates_closed γ hγ hh hv
+  have hunit := liftedWalkCoordinates_unit γ
   apply horizontalEdge_oddRay_boundary (m + 1) row col
     (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
     hclosed.1 hclosed.2 hunit ?_ r c hodd
@@ -87,10 +87,10 @@ theorem vertexSimpleWalk_step_mem_interiorBoundary
   dsimp only
   let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
   let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
-  have hle := walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one
+  have hle := liftedWalkCoordinates_incident_counts_le_one
     γ hγ hh hv hdistinct j hj
   have hstep := walkStep_edgeTraversal_one (m + 1) row col j hj
-    (walkSideInteriorBandFromWalk_coordinate_unit γ) hle
+    (liftedWalkCoordinates_unit γ) hle
   rcases hstep with h | h | h | h
   · have ho : Odd (verticalEdgeTraversalCount (m + 1) row col (row j) (col j)) := by
       simp [h.2.2]

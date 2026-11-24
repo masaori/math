@@ -54,12 +54,11 @@ theorem boundaryVertex_diagonalContactExcluded
     by_cases hv : ∃ j, j < n ∧ row j = a ∧ col j = b
     · left
       rcases hv with ⟨j, hj, hrow, hcol⟩
-      simpa [hrow, hcol] using
-        vertexSurroundingCells_formParityArcs n row col j hj hclosedRow hclosedCol hunit
-          hdistinct (by simpa [hrow, hcol] using hleft)
-          (by simpa [hrow, hcol] using hright)
-          (by simpa [hrow, hcol] using hdown)
-          (by simpa [hrow, hcol] using hup)
+      have hvisit : vertexVisitCount n row col a b = 1 := by
+        rw [← hrow, ← hcol]
+        exact vertexVisitCount_eq_one_of_distinct n row col j hj hdistinct
+      exact vertexSurroundingCells_formParityArcs_local n row col a b hclosedRow hclosedCol
+        hunit hvisit hleft hright hdown hup
     · right
       have hvisit0 : vertexVisitCount n row col a b = 0 := by
         unfold vertexVisitCount

@@ -3,10 +3,11 @@
 「持ち上げ点が相異なる閉路の各訪問頂点で内側セルと外側セルはそれぞれ一つの弧をなす」
 （`claim_vertex_surrounding_cells_form_parity_arcs`）の具体版。
 
-人手証明と同じく、訪問回数の二倍等式から接する四辺の総通過回数を二とし、
-持ち上げ点の相異性が与える各辺の高々一回という局所条件と、隣接セルの境界奇偶を合成する。
+人手証明と同じく、持ち上げ点の相異性と訪問回数の二倍等式から接する四辺の総通過回数を二とし、
+訪問へ入る辺と出る辺が非後退性で相異なることから各辺の通過回数を高々一とし、
+隣接セルの境界奇偶を合成する。
 -/
-import Ising2DLambda.KacWard.VertexIncidentEdgeTraversalEven
+import Ising2DLambda.KacWard.WalkLiftVertexIncidentEdges
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -83,26 +84,36 @@ theorem vertexSurroundingCells_formParityArcs_local
   unfold FourCellsFormParityArcs
   refine ⟨?_, ?_, ?_⟩ <;> omega
 
-/-- `claim_vertex_surrounding_cells_form_parity_arcs` の具体版。 -/
-theorem vertexSurroundingCells_formParityArcs
-    (n : ℕ) (row col : ℕ → ℤ) (j : ℕ)
-    (hj : j < n)
-    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
-    (hunit : IsUnitGridWalk n row col)
-    (hdistinct : ∀ k l, k < n → l < n →
-      row k = row l → col k = col l → k = l)
-    -- 閉じた非後退単位格子路と持ち上げ点の相異性から得る局所的な辺単純性。
-    (hleft : verticalEdgeTraversalCount n row col (row j - 1) (col j) ≤ 1)
-    (hright : verticalEdgeTraversalCount n row col (row j) (col j) ≤ 1)
-    (hdown : horizontalEdgeTraversalCount n row col (row j) (col j - 1) ≤ 1)
-    (hup : horizontalEdgeTraversalCount n row col (row j) (col j) ≤ 1) :
+/-- `claim_vertex_surrounding_cells_form_parity_arcs` の具体版。
+仮定は本文の前提だけである: 閉じた非後退辺列 `γ`、零の整数巻き付き数、一周期の持ち上げ点の相異性。
+四辺の各々の通過回数が高々一であることは、人手証明と同じく、総通過回数が二であること
+（`unitGridWalk_incident_total_two`）と、入る辺と出る辺が非後退性で相異なり
+それぞれ正の回数通られること（`liftedWalkCoordinates_incident_distinct_positive`）から導く。 -/
+theorem vertexSurroundingCells_formParityArcs {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc))
+    (j : ℕ) (hj : j < m + 1) :
+    let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
+    let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
     FourCellsFormParityArcs
-      (rightRayCrossingCount n row col (row j - 1) (col j - 1) % 2)
-      (rightRayCrossingCount n row col (row j - 1) (col j) % 2)
-      (rightRayCrossingCount n row col (row j) (col j) % 2)
-      (rightRayCrossingCount n row col (row j) (col j - 1) % 2) := by
-  have hvisit := vertexVisitCount_eq_one_of_distinct n row col j hj hdistinct
-  exact vertexSurroundingCells_formParityArcs_local n row col (row j) (col j)
-    hclosedRow hclosedCol hunit hvisit hleft hright hdown hup
+      (rightRayCrossingCount (m + 1) row col (row j - 1) (col j - 1) % 2)
+      (rightRayCrossingCount (m + 1) row col (row j - 1) (col j) % 2)
+      (rightRayCrossingCount (m + 1) row col (row j) (col j) % 2)
+      (rightRayCrossingCount (m + 1) row col (row j) (col j - 1) % 2) := by
+  intro row col
+  have hclosed := liftedWalkCoordinates_closed γ hγ hh hv
+  have hunit := liftedWalkCoordinates_unit γ
+  -- 一周期での訪問の一意性。
+  have hvisit := vertexVisitCount_eq_one_of_distinct (m + 1) row col j hj
+    (liftedWalkCoordinates_distinct γ hdistinct)
+  -- 四辺の総通過回数は二で、入る辺と出る辺の二辺が正の回数通られるので、各辺は高々一回。
+  have hbounds := liftedWalkCoordinates_incident_counts_le_one
+    γ hγ hh hv hdistinct j hj
+  exact vertexSurroundingCells_formParityArcs_local (m + 1) row col (row j) (col j)
+    hclosed.1 hclosed.2 hunit hvisit hbounds.1 hbounds.2.1 hbounds.2.2.1 hbounds.2.2.2
 
 end Ising2DLambda.KacWard

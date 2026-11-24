@@ -125,12 +125,12 @@ theorem walkSideExteriorBandFromWalk_nonempty_edgeConnected {L m : ℕ} [NeZero 
       EdgeConnectedCellSet (walkSideExteriorBandFromWalk γ hγ hh hv) := by
   let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
   let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
-  have hclosed := walkSideInteriorBandFromWalk_coordinate_closed γ hγ hh hv
+  have hclosed := liftedWalkCoordinates_closed_of_endpointWinding γ hγ hh hv
   have hband := walkSideExteriorBand_nonempty_edgeConnected (m + 1) row col
     (by omega) hclosed.1 hclosed.2
-    (walkSideInteriorBandFromWalk_coordinate_unit γ)
-    (walkSideInteriorBandFromWalk_coordinate_distinct γ hdistinct)
-    (walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one γ hγ hh hv hdistinct)
+    (liftedWalkCoordinates_unit γ)
+    (liftedWalkCoordinates_distinct γ hdistinct)
+    (liftedWalkCoordinates_incident_counts_le_one γ hγ hh hv hdistinct)
   rw [walkSideExteriorBandFromWalk_eq_coordinateBand γ hγ hh hv]
   exact hband
 

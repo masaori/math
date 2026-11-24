@@ -24,9 +24,9 @@ theorem boundaryVertex_diagonalContactExcluded_ofWalk {L m : ℕ} [NeZero L]
       (rightRayVerticalCrossingCount γ hγ a (b - 1) % 2) := by
   let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
   let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
-  have hclosed := walkSideInteriorBandFromWalk_coordinate_closed γ hγ hh hv
-  have hunit := walkSideInteriorBandFromWalk_coordinate_unit γ
-  have hcoord := walkSideInteriorBandFromWalk_coordinate_distinct γ hdistinct
+  have hclosed := liftedWalkCoordinates_closed γ hγ hh hv
+  have hunit := liftedWalkCoordinates_unit γ
+  have hcoord := liftedWalkCoordinates_distinct γ hdistinct
   have hbounds :
       verticalEdgeTraversalCount (m + 1) row col (a - 1) b ≤ 1 ∧
       verticalEdgeTraversalCount (m + 1) row col a b ≤ 1 ∧
@@ -34,7 +34,7 @@ theorem boundaryVertex_diagonalContactExcluded_ofWalk {L m : ℕ} [NeZero L]
       horizontalEdgeTraversalCount (m + 1) row col a b ≤ 1 := by
     by_cases hvisited : ∃ j, j < m + 1 ∧ row j = a ∧ col j = b
     · obtain ⟨j, hj, hr, hc⟩ := hvisited
-      have hlocal := walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one
+      have hlocal := liftedWalkCoordinates_incident_counts_le_one
         γ hγ hh hv hdistinct j hj
       change (planeLift γ (Fin.ofNat (m + 2) j)).1 = a at hr
       change (planeLift γ (Fin.ofNat (m + 2) j)).2 = b at hc

@@ -220,8 +220,9 @@ theorem surroundingExteriorCells_edgeConnected
       horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
       horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1) :
     EdgeConnectedCellSet (surroundingExteriorCells n row col k) := by
-  have hshape := vertexSurroundingCells_formParityArcs n row col k hk
-    hclosedRow hclosedCol hunit hdistinct
+  have hshape := vertexSurroundingCells_formParityArcs_local n row col (row k) (col k)
+    hclosedRow hclosedCol hunit
+    (vertexVisitCount_eq_one_of_distinct n row col k hk hdistinct)
     hedgeSimple.1 hedgeSimple.2.1 hedgeSimple.2.2.1 hedgeSimple.2.2.2
   exact surroundingExteriorCells_edgeConnected_of_parityArcs n row col k hshape
 
@@ -360,8 +361,9 @@ theorem walkSideExteriorBand_nonempty_edgeConnected
   have hnonempty : ∀ k, k < n →
       (surroundingExteriorCells n row col k).Nonempty := by
     intro k hk
-    have hshape := vertexSurroundingCells_formParityArcs n row col k hk
-      hclosedRow hclosedCol hunit hdistinct
+    have hshape := vertexSurroundingCells_formParityArcs_local n row col (row k) (col k)
+      hclosedRow hclosedCol hunit
+      (vertexVisitCount_eq_one_of_distinct n row col k hk hdistinct)
       (hedgeSimple k hk).1 (hedgeSimple k hk).2.1
       (hedgeSimple k hk).2.2.1 (hedgeSimple k hk).2.2.2
     exact surroundingExteriorCells_nonempty_of_parityArcs n row col k hshape

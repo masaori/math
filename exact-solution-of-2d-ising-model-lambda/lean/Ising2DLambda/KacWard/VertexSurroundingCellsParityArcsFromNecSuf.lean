@@ -13,24 +13,22 @@ theorem fourCellsFormParityArcs_eq_necSuf :
     FourCellsFormParityArcs = Ising2DLambda.NecSuf.KacWard.FourCellsFormParityArcs := rfl
 
 /-- `claim_vertex_surrounding_cells_form_parity_arcs` を必要十分版から導く。 -/
-theorem vertexSurroundingCells_formParityArcs_from_necSuf
-    (n : ℕ) (row col : ℕ → ℤ) (j : ℕ)
-    (hj : j < n)
-    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
-    (hunit : IsUnitGridWalk n row col)
-    (hdistinct : ∀ k l, k < n → l < n →
-      row k = row l → col k = col l → k = l)
-    (hleft : verticalEdgeTraversalCount n row col (row j - 1) (col j) ≤ 1)
-    (hright : verticalEdgeTraversalCount n row col (row j) (col j) ≤ 1)
-    (hdown : horizontalEdgeTraversalCount n row col (row j) (col j - 1) ≤ 1)
-    (hup : horizontalEdgeTraversalCount n row col (row j) (col j) ≤ 1) :
+theorem vertexSurroundingCells_formParityArcs_from_necSuf {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (hdistinct : Function.Injective
+      (fun i : Fin (m + 1) => planeLift γ i.castSucc))
+    (j : ℕ) (hj : j < m + 1) :
+    let row : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).1
+    let col : ℕ → ℤ := fun k => (planeLift γ (Fin.ofNat (m + 2) k)).2
     Ising2DLambda.NecSuf.KacWard.FourCellsFormParityArcs
-      (rightRayCrossingCount n row col (row j - 1) (col j - 1) % 2)
-      (rightRayCrossingCount n row col (row j - 1) (col j) % 2)
-      (rightRayCrossingCount n row col (row j) (col j) % 2)
-      (rightRayCrossingCount n row col (row j) (col j - 1) % 2) := by
+      (rightRayCrossingCount (m + 1) row col (row j - 1) (col j - 1) % 2)
+      (rightRayCrossingCount (m + 1) row col (row j - 1) (col j) % 2)
+      (rightRayCrossingCount (m + 1) row col (row j) (col j) % 2)
+      (rightRayCrossingCount (m + 1) row col (row j) (col j - 1) % 2) := by
   rw [← fourCellsFormParityArcs_eq_necSuf]
-  exact vertexSurroundingCells_formParityArcs n row col j hj hclosedRow hclosedCol hunit hdistinct
-    hleft hright hdown hup
+  exact vertexSurroundingCells_formParityArcs γ hγ hh hv hdistinct j hj
 
 end Ising2DLambda.KacWard

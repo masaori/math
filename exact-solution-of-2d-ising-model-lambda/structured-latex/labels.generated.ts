@@ -273,6 +273,7 @@ export const ALL_LABELS = [
   "claim_leading_distance_positive",
   "claim_leftward_seam_mode_phase",
   "claim_lifted_steps_do_not_reverse",
+  "claim_lifted_walk_vertex_incident_edges_traversed_at_most_once",
   "claim_linear_factor_product_coefficient_elementary_symmetric",
   "claim_local_pairing_four_ports_count",
   "claim_local_pairing_matching_complement_recovery",

@@ -88206,6 +88206,103 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                 role: "supporting",
                 element: {
                   kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_lifted_walk_vertex_incident_edges_traversed_at_most_once",
+                  focus: {
+                    id: "kac_ward_claim_lifted_walk_vertex_incident_edges_traversed_at_most_once",
+                    kind: "claim",
+                    title: { text: "持ち上げ点が相異なる閉路の各訪問頂点に接する四辺はそれぞれ高々一度通過される" },
+                    labels: ["claim_lifted_walk_vertex_incident_edges_traversed_at_most_once"],
+                    habitat: "N",
+                    lean: [
+                      "Ising2DLambda.KacWard.liftedWalkCoordinates_incident_counts_le_one",
+                      "Ising2DLambda.KacWard.liftedWalkCoordinates_neighbors_distinct",
+                      "Ising2DLambda.KacWard.unitGridWalk_incident_total_two",
+                      "Ising2DLambda.KacWard.unitGridWalk_incident_distinct_positive",
+                      "Ising2DLambda.KacWard.liftedWalkCoordinates_incident_distinct_positive",
+                      "Ising2DLambda.NecSuf.KacWard.four_incident_counts_le_one_necSuf",
+                      "Ising2DLambda.KacWard.liftedWalkCoordinates_incident_counts_le_one_from_necSuf",
+                    ],
+                    verification: ["sagemath/check/lifted-walk-vertex-incident-edges-at-most-once"],
+                    statement: [
+                      paragraph([
+                        "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
+                        math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
+                        " で、一周期の持ち上げ点 ",
+                        math(String.raw`P_0(\gamma),\ldots,P_{m-1}(\gamma)`), "（", ref("def_plane_lift"),
+                        "）が二つずつ相異なる任意の閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "（",
+                        ref("def_closed_nonbacktracking_walk"), "）を取る。任意の ",
+                        math(String.raw`j\in\{0,\ldots,m-1\}`), " について ",
+                        math(String.raw`P_j(\gamma)=(a,b)\in\mathbb Z\times\mathbb Z`),
+                        " と書くと、この頂点に接する四辺の通過回数（縦辺は ", ref("def_vertical_edge_traversal_count"),
+                        "、横辺は ", ref("def_horizontal_edge_traversal_count"), "）について、",
+                        math(String.raw`\mathbb N`), " の不等式",
+                      ]),
+                      displayMath(String.raw`V_{a-1,b}(\gamma)\le1,\qquad V_{a,b}(\gamma)\le1,\qquad
+H_{a,b-1}(\gamma)\le1,\qquad H_{a,b}(\gamma)\le1`),
+                      paragraph([
+                        "が成り立つ。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "持ち上げ点 ", math(String.raw`P_0(\gamma),\ldots,P_{m-1}(\gamma)`),
+                        " は二つずつ相異なる（仮定）ので、", math(String.raw`P_k(\gamma)=(a,b)`),
+                        " を満たす一周期の添字 ", math(String.raw`k`), " は ", math(String.raw`j`), " だけである。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
+&=2\cdot\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=(a,b)\right\}\right|
+&&\bigl(\because\ \blkref{claim_vertex_incident_edge_traversal_even}\bigr)\\
+&=2\cdot1
+&&\bigl(\because\ \text{仮定の持ち上げ点の相異性}\bigr)\\
+&=2
+&&\bigl(\because\ \mathbb N\text{ の乗法}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "次に、訪問 ", math(String.raw`P_j(\gamma)`), " へ入る辺と出る辺を置く。",
+                        math(String.raw`j\ge1`), " なら ", math(String.raw`j^-:=j-1`), "、",
+                        math(String.raw`j=0`), " なら ", math(String.raw`j^-:=m-1`), " と置く。",
+                        "零巻き付きなので ", math(String.raw`P_m(\gamma)=P_0(\gamma)`), "（",
+                        ref("claim_plane_lift_endpoint_winding"), "）であり、どちらの場合も ",
+                        math(String.raw`P_{j^-+1}(\gamma)=P_j(\gamma)`), " である。入る辺と出る辺を",
+                      ]),
+                      displayMath(String.raw`E^-:=\{P_{j^-}(\gamma),\,P_{j}(\gamma)\},\qquad
+E^+:=\{P_{j}(\gamma),\,P_{j+1}(\gamma)\}`),
+                      paragraph([
+                        "と置く。各歩の変位は四つの単位ベクトルのいずれかである（", ref("def_plane_lift"), "、",
+                        ref("def_plane_displacement"), "）から、", math(String.raw`E^-`), " と ",
+                        math(String.raw`E^+`), " は ", math(String.raw`(a,b)`),
+                        " に接する四辺のいずれかであり、それぞれ歩 ", math(String.raw`j^-+1`), " と歩 ",
+                        math(String.raw`j+1`), " で通過されるので、その通過回数は ",
+                        math(String.raw`1`), " 以上である（", ref("def_vertical_edge_traversal_count"), "、",
+                        ref("def_horizontal_edge_traversal_count"), "）。",
+                        math(String.raw`E^-=E^+`), " と仮定すると ",
+                        math(String.raw`P_{j^-}(\gamma)=P_{j+1}(\gamma)`),
+                        " で、歩 ", math(String.raw`j+1`), " の変位が歩 ", math(String.raw`j^-+1`),
+                        " の変位の逆ベクトルになる。この二歩は ", math(String.raw`\gamma`),
+                        " の中で隣り合う（", math(String.raw`j=0`), " では閉性により ",
+                        math(String.raw`\vec e_m`), " の次が ", math(String.raw`\vec e_1`), "。",
+                        ref("def_closed_nonbacktracking_walk"), "）から、これは起きない（",
+                        ref("claim_lifted_steps_do_not_reverse"), "）。ゆえに ",
+                        math(String.raw`E^-\ne E^+`), " である。",
+                      ]),
+                      paragraph([
+                        "総和が ", math(String.raw`2`), " の四つの自然数のうち、相異なる二項 ",
+                        "（", math(String.raw`E^-`), " と ", math(String.raw`E^+`),
+                        " の通過回数）がともに ", math(String.raw`1`),
+                        " 以上なので、この二項はともに ", math(String.raw`1`), "、残る二項は ",
+                        math(String.raw`0`), " であり（", math(String.raw`\mathbb N`),
+                        " の加法と順序）、四つとも ", math(String.raw`1`), " 以下である。",
+                        "使ったのは有限な添字の数え上げ・整数の組の等号・自然数の和と順序だけであり、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
                   id: "group_of_kac_ward_claim_vertex_surrounding_cells_form_parity_arcs",
                   focus: {
                     id: "kac_ward_claim_vertex_surrounding_cells_form_parity_arcs",
@@ -88215,6 +88312,7 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
                     habitat: "N",
                     lean: [
                       "Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs",
+                      "Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs_local",
                       "Ising2DLambda.NecSuf.KacWard.four_cells_form_parity_arcs_necSuf",
                       "Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs_from_necSuf",
                     ],
@@ -88246,17 +88344,19 @@ C_2:=(a,b),\qquad C_3:=(a,b-1)`),
                       paragraph([
                         "持ち上げ点 ", math(String.raw`P_0(\gamma),\ldots,P_{m-1}(\gamma)`),
                         " は二つずつ相異なる（仮定）ので、", math(String.raw`P_j(\gamma)=(a,b)`),
-                        " を満たす一周期の添字は ", math(String.raw`j`), " だけである。したがって ",
+                        " を満たす一周期の添字は ", math(String.raw`j`), " だけである。零巻き付きなので ",
+                        math(String.raw`P_m(\gamma)=P_0(\gamma)`), "（", ref("claim_plane_lift_endpoint_winding"),
+                        "）であり、持ち上げ点の列は一周期で閉じる。したがって ",
                         ref("claim_vertex_incident_edge_traversal_even"), " の右辺は ", math(String.raw`2`), " であり、",
                       ]),
                       displayMath(String.raw`V_{a-1,b}(\gamma)+H_{a,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)=2
 \qquad\bigl(\because\ \blkref{claim_vertex_incident_edge_traversal_even}\text{ と一周期での訪問の一意性}\bigr)`),
                       paragraph([
-                        "である。この総和に現れる四辺は、訪問 ", math(String.raw`P_j(\gamma)`),
-                        " へ入る辺とそこから出る辺を含む。二辺は非後退性（", ref("def_closed_nonbacktracking_walk"),
-                        "）により相異なり、それぞれ少なくとも一度通過される。四つの通過回数は自然数で総和が ",
-                        math(String.raw`2`), " なので、この二辺の通過回数が ", math(String.raw`1`),
-                        "、残る二辺の通過回数が ", math(String.raw`0`), " である。ゆえに巡回順に並べた四辺",
+                        "である。四つの通過回数はそれぞれ ", math(String.raw`1`), " 以下（",
+                        ref("claim_lifted_walk_vertex_incident_edges_traversed_at_most_once"),
+                        "）の自然数で総和が ", math(String.raw`2`), " なので、ちょうど二つが ",
+                        math(String.raw`1`), "、残る二つが ", math(String.raw`0`),
+                        " である（", math(String.raw`\mathbb N`), " の加法と順序）。ゆえに巡回順に並べた四辺",
                       ]),
                       displayMath(String.raw`\{(a-1,b),(a,b)\},\quad
 \{(a,b),(a,b+1)\},\quad
@@ -88395,16 +88495,6 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                     lean: [
                       "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected",
                       "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_nonempty_edgeConnected",
-                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_closed",
-                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_unit",
-                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_distinct",
-                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_no_two_step_return",
-                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_no_cyclic_two_step_return",
-                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_neighbors_distinct",
-                      "Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_total_two",
-                      "Ising2DLambda.KacWard.walkSideInteriorBand_coordinate_incident_distinct_positive",
-                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_incident_distinct_positive",
-                      "Ising2DLambda.KacWard.walkSideInteriorBandFromWalk_coordinate_incident_counts_le_one",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_step_mem_interiorBoundary",
                       "Ising2DLambda.NecSuf.KacWard.simple_step_boundary_of_four_cases",
                       "Ising2DLambda.KacWard.consecutive_surroundingInteriorCells_intersect",
@@ -88488,34 +88578,13 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                         math(String.raw`E_{j+1}:=\{P_j(\gamma),P_{j+1}(\gamma)\}`),
                         " と置く。変位が方向単位ベクトルなので、これは平面の隣り合う二格子点を結ぶ単位辺である（",
                         ref("def_plane_lift"), "、", ref("claim_displacement_is_direction_unit"),
-                        "）。頂点 ", math(String.raw`Q:=P_j(\gamma)`),
-                        " は一周期にちょうど一度現れる（仮定）ので、", math(String.raw`Q=(a_j,b_j)`),
-                        " に接する四辺の通過回数について",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gamma)
-&=2\cdot\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
-&&\bigl(\because\ \blkref{claim_vertex_incident_edge_traversal_even}\bigr)\\
-&=2\cdot1
-&&\bigl(\because\ \text{仮定の持ち上げ点の相異性}\bigr)\\
-&=2
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "である。", math(String.raw`Q`), " に接する二つの歩の辺 ",
-                        math(String.raw`E_j=\{P_{j-1}(\gamma),P_j(\gamma)\}`), " と ",
-                        math(String.raw`E_{j+1}=\{P_j(\gamma),P_{j+1}(\gamma)\}`),
-                        " は相異なる。実際、どちらの変位も方向単位ベクトルで零でないから ",
-                        math(String.raw`P_{j-1}(\gamma)\ne P_j(\gamma)\ne P_{j+1}(\gamma)`),
-                        " であり、二つの二元集合が一致するなら ", math(String.raw`P_{j-1}(\gamma)=P_{j+1}(\gamma)`),
-                        "、すなわち歩 ", math(String.raw`j+1`), " の変位が歩 ", math(String.raw`j`),
-                        " の変位の逆ベクトルとなるが、これは非後退性により起きない（",
-                        ref("claim_lifted_steps_do_not_reverse"), "）。二辺とも上の総和に現れる ",
-                        math(String.raw`Q`), " の接辺で、それぞれ少なくとも一度通過される。総和が ",
-                        math(String.raw`2`), " の四つの自然数のうち、相異なる二項がともに ",
-                        math(String.raw`1`), " 以上なので、この二辺の通過回数がそれぞれ ",
-                        math(String.raw`1`), "、残る二辺が ", math(String.raw`0`), " である。とくに ",
-                        math(String.raw`E_{j+1}`), " の通過回数は ", math(String.raw`1`), "（奇数）である。",
+                        "）。", math(String.raw`E_{j+1}`), " は歩 ", math(String.raw`j+1`),
+                        " で通過されるので、その通過回数は ", math(String.raw`1`), " 以上である（",
+                        ref("def_vertical_edge_traversal_count"), "、", ref("def_horizontal_edge_traversal_count"),
+                        "）。一方 ", math(String.raw`E_{j+1}`), " は ", math(String.raw`P_j(\gamma)`),
+                        " に接する四辺の一つなので、その通過回数は ", math(String.raw`1`), " 以下である（",
+                        ref("claim_lifted_walk_vertex_incident_edges_traversed_at_most_once"),
+                        "）。ゆえに ", math(String.raw`E_{j+1}`), " の通過回数は ", math(String.raw`1`), "（奇数）である。",
                       ]),
                       paragraph([
                         math(String.raw`E_{j+1}`), " が縦辺 ",
@@ -88778,34 +88847,13 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                         math(String.raw`E_{j+1}:=\{P_j(\gamma),P_{j+1}(\gamma)\}`),
                         " と置く。変位が方向単位ベクトルなので、これは平面の隣り合う二格子点を結ぶ単位辺である（",
                         ref("def_plane_lift"), "、", ref("claim_displacement_is_direction_unit"),
-                        "）。頂点 ", math(String.raw`Q:=P_j(\gamma)`),
-                        " は一周期にちょうど一度現れる（仮定）ので、", math(String.raw`Q=(a_j,b_j)`),
-                        " に接する四辺の通過回数について",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gamma)
-&=2\cdot\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
-&&\bigl(\because\ \blkref{claim_vertex_incident_edge_traversal_even}\bigr)\\
-&=2\cdot1
-&&\bigl(\because\ \text{仮定の持ち上げ点の相異性}\bigr)\\
-&=2
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "である。", math(String.raw`Q`), " に接する二つの歩の辺 ",
-                        math(String.raw`E_j=\{P_{j-1}(\gamma),P_j(\gamma)\}`), " と ",
-                        math(String.raw`E_{j+1}=\{P_j(\gamma),P_{j+1}(\gamma)\}`),
-                        " は相異なる。実際、どちらの変位も方向単位ベクトルで零でないから ",
-                        math(String.raw`P_{j-1}(\gamma)\ne P_j(\gamma)\ne P_{j+1}(\gamma)`),
-                        " であり、二つの二元集合が一致するなら ", math(String.raw`P_{j-1}(\gamma)=P_{j+1}(\gamma)`),
-                        "、すなわち歩 ", math(String.raw`j+1`), " の変位が歩 ", math(String.raw`j`),
-                        " の変位の逆ベクトルとなるが、これは非後退性により起きない（",
-                        ref("claim_lifted_steps_do_not_reverse"), "）。二辺とも上の総和に現れる ",
-                        math(String.raw`Q`), " の接辺で、それぞれ少なくとも一度通過される。総和が ",
-                        math(String.raw`2`), " の四つの自然数のうち、相異なる二項がともに ",
-                        math(String.raw`1`), " 以上なので、この二辺の通過回数がそれぞれ ",
-                        math(String.raw`1`), "、残る二辺が ", math(String.raw`0`), " である。とくに ",
-                        math(String.raw`E_{j+1}`), " の通過回数は ", math(String.raw`1`), "（奇数）である。",
+                        "）。", math(String.raw`E_{j+1}`), " は歩 ", math(String.raw`j+1`),
+                        " で通過されるので、その通過回数は ", math(String.raw`1`), " 以上である（",
+                        ref("def_vertical_edge_traversal_count"), "、", ref("def_horizontal_edge_traversal_count"),
+                        "）。一方 ", math(String.raw`E_{j+1}`), " は ", math(String.raw`P_j(\gamma)`),
+                        " に接する四辺の一つなので、その通過回数は ", math(String.raw`1`), " 以下である（",
+                        ref("claim_lifted_walk_vertex_incident_edges_traversed_at_most_once"),
+                        "）。ゆえに ", math(String.raw`E_{j+1}`), " の通過回数は ", math(String.raw`1`), "（奇数）である。",
                       ]),
                       paragraph([
                         math(String.raw`E_{j+1}`), " が縦辺 ",

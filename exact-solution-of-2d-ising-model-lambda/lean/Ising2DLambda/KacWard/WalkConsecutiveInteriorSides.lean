@@ -153,7 +153,7 @@ theorem vertexSimpleWalk_consecutive_interior_sides_eq
   have hnoReturn : (row j.val, col j.val) ≠
       (row (j.val + 2), col (j.val + 2)) := by
     intro heq
-    have h := walkSideInteriorBandFromWalk_no_two_step_return γ hγ j
+    have h := liftedWalk_no_two_step_return γ hγ j
     apply h
     have hleft : Fin.ofNat (m + 2) j.val = Fin.castSucc (Fin.castSucc j) := by
       apply Fin.ext
@@ -269,7 +269,7 @@ theorem vertexSimpleWalk_period_seam_interior_side_eq
   have hcol : col (m + 1) = col 0 := by
     simpa only [col, hlastIndex, hzeroIndex] using congrArg Prod.snd hend
   have hnoReturn : (row m, col m) ≠ (row 1, col 1) := by
-    have h := walkSideInteriorBandFromWalk_no_cyclic_two_step_return γ hγ hh hv
+    have h := liftedWalk_no_cyclic_two_step_return γ hγ hh hv
     simpa only [row, col, hprevIndex, hnextIndex] using h
   have hbit (n : ℕ) : (if Odd n then (1 : ℕ) else 0) = n % 2 := by
     by_cases h : Odd n
