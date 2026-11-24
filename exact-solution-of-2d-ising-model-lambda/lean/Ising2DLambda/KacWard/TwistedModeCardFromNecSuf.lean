@@ -5,12 +5,12 @@ namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
 
-theorem twistedModeSets_ncard_from_necSuf (L : ℕ) (hL : 0 < L) (ξ : Qbar)
-    (hξ : ξ ^ L = -1) :
+theorem twistedModeSets_ncard_from_necSuf (L : ℕ) (hL : 0 < L) :
     (horizontalTwistedModes L (false, false)).ncard = L ∧
     (horizontalTwistedModes L (true, false)).ncard = L ∧
     (verticalTwistedModes L (false, false)).ncard = L ∧
     (verticalTwistedModes L (false, true)).ncard = L := by
+  obtain ⟨ξ, -, hξ⟩ := antiperiodicMode_exists L hL
   have hξne : ξ ≠ 0 := by
     intro hzero
     rw [hzero] at hξ

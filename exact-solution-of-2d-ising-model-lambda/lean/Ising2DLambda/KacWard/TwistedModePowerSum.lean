@@ -116,14 +116,11 @@ theorem twistedMode_coordinateKernel {L : ℕ} (hL : 1 ≤ L)
     _ = σ⁻¹ * (∑ z : {z : Qbar // z ^ L = σ}, z.1 ^ k) := by
       rw [Finset.mul_sum]
     _ = σ⁻¹ * (ξ ^ k * (if L ∣ k then algebraMap ℚ Qbar (L : ℚ) else 0)) := by
-      rw [← Fintype.sum_equiv (twistedModeRootEquiv hL hσ hξ)
-        (fun z : RootOfUnity L => (ξ * z.1) ^ k)
-        (fun z : {z : Qbar // z ^ L = σ} => z.1 ^ k) (fun _ => rfl)]
-      simp_rw [mul_pow]
-      rw [← Finset.mul_sum]
-      change σ⁻¹ * (ξ ^ k * powerSum L k) = _
-      rw [powerSumValue hL k]
-      rfl
+      -- 本文の横モード和の二行目: `claim_twisted_mode_power_sum`。
+      congr 1
+      convert twistedMode_powerSum hL hσ hξ k using 2
+      congr 1
+      exact Subsingleton.elim _ _
     _ = if i = j then (L : Qbar) else 0 := by
       simp only [hdiv]
       by_cases heq : i = j

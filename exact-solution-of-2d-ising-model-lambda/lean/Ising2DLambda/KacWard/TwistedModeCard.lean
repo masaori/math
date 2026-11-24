@@ -1,18 +1,20 @@
 import Ising2DLambda.KacWard.HorizontalTwistedModesCoset
 import Ising2DLambda.KacWard.VerticalTwistedModesCoset
 import Ising2DLambda.AlgebraicEigenvalue.RootOfUnityCard
+import Ising2DLambda.KacWard.AntiperiodicModeExists
 
 namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
 
 /-- Both directional mode sets have exactly L elements for either twist. -/
-theorem twistedModeSets_ncard (L : ℕ) (hL : 0 < L) (ξ : Qbar)
-    (hξ : ξ ^ L = -1) :
+theorem twistedModeSets_ncard (L : ℕ) (hL : 0 < L) :
     (horizontalTwistedModes L (false, false)).ncard = L ∧
     (horizontalTwistedModes L (true, false)).ncard = L ∧
     (verticalTwistedModes L (false, false)).ncard = L ∧
     (verticalTwistedModes L (false, true)).ncard = L := by
+  -- 本文の第一段落: `claim_antiperiodic_mode_exists` により ξ^L = -1 の ξ を取る。
+  obtain ⟨ξ, -, hξ⟩ := antiperiodicMode_exists L hL
   have hξne : ξ ≠ 0 := by
     intro hzero
     rw [hzero] at hξ

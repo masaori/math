@@ -17,8 +17,7 @@ theorem modeIndex_card_data {L : ℕ} [NeZero L] (s : SpinStructure) :
     (verticalTwistedModes L s).ncard = L := by
   classical
   have hL : 0 < L := Nat.pos_of_ne_zero (NeZero.ne L)
-  obtain ⟨ξ, hξ⟩ := IsAlgClosed.exists_pow_nat_eq (-1 : Qbar) hL
-  obtain ⟨hh0, hh1, hv0, hv1⟩ := twistedModeSets_ncard L hL ξ hξ
+  obtain ⟨hh0, hh1, hv0, hv1⟩ := twistedModeSets_ncard L hL
   have hUcard : (horizontalTwistedModes L s).ncard = L := by
     rcases s with ⟨a, b⟩
     cases a <;> cases b

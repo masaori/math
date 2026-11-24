@@ -28,9 +28,14 @@ theorem rightwardSeam_modePhase (L : ℕ) (hL : 1 ≤ L) (s : SpinStructure)
   by_cases hlast : edgeColumn L e = L - 1
   · have htarget0 : (((edgeColumn L e : ZMod L) + 1).val) = 0 := by
       rw [htarget, hlast, Nat.sub_add_cancel hL, Nat.mod_self]
+    -- 本文の第二の場合: `claim_twisted_mode_wrap_phase` の前進の等式 σ·z^0 = z^L。
+    have hσ : (if s.1 then (-1 : Qbar) else 1) = 1 ∨ (if s.1 then (-1 : Qbar) else 1) = -1 := by
+      cases s.1 <;> simp
+    have hwrap := (twistedMode_wrapPhase L hL _ varpi hσ hmode).1
     have hsign : (twistSign s (e, false) : Qbar) = varpi ^ L := by
+      rw [← hwrap]
       cases hs : s.1 <;> simp [twistSign, horizontalSeamParity, verticalSeamParity,
-        he, hlast, hs, hmode]
+        he, hlast, hs]
     simp only [orientedTarget, orientedSource, boundary0, boundary1, he,
       Bool.false_eq_true, ↓reduceIte, htarget0, hsource]
     simp only [hsign, pow_zero, one_mul, hlast, Nat.sub_add_cancel hL]

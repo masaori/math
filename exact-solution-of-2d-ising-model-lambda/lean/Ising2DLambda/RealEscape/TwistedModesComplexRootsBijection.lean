@@ -165,12 +165,10 @@ theorem complexRootSet_ncard (L : ℕ) (hL : 0 < L) (c : Bool) :
     (complexRootSet L c).ncard = L := by
   rw [← (complexRootCandidate_bijOn L hL c).image_eq, complexRootCandidates_ncard L hL c]
 
-/-- 横・縦のモード集合はどちらも L 個の元を持つ（`claim_twisted_mode_sets_card`。
-ξ^L = -1 の ξ は `claim_antiperiodic_mode_exists` から取る）。 -/
+/-- 横・縦のモード集合はどちらも L 個の元を持つ（`claim_twisted_mode_sets_card`）。 -/
 theorem horizontalTwistedModes_ncard (L : ℕ) (hL : 0 < L) (s : SpinStructure) :
     (horizontalTwistedModes L s).ncard = L := by
-  obtain ⟨ξ, -, hξ⟩ := antiperiodicMode_exists L hL
-  obtain ⟨h0, h1, -, -⟩ := twistedModeSets_ncard L hL ξ hξ
+  obtain ⟨h0, h1, -, -⟩ := twistedModeSets_ncard L hL
   obtain ⟨a, b⟩ := s
   cases a
   · exact h0
@@ -178,8 +176,7 @@ theorem horizontalTwistedModes_ncard (L : ℕ) (hL : 0 < L) (s : SpinStructure) 
 
 theorem verticalTwistedModes_ncard (L : ℕ) (hL : 0 < L) (s : SpinStructure) :
     (verticalTwistedModes L s).ncard = L := by
-  obtain ⟨ξ, -, hξ⟩ := antiperiodicMode_exists L hL
-  obtain ⟨-, -, h0, h1⟩ := twistedModeSets_ncard L hL ξ hξ
+  obtain ⟨-, -, h0, h1⟩ := twistedModeSets_ncard L hL
   obtain ⟨a, b⟩ := s
   cases b
   · exact h0
