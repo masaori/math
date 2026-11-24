@@ -5,7 +5,7 @@
 新規ファイル:
 
 - 具体版: `lean/Ising2D/EigenvalueProblem/ReductionToATheta/`（章立てに合わせて旧 `Part014/` から移した。ファイル名の番号は外した）
-- 必要十分版: `lean/Ising2D/NecSuf/TVActionSandwich.lean`（新規は 1 本だけ。理由は 2 節）
+- 必要十分版: `lean/Ising2D/NecSuf/TVActionSandwich.lean`（新規の主張は 1 本だけ。理由は 2 節。ほかは具体版と同じ式の定義と合成則）
 
 `lean/README.md` への統合は呼び出し元が行う（本ファイルは章 014 の作業記録）。
 
@@ -83,7 +83,8 @@
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
 | `Ising2D.NecSuf.actsBy_sandwich`（`TVActionSandwich.lean`） | `T_1` が `B_1`、`T_2` が `B_2` で作用するなら `T_1∘T_2∘T_1` は `B_1B_2B_1` で作用する（ℂ 上の任意の加群・任意の ℂ 線型写像） | `T_V_plus_check_Z_Y` / `calc_of_TxT_check_Z_Y` / `linearity_of_T_on_check_Z_Y` / `linearity_of_T_V2` |
-| `Ising2D.NecSuf.actsBy_TV_sandwich` | 上を `T_{(V)} = T_{g_1}∘T_{g_2}∘T_{g_1}` の形で述べた版（任意の ℂ-代数の単元） | 同上 |
+| `Ising2D.NecSuf.actsBy_TV_sandwich` | 上を `T_{(V)} = T_{g_1}∘T_{g_2}∘T_{g_1}` の形で述べた版（任意の ℂ-代数の単元。共役 `NecSuf.TConj'` は ℂ 線型写像） | 同上 |
+| `Ising2D.NecSuf.ActsBy'` / `ActsBy'.comp` / `TConj'` / `TV'`（`TVActionSandwich.lean`） | 行ベクトル記法・合成則・共役作用・その 3 つの合成の必要十分版の側の定義（具体版 `ActsBy`・`ActsBy.comp`・`TConj`・`TV` と同じ式。一致は導出 `DefinitionTgAndTVFromNecSuf.lean` の `actsBy_iff_actsBy_necSuf`・`TConj_toLinearMap_eq_TConj_necSuf`・`TV_toLinearMap_eq_TV_necSuf` だけが述べる） | `def_T_g` |
 | `Ising2D.NecSuf.iterComm` / `iterComm_smul_left_one` / `iterComm_smul_right_one` / `iterComm_smul_left`（`IteratedCommutatorSmul.lean`） | `ad_{αx} = α ad_x`、`ad_x` の線型性、`ad_{αx}^n = α^n ad_x^n`（台は積を持つ加法群で、スカラーの作用が引き算と分配し、積と `(αx)w = α(xw)`・`x(αw) = α(xw)` で両立すればよい。スカラーは任意のモノイド） | `cosh_sinh_coefficient_conversion_for_check` の補題 1 |
 
 ---
@@ -103,7 +104,7 @@
 
 ### 本章で新しく足した必要十分版
 
-新しく足した必要十分版は 1 本で、原文が `T_actions → linearity → calc_of_TxT → linearity → calc_of_TxT` と
+新しく足した必要十分版の主張は 1 本で（ほかに、具体版の `ActsBy`・`ActsBy.comp`・`TConj`・`TV` と同じ式の定義と合成則 `NecSuf.ActsBy'`・`ActsBy'.comp`・`TConj'`・`TV'` を置いた）、原文が `T_actions → linearity → calc_of_TxT → linearity → calc_of_TxT` と
 4 段で往復している部分を 1 本にまとめた `NecSuf.actsBy_sandwich` である。
 `NecSuf.hasSum_two_dim_series`（位相 ℂ 加群）は `NecSuf.exp_conj_two_dim_z` / `_y` の材料で、`extract_taylor_coefficient_of_check_Z_Y` の必要十分版ではない
 （その具体版は `exponential_series_of_even_odd_power_terms` を引く別の手順である）。
@@ -111,7 +112,7 @@
 
 | 人手証明のラベル（章 014） | 具体版 | 必要十分版 |
 | --- | --- | --- |
-| `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1plus` / `V1plusHalf` / `V1_plus_square_root_property` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` / `VPlusOfTransfer_eq_VPlus` / `TV_V1plusHalfUnits_V2Units` / `isUnit_V2` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`） |
+| `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1plus` / `V1plusHalf` / `V1_plus_square_root_property` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` / `VPlusOfTransfer_eq_VPlus` / `TV_V1plusHalfUnits_V2Units` / `isUnit_V2` | `def_T_V_plus` の `T_g`・`T_{(V)}` の定義の側だけ `NecSuf.TConj'` / `TV'`（`TVActionSandwich.lean`。任意の ℂ 上の半環の上の ℂ 線型写像。具体版 `Ising2D.TConj` / `TV`（`DefinitionTgAndTV.lean`）との一致は導出 `DefinitionTgAndTVFromNecSuf.lean`）。ほかのラベルには必要十分版を置かない |
 | `nesting_of_commutator_of_H_and_check_Z` | `Ising2D.nesting_H1Plus_checkZ_even` ほか 8 本（人手の帰納法どおり） | `NecSuf.nested_z_even` / `nested_z_odd` / `nested_y_even` / `nested_y_odd`（同じ帰納段階 1・2。スカラーは可換環、台は引き算と積があればよい。導出は `Ising2D.nesting_*_of_necSuf`） |
 | `cosh_sinh_coefficient_conversion_for_check` | `Ising2D.conversion_H1Plus_checkZ_even` ほか 8 本（人手の補題 1・補題 2 と代入の鎖どおり） | 補題 1 は `NecSuf.iterComm_smul_left`（台は引き算と積があればよく、スカラーは任意のモノイド）。8 本は補題 1 と `NecSuf.nested_*` の特殊化から具体版と同じ手順で得る（導出は `Ising2D.adPow_smul_left_of_necSuf`・`conversion_*_of_necSuf`） |
 | `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本（各項の鎖と `exponential_series_of_even_odd_power_terms` の適用が人手どおり） | 置かない（このファイル固有の段は ℂ の積の並べ替えと実数の積の像だけで、部品の係数変換とノルムの評価はそれぞれ既存の必要十分版を持つ） |
@@ -144,7 +145,7 @@ Lean での機械的裏づけである。
 具体的な確認として、`Ising2D.TV_hatZ_hatY_via_sandwich`（本文から退避した整数運動量の経路の記録 `RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`）で
 **008 章の結論を本章の必要十分版から導き直した**。本章の結論を必要十分版から導いた
 `Ising2D.TVPlus_checkZ_checkY_of_necSuf`（`ClaimTVPlusActionFromNecSuf.lean`）とこの定理は、`NecSuf.actsBy_TV_sandwich` に渡す
-`ActsBy` が `(Ẑ^{(-)}, Ŷ, B_1(θ_μ))` か `(Ž, Y̌, B_1(θ~_μ))` かだけが違う。
+`ActsBy'`（具体版の `ActsBy` から読み替えたもの）が `(Ẑ^{(-)}, Ŷ, B_1(θ_μ))` か `(Ž, Y̌, B_1(θ~_μ))` かだけが違う。
 
 さらに、必要十分版から次の 3 点が分かった。
 

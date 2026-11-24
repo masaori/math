@@ -311,8 +311,16 @@ theorem TV_hatZ_hatY_via_sandwich (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1
     (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
     ActsBy (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap
       (hatZMinus M μ) (hatY M μ) (AMat K (thetaMu M μ)) := by
-  have h := NecSuf.actsBy_TV_sandwich (actsBy_TConj_V1pmHalf hM K1 μ)
-    (actsBy_TConj_V2H2Form hM hs2 K2star μ)
+  -- 具体版の `ActsBy`・`TConj`・`TV` と必要十分版の `ActsBy'`・`TConj'`・`TV'` は同じ式の定義なので、
+  -- `have` の型注釈（定義上の一致）で読み替える。
+  have h₁ : NecSuf.ActsBy' (NecSuf.TConj' (V1pmHalfUnits M K1 1)) (hatZMinus M μ) (hatY M μ)
+      (B1mat K1 ((thetaMu M μ : ℝ) : ℂ)) := actsBy_TConj_V1pmHalf hM K1 μ
+  have h₂ : NecSuf.ActsBy' (NecSuf.TConj' (V2H2FormUnits M hs2 K2star)) (hatZMinus M μ) (hatY M μ)
+      (B2mat K2star) := actsBy_TConj_V2H2Form hM hs2 K2star μ
+  have h : ActsBy (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap
+      (hatZMinus M μ) (hatY M μ)
+      (B1mat K1 ((thetaMu M μ : ℝ) : ℂ) * B2mat K2star * B1mat K1 ((thetaMu M μ : ℝ) : ℂ)) :=
+    NecSuf.actsBy_TV_sandwich h₁ h₂
   rwa [B1_mul_B2_mul_B1_eq_AMat K K1 K2star (thetaMu M μ) hc1 hs1 hc2star hs2star hdual] at h
 
 end Ising2D

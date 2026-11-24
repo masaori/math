@@ -434,8 +434,6 @@ DEP	necsuf	Ising2D.NecSuf.acomm_lincomb_clifford
 DEP	necsuf	Ising2D.NecSuf.acomm_of_single_site
 DEP	necsuf	Ising2D.NecSuf.acomm_sum_smul_clifford_left
 DEP	necsuf	Ising2D.NecSuf.acomm_sum_smul_clifford_necSuf
-DEP	necsuf	Ising2D.NecSuf.actsBy_TV_sandwich
-DEP	necsuf	Ising2D.NecSuf.actsBy_sandwich
 DEP	necsuf	Ising2D.NecSuf.car_of_coeffs
 DEP	necsuf	Ising2D.NecSuf.lie_carHam_ann
 DEP	necsuf	Ising2D.NecSuf.lie_carHam_cre
@@ -666,4 +664,3 @@ IMPORT	necsuf	Ising2D.NecSuf.FourierClifford	concrete	Ising2D.MathematicalTools.
 IMPORT	necsuf	Ising2D.NecSuf.OpenChainSpinSum	concrete	Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimOpenChainSpinSums
 IMPORT	necsuf	Ising2D.NecSuf.PermSector	concrete	Ising2D.RoutesNotAdopted.MinusSector.ClaimRayleighSupSectorDecomposition
 IMPORT	necsuf	Ising2D.NecSuf.SiteLocalAnticomm	concrete	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
-IMPORT	necsuf	Ising2D.NecSuf.TVActionSandwich	concrete	Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV

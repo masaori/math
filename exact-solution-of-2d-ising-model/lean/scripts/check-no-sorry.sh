@@ -1753,6 +1753,10 @@ targets=(
   Ising2D.factorization_step5_P21_real
   Ising2D.NecSuf.actsBy_sandwich
   Ising2D.NecSuf.actsBy_TV_sandwich
+  "Ising2D.NecSuf.ActsBy'.comp"
+  Ising2D.actsBy_iff_actsBy_necSuf
+  Ising2D.TConj_toLinearMap_eq_TConj_necSuf
+  Ising2D.TV_toLinearMap_eq_TV_necSuf
   Ising2D.TVPlus_apply_checkZ
   Ising2D.TVPlus_apply_checkY
   Ising2D.TVPlus_checkZ_checkY

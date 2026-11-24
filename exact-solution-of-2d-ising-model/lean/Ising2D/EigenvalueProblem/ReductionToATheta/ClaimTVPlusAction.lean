@@ -53,10 +53,10 @@ Lean の `TVPlus_apply_checkZ`・`TVPlus_apply_checkY` の `calc` の 12 段と�
 
 | 具体版の行 | 必要十分版（`NecSuf.actsBy_sandwich`） |
 | --- | --- |
-| (z)・(y) の 1 行目 `def_T_V_plus` | `TV` が `T_{g_1}∘T_{g_2}∘T_{g_1}` であること（`actsBy_TV_sandwich` が `actsBy_sandwich` へ渡す形） |
+| (z)・(y) の 1 行目 `def_T_V_plus` | `TV'` が `T_{g_1}∘T_{g_2}∘T_{g_1}` であること（`actsBy_TV_sandwich` が `actsBy_sandwich` へ渡す形） |
 | (z)・(y) の 2〜3 行目 `T_actions_on_check_Z_Y`・`β_j` | 内側の `h₁`（`T_1` が `B_1` で作用すること） |
-| (z)・(y) の 4〜7 行目（`linearity_of_T_V2`・`calc_of_TxT_check_Z_Y` の第 2 式・組の積の結合律） | 1 回目の `ActsBy.comp`（`map_add`・`map_smul` が線型性、`hS` が `B_2`） |
-| (z)・(y) の 8〜12 行目（`linearity_of_T_on_check_Z_Y`・`calc_of_TxT_check_Z_Y` の第 1 式・組の積の結合律） | 2 回目の `ActsBy.comp` |
+| (z)・(y) の 4〜7 行目（`linearity_of_T_V2`・`calc_of_TxT_check_Z_Y` の第 2 式・組の積の結合律） | 1 回目の `ActsBy'.comp`（`map_add`・`map_smul` が線型性、`hS` が `B_2`） |
+| (z)・(y) の 8〜12 行目（`linearity_of_T_on_check_Z_Y`・`calc_of_TxT_check_Z_Y` の第 1 式・組の積の結合律） | 2 回目の `ActsBy'.comp` |
 | 2 列を並べる鎖の 1〜7 行目（列を並べて `(B_1 B_2) B_1`） | `actsBy_sandwich` の `mul_assoc` |
 | 2 列を並べる鎖の 8 行目 `factorization_of_A_theta_general` | 導出 `TVPlus_checkZ_checkY_of_necSuf` の `factorization_of_A_thetaTilde` |
 

@@ -11,9 +11,11 @@ README 4 節の要件 4 を満たす。
 
 渡すのは `T_1 = T_{(V_1^{(+)})^{1/2}}`（作用行列 `B_1(θ~_μ)`、`actsBy_TConj_V1plusHalf`）と
 `T_2 = T_{V_2}`（作用行列 `B_2`、`actsBy_TConj_V2H2Form_check`）である。具体版の (z)・(y) の鎖の 6 行は、
-必要十分版では合成則 `ActsBy.comp` の 2 回の適用（線型性はその中に埋め込まれている）にまとまる。
+必要十分版では合成則 `ActsBy'.comp` の 2 回の適用（線型性はその中に埋め込まれている）にまとまる。
+具体版の `ActsBy`・`TConj`・`TV` と必要十分版の `ActsBy'`・`TConj'`・`TV'` の読み替えは
+`MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTVFromNecSuf.lean` の一致で行う。
 -/
-import Ising2D.NecSuf.TVActionSandwich
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTVFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTVPlusAction
 
 namespace Ising2D
@@ -30,8 +32,12 @@ theorem TVPlus_checkZ_checkY_of_necSuf (hM : M ≠ 0) (K : IsingConst) (μ : ℤ
     (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
     ActsBy (TVPlus M hs2 K1 K2star).toLinearMap (checkZ M μ) (checkY M μ)
       (AMat K (thetaTilde M μ)) := by
-  have h := NecSuf.actsBy_TV_sandwich (actsBy_TConj_V1plusHalf hM K1 μ)
-    (actsBy_TConj_V2H2Form_check hs2 K2star μ)
+  have h₁ := actsBy_TConj_V1plusHalf hM K1 μ
+  have h₂ := actsBy_TConj_V2H2Form_check (M := M) hs2 K2star μ
+  rw [actsBy_iff_actsBy_necSuf, TConj_toLinearMap_eq_TConj_necSuf] at h₁ h₂
+  have h := NecSuf.actsBy_TV_sandwich h₁ h₂
+  rw [← TV_toLinearMap_eq_TV_necSuf, ← actsBy_iff_actsBy_necSuf] at h
+  rw [TVPlus]
   rwa [factorization_of_A_thetaTilde (M := M) K K1 K2star μ hc1 hs1 hc2star hs2star hdual] at h
 
 end Ising2D
