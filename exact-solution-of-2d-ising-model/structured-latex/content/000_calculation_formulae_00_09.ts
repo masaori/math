@@ -2228,7 +2228,7 @@ y^2>x\ \land\ x>0
     kind: "definition",
     title: { text: "添字の集合" },
     labels: ["def_index_set_from_one_to_n"],
-    lean: ["Ising2D.finIndexToZZ", "Ising2D.finIndexToZZ_bijective_onto_index_set", "Ising2D.finIndexToZZ_lt_iff_val_lt", "Ising2D.finIndexToZZ_eq_iff_val_add_one_eq", "Ising2D.finIndexToZZ_firstSite", "Ising2D.finIndexToZZ_lastSite"],
+    lean: ["Ising2D.finIndexToZZ", "Ising2D.finIndexToZZ_bijective_onto_index_set", "Ising2D.finIndexToZZ_lt_iff_val_lt", "Ising2D.finIndexToZZ_eq_iff_val_add_one_eq", "Ising2D.finIndexToZZ_le_inclusion_iff_val_lt", "Ising2D.finIndexToZZ_firstSite", "Ising2D.finIndexToZZ_lastSite"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 0}`),

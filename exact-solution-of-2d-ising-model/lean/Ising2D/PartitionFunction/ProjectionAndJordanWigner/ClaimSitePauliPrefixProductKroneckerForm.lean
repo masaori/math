@@ -21,6 +21,12 @@
   人手の `Π_{j=1}^{s}σ_j^{a_j}` は Lean の `finiteMatrixProduct (s - 1) (sitePauliFamily (s - 1) _ (a の先頭 s 個))` で、
   `def_finite_product_of_matrices` の第 1 式の行と第 2 式（`r → s`）の行は `finiteMatrixProduct_zero`・`finiteMatrixProduct_succ` である。
 * 人手の右辺 `σ^{a_1}⊠⋯⊠σ^{a_r}⊠I⊠⋯⊠I` は `siteProd M (prefixKroneckerFamily r a)`（第 `i` 因子は `i < r + 1` なら `a i`、それ以外は `I`）。
+* 人手の添字 `k ∈ {1,…,M_col}` は `finIndexToZZ M i = k`（`def_index_set_from_one_to_n`）を満たす `i : Fin M` である。証明の因子ごとの場合分けは、
+  人手の添字 `finIndexToZZ M i` を ℤ の順序で比べる（「第 `1` から第 `s` 因子」は `finIndexToZZ M i ≤ ι_{ℕ→ℤ}(s)`、「第 `s+1` 因子」は
+  `finIndexToZZ M i = finIndexToZZ M ⟨s, _⟩`）。分けた後の因子の等号は全単射の補題 `finIndexToZZ_bijective_onto_index_set` の単射で得る。
+  Lean の定義（`prefixKroneckerFamily`・`jwFamily`・`jwLetter`・`jwFactor`）は `Fin` の元の値（ℕ）で比べるので、`prefixKroneckerFamily`・`jwFamily` へは
+  `finIndexToZZ_le_inclusion_iff_val_lt`・`finIndexToZZ_lt_iff_val_lt` で移す。`jwFactor`・`jwLetter` の添字は `Fin (m + 1)` の元で、人手の `m` の添字
+  `finIndexToZZ M m` と型が違うので、像の値を証明の中の `have` に置いて値の比較へ移す。
 * 人手の `s` の帰納法は、Lean の `r` の帰納法（因子 `a` を一般にしたまま。`a` の先頭の `s` 個が人手の `Π_{j=1}^{s}σ_j^{a_j}` の因子）である。
   `s = 1` の 2 行の鎖と、`s → s + 1` の 6 行の鎖は、`site_pauli_prefix_product_kronecker_form` の 2 つの節の `calc` と 1 段ずつ対応する。
   節 `| s + 1` の Lean の変数 `s` は人手の `s - 1` である。段のコメントの `k = s+1`・「第 `s+2` 以降」などの `s` は人手の `s` で書く。
@@ -40,6 +46,7 @@
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatrices
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIndexSetFromOneToN
 
 namespace Ising2D
 
@@ -71,17 +78,28 @@ theorem site_pauli_prefix_product_kronecker_form :
           rw [siteOp_apply]
           congr 1
           funext i
-          by_cases hi : (i : ℕ) < 0 + 1
-          · have he : i = (⟨0, h⟩ : Fin M) := Fin.ext (show (i : ℕ) = 0 by omega)
-            rw [prefixKroneckerFamily, dif_pos hi]
+          -- 人手の添字 `finIndexToZZ M i`（`def_index_set_from_one_to_n`）が `ι_{ℕ→ℤ}(1) = 1_ℤ` 以下なら第 1 因子 `σ^{a_1}`、そうでなければ `I`
+          have hinj := (finIndexToZZ_bijective_onto_index_set M).1
+          have h0Z : finIndexToZZ M (⟨0, h⟩ : Fin M) = 1 := by
+            simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]; omega
+          have h1Z : inclusionNNtoZZ (0 + 1) = 1 := by simp only [inclusionNNtoZZ_eq_natCast]; omega
+          by_cases hi : finIndexToZZ M i ≤ inclusionNNtoZZ (0 + 1)
+          · have he : i = (⟨0, h⟩ : Fin M) := hinj _ _ (by
+              have := ((finIndexToZZ_bijective_onto_index_set M).2.1 i).1
+              omega)
+            rw [prefixKroneckerFamily, dif_pos ((finIndexToZZ_le_inclusion_iff_val_lt M i (0 + 1)).1 hi)]
             subst he
             rw [Function.update_self]
             rfl
-          · have hne : i ≠ (⟨0, h⟩ : Fin M) := fun he => hi (by subst he; exact Nat.zero_lt_one)
-            rw [prefixKroneckerFamily, dif_neg hi, Function.update_of_ne hne, Pi.one_apply]
+          · have hne : i ≠ (⟨0, h⟩ : Fin M) := fun he => hi (by rw [he]; omega)
+            rw [prefixKroneckerFamily, dif_neg (fun hv => hi ((finIndexToZZ_le_inclusion_iff_val_lt M i (0 + 1)).2 hv)),
+              Function.update_of_ne hne, Pi.one_apply]
   | s + 1, h, a => by
     have hs : s < M := Nat.lt_of_succ_lt h
     have ih := site_pauli_prefix_product_kronecker_form s hs (fun j => a (Fin.castSucc j))
+    -- `⟨s + 1, h⟩` の `finIndexToZZ` の像（人手の `s+1` の添字）は `ι_{ℕ→ℤ}(s + 1) + 1_ℤ`（ここの `s` は Lean の `s` で、人手の `s` は Lean の `s + 1`。`def_index_set_from_one_to_n`）
+    have hinj := (finIndexToZZ_bijective_onto_index_set M).1
+    have hsZ : finIndexToZZ M (⟨s + 1, h⟩ : Fin M) = inclusionNNtoZZ (s + 1) + 1 := rfl
     calc finiteMatrixProduct (s + 1) (sitePauliFamily (s + 1) h a)
         = finiteMatrixProduct s (sitePauliFamily s hs (fun j => a (Fin.castSucc j)))
             * siteOp (⟨s + 1, h⟩ : Fin M) (a (Fin.last (s + 1))) := finiteMatrixProduct_succ s _
@@ -90,36 +108,45 @@ theorem site_pauli_prefix_product_kronecker_form :
             * siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) ⟨s + 1, h⟩ (a (Fin.last (s + 1)))) := by
           rw [ih, siteOp_apply]                         -- 帰納法の仮定と `def_site_pauli_matrices` の `k = s+1`
       _ = siteProd M (fun i : Fin M =>
-            if hi : (i : ℕ) < s + 1 then a ⟨i, by omega⟩ * 1
-            else if (i : ℕ) = s + 1 then 1 * a (Fin.last (s + 1)) else 1 * 1) := by
+            if hi : finIndexToZZ M i ≤ inclusionNNtoZZ (s + 1) then
+              a ⟨i, by have := (finIndexToZZ_le_inclusion_iff_val_lt M i (s + 1)).1 hi; omega⟩ * 1
+            else if finIndexToZZ M i = finIndexToZZ M ⟨s + 1, h⟩ then 1 * a (Fin.last (s + 1)) else 1 * 1) := by
           -- `kronecker_product_rule` (1)
           rw [← siteProd_mul]
           congr 1
           funext i
           rw [Pi.mul_apply]
-          rcases lt_trichotomy (i : ℕ) (s + 1) with hi | hi | hi
-          · have hne : i ≠ (⟨s + 1, h⟩ : Fin M) := fun he => by rw [he] at hi; exact lt_irrefl _ hi
-            rw [prefixKroneckerFamily, dif_pos hi, dif_pos hi, Function.update_of_ne hne, Pi.one_apply]
-            rfl
-          · have he : i = (⟨s + 1, h⟩ : Fin M) := Fin.ext hi
-            rw [prefixKroneckerFamily, dif_neg (by omega), dif_neg (by omega), if_pos hi, he,
-              Function.update_self]
-          · have hne : i ≠ (⟨s + 1, h⟩ : Fin M) := fun he => by rw [he] at hi; exact lt_irrefl _ hi
-            rw [prefixKroneckerFamily, dif_neg (by omega), dif_neg (by omega), if_neg (by omega),
+          -- 人手の添字 `finIndexToZZ M i` を ℤ の順序で人手の `s+1` の添字と比べ、第 `1` から第 `s` 因子で `σ^{a_k}I`、
+          -- 第 `s+1` 因子で `Iσ^{a_{s+1}}`、第 `s+2` 以降で `II`。Lean の定義 `prefixKroneckerFamily` へは `finIndexToZZ_le_inclusion_iff_val_lt` で移す
+          rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M ⟨s + 1, h⟩) with hi | hi | hi
+          · have hle : finIndexToZZ M i ≤ inclusionNNtoZZ (s + 1) := by omega
+            have hne : i ≠ (⟨s + 1, h⟩ : Fin M) := fun he => by rw [he] at hi; exact lt_irrefl _ hi
+            rw [prefixKroneckerFamily, dif_pos ((finIndexToZZ_le_inclusion_iff_val_lt M i (s + 1)).1 hle), dif_pos hle,
               Function.update_of_ne hne, Pi.one_apply]
+            rfl
+          · have he : i = (⟨s + 1, h⟩ : Fin M) := hinj _ _ hi
+            have hle : ¬ finIndexToZZ M i ≤ inclusionNNtoZZ (s + 1) := by omega
+            rw [prefixKroneckerFamily, dif_neg (fun hv => hle ((finIndexToZZ_le_inclusion_iff_val_lt M i (s + 1)).2 hv)),
+              dif_neg hle, if_pos hi, he, Function.update_self]
+          · have hle : ¬ finIndexToZZ M i ≤ inclusionNNtoZZ (s + 1) := by omega
+            have hne : i ≠ (⟨s + 1, h⟩ : Fin M) := fun he => by rw [he] at hi; exact lt_irrefl _ hi
+            rw [prefixKroneckerFamily, dif_neg (fun hv => hle ((finIndexToZZ_le_inclusion_iff_val_lt M i (s + 1)).2 hv)),
+              dif_neg hle, if_neg (ne_of_gt hi), Function.update_of_ne hne, Pi.one_apply]
       _ = siteProd M (fun i : Fin M =>
-            if hi : (i : ℕ) < s + 1 then a ⟨i, by omega⟩
-            else if (i : ℕ) = s + 1 then 1 * a (Fin.last (s + 1)) else 1 * 1) := by
+            if hi : finIndexToZZ M i ≤ inclusionNNtoZZ (s + 1) then
+              a ⟨i, by have := (finIndexToZZ_le_inclusion_iff_val_lt M i (s + 1)).1 hi; omega⟩
+            else if finIndexToZZ M i = finIndexToZZ M ⟨s + 1, h⟩ then 1 * a (Fin.last (s + 1)) else 1 * 1) := by
           -- `identity_matrix_is_right_unit_of_mat_mult` を第 1 から第 `s` 因子へ同時に適用
           congr 1
           funext i
-          by_cases hi : (i : ℕ) < s + 1
+          by_cases hi : finIndexToZZ M i ≤ inclusionNNtoZZ (s + 1)
           · rw [dif_pos hi, dif_pos hi]
             exact mul_identity_matrix _
           · rw [dif_neg hi, dif_neg hi]
       _ = siteProd M (fun i : Fin M =>
-            if hi : (i : ℕ) < s + 1 then a ⟨i, by omega⟩
-            else if (i : ℕ) = s + 1 then a (Fin.last (s + 1)) else 1 * 1) := by
+            if hi : finIndexToZZ M i ≤ inclusionNNtoZZ (s + 1) then
+              a ⟨i, by have := (finIndexToZZ_le_inclusion_iff_val_lt M i (s + 1)).1 hi; omega⟩
+            else if finIndexToZZ M i = finIndexToZZ M ⟨s + 1, h⟩ then a (Fin.last (s + 1)) else 1 * 1) := by
           -- `identity_matrix_is_left_unit_of_mat_mult`（`A → σ^{a_{s+1}}`）
           rw [identity_matrix_mul (a (Fin.last (s + 1)))]
       _ = siteProd M (prefixKroneckerFamily (s + 1) a) := by
@@ -127,12 +154,19 @@ theorem site_pauli_prefix_product_kronecker_form :
           rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
           congr 1                                       -- 両辺は同じ因子の並び `σ^{a_1}⊠⋯⊠σ^{a_{s+1}}⊠I⊠⋯⊠I`
           funext i
-          rcases lt_trichotomy (i : ℕ) (s + 1) with hi | hi | hi
-          · rw [dif_pos hi, prefixKroneckerFamily, dif_pos (by omega)]
-          · rw [dif_neg (by omega), if_pos hi, prefixKroneckerFamily, dif_pos (by omega)]
-            congr 1
-            exact Fin.ext hi.symm
-          · rw [dif_neg (by omega), if_neg (by omega), prefixKroneckerFamily, dif_neg (by omega)]
+          -- 左辺は人手の添字 `finIndexToZZ M i` の ℤ の比較で、右辺の Lean の定義は値（ℕ）の比較で因子を決める。
+          -- 第 `1` から第 `s` 因子は `finIndexToZZ_le_inclusion_iff_val_lt` で移し、第 `s+1` 因子は全単射の補題の単射で `i = ⟨s + 1, h⟩` にし、
+          -- 第 `s+2` 以降は `finIndexToZZ_lt_iff_val_lt` で移す
+          rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M ⟨s + 1, h⟩) with hi | hi | hi
+          · have hle : finIndexToZZ M i ≤ inclusionNNtoZZ (s + 1) := by omega
+            have hv : (i : ℕ) < s + 1 := (finIndexToZZ_le_inclusion_iff_val_lt M i (s + 1)).1 hle
+            rw [dif_pos hle, prefixKroneckerFamily, dif_pos (by omega)]
+          · have he : i = (⟨s + 1, h⟩ : Fin M) := hinj _ _ hi
+            subst he
+            rw [dif_neg (by omega), if_pos rfl, prefixKroneckerFamily, dif_pos (by exact Nat.lt_succ_self (s + 1))]
+            rfl
+          · have hv : s + 1 < (i : ℕ) := (finIndexToZZ_lt_iff_val_lt M ⟨s + 1, h⟩ i).1 hi
+            rw [dif_neg (by omega), if_neg (ne_of_gt hi), prefixKroneckerFamily, dif_neg (by omega)]
 
 /-! ## Lean の `Z`・`Y` は人手の定義の行列の有限積に等しい -/
 
@@ -156,12 +190,23 @@ theorem finiteMatrixProduct_jwFactor_kronecker_form (m : Fin M) (A : Matrix (Fin
         -- (k): `j < m` なら `F_j = σ_j^x = σ_j^{a_j}`、`j = m` なら `F_m = σ_m^{A} = σ_m^{a_m}`
         congr 1
         funext j
-        by_cases hj : (j : ℕ) < (m : ℕ)
-        · rw [sitePauliFamily, jwFactor, jwLetter, if_pos hj, dif_pos hj]
+        -- 人手の添字 `finIndexToZZ (m + 1) j`（`def_index_set_from_one_to_n`）を、人手の `m` の添字 `finIndexToZZ M m` と ℤ の順序で比べる。
+        -- Lean の定義 `jwFactor`・`jwLetter` は値（ℕ）で比べるので、像の比較を値の比較へ移す
+        -- `Fin (m + 1)` の元 `j` を `Fin M` へ入れても像は変わらず、人手の `m` の添字は `ι_{ℕ→ℤ}(m + 1)`（Lean の `m`）
+        have hjZ : finIndexToZZ M (⟨(j : ℕ), lt_of_le_of_lt (Nat.le_of_lt_succ j.isLt) m.isLt⟩ : Fin M)
+            = finIndexToZZ ((m : ℕ) + 1) j := rfl
+        have hmZ : finIndexToZZ M m = inclusionNNtoZZ ((m : ℕ) + 1) := by
+          simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]; push_cast; ring
+        have hjm : finIndexToZZ ((m : ℕ) + 1) j < finIndexToZZ M m ↔ (j : ℕ) < (m : ℕ) := by
+          rw [← hjZ]; exact finIndexToZZ_lt_iff_val_lt M _ m
+        by_cases hj : finIndexToZZ ((m : ℕ) + 1) j < finIndexToZZ M m
+        · rw [sitePauliFamily, jwFactor, jwLetter, if_pos (hjm.1 hj), dif_pos (hjm.1 hj)]
           rfl
-        · have he : (⟨(j : ℕ), lt_of_le_of_lt (Nat.le_of_lt_succ j.isLt) m.isLt⟩ : Fin M) = m :=
-            Fin.ext (show (j : ℕ) = (m : ℕ) by have := j.isLt; omega)
-          rw [sitePauliFamily, jwFactor, jwLetter, if_neg hj, dif_neg hj, he]
+        · -- 人手の添字 `j` は `{1,…,m}` の元で `m` より小さくないので、`j = m`（全単射の補題の値の範囲と単射）
+          have hjle := ((finIndexToZZ_bijective_onto_index_set ((m : ℕ) + 1)).2.1 j).2
+          have he : (⟨(j : ℕ), lt_of_le_of_lt (Nat.le_of_lt_succ j.isLt) m.isLt⟩ : Fin M) = m :=
+            (finIndexToZZ_bijective_onto_index_set M).1 _ _ (by rw [hjZ]; omega)
+          rw [sitePauliFamily, jwFactor, jwLetter, if_neg (fun hv => hj (hjm.2 hv)), dif_neg (fun hv => hj (hjm.2 hv)), he]
     _ = siteProd M (prefixKroneckerFamily (m : ℕ) (jwLetter m A)) :=
         site_pauli_prefix_product_kronecker_form (m : ℕ) m.isLt (jwLetter m A)
                                                                   -- `site_pauli_prefix_product_kronecker_form`（`r → m`）
@@ -169,11 +214,15 @@ theorem finiteMatrixProduct_jwFactor_kronecker_form (m : Fin M) (A : Matrix (Fin
         -- `a_j` の定義を `m` か所へ（`j < m` なら `x`、`j = m` なら `A`）
         congr 1
         funext i
-        rcases lt_trichotomy (i : ℕ) (m : ℕ) with hi | hi | hi
-        · rw [jwFamily_of_lt hi, prefixKroneckerFamily, dif_pos (by omega), jwLetter, if_pos hi]
-        · have he : i = m := Fin.ext hi
+        -- 人手の添字 `finIndexToZZ M i` を人手の `m` の添字 `finIndexToZZ M m` と ℤ の順序で比べる（`def_index_set_from_one_to_n`）。
+        -- Lean の定義 `jwFamily`・`prefixKroneckerFamily`・`jwLetter` へは `finIndexToZZ_lt_iff_val_lt` で移す
+        rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with hi | hi | hi
+        · have hv := (finIndexToZZ_lt_iff_val_lt M i m).1 hi
+          rw [jwFamily_of_lt hv, prefixKroneckerFamily, dif_pos (by omega), jwLetter, if_pos hv]
+        · have he : i = m := (finIndexToZZ_bijective_onto_index_set M).1 i m hi
           rw [he, jwFamily_self, prefixKroneckerFamily, dif_pos (by omega), jwLetter, if_neg (lt_irrefl _)]
-        · rw [jwFamily_of_gt hi, prefixKroneckerFamily, dif_neg (by omega)]
+        · have hv := (finIndexToZZ_lt_iff_val_lt M m i).1 hi
+          rw [jwFamily_of_gt hv, prefixKroneckerFamily, dif_neg (by omega)]
 
 /-- `σ_1^x⋯σ_{m-1}^x σ_m^{A} = ∏_{j=1}^{m}F_j`（人手の `m` は Lean の `m + 1`）。`Z`・`Y` に共通の鎖。
 左辺の `siteProd M (jwFamily m A)` が Lean の `Z`・`Y` の定義、右辺が人手の `def_jordan_wigner_Z_matrices`・`def_jordan_wigner_Y_matrices`
@@ -257,6 +306,8 @@ theorem global_spin_flip_kronecker_form (n : ℕ) :
     _ = siteProd (n + 1) (fun _ => pauliX) := by
         congr 1
         funext i
-        rw [prefixKroneckerFamily, dif_pos i.isLt]
+        -- 人手の添字 `finIndexToZZ (n + 1) i` は `{1,…,M_col}` の元なので `M_col` 以下（全単射の補題の値の範囲。`def_index_set_from_one_to_n`）
+        rw [prefixKroneckerFamily, dif_pos ((finIndexToZZ_le_inclusion_iff_val_lt (n + 1) i (n + 1)).1
+          ((finIndexToZZ_bijective_onto_index_set (n + 1)).2.1 i).2)]
 
 end Ising2D
