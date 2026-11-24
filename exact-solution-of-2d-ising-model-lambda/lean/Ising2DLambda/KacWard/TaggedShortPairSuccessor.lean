@@ -16,8 +16,15 @@ theorem taggedShortPair_successor {L : ℕ} (z : Qbar) (s : SpinStructure)
     (p : OrientedEdge L × OrientedEdge L) (hp : p ∈ t) :
     p.2 ∈ nonbacktrackingSuccessors (reversal p.1) := by
   have hshort := (taggedMatching_nonzero_term_support z s D t hterm).2 p hp
-  apply (mem_nonbacktrackingSuccessors_reversal p.1 p.2).2
-  exact hshort
+  simp only [nonbacktrackingSuccessors, mem_filter, mem_univ, true_and]
+  refine ⟨?_, ?_⟩
+  · -- 本文の端点計算: tgt(ι(g)) = src(g) = src(f)。
+    calc
+      orientedTarget (reversal p.1) = orientedSource p.1 := orientedTarget_reversal p.1
+      _ = orientedSource p.2 := hshort.1.symm
+  · -- 本文: 反転は対合なので f ≠ ι(ι(g)) は f ≠ g と同じ。
+    rw [reversal_involutive]
+    exact hshort.2
 
 /-- The domain proof specializes to oriented edges and their endpoint maps. -/
 theorem taggedShortPair_successor_from_necSuf {L : ℕ} (z : Qbar)

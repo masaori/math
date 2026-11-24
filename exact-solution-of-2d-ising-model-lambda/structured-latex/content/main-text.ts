@@ -99180,7 +99180,7 @@ c(n)&=c(0)&& (\because\ \blkref{def_finite_permutation_minimal_period}\text{ の
                       paragraph(["である。", math(String.raw`L=1`), " でも向きの異なる二辺は相異なる。実数体と複素数体は現れない。"]),
                     ],
                     proof: [
-                      paragraph([ref("def_reference_long_pairs"), " により ", math(String.raw`\{\vec e,\iota(\vec e)\}\in\mathcal D_0`), " である。", ref("claim_reversal_is_involution"), " と ", ref("claim_reversal_has_no_fixed_point"), " により反転は不動点のない対合である。", ref("claim_perfect_matching_involution"), " の相手の一意性をこの対へ適用すると"]),
+                      paragraph([ref("claim_reference_long_matching"), " により ", math(String.raw`\mathcal D_0`), " は完全マッチングである。", ref("def_reference_long_pairs"), " により ", math(String.raw`\{\vec e,\iota(\vec e)\}\in\mathcal D_0`), " であり、", ref("claim_reversal_has_no_fixed_point"), " により ", math(String.raw`\iota(\vec e)\ne\vec e`), " である。", ref("claim_perfect_matching_involution"), " の相手の一意性をこの対へ適用すると"]),
                       displayMath(String.raw`\begin{aligned}
 m_{\mathcal D_0}(\vec e)
 &=\iota(\vec e)
@@ -99449,7 +99449,19 @@ e
 &=p(w_{C,r})
 &&\bigl(\because\ \blkref{claim_projected_edge_cycle_nonbacktracking}\bigr).
 \end{aligned}`),
-                      paragraph(["もし ", math(String.raw`\vec e`), " が第二色なら、", ref("claim_matching_pair_second_coloring_alternates"), " により長い相手 ", math(String.raw`m_{\mathcal D_0}(\vec e)`), " は同じ閉路の第一色である。", ref("claim_reference_long_mate_reversal"), " によりこの相手は ", math(String.raw`\iota(\vec e)`), " で、その台は ", math(String.raw`e`), " のままである。前の場合を ", math(String.raw`\iota(\vec e)`), " に適用し、", math(String.raw`e=p(w_{C,r})`), " を得る。従って逆の包含も成り立つ。"]),
+                      paragraph(["もし ", math(String.raw`\vec e`), " が第二色なら、", ref("claim_matching_pair_second_coloring_alternates"), " により長い相手 ", math(String.raw`m_{\mathcal D_0}(\vec e)`), " は同じ閉路の第一色である。", ref("claim_reference_long_mate_reversal"), " によりこの相手は ", math(String.raw`\iota(\vec e)`), " である。", ref("claim_tagged_difference_alternating_cycle"), " の一周期の列挙により ", math(String.raw`\iota(\vec e)=c_C(2r)`), " となる ", math(String.raw`0\le r<k_C`), " がある。このとき"]),
+                      displayMath(String.raw`\begin{aligned}
+e
+&=p(\vec e)
+&&\bigl(\because\ \vec e\text{ の台の定義}\bigr)\\
+&=p(\iota(\iota(\vec e)))
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=p(\iota(c_C(2r)))
+&&\bigl(\because\ \iota(\vec e)=c_C(2r)\bigr)\\
+&=p(w_{C,r})
+&&\bigl(\because\ \blkref{claim_projected_edge_cycle_nonbacktracking}\bigr).
+\end{aligned}`),
+                      paragraph(["従って逆の包含も成り立つ。"]),
                     ],
                   },
                 },
@@ -100617,11 +100629,15 @@ n_{\mathrm{ct}}(\gamma_A)
                     statement: [
                       paragraph([
                         math(String.raw`L\in\mathbb N_{>0}`), "、", math(String.raw`(a,b)\in\mathcal S`),
-                        " とする。", ref("def_reference_long_pairs"), " の基準完全マッチング ",
+                        " とする。", ref("def_reference_long_pairs"), " と ", ref("claim_reference_long_matching"), " の基準完全マッチング ",
                         math(String.raw`\mathcal D_0`), " の全ての対に長い標識を付ける。",
-                        ref("claim_tagged_matching_expansion"), " のこの項を ",
-                        math(String.raw`M_{\mathcal D_0,\varnothing}(x)\in\overline{\mathbb Q}[x]`),
-                        " とすると、辺番号を先に、向きを後に比べる辞書式順序で",
+                        ref("claim_tagged_matching_expansion"), " のこの項を、昇順対集合 ", math(String.raw`E_{\mathcal D_0}`), " と符号因子 ", math(String.raw`c_{\mathcal D_0}`), " で",
+                      ]),
+                      displayMath(String.raw`M_{\mathcal D_0,\varnothing}(x):=c_{\mathcal D_0}(-1)^{|\varnothing|}
+\left(\prod_{(\vec e,\vec f)\in E_{\mathcal D_0}\setminus\varnothing}\mathsf L_{\vec e,\vec f}\right)
+\left(\prod_{(\vec e,\vec f)\in\varnothing}\mathsf S_{\vec e,\vec f}\right)\in\overline{\mathbb Q}[x]`),
+                      paragraph([
+                        "と置くと、辺番号を先に、向きを後に比べる辞書式順序で",
                       ]),
                       displayMath(String.raw`\operatorname{sgn}(\mathcal D_0)=1,\qquad
 \mathsf L_{(e,0),(e,1)}=1\quad(e\in E_L),\qquad
@@ -100633,14 +100649,25 @@ M_{\mathcal D_0,\varnothing}(x)=1.`),
                         ref("def_oriented_edges"), " より ", math(String.raw`\vec E_L=E_L\times\{0,1\}`),
                         " である。辞書式順序では各辺の二向き ",
                         math(String.raw`(e,0)\prec(e,1)`), " が隣接する。",
-                        ref("def_reference_long_pairs"), " と ", ref("claim_reference_long_matching"),
-                        " により、これらの隣接対を辺番号順に並べた列は基準完全マッチングの列挙である。",
-                        ref("def_perfect_matching_sign"), " の端点列は昇順の全元列に一致するので、",
+                        ref("def_reference_long_pairs"), " により ", math(String.raw`\mathcal D_0`), " の各対は ",
+                        math(String.raw`\{\vec f,\iota(\vec f)\}`), " の形である。その昇順対 ", math(String.raw`(\vec e_1,\vec e_2)`),
+                        " は、", math(String.raw`\vec e_1=\vec f`), " なら ", math(String.raw`\vec e_2=\iota(\vec e_1)`), " であり、",
+                        math(String.raw`\vec e_1=\iota(\vec f)`), " なら ", ref("claim_reversal_is_involution"), " により ",
+                        math(String.raw`\vec e_2=\vec f=\iota(\iota(\vec f))=\iota(\vec e_1)`), " である。",
+                        ref("def_edge_reversal"), " の反転は向きだけを替えるので、", math(String.raw`\vec e_1\prec\vec e_2`),
+                        " から ", math(String.raw`\vec e_1=(e,0)`), "、", math(String.raw`\vec e_2=(e,1)`), " となる。よって",
+                      ]),
+                      displayMath(String.raw`E_{\mathcal D_0}=\{((e,0),(e,1))\mid e\in E_L\}.`),
+                      paragraph([
+                        "これらの対を辺番号順に並べた列は ", math(String.raw`\mathcal D_0`), " の列挙である。",
+                        ref("claim_perfect_matching_enumeration_complete"), " によりその端点列は全元を含み、辞書式順序で狭義増加なので、",
+                        ref("def_perfect_matching_sign"), " の昇順の全元列に一致する。",
+                        ref("claim_perfect_matching_sign_enumeration_independent"), " により符号はこの列挙で計算できるので、",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \operatorname{sgn}(\mathcal D_0)
 &=\operatorname{sgn}(\operatorname{id}_{\vec E_L})
-&&\bigl(\because\ \blkref{def_perfect_matching_sign}\bigr)\\
+&&\bigl(\because\ \blkref{def_perfect_matching_sign}\text{ と }\blkref{claim_perfect_matching_sign_enumeration_independent}\bigr)\\
 &=1
 &&\bigl(\because\ \text{恒等置換の符号}\bigr).
 \end{aligned}`),
@@ -100675,15 +100702,20 @@ w_{(e,0),(e,1)}
 &&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の一の保存}\bigr).
 \end{aligned}`),
                       paragraph([
-                        ref("claim_tagged_matching_expansion"), " の項は短い標識を持たない。",
-                        "整数の符号は標準の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`),
-                        " で定数多項式へ送る。有限積と符号の等号から",
+                        "この項は短い標識を持たない。",
+                        ref("def_qbar_polynomial_pfaffian"), " の符号因子は整数の符号を定数多項式へ送ったものである。有限積と符号の等号から",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 M_{\mathcal D_0,\varnothing}(x)
+&=c_{\mathcal D_0}(-1)^{|\varnothing|}
+\left(\prod_{(\vec e,\vec f)\in E_{\mathcal D_0}\setminus\varnothing}\mathsf L_{\vec e,\vec f}\right)
+\left(\prod_{(\vec e,\vec f)\in\varnothing}\mathsf S_{\vec e,\vec f}\right)
+&&\bigl(\because\ M_{\mathcal D_0,\varnothing}\text{ の定義}\bigr)\\
+&=c_{\mathcal D_0}\prod_{e\in E_L}\mathsf L_{(e,0),(e,1)}
+&&\bigl(\because\ \text{零乗と空積、上で求めた }E_{\mathcal D_0}\bigr)\\
 &=C(\operatorname{sgn}(\mathcal D_0))
 \prod_{e\in E_L}\mathsf L_{(e,0),(e,1)}
-&&\bigl(\because\ \blkref{claim_tagged_matching_expansion}\bigr)\\
+&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\text{ の符号因子}\bigr)\\
 &=1\cdot\prod_{e\in E_L}1
 &&\bigl(\because\ \text{上の符号と長い寄与}\bigr)\\
 &=1
