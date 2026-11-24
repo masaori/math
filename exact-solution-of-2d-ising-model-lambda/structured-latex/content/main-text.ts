@@ -75732,9 +75732,9 @@ Z^{\mathrm{op}}_{L,L}(q)
                         displayMath(String.raw`\begin{aligned}
 \frac{1}{L^2}\cdot\iota\bigl(n\,\ell_2+2n\,\log(1+q)+\log Z^{\mathrm{op}}_{a,a}(q)\bigr)
 &=\frac{1}{L^2}\cdot\bigl(\iota(n\,\ell_2)+\iota(2n\,\log(1+q))+\iota(\log Z^{\mathrm{op}}_{a,a}(q))\bigr)
-&&(\because\ \iota\text{ は加法を保つ（}\blkref{claim_rational_log_order_group_embedding}\text{）。三項の和へ二回適用})\\
+&&(\because\ \iota\text{ は加法を保つ（}\blkref{claim_rational_log_order_group_embedding}\text{）、三項の和へ二回適用})\\
 &=\frac{1}{L^2}\cdot\iota(n\,\ell_2)+\frac{1}{L^2}\cdot\iota(2n\,\log(1+q))+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則。三項の和へ二回適用})\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の分配則、三項の和へ二回適用})\\
 &=\frac{1}{L^2}\cdot\bigl(n\cdot\iota(\ell_2)\bigr)+\frac{1}{L^2}\cdot\bigl(2n\cdot\iota(\log(1+q))\bigr)+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))
 &&(\because\ \text{準備の第一の }n\cdot\iota(\nu)=\iota(n\nu)\text{ を }(n,\nu):=(n,\ell_2)\text{ と }(2n,\log(1+q))\text{ で二項へ同時に右辺から左辺の向きに読む})\\
 &=\Bigl(\frac{1}{L^2}\cdot n\Bigr)\cdot\iota(\ell_2)+\Bigl(\frac{1}{L^2}\cdot2n\Bigr)\cdot\iota(\log(1+q))+\frac{1}{L^2}\cdot\iota(\log Z^{\mathrm{op}}_{a,a}(q))

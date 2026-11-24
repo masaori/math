@@ -26,6 +26,8 @@ theorem matchingPairActualSignComposition (τ υ : FixedPointFreeInvolution J)
   dsimp
   obtain ⟨hτenum, hτword⟩ := matchingPairFirstEnumeration τ υ w hw hcolor
   obtain ⟨hυenum, hυword⟩ := matchingPairSecondEnumeration τ υ w hw hcolor
+  simp only [show concreteAscendingMatePair υ.val = ascendingMatePair υ.val from rfl]
+    at hυenum hυword
   have hcomplete := matchingPairFirstWordComplete τ υ w hw hcolor
   have hfirst : w.flatMap (fun i => [i, τ.val i]) =
       (w.map (ascendingMatePair τ.val)).flatMap (fun p =>
@@ -65,6 +67,8 @@ theorem matchingPairActualSignComposition_from_necSuf
   dsimp
   obtain ⟨hτenum, hτword⟩ := matchingPairFirstEnumeration τ υ w hw hcolor
   obtain ⟨hυenum, hυword⟩ := matchingPairSecondEnumeration τ υ w hw hcolor
+  simp only [show concreteAscendingMatePair υ.val = ascendingMatePair υ.val from rfl]
+    at hυenum hυword
   have hcomplete := matchingPairFirstWordComplete_from_necSuf τ υ w hw hcolor
   have hfirst : w.flatMap (fun i => [i, τ.val i]) =
       (w.map (ascendingMatePair τ.val)).flatMap (fun p =>

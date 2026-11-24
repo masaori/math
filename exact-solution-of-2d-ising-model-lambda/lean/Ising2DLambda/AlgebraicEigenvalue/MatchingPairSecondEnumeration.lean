@@ -16,7 +16,7 @@ theorem matchingPairSecondEnumeration (τ υ : FixedPointFreeInvolution J)
     (hcolor : ∀ i : J, i ∈ w ↔ i ∈ matchingPairColor τ υ) :
     let C := matchingPairColor τ υ
     let w₂ := w.map τ.val
-    let l := w₂.map (ascendingMatePair υ.val)
+    let l := w₂.map (concreteAscendingMatePair υ.val)
     IsMatchingEnumeration (involutionToPerfectMatching υ) l ∧
       l.flatMap (fun p => if p.1 ∉ C then [p.1, p.2] else [p.2, p.1]) =
         w₂.flatMap (fun i => [i, υ.val i]) := by
@@ -38,14 +38,14 @@ theorem matchingPairSecondEnumeration (τ υ : FixedPointFreeInvolution J)
   have hflip (i : J) : υ.val i ∉ C ↔ i ∈ C := by
     simpa [C] using not_congr (matchingPairSecondColor_alternates τ υ i)
   have hchoose (i : J) (hi : i ∉ C) :
-      (if (ascendingMatePair υ.val i).1 ∉ C then
-        (ascendingMatePair υ.val i).1 else (ascendingMatePair υ.val i).2) = i := by
+      (if (concreteAscendingMatePair υ.val i).1 ∉ C then
+        (concreteAscendingMatePair υ.val i).1 else (concreteAscendingMatePair υ.val i).2) = i := by
     by_cases hlt : i < υ.val i
-    · simp [ascendingMatePair, hlt, hi]
+    · simp [concreteAscendingMatePair, hlt, hi]
     · have hmate : υ.val i ∈ C := by
         by_contra h
         exact hi ((hflip i).mp h)
-      simp [ascendingMatePair, hlt, hmate]
+      simp [concreteAscendingMatePair, hlt, hmate]
   constructor
   · constructor
     · apply hw₂.map_on
@@ -53,15 +53,15 @@ theorem matchingPairSecondEnumeration (τ υ : FixedPointFreeInvolution J)
       have hiC := (hcolor₂ i).mp hi
       have hjC := (hcolor₂ j).mp hj
       calc
-        i = (if (ascendingMatePair υ.val i).1 ∉ C then
-          (ascendingMatePair υ.val i).1 else (ascendingMatePair υ.val i).2) :=
+        i = (if (concreteAscendingMatePair υ.val i).1 ∉ C then
+          (concreteAscendingMatePair υ.val i).1 else (concreteAscendingMatePair υ.val i).2) :=
             (hchoose i hiC).symm
-        _ = (if (ascendingMatePair υ.val j).1 ∉ C then
-          (ascendingMatePair υ.val j).1 else (ascendingMatePair υ.val j).2) := by rw [he]
+        _ = (if (concreteAscendingMatePair υ.val j).1 ∉ C then
+          (concreteAscendingMatePair υ.val j).1 else (concreteAscendingMatePair υ.val j).2) := by rw [he]
         _ = j := hchoose j hjC
     · intro p
-      have hmem : p ∈ (w.map τ.val).map (ascendingMatePair υ.val) ↔
-          p ∈ S.image (ascendingMatePair υ.val) := by
+      have hmem : p ∈ (w.map τ.val).map (concreteAscendingMatePair υ.val) ↔
+          p ∈ S.image (concreteAscendingMatePair υ.val) := by
         constructor
         · intro hp
           obtain ⟨i, hi, rfl⟩ := List.mem_map.mp hp
@@ -78,11 +78,11 @@ theorem matchingPairSecondEnumeration (τ υ : FixedPointFreeInvolution J)
     intro i hi
     have hiC : i ∉ C := (hcolor₂ i).mp hi
     by_cases hlt : i < υ.val i
-    · simp [C, ascendingMatePair, hlt, hiC]
+    · simp [C, concreteAscendingMatePair, hlt, hiC]
     · have hmate : υ.val i ∈ C := by
         by_contra h
         exact hiC ((hflip i).mp h)
-      simp [C, ascendingMatePair, hlt, hmate]
+      simp [C, concreteAscendingMatePair, hlt, hmate]
 
 /-- The abstract color-transfer argument yields the endpoint-word equality. -/
 theorem matchingPairSecondEnumeration_from_necSuf

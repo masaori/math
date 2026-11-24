@@ -22,6 +22,7 @@ theorem matchingPairActualMonomial (τ υ : FixedPointFreeInvolution J)
   classical
   obtain ⟨hτ, _⟩ := matchingPairFirstEnumeration τ υ w hw hcolor
   obtain ⟨hυ, _⟩ := matchingPairSecondEnumeration τ υ w hw hcolor
+  simp only [show concreteAscendingMatePair υ.val = ascendingMatePair υ.val from rfl] at hυ
   constructor
   · have hset : (w.map (ascendingMatePair τ.val)).toFinset =
         matchingOrientedPairs (involutionToPerfectMatching τ) :=
@@ -62,6 +63,7 @@ theorem matchingPairActualMonomial_from_necSuf (τ υ : FixedPointFreeInvolution
   classical
   obtain ⟨hτ, _⟩ := matchingPairFirstEnumeration τ υ w hw hcolor
   obtain ⟨hυ, _⟩ := matchingPairSecondEnumeration τ υ w hw hcolor
+  simp only [show concreteAscendingMatePair υ.val = ascendingMatePair υ.val from rfl] at hυ
   constructor
   · exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingEnumerationMonomial_necSuf
       (matchingOrientedPairs (involutionToPerfectMatching τ))
