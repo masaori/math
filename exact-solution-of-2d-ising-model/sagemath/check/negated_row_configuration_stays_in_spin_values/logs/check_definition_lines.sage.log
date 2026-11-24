@@ -1,0 +1,4 @@
+場合分けの等号 3 個と real_double_negation の一般形を確かめた
+M_col = 1..6 の行配位 126 件で -s の全成分が {-1, 1} に入った
+negative controls (broken lines detected): 2
+RESULT: PASS

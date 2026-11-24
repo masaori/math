@@ -1073,10 +1073,42 @@ w
       ]),
       displayMath(String.raw`(-s)(m) := -s(m) \qquad (m \in \{1,\dots,M_{\mathrm{col}}\})`),
       paragraph([
-        "で定める。",
-        math(String.raw`s(m) \in \{-1,1\}`),
-        " なら ",
-        math(String.raw`-s(m) \in \{-1,1\}`),
+        "で定める。右辺の ",
+        math(String.raw`-s(m)`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{R}`),
+        " の符号反転 ",
+        math(String.raw`-_{\mathbb{R}}`),
+        " の ",
+        math(String.raw`s(m) \in \{-1_{\mathbb{R}},\ 1_{\mathbb{R}}\}`),
+        "（",
+        ref("def_row_configurations"),
+        "）での値である。",
+        math(String.raw`s(m) = 1_{\mathbb{R}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-s(m)
+&= -1_{\mathbb{R}}
+&&\bigl(\because\ s(m) = 1_{\mathbb{R}}\ \text{の等しいものの代入（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`s(m) = -1_{\mathbb{R}}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-s(m)
+&= -(-1_{\mathbb{R}})
+&&\bigl(\because\ s(m) = -1_{\mathbb{R}}\ \text{の等しいものの代入（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= 1_{\mathbb{R}}
+&&\bigl(\because\ \blkref{real_double_negation}\ (a \to 1_{\mathbb{R}})\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。どちらの場合も ",
+        math(String.raw`-s(m) \in \{-1_{\mathbb{R}},\ 1_{\mathbb{R}}\}`),
         " なので、",
         math(String.raw`-s \in \mathfrak{M}`),
         " である。",
@@ -1086,6 +1118,7 @@ w
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。同じ記号は trace_of_epsilon_V_plus の証明の準備の中で置かれていたが、引ける定義ではなかった。epsilon_entries_in_row_configuration_numbering と epsilon_real_permutes_entries_by_spin_flip が引くので定義として足した（Lean は negSpinConf）。",
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残り）: −s(m) の符号反転の所属（set_and_algebra_notation の −_ℝ）を書き、「s(m) ∈ {−1,1} なら −s(m) ∈ {−1,1}」を根拠の無い 1 文から、s(m) = 1_ℝ の 1 行と s(m) = −1_ℝ の 2 行（real_double_negation）の場合分けにした。Lean の negSpinVal の二つ目の場合の mathlib の neg_neg を real_double_negation 1 に替えた。数値検証: sagemath/check/negated_row_configuration_stays_in_spin_values/。",
       ],
     },
   },

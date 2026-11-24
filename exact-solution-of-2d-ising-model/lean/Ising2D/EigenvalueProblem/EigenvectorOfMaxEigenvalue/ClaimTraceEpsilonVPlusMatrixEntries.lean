@@ -55,12 +55,15 @@ variable {M : ℕ}
 
 /-! ## スピン配置の符号反転 `-s` -/
 
-/-- 人手の `-s(m)`（`{-1,1}` は符号反転で閉じている）。 -/
+/-- 人手 `def_negated_row_configuration` の `-s(m)`（`ℝ` の符号反転）。値が `{-1,1}` に入ることは人手の場合分けと同じ:
+`s(m) = 1_ℝ` なら代入で `-1_ℝ`（1 行）、`s(m) = -1_ℝ` なら代入で `-(-1_ℝ)`、`real_double_negation`（`a → 1_ℝ`）で `1_ℝ`（2 行）。 -/
 def negSpinVal (a : SpinVal) : SpinVal :=
   ⟨-(a : ℝ), by
     rcases a.2 with h | h
-    · right; rw [h]
-    · left; rw [h, neg_neg]⟩
+    · right; rw [h]                                   -- `s(m) = 1_ℝ` の代入
+    · left
+      rw [h]                                          -- `s(m) = -1_ℝ` の代入
+      exact real_double_negation 1⟩                   -- `real_double_negation`（`a → 1_ℝ`）
 
 @[simp] theorem coe_negSpinVal (a : SpinVal) : ((negSpinVal a : SpinVal) : ℝ) = -(a : ℝ) := rfl
 
