@@ -72401,9 +72401,7 @@ b(\sigma_{+})
                           math(String.raw`b(\sigma)=0`),
                           " のときは空積で ",
                           math(String.raw`q^{0}=1>0`),
-                          "）。これは ",
-                          ref("claim_value_at_rational_is_positive"),
-                          " の証明の準備と同じ事実である。また ",
+                          "）。また ",
                           math(String.raw`\sigma_{+}\in\Sigma_L`),
                           "（",
                           ref("def_constant_plus_configuration"),
@@ -72655,9 +72653,7 @@ b(\sigma_{+})
                           math(String.raw`k`),
                           " で成り立つとき、",
                           math(String.raw`w^{k+1}=w^{k}\cdot w`),
-                          " は正の元どうしの積なので正である（",
-                          ref("claim_value_at_rational_is_positive"),
-                          " の証明の準備と同じ事実）。",
+                          " は正の元どうしの積なので正である。",
                         ]),
                         paragraph([
                           "第二に、任意の ",
@@ -73339,9 +73335,6 @@ Z^{\mathrm{op}}_{a,b}(q)
 \end{aligned}`),
                         paragraph([
                           "以上は有理数の四則と有限和だけからなり、実数体は現れない。",
-                          "周期境界の ",
-                          ref("claim_value_at_rational_is_positive"),
-                          " と同じ論法である。",
                         ]),
                       ],
                     },
@@ -73559,9 +73552,7 @@ q^{\,b^{\mathrm{op}}_{a,b}(\sigma)}q^{\,b^{\mathrm{op}}_{c,b}(\tau)}
                           "以上で使ったのは、有理数の四則と順序（正の元を掛けても順序が保たれること）、正の有理数の自然数冪の順序、",
                           "有限和・有限積だけであり、実数体は現れない。各項 ",
                           math(String.raw`q^{\,b^{\mathrm{op}}_{a,b}(\sigma)+b^{\mathrm{op}}_{c,b}(\tau)}`),
-                          " が正であることは ",
-                          ref("claim_open_rectangle_value_at_rational_is_positive"),
-                          " の準備と同じ理由による。",
+                          " が正であることは、正の有理数の自然数冪が正であることによる。",
                         ]),
                       ],
                     },
@@ -73844,7 +73835,7 @@ q^{((k+1)-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
   Z^{\mathrm{op}}_{a,b}(q)
 &&\bigl(\because\ \text{有理数の積の結合則}\bigr)\\
 &\le q^b Z^{\mathrm{op}}_{ka,b}(q)Z^{\mathrm{op}}_{a,b}(q)
-&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法}\bigr)\\
+&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法、}Z^{\mathrm{op}}_{a,b}(q)>0\text{（}\blkref{claim_open_rectangle_value_at_rational_is_positive}\text{）}\bigr)\\
 &\le Z^{\mathrm{op}}_{(k+1)a,b}(q)
 &&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)
 \end{aligned}`),
@@ -73854,7 +73845,7 @@ Z^{\mathrm{op}}_{(k+1)a,b}(q)
 &\le Z^{\mathrm{op}}_{ka,b}(q)Z^{\mathrm{op}}_{a,b}(q)
 &&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)\\
 &\le\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^kZ^{\mathrm{op}}_{a,b}(q)
-&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法}\bigr)\\
+&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法、}Z^{\mathrm{op}}_{a,b}(q)>0\text{（}\blkref{claim_open_rectangle_value_at_rational_is_positive}\text{）}\bigr)\\
 &=\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
 &&\bigl(\because\ \text{冪の指数法則}\bigr)
 \end{aligned}`),
@@ -73868,7 +73859,7 @@ Z^{\mathrm{op}}_{(k+1)a,b}(q)
 &=\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^kZ^{\mathrm{op}}_{a,b}(q)
 &&\bigl(\because\ \text{冪の指数法則}\bigr)\\
 &\le Z^{\mathrm{op}}_{ka,b}(q)Z^{\mathrm{op}}_{a,b}(q)
-&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法}\bigr)\\
+&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法、}Z^{\mathrm{op}}_{a,b}(q)>0\text{（}\blkref{claim_open_rectangle_value_at_rational_is_positive}\text{）}\bigr)\\
 &\le Z^{\mathrm{op}}_{(k+1)a,b}(q)
 &&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)
 \end{aligned}`),
@@ -73879,7 +73870,7 @@ Z^{\mathrm{op}}_{(k+1)a,b}(q)
 &&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)\\
 &\le q^b\!\left(q^{(k-1)b}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k\right)
   Z^{\mathrm{op}}_{a,b}(q)
-&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法}\bigr)\\
+&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法、}Z^{\mathrm{op}}_{a,b}(q)>0\text{（}\blkref{claim_open_rectangle_value_at_rational_is_positive}\text{）}\bigr)\\
 &=q^b q^{(k-1)b}\!\left(\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k
   Z^{\mathrm{op}}_{a,b}(q)\right)
 &&\bigl(\because\ \text{有理数の積の結合則}\bigr)\\
@@ -73993,7 +73984,7 @@ q^{((k+1)-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
   Z^{\mathrm{op}}_{a,b}(q)
 &&\bigl(\because\ \text{有理数の積の結合則}\bigr)\\
 &\le q^a Z^{\mathrm{op}}_{a,kb}(q)Z^{\mathrm{op}}_{a,b}(q)
-&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法}\bigr)\\
+&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法、}Z^{\mathrm{op}}_{a,b}(q)>0\text{（}\blkref{claim_open_rectangle_value_at_rational_is_positive}\text{）}\bigr)\\
 &\le Z^{\mathrm{op}}_{a,(k+1)b}(q)
 &&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)
 \end{aligned}`),
@@ -74003,7 +73994,7 @@ Z^{\mathrm{op}}_{a,(k+1)b}(q)
 &\le Z^{\mathrm{op}}_{a,kb}(q)Z^{\mathrm{op}}_{a,b}(q)
 &&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)\\
 &\le\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^kZ^{\mathrm{op}}_{a,b}(q)
-&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法}\bigr)\\
+&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法、}Z^{\mathrm{op}}_{a,b}(q)>0\text{（}\blkref{claim_open_rectangle_value_at_rational_is_positive}\text{）}\bigr)\\
 &=\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^{k+1}
 &&\bigl(\because\ \text{冪の指数法則}\bigr)
 \end{aligned}`),
@@ -74017,7 +74008,7 @@ Z^{\mathrm{op}}_{a,(k+1)b}(q)
 &=\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^kZ^{\mathrm{op}}_{a,b}(q)
 &&\bigl(\because\ \text{冪の指数法則}\bigr)\\
 &\le Z^{\mathrm{op}}_{a,kb}(q)Z^{\mathrm{op}}_{a,b}(q)
-&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法}\bigr)\\
+&&\bigl(\because\ \text{帰納法の下からの評価と正数の乗法、}Z^{\mathrm{op}}_{a,b}(q)>0\text{（}\blkref{claim_open_rectangle_value_at_rational_is_positive}\text{）}\bigr)\\
 &\le Z^{\mathrm{op}}_{a,(k+1)b}(q)
 &&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)
 \end{aligned}`),
@@ -74028,7 +74019,7 @@ Z^{\mathrm{op}}_{a,(k+1)b}(q)
 &&\bigl(\because\ \blkref{claim_open_rectangle_gluing_inequality_rational}\bigr)\\
 &\le q^a\!\left(q^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k\right)
   Z^{\mathrm{op}}_{a,b}(q)
-&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法}\bigr)\\
+&&\bigl(\because\ \text{帰納法の上からの評価と正数の乗法、}Z^{\mathrm{op}}_{a,b}(q)>0\text{（}\blkref{claim_open_rectangle_value_at_rational_is_positive}\text{）}\bigr)\\
 &=q^a q^{(k-1)a}\!\left(\bigl(Z^{\mathrm{op}}_{a,b}(q)\bigr)^k
   Z^{\mathrm{op}}_{a,b}(q)\right)
 &&\bigl(\because\ \text{有理数の積の結合則}\bigr)\\
@@ -74123,9 +74114,7 @@ q^{(k-1)(ka)}\!\left(q^{(k-1)a}\bigl(Z^{\mathrm{op}}_{a,a}(q)\bigr)^k\right)^k
                           math(String.raw`1`),
                           "、帰納段は ",
                           math(String.raw`u^{n+1}=u^n\cdot u\le v^n\cdot u\le v^n\cdot v=v^{n+1}`),
-                          "。正の元を掛けても順序が保たれることを二度使う。正の有理点での分配多項式の値の上からの評価 ",
-                          ref("claim_partition_value_upper_bound_at_positive_rational"),
-                          " の準備の第二と同じ）。",
+                          "。正の元を掛けても順序が保たれることを二度使う）。",
                         ]),
                         paragraph([
                           math(String.raw`0<q\le1`),
@@ -74357,7 +74346,7 @@ b(r_L(\tau))
                         displayMath(String.raw`\begin{aligned}
 Z_L(q)
 &=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
-&&\bigl(\because\ \blkref{def_partition_polynomial}\text{ への代入と、代入が環準同型として和と積を保つこと（}\blkref{claim_value_at_rational_is_positive}\text{ の第二段）}\bigr)\\
+&&\bigl(\because\ \blkref{def_partition_polynomial}\text{ への代入と、代入が環準同型として和と積を保つこと}\bigr)\\
 &=\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}
 q^{\,b(r_L(\tau))}
 &&\bigl(\because\ \text{全単射}\ r_L\ \text{に沿う和の並べ替え}\bigr)\\
@@ -74378,9 +74367,7 @@ q^{\,b^{\mathrm{op}}_{L,L}(\tau)}q^{\,s^{\mathrm{bd}}_L(\tau)}
                         paragraph([
                           "である。各 ",
                           math(String.raw`q^{\,b^{\mathrm{op}}_{L,L}(\tau)}`),
-                          " は正なので（",
-                          ref("claim_open_rectangle_value_at_rational_is_positive"),
-                          " の準備）、この不等式を項ごとに掛けて有限和を取ると、",
+                          " は正なので（正の有理数の自然数冪は正）、この不等式を項ごとに掛けて有限和を取ると、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
@@ -74995,9 +74982,7 @@ b^{\mathrm{op}}_{a,b}(\tau_{+})
                           math(String.raw`b^{\mathrm{op}}_{a,b}(\sigma)=0`),
                           " のときは空積で ",
                           math(String.raw`q^{0}=1>0`),
-                          "）。これは ",
-                          ref("claim_open_rectangle_value_at_rational_is_positive"),
-                          " の証明の準備と同じ事実である。また ",
+                          "）。また ",
                           math(String.raw`\tau_{+}\in\Sigma^{\mathrm{op}}_{a,b}`),
                           "（",
                           ref("def_open_rectangle_constant_plus_configuration"),
@@ -75023,9 +75008,7 @@ b^{\mathrm{op}}_{a,b}(\tau_{+})
 &&(\because\ \text{代入は環準同型であり、和を値の和へ、単項式を冪へ移す、}\blkref{def_open_rectangle_partition_value_at_positive_rational})
 \end{aligned}`),
                         paragraph([
-                          "以上は有理数の四則と順序、および有限和だけからなり、実数体も実対数も現れない。周期境界の ",
-                          ref("claim_partition_value_ge_one_at_positive_rational"),
-                          " と同じ論法である。",
+                          "以上は有理数の四則と順序、および有限和だけからなり、実数体も実対数も現れない。",
                         ]),
                       ],
                     },
