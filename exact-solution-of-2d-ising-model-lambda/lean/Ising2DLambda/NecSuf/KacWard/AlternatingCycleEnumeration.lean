@@ -36,4 +36,25 @@ theorem alternatingCycleEnumeration_necSuf (τ υ : J → J) (C : J → Prop)
   · exact matchingPairPermutation_orbit_eq_component τ υ C hτ hυ hτcolor hυcolor i
   · exact hp.2.1
 
+/-- 最小正周期の長さは、二色の相手写像でできる成分の点数である。 -/
+theorem alternatingCycle_period_eq_component_ncard_necSuf
+    (τ υ : J → J) (C : J → Prop)
+    (hτ : Function.Involutive τ) (hυ : Function.Involutive υ)
+    (hτcolor : ∀ j, C (τ j) ↔ ¬ C j)
+    (hυcolor : ∀ j, C (υ j) ↔ ¬ C j) (i : J) :
+    let σ := matchingPairPermutation τ υ C hτ hυ hτcolor hυcolor
+    finiteInjectiveMinimalPeriod σ σ.injective i =
+      (matchingPairComponent τ υ hτ hυ i).ncard := by
+  dsimp
+  let σ := matchingPairPermutation τ υ C hτ hυ hτcolor hυcolor
+  let p := finiteInjectiveMinimalPeriod σ σ.injective i
+  have hp := finiteInjectiveMinimalPeriod_spec σ σ.injective i
+  calc
+    p = (twoWayOrbit σ σ.symm i).ncard :=
+      period_eq_twoWayOrbit_ncard_necSuf σ σ.symm σ.symm_apply_apply
+        i p hp.1 hp.2.1 hp.2.2
+    _ = (matchingPairComponent τ υ hτ hυ i).ncard := by
+      change (permutationOrbit σ i).ncard = _
+      rw [matchingPairPermutation_orbit_eq_component τ υ C hτ hυ hτcolor hυcolor i]
+
 end Ising2DLambda.NecSuf.KacWard

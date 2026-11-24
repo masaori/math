@@ -78277,14 +78277,14 @@ q\le q'
 &=\frac{L^2}{L^2}
 &&(\because\ \mathbb{Q}\text{ の四則、分母が同じ分数の和})\\
 &=1
-&&(\because\ L^2\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+&&(\because\ L^2\ne0\text{ による約分、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \frac{L^2-(ka)^2}{L^2}
 &\le\frac{2aL}{L^2}
 &&(\because\ \blkref{claim_square_difference_from_multiple_side_bound}\text{（}ka\le L\le ka+a\text{）を }L^2>0\text{ で割る（}\mathbb{Q}\text{ の順序と正数による除法）})\\
 &=\frac{2a}{L}
-&&(\because\ L\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+&&(\because\ L\ne0\text{ による約分、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         paragraph([
                           "第二に、",
@@ -78322,7 +78322,7 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 0
 &=2\cdot0
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }2\text{ を掛ける})\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍、各素数の成分に }2\text{ を掛ける})\\
 &\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\log(1+q))
 &&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=2\text{、}\lambda:=0\text{、}\mu:=\iota(\log(1+q))\text{ で読む})\\
 &=0+2\cdot\iota(\log(1+q))
@@ -78362,7 +78362,7 @@ q\le q'
 &\le_{\Lambda_{\mathbb{Q}}}\frac{L^2-(ka)^2}{L^2}\cdot C
 &&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=\tfrac{L^2-(ka)^2}{L^2}\text{（第一で }0\le c\text{）、}\lambda:=\Psi^{\mathrm{op}}_{ka}(q)\text{、}\mu:=C\text{ で読む})\\
 &\le_{\Lambda_{\mathbb{Q}}}\frac{2a}{L}\cdot C
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{L^2-(ka)^2}{L^2}\text{、}s:=\tfrac{2a}{L}\text{、}\nu:=C\text{ で読む。}r\le s\text{ は第一、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第二})
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{L^2-(ka)^2}{L^2}\text{、}s:=\tfrac{2a}{L}\text{、}\nu:=C\text{ で読む、}r\le s\text{ は第一、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第二})
 \end{aligned}`),
                         paragraph([
                           "本体は二つの一続きで示す。まず、辺 ",
@@ -78389,7 +78389,7 @@ q\le q'
 &=\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)+\Bigl(\frac{2a}{L}\cdot C+\Bigl(-\frac{2a}{L}\cdot C\Bigr)\Bigr)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の結合則})\\
 &=\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)+0
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元。}\lambda+(-\lambda)=0)\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元、}\lambda+(-\lambda)=0)\\
 &=\frac{(ka)^2}{L^2}\cdot\Psi^{\mathrm{op}}_{ka}(q)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})
 \end{aligned}`),
