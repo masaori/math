@@ -17,7 +17,7 @@
 （`(1,…,1)` は `Finset.univ`）。`Q̌_ε` は `CheckFermiSetup.Qproj`、`Λ̌_ε` は `checkBigLambda`、
 `Λ^{(1/2)}_M` は `LambdaM P (1/2) M`。`CheckFermiSetup` は `checkFermiSetupOf P hM`
 （`ψ̌_μ` から作ったもの）、`γ(θ~_μ)` は `gammaTilde P M μ`。(1) の和の添字づけは
-`V_plus_eq_c_exp_sum_gamma_check_number_operator` と同じく `j : Fin M` の `checkIdx M j = j + 1`。
+`V_plus_eq_c_exp_sum_gamma_check_number_operator` と同じく `j : Fin M` の名前を付けた写像の像 `finIndexToZZ M j`（`def_index_set_from_one_to_n`）。
 
 ## 人手証明との対応
 
@@ -53,7 +53,7 @@ variable {M : ℕ}
 theorem V_plus_eigenvalues_with_c_value_and_strict_maximum (P : IsingParam) (hM : M ≠ 0) :
     VPlus M (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)
         = ((((2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2) : ℝ) : ℂ))
-          • matExp (∑ j : Fin M, gammaTildeC P M (checkIdx M j) •
+          • matExp (∑ j : Fin M, gammaTildeC P M (finIndexToZZ M j) •
               ((checkFermiOf P hM).nOp j - (1 / 2 : ℂ) • (1 : TensorPow M)))
       ∧ (∀ T : Finset (CheckIdx M),
           VPlus M (Real.sinh (2 * P.K2)) (P.K1 : ℂ) (P.K2star : ℂ)

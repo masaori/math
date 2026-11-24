@@ -90,11 +90,11 @@ theorem checkPsi_car' (hM : M ≠ 0) {μ ν : ℤ}
 
 /-- **`action_of_T_check_Vprime_on_check_psi`（015 章の仮定なし）**。 -/
 theorem TCheckVprime_checkPsi_pair (hM : M ≠ 0) (j : Fin M) :
-    TConj (checkVprimeUnits P.const M (gammaTildeC P M)) (checkPsiDag P.const M (checkIdx M j))
-        = Complex.exp (gammaTildeC P M (checkIdx M j))
-          • checkPsiDag P.const M (checkIdx M j)
-      ∧ TConj (checkVprimeUnits P.const M (gammaTildeC P M)) (checkPsi P.const M (checkIdx M j))
-        = Complex.exp (-gammaTildeC P M (checkIdx M j)) • checkPsi P.const M (checkIdx M j) :=
+    TConj (checkVprimeUnits P.const M (gammaTildeC P M)) (checkPsiDag P.const M (finIndexToZZ M j))
+        = Complex.exp (gammaTildeC P M (finIndexToZZ M j))
+          • checkPsiDag P.const M (finIndexToZZ M j)
+      ∧ TConj (checkVprimeUnits P.const M (gammaTildeC P M)) (checkPsi P.const M (finIndexToZZ M j))
+        = Complex.exp (-gammaTildeC P M (finIndexToZZ M j)) • checkPsi P.const M (finIndexToZZ M j) :=
   ⟨TCheckVprime_checkPsiDag P.const (gammaTildeC P M) hM
       (gamma2_thetaTilde_ne_zero_of_checkIndex P hM) j,
    TCheckVprime_checkPsi P.const (gammaTildeC P M) hM
@@ -105,14 +105,14 @@ theorem TVPlus_eq_TCheckVprime' (hM : M ≠ 0)
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (uPlus : (TensorPow M)ˣ)
     (hT : ∀ j : Fin M, ActsBy (TConj uPlus).toLinearMap
-      (checkZ M (checkIdx M j)) (checkY M (checkIdx M j))
-      (AMat P.const (thetaTilde M (checkIdx M j)))) :
+      (checkZ M (finIndexToZZ M j)) (checkY M (finIndexToZZ M j))
+      (AMat P.const (thetaTilde M (finIndexToZZ M j)))) :
     ∀ x : TensorPow M,
       TConj uPlus x = TConj (checkVprimeUnits P.const M (gammaTildeC P M)) x :=
   TVPlus_eq_TCheckVprime P (gammaTildeC P M) hM
     (fun μ _ => gammaTildeC_conj P hM μ) uPlus hT
-    (fun j => lambdaPlusR_eq_exp_gammaTildeC P hdual M (checkIdx M j))
-    (fun j => lambdaMinusR_eq_exp_gammaTildeC P hdual M (checkIdx M j))
+    (fun j => lambdaPlusR_eq_exp_gammaTildeC P hdual M (finIndexToZZ M j))
+    (fun j => lambdaMinusR_eq_exp_gammaTildeC P hdual M (finIndexToZZ M j))
 
 /-- **仮定 `hT` を取る一般形**: `V_plus_eq_c_check_Vprime`（015 章の仮定なし。残るのは 014 章の `hT` だけ。本文どおりの版は `VPlus_eq_smul_checkVprime_of_dual`）。
 
@@ -121,8 +121,8 @@ theorem VPlus_eq_smul_checkVprime' (hM : M ≠ 0)
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     (uPlus : (TensorPow M)ˣ)
     (hT : ∀ j : Fin M, ActsBy (TConj uPlus).toLinearMap
-      (checkZ M (checkIdx M j)) (checkY M (checkIdx M j))
-      (AMat P.const (thetaTilde M (checkIdx M j)))) :
+      (checkZ M (finIndexToZZ M j)) (checkY M (finIndexToZZ M j))
+      (AMat P.const (thetaTilde M (finIndexToZZ M j)))) :
     ∃ c : ℂ, c ≠ 0 ∧
       (uPlus : TensorPow M) = c • checkVprime P.const M (gammaTildeC P M) :=
   exists_smul_of_TConj_eq uPlus (checkVprimeUnits P.const M (gammaTildeC P M))
@@ -180,6 +180,6 @@ theorem VPlus_eq_smul_checkVprime_of_dual (hM : M ≠ 0)
         = c • checkVprime P.const M (gammaTildeC P M) :=
   VPlus_eq_smul_checkVprime' P hM hdual
     (VPlusUnits M (sinh_two_K2_pos P) (P.K1 : ℂ) (P.K2star : ℂ))
-    (fun j => TVPlus_actsBy_checkZY P hM hdual (checkIdx M j))
+    (fun j => TVPlus_actsBy_checkZY P hM hdual (finIndexToZZ M j))
 
 end Ising2D

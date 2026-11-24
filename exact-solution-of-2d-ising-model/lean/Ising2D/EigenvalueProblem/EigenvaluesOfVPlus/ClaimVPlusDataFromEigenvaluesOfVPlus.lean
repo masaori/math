@@ -23,7 +23,7 @@
 ## 噛み合わせ（本ファイルの橋渡し部分）
 
 章 017 の `Ising2D.CheckFermiSetup` は添字型が `CheckIdx M`、章 018 の
-`Ising2D.CheckFermi` は `Fin M` である。両者は `Ising2D.checkIdx`（`j ↦ j+1`）で
+`Ising2D.CheckFermi` は `Fin M` である。両者は名前を付けた写像 `Ising2D.finIndexToZZ`（`def_index_set_from_one_to_n`）の像で
 1 対 1 に対応するので、`Ising2D.finCheckIdxEquiv` を置き、
 `X̌` が両側で同じ行列であること（`Ising2D.checkFermiSetupOf_Vprime`）を示して
 章 017 の `constant_c_value_even_sector` を使えるようにする。
@@ -44,18 +44,18 @@ variable {M : ℕ}
 
 /-! ## `Fin M ≃ 𝓜̌` -/
 
-/-- `Fin M` と章 017 の添字型 `CheckIdx M = 𝓜̌` の同一視（`j ↦ j+1`）。 -/
+/-- `Fin M` と章 017 の添字型 `CheckIdx M = 𝓜̌` の間の全単射（`j` を写像の像 `finIndexToZZ M j` へ送る）。 -/
 noncomputable def finCheckIdxEquiv (M : ℕ) : Fin M ≃ CheckIdx M :=
-  Equiv.ofBijective (fun j => ⟨checkIdx M j, mem_checkIdxFinset.2 (checkIndex_checkIdx M j)⟩)
+  Equiv.ofBijective (fun j => ⟨finIndexToZZ M j, mem_checkIdxFinset.2 (checkIndex_checkIdx M j)⟩)
     (by
       refine (Fintype.bijective_iff_injective_and_card _).2 ⟨?_, ?_⟩
       · intro i j h
-        exact checkIdx_injective M (congrArg Subtype.val h)
+        exact (finIndexToZZ_bijective_onto_index_set M).1 _ _ (congrArg Subtype.val h)
       · simp [CheckIdx.card])
 
 @[simp]
 theorem finCheckIdxEquiv_val (M : ℕ) (j : Fin M) :
-    (finCheckIdxEquiv M j).1 = checkIdx M j := rfl
+    (finCheckIdxEquiv M j).1 = finIndexToZZ M j := rfl
 
 /-! ## 章 016 の `ψ̌` から章 017 の `CheckFermiSetup` を作る -/
 
@@ -114,9 +114,9 @@ theorem VPlus_eq_smul_checkVprime_const (P : IsingParam) (hM : M ≠ 0)
 
 /-! ## `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` -/
 
-/-- 章 018 の `Ising2D.checkLambda` に渡す重み `γ_μ := γ(θ̃_{μ})`（`μ = j+1`）。 -/
+/-- 章 018 の `Ising2D.checkLambda` に渡す重み `γ_μ := γ(θ̃_{μ})`（人手の `μ` は写像の像 `finIndexToZZ M j`。`def_index_set_from_one_to_n`）。 -/
 noncomputable def checkGam (P : IsingParam) (M : ℕ) (j : Fin M) : ℝ :=
-  gammaTilde P M (checkIdx M j)
+  gammaTilde P M (finIndexToZZ M j)
 
 theorem checkGam_pos (P : IsingParam) (hM : M ≠ 0) (j : Fin M) : 0 < checkGam P M j :=
   gammaFn_thetaTilde_pos P hM (checkIndex_checkIdx M j)

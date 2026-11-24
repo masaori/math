@@ -116,33 +116,33 @@ theorem eq_on_checkZY_of_eq_on_checkPsi (P : IsingParam) (hM : M ≠ 0) (μ : �
 theorem TVPlus_eq_TCheckVprime_on_checkZY (P : IsingParam) (g : ℤ → ℂ) (hM : M ≠ 0)
     (hgconj : ∀ μ : ℤ, CheckIndex M μ → g ((M : ℤ) + 1 - μ) = g μ)
     {TPlus : TensorPow M →ₗ[ℂ] TensorPow M}
-    (hT : ∀ j : Fin M, ActsBy TPlus (checkZ M (checkIdx M j)) (checkY M (checkIdx M j))
-      (AMat P.const (thetaTilde M (checkIdx M j))))
+    (hT : ∀ j : Fin M, ActsBy TPlus (checkZ M (finIndexToZZ M j)) (checkY M (finIndexToZZ M j))
+      (AMat P.const (thetaTilde M (finIndexToZZ M j))))
     (hlamPlus : ∀ j : Fin M,
-      ((lambdaPlusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (g (checkIdx M j)))
+      ((lambdaPlusR P.const (thetaTilde M (finIndexToZZ M j)) : ℝ) : ℂ) = Complex.exp (g (finIndexToZZ M j)))
     (hlamMinus : ∀ j : Fin M,
-      ((lambdaMinusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (-g (checkIdx M j)))
+      ((lambdaMinusR P.const (thetaTilde M (finIndexToZZ M j)) : ℝ) : ℂ) = Complex.exp (-g (finIndexToZZ M j)))
     (j : Fin M) :
-    TPlus (checkZ M (checkIdx M j))
-        = TConj (checkVprimeUnits P.const M g) (checkZ M (checkIdx M j))
-      ∧ TPlus (checkY M (checkIdx M j))
-        = TConj (checkVprimeUnits P.const M g) (checkY M (checkIdx M j)) := by
+    TPlus (checkZ M (finIndexToZZ M j))
+        = TConj (checkVprimeUnits P.const M g) (checkZ M (finIndexToZZ M j))
+      ∧ TPlus (checkY M (finIndexToZZ M j))
+        = TConj (checkVprimeUnits P.const M g) (checkY M (finIndexToZZ M j)) := by
   -- `gamma_2_theta_tilde_nonzero`（`action_of_T_check_Vprime_on_check_psi` の仮定）
   have hga : ∀ μ : ℤ, CheckIndex M μ → gamma2 P.const (thetaTilde M μ) ≠ 0 :=
     fun μ _ => gamma2_thetaTilde_ne_zero P hM μ
-  have hcomm := TVPlus_checkPsiDag_psi_of_action P M hM (checkIdx M j)
+  have hcomm := TVPlus_checkPsiDag_psi_of_action P M hM (finIndexToZZ M j)
     (hlamPlus j) (hlamMinus j) (hT j)
   refine eq_on_checkZY_of_eq_on_checkPsi (T₁ := TPlus)
-    (T₂ := (TConj (checkVprimeUnits P.const M g)).toLinearMap) P hM (checkIdx M j) ?_ ?_
-  · calc TPlus (checkPsiDag P.const M (checkIdx M j))
-        = Complex.exp (g (checkIdx M j)) • checkPsiDag P.const M (checkIdx M j) :=
+    (T₂ := (TConj (checkVprimeUnits P.const M g)).toLinearMap) P hM (finIndexToZZ M j) ?_ ?_
+  · calc TPlus (checkPsiDag P.const M (finIndexToZZ M j))
+        = Complex.exp (g (finIndexToZZ M j)) • checkPsiDag P.const M (finIndexToZZ M j) :=
           hcomm.1                                                       -- `V^{(+)}` と `ψ̌` の交換関係
-      _ = TConj (checkVprimeUnits P.const M g) (checkPsiDag P.const M (checkIdx M j)) :=
+      _ = TConj (checkVprimeUnits P.const M g) (checkPsiDag P.const M (finIndexToZZ M j)) :=
           (TCheckVprime_checkPsiDag P.const g hM hga j).symm            -- `T_{(V̌')}` の `ψ̌` への作用
-  · calc TPlus (checkPsi P.const M (checkIdx M j))
-        = Complex.exp (-g (checkIdx M j)) • checkPsi P.const M (checkIdx M j) :=
+  · calc TPlus (checkPsi P.const M (finIndexToZZ M j))
+        = Complex.exp (-g (finIndexToZZ M j)) • checkPsi P.const M (finIndexToZZ M j) :=
           hcomm.2                                                       -- `V^{(+)}` と `ψ̌` の交換関係
-      _ = TConj (checkVprimeUnits P.const M g) (checkPsi P.const M (checkIdx M j)) :=
+      _ = TConj (checkVprimeUnits P.const M g) (checkPsi P.const M (finIndexToZZ M j)) :=
           (TCheckVprime_checkPsi P.const g hM hga hgconj j).symm        -- `T_{(V̌')}` の `ψ̌` への作用
 
 end Ising2D

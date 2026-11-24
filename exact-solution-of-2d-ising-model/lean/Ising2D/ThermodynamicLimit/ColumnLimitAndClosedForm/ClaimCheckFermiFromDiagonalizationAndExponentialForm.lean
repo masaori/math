@@ -288,26 +288,26 @@ theorem checkPsiDag_conjTranspose (P : IsingParam) (hM : M ≠ 0) (μ : ℤ) :
 
 /-- **章 016 から `Ising2D.CheckFermi` を構成する**（仮定は `M ≠ 0` だけ）。
 
-`cre j` は `ψ̌_{j+1}^†`、`ann j` は `ψ̌_{M+1-(j+1)}` である
+人手の添字 `μ` を写像の像 `finIndexToZZ M j`（`def_index_set_from_one_to_n`）として、`cre j` は `ψ̌_μ^†`、`ann j` は `ψ̌_{M+1-μ}` である
 （`EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean` の `CheckFermi` の添字づけと同じ）。 -/
 noncomputable def checkFermiOf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) : CheckFermi M where
-  cre j := checkPsiDag P.const M (checkIdx M j)
-  ann j := checkPsi P.const M ((M : ℤ) + 1 - checkIdx M j)
-  hcre j := ⟨checkIdx M j, checkP P.const M (checkIdx M j), checkQ M, rfl⟩
-  hann j := ⟨(M : ℤ) + 1 - checkIdx M j, checkPPlus P.const M ((M : ℤ) + 1 - checkIdx M j),
+  cre j := checkPsiDag P.const M (finIndexToZZ M j)
+  ann j := checkPsi P.const M ((M : ℤ) + 1 - finIndexToZZ M j)
+  hcre j := ⟨finIndexToZZ M j, checkP P.const M (finIndexToZZ M j), checkQ M, rfl⟩
+  hann j := ⟨(M : ℤ) + 1 - finIndexToZZ M j, checkPPlus P.const M ((M : ℤ) + 1 - finIndexToZZ M j),
     checkQ M, rfl⟩
   acomm_cre_cre i j := by
     have h := (checkPsi_car' P hM (checkIndex_checkIdx M i) (checkIndex_checkIdx M j)).1
     simpa [acomm] using h
   acomm_ann_ann i j := by
-    have hi : CheckIndex M ((M : ℤ) + 1 - checkIdx M i) := by
+    have hi : CheckIndex M ((M : ℤ) + 1 - finIndexToZZ M i) := by
       rw [checkIdx_rev]; exact checkIndex_checkIdx M (Fin.rev i)
-    have hj : CheckIndex M ((M : ℤ) + 1 - checkIdx M j) := by
+    have hj : CheckIndex M ((M : ℤ) + 1 - finIndexToZZ M j) := by
       rw [checkIdx_rev]; exact checkIndex_checkIdx M (Fin.rev j)
     have h := (checkPsi_car' P hM hi hj).2.2
     simpa [acomm] using h
   acomm_cre_ann i j := by
-    have hj : CheckIndex M ((M : ℤ) + 1 - checkIdx M j) := by
+    have hj : CheckIndex M ((M : ℤ) + 1 - finIndexToZZ M j) := by
       rw [checkIdx_rev]; exact checkIndex_checkIdx M (Fin.rev j)
     have h := (checkPsi_car' P hM (checkIndex_checkIdx M i) hj).2.1
     rw [acomm] at h
@@ -315,24 +315,24 @@ noncomputable def checkFermiOf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) : Check
     by_cases hij : i = j
     · subst hij
       rw [if_pos rfl, if_pos rfl, one_smul]
-    · have hne : ¬((M : ℤ) + 1 - checkIdx M j = (M : ℤ) + 1 - checkIdx M i) := by
+    · have hne : ¬((M : ℤ) + 1 - finIndexToZZ M j = (M : ℤ) + 1 - finIndexToZZ M i) := by
         intro hc
-        exact hij (checkIdx_injective M (by omega)).symm
+        exact hij ((finIndexToZZ_bijective_onto_index_set M).1 _ _ (by omega)).symm
       rw [if_neg hne, if_neg hij, zero_smul]
-  hstar j := checkPsiDag_conjTranspose P hM (checkIdx M j)
+  hstar j := checkPsiDag_conjTranspose P hM (finIndexToZZ M j)
 
 @[simp]
 theorem checkFermiOf_cre (P : IsingParam) (hM : M ≠ 0) (j : Fin M) :
-    (checkFermiOf P hM).cre j = checkPsiDag P.const M (checkIdx M j) := rfl
+    (checkFermiOf P hM).cre j = checkPsiDag P.const M (finIndexToZZ M j) := rfl
 
 @[simp]
 theorem checkFermiOf_ann (P : IsingParam) (hM : M ≠ 0) (j : Fin M) :
-    (checkFermiOf P hM).ann j = checkPsi P.const M ((M : ℤ) + 1 - checkIdx M j) := rfl
+    (checkFermiOf P hM).ann j = checkPsi P.const M ((M : ℤ) + 1 - finIndexToZZ M j) := rfl
 
 /-- `ň_μ = ψ̌_μ^† ψ̌_{M+1-μ}`（章 016 の `checkX` の被加数と同じ形）。 -/
 theorem checkFermiOf_nOp (P : IsingParam) (hM : M ≠ 0) (j : Fin M) :
     (checkFermiOf P hM).nOp j
-      = checkPsiDag P.const M (checkIdx M j) * checkPsi P.const M ((M : ℤ) + 1 - checkIdx M j) :=
+      = checkPsiDag P.const M (finIndexToZZ M j) * checkPsi P.const M ((M : ℤ) + 1 - finIndexToZZ M j) :=
   rfl
 
 end Ising2D

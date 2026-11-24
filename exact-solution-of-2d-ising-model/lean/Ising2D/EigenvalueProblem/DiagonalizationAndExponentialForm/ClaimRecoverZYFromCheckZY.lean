@@ -224,23 +224,20 @@ theorem Y_eq_inverse_dft_check (hM : M ≠ 0) (m : Fin M) :
 
 /-! ## 生成性 -/
 
-/-- 原文の `{check(Z)_1, …, check(Z)_M, check(Y)_1, …, check(Y)_M}`。 -/
+/-- 原文の `{check(Z)_1, …, check(Z)_M, check(Y)_1, …, check(Y)_M}`（添字 `μ ∈ {1,…,M}` は和の添字 `μ : Fin M` の像 `finIndexToZZ M μ`）。 -/
 noncomputable def checkZYSet (M : ℕ) : Set (TensorPow M) :=
-  (Set.range fun μ : Fin M => checkZ M (((μ : ℕ) : ℤ) + 1)) ∪
-    (Set.range fun μ : Fin M => checkY M (((μ : ℕ) : ℤ) + 1))
+  (Set.range fun μ : Fin M => checkZ M (finIndexToZZ M μ)) ∪
+    (Set.range fun μ : Fin M => checkY M (finIndexToZZ M μ))
 
-/-- 人手の `check(Z)_{μ_ℤ}`（`μ_ℤ` は和の添字 `μ : Fin M` の像 `finIndexToZZ M μ`）は生成系 `checkZYSet M` の生成する代数に入る。
-`checkZYSet` の添字は `checkIdx`（`DefinitionCheckVprime.lean`）と同じく値に 1 を足した形なので、像を値へ戻す（Lean だけの段）。 -/
+/-- 人手の `check(Z)_{μ_ℤ}`（`μ_ℤ` は和の添字 `μ : Fin M` の像 `finIndexToZZ M μ`）は生成系 `checkZYSet M` の生成する代数に入る。 -/
 theorem checkZ_mem_adjoin (μ : Fin M) :
-    checkZ M (finIndexToZZ M μ) ∈ Algebra.adjoin ℂ (checkZYSet M) := by
-  rw [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
-  exact Algebra.subset_adjoin (Or.inl ⟨μ, rfl⟩)
+    checkZ M (finIndexToZZ M μ) ∈ Algebra.adjoin ℂ (checkZYSet M) :=
+  Algebra.subset_adjoin (Or.inl ⟨μ, rfl⟩)
 
 /-- 人手の `check(Y)_μ` について、`checkZ_mem_adjoin` と同じ。 -/
 theorem checkY_mem_adjoin (μ : Fin M) :
-    checkY M (finIndexToZZ M μ) ∈ Algebra.adjoin ℂ (checkZYSet M) := by
-  rw [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
-  exact Algebra.subset_adjoin (Or.inr ⟨μ, rfl⟩)
+    checkY M (finIndexToZZ M μ) ∈ Algebra.adjoin ℂ (checkZYSet M) :=
+  Algebra.subset_adjoin (Or.inr ⟨μ, rfl⟩)
 
 /-- **原文の「とくに」**: `check(Z), check(Y)` は `Mat(2^M, ℂ)` を単位的 `ℂ` 代数として生成する。
 

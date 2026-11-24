@@ -3420,7 +3420,6 @@ Ising2D.checkIdxFinset	Finset.range
 Ising2D.checkIdxFinset_card	Finset.card
 Ising2D.checkIdxFinset_injOn	Function.Injective
 Ising2D.checkIdx_eq_rev_iff	Fin.rev
-Ising2D.checkIdx_injective	Function.Injective
 Ising2D.checkIdx_rev	Fin.rev
 Ising2D.checkLambda	Finset
 Ising2D.checkLambda	Finset.sum@Fin,Real@Real.instAddCommMonoid

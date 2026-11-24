@@ -11,7 +11,7 @@
 
     X̌ := Σ_{μ ∈ 𝓜̌} γ(θ̃_μ) (ψ̌_μ^† ψ̌_{M+1-μ} - ½ I),   V̌' := exp(X̌)
 
-を、添字集合 `𝓜̌ = {1,…,M}` を `Fin M` で走らせる形（`checkIdx j := j + 1`）で定義する。
+を、添字集合 `𝓜̌ = {1,…,M}` を `Fin M` で走らせる形（人手の `μ` は名前を付けた写像の像 `finIndexToZZ M j`。`def_index_set_from_one_to_n`）で定義する。
 
 * 重み `γ(θ̃_μ)`（章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta` の `θ = θ̃_μ` での値）は本セッションの担当範囲外なので、
   **任意の関数 `g : ℤ → ℂ` として持つ**。015 章が `γ` を用意したら `g := fun μ => γ(θ̃_μ)`
@@ -19,8 +19,8 @@
   `periodicity_of_check_fermi` (3) の `γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` ただ 1 つで、
   これは `Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimActionTCheckVprime` の仮定 `hgconj` として明示する。
 * 原文 (1)（和の範囲に例外が要らないこと）は、`Ising2D.checkIdx_rev`
-  （`M+1-checkIdx j = checkIdx (Fin.rev j)`、`Fin.rev` は `Fin M` 上の対合）と
-  `Ising2D.checkIndex_checkIdx`（すべての `j : Fin M` で `checkIdx j ∈ 𝓜̌`）に対応する。
+  （`M+1-finIndexToZZ M j = finIndexToZZ M (Fin.rev j)`、`Fin.rev` は `Fin M` 上の対合）と
+  `Ising2D.checkIndex_checkIdx`（すべての `j : Fin M` で `finIndexToZZ M j ∈ 𝓜̌`）に対応する。
   008 章の `def_Vprime` が和を `γ_2(θ_μ) ≠ 0` なる `μ` に限定していたのと違い、
   ここでは `Fin M` 全体を走る（除外は無い）。
 * 原文 (2)（`V̌'` の可逆性）は 004 章の `Ising2D.matExpUnits` に帰着する。
@@ -32,45 +32,41 @@ namespace Ising2D
 
 variable {M : ℕ}
 
-/-! ## 添字 `𝓜̌ = {1,…,M}` を `Fin M` で走らせる -/
+/-! ## 添字 `𝓜̌ = {1,…,M}` を `Fin M` で走らせる
 
-/-- `Fin M` から `𝓜̌ = {1,…,M}` への同一視 `j ↦ j+1`。 -/
-def checkIdx (M : ℕ) (j : Fin M) : ℤ := ((j : ℕ) : ℤ) + 1
+人手の和の添字 `μ ∈ 𝓜̌ = {1,…,M}` と Lean の `j : Fin M` の行き来は、名前を付けた写像 `finIndexToZZ M`
+（`def_index_set_from_one_to_n`）だけを通す。`checkIndex_checkIdx` と `checkIdx_rev` は原文 (1) に対応し（冒頭の説明）、
+`checkIdx_eq_rev_iff` は `checkIdx_rev` と写像の単射（`finIndexToZZ_bijective_onto_index_set` の一つ目）から従う Lean だけの段の補題である。
+名前の `checkIdx` は `𝓜̌` の添字を指す（この名前の定義は無い）。名前は、未定義の記号の台帳
+`lean/mathlib-symbols-undefined-in-text-ledger.txt` の行（`checkIdx_rev`・`checkIdx_eq_rev_iff` の `Fin.rev`）に合わせて残す。
+台帳の行は減らすだけなので、改名すると新しい行が増えるためである。 -/
 
-theorem checkIndex_checkIdx (M : ℕ) (j : Fin M) : CheckIndex M (checkIdx M j) := by
-  refine ⟨by simp [checkIdx], ?_⟩
-  have : ((j : ℕ) : ℤ) + 1 ≤ (M : ℤ) := by exact_mod_cast j.isLt
-  simpa [checkIdx] using this
+/-- `finIndexToZZ M j ∈ 𝓜̌`（`finIndexToZZ_bijective_onto_index_set` の値の範囲を `def_check_index_set` の形へ移す）。 -/
+theorem checkIndex_checkIdx (M : ℕ) (j : Fin M) : CheckIndex M (finIndexToZZ M j) := by
+  obtain ⟨h1, h2⟩ := (finIndexToZZ_bijective_onto_index_set M).2.1 j
+  rw [inclusionNNtoZZ_eq_natCast] at h2
+  exact ⟨h1, h2⟩
 
-theorem checkIdx_injective (M : ℕ) : Function.Injective (checkIdx M) := by
-  intro i j h
-  have : ((i : ℕ) : ℤ) = ((j : ℕ) : ℤ) := by simpa [checkIdx] using h
-  exact Fin.ext (by exact_mod_cast this)
-
-/-- **対になる添字は `Fin.rev`**: `M + 1 - checkIdx j = checkIdx (Fin.rev j)`。 -/
+/-- **対になる添字は `Fin.rev`**: `M + 1 - finIndexToZZ M j = finIndexToZZ M (Fin.rev j)`。 -/
 theorem checkIdx_rev (M : ℕ) (j : Fin M) :
-    (M : ℤ) + 1 - checkIdx M j = checkIdx M (Fin.rev j) := by
+    (M : ℤ) + 1 - finIndexToZZ M j = finIndexToZZ M (Fin.rev j) := by
   have hlt : (j : ℕ) < M := j.isLt
-  rw [checkIdx, checkIdx, Fin.val_rev]
-  have : ((M - ((j : ℕ) + 1) : ℕ) : ℤ) = (M : ℤ) - ((j : ℕ) : ℤ) - 1 := by
-    have : ((j : ℕ) : ℤ) + 1 ≤ (M : ℤ) := by exact_mod_cast hlt
-    omega
-  rw [this]
-  ring
+  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_rev]
+  omega
 
-/-- `checkIdx i = M + 1 - checkIdx j ⟺ i = Fin.rev j`。 -/
+/-- `finIndexToZZ M i = M + 1 - finIndexToZZ M j ⟺ i = Fin.rev j`。 -/
 theorem checkIdx_eq_rev_iff (M : ℕ) (i j : Fin M) :
-    checkIdx M i = (M : ℤ) + 1 - checkIdx M j ↔ i = Fin.rev j := by
+    finIndexToZZ M i = (M : ℤ) + 1 - finIndexToZZ M j ↔ i = Fin.rev j := by
   rw [checkIdx_rev]
-  exact ⟨fun h => checkIdx_injective M h, fun h => by rw [h]⟩
+  exact ⟨fun h => (finIndexToZZ_bijective_onto_index_set M).1 _ _ h, fun h => by rw [h]⟩
 
 /-! ## `X̌` と `V̌'`（原文 `def_check_Vprime`） -/
 
 /-- **原文 `def_check_Vprime` の `X̌`**:
 `X̌ = Σ_{μ ∈ 𝓜̌} γ(θ̃_μ) (ψ̌_μ^† ψ̌_{M+1-μ} - ½ I)`。 -/
 noncomputable def checkX (K : IsingConst) (M : ℕ) (g : ℤ → ℂ) : TensorPow M :=
-  ∑ j : Fin M, g (checkIdx M j) •
-    (checkPsiDag K M (checkIdx M j) * checkPsi K M ((M : ℤ) + 1 - checkIdx M j)
+  ∑ j : Fin M, g (finIndexToZZ M j) •
+    (checkPsiDag K M (finIndexToZZ M j) * checkPsi K M ((M : ℤ) + 1 - finIndexToZZ M j)
       - (1 / 2 : ℂ) • (1 : TensorPow M))
 
 /-- **原文 `def_check_Vprime` の `V̌' := exp(X̌)`**。 -/

@@ -76,12 +76,12 @@ theorem VPlus_eq_smul_checkVprime (P : IsingParam) (g : ℤ → ℂ) (hM : M ≠
     (hgconj : ∀ μ : ℤ, CheckIndex M μ → g ((M : ℤ) + 1 - μ) = g μ)
     (uPlus : (TensorPow M)ˣ)
     (hT : ∀ j : Fin M, ActsBy (TConj uPlus).toLinearMap
-      (checkZ M (checkIdx M j)) (checkY M (checkIdx M j))
-      (AMat P.const (thetaTilde M (checkIdx M j))))
+      (checkZ M (finIndexToZZ M j)) (checkY M (finIndexToZZ M j))
+      (AMat P.const (thetaTilde M (finIndexToZZ M j))))
     (hlamPlus : ∀ j : Fin M,
-      ((lambdaPlusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (g (checkIdx M j)))
+      ((lambdaPlusR P.const (thetaTilde M (finIndexToZZ M j)) : ℝ) : ℂ) = Complex.exp (g (finIndexToZZ M j)))
     (hlamMinus : ∀ j : Fin M,
-      ((lambdaMinusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (-g (checkIdx M j))) :
+      ((lambdaMinusR P.const (thetaTilde M (finIndexToZZ M j)) : ℝ) : ℂ) = Complex.exp (-g (finIndexToZZ M j))) :
     ∃ c : ℂ, c ≠ 0 ∧ (uPlus : TensorPow M) = c • checkVprime P.const M g :=
   exists_smul_of_TConj_eq uPlus (checkVprimeUnits P.const M g)
     (TVPlus_eq_TCheckVprime P g hM hgconj uPlus hT hlamPlus hlamMinus)

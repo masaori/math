@@ -33,9 +33,9 @@ variable {M : ℕ}
 `Ž_μ, Y̌_μ`（`μ ∈ 𝓜̌`）の上で一致する 2 つの共役は、`Mat(2^M,ℂ)` の全体で一致する。 -/
 theorem TConj_eq_of_eq_on_checkZY (hM : M ≠ 0) (u v : (TensorPow M)ˣ)
     (hZ : ∀ j : Fin M,
-      TConj u (checkZ M (checkIdx M j)) = TConj v (checkZ M (checkIdx M j)))
+      TConj u (checkZ M (finIndexToZZ M j)) = TConj v (checkZ M (finIndexToZZ M j)))
     (hY : ∀ j : Fin M,
-      TConj u (checkY M (checkIdx M j)) = TConj v (checkY M (checkIdx M j))) :
+      TConj u (checkY M (finIndexToZZ M j)) = TConj v (checkY M (finIndexToZZ M j))) :
     ∀ x : TensorPow M, TConj u x = TConj v x := by
   have hle : Algebra.adjoin ℂ (checkZYSet M)
       ≤ AlgHom.equalizer (TConj u).toAlgHom (TConj v).toAlgHom := by
@@ -50,9 +50,9 @@ theorem TConj_eq_of_eq_on_checkZY (hM : M ≠ 0) (u v : (TensorPow M)ˣ)
 /-- 上を「線型写像としての一致」の形で述べた版（原文の statement に近い形）。 -/
 theorem TConj_toLinearMap_eq_of_eq_on_checkZY (hM : M ≠ 0) (u v : (TensorPow M)ˣ)
     (hZ : ∀ j : Fin M,
-      TConj u (checkZ M (checkIdx M j)) = TConj v (checkZ M (checkIdx M j)))
+      TConj u (checkZ M (finIndexToZZ M j)) = TConj v (checkZ M (finIndexToZZ M j)))
     (hY : ∀ j : Fin M,
-      TConj u (checkY M (checkIdx M j)) = TConj v (checkY M (checkIdx M j))) :
+      TConj u (checkY M (finIndexToZZ M j)) = TConj v (checkY M (finIndexToZZ M j))) :
     (TConj u).toLinearMap = (TConj v).toLinearMap :=
   LinearMap.ext (TConj_eq_of_eq_on_checkZY hM u v hZ hY)
 
@@ -64,12 +64,12 @@ theorem TVPlus_eq_TCheckVprime (P : IsingParam) (g : ℤ → ℂ) (hM : M ≠ 0)
     (hgconj : ∀ μ : ℤ, CheckIndex M μ → g ((M : ℤ) + 1 - μ) = g μ)
     (uPlus : (TensorPow M)ˣ)
     (hT : ∀ j : Fin M, ActsBy (TConj uPlus).toLinearMap
-      (checkZ M (checkIdx M j)) (checkY M (checkIdx M j))
-      (AMat P.const (thetaTilde M (checkIdx M j))))
+      (checkZ M (finIndexToZZ M j)) (checkY M (finIndexToZZ M j))
+      (AMat P.const (thetaTilde M (finIndexToZZ M j))))
     (hlamPlus : ∀ j : Fin M,
-      ((lambdaPlusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (g (checkIdx M j)))
+      ((lambdaPlusR P.const (thetaTilde M (finIndexToZZ M j)) : ℝ) : ℂ) = Complex.exp (g (finIndexToZZ M j)))
     (hlamMinus : ∀ j : Fin M,
-      ((lambdaMinusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (-g (checkIdx M j))) :
+      ((lambdaMinusR P.const (thetaTilde M (finIndexToZZ M j)) : ℝ) : ℂ) = Complex.exp (-g (finIndexToZZ M j))) :
     ∀ x : TensorPow M, TConj uPlus x = TConj (checkVprimeUnits P.const M g) x :=
   TConj_eq_of_eq_on_checkZY hM uPlus (checkVprimeUnits P.const M g)
     (fun j => (TVPlus_eq_TCheckVprime_on_checkZY P g hM hgconj hT hlamPlus hlamMinus j).1)

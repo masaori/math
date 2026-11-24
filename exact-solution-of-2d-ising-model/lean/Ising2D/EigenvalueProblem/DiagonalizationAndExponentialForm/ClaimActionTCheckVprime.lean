@@ -69,26 +69,26 @@ theorem matExp_conj_eigen {X a : TensorPow M} {c : ℂ} (h : X * a - a * X = c �
 /-- `checkX` は必要十分版の `NecSuf.carHam` そのものである（橋渡し）。 -/
 theorem checkX_eq_carHam (K : IsingConst) (M : ℕ) (g : ℤ → ℂ) :
     checkX K M g
-      = NecSuf.carHam (fun j : Fin M => g (checkIdx M j))
-          (fun j : Fin M => checkPsiDag K M (checkIdx M j))
-          (fun j : Fin M => checkPsi K M (checkIdx M j)) Fin.rev (1 / 2 : ℂ) := by
+      = NecSuf.carHam (fun j : Fin M => g (finIndexToZZ M j))
+          (fun j : Fin M => checkPsiDag K M (finIndexToZZ M j))
+          (fun j : Fin M => checkPsi K M (finIndexToZZ M j)) Fin.rev (1 / 2 : ℂ) := by
   rw [checkX, NecSuf.carHam]
   exact Finset.sum_congr rfl fun j _ => by rw [checkIdx_rev]
 
 variable (K : IsingConst) (g : ℤ → ℂ)
 
-/-- **人手証明の準備 5 と Step 2**: `[X̌, ψ̌_μ^†] = γ(θ̃_μ) ψ̌_μ^†`（`μ = checkIdx j₀ ∈ 𝓜̌`）。 -/
+/-- **人手証明の準備 5 と Step 2**: `[X̌, ψ̌_μ^†] = γ(θ̃_μ) ψ̌_μ^†`（`μ = finIndexToZZ M j₀ ∈ 𝓜̌`）。 -/
 theorem lie_checkX_checkPsiDag (hM : M ≠ 0)
     (hga : ∀ μ : ℤ, CheckIndex M μ → gamma2 K (thetaTilde M μ) ≠ 0) (j₀ : Fin M) :
-    checkX K M g * checkPsiDag K M (checkIdx M j₀)
-        - checkPsiDag K M (checkIdx M j₀) * checkX K M g
-      = g (checkIdx M j₀) • checkPsiDag K M (checkIdx M j₀) := by
+    checkX K M g * checkPsiDag K M (finIndexToZZ M j₀)
+        - checkPsiDag K M (finIndexToZZ M j₀) * checkX K M g
+      = g (finIndexToZZ M j₀) • checkPsiDag K M (finIndexToZZ M j₀) := by
   rw [checkX_eq_carHam]
   refine NecSuf.lie_carHam_cre (S := ℂ) _ _ _ _ _ j₀ ?_ ?_
   · intro ν
     have h := acomm_checkPsi_checkPsiDag K hM (checkIndex_checkIdx M j₀)
       (checkIndex_checkIdx M (Fin.rev ν)) (hga _ (checkIndex_checkIdx M j₀))
-    have hiff : (checkIdx M (Fin.rev ν) = (M : ℤ) + 1 - checkIdx M j₀) ↔ (ν = j₀) := by
+    have hiff : (finIndexToZZ M (Fin.rev ν) = (M : ℤ) + 1 - finIndexToZZ M j₀) ↔ (ν = j₀) := by
       rw [checkIdx_eq_rev_iff]
       exact ⟨fun hh => Fin.rev_injective hh, fun hh => by rw [hh]⟩
     exact h.trans (by rw [if_congr hiff rfl rfl])
@@ -96,15 +96,15 @@ theorem lie_checkX_checkPsiDag (hM : M ≠ 0)
     exact acomm_checkPsiDag_checkPsiDag K hM (checkIndex_checkIdx M ν)
       (checkIndex_checkIdx M j₀) (hga _ (checkIndex_checkIdx M ν))
 
-/-- **人手証明の準備 5 と Step 2'**: `[X̌, ψ̌_μ] = -γ(θ̃_μ) ψ̌_μ`（`μ = checkIdx j₀ ∈ 𝓜̌`）。
+/-- **人手証明の準備 5 と Step 2'**: `[X̌, ψ̌_μ] = -γ(θ̃_μ) ψ̌_μ`（`μ = finIndexToZZ M j₀ ∈ 𝓜̌`）。
 
 `γ(θ̃_{M+1-μ}) = γ(θ̃_μ)`（人手証明の `periodicity_of_check_fermi` (3)）を仮定 `hgconj` として使う。 -/
 theorem lie_checkX_checkPsi (hM : M ≠ 0)
     (hga : ∀ μ : ℤ, CheckIndex M μ → gamma2 K (thetaTilde M μ) ≠ 0)
     (hgconj : ∀ μ : ℤ, CheckIndex M μ → g ((M : ℤ) + 1 - μ) = g μ) (j₀ : Fin M) :
-    checkX K M g * checkPsi K M (checkIdx M j₀)
-        - checkPsi K M (checkIdx M j₀) * checkX K M g
-      = (-g (checkIdx M j₀)) • checkPsi K M (checkIdx M j₀) := by
+    checkX K M g * checkPsi K M (finIndexToZZ M j₀)
+        - checkPsi K M (finIndexToZZ M j₀) * checkX K M g
+      = (-g (finIndexToZZ M j₀)) • checkPsi K M (finIndexToZZ M j₀) := by
   rw [checkX_eq_carHam, neg_smul]
   refine NecSuf.lie_carHam_ann (S := ℂ) _ _ _ _ _ j₀ (Fin.rev_rev j₀) ?_ ?_ ?_
   · rw [← checkIdx_rev]
@@ -115,7 +115,7 @@ theorem lie_checkX_checkPsi (hM : M ≠ 0)
   · intro ν
     have h := acomm_checkPsiDag_checkPsi K hM (checkIndex_checkIdx M ν)
       (checkIndex_checkIdx M j₀) (hga _ (checkIndex_checkIdx M ν))
-    have hiff : (checkIdx M j₀ = (M : ℤ) + 1 - checkIdx M ν) ↔ (ν = Fin.rev j₀) := by
+    have hiff : (finIndexToZZ M j₀ = (M : ℤ) + 1 - finIndexToZZ M ν) ↔ (ν = Fin.rev j₀) := by
       rw [checkIdx_eq_rev_iff]
       constructor
       · intro hh; rw [hh, Fin.rev_rev]
@@ -127,8 +127,8 @@ theorem lie_checkX_checkPsi (hM : M ≠ 0)
 /-- **主張の第 1 式**: `T_{(V̌')}(ψ̌_μ^†) = e^{+γ(θ̃_μ)} ψ̌_μ^†`。 -/
 theorem TCheckVprime_checkPsiDag (hM : M ≠ 0)
     (hga : ∀ μ : ℤ, CheckIndex M μ → gamma2 K (thetaTilde M μ) ≠ 0) (j₀ : Fin M) :
-    TConj (checkVprimeUnits K M g) (checkPsiDag K M (checkIdx M j₀))
-      = Complex.exp (g (checkIdx M j₀)) • checkPsiDag K M (checkIdx M j₀) := by
+    TConj (checkVprimeUnits K M g) (checkPsiDag K M (finIndexToZZ M j₀))
+      = Complex.exp (g (finIndexToZZ M j₀)) • checkPsiDag K M (finIndexToZZ M j₀) := by
   rw [TConj_apply, checkVprimeUnits_val, checkVprimeUnits_inv, checkVprime]
   exact matExp_conj_eigen (lie_checkX_checkPsiDag K g hM hga j₀)
 
@@ -136,8 +136,8 @@ theorem TCheckVprime_checkPsiDag (hM : M ≠ 0)
 theorem TCheckVprime_checkPsi (hM : M ≠ 0)
     (hga : ∀ μ : ℤ, CheckIndex M μ → gamma2 K (thetaTilde M μ) ≠ 0)
     (hgconj : ∀ μ : ℤ, CheckIndex M μ → g ((M : ℤ) + 1 - μ) = g μ) (j₀ : Fin M) :
-    TConj (checkVprimeUnits K M g) (checkPsi K M (checkIdx M j₀))
-      = Complex.exp (-g (checkIdx M j₀)) • checkPsi K M (checkIdx M j₀) := by
+    TConj (checkVprimeUnits K M g) (checkPsi K M (finIndexToZZ M j₀))
+      = Complex.exp (-g (finIndexToZZ M j₀)) • checkPsi K M (finIndexToZZ M j₀) := by
   rw [TConj_apply, checkVprimeUnits_val, checkVprimeUnits_inv, checkVprime]
   exact matExp_conj_eigen (lie_checkX_checkPsi K g hM hga hgconj j₀)
 

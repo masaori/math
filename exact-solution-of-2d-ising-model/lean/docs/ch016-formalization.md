@@ -49,7 +49,7 @@
 | `Ising2D.rowApply_checkPsi_row` | `(T(ψ̌_μ^†),T(ψ̌_μ)) = (λ_{+,μ}ψ̌_μ^†, λ_{-,μ}ψ̌_μ)`（`A = P̌ĎP̌^{-1}` と `P̌^{-1}P̌ = I` を経る鎖） | 同 Step 2 |
 | `Ising2D.TVPlus_checkPsiDag_of_action` / `TVPlus_checkPsi_of_action` | `T(ψ̌_μ^†) = λ_{+,μ}ψ̌_μ^†` ほか（Step 2 の等式の各列） | **`commutation_V_plus_check_psi`** |
 | `Ising2D.TVPlus_checkPsiDag_psi_of_action` | 上を `e^{±γ(θ̃_μ)}` の形で述べた版 | 同 |
-| `Ising2D.checkIdx` / `checkIndex_checkIdx` / `checkIdx_rev` / `checkIdx_eq_rev_iff`（`DefinitionCheckVprime.lean`） | `𝓜̌ = {1,…,M}` を `Fin M` で走らせる。対の添字は `Fin.rev`（対合） | `def_check_Vprime` (1) |
+| `checkIndex_checkIdx` / `checkIdx_rev` / `checkIdx_eq_rev_iff`（`DefinitionCheckVprime.lean`） | `𝓜̌ = {1,…,M}` を `Fin M` で走らせる（人手の添字は名前を付けた写像の像 `Ising2D.finIndexToZZ M j`）。対の添字は `Fin.rev`（対合） | `def_check_Vprime` (1) |
 | `Ising2D.checkX` / `Ising2D.checkVprime` | `X̌`, `V̌' = exp(X̌)` | **`def_check_Vprime`** |
 | `Ising2D.checkVprimeUnits` / `isUnit_checkVprime` | `V̌'` の可逆性と `(V̌')^{-1} = exp(-X̌)` | 同 (2) |
 | `Ising2D.checkX_eq_carHam` | `X̌` は必要十分版 `NecSuf.carHam` そのもの | 橋渡し |

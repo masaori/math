@@ -197,7 +197,7 @@ theorem vPlusDataOf_eta_univ_eq_one (P : IsingParam) (hM2 : 2 ≤ M) :
 `CheckFermiSetup`（添字 `𝓜̌ = CheckIdx M`）の上の `CheckFermiSetup.Qproj`、この章の鎖は `CheckFermi`（添字 `Fin M`）の上の
 `CheckFermi.Qproj` である。具体的な `ψ̌` から作った二つ（`checkFermiSetupOf`・`checkFermiOf`）では、
 どちらも人手の定義 `Q̌_ε = ∏_{ν∈𝓜̌} R_ν^{(ε(ν))}`（`def_check_Q_epsilon`）の同じ行列であることを `checkFermiOf_Qproj_eq` で示す
-（添字 `j : Fin M` を `finCheckIdxEquiv M j = j + 1 ∈ 𝓜̌` へ送る付け替えで、人手の証明の行ではない）。 -/
+（添字 `j : Fin M` を写像の像 `finIndexToZZ M j ∈ 𝓜̌`（`finCheckIdxEquiv M j`。`def_index_set_from_one_to_n`）へ送る付け替えで、人手の証明の行ではない）。 -/
 
 /-- 運ぶ段: 具体的な `ψ̌` について、`CheckFermi` の `Q̌_T` と `CheckFermiSetup` の `Q̌_{e(T)}`（`e = finCheckIdxEquiv`）は
 同じ行列。どちらも人手の左から掛ける積 `∏_{ν=1}^{M_col}`（`NecSuf.finProdLeft`、人手の `M_col` が Lean の `r + 1`）に等しく、
@@ -215,7 +215,7 @@ theorem checkFermiOf_Qproj_eq (P : IsingParam) {r : ℕ} (T : Finset (Fin (r + 1
       NecSuf.projFactor F.nOp T j
         = NecSuf.projFactor Fs.nOp (T.map e.toEmbedding) (CheckFermiSetup.checkIdxOfFin j) := by
     intro j
-    have hj : CheckFermiSetup.checkIdxOfFin j = e j := Subtype.ext (by simp [CheckFermiSetup.checkIdxOfFin, e, checkIdx])
+    have hj : CheckFermiSetup.checkIdxOfFin j = e j := Subtype.ext (by simp [CheckFermiSetup.checkIdxOfFin, e, finIndexToZZ, inclusionNNtoZZ_eq_natCast])
     have hn : Fs.nOp (e j) = F.nOp j := rfl
     rw [hj]
     by_cases hT : j ∈ T

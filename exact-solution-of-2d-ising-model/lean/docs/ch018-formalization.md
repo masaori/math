@@ -512,7 +512,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 
 1. **添字型のずれ。** 章 017 の `CheckFermiSetup` は `CheckIdx M = {μ ∈ ℤ | 1 ≤ μ ≤ M}`、
    章 018 の `CheckFermi` は `Fin M` で添字づけている。`Ising2D.finCheckIdxEquiv`
-   （`j ↦ j+1`、全単射性は `checkIdx_injective` と `CheckIdx.card` から）を置き、
+   （`j` を写像の像 `finIndexToZZ M j` へ送る。全単射性は `finIndexToZZ_bijective_onto_index_set` の単射と `CheckIdx.card` から）を置き、
    `X̌` が両側で同じ行列であること（`checkFermiSetupOf_Xop`）を示した。
    これにより章 017 の `constant_c_value_even_sector` を章 016 の `checkVprime` に適用できる。
    なお `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` 自体は章 017 の `Q̌_ε` を経由せず、章 018 側の
