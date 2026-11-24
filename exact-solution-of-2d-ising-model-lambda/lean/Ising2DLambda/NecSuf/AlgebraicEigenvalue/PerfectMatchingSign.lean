@@ -9,12 +9,92 @@ hswap は四つの交換の等号、hflip は二重反転の除去に必要で�
 -/
 import Mathlib.Data.List.Nodup
 import Mathlib.Data.List.Perm.Basic
+import Mathlib.Data.List.NodupEquivFin
+import Mathlib.GroupTheory.Perm.Basic
 
 namespace Ising2DLambda.NecSuf.AlgebraicEigenvalue
 
 /-- 全元をちょうど一度ずつ記す有限列。 -/
 def IsCompleteWord {J : Type*} (w : List J) : Prop :=
   w.Nodup ∧ ∀ x : J, x ∈ w
+
+private theorem completeWord_move_front {J : Type*} (u : List J) (a : J) (v : List J) :
+    (u ++ a :: v).Perm (a :: (u ++ v)) := by
+  induction u with
+  | nil => exact List.Perm.refl _
+  | cons b u ih => exact (ih.cons b).trans (List.Perm.swap a b (u ++ v))
+
+/-- 同じ元を重複なく記した二列を、先頭を合わせて並べ替える。 -/
+private theorem completeWord_perm {J : Type*} {l r : List J}
+    (hl : l.Nodup) (hr : r.Nodup) (hm : ∀ x, x ∈ l ↔ x ∈ r) : l.Perm r := by
+  induction l generalizing r with
+  | nil =>
+      have : r = [] := by
+        apply List.eq_nil_iff_forall_not_mem.mpr
+        intro x hx
+        simpa using (hm x).mpr hx
+      subst r
+      exact List.Perm.nil
+  | cons a l ih =>
+      obtain ⟨u, v, rfl⟩ := List.mem_iff_append.mp ((hm a).mp (by simp))
+      have hp := completeWord_move_front u a v
+      have hn : (a :: (u ++ v)).Nodup := hp.nodup_iff.mp hr
+      have ht : l.Perm (u ++ v) := ih hl.tail hn.tail (by
+        intro x
+        have ha : a ∉ l := hl.notMem
+        have hb : a ∉ u ++ v := hn.notMem
+        by_cases hx : x = a
+        · subst x; simp [ha, hb]
+        · have hc := (hm x).trans hp.mem_iff
+          simpa [hx] using hc)
+      exact (ht.cons a).trans hp.symm
+
+/-- 基準列と完全列の長さは等しい。 -/
+theorem completeWord_length {J : Type*} (base w : List J)
+    (hb : IsCompleteWord base) (hw : IsCompleteWord w) : base.length = w.length :=
+  (completeWord_perm hb.1 hw.1 (fun x => iff_of_true (hb.2 x) (hw.2 x))).length_eq
+
+/-- 基準列の各元を完全列の対応する元へ送る置換。 -/
+noncomputable def completeWordPermutation {J : Type*} (base w : List J)
+    (hb : IsCompleteWord base) (hw : IsCompleteWord w) : Equiv.Perm J := by
+  classical
+  exact
+    (List.Nodup.getEquivOfForallMemList base hb.1 hb.2).symm |>.trans
+      ((finCongr (completeWord_length base w hb hw)).trans
+        (List.Nodup.getEquivOfForallMemList w hw.1 hw.2))
+
+/-- 完全列を元ごとに置換しても完全列である。 -/
+theorem completeWord_map {J : Type*} (w : List J)
+    (hw : IsCompleteWord w) (p : Equiv.Perm J) : IsCompleteWord (w.map p) := by
+  refine ⟨hw.1.map p.injective, ?_⟩
+  intro x
+  exact List.mem_map.mpr ⟨p.symm x, hw.2 _, p.apply_symm_apply x⟩
+
+/-- 元ごとの置換は、完全列が定める置換との左合成である。
+必要なのは基準列と対象列の完全性、および作用する写像の全単射性だけである。 -/
+theorem completeWordPermutation_map {J : Type*} (base w : List J)
+    (hb : IsCompleteWord base) (hw : IsCompleteWord w) (p : Equiv.Perm J) :
+    completeWordPermutation base (w.map p) hb (completeWord_map w hw p) =
+      p * completeWordPermutation base w hb hw := by
+  classical
+  ext x
+  obtain ⟨k, hk⟩ := List.mem_iff_get.mp (hb.2 x)
+  rw [← hk]
+  change completeWordPermutation base (w.map p) hb (completeWord_map w hw p)
+      (base.get k) = p (completeWordPermutation base w hb hw (base.get k))
+  have happly (v : List J) (hv : IsCompleteWord v) :
+      completeWordPermutation base v hb hv (base.get k) =
+        v.get (finCongr (completeWord_length base v hb hv) k) := by
+    simp [completeWordPermutation, List.Nodup.getEquivOfForallMemList, finCongr, hb.1]
+  calc
+    completeWordPermutation base (w.map p) hb (completeWord_map w hw p) (base.get k)
+        = (w.map p).get
+            (finCongr (completeWord_length base _ hb (completeWord_map w hw p)) k) :=
+          happly _ _
+    _ = p (w.get (finCongr (completeWord_length base w hb hw) k)) := by
+      simp [List.get_eq_getElem, finCongr]
+    _ = p (completeWordPermutation base w hb hw (base.get k)) := by
+      rw [happly]
 
 /-- 並べ替えは完全列挙を保つ。 -/
 theorem IsCompleteWord.perm {J : Type*} {w v : List J}
