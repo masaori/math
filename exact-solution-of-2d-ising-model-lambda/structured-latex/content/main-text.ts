@@ -77772,12 +77772,12 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 \frac{L^2-(ka)^2}{L^2}\cdot\iota(\ell_2)
 &\le_{\Lambda_{\mathbb{Q}}}\frac{2a}{L}\cdot\iota(\ell_2)
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{L^2-(ka)^2}{L^2}\text{、}s:=\tfrac{2a}{L}\text{、}\nu:=\iota(\ell_2)\text{ で読む。}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{L^2-(ka)^2}{L^2}\text{、}s:=\tfrac{2a}{L}\text{、}\nu:=\iota(\ell_2)\text{ で読む、}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \frac{2(L^2-(ka)^2)}{L^2}\cdot\iota(\log(1+q))
 &\le_{\Lambda_{\mathbb{Q}}}\frac{4a}{L}\cdot\iota(\log(1+q))
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{2(L^2-(ka)^2)}{L^2}\text{、}s:=\tfrac{4a}{L}\text{、}\nu:=\iota(\log(1+q))\text{ で読む。}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=\tfrac{2(L^2-(ka)^2)}{L^2}\text{、}s:=\tfrac{4a}{L}\text{、}\nu:=\iota(\log(1+q))\text{ で読む、}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})
 \end{aligned}`),
                         paragraph([
                           "主張の左の不等式を、その左辺から始める次の一続きで示す。二つの ",
