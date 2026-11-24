@@ -49014,6 +49014,7 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
                       lean: [
                         "Ising2DLambda.PartitionPolynomial.horizontalEdgeNumber",
                         "Ising2DLambda.PartitionPolynomial.verticalEdgeNumber",
+                        "Ising2DLambda.TransferMatrix.edgeOfRow",
                       ],
                       statement: [
                         paragraph([
@@ -50074,7 +50075,6 @@ const chapter_transfer_matrix = defineSection({
                       labels: ["claim_edge_row_partition"],
                       habitat: "N",
                       lean: [
-                        "Ising2DLambda.TransferMatrix.edgeOfRow",
                         "Ising2DLambda.TransferMatrix.edgeOfSum_injective",
                         "Ising2DLambda.TransferMatrix.edgeEquiv",
                         "Ising2DLambda.TransferMatrix.edgeOfRow_boundary0",
@@ -85755,9 +85755,7 @@ f_\gamma(i,j+1)
                     proof: [
                       paragraph([ref("claim_closed_walk_horizontal_column_parity_zero"),
                         " を列 ", math(String.raw`\pi(j)\in\mathbb Z/L\mathbb Z`), " に適用する。",
-                        ref("claim_edge_row_partition"), " の一意な辺番号の分解により、全行和は ",
-                        math(String.raw`r=0`), " の項と ", math(String.raw`1\le r\le L-1`),
-                        " の項へ分かれる。したがって"]),
+                        "全行和から ", math(String.raw`r=0`), " の項を分けると"]),
                       displayMath(String.raw`\begin{aligned}
 0
 &=\left(\sum_{r=0}^{L-1}N_\gamma(n_{\mathrm h}(r,j))\right)\bmod2
@@ -85802,9 +85800,7 @@ f_\gamma(i,j+1)
                     proof: [
                       paragraph([ref("claim_closed_walk_vertical_row_parity_zero"),
                         " を行 ", math(String.raw`\pi(i)\in\mathbb Z/L\mathbb Z`), " に適用する。",
-                        ref("claim_edge_row_partition"), " の一意な辺番号の分解により、全列和は ",
-                        math(String.raw`c=0`), " の項と ", math(String.raw`1\le c\le L-1`),
-                        " の項へ分かれる。したがって"]),
+                        "全列和から ", math(String.raw`c=0`), " の項を分けると"]),
                       displayMath(String.raw`\begin{aligned}
 0
 &=\left(\sum_{c=0}^{L-1}N_\gamma(n_{\mathrm v}(i,c))\right)\bmod2
@@ -86355,7 +86351,9 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
                     proof: [
                       paragraph(["辺 ", math(String.raw`n_{\mathrm h}(i+1,j)`),
                         " の両側のセルは ", math(String.raw`(i+1,j)`), " と ", math(String.raw`(i,j)`),
-                        " である（", ref("claim_edge_row_partition"), "）。従って"]),
+                        " である（", ref("claim_height_one_boundary_support"), " の式で行番号を ",
+                        math(String.raw`i+1`), " とし、", math(String.raw`\mathbb Z/L\mathbb Z`), " の中で ",
+                        math(String.raw`(i+1)-1=i`), " を使う）。従って"]),
                       displayMath(String.raw`\begin{aligned}
 [\partial_\square S_\gamma]_{n_{\mathrm h}(i+1,j)}\ne0
 &\iff f_\gamma(i+1,j)\ne f_\gamma(i,j)
@@ -86396,7 +86394,9 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
                     proof: [
                       paragraph([math(String.raw`L\ge2`), " のとき、切断線上の横辺 ", math(String.raw`n_{\mathrm h}(0,j)`),
                         " の両側のセルは ", math(String.raw`(0,j)`), " と ",
-                        math(String.raw`(L-1,j)`), " である（", ref("claim_edge_row_partition"), "）。従って"]),
+                        math(String.raw`(L-1,j)`), " である（", ref("claim_height_one_boundary_support"),
+                        " の式で行番号を ", math(String.raw`0`), " とし、", math(String.raw`\mathbb Z/L\mathbb Z`),
+                        " の中で ", math(String.raw`0-1=L-1`), " を使う）。従って"]),
                       displayMath(String.raw`\begin{aligned}
 [\partial_\square S_\gamma]_{n_{\mathrm h}(0,j)}\ne0
 &\iff f_\gamma(0,j)\ne f_\gamma(L-1,j)
@@ -86446,7 +86446,9 @@ N_\gamma(n_{\mathrm h}(0,0))
                     proof: [
                       paragraph(["辺 ", math(String.raw`n_{\mathrm v}(i,j+1)`),
                         " の両側のセルは ", math(String.raw`(i,j)`), " と ", math(String.raw`(i,j+1)`),
-                        " である（", ref("claim_edge_row_partition"), "）。従って"]),
+                        " である（", ref("claim_height_one_boundary_support"), " の式で列番号を ",
+                        math(String.raw`j+1`), " とし、", math(String.raw`\mathbb Z/L\mathbb Z`), " の中で ",
+                        math(String.raw`(j+1)-1=j`), " を使う）。従って"]),
                       displayMath(String.raw`\begin{aligned}
 [\partial_\square S_\gamma]_{n_{\mathrm v}(i,j+1)}\ne0
 &\iff f_\gamma(i,j)\ne f_\gamma(i,j+1)
@@ -86489,7 +86491,9 @@ N_\gamma(n_{\mathrm h}(0,0))
                     proof: [
                       paragraph([math(String.raw`L\ge2`), " のとき、縦辺 ", math(String.raw`n_{\mathrm v}(i,0)`),
                         " の両側のセルは ", math(String.raw`(i,L-1)`), " と ", math(String.raw`(i,0)`),
-                        " である（", ref("claim_edge_row_partition"), "）。従って"]),
+                        " である（", ref("claim_height_one_boundary_support"), " の式で列番号を ",
+                        math(String.raw`0`), " とし、", math(String.raw`\mathbb Z/L\mathbb Z`), " の中で ",
+                        math(String.raw`0-1=L-1`), " を使う）。従って"]),
                       displayMath(String.raw`\begin{aligned}
 [\partial_\square S_\gamma]_{n_{\mathrm v}(i,0)}\ne0
 &\iff f_\gamma(i,L-1)\ne f_\gamma(i,0)
