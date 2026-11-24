@@ -10,7 +10,8 @@ open Ising2DLambda.AlgebraicEigenvalue Ising2DLambda.PartitionPolynomial
 theorem polynomialReversalMatrix_determinant_from_necSuf (L : ℕ) :
     Matrix.det (polynomialReversalMatrix L) = 1 := by
   exact NecSuf.KacWard.mappedMatrix_determinant_one_necSuf
-    integerConstantPolynomialHom (reversalMatrix L) (reversalMatrix_determinant L)
+    integerConstantPolynomialHom (reversalMatrix L)
+    (by simpa only [IntegerMatrix.determinant_eq_mathlib] using reversalMatrix_determinant L)
 
 /-- 任意の行列に関する必要十分版に、本文の Kac--Ward 行列を代入する。 -/
 theorem terminalMatrix_determinant_from_necSuf (L : ℕ) (z : Qbar) (s : SpinStructure) :
@@ -18,6 +19,6 @@ theorem terminalMatrix_determinant_from_necSuf (L : ℕ) (z : Qbar) (s : SpinStr
       kacWardDeterminant (kacWardTransitionMatrix L z s) := by
   exact NecSuf.KacWard.mappedMatrix_mul_determinant_necSuf
     integerConstantPolynomialHom (reversalMatrix L) (spinKacWardPolynomialMatrix L z s)
-    (reversalMatrix_determinant L)
+    (by simpa only [IntegerMatrix.determinant_eq_mathlib] using reversalMatrix_determinant L)
 
 end Ising2DLambda.KacWard

@@ -68,22 +68,29 @@ theorem inversionSignIndependent_eq_mathlibSign {ι : Type*} [Fintype ι] [Linea
   have hvalue := DFunLike.congr_fun hhom σ
   exact congrArg Units.val hvalue
 
-/-- 有限添字の整数行列式。本文の行指定展開との一致は直後の補題で保証する。 -/
-noncomputable def determinant {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (A : Square ι) : ℤ := Matrix.det A
+/-- 本文の定義どおり、転倒数の符号による行指定の有限和。 -/
+noncomputable def determinant {ι : Type*} [Fintype ι] [LinearOrder ι]
+    (A : Square ι) : ℤ :=
+  ∑ σ : Equiv.Perm ι, finiteOrderedSign σ * ∏ i, A i (σ i)
 
-/-- mathlib の列指定展開を転置で行指定へ直し、転倒数の符号へ結ぶ。 -/
+/-- 本文の定義の展開。 -/
 theorem determinant_eq_independentSignedPermutationSum {ι : Type*} [Fintype ι] [LinearOrder ι]
     (A : Square ι) :
     determinant A = ∑ σ : Equiv.Perm ι,
-      finiteOrderedSign σ * ∏ i, A i (σ i) := by
+      finiteOrderedSign σ * ∏ i, A i (σ i) := rfl
+
+/-- mathlib の列指定展開を転置で行指定へ直し、転倒数の符号へ結ぶ。 -/
+theorem determinant_eq_mathlib {ι : Type*} [Fintype ι] [LinearOrder ι]
+    (A : Square ι) : determinant A = Matrix.det A := by
   classical
   calc
-    determinant A = Matrix.det A := rfl
-    _ = Matrix.det A.transpose := (Matrix.det_transpose A).symm
-    _ = ∑ σ : Equiv.Perm ι, (Equiv.Perm.sign σ : ℤ) * ∏ i, A.transpose (σ i) i :=
-      Matrix.det_apply' _
-    _ = ∑ σ : Equiv.Perm ι, finiteOrderedSign σ * ∏ i, A i (σ i) := by
-      simp only [inversionSignIndependent_eq_mathlibSign, Matrix.transpose_apply]
+    determinant A = ∑ σ : Equiv.Perm ι,
+        finiteOrderedSign σ * ∏ i, A i (σ i) := rfl
+    _ = ∑ σ : Equiv.Perm ι, (Equiv.Perm.sign σ : ℤ) * ∏ i, A i (σ i) := by
+      simp only [inversionSignIndependent_eq_mathlibSign]
+    _ = ∑ σ : Equiv.Perm ι, (Equiv.Perm.sign σ : ℤ) * ∏ i, A.transpose (σ i) i := by
+      simp only [Matrix.transpose_apply]
+    _ = Matrix.det A.transpose := (Matrix.det_apply' _).symm
+    _ = Matrix.det A := Matrix.det_transpose A
 
 end Ising2DLambda.IntegerMatrix

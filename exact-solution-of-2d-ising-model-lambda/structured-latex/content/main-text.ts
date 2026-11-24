@@ -76575,11 +76575,11 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
                         displayMath(String.raw`\begin{aligned}
 1+(n+1)h
 &\le1+(n+1)h+n\,h^{2}
-&&(\because\ 0\le n\text{ と }0\le h^{2}\text{ から }0\le n\,h^{2}\text{。}\mathbb{Q}\text{ の加法単調性})\\
+&&(\because\ 0\le n\text{ と }0\le h^{2}\text{ から }0\le n\,h^{2}\text{、}\mathbb{Q}\text{ の加法単調性})\\
 &=(1+nh)(1+h)
 &&(\because\ \mathbb{Q}\text{ の分配則})\\
 &\le(1+h)^{n}(1+h)
-&&(\because\ \text{帰納法の仮定と }0\le1+h\text{。}\mathbb{Q}\text{ の非負元による乗法単調性})\\
+&&(\because\ \text{帰納法の仮定と }0\le1+h\text{、}\mathbb{Q}\text{ の非負元による乗法単調性})\\
 &=(1+h)^{n+1}
 &&(\because\ \mathbb{Q}\text{ の冪の定義})
 \end{aligned}`),
