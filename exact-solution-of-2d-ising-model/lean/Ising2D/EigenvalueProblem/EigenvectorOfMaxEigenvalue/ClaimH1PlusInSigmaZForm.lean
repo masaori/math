@@ -99,9 +99,9 @@ theorem pauliX_mul_pauliZ_eq : pauliX * pauliZ = (-Complex.I) • pauliY := by
 
 /-! ## 準備 1（内部の辺の因子のクロネッカー積表示）
 
-Lean のサイトの添字は 0 始まりで、人手のサイト `m` は値が `m - 1` の `Fin M` の元である。人手の `m ∈ {1,…,M_col-1}` は Lean の `(m : ℕ) + 1 ≠ M` なる `m : Fin M`、人手の `m+1` は `nextSite m` である。
+Lean のサイトの添字は `Fin M` で、人手のサイト `k ∈ {1,…,M_col}` は、`finIndexToZZ M m = k`（`def_index_set_from_one_to_n`）を満たす `m : Fin M` である。人手の `m ∈ {1,…,M_col-1}` は Lean の `(m : ℕ) + 1 ≠ M` なる `m : Fin M`、人手の `m+1` は `nextSite m` である。
 人手の因子の並び `A⊠⋯⊠A`（`k` 個）は、Lean ではサイトごとの因子の族を `siteProd` に入れたもので、族は
-サイトの添字についての `if` で書く（人手の「第 `1` から第 `m-1` 因子」は `(i : ℕ) < (m : ℕ)`、第 `m` 因子は `i = m`）。 -/
+サイトの添字についての `if` で書く（人手の「第 `1` から第 `m-1` 因子」は `finIndexToZZ M i < finIndexToZZ M m`、第 `m` 因子は `i = m`。定義 `jwFamily` の中の `if` は `Fin M` の元の値の比較のままで、`finIndexToZZ_lt_iff_val_lt` で移す）。 -/
 
 /-- **人手の準備 1 の `Y_m`**（1 行）: `Y_m = σ^x⊠⋯⊠σ^x⊠σ^y⊠I⊠⋯⊠I`（∵ 準備 1 の `Y_m` の表示（`m ≤ M_col-1` なので当てはまる））。
 準備 1 の `Y_m` の表示の 4 行（有限積 → (k) → `site_pauli_prefix_product_kronecker_form` → `a_j^{(y)}` の定義）は
@@ -116,12 +116,13 @@ theorem Z_nextSite_kronecker_form (m : Fin M) :
     Z (nextSite m) = siteProd M (jwFamily (nextSite m) pauliZ) :=
   Z_prefix_kronecker_form (nextSite m)                  -- 準備 1 の `Z_m` の表示（`m → m+1`）
 
-/-- 人手の `m ∈ {1,…,M_col-1}` のサイト `m` と `m+1` は異なる（`nextSite m` の値は `m + 1`）。 -/
+/-- 人手の `m ∈ {1,…,M_col-1}` のサイト `m` と `m+1` は異なる（人手の添字では次のサイトは `finIndexToZZ M m + 1`。
+`def_index_set_from_one_to_n`・`def_site_pauli_periodic_extension`）。 -/
 theorem ne_nextSite_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) : m ≠ nextSite m := by
   have hlt : (m : ℕ) + 1 < M := by have := m.isLt; omega
+  have hnext : finIndexToZZ M (nextSite m) = finIndexToZZ M m + 1 := finIndexToZZ_nextSite_of_lt hlt
   intro h
-  have := congrArg Fin.val h
-  rw [nextSite_val_of_lt hlt] at this
+  have := congrArg (finIndexToZZ M) h
   omega
 
 /-- **人手の準備 1 の `σ_m^zσ_{m+1}^z` の鎖**（4 行。`m ∈ {1,…,M_col-1}`）。人手の 4 行と `calc` の 4 段が 1 対 1 に対応する。 -/
@@ -156,12 +157,15 @@ theorem sigmaZ_mul_sigmaZ_nextSite_kronecker (m : Fin M) (hm : (m : ℕ) + 1 ≠
 
 /-! ## 準備 2（境界の因子のクロネッカー積表示）
 
-人手のサイト `1` と `M_col` は Lean の `firstSite`・`lastSite` である。 -/
+人手のサイト `1` と `M_col` は Lean の `firstSite`・`lastSite` で、人手の添字は `finIndexToZZ_firstSite`・`finIndexToZZ_lastSite` により `1_ℤ`・`ι_{ℕ→ℤ}(M_col)` である。 -/
 
-/-- `M_col ≥ 2` なら人手のサイト `1` と `M_col` は異なる。 -/
+/-- `M_col ≥ 2` なら人手のサイト `1` と `M_col` は異なる（人手の添字 `1_ℤ` と `ι_{ℕ→ℤ}(M_col)` を比べる）。 -/
 private theorem firstSite_ne_lastSite (hM : 2 ≤ M) :
-    firstSite M (by omega) ≠ lastSite M (by omega) :=
-  Fin.ne_of_val_ne (by simp [firstSite, lastSite]; omega)
+    firstSite M (by omega) ≠ lastSite M (by omega) := by
+  intro h
+  have := congrArg (finIndexToZZ M) h
+  rw [finIndexToZZ_firstSite, finIndexToZZ_lastSite, inclusionNNtoZZ_eq_natCast] at this
+  omega
 
 /-- **人手の準備 2 の `Y_{M_col}`**（1 行）: `Y_{M_col} = σ^x⊠⋯⊠σ^x⊠σ^y`（∵ 準備 1 の `Y_m` の表示（`m → M_col`。`I` の因子は無い））。
 人手の `M_col` は Lean の `lastSite M hM`。 -/
@@ -242,14 +246,16 @@ theorem siteProd_ite_smul (m : Fin M) (c : ℂ) (A : Matrix (Fin 2) (Fin 2) ℂ)
 
 /-- **人手の準備 3**: `i(Y_mZ_{m+1}) = σ_m^zσ_{m+1}^z`（`m ∈ {1,…,M_col-1}`）。人手の 11 行と `calc` の 11 段が 1 対 1 に対応する。
 
-人手の「第 `1` から第 `m-1` 因子」は Lean の `(i : ℕ) < (m : ℕ)`、第 `m` 因子は `i = m`、第 `m+1` 因子は `i = nextSite m`、
+人手の「第 `1` から第 `m-1` 因子」は Lean の `finIndexToZZ M i < finIndexToZZ M m`（人手の添字の ℤ の比較）、第 `m` 因子は `i = m`、第 `m+1` 因子は `i = nextSite m`、
 第 `m+2` 以降の因子はそれ以外である。5 段目の時点で第 `1` から第 `m-1` 因子（4 段目）と第 `m+2` 以降の因子（5 段目）がどちらも `I` なので、
 族の `if` を `i = m`・`i = nextSite m`・それ以外の 3 つの場合に畳む（準備 1 の `σ_m^zσ_{m+1}^z` の鎖の右辺と同じ書き方にするため。
 因子の並びは変わらない）。 -/
 theorem I_smul_Y_mul_Z_next_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
     Complex.I • (Y m * Z (nextSite m)) = sigmaZ m * sigmaZ (nextSite m) := by
   have hlt : (m : ℕ) + 1 < M := by have := m.isLt; omega
-  have hnext : ((nextSite m : Fin M) : ℕ) = (m : ℕ) + 1 := nextSite_val_of_lt hlt
+  -- 人手の添字は `finIndexToZZ M m ∈ {1,…,M−1}` と次のサイトの `finIndexToZZ M m + 1`（`def_index_set_from_one_to_n`・`def_site_pauli_periodic_extension`）
+  have hnext : finIndexToZZ M (nextSite m) = finIndexToZZ M m + 1 := finIndexToZZ_nextSite_of_lt hlt
+  have hinj := (finIndexToZZ_bijective_onto_index_set M).1
   calc
     Complex.I • (Y m * Z (nextSite m))
         = Complex.I • (siteProd M (jwFamily m pauliY) * Z (nextSite m)) := by
@@ -257,27 +263,33 @@ theorem I_smul_Y_mul_Z_next_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
     _ = Complex.I • (siteProd M (jwFamily m pauliY) * siteProd M (jwFamily (nextSite m) pauliZ)) := by
       rw [Z_nextSite_kronecker_form]                    -- 準備 1 の `Z_{m+1}` の行
     _ = Complex.I • siteProd M (fun i =>
-          if (i : ℕ) < (m : ℕ) then pauliX * pauliX
+          if finIndexToZZ M i < finIndexToZZ M m then pauliX * pauliX
           else if i = m then pauliY * pauliX
           else if i = nextSite m then 1 * pauliZ else 1 * 1) := by
       rw [← siteProd_mul]                               -- `kronecker_product_rule` (1)（`M → M_col`）
       congr 2
       funext i
       simp only [Pi.mul_apply]
-      rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-      · rw [jwFamily_of_lt h, jwFamily_of_lt (by omega), if_pos h]
-      · have he : i = m := Fin.val_injective h
-        rw [he, jwFamily_self, jwFamily_of_lt (by omega), if_neg (lt_irrefl _), if_pos rfl]
-      · have hne' : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-        rw [jwFamily_of_gt h, if_neg (by omega), if_neg hne']
-        rcases lt_trichotomy (i : ℕ) ((nextSite m : Fin M) : ℕ) with h' | h' | h'
+      -- 人手の添字 `finIndexToZZ M i` を ℤ の順序で `finIndexToZZ M m`・`finIndexToZZ M m + 1`（`hnext`）と比べ、
+      -- `i < m` で `σ^xσ^x`、`i = m` で `σ^yσ^x`、`i = m+1` で `Iσ^z`、`i > m+1` で `II` の因子
+      rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M m) with h | h | h
+      · have hv := (finIndexToZZ_lt_iff_val_lt M i m).1 h
+        rw [jwFamily_of_lt hv, jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M i (nextSite m)).1 (by omega)),
+          if_pos h]
+      · have he : i = m := hinj i m h
+        rw [he, jwFamily_self, jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M m (nextSite m)).1 (by omega)),
+          if_neg (lt_irrefl _), if_pos rfl]
+      · have hne' : i ≠ m := fun he => by rw [he] at h; exact lt_irrefl _ h
+        have hv := (finIndexToZZ_lt_iff_val_lt M m i).1 h
+        rw [jwFamily_of_gt hv, if_neg (lt_asymm h), if_neg hne']
+        rcases lt_trichotomy (finIndexToZZ M i) (finIndexToZZ M (nextSite m)) with h' | h' | h'
         · omega
-        · have he : i = nextSite m := Fin.val_injective h'
+        · have he : i = nextSite m := hinj i (nextSite m) h'
           rw [he, jwFamily_self, if_pos rfl]
-        · have hne'' : i ≠ nextSite m := fun he => absurd (congrArg Fin.val he) (by omega)
-          rw [jwFamily_of_gt h', if_neg hne'']
+        · have hne'' : i ≠ nextSite m := fun he => by rw [he] at h'; exact lt_irrefl _ h'
+          rw [jwFamily_of_gt ((finIndexToZZ_lt_iff_val_lt M (nextSite m) i).1 h'), if_neg hne'']
     _ = Complex.I • siteProd M (fun i =>
-          if (i : ℕ) < (m : ℕ) then 1
+          if finIndexToZZ M i < finIndexToZZ M m then 1
           else if i = m then pauliY * pauliX
           else if i = nextSite m then 1 * pauliZ else 1 * 1) := by
       rw [pauliX_mul_pauliX]                            -- `pauli_matrix_products` の `σ^xσ^x = I`（第 1 から第 `m-1` 因子へ同時に適用）
@@ -291,8 +303,10 @@ theorem I_smul_Y_mul_Z_next_of_not_last (m : Fin M) (hm : (m : ℕ) + 1 ≠ M) :
       by_cases ha : i = m
       · rw [ha, if_neg (lt_irrefl _), if_pos rfl]
       · rw [if_neg ha]
-        by_cases hlt' : (i : ℕ) < (m : ℕ)
-        · have hb : i ≠ nextSite m := fun he => absurd (congrArg Fin.val he) (by omega)
+        by_cases hlt' : finIndexToZZ M i < finIndexToZZ M m
+        · have hb : i ≠ nextSite m := fun he => by
+            rw [he, hnext] at hlt'
+            omega
           rw [if_pos hlt', if_neg hb]
         · rw [if_neg hlt']
     _ = Complex.I • siteProd M (fun i =>
@@ -355,8 +369,12 @@ theorem neg_I_smul_Y_lastSite_mul_Z_firstSite (hM : 2 ≤ M) :
       = epsilon M * boundaryG M (by omega) := by
   have hM0 : M ≠ 0 := by omega
   have hne := firstSite_ne_lastSite hM
-  have hlast : ((lastSite M hM0 : Fin M) : ℕ) = M - 1 := by simp [lastSite]
-  have hfirst : ((firstSite M hM0 : Fin M) : ℕ) = 0 := by simp [firstSite]
+  -- 人手のサイト `1` と `M_col` の添字は `1_ℤ` と `ι_{ℕ→ℤ}(M_col)`（`def_index_set_from_one_to_n`）
+  have hfirstZ : finIndexToZZ M (firstSite M hM0) = 1 := finIndexToZZ_firstSite hM0
+  have hlastZ : finIndexToZZ M (lastSite M hM0) = inclusionNNtoZZ M := finIndexToZZ_lastSite hM0
+  have hM2 : 2 ≤ inclusionNNtoZZ M := by rw [inclusionNNtoZZ_eq_natCast]; omega
+  have hinj := (finIndexToZZ_bijective_onto_index_set M).1
+  have hrange := (finIndexToZZ_bijective_onto_index_set M).2.1
   calc
     -(Complex.I • (Y (lastSite M hM0) * Z (firstSite M hM0)))
         = (-1 : ℂ) • (Complex.I • (Y (lastSite M hM0) * Z (firstSite M hM0))) :=
@@ -378,15 +396,17 @@ theorem neg_I_smul_Y_lastSite_mul_Z_firstSite (hM : 2 ≤ M) :
       funext i
       simp only [Pi.mul_apply]
       by_cases ha : i = firstSite M hM0
-      · rw [ha, Function.update_self, if_pos rfl, jwFamily_of_lt (by omega)]
+      · rw [ha, Function.update_self, if_pos rfl,
+          jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M (firstSite M hM0) (lastSite M hM0)).1 (by omega))]
       · rw [Function.update_of_ne ha, if_neg ha]
         by_cases hb : i = lastSite M hM0
         · rw [hb, jwFamily_self, if_pos rfl]; rfl
-        · have hv : (i : ℕ) < M - 1 := by
-            have := i.isLt
-            have : (i : ℕ) ≠ M - 1 := fun h => hb (Fin.val_injective (by rw [h, hlast]))
+        · -- 人手の添字 `finIndexToZZ M i ∈ {1,…,M_col}` は `M_col` でないので `M_col` より小さい
+          have hv : finIndexToZZ M i < finIndexToZZ M (lastSite M hM0) := by
+            have := (hrange i).2
+            have : finIndexToZZ M i ≠ finIndexToZZ M (lastSite M hM0) := fun h => hb (hinj _ _ h)
             omega
-          rw [jwFamily_of_lt (by omega), if_neg hb]; rfl
+          rw [jwFamily_of_lt ((finIndexToZZ_lt_iff_val_lt M _ _).1 hv), if_neg hb]; rfl
     _ = (-Complex.I) • siteProd M (fun i =>
           if i = firstSite M hM0 then pauliX * pauliZ
           else if i = lastSite M hM0 then pauliY else pauliX) := by
@@ -452,11 +472,12 @@ private theorem filter_last_eq_singleton (hM : M ≠ 0) :
   ext m
   simp only [Finset.mem_filter, Finset.mem_univ, true_and, not_not, Finset.mem_singleton]
   constructor
-  · intro h
-    exact Fin.val_injective (by simp [lastSite]; omega)
+  · -- 人手の添字では `m = M_col`（`finIndexToZZ_eq_iff_val_add_one_eq`）で、人手のサイト `M_col` は `lastSite`
+    intro h
+    exact (finIndexToZZ_bijective_onto_index_set M).1 _ _
+      (by rw [(finIndexToZZ_eq_iff_val_add_one_eq M m).2 h, finIndexToZZ_lastSite hM])
   · rintro rfl
-    simp [lastSite]
-    omega
+    exact (finIndexToZZ_eq_iff_val_add_one_eq M _).1 (finIndexToZZ_lastSite hM)
 
 /-- **人手 `def_H1_plus` の形** `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1`。
 
@@ -471,7 +492,8 @@ theorem H1plus_eq_bulk_sub_boundary (hM : M ≠ 0) :
   congr 1
   · exact Finset.sum_congr rfl fun m hm => by
       rw [lastSign_of_not_last (Finset.mem_filter.1 hm).2, one_smul]
-  · rw [lastSign_of_last (by simp [lastSite]; omega), nextSite_lastSite hM, neg_one_smul]
+  · rw [lastSign_of_last ((finIndexToZZ_eq_iff_val_add_one_eq M _).1 (finIndexToZZ_lastSite hM)),
+      nextSite_lastSite hM, neg_one_smul]
 
 /-- 人手の和 `Σ_{m=1}^{M_col-1}` の添字の読み替え（`M_col = r + 2`）。Lean の `H1plus_eq_bulk_sub_boundary`・`openChainD0` は
 人手の `m ∈ {1, …, M_col-1}` を `Fin (r + 2)` のうち `(m : ℕ) + 1 ≠ r + 2` を満たすものとして書き、

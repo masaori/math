@@ -127,6 +127,16 @@ def firstSite (M : ℕ) (hM : M ≠ 0) : Fin M := ⟨0, Nat.pos_of_ne_zero hM⟩
 def lastSite (M : ℕ) (hM : M ≠ 0) : Fin M :=
   ⟨M - 1, Nat.sub_lt (Nat.pos_of_ne_zero hM) Nat.one_pos⟩
 
+/-- **`def_index_set_from_one_to_n`**: 原文のサイト `1`（`firstSite`）の人手の添字 `finIndexToZZ M (firstSite M hM)` は `1_ℤ` である（Lean だけの段の補題）。 -/
+theorem finIndexToZZ_firstSite (hM : M ≠ 0) : finIndexToZZ M (firstSite M hM) = 1 := by
+  simp only [finIndexToZZ, firstSite, inclusionNNtoZZ_eq_natCast]
+  omega
+
+/-- **`def_index_set_from_one_to_n`**: 原文のサイト `M`（`lastSite`）の人手の添字 `finIndexToZZ M (lastSite M hM)` は `ι_{ℕ→ℤ}(M)` である（Lean だけの段の補題）。 -/
+theorem finIndexToZZ_lastSite (hM : M ≠ 0) : finIndexToZZ M (lastSite M hM) = inclusionNNtoZZ M := by
+  simp only [finIndexToZZ, lastSite, inclusionNNtoZZ_eq_natCast]
+  omega
+
 /-- `H_1^{(+)}` の最終項の係数 `-1` を一般の `η` にしたもの（`(+)` は `η = -1`）。
 Lean の添字は 0 始まりなので、原文の `m = M` は `(m : ℕ) + 1 = M`。 -/
 def lastSign (η : ℂ) (m : Fin M) : ℂ := if (m : ℕ) + 1 = M then η else 1
