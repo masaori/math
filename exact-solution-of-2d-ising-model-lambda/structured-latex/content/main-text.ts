@@ -77513,7 +77513,7 @@ q\le q'
 &\iff\frac{1}{1^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\le_{\Lambda_{\mathbb{Q}}}\frac{1}{1^2}\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q')
 &&(\because\ \blkref{claim_scaled_embedding_order_transfer}\text{ を }L:=1\text{ で})\\
 &\iff1\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\le_{\Lambda_{\mathbb{Q}}}1\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q')
-&&(\because\ \tfrac{1}{1^2}=1\text{。}\mathbb{Q}\text{ の四則})\\
+&&(\because\ \tfrac{1}{1^2}=1\text{、}\mathbb{Q}\text{ の四則})\\
 &\iff\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q)\le_{\Lambda_{\mathbb{Q}}}\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\log q')
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の }1\cdot\lambda=\lambda\text{ を両辺へ})
 \end{aligned}`),
