@@ -80,4 +80,22 @@ theorem orientedMatchingPairValue (F : List J → R)
     · simp only [Function.comp, if_neg (fun hm => h ((hS p hp).mp hm)),
         matchingPairOrientation, if_neg h]
 
+/-- A complete matching word chooses exactly one first endpoint from each pair,
+so its orientation signs give the value relative to the matching. -/
+theorem orientedMatchingPairValue_of_matching (F : List J → R)
+    (hswap : ∀ (u : List J) (a b : J) (v : List J),
+      IsCompleteWord (u ++ a :: b :: v) →
+        F (u ++ b :: a :: v) = -F (u ++ a :: b :: v))
+    (D : PerfectMatching J) (l : List (J × J))
+    (hc : IsCompleteWord (matchingPairWord l))
+    (hD : ∀ p ∈ l, ({p.1, p.2} : Set J) ∈ D.val)
+    (hen : IsMatchingPairEnumeration D (l.map orderedMatchingPair)) :
+    F (matchingPairWord l) =
+      (l.map (matchingPairOrientation (R := R))).prod * matchingValue F D := by
+  let S : Set J := {x | ∃ p ∈ l, p.1 = x}
+  have hS : ∀ p ∈ l, ((orderedMatchingPair p).1 ∈ S ↔ p.1 < p.2) := by
+    intro p hp
+    exact (matchingPairOrientationSelection D l hc hD p hp).2
+  exact orientedMatchingPairValue F hswap D l S hen hS
+
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue

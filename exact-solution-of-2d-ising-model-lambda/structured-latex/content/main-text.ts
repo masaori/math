@@ -78085,9 +78085,9 @@ q\le q'
                         displayMath(String.raw`\begin{aligned}
 \frac{(ka)^2}{L^2}
 &\le\frac{L^2}{L^2}
-&&(\because\ ka<L\text{ から }(ka)^2\le L^2\text{（}\mathbb{N}\text{ の冪の単調性）。}L^2>0\text{ で割る（}\mathbb{Q}\text{ の順序と正数による除法）})\\
+&&(\because\ ka<L\text{ から }(ka)^2\le L^2\text{（}\mathbb{N}\text{ の冪の単調性）、}L^2>0\text{ で割る（}\mathbb{Q}\text{ の順序と正数による除法）})\\
 &=1
-&&(\because\ L^2\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+&&(\because\ L^2\ne0\text{ による約分、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         paragraph([
                           "第二に、辺 ",
