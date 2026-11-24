@@ -392,8 +392,8 @@ variable {A : Type*} [Ring A] [Algebra K A]
 `(2μ-1) + (2ν-1) = 2(μ+ν-1)` の `-1` だけに由来する。** -/
 theorem acomm_antiperiodic_fourier_clifford {M : ℕ} (hM : M ≠ 0) {ξ : K}
     (hξ : IsPrimitiveRoot ξ (2 * M)) (x y : Fin M → A)
-    (h : ∀ a b, acomm (x a) (y b) = (if a = b then (2 : K) else 0) • (1 : A)) (μ ν : ℤ) :
-    acomm (∑ j : Fin M, ξ ^ ((((j : ℕ) : ℤ) + 1) * (2 * μ - 1)) • x j)
+    (h : ∀ a b, acomm' (x a) (y b) = (if a = b then (2 : K) else 0) • (1 : A)) (μ ν : ℤ) :
+    acomm' (∑ j : Fin M, ξ ^ ((((j : ℕ) : ℤ) + 1) * (2 * μ - 1)) • x j)
         (∑ j : Fin M, ξ ^ ((((j : ℕ) : ℤ) + 1) * (2 * ν - 1)) • y j)
       = (2 * (M : K) * (if (M : ℤ) ∣ (μ + ν - 1) then 1 else 0)) • (1 : A) := by
   have hξ0 : ξ ≠ 0 := hξ.ne_zero (by omega)

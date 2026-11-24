@@ -110,6 +110,8 @@
 | `NecSuf.acomm_antiperiodic_fourier_clifford` | 奇数周波数フーリエ和どうしの反交換子 | `anticommutator_of_check_Z_Y` |
 | `NecSuf.inverse_dft_antiperiodic` | 反周期的離散フーリエ逆変換（任意の体・任意の加群） | `recover_Z_Y_from_check_Z_Y` |
 
+反交換子 `[a, b]₊ = a b + b a` は、具体版 `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimCommutatorViaAnticommutators.lean` の `Ising2D.acomm` と同じ式で、必要十分版の側の `NecSuf.acomm'`（`NecSuf/CommutatorViaAnticommutators.lean`。`acomm'_comm`・`acomm'_sum_smul_left`・`acomm'_sum_smul` は同じ手順。`commutator_via_anticommutators'`・`lie_mul_eq_acomm'_sub_acomm'` は同じ式を `noncomm_ring` で示す）に置いた。反交換子を使う必要十分版（`AntiperiodicFourier.lean`・`FourierClifford.lean`・`CommutatorClifford.lean`・`Fermion.lean`・`FermionLadder.lean`・`CliffordIndependence.lean`・`SiteLocalAnticomm.lean`）は具体版を参照しない。一致は導出 `ClaimCommutatorViaAnticommutatorsFromNecSuf.lean` の `acomm_eq_acomm_necSuf` が述べる。
+
 ### 必要十分版（`Ising2D/NecSuf/CommutatorSiteSum.lean`、名前空間 `Ising2D.NecSuf`）
 
 | Lean の名前 | 内容 | 人手証明のラベル |

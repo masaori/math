@@ -32,7 +32,7 @@
 逆にこれは、具体版が `σ^x, σ^y, σ^z` の成分計算に依存していないことの検査になっている
 （具体版が使うのは `A σ^x = -σ^x A` 型の関係式だけである）。
 -/
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
+import Ising2D.NecSuf.CommutatorViaAnticommutators
 import Mathlib.Algebra.BigOperators.Fin
 
 namespace Ising2D.NecSuf
@@ -72,7 +72,7 @@ variable {P : (ι → A) → B}
 theorem acomm_of_single_site (hP : IsSiteProd S P) (x y : ι → A) (j : ι)
     (hj : y j * x j = -(x j * y j))
     (hcomm : ∀ i, i ≠ j → y i * x i = x i * y i) :
-    acomm (P x) (P y) = 0 := by
+    acomm' (P x) (P y) = 0 := by
   classical
   have hswap : P y * P x = -(P x * P y) := by
     rw [← hP.map_mul, ← hP.map_mul]
@@ -92,7 +92,7 @@ theorem acomm_of_single_site (hP : IsSiteProd S P) (x y : ι → A) (j : ι)
       rw [Finset.prod_update_of_mem (Finset.mem_univ j)]
       simp
     rw [hprod, neg_smul, one_smul]
-  rw [acomm, hswap, add_neg_cancel]
+  rw [acomm', hswap, add_neg_cancel]
 
 omit [DecidableEq ι] in
 /-- 各サイトで自乗が `1` になる族なら、`P` で作った元も自乗が `1`。
@@ -144,7 +144,7 @@ theorem jwStr_of_gt (s : A) {m i : ι} (a : A) (h : m < i) : jwStr s m a i = 1 :
 theorem acomm_jwStr (hP : IsSiteProd S P) (s : A) (μ ν : ι) (a b : A)
     (has : a * s = -(s * a)) (hbs : b * s = -(s * b))
     (hab : μ = ν → b * a = -(a * b)) :
-    acomm (P (jwStr s μ a)) (P (jwStr s ν b)) = 0 := by
+    acomm' (P (jwStr s μ a)) (P (jwStr s ν b)) = 0 := by
   rcases lt_trichotomy μ ν with h | h | h
   · -- `μ < ν`: 食い違うのはサイト `μ`（`s` と `a`）
     refine acomm_of_single_site hP _ _ μ ?_ ?_

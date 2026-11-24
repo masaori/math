@@ -12,18 +12,17 @@
 
 が成り立つ。
 
-原文の証明は分配律・結合律しか使っていないので、ここでは
-**任意の（非可換）環 `R`** に対して定式化する（`Mat(n, ℂ)` はその特別な場合であり、
-系 `matrix_commutator_via_anticommutators` として原文の形でも述べる）。
-交換子は mathlib の Lie 括弧 `⁅·,·⁆`（`Ring.lie_def : ⁅x, y⁆ = x * y - y * x`）と
-一致するので、その形の言い換えも与える。
+人手証明と 1 対 1 に対応する具体版は下の `matComm_mul_eq_matAcomm_sub_matAcomm` である。
+任意の（非可換）環 `R` の上の同じ式（`[a b, c] = a [b, c]₊ - [a, c]₊ b` と、その Lie 括弧の形）は
+必要十分版 `Ising2D/NecSuf/CommutatorViaAnticommutators.lean` の `NecSuf.commutator_via_anticommutators'`・
+`NecSuf.lie_mul_eq_acomm'_sub_acomm'` にある。反交換子 `acomm` とその双線型性は、具体版の補題
+（`ClaimAnticommutatorHatZHatY.lean` など）が使うのでこのファイルに置く。必要十分版の側の同じ式
+`NecSuf.acomm'` との一致は導出 `ClaimCommutatorViaAnticommutatorsFromNecSuf.lean` が述べる。
 -/
 import Mathlib.Algebra.Algebra.Basic
 import Mathlib.Algebra.BigOperators.Ring.Finset
-import Mathlib.Algebra.Lie.OfAssociative
 import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Matrix.Basic
-import Mathlib.Tactic.NoncommRing
 
 namespace Ising2D
 
@@ -41,26 +40,6 @@ theorem acomm_def (a b : R) : acomm a b = a * b + b * a := rfl
 /-- 反交換子は対称。 -/
 theorem acomm_comm (a b : R) : acomm a b = acomm b a := by
   simp [acomm, add_comm]
-
-/-- 原文の交換子 `[x, y] := x y - y x` は mathlib の Lie 括弧と一致する。 -/
-theorem sub_mul_comm_eq_lie (a b : R) : a * b - b * a = ⁅a, b⁆ :=
-  (Ring.lie_def a b).symm
-
-/-- 任意の環 `R` の上の `[a b, c] = a [b, c]₊ - [a, c]₊ b`（本文 `commutator_via_anticommutators` の具体版は下の
-`matComm_mul_eq_matAcomm_sub_matAcomm`）。
-
-原文の証明（右辺を反交換子の定義で展開し、分配律・結合律で整理する）と同じ内容を
-`noncomm_ring`（非可換環の正規化）で実行する。 -/
-theorem commutator_via_anticommutators (a b c : R) :
-    (a * b) * c - c * (a * b) = a * acomm b c - acomm a c * b := by
-  simp only [acomm]
-  noncomm_ring
-
-/-- 上を mathlib の Lie 括弧で述べた版。 -/
-theorem lie_mul_eq_acomm_sub_acomm (a b c : R) :
-    ⁅a * b, c⁆ = a * acomm b c - acomm a c * b := by
-  rw [← sub_mul_comm_eq_lie]
-  exact commutator_via_anticommutators a b c
 
 end Ring
 
@@ -105,21 +84,10 @@ theorem acomm_sum_smul (c : ι → S) (d : κ → S) (x : ι → R) (y : κ → 
 
 end Bilinear
 
-section Matrix
-
-variable {n : Type*} [Fintype n] [DecidableEq n]
-
-/-- 原文の記法（`Mat(n, ℂ)` の元 `a, b, c`）に沿った系。 -/
-theorem matrix_commutator_via_anticommutators (a b c : Matrix n n ℂ) :
-    (a * b) * c - c * (a * b) = a * (b * c + c * b) - (a * c + c * a) * b :=
-  commutator_via_anticommutators a b c
-
-end Matrix
-
 /-! ## 原文と 1 対 1 に対応する具体版（複素行列）
 
-`exact-solution-of-2d-ising-model/README.md` 4 節の方針にしたがい、上の必要十分版
-（任意の環 `R`）とは別に、**人手証明 `<commutator_via_anticommutators>` と 1 対 1 に
+`exact-solution-of-2d-ising-model/README.md` 4 節の方針にしたがい、必要十分版
+（任意の環 `R`。`NecSuf/CommutatorViaAnticommutators.lean`）とは別に、**人手証明 `<commutator_via_anticommutators>` と 1 対 1 に
 対応する形**をここで立てる。原文は
 
 > `n ∈ ℤ_{≥1}`、`a, b, c ∈ Mat(n, ℂ)`、
@@ -128,9 +96,9 @@ end Matrix
 
 であり、`Mat(n, ℂ)` は `Matrix (Fin n) (Fin n) ℂ` である。
 交換子・反交換子も、原文と同じく**複素行列に対する演算として**定義し直す
-（必要十分版の `acomm` は任意の環の上の演算なので、記法としては原文と一致しない）。
+（任意の環の上の `acomm` は、記法としては原文と一致しない）。
 
-仮定 `1 ≤ n` は**証明では使わない**。必要十分版から分かるとおりこの恒等式は分配律と
+仮定 `1 ≤ n` は**証明では使わない**。この恒等式は分配律と
 結合律だけで従うので、`n = 0`（自明な零環）でも成り立つ。原文との対応を明示するために
 引数としては残してある。 -/
 section ConcreteMatrix
@@ -149,20 +117,28 @@ theorem matComm_def (x y : Matrix (Fin n) (Fin n) ℂ) : matComm x y = x * y - y
 @[simp]
 theorem matAcomm_def (x y : Matrix (Fin n) (Fin n) ℂ) : matAcomm x y = x * y + y * x := rfl
 
-/-- 複素行列に対する交換子・反交換子が、必要十分版の対応物と一致すること
-（具体版を必要十分版の特殊化として導くための橋渡し）。 -/
+/-- 複素行列の反交換子 `matAcomm` は、任意の環の上の反交換子 `acomm` を複素行列に当てはめたものと一致する。 -/
 theorem matAcomm_eq_acomm (x y : Matrix (Fin n) (Fin n) ℂ) : matAcomm x y = acomm x y := rfl
 
 /-- **`<commutator_via_anticommutators>` の具体版（原文と 1 対 1 に対応する形）**:
 `n ∈ ℤ_{≥1}`、`a, b, c ∈ Mat(n, ℂ)` について `[a b, c] = a [b, c]₊ - [a, c]₊ b`。
 
-証明は必要十分版 `commutator_via_anticommutators` を `R := Matrix (Fin n) (Fin n) ℂ` へ
-特殊化するだけである。 -/
+証明は人手証明の 6 段の鎖と同じ段の `calc` である。 -/
 theorem matComm_mul_eq_matAcomm_sub_matAcomm (_hn : 1 ≤ n)
     (a b c : Matrix (Fin n) (Fin n) ℂ) :
     matComm (a * b) c = a * matAcomm b c - matAcomm a c * b := by
-  rw [matComm_def, matAcomm_eq_acomm, matAcomm_eq_acomm]
-  exact commutator_via_anticommutators a b c
+  calc matComm (a * b) c
+      = (a * b) * c - c * (a * b) := matComm_def _ _                          -- 交換子の定義
+    _ = a * (b * c) - c * a * b := by
+        rw [Matrix.mul_assoc a b c, ← Matrix.mul_assoc c a b]                -- 行列の積の結合律
+    _ = a * (b * c) + a * (c * b) - a * (c * b) - c * a * b := by
+        rw [add_sub_cancel_right]                                            -- acb - acb = O
+    _ = a * (b * c + c * b) - a * (c * b) - c * a * b := by
+        rw [Matrix.mul_add]                                                  -- 行列の積の分配律
+    _ = a * (b * c + c * b) - (a * c + c * a) * b := by
+        rw [sub_sub, Matrix.add_mul, Matrix.mul_assoc a c b]                 -- 行列の積の分配律（人手が括弧を書かない x - y - z = x - (y + z) と結合律も使う）
+    _ = a * matAcomm b c - matAcomm a c * b := by
+        rw [matAcomm_def, matAcomm_def]                                      -- 反交換子の定義
 
 end ConcreteMatrix
 

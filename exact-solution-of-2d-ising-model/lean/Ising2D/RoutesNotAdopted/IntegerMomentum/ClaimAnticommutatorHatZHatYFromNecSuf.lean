@@ -27,6 +27,7 @@
 `Z, Y` の具体形・指数関数の解析的性質は効いていない」ことが確認できる。
 -/
 import Ising2D.NecSuf.FourierClifford
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutatorsFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSumFromNecSuf
 import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimAnticommutatorHatZHatY
 
@@ -74,7 +75,7 @@ theorem acomm_hatZ_hatZ_same_of_necSuf (hM : M ≠ 0) {η : ℂ} (hη : η * η 
     split
     · exact hη
     · rw [one_mul]
-  rw [hatZ_eq_weighted_zetaM, hatZ_eq_weighted_zetaM,
+  rw [acomm_eq_acomm_necSuf, hatZ_eq_weighted_zetaM, hatZ_eq_weighted_zetaM,
     NecSuf.acomm_fourier_clifford hM (isPrimitiveRoot_zetaM hM) Z Z acomm_Z_Z_clifford
       (firstSign η) (firstSign η) huv (-μ) (-ν),
     deltaMod_eq_ite_neg]
@@ -83,7 +84,7 @@ theorem acomm_hatZ_hatZ_same_of_necSuf (hM : M ≠ 0) {η : ℂ} (hη : η * η 
 theorem acomm_hatY_hatY_of_necSuf (hM : M ≠ 0) (μ ν : ℤ) :
     acomm (hatY M μ) (hatY M ν)
       = (2 * (M : ℂ) * deltaMod M (μ + ν) 0) • (1 : TensorPow M) := by
-  rw [hatY_eq_weighted_zetaM, hatY_eq_weighted_zetaM,
+  rw [acomm_eq_acomm_necSuf, hatY_eq_weighted_zetaM, hatY_eq_weighted_zetaM,
     NecSuf.acomm_fourier_clifford hM (isPrimitiveRoot_zetaM hM) Y Y acomm_Y_Y_clifford
       (fun _ => (1 : ℂ)) (fun _ => (1 : ℂ)) (fun _ => one_mul 1) (-μ) (-ν),
     deltaMod_eq_ite_neg]
@@ -102,7 +103,7 @@ theorem acomm_hatZPlus_hatZMinus_of_necSuf (hM : M ≠ 0) (μ ν : ℤ) :
     by_cases hj : (j : ℕ) = 0
     · rw [firstSign_of_val_eq_zero hj, firstSign_of_val_eq_zero hj, if_pos hj, mul_one]
     · rw [firstSign_of_val_ne_zero hj, firstSign_of_val_ne_zero hj, if_neg hj, mul_one]
-  rw [hatZPlus_def, hatZMinus_def, hatZ_eq_weighted_zetaM, hatZ_eq_weighted_zetaM,
+  rw [acomm_eq_acomm_necSuf, hatZPlus_def, hatZMinus_def, hatZ_eq_weighted_zetaM, hatZ_eq_weighted_zetaM,
     NecSuf.acomm_fourier_clifford_flip hM (isPrimitiveRoot_zetaM hM) Z Z acomm_Z_Z_clifford
       (firstSign (-1 : ℂ)) (firstSign (1 : ℂ)) hflip (-μ) (-ν),
     deltaMod_eq_ite_neg]

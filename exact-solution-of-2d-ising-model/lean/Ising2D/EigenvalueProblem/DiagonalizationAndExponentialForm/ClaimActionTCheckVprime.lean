@@ -91,7 +91,7 @@ theorem lie_checkX_checkPsiDag (hM : M ≠ 0)
     have hiff : (checkIdx M (Fin.rev ν) = (M : ℤ) + 1 - checkIdx M j₀) ↔ (ν = j₀) := by
       rw [checkIdx_eq_rev_iff]
       exact ⟨fun hh => Fin.rev_injective hh, fun hh => by rw [hh]⟩
-    rw [h, if_congr hiff rfl rfl]
+    exact h.trans (by rw [if_congr hiff rfl rfl])
   · intro ν
     exact acomm_checkPsiDag_checkPsiDag K hM (checkIndex_checkIdx M ν)
       (checkIndex_checkIdx M j₀) (hga _ (checkIndex_checkIdx M ν))
@@ -120,7 +120,7 @@ theorem lie_checkX_checkPsi (hM : M ≠ 0)
       constructor
       · intro hh; rw [hh, Fin.rev_rev]
       · intro hh; rw [hh, Fin.rev_rev]
-    rw [h, if_congr hiff rfl rfl]
+    exact h.trans (by rw [if_congr hiff rfl rfl])
 
 /-! ## 人手証明 `action_of_T_check_Vprime_on_check_psi` の結論 -/
 

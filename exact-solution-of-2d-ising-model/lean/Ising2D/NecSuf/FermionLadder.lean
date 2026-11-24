@@ -22,7 +22,7 @@
 ## この主張に本質的に効いている構造（＝具体版が過剰な構造を要求していないかの検査）
 
 * Step 1 / Step 1' に効いているのは**恒等式 `[a b, c] = a [b,c]₊ - [a,c]₊ b`
-  （`Ising2D.commutator_via_anticommutators`、任意の環）と、反交換子の値が
+  （`commutator_via_anticommutators'`、任意の環）と、反交換子の値が
   「係数のスカラー倍の `1`」であることだけ**である。
   `ψ̌` の具体形（`Ž, Y̌` の線型結合）も、複素行列であることも、テンソル冪であることも、
   `M`・`γ_2`・`θ̃` も一切効いていない。
@@ -41,7 +41,7 @@
 `d : ι → A` が生成演算子（原文の `ψ̌^†`）、`e : ι → A` が消滅演算子（原文の `ψ̌`）、
 `σ : ι → ι` が対になる添字の対合（原文の `μ ↦ M+1-μ`）である。
 -/
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
+import Ising2D.NecSuf.CommutatorViaAnticommutators
 import Mathlib.Algebra.Algebra.Basic
 import Mathlib.Tactic.NoncommRing
 
@@ -55,18 +55,18 @@ variable {S A : Type*} [CommRing S] [Ring A] [Algebra S A]
 
 仮定は反交換子 2 本だけ（`[a, c]₊ = δ·1`, `[d, c]₊ = 0`）。 -/
 theorem lie_creAnn_cre (d a c : A) (δ : S)
-    (hac : acomm a c = δ • (1 : A)) (hdc : acomm d c = 0) :
+    (hac : acomm' a c = δ • (1 : A)) (hdc : acomm' d c = 0) :
     (d * a) * c - c * (d * a) = δ • d := by
-  rw [commutator_via_anticommutators, hac, hdc, zero_mul, sub_zero,
+  rw [commutator_via_anticommutators', hac, hdc, zero_mul, sub_zero,
     mul_smul_comm, mul_one]
 
 /-- **人手証明 Step 1' の必要十分版**: `[d · a, b] = -(δ · a)`。
 
 仮定は反交換子 2 本だけ（`[a, b]₊ = 0`, `[d, b]₊ = δ·1`）。 -/
 theorem lie_creAnn_ann (d a b : A) (δ : S)
-    (hab : acomm a b = 0) (hdb : acomm d b = δ • (1 : A)) :
+    (hab : acomm' a b = 0) (hdb : acomm' d b = δ • (1 : A)) :
     (d * a) * b - b * (d * a) = -(δ • a) := by
-  rw [commutator_via_anticommutators, hab, hdb, mul_zero, zero_sub,
+  rw [commutator_via_anticommutators', hab, hdb, mul_zero, zero_sub,
     smul_mul_assoc, one_mul]
 
 /-! ## Step 2 / Step 2': 和との交換子 -/
@@ -81,8 +81,8 @@ def carHam (g : ι → S) (d e : ι → A) (σ : ι → ι) (κ : S) : A :=
 
 /-- **人手証明 Step 2 の必要十分版**: `[X̌, d μ] = g μ · d μ`。 -/
 theorem lie_carHam_cre (g : ι → S) (d e : ι → A) (σ : ι → ι) (κ : S) (μ : ι)
-    (hed : ∀ ν : ι, acomm (e (σ ν)) (d μ) = (if ν = μ then (1 : S) else 0) • (1 : A))
-    (hdd : ∀ ν : ι, acomm (d ν) (d μ) = 0) :
+    (hed : ∀ ν : ι, acomm' (e (σ ν)) (d μ) = (if ν = μ then (1 : S) else 0) • (1 : A))
+    (hdd : ∀ ν : ι, acomm' (d ν) (d μ) = 0) :
     carHam g d e σ κ * d μ - d μ * carHam g d e σ κ = g μ • d μ := by
   have hterm : ∀ ν : ι,
       (g ν • (d ν * e (σ ν) - κ • (1 : A))) * d μ
@@ -113,8 +113,8 @@ theorem lie_carHam_cre (g : ι → S) (d e : ι → A) (σ : ι → ι) (κ : S)
 これは原文の `periodicity_of_check_fermi` (3)（`γ(θ̃_{M+1-μ}) = γ(θ̃_μ)`）にあたる。 -/
 theorem lie_carHam_ann (g : ι → S) (d e : ι → A) (σ : ι → ι) (κ : S) (μ : ι)
     (hσ : σ (σ μ) = μ) (hg : g (σ μ) = g μ)
-    (hee : ∀ ν : ι, acomm (e (σ ν)) (e μ) = 0)
-    (hde : ∀ ν : ι, acomm (d ν) (e μ) = (if ν = σ μ then (1 : S) else 0) • (1 : A)) :
+    (hee : ∀ ν : ι, acomm' (e (σ ν)) (e μ) = 0)
+    (hde : ∀ ν : ι, acomm' (d ν) (e μ) = (if ν = σ μ then (1 : S) else 0) • (1 : A)) :
     carHam g d e σ κ * e μ - e μ * carHam g d e σ κ = -(g μ • e μ) := by
   have hterm : ∀ ν : ι,
       (g ν • (d ν * e (σ ν) - κ • (1 : A))) * e μ

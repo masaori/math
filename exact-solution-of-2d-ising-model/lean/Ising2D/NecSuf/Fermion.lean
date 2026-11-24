@@ -32,7 +32,7 @@
 第 1 係数の符号だけが反転する形になるのは、原文 `def_fermi` の
 `±i√(γ_2(θ_μ)γ_2(-θ_μ))` の複号がそこにしか現れないからである。
 -/
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
+import Ising2D.NecSuf.CommutatorViaAnticommutators
 import Mathlib.Algebra.Algebra.Basic
 import Mathlib.Tactic.Module
 
@@ -44,10 +44,10 @@ variable {S A : Type*} [CommRing S] [Ring A] [Algebra S A]
 
 係数環 `S` は任意の可換環でよく、台 `A` は任意の環でよい。 -/
 theorem acomm_lincomb (p q p' q' : S) (z y z' y' : A) :
-    acomm (p • z + q • y) (p' • z' + q' • y')
-      = (p * p') • acomm z z' + (p * q') • acomm z y'
-        + (q * p') • acomm y z' + (q * q') • acomm y y' := by
-  simp only [acomm, add_mul, mul_add, smul_add, smul_mul_assoc, mul_smul_comm, smul_smul]
+    acomm' (p • z + q • y) (p' • z' + q' • y')
+      = (p * p') • acomm' z z' + (p * q') • acomm' z y'
+        + (q * p') • acomm' y z' + (q * q') • acomm' y y' := by
+  simp only [acomm', add_mul, mul_add, smul_add, smul_mul_assoc, mul_smul_comm, smul_smul]
   module
 
 /-- **必要十分版の本体**: `z, y, z', y'` が
@@ -56,9 +56,9 @@ theorem acomm_lincomb (p q p' q' : S) (z y z' y' : A) :
 
 原文 `anticommutator_of_psi` の a), b), c) の計算はすべてこの 1 本に帰着する。 -/
 theorem acomm_lincomb_clifford (p q p' q' D : S) (z y z' y' : A)
-    (hzz : acomm z z' = D • (1 : A)) (hzy : acomm z y' = 0)
-    (hyz : acomm y z' = 0) (hyy : acomm y y' = D • (1 : A)) :
-    acomm (p • z + q • y) (p' • z' + q' • y') = ((p * p' + q * q') * D) • (1 : A) := by
+    (hzz : acomm' z z' = D • (1 : A)) (hzy : acomm' z y' = 0)
+    (hyz : acomm' y z' = 0) (hyy : acomm' y y' = D • (1 : A)) :
+    acomm' (p • z + q • y) (p' • z' + q' • y') = ((p * p' + q * q') * D) • (1 : A) := by
   rw [acomm_lincomb, hzz, hzy, hyz, hyy, smul_zero, smul_zero, add_zero, add_zero,
     smul_smul, smul_smul, ← add_smul]
   congr 1
@@ -69,13 +69,13 @@ theorem acomm_lincomb_clifford (p q p' q' D : S) (z y z' y' : A)
 必要な仮定は 4 本の反交換関係のほかには、**係数についてのスカラー恒等式 2 本だけ**である:
 `hzero`（消える方）と `hone`（残る方）。 -/
 theorem car_of_coeffs (p q p' q' D δ : S) (z y z' y' : A)
-    (hzz : acomm z z' = D • (1 : A)) (hzy : acomm z y' = 0)
-    (hyz : acomm y z' = 0) (hyy : acomm y y' = D • (1 : A))
+    (hzz : acomm' z z' = D • (1 : A)) (hzy : acomm' z y' = 0)
+    (hyz : acomm' y z' = 0) (hyy : acomm' y y' = D • (1 : A))
     (hzero : (p * p' + q * q') * D = 0)
     (hone : (-(p * p') + q * q') * D = δ) :
-    acomm (p • z + q • y) (p' • z' + q' • y') = 0
-      ∧ acomm (p • z + q • y) ((-p') • z' + q' • y') = δ • (1 : A)
-      ∧ acomm ((-p) • z + q • y) ((-p') • z' + q' • y') = 0 := by
+    acomm' (p • z + q • y) (p' • z' + q' • y') = 0
+      ∧ acomm' (p • z + q • y) ((-p') • z' + q' • y') = δ • (1 : A)
+      ∧ acomm' ((-p) • z + q • y) ((-p') • z' + q' • y') = 0 := by
   refine ⟨?_, ?_, ?_⟩
   · rw [acomm_lincomb_clifford p q p' q' D z y z' y' hzz hzy hyz hyy, hzero, zero_smul]
   · rw [acomm_lincomb_clifford p q (-p') q' D z y z' y' hzz hzy hyz hyy]

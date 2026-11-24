@@ -408,40 +408,6 @@ DEP	concrete	Ising2D.trace_smul_tensorPow
 DEP	concrete	Ising2D.vecNormSq_absVec_eq
 DEP	concrete	Ising2D.xString_conjTranspose
 DEP	concrete	Ising2D.zy_step6_prep_t
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.acomm_y_y
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.acomm_y_z
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.acomm_y_z'
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.acomm_z'_y
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.acomm_z_y
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.acomm_z_z
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.acomm_z_z'
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.lie_sum_yz_y
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.lie_sum_yz_z
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.lie_sum_yz_z'
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.lie_sum_zy_y
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.lie_sum_zy_z
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.lie_sum_zy_z'
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.mk
-DEP	necsuf	Ising2D.NecSuf.CliffordTriple.mk.sizeOf_spec
-DEP	necsuf	Ising2D.NecSuf.acomm_antiperiodic_fourier_clifford
-DEP	necsuf	Ising2D.NecSuf.acomm_fourier_clifford
-DEP	necsuf	Ising2D.NecSuf.acomm_fourier_clifford_flip
-DEP	necsuf	Ising2D.NecSuf.acomm_fourier_clifford_weights
-DEP	necsuf	Ising2D.NecSuf.acomm_jwStr
-DEP	necsuf	Ising2D.NecSuf.acomm_lincomb
-DEP	necsuf	Ising2D.NecSuf.acomm_lincomb_clifford
-DEP	necsuf	Ising2D.NecSuf.acomm_of_single_site
-DEP	necsuf	Ising2D.NecSuf.acomm_sum_smul_clifford_left
-DEP	necsuf	Ising2D.NecSuf.acomm_sum_smul_clifford_necSuf
-DEP	necsuf	Ising2D.NecSuf.car_of_coeffs
-DEP	necsuf	Ising2D.NecSuf.lie_carHam_ann
-DEP	necsuf	Ising2D.NecSuf.lie_carHam_cre
-DEP	necsuf	Ising2D.NecSuf.lie_creAnn_ann
-DEP	necsuf	Ising2D.NecSuf.lie_creAnn_cre
-DEP	necsuf	Ising2D.NecSuf.lie_mul_of_acomm_smul_one
-DEP	necsuf	Ising2D.NecSuf.lie_sum_smul_mul_of_acomm_smul_one
-DEP	necsuf	Ising2D.NecSuf.linearIndependent_of_clifford_necSuf
 DEP	necsuf	Ising2D.NecSuf.rayleighSup_eq_sectorRayleighSup_pos
 DEP	necsuf	Ising2D.NecSuf.sectorRayleighSup_neg_le_pos
 DEP	necsuf	Ising2D.NecSuf.sectorRayleighSup_nonneg
@@ -646,10 +612,4 @@ IMPORT	concrete	Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPart
 IMPORT	concrete	Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPartitionFunctionSandwich	derivation	Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfNegativeIsLeftInverseFromNecSuf
 IMPORT	concrete	Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPartitionFunctionSandwich	derivation	Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimCongruencePreservesPositiveDefiniteFromNecSuf
 IMPORT	concrete	Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPartitionFunctionSandwich	derivation	Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
-IMPORT	necsuf	Ising2D.NecSuf.CliffordIndependence	concrete	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
-IMPORT	necsuf	Ising2D.NecSuf.CommutatorClifford	concrete	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
-IMPORT	necsuf	Ising2D.NecSuf.Fermion	concrete	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
-IMPORT	necsuf	Ising2D.NecSuf.FermionLadder	concrete	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
-IMPORT	necsuf	Ising2D.NecSuf.FourierClifford	concrete	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 IMPORT	necsuf	Ising2D.NecSuf.PermSector	concrete	Ising2D.RoutesNotAdopted.MinusSector.ClaimRayleighSupSectorDecomposition
-IMPORT	necsuf	Ising2D.NecSuf.SiteLocalAnticomm	concrete	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators

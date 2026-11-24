@@ -44,6 +44,7 @@
 -/
 import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionFermiPsi
 import Ising2D.NecSuf.Fermion
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutatorsFromNecSuf
 
 namespace Ising2D
 
@@ -173,7 +174,7 @@ theorem acomm_psiDag_psiDag_of_opposite_branch (hM : M ≠ 0)
   have hqq : (1 : ℂ) / (2 * sqrtM M) * ((1 : ℂ) / (2 * sqrtM M)) = 1 / (4 * (M : ℂ)) := by
     rw [div_mul_div_comm, show (2 * sqrtM M) * (2 * sqrtM M) = 4 * sqrtM M ^ 2 by ring, hsq]
     norm_num
-  rw [psiDag_eq K M μ tμ, psiDag_eq K M ν tν,
+  rw [acomm_eq_acomm_necSuf, psiDag_eq K M μ tμ, psiDag_eq K M ν tν,
     NecSuf.acomm_lincomb_clifford _ _ _ _ (2 * (M : ℂ) * deltaMod M (μ + ν) 0) _ _ _ _
       (acomm_hatZMinus_hatZMinus hM μ ν)
       (acomm_hatZ_hatY (M := M) 1 μ ν)
@@ -212,7 +213,7 @@ theorem acomm_psiDag_psi_of_opposite_branch (hM : M ≠ 0)
   have hqq : (1 : ℂ) / (2 * sqrtM M) * ((1 : ℂ) / (2 * sqrtM M)) = 1 / (4 * (M : ℂ)) := by
     rw [div_mul_div_comm, show (2 * sqrtM M) * (2 * sqrtM M) = 4 * sqrtM M ^ 2 by ring, hsq]
     norm_num
-  rw [psiDag_eq K M μ tμ, psi_eq_neg_coeff K ν tν,
+  rw [acomm_eq_acomm_necSuf, psiDag_eq K M μ tμ, psi_eq_neg_coeff K ν tν,
     NecSuf.acomm_lincomb_clifford _ _ _ _ (2 * (M : ℂ) * deltaMod M (μ + ν) 0) _ _ _ _
       (acomm_hatZMinus_hatZMinus hM μ ν)
       (acomm_hatZ_hatY (M := M) 1 μ ν)

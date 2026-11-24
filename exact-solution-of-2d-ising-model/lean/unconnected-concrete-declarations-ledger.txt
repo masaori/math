@@ -631,7 +631,6 @@ Ising2D.lambdaPlusR_ne_lambdaMinusR
 Ising2D.lambda_mul_lambda_thetaTilde
 Ising2D.lambda_separation
 Ising2D.lastSign_one
-Ising2D.lie_mul_eq_acomm_sub_acomm
 Ising2D.linearIndependent_of_clifford
 Ising2D.linear_combination_of_subspace_elements_stays_in_subspace
 Ising2D.linear_combination_splits_into_two_blocks
@@ -678,7 +677,6 @@ Ising2D.matrix_add_smul
 Ising2D.matrix_add_smul_apply
 Ising2D.matrix_add_sub_cancel
 Ising2D.matrix_add_sub_cancel_apply
-Ising2D.matrix_commutator_via_anticommutators
 Ising2D.matrix_commuting_with_each_factor_commutes_with_finite_product
 Ising2D.matrix_conjTranspose_add_smul
 Ising2D.matrix_conjTranspose_add_smul_apply
@@ -907,7 +905,6 @@ Ising2D.star_kroneckerDelta
 Ising2D.step6_bound
 Ising2D.sub_mulVec_eq
 Ising2D.sub_mulVec_eq_apply
-Ising2D.sub_mul_comm_eq_lie
 Ising2D.subspace_has_basis
 Ising2D.suffixLetterIndicator
 Ising2D.suffixLetterIndicator_eq

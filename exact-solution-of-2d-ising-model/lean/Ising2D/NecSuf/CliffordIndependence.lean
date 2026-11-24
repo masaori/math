@@ -28,7 +28,7 @@
 `Z, Y` の具体形（Jordan–Wigner 文字列）、台の可換性、有限次元性、係数環が体であること。
 係数は任意の可換環でよく、台は任意の環でよい。
 -/
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
+import Ising2D.NecSuf.CommutatorViaAnticommutators
 import Mathlib.LinearAlgebra.LinearIndependent.Defs
 
 namespace Ising2D.NecSuf
@@ -41,10 +41,10 @@ variable {S A : Type*} [CommRing S] [Ring A] [Algebra S A]
 `[∑ₐ gₐ eₐ, e_b]₊ = ∑ₐ gₐ [eₐ, e_b]₊ = (g_b · 2) · 1`。 -/
 theorem acomm_sum_smul_clifford_left {ι : Type*} [Fintype ι] [DecidableEq ι]
     (e : ι → A) (g : ι → S)
-    (hcl : ∀ a b, acomm (e a) (e b) = (if a = b then (2 : S) else 0) • (1 : A))
-    (b : ι) : acomm (∑ a, g a • e a) (e b) = (g b * 2) • (1 : A) := by
+    (hcl : ∀ a b, acomm' (e a) (e b) = (if a = b then (2 : S) else 0) • (1 : A))
+    (b : ι) : acomm' (∑ a, g a • e a) (e b) = (g b * 2) • (1 : A) := by
   classical
-  rw [acomm_sum_smul_left, Finset.sum_eq_single_of_mem b (Finset.mem_univ b)]
+  rw [acomm'_sum_smul_left, Finset.sum_eq_single_of_mem b (Finset.mem_univ b)]
   · rw [hcl, if_pos rfl, smul_smul]
   · intro a _ hab
     rw [hcl, if_neg hab, zero_smul, smul_zero]
@@ -55,7 +55,7 @@ theorem acomm_sum_smul_clifford_left {ι : Type*} [Fintype ι] [DecidableEq ι]
 だけである（台が行列であることも、係数が複素数であることも使わない）。 -/
 theorem linearIndependent_of_clifford_necSuf {ι : Type*} [Fintype ι] [DecidableEq ι]
     (e : ι → A)
-    (hcl : ∀ a b, acomm (e a) (e b) = (if a = b then (2 : S) else 0) • (1 : A))
+    (hcl : ∀ a b, acomm' (e a) (e b) = (if a = b then (2 : S) else 0) • (1 : A))
     (hfaithful : ∀ s : S, s • (1 : A) = 0 → s = 0)
     (hregular : ∀ s : S, s * 2 = 0 → s = 0) :
     LinearIndependent S e := by
@@ -64,7 +64,7 @@ theorem linearIndependent_of_clifford_necSuf {ι : Type*} [Fintype ι] [Decidabl
   intro g hg b
   have hsum := acomm_sum_smul_clifford_left e g hcl b
   have hzero : (g b * 2) • (1 : A) = 0 := by
-    rw [← hsum, hg, acomm, zero_mul, mul_zero, add_zero]
+    rw [← hsum, hg, acomm', zero_mul, mul_zero, add_zero]
   exact hregular _ (hfaithful _ hzero)
 
 end Ising2D.NecSuf

@@ -15,6 +15,7 @@
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSumFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutatorsFromNecSuf
 
 namespace Ising2D
 
@@ -41,7 +42,7 @@ theorem acomm_checkZ_checkZ_of_necSuf (hM : M ≠ 0) (μ ν : ℤ) :
       = (2 * (M : ℂ) * deltaMod M (μ + ν) 1) • (1 : TensorPow M) := by
   have hξ : IsPrimitiveRoot (expPhase (2 * M) 1) (2 * M) :=
     isPrimitiveRoot_expPhase_one (by omega)
-  rw [checkZ_eq_zpow_sum hM μ, checkZ_eq_zpow_sum hM ν,
+  rw [acomm_eq_acomm_necSuf, checkZ_eq_zpow_sum hM μ, checkZ_eq_zpow_sum hM ν,
     NecSuf.acomm_antiperiodic_fourier_clifford (K := ℂ) hM hξ Z Z acomm_Z_Z_clifford μ ν,
     deltaMod]
 
@@ -52,7 +53,7 @@ theorem acomm_checkY_checkY_of_necSuf (hM : M ≠ 0) (μ ν : ℤ) :
       = (2 * (M : ℂ) * deltaMod M (μ + ν) 1) • (1 : TensorPow M) := by
   have hξ : IsPrimitiveRoot (expPhase (2 * M) 1) (2 * M) :=
     isPrimitiveRoot_expPhase_one (by omega)
-  rw [checkY_eq_zpow_sum hM μ, checkY_eq_zpow_sum hM ν,
+  rw [acomm_eq_acomm_necSuf, checkY_eq_zpow_sum hM μ, checkY_eq_zpow_sum hM ν,
     NecSuf.acomm_antiperiodic_fourier_clifford (K := ℂ) hM hξ Y Y acomm_Y_Y_clifford μ ν,
     deltaMod]
 

@@ -3623,9 +3623,6 @@ Ising2D.cols_mul_diagonal_matrix	Matrix.of
 Ising2D.column_entry_mul_offdiag_eq_zero	Matrix
 Ising2D.comm_smul_smul	Bracket.bracket@Ising2D.TensorPow,Ising2D.TensorPow@Ring.instBracket
 Ising2D.comm_smul_smul	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
-Ising2D.commutator_via_anticommutators	HMul.hMul@?,?,?@instDistribOfSemiring
-Ising2D.commutator_via_anticommutators	HSub.hSub@?,?,?@AddGroupWithOne.toAddGroup
-Ising2D.commutator_via_anticommutators	Ring
 Ising2D.commute_V1PauliForm_epsProj	Commute@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid
 Ising2D.commute_V1_epsProj	Commute@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid
 Ising2D.commute_V1_epsProjPlus	Commute@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid
@@ -5981,10 +5978,6 @@ Ising2D.lie_checkX_checkPsiDag	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Mat
 Ising2D.lie_checkX_checkPsiDag	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.lie_checkX_checkPsiDag	HSub.hSub@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.sub
 Ising2D.lie_checkX_checkPsiDag	Matrix
-Ising2D.lie_mul_eq_acomm_sub_acomm	Bracket.bracket@?,?@Ring.instBracket
-Ising2D.lie_mul_eq_acomm_sub_acomm	HMul.hMul@?,?,?@instDistribOfSemiring
-Ising2D.lie_mul_eq_acomm_sub_acomm	HSub.hSub@?,?,?@AddGroupWithOne.toAddGroup
-Ising2D.lie_mul_eq_acomm_sub_acomm	Ring
 Ising2D.lie_sum_smul_left'	Bracket.bracket@Ising2D.TensorPow,Ising2D.TensorPow@Ring.instBracket
 Ising2D.lie_sum_smul_left'	Finset.sum@?,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.lie_sum_smul_left'	Finset.univ@?@?
@@ -6410,12 +6403,6 @@ Ising2D.matrix_centralizer_is_scalar	HMul.hMul@Matrix[Complex],Matrix[Complex],M
 Ising2D.matrix_centralizer_is_scalar	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.matrix_centralizer_is_scalar	Matrix
 Ising2D.matrix_centralizer_is_scalar	OfNat.ofNat@Matrix[Complex],1@One.toOfNat1
-Ising2D.matrix_commutator_via_anticommutators	DecidableEq
-Ising2D.matrix_commutator_via_anticommutators	Fintype
-Ising2D.matrix_commutator_via_anticommutators	HAdd.hAdd@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.add
-Ising2D.matrix_commutator_via_anticommutators	HMul.hMul@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
-Ising2D.matrix_commutator_via_anticommutators	HSub.hSub@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.sub
-Ising2D.matrix_commutator_via_anticommutators	Matrix
 Ising2D.matrix_commuting_with_each_factor_commutes_with_finite_product	HMul.hMul@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.matrix_commuting_with_each_factor_commutes_with_finite_product	Matrix
 Ising2D.matrix_conjTranspose_add_smul	HAdd.hAdd@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.add
@@ -8917,10 +8904,6 @@ Ising2D.sub_mulVec_eq_apply	HSub.hSub@Matrix[Complex],Matrix[Complex],Matrix[Com
 Ising2D.sub_mulVec_eq_apply	HSub.hSub@→,→,→@Pi.instSub
 Ising2D.sub_mulVec_eq_apply	Matrix
 Ising2D.sub_mulVec_eq_apply	Matrix.mulVec@Fin,Fin,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Fin.fintype
-Ising2D.sub_mul_comm_eq_lie	Bracket.bracket@?,?@Ring.instBracket
-Ising2D.sub_mul_comm_eq_lie	HMul.hMul@?,?,?@instDistribOfSemiring
-Ising2D.sub_mul_comm_eq_lie	HSub.hSub@?,?,?@AddGroupWithOne.toAddGroup
-Ising2D.sub_mul_comm_eq_lie	Ring
 Ising2D.subspace_has_basis	Fintype
 Ising2D.subspace_has_basis	Fintype.card@?@?
 Ising2D.subspace_has_basis	Matrix

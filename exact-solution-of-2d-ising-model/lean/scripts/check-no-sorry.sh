@@ -270,9 +270,11 @@ targets=(
   Ising2D.V1_generators_pow_mulVec_eq
   Ising2D.V1_generator_partialSums_mulVec_eq
   Ising2D.V1_mulVec_eq_V1pm
-  Ising2D.commutator_via_anticommutators
-  Ising2D.lie_mul_eq_acomm_sub_acomm
-  Ising2D.matrix_commutator_via_anticommutators
+  "Ising2D.NecSuf.commutator_via_anticommutators'"
+  "Ising2D.NecSuf.lie_mul_eq_acomm'_sub_acomm'"
+  "Ising2D.NecSuf.acomm'_sum_smul"
+  Ising2D.acomm_eq_acomm_necSuf
+  Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm_of_necSuf
   Ising2D.sum_smul_mul_sum_smul
   Ising2D.acomm_sum_smul_left
   Ising2D.acomm_sum_smul

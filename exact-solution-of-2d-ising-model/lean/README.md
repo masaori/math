@@ -368,7 +368,7 @@ cd exact-solution-of-2d-ising-model/lean
 
 | 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
-| `<commutator_via_anticommutators>` | `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm`（`Mat(n, ℂ)`） | `Ising2D.commutator_via_anticommutators`（任意の環） |
+| `<commutator_via_anticommutators>` | `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm`（`Mat(n, ℂ)`。必要十分版からの導出は `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm_of_necSuf`） | `Ising2D.NecSuf.commutator_via_anticommutators'`（任意の環。`NecSuf/CommutatorViaAnticommutators.lean`） |
 | `<matrix_difference_zero_iff_equal>` | `Ising2D.matrix_sub_eq_zero_iff` / `vec_sub_eq_zero_iff`（`Mat(m,p,ℂ)` と `ℂ^m`。必要十分版からの導出は `Ising2D.matrix_sub_eq_zero_iff_of_necSuf` / `vec_sub_eq_zero_iff_of_necSuf`） | `Ising2D.NecSuf.sub_eq_zero_iff_matrix` / `sub_eq_zero_iff_vec`（係数は加法群。`NecSuf/MatrixVectorIdentityScalarDifference.lean`） |
 | `<identity_matrix_is_left_unit_of_mat_mult>`（右の因子が数ベクトルの場合） | `Ising2D.identity_matrix_mulVec`（必要十分版からの導出は `Ising2D.identity_matrix_mulVec_of_necSuf`） | `Ising2D.NecSuf.one_mulVec_eq`（係数は `NonAssocSemiring`、添字は等号を判定できる任意の有限型） |
 | `<scalar_multiple_factors_out_of_left_factor>`（右の因子が数ベクトルの場合） | `Ising2D.smul_mulVec_eq`（必要十分版からの導出は `Ising2D.smul_mulVec_eq_of_necSuf`） | `Ising2D.NecSuf.smul_mulVec_eq'`（係数は `NonUnitalSemiring`。乗法の可換律は効かず、結合律は外せない `Ising2D.NecSuf.mul_assoc_of_smul_mulVec`） |
@@ -873,8 +873,9 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.Conjugation.T_comp` | `T_A ∘ T_B = T_{AB}` | `<conjugation_is_ring_homomorphism>` (3) |
 | `Ising2D.Conjugation.TMonoidHom` | `B ↦ T_B` は群準同型 `Rˣ →* RingAut R` | (3) の言い換え |
 | `Ising2D.Conjugation.matrix_conj_*` | 一般の環の版を `Matrix.inv` の記法で述べた版（人手と 1 対 1 ではない。1 対 1 は上の `conj_*_matrix`） | 原文の記法に寄せた版 |
-| `Ising2D.acomm` / `Ising2D.commutator_via_anticommutators` | `[a b, c] = a [b,c]₊ - [a,c]₊ b`（任意の環） | `<commutator_via_anticommutators>` |
-| `Ising2D.matrix_commutator_via_anticommutators` | 同上を `Mat(n, ℂ)` で述べた版 | 同上 |
+| `Ising2D.acomm` / `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm` | 反交換子 `[a, b]₊ = a b + b a`（任意の環）と、`Mat(n, ℂ)` の `[a b, c] = a [b,c]₊ - [a,c]₊ b` | `<commutator_via_anticommutators>` |
+| `Ising2D.NecSuf.acomm'` / `acomm'_comm` / `commutator_via_anticommutators'` / `lie_mul_eq_acomm'_sub_acomm'` / `acomm'_sum_smul_left` / `acomm'_sum_smul`（`CommutatorViaAnticommutators.lean`） | 反交換子とその性質、`[a b, c] = a [b,c]₊ - [a,c]₊ b` を、具体版と同じ式で必要十分版の側に置いたもの（`commutator_via_anticommutators'` の証明は `noncomm_ring` による正規化で、具体版は人手証明の 6 段の `calc`。ほかは同じ手順）（任意の環。反交換子を使う必要十分版が具体版を参照しないため） | 同上 |
+| `Ising2D.acomm_eq_acomm_necSuf` / `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm_of_necSuf`（`ClaimCommutatorViaAnticommutatorsFromNecSuf.lean`） | 具体版の `acomm` と必要十分版の `acomm'` の一致と、具体版の `[ab, c] = a[b,c]₊ - [a,c]₊b` を必要十分版の特殊化として得たもの（導出） | `<commutator_via_anticommutators>` |
 | `Ising2D.pauliX/pauliY/pauliZ` と積公式 | Pauli 行列とその積・反可換関係（`Z_Y_generate_algebra` の Step 1 の第 2 式・第 3 式は `pauliY_mul_pauliZ`・`pauliX_eq`。`(-i)i = 1_ℂ` は `complex_neg_I_mul_I`（`<negative_i_times_i_is_one_in_cc>`）） | `<def_pauli_matrices>`、`<pauli_matrix_products>`、`<Z_Y_generate_algebra>` Step 1 |
 | `Ising2D.siteOp` | `I ⊗ ⋯ ⊗ A(k) ⊗ ⋯ ⊗ I`（`Mat(2,ℂ) →ₗ[ℂ] TensorPow M`） | `<def_transfer_matrix_symbols>` の `σ^a_k` |
 | `Ising2D.sigmaX/sigmaY/sigmaZ` | `σ^x_k, σ^y_k, σ^z_k` | 同上 |

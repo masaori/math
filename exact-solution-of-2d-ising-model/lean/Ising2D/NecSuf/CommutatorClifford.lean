@@ -19,7 +19,7 @@
 そこで実際に効いているのは次の 2 つだけである。
 
 1. 恒等式 `[a b, c] = a [b, c]₊ - [a, c]₊ b`
-   （`Ising2D.lie_mul_eq_acomm_sub_acomm`、`<commutator_via_anticommutators>`）
+   （`lie_mul_eq_acomm'_sub_acomm'`、`<commutator_via_anticommutators>`）
 2. 反交換子が**係数環のスカラー倍の 1**（`α • 1`）になること。具体的には
    `[z_μ, z_ν]₊ = D_z(μ,ν) • 1`、`[z_μ, y_ν]₊ = 0`、`[y_μ, y_ν]₊ = D_y(μ,ν) • 1`
 
@@ -31,7 +31,7 @@
 **必要十分版は Lean の中だけに置く**（`exact-solution-of-2d-ising-model/README.md` 4 節）。
 人手証明の本文にも参照用ノートにも持ち込まない。
 -/
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
+import Ising2D.NecSuf.CommutatorViaAnticommutators
 
 namespace Ising2D.NecSuf
 
@@ -59,16 +59,16 @@ theorem lie_sum_smul_left {ι : Type*} [Fintype ι] (γ : ι → S) (x : ι → 
 
 人手証明が「反交換子の値を代入する」と書いている操作は、すべてこの形である。 -/
 theorem lie_mul_of_acomm_smul_one (a b c : A) (α β : S)
-    (ha : acomm a c = α • (1 : A)) (hb : acomm b c = β • (1 : A)) :
+    (ha : acomm' a c = α • (1 : A)) (hb : acomm' b c = β • (1 : A)) :
     ⁅a * b, c⁆ = β • a - α • b := by
-  rw [lie_mul_eq_acomm_sub_acomm, ha, hb, Algebra.mul_smul_comm, Algebra.smul_mul_assoc,
+  rw [lie_mul_eq_acomm'_sub_acomm', ha, hb, Algebra.mul_smul_comm, Algebra.smul_mul_assoc,
     mul_one, one_mul]
 
 /-- 上の有限線型結合版（人手証明の `H_1^{(±)}, H_2` は `1/M` 倍を除けばこの形）。 -/
 theorem lie_sum_smul_mul_of_acomm_smul_one {ι : Type*} [Fintype ι]
     (γ : ι → S) (a b : ι → A) (c : A) (α β : ι → S)
-    (ha : ∀ i, acomm (a i) c = α i • (1 : A))
-    (hb : ∀ i, acomm (b i) c = β i • (1 : A)) :
+    (ha : ∀ i, acomm' (a i) c = α i • (1 : A))
+    (hb : ∀ i, acomm' (b i) c = β i • (1 : A)) :
     ⁅∑ i, γ i • (a i * b i), c⁆ = ∑ i, (γ i * β i) • a i - ∑ i, (γ i * α i) • b i := by
   rw [lie_sum_smul_left, ← Finset.sum_sub_distrib]
   refine Finset.sum_congr rfl fun i _ => ?_
@@ -105,26 +105,26 @@ structure CliffordTriple (S : Type*) [CommSemiring S] (A : Type*) [Ring A] [Alge
   /-- `[y_a, y_b]₊` の値。 -/
   Dy : κ → κ → S
   /-- `[z_a, z_b]₊ = D_z(a,b) • 1`。 -/
-  acomm_z_z : ∀ a b, acomm (z a) (z b) = Dz a b • (1 : A)
+  acomm_z_z : ∀ a b, acomm' (z a) (z b) = Dz a b • (1 : A)
   /-- `[z_a, z'_b]₊ = D_{z'}(a,b) • 1`。 -/
-  acomm_z_z' : ∀ a b, acomm (z a) (z' b) = Dz' a b • (1 : A)
+  acomm_z_z' : ∀ a b, acomm' (z a) (z' b) = Dz' a b • (1 : A)
   /-- `[z_a, y_b]₊ = 0`。 -/
-  acomm_z_y : ∀ a b, acomm (z a) (y b) = 0
+  acomm_z_y : ∀ a b, acomm' (z a) (y b) = 0
   /-- `[z'_a, y_b]₊ = 0`。 -/
-  acomm_z'_y : ∀ a b, acomm (z' a) (y b) = 0
+  acomm_z'_y : ∀ a b, acomm' (z' a) (y b) = 0
   /-- `[y_a, y_b]₊ = D_y(a,b) • 1`。 -/
-  acomm_y_y : ∀ a b, acomm (y a) (y b) = Dy a b • (1 : A)
+  acomm_y_y : ∀ a b, acomm' (y a) (y b) = Dy a b • (1 : A)
 
 namespace CliffordTriple
 
 variable {S : Type*} [CommSemiring S] {A : Type*} [Ring A] [Algebra S A] {κ : Type*}
 variable (C : CliffordTriple S A κ)
 
-theorem acomm_y_z (a b : κ) : acomm (C.y a) (C.z b) = 0 := by
-  rw [acomm_comm]; exact C.acomm_z_y b a
+theorem acomm_y_z (a b : κ) : acomm' (C.y a) (C.z b) = 0 := by
+  rw [acomm'_comm]; exact C.acomm_z_y b a
 
-theorem acomm_y_z' (a b : κ) : acomm (C.y a) (C.z' b) = 0 := by
-  rw [acomm_comm]; exact C.acomm_z'_y b a
+theorem acomm_y_z' (a b : κ) : acomm' (C.y a) (C.z' b) = 0 := by
+  rw [acomm'_comm]; exact C.acomm_z'_y b a
 
 variable {ι : Type*} [Fintype ι] (γ : ι → S) (p q : ι → κ)
 

@@ -32,7 +32,7 @@
 `Z, Y` の具体形（Jordan–Wigner 文字列）、指数関数・円周率の解析的性質。
 -/
 import Ising2D.NecSuf.RootOfUnitySum
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
+import Ising2D.NecSuf.CommutatorViaAnticommutators
 
 namespace Ising2D.NecSuf
 
@@ -47,10 +47,10 @@ variable {S A : Type*} [CommRing S] [Ring A] [Algebra S A]
 `Ising2D.acomm_sum_smul_clifford` の係数環を ℂ から任意の可換環へ一般化した形。 -/
 theorem acomm_sum_smul_clifford_necSuf {ι : Type*} [Fintype ι] [DecidableEq ι]
     (c d : ι → S) (x y : ι → A)
-    (h : ∀ a b, acomm (x a) (y b) = (if a = b then (2 : S) else 0) • (1 : A)) :
-    acomm (∑ i, c i • x i) (∑ j, d j • y j) = (∑ i, c i * d i * 2) • (1 : A) := by
+    (h : ∀ a b, acomm' (x a) (y b) = (if a = b then (2 : S) else 0) • (1 : A)) :
+    acomm' (∑ i, c i • x i) (∑ j, d j • y j) = (∑ i, c i * d i * 2) • (1 : A) := by
   classical
-  rw [acomm_sum_smul, Finset.sum_smul]
+  rw [acomm'_sum_smul, Finset.sum_smul]
   refine Finset.sum_congr rfl fun i _ => ?_
   rw [Finset.sum_eq_single_of_mem i (Finset.mem_univ i)]
   · rw [h, if_pos rfl, smul_smul]
@@ -74,9 +74,9 @@ variable {K A : Type*} [Field K] [Ring A] [Algebra K A]
 結論には**両側の重みの積 `u_j v_j` しか現れない**。 -/
 theorem acomm_fourier_clifford_weights {M : ℕ} {ζ : K} (hζ0 : ζ ≠ 0)
     (x y : Fin M → A)
-    (h : ∀ a b, acomm (x a) (y b) = (if a = b then (2 : K) else 0) • (1 : A))
+    (h : ∀ a b, acomm' (x a) (y b) = (if a = b then (2 : K) else 0) • (1 : A))
     (u v : Fin M → K) (μ ν : ℤ) :
-    acomm (∑ j : Fin M, (u j * ζ ^ ((((j : ℕ) : ℤ) + 1) * μ)) • x j)
+    acomm' (∑ j : Fin M, (u j * ζ ^ ((((j : ℕ) : ℤ) + 1) * μ)) • x j)
         (∑ j : Fin M, (v j * ζ ^ ((((j : ℕ) : ℤ) + 1) * ν)) • y j)
       = (2 * ∑ j : Fin M, u j * v j * ζ ^ ((((j : ℕ) : ℤ) + 1) * (μ + ν))) • (1 : A) := by
   rw [acomm_sum_smul_clifford_necSuf _ _ _ _ h]
@@ -101,9 +101,9 @@ theorem acomm_fourier_clifford_weights {M : ℕ} {ζ : K} (hζ0 : ζ ≠ 0)
 必要なのは `u_j v_j = 1` と、`ζ` が 1 の原始 `M` 乗根であることだけ。 -/
 theorem acomm_fourier_clifford {M : ℕ} (hM : M ≠ 0) {ζ : K} (hζ : IsPrimitiveRoot ζ M)
     (x y : Fin M → A)
-    (h : ∀ a b, acomm (x a) (y b) = (if a = b then (2 : K) else 0) • (1 : A))
+    (h : ∀ a b, acomm' (x a) (y b) = (if a = b then (2 : K) else 0) • (1 : A))
     (u v : Fin M → K) (huv : ∀ j, u j * v j = 1) (μ ν : ℤ) :
-    acomm (∑ j : Fin M, (u j * ζ ^ ((((j : ℕ) : ℤ) + 1) * μ)) • x j)
+    acomm' (∑ j : Fin M, (u j * ζ ^ ((((j : ℕ) : ℤ) + 1) * μ)) • x j)
         (∑ j : Fin M, (v j * ζ ^ ((((j : ℕ) : ℤ) + 1) * ν)) • y j)
       = (2 * (M : K) * (if (M : ℤ) ∣ (μ + ν) then 1 else 0)) • (1 : A) := by
   rw [acomm_fourier_clifford_weights (hζ.ne_zero hM) x y h u v μ ν]
@@ -119,10 +119,10 @@ theorem acomm_fourier_clifford {M : ℕ} (hM : M ≠ 0) {ζ : K} (hζ : IsPrimit
 「`j = 1` の項の符号だけが反転するので、その項を 2 回引く」がそのまま計算になっている。 -/
 theorem acomm_fourier_clifford_flip {M : ℕ} (hM : M ≠ 0) {ζ : K} (hζ : IsPrimitiveRoot ζ M)
     (x y : Fin M → A)
-    (h : ∀ a b, acomm (x a) (y b) = (if a = b then (2 : K) else 0) • (1 : A))
+    (h : ∀ a b, acomm' (x a) (y b) = (if a = b then (2 : K) else 0) • (1 : A))
     (u v : Fin M → K)
     (hflip : ∀ j : Fin M, u j * v j = if (j : ℕ) = 0 then -1 else 1) (μ ν : ℤ) :
-    acomm (∑ j : Fin M, (u j * ζ ^ ((((j : ℕ) : ℤ) + 1) * μ)) • x j)
+    acomm' (∑ j : Fin M, (u j * ζ ^ ((((j : ℕ) : ℤ) + 1) * μ)) • x j)
         (∑ j : Fin M, (v j * ζ ^ ((((j : ℕ) : ℤ) + 1) * ν)) • y j)
       = (2 * (M : K) * (if (M : ℤ) ∣ (μ + ν) then 1 else 0)
           - 4 * ζ ^ (μ + ν)) • (1 : A) := by
