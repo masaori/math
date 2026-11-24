@@ -43,9 +43,10 @@ theorem inclusion_zz_to_rr_of_positive_is_at_least_one_of_necSuf (n : ℕ) (hn :
 theorem inclusion_zz_to_rr_of_nonpositive_is_nonpositive_of_necSuf (n : ℤ) (hn : n ≤ 0) : ((n : ℤ) : ℝ) ≤ 0 :=
   NecSuf.int_cast_nonpos' (R := ℝ) n hn
 
-/-- `inclusion_zz_to_rr_is_monotone_on_nonnegatives` を `NecSuf.cast_mono'` の `R := ℝ` として得る。 -/
-theorem inclusion_zz_to_rr_is_monotone_on_nonnegatives_of_necSuf (a b : ℕ) (hab : a ≤ b) : (a : ℝ) ≤ (b : ℝ) :=
-  NecSuf.cast_mono' (R := ℝ) a b hab
+/-- `inclusion_zz_to_rr_is_monotone_on_nonnegatives` を `NecSuf.int_cast_mono'` の `R := ℝ` として得る。 -/
+theorem inclusion_zz_to_rr_is_monotone_on_nonnegatives_of_necSuf (a b : ℤ) (ha : 0 ≤ a) (_hb : 0 ≤ b) (hab : a ≤ b) :
+    ((a : ℤ) : ℝ) ≤ ((b : ℤ) : ℝ) :=
+  NecSuf.int_cast_mono' (R := ℝ) a b ha hab
 
 /-- `inclusion_zz_to_rr_of_successor` を `NecSuf.int_cast_succ'` の `R := ℝ` として得る。 -/
 theorem inclusion_zz_to_rr_of_successor_of_necSuf (n : ℤ) : ((n + 1 : ℤ) : ℝ) = ((n : ℤ) : ℝ) + 1 :=

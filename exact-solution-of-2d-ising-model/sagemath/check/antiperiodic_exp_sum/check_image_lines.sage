@@ -86,7 +86,16 @@ for x, y in zip(L, L[1:]):
 L = [iota_ZR(iota_NZ(1)), iota_ZR(iota_rec(1)), iota_ZR(iota_rec(0 + 1)), iota_ZR(iota_rec(0) + ZZ(1)), iota_ZR(ZZ(0) + ZZ(1)), iota_ZR(ZZ(1)), QQ(1)]
 for x, y in zip(L, L[1:]):
     assert x == y
+# 前置きの ι_{N→Z}(2) = 2_Z の 7 行（ι_{N→Z} は inclusion_nn_to_zz の二つの式だけで組んだ iota_rec）
+L = [iota_rec(2), iota_rec(1 + 1), iota_rec(1) + ZZ(1), iota_rec(0 + 1) + ZZ(1), (iota_rec(0) + ZZ(1)) + ZZ(1),
+     (ZZ(0) + ZZ(1)) + ZZ(1), ZZ(1) + ZZ(1), ZZ(2)]
+for x, y in zip(L, L[1:]):
+    assert x == y
 for N in range(1, 81):
+    # 1_N ≤ N から inclusion_nn_to_zz_preserves_order で (1_N)_Z ≤ N_Z、inclusion_nn_to_zz_image_is_nonnegative で両辺 ≥ 0、
+    # inclusion_zz_to_rr_is_monotone_on_nonnegatives で ((1_N)_Z)_R ≤ N_R
+    assert 1 <= N and iota_rec(1) <= iota_rec(N) and 0 <= iota_rec(1) and 0 <= iota_rec(N)
+    assert iota_ZR(iota_rec(1)) <= iota_ZR(iota_rec(N))
     assert iota_ZR(iota_NZ(N)) >= iota_ZR(iota_NZ(1)) == 1 > 0   # N_R ≥ ((1_N)_Z)_R = 1_R > 0_R
 
 for M in range(2, 41):
@@ -104,9 +113,13 @@ for M in range(2, 41):
     assert UCF(iota_ZR(iota_NZ(MN))) == to_C(M)
     # (2(M)_N)_C = (2M)_C
     assert UCF(iota_ZR(iota_NZ(2 * MN))) == to_C(2 * M)
+    # 前置きの 3 行の鎖 (2_Z)_R = (ι_{N→Z}(2))_R ≤ (ι_{N→Z}((M)_N))_R = (M)_R
+    # （(M)_N ≥ 2 から inclusion_nn_to_zz_preserves_order、両辺 ≥ 0 は inclusion_nn_to_zz_image_is_nonnegative）
+    assert iota_rec(2) <= iota_rec(MN) and 0 <= iota_rec(2) and 0 <= iota_rec(MN)
+    assert iota_ZR(ZZ(2)) == iota_ZR(iota_rec(2)) <= iota_ZR(iota_rec(MN)) == iota_ZR(M)
     # 主張の前提: (M)_R ≥ (2_Z)_R = 2_R > 0_R、2(M)_R ≠ 0_R
     assert iota_ZR(M) >= iota_ZR(ZZ(2)) == 2 and 2 > 0 and 2 * iota_ZR(M) != 0
 print("  n = 0..80、a = -80..80、μ = 1..80: 準備の鎖 (2n)_Z、(2_Z a)_R、(2μ-1)_Z、((2μ-1)_Z)_R、((2μ)_Z)_R が成り立つ")
-print("  (2_Z)_R = 2_R、((1_N)_Z)_R = 1_R の鎖と N = 1..80 の N_R ≥ 1_R > 0_R が成り立つ")
-print("  M_col = 2..40: 像の 7 式と (M_col)_R ≥ 2 > 0、2(M_col)_R ≠ 0 が成り立つ")
+print("  ι_{N→Z}(2) = 2_Z、(2_Z)_R = 2_R、((1_N)_Z)_R = 1_R の鎖と N = 1..80 の ((1_N)_Z)_R ≤ N_R、N_R ≥ 1_R > 0_R が成り立つ")
+print("  M_col = 2..40: 像の 7 式、(2_Z)_R ≤ (M_col)_R の 3 行と (M_col)_R ≥ 2 > 0、2(M_col)_R ≠ 0 が成り立つ")
 print("RESULT: PASS")

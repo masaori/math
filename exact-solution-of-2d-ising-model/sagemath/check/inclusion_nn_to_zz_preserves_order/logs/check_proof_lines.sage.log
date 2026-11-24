@@ -1,0 +1,3 @@
+x ≤ y, x, y = 0..60: 鎖の 5 段を 1891 組の (x, y) で ZZ で確かめた
+negative controls (broken lines detected): 2
+RESULT: PASS

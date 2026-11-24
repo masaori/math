@@ -24,7 +24,7 @@
 | `power_of_two_in_integers_is_at_least_one` | `M` の帰納法。`2^0 = 1 ≥ 1`、`2^{M+1} = 2^M·2 = 2^M(1+1) = 2^M·1 + 2^M·1 = 2^M + 2^M ≥ 1 + 2^M ≥ 1 + 1 ≥ 1 + 0 = 1` | `one_le_two_pow'`（同じ段） | 冪の 2 つの式、`2 = 1 + 1`、左からの分配律、`1` が乗法の右単位元、加法の単調性（辺々を足す）、`0 ≤ 1`、`0` が和の右単位元、反射律 |
 | `inclusion_zz_to_rr_of_positive_is_at_least_one` | `n` の帰納法。`ι(1) = 1 ≥ 1`、`ι(n + 1) = ι(n) + 1 ≥ 1 + 1 ≥ 1 + 0 = 1` | `one_le_cast'`（同じ段） | `cast_one'`、埋め込みの `ι(n + 1) = ι(n) + 1`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元、反射律 |
 | `inclusion_zz_to_rr_of_nonpositive_is_nonpositive` | `n = 0` は `ι(0) = 0 ≤ 0`、`n = -m`（`m ≥ 1`）は `ι(-m) = -ι(m) ≤ -1 ≤ -0 = 0` | `int_cast_nonpos'`（同じ段） | `ℤ` の埋め込みの `ι(-n) = -ι(n)`（`Int.cast_neg`）と `ℤ_{≥0}` での一致（`Int.cast_natCast`）、`one_le_cast'`、符号反転が順序を逆にすること（加法の単調性から出る）、`0 ≤ 1` |
-| `inclusion_zz_to_rr_is_monotone_on_nonnegatives` | `k := b − a`、`ι(k) ≥ 0`（`k = 0` と `k ≥ 1`）、`ι(a) = ι(a) + 0 ≤ ι(a) + ι(k) = ι(a + k) = ι(b)` | `cast_mono'`（同じ段） | `cast_add'`、`one_le_cast'`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元 |
+| `inclusion_zz_to_rr_is_monotone_on_nonnegatives` | `k := b − a`、`ι(k) ≥ 0`（`k = 0` と `k ≥ 1`）、`ι(a) = ι(a) + 0 ≤ ι(a) + ι(k) = ι(a + k) = ι(b)` | `int_cast_mono'`（同じ段） | `ℤ` の埋め込みの `ι(0) = 0` と `ℤ_{≥0}` での一致（`Int.cast_natCast`）、`cast_add'`、`one_le_cast'`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元 |
 | `inclusion_zz_to_rr_of_successor` | `n ∈ ℤ_{≥0}` は定義、`n = -1` は `ι(-1 + 1) = ι(0) = 0 = (-1) + 1 = (-ι(1)) + 1 = ι(-1) + 1`、`n = -(p + 1)`（`p ≥ 1`）は `ι(-(p+1) + 1) = ι(((-p) + (-1)) + 1) = ι((-p) + ((-1) + 1)) = ι((-p) + 0) = ι(-p) = -ι(p) = -ι(p) + 0 = -ι(p) + ((-1) + 1) = (-ι(p) + (-1)) + 1 = -(ι(p) + 1) + 1 = -ι(p + 1) + 1 = ι(-(p + 1)) + 1` | `int_cast_succ'`（同じ段） | `ℤ` の埋め込みの `ι(0) = 0`・`ι(1) = 1`・`ι(-n) = -ι(n)` と `ℤ_{≥0}` での一致・`Nat.cast_succ`、`0` が和の右単位元、加法逆元、和の結合律、`-(x + y) = (-x) + (-y)`（加法の可換性） |
 | `inclusion_zz_to_rr_preserves_sum` | `b` について `0` から足す帰納法（3 行と 5 行）と引く帰納法（13 行）。足す段・引く段とも `inclusion_zz_to_rr_of_successor` を使う | `int_cast_add'`（同じ段） | `int_cast_succ'`、`ι(0) = 0`、`0` が和の右単位元、加法逆元、和の結合律 |
 | `inclusion_zz_to_rr_preserves_product` | `b` について `0` から足す帰納法（5 行と 7 行）と引く帰納法（20 行）。`b = 0` は `ℤ` の乗法の交換律と `0 · a = 0`、`R` の `x · 0 = 0`、引く段の `a(b − 1) = ab − a·1` は `ℤ` の差の定義・分配律・乗法の交換律・`(−x)t = −(xt)` の 6 段、足す段・引く段とも `inclusion_zz_to_rr_preserves_sum`・`inclusion_zz_to_rr_of_successor` を使う | `int_cast_mul'`（同じ段） | `int_cast_add'`・`int_cast_succ'`、`ι(0) = 0`、`x · 0 = 0`、`1` が乗法の右単位元、左からの分配律 `x(y + z) = xy + xz`、`0` が和の右単位元、加法逆元、和の結合律（`R` の側）。`ℤ` の側: 乗法の交換律・分配律・差の定義・`0·a = 0`・`(−x)t = −(xt)` |
@@ -40,7 +40,7 @@
     （`Semiring` は記法 `^`（`Monoid` の冪）のためで、使う冪の性質は `pow_zero`・`pow_succ` の 2 つの式だけである）。
   - `one_le_two_pow'` の `[Semiring R] [PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` のうち、右からの分配律・乗法の結合律・順序の反対称律は効いていない。
 - `cast_one'`・`cast_add'` は乗法を使わない（`[AddMonoidWithOne R]`）。
-- 順序の 3 つの主張（`one_le_cast'`・`int_cast_nonpos'`・`cast_mono'`）は乗法を使わない。`[AddCommMonoidWithOne R]`（`int_cast_nonpos'` は符号反転のため `[AddCommGroupWithOne R]`）に
+- 順序の 3 つの主張（`one_le_cast'`・`int_cast_nonpos'`・`int_cast_mono'`）は乗法を使わない。`[AddCommMonoidWithOne R]`（`int_cast_nonpos'` は符号反転のため、`int_cast_mono'` は `ℤ` の元を `Int.cast` で送ることと `ℤ_{≥0}` の上で `Int.cast_natCast` が成り立つこと（`AddGroupWithOne` の公理）のため `[AddCommGroupWithOne R]`。`int_cast_mono'` は符号反転を使わない）に
   `[PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]` を置く。加法の可換性は `IsOrderedAddMonoid` を書くためだけに要り、証明の段では使わない。順序の反対称律は効いていない。
 - 人手の `ι` の負の元の節 `ι(-n) := -ι(n)` を使うのは `int_cast_nonpos'`・`int_cast_succ'` だけである（`int_cast_add'` は `int_cast_succ'` を通して使う）。
 - `int_cast_mul'` は順序を使わない。`[NonAssocRing R]` を置く（`AddCommGroupWithOne` に乗法と分配律と乗法の単位元を足した最小の標準の組）。
@@ -169,23 +169,30 @@ theorem int_cast_nonpos' {R : Type*} [AddCommGroupWithOne R] [PartialOrder R] [I
       _ = 0 := Nat.cast_zero                                               -- 埋め込みの `ι(0) = 0`
       _ ≤ 0 := le_refl 0                                                   -- 反射律
 
-/-- **必要十分版の `inclusion_zz_to_rr_is_monotone_on_nonnegatives`**: `a ≤ b` なら `ι(a) ≤ ι(b)`。
+/-- **必要十分版の `inclusion_zz_to_rr_is_monotone_on_nonnegatives`**: `ℤ` の埋め込みで、`0 ≤ a ≤ b` なら `ι(a) ≤ ι(b)`。
+具体版の主張の `0 ≤ b` は証明が使わない（`0 ≤ a ≤ b` から出る）ので、仮定に置かない。
 `k := b − a` を置き、`ι(k) ≥ 0` を `k = 0` と `k ≥ 1` に分けて示してから、`ι(a) = ι(a) + 0 ≤ ι(a) + ι(k) = ι(a + k) = ι(b)`。 -/
-theorem cast_mono' {R : Type*} [AddCommMonoidWithOne R] [PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]
-    (a b : ℕ) (hab : a ≤ b) : (a : R) ≤ (b : R) := by
-  set k : ℕ := b - a with hkdef
-  have hb : b = a + k := (Nat.add_sub_cancel' hab).symm
-  have hk : (0 : R) ≤ (k : R) := by
-    rcases Nat.eq_zero_or_pos k with h0 | h1
+theorem int_cast_mono' {R : Type*} [AddCommGroupWithOne R] [PartialOrder R] [IsOrderedAddMonoid R] [ZeroLEOneClass R]
+    (a b : ℤ) (ha : 0 ≤ a) (hab : a ≤ b) : ((a : ℤ) : R) ≤ ((b : ℤ) : R) := by
+  set k : ℤ := b - a with hkdef
+  have hk0 : 0 ≤ k := by omega
+  have hbk : b = a + k := by omega
+  obtain ⟨p, hp⟩ := Int.eq_ofNat_of_zero_le ha
+  obtain ⟨m, hm⟩ := Int.eq_ofNat_of_zero_le hk0
+  have hk : (0 : R) ≤ ((k : ℤ) : R) := by
+    rcases Nat.eq_zero_or_pos m with h0 | h1
     · calc (0 : R) ≤ 0 := le_refl 0                                        -- 反射律
-        _ = ((0 : ℕ) : R) := Nat.cast_zero.symm                            -- 埋め込みの `ι(0) = 0`
-        _ = (k : R) := by rw [h0]
+        _ = ((0 : ℤ) : R) := Int.cast_zero.symm                            -- 埋め込みの `ι(0) = 0`
+        _ = ((k : ℤ) : R) := by rw [hm, h0]; rfl
     · calc (0 : R) ≤ 1 := zero_le_one                                      -- `0 ≤ 1`
-        _ ≤ (k : R) := one_le_cast' k h1                                   -- `one_le_cast'`
-  calc (a : R) = (a : R) + 0 := (add_zero _).symm                          -- `0` は和の右単位元
-    _ ≤ (a : R) + (k : R) := add_le_add (le_refl _) hk                     -- `ι(k) ≥ 0` の両辺に `ι(a)` を足す
-    _ = ((a + k : ℕ) : R) := (cast_add' a k).symm                          -- `cast_add'`
-    _ = (b : R) := by rw [← hb]
+        _ ≤ (m : R) := one_le_cast' m h1                                   -- `one_le_cast'`
+        _ = ((k : ℤ) : R) := by rw [hm, Int.cast_natCast]                  -- `ℤ_{≥0}` の上で 2 つの埋め込みは一致する
+  calc ((a : ℤ) : R) = ((a : ℤ) : R) + 0 := (add_zero _).symm              -- `0` は和の右単位元
+    _ ≤ ((a : ℤ) : R) + ((k : ℤ) : R) := add_le_add (le_refl _) hk         -- `ι(k) ≥ 0` の両辺に `ι(a)` を足す
+    _ = ((a + k : ℤ) : R) := by
+        rw [hp, hm, Int.cast_natCast, Int.cast_natCast]
+        exact (Int.cast_natCast (R := R) (p + m) ▸ cast_add' p m).symm     -- `cast_add'`（`ℤ_{≥0}` の上で 2 つの埋め込みは一致する）
+    _ = ((b : ℤ) : R) := by rw [← hbk]
 
 /-- **必要十分版の `inclusion_zz_to_rr_of_successor`**: `ℤ` の埋め込みで `ι(n + 1) = ι(n) + 1`（`n ∈ ℤ`）。
 具体版と同じく `n ∈ ℤ_{≥0}`・`n = -1`・`n = -(p + 1)`（`p ≥ 1`）の 3 つの場合に分ける。 -/

@@ -1796,7 +1796,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         math(String.raw`\iota_{\mathbb Z\to\mathbb R}:\mathbb Z\to\mathbb R`),
         "（",
         ref("inclusion_zz_to_rr"),
-        "）は順序を保つものとする。また、",
+        "）を用いる。また、",
         ref("inclusion_rr_to_cc"),
         " の実数から複素数への包含を用いる。",
       ]),
@@ -1819,10 +1819,60 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         " を用いる。",
       ]),
       paragraph([
-        math(String.raw`M_{\mathrm{col}}\ge2_{\mathbb Z}`),
-        " と、順序を保つ包含写像により ",
-        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\ge(2_{\mathbb Z})_{\mathbb R}`),
+        math(String.raw`\iota_{\mathbb N\to\mathbb Z}(2)=2_{\mathbb Z}`),
+        " を確かめる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\iota_{\mathbb N\to\mathbb Z}(2)
+&=\iota_{\mathbb N\to\mathbb Z}(1_{\mathbb N}+_{\mathbb N}1_{\mathbb N})
+&&\bigl(\because\ \mathbb N\ \text{の数字}\ 2:=1+1\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=\iota_{\mathbb N\to\mathbb Z}(1_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z}
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(m+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(m)+_{\mathbb Z}1_{\mathbb Z}\ (m\to1_{\mathbb N})\bigr)\\
+&=\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}+_{\mathbb N}1_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z}
+&&\bigl(\because\ \mathbb N\ \text{の加法の単位元}\ 0_{\mathbb N}+x=x\ (x\to1_{\mathbb N})\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&=(\iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N})+_{\mathbb Z}1_{\mathbb Z})+_{\mathbb Z}1_{\mathbb Z}
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(m+_{\mathbb N}1_{\mathbb N}):=\iota_{\mathbb N\to\mathbb Z}(m)+_{\mathbb Z}1_{\mathbb Z}\ (m\to0_{\mathbb N})\bigr)\\
+&=(0_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z})+_{\mathbb Z}1_{\mathbb Z}
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz}\ \text{の}\ \iota_{\mathbb N\to\mathbb Z}(0_{\mathbb N}):=0_{\mathbb Z}\bigr)\\
+&=1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z}
+&&\bigl(\because\ \mathbb Z\ \text{の和の単位元}\ 0_{\mathbb Z}+x=x\ (x\to1_{\mathbb Z})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&=2_{\mathbb Z}
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb Z}:=1_{\mathbb Z}+_{\mathbb Z}1_{\mathbb Z}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb N}\ge2`),
+        " から ",
+        ref("inclusion_nn_to_zz_preserves_order"),
+        "（",
+        math(String.raw`x\to2,\ y\to(M_{\mathrm{col}})_{\mathbb N}`),
+        "）により ",
+        math(String.raw`\iota_{\mathbb N\to\mathbb Z}(2)\le\iota_{\mathbb N\to\mathbb Z}((M_{\mathrm{col}})_{\mathbb N})`),
         " であり、",
+        ref("inclusion_nn_to_zz_image_is_nonnegative"),
+        "（",
+        math(String.raw`n\to2`),
+        "、",
+        math(String.raw`n\to(M_{\mathrm{col}})_{\mathbb N}`),
+        "）により両辺は ",
+        math(String.raw`\mathbb Z_{\ge0}`),
+        " に入るので",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(2_{\mathbb Z})_{\mathbb R}
+&=\bigl(\iota_{\mathbb N\to\mathbb Z}(2)\bigr)_{\mathbb R}
+&&\bigl(\because\ \text{上の}\ \iota_{\mathbb N\to\mathbb Z}(2)=2_{\mathbb Z}\ \text{を右辺から左辺へ}\bigr)\\
+&\le\bigl(\iota_{\mathbb N\to\mathbb Z}((M_{\mathrm{col}})_{\mathbb N})\bigr)_{\mathbb R}
+&&\bigl(\because\ \blkref{inclusion_zz_to_rr_is_monotone_on_nonnegatives}\ (a\to\iota_{\mathbb N\to\mathbb Z}(2),\ b\to\iota_{\mathbb N\to\mathbb Z}((M_{\mathrm{col}})_{\mathbb N}))\bigr)\\
+&=(M_{\mathrm{col}})_{\mathbb R}
+&&\bigl(\because\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -2128,9 +2178,29 @@ S_{M_{\mathrm{col}},k}
         "また、正の自然数 ",
         math(String.raw`N\in\mathbb N_{\ge1}`),
         " については、",
-        math(String.raw`N\ge1_{\mathbb N}`),
-        " と順序を保つ包含写像により ",
-        math(String.raw`N_{\mathbb R}\ge((1_{\mathbb N})_{\mathbb Z})_{\mathbb R}`),
+        math(String.raw`1_{\mathbb N}\le N`),
+        " から ",
+        ref("inclusion_nn_to_zz_preserves_order"),
+        "（",
+        math(String.raw`x\to1_{\mathbb N},\ y\to N`),
+        "）により ",
+        math(String.raw`(1_{\mathbb N})_{\mathbb Z}\le N_{\mathbb Z}`),
+        " であり、",
+        ref("inclusion_nn_to_zz_image_is_nonnegative"),
+        "（",
+        math(String.raw`n\to1_{\mathbb N}`),
+        "、",
+        math(String.raw`n\to N`),
+        "）により両辺は ",
+        math(String.raw`\mathbb Z_{\ge0}`),
+        " に入るので、",
+        ref("inclusion_zz_to_rr_is_monotone_on_nonnegatives"),
+        "（",
+        math(String.raw`a\to(1_{\mathbb N})_{\mathbb Z},\ b\to N_{\mathbb Z}`),
+        "）と略記 ",
+        math(String.raw`n_{\mathbb R}:=(n_{\mathbb Z})_{\mathbb R}`),
+        " により ",
+        math(String.raw`((1_{\mathbb N})_{\mathbb Z})_{\mathbb R}\le N_{\mathbb R}`),
         " であり、",
       ]),
       displayMath(
@@ -2506,6 +2576,7 @@ k
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 0_ℤ ≤ M_col の鎖が「ι_{ℕ→ℤ} は順序を保つ」と前置きの仮定を引き、そのために 0_ℕ ≤ (M_col)_ℕ の 2 行を置いていた。新しい主張 inclusion_nn_to_zz_image_is_nonnegative（n → (M_col)_ℕ）を引く 1 行にし、ℕ の 2 行と ι(0_ℕ) := 0_ℤ の行を外した（鎖は 6 行から 3 行）。前置きの「ι_{ℕ→ℤ} が零を保つことは定義の式 ι(0_ℕ) := 0_ℤ である」の括弧書きも、それを使う行が無くなったので外した。前置きの「順序を保つ」の仮定は、「順序を保つ包含写像により (M_col)_ℝ ≥ 2_ℝ」などがまだ使うので残る。Lean の具体版の同じ段の Nat.zero_add・Nat.le.intro・Nat.cast_le を新しい具体版に替えた。主張は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 準備の鎖の (2(M_col)_ℕ)_ℤ = 2M_col が根拠を「ι_{ℕ→ℤ} は積を保つ」と主張の前置きの仮定で引き、ℤ の数字 2 と ℕ の数字 2 の行き来も書いていなかった。新しい主張 inclusion_nn_to_zz_preserves_product（x → 2, y → (M_col)_ℕ）、inclusion_nn_to_zz の二つの式、set_and_algebra_notation の ℕ の数字 2 := 1 + 1・ℕ の加法の単位元・ℤ の和の単位元、def_power_of_integer の 2_ℤ := 1_ℤ + 1_ℤ、略記 n_ℤ を引く 11 行に割った。Lean の具体版 antiperiodic_exp_sum_not_dvd の 2M ∤ k の段が push_cast で示していた ((2M)_ℕ)_ℤ = M·2 を、同じ 11 段の calc（証明の中の have。主張の型に数字 2 が出る補題にすると未定義の記号の台帳に行が増えるため）と ℤ の乗法の交換律に替えた。前置きの「ι_{ℕ→ℤ} は和・積を保つ」の仮定は、(2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ の行と奇偶の分割の行がまだ名前だけで引くので残る。主張は不変。",
         "2026-11-24（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 主張の前置きが ι_{ℕ→ℤ}・ι_{ℤ→ℝ} について「単位元、和、積を保つ」「ι_{ℤ→ℝ} は零も保つ」と仮定し、準備の鎖の (2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ・(2M_col)_ℝ = 2_ℝ(M_col)_ℝ と奇偶の分割の行の ((2μ−1)_ℤ)_ℝ + 1_ℝ = 2_ℝ(μ_ℤ)_ℝ がそれを名前だけで引いていた。準備の鎖を、n ∈ ℕ の (2n)_ℤ = 2_ℤ n_ℤ（inclusion_nn_to_zz_preserves_product ほかの 10 行）、a ∈ ℤ の (2_ℤ a)_ℝ = 2_ℝ a_ℝ（inclusion_zz_to_rr_preserves_product・inclusion_zz_to_rr_preserves_sum・inclusion_zz_to_rr_of_one・def_real_two の 5 行）、1 ≤ μ の μ ∈ ℕ について ℕ の差 2μ−1 が定まること（2μ = 1 + (d + μ) の 5 行）と (2μ−1) + 1 = 2μ、(2μ−1)_ℤ = 2_ℤμ_ℤ − 1_ℤ（7 行）、((2μ−1)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ − 1_ℝ（inclusion_zz_to_rr_preserves_difference ほかの 4 行）、((2μ)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ（2 行）に書き直し、二つの行をこれらの参照にした。前置きの仮定は順序を保つことだけになった。順序を保つことを使う「(M_col)_ℝ ≥ 2_ℝ」「N_ℝ ≥ 1_ℝ」は、順序からは (M_col)_ℝ ≥ (2_ℤ)_ℝ・N_ℝ ≥ ((1_ℕ)_ℤ)_ℝ までしか出ないので、(2_ℤ)_ℝ = 2_ℝ（def_power_of_integer・inclusion_zz_to_rr_preserves_sum・inclusion_zz_to_rr_of_one・def_real_two の 4 行）と ((1_ℕ)_ℤ)_ℝ = 1_ℝ（略記・ℕ の加法の単位元・inclusion_nn_to_zz の二つの式・ℤ の和の単位元・inclusion_zz_to_rr_of_one の 6 行）の鎖を足した。ι_{ℤ→ℝ} に inclusion_zz_to_rr の参照を足した。Lean の具体版は、同じ鎖を使う証明の中の have（htwoZ・htwoR・h2MR・hoddZ・hoddR）として置き、expPhase_two_mul・antiperiodic_exp_sum_delta_difference の奇偶の分割・antiperiodic_complex_exp_sum_eq_checkPhase・antiperiodic_exp_sum_dvd の 4 行目の push_cast と Nat.cast_mul の段をこれらに替えた（定理にしないのは、型の ℕ・ℤ の数字と Int.cast が未定義の記号の台帳に行を足すため）。checkPhase_eq_exp はほかの章の主張も使うので変えていない。Lean は M ≠ 0 だけを使うので、(M_col)_ℝ ≥ 2_ℝ・N_ℝ ≥ 1_ℝ の段は持たない。",
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 主張の前置きに残っていた仮定「ι_{ℕ→ℤ}・ι_{ℤ→ℝ} は順序を保つものとする」を外した。それを引いていた前置きの (M_col)_ℝ ≥ (2_ℤ)_ℝ は、ι_{ℕ→ℤ}(2) = 2_ℤ の 7 行の鎖と、(M_col)_ℕ ≥ 2 に inclusion_nn_to_zz_preserves_order・inclusion_nn_to_zz_image_is_nonnegative・inclusion_zz_to_rr_is_monotone_on_nonnegatives を当てる 3 行の鎖にした。証明の N_ℝ ≥ ((1_ℕ)_ℤ)_ℝ（N ∈ ℕ_{≥1}）も同じ三つの主張を引く形にした。Lean の具体版は expPhase_two_mul の M_ℂ ≠ 0 をこの N_ℝ ≥ ((1_ℕ)_ℤ)_ℝ = 1_ℝ > 0_ℝ の段（N → M）で示す（前置きの (M_col)_ℝ ≥ 2_ℝ の段は、Lean が M ≠ 0 だけを使うので持たない）。",
       ],
     },
   },

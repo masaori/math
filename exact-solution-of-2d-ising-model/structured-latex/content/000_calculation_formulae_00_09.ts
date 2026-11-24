@@ -3061,6 +3061,87 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_claim_inclusion_nn_to_zz_preserves_order",
+    kind: "claim",
+    title: { tex: String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}\text{ は順序を保つ}` },
+    labels: ["inclusion_nn_to_zz_preserves_order"],
+    lean: ["Ising2D.inclusion_nn_to_zz_preserves_order"],
+    statement: [
+      paragraph([
+        math(String.raw`x, y \in \mathbf{N}`),
+        " が ",
+        math(String.raw`x \le_{\mathbb{N}} y`),
+        " を満たすなら、",
+        ref("inclusion_nn_to_zz"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}`),
+        " は",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}(x) \le_{\mathbb{Z}} \iota_{\mathbb{N}\to\mathbb{Z}}(y)`),
+      paragraph([
+        "を満たす。",
+        math(String.raw`\le_{\mathbb{N}}`),
+        "・",
+        math(String.raw`\le_{\mathbb{Z}}`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{N}`),
+        "・",
+        math(String.raw`\mathbb{Z}`),
+        " の順序である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x \le_{\mathbb{N}} y`),
+        " と ",
+        math(String.raw`\mathbb{N}`),
+        " の順序と和 ",
+        math(String.raw`x \le y \Leftrightarrow \exists d \in \mathbf{N},\ x + d = y`),
+        "（",
+        ref("set_and_algebra_notation"),
+        "）から、",
+        math(String.raw`x +_{\mathbb{N}} d = y`),
+        " を満たす ",
+        math(String.raw`d \in \mathbf{N}`),
+        " を取る。以下では ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}`),
+        " を ",
+        math(String.raw`\iota`),
+        " と略し、鎖の ",
+        math(String.raw`\le`),
+        " と ",
+        math(String.raw`=`),
+        " の連なりは ",
+        math(String.raw`\mathbb{Z}`),
+        " の順序の推移律（",
+        ref("set_and_algebra_notation"),
+        "）でつなぐ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\iota(x)
+&= 0_{\mathbb{Z}} +_{\mathbb{Z}} \iota(x)
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}} + x = x\ (x \to \iota(x))\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\le \iota(d) +_{\mathbb{Z}} \iota(x)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz_image_is_nonnegative}\ (n \to d)\ \text{に}\ \mathbb{Z}\ \text{の順序と加法の両立}\ x \le y \Rightarrow x + t \le y + t\ (x \to 0_{\mathbb{Z}},\ y \to \iota(d),\ t \to \iota(x))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota(x) +_{\mathbb{Z}} \iota(d)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\ x + y = y + x\ (x \to \iota(d),\ y \to \iota(x))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \iota(x +_{\mathbb{N}} d)
+&&\bigl(\because\ \blkref{inclusion_nn_to_zz_preserves_sum}\ (y \to d)\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota(y)
+&&\bigl(\because\ x +_{\mathbb{N}} d = y\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の続き）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum が主張の前置きで ι_{ℕ→ℤ} を「順序を保つものとする」と仮定し、(M_col)_ℝ ≥ (2_ℤ)_ℝ と N_ℝ ≥ ((1_ℕ)_ℤ)_ℝ の段で引いていた。set_and_algebra_notation の ℕ の順序と和、inclusion_nn_to_zz_image_is_nonnegative、inclusion_nn_to_zz_preserves_sum と ℤ の行から示す主張として足した。Lean の具体版は Ising2D.inclusion_nn_to_zz_preserves_order（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimInclusionOfNaturalNumbersIntoIntegersPreservesOrder.lean）、必要十分版は Ising2D.NecSuf.le_of_map_add_of_nonneg（NecSuf/LeOfMapAddOfNonneg.lean）。数値検証: sagemath/check/inclusion_nn_to_zz_preserves_order/。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_definition_inclusion_zz_to_rr",
     kind: "definition",
     title: { tex: String.raw`\mathbb{Z}\to\mathbb{R}\text{の包含写像}` },

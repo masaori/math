@@ -47,7 +47,9 @@
   `antiperiodic_complex_exp_sum_eq_checkPhase` で `((-k)(2μ − 1))_ℝ` を `inclusion_zz_to_rr_preserves_product` で積に割る段は Lean だけの段
   （人手は `k_ℝ` と `(r_ℤ)_ℝ` を初めから別に書く）で、その後の `field_simp` は人手の `k_ℝθ~_μ` の 6 行の鎖を 1 手でまとめており、未対応である。
   人手の ℕ の差 `2μ − 1` が定まることの段（`2μ = 1 + (d + μ)` の 5 行と `(2μ − 1) + 1 = 2μ` の 2 行）は、Lean が `2μ + 1` と書いて差を使わないので持たない。
-  人手の前置きの `(M_col)_ℝ ≥ 2_ℝ` と証明の `N_ℝ ≥ 1_ℝ` の段も、Lean は `M ≠ 0` だけを使うので持たない。
+  人手の証明の `N_ℝ ≥ ((1_ℕ)_ℤ)_ℝ = 1_ℝ > 0_ℝ` の段は、`expPhase_two_mul` の `M_ℂ ≠ 0`（`hMR`。`N → M`）で `inclusion_nn_to_zz_preserves_order`・
+  `inclusion_nn_to_zz_image_is_nonnegative`・`inclusion_zz_to_rr_is_monotone_on_nonnegatives` を引いて示す。ほかの補題の `M_ℂ ≠ 0` は `Nat.cast_ne_zero` のままである。
+  人手の前置きの `(M_col)_ℝ ≥ 2_ℝ` の段は、Lean が `M ≠ 0` だけを使うので持たない。
   残りの `push_cast`（`k` の像、`expPhase_zpow`・`expPhase_two_mul_half` の周波数、`2_ℝ` による約分の前の整理）は、
   `expPhase` で書くための Lean 側の橋の計算である。
   ただし整除の補題（`antiperiodic_exp_sum_dvd` の 2 本の `hdelta2`、`antiperiodic_exp_sum_not_dvd` の `hk2`）の
@@ -63,6 +65,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimI
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerLessThanOneOfProductLessThanNonnegativeFactor
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimInclusionOfNaturalNumbersIntoIntegersImageIsNonnegative
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimInclusionOfNaturalNumbersIntoIntegersPreservesProduct
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimInclusionOfNaturalNumbersIntoIntegersPreservesOrder
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
@@ -81,7 +84,29 @@ theorem expPhase_zpow (N : ℕ) (l a : ℤ) : expPhase N (l * a) = (expPhase N a
 
 /-- `2M` 乗根の偶数周波数は `M` 乗根そのもの: `expPhase (2M) (2n) = expPhase M n`。 -/
 theorem expPhase_two_mul (hM : M ≠ 0) (n : ℤ) : expPhase (2 * M) (2 * n) = expPhase M n := by
-  have hMC : ((M : ℕ) : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hM
+  -- 人手証明の「正の自然数 `N` について `((1_ℕ)_ℤ)_ℝ ≤ N_ℝ`、`((1_ℕ)_ℤ)_ℝ = 1_ℝ` なので `N_ℝ ≥ 1_ℝ > 0_ℝ`、`N_ℝ ≠ 0_ℝ`」（`N → M`）。
+  have hMR : ((inclusionNNtoZZ M : ℤ) : ℝ) ≠ 0 := by
+    have h1M : 1 ≤ M := Nat.one_le_iff_ne_zero.mpr hM                    -- `M ≠ 0` から `1_ℕ ≤ M`（Lean は `M ≠ 0` で受け取るので、Lean だけの段）
+    have hge : ((inclusionNNtoZZ 1 : ℤ) : ℝ) ≤ ((inclusionNNtoZZ M : ℤ) : ℝ) :=
+      inclusion_zz_to_rr_is_monotone_on_nonnegatives _ _
+        (inclusion_nn_to_zz_image_is_nonnegative 1) (inclusion_nn_to_zz_image_is_nonnegative M)
+        (inclusion_nn_to_zz_preserves_order 1 M h1M)
+        -- `inclusion_nn_to_zz_preserves_order`（`x → 1_ℕ, y → N`）・`inclusion_nn_to_zz_image_is_nonnegative`（`n → 1_ℕ`、`n → N`）・
+        -- `inclusion_zz_to_rr_is_monotone_on_nonnegatives`（`a → (1_ℕ)_ℤ, b → N_ℤ`）
+    have hone : ((inclusionNNtoZZ 1 : ℤ) : ℝ) = 1 :=
+      calc ((inclusionNNtoZZ 1 : ℤ) : ℝ)
+          = ((inclusionNNtoZZ (0 + 1) : ℤ) : ℝ) := by rw [Nat.zero_add 1]   -- ℕ の加法の単位元 `0 + x = x`（`x → 1_ℕ`）を右辺から左辺へ
+        _ = ((inclusionNNtoZZ 0 + 1 : ℤ) : ℝ) := rfl                        -- `inclusion_nn_to_zz` の `ι(m + 1_ℕ) := ι(m) + 1_ℤ`（`m → 0_ℕ`）
+        _ = (((0 : ℤ) + 1 : ℤ) : ℝ) := rfl                                  -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`
+        _ = ((1 : ℤ) : ℝ) := by rw [zero_add (1 : ℤ)]                       -- ℤ の和の単位元 `0 + x = x`（`x → 1_ℤ`）
+        _ = 1 := inclusion_zz_to_rr_of_one_intCast                          -- `inclusion_zz_to_rr_of_one`
+    have hge1 : (1 : ℝ) ≤ ((inclusionNNtoZZ M : ℤ) : ℝ) := by rw [← hone]; exact hge
+    exact ne_of_gt (lt_of_lt_of_le zero_lt_one hge1)                       -- `N_ℝ ≥ 1_ℝ > 0_ℝ` なので `N_ℝ ≠ 0_ℝ`
+  -- `n_ℂ := (n_ℝ)_ℂ` と `(M_col)_ℕ` の像の読み替え（Lean の `(M : ℂ)` は `Nat.cast` なので、Lean だけの段）。
+  have hMC : ((M : ℕ) : ℂ) ≠ 0 := by
+    rw [← Complex.ofReal_natCast, Complex.ofReal_ne_zero, ← Int.cast_natCast (R := ℝ) M,
+      ← inclusionNNtoZZ_eq_natCast M]
+    exact hMR
   -- 人手証明の準備の鎖 `(2n)_ℤ = 2_ℤ·n_ℤ`（`n ∈ ℕ`）。
   have htwoZ : ∀ n : ℕ, inclusionNNtoZZ (2 * n) = 2 * inclusionNNtoZZ n := fun n =>
     calc inclusionNNtoZZ (2 * n)

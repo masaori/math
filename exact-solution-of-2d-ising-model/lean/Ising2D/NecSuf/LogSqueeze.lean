@@ -119,10 +119,14 @@ theorem tendsto_of_abs_sub_le_div {u : ℕ → ℝ} {a C : ℝ} (hC : 0 ≤ C)
   have hN0eps : C < (n : ℝ) * ε := (div_lt_iff₀ hε).1 hn
   obtain ⟨k, hk⟩ : ∃ k : ℕ, ((k : ℤ)) = n := ⟨n.toNat, Int.toNat_of_nonneg hN0gt.le⟩
                                                                   -- 列の添字の `ℕ` へ書き直す
-  have hkR : (n : ℝ) = (k : ℝ) := by rw [← hk, Int.cast_natCast]
   have hk1 : 1 ≤ k := by omega
   refine ⟨k, fun N hN => ?_⟩
-  have hNR : (n : ℝ) ≤ N := hkR ▸ cast_mono' (R := ℝ) k N hN     -- `ι(N_0) ≤ ι(N)`（`cast_mono'`）
+  have hNR : (n : ℝ) ≤ N :=                                       -- `ι(N_0) ≤ ι(N)`（`int_cast_mono'`）
+    calc (n : ℝ) = (((k : ℕ) : ℤ) : ℝ) := by rw [hk]
+      _ ≤ (((N : ℕ) : ℤ) : ℝ) :=
+          int_cast_mono' (R := ℝ) _ _ (Int.natCast_nonneg k) (Int.ofNat_le.mpr hN)
+                                                                  -- 列の添字の `ℕ` の `k ≤ N` を `ℤ` へ移して当てる
+      _ = (N : ℝ) := Int.cast_natCast N
   rw [Real.dist_eq]
   calc |u N - a| ≤ C / N := h N (le_trans hk1 hN)                 -- 誤差評価
     _ ≤ C / n := div_le_div_of_nonneg_left hC hN0pos hNR          -- `C ≥ 0` かつ `0 < N_0 ≤ N`

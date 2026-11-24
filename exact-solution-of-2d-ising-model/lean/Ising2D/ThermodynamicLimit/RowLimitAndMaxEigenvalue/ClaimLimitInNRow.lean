@@ -34,8 +34,8 @@
 | `⟹ 0_ℤ + 1_ℤ ≤ N_0`（等号の代入） | `hN01` |
 | `⟹ 1_ℤ ≤ N_0`（`ℤ` の和の単位元） | `hN0` |
 | `log 2 = (log 2/ε)ε < ι(N_0)ε`（`ε ≠ 0` を約す、両辺に `ε > 0` を掛ける） | `hN0eps` の 2 段の `calc` |
-| `N_row ∈ ℤ_{≥N_0}` について | `N_0 ∈ ℤ_{≥1}` を `ℕ` の `k` で書き直し（`ι(N_0) = (k : ℝ)` は `inclusion_zz_to_rr_of_natCast`）、`refine ⟨k, …⟩`。Lean の列は `ℕ` で添字づけるための段で、人手には無い |
-| `|a_N − a| ≤ log 2/ι(N) ≤ log 2/ι(N_0) < ε`（`ι(N_0) ≤ ι(N_row)` は `inclusion_zz_to_rr_is_monotone_on_nonnegatives` を `1 ≤ N_0 ≤ N_row` に） | `hNR` と 3 段の `calc` |
+| `N_row ∈ ℤ_{≥N_0}` について | `N_0 ∈ ℤ_{≥1}` を `ℕ` の `k` で書き直し、`refine ⟨k, …⟩`。Lean の列は `ℕ` で添字づけるための段で、人手には無い |
+| `|a_N − a| ≤ log 2/ι(N) ≤ log 2/ι(N_0) < ε`（`ι(N_0) ≤ ι(N_row)` は `inclusion_zz_to_rr_is_monotone_on_nonnegatives` を `1 ≤ N_0 ≤ N_row` に。Lean は `ℕ` の `k ≤ N` を `Int.ofNat_le` で `ℤ` へ移し、`ι(N_row)` を `inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形へ戻す） | `hNR` と 3 段の `calc` |
 | `def_matrix_norm` の `K = ℝ` の列の収束の意味で `a_N → a`。極限は `scalar_limit_is_unique` で一つに定まる | `Metric.tendsto_atTop` と `Real.dist_eq`。結論の `Tendsto … (𝓝 a)` が値 `a` を名指すので、一意性の段は Lean では要らない |
 
 人手の `log` は `def_real_logarithm_positive` で、Lean は mathlib の `Real.log` で表す（具体版は無い）。
@@ -174,11 +174,15 @@ theorem limit_of_log_Z_in_N_row
       _ < (n : ℝ) * ε := mul_lt_mul_of_pos_right hn hε           -- `log 2/ε < ι(N_0)` の両辺に `ε > 0` を掛ける
   -- Lean の列は `ℕ` で添字づけるので、`N_0 ∈ ℤ_{≥1}` を `ℕ` の `k` で書き直す（人手には無い段）
   obtain ⟨k, hk⟩ : ∃ k : ℕ, ((k : ℤ)) = n := ⟨n.toNat, Int.toNat_of_nonneg hN0nn⟩
-  have hkR : (n : ℝ) = (k : ℝ) := by rw [← hk, inclusion_zz_to_rr_of_natCast]
   have hk1 : 1 ≤ k := by omega
   refine ⟨k, fun N hN => ?_⟩                                      -- `N_row ∈ ℤ_{≥N_0}` について
-  have hNR : (n : ℝ) ≤ N := hkR ▸ inclusion_zz_to_rr_is_monotone_on_nonnegatives k N hN
-                                                                  -- `inclusion_zz_to_rr_is_monotone_on_nonnegatives` を `1 ≤ N_0 ≤ N_row` に
+  have hNR : (n : ℝ) ≤ N :=
+    calc (n : ℝ) = (((k : ℕ) : ℤ) : ℝ) := by rw [hk]
+      _ ≤ (((N : ℕ) : ℤ) : ℝ) :=
+          inclusion_zz_to_rr_is_monotone_on_nonnegatives _ _ (Int.natCast_nonneg k) (Int.natCast_nonneg N)
+            (Int.ofNat_le.mpr hN)                                 -- `inclusion_zz_to_rr_is_monotone_on_nonnegatives` を `1 ≤ N_0 ≤ N_row` に
+                                                                  --   （列の添字の `ℕ` の `k ≤ N` を `ℤ` へ移す段は、人手に無い Lean だけの段）
+      _ = (N : ℝ) := inclusion_zz_to_rr_of_natCast N              -- `ℤ_{≥0}` の上で `Int.cast` と `Nat.cast` は一致する（Lean だけの段）
   rw [Real.dist_eq]
   calc |1 / ((M : ℝ) * N) * Real.log (Z N) - 1 / (M : ℝ) * Real.log c|
       ≤ Real.log 2 / N := abs_log_Z_sub_log_c_le hM hc h1 h2 (le_trans hk1 hN)

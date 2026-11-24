@@ -58,8 +58,9 @@
 * `inclusion_zz_to_rr_of_nonpositive_is_nonpositive` は人手と同じく `n = 0` と `n = -m`（`m ∈ ℤ_{≥1}`）の場合分けで、`n = -m` の段は人手の 4 行に、
   `ι(m)` を `ℕ` の埋め込みの形にする 1 段（`inclusion_zz_to_rr_of_natCast`）を足したもの、`n = 0` の段は人手の 2 行に同じ 1 段を足したものである。
   `n = -m` の鎖の最後の段 `-0_ℝ = 0_ℝ` は人手と同じく `real_negation_of_zero_is_zero`（mathlib の `neg_zero` は使わない）。
-* `inclusion_zz_to_rr_is_monotone_on_nonnegatives` は人手と同じく `k := b − a` を置き、`ι(k) ≥ 0` の 2 つの場合と、`ι(b) ≥ ι(a)` の 4 行の鎖
-  （`calc` は `ι(a) ≤ …` の向きに書くので下から上へ）である。
+* `inclusion_zz_to_rr_is_monotone_on_nonnegatives` は人手と同じく `a, b ∈ ℤ` を `0 ≤ a`・`0 ≤ b` の仮定で取り、`k := b − a` を置き、`ι(k) ≥ 0` の 2 つの場合と、`ι(b) ≥ ι(a)` の 4 行の鎖
+  （`calc` は `ι(a) ≤ …` の向きに書くので下から上へ）である。`ι` は `Int.cast` で、`a`・`k` を `ℕ` の元の像に書いて
+  `inclusion_zz_to_rr_of_positive_is_at_least_one`・`inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast` を当てる段は Lean だけの段である。
 * 人手の `ℤ` の冪 `def_power_of_integer` は、`ℤ_{≥0}` の元では Lean の `ℕ` の冪で、`a^0 := 1` は `Nat.pow_zero`、`a^{m+1} := a^ma` は `Nat.pow_succ` である。
   人手の `2_ℤ := 1_ℤ + 1_ℤ` は `ℕ` の数字の `2` が `1 + 1` であること（`rfl`）である。
 * `power_of_two_in_integers_is_at_least_one` は人手と同じく `M` についての帰納法で、`M = 0` の 2 行と帰納法の段の 8 行が人手の行と 1 対 1 の `calc` である。
@@ -450,21 +451,30 @@ theorem inclusion_zz_to_rr_of_nonpositive_is_nonpositive (n : ℤ) (hn : n ≤ 0
       _ ≤ 0 := le_refl 0                                                   -- `≤_ℝ` の反射律
 
 /-- **人手 `inclusion_zz_to_rr_is_monotone_on_nonnegatives`**: `a, b ∈ ℤ_{≥0}`、`a ≤ b` なら `ι(a) ≤ ι(b)`。
-`k := b − a ∈ ℤ_{≥0}` を置き、`ι(k) ≥ 0` を `k = 0` と `k ≥ 1` に分けて示してから、`ι(b) = ι(a + k) = ι(a) + ι(k) ≥ ι(a) + 0 = ι(a)`。 -/
-theorem inclusion_zz_to_rr_is_monotone_on_nonnegatives (a b : ℕ) (hab : a ≤ b) : (a : ℝ) ≤ (b : ℝ) := by
-  set k : ℕ := b - a with hkdef
-  have hb : b = a + k := (Nat.add_sub_cancel' hab).symm                    -- `ℤ` の四則
-  have hk : (0 : ℝ) ≤ (k : ℝ) := by
-    rcases Nat.eq_zero_or_pos k with h0 | h1
+`k := b − a ∈ ℤ_{≥0}` を置き、`ι(k) ≥ 0` を `k = 0` と `k ≥ 1` に分けて示してから、`ι(b) = ι(a + k) = ι(a) + ι(k) ≥ ι(a) + 0 = ι(a)`。
+`b ∈ ℤ_{≥0}`（`hb`）は人手の主張の範囲で、証明は `0 ≤ a ≤ b` から `0 ≤ b` が出るので使わない（人手の証明も使わない）。 -/
+theorem inclusion_zz_to_rr_is_monotone_on_nonnegatives (a b : ℤ) (ha : 0 ≤ a) (_hb : 0 ≤ b) (hab : a ≤ b) :
+    ((a : ℤ) : ℝ) ≤ ((b : ℤ) : ℝ) := by
+  set k : ℤ := b - a with hkdef                                            -- `k := b −_ℤ a`
+  have hk0 : 0 ≤ k := by omega                                             -- `a ≤ b` より `k ∈ ℤ_{≥0}`
+  have hbk : b = a + k := by omega                                         -- `ℤ` の四則
+  -- 人手の `ℤ_{≥0}` の元 `a`・`k` を、Lean の `ℕ` の元 `p`・`m` の像で書く（Lean だけの段。`ℤ_{≥0}` を `ℕ` で書くのはほかの主張と同じ）
+  obtain ⟨p, hp⟩ := Int.eq_ofNat_of_zero_le ha
+  obtain ⟨m, hm⟩ := Int.eq_ofNat_of_zero_le hk0
+  have hk : (0 : ℝ) ≤ ((k : ℤ) : ℝ) := by
+    rcases Nat.eq_zero_or_pos m with h0 | h1
     · calc (0 : ℝ) ≤ 0 := le_refl 0                                        -- `≤_ℝ` の反射律
-        _ = ((0 : ℕ) : ℝ) := inclusion_zz_to_rr_zero.symm                  -- `inclusion_zz_to_rr` の `ι(0) := 0`
-        _ = (k : ℝ) := by rw [h0]
+        _ = ((0 : ℤ) : ℝ) := inclusion_zz_to_rr_zero_intCast.symm          -- `inclusion_zz_to_rr` の `ι(0) := 0`
+        _ = ((k : ℤ) : ℝ) := by rw [hm, h0]; rfl                          -- `k = 0_ℤ`
     · calc (0 : ℝ) ≤ 1 := zero_le_one                                      -- `1_ℝ ≥ 0_ℝ`
-        _ ≤ (k : ℝ) := inclusion_zz_to_rr_of_positive_is_at_least_one k h1 -- `inclusion_zz_to_rr_of_positive_is_at_least_one`（`n → k`）
-  calc (a : ℝ) = (a : ℝ) + 0 := (add_zero _).symm                          -- `0_ℝ` は `ℝ` の和の単位元
-    _ ≤ (a : ℝ) + (k : ℝ) := add_le_add (le_refl _) hk                        -- 上の `ι(k) ≥ 0_ℝ` の両辺に `ι(a)` を足す
-    _ = ((a + k : ℕ) : ℝ) := (inclusion_zz_to_rr_preserves_sum_of_nonnegatives a k).symm
+        _ ≤ (m : ℝ) := inclusion_zz_to_rr_of_positive_is_at_least_one m h1 -- `inclusion_zz_to_rr_of_positive_is_at_least_one`（`n → k`）
+        _ = ((k : ℤ) : ℝ) := by rw [hm, inclusion_zz_to_rr_of_natCast]     -- `ℤ_{≥0}` の上で `Int.cast` と `Nat.cast` は一致する（Lean だけの段）
+  calc ((a : ℤ) : ℝ) = ((a : ℤ) : ℝ) + 0 := (add_zero _).symm              -- `0_ℝ` は `ℝ` の和の単位元
+    _ ≤ ((a : ℤ) : ℝ) + ((k : ℤ) : ℝ) := add_le_add (le_refl _) hk         -- 上の `ι(k) ≥ 0_ℝ` の両辺に `ι(a)` を足す
+    _ = ((a + k : ℤ) : ℝ) := by
+        rw [hp, hm]
+        exact (inclusion_zz_to_rr_preserves_sum_of_nonnegatives_intCast p m).symm
                                                                            -- `inclusion_zz_to_rr_preserves_sum_of_nonnegatives`（`b → k`）
-    _ = (b : ℝ) := by rw [← hb]                                            -- `b = a + k`
+    _ = ((b : ℤ) : ℝ) := by rw [← hbk]                                     -- `b = a +_ℤ k`
 
 end Ising2D
