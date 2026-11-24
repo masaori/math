@@ -110387,7 +110387,7 @@ c
 &=2\cdot r\cdot\bigl((1-r)(1+r)\bigr)
 &&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)\\
 &>0
-&&\bigl(\because\ \text{第一の事実から }0<r\text{、}0<1-r\text{、}0<1+r\text{。正の実数の積は正}\bigr)
+&&\bigl(\because\ \text{第一の事実から }0<r\text{、}0<1-r\text{、}0<1+r\text{、正の実数の積は正}\bigr)
 \end{aligned}`),
                   paragraph([
                     "第三の事実: ", math(String.raw`\rho_{R\to\mathbb R}(p)=1-2r-r^2`), "。",
