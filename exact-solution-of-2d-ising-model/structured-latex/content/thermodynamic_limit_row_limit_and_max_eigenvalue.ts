@@ -2230,6 +2230,31 @@ u_l
 \end{aligned}`),
       paragraph(["である。"]),
       paragraph([
+        "【添字の等式】",
+        math(String.raw`a \in \mathbb{Z}_{\geq 0}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2_{\mathbb{Z}}\cdot a
+&=(1_{\mathbb{Z}}+1_{\mathbb{Z}})\cdot a
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ 2_{\mathbb{Z}}:=1_{\mathbb{Z}}+1_{\mathbb{Z}}\bigr)\\
+&=1_{\mathbb{Z}}\cdot a+1_{\mathbb{Z}}\cdot a
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ (x+y)\cdot t=x\cdot t+y\cdot t\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}},\ y \to 1_{\mathbb{Z}},\ t \to a)\bigr)\\
+&=a+a
+&&\bigl(\because\ \mathbb{Z}\ \text{の乗法の単位元}\ 1_{\mathbb{Z}}\cdot x=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to a)\ \text{を 2 か所へ}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+2_{\mathbb{Z}}\cdot a+1_{\mathbb{Z}}
+&=(a+a)+1_{\mathbb{Z}}
+&&\bigl(\because\ \text{上の}\ 2_{\mathbb{Z}}\cdot a=a+a\bigr)\\
+&=a+(a+1_{\mathbb{Z}})
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律}\ (x+y)+t=x+(y+t)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to a,\ y \to a,\ t \to 1_{\mathbb{Z}})\bigr)\\
+&=a+(1_{\mathbb{Z}}+a)
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の交換律}\ x+y=y+x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to a,\ y \to 1_{\mathbb{Z}})\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+      paragraph([
         math(String.raw`n = 2a`),
         "（",
         math(String.raw`a \in \mathbb{Z}_{\geq 1}`),
@@ -2240,7 +2265,7 @@ u_l
 &=(W^{2a})_{\mathbb{R}}
 &&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to 2a)\bigr)\\
 &=(W^{a+a})_{\mathbb{R}}
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a = a+a\bigr)\\
+&&\bigl(\because\ \text{【添字の等式】の}\ 2_{\mathbb{Z}}\cdot a=a+a\bigr)\\
 &=(W^aW^a)_{\mathbb{R}}
 &&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p, q \to a)\bigr)\\
 &=(W^a)_{\mathbb{R}}\,(W^a)_{\mathbb{R}}
@@ -2294,13 +2319,13 @@ e_k^\top (W_{\mathbb{R}})^{2a}e_k
       displayMath(String.raw`\begin{aligned}
 W^{2a+1}
 &=W^{a+(1+a)}
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 2a+1 = a+(1+a)\bigr)\\
+&&\bigl(\because\ \text{【添字の等式】の}\ 2_{\mathbb{Z}}\cdot a+1_{\mathbb{Z}}=a+(1_{\mathbb{Z}}+a)\bigr)\\
 &=W^aW^{1+a}
 &&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to a,\ q \to 1+a)\bigr)\\
 &=W^a\bigl(W^1W^a\bigr)
 &&\bigl(\because\ \blkref{matrix_power_exponent_law}\ (n \to d,\ A \to W,\ p \to 1,\ q \to a)\bigr)\\
 &=W^a\bigl(W^{0+1}W^a\bigr)
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 1 = 0+1\bigr)\\
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}}+x=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
 &=W^a\bigl((W^0W)W^a\bigr)
 &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}\bigr)\\
 &=W^a\bigl((I_{\mathrm{Mat}(d,\mathbb{C})}W)W^a\bigr)
@@ -2405,6 +2430,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
     conversion: {
       status: "added",
       notes: [
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りの「ℤ の根拠を名前だけで引く残り」）: 偶数・奇数の場合の冪の指数の等式を名前だけの「ℤ で 2a = a+a」「ℤ で 2a+1 = a+(1+a)」「ℤ で 1 = 0+1」で引いていた。偶数の場合の前に準備【添字の等式】を置き、2a = a+a（def_power_of_integer の 2_ℤ := 1_ℤ + 1_ℤ・分配律・乗法の単位元の 3 行）と 2a+1 = a+(1+a)（前の等式・加法の結合律・加法の交換律の 3 行）を set_and_algebra_notation の ℤ の行と def_power_of_integer を一行ずつ引く鎖で示し、主の鎖の 2 か所をその参照にした。1 = 0+1 は set_and_algebra_notation の ℤ の和の単位元を右辺から左辺へ引く根拠にした。主張と主の鎖の値は不変。Lean の具体版の Nat.two_mul・omega・Nat.zero_add の段も同じ鎖の補題（trace_power_index_*）にした。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【e_k のノルム】の 2 行目「i ≠ k の項は |(e_k)_i|^2 = |0|^2 = 0」（(e_k)_i = 0・|0| = 0・0^2 = 0・0 の項を和から落とすことを 1 行で使っていた）を、i ≠ k の |(e_k)_i|^2 の 3 行の鎖（def_rayleigh_sup の |(e_1)_i|^2 の鎖と同じ書き方）と、ノルムの鎖の「各項へ当てる」「0 の項を落とす」の 2 行に割った（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【e_k のノルム】の最後の行 √1 = 1 を sqrt_of_real_one_is_one の参照にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【e_k のノルム】の 4 行目 √(|1|^2) = √1（根拠 |1|^2 = 1 が |1| = 1 と 1^2 = 1 の 2 つの事実を 1 行で使っていた）を、def_real_absolute_value の 1 ≥ 0 の場合 |1| = 1 の行と power_of_real_one_is_one（m → 2）の行の 2 行に割った（def_rayleigh_sup の |(e_1)_1|^2 の鎖と同じ書き方。値は不変）。",
@@ -3436,7 +3462,7 @@ m_k^{\,2}
 &=(W^1)_{\mathbb{R}}
 &&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to 1)\bigr)\\
 &=(W^{0+1})_{\mathbb{R}}
-&&\bigl(\because\ \mathbb{Z}\ \text{で}\ 1 = 0+1\bigr)\\
+&&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}}+x=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
 &=(W^0W)_{\mathbb{R}}
 &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ (K = \mathbb{C},\ m = 0)\bigr)\\
 &=(IW)_{\mathbb{R}}
@@ -4185,6 +4211,7 @@ T
     conversion: {
       status: "added",
       notes: [
+        "2026-11-24（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りの「ℤ の根拠を名前だけで引く残り」）: (W_ℝ)^1 = W_ℝ の鎖の 2 行目の根拠を、名前だけの「ℤ で 1 = 0+1」から set_and_algebra_notation の ℤ の和の単位元 0_ℤ + x = x（x → 1_ℤ）を右辺から左辺へ引く形にした（値は不変）。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 【(W_ℝ)^n の半正定値性】の ‖w‖ の鎖の最後の行 √1 = 1 を sqrt_of_real_one_is_one の参照にした（値は不変）。",
         "この証明はスペクトル定理（実対称行列の対角化可能性）を使っていない。c(M) は上限として定義され、上からの評価は rayleigh_bounds_operator_norm、下からの評価はモーメント列の対数凸性による。対角化可能性は正しいが本文にまだ無く、挟み撃ちには不要である。",
         "2026-08-14 の式変形統一で、Step 2 の対数凸性を任意の k へ移す奇数・偶数の場合分けを、それぞれ四段の一続きの不等式鎖へ開き、各行末に根拠を置いた。内容は変えていない。",

@@ -26,6 +26,7 @@
 | 【`(W_ℝ)^ae_k` の成分とノルム】`j ≠ k` の項の 2 行と成分の 5 行 | `power_of_W_real_mulVec_standard_basis_apply` の `hterm` の 2 段と `calc` の 5 段 |
 | 同じ段のノルムの 3 行 | `norm_power_of_W_real_mulVec_standard_basis_le` の `calc` の 3 段 |
 | 同じ段の平方の 2 行 | `norm_sq_power_of_W_real_mulVec_standard_basis_le` の `calc` の 2 段 |
+| 【添字の等式】`2a = a+a` の 3 行・`2a+1 = a+(1+a)` の 3 行 | `trace_power_index_two_mul_eq_add` の `calc` の 3 段・`trace_power_index_two_mul_add_one_eq` の `calc` の 3 段（人手の `ℤ_{≥0}` の元を Lean の `ℕ` で書く） |
 | 偶数: `(W_ℝ)^{2a} = (W_ℝ)^a(W_ℝ)^a` の 5 行 | `power_of_W_real_even_split` の `calc` の 5 段 |
 | 偶数: `e_k^⊤(W_ℝ)^{2a}e_k ≤ c^n` の 9 行 | `diagonal_bound_even` の `calc` の 9 段 |
 | 奇数: `W^{2a+1} = W^a(WW^a)`（`Mat(d,ℂ)`）の 7 行 | `power_of_W_odd_split` の `calc` の 7 段 |
@@ -185,6 +186,20 @@ theorem power_of_W_real_mulVec_standard_basis_apply (a : ℕ) (k l : Conf M) :
     _ = P l k * 1 := by rw [he, Pi.single_eq_same]                          -- `(e_k)_k = 1`
     _ = P l k := mul_one (P l k)                                            -- `1` は ℝ の乗法の単位元 `x·1 = x`（`x → ((W_ℝ)^a)_lk`、`set_and_algebra_notation`）
 
+/-- 人手【添字の等式】の一つ目の 3 行: `2a = a + a`（人手の `ℤ_{≥0}` の元を Lean の `ℕ` で書く）。 -/
+theorem trace_power_index_two_mul_eq_add (a : ℕ) : 2 * a = a + a :=
+  calc 2 * a
+      = (1 + 1) * a := rfl                                                  -- `def_power_of_integer` の `2 := 1 + 1`
+    _ = 1 * a + 1 * a := Nat.add_mul 1 1 a                                 -- 分配律 `(x+y)t = xt + yt`（`x → 1`, `y → 1`, `t → a`）
+    _ = a + a := by rw [Nat.one_mul]                                       -- 乗法の単位元 `1·x = x`（`x → a`）を 2 か所へ
+
+/-- 人手【添字の等式】の二つ目の 3 行: `2a + 1 = a + (1 + a)`。 -/
+theorem trace_power_index_two_mul_add_one_eq (a : ℕ) : 2 * a + 1 = a + (1 + a) :=
+  calc 2 * a + 1
+      = a + a + 1 := by rw [trace_power_index_two_mul_eq_add a]            -- 上の `2a = a + a`
+    _ = a + (a + 1) := Nat.add_assoc a a 1                                 -- 加法の結合律（`x → a`, `y → a`, `t → 1`）
+    _ = a + (1 + a) := by rw [Nat.add_comm a 1]                            -- 加法の交換律（`x → a`, `y → 1`）
+
 /-- 人手 偶数の場合の 5 行: `(W_ℝ)^{2a} = (W_ℝ)^a(W_ℝ)^a`。 -/
 theorem power_of_W_real_even_split (a : ℕ) :
     realMatrixOfRealEntries W hW.1 ^ (2 * a)
@@ -193,7 +208,8 @@ theorem power_of_W_real_even_split (a : ℕ) :
       = realMatrixOfRealEntries (W ^ (2 * a)) (matrix_pow_hasRealEntries W hW.1 (2 * a)) :=
         (real_matrix_of_real_entry_matrix_preserves_power W hW.1 (2 * a)).symm  -- 【冪の実数の行列】（`p → 2a`）
     _ = realMatrixOfRealEntries (W ^ (a + a)) (matrix_pow_hasRealEntries W hW.1 (a + a)) :=
-        realMatrixOfRealEntries_congr (by rw [Nat.two_mul]) _ _             -- `ℤ` で `2a = a + a`
+        realMatrixOfRealEntries_congr (by rw [trace_power_index_two_mul_eq_add a]) _ _
+                                                                            -- 【添字の等式】の `2a = a + a`
     _ = realMatrixOfRealEntries (W ^ a * W ^ a)
           (matrix_mul_hasRealEntries _ _ (matrix_pow_hasRealEntries W hW.1 a)
             (matrix_pow_hasRealEntries W hW.1 a)) :=
@@ -207,10 +223,10 @@ theorem power_of_W_real_even_split (a : ℕ) :
 /-- 人手 奇数の場合の `Mat(d,ℂ)` の 7 行: `W^{2a+1} = W^a(WW^a)`。 -/
 theorem power_of_W_odd_split (a : ℕ) : W ^ (2 * a + 1) = W ^ a * (W * W ^ a) :=
   calc W ^ (2 * a + 1)
-      = W ^ (a + (1 + a)) := by rw [show 2 * a + 1 = a + (1 + a) by omega]  -- `ℤ` で `2a + 1 = a + (1 + a)`
+      = W ^ (a + (1 + a)) := by rw [trace_power_index_two_mul_add_one_eq a]  -- 【添字の等式】の `2a + 1 = a + (1 + a)`
     _ = W ^ a * W ^ (1 + a) := matrix_power_exponent_law W a (1 + a)       -- `matrix_power_exponent_law`（`p → a`, `q → 1 + a`）
     _ = W ^ a * (W ^ 1 * W ^ a) := by rw [matrix_power_exponent_law W 1 a]  -- `matrix_power_exponent_law`（`p → 1`, `q → a`）
-    _ = W ^ a * (W ^ (0 + 1) * W ^ a) := by rw [Nat.zero_add]           -- `ℤ` で `1 = 0 + 1`
+    _ = W ^ a * (W ^ (0 + 1) * W ^ a) := by rw [Nat.zero_add 1]         -- `ℤ` の和の単位元 `0 + x = x`（`x → 1`、`set_and_algebra_notation`）を右辺から左辺へ
     _ = W ^ a * ((W ^ 0 * W) * W ^ a) := by rw [pow_succ W 0]               -- `def_exp` (1) の `A^{m+1} := A^mA`（`m = 0`）
     _ = W ^ a * ((1 * W) * W ^ a) := by rw [pow_zero]                       -- `def_exp` (1) の `A^0 := I`
     _ = W ^ a * (W * W ^ a) := by rw [identity_matrix_mul_tensorPow W]      -- `identity_matrix_is_left_unit_of_mat_mult`

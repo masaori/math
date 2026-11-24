@@ -416,6 +416,7 @@ def check_varrho_lines(P, nmax, what):
         eq(varrho_rc(pc[p]), pr[p], f"{what}: 【冪の実数の行列】 p={p}")
     L = [pr[1], varrho_rc(pc[1]), varrho_rc(pc[0 + 1]), varrho_rc(body_product(pc[0], Wc)), varrho_rc(body_product(Ic, Wc)), varrho_rc(Wc), WR]
     chain_eq(L, f"{what}: (W_ℝ)^1 = W_ℝ の ϱ の鎖")
+    eq(ZZ(1), ZZ(0) + ZZ(1), f"{what}: (W_ℝ)^1 の鎖の 2 行目の根拠 ℤ の和の単位元 1 = 0+1")
     for n in range(1, nmax + 1):
         T = body_transpose(pc[n])
         eq(T, pc[n], f"{what}: (W^n)^⊤ = W^n n={n}")

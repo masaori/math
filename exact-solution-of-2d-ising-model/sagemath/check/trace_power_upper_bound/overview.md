@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 - ブロック: `maxeig_008a_claim_trace_power_upper_bound`（`Σ_k ((W_ℝ)^n)_kk ≤ 2^{M_col} c(M_col)^n`、`W_ℝ := ϱ(W)` は `def_W_real`）
-- 範囲: 証明の五つの準備（【e_k のノルム】【冪の実数の行列】【冪の対称性】【対角成分の表示】【(W_ℝ)^ae_k の成分とノルム】）、偶数の場合の ϱ の鎖 5 行と成分の鎖 9 行、奇数の場合の `W^{2a+1} = W^a(WW^a)` の鎖 7 行と ϱ の鎖 5 行と成分の鎖 12 行、最後の和の鎖 5 行、主張そのもの。
+- 範囲: 証明の六つの準備（【e_k のノルム】【冪の実数の行列】【冪の対称性】【対角成分の表示】【(W_ℝ)^ae_k の成分とノルム】【添字の等式】）、偶数の場合の ϱ の鎖 5 行と成分の鎖 9 行、奇数の場合の `W^{2a+1} = W^a(WW^a)` の鎖 7 行と ϱ の鎖 5 行と成分の鎖 12 行、最後の和の鎖 5 行、主張そのもの。
 - 記号は証明のとおり `c := c(M_col)`、`d := 2^{M_col}`、`u := (W_ℝ)^ae_k`。下の表の実数の側の行（`_lines.sage` の `check_proof_lines`）は `P` を `W_ℝ`（QQ の実数の行列）として確かめ、ϱ で運ぶ行（`check_varrho_lines`）は複素行列 `W`（QQbar）と `W_ℝ = ϱ(W)`（AA）を別々に作って確かめる。
 
 ## 証明の行との対応
@@ -17,6 +17,7 @@
 | 【冪の実対称性】（`W^p` は実対称） | `_lines.sage` | `def_exp` (1) の漸化式で作った冪が Sage の冪 `P**p` と一致し、成分が QQ、`def_matrix_transpose` で作った転置と一致。鎖 `(W^p)_kl = ((W^p)^⊤)_kl = (W^p)_lk` の 2 段を全成分で | **PASS** |
 | 【対角成分の表示】（準備: `i ≠ k` の項 `((e_k)_i(W^p)_ij)(e_k)_j = (0·(W^p)_ij)·(e_k)_j = 0·(e_k)_j = 0`、`i ≠ k` の内側の和 `Σ_j … = Σ_j 0 = 0`、`j ≠ k` の項 `(W^p)_kj(e_k)_j = (W^p)_kj·0 = 0`。主: `e_k^⊤W^pe_k = ΣΣ… = 0+⋯+0+Σ_j (e_k)_k(W^p)_kj(e_k)_j+0+⋯+0 = Σ_j (e_k)_k(W^p)_kj(e_k)_j = Σ_j 1·(W^p)_kj(e_k)_j = Σ_j (W^p)_kj(e_k)_j = 0+⋯+0+(W^p)_kk(e_k)_k+0+⋯+0 = (W^p)_kk(e_k)_k = (W^p)_kk·1 = (W^p)_kk`） | `_lines.sage` | 準備の 3 段・2 段・2 段（`real_zero_times_is_zero`・`real_times_zero_is_zero` の当てはめを含む）、主の 9 段の等号、`(e_k)_k = 1` の代入を各項で、`1·x = x`（`x → (W^p)_kj`）と `x·1 = x`（`x → (W^p)_kk`）の当てはめ、各項へ 0 を当てた和、0 の項を左から順に落とす各段（`0 + r = r` か `r + 0 = r`）、組み込みの行列積 `e^⊤Qe` との比較 | **PASS** |
 | 【W^ae_k の成分とノルム】（準備: `j ≠ k` の項 `(W^a)_lj(e_k)_j = (W^a)_lj·0 = 0`。`u_l = Σ_j (W^a)_lj(e_k)_j = 0+⋯+0+(W^a)_lk(e_k)_k+0+⋯+0 = (W^a)_lk(e_k)_k = (W^a)_lk·1 = (W^a)_lk`、`‖u‖ ≤ c^a‖e_k‖ = c^a`、`‖u‖^2 ≤ c^{2a}`） | `_lines.sage` | 成分の式と組み込みの積、準備の 2 段、5 行の等号（各項へ 0 を当てた和と、0 の項を左から順に落とす各段、`(e_k)_k = 1` の代入と `x·1 = x`（`x → (W^a)_lk`））、`rayleigh_bounds_operator_norm` の冪の主張（指数 `a`）の不等号、`0 ≤ ‖u‖`、`(c^a)^2 = c^{2a}`、二乗した不等号 | **PASS** |
+| 【添字の等式】（`2a = (1+1)a = 1·a+1·a = a+a`、`2a+1 = (a+a)+1 = a+(a+1) = a+(1+a)`）と奇数の鎖の 4 行目の根拠 `1 = 0+1`（ℤ の和の単位元） | `_lines.sage` | 各段の等号を ZZ で、確かめる最大の `n` の半分以下の全ての `a` で | **PASS** |
 | 偶数の場合の鎖（【対角成分の表示】 → `2a = a+a` → `matrix_power_exponent_law` → `mat_mult` → 【冪の実対称性】 の対称性 → `u_l = (W^a)_lk` → `u_lu_l = |u_l|^2` → `def_matrix_norm` → `≤ c^{2a}` → `n = 2a`） | `_lines.sage` | 8 段の等号、不等号、最後の等号。`W^{2a} = W^aW^a` を行列として比較 | **PASS** |
 | 奇数の場合の `W^{2a+1} = W^{a+(1+a)} = W^aW^{1+a} = W^a(W^1W^a) = W^a(W^{0+1}W^a) = W^a((W^0W)W^a) = W^a((IW)W^a) = W^a(WW^a)` | `_lines.sage` | 7 段の行列の等号（冪は `def_exp` (1)、積は `mat_mult` の成分の式） | **PASS** |
 | 奇数の場合の成分の鎖（【対角成分の表示】 → 上の鎖 → `mat_mult` 2 回 → 分配律 → 【冪の実対称性】 → 【W^ae_k の成分とノルム】 → `def_real_bilinear_value` → `def_rayleigh_sup` → 【W^ae_k の成分とノルム】 と `c > 0` → 指数法則 → `n = 2a+1`） | `_lines.sage` | 8 段の等号、不等号 2 段、等号 2 段 | **PASS** |
@@ -31,9 +32,9 @@
 `_lines.sage` の `check_proof_lines` を二つの検算が呼ぶ。
 
 - `check_generic_positive_semidefinite_matrices.sage`: 証明が使う `W` の性質は「成分が実数で対称」「半正定値（`rayleigh_bounds_operator_norm` の前提）」「`c` は上限」だけなので、
-  `P := A^⊤A`（`A` は整数の `n'×n` 行列、`n = 1..5`、`n' = n−1, n, n+1`）の有理行列 28 組で確かめる。等号 109971 個、不等号 2446 個（2026-11-06 の `check_varrho_lines`、2026-11-07 の `ι` の行、2026-11-08 の `|1| = 1`・`1^2 = 1` の行、2026-11-15 の `(e_k)_k = 1` の代入と `1·x = x`・`x·1 = x` の行を含む）。
+  `P := A^⊤A`（`A` は整数の `n'×n` 行列、`n = 1..5`、`n' = n−1, n, n+1`）の有理行列 28 組で確かめる。等号 110599 個、不等号 2446 個（2026-11-06 の `check_varrho_lines`、2026-11-07 の `ι` の行、2026-11-08 の `|1| = 1`・`1^2 = 1` の行、2026-11-15 の `(e_k)_k = 1` の代入と `1·x = x`・`x·1 = x` の行、2026-11-24 の【添字の等式】と `1 = 0+1` の行を含む）。
 - `check_symmetrized_transfer_matrix.sage`: 本文の `W = (BV_2)B`（`def_symmetrized_transfer_matrix`）を `K_1 := 2 log y`、`K_2 := log x`
-  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。等号 136832 個、不等号 1144 個（同上）。`W` の大きさが `d = 2^{M_col}` であることも確かめる。
+  （`x, y ∈ {2, 3}`、`M_col = 2, 3`）で作る。`W` は QQ の行列である。等号 136984 個、不等号 1144 個（同上）。`W` の大きさが `d = 2^{M_col}` であることも確かめる。
 
 `W` の作り方、`c(M_col)` の作り方（特性多項式の最大の実根を AA で取り、`cI − W` の半正定値性と固有ベクトルでの到達で上限であることを確かめる）、
 ノルム・`x^⊤Py`・行列とベクトルの積・冪の関数は、直前の主張の検算 `sagemath/check/rayleigh_bounds_operator_norm/_prelude.sage` を読み込んで使う（その overview の「`c(M_col)` の作り方」）。

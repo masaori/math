@@ -181,6 +181,16 @@ def check_proof_lines(P, c, nmax, what):
             eq((c**a)**2, c**(2 * a), f"{what}: 【W^ae_k の成分とノルム】の (c^a)^2 = c^{{2a}}")
             le(nu**2, (c**a)**2, f"{what}: 【W^ae_k の成分とノルム】の ‖u‖^2 ≤ c^{{2a}} a={a}, k={k}")
             U[(a, k)] = u
+    # 【添字の等式】: 2a = (1+1)a = 1·a+1·a = a+a、2a+1 = (a+a)+1 = a+(a+1) = a+(1+a)（ZZ で各段の等号）
+    for a in range(nmax // 2 + 1):
+        L = [ZZ(2) * a, (ZZ(1) + ZZ(1)) * a, ZZ(1) * a + ZZ(1) * a, ZZ(a) + ZZ(a)]
+        for x, y in zip(L, L[1:]):
+            eq(x, y, f"{what}: 【添字の等式】の 2a a={a}")
+        L = [ZZ(2) * a + 1, (ZZ(a) + ZZ(a)) + 1, ZZ(a) + (ZZ(a) + 1), ZZ(a) + (ZZ(1) + ZZ(a))]
+        for x, y in zip(L, L[1:]):
+            eq(x, y, f"{what}: 【添字の等式】の 2a+1 a={a}")
+    # 奇数の鎖の 4 行目の根拠: ℤ の和の単位元 0 + x = x（x → 1）を右辺から左辺へ
+    eq(ZZ(1), ZZ(0) + ZZ(1), f"{what}: ℤ の和の単位元 1 = 0+1")
     # 偶数の場合 n = 2a（a ≥ 1）
     for n in range(2, nmax + 1, 2):
         a = n // 2

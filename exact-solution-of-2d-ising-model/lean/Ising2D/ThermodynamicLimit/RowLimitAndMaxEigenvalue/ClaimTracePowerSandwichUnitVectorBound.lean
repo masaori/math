@@ -205,7 +205,7 @@ theorem power_one_of_W_real : realMatrixOfRealEntries W hW.1 ^ 1 = realMatrixOfR
       = realMatrixOfRealEntries (W ^ 1) (matrix_pow_hasRealEntries W hW.1 1) :=
         (real_matrix_of_real_entry_matrix_preserves_power W hW.1 1).symm    -- 【冪の実数の行列】（`p → 1`）
     _ = realMatrixOfRealEntries (W ^ (0 + 1)) (matrix_pow_hasRealEntries W hW.1 (0 + 1)) :=
-        realMatrixOfRealEntries_congr (by rw [Nat.zero_add]) _ _            -- `ℤ` で `1 = 0 + 1`
+        realMatrixOfRealEntries_congr (by rw [Nat.zero_add 1]) _ _          -- `ℤ` の和の単位元 `0 + x = x`（`x → 1`、`set_and_algebra_notation`）を右辺から左辺へ
     _ = realMatrixOfRealEntries (W ^ 0 * W)
           (matrix_mul_hasRealEntries _ _ (matrix_pow_hasRealEntries W hW.1 0) hW.1) :=
         realMatrixOfRealEntries_congr (pow_succ W 0) _ _                    -- `def_exp` (1) の `A^{m+1} := A^mA`（`K = ℂ`, `m = 0`）
