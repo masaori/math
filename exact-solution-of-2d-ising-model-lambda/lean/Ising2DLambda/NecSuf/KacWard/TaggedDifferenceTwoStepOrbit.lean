@@ -3,11 +3,10 @@
 対合であること、活動点が有限であることだけを使う必要十分版。
 -/
 import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceActiveVertices
-import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationMinimalPeriod
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.FiniteInjectiveMinimalPeriod
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Ising2DLambda.AlgebraicEigenvalue
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue
   (PerfectMatching perfectMatchingMate perfectMatchingMate_involutive)
 
@@ -38,7 +37,8 @@ theorem activeTwoStep_periodic (D R : PerfectMatching J) (T : Set (Set J))
     ∃ n : ℕ, 0 < n ∧
       (activeTwoStep D R T)^[n] i = i := by
   classical
-  simpa only [finiteMapIterate] using
-    finitePermutation_positive_return (activeTwoStep D R T) i
+  exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.finiteInjective_positive_return
+    (activeTwoStep D R T)
+    (activeTwoStep D R T).injective i
 
 end Ising2DLambda.NecSuf.KacWard

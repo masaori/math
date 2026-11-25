@@ -3,7 +3,6 @@
 # 行は減らすだけにする。直して違反でなくなった行は同じ回に消す。
 DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.emptyWeightedPfaffianDeterminant
 DEP	necsuf	Ising2DLambda.NecSuf.CriticalExponent.criticalPoint_rationalPartitionInterval_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.activeTwoStep_periodic
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.alternating_cycle_matching_sign_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.commonPairsOf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.commonPairs_nodup_necSuf
@@ -155,7 +154,6 @@ IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixForbiddenTerm	concrete
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.ProjectedCycleSupportUnion	concrete	Ising2DLambda.AlgebraicEigenvalue.MatchingPairSecondColoring
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedAlternatingCycleMatchingSign	concrete	Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSign
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedCyclePairWalk	concrete	Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSign
-IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedDifferenceTwoStepOrbit	concrete	Ising2DLambda.AlgebraicEigenvalue.FinitePermutationMinimalPeriod
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TaggedMatchingTermOrientation	concrete	Ising2DLambda.KacWard.AlternatingCycleMatchingSign
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TwistedModeRatioRoot	concrete	Ising2DLambda.AlgebraicEigenvalue.RootOfUnity
 IMPORT	necsuf	Ising2DLambda.NecSuf.KacWard.TwistedModeSets	concrete	Ising2DLambda.AlgebraicEigenvalue.RootOfUnity

@@ -3,7 +3,6 @@ import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairOrbitSeparation
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Ising2DLambda.AlgebraicEigenvalue
 open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 attribute [local instance] Classical.propDecidable
 
