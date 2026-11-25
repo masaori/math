@@ -194,7 +194,7 @@
 | `Ising2D.Sfun_le_cosh_sq` / `inv_sqrt_diff_S_Q` / `abs_Jint_sub_Iint` | **Step 4**: `0 ≤ I - J ≤ (π/2)cosh(κ/2)` | Step 4 |
 | `Ising2D.coshgamma_div_sinhgamma_cube_le` / `inv_pow_three_half_mono` / `Tint_le` | **Step 5**: `0 ≤ T ≤ 2cosh²(κ/2)/c_0` | Step 5 |
 | `Ising2D.two_pi_mul_Gsecond` | `2πG'' = cosh κ·log(π/sinh(κ/2)) + (cosh κ/2)(J - 2log(π/sinh(κ/2))) - T` | Step 6 の分解 |
-| `Ising2D.step6_bound` | **Step 6**: `\|cosh κ·log(π/sinh(κ/2)) - log(1/κ)\| ≤ 2.27` | Step 6 |
+| `Ising2D.step6_bound` | **Step 6**: `\|cosh κ·log(π/sinh(κ/2)) - log(1/κ)\| ≤ 2.201` | Step 6 |
 | `Ising2D.second_derivative_log_divergence_pos` | **`\|G''(κ) - (1/2π)log(1/κ)\| ≤ 6/5`**（`0 < κ ≤ 1/2`） | 主張（`κ>0` の場合） |
 | `Ising2D.Sfun_neg` / `gammaK_neg` / `Gfun_neg` | `S(θ,−κ) = S(θ,κ)`、`γ(θ,−κ) = γ(θ,κ)` と **`G(−κ) = G(κ)`** | Step 0 の鎖（`gamma_kappa_identity`） |
 | `Ising2D.Gfirst_eq_neg_Gfirst_neg` / `abs_Gfirst_neg` / `Gsecond_eq_Gsecond_neg` / `Gsecond_neg` | 合成関数の微分で **`G'(κ) = −G'(−κ)`、`\|G'(−κ)\| = \|G'(κ)\|`、`G''(κ) = G''(−κ)`** | Step 0（主張の `\|κ\|` への一般化） |
@@ -291,8 +291,7 @@
 原文は `cosh 0.2 ≤ 1.020067` 等を「初等関数の数値評価」として外から持ち込むと宣言している。
 本形式化はこれを持ち込まない。`cosh 0.2` の評価 `cosh_02_bounds` は、具体版の半角の公式 `cosh_eq_one_add_two_sinh_half_sq`・
 `self_le_sinh_of_nonneg`・`sinh_le_mul_cosh_of_nonneg`・`cosh_sq_eq_one_add_sinh_sq` から導いた。
-`second_derivative_log_divergence` の `cosh(1/4)`・`cosh(1/2)` の評価（`step6_bound` など）は、いまも
-`Ising2D.NecSuf.cosh_le_inv_one_sub_sq_div_two`（`cosh t ≤ (1-t²/2)⁻¹`）から導いている。どちらの評価でも、そのぶん定数が悪くなる。
+この評価では、そのぶん定数が悪くなる。
 
 | 量 | 原文 | 本形式化 |
 | --- | --- | --- |
@@ -302,11 +301,13 @@
 | `\|κ''\|` の上界 | `9.19` | `9.3` |
 | `\|(κ'²)'\|` の上界 | `87` | `88.2` |
 | `\|κ'²-16\|/\|κ\|` | `24.7` | `25.1` |
-| `\|2πG'' - log(1/κ)\|` の上界 | （原文は途中で明示せず） | `6.9` |
 
-**結論の定数 `6/5` は原文のまま成立する**（`6.9/(2π) ≤ 1.10 ≤ 6/5`）。
+`second_derivative_log_divergence` が持ち込む `sinh(1/4)`・`cosh(1/4)`・`log cosh(1/4)`・`cosh(1/2)`・`log 2`・`log(2π)` の評価は、
+`step6_bound`・`second_derivative_log_divergence_pos` の証明の中で mathlib の指数関数の級数の評価（`Real.exp_bound'`・
+`Real.sum_le_exp_of_nonneg`・`Real.quadratic_le_exp_of_nonneg`）と `Real.log_two_lt_d9`・`Real.log_two_gt_d9` から受けるので、
+この定理の途中の定数（`|R| ≤ 1.621`・`T ≤ 3.615`・Step 6 の `2.201`・`|2πG'' - log(1/κ)| ≤ 6.731`）は原文と同じである。
 
-`specific_heat_log_divergence`（章の到達点）でも同様に各段の定数がわずかに悪くなる。
+`specific_heat_log_divergence`（章の到達点）では、上の表の `kappa_of_K_basic` の定数の差を受けて各段の定数がわずかに悪くなる。
 
 | Step | 原文 | 本形式化 |
 | --- | --- | --- |

@@ -12,8 +12,6 @@
 必要十分版は `Ising2D/NecSuf/HyperbolicBounds.lean`
 （`Ising2D.NecSuf.sinh_le_mul_cosh` ほか）。(5) の後半 `sinh_le_mul_cosh_of_nonneg` は本文 `sinh_at_most_argument_times_cosh` の
 証明どおりに書き、必要十分版の特殊化として得ることは導出 `ClaimCoshAdditionAndHalfAngleFromNecSuf.lean` が述べる。
-`NecSuf.HyperbolicBounds` の import は、このファイルを経て同じ必要十分版の定理を使う下流の具体版
-（`step6_bound`・`second_derivative_log_divergence_pos`）のために残っている（分離の台帳の行）。
 (1) の加法定理 4 本の必要十分版は `Ising2D/NecSuf/SymmetrizedAdditionFormulas.lean`、
 具体版をその特殊化として得る導出は `ClaimCoshAdditionAndHalfAngleFromNecSuf.lean`。
 倍角公式 `sinh_double_angle_formula`（具体版 `sinh_eq_two_sinh_half_mul_cosh_half`。人手の 4 行と 1 対 1 の `calc`）の必要十分版は
@@ -29,7 +27,9 @@
 `t ≤ sinh t` も `Real.self_le_sinh_iff` にある。
 mathlib に**無かった**のは `sinh t ≤ t cosh t` だけで、これは本文の積分の鎖で証明した。
 -/
-import Ising2D.NecSuf.HyperbolicBounds
+import Mathlib.Analysis.SpecialFunctions.Arsinh
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Series
+import Mathlib.Analysis.Calculus.MeanValue
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct

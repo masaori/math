@@ -9,24 +9,19 @@
 - `Ising2D/NecSuf/DiffUnderIntegral.lean`（積分記号下の微分 = 原文の (R5)。本ファイルは import せず、
   Step 1 の `hasDerivAt_Gfun`・`hasDerivAt_Gfirst` の証明の中で (R5) を mathlib の優関数の形で受ける）
 - `Ising2D/NecSuf/LogDivergentIntegral.lean`（対数発散の本体）
-- `Ising2D/NecSuf/HyperbolicBounds.lean`（数値評価）
 
-## 原文との差
-
-原文は各段の数値評価に `cosh 0.2 ≤ 1.02007` のような外部の数値を使うが、本形式化では
-`Ising2D/NecSuf/HyperbolicBounds.lean` の `cosh t ≤ (1-t²/2)⁻¹` だけを使う（`ClaimKappaOfKBasic.lean` 参照）。
-そのため途中の定数は原文とわずかに異なるが、**結論の定数 `6/5` は原文のまま成立する**
-（本形式化の評価では `|2πG'' - log(1/κ)| ≤ 6.9`、`6.9/2π ≤ 1.10 ≤ 6/5`)。
-
-なお原文 Step 4 は `|R| ≤ 2δ²/π² + B + (π/2)cosh(κ/2)` と 3 項の和で抑えているが、
-`R` の上界と下界は別々の項から来るので、実際には
-`-(π/2)cosh(κ/2) ≤ R ≤ 2δ²/π² + B` であり和を取る必要はない（本形式化ではこちらを使う）。
+Step 4〜7 の途中の定数（`|R| ≤ 1.621`・`T ≤ 3.615`・Step 6 の `2.201`・総合の `6.731`）は本文と同じである。
+本文が `remark_real_analysis_escape_chapter_E` から持ち込む初等関数の値の数値の評価は、`step6_bound`・
+`second_derivative_log_divergence_pos` の証明の中の段で、mathlib の指数関数の級数の評価から受ける。
 -/
 import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.ClaimGammaDerivativesInKappa
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSineIntegralTwoSided
 import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
 import Mathlib.Analysis.Complex.ExponentialBounds
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimRealLogOfProduct
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimSinhStrictlyIncreasing
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRealLogStrictlyIncreasing
 
 namespace Ising2D
 
@@ -443,193 +438,329 @@ theorem two_pi_mul_Gsecond {κ : ℝ} (hκ : κ ≠ 0) :
   ring
 
 set_option maxHeartbeats 1000000 in
-/-- **人手証明 Step 6**: `|cosh κ · log(π/δ) - log(1/κ)| ≤ 2.27`（`0 < κ ≤ 1/2`）。 -/
+/-- **人手証明 Step 6**: `|cosh κ · log(π/δ) − log(1/κ)| ≤ 2.201`
+（`0 < κ ≤ 1/2`、`δ = sinh(κ/2)`）。本文 `second_derivative_log_divergence` の Step 6 の鎖と 1 段ずつ対応させる。
+本文が `remark_real_analysis_escape_chapter_E` から持ち込む数値の評価（`cosh(1/4) ≤ 1.0315`・`log cosh(1/4) ≤ 0.0310`・
+`cosh(1/2) ≤ 1.1277`・`0.6931 ≤ log 2 ≤ 0.6932`・`log(2π) ≤ 1.8380`）は、証明の中の段で mathlib の指数関数の級数の評価
+（`Real.exp_bound'`・`Real.sum_le_exp_of_nonneg`・`Real.quadratic_le_exp_of_nonneg`）と `Real.log_two_lt_d9`・`Real.log_two_gt_d9` から受ける。
+本文が引く `sinh_at_least_argument`・`sinh_at_most_argument_times_cosh`・`cosh_half_angle_formula`・`cosh_monotone_on_nonnegative` には
+欄 `lean` が無いので、具体版 `self_le_sinh_of_nonneg`・`sinh_le_mul_cosh_of_nonneg`・`cosh_eq_one_add_two_sinh_half_sq` と mathlib の
+`Real.cosh_le_cosh` で受ける。 -/
 theorem step6_bound {κ : ℝ} (h0 : 0 < κ) (h1 : κ ≤ 1/2) :
-    |Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ)| ≤ 2.27 := by
+    |Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ)| ≤ 2.201 := by
   have hpi : (0:ℝ) < Real.pi := Real.pi_pos
+  have hpil : (3.141592:ℝ) < Real.pi := Real.pi_gt_d6
   have hpiu : Real.pi < 3.141593 := Real.pi_lt_d6
-  have hδpos : 0 < Real.sinh (κ / 2) := real_sinh_pos_of_pos (by linarith)
-  have hcpos : (1:ℝ) ≤ Real.cosh (κ / 2) := cosh_at_least_one _
-  have hcub : Real.cosh (κ / 2) ≤ 32/31 := by
-    have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ / 2) (by nlinarith)
-    have hd : (31:ℝ)/32 ≤ 1 - (κ / 2) ^ 2 / 2 := by nlinarith
-    have hinv : (1 - (κ / 2) ^ 2 / 2)⁻¹ ≤ (31/32 : ℝ)⁻¹ := by
-      apply inv_anti₀ (by norm_num) hd
-    calc Real.cosh (κ / 2) ≤ (1 - (κ / 2) ^ 2 / 2)⁻¹ := h
-      _ ≤ (31/32 : ℝ)⁻¹ := hinv
-      _ = 32/31 := by norm_num
-  have hδub : Real.sinh (κ / 2) ≤ κ / 2 * Real.cosh (κ / 2) :=
-    sinh_le_mul_cosh_of_nonneg (by linarith)
-  have hδlb : κ / 2 ≤ Real.sinh (κ / 2) := self_le_sinh_of_nonneg (by linarith)
-  have hcoshκ1 : (1:ℝ) ≤ Real.cosh κ := cosh_at_least_one _
-  have hcoshκ : Real.cosh κ ≤ 8/7 := by
-    have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ) (by nlinarith)
-    have hd : (7:ℝ)/8 ≤ 1 - κ ^ 2 / 2 := by nlinarith
-    have hinv : (1 - κ ^ 2 / 2)⁻¹ ≤ (7/8 : ℝ)⁻¹ := inv_anti₀ (by norm_num) hd
-    calc Real.cosh κ ≤ (1 - κ ^ 2 / 2)⁻¹ := h
-      _ ≤ (7/8 : ℝ)⁻¹ := hinv
-      _ = 8/7 := by norm_num
-  -- ρ の定義と評価
-  set ρ : ℝ := Real.log κ - Real.log (Real.sinh (κ / 2)) - Real.log 2 with hρdef
-  have hlogsplit : Real.log (Real.pi / Real.sinh (κ / 2))
-      = Real.log (1 / κ) + Real.log (2 * Real.pi) + ρ := by
-    rw [Real.log_div (ne_of_gt hpi) (ne_of_gt hδpos), Real.log_div one_ne_zero (ne_of_gt h0),
-      Real.log_mul two_ne_zero (ne_of_gt hpi), hρdef, Real.log_one]
-    ring
-  have hρub : ρ ≤ 0 := by
-    have h : Real.log κ ≤ Real.log (2 * Real.sinh (κ / 2)) :=
-      Real.log_le_log h0 (by linarith)
-    rw [Real.log_mul two_ne_zero (ne_of_gt hδpos)] at h
-    rw [hρdef]; linarith
-  have hρlb : -(1/31 : ℝ) ≤ ρ := by
-    have h : Real.log (2 * Real.sinh (κ / 2)) ≤ Real.log (κ * Real.cosh (κ / 2)) :=
-      Real.log_le_log (by linarith) (by nlinarith)
-    rw [Real.log_mul two_ne_zero (ne_of_gt hδpos),
-      Real.log_mul (ne_of_gt h0) (ne_of_gt (cosh_pos_of_two_cosh_pos (κ / 2)))] at h
-    have hlogc : Real.log (Real.cosh (κ / 2)) ≤ 1/31 := by
-      have := Real.log_le_sub_one_of_pos (cosh_pos_of_two_cosh_pos (κ / 2))
+  -- 対数の単調性（`real_log_strictly_increasing`。等号のときは両辺が等しい）
+  have hlogle : ∀ u v : ℝ, 0 < u → u ≤ v → Real.log u ≤ Real.log v := fun u v hu huv =>
+    huv.eq_or_lt.elim (fun h => h ▸ le_rfl)
+      (fun h => (real_log_strictly_increasing hu (hu.trans h) h).le)
+  -- `log 1 = 0`（`real_log_of_product` を `1 · 1 = 1` に当てる）
+  have hlog1 : Real.log 1 = 0 := by
+    have h := (real_log_of_product one_pos one_pos).2
+    rw [one_mul] at h
+    linarith
+  -- 数値の評価（`remark_real_analysis_escape_chapter_E` が持ち込むもの）
+  have hE14u : Real.exp (1/4) ≤ 1.2840267 := by
+    have h := Real.exp_bound' (x := 1/4) (by norm_num) (by norm_num) (n := 5) (by norm_num)
+    norm_num [Finset.sum_range_succ, Nat.factorial] at h
+    linarith
+  have hE14l : 1.2840169 ≤ Real.exp (1/4) := by
+    have h := Real.sum_le_exp_of_nonneg (x := 1/4) (by norm_num) 5
+    norm_num [Finset.sum_range_succ, Nat.factorial] at h
+    linarith
+  have hcosh14' : Real.cosh (1/4) ≤ 1.03142 := by
+    rw [Real.cosh_eq, Real.exp_neg]
+    have : (Real.exp (1/4))⁻¹ ≤ 0.778806 := by
+      rw [inv_le_comm₀ (Real.exp_pos _) (by norm_num)]
+      exact le_trans (show (0.778806:ℝ)⁻¹ ≤ 1.2840169 by norm_num) hE14l
+    linarith
+  have hcosh14 : Real.cosh (1/4) ≤ 1.0315 := by linarith
+  have hlogcosh14 : Real.log (Real.cosh (1/4)) ≤ 0.0310 := by
+    have hq := Real.quadratic_le_exp_of_nonneg (x := 0.031) (by norm_num)
+    calc Real.log (Real.cosh (1/4)) ≤ Real.log (Real.exp 0.031) :=
+          hlogle _ _ (cosh_pos_of_two_cosh_pos _) (by linarith)
+      _ = 0.0310 := by rw [Real.log_exp]; norm_num
+  have hcosh12 : Real.cosh (1/2) ≤ 1.1277 := by
+    have hE12u : Real.exp (1/2) ≤ 1.6487214 := by
+      have h := Real.exp_bound' (x := 1/2) (by norm_num) (by norm_num) (n := 7) (by norm_num)
+      norm_num [Finset.sum_range_succ, Nat.factorial] at h
       linarith
-    rw [hρdef]; linarith
-  -- log(2π) の評価
-  have hlog2 : Real.log 2 < 0.6931471808 := Real.log_two_lt_d9
-  have hlog2pos : (0:ℝ) < Real.log 2 := by
-    have := Real.log_two_gt_d9; linarith
-  have hlogpi4 : Real.log (Real.pi / 4) ≤ Real.pi / 4 - 1 :=
-    Real.log_le_sub_one_of_pos (by positivity)
-  have hlog2pi_ub : Real.log (2 * Real.pi) ≤ 1.865 := by
-    have hsplit : Real.log (2 * Real.pi) = 3 * Real.log 2 + Real.log (Real.pi / 4) := by
-      rw [Real.log_div (ne_of_gt hpi) (by norm_num), Real.log_mul two_ne_zero (ne_of_gt hpi),
-        show (4:ℝ) = 2 ^ 2 by norm_num, Real.log_pow]
-      push_cast
+    have hE12l : 1.6487196 ≤ Real.exp (1/2) := by
+      have h := Real.sum_le_exp_of_nonneg (x := 1/2) (by norm_num) 7
+      norm_num [Finset.sum_range_succ, Nat.factorial] at h
+      linarith
+    rw [Real.cosh_eq, Real.exp_neg]
+    have : (Real.exp (1/2))⁻¹ ≤ 0.6065314 := by
+      rw [inv_le_comm₀ (Real.exp_pos _) (by norm_num)]
+      exact le_trans (show (0.6065314:ℝ)⁻¹ ≤ 1.6487196 by norm_num) hE12l
+    linarith
+  have hlog2u : Real.log 2 ≤ 0.6932 := by have := Real.log_two_lt_d9; linarith
+  have hlog2l : (0.6931:ℝ) ≤ Real.log 2 := by have := Real.log_two_gt_d9; linarith
+  have hlog2pi : Real.log (2 * Real.pi) ≤ 1.8380 := by
+    have hE : 2.5067822 ≤ Real.exp 0.919 := by
+      have h := Real.sum_le_exp_of_nonneg (x := 0.919) (by norm_num) 10
+      norm_num [Finset.sum_range_succ, Nat.factorial] at h
+      linarith
+    have h2 : Real.exp 1.8380 = Real.exp 0.919 * Real.exp 0.919 := by
+      rw [← Real.exp_add]; norm_num
+    have : 2 * Real.pi ≤ Real.exp 1.8380 := by rw [h2]; nlinarith
+    calc Real.log (2 * Real.pi) ≤ Real.log (Real.exp 1.8380) := hlogle _ _ (by positivity) this
+      _ = 1.8380 := Real.log_exp _
+  -- 準備: δ := sinh(κ/2) と κ/2 ≤ δ ≤ (κ/2) cosh(κ/2)
+  set δ : ℝ := Real.sinh (κ / 2) with hδdef
+  have hδpos : 0 < δ := real_sinh_pos_of_pos (by linarith)
+  have hcpos : 0 < Real.cosh (κ / 2) := cosh_pos_of_two_cosh_pos _
+  have hδlb : κ / 2 ≤ δ := self_le_sinh_of_nonneg (by linarith)          -- sinh_at_least_argument
+  have hδub : δ ≤ κ / 2 * Real.cosh (κ / 2) :=
+    sinh_le_mul_cosh_of_nonneg (by linarith)                             -- sinh_at_most_argument_times_cosh
+  -- `cosh(κ/2) ≤ cosh(1/4)`（cosh_monotone_on_nonnegative）
+  have hc14 : Real.cosh (κ / 2) ≤ Real.cosh (1/4) := Real.cosh_le_cosh.2 (by
+    rw [abs_of_nonneg (by linarith : (0:ℝ) ≤ κ / 2), abs_of_nonneg (by norm_num : (0:ℝ) ≤ 1/4)]
+    linarith)
+  -- `2/cosh(κ/2) ≤ κ/δ ≤ 2`
+  have hratio_lb : 2 / Real.cosh (κ / 2) ≤ κ / δ := by
+    rw [div_le_div_iff₀ hcpos hδpos]; nlinarith
+  have hratio_ub : κ / δ ≤ 2 := by
+    rw [div_le_iff₀ hδpos]; linarith
+  -- `−log cosh(κ/2) ≤ log(κ/δ) − log 2 ≤ 0`
+  have hlog2c : Real.log 2 = Real.log (2 / Real.cosh (κ / 2)) + Real.log (Real.cosh (κ / 2)) := by
+    have h := (real_log_of_product (div_pos two_pos hcpos) hcpos).2
+    rwa [div_mul_cancel₀ (2:ℝ) hcpos.ne'] at h
+  have hρlb : -Real.log (Real.cosh (κ / 2)) ≤ Real.log (κ / δ) - Real.log 2 :=
+    calc -Real.log (Real.cosh (κ / 2))
+        = Real.log (2 / Real.cosh (κ / 2)) - Real.log 2 := by rw [hlog2c]; ring  -- real_log_of_product
+      _ ≤ Real.log (κ / δ) - Real.log 2 := by
+          have := hlogle _ _ (div_pos two_pos hcpos) hratio_lb; linarith  -- real_log_strictly_increasing
+  have hρub : Real.log (κ / δ) - Real.log 2 ≤ 0 :=
+    calc Real.log (κ / δ) - Real.log 2
+        ≤ Real.log 2 - Real.log 2 := by
+          have := hlogle _ _ (div_pos h0 hδpos) hratio_ub; linarith  -- real_log_strictly_increasing
+      _ = 0 := sub_self _
+  set ρ : ℝ := Real.log (κ / δ) - Real.log 2 with hρdef
+  -- `log(π/δ) = log(1/κ) + log(2π) + ρ`
+  have hlogsplit : Real.log (Real.pi / δ) = Real.log (1 / κ) + Real.log (2 * Real.pi) + ρ := by
+    have hprod1 : Real.pi / δ = (1 / κ * Real.pi) * (κ / δ) := by field_simp
+    have hA := (real_log_of_product (mul_pos (one_div_pos.2 h0) hpi) (div_pos h0 hδpos)).2
+    have hB := (real_log_of_product (one_div_pos.2 h0) hpi).2
+    have hC := (real_log_of_product two_pos hpi).2
+    calc Real.log (Real.pi / δ)
+        = Real.log (1 / κ) + Real.log Real.pi + Real.log (κ / δ) := by
+          rw [hprod1, hA, hB]                                        -- real_log_of_product
+      _ = Real.log (1 / κ) + Real.log (2 * Real.pi) + (Real.log (κ / δ) - Real.log 2) := by
+          rw [hC]; ring                                              -- real_log_of_product
+      _ = Real.log (1 / κ) + Real.log (2 * Real.pi) + ρ := by rw [hρdef]  -- ρ の定義
+  -- `|ρ| ≤ 0.0310`
+  have hlogc_nn : 0 ≤ Real.log (Real.cosh (κ / 2)) := by
+    have := hlogle 1 (Real.cosh (κ / 2)) one_pos (cosh_at_least_one (κ / 2)); rwa [hlog1] at this
+  have hρabs : |ρ| ≤ 0.0310 :=
+    calc |ρ| ≤ Real.log (Real.cosh (κ / 2)) := abs_le.2 ⟨by linarith, by linarith⟩
+      _ ≤ Real.log (Real.cosh (1/4)) := hlogle _ _ hcpos hc14     -- real_log_strictly_increasing
+      _ ≤ 0.0310 := hlogcosh14                                      -- 数値の評価
+  -- 分解
+  have hdecomp : Real.cosh κ * Real.log (Real.pi / δ) - Real.log (1 / κ)
+      = (Real.cosh κ - 1) * Real.log (1 / κ) + Real.cosh κ * (Real.log (2 * Real.pi) + ρ) :=
+    calc Real.cosh κ * Real.log (Real.pi / δ) - Real.log (1 / κ)
+        = Real.cosh κ * (Real.log (1 / κ) + Real.log (2 * Real.pi) + ρ) - Real.log (1 / κ) := by
+          rw [hlogsplit]
+      _ = (Real.cosh κ - 1) * Real.log (1 / κ) + Real.cosh κ * (Real.log (2 * Real.pi) + ρ) := by ring
+  -- 第 1 項: `cosh κ − 1 ≤ 0.532 κ²`
+  have hcm : Real.cosh κ - 1 ≤ 0.532 * κ ^ 2 :=
+    calc Real.cosh κ - 1 = 2 * δ ^ 2 := by
+          rw [cosh_eq_one_add_two_sinh_half_sq κ]; ring             -- cosh_half_angle_formula
+      _ ≤ 2 * (κ / 2 * Real.cosh (κ / 2)) ^ 2 := by
+          have := pow_le_pow_left₀ hδpos.le hδub 2; linarith         -- sinh_at_most_argument_times_cosh
+      _ ≤ 2 * (κ / 2 * Real.cosh (1/4)) ^ 2 := by
+          have := pow_le_pow_left₀ (by positivity) (mul_le_mul_of_nonneg_left hc14 (by linarith : (0:ℝ) ≤ κ / 2)) 2
+          linarith                                                   -- cosh_monotone_on_nonnegative
+      _ = κ ^ 2 * Real.cosh (1/4) ^ 2 / 2 := by ring
+      _ ≤ κ ^ 2 * 1.0315 ^ 2 / 2 := by
+          have hc1 : (1:ℝ) ≤ Real.cosh (1/4) := cosh_at_least_one _
+          gcongr                                                     -- cosh(1/4) の数値上界
+      _ ≤ 0.532 * κ ^ 2 := by nlinarith [sq_nonneg κ]
+  -- 第 1 項: `κ² log(1/κ) ≤ 0.1733`（`F(s) := −s² log s` に (R4)・(R3)）
+  have hlog_inv : Real.log (1 / κ) = -Real.log κ := by
+    have h := (real_log_of_product h0 (one_div_pos.2 h0)).2
+    rw [mul_one_div_cancel h0.ne', hlog1] at h
+    linarith
+  have hlog_half : Real.log (1/2) = -Real.log 2 := by
+    have h := (real_log_of_product (by norm_num : (0:ℝ) < 1/2) two_pos).2
+    rw [show (1/2 : ℝ) * 2 = 1 by norm_num, hlog1] at h
+    linarith
+  have hsq_log : κ ^ 2 * Real.log (1 / κ) ≤ 0.1733 := by
+    set F : ℝ → ℝ := fun s => -(s ^ 2 * Real.log s) with hFdef
+    set F' : ℝ → ℝ := fun s => s * (-2 * Real.log s - 1) with hF'def
+    have hIcc : Set.uIcc κ (1/2) = Set.Icc κ (1/2) := Set.uIcc_of_le h1
+    have hspos : ∀ s ∈ Set.uIcc κ (1/2), 0 < s := fun s hs => by
+      rw [hIcc] at hs; linarith [hs.1]
+    -- F の微分（積・恒等関数・log' = 1/x の公式）
+    have hderiv : ∀ s ∈ Set.uIcc κ (1/2), HasDerivAt F (F' s) s := fun s hs => by
+      have hs0 : s ≠ 0 := (hspos s hs).ne'
+      have h := ((hasDerivAt_pow 2 s).mul (Real.hasDerivAt_log hs0)).neg
+      refine h.congr_deriv ?_
+      simp only [hF'def]
+      field_simp
       ring
-    rw [hsplit]
-    nlinarith [hlog2, hlogpi4, hpiu]
-  have hlog2pi_nn : (0:ℝ) ≤ Real.log (2 * Real.pi) :=
-    Real.log_nonneg (by nlinarith [Real.pi_gt_three])
-  -- (cosh κ - 1) log(1/κ) の評価
-  have hlogκ_nn : (0:ℝ) ≤ Real.log (1 / κ) := by
-    apply Real.log_nonneg
-    rw [le_div_iff₀ h0]; linarith
-  have hcoshκ_sub : Real.cosh κ - 1 = 2 * Real.sinh (κ / 2) ^ 2 := by
-    have := cosh_eq_one_add_two_sinh_half_sq κ
-    linarith
-  have hexp : (Real.exp 1)⁻¹ ≤ 0.36788 := by
-    have h := Real.exp_one_gt_d9
-    have : (0:ℝ) < Real.exp 1 := Real.exp_pos 1
-    rw [inv_le_comm₀ this (by norm_num)]
-    linarith
-  have hklog : κ * Real.log (1 / κ) ≤ (Real.exp 1)⁻¹ := by
-    have := NecSuf.mul_log_inv_le h0
-    rwa [← one_div] at this
-  have hsqlog : κ ^ 2 * Real.log (1 / κ) ≤ 0.18394 := by
-    have h : κ * (κ * Real.log (1 / κ)) ≤ κ * (Real.exp 1)⁻¹ :=
-      mul_le_mul_of_nonneg_left hklog h0.le
-    nlinarith [h, hexp, h0, h1]
+    -- F' は微分可能なので連続
+    have hcont : ContinuousOn F' (Set.uIcc κ (1/2)) := fun s hs => by
+      have hs0 : s ≠ 0 := (hspos s hs).ne'
+      exact ((hasDerivAt_id s).mul
+        (((Real.hasDerivAt_log hs0).const_mul (-2)).sub_const 1)).continuousAt.continuousWithinAt
+    have hint : IntervalIntegrable F' MeasureTheory.volume κ (1/2) := hcont.intervalIntegrable
+    -- `0 < s ≤ 1/2` なら `F'(s) ≥ 0`
+    have hF'nn : ∀ s ∈ Set.Icc κ (1/2), (0:ℝ) ≤ F' s := fun s hs => by
+      have hs0 : 0 < s := by linarith [hs.1]
+      have hlogs : Real.log s ≤ Real.log (1/2) := hlogle _ _ hs0 hs.2
+      have : 0 ≤ -2 * Real.log s - 1 := by linarith
+      exact mul_nonneg hs0.le this
+    calc κ ^ 2 * Real.log (1 / κ) = F κ := by rw [hlog_inv]; simp only [hFdef]; ring
+      _ = F (1/2) - ∫ s in κ..(1/2), F' s := by
+          rw [intervalIntegral.integral_eq_sub_of_hasDerivAt hderiv hint]; ring  -- (R4)
+      _ ≤ F (1/2) - ∫ _s in κ..(1/2), (0:ℝ) := by
+          have := intervalIntegral.integral_mono_on h1 intervalIntegrable_const hint hF'nn
+          linarith                                                   -- (R3) の単調性
+      _ = F (1/2) := by rw [intervalIntegral.integral_zero, sub_zero]  -- (R4) を定数関数 0 で
+      _ = 1/4 * Real.log 2 := by simp only [hFdef]; rw [hlog_half]; ring
+      _ ≤ 0.1733 := by linarith
+  have hlogκ_pos : 0 < Real.log (1 / κ) := by
+    have h := real_log_strictly_increasing one_pos (one_div_pos.2 h0)
+      (by rw [lt_one_div one_pos h0]; linarith)
+    rwa [hlog1] at h
+  have hcm_nn : 0 ≤ Real.cosh κ - 1 := by linarith [cosh_at_least_one κ]
   have hterm1 : 0 ≤ (Real.cosh κ - 1) * Real.log (1 / κ) ∧
-      (Real.cosh κ - 1) * Real.log (1 / κ) ≤ 0.099 := by
-    constructor
-    · nlinarith [hcoshκ_sub, hlogκ_nn, sq_nonneg (Real.sinh (κ / 2))]
-    · have hcm : Real.cosh κ - 1 ≤ 0.5328 * κ ^ 2 := by
-        rw [hcoshκ_sub]
-        have hs2 : Real.sinh (κ / 2) ≤ κ / 2 * (32/31) := by nlinarith [hδub, hcub, h0]
-        nlinarith [hs2, hδpos, h0]
-      nlinarith [hcm, hlogκ_nn, hsqlog]
-  -- 総合
-  have hdecomp : Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ)
-      = (Real.cosh κ - 1) * Real.log (1 / κ)
-        + Real.cosh κ * (Real.log (2 * Real.pi) + ρ) := by
-    rw [hlogsplit]; ring
-  rw [hdecomp]
-  set x : ℝ := Real.log (2 * Real.pi) + ρ with hxdef
-  have hxub : x ≤ 1.865 := by rw [hxdef]; linarith
-  have hxlb : -(1/31 : ℝ) ≤ x := by rw [hxdef]; linarith
-  have hcoshpos : (0:ℝ) < Real.cosh κ := cosh_pos_of_two_cosh_pos κ
-  have hprod : |Real.cosh κ * x| ≤ 2.1315 := by
-    rcases le_total (0:ℝ) x with hxs | hxs
-    · have hnn : (0:ℝ) ≤ Real.cosh κ * x := mul_nonneg hcoshpos.le hxs
-      rw [abs_of_nonneg hnn]
-      nlinarith [mul_nonneg (sub_nonneg.2 hcoshκ) hxs,
-        mul_nonneg hcoshpos.le (sub_nonneg.2 hxub)]
-    · have hnp : Real.cosh κ * x ≤ 0 := mul_nonpos_of_nonneg_of_nonpos hcoshpos.le hxs
-      rw [abs_of_nonpos hnp]
-      nlinarith [mul_nonneg (sub_nonneg.2 hcoshκ) (by linarith : (0:ℝ) ≤ -x),
-        mul_nonneg hcoshpos.le (by linarith : (0:ℝ) ≤ 1/31 - (-x))]
-  have hterm1abs : |(Real.cosh κ - 1) * Real.log (1 / κ)| ≤ 0.099 := by
-    rw [abs_of_nonneg hterm1.1]; exact hterm1.2
-  calc |(Real.cosh κ - 1) * Real.log (1 / κ) + Real.cosh κ * x|
-      ≤ |(Real.cosh κ - 1) * Real.log (1 / κ)| + |Real.cosh κ * x| := abs_add_le _ _
-    _ ≤ 0.099 + 2.1315 := by linarith
-    _ ≤ 2.27 := by norm_num
-
-end Ising2D
-
-namespace Ising2D
-
-open Real MeasureTheory intervalIntegral
+      (Real.cosh κ - 1) * Real.log (1 / κ) ≤ 0.093 :=
+    ⟨mul_nonneg hcm_nn hlogκ_pos.le,
+      calc (Real.cosh κ - 1) * Real.log (1 / κ)
+          ≤ 0.532 * κ ^ 2 * Real.log (1 / κ) := mul_le_mul_of_nonneg_right hcm hlogκ_pos.le
+        _ = 0.532 * (κ ^ 2 * Real.log (1 / κ)) := by ring
+        _ ≤ 0.532 * 0.1733 := by linarith [hsq_log]
+        _ ≤ 0.093 := by norm_num⟩
+  -- 第 2 項
+  have hcoshκ : Real.cosh κ ≤ Real.cosh (1/2) := Real.cosh_le_cosh.2 (by
+    rw [abs_of_nonneg h0.le, abs_of_nonneg (by norm_num : (0:ℝ) ≤ 1/2)]; exact h1)
+  have hcoshκpos : 0 < Real.cosh κ := cosh_pos_of_two_cosh_pos κ
+  have hlog2pi_nn : 0 ≤ Real.log (2 * Real.pi) := by
+    have := hlogle 1 (2 * Real.pi) one_pos (by linarith); rwa [hlog1] at this
+  have hterm2 : |Real.cosh κ * (Real.log (2 * Real.pi) + ρ)| ≤ 2.108 :=
+    calc |Real.cosh κ * (Real.log (2 * Real.pi) + ρ)|
+        ≤ Real.cosh κ * (|Real.log (2 * Real.pi)| + |ρ|) := by
+          rw [abs_mul, abs_of_pos hcoshκpos]
+          exact mul_le_mul_of_nonneg_left (abs_add_le _ _) hcoshκpos.le
+      _ ≤ 1.1277 * (1.8380 + 0.0310) := by
+          rw [abs_of_nonneg hlog2pi_nn]
+          apply mul_le_mul (by linarith) (by linarith) (by positivity) (by norm_num)
+      _ ≤ 2.108 := by norm_num
+  calc |Real.cosh κ * Real.log (Real.pi / δ) - Real.log (1 / κ)|
+      = |(Real.cosh κ - 1) * Real.log (1 / κ) + Real.cosh κ * (Real.log (2 * Real.pi) + ρ)| := by
+        rw [hdecomp]
+    _ ≤ |(Real.cosh κ - 1) * Real.log (1 / κ)| + |Real.cosh κ * (Real.log (2 * Real.pi) + ρ)| :=
+        abs_add_le _ _
+    _ ≤ 0.093 + 2.108 := by rw [abs_of_nonneg hterm1.1]; linarith [hterm1.2]
+    _ = 2.201 := by norm_num
 
 set_option maxHeartbeats 1000000 in
-/-- **人手証明 `second_derivative_log_divergence` の `κ > 0` の場合**。 -/
+/-- **人手証明 `second_derivative_log_divergence` の `κ > 0` の場合**（本文の Step 4・5・7 の数値の評価と 1 対 1）。
+本文が持ち込む数値の評価 `sinh(1/4) ≤ 0.2527`・`cosh(1/4) ≤ 1.0315`・`cosh(1/2) ≤ 1.1277` は、`step6_bound` と同じく
+証明の中の段で mathlib の指数関数の級数の評価から受ける。`9.8696 ≤ π²`（本文 `pi_squared_numerical_bounds`）・
+`B ≤ 0.88`（本文 `sine_integral_constant_numerical_bound`）・`c₀ ≥ 0.5887`（本文 `sine_bound_constant_numerical_bounds`）は
+欄 `lean` が無いので、`Real.pi_gt_d6`・`Bconst_le`・`c0_bounds` で受ける。 -/
 theorem second_derivative_log_divergence_pos {κ : ℝ} (h0 : 0 < κ) (h1 : κ ≤ 1/2) :
     |Gsecond κ - (1 / (2 * Real.pi)) * Real.log (1 / κ)| ≤ 6/5 := by
   have hκ0 : κ ≠ 0 := ne_of_gt h0
   have hpi : (0:ℝ) < Real.pi := Real.pi_pos
   have hpiu : Real.pi < 3.141593 := Real.pi_lt_d6
   have hpil : (3.141592:ℝ) < Real.pi := Real.pi_gt_d6
+  -- 数値の評価（`remark_real_analysis_escape_chapter_E` が持ち込むもの）
+  have hE14u : Real.exp (1/4) ≤ 1.2840267 := by
+    have h := Real.exp_bound' (x := 1/4) (by norm_num) (by norm_num) (n := 5) (by norm_num)
+    norm_num [Finset.sum_range_succ, Nat.factorial] at h
+    linarith
+  have hE14l : 1.2840169 ≤ Real.exp (1/4) := by
+    have h := Real.sum_le_exp_of_nonneg (x := 1/4) (by norm_num) 5
+    norm_num [Finset.sum_range_succ, Nat.factorial] at h
+    linarith
+  have hcosh14 : Real.cosh (1/4) ≤ 1.0315 := by
+    rw [Real.cosh_eq, Real.exp_neg]
+    have : (Real.exp (1/4))⁻¹ ≤ 0.778806 := by
+      rw [inv_le_comm₀ (Real.exp_pos _) (by norm_num)]
+      exact le_trans (show (0.778806:ℝ)⁻¹ ≤ 1.2840169 by norm_num) hE14l
+    linarith
+  have hsinh14 : Real.sinh (1/4) ≤ 0.2527 := by
+    rw [Real.sinh_eq, Real.exp_neg]
+    have : 0.7787991 ≤ (Real.exp (1/4))⁻¹ := by
+      rw [le_inv_comm₀ (by norm_num) (Real.exp_pos _)]
+      exact le_trans hE14u (show (1.2840267:ℝ) ≤ 0.7787991⁻¹ by norm_num)
+    linarith
+  have hcosh12 : Real.cosh (1/2) ≤ 1.1277 := by
+    have hE12l : 1.6487196 ≤ Real.exp (1/2) := by
+      have h := Real.sum_le_exp_of_nonneg (x := 1/2) (by norm_num) 7
+      norm_num [Finset.sum_range_succ, Nat.factorial] at h
+      linarith
+    have hE12u : Real.exp (1/2) ≤ 1.6487214 := by
+      have h := Real.exp_bound' (x := 1/2) (by norm_num) (by norm_num) (n := 7) (by norm_num)
+      norm_num [Finset.sum_range_succ, Nat.factorial] at h
+      linarith
+    rw [Real.cosh_eq, Real.exp_neg]
+    have : (Real.exp (1/2))⁻¹ ≤ 0.6065314 := by
+      rw [inv_le_comm₀ (Real.exp_pos _) (by norm_num)]
+      exact le_trans (show (0.6065314:ℝ)⁻¹ ≤ 1.6487196 by norm_num) hE12l
+    linarith
+  have hpi_le : Real.pi ≤ 3.1416 := by linarith
+  have hpi_sq : (9.8696:ℝ) ≤ Real.pi ^ 2 := by nlinarith            -- pi_squared_numerical_bounds
+  have htwopi : (6.2831:ℝ) ≤ 2 * Real.pi := by linarith
+  -- 準備: δ := sinh(κ/2)
   have hδpos : 0 < Real.sinh (κ / 2) := real_sinh_pos_of_pos (by linarith)
-  have hcpos : (1:ℝ) ≤ Real.cosh (κ / 2) := cosh_at_least_one _
-  have hcub : Real.cosh (κ / 2) ≤ 32/31 := by
-    have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ / 2) (by nlinarith)
-    have hd : (31:ℝ)/32 ≤ 1 - (κ / 2) ^ 2 / 2 := by nlinarith
-    have hinv : (1 - (κ / 2) ^ 2 / 2)⁻¹ ≤ (31/32 : ℝ)⁻¹ := inv_anti₀ (by norm_num) hd
-    calc Real.cosh (κ / 2) ≤ (1 - (κ / 2) ^ 2 / 2)⁻¹ := h
-      _ ≤ (31/32 : ℝ)⁻¹ := hinv
-      _ = 32/31 := by norm_num
-  have hδub : Real.sinh (κ / 2) ≤ 8/31 := by
-    have h := sinh_le_mul_cosh_of_nonneg (t := κ / 2) (by linarith)
-    nlinarith [h, hcub, h0, h1]
-  have hcoshκ1 : (1:ℝ) ≤ Real.cosh κ := cosh_at_least_one _
-  have hcoshκ : Real.cosh κ ≤ 8/7 := by
-    have h := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := κ) (by nlinarith)
-    have hd : (7:ℝ)/8 ≤ 1 - κ ^ 2 / 2 := by nlinarith
-    have hinv : (1 - κ ^ 2 / 2)⁻¹ ≤ (7/8 : ℝ)⁻¹ := inv_anti₀ (by norm_num) hd
-    calc Real.cosh κ ≤ (1 - κ ^ 2 / 2)⁻¹ := h
-      _ ≤ (7/8 : ℝ)⁻¹ := hinv
-      _ = 8/7 := by norm_num
-  -- I の評価
+  -- `cosh(κ/2) ≤ cosh(1/4) ≤ 1.0315`（cosh_monotone_on_nonnegative）
+  have hc14 : Real.cosh (κ / 2) ≤ 1.0315 := le_trans (Real.cosh_le_cosh.2 (by
+    rw [abs_of_nonneg (by linarith : (0:ℝ) ≤ κ / 2), abs_of_nonneg (by norm_num : (0:ℝ) ≤ 1/4)]
+    linarith)) hcosh14
+  -- `δ ≤ sinh(1/4) ≤ 0.2527`（sinh_strictly_increasing。等号のときは等しい）
+  have hδub : Real.sinh (κ / 2) ≤ 0.2527 := by
+    have : Real.sinh (κ / 2) ≤ Real.sinh (1/4) := by
+      rcases (show κ / 2 ≤ 1/4 by linarith).eq_or_lt with h | h
+      · rw [h]
+      · exact (sinh_strictly_increasing h).le
+    linarith
+  -- `cosh κ ≤ cosh(1/2) ≤ 1.1277`（cosh_monotone_on_nonnegative）
+  have hcoshκ : Real.cosh κ ≤ 1.1277 := le_trans (Real.cosh_le_cosh.2 (by
+    rw [abs_of_nonneg h0.le, abs_of_nonneg (by norm_num : (0:ℝ) ≤ 1/2)]; exact h1)) hcosh12
+  -- Step 4: `R := J − 2 log(π/δ)` の評価
   have hIeq : Iint κ
       = ∫ θ in (0:ℝ)..Real.pi,
           (Real.sqrt (Real.sinh (κ / 2) ^ 2 + Real.sin (θ / 2) ^ 2))⁻¹ := rfl
   have hI := sine_integral_two_sided (δ := Real.sinh (κ / 2)) hδpos
   rw [← hIeq] at hI
   have hJI := abs_Jint_sub_Iint hκ0
-  have hT := Tint_le h0
-  -- J の評価
-  have hLdef : ∀ _ : Unit, True := fun _ => trivial
-  have hπc : Real.pi * Real.cosh (κ / 2) / 2 ≤ 1.622 := by nlinarith [hcub, hpiu, hpi]
-  have hB := Bconst_le
-  have hBnn := Bconst_nonneg
-  have htail : 2 * Real.sinh (κ / 2) ^ 2 / Real.pi ^ 2 + Bconst ≤ 0.895 := by
-    have hnum : 2 * Real.sinh (κ / 2) ^ 2 ≤ 0.14 := by nlinarith [hδub, hδpos]
-    have hden : (9.8696 : ℝ) ≤ Real.pi ^ 2 := by nlinarith [hpil, hpi]
-    have : 2 * Real.sinh (κ / 2) ^ 2 / Real.pi ^ 2 ≤ 0.0142 := by
-      rw [div_le_iff₀ (by positivity)]
-      nlinarith [hnum, hden]
-    linarith [hB]
-  have hJub : Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2)) ≤ 0.895 := by
-    linarith [hI.2, hJI.1, htail]
-  have hJlb : -(1.622 : ℝ) ≤ Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2)) := by
-    linarith [hI.1, hJI.2, hπc]
-  have hJabs : |Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2))| ≤ 1.622 := by
+  have hB := Bconst_le                                               -- sine_integral_constant_numerical_bound
+  -- 下界: `R ≥ −(I − J) ≥ −(π/2) cosh(κ/2)`
+  have hRlb : -(Real.pi * Real.cosh (κ / 2) / 2)
+      ≤ Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2)) := by
+    linarith [hI.1, hJI.2]
+  -- 上界: `R ≤ R₀ ≤ 2δ²/π² + B`
+  have hRub : Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2))
+      ≤ 2 * Real.sinh (κ / 2) ^ 2 / Real.pi ^ 2 + Bconst := by
+    linarith [hI.2, hJI.1]
+  have hRabs : |Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2))| ≤ 1.621 := by
+    have hu : 2 * Real.sinh (κ / 2) ^ 2 / Real.pi ^ 2 + Bconst ≤ 1.621 :=
+      calc 2 * Real.sinh (κ / 2) ^ 2 / Real.pi ^ 2 + Bconst
+          ≤ 2 * 0.2527 ^ 2 / 9.8696 + 0.88 := by
+            gcongr
+          _ ≤ 0.0130 + 0.88 := by norm_num
+          _ ≤ 1.621 := by norm_num
+    have hl : Real.pi * Real.cosh (κ / 2) / 2 ≤ 1.621 :=
+      calc Real.pi * Real.cosh (κ / 2) / 2 ≤ 3.1416 * 1.0315 / 2 := by gcongr
+        _ ≤ 1.6203 := by norm_num
+        _ ≤ 1.621 := by norm_num
     rw [abs_le]; constructor <;> linarith
-  -- T の評価
-  have hTub : Tint κ ≤ 3.7 := by
-    have hc0 := c0_bounds
-    have hc0p := c0_pos
-    have h : 2 * Real.cosh (κ / 2) ^ 2 / c0 ≤ 3.7 := by
-      rw [div_le_iff₀ hc0p]
-      nlinarith [hcub, hcpos, hc0.1]
-    linarith [hT.2]
-  -- 総合
+  -- Step 5: `0 ≤ T ≤ 2 cosh²(κ/2)/c₀ ≤ 2·1.0315²/0.5887 ≤ 3.615`
+  have hT := Tint_le h0
+  have hTub : Tint κ ≤ 3.615 := by
+    have hc0 := c0_bounds                                            -- sine_bound_constant_numerical_bounds
+    have hcpos : 0 < Real.cosh (κ / 2) := cosh_pos_of_two_cosh_pos _
+    calc Tint κ ≤ 2 * Real.cosh (κ / 2) ^ 2 / c0 := hT.2
+      _ ≤ 2 * 1.0315 ^ 2 / 0.5887 := by gcongr; exact hc0.1
+      _ ≤ 3.615 := by norm_num
+  -- Step 7: 総合
   have hGs := two_pi_mul_Gsecond hκ0
   have hstep6 := step6_bound h0 h1
   have hdecomp : 2 * Real.pi * Gsecond κ - Real.log (1 / κ)
@@ -638,34 +769,41 @@ theorem second_derivative_log_divergence_pos {κ : ℝ} (h0 : 0 < κ) (h1 : κ �
         - Tint κ := by
     rw [hGs]; ring
   have hmid : |Real.cosh κ / 2 * (Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2)))|
-      ≤ 0.927 := by
+      ≤ 0.915 := by
     rw [abs_mul, abs_of_nonneg (by positivity : (0:ℝ) ≤ Real.cosh κ / 2)]
-    have h1' : Real.cosh κ / 2 ≤ 4/7 := by linarith
-    nlinarith [hJabs, abs_nonneg (Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2))), h1']
-  have htot : |2 * Real.pi * Gsecond κ - Real.log (1 / κ)| ≤ 6.9 := by
+    calc Real.cosh κ / 2 * |Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2))|
+        ≤ 1.1277 / 2 * 1.621 := by gcongr
+      _ ≤ 0.915 := by norm_num
+  have htot : |2 * Real.pi * Gsecond κ - Real.log (1 / κ)| ≤ 6.731 := by
     rw [hdecomp]
-    have hTabs : |Tint κ| ≤ 3.7 := by rw [abs_of_nonneg hT.1]; exact hTub
+    have hTabs : |Tint κ| = Tint κ := abs_of_nonneg hT.1
     calc |(Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ))
             + Real.cosh κ / 2 * (Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2)))
             - Tint κ|
-        ≤ |(Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ))
-            + Real.cosh κ / 2 * (Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2)))|
-            + |Tint κ| := abs_sub _ _
-      _ ≤ (|Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ)|
-            + |Real.cosh κ / 2 * (Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2)))|)
+        ≤ |Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ)|
+            + |Real.cosh κ / 2 * (Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2)))|
             + |Tint κ| := by
-          have := abs_add_le
+          have h1' := abs_sub
+            ((Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ))
+              + Real.cosh κ / 2 * (Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2)))) (Tint κ)
+          have h2' := abs_add_le
             (Real.cosh κ * Real.log (Real.pi / Real.sinh (κ / 2)) - Real.log (1 / κ))
             (Real.cosh κ / 2 * (Jint κ - 2 * Real.log (Real.pi / Real.sinh (κ / 2))))
           linarith
-      _ ≤ (2.27 + 0.927) + 3.7 := by linarith [hstep6, hmid, hTabs]
-      _ ≤ 6.9 := by norm_num
+      _ ≤ 2.201 + 0.915 + 3.615 := by rw [hTabs]; linarith [hstep6, hmid, hTub]
+      _ = 6.731 := by norm_num
   have hscale : Gsecond κ - (1 / (2 * Real.pi)) * Real.log (1 / κ)
       = (1 / (2 * Real.pi)) * (2 * Real.pi * Gsecond κ - Real.log (1 / κ)) := by
     field_simp
-  rw [hscale, abs_mul, abs_of_nonneg (by positivity : (0:ℝ) ≤ 1 / (2 * Real.pi))]
-  rw [div_mul_eq_mul_div, div_le_iff₀ (by positivity)]
-  nlinarith [htot, hpil, abs_nonneg (2 * Real.pi * Gsecond κ - Real.log (1 / κ))]
+  have h2pipos : (0:ℝ) < 2 * Real.pi := by positivity
+  calc |Gsecond κ - (1 / (2 * Real.pi)) * Real.log (1 / κ)|
+      = 1 / (2 * Real.pi) * |2 * Real.pi * Gsecond κ - Real.log (1 / κ)| := by
+        rw [hscale, abs_mul, abs_of_pos (one_div_pos.2 h2pipos)]
+    _ ≤ 1 / (2 * Real.pi) * 6.731 := by gcongr
+    _ = 6.731 / (2 * Real.pi) := by ring
+    _ ≤ 6.731 / 6.2831 := by gcongr
+    _ ≤ 1.08 := by norm_num
+    _ ≤ 6/5 := by norm_num
 
 /-- 人手 `gamma_kappa_identity` の偶関数性の鎖（`−κ/2 = −(κ/2)`、`sinh_is_odd`（`x → κ/2`）、`(−a)² = a²`）を `Sfun` について書いたもの。 -/
 theorem Sfun_neg (θ κ : ℝ) : Sfun θ (-κ) = Sfun θ κ := by
