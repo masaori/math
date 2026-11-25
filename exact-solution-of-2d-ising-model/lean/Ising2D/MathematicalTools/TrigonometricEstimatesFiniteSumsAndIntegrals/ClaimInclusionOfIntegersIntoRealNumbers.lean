@@ -49,7 +49,7 @@
 * `inclusion_zz_to_rr_preserves_negation` は人手の 6 行と 1 対 1 の `calc` である。`ℤ` の和の単位元 `0 + y = y` の段は `zero_add`、`def_int_difference` の段は `int_sub_eq_add_neg`、
   `ι(0_ℤ) := 0_ℝ` は `inclusion_zz_to_rr_zero_intCast`、`def_real_difference` は `sub_eq_add_neg`、`0_ℝ` が和の単位元であることは `zero_add` で当てる。
 * `finite_sum_of_constant_real_number_succ` は人手の `m ∈ ℤ_{≥1}` を Lean の `m + 1`（`Fin (m + 1)` の上の和）で書き、`m = 1` の 3 行と
-  帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。`def_finite_sum_of_real_numbers` の 2 つの式は、Lean の `Fin` の上の和がそれを満たす補題
+  帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。`def_finite_sum_of_real_numbers` の一項の式と帰納の式は、Lean の `Fin` の上の和がそれを満たす補題
   `finset_sum_fin_real_eq_finite_sum_of_real_numbers`（`DefinitionFiniteSumOverIndexSet.lean`）で出す。
   有限型の添字の和 `finite_sum_of_constant_real_number_fintype` は、人手の `m ∈ ℤ_{≥1}` に合わせて `1 ≤ card κ` を仮定し、`card κ = m + 1` の `m` を取って
   `κ` に `Fin (m + 1)` の番号を付け、`_succ` を当てる（空の和の場合を通らない）。
@@ -366,14 +366,14 @@ theorem finite_sum_of_constant_real_number_succ (m : ℕ) (r : ℝ) :
   induction m with
   | zero =>
     calc ∑ _j : Fin 1, r = r :=
-          finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 (fun _ => r) 0 rfl
+          finset_sum_fin_real_eq_finite_sum_of_real_numbers.2.1 (fun _ => r) 0 rfl
                                                                            -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{1} r_j := r_1`（`r_1 → r`）
       _ = 1 * r := (one_mul r).symm                                        -- `1_ℝ` は `ℝ` の乗法の単位元
       _ = ((1 : ℕ) : ℝ) * r := by rw [inclusion_zz_to_rr_of_one]           -- `inclusion_zz_to_rr_of_one` を右辺から左辺へ
   | succ m ih =>
     calc ∑ _j : Fin (m + 2), r
         = (∑ _j : Fin (m + 1), r) + r :=
-          finset_sum_fin_real_eq_finite_sum_of_real_numbers.2 (m + 1) (Nat.succ_pos m) (fun _ => r) (fun _ => r)
+          finset_sum_fin_real_eq_finite_sum_of_real_numbers.2.2 (m + 1) (Nat.succ_pos m) (fun _ => r) (fun _ => r)
             (fun _ _ _ => rfl) (Fin.last (m + 1)) ((finIndexToZZ_eq_iff_val_add_one_eq _ _).2 rfl)
                                                                            -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}`
       _ = ((m + 1 : ℕ) : ℝ) * r + r := by rw [ih]                          -- 帰納法の仮定

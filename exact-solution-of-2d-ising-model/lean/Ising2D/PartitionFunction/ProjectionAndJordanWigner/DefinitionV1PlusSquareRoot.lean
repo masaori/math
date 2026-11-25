@@ -36,7 +36,7 @@
   `V1plusHalf_coeff_eq` を通す（Lean の `(1 / 2 : ℂ)` を `((1/2 : ℝ) : ℂ)` と読み、`real_inclusion_of_one_half_is_inverse_of_two`
   と積の可換律で `i·2_ℂ^{-1}` にする）。定義の係数を人手の形に替えるのは状態台帳の別の件である。
 - `theorem_exp_product` は Lean の具体版が無く、ほかのファイルと同じく mathlib の `Matrix.exp_add_of_commute` を引く。
-- `def_finite_sum_of_complex_numbers` の `m = 1` と `m + 1 = 2` の段は、Lean の `Fin 2` の上の和が本文の帰納の二つの式を満たす補題
+- `def_finite_sum_of_complex_numbers` の `m = 1` と `m + 1 = 2` の段は、Lean の `Fin 2` の上の和が本文の一項の式と帰納の式を満たす補題
   `finset_sum_fin_complex_eq_finite_sum_of_complex_numbers` で出す（人手の添字 `1, 2` は Lean の `0, 1`）。
   `def_finite_sum_of_matrices` の `r = 1` と `r + 1 = 2` の段は `Fin.sum_univ_castSucc`・`Fin.sum_univ_one` で出す。`finite_sum_of_scalar_multiples_of_one_matrix`（`r → 2`）は
   `TensorPow M` の系 `finite_sum_smul_one_tensorPow`（人手の `r` は Lean の `r + 1`）。
@@ -131,11 +131,11 @@ theorem V1_plus_square_root_property (K1 : ℂ) :
     _ = matExp ((∑ j : Fin 2, ![c, c] j) • H1plus M) := by
         rw [finite_sum_smul_one_tensorPow 1]            -- `finite_sum_of_scalar_multiples_of_one_matrix`（`m, n → 2^{M_col}`、`r → 2`、`A → H_1^{(+)}`）
     _ = matExp ((c + c) • H1plus M) := by
-        rw [finset_sum_fin_complex_eq_finite_sum_of_complex_numbers.2 1 le_rfl (![c, c])
+        rw [finset_sum_fin_complex_eq_finite_sum_of_complex_numbers.2.2 1 le_rfl (![c, c])
             (fun i => ![c, c] (Fin.castSucc i))
             (fun i j h => congrArg (![c, c]) ((finIndexToZZ_bijective_onto_index_set 2).1 (Fin.castSucc i) j h))
             1 ((finIndexToZZ_eq_iff_val_add_one_eq _ _).2 rfl),
-          finset_sum_fin_complex_eq_finite_sum_of_complex_numbers.1 _ 0 rfl]; rfl
+          finset_sum_fin_complex_eq_finite_sum_of_complex_numbers.2.1 _ 0 rfl]; rfl
                                                         -- `def_finite_sum_of_complex_numbers`（`m → 1`、`z_j → c_j`）の `m = 1` と `m + 1 = 2` の段と `c_1 = c_2 = c`
     _ = matExp ((Complex.I * K1) • H1plus M) := by
         rw [c_add_c_eq_I_mul K1 c hc]                   -- 準備の `c + c = iκ`

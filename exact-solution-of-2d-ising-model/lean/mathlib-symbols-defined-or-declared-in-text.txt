@@ -108,16 +108,17 @@ Fin	def_index_set_from_one_to_n
 Fin.val	def_index_set_from_one_to_n
 #
 # Fin n の上の有限和: def_finite_sum_of_complex_numbers・def_finite_sum_of_real_numbers が、添字の集合 {1,…,m} の上の和を
-# Σ_{j=1}^{1} z_j := z_1、Σ_{j=1}^{m+1} z_j := (Σ_{j=1}^{m} z_j) + z_{m+1} と m についての帰納法で定める（左から順に足す）。mathlib の Finset.sum は多重集合の上の
-# 畳み込みで定義が違うので、Fin m の上の Finset.sum が、添字を写像 finIndexToZZ で {1,…,m} へ送って本文の帰納の二つの式を満たすことを、足す集合ごとに補題一本で示した
-# （DefinitionFiniteSumOverIndexSet.lean の finset_sum_fin_complex_eq_finite_sum_of_complex_numbers・finset_sum_fin_real_eq_finite_sum_of_real_numbers）。二つの式は和を一意に定めるので、m ≥ 1 の和は本文の和と一致する。
+# Σ_{j=1}^{0} z_j := 0、Σ_{j=1}^{1} z_j := z_1、m ≥ 1 で Σ_{j=1}^{m+1} z_j := (Σ_{j=1}^{m} z_j) + z_{m+1} と m ∈ ℤ_{≥0} についての帰納法で定める（左から順に足す）。mathlib の Finset.sum は多重集合の上の
+# 畳み込みで定義が違うので、Fin m の上の Finset.sum が、添字を写像 finIndexToZZ で {1,…,m} へ送って本文の帰納の三つの式を満たすことを、足す集合ごとに補題一本で示した
+# （DefinitionFiniteSumOverIndexSet.lean の finset_sum_fin_complex_eq_finite_sum_of_complex_numbers・finset_sum_fin_real_eq_finite_sum_of_real_numbers）。三つの式は和を一意に定めるので、m ≥ 0 の和は本文の和と一致する。
 # Finset.univ（Fin m の全体）は、和を取る添字の集合と、和の外で η・checkΛ などへ渡す添字の集合 {1,…,m} の全体に当たる（元が全て入ることは
 # Finset.mem_univ、{1,…,m} との対応は finIndexToZZ_bijective_onto_index_set で言える）。
-# 記号の鍵は和を取る Finset も Fin n の n も区別しないので、この三行の許可は補題の範囲の外の使い方も台帳から消した。次の三種類は本文の定義の外であり、
-# それを使う具体版の主張は、まだ本文と一対一でない: (a) Fin 0 の上の空の和（本文の有限和は m ≥ 1 しか定めない。complex_conjugate_star_finite_sum・
-# finite_sum_of_real_sums・finite_sum_of_real_numbers_triangle_inequality など）、(b) Fin の部分集合（univ.filter …）の上の和（openChainEnergy など）、
+# 記号の鍵は和を取る Finset も Fin n の n も区別しないので、この三行の許可は補題の範囲の外の使い方も台帳から消した。それを使う具体版の主張は、
+# まだ本文と一対一でない。(a) は本文の主張の範囲の外、(b)(c) は本文の定義の外である: (a) Fin 0 の上の空の和を
+# 場合に含む主張（本文の有限和は 2026-11-25 に空の和まで定めたが、complex_conjugate_star_finite_sum・finite_sum_of_real_sums・
+# finite_sum_of_real_numbers_triangle_inequality などの本文の主張はまだ m ≥ 1 しか述べない）、(b) Fin の部分集合（univ.filter …）の上の和（openChainEnergy など）、
 # (c) 二値の集合 {0,1} を表す Fin 2 の上の和と Fin 2 の univ（sum_conf_succ_eq_sum_last_sum_init など）。消した行は、載せる前の main の先端 27bea56a1 の
-# 台帳から引ける。状態台帳の行「有限和と有限集合の記号」の二単位目が (a)(b) を、行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が (c) を引き受ける。
+# 台帳から引ける。状態台帳の行「有限和と有限集合の記号」の三単位目が (a) を、四単位目が (b) を、行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が (c) を引き受ける。
 # 行列の有限和（def_finite_sum_of_matrices）は式に行列の和が現れるので、状態台帳の行「行列とその演算」で行列の和を載せた後に同じ形で載せる。
 # Fin でない有限集合（Conf M など）の上の和と、Finset・Fintype の残りは、状態台帳の行「有限和と有限集合の記号」の二単位目が扱う。
 Finset.univ@Fin@Fin.fintype	def_index_set_from_one_to_n
