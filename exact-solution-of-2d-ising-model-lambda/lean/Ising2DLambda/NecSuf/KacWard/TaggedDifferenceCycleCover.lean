@@ -1,63 +1,60 @@
-import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceAlternatingCycle
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairComponent
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairPermutation
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Ising2DLambda.AlgebraicEigenvalue
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 
-variable {J : Type*} [Fintype J]
+variable {J : Type*}
 
-/-- Components of the two labelled mate involutions partition the active points. -/
-theorem alternatingCycle_cover (τ υ : FixedPointFreeInvolution J) :
-    (∀ i : J, i ∈ matchingPairComponent τ υ i) ∧
-    (∀ i j : J, matchingPairComponent τ υ i = matchingPairComponent τ υ j ∨
-      Disjoint (matchingPairComponent τ υ i) (matchingPairComponent τ υ j)) ∧
-    (∀ i : J, τ.val i ∈ matchingPairComponent τ υ i ∧
-      υ.val i ∈ matchingPairComponent τ υ i) := by
-  let p := matchingPairStep τ υ
+/-- 二つの相手写像の成分は全点を被覆し、二成分は一致するか交わらない。 -/
+theorem alternatingCycle_cover (τ υ : J → J)
+    (hτ : Function.Involutive τ) (hυ : Function.Involutive υ) :
+    (∀ i : J, i ∈ matchingPairComponent τ υ hτ hυ i) ∧
+    (∀ i j : J, matchingPairComponent τ υ hτ hυ i = matchingPairComponent τ υ hτ hυ j ∨
+      Disjoint (matchingPairComponent τ υ hτ hυ i)
+        (matchingPairComponent τ υ hτ hυ j)) ∧
+    (∀ i : J, τ i ∈ matchingPairComponent τ υ hτ hυ i ∧
+      υ i ∈ matchingPairComponent τ υ hτ hυ i) := by
+  let p := involutionPairStep τ υ hτ hυ
   constructor
   · intro i
-    exact Or.inl (finitePermutationOrbit_self_mem p i)
+    exact Or.inl (permutationOrbit_self_mem_necSuf p i)
   constructor
   · intro i j
-    by_cases h : matchingPairComponent τ υ i ∩ matchingPairComponent τ υ j = ∅
+    by_cases h : matchingPairComponent τ υ hτ hυ i ∩
+        matchingPairComponent τ υ hτ hυ j = ∅
     · exact Or.inr (Set.disjoint_iff_inter_eq_empty.mpr h)
     · left
-      have hw : (matchingPairComponent τ υ i ∩ matchingPairComponent τ υ j).Nonempty :=
+      have hw : (matchingPairComponent τ υ hτ hυ i ∩
+          matchingPairComponent τ υ hτ hυ j).Nonempty :=
         Set.nonempty_iff_ne_empty.mpr h
       obtain ⟨k, hki, hkj⟩ := hw
       calc
-        matchingPairComponent τ υ i = matchingPairComponent τ υ k :=
-          (matchingPairComponent_basepoint τ υ i k hki).symm
-        _ = matchingPairComponent τ υ j :=
-          matchingPairComponent_basepoint τ υ j k hkj
+        matchingPairComponent τ υ hτ hυ i = matchingPairComponent τ υ hτ hυ k :=
+          (matchingPairComponent_basepoint τ υ hτ hυ i k hki).symm
+        _ = matchingPairComponent τ υ hτ hυ j :=
+          matchingPairComponent_basepoint τ υ hτ hυ j k hkj
   · intro i
     constructor
-    · exact Or.inr (finitePermutationOrbit_self_mem p (τ.val i))
-    · have hτ : τ.val i ∈ finitePermutationOrbit p (τ.val i) :=
-        finitePermutationOrbit_self_mem p (τ.val i)
-      have hp : p (τ.val i) ∈ finitePermutationOrbit p (τ.val i) :=
-        (finitePermutationOrbit_invariant p (τ.val i) (τ.val i)).mpr hτ
-      change υ.val (τ.val (τ.val i)) ∈ finitePermutationOrbit p (τ.val i) at hp
-      rw [τ.property.2 i] at hp
-      exact Or.inr hp
+    · exact Or.inr (permutationOrbit_self_mem_necSuf p (τ i))
+    · have hself : τ i ∈ permutationOrbit p (τ i) :=
+        permutationOrbit_self_mem_necSuf p (τ i)
+      have hstep : p (τ i) ∈ permutationOrbit p (τ i) :=
+        (permutationOrbit_invariant_necSuf p (τ i) (τ i)).mpr hself
+      change υ (τ (τ i)) ∈ permutationOrbit p (τ i) at hstep
+      rw [hτ i] at hstep
+      exact Or.inr hstep
 
-/-- Each pair of either colour occurs as a successor step in its component. -/
-theorem alternatingCycle_pair_step [LinearOrder J]
-    (τ υ : FixedPointFreeInvolution J) (i : J) :
-    (matchingPairPermutation τ υ i = τ.val i ∨
-      matchingPairPermutation τ υ (τ.val i) = i) ∧
-    (matchingPairPermutation τ υ i = υ.val i ∨
-      matchingPairPermutation τ υ (υ.val i) = i) := by
-  classical
-  let C : J → Prop := fun j => j ∈ matchingPairColor τ υ
-  have hτcolor (j : J) : C (τ.val j) ↔ ¬ C j :=
-    matchingPairColor_alternates τ υ j
-  have hυcolor (j : J) : C (υ.val j) ↔ ¬ C j :=
-    matchingPairSecondColor_alternates τ υ j
-  simpa [C, Ising2DLambda.AlgebraicEigenvalue.matchingPairPermutation,
-    Ising2DLambda.AlgebraicEigenvalue.matchingPairSuccessor,
-    Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSuccessor] using
-    (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSuccessor_mate_step_necSuf
-      τ.val υ.val C τ.property.2 υ.property.2 hτcolor hυcolor i)
+/-- どちらの相手の対も、後続写像の一方向の一歩になる。 -/
+theorem alternatingCycle_pair_step (τ υ : J → J) (C : J → Prop)
+    (hτ : Function.Involutive τ) (hυ : Function.Involutive υ)
+    (hτcolor : ∀ j, C (τ j) ↔ ¬ C j)
+    (hυcolor : ∀ j, C (υ j) ↔ ¬ C j) (i : J) :
+    (matchingPairSuccessor τ υ C i = τ i ∨
+      matchingPairSuccessor τ υ C (τ i) = i) ∧
+    (matchingPairSuccessor τ υ C i = υ i ∨
+      matchingPairSuccessor τ υ C (υ i) = i) :=
+  matchingPairSuccessor_mate_step_necSuf τ υ C hτ hυ hτcolor hυcolor i
 
 end Ising2DLambda.NecSuf.KacWard

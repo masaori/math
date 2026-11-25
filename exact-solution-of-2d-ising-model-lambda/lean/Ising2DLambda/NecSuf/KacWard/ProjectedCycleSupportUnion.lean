@@ -18,9 +18,26 @@ theorem projectedCycleSupportUnion_eq_range {J E : Type*}
   · rintro ⟨i, j, hj, hc, rfl⟩
     exact ⟨j, rfl⟩
   · rintro ⟨i, rfl⟩
+    have hcover := alternatingCycle_cover τ.val υ.val τ.property.2 υ.property.2
+    have hfirst : i ∈ matchingPairComponent τ υ i := by
+      simpa [Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent,
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponent,
+        Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit,
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit,
+        Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate,
+        Ising2DLambda.AlgebraicEigenvalue.matchingPairStep,
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.involutionPairStep] using hcover.1 i
+    have hsecond : υ.val i ∈ matchingPairComponent τ υ i := by
+      simpa [Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent,
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponent,
+        Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit,
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit,
+        Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate,
+        Ising2DLambda.AlgebraicEigenvalue.matchingPairStep,
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.involutionPairStep] using (hcover.2.2 i).2
     by_cases hc : i ∈ matchingPairColor τ υ
-    · exact ⟨i, i, (alternatingCycle_cover τ υ).1 i, hc, rfl⟩
-    · refine ⟨i, υ.val i, (alternatingCycle_cover τ υ).2.2 i |>.2,
+    · exact ⟨i, i, hfirst, hc, rfl⟩
+    · refine ⟨i, υ.val i, hsecond,
         (matchingPairSecondColor_alternates τ υ i).2 hc, hp i⟩
 
 end Ising2DLambda.NecSuf.KacWard

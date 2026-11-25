@@ -5,8 +5,6 @@ DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.emptyWeightedPfaffianDetermi
 DEP	necsuf	Ising2DLambda.NecSuf.CriticalExponent.criticalPoint_rationalPartitionInterval_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.activeTwoStep_periodic
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.alternatingCycle
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.alternatingCycle_cover
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.alternatingCycle_pair_step
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.alternating_cycle_matching_sign_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.commonPairsOf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.commonPairs_nodup_necSuf
