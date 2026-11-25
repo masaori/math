@@ -13,7 +13,6 @@
 住処: 人手証明のこのブロックは Qbar を宣言している。ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.RootOfUnity
-import Ising2DLambda.NecSuf.KacWard.TransitionEntries
 
 namespace Ising2DLambda.KacWard
 
@@ -49,11 +48,5 @@ theorem transitionEntry_mem_mu8 {z s r : Qbar} (hz : z ^ 4 = -1)
     _ = (1 : Qbar) ^ 4 * r ^ 8 := by rw [hs2]
     _ = r ^ 8 := by rw [one_pow, one_mul]
     _ = 1 := hr8
-
-/-- 具体版が必要十分版の特殊化として得られることの記録。 -/
-theorem transitionEntry_mem_mu8_from_necSuf {z s r : Qbar} (hz : z ^ 4 = -1)
-    (hs2 : s ^ 2 = 1) (hr : r = 1 ∨ r = z ∨ r = z⁻¹) :
-    (s * r) ^ 8 = 1 :=
-  Ising2DLambda.NecSuf.KacWard.signed_phase_pow_eight hz hs2 hr
 
 end Ising2DLambda.KacWard

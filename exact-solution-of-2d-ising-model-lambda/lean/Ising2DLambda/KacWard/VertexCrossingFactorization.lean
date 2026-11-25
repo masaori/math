@@ -4,11 +4,8 @@
 閉歩道の添字を `Fin m`、通過頂点と局所通過を写像として持つ。
 -/
 import Ising2DLambda.KacWard.CrossingNumberVertexDecomposition
-import Ising2DLambda.NecSuf.KacWard.VertexCrossingFactorization
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 頂点 `v` での横断数は、そこでの水平直進通過数と垂直直進通過数の積である。 -/
 theorem vertex_crossing_number_factorization {m : ℕ} {V : Type} [DecidableEq V]
@@ -99,17 +96,5 @@ theorem vertex_crossing_number_factorization {m : ℕ} {V : Type} [DecidableEq V
           true_and]
         exact ⟨⟨hv₂, hs₂, hb⟩, ⟨hv₁, hs₁, ha'⟩⟩
       · simp [not_lt.mpr (le_of_lt horder)]
-
-/-- 具体版が必要十分版の特殊化として得られることの記録。 -/
-theorem vertex_crossing_number_factorization_from_necSuf {m : ℕ} {V : Type}
-    [DecidableEq V] (vertex : Fin m → V) (visit : Fin m → LocalVisit) (v : V) :
-    (((Finset.univ ×ˢ Finset.univ).filter fun p : Fin m × Fin m =>
-        p.1 < p.2 ∧ IndexCrossing vertex visit p.1 p.2).filter
-          fun p => vertex p.1 = v).card
-      = (Finset.univ.filter fun k : Fin m => vertex k = v ∧
-          (visit k).turn = .straight ∧ (visit k).vertical = false).card
-        * (Finset.univ.filter fun k : Fin m => vertex k = v ∧
-          (visit k).turn = .straight ∧ (visit k).vertical = true).card :=
-  vertex_crossing_number_factorization vertex visit v
 
 end Ising2DLambda.KacWard

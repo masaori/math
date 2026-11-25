@@ -7,7 +7,6 @@
 -/
 import Ising2DLambda.KacWard.TerminalMatrix
 import Ising2DLambda.TransferMatrix.Basic
-import Ising2DLambda.NecSuf.KacWard.ShortPairRotationPhaseNonzero
 
 namespace Ising2DLambda.KacWard
 
@@ -125,19 +124,5 @@ theorem shortPairRotationPhase_ne_zero {L : ℕ} [NeZero L] (z : Qbar)
   have hdir : directionNumber f ≠ directionNumber e :=
     (shortPair_direction_ne e f hsource hne).symm
   exact shortPairRotationPhase_ne_zero_of_direction_ne z hz e f hdir
-
-/-- Specialization of the abstract three-value argument. -/
-theorem shortPairRotationPhase_ne_zero_from_necSuf {L : ℕ} [NeZero L] (z : Qbar)
-    (hz : z ^ (4 : ℕ) = -1) (e f : OrientedEdge L)
-    (hsource : orientedSource e = orientedSource f) (hne : e ≠ f) :
-    rotationPhase z (reversal e) f ≠ 0 := by
-  have hz0 : z ≠ 0 := by
-    intro h
-    simp [h] at hz
-  have hdir : directionNumber f ≠ directionNumber e :=
-    (shortPair_direction_ne e f hsource hne).symm
-  exact Ising2DLambda.NecSuf.KacWard.three_value_phase_ne_zero z
-    (rotationPhase z (reversal e) f) hz0
-    (shortPairRotationPhase_three_values z e f hdir)
 
 end Ising2DLambda.KacWard

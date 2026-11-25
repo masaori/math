@@ -14,42 +14,20 @@ import Ising2DLambda.KacWard.VertexSurroundingCellsParityArcs
 import Ising2DLambda.KacWard.WalkStepEdgeTraversalOne
 import Ising2DLambda.KacWard.LiftedNonbacktracking
 import Ising2DLambda.KacWard.RightRayCrossingCoordinateSum
-import Ising2DLambda.NecSuf.KacWard.WalkSideInteriorBandConnected
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 二つの整数格子セルが一辺を共有すること。 -/
 def CellEdgeAdjacent (p q : ℤ × ℤ) : Prop :=
   (q.1 = p.1 ∧ (q.2 = p.2 - 1 ∨ q.2 = p.2 + 1)) ∨
   (q.2 = p.2 ∧ (q.1 = p.1 - 1 ∨ q.1 = p.1 + 1))
 
-theorem cellEdgeAdjacent_from_necSuf (p q : ℤ × ℤ) :
-    CellEdgeAdjacent p q ↔
-      Ising2DLambda.NecSuf.KacWard.cellEdgeAdjacent
-        (fun p q : ℤ × ℤ =>
-          q.1 = p.1 ∧ (q.2 = p.2 - 1 ∨ q.2 = p.2 + 1))
-        (fun p q : ℤ × ℤ =>
-          q.2 = p.2 ∧ (q.1 = p.1 - 1 ∨ q.1 = p.1 + 1)) p q :=
-  Iff.rfl
-
 /-- 整数格子セルの集合が辺隣接の有限列で連結であること。 -/
 def EdgeConnectedCellSet (S : Set (ℤ × ℤ)) : Prop :=
   ∀ ⦃x⦄, x ∈ S → ∀ ⦃y⦄, y ∈ S →
     Relation.ReflTransGen
       (fun a b => a ∈ S ∧ b ∈ S ∧ CellEdgeAdjacent a b) x y
-
-theorem edgeConnectedCellSet_from_necSuf (S : Set (ℤ × ℤ)) :
-    EdgeConnectedCellSet S ↔
-      Ising2DLambda.NecSuf.KacWard.ConnectedBy
-        (Ising2DLambda.NecSuf.KacWard.cellEdgeAdjacent
-          (fun p q : ℤ × ℤ =>
-            q.1 = p.1 ∧ (q.2 = p.2 - 1 ∨ q.2 = p.2 + 1))
-          (fun p q : ℤ × ℤ =>
-            q.2 = p.2 ∧ (q.1 = p.1 - 1 ∨ q.1 = p.1 + 1))) S :=
-  Iff.rfl
 
 /-- 持ち上げ点 `(row k, col k)` に接する四セルのうち、右半直線交差数が奇数のもの。 -/
 def surroundingInteriorCells
@@ -76,23 +54,6 @@ def walkSideInteriorBandFromWalk {L m : ℕ}
       let P := planeLift γ k.castSucc
       p = (P.1 - 1, P.2 - 1) ∨ p = (P.1 - 1, P.2) ∨
       p = P ∨ p = (P.1, P.2 - 1)}
-
-theorem walkSideInteriorBandFromWalk_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ)
-    (hh : horizontalDirectedWindingNumber γ = 0)
-    (hv : verticalDirectedWindingNumber γ = 0) :
-    walkSideInteriorBandFromWalk γ hγ hh hv =
-      Ising2DLambda.NecSuf.KacWard.walkSideBand Finset.univ
-        (oddRayInteriorCellsOfWalk γ hγ hh hv)
-        (fun (k : Fin (m + 1)) (p : ℤ × ℤ) =>
-          let P := planeLift γ k.castSucc
-          p = (P.1 - 1, P.2 - 1) ∨ p = (P.1 - 1, P.2) ∨
-          p = P ∨ p = (P.1, P.2 - 1)) := by
-  ext p
-  simp only [walkSideInteriorBandFromWalk,
-    Ising2DLambda.NecSuf.KacWard.walkSideBand, Finset.mem_univ,
-    true_and, Set.mem_setOf_eq]
 
 /-- 実際の内側帯のセルは、整数添字の内側帯にも属する。 -/
 theorem walkSideInteriorBandFromWalk_subset_coordinateBand {L m : ℕ}

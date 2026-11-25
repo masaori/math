@@ -5,10 +5,8 @@
 -/
 import Ising2DLambda.KacWard.Basic
 import Mathlib.Algebra.BigOperators.Intervals
-import Ising2DLambda.NecSuf.KacWard.SmoothingSplitSeamParity
 
 namespace Ising2DLambda.KacWard
-
 
 /-- 接触点分割の三つの辺添字区間は、元の辺添字区間を一度ずつ覆う。 -/
 private theorem contactSplit_seam_sum (g : ℕ → ℕ) (m k l : ℕ)
@@ -46,19 +44,5 @@ theorem smoothing_split_seam_parity {L : ℕ}
   have hh := contactSplit_seam_sum (fun r => horizontal (edge r)) m k l hkl hlm
   have hv := contactSplit_seam_sum (fun r => vertical (edge r)) m k l hkl hlm
   apply Prod.ext <;> simp only <;> omega
-
-/-- 具体版が必要十分版の特殊化として得られることの記録。 -/
-theorem smoothing_split_seam_parity_from_necSuf {L : ℕ}
-    (horizontal vertical : OrientedEdge L → ℕ) (edge : ℕ → OrientedEdge L)
-    (m k l : ℕ) (hkl : k < l) (hlm : l ≤ m) :
-    (((∑ r ∈ Finset.Ioc k l, horizontal (edge r)) % 2
-        + ((∑ r ∈ Finset.Ioc l m, horizontal (edge r))
-          + ∑ r ∈ Finset.Ioc 0 k, horizontal (edge r)) % 2) % 2,
-      ((∑ r ∈ Finset.Ioc k l, vertical (edge r)) % 2
-        + ((∑ r ∈ Finset.Ioc l m, vertical (edge r))
-          + ∑ r ∈ Finset.Ioc 0 k, vertical (edge r)) % 2) % 2) =
-    ((∑ r ∈ Finset.Ioc 0 m, horizontal (edge r)) % 2,
-      (∑ r ∈ Finset.Ioc 0 m, vertical (edge r)) % 2) :=
-  smoothing_split_seam_parity horizontal vertical edge m k l hkl hlm
 
 end Ising2DLambda.KacWard

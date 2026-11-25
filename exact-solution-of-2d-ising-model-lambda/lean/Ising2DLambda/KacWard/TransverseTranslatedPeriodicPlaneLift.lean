@@ -8,12 +8,9 @@
 -/
 import Ising2DLambda.KacWard.PeriodicPlaneLiftTransverseBounded
 import Ising2DLambda.KacWard.PlaneLift
-import Ising2DLambda.NecSuf.KacWard.TransverseTranslatedFamily
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `def_transverse_translate_of_periodic_plane_lift`。 -/
 def transverseTranslatedPeriodicPlaneLift
@@ -32,13 +29,6 @@ theorem transverseTranslatedPeriodicPlaneLiftFromWalk_eq {L m : ℕ}
       transverseTranslatedPeriodicPlaneLift (m + 1) L
         (planeLiftIntegerBase γ) (verticalDirectedWindingNumber γ)
         (horizontalDirectedWindingNumber γ) u k := rfl
-
-theorem transverseTranslatedPeriodicPlaneLiftFromWalk_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L) (u k : ℤ) :
-    transverseTranslatedPeriodicPlaneLiftFromWalk γ u k =
-      Ising2DLambda.NecSuf.KacWard.translatedFamily
-        (periodicPlaneLiftFromWalk γ)
-        (horizontalDirectedWindingNumber γ, -verticalDirectedWindingNumber γ) u k := rfl
 
 /-- 横断平行移動は横断座標を `u(wh²+wv²)` だけ変える。 -/
 theorem transverseTranslatedPeriodicPlaneLift_coordinate

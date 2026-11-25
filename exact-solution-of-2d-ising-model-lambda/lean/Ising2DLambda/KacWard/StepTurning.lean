@@ -1,6 +1,5 @@
 import Ising2DLambda.KacWard.SuccessorDirectionSelection
 import Ising2DLambda.KacWard.CyclicTurningVanishes
-import Ising2DLambda.NecSuf.KacWard.StepAdvancesDirection
 
 namespace Ising2DLambda.KacWard
 

@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.SmoothedSuccessorMap
-import Ising2DLambda.NecSuf.KacWard.SmoothingIndexBlocks
 
 namespace Ising2DLambda.KacWard
 
@@ -69,25 +68,5 @@ theorem smoothingIndexBlocks_nonempty {L m : ℕ}
   constructor
   · exact ⟨(closedWalkTextIndex_lt_iff k l).2 hkl, le_refl _⟩
   · exact fun h => (lt_irrefl _) h.1
-
-theorem smoothingIndexBlockA_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
-    (k l : Fin (m + 1)) :
-    smoothingIndexBlockA γ hγ k l =
-      Ising2DLambda.NecSuf.KacWard.smoothingIndexBlockA k l := by
-  ext r
-  change ((closedWalkTextIndex k).val < (closedWalkTextIndex r).val ∧
-    (closedWalkTextIndex r).val ≤ (closedWalkTextIndex l).val) ↔ (k < r ∧ r ≤ l)
-  rw [closedWalkTextIndex_lt_iff, closedWalkTextIndex_le_iff]
-
-theorem smoothingIndexBlockB_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
-    (k l : Fin (m + 1)) :
-    smoothingIndexBlockB γ hγ k l =
-      Ising2DLambda.NecSuf.KacWard.smoothingIndexBlockB k l := by
-  ext r
-  change r ∉ smoothingIndexBlockA γ hγ k l ↔
-    r ∉ Ising2DLambda.NecSuf.KacWard.smoothingIndexBlockA k l
-  rw [smoothingIndexBlockA_from_necSuf]
 
 end Ising2DLambda.KacWard

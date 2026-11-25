@@ -11,7 +11,6 @@ import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-
 /-- 持ち上げ点 `(row k, col k)` に接する四セルのうち、右半直線交差数が偶数のもの。 -/
 def surroundingExteriorCells
     (n : ℕ) (row col : ℕ → ℤ) (k : ℕ) : Set (ℤ × ℤ) :=
@@ -36,23 +35,6 @@ def walkSideExteriorBandFromWalk {L m : ℕ}
       let P := planeLift γ k.castSucc
       p = (P.1 - 1, P.2 - 1) ∨ p = (P.1 - 1, P.2) ∨
       p = P ∨ p = (P.1, P.2 - 1)}
-
-theorem walkSideExteriorBandFromWalk_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ)
-    (hh : horizontalDirectedWindingNumber γ = 0)
-    (hv : verticalDirectedWindingNumber γ = 0) :
-    walkSideExteriorBandFromWalk γ hγ hh hv =
-      Ising2DLambda.NecSuf.KacWard.walkSideBand Finset.univ
-        (oddRayInteriorCellsOfWalk γ hγ hh hv)ᶜ
-        (fun (k : Fin (m + 1)) (p : ℤ × ℤ) =>
-          let P := planeLift γ k.castSucc
-          p = (P.1 - 1, P.2 - 1) ∨ p = (P.1 - 1, P.2) ∨
-          p = P ∨ p = (P.1, P.2 - 1)) := by
-  ext p
-  simp only [walkSideExteriorBandFromWalk,
-    Ising2DLambda.NecSuf.KacWard.walkSideBand, Finset.mem_univ,
-    true_and, Set.mem_compl_iff, Set.mem_setOf_eq]
 
 /-- 四つの接触セルに内側と外側がともに現れるなら、外側セル集合は空でない。 -/
 private theorem surroundingExteriorCells_nonempty_of_parityArcs

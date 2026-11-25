@@ -4,6 +4,7 @@
 外接長方形の外側と歩道沿いの外側帯を二つの核として必要十分版へ渡す。
 -/
 import Ising2DLambda.KacWard.ExteriorCellReachesOuterCoreFromWalk
+import Ising2DLambda.NecSuf.KacWard.WalkSideInteriorBandConnected
 
 namespace Ising2DLambda.KacWard
 

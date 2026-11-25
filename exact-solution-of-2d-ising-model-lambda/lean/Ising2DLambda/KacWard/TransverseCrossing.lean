@@ -4,13 +4,10 @@
 住処は有限な方向データであり、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.KacWard.Turn
-import Ising2DLambda.NecSuf.KacWard.TransverseCrossing
 import Ising2DLambda.KacWard.StepTurning
 import Ising2DLambda.KacWard.DirectionGateCrossingTurning
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 実際の向き付き辺が作る、共通頂点での二つの直進通過の横断。 -/
 def edgeTransverseCrossing {L : ℕ} (e f e' f' : OrientedEdge L) : Prop :=
@@ -18,15 +15,6 @@ def edgeTransverseCrossing {L : ℕ} (e f e' f' : OrientedEdge L) : Prop :=
     orientedTarget e = orientedTarget e' ∧
     stepTurning e f = 0 ∧ stepTurning e' f' = 0 ∧
     directionAxis (directionNumber e) ≠ directionAxis (directionNumber e')
-
-theorem edgeTransverseCrossing_from_necSuf {L : ℕ}
-    (e f e' f' : OrientedEdge L) :
-    edgeTransverseCrossing e f e' f' ↔
-      Ising2DLambda.NecSuf.KacWard.edgeTransverseCrossing
-        (fun a b => b ∈ nonbacktrackingSuccessors a)
-        orientedTarget stepTurning (fun a => directionAxis (directionNumber a))
-        e f e' f' := by
-  rfl
 
 /-- 共通の頂点を通る二つの接続の横断の条件（終点の一致・二つの直進・軸の相異）は、
 二つの接続の交換で対称である（実際の向き付き辺についての具体版）。
@@ -57,12 +45,5 @@ theorem transverse_crossing_symmetric (u v : LocalVisit) :
     exact ⟨hv, hu, Ne.symm haxis⟩
   · rintro ⟨hv, hu, haxis⟩
     exact ⟨hu, hv, Ne.symm haxis⟩
-
-/-- 具体版が必要十分版の特殊化として得られることの記録。 -/
-theorem transverse_crossing_symmetric_from_necSuf (u v : LocalVisit) :
-    TransverseCrossing u v ↔ TransverseCrossing v u := by
-  exact transverse_crossing_symmetric_necSuf
-    (fun w : LocalVisit => w.turn = .straight) LocalVisit.vertical (· ≠ ·)
-    (fun _ _ h => Ne.symm h) u v
 
 end Ising2DLambda.KacWard

@@ -1,3 +1,12 @@
+## 現在地から移したもの
+- **2026-11-25（主経路）、交互閉路と共通の昇順対の向き積を必要十分版で独立に示した。** 共通の対の寄与が一であることを補題へ切り出し、二つの向き積の計算に使った。先頭行の列挙と符号は未了である。
+
+## レビュー記録から移したもの
+- 2026-11-25（主経路）: 前回の端点列の連結・平坦化と巡回移動を、偶数長の二点区切りと巡回置換に照合した。修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-25（主経路）: 先頭の交互閉路の行を共通の昇順対の向き積の論法で割り、必要十分版の補題として独立に示した。列挙と符号の論法は未了である。
+
 ## 前進の記録から移したもの
 - 2026-11-25（並列・八十一回目）: 【分離】の導出を移す行の 14 行を直した（残り 51 行）。具体版のファイルが `NecSuf` の import から Mathlib を間接に受け取っていた場合は、import を外すと数や `abel` が使えなくなるので、必要十分版と同じ Mathlib の import を具体版へ直接足す。
 
@@ -6,6 +15,15 @@
 
 ## 現在地から移したもの
 - **2026-11-25（並列・八十一回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 14 行を直した（行は未了）。** 名前順で `ContactSplitPairDescent` から `EdgeDistinctSmoothingCrossingParity` までの 13 ファイルの導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外し、`EdgeRepresentativeDisplacement` は導出の補題が無いので import を外すだけにした。import を外して Mathlib の定義や戦術が届かなくなった具体版 3 ファイル（`CrossingFreeSignCounterexample`・`ContactSplitTurningUpdate`・`DirectionUnitVector`）には、必要十分版が使っていた Mathlib の import を直接足した。分離の台帳は 133→119 行。
+
+## 現在地から移したもの
+- **2026-11-25（並列・八十一回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 14 行を直した（行は未了）。** 名前順で `ContactSplitPairDescent` から `EdgeDistinctSmoothingCrossingParity` までの 13 ファイルの導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外し、`EdgeRepresentativeDisplacement` は導出の補題が無いので import を外すだけにした。import を外して Mathlib の定義や戦術が届かなくなった具体版 3 ファイル（`CrossingFreeSignCounterexample`・`ContactSplitTurningUpdate`・`DirectionUnitVector`）には、必要十分版が使っていた Mathlib の import を直接足した。分離の台帳は 133→119 行。
+
+## レビュー記録から移したもの
+- 2026-11-25（並列・八十一回目）: 前回の 14 ファイルの導出の移動を含む main の上で `lake build` が通ることを、今回の直しの検証と合わせて確かめた。修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-25（並列・八十一回目）: 【分離】の導出を移す行の 14 行を直した（残り 51 行）。具体版のファイルが `NecSuf` の import から Mathlib を間接に受け取っていた場合は、import を外すと数や `abel` が使えなくなるので、必要十分版と同じ Mathlib の import を具体版へ直接足す。
 
 ## 現在地から移したもの
 - **2026-11-25（主経路）、交互閉路の端点列の連結・平坦化と巡回移動を必要十分版で証明した。** 具体版の補題三件と偶数長保存への参照を外した。定理の型には具体版の完全マッチングが残るため、分離の例外件数は不変である。

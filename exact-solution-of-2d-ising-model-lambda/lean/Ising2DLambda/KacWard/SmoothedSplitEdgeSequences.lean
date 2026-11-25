@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.SmoothingIndexBlocks
-import Ising2DLambda.NecSuf.KacWard.SmoothedSplitEdgeSequences
 
 namespace Ising2DLambda.KacWard
 
@@ -63,30 +62,6 @@ theorem smoothingIndexSequenceB_nodup {L m : ℕ}
   subst hab
   simp at ha hb
   omega
-
-theorem smoothingIndexSequenceA_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
-    (k l : Fin (m + 1)) :
-    smoothingIndexSequenceA γ hγ k l =
-      Ising2DLambda.NecSuf.KacWard.smoothingIndexSequenceA k l := rfl
-
-theorem smoothingIndexSequenceB_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L) (hγ : closedNonbacktrackingWalk γ)
-    (k l : Fin (m + 1)) :
-    smoothingIndexSequenceB γ hγ k l =
-      Ising2DLambda.NecSuf.KacWard.smoothingIndexSequenceB k l := rfl
-
-theorem smoothedSplitEdgeSequenceA_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ) (k l : Fin (m + 1)) :
-    smoothedSplitEdgeSequenceA γ hγ k l =
-      Ising2DLambda.NecSuf.KacWard.smoothedSplitEdgeSequenceA γ k l := rfl
-
-theorem smoothedSplitEdgeSequenceB_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ) (k l : Fin (m + 1)) :
-    smoothedSplitEdgeSequenceB γ hγ k l =
-      Ising2DLambda.NecSuf.KacWard.smoothedSplitEdgeSequenceB γ k l := rfl
 
 theorem smoothedSplitEdgeSequences_nonempty {L m : ℕ}
     (γ : Fin (m + 1) → OrientedEdge L)

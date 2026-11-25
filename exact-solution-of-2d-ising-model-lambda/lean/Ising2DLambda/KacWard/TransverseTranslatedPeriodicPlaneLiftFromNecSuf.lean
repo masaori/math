@@ -2,8 +2,18 @@
 具体版が必要十分版の整数点族への特殊化として得られることの導出。
 -/
 import Ising2DLambda.KacWard.TransverseTranslatedPeriodicPlaneLift
+import Ising2DLambda.NecSuf.KacWard.TransverseTranslatedFamily
 
 namespace Ising2DLambda.KacWard
+
+open Ising2DLambda.NecSuf.KacWard
+
+theorem transverseTranslatedPeriodicPlaneLiftFromWalk_from_necSuf {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) (u k : ℤ) :
+    transverseTranslatedPeriodicPlaneLiftFromWalk γ u k =
+      Ising2DLambda.NecSuf.KacWard.translatedFamily
+        (periodicPlaneLiftFromWalk γ)
+        (horizontalDirectedWindingNumber γ, -verticalDirectedWindingNumber γ) u k := rfl
 
 /-- 横断平行移動後の座標等式を必要十分版から導いたもの。 -/
 theorem transverseTranslatedPeriodicPlaneLift_coordinate_from_necSuf
