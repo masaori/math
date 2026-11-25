@@ -16,11 +16,11 @@
 import Ising2DLambda.KacWard.AlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PerfectMatchingSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairWordOrientationSign
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.OrientedMatchingPairValue
 
 namespace Ising2DLambda.NecSuf.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
-open Ising2DLambda.KacWard (ascendingPair ascendingPairs_enumeration)
 open scoped Classical
 
 variable {J R : Type*} [Fintype J] [LinearOrder J] [CommRing R]
@@ -69,19 +69,6 @@ theorem pairChunks_map_range {K : Type*} :
       rw [pairChunks_map_range k, List.range_succ_eq_map, List.map_cons, List.map_map]
       congr 1
 
-/-- 完全な端点列で一点を共有する二つの対は、同じ対である。 -/
-private theorem pair_eq_of_shared_point_necSuf {l : List (J × J)}
-    (hn : (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord l).Nodup)
-    {p q : J × J}
-    (hp : p ∈ l) (hq : q ∈ l) {x : J}
-    (hxp : x ∈ [p.1, p.2]) (hxq : x ∈ [q.1, q.2]) : p = q := by
-  have hpw : l.Pairwise (fun a b : J × J => List.Disjoint [a.1, a.2] [b.1, b.2]) :=
-    (List.nodup_flatMap.mp hn).2
-  haveI : Std.Symm (fun a b : J × J => List.Disjoint [a.1, a.2] [b.1, b.2]) :=
-    ⟨fun _ _ h => List.disjoint_comm.mp h⟩
-  by_contra hne
-  exact hpw.forall hp hq hne hxp hxq
-
 /-- R に値をとる η。 -/
 def pairOrientationIn (R : Type*) [CommRing R] (p : J × J) : R := if p.1 < p.2 then 1 else -1
 
@@ -128,64 +115,21 @@ theorem matchingSignOf_enumeration (D : PerfectMatching J) (l : List (J × J))
   exact NecSuf.AlgebraicEigenvalue.matchingWord_value_pair_perm F Neg.neg neg_involutive
     hswap hp [] (matchingEnumeration_complete D _ (matchingCanonicalEnumeration_spec D))
 
-/-- 向き直しの等式。具体版 `orientedPairWord_sign` と同じく第一端点の集合 S を選ぶ。 -/
+/-- 向き直しの等式。第一端点の集合による向きの選択を必要十分版で行う。 -/
 theorem orientedPairWord_value (D : PerfectMatching J) (l : List (J × J))
     (hc : IsCompleteWord (matchingPairWord l))
     (hD : ∀ p ∈ l, ({p.1, p.2} : Set J) ∈ D.val) :
     F (matchingPairWord l) = (l.map (pairOrientationIn R)).prod * matchingSignOf F D := by
-  let S : Set J := {x | ∃ p ∈ l, p.1 = x}
-  letI : DecidablePred (fun x : J => x ∈ S) := Classical.decPred _
-  have hen := ascendingPairs_enumeration D l hc hD
-  have hne : ∀ p ∈ l, p.1 ≠ p.2 := by
-    intro p hp
-    have := (List.nodup_flatMap.mp hc.1).1 p hp
-    simpa using this
-  have hS : ∀ p ∈ l, ((ascendingPair p).1 ∈ S ↔ p.1 < p.2) := by
-    intro p hp
-    unfold ascendingPair
-    split_ifs with h
-    · exact iff_of_true ⟨p, hp, rfl⟩ h
-    · refine iff_of_false ?_ h
-      rintro ⟨q, hq, hqe⟩
-      have hpq := pair_eq_of_shared_point_necSuf (by simpa only [matchingPairWord,
-        Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord] using hc.1)
-        hp hq (x := p.2)
-        (by simp) (by simp [hqe])
-      subst hpq
-      exact hne p hp hqe
-  have haux := Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientationSignWithPrefix
-    F (fun u a b v h => hswap u a b v (by
-      simpa [IsCompleteWord, Ising2DLambda.NecSuf.AlgebraicEigenvalue.IsCompleteWord] using h))
-    S (l.map ascendingPair) [] (by
-      simpa [matchingPairWord, Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord,
-        IsCompleteWord, Ising2DLambda.NecSuf.AlgebraicEigenvalue.IsCompleteWord] using
-        matchingEnumeration_complete D _ hen)
-  simp only [List.nil_append] at haux
-  have haux' :
-      F ((l.map ascendingPair).flatMap (fun p =>
-        if p.1 ∈ S then [p.1, p.2] else [p.2, p.1])) =
-        ((l.map ascendingPair).map (fun p => if p.1 ∈ S then (1 : R) else -1)).prod *
-          F (matchingPairWord (l.map ascendingPair)) := by
-    simpa only [matchingPairWord,
-      Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord] using haux
-  rw [matchingSignOf_enumeration F hswap D _ hen] at haux'
-  convert haux' using 2
-  · rw [List.flatMap_map, matchingPairWord]
-    apply List.flatMap_congr
-    intro p hp
-    by_cases h : p.1 < p.2
-    · rw [if_pos ((hS p hp).mpr h)]
-      simp [ascendingPair, h]
-    · rw [if_neg (fun hm => h ((hS p hp).mp hm))]
-      simp [ascendingPair, h]
-  · rw [List.map_map]
-    congr 1
-    apply List.map_congr_left
-    intro p hp
-    by_cases h : p.1 < p.2
-    · simp only [Function.comp, if_pos ((hS p hp).mpr h), pairOrientationIn, if_pos h]
-    · simp only [Function.comp, if_neg (fun hm => h ((hS p hp).mp hm)), pairOrientationIn,
-        if_neg h]
+  let D' : Ising2DLambda.NecSuf.AlgebraicEigenvalue.PerfectMatching J := ⟨D.val, D.property⟩
+  have hc' : Ising2DLambda.NecSuf.AlgebraicEigenvalue.IsCompleteWord
+      (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord l) := hc
+  have h := Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientedMatchingPairValue
+    F (fun u a b v hw => hswap u a b v hw) D' l
+    {x | ∃ p ∈ l, p.1 = x}
+    (Ising2DLambda.NecSuf.AlgebraicEigenvalue.orderedMatchingPairs_enumeration D' l hc' hD)
+    (fun p hp => (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairOrientationSelection
+      D' l hc' hD p hp).2)
+  exact h
 
 omit [Fintype J] [LinearOrder J] in
 /-- 一文字を列 c の後ろへ送る |c| 回の隣接交換。 -/
