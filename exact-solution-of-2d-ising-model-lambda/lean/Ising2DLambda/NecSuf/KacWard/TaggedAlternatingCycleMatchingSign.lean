@@ -17,7 +17,7 @@ import Ising2DLambda.NecSuf.KacWard.AlternatingCycleMatchingSign
 namespace Ising2DLambda.NecSuf.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
-open Ising2DLambda.KacWard (consecutivePairs consecutivePairs_map_range rotate_one_map_range)
+open Ising2DLambda.KacWard (rotate_one_map_range)
 attribute [local instance] Classical.propDecidable
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
@@ -123,14 +123,14 @@ theorem cyclePoints_even_necSuf (m : {x // x ∈ A}) :
 
 include hτ hυ in
 theorem cycle_pairs_D_necSuf (i : {x // x ∈ A}) :
-    ∀ p ∈ consecutivePairs (cyclePointsOf τ υ (matchingPairComponentMinimum τ υ i)),
+    ∀ p ∈ pairChunks (cyclePointsOf τ υ (matchingPairComponentMinimum τ υ i)),
       ({p.1, p.2} : Set J) ∈ D.val := by
   intro p hp
   set m := matchingPairComponentMinimum τ υ i
   obtain ⟨k, hk⟩ := (cycle_period_necSuf A τ υ m).2.1
   have hk2 : finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m = 2 * k := by omega
   unfold cyclePointsOf at hp
-  rw [hk2, consecutivePairs_map_range] at hp
+  rw [hk2, pairChunks_map_range] at hp
   obtain ⟨r, _, rfl⟩ := List.mem_map.mp hp
   have hcol := (iterate_color_parity_necSuf A τ υ m (minimum_self_and_color A τ υ i).2
     (2 * r)).mpr (even_two_mul r)
@@ -140,14 +140,14 @@ theorem cycle_pairs_D_necSuf (i : {x // x ∈ A}) :
 
 include hτ hυ in
 theorem cycle_pairs_reference_necSuf (i : {x // x ∈ A}) :
-    ∀ p ∈ consecutivePairs ((cyclePointsOf τ υ (matchingPairComponentMinimum τ υ i)).rotate 1),
+    ∀ p ∈ pairChunks ((cyclePointsOf τ υ (matchingPairComponentMinimum τ υ i)).rotate 1),
       ({p.1, p.2} : Set J) ∈ D₀.val := by
   intro p hp
   set m := matchingPairComponentMinimum τ υ i
   obtain ⟨hpos, ⟨k, hk⟩, hper⟩ := cycle_period_necSuf A τ υ m
   have hk2 : finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m = 2 * k := by omega
   unfold cyclePointsOf at hp
-  rw [rotate_one_map_range _ _ hpos (by rw [hper]; rfl), hk2, consecutivePairs_map_range] at hp
+  rw [rotate_one_map_range _ _ hpos (by rw [hper]; rfl), hk2, pairChunks_map_range] at hp
   obtain ⟨r, _, rfl⟩ := List.mem_map.mp hp
   have hcol : ¬ finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m ∈
       matchingPairColor τ υ := by
@@ -310,8 +310,8 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
     (hsD : matchingSignOf F D * matchingSignOf F D = 1) :
     matchingSignOf F D * matchingSignOf F D₀ =
       (-1) ^ (cycleMinimaOf τ υ).card * ((cycleWordsOf τ υ).map (fun c =>
-        ((consecutivePairs c).map (pairOrientationIn R)).prod *
-          ((consecutivePairs (c.rotate 1)).map (pairOrientationIn R)).prod)).prod := by
+        ((pairChunks c).map (pairOrientationIn R)).prod *
+          ((pairChunks (c.rotate 1)).map (pairOrientationIn R)).prod)).prod := by
   have hlen : (cycleWordsOf τ υ).length = (cycleMinimaOf τ υ).card := by
     simp [cycleWordsOf]
   rw [← hlen]

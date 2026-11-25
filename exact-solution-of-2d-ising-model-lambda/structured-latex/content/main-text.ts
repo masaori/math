@@ -88687,7 +88687,7 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
 &&\bigl(\because\ \blkref{def_vertical_edge_traversal_count}\text{、}\blkref{def_horizontal_edge_traversal_count}\text{、上の互いに素な分割}\bigr)\\
 &=\left|\left\{k\in\{1,\ldots,m\}\ \middle|\ P_{k-1}(\gamma)=Q\right\}\right|
 +\left|\left\{k\in\{1,\ldots,m\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
-&&\bigl(\because\ P_{k-1}(\gamma)\ne P_k(\gamma)\text{ なので }Q\text{ は高々一方の端点。二つの集合は互いに素に }T\text{ を覆う}\bigr)\\
+&&\bigl(\because\ P_{k-1}(\gamma)\ne P_k(\gamma)\text{ なので }Q\text{ は高々一方の端点、二つの集合は互いに素に }T\text{ を覆う}\bigr)\\
 &=\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
 +\left|\left\{k\in\{1,\ldots,m\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
 &&\bigl(\because\ \text{添字の置き換え }k\mapsto k-1\bigr)\\

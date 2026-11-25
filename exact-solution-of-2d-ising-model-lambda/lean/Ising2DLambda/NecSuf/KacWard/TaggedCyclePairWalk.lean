@@ -25,25 +25,6 @@ open Ising2DLambda.KacWard (consecutivePairs ascendingPair
   pairWord_consecutivePairs matchingPairWord_append matchingPairWord_flatten)
 open scoped Classical
 
-/-- A list partitioned into adjacent pairs, on the necessary and sufficient side. -/
-def pairChunks {K : Type*} : List K → List (K × K)
-  | a :: b :: rest => (a, b) :: pairChunks rest
-  | _ => []
-
-theorem pairChunks_map_range {K : Type*} :
-    ∀ (k : ℕ) (f : ℕ → K),
-      pairChunks ((List.range (2 * k)).map f) =
-        (List.range k).map (fun r => (f (2 * r), f (2 * r + 1)))
-  | 0, _ => rfl
-  | k + 1, f => by
-      have h2 : 2 * (k + 1) = 2 * k + 1 + 1 := by ring
-      rw [h2, List.range_succ_eq_map, List.map_cons, List.map_map, List.range_succ_eq_map,
-        List.map_cons, List.map_map]
-      change (f 0, (f ∘ Nat.succ) 0) ::
-          pairChunks ((List.range (2 * k)).map ((f ∘ Nat.succ) ∘ Nat.succ)) = _
-      rw [pairChunks_map_range k, List.range_succ_eq_map, List.map_cons, List.map_map]
-      congr 1
-
 /-- 閉歩道の辺による読みの必要十分版。w_r = ι(c(2r)) と置くと、(c(2r), c(2r+1)) = (ι(w_r), w_{r+1})。 -/
 theorem cycle_pairs_walk_necSuf {K : Type*} (ι : K → K) (hι : ∀ e, ι (ι e) = e)
     (c : ℕ → K) (k : ℕ) (hstep : ∀ r < k, c (2 * r + 2) = ι (c (2 * r + 1))) :

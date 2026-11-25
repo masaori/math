@@ -20,12 +20,31 @@ import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairWordOrientationSign
 namespace Ising2DLambda.NecSuf.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
-open Ising2DLambda.KacWard (consecutivePairs ascendingPair ascendingPairs_enumeration
-  pair_eq_of_shared_point pairWord_consecutivePairs matchingPairWord_append
+open Ising2DLambda.KacWard (ascendingPair ascendingPairs_enumeration
+  pair_eq_of_shared_point matchingPairWord_append
   matchingPairWord_flatten flatten_rotate_perm even_length_rotate)
 open scoped Classical
 
 variable {J R : Type*} [Fintype J] [LinearOrder J] [CommRing R]
+
+/-- 隣り合う二点ずつを対にする。 -/
+def pairChunks {K : Type*} : List K → List (K × K)
+  | a :: b :: rest => (a, b) :: pairChunks rest
+  | _ => []
+
+theorem pairChunks_map_range {K : Type*} :
+    ∀ (k : ℕ) (f : ℕ → K),
+      pairChunks ((List.range (2 * k)).map f) =
+        (List.range k).map (fun r => (f (2 * r), f (2 * r + 1)))
+  | 0, _ => rfl
+  | k + 1, f => by
+      have h2 : 2 * (k + 1) = 2 * k + 1 + 1 := by ring
+      rw [h2, List.range_succ_eq_map, List.map_cons, List.map_map, List.range_succ_eq_map,
+        List.map_cons, List.map_map]
+      change (f 0, (f ∘ Nat.succ) 0) ::
+          pairChunks ((List.range (2 * k)).map ((f ∘ Nat.succ) ∘ Nat.succ)) = _
+      rw [pairChunks_map_range k, List.range_succ_eq_map, List.map_cons, List.map_map]
+      congr 1
 
 /-- R に値をとる η。 -/
 def pairOrientationIn (R : Type*) [CommRing R] (p : J × J) : R := if p.1 < p.2 then 1 else -1
@@ -176,31 +195,44 @@ theorem alternating_cycle_matching_sign_necSuf
     (D D₀ : PerfectMatching J) (cs : List (List J)) (P : List (J × J))
     (hev : ∀ c ∈ cs, c ≠ [] ∧ Even c.length)
     (hc : IsCompleteWord (cs.flatten ++ matchingPairWord P))
-    (hD : ∀ c ∈ cs, ∀ p ∈ consecutivePairs c, ({p.1, p.2} : Set J) ∈ D.val)
-    (h₀ : ∀ c ∈ cs, ∀ p ∈ consecutivePairs (c.rotate 1), ({p.1, p.2} : Set J) ∈ D₀.val)
+    (hD : ∀ c ∈ cs, ∀ p ∈ pairChunks c, ({p.1, p.2} : Set J) ∈ D.val)
+    (h₀ : ∀ c ∈ cs, ∀ p ∈ pairChunks (c.rotate 1), ({p.1, p.2} : Set J) ∈ D₀.val)
     (hP : ∀ p ∈ P, p.1 < p.2 ∧ ({p.1, p.2} : Set J) ∈ D.val ∧ ({p.1, p.2} : Set J) ∈ D₀.val)
     (hsD : matchingSignOf F D * matchingSignOf F D = 1) :
     matchingSignOf F D * matchingSignOf F D₀ =
       (-1) ^ cs.length * (cs.map (fun c =>
-        ((consecutivePairs c).map (pairOrientationIn R)).prod *
-          ((consecutivePairs (c.rotate 1)).map (pairOrientationIn R)).prod)).prod := by
-  let lD := (cs.map consecutivePairs).flatten ++ P
-  let l₀ := (cs.map (fun c => consecutivePairs (c.rotate 1))).flatten ++ P
-  let αD := (cs.map (fun c => ((consecutivePairs c).map (pairOrientationIn R)).prod)).prod
+        ((pairChunks c).map (pairOrientationIn R)).prod *
+          ((pairChunks (c.rotate 1)).map (pairOrientationIn R)).prod)).prod := by
+  let lD := (cs.map pairChunks).flatten ++ P
+  let l₀ := (cs.map (fun c => pairChunks (c.rotate 1))).flatten ++ P
+  let αD := (cs.map (fun c => ((pairChunks c).map (pairOrientationIn R)).prod)).prod
   let α₀ := (cs.map (fun c =>
-    ((consecutivePairs (c.rotate 1)).map (pairOrientationIn R)).prod)).prod
+    ((pairChunks (c.rotate 1)).map (pairOrientationIn R)).prod)).prod
+  have pairWord_pairChunks :
+      ∀ c : List J, Even c.length → matchingPairWord (pairChunks c) = c := by
+    intro c
+    induction c using List.twoStepInduction with
+    | nil => intro _; rfl
+    | singleton a => intro h; exact absurd h (by simp)
+    | cons_cons a b rest ih =>
+        intro h
+        have hr : Even rest.length := by
+          simpa [Nat.even_add_one] using h
+        change [a, b] ++ matchingPairWord (pairChunks rest) = a :: b :: rest
+        rw [ih hr]
+        rfl
   have hwD : matchingPairWord lD = cs.flatten ++ matchingPairWord P := by
     simp only [lD, matchingPairWord_append, matchingPairWord_flatten, List.map_map]
     congr 1
-    have h' : ∀ c ∈ cs, (matchingPairWord ∘ consecutivePairs) c = c :=
-      fun c hcs => pairWord_consecutivePairs c (hev c hcs).2
+    have h' : ∀ c ∈ cs, (matchingPairWord ∘ pairChunks) c = c :=
+      fun c hcs => pairWord_pairChunks c (hev c hcs).2
     rw [List.map_congr_left h', List.map_id']
   have hw₀ : matchingPairWord l₀ = (cs.map (·.rotate 1)).flatten ++ matchingPairWord P := by
     simp only [l₀, matchingPairWord_append, matchingPairWord_flatten, List.map_map]
     congr 2
     apply List.map_congr_left
     intro c hcs
-    exact pairWord_consecutivePairs _ (even_length_rotate c (hev c hcs).2)
+    exact pairWord_pairChunks _ (even_length_rotate c (hev c hcs).2)
   have hc₀ : IsCompleteWord (matchingPairWord l₀) := by
     rw [hw₀]
     exact hc.perm ((flatten_rotate_perm cs).symm.append_right _)

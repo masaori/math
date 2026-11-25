@@ -7,6 +7,7 @@ A の外で二つの相手が一致することは `inactive_mate_eq_reference`�
 -/
 import Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.KacWard.TaggedAlternatingCycleMatchingSign
+import Ising2DLambda.KacWard.PairChunksFromNecSuf
 
 namespace Ising2DLambda.KacWard
 
@@ -44,6 +45,7 @@ theorem taggedAlternatingCycles_matching_sign_from_necSuf {L : ℕ}
   have hη : NecSuf.KacWard.pairOrientationIn ℤ =
       (pairOrientation : OrientedEdge L × OrientedEdge L → ℤ) := rfl
   rw [hw, hm, hη] at h
+  simp only [pairChunks_eq_consecutivePairs] at h
   exact h
 
 end Ising2DLambda.KacWard

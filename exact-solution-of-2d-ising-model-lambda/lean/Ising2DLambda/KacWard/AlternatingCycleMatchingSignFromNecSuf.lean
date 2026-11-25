@@ -6,6 +6,7 @@ sgn(D) の平方が一であることは `perfectMatchingSign_eq_one_or_neg_one`
 -/
 import Ising2DLambda.KacWard.AlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.KacWard.AlternatingCycleMatchingSign
+import Ising2DLambda.KacWard.PairChunksFromNecSuf
 
 namespace Ising2DLambda.KacWard
 
@@ -27,7 +28,11 @@ theorem alternatingCycleWords_matching_sign_from_necSuf {L : ℕ}
         (cs.map (fun c => cycleShortOrientation c * cycleReferenceOrientation c)).prod := by
   have hsD : perfectMatchingSign D * perfectMatchingSign D = 1 := by
     rcases perfectMatchingSign_eq_one_or_neg_one D with h | h <;> simp [h]
-  exact NecSuf.KacWard.alternating_cycle_matching_sign_necSuf (R := ℤ) matchingWordSign
-    matchingWordSign_swap D (referenceLongMatching L) cs P hev hc hD h₀ hP hsD
+  have h := NecSuf.KacWard.alternating_cycle_matching_sign_necSuf (R := ℤ) matchingWordSign
+    matchingWordSign_swap D (referenceLongMatching L) cs P hev hc
+    (by simpa only [pairChunks_eq_consecutivePairs] using hD)
+    (by simpa only [pairChunks_eq_consecutivePairs] using h₀) hP hsD
+  simp only [pairChunks_eq_consecutivePairs] at h
+  exact h
 
 end Ising2DLambda.KacWard
