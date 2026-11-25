@@ -1,4 +1,7 @@
 ## 直近の記録から移したもの
+- 2026-11-25（並列・八十一回目）: Kac--Ward の具体版の導出の補題を、名前順で `ContactSplitPairDescent` から `EdgeDistinctSmoothingCrossingParity` までの 13 ファイルから同名の `*FromNecSuf.lean` へ移して `NecSuf` の import を外し、`EdgeRepresentativeDisplacement` は import を外すだけにした。分離の台帳 133→119 行。
+
+## 直近の記録から移したもの
 - 2026-11-25（主経路）: 交互閉路の端点列の連結・平坦化と巡回移動を必要十分版で示した。分離の例外件数は不変。実現写像の単調性の式鎖の根拠を統一した。
 
 ## 直近の記録から移したもの

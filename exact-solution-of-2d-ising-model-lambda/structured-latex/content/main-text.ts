@@ -109950,7 +109950,7 @@ b
 &=0\cdot\varepsilon
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍を素数ごとに読む: }(0\cdot\varepsilon)(p)=0\,\varepsilon(p)=0)\\
 &\le_{\Lambda_{\mathbb{Q}}}\tfrac12\cdot\varepsilon
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=0\text{、}s:=\tfrac12\text{、}\nu:=\varepsilon\text{ で読む。}0\le\tfrac12\text{ は }\mathbb{Q}\text{ の順序、}0\le_{\Lambda_{\mathbb{Q}}}\varepsilon\text{ は証人の性質})\\
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=0\text{、}s:=\tfrac12\text{、}\nu:=\varepsilon\text{ で読む、}0\le\tfrac12\text{ は }\mathbb{Q}\text{ の順序、}0\le_{\Lambda_{\mathbb{Q}}}\varepsilon\text{ は証人の性質})\\
 &=\varepsilon'
 &&(\because\ \varepsilon'\text{ の定義})
 \end{aligned}`),
