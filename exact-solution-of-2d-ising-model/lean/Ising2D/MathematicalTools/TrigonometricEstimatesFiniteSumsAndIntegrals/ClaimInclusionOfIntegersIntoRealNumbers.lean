@@ -49,8 +49,8 @@
 * `inclusion_zz_to_rr_preserves_negation` は人手の 6 行と 1 対 1 の `calc` である。`ℤ` の和の単位元 `0 + y = y` の段は `zero_add`、`def_int_difference` の段は `int_sub_eq_add_neg`、
   `ι(0_ℤ) := 0_ℝ` は `inclusion_zz_to_rr_zero_intCast`、`def_real_difference` は `sub_eq_add_neg`、`0_ℝ` が和の単位元であることは `zero_add` で当てる。
 * `finite_sum_of_constant_real_number_succ` は人手の `m ∈ ℤ_{≥1}` を Lean の `m + 1`（`Fin (m + 1)` の上の和）で書き、`m = 1` の 3 行と
-  帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。`def_finite_sum_of_real_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc`
-  （`ClaimFiniteSumsOfRealNumbers.lean` と同じ読み替え）。
+  帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。`def_finite_sum_of_real_numbers` の 2 つの式は、Lean の `Fin` の上の和がそれを満たす補題
+  `finset_sum_fin_real_eq_finite_sum_of_real_numbers`（`DefinitionFiniteSumOverIndexSet.lean`）で出す。
   有限型の添字の和 `finite_sum_of_constant_real_number_fintype` は、人手の `m ∈ ℤ_{≥1}` に合わせて `1 ≤ card κ` を仮定し、`card κ = m + 1` の `m` を取って
   `κ` に `Fin (m + 1)` の番号を付け、`_succ` を当てる（空の和の場合を通らない）。
 * `inclusion_zz_to_rr_of_positive_is_at_least_one` は人手と同じく `n` についての帰納法で、`n = 1` の 2 行と帰納法の段の 4 行が人手の行と 1 対 1 の `calc` である
@@ -79,6 +79,7 @@ import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionFiniteSumOverIndexSet
 
 namespace Ising2D
 
@@ -364,12 +365,17 @@ theorem finite_sum_of_constant_real_number_succ (m : ℕ) (r : ℝ) :
     ∑ _j : Fin (m + 1), r = ((m + 1 : ℕ) : ℝ) * r := by
   induction m with
   | zero =>
-    calc ∑ _j : Fin 1, r = r := Fin.sum_univ_one _                         -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{1} r_j := r_1`（`r_1 → r`）
+    calc ∑ _j : Fin 1, r = r :=
+          finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 (fun _ => r) 0 rfl
+                                                                           -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{1} r_j := r_1`（`r_1 → r`）
       _ = 1 * r := (one_mul r).symm                                        -- `1_ℝ` は `ℝ` の乗法の単位元
       _ = ((1 : ℕ) : ℝ) * r := by rw [inclusion_zz_to_rr_of_one]           -- `inclusion_zz_to_rr_of_one` を右辺から左辺へ
   | succ m ih =>
     calc ∑ _j : Fin (m + 2), r
-        = (∑ _j : Fin (m + 1), r) + r := Fin.sum_univ_castSucc (fun _ => r)  -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}`
+        = (∑ _j : Fin (m + 1), r) + r :=
+          finset_sum_fin_real_eq_finite_sum_of_real_numbers.2 (m + 1) (Nat.succ_pos m) (fun _ => r) (fun _ => r)
+            (fun _ _ _ => rfl) (Fin.last (m + 1)) ((finIndexToZZ_eq_iff_val_add_one_eq _ _).2 rfl)
+                                                                           -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}`
       _ = ((m + 1 : ℕ) : ℝ) * r + r := by rw [ih]                          -- 帰納法の仮定
       _ = ((m + 1 : ℕ) : ℝ) * r + 1 * r := by rw [one_mul]                 -- `1_ℝ` は `ℝ` の乗法の単位元
       _ = (((m + 1 : ℕ) : ℝ) + 1) * r := (add_mul _ _ _).symm              -- `ℝ` の分配律

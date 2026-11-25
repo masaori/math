@@ -4140,6 +4140,7 @@ T_B(X - W)
     kind: "definition",
     title: { text: "複素数の有限和" },
     labels: ["def_finite_sum_of_complex_numbers"],
+    lean: ["Ising2D.finset_sum_fin_complex_eq_finite_sum_of_complex_numbers"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
@@ -4260,6 +4261,7 @@ T_B(X - W)
     kind: "definition",
     title: { text: "実数の有限和" },
     labels: ["def_finite_sum_of_real_numbers"],
+    lean: ["Ising2D.finset_sum_fin_real_eq_finite_sum_of_real_numbers"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
