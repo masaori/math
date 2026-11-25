@@ -184,7 +184,7 @@ theorem H1plus_eq_H1 : H1plus M = H1 M (-1) := rfl
 Lean の `H1plus` は境界項の係数 `-1` を `lastSign (-1)` に持たせた `Fin M` の上の一つの和なので、
 人手の差の形とはこの補題でつなぐ。Lean の添字は 0 始まりなので、人手の `m ∈ {1, …, M_col-1}` は
 `Fin.castSucc m`（`m : Fin (r + 1)`）、`m + 1` は `Fin.succ m`、`M_col` は `Fin.last (r + 1)`、`1` は `0` である。
-同じ式を `Finset.filter` の上の和で述べた `H1plus_eq_bulk_sub_boundary`（`ClaimH1PlusInSigmaZForm.lean`）もある。
+同じ式を、和を `Fin (M - 1)` の上に取りサイトへ `Fin.castLE` で移して述べた `H1plus_eq_bulk_sub_boundary`（`ClaimH1PlusInSigmaZForm.lean`）もある。
 こちらは和を `Fin (r + 1)` の上に取るので、項の個数 `r + 1`（人手の `M_col - 1`）の有限和を `Fin (r + 1)` の上の和として述べた
 有限和の主張の系（`conj_finite_sum_tensorPow`・`neg_finite_sum_tensorPow`）へそのまま渡せる。 -/
 theorem H1plus_eq_sub (r : ℕ) :

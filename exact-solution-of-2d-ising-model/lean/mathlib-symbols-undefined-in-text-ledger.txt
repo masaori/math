@@ -1561,7 +1561,6 @@ Ising2D.H1plus	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.H1plus	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.H1plus	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.H1plus	Matrix
-Ising2D.H1plus_eq_bulk_sub_boundary	Finset.filter@Fin,fun@?
 Ising2D.H1plus_eq_bulk_sub_boundary	Finset.sum@Fin,Matrix[Complex]@Matrix.addCommMonoid
 Ising2D.H1plus_eq_bulk_sub_boundary	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.H1plus_eq_bulk_sub_boundary	HSub.hSub@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.sub
@@ -4818,9 +4817,6 @@ Ising2D.factorization_step5_P21_real	Real.cos
 Ising2D.factorization_step5_P21_real	Real.cosh
 Ising2D.factorization_step5_P21_real	Real.sin
 Ising2D.factorization_step5_P21_real	Real.sinh
-Ising2D.filter_last_eq_singleton	Finset
-Ising2D.filter_last_eq_singleton	Finset.filter@Fin,fun@?
-Ising2D.filter_last_eq_singleton	Singleton.singleton@Fin,Finset@Finset.instSingleton
 Ising2D.finCheckIdxEquiv	Equiv
 Ising2D.finCheckIdxEquiv	Equiv.ofBijective
 Ising2D.finCheckIdxEquiv_val	DFunLike.coe@Equiv,Fin,fun@EquivLike.toFunLike
@@ -6819,7 +6815,6 @@ Ising2D.onsager_limit_in_N_row_physical	nhds@Real@Real.pseudoMetricSpace
 Ising2D.onsager_step3_c_le_two_c_plus	HMul.hMul@Matrix[Real],Matrix[Real],Matrix[Real]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.onsager_step3_c_le_two_c_plus	Matrix
 Ising2D.onsager_step3_c_le_two_c_plus	Matrix.IsSymm
-Ising2D.openChainD0	Finset.filter@Fin,fun@?
 Ising2D.openChainD0	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.openChainD0	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.openChainD0	Matrix
@@ -6832,7 +6827,6 @@ Ising2D.openChainD0_eq_diagonal	Equiv.symm
 Ising2D.openChainD0_eq_diagonal	Matrix.diagonal@Ising2D.Conf,Complex@?,Complex.instZero
 Ising2D.openChainD0_mulVec_basisVec	DFunLike.coe@Equiv,Ising2D.SpinConf,fun@EquivLike.toFunLike
 Ising2D.openChainD0_mulVec_basisVec	Equiv
-Ising2D.openChainD0_mulVec_basisVec	Finset.filter@Fin,fun@?
 Ising2D.openChainD0_mulVec_basisVec	HSMul.hSMul@Complex,→,→@Function.hasSMul
 Ising2D.openChainD0_mulVec_basisVec	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.openChainD0_mulVec_basisVec	Subtype.val
@@ -6847,7 +6841,6 @@ Ising2D.openChainD0_mul_smul_epsilon_mul_boundaryG	HMul.hMul@Ising2D.TensorPow,M
 Ising2D.openChainD0_mul_smul_epsilon_mul_boundaryG	HMul.hMul@Matrix[Complex],Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.openChainD0_mul_smul_epsilon_mul_boundaryG	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.openChainD0_mul_smul_epsilon_mul_boundaryG	Matrix
-Ising2D.openChainEnergy	Finset.filter@Fin,fun@?
 Ising2D.openChainEnergy	Subtype.val
 Ising2D.openChainEnergy_eq_sum_fin	Fin.castSucc
 Ising2D.openChainEnergy_eq_sum_fin	Fin.succ
@@ -7318,7 +7311,6 @@ Ising2D.prefixEntryProduct	Matrix
 Ising2D.prefixEntryProduct	Nat.succ
 Ising2D.prefixEntryProduct	Unit
 Ising2D.prefixEntryProduct	Unit.unit
-Ising2D.prefixEntryProduct_eq_prod	Fin.castLE
 Ising2D.prefixEntryProduct_eq_prod	Finset.prod@Fin,Complex@CommRing.toCommMonoid
 Ising2D.prefixEntryProduct_eq_prod	Matrix
 Ising2D.prefixEntryProduct_succ	Fin.mk
@@ -7562,9 +7554,6 @@ Ising2D.real_inclusion_cos_add_I_mul_sin	Complex.exp
 Ising2D.real_inclusion_cos_add_I_mul_sin	Real.cos
 Ising2D.real_inclusion_cos_add_I_mul_sin	Real.sin
 Ising2D.real_inclusion_cos_neg	Real.cos
-Ising2D.real_inclusion_of_finite_sum_finset	Finset
-Ising2D.real_inclusion_of_finite_sum_finset	Finset.sum@?,Complex@Complex.instAddCommMonoid
-Ising2D.real_inclusion_of_finite_sum_finset	Finset.sum@?,Real@Real.instAddCommMonoid
 Ising2D.real_inclusion_of_finite_sum_fintype	Finset.sum@?,Complex@Complex.instAddCommMonoid
 Ising2D.real_inclusion_of_finite_sum_fintype	Finset.sum@?,Real@Real.instAddCommMonoid
 Ising2D.real_inclusion_of_finite_sum_fintype	Finset.univ@?@?
@@ -8586,10 +8575,6 @@ Ising2D.sum_conf_succ_eq_sum_last_sum_init	Fin.last
 Ising2D.sum_conf_succ_eq_sum_last_sum_init	Finset.prod@Fin,Complex@CommRing.toCommMonoid
 Ising2D.sum_conf_succ_eq_sum_last_sum_init	Finset.sum@Ising2D.Conf,Complex@Complex.instAddCommMonoid
 Ising2D.sum_conf_succ_eq_sum_last_sum_init	Finset.univ@Ising2D.Conf@Pi.instFintype
-Ising2D.sum_filter_not_last_eq_sum_castSucc	AddCommMonoid
-Ising2D.sum_filter_not_last_eq_sum_castSucc	Fin.castSucc
-Ising2D.sum_filter_not_last_eq_sum_castSucc	Finset.filter@Fin,fun@?
-Ising2D.sum_filter_not_last_eq_sum_castSucc	Finset.sum@Fin,?@?
 Ising2D.sum_lie'	Bracket.bracket@Ising2D.TensorPow,Ising2D.TensorPow@Ring.instBracket
 Ising2D.sum_lie'	Finset.sum@?,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.sum_lie'	Finset.univ@?@?

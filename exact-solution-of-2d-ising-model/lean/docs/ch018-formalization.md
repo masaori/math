@@ -223,7 +223,7 @@
 | `Ising2D.Y_lastSite_kronecker_form` / `Z_firstSite_kronecker_form` / `epsilon_kronecker_form` / `sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker` | `Y_{M_col}`・`Z_1`・`ε`・`σ^z_{M_col}σ^z_1` のクロネッカー積表示（`Y_{M_col}` は `Y_prefix_kronecker_form` の当てはめ、`Z_1` は 2 段、`σ^zσ^z` は 4 段の `calc`） | 証明の準備 2 |
 | `Ising2D.I_smul_Y_mul_Z_next_of_not_last`（と `siteProd_ite_smul`） | `i(Y_mZ_{m+1}) = σ^z_mσ^z_{m+1}`（11 段の `calc`。`siteProd_ite_smul` は第 `m` 因子を `if` で書いた族についての `kronecker_multilinear` の `r = 1` の式） | 証明の準備 3 |
 | `Ising2D.neg_I_smul_Y_lastSite_mul_Z_firstSite`（と `siteProd_ite_ite_smul`） | `-(i(Y_{M_col}Z_1)) = εG`（17 段の `calc`） | 証明の準備 4 |
-| `Ising2D.H1plus_eq_bulk_sub_boundary` / `sum_filter_not_last_eq_sum_castSucc` / `castSucc_val_add_one_ne` | `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1`、和の添字 `{1,…,M_col-1}` の `Finset.filter` から `Fin (M_col-1)` への読み替え | `def_H1_plus` と最後の鎖の 1・5 行目 |
+| `Ising2D.H1plus_eq_bulk_sub_boundary` / `castLE_sub_one_val_add_one_ne` / `castSucc_val_add_one_ne` | `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1`（和の添字 `{1,…,M_col-1}` は `Fin (M - 1)`、サイトへは `Fin.castLE`）、和の添字から移したサイトは `M_col` でないこと | `def_H1_plus` と最後の鎖の 1・5 行目 |
 | **`Ising2D.H1_plus_in_sigma_z_form`** | **`iH_1^{(+)} = D_0 + εG`**（`M_col ≥ 2`。最後の 7 行の鎖と 7 段の `calc`） | **主張本体** |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonD0GCommuteAndDiagonalAction.lean`（ラベル `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action`）

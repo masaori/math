@@ -2228,7 +2228,7 @@ y^2>x\ \land\ x>0
     kind: "definition",
     title: { text: "添字の集合" },
     labels: ["def_index_set_from_one_to_n"],
-    lean: ["Ising2D.finIndexToZZ", "Ising2D.finIndexToZZ_bijective_onto_index_set", "Ising2D.finIndexToZZ_lt_iff_val_lt", "Ising2D.finIndexToZZ_eq_iff_val_add_one_eq", "Ising2D.finIndexToZZ_le_inclusion_iff_val_lt", "Ising2D.finIndexToZZ_eq_inclusion_add_one_iff_val_eq", "Ising2D.finIndexToZZ_firstSite", "Ising2D.finIndexToZZ_lastSite"],
+    lean: ["Ising2D.finIndexToZZ", "Ising2D.finIndexToZZ_bijective_onto_index_set", "Ising2D.finIndexToZZ_lt_iff_val_lt", "Ising2D.finIndexToZZ_eq_iff_val_add_one_eq", "Ising2D.finIndexToZZ_le_inclusion_iff_val_lt", "Ising2D.finIndexToZZ_eq_inclusion_add_one_iff_val_eq", "Ising2D.finIndexToZZ_firstSite", "Ising2D.finIndexToZZ_lastSite", "Ising2D.finIndexToZZ_castLE"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
@@ -2263,6 +2263,7 @@ y^2>x\ \land\ x>0
       status: "added",
       notes: [
         "2026-11-24（Lean の点検の直し、未定義の記号の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」の一単位目）: 原文（Typst）に対応ブロックは無い。本文は行列の成分・有限和・サイトの添字を {1,…,n} の元として書いていたが、その集合を定めるブロックが無かった。Lean の具体版は添字に Fin n を使い、名前を付けた写像 Ising2D.finIndexToZZ（i ↦ ι_{ℕ→ℤ}(i.val) + 1_ℤ）がこの集合への全単射であることを補題一本 Ising2D.finIndexToZZ_bijective_onto_index_set で示す（MathematicalTools/SetNotationAndComplexCartesianArithmetic/DefinitionIndexSetFromOneToN.lean）。写像の行き先を ℕ ではなく ℤ にしたのは、本文の添字の集合が 𝐙 の部分集合だからである。",
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の四単位目）: 本文は m ≤ n のとき {1,…,m} の元をそのまま {1,…,n} の元として書く（開鎖項 D_0・開鎖のエネルギー E(s)・H_1^{(+)} の和の添字 m ∈ {1,…,M_col−1} をサイトの添字に使う）。Lean の具体版はこの和を Fin (M − 1) の上に取り、サイトへは mathlib の Fin.castLE で移すので、移しても人手の添字が変わらないこと（finIndexToZZ n (Fin.castLE h j) = finIndexToZZ m j）を示す補題 Ising2D.finIndexToZZ_castLE を欄 lean に足した。本文は変えていない。",
       ],
     },
   },
@@ -4550,7 +4551,7 @@ T_B(X - W)
     kind: "claim",
     title: { text: "実数の有限和の包含は包含の有限和に等しい" },
     labels: ["real_inclusion_preserves_finite_sum"],
-    lean: ["Ising2D.real_inclusion_of_finite_sum", "Ising2D.real_inclusion_of_finite_sum_succ", "Ising2D.real_inclusion_of_finite_sum_fintype", "Ising2D.real_inclusion_of_finite_sum_fintype_or_empty", "Ising2D.real_inclusion_of_finite_sum_finset"],
+    lean: ["Ising2D.real_inclusion_of_finite_sum", "Ising2D.real_inclusion_of_finite_sum_succ", "Ising2D.real_inclusion_of_finite_sum_fintype", "Ising2D.real_inclusion_of_finite_sum_fintype_or_empty"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 0}`),

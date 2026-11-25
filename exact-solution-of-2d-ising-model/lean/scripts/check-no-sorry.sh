@@ -745,7 +745,6 @@ targets=(
   Ising2D.real_inclusion_of_finite_sum_succ
   Ising2D.real_inclusion_of_finite_sum_fintype
   Ising2D.real_inclusion_of_finite_sum_fintype_or_empty
-  Ising2D.real_inclusion_of_finite_sum_finset
   Ising2D.real_inclusion_of_finite_sum_succ_of_necSuf
   Ising2D.complex_finset_sum_eq_finSumLeft
   "Ising2D.NecSuf.map_finSumLeft_of_map_add'"
@@ -3319,7 +3318,8 @@ targets=(
   Ising2D.neg_I_smul_Y_lastSite_mul_Z_firstSite
   Ising2D.boundaryYXYFamily
   Ising2D.H1plus_eq_bulk_sub_boundary
-  Ising2D.sum_filter_not_last_eq_sum_castSucc
+  Ising2D.castLE_sub_one_val_add_one_ne
+  Ising2D.finIndexToZZ_castLE
   Ising2D.castSucc_val_add_one_ne
   Ising2D.H1_plus_in_sigma_z_form
   Ising2D.epsilon_mul_sigmaZ_mul_sigmaZ

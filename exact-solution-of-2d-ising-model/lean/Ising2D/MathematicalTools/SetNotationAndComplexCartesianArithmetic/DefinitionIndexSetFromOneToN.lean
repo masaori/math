@@ -12,6 +12,9 @@ Lean の具体版は添字の型に `Fin n`（`v < n` を満たす `v ∈ ℕ` �
 `finIndexToZZ_le_inclusion_iff_val_lt`・`finIndexToZZ_eq_iff_val_add_one_eq` で示す（人手の添字の比較を Lean の定義の場合分けへ移す）。
 像が `ι_{ℕ→ℤ}(l) + 1_ℤ` に等しいことが値の等号 `i.val = l` と同値であることを `finIndexToZZ_eq_inclusion_add_one_iff_val_eq` で示す
 （人手の添字から、自然数の添字を持つ Lean の定義（`Yflat`・`Zflat` など）の添字へ移す）。
+`m ≤ n` のとき、人手は `{1,…,m}` の元をそのまま `{1,…,n}` の元として書く（例: 開鎖項 `D_0` の和の添字 `m ∈ {1,…,M_col-1}` をサイトの添字に使う）。
+Lean は型 `Fin m` の元から型 `Fin n` の元へ mathlib の `Fin.castLE` で移るので、移っても人手の添字が変わらないこと
+`finIndexToZZ n (Fin.castLE h j) = finIndexToZZ m j` を `finIndexToZZ_castLE` で示す。
 人手の添字 `i ∈ {1,…,n}` と Lean の添字 `i' : Fin n` の行き来は、この写像（とその逆）を通す。Lean の `Fin n` の数字 `(k : Fin n)`（`k < n`）は
 `Fin.ofNat` で `⟨k % n, _⟩` と定義され、`k % n = k` なので人手の添字 `k + 1` に当たる（`finIndexToZZ n ⟨k, _⟩ = ι(k) + 1` は定義どおり）。
 
@@ -81,5 +84,13 @@ theorem finIndexToZZ_eq_inclusion_add_one_iff_val_eq (n : ℕ) (i : Fin n) (l : 
     finIndexToZZ n i = inclusionNNtoZZ l + 1 ↔ (i : ℕ) = l := by
   simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
   omega
+
+/-- **`def_index_set_from_one_to_n`**: `m ≤ n` のとき、Lean の `Fin.castLE h : Fin m → Fin n` は人手の添字を変えない:
+`finIndexToZZ n (Fin.castLE h j) = finIndexToZZ m j`。人手は `{1,…,m}` の元 `k` を、`k ≤ m ≤ n` なのでそのまま `{1,…,n}` の元として書き、
+Lean は型 `Fin m` の元から型 `Fin n` の元へ `Fin.castLE` で移るので、移した元の像が同じ整数であることを示す（Lean だけの段の補題）。
+`Fin.castLE h j` の値は `j` の値と定義として等しいので、両辺は `finIndexToZZ` の定義で同じ式 `ι_{ℕ→ℤ}(j.val) + 1_ℤ` になる。 -/
+theorem finIndexToZZ_castLE {m n : ℕ} (h : m ≤ n) (j : Fin m) :
+    finIndexToZZ n (Fin.castLE h j) = finIndexToZZ m j :=
+  rfl
 
 end Ising2D

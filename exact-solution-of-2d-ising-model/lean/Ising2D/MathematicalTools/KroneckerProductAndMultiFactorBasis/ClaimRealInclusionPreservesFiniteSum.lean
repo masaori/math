@@ -29,8 +29,6 @@
   （添字の型が空でもよい。人手の `m = 0` に当たる）は、`κ` に `Fin (card κ)` の番号を付けて `real_inclusion_of_finite_sum` を当て、番号を外す
   （番号付けの 2 段は mathlib の `Equiv.sum_comp` で、人手のどの行にも当たらない番号付けの埋め合わせである。
   `finite_sum_of_constant_real_number_fintype` と同じ扱い）。
-- `real_inclusion_of_finite_sum_finset` は、有限集合 `S ⊆ κ` の上の和（例えば `Σ_{m=1}^{M_col-1}` を `Fin M` の部分集合の上の和で書いたもの）から引くためのもので、
-  `S` の元の型の上の和へ移して（mathlib の `Finset.sum_coe_sort`。人手のどの行にも当たらない書き方の埋め合わせ）`_or_empty` を当てる。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNumbers
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionFiniteSumOverIndexSet
@@ -98,14 +96,5 @@ theorem real_inclusion_of_finite_sum_fintype_or_empty {κ : Type*} [Fintype κ] 
     _ = ((∑ i : Fin (Fintype.card κ), r (e.symm i) : ℝ) : ℂ) :=
         real_inclusion_of_finite_sum (Fintype.card κ) (fun i => r (e.symm i))     -- `real_inclusion_preserves_finite_sum`（`m → card κ`）
     _ = ((∑ j, r j : ℝ) : ℂ) := by rw [e.symm.sum_comp r]                         -- 番号を外す
-
-/-- 有限集合 `S ⊆ κ` の上の和。`S` の元の型の上の和へ移して `real_inclusion_of_finite_sum_fintype_or_empty` を当てる。 -/
-theorem real_inclusion_of_finite_sum_finset {κ : Type*} (S : Finset κ) (r : κ → ℝ) :
-    ∑ j ∈ S, ((r j : ℝ) : ℂ) = ((∑ j ∈ S, r j : ℝ) : ℂ) := by
-  calc ∑ j ∈ S, ((r j : ℝ) : ℂ)
-      = ∑ j : S, ((r j : ℝ) : ℂ) := (Finset.sum_coe_sort S _).symm               -- `S` の元の型の上の和へ移す
-    _ = ((∑ j : S, r j : ℝ) : ℂ) :=
-        real_inclusion_of_finite_sum_fintype_or_empty (fun j : S => r j)          -- `real_inclusion_preserves_finite_sum`
-    _ = ((∑ j ∈ S, r j : ℝ) : ℂ) := by rw [Finset.sum_coe_sort S r]               -- 和を `S` の上の和へ戻す
 
 end Ising2D

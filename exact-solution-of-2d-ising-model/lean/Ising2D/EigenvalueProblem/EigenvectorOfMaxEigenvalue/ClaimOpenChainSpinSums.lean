@@ -27,7 +27,8 @@
 `openChainEnergy` の定義と二つの主張の型では、人手の列の添字 `{1,…,M_col}` は `Fin M`（人手の `m` が Lean の `(m : ℕ) + 1`）、
 人手の `1` と `M_col` は `firstSite`・`lastSite`、人手の `m+1` は `nextSite m` である（証明の中の書き方は下の節の冒頭に書いた）。
 `openChainEnergy` の開鎖の結合の添字 `{1,…,M_col-1}` は、
-`openChainD0`・`openChainD0_mulVec_basisVec` と同じ「`(m : ℕ) + 1 ≠ M` なる `m : Fin M`」である。
+`openChainD0`・`openChainD0_mulVec_basisVec` と同じく `Fin (M - 1)` の元 `j` で、サイトへは `Fin.castLE (Nat.sub_le M 1) j` で移す
+（人手の添字が変わらないことは `finIndexToZZ_castLE`。`M ≤ 1` の値は人手の定義（`M_col ≥ 2`）の外）。
 `openChainEnergy` は `openChainD0_mulVec_basisVec` の係数と定義で一致する。
 
 人手の `{-1,1}` 上の有限和 `∑_{t∈{-1,1}} f(t) = f(1) + f(-1)` は `sum_spinVal` である。
@@ -94,7 +95,7 @@ def spinMul (a b : SpinVal) : SpinVal :=
 
 /-- **人手 `def_open_chain_spin_energy`**: `E(s) := ∑_{m=1}^{M_col-1} s(m)s(m+1)`。 -/
 noncomputable def openChainEnergy (s : SpinConf M) : ℝ :=
-  ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M), (s m : ℝ) * (s (nextSite m) : ℝ)
+  ∑ j : Fin (M - 1), (s (Fin.castLE (Nat.sub_le M 1) j) : ℝ) * (s (nextSite (Fin.castLE (Nat.sub_le M 1) j)) : ℝ)
 
 /-- 人手 `def_open_chain_spin_energy` の `E(s) ∈ ℤ`。 -/
 theorem openChainEnergy_mem_int (s : SpinConf M) : ∃ n : ℤ, openChainEnergy s = n := by
@@ -103,8 +104,8 @@ theorem openChainEnergy_mem_int (s : SpinConf M) : ∃ n : ℤ, openChainEnergy 
     · exact ⟨1, by rw [h]; norm_num⟩
     · exact ⟨-1, by rw [h]; norm_num⟩
   choose z hz using h
-  refine ⟨∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-    z (s m) * z (s (nextSite m)), ?_⟩
+  refine ⟨∑ j : Fin (M - 1),
+    z (s (Fin.castLE (Nat.sub_le M 1) j)) * z (s (nextSite (Fin.castLE (Nat.sub_le M 1) j))), ?_⟩
   rw [openChainEnergy, Int.cast_sum]
   exact Finset.sum_congr rfl fun m _ => by rw [Int.cast_mul, hz, hz]
 
@@ -226,18 +227,17 @@ theorem binaryWordRealSum_eq_sum_univ :
     rw [Fin.sum_univ_two, add_comm]
     rfl
 
-/-- 運ぶ段（人手の行は無い）: Lean の `openChainEnergy` は `openChainD0` の係数と揃えて `Fin M` の部分集合の上の和で
-定めてあるので、人手 `def_open_chain_spin_energy` の `E(s) = Σ_{m=1}^{M_col-1} s(m)s(m+1)` の添字 `Fin (n + 1)` の形へ読む。 -/
+/-- 運ぶ段（人手の行は無い）: Lean の `openChainEnergy` は `openChainD0` の係数と揃えて `Fin (M - 1)` の上の和で、サイトを
+`Fin.castLE` と `nextSite` で書いてあるので、`M = n + 2` で人手 `def_open_chain_spin_energy` の `E(s) = Σ_{m=1}^{M_col-1} s(m)s(m+1)` を
+添字 `Fin (n + 1)` の上の `s m.castSucc`・`s m.succ` の形へ読む（`Fin (n + 2 - 1)` は `Fin (n + 1)`、`Fin.castLE` は `Fin.castSucc` と
+定義として等しく、`nextSite m.castSucc` は値が `m + 1 < n + 2` なので `m.succ`）。 -/
 theorem openChainEnergy_eq_sum_fin (s : SpinConf (n + 2)) :
     openChainEnergy s = ∑ m : Fin (n + 1), (s m.castSucc : ℝ) * (s m.succ : ℝ) := by
-  rw [openChainEnergy, Finset.sum_filter, Fin.sum_univ_castSucc]
-  have hlast : ¬(((Fin.last (n + 1) : Fin (n + 2)) : ℕ) + 1 ≠ n + 2) := by simp
-  rw [if_neg hlast, add_zero]
+  rw [openChainEnergy]
   refine Finset.sum_congr rfl fun m _ => ?_
-  have hm : ((Fin.castSucc m : Fin (n + 2)) : ℕ) + 1 ≠ n + 2 := by simp; omega
   have hnext : nextSite (Fin.castSucc m : Fin (n + 2)) = m.succ :=
     Fin.ext (by rw [nextSite_val_of_lt (by simp; omega)]; simp)
-  rw [if_pos hm, hnext]
+  exact congrArg (fun t : Fin (n + 2) => (s (Fin.castSucc m) : ℝ) * (s t : ℝ)) hnext
 
 /-- 人手 `open_chain_partition_sum` の Step 2 の準備の鎖: `exp(KE(s)) = Π_{m=1}^{M_col-1} exp(Kt_m(s))`。 -/
 theorem exp_openChainEnergy_eq_prod_bondSpin (K : ℝ) (s : SpinConf (n + 2)) :

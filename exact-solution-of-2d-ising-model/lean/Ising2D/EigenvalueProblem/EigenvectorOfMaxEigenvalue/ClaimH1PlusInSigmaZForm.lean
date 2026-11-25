@@ -15,7 +15,7 @@
 | 準備 2 の `Y_{M_col}`（1 行。準備 1 の `Y_m` の表示を `m → M_col` で引く）・`Z_1` の鎖（2 行）、`ε` の式、`σ_{M_col}^zσ_1^z` の鎖（4 行） | `Y_lastSite_kronecker_form`（`Y_prefix_kronecker_form` の当てはめ）・`Z_firstSite_kronecker_form` の `calc` の 2 段・`epsilon_kronecker_form`・`sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker` の `calc` の 4 段 |
 | 準備 3 の 11 行の鎖 `i(Y_mZ_{m+1}) = ⋯ = σ_m^zσ_{m+1}^z`（`m ∈ {1,…,M_col-1}`） | `I_smul_Y_mul_Z_next_of_not_last` の `calc` の 11 段（7 段目の `kronecker_multilinear` の `r = 1` の式は `siteProd_ite_smul`） |
 | 準備 4 の 17 行の鎖 `-(i(Y_{M_col}Z_1)) = ⋯ = εG`（`M_col ≥ 2`） | `neg_I_smul_Y_lastSite_mul_Z_firstSite` の `calc` の 17 段（9・11 段目の `kronecker_multilinear` の `r = 1` の式（`j → 1`）は `siteProd_ite_smul`、10 段目（`j → M_col`）は `siteProd_ite_ite_smul`） |
-| `def_H1_plus` の `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1` | `H1plus_eq_bulk_sub_boundary`（和は `Finset.filter` の上。`Fin (r + 1)` の上の和への読み替えは `sum_filter_not_last_eq_sum_castSucc`） |
+| `def_H1_plus` の `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1` | `H1plus_eq_bulk_sub_boundary`（和は `Fin (M - 1)` の上、サイトは `Fin.castLE`。`M = r + 2` では `Fin (r + 1)` の上の `Fin.castSucc` の和と定義として等しい） |
 | 最後の 7 行の鎖 `iH_1^{(+)} = i(Σ Y_mZ_{m+1} − Y_{M_col}Z_1) = ⋯ = D_0 + εG` | `H1_plus_in_sigma_z_form` の `calc` の 7 段（`M_col = r + 2`。1・5 段目は和の添字の読み替えを含む） |
 
 人手の準備 1・2・3・4 と最後の鎖は、このファイルの同名の節・定理と 1 対 1 である。
@@ -467,43 +467,26 @@ noncomputable def boundaryYXYFamily (M : ℕ) (hM : M ≠ 0) : Fin M → Matrix 
 
 /-! ## `H_1^{(+)}` の書き換え -/
 
-private theorem filter_last_eq_singleton (hM : M ≠ 0) :
-    Finset.univ.filter (fun m : Fin M => ¬ ((m : ℕ) + 1 ≠ M)) = {lastSite M hM} := by
-  ext m
-  simp only [Finset.mem_filter, Finset.mem_univ, true_and, not_not, Finset.mem_singleton]
-  constructor
-  · -- 人手の添字では `m = M_col`（`finIndexToZZ_eq_iff_val_add_one_eq`）で、人手のサイト `M_col` は `lastSite`
-    intro h
-    exact (finIndexToZZ_bijective_onto_index_set M).1 _ _
-      (by rw [(finIndexToZZ_eq_iff_val_add_one_eq M m).2 h, finIndexToZZ_lastSite hM])
-  · rintro rfl
-    exact (finIndexToZZ_eq_iff_val_add_one_eq M _).1 (finIndexToZZ_lastSite hM)
-
 /-- **人手 `def_H1_plus` の形** `H_1^{(+)} = ∑_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1`。
 
-Lean の `H1plus` は全サイトの和に境界項の係数 `lastSign (-1)` を掛けた形なので、和を
-`(m : ℕ) + 1 ≠ M` の範囲と、残る 1 項（人手のサイト `M_col`）とに分ける。 -/
+人手の和の添字 `m ∈ {1,…,M_col-1}` は `Fin (M - 1)` の元 `j`、サイトへ移した `m` は `Fin.castLE (Nat.sub_le M 1) j`
+（`openChainD0` と同じ書き方。`DefinitionOpenChainAndBoundaryOperators.lean`）である。
+Lean の `H1plus` は全サイトの和に境界項の係数 `lastSign (-1)` を掛けた形なので、`M = n + 1` と置いて和を
+最初の `n` 項と最後の 1 項（人手のサイト `M_col`）とに分ける（`def_finite_sum_of_matrices` の帰納の式。Lean は `Fin.sum_univ_castSucc`）。
+最初の `n` 項のサイトは `M_col` でないので係数が `1`（`castLE_sub_one_val_add_one_ne`）、最後の項の係数は `-1` である。 -/
 theorem H1plus_eq_bulk_sub_boundary (hM : M ≠ 0) :
     H1plus M
-      = ∑ m ∈ Finset.univ.filter (fun m : Fin M => (m : ℕ) + 1 ≠ M), Y m * Z (nextSite m)
+      = ∑ j : Fin (M - 1), Y (Fin.castLE (Nat.sub_le M 1) j) * Z (nextSite (Fin.castLE (Nat.sub_le M 1) j))
         - Y (lastSite M hM) * Z (firstSite M hM) := by
-  rw [H1plus, ← Finset.sum_filter_add_sum_filter_not Finset.univ (fun m : Fin M => (m : ℕ) + 1 ≠ M),
-    filter_last_eq_singleton hM, Finset.sum_singleton, sub_eq_add_neg]
+  obtain ⟨n, rfl⟩ : ∃ n, M = n + 1 := ⟨M - 1, by omega⟩
+  rw [H1plus, Fin.sum_univ_castSucc, sub_eq_add_neg]
   congr 1
-  · exact Finset.sum_congr rfl fun m hm => by
-      rw [lastSign_of_not_last (Finset.mem_filter.1 hm).2, one_smul]
-  · rw [lastSign_of_last ((finIndexToZZ_eq_iff_val_add_one_eq M _).1 (finIndexToZZ_lastSite hM)),
+  · exact Finset.sum_congr rfl fun j _ => by
+      rw [lastSign_of_not_last (m := Fin.castSucc j) (castLE_sub_one_val_add_one_ne (M := n + 1) j), one_smul]
+      rfl
+  · have hlast : Fin.last n = lastSite (n + 1) hM := rfl
+    rw [hlast, lastSign_of_last ((finIndexToZZ_eq_iff_val_add_one_eq (n + 1) _).1 (finIndexToZZ_lastSite hM)),
       nextSite_lastSite hM, neg_one_smul]
-
-/-- 人手の和 `Σ_{m=1}^{M_col-1}` の添字の読み替え（`M_col = r + 2`）。Lean の `H1plus_eq_bulk_sub_boundary`・`openChainD0` は
-人手の `m ∈ {1, …, M_col-1}` を `Fin (r + 2)` のうち `(m : ℕ) + 1 ≠ r + 2` を満たすものとして書き、
-`finite_sum_of_scalar_multiples` の Lean の系 `finite_sum_smul_tensorPow` は項の個数 `r + 1` の和を `Fin (r + 1)` の上に取るので、
-`Fin.castSucc` で両者をつなぐ（人手の添字 `m` は Lean の `Fin.castSucc j`、`j` は `m - 1`）。 -/
-theorem sum_filter_not_last_eq_sum_castSucc {α : Type*} [AddCommMonoid α] (r : ℕ) (f : Fin (r + 2) → α) :
-    ∑ m ∈ Finset.univ.filter (fun m : Fin (r + 2) => (m : ℕ) + 1 ≠ r + 2), f m
-      = ∑ j : Fin (r + 1), f (Fin.castSucc j) := by
-  rw [Finset.sum_filter, Fin.sum_univ_castSucc, Fin.val_last, if_neg (by omega), add_zero]
-  exact Finset.sum_congr rfl fun j _ => if_pos (by simp only [Fin.val_castSucc]; omega)
 
 /-- 人手のサイト `m ∈ {1, …, M_col-1}`（Lean の `Fin.castSucc j`）は最後のサイトではない。 -/
 theorem castSucc_val_add_one_ne (r : ℕ) (j : Fin (r + 1)) :
@@ -514,7 +497,7 @@ theorem castSucc_val_add_one_ne (r : ℕ) (j : Fin (r + 1)) :
 
 人手の最後の 7 行の鎖と `calc` の 7 段が 1 対 1 に対応する。Lean では `M_col = r + 2` と置き、人手の和 `Σ_{m=1}^{M_col-1}` を
 `Fin (r + 1)` の上の和（人手の `m` は `Fin.castSucc j`）で書く。1 段目（`def_H1_plus`）と 5 段目（`def_D0_open_chain_operator`）は、
-Lean の `H1plus`・`openChainD0` の和の書き方（`Finset.filter`）をこの和へ読み替える段を含む（`sum_filter_not_last_eq_sum_castSucc`）。 -/
+Lean の `H1plus_eq_bulk_sub_boundary`・`openChainD0` の和（`Fin (r + 2 - 1)` の上、サイトは `Fin.castLE`）をこの和と定義として等しいものとして読む。 -/
 theorem H1_plus_in_sigma_z_form (hM : 2 ≤ M) :
     Complex.I • H1plus M = openChainD0 M + epsilon M * boundaryG M (by omega) := by
   obtain ⟨r, rfl⟩ : ∃ r, M = r + 2 := ⟨M - 2, by omega⟩
@@ -522,9 +505,7 @@ theorem H1_plus_in_sigma_z_form (hM : 2 ≤ M) :
   calc Complex.I • H1plus (r + 2)
       = Complex.I • ((∑ j : Fin (r + 1), Y (Fin.castSucc j) * Z (nextSite (Fin.castSucc j)))
           - Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) := by
-        rw [H1plus_eq_bulk_sub_boundary hM0,
-          sum_filter_not_last_eq_sum_castSucc r (fun m => Y m * Z (nextSite m))]
-                                                        -- `def_H1_plus`（和の添字を `Fin (r + 1)` へ読み替える）
+        rw [H1plus_eq_bulk_sub_boundary hM0]; rfl       -- `def_H1_plus`（`Fin (r + 2 - 1)` は `Fin (r + 1)`、`Fin.castLE` は `Fin.castSucc` と定義として等しい）
     _ = Complex.I • (∑ j : Fin (r + 1), Y (Fin.castSucc j) * Z (nextSite (Fin.castSucc j)))
           - Complex.I • (Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) :=
         smul_sub_tensorPow _ _ _                        -- `scalar_multiple_distributes_over_matrix_difference`
@@ -538,8 +519,7 @@ theorem H1_plus_in_sigma_z_form (hM : 2 ≤ M) :
                                                         -- 準備 3 を各項へ同時適用
     _ = openChainD0 (r + 2)
           - Complex.I • (Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) := by
-        rw [openChainD0, sum_filter_not_last_eq_sum_castSucc r (fun m => sigmaZ m * sigmaZ (nextSite m))]
-                                                        -- `def_D0_open_chain_operator`（和の添字を `Fin (r + 1)` へ読み替える）
+        rw [openChainD0]; rfl                           -- `def_D0_open_chain_operator`（`Fin (r + 2 - 1)` は `Fin (r + 1)`、`Fin.castLE` は `Fin.castSucc` と定義として等しい）
     _ = openChainD0 (r + 2)
           + -(Complex.I • (Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0))) :=
         sub_eq_add_neg_tensorPow _ _                    -- `matrix_difference_is_sum_with_negation`

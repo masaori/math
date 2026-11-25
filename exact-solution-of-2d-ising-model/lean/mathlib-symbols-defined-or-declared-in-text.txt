@@ -106,6 +106,14 @@ Nat.cast@Int@instNatCastInt	inclusion_nn_to_zz
 # Fin の数字（OfNat.ofNat@Fin）は、添字の 1 つずれた値（(0 : Fin n) は添字 1）と二値の 0・1 の両方に使われているので、まだ載せない。
 Fin	def_index_set_from_one_to_n
 Fin.val	def_index_set_from_one_to_n
+# Fin.castLE h : Fin m → Fin n（m ≤ n）: 本文は m ≤ n のとき {1,…,m} の元をそのまま {1,…,n} の元として書く（開鎖項 D_0 の和の添字 m ∈ {1,…,M_col−1} を
+# サイトの添字に使うなど）。Lean は型 Fin m の元から型 Fin n の元へ Fin.castLE で移り、移しても写像 finIndexToZZ の像（本文の添字）が同じ整数であることを
+# 補題一本 finIndexToZZ_castLE で示した（DefinitionIndexSetFromOneToN.lean）。
+# この許可は本文の定義の外の使い方も台帳から消した: prefixEntryProduct_eq_prod（ClaimKroneckerFamilyOfIndependentFamilyIsIndependent.lean）の
+# U (Fin.castLE hs k)・V (Fin.castLE hs k) は、本文では U, V ∈ {1,2}^s（長さ s の語）なのに、Lean だけが長さ M の語を先頭 s 成分で読んでいる
+# （p (Fin.castLE hs k) は本文の π(q)_k で、範囲の内）。消した行は、載せる前の main の先端の台帳から引ける。状態台帳の行
+# 「添字の集合 {1,…,n} と Lean の Fin n の間の写像」が引き受ける。
+Fin.castLE	def_index_set_from_one_to_n
 #
 # Fin n の上の有限和: def_finite_sum_of_complex_numbers・def_finite_sum_of_real_numbers が、添字の集合 {1,…,m} の上の和を
 # Σ_{j=1}^{0} z_j := 0、Σ_{j=1}^{1} z_j := z_1、m ≥ 1 で Σ_{j=1}^{m+1} z_j := (Σ_{j=1}^{m} z_j) + z_{m+1} と m ∈ ℤ_{≥0} についての帰納法で定める（左から順に足す）。mathlib の Finset.sum は多重集合の上の
@@ -117,11 +125,14 @@ Fin.val	def_index_set_from_one_to_n
 # まだ本文と一対一でない。(a) は本文の主張の範囲の外、(b)(c) は本文の定義の外である: (a) Fin 0 の上の空の和を
 # 場合に含む主張（本文の有限和は 2026-11-25 に空の和まで定め、実数の差・和・符号反転・共通の因子・三角不等式・項ごとの大小の 6 主張は m ≥ 0 へ広げた。
 # 複素数の 2 主張と、実数の定数の和・二重の和の順序の入れ替え・実数の有限和の包含も同じ日に m ≥ 0 へ広げた。同じ日の洗い出しで、本文が m ≥ 1 しか述べないのに
-# Lean が Fin m の上の空の和を含めて述べる実数・複素数の有限和の主張は残っていない。添字を任意の有限型に取る行列の添字の上の和（本文は n ≥ 1 の
+# Lean が Fin m の上の空の和を含めて述べる実数・複素数の有限和の主張は、次の開鎖の宣言を除いて残っていない。(b) を直した同じ日に、開鎖の和を Fin (M − 1) の上の和へ
+# 書き換えたので、本文が M_col ≥ 2 しか述べないのに Lean が M ≤ 1 の Fin 0 の上の空の和も含めて述べる主張（openChainEnergy_mem_int・openChainD0_mulVec_basisVec・
+# openChainD0_mulVec_basisVec_eq_energy と、それらの式を使う主張）が (a) に入った。状態台帳の行「有限和と有限集合の記号」の五単位目が引き受ける。添字を任意の有限型に取る行列の添字の上の和（本文は n ≥ 1 の
 # real_bilinear_value_is_sum_with_real_matrix_vector_product・real_symmetric_matrix_moves_between_factors_of_sum_of_products・trace_basic_properties の
-# trace_identity_eq_sum_one）と行列の和（H2 の M = 0 など）は、下の行列の有限和と同じく行「行列とその演算」で扱う）、(b) Fin の部分集合（univ.filter …）の上の和（openChainEnergy など）、
+# trace_identity_eq_sum_one）と行列の和（H2 の M = 0 など）は、下の行列の有限和と同じく行「行列とその演算」で扱う）、(b) Fin の部分集合（univ.filter …）の上の和（2026-11-25 に、
+# openChainD0・openChainEnergy・openChainD0_mulVec_basisVec・H1plus_eq_bulk_sub_boundary を Fin (M − 1) の上の和へ書き換え、filter の補題を消して済んだ）、
 # (c) 二値の集合 {0,1} を表す Fin 2 の上の和と Fin 2 の univ（sum_conf_succ_eq_sum_last_sum_init など）。消した行は、載せる前の main の先端 27bea56a1 の
-# 台帳から引ける。状態台帳の行「有限和と有限集合の記号」の三単位目が (a) を、四単位目が (b) を、行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が (c) を引き受ける。
+# 台帳から引ける。状態台帳の行「有限和と有限集合の記号」の三単位目が (a) を、四単位目が (b) を（済み）、行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が (c) を引き受ける。
 # 行列の有限和（def_finite_sum_of_matrices）は式に行列の和が現れるので、状態台帳の行「行列とその演算」で行列の和を載せた後に同じ形で載せる。
 # Fin でない有限集合（Conf M など）の上の和と、Finset・Fintype の残りは、状態台帳の行「有限和と有限集合の記号」の二単位目が扱う。
 Finset.univ@Fin@Fin.fintype	def_index_set_from_one_to_n
