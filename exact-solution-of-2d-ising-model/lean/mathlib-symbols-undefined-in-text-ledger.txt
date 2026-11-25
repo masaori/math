@@ -1441,8 +1441,6 @@ Ising2D.EvenSectorBridge.lamMax_eq_LambdaM	Real.sinh
 Ising2D.EvenSectorBridge.quad_Qproj	Complex.normSq
 Ising2D.EvenSectorBridge.quad_Qproj	DFunLike.coe@MonoidWithZeroHom,Complex,fun@MonoidWithZeroHom.funLike
 Ising2D.EvenSectorBridge.quad_Qproj	Finset
-Ising2D.EvenSectorBridge.quad_Qproj	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.EvenSectorBridge.quad_Qproj	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.EvenSectorBridge.quad_Qproj	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.EvenSectorBridge.quad_Qproj	MonoidWithZeroHom@Complex,Real@instMulZeroOneClassOfSemiring,instMulZeroOneClassOfSemiring
 Ising2D.EvenSectorBridge.quad_Qproj	dotProduct@Ising2D.Conf,Complex@Pi.instFintype,Complex.instMul,Complex.instAddCommMonoid
@@ -1450,9 +1448,7 @@ Ising2D.EvenSectorBridge.quad_Vr_eq_sum	Complex.normSq
 Ising2D.EvenSectorBridge.quad_Vr_eq_sum	DFunLike.coe@MonoidWithZeroHom,Complex,fun@MonoidWithZeroHom.funLike
 Ising2D.EvenSectorBridge.quad_Vr_eq_sum	Finset
 Ising2D.EvenSectorBridge.quad_Vr_eq_sum	Finset.sum@Finset,Real@Real.instAddCommMonoid
-Ising2D.EvenSectorBridge.quad_Vr_eq_sum	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
 Ising2D.EvenSectorBridge.quad_Vr_eq_sum	Finset.univ@Finset@Finset.fintype
-Ising2D.EvenSectorBridge.quad_Vr_eq_sum	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.EvenSectorBridge.quad_Vr_eq_sum	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.EvenSectorBridge.quad_Vr_eq_sum	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.EvenSectorBridge.quad_Vr_eq_sum	MonoidWithZeroHom@Complex,Real@instMulZeroOneClassOfSemiring,instMulZeroOneClassOfSemiring
@@ -1491,9 +1487,7 @@ Ising2D.EvenSectorBridge.sum_quad_Qproj	Complex.normSq
 Ising2D.EvenSectorBridge.sum_quad_Qproj	DFunLike.coe@MonoidWithZeroHom,Complex,fun@MonoidWithZeroHom.funLike
 Ising2D.EvenSectorBridge.sum_quad_Qproj	Finset
 Ising2D.EvenSectorBridge.sum_quad_Qproj	Finset.sum@Finset,Real@Real.instAddCommMonoid
-Ising2D.EvenSectorBridge.sum_quad_Qproj	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
 Ising2D.EvenSectorBridge.sum_quad_Qproj	Finset.univ@Finset@Finset.fintype
-Ising2D.EvenSectorBridge.sum_quad_Qproj	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.EvenSectorBridge.sum_quad_Qproj	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.EvenSectorBridge.sum_quad_Qproj	MonoidWithZeroHom@Complex,Real@instMulZeroOneClassOfSemiring,instMulZeroOneClassOfSemiring
 Ising2D.Fflip	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
@@ -3587,8 +3581,6 @@ Ising2D.conjugate_bilinear_value_of_congruence	Matrix.conjTranspose@Fin,Fin,Comp
 Ising2D.conjugate_bilinear_value_of_congruence	Matrix.mulVec@Fin,Fin,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Fin.fintype
 Ising2D.conjugate_bilinear_value_of_positive_real_multiple	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.conjugate_bilinear_value_of_positive_real_multiple	Matrix
-Ising2D.conjugate_bilinear_value_of_real_vector_W	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.conjugate_bilinear_value_of_real_vector_W	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.constantCW	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
 Ising2D.constantCW	Inv.inv@Units@Units.instInv
 Ising2D.constantCW	Units.val@Ising2D.TensorPow@Matrix.semiring
@@ -6397,8 +6389,6 @@ Ising2D.moment_ge_moment_one_pow	Matrix.IsSymm
 Ising2D.moment_ge_moment_one_pow	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.moment_ge_moment_one_pow	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.moment_ge_moment_one_pow	dotProduct@Ising2D.Conf,Real@Pi.instFintype,Real.instMul,Real.instAddCommMonoid
-Ising2D.moment_le_trace_of_power	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.moment_le_trace_of_power	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.moment_le_trace_of_power	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.moment_le_trace_of_power	Matrix
 Ising2D.moment_le_trace_of_power	Matrix.IsSymm
@@ -6723,7 +6713,6 @@ Ising2D.one_dimensional_subspace_is_multiples_of_nonzero_element	OfNat.ofNat@Mat
 Ising2D.one_dimensional_subspace_is_multiples_of_nonzero_element	Set
 Ising2D.one_dimensional_subspace_is_multiples_of_nonzero_element	setOf
 Ising2D.one_eq_sum_E	Finset.sum@Ising2D.Conf,Ising2D.TensorPow@Matrix.addCommMonoid
-Ising2D.one_eq_sum_E	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.one_eq_sum_E	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
 Ising2D.one_lt_gamma1R_sq_thetaTilde	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.one_sub_cos_eq	HPow.hPow@Real,Nat,Real@NPow.toPow
@@ -6885,8 +6874,6 @@ Ising2D.partitionFunction	Prod.mk
 Ising2D.partitionFunction	Prod.snd
 Ising2D.partitionFunction	Real.exp
 Ising2D.partitionFunction	Subtype.val
-Ising2D.partition_function_eq_sum_diag_W_real_pow	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.partition_function_eq_sum_diag_W_real_pow	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.partition_function_eq_sum_diag_W_real_pow	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.partition_function_eq_sum_diag_W_real_pow	Matrix
 Ising2D.partition_function_eq_trace_physicalSymTransferC	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow
@@ -7384,8 +7371,6 @@ Ising2D.rayleighSup_pos	Matrix.mulVec@?,?,Real@NonUnitalNonAssocRing.toNonUnital
 Ising2D.rayleighSup_pos	Nonempty
 Ising2D.rayleighSup_pos	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.rayleighSup_pos	dotProduct@?,Real@?,Real.instMul,Real.instAddCommMonoid
-Ising2D.rayleighSup_pow_le_trace_of_power	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.rayleighSup_pow_le_trace_of_power	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.rayleighSup_pow_le_trace_of_power	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.rayleighSup_pow_le_trace_of_power	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.rayleighSup_pow_le_trace_of_power	Matrix
@@ -7475,8 +7460,6 @@ Ising2D.real_bilinear_value_of_normalized_vector	Matrix
 Ising2D.real_bilinear_value_of_normalized_vector	Matrix.mulVec@?,?,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,?
 Ising2D.real_bilinear_value_of_normalized_vector	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.real_bilinear_value_of_normalized_vector	dotProduct@?,Real@?,Real.instMul,Real.instAddCommMonoid
-Ising2D.real_bilinear_value_of_real_identity_matrix	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.real_bilinear_value_of_real_identity_matrix	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.real_bilinear_value_of_real_identity_matrix	Matrix
 Ising2D.real_bilinear_value_of_real_identity_matrix	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.real_bilinear_value_of_real_identity_matrix	OfNat.ofNat@Matrix[Real],1@One.toOfNat1
@@ -7490,8 +7473,6 @@ Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric	Matrix
 Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric	Matrix.IsSymm
 Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric	Matrix.mulVec@?,?,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,?
 Ising2D.real_bilinear_value_of_symmetric_matrix_is_symmetric	dotProduct@?,Real@?,Real.instMul,Real.instAddCommMonoid
-Ising2D.real_bilinear_value_pow_le_trace_of_power	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.real_bilinear_value_pow_le_trace_of_power	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.real_bilinear_value_pow_le_trace_of_power	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.real_bilinear_value_pow_le_trace_of_power	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.real_bilinear_value_pow_le_trace_of_power	Matrix
@@ -8496,8 +8477,6 @@ Ising2D.square_of_real_absolute_value	abs@Real@Real.lattice,Real.instAddGroup
 Ising2D.square_of_real_number_is_product	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.square_of_real_sum_is_at_most_twice_sum_of_squares	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.standardBasisVec_ne_zero	OfNat.ofNat@→,0@Zero.toOfNat0
-Ising2D.standard_basis_real_bilinear_value	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.standard_basis_real_bilinear_value	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.standard_basis_real_bilinear_value	Matrix
 Ising2D.standard_basis_real_bilinear_value	Pi.single@Ising2D.Conf,fun@?,?
 Ising2D.star_cvec	Star.star@→@Pi.instStarForall
@@ -8561,8 +8540,6 @@ Ising2D.sum_checkPhase	Nat.cast@Complex@Complex.instNatCast
 Ising2D.sum_conf_succ_eq_sum_last_sum_init	Fin.castSucc
 Ising2D.sum_conf_succ_eq_sum_last_sum_init	Fin.last
 Ising2D.sum_conf_succ_eq_sum_last_sum_init	Finset.prod@Fin,Complex@CommRing.toCommMonoid
-Ising2D.sum_conf_succ_eq_sum_last_sum_init	Finset.sum@Ising2D.Conf,Complex@Complex.instAddCommMonoid
-Ising2D.sum_conf_succ_eq_sum_last_sum_init	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.sum_lie'	Bracket.bracket@Ising2D.TensorPow,Ising2D.TensorPow@Ring.instBracket
 Ising2D.sum_lie'	Finset.sum@?,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.sum_lie'	Finset.univ@?@?
@@ -8572,8 +8549,6 @@ Ising2D.sum_negSpin_mul_self	Subtype.val
 Ising2D.sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.sum_of_nonnegative_vector_and_its_epsilon_real_image_is_nonzero	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.sum_over_multi_index_of_product_eq_product_of_sums	Finset.prod@Fin,Complex@CommRing.toCommMonoid
-Ising2D.sum_over_multi_index_of_product_eq_product_of_sums	Finset.sum@Ising2D.Conf,Complex@Complex.instAddCommMonoid
-Ising2D.sum_over_multi_index_of_product_eq_product_of_sums	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.sum_range_even_odd	AddCommMonoid
 Ising2D.sum_range_even_odd	Finset.range
 Ising2D.sum_range_even_odd	Finset.sum@Nat,?@?
@@ -8606,8 +8581,6 @@ Ising2D.sum_spinVal	Subtype.mk
 Ising2D.sum_spinVal	rfl
 Ising2D.sum_spin_mul_self	Nat.cast@Real@Real.instNatCast
 Ising2D.sum_spin_mul_self	Subtype.val
-Ising2D.sum_sq_of_unit_vector	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.sum_sq_of_unit_vector	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.sum_sq_of_unit_vector	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.sum_sum_smul_two_deltaM_smul_one	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.sum_sum_smul_two_deltaM_smul_one	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
@@ -8914,8 +8887,6 @@ Ising2D.trace_mul_pow_eq_trace_symmetrized_pow	HMul.hMul@Matrix[Complex],Matrix[
 Ising2D.trace_mul_pow_eq_trace_symmetrized_pow	HPow.hPow@Matrix[Complex],Nat,Matrix[Complex]@NPow.toPow
 Ising2D.trace_mul_pow_eq_trace_symmetrized_pow	Matrix
 Ising2D.trace_mul_pow_eq_trace_symmetrized_pow	Matrix.trace@?,Complex@?,Complex.instAddCommMonoid
-Ising2D.trace_of_W_power_via_W_real	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.trace_of_W_power_via_W_real	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.trace_of_W_power_via_W_real	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow
 Ising2D.trace_of_W_power_via_W_real	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.trace_of_W_power_via_W_real	Matrix
@@ -8948,8 +8919,6 @@ Ising2D.trace_of_positive_definite_is_positive	Complex.partialOrder
 Ising2D.trace_of_positive_definite_is_positive	Matrix
 Ising2D.trace_of_positive_definite_is_positive	Matrix.PosDef@Fin,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.trace_of_positive_definite_is_positive	Matrix.trace@Fin,Complex@Fin.fintype,Complex.instAddCommMonoid
-Ising2D.trace_of_power_pos	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.trace_of_power_pos	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.trace_of_power_pos	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.trace_of_power_pos	Matrix
 Ising2D.trace_of_power_pos	Matrix.IsSymm
@@ -8970,8 +8939,6 @@ Ising2D.trace_one_tensorPow	HPow.hPow@Nat,Nat,Nat@NPow.toPow
 Ising2D.trace_one_tensorPow	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid
 Ising2D.trace_one_tensorPow	Nat.cast@Complex@Complex.instNatCast
 Ising2D.trace_one_tensorPow	OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1
-Ising2D.trace_power_sandwich	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.trace_power_sandwich	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.trace_power_sandwich	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.trace_power_sandwich	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.trace_power_sandwich	Matrix
@@ -8979,13 +8946,9 @@ Ising2D.trace_power_sandwich	Matrix.IsSymm
 Ising2D.trace_power_sandwich	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.trace_power_sandwich	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.trace_power_sandwich	dotProduct@Ising2D.Conf,Real@Pi.instFintype,Real.instMul,Real.instAddCommMonoid
-Ising2D.trace_power_sandwich_physical	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.trace_power_sandwich_physical	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.trace_power_sandwich_physical	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.trace_power_sandwich_physical	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.trace_power_sandwich_physical	Matrix
-Ising2D.trace_power_upper_bound	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.trace_power_upper_bound	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.trace_power_upper_bound	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.trace_power_upper_bound	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.trace_power_upper_bound	Matrix
@@ -8993,8 +8956,6 @@ Ising2D.trace_power_upper_bound	Matrix.IsSymm
 Ising2D.trace_power_upper_bound	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.trace_power_upper_bound	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.trace_power_upper_bound	dotProduct@Ising2D.Conf,Real@Pi.instFintype,Real.instMul,Real.instAddCommMonoid
-Ising2D.trace_power_upper_bound_physical	Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid
-Ising2D.trace_power_upper_bound_physical	Finset.univ@Ising2D.Conf@Pi.instFintype
 Ising2D.trace_power_upper_bound_physical	HPow.hPow@Matrix[Real],Nat,Matrix[Real]@NPow.toPow
 Ising2D.trace_power_upper_bound_physical	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.trace_power_upper_bound_physical	Matrix

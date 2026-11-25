@@ -51,6 +51,10 @@
 - 人手の `finite_sum_of_real_scalar_multiples` を当てる行のうち、【`(W_ℝ)^n` の成分の評価】の 4 つの項へ分ける行は mathlib の `Finset.mul_sum`・
   `Finset.sum_sub_distrib`・`Finset.sum_add_distrib` で、`m_n ≤ T` の外側の和へ当てる行は `Finset.sum_mul` で書く（掛ける数が右にあるため）。
   `m_n ≤ T` の「有限和の加法の交換律・結合律」の行（人手に参照が無い）は `Finset.sum_add_distrib` で書く。
+- 人手の `finite_sum_of_real_scalar_multiples` を `𝓘_M`（Lean の `Conf M`）の上の和へ当てる行は、その他の行も含めて
+  `finite_sum_over_multi_indices_of_real_scalar_multiples`（本文の `𝓘_M` の上の和の定義 `def_finite_sum_of_real_numbers_over_multi_indices` で
+  `{1,…,2^M}` の上の和へ開いて当てる補題。`ClaimFiniteSumsOverMultiIndices.lean`）で書く。上の項目の mathlib の `Finset.mul_sum`・`Finset.sum_mul`・
+  `Finset.sum_sub_distrib`・`Finset.sum_add_distrib` で書いた行はまだ本文の `𝓘_M` の上の和の定義を通していない（状態台帳の行「有限和と有限集合の記号」の残り）。
 - 本文の `W` への当てはめ（`*_physical`）は段ごとには置かない。主張 `trace_power_sandwich` の当てはめ `trace_power_sandwich_physical`（`PhysicalPartitionFunctionSandwich.lean`）が、ここの段をまとめて本文の `W` へ渡す。
 - 人手の `ℝ` の分配律・結合律・交換律と、同類項の加法は `ring` で、商と順序の行は mathlib の `div_le_div_of_nonneg_right`・
   `mul_div_cancel_*`・`mul_le_mul_of_nonneg_left` で書く（人手のこれらの行には参照が無い）。
@@ -61,6 +65,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
 
 set_option linter.unusedSectionVars false
 
@@ -133,7 +138,7 @@ theorem norm_of_inverse_norm_multiple_is_one {z : Conf M → ℝ} {j0 : Conf M} 
     _ = Real.sqrt (∑ i, ((vecNorm z)⁻¹) ^ 2 * z i ^ 2) := by
         simp only [square_of_real_number_is_product]                        -- `square_of_real_number_is_product`（`r → ‖z‖^{-1}, z_i`）を右辺から左辺へ、各項へ同時に
     _ = Real.sqrt (((vecNorm z)⁻¹) ^ 2 * ∑ i, z i ^ 2) := by
-        rw [finite_sum_of_real_scalar_multiples_fintype]                    -- `finite_sum_of_real_scalar_multiples`（`c → (‖z‖^{-1})^2`）
+        rw [finite_sum_over_multi_indices_of_real_scalar_multiples]                    -- `finite_sum_of_real_scalar_multiples`（`c → (‖z‖^{-1})^2`）
     _ = Real.sqrt (((vecNorm z)⁻¹) ^ 2 * ∑ i, |z i| ^ 2) := by
         simp only [square_of_real_absolute_value]                           -- `square_of_real_absolute_value` の `|q|^2 = q^2` を各項へ同時に
     _ = Real.sqrt (((vecNorm z)⁻¹) ^ 2 * vecNorm z ^ 2) := by
@@ -269,9 +274,9 @@ theorem power_of_W_real_is_positive_semidefinite (n : ℕ) (z : Conf M → ℝ) 
             simp only [← square_of_real_number_is_product (vecNorm z)]      -- `square_of_real_number_is_product`（`r → ‖z‖`）を右辺から左辺へ、各項へ同時に
         _ = ∑ i, vecNorm z ^ 2 * ∑ j, w i * P i j * w j :=
             Finset.sum_congr rfl fun i _ =>
-              finite_sum_of_real_scalar_multiples_fintype _ _               -- `finite_sum_of_real_scalar_multiples`（`c → ‖z‖^2`）を各 `i` の内側の和へ同時に
+              finite_sum_over_multi_indices_of_real_scalar_multiples _ _               -- `finite_sum_of_real_scalar_multiples`（`c → ‖z‖^2`）を各 `i` の内側の和へ同時に
         _ = vecNorm z ^ 2 * ∑ i, ∑ j, w i * P i j * w j :=
-            finite_sum_of_real_scalar_multiples_fintype _ _                 -- `finite_sum_of_real_scalar_multiples`（`c → ‖z‖^2`）を外側の和へ
+            finite_sum_over_multi_indices_of_real_scalar_multiples _ _                 -- `finite_sum_of_real_scalar_multiples`（`c → ‖z‖^2`）を外側の和へ
         _ = vecNorm z ^ 2 * (w ⬝ᵥ P *ᵥ w) := by
             rw [dotProduct_mulVec_eq_real_bilinear_value w w P]             -- `def_real_bilinear_value`
         _ > 0 :=
@@ -424,9 +429,9 @@ theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : 
       = ∑ k, ∑ l, x k * P k l * x l := dotProduct_mulVec_eq_real_bilinear_value x x P
                                                                             -- `m_n := x^⊤(W_ℝ)^nx` と `def_real_bilinear_value`
     _ = 2⁻¹ * ∑ k, ∑ l, 2 * x k * P k l * x l := by
-        rw [← finite_sum_of_real_scalar_multiples_fintype]
+        rw [← finite_sum_over_multi_indices_of_real_scalar_multiples]
         refine Finset.sum_congr rfl fun k _ => ?_
-        rw [← finite_sum_of_real_scalar_multiples_fintype]
+        rw [← finite_sum_over_multi_indices_of_real_scalar_multiples]
         exact Finset.sum_congr rfl fun l _ => by ring                       -- `2^{-1}·2 = 1` と `finite_sum_of_real_scalar_multiples`（`c → 2^{-1}`）を内側と外側の和へ
     _ ≤ 2⁻¹ * ∑ k, ∑ l, (x l ^ 2 * P k k + x k ^ 2 * P l l) :=
         mul_le_mul_of_nonneg_left
@@ -441,10 +446,10 @@ theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : 
     _ = 2⁻¹ * (∑ k, P k k * ∑ l, x l ^ 2 + ∑ k, x k ^ 2 * ∑ l, P l l) := by
         congr 2
         · exact Finset.sum_congr rfl fun k _ => by
-            rw [← finite_sum_of_real_scalar_multiples_fintype]
+            rw [← finite_sum_over_multi_indices_of_real_scalar_multiples]
             exact Finset.sum_congr rfl fun l _ => mul_comm _ _
         · exact Finset.sum_congr rfl fun k _ => by
-            rw [← finite_sum_of_real_scalar_multiples_fintype]              -- 乗法の交換律と、`finite_sum_of_real_scalar_multiples` を内側の和へ
+            rw [← finite_sum_over_multi_indices_of_real_scalar_multiples]              -- 乗法の交換律と、`finite_sum_of_real_scalar_multiples` を内側の和へ
     _ = 2⁻¹ * ((∑ k, P k k) * (∑ l, x l ^ 2) + (∑ k, x k ^ 2) * (∑ l, P l l)) := by
         rw [Finset.sum_mul, Finset.sum_mul]                                 -- 乗法の交換律と、`finite_sum_of_real_scalar_multiples` を外側の和へ
     _ = 2⁻¹ * (T * 1 + 1 * T) := by rw [hs]                                 -- `T := Σ_k((W_ℝ)^n)_kk` と、上の `Σ_k x_k^2 = 1`

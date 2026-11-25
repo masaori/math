@@ -613,7 +613,6 @@ Ising2D.kappaP_isoParam
 Ising2D.kappaSecond
 Ising2D.kernel_of_matrix_is_subspace
 Ising2D.kroneckerDelta_comm
-Ising2D.kroneckerNumbering
 Ising2D.kronecker_family_of_independent_family_is_independent
 Ising2D.lambdaPlusR_ne_lambdaMinusR
 Ising2D.lambda_mul_lambda_thetaTilde

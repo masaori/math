@@ -135,7 +135,7 @@ Fin.castLE	def_index_set_from_one_to_n
 # (c) 二値の集合 {0,1} を表す Fin 2 の上の和と Fin 2 の univ（sum_conf_succ_eq_sum_last_sum_init など）。消した行は、載せる前の main の先端 27bea56a1 の
 # 台帳から引ける。状態台帳の行「有限和と有限集合の記号」の三単位目が (a) を、四単位目が (b) を（済み）、行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が (c) を引き受ける。
 # 行列の有限和（def_finite_sum_of_matrices）は式に行列の和が現れるので、状態台帳の行「行列とその演算」で行列の和を載せた後に同じ形で載せる。
-# Fin でない有限集合の上の和のうち 𝔐（SpinConf M）の上の和は下の行で載せた。Conf M ほかの上の和と、Finset・Fintype の残りは、状態台帳の行「有限和と有限集合の記号」の六単位目の二つ目以降が扱う。
+# Fin でない有限集合の上の和のうち 𝔐（SpinConf M）と 𝓘_M（Conf M）の上の和は下の行で載せた。ほかの上の和と、Finset・Fintype の残りは、状態台帳の行「有限和と有限集合の記号」の六単位目の三つ目以降が扱う。
 Finset.univ@Fin@Fin.fintype	def_index_set_from_one_to_n
 Finset.sum@Fin,Complex@Complex.instAddCommMonoid	def_finite_sum_of_complex_numbers
 Finset.sum@Fin,Real@Real.instAddCommMonoid	def_finite_sum_of_real_numbers
@@ -145,10 +145,24 @@ Finset.sum@Fin,Real@Real.instAddCommMonoid	def_finite_sum_of_real_numbers
 # Σ_{s∈𝔐} a(s) := Σ_{k=1}^{2^{M_col}} a(ord^{-1}(k)) と定める（右辺は上の Fin n の上の和）。Lean の SpinConf M の上の Finset.sum がこの右辺に等しいことを、
 # 足す集合ごとに補題一本で示した（DefinitionFiniteSumOverRowConfigurations.lean の finset_sum_spinConf_complex_eq_finite_sum_over_row_configurations・
 # finset_sum_spinConf_real_eq_finite_sum_over_row_configurations）。Finset.univ（SpinConf M の全体）は、和を取る集合 𝔐 そのものである。
-# 𝔐 の列の組 𝔐^{N_row}（Fin N → SpinConf M）、Conf M（Fin M → Fin 2）ほか、𝔐 でない有限集合の上の和は、状態台帳の行「有限和と有限集合の記号」の残りが扱う。
+# 𝔐 の列の組 𝔐^{N_row}（Fin N → SpinConf M）ほか、𝔐 と 𝓘_M でない有限集合の上の和は、状態台帳の行「有限和と有限集合の記号」の残りが扱う。
 Finset.univ@Ising2D.SpinConf@Pi.instFintype	def_finite_sum_of_complex_numbers_over_row_configurations
 Finset.sum@Ising2D.SpinConf,Complex@Complex.instAddCommMonoid	def_finite_sum_of_complex_numbers_over_row_configurations
 Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid	def_finite_sum_of_real_numbers_over_row_configurations
+#
+# 多重添字の集合 𝓘_M（Lean の Conf M = Fin M → Fin 2。行列 Mat(2^M, ℂ)・数ベクトル ℂ^{2^M} の成分の番号）の上の有限和:
+# def_finite_sum_of_complex_numbers_over_multi_indices・def_finite_sum_of_real_numbers_over_multi_indices が、全単射 ν : 𝓘_M → {1,…,2^M}（def_kronecker）の
+# 逆写像 ν^{-1}（def_inverse_of_kronecker_numbering）を通して Σ_{I∈𝓘_M} a(I) := Σ_{k=1}^{2^M} a(ν^{-1}(k)) と定める（右辺は上の Fin n の上の和）。
+# Lean の Conf M の上の Finset.sum がこの右辺に等しいことを、足す集合ごとに補題一本で示した（DefinitionFiniteSumOverMultiIndices.lean の
+# finset_sum_conf_complex_eq_finite_sum_over_multi_indices・finset_sum_conf_real_eq_finite_sum_over_multi_indices）。本文は 𝓘_M の元 I を番号 ν(I) と同一視して
+# 成分を並べるので、成分の番号の上の和 Σ_{p=1}^{2^M} b_p もこの和である。Finset.univ（Conf M の全体）は def_kronecker が定める集合 𝓘_M そのものである。
+# 行列の値の和（Finset.sum@Ising2D.Conf,Ising2D.TensorPow）は、行列の有限和と同じく状態台帳の行「行列とその演算」の後に載せる。
+# 本文の定義は M ∈ ℤ_{≥1} だけを扱うが、Lean の Conf M は M = 0（元は空の組ひとつ）も含み、この 3 行はそれも許す（𝔐 の上の和の行と同じ扱い）。
+# 成分の番号の上の和をこの和と読む根拠の「𝓘_M の元 I を番号 ν(I) と同一視する」は def_kronecker の文言で、名前を付けた写像を通さない同一視である
+# （docs/context/証明の書き方.md「同一視をしない」）。直すことは状態台帳の行「有限和と有限集合の記号」の残りに書いた。
+Finset.univ@Ising2D.Conf@Pi.instFintype	def_kronecker
+Finset.sum@Ising2D.Conf,Complex@Complex.instAddCommMonoid	def_finite_sum_of_complex_numbers_over_multi_indices
+Finset.sum@Ising2D.Conf,Real@Real.instAddCommMonoid	def_finite_sum_of_real_numbers_over_multi_indices
 # ℕ の和と積: set_and_algebra_notation が ℕ の +・· を外から持ち込み、証明が使う性質（和と積の再帰の式、結合律・交換律・単位元、分配律、加法の簡約律）を列挙している。
 # Lean の ℕ の和・積も同じ再帰の式で定義されている（x + 0 = x・x + (y + 1) = (x + y) + 1、x·0 = 0・x·(y + 1) = x·y + x が rfl）。
 # 本文の ℤ_{≥0} の元を Lean が ℕ で書く箇所の行き来は、ι_{ℕ→ℤ} が和と積を保つこと（inclusion_nn_to_zz_preserves_sum・inclusion_nn_to_zz_preserves_product）で書く。

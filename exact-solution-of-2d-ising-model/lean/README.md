@@ -785,7 +785,10 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が多重添�
 `config_numbering_equals_kronecker_numbering`（`ord = ν ∘ ι`）により、人手の成分 `A_{ord(μ),ord(μ')}` は
 Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の「`ord(μ)` と `ν(ι(μ))` の読み替え」の段と
 「`ord` の全射性により全成分が決まる」段は、Lean ではそれぞれ添字の読み方と `ι` の全射性にあたる。
-`ν` 自体が全単射であること（`def_kronecker` の証明）は形式化していない。
+`ν`（`kroneckerNumbering`）が全単射であること（`def_kronecker` の証明）と逆写像 `ν^{-1}`（`def_inverse_of_kronecker_numbering`）は
+`MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionKroneckerNumbering.lean` にあり、
+`𝓘_M` の上の和（`def_finite_sum_of_complex_numbers_over_multi_indices`・`def_finite_sum_of_real_numbers_over_multi_indices`）と Lean の `Conf M` の上の `Finset.sum` の一致は
+同じフォルダの `DefinitionFiniteSumOverMultiIndices.lean` にある。
 
 ### ファイルとラベルの対応
 
@@ -793,7 +796,10 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | --- | --- | --- |
 | `def_row_configurations` | `Ising2D.SpinVal` / `SpinConf` | `PartitionFunction/TransferMatrixRepresentation/DefinitionRowConfigurations.lean` |
 | `def_row_configuration_numbering` | `Ising2D.spinBit` / `rowConfigOrd` | `PartitionFunction/TransferMatrixRepresentation/DefinitionRowConfigurationNumbering.lean` |
-| `row_configuration_numbering_bijective` | `Ising2D.row_configuration_numbering_bijective`（途中は `geom_sum_two` / `rowConfigOrd_mem_Icc` / `rowConfigOrd_sub_pos_of_first_diff` / `rowConfigOrd_injective`） | `PartitionFunction/TransferMatrixRepresentation/ClaimRowConfigurationNumberingBijective.lean` |
+| `row_configuration_numbering_bijective` | `Ising2D.row_configuration_numbering_bijective`（途中は `geom_sum_two`（`DefinitionKroneckerNumbering.lean`）/ `rowConfigOrd_mem_Icc` / `rowConfigOrd_sub_pos_of_first_diff` / `rowConfigOrd_injective`） | `PartitionFunction/TransferMatrixRepresentation/ClaimRowConfigurationNumberingBijective.lean` |
+| `def_kronecker` の `ν` とその全単射性 / `def_inverse_of_kronecker_numbering` | `Ising2D.kroneckerNumbering` / `kronecker_numbering_injective`（Step 3 の単射性）/ `exists_inverse_of_kronecker_numbering`（Step 1〜3 と人手の `ν^{-1}` が在ること） | `MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionKroneckerNumbering.lean` |
+| `def_finite_sum_of_complex_numbers_over_multi_indices` / `def_finite_sum_of_real_numbers_over_multi_indices` | `Ising2D.finset_sum_conf_complex_eq_finite_sum_over_multi_indices` / `finset_sum_conf_real_eq_finite_sum_over_multi_indices`（Lean の `Conf M` の上の `Finset.sum` が本文の `Σ_{k=1}^{2^M} a(ν^{-1}(k))` に等しいことを述べる補題） | `MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionFiniteSumOverMultiIndices.lean` |
+| `finite_sum_of_real_scalar_multiples` / `real_inclusion_preserves_finite_sum` を `𝓘_M` の上の和へ当てたもの（本文にブロックは無い） | `Ising2D.finite_sum_over_multi_indices_of_real_scalar_multiples` / `real_inclusion_of_finite_sum_over_multi_indices`（`𝓘_M` の上の和の定義で `{1,…,2^M}` の上の和へ開き、`Fin n` の上の具体版を当てる） | `MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimFiniteSumsOverMultiIndices.lean` |
 | `def_inverse_of_row_configuration_numbering` | `Ising2D.exists_inverse_of_row_configuration_numbering`（人手の `ord^{-1}` が在ること） | `PartitionFunction/TransferMatrixRepresentation/DefinitionFiniteSumOverRowConfigurations.lean` |
 | `def_finite_sum_of_complex_numbers_over_row_configurations` / `def_finite_sum_of_real_numbers_over_row_configurations` | `Ising2D.finset_sum_spinConf_complex_eq_finite_sum_over_row_configurations` / `finset_sum_spinConf_real_eq_finite_sum_over_row_configurations`（Lean の `SpinConf M` の上の `Finset.sum` が本文の `Σ_{k=1}^{2^{M_col}} a(ord^{-1}(k))` に等しいことを述べる補題） | `PartitionFunction/TransferMatrixRepresentation/DefinitionFiniteSumOverRowConfigurations.lean` |
 | `def_transfer_matrix` | **`Ising2D.V1` / `Ising2D.V2`**（定義式は `V1_apply_configBasisIso` / `V2_apply_configBasisIso`） | `PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean` |

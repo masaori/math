@@ -13,7 +13,8 @@
 人手証明の `b_m(μ) := (1-μ(m))/2` は Lean の `spinBit (μ m)`、人手の指数 `M_col - m` は
 Lean の `M - 1 - m`（`m : Fin M` は人手の `m - 1`）である。
 
-* 準備（`∑_{t=0}^{n-1} 2^t = 2^n - 1` を `n` の帰納法で）→ `geom_sum_two`。
+* 準備（`∑_{t=0}^{n-1} 2^t = 2^n - 1` を `n` の帰納法で）→ `geom_sum_two`（人手 `def_kronecker` の証明の Step 2 の準備と同じ式なので、
+  `MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionKroneckerNumbering.lean` のものを使う。`sum_two_pow_rev`・`tail_sum_two_pow` も同じ）。
 * 中間目標「値域」→ `rowConfigOrd_mem_Icc`。
   添字の置き換え `t := M_col - m` は `Fin.revPerm` による付け替え（`sum_two_pow_rev`）。
 * 中間目標「単射性」→ `rowConfigOrd_sub_pos_of_first_diff`（最小の相異なる桁 `k` で
@@ -26,6 +27,7 @@ Lean の `M - 1 - m`（`m : Fin M` は人手の `m - 1`）である。
 必要十分版は置かない。整数の 2 進展開の一意性という具体的な主張であり、取り払える構造が無い。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionRowConfigurationNumbering
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionKroneckerNumbering
 import Mathlib.Algebra.BigOperators.Intervals
 import Mathlib.Algebra.Order.BigOperators.Group.Finset
 import Mathlib.Order.Interval.Finset.Nat
@@ -36,24 +38,6 @@ import Mathlib.Tactic.Ring
 namespace Ising2D
 
 variable {M : ℕ}
-
-/-- 人手証明の準備: `∑_{t=0}^{n-1} 2^t = 2^n - 1`（`n` の帰納法）。 -/
-theorem geom_sum_two (n : ℕ) : ∑ t ∈ Finset.range n, (2 : ℤ) ^ t = 2 ^ n - 1 := by
-  induction n with
-  | zero => simp
-  | succ n ih =>
-    rw [Finset.sum_range_succ, ih, pow_succ]
-    ring
-
-/-- 添字の置き換え `t := M_col - m`: `∑_{m=1}^{M_col} 2^{M_col-m} = ∑_{t=0}^{M_col-1} 2^t`。 -/
-theorem sum_two_pow_rev (M : ℕ) :
-    ∑ m : Fin M, (2 : ℤ) ^ (M - 1 - (m : ℕ)) = ∑ t ∈ Finset.range M, (2 : ℤ) ^ t := by
-  rw [← Fin.sum_univ_eq_sum_range (fun t => (2 : ℤ) ^ t) M]
-  refine Fintype.sum_equiv Fin.revPerm _ _ (fun m => ?_)
-  simp only [Fin.revPerm_apply, Fin.val_rev]
-  have := m.isLt
-  congr 1
-  omega
 
 /-- **人手の中間目標「値域」**: `1 ≤ ord(μ) ≤ 2^{M_col}`。 -/
 theorem rowConfigOrd_mem_Icc (μ : SpinConf M) :
@@ -71,22 +55,6 @@ theorem rowConfigOrd_mem_Icc (μ : SpinConf M) :
       _ = 2 ^ M - 1 := geom_sum_two M
   rw [rowConfigOrd]
   exact ⟨by linarith, by linarith⟩
-
-/-- 残りの和の評価に使う等式: `∑_{l=k+1}^{M_col} 2^{M_col-l} = 2^{M_col-k} - 1`
-（Lean の添字では `k < l` の項の和）。 -/
-theorem tail_sum_two_pow (k : Fin M) :
-    ∑ l : Fin M, (if (k : ℕ) < l then (2 : ℤ) ^ (M - 1 - (l : ℕ)) else 0)
-      = 2 ^ (M - 1 - (k : ℕ)) - 1 := by
-  have hM : 1 ≤ M := k.pos
-  rw [Fin.sum_univ_eq_sum_range
-      (fun l : ℕ => if (k : ℕ) < l then (2 : ℤ) ^ (M - 1 - l) else 0) M,
-    ← Finset.sum_filter]
-  have hfilter : (Finset.range M).filter (fun l => (k : ℕ) < l) = Finset.Ico ((k : ℕ) + 1) M := by
-    ext l; simp only [Finset.mem_filter, Finset.mem_range, Finset.mem_Ico]; omega
-  rw [hfilter, Finset.sum_Ico_reflect (fun t => (2 : ℤ) ^ t) ((k : ℕ) + 1) (by omega : M ≤ M - 1 + 1)]
-  have h1 : M - 1 + 1 - M = 0 := by omega
-  have h2 : M - 1 + 1 - ((k : ℕ) + 1) = M - 1 - (k : ℕ) := by omega
-  rw [h1, h2, ← Finset.range_eq_Ico, geom_sum_two]
 
 /-- **人手の中間目標「単射性」の核心**: `μ(k) ≠ μ'(k)` となる最小の `k` で
 `b_k(μ) = 1, b_k(μ') = 0` なら `ord(μ) - ord(μ') > 0`。 -/

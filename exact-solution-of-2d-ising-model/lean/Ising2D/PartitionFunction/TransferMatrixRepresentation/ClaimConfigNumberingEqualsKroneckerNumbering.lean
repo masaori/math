@@ -17,9 +17,9 @@ Lean の `A I J` であり、本主張により人手の成分 `A_{ord(μ),ord(�
 `A (ι μ) (ι μ')` である。`def_transfer_matrix` の `V_1, V_2`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`）
 をこの添字で定義しているのは、この主張による。
 
-`ν` 自体は `def_kronecker`（002 章）の定義であり、Lean では添字型 `Conf M` を使うため他の箇所では
-使わない。本ファイルでは本主張を述べるためだけに `kroneckerNumbering` として定義する
-（`ν` が全単射であることの `def_kronecker` の証明は形式化していない）。
+`ν` 自体は `def_kronecker`（002 章）の定義で、Lean では `kroneckerNumbering`
+（`MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionKroneckerNumbering.lean`。`ν` が全単射であることの
+`def_kronecker` の証明と逆写像 `ν^{-1}` も同じファイル）である。
 
 ## 人手証明との対応
 
@@ -27,16 +27,11 @@ Lean の `A I J` であり、本主張により人手の成分 `A_{ord(μ),ord(�
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionRowConfigurationNumbering
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionKroneckerNumbering
 
 namespace Ising2D
 
 variable {M : ℕ}
-
-/-- 人手 `def_kronecker` の番号付け `ν(I) := 1 + ∑_{k=1}^{M} (i_k - 1) 2^{M-k}`。
-Lean の成分 `I m : Fin 2` は 0 始まりなので人手の `i_m - 1` にあたり、
-人手の指数 `M - k` は Lean の添字 `m : Fin M`（人手の `k - 1`）で `M - 1 - m` である。 -/
-def kroneckerNumbering (I : Conf M) : ℤ :=
-  1 + ∑ m : Fin M, (((I m : Fin 2) : ℕ) : ℤ) * 2 ^ (M - 1 - (m : ℕ))
 
 /-- 人手証明の `i_m - 1 = (1 - μ(m))/2`（`ι` の定義による）。 -/
 theorem idxOfSpin_val_eq_spinBit (s : SpinVal) :

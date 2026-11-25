@@ -46,6 +46,12 @@ targets=(
   Ising2D.card_spinConf
   Ising2D.row_configuration_numbering_bijective
   Ising2D.kroneckerNumbering
+  Ising2D.kronecker_numbering_injective
+  Ising2D.exists_inverse_of_kronecker_numbering
+  Ising2D.finset_sum_conf_complex_eq_finite_sum_over_multi_indices
+  Ising2D.finset_sum_conf_real_eq_finite_sum_over_multi_indices
+  Ising2D.finite_sum_over_multi_indices_of_real_scalar_multiples
+  Ising2D.real_inclusion_of_finite_sum_over_multi_indices
   Ising2D.config_numbering_equals_kronecker_numbering
   Ising2D.V1
   Ising2D.V2
