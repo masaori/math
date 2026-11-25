@@ -81983,7 +81983,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &=\left(\zeta_8^4\right)^{\operatorname{rot}(\gamma)}
 &&\bigl(\because\ \overline{\mathbb Q}^{\times}\text{ の整数指数の積の法則}\bigr)\\
 &=(-1)^{\operatorname{rot}(\gamma)}
-&&\bigl(\because\ \zeta_8^4=-1\text{。}\blkref{def_rotation_phase}\bigr)
+&&\bigl(\because\ \zeta_8^4=-1\text{、}\blkref{def_rotation_phase}\bigr)
 \end{aligned}`),
                         paragraph([
                           "全過程は代数的数の整数冪だけで閉じ、実数体も複素数体も現れない。トーラス上では、この符号を自己交差数だけで表す平面の式は成り立たず、巻き付き偶奇による補正が必要である。たとえば自己交差のない水平一周路は回転数 0 である。後続では補正項を明示して自己交差偶奇と比較する。",
