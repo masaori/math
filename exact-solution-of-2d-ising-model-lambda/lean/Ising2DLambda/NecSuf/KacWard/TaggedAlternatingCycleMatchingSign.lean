@@ -17,10 +17,21 @@ import Ising2DLambda.NecSuf.KacWard.AlternatingCycleMatchingSign
 namespace Ising2DLambda.NecSuf.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
-open Ising2DLambda.KacWard (rotate_one_map_range)
 attribute [local instance] Classical.propDecidable
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
+
+/-- 周期の終点が始点に戻る点列を一つ左へ巡回移動する。 -/
+private theorem rotate_range_of_period {K : Type*} (n : ℕ) (f : ℕ → K)
+    (hn : 0 < n) (hper : f n = f 0) :
+    ((List.range n).map f).rotate 1 =
+      (List.range n).map (fun r => f (r + 1)) := by
+  obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_lt hn
+  simp only [zero_add] at hper ⊢
+  conv_lhs => rw [List.range_succ_eq_map, List.map_cons, List.map_map, List.rotate_cons_succ,
+    List.rotate_zero]
+  rw [List.range_succ, List.map_append, List.map_singleton, hper]
+  rfl
 
 /-- 最小元 m から読んだ閉路の点列。 -/
 noncomputable def cyclePointsOf {A : Set J} (τ υ : FixedPointFreeInvolution {x // x ∈ A})
@@ -147,7 +158,7 @@ theorem cycle_pairs_reference_necSuf (i : {x // x ∈ A}) :
   obtain ⟨hpos, ⟨k, hk⟩, hper⟩ := cycle_period_necSuf A τ υ m
   have hk2 : finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m = 2 * k := by omega
   unfold cyclePointsOf at hp
-  rw [rotate_one_map_range _ _ hpos (by rw [hper]; rfl), hk2, pairChunks_map_range] at hp
+  rw [rotate_range_of_period _ _ hpos (by rw [hper]; rfl), hk2, pairChunks_map_range] at hp
   obtain ⟨r, _, rfl⟩ := List.mem_map.mp hp
   have hcol : ¬ finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m ∈
       matchingPairColor τ υ := by

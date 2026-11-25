@@ -108488,7 +108488,7 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
 &=\sum_{p\in\operatorname{supp}(r\cdot\mu)}\iota\bigl((r\cdot\mu)(p)\bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
 &&(\because\ \blkref{def_rational_log_order_group_realization})\\
 &=\sum_{p\in\operatorname{supp}(\mu)}\iota\bigl((r\cdot\mu)(p)\bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
-&&(\because\ \operatorname{supp}(r\cdot\mu)\subset\operatorname{supp}(\mu)\text{。台を含む有限集合に渡る和は同じ値（}\blkref{def_rational_log_order_group_realization}\text{）})\\
+&&(\because\ \operatorname{supp}(r\cdot\mu)\subset\operatorname{supp}(\mu)\text{、台を含む有限集合に渡る和は同じ値（}\blkref{def_rational_log_order_group_realization}\text{）})\\
 &=\sum_{p\in\operatorname{supp}(\mu)}\iota\bigl(r\,\mu(p)\bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の定義 }(r\cdot\mu)(p)=r\,\mu(p))\\
 &=\sum_{p\in\operatorname{supp}(\mu)}\bigl(\iota(r)\cdot\iota(\mu(p))\bigr)\cdot\log_{\mathbb{R}}\bigl(\iota(p)\bigr)
