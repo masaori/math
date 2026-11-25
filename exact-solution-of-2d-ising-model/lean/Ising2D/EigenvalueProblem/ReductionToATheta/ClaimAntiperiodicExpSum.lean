@@ -198,9 +198,12 @@ theorem checkPhase_add_left (M : ℕ) (k l μ : ℤ) :
 
 /-- **原文 `half_integer_phase_antiperiodicity`（反周期性）**: `e^{-iM θ~_μ} = -1`。
 
+人手の `M_col ∈ ℤ` は名前を付けた写像の像 `ι_{ℕ→ℤ}(M)`（`inclusionNNtoZZ`、`inclusion_nn_to_zz`）。
 `M(2μ-1) = 2M·μ - M` と分けて、前半は `2M` 乗根の周期（`= 1`）、
 後半が `expPhase (2M) (-M) = -1` になる。 -/
-theorem checkPhase_M (hM : M ≠ 0) (μ : ℤ) : checkPhase M (M : ℤ) μ = -1 := by
+theorem checkPhase_M (hM : M ≠ 0) (μ : ℤ) : checkPhase M (inclusionNNtoZZ M) μ = -1 := by
+  -- Lean だけの段: 像 `ι_{ℕ→ℤ}(M)` を、以下の計算が使う Lean の `Nat.cast` の `(M : ℤ)` へ移す
+  rw [inclusionNNtoZZ_eq_natCast]
   have hsplit : ((M : ℤ) * (2 * μ - 1)) = (μ * (2 * (M : ℤ))) + (-(M : ℤ)) := by ring
   have hfull : expPhase (2 * M) (μ * (2 * (M : ℤ))) = 1 := by
     rw [expPhase_zpow]

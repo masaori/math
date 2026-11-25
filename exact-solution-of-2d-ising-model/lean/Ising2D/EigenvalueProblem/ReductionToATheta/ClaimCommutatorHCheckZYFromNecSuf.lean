@@ -18,6 +18,8 @@
   （`lastSign` と `bdSign`、`nextSite` と `nextIdx` は同じ定義。`check(Z)`・`check(Y)` は位相の添字の像 `finIndexToZZ M j` を値 `j.val + 1` へ戻して一致する）。
 * 位相 `p k := checkPhase M k ν` について、`checkPhase_add_left`・`checkPhase_zero_left` と、
   反周期性 `checkPhase_antiperiodic` から出る `η = p(M)`（`-1 = -1`）・`p(M) η = 1`（`(-1)(-1) = 1`）。
+  具体版の反周期性は位相の添字を像 `ι_{ℕ→ℤ}(M)`（`inclusionNNtoZZ`）で述べ、必要十分版の `p M` は Lean の `Nat.cast` の `(M : ℤ)` を取るので、
+  その間を `inclusionNNtoZZ_eq_natCast` で渡す。
 -/
 import Ising2D.NecSuf.CommutatorSiteSum
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimCommutatorHCheckZY
@@ -72,7 +74,7 @@ theorem lie_H1Plus_checkZ_of_necSuf (hM : M ≠ 0) (ν : ℤ) :
   rw [checkZ_eq_zySiteZY_checkZ, checkY_eq_zySiteZY_checkY]
   exact (zySiteZY M).lie_h1_checkZ hM (fun k => checkPhase M k ν) (-1)
     (fun k l => checkPhase_add_left M k l ν) (checkPhase_zero_left M ν)
-    (checkPhase_antiperiodic hM ν).symm
+    (by rw [← inclusionNNtoZZ_eq_natCast]; exact (checkPhase_antiperiodic hM ν).symm)
 
 /-- **(B) を必要十分版の特殊化として導出した形**:
 `[H_1^{(+)}, check(Y)_μ] = -2 e^{iθ~_μ} check(Z)_μ`。
@@ -83,6 +85,6 @@ theorem lie_H1Plus_checkY_of_necSuf (hM : M ≠ 0) (ν : ℤ) :
   exact (zySiteZY M).lie_h1_checkY hM (fun k => checkPhase M k ν) (-1)
     (fun k l => checkPhase_add_left M k l ν)
     (by show checkPhase M (M : ℤ) ν * (-1) = 1
-        rw [checkPhase_antiperiodic hM]; norm_num)
+        rw [← inclusionNNtoZZ_eq_natCast, checkPhase_antiperiodic hM]; norm_num)
 
 end Ising2D

@@ -57,8 +57,9 @@ noncomputable def checkY (M : ℕ) (μ : ℤ) : TensorPow M :=
 
 /-- **`half_integer_phase_antiperiodicity`（反周期性）**: `e^{-iM θ~_μ} = -1`。
 
-これが 013 章全体の仕組みである（整数運動量では `e^{-iMθ_μ} = +1`）。 -/
-theorem checkPhase_antiperiodic (hM : M ≠ 0) (μ : ℤ) : checkPhase M (M : ℤ) μ = -1 :=
+これが半整数運動量のモードの議論全体の仕組みである（整数運動量では `e^{-iMθ_μ} = +1`）。
+人手の `M_col ∈ ℤ` は名前を付けた写像の像 `ι_{ℕ→ℤ}(M)`（`inclusionNNtoZZ`、`inclusion_nn_to_zz`）。 -/
+theorem checkPhase_antiperiodic (hM : M ≠ 0) (μ : ℤ) : checkPhase M (inclusionNNtoZZ M) μ = -1 :=
   checkPhase_M hM μ
 
 /-- 人手 `half_integer_phase_periodicity` の準備の鎖: `θ~_{μ+M} = θ~_μ + 2π`（人手の 11 行と 1 段ずつ対応）。 -/
