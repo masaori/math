@@ -5,6 +5,7 @@
 -/
 import Ising2DLambda.KacWard.CrossingNumberVertexDecomposition
 import Ising2DLambda.KacWard.SmoothingOtherVertexInvariance
+import Ising2DLambda.KacWard.SmoothingVertexCrossingNumber
 import Ising2DLambda.NecSuf.KacWard.SmoothingCrossingNumberUpdate
 
 namespace Ising2DLambda.KacWard
@@ -56,13 +57,14 @@ theorem smoothing_crossing_number_update {m : ℕ} {V : Type} [DecidableEq V] [F
   have hbefore : vertexCount visit (vertex a) = axisZero * axisOne := by
     simpa [vertexCount, axisZero, axisOne] using
       (vertex_crossing_number_factorization vertex visit (vertex a))
-  have hafter : vertexCount visit' (vertex a) = axisZero' * axisOne' := by
-    simpa [vertexCount, axisZero', axisOne'] using
-      (vertex_crossing_number_factorization vertex visit' (vertex a))
+  -- 本文: 選んだ頂点での平滑化後の横断数（claim_smoothing_vertex_crossing_number_update）。
+  have hafter : vertexCount visit' (vertex a) = (axisZero - 1) * (axisOne - 1) := by
+    simpa [vertexCount, axisZero, axisOne] using
+      (smoothing_vertex_crossing_number_update vertex visit visit' a b hcross hother ha hb)
   have hlocal : vertexCount visit (vertex a) + 1 =
       vertexCount visit' (vertex a) + axisZero + axisOne := by
     rw [hbefore, hafter, hzero, hone]
-    simp only [Nat.add_mul, Nat.mul_add, Nat.one_mul, Nat.mul_one]
+    simp only [Nat.add_sub_cancel, Nat.add_mul, Nat.mul_add, Nat.one_mul, Nat.mul_one]
     omega
   have hvertexOther : ∀ w, w ≠ vertex a → vertexCount visit' w = vertexCount visit w := by
     intro w hw
