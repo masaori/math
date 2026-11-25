@@ -36,10 +36,11 @@ theorem firstHitConnectingStaircase_meets_lifts_only_at_ends_from_necSuf
     (hwind : (wh, wv) ≠ (0, 0))
     (hbase : Q = periodicPlaneLift m base L wv wh k0)
     (hbaseCoordinate : windingTransverseCoordinate wh wv Q = Kmax)
-    (hlower : ∀ k : ℤ, Kmin ≤ windingTransverseCoordinate wh wv
-      (periodicPlaneLift m base L wv wh k))
-    (hupper : ∀ k : ℤ, windingTransverseCoordinate wh wv
-      (periodicPlaneLift m base L wv wh k) ≤ Kmax)
+    (hm : 0 < m)
+    (hlower : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      Kmin ≤ windingTransverseCoordinate wh wv (base r))
+    (hupper : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      windingTransverseCoordinate wh wv (base r) ≤ Kmax)
     (hgap : u * (wh ^ 2 + wv ^ 2) > Kmax - Kmin)
     (hu : 1 ≤ u.natAbs)
     (hhitPositive : 1 ≤ hit)
@@ -62,6 +63,6 @@ theorem firstHitConnectingStaircase_meets_lifts_only_at_ends_from_necSuf
           transverseTranslatedPeriodicPlaneLift m L base wv wh u k) :=
   firstHitConnectingStaircase_meets_lifts_only_at_ends
     m L base wv wh Q Kmin Kmax u hit k0 hwind hbase hbaseCoordinate
-    hlower hupper hgap hu hhitPositive hhitBound hhit hminimal
+    hm hlower hupper hgap hu hhitPositive hhitBound hhit hminimal
 
 end Ising2DLambda.KacWard

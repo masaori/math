@@ -16,14 +16,17 @@ theorem iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top
     (m L : ℕ) (base : ℤ → ℤ × ℤ) (wv wh : ℤ) (Q : ℤ × ℤ) (Kmax : ℤ)
     (hwind : (wh, wv) ≠ (0, 0))
     (hbase : Kmax ≤ windingTransverseCoordinate wh wv Q)
-    (hupper : ∀ k : ℤ, windingTransverseCoordinate wh wv
-      (periodicPlaneLift m base L wv wh k) ≤ Kmax)
+    (hm : 0 < m)
+    (hupper : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      windingTransverseCoordinate wh wv (base r) ≤ Kmax)
     (t s : ℕ) (_ht : 1 ≤ t) (hs : 1 ≤ s)
     (_hsle : s ≤ t * (wh.natAbs + wv.natAbs)) (k : ℤ) :
     iteratedTransverseStaircase wh wv Q s ≠ periodicPlaneLift m base L wv wh k := by
   intro heq
   have hstep := (iteratedTransverseStaircase_lower_bound wh wv Q hwind).2.2.1 s
-  have htop := hupper k
+  -- 本文の不等式の四行目: 周期持ち上げの有限幅と `K_max` の定義。
+  have htop := periodicPlaneLift_transverseCoordinate_le_of_period_le
+    m L hm base wv wh Kmax hupper k
   rw [heq] at hstep
   omega
 

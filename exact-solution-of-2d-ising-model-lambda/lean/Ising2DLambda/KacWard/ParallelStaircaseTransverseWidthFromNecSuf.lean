@@ -19,11 +19,12 @@ theorem windingParallelStaircase_transverse_width_bound_from_necSuf
 theorem windingParallelStaircase_above_band_avoids_periodicPlaneLift_from_necSuf
     (m L : ℕ) (base : ℤ → ℤ × ℤ) (wh wv : ℤ) (Q : ℤ × ℤ) (Kmax : ℤ)
     (hbase : Kmax < windingTransverseCoordinate wh wv Q - (L : ℤ) * |wh * wv|)
-    (hupper : ∀ k : ℤ, windingTransverseCoordinate wh wv
-      (periodicPlaneLift m base L wv wh k) ≤ Kmax)
+    (hm : 0 < m)
+    (hupper : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      windingTransverseCoordinate wh wv (base r) ≤ Kmax)
     (s : ℕ) (hs : s ≤ L * wh.natAbs + L * wv.natAbs) (k : ℤ) :
     Q + windingParallelStaircase L wh wv s ≠ periodicPlaneLift m base L wv wh k :=
   windingParallelStaircase_above_band_avoids_periodicPlaneLift
-    m L base wh wv Q Kmax hbase hupper s hs k
+    m L base wh wv Q Kmax hbase hm hupper s hs k
 
 end Ising2DLambda.KacWard

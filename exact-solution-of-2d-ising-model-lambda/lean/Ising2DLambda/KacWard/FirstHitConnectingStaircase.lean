@@ -75,10 +75,11 @@ theorem firstHitConnectingStaircase_meets_lifts_only_at_ends
     (hwind : (wh, wv) ≠ (0, 0))
     (hbase : Q = periodicPlaneLift m base L wv wh k0)
     (hbaseCoordinate : windingTransverseCoordinate wh wv Q = Kmax)
-    (hlower : ∀ k : ℤ, Kmin ≤ windingTransverseCoordinate wh wv
-      (periodicPlaneLift m base L wv wh k))
-    (hupper : ∀ k : ℤ, windingTransverseCoordinate wh wv
-      (periodicPlaneLift m base L wv wh k) ≤ Kmax)
+    (hm : 0 < m)
+    (hlower : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      Kmin ≤ windingTransverseCoordinate wh wv (base r))
+    (hupper : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      windingTransverseCoordinate wh wv (base r) ≤ Kmax)
     (hgap : u * (wh ^ 2 + wv ^ 2) > Kmax - Kmin)
     (hu : 1 ≤ u.natAbs)
     (_hhitPositive : 1 ≤ hit)
@@ -107,7 +108,7 @@ theorem firstHitConnectingStaircase_meets_lifts_only_at_ends
       iteratedTransverseStaircase wh wv Q s ≠ periodicPlaneLift m base L wv wh k := by
     intro s hs hsle k
     exact iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top
-      m L base wv wh Q Kmax hwind (le_of_eq hbaseCoordinate.symm) hupper
+      m L base wv wh Q Kmax hwind (le_of_eq hbaseCoordinate.symm) hm hupper
       u.natAbs s hu hs (le_trans hsle hhitBound) k
   constructor
   · intro s s' _ _ heq
@@ -125,7 +126,9 @@ theorem firstHitConnectingStaircase_meets_lifts_only_at_ends
       intro heq
       have htranslated := transverseTranslatedPeriodicPlaneLift_coordinate
         m L base wv wh u k
-      have horiginalLower := hlower k
+      -- 本文の不等式の二行目: 周期持ち上げの有限幅と `K_min` の定義。
+      have horiginalLower := periodicPlaneLift_transverseCoordinate_ge_of_period_ge
+        m L hm base wv wh Kmin hlower k
       rw [hzero] at heq
       rw [← heq] at htranslated
       rw [hbaseCoordinate] at htranslated

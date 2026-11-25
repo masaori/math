@@ -66,11 +66,11 @@ theorem transverseTranslatedPeriodicPlaneLift_coordinate
 /-- `claim_transverse_translates_of_periodic_plane_lift_disjoint` の分離部分。 -/
 theorem transverseTranslatedPeriodicPlaneLifts_disjoint
     (m L : ℕ) (base : ℤ → ℤ × ℤ) (wv wh : ℤ)
-    (Kmin Kmax u v : ℤ)
-    (hlower : ∀ k, Kmin ≤ windingTransverseCoordinate wh wv
-      (periodicPlaneLift m base L wv wh k))
-    (hupper : ∀ k, windingTransverseCoordinate wh wv
-      (periodicPlaneLift m base L wv wh k) ≤ Kmax)
+    (Kmin Kmax u v : ℤ) (hm : 0 < m)
+    (hlower : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      Kmin ≤ windingTransverseCoordinate wh wv (base r))
+    (hupper : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      windingTransverseCoordinate wh wv (base r) ≤ Kmax)
     (hgap : (v - u) * (wh ^ 2 + wv ^ 2) > Kmax - Kmin) :
     ∀ k k', transverseTranslatedPeriodicPlaneLift m L base wv wh u k ≠
       transverseTranslatedPeriodicPlaneLift m L base wv wh v k' := by
@@ -84,8 +84,11 @@ theorem transverseTranslatedPeriodicPlaneLifts_disjoint
       windingTransverseCoordinate wh wv
         (transverseTranslatedPeriodicPlaneLift m L base wv wh v k') := by
     rw [hleft, hright]
-    have hk := hupper k
-    have hk' := hlower k'
+    -- 本文の不等式の一行目と三行目: 周期持ち上げの有限幅と `K_max`・`K_min` の定義。
+    have hk := periodicPlaneLift_transverseCoordinate_le_of_period_le
+      m L hm base wv wh Kmax hupper k
+    have hk' := periodicPlaneLift_transverseCoordinate_ge_of_period_ge
+      m L hm base wv wh Kmin hlower k'
     have hmul : (v - u) * (wh ^ 2 + wv ^ 2) =
         v * (wh ^ 2 + wv ^ 2) - u * (wh ^ 2 + wv ^ 2) := by ring
     rw [hmul] at hgap

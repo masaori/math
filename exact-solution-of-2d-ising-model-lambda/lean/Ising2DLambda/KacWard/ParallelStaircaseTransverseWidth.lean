@@ -175,8 +175,9 @@ theorem windingParallelStaircase_transverse_width_bound
 theorem windingParallelStaircase_above_band_avoids_periodicPlaneLift
     (m L : ℕ) (base : ℤ → ℤ × ℤ) (wh wv : ℤ) (Q : ℤ × ℤ) (Kmax : ℤ)
     (hbase : Kmax < windingTransverseCoordinate wh wv Q - (L : ℤ) * |wh * wv|)
-    (hupper : ∀ k : ℤ, windingTransverseCoordinate wh wv
-      (periodicPlaneLift m base L wv wh k) ≤ Kmax)
+    (hm : 0 < m)
+    (hupper : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      windingTransverseCoordinate wh wv (base r) ≤ Kmax)
     (s : ℕ) (hs : s ≤ L * wh.natAbs + L * wv.natAbs) (k : ℤ) :
     Q + windingParallelStaircase L wh wv s ≠ periodicPlaneLift m base L wv wh k := by
   -- 本文の「幅の下界」から、平行移動した階段の横断座標を下から押さえる。
@@ -192,6 +193,8 @@ theorem windingParallelStaircase_above_band_avoids_periodicPlaneLift
     lt_of_lt_of_le hbase htranslated
   intro heq
   rw [heq] at habove
-  exact (not_lt_of_ge (hupper k)) habove
+  -- 本文の最後の不等式: 周期持ち上げの有限幅と `K_max` の定義。
+  exact (not_lt_of_ge (periodicPlaneLift_transverseCoordinate_le_of_period_le
+    m L hm base wv wh Kmax hupper k)) habove
 
 end Ising2DLambda.KacWard

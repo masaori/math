@@ -77,4 +77,30 @@ theorem periodicPlaneLift_transverseCoordinate_range_finite
   · exact ⟨Int.emod_nonneg k (by omega), Int.emod_lt_of_pos k (by omega)⟩
   · exact (periodicPlaneLift_transverseCoordinate_eq_base m L base wv wh k).symm
 
+/-- `claim_periodic_plane_lift_transverse_bounded` の帯の上端。一周期の横断座標を上から押さえる
+整数（本文の `K_max(γ)` は一周期の値の最大元なので、これを満たす）は、周期延長した持ち上げの
+横断座標をすべて上から押さえる。 -/
+theorem periodicPlaneLift_transverseCoordinate_le_of_period_le
+    (m L : ℕ) (hm : 0 < m) (base : ℤ → ℤ × ℤ) (wv wh K : ℤ)
+    (hperiod : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      windingTransverseCoordinate wh wv (base r) ≤ K)
+    (k : ℤ) :
+    windingTransverseCoordinate wh wv (periodicPlaneLift m base L wv wh k) ≤ K := by
+  rw [periodicPlaneLift_transverseCoordinate_eq_base m L base wv wh k]
+  exact hperiod (k % (m : ℤ)) (Int.emod_nonneg k (by omega))
+    (Int.emod_lt_of_pos k (by omega))
+
+/-- `claim_periodic_plane_lift_transverse_bounded` の帯の下端。一周期の横断座標を下から押さえる
+整数（本文の `K_min(γ)` は一周期の値の最小元なので、これを満たす）は、周期延長した持ち上げの
+横断座標をすべて下から押さえる。 -/
+theorem periodicPlaneLift_transverseCoordinate_ge_of_period_ge
+    (m L : ℕ) (hm : 0 < m) (base : ℤ → ℤ × ℤ) (wv wh K : ℤ)
+    (hperiod : ∀ r : ℤ, 0 ≤ r → r < (m : ℤ) →
+      K ≤ windingTransverseCoordinate wh wv (base r))
+    (k : ℤ) :
+    K ≤ windingTransverseCoordinate wh wv (periodicPlaneLift m base L wv wh k) := by
+  rw [periodicPlaneLift_transverseCoordinate_eq_base m L base wv wh k]
+  exact hperiod (k % (m : ℤ)) (Int.emod_nonneg k (by omega))
+    (Int.emod_lt_of_pos k (by omega))
+
 end Ising2DLambda.KacWard
