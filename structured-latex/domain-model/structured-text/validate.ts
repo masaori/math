@@ -194,7 +194,7 @@ export const createRuntimeSchema = <
     ),
     standing: z
       .undefined({
-        invalid_type_error: `standing（主定理 / サブ定理の身分）を宣言できるのは ${STANDING_BEARING_KINDS.join(' / ')} だけである`,
+        error: `standing（主定理 / サブ定理の身分）を宣言できるのは ${STANDING_BEARING_KINDS.join(' / ')} だけである`,
       })
       .optional(),
   })

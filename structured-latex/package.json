@@ -19,8 +19,8 @@
     "check:entities": "node codegen/entity-definitions/cli.ts --check"
   },
   "dependencies": {
-    "@masaori/zod-to-entity-definitions": "^1.2.0",
-    "zod": "3.25.76"
+    "@masaori/zod-to-entity-definitions": "^1.4.0",
+    "zod": "4.6.6"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
