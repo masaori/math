@@ -69,8 +69,8 @@ theorem A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_fo
                 ((checkFermiOf P hM).nOp j - (1 / 2 : ℂ) • (1 : TensorPow M)))) :=
   ⟨fun j => ⟨det_checkPmat_ne_zero P hM (finIndexToZZ M j),                         -- 人手の (1)
       AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv P hM (finIndexToZZ M j)⟩,
-    fun j => ⟨lambdaPlusR_eq_exp P P.c2_mul_s2star_eq_c2star M (finIndexToZZ M j),    -- 人手の (2)
-      lambdaMinusR_eq_exp P P.c2_mul_s2star_eq_c2star M (finIndexToZZ M j)⟩,
+    fun j => ⟨lambdaPlusR_eq_exp P P.c2_mul_s2star_eq_c2star hM (finIndexToZZ M j),    -- 人手の (2)
+      lambdaMinusR_eq_exp P P.c2_mul_s2star_eq_c2star hM (finIndexToZZ M j)⟩,
     gammaFn_eq P,                                                                  -- 人手の (3)
     fun j => ⟨checkPsiDag_eq_checkPmat_col P.const M (finIndexToZZ M j),              -- 人手の (4)
       checkPsi_eq_checkPmat_col P.const M (finIndexToZZ M j), checkFermiOf_nOp P hM j⟩,

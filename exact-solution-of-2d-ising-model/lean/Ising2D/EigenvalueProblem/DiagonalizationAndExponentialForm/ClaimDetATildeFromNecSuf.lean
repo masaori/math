@@ -14,6 +14,7 @@
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimDetATilde
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Ising2D.NecSuf.GammaDetIdentity
+import Ising2D.NecSuf.ArcoshExp
 
 namespace Ising2D
 

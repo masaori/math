@@ -75,17 +75,42 @@ theorem one_lt_of_sq_gt_one {R : Type*} [Monoid R] [Zero R] [LinearOrder R] [Zer
   lt_of_not_ge fun hle : t ≤ 1 =>
     lt_irrefl (1 : R) (lt_of_lt_of_le h (sq_le_one_of_le_one_chain ht hle))
 
-/-- **必要十分版 Step 1**: `1 ≤ g`, `0 ≤ r`, `g^2 = 1 + r^2` なら `sinh (arcosh g) = r`。 -/
+/-- **必要十分版 Step 1**: `1 ≤ g`, `0 ≤ r`, `g^2 = 1 + r^2` なら `sinh (arcosh g) = r`。
+
+具体版 `sinh_gammaTilde` と同じ段: 準備の `cosh t = g`（`t := arcosh g`）、平方の 4 行の鎖
+`(sinh t)^2 = (cosh t)^2 − 1 = g^2 − 1 = (1 + r^2) − 1 = r^2`、`sinh t` の符号、
+`cosh_sinh_basic_properties` (4) の逆向きの段（`(a−b)(a+b) = a^2 − b^2 = 0`、`a+b ≠ 0`、ℝ は整域で `a−b = 0`、`a = b`）。
+具体版との違いは符号の段だけである。具体版は `t > 0`・`r > 0` から `a + b > 0` を出すが、ここは `t ≥ 0`（`arcosh ≥ 0`）から
+`sinh t ≥ 0` と `r ≥ 0` しか使わないので、`a + b = 0` の場合を分け、そのときは `a = b = 0` で結論する。
+したがって具体版の仮定 `M ≠ 0` は主張には効いていない。具体版はそれを、本文に合わせて準備で `g > 1` を取る段と、`a + b ≠ 0` を出す段で使うが、どちらも `g ≥ 1`・`r ≥ 0` と上の場合分けで置き換えられる。 -/
 theorem sinh_arcosh_of_sq {g r : ℝ} (hg : 1 ≤ g) (hr : 0 ≤ r) (h : g ^ 2 = 1 + r ^ 2) :
     Real.sinh (Real.arcosh g) = r := by
+  -- 準備: `cosh t = g`
   have hcosh : Real.cosh (Real.arcosh g) = g := Real.cosh_arcosh hg
+  -- 平方の鎖: `(sinh t)^2 = r^2`
+  have hsq : Real.sinh (Real.arcosh g) ^ 2 = r ^ 2 :=
+    calc Real.sinh (Real.arcosh g) ^ 2
+        = Real.cosh (Real.arcosh g) ^ 2 - 1 := by
+          rw [← Real.cosh_sq_sub_sinh_sq (Real.arcosh g), sub_sub_self]   -- `cosh^2 − sinh^2 = 1`
+      _ = g ^ 2 - 1 := by rw [hcosh]                                     -- 準備の `cosh t = g`
+      _ = (1 + r ^ 2) - 1 := by rw [h]                                   -- 仮定 `g^2 = 1 + r^2`
+      _ = r ^ 2 := add_sub_cancel_left _ _                               -- ℝ の四則
+  -- 符号: `t ≥ 0 ⟹ sinh t ≥ 0`
   have hnn : 0 ≤ Real.sinh (Real.arcosh g) :=
     Real.sinh_nonneg_iff.2 (Real.arcosh_nonneg hg)
-  have hsq : Real.sinh (Real.arcosh g) ^ 2 = r ^ 2 := by
-    have := Real.cosh_sq_sub_sinh_sq (Real.arcosh g)
-    rw [hcosh] at this
-    nlinarith [this, h]
-  nlinarith [hsq, hnn, hr]
+  -- `a := sinh t`、`b := r` の `(a−b)(a+b) = 0`
+  have hfactor : (Real.sinh (Real.arcosh g) - r) * (Real.sinh (Real.arcosh g) + r) = 0 :=
+    calc (Real.sinh (Real.arcosh g) - r) * (Real.sinh (Real.arcosh g) + r)
+        = Real.sinh (Real.arcosh g) ^ 2 - r ^ 2 := by
+          rw [sq, sq]; exact ((Commute.all _ _).mul_self_sub_mul_self_eq').symm  -- 2 乗の差の因数分解
+      _ = 0 := sub_eq_zero.mpr hsq                                                -- `a^2 = b^2`
+  by_cases hsum : Real.sinh (Real.arcosh g) + r = 0
+  · -- `a + b = 0` かつ `a, b ≥ 0` なら `a = b = 0`（具体版には無い場合。`r > 0` が無いため）
+    have ha0 : Real.sinh (Real.arcosh g) = 0 := le_antisymm (by linarith) hnn
+    have hb0 : r = 0 := le_antisymm (by linarith) hr
+    rw [ha0, hb0]
+  · -- `a + b ≠ 0` なら、ℝ は整域なので `a − b = 0`、両辺に `b` を加えて `a = b`
+    exact sub_eq_zero.mp ((mul_eq_zero.mp hfactor).resolve_right hsum)
 
 /-- **必要十分版 Step 2**: `e^{+arcosh g} = g + r`。 -/
 theorem exp_arcosh_of_sq {g r : ℝ} (hg : 1 ≤ g) (hr : 0 ≤ r) (h : g ^ 2 = 1 + r ^ 2) :

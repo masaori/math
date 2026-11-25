@@ -2071,6 +2071,9 @@ targets=(
   Ising2D.gamma1R_ge_cosh_sub_of_necSuf
   Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero_of_necSuf
   Ising2D.gammaTilde_pos_of_necSuf
+  Ising2D.sinh_gammaTilde_of_necSuf
+  Ising2D.lambdaPlusR_eq_exp_of_necSuf
+  Ising2D.lambdaMinusR_eq_exp_of_necSuf
   Ising2D.gammaFn_thetaTilde_pos_of_necSuf
   Ising2D.vec_sub_eq_zero_iff_tensorPow
   Ising2D.identity_matrix_mulVec_tensorPow

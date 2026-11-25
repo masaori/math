@@ -81,9 +81,10 @@
 | `Ising2D.cosh_gammaTilde` / `gammaTilde_nonneg`（`DefinitionGammaTildeMu.lean`） | `cosh γ = γ_1`、`γ ≥ 0` | 同上 |
 | **`Ising2D.gammaTilde_pos`** | **`γ(θ~_μ) > 0`（狭義）** | **`gamma_theta_tilde_mu_positive`** |
 | `Ising2D.gammaTilde_pos_of_necSuf` / `gammaFn_thetaTilde_pos_of_necSuf`（`ClaimGammaThetaTildeMuPositiveFromNecSuf.lean`） | `gammaTilde_pos`・`gammaFn_thetaTilde_pos` を必要十分版 `NecSuf.arcosh_pos_of_one_lt` の `g := γ_1(θ~_μ)` の特殊化として導出した版 | `gamma_theta_tilde_mu_positive` |
-| `Ising2D.sinh_gammaTilde` | `sinh γ(θ~_μ) = |γ_2(θ~_μ)|` | `lambda_eq_exp_gamma_theta_tilde` Step 1 |
-| `Ising2D.lambdaPlusR_eq_exp` / `lambdaMinusR_eq_exp` | `λ_{±,μ} = e^{±γ(θ~_μ)}` | 同 Step 2 |
+| `Ising2D.sinh_gammaTilde` | `sinh γ(θ~_μ) = |γ_2(θ~_μ)|`（仮定 `M ≠ 0`） | `lambda_eq_exp_gamma_theta_tilde` Step 1 |
+| `Ising2D.lambdaPlusR_eq_exp` / `lambdaMinusR_eq_exp` | `λ_{±,μ} = e^{±γ(θ~_μ)}`（仮定 `M ≠ 0`） | 同 Step 2 |
 | `Ising2D.lambda_separation` | `λ_+ > 1 > λ_- > 0` | 同 Step 3 |
+| `Ising2D.sinh_gammaTilde_of_necSuf` / `lambdaPlusR_eq_exp_of_necSuf` / `lambdaMinusR_eq_exp_of_necSuf`（`ClaimLambdaEqExpGammaThetaTildeFromNecSuf.lean`） | `sinh_gammaTilde`・`lambdaPlusR_eq_exp`・`lambdaMinusR_eq_exp` を必要十分版 `NecSuf.sinh_arcosh_of_sq`・`exp_arcosh_of_sq`・`exp_neg_arcosh_of_sq` の特殊化として導出した版 | `lambda_eq_exp_gamma_theta_tilde` |
 
 補助として `Ising2D.IsingParam.c1_pos` / `c2_pos` / `c1_sq_sub_s1_sq` / `c2star_sq_sub_s2star_sq`
 （`c_1 = cosh 2K_1 > 0` 等）を置いた。
@@ -113,7 +114,7 @@
 | `det_A_theta_tilde` | `det_AMat_thetaTilde_eq_one` | `NecSuf.gamma_det_identity` | `det_AMat_thetaTilde_eq_one_of_necSuf`（同じ主張を必要十分版の系として再証明） |
 | `gamma1_gt_1_theta_tilde` | `gamma1_gt_1_prep_absGamma2_sq_pos`, `one_lt_gamma1R_sq_thetaTilde`, `gamma1R_thetaTilde_sq_le_one_of_le_one`, `one_lt_gamma1R_thetaTilde` | `NecSuf.sq_pos_of_pos_implication_chain`, `sq_le_one_of_le_one_chain`, `one_lt_of_sq_gt_one` | `gamma1_gt_1_prep_absGamma2_sq_pos_of_necSuf`, `gamma1R_thetaTilde_sq_le_one_of_le_one_of_necSuf`, `one_lt_gamma1R_thetaTilde_of_necSuf`（`ClaimDetATildeFromNecSuf.lean`。`R := ℝ` への特殊化） |
 | `gamma_theta_tilde_mu_positive` | `gammaTilde_pos`, `gammaFn_thetaTilde_pos`（`TheoremMaxEigenvalueSimple.lean`） | `NecSuf.arcosh_pos_of_one_lt` | `ClaimGammaThetaTildeMuPositiveFromNecSuf.lean` の `gammaTilde_pos_of_necSuf`, `gammaFn_thetaTilde_pos_of_necSuf`（必要十分版へ `g := γ_1(θ~_μ)` を代入。具体版は人手の背理の鎖と 1 対 1 で、必要十分版を使わない） |
-| `lambda_eq_exp_gamma_theta_tilde` | `sinh_gammaTilde`, `lambdaPlusR_eq_exp`, `lambdaMinusR_eq_exp` | `NecSuf.sinh_arcosh_of_sq`, `NecSuf.exp_arcosh_of_sq`, `NecSuf.exp_neg_arcosh_of_sq` | 具体版はいずれも必要十分版の系 |
+| `lambda_eq_exp_gamma_theta_tilde` | `sinh_gammaTilde`, `lambdaPlusR_eq_exp`, `lambdaMinusR_eq_exp` | `NecSuf.sinh_arcosh_of_sq`, `NecSuf.exp_arcosh_of_sq`, `NecSuf.exp_neg_arcosh_of_sq` | `ClaimLambdaEqExpGammaThetaTildeFromNecSuf.lean` の `sinh_gammaTilde_of_necSuf`, `lambdaPlusR_eq_exp_of_necSuf`, `lambdaMinusR_eq_exp_of_necSuf`（必要十分版へ `g := γ_1(θ~_μ)`、`r := |γ_2(θ~_μ)|` を代入。具体版は人手の Step 1・Step 2 の鎖と 1 対 1 で、必要十分版を使わない） |
 
 必要十分版から得られた知見（本文には持ち込まない）:
 

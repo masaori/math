@@ -65,16 +65,16 @@ theorem gamma2_thetaTilde_ne_zero_of_checkIndex (hM : M ≠ 0) :
 
 /-- 015 章 `lambda_eq_exp_gamma_theta_tilde`: 本章の仮定 `hlamPlus`（`λ_{+,μ} = e^{+γ(θ̃_μ)}`）は無条件に成り立つ。 -/
 theorem lambdaPlusR_eq_exp_gammaTildeC
-    (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (M : ℕ) (μ : ℤ) :
+    (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (hM : M ≠ 0) (μ : ℤ) :
     ((lambdaPlusR P.const (thetaTilde M μ) : ℝ) : ℂ) = Complex.exp (gammaTildeC P M μ) := by
-  rw [lambdaPlusR_eq_exp P hdual M μ, Complex.ofReal_exp]
+  rw [lambdaPlusR_eq_exp P hdual hM μ, Complex.ofReal_exp]
   rfl
 
 /-- 015 章 `lambda_eq_exp_gamma_theta_tilde`: 本章の仮定 `hlamMinus`（`λ_{-,μ} = e^{-γ(θ̃_μ)}`）は無条件に成り立つ。 -/
 theorem lambdaMinusR_eq_exp_gammaTildeC
-    (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (M : ℕ) (μ : ℤ) :
+    (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (hM : M ≠ 0) (μ : ℤ) :
     ((lambdaMinusR P.const (thetaTilde M μ) : ℝ) : ℂ) = Complex.exp (-gammaTildeC P M μ) := by
-  rw [lambdaMinusR_eq_exp P hdual M μ, Complex.ofReal_exp, Complex.ofReal_neg]
+  rw [lambdaMinusR_eq_exp P hdual hM μ, Complex.ofReal_exp, Complex.ofReal_neg]
   rfl
 
 /-! ## 015 章の仮定を落とした版の主張 -/
@@ -111,8 +111,8 @@ theorem TVPlus_eq_TCheckVprime' (hM : M ≠ 0)
       TConj uPlus x = TConj (checkVprimeUnits P.const M (gammaTildeC P M)) x :=
   TVPlus_eq_TCheckVprime P (gammaTildeC P M) hM
     (fun μ _ => gammaTildeC_conj P hM μ) uPlus hT
-    (fun j => lambdaPlusR_eq_exp_gammaTildeC P hdual M (finIndexToZZ M j))
-    (fun j => lambdaMinusR_eq_exp_gammaTildeC P hdual M (finIndexToZZ M j))
+    (fun j => lambdaPlusR_eq_exp_gammaTildeC P hdual hM (finIndexToZZ M j))
+    (fun j => lambdaMinusR_eq_exp_gammaTildeC P hdual hM (finIndexToZZ M j))
 
 /-- **仮定 `hT` を取る一般形**: `V_plus_eq_c_check_Vprime`（015 章の仮定なし。残るのは 014 章の `hT` だけ。本文どおりの版は `VPlus_eq_smul_checkVprime_of_dual`）。
 
@@ -167,8 +167,8 @@ theorem TVPlus_checkPsiDag_checkPsi (hM : M ≠ 0) (μ : ℤ) :
       ∧ TConj (VPlusUnits M (sinh_two_K2_pos P) (P.K1 : ℂ) (P.K2star : ℂ)) (checkPsi P.const M μ)
         = Complex.exp (-gammaTildeC P M μ) • checkPsi P.const M μ :=
   TVPlus_checkPsiDag_psi_of_action P M hM μ
-    (lambdaPlusR_eq_exp_gammaTildeC P P.c2_mul_s2star_eq_c2star M μ)
-    (lambdaMinusR_eq_exp_gammaTildeC P P.c2_mul_s2star_eq_c2star M μ)
+    (lambdaPlusR_eq_exp_gammaTildeC P P.c2_mul_s2star_eq_c2star hM μ)
+    (lambdaMinusR_eq_exp_gammaTildeC P P.c2_mul_s2star_eq_c2star hM μ)
     (TVPlus_actsBy_checkZY P hM P.c2_mul_s2star_eq_c2star μ)
 
 /-- **本章の結論の完全な無条件版**（残る仮定は双対関係 `hdual` だけ）:

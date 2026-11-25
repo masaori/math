@@ -513,8 +513,6 @@ Ising2D.finrank_range_Qproj_univ
 Ising2D.gamma1R_eq_cosh_kappa_add
 Ising2D.gamma1R_periodic
 Ising2D.gamma1R_thetaTilde_add_int_mul
-Ising2D.gamma1R_thetaTilde_sq_le_one_of_le_one
-Ising2D.gamma1_gt_1_prep_absGamma2_sq_pos
 Ising2D.gamma1_lower_bound_all_theta
 Ising2D.gamma2_add_two_pi
 Ising2D.gamma2_eq_zero_iff_of_s2star_ne_zero
@@ -533,7 +531,6 @@ Ising2D.gammaK
 Ising2D.gammaK_neg
 Ising2D.gammaK_nonneg
 Ising2D.gammaTilde_nonneg
-Ising2D.gammaTilde_pos
 Ising2D.geom_sum_two
 Ising2D.gval_empty_eq_neg_half_sum
 Ising2D.gval_empty_le_gval
@@ -770,8 +767,6 @@ Ising2D.nextSite_eq_cycSucc
 Ising2D.one_dimensional_subspace_is_multiples_of_nonzero_element
 Ising2D.one_eq_sum_E
 Ising2D.one_le_gamma1R_thetaTilde
-Ising2D.one_lt_gamma1R_sq_thetaTilde
-Ising2D.one_lt_gamma1R_thetaTilde
 Ising2D.one_sub_cos_eq
 Ising2D.onsager_exact_solution
 Ising2D.onsager_exact_solution_isoParam
@@ -851,7 +846,6 @@ Ising2D.sinh_02_bounds
 Ising2D.sinh_arsinh_eq
 Ising2D.sinh_eq_iff_eq_arsinh
 Ising2D.sinh_gammaK
-Ising2D.sinh_gammaTilde
 Ising2D.sinh_half_gammaFn_sq
 Ising2D.sinh_half_gammaK
 Ising2D.sinh_injective_real
