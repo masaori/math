@@ -108633,7 +108633,7 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
 &=0
 &&(\because\ \text{上で示した }\log_{\mathbb{R}}(1)=0)\\
 &=\iota(0)\cdot\log_{\mathbb{R}}(u)
-&&(\because\ \iota(0)=0\text{、}0\cdot t=0\text{。}\mathbb{R}\text{ の乗法})
+&&(\because\ \iota(0)=0\text{、}0\cdot t=0\text{、}\mathbb{R}\text{ の乗法})
 \end{aligned}`),
                         paragraph([
                           "である。",
@@ -108645,7 +108645,7 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
 &=\log_{\mathbb{R}}(u^{n}\cdot u)
 &&(\because\ u^{n+1}=u^{n}\cdot u)\\
 &=\log_{\mathbb{R}}(u^{n})+\log_{\mathbb{R}}(u)
-&&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm})\\
+&&(\because\ \text{乗法を加法へ移す、}\blkref{def_real_logarithm})\\
 &=\iota(n)\cdot\log_{\mathbb{R}}(u)+\log_{\mathbb{R}}(u)
 &&(\because\ \text{帰納法の仮定})\\
 &=\iota(n)\cdot\log_{\mathbb{R}}(u)+1\cdot\log_{\mathbb{R}}(u)
@@ -108653,7 +108653,7 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
 &=\bigl(\iota(n)+1\bigr)\cdot\log_{\mathbb{R}}(u)
 &&(\because\ \mathbb{R}\text{ の分配則})\\
 &=\iota(n+1)\cdot\log_{\mathbb{R}}(u)
-&&(\because\ \iota\text{ は加法を保ち }\iota(1)=1\text{。}\blkref{def_real_logarithm})
+&&(\because\ \iota\text{ は加法を保ち }\iota(1)=1\text{、}\blkref{def_real_logarithm})
 \end{aligned}`),
                         paragraph([
                           "となる。次に任意の ",

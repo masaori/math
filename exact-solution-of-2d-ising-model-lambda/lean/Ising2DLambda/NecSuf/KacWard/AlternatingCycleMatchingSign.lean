@@ -73,6 +73,21 @@ theorem pairChunks_map_range {K : Type*} :
 /-- R に値をとる η。 -/
 def pairOrientationIn (R : Type*) [CommRing R] (p : J × J) : R := if p.1 < p.2 then 1 else -1
 
+omit [Fintype J] in
+/-- 共通の昇順対は向きの積に寄与せず、閉路ごとの積だけが残る。 -/
+theorem pairOrientationIn_cycles (cs : List (List J)) (P : List (J × J))
+    (hP : ∀ p ∈ P, p.1 < p.2) :
+    (((cs.map pairChunks).flatten ++ P).map (pairOrientationIn R)).prod =
+      (cs.map (fun c => ((pairChunks c).map (pairOrientationIn R)).prod)).prod := by
+  have hPη : (P.map (pairOrientationIn R)).prod = 1 := by
+    have h : P.map (pairOrientationIn R) = P.map (fun _ => (1 : R)) :=
+      List.map_congr_left (fun p hp => by simp [pairOrientationIn, hP p hp])
+    rw [h]
+    simp
+  simp only [List.map_append, List.prod_append, hPη, mul_one, List.map_flatten,
+    List.prod_flatten, List.map_map]
+  rfl
+
 /-- F で評価したマッチングの符号。 -/
 noncomputable def matchingSignOf (F : List J → R) (D : PerfectMatching J) : R :=
   F (matchingPairWord (matchingCanonicalEnumeration D))
@@ -281,19 +296,12 @@ theorem alternating_cycle_matching_sign_necSuf
       obtain ⟨c, hcs, rfl⟩ := List.mem_map.mp hps
       exact h₀ c hcs p hpc
     · exact (hP p h).2.2
-  have hPη : (P.map (pairOrientationIn R)).prod = 1 := by
-    have h' : P.map (pairOrientationIn R) = P.map (fun _ => (1 : R)) :=
-      List.map_congr_left (fun p hp => by simp [pairOrientationIn, (hP p hp).1])
-    rw [h']
-    simp
   have hαD : (lD.map (pairOrientationIn R)).prod = αD := by
-    simp only [lD, List.map_append, List.prod_append, hPη, mul_one, List.map_flatten,
-      List.prod_flatten, List.map_map]
-    rfl
+    exact pairOrientationIn_cycles (R := R) cs P (fun p hp => (hP p hp).1)
   have hα₀' : (l₀.map (pairOrientationIn R)).prod = α₀ := by
-    simp only [l₀, List.map_append, List.prod_append, hPη, mul_one, List.map_flatten,
-      List.prod_flatten, List.map_map]
-    rfl
+    simpa only [l₀, α₀, List.map_map, Function.comp_def] using
+      (pairOrientationIn_cycles (R := R) (cs.map (·.rotate 1)) P
+        (fun p hp => (hP p hp).1))
   have hrot := value_rotate_cycles F hswap cs [] (matchingPairWord P) hev (by simpa using hc)
   simp only [List.nil_append] at hrot
   have hrel : α₀ * matchingSignOf F D₀ = (-1) ^ cs.length * (αD * matchingSignOf F D) := by

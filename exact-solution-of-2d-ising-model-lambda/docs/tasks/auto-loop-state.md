@@ -5,11 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-25（主経路）、交互閉路と共通の昇順対の向き積を必要十分版で独立に示した。** 共通の対の寄与が一であることを補題へ切り出し、二つの向き積の計算に使った。先頭行の列挙と符号は未了である。
 - **2026-11-25（並列・八十一回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 14 行を直した（行は未了）。** 名前順で `ContactSplitPairDescent` から `EdgeDistinctSmoothingCrossingParity` までの 13 ファイルの導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外し、`EdgeRepresentativeDisplacement` は導出の補題が無いので import を外すだけにした。import を外して Mathlib の定義や戦術が届かなくなった具体版 3 ファイル（`CrossingFreeSignCounterexample`・`ContactSplitTurningUpdate`・`DirectionUnitVector`）には、必要十分版が使っていた Mathlib の import を直接足した。分離の台帳は 133→119 行。
 - **2026-11-25（主経路）、交互閉路の端点列の連結・平坦化と巡回移動を必要十分版で証明した。** 具体版の補題三件と偶数長保存への参照を外した。定理の型には具体版の完全マッチングが残るため、分離の例外件数は不変である。
 - **2026-11-25（並列・八十回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 14 行を直した（行は未了）。** 閉歩道の通過 `ClosedWalkPasses` の導出 `closedWalkSuccessor_from_necSuf` を使う 8 ファイル（`SplitMutualCrossingNumber`・`VertexwiseCrossingNumber`・`SmoothedSuccessorMap`・`SmoothedCyclicTotalTurning`・`SmoothedVertexwiseCrossingNumber`・`VertexAxisStraightVisitCount`・`SmoothedCrossingNumber`・`SmoothingStraightVisitCount`）と、`ClosedWalkCrossingNumber`・`CyclicTotalTurning`、それらの導出を使う `SmoothingSplitCrossingPartition`・`SmoothingCyclicTurningInvarianceWalk`・`SmoothingSplitMutualCrossing` の導出の補題を同名の `*FromNecSuf.lean` へ移し、具体版から `NecSuf` の import を外した。既存の導出のファイル `VertexSimpleBoundaryNonloopPropagationFromNecSuf`・`WalkBoundaryVertexTurnSumFromNecSuf` は新しい導出のファイルを import する。分離の台帳は 147→133 行。
 - **2026-11-25（主経路）、交互閉路の異なる成分の点列が交わらないことを必要十分版の成分最小元補題で示した。** 交互閉路の符号の定理はなお具体版の完全マッチングを型に使うため、分離の例外件数は不変である。先頭行は未了。
-- **2026-11-25（並列・七十九回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち、名前順の先頭 14 行を直した（行は未了）。** `AdjacentCellCornersConnected`・`CellBoundaryEvenEdgeBijection`・`CellBoundaryEvenEdgeCount`・`CellCornerConnected`・`CellGraphEvenEdgeBijection`・`CellGridIncidentParity`・`CellVertexGraph`・`ClosedWalkIncidenceParity`・`ClosedWalkRotationNumber`・`ClosedWalkRotationNumberSign`・`ClosedWalkRotationPhase`・`ConnectedCellCorners`・`ContactPairCount` の導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外し、`Basic` は導出の補題が既に導出のファイルに在ったので import を外すだけにした。`ConnectedCellCorners` の導出を使う `CellVertexGraphConnected` の導出も導出のファイルへ移した。導出が使っていた private の補助補題 8 件は公開にした。分離の台帳は 161→147 行。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -36,7 +36,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Kac--Ward 行列の反対称化 | 【分離】必要十分版の交互閉路の列挙と符号を独立させる | 着手（被覆・閉路長の偶数性・活動点の二歩の正周期・符号の隣接二点列・基準対の巡回点列・成分最小元の自己一致と第一色・異なる成分の非交叉・端点列の連結と巡回移動は済） | 残る対の向き直しと列挙・符号の論法を必要十分版の定義で示し、対応する concrete import を外す。依存: 被覆の接続。 |
+| Kac--Ward 行列の反対称化 | 【分離】必要十分版の交互閉路の列挙と符号を独立させる | 着手（被覆・閉路長の偶数性・活動点の二歩の正周期・符号の隣接二点列・基準対の巡回点列・成分最小元の自己一致と第一色・異なる成分の非交叉・端点列の連結と巡回移動・共通の昇順対の向き積は済） | 残る対の向き直しと列挙・符号の論法を必要十分版の定義で示し、対応する concrete import を外す。依存: 被覆の接続。 |
 | Kac--Ward 行列の反対称化 | 【分離】必要十分版のマッチング対の定義を独立させる | 未着手 | `matchingPair*` を使う必要十分版を、一つの対の構成とその性質ごとに示す。依存: 完全マッチングと対合の行。 |
 | Kac--Ward 行列の反対称化 | 【分離】必要十分版の有限置換の反復と軌道を独立させる | 未着手 | `finitePermutation*`・`finiteMapIterate` を使う必要十分版を、反復と軌道の論法ごとに示す。 |
 | Kac--Ward 行列の反対称化 | 【分離】必要十分版の隣接二点列の残りを独立させる | 着手（閉路の隣接二点列の読みを独立させた） | `cycle_pairs_walk_necSuf` は `pairChunks` で示した。ほかの `consecutivePairs` の使用を、列の論法ごとに置き換える。 |
@@ -76,22 +76,22 @@
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 
 ## レビュー記録
+- 2026-11-25（主経路）: 前回の端点列の連結・平坦化と巡回移動を、偶数長の二点区切りと巡回置換に照合した。修正は無かった。
 - 2026-11-25（並列・八十一回目）: 前回の 14 ファイルの導出の移動を含む main の上で `lake build` が通ることを、今回の直しの検証と合わせて確かめた。修正は無かった。
 - 2026-11-25（主経路）: 前回の異なる成分の点列の非交叉を、成分の始点変更と最小元の自己一致に照合した。修正は無かった。
 - 2026-11-25（並列・八十回目）: 前回の 13 ファイルの導出の移動を含む main の上で `lake build` を回し、今回触ったモジュール以外に失敗が無いことを確かめた。修正は無かった。
 - 2026-11-25（主経路）: 前回の成分最小元の自己一致と第一色への所属を、必要十分版の成分の始点変更と二歩軌道の自己所属に照合した。修正は無かった。
-- 2026-11-25（並列・七十九回目）: 前回の活動点と交互二歩の 7 行の直しを含む main の上で `lake build` が通ることを、今回の直しの検証と合わせて確かめた。修正は無かった。
 
 ## 式変形の書き方の統一
+- 2026-11-25（主経路）: 「実対数は整数冪を整数倍へ移す」の式鎖で、行末根拠の句点を読点へ替えた。式と根拠は変えていない。
 - 2026-11-25（主経路）: 「有理係数の対数順序群の実現写像は順序を保つ」の式鎖で、行末根拠の句点を読点に替えた。式と根拠は変えていない。
 - 2026-11-25（主経路）: 「半格子ずれた四つのモード和は同じ積分へ収束する」の式鎖で、行末根拠の句点を読点に替えた。式と根拠は変えていない。
 - 2026-11-25（主経路）: 「実対数は乗法を加法へ移す」の式鎖で、行末根拠の句点を除いた。式と根拠は変えていない。
 - 2026-11-25（主経路）: 「有理対数順序群の実現は有理数倍を保つ」の式鎖で、台を広げる根拠の句点を読点に替えた。式と根拠は変えていない。
-- 2026-11-25（主経路）: 「格子頂点に接する四辺の通過回数の総和は頂点の通過数の二倍である」の式鎖で、行末根拠の句点を読点に替えた。式と根拠は変えていない。
 
 ## 前進の記録
+- 2026-11-25（主経路）: 先頭の交互閉路の行を共通の昇順対の向き積の論法で割り、必要十分版の補題として独立に示した。列挙と符号の論法は未了である。
 - 2026-11-25（並列・八十一回目）: 【分離】の導出を移す行の 14 行を直した（残り 51 行）。具体版のファイルが `NecSuf` の import から Mathlib を間接に受け取っていた場合は、import を外すと数や `abel` が使えなくなるので、必要十分版と同じ Mathlib の import を具体版へ直接足す。
 - 2026-11-25（主経路）: 先頭の交互閉路の行を端点列の連結・平坦化と巡回移動の論法で割り、必要十分版自身の補題で示した。残る対の向き直しと列挙・符号は未了である。
 - 2026-11-25（並列・八十回目）: 【分離】の導出を移す行の 14 行を直した（残り 65 行）。前回の記録どおり、`ClosedWalkPasses` の導出を使う 8 ファイルと、`ClosedWalkCrossingNumber` の導出を使う `SmoothingSplitCrossingPartition` を同じ回に移した。名前順で次の `ContactSplitPairDescent` から `DisjointWalkMutualCrossing` までの 12 ファイルは、導出の補題を他のファイルが使わない。
 - 2026-11-25（主経路）: 交互閉路の異なる成分の点列の非交叉を、必要十分版の成分最小元の始点変更から示した。定理の型に残る具体版の完全マッチングは未解消である。
-- 2026-11-25（並列・七十九回目）: 【分離】の導出を移す行の 14 行を直した（残り 79 行）。`ClosedWalkPasses` の導出 `closedWalkSuccessor_from_necSuf` は八つの具体版のファイルの導出が使い、`ClosedWalkCrossingNumber` の導出は `SmoothingSplitCrossingPartition` の導出が使うので、使う側と同じ回に移す必要があり、今回は外した。次の回は、これらを使う側のファイルとまとめて移す。
