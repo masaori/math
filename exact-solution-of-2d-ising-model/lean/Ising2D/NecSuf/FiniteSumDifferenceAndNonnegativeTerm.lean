@@ -85,7 +85,12 @@ theorem finite_sum_sub_succ' [SubtractionCommMonoid R] (m : ℕ) (a b : Fin (m +
 theorem finite_sum_sub_fin' [SubtractionCommMonoid R] (m : ℕ) (a b : Fin m → R) :
     ∑ j, (a j - b j) = (∑ j, a j) - ∑ j, b j := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, Fin.sum_univ_zero, sub_zero]   -- 空の和（人手には無い）
+  | zero =>                                                                    -- 具体版の `m = 0` の 3 段と同じ並び
+    calc ∑ j : Fin 0, (a j - b j)
+        = 0 := Fin.sum_univ_zero _                                            -- 空の和は 0
+      _ = 0 - 0 := (sub_zero 0).symm                                          -- `x - 0 = x`（`x → 0`）を右辺から左辺へ
+      _ = (∑ j : Fin 0, a j) - ∑ j : Fin 0, b j := by
+          rw [Fin.sum_univ_zero a, Fin.sum_univ_zero b]                       -- 空の和は 0 を右辺から左辺へ 2 か所
   | succ m => exact finite_sum_sub_succ' m a b
 
 /-- **`Σ_{j=1}^{m+1}(-x_j) = -Σ x_j`**（具体版 `finite_sum_of_negated_real_numbers_succ`）。`m` についての帰納法。 -/
@@ -112,7 +117,11 @@ theorem finite_sum_neg_fin' [AddCommMonoid R] [Neg R] (hneg : ∀ a b : R, -(a +
     (h0 : -(0 : R) = 0) (m : ℕ) (x : Fin m → R) :
     ∑ j, -(x j) = -(∑ j, x j) := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, h0]                     -- 空の和（人手には無い。仮定 `h0`）
+  | zero =>                                                                    -- 具体版の `m = 0` の 3 段と同じ並び
+    calc ∑ j : Fin 0, -(x j)
+        = 0 := Fin.sum_univ_zero _                                            -- 空の和は 0
+      _ = -0 := h0.symm                                                       -- `-0 = 0`（仮定 `h0`）を右辺から左辺へ
+      _ = -(∑ j : Fin 0, x j) := by rw [Fin.sum_univ_zero x]                  -- 空の和は 0 を右辺から左辺へ
   | succ m => exact finite_sum_neg_succ' hneg m x
 
 /-- **`Σ_{j=1}^{m+1} c x_j = c Σ x_j`**（具体版 `finite_sum_of_real_scalar_multiples_succ`）。`m` についての帰納法。
@@ -139,7 +148,11 @@ theorem finite_sum_mul_left_succ' [AddCommMonoid R] [Mul R] [LeftDistribClass R]
 theorem finite_sum_mul_left_fin' [AddCommMonoid R] [Mul R] [LeftDistribClass R] (c : R) (h0 : c * 0 = 0)
     (m : ℕ) (x : Fin m → R) : ∑ j, c * x j = c * ∑ j, x j := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, h0]
+  | zero =>                                                                    -- 具体版の `m = 0` の 3 段と同じ並び
+    calc ∑ j : Fin 0, c * x j
+        = 0 := Fin.sum_univ_zero _                                            -- 空の和は 0（具体版の空の和の式）
+      _ = c * 0 := h0.symm                                                    -- `c * 0 = 0`（仮定 `h0`。具体版の `real_times_zero_is_zero`）を右辺から左辺へ
+      _ = c * ∑ j : Fin 0, x j := by rw [Fin.sum_univ_zero x]                 -- 空の和は 0 を右辺から左辺へ
   | succ m => exact finite_sum_mul_left_succ' m c x
 
 /-- **非負の項の有限和は各項以上**（具体版 `finite_sum_of_nonnegative_reals_ge_term_succ`）。`m` についての帰納法。 -/

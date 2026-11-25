@@ -1,5 +1,5 @@
 # 対象ラベル: finite_sum_of_real_sums
-# Σ_{j=1}^{m} (a_j + b_j) = (Σ a_j) + (Σ b_j) の帰納法の各行（m = 1 の 2 行、m → m+1 の 9 行）を
+# Σ_{j=1}^{m} (a_j + b_j) = (Σ a_j) + (Σ b_j) の証明の各行（m = 0 の鎖、m = 1 の 2 行、m → m+1 の 9 行）を
 # m = 1,…,8 で確かめる。有限和は def_finite_sum_of_real_numbers のとおり左から順に足して組む。
 # 帰属: QQ 上の多項式環（a_j, b_j は不定元）。不定元で成り立つ等号は、任意の実数を代入しても成り立つ。
 N = 9
@@ -9,12 +9,25 @@ b = P.gens()[N:]
 
 
 def fsum(rs):
-    """def_finite_sum_of_real_numbers: Σ_{j=1}^{1} r_j := r_1、Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}。"""
+    """def_finite_sum_of_real_numbers: Σ_{j=1}^{0} r_j := 0、Σ_{j=1}^{1} r_j := r_1、Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}。"""
+    if len(rs) == 0:
+        return P(0)
     s = rs[0]
     for r in rs[1:]:
         s = s + r
     return s
 
+
+# m = 0（項の無い族）
+lines0 = [
+    fsum([]),                                                     # Σ^{0}(a_j + b_j)
+    P(0),                                                         # def_finite_sum_of_real_numbers の Σ^{0} := 0（r_j → a_j + b_j）
+    P(0) + P(0),                                                  # 0 は ℝ の加法の単位元 y + 0 = y（y → 0）（set_and_algebra_notation）を右辺から左辺へ
+    fsum([]) + fsum([]),                                          # def_finite_sum_of_real_numbers の Σ^{0} := 0（r_j → a_j; r_j → b_j）を右辺から左辺へ 2 か所同時適用
+]
+for t in range(len(lines0) - 1):
+    assert lines0[t] == lines0[t + 1], (0, t)
+print("m = 0 の 3 行を確かめた")
 
 # m = 1
 lines1 = [

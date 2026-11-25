@@ -17,7 +17,8 @@
 
 ## 人手証明との対応
 
-* 人手の `m ∈ ℤ_{≥1}` 項の和は、Lean では `Fin (m + 1)` の上の和（`m` についての帰納法）で書く。人手の `m` が Lean の `m + 1` に当たる。
+* 人手の `m ∈ ℤ_{≥0}` 項の和は、Lean では `Fin m` の上の和で書く。人手の `m ≥ 1` の帰納法は `_succ` の `Fin (m + 1)` の上の和（`m` についての帰納法）で、人手の `m` が Lean の `m + 1` に当たる。
+  人手の `m = 0` の空の和の式は `finset_sum_fin_real_eq_finite_sum_of_real_numbers` の一つ目の式で出す。`m ≥ 1` の
   `def_finite_sum_of_real_numbers` の 2 つの式は `Fin.sum_univ_one`・`Fin.sum_univ_castSucc` で出す
   （mathlib の `Finset.sum` を人手の左から足す和の定義へ読み替える段）。人手の添字 `j ∈ {1, …, m+1}` は Lean の `Fin (m + 1)` の `j - 1`、
   `j = m + 1` は `Fin.last`、`j ≤ m` は `Fin.castSucc` である。
@@ -25,17 +26,17 @@
   加法の結合律・結合律・交換律・結合律・結合律・`real_negation_of_sum_is_sum_of_negations` を右辺から左辺へ・`def_real_difference` を右辺から左辺へ）は
   `finite_sum_of_real_differences_step`（1 行 1 段）。
   人手の `α, β` は `let` で置き、帰納法の仮定の段と 8 行の段の右辺を `α, β` で書く。人手の「`α, β` の置き方」の行は `α, β` を和へ戻す `rfl` の 1 段で、
-  その次の `def_finite_sum_of_real_numbers` の 2 か所同時適用とは別の段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_real_differences`）。
+  その次の `def_finite_sum_of_real_numbers` の 2 か所同時適用とは別の段である。`m = 0`（空の和）は人手の `m = 0` の 3 行と 1 対 1 の `calc` で、空の和の式は `finset_sum_fin_real_eq_finite_sum_of_real_numbers` の一つ目の式から引く（`finite_sum_of_real_differences`）。
 * `finite_sum_of_real_sums_succ` の `m = 1` の 2 行と帰納法の段は人手の行と対応する。人手の結合律・交換律の 5 行は
   `finite_sum_of_real_sums_step`（1 行 1 段）。`α, β` を `let` で置くことと、「`α, β` の置き方」の行を `rfl` の 1 段にすることは、`finite_sum_of_real_differences_succ` と同じである。
-  `m = 0`（空の和）は人手には無い（`finite_sum_of_real_sums`）。有限型の添字の和には `finite_sum_of_real_sums_fintype` を置く。
+  `m = 0`（空の和）は `finite_sum_of_real_differences` と同じく人手の 3 行と 1 対 1 の `calc` である（`finite_sum_of_real_sums`）。有限型の添字の和には `finite_sum_of_real_sums_fintype` を置く。
 * `finite_double_sum_of_real_numbers_interchange_succ` は人手の `n_1, n_2 ∈ ℤ_{≥1}` を Lean の `p + 1`・`q + 1`、`c_{k,l}` を `a k l` で書き、`n_1 = 1` の 2 行と
   帰納法の段の 4 行が人手の行と 1 対 1 の `calc` である。人手の「各 `l` の項へ同時適用」は `Finset.sum_congr` で各項に当てる段である。
   Lean の `p = 0` または `q = 0`（空の和）は人手には無い（`finite_double_sum_of_real_numbers_interchange`）。有限型の添字の二重の和には `_fintype` を置く。
 * `finite_sum_of_negated_real_numbers_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
-  人手の 1 行 `real_negation_of_sum_is_sum_of_negations`（文字を `p, q` に替える）を右辺から左辺へ当てる行は、同じ名前の具体版の定理を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_negated_real_numbers`。その段の `-0 = 0` は mathlib の `neg_zero` ではなく `real_negation_of_zero_is_zero`）。
+  人手の 1 行 `real_negation_of_sum_is_sum_of_negations`（文字を `p, q` に替える）を右辺から左辺へ当てる行は、同じ名前の具体版の定理を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手の 3 行と 1 対 1 の `calc` である（`finite_sum_of_negated_real_numbers`。その段の `-0 = 0` は mathlib の `neg_zero` ではなく `real_negation_of_zero_is_zero`）。
 * `finite_sum_of_real_scalar_multiples_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
-  人手の 1 行「ℝ の分配律 `ca + cb = c(a + b)`」は mathlib の `mul_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_real_scalar_multiples`）。
+  人手の 1 行「ℝ の分配律 `ca + cb = c(a + b)`」は mathlib の `mul_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手の 3 行と 1 対 1 の `calc` で、`c · 0 = 0` は `real_times_zero_is_zero` である（`finite_sum_of_real_scalar_multiples`）。
   有限型の添字の和には、`finite_sum_of_nonnegative_reals_ge_term_fintype` と同じく番号を付けて当てる `finite_sum_of_real_scalar_multiples_fintype` を置く。
 * `finite_sum_of_nonnegative_reals_ge_term_succ` は人手と同じく、`k ≤ m`（Lean の `Fin.castSucc k'`）と `k = m + 1`（`Fin.last`）に分け、
   それぞれ人手の 4 行と 1 対 1 の `calc` にした。`k = m + 1` の前置き `Σ_{j=1}^{m} a_j ≥ a_1 ≥ 0` は帰納法の仮定を `k → 1`（Lean の `0`）で使う。
@@ -43,6 +44,7 @@
 * `finite_sum_of_real_numbers_triangle_inequality_succ` と `finite_sum_of_real_numbers_is_monotone_succ` は、`m = 1` の 2 行・3 行と帰納法の段の 4 行が
   人手の行と 1 対 1 の `calc` である（三角不等式の `m = 1` は人手の等号の 2 行に、`≤` へ移す `le_rfl` を 1 段足した）。
   帰納法の段の三角不等式は `real_abs_triangle_inequality`（`ClaimRealAbsoluteValueBoundsTriangleAndProduct.lean`）を引く。
+  `m = 0`（空の和）は人手の 3 行・2 行と 1 対 1 の `calc` に、`≤` へ移す `le_rfl` を 1 段足した（`|0| = 0` は `def_real_absolute_value` の `q ≥ 0` の場合で、`abs_of_nonneg`）。
   `_fintype` 版は `finite_sum_of_nonnegative_reals_ge_term_fintype` と同じく、有限型の添字に番号を付けて当てる。
 * `finite_sum_of_real_numbers_moves_one_term_to_end` は人手の `m ≥ 1` を Lean の `n + 1` で書き、`δ^{m}_{k}` は `skipIndex k`
   （`DefinitionIndexSkippingMap.lean`）である。人手と同じく `m = 1` を `k = 1`（Lean の `castSucc 0`）・`k = 2`（`last 1`）に、
@@ -61,6 +63,9 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealAbsoluteValueBoundsTriangleAndProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionIndexSkippingMap
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusZeroIsSelf
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionFiniteSumOverIndexSet
 
 namespace Ising2D
 
@@ -109,11 +114,17 @@ theorem finite_sum_of_real_differences_succ (m : ℕ) (a b : Fin (m + 1) → ℝ
       _ = (∑ j, a j) - ∑ j, b j := by
           rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- `def_finite_sum_of_real_numbers`（`r_j → a_j`; `r_j → b_j`）を右辺から左辺へ 2 か所同時適用
 
-/-- **`finite_sum_of_real_differences`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
+/-- **`finite_sum_of_real_differences`**（`m ∈ ℤ_{≥0}`）: `m = 0` の段は人手の `m = 0` の 3 行、`m ≥ 1` は `finite_sum_of_real_differences_succ`。 -/
 theorem finite_sum_of_real_differences (m : ℕ) (a b : Fin m → ℝ) :
     ∑ j, (a j - b j) = (∑ j, a j) - ∑ j, b j := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, Fin.sum_univ_zero, sub_zero]
+  | zero =>
+    calc ∑ j : Fin 0, (a j - b j)
+        = 0 := finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 _                    -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → a_j - b_j`）
+      _ = 0 - 0 := (real_minus_zero_is_self 0).symm                          -- `real_minus_zero_is_self`（`a → 0`）を右辺から左辺へ
+      _ = (∑ j : Fin 0, a j) - ∑ j : Fin 0, b j := by
+          rw [finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 a, finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 b]
+                                                                              -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → a_j`; `r_j → b_j`）を右辺から左辺へ 2 か所同時適用
   | succ m => exact finite_sum_of_real_differences_succ m a b
 
 /-- **`finite_sum_of_real_sums`** の帰納法の段の 5 行: `(α + β) + (x + y) = (α + x) + (β + y)`（人手の `a_{m+1}, b_{m+1}` が `x, y`）。ℝ の加法の結合律と交換律を 1 段ずつ。 -/
@@ -155,11 +166,17 @@ theorem finite_sum_of_real_sums_succ (m : ℕ) (a b : Fin (m + 1) → ℝ) :
       _ = (∑ j, a j) + ∑ j, b j := by
           rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- `def_finite_sum_of_real_numbers`（`r_j → a_j`; `r_j → b_j`）を右辺から左辺へ 2 か所同時適用
 
-/-- **`finite_sum_of_real_sums`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
+/-- **`finite_sum_of_real_sums`**（`m ∈ ℤ_{≥0}`）: `m = 0` の段は人手の `m = 0` の 3 行、`m ≥ 1` は `finite_sum_of_real_sums_succ`。 -/
 theorem finite_sum_of_real_sums (m : ℕ) (a b : Fin m → ℝ) :
     ∑ j, (a j + b j) = (∑ j, a j) + ∑ j, b j := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, Fin.sum_univ_zero, add_zero]
+  | zero =>
+    calc ∑ j : Fin 0, (a j + b j)
+        = 0 := finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 _                    -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → a_j + b_j`）
+      _ = 0 + 0 := (add_zero 0).symm                                          -- `0` は ℝ の加法の単位元 `y + 0 = y`（`y → 0`）（`set_and_algebra_notation`）を右辺から左辺へ
+      _ = (∑ j : Fin 0, a j) + ∑ j : Fin 0, b j := by
+          rw [finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 a, finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 b]
+                                                                              -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → a_j`; `r_j → b_j`）を右辺から左辺へ 2 か所同時適用
   | succ m => exact finite_sum_of_real_sums_succ m a b
 
 /-- **`finite_sum_of_real_sums`**（添字が有限型 `κ` の和）。
@@ -245,11 +262,16 @@ theorem finite_sum_of_negated_real_numbers_succ (m : ℕ) (x : Fin (m + 1) → �
           (real_negation_of_sum_is_sum_of_negations _ _).symm                 -- `real_negation_of_sum_is_sum_of_negations` を右辺から左辺へ
       _ = -(∑ j, x j) := by rw [Fin.sum_univ_castSucc x]                      -- `def_finite_sum_of_real_numbers` を右辺から左辺へ
 
-/-- **`finite_sum_of_negated_real_numbers`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
+/-- **`finite_sum_of_negated_real_numbers`**（`m ∈ ℤ_{≥0}`）: `m = 0` の段は人手の `m = 0` の 3 行、`m ≥ 1` は `finite_sum_of_negated_real_numbers_succ`。 -/
 theorem finite_sum_of_negated_real_numbers (m : ℕ) (x : Fin m → ℝ) :
     ∑ j, -(x j) = -(∑ j, x j) := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, real_negation_of_zero_is_zero]
+  | zero =>
+    calc ∑ j : Fin 0, -(x j)
+        = 0 := finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 _                    -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → -x_j`）
+      _ = -0 := real_negation_of_zero_is_zero.symm                            -- `real_negation_of_zero_is_zero` を右辺から左辺へ
+      _ = -(∑ j : Fin 0, x j) := by rw [finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 x]
+                                                                              -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → x_j`）を右辺から左辺へ
   | succ m => exact finite_sum_of_negated_real_numbers_succ m x
 
 /-- **`finite_sum_of_real_scalar_multiples`**（`m + 1` 項）: `Σ_{j=1}^{m+1} c x_j = c Σ_{j=1}^{m+1} x_j`。`m` についての帰納法。 -/
@@ -270,11 +292,16 @@ theorem finite_sum_of_real_scalar_multiples_succ (m : ℕ) (c : ℝ) (x : Fin (m
           (mul_add _ _ _).symm                                                -- ℝ の分配律 `ca + cb = c(a + b)`
       _ = c * ∑ j, x j := by rw [Fin.sum_univ_castSucc x]                     -- `def_finite_sum_of_real_numbers` を右辺から左辺へ
 
-/-- **`finite_sum_of_real_scalar_multiples`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
+/-- **`finite_sum_of_real_scalar_multiples`**（`m ∈ ℤ_{≥0}`）: `m = 0` の段は人手の `m = 0` の 3 行、`m ≥ 1` は `finite_sum_of_real_scalar_multiples_succ`。 -/
 theorem finite_sum_of_real_scalar_multiples (m : ℕ) (c : ℝ) (x : Fin m → ℝ) :
     ∑ j, c * x j = c * ∑ j, x j := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, mul_zero]
+  | zero =>
+    calc ∑ j : Fin 0, c * x j
+        = 0 := finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 _                    -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → c x_j`）
+      _ = c * 0 := (real_times_zero_is_zero c).symm                           -- `real_times_zero_is_zero`（`x → c`）を右辺から左辺へ
+      _ = c * ∑ j : Fin 0, x j := by rw [finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 x]
+                                                                              -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → x_j`）を右辺から左辺へ
   | succ m => exact finite_sum_of_real_scalar_multiples_succ m c x
 
 /-- **`finite_sum_of_real_scalar_multiples`**（添字が有限型 `κ` の和）。
@@ -360,11 +387,17 @@ theorem finite_sum_of_real_numbers_triangle_inequality_succ (m : ℕ) (a : Fin (
           add_le_add (ih (fun j => a j.castSucc)) le_rfl                      -- 帰納法の仮定の両辺に `|a_{m+1}|` を足す
       _ = ∑ j, |a j| := (Fin.sum_univ_castSucc (fun j => |a j|)).symm         -- `def_finite_sum_of_real_numbers`（`r_j → |a_j|`）
 
-/-- **`finite_sum_of_real_numbers_triangle_inequality`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
+/-- **`finite_sum_of_real_numbers_triangle_inequality`**（`m ∈ ℤ_{≥0}`）: `m = 0` の段は人手の `m = 0` の 3 行、`m ≥ 1` は `finite_sum_of_real_numbers_triangle_inequality_succ`。 -/
 theorem finite_sum_of_real_numbers_triangle_inequality (m : ℕ) (a : Fin m → ℝ) :
     |∑ j, a j| ≤ ∑ j, |a j| := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, abs_zero]
+  | zero =>
+    calc |∑ j : Fin 0, a j|
+        = |(0 : ℝ)| := by rw [finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 a]   -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → a_j`）
+      _ = 0 := abs_of_nonneg le_rfl                                           -- `def_real_absolute_value`（`q → 0`）の `q ≥ 0` の場合
+      _ = ∑ j : Fin 0, |a j| := (finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 (fun j => |a j|)).symm
+                                                                              -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → |a_j|`）を右辺から左辺へ
+      _ ≤ ∑ j : Fin 0, |a j| := le_rfl                                        -- 人手の「だから成り立つ」（等号の鎖を `≤` へ移す。`m = 1` の段と同じ扱い）
   | succ m => exact finite_sum_of_real_numbers_triangle_inequality_succ m a
 
 /-- **`finite_sum_of_real_numbers_triangle_inequality`**（添字が有限型 `κ` の和）。
@@ -398,11 +431,16 @@ theorem finite_sum_of_real_numbers_is_monotone_succ (m : ℕ) (a b : Fin (m + 1)
           add_le_add le_rfl (hab _)                                           -- `a_{m+1} ≤ b_{m+1}` の両辺に `Σ_{j=1}^{m} b_j` を足す
       _ = ∑ j, b j := (Fin.sum_univ_castSucc b).symm                          -- `def_finite_sum_of_real_numbers`
 
-/-- **`finite_sum_of_real_numbers_is_monotone`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
+/-- **`finite_sum_of_real_numbers_is_monotone`**（`m ∈ ℤ_{≥0}`）: `m = 0` の段は人手の `m = 0` の 2 行、`m ≥ 1` は `finite_sum_of_real_numbers_is_monotone_succ`。 -/
 theorem finite_sum_of_real_numbers_is_monotone (m : ℕ) (a b : Fin m → ℝ)
     (hab : ∀ j, a j ≤ b j) : ∑ j, a j ≤ ∑ j, b j := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero]
+  | zero =>
+    calc ∑ j : Fin 0, a j
+        = 0 := finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 a                    -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → a_j`）
+      _ = ∑ j : Fin 0, b j := (finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 b).symm
+                                                                              -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → b_j`）を右辺から左辺へ
+      _ ≤ ∑ j : Fin 0, b j := le_rfl                                          -- 人手の「だから成り立つ」（等号の鎖を `≤` へ移す）
   | succ m => exact finite_sum_of_real_numbers_is_monotone_succ m a b hab
 
 /-- **`finite_sum_of_real_numbers_is_monotone`**（添字が有限型 `κ` の和）。番号の付け方は

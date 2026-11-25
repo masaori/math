@@ -1,5 +1,5 @@
 # 対象ラベル: finite_sum_of_negated_real_numbers
-# Σ_{j=1}^{m} (−x_j) = −Σ_{j=1}^{m} x_j の帰納法の各行（m = 1 の 2 行、m → m+1 の 4 行）を
+# Σ_{j=1}^{m} (−x_j) = −Σ_{j=1}^{m} x_j の証明の各行（m = 0 の鎖、m = 1 の 2 行、m → m+1 の 4 行）を
 # m = 1,…,8 で確かめる。有限和は def_finite_sum_of_real_numbers のとおり左から順に足して組む。
 # 帰属: QQ 上の多項式環（x_j は不定元）。不定元で成り立つ等号は、任意の実数を代入しても成り立つ。
 N = 9
@@ -8,12 +8,20 @@ x = P.gens()
 
 
 def fsum(rs):
-    """def_finite_sum_of_real_numbers: Σ_{j=1}^{1} r_j := r_1、Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}。"""
+    """def_finite_sum_of_real_numbers: Σ_{j=1}^{0} r_j := 0、Σ_{j=1}^{1} r_j := r_1、Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}。"""
+    if len(rs) == 0:
+        return P(0)
     s = rs[0]
     for r in rs[1:]:
         s = s + r
     return s
 
+
+# m = 0（項の無い族）: Σ^{0}(−x_j) = 0（Σ^{0} := 0）= −0（real_negation_of_zero_is_zero を右辺から左辺へ）= −Σ^{0} x_j（Σ^{0} := 0 を右辺から左辺へ）
+lines0 = [fsum([]), P(0), -P(0), -fsum([])]
+for t in range(len(lines0) - 1):
+    assert lines0[t] == lines0[t + 1], (0, t)
+print("m = 0 の 3 行を確かめた")
 
 # m = 1
 lines1 = [fsum([-x[0]]), -x[0], -fsum([x[0]])]

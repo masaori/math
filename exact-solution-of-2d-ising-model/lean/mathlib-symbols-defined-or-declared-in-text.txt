@@ -115,8 +115,8 @@ Fin.val	def_index_set_from_one_to_n
 # Finset.mem_univ、{1,…,m} との対応は finIndexToZZ_bijective_onto_index_set で言える）。
 # 記号の鍵は和を取る Finset も Fin n の n も区別しないので、この三行の許可は補題の範囲の外の使い方も台帳から消した。それを使う具体版の主張は、
 # まだ本文と一対一でない。(a) は本文の主張の範囲の外、(b)(c) は本文の定義の外である: (a) Fin 0 の上の空の和を
-# 場合に含む主張（本文の有限和は 2026-11-25 に空の和まで定めたが、complex_conjugate_star_finite_sum・finite_sum_of_real_sums・
-# finite_sum_of_real_numbers_triangle_inequality などの本文の主張はまだ m ≥ 1 しか述べない）、(b) Fin の部分集合（univ.filter …）の上の和（openChainEnergy など）、
+# 場合に含む主張（本文の有限和は 2026-11-25 に空の和まで定め、実数の差・和・符号反転・共通の因子・三角不等式・項ごとの大小の 6 主張は m ≥ 0 へ広げたが、
+# complex_conjugate_star_finite_sum・finite_sum_of_complex_sums・finite_double_sum_of_real_numbers_interchange などの本文の主張はまだ m ≥ 1 しか述べない）、(b) Fin の部分集合（univ.filter …）の上の和（openChainEnergy など）、
 # (c) 二値の集合 {0,1} を表す Fin 2 の上の和と Fin 2 の univ（sum_conf_succ_eq_sum_last_sum_init など）。消した行は、載せる前の main の先端 27bea56a1 の
 # 台帳から引ける。状態台帳の行「有限和と有限集合の記号」の三単位目が (a) を、四単位目が (b) を、行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が (c) を引き受ける。
 # 行列の有限和（def_finite_sum_of_matrices）は式に行列の和が現れるので、状態台帳の行「行列とその演算」で行列の和を載せた後に同じ形で載せる。

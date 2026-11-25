@@ -6,12 +6,13 @@
 
 - ファイル: `structured-latex/content/000_calculation_formulae_00_09.ts`
 - ブロック: `calc_formulae_claim_finite_sum_of_real_numbers_triangle_inequality`（|Σ_{j=1}^{m} a_j| ≤ Σ_{j=1}^{m} |a_j|）
-- 範囲: m = 1 の 2 行と、m → m+1 の 4 行と主張
+- 範囲: m = 0 の鎖（定数どうしの比較なので、確かめるのは各行の写し間違いだけである）、m = 1 の 2 行と、m → m+1 の 4 行と主張
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
+| `m = 0` の 3 行 | `check_proof_lines.sage` | 空の和 `Σ^{0} := 0`（`fsum([])` は 0）と `|0| = 0` の各行で、隣り合う行が等しい | **PASS** | 厳密等号 |
 | 範囲に書いた各行と主張 | `check_proof_lines.sage` | QQ の長さ 1〜9 の列 200 個（乱数の種 20261106）。和は左から足すで、各行の等号・不等号を厳密に | **PASS** | 成り立つ |
 
 ## 計算の帰属と範囲
@@ -26,3 +27,5 @@ bash sagemath/tools/run-all-checks.sh finite_sum_of_real_numbers_triangle_inequa
 ```
 
 実行ログは `logs/` に保存する。
+
+2026-11-25: 主張を `m ∈ ℤ_{≥0}` へ広げ、証明に足した `m = 0` の鎖の検査を足して再実行した（`fsum` は `def_finite_sum_of_real_numbers` の `Σ^{0} := 0` を返す）。

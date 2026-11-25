@@ -1,11 +1,19 @@
 # 対象ラベル: finite_sum_of_real_numbers_is_monotone
-# すべての j で a_j ≤ b_j なら Σ a_j ≤ Σ b_j の帰納法の各行（m = 1 の 3 行、m → m+1 の 4 行）を、有理数の列で確かめる。
+# すべての j で a_j ≤ b_j なら Σ a_j ≤ Σ b_j の証明の各行（m = 0 の鎖、m = 1 の 3 行、m → m+1 の 4 行）を、有理数の列で確かめる。
 # 帰属: QQ。浮動小数点は使わない。
 def fsum(rs):
+    """def_finite_sum_of_real_numbers: Σ_{j=1}^{0} r_j := 0、Σ_{j=1}^{1} r_j := r_1、Σ_{j=1}^{m+1} r_j := (Σ_{j=1}^{m} r_j) + r_{m+1}。"""
+    if len(rs) == 0:
+        return QQ(0)
     s = rs[0]
     for r in rs[1:]:
         s = s + r
     return s
+
+
+# m = 0（項の無い族）: Σ^{0} a_j = 0（Σ^{0} := 0）= Σ^{0} b_j（Σ^{0} := 0 を右辺から左辺へ）
+assert fsum([]) == QQ(0) and QQ(0) == fsum([])
+print("m = 0 の 2 行を確かめた")
 
 
 set_random_seed(20261106)

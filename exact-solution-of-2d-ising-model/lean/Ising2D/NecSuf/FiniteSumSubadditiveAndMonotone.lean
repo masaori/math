@@ -54,7 +54,11 @@ theorem finite_sum_subadditive_fin' {R S : Type*} [AddCommMonoid R] [AddCommMono
     [AddRightMono S] (f : R → S) (hf : ∀ a b, f (a + b) ≤ f a + f b) (h0 : f 0 ≤ 0) (m : ℕ) (a : Fin m → R) :
     f (∑ j, a j) ≤ ∑ j, f (a j) := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero]; exact h0
+  | zero =>                                                                    -- 具体版の `m = 0` の段と同じ並び
+    calc f (∑ j : Fin 0, a j)
+        = f 0 := by rw [Fin.sum_univ_zero]                                    -- 空の和は 0（具体版の空の和の式）
+      _ ≤ 0 := h0                                                             -- 仮定 `h0`（具体版の `|0| = 0` の段）
+      _ = ∑ j : Fin 0, f (a j) := (Fin.sum_univ_zero _).symm                  -- 空の和は 0 を右辺から左辺へ（`r_j → f(a_j)`）
   | succ m => exact finite_sum_subadditive_succ' f hf m a
 
 /-- **`finite_sum_of_real_numbers_is_monotone`** の必要十分版（`m + 1` 項）。`m` についての帰納法。 -/
@@ -78,7 +82,11 @@ theorem finite_sum_le_succ' {R : Type*} [AddCommMonoid R] [Preorder R] [IsOrdere
 theorem finite_sum_le_fin' {R : Type*} [AddCommMonoid R] [Preorder R] [IsOrderedAddMonoid R]
     (m : ℕ) (a b : Fin m → R) (hab : ∀ j, a j ≤ b j) : ∑ j, a j ≤ ∑ j, b j := by
   cases m with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero]
+  | zero =>                                                                    -- 具体版の `m = 0` の段と同じ並び
+    calc ∑ j : Fin 0, a j
+        = 0 := Fin.sum_univ_zero _                                            -- 空の和は 0（具体版の空の和の式）
+      _ = ∑ j : Fin 0, b j := (Fin.sum_univ_zero _).symm                      -- 空の和は 0 を右辺から左辺へ
+      _ ≤ ∑ j : Fin 0, b j := le_rfl                                          -- 等号の鎖を `≤` へ移す（具体版と同じ）
   | succ m => exact finite_sum_le_succ' m a b hab
 
 end Ising2D.NecSuf

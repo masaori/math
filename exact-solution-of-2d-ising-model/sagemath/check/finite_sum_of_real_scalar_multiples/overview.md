@@ -6,12 +6,13 @@
 
 - ファイル: `structured-latex/content/000_calculation_formulae_00_09.ts`
 - ブロック: `calc_formulae_claim_finite_sum_of_real_scalar_multiples`（実数の共通の因子は有限和の外へ出せる）
-- 範囲: 主張 `Σ_{j=1}^{m} c x_j = c Σ_{j=1}^{m} x_j` と、証明の帰納法の各行
+- 範囲: 主張 `Σ_{j=1}^{m} c x_j = c Σ_{j=1}^{m} x_j` と、証明の `m = 0` の鎖と帰納法の各行（`m = 0` の鎖は定数どうしの比較なので、確かめるのは各行の写し間違いだけである）
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
+| `m = 0` の 3 行 | `check_induction_chain.sage` | 空の和 `Σ^{0} := 0`（`fsum([])` は 0）と `c·0 = 0`（`c` は不定元）の各行で、隣り合う行が等しい | **PASS** | 厳密等号 |
 | `m = 1` の 2 行 | `check_induction_chain.sage` | `def_finite_sum_of_real_numbers` どおり左から足した和で、隣り合う行が等しい | **PASS** | 厳密等号 |
 | `m → m+1` の 4 行 | 同上 | `m = 1,…,8` で帰納法の仮定を確かめ、隣り合う行が等しい | **PASS** | 厳密等号（`m = 1` の 2 行と合わせて 34 段） |
 | 主張そのもの | 同上 | Sage の `sum`（独立な経路）と比べる。否定コントロールとして、最後の項 `x_{m+1}` に `c` を掛け忘れた右辺とは一致しないことも確かめる | **PASS** | `m = 2,…,9` で厳密等号、否定コントロール 8 件 |
@@ -31,3 +32,5 @@ bash sagemath/tools/run-all-checks.sh finite_sum_of_real_scalar_multiples
 ```
 
 実行ログは `sagemath/check/finite_sum_of_real_scalar_multiples/logs/` に保存する（2026-11-04）。
+
+2026-11-25: 主張を `m ∈ ℤ_{≥0}` へ広げ、証明に足した `m = 0` の鎖の検査を足して再実行した（`fsum` は `def_finite_sum_of_real_numbers` の `Σ^{0} := 0` を返す）。
