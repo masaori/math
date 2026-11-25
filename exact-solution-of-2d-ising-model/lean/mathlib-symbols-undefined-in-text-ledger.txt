@@ -3324,12 +3324,8 @@ Ising2D.checkBigLambda_empty_le_checkBigLambda	EmptyCollection.emptyCollection@F
 Ising2D.checkBigLambda_empty_le_checkBigLambda	Finset
 Ising2D.checkBigLambda_le_checkBigLambda_univ	Finset
 Ising2D.checkBigLambda_le_checkBigLambda_univ	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
-Ising2D.checkBigLambda_le_max	Finset
-Ising2D.checkBigLambda_le_max	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
 Ising2D.checkBigLambda_lt_checkBigLambda_univ	Finset
 Ising2D.checkBigLambda_lt_checkBigLambda_univ	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
-Ising2D.checkBigLambda_lt_max	Finset
-Ising2D.checkBigLambda_lt_max	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
 Ising2D.checkBigLambda_lt_max_of_gammaFn	Finset
 Ising2D.checkBigLambda_lt_max_of_gammaFn	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
 Ising2D.checkBigLambda_lt_max_of_gammaFn	Membership.mem@Int,Finset@SetLike.instMembership
@@ -3362,8 +3358,6 @@ Ising2D.checkBigLambda_min_eq	Finset.univ@Fin@Fin.fintype
 Ising2D.checkBigLambda_min_eq	HPow.hPow@Real,Real,Real@Real.instPow
 Ising2D.checkBigLambda_min_eq	Nat.cast@Real@Real.instNatCast
 Ising2D.checkBigLambda_min_eq	Real.exp
-Ising2D.checkBigLambda_min_le	EmptyCollection.emptyCollection@Finset@Finset.instEmptyCollection
-Ising2D.checkBigLambda_min_le	Finset
 Ising2D.checkBigLambda_pos	Finset
 Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigen	Finset
 Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigen	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype

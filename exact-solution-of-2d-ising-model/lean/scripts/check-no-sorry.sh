@@ -3229,9 +3229,9 @@ targets=(
   Ising2D.Qproj_mul_VPlus
   Ising2D.VPlus_mulVec_of_mem_range
   Ising2D.checkBigLambda_pos
-  Ising2D.checkBigLambda_le_max
-  Ising2D.checkBigLambda_min_le
-  Ising2D.checkBigLambda_lt_max
+  Ising2D.checkBigLambda_le_checkBigLambda_univ_of_necSuf
+  Ising2D.checkBigLambda_empty_le_checkBigLambda_of_necSuf
+  Ising2D.checkBigLambda_lt_checkBigLambda_univ_of_necSuf
   Ising2D.checkBigLambda_max_mul_min
   Ising2D.checkBigLambda_max_mul_min_eq_sq_prefactor
   Ising2D.checkBigLambda_max_mul_min_eq_c_sq

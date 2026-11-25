@@ -13,11 +13,10 @@
 章 009 の `eigenvalues_of_V` に対して、
 - 重複度が `2^{M-m}` から `1` に（`m = M`）、
 - 和の範囲が `I` から `𝓜̌ = {1,…,M}` に、
-- `γ(θ~_μ) > 0` が狭義なので大小比較も狭義に（`checkBigLambda_lt_max`）
-なる。狭義性は `TheoremMaxEigenvalueSimple.lean` の単純性の根拠である。
+- `γ(θ~_μ) > 0` が狭義なので大小比較も狭義に（`TheoremMaxEigenvalueSimple.lean` の `checkBigLambda_lt_checkBigLambda_univ`）
+なる。狭義性は同じファイルの単純性の根拠である。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimConstantCEvenSector
-import Ising2D.NecSuf.SimpleEigenvalue
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealOneMinusHalfIsHalf
@@ -268,7 +267,7 @@ theorem real_exp_le_exp_of_le {x y : ℝ} (hxy : x ≤ y) : Real.exp x ≤ Real.
 /-- **原文 `eigenvalues_of_V_plus` (2) の大小の比較の `Λ̌_ε ≤ Λ̌_{(1,…,1)}` の鎖**。人手の 9 行と 1 対 1 の calc。
 人手の 1〜4 行目（`Λ̌_ε` の定義、`s_2 = sinh 2K_2`、`ǧ(ε)` の定義、`a` の置き方）は `checkBigLambda_pos` と同じく `rfl` の 1 段が受け持ち、
 2 行目に当たる段は `s2` が引数なので無い。6〜9 行目も同じく `rfl` の 1 段である。`a > 0` は (2) の正値性の前置きと同じく
-`Real.rpow_pos_of_pos` で作る。必要十分版の特殊化は `checkBigLambda_le_max`。 -/
+`Real.rpow_pos_of_pos` で作る。必要十分版の特殊化は `TheoremEigenvaluesVPlusFromNecSuf.lean` の `checkBigLambda_le_checkBigLambda_univ_of_necSuf`。 -/
 theorem checkBigLambda_le_checkBigLambda_univ (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (hgpos : ∀ i, 0 < g i) {s2 : ℝ} (hs2 : 0 < s2) (T : Finset (CheckIdx M)) :
     checkBigLambda F g s2 T ≤ checkBigLambda F g s2 Finset.univ := by
@@ -287,7 +286,7 @@ theorem checkBigLambda_le_checkBigLambda_univ (F : CheckFermiSetup M) (g : Check
                                                         -- 6〜9 行目（`a` の置き方、`ǧ` と `Λ̌_ε` の定義（`ε → (1,…,1)`））
 
 /-- **原文 `eigenvalues_of_V_plus` (2) の大小の比較の `Λ̌_{(0,…,0)} ≤ Λ̌_ε` の鎖**。人手の 9 行と 1 対 1 の calc
-（段の割り当ては `checkBigLambda_le_checkBigLambda_univ` と同じ）。必要十分版の特殊化は `checkBigLambda_min_le`。 -/
+（段の割り当ては `checkBigLambda_le_checkBigLambda_univ` と同じ）。必要十分版の特殊化は `TheoremEigenvaluesVPlusFromNecSuf.lean` の `checkBigLambda_empty_le_checkBigLambda_of_necSuf`。 -/
 theorem checkBigLambda_empty_le_checkBigLambda (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (hgpos : ∀ i, 0 < g i) {s2 : ℝ} (hs2 : 0 < s2) (T : Finset (CheckIdx M)) :
     checkBigLambda F g s2 (∅ : Finset (CheckIdx M)) ≤ checkBigLambda F g s2 T := by
@@ -304,28 +303,6 @@ theorem checkBigLambda_empty_le_checkBigLambda (F : CheckFermiSetup M) (g : Chec
                                                         -- 両辺に正の実数 `a` を掛ける
     _ = checkBigLambda F g s2 T := rfl
                                                         -- 6〜9 行目（`a` の置き方、`ǧ(ε)` と `Λ̌_ε` の定義）
-
-/-- **原文 `eigenvalues_of_V_plus` (2) の大小の比較（最大）の必要十分版の特殊化**: 必要十分版 `NecSuf.sum_weight_le_univ`
-（重みは非負で足りる）を `R := ℝ`、`k := halfSign` へ特殊化し、具体版 `checkBigLambda_le_checkBigLambda_univ` と同じく `a > 0` と
-`exp` の単調性で `Λ̌` へ移す。 -/
-theorem checkBigLambda_le_max (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
-    (hg : ∀ i, 0 ≤ g i) {s2 : ℝ} (hs2 : 0 < s2) (T : Finset (CheckIdx M)) :
-    checkBigLambda F g s2 T ≤ checkBigLambda F g s2 Finset.univ := by
-  haveI : Nonempty (CheckIdx M) := ⟨CheckFermiSetup.checkIdxOfFin ⟨0, Nat.pos_of_ne_zero F.hM⟩⟩
-  have hapos : 0 < (2 * s2) ^ ((M : ℝ) / 2) := Real.rpow_pos_of_pos (by linarith) _
-  exact mul_le_mul_of_nonneg_left (real_exp_le_exp_of_le
-    (NecSuf.sum_weight_le_univ halfSign (by rw [halfSign_one_sub_halfSign_zero]; exact zero_le_one) g hg T))
-    (le_of_lt hapos)
-
-/-- **原文 `eigenvalues_of_V_plus` (2) の大小の比較（最小）の必要十分版の特殊化**（`NecSuf.sum_weight_empty_le`）。 -/
-theorem checkBigLambda_min_le (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
-    (hg : ∀ i, 0 ≤ g i) {s2 : ℝ} (hs2 : 0 < s2) (T : Finset (CheckIdx M)) :
-    checkBigLambda F g s2 (∅ : Finset (CheckIdx M)) ≤ checkBigLambda F g s2 T := by
-  haveI : Nonempty (CheckIdx M) := ⟨CheckFermiSetup.checkIdxOfFin ⟨0, Nat.pos_of_ne_zero F.hM⟩⟩
-  have hapos : 0 < (2 * s2) ^ ((M : ℝ) / 2) := Real.rpow_pos_of_pos (by linarith) _
-  exact mul_le_mul_of_nonneg_left (real_exp_le_exp_of_le
-    (NecSuf.sum_weight_empty_le halfSign (by rw [halfSign_one_sub_halfSign_zero]; exact zero_le_one) g hg T))
-    (le_of_lt hapos)
 
 open CheckFermiSetup in
 /-- **原文 `eigenvalues_of_V_plus` (2) の `ǧ(1,…,1)` の鎖**: `ǧ(1,…,1) = ½ Σ_{μ=1}^{M_col} γ(θ~_μ)`。人手の 6 行と 1 対 1 の calc
@@ -398,18 +375,6 @@ theorem checkBigLambda_min_eq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (
     _ = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp (-((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))) := by
         rw [gval_empty_eq_neg_half_sum F g]
                                                         -- 上の `ǧ(0,…,0)` の鎖
-
-/-- **原文 `max_eigenvalue_of_V_plus_simple` (2)**: `γ(θ~_μ) > 0` なら大小比較は狭義。
-
-章 009 では `γ(θ_μ) ≥ 0` しか無いのでこの形は言えない
-（必要十分版 `NecSuf.sum_weight_lt_of_ne_univ` の特殊化）。 -/
-theorem checkBigLambda_lt_max (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
-    (hg : ∀ i, 0 < g i) {s2 : ℝ} (hs2 : 0 < s2) {T : Finset (CheckIdx M)}
-    (hT : T ≠ Finset.univ) :
-    checkBigLambda F g s2 T < checkBigLambda F g s2 Finset.univ := by
-  rw [checkBigLambda, checkBigLambda]
-  refine mul_lt_mul_of_pos_left ?_ (Real.rpow_pos_of_pos (by linarith) _)
-  exact Real.exp_lt_exp.2 (NecSuf.sum_weight_lt_of_ne_univ halfSign halfSign_one_sub_halfSign_zero g hg hT)
 
 open CheckFermiSetup in
 /-- **原文 `eigenvalues_of_V_plus` (2) の積の鎖の 1〜14 行目**: `Λ̌_max Λ̌_min = aa`（`a := (2 s2)^{M/2}`）。人手の 1〜14 行目と 1 対 1 の calc。

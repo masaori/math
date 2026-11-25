@@ -72,7 +72,7 @@ variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 `0 ≤ 1`、加法と両立する順序）と、`k(1) - k(0) = 1` だけである。人手の `h(1) = ½`・`h(0) = −(½)` の値そのものは効かず、
 差 `h(1) - h(0) = 1` だけが要る（差が正であることだけで済ませるには、`0 < a` かつ `0 < b` なら `0 < ab`（`PosMulStrictMono`）を
 係数に足す必要があり、人手の手順 `γ·1 = γ > 0` の方が仮定が少ない）。乗法の可換律・逆元・全順序・完備性（実数であること）も効いていない。添字が `CheckIdx M` であることも、重みが `γ(θ~_μ)` であることも効いていない。
-具体版の `checkBigLambda_lt_max` は `R := ℝ`、`k := halfSign` への特殊化である。 -/
+具体版 `checkBigLambda_lt_checkBigLambda_univ` の主張は `R := ℝ`、`k := halfSign` への特殊化で、その導出は `TheoremMaxEigenvalueSimpleFromNecSuf.lean` の `checkBigLambda_lt_checkBigLambda_univ_of_necSuf` である。 -/
 theorem sum_weight_lt_of_ne_univ {R : Type*} [Ring R] [PartialOrder R] [IsOrderedRing R] (k : Fin 2 → R)
     (hk : k 1 - k 0 = 1) (w : ι → R) (hw : ∀ i, 0 < w i) {T : Finset ι}
     (hT : T ≠ Finset.univ) :
