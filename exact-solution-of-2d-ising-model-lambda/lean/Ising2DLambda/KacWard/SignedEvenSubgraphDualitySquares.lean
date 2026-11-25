@@ -1,16 +1,34 @@
 import Ising2DLambda.KacWard.SignedEvenSubgraphDualityPolynomiality
 import Ising2DLambda.KacWard.DispersionDualityFiniteProduct
 import Ising2DLambda.KacWard.DeterminantSignedEvenSubgraphSquare
+import Ising2DLambda.KacWard.TwistedModeCard
 
 namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
 
-/-- The mode pairs have the cardinality used in the third line of the human proof. -/
+/-- The mode pairs have the cardinality used in the third line of the human proof:
+`|U_a × W_b| = N`（`claim_twisted_mode_sets_card`）。 -/
 theorem fourierModePair_card_eq (L : ℕ) [NeZero L] (s : SpinStructure) :
     Fintype.card (FourierModePair L s) = L ^ 2 := by
   classical
-  obtain ⟨hU, hW, hUcard, hWcard⟩ := modeIndex_card_data (L := L) s
+  have hL : 0 < L := Nat.pos_of_ne_zero (NeZero.ne L)
+  -- 本文: `claim_twisted_mode_sets_card` による `|U_a| = |W_b| = L`
+  obtain ⟨hh0, hh1, hv0, hv1⟩ := twistedModeSets_ncard L hL
+  have hUcard : (horizontalTwistedModes L s).ncard = L := by
+    rcases s with ⟨a, b⟩
+    cases a <;> cases b
+    · exact hh0
+    · exact hh0
+    · exact hh1
+    · exact hh1
+  have hWcard : (verticalTwistedModes L s).ncard = L := by
+    rcases s with ⟨a, b⟩
+    cases a <;> cases b
+    · exact hv0
+    · exact hv1
+    · exact hv0
+    · exact hv1
   rw [← Nat.card_eq_fintype_card]
   change Nat.card {p : Qbar × Qbar //
     p ∈ horizontalTwistedModes L s ×ˢ verticalTwistedModes L s} = L ^ 2
