@@ -1,0 +1,27 @@
+=== g'(t) の鎖 ===
+  (t -> 1/t)'(t) = (0*t - 1*1)/t^2: PASS
+  = -1/t^2: PASS
+  (t -> log(1/t))'(t) = (1/(1/t))*(-1/t^2): PASS
+  g'(t) = 1*log(1/t) + t*((1/(1/t))*(-1/t^2)): PASS
+  = log(1/t) - 1: PASS
+=== g' の符号 ===
+  標本点が 1/e の左右にある: PASS
+  0 < t < 1/e で g'(t) > 0: PASS
+  t = 1/e で g'(t) = log(exp 1) - 1 = 0: PASS
+  1/e < t で g'(t) < 0: PASS
+=== (R4) と (R3) の鎖 ===
+  0 < x <= 1/e: g(1/e) - g(x) = int_x^{1/e} g' >= 0: PASS
+  1/e <= x <= 1: g(x) - g(1/e) = int_{1/e}^x g' <= 0: PASS
+  (R4) を定数関数 F = 0 で: int 0 = 0: PASS
+=== g(1/e) の鎖 ===
+  g(1/e) = (1/e) log(1/(1/e)): PASS
+  = (1/e) log(exp 1): PASS
+  = 1/e: PASS
+=== 結論: 0 < x <= 1 なら g(x) <= 1/e（否定コントロール: 1/e を少し下げると x = 1/e で破れる） ===
+  0 < x <= 1 の標本点で g(x) <= 1/e: PASS
+  x = 1 で g(1) = 0: PASS
+  否定コントロール: 上界を 1/e - 1/10^6 に下げると x = 1/e で破れる: PASS
+=== Step 4 の 1 行目: |a b| = |a| |b| ===
+  |a b| = |a| |b|（有理数の標本点）: PASS
+
+RESULT: PASS

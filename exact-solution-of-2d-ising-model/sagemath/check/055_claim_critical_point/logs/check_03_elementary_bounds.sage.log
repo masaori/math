@@ -1,0 +1,21 @@
+=== elementary_sine_bounds: 0 <= theta/2 - sin(theta/2) <= theta^3/48, c0 theta/2 <= sin(theta/2) ===
+  c_0 = 1 - pi^2/24 = 0.5887664833（0.5887 <= c_0 <= 0.5888: True）
+  違反件数: 3 次評価 0 件、はさみ込み 0 件、min sin(t)/t = 0.6366197724 >= c_0  -> PASS
+
+=== closed_form_log_integral (1)(2)(3): 閉じた形と log 評価 ===
+  |int - 2 arcsinh(pi/2delta)| = 1.54e-34, log(2y) <= arcsinh y <= log(2y)+1/(4y^2) 違反 0 件, (3) の上界 2/(a delta^2) 違反 なし  -> PASS
+
+=== sine_integral_two_sided: 2log(pi/delta) <= int <= 2log(pi/delta) + 2delta^2/pi^2 + B ===
+  B = pi^2/(12 c0 (1+c0)) = 0.8792560211（<= 0.88: True）
+  delta=0.5: 下界 3.675754133 <= 実測 4.03781164 <= 上界 4.605670746  -> PASS
+  delta=0.2527: 下界 5.040564301 <= 実測 5.469195132 <= 上界 5.932760514  -> PASS
+  delta=0.1: 下界 6.894629958 <= 実測 7.364384972 <= 上界 7.775912403  -> PASS
+  delta=0.01: 下界 11.49980014 <= 実測 11.98267953 <= 上界 12.37907643  -> PASS
+  delta=0.0001: 下界 20.71014052 <= 実測 21.19326942 <= 上界 21.58939654  -> PASS
+  delta=1.0e-8: 下界 39.13082126 <= 実測 39.61395021 <= 上界 40.01007728  -> PASS
+  delta=1.0e-12: 下界 57.551502 <= 実測 58.03463095 <= 上界 58.43075802  -> PASS
+
+=== gamma_derivatives_in_kappa (2)(3): 導関数の式と |d gamma/d kappa| <= 1 ===
+  1 階 1.15e-41, 2 階 1.61e-40, |d gamma/d kappa| > 1 の件数 0  -> PASS
+
+RESULT: PASS

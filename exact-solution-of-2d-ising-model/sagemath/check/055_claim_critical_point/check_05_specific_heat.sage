@@ -10,9 +10,7 @@
 # 有限 M の (1/M) log Lambda^{(1/2)}_M の 2 階微分が M -> infty で f'' へ収束することも
 # M = 2,3,4,5,... で確認する（M が本章に現れるのはこの経路だけである）。
 # ---------------------------------------------------------
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '_prelude.sage'))
+load('_prelude.sage')  # run-all-checks.sh がこのディレクトリへ cd してから呼ぶ
 
 all_ok = True
 

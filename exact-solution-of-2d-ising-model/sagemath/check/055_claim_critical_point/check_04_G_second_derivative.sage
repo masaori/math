@@ -8,9 +8,7 @@
 # 本文の Step ごとに検証する（Step 1 の積分と微分の交換、Step 2 の折り返し、
 # Step 3 の J, T への分解、Step 4/5/6 の各評価、Step 7 の総合）。
 # ---------------------------------------------------------
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '_prelude.sage'))
+load('_prelude.sage')  # run-all-checks.sh がこのディレクトリへ cd してから呼ぶ
 
 all_ok = True
 KAPPAS = [mp.mpf('0.5'), mp.mpf('0.3'), mp.mpf('0.1'), mp.mpf('0.03'),

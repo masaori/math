@@ -8,9 +8,7 @@
 #
 # 本文の各段をそのままの形で検証する（結論だけの検証にしない）。
 # ---------------------------------------------------------
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '_prelude.sage'))
+load('_prelude.sage')  # run-all-checks.sh がこのディレクトリへ cd してから呼ぶ
 
 THETAS = [mp.mpf(0), mp.mpf('0.3'), mp.mpf('1.1'), PI / 2, PI,
           mp.mpf('2.5'), mp.mpf('4.7'), 2 * PI]

@@ -7,9 +7,7 @@
 #   等方では A = 1、kappa'(K) = 2 + 2/sinh 2K > 0、kappa(K_c) = 0
 #   |K - K_c| <= 1/10 での定数（0.7353 / 1.3048 / 3.53 / 4.72 / 9.19 / 87 / 24.7）
 # ---------------------------------------------------------
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '_prelude.sage'))
+load('_prelude.sage')  # run-all-checks.sh がこのディレクトリへ cd してから呼ぶ
 
 all_ok = True
 

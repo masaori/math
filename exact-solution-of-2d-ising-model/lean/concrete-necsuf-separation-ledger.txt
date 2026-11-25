@@ -218,7 +218,6 @@ DEP	concrete	Ising2D.VPlus_mul_W
 DEP	concrete	Ising2D.VPlus_posDef
 DEP	concrete	Ising2D.Vmat_posDef
 DEP	concrete	Ising2D.W_mul_VPlus
-DEP	concrete	Ising2D.abs_kappaDerivSq_sub_mul_Gsecond_le
 DEP	concrete	Ising2D.abs_quad_le_quad_absVec_epsilonR
 DEP	concrete	Ising2D.actsBy_TConj_V1pmHalf
 DEP	concrete	Ising2D.actsBy_TConj_V2H2Form

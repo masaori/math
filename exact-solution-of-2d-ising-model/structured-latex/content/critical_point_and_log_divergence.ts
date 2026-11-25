@@ -79,7 +79,11 @@ export default defineBlocks([
           ref("kappa_of_K_basic"),
           "（増分の評価）と ",
           ref("second_derivative_log_divergence"),
-          " の各不等式（被積分関数の各点評価を積分へ持ち上げる段）で使う。",
+          " の各不等式（被積分関数の各点評価を積分へ持ち上げる段）と、",
+          ref("specific_heat_log_divergence"),
+          " の Step 4 の準備の ",
+          math(String.raw`x\log\frac1x \leq \frac1e`),
+          "（導関数の積分の符号）で使う。",
         ],
         [
           "(R4) は ",
@@ -88,7 +92,11 @@ export default defineBlocks([
           ref("second_derivative_log_divergence"),
           "（定数関数の積分と、",
           math(String.raw`F(s) = -s^2\log s`),
-          " の増分の評価）で使う。",
+          " の増分の評価）と、",
+          ref("specific_heat_log_divergence"),
+          " の Step 4 の準備の ",
+          math(String.raw`g(x) = x\log\frac1x`),
+          " の増分の評価で使う。",
         ],
         [
           "(R5) は ",
@@ -130,6 +138,10 @@ export default defineBlocks([
           math(String.raw`G''`),
           " の偶奇を合成関数の微分で言う段と、",
           math(String.raw`F(s) = -s^2\log s`),
+          " の導関数とその連続性を言う段で使う。",
+          ref("specific_heat_log_divergence"),
+          " でも、Step 4 の準備の ",
+          math(String.raw`g(x) = x\log\frac1x`),
           " の導関数とその連続性を言う段で使う。",
         ],
       ]),
@@ -3251,7 +3263,136 @@ G''(\kappa)
         math(String.raw`\kappa'^2`),
         " を ",
         math(String.raw`16`),
-        " に置き換える誤差）。",
+        " に置き換える誤差）。準備として、",
+        math(String.raw`e := \exp 1`),
+        "（",
+        ref("def_scalar_exp"),
+        " の実数の exp。",
+        ref("real_exp_positive"),
+        " より ",
+        math(String.raw`e \in \mathbb{R}_{>0}`),
+        "）、",
+        math(String.raw`g : \mathbb{R}_{>0} \to \mathbb{R}`),
+        "、",
+        math(String.raw`g(x) := x\log\frac1x`),
+        " とおき、",
+        math(String.raw`0 < x \leq 1`),
+        " なら ",
+        math(String.raw`g(x) \leq \tfrac1e`),
+        " であることを示す。",
+        math(String.raw`t \in \mathbb{R}_{>0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(t \mapsto \frac1t\right)'(t)
+&= \frac{0\cdot t - 1\cdot 1}{t^2}
+   \quad (\because \blkref{remark_real_analysis_facts_R3_R4}\text{ の微分の公式の商と、定数関数・恒等関数の導関数 }0, 1) \\
+&= -\frac1{t^2}
+   \quad (\because \mathbb R\text{ の四則}) \\
+\left(t \mapsto \log\frac1t\right)'(t)
+&= \frac{1}{1/t}\cdot\left(-\frac1{t^2}\right)
+   \quad (\because \blkref{remark_real_analysis_facts_R3_R4}\text{ の微分の公式の合成と }\log'(w) = \tfrac1w) \\
+g'(t)
+&= 1\cdot\log\frac1t + t\cdot\left(\frac{1}{1/t}\cdot\left(-\frac1{t^2}\right)\right)
+   \quad (\because \blkref{remark_real_analysis_facts_R3_R4}\text{ の微分の公式の積と、恒等関数の導関数 }1) \\
+&= \log\frac1t - 1
+   \quad (\because \mathbb R\text{ の四則。}t \neq 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`g'`),
+        " は微分可能な関数 ",
+        math(String.raw`t \mapsto \log\frac1t`),
+        " と定数関数の差として微分可能なので ",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " 上で連続である（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式）。",
+        math(String.raw`0 < t < \tfrac1e`),
+        " なら ",
+        math(String.raw`e < \tfrac1t`),
+        "、",
+        math(String.raw`\tfrac1e < t`),
+        " なら ",
+        math(String.raw`\tfrac1t < e`),
+        " なので",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+g'(t) &= \log\frac1t - 1 > \log(\exp 1) - 1
+   \quad (\because e < \tfrac1t\text{ と }\blkref{real_log_strictly_increasing}) \quad (0 < t < \tfrac1e) \\
+g'(t) &= \log(\exp 1) - 1
+   \quad (\because \tfrac1t = e) \quad (t = \tfrac1e) \\
+g'(t) &= \log\frac1t - 1 < \log(\exp 1) - 1
+   \quad (\because \tfrac1t < e\text{ と }\blkref{real_log_strictly_increasing}) \quad (\tfrac1e < t) \\
+\log(\exp 1) - 1 &= 0
+   \quad (\because \blkref{def_real_logarithm_positive}\text{ の }\log(\exp x) = x)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。よって ",
+        math(String.raw`t \in (0, \tfrac1e]`),
+        " で ",
+        math(String.raw`g'(t) \geq 0`),
+        "、",
+        math(String.raw`t \in [\tfrac1e, \infty)`),
+        " で ",
+        math(String.raw`g'(t) \leq 0`),
+        " であり、",
+        math(String.raw`0 < x \leq \tfrac1e`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g\!\left(\tfrac1e\right) - g(x)
+&= \int_x^{1/e} g'(t)\,dt
+&&(\because\ \text{(R4) を }F = g\text{ で})\\
+&\geq \int_x^{1/e} 0\,dt
+&&(\because\ \text{(R3) の単調性と、}t \in [x, \tfrac1e]\text{ で }g'(t) \geq 0)\\
+&= 0
+&&(\because\ \text{(R4) を定数関数 }F = 0\text{ で})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\tfrac1e \leq x \leq 1`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g(x) - g\!\left(\tfrac1e\right)
+&= \int_{1/e}^x g'(t)\,dt
+&&(\because\ \text{(R4) を }F = g\text{ で})\\
+&\leq \int_{1/e}^x 0\,dt
+&&(\because\ \text{(R3) の単調性と、}t \in [\tfrac1e, x]\text{ で }g'(t) \leq 0)\\
+&= 0
+&&(\because\ \text{(R4) を定数関数 }F = 0\text{ で})
+\end{aligned}`),
+      paragraph([
+        "である。さらに",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g\!\left(\tfrac1e\right)
+&= \frac1e\log\frac{1}{1/e}
+&&(\because\ g\text{ の定義})\\
+&= \frac1e\log(\exp 1)
+&&(\because\ \mathbb R\text{ の四則と }e = \exp 1)\\
+&= \frac1e
+&&(\because\ \blkref{def_real_logarithm_positive}\text{ の }\log(\exp x) = x)
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        math(String.raw`0 < x \leq 1`),
+        " なら ",
+        math(String.raw`g(x) \leq \tfrac1e`),
+        " である。",
+        ref("kappa_of_K_basic"),
+        " (2)(5) より ",
+        math(String.raw`0 < |\kappa| \leq 0.472 \leq 1`),
+        " なので、",
+        math(String.raw`x = |\kappa|`),
+        " に当てて ",
+        math(String.raw`|\kappa|\log\frac1{|\kappa|}\leq\frac1e`),
+        " を得る。これと ",
         ref("kappa_of_K_basic"),
         " (5) の ",
         math(String.raw`\left|\kappa'(K)^2-16\right| \leq 24.7|\kappa|`),
@@ -3262,31 +3403,20 @@ G''(\kappa)
       displayMath(
         String.raw`\begin{aligned}
 \left|\left(\kappa'(K)^2 - 16\right)G''\!\left(\kappa\right)\right|
+&= \left|\kappa'(K)^2 - 16\right|\left|G''\!\left(\kappa\right)\right|
+   \quad (\because \text{絶対値の積の性質}) \\
 &\leq 24.7\,|\kappa|\left(\frac{1}{2\pi}\log\frac{1}{|\kappa|} + \frac65\right)
    \quad (\because \blkref{kappa_of_K_basic}\text{ (5) と }\blkref{second_derivative_log_divergence}) \\
 &= 24.7\left(\frac{1}{2\pi}\,|\kappa|\log\frac{1}{|\kappa|} + \frac65|\kappa|\right)
    \quad (\because \mathbb R\text{ の分配律}) \\
 &\leq 24.7\left(\frac{1}{2\pi}\cdot\frac1e + \frac65\cdot 0.472\right)
-   \quad (\because |\kappa| \leq 0.472\text{ と下記の } |\kappa|\log\tfrac1{|\kappa|}\leq \tfrac1e) \\
+   \quad (\because |\kappa| \leq 0.472\text{ と上の } |\kappa|\log\tfrac1{|\kappa|}\leq \tfrac1e) \\
 &\leq 24.7\left(0.0586 + 0.5664\right)
    \quad (\because \mathbb R\text{ の有理数評価}) \\
 &\leq 15.44
    \quad (\because \mathbb R\text{ の有理数計算})
 \end{aligned}`,
       ),
-      paragraph([
-        "ここで ",
-        math(String.raw`x\log\frac1x`),
-        " は ",
-        math(String.raw`(0,1]`),
-        " 上 ",
-        math(String.raw`x = \tfrac1e`),
-        " で最大値 ",
-        math(String.raw`\tfrac1e`),
-        " をとる（導関数 ",
-        math(String.raw`\log\frac1x - 1`),
-        " の符号）。",
-      ]),
       paragraph([
         "Step 5（主要項）。",
         ref("second_derivative_log_divergence"),
@@ -3397,6 +3527,7 @@ G''(\kappa)
       status: "added",
       notes: [
         "定数 45 / 49 は最適化していない（証明の各段の評価をそのまま足した結果 42.94 以下）。数値では実際の |f'' − (8/π)log(1/|κ|)| の上限は 1.6 程度である（sagemath/check/055_claim_critical_point/check_05）。",
+        "2026-11-25: Step 4 の x log(1/x) ≤ 1/e は導関数の符号から言っており平均値の定理（本章の冒頭で使わないとした道具）に当たるので、g(x) := x log(1/x) に (R4)・(R3) を当てる鎖にして Step 4 の式変形の前の準備へ移した。Step 4 の 1 行目の評価から絶対値の積の性質の 1 行を分けた。主張と定数は不変。検算は sagemath/check/055_claim_critical_point/check_06_x_log_inverse_at_most_inverse_e.sage。",
       ],
     },
   },

@@ -205,28 +205,136 @@ theorem abs_Gsecond_le {κ : ℝ} (h0 : κ ≠ 0) (h1 : |κ| ≤ 1/2) :
   rw [abs_le]
   constructor <;> linarith [h.1, h.2]
 
-/-- **人手証明 Step 4**: `|(κ'² - 16)G''(κ)| ≤ 15.75`（原文は `15.44`）。 -/
+/-- **人手証明 Step 4**: `|(κ'² - 16)G''(κ)| ≤ 15.75`（原文は `15.44`）。
+
+本文の鎖（絶対値の積の性質 → `kappa_of_K_basic` (5) と `second_derivative_log_divergence` → 分配律 →
+`|κ| ≤ 0.474` と `|κ| log(1/|κ|) ≤ 1/e` → 有理数評価 → 有理数計算）の順に一行ずつ書く。
+`|κ| log(1/|κ|) ≤ 1/e` は、本文の Step 4 の準備と同じく、`g(x) := x log(1/x)` の導関数
+`g'(t) = log(1/t) - 1` の符号（`t = 1/e` で 0）と (R4)・(R3) の鎖 `g(1/e) - g(x) = ∫_x^{1/e} g' ≥ ∫ 0 = 0`
+（`0 < x ≤ 1/e`）、`g(x) - g(1/e) = ∫_{1/e}^x g' ≤ ∫ 0 = 0`（`1/e ≤ x ≤ 1`）と `g(1/e) = 1/e` で示し、
+証明の冒頭の準備に置く。 -/
 theorem abs_kappaDerivSq_sub_mul_Gsecond_le {K : ℝ} (hK : K ∈ Dnbhd) (hκ : kappaK K ≠ 0) :
     |(kappaDeriv K ^ 2 - 16) * Gsecond (kappaK K)| ≤ 15.75 := by
+  -- 準備: `|κ| ≤ 0.474 ≤ 1/2`、`|κ| > 0`、`L := log(1/|κ|)`
   have hbnd := abs_kappaK_bounds hK
   have hka : |kappaK K| ≤ 0.474 := hbnd.2.2
   have hkpos : 0 < |kappaK K| := abs_pos.2 hκ
   have hhalf : |kappaK K| ≤ 1/2 := by linarith
   set L : ℝ := Real.log (1 / |kappaK K|) with hLdef
-  have hL0 : 0 ≤ L := by
-    rw [hLdef]
-    apply Real.log_nonneg
-    rw [le_div_iff₀ hkpos]; linarith
-  -- |κ| log(1/|κ|) ≤ 1/e ≤ 0.36788
+  -- 準備: `e := exp 1 ∈ ℝ_{>0}`（`real_exp_positive`）
+  have hexp0 : (0:ℝ) < Real.exp 1 := real_exp_positive 1
+  -- 準備: `0 < x ≤ 1` なら `g(x) := x log(1/x) ≤ 1/e`（本文の Step 4 の準備）
+  have hxlog : ∀ x : ℝ, 0 < x → x ≤ 1 → x * Real.log (1 / x) ≤ (Real.exp 1)⁻¹ := by
+    set g : ℝ → ℝ := fun x => x * Real.log (1 / x) with hgdef
+    set g' : ℝ → ℝ := fun t => Real.log (1 / t) - 1 with hg'def
+    set e₀ : ℝ := (Real.exp 1)⁻¹ with he₀def
+    have he₀pos : 0 < e₀ := inv_pos.2 hexp0
+    -- `(t ↦ 1/t)'(t) = (0·t − 1·1)/t²`（微分の公式の商と、定数関数・恒等関数の導関数 0, 1）`= −1/t²`（ℝ の四則）
+    have hinv : ∀ t : ℝ, 0 < t → HasDerivAt (fun y : ℝ => 1 / y) (-(1 / t ^ 2)) t := by
+      intro t ht
+      have hquot := (hasDerivAt_const t (1 : ℝ)).div (hasDerivAt_id' t) (ne_of_gt ht)
+      refine hquot.congr_deriv ?_
+      ring
+    -- `(t ↦ log(1/t))'(t) = (1/(1/t))·(−1/t²)`（微分の公式の合成と `log' w = 1/w`）
+    have hlog : ∀ t : ℝ, 0 < t →
+        HasDerivAt (fun y : ℝ => Real.log (1 / y)) ((1 / t)⁻¹ * (-(1 / t ^ 2))) t := fun t ht =>
+      (Real.hasDerivAt_log (ne_of_gt (one_div_pos.2 ht))).comp t (hinv t ht)
+    -- `g'(t) = 1·log(1/t) + t·((1/(1/t))·(−1/t²))`（微分の公式の積と恒等関数の導関数 1）`= log(1/t) − 1`（ℝ の四則）
+    have hderiv : ∀ t : ℝ, 0 < t → HasDerivAt g (g' t) t := by
+      intro t ht
+      have hprod := (hasDerivAt_id' t).mul (hlog t ht)
+      refine hprod.congr_deriv ?_
+      have ht0 : t ≠ 0 := ne_of_gt ht
+      simp only [hg'def]
+      field_simp
+      ring
+    -- `g'` は `t ↦ log(1/t)` と定数関数の差として微分可能なので `ℝ_{>0}` 上で連続（微分の公式）
+    have hcont' : ∀ a b : ℝ, 0 < a → a ≤ b → ContinuousOn g' (Set.uIcc a b) := by
+      intro a b ha hab t ht
+      rw [Set.uIcc_of_le hab] at ht
+      have ht0 : 0 < t := lt_of_lt_of_le ha ht.1
+      exact ((hlog t ht0).sub_const 1).continuousAt.continuousWithinAt
+    -- `log(exp 1) = 1`（`def_real_logarithm_positive` の `log(exp x) = x`）
+    have hlogE : Real.log (Real.exp 1) = 1 := Real.log_exp 1
+    -- (R4) を `F = g` で、(R3) の単調性、(R4) を定数関数 `F = 0` で
+    have hR4 : ∀ a b : ℝ, 0 < a → a ≤ b → g b - g a = ∫ t in a..b, g' t := by
+      intro a b ha hab
+      have hpos : ∀ t ∈ Set.uIcc a b, 0 < t := by
+        intro t ht
+        rw [Set.uIcc_of_le hab] at ht
+        exact lt_of_lt_of_le ha ht.1
+      rw [intervalIntegral.integral_eq_sub_of_hasDerivAt (fun t ht => hderiv t (hpos t ht))
+        (hcont' a b ha hab).intervalIntegrable]
+    have hzero : ∀ a b : ℝ, ∫ _ in a..b, (0 : ℝ) = 0 - 0 := fun a b =>
+      intervalIntegral.integral_eq_sub_of_hasDerivAt (f := fun _ : ℝ => (0 : ℝ))
+        (fun t _ => hasDerivAt_const t (0 : ℝ)) intervalIntegrable_const
+    -- `0 < x ≤ 1/e` なら `g(1/e) − g(x) ≥ 0`（`0 < t < 1/e` で `g'(t) > 0`）
+    have hleft : ∀ x : ℝ, 0 < x → x ≤ e₀ → g e₀ - g x ≥ 0 := by
+      intro x hx hxe
+      have hint := (hcont' x e₀ hx hxe).intervalIntegrable (μ := MeasureTheory.volume)
+      calc g e₀ - g x = ∫ t in x..e₀, g' t := hR4 x e₀ hx hxe
+        _ ≥ ∫ _ in x..e₀, (0 : ℝ) := by
+            refine intervalIntegral.integral_mono_on hxe intervalIntegrable_const hint ?_
+            intro t ht
+            have ht0 : 0 < t := lt_of_lt_of_le hx ht.1
+            -- `0 < t < 1/e` なら `e < 1/t` と `real_log_strictly_increasing` で `g'(t) > 0`、`t = 1/e` なら `g'(t) = log(exp 1) − 1 = 0`
+            rcases lt_or_eq_of_le ht.2 with hlt | heq
+            · have h1 : Real.exp 1 < 1 / t := by
+                rw [lt_div_iff₀ ht0]
+                calc Real.exp 1 * t < Real.exp 1 * (Real.exp 1)⁻¹ :=
+                      mul_lt_mul_of_pos_left hlt hexp0
+                  _ = 1 := mul_inv_cancel₀ (ne_of_gt hexp0)
+              have h2 := real_log_strictly_increasing hexp0 (by positivity) h1
+              simp only [hg'def]
+              linarith
+            · simp only [hg'def, heq, he₀def, one_div, inv_inv]
+              linarith
+        _ = 0 - 0 := hzero x e₀
+        _ = 0 := sub_self 0
+    -- `1/e ≤ x ≤ 1` なら `g(x) − g(1/e) ≤ 0`（`1/e < t` で `g'(t) < 0`）
+    have hright : ∀ x : ℝ, e₀ ≤ x → g x - g e₀ ≤ 0 := by
+      intro x hxe
+      have hint := (hcont' e₀ x he₀pos hxe).intervalIntegrable (μ := MeasureTheory.volume)
+      calc g x - g e₀ = ∫ t in e₀..x, g' t := hR4 e₀ x he₀pos hxe
+        _ ≤ ∫ _ in e₀..x, (0 : ℝ) := by
+            refine intervalIntegral.integral_mono_on hxe hint intervalIntegrable_const ?_
+            intro t ht
+            have ht0 : 0 < t := lt_of_lt_of_le he₀pos ht.1
+            rcases lt_or_eq_of_le ht.1 with hlt | heq
+            · have h1 : 1 / t < Real.exp 1 := by
+                rw [div_lt_iff₀ ht0]
+                calc (1:ℝ) = Real.exp 1 * (Real.exp 1)⁻¹ :=
+                      (mul_inv_cancel₀ (ne_of_gt hexp0)).symm
+                  _ < Real.exp 1 * t := mul_lt_mul_of_pos_left hlt hexp0
+              have h2 := real_log_strictly_increasing (by positivity) hexp0 h1
+              simp only [hg'def]
+              linarith
+            · simp only [hg'def, ← heq, he₀def, one_div, inv_inv]
+              linarith
+        _ = 0 - 0 := hzero e₀ x
+        _ = 0 := sub_self 0
+    -- `g(1/e) = (1/e) log(1/(1/e)) = (1/e) log(exp 1) = 1/e`
+    have hge : g e₀ = e₀ :=
+      calc g e₀ = e₀ * Real.log (1 / e₀) := rfl
+        _ = e₀ * Real.log (Real.exp 1) := by rw [he₀def, one_div, inv_inv]
+        _ = e₀ := by rw [hlogE, mul_one]
+    intro x hx0 hx1
+    rcases le_total x e₀ with hxe | hxe
+    · have := hleft x hx0 hxe
+      calc x * Real.log (1 / x) = g x := rfl
+        _ ≤ g e₀ := by linarith
+        _ = e₀ := hge
+    · have := hright x hxe
+      calc x * Real.log (1 / x) = g x := rfl
+        _ ≤ g e₀ := by linarith
+        _ = e₀ := hge
+  have hkL : |kappaK K| * L ≤ (Real.exp 1)⁻¹ := hxlog _ hkpos (by linarith)
+  -- 準備: 有理数評価に使う `1/(2π) ≤ 0.1592` と `1/e ≤ 0.36788`
   have hexp : (Real.exp 1)⁻¹ ≤ 0.36788 := by
     have h := Real.exp_one_gt_d9
-    have hp : (0:ℝ) < Real.exp 1 := Real.exp_pos 1
+    have hp : (0:ℝ) < Real.exp 1 := hexp0
     rw [inv_le_comm₀ hp (by norm_num)]
     linarith
-  have hkL : |kappaK K| * L ≤ 0.36788 := by
-    have h := NecSuf.mul_log_inv_le hkpos
-    rw [hLdef, one_div]
-    linarith [h, hexp]
   have hinv2pi : 1 / (2 * Real.pi) ≤ 0.1592 := by
     have hpil : (3.141592:ℝ) < Real.pi := Real.pi_gt_d6
     rw [div_le_iff₀ (by positivity)]
@@ -234,16 +342,25 @@ theorem abs_kappaDerivSq_sub_mul_Gsecond_le {K : ℝ} (hK : K ∈ Dnbhd) (hκ : 
   have hGa := abs_Gsecond_le hκ hhalf
   rw [← hLdef] at hGa
   have hq := abs_kappaDerivSq_sub_le hK
-  rw [abs_mul]
-  have hstep : |kappaDeriv K ^ 2 - 16| * |Gsecond (kappaK K)|
-      ≤ (25.1 * |kappaK K|) * ((1 / (2 * Real.pi)) * L + 6/5) :=
-    mul_le_mul hq hGa (abs_nonneg _) (by positivity)
-  have hprod : (1 / (2 * Real.pi)) * (|kappaK K| * L) ≤ 0.1592 * 0.36788 :=
-    mul_le_mul hinv2pi hkL (mul_nonneg (abs_nonneg _) hL0) (by norm_num)
-  have hexpand : (25.1 * |kappaK K|) * ((1 / (2 * Real.pi)) * L + 6/5)
-      = 25.1 * ((1 / (2 * Real.pi)) * (|kappaK K| * L)) + 30.12 * |kappaK K| := by ring
-  rw [hexpand] at hstep
-  nlinarith [hstep, hprod, hka]
+  calc |(kappaDeriv K ^ 2 - 16) * Gsecond (kappaK K)|
+      = |kappaDeriv K ^ 2 - 16| * |Gsecond (kappaK K)| := abs_mul _ _
+    -- (∵ kappa_of_K_basic (5) と second_derivative_log_divergence)
+    _ ≤ (25.1 * |kappaK K|) * ((1 / (2 * Real.pi)) * L + 6/5) :=
+        mul_le_mul hq hGa (abs_nonneg _) (by positivity)
+    -- (∵ ℝ の分配律)
+    _ = 25.1 * ((1 / (2 * Real.pi)) * (|kappaK K| * L) + 6/5 * |kappaK K|) := by ring
+    -- (∵ |κ| ≤ 0.474 と |κ| log(1/|κ|) ≤ 1/e)
+    _ ≤ 25.1 * ((1 / (2 * Real.pi)) * (Real.exp 1)⁻¹ + 6/5 * 0.474) := by
+        gcongr
+    -- (∵ ℝ の有理数評価)
+    _ ≤ 25.1 * (0.0586 + 0.5688) := by
+        have h1 : (1 / (2 * Real.pi)) * (Real.exp 1)⁻¹ ≤ 0.1592 * 0.36788 :=
+          mul_le_mul hinv2pi hexp (inv_nonneg.2 hexp0.le) (by norm_num)
+        have h2 : (0.1592 : ℝ) * 0.36788 ≤ 0.0586 := by norm_num
+        have h3 : (6/5 : ℝ) * 0.474 = 0.5688 := by norm_num
+        linarith
+    -- (∵ ℝ の有理数計算)
+    _ ≤ 15.75 := by norm_num
 
 /-- **人手証明 Step 5**: `|16 G''(κ) - (8/π)log(1/|κ|)| ≤ 19.2`。 -/
 theorem abs_sixteen_Gsecond_sub_le {κ : ℝ} (h0 : κ ≠ 0) (h1 : |κ| ≤ 1/2) :

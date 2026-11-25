@@ -1,0 +1,13 @@
+=== gamma_kappa_identity（すべての実数 theta、等方・非等方の両方） ===
+  K1=0.3, K2=0.7: kappa=0.096427636, A=0.33432394 | 加法定理 4.59e-41, gamma_1 4.59e-41, cosh 0.0, 半角 2.3e-41, arcsinh 表示 3.75e-40, 偶関数 0.0  -> PASS
+  K1=0.44, K2=0.45: kappa=0.017010682, A=0.9722768 | 加法定理 2.3e-41, gamma_1 4.59e-41, cosh 2.3e-41, 半角 4.59e-41, arcsinh 表示 1.07e-39, 偶関数 0.0  -> PASS
+  K1=0.440687, K2=0.440687: kappa=0.0, A=1.0 | 加法定理 2.3e-41, gamma_1 4.59e-41, cosh 4.59e-41, 半角 1.15e-41, arcsinh 表示 6.78e-21, 偶関数 0.0  -> PASS
+  K1=0.25, K2=0.703415: kappa=0.0, A=0.27154032 | 加法定理 2.3e-41, gamma_1 2.3e-41, cosh 0.0, 半角 1.37e-41, arcsinh 表示 6.78e-21, 偶関数 0.0  -> PASS
+  K1=0.7, K2=0.251786: kappa=0.0, A=3.6263642 | 加法定理 9.18e-41, gamma_1 1.84e-40, cosh 1.84e-40, 半角 1.84e-40, arcsinh 表示 1.36e-20, 偶関数 0.0  -> PASS
+  K1=1.2, K2=0.2: kappa=0.77735182, A=13.307847 | 加法定理 2.98e-40, gamma_1 5.51e-40, cosh 3.67e-40, 半角 2.76e-40, arcsinh 表示 3.56e-40, 偶関数 0.0  -> PASS
+  K1=0.1, K2=1.5: kappa=0.10034347, A=0.020097676 | 加法定理 0.0, gamma_1 0.0, cosh 0.0, 半角 9.33e-42, arcsinh 表示 9.33e-41, 偶関数 0.0  -> PASS
+
+=== cosh_addition_and_half_angle (2)(4)(5) ===
+  cosh x = 1+2sinh^2(x/2) 0.0, sinh x = 2 sinh cosh 1.84e-40, sinh(arcsinh y)=y 1.38e-40, t<=sinh t<=t cosh t OK  -> PASS
+
+RESULT: PASS

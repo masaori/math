@@ -3,9 +3,7 @@
 #   対象: structured-latex elementary_sine_bounds, closed_form_log_integral,
 #         sine_integral_two_sided, gamma_derivatives_in_kappa
 # ---------------------------------------------------------
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '_prelude.sage'))
+load('_prelude.sage')  # run-all-checks.sh がこのディレクトリへ cd してから呼ぶ
 
 all_ok = True
 N = 400

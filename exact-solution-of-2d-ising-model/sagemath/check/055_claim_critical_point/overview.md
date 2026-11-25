@@ -69,6 +69,7 @@ sinh²(γ(θ)/2) = sinh²(κ/2) + A sin²(θ/2)
 | 03 | check_03_elementary_bounds.sage | `elementary_sine_bounds`（`c_0`）、`closed_form_log_integral`・`arcsinh_two_sided_log_bounds`・`log_integral_two_sided_bounds`・`three_halves_power_integral_bound`（旧 `closed_form_log_integral` の三つの主張）、`sine_integral_two_sided` の両側評価、`γ` の導関数の式と `\|∂_κγ\|≤1` | PASS | （run-log.txt 参照） |
 | 04 | check_04_G_second_derivative.sage | 本文 Step 1（(R5) の交換・`\|G'\|≤1/2`）／Step 2,3（折り返しと `J,T` 分解）／Step 4,5,6 の各定数／Step 7 の `6/5`、偶関数性、発散 | PASS | （run-log.txt 参照） |
 | 05 | check_05_specific_heat.sage | `f''` の分解式、主定理の `45` / `49`、比 `f''/log(1/\|K−K_c\|) → 8/π`、有限 `M` からの収束、`C = k_B K² f''` | PASS | （run-log.txt 参照） |
+| 06 | check_06_x_log_inverse_at_most_inverse_e.sage | `specific_heat_log_divergence` の Step 4 の準備 `g(x) = x log(1/x) ≤ 1/e`（`0 < x ≤ 1`）の各行: `1/t` と `log(1/t)` の導関数、`g'(t) = log(1/t) − 1`、`g'` の符号（`t = 1/e` で 0）、(R4)・(R3) の二つの鎖、`g(1/e) = 1/e`、Step 4 の 1 行目の絶対値の積。e を含む符号は区間演算（256 ビット）で判定 | PASS | logs/check_06_x_log_inverse_at_most_inverse_e.sage.log |
 
 ## 実測値（本文の定数はいずれも最適化していない）
 
