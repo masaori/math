@@ -36,8 +36,10 @@ variable {M : ℕ}
 
 /-- **(1)**: `θ~_{M+1-μ} = 2π - θ~_μ`（人手の 26 行に 1 段ずつ対応する）。
 
-人手の `(M_col)_ℝ` は `M_col ∈ ℤ` の `ι_{ℤ→ℝ}` による像で、Lean では `((M : ℤ) : ℝ)` と書く
-（`thetaTilde` の分母と、分子の `(M_col+1-μ)_ℝ` から 2・3 行目で分ける項の両方）。
+人手の `(M_col)_ℝ` は `M_col ∈ ℤ` の `ι_{ℤ→ℝ}` による像である。`thetaTilde` の定義の分母は名前を付けた写像の像
+`((inclusionNNtoZZ M : ℤ) : ℝ)` だが、この鎖は主張の添字 `(M : ℤ) + 1 - μ` に合わせて `((M : ℤ) : ℝ)` で書く
+（分母と、分子の `(M_col+1-μ)_ℝ` から 2・3 行目で分ける項の両方）。定義を開く 1 行目と 25 行目で、分母の像を
+`inclusionNNtoZZ_eq_natCast` により Lean の `Nat.cast` へ移す（Lean だけの段）。
 人手の `M_col+1-μ ∈ ℤ` は `(M_col+1)-μ` と左から括る（Lean の `+`・`-` の括りと同じ）。
 差の定義 `def_real_difference`（`y - z := y + (-z)`）は `sub_eq_add_neg` で当てる。
 人手の `2π` は 1 つの実数で、Lean の `2 * Real.pi` に当たる。商の定義 `def_real_quotient`（`y/z := y z^{-1}`）は
@@ -46,7 +48,8 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     thetaTilde M ((M : ℤ) + 1 - μ) = 2 * Real.pi - thetaTilde M μ := by
   have hMR : ((M : ℤ) : ℝ) ≠ 0 := Int.cast_ne_zero.mpr (Int.natCast_ne_zero.mpr hM)
   calc thetaTilde M ((M : ℤ) + 1 - μ)
-      = 2 * Real.pi * ((((M : ℤ) + 1 - μ : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
+      = 2 * Real.pi * ((((M : ℤ) + 1 - μ : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := by
+        rw [thetaTilde, inclusionNNtoZZ_eq_natCast]   -- Lean だけの段: 分母の像 `ι_{ℕ→ℤ}(M)` を、この鎖の Lean の `Nat.cast` へ移す
           -- 1 行目: `θ~` の定義を `M_col+1-μ ∈ ℤ` で（`antiperiodic_exp_sum`）
     _ = 2 * Real.pi * (((((M : ℤ) + 1 : ℤ) : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [inclusion_zz_to_rr_preserves_difference ((M : ℤ) + 1) μ]
@@ -105,7 +108,8 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
     _ = 2 * Real.pi + -(2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) := by
         rw [← real_div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2)) _ hMR]
                                                   -- 24 行目: `def_real_quotient` を右辺から左辺へ
-    _ = 2 * Real.pi + -thetaTilde M μ := rfl     -- 25 行目: `θ~_μ` の定義（`antiperiodic_exp_sum`）
+    _ = 2 * Real.pi + -thetaTilde M μ := by
+        rw [thetaTilde, inclusionNNtoZZ_eq_natCast]   -- 25 行目: `θ~_μ` の定義（`antiperiodic_exp_sum`）。分母の像を `Nat.cast` へ移す段は Lean だけ
     _ = 2 * Real.pi - thetaTilde M μ := by
         rw [← sub_eq_add_neg (2 * Real.pi) (thetaTilde M μ)]
                                                   -- 26 行目: `def_real_difference`（`y → 2π`, `z → θ~_μ`）を右辺から左辺へ
@@ -248,7 +252,10 @@ theorem checkPhase_conj (hM : M ≠ 0) (k μ : ℤ) :
 （`checkZ_period`）を添字 `1-μ` に当てる。 -/
 theorem checkZ_conj (hM : M ≠ 0) (μ : ℤ) : checkZ M ((M : ℤ) + 1 - μ) = checkZ M (1 - μ) := by
   calc
-    checkZ M ((M : ℤ) + 1 - μ) = checkZ M ((1 - μ) + (M : ℤ)) := by
+    checkZ M ((M : ℤ) + 1 - μ) = checkZ M ((1 - μ) + inclusionNNtoZZ M) := by
+      -- Lean だけの段: 主張の Lean の `Nat.cast` の `(M : ℤ)` を、`checkZ_period` の像 `ι_{ℕ→ℤ}(M)` へ移す
+      rw [inclusionNNtoZZ_eq_natCast]
+      -- 人手の段: 添字 `M_col+1-μ` を `(1-μ)+M_col` と書き直す（ℤ の加法の交換律・結合律）
       rw [show (M : ℤ) + 1 - μ = (1 - μ) + (M : ℤ) by ring]
     _ = checkZ M (1 - μ) := checkZ_period hM (1 - μ)
 
@@ -258,7 +265,10 @@ theorem checkZ_conj (hM : M ≠ 0) (μ : ℤ) : checkZ M ((M : ℤ) + 1 - μ) = 
 （`checkY_period`）を添字 `1-μ` に当てる。 -/
 theorem checkY_conj (hM : M ≠ 0) (μ : ℤ) : checkY M ((M : ℤ) + 1 - μ) = checkY M (1 - μ) := by
   calc
-    checkY M ((M : ℤ) + 1 - μ) = checkY M ((1 - μ) + (M : ℤ)) := by
+    checkY M ((M : ℤ) + 1 - μ) = checkY M ((1 - μ) + inclusionNNtoZZ M) := by
+      -- Lean だけの段: 主張の Lean の `Nat.cast` の `(M : ℤ)` を、`checkY_period` の像 `ι_{ℕ→ℤ}(M)` へ移す
+      rw [inclusionNNtoZZ_eq_natCast]
+      -- 人手の段: 添字 `M_col+1-μ` を `(1-μ)+M_col` と書き直す（ℤ の加法の交換律・結合律）
       rw [show (M : ℤ) + 1 - μ = (1 - μ) + (M : ℤ) by ring]
     _ = checkY M (1 - μ) := checkY_period hM (1 - μ)
 

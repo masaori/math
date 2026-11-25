@@ -278,7 +278,7 @@ theorem checkPhase_eq_weight_mul (hM : M ≠ 0) (b μ : ℤ) :
 整数運動量の `hatZ_hatY_M_periodicity`（`RoutesNotAdopted/IntegerMomentum/ClaimHatZHatYPeriodicityFromNecSuf.lean`）と
 **同じ必要十分版**を、重み `w_j = e^{iπ j/M}` に取り替えて使っているだけである。 -/
 theorem checkZ_period_of_necSuf (hM : M ≠ 0) (μ : ℤ) :
-    checkZ M (μ + (M : ℤ)) = checkZ M μ := by
+    checkZ M (μ + inclusionNNtoZZ M) = checkZ M μ := by
   have hζ : IsPrimitiveRoot (expPhase M 1) M := isPrimitiveRoot_expPhase_one hM
   have h := NecSuf.transform_periodic (K := ℂ) (V := TensorPow M) hM hζ
       (fun j : Fin M => finIndexToZZ M j)
@@ -290,12 +290,12 @@ theorem checkZ_period_of_necSuf (hM : M ≠ 0) (μ : ℤ) :
     intro ν
     rw [checkZ]
     exact Finset.sum_congr rfl fun j _ => by rw [checkPhase_eq_weight_mul hM]
-  rw [hL (μ + (M : ℤ)), hL μ]
+  rw [inclusionNNtoZZ_eq_natCast, hL (μ + (M : ℤ)), hL μ]   -- 主張の像 `ι_{ℕ→ℤ}(M)` を、必要十分版に渡す Lean の `Nat.cast` へ移す
   exact h
 
 /-- **`half_integer_checkY_periodicity`**を同じ必要十分版から導いたもの。 -/
 theorem checkY_period_of_necSuf (hM : M ≠ 0) (μ : ℤ) :
-    checkY M (μ + (M : ℤ)) = checkY M μ := by
+    checkY M (μ + inclusionNNtoZZ M) = checkY M μ := by
   have hζ : IsPrimitiveRoot (expPhase M 1) M := isPrimitiveRoot_expPhase_one hM
   have h := NecSuf.transform_periodic (K := ℂ) (V := TensorPow M) hM hζ
       (fun j : Fin M => finIndexToZZ M j)
@@ -307,7 +307,7 @@ theorem checkY_period_of_necSuf (hM : M ≠ 0) (μ : ℤ) :
     intro ν
     rw [checkY]
     exact Finset.sum_congr rfl fun j _ => by rw [checkPhase_eq_weight_mul hM]
-  rw [hL (μ + (M : ℤ)), hL μ]
+  rw [inclusionNNtoZZ_eq_natCast, hL (μ + (M : ℤ)), hL μ]   -- 主張の像 `ι_{ℕ→ℤ}(M)` を、必要十分版に渡す Lean の `Nat.cast` へ移す
   exact h
 
 end Ising2D

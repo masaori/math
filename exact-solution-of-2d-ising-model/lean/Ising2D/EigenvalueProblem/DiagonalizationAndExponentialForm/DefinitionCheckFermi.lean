@@ -71,8 +71,10 @@ theorem gamma1R_add_two_pi_mul_int (K : IsingConst) (θ : ℝ) (k : ℤ) :
 
 /-- 人手 `periodicity_of_check_fermi` (2) の第一の鎖: `θ̃_{μ+kM} = θ̃_μ + 2π k_ℝ`（人手の 17 行）。
 
-人手の `(M_col)_ℝ` は `M_col ∈ ℤ` の `ι_{ℤ→ℝ}` による像で、Lean では `((M : ℤ) : ℝ)` と書く
-（`thetaTilde` の分母と、分子の `(kM_col)_ℝ` から 3 行目で分ける因子の両方）。
+人手の `(M_col)_ℝ` は `M_col ∈ ℤ` の `ι_{ℤ→ℝ}` による像である。`thetaTilde` の定義の分母は名前を付けた写像の像
+`((inclusionNNtoZZ M : ℤ) : ℝ)` だが、この鎖は主張の添字 `μ + k * M` に合わせて `((M : ℤ) : ℝ)` で書く
+（分母と、分子の `(kM_col)_ℝ` から 3 行目で分ける因子の両方）。定義を開く 1 行目と 13 行目で、分母の像を
+`inclusionNNtoZZ_eq_natCast` により Lean の `Nat.cast` へ移す（Lean だけの段）。
 人手の `2π` は 1 つの実数で、Lean の `2 * Real.pi` に当たる。9 行目の分配律が作る形は `2π(k_ℝ(M_col)_ℝ)` である。
 人手 `def_real_difference`（`y − z := y + (−z)`）は mathlib の `sub_eq_add_neg`、
 人手 `def_real_quotient`（`y/z := y z^{-1}`）は具体版 `real_div_eq_mul_inv`、その乗法の逆元（`z z^{-1} = 1_ℝ`）は
@@ -81,7 +83,8 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
     thetaTilde M (μ + k * M) = thetaTilde M μ + 2 * Real.pi * (k : ℝ) := by
   have hM' : ((M : ℤ) : ℝ) ≠ 0 := Int.cast_ne_zero.2 (Int.natCast_ne_zero.2 hM)
   calc thetaTilde M (μ + k * M)
-      = 2 * Real.pi * (((μ + k * M : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
+      = 2 * Real.pi * (((μ + k * M : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := by
+        rw [thetaTilde, inclusionNNtoZZ_eq_natCast]   -- Lean だけの段: 分母の像 `ι_{ℕ→ℤ}(M)` を、この鎖の Lean の `Nat.cast` へ移す
                                                   -- 1 行目: `θ̃` の定義を `μ+kM_col` で（`antiperiodic_exp_sum`）
     _ = 2 * Real.pi * (((μ : ℝ) + ((k * M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
         rw [inclusion_zz_to_rr_preserves_sum μ (k * M)]
@@ -115,7 +118,8 @@ theorem thetaTilde_add_int_mul (M : ℕ) (hM : M ≠ 0) (μ k : ℤ) :
           + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) * ((M : ℤ) : ℝ)⁻¹ := by
         rw [← real_div_eq_mul_inv (2 * Real.pi * ((μ : ℝ) - 1 / 2)) _ hM']
                                                   -- 12 行目: `def_real_quotient` を右辺から左辺へ
-    _ = thetaTilde M μ + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) * ((M : ℤ) : ℝ)⁻¹ := rfl
+    _ = thetaTilde M μ + 2 * Real.pi * ((k : ℝ) * ((M : ℤ) : ℝ)) * ((M : ℤ) : ℝ)⁻¹ := by
+        rw [thetaTilde, inclusionNNtoZZ_eq_natCast]   -- 分母の像を `Nat.cast` へ移す段は Lean だけ
                                                   -- 13 行目: `θ̃_μ` の定義（`antiperiodic_exp_sum`）
     _ = thetaTilde M μ + 2 * Real.pi * (k : ℝ) * ((M : ℤ) : ℝ) * ((M : ℤ) : ℝ)⁻¹ := by
         rw [← mul_assoc (2 * Real.pi) (k : ℝ)]   -- 14 行目: ℝ の乗法の結合律を右辺から左辺へ

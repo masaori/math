@@ -64,29 +64,33 @@ theorem checkPhase_antiperiodic (hM : M ≠ 0) (μ : ℤ) : checkPhase M (inclus
 
 /-- 人手 `half_integer_phase_periodicity` の準備の鎖: `θ~_{μ+M} = θ~_μ + 2π`（人手の 11 行と 1 段ずつ対応）。 -/
 theorem thetaTilde_period_for_checkZY (hM : M ≠ 0) (μ : ℤ) :
-    thetaTilde M (μ + (M : ℤ)) = thetaTilde M μ + 2 * Real.pi := by
-  have hM' : ((M : ℤ) : ℝ) ≠ 0 := Int.cast_ne_zero.2 (Int.natCast_ne_zero.2 hM)
-  calc thetaTilde M (μ + (M : ℤ))
-      = 2 * Real.pi * (((μ + (M : ℤ) : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
+    thetaTilde M (μ + inclusionNNtoZZ M) = thetaTilde M μ + 2 * Real.pi := by
+  -- 人手の前置き「`antiperiodic_exp_sum` より `(M_col)_ℝ ≠ 0_ℝ`」。Lean は `M ≠ 0` から、像 `ι_{ℕ→ℤ}(M)` を
+  -- Lean の `Nat.cast` へ移して示す（Lean だけの段）
+  have hM' : ((inclusionNNtoZZ M : ℤ) : ℝ) ≠ 0 := by
+    rw [inclusionNNtoZZ_eq_natCast]
+    exact Int.cast_ne_zero.2 (Int.natCast_ne_zero.2 hM)
+  calc thetaTilde M (μ + inclusionNNtoZZ M)
+      = 2 * Real.pi * (((μ + inclusionNNtoZZ M : ℤ) : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) := rfl
                                                   -- 1 行目: `θ~` の定義を `μ+M_col` で（`antiperiodic_exp_sum`）
-    _ = 2 * Real.pi * (((μ : ℝ) + ((M : ℤ) : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
-        rw [inclusion_zz_to_rr_preserves_sum μ (M : ℤ)]
+    _ = 2 * Real.pi * (((μ : ℝ) + ((inclusionNNtoZZ M : ℤ) : ℝ)) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
+        rw [inclusion_zz_to_rr_preserves_sum μ (inclusionNNtoZZ M)]
                                                   -- 2 行目: `inclusion_zz_to_rr_preserves_sum`（`a → μ`, `b → M_col`）
-    _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * ((((inclusionNNtoZZ M : ℤ) : ℝ) + (μ : ℝ)) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [add_comm (μ : ℝ)]                     -- 3 行目: ℝ の加法の交換律
-    _ = 2 * Real.pi * ((((M : ℤ) : ℝ) + (μ : ℝ)) + (-(1 / 2))) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * ((((inclusionNNtoZZ M : ℤ) : ℝ) + (μ : ℝ)) + (-(1 / 2))) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg]                       -- 4 行目: `def_real_difference`
-    _ = 2 * Real.pi * (((M : ℤ) : ℝ) + ((μ : ℝ) + (-(1 / 2)))) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (((inclusionNNtoZZ M : ℤ) : ℝ) + ((μ : ℝ) + (-(1 / 2)))) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [add_assoc]                            -- 5 行目: ℝ の加法の結合律
-    _ = 2 * Real.pi * (((M : ℤ) : ℝ) + ((μ : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (((inclusionNNtoZZ M : ℤ) : ℝ) + ((μ : ℝ) - 1 / 2)) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [← sub_eq_add_neg]                     -- 6 行目: `def_real_difference` を右辺から左辺へ
-    _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
-        rw [add_comm ((M : ℤ) : ℝ)]               -- 7 行目: ℝ の加法の交換律
-    _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((M : ℤ) : ℝ)) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (((μ : ℝ) - 1 / 2) + ((inclusionNNtoZZ M : ℤ) : ℝ)) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
+        rw [add_comm ((inclusionNNtoZZ M : ℤ) : ℝ)]               -- 7 行目: ℝ の加法の交換律
+    _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((inclusionNNtoZZ M : ℤ) : ℝ)) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [mul_add]                              -- 8 行目: ℝ の分配律
-    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) + 2 * Real.pi * ((M : ℤ) : ℝ) / ((M : ℤ) : ℝ) :=
+    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) + 2 * Real.pi * ((inclusionNNtoZZ M : ℤ) : ℝ) / ((inclusionNNtoZZ M : ℤ) : ℝ) :=
         add_div _ _ _                             -- 9 行目: `(M_col)_ℝ ≠ 0_ℝ` を分母とする分数の和
-    _ = thetaTilde M μ + 2 * Real.pi * ((M : ℤ) : ℝ) / ((M : ℤ) : ℝ) := rfl
+    _ = thetaTilde M μ + 2 * Real.pi * ((inclusionNNtoZZ M : ℤ) : ℝ) / ((inclusionNNtoZZ M : ℤ) : ℝ) := rfl
                                                   -- 10 行目: `θ~_μ` の定義（`antiperiodic_exp_sum`）
     _ = thetaTilde M μ + 2 * Real.pi := by
         rw [mul_div_cancel_right₀ _ hM']          -- 11 行目: `(M_col)_ℝ ≠ 0_ℝ` による約分
@@ -105,17 +109,17 @@ calc の 2〜9 段目が人手の主張の鎖の 7 行に対応する（人手�
 （人手は分配と積の交換を準備の鎖 `j_ℝθ~_{μ+M} = j_ℝθ~_μ + 2πj_ℝ` で済ませ、Lean は `2πj_ℝ` を `j_ℝ·(2π)` の形のまま
 `Real.cos_add_int_mul_two_pi` に渡す）。 -/
 theorem checkPhase_period_for_checkZY (hM : M ≠ 0) (j μ : ℤ) :
-    checkPhase M j (μ + (M : ℤ)) = checkPhase M j μ := by
+    checkPhase M j (μ + inclusionNNtoZZ M) = checkPhase M j μ := by
   calc
-    checkPhase M j (μ + (M : ℤ))
-        = Complex.exp ((-Complex.I) * (((j : ℝ) * thetaTilde M (μ + (M : ℤ)) : ℝ) : ℂ)) :=
+    checkPhase M j (μ + inclusionNNtoZZ M)
+        = Complex.exp ((-Complex.I) * (((j : ℝ) * thetaTilde M (μ + inclusionNNtoZZ M) : ℝ) : ℂ)) :=
           checkPhase_eq_exp_neg_I_mul hM j _
     -- 人手 1 行目: `negative_i_times_complex_is_negation_of_i_times`（`z → (j_ℝθ~_{μ+M})_ℂ`）
-    _ = Complex.exp (-(Complex.I * (((j : ℝ) * thetaTilde M (μ + (M : ℤ)) : ℝ) : ℂ))) := by
+    _ = Complex.exp (-(Complex.I * (((j : ℝ) * thetaTilde M (μ + inclusionNNtoZZ M) : ℝ) : ℂ))) := by
           rw [neg_I_mul_eq_neg_of_I_mul]
     -- 人手 2 行目: `exp_of_negative_i_real_as_cos_minus_i_sin`（`θ = j_ℝθ~_{μ+M}`）
-    _ = (Real.cos ((j : ℝ) * thetaTilde M (μ + (M : ℤ))) : ℂ)
-            - Complex.I * (Real.sin ((j : ℝ) * thetaTilde M (μ + (M : ℤ))) : ℂ) :=
+    _ = (Real.cos ((j : ℝ) * thetaTilde M (μ + inclusionNNtoZZ M)) : ℂ)
+            - Complex.I * (Real.sin ((j : ℝ) * thetaTilde M (μ + inclusionNNtoZZ M)) : ℂ) :=
           exp_neg_I_mul_real_eq_cos_sub_I_mul_sin _
     -- 人手 3 行目: 上の鎖を 2 箇所へ同時代入
     _ = (Real.cos ((j : ℝ) * (thetaTilde M μ + 2 * Real.pi)) : ℂ)
@@ -144,19 +148,19 @@ theorem checkPhase_period_for_checkZY (hM : M ≠ 0) (j μ : ℤ) :
     _ = checkPhase M j μ := (checkPhase_eq_exp_neg_I_mul hM j μ).symm
 
 /-- **`half_integer_checkZ_periodicity`**: `check(Z)_{μ+M} = check(Z)_μ`。 -/
-theorem checkZ_period (hM : M ≠ 0) (μ : ℤ) : checkZ M (μ + (M : ℤ)) = checkZ M μ := by
+theorem checkZ_period (hM : M ≠ 0) (μ : ℤ) : checkZ M (μ + inclusionNNtoZZ M) = checkZ M μ := by
   calc
-    checkZ M (μ + (M : ℤ)) =
-        ∑ j : Fin M, checkPhase M (finIndexToZZ M j) (μ + (M : ℤ)) • Z j := rfl
+    checkZ M (μ + inclusionNNtoZZ M) =
+        ∑ j : Fin M, checkPhase M (finIndexToZZ M j) (μ + inclusionNNtoZZ M) • Z j := rfl
     _ = ∑ j : Fin M, checkPhase M (finIndexToZZ M j) μ • Z j :=
       Finset.sum_congr rfl fun j _ => by rw [checkPhase_period_for_checkZY hM]
     _ = checkZ M μ := rfl
 
 /-- **`half_integer_checkY_periodicity`**: `check(Y)_{μ+M} = check(Y)_μ`。 -/
-theorem checkY_period (hM : M ≠ 0) (μ : ℤ) : checkY M (μ + (M : ℤ)) = checkY M μ := by
+theorem checkY_period (hM : M ≠ 0) (μ : ℤ) : checkY M (μ + inclusionNNtoZZ M) = checkY M μ := by
   calc
-    checkY M (μ + (M : ℤ)) =
-        ∑ j : Fin M, checkPhase M (finIndexToZZ M j) (μ + (M : ℤ)) • Y j := rfl
+    checkY M (μ + inclusionNNtoZZ M) =
+        ∑ j : Fin M, checkPhase M (finIndexToZZ M j) (μ + inclusionNNtoZZ M) • Y j := rfl
     _ = ∑ j : Fin M, checkPhase M (finIndexToZZ M j) μ • Y j :=
       Finset.sum_congr rfl fun j _ => by rw [checkPhase_period_for_checkZY hM]
     _ = checkY M μ := rfl
@@ -164,35 +168,35 @@ theorem checkY_period (hM : M ≠ 0) (μ : ℤ) : checkY M (μ + (M : ℤ)) = ch
 /-- **(3) 共役添字**: `θ~_{1-μ} = -θ~_μ`（人手 `def_half_integer_modes` の証明の 14 行と 1 段ずつ対応）。 -/
 theorem thetaTilde_one_sub (M : ℕ) (μ : ℤ) : thetaTilde M (1 - μ) = -thetaTilde M μ := by
   calc thetaTilde M (1 - μ)
-      = 2 * Real.pi * (((1 - μ : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) := rfl
+      = 2 * Real.pi * (((1 - μ : ℤ) : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) := rfl
                                                   -- 1 行目: `θ~` の定義を `1-μ` で（`antiperiodic_exp_sum`）
-    _ = 2 * Real.pi * ((((1 : ℤ) : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * ((((1 : ℤ) : ℝ) - (μ : ℝ)) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [inclusion_zz_to_rr_preserves_difference 1 μ]
                                                   -- 2 行目: `inclusion_zz_to_rr_preserves_difference`（`a → 1_ℤ`, `b → μ`）
-    _ = 2 * Real.pi * (((1 : ℝ) - (μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (((1 : ℝ) - (μ : ℝ)) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [inclusion_zz_to_rr_of_one_intCast]    -- 3 行目: `inclusion_zz_to_rr_of_one`（`ι_{ℤ→ℝ}(1_ℤ) = 1_ℝ`）
-    _ = 2 * Real.pi * (((1 : ℝ) + -(μ : ℝ)) - 1 / 2) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (((1 : ℝ) + -(μ : ℝ)) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg (1 : ℝ) (μ : ℝ)]       -- 4 行目: `def_real_difference`（`y → 1_ℝ`, `z → μ_ℝ`）
-    _ = 2 * Real.pi * (((1 : ℝ) + -(μ : ℝ)) + -(1 / 2)) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (((1 : ℝ) + -(μ : ℝ)) + -(1 / 2)) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [sub_eq_add_neg ((1 : ℝ) + -(μ : ℝ)) (1 / 2)]
                                                   -- 5 行目: `def_real_difference`（`y → 1_ℝ + (-μ_ℝ)`, `z → 1/2`）
-    _ = 2 * Real.pi * ((1 : ℝ) + (-(μ : ℝ) + -(1 / 2))) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * ((1 : ℝ) + (-(μ : ℝ) + -(1 / 2))) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [add_assoc]                            -- 6 行目: ℝ の加法の結合律
-    _ = 2 * Real.pi * ((1 : ℝ) + (-(1 / 2) + -(μ : ℝ))) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * ((1 : ℝ) + (-(1 / 2) + -(μ : ℝ))) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [add_comm (-(μ : ℝ))]                  -- 7 行目: ℝ の加法の交換律
-    _ = 2 * Real.pi * (((1 : ℝ) + -(1 / 2)) + -(μ : ℝ)) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (((1 : ℝ) + -(1 / 2)) + -(μ : ℝ)) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [← add_assoc]                          -- 8 行目: ℝ の加法の結合律を右辺から左辺へ
-    _ = 2 * Real.pi * (((1 : ℝ) - 1 / 2) + -(μ : ℝ)) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (((1 : ℝ) - 1 / 2) + -(μ : ℝ)) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [← sub_eq_add_neg (1 : ℝ) (1 / 2)]     -- 9 行目: `def_real_difference`（`y → 1_ℝ`, `z → 1/2`）を右辺から左辺へ
-    _ = 2 * Real.pi * (((1 : ℝ) - 1 / 2) - (μ : ℝ)) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (((1 : ℝ) - 1 / 2) - (μ : ℝ)) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [← sub_eq_add_neg ((1 : ℝ) - 1 / 2) (μ : ℝ)]
                                                   -- 10 行目: `def_real_difference`（`y → 1_ℝ - 1/2`, `z → μ_ℝ`）を右辺から左辺へ
-    _ = 2 * Real.pi * ((1 / 2 : ℝ) - (μ : ℝ)) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * ((1 / 2 : ℝ) - (μ : ℝ)) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [show (1 : ℝ) - 1 / 2 = 1 / 2 by norm_num]
                                                   -- 11 行目: `1_ℝ - 1/2 = 1/2`
-    _ = 2 * Real.pi * (-((μ : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ) := by
+    _ = 2 * Real.pi * (-((μ : ℝ) - 1 / 2)) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [neg_sub]                              -- 12 行目: `1/2 - μ_ℝ = -(μ_ℝ - 1/2)`
-    _ = -(2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) := by
+    _ = -(2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [mul_neg, neg_div]                     -- 13 行目: 積と分数から `-1` をくくり出す
     _ = -thetaTilde M μ := rfl                    -- 14 行目: `θ~_μ` の定義（`antiperiodic_exp_sum`）
 

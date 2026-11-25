@@ -64,7 +64,10 @@ theorem IsingParam.c2_pos : 0 < P.const.c2 :=
 `ClaimGamma2TildeNonzeroFromNecSuf.lean` の `cos_thetaTilde_eq_neg_one_of_sin_eq_zero_of_necSuf`。 -/
 theorem cos_thetaTilde_eq_neg_one_of_sin_eq_zero {M : ℕ} (hM : M ≠ 0) (μ : ℤ)
     (hsin : Real.sin (thetaTilde M μ) = 0) : Real.cos (thetaTilde M μ) = -1 := by
-  have hMR : ((M : ℤ) : ℝ) ≠ 0 := by exact_mod_cast hM
+  -- Lean だけの段: 像 `ι_{ℕ→ℤ}(M)` を Lean の `Nat.cast` へ移して `M ≠ 0` から示す
+  have hMR : ((inclusionNNtoZZ M : ℤ) : ℝ) ≠ 0 := by
+    rw [inclusionNNtoZZ_eq_natCast]
+    exact_mod_cast hM
   have hpi : Real.pi ≠ 0 := ne_of_gt Real.pi_pos
     -- `pi_is_positive`
   -- Step 2 の鎖の 1 行目: `sin θ~_μ = 0 ⟹ ∃k ∈ ℤ, θ~_μ = kπ`
@@ -73,28 +76,29 @@ theorem cos_thetaTilde_eq_neg_one_of_sin_eq_zero {M : ℕ} (hM : M ≠ 0) (μ : 
     exact ⟨n, hn.symm⟩
     -- `sin t = 0 ⟺ ∃k ∈ ℤ, t = kπ`（`t → θ~_μ`）
   -- 2 行目: `2π(μ − 1/2)/M_col = kπ`
-  have h2 : 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) = (k : ℝ) * Real.pi := hk
+  have h2 : 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) = (k : ℝ) * Real.pi := hk
     -- `antiperiodic_exp_sum` の `θ~_μ` の定義
   -- 3 行目: `2(μ − 1/2)/M_col = k`
-  have h3 : 2 * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ) = (k : ℝ) :=
-    calc 2 * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)
-        = Real.pi * (2 * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) / Real.pi :=
+  have h3 : 2 * ((μ : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ) = (k : ℝ) :=
+    calc 2 * ((μ : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ)
+        = Real.pi * (2 * ((μ : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ)) / Real.pi :=
           (mul_div_cancel_left₀ _ hpi).symm
-      _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) / Real.pi := by
+      _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ)) / Real.pi := by
           rw [← mul_div_assoc, mul_left_comm, ← mul_assoc]
       _ = ((k : ℝ) * Real.pi) / Real.pi := by rw [h2]
       _ = (k : ℝ) := mul_div_cancel_right₀ (k : ℝ) hpi
     -- 両辺を `π > 0`（`pi_is_positive`）で割る（両辺の `π · ( ) / π` の約分に `π ≠ 0` を使う）
   -- 4 行目: `2(μ − 1/2) = kM_col`
-  have h4 : 2 * ((μ : ℝ) - 1 / 2) = (k : ℝ) * ((M : ℤ) : ℝ) := (div_eq_iff hMR).1 h3
+  have h4 : 2 * ((μ : ℝ) - 1 / 2) = (k : ℝ) * ((inclusionNNtoZZ M : ℤ) : ℝ) := (div_eq_iff hMR).1 h3
     -- 両辺を `M_col ≠ 0` 倍する
   -- 5 行目: `2μ − 1 = kM_col`
-  have h5 : 2 * (μ : ℝ) - 1 = (k : ℝ) * ((M : ℤ) : ℝ) := by
+  have h5 : 2 * (μ : ℝ) - 1 = (k : ℝ) * ((inclusionNNtoZZ M : ℤ) : ℝ) := by
     rw [← h4]; ring
     -- 分配律 `2(μ − 1/2) = 2μ − 1`
   -- Lean だけの段: 5 行目の両辺は整数の像なので、ℤ の等式として読む（`ι_{ℤ→ℝ}` の単射と和・積の保存）。
   -- 人手はこの段を書かずに 5 行目を ℤ の等式として次の鎖で使っている（状態台帳の残る件）
-  have h5Z : 2 * μ - 1 = k * (M : ℤ) := by exact_mod_cast h5
+  -- （`h5` の右辺の像 `ι_{ℕ→ℤ}(M)` は、続く鎖の Lean の `Nat.cast` の `(M : ℤ)` へ `inclusionNNtoZZ_eq_natCast` で移す）
+  have h5Z : 2 * μ - 1 = k * (M : ℤ) := by rw [← inclusionNNtoZZ_eq_natCast]; exact_mod_cast h5
   -- `k` が奇数であることの鎖の 1 行目: `kM_col = 2(μ − 1) + 1`
   have h6 : k * (M : ℤ) = 2 * (μ - 1) + 1 := by
     rw [← h5Z]; ring

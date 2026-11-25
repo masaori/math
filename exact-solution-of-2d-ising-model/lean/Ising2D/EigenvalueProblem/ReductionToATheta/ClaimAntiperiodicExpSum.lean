@@ -169,9 +169,10 @@ theorem expPhase_two_mul_neg_half (hM : M ≠ 0) : expPhase (2 * M) (-(M : ℤ))
 /-- **原文の `θ~_μ := 2π(μ_ℝ - 1/2)/(M_col)_ℝ ∈ ℝ`**。
 
 原文の `(M_col)_ℝ` は `M_col ∈ ℤ` の `ι_{ℤ→ℝ}` による像で、`M_col = ι_{ℕ→ℤ}(M_ℕ)` である。
-Lean の `M : ℕ` は `M_ℕ` を表すので、分母は `ℕ → ℤ → ℝ` の像 `((M : ℤ) : ℝ)` と書く
-（`ℕ → ℝ` の直接の像 `(M : ℝ)` は原文に無い写像である）。 -/
-noncomputable def thetaTilde (M : ℕ) (μ : ℤ) : ℝ := 2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)
+Lean の `M : ℕ` は `M_ℕ` を表すので、分母は名前を付けた写像の像 `ι_{ℤ→ℝ}(ι_{ℕ→ℤ}(M))`
+（`inclusionNNtoZZ`、`inclusion_nn_to_zz`）と書く（`ℕ → ℝ` の直接の像 `(M : ℝ)` は原文に無い写像である）。 -/
+noncomputable def thetaTilde (M : ℕ) (μ : ℤ) : ℝ :=
+  2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ)
 
 /-- **原文の位相因子 `e^{-i k θ~_μ}`**。`2M` 乗根の**奇数**周波数 `k(2μ-1)` である。 -/
 noncomputable def checkPhase (M : ℕ) (k μ : ℤ) : ℂ := expPhase (2 * M) (k * (2 * μ - 1))
@@ -180,7 +181,8 @@ noncomputable def checkPhase (M : ℕ) (k μ : ℤ) : ℂ := expPhase (2 * M) (k
 theorem checkPhase_eq_exp (hM : M ≠ 0) (k μ : ℤ) :
     checkPhase M k μ = Complex.exp (-(Complex.I * (k : ℂ) * (thetaTilde M μ : ℂ))) := by
   have hMC : ((M : ℕ) : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hM
-  rw [checkPhase, expPhase, thetaTilde]
+  -- Lean だけの段: 分母の像 `ι_{ℕ→ℤ}(M)` を、以下の `push_cast` が使う Lean の `Nat.cast` へ移す
+  rw [checkPhase, expPhase, thetaTilde, inclusionNNtoZZ_eq_natCast]
   congr 1
   push_cast
   field_simp
@@ -445,7 +447,8 @@ theorem antiperiodic_complex_exp_sum_eq_checkPhase (hM : M ≠ 0) (k : ℤ) :
       _ = 2 * (m : ℝ) - 1 := by rw [inclusion_zz_to_rr_of_one_intCast]      -- `inclusion_zz_to_rr_of_one`
   apply Finset.sum_congr rfl
   intro μ _
-  rw [checkPhase, expPhase, thetaTilde]
+  -- Lean だけの段: `θ~` の分母の像 `ι_{ℕ→ℤ}(M)` を、`h2MR` と `push_cast` が使う Lean の `Nat.cast` へ移す
+  rw [checkPhase, expPhase, thetaTilde, inclusionNNtoZZ_eq_natCast]
   congr 1
   -- 人手の奇偶の分割の行の `((2μ - 1)_ℤ)_ℝ = 2_ℝ(μ_ℤ)_ℝ - 1_ℝ` と T_{2M} の鎖の `(2(M_col)_ℕ)_ℝ = 2_ℝ(M_col)_ℝ`
   -- （`inclusion_zz_to_rr_preserves_product` で `((-k)(2μ - 1))_ℝ = (-k)_ℝ((2μ - 1))_ℝ`）。残りの `push_cast`・`field_simp` は、

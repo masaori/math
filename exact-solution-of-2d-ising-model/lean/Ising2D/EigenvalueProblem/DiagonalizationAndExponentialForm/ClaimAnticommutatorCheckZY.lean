@@ -79,60 +79,60 @@ theorem deltaMod_neg_sub_one (M : ℕ) (μ ν : ℤ) :
 人手の `j` は Lean の `k` である。人手の 24 行のうち `κ` を置く 1 行を除く 23 行に 1 段ずつ対応する（`2π` は Lean では積 `2 * Real.pi`）。 -/
 theorem anticomm_exponent_real_chain (k μ ν : ℤ) :
     (k : ℝ) * thetaTilde M μ + (k : ℝ) * thetaTilde M ν
-      = -(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ) / ((M : ℤ) : ℝ)) :=
+      = -(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ) / ((inclusionNNtoZZ M : ℤ) : ℝ)) :=
   calc (k : ℝ) * thetaTilde M μ + (k : ℝ) * thetaTilde M ν
       = (k : ℝ) * (thetaTilde M μ + thetaTilde M ν) := (mul_add _ _ _).symm  -- ℝ の分配律
-    _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)
-          + 2 * Real.pi * ((ν : ℝ) - 1 / 2) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ)
+          + 2 * Real.pi * ((ν : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [thetaTilde, thetaTilde]                                   -- θ~ の定義を 2 箇所へ
     _ = (k : ℝ) * ((2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * ((ν : ℝ) - 1 / 2))
-          / ((M : ℤ) : ℝ)) := by
+          / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [← add_div]          -- `(M_col)_ℝ ≠ 0` を分母とする分数の和（Lean の `add_div` は `≠ 0` を要しない）
-    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) - 1 / 2) + ((ν : ℝ) - 1 / 2)) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) - 1 / 2) + ((ν : ℝ) - 1 / 2)) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [← mul_add]                                                -- ℝ の分配律
     _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (-(1 / 2))) + ((ν : ℝ) + (-(1 / 2))))
-          / ((M : ℤ) : ℝ)) := by
+          / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [sub_eq_add_neg (μ : ℝ), sub_eq_add_neg (ν : ℝ)]           -- 差は加法の逆元の和を 2 箇所へ
     _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + ((-(1 / 2)) + ((ν : ℝ) + (-(1 / 2)))))
-          / ((M : ℤ) : ℝ)) := by
+          / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [add_assoc (μ : ℝ)]                                        -- ℝ の加法の結合律
     _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + (((ν : ℝ) + (-(1 / 2))) + (-(1 / 2))))
-          / ((M : ℤ) : ℝ)) := by
+          / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [add_comm (-(1 / 2) : ℝ) ((ν : ℝ) + (-(1 / 2)))]           -- ℝ の加法の交換律
     _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + ((ν : ℝ) + ((-(1 / 2)) + (-(1 / 2)))))
-          / ((M : ℤ) : ℝ)) := by
+          / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [add_assoc (ν : ℝ)]                                        -- ℝ の加法の結合律
     _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + ((-(1 / 2)) + (-(1 / 2))))
-          / ((M : ℤ) : ℝ)) := by
+          / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [← add_assoc (μ : ℝ)]                                      -- ℝ の加法の結合律
-    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + (-(1 / 2 + 1 / 2))) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + (-(1 / 2 + 1 / 2))) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [real_negation_of_sum_is_sum_of_negations]                 -- `real_negation_of_sum_is_sum_of_negations`（`x → ½, y → ½`）を右辺から左辺へ
-    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + (-1)) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * (((μ : ℝ) + (ν : ℝ)) + (-1)) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [add_halves]                                               -- `1/2 + 1/2 = 1_ℝ`
-    _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + (ν : ℝ) - 1) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * ((μ : ℝ) + (ν : ℝ) - 1) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [← sub_eq_add_neg]                                         -- 差は加法の逆元の和
-    _ = (k : ℝ) * (2 * Real.pi * (-(-((μ : ℝ) + (ν : ℝ) - 1))) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * (-(-((μ : ℝ) + (ν : ℝ) - 1))) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [neg_neg]                                                  -- `-(-x) = x`
-    _ = (k : ℝ) * (2 * Real.pi * (-(-((μ : ℝ) + (ν : ℝ) - ((1 : ℤ) : ℝ)))) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * (-(-((μ : ℝ) + (ν : ℝ) - ((1 : ℤ) : ℝ)))) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [inclusion_zz_to_rr_of_one_intCast]                        -- `inclusion_zz_to_rr_of_one` を右辺から左辺へ
-    _ = (k : ℝ) * (2 * Real.pi * (-(-(((μ + ν : ℤ) : ℝ) - ((1 : ℤ) : ℝ)))) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * (-(-(((μ + ν : ℤ) : ℝ) - ((1 : ℤ) : ℝ)))) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [inclusion_zz_to_rr_preserves_sum μ ν]                     -- `inclusion_zz_to_rr_preserves_sum`（`a → μ`, `b → ν`）を右辺から左辺へ
-    _ = (k : ℝ) * (2 * Real.pi * (-(-((μ + ν - 1 : ℤ) : ℝ))) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * (-(-((μ + ν - 1 : ℤ) : ℝ))) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [inclusion_zz_to_rr_preserves_difference (μ + ν) 1]       -- `inclusion_zz_to_rr_preserves_difference`（`a → μ + ν`, `b → 1_ℤ`）を右辺から左辺へ
-    _ = (k : ℝ) * (2 * Real.pi * (-((-(μ + ν - 1) : ℤ) : ℝ)) / ((M : ℤ) : ℝ)) := by
+    _ = (k : ℝ) * (2 * Real.pi * (-((-(μ + ν - 1) : ℤ) : ℝ)) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := by
         rw [inclusion_zz_to_rr_preserves_negation (μ + ν - 1)]       -- `inclusion_zz_to_rr_preserves_negation`（`a → (μ + ν) - 1_ℤ`）を右辺から左辺へ
                                                                       -- 人手の次の行 `κ := -(μ+ν-1)`・`κ_ℝ = ι(κ)` は、Lean では `κ` を置かず式のまま書くので段が無い
-    _ = (k : ℝ) * (2 * Real.pi * (-((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) :=
+    _ = (k : ℝ) * (2 * Real.pi * (-((-(μ + ν - 1) : ℤ) : ℝ))) / ((inclusionNNtoZZ M : ℤ) : ℝ) :=
         (mul_div_assoc _ _ _).symm                                    -- `a(b/c) = (ab)/c`
-    _ = (k : ℝ) * (-(2 * Real.pi * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
+    _ = (k : ℝ) * (-(2 * Real.pi * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [real_times_negation_is_negation_of_product (2 * Real.pi)]  -- `real_times_negation_is_negation_of_product`（`x → 2π`、`t → κ_ℝ`）
-    _ = (-((k : ℝ) * (2 * Real.pi * ((-(μ + ν - 1) : ℤ) : ℝ)))) / ((M : ℤ) : ℝ) := by
+    _ = (-((k : ℝ) * (2 * Real.pi * ((-(μ + ν - 1) : ℤ) : ℝ)))) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [real_times_negation_is_negation_of_product (k : ℝ)]       -- `real_times_negation_is_negation_of_product`（`x → j_ℝ`、`t → 2πκ_ℝ`）
-    _ = (-((k : ℝ) * (2 * Real.pi) * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
+    _ = (-((k : ℝ) * (2 * Real.pi) * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [← mul_assoc (k : ℝ)]                                      -- ℝ の積の結合律
-    _ = (-(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((M : ℤ) : ℝ) := by
+    _ = (-(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ))) / ((inclusionNNtoZZ M : ℤ) : ℝ) := by
         rw [mul_comm (k : ℝ) (2 * Real.pi)]                           -- ℝ の積の交換律
-    _ = -(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ) / ((M : ℤ) : ℝ)) := neg_div _ _
+    _ = -(2 * Real.pi * (k : ℝ) * ((-(μ + ν - 1) : ℤ) : ℝ) / ((inclusionNNtoZZ M : ℤ) : ℝ)) := neg_div _ _
                                                                       -- `(-a)/c = -(a/c)`
 
 /-- **準備 2 の複素数の鎖**: `(-i)(a)_ℂ + (-i)(b)_ℂ = i(y)_ℂ`（`a + b = -y`。人手では `a = j_ℝθ~_μ`、
@@ -158,15 +158,16 @@ theorem anticomm_exponent_complex_chain {a b y : ℝ} (h : a + b = -y) :
 `exp(-√-1·2π jk/M)` の和で述べてあるので、`k ↦ -κ` で当て、`M ∣ x ⟺ M ∣ -x` で `δ` を戻す。 -/
 theorem exp_sum_as_I_mul_real (hM : M ≠ 0) (κ : ℤ) :
     ∑ j : Fin M, Complex.exp (Complex.I
-        * ((2 * Real.pi * ((finIndexToZZ M j : ℤ) : ℝ) * (κ : ℝ) / ((M : ℤ) : ℝ) : ℝ) : ℂ))
+        * ((2 * Real.pi * ((finIndexToZZ M j : ℤ) : ℝ) * (κ : ℝ) / ((inclusionNNtoZZ M : ℤ) : ℝ) : ℝ) : ℂ))
       = (M : ℂ) * deltaMod M κ 0 := by
   -- 和の添字は、`exp_sum` の具体版と同じく人手の添字の像 `finIndexToZZ M j`（`def_index_set_from_one_to_n`）
   have hterm : ∀ j : Fin M,
       Complex.exp (Complex.I
-          * ((2 * Real.pi * ((finIndexToZZ M j : ℤ) : ℝ) * (κ : ℝ) / ((M : ℤ) : ℝ) : ℝ) : ℂ))
+          * ((2 * Real.pi * ((finIndexToZZ M j : ℤ) : ℝ) * (κ : ℝ) / ((inclusionNNtoZZ M : ℤ) : ℝ) : ℝ) : ℂ))
         = expPhase M (finIndexToZZ M j * (-κ)) := by
     intro j
-    rw [expPhase]
+    -- Lean だけの段: 分母の像 `ι_{ℕ→ℤ}(M)` を Lean の `Nat.cast` の `(M : ℤ)` へ移す（`expPhase` の分母 `(M : ℂ)` へは続く `push_cast` が運ぶ）
+    rw [expPhase, inclusionNNtoZZ_eq_natCast]
     congr 1
     push_cast
     ring
@@ -215,7 +216,7 @@ theorem acomm_checkZ_checkZ (hM : M ≠ 0) (μ ν : ℤ) :
       -- (∵ 準備 2 の複素数の鎖を各 j へ同時適用)
     _ = (2 * ∑ j : Fin M,
           Complex.exp (Complex.I * ((2 * Real.pi * ((finIndexToZZ M j : ℤ) : ℝ)
-            * ((-(μ + ν - 1) : ℤ) : ℝ) / ((M : ℤ) : ℝ) : ℝ) : ℂ)))
+            * ((-(μ + ν - 1) : ℤ) : ℝ) / ((inclusionNNtoZZ M : ℤ) : ℝ) : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         congr 2
         refine Finset.sum_congr rfl fun j _ => ?_
@@ -269,7 +270,7 @@ theorem acomm_checkY_checkY (hM : M ≠ 0) (μ ν : ℤ) :
       -- (∵ 準備 2 の複素数の鎖を各 j へ同時適用)
     _ = (2 * ∑ j : Fin M,
           Complex.exp (Complex.I * ((2 * Real.pi * ((finIndexToZZ M j : ℤ) : ℝ)
-            * ((-(μ + ν - 1) : ℤ) : ℝ) / ((M : ℤ) : ℝ) : ℝ) : ℂ)))
+            * ((-(μ + ν - 1) : ℤ) : ℝ) / ((inclusionNNtoZZ M : ℤ) : ℝ) : ℝ) : ℂ)))
             • (1 : TensorPow M) := by
         congr 2
         refine Finset.sum_congr rfl fun j _ => ?_

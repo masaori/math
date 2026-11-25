@@ -20,7 +20,7 @@ namespace Ising2D
 theorem thetaTilde_mul_M (M : ℕ) (hM : M ≠ 0) (μ : ℤ) :
     (M : ℝ) * thetaTilde M μ = ((2 * μ - 1 : ℤ) : ℝ) * Real.pi := by
   have hM' : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.2 hM
-  rw [thetaTilde]
+  rw [thetaTilde, inclusionNNtoZZ_eq_natCast]   -- 分母の像 `ι_{ℕ→ℤ}(M)` を Lean の `Nat.cast` へ移す
   push_cast
   field_simp
 

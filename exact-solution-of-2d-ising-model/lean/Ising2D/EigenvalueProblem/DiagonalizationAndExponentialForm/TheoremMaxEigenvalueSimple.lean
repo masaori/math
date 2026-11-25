@@ -133,11 +133,11 @@ end GammaPos
 section Reindex
 
 /-- 代表点の一致: `t^{(M)}_μ` を `δ = 1/2` で取ったものが `θ~_μ` である
-（人手の `θ~_μ = θ^{(1/2)}_{M,μ}`。`def_Theta_delta_M` と `antiperiodic_exp_sum` の `θ~_μ` の定義。Lean では `ℕ` と `ℤ` の添字の実数への包含と、分母の `(M : ℝ)`（`tagPoint`）と `((M : ℤ) : ℝ)`（`thetaTilde`）を付け替える）。 -/
+（人手の `θ~_μ = θ^{(1/2)}_{M,μ}`。`def_Theta_delta_M` と `antiperiodic_exp_sum` の `θ~_μ` の定義。Lean では `ℕ` と `ℤ` の添字の実数への包含と、分母の `(M : ℝ)`（`tagPoint`）と `((inclusionNNtoZZ M : ℤ) : ℝ)`（`thetaTilde`）を付け替える）。 -/
 theorem tagPoint_half_eq_thetaTilde (M : ℕ) (j : Fin M) :
     tagPoint (1 / 2) M ((j : ℕ) + 1) = thetaTilde M (finIndexToZZ M j) := by
   unfold tagPoint thetaTilde finIndexToZZ
-  rw [inclusionNNtoZZ_eq_natCast]                        -- `ι_{ℕ→ℤ}` を Lean の `Nat.cast` へ（Lean だけの段）
+  simp only [inclusionNNtoZZ_eq_natCast]                -- `ι_{ℕ→ℤ}` を Lean の `Nat.cast` へ（添字と分母の 2 か所。Lean だけの段）
   push_cast
   ring
 
@@ -204,11 +204,11 @@ theorem checkBigLambda_univ_eq_LambdaM (F : CheckFermiSetup M) (P : IsingParam)
                                                         -- `eigenvalues_of_V_plus` (2)
     _ = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
           * Real.exp (1 / 2 * ∑ j : Fin M,
-              gammaFn P (2 * Real.pi * (((finIndexToZZ M j : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ))) := rfl
+              gammaFn P (2 * Real.pi * (((finIndexToZZ M j : ℤ) : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ))) := rfl
                                                         -- `antiperiodic_exp_sum` の `θ~_μ` の定義を各項へ同時適用
     _ = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
           * Real.exp (1 / 2 * ∑ j : Fin M, gammaFn P (tagPoint (1 / 2) M ((j : ℕ) + 1))) := by
-        have h : ∀ j : Fin M, gammaFn P (2 * Real.pi * (((finIndexToZZ M j : ℤ) : ℝ) - 1 / 2) / ((M : ℤ) : ℝ))
+        have h : ∀ j : Fin M, gammaFn P (2 * Real.pi * (((finIndexToZZ M j : ℤ) : ℝ) - 1 / 2) / ((inclusionNNtoZZ M : ℤ) : ℝ))
             = gammaFn P (tagPoint (1 / 2) M ((j : ℕ) + 1)) := fun j => by
           rw [tagPoint_half_eq_thetaTilde M j]
           rfl
