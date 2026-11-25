@@ -122,7 +122,7 @@ theorem heightOneBoundary_horizontal_seam_parity (L m : ℕ) [NeZero L]
 
 /-- At side length one, both sides are one cell and zero horizontal seam parity excludes the sole horizontal edge. -/
 theorem heightOneBoundary_horizontal_seam_parity_singleCell (m : ℕ)
-    (γ : Fin (m + 1) → OrientedEdge 1)
+    (γ : Fin (m + 1) → OrientedEdge 1) (hγ : closedNonbacktrackingWalk γ)
     (hseam : (∑ k : Fin (m + 1), horizontalSeamParity (γ k)) % 2 = 0) :
     cellSetEdgeCoefficient 1 (heightOneCells 1 m γ)
         (edgeOfRow 1 false 0 0) ≠ 0 ↔
@@ -134,7 +134,12 @@ theorem heightOneBoundary_horizontal_seam_parity_singleCell (m : ℕ)
       Subsingleton.elim _ _
     rw [hcell]
     simp
-  have hright := singleCell_horizontal_seam_edge_parity m γ hseam
+  -- 本文: 列 0 の全行和の偶奇が零であること（`claim_closed_walk_horizontal_column_parity_zero`）の一項和。
+  have hsum := closedWalk_horizontal_column_parity_zero γ hγ hseam 0
+  rw [Fintype.sum_subsingleton _ 0] at hsum
+  have hright : walkBaseEdgeParity γ (edgeOfRow 1 false 0 0) = 0 := by
+    unfold walkBaseEdgeParity at hsum ⊢
+    omega
   simp [hleft, hright]
 
 /-- At the vertical seam, zero vertical winding identifies the boundary support with traversal parity. -/
@@ -157,7 +162,7 @@ theorem heightOneBoundary_vertical_seam_parity (L m : ℕ) [NeZero L]
 
 /-- At side length one, both sides are one cell and zero seam parity excludes the sole vertical edge. -/
 theorem heightOneBoundary_vertical_seam_parity_singleCell (m : ℕ)
-    (γ : Fin (m + 1) → OrientedEdge 1)
+    (γ : Fin (m + 1) → OrientedEdge 1) (hγ : closedNonbacktrackingWalk γ)
     (hseam : (∑ k : Fin (m + 1), verticalSeamParity (γ k)) % 2 = 0) :
     cellSetEdgeCoefficient 1 (heightOneCells 1 m γ)
         (edgeOfRow 1 true 0 0) ≠ 0 ↔
@@ -169,7 +174,12 @@ theorem heightOneBoundary_vertical_seam_parity_singleCell (m : ℕ)
       Subsingleton.elim _ _
     rw [hcell]
     simp
-  have hright := singleCell_vertical_seam_edge_parity m γ hseam
+  -- 本文: 行 0 の全列和の偶奇が零であること（`claim_closed_walk_vertical_row_parity_zero`）の一項和。
+  have hsum := closedWalk_vertical_row_parity_zero γ hγ hseam 0
+  rw [Fintype.sum_subsingleton _ 0] at hsum
+  have hright : walkBaseEdgeParity γ (edgeOfRow 1 true 0 0) = 0 := by
+    unfold walkBaseEdgeParity at hsum ⊢
+    omega
   simp [hleft, hright]
 
 end Ising2DLambda.KacWard

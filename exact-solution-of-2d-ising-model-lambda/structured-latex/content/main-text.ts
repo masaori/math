@@ -88361,8 +88361,9 @@ N_{r,c}^{\rightarrow}(\gamma)\bmod 2
 \end{aligned}`),
                       paragraph([
                         "二つの隣接セルのうち、交差数が奇数のものだけが内側セル集合に属する（",
-                        ref("def_odd_ray_interior_cells"), "）。したがって共有縦辺は内外を分け、",
-                        "境界辺の定義（", ref("def_plane_cell_boundary_edge_set"), "）を満たす。",
+                        ref("def_odd_ray_interior_cells"), "）。したがって共有縦辺は内外を分ける。",
+                        "内側セル集合は有限集合なので（", ref("claim_odd_ray_interior_cells_bounded"), "）、",
+                        "有限セル集合の境界辺の定義（", ref("def_plane_cell_boundary_edge_set"), "）が適用でき、共有縦辺はそれを満たす。",
                       ]),
                     ],
                   },
@@ -88593,6 +88594,7 @@ V_{r,g}(\gamma)
                     verification: ["sagemath/check/vertex-incident-edge-traversal-even"],
                     lean: [
                       "Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even",
+                      "Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even_ofWalk",
                       "Ising2DLambda.NecSuf.KacWard.closed_endpoint_incidence_double_necSuf",
                       "Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even_from_necSuf",
                     ],
@@ -98351,7 +98353,7 @@ q_{\vec e,\vec f}
                       paragraph(["と定める。", math(String.raw`r\in T_P`), " を短い標識の対、", math(String.raw`r\in E_{\mathcal D_\tau}\setminus T_P`), " を長い標識の対とする。この二集合は ", math(String.raw`E_{\mathcal D_\tau}`), " の分割である。短い標識では ", math(String.raw`\vec f=\kappa(\vec e)`), "、", math(String.raw`\operatorname{src}(\vec f)=\operatorname{src}(\vec e)`), "、", math(String.raw`\vec f\ne\vec e`), " が成り立ち、長い標識では ", math(String.raw`\vec f=\iota(\vec e)`), " が成り立つ。標識は選択辺への所属で決まり、辺長一で二元集合が同じでも区別される。"]),
                     ],
                     proof: [
-                      paragraph(["定義から ", math(String.raw`T_P\subseteq E_{\mathcal D_\tau}`), " であり、任意の ", math(String.raw`r=(\vec e,\vec f)\in E_{\mathcal D_\tau}`), " は ", math(String.raw`p(\vec e)\in P`), " の真偽のちょうど一方に属する。従って二集合は重ならず、和集合は全ての昇順対である。"]),
+                      paragraph([math(String.raw`E_{\mathcal D_\tau}`), " は ", ref("claim_local_pairing_matching_construction"), " で構成した完全マッチングの昇順対の集合である。定義から ", math(String.raw`T_P\subseteq E_{\mathcal D_\tau}`), " であり、任意の ", math(String.raw`r=(\vec e,\vec f)\in E_{\mathcal D_\tau}`), " は ", math(String.raw`p(\vec e)\in P`), " の真偽のちょうど一方に属する。従って二集合は重ならず、和集合は全ての昇順対である。"]),
                       paragraph(["もし ", math(String.raw`r\in T_P`), " なら ", math(String.raw`p(\vec e)\in P`), " なので、"]),
                       displayMath(String.raw`\begin{aligned}
 \vec f&=\kappa(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_pair_support}\bigr),\\

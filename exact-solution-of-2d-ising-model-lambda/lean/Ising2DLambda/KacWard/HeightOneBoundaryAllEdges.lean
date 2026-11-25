@@ -22,7 +22,7 @@ theorem heightOneBoundary_all_edges (L m : ℕ) [NeZero L]
       have hi : i = 0 := Subsingleton.elim _ _
       have hj : j = 0 := Subsingleton.elim _ _
       subst i; subst j
-      simpa using heightOneBoundary_horizontal_seam_parity_singleCell m γ hh
+      simpa using heightOneBoundary_horizontal_seam_parity_singleCell m γ hγ hh
     · by_cases hzero : i.val = 0
       · have hi : i = 0 := by
           apply ZMod.val_injective
@@ -51,7 +51,7 @@ theorem heightOneBoundary_all_edges (L m : ℕ) [NeZero L]
       have hi : i = 0 := Subsingleton.elim _ _
       have hj : j = 0 := Subsingleton.elim _ _
       subst i; subst j
-      simpa using heightOneBoundary_vertical_seam_parity_singleCell m γ hv
+      simpa using heightOneBoundary_vertical_seam_parity_singleCell m γ hγ hv
     · by_cases hzero : j.val = 0
       · have hj : j = 0 := by
           apply ZMod.val_injective
