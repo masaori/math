@@ -282,7 +282,6 @@ DEP	concrete	Ising2D.idempotent_mul_columns_eq
 DEP	concrete	Ising2D.idempotent_sq_eq_mul_self
 DEP	concrete	Ising2D.idempotent_sub_mem_ker
 DEP	concrete	Ising2D.integral_inv_pow_three_half_pi
-DEP	concrete	Ising2D.integral_inv_sqrt_pi
 DEP	concrete	Ising2D.isPdPair_of_matrix
 DEP	concrete	Ising2D.isPsdPair_of_matrix
 DEP	concrete	Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq

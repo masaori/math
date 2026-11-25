@@ -12,14 +12,17 @@
 （`Ising2D.NecSuf.integral_inv_sqrt_quad` / `integral_inv_pow_three_half_le`）と
 `Ising2D/NecSuf/HyperbolicBounds.lean`
 （`Ising2D.NecSuf.log_two_mul_le_arsinh` / `arsinh_le_log_two_mul_add`）。
-`arsinh_log_bounds` は人手の鎖と 1 対 1 に書き、必要十分版を使わない（特殊化としての導出は
-`ClaimClosedFormLogIntegralFromNecSuf.lean` の `arsinh_log_bounds_of_necSuf`）。
-ほかの主張は必要十分版の特殊化として導出してある。
+`integral_inv_sqrt_pi`・`arsinh_log_bounds` は人手の鎖と 1 対 1 に書き、必要十分版を使わない（特殊化としての導出は
+`ClaimClosedFormLogIntegralFromNecSuf.lean` の `integral_inv_sqrt_pi_of_necSuf`・`arsinh_log_bounds_of_necSuf`）。
+`integral_inv_pow_three_half_pi` は必要十分版の特殊化として導出してある。
 -/
 import Ising2D.NecSuf.LogDivergentIntegral
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimRealLogOfProduct
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRealLogStrictlyIncreasing
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusZeroIsSelf
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
 namespace Ising2D
 
@@ -27,18 +30,125 @@ open Real MeasureTheory
 
 /-- **人手証明 `closed_form_log_integral`**:
 `∫_0^π dθ/√(δ² + θ²/4) = 2 arcsinh(π/(2δ))`。
-必要十分版 `NecSuf.integral_inv_sqrt_quad` の `a = 1/2`, `b = π` への特殊化。 -/
+
+人手の準備・`F'` の鎖・`F(0)` の鎖・積分の鎖と 1 対 1 に書く。人手が引く主張のうち
+`definition_of_sqrt_r_positive`・`sqrt_nonnegative_existence_uniqueness`・`remark_real_analysis_facts_R3_R4`・
+`scalar_exp_zero`・`def_real_logarithm_positive` には具体版の宣言が無いので、証明の中の段で受ける。
+`arcsinh_derivative` にも具体版の宣言が無いので、`hasDerivAt_arsinh_form`（mathlib の `Real.hasDerivAt_arsinh` の
+言い換え）で受ける。`W(θ)² = δ²+θ²/4` は mathlib の `Real.sq_sqrt`、平方根の一意性は `Real.sqrt_eq_iff_eq_sq`、
+微分の公式は mathlib の `hasDerivAt_id`・`hasDerivAt_id'`・`HasDerivAt.mul`・`HasDerivAt.div_const`・`HasDerivAt.const_add`・
+`HasDerivAt.const_mul`・`HasDerivAt.comp`・`HasDerivAt.sqrt`・`HasDerivAt.inv`、「微分可能な関数は連続」は
+`HasDerivAt.continuousAt`、(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、`exp 0 = 1` は
+`Real.exp_zero`、`log(exp x) = x` は `Real.log_exp` で受ける。 -/
 theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
     (∫ θ in (0:ℝ)..Real.pi, (Real.sqrt (δ ^ 2 + θ ^ 2 / 4))⁻¹)
       = 2 * Real.arsinh (Real.pi / (2 * δ)) := by
-  have h := NecSuf.integral_inv_sqrt_quad (δ := δ) (a := 1/2) (b := Real.pi) hδ (by norm_num)
-  have hcongr : ∀ θ : ℝ, δ ^ 2 + ((1/2 : ℝ) * θ) ^ 2 = δ ^ 2 + θ ^ 2 / 4 := by
-    intro θ; ring
-  simp only [hcongr] at h
-  rw [h]
-  have : (1/2 : ℝ) * Real.pi / δ = Real.pi / (2 * δ) := by field_simp
-  rw [this]
-  field_simp
+  -- 準備: `q(θ) := θ/(2δ)`, `F(θ) := 2 arcsinh(q(θ))`, `W(θ) := √(δ² + θ²/4)`
+  set q : ℝ → ℝ := fun θ => θ / (2 * δ) with hq_def
+  set F : ℝ → ℝ := fun θ => 2 * Real.arsinh (q θ) with hF_def
+  set W : ℝ → ℝ := fun θ => Real.sqrt (δ ^ 2 + θ ^ 2 / 4) with hW_def
+  have hδne : δ ≠ 0 := ne_of_gt hδ
+  -- `δ² + θ²/4 ≥ δ² > 0`
+  have hrad : ∀ θ : ℝ, 0 < δ ^ 2 + θ ^ 2 / 4 := fun θ =>
+    calc 0 < δ ^ 2 := by positivity     -- `δ > 0`
+      _ ≤ δ ^ 2 + θ ^ 2 / 4 := by have := sq_nonneg θ; linarith
+                                        -- `θ²/4 ≥ 0`
+  -- `W(θ)² = δ² + θ²/4`（`definition_of_sqrt_r_positive`）
+  have hWsq : ∀ θ : ℝ, W θ ^ 2 = δ ^ 2 + θ ^ 2 / 4 := fun θ => Real.sq_sqrt (hrad θ).le
+  -- `W(θ) ≠ 0`、したがって `W(θ) > 0`
+  have hWne : ∀ θ : ℝ, W θ ≠ 0 := by
+    intro θ hW0
+    have h := hWsq θ
+    rw [hW0] at h
+    linarith [hrad θ]                   -- `0² = 0 < δ² + θ²/4` に反する
+  -- 本文の準備の `W(θ) > 0`。以後の段は `W(θ) ≠ 0` と `W(θ) ≥ 0` だけを使う
+  have _hWpos : ∀ θ : ℝ, 0 < W θ := fun θ =>
+    lt_of_le_of_ne (Real.sqrt_nonneg _) (hWne θ).symm
+                                        -- `W(θ) ≥ 0` と `W(θ) ≠ 0`
+  -- `(W(θ)/δ)² = q(θ)² + 1`
+  have hWdsq : ∀ θ : ℝ, (W θ / δ) ^ 2 = q θ ^ 2 + 1 := by
+    intro θ
+    calc (W θ / δ) ^ 2 = W θ ^ 2 / δ ^ 2 := by rw [div_pow]
+                                        -- ℝ の四則
+      _ = (δ ^ 2 + θ ^ 2 / 4) / δ ^ 2 := by rw [hWsq θ]
+                                        -- `definition_of_sqrt_r_positive`
+      _ = (θ / (2 * δ)) ^ 2 + 1 := by field_simp; ring
+                                        -- ℝ の四則。`δ ≠ 0`
+      _ = q θ ^ 2 + 1 := rfl            -- `q` の置き方
+  -- `sqrt_nonnegative_existence_uniqueness` の一意性: `√(q(θ)²+1) = W(θ)/δ`
+  have hsqrtq : ∀ θ : ℝ, Real.sqrt (q θ ^ 2 + 1) = W θ / δ := fun θ =>
+    (Real.sqrt_eq_iff_eq_sq (by positivity) (div_nonneg (Real.sqrt_nonneg _) hδ.le)).mpr
+      (hWdsq θ).symm
+  -- 微分の公式（定数倍と恒等関数。`θ/(2δ)` は恒等関数の `1/(2δ)` 倍）: `q'(θ) = 1/(2δ)`
+  have hq' : ∀ θ : ℝ, HasDerivAt q (1 / (2 * δ)) θ := by
+    intro θ
+    have h := (hasDerivAt_id θ).div_const (2 * δ)
+    simpa [hq_def] using h
+  -- `F'(θ) = 1/W(θ)`
+  have hF' : ∀ θ : ℝ, HasDerivAt F (W θ)⁻¹ θ := by
+    intro θ
+    -- 本文の `F'` の鎖の 1〜3 行目: 微分の公式の定数倍と合成（`arcsinh_derivative` より `arcsinh` は微分可能で
+    -- `arcsinh'(q(θ)) = 1/√(q(θ)²+1)`）と `q'(θ) = 1/(2δ)`。`HasDerivAt` は導関数の値と組で出るので一段になる
+    have hcomp : HasDerivAt F (2 * ((1 / Real.sqrt (q θ ^ 2 + 1)) * (1 / (2 * δ)))) θ :=
+      ((hasDerivAt_arsinh_form (q θ)).comp θ (hq' θ)).const_mul 2
+    have hval : 2 * ((1 / Real.sqrt (q θ ^ 2 + 1)) * (1 / (2 * δ))) = (W θ)⁻¹ :=
+      calc 2 * ((1 / Real.sqrt (q θ ^ 2 + 1)) * (1 / (2 * δ)))
+          = 2 * ((1 / (W θ / δ)) * (1 / (2 * δ))) := by rw [hsqrtq θ]
+                                        -- `√(q(θ)²+1) = W(θ)/δ`
+        _ = 2 * ((δ / W θ) * (1 / (2 * δ))) := by rw [one_div_div]
+                                        -- ℝ の四則。`W(θ) ≠ 0`
+        _ = (W θ)⁻¹ := by field_simp    -- 約分
+    rw [hval] at hcomp
+    exact hcomp
+  -- `W` は平方根と `ℝ_{>0}` に値をとる微分可能な関数 `θ ↦ δ² + θ²/4` の合成なので微分可能
+  have hW' : ∀ θ : ℝ,
+      HasDerivAt W (((1 * θ + θ * 1) / 4) / (2 * Real.sqrt (δ ^ 2 + θ ^ 2 / 4))) θ := by
+    intro θ
+    -- `θ²` は恒等関数どうしの積なので、積の微分の公式で `(θ·θ)' = 1·θ + θ·1`
+    have hmul : HasDerivAt (fun t : ℝ => t ^ 2) (1 * θ + θ * 1) θ := by
+      have h : HasDerivAt (fun t : ℝ => t * t) (1 * θ + θ * 1) θ :=
+        (hasDerivAt_id' θ).mul (hasDerivAt_id' θ)
+      have e : (fun t : ℝ => t * t) = fun t : ℝ => t ^ 2 := by
+        funext t; rw [pow_two]
+      rw [e] at h
+      exact h
+    have hinner : HasDerivAt (fun t : ℝ => δ ^ 2 + t ^ 2 / 4) ((1 * θ + θ * 1) / 4) θ :=
+      (hmul.div_const 4).const_add (δ ^ 2)
+                                        -- 微分の公式（定数倍と、定数との和）
+    exact hinner.sqrt (ne_of_gt (hrad θ))
+                                        -- 微分の公式（平方根と合成）
+  -- `F' = 1/W` は分母が 0 でない商なので微分可能、したがって連続（微分の公式）
+  have hcont : ContinuousOn (fun θ : ℝ => (W θ)⁻¹) (Set.uIcc 0 Real.pi) := by
+    intro θ _
+    exact ((hW' θ).inv (hWne θ)).continuousAt.continuousWithinAt
+                                        -- 商の微分の公式と「微分可能な関数は連続」
+  -- `F(0) = 0`
+  have hF0 : F 0 = 0 :=
+    calc F 0 = 2 * Real.arsinh 0 := by simp [hF_def, hq_def]
+                                        -- `q(0) = 0`
+      _ = 2 * Real.log (0 + Real.sqrt (0 ^ 2 + 1)) := by rw [arsinh_eq_log_form 0]
+                                        -- `def_arcsinh`
+      _ = 2 * Real.log (Real.sqrt 1) := by norm_num
+                                        -- ℝ の四則
+      _ = 2 * Real.log 1 := by rw [sqrt_of_real_one_is_one]
+                                        -- `sqrt_of_real_one_is_one`
+      _ = 2 * Real.log (Real.exp 0) := by rw [Real.exp_zero]
+                                        -- `scalar_exp_zero`
+      _ = 2 * 0 := by rw [Real.log_exp 0]
+                                        -- `def_real_logarithm_positive` の `log(exp x) = x`
+      _ = 0 := by ring
+  calc (∫ θ in (0:ℝ)..Real.pi, (Real.sqrt (δ ^ 2 + θ ^ 2 / 4))⁻¹)
+      = ∫ θ in (0:ℝ)..Real.pi, (W θ)⁻¹ := rfl
+                                        -- `W` の置き方
+    _ = F Real.pi - F 0 :=
+          intervalIntegral.integral_eq_sub_of_hasDerivAt (fun θ _ => hF' θ)
+            hcont.intervalIntegrable    -- 本文の `∫F'` への書き換え（`F'(θ) = 1/W(θ)`）と (R4) を `F` に
+    _ = 2 * Real.arsinh (Real.pi / (2 * δ)) - F 0 := rfl
+                                        -- `F` と `q` の置き方
+    _ = 2 * Real.arsinh (Real.pi / (2 * δ)) - 0 := by rw [hF0]
+                                        -- `F(0) = 0`
+    _ = 2 * Real.arsinh (Real.pi / (2 * δ)) :=
+          real_minus_zero_is_self _     -- `real_minus_zero_is_self`（`a → 2 arcsinh(π/(2δ))`）
 
 /-- **人手証明 `arcsinh_two_sided_log_bounds`**: `log(2y) ≤ arcsinh y ≤ log(2y) + 1/(4y²)`。
 
