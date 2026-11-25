@@ -81883,7 +81883,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma))+\pi_4(\tau(\vec e_m,\vec e_1))
 &&\bigl(\because\ \blkref{claim_walk_direction_difference}\bigr)\\
 &=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma)+\tau(\vec e_m,\vec e_1))
-&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&&\bigl(\because\ \pi_4\text{ の加法性、}\blkref{def_direction_residue_projection}\bigr)\\
 &=\operatorname{dir}(\vec e_1)+\pi_4(t_{\circ}(\gamma))
 &&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)
 \end{aligned}`),
