@@ -7,6 +7,8 @@
 **具体版**（人手証明と同じ抽象度）。必要十分版は
 `Ising2D/NecSuf/MeanValueTwoSided.lean`（(5) の増分評価）と
 `Ising2D/NecSuf/HyperbolicBounds.lean`（数値評価に使う `cosh` の上下界）。
+(5) の具体版 `abs_kappaK_bounds`・`abs_kappaDerivSq_sub_le` は人手の (R3)(R4) の鎖どおりに書き、
+`MeanValueTwoSided.lean` を使わない。その特殊化としての導出は `ClaimKappaOfKBasicFromNecSuf.lean` にある。
 
 ## 人手証明の数値評価との差（重要）
 
@@ -35,7 +37,6 @@
 `cosh(2K_c − 1/5)` を加法定理で評価して得る（`hCoshOverSinhSq_antitone`・`cosh_two_Kc_sub_fifth_le`・`abs_kappaSecond_le`）。
 -/
 import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.DefinitionKappaAndCritical
-import Ising2D.NecSuf.MeanValueTwoSided
 import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
@@ -467,25 +468,127 @@ theorem differentiableOn_kappaK : DifferentiableOn ℝ kappaK (interior Dnbhd) :
     (pos_of_mem_Dnbhd (mem_Dnbhd_of_mem_interior hK))).differentiableAt).differentiableWithinAt
 
 /-- **人手証明 `kappa_of_K_basic` (5) の第 1 式**:
-`3.52|K-K_c| ≤ |κ(K)| ≤ 4.74|K-K_c| ≤ 0.474`。 -/
+`3.52|K-K_c| ≤ |κ(K)| ≤ 4.74|K-K_c| ≤ 0.474`（原文の定数は `3.53`・`4.72`・`0.472`）。
+人手の準備（`a := min{K, K_c}`、`b := max{K, K_c}`、`b − a = |K − K_c|`、`[a, b]` の点で (4) を使えること、
+`κ(b) − κ(a) = |κ(K) − κ(K_c)|`）と 13 行の鎖と 1 対 1。
+(R4)（微分積分学の基本定理）は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、
+(R3)（積分の単調性）は `intervalIntegral.integral_mono_on` で読む。 -/
 theorem abs_kappaK_bounds {K : ℝ} (hK : K ∈ Dnbhd) :
     (3.52 : ℝ) * |K - Kc| ≤ |kappaK K| ∧ |kappaK K| ≤ 4.74 * |K - Kc| ∧ |kappaK K| ≤ 0.474 := by
-  have hb := NecSuf.abs_sub_bounds_of_deriv_bounds (D := Dnbhd) Dnbhd_convex
-    (f := kappaK) (clo := 3.52) (chi := 4.74) continuousOn_kappaK differentiableOn_kappaK
-    (fun x hx => by
-      rw [deriv_kappaK_on (mem_Dnbhd_of_mem_interior hx)]
-      exact (kappaDeriv_bounds (mem_Dnbhd_of_mem_interior hx)).1)
-    (fun x hx => by
-      rw [deriv_kappaK_on (mem_Dnbhd_of_mem_interior hx)]
-      exact (kappaDeriv_bounds (mem_Dnbhd_of_mem_interior hx)).2)
-    (by norm_num) Kc_mem_Dnbhd hK
-  rw [kappaK_Kc, sub_zero] at hb
-  have habs : |K - Kc| ≤ 0.1 := by
+  -- 準備: `a := min{K, K_c}`、`b := max{K, K_c}`
+  set a := min K Kc
+  set b := max K Kc
+  have hab : a ≤ b := min_le_max
+  have huIcc : Set.uIcc a b = Set.Icc a b := Set.uIcc_of_le hab
+  -- `b − a = |K − K_c|`
+  have hba : b - a = |K - Kc| := max_sub_min_eq_abs' K Kc
+  -- `t ∈ [a, b]` は `|t − K_c| ≤ |K − K_c| ≤ 1/10` を満たすので (4) を `t` で使える
+  -- （Lean では `D = [K_c − 1/10, K_c + 1/10]` の両端と `a`・`b` の大小で読む）
+  have hmem : ∀ t ∈ Set.Icc a b, t ∈ Dnbhd := by
+    intro t ht
+    have h1 : Kc - 1/10 ≤ K := hK.1
+    have h2 : K ≤ Kc + 1/10 := hK.2
+    have hma : Kc - 1/10 ≤ a := le_min h1 (by linarith)
+    have hmb : b ≤ Kc + 1/10 := max_le h2 (by linarith)
+    exact ⟨le_trans hma ht.1, le_trans ht.2 hmb⟩
+  -- (R4) を `F(t) = c t` で: `∫_a^b c dt = c b − c a`
+  have hconst : ∀ c : ℝ, (∫ _ in a..b, c) = c * b - c * a := fun c =>
+    intervalIntegral.integral_eq_sub_of_hasDerivAt (f := fun t => c * t)
+      (fun t _ => by simpa using (hasDerivAt_id t).const_mul c) intervalIntegrable_const
+  -- (1) より `κ'` は連続（Lean では (3) の微分可能性から読む）
+  have hcont : ContinuousOn kappaDeriv (Set.uIcc a b) := by
+    intro t ht
+    rw [huIcc] at ht
+    exact (hasDerivAt_kappaDeriv (pos_of_mem_Dnbhd (hmem t ht))).continuousAt.continuousWithinAt
+  have hint : IntervalIntegrable kappaDeriv MeasureTheory.volume a b := hcont.intervalIntegrable
+  -- (R4) を `F = κ` で: `∫_a^b κ'(t) dt = κ(b) − κ(a)`
+  have hFTC : (∫ t in a..b, kappaDeriv t) = kappaK b - kappaK a :=
+    intervalIntegral.integral_eq_sub_of_hasDerivAt
+      (fun t ht => hasDerivAt_kappaK (pos_of_mem_Dnbhd (hmem t (huIcc ▸ ht)))) hint
+  -- (1) の `κ` の単調増加を `a ≤ b` に使う。(1) の単調増加は具体版の宣言を持たないので、
+  -- (1) の証明の鎖 `κ(b) − κ(a) = ∫_a^b κ' ≥ ∫_a^b 2 = 2b − 2a ≥ 0`（(R4)・(R3) と `κ'(t) = 2 + 2/sinh 2t ≥ 2`）で受ける
+  have hmono : kappaK a ≤ kappaK b := by
+    have h2 : (∫ _ in a..b, (2 : ℝ)) ≤ ∫ t in a..b, kappaDeriv t := by
+      refine intervalIntegral.integral_mono_on hab intervalIntegrable_const hint ?_
+      intro t ht
+      have hs : 0 < Real.sinh (2 * t) :=
+        real_sinh_pos_of_pos (by linarith [pos_of_mem_Dnbhd (hmem t ht)])
+      have : (0 : ℝ) ≤ 2 / Real.sinh (2 * t) := by positivity
+      simp only [kappaDeriv]
+      linarith
+    rw [hconst, hFTC] at h2
+    linarith
+  -- `κ(b) − κ(a) = |κ(K) − κ(K_c)|`（`{a, b} = {K, K_c}` と `κ` の単調増加）
+  have hbaκ : kappaK b - kappaK a = |kappaK K - kappaK Kc| := by
+    rcases le_total K Kc with h | h
+    · have ha' : a = K := min_eq_left h
+      have hb' : b = Kc := max_eq_right h
+      rw [ha', hb'] at hmono ⊢
+      rw [abs_of_nonpos (by linarith)]
+      ring
+    · have ha' : a = Kc := min_eq_right h
+      have hb' : b = K := max_eq_left h
+      rw [ha', hb'] at hmono ⊢
+      rw [abs_of_nonneg (by linarith)]
+  -- 人手の鎖の 1〜6 行目
+  have hlow : (3.52 : ℝ) * |K - Kc| ≤ |kappaK K| :=
+    calc (3.52 : ℝ) * |K - Kc|
+        = 3.52 * (b - a) := by
+          -- `b − a = |K − K_c|`
+          rw [hba]
+      _ = ∫ _ in a..b, (3.52 : ℝ) := by
+          -- (R4) を `F(t) = 3.52 t` で
+          rw [hconst]; ring
+      _ ≤ ∫ t in a..b, kappaDeriv t := by
+          -- (R3) の単調性と (4) の `κ'(t) ≥ 3.52`
+          refine intervalIntegral.integral_mono_on hab intervalIntegrable_const hint ?_
+          intro t ht
+          exact (kappaDeriv_bounds (hmem t ht)).1
+      _ = kappaK b - kappaK a := by
+          -- (R4) を `F = κ` で
+          exact hFTC
+      _ = |kappaK K - kappaK Kc| := by
+          -- 上の `κ(b) − κ(a)` の表示
+          exact hbaκ
+      _ = |kappaK K| := by
+          -- (2) の `κ(K_c) = 0`
+          rw [kappaK_Kc, sub_zero]
+  -- 人手の鎖の 7〜11 行目
+  have hup : |kappaK K| ≤ 4.74 * |K - Kc| :=
+    calc |kappaK K|
+        = kappaK b - kappaK a := by
+          -- (2) の `κ(K_c) = 0` と上の `κ(b) − κ(a)` の表示
+          rw [hbaκ, kappaK_Kc, sub_zero]
+      _ = ∫ t in a..b, kappaDeriv t := by
+          -- (R4) を `F = κ` で
+          exact hFTC.symm
+      _ ≤ ∫ _ in a..b, (4.74 : ℝ) := by
+          -- (R3) の単調性と (4) の `κ'(t) ≤ 4.74`
+          refine intervalIntegral.integral_mono_on hab hint intervalIntegrable_const ?_
+          intro t ht
+          exact (kappaDeriv_bounds (hmem t ht)).2
+      _ = 4.74 * (b - a) := by
+          -- (R4) を `F(t) = 4.74 t` で
+          rw [hconst]; ring
+      _ = 4.74 * |K - Kc| := by
+          -- `b − a = |K − K_c|`
+          rw [hba]
+  -- 人手の鎖の 12〜13 行目。人手の仮定 `|K − K_c| ≤ 1/10` は、Lean では仮定 `K ∈ D = [K_c − 1/10, K_c + 1/10]` から読む
+  have hsmall : |K - Kc| ≤ 1/10 := by
     have h1 : Kc - 1/10 ≤ K := hK.1
     have h2 : K ≤ Kc + 1/10 := hK.2
     rw [abs_le]
-    constructor <;> [linarith; linarith]
-  exact ⟨hb.1, hb.2, by nlinarith [hb.2, habs, abs_nonneg (K - Kc)]⟩
+    constructor <;> linarith
+  have hfin : |kappaK K| ≤ 0.474 :=
+    calc |kappaK K|
+        ≤ 4.74 * |K - Kc| := hup
+      _ ≤ 4.74 * (1/10) := by
+          -- `|K − K_c| ≤ 1/10`
+          exact mul_le_mul_of_nonneg_left hsmall (by norm_num)
+      _ = 0.474 := by
+          -- `ℚ` の四則
+          norm_num
+  exact ⟨hlow, hup, hfin⟩
 
 /-- `κ'(K)² - 16` の評価に使う関数 `K ↦ κ'(K)²`。 -/
 noncomputable def kappaDerivSq (K : ℝ) : ℝ := kappaDeriv K ^ 2
@@ -523,28 +626,121 @@ theorem differentiableOn_kappaDerivSq : DifferentiableOn ℝ kappaDerivSq (inter
   exact ((hasDerivAt_kappaDerivSq
     (pos_of_mem_Dnbhd (mem_Dnbhd_of_mem_interior hK))).differentiableAt).differentiableWithinAt
 
-/-- **人手証明 `kappa_of_K_basic` (5) の第 2 式**: `|κ'(K)² - 16| ≤ 25.1 |κ(K)|`。 -/
+/-- **人手証明 `kappa_of_K_basic` (5) の第 2 式**: `|κ'(K)² - 16| ≤ 25.1 |κ(K)|`（原文の定数は `24.7`）。
+人手の準備（`a`・`b` は第 1 式と同じ、`G := κ'²` の `G' = 2κ'κ''` とその連続、`κ'(K_c) = 4` の 3 行の鎖、
+`∫_a^b G'` の 4 行の挟み込み）と 7 行の鎖と 1 対 1。 -/
 theorem abs_kappaDerivSq_sub_le {K : ℝ} (hK : K ∈ Dnbhd) :
     |kappaDeriv K ^ 2 - 16| ≤ 25.1 * |kappaK K| := by
-  have hb := NecSuf.abs_sub_le_of_abs_deriv_le (D := Dnbhd) Dnbhd_convex
-    (f := kappaDerivSq) (C := 88.2) continuousOn_kappaDerivSq differentiableOn_kappaDerivSq
-    (fun x hx => by
-      rw [(hasDerivAt_kappaDerivSq (pos_of_mem_Dnbhd (mem_Dnbhd_of_mem_interior hx))).deriv]
-      exact abs_deriv_kappaDerivSq_le (mem_Dnbhd_of_mem_interior hx))
-    Kc_mem_Dnbhd hK
-  rw [kappaDerivSq_Kc] at hb
-  have hlow := (abs_kappaK_bounds hK).1
-  have : |K - Kc| ≤ |kappaK K| / 3.52 := by
-    rw [le_div_iff₀ (by norm_num)]; linarith
-  have hfin : (88.2 : ℝ) * |K - Kc| ≤ 25.1 * |kappaK K| := by
-    have h2 : (88.2 : ℝ) * |K - Kc| ≤ 88.2 * (|kappaK K| / 3.52) := by
-      exact mul_le_mul_of_nonneg_left this (by norm_num)
-    have h3 : (88.2 : ℝ) * (|kappaK K| / 3.52) ≤ 25.1 * |kappaK K| := by
-      have heq : (88.2 : ℝ) * (|kappaK K| / 3.52) = (88.2 / 3.52) * |kappaK K| := by ring
-      rw [heq]
-      exact mul_le_mul_of_nonneg_right (by norm_num) (abs_nonneg _)
-    linarith
-  simp only [kappaDerivSq] at hb
-  linarith
+  -- 準備: `a := min{K, K_c}`、`b := max{K, K_c}`（第 1 式と同じ）
+  set a := min K Kc
+  set b := max K Kc
+  have hab : a ≤ b := min_le_max
+  have huIcc : Set.uIcc a b = Set.Icc a b := Set.uIcc_of_le hab
+  -- `b − a = |K − K_c|`
+  have hba : b - a = |K - Kc| := max_sub_min_eq_abs' K Kc
+  -- `t ∈ [a, b]` で (4) を使える
+  have hmem : ∀ t ∈ Set.Icc a b, t ∈ Dnbhd := by
+    intro t ht
+    have h1 : Kc - 1/10 ≤ K := hK.1
+    have h2 : K ≤ Kc + 1/10 := hK.2
+    have hma : Kc - 1/10 ≤ a := le_min h1 (by linarith)
+    have hmb : b ≤ Kc + 1/10 := max_le h2 (by linarith)
+    exact ⟨le_trans hma ht.1, le_trans ht.2 hmb⟩
+  -- (R4) を `F(t) = c t` で: `∫_a^b c dt = c b − c a`
+  have hconst : ∀ c : ℝ, (∫ _ in a..b, c) = c * b - c * a := fun c =>
+    intervalIntegral.integral_eq_sub_of_hasDerivAt (f := fun t => c * t)
+      (fun t _ => by simpa using (hasDerivAt_id t).const_mul c) intervalIntegrable_const
+  -- `G' = 2κ'κ''` の連続: `κ'` は微分可能（(3)）、`κ'' = −4cosh(2·)/sinh²(2·)` は微分可能な関数の商
+  have hcontG : ContinuousOn (fun t => 2 * kappaDeriv t * kappaSecond t) (Set.uIcc a b) := by
+    intro t ht
+    rw [huIcc] at ht
+    have htpos : 0 < t := pos_of_mem_Dnbhd (hmem t ht)
+    have hs : 0 < Real.sinh (2 * t) := real_sinh_pos_of_pos (by linarith)
+    have h1 : ContinuousAt kappaDeriv t := (hasDerivAt_kappaDeriv htpos).continuousAt
+    have h2 : ContinuousAt (fun x => -(4 * Real.cosh (2 * x)) / Real.sinh (2 * x) ^ 2) t :=
+      ContinuousAt.div (by fun_prop) (by fun_prop) (pow_ne_zero 2 hs.ne')
+    exact ((continuousAt_const.mul h1).mul h2).continuousWithinAt
+  have hintG : IntervalIntegrable (fun t => 2 * kappaDeriv t * kappaSecond t)
+      MeasureTheory.volume a b := hcontG.intervalIntegrable
+  -- (R4) を `F = G` で: `∫_a^b G'(t) dt = G(b) − G(a)`
+  have hFTC : (∫ t in a..b, 2 * kappaDeriv t * kappaSecond t) = kappaDerivSq b - kappaDerivSq a :=
+    intervalIntegral.integral_eq_sub_of_hasDerivAt
+      (fun t ht => hasDerivAt_kappaDerivSq (pos_of_mem_Dnbhd (hmem t (huIcc ▸ ht)))) hintG
+  -- `κ'(K_c) = 4`
+  have hK4 : kappaDeriv Kc = 4 :=
+    calc kappaDeriv Kc
+        = 2 + 2 / Real.sinh (2 * Kc) := by
+          -- (1) の `κ'` の表示を `K = K_c` で読む
+          rfl
+      _ = 2 + 2 / 1 := by
+          -- `K_c` の定義
+          rw [sinh_two_Kc]
+      _ = 4 := by
+          -- `ℝ` の四則
+          norm_num
+  -- (4) より `t ∈ [a, b]` で `−88.2 ≤ G'(t) ≤ 88.2`
+  have hGb : ∀ t ∈ Set.Icc a b,
+      -88.2 ≤ 2 * kappaDeriv t * kappaSecond t ∧ 2 * kappaDeriv t * kappaSecond t ≤ 88.2 :=
+    fun t ht => abs_le.1 (abs_deriv_kappaDerivSq_le (hmem t ht))
+  -- `∫_a^b G'` の挟み込み。人手の 1 本の 4 行の鎖を、1〜2 行目（`hsand_lo`）と 2〜4 行目（`hsand_hi`）に分けて書く
+  -- （2 行目は人手では二つの不等号の間にある `∫_a^b G'` そのもの）
+  have hsand_lo : -88.2 * (b - a) ≤ ∫ t in a..b, 2 * kappaDeriv t * kappaSecond t :=
+    calc -88.2 * (b - a)
+        = ∫ _ in a..b, (-88.2 : ℝ) := by
+          -- (R4) を `F(t) = −88.2 t` で
+          rw [hconst]; ring
+      _ ≤ ∫ t in a..b, 2 * kappaDeriv t * kappaSecond t := by
+          -- (R3) の単調性と `−88.2 ≤ G'(t)`
+          refine intervalIntegral.integral_mono_on hab intervalIntegrable_const hintG ?_
+          intro t ht
+          exact (hGb t ht).1
+  have hsand_hi : (∫ t in a..b, 2 * kappaDeriv t * kappaSecond t) ≤ 88.2 * (b - a) :=
+    calc (∫ t in a..b, 2 * kappaDeriv t * kappaSecond t)
+        ≤ ∫ _ in a..b, (88.2 : ℝ) := by
+          -- (R3) の単調性と `G'(t) ≤ 88.2`
+          refine intervalIntegral.integral_mono_on hab hintG intervalIntegrable_const ?_
+          intro t ht
+          exact (hGb t ht).2
+      _ = 88.2 * (b - a) := by
+          -- (R4) を `F(t) = 88.2 t` で
+          rw [hconst]; ring
+  have hlow : (3.52 : ℝ) * |K - Kc| ≤ |kappaK K| := (abs_kappaK_bounds hK).1
+  calc |kappaDeriv K ^ 2 - 16|
+      = |kappaDerivSq K - kappaDerivSq Kc| := by
+        -- `G` の定義と `κ'(K_c) = 4`
+        simp only [kappaDerivSq]
+        rw [hK4]
+        norm_num
+    _ = |kappaDerivSq b - kappaDerivSq a| := by
+        -- `{a, b} = {K, K_c}` と `|−x| = |x|`
+        rcases le_total K Kc with h | h
+        · have ha' : a = K := min_eq_left h
+          have hb' : b = Kc := max_eq_right h
+          rw [ha', hb', abs_sub_comm]
+        · have ha' : a = Kc := min_eq_right h
+          have hb' : b = K := max_eq_left h
+          rw [ha', hb']
+    _ = |∫ t in a..b, 2 * kappaDeriv t * kappaSecond t| := by
+        -- (R4) を `F = G` で
+        rw [hFTC]
+    _ ≤ 88.2 * (b - a) := by
+        -- 上の `∫_a^b G'` の挟み込みと絶対値の定義
+        rw [abs_le]
+        constructor
+        · linarith [hsand_lo]
+        · exact hsand_hi
+    _ = 88.2 * |K - Kc| := by
+        -- `b − a = |K − K_c|`
+        rw [hba]
+    _ ≤ 88.2 * (|kappaK K| / 3.52) := by
+        -- 上の `3.52|K − K_c| ≤ |κ(K)|`
+        refine mul_le_mul_of_nonneg_left ?_ (by norm_num)
+        rw [le_div_iff₀ (by norm_num)]
+        linarith
+    _ ≤ 25.1 * |kappaK K| := by
+        -- `ℚ` の四則と大小
+        have heq : (88.2 : ℝ) * (|kappaK K| / 3.52) = (88.2 / 3.52) * |kappaK K| := by ring
+        rw [heq]
+        exact mul_le_mul_of_nonneg_right (by norm_num) (abs_nonneg _)
 
 end Ising2D
