@@ -109064,13 +109064,13 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
 \Longrightarrow\ &\operatorname{rat}_{\Lambda}(\lambda_N)\le\operatorname{rat}_{\Lambda}(\mu_N)
 &&(\because\ \blkref{def_log_order_group_order})\\
 \Longrightarrow\ &\iota\bigl(\operatorname{rat}_{\Lambda}(\lambda_N)\bigr)\le\iota\bigl(\operatorname{rat}_{\Lambda}(\mu_N)\bigr)
-&&(\because\ \iota\text{ は順序を保つ。}\blkref{def_real_logarithm})\\
+&&(\because\ \iota\text{ は順序を保つ、}\blkref{def_real_logarithm})\\
 \Longrightarrow\ &\log_{\mathbb{R}}\Bigl(\iota\bigl(\operatorname{rat}_{\Lambda}(\lambda_N)\bigr)\Bigr)\le\log_{\mathbb{R}}\Bigl(\iota\bigl(\operatorname{rat}_{\Lambda}(\mu_N)\bigr)\Bigr)
-&&(\because\ u\le v\Rightarrow\log_{\mathbb{R}}(u)\le\log_{\mathbb{R}}(v)\text{。}\blkref{def_real_logarithm}\text{。両辺は }\mathbb{R}_{>0}\text{ の元（}\blkref{claim_log_order_group_realization_real_log}\text{）})\\
+&&(\because\ u\le v\Rightarrow\log_{\mathbb{R}}(u)\le\log_{\mathbb{R}}(v)\text{、}\blkref{def_real_logarithm}\text{、両辺は }\mathbb{R}_{>0}\text{ の元（}\blkref{claim_log_order_group_realization_real_log}\text{）})\\
 \Longrightarrow\ &\rho_{\mathbb{R}}\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)\bigr)\le\rho_{\mathbb{R}}\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu_N)\bigr)
 &&(\because\ \blkref{claim_log_order_group_realization_real_log}\text{ を }\lambda_N\text{ と }\mu_N\text{ で（両辺を右から左へ書き換える）})\\
 \Longrightarrow\ &\rho_{\mathbb{R}}(N\cdot\lambda)\le\rho_{\mathbb{R}}(N\cdot\mu)
-&&(\because\ N\cdot\lambda=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N),\ N\cdot\mu=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu_N)\text{。}\blkref{def_common_denominator})\\
+&&(\because\ N\cdot\lambda=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N),\ N\cdot\mu=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\mu_N)\text{、}\blkref{def_common_denominator})\\
 \Longrightarrow\ &\iota(N)\cdot\rho_{\mathbb{R}}(\lambda)\le\iota(N)\cdot\rho_{\mathbb{R}}(\mu)
 &&(\because\ \blkref{claim_rational_log_order_group_realization_smul}\text{ を }r:=N\text{ で（両辺を書き換える）})
 \end{aligned}`),
@@ -109084,7 +109084,7 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
 &=\iota(N)^{-1}\cdot\bigl(\iota(N)\cdot\rho_{\mathbb{R}}(\lambda)\bigr)
 &&(\because\ \mathbb{R}\text{ の乗法の結合則、}\iota(N)^{-1}\iota(N)=1\text{、}1\cdot t=t)\\
 &\le\iota(N)^{-1}\cdot\bigl(\iota(N)\cdot\rho_{\mathbb{R}}(\mu)\bigr)
-&&(\because\ \text{上で導いた不等式に、正の元 }\iota(N)^{-1}\text{ を左から掛ける。順序体 }\mathbb{R}\text{ では正の元を掛けても順序が保たれる})\\
+&&(\because\ \text{上で導いた不等式に、正の元 }\iota(N)^{-1}\text{ を左から掛ける、順序体 }\mathbb{R}\text{ では正の元を掛けても順序が保たれる})\\
 &=\rho_{\mathbb{R}}(\mu)
 &&(\because\ \mathbb{R}\text{ の乗法の結合則、}\iota(N)^{-1}\iota(N)=1\text{、}1\cdot t=t)
 \end{aligned}`),

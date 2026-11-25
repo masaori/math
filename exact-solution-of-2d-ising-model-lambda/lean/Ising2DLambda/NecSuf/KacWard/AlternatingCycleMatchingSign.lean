@@ -21,8 +21,7 @@ namespace Ising2DLambda.NecSuf.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
 open Ising2DLambda.KacWard (ascendingPair ascendingPairs_enumeration
-  pair_eq_of_shared_point matchingPairWord_append
-  matchingPairWord_flatten flatten_rotate_perm even_length_rotate)
+  pair_eq_of_shared_point)
 open scoped Classical
 
 variable {J R : Type*} [Fintype J] [LinearOrder J] [CommRing R]
@@ -31,6 +30,31 @@ variable {J R : Type*} [Fintype J] [LinearOrder J] [CommRing R]
 def pairChunks {K : Type*} : List K → List (K × K)
   | a :: b :: rest => (a, b) :: pairChunks rest
   | _ => []
+
+/-- 対の端点列は、対の列の連結を保つ。 -/
+private theorem pairWord_append {K : Type*} (l r : List (K × K)) :
+    Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord (l ++ r) =
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord l ++
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord r := by
+  simp [Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord, List.flatMap_append]
+
+/-- 対の列を連結してから端点を読むことと、端点列を連結することは同じ。 -/
+private theorem pairWord_flatten {K : Type*} :
+    ∀ ls : List (List (K × K)),
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord ls.flatten =
+        (ls.map Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord).flatten
+  | [] => rfl
+  | l :: ls => by
+      rw [List.flatten_cons, pairWord_append, pairWord_flatten ls]
+      rfl
+
+/-- 閉路ごとの巡回移動は、連結した点列を並べ替える。 -/
+private theorem flatten_rotate_perm {K : Type*} : ∀ cs : List (List K),
+    ((cs.map (·.rotate 1)).flatten).Perm cs.flatten
+  | [] => List.Perm.refl _
+  | c :: cs => by
+      simp only [List.map_cons, List.flatten_cons]
+      exact (List.rotate_perm c 1).append (flatten_rotate_perm cs)
 
 theorem pairChunks_map_range {K : Type*} :
     ∀ (k : ℕ) (f : ℕ → K),
@@ -222,17 +246,23 @@ theorem alternating_cycle_matching_sign_necSuf
         rw [ih hr]
         rfl
   have hwD : matchingPairWord lD = cs.flatten ++ matchingPairWord P := by
-    simp only [lD, matchingPairWord_append, matchingPairWord_flatten, List.map_map]
+    change Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord lD =
+      cs.flatten ++ Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord P
+    simp only [lD, pairWord_append, pairWord_flatten, List.map_map]
     congr 1
-    have h' : ∀ c ∈ cs, (matchingPairWord ∘ pairChunks) c = c :=
+    have h' : ∀ c ∈ cs,
+        (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord ∘ pairChunks) c = c :=
       fun c hcs => pairWord_pairChunks c (hev c hcs).2
     rw [List.map_congr_left h', List.map_id']
   have hw₀ : matchingPairWord l₀ = (cs.map (·.rotate 1)).flatten ++ matchingPairWord P := by
-    simp only [l₀, matchingPairWord_append, matchingPairWord_flatten, List.map_map]
+    change Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord l₀ =
+      (cs.map (·.rotate 1)).flatten ++
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord P
+    simp only [l₀, pairWord_append, pairWord_flatten, List.map_map]
     congr 2
     apply List.map_congr_left
     intro c hcs
-    exact pairWord_pairChunks _ (even_length_rotate c (hev c hcs).2)
+    exact pairWord_pairChunks _ (by simpa using (hev c hcs).2)
   have hc₀ : IsCompleteWord (matchingPairWord l₀) := by
     rw [hw₀]
     exact hc.perm ((flatten_rotate_perm cs).symm.append_right _)
