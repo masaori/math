@@ -82282,6 +82282,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                       verification: ["sagemath/check/transverse-crossing-symmetry"],
                       lean: [
                         "Ising2DLambda.KacWard.transverse_crossing_symmetric",
+                        "Ising2DLambda.KacWard.transverse_crossing_condition_symmetric",
                         "Ising2DLambda.NecSuf.KacWard.transverse_crossing_symmetric_necSuf",
                         "Ising2DLambda.KacWard.transverse_crossing_symmetric_from_necSuf",
                       ],
@@ -96265,9 +96266,21 @@ t_{\circ}(\gamma)=0,&\bigl(h(\gamma),v(\gamma)\bigr)\ne(0,0)
                   " と略記する。まず ", math(String.raw`(h,v)=(0,0)`), " とする。",
                   ref("claim_vertex_simple_cycle_turning_by_seam_parity"), " により ",
                   math(String.raw`t_{\circ}(\gamma)\in\{4,-4\}`), " であり、",
-                  ref("claim_closed_walk_rotation_phase_sign"), " と ", ref("def_closed_walk_rotation_number"),
-                  " により ", math(String.raw`\zeta_8^{\,t_{\circ}(\gamma)}=-1`), " である。",
+                  ref("def_closed_walk_rotation_number"), " により ",
+                  math(String.raw`\operatorname{rot}(\gamma)=t_{\circ}(\gamma)/4\in\{1,-1\}`), " である。従って",
                 ]),
+                displayMath(String.raw`\begin{aligned}
+\zeta_8^{\,t_{\circ}(\gamma)}
+&=\zeta_8^{\,4\operatorname{rot}(\gamma)}
+&&\bigl(\because\ \blkref{def_closed_walk_rotation_number}\bigr)\\
+&=\left(\zeta_8^4\right)^{\operatorname{rot}(\gamma)}
+&&\bigl(\because\ \overline{\mathbb Q}^{\times}\text{ の整数指数の積の法則}\bigr)\\
+&=(-1)^{\operatorname{rot}(\gamma)}
+&&\bigl(\because\ \zeta_8^4=-1,\ \blkref{def_rotation_phase}\bigr)\\
+&=-1
+&&\bigl(\because\ \operatorname{rot}(\gamma)\in\{1,-1\}\bigr)
+\end{aligned}`),
+                paragraph(["である。"]),
                 displayMath(String.raw`\begin{aligned}
 -(-1)^{a h+b v}\,\zeta_8^{\,t_{\circ}(\gamma)}
 &=-(-1)^0(-1)
@@ -100197,7 +100210,9 @@ c(\gamma)\bmod2=(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)\quad(\mathbb F_2)`),
                         " から横断する添字 ", math(String.raw`k<l`), " を選ぶ。",
                         ref("claim_smoothing_splits_closed_walk"), " の二本を ",
                         math(String.raw`\gamma_A,\gamma_B`), " とし、その辺の台を ",
-                        math(String.raw`C_A,C_B`), " とする。二本の辺はどちらも元の相異なる添字の辺なので、各子の無向辺の標識は相異なり、",
+                        math(String.raw`C_A,C_B`), " とする（辺の台は ",
+                        ref("claim_disjoint_walk_mutual_crossing_intersection"),
+                        " の二本の辺の台と同じく、辺列に現れる無向辺の有限集合である）。二本の辺はどちらも元の相異なる添字の辺なので、各子の無向辺の標識は相異なり、",
                         math(String.raw`C_A\cap C_B=\varnothing`), " かつ ",
                         math(String.raw`C_A\cup C_B=C_{\gamma}`), " である。",
                         ref("claim_smoothing_split_crossing_descent"), " により各子の横断数は元より小さい。",
@@ -100307,7 +100322,8 @@ c(\gamma)\bmod2
                           " と置く。添字 ", math(String.raw`r\in I_m`), " の通過（", ref("def_closed_walk_passes"),
                           "）が ", math(String.raw`v`), " で使う半辺を、始点が ", math(String.raw`v`),
                           " の二つの向き付き辺 ", math(String.raw`\iota(\vec e_r)`), " と ",
-                          math(String.raw`\vec e_{\sigma(r)}`), " とする（", ref("def_edge_reversal"), "）。",
+                          math(String.raw`\vec e_{\sigma(r)}`), " とする（", ref("def_edge_reversal"), "。半辺の呼び方は ",
+                          ref("claim_disjoint_walk_mutual_crossing_intersection"), " の証明と同じ）。",
                           "第一に、一つの通過の二半辺は異なる: ", math(String.raw`\vec e_{\sigma(r)}\ne\iota(\vec e_r)`),
                           " は非後退の条件そのものである（", ref("def_nonbacktracking_successors"), "）。",
                           "第二に、相異なる二つの通過は半辺を共有しない: 共有する半辺が一方の ",
@@ -100518,7 +100534,9 @@ c(\gamma)\bmod2
                         math(String.raw`n_{\mathrm{ct}}(\gamma)>0`), " とする。接触対 ",
                         math(String.raw`k<l`), " を一つ選び、", ref("claim_edge_simple_contact_split"),
                         " の二本を ", math(String.raw`\gamma_A,\gamma_B`), "、その台を ",
-                        math(String.raw`C_A,C_B`), " とする。二本の台は互いに素で元の台を尽くす。",
+                        math(String.raw`C_A,C_B`), " とする（辺の台は ",
+                        ref("claim_disjoint_walk_mutual_crossing_intersection"),
+                        " の二本の辺の台と同じく、辺列に現れる無向辺の有限集合である）。二本の台は互いに素で元の台を尽くす。",
                         "二本の項はどちらも元の辺列の項を重複なく並べたものなので、各子の無向辺の標識も相異なる。",
                         ref("claim_crossing_free_contact_split_children"), " により両子の横断数は零である。",
                         "接触対数について両子それぞれに",
@@ -100624,7 +100642,8 @@ n_{\mathrm{ct}}(\gamma_A)
                         ref("claim_edge_distinct_crossing_elimination_parity"), " により、",
                         math(String.raw`\gamma`), " は横断のない閉歩道の族 ",
                         math(String.raw`(\delta_i)_{1\le i\le n}`), " に分かれる。",
-                        "各台を ", math(String.raw`C_i`), " と置く。切断線偶奇と回転数は同じ主張の等式を満たす。",
+                        "各台（", ref("claim_disjoint_walk_mutual_crossing_intersection"),
+                        " の二本の辺の台と同じく、辺列に現れる無向辺の有限集合）を ", math(String.raw`C_i`), " と置く。切断線偶奇と回転数は同じ主張の等式を満たす。",
                         "まず各 ", math(String.raw`\delta_i`), " に ",
                         ref("claim_crossing_free_contact_elimination_phase"), " を適用し、",
                         "頂点単純な閉歩道の族 ", math(String.raw`(\alpha_j)_{1\le j\le p}`),
@@ -100632,6 +100651,9 @@ n_{\mathrm{ct}}(\gamma_A)
                         "この段では一つの ", math(String.raw`\delta_i`), " を固定する。",
                       ]),
                       paragraph([
+                        "各 ", math(String.raw`\alpha_j`), " は通過する頂点が相異なるので、",
+                        ref("claim_zero_contact_iff_distinct_pass_vertices"), " により ",
+                        math(String.raw`n_{\mathrm{ct}}(\alpha_j)=0`), " であり、",
                         ref("claim_vertex_simple_orbit_quadratic_sign"), " は各 ",
                         math(String.raw`\alpha_j`), " に適用できる。",
                         "切断線偶奇の和からねじれ符号は積に分かれるので、",

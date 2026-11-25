@@ -28,6 +28,17 @@ theorem edgeTransverseCrossing_from_necSuf {L : ℕ}
         e f e' f' := by
   rfl
 
+/-- 共通の頂点を通る二つの接続の横断の条件（終点の一致・二つの直進・軸の相異）は、
+二つの接続の交換で対称である（実際の向き付き辺についての具体版）。
+人手証明と同じく、終点の一致は等号の対称性、二つの直進は順序の入れ替え、
+軸の相異は不等号の対称性で移す。 -/
+theorem transverse_crossing_condition_symmetric {L : ℕ} (e f e' f' : OrientedEdge L)
+    (h : orientedTarget e = orientedTarget e' ∧ stepTurning e f = 0 ∧ stepTurning e' f' = 0 ∧
+      directionAxis (directionNumber e) ≠ directionAxis (directionNumber e')) :
+    orientedTarget e' = orientedTarget e ∧ stepTurning e' f' = 0 ∧ stepTurning e f = 0 ∧
+      directionAxis (directionNumber e') ≠ directionAxis (directionNumber e) :=
+  ⟨h.1.symm, h.2.2.1, h.2.1, Ne.symm h.2.2.2⟩
+
 /-- 正方格子の一回の通過が持つ局所データ。一歩の回転と、水平・垂直の軸。 -/
 structure LocalVisit where
   turn : Turn

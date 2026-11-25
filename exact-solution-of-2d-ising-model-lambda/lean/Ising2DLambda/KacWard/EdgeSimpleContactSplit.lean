@@ -1,8 +1,10 @@
 /-
 「台の辺が相異なる閉歩道は接触点で二本の閉歩道に分かれる」の接続部分の具体版。
 人手証明と同じく、元の接続と、前段で非後退と示した交換後の二接続を二点交換後の
-接続族へまとめ、二つの添字区間の内部・継ぎ目・閉じる接続を順に得る。
+接続族へまとめ、二つの添字区間の内部・継ぎ目・閉じる接続は、平滑化の主張
+（`claim_smoothing_splits_closed_walk`）の具体版 `smoothing_split_closed_connections` から得る。
 -/
+import Ising2DLambda.KacWard.SmoothingClosedWalkSplit
 import Ising2DLambda.NecSuf.KacWard.ContactSplitConnections
 
 namespace Ising2DLambda.KacWard
@@ -22,6 +24,7 @@ theorem edgeSimpleContactSplitConnections {E : Type} (Next : E → E → Prop)
     (l < m → Next (edge m) (edge 1)) ∧
     (∀ r, 1 ≤ r → r < k → Next (edge r) (edge (r + 1))) ∧
     Next (edge k) (edge (if l = m then 1 else l + 1)) := by
+  -- 元の接続と交換した二接続を、二点交換後の接続族 `ν` へまとめる
   have hnext : ∀ r, Next (edge r) (edge (ν r)) := by
     intro r
     by_cases hrk : r = k
@@ -31,39 +34,9 @@ theorem edgeSimpleContactSplitConnections {E : Type} (Next : E → E → Prop)
       · subst r
         simpa [hνl] using hswapL
       · simpa [hother r hrk hrl] using horiginal r hrk hrl
-  constructor
-  · intro r hkr hrl
-    have hrk : r ≠ k := by omega
-    have hrl' : r ≠ l := by omega
-    have hrm : r ≠ m := by omega
-    simpa [hother r hrk hrl', hσ r, if_neg hrm] using hnext r
-  constructor
-  · have hkm : k ≠ m := by omega
-    simpa [hνl, hσ k, if_neg hkm] using hnext l
-  constructor
-  · intro r hlr hrm
-    have hrk : r ≠ k := by omega
-    have hrl' : r ≠ l := by omega
-    have hrm' : r ≠ m := by omega
-    simpa [hother r hrk hrl', hσ r, if_neg hrm'] using hnext r
-  constructor
-  · intro hlm'
-    have hmk : m ≠ k := by omega
-    have hml : m ≠ l := by omega
-    simpa [hother m hmk hml, hσ m] using hnext m
-  constructor
-  · intro r hr1 hrk
-    have hrk' : r ≠ k := by omega
-    have hrl : r ≠ l := by omega
-    have hrm : r ≠ m := by omega
-    simpa [hother r hrk' hrl, hσ r, if_neg hrm] using hnext r
-  · by_cases hlm' : l = m
-    · have hkNext := hnext k
-      rw [hνk, hσ l] at hkNext
-      simpa [hlm'] using hkNext
-    · have hkNext := hnext k
-      rw [hνk, hσ l] at hkNext
-      simpa [hlm'] using hkNext
+  -- 残りは「横断の平滑化は二本の閉歩道に分ける」と同じ添字区間の論法
+  -- （`claim_smoothing_splits_closed_walk` の具体版）
+  exact smoothing_split_closed_connections Next edge m k l σ ν hσ hνk hνl hother hnext hkl hlm
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
 theorem edgeSimpleContactSplitConnections_from_necSuf {E : Type} (Next : E → E → Prop)

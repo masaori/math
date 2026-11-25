@@ -14,11 +14,13 @@
   （非後退の条件は `smoothedExitEdge_mem_nonbacktrackingSuccessors` が与える）。
 - 「`p_A` は狭義単調増加」: `smoothedSplitIndexA_lt_iff`。`c(γ_A) = |C_AA|`: `closedWalkCrossingNumber_splitWalkA`。
 - 「順序なし二元集合の全単射」による `c(γ_B) = |C_BB|`: `closedWalkCrossingNumber_splitWalkB`。
-- 三条件の交換での対称性: `smoothedCrossingCondition_symm`（二辺の終点の一致・二つの直進・軸の相異の各々の対称性）。
+- 三条件の交換での対称性（`claim_transverse_crossing_symmetric`）: `smoothedCrossingCondition_symm` が
+  `transverse_crossing_condition_symmetric` を引く。
 - 第三の準備（`C_×` の対を `A` 側を第一成分に置き直す全単射）: `splitMutualCrossingNumber_eq_mixed`。
 - 合成: `smoothing_split_crossing_partition`。
 -/
 import Ising2DLambda.KacWard.SmoothedSplitClosedWalks
+import Ising2DLambda.KacWard.TransverseCrossing
 import Ising2DLambda.KacWard.ClosedWalkCrossingNumber
 import Ising2DLambda.KacWard.SmoothedCrossingNumber
 import Ising2DLambda.KacWard.SplitMutualCrossingNumber
@@ -39,10 +41,11 @@ def smoothedCrossingCondition (γ : Fin (m + 1) → OrientedEdge L) (k l r s : F
     stepTurning (γ s) (smoothedExitEdge γ k l s) = 0 ∧
     directionAxis (directionNumber (γ r)) ≠ directionAxis (directionNumber (γ s))
 
-/-- 三条件は二つの添字の交換で対称である。 -/
+/-- 三条件は二つの添字の交換で対称である（`claim_transverse_crossing_symmetric`）。 -/
 theorem smoothedCrossingCondition_symm {γ : Fin (m + 1) → OrientedEdge L} {k l r s : Fin (m + 1)}
     (h : smoothedCrossingCondition γ k l r s) : smoothedCrossingCondition γ k l s r :=
-  ⟨h.1.symm, h.2.2.1, h.2.1, Ne.symm h.2.2.2⟩
+  transverse_crossing_condition_symmetric (γ r) (smoothedExitEdge γ k l r)
+    (γ s) (smoothedExitEdge γ k l s) h
 
 /-- 三条件を満たす二つの添字は異なる（同じ添字なら軸が一致する）。 -/
 theorem smoothedCrossingCondition_ne {γ : Fin (m + 1) → OrientedEdge L} {k l r s : Fin (m + 1)}
