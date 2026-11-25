@@ -22,6 +22,8 @@
 
 ## 完了済み
 
+- 2026-11-25（研究管理）: zod 4.6.6 への版上げの後に npm run check・verify-check-linkage・verify-label-correspondence を打ち直して通った。本文・Lean・台帳に変更は無く、ゴールに着いたまま。積み上げの実行は止めたまま。
+
 - 2026-11-24（研究管理）: 前回から本文・Lean・台帳に変更が無く、ゴールに着いたまま。台帳に行を足さず、積み上げの実行は止めたまま。
 
 - 2026-11-23（研究管理）: ゴールへの到達を、lake build の後の全検査（分離・一般論・使わない仮定の点検が全て 0、check-no-sorry、verify-label-correspondence）と npm run check・verify-check-linkage で確かめた。
