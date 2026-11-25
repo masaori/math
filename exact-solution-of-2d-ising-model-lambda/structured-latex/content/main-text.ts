@@ -78928,16 +78928,16 @@ a
                         displayMath(String.raw`\begin{aligned}
 \frac{2}{a}\cdot\iota(\log q)
 &\le_{\Lambda_{\mathbb{Q}}}\frac{2}{L}\cdot\iota(\log q)
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonpos}\text{ を }r:=\tfrac{2}{L}\text{、}s:=\tfrac{2}{a}\text{、}\nu:=\iota(\log q)\text{ で読む。}r\le s\text{ は第二、}\nu\le_{\Lambda_{\mathbb{Q}}}0\text{ は第三})
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonpos}\text{ を }r:=\tfrac{2}{L}\text{、}s:=\tfrac{2}{a}\text{、}\nu:=\iota(\log q)\text{ で読む、}r\le s\text{ は第二、}\nu\le_{\Lambda_{\mathbb{Q}}}0\text{ は第三})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 -\Bigl(\frac{2}{a}\cdot C\Bigr)
 &=\Bigl(-\frac{2}{a}\Bigr)\cdot C
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元と有理数倍を素数ごとに読む。}-(r\,C(p))=(-r)\,C(p)\text{ は }\mathbb{Q}\text{ の四則})\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元と有理数倍を素数ごとに読む、}-(r\,C(p))=(-r)\,C(p)\text{ は }\mathbb{Q}\text{ の四則})\\
 &\le_{\Lambda_{\mathbb{Q}}}\Bigl(-\frac{2a}{L}\Bigr)\cdot C
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=-\tfrac{2}{a}\text{、}s:=-\tfrac{2a}{L}\text{、}\nu:=C\text{ で読む。}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})\\
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=-\tfrac{2}{a}\text{、}s:=-\tfrac{2a}{L}\text{、}\nu:=C\text{ で読む、}r\le s\text{ は第二、}0\le_{\Lambda_{\mathbb{Q}}}\nu\text{ は第三})\\
 &=-\Bigl(\frac{2a}{L}\cdot C\Bigr)
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元と有理数倍を素数ごとに読む。}(-r)\,C(p)=-(r\,C(p))\text{ は }\mathbb{Q}\text{ の四則})
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元と有理数倍を素数ごとに読む、}(-r)\,C(p)=-(r\,C(p))\text{ は }\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         paragraph([
                           "本体は、主張の左辺の第一の項を分配則で二つに割り、割った前の項を第四の前者で、末尾の項を第四の後者で置き換えたうえで、第一で取った ",

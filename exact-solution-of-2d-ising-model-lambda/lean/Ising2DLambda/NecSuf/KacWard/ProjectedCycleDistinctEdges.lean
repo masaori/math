@@ -1,66 +1,61 @@
-import Ising2DLambda.NecSuf.KacWard.ProjectedClosedEdgeCycle
-import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationPeriodInjective
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.FiniteInjectiveMinimalPeriod
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.IterateNoShortReturn
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEvenOrbit
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Ising2DLambda.AlgebraicEigenvalue
-attribute [local instance] Classical.propDecidable
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 
-variable {J E : Type*} [Fintype J] [LinearOrder J]
+variable {J E : Type*} [Fintype J]
 
-/-- A two-point fibre consisting of an edge and its long mate meets the first
-    colour of an alternating cycle at most once. -/
-theorem projectedCycle_edges_injective (τ υ : FixedPointFreeInvolution J)
-    (p : J → E) (hfibre : ∀ j l, p j = p l → j = l ∨ j = υ.val l)
-    (i : J) (hi : i ∈ matchingPairColor τ υ) :
-    let σ := matchingPairPermutation τ υ
-    let k := finitePermutationMinimalPeriod σ i / 2
+/-- A two-point fibre consisting of an edge and its second-colour mate meets
+    the first colour of an alternating cycle at most once per period. -/
+theorem projectedCycle_edges_injective (σ : Equiv.Perm J) (υ : J → J)
+    (C : J → Prop)
+    (hflip : ∀ j, C (σ j) ↔ ¬ C j)
+    (hυcolor : ∀ j, C (υ j) ↔ ¬ C j)
+    (p : J → E) (hfibre : ∀ j l, p j = p l → j = l ∨ j = υ l)
+    (i : J) (hi : C i) :
+    let n := finiteInjectiveMinimalPeriod σ σ.injective i
+    let k := n / 2
     ∀ r s : ℕ, r < k → s < k →
-      p (finiteMapIterate σ (2 * r) i) =
-        p (finiteMapIterate σ (2 * s) i) → r = s := by
+      p (σ^[2 * r] i) = p (σ^[2 * s] i) → r = s := by
   dsimp
-  let σ := matchingPairPermutation τ υ
-  let C := matchingPairColor τ υ
-  let n := finitePermutationMinimalPeriod σ i
+  let n := finiteInjectiveMinimalPeriod σ σ.injective i
   let k := n / 2
-  have hneven : Even n := by
-    change Even (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) i)
-    exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.even_of_color_flip
-      (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
-      (matchingPairSuccessor_color τ υ) _ _
-      (finitePermutationMinimalPeriod_spec _ _).2.1
+  have hneven : Even n :=
+    even_of_color_flip σ C hflip n i
+      (finiteInjectiveMinimalPeriod_spec σ σ.injective i).2.1
   have hnk : n = 2 * k := by
     obtain ⟨a, ha⟩ := hneven
     dsimp [k]
     omega
-  have hflip (j : J) : σ j ∈ C ↔ j ∉ C := matchingPairSuccessor_color τ υ j
-  have heven (r : ℕ) : finiteMapIterate σ (2 * r) i ∈ C := by
+  have heven (r : ℕ) : C (σ^[2 * r] i) := by
     induction r with
-    | zero => simpa [finiteMapIterate, C] using hi
+    | zero => simpa using hi
     | succ r ih =>
-      let j := finiteMapIterate σ (2 * r) i
-      have hodd : σ j ∉ C := by
+      have hodd : ¬ C (σ (σ^[2 * r] i)) := by
         intro h
-        exact (hflip j).mp h ih
-      have hnext : σ (σ j) ∈ C := (hflip (σ j)).mpr hodd
+        exact (hflip _).mp h ih
+      have hnext : C (σ (σ (σ^[2 * r] i))) := (hflip _).mpr hodd
       have hindex : 2 * (r + 1) = 2 + 2 * r := by omega
-      rw [hindex, finiteMapIterate_add]
+      rw [hindex, iterate_add_necSuf]
       exact hnext
   intro r s hr hs hprojection
-  change r < k at hr
-  change s < k at hs
   have hpair := hfibre _ _ hprojection
-  have heq : finiteMapIterate σ (2 * r) i = finiteMapIterate σ (2 * s) i := by
+  have heq : σ^[2 * r] i = σ^[2 * s] i := by
     rcases hpair with h | h
     · exact h
     · exfalso
-      have hnot : υ.val (finiteMapIterate σ (2 * s) i) ∉ C := by
+      have hnot : ¬ C (υ (σ^[2 * s] i)) := by
         intro hc
-        exact (matchingPairSecondColor_alternates τ υ _).mp hc (heven s)
+        exact (hυcolor _).mp hc (heven s)
       exact hnot (h ▸ heven r)
   have hrn : 2 * r < n := by omega
   have hsn : 2 * s < n := by omega
-  have hindex := finitePermutationIterate_injOn_period σ i hrn hsn heq
+  have hinj := iterate_injOn_of_no_short_return_necSuf σ σ.injective i n
+    (finiteInjectiveMinimalPeriod_spec σ σ.injective i).2.2
+  have hindex : 2 * r = 2 * s := hinj hrn hsn heq
   omega
 
 end Ising2DLambda.NecSuf.KacWard
