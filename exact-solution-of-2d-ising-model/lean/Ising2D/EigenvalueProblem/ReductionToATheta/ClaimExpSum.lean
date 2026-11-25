@@ -62,10 +62,11 @@ theorem expPhase_sum {M : ℕ} (hM : M ≠ 0) (k : ℤ) :
   have hpow : ∀ j : Fin M,
       expPhase M (finIndexToZZ M j * k) = expPhase M k ^ ((j : ℕ) + 1) := by
     intro j
-    -- 人手の添字 `finIndexToZZ M j = ι_{ℕ→ℤ}(j.val) + 1_ℤ` を、冪の指数の自然数 `j.val + 1` の像として書き直す
-    have h : finIndexToZZ M j = ((((j : ℕ) + 1 : ℕ)) : ℤ) := by
-      simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]; push_cast; ring
-    rw [h, expPhase_natCast_mul]
+    -- 人手の添字 `finIndexToZZ M j = ι_{ℕ→ℤ}(j.val) + 1_ℤ` を、冪の指数の自然数 `j.val + 1` の像 `ι_{ℕ→ℤ}(j.val + 1_ℕ)` として書き直す
+    -- （`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ` により定義どおり）
+    have h : finIndexToZZ M j = inclusionNNtoZZ ((j : ℕ) + 1) := rfl
+    -- Lean だけの段: `expPhase_natCast_mul` の指数は Lean の `Nat.cast` で書かれているので、像 `ι_{ℕ→ℤ}` をそれへ移す
+    rw [h, inclusionNNtoZZ_eq_natCast, expPhase_natCast_mul]
   simp_rw [hpow]
   rw [deltaMod, sub_zero]
   by_cases hdvd : (M : ℤ) ∣ k

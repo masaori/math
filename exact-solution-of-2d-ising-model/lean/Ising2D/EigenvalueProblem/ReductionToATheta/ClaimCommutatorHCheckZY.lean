@@ -301,9 +301,9 @@ theorem lie_H1Plus_Z (k : Fin M) : ⁅H1plus M, Z k⁆ = (2 : ℂ) • Yflat M (
     have hlastZ : finIndexToZZ M last = inclusionNNtoZZ M := finIndexToZZ_lastSite hM.ne'
     have hlast : (last : ℕ) + 1 = M := (finIndexToZZ_eq_iff_val_add_one_eq M last).1 hlastZ
     have hnext : nextSite last = k := hinj _ _ (by rw [finIndexToZZ_nextSite_of_last hlast, hk])
-    -- 延長 `Y♭` の添字（ℕ）へ移す: 人手の `j - 1 = 0`
+    -- 延長 `Y♭` の添字（ℕ）へ移す: 人手の `j - 1 = 0`（`inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ` と ℤ の `0 + 1 = 1`）
     have hk0 : (k : ℕ) = 0 :=
-      (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M k 0).1 (by rw [inclusionNNtoZZ_eq_natCast]; omega)
+      (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M k 0).1 (by rw [hk]; exact (zero_add (1 : ℤ)).symm)
     rw [Finset.sum_eq_single last]
     · rw [lastSign_of_last hlast, hnext, lie_YZ_Z_right, hk0, Yflat_zero hM.ne', smul_smul,
         smul_neg, ← neg_smul]
@@ -335,13 +335,14 @@ theorem lie_H1Plus_Z (k : Fin M) : ⁅H1plus M, Z k⁆ = (2 : ℂ) • Yflat M (
     have hprev : (prev : ℕ) + 1 < M := by have := prev.isLt; omega
     have hnext : nextSite prev = k :=
       hinj _ _ (by rw [finIndexToZZ_nextSite_of_lt hprev, hprevZ]; ring)
-    -- 延長 `Y♭` の添字（ℕ）へ移す: 人手の `j - 1 = m`
+    -- 延長 `Y♭` の添字（ℕ）へ移す: 人手の `j - 1 = m`。`m` の像は `j - 1_ℤ` なので `j` は `m` の像に `1_ℤ` を足したもので、
+    -- それは `inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ` により `ι(m.val + 1_ℕ) + 1_ℤ`（定義どおり）
     have hkval : (k : ℕ) = (prev : ℕ) + 1 := by
-      have hprevval := (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M prev prev).2 rfl
       refine (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M k ((prev : ℕ) + 1)).1 ?_
-      rw [inclusionNNtoZZ_eq_natCast] at hprevval ⊢
-      push_cast
-      omega
+      calc finIndexToZZ M k
+          = (finIndexToZZ M k - 1) + 1 := (sub_add_cancel (finIndexToZZ M k) 1).symm
+        _ = finIndexToZZ M prev + 1 := by rw [hprevZ]
+        _ = inclusionNNtoZZ ((prev : ℕ) + 1) + 1 := rfl
     rw [Finset.sum_eq_single prev]
     · rw [lastSign_of_not_last hprevNotLast, hnext, lie_YZ_Z_right, one_smul]
       congr 1
@@ -400,13 +401,13 @@ theorem lie_H1Plus_Y (k : Fin M) : ⁅H1plus M, Y k⁆ = (-2 : ℂ) • Zflat M 
     obtain ⟨nk, hnkZ⟩ := hsurj (finIndexToZZ M k + 1) (by omega) (by omega)
     have hnext : nextSite k = nk := hinj _ _ (by rw [finIndexToZZ_nextSite_of_lt hlt, hnkZ])
     -- 延長 `Z♭` の添字（ℕ）へ移す: 人手の `j + 1`
+    -- `nk` の像は `j + 1_ℤ` で、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ` により `ι(k.val + 1_ℕ) + 1_ℤ`（定義どおり）
     have hnkval : (k : ℕ) + 2 = (nk : ℕ) + 1 := by
-      have hkval := (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M k k).2 rfl
       have hnk : (nk : ℕ) = (k : ℕ) + 1 := by
         refine (finIndexToZZ_eq_inclusion_add_one_iff_val_eq M nk ((k : ℕ) + 1)).1 ?_
-        rw [inclusionNNtoZZ_eq_natCast] at hkval ⊢
-        push_cast
-        omega
+        calc finIndexToZZ M nk
+            = finIndexToZZ M k + 1 := hnkZ
+          _ = inclusionNNtoZZ ((k : ℕ) + 1) + 1 := rfl
       omega
     rw [lastSign_of_not_last hk, hnext, hnkval, Zflat_succ, one_mul]
 
@@ -479,9 +480,10 @@ theorem lie_H1Plus_checkZ (hM : M ≠ 0) (ν : ℤ) :
     have hzero : finIndexToZZ (n + 1) 0 - 1 = 0 := by
       have h1 : finIndexToZZ (n + 1) 0 = 1 := finIndexToZZ_firstSite (M := n + 1) (Nat.succ_ne_zero n)
       rw [h1]; ring
-    have hsucc : ∀ i : Fin n, finIndexToZZ (n + 1) (Fin.succ i) - 1 = finIndexToZZ n i := by
-      intro i; rw [finIndexToZZ, finIndexToZZ, inclusionNNtoZZ_eq_natCast, inclusionNNtoZZ_eq_natCast, Fin.val_succ]
-      push_cast; ring
+    -- `succ i` の像は `ι_{ℕ→ℤ}(i.val + 1_ℕ) + 1_ℤ` で、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ` により
+    -- `i` の像に `1_ℤ` を足したもの（定義どおり）。そこから `1_ℤ` を引くと `i` の像（ℤ の `(a + 1) - 1 = a`）
+    have hsucc : ∀ i : Fin n, finIndexToZZ (n + 1) (Fin.succ i) - 1 = finIndexToZZ n i := fun i =>
+      add_sub_cancel_right (finIndexToZZ n i) 1
     simp only [hzero, hsucc]
     simp only [Fin.val_zero, Fin.val_succ]
   calc ⁅H1plus (n + 1), checkZ (n + 1) ν⁆
@@ -556,9 +558,8 @@ theorem lie_H1Plus_checkY (hM : M ≠ 0) (ν : ℤ) :
     rw [Fin.sum_univ_succ]
     -- Lean だけの段: 最初の元の像は `1_ℤ`、`succ i` の像は `i` の像に `1_ℤ` を足したもの
     have hzero : finIndexToZZ (n + 1) 0 = 1 := finIndexToZZ_firstSite (M := n + 1) (Nat.succ_ne_zero n)
-    have hsucc : ∀ i : Fin n, finIndexToZZ (n + 1) (Fin.succ i) = finIndexToZZ n i + 1 := by
-      intro i; rw [finIndexToZZ, finIndexToZZ, inclusionNNtoZZ_eq_natCast, inclusionNNtoZZ_eq_natCast, Fin.val_succ]
-      push_cast; rfl
+    -- （`succ i` の像は `ι_{ℕ→ℤ}(i.val + 1_ℕ) + 1_ℤ` で、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ` により定義どおり）
+    have hsucc : ∀ i : Fin n, finIndexToZZ (n + 1) (Fin.succ i) = finIndexToZZ n i + 1 := fun _ => rfl
     simp only [hzero, hsucc, Fin.val_zero, Fin.val_succ]
   calc ⁅H1plus (n + 1), checkY (n + 1) ν⁆
       = ⁅H1plus (n + 1), ∑ j : Fin (n + 1), checkPhase (n + 1) (finIndexToZZ (n + 1) j) ν • Y j⁆ := rfl

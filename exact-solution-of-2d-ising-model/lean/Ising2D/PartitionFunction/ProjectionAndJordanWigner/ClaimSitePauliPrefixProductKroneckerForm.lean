@@ -80,9 +80,9 @@ theorem site_pauli_prefix_product_kronecker_form :
           funext i
           -- 人手の添字 `finIndexToZZ M i`（`def_index_set_from_one_to_n`）が `ι_{ℕ→ℤ}(1) = 1_ℤ` 以下なら第 1 因子 `σ^{a_1}`、そうでなければ `I`
           have hinj := (finIndexToZZ_bijective_onto_index_set M).1
-          have h0Z : finIndexToZZ M (⟨0, h⟩ : Fin M) = 1 := by
-            simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]; omega
-          have h1Z : inclusionNNtoZZ (0 + 1) = 1 := by simp only [inclusionNNtoZZ_eq_natCast]; omega
+          -- どちらも `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`・`ι(k + 1_ℕ) := ι(k) + 1_ℤ` により定義どおり `0_ℤ + 1_ℤ` で、ℤ の `0 + 1 = 1`
+          have h0Z : finIndexToZZ M (⟨0, h⟩ : Fin M) = 1 := zero_add (1 : ℤ)
+          have h1Z : inclusionNNtoZZ (0 + 1) = 1 := zero_add (1 : ℤ)
           by_cases hi : finIndexToZZ M i ≤ inclusionNNtoZZ (0 + 1)
           · have he : i = (⟨0, h⟩ : Fin M) := hinj _ _ (by
               have := ((finIndexToZZ_bijective_onto_index_set M).2.1 i).1
@@ -195,8 +195,8 @@ theorem finiteMatrixProduct_jwFactor_kronecker_form (m : Fin M) (A : Matrix (Fin
         -- `Fin (m + 1)` の元 `j` を `Fin M` へ入れても像は変わらず、人手の `m` の添字は `ι_{ℕ→ℤ}(m + 1)`（Lean の `m`）
         have hjZ : finIndexToZZ M (⟨(j : ℕ), lt_of_le_of_lt (Nat.le_of_lt_succ j.isLt) m.isLt⟩ : Fin M)
             = finIndexToZZ ((m : ℕ) + 1) j := rfl
-        have hmZ : finIndexToZZ M m = inclusionNNtoZZ ((m : ℕ) + 1) := by
-          simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]; push_cast; ring
+        -- `inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ` により定義どおり
+        have hmZ : finIndexToZZ M m = inclusionNNtoZZ ((m : ℕ) + 1) := rfl
         have hjm : finIndexToZZ ((m : ℕ) + 1) j < finIndexToZZ M m ↔ (j : ℕ) < (m : ℕ) := by
           rw [← hjZ]; exact finIndexToZZ_lt_iff_val_lt M _ m
         by_cases hj : finIndexToZZ ((m : ℕ) + 1) j < finIndexToZZ M m

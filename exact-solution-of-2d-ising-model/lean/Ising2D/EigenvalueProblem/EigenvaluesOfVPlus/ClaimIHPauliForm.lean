@@ -126,10 +126,10 @@ theorem boundaryG_kronecker_form (r : ℕ) :
         funext i
         -- 人手のサイト `1`・`M_col` の添字は `1_ℤ`・`ι_{ℕ→ℤ}(M_col)`（`def_index_set_from_one_to_n`）で、`0`・`Fin.last (r + 1)` の像も同じ値
         have hinj := (finIndexToZZ_bijective_onto_index_set (r + 2)).1
-        have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
-          simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
-        have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
-          simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+        -- `0` の像 `ι_{ℕ→ℤ}(0_ℕ) + 1_ℤ` は、`inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`（と Lean の `Fin` の値の定義）どおりに `0_ℤ + 1_ℤ`、ℤ の `0 + 1 = 1`
+        have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := zero_add (1 : ℤ)
+        -- `Fin.last (r + 1)` の像 `ι_{ℕ→ℤ}(r + 1) + 1_ℤ` は、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（と Lean の `Fin` の値・ℕ の和の定義）により定義どおり `ι_{ℕ→ℤ}(r + 2)`
+        have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := rfl
         have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) :=
           hinj _ _ (by rw [finIndexToZZ_firstSite, hzeroZ])
         have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) :=
@@ -174,9 +174,9 @@ theorem sigmaZ_castSucc_mul_sigmaZ_succ_kronecker {r : ℕ} (m : Fin (r + 1)) :
     sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)
       = siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
           (Fin.succ m) pauliZ) (Fin.castSucc m) pauliZ) := by
-  -- 人手の `m` と `m+1` の添字（`finIndexToZZ` の像）は `1_ℤ` だけ違う（`def_index_set_from_one_to_n`）
-  have hsuccZ : finIndexToZZ (r + 2) (Fin.succ m) = finIndexToZZ (r + 2) (Fin.castSucc m) + 1 := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_succ, Fin.val_castSucc]; push_cast; ring
+  -- 人手の `m` と `m+1` の添字（`finIndexToZZ` の像）は `1_ℤ` だけ違う（`def_index_set_from_one_to_n`）。
+  -- `succ m` の像 `ι_{ℕ→ℤ}(m.val + 1_ℕ) + 1_ℤ` は、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（と Lean の `Fin` の値の定義）により定義どおり
+  have hsuccZ : finIndexToZZ (r + 2) (Fin.succ m) = finIndexToZZ (r + 2) (Fin.castSucc m) + 1 := rfl
   have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := fun h => by
     have := congrArg (finIndexToZZ (r + 2)) h
     omega
@@ -230,9 +230,9 @@ theorem sigmaZ_castSucc_mul_sigmaZ_succ_kronecker {r : ℕ} (m : Fin (r + 1)) :
 theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
     Y (Fin.castSucc m) * Z (Fin.succ m)
       = (-Complex.I) • (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)) := by
-  -- 人手の `m` と `m+1` の添字（`finIndexToZZ` の像）は `1_ℤ` だけ違う（`def_index_set_from_one_to_n`）
-  have hsuccZ : finIndexToZZ (r + 2) (Fin.succ m) = finIndexToZZ (r + 2) (Fin.castSucc m) + 1 := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_succ, Fin.val_castSucc]; push_cast; ring
+  -- 人手の `m` と `m+1` の添字（`finIndexToZZ` の像）は `1_ℤ` だけ違う（`def_index_set_from_one_to_n`）。
+  -- `succ m` の像 `ι_{ℕ→ℤ}(m.val + 1_ℕ) + 1_ℤ` は、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（と Lean の `Fin` の値の定義）により定義どおり
+  have hsuccZ : finIndexToZZ (r + 2) (Fin.succ m) = finIndexToZZ (r + 2) (Fin.castSucc m) + 1 := rfl
   have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := fun h => by
     have := congrArg (finIndexToZZ (r + 2)) h
     omega
@@ -321,10 +321,10 @@ theorem Y_last_mul_Z_zero (r : ℕ) :
       = (-Complex.I) • finiteMatrixProduct (r + 1) (boundaryGFactor r) := by
   have hinj := (finIndexToZZ_bijective_onto_index_set (r + 2)).1
   have hrange := (finIndexToZZ_bijective_onto_index_set (r + 2)).2.1
-  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
-  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+  -- `0` の像 `ι_{ℕ→ℤ}(0_ℕ) + 1_ℤ` は、`inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`（と Lean の `Fin` の値の定義）どおりに `0_ℤ + 1_ℤ`、ℤ の `0 + 1 = 1`
+  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := zero_add (1 : ℤ)
+  -- `Fin.last (r + 1)` の像 `ι_{ℕ→ℤ}(r + 1) + 1_ℤ` は、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（と Lean の `Fin` の値・ℕ の和の定義）により定義どおり `ι_{ℕ→ℤ}(r + 2)`
+  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := rfl
   have hM2 : 2 ≤ inclusionNNtoZZ (r + 2) := by rw [inclusionNNtoZZ_eq_natCast]; omega
   -- 人手の第 `1` 因子と第 `M_col` 因子は異なる（人手の添字 `1_ℤ` と `ι_{ℕ→ℤ}(M_col)`。`def_index_set_from_one_to_n`）
   have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := by
@@ -487,9 +487,9 @@ theorem sigmaX_transpose {M : ℕ} (m : Fin M) : (sigmaX m)ᵀ = sigmaX m := by
 人手の添字 `finIndexToZZ (r + 2) (Fin.castSucc m)` のサイトは Lean の `Fin.castSucc m`、その次の添字のサイトは `Fin.succ m` である（`def_index_set_from_one_to_n`）。 -/
 theorem sigmaZ_castSucc_mul_sigmaZ_succ_transpose {r : ℕ} (m : Fin (r + 1)) :
     (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))ᵀ = sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m) := by
-  -- 人手の `m` と `m+1` の添字（`finIndexToZZ` の像）は `1_ℤ` だけ違う（`def_index_set_from_one_to_n`）
-  have hsuccZ : finIndexToZZ (r + 2) (Fin.succ m) = finIndexToZZ (r + 2) (Fin.castSucc m) + 1 := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_succ, Fin.val_castSucc]; push_cast; ring
+  -- 人手の `m` と `m+1` の添字（`finIndexToZZ` の像）は `1_ℤ` だけ違う（`def_index_set_from_one_to_n`）。
+  -- `succ m` の像 `ι_{ℕ→ℤ}(m.val + 1_ℕ) + 1_ℤ` は、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（と Lean の `Fin` の値の定義）により定義どおり
+  have hsuccZ : finIndexToZZ (r + 2) (Fin.succ m) = finIndexToZZ (r + 2) (Fin.castSucc m) + 1 := rfl
   have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := fun h => by
     have := congrArg (finIndexToZZ (r + 2)) h
     omega
@@ -569,10 +569,10 @@ theorem boundaryYXYFamily_eq_ite (r : ℕ) :
   funext i
   -- 人手のサイト `1`・`M_col` の添字は `1_ℤ`・`ι_{ℕ→ℤ}(M_col)`（`def_index_set_from_one_to_n`）で、`0`・`Fin.last (r + 1)` の像も同じ値
   have hinj := (finIndexToZZ_bijective_onto_index_set (r + 2)).1
-  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
-  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+  -- `0` の像 `ι_{ℕ→ℤ}(0_ℕ) + 1_ℤ` は、`inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`（と Lean の `Fin` の値の定義）どおりに `0_ℤ + 1_ℤ`、ℤ の `0 + 1 = 1`
+  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := zero_add (1 : ℤ)
+  -- `Fin.last (r + 1)` の像 `ι_{ℕ→ℤ}(r + 1) + 1_ℤ` は、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（と Lean の `Fin` の値・ℕ の和の定義）により定義どおり `ι_{ℕ→ℤ}(r + 2)`
+  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := rfl
   have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) :=
     hinj _ _ (by rw [finIndexToZZ_firstSite, hzeroZ])
   have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) :=
@@ -592,10 +592,10 @@ theorem boundaryYXY_transpose (r : ℕ) :
     (siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)))ᵀ
       = siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
   -- 人手の第 `1` 因子と第 `M_col` 因子は異なる（人手の添字 `1_ℤ` と `ι_{ℕ→ℤ}(M_col)`。`def_index_set_from_one_to_n`）
-  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
-  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+  -- `0` の像 `ι_{ℕ→ℤ}(0_ℕ) + 1_ℤ` は、`inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`（と Lean の `Fin` の値の定義）どおりに `0_ℤ + 1_ℤ`、ℤ の `0 + 1 = 1`
+  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := zero_add (1 : ℤ)
+  -- `Fin.last (r + 1)` の像 `ι_{ℕ→ℤ}(r + 1) + 1_ℤ` は、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（と Lean の `Fin` の値・ℕ の和の定義）により定義どおり `ι_{ℕ→ℤ}(r + 2)`
+  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := rfl
   have hM2 : 2 ≤ inclusionNNtoZZ (r + 2) := by rw [inclusionNNtoZZ_eq_natCast]; omega
   have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := by
     intro h
@@ -671,10 +671,10 @@ theorem boundaryYXY_eq_neg_one_smul_real (r : ℕ) :
       = ((-1 : ℝ) : ℂ) • siteProd (r + 2) (fun i : Fin (r + 2) =>
           if i = 0 then pauliYReal else if i = Fin.last (r + 1) then pauliYReal else pauliX) := by
   -- 人手の第 `1` 因子と第 `M_col` 因子は異なる（人手の添字 `1_ℤ` と `ι_{ℕ→ℤ}(M_col)`。`def_index_set_from_one_to_n`）
-  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_zero]; omega
-  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := by
-    simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast, Fin.val_last]; omega
+  -- `0` の像 `ι_{ℕ→ℤ}(0_ℕ) + 1_ℤ` は、`inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`（と Lean の `Fin` の値の定義）どおりに `0_ℤ + 1_ℤ`、ℤ の `0 + 1 = 1`
+  have hzeroZ : finIndexToZZ (r + 2) (0 : Fin (r + 2)) = 1 := zero_add (1 : ℤ)
+  -- `Fin.last (r + 1)` の像 `ι_{ℕ→ℤ}(r + 1) + 1_ℤ` は、`inclusion_nn_to_zz` の再帰の式 `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（と Lean の `Fin` の値・ℕ の和の定義）により定義どおり `ι_{ℕ→ℤ}(r + 2)`
+  have hlastZ : finIndexToZZ (r + 2) (Fin.last (r + 1)) = inclusionNNtoZZ (r + 2) := rfl
   have hM2 : 2 ≤ inclusionNNtoZZ (r + 2) := by rw [inclusionNNtoZZ_eq_natCast]; omega
   have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := by
     intro h
