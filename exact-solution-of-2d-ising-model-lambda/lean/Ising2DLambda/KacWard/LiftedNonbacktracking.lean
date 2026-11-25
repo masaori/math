@@ -1,6 +1,5 @@
 import Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning
 import Ising2DLambda.KacWard.SuccessorDirectionSelection
-import Ising2DLambda.NecSuf.KacWard.LiftedNonbacktracking
 
 namespace Ising2DLambda.KacWard
 

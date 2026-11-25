@@ -1,4 +1,7 @@
 ## 直近の記録から移したもの
+- 2026-11-25（主経路）: 異なる交互閉路の点列の非交叉を必要十分版の成分最小元補題で示した。分離の例外件数は不変。半格子ずれた四つのモード和の式鎖の根拠を統一した。
+
+## 直近の記録から移したもの
 - 2026-11-25（並列・七十九回目）: Kac--Ward の具体版の導出の補題を、名前順の先頭 13 ファイル（`AdjacentCellCornersConnected`〜`ContactPairCount`）から同名の `*FromNecSuf.lean` へ移して `NecSuf` の import を外し、`Basic` は import を外すだけにした。分離の台帳 161→147 行。`ClosedWalkPasses`・`ClosedWalkCrossingNumber` は導出を使う側と同じ回に移すため外した。
 
 ## 直近の記録から移したもの

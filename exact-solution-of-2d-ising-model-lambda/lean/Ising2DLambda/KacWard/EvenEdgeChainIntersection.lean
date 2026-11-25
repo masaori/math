@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.Basic
-import Ising2DLambda.NecSuf.KacWard.EvenEdgeChainIntersection
 
 namespace Ising2DLambda.KacWard
 
@@ -26,14 +25,5 @@ def evenEdgeChainIntersection (L : ℕ) [NeZero L]
     (horizontalChainCoefficient L C i j *
         verticalChainCoefficient L D (i - 1) (j + 1) +
       verticalChainCoefficient L C i j * horizontalChainCoefficient L D i j)
-
-/-- 具体的な辺係数を必要十分な有限添字の交差形式へ代入する。 -/
-theorem evenEdgeChainIntersection_from_necSuf (L : ℕ) [NeZero L]
-    (C D : Finset (Edge L)) :
-    evenEdgeChainIntersection L C D =
-      Ising2DLambda.NecSuf.KacWard.finiteEdgeChainIntersection
-        (fun i : ZMod L => i - 1) (fun j : ZMod L => j + 1)
-        (horizontalChainCoefficient L C) (verticalChainCoefficient L C)
-        (horizontalChainCoefficient L D) (verticalChainCoefficient L D) := rfl
 
 end Ising2DLambda.KacWard
