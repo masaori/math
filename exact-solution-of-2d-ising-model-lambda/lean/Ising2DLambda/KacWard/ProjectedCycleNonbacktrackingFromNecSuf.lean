@@ -59,13 +59,21 @@ theorem taggedActive_projectedCycle_nonbacktracking_from_necSuf {L : ℕ} (z : Q
     apply taggedActive_shortMate_mem_nonbacktrackingSuccessors z s D t ht hterm j.val
     rw [concreteTaggedActiveVertices_eq_activeVertices D t]
     exact j.property
+  have hflip (j : _) : σ j ∈ C ↔ j ∉ C := matchingPairSuccessor_color τ υ j
+  have hsecond (j : _) (hj : j ∉ C) : σ j = υ.val j := by
+    change matchingPairSuccessor τ υ j = υ.val j
+    rw [matchingPairSuccessor, if_neg hj]
+  have hfirst (j : _) (hj : j ∈ C) : σ j = τ.val j := by
+    change matchingPairSuccessor τ υ j = τ.val j
+    rw [matchingPairSuccessor, if_pos hj]
   obtain ⟨k, hk, hreturn, hsteps⟩ :=
     Ising2DLambda.NecSuf.KacWard.projectedCycle_nonbacktracking
-      τ υ υ.val
+      σ τ.val υ.val (fun j => j ∈ C) hflip hsecond hfirst υ.val
       (fun a b => b.val ∈ nonbacktrackingSuccessors a.val)
       υ.property.2 (fun _ => rfl) hlocal m hm
   refine ⟨k, hk, ?_, ?_⟩
-  · simpa only [hrev] using congrArg Subtype.val hreturn
+  · change reversal (σ^[2 * k] m).val = reversal m.val
+    simpa only [hrev] using congrArg Subtype.val hreturn
   · intro r hr
     have h := hsteps r hr
     change (υ.val (finiteMapIterate σ (2 * (r + 1)) m)).val ∈

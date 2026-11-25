@@ -1989,7 +1989,6 @@ import Ising2DLambda.KacWard.TaggedDifferenceOrbitSeparation
 import Ising2DLambda.KacWard.TaggedDifferenceOrbitSeparationFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.AlternatingCycleEnumeration
 import Ising2DLambda.NecSuf.KacWard.AlternatingCycleAtRepresentative
-import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceAlternatingCycle
 import Ising2DLambda.KacWard.TaggedDifferenceAlternatingCycle
 import Ising2DLambda.KacWard.TaggedDifferenceAlternatingCycleFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.AlternatingComponentCover
@@ -2003,7 +2002,6 @@ import Ising2DLambda.KacWard.TaggedShortPairSuccessor
 import Ising2DLambda.NecSuf.KacWard.ReferenceLongMate
 import Ising2DLambda.KacWard.ReferenceLongMate
 import Ising2DLambda.NecSuf.KacWard.ProjectedClosedEdgeCycleCore
-import Ising2DLambda.NecSuf.KacWard.ProjectedClosedEdgeCycle
 import Ising2DLambda.KacWard.ProjectedClosedEdgeCycle
 import Ising2DLambda.KacWard.ProjectedClosedEdgeCycleFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.ProjectedCycleNonbacktracking

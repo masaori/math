@@ -80054,7 +80054,7 @@ Y
                     displayMath(String.raw`\begin{aligned}
 \Psi^{\mathrm{op}}_L(q)+\bigl(-\Psi^{\mathrm{op}}_M(q)\bigr)
 &\le_{\Lambda_{\mathbb{Q}}}R_a
-&&(\because\ \blkref{claim_open_square_large_sides_density_difference_upper_le_one}\text{ を }a,L,M\text{ で読む。仮定は準備の第二})\\
+&&(\because\ \blkref{claim_open_square_large_sides_density_difference_upper_le_one}\text{ を }a,L,M\text{ で読む、仮定は準備の第二})\\
 &=\tfrac1a\cdot\Gamma(q)
 &&(\because\ \blkref{claim_open_square_density_difference_bound_is_core_over_base_side}\text{ を }a\text{ で右から左へ読む})\\
 &\le_{\Lambda_{\mathbb{Q}}}\varepsilon
@@ -80064,11 +80064,11 @@ Y
                     displayMath(String.raw`\begin{aligned}
 -\varepsilon
 &\le_{\Lambda_{\mathbb{Q}}}-\bigl(\tfrac1a\cdot\Gamma(q)\bigr)
-&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=\tfrac1a\cdot\Gamma(q)\text{、}\mu:=\varepsilon\text{ で読む。}\tfrac1a\cdot\Gamma(q)\le_{\Lambda_{\mathbb{Q}}}\varepsilon\text{ は準備の第三})\\
+&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=\tfrac1a\cdot\Gamma(q)\text{、}\mu:=\varepsilon\text{ で読む、}\tfrac1a\cdot\Gamma(q)\le_{\Lambda_{\mathbb{Q}}}\varepsilon\text{ は準備の第三})\\
 &=-R_a
 &&(\because\ \blkref{claim_open_square_density_difference_bound_is_core_over_base_side}\text{ を }a\text{ で読み、逆元の中身を置き換える})\\
 &\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)+\bigl(-\Psi^{\mathrm{op}}_M(q)\bigr)
-&&(\because\ \blkref{claim_open_square_large_sides_density_difference_lower_le_one}\text{ を }a,L,M\text{ で読む。仮定は準備の第二})
+&&(\because\ \blkref{claim_open_square_large_sides_density_difference_lower_le_one}\text{ を }a,L,M\text{ で読む、仮定は準備の第二})
 \end{aligned}`),
                     paragraph([
                       "順序の推移律は ",
@@ -99145,7 +99145,7 @@ d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ 
                     verification: ["sagemath/check/tagged-difference-alternating-cycle"],
                     lean: [
                       "Ising2DLambda.KacWard.taggedActive_alternatingCycle",
-                      "Ising2DLambda.NecSuf.KacWard.alternatingCycle",
+                      "Ising2DLambda.NecSuf.KacWard.alternatingCycleAtRepresentative",
                     ],
                     statement: [
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " の非零項 ", math(String.raw`(D,T)`), " と活動点 ", math(String.raw`\vec e\in V_{\mathcal A}`), " を取る。", ref("def_matching_pair_component_minimum"), " の意味で二歩軌道の合併の最小元を ", math(String.raw`m`), " とし、", ref("def_matching_pair_successor"), " の第一の相手を ", math(String.raw`m_D`), "、第二の相手を ", math(String.raw`m_{\mathcal D_0}`), " とした後続置換を ", math(String.raw`\sigma`), " とする。", math(String.raw`n:=\operatorname{per}_{\sigma}(m)\in\mathbb N_{\ge1}`), " は ", ref("def_finite_permutation_minimal_period"), " の最小正周期とする。"]),
@@ -99310,7 +99310,7 @@ m_{\mathcal D_0}(\vec e)
                     verification: ["sagemath/check/projected-edge-cycle-closure"],
                     lean: [
                       "Ising2DLambda.KacWard.taggedActive_projectedClosedEdgeCycle",
-                      "Ising2DLambda.NecSuf.KacWard.projectedClosedEdgeCycle",
+                      "Ising2DLambda.NecSuf.KacWard.projectedClosedEdgeCycleCore",
                       "Ising2DLambda.KacWard.taggedActive_projectedClosedEdgeCycle_from_necSuf",
                     ],
                     statement: [
