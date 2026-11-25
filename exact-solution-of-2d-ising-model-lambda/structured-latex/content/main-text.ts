@@ -108667,9 +108667,9 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
 &=\log_{\mathbb{R}}(1)
 &&(\because\ \text{上で示した }\log_{\mathbb{R}}(1)=0)\\
 &=\log_{\mathbb{R}}(v\cdot v^{-1})
-&&(\because\ v\cdot v^{-1}=1\text{。}\mathbb{R}\text{ の逆元})\\
+&&(\because\ v\cdot v^{-1}=1\text{、}\mathbb{R}\text{ の逆元})\\
 &=\log_{\mathbb{R}}(v)+\log_{\mathbb{R}}(v^{-1})
-&&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm})
+&&(\because\ \text{乗法を加法へ移す、}\blkref{def_real_logarithm})
 \end{aligned}`),
                         paragraph([
                           "上の等号を ", math(String.raw`\mathbb R`),
@@ -108706,7 +108706,7 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
 &=\bigl(-\iota(n+1)\bigr)\cdot\log_{\mathbb{R}}(u)
 &&(\because\ \mathbb{R}\text{ の }-(st)=(-s)t)\\
 &=\iota\bigl(-(n+1)\bigr)\cdot\log_{\mathbb{R}}(u)
-&&(\because\ \iota\text{ は加法を保つので }\iota(-r)=-\iota(r)\text{。}\blkref{def_real_logarithm})\\
+&&(\because\ \iota\text{ は加法を保つので }\iota(-r)=-\iota(r)\text{、}\blkref{def_real_logarithm})\\
 &=\iota(k)\cdot\log_{\mathbb{R}}(u)
 &&(\because\ k=-(n+1))
 \end{aligned}`),

@@ -1,3 +1,18 @@
+## 前進の記録から移したもの
+- 2026-11-25（並列・八十二回目）: 【分離】の導出を移す行の 14 行を直した（残り 37 行）。導出の補題が使う側の Lean のファイルは今回の 12 件のどれにも無かった。
+- 2026-11-25（主経路）: 先頭の交互閉路の行を共有点から対が一致する論法で割り、必要十分版の端点列の相異性から独立に示した。対の向き直しの残りと列挙・符号は未了である。
+
+## 式変形の書き方の統一から移したもの
+- 2026-11-25（主経路）: 「有理係数の対数順序群の実現写像は順序を保つ」の式鎖で、行末根拠の句点を読点に替えた。式と根拠は変えていない。
+
+## レビュー記録から移したもの
+- 2026-11-25（並列・八十二回目）: 前回の 13 ファイルの導出の移動を含む main の上で `lake build` が通ることを、今回の直しの検証と合わせて確かめた。修正は無かった。
+- 2026-11-25（主経路）: 前回の共通の昇順対の向き積を、昇順条件から各因子が一になることに照合した。修正は無かった。
+
+## 現在地から移したもの
+- **2026-11-25（並列・八十二回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 14 行を直した（行は未了）。** 名前順で `EdgeSequenceTotalTurning` から `OddRayInteriorCells` までの 12 ファイル（`EdgeSequenceTotalTurning`・`EdgeSimpleContactSplit`・`EvenEdgeChainIntersection`・`EvenEdgeChainIntersectionValue`・`EvenEdgeChainTorusNormalForm`・`EvenEdgeSetCellBoundary`・`GaugePairWeightNonzero`・`GridEdgeEndpointsInCellVertices`・`IndexPairCrossing`・`LocalPairingMatching`・`MovedOrbitClosedWalk`・`OddRayInteriorCells`）の導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外し、`LiftedNonbacktracking` は導出の補題が無いので import を外すだけにした。`LocalPairingMatching` は `NecSuf` の二つのモジュールを import していたので台帳の 2 行が消えた。移した補題を使う Lean のファイルは無く、Mathlib を足す必要のある具体版も無かった。分離の台帳は 119→105 行。
+- **2026-11-25（主経路）、完全な端点列で一点を共有する対の一致を必要十分版で独立に示した。** 対の向き直しの証明から具体版の同名補題への参照を外した。列挙と符号の論法は未了である。
+
 ## 式変形の書き方の統一から移したもの
 - 2026-11-25（主経路）: 「半格子ずれた四つのモード和は同じ積分へ収束する」の式鎖で、行末根拠の句点を読点に替えた。式と根拠は変えていない。
 

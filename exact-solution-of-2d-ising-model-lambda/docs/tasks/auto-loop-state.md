@@ -5,12 +5,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-11-25（主経路）、交互閉路の符号の必要十分版から具体版への依存を外した。** 完全マッチングの列挙と向き直しを必要十分版の定義で行い、分離の台帳を七件減らした。主経路の次はマッチング対の定義の独立化である。
 - **2026-11-25（主経路）、交互閉路の対の向き直しを必要十分版の補題へ接続した。** 符号の本体には具体版の完全マッチング型が残り、具体版の交互閉路ファイルの import も残る。
 - **2026-11-25（主経路）、完全な端点列から昇順対の列挙を必要十分版で示した。** 向き直しの補題は列挙条件を外から受け取らなくなった。交互閉路の定理は具体版の import をまだ使う。
 - **2026-11-25（並列・八十四回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」の残り 22 行を直し、行を済ませた（表から消した）。** 名前順で `ShortPairCoefficientNonzero` から `WalkSideInteriorBandConnected` までの 20 ファイルの導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外し（導出のファイルが既にあった `TransverseTranslatedPeriodicPlaneLift`・`WalkSideInteriorBandConnected` はそこへ足した）、`StepTurning`・`VertexSimpleBoundaryNonloopPropagation` は import を外すだけにした。import が外れて落ちた下流の具体版 `WalkSideExteriorBandConnected` の導出の補題も既存の導出のファイルへ移し、`ExteriorCellSetEdgeConnectedFromNecSuf` に `NecSuf.KacWard.WalkSideInteriorBandConnected` の import を足した。導出が使う具体版の二つの補助定理（`TaggedMatchingNonzeroSupport` の長い寄与・短い寄与の非零性）の `private` を外し、`SmoothingClosedWalkSplit` に `Mathlib.Data.Nat.Basic` を直接足した。分離の台帳は 90→68 行（具体版のモジュールが必要十分版を import する組 37→15）。
 - **2026-11-25（並列・八十三回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 15 行を直した（行は未了）。** 名前順で `OneSidedClosureNonbacktracking` から `RightRayVerticalCrossingCount` までの 13 ファイルと、`ReversalRotationPhase` の導出の定義 `Turn.toNecSuf` を使う `TotalTurning`（計 14 ファイル：`OneSidedClosureNonbacktracking`・`OneSidedClosurePeriodDifferenceTurning`・`PeriodicPlaneLiftPeriodTurning`・`PlaneCellBoundaryInjective`・`PrimitiveIntegerPair`・`ReconnectionTurningDifference`・`ReferenceLongMatching`・`ReferenceLongMate`・`RepresentativeIncrement`・`ReversalDirectionShift`・`ReversalMatrixDeterminant`・`ReversalRotationPhase`・`RightRayVerticalCrossingCount`・`TotalTurning`）の導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外した（導出のファイルが既にあった三つは import を外すだけ）。`ClosedWalkRotationPhaseFromNecSuf` は `TotalTurningFromNecSuf` を、`OddRayInteriorCellsFromNecSuf` は `RightRayVerticalCrossingCountFromNecSuf` を import する。import が外れて使えなくなった具体版の `open Ising2DLambda.NecSuf.KacWard`（使われていなかった）を 11 ファイルから、`simp` の `NecSuf.KacWard.reverseBool`（同じく不要）を 2 ファイルから消し、`RepresentativeIncrement`・`RightRayVerticalCrossingCount` に `Mathlib`、`PrimitiveIntegerPair` に `Mathlib.Data.Int.GCD` を直接足した。分離の台帳は 105→90 行。
-- **2026-11-25（並列・八十二回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 14 行を直した（行は未了）。** 名前順で `EdgeSequenceTotalTurning` から `OddRayInteriorCells` までの 12 ファイル（`EdgeSequenceTotalTurning`・`EdgeSimpleContactSplit`・`EvenEdgeChainIntersection`・`EvenEdgeChainIntersectionValue`・`EvenEdgeChainTorusNormalForm`・`EvenEdgeSetCellBoundary`・`GaugePairWeightNonzero`・`GridEdgeEndpointsInCellVertices`・`IndexPairCrossing`・`LocalPairingMatching`・`MovedOrbitClosedWalk`・`OddRayInteriorCells`）の導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外し、`LiftedNonbacktracking` は導出の補題が無いので import を外すだけにした。`LocalPairingMatching` は `NecSuf` の二つのモジュールを import していたので台帳の 2 行が消えた。移した補題を使う Lean のファイルは無く、Mathlib を足す必要のある具体版も無かった。分離の台帳は 119→105 行。
-- **2026-11-25（主経路）、完全な端点列で一点を共有する対の一致を必要十分版で独立に示した。** 対の向き直しの証明から具体版の同名補題への参照を外した。列挙と符号の論法は未了である。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -37,7 +36,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Kac--Ward 行列の反対称化 | 【分離】必要十分版の交互閉路の列挙と符号を独立させる | 着手（被覆・閉路長の偶数性・活動点の二歩の正周期・符号の隣接二点列・基準対の巡回点列・成分最小元の自己一致と第一色・異なる成分の非交叉・端点列の連結と巡回移動・共通の昇順対の向き積・共有点からの対の一致・昇順対の列挙・対の向き直しは済） | 残る交互閉路の符号の論法を必要十分版の定義で示し、具体版の完全マッチングへの依存を外す。依存: 被覆の接続。 |
 | Kac--Ward 行列の反対称化 | 【分離】必要十分版のマッチング対の定義を独立させる | 未着手 | `matchingPair*` を使う必要十分版を、一つの対の構成とその性質ごとに示す。依存: 完全マッチングと対合の行。 |
 | Kac--Ward 行列の反対称化 | 【分離】必要十分版の有限置換の反復と軌道を独立させる | 未着手 | `finitePermutation*`・`finiteMapIterate` を使う必要十分版を、反復と軌道の論法ごとに示す。 |
 | Kac--Ward 行列の反対称化 | 【分離】必要十分版の隣接二点列の残りを独立させる | 着手（閉路の隣接二点列の読みを独立させた） | `cycle_pairs_walk_necSuf` は `pairChunks` で示した。ほかの `consecutivePairs` の使用を、列の論法ごとに置き換える。 |
@@ -76,24 +74,22 @@
 固定原始特徴の多項式探索とそれに続く有限データへの当てはめは 2026-09-20 に終了し、2026-10-03 の研究管理が平方恒等式の経路を Pfaffian 経路へ切り替えた（「現在地」の先頭と runbook「Kac--Ward 平方恒等式の経路」）。有限データへの当てはめは再開しない。
 
 ## レビュー記録
+- 2026-11-25（主経路）: 前回の向き直しの等式を、完全端点列から得る列挙条件と向き積の適用条件に照合した。修正は無かった。
 - 2026-11-25（主経路）: 前回の昇順対の列挙を、完全な端点列から二点ずつ取る条件と照合した。修正は無かった。
 - 2026-11-25（主経路）: 前回の共有点から対が一致する補題を、端点列の相異性が与える対ごとの非交叉と照合した。修正は無かった。
 - 2026-11-25（並列・八十四回目）: 前回の 14 ファイルの導出の移動を含む main の上で `lake build` が通ることを、今回の直しの検証と合わせて確かめた。修正は無かった。
 - 2026-11-25（並列・八十三回目）: 前回の 12 ファイルの導出の移動を含む main の上で `lake build` が通ることを、今回の直しの検証と合わせて確かめた。修正は無かった。
-- 2026-11-25（並列・八十二回目）: 前回の 13 ファイルの導出の移動を含む main の上で `lake build` が通ることを、今回の直しの検証と合わせて確かめた。修正は無かった。
-- 2026-11-25（主経路）: 前回の共通の昇順対の向き積を、昇順条件から各因子が一になることに照合した。修正は無かった。
 
 ## 式変形の書き方の統一
+- 2026-11-25（主経路）: 「実対数は整数冪を整数倍へ移す」の逆元と負の冪の式鎖で、行末根拠内の句点を読点に替えた。式と根拠は変えていない。
 - 2026-11-25（主経路）: 「有限積の実対数」の式鎖で、行末根拠内の句点を読点へ替えた。式と根拠は変えていない。
 - 2026-11-25（主経路）: 「開境界の下組は周期境界の下組に含まれる」の証人の半分の式鎖で、行末根拠内の句点を読点へ替えた。式と根拠は変えていない。
 - 2026-11-25（主経路）: 「対数順序群の元の実現は対応する正の有理数の実対数である」の式鎖で、根拠内の句点を読点に替えた。式と根拠は変えていない。
 - 2026-11-25（主経路）: 「実対数は整数冪を整数倍へ移す」の式鎖で、行末根拠の句点を読点へ替えた。式と根拠は変えていない。
-- 2026-11-25（主経路）: 「有理係数の対数順序群の実現写像は順序を保つ」の式鎖で、行末根拠の句点を読点に替えた。式と根拠は変えていない。
 
 ## 前進の記録
+- 2026-11-25（主経路）: 交互閉路の符号の論法を必要十分版の完全マッチングの列挙と向き直しへ接続し、具体版の import を外した。分離の台帳が七件減り、この行を済ませた。
 - 2026-11-25（主経路）: 先頭の交互閉路の行を対の向き直しの論法で割り、必要十分版の向き選択・昇順対列挙・端点列評価から等式を示した。符号の本体と、具体版の完全マッチング型に伴う import は未了である。
 - 2026-11-25（主経路）: 先頭の交互閉路の行を昇順対の列挙の論法で割り、完全な端点列から必要十分版のマッチング列挙を独立に示した。向き直しの補題が列挙条件を仮定で受け取らない形になった。交互閉路の本体から具体版の import を外す段は未了である。
 - 2026-11-25（並列・八十四回目）: 【分離】の導出を移す行の残り 22 行を直し、行を済ませた。台帳に載っていない下流の具体版も、import を外した具体版から `NecSuf` を間接に受け取って導出の補題を置いていることがある（今回は `WalkSideExteriorBandConnected`）。`lake build` で落ちたものを同じ回に移す。並列の表の次は Kac--Ward と離散 Whitney 系の【一対一】である。
 - 2026-11-25（並列・八十三回目）: 【分離】の導出を移す行の 15 行を直した（残り 22 行）。具体版の import を外すと、その具体版を通して `NecSuf` を間接に受け取っていた下流の具体版の `open Ising2DLambda.NecSuf.KacWard` が「未知の名前空間」で落ちる。具体版が必要十分版の定数を使う行は台帳に無いので、その `open` は消してよい。導出の定義（`Turn.toNecSuf`）を別の具体版の導出が使うときは、両方を同じ回に移す。
-- 2026-11-25（並列・八十二回目）: 【分離】の導出を移す行の 14 行を直した（残り 37 行）。導出の補題が使う側の Lean のファイルは今回の 12 件のどれにも無かった。
-- 2026-11-25（主経路）: 先頭の交互閉路の行を共有点から対が一致する論法で割り、必要十分版の端点列の相異性から独立に示した。対の向き直しの残りと列挙・符号は未了である。

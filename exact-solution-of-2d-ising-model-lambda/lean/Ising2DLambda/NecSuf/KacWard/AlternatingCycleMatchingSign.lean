@@ -13,14 +13,13 @@
 * 最後の整理には sgn_F(D) の平方が一であること（hsD）だけを使う。sgn_F(D₀) の平方は使わない。
   外すと α₀ sgn(D₀) = ± α_D sgn(D) から sgn(D) sgn(D₀) の形へ移れない。
 -/
-import Ising2DLambda.KacWard.AlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PerfectMatchingSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairWordOrientationSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.OrientedMatchingPairValue
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Ising2DLambda.AlgebraicEigenvalue
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 open scoped Classical
 
 variable {J R : Type*} [Fintype J] [LinearOrder J] [CommRing R]
@@ -89,7 +88,7 @@ theorem pairOrientationIn_cycles (cs : List (List J)) (P : List (J × J))
 
 /-- F で評価したマッチングの符号。 -/
 noncomputable def matchingSignOf (F : List J → R) (D : PerfectMatching J) : R :=
-  F (matchingPairWord (matchingCanonicalEnumeration D))
+  matchingValue F D
 
 omit [Fintype J] [LinearOrder J] in
 /-- 平方が一の元の積の平方は一。 -/
@@ -109,27 +108,16 @@ include hswap
 
 /-- 列挙の取り替え。具体版の列挙独立性と同じく、既存の前置列付きの帰納法を F へ当てる。 -/
 theorem matchingSignOf_enumeration (D : PerfectMatching J) (l : List (J × J))
-    (hl : IsMatchingEnumeration D l) :
+    (hl : IsMatchingPairEnumeration D l) :
     F (matchingPairWord l) = matchingSignOf F D := by
-  have hp := matchingEnumerations_perm D (matchingCanonicalEnumeration_spec D) hl
-  exact NecSuf.AlgebraicEigenvalue.matchingWord_value_pair_perm F Neg.neg neg_involutive
-    hswap hp [] (matchingEnumeration_complete D _ (matchingCanonicalEnumeration_spec D))
+  exact matchingValue_enumeration F hswap D l hl
 
 /-- 向き直しの等式。第一端点の集合による向きの選択を必要十分版で行う。 -/
 theorem orientedPairWord_value (D : PerfectMatching J) (l : List (J × J))
     (hc : IsCompleteWord (matchingPairWord l))
     (hD : ∀ p ∈ l, ({p.1, p.2} : Set J) ∈ D.val) :
     F (matchingPairWord l) = (l.map (pairOrientationIn R)).prod * matchingSignOf F D := by
-  let D' : Ising2DLambda.NecSuf.AlgebraicEigenvalue.PerfectMatching J := ⟨D.val, D.property⟩
-  have hc' : Ising2DLambda.NecSuf.AlgebraicEigenvalue.IsCompleteWord
-      (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord l) := hc
-  have h := Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientedMatchingPairValue
-    F (fun u a b v hw => hswap u a b v hw) D' l
-    {x | ∃ p ∈ l, p.1 = x}
-    (Ising2DLambda.NecSuf.AlgebraicEigenvalue.orderedMatchingPairs_enumeration D' l hc' hD)
-    (fun p hp => (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairOrientationSelection
-      D' l hc' hD p hp).2)
-  exact h
+  exact orientedMatchingPairValue_of_matching F hswap D l hc hD
 
 omit [Fintype J] [LinearOrder J] in
 /-- 一文字を列 c の後ろへ送る |c| 回の隣接交換。 -/
@@ -220,8 +208,6 @@ theorem alternating_cycle_matching_sign_necSuf
         rw [ih hr]
         rfl
   have hwD : matchingPairWord lD = cs.flatten ++ matchingPairWord P := by
-    change Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord lD =
-      cs.flatten ++ Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord P
     simp only [lD, pairWord_append, pairWord_flatten, List.map_map]
     congr 1
     have h' : ∀ c ∈ cs,
