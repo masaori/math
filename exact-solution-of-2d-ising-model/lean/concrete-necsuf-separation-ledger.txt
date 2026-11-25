@@ -362,7 +362,6 @@ DEP	concrete	Ising2D.sigmaZ_sigmaX_sigmaZ_site
 DEP	concrete	Ising2D.sigmaZ_sigmaY_sigmaZ_site
 DEP	concrete	Ising2D.sigmaZ_sigmaZ_sigmaZ_site
 DEP	concrete	Ising2D.sinh_gammaTilde
-DEP	concrete	Ising2D.sinh_le_mul_cosh_of_nonneg
 DEP	concrete	Ising2D.siteOp_mul_of_anticomm
 DEP	concrete	Ising2D.siteProd_diagonal
 DEP	concrete	Ising2D.smul_epsilon_mul_boundaryG_mul_smul_openChainD0

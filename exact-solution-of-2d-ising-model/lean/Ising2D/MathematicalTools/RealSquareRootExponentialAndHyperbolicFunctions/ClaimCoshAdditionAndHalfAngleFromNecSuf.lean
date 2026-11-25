@@ -13,10 +13,14 @@
 `Ising2D/NecSuf/DoubleAngleFormula.lean` の `NecSuf.double_angle_formula'` を `A, R := ℝ`、`y := x / 2`、
 `s := sinh`、`c := cosh`、`hh := (add_halves x).symm`、`hadd := sinh_add_formula (x / 2) (x / 2)`、`hcomm := mul_comm _ _`、
 `hdbl := (two_mul _).symm`、`hassoc := (mul_assoc 2 _ _).symm` に特殊化して得る。
+
+同じファイルで、`sinh_le_mul_cosh_of_nonneg`（人手 `sinh_at_most_argument_times_cosh`）を、必要十分版
+`Ising2D/NecSuf/HyperbolicBounds.lean` の `NecSuf.sinh_le_mul_cosh` の特殊化として得る（主張は同じ型）。
 -/
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 import Ising2D.NecSuf.SymmetrizedAdditionFormulas
 import Ising2D.NecSuf.DoubleAngleFormula
+import Ising2D.NecSuf.HyperbolicBounds
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicPropertiesFromNecSuf
 
 namespace Ising2D
@@ -50,5 +54,9 @@ theorem sinh_eq_two_sinh_half_mul_cosh_half_of_necSuf (x : ℝ) :
     Real.sinh x = 2 * Real.sinh (x / 2) * Real.cosh (x / 2) :=
   NecSuf.double_angle_formula' Real.sinh Real.cosh x (x / 2) (add_halves x).symm
     (sinh_add_formula (x / 2) (x / 2)) (mul_comm _ _) (two_mul _).symm (mul_assoc 2 _ _).symm
+
+/-- `sinh_le_mul_cosh_of_nonneg` を `NecSuf.sinh_le_mul_cosh` の特殊化として得る。 -/
+theorem sinh_le_mul_cosh_of_nonneg_of_necSuf {t : ℝ} (ht : 0 ≤ t) : Real.sinh t ≤ t * Real.cosh t :=
+  NecSuf.sinh_le_mul_cosh ht
 
 end Ising2D

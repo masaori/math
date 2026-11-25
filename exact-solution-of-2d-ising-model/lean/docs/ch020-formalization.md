@@ -52,7 +52,8 @@
 | `Ising2D.sinh_arsinh_eq` / `sinh_eq_iff_eq_arsinh` | `arsinh` の逆関数性 | (4) |
 | `Ising2D.hasDerivAt_arsinh_form` | **`arcsinh'(y) = 1/√(1+y²)`** | (4) |
 | `Ising2D.self_le_sinh_of_nonneg` | **`t ≤ sinh t`**（`t ≥ 0`） | (5) 前半 |
-| `Ising2D.sinh_le_mul_cosh_of_nonneg` | **`sinh t ≤ t cosh t`**（`t ≥ 0`） | (5) 後半 |
+| `Ising2D.sinh_le_mul_cosh_of_nonneg` | **`sinh t ≤ t cosh t`**（`t ≥ 0`。`t = 0` の場合と、`t > 0` の 7 行の鎖と 1 対 1） | `sinh_at_most_argument_times_cosh` |
+| `Ising2D.sinh_le_mul_cosh_of_nonneg_of_necSuf` | 同じ主張を `NecSuf.sinh_le_mul_cosh` の特殊化として得る（`ClaimCoshAdditionAndHalfAngleFromNecSuf.lean`） | `sinh_at_most_argument_times_cosh` |
 | `Ising2D.cosh_addition_and_half_angle_five` | (1)〜(5) をまとめた形 | 主張全体 |
 
 ### `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshIsEven.lean`（ラベル `cosh_is_even`）

@@ -10,7 +10,10 @@
 
 **具体版**（人手証明と同じ抽象度＝実数の `cosh, sinh, arsinh`）。
 必要十分版は `Ising2D/NecSuf/HyperbolicBounds.lean`
-（`Ising2D.NecSuf.sinh_le_mul_cosh` ほか）。(5) の後半は必要十分版の系として導出してある。
+（`Ising2D.NecSuf.sinh_le_mul_cosh` ほか）。(5) の後半 `sinh_le_mul_cosh_of_nonneg` は本文 `sinh_at_most_argument_times_cosh` の
+証明どおりに書き、必要十分版の特殊化として得ることは導出 `ClaimCoshAdditionAndHalfAngleFromNecSuf.lean` が述べる。
+`NecSuf.HyperbolicBounds` の import は、このファイルを経て同じ必要十分版の定理を使う下流の具体版
+（`step6_bound`・`cosh_02_bounds` など）のために残っている（分離の台帳の行）。
 (1) の加法定理 4 本の必要十分版は `Ising2D/NecSuf/SymmetrizedAdditionFormulas.lean`、
 具体版をその特殊化として得る導出は `ClaimCoshAdditionAndHalfAngleFromNecSuf.lean`。
 倍角公式 `sinh_double_angle_formula`（具体版 `sinh_eq_two_sinh_half_mul_cosh_half`。人手の 4 行と 1 対 1 の `calc`）の必要十分版は
@@ -24,9 +27,10 @@
 単調性は mathlib の `Real.sinh_lt_sinh` / `Real.sinh_le_sinh` を使わず、人手 `sinh_strictly_increasing` の具体版
 （`ClaimSinhStrictlyIncreasing.lean`）で引く。
 `t ≤ sinh t` も `Real.self_le_sinh_iff` にある。
-mathlib に**無かった**のは `sinh t ≤ t cosh t` だけで、これは必要十分版で証明した。
+mathlib に**無かった**のは `sinh t ≤ t cosh t` だけで、これは本文の積分の鎖で証明した。
 -/
 import Ising2D.NecSuf.HyperbolicBounds
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
@@ -208,10 +212,36 @@ theorem hasDerivAt_arsinh_form (y : ℝ) :
 theorem self_le_sinh_of_nonneg {t : ℝ} (ht : 0 ≤ t) : t ≤ Real.sinh t :=
   Real.self_le_sinh_iff.2 ht
 
-/-- 人手証明 (5) の後半: `sinh t ≤ t cosh t`（`t ≥ 0`）。
-**必要十分版 `Ising2D.NecSuf.sinh_le_mul_cosh` の系。** -/
-theorem sinh_le_mul_cosh_of_nonneg {t : ℝ} (ht : 0 ≤ t) : Real.sinh t ≤ t * Real.cosh t :=
-  NecSuf.sinh_le_mul_cosh ht
+/-- 人手証明 `sinh_at_most_argument_times_cosh`: `sinh t ≤ t cosh t`（`t ≥ 0`）。
+本文の証明どおり、`t = 0` と `t > 0` に分け、`t > 0` は本文の 7 行の鎖と 1 段ずつ対応させる。
+本文が引く `sinh_zero`・`sinh_derivative`・`cosh_monotone_on_nonnegative` には具体版の宣言が無いので、
+それぞれ mathlib の `Real.sinh_zero`・`Real.hasDerivAt_sinh`・`Real.cosh_le_cosh` で受ける（証明の中の段）。
+(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、(R3) の単調性は `intervalIntegral.integral_mono_on`、
+本文の「`cosh` は連続」は `Real.continuous_cosh` である。
+本文が引く `real_minus_zero_is_self`・`real_zero_times_is_zero` の段は、同じ等式の mathlib の `sub_zero`・`zero_mul` で受ける
+（本文のこのブロックに欄 `lean` が無いため。理由は状態台帳の 2026-11-25（並列）の記録）。 -/
+theorem sinh_le_mul_cosh_of_nonneg {t : ℝ} (ht : 0 ≤ t) : Real.sinh t ≤ t * Real.cosh t := by
+  rcases ht.eq_or_lt with h0 | hpos
+  · -- `t = 0`: `sinh_zero` より `sinh t = 0 = t cosh t`（`0 · cosh 0 = 0` は本文が書いていない段）
+    rw [← h0, Real.sinh_zero, zero_mul]
+  · have hcont : Continuous Real.cosh := Real.continuous_cosh
+    calc Real.sinh t
+        = Real.sinh t - 0 := (sub_zero (Real.sinh t)).symm  -- real_minus_zero_is_self（a → sinh t）を右辺から左辺へ
+      _ = Real.sinh t - Real.sinh 0 := by rw [Real.sinh_zero]  -- sinh_zero
+      _ = ∫ u in (0:ℝ)..t, Real.cosh u :=  -- (R4) を F = sinh に。sinh_derivative
+          (intervalIntegral.integral_eq_sub_of_hasDerivAt (fun u _ => Real.hasDerivAt_sinh u)
+            (hcont.intervalIntegrable _ _)).symm
+      _ ≤ ∫ _u in (0:ℝ)..t, Real.cosh t :=  -- (R3) の単調性と、u ∈ [0,t] で cosh u ≤ cosh t（cosh_monotone_on_nonnegative）
+          intervalIntegral.integral_mono_on hpos.le (hcont.intervalIntegrable _ _) intervalIntegrable_const
+            (fun u hu => Real.cosh_le_cosh.2 (by
+              -- |u| ≤ |t| へ読み替える段（0 ≤ u, 0 ≤ t で絶対値を外す）は本文に無い Lean だけの段
+              rw [abs_of_nonneg hu.1, abs_of_nonneg hpos.le]
+              exact hu.2))
+      _ = t * Real.cosh t - 0 * Real.cosh t :=  -- (R4) を F(u) = u cosh t に。微分の公式で F' = cosh t
+          intervalIntegral.integral_eq_sub_of_hasDerivAt (f := fun u => u * Real.cosh t)
+            (fun u _ => by simpa using (hasDerivAt_id u).mul_const (Real.cosh t)) intervalIntegrable_const
+      _ = t * Real.cosh t - 0 := by rw [zero_mul]  -- real_zero_times_is_zero（x → cosh t）
+      _ = t * Real.cosh t := sub_zero (t * Real.cosh t)  -- real_minus_zero_is_self（a → t cosh t）
 
 /-- 人手証明 (5) そのもの。 -/
 theorem cosh_addition_and_half_angle_five {t : ℝ} (ht : 0 ≤ t) :
