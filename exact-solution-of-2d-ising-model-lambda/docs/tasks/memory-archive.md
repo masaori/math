@@ -1,4 +1,5 @@
 ## 直近の記録から移したもの
+- 2026-11-25（並列・八十回目）: Kac--Ward の具体版の導出の補題を、閉歩道の通過・交差数・平滑化の 14 ファイル（`ClosedWalkPasses` とその導出を使う 8 ファイル、`ClosedWalkCrossingNumber`・`CyclicTotalTurning`・`SmoothingSplitCrossingPartition`・`SmoothingCyclicTurningInvarianceWalk`・`SmoothingSplitMutualCrossing`）から同名の `*FromNecSuf.lean` へ移して `NecSuf` の import を外した。分離の台帳 147→133 行。
 - 2026-11-25（主経路）: 異なる交互閉路の点列の非交叉を必要十分版の成分最小元補題で示した。分離の例外件数は不変。半格子ずれた四つのモード和の式鎖の根拠を統一した。
 
 ## 直近の記録から移したもの

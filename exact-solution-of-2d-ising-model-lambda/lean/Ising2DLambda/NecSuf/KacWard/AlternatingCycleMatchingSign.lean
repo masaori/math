@@ -20,8 +20,7 @@ import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairWordOrientationSign
 namespace Ising2DLambda.NecSuf.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
-open Ising2DLambda.KacWard (ascendingPair ascendingPairs_enumeration
-  pair_eq_of_shared_point)
+open Ising2DLambda.KacWard (ascendingPair ascendingPairs_enumeration)
 open scoped Classical
 
 variable {J R : Type*} [Fintype J] [LinearOrder J] [CommRing R]
@@ -69,6 +68,19 @@ theorem pairChunks_map_range {K : Type*} :
           pairChunks ((List.range (2 * k)).map ((f ∘ Nat.succ) ∘ Nat.succ)) = _
       rw [pairChunks_map_range k, List.range_succ_eq_map, List.map_cons, List.map_map]
       congr 1
+
+/-- 完全な端点列で一点を共有する二つの対は、同じ対である。 -/
+private theorem pair_eq_of_shared_point_necSuf {l : List (J × J)}
+    (hn : (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord l).Nodup)
+    {p q : J × J}
+    (hp : p ∈ l) (hq : q ∈ l) {x : J}
+    (hxp : x ∈ [p.1, p.2]) (hxq : x ∈ [q.1, q.2]) : p = q := by
+  have hpw : l.Pairwise (fun a b : J × J => List.Disjoint [a.1, a.2] [b.1, b.2]) :=
+    (List.nodup_flatMap.mp hn).2
+  haveI : Std.Symm (fun a b : J × J => List.Disjoint [a.1, a.2] [b.1, b.2]) :=
+    ⟨fun _ _ h => List.disjoint_comm.mp h⟩
+  by_contra hne
+  exact hpw.forall hp hq hne hxp hxq
 
 /-- R に値をとる η。 -/
 def pairOrientationIn (R : Type*) [CommRing R] (p : J × J) : R := if p.1 < p.2 then 1 else -1
@@ -135,7 +147,10 @@ theorem orientedPairWord_value (D : PerfectMatching J) (l : List (J × J))
     · exact iff_of_true ⟨p, hp, rfl⟩ h
     · refine iff_of_false ?_ h
       rintro ⟨q, hq, hqe⟩
-      have hpq := pair_eq_of_shared_point hc.1 hp hq (x := p.2) (by simp) (by simp [hqe])
+      have hpq := pair_eq_of_shared_point_necSuf (by simpa only [matchingPairWord,
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord] using hc.1)
+        hp hq (x := p.2)
+        (by simp) (by simp [hqe])
       subst hpq
       exact hne p hp hqe
   have haux := Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientationSignWithPrefix

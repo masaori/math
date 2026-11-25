@@ -1,19 +1,25 @@
 ## 現在地から移したもの
+- **2026-11-25（並列・八十回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 14 行を直した（行は未了）。** 閉歩道の通過 `ClosedWalkPasses` の導出 `closedWalkSuccessor_from_necSuf` を使う 8 ファイル（`SplitMutualCrossingNumber`・`VertexwiseCrossingNumber`・`SmoothedSuccessorMap`・`SmoothedCyclicTotalTurning`・`SmoothedVertexwiseCrossingNumber`・`VertexAxisStraightVisitCount`・`SmoothedCrossingNumber`・`SmoothingStraightVisitCount`）と、`ClosedWalkCrossingNumber`・`CyclicTotalTurning`、それらの導出を使う `SmoothingSplitCrossingPartition`・`SmoothingCyclicTurningInvarianceWalk`・`SmoothingSplitMutualCrossing` の導出の補題を同名の `*FromNecSuf.lean` へ移し、具体版から `NecSuf` の import を外した。既存の導出のファイル `VertexSimpleBoundaryNonloopPropagationFromNecSuf`・`WalkBoundaryVertexTurnSumFromNecSuf` は新しい導出のファイルを import する。分離の台帳は 147→133 行。
 - **2026-11-25（主経路）、交互閉路の異なる成分の点列が交わらないことを必要十分版の成分最小元補題で示した。** 交互閉路の符号の定理はなお具体版の完全マッチングを型に使うため、分離の例外件数は不変である。先頭行は未了。
 
 ## レビュー記録から移したもの
+- 2026-11-25（並列・八十回目）: 前回の 13 ファイルの導出の移動を含む main の上で `lake build` を回し、今回触ったモジュール以外に失敗が無いことを確かめた。修正は無かった。
 - 2026-11-25（主経路）: 前回の成分最小元の自己一致と第一色への所属を、必要十分版の成分の始点変更と二歩軌道の自己所属に照合した。修正は無かった。
 
 ## 前進の記録から移したもの
+- 2026-11-25（主経路）: 先頭の交互閉路の行を共有点から対が一致する論法で割り、必要十分版の端点列の相異性から独立に示した。対の向き直しの残りと列挙・符号は未了である。
 - 2026-11-25（主経路）: 交互閉路の異なる成分の点列の非交叉を、必要十分版の成分最小元の始点変更から示した。定理の型に残る具体版の完全マッチングは未解消である。
 
 ## 前進の記録から移したもの
+- 2026-11-25（主経路）: 交互閉路の異なる成分の点列の非交叉を、必要十分版の成分最小元の始点変更から示した。定理の型に残る具体版の完全マッチングは未解消である。
 - 2026-11-25（並列・七十九回目）: 【分離】の導出を移す行の 14 行を直した（残り 79 行）。`ClosedWalkPasses` の導出 `closedWalkSuccessor_from_necSuf` は八つの具体版のファイルの導出が使い、`ClosedWalkCrossingNumber` の導出は `SmoothingSplitCrossingPartition` の導出が使うので、使う側と同じ回に移す必要があり、今回は外した。次の回は、これらを使う側のファイルとまとめて移す。
 
 ## レビュー記録から移したもの
+- 2026-11-25（主経路）: 前回の成分最小元の自己一致と第一色への所属を、必要十分版の成分の始点変更と二歩軌道の自己所属に照合した。修正は無かった。
 - 2026-11-25（並列・七十九回目）: 前回の活動点と交互二歩の 7 行の直しを含む main の上で `lake build` が通ることを、今回の直しの検証と合わせて確かめた。修正は無かった。
 
 ## 現在地から移したもの
+- **2026-11-25（主経路）、交互閉路の異なる成分の点列が交わらないことを必要十分版の成分最小元補題で示した。** 交互閉路の符号の定理はなお具体版の完全マッチングを型に使うため、分離の例外件数は不変である。先頭行は未了。
 - **2026-11-25（並列・七十九回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち、名前順の先頭 14 行を直した（行は未了）。** `AdjacentCellCornersConnected`・`CellBoundaryEvenEdgeBijection`・`CellBoundaryEvenEdgeCount`・`CellCornerConnected`・`CellGraphEvenEdgeBijection`・`CellGridIncidentParity`・`CellVertexGraph`・`ClosedWalkIncidenceParity`・`ClosedWalkRotationNumber`・`ClosedWalkRotationNumberSign`・`ClosedWalkRotationPhase`・`ConnectedCellCorners`・`ContactPairCount` の導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外し、`Basic` は導出の補題が既に導出のファイルに在ったので import を外すだけにした。`ConnectedCellCorners` の導出を使う `CellVertexGraphConnected` の導出も導出のファイルへ移した。導出が使っていた private の補助補題 8 件は公開にした。分離の台帳は 161→147 行。
 
 ## 現在地から移したもの
@@ -23,6 +29,7 @@
 - 2026-11-25（主経路）: 前回の巡回点列の補題を、周期での帰還と正の周期を使った列の巡回移動に照合した。修正は無かった。
 
 ## 式変形の書き方の統一から移したもの
+- 2026-11-25（主経路）: 「有理対数順序群の実現は有理数倍を保つ」の式鎖で、台を広げる根拠の句点を読点に替えた。式と根拠は変えていない。
 - 2026-11-25（主経路）: 「格子頂点に接する四辺の通過回数の総和は頂点の通過数の二倍である」の式鎖で、行末根拠の句点を読点に替えた。式と根拠は変えていない。
 
 ## 前進の記録から移したもの
@@ -24676,3 +24683,6 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 
 ## 前進の記録から移したもの
 - 2026-11-25（主経路）: 先頭の交互閉路の具体版 import の行を、射影辺の周期内単射の論法と残る交互閉路本体・下流の接続に割り直した。周期内単射を必要十分版へ移し、分離の例外台帳を二件減らした。
+
+## 前進の記録から移したもの
+- 2026-11-25（並列・八十回目）: 【分離】の導出を移す行の 14 行を直した（残り 65 行）。前回の記録どおり、`ClosedWalkPasses` の導出を使う 8 ファイルと、`ClosedWalkCrossingNumber` の導出を使う `SmoothingSplitCrossingPartition` を同じ回に移した。名前順で次の `ContactSplitPairDescent` から `DisjointWalkMutualCrossing` までの 12 ファイルは、導出の補題を他のファイルが使わない。

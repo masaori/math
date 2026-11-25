@@ -108828,11 +108828,11 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
                         displayMath(String.raw`\begin{aligned}
 \iota(v)\cdot\iota(v^{-1})
 &=\iota(v\cdot v^{-1})
-&&(\because\ \iota\text{ は乗法を保つ。}\blkref{def_real_logarithm})\\
+&&(\because\ \iota\text{ は乗法を保つ、}\blkref{def_real_logarithm})\\
 &=\iota(1)
-&&(\because\ v\cdot v^{-1}=1\text{。}\mathbb{Q}\text{ の逆元})\\
+&&(\because\ v\cdot v^{-1}=1\text{、}\mathbb{Q}\text{ の逆元})\\
 &=1
-&&(\because\ \iota(1)=1\text{。}\blkref{def_real_logarithm})
+&&(\because\ \iota(1)=1\text{、}\blkref{def_real_logarithm})
 \end{aligned}`),
                         paragraph([
                           "である。よって ",
