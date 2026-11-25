@@ -83694,7 +83694,7 @@ t_{\circ}(\gamma_A)
 &=\sum_{s=1}^{l-k-1}\tau(\vec e_{k+s},\vec e_{k+s+1})+\tau(\vec e_l,\vec e_{k+1})
 &&\bigl(\because\ \blkref{def_total_turning}\text{ と }\blkref{def_smoothed_split_edge_sequences}\text{ の位置 }s\text{ の辺}\bigr)\\
 &=\sum_{\substack{r\in I_m\\k<r<l}}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_l,\vec e_{k+1})
-&&\bigl(\because\ \text{添字の置換 }r=k+s\text{。有限和の並べ替え}\bigr)\\
+&&\bigl(\because\ \text{添字の置換 }r=k+s\text{、有限和の並べ替え}\bigr)\\
 &=\sum_{\substack{r\in I_m\\k<r<l}}\tau(\vec e_r,\vec f_r)+\tau(\vec e_l,\vec f_l)
 &&\bigl(\because\ \blkref{claim_smoothing_splits_closed_walk}\text{ の各接続}\bigr)\\
 &=\sum_{r\in A}\tau(\vec e_r,\vec f_r)
