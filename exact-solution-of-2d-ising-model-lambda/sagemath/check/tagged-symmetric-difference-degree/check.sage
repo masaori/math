@@ -31,10 +31,15 @@ for size in (2, 4, 6):
                 assert len(incident) in (0, 2)
                 if incident:
                     assert {label for _, label in incident} == {"long", "short"}
+                    # 二元集合は相手写像で {e, m_D(e)}、{e, m_D0(e)} と書ける。
+                    mate = next(pair for pair in matching if vertex in pair)
+                    reference_mate = next(pair for pair in reference if vertex in pair)
+                    assert {pair for pair, label in incident if label == "short"} == {mate}
+                    assert {pair for pair, label in incident if label == "long"} == {reference_mate}
 
 # 辺長一では同じ端点対の短標識と長標識が二本として残る。
 parallel = frozenset((0, 1))
 assert {(parallel, "short")}.symmetric_difference({(parallel, "long")}) == {
     (parallel, "short"), (parallel, "long")}
 
-print("RESULT: PASS; tagged local degree and parallel pair at L=1")
+print("RESULT: PASS; tagged local degree, mate supports and parallel pair at L=1")

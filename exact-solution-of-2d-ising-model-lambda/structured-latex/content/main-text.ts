@@ -98988,7 +98988,7 @@ q_{\vec e,\vec f}
                       "Ising2DLambda.NecSuf.KacWard.taggedDifference_incident_iff",
                     ],
                     statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。任意の ", math(String.raw`\vec e\in\vec E_L`), " に対し、", ref("def_tagged_symmetric_difference"), " の ", math(String.raw`\mathcal A(D,T)`), " で ", math(String.raw`\vec e`), " を含む標識付き対は、存在しないか、長い対と短い対が各一本ずつの二本である。二本の場合は ", math(String.raw`\vec e`), " を含む ", math(String.raw`D`), " の唯一の短い対と、", math(String.raw`\mathcal D_0`), " の唯一の長い対である。"]),
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。任意の ", math(String.raw`\vec e\in\vec E_L`), " に対し、", ref("def_tagged_symmetric_difference"), " の ", math(String.raw`\mathcal A(D,T)`), " で ", math(String.raw`\vec e`), " を含む標識付き対は、存在しないか、長い対と短い対が各一本ずつの二本である。二本の場合は ", math(String.raw`\vec e`), " を含む ", math(String.raw`D`), " の唯一の短い対と、", math(String.raw`\mathcal D_0`), " の唯一の長い対であり、", ref("claim_perfect_matching_involution"), " の相手写像 ", math(String.raw`m_D,m_{\mathcal D_0}:\vec E_L\to\vec E_L`), " で書けば、それらの二元集合はそれぞれ ", math(String.raw`\{\vec e,m_D(\vec e)\}`), "、", math(String.raw`\{\vec e,m_{\mathcal D_0}(\vec e)\}`), " である。"]),
                     ],
                     proof: [
                       paragraph(["点 ", math(String.raw`\vec e`), " を固定する。", ref("def_finite_perfect_matching"), " により、", math(String.raw`D`), " と ", ref("claim_reference_long_matching"), " の ", math(String.raw`\mathcal D_0`), " には、それぞれ ", math(String.raw`\vec e`), " を含む対がちょうど一つある。", ref("claim_perfect_matching_involution"), " の相手写像で書けば、その台はそれぞれ ", math(String.raw`\{\vec e,m_D(\vec e)\}`), "、", math(String.raw`\{\vec e,m_{\mathcal D_0}(\vec e)\}`), " である。それらの標識付き対を ", math(String.raw`d_{\vec e}`), "、", math(String.raw`r_{\vec e}`), " と書く。前者の標識を ", math(String.raw`t_{\vec e}`), " と書き、後者の標識は長い。"]),
@@ -99057,9 +99057,9 @@ d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ 
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " の非零項 ", math(String.raw`(D,T)`), " と ", ref("def_reference_long_pairs"), " の基準マッチング ", math(String.raw`\mathcal D_0`), " を取る。", ref("claim_perfect_matching_involution"), " の相手写像を ", math(String.raw`m_D,m_{\mathcal D_0}:\vec E_L\to\vec E_L`), " と書く。このとき任意の ", math(String.raw`\vec e\in V_{\mathcal A}`), " について ", math(String.raw`m_D(\vec e),m_{\mathcal D_0}(\vec e)\in V_{\mathcal A}`), " である。辺長一の平行な長短の対も含む。"]),
                     ],
                     proof: [
-                      paragraph(["点 ", math(String.raw`\vec e\in V_{\mathcal A}`), " を固定する。", ref("claim_tagged_symmetric_difference_degree"), " により、接する短い対は ", math(String.raw`D`), " の唯一の対 ", math(String.raw`d_{\vec e}`), " であり、長い対は ", math(String.raw`\mathcal D_0`), " の唯一の対 ", math(String.raw`r_{\vec e}`), " である。"]),
-                      paragraph([ref("claim_perfect_matching_involution"), " より ", math(String.raw`m_D(\vec e)\in U(d_{\vec e})`), " である。対 ", math(String.raw`d_{\vec e}`), " は ", math(String.raw`\mathcal A(D,T)`), " に残っているため、活動点の定義をこの対と相手に適用すると ", math(String.raw`m_D(\vec e)\in V_{\mathcal A}`), " を得る。"]),
-                      paragraph(["同様に ", ref("claim_perfect_matching_involution"), " より ", math(String.raw`m_{\mathcal D_0}(\vec e)\in U(r_{\vec e})`), " である。対 ", math(String.raw`r_{\vec e}`), " は ", math(String.raw`\mathcal A(D,T)`), " に残っているため、活動点の定義から ", math(String.raw`m_{\mathcal D_0}(\vec e)\in V_{\mathcal A}`), " を得る。二元集合が同じでも標識が異なれば二つの対はともに残る。実数体と複素数体は現れない。"]),
+                      paragraph(["点 ", math(String.raw`\vec e\in V_{\mathcal A}`), " を固定する。", ref("claim_reference_long_matching"), " により ", math(String.raw`\mathcal D_0`), " は完全マッチングなので、相手写像 ", math(String.raw`m_{\mathcal D_0}`), " が定まる。", ref("claim_tagged_symmetric_difference_degree"), " により、接する短い対は ", math(String.raw`D`), " の唯一の対 ", math(String.raw`d_{\vec e}`), " であり、長い対は ", math(String.raw`\mathcal D_0`), " の唯一の対 ", math(String.raw`r_{\vec e}`), " である。同じ主張により ", math(String.raw`U(d_{\vec e})=\{\vec e,m_D(\vec e)\}`), "、", math(String.raw`U(r_{\vec e})=\{\vec e,m_{\mathcal D_0}(\vec e)\}`), " である。"]),
+                      paragraph(["従って ", math(String.raw`m_D(\vec e)\in U(d_{\vec e})`), " である。対 ", math(String.raw`d_{\vec e}`), " は ", math(String.raw`\mathcal A(D,T)`), " に残っているため、活動点の定義をこの対と相手に適用すると ", math(String.raw`m_D(\vec e)\in V_{\mathcal A}`), " を得る。"]),
+                      paragraph(["同様に ", math(String.raw`m_{\mathcal D_0}(\vec e)\in U(r_{\vec e})`), " である。対 ", math(String.raw`r_{\vec e}`), " は ", math(String.raw`\mathcal A(D,T)`), " に残っているため、活動点の定義から ", math(String.raw`m_{\mathcal D_0}(\vec e)\in V_{\mathcal A}`), " を得る。二元集合が同じでも標識が異なれば二つの対はともに残る。実数体と複素数体は現れない。"]),
                     ],
                   },
                 },
@@ -99094,7 +99094,7 @@ d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ 
                     ],
                     proof: [
                       paragraph(["点 ", math(String.raw`\vec e`), " と、", math(String.raw`D`), " でそれを含む唯一の対 ", math(String.raw`d_{\vec e}`), " を固定する。この一意性は ", ref("def_finite_perfect_matching"), " による。"]),
-                      paragraph(["まず ", math(String.raw`d_{\vec e}`), " の標識が短いとする。", ref("claim_tagged_symmetric_difference_degree"), " の短い場合により、", math(String.raw`d_{\vec e}`), " と基準マッチングの長い対が標識付き対称差に残る。従って ", math(String.raw`\vec e`), " は対称差に接する。"]),
+                      paragraph(["まず ", math(String.raw`d_{\vec e}`), " の標識が短いとする。", ref("claim_tagged_symmetric_difference_degree"), " の短い場合により、", math(String.raw`d_{\vec e}`), " と、", ref("claim_reference_long_matching"), " の完全マッチング ", math(String.raw`\mathcal D_0`), " で ", math(String.raw`\vec e`), " を含む唯一の長い対が標識付き対称差に残る。従って ", math(String.raw`\vec e`), " は対称差に接する。"]),
                       paragraph(["逆に ", math(String.raw`\vec e`), " が対称差の標識付き対に接するとする。", ref("claim_tagged_symmetric_difference_degree"), " により、接する対が存在する場合は長い対と短い対が各一本残り、短い対は ", math(String.raw`D`), " の ", math(String.raw`d_{\vec e}`), " である。従って ", math(String.raw`d_{\vec e}`), " の標識は短い。二方向を合わせて同値を得る。"]),
                     ],
                   },
@@ -99124,16 +99124,21 @@ d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ 
                     lean: [
                       "Ising2DLambda.KacWard.taggedConcreteTwoStep_apply",
                       "Ising2DLambda.KacWard.taggedConcreteTwoStep_periodic",
+                      "Ising2DLambda.KacWard.taggedConcreteShortMate",
+                      "Ising2DLambda.KacWard.taggedConcreteLongMate",
+                      "Ising2DLambda.KacWard.taggedConcreteTwoStep",
                       "Ising2DLambda.NecSuf.KacWard.activeTwoStep_apply",
                       "Ising2DLambda.NecSuf.KacWard.activeTwoStep_periodic",
                     ],
                     statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " の非零項 ", math(String.raw`(D,T)`), " について、", ref("def_tagged_difference_active_vertices"), " の活動点集合 ", math(String.raw`V_{\mathcal A}`), " 上に写像 "]),
-                      displayMath(String.raw`F_{\mathcal A}(\vec e):=m_{\mathcal D_0}(m_D(\vec e))\qquad(\vec e\in V_{\mathcal A})`),
-                      paragraph(["を定める。", ref("claim_tagged_difference_active_mates"), " により ", math(String.raw`F_{\mathcal A}:V_{\mathcal A}\to V_{\mathcal A}`), " である。", math(String.raw`F_{\mathcal A}`), " は置換であり、各 ", math(String.raw`\vec e\in V_{\mathcal A}`), " について、ある ", math(String.raw`n\in\mathbb N_{\ge1}`), " が存在して ", math(String.raw`F_{\mathcal A}^{[n]}(\vec e)=\vec e`), " となる。反復は ", ref("def_finite_map_iteration"), " による。長短の対が同じ二元集合を持つ辺長一でも、二つの相手写像を順に適用する。実数体と複素数体は現れない。"]),
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " の非零項 ", math(String.raw`(D,T)`), " について、", ref("def_tagged_difference_active_vertices"), " の活動点集合 ", math(String.raw`V_{\mathcal A}`), " を取る。", ref("claim_tagged_difference_active_mates"), " により、二つの相手写像の ", math(String.raw`V_{\mathcal A}`), " への制限 "]),
+                      displayMath(String.raw`m_D^{\mathcal A},m_{\mathcal D_0}^{\mathcal A}:V_{\mathcal A}\to V_{\mathcal A},\qquad m_D^{\mathcal A}(\vec e):=m_D(\vec e),\quad m_{\mathcal D_0}^{\mathcal A}(\vec e):=m_{\mathcal D_0}(\vec e)\qquad(\vec e\in V_{\mathcal A})`),
+                      paragraph(["が定まる。写像 "]),
+                      displayMath(String.raw`F_{\mathcal A}(\vec e):=m_{\mathcal D_0}^{\mathcal A}(m_D^{\mathcal A}(\vec e))\qquad(\vec e\in V_{\mathcal A})`),
+                      paragraph(["を定める。", math(String.raw`F_{\mathcal A}:V_{\mathcal A}\to V_{\mathcal A}`), " は置換であり、各 ", math(String.raw`\vec e\in V_{\mathcal A}`), " について、ある ", math(String.raw`n\in\mathbb N_{\ge1}`), " が存在して ", math(String.raw`F_{\mathcal A}^{[n]}(\vec e)=\vec e`), " となる。反復は ", ref("def_finite_map_iteration"), " による。長短の対が同じ二元集合を持つ辺長一でも、二つの相手写像を順に適用する。実数体と複素数体は現れない。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_perfect_matching_involution"), " により、活動点に制限した ", math(String.raw`m_D`), " と ", math(String.raw`m_{\mathcal D_0}`), " はそれぞれ自分自身を逆写像に持つ。制限が全域で定まることは ", ref("claim_tagged_difference_active_mates"), " による。従って二写像の合成 ", math(String.raw`F_{\mathcal A}`), " の逆写像は ", math(String.raw`m_D\circ m_{\mathcal D_0}`), " であり、", math(String.raw`F_{\mathcal A}`), " は置換である。"]),
+                      paragraph([ref("claim_reference_long_matching"), " により ", math(String.raw`\mathcal D_0`), " は完全マッチングである。", ref("claim_perfect_matching_involution"), " を ", math(String.raw`D`), " と ", math(String.raw`\mathcal D_0`), " に適用すると、", math(String.raw`m_D`), " と ", math(String.raw`m_{\mathcal D_0}`), " はそれぞれ自分自身を逆写像に持つ。制限が全域で定まることは ", ref("claim_tagged_difference_active_mates"), " によるので、", math(String.raw`m_D^{\mathcal A}`), " と ", math(String.raw`m_{\mathcal D_0}^{\mathcal A}`), " もそれぞれ自分自身を逆写像に持つ。従って二写像の合成 ", math(String.raw`F_{\mathcal A}`), " の逆写像は ", math(String.raw`m_D^{\mathcal A}\circ m_{\mathcal D_0}^{\mathcal A}`), " であり、", math(String.raw`F_{\mathcal A}`), " は置換である。"]),
                       paragraph(["活動点集合は ", ref("def_tagged_difference_active_vertices"), " により有限集合 ", math(String.raw`\vec E_L`), " の部分集合である。", ref("claim_finite_permutation_positive_return"), " を置換 ", math(String.raw`F_{\mathcal A}`), " と始点 ", math(String.raw`\vec e`), " に適用し、正の帰還時刻 ", math(String.raw`n`), " を得る。長短の標識は二つの相手写像の適用順を定めるので、二元集合の一致によって二歩を消していない。"]),
                     ],
                   },
@@ -99170,8 +99175,8 @@ d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ 
                       paragraph(["軌道は ", ref("def_finite_permutation_orbit"), " の意味である。辺長一で長短の対の端点が一致しても、標識と二歩の順序は保持する。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_tagged_difference_active_mates"), " により、", math(String.raw`m_D,m_{\mathcal D_0}`), " は有限集合 ", math(String.raw`V_{\mathcal A}`), " 上へ制限できる。", ref("claim_perfect_matching_involution"), " により各制限は不動点のない対合である。"]),
-                      paragraph([ref("claim_tagged_difference_two_step_orbit"), " の定義から、その二対合の合成は ", math(String.raw`F_{\mathcal A}`), " である。よって ", ref("claim_matching_pair_orbit_separation"), " を第一の相手 ", math(String.raw`m_D`), "、第二の相手 ", math(String.raw`m_{\mathcal D_0}`), " に適用すると表示した空共通部分を得る。使った集合は有限であり、実数体と複素数体は現れない。"]),
+                      paragraph([ref("claim_tagged_difference_two_step_orbit"), " の制限 ", math(String.raw`m_D^{\mathcal A},m_{\mathcal D_0}^{\mathcal A}`), " は、", math(String.raw`D`), " と基準完全マッチング ", math(String.raw`\mathcal D_0`), " の相手写像を有限集合 ", math(String.raw`V_{\mathcal A}`), " へ制限したものである。", ref("claim_perfect_matching_involution"), " により各制限は不動点のない対合である。"]),
+                      paragraph([ref("claim_tagged_difference_two_step_orbit"), " の定義から、その二対合の合成は ", math(String.raw`F_{\mathcal A}`), " である。よって ", ref("claim_matching_pair_orbit_separation"), " を第一の相手 ", math(String.raw`m_D^{\mathcal A}`), "、第二の相手 ", math(String.raw`m_{\mathcal D_0}^{\mathcal A}`), " に適用すると、", math(String.raw`m_D^{\mathcal A}(\vec e)=m_D(\vec e)`), " だから表示した空共通部分を得る。使った集合は有限であり、実数体と複素数体は現れない。"]),
                     ],
                   },
                 },
