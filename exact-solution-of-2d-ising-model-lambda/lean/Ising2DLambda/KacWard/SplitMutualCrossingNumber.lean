@@ -1,6 +1,5 @@
 import Ising2DLambda.KacWard.SmoothedCrossingNumber
 import Ising2DLambda.KacWard.SmoothingIndexBlocks
-import Ising2DLambda.NecSuf.KacWard.SplitMutualCrossingNumber
 
 namespace Ising2DLambda.KacWard
 
@@ -19,19 +18,5 @@ noncomputable def splitMutualCrossingNumber {L m : ℕ}
       stepTurning (γ p.2) (smoothedExitEdge γ k l p.2) = 0 ∧
       directionAxis (directionNumber (γ p.1)) ≠
         directionAxis (directionNumber (γ p.2))).card
-
-theorem splitMutualCrossingNumber_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ) (k l : Fin (m + 1)) :
-    splitMutualCrossingNumber γ hγ k l =
-      Ising2DLambda.NecSuf.KacWard.splitMutualCrossingNumber
-        γ orientedTarget (fun e f => stepTurning e f = 0)
-        (fun e => directionAxis (directionNumber e)) k l := by
-  classical
-  simp only [splitMutualCrossingNumber,
-    Ising2DLambda.NecSuf.KacWard.splitMutualCrossingNumber,
-    smoothingIndexBlockA_from_necSuf, smoothingIndexBlockB_from_necSuf,
-    smoothedExitEdge, Ising2DLambda.NecSuf.KacWard.smoothedSuccessorEdge,
-    closedWalkSuccessor_from_necSuf]
 
 end Ising2DLambda.KacWard

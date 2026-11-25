@@ -24,7 +24,6 @@ import Ising2DLambda.KacWard.TransverseCrossing
 import Ising2DLambda.KacWard.ClosedWalkCrossingNumber
 import Ising2DLambda.KacWard.SmoothedCrossingNumber
 import Ising2DLambda.KacWard.SplitMutualCrossingNumber
-import Ising2DLambda.NecSuf.KacWard.SmoothingSplitCrossingPartition
 
 namespace Ising2DLambda.KacWard
 
@@ -411,24 +410,6 @@ theorem smoothing_split_crossing_partition (γ : Fin (m + 1) → OrientedEdge L)
     splitMutualCrossingNumber_eq_mixed γ hγ k l,
     smoothedCrossingNumber_eq_card γ hγ k l,
     smoothedCrossingPairs_card_partition γ hγ k l]
-
-/-- 具体版が必要十分版の特殊化として得られることの記録（接続は非後退の後続、直進は一歩の回転が零、
-軸は方向番号の軸。平滑化後の出辺の接続は `smoothedExitEdge_mem_nonbacktrackingSuccessors`）。 -/
-theorem smoothing_split_crossing_partition_from_necSuf (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ) {k l : Fin (m + 1)} (hcross : indexPairCrossing γ hγ k l)
-    (hkl : k < l) :
-    closedWalkCrossingNumber (smoothedSplitWalkA γ hγ k l) (smoothedSplitWalkA_closed γ hγ hcross hkl)
-      + closedWalkCrossingNumber (smoothedSplitWalkB γ hγ k l)
-          (smoothedSplitWalkB_closed γ hγ hcross hkl)
-      + splitMutualCrossingNumber γ hγ k l =
-      smoothedCrossingNumber γ hγ k l := by
-  rw [closedWalkCrossingNumber_from_necSuf, closedWalkCrossingNumber_from_necSuf,
-    smoothedSplitWalkA_from_necSuf, smoothedSplitWalkB_from_necSuf,
-    splitMutualCrossingNumber_from_necSuf, smoothedCrossingNumber_from_necSuf]
-  exact Ising2DLambda.NecSuf.KacWard.smoothing_split_crossing_partition_necSuf
-    (fun e f => f ∈ nonbacktrackingSuccessors e) γ orientedTarget (fun e f => stepTurning e f = 0)
-    (fun e => directionAxis (directionNumber e))
-    (fun r => smoothedExitEdge_mem_nonbacktrackingSuccessors γ hγ hcross r) hkl
 
 end Crossing
 

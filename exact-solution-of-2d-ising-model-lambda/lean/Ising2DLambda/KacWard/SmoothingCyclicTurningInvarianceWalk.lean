@@ -24,7 +24,6 @@
 `claim_smoothing_split_turning_sum` の最後の行との合成を `closedWalk_smoothing_split_turning_sum` に置く。
 -/
 import Ising2DLambda.KacWard.SmoothingSplitWalkTurningSum
-import Ising2DLambda.NecSuf.KacWard.SmoothingCyclicTurningInvarianceWalk
 
 namespace Ising2DLambda.KacWard
 
@@ -150,25 +149,6 @@ theorem closedWalk_smoothing_cyclic_turning_invariance (γ : Fin (m + 1) → Ori
     _ = ∑ r : Fin (m + 1), stepTurning (γ r) (γ (closedWalkSuccessor r)) :=
         (sum_split_two_indices _ hkl).symm
     _ = cyclicTotalTurning γ hγ := cyclicTotalTurning_eq_sum_successor γ hγ
-
-/-- 具体版が必要十分版 `smoothing_cyclic_turning_invariance_walk_necSuf` の特殊化として得られること。
-辺を向き付き辺、方向を `ZMod 4` の方向番号、`π` を剰余への射影に取る。 -/
-theorem closedWalk_smoothing_cyclic_turning_invariance_from_necSuf
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ) {k l : Fin (m + 1)}
-    (hcross : indexPairCrossing γ hγ k l) :
-    smoothedCyclicTotalTurning γ hγ k l = cyclicTotalTurning γ hγ := by
-  rw [smoothedCyclicTotalTurning_from_necSuf, cyclicTotalTurning_from_necSuf]
-  obtain ⟨hkl, hcr⟩ := hcross
-  exact Ising2DLambda.NecSuf.KacWard.smoothing_cyclic_turning_invariance_walk_necSuf
-    (fun e f => f ∈ nonbacktrackingSuccessors e) stepTurning directionNumber
-    (Int.castAddHom (ZMod 4))
-    (fun D h => (ZMod.intCast_zmod_eq_zero_iff_dvd D 4).mp h)
-    stepTurning_mem
-    (fun e f hf => step_advances_direction e f hf)
-    γ hkl hcr.1 hcr.2.1
-    (swappedExit_mem_nonbacktrackingSuccessors hcr)
-    (swappedExit_mem_nonbacktrackingSuccessors' hcr) hcr.2.2.2.1 hcr.2.2.2.2.1
 
 /-- `claim_smoothing_split_turning_sum` の全体: 二本の閉歩道の循環総回転数の和は `t_∘(γ)` に等しい。
 合わせる段（`smoothing_split_walk_turning_sum`）と最後の行（この主張）の合成。 -/

@@ -1,5 +1,6 @@
 import Ising2DLambda.KacWard.VertexSimpleBoundaryDistinctPassPropagation
 import Ising2DLambda.NecSuf.KacWard.CyclicCoefficientPropagation
+import Ising2DLambda.KacWard.ClosedWalkPassesFromNecSuf
 
 namespace Ising2DLambda.KacWard
 

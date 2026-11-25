@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.SmoothingStraightVisitCount
-import Ising2DLambda.NecSuf.KacWard.SmoothedSuccessorMap
 
 namespace Ising2DLambda.KacWard
 
@@ -23,14 +22,5 @@ theorem smoothedExitEdge_eq_map {L m : ℕ}
     · by_cases hlk : l = k <;>
         simp [smoothedExitEdge, smoothedSuccessorMap, hrl, hlk]
     · simp [smoothedExitEdge, smoothedSuccessorMap, hrk, hrl]
-
-theorem smoothedSuccessorMap_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ) (k l r : Fin (m + 1)) :
-    smoothedSuccessorMap γ hγ k l r =
-      Ising2DLambda.NecSuf.KacWard.smoothedSuccessorMap k l r := by
-  simp only [smoothedSuccessorMap,
-    Ising2DLambda.NecSuf.KacWard.smoothedSuccessorMap,
-    closedWalkSuccessor_from_necSuf]
 
 end Ising2DLambda.KacWard

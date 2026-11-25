@@ -1,5 +1,6 @@
 import Ising2DLambda.KacWard.WalkBoundaryVertexTurnSum
 import Ising2DLambda.NecSuf.KacWard.WalkBoundaryVertexTurnSum
+import Ising2DLambda.KacWard.CyclicTotalTurningFromNecSuf
 
 namespace Ising2DLambda.KacWard
 
