@@ -107,18 +107,23 @@ theorem nextSite_val_of_last {m : Fin M} (h : (m : ℕ) + 1 = M) :
 `ι_{ℕ→ℤ}(M)` より小さければ、次のサイトの人手の添字は `m + 1_ℤ` である。周期的な延長を使わない側で、`nextSite`（このブロックの具体版）の値が
 ℤ の加法と一致することを述べる（Lean だけの段の補題。仮定は Lean の `Fin M` の元の値 `m.val + 1 < M` で書く）。 -/
 theorem finIndexToZZ_nextSite_of_lt {m : Fin M} (h : (m : ℕ) + 1 < M) :
-    finIndexToZZ M (nextSite m) = finIndexToZZ M m + 1 := by
-  have hv := nextSite_val_of_lt h
-  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
-  omega
+    finIndexToZZ M (nextSite m) = finIndexToZZ M m + 1 :=
+  calc finIndexToZZ M (nextSite m)
+      = inclusionNNtoZZ (nextSite m : ℕ) + 1 := rfl                 -- `finIndexToZZ` の定義 `i ↦ ι_{ℕ→ℤ}(i.val) + 1_ℤ`
+    _ = inclusionNNtoZZ ((m : ℕ) + 1) + 1 := by rw [nextSite_val_of_lt h]
+                                                                    -- `nextSite` の値は `m.val + 1`（`m.val + 1 < M`）
+    _ = (inclusionNNtoZZ (m : ℕ) + 1) + 1 := rfl                    -- `inclusion_nn_to_zz` の `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（`k → m.val`）
+    _ = finIndexToZZ M m + 1 := rfl                                 -- `ι_{ℕ→ℤ}(m.val) + 1_ℤ` を `finIndexToZZ` の定義で `finIndexToZZ M m` に畳む
 
 /-- **`def_site_pauli_periodic_extension`**: 人手の添字 `m ∈ {1,…,M}`（`finIndexToZZ M m`）が `M` なら、
-次のサイトの人手の添字は周期的な延長により `1_ℤ` である（Lean だけの段の補題）。 -/
+次のサイトの人手の添字は `1_ℤ` である（`nextSite` の定義の剰余で `M % M = 0`。Lean だけの段の補題）。 -/
 theorem finIndexToZZ_nextSite_of_last {m : Fin M} (h : (m : ℕ) + 1 = M) :
-    finIndexToZZ M (nextSite m) = 1 := by
-  have hv := nextSite_val_of_last h
-  simp only [finIndexToZZ, inclusionNNtoZZ_eq_natCast]
-  omega
+    finIndexToZZ M (nextSite m) = 1 :=
+  calc finIndexToZZ M (nextSite m)
+      = inclusionNNtoZZ (nextSite m : ℕ) + 1 := rfl                 -- `finIndexToZZ` の定義 `i ↦ ι_{ℕ→ℤ}(i.val) + 1_ℤ`
+    _ = inclusionNNtoZZ 0 + 1 := by rw [nextSite_val_of_last h]     -- `nextSite` の値は `0`（定義の剰余で `(m.val + 1) % M = M % M = 0`）
+    _ = 0 + 1 := rfl                                                -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`
+    _ = 1 := zero_add 1                                             -- ℤ の和の単位元 `0 + x = x`（`x → 1_ℤ`）
 
 /-- 原文の site 添字 `1`（Lean の `Fin M` では `0`）。 -/
 def firstSite (M : ℕ) (hM : M ≠ 0) : Fin M := ⟨0, Nat.pos_of_ne_zero hM⟩
@@ -128,14 +133,22 @@ def lastSite (M : ℕ) (hM : M ≠ 0) : Fin M :=
   ⟨M - 1, Nat.sub_lt (Nat.pos_of_ne_zero hM) Nat.one_pos⟩
 
 /-- **`def_index_set_from_one_to_n`**: 原文のサイト `1`（`firstSite`）の人手の添字 `finIndexToZZ M (firstSite M hM)` は `1_ℤ` である（Lean だけの段の補題）。 -/
-theorem finIndexToZZ_firstSite (hM : M ≠ 0) : finIndexToZZ M (firstSite M hM) = 1 := by
-  simp only [finIndexToZZ, firstSite, inclusionNNtoZZ_eq_natCast]
-  omega
+theorem finIndexToZZ_firstSite (hM : M ≠ 0) : finIndexToZZ M (firstSite M hM) = 1 :=
+  calc finIndexToZZ M (firstSite M hM)
+      = inclusionNNtoZZ (firstSite M hM : ℕ) + 1 := rfl             -- `finIndexToZZ` の定義 `i ↦ ι_{ℕ→ℤ}(i.val) + 1_ℤ`
+    _ = inclusionNNtoZZ 0 + 1 := rfl                                -- `firstSite` の定義（値 `0`）
+    _ = 0 + 1 := rfl                                                -- `inclusion_nn_to_zz` の `ι(0_ℕ) := 0_ℤ`
+    _ = 1 := zero_add 1                                             -- ℤ の和の単位元 `0 + x = x`（`x → 1_ℤ`）
 
 /-- **`def_index_set_from_one_to_n`**: 原文のサイト `M`（`lastSite`）の人手の添字 `finIndexToZZ M (lastSite M hM)` は `ι_{ℕ→ℤ}(M)` である（Lean だけの段の補題）。 -/
-theorem finIndexToZZ_lastSite (hM : M ≠ 0) : finIndexToZZ M (lastSite M hM) = inclusionNNtoZZ M := by
-  simp only [finIndexToZZ, lastSite, inclusionNNtoZZ_eq_natCast]
-  omega
+theorem finIndexToZZ_lastSite (hM : M ≠ 0) : finIndexToZZ M (lastSite M hM) = inclusionNNtoZZ M :=
+  calc finIndexToZZ M (lastSite M hM)
+      = inclusionNNtoZZ (lastSite M hM : ℕ) + 1 := rfl              -- `finIndexToZZ` の定義 `i ↦ ι_{ℕ→ℤ}(i.val) + 1_ℤ`
+    _ = inclusionNNtoZZ (M - 1) + 1 := rfl                          -- `lastSite` の定義（値 `M − 1`）
+    _ = inclusionNNtoZZ (M - 1 + 1) := rfl                          -- `inclusion_nn_to_zz` の `ι(k + 1_ℕ) := ι(k) + 1_ℤ`（`k → M − 1`）を右辺から左辺へ
+    _ = inclusionNNtoZZ M := by rw [Nat.sub_add_cancel (Nat.pos_of_ne_zero hM)]
+                                                                    -- `hM : M ≠ 0` から `0 < M`（`Nat.pos_of_ne_zero`。ℕ の `<` の定義で `1 ≤ M` と同じ値）、ℕ の `(M − 1) + 1 = M`（`Nat.sub_add_cancel`）。
+                                                                    -- ℕ の引き算は 0 で止まるので要る、Lean だけの段
 
 /-- `H_1^{(+)}` の最終項の係数 `-1` を一般の `η` にしたもの（`(+)` は `η = -1`）。
 Lean の添字は 0 始まりなので、原文の `m = M` は `(m : ℕ) + 1 = M`。 -/
