@@ -40,8 +40,8 @@ theorem contactSwappedExit_mem_nonbacktrackingSuccessors (γ : Fin (m + 1) → O
     γ (closedWalkSuccessor l) ∈ nonbacktrackingSuccessors (γ k) := by
   refine Finset.mem_filter.mpr ⟨Finset.mem_univ _,
     hcontact.trans (closedWalk_target_eq_source γ hγ l), fun hrev => ?_⟩
-  exact incoming_outgoing_absurd γ hinj k (closedWalkSuccessor l) (γ (closedWalkSuccessor l))
-    (by rw [hrev, reversal_involutive]) rfl
+  -- 本文: `e_{σ(l)} = ι(e_k)` なら台の辺が等しく、台の辺の相異から `σ(l) = k`、`e_k = ι(e_k)` で矛盾
+  exact incoming_outgoing_absurd γ hinj (closedWalkSuccessor l) k (γ k) hrev rfl
 
 /-- `γ_A` は閉じた非後退辺列である（終辺 `e_l` から始辺 `e_{k+1}` へは交換した接続）。 -/
 theorem contactSplitWalkA_closed (γ : Fin (m + 1) → OrientedEdge L)

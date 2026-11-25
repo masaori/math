@@ -915,6 +915,7 @@ export const ALL_LABELS = [
   "def_constant_plus_configuration",
   "def_constant_polynomial",
   "def_contact_pair_count",
+  "def_contact_split_edge_sequences",
   "def_critical_point",
   "def_cross_orbit_inversion_pairs",
   "def_cross_orbit_inversions",

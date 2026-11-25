@@ -81536,6 +81536,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                             "Ising2DLambda.KacWard.cyclicTotalTurning_eq",
                             "Ising2DLambda.NecSuf.KacWard.cyclicTotalTurning",
                             "Ising2DLambda.KacWard.cyclicTotalTurning_from_necSuf",
+                            "Ising2DLambda.KacWard.cyclicTotalTurning_eq_sum_successor",
                           ],
                           statement: [
                             paragraph([
@@ -82351,6 +82352,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                         "Ising2DLambda.NecSuf.KacWard.cyclicSuccessor",
                         "Ising2DLambda.NecSuf.KacWard.cyclicPass",
                         "Ising2DLambda.NecSuf.KacWard.cyclicPassVertex",
+                        "Ising2DLambda.KacWard.closedWalkSuccessor_mod",
                       ],
                       habitat: "N",
                       statement: [
@@ -83291,7 +83293,6 @@ c(\gamma)+1
                     verification: ["sagemath/check/smoothing-straight-visit-count"],
                     lean: [
                       "Ising2DLambda.KacWard.closedWalk_smoothing_cyclic_turning_invariance",
-                      "Ising2DLambda.KacWard.cyclicTotalTurning_eq_sum_successor",
                       "Ising2DLambda.NecSuf.KacWard.smoothing_cyclic_turning_invariance_walk_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.cyclicTotalTurning_eq_sum_cyclicSuccessor_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.two_point_preserved_sum_necSuf",
@@ -83559,7 +83560,6 @@ B:=I_m\setminus A=\{r\in I_m:\ r\le k\}\cup\{r\in I_m:\ l<r\}`),
                       "Ising2DLambda.KacWard.smoothing_split_closed_connections",
                       "Ising2DLambda.NecSuf.KacWard.smoothing_split_closed_connections_necSuf",
                       "Ising2DLambda.KacWard.smoothing_split_closed_connections_from_necSuf",
-                      "Ising2DLambda.KacWard.closedWalkSuccessor_mod",
                       "Ising2DLambda.KacWard.closedWalkSegment_closed",
                       "Ising2DLambda.KacWard.smoothedSplitWalkA_closed",
                       "Ising2DLambda.KacWard.smoothedSplitWalkB_closed",
@@ -84198,6 +84198,41 @@ v(\gamma_{\mathrm c})
           element: {
             kind: "elementGroup",
             id: "group_of_kac_ward_claim_edge_simple_contact_split",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_contact_split_edge_sequences",
+                  kind: "definition",
+                  title: { text: "接触点で分ける二本の辺列" },
+                  labels: ["def_contact_split_edge_sequences"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.KacWard.smoothedSplitWalkA",
+                    "Ising2DLambda.KacWard.smoothedSplitWalkB",
+                  ],
+                  statement: [
+                    paragraph([
+                      "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                      "（", ref("def_closed_nonbacktracking_walk"), "）と添字 ",
+                      math(String.raw`k,l\in I_m`), "、", math(String.raw`k<l`),
+                      " に対し、二本の辺列を",
+                    ]),
+                    displayMath(String.raw`\gamma_A:=(\vec e_{k+1},\ldots,\vec e_l),\qquad
+\gamma_B:=\begin{cases}(\vec e_{l+1},\ldots,\vec e_m,\vec e_1,\ldots,\vec e_k),&l<m,\\
+(\vec e_1,\ldots,\vec e_k),&l=m\end{cases}`),
+                    paragraph([
+                      "と定める。", math(String.raw`\gamma_A`), " の項の添字は ",
+                      math(String.raw`A:=\{r\in I_m\mid k<r\le l\}`), " を、",
+                      math(String.raw`\gamma_B`), " の項の添字は補集合 ",
+                      math(String.raw`I_m\setminus A`), " を、それぞれ一度ずつ尽くす。",
+                      "添字の区間は ", ref("def_smoothed_split_edge_sequences"),
+                      " と同じ式であり、横断する添字対に限らず任意の ", math(String.raw`k<l`), " に対して置く。",
+                    ]),
+                  ],
+                },
+              },
+            ],
             focus: {
               id: "kac_ward_claim_edge_simple_contact_split",
               kind: "claim",
@@ -84215,6 +84250,9 @@ v(\gamma_{\mathrm c})
                 "Ising2DLambda.KacWard.edgeSimpleContactSplitConnections",
                 "Ising2DLambda.NecSuf.KacWard.contactSplitConnections_necSuf",
                 "Ising2DLambda.KacWard.edgeSimpleContactSplitConnections_from_necSuf",
+                "Ising2DLambda.KacWard.contactSwappedExit_mem_nonbacktrackingSuccessors",
+                "Ising2DLambda.KacWard.contactSplitWalkA_closed",
+                "Ising2DLambda.KacWard.contactSplitWalkB_closed",
               ],
               statement: [
                 paragraph([
@@ -84233,13 +84271,10 @@ v(\gamma_{\mathrm c})
                   " を共有するので、この主張の仮定を満たさない。",
                 ]),
                 paragraph([
-                  "さらに添字を入れ替えて ", math(String.raw`k<l`), " とし、二本の辺列を",
-                ]),
-                displayMath(String.raw`\gamma_A:=(\vec e_{k+1},\ldots,\vec e_l),\qquad
-\gamma_B:=\begin{cases}(\vec e_{l+1},\ldots,\vec e_m,\vec e_1,\ldots,\vec e_k),&l<m,\\
-(\vec e_1,\ldots,\vec e_k),&l=m\end{cases}`),
-                paragraph([
-                  "と置くと、両方とも空でない閉じた非後退辺列で、各々の長さは ", math(String.raw`m`),
+                  "さらに添字を入れ替えて ", math(String.raw`k<l`), " とし、",
+                  ref("def_contact_split_edge_sequences"), " の二本の辺列を ",
+                  math(String.raw`\gamma_A,\gamma_B`),
+                  " とすると、両方とも空でない閉じた非後退辺列で、各々の長さは ", math(String.raw`m`),
                   " より小さい。二本に現れる台の辺の集合は互いに交わらず、合併が ",
                   math(String.raw`\gamma`), " の台の辺の集合に等しい。",
                 ]),
@@ -84345,7 +84380,7 @@ d_k&=1-d_k
                   math(String.raw`c_{\mathrm v}`),
                   " のどちらか一方とする。切断線指示値は向き付き辺だけの関数であり、接続には依存しない（",
                   ref("def_seam_parities"), "）。",
-                  ref("claim_edge_simple_contact_split"), " の二本の辺列の定義により、",
+                  ref("def_contact_split_edge_sequences"), " により、",
                   math(String.raw`\gamma_A`), " の辺添字は ",
                   math(String.raw`A=\{r\in I_m:k<r\le l\}`), "、",
                   math(String.raw`\gamma_B`), " の辺添字は補集合 ",
@@ -84354,7 +84389,7 @@ d_k&=1-d_k
                 displayMath(String.raw`\begin{aligned}
 \sum_{\vec e\in\gamma_A}c(\vec e)+\sum_{\vec e\in\gamma_B}c(\vec e)
 &=\sum_{r\in A}c(\vec e_r)+\sum_{r\in B}c(\vec e_r)
-&&\bigl(\because\ \blkref{claim_edge_simple_contact_split}\text{ の二本の辺の並び}\bigr)\\
+&&\bigl(\because\ \blkref{def_contact_split_edge_sequences}\text{ の二本の辺の並び}\bigr)\\
 &=\sum_{r\in I_m}c(\vec e_r)
 &&\bigl(\because\ B=I_m\setminus A\text{ と互いに素な有限和の分割}\bigr).
 \end{aligned}`),
@@ -84363,12 +84398,6 @@ d_k&=1-d_k
                   " と ", math(String.raw`c=c_{\mathrm v}`), " の二回適用と ",
                   ref("def_edge_sequence_seam_parities"),
                   " により、組の両成分について主張を得る。全過程は自然数の有限和と偶奇だけで閉じ、実数体も複素数体も現れない。",
-                  "添字区間は ", ref("claim_smoothing_split_seam_parity"),
-                  " の平滑化分割と同一（", math(String.raw`(k,l]`), " とその補集合）なので、Lean の具体版・必要十分版はあちらと同じ区間和の定理を引く。",
-                  "一方、循環総回転数はこの分割で保存されない。交換した二接続の回転数の差は ",
-                  ref("claim_reconnection_turning_difference"), " により ",
-                  math(String.raw`\{-4,0,4\}`),
-                  " を走り、実際に零でない接触点がある（検証が全数で確認した）。回転数の追跡はこの差の更新式として別に固定する。",
                 ]),
               ],
             },
@@ -84391,6 +84420,8 @@ d_k&=1-d_k
                 "Ising2DLambda.KacWard.contact_split_walk_turning_update",
                 "Ising2DLambda.NecSuf.KacWard.two_point_sum_difference_necSuf",
                 "Ising2DLambda.KacWard.contact_split_turning_update_from_necSuf",
+                "Ising2DLambda.KacWard.contactSplitWalkA_cyclicTotalTurning",
+                "Ising2DLambda.KacWard.contactSplitWalkB_cyclicTotalTurning",
               ],
               statement: [
                 paragraph([
@@ -84417,7 +84448,7 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
 \sigma(r),&r\ne k,l
 \end{cases}`),
                 paragraph([
-                  "で置く。", ref("claim_edge_simple_contact_split"),
+                  "で置く。", ref("def_contact_split_edge_sequences"),
                   " の二本の辺列は、添字区間 ", math(String.raw`(k,l]`),
                   " とその補集合を、この後続写像で閉じたものである。従って",
                 ]),
@@ -84503,7 +84534,7 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
                 ]),
                 displayMath(String.raw`n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)<n_{\mathrm{ct}}(\gamma)`),
                 paragraph([
-                  "が成り立つ（二本の辺列は ", ref("claim_edge_simple_contact_split"),
+                  "が成り立つ（二本の辺列は ", ref("def_contact_split_edge_sequences"),
                   "、接触対の個数は ", ref("def_contact_pair_count"),
                   "）。この狭義減少が、接触点分割を繰り返す整礎帰納の測度を与える。",
                 ]),
@@ -84535,12 +84566,16 @@ S_{\times}:=S\setminus(S_A\cup S_B)`),
                 displayMath(String.raw`|S|=|S_A|+|S_B|+|S_{\times}|
 \qquad\bigl(\because\ S=S_A\sqcup S_B\sqcup S_{\times}\text{ と有限集合の個数の加法性}\bigr)`),
                 paragraph([
+                  math(String.raw`\gamma_A`), " と ", math(String.raw`\gamma_B`),
+                  " は閉じた非後退辺列なので（", ref("claim_edge_simple_contact_split"),
+                  "）、接触対の個数 ", math(String.raw`n_{\mathrm{ct}}(\gamma_A),n_{\mathrm{ct}}(\gamma_B)`),
+                  " が定まる（", ref("def_contact_pair_count"), "）。",
                   math(String.raw`\gamma_A`), " の項の並びは ",
                   math(String.raw`(\vec e_{k+1},\ldots,\vec e_l)`), " なので、",
                   math(String.raw`\gamma_A`), " の添字 ", math(String.raw`i`),
                   " と元の添字 ", math(String.raw`k+i\in A`),
                   " の対応は ", math(String.raw`A`), " への 1 対 1 対応である（",
-                  ref("claim_edge_simple_contact_split"),
+                  ref("def_contact_split_edge_sequences"),
                   "）。接触の条件は二つの項の通過の頂点の一致だけで決まり、項の間の接続に依存しない（",
                   ref("def_closed_walk_passes"), " の ",
                   math(String.raw`\operatorname{tgt}`),
@@ -84553,9 +84588,9 @@ S_{\times}:=S\setminus(S_A\cup S_B)`),
                   "接触対は ", math(String.raw`S_B`), " の元と 1 対 1 に対応する。",
                 ]),
                 displayMath(String.raw`n_{\mathrm{ct}}(\gamma_A)=|S_A|
-\qquad\bigl(\because\ \blkref{def_contact_pair_count}\text{ と }\blkref{claim_edge_simple_contact_split}\text{ による添字対の全単射}\bigr)`),
+\qquad\bigl(\because\ \blkref{def_contact_pair_count}\text{ と }\blkref{def_contact_split_edge_sequences}\text{ による添字対の全単射}\bigr)`),
                 displayMath(String.raw`n_{\mathrm{ct}}(\gamma_B)=|S_B|
-\qquad\bigl(\because\ \blkref{def_contact_pair_count}\text{ と }\blkref{claim_edge_simple_contact_split}\text{ による添字対の全単射}\bigr)`),
+\qquad\bigl(\because\ \blkref{def_contact_pair_count}\text{ と }\blkref{def_contact_split_edge_sequences}\text{ による添字対の全単射}\bigr)`),
                 paragraph([
                   "選んだ接触点の添字対 ", math(String.raw`(k,l)`), " は、",
                   math(String.raw`k<k`), " が成り立たないので ", math(String.raw`k\notin A`),
@@ -100291,9 +100326,6 @@ c(\gamma)\bmod2
                       habitat: "N",
                       verification: ["sagemath/check/crossing-free-contact-split-phase"],
                       lean: [
-                        "Ising2DLambda.KacWard.contactSwappedExit_mem_nonbacktrackingSuccessors",
-                        "Ising2DLambda.KacWard.contactSplitWalkA_closed",
-                        "Ising2DLambda.KacWard.contactSplitWalkB_closed",
                         "Ising2DLambda.KacWard.pass_halfEdges_ne",
                         "Ising2DLambda.KacWard.contact_vertex_passes",
                         "Ising2DLambda.KacWard.contact_split_child_original_crossing",
@@ -100379,8 +100411,6 @@ c(\gamma)\bmod2
                       "Ising2DLambda.KacWard.contact_halfEdge_directions_ne",
                       "Ising2DLambda.KacWard.contact_not_straight_straight",
                       "Ising2DLambda.KacWard.contactExitEdge_mem_nonbacktrackingSuccessors",
-                      "Ising2DLambda.KacWard.contactSplitWalkA_cyclicTotalTurning",
-                      "Ising2DLambda.KacWard.contactSplitWalkB_cyclicTotalTurning",
                       "Ising2DLambda.KacWard.contact_split_walk_turning_update",
                       "Ising2DLambda.KacWard.contact_split_mutual_crossing_eq_index",
                       "Ising2DLambda.KacWard.contact_split_index_mutual_crossing_eq_indicator",

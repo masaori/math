@@ -7,6 +7,19 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_claim_contact_split_seam_parity_turning_not_preserved",
+    targets: ["claim_contact_split_seam_parity"],
+    title: { text: "接触点分割は切断線偶奇を保つが循環総回転数は保たない" },
+    body: [
+      paragraph(["添字区間は ", ref("claim_smoothing_split_seam_parity"),
+        " の平滑化分割と同じ（", math(String.raw`(k,l]`), " とその補集合）であり、切断線偶奇の和の論法も同じである。"]),
+      paragraph(["一方、循環総回転数はこの分割で保存されない。交換した二接続の回転数の差は ",
+        ref("claim_reconnection_turning_difference"), " により ", math(String.raw`\{-4,0,4\}`),
+        " を走り、実際に零でない接触点がある（検証が全数で確認した）。回転数の追跡は ",
+        ref("claim_contact_split_turning_update"), " の更新式で行う。"]),
+    ],
+  },
+  {
     id: "note_vertex_simple_winding_primitive_archived",
     targets: ["claim_vertex_simple_zero_seam_winding"],
     title: { text: "参照用: 頂点単純閉路の巻き付きベクトルの原始性" },
