@@ -79729,20 +79729,20 @@ a
                     displayMath(String.raw`\begin{aligned}
 0
 &=2\cdot0
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }2\text{ を掛ける})\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍、各素数の成分に }2\text{ を掛ける})\\
 &\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\ell_2)
-&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=2\text{、}\lambda:=0\text{、}\mu:=\iota(\ell_2)\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}\iota(\ell_2)\text{ は第一})
+&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=2\text{、}\lambda:=0\text{、}\mu:=\iota(\ell_2)\text{ で読む、}0\le_{\Lambda_{\mathbb{Q}}}\iota(\ell_2)\text{ は第一})
 \end{aligned}`),
                     displayMath(String.raw`\begin{aligned}
 0
 &=4\cdot0
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }4\text{ を掛ける})\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍、各素数の成分に }4\text{ を掛ける})\\
 &\le_{\Lambda_{\mathbb{Q}}}4\cdot\iota(\log(1+q))
-&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=4\text{、}\lambda:=0\text{、}\mu:=\iota(\log(1+q))\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}\iota(\log(1+q))\text{ は第一})\\
+&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=4\text{、}\lambda:=0\text{、}\mu:=\iota(\log(1+q))\text{ で読む、}0\le_{\Lambda_{\mathbb{Q}}}\iota(\log(1+q))\text{ は第一})\\
 &=0+4\cdot\iota(\log(1+q))
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})\\
 &\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\ell_2)+4\cdot\iota(\log(1+q))
-&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=2\cdot\iota(\ell_2)\text{、}\nu:=4\cdot\iota(\log(1+q))\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\ell_2)\text{ は直前の一続き})\\
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=2\cdot\iota(\ell_2)\text{、}\nu:=4\cdot\iota(\log(1+q))\text{ で読む、}0\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\ell_2)\text{ は直前の一続き})\\
 &=X
 &&(\because\ X\text{ の置き方})
 \end{aligned}`),
@@ -79758,9 +79758,9 @@ Y
 &=4\cdot\iota(\log q)
 &&(\because\ Y\text{ の置き方})\\
 &\le_{\Lambda_{\mathbb{Q}}}4\cdot0
-&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=4\text{、}\lambda:=\iota(\log q)\text{、}\mu:=0\text{ で読む。}\iota(\log q)\le_{\Lambda_{\mathbb{Q}}}0\text{ は第一})\\
+&&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=4\text{、}\lambda:=\iota(\log q)\text{、}\mu:=0\text{ で読む、}\iota(\log q)\le_{\Lambda_{\mathbb{Q}}}0\text{ は第一})\\
 &=0
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }4\text{ を掛ける})
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍、各素数の成分に }4\text{ を掛ける})
 \end{aligned}`),
                     paragraph([
                       "そのうえで",
@@ -79768,9 +79768,9 @@ Y
                     displayMath(String.raw`\begin{aligned}
 0
 &=-0
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }(-\lambda)(p)=-\lambda(p)\text{ を }\lambda:=0\text{ で読む。各素数で }-0=0\text{（}\mathbb{Q}\text{ の四則）})\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元 }(-\lambda)(p)=-\lambda(p)\text{ を }\lambda:=0\text{ で読む、各素数で }-0=0\text{（}\mathbb{Q}\text{ の四則）})\\
 &\le_{\Lambda_{\mathbb{Q}}}-Y
-&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=Y\text{、}\mu:=0\text{ で読む。}Y\le_{\Lambda_{\mathbb{Q}}}0\text{ は直前の一続き})
+&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=Y\text{、}\mu:=0\text{ で読む、}Y\le_{\Lambda_{\mathbb{Q}}}0\text{ は直前の一続き})
 \end{aligned}`),
                     paragraph([
                       "第四に、",
@@ -79790,7 +79790,7 @@ Y
                     displayMath(String.raw`\begin{aligned}
 0
 &=2\cdot0
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }2\text{ を掛ける})\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍、各素数の成分に }2\text{ を掛ける})\\
 &\le_{\Lambda_{\mathbb{Q}}}2\cdot C
 &&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=2\text{、}\lambda:=0\text{、}\mu:=C\text{ で読む})
 \end{aligned}`),
@@ -79802,17 +79802,17 @@ Y
 &=0+0
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})\\
 &\le_{\Lambda_{\mathbb{Q}}}X+0
-&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=X\text{、}\nu:=0\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}X\text{ は準備の第二})\\
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=X\text{、}\nu:=0\text{ で読む、}0\le_{\Lambda_{\mathbb{Q}}}X\text{ は準備の第二})\\
 &=0+X
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の交換則})\\
 &\le_{\Lambda_{\mathbb{Q}}}(-Y)+X
-&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=-Y\text{、}\nu:=X\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}-Y\text{ は準備の第三})\\
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=-Y\text{、}\nu:=X\text{ で読む、}0\le_{\Lambda_{\mathbb{Q}}}-Y\text{ は準備の第三})\\
 &=X+(-Y)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の交換則})\\
 &=0+\bigl(X+(-Y)\bigr)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の単位元})\\
 &\le_{\Lambda_{\mathbb{Q}}}2\cdot C+\bigl(X+(-Y)\bigr)
-&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=2\cdot C\text{、}\nu:=X+(-Y)\text{ で読む。}0\le_{\Lambda_{\mathbb{Q}}}2\cdot C\text{ は準備の第四})\\
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=0\text{、}\mu:=2\cdot C\text{、}\nu:=X+(-Y)\text{ で読む、}0\le_{\Lambda_{\mathbb{Q}}}2\cdot C\text{ は準備の第四})\\
 &=\bigl(X+(-Y)\bigr)+2\cdot C
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の交換則})\\
 &=\Gamma(q)
