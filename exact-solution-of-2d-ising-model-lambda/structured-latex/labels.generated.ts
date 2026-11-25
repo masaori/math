@@ -978,6 +978,7 @@ export const ALL_LABELS = [
   "def_fourier_mode_index_set",
   "def_gauged_terminal_matrix",
   "def_global_spin_reversal",
+  "def_grid_edge_endpoints",
   "def_high_temperature_polynomial",
   "def_high_temperature_sector_polynomial",
   "def_horizontal_edge_traversal_count",

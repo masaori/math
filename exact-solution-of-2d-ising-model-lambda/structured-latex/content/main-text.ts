@@ -89615,6 +89615,30 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                       },
                     },
                     {
+                      role: "prerequisiteDefinition",
+                      element: {
+                        id: "kac_ward_definition_grid_edge_endpoints",
+                        kind: "definition",
+                        title: { text: "符号化格子辺の端点集合" },
+                        labels: ["def_grid_edge_endpoints"],
+                        habitat: "Z",
+                        lean: ["Ising2DLambda.KacWard.gridEdgeEndpoints"],
+                        statement: [
+                          paragraph([
+                            "各 ", math(String.raw`(d,r,c)\in\{0,1\}\times\mathbb Z\times\mathbb Z`),
+                            " の端点集合 ", math(String.raw`\operatorname{end}_{\square}(d,r,c)`),
+                            " を、格子点の二元集合として次で定める（", ref("def_cell_edge_set"), "）。",
+                          ]),
+                          displayMath(String.raw`\operatorname{end}_{\square}(0,r,c):=\{(r,c),(r,c+1)\},\qquad
+\operatorname{end}_{\square}(1,r,c):=\{(r,c),(r+1,c)\}`),
+                          paragraph([
+                            "第一成分 ", math(String.raw`d=0`), " は横辺、", math(String.raw`d=1`),
+                            " は縦辺を表し、", math(String.raw`(r,c)`), " はその辺の二つの端点のうち、二つの座標の和が小さい方である。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
                       role: "supportingClaim",
                       element: {
                         id: "kac_ward_claim_grid_edge_endpoint_encoding_injective",
@@ -89629,12 +89653,8 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                         ],
                         statement: [
                           paragraph([
-                            "各 ", math(String.raw`(d,r,c)\in\{0,1\}\times\mathbb Z\times\mathbb Z`),
-                            " の端点集合を次で定める（", ref("def_cell_edge_set"), "）。",
-                          ]),
-                          displayMath(String.raw`\operatorname{end}_{\square}(0,r,c):=\{(r,c),(r,c+1)\},\qquad
-\operatorname{end}_{\square}(1,r,c):=\{(r,c),(r+1,c)\}`),
-                          paragraph([
+                            ref("def_grid_edge_endpoints"), " の端点集合写像 ",
+                            math(String.raw`\operatorname{end}_{\square}`), " について、",
                             "任意の ", math(String.raw`(d,r,c),(d',s,t)\in\{0,1\}\times\mathbb Z\times\mathbb Z`),
                             " に対し、", math(String.raw`\operatorname{end}_{\square}(d,r,c)=\operatorname{end}_{\square}(d',s,t)`),
                             " ならば ", math(String.raw`(d,r,c)=(d',s,t)`), " である。",
@@ -89772,7 +89792,7 @@ e
                             "有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
                             " に対し、", ref("def_encoded_cell_edge_set"), " の符号化辺集合と、",
                             math(String.raw`\operatorname{end}_{\square}`),
-                            " は ", ref("claim_grid_edge_endpoint_encoding_injective"),
+                            " は ", ref("def_grid_edge_endpoints"),
                             " で定めた端点集合写像である。このとき ", ref("def_cell_vertex_graph"),
                             " の辺集合は次を満たす。",
                           ]),
@@ -89783,7 +89803,7 @@ e
                             "任意の ", math(String.raw`e\in\widetilde{\mathcal E}_{\square}(S)`),
                             " を取る。", math(String.raw`e`), " はある ",
                             math(String.raw`(r,c)\in S`), " に由来する四つの符号化辺の一つである。",
-                            ref("claim_grid_edge_endpoint_encoding_injective"), " の端点集合の式を各辺に適用すると、",
+                            ref("def_grid_edge_endpoints"), " の端点集合の式を各辺に適用すると、",
                             ref("def_cell_edge_set"), " の四辺を順に得る。したがって像は ",
                             math(String.raw`\mathcal E_{\square}(S)`), " に含まれる。",
                           ]),
@@ -89794,7 +89814,7 @@ e
                             " の四辺の一つである。対応する符号化辺 ",
                             math(String.raw`(0,r,c),(0,r+1,c),(1,r,c),(1,r,c+1)`),
                             " のいずれかを選ぶと、その端点集合は ", math(String.raw`a`),
-                            " に等しい（", ref("claim_grid_edge_endpoint_encoding_injective"), "）。",
+                            " に等しい（", ref("def_grid_edge_endpoints"), "）。",
                             "よって像と ", math(String.raw`\mathcal E_{\square}(S)`), " は等しい。",
                           ]),
                           paragraph([
@@ -89807,7 +89827,7 @@ E(G_S)
 &=\{\operatorname{end}_{\square}(e)\mid e\in\widetilde{\mathcal E}_{\square}(S)\}
 &&\bigl(\because\ \blkref{def_cell_vertex_graph},\ \blkref{claim_cell_edge_endpoints_belong_to_cell_vertices}\bigr)\\
 &=\mathcal E_{\square}(S)
-&&\bigl(\because\ \blkref{def_cell_edge_set},\ \blkref{claim_grid_edge_endpoint_encoding_injective}\bigr)
+&&\bigl(\because\ \blkref{def_cell_edge_set},\ \blkref{def_grid_edge_endpoints}\bigr)
 \end{aligned}`),
                         ],
                       },
@@ -89892,14 +89912,14 @@ e&=f
                           displayMath(String.raw`v\in\theta_S(e)\quad\Longleftrightarrow\quad v\in\operatorname{end}_{\square}(e)`),
                           paragraph([
                             "左辺の所属はグラフ辺への接続、右辺の所属は格子辺の端点であることを表す（",
-                            ref("def_cell_vertex_graph"), "、", ref("claim_grid_edge_endpoint_encoding_injective"), "）。",
+                            ref("def_cell_vertex_graph"), "、", ref("def_grid_edge_endpoints"), "）。",
                           ]),
                         ],
                         proof: [
                           paragraph([
                             math(String.raw`\theta_S(e)`), " は ", math(String.raw`\operatorname{end}_{\square}(e)`),
                             " の両端点を ", math(String.raw`\mathcal V_{\square}(S)`),
-                            " の元として記した二元集合である（", ref("claim_cell_graph_edge_bijection"), "。両端点が ",
+                            " の元として記した二元集合である（", math(String.raw`\theta_S`), " の定義。両端点が ",
                             math(String.raw`\mathcal V_{\square}(S)`), " に属することは ",
                             ref("claim_cell_edge_endpoints_belong_to_cell_vertices"), "）。",
                             "頂点集合は整数座標の集合の部分集合なので、この二元集合の二点は元の端点と同じである（",
@@ -89907,7 +89927,7 @@ e&=f
                           ]),
                           displayMath(String.raw`v\in\theta_S(e)
 \Longleftrightarrow v\in\operatorname{end}_{\square}(e)
-\qquad\bigl(\because\ \blkref{claim_cell_graph_edge_bijection},\ \blkref{def_cell_vertex_set}\bigr)`),
+\qquad\bigl(\because\ \theta_S\text{ の定義},\ \blkref{def_cell_vertex_set}\bigr)`),
                         ],
                       },
                     },
@@ -89994,7 +90014,7 @@ e\in\{a\in A\mid v\in\operatorname{end}_{\square}(a)\}
                         ],
                         proof: [
                           paragraph([
-                            ref("claim_grid_edge_endpoint_encoding_injective"),
+                            ref("def_grid_edge_endpoints"),
                             " の端点式より、", math(String.raw`v`),
                             " に接続する符号化辺は ", math(String.raw`e_1,e_2,e_3,e_4`),
                             " に限る。四つは相異なる。横辺と縦辺は最初の成分が異なり、",
@@ -90002,7 +90022,7 @@ e\in\{a\in A\mid v\in\operatorname{end}_{\square}(a)\}
                           ]),
                           displayMath(String.raw`\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}
 =A\cap\{e_1,e_2,e_3,e_4\}
-\qquad\bigl(\because\ \blkref{claim_grid_edge_endpoint_encoding_injective}\bigr)`),
+\qquad\bigl(\because\ \blkref{def_grid_edge_endpoints}\bigr)`),
                           displayMath(String.raw`\left|\{e\in A\mid v\in\operatorname{end}_{\square}(e)\}\right|
 =\sum_{i=1}^{4}\mathbf 1_A(e_i)
 \qquad\bigl(\because\ \text{直前の集合の等号と }e_1,e_2,e_3,e_4\text{ の相異性}\bigr)`),
@@ -91272,8 +91292,8 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                         math(String.raw`G_S`), " の偶辺集合全体を ", math(String.raw`\mathcal E(G_S)`),
                         " と置く。", ref("claim_cell_boundary_even_edge_bijection"), " と ",
                         ref("claim_cell_graph_even_edge_bijection"),
-                        " を合成する。端点集合で記した格子辺は ", ref("claim_grid_edge_endpoint_encoding_injective"),
-                        " と ", ref("claim_cell_vertex_graph_edge_image"), " により符号化辺へ一意に戻せる。",
+                        " を合成する。端点集合で記した格子辺は ", ref("claim_cell_graph_edge_bijection"),
+                        " の全単射 ", math(String.raw`\theta_S`), " により符号化辺へ一意に戻せる。",
                         "従って ", math(String.raw`S`), " の部分集合全体と ",
                         math(String.raw`\mathcal E(G_S)`), " は全単射である。",
                         "有限集合の部分集合は二の元の個数乗だけあり、",
@@ -98584,7 +98604,7 @@ q_{\vec e,\vec f}
                       paragraph(["選択辺上の向き付き辺 ", math(String.raw`\vec e\in H(P)`), " を取る。", ref("claim_local_pairing_matching_construction"), " の相手写像とその場合分けを順に用いると、"]),
                       displayMath(String.raw`\begin{aligned}
 \operatorname{mate}_{\mathcal D_\tau}(\vec e)
-&=\tau(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_construction}\text{ と }\blkref{claim_perfect_matching_involution}\bigr)\\
+&=\tau(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_construction}\text{ の相手写像は }\tau\bigr)\\
 &=\kappa(\vec e)&&\bigl(\because\ \vec e\in H(P)\text{ に対する }\tau\text{ の選択辺の場合分け}\bigr).
 \end{aligned}`),
                     ],
@@ -98800,14 +98820,13 @@ q_{\vec e,\vec f}
                       paragraph(["各辺の選択は ", math(String.raw`P`), " に固定されている。頂点ごとの半辺の対合は別の半辺集合上で定義されるため、異なる頂点間に追加の一致条件はない。辺長一でも端点番号付き半辺を区別する。実数体と複素数体は現れない。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_vertex_port_bijection"), " より各 ", math(String.raw`S_v(P)`), " は実際の頂点の選択半辺から得られる。各頂点で局所対合を一つ選んだ族は、定義により ", math(String.raw`\mathcal C(P)`), " の元である。逆に ", math(String.raw`\mathcal C(P)`), " の元を各頂点へ射影すれば、各 ", math(String.raw`\mathcal K(S_v(P))`), " の元を一つずつ得る。二操作は各頂点で互いに逆なので一対一対応である。"]),
+                      paragraph(["各頂点 ", math(String.raw`v\in V_L`), " で局所対合 ", math(String.raw`\kappa_v\in\mathcal K(S_v(P))`), " を一つ選んだ族は、定義により ", math(String.raw`\mathcal C(P)`), " の元である。逆に ", math(String.raw`\mathcal C(P)`), " の元を各頂点へ射影すれば、各 ", math(String.raw`\mathcal K(S_v(P))`), " の元を一つずつ得る。二操作は各頂点で互いに逆なので一対一対応である。"]),
                       paragraph(["有限集合 ", math(String.raw`V_L`), " 上の直積を、一つの頂点を追加するごとに積の原理で数える。"]),
                       displayMath(String.raw`\begin{aligned}
 |\mathcal C(P)|
 &=\prod_{v\in V_L}|\mathcal K(S_v(P))|
 &&\bigl(\because\ \mathcal C(P)\text{ の定義と有限集合の積の原理}\bigr).
 \end{aligned}`),
-                      paragraph([ref("claim_local_pairing_four_ports_count"), " により偶次数の各局所因子は ", math(String.raw`|S_v(P)|=0,2`), " で一、", math(String.raw`|S_v(P)|=4`), " で三である。"]),
                     ],
                   },
                 },
