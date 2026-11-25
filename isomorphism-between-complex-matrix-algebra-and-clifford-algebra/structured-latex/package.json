@@ -16,7 +16,7 @@
     "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:no-notes"
   },
   "dependencies": {
-    "zod": "3.25.76"
+    "zod": "4.6.6"
   },
   "devDependencies": {
     "@types/katex": "^0.16.8",
