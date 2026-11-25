@@ -78817,11 +78817,11 @@ L
                         displayMath(String.raw`\begin{aligned}
 a
 &\le L-1
-&&(\because\ a<L\text{。}\mathbb{N}\text{ の順序})\\
+&&(\because\ a<L\text{、}\mathbb{N}\text{ の順序})\\
 &=ka+r
 &&(\because\ \text{除法の等式})\\
 &<ka+a
-&&(\because\ r<a\text{。}\mathbb{N}\text{ の加法単調性})\\
+&&(\because\ r<a\text{、}\mathbb{N}\text{ の加法単調性})\\
 &=(k+1)a
 &&(\because\ \mathbb{N}\text{ の分配則})
 \end{aligned}`),
@@ -78855,14 +78855,14 @@ a
                         displayMath(String.raw`\begin{aligned}
 \frac{2}{L}
 &\le\frac{2}{a}
-&&(\because\ a<L\text{ と }2>0\text{。}\mathbb{Q}\text{ の順序。正の分子の分数は分母が大きいほど小さい})
+&&(\because\ a<L\text{ と }2>0\text{、}\mathbb{Q}\text{ の順序、正の分子の分数は分母が大きいほど小さい})
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 -\frac{2}{a}
 &\le-\frac{2a}{a^2}
-&&(\because\ \tfrac{2a}{a^2}=\tfrac{2}{a}\text{（}a\ne0\text{ による約分。}\mathbb{Q}\text{ の四則）。}\mathbb{Q}\text{ の順序の反射律})\\
+&&(\because\ \tfrac{2a}{a^2}=\tfrac{2}{a}\text{（}a\ne0\text{ による約分、}\mathbb{Q}\text{ の四則）、}\mathbb{Q}\text{ の順序の反射律})\\
 &\le-\frac{2a}{L}
-&&(\because\ \tfrac{2a}{L}\le\tfrac{2a}{a^2}\text{（}a^2\le L\text{ と }2a>0\text{。正の分子の分数は分母が大きいほど小さい）を }-1\text{ 倍する。}\mathbb{Q}\text{ の順序は }-1\text{ 倍で反転する})
+&&(\because\ \tfrac{2a}{L}\le\tfrac{2a}{a^2}\text{（}a^2\le L\text{ と }2a>0\text{、正の分子の分数は分母が大きいほど小さい）を }-1\text{ 倍する、}\mathbb{Q}\text{ の順序は }-1\text{ 倍で反転する})
 \end{aligned}`),
                         paragraph([
                           "第三に、符号 ",

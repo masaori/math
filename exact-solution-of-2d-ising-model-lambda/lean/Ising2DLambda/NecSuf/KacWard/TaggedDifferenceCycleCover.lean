@@ -49,21 +49,15 @@ theorem alternatingCycle_pair_step [LinearOrder J]
     (matchingPairPermutation τ υ i = υ.val i ∨
       matchingPairPermutation τ υ (υ.val i) = i) := by
   classical
-  constructor
-  · by_cases hi : i ∈ matchingPairColor τ υ
-    · left
-      simp [matchingPairPermutation, matchingPairSuccessor, hi]
-    · right
-      have hm : τ.val i ∈ matchingPairColor τ υ :=
-        (matchingPairColor_alternates τ υ i).mpr hi
-      simp [matchingPairPermutation, matchingPairSuccessor, hm, τ.property.2 i]
-  · by_cases hi : i ∈ matchingPairColor τ υ
-    · right
-      have hm : υ.val i ∉ matchingPairColor τ υ := by
-        intro h
-        exact ((matchingPairSecondColor_alternates τ υ i).mp h) hi
-      simp [matchingPairPermutation, matchingPairSuccessor, hm, υ.property.2 i]
-    · left
-      simp [matchingPairPermutation, matchingPairSuccessor, hi]
+  let C : J → Prop := fun j => j ∈ matchingPairColor τ υ
+  have hτcolor (j : J) : C (τ.val j) ↔ ¬ C j :=
+    matchingPairColor_alternates τ υ j
+  have hυcolor (j : J) : C (υ.val j) ↔ ¬ C j :=
+    matchingPairSecondColor_alternates τ υ j
+  simpa [C, Ising2DLambda.AlgebraicEigenvalue.matchingPairPermutation,
+    Ising2DLambda.AlgebraicEigenvalue.matchingPairSuccessor,
+    Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSuccessor] using
+    (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSuccessor_mate_step_necSuf
+      τ.val υ.val C τ.property.2 υ.property.2 hτcolor hυcolor i)
 
 end Ising2DLambda.NecSuf.KacWard

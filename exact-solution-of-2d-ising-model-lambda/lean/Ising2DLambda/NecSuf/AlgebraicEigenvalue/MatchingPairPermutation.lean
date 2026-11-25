@@ -78,4 +78,24 @@ theorem matchingPairSuccessor_color_necSuf (τ υ : J → J) (C : J → Prop)
     rw [hstep]
     simp [hi, hmate]
 
+/-- Each mate edge is traversed by the successor in one of its two directions. -/
+theorem matchingPairSuccessor_mate_step_necSuf (τ υ : J → J) (C : J → Prop)
+    (hτ : Function.Involutive τ) (hυ : Function.Involutive υ)
+    (hτcolor : ∀ i, C (τ i) ↔ ¬ C i)
+    (hυcolor : ∀ i, C (υ i) ↔ ¬ C i) (i : J) :
+    (matchingPairSuccessor τ υ C i = τ i ∨
+      matchingPairSuccessor τ υ C (τ i) = i) ∧
+    (matchingPairSuccessor τ υ C i = υ i ∨
+      matchingPairSuccessor τ υ C (υ i) = i) := by
+  classical
+  constructor
+  · by_cases hi : C i
+    · exact Or.inl (by simp [matchingPairSuccessor, hi])
+    · have hm : C (τ i) := (hτcolor i).mpr hi
+      exact Or.inr (by simp [matchingPairSuccessor, hm, hτ i])
+  · by_cases hi : C i
+    · have hm : ¬ C (υ i) := fun h => (hυcolor i).mp h hi
+      exact Or.inr (by simp [matchingPairSuccessor, hm, hυ i])
+    · exact Or.inl (by simp [matchingPairSuccessor, hi])
+
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue
