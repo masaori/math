@@ -6,12 +6,13 @@
 
 - ファイル: `structured-latex/content/002_linear_space_general.ts`
 - ブロック: `linear_space_general_claim_finite_sum_of_complex_sums`（複素数の和の有限和は有限和の和）
-- 範囲: 主張 `Σ_{j=1}^{n}(a_j + b_j) = (Σ a_j) + (Σ b_j)` と、証明の帰納法の各行
+- 範囲: 主張 `Σ_{j=1}^{n}(a_j + b_j) = (Σ a_j) + (Σ b_j)` と、証明の `n = 0` の鎖と帰納法の各行（`n = 0` の鎖は定数どうしの比較なので、確かめるのは各行の写し間違いだけである）
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
+| `n = 0` の 3 行 | `check_induction_chain.sage` | 空の和 `Σ^{0} := 0_ℂ`（`fsum([])` は 0）と `0 + 0 = 0` の各行で、隣り合う行が等しい | **PASS** | 厳密等号 |
 | `n = 1` の 2 行 | `check_induction_chain.sage` | `def_finite_sum_of_complex_numbers` どおり左から足した和で、隣り合う行が等しい | **PASS** | 厳密等号 |
 | `n → n+1` の 8 行 | 同上 | `n = 1,…,8` で帰納法の仮定を確かめ、隣り合う行が等しい | **PASS** | 厳密等号 |
 | 主張そのもの | 同上 | Sage の `sum`（独立な経路）と比べる。否定コントロールとして、`b_{n+1}` を落とした右辺とは一致しないことも確かめる | **PASS** | `n = 2,…,9` で厳密等号 |
@@ -31,3 +32,5 @@ bash sagemath/tools/run-all-checks.sh finite_sum_of_complex_sums
 ```
 
 実行ログは `sagemath/check/finite_sum_of_complex_sums/logs/` に保存する（2026-11-02）。
+
+2026-11-25: 主張を `n ∈ ℤ_{≥0}` へ広げ、証明に足した `n = 0` の鎖の検査を足して再実行した（`fsum` は `def_finite_sum_of_complex_numbers` の `Σ^{0} := 0_ℂ` を返す）。

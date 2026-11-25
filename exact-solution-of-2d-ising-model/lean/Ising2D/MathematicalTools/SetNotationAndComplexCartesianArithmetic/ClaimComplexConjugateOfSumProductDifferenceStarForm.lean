@@ -5,8 +5,9 @@
 - `exp_conjugation_claim_complex_conjugate_of_sum`（ラベル `complex_conjugate_of_sum`）
 - `exp_conjugation_claim_complex_conjugate_of_product`（ラベル `complex_conjugate_of_product`）
 
-このファイルは新しい主張を立てない。2 つの主張の具体版（`ClaimComplexConjugateOfSumProductDifference.lean`）は
-有限和の添字が `Fin (m + 1)` で、積は 2 因子である。使う側の和の添字は `Fin n`（`n = 0` を含む）・`Finset.range N`・`Conf M`、
+`complex_conjugate_star_finite_sum` は人手 `complex_conjugate_of_sum`（`m ∈ ℤ_{≥0}`）の主の具体版で、`n = 0` の段が人手の `m = 0` の 6 行、
+`n = m + 1` の段が `complex_conjugate_of_finite_sum_succ` である。ほかの宣言は新しい主張を立てない。2 つの主張の
+`ClaimComplexConjugateOfSumProductDifference.lean` の具体版は、有限和の添字が `Fin (m + 1)` で、積は 2 因子である。使う側の和の添字は `Fin n`（`n = 0` を含む）・`Finset.range N`・`Conf M`、
 積は `M` 個の因子なので、使う側がそのまま当てられる形へ読み替える。
 
 | 人手 | Lean |
@@ -16,8 +17,8 @@
 | `complex_conjugate_of_sum` の `m = 2^M`（添字 `Conf M`） | `complex_conjugate_star_sum_conf`（添字の付け替え `finFunctionFinEquiv` と `complex_conjugate_star_finite_sum`） |
 | `complex_conjugate_of_product` の反復適用（`M` 個の因子の有限積） | `complex_conjugate_star_finite_prod`（`def_finite_product_of_complex_numbers` で末尾の因子を外し、1 段ごとに `complex_conjugate_of_product_eq` を 1 回） |
 
-- 人手の `m ∈ ℤ_{≥1}` に対し、使う側の `Fin n` は `n = 0` を含む。`n = 0` の段（両辺とも空の和）は人手証明の外で、
-  空の和 `Σ_{j ∈ ∅} = 0`（mathlib の `Fin.sum_univ_zero`）と `\overline{0_ℂ} = 0_ℂ`（`complex_conjugate_star_zero`）で閉じる。
+- 人手の `m ∈ ℤ_{≥0}` の `m = 0` の 6 行は、`complex_conjugate_star_finite_sum` の `n = 0` の段で、空の和の式
+  `Σ_{j=1}^{0} z_j := 0_ℂ`（`finset_sum_fin_complex_eq_finite_sum_of_complex_numbers` の一つ目の式）と `\overline{0_ℂ} = 0_ℂ`（`complex_conjugate_star_zero`）で閉じる。
   `complex_conjugate_star_zero` は `complex_conjugate_of_neg_one` の 4 行と同じ段の並び（`inclusion_rr_to_cc` の `r_ℂ = (r, 0)`、
   `def_complex_conjugate`、`real_negation_of_zero_is_zero`、`inclusion_rr_to_cc`）で `r = 0` について示す。
   有限積も同じく、`n = 0`（両辺とも空の積）は人手証明の外で、空の積 `∏_{j ∈ ∅} = 1_ℂ`（mathlib の `Fin.prod_univ_zero`）と
@@ -36,11 +37,13 @@
   主張の添字は `Conf M` の中身 `Fin M → Fin 2` で書く（`Conf M` は略記なので、使う側はそのまま当てられる）。
   移す段と戻す段は人手の行ではない（`ClaimTraceEpsilonVPlusReduction.lean` の `Φ` と同じ扱い）。結論は付け替えの選び方によらない。
 
-必要十分版は置かない。新しい主張が無く、読み替えの段だけだからである（和の主張の必要十分版は
-`NecSuf/AdditiveMapPreservesFiniteSum.lean`）。
+`complex_conjugate_star_finite_sum` の必要十分版は `NecSuf/AdditiveMapPreservesFiniteSum.lean` の
+`NecSuf.map_finSumLeftFromEmpty_of_map_add_of_map_zero'`（導出は `ClaimComplexConjugateOfSumFromNecSuf.lean`）。
+ほかの宣言は読み替えの段だけなので、必要十分版を置かない。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifference
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionFiniteSumOverIndexSet
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Logic.Equiv.Fin.Basic
 
@@ -94,14 +97,18 @@ theorem complex_conjugate_star_finite_prod : ∀ (n : ℕ) (z : Fin n → ℂ), 
       _ = ∏ j : Fin (n + 2), star (z j) :=
           (Fin.prod_univ_castSucc (fun j => star (z j))).symm   -- `def_finite_product_of_complex_numbers`（`m → n + 1`）、右辺から左辺へ
 
-/-- 添字 `Fin n` の `\overline{Σ_j z_j} = Σ_j \overline{z_j}`（人手 `complex_conjugate_of_sum` の `m = n`）。
-`n = m + 1` は具体版 `complex_conjugate_of_finite_sum_succ`、`n = 0`（両辺とも空の和）は人手証明の外の段。 -/
+/-- 添字 `Fin n` の `\overline{Σ_j z_j} = Σ_j \overline{z_j}`（人手 `complex_conjugate_of_sum`、`m ∈ ℤ_{≥0}` の `m = n`）。
+`n = 0` の段は人手の `m = 0` の 6 行、`n = m + 1` は具体版 `complex_conjugate_of_finite_sum_succ`。 -/
 theorem complex_conjugate_star_finite_sum : ∀ (n : ℕ) (z : Fin n → ℂ), star (∑ j, z j) = ∑ j, star (z j)
   | 0, z =>
     calc star (∑ j : Fin 0, z j)
-        = star (0 : ℂ) := by rw [Fin.sum_univ_zero]             -- 空の和は `0_ℂ`
-      _ = 0 := complex_conjugate_star_zero                       -- `\overline{0_ℂ} = 0_ℂ`
-      _ = ∑ j : Fin 0, star (z j) := (Fin.sum_univ_zero _).symm  -- 空の和は `0_ℂ`
+        = star (0 : ℂ) := by
+          rw [finset_sum_fin_complex_eq_finite_sum_of_complex_numbers.1 z]
+                                                                -- `def_finite_sum_of_complex_numbers` の `Σ_{j=1}^{0} z_j := 0_ℂ`
+      _ = 0 := complex_conjugate_star_zero                       -- 人手の 2〜5 行（`inclusion_rr_to_cc`・`def_complex_conjugate`・`real_negation_of_zero_is_zero`・`inclusion_rr_to_cc` を右辺から左辺へ）
+      _ = ∑ j : Fin 0, star (z j) :=
+          (finset_sum_fin_complex_eq_finite_sum_of_complex_numbers.1 _).symm
+                                                                -- `def_finite_sum_of_complex_numbers` の `Σ_{j=1}^{0} z_j := 0_ℂ`（`z_j → \overline{z_j}`）を右辺から左辺へ
   | m + 1, z =>
     complex_conjugate_of_finite_sum_succ m z                    -- `complex_conjugate_of_sum` の `m → m + 1`
 

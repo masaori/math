@@ -1,5 +1,5 @@
 # 対象ラベル: complex_conjugate_of_sum
-# 準備（二つの和）の鎖と、帰納法の m = 1 の鎖・m → m+1 の鎖を一行ずつ。
+# 準備（二つの和）の鎖と、m = 0 の鎖、帰納法の m = 1 の鎖・m → m+1 の鎖を一行ずつ。
 # ℂ を本文 definition_of_cc どおり実数の対で持つ（_shared/complex_as_real_pairs.sage）。成分は QQ 上の多項式環の不定元。
 # 比べる側: 対 (x, y) を QQ(i) 係数の多項式 x + i y へ送り、Sage の係数の共役（x, y は実の不定元なので複素共役に当たる）と比べる。
 load("../../_shared/complex_as_real_pairs.sage")
@@ -36,12 +36,30 @@ print("準備（二つの和）: 鎖の 5 個の等号と両端を不定元で�
 
 
 def body_finite_sum(zs):
-    """def_finite_sum_of_complex_numbers の有限和: Σ_{j=1}^{1} z_j := z_1、Σ_{j=1}^{m+1} := (Σ_{j=1}^{m}) + z_{m+1}。"""
+    """def_finite_sum_of_complex_numbers の有限和: Σ_{j=1}^{0} z_j := 0_ℂ、Σ_{j=1}^{1} z_j := z_1、Σ_{j=1}^{m+1} := (Σ_{j=1}^{m}) + z_{m+1}。"""
+    if len(zs) == 0:
+        return (QQ(0), QQ(0))                                     # 0_ℂ = (0_ℝ)_ℂ = (0, 0)（inclusion_rr_to_cc）
     s = zs[0]
     for q in zs[1:]:
         s = cc_add(s, q)
     return s
 
+
+# m = 0（項の無い族）
+zero_c = (QQ(0), QQ(0))                                           # 0_ℂ
+lines0 = [
+    cc_conj(body_finite_sum([])),                                 # conj(Σ^{0} z_j)
+    cc_conj(zero_c),                                              # conj(0_ℂ)            (def_finite_sum_of_complex_numbers の Σ^{0} := 0_ℂ)
+    cc_conj((QQ(0), QQ(0))),                                      # conj((0, 0))         (inclusion_rr_to_cc の 0_ℂ と ι(x) := (x, 0), x → 0)
+    (QQ(0), -QQ(0)),                                              # (0, -0)              (def_complex_conjugate)
+    (QQ(0), QQ(0)),                                               # (0, 0)               (real_negation_of_zero_is_zero)
+    zero_c,                                                       # 0_ℂ                  (inclusion_rr_to_cc を右辺から左辺へ)
+    body_finite_sum([]),                                          # Σ^{0} conj z_j       (def_finite_sum_of_complex_numbers の Σ^{0} := 0_ℂ を右辺から左辺へ)
+]
+for t in range(len(lines0) - 1):
+    assert lines0[t] == lines0[t + 1], (0, t)
+assert K(0).conjugate() == K(0)
+print("m = 0: 鎖の 6 個の等号と、Sage の 0 の共役との一致を確かめた")
 
 MAX_M = 7
 for m in range(1, MAX_M + 1):

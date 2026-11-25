@@ -1158,10 +1158,10 @@ X - O
     kind: "claim",
     title: { text: "複素数の和の有限和は有限和の和" },
     labels: ["finite_sum_of_complex_sums"],
-    lean: ["Ising2D.finite_sum_of_complex_sums_succ", "Ising2D.finite_sum_of_complex_sums_step", "Ising2D.finite_sum_of_complex_sums"],
+    lean: ["Ising2D.finite_sum_of_complex_sums", "Ising2D.finite_sum_of_complex_sums_succ", "Ising2D.finite_sum_of_complex_sums_step"],
     statement: [
       paragraph([
-        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
         "、",
         math(String.raw`a_1,\dots,a_n, b_1,\dots,b_n \in \mathbb{C}`),
         " とする。有限和は ",
@@ -1175,6 +1175,22 @@ X - O
     ],
     proof: [
       paragraph([
+        math(String.raw`n = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{0} (a_j + b_j)
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} z_j := 0_{\mathbb{C}}\ (z_j \to a_j + b_j)\bigr)\\
+&= 0_{\mathbb{C}} + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\ z + 0_{\mathbb{C}} = z\ (z \to 0_{\mathbb{C}})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\sum_{j=1}^{0} a_j\Bigr) + \Bigl(\sum_{j=1}^{0} b_j\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} z_j := 0_{\mathbb{C}}\ (z_j \to a_j;\ z_j \to b_j)\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " は ",
         math(String.raw`n`),
         " についての帰納法で示す。",
         math(String.raw`n = 1`),
@@ -1226,6 +1242,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。行列の積が右の因子の和・左の因子の和に分配すること（mat_mult_distributes_over_sum_in_right_factor・mat_mult_distributes_over_sum_in_left_factor）の成分の鎖で、" +
           "項ごとの和の有限和を二つの有限和に分ける段を引けるよう足した。和の結合律・交換律の適用を、帰納法の 1 段ずつに割った。",
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の三単位目）: def_finite_sum_of_complex_numbers が項の無い族の和 Σ_{j=1}^{0} z_j := 0_ℂ を定めたので、主張の n の範囲を ℤ_{≥1} から ℤ_{≥0} へ広げ、証明の冒頭に n = 0 の鎖（空の和の式と加法の単位元）を足した。n ≥ 1 の帰納法の鎖は変えていない。Lean の n = 0 の段は Fin.sum_univ_zero から finset_sum_fin_complex_eq_finite_sum_of_complex_numbers の空の和の式へ替えた。数値検証に n = 0 を足した。",
       ],
     },
   },

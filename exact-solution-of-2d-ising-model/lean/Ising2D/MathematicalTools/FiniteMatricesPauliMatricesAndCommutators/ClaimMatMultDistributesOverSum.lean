@@ -16,7 +16,8 @@
   （`finite_sum_of_complex_sums_succ`）。人手の `n ∈ ℤ_{≥1}` が Lean の `n + 1` に当たる。`def_finite_sum_of_complex_numbers` の 2 つの式は
   `Fin.sum_univ_one`・`Fin.sum_univ_castSucc` で出す（mathlib の `Finset.sum` を人手の左から足す和の定義へ読み替える段）。
   帰納法の段の結合律・交換律の 5 行（人手の `α := Σ a_j`、`β := Σ b_j`）は `finite_sum_of_complex_sums_step` の 5 段と 1 対 1 である
-  （`complex_numbers_form_a_field` の和の結合律・交換律は `add_assoc`・`add_comm`）。`n = 0`（空の和）は人手には無い。
+  （`complex_numbers_form_a_field` の和の結合律・交換律は `add_assoc`・`add_comm`）。人手の `n ∈ ℤ_{≥0}` の `n = 0`（空の和）の 3 行は
+  `finite_sum_of_complex_sums` の `n = 0` の段の `calc` と 1 対 1 で、空の和の式は `finset_sum_fin_complex_eq_finite_sum_of_complex_numbers` の一つ目の式から引く。
 * 2 つの分配の成分の鎖の 6 行は、`mul_add_matrix_apply`・`add_mul_matrix_apply` の `calc` の 6 段と 1 対 1 である。
   `ℂ` の分配律を各項へ同時適用する行は `Finset.sum_congr` と `mul_add`・`add_mul`（`complex_numbers_form_a_field`）で出す。
   成分の式との接点は `matrix_mul_apply_sum`（`mat_mult`）と `matrix_sum_apply`（`def_matrix_sum`）である。
@@ -25,6 +26,7 @@
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrix
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 import Mathlib.Algebra.BigOperators.Fin
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionFiniteSumOverIndexSet
 
 namespace Ising2D
 
@@ -62,11 +64,17 @@ theorem finite_sum_of_complex_sums_succ (n : ℕ) (a b : Fin (n + 1) → ℂ) :
       _ = (∑ j, a j) + ∑ j, b j := by
           rw [Fin.sum_univ_castSucc a, Fin.sum_univ_castSucc b]               -- `def_finite_sum_of_complex_numbers` を 2 か所
 
-/-- **`finite_sum_of_complex_sums`**（`n = 0` の空の和を含む。`n = 0` は人手には無い）。 -/
+/-- **`finite_sum_of_complex_sums`**（`n ∈ ℤ_{≥0}`）: `n = 0` の段は人手の `n = 0` の 3 行、`n ≥ 1` は `finite_sum_of_complex_sums_succ`。 -/
 theorem finite_sum_of_complex_sums (n : ℕ) (a b : Fin n → ℂ) :
     ∑ j, (a j + b j) = (∑ j, a j) + ∑ j, b j := by
   cases n with
-  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, Fin.sum_univ_zero, add_zero]
+  | zero =>
+    calc ∑ j : Fin 0, (a j + b j)
+        = 0 := finset_sum_fin_complex_eq_finite_sum_of_complex_numbers.1 _        -- `def_finite_sum_of_complex_numbers` の `Σ_{j=1}^{0} z_j := 0_ℂ`（`z_j → a_j + b_j`）
+      _ = 0 + 0 := (add_zero 0).symm                                          -- `complex_numbers_form_a_field` の加法の単位元 `z + 0_ℂ = z`（`z → 0_ℂ`）を右辺から左辺へ
+      _ = (∑ j : Fin 0, a j) + ∑ j : Fin 0, b j := by
+          rw [finset_sum_fin_complex_eq_finite_sum_of_complex_numbers.1 a, finset_sum_fin_complex_eq_finite_sum_of_complex_numbers.1 b]
+                                                                              -- `def_finite_sum_of_complex_numbers` の `Σ_{j=1}^{0} z_j := 0_ℂ`（`z_j → a_j`; `z_j → b_j`）を右辺から左辺へ 2 か所同時適用
   | succ n => exact finite_sum_of_complex_sums_succ n a b
 
 /-- **`mat_mult_distributes_over_sum_in_right_factor`** の成分の鎖: `(A(B + C))_{ik} = (AB + AC)_{ik}`。 -/

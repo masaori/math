@@ -28,10 +28,10 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "複素共役は有限和を保つ" },
     labels: ["complex_conjugate_of_sum"],
-    lean: ["Ising2D.complex_conjugate_of_finite_sum_succ", "Ising2D.complex_conjugate_of_add", "Ising2D.complex_conjugate_of_sum_two"],
+    lean: ["Ising2D.complex_conjugate_star_finite_sum", "Ising2D.complex_conjugate_of_finite_sum_succ", "Ising2D.complex_conjugate_of_add", "Ising2D.complex_conjugate_of_sum_two"],
     statement: [
       paragraph([
-        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
         "、",
         math(String.raw`z_1,\dots,z_m \in \mathbb{C}`),
         " について",
@@ -73,6 +73,28 @@ export default defineBlocks([
 &&(\because\ \blkref{def_complex_conjugate})
 \end{aligned}`),
       paragraph([
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\textstyle\sum_{j=1}^{0} z_j}
+&= \overline{0_{\mathbb{C}}}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} z_j := 0_{\mathbb{C}}\bigr)\\
+&= \overline{(0,0)}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}} := (0_{\mathbb{R}})_{\mathbb{C}}\ \text{と}\ \iota_{\mathbb{R}\to\mathbb{C}}(x) := (x,0)\ (x \to 0)\bigr)\\
+&= (0,-0)
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= (0,0)
+&&(\because\ \blkref{real_negation_of_zero_is_zero})\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}} := (0_{\mathbb{R}})_{\mathbb{C}}\ \text{と}\ \iota_{\mathbb{R}\to\mathbb{C}}(x) := (x,0)\ (x \to 0)\ \text{を右辺から左辺へ}\bigr)\\
+&= \textstyle\sum_{j=1}^{0} \overline{z_j}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} z_j := 0_{\mathbb{C}}\ (z_j \to \overline{z_j})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " は ",
         math(String.raw`m`),
         " についての帰納法で示す。",
         math(String.raw`m = 1`),
@@ -106,6 +128,7 @@ export default defineBlocks([
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。star_preserves_norm_and_limits の証明は「複素共役は和を保つ」を frobenius_inner_product_axioms の証明冒頭から引いていた。証明の中の計算は主張として引けないので、有限和の形で独立の主張にした。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠「ℝ で −(y+v) = (−y)+(−v)」を、この回に足した主張 real_negation_of_sum_is_sum_of_negations（文字を p, q に替え p → y, q → v）の参照にした（文書の並びでは前のファイルのブロック）。式・鎖の両端・段数は不変。",
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の三単位目）: def_finite_sum_of_complex_numbers が項の無い族の和 Σ_{j=1}^{0} z_j := 0_ℂ を定めたので、主張の m の範囲を ℤ_{≥1} から ℤ_{≥0} へ広げ、証明の冒頭に m = 0 の鎖（空の和の式と、0_ℂ の共役が 0_ℂ であること）を足した。m ≥ 1 の帰納法の鎖は変えていない。Lean の m = 0 の段は Fin.sum_univ_zero から finset_sum_fin_complex_eq_finite_sum_of_complex_numbers の空の和の式へ替えた。数値検証に m = 0 を足した。",
       ],
     },
   },

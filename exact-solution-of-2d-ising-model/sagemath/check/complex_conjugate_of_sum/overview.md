@@ -6,13 +6,14 @@
 
 - ファイル: `structured-latex/content/005_exp_conjugation_proof.ts`
 - ブロック: `exp_conjugation_claim_complex_conjugate_of_sum`（複素共役は有限和を保つ）
-- 範囲: 準備（二つの和）の鎖、帰納法の `m = 1` の鎖と `m → m+1` の鎖、主張
+- 範囲: 準備（二つの和）の鎖、`m = 0` の鎖、帰納法の `m = 1` の鎖と `m → m+1` の鎖、主張（`m = 0` の鎖は定数どうしの比較なので、確かめるのは各行の写し間違いだけである）
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 準備 `conj(z+w) = conj((x+u, y+v))`（`definition_of_cc` の和）から `= conj z + conj w`（`def_complex_conjugate`）までの 5 行 | `check_two_terms_and_induction.sage` | `x, y, u, v` を `QQ` 上の不定元に置き、各行を書かれた式どおりに対で組んで隣り合う行を比べる。左端を `QQ(i)` 係数の `x+iy` へ送った Sage の係数の共役と比べた | **PASS** | 厳密等号 |
+| `m = 0` の 6 行（`def_finite_sum_of_complex_numbers` の空の和・`inclusion_rr_to_cc`・`def_complex_conjugate`・`real_negation_of_zero_is_zero`・`inclusion_rr_to_cc`・空の和） | 同上 | 空の和を `0_ℂ = (0, 0)` として組み、隣り合う行を比べる。Sage の `0` の共役とも比べた | **PASS** | 厳密等号 |
 | 帰納法 `m = 1` の 2 行（`def_finite_sum_of_complex_numbers`） | 同上 | 同上 | **PASS** | 厳密等号 |
 | 帰納法 `m → m+1` の 4 行（`def_finite_sum_of_complex_numbers`・準備・帰納法の仮定・`def_finite_sum_of_complex_numbers`） | 同上 | `z_1,…,z_{m+1}` を不定元の対に置き、帰納法の仮定の行は `m` 項の主張を直接確かめてから使う。左端を Sage の係数の共役と比べた | **PASS** | `m = 1,…,7` で厳密等号 |
 | 主張 | 同上 | 具体の `QQ(i)` の点で、両端を Sage の `conjugate` と比べた | **PASS** | `m = 1,…,8` |
@@ -31,3 +32,5 @@
 ```bash
 bash sagemath/tools/run-all-checks.sh complex_conjugate_of_sum
 ```
+
+2026-11-25: 主張を `m ∈ ℤ_{≥0}` へ広げ、証明に足した `m = 0` の鎖の検査を足して再実行した。

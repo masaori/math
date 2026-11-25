@@ -8,6 +8,8 @@
 同じ手順の具体版に人手 `complex_conjugate_of_sum` の `complex_conjugate_of_finite_sum_succ`
 （`Ising2D/MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`。`f := \overline{(·)}`）もあり、
 その系としての導出は同じフォルダの `ClaimComplexConjugateOfSumFromNecSuf.lean`。
+項の無い族を含む `map_finSumLeftFromEmpty_of_map_add_of_map_zero'` の具体版は `complex_conjugate_star_finite_sum`
+（`ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`。導出は同じく `ClaimComplexConjugateOfSumFromNecSuf.lean`）。
 
 人手の `ι_{ℝ→ℂ}` を、2 つの集合の間の写像 `f : G → H` に置き換える。有限和は `finSumLeft`
 （`Ising2D/NecSuf/AdditiveToMultiplicativeMapOfFiniteSum.lean`。人手の `m ∈ ℤ_{≥1}` は Lean の `r + 1`、
@@ -25,8 +27,18 @@
   具体版の 5 行目（ℝ の和の定義）は、必要十分版の最後の段（和の定義を右辺から左辺へ）に当たる。
   具体版では 5 行目が 6・7 行目より前にあるが、必要十分版では `hadd` の後に来る。`f` の値の成分（実部・虚部）が見えないので、
   `hadd` を具体版の 3・4 行目と 6・7 行目に分けられないためで、証明の手順（帰納法と各段の根拠）は同じである。
-- **効いていないもの**: `ℝ`・`ℂ` であること、乗法、加法の結合律・可換律・単位元・逆元、`f(0) = 0`
+- **効いていないもの**（`map_finSumLeft_of_map_add'` について）: `ℝ`・`ℂ` であること、乗法、加法の結合律・可換律・単位元・逆元、`f(0) = 0`
   （和は空でなく、左から順に畳み込むので、`0` も並べ替えも括弧の付け替えも現れない）、`f` が単射であること。
+- 人手 `complex_conjugate_of_sum` は `m ∈ ℤ_{≥0}` で、`m = 0` の 6 行（空の和の式と `\overline{0_ℂ} = 0_ℂ`）も持つ。具体版は
+  `complex_conjugate_star_finite_sum`（`n = 0` の節が `m = 0` の 6 行、`n = m + 1` の節が `complex_conjugate_of_finite_sum_succ`）で、
+  必要十分版は `map_finSumLeftFromEmpty_of_map_add_of_map_zero'`（有限和は空の和から始まる `finSumLeftFromEmpty`）である。
+  | 人手の段 | 具体版の段 | 必要十分版の段 | 効いている仮定 |
+  | --- | --- | --- | --- |
+  | `m = 0` の 6 行 | 空の和の式 → `\overline{0_ℂ} = 0_ℂ`（`complex_conjugate_star_zero`）→ 空の和の式 | `0` の節（和の定義 → `f(0) = 0` を右辺から左辺へ → 和の定義） | 和の定義の `Σ_{j=1}^{0} x_j := 0`（両側）、`f(0) = 0`（仮定 `hzero`） |
+  | `m ≥ 1` | `complex_conjugate_of_finite_sum_succ` | `r + 1` の節（`map_finSumLeft_of_map_add'`） | 上の表のとおり |
+  `m = 0` の段では `hadd` は効かず、`m ≥ 1` の段では `hzero` は効かない。仮定 `hzero` は削れない（`hadd` から出ない）:
+  `G := ℕ`、`H := {偽, 真}`（和を「または」、零を偽とする）、`f(x) := 真` は `hadd` を満たすが、空の和で左辺は偽、右辺は `f(0) = 真` である。
+  人手 `real_inclusion_preserves_finite_sum` は `m ≥ 1` のままである。
 - 仮定 `hadd` は削れない: `ℝ` 上の `f(x) = x + 1` では `f(1 + 1) = 3` だが `f(1) + f(1) = 4` である。
 -/
 import Ising2D.NecSuf.AdditiveToMultiplicativeMapOfFiniteSum
@@ -51,5 +63,36 @@ theorem map_finSumLeft_of_map_add' {G H : Type*} [Add G] [Add H]
       _ = f (finSumLeft r (fun j => x (Fin.castSucc j)) + x (Fin.last (r + 1))) :=
           (hadd _ _).symm                                                       -- `f(a + b) = f(a) + f(b)` を右辺から左辺へ
       _ = f (finSumLeft (r + 1) x) := by rw [finSumLeft_succ]                   -- 和の定義（`G` の側）を右辺から左辺へ
+
+/-- **`def_finite_sum_of_real_numbers`・`def_finite_sum_of_complex_numbers` の必要十分版（項の無い族を含む）**:
+`n` 個の項を左から順に足す。`n = 0` は `Σ_{j=1}^{0} x_j := 0`、`n = r + 1` は `finSumLeft r`。 -/
+def finSumLeftFromEmpty {G : Type*} [Zero G] [Add G] : (n : ℕ) → (Fin n → G) → G
+  | 0, _ => 0
+  | r + 1, x => finSumLeft r x
+
+/-- `Σ_{j=1}^{0} x_j := 0`。 -/
+theorem finSumLeftFromEmpty_zero {G : Type*} [Zero G] [Add G] (x : Fin 0 → G) :
+    finSumLeftFromEmpty 0 x = 0 := rfl
+
+/-- `n = r + 1` は `finSumLeft r`。 -/
+theorem finSumLeftFromEmpty_succ {G : Type*} [Zero G] [Add G] (r : ℕ) (x : Fin (r + 1) → G) :
+    finSumLeftFromEmpty (r + 1) x = finSumLeft r x := rfl
+
+/-- **必要十分版の `complex_conjugate_of_sum`（`m ∈ ℤ_{≥0}`）**: `f(0) = 0` と `f(a + b) = f(a) + f(b)` を満たす写像は、
+項の無い族を含む有限和を保つ: `Σ_j f(x_j) = f(Σ_j x_j)`。具体版 `complex_conjugate_star_finite_sum` と同じく、
+`n = 0` は空の和の式と `f(0) = 0`、`n = r + 1` は `map_finSumLeft_of_map_add'`。 -/
+theorem map_finSumLeftFromEmpty_of_map_add_of_map_zero' {G H : Type*} [Zero G] [Add G] [Zero H] [Add H]
+    (f : G → H) (hzero : f 0 = 0) (hadd : ∀ a b, f (a + b) = f a + f b) :
+    ∀ (n : ℕ) (x : Fin n → G), finSumLeftFromEmpty n (fun j => f (x j)) = f (finSumLeftFromEmpty n x)
+  | 0, x =>
+    calc finSumLeftFromEmpty 0 (fun j => f (x j))
+        = 0 := finSumLeftFromEmpty_zero _                                       -- 和の定義の `Σ_{j=1}^{0} := 0`（`H` の側）
+      _ = f 0 := hzero.symm                                                     -- `f(0) = 0` を右辺から左辺へ
+      _ = f (finSumLeftFromEmpty 0 x) := by rw [finSumLeftFromEmpty_zero]       -- 和の定義の `Σ_{j=1}^{0} := 0`（`G` の側）を右辺から左辺へ
+  | r + 1, x =>
+    calc finSumLeftFromEmpty (r + 1) (fun j => f (x j))
+        = finSumLeft r (fun j => f (x j)) := finSumLeftFromEmpty_succ _ _       -- 和の定義（`H` の側）
+      _ = f (finSumLeft r x) := map_finSumLeft_of_map_add' f hadd r x           -- `m ≥ 1` の段
+      _ = f (finSumLeftFromEmpty (r + 1) x) := by rw [finSumLeftFromEmpty_succ] -- 和の定義（`G` の側）を右辺から左辺へ
 
 end Ising2D.NecSuf
