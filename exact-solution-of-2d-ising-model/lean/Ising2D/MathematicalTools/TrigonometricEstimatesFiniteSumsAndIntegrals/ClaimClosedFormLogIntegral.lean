@@ -12,9 +12,11 @@
 （`Ising2D.NecSuf.integral_inv_sqrt_quad` / `integral_inv_pow_three_half_le`）と
 `Ising2D/NecSuf/HyperbolicBounds.lean`
 （`Ising2D.NecSuf.log_two_mul_le_arsinh` / `arsinh_le_log_two_mul_add`）。
-`integral_inv_sqrt_pi`・`arsinh_log_bounds` は人手の鎖と 1 対 1 に書き、必要十分版を使わない（特殊化としての導出は
-`ClaimClosedFormLogIntegralFromNecSuf.lean` の `integral_inv_sqrt_pi_of_necSuf`・`arsinh_log_bounds_of_necSuf`）。
-`integral_inv_pow_three_half_pi` は必要十分版の特殊化として導出してある。
+`integral_inv_sqrt_pi`・`arsinh_log_bounds`・`integral_inv_pow_three_half_pi` は人手の鎖と 1 対 1 に書き、必要十分版を
+使わない（特殊化としての導出は `ClaimClosedFormLogIntegralFromNecSuf.lean` の `integral_inv_sqrt_pi_of_necSuf`・
+`arsinh_log_bounds_of_necSuf`・`integral_inv_pow_three_half_pi_of_necSuf`）。
+必要十分版 `LogDivergentIntegral` の import は、このファイルを import する `ClaimSineIntegralTwoSided.lean` の
+`sine_integral_two_sided` が `NecSuf.inv_sqrt_diff_bound` を使うので残す。
 -/
 import Ising2D.NecSuf.LogDivergentIntegral
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
@@ -276,18 +278,169 @@ theorem integral_inv_sqrt_pi_bounds {δ : ℝ} (hδ : 0 < δ) :
 
 /-- **人手証明 `three_halves_power_integral_bound`**:
 `∫_0^π dθ/(δ² + a²θ²/4)^{3/2} ≤ 2/(a δ²)`。
-必要十分版 `NecSuf.integral_inv_pow_three_half_le` の `A = a/2`, `b = π` への特殊化。 -/
+
+人手の準備・`w'`・`r'`・`G'` の鎖・`G'` の連続性・正値性の段・背理法の鎖・`1/r(π)` の鎖・積分の鎖と 1 対 1 に書く。
+3/2 乗は `def_three_halves_power` どおり `w·√w` と書く。人手が引く主張のうち `pi_is_positive`・
+`definition_of_sqrt_r_positive`・`remark_real_analysis_facts_R3_R4`・`set_and_algebra_notation` には具体版の宣言が
+無いので、証明の中の段で受ける。`π > 0` は mathlib の `Real.pi_pos`、`r(θ)² = w(θ)` は mathlib の `Real.sq_sqrt`、
+微分の公式は mathlib の `hasDerivAt_id'`・`HasDerivAt.mul`・`HasDerivAt.const_mul`・`HasDerivAt.div_const`・
+`HasDerivAt.const_add`・`HasDerivAt.sqrt`・`HasDerivAt.div`・`HasDerivAt.inv`（商 `1/x` を逆数で書く）、「微分可能な関数は連続」は
+`HasDerivAt.continuousAt`、(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、`r(θ) ≥ 0` は `Real.sqrt_nonneg`、
+順序体の積と逆数の正値性は `mul_pos`・`one_div_pos` で受ける。 -/
 theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) :
     (∫ θ in (0:ℝ)..Real.pi,
         ((δ ^ 2 + a ^ 2 * θ ^ 2 / 4) * Real.sqrt (δ ^ 2 + a ^ 2 * θ ^ 2 / 4))⁻¹)
       ≤ 2 / (a * δ ^ 2) := by
-  have h := NecSuf.integral_inv_pow_three_half_le (δ := δ) (a := a / 2) (b := Real.pi)
-    hδ (by positivity) Real.pi_pos
-  have hcongr : ∀ θ : ℝ, δ ^ 2 + ((a / 2 : ℝ) * θ) ^ 2 = δ ^ 2 + a ^ 2 * θ ^ 2 / 4 := by
-    intro θ; ring
-  simp only [hcongr] at h
-  have hrw : 1 / (a / 2 * δ ^ 2) = 2 / (a * δ ^ 2) := by
-    field_simp
-  linarith [h, hrw.le, hrw.ge]
+  -- 準備: `w(θ) := δ² + a²θ²/4`, `r(θ) := √w(θ)`, `G(θ) := θ/(δ² r(θ))`
+  set w : ℝ → ℝ := fun θ => δ ^ 2 + a ^ 2 * θ ^ 2 / 4 with hw_def
+  set r : ℝ → ℝ := fun θ => Real.sqrt (w θ) with hr_def
+  set G : ℝ → ℝ := fun θ => θ / (δ ^ 2 * r θ) with hG_def
+  have hδne : δ ≠ 0 := ne_of_gt hδ
+  -- `w(θ) ≥ δ² > 0`
+  have hw : ∀ θ : ℝ, 0 < w θ := fun θ =>
+    calc 0 < δ ^ 2 := by rw [pow_two]; exact mul_pos hδ hδ
+                                        -- `δ > 0` と正の数どうしの積
+      _ ≤ δ ^ 2 + a ^ 2 * θ ^ 2 / 4 := by
+            have := mul_nonneg (sq_nonneg a) (sq_nonneg θ); linarith
+                                        -- `a²θ²/4 ≥ 0`
+  -- `r(θ)² = w(θ)`（`definition_of_sqrt_r_positive`）
+  have hrsq : ∀ θ : ℝ, r θ ^ 2 = w θ := fun θ => Real.sq_sqrt (hw θ).le
+  -- `def_three_halves_power` と同じ理由で `r(θ) > 0`: `r(θ) ≥ 0` と `r(θ)² = w(θ) > 0`
+  have hrne : ∀ θ : ℝ, r θ ≠ 0 := by
+    intro θ hr0
+    have h := hrsq θ
+    rw [hr0] at h
+    linarith [hw θ]                     -- `0² = 0 < w(θ)` に反する
+  have hrpos : ∀ θ : ℝ, 0 < r θ := fun θ =>
+    lt_of_le_of_ne (Real.sqrt_nonneg _) (hrne θ).symm
+  -- `w'(θ) = a²θ/2`（微分の公式の和・定数倍・積と、定数関数の導関数 0、恒等関数の導関数 1）
+  have hw' : ∀ θ : ℝ, HasDerivAt w (a ^ 2 * θ / 2) θ := by
+    intro θ
+    have hmul : HasDerivAt (fun t : ℝ => t * t) (1 * θ + θ * 1) θ :=
+      (hasDerivAt_id' θ).mul (hasDerivAt_id' θ)
+    have h : HasDerivAt (fun t : ℝ => δ ^ 2 + a ^ 2 * (t * t) / 4) (a ^ 2 * (1 * θ + θ * 1) / 4) θ :=
+      ((hmul.const_mul (a ^ 2)).div_const 4).const_add (δ ^ 2)
+    have e : (fun t : ℝ => δ ^ 2 + a ^ 2 * (t * t) / 4) = w := by
+      funext t; show _ = δ ^ 2 + a ^ 2 * t ^ 2 / 4; rw [pow_two t]
+    have hv : a ^ 2 * (1 * θ + θ * 1) / 4 = a ^ 2 * θ / 2 := by ring
+                                        -- ℝ の四則
+    rw [e, hv] at h
+    exact h
+  -- `r'(θ) = a²θ/(4 r(θ))`
+  have hr' : ∀ θ : ℝ, HasDerivAt r (a ^ 2 * θ / (4 * r θ)) θ := by
+    intro θ
+    -- 微分の公式の平方根と合成（`w(θ) > 0`）
+    have h : HasDerivAt r (a ^ 2 * θ / 2 / (2 * Real.sqrt (w θ))) θ :=
+      (hw' θ).sqrt (ne_of_gt (hw θ))
+    have hval : a ^ 2 * θ / 2 / (2 * Real.sqrt (w θ)) = a ^ 2 * θ / (4 * r θ) :=
+      calc a ^ 2 * θ / 2 / (2 * Real.sqrt (w θ))
+          = 1 / (2 * r θ) * (a ^ 2 * θ / 2) := by
+            ring
+                                        -- `r` の置き方と `w'(θ) = a²θ/2`
+        _ = a ^ 2 * θ / (4 * r θ) := by
+            field_simp; ring            -- ℝ の四則
+    rw [hval] at h
+    exact h
+  -- `G'(θ) = 1/w(θ)^{3/2}`
+  have hG' : ∀ θ : ℝ, HasDerivAt G (w θ * Real.sqrt (w θ))⁻¹ θ := by
+    intro θ
+    have hdne : δ ^ 2 * r θ ≠ 0 := mul_ne_zero (pow_ne_zero 2 hδne) (hrne θ)
+    -- 微分の公式の商と定数倍（`δ² r(θ) ≠ 0`）と `r'(θ) = a²θ/(4r(θ))`。`HasDerivAt` は導関数の値と組で出るので
+    -- 本文の `G'` の鎖の 1・2 行目は一段になる
+    have h : HasDerivAt G
+        ((1 * (δ ^ 2 * r θ) - θ * (δ ^ 2 * (a ^ 2 * θ / (4 * r θ)))) / (δ ^ 2 * r θ) ^ 2) θ :=
+      (hasDerivAt_id' θ).div ((hr' θ).const_mul (δ ^ 2)) hdne
+    have hr0 := hrne θ
+    have hval : (1 * (δ ^ 2 * r θ) - θ * (δ ^ 2 * (a ^ 2 * θ / (4 * r θ)))) / (δ ^ 2 * r θ) ^ 2
+        = (w θ * Real.sqrt (w θ))⁻¹ :=
+      calc (1 * (δ ^ 2 * r θ) - θ * (δ ^ 2 * (a ^ 2 * θ / (4 * r θ)))) / (δ ^ 2 * r θ) ^ 2
+          = (δ ^ 2 * r θ - δ ^ 2 * (a ^ 2 * θ ^ 2 / (4 * r θ))) / (δ ^ 4 * r θ ^ 2) := by
+            ring                        -- ℝ の四則
+        _ = (δ ^ 2 * r θ ^ 2 - δ ^ 2 * (a ^ 2 * θ ^ 2 / 4)) / (δ ^ 4 * r θ ^ 3) := by
+            field_simp                  -- 分子と分母に `r(θ)` を掛ける
+        _ = δ ^ 2 * (r θ ^ 2 - a ^ 2 * θ ^ 2 / 4) / (δ ^ 4 * r θ ^ 3) := by
+            rw [mul_sub]                -- 分配律
+        _ = δ ^ 2 * δ ^ 2 / (δ ^ 4 * r θ ^ 3) := by
+            rw [hrsq θ, hw_def]; ring   -- `r(θ)² = w(θ) = δ² + a²θ²/4`
+        _ = 1 / (r θ ^ 2 * r θ) := by
+            field_simp                  -- 約分
+        _ = 1 / (w θ * Real.sqrt (w θ)) := by
+            rw [hrsq θ]                 -- `r(θ)² = w(θ)` と `r` の置き方
+        _ = (w θ * Real.sqrt (w θ))⁻¹ := one_div _
+                                        -- `def_three_halves_power`
+    rw [hval] at h
+    exact h
+  -- `G'` は分母が 0 でない微分可能な関数の商なので微分可能、したがって連続（微分の公式）
+  have hcont : ContinuousOn (fun θ : ℝ => (w θ * Real.sqrt (w θ))⁻¹) (Set.uIcc 0 Real.pi) := by
+    intro θ _
+    exact (((hw' θ).mul (hr' θ)).inv (mul_ne_zero (ne_of_gt (hw θ)) (hrne θ))).continuousAt.continuousWithinAt
+                                        -- 積と商（`1/x` を逆数で書く）の微分の公式と「微分可能な関数は連続」
+  -- 正値性の段
+  have hpi : 0 < Real.pi := Real.pi_pos -- `pi_is_positive`
+  have hapi : 0 < a * Real.pi := mul_pos ha hpi
+                                        -- 正の数どうしの積は正（`set_and_algebra_notation`）
+  have hapine : a * Real.pi ≠ 0 := ne_of_gt hapi
+  have hapi2 : 0 < a * Real.pi / 2 := by
+    have h : 0 < a * Real.pi * (1 / 2) := mul_pos hapi (by norm_num)
+                                        -- `0 < 1/2`（有理数の大小比較）と正の数どうしの積
+    rwa [mul_one_div] at h
+  have hapir : 0 < a * Real.pi * r Real.pi := mul_pos hapi (hrpos Real.pi)
+  have hinvapir : 0 < 1 / (a * Real.pi * r Real.pi) := one_div_pos.2 hapir
+                                        -- 正の数の逆数は正
+  have h2apir : 0 < 2 / (a * Real.pi * r Real.pi) := by
+    have h : 0 < 2 * (1 / (a * Real.pi * r Real.pi)) := mul_pos (by norm_num) hinvapir
+    rwa [mul_one_div] at h
+  have hδ2 : 0 < δ ^ 2 := by
+    have h : 0 < δ * δ := mul_pos hδ hδ
+    rwa [← pow_two] at h
+  have hinvδ2 : 0 < 1 / δ ^ 2 := one_div_pos.2 hδ2
+  have hpiδ2 : 0 < Real.pi / δ ^ 2 := by
+    have h : 0 < Real.pi * (1 / δ ^ 2) := mul_pos hpi hinvδ2
+    rwa [mul_one_div] at h
+  -- 背理法: `r(π) ≤ aπ/2` なら `r(π)² < r(π)²`
+  have hrgt : a * Real.pi / 2 < r Real.pi := by
+    by_contra hle
+    have hle' : r Real.pi ≤ a * Real.pi / 2 := not_lt.1 hle
+    have hlt : r Real.pi ^ 2 < r Real.pi ^ 2 :=
+      calc r Real.pi ^ 2 = r Real.pi * r Real.pi := pow_two _
+        _ ≤ a * Real.pi / 2 * r Real.pi :=
+              mul_le_mul_of_nonneg_right hle' (hrpos Real.pi).le
+                                        -- 仮定の両辺に `r(π) > 0` を掛ける
+        _ ≤ a * Real.pi / 2 * (a * Real.pi / 2) :=
+              mul_le_mul_of_nonneg_left hle' hapi2.le
+                                        -- 仮定の両辺に上の `aπ/2 > 0` を掛ける
+        _ = a ^ 2 * Real.pi ^ 2 / 4 := by ring
+        _ < δ ^ 2 + a ^ 2 * Real.pi ^ 2 / 4 := by linarith
+                                        -- 上の `δ² > 0`
+        _ = r Real.pi ^ 2 := (hrsq Real.pi).symm
+                                        -- `r(π)² = w(π)`
+    exact lt_irrefl _ hlt
+  -- `1/r(π) ≤ 2/(aπ)`
+  have hrπne : r Real.pi ≠ 0 := hrne Real.pi
+  have hinvr : 1 / r Real.pi ≤ 2 / (a * Real.pi) :=
+    calc 1 / r Real.pi
+        = a * Real.pi / 2 * (2 / (a * Real.pi * r Real.pi)) := by
+          field_simp                    -- ℝ の四則。上の `aπ ≠ 0` と `r(π) > 0`
+      _ ≤ r Real.pi * (2 / (a * Real.pi * r Real.pi)) :=
+          mul_le_mul_of_nonneg_right hrgt.le h2apir.le
+                                        -- `aπ/2 < r(π)` の両辺に上の `2/(aπ r(π)) > 0` を掛ける
+      _ = 2 / (a * Real.pi) := by
+          field_simp                    -- 約分
+  calc (∫ θ in (0:ℝ)..Real.pi,
+          ((δ ^ 2 + a ^ 2 * θ ^ 2 / 4) * Real.sqrt (δ ^ 2 + a ^ 2 * θ ^ 2 / 4))⁻¹)
+      = ∫ θ in (0:ℝ)..Real.pi, (w θ * Real.sqrt (w θ))⁻¹ := rfl
+                                        -- `w` の置き方
+    _ = G Real.pi - G 0 :=
+          intervalIntegral.integral_eq_sub_of_hasDerivAt (fun θ _ => hG' θ)
+            hcont.intervalIntegrable    -- 本文の `∫G'` への書き換え（`G'(θ) = 1/w(θ)^{3/2}`）と (R4) を `G` に
+    _ = Real.pi / (δ ^ 2 * r Real.pi) - 0 / (δ ^ 2 * r 0) := rfl
+                                        -- `G` の置き方
+    _ = Real.pi / δ ^ 2 * (1 / r Real.pi) := by
+          rw [zero_div, sub_zero]; ring -- ℝ の四則
+    _ ≤ Real.pi / δ ^ 2 * (2 / (a * Real.pi)) :=
+          mul_le_mul_of_nonneg_left hinvr hpiδ2.le
+                                        -- `1/r(π) ≤ 2/(aπ)` の両辺に上の `π/δ² > 0` を掛ける
+    _ = 2 / (a * δ ^ 2) := by
+          field_simp                    -- 約分
 
 end Ising2D

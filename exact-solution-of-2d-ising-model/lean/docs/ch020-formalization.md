@@ -162,7 +162,8 @@
 | `Ising2D.arsinh_log_bounds` | **`log(2y) ≤ arcsinh y ≤ log(2y)+1/(4y²)`**（人手の準備・下からの評価・上からの評価の鎖を証明の中の段で 1 対 1 に書き、必要十分版を使わない） | `arcsinh_two_sided_log_bounds` |
 | `Ising2D.arsinh_log_bounds_of_necSuf`（`ClaimClosedFormLogIntegralFromNecSuf.lean`） | `arsinh_log_bounds` を `NecSuf.log_two_mul_le_arsinh`・`NecSuf.arsinh_le_log_two_mul_add` の組として導出した版 | `arcsinh_two_sided_log_bounds` |
 | `Ising2D.integral_inv_sqrt_pi_bounds` | **`2log(π/δ) ≤ ∫ ≤ 2log(π/δ)+2δ²/π²`** | `log_integral_two_sided_bounds` |
-| `Ising2D.integral_inv_pow_three_half_pi` | `∫_0^π dθ/(δ²+θ²/4)^{3/2}` の評価 `≤ 2/(aδ²)` | `three_halves_power_integral_bound` |
+| `Ising2D.integral_inv_pow_three_half_pi` | **`∫_0^π dθ/(δ²+a²θ²/4)^{3/2} ≤ 2/(aδ²)`**（人手の準備・`w'`・`r'`・`G'` の鎖・背理法・`1/r(π)` の鎖・積分の鎖を証明の中の段で 1 対 1 に書き、必要十分版を使わない） | `three_halves_power_integral_bound` |
+| `Ising2D.integral_inv_pow_three_half_pi_of_necSuf`（`ClaimClosedFormLogIntegralFromNecSuf.lean`） | `integral_inv_pow_three_half_pi` を `NecSuf.integral_inv_pow_three_half_le` の `A = a/2`, `b = π` への特殊化として導出した版 | `three_halves_power_integral_bound` |
 
 ### 1.7 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSineIntegralTwoSided.lean`（ラベル `sine_integral_two_sided`）
 
