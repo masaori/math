@@ -8,7 +8,8 @@
 | --- | --- |
 | Step 4 の一つ目の鎖（7 行）`(exp(κD_0)(εV_2))_{ord(s),ord(s)} = ⋯ = (exp(-K_2M_col)exp(K_1E(s)))_ℂ` | `matExp_openChainD0_mul_epsilon_mul_V2_apply_self` の 7 段 |
 | Step 4 の二つ目の鎖（7 行）`(exp(κD_0)(GV_2))_{ord(s),ord(s)} = ⋯ = (exp(K_2M_col)(s(M_col)s(1)exp(K_1E(s))))_ℂ` | `matExp_openChainD0_mul_boundaryG_mul_V2_apply_self` の 7 段 |
-| Step 5 の `tr(X) = ∑_{s∈𝔐} X_{ord(s),ord(s)}`（`def_trace` と準備の和の定め方） | `trace_eq_sum_configBasisIso` |
+| Step 5 の `tr(X) = ∑_{s∈𝔐} X_{ord(s),ord(s)}`（`def_trace` と `def_finite_sum_of_complex_numbers_over_row_configurations`） | `trace_eq_sum_configBasisIso` |
+| Step 5 の二つの鎖の 3 行目の根拠 `real_inclusion_preserves_finite_sum` を 𝔐 の上の和へ当てたもの | `real_inclusion_of_finite_sum_over_spinConf` |
 | Step 5 の二つの鎖の 4 行目の根拠 `finite_sum_of_real_scalar_multiples` を 𝔐 の上の和へ当てたもの | `finite_sum_over_spinConf_of_real_scalar_multiples` |
 | Step 5 の一つ目のトレースの鎖（4 行）`tr(exp(κD_0)(εV_2)) = ⋯ = (exp(-K_2M_col)S_cosh)_ℂ` | `trace_matExp_openChainD0_mul_epsilon_mul_V2` の 4 段 |
 | Step 5 の二つ目のトレースの鎖（4 行）`tr(exp(κD_0)(GV_2)) = ⋯ = (exp(K_2M_col)S_sinh)_ℂ` | `trace_matExp_openChainD0_mul_boundaryG_mul_V2` の 4 段 |
@@ -21,8 +22,9 @@
 | 主張 `tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} ∈ ℝ_{>0}` | `trace_of_epsilon_V_plus` |
 
 `S_cosh`・`S_sinh` は Lean では名前を付けず、和 `∑ s : SpinConf M, …` をそのまま書く。
-二つのトレースの鎖の 3 行目 `real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype` を引く
-（添字 `SpinConf M` は空でない）。Lean の具体版が無い根拠は、既存の慣行どおり mathlib を引く。組み立ての鎖の 3 行目 `mat_mult_associative` は `Matrix.mul_assoc` である。組み立ての鎖のほかの根拠は具体版で、分配と括り出しは `TensorPow M` での系
+二つのトレースの鎖の 3 行目・4 行目は、𝔐 の上の和を定義の一致の補題
+（`DefinitionFiniteSumOverRowConfigurations.lean`）で `{1,…,2^{M_col}}` の上の和へ開き、具体版 `real_inclusion_of_finite_sum`・
+`finite_sum_of_real_scalar_multiples` を当てる。Lean の具体版が無い根拠は、既存の慣行どおり mathlib を引く。組み立ての鎖の 3 行目 `mat_mult_associative` は `Matrix.mul_assoc` である。組み立ての鎖のほかの根拠は具体版で、分配と括り出しは `TensorPow M` での系
 `add_mul_matrix_tensorPow`・`mul_add_matrix_tensorPow`・`smul_mul_matrix_tensorPow`・`mul_smul_matrix_tensorPow`、
 `trace_basic_properties` (1) は `trace_linear`、`real_inclusion_preserves_product`・`real_inclusion_preserves_sum` は
 `real_inclusion_mul`・`real_inclusion_add` である。
@@ -42,6 +44,7 @@
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusMatrixEntries
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionFiniteSumOverRowConfigurations
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusReduction
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
@@ -57,29 +60,43 @@ variable {M : ℕ}
 
 /-! ## Step 5 の準備: トレースと 𝔐 の上の和 -/
 
-/-- 人手 Step 5 の `tr(X) = ∑_{s∈𝔐} X_{ord(s),ord(s)}`（`def_trace` と準備の和の定め方）。
+/-- 人手 Step 5 の `tr(X) = ∑_{s∈𝔐} X_{ord(s),ord(s)}`（`def_trace` と `def_finite_sum_of_complex_numbers_over_row_configurations`）。
 人手の番号 `ord(s)` は Lean の添字 `configBasisIso M s`（`ι(s)`）に当たる（`config_numbering_equals_kronecker_numbering`、
-`ord = ν∘ι`）。`def_trace` の対角成分の和を `ι` で 𝔐 の上の和へ足し直す。 -/
+`ord = ν∘ι`）。`def_trace` の対角成分の和を `ι` で 𝔐 の上の和へ足し直す。Lean の行列の添字は `Conf M` なので、
+`def_trace` の和は `Conf M` の上の和である。 -/
 theorem trace_eq_sum_configBasisIso (X : TensorPow M) :
     X.trace = ∑ s : SpinConf M, X (configBasisIso M s) (configBasisIso M s) := by
   rw [trace_eq_sum_diag]
   exact ((configBasisIso M).sum_comp (fun I => X I I)).symm
 
 /-- 人手 Step 5 の二つの鎖の 4 行目の根拠 `finite_sum_of_real_scalar_multiples` を、𝔐 の上の和
-（準備の和の定め方 `∑_{s∈𝔐} a(s) := ∑_{k=1}^{2^{M_col}} a(ord^{-1}(k))`）へ当てたもの:
+（`def_finite_sum_of_real_numbers_over_row_configurations` の `∑_{s∈𝔐} a(s) := ∑_{k=1}^{2^{M_col}} a(ord^{-1}(k))`）へ当てたもの:
 `∑_{s∈𝔐} c a(s) = c ∑_{s∈𝔐} a(s)`。
-Lean の `∑ s : SpinConf M` は番号付けに依らない有限集合の上の和なので、番号 `Fin (2^M)` への付け替え
-`(configBasisIso M).trans finFunctionFinEquiv`（`toFinPowAlgEquiv M` と同じ番号付け）で `Fin` の和へ移して
-具体版 `finite_sum_of_real_scalar_multiples` を当て、同じ付け替えで戻す（付け替えの 2 段は人手の行ではない）。
-この付け替えの番号（`∑_m I(m)·2^m`）は人手の `ord` と別の全単射だが、`∑ s : SpinConf M` は番号付けに依らない和なので、
-結論は付け替えの選び方に依らない（`ClaimTraceEpsilonVPlusReduction.lean` の `toFinPowAlgEquiv M` と同じ扱い）。 -/
+定義の一致の補題 `finset_sum_spinConf_real_eq_finite_sum_over_row_configurations` で両辺の 𝔐 の上の和を
+`ord^{-1}`（Lean の `σ`）による `{1,…,2^{M_col}}` の上の和へ開き、具体版 `finite_sum_of_real_scalar_multiples` を当て、同じ補題で閉じる。 -/
 theorem finite_sum_over_spinConf_of_real_scalar_multiples (c : ℝ) (a : SpinConf M → ℝ) :
-    ∑ s : SpinConf M, c * a s = c * ∑ s : SpinConf M, a s :=
-  let e : SpinConf M ≃ Fin (2 ^ M) := (configBasisIso M).trans finFunctionFinEquiv
+    ∑ s : SpinConf M, c * a s = c * ∑ s : SpinConf M, a s := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_row_configuration_numbering M  -- `def_inverse_of_row_configuration_numbering`
+  have hsum := finset_sum_spinConf_real_eq_finite_sum_over_row_configurations M
   calc ∑ s : SpinConf M, c * a s
-      = ∑ k : Fin (2 ^ M), c * a (e.symm k) := (e.symm.sum_comp (fun s => c * a s)).symm
-    _ = c * ∑ k : Fin (2 ^ M), a (e.symm k) := finite_sum_of_real_scalar_multiples _ c _
-    _ = c * ∑ s : SpinConf M, a s := by rw [e.symm.sum_comp a]
+      = ∑ k : Fin n, c * a (σ k) := hsum n hord σ hσ (fun s => c * a s)  -- `def_finite_sum_of_real_numbers_over_row_configurations`
+    _ = c * ∑ k : Fin n, a (σ k) := finite_sum_of_real_scalar_multiples n c _  -- `finite_sum_of_real_scalar_multiples`
+    _ = c * ∑ s : SpinConf M, a s := by rw [hsum n hord σ hσ a]  -- `def_finite_sum_of_real_numbers_over_row_configurations`
+
+/-- 人手 Step 5 の二つの鎖の 3 行目の根拠 `real_inclusion_preserves_finite_sum` を、𝔐 の上の和
+（`def_finite_sum_of_complex_numbers_over_row_configurations`・`def_finite_sum_of_real_numbers_over_row_configurations`）へ当てたもの:
+`∑_{s∈𝔐} (r(s))_ℂ = (∑_{s∈𝔐} r(s))_ℂ`。
+二つの定義の一致の補題で両辺の 𝔐 の上の和を同じ `ord^{-1}`（Lean の `σ`）による `{1,…,2^{M_col}}` の上の和へ開き、
+具体版 `real_inclusion_of_finite_sum` を当てる。 -/
+theorem real_inclusion_of_finite_sum_over_spinConf (r : SpinConf M → ℝ) :
+    ∑ s : SpinConf M, ((r s : ℝ) : ℂ) = ((∑ s : SpinConf M, r s : ℝ) : ℂ) := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_row_configuration_numbering M  -- `def_inverse_of_row_configuration_numbering`
+  have hsumR := finset_sum_spinConf_real_eq_finite_sum_over_row_configurations M
+  have hsumC := finset_sum_spinConf_complex_eq_finite_sum_over_row_configurations M n hord σ hσ
+  calc ∑ s : SpinConf M, ((r s : ℝ) : ℂ)
+      = ∑ k : Fin n, ((r (σ k) : ℝ) : ℂ) := hsumC (fun s => ((r s : ℝ) : ℂ))  -- `def_finite_sum_of_complex_numbers_over_row_configurations`
+    _ = ((∑ k : Fin n, r (σ k) : ℝ) : ℂ) := real_inclusion_of_finite_sum n _  -- `real_inclusion_preserves_finite_sum`
+    _ = ((∑ s : SpinConf M, r s : ℝ) : ℂ) := by rw [hsumR n hord σ hσ r]  -- `def_finite_sum_of_real_numbers_over_row_configurations`
 
 /-! ## Step 4 -/
 
@@ -161,13 +178,13 @@ theorem trace_matExp_openChainD0_mul_epsilon_mul_V2 (hM : 2 ≤ M) (K1 K2 : ℝ)
   calc (matExp ((K1 : ℂ) • openChainD0 M) * (epsilon M * V2 M K2)).trace
       = ∑ s : SpinConf M, (matExp ((K1 : ℂ) • openChainD0 M) * (epsilon M * V2 M K2))
           (configBasisIso M s) (configBasisIso M s) :=
-        trace_eq_sum_configBasisIso _                              -- 人手 1: `def_trace` と準備の和の定め方
+        trace_eq_sum_configBasisIso _                              -- 人手 1: `def_trace` と `def_finite_sum_of_complex_numbers_over_row_configurations`
     _ = ∑ s : SpinConf M, ((Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun s _ =>
           matExp_openChainD0_mul_epsilon_mul_V2_apply_self hM K1 K2 s  -- 人手 2: Step 4
     _ = ((∑ s : SpinConf M, Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
         -- 人手 3: `real_inclusion_preserves_finite_sum`
-        real_inclusion_of_finite_sum_fintype _
+        real_inclusion_of_finite_sum_over_spinConf _
     _ = ((Real.exp (-(K2 * M)) * ∑ s : SpinConf M, Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
         -- 人手 4: `finite_sum_of_real_scalar_multiples`
         congrArg (fun x : ℝ => (x : ℂ)) (finite_sum_over_spinConf_of_real_scalar_multiples _ _)
@@ -181,7 +198,7 @@ theorem trace_matExp_openChainD0_mul_boundaryG_mul_V2 (hM2 : 2 ≤ M) (hM : M �
   calc (matExp ((K1 : ℂ) • openChainD0 M) * (boundaryG M hM * V2 M K2)).trace
       = ∑ s : SpinConf M, (matExp ((K1 : ℂ) • openChainD0 M) * (boundaryG M hM * V2 M K2))
           (configBasisIso M s) (configBasisIso M s) :=
-        trace_eq_sum_configBasisIso _                              -- 人手 1: `def_trace` と準備の和の定め方
+        trace_eq_sum_configBasisIso _                              -- 人手 1: `def_trace` と `def_finite_sum_of_complex_numbers_over_row_configurations`
     _ = ∑ s : SpinConf M, ((Real.exp (K2 * M)
           * ((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun s _ =>
@@ -189,7 +206,7 @@ theorem trace_matExp_openChainD0_mul_boundaryG_mul_V2 (hM2 : 2 ≤ M) (hM : M �
     _ = ((∑ s : SpinConf M, Real.exp (K2 * M)
           * ((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ) :=
         -- 人手 3: `real_inclusion_preserves_finite_sum`
-        real_inclusion_of_finite_sum_fintype _
+        real_inclusion_of_finite_sum_over_spinConf _
     _ = ((Real.exp (K2 * M) * ∑ s : SpinConf M,
           (s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
         -- 人手 4: `finite_sum_of_real_scalar_multiples`

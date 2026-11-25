@@ -294,8 +294,6 @@ Ising2D.c_plus_value_c_sandwich_and_double_limit_of_log_Z
 Ising2D.card_conf
 Ising2D.card_eps_index
 Ising2D.card_le_of_finset
-Ising2D.card_spinConf
-Ising2D.card_spinVal
 Ising2D.centralizer_is_scalar_abstract
 Ising2D.charPoly_factor_thetaTilde
 Ising2D.checkBigLambda
@@ -531,7 +529,6 @@ Ising2D.gammaK
 Ising2D.gammaK_neg
 Ising2D.gammaK_nonneg
 Ising2D.gammaTilde_nonneg
-Ising2D.geom_sum_two
 Ising2D.gval_empty_eq_neg_half_sum
 Ising2D.gval_empty_le_gval
 Ising2D.gval_eq_sum_fin_real
@@ -820,11 +817,6 @@ Ising2D.real_neg_lt_neg_of_lt
 Ising2D.real_zero_divided_is_zero
 Ising2D.riemann_sum_to_integral_error
 Ising2D.riemann_sum_to_integral_indep_delta
-Ising2D.rowConfigOrd
-Ising2D.rowConfigOrd_injective
-Ising2D.rowConfigOrd_mem_Icc
-Ising2D.rowConfigOrd_sub_pos_of_first_diff
-Ising2D.row_configuration_numbering_bijective
 Ising2D.scalar_identity_commutes
 Ising2D.second_derivative_log_divergence
 Ising2D.second_derivative_log_divergence_pos
@@ -875,12 +867,8 @@ Ising2D.smul_sub_smul_matrix_apply
 Ising2D.specific_heat_log_divergence
 Ising2D.specific_heat_log_divergence_dist
 Ising2D.specific_heat_ratio_tendsto
-Ising2D.spinBit
 Ising2D.spinBit_eq
 Ising2D.spinBit_eq_zero_iff
-Ising2D.spinBit_le_one
-Ising2D.spinBit_nonneg
-Ising2D.spinVal_eq_of_spinBit_eq
 Ising2D.sq_I_absGamma2
 Ising2D.sq_absGamma2
 Ising2D.sqrt_Qfun_pos
@@ -900,13 +888,11 @@ Ising2D.suffixLetterIndicator_update_of_lt
 Ising2D.sum_Icc_one_gammaFn_tagPoint_eq_sum_fin
 Ising2D.sum_checkIdx_eq_sum_fin_real
 Ising2D.sum_checkPhase
-Ising2D.sum_two_pow_rev
 Ising2D.sum_zyStep6Coeff_smul_pauliKroneckerFamily
 Ising2D.symTransfer_entry_pos
 Ising2D.symTransfer_isSymm
 Ising2D.symTransfer_posDef
 Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form
-Ising2D.tail_sum_two_pow
 Ising2D.tendsto_log_inv_dist_atTop
 Ising2D.tendsto_modulus_gamma
 Ising2D.tensorPowAlgEquiv

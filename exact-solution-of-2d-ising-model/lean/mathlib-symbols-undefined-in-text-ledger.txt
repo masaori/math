@@ -4921,8 +4921,6 @@ Ising2D.finite_sum_of_real_sums_fintype	Fintype
 Ising2D.finite_sum_of_zero_matrices	Finset.sum@Fin,Matrix[Complex]@Matrix.addCommMonoid
 Ising2D.finite_sum_of_zero_matrices	Matrix
 Ising2D.finite_sum_of_zero_matrices	OfNat.ofNat@Matrix[Complex],0@Zero.toOfNat0
-Ising2D.finite_sum_over_spinConf_of_real_scalar_multiples	Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid
-Ising2D.finite_sum_over_spinConf_of_real_scalar_multiples	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.finite_sum_smul_of_matrices	Finset.sum@Fin,Matrix[Complex]@Matrix.addCommMonoid
 Ising2D.finite_sum_smul_of_matrices	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.finite_sum_smul_of_matrices	Matrix
@@ -6862,23 +6860,15 @@ Ising2D.openChainPhiInv_succ	Prod.snd
 Ising2D.openChainPhiInv_zero	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.openChainPhiInv_zero	Prod
 Ising2D.openChainPhiInv_zero	Prod.fst
-Ising2D.open_chain_endpoint_product_sum	Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid
-Ising2D.open_chain_endpoint_product_sum	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.open_chain_endpoint_product_sum	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.open_chain_endpoint_product_sum	Real.exp
 Ising2D.open_chain_endpoint_product_sum	Real.sinh
 Ising2D.open_chain_endpoint_product_sum	Subtype.val
-Ising2D.open_chain_endpoint_product_sum_pos	Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid
-Ising2D.open_chain_endpoint_product_sum_pos	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.open_chain_endpoint_product_sum_pos	Real.exp
 Ising2D.open_chain_endpoint_product_sum_pos	Subtype.val
-Ising2D.open_chain_partition_sum	Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid
-Ising2D.open_chain_partition_sum	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.open_chain_partition_sum	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.open_chain_partition_sum	Real.cosh
 Ising2D.open_chain_partition_sum	Real.exp
-Ising2D.open_chain_partition_sum_pos	Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid
-Ising2D.open_chain_partition_sum_pos	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.open_chain_partition_sum_pos	Real.exp
 Ising2D.open_product_pow	DecidableEq
 Ising2D.open_product_pow	Fintype
@@ -8453,8 +8443,6 @@ Ising2D.spinMul	Subtype.mk
 Ising2D.spinMul	Subtype.val
 Ising2D.spinOfIdx	Subtype.mk
 Ising2D.spinVal_mul_self	Subtype.val
-Ising2D.spin_sums_combination_eq_closed_form	Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid
-Ising2D.spin_sums_combination_eq_closed_form	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.spin_sums_combination_eq_closed_form	HPow.hPow@Real,Nat,Real@NPow.toPow
 Ising2D.spin_sums_combination_eq_closed_form	Nat.cast@Real@Real.instNatCast
 Ising2D.spin_sums_combination_eq_closed_form	Real.cosh
@@ -8867,8 +8855,6 @@ Ising2D.trace_epsilon_VPlusOfTransfer_closed_form	Matrix.trace@Ising2D.Conf,Comp
 Ising2D.trace_epsilon_VPlusOfTransfer_closed_form	Real.cosh
 Ising2D.trace_epsilon_VPlusOfTransfer_closed_form	Real.exp
 Ising2D.trace_epsilon_VPlusOfTransfer_closed_form	Real.sinh
-Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums	Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid
-Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums	Matrix
 Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid
@@ -8887,8 +8873,6 @@ Ising2D.trace_epsilon_vPlusDataOf_pos	Matrix
 Ising2D.trace_epsilon_vPlusDataOf_pos	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid
 Ising2D.trace_eq_sum_configBasisIso	DFunLike.coe@Equiv,Ising2D.SpinConf,fun@EquivLike.toFunLike
 Ising2D.trace_eq_sum_configBasisIso	Equiv
-Ising2D.trace_eq_sum_configBasisIso	Finset.sum@Ising2D.SpinConf,Complex@Complex.instAddCommMonoid
-Ising2D.trace_eq_sum_configBasisIso	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.trace_eq_sum_configBasisIso	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid
 Ising2D.trace_eq_sum_diag	DecidableEq
 Ising2D.trace_eq_sum_diag	Finset.sum@?,Complex@Complex.instAddCommMonoid
@@ -8909,8 +8893,6 @@ Ising2D.trace_linear	HAdd.hAdd@Matrix[Complex],Matrix[Complex],Matrix[Complex]@M
 Ising2D.trace_linear	HSMul.hSMul@Complex,Matrix[Complex],Matrix[Complex]@Matrix.smul
 Ising2D.trace_linear	Matrix
 Ising2D.trace_linear	Matrix.trace@?,Complex@?,Complex.instAddCommMonoid
-Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2	Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid
-Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2	HMul.hMul@Ising2D.TensorPow,Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul
@@ -8919,8 +8901,6 @@ Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2	Matrix.trace@Ising2D.Conf,
 Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2	Nat.cast@Real@Real.instNatCast
 Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2	Real.exp
 Ising2D.trace_matExp_openChainD0_mul_boundaryG_mul_V2	Subtype.val
-Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2	Finset.sum@Ising2D.SpinConf,Real@Real.instAddCommMonoid
-Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2	Finset.univ@Ising2D.SpinConf@Pi.instFintype
 Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2	HMul.hMul@Ising2D.TensorPow,Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.trace_matExp_openChainD0_mul_epsilon_mul_V2	HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul

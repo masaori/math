@@ -3865,24 +3865,20 @@ c+c
         " を ",
         math(String.raw`(-s)(m) := -s(m)`),
         " で定める。",
-        ref("row_configuration_numbering_bijective"),
-        " より ",
-        math(String.raw`\mathrm{ord} : \mathfrak{M} \to \{1,\dots,2^{M_{\mathrm{col}}}\}`),
-        " は全単射なので、",
+        math(String.raw`\mathfrak{M}`),
+        " の上の和は、",
         math(String.raw`a : \mathfrak{M} \to \mathbb{C}`),
-        " について ",
-        math(String.raw`\sum_{s\in\mathfrak{M}} a(s) := \sum_{k=1}^{2^{M_{\mathrm{col}}}} a\bigl(\mathrm{ord}^{-1}(k)\bigr)`),
-        "（",
-        ref("def_finite_sum_of_complex_numbers"),
-        "）と定め、",
+        " については ",
+        ref("def_finite_sum_of_complex_numbers_over_row_configurations"),
+        "、",
         math(String.raw`a : \mathfrak{M} \to \mathbb{R}`),
-        " についても同じ式で ",
-        ref("def_finite_sum_of_real_numbers"),
-        " の和を定める（",
+        " については ",
+        ref("def_finite_sum_of_real_numbers_over_row_configurations"),
+        " の和である（",
         ref("open_chain_partition_sum"),
         "・",
         ref("open_chain_endpoint_product_sum"),
-        " の左辺の和もこの和である）。",
+        " の左辺の和も後者の和である）。",
         ref("V1_plus_exponential_representation"),
         " の右辺の ",
         math(String.raw`iK_1H_1^{(+)}`),
@@ -4437,7 +4433,9 @@ V_1^{(+)}
         math(String.raw`S_{\sinh} := \sum_{s\in\mathfrak{M}}s(M_{\mathrm{col}})s(1)\exp\bigl(K_1E(s)\bigr) \in \mathbb{R}`),
         " とおく。",
         ref("def_trace"),
-        " と準備の和の定め方より ",
+        " と ",
+        ref("def_finite_sum_of_complex_numbers_over_row_configurations"),
+        " より ",
         math(String.raw`\mathrm{tr}(X) = \sum_{s\in\mathfrak{M}}X_{\mathrm{ord}(s),\mathrm{ord}(s)}`),
         " である。",
       ]),
@@ -4445,22 +4443,22 @@ V_1^{(+)}
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\exp(\kappa D_0)(\varepsilon V_2)\right)
 &= \sum_{s\in\mathfrak{M}}\bigl(\exp(\kappa D_0)(\varepsilon V_2)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}
-&&(\because \blkref{def_trace}\ \text{と準備の和の定め方}) \\
+&&(\because \blkref{def_trace}\ \text{と}\ \blkref{def_finite_sum_of_complex_numbers_over_row_configurations}) \\
 &= \sum_{s\in\mathfrak{M}}\Bigl(\exp(-K_2M_{\mathrm{col}})\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}
 &&(\because \text{Step 4}) \\
 &= \Bigl(\sum_{s\in\mathfrak{M}}\exp(-K_2M_{\mathrm{col}})\exp\bigl(K_1E(s)\bigr)\Bigr)_{\mathbb{C}}
-&&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
+&&(\because \blkref{def_finite_sum_of_complex_numbers_over_row_configurations}\ \text{と}\ \blkref{def_finite_sum_of_real_numbers_over_row_configurations}\ \text{で開いた和に}\ \blkref{real_inclusion_preserves_finite_sum}) \\
 &= \bigl(\exp(-K_2M_{\mathrm{col}})\,S_{\cosh}\bigr)_{\mathbb{C}}
-&&(\because \blkref{finite_sum_of_real_scalar_multiples}) \\[4pt]
+&&(\because \blkref{def_finite_sum_of_real_numbers_over_row_configurations}\ \text{で開いた和に}\ \blkref{finite_sum_of_real_scalar_multiples}) \\[4pt]
 \mathrm{tr}\!\left(\exp(\kappa D_0)(GV_2)\right)
 &= \sum_{s\in\mathfrak{M}}\bigl(\exp(\kappa D_0)(GV_2)\bigr)_{\mathrm{ord}(s),\mathrm{ord}(s)}
-&&(\because \blkref{def_trace}\ \text{と準備の和の定め方}) \\
+&&(\because \blkref{def_trace}\ \text{と}\ \blkref{def_finite_sum_of_complex_numbers_over_row_configurations}) \\
 &= \sum_{s\in\mathfrak{M}}\Bigl(\exp(K_2M_{\mathrm{col}})\bigl(s(M_{\mathrm{col}})s(1)\exp(K_1E(s))\bigr)\Bigr)_{\mathbb{C}}
 &&(\because \text{Step 4}) \\
 &= \Bigl(\sum_{s\in\mathfrak{M}}\exp(K_2M_{\mathrm{col}})\bigl(s(M_{\mathrm{col}})s(1)\exp(K_1E(s))\bigr)\Bigr)_{\mathbb{C}}
-&&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
+&&(\because \blkref{def_finite_sum_of_complex_numbers_over_row_configurations}\ \text{と}\ \blkref{def_finite_sum_of_real_numbers_over_row_configurations}\ \text{で開いた和に}\ \blkref{real_inclusion_preserves_finite_sum}) \\
 &= \bigl(\exp(K_2M_{\mathrm{col}})\,S_{\sinh}\bigr)_{\mathbb{C}}
-&&(\because \blkref{finite_sum_of_real_scalar_multiples})
+&&(\because \blkref{def_finite_sum_of_real_numbers_over_row_configurations}\ \text{で開いた和に}\ \blkref{finite_sum_of_real_scalar_multiples})
 \end{aligned}`,
       ),
       paragraph(["これらを使って"]),
