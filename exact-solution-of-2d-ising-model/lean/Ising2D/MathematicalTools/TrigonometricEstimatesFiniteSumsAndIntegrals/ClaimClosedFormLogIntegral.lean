@@ -15,10 +15,7 @@
 `integral_inv_sqrt_pi`・`arsinh_log_bounds`・`integral_inv_pow_three_half_pi` は人手の鎖と 1 対 1 に書き、必要十分版を
 使わない（特殊化としての導出は `ClaimClosedFormLogIntegralFromNecSuf.lean` の `integral_inv_sqrt_pi_of_necSuf`・
 `arsinh_log_bounds_of_necSuf`・`integral_inv_pow_three_half_pi_of_necSuf`）。
-必要十分版 `LogDivergentIntegral` の import は、このファイルを import する `ClaimSineIntegralTwoSided.lean` の
-`sine_integral_two_sided` が `NecSuf.inv_sqrt_diff_bound` を使うので残す。
 -/
-import Ising2D.NecSuf.LogDivergentIntegral
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimRealLogOfProduct
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRealLogStrictlyIncreasing
