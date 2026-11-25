@@ -192,15 +192,22 @@ theorem cyclePoints_disjoint_necSuf (m₁ m₂ : {x // x ∈ A})
   obtain ⟨i₂, _, rfl⟩ := Finset.mem_image.mp h₂
   obtain ⟨ha, hc₁⟩ := cyclePoints_mem_component_necSuf A τ υ _ x hx₁
   obtain ⟨_, hc₂⟩ := cyclePoints_mem_component_necSuf A τ υ _ x hx₂
+  have hbase (j : {x // x ∈ A})
+      (hj : ⟨x, ha⟩ ∈ matchingPairComponent τ υ j) :
+      matchingPairComponentMinimum τ υ ⟨x, ha⟩ = matchingPairComponentMinimum τ υ j := by
+    apply Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_basepoint
+      τ υ (· ≤ ·) (fun _ _ => le_antisymm) (matchingPairComponentMinimum τ υ)
+      (matchingPairComponentMinimum_mem τ υ) (matchingPairComponentMinimum_le τ υ)
+    exact hj
   apply hne
   calc
     matchingPairComponentMinimum τ υ i₁ =
         matchingPairComponentMinimum τ υ (matchingPairComponentMinimum τ υ i₁) :=
       ((minimum_self_and_color A τ υ i₁).1).symm
     _ = matchingPairComponentMinimum τ υ ⟨x, ha⟩ :=
-      (matchingPairComponentMinimum_basepoint τ υ _ _ hc₁).symm
+      (hbase _ hc₁).symm
     _ = matchingPairComponentMinimum τ υ (matchingPairComponentMinimum τ υ i₂) :=
-      matchingPairComponentMinimum_basepoint τ υ _ _ hc₂
+      hbase _ hc₂
     _ = matchingPairComponentMinimum τ υ i₂ := (minimum_self_and_color A τ υ i₂).1
 
 theorem cycleWords_flatten_nodup_necSuf : (cycleWordsOf τ υ).flatten.Nodup := by

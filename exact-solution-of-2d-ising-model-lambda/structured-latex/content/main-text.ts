@@ -108302,7 +108302,7 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
                   displayMath(String.raw`\begin{aligned}
 \left|I-h_L^2\sum_{k,l=0}^{L-1}f_q(t^{a,b}_{L,k,l})\right|
 &=\left|\sum_{k,l=0}^{L-1}J_{L,k,l}(f_q)-\sum_{k,l=0}^{L-1}h_L\,h_L\,f_q(t^{a,b}_{L,k,l})\right|
-&&\bigl(\because\ \text{区間積分の隣接区間での加法性を外側と内側に当てる。}0=0\cdot h_L\text{、}2\pi=Lh_L\bigr)\\
+&&\bigl(\because\ \text{区間積分の隣接区間での加法性を外側と内側に当てる、}0=0\cdot h_L\text{、}2\pi=Lh_L\bigr)\\
 &=\left|\sum_{k,l=0}^{L-1}J_{L,k,l}(f_q)-\sum_{k,l=0}^{L-1}J_{L,k,l}\bigl(f_q(t^{a,b}_{L,k,l})\bigr)\right|
 &&\bigl(\because\ \text{定数の区間積分は区間の長さ倍、}(k+1)h_L-kh_L=h_L\bigr)\\
 &=\left|\sum_{k,l=0}^{L-1}J_{L,k,l}\bigl(d^{a,b}_{L,k,l}\bigr)\right|
