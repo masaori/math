@@ -7,7 +7,6 @@ import Ising2DLambda.KacWard.IteratedTransverseStaircase
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `claim_one_sided_transverse_steps_base_independent`。
 反復横断階段を順向き・逆向きに読むどちらの場合も、歩ベクトルは基点に依らない。 -/

@@ -5,6 +5,7 @@
 import Ising2DLambda.KacWard.OneSidedClosurePeriodDifferenceTurning
 import Ising2DLambda.KacWard.OneSidedClosureCyclicSumFromNecSuf
 import Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurningFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.OneSidedClosurePeriodDifferenceTurning
 
 namespace Ising2DLambda.KacWard
 

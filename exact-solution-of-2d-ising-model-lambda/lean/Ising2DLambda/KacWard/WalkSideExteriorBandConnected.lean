@@ -11,7 +11,6 @@ import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 持ち上げ点 `(row k, col k)` に接する四セルのうち、右半直線交差数が偶数のもの。 -/
 def surroundingExteriorCells

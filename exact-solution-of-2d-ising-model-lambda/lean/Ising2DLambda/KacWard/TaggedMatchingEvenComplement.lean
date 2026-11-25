@@ -37,7 +37,7 @@ private theorem same_base_or_reverse {L : ℕ} {h k : OrientedEdge L}
   rcases h with ⟨e, false | true⟩ <;>
     rcases k with ⟨e', false | true⟩ <;>
     change e = e' at he <;> subst e' <;>
-    simp [reversal, Ising2DLambda.NecSuf.KacWard.reverseBool]
+    simp [reversal]
 
 theorem complement_iff_short_endpoint {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))

@@ -9,7 +9,6 @@ import Ising2DLambda.KacWard.TransverseCrossing
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 添字対の横断（`def_index_pair_crossing`）: 通過の頂点が等しく、
 二つの通過がその頂点で横断すること。 -/

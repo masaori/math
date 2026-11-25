@@ -7,7 +7,6 @@ import Ising2DLambda.KacWard.RepeatedAdjacentSum
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- claim_four_part_repeated_difference。反復二列の一周期ずつの循環和が増分になる。 -/
 theorem fourPartRepeated_cyclicTurning_difference

@@ -5,7 +5,7 @@ import Ising2DLambda.TransferMatrix.Basic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.TransferMatrix Ising2DLambda.NecSuf.KacWard
+open Ising2DLambda.TransferMatrix
 
 /-- `def_plane_unit_path_torus_projection`。負向きの辺番号は終点から作る。 -/
 def projectedUnitStep (L : ℕ) [NeZero L] (p u : ℤ × ℤ) : OrientedEdge L :=

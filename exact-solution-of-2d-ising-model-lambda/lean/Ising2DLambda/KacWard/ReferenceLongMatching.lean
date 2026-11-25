@@ -1,6 +1,5 @@
 import Ising2DLambda.KacWard.Basic
 import Ising2DLambda.AlgebraicEigenvalue.PerfectMatching
-import Ising2DLambda.NecSuf.KacWard.ReferenceLongMatching
 
 namespace Ising2DLambda.KacWard
 
@@ -30,10 +29,5 @@ theorem referenceLongMatching_isPerfectMatching (L : ℕ) :
           _ = reversal e := congrArg reversal h.symm
       rw [hf, reversal_involutive]
       exact Set.pair_comm (reversal e) e
-
-theorem referenceLongMatching_from_necSuf (L : ℕ) :
-    IsPerfectMatching (referenceLongPairs L) := by
-  exact Ising2DLambda.NecSuf.KacWard.reversalPairs_isPerfectMatching
-    (reversal (L := L)) (reversal_ne (L := L)) (reversal_involutive (L := L))
 
 end Ising2DLambda.KacWard

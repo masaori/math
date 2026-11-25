@@ -13,7 +13,7 @@ private theorem same_edge_eq_or_reversal {L : ℕ}
   rcases f with ⟨other, otherDirection⟩
   cases h
   cases direction <;> cases otherDirection <;>
-    simp [reversal, Ising2DLambda.NecSuf.KacWard.reverseBool]
+    simp [reversal]
 
 /-- Distinct first-colour positions of an actual alternating cycle use distinct
     unoriented lattice edges, including when the cycle has one projected step. -/

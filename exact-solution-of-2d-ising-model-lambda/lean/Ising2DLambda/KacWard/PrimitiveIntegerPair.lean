@@ -1,4 +1,4 @@
-import Ising2DLambda.NecSuf.KacWard.PrimitiveIntegerPair
+import Mathlib.Data.Int.GCD
 import Mathlib.Tactic.Ring
 
 namespace Ising2DLambda.KacWard
@@ -36,9 +36,5 @@ theorem primitiveIntegerPair_iff_bezout (a b : ℤ) :
           (1 : ℤ) = -(a * s - b * r) := by rw [h]; ring
           _ = a * -s + b * r := by ring⟩
     exact ⟨hn, Nat.dvd_one.mp hd⟩
-
-theorem primitiveIntegerPair_from_necSuf (a b : ℤ) :
-    primitiveIntegerPair a b ↔
-      Ising2DLambda.NecSuf.KacWard.primitivePair Int.gcd a b := Iff.rfl
 
 end Ising2DLambda.KacWard

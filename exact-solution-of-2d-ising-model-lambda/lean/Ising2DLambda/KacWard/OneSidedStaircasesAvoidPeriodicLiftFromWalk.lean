@@ -5,7 +5,6 @@ import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 一側閉包の二つの横断階段は、周期部分との接合点を除いて交わらない。 -/
 theorem oneSidedStaircasesFromWalk_avoid_periodicLift {L m : ℕ} [NeZero L]

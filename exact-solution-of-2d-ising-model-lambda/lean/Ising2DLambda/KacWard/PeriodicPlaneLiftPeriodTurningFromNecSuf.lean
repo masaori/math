@@ -1,5 +1,7 @@
 /- 一周期の回転和の同定を、整数格子と整数の回転表へ特殊化する。 -/
 import Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning
+import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftPeriodTurning
+import Ising2DLambda.NecSuf.KacWard.PlaneDisplacement
 
 namespace Ising2DLambda.KacWard
 
@@ -24,5 +26,12 @@ theorem periodicPlaneLift_periodTurning_from_necSuf
       apply Finset.sum_congr rfl
       intro j _
       exact orientedEdgeLatticeStep_turning _ _
+
+theorem orientedEdgeLatticeStep_from_necSuf {L : ℕ} (e : OrientedEdge L) :
+    orientedEdgeLatticeStep e =
+      Ising2DLambda.NecSuf.KacWard.planeDisplacement
+        (fun edge => decide (edge.val < L ^ 2)) e := by
+  simp only [orientedEdgeLatticeStep,
+    Ising2DLambda.NecSuf.KacWard.planeDisplacement, decide_eq_true_eq]
 
 end Ising2DLambda.KacWard

@@ -5,11 +5,9 @@
 -/
 import Ising2DLambda.KacWard.OneSidedClosureCyclicSum
 import Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning
-import Ising2DLambda.NecSuf.KacWard.OneSidedClosurePeriodDifferenceTurning
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 周期数だけを変える一側閉包の、実際の格子点列。 -/
 def oneSidedClosurePoint (m L : ℕ) (base : ℤ → ℤ × ℤ) (wv wh k₀ : ℤ)

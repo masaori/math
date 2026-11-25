@@ -1,5 +1,22 @@
 ## 現在地から移したもの
+- **2026-11-25（主経路）、交互閉路の端点列の連結・平坦化と巡回移動を必要十分版で証明した。** 具体版の補題三件と偶数長保存への参照を外した。定理の型には具体版の完全マッチングが残るため、分離の例外件数は不変である。
+
+## レビュー記録から移したもの
+- 2026-11-25（主経路）: 前回の異なる成分の点列の非交叉を、成分の始点変更と最小元の自己一致に照合した。修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-25（主経路）: 先頭の交互閉路の行を端点列の連結・平坦化と巡回移動の論法で割り、必要十分版自身の補題で示した。残る対の向き直しと列挙・符号は未了である。
+
+## 現在地から移したもの
 - **2026-11-25（並列・八十回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 14 行を直した（行は未了）。** 閉歩道の通過 `ClosedWalkPasses` の導出 `closedWalkSuccessor_from_necSuf` を使う 8 ファイル（`SplitMutualCrossingNumber`・`VertexwiseCrossingNumber`・`SmoothedSuccessorMap`・`SmoothedCyclicTotalTurning`・`SmoothedVertexwiseCrossingNumber`・`VertexAxisStraightVisitCount`・`SmoothedCrossingNumber`・`SmoothingStraightVisitCount`）と、`ClosedWalkCrossingNumber`・`CyclicTotalTurning`、それらの導出を使う `SmoothingSplitCrossingPartition`・`SmoothingCyclicTurningInvarianceWalk`・`SmoothingSplitMutualCrossing` の導出の補題を同名の `*FromNecSuf.lean` へ移し、具体版から `NecSuf` の import を外した。既存の導出のファイル `VertexSimpleBoundaryNonloopPropagationFromNecSuf`・`WalkBoundaryVertexTurnSumFromNecSuf` は新しい導出のファイルを import する。分離の台帳は 147→133 行。
+
+## レビュー記録から移したもの
+- 2026-11-25（並列・八十回目）: 前回の 13 ファイルの導出の移動を含む main の上で `lake build` を回し、今回触ったモジュール以外に失敗が無いことを確かめた。修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-25（並列・八十回目）: 【分離】の導出を移す行の 14 行を直した（残り 65 行）。前回の記録どおり、`ClosedWalkPasses` の導出を使う 8 ファイルと、`ClosedWalkCrossingNumber` の導出を使う `SmoothingSplitCrossingPartition` を同じ回に移した。名前順で次の `ContactSplitPairDescent` から `DisjointWalkMutualCrossing` までの 12 ファイルは、導出の補題を他のファイルが使わない。
+
+## 現在地から移したもの
 - **2026-11-25（主経路）、交互閉路の異なる成分の点列が交わらないことを必要十分版の成分最小元補題で示した。** 交互閉路の符号の定理はなお具体版の完全マッチングを型に使うため、分離の例外件数は不変である。先頭行は未了。
 
 ## レビュー記録から移したもの

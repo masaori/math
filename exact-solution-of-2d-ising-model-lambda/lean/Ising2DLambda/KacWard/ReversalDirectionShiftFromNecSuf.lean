@@ -1,0 +1,28 @@
+/- 具体版が必要十分版の特殊化として得られることの導出。 -/
+import Ising2DLambda.KacWard.ReversalDirectionShift
+import Ising2DLambda.NecSuf.KacWard.ReversalDirectionShift
+
+namespace Ising2DLambda.KacWard
+
+/-- 具体版が必要十分版の特殊化として得られることの記録。基底値を辺の種類から、
+反転の寄与を `c = 2`（`2 + 2 = 0` in Z/4Z）と取れば、必要十分版がこの主張を与える。 -/
+theorem directionNumber_reversal_from_necSuf {L : ℕ} (e : OrientedEdge L) :
+    directionNumber (reversal e) = directionNumber e + 2 := by
+  rcases e with ⟨edge, d⟩
+  have h : (2 : ZMod 4) + 2 = 0 := by decide
+  have key := Ising2DLambda.NecSuf.KacWard.offset_reverse_necSuf
+    (if edge.val < L ^ 2 then (0 : ZMod 4) else 1) 2 h d
+  -- 表による定義が「基底値 + 向きの寄与」と一致することを場合ごとに確かめる。
+  have table : ∀ d' : Bool, directionNumber (edge, d') =
+      (if edge.val < L ^ 2 then (0 : ZMod 4) else 1) + (if d' then 2 else 0) := by
+    intro d'
+    by_cases hk : edge.val < L ^ 2 <;> cases d' <;>
+      simp [directionNumber, hk] <;> decide
+  calc directionNumber (reversal (edge, d))
+      = directionNumber (edge, Ising2DLambda.NecSuf.KacWard.reverseBool d) := rfl
+    _ = (if edge.val < L ^ 2 then (0 : ZMod 4) else 1)
+        + (if Ising2DLambda.NecSuf.KacWard.reverseBool d then 2 else 0) := table _
+    _ = (if edge.val < L ^ 2 then (0 : ZMod 4) else 1) + (if d then 2 else 0) + 2 := key
+    _ = directionNumber (edge, d) + 2 := by rw [table d]
+
+end Ising2DLambda.KacWard

@@ -1,6 +1,7 @@
 /- 必要十分版へ実際の辺集合と二方向反転を渡して具体的な行列式を得る。 -/
 import Ising2DLambda.KacWard.ReversalMatrixDeterminant
 import Ising2DLambda.NecSuf.KacWard.ReversalMatrixDeterminant
+import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 
 namespace Ising2DLambda.KacWard
 

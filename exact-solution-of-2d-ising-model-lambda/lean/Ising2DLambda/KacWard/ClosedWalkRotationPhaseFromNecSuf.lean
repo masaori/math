@@ -1,5 +1,6 @@
 /- 具体版が必要十分版の特殊化として得られることの導出。 -/
 import Ising2DLambda.KacWard.ClosedWalkRotationPhase
+import Ising2DLambda.KacWard.TotalTurningFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkRotationPhase
 
 namespace Ising2DLambda.KacWard

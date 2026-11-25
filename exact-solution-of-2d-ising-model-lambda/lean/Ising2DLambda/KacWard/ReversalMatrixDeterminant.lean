@@ -4,7 +4,6 @@
 反転そのものであることを確かめ、符号の積と唯一の非零置換項を順に計算する。
 -/
 import Ising2DLambda.IntegerMatrix.Determinant
-import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
 import Ising2DLambda.KacWard.ReversalMatrix
 import Ising2DLambda.KacWard.TranspositionSignFiniteOrderedSet
 import Mathlib.Data.Prod.Lex
@@ -13,8 +12,6 @@ namespace Ising2DLambda.KacWard
 
 open scoped BigOperators
 open Ising2DLambda.PartitionPolynomial
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue
-open Ising2DLambda.NecSuf.KacWard
 open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign
 
 /-- 辺の番号、向きの順に比較する辞書式順序。 -/

@@ -4,7 +4,6 @@ import Ising2DLambda.KacWard.NegatedParallelStaircaseTurning
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 private theorem twoPhase_end (p q : ℕ) (a b : ℤ × ℤ) :
     twoPhaseStaircase p a b (p + q) = p • a + q • b := by

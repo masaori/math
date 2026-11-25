@@ -8,7 +8,6 @@ import Ising2DLambda.KacWard.SmoothingStraightVisitCount
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 選んだ横断の頂点で、平滑化後の横断数は平滑化前の各軸の
 直進通過数から一つずつ引いた積に等しい。 -/

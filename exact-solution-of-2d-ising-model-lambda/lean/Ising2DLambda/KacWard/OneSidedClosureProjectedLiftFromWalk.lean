@@ -5,7 +5,6 @@ import Ising2DLambda.KacWard.PlaneSimpleCycleTorusProjection
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 射影した辺列を、指定した始点から平面へ持ち上げ直す。 -/
 def projectedClosureLift (L : ℕ) [NeZero L] (W : ℕ → ℤ × ℤ)

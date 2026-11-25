@@ -13,11 +13,9 @@
 -/
 import Mathlib.Data.ZMod.Basic
 import Ising2DLambda.KacWard.Turn
-import Ising2DLambda.NecSuf.KacWard.ReconnectionTurningDifference
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 一歩の回転数は 0, 1, -1 のいずれかである（`def_step_turning` の値の場合分け）。 -/
 theorem turnValue_mem (t : Turn) :
@@ -60,11 +58,5 @@ theorem reconnection_turning_difference (a b c d : Turn) (de de' df df' : ZMod 4
     rcases turnValue_mem c with hc | hc | hc <;>
     rcases turnValue_mem d with hd | hd | hd <;>
     omega
-
-/-- 具体版が必要十分版の特殊化として得られることの記録。`D` を回転数の差に取り、
-整除（π₄ による合同）と範囲（τ ∈ {0,1,-1}）を渡せば、必要十分版がこの主張を与える。 -/
-theorem reconnection_turning_difference_from_necSuf {D : ℤ} (hdvd : (4 : ℤ) ∣ D)
-    (hlow : -4 ≤ D) (hhigh : D ≤ 4) : D = -4 ∨ D = 0 ∨ D = 4 :=
-  dvd_four_bounded_mem_necSuf hdvd hlow hhigh
 
 end Ising2DLambda.KacWard

@@ -7,7 +7,6 @@ import Ising2DLambda.KacWard.ReversedParallelStaircaseTurning
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 /-- 有限列の範囲外を零で補い、連結の自然数添字へ合わせる。 -/
 def extendLatticeWord {n : ℕ} (u : Fin n → ℤ × ℤ) (j : ℕ) : ℤ × ℤ :=

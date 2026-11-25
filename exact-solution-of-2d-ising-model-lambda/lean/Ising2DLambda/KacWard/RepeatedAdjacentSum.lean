@@ -7,7 +7,6 @@ import Ising2DLambda.KacWard.FourPartAdjacentSum
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.NecSuf.KacWard
 
 def repeatedLatticeWord {n : ℕ} (u : Fin n → ℤ × ℤ) : ℕ → ℤ × ℤ :=
   repeatDirectionSequence (extendLatticeWord u) n
