@@ -1,12 +1,11 @@
 import Ising2DLambda.KacWard.CellBoundaryEvenEdgeBijection
 import Ising2DLambda.KacWard.CellVertexGraph
-import Ising2DLambda.NecSuf.KacWard.FourEdgeMembershipParity
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
 
 /-- At a grid vertex exactly four encoded edge positions can be incident. -/
-private theorem incident_edges_eq_four (A : Finset GridEdge) (r c : ℤ) :
+theorem incident_edges_eq_four (A : Finset GridEdge) (r c : ℤ) :
     A.filter (fun e => (r, c) ∈ gridEdgeEndpoints e) =
       A.filter (fun e => e ∈ ({(false, (r, c)), (false, (r, c - 1)),
         (true, (r, c)), (true, (r - 1, c))} : Finset GridEdge)) := by
@@ -39,24 +38,5 @@ theorem gridIncidentEven_iff (A : Finset GridEdge) (r c : ℤ) :
     by_cases h₄ : (true, (r - 1, c)) ∈ A <;>
     simp [h₁, h₂, h₃, h₄, Prod.mk.injEq, hr, hc, Nat.even_iff] <;>
       norm_num <;> decide
-
-theorem gridIncidentEven_iff_from_necSuf (A : Finset GridEdge) (r c : ℤ) :
-    (((if (false, (r, c)) ∈ A then (1 : ZMod 2) else 0) +
-      (if (false, (r, c - 1)) ∈ A then 1 else 0) +
-      (if (true, (r, c)) ∈ A then 1 else 0) +
-      (if (true, (r - 1, c)) ∈ A then 1 else 0)) = 0) ↔
-      Even (A.filter (fun e => (r, c) ∈ gridEdgeEndpoints e)).card := by
-  rw [incident_edges_eq_four]
-  have hfilter :
-      A.filter (fun e => e ∈ ({(false, (r, c)), (false, (r, c - 1)),
-        (true, (r, c)), (true, (r - 1, c))} : Finset GridEdge)) =
-      ({(false, (r, c)), (false, (r, c - 1)),
-        (true, (r, c)), (true, (r - 1, c))} : Finset GridEdge).filter
-        (fun e => e ∈ A) := by
-    ext e
-    simp [and_comm]
-  rw [hfilter]
-  apply Ising2DLambda.NecSuf.KacWard.fourEdgeMembershipParity
-  all_goals simp [Prod.mk.injEq] <;> omega
 
 end Ising2DLambda.KacWard

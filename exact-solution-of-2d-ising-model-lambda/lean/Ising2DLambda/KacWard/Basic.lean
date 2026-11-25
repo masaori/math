@@ -5,7 +5,6 @@
 住処は有限集合と自然数であり、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.PartitionPolynomial.Basic
-import Ising2DLambda.NecSuf.KacWard.Basic
 
 namespace Ising2DLambda.KacWard
 

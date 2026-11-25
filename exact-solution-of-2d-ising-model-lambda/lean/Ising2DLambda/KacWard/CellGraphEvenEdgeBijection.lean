@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.CellGridIncidentParity
-import Ising2DLambda.NecSuf.KacWard.CellGraphEvenEdgeBijection
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -57,18 +56,5 @@ theorem cellGraphEvenEdge_bijective (cells : Finset GridCell) :
       apply (cellGraphEdge_even_iff cells A).mpr
       simpa [himage] using B.2
     exact ⟨⟨A, heven⟩, Subtype.ext himage⟩
-
-theorem cellGraphEvenEdge_bijective_from_necSuf (cells : Finset GridCell) :
-    Function.Bijective
-      (fun A : {A : Finset (cellEdges cells) // IsEvenEncodedCellEdgeSet cells A} =>
-        (⟨A.1.image (cellGraphEdgeEquiv cells),
-          (cellGraphEdge_even_iff cells A.1).mp A.2⟩ :
-          {B : Finset (cellVertexGraph cells).edgeFinset //
-            IsEvenCellGraphEdgeSet cells B})) := by
-  exact Ising2DLambda.NecSuf.KacWard.subsetProperty_bijective_of_edgeEquiv
-    (cellGraphEdgeEquiv cells)
-    (IsEvenEncodedCellEdgeSet cells)
-    (IsEvenCellGraphEdgeSet cells)
-    (cellGraphEdge_even_iff cells)
 
 end Ising2DLambda.KacWard

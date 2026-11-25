@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.ClosedWalkCrossingNumber
-import Ising2DLambda.NecSuf.KacWard.ContactPairCount
 
 namespace Ising2DLambda.KacWard
 
@@ -50,16 +49,5 @@ theorem contactPairCount_eq_zero_iff_pass_vertices_injective {L m : ℕ}
       exact False.elim ((ne_of_lt hp.1) (hinj hp.2))
     · intro hp
       simp at hp
-
-theorem contactPairCount_from_necSuf {L m : ℕ}
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ) :
-    contactPairCount γ hγ =
-      Ising2DLambda.NecSuf.KacWard.contactPairCount γ orientedTarget := by
-  classical
-  simp only [contactPairCount, Ising2DLambda.NecSuf.KacWard.contactPairCount]
-  congr 1
-  ext p
-  simp
 
 end Ising2DLambda.KacWard

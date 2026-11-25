@@ -1,6 +1,5 @@
 import Ising2DLambda.KacWard.GridEdgeEndpointsInCellVertices
 import Ising2DLambda.KacWard.GridEdgeEndpointsInjective
-import Ising2DLambda.NecSuf.KacWard.CellVertexGraph
 import Mathlib.Combinatorics.SimpleGraph.Finite
 import Mathlib.Tactic
 
@@ -40,13 +39,6 @@ theorem cellGraphEdge_incident_iff (cells : Finset GridCell)
     have h : w = v := Subtype.ext heq
     subst w
     simpa using hw
-
-theorem cellGraphEdge_incident_iff_from_necSuf (cells : Finset GridCell)
-    (e : cellEdges cells) (v : cellVertices cells) :
-    v ∈ cellGraphEdge cells e ↔ v.1 ∈ gridEdgeEndpoints e.1 := by
-  rw [← cellGraphEdge_endpointSet]
-  exact Ising2DLambda.NecSuf.KacWard.endpoint_incidence_iff_of_subtype
-    (cellGraphEdge cells e) v
 
 /-- Distinct coordinate encoded grid edges remain distinct as graph edges. -/
 theorem cellGraphEdge_injective (cells : Finset GridCell) :
@@ -103,15 +95,6 @@ noncomputable def cellGraphEdgeEquiv (cells : Finset GridCell) :
         rw [cellVertexGraph_edgeFinset] at hmem
         obtain ⟨e, _, he⟩ := Finset.mem_image.mp hmem
         exact ⟨e, Subtype.ext he⟩)
-
-theorem cellVertexGraph_edgeFinset_from_necSuf (cells : Finset GridCell) :
-    (cellVertexGraph cells).edgeFinset =
-      (cellEdges cells).attach.image (cellGraphEdge cells) := by
-  have h := Ising2DLambda.NecSuf.KacWard.finiteGraph_edgeSet_of_endpoint_image
-    (cellGraphEdge cells) (cellGraphEdge_not_diag cells)
-  ext edge
-  rw [SimpleGraph.mem_edgeFinset]
-  simpa [cellVertexGraph] using Set.ext_iff.mp h edge
 
 theorem cellVertexGraph_edge_endpoint_image (cells : Finset GridCell) :
     (cellVertexGraph cells).edgeFinset.image

@@ -30,7 +30,7 @@ theorem cellVertexStep_graphAdj (S : Finset GridCell)
       exact huv
     exact cellGraphEdge_not_diag S edge hdiag
 
-private theorem cellVertexStep_eqvGen_graphConnected (S : Finset GridCell)
+theorem cellVertexStep_eqvGen_graphConnected (S : Finset GridCell)
     (hV : (cellVertices S).Nonempty)
     (hpath : ∀ u ∈ cellVertices S, ∀ v ∈ cellVertices S,
       Relation.EqvGen (CellVertexStep S) u v) :
@@ -82,14 +82,6 @@ theorem edgeConnectedCellSet_actualVertexGraphConnected (S : Finset GridCell)
     (hS : S.Nonempty) (hconn : EdgeConnectedCellSet (S : Set GridCell)) :
     (cellVertexGraph S).Connected := by
   obtain ⟨hV, hpath⟩ := edgeConnectedCellSet_vertexGraphConnected S hS hconn
-  exact cellVertexStep_eqvGen_graphConnected S hV hpath
-
-theorem edgeConnectedCellSet_actualVertexGraphConnected_from_necSuf
-    (S : Finset GridCell) (hS : S.Nonempty)
-    (hconn : EdgeConnectedCellSet (S : Set GridCell)) :
-    (cellVertexGraph S).Connected := by
-  obtain ⟨hV, hpath⟩ :=
-    edgeConnectedCellSet_vertexGraphConnected_from_necSuf S hS hconn
   exact cellVertexStep_eqvGen_graphConnected S hV hpath
 
 end Ising2DLambda.KacWard

@@ -1,6 +1,5 @@
 import Ising2DLambda.KacWard.CellCornerConnected
 import Ising2DLambda.KacWard.WalkSideInteriorBandConnected
-import Ising2DLambda.NecSuf.KacWard.AdjacentCellCornersConnected
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -30,7 +29,7 @@ private theorem glueCornerPaths {α : Type*} [DecidableEq α]
         (Relation.EqvGen.symm _ _ (hA' v hvA))
     · exact (hB u huB v hvB).mono (fun _ _ h => hstepB h)
 
-private theorem adjacentCells_commonCorner (p q : GridCell)
+theorem adjacentCells_commonCorner (p q : GridCell)
     (hadj : CellEdgeAdjacent p q) :
     ∃ w, w ∈ verticesOfCell p ∧ w ∈ verticesOfCell q := by
   rcases p with ⟨r, c⟩
@@ -49,7 +48,7 @@ private theorem adjacentCells_commonCorner (p q : GridCell)
     simp [verticesOfCell]
     omega
 
-private theorem singleCellStep_le_cells (p : GridCell) (cells : Finset GridCell)
+theorem singleCellStep_le_cells (p : GridCell) (cells : Finset GridCell)
     (hp : p ∈ cells) :
     ∀ ⦃u v⦄, CellVertexStep ({p} : Finset GridCell) u v →
       CellVertexStep cells u v := by
@@ -72,27 +71,6 @@ theorem adjacentCellCorners_connected (p q : GridCell)
   have hp := cellCorners_connected p.1 p.2
   have hq := cellCorners_connected q.1 q.2
   have h := glueCornerPaths
-    (verticesOfCell p) (verticesOfCell q)
-    (CellVertexStep ({p} : Finset GridCell))
-    (CellVertexStep ({q} : Finset GridCell))
-    (CellVertexStep ({p, q} : Finset GridCell))
-    (by simpa only [Prod.mk.eta] using hp)
-    (by simpa only [Prod.mk.eta] using hq)
-    (singleCellStep_le_cells p {p, q} (by simp))
-    (singleCellStep_le_cells q {p, q} (by simp))
-    w hwp hwq
-  simpa [cellVertices] using h
-
-/-- The concrete statement follows from the necessary-sufficient gluing proof. -/
-theorem adjacentCellCorners_connected_from_necSuf (p q : GridCell)
-    (hadj : CellEdgeAdjacent p q) :
-    ∀ u ∈ cellVertices ({p, q} : Finset GridCell),
-      ∀ v ∈ cellVertices ({p, q} : Finset GridCell),
-        Relation.EqvGen (CellVertexStep ({p, q} : Finset GridCell)) u v := by
-  obtain ⟨w, hwp, hwq⟩ := adjacentCells_commonCorner p q hadj
-  have hp := cellCorners_connected p.1 p.2
-  have hq := cellCorners_connected q.1 q.2
-  have h := Ising2DLambda.NecSuf.KacWard.adjacentCornerSets_connected
     (verticesOfCell p) (verticesOfCell q)
     (CellVertexStep ({p} : Finset GridCell))
     (CellVertexStep ({q} : Finset GridCell))

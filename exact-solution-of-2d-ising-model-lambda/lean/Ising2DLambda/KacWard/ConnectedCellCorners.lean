@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.AdjacentCellCornersConnected
-import Ising2DLambda.NecSuf.KacWard.ConnectedCellCorners
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -33,7 +32,7 @@ private theorem adjacentCornerStep_mono (S : Finset GridCell)
     subst x
     exact ⟨q, hq, hex⟩
 
-private theorem cellCornerPaths (S : Finset GridCell) (p : GridCell)
+theorem cellCornerPaths (S : Finset GridCell) (p : GridCell)
     (hp : p ∈ S) :
     ∀ u ∈ verticesOfCell p, ∀ v ∈ verticesOfCell p,
       Relation.EqvGen (CellVertexStep S) u v := by
@@ -41,7 +40,7 @@ private theorem cellCornerPaths (S : Finset GridCell) (p : GridCell)
   simpa only [Prod.mk.eta] using
     (fun u hu v hv => (h u hu v hv).mono (cornerStep_mono S p hp))
 
-private theorem adjacentCornerPaths (S : Finset GridCell) (p q : GridCell)
+theorem adjacentCornerPaths (S : Finset GridCell) (p q : GridCell)
     (hp : p ∈ S) (hq : q ∈ S) (hadj : CellEdgeAdjacent p q) :
     ∀ u ∈ verticesOfCell p, ∀ v ∈ verticesOfCell q,
       Relation.EqvGen (CellVertexStep S) u v := by
@@ -86,28 +85,5 @@ theorem edgeConnectedCellSet_vertexGraphConnected (S : Finset GridCell)
         exact Relation.EqvGen.trans _ _ _ (ih x hx w hw)
           (adjacentCornerPaths S mid last hm' hl' hadj w hw y hy)
   exact hchain hpath hp u hup v hvq
-
-/-- The abstract chain lemma specializes to the actual grid cell graph. -/
-theorem edgeConnectedCellSet_vertexGraphConnected_from_necSuf
-    (S : Finset GridCell) (hS : S.Nonempty)
-    (hconn : EdgeConnectedCellSet (S : Set GridCell)) :
-    (cellVertices S).Nonempty ∧
-      ∀ u ∈ cellVertices S, ∀ v ∈ cellVertices S,
-        Relation.EqvGen (CellVertexStep S) u v := by
-  constructor
-  · obtain ⟨p, hp⟩ := hS
-    refine ⟨p, ?_⟩
-    exact Finset.mem_biUnion.mpr ⟨p, hp, by simp [verticesOfCell]⟩
-  intro u hu v hv
-  obtain ⟨p, hp, hup⟩ := Finset.mem_biUnion.mp hu
-  obtain ⟨q, hq, hvq⟩ := Finset.mem_biUnion.mp hv
-  exact Ising2DLambda.NecSuf.KacWard.connectedCellCorners_connected
-    (S : Set GridCell) verticesOfCell CellEdgeAdjacent (CellVertexStep S)
-    (fun a ha => cellCornerPaths S a (Finset.mem_coe.mp ha))
-    (fun a ha b hb hab => adjacentCornerPaths S a b
-      (Finset.mem_coe.mp ha) (Finset.mem_coe.mp hb) hab)
-    (fun a _ => by rcases a with ⟨r, c⟩; exact ⟨(r, c), by simp [verticesOfCell]⟩)
-    (hconn (Finset.mem_coe.mpr hp) (Finset.mem_coe.mpr hq))
-    (Finset.mem_coe.mpr hp) u hup v hvq
 
 end Ising2DLambda.KacWard
