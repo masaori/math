@@ -972,6 +972,7 @@ targets=(
   Ising2D.cosh_gammaFn
   Ising2D.gamma_is_continuous
   Ising2D.gamma_is_continuous_of_necSuf
+  Ising2D.arsinh_log_bounds_of_necSuf
   Ising2D.gammaFn_periodic
   Ising2D.abs_log_Z_sub_log_c_le
   Ising2D.log_two_pos

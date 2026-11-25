@@ -158,7 +158,8 @@
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
 | `Ising2D.integral_inv_sqrt_pi` | **`∫_0^π dθ/√(δ²+θ²/4) = 2 arcsinh(π/(2δ))`** | `closed_form_log_integral` |
-| `Ising2D.arsinh_log_bounds` | **`log(2y) ≤ arcsinh y ≤ log(2y)+1/(4y²)`** | `arcsinh_two_sided_log_bounds` |
+| `Ising2D.arsinh_log_bounds` | **`log(2y) ≤ arcsinh y ≤ log(2y)+1/(4y²)`**（人手の準備・下からの評価・上からの評価の鎖を証明の中の段で 1 対 1 に書き、必要十分版を使わない） | `arcsinh_two_sided_log_bounds` |
+| `Ising2D.arsinh_log_bounds_of_necSuf`（`ClaimClosedFormLogIntegralFromNecSuf.lean`） | `arsinh_log_bounds` を `NecSuf.log_two_mul_le_arsinh`・`NecSuf.arsinh_le_log_two_mul_add` の組として導出した版 | `arcsinh_two_sided_log_bounds` |
 | `Ising2D.integral_inv_sqrt_pi_bounds` | **`2log(π/δ) ≤ ∫ ≤ 2log(π/δ)+2δ²/π²`** | `log_integral_two_sided_bounds` |
 | `Ising2D.integral_inv_pow_three_half_pi` | `∫_0^π dθ/(δ²+θ²/4)^{3/2}` の評価 `≤ 2/(aδ²)` | `three_halves_power_integral_bound` |
 
@@ -248,7 +249,7 @@
 
 | 必要十分版（`lean/Ising2D/NecSuf/`） | 対応する具体版 | 必要十分版で判明した本質 |
 | --- | --- | --- |
-| `HyperbolicBounds.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`, `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean` | 原文 (1)〜(5) のうち mathlib に無いのは **`sinh t ≤ t cosh t` 1 本だけ**で、それも `(t cosh t - sinh t)' = t sinh t` の**符号**だけで出る。`t ≥ 0` の仮定は結論の向きのためだけで、単調性自体は `ℝ` 全体で成り立つ。原文の `arcsinh` の逆関数性・微分は**対数発散の本体には効いていない**——効いているのは `arsinh y - log(2y) ∈ [0, 1/(4y²)]` という**平方根の 2 次評価**だけである。 |
+| `HyperbolicBounds.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`, `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`（`arsinh_log_bounds` の特殊化としての導出は `ClaimClosedFormLogIntegralFromNecSuf.lean`） | 原文 (1)〜(5) のうち mathlib に無いのは **`sinh t ≤ t cosh t` 1 本だけ**で、それも `(t cosh t - sinh t)' = t sinh t` の**符号**だけで出る。`t ≥ 0` の仮定は結論の向きのためだけで、単調性自体は `ℝ` 全体で成り立つ。原文の `arcsinh` の逆関数性・微分は**対数発散の本体には効いていない**——効いているのは `arsinh y - log(2y) ∈ [0, 1/(4y²)]` という**平方根の 2 次評価**だけである。 |
 | `SymmetrizedSumIsEven.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshIsEven.lean` | `cosh_is_even` に効いているのは引数の側の符号反転の対合性と値の側の和の交換律だけで、`exp` の性質も 2 で割ることも効いていない（`h y = d(f y + f(−y))` の `f`・`d` は任意の写像でよい）。 |
 | `AntisymmetrizedDifferenceIsOdd.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimSinhIsOdd.lean` | `sinh_is_odd` に効いているのは引数の側と値の側の符号反転の対合性、値の側の `a − b = a + (−b)`（仮定 `hsub`）・加法の交換律（`hcomm`）・`−(a + b) = (−a) + (−b)`（`hnegadd`。値の側の加法の結合律・零・逆元の公理は要らない）、2 で割ること `d` が 2 の逆数を掛けること `m` と一致し（`hdm`）、`m` が符号反転と交換すること（`hm`）だけで、`exp` の性質も 2 の逆数を掛けることのほかの性質も効いていない（`h y = d(f y − f(−y))` の `f` は任意の写像でよい）。 |
 | `SymmetrizedAdditionFormulas.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`（加法定理 4 本） | `cosh_addition_formula`・`sinh_addition_formula` に効いているのは、`exp` の指数法則 `f(a + b) = f(a)f(b)`、引数の側の `−(x + y) = (−x) + (−y)`（複号 `−` では `x − y = x + (−y)` と `−(−y) = y` も）、値の側が環で `2` が逆元 `⅟2` を持つこと（約分は「分母と分子に 2 を掛ける」段、`⅟2` が任意の元と交換することは「分数の和と積」段で使う）だけで、`f(0) = 1`・正値性・連続性・級数による定義も、引数の側の結合律・交換律・零も、値の側の乗法の可換律と 2 以外の元の逆元も効いていない。 |

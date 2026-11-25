@@ -225,7 +225,6 @@ DEP	concrete	Ising2D.abs_quad_le_quad_absVec_epsilonR
 DEP	concrete	Ising2D.actsBy_TConj_V1pmHalf
 DEP	concrete	Ising2D.actsBy_TConj_V2H2Form
 DEP	concrete	Ising2D.adPow_eq_adCLM
-DEP	concrete	Ising2D.arsinh_log_bounds
 DEP	concrete	Ising2D.boundaryYXY_transpose
 DEP	concrete	Ising2D.c_equals_c_plus
 DEP	concrete	Ising2D.c_minus_le_c_plus
