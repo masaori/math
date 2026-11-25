@@ -6,17 +6,18 @@
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は
 `Ising2D/NecSuf/MeanValueTwoSided.lean`（(5) の増分評価）と
-`Ising2D/NecSuf/HyperbolicBounds.lean`（数値評価に使う `cosh` の上下界）。
+`Ising2D/NecSuf/HyperbolicBounds.lean`（`cosh` の上下界）。数値の下準備 `cosh_02_bounds` は必要十分版を使わず、
+具体版の半角の公式と `sinh` の上下界から出す。その必要十分版の特殊化としての導出は `ClaimKappaOfKBasicFromNecSuf.lean` にある。
 (5) の具体版 `abs_kappaK_bounds`・`abs_kappaDerivSq_sub_le` は人手の (R3)(R4) の鎖どおりに書き、
 `MeanValueTwoSided.lean` を使わない。その特殊化としての導出は `ClaimKappaOfKBasicFromNecSuf.lean` にある。
 
 ## 人手証明の数値評価との差（重要）
 
-原文 (4)(5) は `cosh 0.2 ≤ 1.02007` のような**具体的な数値評価を外から持ち込んでいる**
+原文 (4)(5) は `cosh 0.2 ≤ 1.020067` のような**具体的な数値評価を外から持ち込んでいる**
 （原文自身が `remark_real_analysis_escape_chapter_E` の末尾でそう宣言している）。
-本形式化では**外から数値を持ち込まず**、`Ising2D.NecSuf.cosh_le_inv_one_sub_sq_div_two`
-（`cosh t ≤ (1-t²/2)⁻¹`、mathlib の `Real.cosh_le_exp_half_sq` から出る）と
-`Ising2D.NecSuf.one_add_sq_div_two_le_cosh` だけで評価する。
+本形式化では**外から数値を持ち込まず**、`cosh 0.2` を具体版の半角の公式 `cosh_eq_one_add_two_sinh_half_sq`、
+`self_le_sinh_of_nonneg`（`t ≤ sinh t`）、`sinh_le_mul_cosh_of_nonneg`（`sinh t ≤ t cosh t`）、
+`cosh_sq_eq_one_add_sinh_sq` だけで `[1.02, 1.0204082]` と評価する（`cosh_02_bounds`）。
 そのぶん定数はわずかに悪くなる（原文の値 → 本形式化の値）:
 
 | 量 | 原文 | 本形式化 |
@@ -56,14 +57,22 @@ theorem sqrt_two_bounds : (1.4142135 : ℝ) ≤ Real.sqrt 2 ∧ Real.sqrt 2 ≤ 
       Real.sqrt_le_sqrt (by norm_num)
     rwa [Real.sqrt_sq (by norm_num)] at h
 
+/-- `cosh 0.2` の上下の評価。本文はこの数値を証明せずに持ち込む（`remark_real_analysis_escape_chapter_E` の末尾）ので、
+本文に対応する鎖は無く、Lean だけが既にある具体版の主張から出す。`s = sinh 0.1`, `c = cosh 0.1` として、
+半角の公式 `cosh 0.2 = 1 + 2s²`（`cosh_half_angle_formula`）、`0.1 ≤ s`（`sinh_at_least_argument`）、
+`s ≤ 0.1·c`（`sinh_at_most_argument_times_cosh`）、`c² = 1 + s²`（`cosh_sinh_basic_properties` (2) の移項）を使う。
+上界は `s² ≤ 0.01·c² = 0.01·(1 + s²)` から `s² ≤ 1/99` を出す。 -/
 theorem cosh_02_bounds : (1.02 : ℝ) ≤ Real.cosh 0.2 ∧ Real.cosh 0.2 ≤ 1.0204082 := by
+  have hhalf : Real.cosh 0.2 = 1 + 2 * Real.sinh 0.1 ^ 2 := by
+    have h := cosh_eq_one_add_two_sinh_half_sq (0.2 : ℝ)
+    rwa [show (0.2 : ℝ) / 2 = 0.1 by norm_num] at h
+  have hs_lo : (0.1 : ℝ) ≤ Real.sinh 0.1 := self_le_sinh_of_nonneg (by norm_num)
+  have hs_hi : Real.sinh 0.1 ≤ 0.1 * Real.cosh 0.1 := sinh_le_mul_cosh_of_nonneg (by norm_num)
+  have hch : Real.cosh 0.1 ^ 2 = 1 + Real.sinh 0.1 ^ 2 := cosh_sq_eq_one_add_sinh_sq 0.1
+  have hsq : Real.sinh 0.1 ^ 2 ≤ (0.1 * Real.cosh 0.1) ^ 2 := by nlinarith [hs_lo, hs_hi]
   constructor
-  · have := NecSuf.one_add_sq_div_two_le_cosh (0.2 : ℝ)
-    norm_num at this ⊢
-    linarith
-  · have := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := (0.2 : ℝ)) (by norm_num)
-    norm_num at this ⊢
-    linarith
+  · rw [hhalf]; nlinarith [hs_lo]
+  · rw [hhalf]; nlinarith [hsq, hch]
 
 theorem sinh_02_bounds : (0.2 : ℝ) ≤ Real.sinh 0.2 ∧ Real.sinh 0.2 ≤ 0.2040817 := by
   constructor

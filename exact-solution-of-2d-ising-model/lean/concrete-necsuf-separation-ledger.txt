@@ -237,7 +237,6 @@ DEP	concrete	Ising2D.commute_epsProj_of_commute_epsilon
 DEP	concrete	Ising2D.commute_xString_of_commute_sigmaX
 DEP	concrete	Ising2D.conjTranspose_Y_mul_Z
 DEP	concrete	Ising2D.conjTranspose_Z_mul_Y
-DEP	concrete	Ising2D.cosh_02_bounds
 DEP	concrete	Ising2D.epsProj_add_epsProj_neg
 DEP	concrete	Ising2D.epsProj_eq_invProj
 DEP	concrete	Ising2D.epsProj_mul_epsProj_neg

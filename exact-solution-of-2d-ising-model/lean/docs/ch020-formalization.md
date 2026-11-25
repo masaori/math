@@ -288,9 +288,11 @@
 
 ## 4. 人手証明との定数の差（原文の数値評価を持ち込まなかったことによる）
 
-原文は `cosh 0.2 ≤ 1.02007` 等を「初等関数の数値評価」として外から持ち込むと宣言している。
-本形式化はこれを持ち込まず、`Ising2D.NecSuf.cosh_le_inv_one_sub_sq_div_two`
-（`cosh t ≤ (1-t²/2)⁻¹`）と `one_add_sq_div_two_le_cosh` から導いた。そのぶん定数が悪くなる。
+原文は `cosh 0.2 ≤ 1.020067` 等を「初等関数の数値評価」として外から持ち込むと宣言している。
+本形式化はこれを持ち込まない。`cosh 0.2` の評価 `cosh_02_bounds` は、具体版の半角の公式 `cosh_eq_one_add_two_sinh_half_sq`・
+`self_le_sinh_of_nonneg`・`sinh_le_mul_cosh_of_nonneg`・`cosh_sq_eq_one_add_sinh_sq` から導いた。
+`second_derivative_log_divergence` の `cosh(1/4)`・`cosh(1/2)` の評価（`step6_bound` など）は、いまも
+`Ising2D.NecSuf.cosh_le_inv_one_sub_sq_div_two`（`cosh t ≤ (1-t²/2)⁻¹`）から導いている。どちらの評価でも、そのぶん定数が悪くなる。
 
 | 量 | 原文 | 本形式化 |
 | --- | --- | --- |

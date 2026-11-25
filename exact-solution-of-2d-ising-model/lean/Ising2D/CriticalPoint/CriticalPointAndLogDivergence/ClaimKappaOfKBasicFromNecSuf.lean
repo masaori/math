@@ -5,13 +5,27 @@
 `Ising2D/NecSuf/MeanValueTwoSided.lean` の `abs_sub_bounds_of_deriv_bounds`（`D = [K_c − 1/10, K_c + 1/10]`,
 `f = κ`, `c_lo = 3.52`, `c_hi = 4.74`）と `abs_sub_le_of_abs_deriv_le`（`f = κ'²`, `C = 88.2`）への特殊化から得る
 （人手のラベルは `kappa_of_K_basic` (5)）。
+数値の下準備 `cosh_02_bounds` の主張を、必要十分版 `Ising2D/NecSuf/HyperbolicBounds.lean` の
+`one_add_sq_div_two_le_cosh` と `cosh_le_inv_one_sub_sq_div_two` の `t = 0.2` への特殊化から得る（`cosh_02_bounds_of_necSuf`）。
 -/
 import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.ClaimKappaOfKBasic
 import Ising2D.NecSuf.MeanValueTwoSided
+import Ising2D.NecSuf.HyperbolicBounds
 
 namespace Ising2D
 
 open Real
+
+/-- `cosh_02_bounds` を、`NecSuf.one_add_sq_div_two_le_cosh` と `NecSuf.cosh_le_inv_one_sub_sq_div_two` の
+`t = 0.2` への特殊化から得る（`1 + 0.02 ≤ cosh 0.2 ≤ (1 − 0.02)⁻¹ = 1/0.98`）。 -/
+theorem cosh_02_bounds_of_necSuf : (1.02 : ℝ) ≤ Real.cosh 0.2 ∧ Real.cosh 0.2 ≤ 1.0204082 := by
+  constructor
+  · have := NecSuf.one_add_sq_div_two_le_cosh (0.2 : ℝ)
+    norm_num at this ⊢
+    linarith
+  · have := NecSuf.cosh_le_inv_one_sub_sq_div_two (t := (0.2 : ℝ)) (by norm_num)
+    norm_num at this ⊢
+    linarith
 
 /-- `abs_kappaK_bounds` を、`NecSuf.abs_sub_bounds_of_deriv_bounds` の `D = Dnbhd`, `f = κ`,
 `c_lo = 3.52`, `c_hi = 4.74` への特殊化から得る。 -/

@@ -13,7 +13,7 @@
 （`Ising2D.NecSuf.sinh_le_mul_cosh` ほか）。(5) の後半 `sinh_le_mul_cosh_of_nonneg` は本文 `sinh_at_most_argument_times_cosh` の
 証明どおりに書き、必要十分版の特殊化として得ることは導出 `ClaimCoshAdditionAndHalfAngleFromNecSuf.lean` が述べる。
 `NecSuf.HyperbolicBounds` の import は、このファイルを経て同じ必要十分版の定理を使う下流の具体版
-（`step6_bound`・`cosh_02_bounds` など）のために残っている（分離の台帳の行）。
+（`step6_bound`・`second_derivative_log_divergence_pos`・`abs_kappaDerivSq_sub_mul_Gsecond_le`）のために残っている（分離の台帳の行）。
 (1) の加法定理 4 本の必要十分版は `Ising2D/NecSuf/SymmetrizedAdditionFormulas.lean`、
 具体版をその特殊化として得る導出は `ClaimCoshAdditionAndHalfAngleFromNecSuf.lean`。
 倍角公式 `sinh_double_angle_formula`（具体版 `sinh_eq_two_sinh_half_mul_cosh_half`。人手の 4 行と 1 対 1 の `calc`）の必要十分版は
