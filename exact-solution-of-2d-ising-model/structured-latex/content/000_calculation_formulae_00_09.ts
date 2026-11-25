@@ -4329,10 +4329,10 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\sum_{j=1}^{m} r = \iota_{\mathbb{Z}\to\mathbb{R}}(m)\, r` },
     labels: ["finite_sum_of_constant_real_number"],
-    lean: ["Ising2D.finite_sum_of_constant_real_number_succ", "Ising2D.finite_sum_of_constant_real_number_fintype"],
+    lean: ["Ising2D.finite_sum_of_constant_real_number", "Ising2D.finite_sum_of_constant_real_number_succ", "Ising2D.finite_sum_of_constant_real_number_fintype"],
     statement: [
       paragraph([
-        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
         "、",
         math(String.raw`r \in \mathbb{R}`),
         " について、すべての項が ",
@@ -4356,6 +4356,22 @@ T_B(X - W)
     ],
     proof: [
       paragraph([
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{0} r
+&= 0
+  &&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} r_j := 0\ (r_j \to r)\bigr)\\
+&= 0_{\mathbb{R}}\, r
+  &&\bigl(\because\ \blkref{real_zero_times_is_zero}\ (x \to r)\ \text{を右辺から左辺へ}\bigr)\\
+&= \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}})\, r
+  &&\bigl(\because\ \blkref{inclusion_zz_to_rr}\ \text{の}\ \iota_{\mathbb{Z}\to\mathbb{R}}(0_{\mathbb{Z}}) := 0_{\mathbb{R}}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " は ",
         math(String.raw`m`),
         " についての帰納法で示す。",
         math(String.raw`m = 1`),
@@ -4394,6 +4410,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。trace_power_upper_bound の最後の鎖の「同じ項 c^n を d 個足した和」を引けるよう足した。",
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の三単位目）: def_finite_sum_of_real_numbers が項の無い族の和 Σ_{j=1}^{0} r_j := 0 を定めたので、主張の m の範囲を ℤ_{≥1} から ℤ_{≥0} へ広げ、証明の冒頭に m = 0 の鎖（空の和の式・real_zero_times_is_zero・ι(0_ℤ) := 0_ℝ）を足した。m ≥ 1 の帰納法の鎖は変えていない。Lean は m ∈ ℤ_{≥0} の版 finite_sum_of_constant_real_number を欄 lean の先頭に置いた（有限型の添字の版は、使う側の人手が m → d ∈ ℤ_{≥1} で引くので 1 ≤ card κ の仮定のまま）。数値検証に m = 0 を足した。",
       ],
     },
   },
@@ -4843,14 +4860,82 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
   },
 
   {
+    id: "calc_formulae_claim_finite_sum_of_real_zeros",
+    kind: "claim",
+    title: { text: "実数の零の有限和は零" },
+    labels: ["finite_sum_of_real_zeros"],
+    lean: ["Ising2D.finite_sum_of_real_zeros", "Ising2D.finite_sum_of_real_zeros_succ"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について、すべての項が ",
+        math(String.raw`0 \in \mathbb{R}`),
+        " の有限和（",
+        ref("def_finite_sum_of_real_numbers"),
+        " の ",
+        math(String.raw`r_1 = \dots = r_m = 0`),
+        "）は",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} 0 = 0`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{0} 0
+&= 0
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} r_j := 0\ (r_j \to 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " は ",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} 0
+&= 0
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{1} r_j := r_1\ (r_1 \to 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " で主張が成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} 0
+&= \Bigl(\sum_{j=1}^{m} 0\Bigr) + 0
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{m+1} r_j := \bigl(\sum_{j=1}^{m} r_j\bigr) + r_{m+1}\ (r_j \to 0)\bigr)\\
+&= 0 + 0
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= 0
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ y + 0 = y\ (y \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph(["であり、主張は ", math(String.raw`m+1`), " でも成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の三単位目）: 原文（Typst）に対応ブロックは無い。finite_double_sum_of_real_numbers_interchange を n_1 = 0 へ広げたとき、その鎖の「Σ_{l=1}^{n_2} 0 = 0」を引けるよう足した（finite_sum_of_constant_real_number と real_times_zero_is_zero の 2 行で示すと実数の乗法を通り、主張に効かない構造を持ち込むため）。複素数の兄弟は finite_sum_of_complex_zeros。数値検証: sagemath/check/finite_sum_of_real_zeros/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_finite_double_sum_of_real_numbers_interchange",
     kind: "claim",
     title: { text: "実数の二重の有限和は和の順序を入れ替えても等しい" },
     labels: ["finite_double_sum_of_real_numbers_interchange"],
-    lean: ["Ising2D.finite_double_sum_of_real_numbers_interchange_succ", "Ising2D.finite_double_sum_of_real_numbers_interchange", "Ising2D.finite_double_sum_of_real_numbers_interchange_fintype"],
+    lean: ["Ising2D.finite_double_sum_of_real_numbers_interchange", "Ising2D.finite_double_sum_of_real_numbers_interchange_succ", "Ising2D.finite_double_sum_of_real_numbers_interchange_fintype"],
     statement: [
       paragraph([
-        math(String.raw`n_1, n_2 \in \mathbb{Z}_{\geq 1}`),
+        math(String.raw`n_1, n_2 \in \mathbb{Z}_{\geq 0}`),
         " とし、",
         math(String.raw`k \in \{1,\dots,n_1\}`),
         "、",
@@ -4872,6 +4957,22 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
     ],
     proof: [
       paragraph([
+        math(String.raw`n_1 = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{0}\sum_{l=1}^{n_2} c_{k,l}
+&= 0
+&&\Bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} r_j := 0\ \Bigl(r_j \to \sum_{l=1}^{n_2} c_{j,l}\Bigr)\Bigr)\\
+&= \sum_{l=1}^{n_2} 0
+&&\bigl(\because\ \blkref{finite_sum_of_real_zeros}\ (m \to n_2)\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{l=1}^{n_2}\sum_{k=1}^{0} c_{k,l}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} r_j := 0\ (r_j \to c_{j,l})\ \text{を右辺から左辺へ、各}\ l\ \text{の項へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n_1 \in \mathbb{Z}_{\geq 1}`),
+        " は ",
         math(String.raw`n_1`),
         " についての帰納法で示す（",
         math(String.raw`n_2`),
@@ -4914,6 +5015,7 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
       status: "added",
       notes: [
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。psd_cauchy_schwarz の準備の鎖が実数の二重の有限和の順序を「ℝ の加法の結合則・可換則による有限和の順序の入れ替え」と名前だけで入れ替えていたので、その段を引けるよう足した。c_between_Lambda_half_and_twice_Lambda_half の Step 2 を W_ℝ・ε_ℝ で書き直すときの双線型値の対称性の段も同じ入れ替えを使う。外側の和の項の数 n_1 についての帰納法で、帰納法の段は finite_sum_of_real_sums を引く。数値検証: sagemath/check/finite_double_sum_of_real_numbers_interchange/。",
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の三単位目）: def_finite_sum_of_real_numbers が項の無い族の和 Σ_{j=1}^{0} r_j := 0 を定めたので、主張の n_1, n_2 の範囲を ℤ_{≥1} から ℤ_{≥0} へ広げた。n_1 = 0 の鎖（空の和の式・この回に足した finite_sum_of_real_zeros・空の和の式を各項へ）を足した。n_1 ≥ 1 の帰納法の鎖は変えていない（n_2 = 0 でも、引く finite_sum_of_real_sums が m ∈ ℤ_{≥0} の主張なのでそのまま通る）。Lean は p = 0 の段を人手の 3 行と 1 対 1 の calc にし、_succ の内側の項の数を q（0 を含む）にした。数値検証に n_1 = 0・n_2 = 0 を足した。",
       ],
     },
   },

@@ -48,11 +48,13 @@
   `def_real_difference`（`y − z := y + (−z)`）は `sub_eq_add_neg` で当てる。
 * `inclusion_zz_to_rr_preserves_negation` は人手の 6 行と 1 対 1 の `calc` である。`ℤ` の和の単位元 `0 + y = y` の段は `zero_add`、`def_int_difference` の段は `int_sub_eq_add_neg`、
   `ι(0_ℤ) := 0_ℝ` は `inclusion_zz_to_rr_zero_intCast`、`def_real_difference` は `sub_eq_add_neg`、`0_ℝ` が和の単位元であることは `zero_add` で当てる。
-* `finite_sum_of_constant_real_number_succ` は人手の `m ∈ ℤ_{≥1}` を Lean の `m + 1`（`Fin (m + 1)` の上の和）で書き、`m = 1` の 3 行と
+* `finite_sum_of_constant_real_number_succ` は人手の `m ∈ ℤ_{≥1}` の帰納法を Lean の `m + 1`（`Fin (m + 1)` の上の和）で書き、`m = 1` の 3 行と
   帰納法の段の 5 行が人手の行と 1 対 1 の `calc` である。`def_finite_sum_of_real_numbers` の一項の式と帰納の式は、Lean の `Fin` の上の和がそれを満たす補題
   `finset_sum_fin_real_eq_finite_sum_of_real_numbers`（`DefinitionFiniteSumOverIndexSet.lean`）で出す。
-  有限型の添字の和 `finite_sum_of_constant_real_number_fintype` は、人手の `m ∈ ℤ_{≥1}` に合わせて `1 ≤ card κ` を仮定し、`card κ = m + 1` の `m` を取って
-  `κ` に `Fin (m + 1)` の番号を付け、`_succ` を当てる（空の和の場合を通らない）。
+  人手の `m = 0` の 3 行は `finite_sum_of_constant_real_number` の `m = 0` の段で、1 対 1 の `calc` である（`0_ℝ r = 0_ℝ` は `real_zero_times_is_zero`、`ι(0_ℤ) := 0_ℝ` は `inclusion_zz_to_rr_zero_intCast`）。
+  この版の主張は `ι` を `Int.cast` で書き、`m ≥ 1` の段は `_succ` の `Nat.cast` の形を `inclusion_zz_to_rr_of_natCast` で移す。
+  有限型の添字の和 `finite_sum_of_constant_real_number_fintype` は、使う側の人手が `m → d ∈ ℤ_{≥1}` で引くのに合わせて `1 ≤ card κ` を仮定し、`card κ = m + 1` の `m` を取って
+  `κ` に `Fin (m + 1)` の番号を付け、`finite_sum_of_constant_real_number` を当てて `Nat.cast` の形へ移す（空の和の場合を通らない）。
 * `inclusion_zz_to_rr_of_positive_is_at_least_one` は人手と同じく `n` についての帰納法で、`n = 1` の 2 行と帰納法の段の 4 行が人手の行と 1 対 1 の `calc` である
   （`calc` は `1 ≤ …` の向きに書くので、人手の行を下から上へ並べている）。
 * `inclusion_zz_to_rr_of_nonpositive_is_nonpositive` は人手と同じく `n = 0` と `n = -m`（`m ∈ ℤ_{≥1}`）の場合分けで、`n = -m` の段は人手の 4 行に、
@@ -79,6 +81,7 @@ import Mathlib.Data.Real.Basic
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfSumIsSumOfNegations
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionFiniteSumOverIndexSet
 
 namespace Ising2D
@@ -382,16 +385,33 @@ theorem finite_sum_of_constant_real_number_succ (m : ℕ) (r : ℝ) :
       _ = ((m + 1 + 1 : ℕ) : ℝ) * r := by rw [inclusion_zz_to_rr_succ (m + 1)]
                                                                            -- `inclusion_zz_to_rr` の `ι(n + 1) := ι(n) + 1`（`n → m`）を右辺から左辺へ
 
-/-- **`finite_sum_of_constant_real_number`**（添字が有限型 `κ` の和。人手の `m ∈ ℤ_{≥1}` に合わせて `1 ≤ card κ` を仮定する）。
+/-- **人手 `finite_sum_of_constant_real_number`**（`m ∈ ℤ_{≥0}`）: `Σ_{j=1}^{m} r = ι_{ℤ→ℝ}(m) r`。人手の `m ∈ ℤ_{≥0}` は Lean の `m : ℕ` を
+`ℤ` へ送ったもの、`ι_{ℤ→ℝ}` は `Int.cast` である。`m = 0` の段は人手の `m = 0` の 3 行、`m ≥ 1` は `finite_sum_of_constant_real_number_succ`
+（`Nat.cast` の形）を `inclusion_zz_to_rr_of_natCast` で `Int.cast` の形へ移す（Lean だけの読み替えの段）。 -/
+theorem finite_sum_of_constant_real_number (m : ℕ) (r : ℝ) :
+    ∑ _j : Fin m, r = (((m : ℤ)) : ℝ) * r := by
+  cases m with
+  | zero =>
+    calc ∑ _j : Fin 0, r
+        = 0 := finset_sum_fin_real_eq_finite_sum_of_real_numbers.1 _      -- `def_finite_sum_of_real_numbers` の `Σ_{j=1}^{0} r_j := 0`（`r_j → r`）
+      _ = 0 * r := (real_zero_times_is_zero r).symm                        -- `real_zero_times_is_zero`（`x → r`）を右辺から左辺へ
+      _ = ((0 : ℤ) : ℝ) * r := by rw [inclusion_zz_to_rr_zero_intCast]     -- `inclusion_zz_to_rr` の `ι(0_ℤ) := 0_ℝ` を右辺から左辺へ
+  | succ m =>
+    calc ∑ _j : Fin (m + 1), r
+        = ((m + 1 : ℕ) : ℝ) * r := finite_sum_of_constant_real_number_succ m r   -- `m ≥ 1` の帰納法
+      _ = ((((m + 1 : ℕ) : ℤ)) : ℝ) * r := by rw [inclusion_zz_to_rr_of_natCast] -- `ι` の `Nat.cast` の形を `Int.cast` の形へ（Lean だけの段）
+
+/-- **`finite_sum_of_constant_real_number`**（添字が有限型 `κ` の和。使う側の人手が `m → d ∈ ℤ_{≥1}` で引くのに合わせて `1 ≤ card κ` を仮定する）。
 人手の和は添字 `1, …, m` の上の和なので、`card κ = m + 1` の `m` を取り、`κ` に `Fin (m + 1)` の番号を付けて
-`finite_sum_of_constant_real_number_succ` を当てる（番号を付ける段は mathlib の `Equiv.sum_comp` による）。 -/
+`finite_sum_of_constant_real_number` を当てる（番号を付ける段は mathlib の `Equiv.sum_comp` による）。 -/
 theorem finite_sum_of_constant_real_number_fintype {κ : Type*} [Fintype κ] (hκ : 1 ≤ Fintype.card κ) (r : ℝ) :
     ∑ _j : κ, r = (Fintype.card κ : ℝ) * r := by
   obtain ⟨m, hm⟩ : ∃ m : ℕ, Fintype.card κ = m + 1 := ⟨Fintype.card κ - 1, (Nat.sub_add_cancel hκ).symm⟩
   set e : κ ≃ Fin (m + 1) := (Fintype.equivFin κ).trans (finCongr hm)
   calc ∑ _j : κ, r
       = ∑ _j : Fin (m + 1), r := (e.symm.sum_comp (fun _ => r)).symm      -- `κ` に番号を付ける
-    _ = ((m + 1 : ℕ) : ℝ) * r := finite_sum_of_constant_real_number_succ m r  -- `finite_sum_of_constant_real_number`（`m → card κ`）
+    _ = ((((m + 1 : ℕ) : ℤ)) : ℝ) * r := finite_sum_of_constant_real_number (m + 1) r  -- `finite_sum_of_constant_real_number`（`m → card κ`）
+    _ = ((m + 1 : ℕ) : ℝ) * r := by rw [inclusion_zz_to_rr_of_natCast]     -- `ι` の `Int.cast` の形を `Nat.cast` の形へ（Lean だけの段）
     _ = (Fintype.card κ : ℝ) * r := by rw [hm]                             -- `card κ = m + 1`
 
 /-- **人手 `power_of_two_in_integers_is_at_least_one`**: `M ∈ ℤ_{≥0}` なら `2_ℤ^M ≥ 1`。`M` についての帰納法。 -/

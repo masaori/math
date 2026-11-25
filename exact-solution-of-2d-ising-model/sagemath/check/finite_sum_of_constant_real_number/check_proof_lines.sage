@@ -1,11 +1,15 @@
 # 対象ラベル: finite_sum_of_constant_real_number
-# m ∈ ℤ_{≥1}、r ∈ ℝ について、m = 1 の 3 行と帰納法の段の 5 行を一行ずつ確かめる。
+# m ∈ ℤ_{≥0}、r ∈ ℝ について、m = 0 の 3 行、m = 1 の 3 行と帰納法の段の 5 行を一行ずつ確かめる。
 # 有限和は def_finite_sum_of_real_numbers の再帰、ι は inclusion_zz_to_rr の再帰。r は QQ と AA の元（厳密な比較）。
 load("../../_shared/inclusion_zz_to_rr_by_definition.sage")
 io = iota_zz_to_rr
 cnt = 0
 for r in [QQ(0), QQ(1), QQ(-3)/7, QQ(5), AA(2).sqrt(), AA(3).sqrt() - 1]:
-    S = lambda m: finite_sum_by_definition([r] * m)
+    S = lambda m: r.parent()(0) if m == 0 else finite_sum_by_definition([r] * m)   # def_finite_sum_of_real_numbers の Σ^{0} := 0 と m ≥ 1 の再帰
+    L = [S(0), 0, 0 * r, io(0) * r]                                     # m = 0: 空の和・real_zero_times_is_zero・ι(0) := 0
+    for x, y in zip(L, L[1:]):
+        assert x == y; cnt += 1
+    assert S(0) == 0 * r; cnt += 1                                      # 主張（m = 0）
     L = [S(1), r, 1 * r, io(1) * r]
     for x, y in zip(L, L[1:]):
         assert x == y; cnt += 1

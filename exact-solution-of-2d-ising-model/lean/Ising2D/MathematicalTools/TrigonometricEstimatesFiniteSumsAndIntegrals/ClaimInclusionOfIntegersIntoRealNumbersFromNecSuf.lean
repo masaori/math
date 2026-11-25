@@ -27,6 +27,13 @@ theorem finite_sum_of_constant_real_number_succ_of_necSuf (m : ℕ) (r : ℝ) :
     ∑ _j : Fin (m + 1), r = ((m + 1 : ℕ) : ℝ) * r :=
   NecSuf.sum_const_fin_succ' m r
 
+/-- `finite_sum_of_constant_real_number`（`m ∈ ℤ_{≥0}`）を `NecSuf.sum_const_fin'` の `R := ℝ` として得る
+（具体版の主張の `ι = Int.cast` の形へは `inclusion_zz_to_rr_of_natCast` で移す）。 -/
+theorem finite_sum_of_constant_real_number_of_necSuf (m : ℕ) (r : ℝ) :
+    ∑ _j : Fin m, r = (((m : ℤ)) : ℝ) * r := by
+  rw [inclusion_zz_to_rr_of_natCast]
+  exact NecSuf.sum_const_fin' m r
+
 /-- `inclusion_zz_to_rr_of_power_of_two` を `NecSuf.cast_two_pow'` の `R := ℝ` として得る。 -/
 theorem inclusion_zz_to_rr_of_power_of_two_of_necSuf (M : ℕ) : ((2 ^ M : ℕ) : ℝ) = (2 : ℝ) ^ M :=
   NecSuf.cast_two_pow' (R := ℝ) M

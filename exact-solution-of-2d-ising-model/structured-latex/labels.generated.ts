@@ -429,6 +429,7 @@ export const ALL_LABELS = [
   "finite_sum_of_real_numbers_with_single_nonzero_term",
   "finite_sum_of_real_scalar_multiples",
   "finite_sum_of_real_sums",
+  "finite_sum_of_real_zeros",
   "finite_sum_of_scalar_multiples",
   "finite_sum_of_scalar_multiples_of_one_matrix",
   "finite_sum_of_zero_matrices",

@@ -2,7 +2,7 @@
 # 実数の差・和の有限和、二重の有限和の順序の入れ替えと、非負の実数の有限和の下からの評価を、必要十分版の特殊化として得る
 
 具体版 `ClaimFiniteSumsOfRealNumbers.lean` の主張を、必要十分版 `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean` を
-係数 `R := ℝ` に特殊化して得る。人手のラベルは `finite_sum_of_real_differences`, `finite_sum_of_real_sums`（必要十分版は `Ising2D/NecSuf/MatMulDistribSum.lean` の `finite_sum_add_fin'`）, `finite_double_sum_of_real_numbers_interchange`（必要十分版は `Ising2D/NecSuf/FiniteDoubleSumInterchange.lean`）,
+係数 `R := ℝ` に特殊化して得る。人手のラベルは `finite_sum_of_real_differences`, `finite_sum_of_real_sums`（必要十分版は `Ising2D/NecSuf/MatMulDistribSum.lean` の `finite_sum_add_fin'`）, `finite_sum_of_real_zeros`・`finite_double_sum_of_real_numbers_interchange`（必要十分版は `Ising2D/NecSuf/FiniteDoubleSumInterchange.lean`）,
 `finite_sum_of_negated_real_numbers`, `finite_sum_of_real_scalar_multiples`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`,
 `finite_sum_of_real_numbers_triangle_inequality`, `finite_sum_of_real_numbers_is_monotone`（この 2 つは必要十分版 `Ising2D/NecSuf/FiniteSumSubadditiveAndMonotone.lean`）、`finite_sum_of_real_numbers_moves_one_term_to_end`（必要十分版 `Ising2D/NecSuf/FiniteSumMovesOneTermToEnd.lean`）、`finite_sum_of_real_numbers_with_single_nonzero_term`（必要十分版 `Ising2D/NecSuf/FiniteSumWithSingleNonzeroTerm.lean` の `finSumLeft_single_via_first'`。具体版の `Finset.sum` と必要十分版の `finSumLeft` の一致は `real_finset_sum_eq_finSumLeft`）。人手証明と 1 対 1 に対応する形は具体版のほうである。
 -/
@@ -34,6 +34,10 @@ theorem finite_sum_of_real_sums_of_necSuf (m : ℕ) (a b : Fin m → ℝ) :
 theorem finite_sum_of_real_sums_fintype_of_necSuf {κ : Type*} [Fintype κ] (a b : κ → ℝ) :
     ∑ j, (a j + b j) = (∑ j, a j) + ∑ j, b j :=
   NecSuf.finite_sum_add' (R := ℝ) a b
+
+/-- `finite_sum_of_real_zeros` を `NecSuf.finite_sum_zero_fin'`（係数 `ℝ`。仮定は加法の可換モノイドだけ）の特殊化として得る。 -/
+theorem finite_sum_of_real_zeros_of_necSuf (m : ℕ) : ∑ _j : Fin m, (0 : ℝ) = 0 :=
+  NecSuf.finite_sum_zero_fin' (R := ℝ) m
 
 /-- `finite_double_sum_of_real_numbers_interchange` を `NecSuf.finite_double_sum_interchange_fin'`（係数 `ℝ`。仮定は加法の可換モノイドだけ）の特殊化として得る。 -/
 theorem finite_double_sum_of_real_numbers_interchange_of_necSuf (p q : ℕ) (a : Fin p → Fin q → ℝ) :

@@ -19,7 +19,7 @@
 | --- | --- | --- | --- |
 | `inclusion_zz_to_rr_of_one` | `ι(1) = ι(0 + 1) = ι(0) + 1 = 0 + 1 = 1` | `cast_one'`（同じ段） | 埋め込みの 2 つの式、`0` が和の左単位元 |
 | `inclusion_zz_to_rr_preserves_sum_of_nonnegatives` | `b` の帰納法。`b = 0` は `ι(a + 0) = ι(a) = ι(a) + 0 = ι(a) + ι(0)`、`b → b + 1` は `ι(a + (b + 1)) = ι((a + b) + 1) = ι(a + b) + 1 = (ι(a) + ι(b)) + 1 = ι(a) + (ι(b) + 1) = ι(a) + ι(b + 1)` | `cast_add'`（同じ段） | 埋め込みの 2 つの式、`0` が和の右単位元、和の結合律 |
-| `finite_sum_of_constant_real_number` | `m` の帰納法。`m = 1` は `Σ_{j=1}^{1} r = r = 1r = ι(1)r`、`m → m + 1` は `Σ_{j=1}^{m+1} r = (Σ_{j=1}^{m} r) + r = ι(m)r + r = ι(m)r + 1r = (ι(m) + 1)r = ι(m + 1)r` | `sum_const_fin_succ'`（同じ段） | 有限和の 2 つの式（左から足す）、埋め込みの 2 つの式（`cast_one'` を通して）、`1` が乗法の左単位元、右からの分配律 `(x + y)r = xr + yr` |
+| `finite_sum_of_constant_real_number` | `m = 0` は `Σ_{j=1}^{0} r = 0 = 0r = ι(0)r`、`m ≥ 1` は `m` の帰納法で、`m = 1` は `Σ_{j=1}^{1} r = r = 1r = ι(1)r`、`m → m + 1` は `Σ_{j=1}^{m+1} r = (Σ_{j=1}^{m} r) + r = ι(m)r + r = ι(m)r + 1r = (ι(m) + 1)r = ι(m + 1)r` | `sum_const_fin'`（`m = 0` の 3 段は同じ並び。`m ≥ 1` は `sum_const_fin_succ'`（同じ段）） | `m = 0`: 空の和、`0` が乗法の左零元 `0r = 0`、埋め込みの `ι(0) = 0`。`m ≥ 1`: 有限和の 2 つの式（左から足す）、埋め込みの 2 つの式（`cast_one'` を通して）、`1` が乗法の左単位元、右からの分配律 `(x + y)r = xr + yr` |
 | `inclusion_zz_to_rr_of_power_of_two` | `M` の帰納法。`M = 0` は `ι(2^0) = ι(1) = 1 = 2^0`、`M → M + 1` は `ι(2^{M+1}) = ι(2^M·2) = ι(2^M(1+1)) = ι(2^M·1 + 2^M·1) = ι(2^M + 2^M) = ι(2^M) + ι(2^M) = 2^M + 2^M = 2^M·1 + 2^M·1 = 2^M(1 + 1) = 2^M·2 = 2^{M+1}` | `cast_two_pow'`（同じ段） | `ℕ` の側: 冪の 2 つの式・`2 = 1 + 1`・分配律・乗法の単位元。`R` の側: `cast_add'`・`cast_one'`、`1` が乗法の右単位元、左からの分配律 `x(y + z) = xy + xz`、`1 + 1 = 2`、冪の 2 つの式 `a^0 = 1`・`a^{m+1} = a^ma` |
 | `power_of_two_in_integers_is_at_least_one` | `M` の帰納法。`2^0 = 1 ≥ 1`、`2^{M+1} = 2^M·2 = 2^M(1+1) = 2^M·1 + 2^M·1 = 2^M + 2^M ≥ 1 + 2^M ≥ 1 + 1 ≥ 1 + 0 = 1` | `one_le_two_pow'`（同じ段） | 冪の 2 つの式、`2 = 1 + 1`、左からの分配律、`1` が乗法の右単位元、加法の単調性（辺々を足す）、`0 ≤ 1`、`0` が和の右単位元、反射律 |
 | `inclusion_zz_to_rr_of_positive_is_at_least_one` | `n` の帰納法。`ι(1) = 1 ≥ 1`、`ι(n + 1) = ι(n) + 1 ≥ 1 + 1 ≥ 1 + 0 = 1` | `one_le_cast'`（同じ段） | `cast_one'`、埋め込みの `ι(n + 1) = ι(n) + 1`、加法の単調性、`0 ≤ 1`、`0` が和の右単位元、反射律 |
@@ -35,6 +35,7 @@
 - **型クラスについて**: mathlib の型クラスでは、効いている性質だけを切り出した組を作れない（`One` を二重に持つことになる）ので、
   それを含む最小の標準の組を置き、効いていない性質を次に書く。
   - `sum_const_fin_succ'` の `[NonAssocSemiring R]` のうち、左からの分配律・`mul_one`・`zero_mul`・`mul_zero` は効いていない。
+    `sum_const_fin'` では `m = 0` の段で `zero_mul` が効き、左からの分配律・`mul_one`・`mul_zero` は効いていない。
     加法の可換性は証明の段では使わず、有限和 `Finset.sum` を書くためだけに要る。
   - `cast_two_pow'` の `[Semiring R]` のうち、右からの分配律・加法の可換性・乗法の結合律は効いていない
     （`Semiring` は記法 `^`（`Monoid` の冪）のためで、使う冪の性質は `pow_zero`・`pow_succ` の 2 つの式だけである）。
@@ -100,6 +101,17 @@ theorem sum_const_fin_succ' {R : Type*} [NonAssocSemiring R] (m : ℕ) (r : R) :
       _ = ((m + 1 : ℕ) : R) * r + 1 * r := by rw [one_mul]                 -- `1` は乗法の左単位元
       _ = (((m + 1 : ℕ) : R) + 1) * r := (add_mul _ _ _).symm              -- 右からの分配律
       _ = ((m + 1 + 1 : ℕ) : R) * r := by rw [Nat.cast_succ (m + 1)]       -- 埋め込みの `ι(n + 1) = ι(n) + 1` を右辺から左辺へ
+
+/-- **必要十分版の `finite_sum_of_constant_real_number`**（`m ∈ ℤ_{≥0}`）: `m = 0` の段は具体版と同じ 3 段（空の和 → `0 r = 0` を右辺から左辺へ →
+埋め込みの `ι(0) = 0` を右辺から左辺へ）、`m ≥ 1` は `sum_const_fin_succ'`。`m = 0` の段で効くのは乗法の零元の性質 `0 r = 0`（`NonAssocSemiring` の公理）である。 -/
+theorem sum_const_fin' {R : Type*} [NonAssocSemiring R] (m : ℕ) (r : R) :
+    ∑ _j : Fin m, r = (m : R) * r := by
+  cases m with
+  | zero =>
+    calc ∑ _j : Fin 0, r = 0 := Fin.sum_univ_zero _                         -- 有限和の `Σ_{j=1}^{0} r_j = 0`
+      _ = 0 * r := (zero_mul r).symm                                       -- `0 r = 0` を右辺から左辺へ
+      _ = ((0 : ℕ) : R) * r := by rw [Nat.cast_zero]                       -- 埋め込みの `ι(0) = 0` を右辺から左辺へ
+  | succ m => exact sum_const_fin_succ' m r
 
 /-- **必要十分版の `inclusion_zz_to_rr_of_power_of_two`**: `ι(2^M) = 2^M`。`M` についての帰納法。 -/
 theorem cast_two_pow' {R : Type*} [Semiring R] (M : ℕ) : ((2 ^ M : ℕ) : R) = (2 : R) ^ M := by
