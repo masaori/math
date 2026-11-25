@@ -7,7 +7,8 @@
 
 **必要十分版**: `Ising2D/NecSuf/NegConjPair.lean`
 （`Ising2D.NecSuf.mul_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul`）。
-具体版は必要十分版の系として導出する。
+具体版は人手の鎖どおりに示し、必要十分版の特殊化としての導出は `ClaimRelationGamma2TildeFromNecSuf.lean` に置く
+（このファイルは必要十分版を import しない）。
 
 ## 形式化の方針
 
@@ -34,9 +35,10 @@
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfZeroIsZero
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma2TildeNonzero
-import Ising2D.NecSuf.NegConjPair
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNegationAndDifference
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 
 namespace Ising2D
 
@@ -57,24 +59,81 @@ theorem gamma2_neg_thetaTilde_eq (M : ℕ) (μ : ℤ) :
     gamma2 K (-thetaTilde M μ) = -star (gamma2 K (thetaTilde M μ)) :=
   gamma2_neg_eq_neg_conj K (thetaTilde M μ)
 
-/-- **人手証明 (2)**: `γ_2(θ)γ_2(-θ) = (-|γ_2(θ)|^2)_ℂ`（右辺は実数 `-|γ_2(θ)|^2` の像。人手の (2) と同じ形）。
-必要十分版 `NecSuf.mul_of_eq_neg_conj` の系。必要十分版の右辺 `-((normSq : ℝ) : ℂ)` の符号反転を
-像の中へ入れるのは `Complex.ofReal_neg`（人手の (2) の鎖の 8・9 行目が `real_inclusion_preserves_product` と
-ℝ の `(-1)a = -a` で行う、ℂ の符号反転から実数の符号反転の像への書き換え）。人手の 9 行の鎖と 1 対 1 の形にする件は状態台帳の (cl14)。 -/
+/-- **人手証明 (2) の等式**: `γ_2(θ)γ_2(-θ) = (-|γ_2(θ)|^2)_ℂ`（右辺は実数 `-|γ_2(θ)|^2` の像。人手の (2) と同じ形）。
+人手の (2) の 9 行の鎖に 1 段ずつ対応する。`complex_numbers_form_a_field`（積の結合律・可換律）と
+`complex_conjugate_times_self` は本文に具体版の宣言が無く、mathlib の `mul_assoc`・`mul_comm` と
+`Complex.normSq_eq_conj_mul_self`（`absGamma2_sq` で `normSq` を `|γ_2(θ)|^2` に戻す）で受け取る。
+必要十分版 `NecSuf.mul_of_eq_neg_conj` の特殊化としての導出は `ClaimRelationGamma2TildeFromNecSuf.lean` に置く。 -/
 theorem gamma2_mul_gamma2_neg_eq_neg_absSq :
-    gamma2 K θ * gamma2 K (-θ) = ((-(absGamma2 K θ ^ 2) : ℝ) : ℂ) := by
-  rw [Complex.ofReal_neg, absGamma2_sq]
-  exact NecSuf.mul_of_eq_neg_conj (gamma2_neg_eq_neg_conj K θ)
+    gamma2 K θ * gamma2 K (-θ) = ((-(absGamma2 K θ ^ 2) : ℝ) : ℂ) :=
+  calc gamma2 K θ * gamma2 K (-θ)
+      = gamma2 K θ * (-star (gamma2 K θ)) := by
+        rw [gamma2_neg_eq_neg_conj K θ]                                      -- (1)
+    _ = gamma2 K θ * (((-1 : ℝ) : ℂ) * star (gamma2 K θ)) := by
+        rw [complex_neg_eq_ofReal_neg_one_mul (star (gamma2 K θ))]           -- `multiply_by_minus_one`
+    _ = (gamma2 K θ * ((-1 : ℝ) : ℂ)) * star (gamma2 K θ) :=
+        (mul_assoc _ _ _).symm                                               -- `complex_numbers_form_a_field` の積の結合律
+    _ = (((-1 : ℝ) : ℂ) * gamma2 K θ) * star (gamma2 K θ) := by
+        rw [mul_comm (gamma2 K θ) ((-1 : ℝ) : ℂ)]                            -- `complex_numbers_form_a_field` の積の可換律
+    _ = ((-1 : ℝ) : ℂ) * (gamma2 K θ * star (gamma2 K θ)) :=
+        mul_assoc _ _ _                                                      -- `complex_numbers_form_a_field` の積の結合律
+    _ = ((-1 : ℝ) : ℂ) * (star (gamma2 K θ) * gamma2 K θ) := by
+        rw [mul_comm (gamma2 K θ) (star (gamma2 K θ))]                       -- `complex_numbers_form_a_field` の積の可換律
+    _ = ((-1 : ℝ) : ℂ) * ((absGamma2 K θ ^ 2 : ℝ) : ℂ) := by
+        rw [absGamma2_sq K θ, Complex.normSq_eq_conj_mul_self]; rfl
+          -- `complex_conjugate_times_self`。具体版の宣言が無いので、`absGamma2` の置き方から来る `absGamma2_sq`
+          -- （`|γ_2(θ)|^2 = normSq(γ_2(θ))`）と mathlib の `Complex.normSq_eq_conj_mul_self` の 2 つで受ける
+    _ = (((-1) * absGamma2 K θ ^ 2 : ℝ) : ℂ) :=
+        real_inclusion_mul (-1) (absGamma2 K θ ^ 2)                          -- `real_inclusion_preserves_product`
+    _ = ((-(absGamma2 K θ ^ 2) : ℝ) : ℂ) := by
+        rw [neg_one_mul]                                                     -- ℝ で `(-1)a = -a`（`set_and_algebra_notation` の ℝ の体。`a → |γ_2(θ)|^2`）
 
-/-- **人手証明 (4)**: `(|γ_2(θ)|)^2 = -γ_2(θ)γ_2(-θ)`（複素平方根を使わない形）。 -/
+/-- **人手証明 (4)**: `(|γ_2(θ)|)^2 = -γ_2(θ)γ_2(-θ)`（複素平方根を使わない形）。
+右辺から始め、人手の (4) の最初の鎖 `-γ_2(θ)γ_2(-θ) = (-1_ℂ)(γ_2(θ)γ_2(-θ)) = (-1_ℂ)(-r)_ℂ = ((-1)(-r))_ℂ = (1·r)_ℂ = r_ℂ`
+（`r := |γ_2(θ)|^2`）の 5 段に 1 段ずつ対応させ、最後に `r_ℂ = (|γ_2(θ)|_ℂ)^2` の 3 段（`square_of_real_number_is_product`・
+`real_inclusion_preserves_product`・ℂ の冪 `w^2 = w·w`）で左辺へ着く。人手の (4) の残り（`r_ℂ` の複素平方根を `|γ_2(θ)|_ℂ` と求める段）は
+平方根を形式化しないので無い（冒頭の「形式化の方針」）。`(-a)(-b) = ab`・`1·x = x` は `set_and_algebra_notation` の ℝ の体の性質。 -/
 theorem sq_absGamma2 :
     ((absGamma2 K θ : ℝ) : ℂ) ^ 2 = -(gamma2 K θ * gamma2 K (-θ)) :=
-  NecSuf.sq_absOf_eq_neg_mul (gamma2_neg_eq_neg_conj K θ)
+  (calc -(gamma2 K θ * gamma2 K (-θ))
+      = ((-1 : ℝ) : ℂ) * (gamma2 K θ * gamma2 K (-θ)) :=
+        complex_neg_eq_ofReal_neg_one_mul _                                  -- `multiply_by_minus_one`
+    _ = ((-1 : ℝ) : ℂ) * ((-(absGamma2 K θ ^ 2) : ℝ) : ℂ) := by
+        rw [gamma2_mul_gamma2_neg_eq_neg_absSq K θ]                          -- (2)
+    _ = (((-1) * (-(absGamma2 K θ ^ 2)) : ℝ) : ℂ) :=
+        real_inclusion_mul _ _                                               -- `real_inclusion_preserves_product`
+    _ = ((1 * absGamma2 K θ ^ 2 : ℝ) : ℂ) := by
+        rw [neg_mul_neg]                                                     -- ℝ で `(-a)(-b) = ab`（`a → 1`, `b → r`）
+    _ = ((absGamma2 K θ ^ 2 : ℝ) : ℂ) := by
+        rw [one_mul]                                                         -- ℝ で `1·x = x`（`x → r`）
+    _ = ((absGamma2 K θ * absGamma2 K θ : ℝ) : ℂ) := by
+        rw [square_of_real_number_is_product]                                -- `square_of_real_number_is_product`（`r → |γ_2(θ)|`）
+    _ = ((absGamma2 K θ : ℝ) : ℂ) * ((absGamma2 K θ : ℝ) : ℂ) :=
+        (real_inclusion_mul _ _).symm                                        -- `real_inclusion_preserves_product` を右辺から左辺へ
+    _ = ((absGamma2 K θ : ℝ) : ℂ) ^ 2 :=
+        (sq _).symm).symm                                                    -- ℂ の冪 `w^2 = w·w` を右辺から左辺へ
 
-/-- **人手証明 (5)**: `(i|γ_2(θ)|)^2 = γ_2(θ)γ_2(-θ)`（複素平方根を使わない形）。 -/
+/-- **人手証明 (5)**: `(i|γ_2(θ)|)^2 = γ_2(θ)γ_2(-θ)`（複素平方根を使わない形）。
+本文の (5) は (2) で `γ_2(θ)γ_2(-θ)` を `(-r)_ℂ` に書き換え、その複素平方根を `i|γ_2(θ)|_ℂ` と求める鎖である。
+平方根を形式化しないこの形は別の経路で、左辺を `i^2 (|γ_2(θ)|_ℂ)^2` に開き、`i^2 = (-1)_ℂ` と (4) で
+`(-1)_ℂ(-(γ_2(θ)γ_2(-θ)))` にし、`multiply_by_minus_one` と ℂ で `-(-z) = z` で右辺へ着く。本文の鎖とは段が対応しない
+（冒頭の「形式化の方針」）。`i^2 = -1` は本文に主張のブロックが無く（`def_imaginary_unit` の `i := (0,1)` と
+`definition_of_cc` の積から従う）、mathlib の `Complex.I_sq` で受ける。 -/
 theorem sq_I_absGamma2 :
     (Complex.I * ((absGamma2 K θ : ℝ) : ℂ)) ^ 2 = gamma2 K θ * gamma2 K (-θ) :=
-  NecSuf.sq_I_mul_absOf_eq_mul (gamma2_neg_eq_neg_conj K θ)
+  calc (Complex.I * ((absGamma2 K θ : ℝ) : ℂ)) ^ 2
+      = Complex.I ^ 2 * ((absGamma2 K θ : ℝ) : ℂ) ^ 2 :=
+        mul_pow _ _ 2                                                        -- ℂ の積の冪は冪の積（積の可換律）
+    _ = ((-1 : ℝ) : ℂ) * ((absGamma2 K θ : ℝ) : ℂ) ^ 2 := by
+        rw [Complex.I_sq, Complex.ofReal_neg, Complex.ofReal_one]
+          -- `i^2 = -1`（mathlib の `Complex.I_sq`）と `(-1)_ℂ = -(1_ℂ)`（mathlib の `Complex.ofReal_neg`・`Complex.ofReal_one`。
+          -- `1_ℂ = (1)_ℂ` は `inclusion_rr_to_cc` の具体版 `complex_one_eq_ofReal_one` と同じ事実）
+    _ = ((-1 : ℝ) : ℂ) * (-(gamma2 K θ * gamma2 K (-θ))) := by
+        rw [sq_absGamma2 K θ]                                                -- (4)
+    _ = -(-(gamma2 K θ * gamma2 K (-θ))) :=
+        (complex_neg_eq_ofReal_neg_one_mul _).symm                           -- `multiply_by_minus_one` を右辺から左辺へ
+    _ = gamma2 K θ * gamma2 K (-θ) :=
+        neg_neg _                                                            -- 本文の (5) には無い段。ℂ の体の性質 `-(-z) = z`（`complex_numbers_form_a_field`）を mathlib の `neg_neg` で受ける
 
 /-- **人手証明 (4) の `|γ_2(θ)| > 0`**（人手はこれを (2) の狭義部分の前置きで示す）: `γ_2(θ) ≠ 0_ℂ` なら `|γ_2(θ)| > 0`。
 人手の 3 段に 1 段ずつ対応させる。
