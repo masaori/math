@@ -2,7 +2,6 @@ import Ising2DLambda.KacWard.RepresentativeIncrement
 import Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning
 import Ising2DLambda.KacWard.TerminalMatrix
 import Ising2DLambda.TransferMatrix.Basic
-import Ising2DLambda.NecSuf.KacWard.EdgeRepresentativeDisplacement
 
 namespace Ising2DLambda.KacWard
 

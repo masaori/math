@@ -4,7 +4,8 @@
 人手証明と同じ有限計算を行う。辺の接続と横断判定そのものは SageMath 層が
 本文の定義から全添字対について独立に検査する。
 -/
-import Ising2DLambda.NecSuf.KacWard.CrossingFreeSignCounterexample
+import Mathlib.Data.Int.Basic
+import Mathlib.Data.List.Basic
 
 namespace Ising2DLambda.KacWard
 
@@ -15,13 +16,5 @@ theorem crossingFreeSignCounterexample :
       (List.replicate 15 false).all (fun value => !value) = true ∧
       ((-1 : ℤ) ^ 0) ≠ ((-1 : ℤ) ^ 1) := by
   decide
-
-theorem crossingFreeSignCounterexample_from_necSuf :
-    ([0, 1, -1, 0, -1, 1] : List ℤ).sum = 0 ∧
-      ([0, 1, 0, 0, 1, 0] : List ℕ).sum % 2 = 0 ∧
-      ([0, 0, 0, 0, 0, 0] : List ℕ).sum % 2 = 0 ∧
-      (List.replicate 15 false).all (fun value => !value) = true ∧
-      ((-1 : ℤ) ^ 0) ≠ ((-1 : ℤ) ^ 1) :=
-  crossingFreeSignCounterexample
 
 end Ising2DLambda.KacWard

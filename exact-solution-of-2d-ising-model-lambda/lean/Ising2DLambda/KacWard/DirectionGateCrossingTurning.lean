@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.TotalTurning
-import Ising2DLambda.NecSuf.KacWard.DirectionAxis
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -14,8 +13,5 @@ theorem directionAxis_values :
     directionAxis 0 = 0 ∧ directionAxis 1 = 1 ∧
       directionAxis 2 = 0 ∧ directionAxis 3 = 1 := by
   decide
-
-theorem directionAxis_from_necSuf (d : ZMod 4) :
-    directionAxis d = Ising2DLambda.NecSuf.KacWard.residueAxis 2 d := rfl
 
 end Ising2DLambda.KacWard

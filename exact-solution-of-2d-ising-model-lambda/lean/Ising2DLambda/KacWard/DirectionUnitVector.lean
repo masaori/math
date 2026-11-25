@@ -1,4 +1,4 @@
-import Ising2DLambda.NecSuf.KacWard.DirectionUnitVector
+import Mathlib.Data.ZMod.Basic
 
 namespace Ising2DLambda.KacWard
 
@@ -13,10 +13,5 @@ theorem directionUnitVector_values :
     directionUnitVector 2 = (0, -1) ∧
     directionUnitVector 3 = (-1, 0) := by
   decide
-
-theorem directionUnitVector_from_necSuf (d : ZMod 4) :
-    directionUnitVector d =
-      Ising2DLambda.NecSuf.KacWard.directionUnitVector
-        (0, 1) (1, 0) (0, -1) (-1, 0) d := rfl
 
 end Ising2DLambda.KacWard

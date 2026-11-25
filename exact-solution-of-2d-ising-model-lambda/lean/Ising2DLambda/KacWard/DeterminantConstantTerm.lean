@@ -18,7 +18,6 @@ D(x) = det K(x)                              `kacWardDeterminant`
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolyPowerDifferenceFactorization
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansion
-import Ising2DLambda.NecSuf.KacWard.DeterminantConstantTerm
 import Mathlib.LinearAlgebra.Matrix.Polynomial
 
 namespace Ising2DLambda.KacWard
@@ -84,12 +83,5 @@ theorem kacWardDeterminant_coeff_zero {ι : Type} [Fintype ι] [DecidableEq ι]
   · -- 恒等置換は必ず和の添字に入っている
     intro h
     exact absurd (Finset.mem_univ (1 : Equiv.Perm ι)) h
-
-/-- 具体版が必要十分版の特殊化として得られることの記録。 -/
-theorem kacWardDeterminant_coeff_zero_from_necSuf {ι : Type}
-    [Fintype ι] [DecidableEq ι] (M : Matrix ι ι Qbar) :
-    (kacWardDeterminant M).coeff 0 = 1 := by
-  rw [kacWardDeterminant_eq_mathlib]
-  exact Ising2DLambda.NecSuf.KacWard.det_one_sub_X_mul_coeff_zero M
 
 end Ising2DLambda.KacWard

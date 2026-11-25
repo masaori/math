@@ -14,11 +14,8 @@
 -/
 import Ising2DLambda.KacWard.Turn
 import Mathlib.Data.ZMod.Basic
-import Ising2DLambda.NecSuf.KacWard.CyclicTurningVanishes
 
 namespace Ising2DLambda.KacWard
-
-open Ising2DLambda.NecSuf.KacWard
 
 /-- `def_direction_residue_projection`。整数の四を法とする剰余類。 -/
 def directionResidueProjection (n : ℤ) : ZMod 4 := n
@@ -27,10 +24,6 @@ theorem directionResidueProjection_add (a b : ℤ) :
     directionResidueProjection (a + b) =
       directionResidueProjection a + directionResidueProjection b := by
   simp [directionResidueProjection]
-
-theorem directionResidueProjection_from_necSuf (n : ℤ) :
-    directionResidueProjection n =
-      Ising2DLambda.NecSuf.KacWard.residueProjection 4 n := rfl
 
 private theorem direction_add_turns (d : ZMod 4) (steps : List ℤ) :
     steps.foldl (fun (a : ZMod 4) (n : ℤ) => a + (n : ZMod 4)) d
@@ -68,17 +61,5 @@ theorem four_dvd_cyclic_total_turning (d : ZMod 4) (turns : List Turn) (closing 
   have h := cyclic_total_turning_vanishes d turns closing hclosed
   simpa using (ZMod.intCast_zmod_eq_zero_iff_dvd
     ((turns.map turnValue).sum + turnValue closing) 4).mp h
-
-/-- 具体版が必要十分版の特殊化として得られることの記録。`A = ZMod 4`（加法群なので
-左簡約を持つ）、`φ` を整数キャスト（`Int.cast_zero` と `Int.cast_add` が
-π₄ の零の保存と加法性）と取れば、必要十分版がこの主張を与える。 -/
-theorem cyclic_total_turning_vanishes_from_necSuf (d : ZMod 4) (turns : List Turn)
-    (closing : Turn)
-    (hclosed :
-      (turns.map turnValue).foldl (fun (a : ZMod 4) (n : ℤ) => a + (n : ZMod 4)) d
-        + ((turnValue closing : ℤ) : ZMod 4) = d) :
-    (((turns.map turnValue).sum + turnValue closing : ℤ) : ZMod 4) = 0 :=
-  closed_walk_additive_vanishes_necSuf (fun n : ℤ => (n : ZMod 4))
-    Int.cast_zero Int.cast_add d (turns.map turnValue) (turnValue closing) hclosed
 
 end Ising2DLambda.KacWard
