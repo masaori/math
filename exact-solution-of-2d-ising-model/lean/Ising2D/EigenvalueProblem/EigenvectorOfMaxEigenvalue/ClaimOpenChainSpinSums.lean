@@ -28,7 +28,7 @@
 人手の `1` と `M_col` は `firstSite`・`lastSite`、人手の `m+1` は `nextSite m` である（証明の中の書き方は下の節の冒頭に書いた）。
 `openChainEnergy` の開鎖の結合の添字 `{1,…,M_col-1}` は、
 `openChainD0`・`openChainD0_mulVec_basisVec` と同じく `Fin (M - 1)` の元 `j` で、サイトへは `Fin.castLE (Nat.sub_le M 1) j` で移す
-（人手の添字が変わらないことは `finIndexToZZ_castLE`。`M ≤ 1` の値は人手の定義（`M_col ≥ 2`）の外）。
+（人手の添字が変わらないことは `finIndexToZZ_castLE`。`M ≤ 1` の値は人手の定義（`M_col ≥ 2`）の外なので、`openChainEnergy_mem_int`・`openChainD0_mulVec_basisVec_eq_energy` は仮定 `2 ≤ M` を置く）。
 `openChainEnergy` は `openChainD0_mulVec_basisVec` の係数と定義で一致する。
 
 人手の `{-1,1}` 上の有限和 `∑_{t∈{-1,1}} f(t) = f(1) + f(-1)` は `sum_spinVal` である。
@@ -97,8 +97,10 @@ def spinMul (a b : SpinVal) : SpinVal :=
 noncomputable def openChainEnergy (s : SpinConf M) : ℝ :=
   ∑ j : Fin (M - 1), (s (Fin.castLE (Nat.sub_le M 1) j) : ℝ) * (s (nextSite (Fin.castLE (Nat.sub_le M 1) j)) : ℝ)
 
-/-- 人手 `def_open_chain_spin_energy` の `E(s) ∈ ℤ`。 -/
-theorem openChainEnergy_mem_int (s : SpinConf M) : ∃ n : ℤ, openChainEnergy s = n := by
+/-- 人手 `def_open_chain_spin_energy` の `E(s) ∈ ℤ`。
+
+人手の範囲 `M_col ∈ ℤ_{≥2}` を仮定 `2 ≤ M` に置く（証明は使わない。`M ≤ 1` の空の和は人手の定義の外）。 -/
+theorem openChainEnergy_mem_int (_hM : 2 ≤ M) (s : SpinConf M) : ∃ n : ℤ, openChainEnergy s = n := by
   have h : ∀ a : SpinVal, ∃ z : ℤ, (a : ℝ) = z := fun a => by
     rcases a.2 with h | h
     · exact ⟨1, by rw [h]; norm_num⟩
@@ -109,11 +111,11 @@ theorem openChainEnergy_mem_int (s : SpinConf M) : ∃ n : ℤ, openChainEnergy 
   rw [openChainEnergy, Int.cast_sum]
   exact Finset.sum_congr rfl fun m _ => by rw [Int.cast_mul, hz, hz]
 
-/-- 人手 `D0_G_diagonal_action` の係数は `E(s)`: `D_0f_{ι(s)} = E(s)f_{ι(s)}`。 -/
-theorem openChainD0_mulVec_basisVec_eq_energy (s : SpinConf M) :
+/-- 人手 `D0_G_diagonal_action` の係数は `E(s)`: `D_0f_{ι(s)} = E(s)f_{ι(s)}`（人手と同じく `M_col ≥ 2`）。 -/
+theorem openChainD0_mulVec_basisVec_eq_energy (hM : 2 ≤ M) (s : SpinConf M) :
     openChainD0 M *ᵥ basisVec (configBasisIso M s)
       = ((openChainEnergy s : ℝ) : ℂ) • basisVec (configBasisIso M s) :=
-  openChainD0_mulVec_basisVec s
+  openChainD0_mulVec_basisVec hM s
 
 /-! ## `open_chain_partition_sum`（人手の Step 1・Step 2 と同じ行）
 

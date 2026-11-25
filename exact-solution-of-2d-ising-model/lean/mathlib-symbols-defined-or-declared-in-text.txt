@@ -127,7 +127,8 @@ Fin.castLE	def_index_set_from_one_to_n
 # 複素数の 2 主張と、実数の定数の和・二重の和の順序の入れ替え・実数の有限和の包含も同じ日に m ≥ 0 へ広げた。同じ日の洗い出しで、本文が m ≥ 1 しか述べないのに
 # Lean が Fin m の上の空の和を含めて述べる実数・複素数の有限和の主張は、次の開鎖の宣言を除いて残っていない。(b) を直した同じ日に、開鎖の和を Fin (M − 1) の上の和へ
 # 書き換えたので、本文が M_col ≥ 2 しか述べないのに Lean が M ≤ 1 の Fin 0 の上の空の和も含めて述べる主張（openChainEnergy_mem_int・openChainD0_mulVec_basisVec・
-# openChainD0_mulVec_basisVec_eq_energy と、それらの式を使う主張）が (a) に入った。状態台帳の行「有限和と有限集合の記号」の五単位目が引き受ける。添字を任意の有限型に取る行列の添字の上の和（本文は n ≥ 1 の
+# openChainD0_mulVec_basisVec_eq_energy と、それらの式を使う主張）が (a) に入った。同じ日の五単位目で、それらの主張（H1plus_eq_bulk_sub_boundary を含む 14 宣言）に
+# 本文の M_col ≥ 2 を仮定 2 ≤ M として置いて済んだ（定義 openChainD0・openChainEnergy は仮定なしのまま。M ≤ 1 の値はどの主張も述べない）。添字を任意の有限型に取る行列の添字の上の和（本文は n ≥ 1 の
 # real_bilinear_value_is_sum_with_real_matrix_vector_product・real_symmetric_matrix_moves_between_factors_of_sum_of_products・trace_basic_properties の
 # trace_identity_eq_sum_one）と行列の和（H2 の M = 0 など）は、下の行列の有限和と同じく行「行列とその演算」で扱う）、(b) Fin の部分集合（univ.filter …）の上の和（2026-11-25 に、
 # openChainD0・openChainEnergy・openChainD0_mulVec_basisVec・H1plus_eq_bulk_sub_boundary を Fin (M − 1) の上の和へ書き換え、filter の補題を消して済んだ）、

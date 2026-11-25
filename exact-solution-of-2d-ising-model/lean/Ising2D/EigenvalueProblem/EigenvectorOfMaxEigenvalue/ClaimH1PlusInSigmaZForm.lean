@@ -473,8 +473,10 @@ noncomputable def boundaryYXYFamily (M : ℕ) (hM : M ≠ 0) : Fin M → Matrix 
 （`openChainD0` と同じ書き方。`DefinitionOpenChainAndBoundaryOperators.lean`）である。
 Lean の `H1plus` は全サイトの和に境界項の係数 `lastSign (-1)` を掛けた形なので、`M = n + 1` と置いて和を
 最初の `n` 項と最後の 1 項（人手のサイト `M_col`）とに分ける（`def_finite_sum_of_matrices` の帰納の式。Lean は `Fin.sum_univ_castSucc`）。
-最初の `n` 項のサイトは `M_col` でないので係数が `1`（`castLE_sub_one_val_add_one_ne`）、最後の項の係数は `-1` である。 -/
-theorem H1plus_eq_bulk_sub_boundary (hM : M ≠ 0) :
+最初の `n` 項のサイトは `M_col` でないので係数が `1`（`castLE_sub_one_val_add_one_ne`）、最後の項の係数は `-1` である。
+人手の `M_col ∈ ℤ_{≥2}` を仮定 `2 ≤ M` に置く（証明はサイト `M_col` が在ること `hM : M ≠ 0` だけを使う。`M = 1` の
+`Fin 0` の上の空の和は人手の定義の外）。 -/
+theorem H1plus_eq_bulk_sub_boundary (_hM2 : 2 ≤ M) (hM : M ≠ 0) :
     H1plus M
       = ∑ j : Fin (M - 1), Y (Fin.castLE (Nat.sub_le M 1) j) * Z (nextSite (Fin.castLE (Nat.sub_le M 1) j))
         - Y (lastSite M hM) * Z (firstSite M hM) := by
@@ -505,7 +507,7 @@ theorem H1_plus_in_sigma_z_form (hM : 2 ≤ M) :
   calc Complex.I • H1plus (r + 2)
       = Complex.I • ((∑ j : Fin (r + 1), Y (Fin.castSucc j) * Z (nextSite (Fin.castSucc j)))
           - Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) := by
-        rw [H1plus_eq_bulk_sub_boundary hM0]; rfl       -- `def_H1_plus`（`Fin (r + 2 - 1)` は `Fin (r + 1)`、`Fin.castLE` は `Fin.castSucc` と定義として等しい）
+        rw [H1plus_eq_bulk_sub_boundary (by omega) hM0]; rfl       -- `def_H1_plus`（`Fin (r + 2 - 1)` は `Fin (r + 1)`、`Fin.castLE` は `Fin.castSucc` と定義として等しい）
     _ = Complex.I • (∑ j : Fin (r + 1), Y (Fin.castSucc j) * Z (nextSite (Fin.castSucc j)))
           - Complex.I • (Y (lastSite (r + 2) hM0) * Z (firstSite (r + 2) hM0)) :=
         smul_sub_tensorPow _ _ _                        -- `scalar_multiple_distributes_over_matrix_difference`

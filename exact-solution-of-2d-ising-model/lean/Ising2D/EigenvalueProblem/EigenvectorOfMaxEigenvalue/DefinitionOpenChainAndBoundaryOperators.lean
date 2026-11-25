@@ -19,8 +19,9 @@
 人手は両定義で `M_col ∈ ℤ_{≥2}` を置くが、`G` はサイト `1` と `M_col` が在ること（`M ≠ 0`）だけで定まるので、Lean の仮定はそれだけにする。
 `D_0` は Lean では仮定なしで定める。人手の `M_col - 1` は ℤ の差で、Lean の和の添字の個数 `M - 1` は ℕ の差である。
 `M ≥ 1` では `ι_{ℕ→ℤ}(M - 1) = ι_{ℕ→ℤ}(M) - 1_ℤ` で両者は一致する。`M ≤ 1` の値（`M = 0` では ℕ の差が本文の定義域の外で `0 - 1 = 0`、
-どちらも `Fin 0` の上の空の和）は人手の定義の範囲（`M_col ≥ 2`）の外である。この定義を `M ≤ 1` も含めて述べる主張
-（`openChainD0_mulVec_basisVec` など）に人手の `M_col ≥ 2` を置く直しは、状態台帳の行「有限和と有限集合の記号」に残してある。
+どちらも `Fin 0` の上の空の和）は人手の定義の範囲（`M_col ≥ 2`）の外である。この定義と `openChainEnergy` を使う主張
+（`openChainD0_mulVec_basisVec`・`openChainEnergy_mem_int`・`H1plus_eq_bulk_sub_boundary` など）は、人手の `M_col ≥ 2` を仮定 `2 ≤ M` に置き、
+`M ≤ 1` の値について述べない。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon
 

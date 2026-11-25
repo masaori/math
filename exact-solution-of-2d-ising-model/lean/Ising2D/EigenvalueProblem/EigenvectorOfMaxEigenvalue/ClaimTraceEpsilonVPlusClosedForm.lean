@@ -85,14 +85,14 @@ theorem finite_sum_over_spinConf_of_real_scalar_multiples (c : ℝ) (a : SpinCon
 
 /-- **人手 Step 4 の一つ目の鎖**（7 行）:
 `(exp(κD_0)(εV_2))_{ord(s),ord(s)} = (exp(-K_2M_col)exp(K_1E(s)))_ℂ`。 -/
-theorem matExp_openChainD0_mul_epsilon_mul_V2_apply_self (K1 K2 : ℝ) (s : SpinConf M) :
+theorem matExp_openChainD0_mul_epsilon_mul_V2_apply_self (hM : 2 ≤ M) (K1 K2 : ℝ) (s : SpinConf M) :
     (matExp ((K1 : ℂ) • openChainD0 M) * (epsilon M * V2 M K2)) (configBasisIso M s) (configBasisIso M s)
       = ((Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
   calc (matExp ((K1 : ℂ) • openChainD0 M) * (epsilon M * V2 M K2)) (configBasisIso M s) (configBasisIso M s)
       = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
           * (epsilon M * V2 M K2) (configBasisIso M s) (configBasisIso M s) :=
         -- 人手 1: `mat_mult` と (a) の `exp(κD_0)` の対角性、`finite_sum_with_single_nonzero_term`
-        mul_apply_configBasisIso_of_single_nonzero _ (matExp_smul_openChainD0_apply_of_ne K1 s) _
+        mul_apply_configBasisIso_of_single_nonzero _ (matExp_smul_openChainD0_apply_of_ne hM K1 s) _
     _ = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
           * (epsilon M (configBasisIso M s) (configBasisIso M (negSpinConf s))
             * V2 M K2 (configBasisIso M (negSpinConf s)) (configBasisIso M s)) := by
@@ -106,7 +106,7 @@ theorem matExp_openChainD0_mul_epsilon_mul_V2_apply_self (K1 K2 : ℝ) (s : Spin
         rw [one_mul]                                               -- 人手 4: `complex_numbers_form_a_field` の積の単位元
     _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
           * V2 M K2 (configBasisIso M (negSpinConf s)) (configBasisIso M s) := by
-        rw [matExp_smul_openChainD0_apply]                         -- 人手 5: (a)
+        rw [matExp_smul_openChainD0_apply hM]                      -- 人手 5: (a)
     _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) * ((Real.exp (-(K2 * M)) : ℝ) : ℂ) := by
         rw [V2_apply_configBasisIso_neg_self]                      -- 人手 6: (c)
     _ = ((Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
@@ -115,7 +115,7 @@ theorem matExp_openChainD0_mul_epsilon_mul_V2_apply_self (K1 K2 : ℝ) (s : Spin
 
 /-- **人手 Step 4 の二つ目の鎖**（7 行）:
 `(exp(κD_0)(GV_2))_{ord(s),ord(s)} = (exp(K_2M_col)(s(M_col)s(1)exp(K_1E(s))))_ℂ`。 -/
-theorem matExp_openChainD0_mul_boundaryG_mul_V2_apply_self (hM : M ≠ 0) (K1 K2 : ℝ) (s : SpinConf M) :
+theorem matExp_openChainD0_mul_boundaryG_mul_V2_apply_self (hM2 : 2 ≤ M) (hM : M ≠ 0) (K1 K2 : ℝ) (s : SpinConf M) :
     (matExp ((K1 : ℂ) • openChainD0 M) * (boundaryG M hM * V2 M K2))
         (configBasisIso M s) (configBasisIso M s)
       = ((Real.exp (K2 * M)
@@ -125,7 +125,7 @@ theorem matExp_openChainD0_mul_boundaryG_mul_V2_apply_self (hM : M ≠ 0) (K1 K2
       = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
           * (boundaryG M hM * V2 M K2) (configBasisIso M s) (configBasisIso M s) :=
         -- 人手 1: `mat_mult` と (a) の `exp(κD_0)` の対角性、`finite_sum_with_single_nonzero_term`
-        mul_apply_configBasisIso_of_single_nonzero _ (matExp_smul_openChainD0_apply_of_ne K1 s) _
+        mul_apply_configBasisIso_of_single_nonzero _ (matExp_smul_openChainD0_apply_of_ne hM2 K1 s) _
     _ = matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
           * (boundaryG M hM (configBasisIso M s) (configBasisIso M s)
             * V2 M K2 (configBasisIso M s) (configBasisIso M s)) := by
@@ -134,7 +134,7 @@ theorem matExp_openChainD0_mul_boundaryG_mul_V2_apply_self (hM : M ≠ 0) (K1 K2
     _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
           * ((((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) : ℝ) : ℂ)
             * V2 M K2 (configBasisIso M s) (configBasisIso M s)) := by
-        rw [matExp_smul_openChainD0_apply, boundaryG_apply_configBasisIso_self]  -- 人手 3: (a)
+        rw [matExp_smul_openChainD0_apply hM2, boundaryG_apply_configBasisIso_self]  -- 人手 3: (a)
     _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ)
           * ((((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) : ℝ) : ℂ)
             * ((Real.exp (K2 * M) : ℝ) : ℂ)) := by
@@ -155,7 +155,7 @@ theorem matExp_openChainD0_mul_boundaryG_mul_V2_apply_self (hM : M ≠ 0) (K1 K2
 
 /-- **人手 Step 5 の一つ目の鎖**（4 行）:
 `tr(exp(κD_0)(εV_2)) = (exp(-K_2M_col)S_cosh)_ℂ`、`S_cosh := ∑_{s∈𝔐} exp(K_1E(s))`。 -/
-theorem trace_matExp_openChainD0_mul_epsilon_mul_V2 (K1 K2 : ℝ) :
+theorem trace_matExp_openChainD0_mul_epsilon_mul_V2 (hM : 2 ≤ M) (K1 K2 : ℝ) :
     (matExp ((K1 : ℂ) • openChainD0 M) * (epsilon M * V2 M K2)).trace
       = ((Real.exp (-(K2 * M)) * ∑ s : SpinConf M, Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
   calc (matExp ((K1 : ℂ) • openChainD0 M) * (epsilon M * V2 M K2)).trace
@@ -164,7 +164,7 @@ theorem trace_matExp_openChainD0_mul_epsilon_mul_V2 (K1 K2 : ℝ) :
         trace_eq_sum_configBasisIso _                              -- 人手 1: `def_trace` と準備の和の定め方
     _ = ∑ s : SpinConf M, ((Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun s _ =>
-          matExp_openChainD0_mul_epsilon_mul_V2_apply_self K1 K2 s  -- 人手 2: Step 4
+          matExp_openChainD0_mul_epsilon_mul_V2_apply_self hM K1 K2 s  -- 人手 2: Step 4
     _ = ((∑ s : SpinConf M, Real.exp (-(K2 * M)) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
         -- 人手 3: `real_inclusion_preserves_finite_sum`
         real_inclusion_of_finite_sum_fintype _
@@ -174,7 +174,7 @@ theorem trace_matExp_openChainD0_mul_epsilon_mul_V2 (K1 K2 : ℝ) :
 
 /-- **人手 Step 5 の二つ目の鎖**（4 行）:
 `tr(exp(κD_0)(GV_2)) = (exp(K_2M_col)S_sinh)_ℂ`、`S_sinh := ∑_{s∈𝔐} s(M_col)s(1)exp(K_1E(s))`。 -/
-theorem trace_matExp_openChainD0_mul_boundaryG_mul_V2 (hM : M ≠ 0) (K1 K2 : ℝ) :
+theorem trace_matExp_openChainD0_mul_boundaryG_mul_V2 (hM2 : 2 ≤ M) (hM : M ≠ 0) (K1 K2 : ℝ) :
     (matExp ((K1 : ℂ) • openChainD0 M) * (boundaryG M hM * V2 M K2)).trace
       = ((Real.exp (K2 * M) * ∑ s : SpinConf M,
           (s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
@@ -185,7 +185,7 @@ theorem trace_matExp_openChainD0_mul_boundaryG_mul_V2 (hM : M ≠ 0) (K1 K2 : �
     _ = ∑ s : SpinConf M, ((Real.exp (K2 * M)
           * ((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun s _ =>
-          matExp_openChainD0_mul_boundaryG_mul_V2_apply_self hM K1 K2 s  -- 人手 2: Step 4
+          matExp_openChainD0_mul_boundaryG_mul_V2_apply_self hM2 hM K1 K2 s  -- 人手 2: Step 4
     _ = ((∑ s : SpinConf M, Real.exp (K2 * M)
           * ((s (lastSite M hM) : ℝ) * (s (firstSite M hM) : ℝ) * Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ) :=
         -- 人手 3: `real_inclusion_preserves_finite_sum`
@@ -245,7 +245,7 @@ theorem trace_epsilon_VPlusOfTransfer_eq_spin_sums (hM : 2 ≤ M) (K1 K2 : ℝ) 
                 (s (lastSite M hM0) : ℝ) * (s (firstSite M hM0) : ℝ)
                   * Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) := by
         -- 人手 9: 直前の二つの鎖
-        rw [trace_matExp_openChainD0_mul_epsilon_mul_V2, trace_matExp_openChainD0_mul_boundaryG_mul_V2]
+        rw [trace_matExp_openChainD0_mul_epsilon_mul_V2 hM, trace_matExp_openChainD0_mul_boundaryG_mul_V2 hM]
     _ = ((Real.cosh K1 * (Real.exp (-(K2 * M)) * ∑ s : SpinConf M, Real.exp (K1 * openChainEnergy s)) : ℝ) : ℂ)
           + ((Real.sinh K1 * (Real.exp (K2 * M) * ∑ s : SpinConf M,
                 (s (lastSite M hM0) : ℝ) * (s (firstSite M hM0) : ℝ)

@@ -272,7 +272,7 @@ Lean の数ベクトルは 1 列の行列ではなく `Conf M → ℂ` なので
 具体版 `finite_sum_smul_one_matrix` とその系 `finite_sum_smul_one_tensorPow` は行列の和について述べるので、数ベクトルの和には使えない）。
 `scalar_multiple_is_associative` にも Lean の具体版は無く、mathlib の `smul_smul` を引く。
 `real_inclusion_preserves_finite_sum` は具体版の主の宣言 `real_inclusion_of_finite_sum`（`Fin m` の上の和。`m → M - 1`）を引く
-（人手は `M_col ≥ 2` だが、Lean の主張は人手の範囲外の `M ≤ 1` も含み、そのとき和は `Fin 0` の上の空の和で、人手 `real_inclusion_preserves_finite_sum` の `m = 0` に当たる）。`real_inclusion_preserves_product` は具体版 `real_inclusion_mul` を引く。 -/
+（人手と同じく `M_col ≥ 2` を仮定するので `m = M_col - 1 ≥ 1` である）。`real_inclusion_preserves_product` は具体版 `real_inclusion_mul` を引く。 -/
 
 /-- **人手 `sigma_z_product_action`** `(σ^z_aσ^z_b)f_{ι(s)} = ⋯ = (s(a)s(b))_ℂ f_{ι(s)}`。
 
@@ -302,9 +302,10 @@ theorem sigmaZ_mul_sigmaZ_mulVec_basisVec_spin (a b : Fin M) (s : SpinConf M) :
 /-- **人手 `D0_G_diagonal_action` の `D_0f_{ι(s)} = (∑_{m=1}^{M_col-1}s(m)s(m+1))_ℂ f_{ι(s)}`** の 5 行。
 
 人手の和 `∑_{m=1}^{M_col-1}` は、Lean の `openChainD0` と同じく `Fin (M - 1)` の上の和で、和の添字 `j` を
-サイト `Fin.castLE (Nat.sub_le M 1) j` へ移して書く（人手のサイト `m + 1` はそのサイトの `nextSite`）。人手は `M_col ≥ 2` を仮定するが、
-鎖は `M` の大きさを使わないので、Lean は仮定を置かない（`M ≤ 1` の値は人手の定義の外。`openChainD0` の説明を見よ）。 -/
-theorem openChainD0_mulVec_basisVec (s : SpinConf M) :
+サイト `Fin.castLE (Nat.sub_le M 1) j` へ移して書く（人手のサイト `m + 1` はそのサイトの `nextSite`）。人手の `M_col ≥ 2` を
+仮定 `2 ≤ M` に置く。鎖は `M` の大きさを使わないので証明は仮定を使わないが、`M ≤ 1` の値（`Fin 0` の上の空の和）は
+人手の定義の外なので主張から外す（`openChainD0` の説明を見よ）。 -/
+theorem openChainD0_mulVec_basisVec (_hM : 2 ≤ M) (s : SpinConf M) :
     openChainD0 M *ᵥ basisVec (configBasisIso M s)
       = ((∑ j : Fin (M - 1), (s (Fin.castLE (Nat.sub_le M 1) j) : ℝ)
             * (s (nextSite (Fin.castLE (Nat.sub_le M 1) j)) : ℝ) : ℝ) : ℂ) • basisVec (configBasisIso M s) :=

@@ -177,14 +177,14 @@ open Classical in
 1 行目は (P5) の列の読み取り、2 行目は `D0_G_diagonal_action` と `def_open_chain_spin_energy`
 （`openChainD0_mulVec_basisVec_eq_energy`）、3 行目は `def_matrix_scalar_multiple`（数ベクトルのスカラー倍は成分ごと）、
 4 行目は (P5)。`δ_{s=s'}` は Lean では `if s = s' then 1 else 0` である。 -/
-theorem openChainD0_apply_configBasisIso (s s' : SpinConf M) :
+theorem openChainD0_apply_configBasisIso (hM : 2 ≤ M) (s s' : SpinConf M) :
     openChainD0 M (configBasisIso M s') (configBasisIso M s)
       = ((openChainEnergy s : ℝ) : ℂ) * (if s = s' then 1 else 0) :=
   calc openChainD0 M (configBasisIso M s') (configBasisIso M s)
       = (openChainD0 M *ᵥ basisVec (configBasisIso M s)) (configBasisIso M s') :=
         (mulVec_basisVec_configBasisIso_apply _ s s').symm         -- 人手 1: (P5) の列の読み取り
     _ = (((openChainEnergy s : ℝ) : ℂ) • basisVec (configBasisIso M s)) (configBasisIso M s') := by
-        rw [openChainD0_mulVec_basisVec_eq_energy]  -- 人手 2: `D0_G_diagonal_action`・`def_open_chain_spin_energy`
+        rw [openChainD0_mulVec_basisVec_eq_energy hM]  -- 人手 2: `D0_G_diagonal_action`・`def_open_chain_spin_energy`
     _ = ((openChainEnergy s : ℝ) : ℂ) * basisVec (configBasisIso M s) (configBasisIso M s') := by
         rw [Pi.smul_apply, smul_eq_mul]                            -- 人手 3: `def_matrix_scalar_multiple`
     _ = ((openChainEnergy s : ℝ) : ℂ) * (if s = s' then 1 else 0) := by
@@ -232,12 +232,12 @@ theorem eq_diagonal_of_apply_configBasisIso {A : TensorPow M} {d : SpinConf M �
 
 非対角成分は (a) の 4 行の `s ≠ s'` で `(E(s))_ℂ0_ℂ = 0_ℂ`（`complex_times_zero_is_zero`）、
 対角成分は `s' = s` で `(E(s))_ℂ1_ℂ = (E(s))_ℂ`（`complex_numbers_form_a_field` の積の単位元）である。 -/
-theorem openChainD0_eq_diagonal :
+theorem openChainD0_eq_diagonal (hM : 2 ≤ M) :
     openChainD0 M
       = Matrix.diagonal (fun I => ((openChainEnergy ((configBasisIso M).symm I) : ℝ) : ℂ)) :=
   eq_diagonal_of_apply_configBasisIso (A := openChainD0 M) (d := fun s => ((openChainEnergy s : ℝ) : ℂ))
-    (fun s s' hs => by rw [openChainD0_apply_configBasisIso, if_neg hs, mul_zero])
-    (fun s => by rw [openChainD0_apply_configBasisIso, if_pos rfl, mul_one])
+    (fun s s' hs => by rw [openChainD0_apply_configBasisIso hM, if_neg hs, mul_zero])
+    (fun s => by rw [openChainD0_apply_configBasisIso hM, if_pos rfl, mul_one])
 
 /-- **人手 Step 3 (a)**: `G` は対角行列で `G_{ord(s),ord(s)} = (s(M_col)s(1))_ℂ`（`openChainD0_eq_diagonal` と同じ読み方）。 -/
 theorem boundaryG_eq_diagonal (hM : M ≠ 0) :
@@ -255,7 +255,7 @@ theorem boundaryG_eq_diagonal (hM : M ≠ 0) :
 
 非対角成分は `def_matrix_scalar_multiple` と (a) の `D_0` の非対角成分と `complex_times_zero_is_zero`、
 対角成分の 2 行は `def_matrix_scalar_multiple` と (a)、`real_inclusion_preserves_product`（`real_inclusion_mul`）である。 -/
-theorem smul_openChainD0_eq_diagonal (K1 : ℝ) :
+theorem smul_openChainD0_eq_diagonal (hM : 2 ≤ M) (K1 : ℝ) :
     (K1 : ℂ) • openChainD0 M
       = Matrix.diagonal (fun I => ((K1 * openChainEnergy ((configBasisIso M).symm I) : ℝ) : ℂ)) :=
   eq_diagonal_of_apply_configBasisIso (A := (K1 : ℂ) • openChainD0 M)
@@ -265,13 +265,13 @@ theorem smul_openChainD0_eq_diagonal (K1 : ℝ) :
           = (K1 : ℂ) * openChainD0 M (configBasisIso M s') (configBasisIso M s) := by
             rw [Matrix.smul_apply, smul_eq_mul]                    -- `def_matrix_scalar_multiple`
         _ = (K1 : ℂ) * 0 := by
-            rw [openChainD0_eq_diagonal, Matrix.diagonal_apply,
+            rw [openChainD0_eq_diagonal hM, Matrix.diagonal_apply,
               if_neg (fun hc => hs ((configBasisIso M).injective hc).symm)]  -- (a) の非対角成分
         _ = 0 := mul_zero _)                                       -- `complex_times_zero_is_zero`
     (fun s => by
       calc ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
           = (K1 : ℂ) * ((openChainEnergy s : ℝ) : ℂ) := by
-            rw [Matrix.smul_apply, smul_eq_mul, openChainD0_eq_diagonal, Matrix.diagonal_apply_eq,
+            rw [Matrix.smul_apply, smul_eq_mul, openChainD0_eq_diagonal hM, Matrix.diagonal_apply_eq,
               Equiv.symm_apply_apply]                              -- 人手 1: `def_matrix_scalar_multiple` と (a)
         _ = ((K1 * openChainEnergy s : ℝ) : ℂ) :=
             real_inclusion_mul _ _                                 -- 人手 2: `real_inclusion_preserves_product`
@@ -282,14 +282,14 @@ theorem smul_openChainD0_eq_diagonal (K1 : ℝ) :
 1 段目は `smul_openChainD0_eq_diagonal`、2 段目は `exp_of_diagonal_matrix`（`matExp_diagonal`）、
 3 段目は対角成分ごとに `complex_exp_of_real_argument`（Lean の具体版は無く、mathlib の `Complex.ofReal_exp`）。
 対角成分だけを取り出した 2 行は `matExp_smul_openChainD0_apply`。 -/
-theorem matExp_smul_openChainD0 (K1 : ℝ) :
+theorem matExp_smul_openChainD0 (hM : 2 ≤ M) (K1 : ℝ) :
     matExp ((K1 : ℂ) • openChainD0 M)
       = Matrix.diagonal (fun I =>
           ((Real.exp (K1 * openChainEnergy ((configBasisIso M).symm I)) : ℝ) : ℂ)) :=
   calc matExp ((K1 : ℂ) • openChainD0 M)
       = matExp (Matrix.diagonal (fun I =>
           ((K1 * openChainEnergy ((configBasisIso M).symm I) : ℝ) : ℂ))) := by
-        rw [smul_openChainD0_eq_diagonal]                          -- (a) の `κD_0` の対角性
+        rw [smul_openChainD0_eq_diagonal hM]                       -- (a) の `κD_0` の対角性
     _ = Matrix.diagonal (fun I =>
           Complex.exp ((K1 * openChainEnergy ((configBasisIso M).symm I) : ℝ) : ℂ)) :=
         matExp_diagonal _                                          -- `exp_of_diagonal_matrix`
@@ -298,23 +298,23 @@ theorem matExp_smul_openChainD0 (K1 : ℝ) :
         congrArg Matrix.diagonal (funext fun _ => (Complex.ofReal_exp _).symm)  -- `complex_exp_of_real_argument`
 
 /-- **人手 Step 3 (a) の最後の 2 行**: `(exp(κD_0))_{ord(s),ord(s)} = exp((K_1E(s))_ℂ) = (exp(K_1E(s)))_ℂ`。 -/
-theorem matExp_smul_openChainD0_apply (K1 : ℝ) (s : SpinConf M) :
+theorem matExp_smul_openChainD0_apply (hM : 2 ≤ M) (K1 : ℝ) (s : SpinConf M) :
     matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
       = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
   calc matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M s)
       = Complex.exp ((K1 * openChainEnergy s : ℝ) : ℂ) := by
-        rw [smul_openChainD0_eq_diagonal, matExp_diagonal, Matrix.diagonal_apply_eq,
+        rw [smul_openChainD0_eq_diagonal hM, matExp_diagonal, Matrix.diagonal_apply_eq,
           Equiv.symm_apply_apply]                                  -- 人手 1: `exp_of_diagonal_matrix`
     _ = ((Real.exp (K1 * openChainEnergy s) : ℝ) : ℂ) :=
         (Complex.ofReal_exp _).symm                                -- 人手 2: `complex_exp_of_real_argument`
 
 /-- 人手 Step 4 が「(a) の `exp(κD_0)` の対角性」として使う非対角成分: `t ≠ s` なら
 `(exp(κD_0))_{ord(s),ord(t)} = 0_ℂ`（`matExp_smul_openChainD0` の対角行列の非対角成分）。 -/
-theorem matExp_smul_openChainD0_apply_of_ne (K1 : ℝ) (s : SpinConf M) :
+theorem matExp_smul_openChainD0_apply_of_ne (hM : 2 ≤ M) (K1 : ℝ) (s : SpinConf M) :
     ∀ t : SpinConf M, t ≠ s →
       matExp ((K1 : ℂ) • openChainD0 M) (configBasisIso M s) (configBasisIso M t) = 0 := by
   intro t hts
-  rw [matExp_smul_openChainD0, Matrix.diagonal_apply_ne _
+  rw [matExp_smul_openChainD0 hM, Matrix.diagonal_apply_ne _
     (fun hc => hts ((configBasisIso M).injective hc).symm)]
 
 open Classical in
