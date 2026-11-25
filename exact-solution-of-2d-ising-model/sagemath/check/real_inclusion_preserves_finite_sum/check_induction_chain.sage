@@ -1,10 +1,13 @@
 # 対象ラベル: real_inclusion_preserves_finite_sum
-# Σ_{j=1}^{m} (r_j)_C = (Σ_{j=1}^{m} r_j)_C の帰納法の各行を、r_j を QQ 上の不定元に置いて厳密に確かめる。
+# Σ_{j=1}^{m} (r_j)_C = (Σ_{j=1}^{m} r_j)_C の証明の各行（m = 0 の 3 行、m = 1 の 2 行、帰納法の段の 7 行）を、
+# r_j を QQ 上の不定元に置いて厳密に確かめる。
 load("../../_shared/complex_as_real_pairs.sage")
 
 
 def fsum_cc(zs):
-    """def_finite_sum_of_complex_numbers: Σ^1 := z_1、Σ^{m+1} := (Σ^m) + z_{m+1}。"""
+    """def_finite_sum_of_complex_numbers: Σ^0 := 0_C、Σ^1 := z_1、Σ^{m+1} := (Σ^m) + z_{m+1}。"""
+    if len(zs) == 0:
+        return iota(0, P)
     s = zs[0]
     for q in zs[1:]:
         s = cc_add(s, q)
@@ -12,6 +15,9 @@ def fsum_cc(zs):
 
 
 def fsum_rr(rs):
+    """def_finite_sum_of_real_numbers: Σ^0 := 0、Σ^1 := r_1、Σ^{m+1} := (Σ^m) + r_{m+1}。"""
+    if len(rs) == 0:
+        return P(0)
     s = rs[0]
     for q in rs[1:]:
         s = s + q
@@ -21,6 +27,17 @@ def fsum_rr(rs):
 MAX_M = 8
 P = PolynomialRing(QQ, [f"r_{j}" for j in range(1, MAX_M + 2)])
 r = P.gens()
+
+# m = 0（項の無い族）
+lines0 = [
+    fsum_cc([]),                 # Σ^{0} (r_j)_C
+    (P(0), P(0)),                # def_finite_sum_of_complex_numbers の Σ^{0} := 0_C（0_C は対 (0, 0)）
+    iota(P(0), P),               # inclusion_rr_to_cc の 0_C := (0_R)_C
+    iota(fsum_rr([]), P),        # def_finite_sum_of_real_numbers の Σ^{0} r_j := 0 を右辺から左辺へ
+]
+for t in range(len(lines0) - 1):
+    assert lines0[t] == lines0[t + 1], (0, t)
+print("m = 0 の 3 行を確かめた")
 
 # m = 1
 lines = [fsum_cc([iota(r[0], P)]), iota(r[0], P), iota(fsum_rr([r[0]]), P)]

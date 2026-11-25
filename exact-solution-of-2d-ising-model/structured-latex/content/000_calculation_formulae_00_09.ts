@@ -4550,10 +4550,10 @@ T_B(X - W)
     kind: "claim",
     title: { text: "実数の有限和の包含は包含の有限和に等しい" },
     labels: ["real_inclusion_preserves_finite_sum"],
-    lean: ["Ising2D.real_inclusion_of_finite_sum_succ", "Ising2D.real_inclusion_of_finite_sum_fintype", "Ising2D.real_inclusion_of_finite_sum_fintype_or_empty", "Ising2D.real_inclusion_of_finite_sum_finset"],
+    lean: ["Ising2D.real_inclusion_of_finite_sum", "Ising2D.real_inclusion_of_finite_sum_succ", "Ising2D.real_inclusion_of_finite_sum_fintype", "Ising2D.real_inclusion_of_finite_sum_fintype_or_empty", "Ising2D.real_inclusion_of_finite_sum_finset"],
     statement: [
       paragraph([
-        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
         "、",
         math(String.raw`r_1,\dots,r_m \in \mathbb{R}`),
         " について",
@@ -4573,6 +4573,22 @@ T_B(X - W)
     ],
     proof: [
       paragraph([
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{0} (r_j)_{\mathbb{C}}
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} z_j := 0_{\mathbb{C}}\ (z_j \to (r_j)_{\mathbb{C}})\bigr)\\
+&= (0_{\mathbb{R}})_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ 0_{\mathbb{C}} := (0_{\mathbb{R}})_{\mathbb{C}}\bigr)\\
+&= \Bigl(\sum_{j=1}^{0} r_j\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} r_j := 0\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " は ",
         math(String.raw`m`),
         " についての帰納法で示す。",
         math(String.raw`m = 1`),
@@ -4613,6 +4629,7 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。正定値性の主張（identity_matrix_is_positive_definite、trace_of_positive_definite_is_positive）が、ℂ の元が正の実数の包含であることを示すのに使うので足した。",
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の三単位目の (a) の残り）: def_finite_sum_of_real_numbers・def_finite_sum_of_complex_numbers が項の無い族の和 Σ_{j=1}^{0} := 0 を定めたので、主張の m の範囲を ℤ_{≥1} から ℤ_{≥0} へ広げ、証明の冒頭に m = 0 の 3 行（ℂ の空の和の式・inclusion_rr_to_cc の 0_ℂ := (0_ℝ)_ℂ・ℝ の空の和の式を右辺から左辺へ）を足した。Lean は添字の型が空でもよい有限型の和（real_inclusion_of_finite_sum_fintype_or_empty・real_inclusion_of_finite_sum_finset）から引かれており、空の場合を本文の外の Lean だけの場合として扱っていた。具体版の主は Fin m の版 Ising2D.real_inclusion_of_finite_sum。数値検証: sagemath/check/real_inclusion_preserves_finite_sum/。",
       ],
     },
   },

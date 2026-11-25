@@ -278,7 +278,7 @@ Lean の数ベクトルは 1 列の行列ではなく `Conf M → ℂ` なので
 `Finset.filter` の上の数ベクトルの和には使えない）。
 `scalar_multiple_is_associative` にも Lean の具体版は無く、mathlib の `smul_smul` を引く。
 `real_inclusion_preserves_finite_sum` は具体版の `Finset.filter` の上の和の形 `real_inclusion_of_finite_sum_finset` を引く
-（人手は `M_col ≥ 2` だが、Lean の主張は人手の範囲外の `M ≤ 1` も含み、そのとき和は空なので、空の場合を分ける版を経る）。`real_inclusion_preserves_product` は具体版 `real_inclusion_mul` を引く。 -/
+（人手は `M_col ≥ 2` だが、Lean の主張は人手の範囲外の `M ≤ 1` も含み、そのとき和は空なので、添字の型が空でもよい版 `_or_empty` を経る。空の和は人手 `real_inclusion_preserves_finite_sum` の `m = 0` に当たる）。`real_inclusion_preserves_product` は具体版 `real_inclusion_mul` を引く。 -/
 
 /-- **人手 `sigma_z_product_action`** `(σ^z_aσ^z_b)f_{ι(s)} = ⋯ = (s(a)s(b))_ℂ f_{ι(s)}`。
 

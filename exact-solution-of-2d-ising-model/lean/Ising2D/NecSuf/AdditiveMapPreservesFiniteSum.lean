@@ -3,13 +3,14 @@
 
 対応する人手証明のラベル: `real_inclusion_preserves_finite_sum`
 具体版: `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimRealInclusionPreservesFiniteSum.lean` の
-`real_inclusion_of_finite_sum_succ`（具体版をこのファイルの系として導くのは、同じフォルダの
+`real_inclusion_of_finite_sum_succ`（`m ∈ ℤ_{≥1}`）と主の具体版 `real_inclusion_of_finite_sum`（`m ∈ ℤ_{≥0}`）（具体版をこのファイルの系として導くのは、同じフォルダの
 `ClaimRealInclusionPreservesFiniteSumFromNecSuf.lean`）。
 同じ手順の具体版に人手 `complex_conjugate_of_sum` の `complex_conjugate_of_finite_sum_succ`
 （`Ising2D/MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`。`f := \overline{(·)}`）もあり、
 その系としての導出は同じフォルダの `ClaimComplexConjugateOfSumFromNecSuf.lean`。
 項の無い族を含む `map_finSumLeftFromEmpty_of_map_add_of_map_zero'` の具体版は `complex_conjugate_star_finite_sum`
-（`ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`。導出は同じく `ClaimComplexConjugateOfSumFromNecSuf.lean`）。
+（`ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`。導出は同じく `ClaimComplexConjugateOfSumFromNecSuf.lean`）と
+`real_inclusion_of_finite_sum`（導出は `ClaimRealInclusionPreservesFiniteSumFromNecSuf.lean`）。
 
 人手の `ι_{ℝ→ℂ}` を、2 つの集合の間の写像 `f : G → H` に置き換える。有限和は `finSumLeft`
 （`Ising2D/NecSuf/AdditiveToMultiplicativeMapOfFiniteSum.lean`。人手の `m ∈ ℤ_{≥1}` は Lean の `r + 1`、
@@ -38,7 +39,9 @@
   | `m ≥ 1` | `complex_conjugate_of_finite_sum_succ` | `r + 1` の節（`map_finSumLeft_of_map_add'`） | 上の表のとおり |
   `m = 0` の段では `hadd` は効かず、`m ≥ 1` の段では `hzero` は効かない。仮定 `hzero` は削れない（`hadd` から出ない）:
   `G := ℕ`、`H := {偽, 真}`（和を「または」、零を偽とする）、`f(x) := 真` は `hadd` を満たすが、空の和で左辺は偽、右辺は `f(0) = 真` である。
-  人手 `real_inclusion_preserves_finite_sum` は `m ≥ 1` のままである。
+  人手 `real_inclusion_preserves_finite_sum` も `m ∈ ℤ_{≥0}` で、`m = 0` の 3 行（空の和の式 → `0_ℂ := (0_ℝ)_ℂ` → 空の和の式）を持つ。
+  具体版は `real_inclusion_of_finite_sum`（`0` の節が `m = 0` の 3 行、`m + 1` の節が `real_inclusion_of_finite_sum_succ`）で、
+  必要十分版は同じ `map_finSumLeftFromEmpty_of_map_add_of_map_zero'` である。`m = 0` の 2 行目 `0_ℂ = (0_ℝ)_ℂ` が `f(0) = 0` を右辺から左辺へ使った段に当たる。
 - 仮定 `hadd` は削れない: `ℝ` 上の `f(x) = x + 1` では `f(1 + 1) = 3` だが `f(1) + f(1) = 4` である。
 -/
 import Ising2D.NecSuf.AdditiveToMultiplicativeMapOfFiniteSum
@@ -78,8 +81,8 @@ theorem finSumLeftFromEmpty_zero {G : Type*} [Zero G] [Add G] (x : Fin 0 → G) 
 theorem finSumLeftFromEmpty_succ {G : Type*} [Zero G] [Add G] (r : ℕ) (x : Fin (r + 1) → G) :
     finSumLeftFromEmpty (r + 1) x = finSumLeft r x := rfl
 
-/-- **必要十分版の `complex_conjugate_of_sum`（`m ∈ ℤ_{≥0}`）**: `f(0) = 0` と `f(a + b) = f(a) + f(b)` を満たす写像は、
-項の無い族を含む有限和を保つ: `Σ_j f(x_j) = f(Σ_j x_j)`。具体版 `complex_conjugate_star_finite_sum` と同じく、
+/-- **必要十分版の `complex_conjugate_of_sum`・`real_inclusion_preserves_finite_sum`（`m ∈ ℤ_{≥0}`）**: `f(0) = 0` と `f(a + b) = f(a) + f(b)` を満たす写像は、
+項の無い族を含む有限和を保つ: `Σ_j f(x_j) = f(Σ_j x_j)`。具体版 `complex_conjugate_star_finite_sum`・`real_inclusion_of_finite_sum` と同じく、
 `n = 0` は空の和の式と `f(0) = 0`、`n = r + 1` は `map_finSumLeft_of_map_add'`。 -/
 theorem map_finSumLeftFromEmpty_of_map_add_of_map_zero' {G H : Type*} [Zero G] [Add G] [Zero H] [Add H]
     (f : G → H) (hzero : f 0 = 0) (hadd : ∀ a b, f (a + b) = f a + f b) :

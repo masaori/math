@@ -110,7 +110,7 @@ theorem sum_sigmaZ_sigmaZ_apply_of_ne {p q : Conf M} (hpq : p ≠ q) :
 人手の 7 行のうち 2 行目（`σ^z_{m+1} = σ^z_{m^+}`）と 6 行目（`μ(m+1) = μ(m^+)`）は、Lean では両方を最初から
 `nextSite m` で書くので、添字の読み方であって段は無い。`real_inclusion_preserves_product` は `real_inclusion_mul`、
 `real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype_or_empty`
-（Lean の主張は `M = 0` も含むので、空の和の場合を分ける版）。
+（Lean の主張は `M = 0` も含むので、添字の型が空でもよい版。空なら人手の主張の `m = 0`）。
 人手 `W_has_positive_entries` の Step 1 の `D_{kk}` の 7 行も同じ鎖である。 -/
 theorem sum_sigmaZ_sigmaZ_apply_configBasisIso_self (μ : SpinConf M) :
     (∑ m : Fin M, sigmaZ m * sigmaZ (nextSite m)) (configBasisIso M μ) (configBasisIso M μ)
