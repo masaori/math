@@ -263,8 +263,6 @@ DEP	concrete	Ising2D.expNegHalfS1plus_mul_expHalfS1plus
 DEP	concrete	Ising2D.expNegS2_mul_expS2
 DEP	concrete	Ising2D.exp_pi_apply
 DEP	concrete	Ising2D.halfK1D_transpose
-DEP	concrete	Ising2D.hasDerivAt_Gfirst
-DEP	concrete	Ising2D.hasDerivAt_Gfun
 DEP	concrete	Ising2D.hasSum_matExp_conj_aux
 DEP	concrete	Ising2D.hatCliffordTriple
 DEP	concrete	Ising2D.hatCliffordTriple.congr_simp
@@ -385,7 +383,6 @@ DEP	concrete	Ising2D.trace_smul_tensorPow
 DEP	concrete	Ising2D.vecNormSq_absVec_eq
 DEP	concrete	Ising2D.xString_conjTranspose
 DEP	concrete	Ising2D.zy_step6_prep_t
-IMPORT	concrete	Ising2D.CriticalPoint.CriticalPointAndLogDivergence.TheoremSecondDerivativeLogDivergence	necsuf	Ising2D.NecSuf.DiffUnderIntegral
 IMPORT	concrete	Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimActionTCheckVprime	necsuf	Ising2D.NecSuf.ExpEigenvector
 IMPORT	concrete	Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimActionTCheckVprime	necsuf	Ising2D.NecSuf.FermionLadder
 IMPORT	concrete	Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckPsi	necsuf	Ising2D.NecSuf.Fermion

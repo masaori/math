@@ -6,7 +6,8 @@
   （ラベル `second_derivative_log_divergence`）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は
-- `Ising2D/NecSuf/DiffUnderIntegral.lean`（積分記号下の微分 = 原文の (R5)）
+- `Ising2D/NecSuf/DiffUnderIntegral.lean`（積分記号下の微分 = 原文の (R5)。本ファイルは import せず、
+  Step 1 の `hasDerivAt_Gfun`・`hasDerivAt_Gfirst` の証明の中で (R5) を mathlib の優関数の形で受ける）
 - `Ising2D/NecSuf/LogDivergentIntegral.lean`（対数発散の本体）
 - `Ising2D/NecSuf/HyperbolicBounds.lean`（数値評価）
 
@@ -23,7 +24,7 @@
 -/
 import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.ClaimGammaDerivativesInKappa
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSineIntegralTwoSided
-import Ising2D.NecSuf.DiffUnderIntegral
+import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
 import Mathlib.Analysis.Complex.ExponentialBounds
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
 
@@ -46,23 +47,85 @@ noncomputable def Gsecond (κ : ℝ) : ℝ :=
 theorem isOpen_ne_zero : IsOpen {x : ℝ | x ≠ 0} := isOpen_ne
 
 set_option maxHeartbeats 1000000 in
-/-- **人手証明 Step 1**（(R5) の 1 回目）: `G' = (1/4π)∫ ∂γ/∂κ`。 -/
+/-- **人手証明 Step 1**（(R5) の 1 回目）: `G' = (1/4π)∫ ∂γ/∂κ`。
+
+人手の段: `gamma_derivatives_in_kappa` (4) より `γ` と `∂γ/∂κ` は長方形 `[0,2π]×[κ₁,κ₂]` 上連続なので、
+(R5) を適用する。(R5) は本文が章の冒頭（`remark_real_analysis_escape_chapter_E`）で外から持ち込むと
+宣言した事実で、mathlib には連続性だけを仮定した形が無い。証明の中で、長方形がコンパクトであることから
+`∂γ/∂κ` の上界 `C` を取り、mathlib の優関数の形
+`intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le` に定数 `C` を優関数として渡して受ける。 -/
 theorem hasDerivAt_Gfun {κ : ℝ} (hκ : κ ≠ 0) : HasDerivAt Gfun (Gfirst κ) κ := by
-  have h := NecSuf.hasDerivAt_integral_of_continuousOn (g := gammaK) (g' := dgammaK)
-    (a := 0) (b := 2 * Real.pi) (x₀ := κ) (s := {x : ℝ | x ≠ 0}) isOpen_ne_zero hκ
-    (fun x _ => (continuous_gammaK_fixed x).continuousOn)
-    (continuousOn_dgammaK.mono (Set.prod_mono_left (Set.subset_univ _)))
-    (fun t _ x hx => hasDerivAt_gammaK t hx)
+  have hr : 0 < |κ| / 2 := by
+    have := abs_pos.2 hκ
+    linarith
+  -- 人手 Step 1 の長方形の `κ` の側 `[κ₁,κ₂]`。人手は `0 < κ₁ ≤ κ ≤ κ₂` とだけ書き（`κ > 0` の場合）、
+  -- 値を定めない。Lean は `κ₁ := κ − |κ|/2`、`κ₂ := κ + |κ|/2` に取り、`κ < 0` も同じ形で扱う。この区間は 0 を含まない
+  have hrect : Metric.closedBall κ (|κ| / 2) ⊆ {x : ℝ | x ≠ 0} := by
+    intro x hx hx0
+    rw [Metric.mem_closedBall, hx0, Real.dist_eq, zero_sub, abs_neg] at hx
+    linarith [abs_pos.2 hκ]
+  -- `gamma_derivatives_in_kappa` (4): `∂γ/∂κ` は長方形 `[0,2π]×[κ₁,κ₂]` 上連続
+  have hcont : ContinuousOn (fun p : ℝ × ℝ => dgammaK p.1 p.2)
+      (Set.uIcc 0 (2 * Real.pi) ×ˢ Metric.closedBall κ (|κ| / 2)) :=
+    continuousOn_dgammaK.mono (Set.prod_mono (Set.subset_univ _) hrect)
+  -- (R5) を mathlib の優関数の形で受けるための段: コンパクトな長方形上の連続関数は有界
+  obtain ⟨C, hC⟩ :=
+    (isCompact_uIcc.prod (isCompact_closedBall κ (|κ| / 2))).exists_bound_of_continuousOn hcont
+  -- (R5)（外から持ち込む積分記号下の微分。mathlib の優関数の形）
+  have h := (intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le
+    (μ := volume) (a := 0) (b := 2 * Real.pi)
+    (F := fun x θ => gammaK θ x) (F' := fun x θ => dgammaK θ x) (bound := fun _ => C)
+    (Metric.ball_mem_nhds κ hr)
+    -- 次の 3 つは mathlib の優関数の形が求める θ についての可測性・可積分性（Lean だけの段）
+    (Filter.Eventually.of_forall fun x => (continuous_gammaK_fixed x).aestronglyMeasurable)
+    ((continuous_gammaK_fixed κ).intervalIntegrable _ _)
+    (continuous_dgammaK_fixed hκ).aestronglyMeasurable
+    (Filter.Eventually.of_forall fun θ hθ x hx =>
+      hC (θ, x) (Set.mk_mem_prod (Set.uIoc_subset_uIcc hθ) (Metric.ball_subset_closedBall hx)))
+    intervalIntegrable_const
+    -- `gamma_derivatives_in_kappa` (2): `∂γ/∂κ` は `γ` の `κ` についての導関数（人手 Step 1 は (4) だけを引く）
+    (Filter.Eventually.of_forall fun θ _ x hx =>
+      hasDerivAt_gammaK θ (hrect (Metric.ball_subset_closedBall hx)))).2
   exact h.const_mul (1 / (4 * Real.pi))
 
 set_option maxHeartbeats 1000000 in
-/-- **人手証明 Step 1**（(R5) の 2 回目）: `G'' = (1/4π)∫ ∂²γ/∂κ²`。 -/
+/-- **人手証明 Step 1**（(R5) の 2 回目）: `G'' = (1/4π)∫ ∂²γ/∂κ²`。
+
+人手の段は 1 回目と同じで、`gamma_derivatives_in_kappa` (4) の `∂γ/∂κ` と `∂²γ/∂κ²` の長方形上の連続性に
+(R5) を適用する。(R5) の受け方も 1 回目と同じ。 -/
 theorem hasDerivAt_Gfirst {κ : ℝ} (hκ : κ ≠ 0) : HasDerivAt Gfirst (Gsecond κ) κ := by
-  have h := NecSuf.hasDerivAt_integral_of_continuousOn (g := dgammaK) (g' := d2gammaK)
-    (a := 0) (b := 2 * Real.pi) (x₀ := κ) (s := {x : ℝ | x ≠ 0}) isOpen_ne_zero hκ
-    (fun x hx => (continuous_dgammaK_fixed hx).continuousOn)
-    (continuousOn_d2gammaK.mono (Set.prod_mono_left (Set.subset_univ _)))
-    (fun t _ x hx => hasDerivAt_dgammaK t hx)
+  have hr : 0 < |κ| / 2 := by
+    have := abs_pos.2 hκ
+    linarith
+  -- 人手 Step 1 の長方形の `κ` の側 `[κ₁,κ₂]`。人手は `0 < κ₁ ≤ κ ≤ κ₂` とだけ書き（`κ > 0` の場合）、
+  -- 値を定めない。Lean は `κ₁ := κ − |κ|/2`、`κ₂ := κ + |κ|/2` に取り、`κ < 0` も同じ形で扱う。この区間は 0 を含まない
+  have hrect : Metric.closedBall κ (|κ| / 2) ⊆ {x : ℝ | x ≠ 0} := by
+    intro x hx hx0
+    rw [Metric.mem_closedBall, hx0, Real.dist_eq, zero_sub, abs_neg] at hx
+    linarith [abs_pos.2 hκ]
+  -- `gamma_derivatives_in_kappa` (4): `∂²γ/∂κ²` は長方形 `[0,2π]×[κ₁,κ₂]` 上連続
+  have hcont : ContinuousOn (fun p : ℝ × ℝ => d2gammaK p.1 p.2)
+      (Set.uIcc 0 (2 * Real.pi) ×ˢ Metric.closedBall κ (|κ| / 2)) :=
+    continuousOn_d2gammaK.mono (Set.prod_mono (Set.subset_univ _) hrect)
+  -- (R5) を mathlib の優関数の形で受けるための段: コンパクトな長方形上の連続関数は有界
+  obtain ⟨C, hC⟩ :=
+    (isCompact_uIcc.prod (isCompact_closedBall κ (|κ| / 2))).exists_bound_of_continuousOn hcont
+  -- (R5)（外から持ち込む積分記号下の微分。mathlib の優関数の形）
+  have h := (intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le
+    (μ := volume) (a := 0) (b := 2 * Real.pi)
+    (F := fun x θ => dgammaK θ x) (F' := fun x θ => d2gammaK θ x) (bound := fun _ => C)
+    (Metric.ball_mem_nhds κ hr)
+    -- 次の 3 つは mathlib の優関数の形が求める θ についての可測性・可積分性（Lean だけの段）
+    (Filter.eventually_of_mem (Metric.ball_mem_nhds κ hr) fun x hx =>
+      (continuous_dgammaK_fixed (hrect (Metric.ball_subset_closedBall hx))).aestronglyMeasurable)
+    ((continuous_dgammaK_fixed hκ).intervalIntegrable _ _)
+    (continuous_d2gammaK_fixed hκ).aestronglyMeasurable
+    (Filter.Eventually.of_forall fun θ hθ x hx =>
+      hC (θ, x) (Set.mk_mem_prod (Set.uIoc_subset_uIcc hθ) (Metric.ball_subset_closedBall hx)))
+    intervalIntegrable_const
+    -- `gamma_derivatives_in_kappa` (2): `∂²γ/∂κ²` は `∂γ/∂κ` の `κ` についての導関数（人手 Step 1 は (4) だけを引く）
+    (Filter.Eventually.of_forall fun θ _ x hx =>
+      hasDerivAt_dgammaK θ (hrect (Metric.ball_subset_closedBall hx)))).2
   exact h.const_mul (1 / (4 * Real.pi))
 
 /-- **人手証明 Step 1 の帰結**: `|G'(κ)| ≤ 1/2`。 -/
