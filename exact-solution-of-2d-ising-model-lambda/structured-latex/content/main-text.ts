@@ -108866,11 +108866,11 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
 &=\log_{\mathbb{R}}(1)
 &&(\because\ \text{空積は }1)\\
 &=\log_{\mathbb{R}}(1^{0})
-&&(\because\ 1^{0}=1\text{。整数冪の定義})\\
+&&(\because\ 1^{0}=1\text{、整数冪の定義})\\
 &=\iota(0)\cdot\log_{\mathbb{R}}(1)
 &&(\because\ \blkref{claim_real_logarithm_int_power}\text{ を }u:=1\text{、}k:=0\text{ で})\\
 &=0
-&&(\because\ \iota(0)=0\text{、}0\cdot t=0\text{。}\mathbb{R}\text{ の乗法})\\
+&&(\because\ \iota(0)=0\text{、}0\cdot t=0\text{、}\mathbb{R}\text{ の乗法})\\
 &=\sum_{p\in\varnothing}\log_{\mathbb{R}}\bigl(u(p)\bigr)
 &&(\because\ \text{空和は }0)
 \end{aligned}`),
@@ -108884,13 +108884,13 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
                         displayMath(String.raw`\begin{aligned}
 \log_{\mathbb{R}}\Bigl(\prod_{p\in S\cup\{p_0\}}u(p)\Bigr)
 &=\log_{\mathbb{R}}\Bigl(u(p_0)\cdot\prod_{p\in S}u(p)\Bigr)
-&&(\because\ p_0\notin S\text{。有限積の定義})\\
+&&(\because\ p_0\notin S\text{、有限積の定義})\\
 &=\log_{\mathbb{R}}\bigl(u(p_0)\bigr)+\log_{\mathbb{R}}\Bigl(\prod_{p\in S}u(p)\Bigr)
-&&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm}\text{。}\textstyle\prod_{p\in S}u(p)\in\mathbb{R}_{>0})\\
+&&(\because\ \text{乗法を加法へ移す、}\blkref{def_real_logarithm}\text{、}\textstyle\prod_{p\in S}u(p)\in\mathbb{R}_{>0})\\
 &=\log_{\mathbb{R}}\bigl(u(p_0)\bigr)+\sum_{p\in S}\log_{\mathbb{R}}\bigl(u(p)\bigr)
 &&(\because\ \text{帰納法の仮定})\\
 &=\sum_{p\in S\cup\{p_0\}}\log_{\mathbb{R}}\bigl(u(p)\bigr)
-&&(\because\ p_0\notin S\text{。有限和の定義})
+&&(\because\ p_0\notin S\text{、有限和の定義})
 \end{aligned}`),
                         paragraph([
                           "となる。以上を準備として、主張は一続きである。各行で ",
