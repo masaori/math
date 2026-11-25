@@ -31,7 +31,8 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | `Ising2D.cosh_gammaFn` | `cosh γ(θ) = γ_1(θ)` | 同上（`arccosh` が逆写像であること） |
 | `Ising2D.continuous_gamma1R`（`ClaimGammaContinuous.lean`） | `γ_1` は連続 | `gamma_is_continuous` Step 1 |
 | `Ising2D.gamma1R_periodic` | `γ_1(θ+2π) = γ_1(θ)` | 参照用ノート claims_unused_by_chapter_goals_not_adopted.ts に移した、もとの `gamma_is_continuous` の後半（周期性） |
-| `Ising2D.gamma_is_continuous` | **`γ` は `ℝ` 上連続** | `gamma_is_continuous` |
+| `Ising2D.gamma_is_continuous` | **`γ` は `ℝ` 上連続**（人手の Step 2（`def_arccosh` の `log(y + √(y²−1))` の (R0) による合成）と Step 3（合成）を証明の中の段で 1 対 1 に書く） | `gamma_is_continuous` |
+| `Ising2D.gamma_is_continuous_of_necSuf`（`ClaimGammaContinuousFromNecSuf.lean`） | `gamma_is_continuous` を `NecSuf.continuous_arcosh_comp`（`f := γ_1`）の特殊化として導出した版 | `gamma_is_continuous` |
 | `Ising2D.gammaFn_periodic` | `γ(θ+2π) = γ(θ)` | 同上のノート |
 | `Ising2D.abs_log_Z_sub_log_c_le`（`ClaimLimitInNRow.lean`） | `\|(1/(MN))log Z - (1/M)log c\| ≤ (log 2)/N` | `limit_of_log_Z_in_N_row` の含意の鎖（10 行） |
 | `Ising2D.log_two_pos` | `log 2 > 0` | `limit_of_log_Z_in_N_row` の準備 |
@@ -75,7 +76,7 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | 人手証明のラベル | 具体版 | 必要十分版 | 具体版を必要十分版の系として導出しているか |
 | --- | --- | --- | --- |
 | `gamma1_lower_bound_all_theta` | `Ising2D.gamma1R_ge_cosh_sub` / `one_le_gamma1R` | `NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub` | **している**（`ClaimGamma1LowerBoundFromNecSuf.lean` の `gamma1R_ge_cosh_sub_of_necSuf`。具体版 `gamma1R_ge_cosh_sub` は人手の鎖と 1 対 1 で、必要十分版を使わない） |
-| `gamma_is_continuous` | `Ising2D.gamma_is_continuous` | `NecSuf.continuous_arcosh_comp` | **している**（1 行の特殊化） |
+| `gamma_is_continuous` | `Ising2D.gamma_is_continuous` | `NecSuf.continuous_arcosh_comp` | **している**（`ClaimGammaContinuousFromNecSuf.lean` の `gamma_is_continuous_of_necSuf`。具体版 `gamma_is_continuous` は人手の Step 1〜3 と 1 対 1 で、必要十分版を使わない） |
 | `limit_of_log_Z_in_N_row` | `Ising2D.abs_log_Z_sub_log_c_le` / `limit_of_log_Z_in_N_row` | `NecSuf.abs_div_sub_le_of_sandwich` / `NecSuf.tendsto_of_abs_sub_le_div` | **している**（`ClaimLimitInNRowFromNecSuf.lean`。`L := log`、`b := 2`、`C := log 2`） |
 | `riemann_sum_to_integral` | `Ising2D.riemann_sum_to_integral_error` / `riemann_sum_to_integral` | `NecSuf.abs_integral_sub_riemann_sum_le_modulus` / `NecSuf.tendsto_riemann_sum` | **している**（`a = 0`, `b = 2π` の特殊化と添字の付け替え） |
 | `onsager_free_energy_expression` | `Ising2D.log_LambdaM` / `inv_M_log_LambdaM` / `onsager_free_energy_expression` | `NecSuf.log_rpow_mul_exp` / `NecSuf.tendsto_affine`（＋上の `tendsto_riemann_sum`） | **している** |

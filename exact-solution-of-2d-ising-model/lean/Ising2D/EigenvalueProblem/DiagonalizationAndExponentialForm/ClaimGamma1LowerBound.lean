@@ -6,8 +6,9 @@
 - `Athetatilde_001b_definition_gamma_theta`（ラベル `def_gamma_theta`。`gammaFn` 以下）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は `Ising2D/NecSuf/CoshLowerBound.lean`
-（`Ising2D.NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub`）と
-`Ising2D/NecSuf/Arcosh.lean`（`Ising2D.NecSuf.continuous_arcosh_comp`）。
+（`Ising2D.NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub`）。
+`γ` の連続性の必要十分版 `Ising2D/NecSuf/Arcosh.lean`（`Ising2D.NecSuf.continuous_arcosh_comp`）は
+`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimGammaContinuousFromNecSuf.lean` だけが使う。
 `gamma1R_ge_cosh_sub` を必要十分版の特殊化として得る導出は `ClaimGamma1LowerBoundFromNecSuf.lean`。
 
 ## 形式化の方針
@@ -35,7 +36,7 @@
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimDualityC2StarEqS2StarC2
-import Ising2D.NecSuf.Arcosh
+import Mathlib.Analysis.SpecialFunctions.Arcosh
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealDifference
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2

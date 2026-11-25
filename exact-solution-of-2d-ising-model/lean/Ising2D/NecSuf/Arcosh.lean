@@ -4,6 +4,7 @@
 対応する人手証明のラベル: `gamma_is_continuous`（`gamma1_lower_bound_all_theta` も参照）
 具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`,
 `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimGammaContinuous.lean`
+（特殊化としての導出は同じフォルダの `ClaimGammaContinuousFromNecSuf.lean`）
 
 ## mathlib の状況（`lean/README.md` の記載の訂正）
 
