@@ -78904,7 +78904,7 @@ a
                         displayMath(String.raw`\begin{aligned}
 0
 &=2\cdot0
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍。各素数の成分に }2\text{ を掛ける})\\
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍、各素数の成分に }2\text{ を掛ける})\\
 &\le_{\Lambda_{\mathbb{Q}}}2\cdot\iota(\log(1+q))
 &&(\because\ \blkref{claim_rational_log_order_group_nonneg_scalar_monotone}\text{ を }c:=2\text{、}\lambda:=0\text{、}\mu:=\iota(\log(1+q))\text{ で読む})\\
 &=0+2\cdot\iota(\log(1+q))

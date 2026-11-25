@@ -1,4 +1,5 @@
 import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceAlternatingCycle
+import Ising2DLambda.NecSuf.KacWard.ProjectedClosedEdgeCycleCore
 
 namespace Ising2DLambda.NecSuf.KacWard
 
@@ -20,53 +21,10 @@ theorem projectedClosedEdgeCycle (τ υ : FixedPointFreeInvolution J) (i : J)
   let σ := matchingPairPermutation τ υ
   let C := matchingPairColor τ υ
   have hflip (j : J) : σ j ∈ C ↔ j ∉ C := matchingPairSuccessor_color τ υ j
-  have heven (r : ℕ) : finiteMapIterate σ (2 * r) i ∈ C := by
-    induction r with
-    | zero => simpa [finiteMapIterate, C] using hi
-    | succ r ih =>
-      let j := finiteMapIterate σ (2 * r) i
-      have hodd : σ j ∉ C := by
-        intro h
-        exact (hflip j).mp h ih
-      have hnext : σ (σ j) ∈ C := (hflip (σ j)).mpr hodd
-      have hindex : 2 * (r + 1) = 2 + 2 * r := by omega
-      rw [hindex, finiteMapIterate_add]
-      exact hnext
-  let n := finitePermutationMinimalPeriod σ i
-  have hnpos : 0 < n := (finitePermutationMinimalPeriod_spec σ i).1
-  have hnreturn : finiteMapIterate σ n i = i :=
-    (finitePermutationMinimalPeriod_spec σ i).2.1
-  have hneven : Even n := by
-    change Even (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) i)
-    exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.even_of_color_flip
-      (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
-      (matchingPairSuccessor_color τ υ) _ _ hnreturn
-  obtain ⟨k, hk⟩ := hneven
-  have hkpos : 0 < k := by omega
-  refine ⟨k, hkpos, ?_, ?_⟩
-  · calc
-      finiteMapIterate σ (2 * k) i = finiteMapIterate σ n i := by
-        congr 1
-        omega
-      _ = i := hnreturn
-  · intro r _
-    have hodd : finiteMapIterate σ (2 * r + 1) i ∉ C := by
-      have hstep : finiteMapIterate σ (2 * r + 1) i =
-          σ (finiteMapIterate σ (2 * r) i) := by
-        rw [show 2 * r + 1 = 1 + 2 * r by omega, finiteMapIterate_add]
-        rfl
-      rw [hstep]
-      intro h
-      exact (hflip _).mp h (heven r)
-    calc
-      υ.val (finiteMapIterate σ (2 * r + 1) i) =
-          σ (finiteMapIterate σ (2 * r + 1) i) := by
-            change υ.val _ = matchingPairSuccessor τ υ _
-            rw [matchingPairSuccessor, if_neg hodd]
-      _ = finiteMapIterate σ (1 + (2 * r + 1)) i :=
-        (finiteMapIterate_add σ 1 (2 * r + 1) i).symm
-      _ = finiteMapIterate σ (2 * (r + 1)) i := by
-        congr 1
-        omega
+  have hsecond (j : J) (hj : j ∉ C) : σ j = υ.val j := by
+    change matchingPairSuccessor τ υ j = υ.val j
+    rw [matchingPairSuccessor, if_neg hj]
+  simpa only [finiteMapIterate] using
+    projectedClosedEdgeCycleCore σ υ.val (fun j => j ∈ C) hflip hsecond i hi
 
 end Ising2DLambda.NecSuf.KacWard
