@@ -108598,9 +108598,9 @@ d^{a,b}_{L,k,l}(\theta_1,\theta_2)&:=f_q(\theta_1,\theta_2)-f_q(t^{a,b}_{L,k,l})
                         displayMath(String.raw`\begin{aligned}
 \log_{\mathbb{R}}(1)
 &=\log_{\mathbb{R}}(1\cdot1)
-&&(\because\ 1\cdot1=1\text{。}\mathbb{R}\text{ の乗法の単位元})\\
+&&(\because\ 1\cdot1=1\text{、}\mathbb{R}\text{ の乗法の単位元})\\
 &=\log_{\mathbb{R}}(1)+\log_{\mathbb{R}}(1)
-&&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm})
+&&(\because\ \text{乗法を加法へ移す}\blkref{def_real_logarithm})
 \end{aligned}`),
                         paragraph([
                           "両辺から ", math(String.raw`\log_{\mathbb R}(1)`),

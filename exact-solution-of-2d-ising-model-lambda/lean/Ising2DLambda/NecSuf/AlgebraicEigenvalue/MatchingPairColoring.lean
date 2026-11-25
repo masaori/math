@@ -27,6 +27,19 @@ theorem matchingPairMinimum_basepoint (τ υ : FixedPointFreeInvolution J)
 def matchingPairColor (τ υ : FixedPointFreeInvolution J) (m : J → J) : Set J :=
   {i | i ∈ permutationOrbit (matchingPairStep τ υ) (m i)}
 
+/-- 成分の最小元は自分自身の最小元であり、第一色に属する。 -/
+theorem matchingPairMinimum_self_and_color (τ υ : FixedPointFreeInvolution J)
+    (le : J → J → Prop) (hanti : ∀ a b, le a b → le b a → a = b)
+    (m : J → J)
+    (hmem : ∀ i, m i ∈ matchingPairComponent τ.val υ.val τ.property.2 υ.property.2 i)
+    (hleast : ∀ i j, j ∈ matchingPairComponent τ.val υ.val τ.property.2 υ.property.2 i → le (m i) j)
+    (i : J) : m (m i) = m i ∧ m i ∈ matchingPairColor τ υ m := by
+  have hself := matchingPairMinimum_basepoint τ υ le hanti m hmem hleast i (m i) (hmem i)
+  refine ⟨hself, ?_⟩
+  change m i ∈ permutationOrbit (matchingPairStep τ υ) (m (m i))
+  rw [hself]
+  exact permutationOrbit_self_mem_necSuf _ _
+
 /-- 具体版と同じ、最小元の比較に続く二場合。 -/
 theorem matchingPairColor_alternates (τ υ : FixedPointFreeInvolution J)
     (le : J → J → Prop) (hanti : ∀ a b, le a b → le b a → a = b)

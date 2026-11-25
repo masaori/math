@@ -13,6 +13,7 @@
 -/
 import Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.KacWard.AlternatingCycleMatchingSign
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairColoring
 
 namespace Ising2DLambda.NecSuf.KacWard
 
@@ -75,12 +76,9 @@ theorem minimum_self_and_color (i : {x // x ∈ A}) :
     matchingPairComponentMinimum τ υ (matchingPairComponentMinimum τ υ i) =
         matchingPairComponentMinimum τ υ i ∧
       matchingPairComponentMinimum τ υ i ∈ matchingPairColor τ υ := by
-  have hself := matchingPairComponentMinimum_basepoint τ υ i _
-    (matchingPairComponentMinimum_mem τ υ i)
-  refine ⟨hself, ?_⟩
-  change _ ∈ finitePermutationOrbit (matchingPairStep τ υ) _
-  rw [hself]
-  exact finitePermutationOrbit_self_mem _ _
+  exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
+    τ υ (· ≤ ·) (fun _ _ => le_antisymm) (matchingPairComponentMinimum τ υ)
+    (matchingPairComponentMinimum_mem τ υ) (matchingPairComponentMinimum_le τ υ) i
 
 /-- 第一色の点からの反復は、偶数回なら第一色にある。 -/
 theorem iterate_color_parity_necSuf (m : {x // x ∈ A}) (hm : m ∈ matchingPairColor τ υ) :
