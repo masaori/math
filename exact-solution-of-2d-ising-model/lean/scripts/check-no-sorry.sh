@@ -989,6 +989,9 @@ targets=(
   Ising2D.inv_M_log_LambdaM
   Ising2D.onsager_free_energy_expression
   Ising2D.onsager_free_energy_expression_indep_delta
+  Ising2D.log_LambdaM_of_necSuf
+  Ising2D.onsager_free_energy_affine_limit_of_necSuf
+  Ising2D.onsager_free_energy_expression_of_necSuf
   Ising2D.NecSuf.IsPsdPair.cs_ip
   Ising2D.NecSuf.IsPsdPair.cs_W
   Ising2D.NecSuf.IsPsdPair.rayleigh_bounds_operator_norm

@@ -45,9 +45,12 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | `Ising2D.riemann_sum_to_integral_indep_delta` | 極限は `δ ∈ [0,1]` に依らない | 同 statement 末尾 |
 | `Ising2D.LambdaM` | `Λ^{(δ)}_M = (2 sinh 2K_2)^{M/2}\exp((1/2)Σγ)` | `def_Lambda_delta_M` |
 | `Ising2D.two_sinh_pos` / `LambdaM_pos`（`TheoremOnsagerFreeEnergy.lean`） | `2 sinh 2K_2 > 0`、`Λ^{(δ)}_M > 0` | `onsager_free_energy_expression` の proof 冒頭 |
-| `Ising2D.log_LambdaM` | `log Λ = (M/2)log(2 sinh 2K_2) + (1/2)Σγ` | `onsager_free_energy_expression` の proof 第 1 式 |
+| `Ising2D.log_LambdaM` | `log Λ = (M/2)log(2 sinh 2K_2) + (1/2)Σγ`（人手の 4 行の鎖（定義・積の対数・冪の対数・`log(exp y) = y`）と 1 対 1） | `onsager_free_energy_expression` の proof 第 1 式 |
+| `Ising2D.log_LambdaM_of_necSuf` | 同じ主張を `NecSuf.log_rpow_mul_exp` の特殊化として得る（`TheoremOnsagerFreeEnergyFromNecSuf.lean`） | `onsager_free_energy_expression` の proof 第 1 式 |
 | `Ising2D.inv_M_log_LambdaM` | `(1/M)log Λ = (1/2)log(2 sinh 2K_2) + (1/2)(1/M)Σγ` | `onsager_free_energy_expression` の proof 第 2 式 |
-| `Ising2D.onsager_free_energy_expression` | **`(1/M)log Λ^{(δ)}_M → (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π}γ`** | `onsager_free_energy_expression` |
+| `Ising2D.onsager_free_energy_expression` | **`(1/M)log Λ^{(δ)}_M → (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π}γ`**（極限の鎖（定数倍・定数の和の極限と `riemann_sum_to_integral`）と 1 対 1） | `onsager_free_energy_expression` |
+| `Ising2D.onsager_free_energy_affine_limit_of_necSuf` | 極限の鎖の第 2・3 行を `NecSuf.tendsto_affine` の特殊化として得る（`TheoremOnsagerFreeEnergyFromNecSuf.lean`） | 同 proof の極限の鎖 |
+| `Ising2D.onsager_free_energy_expression_of_necSuf` | 具体版 `onsager_free_energy_expression` と同じ主張を、上の特殊化に第 5 行の四則と第 1 行の代入を続けて得る（`TheoremOnsagerFreeEnergyFromNecSuf.lean`） | `onsager_free_energy_expression` |
 | `Ising2D.onsager_free_energy_expression_indep_delta` | 右辺が `δ` に依らないこと | 同 statement の「右辺は `δ` に依らない」 |
 
 ### 必要十分版（`Ising2D.NecSuf`）
@@ -79,7 +82,7 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | `gamma_is_continuous` | `Ising2D.gamma_is_continuous` | `NecSuf.continuous_arcosh_comp` | **している**（`ClaimGammaContinuousFromNecSuf.lean` の `gamma_is_continuous_of_necSuf`。具体版 `gamma_is_continuous` は人手の Step 1〜3 と 1 対 1 で、必要十分版を使わない） |
 | `limit_of_log_Z_in_N_row` | `Ising2D.abs_log_Z_sub_log_c_le` / `limit_of_log_Z_in_N_row` | `NecSuf.abs_div_sub_le_of_sandwich` / `NecSuf.tendsto_of_abs_sub_le_div` | **している**（`ClaimLimitInNRowFromNecSuf.lean`。`L := log`、`b := 2`、`C := log 2`） |
 | `riemann_sum_to_integral` | `Ising2D.riemann_sum_to_integral_error` / `riemann_sum_to_integral` | `NecSuf.abs_integral_sub_riemann_sum_le_modulus` / `NecSuf.tendsto_riemann_sum` | **している**（`a = 0`, `b = 2π` の特殊化と添字の付け替え） |
-| `onsager_free_energy_expression` | `Ising2D.log_LambdaM` / `inv_M_log_LambdaM` / `onsager_free_energy_expression` | `NecSuf.log_rpow_mul_exp` / `NecSuf.tendsto_affine`（＋上の `tendsto_riemann_sum`） | **している** |
+| `onsager_free_energy_expression` | `Ising2D.log_LambdaM` / `inv_M_log_LambdaM` / `onsager_free_energy_expression` | `NecSuf.log_rpow_mul_exp` / `NecSuf.tendsto_affine`（＋上の `tendsto_riemann_sum`） | **している**（`TheoremOnsagerFreeEnergyFromNecSuf.lean` の `log_LambdaM_of_necSuf`・`onsager_free_energy_expression_of_necSuf`。具体版は人手の鎖と 1 対 1 で、必要十分版を使わない） |
 
 ### 必要十分版で判明した本質（本文には持ち込まないが、解説パートの素材になる）
 
