@@ -128,10 +128,12 @@ theorem cyclePoints_even_necSuf (m : {x // x ∈ A}) :
   simp at this
   omega
 
-include hτ hυ in
-theorem cycle_pairs_D_necSuf (i : {x // x ∈ A}) :
+theorem cycle_pairs_D_necSuf (D' : Set (Set J)) (mate : J → J)
+    (hτ' : ∀ i, (τ.val i).1 = mate i.1)
+    (hD' : ∀ e, ({e, mate e} : Set J) ∈ D')
+    (i : {x // x ∈ A}) :
     ∀ p ∈ pairChunks (cyclePointsOf τ υ (matchingPairComponentMinimum τ υ i)),
-      ({p.1, p.2} : Set J) ∈ D.val := by
+      ({p.1, p.2} : Set J) ∈ D' := by
   intro p hp
   set m := matchingPairComponentMinimum τ υ i
   obtain ⟨k, hk⟩ := (cycle_period_necSuf A τ υ m).2.1
@@ -142,8 +144,15 @@ theorem cycle_pairs_D_necSuf (i : {x // x ∈ A}) :
   have hcol := (iterate_color_parity_necSuf A τ υ m (minimum_self_and_color A τ υ i).2
     (2 * r)).mpr (even_two_mul r)
   simp only
-  rw [iterate_succ_val_necSuf D D₀ A τ υ hτ hυ m (2 * r), if_pos hcol]
-  exact (perfectMatchingMate_spec D _).2
+  rw [show (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m).1 =
+      mate (finiteMapIterate (matchingPairPermutation τ υ) (2 * r) m).1 from by
+        have hstep : finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m =
+            matchingPairSuccessor τ υ (finiteMapIterate (matchingPairPermutation τ υ) (2 * r) m) := by
+          simp only [finiteMapIterate, Function.iterate_succ_apply']
+          rfl
+        rw [hstep, matchingPairSuccessor, if_pos hcol]
+        exact hτ' _]
+  exact hD' _
 
 include hτ hυ in
 theorem cycle_pairs_reference_necSuf (i : {x // x ∈ A}) :
@@ -298,7 +307,8 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
   · intro c hc
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc
     obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp ((Finset.mem_sort _).mp hm)
-    exact cycle_pairs_D_necSuf D D₀ A τ υ hτ hυ i
+    exact cycle_pairs_D_necSuf A τ υ D.val (perfectMatchingMate D)
+      hτ (fun e => (perfectMatchingMate_spec D e).2) i
   · intro c hc
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc
     obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp ((Finset.mem_sort _).mp hm)

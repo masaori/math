@@ -110565,7 +110565,7 @@ f^{\mathrm{per}}(q)
 &=\sup\rho_{\mathbb{R}}\bigl(A^{\mathrm{per}}(q)\bigr)
 &&(\because\ \text{上の定義})\\
 &=\sup\rho_{\mathbb{R}}\bigl(A^{\mathrm{op}}(q)\bigr)
-&&(\because\ \text{上で示した }\rho_{\mathbb{R}}(A^{\mathrm{per}}(q))=\rho_{\mathbb{R}}(A^{\mathrm{op}}(q))\text{。同じ集合の上限は同じ})\\
+&&(\because\ \text{上で示した }\rho_{\mathbb{R}}(A^{\mathrm{per}}(q))=\rho_{\mathbb{R}}(A^{\mathrm{op}}(q))\text{、同じ集合の上限は同じ})\\
 &=f^{\mathrm{op}}(q)
 &&(\because\ \blkref{def_open_square_free_energy_density})
 \end{aligned}`),
