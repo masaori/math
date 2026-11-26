@@ -109,6 +109,9 @@
 
 - **「現在地」「前進の記録」「レビュー記録」は新しい 5 件までを台帳に置く。**
   それより古いものは [auto-loop-archive.md](auto-loop-archive.md) へ移す（消さない）。
+  **保管庫の二つの文書（`auto-loop-archive.md`・`memory-archive.md`）は書き足すだけにする。** コミットの前に
+  `git diff --cached --numstat -- docs/tasks/auto-loop-archive.md docs/tasks/memory-archive.md` を打ち、削除の列が 0 でなければ直す
+  （2026-11-23 と 2026-11-26 に、並列の一回が保管庫をほぼ空にしたコミットを push した）。
 - **セクション台帳の表には残っているものだけを置く。** 済んだものは章ごとの件数だけを書く
   （内訳は保管庫と MEMORY にある）。
 - **セクションに番号を振らない。** 内容の分かる名前で書く（リポジトリ直下 CLAUDE.md
