@@ -2450,7 +2450,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
     origin: { path: "structured-latex/content/011_max_eigenvalue.ts", ordinal: 10 },
     title: { text: "モーメント列の正値性と対数凸性" },
     labels: ["moment_log_convexity"],
-    lean: ["Ising2D.moment_log_convexity_physical"],
+    lean: ["Ising2D.moment_log_convexity_physical", "Ising2D.moment_log_convexity"],
     statement: [
       paragraph([
         math(String.raw`d := 2_{\mathbb{Z}}^{\,M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
@@ -2804,8 +2804,14 @@ x^\top\Bigl((W_{\mathbb{R}})^b\bigl(C_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)
 &&\bigl(\because\ \blkref{def_real_matrix_product}\bigr)\\
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\sum_{l=1}^{d}\sum_{m=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ \text{を右辺から左辺へ各段の和へ適用し（掛ける数が右にある段は}\ \mathbb{R}\ \text{の乗法の交換律で左へ移す）、乗法の交換律・結合律}\bigr)\\
+&=\sum_{i=1}^{d}\sum_{l=1}^{d}\sum_{j=1}^{d}\sum_{m=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
+&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to d,\ n_2 \to d,\ k \to j,\ c_{j,l} \to \textstyle\sum_{m=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j)\ \text{を各}\ i\ \text{の項へ}\bigr)\\
+&=\sum_{i=1}^{d}\sum_{l=1}^{d}\sum_{m=1}^{d}\sum_{j=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
+&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to d,\ n_2 \to d,\ k \to j,\ l \to m,\ c_{j,m} \to x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j)\ \text{を各}\ (i,l)\ \text{の項へ}\bigr)\\
+&=\sum_{l=1}^{d}\sum_{i=1}^{d}\sum_{m=1}^{d}\sum_{j=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
+&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to d,\ n_2 \to d,\ k \to i,\ c_{i,l} \to \textstyle\sum_{m=1}^{d}\sum_{j=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j)\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
-&&\bigl(\because\ \mathbb{R}\ \text{の有限和の順序の交換}\bigr)\\
+&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to d,\ n_2 \to d,\ k \to i,\ l \to m,\ c_{i,m} \to \textstyle\sum_{j=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j)\ \text{を各}\ l\ \text{の項へ}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
 &&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ \text{を各}\ (l,m)\ \text{の項の}\ i\ \text{の和と}\ j\ \text{の和へ適用し（掛ける数が右にある和は}\ \mathbb{R}\ \text{の乗法の交換律で左へ移す）、乗法の交換律・結合律}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{li}\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
@@ -3001,7 +3007,7 @@ u^{(a+1)}_l
 &=\sum_{m=1}^{d}\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
 &&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律で掛ける数}\ x_m\ \text{を左へ移し、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to x_m)\ \text{を右辺から左辺へ各}\ m\ \text{の項へ同時に適用し、乗法の交換律で}\ x_m\ \text{を右へ戻す}\bigr)\\
 &=\sum_{n=1}^{d}\sum_{m=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
-&&\bigl(\because\ \mathbb{R}\ \text{の有限和の順序の交換}\bigr)\\
+&&\bigl(\because\ \blkref{finite_double_sum_of_real_numbers_interchange}\ (n_1 \to d,\ n_2 \to d,\ k \to m,\ l \to n,\ c_{m,n} \to (W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m)\bigr)\\
 &=\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
 &&\bigl(\because\ \text{乗法の結合律と、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to (W_{\mathbb{R}})_{ln})\ \text{を各}\ n\ \text{の項へ同時に適用}\bigr)\\
 &=\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,u^{(a)}_n

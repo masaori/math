@@ -6048,7 +6048,7 @@ i
     kind: "claim",
     title: { text: "実数の有限和は添字の全単射による付け替えで変わらない" },
     labels: ["finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing"],
-    lean: ["Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing", "Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_fintype"],
+    lean: ["Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 1}`),

@@ -58,6 +58,8 @@ targets=(
   Ising2D.finite_sum_over_multi_indices_of_real_numbers_is_monotone
   Ising2D.finite_sum_over_multi_indices_of_nonnegative_reals_ge_term
   Ising2D.finite_sum_over_multi_indices_of_constant_real_number
+  Ising2D.finite_sum_over_multi_indices_of_real_numbers_is_invariant_under_bijective_reindexing
+  Ising2D.finite_double_sum_over_multi_indices_of_real_numbers_interchange
   Ising2D.config_numbering_equals_kronecker_numbering
   Ising2D.V1
   Ising2D.V2
@@ -1297,7 +1299,6 @@ targets=(
   Ising2D.NecSuf.compSkipIndex_bijective
   Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing
   Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_of_necSuf
-  Ising2D.finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_fintype
   "Ising2D.NecSuf.finite_sum_reindex_bijective'"
   "Ising2D.NecSuf.finite_sum_subadditive_fin'"
   "Ising2D.NecSuf.finite_sum_le_fin'"
@@ -2002,7 +2003,6 @@ targets=(
   Ising2D.real_inclusion_add
   Ising2D.binaryWordComplexSum_ofReal
   Ising2D.binaryWordComplexSum_ofReal_of_necSuf
-  Ising2D.binWordSum_ofReal
   Ising2D.binaryWordMatrixSum_mul_of_necSuf
   Ising2D.binWordSum_mul_tensorPow
   Ising2D.binWordSum_mul_colVec

@@ -14,6 +14,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionF
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumOfRealNumbersReindexedByBijection
 
 namespace Ising2D
 
@@ -125,5 +126,61 @@ theorem finite_sum_over_multi_indices_of_constant_real_number (n : ℕ)
         finset_sum_conf_real_eq_finite_sum_over_multi_indices M n hord σ hσ (fun _ => r)
                                                                             -- `def_finite_sum_of_real_numbers_over_multi_indices`
     _ = (((n : ℤ)) : ℝ) * r := finite_sum_of_constant_real_number n r       -- `finite_sum_of_constant_real_number`（`m → n`）
+
+/-- 人手 `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing` を `𝓘_M`（Lean の `Conf M`）の上の和へ当てたもの:
+`π : 𝓘_M → 𝓘_M` が全単射なら `Σ_{I∈𝓘_M} a(π(I)) = Σ_{I∈𝓘_M} a(I)`（全単射は、単射 `hπinj` と全射 `hπsurj` を等号と存在で書いた二つの仮定で受け取る）。
+両辺を `ν^{-1}`（Lean の `σ`）による `{1,…,n}` の上の和へ開き、`{1,…,n}` の上の写像 `π'`（`ν^{-1}(π'(k)) = π(ν^{-1}(k))`。
+`ν ∘ π ∘ ν^{-1}` の値を番号として読んだもの）が全単射であることを `ν^{-1}` の単射・全射と `π` の単射・全射から示し、
+`{1,…,n}` の上の具体版 `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing`（`a_j → a(ν^{-1}(j))`、`π → π'`）を当てる。
+`n ≥ 1` は `𝓘_M` が空でない（成分が全て 1 の組を持つ）ことから出る。 -/
+theorem finite_sum_over_multi_indices_of_real_numbers_is_invariant_under_bijective_reindexing
+    (a : Conf M → ℝ) (π : Conf M → Conf M) (hπinj : ∀ I J, π I = π J → I = J)
+    (hπsurj : ∀ J, ∃ I, π I = J) :
+    ∑ I : Conf M, a (π I) = ∑ I : Conf M, a I := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M     -- `def_inverse_of_kronecker_numbering`
+  have hsum := finset_sum_conf_real_eq_finite_sum_over_multi_indices M n hord σ hσ
+  -- `ν^{-1}` の単射: `ν(ν^{-1}(k)) = k` と `{1,…,n}` の添字の単射から
+  have hσinj : ∀ k k', σ k = σ k' → k = k' := fun k k' h =>
+    (finIndexToZZ_bijective_onto_index_set n).1 k k' (by rw [← hσ, ← hσ, h])
+  -- `ν^{-1}` の全射: `ν(I)` の番号 `k` について `ν(ν^{-1}(k)) = ν(I)` と `ν` の単射（`kronecker_numbering_injective`）から
+  have hσsurj : ∀ I, ∃ k, σ k = I := fun I => by
+    obtain ⟨k, hk⟩ := hord I
+    exact ⟨k, kronecker_numbering_injective _ _ (by rw [hσ, hk])⟩
+  -- `n ≥ 1`: 成分が全て 1 の組（Lean の成分 `0 : Fin 2`）の番号が `{1,…,n}` に在る
+  obtain ⟨k₀, -⟩ := hord (fun _ => 0)
+  obtain ⟨n', rfl⟩ : ∃ n', n = n' + 1 := ⟨n - 1, by have := k₀.pos; omega⟩
+  -- `π'(k)`: `ν^{-1}(π'(k)) = π(ν^{-1}(k))` を満たす番号
+  choose π' hπ' using fun k => hσsurj (π (σ k))
+  have hπ'bij : Function.Bijective π' := by
+    refine ⟨fun k k' h => hσinj k k' (hπinj _ _ (by rw [← hπ' k, ← hπ' k', h])), fun k => ?_⟩
+    obtain ⟨I, hI⟩ := hπsurj (σ k)                                        -- `π` の全射
+    obtain ⟨k₁, hk₁⟩ := hσsurj I                                          -- `ν^{-1}` の全射
+    exact ⟨k₁, hσinj _ _ (by rw [hπ' k₁, hk₁, hI])⟩
+  calc ∑ I : Conf M, a (π I)
+      = ∑ k : Fin (n' + 1), a (π (σ k)) := hsum (fun I => a (π I))          -- `def_finite_sum_of_real_numbers_over_multi_indices`
+    _ = ∑ k : Fin (n' + 1), (fun j => a (σ j)) (π' k) := by
+        simp only [hπ']                                                     -- `ν^{-1}(π'(k)) = π(ν^{-1}(k))` を各項へ同時に
+    _ = ∑ k : Fin (n' + 1), a (σ k) :=
+        finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing n' (fun j => a (σ j)) π' hπ'bij
+                                                                            -- `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing`（`a_j → a(ν^{-1}(j))`、`π → π'`）
+    _ = ∑ I : Conf M, a I := (hsum a).symm                                  -- `def_finite_sum_of_real_numbers_over_multi_indices` を右辺から左辺へ
+
+/-- 人手 `finite_double_sum_of_real_numbers_interchange` を `𝓘_M`（Lean の `Conf M`）の上の二重の和へ当てたもの:
+`Σ_{I∈𝓘_M} Σ_{J∈𝓘_M} c(I,J) = Σ_{J∈𝓘_M} Σ_{I∈𝓘_M} c(I,J)`。
+外側の和と内側の和を順に `ν^{-1}`（Lean の `σ`）による `{1,…,n}` の上の和へ開き、具体版 `finite_double_sum_of_real_numbers_interchange`
+（`n_1, n_2 → n`、`c_{k,l} → c(ν^{-1}(k), ν^{-1}(l))`）を当て、開いた順の逆に閉じる。 -/
+theorem finite_double_sum_over_multi_indices_of_real_numbers_interchange (c : Conf M → Conf M → ℝ) :
+    ∑ I : Conf M, ∑ J : Conf M, c I J = ∑ J : Conf M, ∑ I : Conf M, c I J := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M     -- `def_inverse_of_kronecker_numbering`
+  have hsum := finset_sum_conf_real_eq_finite_sum_over_multi_indices M n hord σ hσ
+  calc ∑ I : Conf M, ∑ J : Conf M, c I J
+      = ∑ k : Fin n, ∑ J : Conf M, c (σ k) J := hsum (fun I => ∑ J, c I J)  -- `def_finite_sum_of_real_numbers_over_multi_indices`（外側の和）
+    _ = ∑ k : Fin n, ∑ l : Fin n, c (σ k) (σ l) :=
+        Finset.sum_congr rfl fun k _ => hsum (fun J => c (σ k) J)           -- `def_finite_sum_of_real_numbers_over_multi_indices`（内側の和、各 `k` の項へ）
+    _ = ∑ l : Fin n, ∑ k : Fin n, c (σ k) (σ l) :=
+        finite_double_sum_of_real_numbers_interchange n n _                 -- `finite_double_sum_of_real_numbers_interchange`
+    _ = ∑ l : Fin n, ∑ I : Conf M, c I (σ l) :=
+        Finset.sum_congr rfl fun l _ => (hsum (fun I => c I (σ l))).symm    -- `def_finite_sum_of_real_numbers_over_multi_indices` を右辺から左辺へ（内側の和、各 `l` の項へ）
+    _ = ∑ J : Conf M, ∑ I : Conf M, c I J := (hsum (fun J => ∑ I, c I J)).symm  -- `def_finite_sum_of_real_numbers_over_multi_indices` を右辺から左辺へ（外側の和）
 
 end Ising2D

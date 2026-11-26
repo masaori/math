@@ -23,8 +23,9 @@
   `sq_abs` で `√(Σ|w_k|^2)` に書いたものである（`sq_abs` は人手の行ではなく、二つの書き方の差を埋める段。
   `DefinitionRayleighSup.lean` の `abs_component_le_one_of_unit` と同じ）。
 - 人手は付け替えの写像を `χ` と書く（`π` は同じ章で円周率、`κ` は論文の別の章で定数と添字に使うため）。引く主張 `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing` の `π` に `χ` を代入する。
-- 人手の和の添字は `{1, …, d}` で、Lean の和の添字は `Conf (n + 1)` である。付け替えの段は、添字が有限型の和の系
-  `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_fintype` で当てる。
+- 人手の和の添字は `{1, …, d}` で、Lean の和の添字は `Conf (n + 1)`（本文の `𝓘_{M_col}`）である。付け替えの段は、
+  `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing` を `𝓘_M` の上の和へ当てた
+  `finite_sum_over_multi_indices_of_real_numbers_is_invariant_under_bijective_reindexing`（`ClaimFiniteSumsOverMultiIndices.lean`）で当てる。
 
 必要十分版は置かない。主張は、番号付けの全単射性と `epsilon_real_permutes_entries_by_spin_flip`・
 `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing`（必要十分版 `NecSuf/FiniteSumReindexedByBijection.lean`）を
@@ -32,7 +33,7 @@
 -/
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealPermutesEntriesBySpinFlip
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.RealMatrixBilinearFormAndNorm
-import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumOfRealNumbersReindexedByBijection
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
 
 namespace Ising2D
 
@@ -88,8 +89,9 @@ theorem epsilon_real_preserves_norm (n : ℕ) (u : Conf (n + 1) → ℝ) :
     _ = Real.sqrt (∑ k, |u (spinFlipIndex n k)| ^ 2) := by
         simp only [epsilon_real_mulVec_eq_spinFlipIndex]            -- `(ε_ℝu)_k = u_{χ(k)}` を `d` 個の項へ同時に
     _ = Real.sqrt (∑ k, |u k| ^ 2) := by
-        rw [finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing_fintype
-          (fun k => |u k| ^ 2) (spinFlipIndex n) (spinFlipIndex_bijective n)]
+        rw [finite_sum_over_multi_indices_of_real_numbers_is_invariant_under_bijective_reindexing
+          (fun k => |u k| ^ 2) (spinFlipIndex n)
+          (spinFlipIndex_bijective n).1 (spinFlipIndex_bijective n).2]
                                                                     -- `finite_sum_of_real_numbers_is_invariant_under_bijective_reindexing`（`a_j → |u_j|^2`）
     _ = vecNorm u := by
         rw [vecNorm, vecNormSq_eq_sum]

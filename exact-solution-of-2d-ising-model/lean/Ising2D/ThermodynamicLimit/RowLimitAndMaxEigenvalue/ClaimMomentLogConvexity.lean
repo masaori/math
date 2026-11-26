@@ -30,7 +30,7 @@
 | 【冪の分け方】`W^{a+b} = W^b(IW^a)` の 3 行 | `power_of_W_split_with_identity` の `calc` の 3 段 |
 | 同じ段の `W^{a+b+1} = W^b(WW^a)` の 7 行 | `power_of_W_split_with_W` の `calc` の 7 段 |
 | 同じ段の `(W_ℝ)^s = (W_ℝ)^b(C_ℝ(W_ℝ)^a)` の 5 行 | `power_of_W_real_split` の `calc` の 5 段（`C = I` は `power_of_W_real_split_with_identity`、`C = W` は `power_of_W_real_split_with_W_real`） |
-| 【二つの冪で挟んだ値】10 行 | `real_bilinear_value_between_two_powers` の `calc` の 10 段（人手の `C_ℝ ∈ {I_ℝ, W_ℝ}` を任意の実数の行列 `CR` で述べる。証明は `C_ℝ` の性質を使わない） |
+| 【二つの冪で挟んだ値】13 行 | `real_bilinear_value_between_two_powers` の `calc` の 13 段（人手の `C_ℝ ∈ {I_ℝ, W_ℝ}` を任意の実数の行列 `CR` で述べる。証明は `C_ℝ` の性質を使わない） |
 | 【`I_ℝ` と `W_ℝ` の正値性】`l ≠ k` の項の 3 行と `y^⊤I_ℝy` の 4 行と、`≥ 0`・`> 0` | `real_bilinear_value_of_real_identity_matrix`（`hterm` の 3 段と `calc` の 4 段）・`real_identity_matrix_is_positive_semidefinite`・`real_identity_matrix_is_positive_definite` |
 | 同じ段の `W_ℝ` の正定値性・半正定値性 | 仮定 `hpd`（`W_real_is_positive_definite`）と `psd_of_pd`（`W_real_is_positive_semidefinite`） |
 | 同じ段の `(I_ℝ)_kl = (I_ℝ)_lk` の 3 行 | `real_identity_matrix_entry_symm` の `calc` の 3 段（対称性は `real_identity_matrix_is_symmetric`） |
@@ -58,7 +58,7 @@
   「各項は 0 以上なので和は 0 以上」「正の項があるので和は正」は mathlib の `Finset.sum_nonneg`・`Finset.sum_pos'` で書く
   （人手のこの 2 か所には参照が無い）。有限和から共通の因子をくくり出す・和へ配る行（人手の「`ℝ` の分配律」）は `finite_sum_of_real_scalar_multiples` を `𝓘_M` の上の和へ当てた
   `finite_sum_over_multi_indices_of_real_scalar_multiples`（掛ける数が右なら `_on_the_right`。`ClaimFiniteSumsOverMultiIndices.lean`）で書き、
-  `ℝ` の結合律・交換律は `mul_assoc`・`ring` で書く。有限和の順序の交換は `Finset.sum_comm` で書く（`𝓘_M` の上の二重和の交換の補題がまだ無い。状態台帳の行「有限和と有限集合の記号」の残り）。
+  `ℝ` の結合律・交換律は `mul_assoc`・`ring` で書く。有限和の順序の交換（人手の `finite_double_sum_of_real_numbers_interchange`）は、それを `𝓘_M` の上の二重の和へ当てた `finite_double_sum_over_multi_indices_of_real_numbers_interchange`（`ClaimFiniteSumsOverMultiIndices.lean`）で書く。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperBound
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPsdCauchySchwarz
@@ -232,7 +232,7 @@ theorem power_of_W_real_split_with_W_real (a b : ℕ) :
           * (realMatrixOfRealEntries W hW.1 * realMatrixOfRealEntries W hW.1 ^ a) :=
   power_of_W_real_split W hW W hW.1 (a + b + 1) a b (power_of_W_split_with_W W a b)
 
-/-- 人手【二つの冪で挟んだ値】の 10 行: `x^⊤((W_ℝ)^b(C_ℝ(W_ℝ)^a))x = (u^{(b)})^⊤C_ℝu^{(a)}`（`u^{(a)} := (W_ℝ)^ax`）。 -/
+/-- 人手【二つの冪で挟んだ値】の 13 行: `x^⊤((W_ℝ)^b(C_ℝ(W_ℝ)^a))x = (u^{(b)})^⊤C_ℝu^{(a)}`（`u^{(a)} := (W_ℝ)^ax`）。 -/
 theorem real_bilinear_value_between_two_powers (CR : Matrix (Conf M) (Conf M) ℝ) (a b : ℕ)
     (x : Conf M → ℝ) :
     x ⬝ᵥ (realMatrixOfRealEntries W hW.1 ^ b * (CR * realMatrixOfRealEntries W hW.1 ^ a)) *ᵥ x
@@ -249,14 +249,25 @@ theorem real_bilinear_value_between_two_powers (CR : Matrix (Conf M) (Conf M) �
         simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples,
           ← finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right, mul_assoc]
                                                                             -- `finite_sum_of_real_scalar_multiples` を右辺から左辺へ各段の和へと、`ℝ` の乗法の交換律・結合律
-    _ = ∑ l, ∑ m, ∑ i, ∑ j, x i * Pb i l * CR l m * Pa m j * x j := by
-        calc ∑ i, ∑ j, ∑ l, ∑ m, x i * Pb i l * CR l m * Pa m j * x j
-            = ∑ i, ∑ l, ∑ m, ∑ j, x i * Pb i l * CR l m * Pa m j * x j :=
-              Finset.sum_congr rfl fun i _ =>
-                Finset.sum_comm.trans (Finset.sum_congr rfl fun l _ => Finset.sum_comm)
-          _ = ∑ l, ∑ m, ∑ i, ∑ j, x i * Pb i l * CR l m * Pa m j * x j :=
-              Finset.sum_comm.trans (Finset.sum_congr rfl fun l _ => Finset.sum_comm)
-                                                                            -- `ℝ` の有限和の順序の交換
+    _ = ∑ i, ∑ l, ∑ j, ∑ m, x i * Pb i l * CR l m * Pa m j * x j :=
+        Finset.sum_congr rfl fun i _ =>
+          finite_double_sum_over_multi_indices_of_real_numbers_interchange
+            (fun j l => ∑ m, x i * Pb i l * CR l m * Pa m j * x j)
+                                                                            -- `finite_double_sum_of_real_numbers_interchange`（`k → j`）を各 `i` の項へ
+    _ = ∑ i, ∑ l, ∑ m, ∑ j, x i * Pb i l * CR l m * Pa m j * x j :=
+        Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun l _ =>
+          finite_double_sum_over_multi_indices_of_real_numbers_interchange
+            (fun j m => x i * Pb i l * CR l m * Pa m j * x j)
+                                                                            -- `finite_double_sum_of_real_numbers_interchange`（`k → j`、`l → m`）を各 `(i, l)` の項へ
+    _ = ∑ l, ∑ i, ∑ m, ∑ j, x i * Pb i l * CR l m * Pa m j * x j :=
+        finite_double_sum_over_multi_indices_of_real_numbers_interchange
+          (fun i l => ∑ m, ∑ j, x i * Pb i l * CR l m * Pa m j * x j)
+                                                                            -- `finite_double_sum_of_real_numbers_interchange`（`k → i`）
+    _ = ∑ l, ∑ m, ∑ i, ∑ j, x i * Pb i l * CR l m * Pa m j * x j :=
+        Finset.sum_congr rfl fun l _ =>
+          finite_double_sum_over_multi_indices_of_real_numbers_interchange
+            (fun i m => ∑ j, x i * Pb i l * CR l m * Pa m j * x j)
+                                                                            -- `finite_double_sum_of_real_numbers_interchange`（`k → i`、`l → m`）を各 `l` の項へ
     _ = ∑ l, ∑ m, (∑ i, x i * Pb i l) * CR l m * (∑ j, Pa m j * x j) := by
         refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun m _ => ?_
         rw [← finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right,
@@ -331,7 +342,9 @@ theorem power_succ_of_W_real_mulVec_apply (a : ℕ) (x : Conf M → ℝ) (l : Co
     _ = ∑ m, ∑ n, WR l n * (WR ^ a) n m * x m := by
         simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right]
                                                                             -- `ℝ` の乗法の交換律で `x_m` を左へ移し、`finite_sum_of_real_scalar_multiples` を右辺から左辺へ各 `m` の項へ同時に当て、交換律で右へ戻す
-    _ = ∑ n, ∑ m, WR l n * (WR ^ a) n m * x m := Finset.sum_comm            -- `ℝ` の有限和の順序の交換
+    _ = ∑ n, ∑ m, WR l n * (WR ^ a) n m * x m :=
+        finite_double_sum_over_multi_indices_of_real_numbers_interchange (fun m n => WR l n * (WR ^ a) n m * x m)
+                                                                            -- `finite_double_sum_of_real_numbers_interchange`（`k → m`、`l → n`）
     _ = ∑ n, WR l n * ∑ m, (WR ^ a) n m * x m := by
         simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples, mul_assoc]
                                                                             -- 乗法の結合律と、`finite_sum_of_real_scalar_multiples` を各項へ同時に
