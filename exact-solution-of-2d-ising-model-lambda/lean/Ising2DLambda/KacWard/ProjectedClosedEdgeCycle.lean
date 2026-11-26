@@ -35,7 +35,8 @@ theorem taggedActive_projectedClosedEdgeCycle {L : ℕ}
     change m ∈ finitePermutationOrbit (matchingPairStep τ υ)
       (matchingPairComponentMinimum τ υ m)
     rw [hbase]
-    exact finitePermutationOrbit_self_mem _ m
+    -- 本文: 軌道の定義の零回の反復。
+    exact ⟨0, Or.inl rfl⟩
   have hflip (j : _) : σ j ∈ C ↔ j ∉ C := matchingPairSuccessor_color τ υ j
   have heven (r : ℕ) : finiteMapIterate σ (2 * r) m ∈ C := by
     induction r with
@@ -50,14 +51,13 @@ theorem taggedActive_projectedClosedEdgeCycle {L : ℕ}
       rw [hindex, finiteMapIterate_add]
       exact hnext
   let n := finitePermutationMinimalPeriod σ m
-  have hnreturn : finiteMapIterate σ n m = m :=
-    (finitePermutationMinimalPeriod_spec σ m).2.1
-  have hneven : Even n := by
-    change Even (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m)
-    rw [finitePermutationMinimalPeriod_eq_orbitLength]
-    exact matchingPairPermutation_even_orbit τ υ m
+  -- 本文: 交互閉路の主張により n は偶数で、周期で始点へ帰る。
+  have hcycle := taggedActive_alternatingCycle D t i
+  have hneven : Even n := hcycle.1
+  have hnreturn : finiteMapIterate σ n m = m := hcycle.2.2.2.1
   obtain ⟨k, hk⟩ := hneven
   have hkpos : 0 < k := by
+    -- 本文: 最小正周期は正の帰還時刻の最小元なので正である。
     have hnpos : 0 < n := (finitePermutationMinimalPeriod_spec σ m).1
     omega
   refine ⟨k, hkpos, ?_, ?_⟩

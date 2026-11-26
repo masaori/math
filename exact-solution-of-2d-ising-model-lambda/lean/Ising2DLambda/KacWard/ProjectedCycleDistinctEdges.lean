@@ -1,5 +1,5 @@
 import Ising2DLambda.KacWard.ProjectedCycleNonbacktracking
-import Ising2DLambda.AlgebraicEigenvalue.FinitePermutationPeriodInjective
+import Ising2DLambda.KacWard.TaggedDifferenceAlternatingCycle
 
 namespace Ising2DLambda.KacWard
 
@@ -41,7 +41,8 @@ theorem taggedActive_projectedCycle_distinctEdges {L : ℕ}
     change m ∈ finitePermutationOrbit (matchingPairStep τ υ)
       (matchingPairComponentMinimum τ υ m)
     rw [hbase]
-    exact finitePermutationOrbit_self_mem _ m
+    -- 本文: 軌道の定義の零回の反復。
+    exact ⟨0, Or.inl rfl⟩
   have hfibre (j l : {e : OrientedEdge L // e ∈ concreteTaggedActiveVertices D t})
       (h : j.val.1 = l.val.1) : j = l ∨ j = υ.val l := by
     rcases same_edge_eq_or_reversal j.val l.val h with heq | heq
@@ -57,10 +58,8 @@ theorem taggedActive_projectedCycle_distinctEdges {L : ℕ}
   let C := matchingPairColor τ υ
   let n := finitePermutationMinimalPeriod σ m
   let k := n / 2
-  have hneven : Even n := by
-    change Even (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m)
-    rw [finitePermutationMinimalPeriod_eq_orbitLength]
-    exact matchingPairPermutation_even_orbit τ υ m
+  -- 本文: 交互閉路の主張により最小正周期は偶数である。
+  have hneven : Even n := (taggedActive_alternatingCycle D t i).1
   have hnk : n = 2 * k := by
     obtain ⟨a, ha⟩ := hneven
     dsimp [k]
@@ -95,7 +94,11 @@ theorem taggedActive_projectedCycle_distinctEdges {L : ℕ}
       exact hnot (h ▸ heven r)
   have hrn : 2 * r < n := by omega
   have hsn : 2 * s < n := by omega
-  have hindex := finitePermutationIterate_injOn_period σ m hrn hsn heq
+  -- 本文: 軌道の列挙の単射性（最小正周期未満の反復回数の一意性）により 2r = 2s。
+  have hindex : (⟨2 * r, hrn⟩ : Fin n) = ⟨2 * s, hsn⟩ :=
+    (finitePermutationOrbitEnumeration_bijective σ m).1 (Subtype.ext heq)
+  have hval := congrArg Fin.val hindex
+  dsimp at hval
   omega
 
 end Ising2DLambda.KacWard

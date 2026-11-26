@@ -1,4 +1,7 @@
 ## 直近の記録から移したもの
+- 2026-11-25（主経路）: 対の向き直しの等式を必要十分版の向き選択と列挙の補題へ接続した。先頭行の符号の本体と具体版の型に伴う import は未了。「有限積の実対数」の式鎖の根拠の句点を読点に替えた。
+
+## 直近の記録から移したもの
 - 2026-11-25（主経路）: 完全な端点列の各対を昇順に直すと必要十分版のマッチング列挙になることを独立に示し、向き直しの補題から列挙条件の仮定を外した。交互閉路の本体の具体版 import は残る。
 - 2026-11-25（並列・八十四回目）: Kac--Ward の具体版の導出の補題を、名前順で `ShortPairCoefficientNonzero` から `WalkSideInteriorBandConnected` までの 20 ファイルと下流の `WalkSideExteriorBandConnected` から同名の `*FromNecSuf.lean` へ移して `NecSuf` の import を外し、`StepTurning`・`VertexSimpleBoundaryNonloopPropagation` は import を外すだけにした。並列の表の【分離】の導出を移す行は済んだ。分離の台帳 90→68 行。
 - 2026-11-25（並列・八十三回目）: Kac--Ward の具体版の導出の補題を、名前順で `OneSidedClosureNonbacktracking` から `RightRayVerticalCrossingCount` までの 13 ファイルと `TotalTurning` から同名の `*FromNecSuf.lean` へ移して `NecSuf` の import を外した。下流の具体版の使われていない `open Ising2DLambda.NecSuf.KacWard` を消した。分離の台帳 105→90 行。

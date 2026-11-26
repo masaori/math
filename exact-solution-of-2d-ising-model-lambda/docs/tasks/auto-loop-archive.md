@@ -1,4 +1,13 @@
 ## 現在地から移したもの
+- **2026-11-25（主経路）、交互閉路の対の向き直しを必要十分版の補題へ接続した。** 符号の本体には具体版の完全マッチング型が残り、具体版の交互閉路ファイルの import も残る。
+
+## レビュー記録から移したもの
+- 2026-11-25（主経路）: 前回の昇順対の列挙を、完全な端点列から二点ずつ取る条件と照合した。修正は無かった。
+
+## 前進の記録から移したもの
+- 2026-11-25（主経路）: 先頭の交互閉路の行を対の向き直しの論法で割り、必要十分版の向き選択・昇順対列挙・端点列評価から等式を示した。符号の本体と、具体版の完全マッチング型に伴う import は未了である。
+
+## 現在地から移したもの
 - **2026-11-25（主経路）、完全な端点列から昇順対の列挙を必要十分版で示した。** 向き直しの補題は列挙条件を外から受け取らなくなった。交互閉路の定理は具体版の import をまだ使う。
 - **2026-11-25（並列・八十四回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」の残り 22 行を直し、行を済ませた（表から消した）。** 名前順で `ShortPairCoefficientNonzero` から `WalkSideInteriorBandConnected` までの 20 ファイルの導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外し（導出のファイルが既にあった `TransverseTranslatedPeriodicPlaneLift`・`WalkSideInteriorBandConnected` はそこへ足した）、`StepTurning`・`VertexSimpleBoundaryNonloopPropagation` は import を外すだけにした。import が外れて落ちた下流の具体版 `WalkSideExteriorBandConnected` の導出の補題も既存の導出のファイルへ移し、`ExteriorCellSetEdgeConnectedFromNecSuf` に `NecSuf.KacWard.WalkSideInteriorBandConnected` の import を足した。導出が使う具体版の二つの補助定理（`TaggedMatchingNonzeroSupport` の長い寄与・短い寄与の非零性）の `private` を外し、`SmoothingClosedWalkSplit` に `Mathlib.Data.Nat.Basic` を直接足した。分離の台帳は 90→68 行（具体版のモジュールが必要十分版を import する組 37→15）。
 - **2026-11-25（並列・八十三回目）、並列の表の先頭の行「Kac--Ward の具体版の導出を導出のファイルへ移し、import を分ける」のうち 15 行を直した（行は未了）。** 名前順で `OneSidedClosureNonbacktracking` から `RightRayVerticalCrossingCount` までの 13 ファイルと、`ReversalRotationPhase` の導出の定義 `Turn.toNecSuf` を使う `TotalTurning`（計 14 ファイル：`OneSidedClosureNonbacktracking`・`OneSidedClosurePeriodDifferenceTurning`・`PeriodicPlaneLiftPeriodTurning`・`PlaneCellBoundaryInjective`・`PrimitiveIntegerPair`・`ReconnectionTurningDifference`・`ReferenceLongMatching`・`ReferenceLongMate`・`RepresentativeIncrement`・`ReversalDirectionShift`・`ReversalMatrixDeterminant`・`ReversalRotationPhase`・`RightRayVerticalCrossingCount`・`TotalTurning`）の導出の補題を同名の `*FromNecSuf.lean` へ移して具体版から `NecSuf` の import を外した（導出のファイルが既にあった三つは import を外すだけ）。`ClosedWalkRotationPhaseFromNecSuf` は `TotalTurningFromNecSuf` を、`OddRayInteriorCellsFromNecSuf` は `RightRayVerticalCrossingCountFromNecSuf` を import する。import が外れて使えなくなった具体版の `open Ising2DLambda.NecSuf.KacWard`（使われていなかった）を 11 ファイルから、`simp` の `NecSuf.KacWard.reverseBool`（同じく不要）を 2 ファイルから消し、`RepresentativeIncrement`・`RightRayVerticalCrossingCount` に `Mathlib`、`PrimitiveIntegerPair` に `Mathlib.Data.Int.GCD` を直接足した。分離の台帳は 105→90 行。
