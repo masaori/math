@@ -113192,11 +113192,11 @@ s+1
                     displayMath(String.raw`\begin{aligned}
 q-p
 &=\frac{k+1}{N}-\frac{k}{N}
-&&(\because\ p,q\text{ の定義})\\
+&&\bigl(\because\ p,q\text{ の定義}\bigr)\\
 &=\frac{1}{N}
-&&(\because\ \mathbb{Q}\text{ の四則})\\
+&&\bigl(\because\ \mathbb{Q}\text{ の四則}\bigr)\\
 &=h
-&&(\because\ h\text{ の定義})
+&&\bigl(\because\ h\text{ の定義}\bigr)
 \end{aligned}`),
                     paragraph([
                       "である。狭義上界から零元でない ", math(String.raw`a\in R`),
@@ -113210,11 +113210,11 @@ q-p
                     displayMath(String.raw`\begin{aligned}
 h-a\cdot a
 &=(q-p)-(q-x_c)
-&&(\because\ h=q-p\ \text{と }q-x_c=a\cdot a)\\
+&&\bigl(\because\ h=q-p\ \text{と }q-x_c=a\cdot a\bigr)\\
 &=x_c-p
-&&(\because\ R\text{ の四則})\\
+&&\bigl(\because\ R\text{ の四則}\bigr)\\
 &=d\cdot d
-&&(\because\ p\le_Rx_c\text{ の平方表示})
+&&\bigl(\because\ p\le_Rx_c\text{ の平方表示}\bigr)
 \end{aligned}`),
                     paragraph([
                       "である。また ", ref("claim_positive_rational_positive_in_real_closed"),
@@ -113229,13 +113229,13 @@ h-a\cdot a
                     displayMath(String.raw`\begin{aligned}
 h\cdot h-(q-x_c)\cdot(q-x_c)
 &=h\cdot h-(a\cdot a)\cdot(a\cdot a)
-&&(\because\ q-x_c=a\cdot a)\\
+&&\bigl(\because\ q-x_c=a\cdot a\bigr)\\
 &=(h-a\cdot a)\cdot(h+a\cdot a)
-&&(\because\ R\text{ の分配則（平方差の因数分解）})\\
+&&\bigl(\because\ R\text{ の分配則（平方差の因数分解）}\bigr)\\
 &=(d\cdot d)\cdot(v\cdot v)
-&&(\because\ \text{上の二つの平方表示})\\
+&&\bigl(\because\ \text{上の二つの平方表示}\bigr)\\
 &=(d\cdot v)\cdot(d\cdot v)
-&&(\because\ R\text{ の積の可換則と結合則})
+&&\bigl(\because\ R\text{ の積の可換則と結合則}\bigr)
 \end{aligned}`),
                     paragraph([
                       math(String.raw`h\cdot h<\delta`), " は ", math(String.raw`\mathbb{Q}`),
@@ -113253,11 +113253,11 @@ h\cdot h-(q-x_c)\cdot(q-x_c)
                     displayMath(String.raw`\begin{aligned}
 \delta-(x_c-q)\cdot(x_c-q)
 &=(\delta-h\cdot h)+\bigl(h\cdot h-(q-x_c)\cdot(q-x_c)\bigr)
-&&(\because\ (x_c-q)^2=(q-x_c)^2\text{ と }R\text{ の四則})\\
+&&\bigl(\because\ (x_c-q)^2=(q-x_c)^2\text{ と }R\text{ の四則}\bigr)\\
 &=r\cdot r+(d\cdot v)\cdot(d\cdot v)
-&&(\because\ \text{上の二つの平方表示})\\
+&&\bigl(\because\ \text{上の二つの平方表示}\bigr)\\
 &=z\cdot z
-&&(\because\ z\text{ の取り方})
+&&\bigl(\because\ z\text{ の取り方}\bigr)
 \end{aligned}`),
                     paragraph([
                       "を得る。", math(String.raw`z\ne0`), " なので ",
