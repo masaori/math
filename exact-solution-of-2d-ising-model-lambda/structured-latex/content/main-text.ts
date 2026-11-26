@@ -110154,7 +110154,7 @@ b
 &=-\bigl(\bigl(\tfrac1L\cdot2\bigr)\cdot\delta\bigr)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の }(rs)\cdot\lambda=r\cdot(s\cdot\lambda)\text{ を右辺から左辺の向きに読む})\\
 &=-\bigl(\tfrac{2}{L}\cdot\delta\bigr)
-&&(\because\ \tfrac1L\cdot2=\tfrac2L\text{。}\mathbb{Q}\text{ の四則})\\
+&&(\because\ \tfrac1L\cdot2=\tfrac2L\text{、}\mathbb{Q}\text{ の四則})\\
 &=-\bigl(\tfrac{2}{L}\cdot(-\iota(\log q))\bigr)
 &&(\because\ \delta\text{ の定義})\\
 &=\tfrac{2}{L}\cdot\iota(\log q)

@@ -1,8 +1,42 @@
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairComponent
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairOrbitSeparation
+import Mathlib.Data.Finset.Max
 
 namespace Ising2DLambda.NecSuf.AlgebraicEigenvalue
 variable {J : Type*}
+
+section Minimum
+
+variable [Fintype J] [LinearOrder J]
+
+/-- 二つの二歩軌道の合併を有限集合として集める。 -/
+noncomputable def matchingPairComponentPoints (τ υ : FixedPointFreeInvolution J) (i : J) : Finset J :=
+  open Classical in Set.toFinset
+    (matchingPairComponent τ.val υ.val τ.property.2 υ.property.2 i)
+
+omit [LinearOrder J] in
+theorem matchingPairComponentPoints_nonempty (τ υ : FixedPointFreeInvolution J) (i : J) :
+    (matchingPairComponentPoints τ υ i).Nonempty := by
+  classical
+  exact ⟨i, Set.mem_toFinset.mpr (Or.inl (permutationOrbit_self_mem_necSuf _ i))⟩
+
+/-- 成分の最小元を、成分の有限性と始点の所属から構成する。 -/
+noncomputable def matchingPairComponentMinimum (τ υ : FixedPointFreeInvolution J) (i : J) : J :=
+  (matchingPairComponentPoints τ υ i).min' (matchingPairComponentPoints_nonempty τ υ i)
+
+theorem matchingPairComponentMinimum_mem (τ υ : FixedPointFreeInvolution J) (i : J) :
+    matchingPairComponentMinimum τ υ i ∈
+      matchingPairComponent τ.val υ.val τ.property.2 υ.property.2 i := by
+  classical
+  exact Set.mem_toFinset.mp (Finset.min'_mem _ _)
+
+theorem matchingPairComponentMinimum_le (τ υ : FixedPointFreeInvolution J) (i j : J)
+    (hj : j ∈ matchingPairComponent τ.val υ.val τ.property.2 υ.property.2 i) :
+    matchingPairComponentMinimum τ υ i ≤ j := by
+  classical
+  exact Finset.min'_le _ _ (Set.mem_toFinset.mpr hj)
+
+end Minimum
 
 /- 有限性・全順序・最小元の探索手続きは不要。合併内の最小元の仕様と比較の反対称性だけを残す。
 対合性は軌道の交換と合併の始点独立性に、不動点の不在は二軌道の非交叉に必要。 -/
@@ -23,6 +57,21 @@ theorem matchingPairMinimum_basepoint (τ υ : FixedPointFreeInvolution J)
   have hle := hleast j (m i) hmi
   have hge := hleast i (m j) hmj
   exact hanti (m j) (m i) hle hge
+
+section ConcreteMinimum
+
+variable [Fintype J] [LinearOrder J]
+
+/-- 成分内の始点を変えても、その成分から構成した最小元は変わらない。 -/
+theorem matchingPairComponentMinimum_basepoint (τ υ : FixedPointFreeInvolution J) (i j : J)
+    (hj : j ∈ matchingPairComponent τ.val υ.val τ.property.2 υ.property.2 i) :
+    matchingPairComponentMinimum τ υ j = matchingPairComponentMinimum τ υ i :=
+  matchingPairMinimum_basepoint τ υ (· ≤ ·) (fun _ _ => le_antisymm)
+    (matchingPairComponentMinimum τ υ)
+    (matchingPairComponentMinimum_mem τ υ)
+    (matchingPairComponentMinimum_le τ υ) i j hj
+
+end ConcreteMinimum
 
 def matchingPairColor (τ υ : FixedPointFreeInvolution J) (m : J → J) : Set J :=
   {i | i ∈ permutationOrbit (matchingPairStep τ υ) (m i)}
