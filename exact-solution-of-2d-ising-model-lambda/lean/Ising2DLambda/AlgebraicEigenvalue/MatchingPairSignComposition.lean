@@ -1,10 +1,8 @@
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairWordSignMap
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairWordOrientationSign
-import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairSignComposition
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
-open Ising2DLambda.NecSuf.AlgebraicEigenvalue (sign)
 open Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign (finiteOrderedSign)
 open scoped Classical
 
@@ -13,7 +11,7 @@ variable {J : Type*} [Fintype J] [LinearOrder J]
 noncomputable def orientationSign (l : List (J × J)) (S : Set J) : ℤ :=
   (l.map (fun p => if p.1 ∈ S then (1 : ℤ) else -1)).prod
 
-private theorem orientationSign_mul_self (l : List (J × J)) (S : Set J) :
+theorem orientationSign_mul_self (l : List (J × J)) (S : Set J) :
     orientationSign l S * orientationSign l S = 1 := by
   classical
   unfold orientationSign
@@ -23,11 +21,11 @@ private theorem orientationSign_mul_self (l : List (J × J)) (S : Set J) :
       simp only [List.map_cons, List.prod_cons]
       split_ifs <;> nlinarith [ih]
 
-private theorem perfectMatchingSign_mul_self (D : PerfectMatching J) :
+theorem perfectMatchingSign_mul_self (D : PerfectMatching J) :
     perfectMatchingSign D * perfectMatchingSign D = 1 := by
   rcases perfectMatchingSign_eq_one_or_neg_one D with h | h <;> rw [h] <;> norm_num
 
-private theorem matchingPairWordOrientationSign_forEnumeration
+theorem matchingPairWordOrientationSign_forEnumeration
     (D : PerfectMatching J) (l : List (J × J))
     (hl : IsMatchingEnumeration D l) (S : Set J) :
     matchingWordSign (l.flatMap (fun p =>
@@ -93,30 +91,5 @@ theorem matchingPairSignComposition (τ υ : FixedPointFreeInvolution J)
           (orientationSign lD S * perfectMatchingSign D) := by rw [hD]
     _ = orientationSign lD S * orientationSign lE T *
           perfectMatchingSign D * perfectMatchingSign E := by ring
-
-/-- The same composition follows from the necessary hypotheses in a commutative ring. -/
-theorem matchingPairSignComposition_from_necSuf (τ υ : FixedPointFreeInvolution J)
-    (D E : PerfectMatching J) (lD lE : List (J × J))
-    (hDenum : IsMatchingEnumeration D lD) (hEenum : IsMatchingEnumeration E lE)
-    (S T : Set J) (w : List J)
-    (hw : ∀ i ∈ w, i ∈ matchingPairColor τ υ)
-    (hcomplete : IsCompleteWord (w.flatMap (fun i => [i, τ.val i])))
-    (hfirst : w.flatMap (fun i => [i, τ.val i]) =
-      lD.flatMap (fun p =>
-        if p.1 ∈ S then [p.1, p.2] else [p.2, p.1]))
-    (hsecond : w.flatMap (fun i => [τ.val i, υ.val (τ.val i)]) =
-      lE.flatMap (fun p =>
-        if p.1 ∈ T then [p.1, p.2] else [p.2, p.1])) :
-    sign (fun x y : J => x < y) (matchingPairPermutation τ υ) =
-      orientationSign lD S * orientationSign lE T *
-        perfectMatchingSign D * perfectMatchingSign E := by
-  have hmap := matchingPairWordSignMap_from_necSuf τ υ w hw hcomplete
-  have hD := matchingPairWordOrientationSign_forEnumeration D lD hDenum S
-  have hE := matchingPairWordOrientationSign_forEnumeration E lE hEenum T
-  rw [hfirst] at hmap
-  rw [hsecond] at hmap
-  exact NecSuf.AlgebraicEigenvalue.matchingPairSignComposition_necSuf
-    _ _ _ _ _ _ _ hmap hD hE (orientationSign_mul_self lD S)
-      (perfectMatchingSign_mul_self D)
 
 end Ising2DLambda.AlgebraicEigenvalue

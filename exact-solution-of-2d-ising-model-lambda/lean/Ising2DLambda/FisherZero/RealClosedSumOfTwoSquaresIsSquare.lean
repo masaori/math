@@ -7,7 +7,7 @@
   代数閉性で u·u = x + yω を満たす u を取る                          `IsAlgClosed.exists_pow_nat_eq`
   第 4 条件で u = a + bω と一意表示                                  `data.unique_decomposition`
   展開して x = a·a - b·b、y = a·b + a·b（一意性）                    `hx`, `hy`
-  c := a·a + b·b と置き Gauss の恒等式                               `gauss_sum_of_two_squares_identity_necSuf`
+  c := a·a + b·b と置き Gauss の恒等式                               `ring`
   x := 1, y := 1 として 1+1 = s·s、s ≠ 0                             `two_is_square_in_realClosed`
   三分法の第 2 の場合が成り立つので第 3 は成り立たない               `neg_two_not_square_in_realClosed`
 
@@ -17,7 +17,6 @@
 住処: Qbar。実数体・複素数体は現れない。
 -/
 import Ising2DLambda.FisherZero.RealClosedSubfield
-import Ising2DLambda.NecSuf.FisherZero.RealClosedSumOfTwoSquaresIsSquare
 import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 namespace Ising2DLambda.FisherZero

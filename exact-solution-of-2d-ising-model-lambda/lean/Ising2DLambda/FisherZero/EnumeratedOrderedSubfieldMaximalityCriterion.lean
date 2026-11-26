@@ -1,4 +1,5 @@
-import Ising2DLambda.FisherZero.IncreasingPositiveConeUnionFromNecSuf
+import Ising2DLambda.FisherZero.IncreasingSubfieldUnion
+import Ising2DLambda.FisherZero.SubfieldPositiveCone
 
 namespace Ising2DLambda.FisherZero
 

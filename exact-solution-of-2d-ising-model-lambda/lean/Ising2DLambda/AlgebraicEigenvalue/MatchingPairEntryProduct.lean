@@ -1,6 +1,5 @@
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairPermutation
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialPfaffian
-import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEntryProduct
 import Mathlib.Algebra.Polynomial.Basic
 import Mathlib.Data.Fintype.BigOperators
 
@@ -36,17 +35,5 @@ theorem matchingPairEntryProduct (τ υ : FixedPointFreeInvolution J)
         have hC : i ∉ C := (Finset.mem_filter.mp hi).2
         change i ∉ matchingPairColor τ υ at hC
         simp [f, matchingPairPermutation, matchingPairSuccessor, hC]
-
-/-- 必要十分版を実際の二つの相手写像へ代入した等式。 -/
-theorem matchingPairEntryProduct_from_necSuf (τ υ : FixedPointFreeInvolution J)
-    (A : Matrix J J (Polynomial Qbar)) :
-    (∏ i : J, A i (matchingPairPermutation τ υ i)) =
-      (∏ i ∈ Finset.univ.filter (· ∈ matchingPairColor τ υ), A i (τ.val i)) *
-        (∏ i ∈ Finset.univ.filter (· ∉ matchingPairColor τ υ), A i (υ.val i)) := by
-  classical
-  apply NecSuf.AlgebraicEigenvalue.matchingPairEntryProduct_necSuf
-    (matchingPairColor τ υ) (matchingPairPermutation τ υ) τ.val υ.val A
-  intro i
-  rfl
 
 end Ising2DLambda.AlgebraicEigenvalue

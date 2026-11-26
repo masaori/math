@@ -2,7 +2,6 @@ import Ising2DLambda.AlgebraicEigenvalue.MatchingPairReversePermutation
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairFirstRecovery
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairSecondRecovery
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairEvenOrbit
-import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairBijection
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 variable {J : Type*} [Fintype J] [LinearOrder J]
@@ -98,12 +97,6 @@ noncomputable def matchingPairEvenOrbitEquiv :
   invFun := evenOrbitToMatchingPair
   left_inv := matchingPair_bijection_left
   right_inv := matchingPair_bijection_right
-
-noncomputable def matchingPairEvenOrbitEquiv_from_necSuf :
-    (FixedPointFreeInvolution J × FixedPointFreeInvolution J) ≃ EvenOrbitPermutation J :=
-  NecSuf.AlgebraicEigenvalue.equivalenceOfTwoSidedInverse
-    matchingPairToEvenOrbit evenOrbitToMatchingPair
-    matchingPair_bijection_left matchingPair_bijection_right
 
 noncomputable def perfectMatchingPairEvenOrbitEquiv :
     (PerfectMatching J × PerfectMatching J) ≃ EvenOrbitPermutation J :=

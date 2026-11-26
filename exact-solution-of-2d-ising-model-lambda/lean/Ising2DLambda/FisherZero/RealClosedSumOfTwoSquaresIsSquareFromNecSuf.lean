@@ -5,6 +5,7 @@
 住処: ここに ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.FisherZero.RealClosedSumOfTwoSquaresIsSquare
+import Ising2DLambda.NecSuf.FisherZero.RealClosedSumOfTwoSquaresIsSquare
 
 namespace Ising2DLambda.FisherZero
 

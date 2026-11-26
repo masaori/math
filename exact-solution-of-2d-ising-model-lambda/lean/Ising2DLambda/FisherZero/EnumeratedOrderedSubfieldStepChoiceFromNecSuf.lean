@@ -1,5 +1,6 @@
 import Ising2DLambda.FisherZero.EnumeratedOrderedSubfieldStepChoice
 import Ising2DLambda.NecSuf.FisherZero.EnumeratedOrderedSubfieldStepChoice
+import Ising2DLambda.FisherZero.SubfieldPositiveConeFromNecSuf
 
 namespace Ising2DLambda.FisherZero
 
