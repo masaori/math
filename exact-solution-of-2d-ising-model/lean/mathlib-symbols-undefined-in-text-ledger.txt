@@ -46,7 +46,6 @@ Ising2D.AP	Real.sinh
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	DFunLike.coe@Equiv,→,fun@EquivLike.toFunLike
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	Equiv
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
-Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	Inv.inv@Matrix[Fin,Fin,Complex]@Matrix.inv
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	Matrix.det@Fin@instDecidableEqFin,Fin.fintype,Complex.commRing
 Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form	Matrix.of
@@ -162,7 +161,6 @@ Ising2D.CheckFermi.Qproj_ne_zero	Finset
 Ising2D.CheckFermi.acomm_cre_ann_self	HAdd.hAdd@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.add
 Ising2D.CheckFermi.ann_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.CheckFermi.ann_mulVec_cre_mulVec_generator	OfNat.ofNat@→,0@Zero.toOfNat0
-Ising2D.CheckFermi.ann_mul_cre	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermi.checkH	ite@Real,Eq@Complex.instDecidableEq
 Ising2D.CheckFermi.commute_ann_nOp	Commute@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid
 Ising2D.CheckFermi.commute_cre_nOp	Commute@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid
@@ -188,7 +186,6 @@ Ising2D.CheckFermi.defFactor_mul_defFactor	Finset
 Ising2D.CheckFermi.defFactor_of_mem	Finset
 Ising2D.CheckFermi.defFactor_of_mem	Membership.mem@Fin,Finset@SetLike.instMembership
 Ising2D.CheckFermi.defFactor_of_notMem	Finset
-Ising2D.CheckFermi.defFactor_of_notMem	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermi.defFactor_of_notMem	Membership.mem@Fin,Finset@SetLike.instMembership
 Ising2D.CheckFermi.epsVal	Finset
 Ising2D.CheckFermi.epsVal	Membership.mem@Fin,Finset@SetLike.instMembership
@@ -307,7 +304,6 @@ Ising2D.CheckFermi.neg_one_pow_mul_self	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.CheckFermi.omittingDefFactor_insert	Finset
 Ising2D.CheckFermi.omittingDefFactor_insert	Insert.insert@Fin,Finset@Finset.instInsert
 Ising2D.CheckFermi.omittingDefFactor_mulVec_generator	Finset
-Ising2D.CheckFermi.parityFactor	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermi.parityFactor_mul_Qproj	Finset
 Ising2D.CheckFermi.parityFactor_mul_Qproj	HSMul.hSMul@Complex,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.smul
 Ising2D.CheckFermi.parityFactor_mul_Qproj	HSub.hSub@Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow@Matrix.sub
@@ -321,11 +317,9 @@ Ising2D.CheckFermi.parityProd_mul_Qproj	Finset
 Ising2D.CheckFermi.parityProd_mul_Qproj	Finset.card
 Ising2D.CheckFermi.parityProd_mul_Qproj	HPow.hPow@Complex,Nat,Complex@NPow.toPow
 Ising2D.CheckFermi.projFactor_eq_defFactor	Finset
-Ising2D.CheckFermi.rFactor	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermi.rFactor	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.CheckFermi.rFactor	ite@Ising2D.TensorPow,Eq@instDecidableEqFin
 Ising2D.CheckFermi.rFactor_one	OfNat.ofNat@Fin,1@Fin.instOfNat
-Ising2D.CheckFermi.rFactor_zero	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermi.rFactor_zero	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.CheckFermi.smul_generator_cancel	HSMul.hSMul@Complex,→,→@Function.hasSMul
 Ising2D.CheckFermi.smul_generator_cancel	OfNat.ofNat@→,0@Zero.toOfNat0
@@ -383,15 +377,11 @@ Ising2D.CheckFermiSetup.Qproj_mul_nOp_step3	Finset
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_step3	Membership.mem@Ising2D.CheckIdx,Finset@SetLike.instMembership
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_step3	ite@Complex,Membership.mem@Finset.decidableMem
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	Finset
-Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	Finset
-Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_common	HSub.hSub@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.sub
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	Finset
-Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_mem	Membership.mem@Ising2D.CheckIdx,Finset@SetLike.instMembership
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_not_mem	Finset
-Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_not_mem	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.Qproj_mul_nOp_sub_half_of_not_mem	Membership.mem@Ising2D.CheckIdx,Finset@SetLike.instMembership
 Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	Finset
 Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	Finset.range
@@ -422,9 +412,7 @@ Ising2D.CheckFermiSetup.Vprime_mul_Qproj	Finset
 Ising2D.CheckFermiSetup.Vprime_mul_Qproj	Real.exp
 Ising2D.CheckFermiSetup.Xop	Finset.sum@Ising2D.CheckIdx,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.CheckFermiSetup.Xop	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
-Ising2D.CheckFermiSetup.Xop	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.Xop_eq_sum_fin	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
-Ising2D.CheckFermiSetup.Xop_eq_sum_fin	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.Xop_mul_Qproj	Finset
 Ising2D.CheckFermiSetup.Xop_mul_Qproj_of_finset_sum	Finset
 Ising2D.CheckFermiSetup.Xop_mul_Qproj_step1	Finset
@@ -443,7 +431,6 @@ Ising2D.CheckFermiSetup.ann_add_self_eq_zero	HAdd.hAdd@Matrix[Ising2D.Conf,Ising
 Ising2D.CheckFermiSetup.ann_def	Finset
 Ising2D.CheckFermiSetup.ann_def	Membership.mem@Int,Finset@SetLike.instMembership
 Ising2D.CheckFermiSetup.ann_def	Subtype.val
-Ising2D.CheckFermiSetup.ann_mul_cre	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.ann_mul_projFactor_prep2	Finset
 Ising2D.CheckFermiSetup.anticomm_ann_ann_eq_zero	OfNat.ofNat@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],0@Zero.toOfNat0
 Ising2D.CheckFermiSetup.anticomm_ann_cre_eq_zero	OfNat.ofNat@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],0@Zero.toOfNat0
@@ -586,7 +573,6 @@ Ising2D.CheckFermiSetup.nOpProd_eq	Finset.noncommProd@Ising2D.CheckIdx,Ising2D.T
 Ising2D.CheckFermiSetup.nOpProd_eq	Membership.mem@Ising2D.CheckIdx,Set@Set.instMembership
 Ising2D.CheckFermiSetup.nOpProd_eq	Set
 Ising2D.CheckFermiSetup.nOpProd_eq	SetLike.coe@Finset,Ising2D.CheckIdx@Finset.instSetLike
-Ising2D.CheckFermiSetup.nOp_add_one_sub_nOp	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.nOp_eq	Finset
 Ising2D.CheckFermiSetup.nOp_eq	Membership.mem@Int,Finset@SetLike.instMembership
 Ising2D.CheckFermiSetup.nOp_eq	Subtype.val
@@ -606,8 +592,6 @@ Ising2D.CheckFermiSetup.nOp_mul_Qproj_of_not_mem_step3	Membership.mem@Ising2D.Ch
 Ising2D.CheckFermiSetup.nOp_mul_Qproj_step3	Finset
 Ising2D.CheckFermiSetup.nOp_mul_Qproj_step3	Membership.mem@Ising2D.CheckIdx,Finset@SetLike.instMembership
 Ising2D.CheckFermiSetup.nOp_mul_Qproj_step3	ite@Complex,Membership.mem@Finset.decidableMem
-Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
-Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp_comm_step0	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.nOp_mul_projFactor_comm_step3	Finset
 Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_mem	Finset
 Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_mem	Membership.mem@Ising2D.CheckIdx,Finset@SetLike.instMembership
@@ -618,15 +602,11 @@ Ising2D.CheckFermiSetup.nOp_mul_projFactor_step3	Membership.mem@Ising2D.CheckIdx
 Ising2D.CheckFermiSetup.nOp_mul_projFactor_step3	ite@Complex,Membership.mem@Finset.decidableMem
 Ising2D.CheckFermiSetup.nOp_sq	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	Finset
-Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	Finset
-Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_common	HSub.hSub@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.sub
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	Finset
-Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_mem	Membership.mem@Ising2D.CheckIdx,Finset@SetLike.instMembership
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_not_mem	Finset
-Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_not_mem	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.nOp_sub_half_mul_Qproj_of_not_mem	Membership.mem@Ising2D.CheckIdx,Finset@SetLike.instMembership
 Ising2D.CheckFermiSetup.nonzero_elements_of_images_of_check_Q_form_basis	DFunLike.coe@Equiv,Fin,fun@EquivLike.toFunLike
 Ising2D.CheckFermiSetup.nonzero_elements_of_images_of_check_Q_form_basis	Equiv
@@ -637,10 +617,6 @@ Ising2D.CheckFermiSetup.nonzero_elements_of_images_of_check_Q_form_basis	HMul.hM
 Ising2D.CheckFermiSetup.nonzero_elements_of_images_of_check_Q_form_basis	Matrix@Ising2D.Conf,Fin,Complex
 Ising2D.CheckFermiSetup.nonzero_elements_of_images_of_check_Q_form_basis	OfNat.ofNat@Matrix[Ising2D.Conf,Fin,Complex],0@Zero.toOfNat0
 Ising2D.CheckFermiSetup.nonzero_elements_of_images_of_check_Q_form_basis	Set.univ
-Ising2D.CheckFermiSetup.one_sub_nOp_mul_nOp	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
-Ising2D.CheckFermiSetup.one_sub_nOp_mul_nOp_comm_step0	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
-Ising2D.CheckFermiSetup.one_sub_nOp_mul_one_sub_nOp_comm_step0	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
-Ising2D.CheckFermiSetup.one_sub_nOp_mul_self	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.partialExpSum	Finset.range
 Ising2D.CheckFermiSetup.partialExpSum	Finset.sum@Nat,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.CheckFermiSetup.partialExpSum	HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow
@@ -668,7 +644,6 @@ Ising2D.CheckFermiSetup.projFactor_mul_comm_step0	Finset
 Ising2D.CheckFermiSetup.projFactor_mul_projFactor_eq_zero_step1	Finset
 Ising2D.CheckFermiSetup.projFactor_mul_projFactor_eq_zero_step1	Membership.mem@Ising2D.CheckIdx,Finset@SetLike.instMembership
 Ising2D.CheckFermiSetup.projFactor_mul_self_step0	Finset
-Ising2D.CheckFermiSetup.rFactor	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.rFactor	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.CheckFermiSetup.rFactor	ite@Ising2D.TensorPow,Eq@instDecidableEqFin
 Ising2D.CheckFermiSetup.rFactor_one_add_rFactor_zero	OfNat.ofNat@Fin,0@Fin.instOfNat
@@ -721,7 +696,6 @@ Ising2D.CheckFermiSetup.trace_Vprime_step1	Real.exp
 Ising2D.CheckFermiSetup.trace_Vprime_step5	Finset.prod@Fin,Real@Real.instCommMonoid
 Ising2D.CheckFermiSetup.trace_Vprime_step5	Real.cosh
 Ising2D.CheckFermiSetup.trace_identity_base_case	HPow.hPow@Complex,Nat,Complex@NPow.toPow
-Ising2D.CheckFermiSetup.trace_mul_one_sub_nOp_prep3	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.CheckFermiSetup.trace_mul_projFactor_eq_half	Finset
 Ising2D.CheckFermiSetup.trace_nOp	HPow.hPow@Nat,Nat,Nat@NPow.toPow
 Ising2D.CheckFermiSetup.trace_nOp	Nat.cast@Complex@Complex.instNatCast
@@ -1586,14 +1560,12 @@ Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	HPow.hPow@Real,Real,Real@Real.instPow
-Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Membership.mem@Int,Finset@SetLike.instMembership
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Nat.cast@Real@Real.instNatCast
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Real.exp
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Real.sinh
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Subtype.val
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
-Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	Real.sinh
 Ising2D.V_plus_exponential_form	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.V_plus_exponential_form	HPow.hPow@Real,Real,Real@Real.instPow
@@ -5854,8 +5826,6 @@ Ising2D.step6_bound	Real.log
 Ising2D.step6_bound	Real.pi
 Ising2D.step6_bound	Real.sinh
 Ising2D.step6_bound	abs@Real@Real.lattice,Real.instAddGroup
-Ising2D.sub_eq_add_real_neg_one_smul_tensorPow	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
-Ising2D.sub_hasRealEntries_tensorPow	HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.sub_mulVec_eq	HSub.hSub@→,→,→@Pi.instSub
 Ising2D.sub_mulVec_eq_apply	HSub.hSub@→,→,→@Pi.instSub
 Ising2D.subspace_has_basis	Fintype

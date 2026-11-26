@@ -258,7 +258,7 @@ T_B(I)
     kind: "definition",
     title: { text: "行列の差" },
     labels: ["def_matrix_difference"],
-    lean: ["Ising2D.matrix_sub_apply", "Ising2D.vec_sub_apply"],
+    lean: ["Ising2D.matrix_sub_apply", "Ising2D.vec_sub_apply", "Ising2D.tensorPow_sub_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -285,6 +285,7 @@ T_B(I)
       notes: [
         "2026-11-01: 本文の多くの証明が「行列の差は成分ごと」を定義のブロックを置かずに根拠にしていた。eigenvector_of_A_theta_tilde Step 1 の同値の鎖を定義から引けるよう足した。",
         "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 数ベクトルを n 行 1 列の行列として扱う根拠を、mat_mult の「みなし」の文（名前を付けた写像を通さない同一視で、削った）から、定義のブロック def_complex_number_vectors（ℂ^n := Mat(n,1,ℂ)）の参照にした。式は不変。",
+        "2026-11-26（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の三単位目）: 欄 lean に、Lean の TensorPow M（添字が 𝓘_M の行列）の差がこの定義の成分の式を ν を通して読んだものに等しいことを述べる補題 Ising2D.tensorPow_sub_apply を足した（MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionMatrixOperationsOverMultiIndices.lean）。式は不変。",
       ],
     },
   },

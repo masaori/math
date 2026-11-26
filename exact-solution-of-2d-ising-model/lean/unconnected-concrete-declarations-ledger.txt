@@ -693,7 +693,6 @@ Ising2D.matrix_smul_sub_apply
 Ising2D.matrix_smul_zero_matrix
 Ising2D.matrix_smul_zero_matrix_apply
 Ising2D.matrix_sub_eq_add_neg
-Ising2D.matrix_sub_eq_add_neg_apply
 Ising2D.matrix_sub_eq_add_real_neg_one_smul
 Ising2D.matrix_sub_eq_zero_iff
 Ising2D.matrix_sub_hasRealEntries

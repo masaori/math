@@ -212,15 +212,16 @@ Int.cast@Real@Real.instIntCast	inclusion_zz_to_rr
 # Matrix[Fin,Fin,Complex] で、別の行）。
 # 積は下の行列の型の行の後に載せた。符号反転（Neg.neg@Ising2D.TensorPow）は def_matrix_negation が (-A)_{ik} := -A_{ik} と定め、スカラー倍と同じく
 # Conf M の添字のまま補題一本 tensorPow_neg_apply（rfl）で示し、分離の行「TensorPow 上の行列の基本恒等式」の具体版 neg_mul_matrix_tensorPow・mul_neg_matrix_tensorPow
-# （ClaimNegationFactorsOutOfTensorPowProduct.lean）の証明で使って通しの定理に繋げた。差（HSub.hSub@Ising2D.TensorPow）は、補題を通しの定理に繋げる使い道が
-# 同じ行の差の補題（sub_eq_add_neg_tensorPow・add_sub_cancel_tensorPow など。いまは導出の定理）の具体版の証明の中にしか無いので、
-# その具体版の証明を置く同じ回に、一致の補題を置いて使い、この一覧に載せ、未定義の記号の台帳から行を消す（状態台帳の行「行列とその演算」と分離の行の備考）。
-# スカラー倍・和・零・符号反転の 4 行の根拠は def_kronecker の「I を番号 ν(I) と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii)）。
+# （ClaimNegationFactorsOutOfTensorPowProduct.lean）の証明で使って通しの定理に繋げた。差（HSub.hSub@Ising2D.TensorPow）は def_matrix_difference が
+# (A - B)_{ik} := A_{ik} - B_{ik} と定め、同じく Conf M の添字のまま補題一本 tensorPow_sub_apply（rfl）で示し、分離の行「TensorPow 上の行列の基本恒等式」の具体版 sub_eq_add_neg_tensorPow
+# （ClaimTensorPowDifferenceIsSumWithNegation.lean）の証明で使って通しの定理に繋げた。
+# スカラー倍・和・零・符号反転・差の 5 行の根拠は def_kronecker の「I を番号 ν(I) と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii)）。
 OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1	def_identity_matrix
 HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul	def_matrix_scalar_multiple
 HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add	def_matrix_sum
 OfNat.ofNat@Ising2D.TensorPow,0@Zero.toOfNat0	def_zero_matrix
 Neg.neg@Ising2D.TensorPow@Matrix.neg	def_matrix_negation
+HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub	def_matrix_difference
 # 行列の型: def_complex_matrices が Mat(m,n,ℂ) を添字の集合の直積 {1,…,m} × {1,…,n} から ℂ への写像の全体と定める。記号の鍵は、行列の型そのものを
 # 行と列の添字の型と成分の型の頭で分ける（UndefinedSymbols.lean）。
 # Matrix (Fin m) (Fin n) ℂ（Fin m → Fin n → ℂ）は、行と列の添字を写像 finIndexToZZ で送ると、成分が行列を定め、どの成分の割り当ても行列になることを

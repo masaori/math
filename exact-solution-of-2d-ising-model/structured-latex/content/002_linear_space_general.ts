@@ -1698,7 +1698,7 @@ X - O
     kind: "claim",
     title: { text: "行列の差は符号反転した行列との和に等しい" },
     labels: ["matrix_difference_is_sum_with_negation"],
-    lean: ["Ising2D.matrix_sub_eq_add_neg", "Ising2D.matrix_sub_eq_add_neg_apply"],
+    lean: ["Ising2D.matrix_sub_eq_add_neg", "Ising2D.matrix_sub_eq_add_neg_apply", "Ising2D.sub_eq_add_neg_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1743,6 +1743,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 3 の H_1^{(+)} の鎖は差 Σ Y_mZ_{m+1} − Y_{M_col}Z_1 を含むので、差を和と符号反転へ戻す段（difference_of_negated_matrices・matrix_conjugation_preserves_difference）に要る。" +
           "行列の差 def_matrix_difference は成分の複素数の差で定まり、和と符号反転とは別に定義されているので、成分計算の鎖で示した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の三単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.sub_eq_add_neg_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowDifferenceIsSumWithNegation.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。主張と証明は不変。",
       ],
     },
   },
