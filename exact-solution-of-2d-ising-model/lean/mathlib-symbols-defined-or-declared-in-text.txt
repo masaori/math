@@ -272,3 +272,17 @@ Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Complex@NonUnitalNonAssocRing.toNonUnita
 # （trace_add_matrix・trace_of_scalar_multiple など）がどれも通しの定理に繋がっておらず一致の補題を繋げる使い道が無いので、添字が任意の型のトレース
 # （Matrix.trace@?,Complex）と一緒にまだ載せない（状態台帳の行「行列とその演算」）。
 Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid	def_trace
+# ℝ の行列（添字が Conf M、本文の Mat(2^M, ℝ)）とその積・単位行列・実数のベクトルとの積: def_real_matrices が Mat(m,n,ℝ) を {1,…,m}×{1,…,n} から ℝ への写像の全体と定め、
+# def_real_matrix_product が (PQ)_{ik} := Σ_{j=1}^{n} P_{ij} Q_{jk}、def_real_identity_matrix が (I_{Mat(n,ℝ)})_{st} := 1 (s = t)・0 (s ≠ t)、
+# def_real_matrix_vector_product が (Px)_i := Σ_{j=1}^{n} P_{ij} x_j と定める。Lean の Matrix (Conf M) (Conf M) ℝ について、ν^{-1} で番号へ移した成分が
+# 行列を定めどの割り当ても行列になること（realMatrix_conf_entries_by_kronecker_numbering）、積・単位行列・ベクトルとの積の成分が本文の右辺に等しいこと
+# （realMatrix_conf_mul_apply_eq_def_real_matrix_product・realMatrix_conf_one_apply_eq_def_real_identity_matrix・
+# realMatrix_conf_mulVec_apply_eq_def_real_matrix_vector_product。mathlib の Conf M の上の和は finset_sum_conf_real_eq_finite_sum_over_multi_indices で番号の上の和へ移す）を
+# 補題一本ずつで示した（DefinitionRealMatrixOperationsOverMultiIndices.lean）。𝓘_M の添字の形（realMatrix_conf_mul_apply・realMatrix_conf_one_apply・
+# realMatrix_conf_mulVec_apply）をそこから導き、通しの定理に繋がる epsilonR_eq_epsilonReal・power_zero_of_W_real_mulVec_apply・power_succ_of_W_real_mulVec_apply が使う。
+# どれも各定義のブロックの欄 lean に在る。Conf 0 の添字の行列もこの鍵に入る（def_complex_matrices の行と同じ扱い）。添字が任意の型の ℝ の行列（Matrix@?,?,Real）と
+# その演算、ℝ の行列の冪と内積（dotProduct）はまだ載せない（状態台帳の行「行列とその演算」）。
+Matrix@Ising2D.Conf,Ising2D.Conf,Real	def_real_matrices
+HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Real],Matrix[Ising2D.Conf,Ising2D.Conf,Real],Matrix[Ising2D.Conf,Ising2D.Conf,Real]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	def_real_matrix_product
+OfNat.ofNat@Matrix[Ising2D.Conf,Ising2D.Conf,Real],1@One.toOfNat1	def_real_identity_matrix
+Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Real@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype	def_real_matrix_vector_product

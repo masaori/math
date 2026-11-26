@@ -65,6 +65,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOperationsOverMultiIndices
 
 set_option linter.unusedSectionVars false
 
@@ -290,10 +291,11 @@ theorem power_zero_of_W_real_mulVec_apply (x : Conf M → ℝ) (l : Conf M) :
   -- 準備: `m ≠ l` の項（2 行）
   have hterm : ∀ m, m ≠ l → (1 : Matrix (Conf M) (Conf M) ℝ) l m * x m = 0 := fun m hml =>
     calc (1 : Matrix (Conf M) (Conf M) ℝ) l m * x m
-        = 0 * x m := by rw [Matrix.one_apply_ne (Ne.symm hml)]               -- `m ≠ l` なので `def_real_identity_matrix` の `(I_ℝ)_lm = 0`
+        = 0 * x m := by rw [realMatrix_conf_one_apply.2 l m (Ne.symm hml)]  -- `m ≠ l` なので `def_real_identity_matrix` の `(I_ℝ)_lm = 0`
       _ = 0 := real_zero_times_is_zero (x m)                               -- `real_zero_times_is_zero`（`x → x_m`）
   calc ((realMatrixOfRealEntries W hW.1 ^ 0) *ᵥ x) l
-      = ∑ m, (realMatrixOfRealEntries W hW.1 ^ 0) l m * x m := rfl          -- 【`(W_ℝ)^ax` の成分】（`a → 0`）
+      = ∑ m, (realMatrixOfRealEntries W hW.1 ^ 0) l m * x m :=
+        realMatrix_conf_mulVec_apply _ _ _                                  -- 【`(W_ℝ)^ax` の成分】（`a → 0`）
     _ = ∑ m, (1 : Matrix (Conf M) (Conf M) ℝ) l m * x m := by rw [pow_zero]  -- `def_exp` (1) の `A^0 := I`（`K = ℝ`）
     _ = ∑ m, if m = l then (1 : Matrix (Conf M) (Conf M) ℝ) l l * x l else 0 := by
         refine Finset.sum_congr rfl fun m _ => ?_
@@ -303,7 +305,7 @@ theorem power_zero_of_W_real_mulVec_apply (x : Conf M → ℝ) (l : Conf M) :
     _ = (1 : Matrix (Conf M) (Conf M) ℝ) l l * x l := by
         rw [Finset.sum_ite_eq' Finset.univ l, if_pos (Finset.mem_univ l)]
                                                                             -- `ℝ` で `0 + r = r` と `r + 0 = r` を左から順に（具体版が無いので mathlib）
-    _ = x l := by rw [Matrix.one_apply_eq, one_mul]                         -- `(I_ℝ)_ll = 1`（`def_real_identity_matrix`）
+    _ = x l := by rw [realMatrix_conf_one_apply.1 l, one_mul]               -- `(I_ℝ)_ll = 1`（`def_real_identity_matrix`）
 
 /-- 人手【`(W_ℝ)^ax` は零でない】の 7 行: `(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a`。 -/
 theorem power_succ_of_W_real (a : ℕ) :
@@ -336,9 +338,10 @@ theorem power_succ_of_W_real_mulVec_apply (a : ℕ) (x : Conf M → ℝ) (l : Co
       = (realMatrixOfRealEntries W hW.1 *ᵥ ((realMatrixOfRealEntries W hW.1 ^ a) *ᵥ x)) l := by
   set WR := realMatrixOfRealEntries W hW.1
   calc ((WR ^ (a + 1)) *ᵥ x) l
-      = ∑ m, (WR ^ (a + 1)) l m * x m := rfl                                -- 【`(W_ℝ)^ax` の成分】（`a → a + 1`）
+      = ∑ m, (WR ^ (a + 1)) l m * x m := realMatrix_conf_mulVec_apply _ _ _ -- 【`(W_ℝ)^ax` の成分】（`a → a + 1`）
     _ = ∑ m, (WR * WR ^ a) l m * x m := by rw [power_succ_of_W_real W hW a] -- 上の式変形
-    _ = ∑ m, (∑ n, WR l n * (WR ^ a) n m) * x m := rfl                      -- `def_real_matrix_product`
+    _ = ∑ m, (∑ n, WR l n * (WR ^ a) n m) * x m := by
+        simp only [realMatrix_conf_mul_apply]                               -- `def_real_matrix_product`
     _ = ∑ m, ∑ n, WR l n * (WR ^ a) n m * x m := by
         simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right]
                                                                             -- `ℝ` の乗法の交換律で `x_m` を左へ移し、`finite_sum_of_real_scalar_multiples` を右辺から左辺へ各 `m` の項へ同時に当て、交換律で右へ戻す
@@ -348,8 +351,10 @@ theorem power_succ_of_W_real_mulVec_apply (a : ℕ) (x : Conf M → ℝ) (l : Co
     _ = ∑ n, WR l n * ∑ m, (WR ^ a) n m * x m := by
         simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples, mul_assoc]
                                                                             -- 乗法の結合律と、`finite_sum_of_real_scalar_multiples` を各項へ同時に
-    _ = ∑ n, WR l n * ((WR ^ a) *ᵥ x) n := rfl                              -- 【`(W_ℝ)^ax` の成分】
-    _ = (WR *ᵥ ((WR ^ a) *ᵥ x)) l := rfl                                    -- `def_real_matrix_vector_product`（`P → W_ℝ`, `x → u^{(a)}`）
+    _ = ∑ n, WR l n * ((WR ^ a) *ᵥ x) n := by
+        simp only [realMatrix_conf_mulVec_apply]                            -- 【`(W_ℝ)^ax` の成分】
+    _ = (WR *ᵥ ((WR ^ a) *ᵥ x)) l := (realMatrix_conf_mulVec_apply _ _ _).symm
+                                                                            -- `def_real_matrix_vector_product`（`P → W_ℝ`, `x → u^{(a)}`）
 
 /-- 人手【`(W_ℝ)^ax` は零でない】の背理法の 7 行: `W_ℝu = 0` なら `u^⊤W_ℝu = 0`。 -/
 theorem real_bilinear_value_eq_zero_of_mulVec_eq_zero (u : Conf M → ℝ)

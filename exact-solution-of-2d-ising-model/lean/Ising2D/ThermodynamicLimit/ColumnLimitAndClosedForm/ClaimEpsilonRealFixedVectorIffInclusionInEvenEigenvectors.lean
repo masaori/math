@@ -31,6 +31,7 @@
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealVectorInclusion
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.EvenEigenvectors
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOperationsOverMultiIndices
 
 namespace Ising2D
 
@@ -74,8 +75,10 @@ theorem epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors (n : ℕ) (
 /-- 人手の `ε_ℝ` と、`evenSectorSet` が受け取る符号反転の置換行列 `epsilonR` は同じ行列である
 （成分ごとに `epsilon_eq_ofReal_epsilonR` と `def_real_matrix_of_real_entry_matrix` の一意性の段）。 -/
 theorem epsilonR_eq_epsilonReal (n : ℕ) : epsilonR (n + 1) = epsilonReal n := by
-  ext k l
-  exact (realMatrixOfRealEntries_apply_eq _ _ (epsilon_eq_ofReal_epsilonR k l)).symm
+  -- 行列の等号は、`ν^{-1}` で番号へ移した成分ごとの等号（`def_real_matrices`）
+  obtain ⟨d, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering (n + 1)
+  refine ((realMatrix_conf_entries_by_kronecker_numbering (n + 1) d hord σ hσ).1 _ _).2 fun k l => ?_
+  exact (realMatrixOfRealEntries_apply_eq _ _ (epsilon_eq_ofReal_epsilonR (σ k) (σ l))).symm
 
 /-- `epsilon_real_fixed_vector_iff_inclusion_in_even_eigenvectors` を `evenSectorSet` の `epsilonR` の形へ移したもの。 -/
 theorem epsilonR_mulVec_eq_self_iff_cvec_mem_evenEigenvectors (n : ℕ) (hM : 1 ≤ n + 1)

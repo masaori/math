@@ -946,7 +946,7 @@ x^\top P x
         "、",
         math(String.raw`P \in \mathrm{Mat}(n,\mathbb{R})`),
         "（",
-        ref("def_real_matrix_of_real_entry_matrix"),
+        ref("def_real_matrices"),
         " の記号）、",
         math(String.raw`v \in \mathbb{R}^n`),
         " が ",

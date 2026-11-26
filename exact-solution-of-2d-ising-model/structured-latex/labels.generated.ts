@@ -295,6 +295,7 @@ export const ALL_LABELS = [
   "def_real_identity_matrix",
   "def_real_imag_parts",
   "def_real_logarithm_positive",
+  "def_real_matrices",
   "def_real_matrix_of_real_entry_matrix",
   "def_real_matrix_product",
   "def_real_matrix_vector_product",
