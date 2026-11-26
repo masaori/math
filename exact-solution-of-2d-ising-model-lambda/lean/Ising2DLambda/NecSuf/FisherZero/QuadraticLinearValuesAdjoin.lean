@@ -1,4 +1,4 @@
-import Ising2DLambda.FisherZero.QuadraticLinearValuesAdjoin
+import Mathlib
 
 namespace Ising2DLambda.NecSuf.FisherZero
 

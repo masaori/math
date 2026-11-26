@@ -1,8 +1,6 @@
-import Ising2DLambda.AlgebraicEigenvalue.RootOfUnity
+import Mathlib
 
 namespace Ising2DLambda.NecSuf.KacWard
-
-open Ising2DLambda.AlgebraicEigenvalue
 
 theorem equalPower_ratio_root_necSuf {F : Type*} [Field F] {L : ℕ}
     {z z' σ : F} (hz : z ^ L = σ) (hz' : z' ^ L = σ) (hσ : σ ≠ 0) :

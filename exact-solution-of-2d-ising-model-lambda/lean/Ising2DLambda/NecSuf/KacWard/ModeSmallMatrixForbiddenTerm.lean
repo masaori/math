@@ -1,5 +1,4 @@
 import Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixEntries
-import Ising2DLambda.AlgebraicEigenvalue.QbarPolyPowerDifferenceFactorization
 
 namespace Ising2DLambda.NecSuf.KacWard
 

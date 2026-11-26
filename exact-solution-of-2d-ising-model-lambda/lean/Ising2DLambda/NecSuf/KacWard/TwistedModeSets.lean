@@ -1,4 +1,4 @@
-import Ising2DLambda.AlgebraicEigenvalue.RootOfUnity
+import Mathlib
 
 namespace Ising2DLambda.NecSuf.KacWard
 

@@ -1,3 +1,4 @@
+import Ising2DLambda.FisherZero.QuadraticNormNonzero
 import Ising2DLambda.NecSuf.FisherZero.QuadraticNormNonzero
 
 namespace Ising2DLambda.FisherZero

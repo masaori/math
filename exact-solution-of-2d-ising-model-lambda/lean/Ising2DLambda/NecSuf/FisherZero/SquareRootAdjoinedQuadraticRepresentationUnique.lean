@@ -1,4 +1,4 @@
-import Ising2DLambda.FisherZero.SquareRootAdjoinedQuadraticRepresentationUnique
+import Mathlib
 
 namespace Ising2DLambda.NecSuf.FisherZero
 

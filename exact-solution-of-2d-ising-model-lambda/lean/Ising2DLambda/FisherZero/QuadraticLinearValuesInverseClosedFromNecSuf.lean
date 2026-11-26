@@ -1,3 +1,4 @@
+import Ising2DLambda.FisherZero.QuadraticLinearValuesInverseClosed
 import Ising2DLambda.NecSuf.FisherZero.QuadraticLinearValuesInverseClosed
 
 namespace Ising2DLambda.FisherZero

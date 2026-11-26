@@ -45,7 +45,8 @@ theorem dispersion_product_real_log_sum_from_necSuf {L : ℕ} [NeZero L]
         rw [← pow_two, hprod]
       _ = ∏ m : FourierModePair L s, realAlgebraicCutRealization data (D m) :=
         cutRealization_finiteProduct data Finset.univ D
-  have h := Ising2DLambda.NecSuf.RealEscape.squareProduct_realLog_sum
+  have h := Ising2DLambda.NecSuf.RealEscape.squareProduct_realLog_sum Real.log
+    (fun a b ha hb => realLog_mul ⟨a, ha⟩ ⟨b, hb⟩)
     (Finset.univ : Finset (FourierModePair L s)) T
     (fun m => realAlgebraicCutRealization data (D m)) hpos hTprod
     (1 / ((L : ℝ) ^ 2))

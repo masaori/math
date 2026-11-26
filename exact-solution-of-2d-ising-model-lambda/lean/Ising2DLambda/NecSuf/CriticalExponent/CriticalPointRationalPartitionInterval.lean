@@ -5,11 +5,12 @@
 「x 以下である番号」の最大元とその次の番号が x を挟む。
 値の型には順序構造も代数構造も要求しない。
 -/
-import Ising2DLambda.FisherZero.RealClosedSubfield
+import Mathlib
+import Ising2DLambda.NecSuf.FisherZero.RealAlgebraicOrder
 
 namespace Ising2DLambda.NecSuf.CriticalExponent
 
-open Ising2DLambda.FisherZero
+open Ising2DLambda.NecSuf.FisherZero
 
 theorem criticalPoint_rationalPartitionInterval_necSuf
     {A : Type*} [DecidableEq A]
