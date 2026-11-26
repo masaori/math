@@ -20814,6 +20814,7 @@ m&\in C_\sigma&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\bigr)
                     verification: ["sagemath/check/matching-pair-bijection"],
                     lean: [
                       "Ising2DLambda.AlgebraicEigenvalue.matchingPair_evenColor_eq",
+                      "Ising2DLambda.AlgebraicEigenvalue.matchingPair_evenColor_eq_from_necSuf",
                       "Ising2DLambda.AlgebraicEigenvalue.matchingPair_bijection_left",
                       "Ising2DLambda.AlgebraicEigenvalue.matchingPair_bijection_right",
                       "Ising2DLambda.AlgebraicEigenvalue.matchingPairEvenOrbitEquiv",
@@ -110160,7 +110161,7 @@ b
 &=-0
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の逆元を素数ごとに読む: }(-0)(p)=-0=0)\\
 &\le_{\Lambda_{\mathbb{Q}}}-\iota(\log q)
-&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=\iota(\log q)\text{、}\mu:=0\text{ で読む。}\iota(\log q)\le_{\Lambda_{\mathbb{Q}}}0\text{ は直前の一続き})\\
+&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=\iota(\log q)\text{、}\mu:=0\text{ で読む、}\iota(\log q)\le_{\Lambda_{\mathbb{Q}}}0\text{ は直前の一続き})\\
 &=\delta
 &&(\because\ \delta\text{ の定義})
 \end{aligned}`),
