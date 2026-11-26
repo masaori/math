@@ -2798,7 +2798,6 @@ targets=(
   Ising2D.VPlusData.lamMax_pos
   Ising2D.VPlusData.checkLambda_le_lamMax
   Ising2D.VPlusData.trace_epsilon_mul_V_step1
-  Ising2D.VPlusData.trace_epsilon_mul_V_eq_sum
   Ising2D.checkU
   Ising2D.ite_eq_one_eq_val
   Ising2D.card_finsetOfWord_one

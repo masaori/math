@@ -199,9 +199,7 @@ DEP	concrete	Ising2D.V1_plus_square_root_property
 DEP	concrete	Ising2D.V2Inv_mul_V2
 DEP	concrete	Ising2D.V2_mul_V2Inv
 DEP	concrete	Ising2D.V2_transpose
-DEP	concrete	Ising2D.VPlusData.trace_epsilon_mul_V_eq_sum
 DEP	concrete	Ising2D.VPlusData.trace_epsilon_mul_V_step1
-DEP	concrete	Ising2D.VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six
 DEP	concrete	Ising2D.VPlusInv_mul_VPlus
 DEP	concrete	Ising2D.VPlusInv_posDef
 DEP	concrete	Ising2D.VPlus_eq_smul

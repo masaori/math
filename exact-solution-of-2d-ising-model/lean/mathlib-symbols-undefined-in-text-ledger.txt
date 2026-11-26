@@ -2392,12 +2392,6 @@ Ising2D.VPlusData.trace_epsilon_mul_V	Matrix.trace@Ising2D.Conf,Complex@Pi.instF
 Ising2D.VPlusData.trace_epsilon_mul_V_eq_ofReal	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.VPlusData.trace_epsilon_mul_V_eq_ofReal	Matrix
 Ising2D.VPlusData.trace_epsilon_mul_V_eq_ofReal	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid
-Ising2D.VPlusData.trace_epsilon_mul_V_eq_sum	Finset
-Ising2D.VPlusData.trace_epsilon_mul_V_eq_sum	Finset.sum@Finset,Complex@Complex.instAddCommMonoid
-Ising2D.VPlusData.trace_epsilon_mul_V_eq_sum	Finset.univ@Finset@Finset.fintype
-Ising2D.VPlusData.trace_epsilon_mul_V_eq_sum	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
-Ising2D.VPlusData.trace_epsilon_mul_V_eq_sum	Matrix
-Ising2D.VPlusData.trace_epsilon_mul_V_eq_sum	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid
 Ising2D.VPlusData.trace_epsilon_mul_V_step1	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.VPlusData.trace_epsilon_mul_V_step1	Matrix
 Ising2D.VPlusData.trace_epsilon_mul_V_step1	Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid

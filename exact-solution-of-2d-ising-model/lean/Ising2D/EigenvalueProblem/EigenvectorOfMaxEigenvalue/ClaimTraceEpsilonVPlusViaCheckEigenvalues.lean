@@ -32,12 +32,12 @@ Step 7 の `⟹` の 2 行目と `η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行目�
 
 | 原文の行 | Lean |
 | --- | --- |
-| Step 1 の 13 行の鎖 `tr(εV^{(+)}) = … = Σ_εη_ε(Λ̌_ε)_ℂ` | `VPlusData.trace_epsilon_mul_V_step1`（同じ行の calc。人手の `M_col` が `r + 1`） |
+| Step 1 の 13 行の鎖 `tr(εV^{(+)}) = … = Σ_εη_ε(Λ̌_ε)_ℂ` | `VPlusData.trace_epsilon_mul_V_step1`（同じ行の calc。人手の `M_col` が `r + 1`。行列の和は `NecSuf.binWordSum r`、複素数の和は具体版 `binaryWordComplexSum r` で、4 行目の直後に付け替えの運ぶ段が 1 つある） |
 | Step 2 の `(Π_{μ≤k}ǔ^{(ε(μ))})_ℂ = (−1_ℂ)^{k−\|ε\|_k}` の `k` の帰納法（`k = 1` の 5 行・7 行、`k → k+1` の 6 行・6 行）、最後の 3 行の鎖 `(Π_{μ∈𝓜̌}ǔ^{(ε(μ))})_ℂ = … = (−1_ℂ)^{M_col−\|ε\|}` と準備の `ǔ^{(e)}`・`\|ε\|_k` の数え上げ | `checkU_prod_eq_neg_one_pow`（同じ行の calc。人手の `k` が `n + 1`）・`checkU_prod_univ_eq_neg_one_pow`（最後の 3 行）・`checkU`・数え上げの `ite_eq_one_eq_val`・`card_finsetOfWord_one`・`card_finsetOfWord_castSucc`・`card_finsetOfWord_le`（この 4 つは `ClaimEpsilonEigenvalueOnCheckQ.lean`）（必要十分版の特殊化は `checkU_prod_eq_neg_one_pow_of_necSuf`。必要十分版は `NecSuf/PowerFromProductOfTwoValuedFactors.lean`） |
 | Step 3 の `η_ε(Λ̌_ε)_ℂ = … = (ť_εȟ)_ℂ` の 7 行と準備の `ȟ`・`ť_ε` | `VPlusData.eta_mul_checkLambda_eq_checkT_mul_checkH`（同じ行の calc。人手の `M_col` が `r + 1`）・`CheckFermi.checkH`・`CheckFermi.checkH_mem`・`CheckFermi.checkH_ofReal`・`VPlusData.checkT`（必要十分版の特殊化は `eta_mul_checkLambda_eq_checkT_mul_checkH_of_necSuf`。必要十分版は `NecSuf/SignedTermAsImageOfReorderedProduct.lean`） |
 | Step 4 の 1 本目の 9 行の鎖 `ť_ε = … = (Π_μw̌_μ^{(ε(μ))})(2sinh 2K_2)^{M_col/2}` と `w̌_μ^{(e)}`・`h` の置き方 | `VPlusData.checkT_eq_prod_checkW_mul`（同じ行の calc。人手の `M_col` が `r + 1`。`Π_{μ∈𝓜̌}`・`Σ_{μ∈𝓜̌}` を開く 2 行は `rfl` の段）・`VPlusData.checkW`・`CheckFermi.halfSign`・`checkLambda_finsetOfWord`（`Λ̌_ε` の定義を語の値 `h(ε(μ))` で読む運ぶ段）。必要十分版は置かない（効くのは、引いた `real_exp_of_finite_sum`・`finite_product_of_real_products`（それぞれ必要十分版あり）と ℝ の `a(bc) = b(ac)`・`ab = ba` だけで、この鎖に固有の取り払える構造が無い） |
 | 主張の `ϰ` の置き方と Step 4 の 2 本目の和の鎖 `Σ_εť_ε = … = ϰ` | `VPlusData.traceFactor`・`VPlusData.sum_checkT_eq_traceFactor`（同じ行の calc。人手の `M_col` が `r + 1`、和は `binaryWordRealSum r`。`h(1) := 1/2`・`h(0) := −(1/2)` の行は `CheckFermi.halfSign_one`・`halfSign_zero`。必要十分版は置かない） |
-| Step 5 の 8 行の鎖 `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = … = η_{(1,…,1)}ϰ_ℂ`（(1) の等式） | `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`（1〜6 行目。Step 7 の `⟸` が引く）・`VPlusData.trace_epsilon_mul_V_step5`（それに 7・8 行目を続けた全体。同じ行の calc。人手の `M_col` が `r + 1`。Step 1 の和 `NecSuf.binWordSum r` を具体版 `binaryWordComplexSum r` へ付け替える運ぶ段が 1 つある。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.trace_epsilon_mul_V`（人手の範囲外の `M = 0` は mathlib の `simp`） |
+| Step 5 の 8 行の鎖 `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = … = η_{(1,…,1)}ϰ_ℂ`（(1) の等式） | `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`（1〜6 行目。Step 7 の `⟸` が引く）・`VPlusData.trace_epsilon_mul_V_step5`（それに 7・8 行目を続けた全体。同じ行の calc。人手の `M_col` が `r + 1`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.trace_epsilon_mul_V`（人手の範囲外の `M = 0` は mathlib の `simp`） |
 | Step 6 の 5 本の鎖（(2) の不等号）`γ(θ̃_μ)/2 > 0`、`sinh(γ(θ̃_μ)/2) > 0`、`2sinh(γ(θ̃_μ)/2) > 0`、`Π_μ2sinh(γ(θ̃_μ)/2) > 0`、`ϰ > 0` | `VPlusData.gam_half_pos`・`VPlusData.sinh_gam_half_pos`・`VPlusData.two_sinh_gam_half_pos`・`VPlusData.prod_two_sinh_gam_half_pos`・`VPlusData.traceFactor_pos_step6`（1・3・5 本目は同じ行の calc（3 本目は 1 段）、2 本目は `cosh_sinh_basic_properties` (3) の適用 1 つ、4 本目は `finite_product_of_positive_reals_is_positive` の適用 1 つ（どちらも人手で 1 行）。人手の `M_col` が `r + 1`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.traceFactor_pos`（人手の範囲外の `M = 0` は mathlib の `simp`） |
 | Step 7 の同値（(3)）: `⟹` の 2 行の鎖 `tr(εV^{(+)}) = 1_ℂϰ_ℂ = ϰ_ℂ`、`⟸` の 2 行の鎖 `r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ`、`ȟ = −1` の背理の 4 行（1 行目は `inclusion_rr_to_cc_is_injective`）と `real_less_than_is_asymmetric` による矛盾、`η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行 | `VPlusData.trace_pos_of_eta_univ_eq_one_step7`・`VPlusData.eta_univ_eq_one_of_trace_pos_step7`・`VPlusData.eta_univ_eq_one_iff_trace_pos_step7`（各鎖は同じ行の calc。人手の `M_col` が `r + 1`、人手の `r` が `s`。`⟸` の 2 行目が引く Step 5 の鎖の 1〜6 行目は `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.eta_univ_eq_one_iff_trace_pos`（人手の範囲外の `M = 0` は `Complex.ofReal_injective` と `linarith`）。下流が渡す `0 < Re tr(εV^{(+)})` の形で読む運ぶ段が `VPlusData.eta_univ_eq_one_of_trace_pos`（`VPlusData.trace_epsilon_mul_V_eq_ofReal` を通す） |
 -/
@@ -140,12 +140,14 @@ theorem checkLambda_le_lamMax (T : Finset (Fin M)) : checkLambda D.C D.gam T ≤
 = Σ_εtr(ε(V^{(+)}Q̌_ε)) = Σ_εtr(ε((Λ̌_ε)_ℂQ̌_ε)) = Σ_εtr((Λ̌_ε)_ℂ(εQ̌_ε)) = Σ_εtr((Λ̌_ε)_ℂ(η_εQ̌_ε))
 = Σ_εtr(((Λ̌_ε)_ℂη_ε)Q̌_ε) = Σ_ε((Λ̌_ε)_ℂη_ε)tr(Q̌_ε) = Σ_ε((Λ̌_ε)_ℂη_ε)1_ℂ = Σ_ε(Λ̌_ε)_ℂη_ε = Σ_εη_ε(Λ̌_ε)_ℂ`
 （人手の `M_col` が Lean の `r + 1`、`Q̌_ε` が `F.Qproj (CheckFermi.finsetOfWord ε)`。2〜3 行目の行列の和
-（`def_sum_over_binary_words`）も 4〜13 行目の複素数の和（`def_sum_over_binary_words_of_complex_numbers`）も
-`NecSuf.binWordSum r` である）。`mat_mult_associative`・`scalar_multiple_is_associative` の行は、Lean の具体版が無いので
+（`def_sum_over_binary_words`）は `TensorPow M` の和の具体版がまだ無いので `NecSuf.binWordSum r`、4〜13 行目の複素数の和
+（`def_sum_over_binary_words_of_complex_numbers`）は具体版 `binaryWordComplexSum r` で、4 行目の直後の 1 段は複素数の和を
+`NecSuf.binWordSum r` から `binaryWordComplexSum r` へ付け替える運ぶ段（人手の行は無い。`ClaimTraceCheckVprime.lean` の
+`trace_Vprime_step1` と同じ作り））。`mat_mult_associative`・`scalar_multiple_is_associative` の行は、Lean の具体版が無いので
 mathlib の `Matrix.mul_assoc`・`smul_smul` で受ける（`ClaimTraceCheckVprime.lean` の `Vprime_inv_mul_Qproj` と同じ扱い）。 -/
 theorem trace_epsilon_mul_V_step1 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
     (epsilon (r + 1) * D.V).trace
-      = NecSuf.binWordSum r (fun ε =>
+      = binaryWordComplexSum r (fun ε =>
           F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)) :=
   calc (epsilon (r + 1) * D.V).trace
       = (epsilon (r + 1) * D.V * 1).trace := by rw [mul_identity_matrix_tensorPow]
@@ -157,67 +159,42 @@ theorem trace_epsilon_mul_V_step1 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
                                                         -- （`C → εV^{(+)}`、`X_ε → Q̌_ε`）
     _ = NecSuf.binWordSum r (fun ε => (epsilon (r + 1) * D.V * F.Qproj (CheckFermi.finsetOfWord ε)).trace) :=
         trace_binWordSum_tensorPow r _                  -- `trace_of_sum_over_binary_words`（`B_ε → (εV^{(+)})Q̌_ε`）
-    _ = NecSuf.binWordSum r (fun ε => (epsilon (r + 1) * (D.V * F.Qproj (CheckFermi.finsetOfWord ε))).trace) := by
+    _ = binaryWordComplexSum r (fun ε => (epsilon (r + 1) * D.V * F.Qproj (CheckFermi.finsetOfWord ε)).trace) :=
+        (binaryWordComplexSum_eq_binWordSum r _).symm   -- 人手の複素数の和の Lean の二つの表し方を付け替える（運ぶ段。人手の行は無い）
+    _ = binaryWordComplexSum r (fun ε => (epsilon (r + 1) * (D.V * F.Qproj (CheckFermi.finsetOfWord ε))).trace) := by
         congr 1; funext ε; rw [Matrix.mul_assoc]        -- `mat_mult_associative` を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
           (epsilon (r + 1) * (((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) • F.Qproj (CheckFermi.finsetOfWord ε))).trace) := by
         congr 1; funext ε; rw [D.hV]                    -- `eigenvalues_of_V_plus` (1) の `V^{(+)}Q̌_ε = Λ̌_εQ̌_ε` を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
           (((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) • (epsilon (r + 1) * F.Qproj (CheckFermi.finsetOfWord ε))).trace) := by
         congr 1; funext ε; rw [mul_smul_matrix_tensorPow]
                                                         -- `scalar_multiple_factors_out_of_right_factor`
                                                         -- （`a → (Λ̌_ε)_ℂ`、`A → ε`、`B → Q̌_ε`）を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
           (((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)
             • (F.eta (CheckFermi.finsetOfWord ε) • F.Qproj (CheckFermi.finsetOfWord ε))).trace) := by
         congr 1; funext ε; rw [F.epsilon_mul_Qproj]     -- `epsilon_eigenvalue_on_check_Q` (1) の `εQ̌_ε = η_εQ̌_ε` を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
           ((((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) * F.eta (CheckFermi.finsetOfWord ε))
             • F.Qproj (CheckFermi.finsetOfWord ε)).trace) := by
         congr 1; funext ε; rw [smul_smul]               -- `scalar_multiple_is_associative`
                                                         -- （`a → (Λ̌_ε)_ℂ`、`b → η_ε`、`A → Q̌_ε`）を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
           (((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) * F.eta (CheckFermi.finsetOfWord ε))
             * (F.Qproj (CheckFermi.finsetOfWord ε)).trace) := by
         congr 1; funext ε; exact trace_smul_tensorPow _ _
                                                         -- `trace_of_scalar_multiple`
                                                         -- （`α → (Λ̌_ε)_ℂη_ε`、`A → Q̌_ε`）を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
           (((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) * F.eta (CheckFermi.finsetOfWord ε)) * 1) := by
         congr 1; funext ε; rw [F.trace_Qproj]           -- `check_joint_eigenspace_decomposition` (4) の `tr(Q̌_ε) = 1` を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
           ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) * F.eta (CheckFermi.finsetOfWord ε)) := by
         congr 1; funext ε; exact mul_one _              -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
           F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)) := by
         congr 1; funext ε; exact mul_comm _ _           -- `complex_numbers_form_a_field` の積の可換律を各項へ同時に
-
-/-- `tr(εV^{(+)}) = Σ_T η_T Λ̌_T`（和は部分集合の上の `Finset.sum`）。人手の主張の行ではなく、`trace_epsilon_mul_V` の
-人手の範囲外の `M = 0` の場合だけが使う形である（`M = r + 1` の場合は Step 5 の鎖 `trace_epsilon_mul_V_step5` を通る）。`M = r + 1` は Step 1 の鎖 `trace_epsilon_mul_V_step1` を通し、
-人手の和 `NecSuf.binWordSum` を語から部分集合への全単射 `finsetOfWord` で `Finset.sum` へ付け替える（運ぶ段。人手の行は無い）。
-人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` で閉じる。 -/
-theorem trace_epsilon_mul_V_eq_sum :
-    (epsilon M * D.V).trace
-      = ∑ T : Finset (Fin M), F.eta T * ((checkLambda D.C D.gam T : ℝ) : ℂ) := by
-  match M, F, D with
-  | 0, F, D =>
-    have hdecomp : epsilon 0 * D.V = ∑ T : Finset (Fin 0), (epsilon 0 * D.V * F.Qproj T) := by
-      rw [← Finset.mul_sum, F.sum_Qproj, mul_one]
-    rw [hdecomp, Matrix.trace_sum]
-    refine Finset.sum_congr rfl fun T _ => ?_
-    rw [Matrix.mul_assoc, D.hV T, Matrix.mul_smul, F.epsilon_mul_Qproj T, smul_smul, Matrix.trace_smul,
-      F.trace_Qproj T, smul_eq_mul, mul_one, mul_comm]
-  | r + 1, F, D =>
-    calc (epsilon (r + 1) * D.V).trace
-        = NecSuf.binWordSum r (fun ε =>
-            F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)) :=
-          trace_epsilon_mul_V_step1 D                   -- Step 1 の鎖
-      _ = ∑ ε : Fin (r + 1) → Fin 2,
-            F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ) :=
-          NecSuf.binWordSum_eq_sum r _                  -- 必要十分版（加法についての可換モノイド）
-      _ = ∑ T : Finset (Fin (r + 1)), F.eta T * ((checkLambda D.C D.gam T : ℝ) : ℂ) :=
-          Fintype.sum_bijective CheckFermi.finsetOfWord CheckFermi.finsetOfWord_bijective _ _ (fun _ => rfl)
-                                                        -- 語から部分集合への全単射で添字を付け替える（運ぶ段）
 
 end VPlusData
 
@@ -550,23 +527,20 @@ theorem sum_checkT_eq_traceFactor {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusD
 `tr(εV^{(+)}) = Σ_εη_ε(Λ̌_ε)_ℂ = Σ_ε(ť_εȟ)_ℂ = (Σ_εť_εȟ)_ℂ = ((Σ_εť_ε)ȟ)_ℂ = (ϰȟ)_ℂ = (ȟϰ)_ℂ`
 （7・8 行目 `= ȟ_ℂϰ_ℂ = η_{(1,…,1)}ϰ_ℂ` は下の `trace_epsilon_mul_V_step5`）
 （人手の `M_col` が Lean の `r + 1`、`ϰ` が `D.traceFactor`、`ȟ` が `F.checkH`。人手の複素数の和
-`Σ_{ε∈{0,1}^𝓜̌}`（`def_sum_over_binary_words_of_complex_numbers`）は、Step 1 の鎖の右辺では `NecSuf.binWordSum r`、
-付け替えの段の右辺では具体版 `binaryWordComplexSum r` で、2 行目の後の 1 段はその付け替え（`binaryWordComplexSum_eq_binWordSum`。
-運ぶ段で、人手の行は無い）。実数の和は `binaryWordRealSum r`）。必要十分版は置かない（効くのは、引いた
+`Σ_{ε∈{0,1}^𝓜̌}`（`def_sum_over_binary_words_of_complex_numbers`）は具体版 `binaryWordComplexSum r`、
+実数の和は `binaryWordRealSum r`）。必要十分版は置かない（効くのは、引いた
 Step 1・Step 3・Step 4 の鎖、`real_inclusion_preserves_sum_over_binary_words`・
 `real_sum_over_binary_words_distributes_in_left_factor` と ℝ の乗法の交換律だけで、
 この鎖はそれらをつなぐだけなので、この鎖に固有の取り払える構造が無い）。 -/
 theorem trace_epsilon_mul_V_step5_rows_one_to_six {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
     (epsilon (r + 1) * D.V).trace = ((F.checkH * D.traceFactor : ℝ) : ℂ) :=
   calc (epsilon (r + 1) * D.V).trace
-      = NecSuf.binWordSum r (fun ε =>
+      = binaryWordComplexSum r (fun ε =>
           F.eta (CheckFermi.finsetOfWord ε) * ((checkLambda D.C D.gam (CheckFermi.finsetOfWord ε) : ℝ) : ℂ)) :=
         trace_epsilon_mul_V_step1 D                     -- Step 1 の鎖
-    _ = NecSuf.binWordSum r (fun ε => ((D.checkT ε * F.checkH : ℝ) : ℂ)) := by
+    _ = binaryWordComplexSum r (fun ε => ((D.checkT ε * F.checkH : ℝ) : ℂ)) := by
         congr 1; funext ε; exact D.eta_mul_checkLambda_eq_checkT_mul_checkH ε
                                                         -- Step 3 の鎖を各項へ同時に
-    _ = binaryWordComplexSum r (fun ε => ((D.checkT ε * F.checkH : ℝ) : ℂ)) :=
-        (binaryWordComplexSum_eq_binWordSum r _).symm   -- 複素数の和を具体版 `binaryWordComplexSum` へ付け替える（運ぶ段。人手の行は無い）
     _ = ((binaryWordRealSum r (fun ε => D.checkT ε * F.checkH) : ℝ) : ℂ) :=
         binaryWordComplexSum_ofReal r _                 -- `real_inclusion_preserves_sum_over_binary_words`（`r → M_col`、`x_ε → ť_εȟ`）
     _ = ((binaryWordRealSum r (fun ε => D.checkT ε) * F.checkH : ℝ) : ℂ) := by
@@ -598,12 +572,21 @@ variable {F : CheckFermi M} (D : VPlusData M F)
 
 /-- **人手 `trace_of_epsilon_V_plus_via_check_eigenvalues` (1)**:
 `tr(εV^{(+)}) = η_{(1,…,1)}ϰ_ℂ`（`M` を一般に取る形）。`M = r + 1` は Step 5 の鎖 `trace_epsilon_mul_V_step5` である。
-人手の範囲外の `M = 0`（和が `T = ∅` の 1 項だけ）は `trace_epsilon_mul_V_eq_sum` を mathlib の `simp` で閉じる。 -/
+人手の範囲外の `M = 0`（和が `T = ∅` の 1 項だけ）は、`tr(εV^{(+)}) = Σ_T η_TΛ̌_T`（部分集合の上の `Finset.sum`）を
+mathlib の `Finset.mul_sum`・`Matrix.trace_sum`・`Matrix.trace_smul` で作り、mathlib の `simp` で閉じる（人手の行は無い）。 -/
 theorem trace_epsilon_mul_V :
     (epsilon M * D.V).trace = F.eta Finset.univ * ((D.traceFactor : ℝ) : ℂ) := by
   match M, F, D with
   | 0, F, D =>
-    rw [D.trace_epsilon_mul_V_eq_sum]
+    have hsum : (epsilon 0 * D.V).trace
+        = ∑ T : Finset (Fin 0), F.eta T * ((checkLambda D.C D.gam T : ℝ) : ℂ) := by
+      have hdecomp : epsilon 0 * D.V = ∑ T : Finset (Fin 0), (epsilon 0 * D.V * F.Qproj T) := by
+        rw [← Finset.mul_sum, F.sum_Qproj, mul_one]
+      rw [hdecomp, Matrix.trace_sum]
+      refine Finset.sum_congr rfl fun T _ => ?_
+      rw [Matrix.mul_assoc, D.hV T, Matrix.mul_smul, F.epsilon_mul_Qproj T, smul_smul, Matrix.trace_smul,
+        F.trace_Qproj T, smul_eq_mul, mul_one, mul_comm]
+    rw [hsum]
     simp [traceFactor, checkLambda, Finset.univ_eq_empty]
     exact Or.inl (congrArg F.eta (Subsingleton.elim _ _))
   | r + 1, F, D => exact trace_epsilon_mul_V_step5 D
