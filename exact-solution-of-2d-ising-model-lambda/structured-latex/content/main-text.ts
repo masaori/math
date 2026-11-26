@@ -101663,7 +101663,6 @@ D_L^{a,b}(x)
                       habitat: "Qbar",
                       verification: ["sagemath/check/determinant-square-root-torus-formula"],
                       lean: [
-                        "Ising2DLambda.KacWard.signedEvenSubgraphPolynomial_coeff_zero",
                         "Ising2DLambda.KacWard.kacWardDeterminant_qbarPolynomialSquareRoot",
                         "Ising2DLambda.KacWard.kacWardDeterminant_squareRoot_eq_signedEvenSubgraphPolynomial",
                         "Ising2DLambda.KacWard.kacWardDeterminant_existsUnique_qbarPolynomialSquareRoot",
@@ -105367,39 +105366,94 @@ P_L^{a,b}
                 proof: [
                   paragraph([
                     "まず ", math(String.raw`(a,b)\ne(0,0)`), " とする。臨界点 ",
-                    math(String.raw`x_c\in R`), " は ", ref("def_critical_point"), "、",
-                    ref("claim_critical_point_mem_real_closed"), " により定まり、",
-                    ref("claim_critical_point_positive"), " と ", ref("claim_critical_point_lt_one"),
-                    " により ", math(String.raw`0<_Rx_c<_R1`), " である。",
-                    math(String.raw`x_c^2+2x_c-1=0`), "、",
+                    math(String.raw`x_c\in\overline{\mathbb Q}`), " は ", ref("def_critical_point"),
+                    " により定まり、", math(String.raw`x_c^2+2x_c-1=0`), "、",
                     math(String.raw`\mathrm{KW}(x_c)=x_c`), " および ",
                     math(String.raw`(1+x_c)^2=2`), " は ", ref("def_critical_point"), " に従う。",
-                    "任意の ", math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
-                    " を取り、", ref("claim_root_of_unity_inverse_is_real_closed_conjugate"),
-                    " に従って ", math(String.raw`\varpi=\alpha+\beta\omega`), "、",
-                    math(String.raw`\varsigma=\gamma+\delta\omega`),
-                    "（", math(String.raw`\alpha,\beta,\gamma,\delta\in R`), "）と書く。",
+                    math(String.raw`x_c=0`), " なら ", math(String.raw`x_c^2+2x_c-1=-1\ne0`),
+                    " となるので ", math(String.raw`x_c\ne0`), " である。",
+                    math(String.raw`x_c^2=1`), " なら",
                   ]),
                   displayMath(String.raw`\begin{aligned}
+2x_c
+&=(x_c^2+2x_c-1)-(x_c^2-1)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)\\
+&=0-0
+&&\bigl(\because\ x_c^2+2x_c-1=0,\ x_c^2=1\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となり ", math(String.raw`x_c=0`), " に戻って矛盾するので、",
+                    math(String.raw`x_c^2\ne1`), " である。従って ",
+                    math(String.raw`\overline{\mathbb Q}`), " は体なので ",
+                    math(String.raw`x_c(1-x_c^2)\ne0`), " である。",
+                    "任意の ", math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を取る。", ref("claim_twisted_modes_are_double_roots"), " により ",
+                    math(String.raw`\varpi,\varsigma\in\mu_{2L}`), " であり、",
+                    math(String.raw`2L\in\mathbb N_{\ge1}`), " である。",
+                    ref("def_real_closed_subfield"), " の一意表示により ",
+                    math(String.raw`\varpi=\alpha+\beta\omega`), "、",
+                    math(String.raw`\varsigma=\gamma+\delta\omega`), " と書ける（",
+                    math(String.raw`\alpha,\beta,\gamma,\delta\in R`), "）。",
+                    ref("claim_root_of_unity_inverse_is_real_closed_conjugate"),
+                    " を指数 ", math(String.raw`2L`), " で二つのモードへ適用すると",
+                  ]),
+                  displayMath(String.raw`\alpha^2+\beta^2=1,\quad\varpi^{-1}=\alpha-\beta\omega,\qquad
+\gamma^2+\delta^2=1,\quad\varsigma^{-1}=\gamma-\delta\omega.`),
+                  paragraph([
+                    ref("claim_real_closed_sum_of_two_squares_is_square"), " により、",
+                    math(String.raw`(1-\alpha)^2+\beta^2=c_\varpi\cdot c_\varpi`), " と ",
+                    math(String.raw`(1-\gamma)^2+\delta^2=c_\varsigma\cdot c_\varsigma`),
+                    " を満たす ", math(String.raw`c_\varpi,c_\varsigma\in R`), " を取る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+2-\varpi-\varpi^{-1}
+&=2-(\alpha+\beta\omega)-(\alpha-\beta\omega)
+&&\bigl(\because\ \varpi\text{ の表示と }\blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr)\\
+&=2-2\alpha
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
+&=1-2\alpha+(\alpha^2+\beta^2)
+&&\bigl(\because\ \alpha^2+\beta^2=1\bigr)\\
+&=(1-\alpha)^2+\beta^2
+&&\bigl(\because\ R\text{ の分配律}\bigr)\\
+&=c_\varpi\cdot c_\varpi
+&&\bigl(\because\ c_\varpi\text{ の取り方}\bigr),\\[4pt]
+2-\varsigma-\varsigma^{-1}
+&=2-(\gamma+\delta\omega)-(\gamma-\delta\omega)
+&&\bigl(\because\ \varsigma\text{ の表示と }\blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr)\\
+&=2-2\gamma
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
+&=1-2\gamma+(\gamma^2+\delta^2)
+&&\bigl(\because\ \gamma^2+\delta^2=1\bigr)\\
+&=(1-\gamma)^2+\delta^2
+&&\bigl(\because\ R\text{ の分配律}\bigr)\\
+&=c_\varsigma\cdot c_\varsigma
+&&\bigl(\because\ c_\varsigma\text{ の取り方}\bigr),\\[4pt]
 \Delta(x_c;\varpi,\varsigma)
 &=(x_c^2+2x_c-1)^2+x_c(1-x_c^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)
 &&\bigl(\because\ \blkref{claim_dispersion_positive_decomposition}\bigr)\\
 &=x_c(1-x_c^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)
 &&\bigl(\because\ x_c^2+2x_c-1=0,\ \blkref{def_critical_point}\bigr)\\
-&=x_c(1-x_c^2)\bigl((1-\alpha)^2+\beta^2+(1-\gamma)^2+\delta^2\bigr)
-&&\bigl(\because\ \blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr).
+&=x_c(1-x_c^2)\bigl(c_\varpi\cdot c_\varpi+c_\varsigma\cdot c_\varsigma\bigr)
+&&\bigl(\because\ \text{上の二つの等式}\bigr).
 \end{aligned}`),
                   paragraph([
-                    math(String.raw`x_c(1-x_c^2)>_R0`), " である。平方は全て非負なので、",
-                    "最後の平方和が零なら二つの平方和もそれぞれ零となる。",
-                    ref("claim_real_closed_sum_of_two_squares_zero"),
-                    " を各組へ適用して ", math(String.raw`\alpha=\gamma=1`), "、",
-                    math(String.raw`\beta=\delta=0`), "、従って ",
-                    math(String.raw`(\varpi,\varsigma)=(1,1)`), " となる。しかし ",
+                    "仮に ", math(String.raw`\Delta(x_c;\varpi,\varsigma)=0`), " とする。",
+                    math(String.raw`x_c(1-x_c^2)\ne0`), " なので ",
+                    math(String.raw`c_\varpi\cdot c_\varpi+c_\varsigma\cdot c_\varsigma=0`),
+                    " であり、", ref("claim_real_closed_sum_of_two_squares_zero"), " により ",
+                    math(String.raw`c_\varpi=c_\varsigma=0`), " である。すると ",
+                    math(String.raw`(1-\alpha)^2+\beta^2=0\cdot0=0`), " なので、",
+                    ref("claim_real_closed_sum_of_two_squares_zero"), " を ",
+                    math(String.raw`1-\alpha,\beta\in R`), " へ適用して ",
+                    math(String.raw`\alpha=1`), "、", math(String.raw`\beta=0`), "、従って ",
+                    math(String.raw`\varpi=1+0\cdot\omega=1`), " である。同様に ",
+                    math(String.raw`\varsigma=1`), " である。しかし ",
                     math(String.raw`(a,b)\ne(0,0)`), " なので ",
                     ref("def_horizontal_twisted_modes"), " と ", ref("def_vertical_twisted_modes"),
                     " により ", math(String.raw`(1,1)\notin\mathcal U_a\times\mathcal W_b`),
-                    " である。ゆえに各分散因子は零でない。",
+                    " である（", math(String.raw`1^L=1\ne-1`), "）。ゆえに各分散因子は零でない。",
                     ref("claim_dispersion_mode_product"), " と ",
                     ref("claim_determinant_signed_even_subgraph_square"), " から",
                   ]),
@@ -105543,7 +105597,7 @@ q^2+2q-1>0&\Longrightarrow Q_L^{0,0}(q)<0\ \text{かつ}\ Q_L^{a,b}(q)>0\quad((a
 &\le_R\Delta(q;\varpi,\varsigma)
 &&\bigl(\because\ \blkref{claim_dispersion_positive_at_rational_point}\bigr)\\
 &=\Delta_O(q)
-&&\bigl(\because\ \Delta_O\text{ は元の選択に依らない、}\blkref{claim_signed_even_subgraph_orbit_product}\bigr).
+&&\bigl(\because\ \Delta_O\text{ は元の選択に依らない、}\blkref{claim_dispersion_inversion_invariant},\ \blkref{claim_signed_even_subgraph_orbit_product}\bigr).
 \end{aligned}`),
                   paragraph([
                     "二つ目の ", math(String.raw`\le_R`), " が等号なら一つ目の不等式がそのまま ",

@@ -1,6 +1,7 @@
 import Ising2DLambda.KacWard.SignedEvenSubgraphDualityNontrivialSign
 import Ising2DLambda.KacWard.FiniteTorusPolynomial
 import Ising2DLambda.KacWard.DeterminantPolynomialSquareRootExists
+import Ising2DLambda.PartitionPolynomial.CoefficientRepresentation
 
 namespace Ising2DLambda.KacWard
 
@@ -13,13 +14,19 @@ theorem signed_eval_zero (L : ℕ) [NeZero L] (s : SpinStructure) :
   rw [← Polynomial.coeff_zero_eq_eval_zero, Polynomial.coeff_map,
     signedEvenSubgraphPolynomial_coeff_zero, map_one]
 
+/-- 本文: `Z_L(1) = Σ_m Ω_L(m) = 2^N`（claim_coefficient_representation・claim_coefficient_sum）。 -/
 theorem partition_eval_one (L : ℕ) [NeZero L] :
     ((partitionPolynomial L).map (Int.castRingHom Qbar)).eval 1 =
       (2 : Qbar) ^ (L ^ 2) := by
-  rw [partitionPolynomial, Polynomial.map_sum, Polynomial.eval_finsetSum]
-  simp only [Polynomial.map_pow, Polynomial.map_X, Polynomial.eval_pow,
-    Polynomial.eval_X, one_pow]
-  simp [card_config]
+  -- claim_coefficient_representation
+  rw [partitionPolynomial_eq_sum_multiplicity L]
+  simp only [Polynomial.map_sum, Polynomial.map_mul, Polynomial.map_C, Polynomial.map_pow,
+    Polynomial.map_X, Polynomial.eval_finsetSum, Polynomial.eval_mul, Polynomial.eval_C,
+    Polynomial.eval_pow, Polynomial.eval_X, one_pow, mul_one]
+  -- claim_coefficient_sum
+  have hsum := congrArg (fun n : ℕ => (n : Qbar)) (multiplicity_sum_eq_two_pow L)
+  push_cast at hsum
+  simpa using hsum
 
 theorem signed_eval_one_of_positive (L : ℕ) [NeZero L]
     (s : SpinStructure)
