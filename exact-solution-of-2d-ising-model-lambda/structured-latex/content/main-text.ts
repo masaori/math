@@ -110383,7 +110383,7 @@ b
 &=\{\rho_{\mathbb{R}}(\mu)\in\mathbb{R}\mid\mu\in A^{\mathrm{per}}(q)\}
 &&(\because\ \text{上の定義})\\
 &=\{\rho_{\mathbb{R}}(\mu)\in\mathbb{R}\mid\mu\in A^{\mathrm{op}}(q)\}
-&&(\because\ \blkref{claim_periodic_density_lower_set_eq_open_square_le_one}\text{ を }q:=q\text{ で読む。}0<q\le1)\\
+&&(\because\ \blkref{claim_periodic_density_lower_set_eq_open_square_le_one}\text{ を }q:=q\text{ で読む、}0<q\le1)\\
 &=\rho_{\mathbb{R}}\bigl(A^{\mathrm{op}}(q)\bigr)
 &&(\because\ \blkref{def_open_square_free_energy_density}\text{ の像の定義})
 \end{aligned}`),
