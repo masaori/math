@@ -91,22 +91,6 @@ theorem iterate_color_parity_necSuf (m : {x // x ∈ A}) (hm : m ∈ matchingPai
         rfl
       rw [hstep, matchingPairSuccessor_color, ih, Nat.even_add_one]
 
-include hτ hυ in
-/-- 一歩の値。第一色では D の相手、第二色では D₀ の相手へ進む。 -/
-theorem iterate_succ_val_necSuf (m : {x // x ∈ A}) (r : ℕ) :
-    (finiteMapIterate (matchingPairPermutation τ υ) (r + 1) m).1 =
-      if finiteMapIterate (matchingPairPermutation τ υ) r m ∈ matchingPairColor τ υ then
-        perfectMatchingMate D (finiteMapIterate (matchingPairPermutation τ υ) r m).1
-      else perfectMatchingMate D₀ (finiteMapIterate (matchingPairPermutation τ υ) r m).1 := by
-  have hstep : finiteMapIterate (matchingPairPermutation τ υ) (r + 1) m =
-      matchingPairSuccessor τ υ (finiteMapIterate (matchingPairPermutation τ υ) r m) := by
-    simp only [finiteMapIterate, Function.iterate_succ_apply']
-    rfl
-  rw [hstep, matchingPairSuccessor]
-  split_ifs
-  · exact hτ _
-  · exact hυ _
-
 /-- 周期は正で偶数で、周期で戻る。 -/
 theorem cycle_period_necSuf (m : {x // x ∈ A}) :
     0 < finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m ∧
@@ -154,10 +138,12 @@ theorem cycle_pairs_D_necSuf (D' : Set (Set J)) (mate : J → J)
         exact hτ' _]
   exact hD' _
 
-include hτ hυ in
-theorem cycle_pairs_reference_necSuf (i : {x // x ∈ A}) :
+theorem cycle_pairs_reference_necSuf (D₀' : Set (Set J)) (mate : J → J)
+    (hυ' : ∀ i, (υ.val i).1 = mate i.1)
+    (hD₀' : ∀ e, ({e, mate e} : Set J) ∈ D₀')
+    (i : {x // x ∈ A}) :
     ∀ p ∈ pairChunks ((cyclePointsOf τ υ (matchingPairComponentMinimum τ υ i)).rotate 1),
-      ({p.1, p.2} : Set J) ∈ D₀.val := by
+      ({p.1, p.2} : Set J) ∈ D₀' := by
   intro p hp
   set m := matchingPairComponentMinimum τ υ i
   obtain ⟨hpos, ⟨k, hk⟩, hper⟩ := cycle_period_necSuf A τ υ m
@@ -170,8 +156,16 @@ theorem cycle_pairs_reference_necSuf (i : {x // x ∈ A}) :
     rw [iterate_color_parity_necSuf A τ υ m (minimum_self_and_color A τ υ i).2 (2 * r + 1)]
     exact Nat.not_even_iff_odd.mpr (odd_two_mul_add_one r)
   simp only
-  rw [iterate_succ_val_necSuf D D₀ A τ υ hτ hυ m (2 * r + 1), if_neg hcol]
-  exact (perfectMatchingMate_spec _ _).2
+  rw [show (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1 + 1) m).1 =
+      mate (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m).1 from by
+        have hstep : finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1 + 1) m =
+            matchingPairSuccessor τ υ
+              (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m) := by
+          simp only [finiteMapIterate, Function.iterate_succ_apply']
+          rfl
+        rw [hstep, matchingPairSuccessor, if_neg hcol]
+        exact hυ' _]
+  exact hD₀' _
 
 theorem cyclePoints_mem_component_necSuf (m : {x // x ∈ A}) (x : J)
     (hx : x ∈ cyclePointsOf τ υ m) :
@@ -312,7 +306,8 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
   · intro c hc
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc
     obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp ((Finset.mem_sort _).mp hm)
-    exact cycle_pairs_reference_necSuf D D₀ A τ υ hτ hυ i
+    exact cycle_pairs_reference_necSuf A τ υ D₀.val (perfectMatchingMate D₀)
+      hυ (fun e => (perfectMatchingMate_spec D₀ e).2) i
   · exact matchingPairOutsideEnumeration_spec D.val D₀.val
       (perfectMatchingMate D) (perfectMatchingMate D₀) A
       (fun e => (perfectMatchingMate_spec D e).2)
