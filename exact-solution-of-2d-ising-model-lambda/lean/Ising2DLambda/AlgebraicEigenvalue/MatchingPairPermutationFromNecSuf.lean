@@ -1,8 +1,16 @@
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairPermutation
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairPermutation
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairMinimumPermutation
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 variable {J : Type*} [Fintype J] [LinearOrder J]
+
+/-- 実際の後続置換は、成分最小元から構成した必要十分版の特殊化である。 -/
+theorem matchingPairPermutation_eq_necSuf (τ υ : FixedPointFreeInvolution J) :
+    matchingPairPermutation τ υ =
+      NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation τ υ := by
+  ext i
+  rfl
 
 /-- 実際の相手写像の対合性と二つの色反転を供給する。 -/
 theorem matchingPairSuccessor_inverse_from_necSuf

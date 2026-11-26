@@ -111591,7 +111591,7 @@ const chapter_fisher_zero_density = defineSection({
 &=\mathrm{Ev}^{F}_{w}(Z_L)
 &&(\because\ \blkref{claim_integer_polynomial_qbar_lift_evaluation})\\
 &=0
-&&(\because\ w\in\mathcal{F}_{L}\text{。}\ \blkref{def_finite_lattice_fisher_zeros})
+&&(\because\ w\in\mathcal{F}_{L}\text{、}\ \blkref{def_finite_lattice_fisher_zeros})
 \end{aligned}`),
                         paragraph([
                           "である。以上の 3 つにより ",
