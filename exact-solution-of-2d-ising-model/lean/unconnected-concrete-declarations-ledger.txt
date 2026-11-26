@@ -739,7 +739,6 @@ Ising2D.mul_add_matrix_apply
 Ising2D.mul_binaryWordMatrixSum
 Ising2D.mul_finite_sum_of_matrices
 Ising2D.mul_neg_matrix
-Ising2D.mul_neg_matrix_apply
 Ising2D.multiIndexDelta
 Ising2D.multiIndexDelta_of_ne
 Ising2D.multiIndexDelta_self
@@ -752,7 +751,6 @@ Ising2D.neg_matrix_add_self_apply
 Ising2D.neg_matrix_mul_self_apply
 Ising2D.neg_matrix_mul_self_comm
 Ising2D.neg_mul_matrix
-Ising2D.neg_mul_matrix_apply
 Ising2D.neg_neg_matrix
 Ising2D.neg_neg_matrix_apply
 Ising2D.neg_one_pow_mul_neg_one_pow

@@ -1,16 +1,17 @@
 /-
-# 複素行列の全体 `Mat(m, n, ℂ)` と、行列 `Mat(2^M, ℂ)` の単位行列・スカラー倍・和・零行列・積・数ベクトルとの積・トレースと、Lean の `TensorPow M` の演算（具体版）
+# 複素行列の全体 `Mat(m, n, ℂ)` と、行列 `Mat(2^M, ℂ)` の単位行列・スカラー倍・和・零行列・符号反転・積・数ベクトルとの積・トレースと、Lean の `TensorPow M` の演算（具体版）
 
 正本: `structured-latex/content/000_calculation_formulae_00_09.ts`（`calc_formulae_definition_complex_matrices`、ラベル **`def_complex_matrices`**・
 `calc_formulae_003_matrix_decomposition`、ラベル **`mat_mult`**）、
 `structured-latex/content/002_linear_space_general.ts`（`linear_space_general_definition_identity_matrix`、ラベル **`def_identity_matrix`**・
 `linear_space_general_definition_matrix_scalar_multiple`、ラベル **`def_matrix_scalar_multiple`**・
 `linear_space_general_definition_matrix_sum`、ラベル **`def_matrix_sum`**）、
-`structured-latex/content/000_calculation_formulae_45_46.ts`（`finite_matrix_definition_zero_matrix`、ラベル **`def_zero_matrix`**）、
+`structured-latex/content/000_calculation_formulae_45_46.ts`（`finite_matrix_definition_zero_matrix`、ラベル **`def_zero_matrix`**・
+`finite_matrix_definition_negation`、ラベル **`def_matrix_negation`**）、
 `structured-latex/content/009_eigenvalues_of_V.ts`（`eigenvalues_of_V_001_definition_trace`、ラベル **`def_trace`**）
 
-人手は `Mat(2^M, ℂ)` の成分を番号で書き、五つの演算を成分の式で定める:
-`(I)_{ij} := δ_{ij}`、`(aA)_{ij} := a A_{ij}`、`(A + B)_{ij} := A_{ij} + B_{ij}`、`O_{ik} := 0`、`(AB)_{ik} := Σ_{j=1}^{n} A_{ij} B_{jk}`（添字の文字は本文どおり）。
+人手は `Mat(2^M, ℂ)` の成分を番号で書き、六つの演算を成分の式で定める:
+`(I)_{ij} := δ_{ij}`、`(aA)_{ij} := a A_{ij}`、`(A + B)_{ij} := A_{ij} + B_{ij}`、`O_{ik} := 0`、`(-A)_{ik} := -A_{ik}`、`(AB)_{ik} := Σ_{j=1}^{n} A_{ij} B_{jk}`（添字の文字は本文どおり）。
 `def_kronecker` は多重添字 `I ∈ 𝓘_M` を番号 `ν(I)` と同一視して成分を並べる。
 
 Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が `𝓘_M`（Lean の `Conf M`）で、演算は mathlib の行列の `1`・`•`・`+`・`0`・`*` である。
@@ -36,7 +37,8 @@ Lean の `A *ᵥ f`（`f : Conf M → ℂ` は `ℂ^{2^M}` の数ベクトルを
 （`tensorPow_mulVec_apply_eq_mat_mult`）、`𝓘_M` の上の和の形 `tensorPow_mulVec_apply` をそこから導く。
 トレース（`def_trace`、`tr(A) := Σ_{k=1}^{n} A_{kk}`）も同じく、Lean の `A.trace`（`def_trace` の具体版 `trace_eq_sum_diag` で対角成分の
 `𝓘_M` の上の和）を `ν^{-1}` で番号へ移して書き（`tensorPow_trace_eq_def_trace`）、`𝓘_M` の上の和の形 `tensorPow_trace_apply` をそこから導く。
-符号反転と差はここに置かない。一致の補題を通しの定理に繋げる使い道が、分離の行「TensorPow 上の行列の基本恒等式」の具体版の証明の中にしか無いからである。
+符号反転（`def_matrix_negation`）もスカラー倍と同じく成分の式が各成分だけで閉じるので、`Conf M` の添字で一本書く（`tensorPow_neg_apply`）。
+差はここに置かない。一致の補題を通しの定理に繋げる使い道が無いからである。
 
 人手の本文は演算を定めるだけで、Lean の演算との一致の主張を持たない。補題は Lean だけの段であり、
 定義の一致を述べる補題なので、必要十分版は置かない。人手の `M ∈ ℤ_{≥1}` に対し、Lean は `M = 0` も許す。
@@ -126,6 +128,12 @@ theorem tensorPow_add_apply {M : ℕ} (A B : TensorPow M) (I K : Conf M) :
 theorem tensorPow_zero_apply {M : ℕ} (I K : Conf M) :
     (0 : TensorPow M) I K = 0 :=
   rfl                                                       -- mathlib の零行列の成分
+
+/-- **`def_matrix_negation`**: Lean の `TensorPow M` の符号反転の成分は、本文の `(-A)_{ik} := -A_{ik}` を
+番号 `i = ν(I)`・`k = ν(K)` で読んだもの `(-A)_{IK} = -A_{IK}` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
+theorem tensorPow_neg_apply {M : ℕ} (A : TensorPow M) (I K : Conf M) :
+    (-A) I K = -A I K :=
+  rfl                                                       -- mathlib の行列の符号反転は成分ごと
 
 /-- **`mat_mult`**: Lean の `TensorPow M` の積の成分を `ν^{-1}` で番号へ移すと、本文の `(AB)_{ik} := Σ_{j=1}^{n} A_{ij} B_{jk}`（`n = 2^M`）の
 右辺に等しい（Lean だけの段の補題。冒頭の説明を見よ）。mathlib の積の成分は `𝓘_M`（Lean の `Conf M`）の上の和で、それを番号の上の和へ移すのは

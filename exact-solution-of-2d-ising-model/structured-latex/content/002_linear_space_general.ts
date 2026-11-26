@@ -1035,7 +1035,7 @@ X - O
     kind: "claim",
     title: { text: "左の因子の符号反転は行列の積の外へ出る" },
     labels: ["negation_factors_out_of_left_factor"],
-    lean: ["Ising2D.neg_mul_matrix", "Ising2D.neg_mul_matrix_apply"],
+    lean: ["Ising2D.neg_mul_matrix", "Ising2D.neg_mul_matrix_apply", "Ising2D.neg_mul_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -1096,7 +1096,7 @@ X - O
     kind: "claim",
     title: { text: "右の因子の符号反転は行列の積の外へ出る" },
     labels: ["negation_factors_out_of_right_factor"],
-    lean: ["Ising2D.mul_neg_matrix", "Ising2D.mul_neg_matrix_apply"],
+    lean: ["Ising2D.mul_neg_matrix", "Ising2D.mul_neg_matrix_apply", "Ising2D.mul_neg_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),

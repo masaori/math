@@ -324,7 +324,7 @@ T_B(I)
     kind: "definition",
     title: { text: "行列の符号反転" },
     labels: ["def_matrix_negation"],
-    lean: ["Ising2D.matrix_neg_apply"],
+    lean: ["Ising2D.matrix_neg_apply", "Ising2D.tensorPow_neg_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -348,6 +348,7 @@ T_B(I)
       status: "added",
       notes: [
         "2026-11-01: 本文の証明が行列の符号反転 -A を定義のブロックを置かずに使っていた（pauli_matrix_products の反可換性の 3 式など）。pauli_matrix_products が引けるよう足した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の二単位目）: 欄 lean に、Lean の TensorPow M（添字が 𝓘_M の行列）の符号反転がこの定義の成分の式を ν を通して読んだものに等しいことを述べる補題 Ising2D.tensorPow_neg_apply を足した（MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionMatrixOperationsOverMultiIndices.lean）。本文は変えていない。",
       ],
     },
   },
