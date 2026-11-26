@@ -31,12 +31,11 @@ theorem taggedAlternatingCycles_matching_sign_from_necSuf {L : ℕ}
     matchingWordSign matchingWordSign_swap D (referenceLongMatching L)
     (concreteTaggedActiveVertices D t) (concreteShortInvolution D t) (concreteLongInvolution D t)
     hτ hυ (fun e he => (inactive_mate_eq_reference D t e he).1) hsD
-  -- 二つの定義は像を取るときの等号の判定の与え方だけが違う（判定は部分単集合なので一致する）。
-  have hm : NecSuf.KacWard.cycleMinimaOf (concreteShortInvolution D t)
-      (concreteLongInvolution D t) = taggedCycleMinima D t := by
-    unfold NecSuf.KacWard.cycleMinimaOf taggedCycleMinima
-    congr 1
-    exact Subsingleton.elim _ _
+  have hm : NecSuf.KacWard.cycleMinimaOf
+      (matchingPairComponentMinimum
+        (concreteShortInvolution D t) (concreteLongInvolution D t)) = taggedCycleMinima D t := by
+    ext x
+    simp [NecSuf.KacWard.mem_cycleMinimaOf, taggedCycleMinima]
   have hw : NecSuf.KacWard.cycleWordsOf (concreteShortInvolution D t)
       (concreteLongInvolution D t) = taggedCycleWords D t := by
     unfold NecSuf.KacWard.cycleWordsOf taggedCycleWords

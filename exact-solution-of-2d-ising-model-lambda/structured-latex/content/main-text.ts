@@ -2587,19 +2587,19 @@ N_{\mu}N_{\lambda}
                               displayMath(String.raw`\begin{aligned}
 \iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(N'\lambda_N)
 &=N'\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_N)
-&&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})\\
+&&\bigl(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple}\bigr)\\
 &=N'\cdot(N\cdot\lambda)
-&&(\because\ N\text{ は }\lambda\text{ の共通分母、}\blkref{def_common_denominator})\\
+&&\bigl(\because\ N\text{ は }\lambda\text{ の共通分母、}\blkref{def_common_denominator}\bigr)\\
 &=(N'N)\cdot\lambda
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
+&&\bigl(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則}\bigr)\\
 &=(NN')\cdot\lambda
-&&(\because\ \mathbb{Q}\text{ の積の可換性})\\
+&&\bigl(\because\ \mathbb{Q}\text{ の積の可換性}\bigr)\\
 &=N\cdot(N'\cdot\lambda)
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則})\\
+&&\bigl(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の結合則}\bigr)\\
 &=N\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\lambda_{N'})
-&&(\because\ N'\text{ は }\lambda\text{ の共通分母、}\blkref{def_common_denominator})\\
+&&\bigl(\because\ N'\text{ は }\lambda\text{ の共通分母、}\blkref{def_common_denominator}\bigr)\\
 &=\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(N\lambda_{N'})
-&&(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple})
+&&\bigl(\because\ \blkref{claim_rational_embedding_commutes_with_integer_multiple}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "同じ計算を ",
@@ -2611,11 +2611,11 @@ N_{\mu}N_{\lambda}
                               displayMath(String.raw`\begin{aligned}
 \lambda_N\le_{\Lambda}\mu_N
 &\iff N'\lambda_N\le_{\Lambda}N'\mu_N
-&&(\because\ \blkref{claim_log_order_group_positive_multiple_invariant}\text{、}N'\ge1)\\
+&&\bigl(\because\ \blkref{claim_log_order_group_positive_multiple_invariant}\text{、}N'\ge1\bigr)\\
 &\iff N\lambda_{N'}\le_{\Lambda}N\mu_{N'}
-&&(\because\ N'\lambda_N=N\lambda_{N'},\ N'\mu_N=N\mu_{N'}\text{（上の準備）})\\
+&&\bigl(\because\ N'\lambda_N=N\lambda_{N'},\ N'\mu_N=N\mu_{N'}\text{（上の準備）}\bigr)\\
 &\iff \lambda_{N'}\le_{\Lambda}\mu_{N'}
-&&(\because\ \blkref{claim_log_order_group_positive_multiple_invariant}\text{、}N\ge1)
+&&\bigl(\because\ \blkref{claim_log_order_group_positive_multiple_invariant}\text{、}N\ge1\bigr)
 \end{aligned}`),
                               paragraph([
                                 "使ったのは有理数倍の結合則、整数倍と ",

@@ -41,15 +41,20 @@ noncomputable def cyclePointsOf {A : Set J} (τ υ : FixedPointFreeInvolution {x
   (List.range (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m)).map
     (fun r => (finiteMapIterate (matchingPairPermutation τ υ) r m).1)
 
-/-- 閉路ごとの最小元の集合。 -/
-noncomputable def cycleMinimaOf {A : Set J} (τ υ : FixedPointFreeInvolution {x // x ∈ A}) :
-    Finset {x // x ∈ A} :=
-  Finset.univ.image (matchingPairComponentMinimum τ υ)
+/-- 各点から選んだ代表点の集合。成分の最小元を選ぶ場合に閉路の最小元集合となる。 -/
+noncomputable def cycleMinimaOf {K : Type*} [Fintype K] (minimum : K → K) : Finset K := by
+  classical
+  exact Finset.univ.image minimum
+
+theorem mem_cycleMinimaOf {K : Type*} [Fintype K] (minimum : K → K) (x : K) :
+    x ∈ cycleMinimaOf minimum ↔ ∃ i, minimum i = x := by
+  classical
+  simp [cycleMinimaOf]
 
 /-- 閉路を最小元の昇順に並べた点列の列。 -/
 noncomputable def cycleWordsOf {A : Set J} (τ υ : FixedPointFreeInvolution {x // x ∈ A}) :
     List (List J) :=
-  ((cycleMinimaOf τ υ).sort (· ≤ ·)).map (cyclePointsOf τ υ)
+  ((cycleMinimaOf (matchingPairComponentMinimum τ υ)).sort (· ≤ ·)).map (cyclePointsOf τ υ)
 
 section Facts
 
@@ -183,11 +188,11 @@ theorem cyclePoints_nodup_necSuf (m : {x // x ∈ A}) : (cyclePointsOf τ υ m).
   exact congrArg Fin.val this
 
 theorem cyclePoints_disjoint_necSuf (m₁ m₂ : {x // x ∈ A})
-    (h₁ : m₁ ∈ cycleMinimaOf τ υ) (h₂ : m₂ ∈ cycleMinimaOf τ υ) (hne : m₁ ≠ m₂) :
+    (h₁ : m₁ ∈ cycleMinimaOf (matchingPairComponentMinimum τ υ)) (h₂ : m₂ ∈ cycleMinimaOf (matchingPairComponentMinimum τ υ)) (hne : m₁ ≠ m₂) :
     List.Disjoint (cyclePointsOf τ υ m₁) (cyclePointsOf τ υ m₂) := by
   intro x hx₁ hx₂
-  obtain ⟨i₁, _, rfl⟩ := Finset.mem_image.mp h₁
-  obtain ⟨i₂, _, rfl⟩ := Finset.mem_image.mp h₂
+  obtain ⟨i₁, rfl⟩ := (mem_cycleMinimaOf _ _).mp h₁
+  obtain ⟨i₂, rfl⟩ := (mem_cycleMinimaOf _ _).mp h₂
   obtain ⟨ha, hc₁⟩ := cyclePoints_mem_component_necSuf A τ υ _ x hx₁
   obtain ⟨_, hc₂⟩ := cyclePoints_mem_component_necSuf A τ υ _ x hx₂
   have hbase (j : {x // x ∈ A})
@@ -247,7 +252,8 @@ theorem cycleWords_complete_necSuf :
     · apply List.mem_append_left
       let xx : {x // x ∈ A} := ⟨x, hx⟩
       let m := matchingPairComponentMinimum τ υ xx
-      have hm : m ∈ cycleMinimaOf τ υ := Finset.mem_image_of_mem _ (Finset.mem_univ _)
+      have hm : m ∈ cycleMinimaOf (matchingPairComponentMinimum τ υ) :=
+        (mem_cycleMinimaOf _ _).mpr ⟨xx, rfl⟩
       have horbit : xx ∈ finitePermutationOrbit (matchingPairPermutation τ υ) m := by
         rw [matchingPairPermutation_orbit_eq_component,
           matchingPairComponent_basepoint τ υ xx m (matchingPairComponentMinimum_mem τ υ xx)]
@@ -287,10 +293,10 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
     (hout : ∀ e, e ∉ A → perfectMatchingMate D₀ e = perfectMatchingMate D e)
     (hsD : matchingSignOf F D * matchingSignOf F D = 1) :
     matchingSignOf F D * matchingSignOf F D₀ =
-      (-1) ^ (cycleMinimaOf τ υ).card * ((cycleWordsOf τ υ).map (fun c =>
+      (-1) ^ (cycleMinimaOf (matchingPairComponentMinimum τ υ)).card * ((cycleWordsOf τ υ).map (fun c =>
         ((pairChunks c).map (pairOrientationIn R)).prod *
           ((pairChunks (c.rotate 1)).map (pairOrientationIn R)).prod)).prod := by
-  have hlen : (cycleWordsOf τ υ).length = (cycleMinimaOf τ υ).card := by
+  have hlen : (cycleWordsOf τ υ).length = (cycleMinimaOf (matchingPairComponentMinimum τ υ)).card := by
     simp [cycleWordsOf]
   rw [← hlen]
   apply alternating_cycle_matching_sign_necSuf F hswap D D₀ (cycleWordsOf τ υ)
@@ -301,12 +307,12 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
   · exact cycleWords_complete_necSuf D A τ υ hτ
   · intro c hc
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc
-    obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp ((Finset.mem_sort _).mp hm)
+    obtain ⟨i, rfl⟩ := (mem_cycleMinimaOf _ _).mp ((Finset.mem_sort _).mp hm)
     exact cycle_pairs_D_necSuf A τ υ D.val (perfectMatchingMate D)
       hτ (fun e => (perfectMatchingMate_spec D e).2) i
   · intro c hc
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc
-    obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp ((Finset.mem_sort _).mp hm)
+    obtain ⟨i, rfl⟩ := (mem_cycleMinimaOf _ _).mp ((Finset.mem_sort _).mp hm)
     exact cycle_pairs_reference_necSuf A τ υ D₀.val (perfectMatchingMate D₀)
       hυ (fun e => (perfectMatchingMate_spec D₀ e).2) i
   · exact matchingPairOutsideEnumeration_spec D.val D₀.val
