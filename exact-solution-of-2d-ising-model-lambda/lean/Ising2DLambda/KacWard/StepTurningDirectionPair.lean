@@ -3,18 +3,11 @@ import Ising2DLambda.KacWard.PlaneProjectionCyclicTurning
 
 namespace Ising2DLambda.KacWard
 
-/-- The turn of an actual nonbacktracking pair is the turn of its two directions. -/
+/-- 非後退の一歩の回転数（`def_step_turning`）を方向番号の対の回転数として読む定義の対応。
+逆向きの方向の対 `b = a + 2` では両辺とも零なので、後続辺が反転でないことは使わない。 -/
 theorem stepTurning_eq_directionPairTurning {L : ℕ} [NeZero L]
     (e f : OrientedEdge L) (hf : f ∈ nonbacktrackingSuccessors e) :
     stepTurning e f = directionPairTurning (directionNumber e) (directionNumber f) := by
-  have hreverse : directionNumber f ≠ directionNumber e + 2 := by
-    intro h
-    have hs : orientedSource f = orientedTarget e := (Finset.mem_filter.mp hf).2.1.symm
-    have hr : orientedSource (reversal e) = orientedTarget e := by
-      rcases e with ⟨edge, false | true⟩ <;> rfl
-    have heq : f = reversal e := sourceDirection_bijective.1
-      (Prod.ext (hs.trans hr.symm) (h.trans (directionNumber_reversal e).symm))
-    exact (Finset.mem_filter.mp hf).2.2 heq
   simp only [stepTurning, if_pos hf]
   generalize ha : directionNumber e = a at *
   generalize hb : directionNumber f = b at *

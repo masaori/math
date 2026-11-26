@@ -81265,7 +81265,11 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           title: { text: "一歩の回転数" },
                           labels: ["def_step_turning"],
                           habitat: "Z",
-                          lean: ["Ising2DLambda.KacWard.stepTurning", "Ising2DLambda.KacWard.turnValue"],
+                          lean: [
+                            "Ising2DLambda.KacWard.stepTurning",
+                            "Ising2DLambda.KacWard.turnValue",
+                            "Ising2DLambda.KacWard.stepTurning_eq_directionPairTurning",
+                          ],
                           statement: [
                             paragraph([
                               math(String.raw`\vec e\in\vec E_L`), " と ",
@@ -81510,7 +81514,10 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           title: { text: "閉じた非後退辺列" },
                           labels: ["def_closed_nonbacktracking_walk"],
                           habitat: "N",
-                          lean: ["Ising2DLambda.KacWard.closedNonbacktrackingWalk"],
+                          lean: [
+                            "Ising2DLambda.KacWard.closedNonbacktrackingWalk",
+                            "Ising2DLambda.KacWard.closedNonbacktrackingWalk_finRotate_successor",
+                          ],
                           statement: [
                             paragraph([
                               "非後退辺列 ",
@@ -81543,6 +81550,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                             "Ising2DLambda.NecSuf.KacWard.cyclicTotalTurning",
                             "Ising2DLambda.KacWard.cyclicTotalTurning_from_necSuf",
                             "Ising2DLambda.KacWard.cyclicTotalTurning_eq_sum_successor",
+                            "Ising2DLambda.KacWard.cyclicTotalTurning_eq_sum_finRotate",
                           ],
                           statement: [
                             paragraph([
@@ -91622,13 +91630,11 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.KacWard.vertexSimpleWalk_liftPoint_mem_boundaryVertices",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_boundaryVertex_has_departure",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_departure_equiv_boundaryVertices",
-                      "Ising2DLambda.KacWard.stepTurning_eq_directionPairTurning",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_outgoing_direction_eq_boundary_left",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_incoming_direction_eq_boundary_left",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_outgoing_direction_eq_boundary_right",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_incoming_direction_eq_boundary_right",
                       "Ising2DLambda.NecSuf.KacWard.right_boundary_direction_match",
-                      "Ising2DLambda.KacWard.closedNonbacktrackingWalk_finRotate_successor",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_planeLift_succ_eq_finRotate_castSucc",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_stepTurning_eq_boundary_turn_left",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_stepTurning_eq_neg_boundary_turn_right",
@@ -91636,7 +91642,6 @@ H_{a,b}(\gamma)&=0
                       "Ising2DLambda.NecSuf.KacWard.boundary_turn_match_right",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_stepTurning_eq_boundary_turn_left_from_necSuf",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_stepTurning_eq_neg_boundary_turn_right_from_necSuf",
-                      "Ising2DLambda.KacWard.cyclicTotalTurning_eq_sum_finRotate",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_sum_endpoint_eq_sum_boundaryVertices",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_cyclicTotalTurning_eq_boundary_turn_sum_left",
                       "Ising2DLambda.KacWard.vertexSimpleWalk_cyclicTotalTurning_eq_neg_boundary_turn_sum_right",
@@ -95379,17 +95384,21 @@ D^Q_{j_\varepsilon(i+1)}-D^Q_{j_\varepsilon(i)}
 \end{aligned}`),
                       paragraph([
                         "一側閉包の基点を ", math(String.raw`S\in\mathbb Z^2`), "、周期ベクトルを ",
-                        math(String.raw`B:=B_\gamma\in\mathbb Z^2`), " と書く。第二部分と第四部分の歩をそれぞれ ",
-                        math(String.raw`v^{(c)}_i,x^{(c)}_i\in\mathbb Z^2`), " とすると、四部分の歩ベクトル表示（",
-                        ref("claim_one_sided_closure_step_sequence"), "）から、",
+                        math(String.raw`B:=B_\gamma\in\mathbb Z^2`), " と書く。", ref("def_one_sided_periodic_lift_closure"),
+                        " により、第二部分の点列は順向きの ", math(String.raw`D^{S+cB}_0,\ldots,D^{S+cB}_b`),
+                        "、第四部分の点列は逆向きの ", math(String.raw`D^{S}_b,\ldots,D^{S}_0`), " である。",
+                        "それぞれの隣り合う二点の差を、第二部分の歩 ",
+                        math(String.raw`v^{(c)}_i:=D^{S+cB}_{i+1}-D^{S+cB}_i\in\mathbb Z^2`), " と第四部分の歩 ",
+                        math(String.raw`x^{(c)}_i:=D^S_{b-(i+1)}-D^S_{b-i}\in\mathbb Z^2`),
+                        "（", math(String.raw`0\le i<b`), "）と置く。すると",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 v^{(c)}_i&=D^{S+cB}_{i+1}-D^{S+cB}_i
-&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{claim_one_sided_closure_step_sequence}\bigr)\\
+&&\bigl(\because\ v^{(c)}_i\text{ の定義}\bigr)\\
 &=D^0_{i+1}-D^0_i
 &&\bigl(\because\ \text{上の等式へ }Q=S+cB,\ \varepsilon=0\text{ を代入}\bigr),\\
 x^{(c)}_i&=D^S_{b-(i+1)}-D^S_{b-i}
-&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{claim_one_sided_closure_step_sequence}\bigr)\\
+&&\bigl(\because\ x^{(c)}_i\text{ の定義}\bigr)\\
 &=D^0_{b-(i+1)}-D^0_{b-i}
 &&\bigl(\because\ \text{上の等式へ }Q=S,\ \varepsilon=1\text{ を代入}\bigr)
 \end{aligned}`),
@@ -98850,7 +98859,7 @@ q_{\vec e,\vec f}
                       paragraph(["長い標識の対集合も ", math(String.raw`E_D\setminus T_P=E_D\setminus T`), " である。標識は二元対とは別のデータなので、辺長一でも主張が成り立つ。実数体と複素数体は現れない。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_tagged_matching_matching_recovery"), " より ", math(String.raw`\mathcal D_\tau=D`), " である。従って両者の昇順対集合も等しい。任意の ", math(String.raw`r=(\vec e,\vec f)\in E_D`), " を取る。", ref("claim_local_pairing_matching_label_support"), " の定義から、"]),
+                      paragraph([math(String.raw`\mathcal D_\tau`), " は ", ref("claim_local_pairing_matching_construction"), " が局所対合から構成した完全マッチングである。", ref("claim_tagged_matching_matching_recovery"), " より ", math(String.raw`\mathcal D_\tau=D`), " である。従って両者の昇順対集合も等しい。任意の ", math(String.raw`r=(\vec e,\vec f)\in E_D`), " を取る。", ref("claim_local_pairing_matching_label_support"), " の定義から、"]),
                       displayMath(String.raw`r\in T_P\iff p(\vec e)\in P\qquad\bigl(\because\ \blkref{claim_local_pairing_matching_label_support}\bigr)`),
                       paragraph(["まず ", math(String.raw`r\in T`), " とする。", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec e,\vec f`), " は同じ始点を持つ。もし ", math(String.raw`p(\vec e)\notin P`), " なら、", ref("def_tagged_matching_complement_edges"), " により同じ台の長い標識の対 ", math(String.raw`q\in E_D\setminus T`), " がある。", ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`q`), " はその台の二つの向き付き辺を含み、", math(String.raw`\vec e`), " も含む。", ref("claim_perfect_matching_enumeration_complete"), " の完全列挙では各向き付き辺はただ一つの昇順対に現れるので ", math(String.raw`r=q`), " となるが、", math(String.raw`r\in T`), " と ", math(String.raw`q\notin T`), " に矛盾する。ゆえに ", math(String.raw`p(\vec e)\in P`), "、従って ", math(String.raw`r\in T_P`), " である。"]),
                       paragraph(["逆に ", math(String.raw`r\in T_P`), " とする。もし ", math(String.raw`r\notin T`), " なら ", math(String.raw`r\in E_D\setminus T`), " であり、", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec f=\iota(\vec e)`), " である。", ref("def_edge_reversal"), " より両者の台は ", math(String.raw`p(\vec e)`), " であり、", ref("def_tagged_matching_complement_edges"), " により ", math(String.raw`p(\vec e)\notin P`), " となる。これは ", math(String.raw`r\in T_P`), " に矛盾する。従って ", math(String.raw`r\in T`), " である。"]),
@@ -100554,8 +100563,10 @@ c(\gamma)\bmod2
                           "台の辺が相異なるという仮定から二つの添字が等しくなるか、",
                           math(String.raw`\vec e_r=\iota(\vec e_r)`), " の形の矛盾に至る（",
                           ref("claim_edge_simple_contact_split"), " の証明と同じ論法）。",
-                          "第三に、", math(String.raw`v`), " を始点とする向き付き辺は方向番号 ",
-                          math(String.raw`0,1,2,3`), " と一対一に対応する（", ref("claim_vertex_port_bijection"), "）。",
+                          "第三に、上の半辺の呼び方では ", math(String.raw`v`), " の半辺をその方向番号 ",
+                          math(String.raw`\in\mathbb Z/4\mathbb Z`), " で表す。", math(String.raw`k`), " と ", math(String.raw`l`),
+                          " の通過の四つの半辺は互いに異なるので、その方向番号は ", math(String.raw`\mathbb Z/4\mathbb Z`),
+                          " の四元を尽くす（", math(String.raw`\mathbb Z/4\mathbb Z`), " は四元の有限集合）。",
                           "従って ", math(String.raw`k`), " と ", math(String.raw`l`),
                           " の通過は ", math(String.raw`v`), " の四半辺を使い尽くし、",
                           math(String.raw`\operatorname{tgt}(\vec e_r)=v`), " なら ",
@@ -101478,7 +101489,7 @@ t(D,T)
                       paragraph(["が成り立つ。右辺は ", ref("def_signed_even_subgraph_polynomial"), " の ", math(String.raw`\mathbb Z[x]`), " の多項式を係数の包含で送ったものである。実数体・複素数体は使わない。"]),
                     ],
                     proof: [
-                      paragraph(["偶部分グラフの有限集合を ", math(String.raw`\mathcal W_L:=\{P\subseteq E_L\mid\operatorname{Even}_L(P)\}`), " と置く。", ref("claim_tagged_matching_even_complement"), " により、非零項の補辺は ", math(String.raw`\mathcal W_L`), " に属する。各 ", math(String.raw`P\in\mathcal W_L`), " の上の非零項は ", ref("claim_tagged_matching_local_pairs"), " と ", ref("claim_tagged_matching_label_recovery"), " により局所対合族と一対一に対応する。"]),
+                      paragraph(["偶部分グラフの有限集合を ", math(String.raw`\mathcal W_L:=\{P\subseteq E_L\mid\operatorname{Even}_L(P)\}`), " と置く。", ref("claim_tagged_matching_even_complement"), " により、非零項の補辺は ", math(String.raw`\mathcal W_L`), " に属する。各 ", math(String.raw`P\in\mathcal W_L`), " の上の非零項と局所対合族の一対一の対応は、下の式変形が引く ", ref("claim_local_pairing_signed_sum"), " の証明の中で使う。"]),
                       displayMath(String.raw`\begin{aligned}
 \operatorname{Pf}(K^{\mathrm{as}})
 &=\sum_{D\in\mathcal M(\vec E_L)}\sum_{T\subseteq E_D}M_{D,T}(x)
@@ -105163,7 +105174,9 @@ z=z^{-1}
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
                     math(String.raw`(a,b)\in\mathcal S`), " を任意に取り、",
                     math(String.raw`\mathcal K:=\mathcal U_a\times\mathcal W_b`),
-                    " と置く。", ref("claim_mode_inversion_orbit_cardinality"),
+                    " と置く。", ref("claim_twisted_mode_sets_card"), " により ",
+                    math(String.raw`\mathcal K`), " は有限集合であり、以下の積はすべて有限積である。",
+                    ref("claim_mode_inversion_orbit_cardinality"),
                     " の軌道の集合を ", math(String.raw`\mathfrak M_L^{a,b}:=\{O(m):m\in\mathcal K\}`),
                     " とする。各 ", math(String.raw`O\in\mathfrak M_L^{a,b}`), " の任意の元 ",
                     math(String.raw`m=(\varpi,\varsigma)`), " について ",
@@ -105188,7 +105201,7 @@ z=z^{-1}
                   paragraph([
                     ref("claim_dispersion_inversion_invariant"), " により ", math(String.raw`\Delta_O`),
                     " は元の選択に依らない。逆元操作は互いに可換な対合なので、二つの軌道が交われば一致する。",
-                    ref("claim_twisted_mode_sets_card"), " により ", math(String.raw`\mathcal K`),
+                    "主張文で述べたとおり ", math(String.raw`\mathcal K`),
                     " は有限であり、この集合は ", math(String.raw`\mathfrak M_L^{a,b}`),
                     " によって重複なく分割される。", ref("claim_mode_inversion_orbit_cardinality"),
                     " により軌道の元数は一、二、四だけで、一元軌道の元は ",
