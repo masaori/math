@@ -35,11 +35,10 @@ private theorem rotate_range_of_period {K : Type*} (n : ℕ) (f : ℕ → K)
   rw [List.range_succ, List.map_append, List.map_singleton, hper]
   rfl
 
-/-- 最小元 m から読んだ閉路の点列。 -/
-noncomputable def cyclePointsOf {A : Set J} (τ υ : FixedPointFreeInvolution {x // x ∈ A})
-    (m : {x // x ∈ A}) : List J :=
-  (List.range (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m)).map
-    (fun r => (finiteMapIterate (matchingPairPermutation τ υ) r m).1)
+/-- 周期と反復を指定した軌道を、始点から一周期だけ読む点列。 -/
+def cyclePointsOf {K : Type*} (period : K → ℕ) (iterate : ℕ → K → K)
+    (point : K → J) (m : K) : List J :=
+  (List.range (period m)).map (fun r => point (iterate r m))
 
 /-- 各点から選んだ代表点の集合。成分の最小元を選ぶ場合に閉路の最小元集合となる。 -/
 noncomputable def cycleMinimaOf {K : Type*} [Fintype K] (minimum : K → K) : Finset K := by
@@ -54,7 +53,8 @@ theorem mem_cycleMinimaOf {K : Type*} [Fintype K] (minimum : K → K) (x : K) :
 /-- 閉路を最小元の昇順に並べた点列の列。 -/
 noncomputable def cycleWordsOf {A : Set J} (τ υ : FixedPointFreeInvolution {x // x ∈ A}) :
     List (List J) :=
-  ((cycleMinimaOf (matchingPairComponentMinimum τ υ)).sort (· ≤ ·)).map (cyclePointsOf τ υ)
+  ((cycleMinimaOf (matchingPairComponentMinimum τ υ)).sort (· ≤ ·)).map (cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val)
 
 section Facts
 
@@ -99,7 +99,9 @@ theorem cycle_period_necSuf (m : {x // x ∈ A}) :
   exact matchingPairPermutation_even_orbit _ _ m
 
 theorem cyclePoints_even_necSuf (m : {x // x ∈ A}) :
-    cyclePointsOf τ υ m ≠ [] ∧ Even (cyclePointsOf τ υ m).length := by
+    cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m ≠ [] ∧ Even (cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m).length := by
   obtain ⟨hpos, hev, _⟩ := cycle_period_necSuf A τ υ m
   unfold cyclePointsOf
   refine ⟨?_, by simpa using hev⟩
@@ -112,7 +114,8 @@ theorem cycle_pairs_D_necSuf (D' : Set (Set J)) (mate : J → J)
     (hτ' : ∀ i, (τ.val i).1 = mate i.1)
     (hD' : ∀ e, ({e, mate e} : Set J) ∈ D')
     (i : {x // x ∈ A}) :
-    ∀ p ∈ pairChunks (cyclePointsOf τ υ (matchingPairComponentMinimum τ υ i)),
+    ∀ p ∈ pairChunks (cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val (matchingPairComponentMinimum τ υ i)),
       ({p.1, p.2} : Set J) ∈ D' := by
   intro p hp
   set m := matchingPairComponentMinimum τ υ i
@@ -141,7 +144,8 @@ theorem cycle_pairs_reference_necSuf (D₀' : Set (Set J)) (mate : J → J)
     (hυ' : ∀ i, (υ.val i).1 = mate i.1)
     (hD₀' : ∀ e, ({e, mate e} : Set J) ∈ D₀')
     (i : {x // x ∈ A}) :
-    ∀ p ∈ pairChunks ((cyclePointsOf τ υ (matchingPairComponentMinimum τ υ i)).rotate 1),
+    ∀ p ∈ pairChunks ((cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val (matchingPairComponentMinimum τ υ i)).rotate 1),
       ({p.1, p.2} : Set J) ∈ D₀' := by
   intro p hp
   set m := matchingPairComponentMinimum τ υ i
@@ -170,7 +174,8 @@ theorem cycle_pairs_reference_necSuf (D₀' : Set (Set J)) (mate : J → J)
   exact hD₀' _
 
 theorem cyclePoints_mem_component_necSuf (m : {x // x ∈ A}) (x : J)
-    (hx : x ∈ cyclePointsOf τ υ m) :
+    (hx : x ∈ cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m) :
     ∃ h : x ∈ A, (⟨x, h⟩ : {x // x ∈ A}) ∈ matchingPairComponent τ υ m := by
   unfold cyclePointsOf at hx
   obtain ⟨r, _, rfl⟩ := List.mem_map.mp hx
@@ -178,7 +183,8 @@ theorem cyclePoints_mem_component_necSuf (m : {x // x ∈ A}) (x : J)
   rw [← matchingPairPermutation_orbit_eq_component]
   exact ⟨r, Or.inl rfl⟩
 
-theorem cyclePoints_nodup_necSuf (m : {x // x ∈ A}) : (cyclePointsOf τ υ m).Nodup := by
+theorem cyclePoints_nodup_necSuf (m : {x // x ∈ A}) : (cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m).Nodup := by
   unfold cyclePointsOf
   apply List.Nodup.map_on _ List.nodup_range
   intro r hr s hs hrs
@@ -189,7 +195,9 @@ theorem cyclePoints_nodup_necSuf (m : {x // x ∈ A}) : (cyclePointsOf τ υ m).
 
 theorem cyclePoints_disjoint_necSuf (m₁ m₂ : {x // x ∈ A})
     (h₁ : m₁ ∈ cycleMinimaOf (matchingPairComponentMinimum τ υ)) (h₂ : m₂ ∈ cycleMinimaOf (matchingPairComponentMinimum τ υ)) (hne : m₁ ≠ m₂) :
-    List.Disjoint (cyclePointsOf τ υ m₁) (cyclePointsOf τ υ m₂) := by
+    List.Disjoint (cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m₁) (cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m₂) := by
   intro x hx₁ hx₂
   obtain ⟨i₁, rfl⟩ := (mem_cycleMinimaOf _ _).mp h₁
   obtain ⟨i₂, rfl⟩ := (mem_cycleMinimaOf _ _).mp h₂
@@ -260,7 +268,8 @@ theorem cycleWords_complete_necSuf :
         exact Or.inl (finitePermutationOrbit_self_mem _ _)
       obtain ⟨r, hr⟩ := (finitePermutationOrbitEnumeration_bijective
         (matchingPairPermutation τ υ) m).2 ⟨xx, horbit⟩
-      refine List.mem_flatten.mpr ⟨cyclePointsOf τ υ m,
+      refine List.mem_flatten.mpr ⟨cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m,
         List.mem_map.mpr ⟨m, (Finset.mem_sort _).mpr hm, rfl⟩, ?_⟩
       refine List.mem_map.mpr ⟨r.val, List.mem_range.mpr r.isLt, ?_⟩
       exact congrArg (fun y => y.1.1) hr
