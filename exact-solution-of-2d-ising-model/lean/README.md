@@ -806,7 +806,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `def_finite_sum_of_complex_numbers_over_row_configurations` / `def_finite_sum_of_real_numbers_over_row_configurations` | `Ising2D.finset_sum_spinConf_complex_eq_finite_sum_over_row_configurations` / `finset_sum_spinConf_real_eq_finite_sum_over_row_configurations`（Lean の `SpinConf M` の上の `Finset.sum` が本文の `Σ_{k=1}^{2^{M_col}} a(ord^{-1}(k))` に等しいことを述べる補題） | `PartitionFunction/TransferMatrixRepresentation/DefinitionFiniteSumOverRowConfigurations.lean` |
 | `def_transfer_matrix` | **`Ising2D.V1` / `Ising2D.V2`**（定義式は `V1_apply_configBasisIso` / `V2_apply_configBasisIso`） | `PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean` |
 | `def_lattice_size` / `def_partition_function_2d_ising` | `Ising2D.partitionFunction` | `PartitionFunction/TransferMatrixRepresentation/DefinitionPartitionFunction.lean` |
-| `partition_function_via_transfer_matrix` | `Ising2D.partition_function_via_transfer_matrix`（`K_1, K_2 > 0`、`N_row ≥ 1`。途中は `V1_mul_V2_apply` / `rowsToLattice`） | `PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean` |
+| `partition_function_via_transfer_matrix` | `Ising2D.partition_function_via_transfer_matrix`（`K_1, K_2 > 0`、`N_row ≥ 1`。途中は `V1_mul_V2_apply` / `rowsToLattice`、中間目標「行列の冪の成分」「トレースの展開」は証明の中の `hpow`・`htrace`。「トレースの展開」を必要十分版 `NecSuf.trace_pow_succ` の特殊化として得る導出は `trace_V1_mul_V2_pow_succ_of_necSuf`（`ClaimPartitionFunctionViaTransferMatrixFromNecSuf.lean`）） | `PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean` |
 | `def_config_basis_iso` | `Ising2D.configBasisIso` / `sgn` / `basisVec` | `PartitionFunction/TransferMatrixRepresentation/DefinitionConfigBasisIso.lean` |
 | `config_numbering_equals_kronecker_numbering` | `Ising2D.config_numbering_equals_kronecker_numbering`（`ν` は `kroneckerNumbering`） | `PartitionFunction/TransferMatrixRepresentation/ClaimConfigNumberingEqualsKroneckerNumbering.lean` |
 | `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec` ほか | `PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean` |
@@ -852,7 +852,9 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
   （`exp_smul_sigmaX`）は、冪の等式（`siteOp_pow`）・部分和の像（連続線型写像による級数の像）・
   極限の一意性の 3 段で書いた。人手の「成分ごとの極限」は、有限次元の行列空間の位相での極限として扱っている。
 * `partition_function_via_transfer_matrix` の中間目標「行列の冪の成分」(*) と「トレースの展開」は、
-  必要十分版 `NecSuf.trace_pow_succ`（任意の可換半環上の行列）の系として得ている。
+  証明の中の `hpow`（`r` の帰納法）・`htrace` で本文どおりに書いた。人手の (R) による `𝔐` 上の和への付け替えは、
+  Lean の添字が `Conf M` なので段にならない。同じ等式を必要十分版 `NecSuf.trace_pow_succ` の特殊化として得る導出は
+  `ClaimPartitionFunctionViaTransferMatrixFromNecSuf.lean` に置いた。
 * 人手が仮定する `K_1, K_2 > 0` のうち、`V1`, `V2`, `partitionFunction` の定義と
   `first_transfer_matrix_pauli_form` の証明は正値性を使わないので、Lean では仮定に置いていない。
   `partition_function_via_transfer_matrix` の証明も正値性を使わないが、主張を人手どおりにするため

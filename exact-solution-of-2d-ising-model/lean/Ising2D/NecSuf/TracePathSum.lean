@@ -3,12 +3,13 @@
 
 対応する人手証明のラベル: **`partition_function_via_transfer_matrix`**
 （転送行列による表示の章 `structured-latex/content/partition_function_transfer_matrix_representation.ts` の中間目標「行列の冪の成分」と
-「トレースの展開」。具体版は `Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean`）
+「トレースの展開」。具体版は `Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean` の証明の中の `hpow`・`htrace`、
+「トレースの展開」をこのファイルの `trace_pow_succ` の特殊化として得る導出は同じフォルダの `ClaimPartitionFunctionViaTransferMatrixFromNecSuf.lean`）
 
 ## この主張に本質的に効いている構造は何か
 
-人手証明の Step 2（`(A^m)_{μ,μ'} = ∑_{中間配置} ∏_k A_{μ^{(k)},μ^{(k+1)}}`）と
-Step 3（`tr(A^M) = ∑_{全配置} ∏_k A_{μ^{(k)},μ^{(k+1)}}`、ただし `μ^{(M+1)} = μ^{(1)}`）に
+人手証明の中間目標「行列の冪の成分」（`(A^m)_{μ,μ'} = ∑_{中間配置} ∏_k A_{μ^{(k)},μ^{(k+1)}}`）と
+中間目標「トレースの展開」（`tr(A^M) = ∑_{全配置} ∏_k A_{μ^{(k)},μ^{(k+1)}}`、ただし `μ^{(M+1)} = μ^{(1)}`）に
 効いているのは、次の 2 点だけである。
 
 * 行列の積とトレースの定義（有限和・有限積の組み替え）。
@@ -71,7 +72,7 @@ theorem openW_snoc (A : Matrix ι ι R) {n : ℕ} (w : Fin (n + 1) → ι) (c j 
 
 /-! ## 冪の成分と、トレース -/
 
-/-- **人手証明 Step 2**: `(A^{n+1})_{i,j}` は長さ `n+1` の道の重みの総和である。 -/
+/-- **人手証明の中間目標「行列の冪の成分」**: `(A^{n+1})_{i,j}` は長さ `n+1` の道の重みの総和である。 -/
 theorem pow_succ_apply_eq_sum (A : Matrix ι ι R) :
     ∀ (n : ℕ) (i j : ι), (A ^ (n + 1)) i j = ∑ p : Fin n → ι, openW A (Fin.cons i p) j
   | 0, i, j => by
@@ -93,7 +94,7 @@ theorem pow_succ_apply_eq_sum (A : Matrix ι ι R) :
       refine Finset.sum_congr rfl fun c _ => Finset.sum_congr rfl fun p _ => ?_
       rw [Fin.cons_snoc_eq_snoc_cons, openW_snoc]
 
-/-- **人手証明 Step 3**: `tr(A^{n+1})` は「閉じた道」（周期境界条件つきの配置）の
+/-- **人手証明の中間目標「トレースの展開」**: `tr(A^{n+1})` は「閉じた道」（周期境界条件つきの配置）の
 重みの総和である。 -/
 theorem trace_pow_succ (A : Matrix ι ι R) (m : ℕ) :
     (A ^ (m + 1)).trace
