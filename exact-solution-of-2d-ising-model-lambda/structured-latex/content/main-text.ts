@@ -111904,7 +111904,7 @@ const chapter_fisher_zero_density = defineSection({
 &\le\frac{2L^{2}}{L^{2}}
 &&(\because\ \lvert\mathcal{F}_{L}\rvert\le2L^{2}\ (\blkref{claim_fisher_zero_set_finite_card_bound})\text{ を正の分母 }L^{2}\text{ で割る})\\
 &=2
-&&(\because\ L^{2}\ne0\text{ による約分。}\mathbb{Q}\text{ の四則})
+&&(\because\ L^{2}\ne0\text{ による約分、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         paragraph([
                           "この議論は自然数と有理数の大小だけで閉じており、実数体も複素数体も現れない。",
