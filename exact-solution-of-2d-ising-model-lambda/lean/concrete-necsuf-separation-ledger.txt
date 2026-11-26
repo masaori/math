@@ -22,7 +22,6 @@ DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycle_period_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.iterate_color_parity_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.iterate_succ_val_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.minimum_self_and_color
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.outside_mate_outside
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.tagged_alternating_cycles_matching_sign_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.tagged_cycle_term_split_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.tagged_matching_term_oriented_necSuf

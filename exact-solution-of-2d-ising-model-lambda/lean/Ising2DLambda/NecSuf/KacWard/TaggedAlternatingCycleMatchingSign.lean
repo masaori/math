@@ -62,14 +62,16 @@ variable (D D₀ : PerfectMatching J) (A : Set J) (τ υ : FixedPointFreeInvolut
   (hυ : ∀ i, (υ.val i).1 = perfectMatchingMate D₀ i.1)
   (hout : ∀ e, e ∉ A → perfectMatchingMate D₀ e = perfectMatchingMate D e)
 
-omit [LinearOrder J] in
-include hτ in
-/-- A の外の点の D の相手も A の外にある。τ が A を D の相手で閉じるから。 -/
-theorem outside_mate_outside (e : J) (he : e ∉ A) : perfectMatchingMate D e ∉ A := by
+omit [Fintype J] [LinearOrder J] in
+/-- 対合が A を保てば、A の外も保つ。 -/
+theorem outside_mate_outside (mate : J → J) (A : Set J)
+    (hinv : ∀ e, mate (mate e) = e)
+    (hclosed : ∀ e, e ∈ A → mate e ∈ A)
+    (e : J) (he : e ∉ A) : mate e ∉ A := by
   intro hm
   apply he
-  have h := (τ.val ⟨_, hm⟩).2
-  rwa [hτ, perfectMatchingMate_involutive D e] at h
+  have h := hclosed (mate e) hm
+  rwa [hinv] at h
 
 /-- 最小元は自分の成分の最小元であり、第一色に属する。 -/
 theorem minimum_self_and_color (i : {x // x ∈ A}) :
@@ -231,7 +233,11 @@ theorem commonPairs_outside_necSuf (x : J) (hx : x ∈ matchingPairWord (commonP
   simp only [List.mem_cons, List.not_mem_nil, or_false] at hxp
   rcases hxp with rfl | rfl
   · exact he'.1
-  · exact outside_mate_outside D A τ hτ e he'.1
+  · exact outside_mate_outside (perfectMatchingMate D) A
+      (perfectMatchingMate_involutive D)
+      (fun e he => by
+        have h := (τ.val ⟨e, he⟩).2
+        rwa [hτ] at h) e he'.1
 
 theorem commonPairs_nodup_necSuf : (matchingPairWord (commonPairsOf D A)).Nodup := by
   exact matchingPairOutsideEnumeration_nodup (perfectMatchingMate D) A
@@ -266,7 +272,11 @@ theorem cycleWords_complete_necSuf :
       refine List.mem_map.mpr ⟨r.val, List.mem_range.mpr r.isLt, ?_⟩
       exact congrArg (fun y => y.1.1) hr
     · apply List.mem_append_right
-      have hout' := outside_mate_outside D A τ hτ x hx
+      have hout' := outside_mate_outside (perfectMatchingMate D) A
+        (perfectMatchingMate_involutive D)
+        (fun e he => by
+          have h := (τ.val ⟨e, he⟩).2
+          rwa [hτ] at h) x hx
       rcases lt_or_gt_of_ne (perfectMatchingMate_ne D x).symm with hlt | hgt
       · refine List.mem_flatMap.mpr ⟨(x, perfectMatchingMate D x), ?_, by simp⟩
         exact List.mem_map.mpr ⟨x, (Finset.mem_sort _).mpr
