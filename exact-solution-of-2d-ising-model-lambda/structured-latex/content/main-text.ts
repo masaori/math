@@ -99175,7 +99175,7 @@ d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ 
                       paragraph(["軌道は ", ref("def_finite_permutation_orbit"), " の意味である。辺長一で長短の対の端点が一致しても、標識と二歩の順序は保持する。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_tagged_difference_two_step_orbit"), " の制限 ", math(String.raw`m_D^{\mathcal A},m_{\mathcal D_0}^{\mathcal A}`), " は、", math(String.raw`D`), " と基準完全マッチング ", math(String.raw`\mathcal D_0`), " の相手写像を有限集合 ", math(String.raw`V_{\mathcal A}`), " へ制限したものである。", ref("claim_perfect_matching_involution"), " により各制限は不動点のない対合である。"]),
+                      paragraph([ref("claim_tagged_difference_two_step_orbit"), " の制限 ", math(String.raw`m_D^{\mathcal A},m_{\mathcal D_0}^{\mathcal A}`), " は、", math(String.raw`D`), " と基準完全マッチング ", math(String.raw`\mathcal D_0`), "（", ref("claim_reference_long_matching"), "）の相手写像を有限集合 ", math(String.raw`V_{\mathcal A}`), " へ制限したものである。", ref("claim_perfect_matching_involution"), " により各制限は不動点のない対合である。"]),
                       paragraph([ref("claim_tagged_difference_two_step_orbit"), " の定義から、その二対合の合成は ", math(String.raw`F_{\mathcal A}`), " である。よって ", ref("claim_matching_pair_orbit_separation"), " を第一の相手 ", math(String.raw`m_D^{\mathcal A}`), "、第二の相手 ", math(String.raw`m_{\mathcal D_0}^{\mathcal A}`), " に適用すると、", math(String.raw`m_D^{\mathcal A}(\vec e)=m_D(\vec e)`), " だから表示した空共通部分を得る。使った集合は有限であり、実数体と複素数体は現れない。"]),
                     ],
                   },
@@ -99213,10 +99213,10 @@ d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ 
                     ],
                     proof: [
                       paragraph([ref("claim_tagged_difference_active_mates"), " と ", ref("claim_perfect_matching_involution"), " により、活動点上の ", math(String.raw`m_D,m_{\mathcal D_0}`), " は不動点のない二つの対合である。", ref("claim_tagged_difference_two_step_orbit"), " の二歩はこの二対合の合成であり、", ref("claim_tagged_difference_orbit_separation"), " により二つの二歩軌道は交わらない。"]),
-                      paragraph([ref("claim_matching_pair_permutation"), " により ", math(String.raw`\sigma`), " は置換である。", ref("claim_matching_pair_even_orbit"), " により軌道長は偶数である。", ref("claim_finite_permutation_orbit_enumeration"), " により最小正周期未満の反復回数と軌道上の点は一対一に対応し、", ref("claim_matching_pair_reconstructed_orbit"), " によりその軌道は二歩軌道の合併と一致する。従って列 ", math(String.raw`c(0),\ldots,c(n-1)`), " は相異なる点をちょうど一度ずつ並べる。"]),
+                      paragraph([ref("claim_matching_pair_permutation"), " により ", math(String.raw`\sigma`), " は置換である。", ref("claim_matching_pair_even_orbit"), " により軌道長は偶数である。", ref("claim_finite_permutation_orbit_enumeration"), " により最小正周期未満の反復回数と軌道上の点は一対一に対応し、", ref("claim_matching_pair_reconstructed_orbit"), " によりその軌道は ", math(String.raw`m`), " を含む二歩軌道の合併と一致する。", ref("def_matching_pair_component_minimum"), " により ", math(String.raw`m`), " は ", math(String.raw`\vec e`), " を含む二歩軌道の合併に属するので、", ref("claim_matching_pair_component_basepoint"), " により二つの合併は一致する。従って列 ", math(String.raw`c(0),\ldots,c(n-1)`), " は相異なる点をちょうど一度ずつ並べる。"]),
                       paragraph(["周期の帰還と列の定義から次を得る。"]),
                       displayMath(String.raw`\begin{aligned}
-c(n)&=c(0)&& (\because\ \blkref{def_finite_permutation_minimal_period}\text{ の帰還と列の定義})\\
+c(n)&=c(0)&& (\because\ \blkref{def_finite_permutation_minimal_period}\text{ の帰還（}\blkref{claim_finite_permutation_positive_return}\text{ の正の帰還時刻の最小元）と列の定義})\\
 &=m&& (\because\ \text{上の }c(0)\text{ の定義})
 \end{aligned}`),
                       paragraph([ref("def_matching_pair_successor"), " により、第一色にいる点の次は短い相手、第二色にいる点の次は長い相手である。", ref("claim_matching_pair_successor_color"), " により後続のたびに色が反転するから、閉路の対は長短交互である。偶数長なので最後から最初への対も交替を保つ。各相手は不動点を持たないので最小の閉路長は二である。辺長一でも標識付きの二対は異なる。"]),
