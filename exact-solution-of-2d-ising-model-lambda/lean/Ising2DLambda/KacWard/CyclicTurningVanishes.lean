@@ -1,16 +1,8 @@
 /-
-章「離散 Whitney 系: トーラス上の閉歩道の回転数」の「閉歩道の循環総回転数は 4 の倍数である」
-（`claim_cyclic_total_turning_multiple_of_four`）の具体版（人手証明と 1 対 1 に対応させる）。
-
-  人手証明                                    このファイル
-  射影 π₄ : ℤ → ℤ/4ℤ                          整数キャスト `fun n : ℤ => (n : ZMod 4)`
-  π₄(0) は零元・π₄ の加法性                    `Int.cast_zero`・`Int.cast_add`
-  一歩は方向番号を回転数だけ進める             方向の更新 `fun a n => a + (n : ZMod 4)`（定義）
-  端の方向番号の差は総回転数（帰納法）         `direction_add_turns`
-  両辺に加法逆元を加えて簡約                   `add_left_cancel`
-  剰余類の等号 ⇔ 4 の倍数                      `ZMod.intCast_zmod_eq_zero_iff_dvd`
-
-住処: 人手証明のこのブロックは Z（ℤ/4ℤ）を宣言している。ℝ / ℂ は現れない。
+章「離散 Whitney 系: トーラス上の閉歩道の回転数」の四を法とする剰余類への射影
+`def_direction_residue_projection` の具体版。閉歩道の循環総回転数が 4 の倍数であることの具体版は、
+実際の向き付き辺列について `WalkDirectionDifference.lean` に置く。
+住処: ℤ と ℤ/4ℤ。ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.KacWard.Turn
 import Mathlib.Data.ZMod.Basic
@@ -24,42 +16,5 @@ theorem directionResidueProjection_add (a b : ℤ) :
     directionResidueProjection (a + b) =
       directionResidueProjection a + directionResidueProjection b := by
   simp [directionResidueProjection]
-
-private theorem direction_add_turns (d : ZMod 4) (steps : List ℤ) :
-    steps.foldl (fun (a : ZMod 4) (n : ℤ) => a + (n : ZMod 4)) d
-      = d + ((steps.sum : ℤ) : ZMod 4) := by
-  induction steps generalizing d with
-  | nil => simp
-  | cons head tail ih =>
-    simp only [List.foldl_cons, ih, List.sum_cons, Int.cast_add]
-    rw [add_assoc]
-
-/-- 閉歩道の循環総回転数の剰余類は零である（ℤ/4ℤ に固定した具体版）。
-`turns` は開いた部分の一歩の回転数の列、`closing` は終辺から始辺への一歩、
-`d` は始辺の方向番号にあたる。仮定 `hclosed` が閉性（一周して方向番号が戻ること）である。 -/
-theorem cyclic_total_turning_vanishes (d : ZMod 4) (turns : List Turn) (closing : Turn)
-    (hclosed :
-      (turns.map turnValue).foldl (fun (a : ZMod 4) (n : ℤ) => a + (n : ZMod 4)) d
-        + ((turnValue closing : ℤ) : ZMod 4) = d) :
-    (((turns.map turnValue).sum + turnValue closing : ℤ) : ZMod 4) = 0 := by
-  have hsum : d + (((turns.map turnValue).sum : ℤ) : ZMod 4)
-      + ((turnValue closing : ℤ) : ZMod 4) = d := by
-    rw [← direction_add_turns]
-    exact hclosed
-  have hcancel : d + ((((turns.map turnValue).sum : ℤ) : ZMod 4)
-      + ((turnValue closing : ℤ) : ZMod 4)) = d + 0 := by
-    rw [← add_assoc, hsum, add_zero]
-  rw [Int.cast_add]
-  exact add_left_cancel hcancel
-
-/-- 循環総回転数は 4 の倍数である（整数の整除としての言い換え）。 -/
-theorem four_dvd_cyclic_total_turning (d : ZMod 4) (turns : List Turn) (closing : Turn)
-    (hclosed :
-      (turns.map turnValue).foldl (fun (a : ZMod 4) (n : ℤ) => a + (n : ZMod 4)) d
-        + ((turnValue closing : ℤ) : ZMod 4) = d) :
-    (4 : ℤ) ∣ ((turns.map turnValue).sum + turnValue closing) := by
-  have h := cyclic_total_turning_vanishes d turns closing hclosed
-  simpa using (ZMod.intCast_zmod_eq_zero_iff_dvd
-    ((turns.map turnValue).sum + turnValue closing) 4).mp h
 
 end Ising2DLambda.KacWard

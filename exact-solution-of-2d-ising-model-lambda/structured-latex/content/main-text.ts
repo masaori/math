@@ -81780,6 +81780,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           habitat: "Z",
                           verification: ["sagemath/check/cyclic-turning-multiple-of-four"],
                           lean: [
+                            "Ising2DLambda.KacWard.walk_direction_difference",
                             "Ising2DLambda.NecSuf.KacWard.foldl_add_of_additive_necSuf",
                           ],
                           statement: [
@@ -81849,10 +81850,10 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                       habitat: "Z",
                       verification: ["sagemath/check/cyclic-turning-multiple-of-four"],
                       lean: [
-                        "Ising2DLambda.KacWard.cyclic_total_turning_vanishes",
-                        "Ising2DLambda.KacWard.four_dvd_cyclic_total_turning",
+                        "Ising2DLambda.KacWard.cyclicTotalTurning_residue_eq_zero",
+                        "Ising2DLambda.KacWard.four_dvd_cyclicTotalTurning",
                         "Ising2DLambda.NecSuf.KacWard.closed_walk_additive_vanishes_necSuf",
-                        "Ising2DLambda.KacWard.cyclic_total_turning_vanishes_from_necSuf",
+                        "Ising2DLambda.KacWard.cyclicTotalTurning_residue_eq_zero_from_necSuf",
                       ],
                       statement: [
                         paragraph([
@@ -94401,6 +94402,97 @@ t_{\circ}(R)&=\vartheta(a,b)+\vartheta(b,a)
                 element: {
                   kind: "elementGroup",
                   id: "group_of_kac_ward_claim_four_part_adjacent_sum",
+                  beforeFocus: [
+                    {
+                      role: "prerequisiteDefinition",
+                      element: {
+                        id: "kac_ward_definition_lattice_turning_weight",
+                        kind: "definition",
+                        title: { text: "整数ベクトルの組の回転の重み" },
+                        labels: ["def_lattice_turning_weight"],
+                        habitat: "Z",
+                        lean: ["Ising2DLambda.KacWard.latticeStepTurning"],
+                        statement: [
+                          paragraph([
+                            "整数ベクトル ", math(String.raw`r=(r_1,r_2),s=(s_1,s_2)\in\mathbb Z^2`), " に対し、",
+                          ]),
+                          displayMath(String.raw`\vartheta(r,s):=r_2s_1-r_1s_2\in\mathbb Z`),
+                          paragraph([
+                            "と定める。右辺は整数の積と差だけで書かれるので、値は ", math(String.raw`\mathbb Z`), " に属する。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "prerequisiteDefinition",
+                      element: {
+                        id: "kac_ward_definition_finite_sequence_concatenation",
+                        kind: "definition",
+                        title: { text: "写像の列の連結" },
+                        labels: ["def_finite_sequence_concatenation"],
+                        habitat: "Z",
+                        lean: ["Ising2DLambda.KacWard.joinDirectionSequence"],
+                        statement: [
+                          paragraph([
+                            "二つの写像 ", math(String.raw`p,q:\mathbb N\to\mathbb Z^2`), " と正の自然数 ",
+                            math(String.raw`n\in\mathbb N`), " に対し、長さ ", math(String.raw`n`), " での連結 ",
+                            math(String.raw`p*_{n}q:\mathbb N\to\mathbb Z^2`), " を",
+                          ]),
+                          displayMath(String.raw`(p*_{n}q)_j:=\begin{cases}p_j,&0\le j<n,\\q_{j-n},&j\ge n\end{cases}\quad(j\in\mathbb N)`),
+                          paragraph([
+                            "で定める。", math(String.raw`j\ge n`), " のとき ", math(String.raw`j-n\in\mathbb N`),
+                            " なので、右辺は ", math(String.raw`\mathbb N`), " 上で定まる。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "prerequisiteDefinition",
+                      element: {
+                        id: "kac_ward_definition_internal_adjacent_sum",
+                        kind: "definition",
+                        title: { text: "写像の列の内部和" },
+                        labels: ["def_internal_adjacent_sum"],
+                        habitat: "Z",
+                        lean: ["Ising2DLambda.KacWard.internalAdjacentSum"],
+                        statement: [
+                          paragraph([
+                            "写像 ", math(String.raw`p:\mathbb N\to\mathbb Z^2`), " と正の自然数 ",
+                            math(String.raw`n\in\mathbb N`), " に対し、長さ ", math(String.raw`n`), " の内部和を、",
+                            "回転の重み ", math(String.raw`\vartheta`), "（", ref("def_lattice_turning_weight"), "）を用いて",
+                          ]),
+                          displayMath(String.raw`I_n(p):=\sum_{j=0}^{n-2}\vartheta(p_j,p_{j+1})\in\mathbb Z`),
+                          paragraph([
+                            "で定める。", math(String.raw`n=1`), " では空和の零である。有限個の整数の和なので値は ",
+                            math(String.raw`\mathbb Z`), " に属する。",
+                          ]),
+                        ],
+                      },
+                    },
+                    {
+                      role: "prerequisiteDefinition",
+                      element: {
+                        id: "kac_ward_definition_cyclic_adjacent_sum",
+                        kind: "definition",
+                        title: { text: "写像の列の循環隣接和" },
+                        labels: ["def_cyclic_adjacent_sum"],
+                        habitat: "Z",
+                        lean: ["Ising2DLambda.KacWard.cyclicAdjacentSum"],
+                        statement: [
+                          paragraph([
+                            "写像 ", math(String.raw`p:\mathbb N\to\mathbb Z^2`), " と正の自然数 ",
+                            math(String.raw`n\in\mathbb N`), " に対し、長さ ", math(String.raw`n`), " の循環隣接和を、",
+                            "内部和 ", math(String.raw`I_n`), "（", ref("def_internal_adjacent_sum"), "）と回転の重み ",
+                            math(String.raw`\vartheta`), "（", ref("def_lattice_turning_weight"), "）を用いて",
+                          ]),
+                          displayMath(String.raw`C_n(p):=I_n(p)+\vartheta(p_{n-1},p_0)\in\mathbb Z`),
+                          paragraph([
+                            "で定める。", math(String.raw`n\ge1`), " なので ", math(String.raw`n-1\in\mathbb N`), " である。",
+                          ]),
+                        ],
+                      },
+                    },
+                  ],
                   focus: {
                     id: "kac_ward_claim_four_part_adjacent_sum",
                     kind: "claim",
@@ -94422,19 +94514,10 @@ t_{\circ}(R)&=\vartheta(a,b)+\vartheta(b,a)
                         math(String.raw`u,v,w,x`), " を取る。添字は零から始める。添字計算のため、",
                         "各列の末尾より後ろを零ベクトルで補って ", math(String.raw`\mathbb N\to\mathbb Z^2`),
                         " の写像とみなす。この延長は有限列から一意に決まり、使うのは元の有限個の項だけである。",
-                        "整数ベクトル ", math(String.raw`r=(r_1,r_2),s=(s_1,s_2)\in\mathbb Z^2`),
-                        " に対し ", math(String.raw`\vartheta(r,s):=r_2s_1-r_1s_2\in\mathbb Z`),
-                        " と置く。二つの有限列を零で補った写像 ", math(String.raw`p,q:\mathbb N\to\mathbb Z^2`),
-                        " と正の長さ ", math(String.raw`n\in\mathbb N`), " の連結を",
-                      ]),
-                      displayMath(String.raw`(p*_{n}q)_j:=\begin{cases}p_j,&0\le j<n,\\q_{j-n},&j\ge n\end{cases}\quad(j\in\mathbb N)`),
-                      paragraph([
-                        "と定める。長さ ", math(String.raw`n`), " の内部和と循環隣接和をそれぞれ",
-                      ]),
-                      displayMath(String.raw`I_n(p):=\sum_{j=0}^{n-2}\vartheta(p_j,p_{j+1})\in\mathbb Z,
-\qquad C_n(p):=I_n(p)+\vartheta(p_{n-1},p_0)\in\mathbb Z`),
-                      paragraph([
-                        "と定める。", math(String.raw`n=1`), " では内部和は空和の零である。",
+                        "回転の重み ", math(String.raw`\vartheta`), "（", ref("def_lattice_turning_weight"), "）、連結 ",
+                        math(String.raw`*_{n}`), "（", ref("def_finite_sequence_concatenation"), "）、内部和 ",
+                        math(String.raw`I_n`), "（", ref("def_internal_adjacent_sum"), "）、循環隣接和 ",
+                        math(String.raw`C_n`), "（", ref("def_cyclic_adjacent_sum"), "）を用いる。",
                         "連結列を ", math(String.raw`uv:=u*_{a}v`), "、",
                         math(String.raw`uvw:=uv*_{a+b}w`), "、",
                         math(String.raw`z:=uvw*_{a+b+c}x`), " と書くと、",
@@ -94467,16 +94550,16 @@ C_{a+b+c+d}(z)={}&I_a(u)+\vartheta(u_{a-1},v_0)+I_b(v)+\vartheta(v_{b-1},w_0)\\
 &&\bigl(\because\ a>0\text{ より最初の有限和の末項を取り出す}\bigr).
 \end{aligned}`),
                       paragraph([
-                        "連結の定義では、", math(String.raw`0\le j<a-1`),
+                        "連結の定義（", ref("def_finite_sequence_concatenation"), "）では、", math(String.raw`0\le j<a-1`),
                         " の両方の隣接項が前半にあり、境界の次の項は後半の先頭にある。従って",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \sum_{j=0}^{a-2}\vartheta(y_j,y_{j+1})
 &=\sum_{j=0}^{a-2}\vartheta(u_j,u_{j+1})
-&&\bigl(\because\ j,j+1<a\text{ と連結の定義}\bigr)\\
-&=I_a(u)&&\bigl(\because\ I\text{ の定義}\bigr),\\
+&&\bigl(\because\ j,j+1<a\text{ と }\blkref{def_finite_sequence_concatenation}\bigr)\\
+&=I_a(u)&&\bigl(\because\ \blkref{def_internal_adjacent_sum}\bigr),\\
 \vartheta(y_{a-1},y_a)&=\vartheta(u_{a-1},v_0)
-&&\bigl(\because\ a-1<a,\ a-a=0\text{ と連結の定義}\bigr).
+&&\bigl(\because\ a-1<a,\ a-a=0\text{ と }\blkref{def_finite_sequence_concatenation}\bigr).
 \end{aligned}`),
                       paragraph([
                         "後半では ", math(String.raw`0\le j<b-1`), " に対して ",
@@ -94485,14 +94568,14 @@ C_{a+b+c+d}(z)={}&I_a(u)+\vartheta(u_{a-1},v_0)+I_b(v)+\vartheta(v_{b-1},w_0)\\
                       displayMath(String.raw`\begin{aligned}
 \sum_{j=0}^{b-2}\vartheta(y_{a+j},y_{a+j+1})
 &=\sum_{j=0}^{b-2}\vartheta(v_j,v_{j+1})
-&&\bigl(\because\ \text{連結の定義と }(a+j)-a=j,\ (a+j+1)-a=j+1\bigr)\\
-&=I_b(v)&&\bigl(\because\ I\text{ の定義}\bigr).
+&&\bigl(\because\ \blkref{def_finite_sequence_concatenation}\text{ と }(a+j)-a=j,\ (a+j+1)-a=j+1\bigr)\\
+&=I_b(v)&&\bigl(\because\ \blkref{def_internal_adjacent_sum}\bigr).
 \end{aligned}`),
                       paragraph(["これらを一つの和へ代入する。"]),
                       displayMath(String.raw`\begin{aligned}
 I_{a+b}(y)
 &=\sum_{j=0}^{a+b-2}\vartheta(y_j,y_{j+1})
-&&\bigl(\because\ I\text{ の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_internal_adjacent_sum}\bigr)\\
 &=\left(\sum_{j=0}^{a-2}\vartheta(y_j,y_{j+1})+\vartheta(y_{a-1},y_a)\right)
 +\sum_{j=0}^{b-2}\vartheta(y_{a+j},y_{a+j+1})
 &&\bigl(\because\ \text{上の有限和分割へ }f(j)=\vartheta(y_j,y_{j+1})\text{ を代入}\bigr)\\
@@ -94507,12 +94590,12 @@ I_{a+b}(y)
                         "これは任意の正の二つの長さに対して示された。次に三つの連結の末項と始項を記す。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
-uv_{a+b-1}&=v_{b-1}&&\bigl(\because\ b>0\text{ と連結の定義}\bigr),\\
-uvw_{a+b+c-1}&=w_{c-1}&&\bigl(\because\ c>0\text{ と連結の定義}\bigr),\\
-z_{a+b+c+d-1}&=x_{d-1}&&\bigl(\because\ d>0\text{ と連結の定義}\bigr),\\
-z_0&=uvw_0&&\bigl(\because\ a+b+c>0\text{ と連結の定義}\bigr)\\
-&=uv_0&&\bigl(\because\ a+b>0\text{ と連結の定義}\bigr)\\
-&=u_0&&\bigl(\because\ a>0\text{ と連結の定義}\bigr).
+uv_{a+b-1}&=v_{b-1}&&\bigl(\because\ b>0\text{ と }\blkref{def_finite_sequence_concatenation}\bigr),\\
+uvw_{a+b+c-1}&=w_{c-1}&&\bigl(\because\ c>0\text{ と }\blkref{def_finite_sequence_concatenation}\bigr),\\
+z_{a+b+c+d-1}&=x_{d-1}&&\bigl(\because\ d>0\text{ と }\blkref{def_finite_sequence_concatenation}\bigr),\\
+z_0&=uvw_0&&\bigl(\because\ a+b+c>0\text{ と }\blkref{def_finite_sequence_concatenation}\bigr)\\
+&=uv_0&&\bigl(\because\ a+b>0\text{ と }\blkref{def_finite_sequence_concatenation}\bigr)\\
+&=u_0&&\bigl(\because\ a>0\text{ と }\blkref{def_finite_sequence_concatenation}\bigr).
 \end{aligned}`),
                       paragraph(["二列の分割を外側から三回使う。"]),
                       displayMath(String.raw`\begin{aligned}
@@ -94545,7 +94628,7 @@ I_{a+b+c+d}(z)
                       displayMath(String.raw`\begin{aligned}
 C_{a+b+c+d}(z)
 &=I_{a+b+c+d}(z)+\vartheta(z_{a+b+c+d-1},z_0)
-&&\bigl(\because\ C\text{ の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_cyclic_adjacent_sum}\bigr)\\
 &=S+\vartheta(z_{a+b+c+d-1},z_0)
 &&\bigl(\because\ \text{直前の内部和の等式}\bigr)\\
 &=S+\vartheta(x_{d-1},z_0)
@@ -94600,9 +94683,9 @@ C_{a+b+c+d}(z)
                       paragraph([
                         "で定める。余りは ", math(String.raw`\{0,\ldots,n-1\}`),
                         " の元を取る。反復列は有限列から一意に定まり、任意の無限列を入力にしていない。",
-                        "内部和 ", math(String.raw`I`), " と循環隣接和 ", math(String.raw`C`),
-                        "、整数の重み ", math(String.raw`\vartheta`), " は ",
-                        ref("claim_four_part_adjacent_sum"), " の定義を用いる。このとき",
+                        "内部和 ", math(String.raw`I`), "（", ref("def_internal_adjacent_sum"), "）と循環隣接和 ", math(String.raw`C`),
+                        "（", ref("def_cyclic_adjacent_sum"), "）、整数の重み ", math(String.raw`\vartheta`), "（",
+                        ref("def_lattice_turning_weight"), "）を用いる。このとき",
                       ]),
                       displayMath(String.raw`I_{(c+1)n}(r)-I_{cn}(r)=C_n(\bar u).`),
                       paragraph([
@@ -94632,13 +94715,13 @@ r_{cn-1}
 &=\bar u_{n-1}&&\bigl(\because\ r\text{ の定義と }0\le n-1<n\bigr).
 \end{aligned}`),
                       paragraph([
-                        "連結 ", math(String.raw`*_{cn}`), " は ", ref("claim_four_part_adjacent_sum"),
+                        "連結 ", math(String.raw`*_{cn}`), " は ", ref("def_finite_sequence_concatenation"),
                         " の定義を用いる。", math(String.raw`j<cn`), " なら定義から ",
                         math(String.raw`(r*_{cn}r)_j=r_j`), " であり、", math(String.raw`j\ge cn`), " なら",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 (r*_{cn}r)_j
-&=r_{j-cn}&&\bigl(\because\ j\ge cn\text{ と }\blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr)\\
+&=r_{j-cn}&&\bigl(\because\ j\ge cn\text{ と }\blkref{def_finite_sequence_concatenation}\bigr)\\
 &=r_{cn+(j-cn)}&&\bigl(\because\ \text{上の周期性}\bigr)\\
 &=r_j&&\bigl(\because\ cn+(j-cn)=j\bigr).
 \end{aligned}`),
@@ -94649,10 +94732,10 @@ r_{cn-1}
                       displayMath(String.raw`\begin{aligned}
 I_n(r)
 &=\sum_{j=0}^{n-2}\vartheta(r_j,r_{j+1})
-&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }I\text{ の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_internal_adjacent_sum}\bigr)\\
 &=\sum_{j=0}^{n-2}\vartheta(\bar u_j,\bar u_{j+1})
 &&\bigl(\because\ j,j+1<n\text{ と }r\text{ の定義}\bigr)\\
-&=I_n(\bar u)&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }I\text{ の定義}\bigr).
+&=I_n(\bar u)&&\bigl(\because\ \blkref{def_internal_adjacent_sum}\bigr).
 \end{aligned}`),
                       paragraph([
                         "求める差を二列の内部和へ分け、同じ項を消す。以下では ",
@@ -94674,7 +94757,7 @@ I_{(c+1)n}(r)-A
 &&\bigl(\because\ \mathbb Z\text{ の加法で共通項を消す}\bigr)\\
 &=I_n(\bar u)+\vartheta(\bar u_{n-1},\bar u_0)
 &&\bigl(\because\ \mathbb Z\text{ の加法の交換律}\bigr)\\
-&=C_n(\bar u)&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C\text{ の定義}\bigr).
+&=C_n(\bar u)&&\bigl(\because\ \blkref{def_cyclic_adjacent_sum}\bigr).
 \end{aligned}`),
                       paragraph([
                         "長さ一の内部和は空和なので、同じ計算が成立する。有限列の整数ベクトルと自然数の余り、",
@@ -94738,7 +94821,7 @@ x_i&:=S_{b-(i+1)}-S_{b-i}&&(0\le i<b).
 \end{aligned}`),
                       paragraph([
                         "四列の値は全て ", math(String.raw`\mathbb Z^2`), " に属する。",
-                        "有限列の外を零で補い、連結の記号（", ref("claim_four_part_adjacent_sum"), "）で ",
+                        "有限列の外を零で補い、連結の記号（", ref("def_finite_sequence_concatenation"), "）で ",
                         math(String.raw`z:=((u*_{a}v)*_{a+b}w)*_{a+b+c}x`), " と置く。このとき",
                       ]),
                       displayMath(String.raw`F_{j+1}-F_j=z_j\qquad(0\le j<N)`),
@@ -94760,14 +94843,14 @@ x_i&:=S_{b-(i+1)}-S_{b-i}&&(0\le i<b).
                       displayMath(String.raw`\begin{aligned}
 F_{j+1}-F_j&=P_{j+1}-P_j&&\bigl(\because\ F\text{ の第一の場合}\bigr)\\
 &=u_j&&\bigl(\because\ u\text{ の定義}\bigr)\\
-&=z_j&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義},\ j<a\bigr).
+&=z_j&&\bigl(\because\ \blkref{def_finite_sequence_concatenation},\ j<a\bigr).
 \end{aligned}`),
                       paragraph(["最初の接合点の直前 ", math(String.raw`j=a-1`), " では、"]),
                       displayMath(String.raw`\begin{aligned}
 F_a-F_{a-1}&=Q_0-P_{a-1}&&\bigl(\because\ F\text{ の第一・第二の場合}\bigr)\\
 &=P_a-P_{a-1}&&\bigl(\because\ P_a=Q_0\bigr)\\
 &=u_{a-1}&&\bigl(\because\ u\text{ の定義}\bigr)\\
-&=z_{a-1}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+&=z_{a-1}&&\bigl(\because\ \blkref{def_finite_sequence_concatenation}\bigr).
 \end{aligned}`),
                       paragraph([
                         "第二の区間の内部では ", math(String.raw`j=a+k`), "、",
@@ -94776,14 +94859,14 @@ F_a-F_{a-1}&=Q_0-P_{a-1}&&\bigl(\because\ F\text{ の第一・第二の場合}\b
                       displayMath(String.raw`\begin{aligned}
 F_{a+k+1}-F_{a+k}&=Q_{k+1}-Q_k&&\bigl(\because\ F\text{ の第二の場合}\bigr)\\
 &=v_k&&\bigl(\because\ v\text{ の定義}\bigr)\\
-&=z_{a+k}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+&=z_{a+k}&&\bigl(\because\ \blkref{def_finite_sequence_concatenation}\bigr).
 \end{aligned}`),
                       paragraph(["次の接合点の直前 ", math(String.raw`j=a+b-1`), " では、"]),
                       displayMath(String.raw`\begin{aligned}
 F_{a+b}-F_{a+b-1}&=R_0-Q_{b-1}&&\bigl(\because\ F\text{ の第二・第三の場合}\bigr)\\
 &=Q_b-Q_{b-1}&&\bigl(\because\ Q_b=R_0\bigr)\\
 &=v_{b-1}&&\bigl(\because\ v\text{ の定義}\bigr)\\
-&=z_{a+b-1}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+&=z_{a+b-1}&&\bigl(\because\ \blkref{def_finite_sequence_concatenation}\bigr).
 \end{aligned}`),
                       paragraph([
                         "第三の区間の内部では ", math(String.raw`j=a+b+k`), "、",
@@ -94792,14 +94875,14 @@ F_{a+b}-F_{a+b-1}&=R_0-Q_{b-1}&&\bigl(\because\ F\text{ の第二・第三の場
                       displayMath(String.raw`\begin{aligned}
 F_{a+b+k+1}-F_{a+b+k}&=R_{k+1}-R_k&&\bigl(\because\ F\text{ の第三の場合}\bigr)\\
 &=w_k&&\bigl(\because\ w\text{ の定義}\bigr)\\
-&=z_{a+b+k}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+&=z_{a+b+k}&&\bigl(\because\ \blkref{def_finite_sequence_concatenation}\bigr).
 \end{aligned}`),
                       paragraph(["最後の接合点の直前 ", math(String.raw`j=a+b+c-1`), " では、"]),
                       displayMath(String.raw`\begin{aligned}
 F_{a+b+c}-F_{a+b+c-1}&=S_b-R_{c-1}&&\bigl(\because\ F\text{ の第三・第四の場合}\bigr)\\
 &=R_c-R_{c-1}&&\bigl(\because\ R_c=S_b\bigr)\\
 &=w_{c-1}&&\bigl(\because\ w\text{ の定義}\bigr)\\
-&=z_{a+b+c-1}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+&=z_{a+b+c-1}&&\bigl(\because\ \blkref{def_finite_sequence_concatenation}\bigr).
 \end{aligned}`),
                       paragraph([
                         "第四の区間では ", math(String.raw`j=a+b+c+k`), "、",
@@ -94809,7 +94892,7 @@ F_{a+b+c}-F_{a+b+c-1}&=S_b-R_{c-1}&&\bigl(\because\ F\text{ の第三・第四�
 F_{j+1}-F_j&=S_{N-(j+1)}-S_{N-j}&&\bigl(\because\ F\text{ の第四の場合}\bigr)\\
 &=S_{b-(k+1)}-S_{b-k}&&\bigl(\because\ N=a+2b+c,\ j=a+b+c+k\text{ の添字計算}\bigr)\\
 &=x_k&&\bigl(\because\ x\text{ の定義}\bigr)\\
-&=z_j&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+&=z_j&&\bigl(\because\ \blkref{def_finite_sequence_concatenation}\bigr).
 \end{aligned}`),
                       paragraph([
                         "これらで ", math(String.raw`0\le j<N`), " を尽くす。区間長が一のとき、その区間の内部の場合は空で、接合点の場合が最後の歩を扱う。",
@@ -95467,9 +95550,9 @@ J_c
                         math(String.raw`m,b,n,d,c\in\mathbb N`), " はすべて正とする。長さがそれぞれ ",
                         math(String.raw`m,b,n,d`), " の整数ベクトルの有限列 ",
                         math(String.raw`u,v,r,x`), " を取り、添字を零から始め、範囲外を零ベクトルで補う。",
-                        "連結 ", math(String.raw`*`), "、整数の重み ", math(String.raw`\vartheta`),
-                        "、内部和 ", math(String.raw`I`), "、循環隣接和 ", math(String.raw`C`),
-                        " は ", ref("claim_four_part_adjacent_sum"), " の記号を用いる。反復列と四部分の連結を",
+                        "連結 ", math(String.raw`*`), "（", ref("def_finite_sequence_concatenation"), "）、整数の重み ", math(String.raw`\vartheta`),
+                        "（", ref("def_lattice_turning_weight"), "）、内部和 ", math(String.raw`I`), "（", ref("def_internal_adjacent_sum"),
+                        "）、循環隣接和 ", math(String.raw`C`), "（", ref("def_cyclic_adjacent_sum"), "）を用いる。反復列と四部分の連結を",
                       ]),
                       displayMath(String.raw`\begin{gathered}
 U_j:=u_{j\bmod m},\qquad R_j:=r_{j\bmod n}\quad(j\in\mathbb N),\\
@@ -95606,9 +95689,8 @@ C_{N_{c+1}}\bigl(z^{(c+1)}\bigr)-C_{N_c}\bigl(z^{(c)}\bigr)
                         "）であると仮定する。", math(String.raw`W_n=W_0`),
                         " は仮定せず、整数格子上で端点が異なる周期路も含む。歩ベクトルを ",
                         math(String.raw`u_j:=W_{j+1}-W_j\in\mathbb Z\times\mathbb Z\quad(0\le j<n)`),
-                        " とする。整数の重み ", math(String.raw`\vartheta`),
-                        " と循環隣接和 ", math(String.raw`C_n`), " を ",
-                        ref("claim_four_part_repeated_difference"), " のとおり用いると、",
+                        " とする。整数の重み ", math(String.raw`\vartheta`), "（", ref("def_lattice_turning_weight"),
+                        "）と循環隣接和 ", math(String.raw`C_n`), "（", ref("def_cyclic_adjacent_sum"), "）を用いると、",
                       ]),
                       displayMath(String.raw`t_{\circ}(\Pi(W))
 =C_n(u)
@@ -95677,7 +95759,7 @@ t_{\circ}(\Pi(W))
 &=\sum_{j=0}^{n-2}\vartheta(u_j,u_{j+1})+\vartheta(u_{n-1},u_0)
 &&\bigl(\because\ \text{直前の十二場合の等式を閉じ目へ代入}\bigr)\\
 &=C_n(u)
-&&\bigl(\because\ \blkref{claim_four_part_repeated_difference}\text{ の }C_n\text{ の定義}\bigr).
+&&\bigl(\because\ \blkref{def_cyclic_adjacent_sum}\bigr).
 \end{aligned}`),
                       paragraph(["使うのは有限集合、整数の四則と有限和だけである。"]),
                     ],
@@ -95720,7 +95802,7 @@ t_{\circ}(\Pi(W))
                         math(String.raw`u,v,r,x`), " は ", ref("claim_one_sided_closure_junction_pairs"),
                         " の定義を使い、長さは順に ", math(String.raw`m,b,n,b`),
                         "、値は ", math(String.raw`\mathbb Z^2`), "、範囲外の値は零ベクトルとする。",
-                        "連結と循環隣接和（", ref("claim_four_part_adjacent_sum"), "）を使って、",
+                        "連結（", ref("def_finite_sequence_concatenation"), "）と循環隣接和（", ref("def_cyclic_adjacent_sum"), "）を使って、",
                       ]),
                       displayMath(String.raw`\begin{gathered}
 U_j:=u(j\bmod m),\qquad R_j:=r(j\bmod n)\quad(j\in\mathbb N),\\
@@ -95777,7 +95859,7 @@ cm+b\le j<cm+b+cn&0\le j-cm-b<cn\\
 cm+b+cn\le j<N_c&0\le j-cm-b-cn<b
 \end{array}`),
                       paragraph([
-                        "である（連結の定義は ", ref("claim_four_part_adjacent_sum"),
+                        "である（連結の定義は ", ref("def_finite_sequence_concatenation"),
                         "）。従って、先ほどの四つの等式は、各段で実際に選ばれる添字へ適用できる。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
@@ -95798,13 +95880,13 @@ w^{(c)}_j
                       paragraph([
                         math(String.raw`N_c>0`), " なので末歩と始歩が存在する。整数の重み ",
                         math(String.raw`\vartheta:\mathbb Z^2\times\mathbb Z^2\to\mathbb Z`),
-                        " は ", ref("claim_four_part_adjacent_sum"), " の定義である。求める和は、",
+                        " は ", ref("def_lattice_turning_weight"), " の定義である。求める和は、",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 C_{N_c}\bigl(w^{(c)}\bigr)
 &=\sum_{j=0}^{N_c-2}\vartheta\bigl(w^{(c)}_j,w^{(c)}_{j+1}\bigr)
 +\vartheta\bigl(w^{(c)}_{N_c-1},w^{(c)}_0\bigr)
-&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C\text{ の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_cyclic_adjacent_sum}\bigr)\\
 &=\sum_{j=0}^{N_c-2}\vartheta\bigl(z^{(c)}_j,z^{(c)}_{j+1}\bigr)
 +\vartheta\bigl(w^{(c)}_{N_c-1},w^{(c)}_0\bigr)
 &&\bigl(\because\ w^{(c)}_j=z^{(c)}_j\text{ を内部の各隣接対へ代入}\bigr)\\
@@ -95812,7 +95894,7 @@ C_{N_c}\bigl(w^{(c)}\bigr)
 +\vartheta\bigl(z^{(c)}_{N_c-1},z^{(c)}_0\bigr)
 &&\bigl(\because\ w^{(c)}_j=z^{(c)}_j\text{ を閉じ目へ代入}\bigr)\\
 &=C_{N_c}\bigl(z^{(c)}\bigr)
-&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C\text{ の定義}\bigr)
+&&\bigl(\because\ \blkref{def_cyclic_adjacent_sum}\bigr)
 \end{aligned}`),
                       paragraph(["比較したのは整数格子点の差であり、異なる位置の射影辺を同一視していない。"]),
                     ],
@@ -95848,7 +95930,7 @@ C_{N_c}\bigl(w^{(c)}\bigr)
                     statement: [
                       paragraph(["閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "（", ref("def_closed_nonbacktracking_walk"), "）を取り、", math(String.raw`L,m\in\mathbb N_{>0}`), " とする。添字集合 ", math(String.raw`I_m=\{0,\ldots,m-1\}`), "、整数の余り ", math(String.raw`[h]_m`), " と巡回移動 ", math(String.raw`\rho_k(j)=[j+k]_m`), " は ", ref("claim_cyclic_shift_adjacent_integer_sum"), " の記法を使う。任意の基点添字 ", math(String.raw`k_0\in\mathbb Z`), " に対して、歩ベクトルの写像 ", math(String.raw`u^{(k_0)}:\mathbb N\to\mathbb Z^2`), " を"]),
                       displayMath(String.raw`u^{(k_0)}_j:=\widetilde P_{k_0+j+1}(\gamma)-\widetilde P_{k_0+j}(\gamma)\qquad(j\in\mathbb N)`),
-                      paragraph(["と定める。周期持ち上げは ", ref("def_periodic_plane_lift"), "、整数の重み ", math(String.raw`\vartheta`), " と循環隣接和 ", math(String.raw`C_m`), " は ", ref("claim_four_part_adjacent_sum"), "、循環総回転数は ", ref("def_cyclic_total_turning"), " の定義を使う。このとき"]),
+                      paragraph(["と定める。周期持ち上げは ", ref("def_periodic_plane_lift"), "、整数の重み ", math(String.raw`\vartheta`), "（", ref("def_lattice_turning_weight"), "）と循環隣接和 ", math(String.raw`C_m`), " は ", ref("def_cyclic_adjacent_sum"), "、循環総回転数は ", ref("def_cyclic_total_turning"), " の定義を使う。このとき"]),
                       displayMath(String.raw`C_m\bigl(u^{(k_0)}\bigr)=t_{\circ}(\gamma)\quad\text{in }\mathbb Z`),
                       paragraph(["が成り立つ。頂点の相異性や巻き付きが非零であることは仮定しない。"]),
                     ],
@@ -95902,7 +95984,7 @@ u^{(k_0)}_j
                       displayMath(String.raw`\begin{aligned}
 C_m\bigl(u^{(k_0)}\bigr)
 &=\sum_{j=0}^{m-2}\vartheta(u^{(k_0)}_j,u^{(k_0)}_{j+1})+\vartheta(u^{(k_0)}_{m-1},u^{(k_0)}_0)
-&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C_m\text{ の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_cyclic_adjacent_sum}\bigr)\\
 &=\sum_{j\in I_m}\vartheta(u^{(k_0)}_j,u^{(k_0)}_{\rho_1(j)})
 &&\bigl(\because\ \rho_1\text{ の内部と末尾の値、有限和の分割}\bigr)\\
 &=\sum_{j\in I_m}\vartheta(D_{\rho_{k_0}(j)},u^{(k_0)}_{\rho_1(j)})
@@ -95991,7 +96073,7 @@ C_m\bigl(u^{(k_0)}\bigr)
                         math(String.raw`N_q:=qm+b+qn+b\in\mathbb N_{>0}`), " である。",
                         "循環隣接和 ", math(String.raw`C_\ell(f)\in\mathbb Z`), "（",
                         math(String.raw`\ell\in\mathbb N_{>0},\ f:\mathbb N\to\mathbb Z^2`), "）は ",
-                        ref("claim_four_part_adjacent_sum"), " の定義を使う。",
+                        ref("def_cyclic_adjacent_sum"), " の定義を使う。",
                         "この和は添字零から ", math(String.raw`\ell-1`),
                         " の値だけを読むので、有限列の零による拡張は和を変えない。",
                         "一周期の歩の和は、",

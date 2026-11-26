@@ -1714,6 +1714,7 @@ import Ising2DLambda.NecSuf.KacWard.EdgeSequenceTotalTurning
 import Ising2DLambda.KacWard.EdgeSequenceTotalTurning
 import Ising2DLambda.NecSuf.KacWard.CyclicTotalTurning
 import Ising2DLambda.KacWard.CyclicTotalTurning
+import Ising2DLambda.KacWard.WalkDirectionDifference
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkRotationNumber
 import Ising2DLambda.KacWard.ClosedWalkRotationNumber
 import Ising2DLambda.KacWard.DirectedWindingNumbers
