@@ -39,7 +39,29 @@ theorem horizontalEdge_oddRay_boundary
   · left
     exact ⟨h.2, by simpa using h.1⟩
 
-/-- The same parity statement for the finite odd-ray cell set of an actual walk. -/
+/-- `claim_vertically_adjacent_cells_boundary_parity` を実際の閉歩道について述べたもの。
+零巻き付きから持ち上げの閉性を得て、座標の版に渡す。 -/
+theorem verticallyAdjacentCells_boundaryParity_ofWalk
+    {L m : ℕ} [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0)
+    (r c : ℤ) :
+    (rightRayVerticalCrossingCount γ hγ r c +
+      rightRayVerticalCrossingCount γ hγ (r + 1) c) % 2 =
+        horizontalEdgeTraversalCount (m + 1)
+          (fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1)
+          (fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2) (r + 1) c % 2 := by
+  -- 本文: 零巻き付きなので持ち上げの終点は始点に一致する。
+  have hclosed := liftedWalkCoordinates_closed γ hγ hh hv
+  rw [rightRayVerticalCrossingCount_eq_coordinateSum,
+    rightRayVerticalCrossingCount_eq_coordinateSum]
+  exact verticallyAdjacentCells_boundaryParity (m + 1) _ _ r c
+    hclosed.1 hclosed.2 (liftedWalkCoordinates_unit γ)
+
+/-- `claim_horizontal_walk_edge_odd_boundary`: 実際の閉歩道の有限な内側セル集合について、
+奇数回通る横辺は境界辺である。 -/
 theorem horizontalEdge_oddRay_boundary_ofWalk
     {L m : ℕ} [NeZero L]
     (γ : Fin (m + 1) → OrientedEdge L)
@@ -52,16 +74,34 @@ theorem horizontalEdge_oddRay_boundary_ofWalk
       (fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2) (r + 1) c)) :
     (false, (r + 1, c)) ∈ planeCellBoundary
       (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset := by
-  let row : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).1
-  let col : ℕ → ℤ := fun j => (planeLift γ (Fin.ofNat (m + 2) j)).2
-  have hclosed := liftedWalkCoordinates_closed γ hγ hh hv
-  have hunit := liftedWalkCoordinates_unit γ
-  apply horizontalEdge_oddRay_boundary (m + 1) row col
-    (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
-    hclosed.1 hclosed.2 hunit ?_ r c hodd
-  intro a b
-  simp only [Set.Finite.mem_toFinset, oddRayInteriorCellsOfWalk, Set.mem_setOf_eq]
-  rw [rightRayVerticalCrossingCount_eq_coordinateSum]
+  let cells := (oddRayInteriorCellsOfWalk_finite γ hγ hh hv).toFinset
+  have hcell : ∀ a b : ℤ,
+      (a, b) ∈ cells ↔ Odd (rightRayVerticalCrossingCount γ hγ a b) := by
+    intro a b
+    simp only [cells, Set.Finite.mem_toFinset, oddRayInteriorCellsOfWalk, Set.mem_setOf_eq]
+  -- 本文: 上下隣接の偶奇の主張と、共有横辺の通過回数が奇数であること。
+  have hparity := verticallyAdjacentCells_boundaryParity_ofWalk γ hγ hh hv r c
+  have hdiff : ((r, c) ∈ cells ∧ (r + 1, c) ∉ cells) ∨
+      ((r, c) ∉ cells ∧ (r + 1, c) ∈ cells) := by
+    rw [hcell r c, hcell (r + 1) c]
+    simp only [Nat.odd_iff]
+    have hh' := Nat.odd_iff.mp hodd
+    omega
+  -- 本文: 有限セル集合の境界辺の定義。
+  have hedge : (false, (r + 1, c)) ∈ cellEdges cells := by
+    apply (horizontalEdge_mem_cellEdges_iff cells (r + 1) c).2
+    rcases hdiff with h | h
+    · right
+      simpa using h.1
+    · exact Or.inl h.2
+  change (false, (r + 1, c)) ∈ planeCellBoundary cells
+  simp only [planeCellBoundary, Finset.mem_filter, hedge, Bool.false_eq_true,
+    ↓reduceIte, true_and]
+  rcases hdiff with h | h
+  · right
+    exact ⟨h.2, by simpa using h.1⟩
+  · left
+    exact ⟨h.2, by simpa using h.1⟩
 
 /-- Every step of a simple closed lifted walk is an edge of its interior-cell boundary. -/
 theorem vertexSimpleWalk_step_mem_interiorBoundary

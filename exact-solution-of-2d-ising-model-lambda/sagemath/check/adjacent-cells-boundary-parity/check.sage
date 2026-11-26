@@ -1,5 +1,6 @@
 # 対象ラベル: claim_vertically_adjacent_cells_boundary_parity /
-# def_horizontal_edge_traversal_count / def_right_ray_vertical_crossing_count
+# def_horizontal_edge_traversal_count / def_right_ray_vertical_crossing_count /
+# claim_horizontal_walk_edge_odd_boundary
 
 from itertools import product
 
@@ -7,6 +8,7 @@ steps = ((ZZ(1), ZZ(0)), (ZZ(-1), ZZ(0)), (ZZ(0), ZZ(1)), (ZZ(0), ZZ(-1)))
 max_length = 8
 checked_walks = 0
 checked_pairs = 0
+checked_odd_edges = 0
 
 
 def right_ray_crossing_count(points, row, col):
@@ -51,11 +53,18 @@ for length in range(1, max_length + 1):
                 assert (upper + lower - shared) % 2 == 0, (
                     points, row, col, upper, lower, shared
                 )
+                if shared % 2 == 1:
+                    # 奇数回通る共有横辺では、上下のセルの交差奇偶がちょうど一方だけ奇数になる。
+                    assert (upper % 2 == 1) != (lower % 2 == 1), (
+                        points, row, col, upper, lower, shared
+                    )
+                    checked_odd_edges += 1
                 checked_pairs += 1
 
         checked_walks += 1
 
 print(
     f"PASS: closed walks={checked_walks}, checked adjacent pairs={checked_pairs}, "
+    f"odd shared horizontal edges={checked_odd_edges}, "
     f"length<={max_length}"
 )

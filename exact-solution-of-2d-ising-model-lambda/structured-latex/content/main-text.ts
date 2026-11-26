@@ -88517,10 +88517,8 @@ N_{r,c}^{\rightarrow}(\gamma)\bmod 2
                     verification: ["sagemath/check/adjacent-cells-boundary-parity"],
                     lean: [
                       "Ising2DLambda.KacWard.verticallyAdjacentCells_boundaryParity",
-                      "Ising2DLambda.KacWard.horizontalEdge_oddRay_boundary",
-                      "Ising2DLambda.KacWard.horizontalEdge_oddRay_boundary_ofWalk",
+                      "Ising2DLambda.KacWard.verticallyAdjacentCells_boundaryParity_ofWalk",
                       "Ising2DLambda.NecSuf.KacWard.boundary_three_part_parity_necSuf",
-                      "Ising2DLambda.NecSuf.KacWard.odd_shared_edge_separates_cells_necSuf",
                       "Ising2DLambda.KacWard.verticallyAdjacentCells_boundaryParity_from_necSuf",
                     ],
                     statement: [
@@ -88594,6 +88592,57 @@ N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
                       paragraph([
                         "後半の同値は最後の合同式を読むだけである。使ったのは有限な辺列の端点の数え上げと奇偶だけであり、",
                         "実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              }, {
+                role: "supporting",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_horizontal_walk_edge_odd_boundary",
+                  focus: {
+                    id: "kac_ward_claim_horizontal_walk_edge_odd_boundary",
+                    kind: "claim",
+                    title: { text: "奇数回通る横辺は内側セル集合の境界辺である" },
+                    labels: ["claim_horizontal_walk_edge_odd_boundary"],
+                    habitat: "N",
+                    verification: ["sagemath/check/adjacent-cells-boundary-parity"],
+                    lean: [
+                      "Ising2DLambda.KacWard.horizontalEdge_oddRay_boundary",
+                      "Ising2DLambda.KacWard.horizontalEdge_oddRay_boundary_ofWalk",
+                      "Ising2DLambda.NecSuf.KacWard.odd_shared_edge_separates_cells_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
+                        math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
+                        " である閉じた非後退辺列 ", math(String.raw`\gamma`), "（", ref("def_closed_nonbacktracking_walk"), "）の平面持ち上げについて、",
+                        "有限な内側セル集合を ", math(String.raw`\mathcal F_{\rightarrow}(\gamma)`),
+                        " とする（", ref("def_odd_ray_interior_cells"), "、",
+                        ref("claim_odd_ray_interior_cells_bounded"), "）。任意の ",
+                        math(String.raw`r,c\in\mathbb Z`), " に対し、横辺 ",
+                        math(String.raw`\{(r+1,c),(r+1,c+1)\}`),
+                        " の通過回数 ", math(String.raw`H_{r+1,c}(\gamma)`), "（", ref("def_horizontal_edge_traversal_count"), "）が奇数なら、この辺は ",
+                        math(String.raw`\mathcal F_{\rightarrow}(\gamma)`),
+                        " の境界辺である。",
+                      ]),
+                    ],
+                    proof: [
+                      displayMath(String.raw`\begin{aligned}
+\bigl(N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)\bigr)\bmod 2
+&=H_{r+1,c}(\gamma)\bmod 2
+&&\bigl(\because\ \blkref{claim_vertically_adjacent_cells_boundary_parity}\bigr)\\
+&=1
+&&\bigl(\because\ H_{r+1,c}(\gamma)\text{ は奇数}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "従って ", math(String.raw`N_{r,c}^{\rightarrow}(\gamma)`), " と ", math(String.raw`N_{r+1,c}^{\rightarrow}(\gamma)`),
+                        " のちょうど一方が奇数である。上下に隣り合う二つのセル ", math(String.raw`(r,c)`), " と ", math(String.raw`(r+1,c)`),
+                        " のうち、交差数が奇数のものだけが内側セル集合に属する（",
+                        ref("def_odd_ray_interior_cells"), "）。したがって共有横辺は内外を分ける。",
+                        "内側セル集合は有限集合なので（", ref("claim_odd_ray_interior_cells_bounded"), "）、",
+                        "有限セル集合の境界辺の定義（", ref("def_plane_cell_boundary_edge_set"), "）が適用でき、共有横辺はそれを満たす。",
                       ]),
                     ],
                   },
@@ -89176,7 +89225,7 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                         math(String.raw`(i-1,c_0)`), " と ", math(String.raw`(i,c_0)`),
                         " で、同様にちょうど一方が内側セルである（",
                         ref("claim_vertically_adjacent_cells_boundary_parity"), "、",
-                        ref("def_odd_ray_interior_cells"), "）。どちらの場合も、内側である側のセルを ",
+                        ref("def_odd_ray_interior_cells"), "）。内側セル集合は有限集合なので（", ref("claim_odd_ray_interior_cells_bounded"), "）、この横辺はその境界辺でもある（", ref("claim_horizontal_walk_edge_odd_boundary"), "）。どちらの場合も、内側である側のセルを ",
                         math(String.raw`D_j`), " と書く。共有辺 ", math(String.raw`E_{j+1}`),
                         " の両端点は、これを共有するどちらのセルでも単位正方形の四隅に含まれるから、",
                         math(String.raw`D_j`), " の四隅は ", math(String.raw`P_j(\gamma)`), " と ",
@@ -99757,7 +99806,7 @@ e
 &=p(w_{C,r})
 &&\bigl(\because\ e\text{ の取り方}\bigr)\\
 &=p(\iota(c_C(2r)))
-&&\bigl(\because\ \blkref{claim_projected_edge_cycle_nonbacktracking}\bigr)\\
+&&\bigl(\because\ w_{C,r}\text{ の定義}\bigr)\\
 &=p(c_C(2r))
 &&\bigl(\because\ \blkref{def_edge_reversal}\bigr).
 \end{aligned}`),
@@ -99773,7 +99822,7 @@ e
 &=p(\iota(c_C(2r)))
 &&\bigl(\because\ \blkref{def_edge_reversal}\bigr)\\
 &=p(w_{C,r})
-&&\bigl(\because\ \blkref{claim_projected_edge_cycle_nonbacktracking}\bigr).
+&&\bigl(\because\ w_{C,r}\text{ の定義}\bigr).
 \end{aligned}`),
                       paragraph(["もし ", math(String.raw`\vec e`), " が第二色なら、", ref("claim_reference_long_matching"), " の基準完全マッチング ", math(String.raw`\mathcal D_0`), " での長い相手 ", math(String.raw`\upsilon(\vec e)=m_{\mathcal D_0}(\vec e)`), " は、", ref("claim_matching_pair_second_coloring_alternates"), " により第一色である。短い相手を ", math(String.raw`\tau(\vec e)`), " と書くと、", ref("claim_perfect_matching_involution"), " により ", math(String.raw`\tau(\tau(\vec e))=\vec e`), " なので、", math(String.raw`\upsilon(\vec e)=\upsilon(\tau(\tau(\vec e)))`), " は ", math(String.raw`\tau(\vec e)`), " を ", ref("def_matching_pair_step"), " の二歩置換で一歩進めた点である。", math(String.raw`\tau(\vec e)`), " は ", ref("def_finite_permutation_orbit"), " の零回の反復で自分の二歩軌道に属し、", ref("claim_finite_permutation_orbit_invariant"), " により ", math(String.raw`\upsilon(\vec e)`), " も同じ二歩軌道に属する。", ref("def_matching_pair_component"), " により ", math(String.raw`\upsilon(\vec e)`), " は ", math(String.raw`\vec e`), " と同じ閉路 ", math(String.raw`C`), " に属する。", ref("claim_reference_long_mate_reversal"), " によりこの相手は ", math(String.raw`\iota(\vec e)`), " である。", ref("claim_tagged_difference_alternating_cycle"), " の一周期の列挙により ", math(String.raw`\iota(\vec e)=c_C(2r)`), " となる ", math(String.raw`0\le r<k_C`), " がある。このとき"]),
                       displayMath(String.raw`\begin{aligned}
@@ -99785,7 +99834,7 @@ e
 &=p(\iota(c_C(2r)))
 &&\bigl(\because\ \iota(\vec e)=c_C(2r)\bigr)\\
 &=p(w_{C,r})
-&&\bigl(\because\ \blkref{claim_projected_edge_cycle_nonbacktracking}\bigr).
+&&\bigl(\because\ w_{C,r}\text{ の定義}\bigr).
 \end{aligned}`),
                       paragraph(["従って逆の包含も成り立つ。"]),
                     ],
