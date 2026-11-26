@@ -20963,7 +20963,7 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
 &&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第一色の場合}\bigr)\\
 &=\left(\prod_{i\in C}A_{i,\tau(i)}\right)
   \left(\prod_{i\in\mathcal J\setminus C}A_{i,\upsilon(i)}\right)
-&&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第二色の場合}\bigr).
+&&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第二色の場合}\bigr)
 \end{aligned}`),
                       paragraph(["空集合では三つの積がいずれも空積の一であり、同じ等式が成り立つ。有限積だけを使い、実数体への脱出はない。"]),
                     ],

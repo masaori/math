@@ -69,15 +69,6 @@ theorem outside_mate_outside (mate : J → J) (A : Set J)
   have h := hclosed (mate e) hm
   rwa [hinv] at h
 
-/-- 最小元は自分の成分の最小元であり、第一色に属する。 -/
-theorem minimum_self_and_color (i : {x // x ∈ A}) :
-    matchingPairComponentMinimum τ υ (matchingPairComponentMinimum τ υ i) =
-        matchingPairComponentMinimum τ υ i ∧
-      matchingPairComponentMinimum τ υ i ∈ matchingPairColor τ υ := by
-  exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
-    τ υ (· ≤ ·) (fun _ _ => le_antisymm) (matchingPairComponentMinimum τ υ)
-    (matchingPairComponentMinimum_mem τ υ) (matchingPairComponentMinimum_le τ υ) i
-
 /-- 第一色の点からの反復は、偶数回なら第一色にある。 -/
 theorem iterate_color_parity_necSuf (m : {x // x ∈ A}) (hm : m ∈ matchingPairColor τ υ) :
     ∀ r : ℕ, finiteMapIterate (matchingPairPermutation τ υ) r m ∈ matchingPairColor τ υ ↔
@@ -125,7 +116,10 @@ theorem cycle_pairs_D_necSuf (D' : Set (Set J)) (mate : J → J)
   unfold cyclePointsOf at hp
   rw [hk2, pairChunks_map_range] at hp
   obtain ⟨r, _, rfl⟩ := List.mem_map.mp hp
-  have hcol := (iterate_color_parity_necSuf A τ υ m (minimum_self_and_color A τ υ i).2
+  have hmin := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
+    τ υ (· ≤ ·) (fun _ _ => le_antisymm) (matchingPairComponentMinimum τ υ)
+    (matchingPairComponentMinimum_mem τ υ) (matchingPairComponentMinimum_le τ υ) i
+  have hcol := (iterate_color_parity_necSuf A τ υ m hmin.2
     (2 * r)).mpr (even_two_mul r)
   simp only
   rw [show (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m).1 =
@@ -151,9 +145,12 @@ theorem cycle_pairs_reference_necSuf (D₀' : Set (Set J)) (mate : J → J)
   unfold cyclePointsOf at hp
   rw [rotate_range_of_period _ _ hpos (by rw [hper]; rfl), hk2, pairChunks_map_range] at hp
   obtain ⟨r, _, rfl⟩ := List.mem_map.mp hp
+  have hmin := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
+    τ υ (· ≤ ·) (fun _ _ => le_antisymm) (matchingPairComponentMinimum τ υ)
+    (matchingPairComponentMinimum_mem τ υ) (matchingPairComponentMinimum_le τ υ) i
   have hcol : ¬ finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m ∈
       matchingPairColor τ υ := by
-    rw [iterate_color_parity_necSuf A τ υ m (minimum_self_and_color A τ υ i).2 (2 * r + 1)]
+    rw [iterate_color_parity_necSuf A τ υ m hmin.2 (2 * r + 1)]
     exact Nat.not_even_iff_odd.mpr (odd_two_mul_add_one r)
   simp only
   rw [show (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1 + 1) m).1 =
@@ -200,16 +197,20 @@ theorem cyclePoints_disjoint_necSuf (m₁ m₂ : {x // x ∈ A})
       τ υ (· ≤ ·) (fun _ _ => le_antisymm) (matchingPairComponentMinimum τ υ)
       (matchingPairComponentMinimum_mem τ υ) (matchingPairComponentMinimum_le τ υ)
     exact hj
+  have hmin (j : {x // x ∈ A}) :=
+    Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
+      τ υ (· ≤ ·) (fun _ _ => le_antisymm) (matchingPairComponentMinimum τ υ)
+      (matchingPairComponentMinimum_mem τ υ) (matchingPairComponentMinimum_le τ υ) j
   apply hne
   calc
     matchingPairComponentMinimum τ υ i₁ =
         matchingPairComponentMinimum τ υ (matchingPairComponentMinimum τ υ i₁) :=
-      ((minimum_self_and_color A τ υ i₁).1).symm
+      (hmin i₁).1.symm
     _ = matchingPairComponentMinimum τ υ ⟨x, ha⟩ :=
       (hbase _ hc₁).symm
     _ = matchingPairComponentMinimum τ υ (matchingPairComponentMinimum τ υ i₂) :=
       hbase _ hc₂
-    _ = matchingPairComponentMinimum τ υ i₂ := (minimum_self_and_color A τ υ i₂).1
+    _ = matchingPairComponentMinimum τ υ i₂ := (hmin i₂).1
 
 theorem cycleWords_flatten_nodup_necSuf : (cycleWordsOf τ υ).flatten.Nodup := by
   unfold cycleWordsOf
