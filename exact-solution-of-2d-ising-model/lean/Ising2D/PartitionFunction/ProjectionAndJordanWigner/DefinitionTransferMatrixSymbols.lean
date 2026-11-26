@@ -67,6 +67,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimM
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimITimesIAndNegativeITimesIInCC
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIndexSetFromOneToN
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
 
 namespace Ising2D
 
@@ -119,7 +120,8 @@ theorem twoByTwo_kroneckerDelta_eq_identity :
     !![kroneckerDelta (0 : Fin 2) 0, kroneckerDelta (0 : Fin 2) 1;
         kroneckerDelta (1 : Fin 2) 0, kroneckerDelta (1 : Fin 2) 1] =
       (1 : Matrix (Fin 2) (Fin 2) ℂ) := by
-  ext i j
+  -- 行列の等号は成分ごとの等号（`def_complex_matrices`）
+  refine ((matrix_fin_complex_entries_determine_and_realize 2 2).1 _ _).2 fun i j => ?_
   rw [identity_matrix_apply]
   fin_cases i <;> fin_cases j <;> rfl
 

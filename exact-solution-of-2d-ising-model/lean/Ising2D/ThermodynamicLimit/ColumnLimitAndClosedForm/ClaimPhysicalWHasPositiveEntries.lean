@@ -50,6 +50,7 @@
 具体版をその特殊化（`R := ℂ`・`S := ℝ`・`φ := ℝ → ℂ の埋め込み`）として導出するのは
 `ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
@@ -214,7 +215,7 @@ theorem physicalV1halfC_apply_mul_V2_apply_of_ne (K1 K2 : ℝ) (μ μ' : SpinCon
 /-- **人手 Step 3 の主の鎖**（`k := ν(ι(μ))`、`l := ν(ι(μ'))`、`B := V_1^{1/2}`）:
 `W_{kl} = (((b(μ)v(μ,μ'))b(μ'))_ℂ`。人手の 9 行と同じ順に、外側の和（`t`）を先に、内側の和（`s`）を後に潰す。
 
-`mat_mult` は Lean の `Matrix.mul_apply`、`finite_sum_with_single_nonzero_term` は具体版が無く `Finset.sum_eq_single`
+`mat_mult` は `tensorPow_mul_apply`（`TensorPow M` の積の成分の式）、`finite_sum_with_single_nonzero_term` は具体版が無く `Finset.sum_eq_single`
 （既存の慣行どおり）。和から除く項の値は Step 3 の補助の鎖 2 本である。 -/
 theorem physicalSymTransferC_apply_configBasisIso (K1 K2 : ℝ) (μ μ' : SpinConf M) :
     physicalSymTransferC M K1 K2 (configBasisIso M μ) (configBasisIso M μ')
@@ -225,7 +226,7 @@ theorem physicalSymTransferC_apply_configBasisIso (K1 K2 : ℝ) (μ μ' : SpinCo
           (configBasisIso M μ) (configBasisIso M μ') := rfl  -- `def_symmetrized_transfer_matrix`
     _ = ∑ t : Conf M, (physicalV1halfC M K1 * V2 M K2) (configBasisIso M μ) t
           * physicalV1halfC M K1 t (configBasisIso M μ') :=
-        Matrix.mul_apply                                      -- `mat_mult`
+        tensorPow_mul_apply _ _ _ _                           -- `mat_mult`
     _ = (physicalV1halfC M K1 * V2 M K2) (configBasisIso M μ) (configBasisIso M μ')
           * physicalV1halfC M K1 (configBasisIso M μ') (configBasisIso M μ') :=
         Finset.sum_eq_single (configBasisIso M μ')
@@ -233,7 +234,7 @@ theorem physicalSymTransferC_apply_configBasisIso (K1 K2 : ℝ) (μ μ' : SpinCo
           (fun h => absurd (Finset.mem_univ _) h)             -- `finite_sum_with_single_nonzero_term`（上の `t ≠ l` の項の値）
     _ = (∑ s : Conf M, physicalV1halfC M K1 (configBasisIso M μ) s * V2 M K2 s (configBasisIso M μ'))
           * physicalV1halfC M K1 (configBasisIso M μ') (configBasisIso M μ') := by
-        rw [Matrix.mul_apply]                                 -- `mat_mult`
+        rw [tensorPow_mul_apply]                              -- `mat_mult`
     _ = (physicalV1halfC M K1 (configBasisIso M μ) (configBasisIso M μ)
             * V2 M K2 (configBasisIso M μ) (configBasisIso M μ'))
           * physicalV1halfC M K1 (configBasisIso M μ') (configBasisIso M μ') := by

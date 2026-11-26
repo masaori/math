@@ -25,7 +25,8 @@
 `HPow.hPow@Real,Nat,Real@NPow.toPow`（自然数の冪）・`HPow.hPow@Real,Real,Real@Real.instPow`（実数の冪）のように書き出す。
 インスタンスの頭は、親への射影と、異なる型の演算を同じ型の演算から作るだけのインスタンス（`instHMul` など）を通り抜けて取る。
 同じ記号でも本文では別の定義になるもの（実数の和と行列の和、自然数の冪と実数の冪、mathlib の行列の積と
-ライブラリが置いた積、ℂ の行列と ℝ の行列）を、分けて数えるためである。行列は成分の型まで `Matrix[Complex]` と書く。
+ライブラリが置いた積、ℂ の行列と ℝ の行列）を、分けて数えるためである。演算の型としての行列は成分の型まで `Matrix[Complex]` と書く。
+行列の型そのもの（`Matrix m n α`）は、同じ理由で、行と列の添字の型と成分の型の頭を添えて `Matrix@Fin,Fin,Complex` と書き出す。
 インスタンス引数をとる型クラスの演算でない関数（`Finset.sum`・`Matrix.trace`・`nhds` など）も、最初のインスタンス引数より前の
 引数の頭と各インスタンス引数の頭を添えて `Finset.sum@Complex,Fin@Complex.instAddCommMonoid` のように書き出す。型が変数なら `?`、関数の型なら `→`、λ なら `fun` を添える。
 
@@ -199,6 +200,10 @@ partial def recordHead (c : Name) (args : Array Expr) : WalkM Unit := do
       record s!"{c}@{",".intercalate types}@{inst}"
   else if let some ind := recursorFamily env c then record ind.toString
   else if compilationArtifact c then pure ()
+  -- 行列の型は、行と列の添字の型と成分の型の頭を添える（`Matrix@Fin,Fin,Complex`）。本文の `Mat(m,n,ℂ)` は添字が
+  -- `{1,…,m} × {1,…,n}` の複素行列であり、添字を任意の型に取る行列や ℝ の行列とは別の定義である。
+  else if c == ``Matrix && args.size == 3 then
+    record s!"Matrix@{carrierHead args[0]!},{carrierHead args[1]!},{carrierHead args[2]!}"
   else
     -- インスタンス引数をとる関数（`Finset.sum`・`Matrix.trace`・`nhds` など）は、どの和・どの位相かを
     -- インスタンスが決めるので、最初のインスタンス引数より前の引数の頭と、各インスタンス引数の頭を添える。

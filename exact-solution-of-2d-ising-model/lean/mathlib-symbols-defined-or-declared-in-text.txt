@@ -209,8 +209,7 @@ Int.cast@Real@Real.instIntCast	inclusion_zz_to_rr
 # （DefinitionMatrixOperationsOverMultiIndices.lean）。単位行列は 1 (ν^{-1}(i)) (ν^{-1}(k)) = δ_{ik}（tensorPow_one_apply_eq_identity_matrix。ν^{-1} の単射による）、
 # スカラー倍・和・零行列は成分の式が各成分だけで閉じるので Conf M の添字のまま（tensorPow_smul_apply・tensorPow_add_apply・tensorPow_zero_apply）。
 # 記号の鍵は TensorPow と書かれた演算だけを指す（Matrix (Conf M) (Conf M) ℂ と書いた行列や Fin n の添字の行列は鍵が Matrix[Complex] で、別の行）。
-# 積（HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]）は、積の値の型が mathlib の Matrix (Conf M) (Conf M) ℂ と書かれ、一致の補題の主張が型 Matrix の記号を
-# 使うので、型 Matrix を載せる単位で載せる。符号反転と差（Neg.neg@Ising2D.TensorPow・HSub.hSub@Ising2D.TensorPow）は、補題を通しの定理に繋げる使い道が、
+# 積は下の行列の型の行の後に載せた。符号反転と差（Neg.neg@Ising2D.TensorPow・HSub.hSub@Ising2D.TensorPow）は、補題を通しの定理に繋げる使い道が、
 # 並列の実行が受け持つ分離の行「TensorPow 上の行列の基本恒等式」の補題（neg_mul_matrix_tensorPow・add_sub_cancel_tensorPow など。いまは導出の定理）の具体版の証明の中にしか無いので、
 # その行の具体版の証明を置く同じ回に、一致の補題を置いて使い、この一覧に載せ、未定義の記号の台帳から行を消す（状態台帳の行「行列とその演算」と分離の行の備考）。
 # スカラー倍・和・零の 3 行の根拠は def_kronecker の「I を番号 ν(I) と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii)）。
@@ -218,3 +217,19 @@ OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1	def_identity_matrix
 HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul	def_matrix_scalar_multiple
 HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add	def_matrix_sum
 OfNat.ofNat@Ising2D.TensorPow,0@Zero.toOfNat0	def_zero_matrix
+# 行列の型: def_complex_matrices が Mat(m,n,ℂ) を添字の集合の直積 {1,…,m} × {1,…,n} から ℂ への写像の全体と定める。記号の鍵は、行列の型そのものを
+# 行と列の添字の型と成分の型の頭で分ける（UndefinedSymbols.lean。2026-11-26 に、それまで一語 Matrix だった鍵を分けた）。
+# Matrix (Fin m) (Fin n) ℂ（Fin m → Fin n → ℂ）は、行と列の添字を写像 finIndexToZZ で送ると、成分が行列を定め、どの成分の割り当ても行列になることを
+# 補題一本 matrix_fin_complex_entries_determine_and_realize で示した。Matrix (Conf M) (Conf M) ℂ（本文の Mat(2^M,ℂ)）は、ν^{-1} で番号へ移した成分について
+# 同じことを補題一本 tensorPow_entries_by_kronecker_numbering で示した（どちらも DefinitionMatrixOperationsOverMultiIndices.lean）。
+# 本文の定義は m, n ∈ ℤ_{≥1}・M ∈ ℤ_{≥1} だけを扱うが、Lean の Fin 0 と Conf 0 も鍵は同じで、この 2 行はそれも許す（𝔐・𝓘_M の上の和の行と同じ扱い）。
+# Matrix (Fin n) (Fin 1) ℂ の形で数ベクトルを n 行 1 列の行列として書く宣言もこの鍵に入る。mat_mult の「数ベクトル a ∈ ℂ^n は n 行 1 列の行列とみなし」は
+# 名前を付けた写像を通さない同一視で、状態台帳の行「行列とその演算」の残りが扱う。
+# 添字を任意の型に取る行列（Matrix@?,?,…）、ℝ の行列（Matrix@…,Real）、Conf M と Fin の組の添字の行列は、まだ載せない（同じ行の三単位目・四単位目）。
+Matrix@Fin,Fin,Complex	def_complex_matrices
+Matrix@Ising2D.Conf,Ising2D.Conf,Complex	def_complex_matrices
+# Lean の TensorPow M の積: mat_mult が (AB)_{ik} := Σ_{j=1}^{n} A_{ij} B_{jk} と定め、𝓘_M の上の和は def_finite_sum_of_complex_numbers_over_multi_indices が
+# 番号の上の和として定めるので、mathlib の積の成分を ν^{-1} で番号へ移すと本文の右辺 Σ_{j=1}^{n} A_{ij} B_{jk} に等しいことを補題一本
+# tensorPow_mul_apply_eq_mat_mult で示した（mathlib の Conf M の上の和を finset_sum_conf_complex_eq_finite_sum_over_multi_indices で番号の上の和へ移す）。
+# 証明の段が 𝓘_M の元を添字に書くための形 (AB)_{IK} = Σ_{J∈𝓘_M} A_{IJ} B_{JK}（tensorPow_mul_apply）は、そこから Lean だけの段で導く。
+HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	mat_mult

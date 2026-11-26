@@ -40,6 +40,7 @@ Lean の具体版が無く、mathlib の `Complex.ofReal_exp` を引く。
 一般化できるのは、行列の列の読み取りと「行の成分が 1 つを除いて `0` なら積の成分は 1 項になる」（どちらも任意の半環・任意の有限添字の行列で成り立つ自明な事実）と、
 `{±1}` の符号反転の組合せだけである。必要十分版にしても何が本質的かについて情報を与えないので、置かない。
 -/
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimOpenChainSpinSums
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonD0GCommuteAndDiagonalAction
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfDiagonalMatrix
@@ -159,7 +160,7 @@ theorem mul_apply_configBasisIso_of_single_nonzero {A : TensorPow M} (X : Tensor
       = A (configBasisIso M s) (configBasisIso M u) * X (configBasisIso M u) J :=
   calc (A * X) (configBasisIso M s) J
       = ∑ k : Conf M, A (configBasisIso M s) k * X k J := by
-        rw [Matrix.mul_apply]                                      -- `mat_mult`
+        rw [tensorPow_mul_apply]                                   -- `mat_mult`
     _ = A (configBasisIso M s) (configBasisIso M u) * X (configBasisIso M u) J := by
         -- `finite_sum_with_single_nonzero_term`
         refine Finset.sum_eq_single (configBasisIso M u) (fun k _ hk => ?_)

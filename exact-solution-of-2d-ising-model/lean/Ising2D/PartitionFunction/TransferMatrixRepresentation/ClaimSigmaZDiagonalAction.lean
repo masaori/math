@@ -37,6 +37,7 @@ Lean は対角性（`sigmaZ_eq_diagonal`）を先に示して作用をその系�
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
 
 namespace Ising2D
 
@@ -53,7 +54,11 @@ variable {M : ℕ}
 theorem siteProd_diagonal (d : Fin M → Fin 2 → ℂ) :
     siteProd M (fun i => Matrix.diagonal (d i)) =
       Matrix.diagonal (fun I : Conf M => ∏ i : Fin M, d i (I i)) := by
-  ext s t
+  -- 行列の等号は、`ν^{-1}` で番号へ移した成分ごとの等号（`def_complex_matrices`）
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M
+  refine ((tensorPow_entries_by_kronecker_numbering M n hord σ hσ).1 _ _).2 fun k l => ?_
+  generalize σ k = s
+  generalize σ l = t
   rw [siteProd_apply]
   by_cases h : s = t
   · subst h

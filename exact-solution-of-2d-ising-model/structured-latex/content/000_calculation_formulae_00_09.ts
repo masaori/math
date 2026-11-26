@@ -392,8 +392,6 @@ export default defineBlocks([
 &&\text{（直積の元の等号は成分ごとの等号）},\\
 &f=g\ \Leftrightarrow\ (\forall x\in X,\ f(x)=g(x))
 &&\text{（写像の等号は全ての点での値の等号）},\\
-&A=B\ \Leftrightarrow\ \bigl(\forall i\in\{1,\dots,m\},\ \forall j\in\{1,\dots,n\},\ A_{ij}=B_{ij}\bigr)\quad (A,B\in\mathrm{Mat}(m,n,\mathbb{C}))
-&&\text{（行列の等号は成分ごとの等号）},\\
 &(P\wedge Q)\ \Rightarrow\ P,\qquad (P\wedge Q)\ \Rightarrow\ Q,\qquad P\ \text{と}\ Q\ \text{から}\ P\wedge Q
 &&\text{（かつの除去と導入）},\\
 &P\ \Rightarrow\ (P\vee Q),\qquad Q\ \Rightarrow\ (P\vee Q),\qquad
@@ -456,6 +454,7 @@ export default defineBlocks([
         "2026-11-23（Lean の点検の直し、未定義の記号の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」の先頭）: ℕ の上の写像を帰納法で定めるときに使う再帰による定義（任意の集合 X、a ∈ X、f: 𝐍×X → X について h(0) = a・h(n+1) = f(n, h(n)) を満たす h がただ一つある）を、外から持ち込むものとして宣言した。inclusion_nn_to_zz がこれを引く。Lean の具体版はこの存在を ℕ の再帰子 Nat.rec で受ける。inclusion_zz_to_rr・def_power_of_integer の ℤ_{≥0} の上の再帰は、ℤ_{≥0} と ℕ の間の写像の主張が揃ってからこの宣言へ移す。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の数・和・積・順序」）: 本文の証明が「ℤ の加法の結合律」「ℤ の分配律」「ℤ の和の単位元」などと名前だけで引いていた ℤ の性質の基になる性質を、外から持ち込み使う性質として名前つきで並べた（可換環の等式、0 ≠ 1、順序の反射律・反対称律・推移律・全順序、加法・乗法との両立、0 以上の元は 0 か 0 以上の元に 1 を足したもの、k から始める数学的帰納法）。引く側が使う別名（和の結合律、加法の可換律、和の単位元、加法逆元、積の単位元）も挙げた。一覧の −x が写像の値であることを示すため、組に符号反転 −_ℤ を足して型を宣言した。数字 0・1 は 0_ℤ・1_ℤ を表すと書いた。ℤ の差・狭義の順序・2 以上の数字は、1 ブロック 1 主張に従い ℝ と同じく別の定義のブロックで定める（状態台帳の行「ℤ の差・狭義の順序・数字」。2_ℤ は def_power_of_integer が既に定めている）。0 以上の元の分解と k から始める帰納法は、inclusion_zz_to_rr が ℤ_{≥0} の上の帰納的な定義に使い、本文の証明が ℤ_{≥1} の上の帰納法として使っていた性質である。一覧の行から導けるが一行ではない根拠（「ℤ の四則」「ℤ の符号反転を 2 回行うと元に戻る」「ℤ の減法」「ℤ の計算」、根拠の無い 1_ℤ ≥ 0_ℤ など）を名前だけで引く箇所が残っており、状態台帳の行「ℤ の差・狭義の順序・数字」に直す項目として書いた。新しいブロックにせずここに足したのは、一対一の検査で対応する具体版の宣言の無いブロックを増やさないためである。",
         "2026-11-24（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち ℤ の ≥）: ℤ の段に x ≥ y を y ≤ x の略記として足した。本文は ℤ の元どうしの ≥ を使っていたが（N_0 ≥ 1 など）、def_int_strict_order は < と > だけを定め、≥ を定めるブロックが無かった。Lean の ℤ の ≥ も y ≤ x と定義として等しい（GE.ge）。具体版の定義と主張には ℤ の ≥ が現れないので、許可の一覧は変えていない。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の二単位目）: 外から持ち込む規則に並べていた「行列の等号は成分ごとの等号」を消し、Mat(m,n,ℂ) を写像の全体と定める定義のブロック def_complex_matrices へ移した（行列の等号は写像の等号の規則の場合である）。この規則は Mat(m,n,ℂ) をその定義より前に使っていた。",
       ],
     },
   },
@@ -2268,12 +2267,64 @@ y^2>x\ \land\ x>0
     },
   },
   {
+    id: "calc_formulae_definition_complex_matrices",
+    kind: "definition",
+    title: { text: "複素数を成分とする行列の全体" },
+    labels: ["def_complex_matrices"],
+    lean: ["Ising2D.matrix_fin_complex_entries_determine_and_realize", "Ising2D.tensorPow_entries_by_kronecker_numbering"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
+        " とする。添字の集合の直積 ",
+        math(String.raw`\{1,\dots,m\} \times \{1,\dots,n\}`),
+        "（",
+        ref("def_index_set_from_one_to_n"),
+        "）から ",
+        ref("definition_of_cc"),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " への写像の全体を ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " と書き、その元を ",
+        math(String.raw`m`),
+        " 行 ",
+        math(String.raw`n`),
+        " 列の複素行列と呼ぶ。",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " の ",
+        math(String.raw`(i,k) \in \{1,\dots,m\} \times \{1,\dots,n\}`),
+        " での値を ",
+        math(String.raw`A_{ik} \in \mathbb{C}`),
+        " と書き、",
+        math(String.raw`A`),
+        " の ",
+        math(String.raw`(i,k)`),
+        " 成分と呼ぶ。",
+        math(String.raw`\mathrm{Mat}(n,\mathbb{C}) := \mathrm{Mat}(n,n,\mathbb{C})`),
+        " とおく。",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " の等号は写像の等号（",
+        ref("set_and_algebra_notation"),
+        " の「写像の等号は全ての点での値の等号」）であり、成分で書けば",
+      ]),
+      displayMath(String.raw`A=B\ \Leftrightarrow\ \bigl(\forall i\in\{1,\dots,m\},\ \forall k\in\{1,\dots,n\},\ A_{ik}=B_{ik}\bigr)
+\qquad \text{（行列の等号は成分ごとの等号）}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の二単位目）: 原文（Typst）に対応ブロックは無い。Mat(m,n,ℂ) は mat_mult の主張の括弧の中で「成分が複素数である m 行 n 列の行列全体」として積の定義と一緒に置かれていた（1 ブロック 1 主張に反する）ので、定義のブロックとして切り出し、添字の集合の直積から ℂ への写像の全体として定めた。set_and_algebra_notation が外から持ち込む規則として Mat(m,n,ℂ) の定義より前に置いていた「行列の等号は成分ごとの等号」は、行列が写像なので写像の等号の規則の場合であり、ここへ移した。Lean の具体版は mathlib の Matrix (Fin m) (Fin n) ℂ（Fin m → Fin n → ℂ）で、名前を付けた写像 finIndexToZZ を通して成分が行列を定めることと、どの成分の割り当ても行列になることを補題一本 Ising2D.matrix_fin_complex_entries_determine_and_realize で示す。添字を多重添字の集合 𝓘_M に取る Lean の Matrix (Conf M) (Conf M) ℂ（本文の Mat(2^M,ℂ)）は、ν^{-1} で番号へ移した成分が行列を定めることと、どの成分の割り当ても行列になることを Ising2D.tensorPow_entries_by_kronecker_numbering で示す（MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionMatrixOperationsOverMultiIndices.lean）。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_003_matrix_decomposition",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/003_theorem_行列の分解.typ", ordinal: 4 },
     title: { text: "行列の積の成分による定義" },
     labels: ["mat_mult"],
-    lean: ["Ising2D.matrix_mul_apply_sum", "Ising2D.mulVec_apply_sum", "Ising2D.mul_two_apply", "Ising2D.mulVec_two_zero", "Ising2D.mulVec_two_one"],
+    lean: ["Ising2D.matrix_mul_apply_sum", "Ising2D.mulVec_apply_sum", "Ising2D.mul_two_apply", "Ising2D.mulVec_two_zero", "Ising2D.mulVec_two_one", "Ising2D.tensorPow_mul_apply_eq_mat_mult", "Ising2D.tensorPow_mul_apply"],
     statement: [
       paragraph([
         math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
@@ -2282,16 +2333,8 @@ y^2>x\ \land\ x>0
         "、",
         math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
         " とする（",
-        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
-        " は成分が ",
-        ref("definition_of_cc"),
-        " の複素数である ",
-        math(String.raw`m`),
-        " 行 ",
-        math(String.raw`n`),
-        " 列の行列全体、",
-        math(String.raw`\mathrm{Mat}(n,\mathbb{C}) := \mathrm{Mat}(n,n,\mathbb{C})`),
-        "）。積 ",
+        ref("def_complex_matrices"),
+        " の記号）。積 ",
         math(String.raw`AB \in \mathrm{Mat}(m,p,\mathbb{C})`),
         " を、成分ごとに",
       ]),
@@ -2315,6 +2358,7 @@ y^2>x\ \land\ x>0
       status: "added",
       notes: [
         "2026-09-05: 原文のこのブロックは Typst の行列構成子 mat(...) を使った「行列の分解」で、記号 mat が本文で定義されておらず証明も無かった。一方このラベル mat_mult は本文の20箇所以上から「行列の積の定義」として引かれていた。引用の意味と一致するよう、成分による積の定義そのものをこのラベルの内容とした。原文が述べていた列ごとの作用は次のブロックへ、記法を定義したうえで移した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の二単位目）: 主張の括弧の中にあった Mat(m,n,ℂ) の定め（成分が複素数である m 行 n 列の行列全体、Mat(n,ℂ) := Mat(n,n,ℂ)）を定義のブロック def_complex_matrices へ切り出し、ここはその参照にした。欄 lean に、Lean の TensorPow M（添字が 𝓘_M の行列）の積の成分を ν^{-1} で番号へ移すとこの定義の右辺に等しいことを述べる補題 Ising2D.tensorPow_mul_apply_eq_mat_mult と、そこから導く 𝓘_M の添字の形 Ising2D.tensorPow_mul_apply を足した。",
       ],
     },
   },
