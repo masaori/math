@@ -45,7 +45,7 @@ import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimSignFlipConjugation
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimPositiveRealSquareInjective
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWords
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSumFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverTensorPowSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
 
 namespace Ising2D
@@ -94,7 +94,7 @@ theorem matExp_neg_half_mul_matExp_neg_half (S : TensorPow M) :
         -- `theorem_exp_product`（`K → ℂ`、`A, B → -H`）と `(-H)(-H) = (-H)(-H)`。mathlib の `Matrix.exp_add_of_commute`
         (Matrix.exp_add_of_commute _ _ (Commute.refl _)).symm
     _ = matExp (-((1 / 2 : ℂ) • S + (1 / 2 : ℂ) • S)) := by
-        -- `negation_distributes_over_matrix_sum`（`A, B → H`）を右辺から左辺へ（`TensorPow M` の系 `neg_add_tensorPow`）
+        -- `negation_distributes_over_matrix_sum`（`A, B → H`）を右辺から左辺へ（`Mat(2^M, ℂ)` の具体版 `neg_add_tensorPow`）
         rw [neg_add_tensorPow]
     _ = matExp (-S) := by rw [half_smul_add_half_smul]                -- `H + H = S_1`
 

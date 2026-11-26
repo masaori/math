@@ -743,7 +743,6 @@ Ising2D.multiIndexDelta_of_ne
 Ising2D.multiIndexDelta_self
 Ising2D.neg_absGamma2_thetaTilde_sq_neg
 Ising2D.neg_add_matrix
-Ising2D.neg_add_matrix_apply
 Ising2D.neg_finite_sum_of_matrices
 Ising2D.neg_matrix_add_self
 Ising2D.neg_matrix_add_self_apply

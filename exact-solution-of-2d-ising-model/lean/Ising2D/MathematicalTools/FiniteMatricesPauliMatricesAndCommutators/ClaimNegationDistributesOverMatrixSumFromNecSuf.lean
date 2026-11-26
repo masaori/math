@@ -5,8 +5,10 @@
 係数 `R := ℂ`、添字 `Fin m`・`Fin n`、`hneg := complex_neg_eq_neg_one_mul`（人手の `multiply_by_minus_one`）の特殊化として得る。
 人手のラベルは `negation_distributes_over_matrix_sum`・`finite_sum_of_negated_matrices`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin m` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。
+`TensorPow M`（添字 `Conf M`）の具体版 `ClaimNegationDistributesOverTensorPowSum.lean` の主張 `neg_add_tensorPow` も、
+同じ必要十分版の添字 `Conf M` の特殊化として得る（`neg_add_tensorPow_of_necSuf`）。
+`finite_sum_of_negated_matrices` の `TensorPow M` での系 `neg_finite_sum_tensorPow` は、具体版がまだ無いので必要十分版の特殊化として置く
+（主張の `TensorPow M` の値の `Fin (r + 1)` の上の和 `Finset.sum` が、未定義の記号の許可の一覧にまだ無い）。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
@@ -24,8 +26,9 @@ theorem neg_finite_sum_of_matrices_of_necSuf {m n : ℕ} (r : ℕ) (X : Fin (r +
     ∑ j, -X j = -∑ j, X j :=
   NecSuf.neg_finite_sum_matrix' complex_neg_eq_neg_one_mul r X
 
-/-- `negation_distributes_over_matrix_sum` の `TensorPow M` での系（`NecSuf.neg_add_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem neg_add_tensorPow {M : ℕ} (A B : TensorPow M) : -(A + B) = (-A) + (-B) :=
+/-- 具体版 `neg_add_tensorPow`（`negation_distributes_over_matrix_sum` の `TensorPow M` での具体版）を
+`NecSuf.neg_add_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem neg_add_tensorPow_of_necSuf {M : ℕ} (A B : TensorPow M) : -(A + B) = (-A) + (-B) :=
   NecSuf.neg_add_matrix' complex_neg_eq_neg_one_mul A B
 
 /-- `finite_sum_of_negated_matrices` の `TensorPow M` での系（`NecSuf.neg_finite_sum_matrix'` の添字 `Conf M` の特殊化）。 -/

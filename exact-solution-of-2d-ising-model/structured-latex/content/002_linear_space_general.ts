@@ -1585,7 +1585,7 @@ X - O
     kind: "claim",
     title: { text: "行列の和の符号反転は符号反転の和に等しい" },
     labels: ["negation_distributes_over_matrix_sum"],
-    lean: ["Ising2D.neg_add_matrix", "Ising2D.neg_add_matrix_apply"],
+    lean: ["Ising2D.neg_add_matrix", "Ising2D.neg_add_matrix_apply", "Ising2D.neg_add_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1634,6 +1634,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 3 の H_2 の鎖で、符号反転した項の有限和 Σ(−(Z_mY_m)) を −Σ Z_mY_m にまとめる段（finite_sum_of_negated_matrices）の帰納法の段に要るので足した。" +
           "−A は def_matrix_negation の成分ごとの符号反転なので、成分計算の鎖で示した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の四単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.neg_add_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNegationDistributesOverTensorPowSum.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。主張と証明は不変。",
       ],
     },
   },
@@ -1752,7 +1753,7 @@ X - O
     kind: "claim",
     title: { text: "符号反転した行列の差は差の符号反転に等しい" },
     labels: ["difference_of_negated_matrices"],
-    lean: ["Ising2D.neg_sub_neg_matrix"],
+    lean: ["Ising2D.neg_sub_neg_matrix", "Ising2D.neg_sub_neg_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1783,6 +1784,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 3 の H_1^{(+)} の鎖で、Σ(−(Y_mZ_{m+1})) − (−(Y_{M_col}Z_1)) を −H_1^{(+)} にまとめる段を引けるよう足した。" +
           "行列の等号の 3 行の鎖で、二重の符号反転 −(−B) は B へ戻さずに negation_distributes_over_matrix_sum の右辺として読む。",
+        "2026-11-26（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の四単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.neg_sub_neg_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowDifferenceIsSumWithNegation.lean。この主張の 3 行の行列の等号の鎖を、matrix_difference_is_sum_with_negation と negation_distributes_over_matrix_sum の Mat(2^M, ℂ) の具体版で引く）。主張と証明は不変。",
       ],
     },
   },
