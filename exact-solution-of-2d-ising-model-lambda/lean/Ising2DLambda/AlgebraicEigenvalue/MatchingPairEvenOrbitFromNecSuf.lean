@@ -8,9 +8,10 @@ theorem matchingPairPermutation_even_orbit_from_necSuf
     (τ υ : FixedPointFreeInvolution J) (i : J) :
     Even (finitePermutationOrbitLength (matchingPairPermutation τ υ) i) := by
   rw [← finitePermutationMinimalPeriod_eq_orbitLength]
-  exact NecSuf.AlgebraicEigenvalue.even_of_color_flip
-    (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
-    (matchingPairSuccessor_color τ υ) _ i
-    (finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) i).2.1
+  exact NecSuf.AlgebraicEigenvalue.matchingPairPermutation_even_return
+    τ.val υ.val (fun j => j ∈ matchingPairColor τ υ)
+    τ.property.2 υ.property.2
+    (matchingPairColor_alternates τ υ) (matchingPairSecondColor_alternates τ υ)
+    _ i (finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) i).2.1
 
 end Ising2DLambda.AlgebraicEigenvalue

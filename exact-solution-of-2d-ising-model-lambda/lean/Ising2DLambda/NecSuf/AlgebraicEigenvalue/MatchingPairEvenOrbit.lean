@@ -1,5 +1,6 @@
 import Mathlib.Logic.Function.Iterate
 import Mathlib.Tactic
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairPermutation
 
 namespace Ising2DLambda.NecSuf.AlgebraicEigenvalue
 
@@ -22,5 +23,17 @@ theorem even_of_color_flip {J : Type*} (f : J → J) (C : J → Prop)
       have hn' := (hpar n).mpr (by simp [hn, hi])
       exact hi (hsame.mp hn')
   exact Nat.even_iff.mpr heven
+
+/-- 二つの相手から構成した後続置換が始点に戻る回数は偶数。 -/
+theorem matchingPairPermutation_even_return {J : Type*} (τ υ : J → J) (C : J → Prop)
+    (hτ : Function.Involutive τ) (hυ : Function.Involutive υ)
+    (hτcolor : ∀ i, C (τ i) ↔ ¬ C i) (hυcolor : ∀ i, C (υ i) ↔ ¬ C i)
+    (n : ℕ) (i : J)
+    (hreturn : (matchingPairPermutation τ υ C hτ hυ hτcolor hυcolor)^[n] i = i) :
+    Even n := by
+  exact even_of_color_flip
+    (matchingPairPermutation τ υ C hτ hυ hτcolor hυcolor) C
+    (matchingPairSuccessor_color_necSuf τ υ C hτcolor hυcolor)
+    n i hreturn
 
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue
