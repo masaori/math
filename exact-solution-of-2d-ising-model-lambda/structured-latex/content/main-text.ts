@@ -111391,7 +111391,7 @@ const chapter_fisher_zero_density = defineSection({
 &=\mathrm{ac}_m(0)
 &&(\because\ \operatorname{Lift}^{F}(Z_L)=0)\\
 &=0
-&&(\because\ \blkref{def_qbar_polynomial_ring}\text{。零元はすべての係数が零の族})
+&&(\because\ \blkref{def_qbar_polynomial_ring}\text{、零元はすべての係数が零の族})
 \end{aligned}`),
                     paragraph([
                       "であり、",

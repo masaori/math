@@ -1,11 +1,42 @@
 import Ising2DLambda.KacWard.ProjectedCycleSupportUnion
 import Ising2DLambda.NecSuf.KacWard.ProjectedCycleSupportUnion
+import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceCycleCover
+import Ising2DLambda.AlgebraicEigenvalue.MatchingPairSecondColoring
 
 namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.AlgebraicEigenvalue
 open Ising2DLambda.PartitionPolynomial
 attribute [local instance] Classical.propDecidable
+
+private theorem projectedCycleSupportUnion_eq_range_concrete {J E : Type*}
+    [Fintype J] [LinearOrder J] (τ υ : FixedPointFreeInvolution J)
+    (p : J → E) (hp : ∀ j, p (υ.val j) = p j) :
+    {e | ∃ i j : J, j ∈ matchingPairComponent τ υ i ∧
+      j ∈ matchingPairColor τ υ ∧ p j = e} = Set.range p := by
+  classical
+  have hcover := NecSuf.KacWard.alternatingCycle_cover τ.val υ.val τ.property.2 υ.property.2
+  have hself : ∀ i, i ∈ matchingPairComponent τ υ i := by
+    intro i
+    simpa [Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent,
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponent,
+      Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit,
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit,
+      Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate,
+      Ising2DLambda.AlgebraicEigenvalue.matchingPairStep,
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.involutionPairStep] using hcover.1 i
+  have hmate : ∀ i, υ.val i ∈ matchingPairComponent τ υ i := by
+    intro i
+    simpa [Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent,
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponent,
+      Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit,
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit,
+      Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate,
+      Ising2DLambda.AlgebraicEigenvalue.matchingPairStep,
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.involutionPairStep] using (hcover.2.2 i).2
+  exact NecSuf.KacWard.projectedCycleSupportUnion_eq_range υ.val
+    (matchingPairComponent τ υ) (matchingPairColor τ υ) p
+    hself hmate (matchingPairSecondColor_alternates τ υ) hp
 
 /-- The abstract coverage theorem specializes to the actual tagged matching. -/
 theorem projectedCycleSupportUnion_eq_complement_from_necSuf {L : ℕ} (z : Qbar)
@@ -30,7 +61,7 @@ theorem projectedCycleSupportUnion_eq_complement_from_necSuf {L : ℕ} (z : Qbar
   have hcover : projectedCycleSupportUnion D t =
       Set.range (fun j : {a : OrientedEdge L // a ∈ A} => j.val.1) := by
     simpa [projectedCycleSupportUnion, concreteAlternatingComponent, reversal] using
-      (Ising2DLambda.NecSuf.KacWard.projectedCycleSupportUnion_eq_range
+      (projectedCycleSupportUnion_eq_range_concrete
         τ υ (fun j : {a : OrientedEdge L // a ∈ A} => j.val.1) hp)
   rw [hcover]
   ext e
