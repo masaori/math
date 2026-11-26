@@ -25,7 +25,9 @@
 `HPow.hPow@Real,Nat,Real@NPow.toPow`（自然数の冪）・`HPow.hPow@Real,Real,Real@Real.instPow`（実数の冪）のように書き出す。
 インスタンスの頭は、親への射影と、異なる型の演算を同じ型の演算から作るだけのインスタンス（`instHMul` など）を通り抜けて取る。
 同じ記号でも本文では別の定義になるもの（実数の和と行列の和、自然数の冪と実数の冪、mathlib の行列の積と
-ライブラリが置いた積、ℂ の行列と ℝ の行列）を、分けて数えるためである。演算の型としての行列は成分の型まで `Matrix[Complex]` と書く。
+ライブラリが置いた積、ℂ の行列と ℝ の行列）と、本文が定める添字が `{1,…,n}` の行列の演算と本文に定義の無い添字が任意の型の行列の演算を、
+分けて数えるためである。
+演算の型としての行列は、行と列の添字の型と成分の型の頭まで `Matrix[Fin,Fin,Complex]` と書く。
 行列の型そのもの（`Matrix m n α`）は、同じ理由で、行と列の添字の型と成分の型の頭を添えて `Matrix@Fin,Fin,Complex` と書き出す。
 インスタンス引数をとる型クラスの演算でない関数（`Finset.sum`・`Matrix.trace`・`nhds` など）も、最初のインスタンス引数より前の
 引数の頭と各インスタンス引数の頭を添えて `Finset.sum@Complex,Fin@Complex.instAddCommMonoid` のように書き出す。型が変数なら `?`、関数の型なら `→`、λ なら `fun` を添える。
@@ -151,8 +153,11 @@ def inLibrary (env : Environment) (n : Name) : Bool :=
 partial def carrierHead (e : Expr) : String :=
   match e.getAppFn with
   | .const c _ =>
-    -- 行列は成分の型まで書く（ℂ の行列の積と ℝ の行列の積は本文では別の定義である）。
-    if c == ``Matrix && e.getAppNumArgs == 3 then s!"Matrix[{carrierHead e.appArg!}]"
+    -- 行列は行と列の添字の型と成分の型の頭まで書く（ℂ の行列の積と ℝ の行列の積は本文では別の定義であり、
+    -- 本文が定めるのは添字が `{1,…,n}` の行列だけで、添字が任意の型の行列は本文に定義が無い）。
+    if c == ``Matrix && e.getAppNumArgs == 3 then
+      let a := e.getAppArgs
+      s!"Matrix[{carrierHead a[0]!},{carrierHead a[1]!},{carrierHead a[2]!}]"
     else (userName c).toString
   | .forallE .. => "→"
   | .sort _ => "Sort"

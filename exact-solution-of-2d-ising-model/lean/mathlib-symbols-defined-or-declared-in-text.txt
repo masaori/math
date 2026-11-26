@@ -208,7 +208,8 @@ Int.cast@Real@Real.instIntCast	inclusion_zz_to_rr
 # def_kronecker が I ∈ 𝓘_M を番号 ν(I) と同一視して成分を並べる。mathlib の行列の演算と本文の成分の式が ν を通して等しいことを、演算ごとに補題一本で示した
 # （DefinitionMatrixOperationsOverMultiIndices.lean）。単位行列は 1 (ν^{-1}(i)) (ν^{-1}(k)) = δ_{ik}（tensorPow_one_apply_eq_identity_matrix。ν^{-1} の単射による）、
 # スカラー倍・和・零行列は成分の式が各成分だけで閉じるので Conf M の添字のまま（tensorPow_smul_apply・tensorPow_add_apply・tensorPow_zero_apply）。
-# 記号の鍵は TensorPow と書かれた演算だけを指す（Matrix (Conf M) (Conf M) ℂ と書いた行列や Fin n の添字の行列は鍵が Matrix[Complex] で、別の行）。
+# 記号の鍵は TensorPow と書かれた演算だけを指す（Matrix (Conf M) (Conf M) ℂ と書いた行列は鍵が Matrix[Ising2D.Conf,Ising2D.Conf,Complex]、Fin n の添字の行列は
+# Matrix[Fin,Fin,Complex] で、別の行）。
 # 積は下の行列の型の行の後に載せた。符号反転と差（Neg.neg@Ising2D.TensorPow・HSub.hSub@Ising2D.TensorPow）は、補題を通しの定理に繋げる使い道が、
 # 並列の実行が受け持つ分離の行「TensorPow 上の行列の基本恒等式」の補題（neg_mul_matrix_tensorPow・add_sub_cancel_tensorPow など。いまは導出の定理）の具体版の証明の中にしか無いので、
 # その行の具体版の証明を置く同じ回に、一致の補題を置いて使い、この一覧に載せ、未定義の記号の台帳から行を消す（状態台帳の行「行列とその演算」と分離の行の備考）。
@@ -218,7 +219,7 @@ HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul	def_matrix_s
 HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add	def_matrix_sum
 OfNat.ofNat@Ising2D.TensorPow,0@Zero.toOfNat0	def_zero_matrix
 # 行列の型: def_complex_matrices が Mat(m,n,ℂ) を添字の集合の直積 {1,…,m} × {1,…,n} から ℂ への写像の全体と定める。記号の鍵は、行列の型そのものを
-# 行と列の添字の型と成分の型の頭で分ける（UndefinedSymbols.lean。2026-11-26 に、それまで一語 Matrix だった鍵を分けた）。
+# 行と列の添字の型と成分の型の頭で分ける（UndefinedSymbols.lean）。
 # Matrix (Fin m) (Fin n) ℂ（Fin m → Fin n → ℂ）は、行と列の添字を写像 finIndexToZZ で送ると、成分が行列を定め、どの成分の割り当ても行列になることを
 # 補題一本 matrix_fin_complex_entries_determine_and_realize で示した。Matrix (Conf M) (Conf M) ℂ（本文の Mat(2^M,ℂ)）は、ν^{-1} で番号へ移した成分について
 # 同じことを補題一本 tensorPow_entries_by_kronecker_numbering で示した（どちらも DefinitionMatrixOperationsOverMultiIndices.lean）。
@@ -232,4 +233,22 @@ Matrix@Ising2D.Conf,Ising2D.Conf,Complex	def_complex_matrices
 # 番号の上の和として定めるので、mathlib の積の成分を ν^{-1} で番号へ移すと本文の右辺 Σ_{j=1}^{n} A_{ij} B_{jk} に等しいことを補題一本
 # tensorPow_mul_apply_eq_mat_mult で示した（mathlib の Conf M の上の和を finset_sum_conf_complex_eq_finite_sum_over_multi_indices で番号の上の和へ移す）。
 # 証明の段が 𝓘_M の元を添字に書くための形 (AB)_{IK} = Σ_{J∈𝓘_M} A_{IJ} B_{JK}（tensorPow_mul_apply）は、そこから Lean だけの段で導く。
-HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	mat_mult
+HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	mat_mult
+# Fin m・Fin n を添字に取る ℂ の行列 Matrix (Fin m) (Fin n) ℂ の演算: 演算の型としての行列の鍵は、行と列の添字の型と成分の型の頭まで書く
+# （Matrix[Fin,Fin,Complex]。UndefinedSymbols.lean）。
+# 行と列の添字は、Lean の i : Fin m を名前を付けた写像 finIndexToZZ で本文の {1,…,m} の元へ送って読む（def_complex_matrices の行と同じ）。
+# 本文の演算は成分の式で定まり、Lean の mathlib の演算の成分が同じ式であることを、演算ごとに補題一本で示してある:
+# 単位行列 identity_matrix_apply（1 i j = δ_{ij}。δ は def_kronecker_delta の具体版 kroneckerDelta で、Fin の等号は finIndexToZZ の単射で本文の等号と同じ）、
+# スカラー倍 matrix_smul_apply、和 matrix_sum_apply、零行列 matrix_zero_apply、符号反転 matrix_neg_apply、差 matrix_sub_apply（いずれも rfl）、
+# 積 matrix_mul_apply_sum（(AB)_{ik} = Σ_j A_{ij} B_{jk}。右辺の Fin n の上の和は def_finite_sum_of_complex_numbers の行で載せた）。
+# 7 本は本文の各定義のブロックの欄 lean に在り、通しの定理の依存に入っている。
+# 本文の定義は m, n ∈ ℤ_{≥1} だけを扱うが、Lean の Fin 0 の添字の行列も鍵は同じで、この 7 行はそれも許す（def_complex_matrices の行と同じ扱い）。
+# Matrix (Fin n) (Fin 1) ℂ で数ベクトルを書く宣言の演算もこの鍵に入る（mat_mult の「n 行 1 列の行列とみなし」は def_complex_matrices の行と同じく残り）。
+# 添字が任意の型の行列（Matrix[?,?,Complex]）、Conf M の添字を Matrix と書いた行列、Conf M と Fin の組、ℝ の行列の演算はまだ載せない（状態台帳の行「行列とその演算」）。
+OfNat.ofNat@Matrix[Fin,Fin,Complex],1@One.toOfNat1	def_identity_matrix
+HSMul.hSMul@Complex,Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex]@Matrix.smul	def_matrix_scalar_multiple
+HAdd.hAdd@Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex]@Matrix.add	def_matrix_sum
+OfNat.ofNat@Matrix[Fin,Fin,Complex],0@Zero.toOfNat0	def_zero_matrix
+Neg.neg@Matrix[Fin,Fin,Complex]@Matrix.neg	def_matrix_negation
+HSub.hSub@Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex]@Matrix.sub	def_matrix_difference
+HMul.hMul@Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	mat_mult
