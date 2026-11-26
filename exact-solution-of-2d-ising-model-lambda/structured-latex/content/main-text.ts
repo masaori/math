@@ -84448,15 +84448,75 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
 \sigma(r),&r\ne k,l
 \end{cases}`),
                 paragraph([
-                  "で置く。", ref("def_contact_split_edge_sequences"),
-                  " の二本の辺列は、添字区間 ", math(String.raw`(k,l]`),
-                  " とその補集合を、この後続写像で閉じたものである。従って",
+                  "で置く。", math(String.raw`k<l\le m`), " なので ",
+                  math(String.raw`\sigma(k)=k+1`), " であり、", math(String.raw`k<r<l`),
+                  " を満たす任意の ", math(String.raw`r\in I_m`), " について ",
+                  math(String.raw`\nu(r)=\sigma(r)=r+1`), " である。",
+                  "二つの準備をする。第一に、", math(String.raw`t_{\circ}(\gamma_A)`),
+                  " を ", ref("def_contact_split_edge_sequences"), " の添字区間 ",
+                  math(String.raw`A=\{r\in I_m\mid k<r\le l\}`), " の上の和として表す。",
                 ]),
                 displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_A)
+&=t(\gamma_A)+\tau(\vec e_l,\vec e_{k+1})
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と }\blkref{def_contact_split_edge_sequences}\text{ の末辺・先頭辺}\bigr)\\
+&=\sum_{s=1}^{l-k-1}\tau(\vec e_{k+s},\vec e_{k+s+1})+\tau(\vec e_l,\vec e_{k+1})
+&&\bigl(\because\ \blkref{def_total_turning}\text{ と }\blkref{def_contact_split_edge_sequences}\text{ の位置 }s\text{ の辺}\bigr)\\
+&=\sum_{\substack{r\in I_m\\k<r<l}}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_l,\vec e_{k+1})
+&&\bigl(\because\ \text{添字の置換 }r=k+s\text{、有限和の並べ替え}\bigr)\\
+&=\sum_{\substack{r\in I_m\\k<r<l}}\tau(\vec e_r,\vec e_{\nu(r)})+\tau(\vec e_l,\vec e_{\nu(l)})
+&&\bigl(\because\ k<r<l\text{ では }\nu(r)=r+1\text{、}\nu(l)=\sigma(k)=k+1\bigr)\\
+&=\sum_{r\in A}\tau(\vec e_r,\vec e_{\nu(r)})
+&&\bigl(\because\ A\text{ の置き方と有限和の項の合併}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "第二に、", math(String.raw`t_{\circ}(\gamma_B)`), " を補集合 ",
+                  math(String.raw`B:=I_m\setminus A`), " の上の和として表す。まず ",
+                  math(String.raw`l<m`), " の場合。このとき ", math(String.raw`\nu(k)=\sigma(l)=l+1`),
+                  " であり、", math(String.raw`r\in B`), "、", math(String.raw`r\ne k`),
+                  " を満たす任意の ", math(String.raw`r`), " について ",
+                  math(String.raw`\nu(r)=\sigma(r)`), "（", math(String.raw`r<m`), " なら ",
+                  math(String.raw`r+1`), "、", math(String.raw`r=m`), " なら ", math(String.raw`1`),
+                  "）である。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_B)
+&=t(\gamma_B)+\tau(\vec e_k,\vec e_{l+1})
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と }\blkref{def_contact_split_edge_sequences}\text{ の末辺・先頭辺}\bigr)\\
+&=\sum_{\substack{r\in I_m\\l<r<m}}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_m,\vec e_1)
+  +\sum_{\substack{r\in I_m\\r<k}}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_k,\vec e_{l+1})
+&&\bigl(\because\ \blkref{def_total_turning}\text{ と }\blkref{def_contact_split_edge_sequences}\text{ の並び}\bigr)\\
+&=\sum_{\substack{r\in B\\r\ne k}}\tau(\vec e_r,\vec e_{\nu(r)})+\tau(\vec e_k,\vec e_{\nu(k)})
+&&\bigl(\because\ r\in B,\ r\ne k\text{ では }\nu(r)=\sigma(r)\text{、}\nu(k)=l+1\bigr)\\
+&=\sum_{r\in B}\tau(\vec e_r,\vec e_{\nu(r)})
+&&\bigl(\because\ \text{有限和の項の合併}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "次に ", math(String.raw`l=m`), " の場合。",
+                  math(String.raw`\gamma_B=(\vec e_1,\ldots,\vec e_k)`), "、",
+                  math(String.raw`B=\{r\in I_m\mid r\le k\}`), "、",
+                  math(String.raw`\nu(k)=\sigma(m)=1`), " であり、",
+                  math(String.raw`r<k`), " を満たす任意の ", math(String.raw`r\in I_m`),
+                  " について ", math(String.raw`\nu(r)=r+1`), " である。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_B)
+&=\sum_{\substack{r\in I_m\\r<k}}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_k,\vec e_1)
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と }\blkref{def_total_turning}\text{ と }\blkref{def_contact_split_edge_sequences}\text{ の並び}\bigr)\\
+&=\sum_{\substack{r\in B\\r\ne k}}\tau(\vec e_r,\vec e_{\nu(r)})+\tau(\vec e_k,\vec e_{\nu(k)})
+&&\bigl(\because\ r<k\text{ では }\nu(r)=r+1\text{、}\nu(k)=1\bigr)\\
+&=\sum_{r\in B}\tau(\vec e_r,\vec e_{\nu(r)})
+&&\bigl(\because\ \text{有限和の項の合併}\bigr)
+\end{aligned}`),
+                paragraph(["どちらの場合も同じ形に着く。二つの準備を合わせて"]),
+                displayMath(String.raw`\begin{aligned}
 t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
+&=\sum_{r\in A}\tau(\vec e_r,\vec e_{\nu(r)})+\sum_{r\in B}\tau(\vec e_r,\vec e_{\nu(r)})
+  -t_{\circ}(\gamma)
+&&\bigl(\because\ \text{準備の二式}\bigr)\\
 &=\sum_{r\in I_m}\tau(\vec e_r,\vec e_{\nu(r)})
   -\sum_{r\in I_m}\tau(\vec e_r,\vec e_{\sigma(r)})
-&&\bigl(\because\ \blkref{claim_smoothing_split_turning_sum}\text{ と同じ添字区間の有限和分割、}\blkref{def_cyclic_total_turning}\bigr)\\
+&&\bigl(\because\ B=I_m\setminus A\text{ による互いに素な有限和の分割と }\blkref{def_cyclic_total_turning}\bigr)\\
 &=\left(\sum_{\substack{r\in I_m\\r\ne k,l}}\tau(\vec e_r,\vec e_{\sigma(r)})
   +\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\right)\\
 &\quad-\left(\sum_{\substack{r\in I_m\\r\ne k,l}}\tau(\vec e_r,\vec e_{\sigma(r)})
@@ -88178,7 +88238,6 @@ N_{r,c}^{\rightarrow}(\gamma)\equiv1\pmod 2
                       "Ising2DLambda.NecSuf.KacWard.odd_support_finite_necSuf",
                       "Ising2DLambda.KacWard.oddRayInteriorCells_finite_from_necSuf",
                       "Ising2DLambda.KacWard.oddRayInteriorCellsOfWalk_finite",
-                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_finite",
                     ],
                     statement: [
                       paragraph([
@@ -88539,7 +88598,6 @@ N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
                     lean: [
                       "Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge",
                       "Ising2DLambda.KacWard.oddRayInteriorCellsOfWalk_reachOddVerticalEdge",
-                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_reachesOddVerticalEdge",
                       "Ising2DLambda.NecSuf.KacWard.odd_run_reaches_odd_increment_necSuf",
                       "Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge_from_necSuf",
                     ],
@@ -89095,7 +89153,9 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                         math(String.raw`(r,j_0-1)`), " と ", math(String.raw`(r,j_0)`),
                         " で、共有縦辺の通過回数が奇数なので二セルの交差数の奇偶が異なり、ちょうど一方が内側セルである（",
                         ref("claim_adjacent_cells_ray_crossing_difference"), "、",
-                        ref("def_odd_ray_interior_cells"), "）。", math(String.raw`E_{j+1}`),
+                        ref("def_odd_ray_interior_cells"), "）。内側セル集合は有限集合なので（",
+                        ref("claim_odd_ray_interior_cells_bounded"), "）、この縦辺はその境界辺でもある（",
+                        ref("claim_vertical_walk_edge_odd_boundary"), "）。", math(String.raw`E_{j+1}`),
                         " が横辺 ", math(String.raw`\{(i,c_0),(i,c_0+1)\}`),
                         " のとき、これを共有する二セルは上下に隣り合う ",
                         math(String.raw`(i-1,c_0)`), " と ", math(String.raw`(i,c_0)`),
@@ -89443,7 +89503,11 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                         math(String.raw`P_k(\gamma)=(p_k^{\mathrm{row}},p_k^{\mathrm{col}})`),
                         " と書き、外接長方形の四端 ",
                         math(String.raw`r_{\min},r_{\max},c_{\min},c_{\max}\in\mathbb Z`),
-                        " を ", ref("claim_odd_ray_interior_cells_bounded"), " と同じものとする。長方形の外側のセル集合を",
+                        " を ", ref("claim_odd_ray_interior_cells_bounded"), " と同じものとする。",
+                        "巻き付き数が零なので、持ち上げの終点は始点に一致し（", ref("claim_plane_lift_endpoint_winding"), "）、",
+                        math(String.raw`P_m(\gamma)=P_0(\gamma)`), " である。したがって四端は ",
+                        math(String.raw`0\le k\le m-1`), " の座標の最小値・最大値に等しく、",
+                        "以下で最大値を取る添字は ", math(String.raw`0\le k\le m-1`), " から選べる。長方形の外側のセル集合を",
                       ]),
                       displayMath(String.raw`\mathcal U(\gamma):=\left\{(r,c)\in\mathbb Z\times\mathbb Z\ \middle|\
 r<r_{\min}\ \text{または}\ r_{\max}\le r\ \text{または}\
@@ -93802,21 +93866,21 @@ cL W_{\perp}(\gamma)
 &=\partial_0\bigl(n_{\mathrm h}(i,k)\bigr)
 &&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=0\text{ の場合}\bigr)\\
 &=(i,k)
-&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr)\\
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ の端点の項の横向きの場合}\bigr)\\
 &=\operatorname{vt}(W_j)
 &&\bigl(\because\ \operatorname{vt}(W_j)=(i,k)\text{ の置き方}\bigr)\\
 \operatorname{tgt}\bigl(p_j(W)\bigr)
 &=\partial_1\bigl(n_{\mathrm h}(i,k)\bigr)
 &&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=0\text{ の場合}\bigr)\\
 &=\bigl(i,\ k+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
-&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr)\\
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ の端点の項の横向きの場合}\bigr)\\
 &=\operatorname{vt}(W_{j+1})
 &&\bigl(\because\ W_{j+1}=W_j+(0,1)\text{ と }\pi(b+1)=\pi(b)+_{\mathbb{Z}/L\mathbb{Z}}\bar1\text{（}\blkref{def_residue_maps}\text{ の射影と剰余類の加法）}\bigr)
 \end{aligned}`),
                       paragraph([
                         "差が ", math(String.raw`(1,0)`), " の場合は縦向きの番号 ",
-                        math(String.raw`n_{\mathrm v}`), " と ", ref("def_boundary_maps"),
-                        " の縦向きの場合で同じ計算になる。差が ", math(String.raw`(0,-1)`),
+                        math(String.raw`n_{\mathrm v}`), " と ", ref("claim_edge_row_partition"),
+                        " の端点の項の縦向きの場合で同じ計算になる。差が ", math(String.raw`(0,-1)`),
                         " の場合、", math(String.raw`\operatorname{vt}(W_{j+1})=(i,k)`), " と書くと、一続きである。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
@@ -93824,14 +93888,14 @@ cL W_{\perp}(\gamma)
 &=\partial_1\bigl(n_{\mathrm h}(i,k)\bigr)
 &&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=1\text{ の場合}\bigr)\\
 &=\bigl(i,\ k+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
-&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr)\\
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ の端点の項の横向きの場合}\bigr)\\
 &=\operatorname{vt}(W_j)
 &&\bigl(\because\ W_j=W_{j+1}+(0,1)\text{ と }\pi(b+1)=\pi(b)+_{\mathbb{Z}/L\mathbb{Z}}\bar1\text{（}\blkref{def_residue_maps}\text{）}\bigr),\\
 \operatorname{tgt}\bigl(p_j(W)\bigr)
 &=\partial_0\bigl(n_{\mathrm h}(i,k)\bigr)
 &&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=1\text{ の場合}\bigr)\\
 &=(i,k)
-&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr)\\
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{ の端点の項の横向きの場合}\bigr)\\
 &=\operatorname{vt}(W_{j+1})
 &&\bigl(\because\ \operatorname{vt}(W_{j+1})=(i,k)\text{ の置き方}\bigr)
 \end{aligned}`),
@@ -100541,10 +100605,6 @@ c(\gamma)\bmod2
                     habitat: "Qbar",
                     verification: ["sagemath/check/crossing-free-contact-elimination-phase"],
                     lean: [
-                      "Ising2DLambda.KacWard.orderedIndexPair",
-                      "Ising2DLambda.KacWard.contactPairCount_reindex",
-                      "Ising2DLambda.KacWard.contactPairCount_eq_card",
-                      "Ising2DLambda.KacWard.contact_split_walks_pair_descent",
                       "Ising2DLambda.KacWard.neg_one_pow_zmod_two_val_add",
                       "Ising2DLambda.KacWard.exists_contact_pair_of_contactPairCount_pos",
                       "Ising2DLambda.KacWard.ContactEliminationFamily",

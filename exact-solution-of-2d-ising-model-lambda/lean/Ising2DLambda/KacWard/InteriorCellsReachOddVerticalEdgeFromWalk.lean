@@ -46,42 +46,4 @@ theorem oddRayInteriorCellsOfWalk_reachOddVerticalEdge {L m : ℕ} [NeZero L]
     rw [rightRayVerticalCrossingCount_eq_coordinateSum]
     exact houtside
 
-/-- The actual one-sided closure satisfies the row-reach condition for every
-interior cell of its projected edge sequence. -/
-theorem oneSidedClosureProjectionFromWalk_interior_reachesOddVerticalEdge
-    {L m : ℕ} [NeZero L]
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ)
-    (hcontact : contactPairCount γ hγ = 0)
-    (hwind : (horizontalDirectedWindingNumber γ,
-      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
-    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
-      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
-        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
-      let N := oneSidedClosureLength (m + 1) L
-        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
-      let Γ : Fin (N - 1 + 1) → OrientedEdge L := fun j =>
-        projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
-      ∃ (hΓ : closedNonbacktrackingWalk Γ)
-        (hh : horizontalDirectedWindingNumber Γ = 0)
-        (hv : verticalDirectedWindingNumber Γ = 0),
-        ∀ r c : ℤ, (r, c) ∈ oddRayInteriorCellsOfWalk Γ hΓ hh hv →
-          let row : ℕ → ℤ := fun j => (planeLift Γ (Fin.ofNat (N - 1 + 2) j)).1
-          let col : ℕ → ℤ := fun j => (planeLift Γ (Fin.ofNat (N - 1 + 2) j)).2
-          ∃ g : ℤ, c < g ∧
-            (∀ j : ℤ, c ≤ j → j < g →
-              (r, j) ∈ oddRayInteriorCellsOfWalk Γ hΓ hh hv) ∧
-            (r, g) ∉ oddRayInteriorCellsOfWalk Γ hΓ hh hv ∧
-            Odd (verticalEdgeTraversalCount (N - 1 + 1) row col r g) ∧
-            0 < verticalEdgeTraversalCount (N - 1 + 1) row col r g := by
-  obtain ⟨k₀, hprojection⟩ :=
-    oneSidedClosureProjectionFromWalk_winding_zero γ hγ hcontact hwind
-  refine ⟨k₀, ?_⟩
-  intro t c ht hc
-  have hp := hprojection t c ht hc
-  dsimp only at hp ⊢
-  refine ⟨hp.1, hp.2.2, hp.2.1, ?_⟩
-  intro r c' hinside
-  exact oddRayInteriorCellsOfWalk_reachOddVerticalEdge _ hp.1 hp.2.2 hp.2.1 r c' hinside
-
 end Ising2DLambda.KacWard
