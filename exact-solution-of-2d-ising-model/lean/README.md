@@ -809,7 +809,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `partition_function_via_transfer_matrix` | `Ising2D.partition_function_via_transfer_matrix`（`K_1, K_2 > 0`、`N_row ≥ 1`。途中は `V1_mul_V2_apply` / `rowsToLattice`、中間目標「行列の冪の成分」「トレースの展開」は証明の中の `hpow`・`htrace`。「トレースの展開」を必要十分版 `NecSuf.trace_pow_succ` の特殊化として得る導出は `trace_V1_mul_V2_pow_succ_of_necSuf`（`ClaimPartitionFunctionViaTransferMatrixFromNecSuf.lean`）） | `PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean` |
 | `def_config_basis_iso` | `Ising2D.configBasisIso` / `sgn` / `basisVec` | `PartitionFunction/TransferMatrixRepresentation/DefinitionConfigBasisIso.lean` |
 | `config_numbering_equals_kronecker_numbering` | `Ising2D.config_numbering_equals_kronecker_numbering`（`ν` は `kroneckerNumbering`） | `PartitionFunction/TransferMatrixRepresentation/ClaimConfigNumberingEqualsKroneckerNumbering.lean` |
-| `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec` ほか | `PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean` |
+| `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec` ほか（`site_sigma_z_is_diagonal` の具体版 `sigmaZ_eq_diagonal` が使う `siteProd_diagonal` の非対角成分の必要十分版からの導出は `Ising2D.siteProd_diagonal_apply_of_ne_of_necSuf`） | `PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean`・`ClaimSigmaZDiagonalActionFromNecSuf.lean` |
 | `site_sigma_z_product_is_diagonal` / `site_sigma_z_product_diagonal_entry` | `Ising2D.sigmaZ_mul_sigmaZ_eq_diagonal` / `sigmaZ_mul_sigmaZ_apply_of_ne`（非対角成分は `0_ℂ`） / `sigmaZ_mul_sigmaZ_apply_configBasisIso_self`（`(σ^z_mσ^z_{m'})_{kk} = μ(m)_ℂμ(m')_ℂ`、人手の 8 行と同じ順の `calc`） | `PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean` |
 | `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply` | `MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean` |
 | `def_site_pauli_periodic_extension` / `first_transfer_matrix_pauli_form` | `Ising2D.sigmaZ_nextSite_of_last` / **`Ising2D.first_transfer_matrix_pauli_form`**（`V1 M K1 = V1PauliForm M K1`） | `PartitionFunction/TransferMatrixRepresentation/ClaimFirstTransferMatrixPauliForm.lean` |
@@ -855,6 +855,11 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
   証明の中の `hpow`（`r` の帰納法）・`htrace` で本文どおりに書いた。人手の (R) による `𝔐` 上の和への付け替えは、
   Lean の添字が `Conf M` なので段にならない。同じ等式を必要十分版 `NecSuf.trace_pow_succ` の特殊化として得る導出は
   `ClaimPartitionFunctionViaTransferMatrixFromNecSuf.lean` に置いた。
+* `site_sigma_z_is_diagonal` の具体版が使う `siteProd_diagonal` の非対角成分は、本文どおり `k_n ≠ l_n` となるサイトを取り、
+  その因子の成分が `0_ℂ` であることと `finite_product_with_zero_factor_is_zero`（具体版が無く、Lean は `Finset.prod_eq_zero`）で示した。
+  同じ段を必要十分版 `NecSuf.prod_entry_eq_zero_of_ne` の特殊化として得る導出は `ClaimSigmaZDiagonalActionFromNecSuf.lean` に置いた。
+  本文の準備は零の因子の成分を `def_identity_matrix`・`def_pauli_matrices` から引くが、`siteProd_diagonal` は一般の対角の因子について述べ、
+  その成分を `Matrix.diagonal_apply_ne` で受ける。
 * 人手が仮定する `K_1, K_2 > 0` のうち、`V1`, `V2`, `partitionFunction` の定義と
   `first_transfer_matrix_pauli_form` の証明は正値性を使わないので、Lean では仮定に置いていない。
   `partition_function_via_transfer_matrix` の証明も正値性を使わないが、主張を人手どおりにするため

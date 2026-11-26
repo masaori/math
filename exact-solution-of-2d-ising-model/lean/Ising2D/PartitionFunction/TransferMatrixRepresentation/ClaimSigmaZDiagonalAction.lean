@@ -32,11 +32,11 @@ Lean は対角性（`sigmaZ_eq_diagonal`）を先に示して作用をその系�
 必要十分版: `Ising2D/NecSuf/SiteDiagonal.lean`（対角性の側、ラベル `site_sigma_z_is_diagonal`）。
 そこで確かめたとおり、効いているのは「サイトごとの積 `siteProd` の成分が因子の成分の積である」
 ことと「Pauli 行列 `σ^z` が対角行列であること」だけで、`σ^z` の具体的な成分も
-複素数であることも効いていない。
+複素数であることも効いていない。`siteProd_diagonal` の非対角成分がその特殊化であることは
+導出 `ClaimSigmaZDiagonalActionFromNecSuf.lean` が述べる。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
-import Ising2D.NecSuf.SiteDiagonal
 
 namespace Ising2D
 
@@ -46,7 +46,10 @@ variable {M : ℕ}
 
 /-- 各因子が対角行列なら、クロネッカー積も対角行列で、対角成分は因子の対角成分の積。
 
-（必要十分版 `Ising2D.NecSuf.prod_diagonal_entry` の特殊化として証明する。） -/
+非対角成分は人手 `site_sigma_z_is_diagonal` の証明と同じ段で示す: `s ≠ t` なら `s n ≠ t n` となる
+サイト `n` があり（`K ≠ L` から `k_n ≠ l_n`）、成分は因子の成分の積（`def_kronecker` (2)、`siteProd_apply`）で、
+第 `n` 因子の成分は対角性より `0_ℂ`、積は `finite_product_with_zero_factor_is_zero`
+（具体版が無く、Lean は `Finset.prod_eq_zero`。`ClaimTraceEpsilonVPlusMatrixEntries.lean` と同じ扱い）。 -/
 theorem siteProd_diagonal (d : Fin M → Fin 2 → ℂ) :
     siteProd M (fun i => Matrix.diagonal (d i)) =
       Matrix.diagonal (fun I : Conf M => ∏ i : Fin M, d i (I i)) := by
@@ -57,9 +60,10 @@ theorem siteProd_diagonal (d : Fin M → Fin 2 → ℂ) :
     rw [Matrix.diagonal_apply_eq]
     exact Finset.prod_congr rfl fun i _ => Matrix.diagonal_apply_eq _ _
   · rw [Matrix.diagonal_apply_ne _ h]
-    exact NecSuf.prod_entry_eq_zero_of_ne
-      (fun i => (Matrix.diagonal (d i) : Matrix (Fin 2) (Fin 2) ℂ))
-      (fun _ _ _ hab => Matrix.diagonal_apply_ne _ hab) s t h
+    -- `K ≠ L` より `k_n ≠ l_n` となる `n` がある
+    obtain ⟨n, hn⟩ := Function.ne_iff.mp h
+    -- `finite_product_with_zero_factor_is_zero`（第 `n` 因子は対角性より `0_ℂ`）
+    exact Finset.prod_eq_zero (Finset.mem_univ n) (Matrix.diagonal_apply_ne _ hn)
 
 /-- `σ^z = diagonal (sgn)`。原文の `σ^z e_1 = e_1`, `σ^z e_2 = -e_2` にあたる。 -/
 theorem pauliZ_eq_diagonal : pauliZ = Matrix.diagonal sgnC := by

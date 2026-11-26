@@ -2,7 +2,8 @@
 # 必要十分版: 「因子がすべて対角なら積も対角」
 
 対応する人手証明のラベル: **`site_sigma_z_is_diagonal`**（2026-11-02 に `sigma_z_diagonal_action` から分けた対角性の主張）
-（具体版は `Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean`）
+（具体版は `Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean`、
+具体版の `siteProd_diagonal` の非対角成分をこのファイルの特殊化として得る導出は同じフォルダの `ClaimSigmaZDiagonalActionFromNecSuf.lean`）
 
 ## この主張に本質的に効いている構造は何か
 

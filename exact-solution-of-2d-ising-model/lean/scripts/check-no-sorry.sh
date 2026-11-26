@@ -645,6 +645,7 @@ targets=(
   Ising2D.configBasisIso
   Ising2D.sgn_configBasisIso
   Ising2D.NecSuf.prod_entry_eq_zero_of_ne
+  Ising2D.siteProd_diagonal_apply_of_ne_of_necSuf
   Ising2D.siteProd_diagonal
   Ising2D.sigmaZ_eq_diagonal
   Ising2D.sigmaZ_mulVec_basisVec
