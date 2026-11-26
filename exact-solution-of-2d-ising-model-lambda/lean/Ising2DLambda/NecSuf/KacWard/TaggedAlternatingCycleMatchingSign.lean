@@ -234,32 +234,8 @@ theorem commonPairs_outside_necSuf (x : J) (hx : x ∈ matchingPairWord (commonP
   · exact outside_mate_outside D A τ hτ e he'.1
 
 theorem commonPairs_nodup_necSuf : (matchingPairWord (commonPairsOf D A)).Nodup := by
-  unfold commonPairsOf matchingPairOutsideEnumeration matchingPairWord
-  rw [List.flatMap_map]
-  apply List.nodup_flatMap.mpr
-  refine ⟨fun e _ => ?_, ?_⟩
-  · simpa using (perfectMatchingMate_ne D e).symm
-  · apply List.Nodup.pairwise_of_forall_ne (Finset.sort_nodup _ _)
-    intro a ha b hb hab
-    have ha' := (Finset.mem_filter.mp ((Finset.mem_sort _).mp ha)).2.2
-    have hb' := (Finset.mem_filter.mp ((Finset.mem_sort _).mp hb)).2.2
-    have hinv := perfectMatchingMate_involutive D
-    intro x hxa hxb
-    simp only [List.mem_cons, List.not_mem_nil, or_false] at hxa hxb
-    have key : a = b ∨ a = perfectMatchingMate D b ∨ perfectMatchingMate D a = b ∨
-        perfectMatchingMate D a = perfectMatchingMate D b := by
-      rcases hxa with h1 | h1 <;> rcases hxb with h2 | h2 <;> rw [h1] at h2 <;> simp [h2]
-    rcases key with h | h | h | h
-    · exact hab h
-    · have hb2 : perfectMatchingMate D a = b := by rw [h, hinv]
-      rw [hb2] at ha'
-      rw [← h] at hb'
-      exact absurd (ha'.trans hb') (lt_irrefl _)
-    · have hb2 : perfectMatchingMate D b = a := by rw [← h, hinv]
-      rw [h] at ha'
-      rw [hb2] at hb'
-      exact absurd (ha'.trans hb') (lt_irrefl _)
-    · exact hab (by rw [← hinv a, h, hinv])
+  exact matchingPairOutsideEnumeration_nodup (perfectMatchingMate D) A
+    (perfectMatchingMate_ne D) (perfectMatchingMate_involutive D)
 
 include hτ in
 theorem cycleWords_complete_necSuf :

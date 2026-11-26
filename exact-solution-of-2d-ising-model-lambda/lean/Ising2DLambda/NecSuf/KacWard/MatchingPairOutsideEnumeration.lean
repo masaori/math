@@ -12,6 +12,35 @@ noncomputable def matchingPairOutsideEnumeration (mate : J → J) (A : Set J) :
   ((Finset.univ.filter (fun e : J => e ∉ A ∧ e < mate e)).sort (· ≤ ·)).map
     (fun e => (e, mate e))
 
+/-- 不動点のない対合で列挙した対の端点は互いに異なる。 -/
+theorem matchingPairOutsideEnumeration_nodup (mate : J → J) (A : Set J)
+    (hfix : ∀ e, mate e ≠ e) (hinv : ∀ e, mate (mate e) = e) :
+    ((matchingPairOutsideEnumeration mate A).flatMap fun p => [p.1, p.2]).Nodup := by
+  unfold matchingPairOutsideEnumeration
+  rw [List.flatMap_map]
+  apply List.nodup_flatMap.mpr
+  refine ⟨fun e _ => ?_, ?_⟩
+  · simpa using (hfix e).symm
+  · apply List.Nodup.pairwise_of_forall_ne (Finset.sort_nodup _ _)
+    intro a ha b hb hab
+    have ha' := (Finset.mem_filter.mp ((Finset.mem_sort _).mp ha)).2.2
+    have hb' := (Finset.mem_filter.mp ((Finset.mem_sort _).mp hb)).2.2
+    intro x hxa hxb
+    simp only [List.mem_cons, List.not_mem_nil, or_false] at hxa hxb
+    have key : a = b ∨ a = mate b ∨ mate a = b ∨ mate a = mate b := by
+      rcases hxa with h1 | h1 <;> rcases hxb with h2 | h2 <;> rw [h1] at h2 <;> simp [h2]
+    rcases key with h | h | h | h
+    · exact hab h
+    · have hb2 : mate a = b := by rw [h, hinv]
+      rw [hb2] at ha'
+      rw [← h] at hb'
+      exact absurd (ha'.trans hb') (lt_irrefl _)
+    · have hb2 : mate b = a := by rw [← h, hinv]
+      rw [h] at ha'
+      rw [hb2] at hb'
+      exact absurd (ha'.trans hb') (lt_irrefl _)
+    · exact hab (by rw [← hinv a, h, hinv])
+
 /-- 活動点の外で二つのマッチングの相手が一致すれば、列挙した各対は両方に属する。 -/
 theorem matchingPairOutsideEnumeration_spec (D D₀ : Set (Set J)) (mate mate₀ : J → J)
     (A : Set J)
