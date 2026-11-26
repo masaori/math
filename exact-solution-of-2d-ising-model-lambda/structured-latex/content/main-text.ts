@@ -110082,7 +110082,7 @@ b
 &=0\cdot\delta
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍を素数ごとに読む: }(0\cdot\delta)(p)=0\,\delta(p)=0)\\
 &\le_{\Lambda_{\mathbb{Q}}}2\cdot\delta
-&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=0\text{、}s:=2\text{、}\nu:=\delta\text{ で読む。}0\le2\text{ は }\mathbb{Q}\text{ の順序、}0\le_{\Lambda_{\mathbb{Q}}}\delta\text{ は直前の一続き})
+&&(\because\ \blkref{claim_rational_log_order_group_scalar_compare_nonneg}\text{ を }r:=0\text{、}s:=2\text{、}\nu:=\delta\text{ で読み、}0\le2\text{ は }\mathbb{Q}\text{ の順序、}0\le_{\Lambda_{\mathbb{Q}}}\delta\text{ は直前の一続き})
 \end{aligned}`),
                         paragraph([
                           "準備の第三（Archimedes 性と新しい辺の下限）。",
