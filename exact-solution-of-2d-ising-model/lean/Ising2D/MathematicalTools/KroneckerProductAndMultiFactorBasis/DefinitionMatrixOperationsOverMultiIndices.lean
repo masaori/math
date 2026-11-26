@@ -1,12 +1,13 @@
 /-
-# 複素行列の全体 `Mat(m, n, ℂ)` と、行列 `Mat(2^M, ℂ)` の単位行列・スカラー倍・和・零行列・積・数ベクトルとの積と、Lean の `TensorPow M` の演算（具体版）
+# 複素行列の全体 `Mat(m, n, ℂ)` と、行列 `Mat(2^M, ℂ)` の単位行列・スカラー倍・和・零行列・積・数ベクトルとの積・トレースと、Lean の `TensorPow M` の演算（具体版）
 
 正本: `structured-latex/content/000_calculation_formulae_00_09.ts`（`calc_formulae_definition_complex_matrices`、ラベル **`def_complex_matrices`**・
 `calc_formulae_003_matrix_decomposition`、ラベル **`mat_mult`**）、
 `structured-latex/content/002_linear_space_general.ts`（`linear_space_general_definition_identity_matrix`、ラベル **`def_identity_matrix`**・
 `linear_space_general_definition_matrix_scalar_multiple`、ラベル **`def_matrix_scalar_multiple`**・
 `linear_space_general_definition_matrix_sum`、ラベル **`def_matrix_sum`**）、
-`structured-latex/content/000_calculation_formulae_45_46.ts`（`finite_matrix_definition_zero_matrix`、ラベル **`def_zero_matrix`**）
+`structured-latex/content/000_calculation_formulae_45_46.ts`（`finite_matrix_definition_zero_matrix`、ラベル **`def_zero_matrix`**）、
+`structured-latex/content/009_eigenvalues_of_V.ts`（`eigenvalues_of_V_001_definition_trace`、ラベル **`def_trace`**）
 
 人手は `Mat(2^M, ℂ)` の成分を番号で書き、五つの演算を成分の式で定める:
 `(I)_{ij} := δ_{ij}`、`(aA)_{ij} := a A_{ij}`、`(A + B)_{ij} := A_{ij} + B_{ij}`、`O_{ik} := 0`、`(AB)_{ik} := Σ_{j=1}^{n} A_{ij} B_{jk}`（添字の文字は本文どおり）。
@@ -33,6 +34,8 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が `𝓘_M`�
 行列と数ベクトルの積（`mat_mult` の `p = 1` の場合。数ベクトルは `def_complex_number_vectors` の `ℂ^n := Mat(n,1,ℂ)` の元）も同じく、
 Lean の `A *ᵥ f`（`f : Conf M → ℂ` は `ℂ^{2^M}` の数ベクトルを、第 `k` 成分 `a_k` を `f (ν^{-1}(k))` として持つ）の成分を `ν^{-1}` で番号へ移して書き
 （`tensorPow_mulVec_apply_eq_mat_mult`）、`𝓘_M` の上の和の形 `tensorPow_mulVec_apply` をそこから導く。
+トレース（`def_trace`、`tr(A) := Σ_{k=1}^{n} A_{kk}`）も同じく、Lean の `A.trace`（`def_trace` の具体版 `trace_eq_sum_diag` で対角成分の
+`𝓘_M` の上の和）を `ν^{-1}` で番号へ移して書き（`tensorPow_trace_eq_def_trace`）、`𝓘_M` の上の和の形 `tensorPow_trace_apply` をそこから導く。
 符号反転と差はここに置かない。一致の補題を通しの定理に繋げる使い道が、分離の行「TensorPow 上の行列の基本恒等式」の具体版の証明の中にしか無いからである。
 
 人手の本文は演算を定めるだけで、Lean の演算との一致の主張を持たない。補題は Lean だけの段であり、
@@ -41,6 +44,7 @@ Lean の `A *ᵥ f`（`f : Conf M → ℂ` は `ℂ^{2^M}` の数ベクトルを
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionKroneckerNumbering
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionFiniteSumOverMultiIndices
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 
 namespace Ising2D
 
@@ -191,6 +195,32 @@ theorem tensorPow_mulVec_apply {M : ℕ} (A : TensorPow M) (f : Conf M → ℂ) 
     _ = ∑ J : Conf M, A (σ i) J * f J :=
         (finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ
           (fun J => A (σ i) J * f J)).symm
+                                                            -- `def_finite_sum_of_complex_numbers_over_multi_indices`
+
+/-- **`def_trace`**: Lean の `TensorPow M` のトレースを `ν^{-1}` で番号へ移すと、本文の `tr(A) := Σ_{k=1}^{n} A_{kk}`（`n = 2^M`）の
+右辺に等しい（Lean だけの段の補題。冒頭の説明を見よ）。`def_trace` の具体版 `trace_eq_sum_diag` が開く対角成分の和は `𝓘_M`（Lean の `Conf M`）の
+上の和で、それを番号の上の和へ移すのは `def_finite_sum_of_complex_numbers_over_multi_indices`（`finset_sum_conf_complex_eq_finite_sum_over_multi_indices`）である。 -/
+theorem tensorPow_trace_eq_def_trace (M : ℕ) :
+    ∀ (n : ℕ), (∀ I : Conf M, ∃ k : Fin n, kroneckerNumbering I = finIndexToZZ n k) →
+      ∀ (σ : Fin n → Conf M), (∀ k, kroneckerNumbering (σ k) = finIndexToZZ n k) →
+        ∀ (A : TensorPow M), A.trace = ∑ k : Fin n, A (σ k) (σ k) := by
+  intro n hord σ hσ A
+  calc A.trace
+      = ∑ K : Conf M, A K K := trace_eq_sum_diag A          -- `def_trace`
+    _ = ∑ k : Fin n, A (σ k) (σ k) :=
+        finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ _
+                                                            -- `def_finite_sum_of_complex_numbers_over_multi_indices`
+
+/-- **`def_trace`**（`𝓘_M` の添字の形）: `TensorPow M` のトレースは `tr(A) = Σ_{I∈𝓘_M} A_{II}` である。
+`tensorPow_trace_eq_def_trace` で番号の上の和にし、`def_finite_sum_of_complex_numbers_over_multi_indices` で `𝓘_M` の上の和へ戻す
+（Lean だけの段。本文の和の添字を `𝓘_M` の元で書く証明の段が使う）。 -/
+theorem tensorPow_trace_apply {M : ℕ} (A : TensorPow M) :
+    A.trace = ∑ I : Conf M, A I I := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M
+  calc A.trace
+      = ∑ k : Fin n, A (σ k) (σ k) := tensorPow_trace_eq_def_trace M n hord σ hσ A  -- `def_trace`
+    _ = ∑ I : Conf M, A I I :=
+        (finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ (fun I => A I I)).symm
                                                             -- `def_finite_sum_of_complex_numbers_over_multi_indices`
 
 end Ising2D

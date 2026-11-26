@@ -18,7 +18,7 @@ export default defineBlocks([
     origin: { path: SRC, ordinal: 3 },
     title: { tex: String.raw`\text{トレース } \mathrm{tr}` },
     labels: ["def_trace"],
-    lean: ["Ising2D.trace_eq_sum_diag"],
+    lean: ["Ising2D.trace_eq_sum_diag", "Ising2D.tensorPow_trace_eq_def_trace", "Ising2D.tensorPow_trace_apply"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),

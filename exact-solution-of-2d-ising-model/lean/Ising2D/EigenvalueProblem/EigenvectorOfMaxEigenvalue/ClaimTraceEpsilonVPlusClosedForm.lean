@@ -63,10 +63,10 @@ variable {M : ℕ}
 /-- 人手 Step 5 の `tr(X) = ∑_{s∈𝔐} X_{ord(s),ord(s)}`（`def_trace` と `def_finite_sum_of_complex_numbers_over_row_configurations`）。
 人手の番号 `ord(s)` は Lean の添字 `configBasisIso M s`（`ι(s)`）に当たる（`config_numbering_equals_kronecker_numbering`、
 `ord = ν∘ι`）。`def_trace` の対角成分の和を `ι` で 𝔐 の上の和へ足し直す。Lean の行列の添字は `Conf M` なので、
-`def_trace` の和は `Conf M` の上の和である。 -/
+`def_trace` の和は `Conf M` の上の和である（`tensorPow_trace_apply`）。 -/
 theorem trace_eq_sum_configBasisIso (X : TensorPow M) :
     X.trace = ∑ s : SpinConf M, X (configBasisIso M s) (configBasisIso M s) := by
-  rw [trace_eq_sum_diag]
+  rw [tensorPow_trace_apply]                                -- `def_trace`
   exact ((configBasisIso M).sum_comp (fun I => X I I)).symm
 
 /-- 人手 Step 5 の二つの鎖の 4 行目の根拠 `finite_sum_of_real_scalar_multiples` を、𝔐 の上の和
