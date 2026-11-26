@@ -11,12 +11,14 @@
 
 ## 原文 Step 1 との対応
 
-人手の `M_col` が Lean の `r + 1`、人手の和 `Σ_{ε∈{0,1}^𝓜̌}` が `NecSuf.binWordSum r`（行列の和は `def_sum_over_binary_words`、
-複素数の和は `def_sum_over_binary_words_of_complex_numbers`。`TensorPow M` と `ℂ` の和はどちらも `NecSuf.binWordSum`）、
+人手の `M_col` が Lean の `r + 1`、人手の和 `Σ_{ε∈{0,1}^𝓜̌}` のうち行列の和（`def_sum_over_binary_words`）が `NecSuf.binWordSum r`
+（`TensorPow M` の和の具体版がまだ無いため）、複素数の和（`def_sum_over_binary_words_of_complex_numbers`）が具体版 `binaryWordComplexSum r`、
+実数の和（`def_sum_over_binary_words_of_real_numbers`）が具体版 `binaryWordRealSum r`、
 人手の `Q̌_ε` が `F.Qproj (finsetOfBinWord ε)` である。Step 1 の 8 行の鎖は `trace_Vprime_step1` の `calc` と 1 対 1 である。
 4 行目の `trace_of_sum_over_binary_words` は、`TensorPow M` の系 `trace_binWordSum_tensorPow`（必要十分版 `NecSuf.binWordSum_map` の
-特殊化。3 行目の `mul_binWordSum_tensorPow` と同じ作り）で受ける。人手の帰納法と 1 対 1 の `calc` は添字 `Fin n` の `trace_binaryWordMatrixSum` にある。
-Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`）は `NecSuf.binWordSum` の系 `binWordSum_ofReal`、
+特殊化。3 行目の `mul_binWordSum_tensorPow` と同じ作り）で受け、その直後に複素数の和を `NecSuf.binWordSum` から `binaryWordComplexSum` へ
+付け替える運ぶ段（人手の行は無い）を置く。人手の帰納法と 1 対 1 の `calc` は添字 `Fin n` の `trace_binaryWordMatrixSum` にある。
+Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`）は具体版 `binaryWordComplexSum_ofReal`、
 指数法則の 3 行（`ǧ` の定義・`def_sum_over_check_index_set`・`real_exp_of_finite_sum`）と展開の 2 行は `sum_exp_gval_step2_expansion`
 （各項に `exp_gval_step2_product`、展開は `expansion_of_finite_product_of_two_term_sums_of_real`）、続く 6 行は `prod_step2_cosh`
 （`def_half_sign_of_binary_value` の `h(1) := ½`・`h(0) := −(½)`（`halfSign_one`・`halfSign_zero`）と、ℝ の計算規則を 1 行に 1 つと、
@@ -34,7 +36,7 @@ Step 3 の冒頭の `exp(−ǧ(ε))` の 5 行の鎖は `exp_neg_gval_step3_prod
 `finite_sum_of_negated_real_numbers` は具体版 `finite_sum_of_negated_real_numbers_succ`）。トレースの鎖の 10・11 行目は `sum_exp_neg_gval_step3_expansion`
 （Step 2 の `sum_exp_gval_step2_expansion` と同じ並び）、続く 6 行は Step 2 の `prod_step2_cosh` を `γ → −γ`（`g → fun i => -(g i)`）で使う段で、
 人手もこの 6 行を Step 2 の 6 行に `γ(θ̃_μ) → −γ(θ̃_μ)` を代入した形で書いている。その先の 5 行（ℝ の `(−a)/2 = −(a/2)`、`cosh_is_even`
-（具体版 `Ising2D.cosh_is_even`）、Step 2 の鎖を右辺から左辺へ、`real_inclusion_preserves_sum_over_binary_words`（`binWordSum_ofReal`）を右辺から左辺へ、
+（具体版 `Ising2D.cosh_is_even`）、Step 2 の鎖を右辺から左辺へ、`real_inclusion_preserves_sum_over_binary_words`（`binaryWordComplexSum_ofReal`）を右辺から左辺へ、
 Step 1 の鎖 `trace_Vprime_step1` を右辺から左辺へ）は、`trace_Vprime_inv` の `M = r + 1` の最後の 5 段と 1 対 1 である。
 
 ## 原文 Step 4 との対応
@@ -60,7 +62,7 @@ import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimCheckJointEigenspace
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimRealInclusionPreservesSumOverBinaryWordsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimRealInclusionPreservesSumOverBinaryWords
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
@@ -210,21 +212,18 @@ theorem exp_gval_eq_prod (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
 /-- **原文 `trace_of_check_Vprime` Step 2 の展開の 2 行**:
 `Σ_ε exp(ǧ(ε)) = Σ_ε Π_μ exp(γ(θ̃_μ)h(ε(μ))) = Π_μ (exp(γ(θ̃_μ)h(1)) + exp(γ(θ̃_μ)h(0)))`
 （人手の `M_col` が Lean の `r + 1`、人手の `μ` が Lean の `checkIdxOfFin j`、人手の和 `Σ_{ε∈{0,1}^𝓜̌}`
-（`def_sum_over_binary_words_of_real_numbers`）が `NecSuf.binWordSum r`（`trace_Vprime_step1` と同じ）、
+（`def_sum_over_binary_words_of_real_numbers`）が具体版 `binaryWordRealSum r`、
 人手の `e ∈ {0,1}` を ℝ の元として使う箇所が Lean の `((e : ℕ) : ℝ)`）。 -/
 theorem sum_exp_gval_step2_expansion {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ) :
-    NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε)))
+    binaryWordRealSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε)))
       = ∏ j : Fin (r + 1),
           (Real.exp (g (checkIdxOfFin j) * halfSign 1)
             + Real.exp (g (checkIdxOfFin j) * halfSign 0)) :=
-  calc NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε)))
-      = NecSuf.binWordSum r
+  calc binaryWordRealSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε)))
+      = binaryWordRealSum r
           (fun ε => ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * halfSign (ε j))) := by
         congr 1; funext ε; exact F.exp_gval_step2_product g ε
                                                         -- 直前の鎖（`exp_gval_step2_product`）を各項へ同時に
-    _ = binaryWordRealSum r
-          (fun ε => ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * halfSign (ε j))) :=
-        (binaryWordRealSum_eq_binWordSum r _).symm      -- 人手の和の Lean の二つの表し方を付け替える（運ぶ段。人手の行は無い）
     _ = ∏ j : Fin (r + 1),
           (Real.exp (g (checkIdxOfFin j) * halfSign 1)
             + Real.exp (g (checkIdxOfFin j) * halfSign 0)) :=
@@ -315,10 +314,11 @@ theorem sum_exp_gval (g : CheckIdx M → ℝ) :
 
 /-- **原文 `trace_of_check_Vprime` Step 1** の 8 行の鎖:
 `tr(V̌') = tr(V̌'I) = tr(V̌'Σ_εQ̌_ε) = tr(Σ_εV̌'Q̌_ε) = Σ_εtr(V̌'Q̌_ε) = Σ_εtr(e^{ǧ(ε)}Q̌_ε) = Σ_εe^{ǧ(ε)}tr(Q̌_ε)
-= Σ_εe^{ǧ(ε)}1_ℂ = Σ_εe^{ǧ(ε)}`（人手の `M_col` が Lean の `r + 1`）。 -/
+= Σ_εe^{ǧ(ε)}1_ℂ = Σ_εe^{ǧ(ε)}`（人手の `M_col` が Lean の `r + 1`）。4 行目の直後に、複素数の和を `NecSuf.binWordSum` から
+具体版 `binaryWordComplexSum` へ付け替える運ぶ段（人手の行は無い）を置く。 -/
 theorem trace_Vprime_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ) :
     (F.Vprime g).trace
-      = NecSuf.binWordSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
+      = binaryWordComplexSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
   calc (F.Vprime g).trace
       = (F.Vprime g * 1).trace := by rw [mul_identity_matrix_tensorPow]
                                                         -- `identity_matrix_is_right_unit_of_mat_mult`（`A → V̌'`）を右辺から左辺へ
@@ -329,16 +329,18 @@ theorem trace_Vprime_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx
                                                         -- （`C → V̌'`、`X_ε → Q̌_ε`）
     _ = NecSuf.binWordSum r (fun ε => (F.Vprime g * F.Qproj (finsetOfBinWord ε)).trace) :=
         trace_binWordSum_tensorPow r _                  -- `trace_of_sum_over_binary_words`（`B_ε → V̌'Q̌_ε`）
-    _ = NecSuf.binWordSum r
+    _ = binaryWordComplexSum r (fun ε => (F.Vprime g * F.Qproj (finsetOfBinWord ε)).trace) :=
+        (binaryWordComplexSum_eq_binWordSum r _).symm   -- 人手の複素数の和の Lean の二つの表し方を付け替える（運ぶ段。人手の行は無い）
+    _ = binaryWordComplexSum r
           (fun ε => ((((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) • F.Qproj (finsetOfBinWord ε)).trace) := by
         congr 1; funext ε; rw [F.Vprime_mul_Qproj]      -- `eigenvalues_of_check_Vprime` を各項へ同時に
-    _ = NecSuf.binWordSum r
+    _ = binaryWordComplexSum r
           (fun ε => (((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) * (F.Qproj (finsetOfBinWord ε)).trace) := by
         congr 1; funext ε; exact trace_smul_tensorPow _ _
                                                         -- `trace_of_scalar_multiple`（`α → (e^{ǧ(ε)})_ℂ`、`A → Q̌_ε`）を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε => (((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) * 1) := by
+    _ = binaryWordComplexSum r (fun ε => (((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) * 1) := by
         congr 1; funext ε; rw [F.trace_Qproj]           -- `check_joint_eigenspace_decomposition` (4) の `tr(Q̌_ε) = 1` を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) := by
+    _ = binaryWordComplexSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) := by
         congr 1; funext ε; exact mul_one _              -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）を各項へ同時に
 
 /-- 人手の範囲外の `M = 0` の `tr(V̌') = Σ_T e^{ǧ(T)}`（mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` で閉じる）。 -/
@@ -356,7 +358,7 @@ theorem trace_Vprime_eq_finset_sum_of_mathlib (g : CheckIdx M → ℝ) :
 
 /-- `tr(V̌') = (∏_{μ∈𝓜̌} 2 cosh(γ(θ~_μ)/2))_ℂ`（積の添字が `𝓜̌`。**前因子 `2^{M-m}` は無い**）。
 人手の主張は積の添字を `{1, …, M_col}` に取る Step 5 の鎖（`trace_Vprime_step5`）で、この定理に対応する人手の行は無い。
-`M = r + 1` では Step 1 の鎖 `trace_Vprime_step1`、`binWordSum_ofReal`、`sum_exp_gval_step2_expansion`、`prod_step2_cosh` を順に通し、
+`M = r + 1` では Step 1 の鎖 `trace_Vprime_step1`、`binaryWordComplexSum_ofReal`、`sum_exp_gval_step2_expansion`、`prod_step2_cosh` を順に通し、
 最後の段で積の添字を `𝓜̌` へ戻す（運ぶ段）。このファイルで使うのは人手の範囲外の `M = 0` の枝（`trace_Vprime_eq_finset_sum_of_mathlib` と
 `sum_exp_gval` で閉じる）だけである。 -/
 theorem trace_Vprime (g : CheckIdx M → ℝ) :
@@ -365,10 +367,10 @@ theorem trace_Vprime (g : CheckIdx M → ℝ) :
   | 0, F, g => rw [F.trace_Vprime_eq_finset_sum_of_mathlib g, F.sum_exp_gval g]
   | r + 1, F, g =>
     calc (F.Vprime g).trace
-        = NecSuf.binWordSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
+        = binaryWordComplexSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
           trace_Vprime_step1 F g                        -- Step 1 の鎖
-      _ = ((NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ) :=
-          binWordSum_ofReal r _                         -- Step 2 の 1 行目: `real_inclusion_preserves_sum_over_binary_words`
+      _ = ((binaryWordRealSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ) :=
+          binaryWordComplexSum_ofReal r _               -- Step 2 の 1 行目: `real_inclusion_preserves_sum_over_binary_words`
                                                         -- （`x_ε → exp(ǧ(ε))`）
       _ = ((∏ j : Fin (r + 1),
               (Real.exp (g (checkIdxOfFin j) * halfSign 1)
@@ -387,10 +389,11 @@ theorem trace_Vprime (g : CheckIdx M → ℝ) :
 = (Σ_εexp(−ǧ(ε)))_ℂ`（人手の `M_col` が Lean の `r + 1`、人手の `(V̌')^{-1}` が `↑(F.VprimeUnits g)⁻¹`）。
 1〜8 行は Step 1 の鎖 `trace_Vprime_step1` と同じ根拠で、5 行目だけが `eigenvalues_of_check_Vprime` の代わりに
 `eigenvalues_of_inverse_of_check_Vprime`（`Vprime_inv_mul_Qproj`）を引く。9 行目は Step 2 の 1 行目と同じ
-`real_inclusion_preserves_sum_over_binary_words`（`binWordSum_ofReal`）である。 -/
+`real_inclusion_preserves_sum_over_binary_words`（`binaryWordComplexSum_ofReal`）である。4 行目の直後に、Step 1 と同じく
+複素数の和を `binaryWordComplexSum` へ付け替える運ぶ段（人手の行は無い）を置く。 -/
 theorem trace_Vprime_inv_step3 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ) :
     ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1))).trace
-      = ((NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
+      = ((binaryWordRealSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
   calc ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1))).trace
       = ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1)) * 1).trace := by
         rw [mul_identity_matrix_tensorPow]              -- `identity_matrix_is_right_unit_of_mat_mult`（`A → (V̌')^{-1}`）を右辺から左辺へ
@@ -404,19 +407,22 @@ theorem trace_Vprime_inv_step3 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : Chec
     _ = NecSuf.binWordSum r (fun ε =>
           ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1)) * F.Qproj (finsetOfBinWord ε)).trace) :=
         trace_binWordSum_tensorPow r _                  -- `trace_of_sum_over_binary_words`（`B_ε → (V̌')^{-1}Q̌_ε`）
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
+          ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1)) * F.Qproj (finsetOfBinWord ε)).trace) :=
+        (binaryWordComplexSum_eq_binWordSum r _).symm   -- 人手の複素数の和の Lean の二つの表し方を付け替える（運ぶ段。人手の行は無い）
+    _ = binaryWordComplexSum r (fun ε =>
           ((((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) • F.Qproj (finsetOfBinWord ε)).trace) := by
         congr 1; funext ε; rw [F.Vprime_inv_mul_Qproj]  -- `eigenvalues_of_inverse_of_check_Vprime` を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε =>
+    _ = binaryWordComplexSum r (fun ε =>
           (((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) * (F.Qproj (finsetOfBinWord ε)).trace) := by
         congr 1; funext ε; exact trace_smul_tensorPow _ _
                                                         -- `trace_of_scalar_multiple`（`α → (exp(−ǧ(ε)))_ℂ`、`A → Q̌_ε`）を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε => (((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) * 1) := by
+    _ = binaryWordComplexSum r (fun ε => (((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) * 1) := by
         congr 1; funext ε; rw [F.trace_Qproj]           -- `check_joint_eigenspace_decomposition` (4) の `tr(Q̌_ε) = 1` を各項へ同時に
-    _ = NecSuf.binWordSum r (fun ε => ((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) := by
+    _ = binaryWordComplexSum r (fun ε => ((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) := by
         congr 1; funext ε; exact mul_one _              -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）を各項へ同時に
-    _ = ((NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
-        binWordSum_ofReal r _                           -- `real_inclusion_preserves_sum_over_binary_words`（`x_ε → exp(−ǧ(ε))`）
+    _ = ((binaryWordRealSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
+        binaryWordComplexSum_ofReal r _                 -- `real_inclusion_preserves_sum_over_binary_words`（`x_ε → exp(−ǧ(ε))`）
 
 /-- **原文 `trace_of_check_Vprime` Step 3 の冒頭の 5 行の鎖**:
 `exp(−ǧ(ε)) = exp(−Σ_{μ∈𝓜̌} γ(θ̃_μ)h(ε(μ))) = exp(−Σ_μ γ(θ̃_μ)h(ε(μ))) = exp(Σ_μ −(γ(θ̃_μ)h(ε(μ)))) = exp(Σ_μ (−γ(θ̃_μ))h(ε(μ)))
@@ -453,18 +459,15 @@ theorem exp_neg_gval_step3_product {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : 
 `Σ_ε exp(−ǧ(ε)) = Σ_ε Π_μ exp((−γ(θ̃_μ))h(ε(μ))) = Π_μ (exp((−γ(θ̃_μ))h(1)) + exp((−γ(θ̃_μ))h(0)))`
 （`sum_exp_gval_step2_expansion` と同じ並び。1 行目は `exp_neg_gval_step3_product` を各項へ）。 -/
 theorem sum_exp_neg_gval_step3_expansion {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ) :
-    NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε))))
+    binaryWordRealSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε))))
       = ∏ j : Fin (r + 1),
           (Real.exp ((-(g (checkIdxOfFin j))) * halfSign 1)
             + Real.exp ((-(g (checkIdxOfFin j))) * halfSign 0)) :=
-  calc NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε))))
-      = NecSuf.binWordSum r
+  calc binaryWordRealSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε))))
+      = binaryWordRealSum r
           (fun ε => ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * halfSign (ε j))) := by
         congr 1; funext ε; exact F.exp_neg_gval_step3_product g ε
                                                         -- 冒頭の `exp(−ǧ(ε))` の鎖（`exp_neg_gval_step3_product`）を各項へ同時に
-    _ = binaryWordRealSum r
-          (fun ε => ∏ j : Fin (r + 1), Real.exp ((-(g (checkIdxOfFin j))) * halfSign (ε j))) :=
-        (binaryWordRealSum_eq_binWordSum r _).symm      -- 人手の和の Lean の二つの表し方を付け替える（運ぶ段。人手の行は無い）
     _ = ∏ j : Fin (r + 1),
           (Real.exp ((-(g (checkIdxOfFin j))) * halfSign 1)
             + Real.exp ((-(g (checkIdxOfFin j))) * halfSign 0)) :=
@@ -490,7 +493,7 @@ theorem trace_Vprime_inv (g : CheckIdx M → ℝ) :
     calc (F.Vprime (fun i => -(g i))).trace
         = ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1))).trace := by
           rw [F.VprimeUnits_inv g]                      -- 人手の `(V̌')^{-1}` の Lean の二つの表し方を付け替える（運ぶ段。人手の行は無い）
-      _ = ((NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
+      _ = ((binaryWordRealSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
           trace_Vprime_inv_step3 F g                    -- Step 3 のトレースの鎖
       _ = ((∏ j : Fin (r + 1),
               (Real.exp ((-(g (checkIdxOfFin j))) * halfSign 1)
@@ -505,12 +508,12 @@ theorem trace_Vprime_inv (g : CheckIdx M → ℝ) :
       _ = ((∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) : ℝ) : ℂ) :=
           congrArg (fun x : ℝ => (x : ℂ)) (Finset.prod_congr rfl fun j _ => by
             rw [cosh_is_even (g (checkIdxOfFin j) / 2)]) -- `cosh_is_even`（`x → γ(θ̃_μ)/2`）を各因子へ同時に
-      _ = ((NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ) := by
+      _ = ((binaryWordRealSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ) := by
           rw [sum_exp_gval_step2_expansion F g, prod_step2_cosh g]
                                                         -- Step 2 の `Σ_ε exp(ǧ(ε)) = Π_μ 2cosh(γ(θ̃_μ)/2)` の鎖
                                                         -- （展開までの `sum_exp_gval_step2_expansion` と続く 6 行の `prod_step2_cosh`）を右辺から左辺へ
-      _ = NecSuf.binWordSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
-          (binWordSum_ofReal r _).symm                  -- `real_inclusion_preserves_sum_over_binary_words`（`x_ε → exp(ǧ(ε))`）を右辺から左辺へ
+      _ = binaryWordComplexSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
+          (binaryWordComplexSum_ofReal r _).symm        -- `real_inclusion_preserves_sum_over_binary_words`（`x_ε → exp(ǧ(ε))`）を右辺から左辺へ
       _ = (F.Vprime g).trace :=
           (trace_Vprime_step1 F g).symm                 -- Step 1 の `tr(V̌') = Σ_ε (exp(ǧ(ε)))_ℂ` の鎖を右辺から左辺へ
 
@@ -532,10 +535,10 @@ theorem two_cosh_half_step4 (x : ℝ) : 2 * Real.cosh (x / 2) > 0 :=
 theorem trace_Vprime_step5 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ) :
     (F.Vprime g).trace = ((∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) : ℝ) : ℂ) :=
   calc (F.Vprime g).trace
-      = NecSuf.binWordSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
+      = binaryWordComplexSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
         trace_Vprime_step1 F g                          -- Step 1 の `tr(V̌') = Σ_ε (exp(ǧ(ε)))_ℂ` の鎖
-    _ = ((NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ) :=
-        binWordSum_ofReal r _                           -- `real_inclusion_preserves_sum_over_binary_words`（`r → M_col`、`x_ε → exp(ǧ(ε))`）
+    _ = ((binaryWordRealSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ) :=
+        binaryWordComplexSum_ofReal r _                 -- `real_inclusion_preserves_sum_over_binary_words`（`r → M_col`、`x_ε → exp(ǧ(ε))`）
     _ = ((∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) : ℝ) : ℂ) := by
         rw [sum_exp_gval_step2_expansion F g, prod_step2_cosh g]
                                                         -- Step 2 の `Σ_ε exp(ǧ(ε)) = Π_μ 2cosh(γ(θ̃_μ)/2)` の鎖
