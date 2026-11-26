@@ -142,11 +142,12 @@ theorem real_identity_matrix_eq_real_matrix_of_identity :
     (1 : Matrix (Conf M) (Conf M) ℝ)
       = realMatrixOfRealEntries (1 : TensorPow M) identity_matrix_hasRealEntries_tensorPow :=
   calc (1 : Matrix (Conf M) (Conf M) ℝ)
-      = realMatrixOfRealEntries W hW.1 ^ 0 := (pow_zero _).symm             -- `def_exp` (1) の `A^0 := I`（`K = ℝ`、`I` は `def_real_identity_matrix`）
+      = realMatrixOfRealEntries W hW.1 ^ 0 :=
+        (realMatrix_conf_pow_zero_and_succ _).1.symm                        -- `def_matrix_power` の `A^0 := I`（`K = ℝ`、`I` は `def_real_identity_matrix`）
     _ = realMatrixOfRealEntries (W ^ 0) (matrix_pow_hasRealEntries W hW.1 0) :=
         (real_matrix_of_real_entry_matrix_preserves_power W hW.1 0).symm     -- 【冪の実数の行列】（`p → 0`）
     _ = realMatrixOfRealEntries (1 : TensorPow M) identity_matrix_hasRealEntries_tensorPow :=
-        realMatrixOfRealEntries_congr (pow_zero W) _ _                      -- `def_exp` (1) の `A^0 := I`（`K = ℂ`）
+        realMatrixOfRealEntries_congr (pow_zero W) _ _                      -- `def_matrix_power` の `A^0 := I`（`K = ℂ`）
 
 /-- 人手【添字の等式】の一つ目の 3 行: `(a + b) + 1 = b + (1 + a)`（人手の `ℤ_{≥0}` の元を Lean の `ℕ` で書く）。 -/
 theorem moment_index_add_add_one_eq (a b : ℕ) : a + b + 1 = b + (1 + a) :=
@@ -188,8 +189,8 @@ theorem power_of_W_split_with_W (a b : ℕ) : W ^ (a + b + 1) = W ^ b * (W * W ^
     _ = W ^ b * W ^ (1 + a) := matrix_power_exponent_law W b (1 + a)       -- `matrix_power_exponent_law`（`p → b`, `q → 1 + a`）
     _ = W ^ b * (W ^ 1 * W ^ a) := by rw [matrix_power_exponent_law W 1 a]  -- `matrix_power_exponent_law`（`p → 1`, `q → a`）
     _ = W ^ b * (W ^ (0 + 1) * W ^ a) := by rw [← moment_index_one_eq_zero_add_one]  -- 【添字の等式】の `1 = 0 + 1`
-    _ = W ^ b * ((W ^ 0 * W) * W ^ a) := by rw [pow_succ W 0]               -- `def_exp` (1) の `A^{m+1} := A^mA`（`m = 0`）
-    _ = W ^ b * ((1 * W) * W ^ a) := by rw [pow_zero]                       -- `def_exp` (1) の `A^0 := I`
+    _ = W ^ b * ((W ^ 0 * W) * W ^ a) := by rw [pow_succ W 0]               -- `def_matrix_power` の `A^{m+1} := A^mA`（`m = 0`）
+    _ = W ^ b * ((1 * W) * W ^ a) := by rw [pow_zero]                       -- `def_matrix_power` の `A^0 := I`
     _ = W ^ b * (W * W ^ a) := by rw [identity_matrix_mul_tensorPow W]      -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-- 人手【冪の分け方】の 5 行: `W^s = W^b(CW^a)`（`C ∈ Mat^re`）なら `(W_ℝ)^s = (W_ℝ)^b(C_ℝ(W_ℝ)^a)`。 -/
@@ -296,7 +297,8 @@ theorem power_zero_of_W_real_mulVec_apply (x : Conf M → ℝ) (l : Conf M) :
   calc ((realMatrixOfRealEntries W hW.1 ^ 0) *ᵥ x) l
       = ∑ m, (realMatrixOfRealEntries W hW.1 ^ 0) l m * x m :=
         realMatrix_conf_mulVec_apply _ _ _                                  -- 【`(W_ℝ)^ax` の成分】（`a → 0`）
-    _ = ∑ m, (1 : Matrix (Conf M) (Conf M) ℝ) l m * x m := by rw [pow_zero]  -- `def_exp` (1) の `A^0 := I`（`K = ℝ`）
+    _ = ∑ m, (1 : Matrix (Conf M) (Conf M) ℝ) l m * x m := by
+        rw [(realMatrix_conf_pow_zero_and_succ _).1]                        -- `def_matrix_power` の `A^0 := I`（`K = ℝ`）
     _ = ∑ m, if m = l then (1 : Matrix (Conf M) (Conf M) ℝ) l l * x l else 0 := by
         refine Finset.sum_congr rfl fun m _ => ?_
         by_cases h : m = l
@@ -324,7 +326,7 @@ theorem power_succ_of_W_real (a : ℕ) :
         realMatrixOfRealEntries_congr (power_of_W_split_with_W W a 0) _ _   -- 【冪の分け方】の `Mat(d,ℂ)` の二つ目の鎖（`b → 0`）
     _ = realMatrixOfRealEntries (1 * (W * W ^ a))
           (matrix_mul_hasRealEntries _ _ identity_matrix_hasRealEntries_tensorPow hWWa) :=
-        realMatrixOfRealEntries_congr (by rw [pow_zero]) _ _                -- `def_exp` (1) の `A^0 := I`（`K = ℂ`）
+        realMatrixOfRealEntries_congr (by rw [pow_zero]) _ _                -- `def_matrix_power` の `A^0 := I`（`K = ℂ`）
     _ = realMatrixOfRealEntries (W * W ^ a) hWWa :=
         realMatrixOfRealEntries_congr (identity_matrix_mul_tensorPow _) _ _  -- `identity_matrix_is_left_unit_of_mat_mult`
     _ = realMatrixOfRealEntries W hW.1 * realMatrixOfRealEntries (W ^ a) hWa :=

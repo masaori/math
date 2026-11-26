@@ -14,15 +14,15 @@
 | 証明の行 | ファイル | 検査内容 | ステータス |
 |---|---|---|---|
 | 【e_k のノルム】（`i ≠ k` の鎖 `|(e_k)_i|^2 = |0|^2 = 0^2 = 0` と、`‖e_k‖ = √(Σ|(e_k)_i|^2) = √(0+⋯+0+|(e_k)_k|^2+0+⋯+0) = √(|(e_k)_k|^2) = √(|1|^2) = √(1^2) = √1 = 1`） | `_lines.sage` | `i ≠ k` の鎖の 3 段（`|·|` は `def_real_absolute_value` の場合分けで作る）、AA の平方根で作ったノルムの 7 段、各項へ当てた和と、0 の項を左から順に落とす各段（`0 + a = a` か `a + 0 = a`）、根号の中が 1、`|1| = 1` と `1^2 = 1` | **PASS** |
-| 【冪の実対称性】（`W^p` は実対称） | `_lines.sage` | `def_exp` (1) の漸化式で作った冪が Sage の冪 `P**p` と一致し、成分が QQ、`def_matrix_transpose` で作った転置と一致。鎖 `(W^p)_kl = ((W^p)^⊤)_kl = (W^p)_lk` の 2 段を全成分で | **PASS** |
+| 【冪の実対称性】（`W^p` は実対称） | `_lines.sage` | `def_matrix_power` の漸化式で作った冪が Sage の冪 `P**p` と一致し、成分が QQ、`def_matrix_transpose` で作った転置と一致。鎖 `(W^p)_kl = ((W^p)^⊤)_kl = (W^p)_lk` の 2 段を全成分で | **PASS** |
 | 【対角成分の表示】（準備: `i ≠ k` の項 `((e_k)_i(W^p)_ij)(e_k)_j = (0·(W^p)_ij)·(e_k)_j = 0·(e_k)_j = 0`、`i ≠ k` の内側の和 `Σ_j … = Σ_j 0 = 0`、`j ≠ k` の項 `(W^p)_kj(e_k)_j = (W^p)_kj·0 = 0`。主: `e_k^⊤W^pe_k = ΣΣ… = 0+⋯+0+Σ_j (e_k)_k(W^p)_kj(e_k)_j+0+⋯+0 = Σ_j (e_k)_k(W^p)_kj(e_k)_j = Σ_j 1·(W^p)_kj(e_k)_j = Σ_j (W^p)_kj(e_k)_j = 0+⋯+0+(W^p)_kk(e_k)_k+0+⋯+0 = (W^p)_kk(e_k)_k = (W^p)_kk·1 = (W^p)_kk`） | `_lines.sage` | 準備の 3 段・2 段・2 段（`real_zero_times_is_zero`・`real_times_zero_is_zero` の当てはめを含む）、主の 9 段の等号、`(e_k)_k = 1` の代入を各項で、`1·x = x`（`x → (W^p)_kj`）と `x·1 = x`（`x → (W^p)_kk`）の当てはめ、各項へ 0 を当てた和、0 の項を左から順に落とす各段（`0 + r = r` か `r + 0 = r`）、組み込みの行列積 `e^⊤Qe` との比較 | **PASS** |
 | 【W^ae_k の成分とノルム】（準備: `j ≠ k` の項 `(W^a)_lj(e_k)_j = (W^a)_lj·0 = 0`。`u_l = Σ_j (W^a)_lj(e_k)_j = 0+⋯+0+(W^a)_lk(e_k)_k+0+⋯+0 = (W^a)_lk(e_k)_k = (W^a)_lk·1 = (W^a)_lk`、`‖u‖ ≤ c^a‖e_k‖ = c^a`、`‖u‖^2 ≤ c^{2a}`） | `_lines.sage` | 成分の式と組み込みの積、準備の 2 段、5 行の等号（各項へ 0 を当てた和と、0 の項を左から順に落とす各段、`(e_k)_k = 1` の代入と `x·1 = x`（`x → (W^a)_lk`））、`rayleigh_bounds_operator_norm` の冪の主張（指数 `a`）の不等号、`0 ≤ ‖u‖`、`(c^a)^2 = c^{2a}`、二乗した不等号 | **PASS** |
 | 【添字の等式】（`2a = (1+1)a = 1·a+1·a = a+a`、`2a+1 = (a+a)+1 = a+(a+1) = a+(1+a)`）と奇数の鎖の 4 行目の根拠 `1 = 0+1`（ℤ の和の単位元） | `_lines.sage` | 各段の等号を ZZ で、確かめる最大の `n` の半分以下の全ての `a` で | **PASS** |
 | 偶数の場合の鎖（【対角成分の表示】 → `2a = a+a` → `matrix_power_exponent_law` → `mat_mult` → 【冪の実対称性】 の対称性 → `u_l = (W^a)_lk` → `u_lu_l = |u_l|^2` → `def_matrix_norm` → `≤ c^{2a}` → `n = 2a`） | `_lines.sage` | 8 段の等号、不等号、最後の等号。`W^{2a} = W^aW^a` を行列として比較 | **PASS** |
-| 奇数の場合の `W^{2a+1} = W^{a+(1+a)} = W^aW^{1+a} = W^a(W^1W^a) = W^a(W^{0+1}W^a) = W^a((W^0W)W^a) = W^a((IW)W^a) = W^a(WW^a)` | `_lines.sage` | 7 段の行列の等号（冪は `def_exp` (1)、積は `mat_mult` の成分の式） | **PASS** |
+| 奇数の場合の `W^{2a+1} = W^{a+(1+a)} = W^aW^{1+a} = W^a(W^1W^a) = W^a(W^{0+1}W^a) = W^a((W^0W)W^a) = W^a((IW)W^a) = W^a(WW^a)` | `_lines.sage` | 7 段の行列の等号（冪は `def_matrix_power`、積は `mat_mult` の成分の式） | **PASS** |
 | 奇数の場合の成分の鎖（【対角成分の表示】 → 上の鎖 → `mat_mult` 2 回 → 分配律 → 【冪の実対称性】 → 【W^ae_k の成分とノルム】 → `def_real_bilinear_value` → `def_rayleigh_sup` → 【W^ae_k の成分とノルム】 と `c > 0` → 指数法則 → `n = 2a+1`） | `_lines.sage` | 8 段の等号、不等号 2 段、等号 2 段 | **PASS** |
 | トレースの鎖（`def_trace` → 【対角成分の表示】 → 各 `k` の評価と有限和 → `ι(d) c^n`（`finite_sum_of_constant_real_number`） → `ι(2^{M_col}) c^n`（`d := 2^{M_col} ∈ ℤ_{≥1}`） → `2_ℝ^{M_col} c^n`（`inclusion_zz_to_rr_of_power_of_two`）） | `_lines.sage`（最後の 2 行は `check_power_of_two_lines`、本文の `W` だけ） | Sage の `trace`（別の経路）と `def_trace` の和と【対角成分の表示】 の和の一致、各 `k` の不等号、和の不等号、定義の再帰で作った和と `ι`（`sagemath/_shared/inclusion_zz_to_rr_by_definition.sage`）で `Σc^n = ι(d)c^n`、組み込みの `dc^n` との一致、`d = 2^{M_col}`、`ι(2^{M_col})c^n = 2_ℝ^{M_col}c^n`（`2_ℝ^{M_col}` は `def_power_of_real_number` の再帰） | **PASS** |
-| 【冪の実数の行列】（`(W^p)_ℝ = (W_ℝ)^p`） | `_lines.sage`（`check_varrho_lines`） | QQbar の冪を ϱ で移したものと AA の冪（どちらも `def_exp` (1) の漸化式） | **PASS** |
+| 【冪の実数の行列】（`(W^p)_ℝ = (W_ℝ)^p`） | `_lines.sage`（`check_varrho_lines`） | QQbar の冪を ϱ で移したものと AA の冪（どちらも `def_matrix_power` の漸化式） | **PASS** |
 | 【冪の対称性】の 6 行の鎖と単射性の結論（`((W_ℝ)^p)_kl = ((W_ℝ)^p)_lk`） | `_lines.sage`（`check_varrho_lines`） | 6 段の等号を全成分で、結論を AA で | **PASS** |
 | 偶数の ϱ の鎖（`(W_ℝ)^{2a} = (W^{2a})_ℝ = (W^{a+a})_ℝ = (W^aW^a)_ℝ = (W^a)_ℝ(W^a)_ℝ = (W_ℝ)^a(W_ℝ)^a`） | `_lines.sage`（`check_varrho_lines`） | 5 段の行列の等号 | **PASS** |
 | 奇数の `(WW^a)_ℝ = W_ℝ(W^a)_ℝ` と ϱ の鎖（`(W_ℝ)^{2a+1} = (W^{2a+1})_ℝ = (W^a(WW^a))_ℝ = (W^a)_ℝ(WW^a)_ℝ = (W^a)_ℝ(W_ℝ(W^a)_ℝ) = (W_ℝ)^a(W_ℝ(W_ℝ)^a)`） | `_lines.sage`（`check_varrho_lines`） | 1 個と 5 段の行列の等号 | **PASS** |
@@ -54,7 +54,7 @@
 ## 構成上かならず一致する比較（写し間違いの検出だけに効く）
 
 - 【e_k のノルム】の 1 行目（`norm_exact` と同じ式）、偶数の鎖の `W^{2a} = W^{a+a}`（同じ添字の冪）、【対角成分の表示】の 1 行目（`bil` は二重和そのもの）と 2〜6 行目（`(e_k)_k = 1` を代入する 4 行目と `1·x = x` の 5 行目を含む）と、代入の 8 行目、`x·1 = x` の 9 行目、【W^ae_k の成分とノルム】の `(e_k)_k = 1` を代入する 4 行目と `x·1 = x` の 5 行目、【冪の実対称性】の鎖の 2 行目（転置を `def_matrix_transpose` の式で作る）、奇数の鎖の `ΣΣu_lW_lmu_m = u^⊤Wu`（`bil` の定義そのもの）、【W^ae_k の成分とノルム】の 1〜3 行目、偶数・奇数の鎖の `mat_mult` と分配律の行は、和の項を落とす・並べ替えるだけなので QQ の計算規則で必ず一致する。中身は、組み込みの行列積 `e^⊤Qe`・`P*e` と Sage の `trace`・冪 `P**p` との比較にある。
-- `W^{2a+1}` の鎖の `W^{a+(1+a)}`・`W^{0+1}`・`W^0`・`I` の行は、冪を `def_exp` (1) の漸化式で作るので構成上一致する。`matrix_power_exponent_law` を当てる行（`W^aW^{1+a}`、`W^a(W^1W^a)`）は、別々に作った冪の積の比較なので中身がある。
+- `W^{2a+1}` の鎖の `W^{a+(1+a)}`・`W^{0+1}`・`W^0`・`I` の行は、冪を `def_matrix_power` の漸化式で作るので構成上一致する。`matrix_power_exponent_law` を当てる行（`W^aW^{1+a}`、`W^a(W^1W^a)`）は、別々に作った冪の積の比較なので中身がある。
 
 ## 証明の修正（2026-11-04）
 

@@ -10006,8 +10006,8 @@ r_i
         " について、",
         math(String.raw`A^q`),
         "（",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{C}`),
         " の冪）の成分はすべて実数（",
         ref("def_matrix_with_real_entries"),
@@ -10020,8 +10020,8 @@ r_i
         "（",
         math(String.raw`m \to n,\ n \to n,\ B \to A^q`),
         "）の略記、右辺は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{R}`),
         " の冪（積は ",
         ref("def_real_matrix_product"),
@@ -10052,8 +10052,8 @@ r_i
         " のとき、",
         math(String.raw`A^0 = I`),
         "（",
-        ref("def_exp"),
-        " (1)、",
+        ref("def_matrix_power"),
+        "、",
         math(String.raw`K = \mathbb{C}`),
         "）である。",
         math(String.raw`s, t \in \{1,\dots,n\}`),
@@ -10086,11 +10086,11 @@ I_{st}
 &= (A^0)_{st}
 &&(\because \blkref{def_real_matrix_of_real_entry_matrix}\ (m \to n,\ n \to n,\ B \to A^0)) \\
 &= I_{st}
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{C})) \\
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K = \mathbb{C})) \\
 &= \bigl((I_{\mathrm{Mat}(n,\mathbb{R})})_{st}\bigr)_{\mathbb{C}}
 &&(\because \text{上の鎖}) \\
 &= \bigl(((A_{\mathbb{R}})^0)_{st}\bigr)_{\mathbb{C}}
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ (A_{\mathbb{R}})^0 := I\ (K = \mathbb{R}\text{、}I = I_{\mathrm{Mat}(n,\mathbb{R})}\ \text{は}\ \blkref{def_real_identity_matrix}))
+&&(\because \blkref{def_matrix_power}\ \text{の}\ (A_{\mathbb{R}})^0 := I\ (K = \mathbb{R}\text{、}I = I_{\mathrm{Mat}(n,\mathbb{R})}\ \text{は}\ \blkref{def_real_identity_matrix}))
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -10110,8 +10110,8 @@ I_{st}
         " で主張が成り立つとする。",
         math(String.raw`A^{q+1} = A^qA`),
         "（",
-        ref("def_exp"),
-        " (1)、",
+        ref("def_matrix_power"),
+        "、",
         math(String.raw`K = \mathbb{C}`),
         "）であり、帰納法の仮定より ",
         math(String.raw`A^q`),
@@ -10128,13 +10128,13 @@ I_{st}
       displayMath(String.raw`\begin{aligned}
 (A^{q+1})_{\mathbb{R}}
 &= (A^qA)_{\mathbb{R}}
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{q+1} := A^qA\ (K = \mathbb{C})) \\
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^{q+1} := A^qA\ (K = \mathbb{C})) \\
 &= (A^q)_{\mathbb{R}}\,A_{\mathbb{R}}
 &&(\because \blkref{real_matrix_of_real_entry_matrix_preserves_product}\ (m, n, p \to n,\ A \to A^q,\ B \to A)) \\
 &= (A_{\mathbb{R}})^q\,A_{\mathbb{R}}
 &&(\because \text{帰納法の仮定}) \\
 &= (A_{\mathbb{R}})^{q+1}
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ (A_{\mathbb{R}})^{q+1} := (A_{\mathbb{R}})^qA_{\mathbb{R}}\ (K = \mathbb{R}\text{、積は}\ \blkref{def_real_matrix_product}))
+&&(\because \blkref{def_matrix_power}\ \text{の}\ (A_{\mathbb{R}})^{q+1} := (A_{\mathbb{R}})^qA_{\mathbb{R}}\ (K = \mathbb{R}\text{、積は}\ \blkref{def_real_matrix_product}))
 \end{aligned}`),
       paragraph([
         "である。よって ",

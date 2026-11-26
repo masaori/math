@@ -33,10 +33,10 @@
 
 | 証明の行 | 検算 | 段数（模型） |
 |---|---|---|
-| Step 0 の冒頭の ň_μň_μ = ň_μ（5 行。冪は `def_exp` (1) どおり）、ň − ň = O の行（`matrix_difference_zero_iff_equal` の ⟸。3 か所とも同じ行）、和 R^{(1)} + R^{(0)} = I（`matrix_plus_difference_cancels`） | `check_step0_square_zero_difference_and_sum_chains.sage` | 79 |
+| Step 0 の冒頭の ň_μň_μ = ň_μ（5 行。冪は `def_matrix_power` どおり）、ň − ň = O の行（`matrix_difference_zero_iff_equal` の ⟸。3 か所とも同じ行）、和 R^{(1)} + R^{(0)} = I（`matrix_plus_difference_cancels`） | `check_step0_square_zero_difference_and_sum_chains.sage` | 79 |
 | Step 0 の R^{(1)}R^{(0)} = 0・R^{(0)}R^{(1)} = 0（本文の 8 行のうち先頭の R の定義の行を除く 7 行）・R^{(0)}R^{(0)} = R^{(0)}（本文の 9 行のうち先頭を除く 8 行）、Step 3 の ň_νR_ν^{(0)} = 0（同じ 7 行） | `check_step0_step3_distributivity_chains.sage` | 217 |
 | Step 0 の R^{(1)}R^{(1)} = R^{(1)}（本文の 3 行）は、Step 3 の ň_νR_ν^{(1)} = R_ν^{(1)} の 3 行と同じ式で、`check_step3_factor_case_chains.sage` が確かめる | 同左 | — |
-| Step 0 の異なる添字の因子の可換性（YI = Y = IY と、4 通りの上付き添字の組の鎖。`check_number_operators_commute` (2)・`commuting_with_difference`）、Step 1 の ε = ε' の Q̌_ε^2 の 8 行（`def_exp` (1)・`product_of_two_finite_products_of_matrices` とその前提・冪等性）、Step 3 の因子ごとの可換性の三つの場合と右から掛けた側 Q̌_εň_ν = ň_νQ̌_ε の 3 行（`matrix_commuting_with_each_factor_commutes_with_finite_product` を右辺から左辺へ） | `check_step0_commutation_step1_square_step3_chains.sage` | 1820 |
+| Step 0 の異なる添字の因子の可換性（YI = Y = IY と、4 通りの上付き添字の組の鎖。`check_number_operators_commute` (2)・`commuting_with_difference`）、Step 1 の ε = ε' の Q̌_ε^2 の 8 行（`def_matrix_power`・`product_of_two_finite_products_of_matrices` とその前提・冪等性）、Step 3 の因子ごとの可換性の三つの場合と右から掛けた側 Q̌_εň_ν = ň_νQ̌_ε の 3 行（`matrix_commuting_with_each_factor_commutes_with_finite_product` を右辺から左辺へ） | `check_step0_commutation_step1_square_step3_chains.sage` | 1820 |
 | Step 1 の ε ≠ ε' の鎖（μ = ν の可換性の 2 行と、Q̌_ε の定義・`moving_one_factor_of_finite_product_to_the_end`・結合律・Q̌_{ε'} の定義・`matrix_commuting_with_each_factor_commutes_with_finite_product`・`moving_one_factor_of_finite_product_to_the_end`・結合律・Step 0 の異なる上付き添字の積・`zero_matrix_is_right_zero_of_mat_mult` 2 回の 10 行。二つの主張の前提も）、Step 3 の ň_νQ̌_ε の ε(ν) によらない 5 行と、ε(ν) = 1 の 6 行（場合の仮定・ň_νR_ν^{(1)} = R_ν^{(1)}・`moving_one_factor_of_finite_product_to_the_end` を右辺から左辺へ・定義）・ε(ν) = 0 の 4 行（場合の仮定・ň_νR_ν^{(0)} = 0・`zero_matrix_is_right_zero_of_mat_mult`）（∏_{μ≠ν} は `def_finite_product_of_matrices_omitting_one_index` どおり） | `check_step1_orthogonality_step3_moving_one_factor_chains.sage` | 8352 |
 | Step 2 の鎖（分配による展開・Step 0 の和・`finite_product_of_identity_matrices`。和は Sage の sum） | `check_step2_identity_product_chain.sage` | 9 |
 | Step 2 の鎖を、(2) の和を `def_sum_over_binary_words` どおりに組んで（Q̌_ε の定義・`expansion_of_finite_product_of_two_term_sums` を右辺から左辺へ・Step 0 の和・`finite_product_of_identity_matrices`） | `check_step2_expansion_over_binary_words.sage` | 12 |
@@ -75,7 +75,7 @@
 - **厳密**: すべて。模型は `QQ`、本物の ψ̌ は数体 F、不定元の成分は `QQ` か F の上の多項式環の等号。浮動小数点は使わない。
 - **ℝ への脱出**: 本物の ψ̌ の r_μ = |γ_2(θ̃_μ)| と (√M_col)_ℂ（ℝ_{≥0} の平方根）。どちらも代数的数として厳密に持つ（`def_check_number_operator` の検算の準備と同じ）。
 - **作り方で自明な比較**（両辺を同じ Sage の式から作るので、本文の写し間違いだけを検出する）: 証明が
-  「R_μ^{(e)} の定義（`def_check_R_factor`）」「Q̌_ε の定義（冒頭。`def_check_Q_epsilon`・`def_product_over_check_index_set`）」「場合の仮定」「x_ε の取り方」「`def_exp` (1) の A^0 := I・A^{m+1} := A^mA」を根拠に引く行は、
+  「R_μ^{(e)} の定義（`def_check_R_factor`）」「Q̌_ε の定義（冒頭。`def_check_Q_epsilon`・`def_product_over_check_index_set`）」「場合の仮定」「x_ε の取り方」「`def_matrix_power` の A^0 := I・A^{m+1} := A^mA」を根拠に引く行は、
   検算が R・Q̌・冪・y_ε をその定義どおりに組むので、全ての検算で作り方で自明である（例: Step 0 の 4 通りの可換性の鎖の先頭と末尾、
   Step 1 の Q̌^2 の 1〜3 行目と「Q̌ の定義を 2 か所」の行と最後の行、Step 3 の μ = ν、ε(ν) = 1 の 2 行の鎖の全体、
   Step 3 の ε(ν) = 0・1 の場合の仮定の行、Step 5 の直和の前提の鎖の「x_ε の取り方」の行）。この規則の外の自明な比較は次だけである:

@@ -12,9 +12,9 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス |
 |---|---|---|---|
-| `q = 0`: `A^{p+0} = A^p = A^pI = A^pA^0` | `check_induction_chains.sage` | 冪は `def_exp` (1) の漸化式、積は `mat_mult` の成分の式、単位行列は `def_identity_matrix` で作り、3 段の等号 | **PASS** |
+| `q = 0`: `A^{p+0} = A^p = A^pI = A^pA^0` | `check_induction_chains.sage` | 冪は `def_matrix_power` の漸化式、積は `mat_mult` の成分の式、単位行列は `def_identity_matrix` で作り、3 段の等号 | **PASS** |
 | 帰納法の段: `A^{p+(q+1)} = A^{(p+q)+1} = A^{p+q}A = (A^pA^q)A = A^p(A^qA) = A^pA^{q+1}` | `check_induction_chains.sage` | 帰納法の仮定 `A^{p+q} = A^pA^q` を確かめたうえで 5 段の等号 | **PASS** |
-| 主張 | `check_induction_chains.sage` | Sage の冪 `A**k` と行列積 `*`（別の経路）で `A^{p+q+1} = A^pA^{q+1}`、`def_exp` (1) の冪と Sage の冪の一致 | **PASS** |
+| 主張 | `check_induction_chains.sage` | Sage の冪 `A**k` と行列積 `*`（別の経路）で `A^{p+q+1} = A^pA^{q+1}`、`def_matrix_power` の冪と Sage の冪の一致 | **PASS** |
 
 成分を QQ 上の不定元にした `n = 1..3` の行列（`p, q ≤ 3`、`n = 3` は `≤ 2`）と、`QQ(i)` の具体の行列 `n = 1..5`（`p, q ≤ 5`）。1473 段。
 

@@ -2229,8 +2229,8 @@ U S_2 U^{-1}
         "）、",
         math(String.raw`\check{n}_\mu^2`),
         " は ",
-        ref("def_exp"),
-        " (1) の冪である。",
+        ref("def_matrix_power"),
+        " の冪である。",
       ]),
     ],
     proof: [
@@ -2324,11 +2324,11 @@ U S_2 U^{-1}
         String.raw`\begin{aligned}
 \check{n}_\mu^2
 &= \check{n}_\mu^1\,\check{n}_\mu
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{n}_\mu)\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{n}_\mu)\right) \\
 &= \left(\check{n}_\mu^0\,\check{n}_\mu\right)\check{n}_\mu
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{n}_\mu)\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{n}_\mu)\right) \\
 &= \left(I\,\check{n}_\mu\right)\check{n}_\mu
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{n}_\mu)\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (A \to \check{n}_\mu)\right) \\
 &= \check{n}_\mu\,\check{n}_\mu
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\right) \\
 &= \left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
@@ -3500,11 +3500,11 @@ w
 &= \left(I\,\check{n}_\mu\right)\check{n}_\mu
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
 &= \left(\check{n}_\mu^0\,\check{n}_\mu\right)\check{n}_\mu
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
 &= \check{n}_\mu^1\,\check{n}_\mu
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
 &= \check{n}_\mu^2
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
 &= \check{n}_\mu
    \quad \left(\because\ \blkref{check_number_operator_idempotent}\ \text{(3)}\right)
 \end{aligned}`,
@@ -3735,11 +3735,11 @@ R_\nu^{(\epsilon(\nu))}R_\nu^{(\epsilon'(\nu))}
         String.raw`\begin{aligned}
 \check{Q}_\epsilon^2
 &=\check{Q}_\epsilon^1\,\check{Q}_\epsilon
-  \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_\epsilon)\right) \\
+  \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_\epsilon)\right) \\
 &=\left(\check{Q}_\epsilon^0\,\check{Q}_\epsilon\right)\check{Q}_\epsilon
-  \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_\epsilon)\right) \\
+  \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_\epsilon)\right) \\
 &=\left(I\,\check{Q}_\epsilon\right)\check{Q}_\epsilon
-  \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\right) \\
+  \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\right) \\
 &=\check{Q}_\epsilon\check{Q}_\epsilon
   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\right) \\
 &=\left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon(\mu))}\right)
@@ -4246,11 +4246,11 @@ y_{\epsilon'}
 &= \Bigl(\bigl(I\,\check{Q}_{\epsilon}\bigr)\check{Q}_{\epsilon}\Bigr)x_{\epsilon}
 &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\bigr)\\
 &= \Bigl(\bigl(\check{Q}_\epsilon^0\,\check{Q}_{\epsilon}\bigr)\check{Q}_{\epsilon}\Bigr)x_{\epsilon}
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ \text{を右辺から左辺へ}\bigr)\\
 &= \left(\check{Q}_\epsilon^1\,\check{Q}_{\epsilon}\right)x_{\epsilon}
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0)\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 0)\ \text{を右辺から左辺へ}\bigr)\\
 &= \check{Q}_\epsilon^2\,x_{\epsilon}
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1)\ \text{を右辺から左辺へ}\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 1)\ \text{を右辺から左辺へ}\bigr)\\
 &= \check{Q}_{\epsilon}x_{\epsilon}
 &&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(1) の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\bigr)\\
 &= q_{\epsilon}
@@ -4684,8 +4684,8 @@ h(\epsilon(\mu)) \in \mathbb{R}`,
         "Step 2（",
         math(String.raw`\check{X}^k\check{Q}_\epsilon = \check{g}(\epsilon)^k\check{Q}_\epsilon`),
         "）。行列の冪は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`A^0 := I`),
         "、",
         math(String.raw`A^{m+1} := A^m A`),
@@ -4705,7 +4705,7 @@ h(\epsilon(\mu)) \in \mathbb{R}`,
         String.raw`\begin{aligned}
 \check{X}^0\check{Q}_\epsilon
 &= I\check{Q}_\epsilon
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{X})\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (A \to \check{X})\right) \\
 &= \check{Q}_\epsilon
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\right) \\
 &= 1\,\check{Q}_\epsilon
@@ -4722,7 +4722,7 @@ h(\epsilon(\mu)) \in \mathbb{R}`,
         String.raw`\begin{aligned}
 \check{X}^{k+1}\check{Q}_\epsilon
 &= \left(\check{X}^k\check{X}\right)\check{Q}_\epsilon
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to k,\ A \to \check{X})\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to k,\ A \to \check{X})\right) \\
 &= \check{X}^k\left(\check{X}\check{Q}_\epsilon\right)
    \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check{X}^k,\ B \to \check{X},\ C \to \check{Q}_\epsilon)\right) \\
 &= \check{X}^k\left(\check{g}(\epsilon)\,\check{Q}_\epsilon\right)
@@ -4819,7 +4819,7 @@ E_K \check{Q}_\epsilon
         String.raw`\begin{aligned}
 \check{Q}_\epsilon\check{X}^0
 &= \check{Q}_\epsilon I
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{X})\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (A \to \check{X})\right) \\
 &= \check{Q}_\epsilon
    \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\right) \\
 &= 1\,\check{Q}_\epsilon
@@ -4836,7 +4836,7 @@ E_K \check{Q}_\epsilon
         String.raw`\begin{aligned}
 \check{Q}_\epsilon\check{X}^{k+1}
 &= \check{Q}_\epsilon\left(\check{X}^k\check{X}\right)
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to k,\ A \to \check{X})\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to k,\ A \to \check{X})\right) \\
 &= \left(\check{Q}_\epsilon\check{X}^k\right)\check{X}
    \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon,\ B \to \check{X}^k,\ C \to \check{X})\ \text{を右辺から左辺へ}\right) \\
 &= \left(\check{g}(\epsilon)^k\check{Q}_\epsilon\right)\check{X}
@@ -4925,11 +4925,11 @@ E_K \check{Q}_\epsilon
 &= \left(\left(I\check{Q}_\epsilon\right)\check{Q}_\epsilon\right)x
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \left(\left(\check{Q}_\epsilon^0\check{Q}_\epsilon\right)\check{Q}_\epsilon\right)x
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \left(\check{Q}_\epsilon^1\check{Q}_\epsilon\right)x
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_\epsilon^2 x
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_\epsilon x
    \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (1)\ \text{の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\right) \\
 &= y
@@ -6048,7 +6048,9 @@ R^{(+)}V^{(+)}
         math(String.raw`A^p`),
         "（",
         math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
-        "）と ",
+        "）は ",
+        ref("def_matrix_power"),
+        "、",
         math(String.raw`\exp`),
         " は ",
         ref("def_exp"),
@@ -6125,23 +6127,23 @@ R^{(+)}V^{(+)}
       displayMath(String.raw`\begin{aligned}
 T_B(X^0)
 &= T_B\bigl(I_{\mathrm{Mat}(n,\mathbb{C})}\bigr)
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ X^0 := I)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ X^0 := I)\\
 &= I_{\mathrm{Mat}(n,\mathbb{C})}
 &&(\because\ \blkref{conjugation_is_ring_homomorphism}\ \text{の単位的})\\
 &= \bigl(T_B(X)\bigr)^0
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ \bigl(T_B(X)\bigr)^0 := I)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ \bigl(T_B(X)\bigr)^0 := I)
 \end{aligned}`),
       paragraph([math(String.raw`p`), " で成り立つとすると、"]),
       displayMath(String.raw`\begin{aligned}
 T_B(X^{p+1})
 &= T_B(X^pX)
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ X^{p+1} := X^pX)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ X^{p+1} := X^pX)\\
 &= T_B(X^p)\,T_B(X)
 &&(\because\ \blkref{conjugation_is_ring_homomorphism}\ \text{の乗法的}\ (A \to X^p,\ C \to X))\\
 &= \bigl(T_B(X)\bigr)^p\,T_B(X)
 &&(\because\ \text{帰納法の仮定}\ T_B(X^p) = \bigl(T_B(X)\bigr)^p)\\
 &= \bigl(T_B(X)\bigr)^{p+1}
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ \bigl(T_B(X)\bigr)^{p+1} := \bigl(T_B(X)\bigr)^p\,T_B(X))
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ \bigl(T_B(X)\bigr)^{p+1} := \bigl(T_B(X)\bigr)^p\,T_B(X))
 \end{aligned}`),
       paragraph([
         "Step 2（部分和の共役）。すべての ",
@@ -7041,11 +7043,11 @@ V^{(+)}\check{Q}_\epsilon
 &= \left(\left(I\check{Q}_\epsilon\right)\check{Q}_\epsilon\right)x
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \left(\left(\check{Q}_\epsilon^0\check{Q}_\epsilon\right)\check{Q}_\epsilon\right)x
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \left(\check{Q}_\epsilon^1\check{Q}_\epsilon\right)x
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_\epsilon^2 x
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_\epsilon x
    \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (1)\ \text{の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\right) \\
 &= y
@@ -8162,11 +8164,11 @@ x &= Ix
 &= \left(\left(I\check{Q}_{(1,\dots,1)}\right)\check{Q}_{(1,\dots,1)}\right)z
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
 &= \left(\left(\check{Q}_{(1,\dots,1)}^0\check{Q}_{(1,\dots,1)}\right)\check{Q}_{(1,\dots,1)}\right)z
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
 &= \left(\check{Q}_{(1,\dots,1)}^1\check{Q}_{(1,\dots,1)}\right)z
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_{(1,\dots,1)}^2 z
-   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
+   \quad \left(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_{(1,\dots,1)}z
    \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (1)\ \text{の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\ (\epsilon \to (1,\dots,1))\right) \\
 &= y

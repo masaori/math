@@ -41,7 +41,7 @@ theorem projection_apply_self (Pr : ι → Module.End K V) (hsq : ∀ e, Pr e ^ 
     (e : ι) {q x : V} (hq : q = Pr e x) : Pr e q = q := by
   rw [hq,                                                          -- `x_ε` の取り方
     ← Module.End.mul_apply,                                        -- `mat_mult_associative` を右辺から左辺へ
-    ← pow_two,                                                     -- `def_exp` (1) の冪を右辺から左辺へ
+    ← pow_two,                                                     -- `def_matrix_power` の冪を右辺から左辺へ
     hsq e]                                                         -- `check_joint_eigenspace_decomposition` (1) の `Q̌_ε^2 = Q̌_ε`
 
 /-- **`nonzero_elements_of_images_of_check_Q_form_basis`** の必要十分版。 -/

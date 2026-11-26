@@ -12,10 +12,10 @@
 
 | 証明の行 | ファイル | 検査内容 | ステータス |
 |---|---|---|---|
-| 準備 `A^1 = A^{0+1} = A^0A = IA = A` | `check_induction_chains.sage` | 冪は `def_exp` (1)、積は `mat_mult`、単位行列は `def_identity_matrix` と `def_kronecker_delta` で作り、4 段 | **PASS** |
+| 準備 `A^1 = A^{0+1} = A^0A = IA = A` | `check_induction_chains.sage` | 冪は `def_matrix_power`、積は `mat_mult`、単位行列は `def_identity_matrix` と `def_kronecker_delta` で作り、4 段 | **PASS** |
 | `p = 0`: `I_kl = δ_kl = {1_C, 0_C} = {ι(1), ι(0)}`、`(I^⊤)_kl = I_lk = δ_lk = δ_kl = I_kl` | `check_induction_chains.sage` | 全成分で各段。`δ_kl` を実数の組 `(1,0)`・`(0,0)` で持ち、それが ℂ の積・和の単位元であること（一般の元 `(x, y)` で）と `ι(1)`・`ι(0)` との一致、虚部 0 | **PASS** |
 | 帰納法の段の成分が実（`product_of_real_entry_matrices_has_real_entries`） | `check_induction_chains.sage` | `(A^pA)_kl` を実数の組で組んだ ℂ の積の和として作り、虚部が 0 で `A^{p+1}` の成分と一致 | **PASS** |
-| 帰納法の段の転置の鎖（`def_matrix_transpose` → `def_exp` (1) → `mat_mult` → 転置 2 箇所 → 帰納法の仮定 → 仮定 `A^⊤ = A` → 可換律 → `mat_mult` → `A^1 = A` → `matrix_power_exponent_law` → 加法の可換律） | `check_induction_chains.sage` | 帰納法の仮定 `(A^p)^⊤ = A^p` を確かめたうえで 11 段 | **PASS** |
+| 帰納法の段の転置の鎖（`def_matrix_transpose` → `def_matrix_power` → `mat_mult` → 転置 2 箇所 → 帰納法の仮定 → 仮定 `A^⊤ = A` → 可換律 → `mat_mult` → `A^1 = A` → `matrix_power_exponent_law` → 加法の可換律） | `check_induction_chains.sage` | 帰納法の仮定 `(A^p)^⊤ = A^p` を確かめたうえで 11 段 | **PASS** |
 | 主張 | `check_induction_chains.sage` | Sage の冪と転置（別の経路）で `(A^{p+1})^⊤ = A^{p+1}` | **PASS** |
 
 成分 `a_kl = a_lk` を QQ 上の不定元にした実対称行列 `n = 1..3`（`p ≤ 3`、`n = 3` は `≤ 2`）と、QQ の具体の対称行列 `n = 1..5`（`p ≤ 5`）。5267 段。

@@ -3943,7 +3943,7 @@ D_0(\varepsilon G)
         "(P3) ",
         math(String.raw`\varepsilon G`),
         " の冪。",
-        ref("def_exp"),
+        ref("def_matrix_power"),
         " の冪 ",
         math(String.raw`A^0 := I`),
         "、",
@@ -3958,20 +3958,22 @@ D_0(\varepsilon G)
         math(String.raw`j = 0`),
         " では ",
         math(String.raw`(\varepsilon G)^{0} = I`),
-        "（冪の定義）であり、",
+        "（",
+        ref("def_matrix_power"),
+        "）であり、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 (\varepsilon G)^{2j+1}
 &= (\varepsilon G)^{2j}(\varepsilon G)
-&&(\because \text{冪の定義}) \\
+&&(\because \blkref{def_matrix_power}) \\
 &= I(\varepsilon G)
 &&(\because \text{帰納法の仮定}\ (\varepsilon G)^{2j} = I) \\
 &= \varepsilon G
 &&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult}) \\[4pt]
 (\varepsilon G)^{2j+2}
 &= (\varepsilon G)^{2j+1}(\varepsilon G)
-&&(\because \text{冪の定義}) \\
+&&(\because \blkref{def_matrix_power}) \\
 &= (\varepsilon G)(\varepsilon G)
 &&(\because \text{直前の}\ (\varepsilon G)^{2j+1} = \varepsilon G) \\
 &= (\varepsilon G)^2
@@ -4005,7 +4007,7 @@ D_0(\varepsilon G)
         String.raw`\begin{aligned}
 (\kappa X)^{n+1}
 &= (\kappa X)^{n}(\kappa X)
-&&(\because \text{冪の定義}) \\
+&&(\because \blkref{def_matrix_power}) \\
 &= \bigl(\kappa^{n}X^{n}\bigr)(\kappa X)
 &&(\because \text{帰納法の仮定}) \\
 &= \kappa^{n}\bigl(X^{n}(\kappa X)\bigr)
@@ -4015,7 +4017,7 @@ D_0(\varepsilon G)
 &= (\kappa^{n}\kappa)(X^{n}X)
 &&(\because \blkref{scalar_multiple_is_associative}) \\
 &= \kappa^{n+1}X^{n+1}
-&&(\because \blkref{def_power_of_complex_number}\ \text{と冪の定義})
+&&(\because \blkref{def_power_of_complex_number}\ \text{と}\ \blkref{def_matrix_power})
 \end{aligned}`,
       ),
       paragraph([

@@ -153,14 +153,14 @@ theorem rayleigh_bounds_operator_norm_pow {W : Matrix n n ℝ} (hW : W.IsSymm)
   | zero =>
       exact le_of_eq <|
         calc vecNorm (W ^ 0 *ᵥ x)
-            = vecNorm ((1 : Matrix n n ℝ) *ᵥ x) := by rw [pow_zero]           -- 1 行目: `def_exp` (1) の `A^0 := I`（`def_real_identity_matrix`）
+            = vecNorm ((1 : Matrix n n ℝ) *ᵥ x) := by rw [pow_zero]           -- 1 行目: `def_matrix_power` の `A^0 := I`（`def_real_identity_matrix`）
           _ = vecNorm x := by
               rw [real_identity_matrix_is_left_unit_of_real_matrix_vector_product x]
                                                                               -- 2 行目: `real_identity_matrix_is_left_unit_of_real_matrix_vector_product`
           _ = rayleighSup W ^ 0 * vecNorm x := by rw [pow_zero, one_mul]      -- 3 行目: `c^0 = 1`
   | succ k ih =>
       calc vecNorm (W ^ (k + 1) *ᵥ x)
-          = vecNorm ((W ^ k * W) *ᵥ x) := by rw [pow_succ]                    -- 1 行目: `def_exp` (1) の `A^{m+1} := A^mA`（積は `def_real_matrix_product`）
+          = vecNorm ((W ^ k * W) *ᵥ x) := by rw [pow_succ]                    -- 1 行目: `def_matrix_power` の `A^{m+1} := A^mA`（積は `def_real_matrix_product`）
         _ = vecNorm (W ^ k *ᵥ (W *ᵥ x)) := by
             rw [real_matrix_vector_product_is_associative (W ^ k) W x]       -- 2 行目: `real_matrix_vector_product_is_associative`（`P → (W_ℝ)^k`, `Q → W_ℝ`）
         _ ≤ rayleighSup W ^ k * vecNorm (W *ᵥ x) := ih (W *ᵥ x)               -- 3 行目: 帰納法の仮定を `W_ℝx` に適用

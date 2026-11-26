@@ -1,11 +1,12 @@
 /-
-# 実数の行列の全体 `Mat(m, n, ℝ)` と、実数の行列 `Mat(2^M, ℝ)` の積・実数のベクトルとの積・単位行列・実数の双線型値 `x^⊤Py` と、Lean の `Matrix (Conf M) (Conf M) ℝ` の演算（具体版）
+# 実数の行列の全体 `Mat(m, n, ℝ)` と、実数の行列 `Mat(2^M, ℝ)` の積・実数のベクトルとの積・単位行列・冪・実数の双線型値 `x^⊤Py` と、Lean の `Matrix (Conf M) (Conf M) ℝ` の演算（具体版）
 
 正本: `structured-latex/content/002_linear_space_general.ts`（`linear_space_general_definition_real_matrices`、ラベル **`def_real_matrices`**・
 `linear_space_general_definition_real_matrix_product`、ラベル **`def_real_matrix_product`**・
 `linear_space_general_definition_real_matrix_vector_product`、ラベル **`def_real_matrix_vector_product`**・
 `linear_space_general_definition_real_identity_matrix`、ラベル **`def_real_identity_matrix`**）、
-`structured-latex/content/011_max_eigenvalue.ts`（`maxeig_definition_real_bilinear_value`、ラベル **`def_real_bilinear_value`**）
+`structured-latex/content/011_max_eigenvalue.ts`（`maxeig_definition_real_bilinear_value`、ラベル **`def_real_bilinear_value`**）、
+`structured-latex/content/003_exp_linear_map.ts`（`exp_linear_map_definition_matrix_power`、ラベル **`def_matrix_power`** の `K = ℝ` の場合）
 
 人手の `Mat(m, n, ℝ)` は添字の集合の直積 `{1,…,m} × {1,…,n}` から `ℝ` への写像の全体（`def_real_matrices`）で、演算を成分の式で定める:
 `(PQ)_{ik} := Σ_{j=1}^{n} P_{ij} Q_{jk}`、`(Px)_i := Σ_{j=1}^{n} P_{ij} x_j`、`(I_{Mat(n,ℝ)})_{st} := 1 (s = t)、0 (s ≠ t)`（添字の文字は本文どおり）。
@@ -24,6 +25,8 @@ Lean の `Matrix (Conf M) (Conf M) ℝ` は添字型が `𝓘_M`（Lean の `Con
 - 実数の双線型値 `x^⊤Py := Σ_{k=1}^{n} Σ_{l=1}^{n} x_k P_{kl} y_l`（`def_real_bilinear_value`）は、Lean では `x ⬝ᵥ P *ᵥ y` と書く。
   `⬝ᵥ` と `*ᵥ` の値を番号の上の和へ移し、`x_k` を内側の和へ入れて、本文の二重の和に等しいことを示す
   （`realMatrix_conf_bilinear_value_eq_def_real_bilinear_value`）。`𝓘_M` の上の二重の和の形 `realMatrix_conf_bilinear_value_apply` もそこから導く。
+- 冪（`def_matrix_power` の `K = ℝ`）は `P^0 := I`、`P^{m+1} := P^m P` の帰納法で定まる。mathlib の行列の冪も同じ帰納法 `npowRec` で
+  定義されているので、二つの式を定義を開くだけで示す（`realMatrix_conf_pow_zero_and_succ`）。
 - 単位行列は成分の式が番号の等号で場合を分けるので、`ν^{-1}` で番号へ移した成分が本文の二つの場合の値に等しいことを `ν^{-1}` の単射で示す
   （`realMatrix_conf_one_apply_eq_def_real_identity_matrix`）。`𝓘_M` の添字の形 `realMatrix_conf_one_apply` もそこから導く。
 
@@ -219,5 +222,13 @@ theorem realMatrix_conf_bilinear_value_apply {M : ℕ} (x y : Conf M → ℝ) (P
         (finset_sum_conf_real_eq_finite_sum_over_multi_indices M n hord σ hσ
           (fun K => ∑ L : Conf M, x K * P K L * y L)).symm
                                                             -- `def_finite_sum_of_real_numbers_over_multi_indices` を外側の和へ
+
+/-- **`def_matrix_power`**（`K = ℝ`、`Mat(2^M, ℝ)`）: Lean の `Matrix (Conf M) (Conf M) ℝ` の冪 `P ^ m`（mathlib の `Monoid.npow`）は、本文の
+`P^0 := I`、`P^{m+1} := P^m P` の二つの式を満たす（Lean だけの段の補題。冒頭の説明を見よ）。右辺の積は `def_real_matrix_product`、
+`I` は `def_real_identity_matrix` の具体版（mathlib の `*` と `1`。一致は上の補題）である。mathlib の行列の冪は
+`npowRec`（`a^0 := 1`、`a^{m+1} := a^m * a`）で定義されているので、二つの式はどちらも定義を開くだけで成り立つ。 -/
+theorem realMatrix_conf_pow_zero_and_succ {M : ℕ} (P : Matrix (Conf M) (Conf M) ℝ) :
+    P ^ 0 = (1 : Matrix (Conf M) (Conf M) ℝ) ∧ ∀ m : ℕ, P ^ (m + 1) = P ^ m * P :=
+  ⟨rfl, fun _ => rfl⟩                                       -- mathlib の冪 `npowRec` の定義を開く
 
 end Ising2D

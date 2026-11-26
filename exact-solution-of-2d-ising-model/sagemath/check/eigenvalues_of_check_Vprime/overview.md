@@ -39,7 +39,7 @@
 |---|---|---|
 | Step 1 の μ ごとの左の等式 (ň_μ − ½I)Q̌_ε = h(ε(μ))Q̌_ε（ε(μ) によらない 6 行: `matrix_difference_is_sum_with_negation`・`mat_mult_distributes_over_sum_in_left_factor`・`negation_factors_out_of_left_factor`・右辺から左辺へ・`scalar_multiple_factors_out_of_left_factor`・`identity_matrix_is_left_unit_of_mat_mult`。ε(μ) = 1 の 7 行: (3)・`scalar_multiple_by_one`・`difference_of_scalar_multiples_of_one_matrix`・`real_one_minus_half_is_half`・h(1) := ½・場合の仮定。ε(μ) = 0 の 7 行: (3)・`zero_scalar_multiple_is_zero_matrix`・同・0 − a = −a・h(0) := −(½)・場合の仮定）と、X̌Q̌_ε から ǧ(ε)Q̌_ε までの 8 行（`def_check_number_operator` (2)・`finite_sum_of_matrices_distributes_in_left_factor`・`scalar_multiple_factors_out_of_left_factor`・μ ごとの左の等式・`scalar_multiple_is_associative`・`finite_sum_of_scalar_multiples_of_one_matrix`・`def_sum_over_check_index_set`（作り方で自明）・ǧ の定義）。鎖の項は `_step1_chains.sage` が組む。両端は Sage の演算（独立な経路）とも比べる | `check_step1_left_chain.sage` | 1405（否定コントロールで等号のまま残る段を含む） |
 | Step 1 の μ ごとの右の等式 Q̌_ε(ň_μ − ½I) = h(ε(μ))Q̌_ε と Q̌_εX̌ から ǧ(ε)Q̌_ε までの 8 行（右から掛ける形の同じ主張たち）と、「とくに X̌Q̌_ε = Q̌_εX̌」（左右の鎖の終わりが同じ ǧ(ε)Q̌_ε） | `check_step1_right_chain.sage` | 1405（同上） |
-| Step 2 の帰納法（k = 0 の 4 行、k + 1 の 8 行）、Step 3' の帰納法（k = 0 の 4 行、k + 1 の 7 行）、Step 4 の Q̌_εy = y の 8 行（`def_exp` (1) の冪・`mat_mult_associative`・単位行列・`scalar_multiple_by_one`・スカラー倍の主張・ℂ の交換律・(1)）。k = 0, …, 4 | `check_step2_step3prime_induction_and_step4_idempotent_chains.sage` | 1129（否定コントロール 9 行） |
+| Step 2 の帰納法（k = 0 の 4 行、k + 1 の 8 行）、Step 3' の帰納法（k = 0 の 4 行、k + 1 の 7 行）、Step 4 の Q̌_εy = y の 8 行（`def_matrix_power` の冪・`mat_mult_associative`・単位行列・`scalar_multiple_by_one`・スカラー倍の主張・ℂ の交換律・(1)）。k = 0, …, 4 | `check_step2_step3prime_induction_and_step4_idempotent_chains.sage` | 1129（否定コントロール 9 行） |
 | Step 3 の E_KQ̌_ε と Step 3' の Q̌_εE_K から (Σ_{k≤K}(1/k!)ǧ^k)Q̌_ε までの各 8 行（K = 0, …, 4） | `check_step3_partial_sum_chains.sage` | 974（否定コントロールの 14 段を含む） |
 | Step 3・Step 3' の極限の鎖（Step 3' の最後の行 = V̌'Q̌_ε は「主張の両辺」が受け持つ。E_K → V̌'、行列積の連続性の評価（左右）、(1/k!)z = z/k!、`scalar_sequence_times_matrix_converges` の評価、`scalar_exp_is_limit_of_partial_sums` の極限、`complex_exp_of_real_argument`、主張の両辺。ǧ(ε) < 0 の ε が在ること） | `check_step3_limit_chains.sage` | 1044 の関係 |
 | Step 4 の後半の 5 行 V̌'y = V̌'(Q̌_εy) = (V̌'Q̌_ε)y = ((exp ǧ)_ℂQ̌_ε)y = (exp ǧ)_ℂ(Q̌_εy) = (exp ǧ)_ℂy（exp(γ_μ/2) を不定元 t_μ に置いた F[t^{±1}] で厳密に） | `check_step4_eigenvector_chain.sage` | 122（否定コントロール 3 行） |
@@ -90,7 +90,7 @@ P^{-1}V̌'P が diag(exp ǧ(ε)) と重なる（対角化可能、固有値は�
   模型の極限の鎖は移す前と同じ `RealField(256)` の評価で、許容誤差 2^{-200} はその精度の丸めに対する余裕である。
 - **作り方で自明な比較**: 1 行目と最後の行が X̌・ǧ・E_K の定義そのものの行（Step 1 の両端、部分和の鎖の 1・2 行目）、
   添字 0 からの和をずらす二つの定義の行（同じ項の並びから組む）、ℂ の積の交換律の行（可換な環の上ではいつも一致）、
-  `def_exp` (1) の冪の定義の行と g^0 := 1・g^{k+1} := g^kg の行（冪を定義どおりに組む）、Step 4 の「y = Q̌_εx と書いた」の行、
+  `def_matrix_power` の冪の定義の行と g^0 := 1・g^{k+1} := g^kg の行（冪を定義どおりに組む）、Step 4 の「y = Q̌_εx と書いた」の行、
   Step 4 の後半の `mat_mult_associative`・`scalar_multiple_factors_out_of_left_factor` の行（Sage の行列演算ではいつも成り立つ）、
   極限の鎖の (1/k!)z = z/k! と `complex_exp_of_real_argument`（Sage の中ではほぼ恒等的に成り立ち、写し間違いの検出だけに効く）。
 - 範囲外: 本物の ψ̌ の M_col ≥ 4（`check_joint_eigenspace_decomposition` の overview と同じ理由）。M_col = 4 は模型が受け持つ。

@@ -56,9 +56,9 @@ variable {K : Type*} [CommRing K] {n : Type*} [Fintype n] [DecidableEq n]
 
 theorem idempotent_sq_eq_mul_self (Q : Matrix n n K) : Q ^ 2 = Q * Q :=
   calc Q ^ 2
-      = Q ^ 1 * Q := pow_succ Q 1                          -- `def_exp` (1) の `A^{m+1} := A^m A` を `m = 1` に
-    _ = (Q ^ 0 * Q) * Q := by rw [pow_succ Q 0]            -- `def_exp` (1) の `A^{m+1} := A^m A` を `m = 0` に
-    _ = (1 * Q) * Q := by rw [pow_zero]                    -- `def_exp` (1) の `A^0 := I`
+      = Q ^ 1 * Q := pow_succ Q 1                          -- `def_matrix_power` の `A^{m+1} := A^m A` を `m = 1` に
+    _ = (Q ^ 0 * Q) * Q := by rw [pow_succ Q 0]            -- `def_matrix_power` の `A^{m+1} := A^m A` を `m = 0` に
+    _ = (1 * Q) * Q := by rw [pow_zero]                    -- `def_matrix_power` の `A^0 := I`
     _ = Q * Q := by rw [Ising2D.NecSuf.one_mul_matrix]             -- `identity_matrix_is_left_unit_of_mat_mult`
 
 theorem idempotent_mul_self_of_sq (Q : Matrix n n K) (hQ : Q ^ 2 = Q) : Q * Q = Q :=

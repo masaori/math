@@ -24,7 +24,7 @@
   （`DefinitionRealMatrixOfRealEntryMatrix.lean`）。`(AB)_ℝ` に渡す証明は `matrix_mul_hasRealEntries`、`(A^q)_ℝ` に渡す証明は
   `matrix_pow_hasRealEntries` である。`MatrixHasRealEntries` は命題なので、どの証明を渡しても `realMatrixOfRealEntries` の値は同じである。
   `A^{q+1}` と `A^qA` は行列として等しいが証明の型が違うので、その行は `realMatrixOfRealEntries_congr`（等しい行列の `ϱ` は等しい）で書く。
-- 人手の `def_exp` (1) の `A^0 := I`、`A^{m+1} := A^mA` は、Lean の `Monoid` の冪の `pow_zero`・`pow_succ` である（`K = ℂ` と `K = ℝ` の両方）。
+- 人手の `def_matrix_power` の `A^0 := I`、`A^{m+1} := A^mA` は、Lean の `Monoid` の冪の `pow_zero`・`pow_succ` である（`K = ℂ` と `K = ℝ` の両方）。
 - 人手の `def_real_matrix_product`・`def_real_identity_matrix`（実数の行列の積と単位行列）は、Lean の `Matrix ι ι ℝ` の `*` と `1`（成分は `Matrix.one_apply`）である。
 - 人手の `m, n, p ∈ ℤ_{≥1}` と成分の番号は、Lean の添字の型の元である。和を取る添字の型には、`matrix_mul_hasRealEntries` と同じく
   `Fintype` と、人手の `n ≥ 1` に当たる `Nonempty` を置く。
@@ -97,10 +97,10 @@ variable [Fintype ι] [Nonempty ι]
 theorem matrix_pow_hasRealEntries (A : Matrix ι ι ℂ) (hA : MatrixHasRealEntries A) :
     ∀ q : ℕ, MatrixHasRealEntries (A ^ q)
   | 0 => by
-      rw [pow_zero]                                                           -- `def_exp` (1) の `A^0 := I`
+      rw [pow_zero]                                                           -- `def_matrix_power` の `A^0 := I`
       exact identity_matrix_hasRealEntries
   | q + 1 => by
-      rw [pow_succ]                                                           -- `def_exp` (1) の `A^{q+1} := A^qA`
+      rw [pow_succ]                                                           -- `def_matrix_power` の `A^{q+1} := A^qA`
       exact matrix_mul_hasRealEntries _ _ (matrix_pow_hasRealEntries A hA q) hA
 
 /-- **人手 `real_matrix_of_real_entry_matrix_preserves_power`**: `(A^q)_ℝ = (A_ℝ)^q`。 -/
@@ -112,21 +112,21 @@ theorem real_matrix_of_real_entry_matrix_preserves_power (A : Matrix ι ι ℂ) 
       apply inclusion_rr_to_cc_is_injective                                   -- `a → ((A^0)_ℝ)_st`, `b → ((A_ℝ)^0)_st`
       calc ((realMatrixOfRealEntries (A ^ 0) (matrix_pow_hasRealEntries A hA 0) s t : ℝ) : ℂ)
           = (A ^ 0) s t := ofReal_realMatrixOfRealEntries_apply _ _ s t      -- `def_real_matrix_of_real_entry_matrix`（`B → A^0`）
-        _ = (1 : Matrix ι ι ℂ) s t := by rw [pow_zero]                        -- `def_exp` (1) の `A^0 := I`（`K = ℂ`）
+        _ = (1 : Matrix ι ι ℂ) s t := by rw [pow_zero]                        -- `def_matrix_power` の `A^0 := I`（`K = ℂ`）
         _ = (((1 : Matrix ι ι ℝ) s t : ℝ) : ℂ) :=
             identity_matrix_entry_eq_real_identity_entry s t                  -- 上の鎖
         _ = (((realMatrixOfRealEntries A hA ^ 0) s t : ℝ) : ℂ) := by rw [pow_zero]
-                                                                              -- `def_exp` (1) の `(A_ℝ)^0 := I_{Mat(n,ℝ)}`（`K = ℝ`）
+                                                                              -- `def_matrix_power` の `(A_ℝ)^0 := I_{Mat(n,ℝ)}`（`K = ℝ`）
   | q + 1 =>
       calc realMatrixOfRealEntries (A ^ (q + 1)) (matrix_pow_hasRealEntries A hA (q + 1))
           = realMatrixOfRealEntries (A ^ q * A)
               (matrix_mul_hasRealEntries _ _ (matrix_pow_hasRealEntries A hA q) hA) :=
-            realMatrixOfRealEntries_congr (pow_succ A q) _ _                  -- `def_exp` (1) の `A^{q+1} := A^qA`（`K = ℂ`）
+            realMatrixOfRealEntries_congr (pow_succ A q) _ _                  -- `def_matrix_power` の `A^{q+1} := A^qA`（`K = ℂ`）
         _ = realMatrixOfRealEntries (A ^ q) (matrix_pow_hasRealEntries A hA q)
               * realMatrixOfRealEntries A hA :=
             real_matrix_of_real_entry_matrix_preserves_product _ _ _ _        -- `real_matrix_of_real_entry_matrix_preserves_product`（`A → A^q`, `B → A`）
         _ = realMatrixOfRealEntries A hA ^ q * realMatrixOfRealEntries A hA := by
             rw [real_matrix_of_real_entry_matrix_preserves_power A hA q]      -- 帰納法の仮定
-        _ = realMatrixOfRealEntries A hA ^ (q + 1) := (pow_succ _ q).symm     -- `def_exp` (1) の `(A_ℝ)^{q+1} := (A_ℝ)^qA_ℝ`（`K = ℝ`）
+        _ = realMatrixOfRealEntries A hA ^ (q + 1) := (pow_succ _ q).symm     -- `def_matrix_power` の `(A_ℝ)^{q+1} := (A_ℝ)^qA_ℝ`（`K = ℝ`）
 
 end Ising2D

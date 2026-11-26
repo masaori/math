@@ -8920,8 +8920,8 @@ U := \left(\tfrac12\right)_{\mathbb{C}} I \in R`),
         "（",
         math(String.raw`W \in R`),
         "）である。冪は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`A^0 := I`),
         "、",
         math(String.raw`A^{m+1} := A^m A`),
@@ -9439,13 +9439,13 @@ g_\nu\left(-\left(\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{
       displayMath(String.raw`\begin{aligned}
 \check{X}^0 W
 &= IW
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\bigr)\\
 &= W
 &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
 &= WI
 &&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を右辺から左辺へ}\bigr)\\
 &= W\left(\check{X} + cI\right)^0
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\bigr)
 \end{aligned}`),
       paragraph([
         math(String.raw`n`),
@@ -9454,7 +9454,7 @@ g_\nu\left(-\left(\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{
       displayMath(String.raw`\begin{aligned}
 \check{X}^{n+1} W
 &= \left(\check{X}^{n}\check{X}\right)W
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\bigr)\\
 &= \check{X}^{n}\left(\check{X}W\right)
 &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
 &= \check{X}^{n}\left(W\left(\check{X} + cI\right)\right)
@@ -9466,7 +9466,7 @@ g_\nu\left(-\left(\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{
 &= W\left(\left(\check{X} + cI\right)^{n}\left(\check{X} + cI\right)\right)
 &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
 &= W\left(\check{X} + cI\right)^{n+1}
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\bigr)
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\bigr)
 \end{aligned}`),
       paragraph([
         "Step 5（部分和と極限）。",

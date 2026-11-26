@@ -340,13 +340,13 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         "、",
         math(String.raw`d_k^{\,p+1} := d_k^{\,p}\,d_k`),
         " で、行列の冪を ",
-        ref("def_exp"),
+        ref("def_matrix_power"),
         " の ",
         math(String.raw`D^0 := I`),
         "、",
         math(String.raw`D^{p+1} := D^p D`),
         " で表す。",
-        ref("def_exp"),
+        ref("def_matrix_power"),
         " を ",
         math(String.raw`K := \mathbb{C}`),
         " として用いるので、その単位行列 ",
@@ -409,7 +409,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         String.raw`\begin{aligned}
 (D^0)_{kl}
 &= \left(I_{\mathrm{Mat}(n,\mathbb{C})}\right)_{kl}
-   \quad (\because D^0 := I\text{。}\blkref{def_exp}) \\
+   \quad (\because D^0 := I\text{。}\blkref{def_matrix_power}) \\
 &= \delta_{kl}
    \quad (\because \blkref{def_identity_matrix}) \\
 &= 0_{\mathbb{C}}
@@ -421,7 +421,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         String.raw`\begin{aligned}
 (D^0)_{kk}
 &= \left(I_{\mathrm{Mat}(n,\mathbb{C})}\right)_{kk}
-   \quad (\because D^0 := I\text{。}\blkref{def_exp}) \\
+   \quad (\because D^0 := I\text{。}\blkref{def_matrix_power}) \\
 &= \delta_{kk}
    \quad (\because \blkref{def_identity_matrix}) \\
 &= 1_{\mathbb{C}}
@@ -441,7 +441,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         String.raw`\begin{aligned}
 (D^{p+1})_{kl}
 &= (D^p D)_{kl}
-   \quad (\because D^{p+1} := D^p D\text{。}\blkref{def_exp}) \\
+   \quad (\because D^{p+1} := D^p D\text{。}\blkref{def_matrix_power}) \\
 &= 0
    \quad (\because D^p \text{ は対角行列（帰納法の仮定）で、上の対角行列の積を } P := D^p,\ Q := D \text{ として適用})
 \end{aligned}`,
@@ -451,7 +451,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         String.raw`\begin{aligned}
 (D^{p+1})_{kk}
 &= (D^p D)_{kk}
-   \quad (\because D^{p+1} := D^p D\text{。}\blkref{def_exp}) \\
+   \quad (\because D^{p+1} := D^p D\text{。}\blkref{def_matrix_power}) \\
 &= (D^p)_{kk}\,D_{kk}
    \quad (\because D^p \text{ は対角行列（帰納法の仮定）で、上の対角行列の積を } P := D^p,\ Q := D \text{ として適用}) \\
 &= d_k^{\,p}\,D_{kk}
@@ -1220,8 +1220,8 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         "記号は主張のとおりとし、",
         math(String.raw`A`),
         " の冪は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`A^0:=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         "、",
         math(String.raw`A^{n+1}:=A^nA`),
@@ -1302,7 +1302,7 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         String.raw`\begin{aligned}
 \mathbf{end}(A^0)
 &= \mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
-&&\left(\because\ A^0:=I_{\mathrm{Mat}(2^M,\mathbb{C})}\text{。}\blkref{def_exp}\ (1)\right)\\
+&&\left(\because\ A^0:=I_{\mathrm{Mat}(2^M,\mathbb{C})}\text{。}\blkref{def_matrix_power}\right)\\
 &= \mathrm{id}_{\mathcal{F}}
 &&\left(\because\ \blkref{end_is_algebra_isomorphism}\ (3)\right)\\
 &= \mathbf{end}(A)^0
@@ -1318,7 +1318,7 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         String.raw`\begin{aligned}
 \mathbf{end}(A^{n+1})
 &= \mathbf{end}(A^nA)
-&&\left(\because\ A^{n+1}:=A^nA\text{。}\blkref{def_exp}\ (1)\right)\\
+&&\left(\because\ A^{n+1}:=A^nA\text{。}\blkref{def_matrix_power}\right)\\
 &= \mathbf{end}(A^n)\circ\mathbf{end}(A)
 &&\left(\because\ \blkref{end_is_algebra_isomorphism}\ (2)\right)\\
 &= \mathbf{end}(A)^n\circ\mathbf{end}(A)

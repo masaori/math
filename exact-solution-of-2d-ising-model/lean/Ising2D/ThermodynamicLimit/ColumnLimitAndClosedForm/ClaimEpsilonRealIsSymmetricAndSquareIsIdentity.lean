@@ -26,6 +26,7 @@
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealFixedVectorIffInclusionInEvenEigenvectors
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixOfRealEntryMatrixPreservesProductAndPower
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonProjectors
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOperationsOverMultiIndices
 
 namespace Ising2D
 
@@ -65,10 +66,10 @@ theorem epsilon_real_square_is_identity (n : ℕ) : epsilonReal n * epsilonReal 
         realMatrixOfRealEntries_congr epsilon_sq _ _                        -- `epsilon_square_and_eigenvalues` の `εε = I_{Mat(d,ℂ)}`
     _ = realMatrixOfRealEntries (epsilon (n + 1) ^ 0)
           (matrix_pow_hasRealEntries _ (epsilon_hasRealEntries n) 0) :=
-        realMatrixOfRealEntries_congr (pow_zero _).symm _ _                 -- `def_exp` (1) の `A^0 := I`（`K = ℂ`, `A → ε`）を右辺から左辺へ
+        realMatrixOfRealEntries_congr (pow_zero _).symm _ _                 -- `def_matrix_power` の `A^0 := I`（`K = ℂ`, `A → ε`）を右辺から左辺へ
     _ = epsilonReal n ^ 0 :=
         real_matrix_of_real_entry_matrix_preserves_power _ (epsilon_hasRealEntries n) 0
                                                                             -- `real_matrix_of_real_entry_matrix_preserves_power`（`A → ε`, `q → 0`）
-    _ = 1 := pow_zero _                                                     -- `def_exp` (1) の `A^0 := I`（`K = ℝ`、`I` は `def_real_identity_matrix`）
+    _ = 1 := (realMatrix_conf_pow_zero_and_succ _).1                        -- `def_matrix_power` の `A^0 := I`（`K = ℝ`、`I` は `def_real_identity_matrix`）
 
 end Ising2D

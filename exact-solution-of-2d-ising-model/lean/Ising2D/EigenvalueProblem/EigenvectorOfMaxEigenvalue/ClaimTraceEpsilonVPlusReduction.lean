@@ -25,7 +25,7 @@
 `commuting_with_scalar_multiple` が `mul_smul_comm_of_commute_tensorPow`（どちらも `TensorPow M` での系）、
 `scalar_multiple_is_associative`・`mat_mult_associative` は Lean の具体版が無いので既存の慣行どおり mathlib の
 `smul_smul`・`mul_assoc`、ℂ の積の可換律（`complex_numbers_form_a_field`）は `mul_comm` である。
-準備 (P3)・(P4) の根拠は、冪の定義 `A^0 := I`・`A^{n+1} := A^nA`（`def_exp`）と `def_power_of_complex_number` が
+準備 (P3)・(P4) の根拠は、冪の定義 `A^0 := I`・`A^{n+1} := A^nA`（`def_matrix_power`）と `def_power_of_complex_number` が
 `pow_zero`・`pow_succ`、`epsilon_G_is_involution` の `X^2 := XX` が `pow_two`、`identity_matrix_is_left_unit_of_mat_mult` が
 `identity_matrix_mul_tensorPow`、`scalar_multiple_by_one` が `one_smul_tensorPow`、`scalar_multiple_factors_out_of_left_factor`・
 `scalar_multiple_factors_out_of_right_factor` が `smul_mul_matrix_tensorPow`・`mul_smul_matrix_tensorPow`（いずれも `TensorPow M` での系）である。
@@ -177,7 +177,7 @@ theorem V1plus_eq_exp_openChainD0_mul_exp (hM : 2 ≤ M) (K1 : ℂ) :
 theorem pow_two_mul_add_one_of_pow_two_mul_eq_one {A : TensorPow M} (j : ℕ) (h : A ^ (2 * j) = 1) :
     A ^ (2 * j + 1) = A :=
   calc A ^ (2 * j + 1)
-      = A ^ (2 * j) * A := pow_succ A (2 * j)                 -- 冪の定義 `A^{n+1} := A^nA`（`def_exp`）
+      = A ^ (2 * j) * A := pow_succ A (2 * j)                 -- 冪の定義 `A^{n+1} := A^nA`（`def_matrix_power`）
     _ = 1 * A := by rw [h]                                    -- 帰納法の仮定 `(εG)^{2j} = I`
     _ = A := identity_matrix_mul_tensorPow A                  -- `identity_matrix_is_left_unit_of_mat_mult`
 

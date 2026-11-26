@@ -947,11 +947,11 @@ w
 &= \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}\bigl(I_{\mathrm{Mat}(d,\mathbb{C})}\bigr)
   &&\bigl(\because\ \blkref{epsilon_square_and_eigenvalues}\ \text{の}\ \varepsilon\varepsilon = I_{\mathrm{Mat}(d,\mathbb{C})}\bigr)\\
 &= \varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}\bigl(\varepsilon^0\bigr)
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{C},\ A \to \varepsilon)\ \text{を右辺から左辺へ}\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K = \mathbb{C},\ A \to \varepsilon)\ \text{を右辺から左辺へ}\bigr)\\
 &= (\varepsilon_{\mathbb{R}})^0
   &&\bigl(\because\ \blkref{real_matrix_of_real_entry_matrix_preserves_power}\ (n \to d,\ A \to \varepsilon,\ q \to 0)\bigr)\\
 &= I_{\mathrm{Mat}(d,\mathbb{R})}
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{R},\ A \to \varepsilon_{\mathbb{R}}\text{、}I\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K = \mathbb{R},\ A \to \varepsilon_{\mathbb{R}}\text{、}I\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)
 \end{aligned}`),
     ],
     conversion: {

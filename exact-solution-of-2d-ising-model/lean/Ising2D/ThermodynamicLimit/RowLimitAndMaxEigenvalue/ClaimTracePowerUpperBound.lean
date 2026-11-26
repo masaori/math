@@ -228,8 +228,8 @@ theorem power_of_W_odd_split (a : ℕ) : W ^ (2 * a + 1) = W ^ a * (W * W ^ a) :
     _ = W ^ a * W ^ (1 + a) := matrix_power_exponent_law W a (1 + a)       -- `matrix_power_exponent_law`（`p → a`, `q → 1 + a`）
     _ = W ^ a * (W ^ 1 * W ^ a) := by rw [matrix_power_exponent_law W 1 a]  -- `matrix_power_exponent_law`（`p → 1`, `q → a`）
     _ = W ^ a * (W ^ (0 + 1) * W ^ a) := by rw [Nat.zero_add 1]         -- `ℤ` の和の単位元 `0 + x = x`（`x → 1`、`set_and_algebra_notation`）を右辺から左辺へ
-    _ = W ^ a * ((W ^ 0 * W) * W ^ a) := by rw [pow_succ W 0]               -- `def_exp` (1) の `A^{m+1} := A^mA`（`m = 0`）
-    _ = W ^ a * ((1 * W) * W ^ a) := by rw [pow_zero]                       -- `def_exp` (1) の `A^0 := I`
+    _ = W ^ a * ((W ^ 0 * W) * W ^ a) := by rw [pow_succ W 0]               -- `def_matrix_power` の `A^{m+1} := A^mA`（`m = 0`）
+    _ = W ^ a * ((1 * W) * W ^ a) := by rw [pow_zero]                       -- `def_matrix_power` の `A^0 := I`
     _ = W ^ a * (W * W ^ a) := by rw [identity_matrix_mul_tensorPow W]      -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-- 人手 奇数の場合の 5 行: `(W_ℝ)^{2a+1} = (W_ℝ)^a(W_ℝ(W_ℝ)^a)`（`WW^a` の成分の実性と `(WW^a)_ℝ = W_ℝ(W^a)_ℝ` は

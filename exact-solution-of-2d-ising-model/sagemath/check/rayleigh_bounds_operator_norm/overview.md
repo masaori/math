@@ -28,8 +28,8 @@
 | 二つ目の鎖 6→7（`y = Wx`、乗法の可換律・結合律） | `_lines.sage` | `‖Wx‖` を組み込みの積と内積から作り直して比べる | **PASS** |
 | 場合分け `‖Wx‖ = 0` の側（`0 ≤ c‖x‖`） | `_lines.sage` | 特異な `P` の核の `x ≠ 0` で通る（`check_generic_…`） | **PASS** |
 | `‖Wx‖^2 ≤ c^2‖x‖^2`（`‖Wx‖^2 > 0` で割る）、`c^2‖x‖^2 = (c‖x‖)^2`、`‖Wx‖ ≤ c‖x‖`（`nonnegative_real_order_from_squares`、`‖Wx‖ ≥ 0`・`c‖x‖ ≥ 0`） | `_lines.sage` | 両辺を `‖Wx‖^2` で割った値の等号 2 つ、`‖Wx‖ ≥ 0`・`c‖x‖ ≥ 0`・`c^2‖x‖^2 = (c‖x‖)^2`、`‖Wx‖^2 ≤ (c‖x‖)^2` と両方の不等号。場合分けの件数をログに出す（一般の行列で `‖Wx‖ = 0` の側 13 件、`> 0` の側 144 件） | **PASS** |
-| `k = 0` の鎖 3 行（`def_exp` (1) の `W^0 := I`（`def_real_identity_matrix`）、`real_identity_matrix_is_left_unit_of_real_matrix_vector_product`、`c^0 = 1`） | `_lines.sage` | `W^0 := I` で作る | **PASS** |
-| 帰納法の鎖 1→2（`def_exp` (1) の `W^{k+1} := W^kW`） | `_lines.sage` | 冪を `def_exp` (1) の漸化式で作り、Sage の冪 `P**(k+1)`（別の実装）と比べる。左辺のノルムは `P**(k+1)` から、右辺は `W^kW` から作る | **PASS** |
+| `k = 0` の鎖 3 行（`def_matrix_power` の `W^0 := I`（`def_real_identity_matrix`）、`real_identity_matrix_is_left_unit_of_real_matrix_vector_product`、`c^0 = 1`） | `_lines.sage` | `W^0 := I` で作る | **PASS** |
+| 帰納法の鎖 1→2（`def_matrix_power` の `W^{k+1} := W^kW`） | `_lines.sage` | 冪を `def_matrix_power` の漸化式で作り、Sage の冪 `P**(k+1)`（別の実装）と比べる。左辺のノルムは `P**(k+1)` から、右辺は `W^kW` から作る | **PASS** |
 | 帰納法の鎖 2→3（`real_matrix_vector_product_is_associative`） | `_lines.sage` | `‖(W^kW)x‖` と `‖W^k(Wx)‖` | **PASS** |
 | 帰納法の鎖 3→4（帰納法の仮定を `Wx` に） | `_lines.sage` | `‖W^k(Wx)‖ ≤ c^k‖Wx‖` | **PASS** |
 | 帰納法の鎖 4→5（`‖Wx‖ ≤ c‖x‖` と `c^k ≥ 0`） | `_lines.sage` | 側の条件と行の不等号 | **PASS** |
@@ -70,13 +70,13 @@
 - 一つ目の鎖 4→5 の右の因子 `Σ_l W_kl x_l` は `y` を作った式そのものなので、`y` と組み込みの積 `P*x` の比較が通れば必ず一致する。中身はその比較にある。
 - `k = 0` の鎖は `W^0 := I` で作るので構成上一致する。中身は、`W^0` と Sage の単位行列、`Ix = x` の比較にある。
 - 一つ目の鎖 6→7 の `bil` は 5→6 の二重和と同じ左結合の和なので、その比較は構成上一致する。中身は、組み込みの行列積 `y^⊤(Wx)` との比較にある。
-- `W^{k+1} = W^kW` は冪を `def_exp` (1) の漸化式で作るので構成上一致する。中身は、Sage の冪 `P**(k+1)` との比較にある。
+- `W^{k+1} = W^kW` は冪を `def_matrix_power` の漸化式で作るので構成上一致する。中身は、Sage の冪 `P**(k+1)` との比較にある。
 
 ## 証明の修正（2026-11-04）
 
 - 旧い一つ目の鎖は `‖Wx‖^2 = (Wx)^⊤(Wx) = y^⊤(Wx)` で止まり、二つ目の鎖が使う `y^⊤Wx`（`def_real_bilinear_value` の二重和）との等号が無かった。
   `‖Wx‖^2 = Σ|y_k|^2 = Σy_ky_k = Σ_ky_kΣ_lW_klx_l = Σ_kΣ_ly_kW_klx_l = y^⊤Wx` の 6 行（`‖Wx‖^2 = ‖y‖^2` の置き換えを含む）にした。
-- 旧い帰納法の段の 1 行目 `‖W^{k+1}x‖ = ‖W(W^kx)‖` は、`def_exp` (1) の `W^{k+1} := W^kW` から `W^kW = WW^k` を要するが、その主張は本文に無い。
+- 旧い帰納法の段の 1 行目 `‖W^{k+1}x‖ = ‖W(W^kx)‖` は、`def_matrix_power` の `W^{k+1} := W^kW` から `W^kW = WW^k` を要するが、その主張は本文に無い。
   `W^{k+1}x = (W^kW)x = W^k(Wx)` とし、帰納法の仮定（全ての `x`）を `Wx` に当てる順にした。主張は不変。
 - レビューの指摘で、`y` の成分と鎖の行に `mat_mult` を引き、`‖Wx‖^2 = ‖y‖^2` を独立の行にし、`k = 0` を 3 行の鎖にし、帰納法で `x` を取り直す一文を足した。
 

@@ -23,7 +23,7 @@
   `transpose_of_matrix_product`・`transpose_preserves_matrix_limits` は、必要十分版を添字 `Conf M` へ特殊化した系 `transpose_mul_tensorPow`・`transpose_tendsto_tensorPow` を引く。
   `identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult` は、`TensorPow M` での具体版 `identity_matrix_mul_tensorPow`・`mul_identity_matrix_tensorPow`
   （`ClaimIdentityAndScalarMultipleInTensorPowProduct.lean`）を引く。
-* `def_exp` (1) の冪 `A^0 := I`・`A^{m+1} := A^mA` は mathlib の `pow_zero`・`pow_succ`（`a^{m+1} = a^m a`）と同じ形である。
+* `def_matrix_power` の冪 `A^0 := I`・`A^{m+1} := A^mA` は mathlib の `pow_zero`・`pow_succ`（`a^{m+1} = a^m a`）と同じ形である。
   `mat_mult_associative` は本文に Lean の具体版が無く、他のファイルと同じく mathlib の `Matrix.mul_assoc` を引く。
 * 部分和の成分の式は、人手が `def_matrix_sum` を項の数についての帰納法で、`def_matrix_scalar_multiple` を各項へ当てはめて得ている段で、
   Lean は和とスカラー倍の成分の定義そのもの（mathlib の `Matrix.sum_apply`・`Matrix.smul_apply`）で閉じる。
@@ -75,31 +75,31 @@ theorem identity_transpose_tensorPow : (1 : TensorPow M)ᵀ = 1 := by
 theorem tensorPow_mul_pow_comm (S : TensorPow M) (m : ℕ) : S * S ^ m = S ^ m * S := by
   induction m with
   | zero =>
-    calc S * S ^ 0 = S * 1 := by rw [pow_zero]                      -- `def_exp` (1) の `A^0 := I`
+    calc S * S ^ 0 = S * 1 := by rw [pow_zero]                      -- `def_matrix_power` の `A^0 := I`
       _ = S := mul_identity_matrix_tensorPow S                        -- `identity_matrix_is_right_unit_of_mat_mult`
       _ = 1 * S := (identity_matrix_mul_tensorPow S).symm             -- `identity_matrix_is_left_unit_of_mat_mult`
-      _ = S ^ 0 * S := by rw [pow_zero]                               -- `def_exp` (1) の `A^0 := I`
+      _ = S ^ 0 * S := by rw [pow_zero]                               -- `def_matrix_power` の `A^0 := I`
   | succ m ih =>
-    calc S * S ^ (m + 1) = S * (S ^ m * S) := by rw [pow_succ]      -- `def_exp` (1) の `A^{m+1} := A^mA`
+    calc S * S ^ (m + 1) = S * (S ^ m * S) := by rw [pow_succ]      -- `def_matrix_power` の `A^{m+1} := A^mA`
       _ = (S * S ^ m) * S := (Matrix.mul_assoc _ _ _).symm            -- `mat_mult_associative`
       _ = (S ^ m * S) * S := by rw [ih]                               -- 帰納法の仮定
-      _ = S ^ (m + 1) * S := by rw [pow_succ]                         -- `def_exp` (1) の `A^{m+1} := A^mA`
+      _ = S ^ (m + 1) * S := by rw [pow_succ]                         -- `def_matrix_power` の `A^{m+1} := A^mA`
 
 /-- 人手 準備: `S^⊤ = S` なら、すべての `m` について `(S^m)^⊤ = S^m`（`m` についての帰納法）。 -/
 theorem tensorPow_pow_transpose_of_transpose_eq (S : TensorPow M) (hS : Sᵀ = S) (m : ℕ) :
     (S ^ m)ᵀ = S ^ m := by
   induction m with
   | zero =>
-    calc (S ^ 0)ᵀ = (1 : TensorPow M)ᵀ := by rw [pow_zero]          -- `def_exp` (1) の `A^0 := I`
+    calc (S ^ 0)ᵀ = (1 : TensorPow M)ᵀ := by rw [pow_zero]          -- `def_matrix_power` の `A^0 := I`
       _ = 1 := identity_transpose_tensorPow                           -- `I^⊤ = I`
-      _ = S ^ 0 := (pow_zero S).symm                                  -- `def_exp` (1) の `A^0 := I`
+      _ = S ^ 0 := (pow_zero S).symm                                  -- `def_matrix_power` の `A^0 := I`
   | succ m ih =>
-    calc (S ^ (m + 1))ᵀ = (S ^ m * S)ᵀ := by rw [pow_succ]          -- `def_exp` (1) の `A^{m+1} := A^mA`
+    calc (S ^ (m + 1))ᵀ = (S ^ m * S)ᵀ := by rw [pow_succ]          -- `def_matrix_power` の `A^{m+1} := A^mA`
       _ = Sᵀ * (S ^ m)ᵀ := transpose_mul_tensorPow _ _                -- `transpose_of_matrix_product`（`A → S^m`, `B → S`）
       _ = S * (S ^ m)ᵀ := by rw [hS]                                  -- `S^⊤ = S`
       _ = S * S ^ m := by rw [ih]                                     -- 帰納法の仮定
       _ = S ^ m * S := tensorPow_mul_pow_comm S m                     -- 準備の `SS^m = S^mS`
-      _ = S ^ (m + 1) := (pow_succ S m).symm                          -- `def_exp` (1) の `A^{m+1} := A^mA`
+      _ = S ^ (m + 1) := (pow_succ S m).symm                          -- `def_matrix_power` の `A^{m+1} := A^mA`
 
 /-- 人手の部分和 `E_N := Σ_{m=0}^{N} (1/m!) S^m`（`def_exp` (1) の部分和。係数は `(1/m!)_ℂ`）。 -/
 noncomputable def expPartialSum (S : TensorPow M) (N : ℕ) : TensorPow M :=

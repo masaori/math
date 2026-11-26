@@ -60,7 +60,7 @@ def symTransfer (B V2 : Matrix n n ℝ) : Matrix n n ℝ := B * V2 * B
 同じ段の calc で置く（準備 1 の `BB = V_1`・`W = (BV_2)B` は仮定 `hBB`・`hW` として受け取る）。「とくに」の
 `(Z(K_1,K_2))_ℂ = tr(W^{N_row})` は、具体的な `V_1`・`V_2`・`V_1^{1/2}` について
 `ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean` の `partition_function_eq_trace_physicalSymTransferC` に置く。
-人手の `X^0 := I`、`X^{m+1} := X^m X`（`def_exp` (1)）は mathlib の `pow_zero`・`pow_succ` と同じ定め方である。
+人手の `X^0 := I`、`X^{m+1} := X^m X`（`def_matrix_power`）は mathlib の `pow_zero`・`pow_succ` と同じ定め方である。
 `mat_mult_associative` は具体版が無いので、既存の慣行どおり `Matrix.mul_assoc` を 1 段に 1 回ずつ引く。
 単位行列の左右の単位律（`identity_matrix_is_left_unit_of_mat_mult`・`_right_unit_`）の具体版は添字が `Fin m` の行列にしかないので、
 同じ主張の mathlib の一段の補題 `Matrix.one_mul`・`Matrix.mul_one` を引く。跡の巡回性（`trace_basic_properties` (2)）は具体版 `trace_cyclic`。
@@ -73,21 +73,21 @@ theorem open_product_pow (X Y : Matrix n n ℂ) (k : ℕ) :
   induction k with
   | zero =>
     calc (X * (Y * X) ^ 0) * Y
-        = (X * 1) * Y := by rw [pow_zero]                      -- `def_exp` (1) の `(YX)^0 := I`
+        = (X * 1) * Y := by rw [pow_zero]                      -- `def_matrix_power` の `(YX)^0 := I`
       _ = X * Y := by rw [Matrix.mul_one]                      -- `identity_matrix_is_right_unit_of_mat_mult`
       _ = 1 * (X * Y) := (Matrix.one_mul _).symm               -- `identity_matrix_is_left_unit_of_mat_mult`
-      _ = (X * Y) ^ 0 * (X * Y) := by rw [pow_zero]            -- `def_exp` (1) の `(XY)^0 := I`
-      _ = (X * Y) ^ (0 + 1) := (pow_succ _ _).symm             -- `def_exp` (1) の `(XY)^{0+1} := (XY)^0(XY)`
+      _ = (X * Y) ^ 0 * (X * Y) := by rw [pow_zero]            -- `def_matrix_power` の `(XY)^0 := I`
+      _ = (X * Y) ^ (0 + 1) := (pow_succ _ _).symm             -- `def_matrix_power` の `(XY)^{0+1} := (XY)^0(XY)`
   | succ k ih =>
     calc (X * (Y * X) ^ (k + 1)) * Y
-        = (X * ((Y * X) ^ k * (Y * X))) * Y := by rw [pow_succ] -- `def_exp` (1) の `(YX)^{k+1} := (YX)^k(YX)`
+        = (X * ((Y * X) ^ k * (Y * X))) * Y := by rw [pow_succ] -- `def_matrix_power` の `(YX)^{k+1} := (YX)^k(YX)`
       _ = ((X * (Y * X) ^ k) * (Y * X)) * Y := by
           rw [← Matrix.mul_assoc X ((Y * X) ^ k) (Y * X)]      -- `mat_mult_associative`
       _ = (((X * (Y * X) ^ k) * Y) * X) * Y := by
           rw [← Matrix.mul_assoc (X * (Y * X) ^ k) Y X]          -- `mat_mult_associative`
       _ = ((X * Y) ^ (k + 1) * X) * Y := by rw [ih]            -- 帰納法の仮定
       _ = (X * Y) ^ (k + 1) * (X * Y) := Matrix.mul_assoc _ _ _ -- `mat_mult_associative`
-      _ = (X * Y) ^ (k + 1 + 1) := (pow_succ _ _).symm         -- `def_exp` (1) の `(XY)^{(k+1)+1} := (XY)^{k+1}(XY)`
+      _ = (X * Y) ^ (k + 1 + 1) := (pow_succ _ _).symm         -- `def_matrix_power` の `(XY)^{(k+1)+1} := (XY)^{k+1}(XY)`
 
 /-- 人手 `Z_equals_trace_of_W` の準備 3: `B B = V_1`（準備 1）のもとで `W^{k+1} = ((B(V_2V_1)^k)V_2)B`
 （`k` の帰納法。`k = 0` の 6 行と帰納段階の 12 行。帰納段階の `C := B(V_2V_1)^k` は等式 `hC` を持つ変数として置く）。
@@ -98,16 +98,16 @@ theorem symmetrized_pow_succ {B V1 V2 W : Matrix n n ℂ} (hBB : B * B = V1)
   induction k with
   | zero =>
     calc W ^ (0 + 1)
-        = W ^ 0 * W := pow_succ _ _                            -- `def_exp` (1) の `W^{0+1} := W^0W`
-      _ = 1 * W := by rw [pow_zero]                            -- `def_exp` (1) の `W^0 := I`
+        = W ^ 0 * W := pow_succ _ _                            -- `def_matrix_power` の `W^{0+1} := W^0W`
+      _ = 1 * W := by rw [pow_zero]                            -- `def_matrix_power` の `W^0 := I`
       _ = W := Matrix.one_mul _                                -- `identity_matrix_is_left_unit_of_mat_mult`
       _ = (B * V2) * B := hW                                   -- 準備 1（`def_symmetrized_transfer_matrix`）
       _ = ((B * 1) * V2) * B := by rw [Matrix.mul_one]         -- `identity_matrix_is_right_unit_of_mat_mult`
-      _ = ((B * (V2 * V1) ^ 0) * V2) * B := by rw [pow_zero]   -- `def_exp` (1) の `(V_2V_1)^0 := I`
+      _ = ((B * (V2 * V1) ^ 0) * V2) * B := by rw [pow_zero]   -- `def_matrix_power` の `(V_2V_1)^0 := I`
   | succ k ih =>
     obtain ⟨C, hC⟩ : ∃ C : Matrix n n ℂ, C = B * (V2 * V1) ^ k := ⟨_, rfl⟩
     calc W ^ (k + 1 + 1)
-        = W ^ (k + 1) * W := pow_succ _ _                      -- `def_exp` (1) の `W^{(k+1)+1} := W^{k+1}W`
+        = W ^ (k + 1) * W := pow_succ _ _                      -- `def_matrix_power` の `W^{(k+1)+1} := W^{k+1}W`
       _ = (((B * (V2 * V1) ^ k) * V2) * B) * W := by rw [ih]   -- 帰納法の仮定
       _ = ((C * V2) * B) * W := by rw [hC]                     -- `C` の置き方
       _ = ((C * V2) * B) * ((B * V2) * B) := by rw [hW]        -- 準備 1（`def_symmetrized_transfer_matrix`）
@@ -123,7 +123,7 @@ theorem symmetrized_pow_succ {B V1 V2 W : Matrix n n ℂ} (hBB : B * B = V1)
       _ = (((B * (V2 * V1) ^ k) * (V2 * V1)) * V2) * B := by rw [hC] -- `C` の置き方
       _ = ((B * ((V2 * V1) ^ k * (V2 * V1))) * V2) * B := by
           rw [Matrix.mul_assoc B ((V2 * V1) ^ k) (V2 * V1)]   -- `mat_mult_associative`
-      _ = ((B * (V2 * V1) ^ (k + 1)) * V2) * B := by rw [← pow_succ] -- `def_exp` (1) の `(V_2V_1)^{k+1} := (V_2V_1)^k(V_2V_1)`
+      _ = ((B * (V2 * V1) ^ (k + 1)) * V2) * B := by rw [← pow_succ] -- `def_matrix_power` の `(V_2V_1)^{k+1} := (V_2V_1)^k(V_2V_1)`
 
 /-- **人手 `Z_equals_trace_of_W` の本体**（任意の `B, V_1, V_2, W` についての一般形。本文の `V_1, V_2, W` について全ての `n` で述べた版は無い）: `n ∈ ℤ_{≥1}` について `tr((V_1V_2)^n) = tr(W^n)`。
 `k := n - 1` と置いて（`k + 1 = n`）、人手の 6 行と同じ段の calc で示す。`B * B = V₁`（準備 1）だけを仮定する。 -/

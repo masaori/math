@@ -96,10 +96,10 @@ theorem nOp_mul_nOp_of_sq (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=
       = (1 * F.nOp i) * F.nOp i := by rw [identity_matrix_mul_tensorPow]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult` を右辺から左辺へ
     _ = (F.nOp i ^ 0 * F.nOp i) * F.nOp i := by rw [pow_zero]
-                                                        -- `def_exp` (1) の `A^0 := I` を右辺から左辺へ
+                                                        -- `def_matrix_power` の `A^0 := I` を右辺から左辺へ
     _ = F.nOp i ^ 1 * F.nOp i := by rw [← pow_succ (F.nOp i) 0]
-                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 0`）を右辺から左辺へ
-    _ = F.nOp i ^ 2 := (pow_succ _ _).symm              -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 1`）を右辺から左辺へ
+                                                        -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 0`）を右辺から左辺へ
+    _ = F.nOp i ^ 2 := (pow_succ _ _).symm              -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 1`）を右辺から左辺へ
     _ = F.nOp i := F.nOp_sq i                           -- `check_number_operator_idempotent` (3)
 
 /-- **原文 Step 0** の `R_μ^{(1)}R_μ^{(0)} = 0`（と Step 3 の `ε(ν) = 0` の場合の `ň_ν R_ν^{(0)} = 0`）。 -/
@@ -307,10 +307,10 @@ theorem projFactor_mul_self_step0 (T : Finset (CheckIdx M)) (μ : CheckIdx M) :
 /-- **原文 Step 1** の `ε = ε'` の鎖の 1〜4 行: `Q̌_ε^2 = Q̌_ε^1Q̌_ε = (Q̌_ε^0Q̌_ε)Q̌_ε = (IQ̌_ε)Q̌_ε = Q̌_εQ̌_ε`。 -/
 theorem Qproj_sq_eq_mul_self_step1 (T : Finset (CheckIdx M)) : F.Qproj T ^ 2 = F.Qproj T * F.Qproj T :=
   calc F.Qproj T ^ 2
-      = F.Qproj T ^ 1 * F.Qproj T := pow_succ _ 1       -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 1`、`A → Q̌_ε`）
+      = F.Qproj T ^ 1 * F.Qproj T := pow_succ _ 1       -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 1`、`A → Q̌_ε`）
     _ = (F.Qproj T ^ 0 * F.Qproj T) * F.Qproj T := by rw [pow_succ (F.Qproj T) 0]
-                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 0`、`A → Q̌_ε`）
-    _ = (1 * F.Qproj T) * F.Qproj T := by rw [pow_zero] -- `def_exp` (1) の `A^0 := I`（`A → Q̌_ε`）
+                                                        -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 0`、`A → Q̌_ε`）
+    _ = (1 * F.Qproj T) * F.Qproj T := by rw [pow_zero] -- `def_matrix_power` の `A^0 := I`（`A → Q̌_ε`）
     _ = F.Qproj T * F.Qproj T := by rw [identity_matrix_mul_tensorPow]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`（`A → Q̌_ε`）
 

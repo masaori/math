@@ -160,8 +160,8 @@ export default defineBlocks([
         " のものである。行列の積は ",
         ref("mat_mult"),
         "、行列の冪は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`X^0 := I`),
         "、",
         math(String.raw`X^{m+1} := X^m X`),
@@ -199,15 +199,15 @@ W &= \left(BV_2\right)B
         String.raw`\begin{aligned}
 \left(X(YX)^{0}\right)Y
   &= (XI)Y
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (YX)^0 := I\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ (YX)^0 := I\bigr)\\
   &= XY
   &&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr)\\
   &= I(XY)
   &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
   &= (XY)^{0}(XY)
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (XY)^0 := I\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ (XY)^0 := I\bigr)\\
   &= (XY)^{1}
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (XY)^{0+1} := (XY)^0(XY)\bigr)
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ (XY)^{0+1} := (XY)^0(XY)\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -218,7 +218,7 @@ W &= \left(BV_2\right)B
         String.raw`\begin{aligned}
 \left(X(YX)^{k+1}\right)Y
   &= \left(X\left((YX)^{k}(YX)\right)\right)Y
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (YX)^{k+1} := (YX)^k(YX)\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ (YX)^{k+1} := (YX)^k(YX)\bigr)\\
   &= \left(\left(X(YX)^{k}\right)(YX)\right)Y
   &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
   &= \left(\left(\left(X(YX)^{k}\right)Y\right)X\right)Y
@@ -228,7 +228,7 @@ W &= \left(BV_2\right)B
   &= (XY)^{k+1}(XY)
   &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
   &= (XY)^{k+2}
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (XY)^{(k+1)+1} := (XY)^{k+1}(XY)\bigr)
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ (XY)^{(k+1)+1} := (XY)^{k+1}(XY)\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -255,9 +255,9 @@ W &= \left(BV_2\right)B
         String.raw`\begin{aligned}
 W^{1}
   &= W^{0}W
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ W^{0+1} := W^0W\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ W^{0+1} := W^0W\bigr)\\
   &= IW
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ W^0 := I\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ W^0 := I\bigr)\\
   &= W
   &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
   &= \left(BV_2\right)B
@@ -265,7 +265,7 @@ W^{1}
   &= \left(\left(BI\right)V_2\right)B
   &&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr)\\
   &= \left(\left(B(V_2V_1)^{0}\right)V_2\right)B
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (V_2V_1)^0 := I\bigr)
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ (V_2V_1)^0 := I\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -278,7 +278,7 @@ W^{1}
         String.raw`\begin{aligned}
 W^{k+2}
   &= W^{k+1}W
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ W^{(k+1)+1} := W^{k+1}W\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ W^{(k+1)+1} := W^{k+1}W\bigr)\\
   &= \left(\left(\left(B(V_2V_1)^{k}\right)V_2\right)B\right)W
   &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
   &= \left(\left(CV_2\right)B\right)W
@@ -300,7 +300,7 @@ W^{k+2}
   &= \left(\left(B\left((V_2V_1)^{k}\left(V_2V_1\right)\right)\right)V_2\right)B
   &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
   &= \left(\left(B(V_2V_1)^{k+1}\right)V_2\right)B
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (V_2V_1)^{k+1} := (V_2V_1)^k(V_2V_1)\bigr)
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ (V_2V_1)^{k+1} := (V_2V_1)^k(V_2V_1)\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1268,8 +1268,8 @@ u^\top W_{\mathbb{R}} u
         " の有限和、",
         math(String.raw`W^q`),
         " は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{C}`),
         " の冪、",
         math(String.raw`(W_{\mathbb{R}})^q`),
@@ -1726,8 +1726,8 @@ c(M_{\mathrm{col}})
         "）のもの、冪 ",
         math(String.raw`(W_{\mathbb{R}})^k`),
         " は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{R}`),
         " のもの（積は ",
         ref("def_real_matrix_product"),
@@ -1847,7 +1847,7 @@ c(M_{\mathrm{col}})
       displayMath(String.raw`\begin{aligned}
 \|(W_{\mathbb{R}})^0x\|
 &=\|I_{\mathrm{Mat}(d,\mathbb{R})}\,x\|
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0:=I\ (K = \mathbb{R}\text{。}I\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0:=I\ (K = \mathbb{R}\text{。}I\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)\\
 &=\|x\|
   &&\bigl(\because\ \blkref{real_identity_matrix_is_left_unit_of_real_matrix_vector_product}\ (n \to d,\ x \to x)\bigr)\\
 &=c^0\|x\|
@@ -1867,7 +1867,7 @@ c(M_{\mathrm{col}})
       displayMath(String.raw`\begin{aligned}
 \|(W_{\mathbb{R}})^{k+1}x\|
 &=\|((W_{\mathbb{R}})^kW_{\mathbb{R}})x\|
-  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1}:=A^mA\ (K = \mathbb{R}\text{。積は}\ \blkref{def_real_matrix_product})\bigr)\\
+  &&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1}:=A^mA\ (K = \mathbb{R}\text{。積は}\ \blkref{def_real_matrix_product})\bigr)\\
 &=\|(W_{\mathbb{R}})^k(W_{\mathbb{R}}x)\|
   &&\bigl(\because\ \blkref{real_matrix_vector_product_is_associative}\ (m, n, p \to d,\ P \to (W_{\mathbb{R}})^k,\ Q \to W_{\mathbb{R}},\ x \to x)\bigr)\\
 &\leq c^k\|W_{\mathbb{R}}x\|
@@ -1929,8 +1929,8 @@ c(M_{\mathrm{col}})
         "が成り立つ。左辺の ",
         math(String.raw`(W_{\mathbb{R}})^{n}`),
         " は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{R}`),
         " の冪、和は ",
         ref("def_finite_sum_of_real_numbers"),
@@ -2046,8 +2046,8 @@ c(M_{\mathrm{col}})
         "（",
         math(String.raw`W^p`),
         " は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{C}`),
         " の冪）であり、",
       ]),
@@ -2327,9 +2327,9 @@ W^{2a+1}
 &=W^a\bigl(W^{0+1}W^a\bigr)
 &&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}}+x=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
 &=W^a\bigl((W^0W)W^a\bigr)
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}\bigr)\\
 &=W^a\bigl((I_{\mathrm{Mat}(d,\mathbb{C})}W)W^a\bigr)
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\bigr)\\
 &=W^a\bigl(WW^a\bigr)
 &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)
 \end{aligned}`),
@@ -2483,8 +2483,8 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
         "（",
         math(String.raw`(W_{\mathbb{R}})^k`),
         " は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{R}`),
         " の冪で積は ",
         ref("def_real_matrix_product"),
@@ -2533,8 +2533,8 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
         "）と書く。",
         math(String.raw`W^p`),
         " は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{C}`),
         " の冪で積は ",
         ref("mat_mult"),
@@ -2564,8 +2564,8 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
         "である。とくに ",
         math(String.raw`I = W^0`),
         "（",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`A^0 := I`),
         "、",
         math(String.raw`K = \mathbb{C}`),
@@ -2576,11 +2576,11 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
       displayMath(String.raw`\begin{aligned}
 I_{\mathbb{R}}
 &=(W_{\mathbb{R}})^0
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{R}\text{、}I = I_{\mathrm{Mat}(d,\mathbb{R})}\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K = \mathbb{R}\text{、}I = I_{\mathrm{Mat}(d,\mathbb{R})}\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)\\
 &=(W^0)_{\mathbb{R}}
 &&\bigl(\because\ \text{【冪の実数の行列】}\ (p \to 0)\bigr)\\
 &=\varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(I)
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{C})\bigr)
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K = \mathbb{C})\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
@@ -2738,9 +2738,9 @@ W^{a+b+1}
 &=W^b\bigl(W^{0+1}W^a\bigr)
 &&\bigl(\because\ \text{【添字の等式】の}\ 1_{\mathbb{Z}}=0_{\mathbb{Z}}+1_{\mathbb{Z}}\bigr)\\
 &=W^b\bigl((W^0W)W^a\bigr)
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}\bigr)\\
 &=W^b\bigl((IW)W^a\bigr)
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\bigr)\\
 &=W^b\bigl(WW^a\bigr)
 &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)
 \end{aligned}`),
@@ -2959,7 +2959,7 @@ u^{(0)}_l
 &=\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^0\bigr)_{lm}\,x_m
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ の成分】}\ (a \to 0)\bigr)\\
 &=\sum_{m=1}^{d}(I_{\mathbb{R}})_{lm}\,x_m
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{R})\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K = \mathbb{R})\bigr)\\
 &=0 + \cdots + 0 + (I_{\mathbb{R}})_{ll}\,x_l + 0 + \cdots + 0
 &&\bigl(\because\ \text{上の}\ m \neq l\ \text{の}\ (I_{\mathbb{R}})_{lm}x_m = 0\ \text{を}\ l\ \text{以外の各項へ。和は}\ \blkref{def_finite_sum_of_real_numbers}\ \text{の左から順に足したもの。前に}\ 0\ \text{が}\ l-1\ \text{個、後に}\ d-l\ \text{個（}0\ \text{個のときは書かない）}\bigr)\\
 &=(I_{\mathbb{R}})_{ll}\,x_l
@@ -2983,7 +2983,7 @@ u^{(0)}_l
 &=\bigl(W^0(WW^a)\bigr)_{\mathbb{R}}
 &&\bigl(\because\ \text{【冪の分け方】の}\ \mathrm{Mat}(d,\mathbb{C})\ \text{の二つ目の鎖}\ (b \to 0)\bigr)\\
 &=\bigl(I(WW^a)\bigr)_{\mathbb{R}}
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{C})\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K = \mathbb{C})\bigr)\\
 &=(WW^a)_{\mathbb{R}}
 &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
 &=W_{\mathbb{R}}\,(W^a)_{\mathbb{R}}
@@ -3363,8 +3363,8 @@ m_k^{\,2}
         "が成り立つ。",
         math(String.raw`(W_{\mathbb{R}})^{n}`),
         " は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{R}`),
         " の冪、和は ",
         ref("def_finite_sum_of_real_numbers"),
@@ -3431,8 +3431,8 @@ m_k^{\,2}
         "）と書く。",
         math(String.raw`W^p`),
         " は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{C}`),
         " の冪で積は ",
         ref("mat_mult"),
@@ -3470,9 +3470,9 @@ m_k^{\,2}
 &=(W^{0+1})_{\mathbb{R}}
 &&\bigl(\because\ \mathbb{Z}\ \text{の和の単位元}\ 0_{\mathbb{Z}}+x=x\ \text{（}\blkref{set_and_algebra_notation}\text{）}\ (x \to 1_{\mathbb{Z}})\ \text{を右辺から左辺へ}\bigr)\\
 &=(W^0W)_{\mathbb{R}}
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ (K = \mathbb{C},\ m = 0)\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA\ (K = \mathbb{C},\ m = 0)\bigr)\\
 &=(IW)_{\mathbb{R}}
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{C})\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K = \mathbb{C})\bigr)\\
 &=\varrho^{d,d}_{\mathbb{C}\to\mathbb{R}}(W)
 &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{の}\ IW = W\bigr)\\
 &=W_{\mathbb{R}}
@@ -3904,7 +3904,7 @@ m_0
 &=x^\top (W_{\mathbb{R}})^0x
 &&\bigl(\because\ m_0 := x^\top (W_{\mathbb{R}})^0x\bigr)\\
 &=x^\top I_{\mathbb{R}}x
-&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (K = \mathbb{R}\text{、}I = I_{\mathbb{R}}\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)\\
+&&\bigl(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K = \mathbb{R}\text{、}I = I_{\mathbb{R}}\ \text{は}\ \blkref{def_real_identity_matrix})\bigr)\\
 &=\sum_{k=1}^{d}\sum_{l=1}^{d}x_k\,(I_{\mathbb{R}})_{kl}\,x_l
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &=\sum_{k=1}^{d}\bigl(0 + \cdots + 0 + x_k\,(I_{\mathbb{R}})_{kk}\,x_k + 0 + \cdots + 0\bigr)
@@ -4323,8 +4323,8 @@ T
         "（",
         math(String.raw`(W_{\mathbb{R}})^{N_{\mathrm{row}}}`),
         " は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`K = \mathbb{R}`),
         " の冪、和は ",
         ref("def_finite_sum_of_real_numbers"),

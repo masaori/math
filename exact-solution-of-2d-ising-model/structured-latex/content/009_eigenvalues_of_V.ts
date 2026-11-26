@@ -302,7 +302,7 @@ export default defineBlocks([
     statement: [
       paragraph([
         "トレースは ", ref("def_trace"), "、行列の積は ", ref("mat_mult"), "、行列の冪 ",
-        math(String.raw`Q^2`), " は ", ref("def_exp"), " (1)、数ベクトルの和は ", ref("def_matrix_sum"),
+        math(String.raw`Q^2`), " は ", ref("def_matrix_power"), "、数ベクトルの和は ", ref("def_matrix_sum"),
         "、差は ", ref("def_matrix_difference"), "、零ベクトル ", math(String.raw`0`), " は ", ref("def_zero_matrix"),
         " のものとする。",
       ]),
@@ -365,11 +365,11 @@ export default defineBlocks([
       displayMath(String.raw`\begin{aligned}
 Q^2
 &= Q^1 Q
-&&(\because\ A^{m+1} := A^m A\ \text{を}\ m = 1\ \text{に。}\blkref{def_exp}\ (1))\\
+&&(\because\ A^{m+1} := A^m A\ \text{を}\ m = 1\ \text{に。}\blkref{def_matrix_power})\\
 &= (Q^0 Q) Q
-&&(\because\ A^{m+1} := A^m A\ \text{を}\ m = 0\ \text{に。}\blkref{def_exp}\ (1))\\
+&&(\because\ A^{m+1} := A^m A\ \text{を}\ m = 0\ \text{に。}\blkref{def_matrix_power})\\
 &= (I Q) Q
-&&(\because\ A^0 := I\ \text{。}\blkref{def_exp}\ (1))\\
+&&(\because\ A^0 := I\ \text{。}\blkref{def_matrix_power})\\
 &= Q Q
 &&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})
 \end{aligned}`),
@@ -1296,8 +1296,8 @@ A_{kl}
         " について ",
         math(String.raw`A^p`),
         "（",
-        ref("def_exp"),
-        " (1) の冪）は実対称である。",
+        ref("def_matrix_power"),
+        " の冪）は実対称である。",
       ]),
     ],
     proof: [
@@ -1311,9 +1311,9 @@ A^1
 &= A^{0+1}
 &&(\because \mathbb{Z}\ \text{で}\ 1 = 0 + 1) \\
 &= A^0A
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}) \\
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = 0\ \text{に適用}) \\
 &= I_{\mathrm{Mat}(n,\mathbb{C})}\,A
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I) \\
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^0 := I) \\
 &= A
 &&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult})
 \end{aligned}`),
@@ -1324,8 +1324,8 @@ A^1
         " のとき、",
         math(String.raw`A^0 = I_{\mathrm{Mat}(n,\mathbb{C})}`),
         "（",
-        ref("def_exp"),
-        " (1)）である。",
+        ref("def_matrix_power"),
+        "）である。",
         math(String.raw`k, l \in \{1,\dots,n\}`),
         " を任意に取ると",
       ]),
@@ -1370,8 +1370,8 @@ A^1
         " が実対称であるとする。",
         math(String.raw`A^{p+1} = A^pA`),
         "（",
-        ref("def_exp"),
-        " (1)）であり、",
+        ref("def_matrix_power"),
+        "）であり、",
         math(String.raw`A^p`),
         " と ",
         math(String.raw`A`),
@@ -1394,7 +1394,7 @@ A^1
 &= (A^{p+1})_{lk}
 &&(\because \blkref{def_matrix_transpose}) \\
 &= (A^pA)_{lk}
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = p\ \text{に適用}) \\
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = p\ \text{に適用}) \\
 &= \sum_{j=1}^{n} (A^p)_{lj}\,A_{jk}
 &&(\because \blkref{mat_mult}) \\
 &= \sum_{j=1}^{n} \bigl((A^p)^{\top}\bigr)_{jl}\,\bigl(A^{\top}\bigr)_{kj}
@@ -2407,7 +2407,7 @@ b^{(k)*}Ab^{(k)}
     labels: ["exp_of_hermitian_is_hermitian"],
     lean: ["Ising2D.matExp_conjTranspose_of_conjTranspose_eq", "Ising2D.tensorPow_pow_conjTranspose_of_conjTranspose_eq", "Ising2D.star_inv_factorial", "Ising2D.expPartialSum_conjTranspose_apply", "Ising2D.expPartialSum_conjTranspose"],
     statement: [
-      paragraph(["指数と冪は ", ref("def_exp"), "、共役転置は ", ref("def_hermitian_positive_definite"), "、行列の積は ", ref("mat_mult"), "、和とスカラー倍は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " による。"]),
+      paragraph(["指数は ", ref("def_exp"), "、冪は ", ref("def_matrix_power"), "、共役転置は ", ref("def_hermitian_positive_definite"), "、行列の積は ", ref("mat_mult"), "、和とスカラー倍は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " による。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",
@@ -2459,25 +2459,25 @@ b^{(k)*}Ab^{(k)}
       displayMath(String.raw`\begin{aligned}
 SS^0
 &= SI
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I)\\
 &= S
 &&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
 &= IS
 &&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
 &= S^0S
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I)
 \end{aligned}`),
       paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
       displayMath(String.raw`\begin{aligned}
 SS^{m+1}
 &= S(S^mS)
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA)\\
 &= (SS^m)S
 &&(\because\ \blkref{mat_mult_associative})\\
 &= (S^mS)S
 &&(\because\ \text{帰納法の仮定})\\
 &= S^{m+1}S
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA)
 \end{aligned}`),
       paragraph([
         "次に、すべての ",
@@ -2493,17 +2493,17 @@ SS^{m+1}
       displayMath(String.raw`\begin{aligned}
 (S^0)^*
 &= I^*
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I)\\
 &= I
 &&(\because\ I^* = I)\\
 &= S^0
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I)
 \end{aligned}`),
       paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
       displayMath(String.raw`\begin{aligned}
 (S^{m+1})^*
 &= (S^mS)^*
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA)\\
 &= S^*(S^m)^*
 &&(\because\ \blkref{star_preserves_norm_and_limits}\ (1)\ \text{の第 1 式})\\
 &= S(S^m)^*
@@ -2513,7 +2513,7 @@ SS^{m+1}
 &= S^mS
 &&(\because\ \text{準備の}\ SS^m = S^mS)\\
 &= S^{m+1}
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA)
 \end{aligned}`),
       paragraph([
         math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
@@ -2593,7 +2593,7 @@ SS^{m+1}
     labels: ["exp_of_symmetric_is_symmetric"],
     lean: ["Ising2D.matExp_transpose_of_transpose_eq", "Ising2D.tensorPow_pow_transpose_of_transpose_eq", "Ising2D.expPartialSum_transpose_apply", "Ising2D.expPartialSum_transpose"],
     statement: [
-      paragraph(["指数と冪は ", ref("def_exp"), "、転置は ", ref("def_matrix_transpose"), "、行列の積は ", ref("mat_mult"), "、和とスカラー倍は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " による。"]),
+      paragraph(["指数は ", ref("def_exp"), "、冪は ", ref("def_matrix_power"), "、転置は ", ref("def_matrix_transpose"), "、行列の積は ", ref("mat_mult"), "、和とスカラー倍は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " による。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",
@@ -2657,25 +2657,25 @@ SS^{m+1}
       displayMath(String.raw`\begin{aligned}
 SS^0
 &= SI
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I)\\
 &= S
 &&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
 &= IS
 &&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
 &= S^0S
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I)
 \end{aligned}`),
       paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
       displayMath(String.raw`\begin{aligned}
 SS^{m+1}
 &= S(S^mS)
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA)\\
 &= (SS^m)S
 &&(\because\ \blkref{mat_mult_associative})\\
 &= (S^mS)S
 &&(\because\ \text{帰納法の仮定})\\
 &= S^{m+1}S
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA)
 \end{aligned}`),
       paragraph([
         "次に、すべての ",
@@ -2691,17 +2691,17 @@ SS^{m+1}
       displayMath(String.raw`\begin{aligned}
 (S^0)^{\top}
 &= I^{\top}
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I)\\
 &= I
 &&(\because\ I^{\top} = I)\\
 &= S^0
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I)
 \end{aligned}`),
       paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
       displayMath(String.raw`\begin{aligned}
 (S^{m+1})^{\top}
 &= (S^mS)^{\top}
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA)\\
 &= S^{\top}(S^m)^{\top}
 &&(\because\ \blkref{transpose_of_matrix_product}\ (m, n, p \to n,\ A \to S^m,\ B \to S\ \text{を同時に置き換える}))\\
 &= S(S^m)^{\top}
@@ -2711,7 +2711,7 @@ SS^{m+1}
 &= S^mS
 &&(\because\ \text{準備の}\ SS^m = S^mS)\\
 &= S^{m+1}
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA)
 \end{aligned}`),
       paragraph([
         math(String.raw`N \in \mathbb{Z}_{\geq 0}`),

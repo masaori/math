@@ -2820,8 +2820,8 @@ x_{\mathbb{C}} - y_{\mathbb{C}}
         " を ",
         math(String.raw`p`),
         " の帰納法で示す。冪は ",
-        ref("def_exp"),
-        " (1) の ",
+        ref("def_matrix_power"),
+        " の ",
         math(String.raw`A^0 := I,\ A^{m+1} := A^m A`),
         " である。",
         math(String.raw`p = 0`),
@@ -2831,7 +2831,7 @@ x_{\mathbb{C}} - y_{\mathbb{C}}
         String.raw`\begin{aligned}
 B_\tau^{\,0}
 &= I
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I) \\
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^0 := I) \\
 &= 1_{\mathbb{C}}\,I
 &&(\because \blkref{scalar_multiple_by_one}) \\
 &= (\tau^{0})_{\mathbb{C}}\,I
@@ -2847,7 +2847,7 @@ B_\tau^{\,0}
         String.raw`\begin{aligned}
 B_\tau^{\,2p+1}
 &= B_\tau^{\,2p}\,B_\tau
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A) \\
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A) \\
 &= \bigl((\tau^{2p})_{\mathbb{C}}\,I\bigr)\,B_\tau
 &&(\because \text{帰納法の仮定}) \\
 &= \bigl((\tau^{2p})_{\mathbb{C}}\,I\bigr)\bigl(\tau_{\mathbb{C}}\,\sigma^x\bigr)
@@ -2868,7 +2868,7 @@ B_\tau^{\,2p+1}
         String.raw`\begin{aligned}
 B_\tau^{\,2p+2}
 &= B_\tau^{\,2p+1}\,B_\tau
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A) \\
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A) \\
 &= \bigl((\tau^{2p+1})_{\mathbb{C}}\,\sigma^x\bigr)\,B_\tau
 &&(\because \text{直前の式}) \\
 &= \bigl((\tau^{2p+1})_{\mathbb{C}}\,\sigma^x\bigr)\bigl(\tau_{\mathbb{C}}\,\sigma^x\bigr)

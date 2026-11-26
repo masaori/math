@@ -372,7 +372,7 @@ theorem Qproj_mul_Xop (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
   | r + 1, F, g, T => exact Qproj_mul_Xop_step1 F g T
 
 /-- **原文 `eigenvalues_of_check_Vprime` Step 2**: `X̌^k Q̌_ε = ǧ(ε)^k Q̌_ε`。
-人手の帰納法の鎖（`k = 0` の 4 行、`k + 1` の 8 行）と 1 対 1 の calc。行列の冪は `def_exp` (1) の
+人手の帰納法の鎖（`k = 0` の 4 行、`k + 1` の 8 行）と 1 対 1 の calc。行列の冪は `def_matrix_power` の
 `A^0 := I`・`A^{m+1} := A^m A`（mathlib の `pow_zero`・`pow_succ` が同じ形）、数の冪も同じ形で証明の中で定めている。
 同じ主張の必要十分版は `NecSuf.pow_mul_eq_of_mul_eq_smul`（`ClaimEigenvaluesCheckVprimeFromNecSuf.lean` の `Vprime_mul_Qproj_of_necSuf` が `NecSuf.exp_mul_eq_of_mul_eq_smul` の中で使う）。
 具体版の `Vprime_mul_Qproj` は部分和の鎖 `partialExpSum_mul_Qproj` を経てこの定理を使う。 -/
@@ -382,7 +382,7 @@ theorem Xop_pow_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k 
   | zero =>
     calc F.Xop g ^ 0 * F.Qproj T
         = 1 * F.Qproj T := by rw [pow_zero]
-                                                        -- `def_exp` (1) の `A^0 := I`
+                                                        -- `def_matrix_power` の `A^0 := I`
       _ = F.Qproj T := identity_matrix_mul_tensorPow _
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`
       _ = (1 : ℂ) • F.Qproj T := (one_smul ℂ _).symm
@@ -392,7 +392,7 @@ theorem Xop_pow_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k 
   | succ k ih =>
     calc F.Xop g ^ (k + 1) * F.Qproj T
         = (F.Xop g ^ k * F.Xop g) * F.Qproj T := by rw [pow_succ]
-                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`
+                                                        -- `def_matrix_power` の `A^{m+1} := A^m A`
       _ = F.Xop g ^ k * (F.Xop g * F.Qproj T) := Matrix.mul_assoc _ _ _
                                                         -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）
       _ = F.Xop g ^ k * ((((F.gval g T : ℝ) : ℂ)) • F.Qproj T) := by rw [F.Xop_mul_Qproj g T]
@@ -419,7 +419,7 @@ theorem Qproj_mul_Xop_pow (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k 
   | zero =>
     calc F.Qproj T * F.Xop g ^ 0
         = F.Qproj T * 1 := by rw [pow_zero]
-                                                        -- `def_exp` (1) の `A^0 := I`
+                                                        -- `def_matrix_power` の `A^0 := I`
       _ = F.Qproj T := mul_identity_matrix_tensorPow _
                                                         -- `identity_matrix_is_right_unit_of_mat_mult`
       _ = (1 : ℂ) • F.Qproj T := (one_smul ℂ _).symm
@@ -429,7 +429,7 @@ theorem Qproj_mul_Xop_pow (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k 
   | succ k ih =>
     calc F.Qproj T * F.Xop g ^ (k + 1)
         = F.Qproj T * (F.Xop g ^ k * F.Xop g) := by rw [pow_succ]
-                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`
+                                                        -- `def_matrix_power` の `A^{m+1} := A^m A`
       _ = (F.Qproj T * F.Xop g ^ k) * F.Xop g := (Matrix.mul_assoc _ _ _).symm
                                                         -- `mat_mult_associative` を右辺から左辺へ（mathlib の `Matrix.mul_assoc`）
       _ = ((((F.gval g T : ℝ) : ℂ)) ^ k • F.Qproj T) * F.Xop g := by rw [ih]
@@ -528,11 +528,11 @@ theorem Qproj_mulVec_Qproj_mulVec {r : ℕ} (F : CheckFermiSetup (r + 1)) (T : F
     _ = ((1 * F.Qproj T) * F.Qproj T).mulVec x := by rw [identity_matrix_mul_tensorPow]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult` を右辺から左辺へ
     _ = ((F.Qproj T ^ 0 * F.Qproj T) * F.Qproj T).mulVec x := by rw [pow_zero]
-                                                        -- `def_exp` (1) の `A^0 := I`
+                                                        -- `def_matrix_power` の `A^0 := I`
     _ = (F.Qproj T ^ 1 * F.Qproj T).mulVec x := by rw [← pow_succ]
-                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`（`m = 0`）
+                                                        -- `def_matrix_power` の `A^{m+1} := A^m A`（`m = 0`）
     _ = (F.Qproj T ^ 2).mulVec x := by rw [← pow_succ]
-                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`（`m = 1`）
+                                                        -- `def_matrix_power` の `A^{m+1} := A^m A`（`m = 1`）
     _ = (F.Qproj T).mulVec x := by rw [Qproj_sq_step1 F T]
                                                         -- `check_joint_eigenspace_decomposition` (1) の `Q̌_ε^2 = Q̌_ε`
 

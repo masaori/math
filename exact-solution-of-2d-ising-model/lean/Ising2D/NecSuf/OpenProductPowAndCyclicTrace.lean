@@ -10,7 +10,7 @@
 * 本体はそれに、写像 `τ : α → β` の巡回性 `τ(ab) = τ(ba)` を足すだけ。`τ` の線型性も `β` の構造も効かない。
 * 準備 1 の `bb = v_1`・`w = (bv_2)b` は仮定 `hbb`・`hw` として受け取る（`b` が平方根であること・可逆性・正定値性は効かない）。
 
-各段の右の注記は、具体版の同じ段が引く人手の根拠である（`pow_zero`・`pow_succ` は `def_exp` (1) の冪の定め方、
+各段の右の注記は、具体版の同じ段が引く人手の根拠である（`pow_zero`・`pow_succ` は `def_matrix_power` の冪の定め方、
 `mul_one`・`one_mul` は単位行列の右・左の単位律、`mul_assoc` は `mat_mult_associative`、`hcyc` は `trace_basic_properties` (2)）。
 -/
 import Mathlib.Algebra.Group.Defs

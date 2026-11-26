@@ -107,14 +107,14 @@ section TraceIdempotent
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
 /-- **人手 `trace_of_idempotent` の準備**: `Q^2 = QQ`。人手の 4 行と 1 対 1 の `calc`
-（`def_exp` (1) の冪 `A^{m+1} := A^m A` は mathlib の `pow_succ`、`A^0 := I` は `pow_zero`。
+（`def_matrix_power` の冪 `A^{m+1} := A^m A` は mathlib の `pow_succ`、`A^0 := I` は `pow_zero`。
 `identity_matrix_is_left_unit_of_mat_mult` は具体版の添字が `Fin m` に限るので、必要十分版 `NecSuf.one_mul_matrix` の
 係数 `ℂ`・添字 `n` の特殊化を引く）。 -/
 theorem idempotent_sq_eq_mul_self (Q : Matrix n n ℂ) : Q ^ 2 = Q * Q :=
   calc Q ^ 2
-      = Q ^ 1 * Q := pow_succ Q 1                          -- `def_exp` (1) の `A^{m+1} := A^m A` を `m = 1` に
-    _ = (Q ^ 0 * Q) * Q := by rw [pow_succ Q 0]            -- `def_exp` (1) の `A^{m+1} := A^m A` を `m = 0` に
-    _ = (1 * Q) * Q := by rw [pow_zero]                    -- `def_exp` (1) の `A^0 := I`
+      = Q ^ 1 * Q := pow_succ Q 1                          -- `def_matrix_power` の `A^{m+1} := A^m A` を `m = 1` に
+    _ = (Q ^ 0 * Q) * Q := by rw [pow_succ Q 0]            -- `def_matrix_power` の `A^{m+1} := A^m A` を `m = 0` に
+    _ = (1 * Q) * Q := by rw [pow_zero]                    -- `def_matrix_power` の `A^0 := I`
     _ = Q * Q := by rw [NecSuf.one_mul_matrix]             -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-- 人手の準備の結び: 仮定 `Q^2 = Q` から `QQ = Q`。 -/

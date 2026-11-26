@@ -1107,6 +1107,65 @@ s_i
     },
   },
   {
+    id: "exp_linear_map_definition_matrix_power",
+    kind: "definition",
+    title: { text: "行列の冪" },
+    labels: ["def_matrix_power"],
+    lean: ["Ising2D.realMatrix_conf_pow_zero_and_succ"],
+    statement: [
+      paragraph([
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        "、",
+        math(String.raw`n \in \mathbb{Z}_{\ge 1}`),
+        " とする。",
+        math(String.raw`\mathrm{Mat}(n,K)`),
+        " は、",
+        math(String.raw`K = \mathbb{C}`),
+        " なら ",
+        ref("def_complex_matrices"),
+        "、",
+        math(String.raw`K = \mathbb{R}`),
+        " なら ",
+        ref("def_real_matrices"),
+        " のものとする。行列の積と単位行列 ",
+        math(String.raw`I`),
+        " は、",
+        math(String.raw`K = \mathbb{C}`),
+        " なら ",
+        ref("mat_mult"),
+        " と ",
+        ref("def_identity_matrix"),
+        "、",
+        math(String.raw`K = \mathbb{R}`),
+        " なら ",
+        ref("def_real_matrix_product"),
+        " と ",
+        ref("def_real_identity_matrix"),
+        " のものとする。",
+        math(String.raw`A \in \mathrm{Mat}(n,K)`),
+        " と ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について、冪 ",
+        math(String.raw`A^m \in \mathrm{Mat}(n,K)`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`A^0 := I,
+\qquad
+A^{m+1} := A^m A`),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 原文（Typst）に対応ブロックは無い。行列の冪は def_exp (1) の中で exp の定義と一緒に置かれ、冪だけを根拠に引く本文の行（A^0 := I・A^{m+1} := A^mA を当てる行）も def_exp (1) を引いていたので、def_power_of_real_number と同じ形（零乗から始める帰納法）の定義のブロックとして切り出し、冪だけを引く行をこのブロックの参照にした。Lean の具体版は mathlib の Matrix の冪で、K = ℝ・添字 Conf M（本文の Mat(2^M,ℝ)）の場合の一致を Ising2D.realMatrix_conf_pow_zero_and_succ で示す（MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionRealMatrixOperationsOverMultiIndices.lean）。",
+      ],
+    },
+  },
+  {
     id: "exp_linear_map_002_definition_exp_of_endomorphism",
     kind: "definition",
     origin: {
@@ -1148,11 +1207,11 @@ s_i
       paragraph([
         "(1)（行列の exp）",
         math(String.raw`A \in \mathrm{Mat}(n,K)`),
-        " について、",
-        math(String.raw`A^0 := I`),
-        "（単位行列）、",
-        math(String.raw`A^{m+1} := A^m A`),
-        " とおき",
+        " について、冪 ",
+        math(String.raw`A^m`),
+        " を ",
+        ref("def_matrix_power"),
+        " のものとして",
       ]),
       displayMath(
         String.raw`\exp(A) := \sum_{m=0}^{\infty}\frac{1}{m!}A^m
@@ -1205,6 +1264,7 @@ s_i
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: (1) の冪 A^0 := I、A^{m+1} := A^mA を定義のブロック def_matrix_power へ切り出し、(1) はそれを引く形にした。冒頭の段落の積と単位行列の指定と、exp の定義は変えていない。",
         "2026-11-06（Lean の通しの証明のゴールラインの確認）: K = ℝ の冪の積と単位行列を定めるブロックが無かった（mat_mult・def_identity_matrix は係数が ℂ のものだけ）ので、冒頭の段落で K ごとに def_real_matrix_product・def_real_identity_matrix を引くようにした。K = ℂ の内容は不変。",
         "原文は「有限次元線型空間 V の自己準同型 X ∈ End(V) の exp」として定義していた。" +
           "README 4 節（主張は複素行列について具体的に述べる）に従い、" +
@@ -1229,8 +1289,8 @@ s_i
         "、",
         math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
         " とし、冪は ",
-        ref("def_exp"),
-        " (1) のもの、積は ",
+        ref("def_matrix_power"),
+        " のもの、積は ",
         ref("mat_mult"),
         " のものとする。すべての ",
         math(String.raw`p, q \in \mathbb{Z}_{\geq 0}`),
@@ -1255,7 +1315,7 @@ A^{p+0}
 &= A^p\,I_{\mathrm{Mat}(n,\mathbb{C})}
 &&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}) \\
 &= A^pA^0
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^0 := I)
 \end{aligned}`),
       paragraph([
         "である。",
@@ -1267,13 +1327,13 @@ A^{p+(q+1)}
 &= A^{(p+q)+1}
 &&(\because \mathbb{Z}\ \text{の加法の結合律}) \\
 &= A^{p+q}A
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = p+q\ \text{に適用}) \\
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = p+q\ \text{に適用}) \\
 &= (A^pA^q)A
 &&(\because \text{帰納法の仮定}) \\
 &= A^p(A^qA)
 &&(\because \blkref{mat_mult_associative}) \\
 &= A^pA^{q+1}
-&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = q\ \text{に適用})
+&&(\because \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^mA\ \text{を}\ m = q\ \text{に適用})
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -1306,7 +1366,9 @@ A^{p+(q+1)}
         math(String.raw`B^p`),
         "（",
         math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
-        "）と ",
+        "）は ",
+        ref("def_matrix_power"),
+        "、",
         math(String.raw`\exp`),
         " は ",
         ref("def_exp"),
@@ -1377,13 +1439,13 @@ A^{p+(q+1)}
       displayMath(String.raw`\begin{aligned}
 AB^0
 &= AI_{\mathrm{Mat}(n,\mathbb{C})}
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ B^0 := I)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ B^0 := I)\\
 &= A
 &&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
 &= I_{\mathrm{Mat}(n,\mathbb{C})}A
 &&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
 &= B^0A
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ B^0 := I)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ B^0 := I)
 \end{aligned}`),
       paragraph([
         math(String.raw`p`),
@@ -1392,7 +1454,7 @@ AB^0
       displayMath(String.raw`\begin{aligned}
 AB^{p+1}
 &= A(B^pB)
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ B^{p+1} := B^pB)\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ B^{p+1} := B^pB)\\
 &= (AB^p)B
 &&(\because\ \blkref{mat_mult_associative})\\
 &= (B^pA)B
@@ -1404,7 +1466,7 @@ AB^{p+1}
 &= (B^pB)A
 &&(\because\ \blkref{mat_mult_associative})\\
 &= B^{p+1}A
-&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ B^{p+1} := B^pB)
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ B^{p+1} := B^pB)
 \end{aligned}`),
       paragraph([
         "Step 2（部分和との可換性）。すべての ",
@@ -1994,7 +2056,7 @@ S_NT_N
     title: { tex: String.raw`\exp(O) = I` },
     labels: ["theorem_exp_zero"],
     statement: [
-      paragraph(["行列指数は ", ref("def_exp"), "、成分積は ", ref("mat_mult"), "、実数係数の包含は ", ref("inclusion_rr_to_cc"), " による。実数級数の収束は ", ref("real_exp_series_converges"), " を引数1に適用する。"]),
+      paragraph(["行列指数は ", ref("def_exp"), "、行列の冪は ", ref("def_matrix_power"), "、成分積は ", ref("mat_mult"), "、実数係数の包含は ", ref("inclusion_rr_to_cc"), " による。実数級数の収束は ", ref("real_exp_series_converges"), " を引数1に適用する。"]),
       paragraph([math(String.raw`d \in \mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`O,I \in \mathrm{Mat}(d,\mathbb{C})`), " とする。"]),
       paragraph([
         math(String.raw`O`),
@@ -2014,7 +2076,7 @@ S_NT_N
         String.raw`\begin{aligned}
 O^k
 &= O^{k-1}\,O
-&&(\because\ \blkref{def_exp}\ \text{(1) の}\ A^{m+1} := A^m A\ (K \to \mathbb{C},\ n \to d,\ A \to O,\ m \to k-1))\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^{m+1} := A^m A\ (K \to \mathbb{C},\ n \to d,\ A \to O,\ m \to k-1))\\
 &= O
 &&(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ (m, n, p \to d,\ A \to O^{k-1}))
 \end{aligned}`,
@@ -2028,7 +2090,7 @@ O^k
 &= \frac{O^0}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
 &&(\because\ \text{収束級数の第 0 項を分ける})\\
 &= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
-&&(\because\ \blkref{def_exp}\ \text{(1) の}\ A^0 := I\ (K \to \mathbb{C},\ n \to d,\ A \to O))\\
+&&(\because\ \blkref{def_matrix_power}\ \text{の}\ A^0 := I\ (K \to \mathbb{C},\ n \to d,\ A \to O))\\
 &= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O}{n!}
 &&(\because\ \text{準備の}\ O^k = O\ (k \to n)\ \text{を}\ n \geq 1\ \text{の各項へ})\\
 &= I + \sum_{n=1}^{\infty} \frac{O}{n!}
@@ -2315,7 +2377,7 @@ a
         String.raw`\begin{aligned}
 [x]_K^{\,0}
 &= I
-   \quad (\because \text{行列の冪の定義 } A^0 := I\text{。}\blkref{def_exp}) \\
+   \quad (\because \text{行列の冪の定義 } A^0 := I\text{。}\blkref{def_matrix_power}) \\
 &= \left[I_{11}\right]_K
    \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
 &= [1]_K
@@ -2332,7 +2394,7 @@ a
         String.raw`\begin{aligned}
 \left([x]_K^{\,m+1}\right)_{11}
 &= \left([x]_K^{\,m}[x]_K\right)_{11}
-   \quad (\because \text{行列の冪の定義 } A^{m+1} := A^m A\text{。}\blkref{def_exp}) \\
+   \quad (\because \text{行列の冪の定義 } A^{m+1} := A^m A\text{。}\blkref{def_matrix_power}) \\
 &= \sum_{j=1}^{1}\left([x]_K^{\,m}\right)_{1j}\left([x]_K\right)_{j1}
    \quad (\because \text{行列の積の成分。}\blkref{mat_mult}) \\
 &= \left([x]_K^{\,m}\right)_{11}\left([x]_K\right)_{11}
@@ -2524,7 +2586,7 @@ a
         String.raw`\begin{aligned}
 \left([0]_K^{\,m}\right)_{11}
 &= \left([0]_K^{\,m-1}[0]_K\right)_{11}
-   \quad (\because \text{行列の冪の定義 } A^{m} := A^{m-1} A\text{。}\blkref{def_exp}) \\
+   \quad (\because \text{行列の冪の定義 } A^{m} := A^{m-1} A\text{。}\blkref{def_matrix_power}) \\
 &= \sum_{j=1}^{1}\left([0]_K^{\,m-1}\right)_{1j}\left([0]_K\right)_{j1}
    \quad (\because \text{行列の積の成分。}\blkref{mat_mult}) \\
 &= \left([0]_K^{\,m-1}\right)_{11}\left([0]_K\right)_{11}
@@ -2564,7 +2626,7 @@ S_0([0]_K)
 &= \frac{1}{0!}[0]_K^{\,0}
    \quad (\because K = \mathbb{R} \text{ なら 1 項だけの和はその項、} K = \mathbb{C} \text{ なら }\blkref{def_finite_sum_of_matrices}\text{ の } \textstyle\sum_{j=1}^{1} X_j := X_1) \\
 &= \frac{1}{0!}I
-   \quad (\because \text{行列の冪の定義 } A^0 := I\text{。}\blkref{def_exp}) \\
+   \quad (\because \text{行列の冪の定義 } A^0 := I\text{。}\blkref{def_matrix_power}) \\
 &= I
    \quad (\because 0! = 1) \\
 &= \left[I_{11}\right]_K
@@ -2586,7 +2648,7 @@ S_N([0]_K)
 &= \frac{1}{0!}[0]_K^{\,0} + \sum_{m=1}^{N}\frac{1}{m!}[0]_K^{\,m}
    \quad (\because \text{第 0 項を分ける}) \\
 &= \frac{1}{0!}I + \sum_{m=1}^{N}\frac{1}{m!}[0]_K^{\,m}
-   \quad (\because \text{行列の冪の定義 } A^0 := I\text{。}\blkref{def_exp}) \\
+   \quad (\because \text{行列の冪の定義 } A^0 := I\text{。}\blkref{def_matrix_power}) \\
 &= I + \sum_{m=1}^{N}\frac{1}{m!}[0]_K^{\,m}
    \quad (\because 0! = 1) \\
 &= I + \sum_{m=1}^{N}\frac{1}{m!}O

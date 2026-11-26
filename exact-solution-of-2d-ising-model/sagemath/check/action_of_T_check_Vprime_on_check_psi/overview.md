@@ -24,7 +24,7 @@
 | Step 2' の第 8 行（periodicity_of_check_fermi (3)） | `check_steps_exact.sage` | γ_1(θ̃_{M+1−μ}) = γ_1(θ̃_μ) を L で厳密に（γ = arccosh∘γ_1 なので γ も等しい）。g 対称の環で行列が一致する。対照: M_col = 3 で共役でない添字 λ では γ_1(θ̃_λ) ≠ γ_1(θ̃_μ) | **PASS** | 成り立つ |
 | Step 2' の第 9〜11 行と結論 | `check_steps_exact.sage` | g 対称の環で各行と [X̌, ψ̌_μ] = (−g_μ)ψ̌_μ | **PASS** | 成り立つ |
 | Step 3 の 6 等号 | `check_steps_exact.sage` | g 対称の環で (W, c) = (ψ̌^†_μ, g_μ), (ψ̌_μ, −g_μ) の仮定 [X̌, W] = cW と各行。対照: c の符号を逆にすると X̌W = W(X̌ − cI) にならない | **PASS** | 成り立つ |
-| Step 4 の n = 0 と帰納の 7 等号 | `check_steps_exact.sage` | 冪を def_exp (1) の A^{m+1} := A^m A で組み、n ≤ 4（M_col = 2）、n ≤ 3（M_col = 3）で各行 | **PASS** | 成り立つ |
+| Step 4 の n = 0 と帰納の 7 等号 | `check_steps_exact.sage` | 冪を def_matrix_power の A^{m+1} := A^m A で組み、n ≤ 4（M_col = 2）、n ≤ 3（M_col = 3）で各行 | **PASS** | 成り立つ |
 | Step 5 の部分和の 9 等号 | `check_steps_exact.sage` | 係数 a_m = (1/m!)_C の部分和で N ≤ 4（M_col = 2）、N ≤ 3（M_col = 3）の各行（S_N の定め方の 2 行と添字 j = m + 1 の付け替えの 2 行を含む） | **PASS** | 成り立つ |
 | Step 5 の極限の等式 | `check_conclusion_ball.sage` | 結合定数 4 組 × M_col = 2..5 × 全ての μ × 二つの (W, c) で exp(X̌)W と W exp(X̌ + cI) のボールが重なる。対照: c = 0 の exp(X̌)W と W exp(X̌) は重ならない | **PASS** | 成り立つ |
 | 準備 6 の三つの鎖 | `check_preparations.sage` | 不定元 c と全ての (k, l) で各行 | **PASS** | 成り立つ |

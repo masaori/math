@@ -11,7 +11,7 @@
 | 人手の段 | Lean |
 | --- | --- |
 | Step 1 の `ε ≠ ε'` の 4 行の鎖 | `Qproj_mul_image_of_ne` |
-| Step 1 の `Q̌_ε q_ε = q_ε` の鎖（`def_exp` (1) の冪を経て (1) の `Q̌_ε^2 = Q̌_ε`） | `Qproj_mul_image_self`（Lean の (1) は `Qproj_mul_self` の積の形なので冪の 3 行は要らない） |
+| Step 1 の `Q̌_ε q_ε = q_ε` の鎖（`def_matrix_power` の冪を経て (1) の `Q̌_ε^2 = Q̌_ε`） | `Qproj_mul_image_self`（Lean の (1) は `Qproj_mul_self` の積の形なので冪の 3 行は要らない） |
 | Step 2（線型独立。`t ≠ t_0` の 3 行の鎖、`d_{t_0} q_{ε'}` の 7 行の鎖、逆元の 5 行の鎖） | `nonzero_elements_of_images_of_check_Q_form_basis` の `hind` |
 | Step 3（`linearly_independent_family_of_n_vectors_is_basis` と `def_basis_indexed_by_finite_set`） | 同じ定理の最後の 2 行 |
 

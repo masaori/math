@@ -8,7 +8,7 @@
 - ブロック: `evenEigen_claim_conjugation_commutes_with_matrix_exp`（正則な B について T_B(exp(X)) = exp(T_B(X))、T_B(A) := (BA)B^{-1}）
 - 範囲: 証明の準備（部分和 P_N の置き方と二つの収束）、Step 1 の二つの鎖（p = 0 と p → p+1）、Step 2 の二つの鎖（N = 0 と N → N+1）、
   Step 3（二つの積の連続性）、結論の行（極限の一意性）と、主張そのもの。
-- 記号: c_p := (1/p!)_ℂ、P_N(A) := Σ_{p=0}^{N} c_pA^p（P_0 = c_0A^0、P_{N+1} = P_N + c_{N+1}A^{N+1}）、冪は def_exp (1) の A^0 := I、A^{p+1} := A^pA。
+- 記号: c_p := (1/p!)_ℂ、P_N(A) := Σ_{p=0}^{N} c_pA^p（P_0 = c_0A^0、P_{N+1} = P_N + c_{N+1}A^{N+1}）、冪は def_matrix_power の A^0 := I、A^{p+1} := A^pA。
 
 ## 証明の行との対応
 

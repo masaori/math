@@ -25,7 +25,7 @@
   添字 `Conf M` へ特殊化した系 `identity_matrix_mul_tensorPow` を引く（`ClaimExpOfSymmetricIsSymmetric.lean` と同じ扱い）。
 - 人手の `p = 0` の 1・2 行目（`def_identity_matrix` と `def_kronecker_delta`）は、mathlib の単位行列の成分 `Matrix.one_apply` が
   `if k = l then 1 else 0` を返すので、Lean では 1 段にまとまる（`ClaimRealMatrixOfRealEntryMatrixPreservesProductAndPower.lean` と同じ扱い）。
-- `def_exp` (1) の冪 `A^0 := I`・`A^{m+1} := A^mA` は mathlib の `pow_zero`・`pow_succ` と同じ形である。
+- `def_matrix_power` の冪 `A^0 := I`・`A^{m+1} := A^mA` は mathlib の `pow_zero`・`pow_succ` と同じ形である。
   `mat_mult` は mathlib の行列の積の定義（成分は `dotProduct`）で `rfl`、`def_matrix_transpose` は `Aᵀ k l = A l k` が `rfl` である。
   `complex_numbers_form_a_field` の積の可換律は mathlib の `mul_comm`（`ℂ`）である。
 -/
@@ -44,8 +44,8 @@ variable {M : ℕ}
 theorem matrix_pow_one_eq_self_tensorPow (A : TensorPow M) : A ^ 1 = A :=
   calc A ^ 1
       = A ^ (0 + 1) := rfl                                                  -- `ℤ` で `1 = 0 + 1`
-    _ = A ^ 0 * A := pow_succ A 0                                           -- `def_exp` (1) の `A^{m+1} := A^mA`（`m → 0`）
-    _ = 1 * A := by rw [pow_zero]                                           -- `def_exp` (1) の `A^0 := I`
+    _ = A ^ 0 * A := pow_succ A 0                                           -- `def_matrix_power` の `A^{m+1} := A^mA`（`m → 0`）
+    _ = 1 * A := by rw [pow_zero]                                           -- `def_matrix_power` の `A^0 := I`
     _ = A := identity_matrix_mul_tensorPow A                                -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-- 人手 `p = 0` の成分の 3 行 `(I)_{kl} = δ_{kl} = {1_ℂ, 0_ℂ} = {ι(1), ι(0)}`。 -/
@@ -74,7 +74,7 @@ theorem matrix_pow_succ_transpose_apply_tensorPow (A : TensorPow M) (hAT : Aᵀ 
     (A ^ (p + 1))ᵀ k l = (A ^ (p + 1)) k l :=
   calc (A ^ (p + 1))ᵀ k l
       = (A ^ (p + 1)) l k := rfl                                            -- `def_matrix_transpose`
-    _ = (A ^ p * A) l k := by rw [pow_succ]                                 -- `def_exp` (1) の `A^{m+1} := A^mA`（`m → p`）
+    _ = (A ^ p * A) l k := by rw [pow_succ]                                 -- `def_matrix_power` の `A^{m+1} := A^mA`（`m → p`）
     _ = ∑ j, (A ^ p) l j * A j k := rfl                                     -- `mat_mult`
     _ = ∑ j, (A ^ p)ᵀ j l * Aᵀ k j := rfl                                   -- `def_matrix_transpose` を 2 箇所へ同時に適用
     _ = ∑ j, (A ^ p) j l * Aᵀ k j := by rw [ih]                             -- 帰納法の仮定の `(A^p)^⊤ = A^p`
@@ -91,12 +91,12 @@ theorem matrix_pow_succ_transpose_apply_tensorPow (A : TensorPow M) (hAT : Aᵀ 
 theorem power_of_real_symmetric_complex_matrix_is_real_symmetric (A : TensorPow M)
     (hA : MatrixIsRealSymmetric A) : ∀ p : ℕ, MatrixIsRealSymmetric (A ^ p)
   | 0 => by
-      rw [pow_zero]                                                         -- `def_exp` (1) の `A^0 := I`
+      rw [pow_zero]                                                         -- `def_matrix_power` の `A^0 := I`
       exact identity_matrix_isRealSymmetric_tensorPow
   | p + 1 => by
       have ih := power_of_real_symmetric_complex_matrix_is_real_symmetric A hA p  -- 帰納法の仮定（`A^p` は実対称）
       refine ⟨?_, ?_⟩
-      · rw [pow_succ]                                                       -- `def_exp` (1) の `A^{p+1} = A^pA`
+      · rw [pow_succ]                                                       -- `def_matrix_power` の `A^{p+1} := A^pA`
         exact matrix_mul_hasRealEntries _ _ ih.1 hA.1                       -- `product_of_real_entry_matrices_has_real_entries`（`A → A^p`, `B → A`）
       · exact Matrix.ext (matrix_pow_succ_transpose_apply_tensorPow A hA.2 p ih.2)
                                                                             -- 転置は 11 行の鎖、`k, l` は任意
