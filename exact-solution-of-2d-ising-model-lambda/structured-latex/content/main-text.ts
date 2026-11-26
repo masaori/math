@@ -100991,7 +100991,7 @@ M_{\mathcal D_0,\varnothing}(x)=1.`),
                         ref("def_edge_reversal"), " の反転は向きだけを替えるので、", math(String.raw`\vec e_1\prec\vec e_2`),
                         " から ", math(String.raw`\vec e_1=(e,0)`), "、", math(String.raw`\vec e_2=(e,1)`), " となる。よって",
                       ]),
-                      displayMath(String.raw`E_{\mathcal D_0}=\{((e,0),(e,1))\mid e\in E_L\}.`),
+                      displayMath(String.raw`E_{\mathcal D_0}=\{((e,0),(e,1))\mid e\in E_L\}`),
                       paragraph([
                         "これらの対を辺番号順に並べた列は ", math(String.raw`\mathcal D_0`), " の列挙である。",
                         ref("claim_perfect_matching_enumeration_complete"), " によりその端点列は全元を含み、辞書式順序で狭義増加なので、",
@@ -101003,7 +101003,7 @@ M_{\mathcal D_0,\varnothing}(x)=1.`),
 &=\operatorname{sgn}(\operatorname{id}_{\vec E_L})
 &&\bigl(\because\ \blkref{def_perfect_matching_sign}\text{ と }\blkref{claim_perfect_matching_sign_enumeration_independent}\bigr)\\
 &=1
-&&\bigl(\because\ \text{恒等置換の符号}\bigr).
+&&\bigl(\because\ \text{恒等置換の符号}\bigr)
 \end{aligned}`),
                       paragraph([
                         math(String.raw`e\in E_L`), " を固定する。", ref("def_oriented_edge_direction"),
@@ -101023,7 +101023,7 @@ w_{(e,0),(e,1)}
 &=\zeta_8^{\,0}
 &&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の二つの場合}\bigr)\\
 &=1
-&&\bigl(\because\ \text{零乗}\bigr).
+&&\bigl(\because\ \text{零乗}\bigr)
 \end{aligned}`),
                       paragraph([ref("def_tagged_matching_contributions"), " の長い寄与を求める。"]),
                       displayMath(String.raw`\begin{aligned}
@@ -101033,7 +101033,7 @@ w_{(e,0),(e,1)}
 &=C(1)
 &&\bigl(\because\ \text{上で求めた重み}\bigr)\\
 &=1
-&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の一の保存}\bigr).
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の一の保存}\bigr)
 \end{aligned}`),
                       paragraph([
                         "この項は短い標識を持たない。",
@@ -101053,7 +101053,7 @@ M_{\mathcal D_0,\varnothing}(x)
 &=1\cdot\prod_{e\in E_L}1
 &&\bigl(\because\ \text{上の符号と長い寄与}\bigr)\\
 &=1
-&&\bigl(\because\ \text{有限積の単位元}\bigr).
+&&\bigl(\because\ \text{有限積の単位元}\bigr)
 \end{aligned}`),
                     ],
                   },
