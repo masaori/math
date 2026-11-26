@@ -52,7 +52,6 @@ GT	Ising2D.eigenspace_VPlus_max_subset_evenSector	LinearMap.range
 GT	Ising2D.eigenspace_VPlus_max_subset_evenSector	Submodule
 GT	Ising2D.evenEigenspace	Submodule
 GT	Ising2D.evenEigenspace_carrier	Submodule
-GT	Ising2D.evenEigenspace_eq_fixedSubmodule	Submodule
 GT	Ising2D.exists_eigenBasis_VPlus	Module.Basis
 GT	Ising2D.exists_eigenBasis_VPlus_of_joint_eigenspaces	DirectSum
 GT	Ising2D.exists_eigenBasis_VPlus_of_joint_eigenspaces	FiniteDimensional

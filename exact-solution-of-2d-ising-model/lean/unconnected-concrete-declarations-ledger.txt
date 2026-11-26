@@ -463,7 +463,6 @@ Ising2D.eq_Qproj_univ_mulVec_of_eigen
 Ising2D.eta_smul_epsilon_sq
 Ising2D.evenEigenspace
 Ising2D.evenEigenspace_carrier
-Ising2D.evenEigenspace_eq_fixedSubmodule
 Ising2D.evenOddPartialSum_apply_eq
 Ising2D.evenOddPartialSum_eq
 Ising2D.eventually_hasDerivAt_fFun

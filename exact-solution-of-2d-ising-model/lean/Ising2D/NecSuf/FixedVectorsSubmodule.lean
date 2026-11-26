@@ -11,6 +11,10 @@ import Mathlib.Algebra.Module.Submodule.Basic
 証明に使うのは有限添字、加法・乗法・零、および行列成分とスカラーを交換する
 可換性だけである。減法、逆元、順序、ノルム、有限次元性は使わないため、係数は
 可換半環まで弱める。
+
+具体版 `Ising2D.evenEigenspace` がこの `fixedSubmodule` の特殊化であることは、導出
+`Ising2D/PartitionFunction/ProjectionAndJordanWigner/EvenEigenvectorsFromNecSuf.lean` の
+`evenEigenspace_eq_fixedSubmodule` が述べる。
 -/
 
 namespace Ising2D.NecSuf

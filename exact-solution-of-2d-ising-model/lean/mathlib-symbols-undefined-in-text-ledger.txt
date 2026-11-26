@@ -3120,7 +3120,6 @@ Ising2D.evenEigenspace	Submodule@Complex,→@Complex.instSemiring,Pi.addCommMono
 Ising2D.evenEigenspace_carrier	Set
 Ising2D.evenEigenspace_carrier	SetLike.coe@Submodule,→@Submodule.setLike
 Ising2D.evenEigenspace_carrier	Submodule@Complex,→@Complex.instSemiring,Pi.addCommMonoid,Pi.Function.module
-Ising2D.evenEigenspace_eq_fixedSubmodule	Submodule@Complex,→@Complex.instSemiring,Pi.addCommMonoid,Pi.Function.module
 Ising2D.evenEigenvectors	Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype
 Ising2D.evenEigenvectors	Set
 Ising2D.evenEigenvectors	setOf

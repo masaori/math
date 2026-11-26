@@ -15,7 +15,6 @@
 （`evenEigenspace_carrier`）。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
-import Ising2D.NecSuf.FixedVectorsSubmodule
 
 namespace Ising2D
 
@@ -96,12 +95,5 @@ def evenEigenspace (M : ℕ) (hM : 1 ≤ M) : Submodule ℂ (Conf M → ℂ) whe
 theorem evenEigenspace_carrier (M : ℕ) (hM : 1 ≤ M) :
     ((evenEigenspace M hM : Submodule ℂ (Conf M → ℂ)) : Set (Conf M → ℂ))
       = evenEigenvectors M hM := rfl
-
-/-- 具体版は必要十分版を `R=ℂ`、`ι=Conf M`、`A=epsilon M` とした特殊化である。 -/
-theorem evenEigenspace_eq_fixedSubmodule (M : ℕ) (hM : 1 ≤ M) :
-    evenEigenspace M hM = NecSuf.fixedSubmodule (epsilon M) := by
-  apply Submodule.ext
-  intro f
-  rfl
 
 end Ising2D
