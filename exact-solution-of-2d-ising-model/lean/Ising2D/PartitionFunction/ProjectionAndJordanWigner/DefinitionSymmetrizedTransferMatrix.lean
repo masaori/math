@@ -39,7 +39,6 @@
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
-import Ising2D.NecSuf.TransposeOfMatrixProduct
 
 set_option linter.unusedSectionVars false
 
@@ -149,15 +148,15 @@ theorem trace_mul_pow_eq_trace_symmetrized_pow {B V1 V2 W : Matrix n n ℂ} (hBB
 
 /-- `B`, `V₂` が実行列で対称なら `W = (BV₂)B` も対称（人手 `W_is_real_symmetric_positive_definite` の Step 3 の
 `W^⊤ = W` の 7 行の鎖を、係数 `ℝ` の行列で同じ段に書いたもの。具体的な `W` の人手と 1 対 1 の鎖は
-`physicalSymTransferC_transpose`。積の転置は `transpose_of_matrix_product` の必要十分版 `NecSuf.transpose_mul_matrix'`
-（係数は可換な積と加法の可換モノイドだけ）を係数 `ℝ` で引く）。 -/
+`physicalSymTransferC_transpose`。`transpose_of_matrix_product` の具体版 `matrix_transpose_mul` は係数が `ℂ` で
+添字が `Fin` の行列にしかないので（具体版のファイル自身は `Matrix.transpose_mul` を使わない）、単位律と同じく同じ主張の mathlib の一段の補題 `Matrix.transpose_mul` を引く）。 -/
 theorem symTransfer_isSymm {B V2 : Matrix n n ℝ} (hB : B.IsSymm) (hV2 : V2.IsSymm) :
     (symTransfer B V2).IsSymm :=
   calc (symTransfer B V2)ᵀ
       = ((B * V2) * B)ᵀ := rfl                                  -- `def_symmetrized_transfer_matrix`
-    _ = Bᵀ * (B * V2)ᵀ := NecSuf.transpose_mul_matrix' _ _      -- `transpose_of_matrix_product`（`A → BV_2`, `B → B`）
+    _ = Bᵀ * (B * V2)ᵀ := Matrix.transpose_mul _ _              -- `transpose_of_matrix_product`（`A → BV_2`, `B → B`）
     _ = Bᵀ * (V2ᵀ * Bᵀ) := by
-        rw [NecSuf.transpose_mul_matrix' B V2]                 -- `transpose_of_matrix_product`（`A → B`, `B → V_2`）
+        rw [Matrix.transpose_mul B V2]                         -- `transpose_of_matrix_product`（`A → B`, `B → V_2`）
     _ = B * (V2ᵀ * B) := by rw [hB.eq]                         -- `B^⊤ = B` を 2 箇所へ同時に
     _ = B * (V2 * B) := by rw [hV2.eq]                         -- `V_2^⊤ = V_2`
     _ = (B * V2) * B := (Matrix.mul_assoc _ _ _).symm          -- `mat_mult_associative`
