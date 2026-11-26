@@ -27,8 +27,8 @@
   `definition_of_cc` の和の段も mathlib の ℂ の和の定義と同じ式なので `rfl` である（`real_inclusion_add` と同じ）。
 - 有限型の添字の和 `real_inclusion_of_finite_sum_fintype`（添字の型が空でない）と `real_inclusion_of_finite_sum_fintype_or_empty`
   （添字の型が空でもよい。人手の `m = 0` に当たる）は、`κ` に `Fin (card κ)` の番号を付けて `real_inclusion_of_finite_sum` を当て、番号を外す
-  （番号付けの 2 段は mathlib の `Equiv.sum_comp` で、人手のどの行にも当たらない番号付けの埋め合わせである。
-  `finite_sum_of_constant_real_number_fintype` と同じ扱い）。
+  （番号付けの 2 段は mathlib の `Equiv.sum_comp` で、人手のどの行にも当たらない番号付けの埋め合わせである）。
+  多重添字の集合 `𝓘_M`（Lean の `Conf M`）の上の和には、本文の `ν` で番号を付ける `real_inclusion_of_finite_sum_over_multi_indices`（`ClaimFiniteSumsOverMultiIndices.lean`）を使う。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNumbers
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionFiniteSumOverIndexSet

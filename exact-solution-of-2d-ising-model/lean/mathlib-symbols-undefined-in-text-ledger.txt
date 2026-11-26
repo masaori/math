@@ -4863,11 +4863,6 @@ Ising2D.finite_sum_mul_of_matrices	Finset.sum@Fin,Matrix[Complex]@Matrix.addComm
 Ising2D.finite_sum_mul_of_matrices	HMul.hMul@Matrix[Complex],Matrix[Complex],Matrix[Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.finite_sum_mul_of_matrices	Matrix
 Ising2D.finite_sum_of_constant_real	Nat.cast@Real@Real.instNatCast
-Ising2D.finite_sum_of_constant_real_number_fintype	Finset.sum@?,Real@Real.instAddCommMonoid
-Ising2D.finite_sum_of_constant_real_number_fintype	Finset.univ@?@?
-Ising2D.finite_sum_of_constant_real_number_fintype	Fintype
-Ising2D.finite_sum_of_constant_real_number_fintype	Fintype.card@?@?
-Ising2D.finite_sum_of_constant_real_number_fintype	Nat.cast@Real@Real.instNatCast
 Ising2D.finite_sum_of_constant_real_number_succ	Nat.cast@Real@Real.instNatCast
 Ising2D.finite_sum_of_matrices_with_single_nonzero_term	Finset.sum@?,Matrix[Complex]@Matrix.addCommMonoid
 Ising2D.finite_sum_of_matrices_with_single_nonzero_term	Finset.univ@?@?

@@ -19,8 +19,9 @@
 - 人手の `def_matrix_norm` の `‖w‖ = √(Σ|w_k|^2)` は、Lean の `vecNorm w = √(w ⬝ᵥ w)` を `vecNormSq_eq_sum` で `√(Σ w_k^2)` に開き、
   `square_of_real_absolute_value` で `√(Σ|w_k|^2)` に書いたものである（`ClaimEpsilonRealPreservesNorm.lean` と同じ。そちらは同じ段を mathlib の `sq_abs` で埋めている）。
 - 人手の `definition_of_sqrt_r_positive`（`√x` は `y ≥ 0, y^2 = x` を満たす `y`）は Lean では `Real.sqrt` で、その `y^2 = x` の行は `Real.sq_sqrt` である。
-- 人手の和の添字は `{1, …, d}` で、Lean の和の添字は `Conf (n + 1)` である。有限和の段は添字が有限型の系
-  `finite_sum_of_real_numbers_is_monotone_fintype`・`finite_sum_of_real_sums_fintype`・`finite_sum_of_real_scalar_multiples_fintype` で当てる。
+- 人手の和の添字は `{1, …, d}` で、Lean の和の添字は `Conf (n + 1)`（本文の `𝓘_{M_col}`）である。有限和の段は、本文の主張を `𝓘_M` の上の和へ当てた
+  `finite_sum_over_multi_indices_of_real_numbers_is_monotone`・`finite_sum_over_multi_indices_of_real_sums`・`finite_sum_over_multi_indices_of_real_scalar_multiples`
+  （`ClaimFiniteSumsOverMultiIndices.lean`）で当てる。
 - 人手は `ℝ^d` の元どうしの和を定めず、`v` を成分の等式 `v_k = u_k + (ε_ℝu)_k` で与える。Lean も同じく仮定 `hv` に置く
   （`epsilon_real_fixes_sum_of_vector_and_its_image` と同じ形）。
 
@@ -34,6 +35,7 @@ import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimNormOfNormalized
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimPowerOfRealOneIsOne
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
 
 namespace Ising2D
 
@@ -58,11 +60,11 @@ theorem norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most
   calc vecNorm v ^ 2
       = ∑ k, |v k| ^ 2 := vecNorm_sq_eq_sum_abs_sq v                -- 準備の `‖x‖^2 = Σ|x_k|^2`（`x → v`）
     _ ≤ ∑ k, (2 * |u k| ^ 2 + 2 * |(epsilonReal n *ᵥ u) k| ^ 2) :=
-        finite_sum_of_real_numbers_is_monotone_fintype _ _ hterm    -- `finite_sum_of_real_numbers_is_monotone` と `|v_k|^2` の評価
+        finite_sum_over_multi_indices_of_real_numbers_is_monotone _ _ hterm   -- `finite_sum_of_real_numbers_is_monotone` と `|v_k|^2` の評価
     _ = (∑ k, 2 * |u k| ^ 2) + ∑ k, 2 * |(epsilonReal n *ᵥ u) k| ^ 2 :=
-        finite_sum_of_real_sums_fintype _ _                         -- `finite_sum_of_real_sums`
+        finite_sum_over_multi_indices_of_real_sums _ _              -- `finite_sum_of_real_sums`
     _ = 2 * ∑ k, |u k| ^ 2 + 2 * ∑ k, |(epsilonReal n *ᵥ u) k| ^ 2 := by
-        rw [finite_sum_of_real_scalar_multiples_fintype, finite_sum_of_real_scalar_multiples_fintype]
+        rw [finite_sum_over_multi_indices_of_real_scalar_multiples, finite_sum_over_multi_indices_of_real_scalar_multiples]
                                                                     -- `finite_sum_of_real_scalar_multiples`（`c → 2`）を 2 か所へ同時適用
     _ = 2 * vecNorm u ^ 2 + 2 * vecNorm (epsilonReal n *ᵥ u) ^ 2 := by
         rw [vecNorm_sq_eq_sum_abs_sq u, vecNorm_sq_eq_sum_abs_sq (epsilonReal n *ᵥ u)]

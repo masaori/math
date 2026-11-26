@@ -38,13 +38,13 @@
 | 同じ段の `a = 0`: `m ≠ l` の項の 2 行と `u^{(0)}_l = x_l` の 5 行 | `power_zero_of_W_real_mulVec_apply` の `hterm` の 2 段と `calc` の 5 段 |
 | 同じ段の `(W_ℝ)^{a+1} = W_ℝ(W_ℝ)^a` の 7 行 | `power_succ_of_W_real` の `calc` の 7 段 |
 | 同じ段の `u^{(a+1)}_l = (W_ℝu^{(a)})_l` の 8 行 | `power_succ_of_W_real_mulVec_apply` の `calc` の 8 段 |
-| 同じ段の背理法の 7 行 | `real_bilinear_value_eq_zero_of_mulVec_eq_zero` の `calc` の 7 段（人手の `ι_{ℤ→ℝ}(d)` は Lean の `(Fintype.card (Conf M) : ℝ)`（`Nat.cast`））と `power_of_W_real_mulVec_ne_zero` の帰納法 |
+| 同じ段の背理法の 7 行 | `real_bilinear_value_eq_zero_of_mulVec_eq_zero` の `calc` の 7 段（人手の `Σ_k 0 = ι_{ℤ→ℝ}(d)·0` は、`Conf M` の上の和を開く `ν^{-1}` の定義域の大きさ `d` についての `finite_sum_over_multi_indices_of_constant_real_number`）と `power_of_W_real_mulVec_ne_zero` の帰納法 |
 | 【正値性】`m_{2a} > 0`・`m_{2a+1} > 0` の 5 行ずつ | `moment_even_pos`・`moment_odd_pos` の `calc` の 5 段 |
 | 【`P = W_ℝ` の不等式】8 行 | `moment_sq_le_with_W_real` の `calc` の 8 段 |
 | 【`P = I_ℝ` の不等式】8 行 | `moment_sq_le_with_real_identity` の `calc` の 8 段 |
 | 奇数 `k = 2p+1`・偶数 `k = 2p+2` の添字の確認（奇数は 6・6・6 行、偶数は 8・8・4 行）と 4 行ずつの主の鎖 | `moment_log_convexity` の `hab`・`h2a`・`h2b` の `calc` と二つの主の `calc` の 4 段（人手と同じく奇数・偶数の順。人手の各鎖の 1 行目（`a = p`・`b = p + 1` の代入）は、Lean が `a`・`b` を `p`・`p + 1` と直接書くので段が無い。人手の `ℤ_{≥0}` の元は Lean の `ℕ` で書き、人手の `k − 1_ℤ` に着く段（`x + 0 = x`・`x + (−x) = 0`・結合律と `def_int_difference`）は、`set_and_algebra_notation` の `ℕ` の差（`Nat.add_sub_cancel`）の 1 段と `k` の代入の段。`k = 2p+1 ∨ k = 2p+2` の `p` を取る段は `omega`） |
 
-- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`。`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one`）である。一般の `W` で述べ、人手が引く主張を仮定に置く:
+- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`。人手の `d = 2_ℤ^M` は `ν^{-1}` の定義域の大きさ `d` と `hd : d = 2^M`（Lean だけの段）で読み、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one` を `hd` で移したもの）である。一般の `W` で述べ、人手が引く主張を仮定に置く:
   `hW` は `W_is_real_symmetric_positive_definite` の実対称性、`hWRsymm`・`hpd` は `W_real_is_symmetric`・`W_real_is_positive_definite`。
   各補題は使う仮定だけを取る（`hpd` は【`(W_ℝ)^ax` は零でない】と【正値性】と【`P = W_ℝ` の不等式】、`hWRsymm` は【`P = W_ℝ` の不等式】だけ）。
   本文の `W` への当てはめは `PhysicalPartitionFunctionSandwich.lean` の `moment_log_convexity_physical`。
@@ -62,6 +62,7 @@ import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperB
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPsdCauchySchwarz
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
 
 set_option linter.unusedSectionVars false
 
@@ -335,6 +336,11 @@ theorem real_bilinear_value_eq_zero_of_mulVec_eq_zero (u : Conf M → ℝ)
     (hu : realMatrixOfRealEntries W hW.1 *ᵥ u = 0) :
     u ⬝ᵥ realMatrixOfRealEntries W hW.1 *ᵥ u = 0 := by
   set WR := realMatrixOfRealEntries W hW.1
+  obtain ⟨d, τ, hord, hτ⟩ := exists_inverse_of_kronecker_numbering M     -- `def_inverse_of_kronecker_numbering`
+  have hd : d = 2 ^ M := by                                               -- `ν^{-1}` の定義域は `{1,…,2^{M_col}}`（Lean だけの段: 定数 `1` の和で項の個数を比べる）
+    have h := finset_sum_conf_real_eq_finite_sum_over_multi_indices M d hord τ hτ (fun _ => (1 : ℝ))
+    simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, card_conf_nat, nsmul_eq_mul, mul_one] at h
+    exact_mod_cast h.symm
   calc u ⬝ᵥ WR *ᵥ u
       = ∑ k, ∑ l, u k * WR k l * u l := dotProduct_mulVec_eq_real_bilinear_value u u WR
                                                                             -- `def_real_bilinear_value`
@@ -344,9 +350,9 @@ theorem real_bilinear_value_eq_zero_of_mulVec_eq_zero (u : Conf M → ℝ)
     _ = ∑ k, u k * (0 : Conf M → ℝ) k := by rw [hu]                         -- `W_ℝu = 0` という仮定
     _ = ∑ _k : Conf M, (0 : ℝ) :=
         Finset.sum_congr rfl fun k _ => real_times_zero_is_zero (u k)       -- `real_times_zero_is_zero`（`x → u^{(a)}_k`）を `d` 個の項へ同時に
-    _ = (Fintype.card (Conf M) : ℝ) * 0 :=
-        finite_sum_of_constant_real_number_fintype
-          (by rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one M) 0
+    _ = (((d : ℤ)) : ℝ) * 0 :=
+        finite_sum_over_multi_indices_of_constant_real_number d hord τ hτ
+          (hd ▸ power_of_two_in_integers_is_at_least_one M) 0
                                                                             -- `finite_sum_of_constant_real_number`（`m → d ∈ ℤ_{≥1}`, `r → 0`）
     _ = 0 := real_times_zero_is_zero _                                      -- `real_times_zero_is_zero`（`x → ι_{ℤ→ℝ}(d)`）
 

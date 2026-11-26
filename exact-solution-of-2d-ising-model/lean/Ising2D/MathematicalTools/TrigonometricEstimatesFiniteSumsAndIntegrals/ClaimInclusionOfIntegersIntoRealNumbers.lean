@@ -53,8 +53,7 @@
   `finset_sum_fin_real_eq_finite_sum_of_real_numbers`（`DefinitionFiniteSumOverIndexSet.lean`）で出す。
   人手の `m = 0` の 3 行は `finite_sum_of_constant_real_number` の `m = 0` の段で、1 対 1 の `calc` である（`0_ℝ r = 0_ℝ` は `real_zero_times_is_zero`、`ι(0_ℤ) := 0_ℝ` は `inclusion_zz_to_rr_zero_intCast`）。
   この版の主張は `ι` を `Int.cast` で書き、`m ≥ 1` の段は `_succ` の `Nat.cast` の形を `inclusion_zz_to_rr_of_natCast` で移す。
-  有限型の添字の和 `finite_sum_of_constant_real_number_fintype` は、使う側の人手が `m → d ∈ ℤ_{≥1}` で引くのに合わせて `1 ≤ card κ` を仮定し、`card κ = m + 1` の `m` を取って
-  `κ` に `Fin (m + 1)` の番号を付け、`finite_sum_of_constant_real_number` を当てて `Nat.cast` の形へ移す（空の和の場合を通らない）。
+  多重添字の集合 `𝓘_M`（Lean の `Conf M`）の上の和には、`ClaimFiniteSumsOverMultiIndices.lean` の `finite_sum_over_multi_indices_of_constant_real_number` を使う。
 * `inclusion_zz_to_rr_of_positive_is_at_least_one` は人手と同じく `n` についての帰納法で、`n = 1` の 2 行と帰納法の段の 4 行が人手の行と 1 対 1 の `calc` である
   （`calc` は `1 ≤ …` の向きに書くので、人手の行を下から上へ並べている）。
 * `inclusion_zz_to_rr_of_nonpositive_is_nonpositive` は人手と同じく `n = 0` と `n = -m`（`m ∈ ℤ_{≥1}`）の場合分けで、`n = -m` の段は人手の 4 行に、
@@ -400,19 +399,6 @@ theorem finite_sum_of_constant_real_number (m : ℕ) (r : ℝ) :
     calc ∑ _j : Fin (m + 1), r
         = ((m + 1 : ℕ) : ℝ) * r := finite_sum_of_constant_real_number_succ m r   -- `m ≥ 1` の帰納法
       _ = ((((m + 1 : ℕ) : ℤ)) : ℝ) * r := by rw [inclusion_zz_to_rr_of_natCast] -- `ι` の `Nat.cast` の形を `Int.cast` の形へ（Lean だけの段）
-
-/-- **`finite_sum_of_constant_real_number`**（添字が有限型 `κ` の和。使う側の人手が `m → d ∈ ℤ_{≥1}` で引くのに合わせて `1 ≤ card κ` を仮定する）。
-人手の和は添字 `1, …, m` の上の和なので、`card κ = m + 1` の `m` を取り、`κ` に `Fin (m + 1)` の番号を付けて
-`finite_sum_of_constant_real_number` を当てる（番号を付ける段は mathlib の `Equiv.sum_comp` による）。 -/
-theorem finite_sum_of_constant_real_number_fintype {κ : Type*} [Fintype κ] (hκ : 1 ≤ Fintype.card κ) (r : ℝ) :
-    ∑ _j : κ, r = (Fintype.card κ : ℝ) * r := by
-  obtain ⟨m, hm⟩ : ∃ m : ℕ, Fintype.card κ = m + 1 := ⟨Fintype.card κ - 1, (Nat.sub_add_cancel hκ).symm⟩
-  set e : κ ≃ Fin (m + 1) := (Fintype.equivFin κ).trans (finCongr hm)
-  calc ∑ _j : κ, r
-      = ∑ _j : Fin (m + 1), r := (e.symm.sum_comp (fun _ => r)).symm      -- `κ` に番号を付ける
-    _ = ((((m + 1 : ℕ) : ℤ)) : ℝ) * r := finite_sum_of_constant_real_number (m + 1) r  -- `finite_sum_of_constant_real_number`（`m → card κ`）
-    _ = ((m + 1 : ℕ) : ℝ) * r := by rw [inclusion_zz_to_rr_of_natCast]     -- `ι` の `Int.cast` の形を `Nat.cast` の形へ（Lean だけの段）
-    _ = (Fintype.card κ : ℝ) * r := by rw [hm]                             -- `card κ = m + 1`
 
 /-- **人手 `power_of_two_in_integers_is_at_least_one`**: `M ∈ ℤ_{≥0}` なら `2_ℤ^M ≥ 1`。`M` についての帰納法。 -/
 theorem power_of_two_in_integers_is_at_least_one (M : ℕ) : 1 ≤ 2 ^ M := by

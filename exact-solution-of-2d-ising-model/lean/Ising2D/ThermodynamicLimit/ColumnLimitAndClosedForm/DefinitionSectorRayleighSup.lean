@@ -44,7 +44,8 @@ Lean の `evenSectorSet W ε` は実数の行列 `W`・`ε` を受け取り、Is
 ## 人手証明と 1 対 1 にならない箇所
 
 * 人手のノルムの鎖は `i ∈ {1,…,2^{M_col}}` の上の和で書き、和の個数を上端の `2^{M_col}` で読む。Lean の和は `I : Conf (n + 1)` の上の和なので、
-  `finite_sum_of_constant_real_number` の段の後に、添字の個数を `2^{M_col}` に読み替える段（`card_conf_nat`）が 1 つ多い。
+  `finite_sum_of_constant_real_number` は `𝓘_M` の上の和へ当てた `finite_sum_over_multi_indices_of_constant_real_number`（`ClaimFiniteSumsOverMultiIndices.lean`）で引き、
+  その後に、`ν^{-1}` の定義域の大きさ `d` を `2^{M_col}` に読み替える段（`hd`）と、`ι` の `Int.cast` の形を `Nat.cast` の形へ移す段が多い。
   1 段目の `def_matrix_norm` は、Lean の `vecNorm x = √(x ⬝ᵥ x)` を人手の `√(Σ|x_i|^2)` の形に書く読み替えの補題 `vecNorm_eq_sqrt_sum_abs_sq`
   （`RealMatrixBilinearFormAndNorm.lean`。Lean の定義を開く 3 段と、`square_of_real_number_is_product`・`square_of_real_absolute_value` を全ての項へ当てる 2 段）で引く。
 * Lean の通しの定理は `M` を一般に取るので、`evenSectorSet_epsilonR_nonempty` は `M = 0` も扱う。
@@ -76,6 +77,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTwoIsNonzero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfInversesIsInverseOfProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfPositiveRealIsPositive
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
 
 set_option linter.unusedSectionVars false
 
@@ -194,8 +196,11 @@ theorem epsilonR_zero_mulVec_evenUnit : epsilonR 0 *ᵥ evenUnit 0 = evenUnit 0 
 
 /-- 人手の `‖x^{(+)}‖² = 1` の 20 行の鎖（人手の `M_col` は `n + 1`、`ν(I)` は `I : Conf (n + 1)`）。 -/
 theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 := by
-  have hcard : 1 ≤ Fintype.card (Conf (n + 1)) := by
-    rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one (n + 1)
+  obtain ⟨d, τ, hord, hτ⟩ := exists_inverse_of_kronecker_numbering (n + 1)   -- `def_inverse_of_kronecker_numbering`
+  have hd : d = 2 ^ (n + 1) := by                                 -- `ν^{-1}` の定義域は `{1,…,2^{M_col}}`（Lean だけの段: 定数 `1` の和で項の個数を比べる）
+    have h := finset_sum_conf_real_eq_finite_sum_over_multi_indices (n + 1) d hord τ hτ (fun _ => (1 : ℝ))
+    simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, card_conf_nat, nsmul_eq_mul, mul_one] at h
+    exact_mod_cast h.symm
   have h2 : (0 : ℝ) ≤ 2 := (lt_iff_le_and_ne.mp real_zero_less_than_two).1
                           -- `real_zero_less_than_two` の `0 < 2_ℝ` と `<` の意味の前半（`x → 0, y → 2_ℝ`）で `2_ℝ ∈ ℝ_{≥0}`
   have h2ne : (2 : ℝ) ≠ 0 := real_two_is_nonzero
@@ -219,12 +224,16 @@ theorem vecNorm_sq_evenUnit_succ (n : ℕ) : vecNorm (evenUnit (n + 1)) ^ 2 = 1 
     _ = ∑ _I : Conf (n + 1), ((1 / Real.sqrt 2) ^ (n + 1)) ^ 2 :=
         Finset.sum_congr rfl fun I _ => by rw [evenUnit_apply_succ n I]
                           -- 各成分の値（`evenUnit_apply_succ`）を `2^{M_col}` 個の項へ同時に
-    _ = (Fintype.card (Conf (n + 1)) : ℝ) * ((1 / Real.sqrt 2) ^ (n + 1)) ^ 2 :=
-        finite_sum_of_constant_real_number_fintype hcard _
+    _ = (((d : ℤ)) : ℝ) * ((1 / Real.sqrt 2) ^ (n + 1)) ^ 2 :=
+        finite_sum_over_multi_indices_of_constant_real_number d hord τ hτ
+          (hd ▸ power_of_two_in_integers_is_at_least_one (n + 1)) _
                           -- `finite_sum_of_constant_real_number`（`m → 2_ℤ^{M_col}`、`r → ((1/√2)^{M_col})^2`）
+    _ = ((((2 ^ (n + 1) : ℕ) : ℤ)) : ℝ) * ((1 / Real.sqrt 2) ^ (n + 1)) ^ 2 := by
+        rw [hd]
+                          -- `ν^{-1}` の定義域の大きさ `= 2_ℤ^{M_col}`（人手は和の上端の `2^{M_col}` で書くので、Lean だけの読み替えの段）
     _ = ((2 ^ (n + 1) : ℕ) : ℝ) * ((1 / Real.sqrt 2) ^ (n + 1)) ^ 2 := by
-        rw [card_conf_nat]
-                          -- 添字の個数 `#𝓘_{M_col} = 2_ℤ^{M_col}`（人手は和の上端の `2^{M_col}` で書くので、Lean だけの読み替えの段）
+        rw [inclusion_zz_to_rr_of_natCast]
+                          -- `ι` の `Int.cast` の形を `Nat.cast` の形へ（Lean だけの読み替えの段）
     _ = (2 : ℝ) ^ (n + 1) * ((1 / Real.sqrt 2) ^ (n + 1)) ^ 2 := by
         rw [inclusion_zz_to_rr_of_power_of_two]
                           -- `inclusion_zz_to_rr_of_power_of_two`（`M → M_col`）

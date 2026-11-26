@@ -52,6 +52,10 @@ targets=(
   Ising2D.finset_sum_conf_real_eq_finite_sum_over_multi_indices
   Ising2D.finite_sum_over_multi_indices_of_real_scalar_multiples
   Ising2D.real_inclusion_of_finite_sum_over_multi_indices
+  Ising2D.finite_sum_over_multi_indices_of_real_sums
+  Ising2D.finite_sum_over_multi_indices_of_real_numbers_is_monotone
+  Ising2D.finite_sum_over_multi_indices_of_nonnegative_reals_ge_term
+  Ising2D.finite_sum_over_multi_indices_of_constant_real_number
   Ising2D.config_numbering_equals_kronecker_numbering
   Ising2D.V1
   Ising2D.V2
@@ -1345,7 +1349,6 @@ targets=(
   Ising2D.power_of_two_in_integers_is_at_least_one
   Ising2D.power_of_two_in_integers_is_at_least_one_of_necSuf
   "Ising2D.NecSuf.one_le_two_pow'"
-  Ising2D.finite_sum_of_constant_real_number_fintype
   Ising2D.inclusion_zz_to_rr_of_power_of_two
   Ising2D.inclusion_zz_to_rr_of_one_of_necSuf
   Ising2D.inclusion_zz_to_rr_preserves_sum_of_nonnegatives_of_necSuf

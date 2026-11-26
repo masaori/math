@@ -39,7 +39,7 @@
 | 同じ段の `m_n ≤ T` の 8 行 | `moment_le_trace_of_power` の `calc` の 8 段 |
 | 同じ段の `(x^⊤W_ℝx)^n ≤ T` の 3 行 | `real_bilinear_value_pow_le_trace_of_power` の `calc` の 3 段 |
 
-- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`。`d = 2_ℤ^M` に当たるのは `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は人手 `power_of_two_in_integers_is_at_least_one`）である。`ClaimTracePowerUpperBound.lean`・
+- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`。本文の `𝓘_M`。和の主張は `𝓘_M` の上の和へ当てた `ClaimFiniteSumsOverMultiIndices.lean` の補題で引く）である。`ClaimTracePowerUpperBound.lean`・
   `ClaimMomentLogConvexity.lean` と同じく一般の `W` で述べ、人手が引く主張を仮定に置く: `hW` は `W_is_real_symmetric_positive_definite` の実対称性、
   `hWRsymm`・`hpd` は `moment_log_convexity` が要る `W_real_is_symmetric`・`W_real_is_positive_definite`。
 - 人手の `W_ℝ = ϱ(W)` は `realMatrixOfRealEntries W hW.1`、`m_k := x^⊤(W_ℝ)^kx` は `momentWReal`、`e_q` は `Pi.single q 1`、
@@ -95,7 +95,7 @@ theorem norm_sq_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0
   calc vecNorm z ^ 2
       = ∑ j, |z j| ^ 2 := vecNorm_sq_eq_sum_abs_sq z                        -- `def_matrix_norm` と `definition_of_sqrt_r_positive` の `(√b)^2 = b`
     _ ≥ |z j0| ^ 2 :=
-        finite_sum_of_nonnegative_reals_ge_term_fintype (fun j => |z j| ^ 2)
+        finite_sum_over_multi_indices_of_nonnegative_reals_ge_term (fun j => |z j| ^ 2)
           (fun j => abs_sq_of_real_number_nonneg (z j)) j0                  -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`a_j → |z_j|^2`, `k → j_0`）。各項が非負なのは上の `|z_j|^2 ≥ 0`
     _ = |z j0| * |z j0| := square_of_real_number_is_product |z j0|          -- `square_of_real_number_is_product`（`r → |z_{j_0}|`）
     _ > 0 := mul_pos (abs_pos_of_real_number_ne_zero hj0)
@@ -435,8 +435,8 @@ theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : 
         exact Finset.sum_congr rfl fun l _ => by ring                       -- `2^{-1}·2 = 1` と `finite_sum_of_real_scalar_multiples`（`c → 2^{-1}`）を内側と外側の和へ
     _ ≤ 2⁻¹ * ∑ k, ∑ l, (x l ^ 2 * P k k + x k ^ 2 * P l l) :=
         mul_le_mul_of_nonneg_left
-          (finite_sum_of_real_numbers_is_monotone_fintype _ _ fun k =>
-            finite_sum_of_real_numbers_is_monotone_fintype _ _ fun l =>
+          (finite_sum_over_multi_indices_of_real_numbers_is_monotone _ _ fun k =>
+            finite_sum_over_multi_indices_of_real_numbers_is_monotone _ _ fun l =>
               power_of_W_real_entry_bound W hW hWRsymm hpd n x k l)
           (by norm_num)                                                     -- 【`(W_ℝ)^n` の成分の評価】を組 `(k,l)` ごとの項へ同時に、項ごとの不等式の有限和と `2^{-1} > 0` 倍
     _ = 2⁻¹ * (∑ k, ∑ l, x l ^ 2 * P k k + ∑ k, ∑ l, x k ^ 2 * P l l) := by

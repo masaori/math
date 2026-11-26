@@ -4330,7 +4330,7 @@ T_B(X - W)
     kind: "claim",
     title: { tex: String.raw`\sum_{j=1}^{m} r = \iota_{\mathbb{Z}\to\mathbb{R}}(m)\, r` },
     labels: ["finite_sum_of_constant_real_number"],
-    lean: ["Ising2D.finite_sum_of_constant_real_number", "Ising2D.finite_sum_of_constant_real_number_succ", "Ising2D.finite_sum_of_constant_real_number_fintype"],
+    lean: ["Ising2D.finite_sum_of_constant_real_number", "Ising2D.finite_sum_of_constant_real_number_succ"],
     statement: [
       paragraph([
         math(String.raw`m \in \mathbb{Z}_{\geq 0}`),

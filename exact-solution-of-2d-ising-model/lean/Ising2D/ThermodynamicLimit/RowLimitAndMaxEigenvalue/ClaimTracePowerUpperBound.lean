@@ -32,9 +32,9 @@
 | 奇数: `W^{2a+1} = W^a(WW^a)`（`Mat(d,ℂ)`）の 7 行 | `power_of_W_odd_split` の `calc` の 7 段 |
 | 奇数: `(W_ℝ)^{2a+1} = (W_ℝ)^a(W_ℝ(W_ℝ)^a)` の 5 行 | `power_of_W_real_odd_split` の `calc` の 5 段 |
 | 奇数: `e_k^⊤(W_ℝ)^{2a+1}e_k ≤ c^n` の 12 行 | `diagonal_bound_odd` の `calc` の 12 段 |
-| 最後のトレースの 5 行 | `trace_power_upper_bound` の `calc` の 5 段（`Σ_k c^n = ι(d)c^n` は `finite_sum_of_constant_real_number_fintype`、`ι(2^{M_col}) = 2_ℝ^{M_col}` は `inclusion_zz_to_rr_of_power_of_two`。人手の `ι_{ℤ→ℝ}` は Lean の `Nat.cast`） |
+| 最後のトレースの 5 行 | `trace_power_upper_bound` の `calc` の 6 段（`Σ_k e_k^⊤(W_ℝ)^ne_k ≤ Σ_k c^n` は `𝓘_M` の上の和へ当てた `finite_sum_over_multi_indices_of_real_numbers_is_monotone`、`Σ_k c^n = ι(d)c^n` は同じく `finite_sum_over_multi_indices_of_constant_real_number`（`ClaimFiniteSumsOverMultiIndices.lean`）。人手の 4 行目 `d := 2_ℤ^{M_col}` は `ν^{-1}` の定義域の大きさ `d` についての `hd` で、`ι` の `Int.cast` の形を `Nat.cast` の形へ移す段だけが Lean だけの段。`ι(2^{M_col}) = 2_ℝ^{M_col}` は `inclusion_zz_to_rr_of_power_of_two`） |
 
-- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`、`d = 2_ℤ^M` は `ℕ` の等式 `card_conf_nat`、`d ∈ ℤ_{≥1}` は `power_of_two_in_integers_is_at_least_one`）である。
+- 人手の `W ∈ Mat(d,ℂ)` は Lean の `W : TensorPow M`（添字 `Conf M`。人手の `d = 2_ℤ^M` は、`Conf M` の上の和を開く `ν^{-1}` の定義域の大きさ `d` と `hd : d = 2^M` で読み、`d ∈ ℤ_{≥1}` は `power_of_two_in_integers_is_at_least_one` を `hd` で移したもの）である。
   一般の `W` で述べ、人手が引く主張を仮定に置く: `hW` は `W_is_real_symmetric_positive_definite` の実対称性、
   `hWRsymm`・`hpd` は `rayleigh_bounds_operator_norm` が要る `W_real_is_symmetric`・`W_real_is_positive_definite`
   （`hpd` は `c ∈ ℝ_{>0}`（`def_rayleigh_sup`、Lean の `rayleighSup_pos`）にも使う）。具体的な `W` への当てはめは
@@ -59,6 +59,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
 
 set_option linter.unusedSectionVars false
 
@@ -348,6 +349,11 @@ theorem trace_power_upper_bound {n : ℕ} (_hn : 1 ≤ n) :
       ≤ 2 ^ M * rayleighSup (realMatrixOfRealEntries W hW.1) ^ n := by
   set WR := realMatrixOfRealEntries W hW.1 with hWR
   set c := rayleighSup WR with hc
+  obtain ⟨d, τ, hord, hτ⟩ := exists_inverse_of_kronecker_numbering M     -- `def_inverse_of_kronecker_numbering`
+  have hd : d = 2 ^ M := by                                   -- `ν^{-1}` の定義域は `{1,…,2^{M_col}}`（Lean だけの段: 定数 `1` の和で項の個数を比べる）
+    have h := finset_sum_conf_real_eq_finite_sum_over_multi_indices M d hord τ hτ (fun _ => (1 : ℝ))
+    simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, card_conf_nat, nsmul_eq_mul, mul_one] at h
+    exact_mod_cast h.symm
   have hbound : ∀ k : Conf M,
       (Pi.single k (1 : ℝ)) ⬝ᵥ (WR ^ n) *ᵥ (Pi.single k (1 : ℝ)) ≤ c ^ n := by
     intro k
@@ -361,12 +367,13 @@ theorem trace_power_upper_bound {n : ℕ} (_hn : 1 ≤ n) :
         Finset.sum_congr rfl fun k _ =>
           (diagonal_entry_via_standard_basis W hW n k).symm                 -- 【対角成分の表示】（`p → n`）を `d` 個の項へ同時に
     _ ≤ ∑ _k : Conf M, c ^ n :=
-        finite_sum_of_real_numbers_is_monotone_fintype _ _ hbound           -- `finite_sum_of_real_numbers_is_monotone`（各 `k` は偶数・奇数の鎖）
-    _ = (Fintype.card (Conf M) : ℝ) * c ^ n :=
-        finite_sum_of_constant_real_number_fintype
-          (by rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one M) (c ^ n)
+        finite_sum_over_multi_indices_of_real_numbers_is_monotone _ _ hbound -- `finite_sum_of_real_numbers_is_monotone`（各 `k` は偶数・奇数の鎖）
+    _ = (((d : ℤ)) : ℝ) * c ^ n :=
+        finite_sum_over_multi_indices_of_constant_real_number d hord τ hτ
+          (hd ▸ power_of_two_in_integers_is_at_least_one M) (c ^ n)
                                                                             -- `finite_sum_of_constant_real_number`（`m → d ∈ ℤ_{≥1}`, `r → c^n`）
-    _ = ((2 ^ M : ℕ) : ℝ) * c ^ n := by rw [card_conf_nat]                  -- `d := 2_ℤ^{M_col}`
+    _ = ((((2 ^ M : ℕ) : ℤ)) : ℝ) * c ^ n := by rw [hd]                     -- `d := 2_ℤ^{M_col}`
+    _ = ((2 ^ M : ℕ) : ℝ) * c ^ n := by rw [inclusion_zz_to_rr_of_natCast]  -- `ι` の `Int.cast` の形を `Nat.cast` の形へ（Lean だけの読み替えの段）
     _ = 2 ^ M * c ^ n := by rw [inclusion_zz_to_rr_of_power_of_two M]       -- `inclusion_zz_to_rr_of_power_of_two`（`M → M_col`）
 
 end General

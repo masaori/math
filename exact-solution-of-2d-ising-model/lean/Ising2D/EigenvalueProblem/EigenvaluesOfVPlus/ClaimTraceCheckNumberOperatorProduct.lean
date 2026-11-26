@@ -42,6 +42,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
 
 namespace Ising2D
 
@@ -124,21 +125,28 @@ theorem trace_projFactorProd (S T : Finset (CheckIdx M)) :
 
 /-- **人手の基底段階**（`k = 0`）: `tr(I) = Σ_{l=1}^{2_ℤ^{M_col}} 1_ℂ = Σ (1_ℝ)_ℂ = (Σ 1_ℝ)_ℂ = (ι(2_ℤ^{M_col})1_ℝ)_ℂ = (ι(2_ℤ^{M_col}))_ℂ
 = (2_ℝ^{M_col})_ℂ = ((2_ℝ)_ℂ)^{M_col} = 2^{M_col} = 2^{M_col-0}`。人手の 9 行と 1 対 1 の `calc` に、添字の個数 `#Conf M = 2_ℤ^{M_col}` の
-読み替えの 1 段（人手は和の上端を `2_ℤ^{M_col}` で書くので、Lean だけの段。`DefinitionSectorRayleighSup.lean` と同じ）を足したもの。
-人手の前置きの `2_ℤ^{M_col} ∈ ℤ_{≥1}`（`power_of_two_in_integers_is_at_least_one`）は `hcard`。
-`real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype`（添字 `Conf M` は空でない）。 -/
+読み替えの段（人手は和の上端を `2_ℤ^{M_col}` で書くので、Lean だけの段）を足したもの。
+Lean の和の添字は `𝓘_{M_col}`（Lean の `Conf M`）なので、有限和の主張は `𝓘_M` の上の和へ当てた
+`real_inclusion_of_finite_sum_over_multi_indices`・`finite_sum_over_multi_indices_of_constant_real_number`（`ClaimFiniteSumsOverMultiIndices.lean`）で引く。
+人手の前置きの `2_ℤ^{M_col} ∈ ℤ_{≥1}`（`power_of_two_in_integers_is_at_least_one`）は、後者の仮定 `1 ≤ n` に渡す。後者は `ι(n)` の形で返すので、`ν^{-1}` の定義域の大きさ `n` が `2_ℤ^{M_col}` であること（`hn`）と、`ι` の `Int.cast` の形を `Nat.cast` の形へ移す段を足す。 -/
 theorem trace_identity_base_case : (1 : TensorPow M).trace = (2 : ℂ) ^ (M - 0) := by
-  have hcard : 1 ≤ Fintype.card (Conf M) := by
-    rw [card_conf_nat]; exact power_of_two_in_integers_is_at_least_one M
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M     -- `def_inverse_of_kronecker_numbering`
+  have hn : n = 2 ^ M := by                                               -- `ν^{-1}` の定義域は `{1,…,2^M}`（Lean だけの段: 定数 `1` の和で項の個数を比べる）
+    have h := finset_sum_conf_real_eq_finite_sum_over_multi_indices M n hord σ hσ (fun _ => (1 : ℝ))
+    simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, card_conf_nat, nsmul_eq_mul, mul_one] at h
+    exact_mod_cast h.symm
   calc (1 : TensorPow M).trace
       = ∑ _l : Conf M, (1 : ℂ) := trace_identity_eq_sum_one        -- `trace_basic_properties` (3)（`n → 2_ℤ^{M_col}`、添字 `k → l`）
     _ = ∑ _l : Conf M, ((1 : ℝ) : ℂ) :=
         Finset.sum_congr rfl fun _ _ => Complex.ofReal_one.symm      -- `1_ℂ` は `(1_ℝ)_ℂ` の略記を `2_ℤ^{M_col}` 個の項へ同時に
-    _ = ((∑ _l : Conf M, (1 : ℝ) : ℝ) : ℂ) := real_inclusion_of_finite_sum_fintype _
+    _ = ((∑ _l : Conf M, (1 : ℝ) : ℝ) : ℂ) := real_inclusion_of_finite_sum_over_multi_indices _
                                                                      -- `real_inclusion_preserves_finite_sum`（`m → 2_ℤ^{M_col}`、添字 `j → l`、`r_j → 1_ℝ`）
-    _ = (((Fintype.card (Conf M) : ℝ) * 1 : ℝ) : ℂ) := by
-        rw [finite_sum_of_constant_real_number_fintype hcard]        -- `finite_sum_of_constant_real_number`（`m → 2_ℤ^{M_col}`、`r → 1_ℝ`）
-    _ = ((((2 ^ M : ℕ) : ℝ) * 1 : ℝ) : ℂ) := by rw [card_conf_nat]   -- 添字の個数 `#Conf M = 2_ℤ^{M_col}`（Lean だけの読み替えの段）
+    _ = (((((n : ℤ)) : ℝ) * 1 : ℝ) : ℂ) := by
+        rw [finite_sum_over_multi_indices_of_constant_real_number n hord σ hσ (hn ▸ power_of_two_in_integers_is_at_least_one M)]
+                                                                     -- `finite_sum_of_constant_real_number`（`m → 2_ℤ^{M_col}`、`r → 1_ℝ`）
+    _ = ((((((2 ^ M : ℕ) : ℤ)) : ℝ) * 1 : ℝ) : ℂ) := by rw [hn]       -- `n = 2_ℤ^{M_col}`（Lean だけの読み替えの段）
+    _ = ((((2 ^ M : ℕ) : ℝ) * 1 : ℝ) : ℂ) := by rw [inclusion_zz_to_rr_of_natCast]
+                                                                     -- `ι` の `Int.cast` の形を `Nat.cast` の形へ（Lean だけの読み替えの段）
     _ = (((2 ^ M : ℕ) : ℝ) : ℂ) := by rw [mul_one]                     -- `1_ℝ` は `ℝ` の乗法の単位元
     _ = (((2 : ℝ) ^ M : ℝ) : ℂ) := by rw [inclusion_zz_to_rr_of_power_of_two]
                                                                      -- `inclusion_zz_to_rr_of_power_of_two`（`M → M_col`）

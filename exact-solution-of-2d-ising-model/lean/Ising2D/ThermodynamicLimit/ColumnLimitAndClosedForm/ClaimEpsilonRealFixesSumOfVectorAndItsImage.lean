@@ -16,7 +16,7 @@
   行列とベクトルの積（`def_real_matrix_vector_product`）は `*ᵥ` で、その成分 `(Px)_i = Σ_jP_ijx_j` は定義から `rfl` で開く。
 - 人手は `ℝ^d` の元どうしの和を定めず、`v` を成分の等式 `v_k = u_k + (ε_ℝu)_k` で与える。Lean も同じく仮定 `hv` に置く
   （引く側で `v := u + ε_ℝ *ᵥ u` なら `hv := fun _ => rfl`）。
-- 人手の和の添字 `{1, …, d}` は Lean では有限型 `Conf (n + 1)` で、`finite_sum_of_real_sums` は `_fintype` 版を引く。
+- 人手の和の添字 `{1, …, d}` は Lean では `Conf (n + 1)`（本文の `𝓘_{M_col}`）で、`finite_sum_of_real_sums` は `𝓘_M` の上の和へ当てた `finite_sum_over_multi_indices_of_real_sums`（`ClaimFiniteSumsOverMultiIndices.lean`）を引く。
 
 必要十分版は置かない。鎖は、引いた主張（`finite_sum_of_real_sums`・`real_matrix_vector_product_is_associative`・
 `epsilon_real_square_is_identity`・`real_identity_matrix_is_left_unit_of_real_matrix_vector_product`）と ℝ の分配律・加法の交換律を
@@ -25,6 +25,7 @@
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonRealIsSymmetricAndSquareIsIdentity
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixVectorProductAssociativityAndIdentity
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
 
 namespace Ising2D
 
@@ -43,7 +44,7 @@ theorem epsilon_real_fixes_sum_of_vector_and_its_image (n : ℕ) (u v : Conf (n 
     _ = ∑ l, (epsilonReal n k l * u l + epsilonReal n k l * (epsilonReal n *ᵥ u) l) :=
         Finset.sum_congr rfl fun l _ => mul_add _ _ _                         -- ℝ の分配律 `a(b + c) = ab + ac` を `d` 個の項へ
     _ = (∑ l, epsilonReal n k l * u l) + ∑ l, epsilonReal n k l * (epsilonReal n *ᵥ u) l :=
-        finite_sum_of_real_sums_fintype
+        finite_sum_over_multi_indices_of_real_sums
           (fun l => epsilonReal n k l * u l)
           (fun l => epsilonReal n k l * (epsilonReal n *ᵥ u) l)               -- `finite_sum_of_real_sums`（`j → l`）
     _ = (epsilonReal n *ᵥ u) k + (epsilonReal n *ᵥ (epsilonReal n *ᵥ u)) k := rfl
