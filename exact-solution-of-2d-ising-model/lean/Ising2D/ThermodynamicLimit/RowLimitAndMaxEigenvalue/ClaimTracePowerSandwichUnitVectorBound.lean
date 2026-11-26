@@ -210,10 +210,10 @@ theorem power_one_of_W_real : realMatrixOfRealEntries W hW.1 ^ 1 = realMatrixOfR
         realMatrixOfRealEntries_congr (by rw [Nat.zero_add 1]) _ _          -- `ℤ` の和の単位元 `0 + x = x`（`x → 1`、`set_and_algebra_notation`）を右辺から左辺へ
     _ = realMatrixOfRealEntries (W ^ 0 * W)
           (matrix_mul_hasRealEntries _ _ (matrix_pow_hasRealEntries W hW.1 0) hW.1) :=
-        realMatrixOfRealEntries_congr (pow_succ W 0) _ _                    -- `def_matrix_power` の `A^{m+1} := A^mA`（`K = ℂ`, `m = 0`）
+        realMatrixOfRealEntries_congr ((tensorPow_pow_zero_and_succ W).2 0) _ _ -- `def_matrix_power` の `A^{m+1} := A^mA`（`K = ℂ`, `m = 0`）
     _ = realMatrixOfRealEntries (1 * W)
           (matrix_mul_hasRealEntries _ _ identity_matrix_hasRealEntries_tensorPow hW.1) :=
-        realMatrixOfRealEntries_congr (by rw [pow_zero]) _ _                -- `def_matrix_power` の `A^0 := I`（`K = ℂ`）
+        realMatrixOfRealEntries_congr (by rw [(tensorPow_pow_zero_and_succ W).1]) _ _ -- `def_matrix_power` の `A^0 := I`（`K = ℂ`）
     _ = realMatrixOfRealEntries W hW.1 :=
         realMatrixOfRealEntries_congr (identity_matrix_mul_tensorPow W) _ _ -- `identity_matrix_is_left_unit_of_mat_mult` の `IW = W`
     _ = realMatrixOfRealEntries W hW.1 := rfl                               -- `def_W_real`（`W_ℝ := ϱ(W)`）

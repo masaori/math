@@ -1,5 +1,5 @@
 /-
-# 複素行列の全体 `Mat(m, n, ℂ)` と、行列 `Mat(2^M, ℂ)` の単位行列・スカラー倍・和・零行列・符号反転・差・積・数ベクトルとの積・トレースと、Lean の `TensorPow M` の演算（具体版）
+# 複素行列の全体 `Mat(m, n, ℂ)` と、行列 `Mat(2^M, ℂ)` の単位行列・スカラー倍・和・零行列・符号反転・差・積・数ベクトルとの積・トレース・冪と、Lean の `TensorPow M` の演算（具体版）
 
 正本: `structured-latex/content/000_calculation_formulae_00_09.ts`（`calc_formulae_definition_complex_matrices`、ラベル **`def_complex_matrices`**・
 `calc_formulae_003_matrix_decomposition`、ラベル **`mat_mult`**）、
@@ -9,7 +9,8 @@
 `structured-latex/content/000_calculation_formulae_45_46.ts`（`finite_matrix_definition_zero_matrix`、ラベル **`def_zero_matrix`**・
 `finite_matrix_definition_negation`、ラベル **`def_matrix_negation`**・
 `finite_matrix_definition_difference`、ラベル **`def_matrix_difference`**）、
-`structured-latex/content/009_eigenvalues_of_V.ts`（`eigenvalues_of_V_001_definition_trace`、ラベル **`def_trace`**）
+`structured-latex/content/009_eigenvalues_of_V.ts`（`eigenvalues_of_V_001_definition_trace`、ラベル **`def_trace`**）、
+`structured-latex/content/003_exp_linear_map.ts`（`exp_linear_map_definition_matrix_power`、ラベル **`def_matrix_power`** の `K = ℂ` の場合）
 
 人手は `Mat(2^M, ℂ)` の成分を番号で書き、七つの演算を成分の式で定める:
 `(I)_{ij} := δ_{ij}`、`(aA)_{ij} := a A_{ij}`、`(A + B)_{ij} := A_{ij} + B_{ij}`、`O_{ik} := 0`、`(-A)_{ik} := -A_{ik}`、`(A - B)_{ik} := A_{ik} - B_{ik}`、`(AB)_{ik} := Σ_{j=1}^{n} A_{ij} B_{jk}`（添字の文字は本文どおり）。
@@ -40,6 +41,8 @@ Lean の `A *ᵥ f`（`f : Conf M → ℂ` は `ℂ^{2^M}` の数ベクトルを
 `𝓘_M` の上の和）を `ν^{-1}` で番号へ移して書き（`tensorPow_trace_eq_def_trace`）、`𝓘_M` の上の和の形 `tensorPow_trace_apply` をそこから導く。
 符号反転（`def_matrix_negation`）と差（`def_matrix_difference`）もスカラー倍と同じく成分の式が各成分だけで閉じるので、`Conf M` の添字で
 一本ずつ書く（`tensorPow_neg_apply`・`tensorPow_sub_apply`）。
+冪（`def_matrix_power` の `K = ℂ`）は `A^0 := I`、`A^{m+1} := A^m A` の帰納法で定まる。mathlib の行列の冪も同じ帰納法 `npowRec` で
+定義されているので、二つの式を定義を開くだけで示す（`tensorPow_pow_zero_and_succ`）。
 
 人手の本文は演算を定めるだけで、Lean の演算との一致の主張を持たない。補題は Lean だけの段であり、
 定義の一致を述べる補題なので、必要十分版は置かない。人手の `M ∈ ℤ_{≥1}` に対し、Lean は `M = 0` も許す。
@@ -237,5 +240,13 @@ theorem tensorPow_trace_apply {M : ℕ} (A : TensorPow M) :
     _ = ∑ I : Conf M, A I I :=
         (finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ (fun I => A I I)).symm
                                                             -- `def_finite_sum_of_complex_numbers_over_multi_indices`
+
+/-- **`def_matrix_power`**（`K = ℂ`、`Mat(2^M, ℂ)`）: Lean の `TensorPow M` の冪 `A ^ m`（mathlib の `Monoid.npow`）は、本文の
+`A^0 := I`、`A^{m+1} := A^m A` の二つの式を満たす（Lean だけの段の補題。冒頭の説明を見よ）。右辺の積は `mat_mult`、
+`I` は `def_identity_matrix` の具体版（mathlib の `*` と `1`。一致は上の補題）である。mathlib の行列の冪は
+`npowRec`（`a^0 := 1`、`a^{m+1} := a^m * a`）で定義されているので、二つの式はどちらも定義を開くだけで成り立つ。 -/
+theorem tensorPow_pow_zero_and_succ {M : ℕ} (A : TensorPow M) :
+    A ^ 0 = (1 : TensorPow M) ∧ ∀ m : ℕ, A ^ (m + 1) = A ^ m * A :=
+  ⟨rfl, fun _ => rfl⟩                                       -- mathlib の冪 `npowRec` の定義を開く
 
 end Ising2D

@@ -341,10 +341,10 @@ theorem nOp_mul_self (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=
 続く `nOp_mul_self` の 19 行。 -/
 theorem nOp_sq (i : CheckIdx M) : F.nOp i ^ 2 = F.nOp i :=
   calc F.nOp i ^ 2
-      = F.nOp i ^ 1 * F.nOp i := pow_succ _ _           -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 1`）
-    _ = (F.nOp i ^ 0 * F.nOp i) * F.nOp i := by rw [pow_succ (F.nOp i) 0]
+      = F.nOp i ^ 1 * F.nOp i := (tensorPow_pow_zero_and_succ (F.nOp i)).2 1           -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 1`）
+    _ = (F.nOp i ^ 0 * F.nOp i) * F.nOp i := by rw [(tensorPow_pow_zero_and_succ (F.nOp i)).2 0]
                                                         -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 0`）
-    _ = (1 * F.nOp i) * F.nOp i := by rw [pow_zero]     -- `def_matrix_power` の `A^0 := I`
+    _ = (1 * F.nOp i) * F.nOp i := by rw [(tensorPow_pow_zero_and_succ (F.nOp i)).1]     -- `def_matrix_power` の `A^0 := I`
     _ = F.nOp i * F.nOp i := by rw [identity_matrix_mul_tensorPow]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`
     _ = F.nOp i := F.nOp_mul_self i                     -- 続く 19 行（`nOp_mul_self`）

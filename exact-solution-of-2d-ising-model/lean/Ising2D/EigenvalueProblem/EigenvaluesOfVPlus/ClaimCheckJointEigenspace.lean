@@ -95,11 +95,11 @@ theorem nOp_mul_nOp_of_sq (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=
   calc F.nOp i * F.nOp i
       = (1 * F.nOp i) * F.nOp i := by rw [identity_matrix_mul_tensorPow]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult` を右辺から左辺へ
-    _ = (F.nOp i ^ 0 * F.nOp i) * F.nOp i := by rw [pow_zero]
+    _ = (F.nOp i ^ 0 * F.nOp i) * F.nOp i := by rw [(tensorPow_pow_zero_and_succ (F.nOp i)).1]
                                                         -- `def_matrix_power` の `A^0 := I` を右辺から左辺へ
-    _ = F.nOp i ^ 1 * F.nOp i := by rw [← pow_succ (F.nOp i) 0]
+    _ = F.nOp i ^ 1 * F.nOp i := by rw [← (tensorPow_pow_zero_and_succ (F.nOp i)).2 0]
                                                         -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 0`）を右辺から左辺へ
-    _ = F.nOp i ^ 2 := (pow_succ _ _).symm              -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 1`）を右辺から左辺へ
+    _ = F.nOp i ^ 2 := ((tensorPow_pow_zero_and_succ (F.nOp i)).2 1).symm              -- `def_matrix_power` の `A^{m+1} := A^m A`（`m → 1`）を右辺から左辺へ
     _ = F.nOp i := F.nOp_sq i                           -- `check_number_operator_idempotent` (3)
 
 /-- **原文 Step 0** の `R_μ^{(1)}R_μ^{(0)} = 0`（と Step 3 の `ε(ν) = 0` の場合の `ň_ν R_ν^{(0)} = 0`）。 -/

@@ -25,8 +25,8 @@
 `commuting_with_scalar_multiple` が `mul_smul_comm_of_commute_tensorPow`（どちらも `TensorPow M` での系）、
 `scalar_multiple_is_associative`・`mat_mult_associative` は Lean の具体版が無いので既存の慣行どおり mathlib の
 `smul_smul`・`mul_assoc`、ℂ の積の可換律（`complex_numbers_form_a_field`）は `mul_comm` である。
-準備 (P3)・(P4) の根拠は、冪の定義 `A^0 := I`・`A^{n+1} := A^nA`（`def_matrix_power`）と `def_power_of_complex_number` が
-`pow_zero`・`pow_succ`、`epsilon_G_is_involution` の `X^2 := XX` が `pow_two`、`identity_matrix_is_left_unit_of_mat_mult` が
+準備 (P3)・(P4) の根拠は、冪の定義 `A^0 := I`・`A^{n+1} := A^nA`（`def_matrix_power`）が `TensorPow M` での一致の補題
+`tensorPow_pow_zero_and_succ`（`DefinitionMatrixOperationsOverMultiIndices.lean`）、`def_power_of_complex_number` が `pow_zero`・`pow_succ`、`epsilon_G_is_involution` の `X^2 := XX` が `pow_two`、`identity_matrix_is_left_unit_of_mat_mult` が
 `identity_matrix_mul_tensorPow`、`scalar_multiple_by_one` が `one_smul_tensorPow`、`scalar_multiple_factors_out_of_left_factor`・
 `scalar_multiple_factors_out_of_right_factor` が `smul_mul_matrix_tensorPow`・`mul_smul_matrix_tensorPow`（いずれも `TensorPow M` での系）である。
 人手 Step 1 は `V_2` との可換性を挙げるが、式変形の各行が使うのは `B` と `V_1^{(+)}` との可換性だけなので、
@@ -177,7 +177,7 @@ theorem V1plus_eq_exp_openChainD0_mul_exp (hM : 2 ≤ M) (K1 : ℂ) :
 theorem pow_two_mul_add_one_of_pow_two_mul_eq_one {A : TensorPow M} (j : ℕ) (h : A ^ (2 * j) = 1) :
     A ^ (2 * j + 1) = A :=
   calc A ^ (2 * j + 1)
-      = A ^ (2 * j) * A := pow_succ A (2 * j)                 -- 冪の定義 `A^{n+1} := A^nA`（`def_matrix_power`）
+      = A ^ (2 * j) * A := (tensorPow_pow_zero_and_succ A).2 (2 * j) -- 冪の定義 `A^{n+1} := A^nA`（`def_matrix_power`）
     _ = 1 * A := by rw [h]                                    -- 帰納法の仮定 `(εG)^{2j} = I`
     _ = A := identity_matrix_mul_tensorPow A                  -- `identity_matrix_is_left_unit_of_mat_mult`
 
@@ -186,11 +186,11 @@ theorem pow_two_mul_add_one_of_pow_two_mul_eq_one {A : TensorPow M} (j : ℕ) (h
 `(εG)^{2j+2} = (εG)^{2j+1}(εG) = (εG)(εG) = (εG)^2 = I`。 -/
 theorem pow_two_mul_of_sq_eq_one {A : TensorPow M} (hA : A ^ 2 = 1) (j : ℕ) : A ^ (2 * j) = 1 := by
   induction j with
-  | zero => exact pow_zero A                                  -- 冪の定義 `A^0 := I`
+  | zero => exact (tensorPow_pow_zero_and_succ A).1           -- 冪の定義 `A^0 := I`
   | succ j ih =>
     calc A ^ (2 * (j + 1))
         = A ^ (2 * j + 2) := rfl                              -- 指数 `2(j+1) = 2j+2`（人手は `(εG)^{2j+2}` と書く）
-      _ = A ^ (2 * j + 1) * A := pow_succ A (2 * j + 1)       -- 冪の定義
+      _ = A ^ (2 * j + 1) * A := (tensorPow_pow_zero_and_succ A).2 (2 * j + 1) -- 冪の定義
       _ = A * A := by                                         -- 直前の `(εG)^{2j+1} = εG`
           rw [pow_two_mul_add_one_of_pow_two_mul_eq_one j ih]
       _ = A ^ 2 := (pow_two A).symm                           -- `epsilon_G_is_involution` の `X^2 := XX`
@@ -208,12 +208,12 @@ theorem smul_pow_tensorPow (κ : ℂ) (X : TensorPow M) (n : ℕ) : (κ • X) ^
   induction n with
   | zero =>
     calc (κ • X) ^ 0
-        = 1 := pow_zero _                                     -- 冪の定義 `A^0 := I`
+        = 1 := (tensorPow_pow_zero_and_succ (κ • X)).1        -- 冪の定義 `A^0 := I`
       _ = (1 : ℂ) • (1 : TensorPow M) := (one_smul_tensorPow 1).symm   -- `scalar_multiple_by_one` を右辺から左辺へ
-      _ = κ ^ 0 • X ^ 0 := by rw [pow_zero, pow_zero]         -- `κ^0 = 1_ℂ`（`def_power_of_complex_number`）と冪の定義
+      _ = κ ^ 0 • X ^ 0 := by rw [pow_zero κ, (tensorPow_pow_zero_and_succ X).1] -- `κ^0 = 1_ℂ`（`def_power_of_complex_number`）と冪の定義
   | succ n ih =>
     calc (κ • X) ^ (n + 1)
-        = (κ • X) ^ n * (κ • X) := pow_succ _ n               -- 冪の定義
+        = (κ • X) ^ n * (κ • X) := (tensorPow_pow_zero_and_succ (κ • X)).2 n -- 冪の定義
       _ = (κ ^ n • X ^ n) * (κ • X) := by rw [ih]             -- 帰納法の仮定
       _ = κ ^ n • (X ^ n * (κ • X)) :=
           smul_mul_matrix_tensorPow _ _ _                     -- `scalar_multiple_factors_out_of_left_factor`
@@ -221,7 +221,7 @@ theorem smul_pow_tensorPow (κ : ℂ) (X : TensorPow M) (n : ℕ) : (κ • X) ^
           rw [mul_smul_matrix_tensorPow]                      -- `scalar_multiple_factors_out_of_right_factor`
       _ = (κ ^ n * κ) • (X ^ n * X) := smul_smul _ _ _        -- `scalar_multiple_is_associative`（具体版が無いので mathlib の `smul_smul`）
       _ = κ ^ (n + 1) • X ^ (n + 1) := by                     -- `def_power_of_complex_number` と冪の定義
-          rw [← pow_succ, ← pow_succ]
+          rw [← pow_succ κ n, ← (tensorPow_pow_zero_and_succ X).2 n]
 
 /-! ## Step 2 の真ん中の鎖 `exp(κ(εG)) = (cosh K_1)_ℂI + (sinh K_1)_ℂ(εG)`
 

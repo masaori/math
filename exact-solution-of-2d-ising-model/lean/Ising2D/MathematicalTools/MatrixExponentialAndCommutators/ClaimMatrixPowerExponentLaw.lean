@@ -18,7 +18,8 @@
   `power_of_real_symmetric_complex_matrix_is_real_symmetric` の `A → W`）が `TensorPow M` の行列だからである。
   添字が `Conf M` なので、`identity_matrix_is_right_unit_of_mat_mult` は `TensorPow M` での具体版
   `mul_identity_matrix_tensorPow`（`ClaimIdentityAndScalarMultipleInTensorPowProduct.lean`）を引く。
-- `def_matrix_power` の冪 `A^0 := I`・`A^{m+1} := A^mA` は mathlib の `pow_zero`・`pow_succ`（`a^{m+1} = a^m a`）と同じ形である。
+- `def_matrix_power` の冪 `A^0 := I`・`A^{m+1} := A^mA` は、`TensorPow M` での一致の補題 `tensorPow_pow_zero_and_succ`
+  （`DefinitionMatrixOperationsOverMultiIndices.lean`）の二つの式で引く。
 - `mat_mult_associative` は本文に Lean の具体版が無く、他のファイルと同じく mathlib の `Matrix.mul_assoc` を引く。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
@@ -34,13 +35,13 @@ theorem matrix_power_exponent_law (A : TensorPow M) (p : ℕ) :
     calc A ^ (p + 0)
         = A ^ p := by rw [Nat.add_zero]                                     -- `ℤ` で `p + 0 = p`
       _ = A ^ p * 1 := (mul_identity_matrix_tensorPow _).symm               -- `identity_matrix_is_right_unit_of_mat_mult`
-      _ = A ^ p * A ^ 0 := by rw [pow_zero]                                 -- `def_matrix_power` の `A^0 := I`
+      _ = A ^ p * A ^ 0 := by rw [(tensorPow_pow_zero_and_succ A).1]       -- `def_matrix_power` の `A^0 := I`
   | q + 1 =>
     calc A ^ (p + (q + 1))
         = A ^ ((p + q) + 1) := by rw [Nat.add_assoc]                        -- `ℤ` の加法の結合律
-      _ = A ^ (p + q) * A := pow_succ A (p + q)                             -- `def_matrix_power` の `A^{m+1} := A^mA`（`m → p + q`）
+      _ = A ^ (p + q) * A := (tensorPow_pow_zero_and_succ A).2 (p + q)      -- `def_matrix_power` の `A^{m+1} := A^mA`（`m → p + q`）
       _ = (A ^ p * A ^ q) * A := by rw [matrix_power_exponent_law A p q]    -- 帰納法の仮定
       _ = A ^ p * (A ^ q * A) := Matrix.mul_assoc _ _ _                     -- `mat_mult_associative`
-      _ = A ^ p * A ^ (q + 1) := by rw [pow_succ A q]                       -- `def_matrix_power` の `A^{m+1} := A^mA`（`m → q`）
+      _ = A ^ p * A ^ (q + 1) := by rw [(tensorPow_pow_zero_and_succ A).2 q] -- `def_matrix_power` の `A^{m+1} := A^mA`（`m → q`）
 
 end Ising2D

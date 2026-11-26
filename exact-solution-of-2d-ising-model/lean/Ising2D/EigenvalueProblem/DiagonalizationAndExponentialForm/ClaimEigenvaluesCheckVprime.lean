@@ -373,7 +373,7 @@ theorem Qproj_mul_Xop (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
 
 /-- **原文 `eigenvalues_of_check_Vprime` Step 2**: `X̌^k Q̌_ε = ǧ(ε)^k Q̌_ε`。
 人手の帰納法の鎖（`k = 0` の 4 行、`k + 1` の 8 行）と 1 対 1 の calc。行列の冪は `def_matrix_power` の
-`A^0 := I`・`A^{m+1} := A^m A`（mathlib の `pow_zero`・`pow_succ` が同じ形）、数の冪も同じ形で証明の中で定めている。
+`A^0 := I`・`A^{m+1} := A^m A`（`TensorPow M` での一致の補題 `tensorPow_pow_zero_and_succ` の二つの式で引く）、数の冪は mathlib の `pow_zero`・`pow_succ` と同じ形で証明の中で定めている。
 同じ主張の必要十分版は `NecSuf.pow_mul_eq_of_mul_eq_smul`（`ClaimEigenvaluesCheckVprimeFromNecSuf.lean` の `Vprime_mul_Qproj_of_necSuf` が `NecSuf.exp_mul_eq_of_mul_eq_smul` の中で使う）。
 具体版の `Vprime_mul_Qproj` は部分和の鎖 `partialExpSum_mul_Qproj` を経てこの定理を使う。 -/
 theorem Xop_pow_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k : ℕ) :
@@ -381,7 +381,7 @@ theorem Xop_pow_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k 
   induction k with
   | zero =>
     calc F.Xop g ^ 0 * F.Qproj T
-        = 1 * F.Qproj T := by rw [pow_zero]
+        = 1 * F.Qproj T := by rw [(tensorPow_pow_zero_and_succ (F.Xop g)).1]
                                                         -- `def_matrix_power` の `A^0 := I`
       _ = F.Qproj T := identity_matrix_mul_tensorPow _
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`
@@ -391,7 +391,7 @@ theorem Xop_pow_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k 
                                                         -- `ǧ(ε)^0 := 1`
   | succ k ih =>
     calc F.Xop g ^ (k + 1) * F.Qproj T
-        = (F.Xop g ^ k * F.Xop g) * F.Qproj T := by rw [pow_succ]
+        = (F.Xop g ^ k * F.Xop g) * F.Qproj T := by rw [(tensorPow_pow_zero_and_succ (F.Xop g)).2 k]
                                                         -- `def_matrix_power` の `A^{m+1} := A^m A`
       _ = F.Xop g ^ k * (F.Xop g * F.Qproj T) := Matrix.mul_assoc _ _ _
                                                         -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）

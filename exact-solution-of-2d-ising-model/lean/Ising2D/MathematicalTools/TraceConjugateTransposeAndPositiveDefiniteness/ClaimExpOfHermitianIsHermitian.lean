@@ -29,7 +29,8 @@
   3 段目の「`δ_{lk}` は `1_ℂ` か `0_ℂ` なので `\overline{δ_{lk}} = δ_{lk}`（`complex_conjugate_of_real_inclusion`）」は、
   `ClaimTraceOfPositiveDefiniteIsPositive.lean` の `star_kroneckerDelta` と同じ場合分けで `star_identity_entry_tensorPow` に置いた。
   `identity_matrix_is_positive_definite` の具体版を置いたら、この 2 つはそちらへ移して引く形にできる。
-* `def_matrix_power` の冪 `A^0 := I`・`A^{m+1} := A^mA` は mathlib の `pow_zero`・`pow_succ`（`a^{m+1} = a^m a`）と同じ形である。
+* `def_matrix_power` の冪 `A^0 := I`・`A^{m+1} := A^mA` は、`TensorPow M` での一致の補題 `tensorPow_pow_zero_and_succ`
+  （`DefinitionMatrixOperationsOverMultiIndices.lean`）の二つの式で引く。
 * 部分和の係数 `(1/m!)_ℂ` は Lean では `((m! : ℂ))⁻¹` と書いてある（`expPartialSum`）。8 行のうち 5 行目の
   `complex_conjugate_of_real_inclusion` は、`((m! : ℂ))⁻¹ = ((m! : ℝ)⁻¹)_ℂ`（`inclusion_rr_to_cc` が逆数と自然数の像を保つこと。
   mathlib の `Complex.ofReal_inv`・`Complex.ofReal_natCast`）と書き直してから当てる（`star_inv_factorial`）。
@@ -85,16 +86,16 @@ theorem tensorPow_pow_conjTranspose_of_conjTranspose_eq (S : TensorPow M) (hS : 
     (S ^ m)ᴴ = S ^ m := by
   induction m with
   | zero =>
-    calc (S ^ 0)ᴴ = (1 : TensorPow M)ᴴ := by rw [pow_zero]                     -- `def_matrix_power` の `A^0 := I`
+    calc (S ^ 0)ᴴ = (1 : TensorPow M)ᴴ := by rw [(tensorPow_pow_zero_and_succ S).1] -- `def_matrix_power` の `A^0 := I`
       _ = 1 := identity_conjTranspose_tensorPow                                  -- `I^* = I`
-      _ = S ^ 0 := (pow_zero S).symm                                             -- `def_matrix_power` の `A^0 := I`
+      _ = S ^ 0 := (tensorPow_pow_zero_and_succ S).1.symm                        -- `def_matrix_power` の `A^0 := I`
   | succ m ih =>
-    calc (S ^ (m + 1))ᴴ = (S ^ m * S)ᴴ := by rw [pow_succ]                     -- `def_matrix_power` の `A^{m+1} := A^mA`
+    calc (S ^ (m + 1))ᴴ = (S ^ m * S)ᴴ := by rw [(tensorPow_pow_zero_and_succ S).2 m] -- `def_matrix_power` の `A^{m+1} := A^mA`
       _ = Sᴴ * (S ^ m)ᴴ := conjTranspose_mul_tensorPow _ _                       -- `star_preserves_norm_and_limits` (1) の第 1 式（`A → S^m`, `B → S`）
       _ = S * (S ^ m)ᴴ := by rw [hS]                                             -- `S^* = S`
       _ = S * S ^ m := by rw [ih]                                                -- 帰納法の仮定
       _ = S ^ m * S := tensorPow_mul_pow_comm S m                                -- 準備の `SS^m = S^mS`
-      _ = S ^ (m + 1) := (pow_succ S m).symm                                     -- `def_matrix_power` の `A^{m+1} := A^mA`
+      _ = S ^ (m + 1) := ((tensorPow_pow_zero_and_succ S).2 m).symm              -- `def_matrix_power` の `A^{m+1} := A^mA`
 
 /-- 部分和の係数 `(1/m!)_ℂ` は共役で動かない（`complex_conjugate_of_real_inclusion` の `r → 1/m!`）。
 Lean の係数 `((m! : ℂ))⁻¹` を `((m! : ℝ)⁻¹)_ℂ` と書き直してから当てる。 -/
