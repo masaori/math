@@ -1,5 +1,5 @@
 /-
-# 複素行列の全体 `Mat(m, n, ℂ)` と、行列 `Mat(2^M, ℂ)` の単位行列・スカラー倍・和・零行列・積と、Lean の `TensorPow M` の演算（具体版）
+# 複素行列の全体 `Mat(m, n, ℂ)` と、行列 `Mat(2^M, ℂ)` の単位行列・スカラー倍・和・零行列・積・数ベクトルとの積と、Lean の `TensorPow M` の演算（具体版）
 
 正本: `structured-latex/content/000_calculation_formulae_00_09.ts`（`calc_formulae_definition_complex_matrices`、ラベル **`def_complex_matrices`**・
 `calc_formulae_003_matrix_decomposition`、ラベル **`mat_mult`**）、
@@ -30,6 +30,9 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が `𝓘_M`�
 積（`mat_mult`）は成分の式が番号の上の和なので、単位行列と同じく `ν^{-1}` で番号へ移した成分で書き、mathlib の積の成分（`𝓘_M` の上の和）を
 `def_finite_sum_of_complex_numbers_over_multi_indices` で番号の上の和へ移す（`tensorPow_mul_apply_eq_mat_mult`）。証明の段が `𝓘_M` の元を
 添字に書くときのために、`𝓘_M` の上の和の形 `tensorPow_mul_apply` もそこから導く。
+行列と数ベクトルの積（`mat_mult` の `p = 1` の場合。数ベクトルは `def_complex_number_vectors` の `ℂ^n := Mat(n,1,ℂ)` の元）も同じく、
+Lean の `A *ᵥ f`（`f : Conf M → ℂ` は `ℂ^{2^M}` の数ベクトルを、第 `k` 成分 `a_k` を `f (ν^{-1}(k))` として持つ）の成分を `ν^{-1}` で番号へ移して書き
+（`tensorPow_mulVec_apply_eq_mat_mult`）、`𝓘_M` の上の和の形 `tensorPow_mulVec_apply` をそこから導く。
 符号反転と差はここに置かない。一致の補題を通しの定理に繋げる使い道が、分離の行「TensorPow 上の行列の基本恒等式」の具体版の証明の中にしか無いからである。
 
 人手の本文は演算を定めるだけで、Lean の演算との一致の主張を持たない。補題は Lean だけの段であり、
@@ -40,6 +43,8 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionF
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
 
 namespace Ising2D
+
+open Matrix
 
 /-- **`def_complex_matrices`**: Lean の `Matrix (Fin m) (Fin n) ℂ` は、本文の `Mat(m, n, ℂ)`（`{1,…,m} × {1,…,n}` から `ℂ` への写像の全体）と、
 行と列の添字を名前を付けた写像 `finIndexToZZ` で送って対応する（Lean だけの段の補題。冒頭の説明を見よ）。
@@ -151,6 +156,41 @@ theorem tensorPow_mul_apply {M : ℕ} (A B : TensorPow M) (I K : Conf M) :
     _ = ∑ J : Conf M, A (σ i) J * B J (σ k) :=
         (finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ
           (fun J => A (σ i) J * B J (σ k))).symm
+                                                            -- `def_finite_sum_of_complex_numbers_over_multi_indices`
+
+/-- **`mat_mult`**（`p = 1`）: Lean の `TensorPow M` の行列と数ベクトル `f : Conf M → ℂ` の積の成分を `ν^{-1}` で番号へ移すと、
+本文の `(Aa)_{i1} = Σ_{j=1}^{n} A_{ij} a_{j1}`（`n = 2^M`、`def_complex_number_vectors` の第 `j` 成分 `a_j := a_{j1}` が `f (ν^{-1}(j))`）の右辺に等しい
+（Lean だけの段の補題。冒頭の説明を見よ）。
+mathlib の積の成分は `𝓘_M`（Lean の `Conf M`）の上の和で、それを番号の上の和へ移すのは
+`def_finite_sum_of_complex_numbers_over_multi_indices`（`finset_sum_conf_complex_eq_finite_sum_over_multi_indices`）である。 -/
+theorem tensorPow_mulVec_apply_eq_mat_mult (M : ℕ) :
+    ∀ (n : ℕ), (∀ I : Conf M, ∃ k : Fin n, kroneckerNumbering I = finIndexToZZ n k) →
+      ∀ (σ : Fin n → Conf M), (∀ k, kroneckerNumbering (σ k) = finIndexToZZ n k) →
+        ∀ (A : TensorPow M) (f : Conf M → ℂ) (i : Fin n),
+          (A *ᵥ f) (σ i) = ∑ j : Fin n, A (σ i) (σ j) * f (σ j) := by
+  intro n hord σ hσ A f i
+  calc (A *ᵥ f) (σ i)
+      = ∑ J : Conf M, A (σ i) J * f J := rfl                -- mathlib の行列とベクトルの積の成分
+    _ = ∑ j : Fin n, A (σ i) (σ j) * f (σ j) :=
+        finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ _
+                                                            -- `def_finite_sum_of_complex_numbers_over_multi_indices`
+
+/-- **`mat_mult`**（`p = 1`、`𝓘_M` の添字の形）: `TensorPow M` の行列と数ベクトルの積の成分は `(Af)_I = Σ_{J∈𝓘_M} A_{IJ} f_J` である。
+`I = ν^{-1}(i)` と書いて `tensorPow_mulVec_apply_eq_mat_mult` で番号の上の和にし、
+`def_finite_sum_of_complex_numbers_over_multi_indices` で `𝓘_M` の上の和へ戻す（Lean だけの段。本文の和の添字を `𝓘_M` の元で書く証明の段が使う）。 -/
+theorem tensorPow_mulVec_apply {M : ℕ} (A : TensorPow M) (f : Conf M → ℂ) (I : Conf M) :
+    (A *ᵥ f) I = ∑ J : Conf M, A I J * f J := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M
+  -- `ν^{-1}` の全射（`kronecker_numbering_injective`）: `I = σ(i)`
+  obtain ⟨i, hi⟩ := hord I
+  have hI : σ i = I := kronecker_numbering_injective _ _ (by rw [hσ, hi])
+  subst hI
+  calc (A *ᵥ f) (σ i)
+      = ∑ j : Fin n, A (σ i) (σ j) * f (σ j) :=
+        tensorPow_mulVec_apply_eq_mat_mult M n hord σ hσ A f i  -- `mat_mult` の `p = 1`
+    _ = ∑ J : Conf M, A (σ i) J * f J :=
+        (finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ
+          (fun J => A (σ i) J * f J)).symm
                                                             -- `def_finite_sum_of_complex_numbers_over_multi_indices`
 
 end Ising2D

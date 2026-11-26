@@ -24,7 +24,10 @@
   `identity_matrix_apply`（`def_identity_matrix`。`I_{ij} = δ_{ij}`）・`matrix_smul_apply`（`def_matrix_scalar_multiple`）・
   `matrix_sub_apply`（`def_matrix_difference`）・`matrix_zero_apply`（`def_zero_matrix`）・`matrix_neg_apply`（`def_matrix_negation`。`pauli_matrix_products` が使う）の 5 つと、転置の成分の式 `matrix_transpose_apply`（`def_matrix_transpose`。`transpose_of_pauli_x` ほか 2 次の行列の転置の主張が使う。ここで示す主張の証明には現れない）と `kroneckerDelta` の値 `kroneckerDelta_self`・`kroneckerDelta_of_ne` だけで、
   ここで示す主張の証明はこれらと行列とベクトルの積の成分 `mulVec_apply_sum`（`mat_mult`）だけから成分ごとに進む。
-* 人手の数ベクトル `v ∈ ℂ^n` は `mat_mult` のとおり `n` 行 1 列の行列である。Lean では後段に合わせて `Fin n → ℂ` で書き、
+* 人手の数ベクトル `v ∈ ℂ^n` は `def_complex_number_vectors` のとおり `n` 行 1 列の行列（`ℂ^n := Mat(n,1,ℂ)`）である。
+  Lean では後段に合わせて第 `j` 成分 `v_j := v_{j1}` の割り当て `Fin n → ℂ` で書き、それを `n` 行 1 列の行列へ送る写像に
+  `vecToColumn`（`(vecToColumn v)_{j1} := v_j`）と名前を付ける。行列と数ベクトルの積は `mat_mult` の `p = 1` の場合であり、
+  mathlib の `B *ᵥ v` の成分がその右辺に等しいことを `mulVec_apply_sum` が `vecToColumn` を通して示す。
   スカラー倍・差・零ベクトルの成分は `vec_smul_apply`・`vec_sub_apply`・`vec_zero_apply` とする。
   `matrix_difference_zero_iff_equal` は行列の版 `matrix_sub_eq_zero_iff` と、`p = 1` に当たる数ベクトルの版
   `vec_sub_eq_zero_iff`（`eigenvector_of_A_theta_tilde` Step 1 が使う形）を同じ鎖で置く。数ベクトルの版は、行列の版を
@@ -96,10 +99,19 @@ theorem vec_sub_apply {m : ℕ} (u w : Fin m → ℂ) (i : Fin m) : (u - w) i = 
 theorem vec_zero_apply {m : ℕ} (i : Fin m) : (0 : Fin m → ℂ) i = 0 :=
   rfl
 
-/-- **`mat_mult`**: `(Bv)_i = Σ_j B_{ij} v_j`。 -/
+/-- **`def_complex_number_vectors`**: Lean の数ベクトル `v : Fin n → ℂ`（第 `j` 成分の割り当て）を、本文の `ℂ^n := Mat(n,1,ℂ)` の元
+（`n` 行 1 列の行列で、`(j,1)` 成分が `v_j`）へ送る写像。人手の第 `j` 成分の略記 `a_j := a_{j1}` の逆向きで、列の添字 `1` は Lean の `Fin 1` の唯一の元である。 -/
+def vecToColumn {n : ℕ} (v : Fin n → ℂ) : Matrix (Fin n) (Fin 1) ℂ :=
+  fun j _ => v j
+
+/-- **`mat_mult`**（`p = 1`）: `(Bv)_i = Σ_j B_{ij} v_j`。人手の `Bv` は `mat_mult` の `p = 1` の場合で、数ベクトル `v` は
+`def_complex_number_vectors` の `n` 行 1 列の行列 `vecToColumn v` である。 -/
 theorem mulVec_apply_sum {m n : ℕ} (B : Matrix (Fin m) (Fin n) ℂ) (v : Fin n → ℂ) (i : Fin m) :
     (B *ᵥ v) i = ∑ j, B i j * v j :=
-  rfl
+  calc (B *ᵥ v) i
+      = (B * vecToColumn v) i 0 := rfl                     -- `def_complex_number_vectors`: `Bv` は `B` と `n` 行 1 列の行列の積
+    _ = ∑ j, B i j * vecToColumn v j 0 := rfl              -- `mat_mult` の `p = 1`
+    _ = ∑ j, B i j * v j := rfl                            -- `def_complex_number_vectors` の `v_j := v_{j1}`
 
 /-- **`matrix_difference_zero_iff_equal`**: `A - B = O ⟺ A = B`（人手の同値の鎖）。 -/
 theorem matrix_sub_eq_zero_iff {m p : ℕ} (A B : Matrix (Fin m) (Fin p) ℂ) : A - B = 0 ↔ A = B :=

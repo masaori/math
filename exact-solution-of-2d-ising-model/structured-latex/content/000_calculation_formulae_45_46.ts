@@ -274,7 +274,7 @@ T_B(I)
         "で定める。右辺は ",
         ref("def_complex_difference"),
         " の複素数の差である。数ベクトルの差も ",
-        ref("mat_mult"),
+        ref("def_complex_number_vectors"),
         " のとおり ",
         math(String.raw`m`),
         " 行 1 列の行列の差としてこの式で定まる。",
@@ -284,6 +284,7 @@ T_B(I)
       status: "added",
       notes: [
         "2026-11-01: 本文の多くの証明が「行列の差は成分ごと」を定義のブロックを置かずに根拠にしていた。eigenvector_of_A_theta_tilde Step 1 の同値の鎖を定義から引けるよう足した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 数ベクトルを n 行 1 列の行列として扱う根拠を、mat_mult の「みなし」の文（名前を付けた写像を通さない同一視で、削った）から、定義のブロック def_complex_number_vectors（ℂ^n := Mat(n,1,ℂ)）の参照にした。式は不変。",
       ],
     },
   },

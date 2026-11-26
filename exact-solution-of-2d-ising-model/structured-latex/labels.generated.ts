@@ -194,6 +194,7 @@ export const ALL_LABELS = [
   "def_complex_difference",
   "def_complex_inverse",
   "def_complex_matrices",
+  "def_complex_number_vectors",
   "def_complex_quotient",
   "def_complex_to_unit_circle",
   "def_config_basis_iso",

@@ -2319,12 +2319,49 @@ y^2>x\ \land\ x>0
     },
   },
   {
+    id: "calc_formulae_definition_complex_number_vectors",
+    kind: "definition",
+    title: { text: "複素数を成分とする数ベクトルの全体" },
+    labels: ["def_complex_number_vectors"],
+    lean: ["Ising2D.vecToColumn"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " とする。",
+        math(String.raw`\mathbb{C}^n := \mathrm{Mat}(n,1,\mathbb{C})`),
+        "（",
+        ref("def_complex_matrices"),
+        " の記号）と定め、その元を数ベクトルと呼ぶ。",
+        math(String.raw`a \in \mathbb{C}^n`),
+        " と ",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " について、",
+        math(String.raw`a`),
+        " の ",
+        math(String.raw`(j,1)`),
+        " 成分を ",
+        math(String.raw`a_j := a_{j1} \in \mathbb{C}`),
+        " と書き、",
+        math(String.raw`a`),
+        " の第 ",
+        math(String.raw`j`),
+        " 成分と呼ぶ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 原文（Typst）に対応ブロックは無い。mat_mult の主張の最後の文が「数ベクトル a ∈ ℂ^n は n 行 1 列の行列とみなし」と、名前を付けた写像を通さない同一視で数ベクトルを扱っていた。本文は部分空間 def_subspace・核・固有空間・標準基底 e_t := E^{(m,1)}_{t1} などで ℂ^n を n 行 1 列の行列の全体として使っているので、同一視ではなく定義 ℂ^n := Mat(n,1,ℂ) として立てた。成分の略記 a_j := a_{j1} もここで定める。Lean の具体版は数ベクトルを第 j 成分の割り当て Fin n → ℂ で持ち、それを n 行 1 列の行列へ送る写像 Ising2D.vecToColumn（(vecToColumn v)_{j1} := v_j）に名前を付けた（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean）。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_003_matrix_decomposition",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/003_theorem_行列の分解.typ", ordinal: 4 },
     title: { text: "行列の積の成分による定義" },
     labels: ["mat_mult"],
-    lean: ["Ising2D.matrix_mul_apply_sum", "Ising2D.mulVec_apply_sum", "Ising2D.mul_two_apply", "Ising2D.mulVec_two_zero", "Ising2D.mulVec_two_one", "Ising2D.tensorPow_mul_apply_eq_mat_mult", "Ising2D.tensorPow_mul_apply"],
+    lean: ["Ising2D.matrix_mul_apply_sum", "Ising2D.mulVec_apply_sum", "Ising2D.mul_two_apply", "Ising2D.mulVec_two_zero", "Ising2D.mulVec_two_one", "Ising2D.tensorPow_mul_apply_eq_mat_mult", "Ising2D.tensorPow_mul_apply", "Ising2D.tensorPow_mulVec_apply_eq_mat_mult", "Ising2D.tensorPow_mulVec_apply"],
     statement: [
       paragraph([
         math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
@@ -2347,11 +2384,19 @@ y^2>x\ \land\ x>0
         ref("def_finite_sum_of_complex_numbers"),
         "）である。数ベクトル ",
         math(String.raw`a \in \mathbb{C}^n`),
-        " は ",
-        math(String.raw`n`),
-        " 行 1 列の行列とみなし、",
-        math(String.raw`Aa`),
-        " も同じ式で定める。",
+        "（",
+        ref("def_complex_number_vectors"),
+        "）は ",
+        math(String.raw`\mathrm{Mat}(n,1,\mathbb{C})`),
+        " の元なので、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " と ",
+        math(String.raw`a`),
+        " の積 ",
+        math(String.raw`Aa \in \mathbb{C}^m`),
+        " はこの定義の ",
+        math(String.raw`p = 1`),
+        " の場合である。",
       ]),
     ],
     conversion: {
@@ -2359,6 +2404,7 @@ y^2>x\ \land\ x>0
       notes: [
         "2026-09-05: 原文のこのブロックは Typst の行列構成子 mat(...) を使った「行列の分解」で、記号 mat が本文で定義されておらず証明も無かった。一方このラベル mat_mult は本文の20箇所以上から「行列の積の定義」として引かれていた。引用の意味と一致するよう、成分による積の定義そのものをこのラベルの内容とした。原文が述べていた列ごとの作用は次のブロックへ、記法を定義したうえで移した。",
         "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の二単位目）: 主張の括弧の中にあった Mat(m,n,ℂ) の定め（成分が複素数である m 行 n 列の行列全体、Mat(n,ℂ) := Mat(n,n,ℂ)）を定義のブロック def_complex_matrices へ切り出し、ここはその参照にした。欄 lean に、Lean の TensorPow M（添字が 𝓘_M の行列）の積の成分を ν^{-1} で番号へ移すとこの定義の右辺に等しいことを述べる補題 Ising2D.tensorPow_mul_apply_eq_mat_mult と、そこから導く 𝓘_M の添字の形 Ising2D.tensorPow_mul_apply を足した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 主張の最後の文「数ベクトル a ∈ ℂ^n は n 行 1 列の行列とみなし、Aa も同じ式で定める」は、名前を付けた写像を通さない同一視だったので、ℂ^n := Mat(n,1,ℂ) を定義のブロック def_complex_number_vectors として立て、Aa はこの定義の p = 1 の場合であると書き直した。式は不変。欄 lean に、Lean の TensorPow M（添字が 𝓘_M の行列）と数ベクトルの積の成分を ν^{-1} で番号へ移すとこの定義の p = 1 の右辺に等しいことを述べる補題 Ising2D.tensorPow_mulVec_apply_eq_mat_mult と、そこから導く 𝓘_M の添字の形 Ising2D.tensorPow_mulVec_apply を足した。",
       ],
     },
   },
@@ -2405,7 +2451,7 @@ y^2>x\ \land\ x>0
 &=\sum_{j=1}^{n} A_{ij}\,(b_k)_j
   &&\bigl(\because\ \text{列に並べた行列の成分の定め方}\bigr)\\
 &=(Ab_k)_i
-  &&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\ \text{を}\ Ab_k\ \text{へ適用}\bigr)\\
+  &&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\ \text{の}\ p=1\ \text{を}\ Ab_k\ \text{へ適用し、成分を}\ \blkref{def_complex_number_vectors}\ \text{の略記で書く}\bigr)\\
 &=\left(\left[\,Ab_1\ \cdots\ Ab_p\,\right]\right)_{ik}
   &&\bigl(\because\ \text{列に並べた行列の成分の定め方}\bigr)
 \end{aligned}`),
@@ -2415,6 +2461,7 @@ y^2>x\ \land\ x>0
       status: "added",
       notes: [
         "2026-09-05: 原文は Typst の行列構成子 mat(...) で「mat(Aa,Ab)=A mat(a,b)」と書いていたが、その記号は本文で定義されておらず証明も無かった。列に並べた行列という記法を主張の中で定義し、成分計算の四段で証明した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 3 行目の根拠に、mat_mult の p = 1 の場合であることと、数ベクトルの成分の略記 (b_k)_j := (b_k)_{j1} を定める def_complex_number_vectors を書き足した。式は不変。",
       ],
     },
   },

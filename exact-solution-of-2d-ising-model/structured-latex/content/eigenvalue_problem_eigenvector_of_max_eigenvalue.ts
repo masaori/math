@@ -4098,7 +4098,7 @@ D_0(\varepsilon G)
         String.raw`\begin{aligned}
 \bigl(Xf_{\iota(s)}\bigr)_{\mathrm{ord}(s')}
 &= \sum_{l=1}^{2^{M_{\mathrm{col}}}} X_{\mathrm{ord}(s'),l}\bigl(f_{\iota(s)}\bigr)_{l}
-&&(\because \blkref{mat_mult}) \\
+&&(\because \blkref{mat_mult}\ \text{の}\ p=1\ \text{と}\ \blkref{def_complex_number_vectors}\ \text{の成分の略記}) \\
 &= X_{\mathrm{ord}(s'),\mathrm{ord}(s)}\bigl(f_{\iota(s)}\bigr)_{\mathrm{ord}(s)}
 &&(\because \blkref{finite_sum_with_single_nonzero_term}) \\
 &= X_{\mathrm{ord}(s'),\mathrm{ord}(s)}\,1_{\mathbb{C}}
@@ -4567,6 +4567,7 @@ V_1^{(+)}
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-11-21: 「基底」に def_basis_indexed_by_finite_set を引いた。主張・証明の中身は変えていない",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 準備 (P5) の列の読み取りの 1 行目の根拠に、mat_mult の p = 1 の場合であることと、数ベクトルの成分の略記を定める def_complex_number_vectors を書き足した。式は不変。",
       ],
     },
   },
@@ -4806,7 +4807,7 @@ V_1^{(+)}
         " なる ",
         math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " が取れる（数ベクトルは ",
-        ref("mat_mult"),
+        ref("def_complex_number_vectors"),
         " の ",
         math(String.raw`2^{M_{\mathrm{col}}}`),
         " 行 1 列の行列）。",
@@ -4872,6 +4873,7 @@ V_1^{(+)}
         "2026-11-04（全証明の SageMath 検算）: 散文の推論を (∵) 付きの鎖にした。主張は変えていない。(1) は trace_of_epsilon_V_plus の読み方（左辺が右辺の像 r_ℂ、r ∈ ℝ_{>0}）と trace_of_epsilon_V_plus_via_check_eigenvalues の z > 0 の定め方をつなぐ行を足した 3 行の含意の鎖に、(2) の「(1) を代入して」と定義の無い負の冪 (−1)^{−|ϵ|} を、準備 (P1) (−1)^k(−1)^k = 1_ℂ・(P2) |ϵ| ≤ M_col と非負の冪だけの 8 行の鎖に、(3) を 3 行の鎖に、(4) の εQ̌_{(1,…,1)} = Q̌_{(1,…,1)} を、Lean の具体版の epsilon_mul_Qproj_univ と同じ η_{(1,…,1)} = +1 を代入する 3 行の鎖に、「冪等性より y = Q̌y」を y = Q̌x からの 4 行の鎖に、言い換えを max_eigenvalue_of_V_plus_simple (3) を引く 2 行の鎖にした。計算の誤りは無かった。",
         "数値検証: sagemath/check/max_eigenvector_in_even_sector/（厳密計算。本文の ψ̌ と実際の V^{(+)} で M_col = 2, 3、結合定数 3 組）。旧い浮動小数点の検算 sagemath/check/053_claim_even_sector_closing/check_02 も残っている。",
         "2026-11-21: ε の記法の書き直し（代表の指摘）。主張の冒頭で ε・|ε|・Q̌_ε の出所を def_binary_assignments_on_check_index_set・def_number_of_ones_of_binary_assignment・def_check_Q_epsilon として引き、準備 (P2) の ε_μ を ε(μ) に、|ε| の根拠を epsilon_eigenvalue_on_check_Q の置き方から def_number_of_ones_of_binary_assignment に替えた。鎖と主張は変えていない。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 数ベクトルを n 行 1 列の行列として扱う根拠を、mat_mult の「みなし」の文（名前を付けた写像を通さない同一視で、削った）から、定義のブロック def_complex_number_vectors（ℂ^n := Mat(n,1,ℂ)）の参照にした。式は不変。",
       ],
     },
   },
@@ -4994,7 +4996,7 @@ V_1^{(+)}
         " なる ",
         math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " が取れる（数ベクトルは ",
-        ref("mat_mult"),
+        ref("def_complex_number_vectors"),
         " の ",
         math(String.raw`2^{M_{\mathrm{col}}}`),
         " 行 1 列の行列）。",
@@ -5048,6 +5050,7 @@ V_1^{(+)}
         "2026-10-31: 章立ての組み直しで、V^{(+)} の最大固有値に属する固有ベクトルの章のゴールの式（tr(εV^{(+)}) = … > 0 ⟹ im Q̌_{(1,…,1)} ⊆ F^{(+)}）を一つの主張として立てた。既存の主張 trace_of_epsilon_V_plus・trace_of_epsilon_V_plus_via_check_eigenvalues・epsilon_eigenvalue_on_check_Q と、max_eigenvector_in_even_sector (4) の証明の計算を並べるだけで、新しい証明は無い。",
         "2026-11-05: (2) を一ステップ一定理に揃えた。含意の鎖の 1 行目を、(1) の右辺 r の置き方と trace_of_epsilon_V_plus_via_check_eigenvalues の z > 0 の定め方を分けた 2 行にし（max_eigenvector_in_even_sector (1) と同じ）、εQ̌_{(1,…,1)} = Q̌_{(1,…,1)} を epsilon_eigenvalue_on_check_Q (1)・η の代入・scalar_multiple_by_one の 3 行の鎖に、「冪等性より y = Q̌y」を y = Q̌x からの 4 行の鎖に、εy = y を mat_mult_associative の行を入れた 4 行の鎖にした（max_eigenvector_in_even_sector (4) と同じ行）。η の ±1 を ℂ の元 ±1_ℂ と読むことを冒頭に書いた。主張は変えていない。",
         "2026-11-21: ε の記法の書き直し（代表の指摘）。主張の Q̌_{(1,…,1)} の出所を check_joint_eigenspace_decomposition から def_check_Q_epsilon に替え、(1,…,1) が def_binary_assignments_on_check_index_set の定数写像であることを書いた。証明と主張は変えていない。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 数ベクトルを n 行 1 列の行列として扱う根拠を、mat_mult の「みなし」の文（名前を付けた写像を通さない同一視で、削った）から、定義のブロック def_complex_number_vectors（ℂ^n := Mat(n,1,ℂ)）の参照にした。式は不変。",
       ],
     },
   },

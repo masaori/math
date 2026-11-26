@@ -252,3 +252,15 @@ OfNat.ofNat@Matrix[Fin,Fin,Complex],0@Zero.toOfNat0	def_zero_matrix
 Neg.neg@Matrix[Fin,Fin,Complex]@Matrix.neg	def_matrix_negation
 HSub.hSub@Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex]@Matrix.sub	def_matrix_difference
 HMul.hMul@Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	mat_mult
+# 行列と数ベクトルの積（ℂ）: def_complex_number_vectors が ℂ^n := Mat(n,1,ℂ) と定め、第 j 成分を a_j := a_{j1} と書く。mat_mult が A ∈ Mat(m,n,ℂ) と
+# a ∈ ℂ^n の積 Aa をその p = 1 の場合として定める（(Aa)_{i1} = Σ_{j=1}^{n} A_{ij} a_{j1}）。Lean の数ベクトルは第 j 成分の割り当て Fin n → ℂ、または Conf M → ℂ
+# （ℂ^{2^M} の数ベクトルで、第 k 成分を f (ν^{-1}(k)) として持つ）で、それを n 行 1 列の行列へ送る写像に vecToColumn と名前を付けた。
+# mathlib の Matrix.mulVec の成分が mat_mult の p = 1 の右辺に等しいことを補題一本で示した: Fin n の添字は mulVec_apply_sum
+# （B *ᵥ v の成分が B * vecToColumn v の (i,1) 成分に等しく、それが Σ_j B_{ij} v_j であることを rfl の 3 段で辿る）、Conf M の添字は ν^{-1} で番号へ移した成分について
+# tensorPow_mulVec_apply_eq_mat_mult（mathlib の Conf M の上の和を finset_sum_conf_complex_eq_finite_sum_over_multi_indices で番号の上の和へ移す。
+# DefinitionMatrixOperationsOverMultiIndices.lean）。どちらも mat_mult の欄 lean に在り、通しの定理の依存に入っている
+# （Conf M の側は 𝓘_M の添字の形 tensorPow_mulVec_apply を通して mulVec_basisVec_configBasisIso_apply が使う）。
+# Fin 0・Conf 0 の添字の積もこの鍵に入る（def_complex_matrices の行と同じ扱い）。添字が任意の型の行列とベクトルの積（Matrix.mulVec@?,?,Complex）と
+# ℝ の行列とベクトルの積はまだ載せない（状態台帳の行「行列とその演算」）。
+Matrix.mulVec@Fin,Fin,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Fin.fintype	mat_mult
+Matrix.mulVec@Ising2D.Conf,Ising2D.Conf,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,Pi.instFintype	mat_mult

@@ -1037,8 +1037,8 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         " の意味）。",
         math(String.raw`\mathcal{F}=\mathbb{C}^{2^M}`),
         " の数ベクトルの和とスカラー倍は、",
-        ref("mat_mult"),
-        " の約束どおり数ベクトルを ",
+        ref("def_complex_number_vectors"),
+        " のとおり数ベクトルを ",
         math(String.raw`2^M`),
         " 行 1 列の行列として、",
         ref("def_finite_sum_of_matrices"),
@@ -1177,6 +1177,7 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
       notes: [
         "2026-11-01: SageMath の検算（sagemath/check/end_preserves_matrix_exponential/）を付けるにあたり足した。行列表示と線型写像表示は指数関数を保つこと（labels: end_preserves_matrix_exponential）の証明は、exp 級数の各点収束（labels: exp_converges (1a)。行列と数ベクトルの積は mat_mult のもの）を、end の作用の記法 Av := (end(A))(v) で書いた数ベクトルの収束として使っていた。二つの積が一致することを示すブロックが無かったので、ここで成分計算から示した。",
         "2026-11-21: 「基底」に def_basis_indexed_by_finite_set を引いた。主張・証明の中身は変えていない",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の三単位目）: 数ベクトルを n 行 1 列の行列として扱う根拠を、mat_mult の「みなし」の文（名前を付けた写像を通さない同一視で、削った）から、定義のブロック def_complex_number_vectors（ℂ^n := Mat(n,1,ℂ)）の参照にした。式は不変。",
       ],
     },
   },

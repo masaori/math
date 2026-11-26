@@ -135,7 +135,7 @@ theorem mulVec_basisVec_configBasisIso_apply (X : TensorPow M) (s s' : SpinConf 
       = X (configBasisIso M s') (configBasisIso M s) :=
   calc (X *ᵥ basisVec (configBasisIso M s)) (configBasisIso M s')
       = ∑ l : Conf M, X (configBasisIso M s') l * basisVec (configBasisIso M s) l := by
-        rw [Matrix.mulVec, dotProduct]  -- `mat_mult`
+        rw [tensorPow_mulVec_apply]  -- `mat_mult`
     _ = X (configBasisIso M s') (configBasisIso M s)
           * basisVec (configBasisIso M s) (configBasisIso M s) := by
         -- `finite_sum_with_single_nonzero_term`
