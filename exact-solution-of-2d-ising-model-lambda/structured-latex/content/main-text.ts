@@ -110293,7 +110293,7 @@ b
                         displayMath(String.raw`\begin{aligned}
 -\varepsilon'
 &\le_{\Lambda_{\mathbb{Q}}}-\bigl(\tfrac1L\cdot(2\cdot\delta)\bigr)
-&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=\tfrac1L\cdot(2\cdot\delta)\text{、}\mu:=\varepsilon'\text{ で読む。}\tfrac1L\cdot(2\cdot\delta)\le_{\Lambda_{\mathbb{Q}}}\varepsilon'\text{ は直前})\\
+&&(\because\ \blkref{claim_rational_log_order_group_neg_reverses_order}\text{ を }\lambda:=\tfrac1L\cdot(2\cdot\delta)\text{、}\mu:=\varepsilon'\text{ で読む、}\tfrac1L\cdot(2\cdot\delta)\le_{\Lambda_{\mathbb{Q}}}\varepsilon'\text{ は直前})\\
 &=-\bigl(\bigl(\tfrac1L\cdot2\bigr)\cdot\delta\bigr)
 &&(\because\ \blkref{def_rational_log_order_group}\text{ の }(rs)\cdot\lambda=r\cdot(s\cdot\lambda)\text{ を右辺から左辺の向きに読む})\\
 &=-\bigl(\tfrac{2}{L}\cdot\delta\bigr)
@@ -110301,7 +110301,7 @@ b
 &=-\bigl(\tfrac{2}{L}\cdot(-\iota(\log q))\bigr)
 &&(\because\ \delta\text{ の定義})\\
 &=\tfrac{2}{L}\cdot\iota(\log q)
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍と逆元を素数ごとに読む: }-\bigl(r\,(-\lambda(p))\bigr)=r\,\lambda(p)\text{。}\mathbb{Q}\text{ の四則})
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍と逆元を素数ごとに読む: }-\bigl(r\,(-\lambda(p))\bigr)=r\,\lambda(p)\text{、}\mathbb{Q}\text{ の四則})
 \end{aligned}`),
                         paragraph([
                           math(String.raw`\mu\in A^{\mathrm{per}}(q)`),

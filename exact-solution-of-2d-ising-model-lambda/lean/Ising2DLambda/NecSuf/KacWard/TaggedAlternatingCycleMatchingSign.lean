@@ -14,6 +14,7 @@
 import Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.KacWard.AlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairColoring
+import Ising2DLambda.NecSuf.KacWard.MatchingPairOutsideEnumeration
 
 namespace Ising2DLambda.NecSuf.KacWard
 
@@ -52,8 +53,7 @@ noncomputable def cycleWordsOf {A : Set J} (τ υ : FixedPointFreeInvolution {x 
 
 /-- A の外の D の対を昇順に並べた列。 -/
 noncomputable def commonPairsOf (D : PerfectMatching J) (A : Set J) : List (J × J) :=
-  ((Finset.univ.filter (fun e : J => e ∉ A ∧ e < perfectMatchingMate D e)).sort (· ≤ ·)).map
-    (fun e => (e, perfectMatchingMate D e))
+  matchingPairOutsideEnumeration (perfectMatchingMate D) A
 
 section Facts
 
@@ -234,7 +234,7 @@ theorem commonPairs_outside_necSuf (x : J) (hx : x ∈ matchingPairWord (commonP
   · exact outside_mate_outside D A τ hτ e he'.1
 
 theorem commonPairs_nodup_necSuf : (matchingPairWord (commonPairsOf D A)).Nodup := by
-  unfold commonPairsOf matchingPairWord
+  unfold commonPairsOf matchingPairOutsideEnumeration matchingPairWord
   rw [List.flatMap_map]
   apply List.nodup_flatMap.mpr
   refine ⟨fun e _ => ?_, ?_⟩
@@ -305,12 +305,10 @@ include hout in
 theorem commonPairs_spec_necSuf :
     ∀ p ∈ commonPairsOf D A, p.1 < p.2 ∧ ({p.1, p.2} : Set J) ∈ D.val ∧
       ({p.1, p.2} : Set J) ∈ D₀.val := by
-  intro p hp
-  obtain ⟨e, he, rfl⟩ := List.mem_map.mp hp
-  have he' := (Finset.mem_filter.mp ((Finset.mem_sort _).mp he)).2
-  refine ⟨he'.2, (perfectMatchingMate_spec D e).2, ?_⟩
-  rw [← hout e he'.1]
-  exact (perfectMatchingMate_spec _ e).2
+  exact matchingPairOutsideEnumeration_spec D.val D₀.val
+    (perfectMatchingMate D) (perfectMatchingMate D₀) A
+    (fun e => (perfectMatchingMate_spec D e).2)
+    (fun e => (perfectMatchingMate_spec D₀ e).2) hout
 
 end Facts
 
