@@ -202,3 +202,19 @@ abs@Int@instLatticeInt,Int.instAddGroup	def_int_absolute_value
 # 書かない位置で Lean だけが ℤ を ℝ へ送っている宣言を含む（例: openChainEnergy_mem_int。本文の def_open_chain_spin_energy は ℝ の元 E(s) を「∈ ℤ」と書く）。
 # 状態台帳の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」が、git の履歴（載せる前の main の先端 807458d43）から引く手順を持つ。
 Int.cast@Real@Real.instIntCast	inclusion_zz_to_rr
+#
+# Lean の TensorPow M（Matrix (Conf M) (Conf M) ℂ。添字が多重添字の集合 𝓘_M の行列で、本文の Mat(2^M, ℂ)）の単位行列・スカラー倍・和・零行列:
+# def_identity_matrix・def_matrix_scalar_multiple・def_matrix_sum・def_zero_matrix が Mat(n, ℂ) の演算を番号 i, k ∈ {1,…,n} の成分の式で定め、
+# def_kronecker が I ∈ 𝓘_M を番号 ν(I) と同一視して成分を並べる。mathlib の行列の演算と本文の成分の式が ν を通して等しいことを、演算ごとに補題一本で示した
+# （DefinitionMatrixOperationsOverMultiIndices.lean）。単位行列は 1 (ν^{-1}(i)) (ν^{-1}(k)) = δ_{ik}（tensorPow_one_apply_eq_identity_matrix。ν^{-1} の単射による）、
+# スカラー倍・和・零行列は成分の式が各成分だけで閉じるので Conf M の添字のまま（tensorPow_smul_apply・tensorPow_add_apply・tensorPow_zero_apply）。
+# 記号の鍵は TensorPow と書かれた演算だけを指す（Matrix (Conf M) (Conf M) ℂ と書いた行列や Fin n の添字の行列は鍵が Matrix[Complex] で、別の行）。
+# 積（HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Complex]）は、積の値の型が mathlib の Matrix (Conf M) (Conf M) ℂ と書かれ、一致の補題の主張が型 Matrix の記号を
+# 使うので、型 Matrix を載せる単位で載せる。符号反転と差（Neg.neg@Ising2D.TensorPow・HSub.hSub@Ising2D.TensorPow）は、補題を通しの定理に繋げる使い道が、
+# 並列の実行が受け持つ分離の行「TensorPow 上の行列の基本恒等式」の補題（neg_mul_matrix_tensorPow・add_sub_cancel_tensorPow など。いまは導出の定理）の具体版の証明の中にしか無いので、
+# その行の具体版の証明を置く同じ回に、一致の補題を置いて使い、この一覧に載せ、未定義の記号の台帳から行を消す（状態台帳の行「行列とその演算」と分離の行の備考）。
+# スカラー倍・和・零の 3 行の根拠は def_kronecker の「I を番号 ν(I) と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii)）。
+OfNat.ofNat@Ising2D.TensorPow,1@One.toOfNat1	def_identity_matrix
+HSMul.hSMul@Complex,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.smul	def_matrix_scalar_multiple
+HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add	def_matrix_sum
+OfNat.ofNat@Ising2D.TensorPow,0@Zero.toOfNat0	def_zero_matrix

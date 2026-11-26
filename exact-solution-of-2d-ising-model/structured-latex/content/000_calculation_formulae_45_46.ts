@@ -292,7 +292,7 @@ T_B(I)
     kind: "definition",
     title: { text: "零行列" },
     labels: ["def_zero_matrix"],
-    lean: ["Ising2D.matrix_zero_apply", "Ising2D.vec_zero_apply"],
+    lean: ["Ising2D.matrix_zero_apply", "Ising2D.vec_zero_apply", "Ising2D.tensorPow_zero_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -314,6 +314,7 @@ T_B(I)
       status: "added",
       notes: [
         "2026-11-01: 本文の証明が「零行列」「零ベクトル」を定義のブロックを置かずに使っていた。matrix_difference_zero_iff_equal と def_eigenvector が引けるよう足した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の一単位目）: 欄 lean に、Lean の TensorPow M（添字が 𝓘_M の行列）の演算がこの定義の成分の式を ν を通して読んだものに等しいことを述べる補題 Ising2D.tensorPow_zero_apply を足した（MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionMatrixOperationsOverMultiIndices.lean）。本文は変えていない。",
       ],
     },
   },

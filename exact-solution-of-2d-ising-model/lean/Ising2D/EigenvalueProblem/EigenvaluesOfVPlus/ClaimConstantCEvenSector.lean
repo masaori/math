@@ -46,6 +46,7 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWords
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSumFromNecSuf
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
 
 namespace Ising2D
 
@@ -62,8 +63,9 @@ variable {M : ℕ}
 theorem half_smul_add_half_smul (S : TensorPow M) : (1 / 2 : ℂ) • S + (1 / 2 : ℂ) • S = S := by
   ext k l
   calc ((1 / 2 : ℂ) • S + (1 / 2 : ℂ) • S) k l
-      = ((1 / 2 : ℂ) • S) k l + ((1 / 2 : ℂ) • S) k l := rfl          -- `def_matrix_sum`
-    _ = (1 / 2 : ℂ) * S k l + (1 / 2 : ℂ) * S k l := rfl              -- `def_matrix_scalar_multiple`
+      = ((1 / 2 : ℂ) • S) k l + ((1 / 2 : ℂ) • S) k l := tensorPow_add_apply _ _ _ _  -- `def_matrix_sum`
+    _ = (1 / 2 : ℂ) * S k l + (1 / 2 : ℂ) * S k l := by
+        rw [tensorPow_smul_apply]                                     -- `def_matrix_scalar_multiple` を 2 か所
     _ = ((1 / 2 : ℂ) + (1 / 2 : ℂ)) * S k l := (add_mul _ _ _).symm   -- 分配律（`complex_numbers_form_a_field`）
     _ = ((⟨1 / 2, 0⟩ : ℂ) + ⟨1 / 2, 0⟩) * S k l := by
         -- `inclusion_rr_to_cc`（Lean の `(1 / 2 : ℂ)` を人手の `(1/2)_ℂ = (1/2, 0)` に読み替える）

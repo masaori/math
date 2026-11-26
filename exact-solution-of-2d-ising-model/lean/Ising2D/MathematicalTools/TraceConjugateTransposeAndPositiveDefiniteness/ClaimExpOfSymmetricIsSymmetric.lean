@@ -11,7 +11,7 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 冒頭の `(I^⊤)_{kl}` の 4 行（`def_matrix_transpose` → `def_identity_matrix` → `def_kronecker_delta` → `def_identity_matrix`） | `identity_transpose_tensorPow` の `calc` の 4 段 |
+| 冒頭の `(I^⊤)_{kl}` の 4 行（`def_matrix_transpose` → `def_identity_matrix` → `def_kronecker_delta` → `def_identity_matrix`） | `identity_transpose_tensorPow` の `calc` の 4 段（前に Lean だけの準備として、`ν^{-1}`（`σ`）を取り、その全射で添字を `σ k`・`σ l` と書く） |
 | 準備 `SS^m = S^mS` の `m = 0` の 4 行と `m → m+1` の 4 行 | `tensorPow_mul_pow_comm` の 2 つの `calc` |
 | 準備 `(S^m)^⊤ = S^m` の `m = 0` の 3 行と `m → m+1` の 6 行（`transpose_of_matrix_product`） | `tensorPow_pow_transpose_of_transpose_eq` の 2 つの `calc` |
 | 部分和 `E_N := Σ_{m=0}^{N}(1/m!)S^m` と成分の式 `(E_N)_{kl} = Σ_{m=0}^{N}(1/m!)_ℂ(S^m)_{kl}` | `expPartialSum`、`expPartialSum_apply` |
@@ -37,6 +37,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTransposeOfMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.Representation
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
 
 namespace Ising2D
 
@@ -46,14 +47,26 @@ attribute [local instance] Matrix.frobeniusNormedAddCommGroup
 
 variable {M : ℕ}
 
-/-- 人手 冒頭の `I^⊤ = I`（成分の 4 行）。 -/
-theorem identity_transpose_tensorPow : (1 : TensorPow M)ᵀ = 1 :=
-  Matrix.ext fun k l =>
-    calc (1 : TensorPow M)ᵀ k l
-        = (1 : TensorPow M) l k := rfl                                -- `def_matrix_transpose`（`B → I`, `p → k`, `q → l`）
-      _ = if l = k then 1 else 0 := Matrix.one_apply                 -- `def_identity_matrix`（`i → l`, `j → k`）
-      _ = if k = l then 1 else 0 := by simp only [eq_comm]           -- `def_kronecker_delta` で `l = k` と `k = l` は同じ条件
-      _ = (1 : TensorPow M) k l := Matrix.one_apply.symm             -- `def_identity_matrix`（`i → k`, `j → l`）
+/-- 人手 冒頭の `I^⊤ = I`（成分の 4 行）。人手の成分 `(I^⊤)_{kl}`（`k, l ∈ {1,…,2^M}`）は Lean の `1ᵀ (σ k) (σ l)` に当たる
+（`σ` は `ν^{-1}`。`def_inverse_of_kronecker_numbering`）。`σ` の全射により Lean の全ての添字はこの形に書ける。
+`σ` を取ることと全射を示すことは、4 段の前に置く Lean だけの準備である。 -/
+theorem identity_transpose_tensorPow : (1 : TensorPow M)ᵀ = 1 := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M     -- `def_inverse_of_kronecker_numbering`
+  -- `ν^{-1}` の全射: `ν(I)` の番号 `k` について `ν(ν^{-1}(k)) = ν(I)` と `ν` の単射（`kronecker_numbering_injective`）から
+  have hσsurj : ∀ I, ∃ k, σ k = I := fun I => by
+    obtain ⟨k, hk⟩ := hord I
+    exact ⟨k, kronecker_numbering_injective _ _ (by rw [hσ, hk])⟩
+  refine Matrix.ext fun I J => ?_
+  obtain ⟨k, rfl⟩ := hσsurj I
+  obtain ⟨l, rfl⟩ := hσsurj J
+  calc (1 : TensorPow M)ᵀ (σ k) (σ l)
+      = (1 : TensorPow M) (σ l) (σ k) := rfl                         -- `def_matrix_transpose`（`B → I`, `p → k`, `q → l`）
+    _ = kroneckerDelta l k := tensorPow_one_apply_eq_identity_matrix M n σ hσ l k
+                                                                      -- `def_identity_matrix`（`i → l`, `j → k`）
+    _ = kroneckerDelta k l := by
+        unfold kroneckerDelta; simp only [eq_comm]                    -- `def_kronecker_delta` で `l = k` と `k = l` は同じ条件
+    _ = (1 : TensorPow M) (σ k) (σ l) := (tensorPow_one_apply_eq_identity_matrix M n σ hσ k l).symm
+                                                                      -- `def_identity_matrix`（`i → k`, `j → l`）
 
 /-- 人手 準備: すべての `m` について `SS^m = S^mS`（`m` についての帰納法）。 -/
 theorem tensorPow_mul_pow_comm (S : TensorPow M) (m : ℕ) : S * S ^ m = S ^ m * S := by

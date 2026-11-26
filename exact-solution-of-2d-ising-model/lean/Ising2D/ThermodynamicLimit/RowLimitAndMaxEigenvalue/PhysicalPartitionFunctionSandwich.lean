@@ -141,6 +141,7 @@ import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperBound
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimMomentLogConvexity
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
 
 namespace Ising2D
 
@@ -300,8 +301,8 @@ theorem K1D_hasRealEntries (K1 : ℝ) :
   cases M with
   | zero =>
     intro I J
-    exact ⟨0, by rw [Finset.univ_eq_empty, Finset.sum_empty, smul_zero, Matrix.zero_apply,
-      Complex.ofReal_zero]⟩
+    exact ⟨0, by rw [Finset.univ_eq_empty, Finset.sum_empty, smul_zero, tensorPow_zero_apply,
+      Complex.ofReal_zero]⟩                              -- `tensorPow_zero_apply` は `def_zero_matrix`
   | succ n => exact K1D_hasRealEntries_succ K1 n
 
 /-- 人手 Step 1 の結論: `K_1D` は実対称（`def_real_symmetric_complex_matrix`）。 -/

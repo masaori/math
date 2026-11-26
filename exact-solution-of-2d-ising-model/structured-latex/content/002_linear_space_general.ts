@@ -50,7 +50,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "単位行列" },
     labels: ["def_identity_matrix"],
-    lean: ["Ising2D.identity_matrix_apply"],
+    lean: ["Ising2D.identity_matrix_apply", "Ising2D.tensorPow_one_apply_eq_identity_matrix"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -73,6 +73,7 @@ export default defineBlocks([
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。単位行列は本文全体で使われていたが、定めるブロックが無かった。" +
           "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、足した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の一単位目）: 欄 lean に、Lean の TensorPow M（添字が 𝓘_M の行列）の演算がこの定義の成分の式を ν を通して読んだものに等しいことを述べる補題 Ising2D.tensorPow_one_apply_eq_identity_matrix を足した（MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionMatrixOperationsOverMultiIndices.lean）。本文は変えていない。",
       ],
     },
   },
@@ -82,7 +83,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "行列のスカラー倍" },
     labels: ["def_matrix_scalar_multiple"],
-    lean: ["Ising2D.matrix_smul_apply", "Ising2D.vec_smul_apply"],
+    lean: ["Ising2D.matrix_smul_apply", "Ising2D.vec_smul_apply", "Ising2D.tensorPow_smul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -113,6 +114,7 @@ export default defineBlocks([
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。行列のスカラー倍は本文全体で使われていたが、定めるブロックが無かった。" +
           "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、足した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の一単位目）: 欄 lean に、Lean の TensorPow M（添字が 𝓘_M の行列）の演算がこの定義の成分の式を ν を通して読んだものに等しいことを述べる補題 Ising2D.tensorPow_smul_apply を足した（MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionMatrixOperationsOverMultiIndices.lean）。本文は変えていない。",
       ],
     },
   },
@@ -122,7 +124,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "行列の和" },
     labels: ["def_matrix_sum"],
-    lean: ["Ising2D.matrix_sum_apply"],
+    lean: ["Ising2D.matrix_sum_apply", "Ising2D.tensorPow_add_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -147,6 +149,7 @@ export default defineBlocks([
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。行列の和は本文全体で使われていたが、定めるブロックが無かった。" +
           "トレースの基本性質（trace_basic_properties）の検算で、線型性の行の根拠として欠けが見つかり、足した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の行「行列とその演算」の一単位目）: 欄 lean に、Lean の TensorPow M（添字が 𝓘_M の行列）の演算がこの定義の成分の式を ν を通して読んだものに等しいことを述べる補題 Ising2D.tensorPow_add_apply を足した（MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionMatrixOperationsOverMultiIndices.lean）。本文は変えていない。",
       ],
     },
   },
