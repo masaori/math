@@ -66,6 +66,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutingWithDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixPlusDifferenceCancelsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
@@ -764,12 +765,13 @@ theorem nOp_mul_Qproj_of_necSuf (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
 
 /-- **原文 (3)** の `ε(ν) = 1` の場合の `ň_ν Q̌_ε = Q̌_ε`（人手の `ε(ν) = 1` は Lean の `ν ∈ T`）。
 人手の範囲 `M_col ≥ 2`（`M = r + 2`）では Step 3 の鎖 `nOp_mul_Qproj_of_mem_step3` で示す（人手の `ν` は `checkIdxOfFin` の像）。
-`M = 0, 1` は人手の範囲外で、必要十分版の特殊化 `nOp_mul_Qproj_of_necSuf` で閉じる。 -/
+`M = 0, 1` は人手の範囲外で、必要十分版の特殊化 `nOp_mul_Qproj_of_necSuf` と `one_smul_tensorPow_of_necSuf` で閉じる
+（具体版 `one_smul_tensorPow` で閉じると、本文 `check_joint_eigenspace_decomposition` が引かない `scalar_multiple_by_one` を Lean が使うことになる）。 -/
 theorem nOp_mul_Qproj_of_mem {ν : CheckIdx M} {T : Finset (CheckIdx M)} (hν : ν ∈ T) :
     F.nOp ν * F.Qproj T = F.Qproj T := by
   match M, F, ν, T, hν with
-  | 0, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_pos hν, one_smul_tensorPow]
-  | 1, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_pos hν, one_smul_tensorPow]
+  | 0, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_pos hν, one_smul_tensorPow_of_necSuf]
+  | 1, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_pos hν, one_smul_tensorPow_of_necSuf]
   | r + 2, F, ν, T, hν =>
     obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective ν       -- 人手の `ν = finIndexToZZ M j`
     exact nOp_mul_Qproj_of_mem_step3 F j hν

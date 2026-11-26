@@ -2427,7 +2427,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "1 倍しても行列は変わらない" },
     labels: ["scalar_multiple_by_one"],
-    lean: ["Ising2D.matrix_one_smul", "Ising2D.matrix_one_smul_apply"],
+    lean: ["Ising2D.matrix_one_smul", "Ising2D.matrix_one_smul_apply", "Ising2D.one_smul_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -2468,6 +2468,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。1 倍しても行列が変わらないことは本文全体で根拠として使われていたが、述べるブロックが無かった。" +
           "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、成分計算の鎖で示した。",
+        "2026-11-26（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の五単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.one_smul_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowScalarMultipleByOne.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。主張と証明は不変。",
       ],
     },
   },

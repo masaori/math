@@ -51,6 +51,7 @@
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusViaCheckEigenvalues
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusClosedForm
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 
@@ -127,13 +128,17 @@ theorem epsilon_eq_neg_one_pow_smul_parityProd (heta : F.eta Finset.univ = 1) :
     _ = (1 * (-1 : ℂ) ^ M) • F.parityProd := by rw [heta]                             -- 人手 2: (1)
     _ = (-1 : ℂ) ^ M • F.parityProd := by rw [one_mul]                                -- 人手 3: `1_ℂ` は乗法の単位元
 
-/-- **人手 (4) の 1 つ目の鎖**: `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}`。 -/
+/-- **人手 (4) の 1 つ目の鎖**: `εQ̌_{(1,…,1)} = Q̌_{(1,…,1)}`。
+3 行目は `scalar_multiple_by_one` の `TensorPow M` の具体版 `one_smul_tensorPow` ではなく、導出 `one_smul_tensorPow_of_necSuf` で受ける。
+この宣言は `max_eigenvector_in_even_sector` の欄 `lean` に無く、本文 `c_between_Lambda_half_and_twice_Lambda_half` の具体版が
+本文の引く `c_plus_equals_Lambda_half_integer` を通らずにここへ届くので、具体版で受けると一対一の台帳に行が増えるためである（同時に `c_plus_equals_Lambda_half_integer`・`max_eigenvector_in_even_sector`・
+`max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` の本文が引くのに Lean が使わない行が 3 行消えるので、`c_between` の具体版を本文の経路へ直したら具体版で受ける）。 -/
 theorem epsilon_mul_Qproj_univ_of_eta (heta : F.eta Finset.univ = 1) :
     epsilon M * F.Qproj (Finset.univ : Finset (Fin M)) = F.Qproj Finset.univ :=
   calc epsilon M * F.Qproj Finset.univ
       = F.eta Finset.univ • F.Qproj Finset.univ := F.epsilon_mul_Qproj Finset.univ  -- 人手 1: `epsilon_eigenvalue_on_check_Q` (1)
     _ = (1 : ℂ) • F.Qproj Finset.univ := by rw [heta]                               -- 人手 2: (1)
-    _ = F.Qproj Finset.univ := one_smul_tensorPow _                                  -- 人手 3: `scalar_multiple_by_one`
+    _ = F.Qproj Finset.univ := one_smul_tensorPow_of_necSuf _                        -- 人手 3: `scalar_multiple_by_one`
 
 /-- **人手 (4) の 2 つ目の鎖**: `y = Q̌_{(1,…,1)}x` なら `Q̌_{(1,…,1)}y = y`。
 3 行目が引く `check_joint_eigenspace_decomposition` (1) の冪等性 `Q̌_{(1,…,1)}Q̌_{(1,…,1)} = Q̌_{(1,…,1)}` は仮定 `hidem` で受け取る

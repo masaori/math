@@ -2110,6 +2110,7 @@ targets=(
   Ising2D.matrix_one_smul
   Ising2D.matrix_one_smul_of_necSuf
   Ising2D.one_smul_tensorPow
+  Ising2D.one_smul_tensorPow_of_necSuf
   Ising2D.conj_neg_matrix
   Ising2D.conj_sub_matrix
   Ising2D.conj_neg_matrix_of_necSuf

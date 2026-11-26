@@ -69,7 +69,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerOfRealEntryMatricesHasRealEntries
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealScalarMultipleOfRealEntryMatrixHasRealEntries
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimPauliMatricesHaveRealEntries
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimSumsOfRealEntryMatricesHaveRealEntries
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
@@ -658,7 +658,7 @@ theorem boundaryYXY_transpose (r : ℕ) :
     _ = (1 : ℂ) • siteProd (r + 2) (F pauliY pauliY) := by
       rw [mul_neg_one, neg_neg]                         -- ℂ で `(-1)·(-1) = 1`（`definition_of_cc` の積）
     _ = siteProd (r + 2) (F pauliY pauliY) :=
-      one_smul_tensorPow _                              -- `scalar_multiple_by_one`（`TensorPow` の系 `one_smul_tensorPow`）
+      one_smul_tensorPow _                              -- `scalar_multiple_by_one`（`TensorPow M` の具体版 `one_smul_tensorPow`）
     _ = siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
       rw [boundaryYXYFamily_eq_ite]                     -- Step 2 の準備の `G` の表示
 
