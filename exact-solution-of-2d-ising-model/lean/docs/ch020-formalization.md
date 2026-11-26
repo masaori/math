@@ -20,7 +20,7 @@
 | --- | --- | --- |
 | (R3) 線型性・単調性 | `∫(λg+νh)=λ∫g+ν∫h`、各点 `g ≤ h` ⇒ `∫g ≤ ∫h` | `intervalIntegral.integral_add` / `integral_smul` / `integral_sub` / `integral_mono_on` |
 | (R4) 微分積分学の基本定理 | `F' = g` 連続 ⇒ `∫_a^b g = F(b)-F(a)` | `intervalIntegral.integral_eq_sub_of_hasDerivAt` |
-| (R5) 積分記号下の微分 | 有界閉長方形上で `g`, `∂g/∂x` 連続 ⇒ `(∫g)' = ∫∂g/∂x` | **そのままの形は無い。** 優関数版 `intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le` から `Ising2D/NecSuf/DiffUnderIntegral.lean` で導いた。具体版（`TheoremSecondDerivativeLogDivergence.lean` の `hasDerivAt_Gfun`・`hasDerivAt_Gfirst`）は必要十分版を使わず、証明の中で同じ優関数版に定数の上界を渡して受ける |
+| (R5) 積分記号下の微分 | 有界閉長方形上で `g`, `∂g/∂x` 連続 ⇒ `(∫g)' = ∫∂g/∂x` | **そのままの形は無い。** 優関数版 `intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_deriv_le` から `Ising2D/NecSuf/DiffUnderIntegral.lean` で導いた。具体版（`TheoremSecondDerivativeLogDivergence.lean` の `hasDerivAt_Gfun`・`hasDerivAt_Gfirst`）は必要十分版を使わず、証明の中で同じ優関数版に定数の上界を渡して受ける。特殊化としての導出は `TheoremSecondDerivativeLogDivergenceFromNecSuf.lean` |
 | (R6) 置換積分（`θ ↦ 2π-θ`） | `∫_a^b g(d-t)dt = ∫_{d-b}^{d-a} g` | `intervalIntegral.integral_comp_sub_left` |
 
 **(R5) だけが mathlib に「連続性だけを仮定した形」で存在しない。** これが必要十分版
@@ -186,6 +186,7 @@
 | `Ising2D.Gfun` / `Gfirst` / `Gsecond` | **`G(κ) := (1/4π)∫_0^{2π}γ dθ`** とその 1・2 階導関数の式 | 主張の設定 |
 | `Ising2D.hasDerivAt_Gfun` | **Step 1**: `G' = (1/4π)∫∂γ/∂κ`（(R5) 1 回目） | Step 1 |
 | `Ising2D.hasDerivAt_Gfirst` | **Step 1**: `G'' = (1/4π)∫∂²γ/∂κ²`（(R5) 2 回目） | Step 1 |
+| `Ising2D.hasDerivAt_Gfun_of_necSuf` / `hasDerivAt_Gfirst_of_necSuf`（`TheoremSecondDerivativeLogDivergenceFromNecSuf.lean`） | `hasDerivAt_Gfun`・`hasDerivAt_Gfirst` を `NecSuf.hasDerivAt_integral_of_continuousOn` の `[a,b] = [0,2π]`, `s = {x \| x ≠ 0}` への特殊化から得る | Step 1 |
 | `Ising2D.abs_Gfirst_le` | `\|G'\| ≤ 1/2`（`\|∂γ/∂κ\| ≤ 1` から） | Step 1 の系 |
 | `Ising2D.Sfun_two_pi_sub` / `d2gammaK_two_pi_sub` / `integral_fold` | **Step 2**: `θ ↦ 2π-θ` の対称性で `[0,2π]` を `[0,π]` へ折り畳む（(R6)） | Step 2 |
 | `Ising2D.Jint` / `Iint` / `Tint` | 3 つの積分 `J, I, T` の定義 | Step 3 |
@@ -265,7 +266,7 @@
 | `HyperbolicBasicPropertiesFromMonotoneMap.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshSinhBasicProperties.lean` | `cosh_sinh_basic_properties` の (1)・(2)・(3) を写像 `e` の `c = (e(x)+e(−x))·⅟2`・`s = (e(x)−e(−x))·⅟2`（`⅟2` は `2` の逆元） で述べ直すと、(1) の等式は環と `2` の可逆性（`Invertible 2`）だけで `e` に仮定は要らず、(1) の不等号は `e` の正値性だけ、(3) の `s(x) > 0` は `e` の狭義単調性だけが効く。(1)・(3) では `e(0) = 1`、`e(a+b) = e(a)e(b)`、乗法の可換律、2 以外の元の逆元は効かない。(2)（`evenPart_sq_sub_oddPart_sq'`）は (1) の等式に、`e(x)` と `e(−x)` の可換性・その 1 組での `e(−x)e(x) = e(−x+x)`・定義域の `−x + x = 0`・`e(0) = 1` だけを足し、順序と `e` の正値性・単調性は効かない |
 | `MeanValueTwoSided.lean` | `CriticalPoint/CriticalPointAndLogDivergence/ClaimKappaOfKBasic.lean` (5)（特殊化としての導出は `ClaimKappaOfKBasicFromNecSuf.lean`） | 原文は (R4)（微分積分学の基本定理）＋(R3)（積分の単調性）で `3.53\|K-K_c\| ≤ \|κ\| ≤ 4.72\|K-K_c\|` を出すが、**積分は効いていない**。効いているのは (a) 定義域が凸 (b) 導関数が定数で両側から抑えられる (c) 下界が非負、の 3 点だけで、**平均値の定理で足りる**。`κ` が Ising 模型の量であることも `arcsinh` で書けることも効いていない。 |
 | `LogDivergentIntegral.lean` | `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`（`integral_inv_sqrt_pi` の特殊化としての導出は `ClaimClosedFormLogIntegralFromNecSuf.lean`）, `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSineIntegralTwoSided.lean`（特殊化としての導出は `ClaimSineIntegralTwoSidedFromNecSuf.lean`） | **`sin` は効いていない。** 対数発散に効いているのは被積分関数の分母 `w` についての 2 つの各点評価 `c₀(aθ) ≤ w(θ) ≤ aθ` と `aθ - w(θ) ≤ Cθ³` **だけ**である。この 2 条件から差が `δ` に依存しない定数で抑えられ、発散の形は `∫_0^b dθ/√(δ²+(aθ)²) = arsinh(ab/δ)/a` という**完全に初等的な積分**だけで決まる。三角関数も周期性も `θ/2` という内部関数も効いていない。さらに原文の定数 `B = π²/(12c_0(1+c_0))` は必要十分版の `Cb²/(c_0(1+c_0)a²)` に `a=1/2, b=π, C=1/48` を入れたものと**厳密に一致する**（原文の定数は最良化されていないが、必要十分版と同じ値）。 |
-| `DiffUnderIntegral.lean` | `CriticalPoint/CriticalPointAndLogDivergence/TheoremSecondDerivativeLogDivergence.lean`（具体版はこの必要十分版を import せず、特殊化としての導出のファイルも無い） | 原文 (R5) は `[a,b]×[x_1,x_2]`（有界閉長方形）で述べているが、効いているのは (a) 積分区間がコンパクト (b) パラメータの動く範囲が `x_0` の**近傍**（閉区間である必要はない） (c) `g` と `∂g/∂x` がその上で連続、の 3 点だけである。被積分関数が `θ` について偶関数であることも、`γ` が Ising 模型に由来することも効いていない。**mathlib に (R5) のこの形は無く**、優関数版から導出する必要があった（コンパクト上の連続関数の有界性で優関数を定数に取る）。 |
+| `DiffUnderIntegral.lean` | `CriticalPoint/CriticalPointAndLogDivergence/TheoremSecondDerivativeLogDivergence.lean`（具体版はこの必要十分版を import しない。特殊化としての導出は `TheoremSecondDerivativeLogDivergenceFromNecSuf.lean`） | 原文 (R5) は `[a,b]×[x_1,x_2]`（有界閉長方形）で述べているが、効いているのは (a) 積分区間がコンパクト (b) パラメータの動く範囲が `x_0` の**近傍**（閉区間である必要はない） (c) `g` と `∂g/∂x` がその上で連続、の 3 点だけである。被積分関数が `θ` について偶関数であることも、`γ` が Ising 模型に由来することも効いていない。**mathlib に (R5) のこの形は無く**、優関数版から導出する必要があった（コンパクト上の連続関数の有界性で優関数を定数に取る）。 |
 
 ### 必要十分版を立てなかった主張とその理由
 

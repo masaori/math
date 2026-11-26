@@ -7,7 +7,8 @@
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は
 - `Ising2D/NecSuf/DiffUnderIntegral.lean`（積分記号下の微分 = 原文の (R5)。本ファイルは import せず、
-  Step 1 の `hasDerivAt_Gfun`・`hasDerivAt_Gfirst` の証明の中で (R5) を mathlib の優関数の形で受ける）
+  Step 1 の `hasDerivAt_Gfun`・`hasDerivAt_Gfirst` の証明の中で (R5) を mathlib の優関数の形で受ける。
+  特殊化としての導出は `TheoremSecondDerivativeLogDivergenceFromNecSuf.lean`）
 - `Ising2D/NecSuf/LogDivergentIntegral.lean`（対数発散の本体）
 
 Step 4〜7 の途中の定数（`|R| ≤ 1.621`・`T ≤ 3.615`・Step 6 の `2.201`・総合の `6.731`）は本文と同じである。
