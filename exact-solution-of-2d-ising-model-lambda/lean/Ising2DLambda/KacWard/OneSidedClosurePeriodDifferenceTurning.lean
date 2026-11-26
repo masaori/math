@@ -33,7 +33,125 @@ def oneSidedClosureProjectedTurning (m L : ℕ) [NeZero L]
     (oneSidedClosureLength m L wv wh t c)
     (fun j => projectedUnitStep L (W j) (W (j + 1) - W j))
 
-/-- 各部分の単位歩と三接合から、閉包の全歩の単位性を導く。 -/
+/-- 差が四つの単位格子ベクトルのいずれかであることは、成分の差の絶対値の和が一であることと同値である。 -/
+theorem latticeUnitStep_iff_abs_sum (x y : ℤ × ℤ) :
+    (y - x = (0, 1) ∨ y - x = (1, 0) ∨ y - x = (0, -1) ∨ y - x = (-1, 0)) ↔
+      |y.1 - x.1| + |y.2 - x.2| = 1 := by
+  obtain ⟨x₁, x₂⟩ := x
+  obtain ⟨y₁, y₂⟩ := y
+  simp only [Prod.mk_sub_mk, Prod.mk.injEq]
+  constructor
+  · rintro (⟨h₁, h₂⟩ | ⟨h₁, h₂⟩ | ⟨h₁, h₂⟩ | ⟨h₁, h₂⟩) <;> rw [h₁, h₂] <;> norm_num
+  · intro h
+    rcases abs_cases (y₁ - x₁) with ⟨ha, _⟩ | ⟨ha, _⟩ <;>
+      rcases abs_cases (y₂ - x₂) with ⟨hb, _⟩ | ⟨hb, _⟩ <;>
+      rw [ha, hb] at h <;> omega
+
+/-- 本文の第一部分。周期持ち上げの一歩は、商と余りの読み替えにより平面持ち上げの一歩であり、
+単位格子ベクトルである。余りが最後の添字なら端点の周期並進を代入する。 -/
+theorem periodicPlaneLift_step_unit_of_remainder
+    (m L : ℕ) [NeZero m] (base : ℤ → ℤ × ℤ) (wv wh : ℤ)
+    (γ : ZMod m → OrientedEdge L)
+    (hstep : ∀ j : ℕ, j < m →
+      base ((j : ℤ) + 1) = base j + orientedEdgeLatticeStep (γ (j : ZMod m)))
+    (hend : base m = base 0 + windingShift L wv wh) (k : ℤ) :
+    let u := periodicPlaneLift m base L wv wh (k + 1) - periodicPlaneLift m base L wv wh k
+    u = (0, 1) ∨ u = (1, 0) ∨ u = (0, -1) ∨ u = (-1, 0) := by
+  have hm : 0 < m := NeZero.pos m
+  have hmz : (m : ℤ) ≠ 0 := by omega
+  have hbase (j : ℕ) (hj : j < m) : periodicPlaneLift m base L wv wh j = base j := by
+    simp [periodicPlaneLift,
+      Int.emod_eq_of_lt (by omega : (0 : ℤ) ≤ j) (by omega : (j : ℤ) < m),
+      Int.ediv_eq_zero_of_lt (by omega : (0 : ℤ) ≤ j) (by omega : (j : ℤ) < m)]
+  have hterminal : periodicPlaneLift m base L wv wh m = base m := by
+    simp [periodicPlaneLift, Int.ediv_self hmz, hend]
+  -- 余り r の一歩: r + 1 < m なら P_{r+1} - P_r、r = m - 1 なら端点の並進で P_m - P_{m-1}
+  have hfinite (j : ℕ) (hj : j < m) :
+      periodicPlaneLift m base L wv wh ((j : ℤ) + 1) -
+          periodicPlaneLift m base L wv wh j = orientedEdgeLatticeStep (γ (j : ZMod m)) := by
+    have hnext : periodicPlaneLift m base L wv wh ((j : ℤ) + 1) = base ((j : ℤ) + 1) := by
+      by_cases hlt : j + 1 < m
+      · exact_mod_cast hbase (j + 1) hlt
+      · have heq : (j : ℤ) + 1 = m := by omega
+        rw [heq, hterminal]
+    rw [hnext, hbase j hj, hstep j hj]
+    abel
+  -- 商と余りの読み替え k = (k mod m) + (k div m)·m
+  have hdiv : k = k / (m : ℤ) * m + k % m := (Int.ediv_mul_add_emod k m).symm
+  have hleft : k + 1 = (k % m + 1) + (k / m) * m := by omega
+  have hright : k = k % m + (k / m) * m := by omega
+  have hr0 : 0 ≤ k % (m : ℤ) := Int.emod_nonneg k hmz
+  have hrm : k % (m : ℤ) < m := Int.emod_lt_of_pos k (by omega)
+  have hrcast : ((k % (m : ℤ)).toNat : ℤ) = k % m := Int.toNat_of_nonneg hr0
+  have hreduce :
+      periodicPlaneLift m base L wv wh (k + 1) - periodicPlaneLift m base L wv wh k =
+        periodicPlaneLift m base L wv wh (((k % (m : ℤ)).toNat : ℤ) + 1) -
+          periodicPlaneLift m base L wv wh ((k % (m : ℤ)).toNat : ℤ) := by
+    rw [hrcast]
+    calc
+      _ = periodicPlaneLift m base L wv wh ((k % m + 1) + (k / m) * m) -
+          periodicPlaneLift m base L wv wh (k % m + (k / m) * m) := by
+        rw [← hleft, ← hright]
+      _ = _ := by
+        rw [periodicPlaneLift_translate m L hm, periodicPlaneLift_translate m L hm]
+        simp only [add_sub_add_right_eq_sub]
+  dsimp only
+  rw [hreduce, hfinite _ (by omega)]
+  exact orientedEdgeLatticeStep_unit _
+
+/-- 本文の第三部分。平行帰路の一歩は、商と余りの読み替えにより平行階段の一歩の逆向きであり、
+単位格子ベクトルである。余りが最後の添字なら平行階段の終点が一周期の並進であることを代入する。 -/
+theorem oneSidedParallelReturn_step_unit_of_remainder (L : ℕ) (wh wv : ℤ)
+    (base : ℤ × ℤ) (c : ℕ) (hn : 0 < L * wh.natAbs + L * wv.natAbs) (s : ℕ) :
+    let u := oneSidedParallelReturn L wh wv base c (s + 1) -
+      oneSidedParallelReturn L wh wv base c s
+    u = (0, 1) ∨ u = (1, 0) ∨ u = (0, -1) ∨ u = (-1, 0) := by
+  let n := L * wh.natAbs + L * wv.natAbs
+  let path := windingParallelStaircase L wh wv
+  let period : ℤ × ℤ := ((L : ℤ) * wv, (L : ℤ) * wh)
+  have hzero : path 0 = 0 := windingParallelStaircase_zero L wh wv
+  have hend : path n = period := windingParallelStaircase_end L wh wv
+  have hrlt : s % n < n := Nat.mod_lt s hn
+  have hreduce : oneSidedParallelReturn L wh wv base c (s + 1) -
+      oneSidedParallelReturn L wh wv base c s =
+        negatedParallelStaircaseStep L wh wv (s % n) := by
+    rw [negatedParallelStaircaseStep_difference]
+    change (base + ((c : ℤ) - ((s + 1) / n : ℕ)) • period - path ((s + 1) % n)) -
+        (base + ((c : ℤ) - (s / n : ℕ)) • period - path (s % n)) =
+      -(path (s % n + 1) - path (s % n))
+    have hsucc : s + 1 = (s % n + 1) + n * (s / n) := by
+      have := Nat.mod_add_div s n
+      omega
+    have hdivbase : (s + 1) / n = (s % n + 1) / n + s / n := by
+      rw [hsucc, Nat.add_mul_div_left _ _ hn]
+    have hmodbase : (s + 1) % n = (s % n + 1) % n := by
+      rw [hsucc, Nat.add_mul_mod_self_left]
+    by_cases hbefore : s % n + 1 < n
+    · -- 余りが n - 2 以下: 同じ周期の中の一歩
+      have hdiv : (s + 1) / n = s / n := by
+        rw [hdivbase, Nat.div_eq_of_lt hbefore, zero_add]
+      have hmod : (s + 1) % n = s % n + 1 := by
+        rw [hmodbase, Nat.mod_eq_of_lt hbefore]
+      rw [hdiv, hmod]
+      abel
+    · -- 余りが n - 1: 次の周期の先頭へ移る一歩
+      have hrequiv : s % n + 1 = n := by omega
+      have hdiv : (s + 1) / n = s / n + 1 := by
+        rw [hdivbase, hrequiv, Nat.div_self hn]
+        omega
+      have hmod : (s + 1) % n = 0 := by
+        rw [hmodbase, hrequiv, Nat.mod_self]
+      rw [hdiv, hmod, hzero, hrequiv, hend]
+      simp only [Nat.cast_add, Nat.cast_one, sub_smul, add_smul, one_smul]
+      abel
+  dsimp only
+  rw [hreduce]
+  exact (negatedParallelStaircaseStep_unit_negative L wh wv (s % n) hrlt).1
+
+/-- `claim_one_sided_periodic_lift_closure_closed_unit_steps` を実際の一側閉包に当てたもの。
+本文と同じく、四部分の三接合と始点・終点の一致を定義から確かめ、各部分の一歩が単位格子ベクトルで
+あること（第一部分は商と余りの読み替え、第二・第四部分は反復横断階段の一歩、第三部分は平行階段の
+一歩の逆向き）を `oneSidedPeriodicLiftClosure_closed_unit_steps` へ代入する。 -/
 theorem oneSidedClosurePoint_unit_steps
     (m L : ℕ) [NeZero m] (base : ℤ → ℤ × ℤ) (wv wh k₀ : ℤ) (t c : ℕ)
     (γ : ZMod m → OrientedEdge L)
@@ -53,57 +171,76 @@ theorem oneSidedClosurePoint_unit_steps
   let q := iteratedTransverseStaircase wh wv (S + c • windingShift L wv wh)
   let r := oneSidedParallelReturn L wh wv (S + t • (wh, -wv)) c
   let s := iteratedTransverseStaircase wh wv S
-  let unit := fun u : ℤ × ℤ =>
-    u = (0, 1) ∨ u = (1, 0) ∨ u = (0, -1) ∨ u = (-1, 0)
   have hm : 0 < m := NeZero.pos m
+  have htrans : 0 < wh.natAbs + wv.natAbs := by
+    by_contra hz
+    have hz' : wh.natAbs + wv.natAbs = 0 := by omega
+    simp [hz'] at hb
   have hwind : (wh, wv) ≠ (0, 0) := by
     intro h
     have hh : wh = 0 := congrArg Prod.fst h
     have hv : wv = 0 := congrArg Prod.snd h
     simp [hh, hv] at hb
-  have hu (i : ℕ) : unit (p (i + 1) - p i) := by
-    have h := periodicPlaneLift_step_edgeDisplacement m L base wv wh γ hstep hend (k₀ + i)
+  have hzeroT (B : ℤ × ℤ) : iteratedTransverseStaircase wh wv B 0 = B := by
+    simp [iteratedTransverseStaircase, iteratedStaircase,
+      windingTransverseStaircase, twoPhaseStaircase]
+  have hmultT (B : ℤ × ℤ) : iteratedTransverseStaircase wh wv B b = B + t • (wh, -wv) := by
+    simp [b, iteratedTransverseStaircase, iteratedStaircase, Nat.mul_div_cancel _ htrans,
+      windingTransverseStaircase, twoPhaseStaircase]
+  -- 三接合と始点の一致（本文の前半の式鎖）
+  have h12 : p (c * m) = q 0 := by
+    change _ = iteratedTransverseStaircase wh wv (S + c • windingShift L wv wh) 0
+    rw [hzeroT]
+    simpa [p, S, Nat.cast_mul] using
+      periodicPlaneLift_translate m L hm base wv wh k₀ (c : ℤ)
+  have h23 : q b = r 0 := by
+    change iteratedTransverseStaircase wh wv (S + c • windingShift L wv wh) b =
+      oneSidedParallelReturn L wh wv (S + t • (wh, -wv)) c 0
+    rw [hmultT]
+    simp only [oneSidedParallelReturn, Nat.zero_div, Nat.cast_zero, sub_zero,
+      Nat.zero_mod, windingParallelStaircase_zero, sub_zero, windingShift]
+    simp only [natCast_zsmul]
+    abel
+  have h34 : r (c * n) = s b := by
+    change oneSidedParallelReturn L wh wv (S + t • (wh, -wv)) c (c * n) =
+      iteratedTransverseStaircase wh wv S b
+    rw [hmultT]
+    simp [oneSidedParallelReturn, n, Nat.mul_div_cancel _ hn,
+      windingParallelStaircase_zero]
+  have h41 : s 0 = p 0 := hzeroT S
+  -- 各部分の一歩（本文の後半）
+  have hu : ∀ i < c * m, |(p (i + 1)).1 - (p i).1| + |(p (i + 1)).2 - (p i).2| = 1 := by
+    intro i _
     have he : k₀ + ((i + 1 : ℕ) : ℤ) = k₀ + i + 1 := by push_cast; ring
-    change unit (periodicPlaneLift m base L wv wh (k₀ + (i + 1 : ℕ)) -
-      periodicPlaneLift m base L wv wh (k₀ + i))
-    rw [he, h]
-    exact orientedEdgeLatticeStep_unit _
-  have hv (i : ℕ) : unit (q (i + 1) - q i) := by
-    have h := iteratedTransverseStaircase_unit_step wh wv
-      (S + c • windingShift L wv wh) hwind i
-    rcases h with h | h | h | h
+    have h := periodicPlaneLift_step_unit_of_remainder m L base wv wh γ hstep hend (k₀ + i)
+    rw [← he] at h
+    exact (latticeUnitStep_iff_abs_sum _ _).1 h
+  have hv : ∀ i < b, |(q (i + 1)).1 - (q i).1| + |(q (i + 1)).2 - (q i).2| = 1 := by
+    intro i _
+    apply (latticeUnitStep_iff_abs_sum _ _).1
+    rcases iteratedTransverseStaircase_unit_step wh wv
+      (S + c • windingShift L wv wh) hwind i with h | h | h | h
     · exact Or.inr (Or.inl h)
     · exact Or.inr (Or.inr (Or.inr h))
     · exact Or.inl h
     · exact Or.inr (Or.inr (Or.inl h))
-  have hr (i : ℕ) : unit (r (i + 1) - r i) := by
-    rw [oneSidedParallelReturn_step L wh wv (S + t • (wh, -wv)) c hn i]
-    exact (negatedParallelStaircaseStep_unit_negative L wh wv (i % n)
-      (Nat.mod_lt i hn)).1
-  have hx (i : ℕ) (hi : i < b) : unit (s (b - (i + 1)) - s (b - i)) := by
-    have he : b - i = b - (i + 1) + 1 := by omega
-    rw [he, ← neg_sub]
-    have h := iteratedTransverseStaircase_unit_step wh wv S hwind (b - (i + 1))
-    rcases h with h | h | h | h <;> change unit (- _) <;> rw [h] <;> norm_num [unit]
-  obtain ⟨h12, h23, h34, _, _, _, _⟩ :=
-    oneSidedClosure_concrete_parts m L base wv wh k₀ t c hm hn hb
+  have hr : ∀ i < c * n, |(r (i + 1)).1 - (r i).1| + |(r (i + 1)).2 - (r i).2| = 1 := by
+    intro i _
+    exact (latticeUnitStep_iff_abs_sum _ _).1
+      (oneSidedParallelReturn_step_unit_of_remainder L wh wv (S + t • (wh, -wv)) c hn i)
+  have hx : ∀ i < b, |(s (i + 1)).1 - (s i).1| + |(s (i + 1)).2 - (s i).2| = 1 := by
+    intro i _
+    apply (latticeUnitStep_iff_abs_sum _ _).1
+    rcases iteratedTransverseStaircase_unit_step wh wv S hwind i with h | h | h | h
+    · exact Or.inr (Or.inl h)
+    · exact Or.inr (Or.inr (Or.inr h))
+    · exact Or.inl h
+    · exact Or.inr (Or.inr (Or.inl h))
+  obtain ⟨_, _, hall⟩ := oneSidedPeriodicLiftClosure_closed_unit_steps p q r s (c * m) b (c * n)
+    (Nat.mul_pos hc hm) hb (Nat.mul_pos hc hn) h12 h23 h34 h41 hu hv hr hx
   intro j hj
-  change unit (oneSidedPeriodicLiftClosure p q r s (c * m) b (c * n) (j + 1) -
-    oneSidedPeriodicLiftClosure p q r s (c * m) b (c * n) j)
   change j < c * m + b + c * n + b at hj
-  rw [oneSidedClosure_stepSequence p q r s (c * m) b (c * n)
-    (Nat.mul_pos hc hm) hb (Nat.mul_pos hc hn) h12 h23 h34 j (by omega)]
-  by_cases hja : j < c * m
-  · simpa only [joinDirectionSequence, if_pos (show j < c * m + b + c * n by omega),
-      if_pos (show j < c * m + b by omega), if_pos hja] using hu j
-  · by_cases hjab : j < c * m + b
-    · simpa only [joinDirectionSequence, if_pos (show j < c * m + b + c * n by omega),
-        if_pos hjab, if_neg hja] using hv (j - c * m)
-    · by_cases hjabc : j < c * m + b + c * n
-      · simpa only [joinDirectionSequence, if_pos hjabc, if_neg hjab] using
-          hr (j - (c * m + b))
-      · simpa only [joinDirectionSequence, if_neg hjabc] using
-          hx (j - (c * m + b + c * n)) (by omega)
+  exact (latticeUnitStep_iff_abs_sum _ _).2 (hall j (by omega))
 
 /-- 射影の回転和を、実際の格子歩の回転和へ同定する。 -/
 theorem oneSidedClosureProjectedTurning_eq_lattice

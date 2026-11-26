@@ -93519,6 +93519,8 @@ D^{\gamma,S,t}_{N-j},&cm+t\,n_{\perp}+c\,n_{\parallel}\le j\le N.
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps",
+                      "Ising2DLambda.KacWard.oneSidedClosurePoint_unit_steps",
+                      "Ising2DLambda.KacWard.oneSidedClosureFromWalk_unit_steps",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segments_closed_steps_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps_from_necSuf",
                     ],
