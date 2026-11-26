@@ -112616,7 +112616,7 @@ D
 &=\left(2\cdot(u\cdot u)+2\cdot(v\cdot v)\right)-\left(u\cdot u+2\cdot(u\cdot v)+v\cdot v\right)
 &&(\because\ R\ \text{の分配則と積の可換則（展開）})\\
 &=u\cdot u-2\cdot(u\cdot v)+v\cdot v
-&&(\because\ R\ \text{の加法（同じ項をまとめる。}2:=1+1\text{）})\\
+&&(\because\ R\ \text{の加法（同じ項をまとめ、}2:=1+1\text{）})\\
 &=(u-v)\cdot(u-v)
 &&(\because\ R\ \text{の分配則と積の可換則（因数分解）})
 \end{aligned}`),
