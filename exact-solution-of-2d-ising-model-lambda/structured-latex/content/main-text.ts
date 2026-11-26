@@ -18144,7 +18144,12 @@ p&\le d&&\bigl(\because\ 0<d\text{ と帰還の等式、}\blkref{def_finite_perm
                       title: { text: "有限置換の軌道の台" },
                       labels: ["def_finite_permutation_orbit"],
                       habitat: "N",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit"],
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit",
+                        "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_self_mem",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_self_mem_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_self_mem_from_necSuf",
+                      ],
                       verification: ["sagemath/check/invariant-subset-reversal-orbit"],
                       statement: [
                         paragraph(["有限集合 ", math(String.raw`\mathcal J`), "（空集合も許す）と置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " を固定する。始点 ", math(String.raw`i\in\mathcal J`), " の軌道の台を次の部分集合として定める。反復は ", ref("def_finite_map_iteration"), " の意味である。"]),
@@ -18154,6 +18159,9 @@ p&\le d&&\bigl(\because\ 0<d\text{ と帰還の等式、}\blkref{def_finite_perm
 \sigma^{[n]}(i)=j\ \lor\ (\sigma^{-1})^{[n]}(i)=j
 \right\}.`),
                         paragraph(["これは、始点から置換を順向き、または逆向きに有限回たどって到達する点の集合である。零回も許す。台は有限集合 ", math(String.raw`\mathcal J`), " の部分集合なので有限である。"]),
+                        paragraph(["零回の順向きの反復を証人に取ると、任意の始点 ", math(String.raw`i\in\mathcal J`), " について"]),
+                        displayMath(String.raw`\sigma^{[0]}(i)=i\qquad\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)`),
+                        paragraph(["なので、", math(String.raw`i\in\operatorname{Orb}_{\sigma}(i)`), " である。"]),
                       ],
                     },
                   }, {
@@ -18427,19 +18435,16 @@ j\in\operatorname{Orb}_{\sigma}(i)
                     lean: [
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_iterate_mem_iff",
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_inverse_iterate_mem_iff",
-                      "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_self_mem",
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_subset_of_mem",
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_mem_symm",
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_basepoint",
                       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_iterate_mem_iff_necSuf",
                       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_inverse_iterate_mem_iff_necSuf",
-                      "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_self_mem_necSuf",
                       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_subset_of_mem_necSuf",
                       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_mem_symm_necSuf",
                       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_basepoint_necSuf",
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_iterate_mem_iff_from_necSuf",
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_inverse_iterate_mem_iff_from_necSuf",
-                      "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_self_mem_from_necSuf",
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_subset_of_mem_from_necSuf",
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_mem_symm_from_necSuf",
                       "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_basepoint_from_necSuf",
