@@ -235,8 +235,10 @@ theorem commute_xString_of_commute_sigmaX (A : TensorPow M) :
     ∀ r : ℕ, ∀ hr : r ≤ M, (∀ i : ℕ, ∀ hi : i < r, A * sigmaX ⟨i, by omega⟩ = sigmaX ⟨i, by omega⟩ * A) →
       A * xString M r = xString M r * A
   | 0, _, _ => by
-    rw [xString_zero, mul_identity_matrix_tensorPow, identity_matrix_mul_tensorPow]
-    -- `AI = A = IA`（`identity_matrix_is_right_unit_of_mat_mult`・`identity_matrix_is_left_unit_of_mat_mult` にあたる）
+    rw [xString_zero, mul_identity_matrix_tensorPow_of_necSuf, identity_matrix_mul_tensorPow_of_necSuf]
+    -- `AI = A = IA`。Lean は空の積 `P_0` を `I` と置くが、本文は空の積を定義せず `Z_1 = σ_1^z` から始めるので、
+    -- この段は本文に無い Lean だけの段である。具体版の単位律を引くと本文が引かない主張を使うことになるので、導出のままにしてある
+    -- （状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の備考）。
   | r + 1, h, hc =>
     calc A * xString M (r + 1)
         = A * (xString M r * sigmaX ⟨r, h⟩) := by rw [xString_succ r h]   -- `P_{r+1} = P_rσ_{r+1}^x`

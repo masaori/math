@@ -16,12 +16,12 @@
 
 - 行列は `TensorPow M`（添字 `Conf M`）で述べ、人手の `n` は `2^M` に限る。使う側（`trace_power_upper_bound`・
   `power_of_real_symmetric_complex_matrix_is_real_symmetric` の `A → W`）が `TensorPow M` の行列だからである。
-  添字が `Conf M` なので、`identity_matrix_is_right_unit_of_mat_mult` は必要十分版を添字 `Conf M` へ特殊化した系
-  `mul_identity_matrix_tensorPow` を引く（`ClaimExpOfSymmetricIsSymmetric.lean` と同じ扱い）。
+  添字が `Conf M` なので、`identity_matrix_is_right_unit_of_mat_mult` は `TensorPow M` での具体版
+  `mul_identity_matrix_tensorPow`（`ClaimIdentityAndScalarMultipleInTensorPowProduct.lean`）を引く。
 - `def_exp` (1) の冪 `A^0 := I`・`A^{m+1} := A^mA` は mathlib の `pow_zero`・`pow_succ`（`a^{m+1} = a^m a`）と同じ形である。
 - `mat_mult_associative` は本文に Lean の具体版が無く、他のファイルと同じく mathlib の `Matrix.mul_assoc` を引く。
 -/
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
 
 namespace Ising2D
 

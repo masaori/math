@@ -9,7 +9,7 @@
 `Conf M` の行列には当てはまらないためである。
 -/
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionInvertibleElementsProduct
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
 import Ising2D.NecSuf.InvertibleElementsProduct
 
 namespace Ising2D

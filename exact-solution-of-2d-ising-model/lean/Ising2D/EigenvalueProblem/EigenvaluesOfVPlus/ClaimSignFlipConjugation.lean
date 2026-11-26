@@ -31,6 +31,7 @@ Lean では境界項の係数を引数 `η` に持たせた一般形 `Uflip_conj
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleOfNegatedMatrixFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
@@ -115,7 +116,8 @@ theorem Uflip_mul_inv : Uflip M * UflipInv M = 1 :=
                                                         -- `mat_mult_associative`
     _ = (Eflip M * 1) * Eflip M := by rw [Fflip_mul_self]
                                                         -- `g_2g_2^{-1} = I`（`FF = I`）
-    _ = Eflip M * Eflip M := by rw [mul_identity_matrix_tensorPow]
+    _ = Eflip M * Eflip M := by rw [mul_identity_matrix_tensorPow_of_necSuf]
+                                                        -- 本文 `conjugation_commutes_with_matrix_exp`・`constant_c_value_even_sector` がこの単位律を引かないので導出を使う（状態台帳の分離の行の備考）
                                                         -- `identity_matrix_is_right_unit_of_mat_mult`
     _ = 1 := Eflip_mul_self                             -- `g_1g_1^{-1} = I`（`EE = I`）
 
@@ -131,7 +133,8 @@ theorem UflipInv_mul : UflipInv M * Uflip M = 1 :=
                                                         -- `mat_mult_associative`
     _ = (Fflip M * 1) * Fflip M := by rw [Eflip_mul_self]
                                                         -- `g_1^{-1}g_1 = I`（`EE = I`）
-    _ = Fflip M * Fflip M := by rw [mul_identity_matrix_tensorPow]
+    _ = Fflip M * Fflip M := by rw [mul_identity_matrix_tensorPow_of_necSuf]
+                                                        -- 本文 `conjugation_commutes_with_matrix_exp`・`constant_c_value_even_sector` がこの単位律を引かないので導出を使う（状態台帳の分離の行の備考）
                                                         -- `identity_matrix_is_right_unit_of_mat_mult`
     _ = 1 := Fflip_mul_self                             -- `g_2^{-1}g_2 = I`（`FF = I`）
 
@@ -586,9 +589,10 @@ theorem Uflip_conj_smul (c : ℂ) (A : TensorPow M) :
     Uflip M * (c • A) * UflipInv M = c • (Uflip M * A * UflipInv M) :=
   calc Uflip M * (c • A) * UflipInv M
       = (c • (Uflip M * A)) * UflipInv M := by
-        rw [mul_smul_matrix_tensorPow]                                       -- `scalar_multiple_factors_out_of_right_factor`
+        -- 本文 `conjugation_commutes_with_matrix_exp` がスカラー倍の法則を引かないので、この補題の 2 段は導出を使う（状態台帳の分離の行の備考）
+        rw [mul_smul_matrix_tensorPow_of_necSuf]                                       -- `scalar_multiple_factors_out_of_right_factor`
     _ = c • (Uflip M * A * UflipInv M) :=
-        smul_mul_matrix_tensorPow _ _ _                                      -- `scalar_multiple_factors_out_of_left_factor`
+        smul_mul_matrix_tensorPow_of_necSuf _ _ _                                      -- `scalar_multiple_factors_out_of_left_factor`
 
 theorem Uflip_conj_sum {ι : Type*} (s : Finset ι) (f : ι → TensorPow M) :
     Uflip M * (∑ i ∈ s, f i) * UflipInv M = ∑ i ∈ s, Uflip M * f i * UflipInv M := by

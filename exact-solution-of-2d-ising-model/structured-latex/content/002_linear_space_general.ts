@@ -794,7 +794,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "単位行列を左から掛けても変わらない" },
     labels: ["identity_matrix_is_left_unit_of_mat_mult"],
-    lean: ["Ising2D.identity_matrix_mul", "Ising2D.identity_matrix_mulVec", "Ising2D.identity_matrix_mulVec_apply", "Ising2D.identity_matrix_mul_apply"],
+    lean: ["Ising2D.identity_matrix_mul", "Ising2D.identity_matrix_mulVec", "Ising2D.identity_matrix_mulVec_apply", "Ising2D.identity_matrix_mul_apply", "Ising2D.identity_matrix_mul_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -852,7 +852,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "単位行列を右から掛けても変わらない" },
     labels: ["identity_matrix_is_right_unit_of_mat_mult"],
-    lean: ["Ising2D.mul_identity_matrix", "Ising2D.mul_identity_matrix_apply"],
+    lean: ["Ising2D.mul_identity_matrix", "Ising2D.mul_identity_matrix_apply", "Ising2D.mul_identity_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -912,7 +912,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "左の因子のスカラー倍は行列の積の外へ出せる" },
     labels: ["scalar_multiple_factors_out_of_left_factor"],
-    lean: ["Ising2D.smul_mul_matrix", "Ising2D.smul_mul_matrix_apply", "Ising2D.smul_mulVec_eq", "Ising2D.smul_mulVec_eq_apply"],
+    lean: ["Ising2D.smul_mul_matrix", "Ising2D.smul_mul_matrix_apply", "Ising2D.smul_mulVec_eq", "Ising2D.smul_mulVec_eq_apply", "Ising2D.smul_mul_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -972,7 +972,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "右の因子のスカラー倍は行列の積の外へ出せる" },
     labels: ["scalar_multiple_factors_out_of_right_factor"],
-    lean: ["Ising2D.mul_smul_matrix", "Ising2D.mul_smul_matrix_apply"],
+    lean: ["Ising2D.mul_smul_matrix", "Ising2D.mul_smul_matrix_apply", "Ising2D.mul_smul_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),

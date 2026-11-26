@@ -58,9 +58,9 @@
 
 * Step 1 の `identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`・
   `matrix_difference_zero_iff_equal` の `⟸` の段は、`identity_matrix_mul_tensorPow`・`mul_identity_matrix_tensorPow`
-  （`ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf.lean`）・`matrix_sub_eq_zero_iff_tensorPow`
-  （`ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf.lean`）で閉じる。具体版は添字が `Fin m` の行列について述べてあり、
-  Lean の `TensorPow M` は添字を `Conf M` に取るので、同じ手順の必要十分版を `Conf M` へ特殊化した系を使う。
+  （具体版。`ClaimIdentityAndScalarMultipleInTensorPowProduct.lean`）・`matrix_sub_eq_zero_iff_tensorPow`
+  （`ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf.lean`）で閉じる。差の段は、具体版が添字が `Fin m` の行列について
+  述べてあり Lean の `TensorPow M` は添字を `Conf M` に取るので、同じ手順の必要十分版を `Conf M` へ特殊化した系を使う。
 
 ## 添字の扱い
 
@@ -77,7 +77,7 @@ Lean の定義 `lastSign`・`nextSite` の仮定（値の `m.val + 1 = M` など
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
 
 namespace Ising2D

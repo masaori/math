@@ -10,7 +10,7 @@
 `finite_product_of_identity_matrices` は人手どおり添字が `Fin n` の行列について述べてあり、`Conf M` の行列には当てはまらないためである。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatrices
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
 import Ising2D.NecSuf.FiniteProductLeft
 
 namespace Ising2D

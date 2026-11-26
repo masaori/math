@@ -3,7 +3,8 @@
 
 具体版: `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityAndScalarMultipleInMatrixProduct.lean`
 （人手 `identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`・
-`scalar_multiple_factors_out_of_left_factor`・`scalar_multiple_factors_out_of_right_factor`）。
+`scalar_multiple_factors_out_of_left_factor`・`scalar_multiple_factors_out_of_right_factor`）と、その `TensorPow M` での具体版
+`Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityAndScalarMultipleInTensorPowProduct.lean`。
 具体版をこのファイルの系として導くのは
 `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf.lean`。
 

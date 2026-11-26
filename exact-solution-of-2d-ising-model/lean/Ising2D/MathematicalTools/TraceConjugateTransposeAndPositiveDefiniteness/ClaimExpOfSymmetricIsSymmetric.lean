@@ -20,8 +20,9 @@
 
 * 行列は `TensorPow M`（添字 `Conf M`）で述べる。使う側（`W_is_real_symmetric_positive_definite` の Step 2 の `B = exp(½K_1D)`・`A = exp(S_2)`）が
   `TensorPow M` の `matExp` だからである。人手の `n` は `2^{M_col}` にあたる。添字が `Conf M` なので、
-  `transpose_of_matrix_product`・`transpose_preserves_matrix_limits`・`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult` は、
-  必要十分版を添字 `Conf M` へ特殊化した系 `transpose_mul_tensorPow`・`transpose_tendsto_tensorPow`・`identity_matrix_mul_tensorPow`・`mul_identity_matrix_tensorPow` を引く。
+  `transpose_of_matrix_product`・`transpose_preserves_matrix_limits` は、必要十分版を添字 `Conf M` へ特殊化した系 `transpose_mul_tensorPow`・`transpose_tendsto_tensorPow` を引く。
+  `identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult` は、`TensorPow M` での具体版 `identity_matrix_mul_tensorPow`・`mul_identity_matrix_tensorPow`
+  （`ClaimIdentityAndScalarMultipleInTensorPowProduct.lean`）を引く。
 * `def_exp` (1) の冪 `A^0 := I`・`A^{m+1} := A^mA` は mathlib の `pow_zero`・`pow_succ`（`a^{m+1} = a^m a`）と同じ形である。
   `mat_mult_associative` は本文に Lean の具体版が無く、他のファイルと同じく mathlib の `Matrix.mul_assoc` を引く。
 * 部分和の成分の式は、人手が `def_matrix_sum` を項の数についての帰納法で、`def_matrix_scalar_multiple` を各項へ当てはめて得ている段で、
@@ -35,6 +36,8 @@
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTransposePreservesMatrixNormAndLimitsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTransposeOfMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
+-- 次の導出の import はこのファイルでは使わない。`ClaimPositiveDefinite.lean` の `commute_xString_of_commute_sigmaX` の r = 0 の段へ導出を届けるために残す（状態台帳の分離の行の備考）。
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.Representation
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices

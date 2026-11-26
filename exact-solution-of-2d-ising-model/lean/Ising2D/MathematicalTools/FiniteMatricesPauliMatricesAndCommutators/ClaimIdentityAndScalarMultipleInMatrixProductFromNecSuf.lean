@@ -6,8 +6,8 @@
 人手のラベルは `identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`・
 `scalar_multiple_factors_out_of_left_factor`・`scalar_multiple_factors_out_of_right_factor`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin m` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。
+`TensorPow M`（添字 `Conf M`）の具体版 `ClaimIdentityAndScalarMultipleInTensorPowProduct.lean` の四つの主張も、同じ必要十分版の
+添字 `Conf M` の特殊化として得る（`*_tensorPow_of_necSuf`）。
 -/
 import Ising2D.NecSuf.MatrixProductIdentityAndScalar
 import Ising2D.Basic
@@ -35,20 +35,20 @@ theorem mul_smul_matrix_of_necSuf {m n p : ℕ} (a : ℂ) (A : Matrix (Fin m) (F
     (B : Matrix (Fin n) (Fin p) ℂ) : A * (a • B) = a • (A * B) :=
   NecSuf.mul_smul_matrix' a A B
 
-/-- `identity_matrix_is_left_unit_of_mat_mult` の `TensorPow M` での系（`NecSuf.one_mul_matrix` の添字 `Conf M` の特殊化）。 -/
-theorem identity_matrix_mul_tensorPow {M : ℕ} (A : TensorPow M) : (1 : TensorPow M) * A = A :=
+/-- 具体版 `identity_matrix_mul_tensorPow`（`identity_matrix_is_left_unit_of_mat_mult` の `TensorPow M` での具体版）を `NecSuf.one_mul_matrix` の添字 `Conf M` の特殊化として得る。 -/
+theorem identity_matrix_mul_tensorPow_of_necSuf {M : ℕ} (A : TensorPow M) : (1 : TensorPow M) * A = A :=
   NecSuf.one_mul_matrix A
 
-/-- `identity_matrix_is_right_unit_of_mat_mult` の `TensorPow M` での系（`NecSuf.mul_one_matrix` の添字 `Conf M` の特殊化）。 -/
-theorem mul_identity_matrix_tensorPow {M : ℕ} (A : TensorPow M) : A * (1 : TensorPow M) = A :=
+/-- 具体版 `mul_identity_matrix_tensorPow`（`identity_matrix_is_right_unit_of_mat_mult` の `TensorPow M` での具体版）を `NecSuf.mul_one_matrix` の添字 `Conf M` の特殊化として得る。 -/
+theorem mul_identity_matrix_tensorPow_of_necSuf {M : ℕ} (A : TensorPow M) : A * (1 : TensorPow M) = A :=
   NecSuf.mul_one_matrix A
 
-/-- `scalar_multiple_factors_out_of_left_factor` の `TensorPow M` での系（`NecSuf.smul_mul_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem smul_mul_matrix_tensorPow {M : ℕ} (a : ℂ) (A B : TensorPow M) : (a • A) * B = a • (A * B) :=
+/-- 具体版 `smul_mul_matrix_tensorPow`（`scalar_multiple_factors_out_of_left_factor` の `TensorPow M` での具体版）を `NecSuf.smul_mul_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem smul_mul_matrix_tensorPow_of_necSuf {M : ℕ} (a : ℂ) (A B : TensorPow M) : (a • A) * B = a • (A * B) :=
   NecSuf.smul_mul_matrix' a A B
 
-/-- `scalar_multiple_factors_out_of_right_factor` の `TensorPow M` での系（`NecSuf.mul_smul_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem mul_smul_matrix_tensorPow {M : ℕ} (a : ℂ) (A B : TensorPow M) : A * (a • B) = a • (A * B) :=
+/-- 具体版 `mul_smul_matrix_tensorPow`（`scalar_multiple_factors_out_of_right_factor` の `TensorPow M` での具体版）を `NecSuf.mul_smul_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem mul_smul_matrix_tensorPow_of_necSuf {M : ℕ} (a : ℂ) (A B : TensorPow M) : A * (a • B) = a • (A * B) :=
   NecSuf.mul_smul_matrix' a A B
 
 /-- `identity_matrix_is_left_unit_of_mat_mult`（`n → 1`）の、`TensorPow M` と `2^M` 行 1 列の行列（添字 `Conf M` と `Fin 1`）での系
