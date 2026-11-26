@@ -57,8 +57,9 @@ theorem projectedCycleSupportUnion_eq_complement {L : ℕ} (z : Qbar)
         (matchingPairSecondColor_alternates τ υ i).2 hfirst
       have hjcycle : j ∈ concreteAlternatingComponent D t i := by
         change j ∈ matchingPairComponent τ υ i
+        -- 本文: 軌道の定義の零回の反復。
         have hτ : τ.val i ∈ finitePermutationOrbit (matchingPairStep τ υ) (τ.val i) :=
-          finitePermutationOrbit_self_mem _ _
+          ⟨0, Or.inl rfl⟩
         have hp := (finitePermutationOrbit_invariant (matchingPairStep τ υ)
           (τ.val i) (τ.val i)).mpr hτ
         change υ.val (τ.val (τ.val i)) ∈

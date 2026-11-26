@@ -99507,7 +99507,8 @@ w_k
 &=\iota(e_0)&&\bigl(\because\ \blkref{claim_projected_edge_cycle_closure}\bigr)\\
 &=w_0&&\bigl(\because\ w_r\text{ の定義}\bigr)
 \end{aligned}`),
-                      paragraph([math(String.raw`0\le r<k`), " を固定する。", ref("claim_tagged_difference_alternating_cycle"), " の第一色の ", math(String.raw`c(2r)`), " の短い相手は、", ref("def_matching_pair_successor"), " と ", ref("claim_matching_pair_successor_color"), " により ", math(String.raw`c(2r+1)`), " である。"]),
+                      paragraph([ref("claim_matching_pair_permutation"), " により ", math(String.raw`\sigma`), " は置換である。", ref("def_matching_pair_component_minimum"), " により ", math(String.raw`m`), " は活動点を含む二歩軌道の合併に属するので、", ref("claim_matching_pair_component_basepoint"), " により ", math(String.raw`m`), " を含む合併の最小元は ", math(String.raw`m`), " 自身である。", ref("def_finite_permutation_orbit"), " の零回の反復と ", ref("def_matching_pair_coloring"), " により ", math(String.raw`c(0)=m`), " は第一色である。", ref("claim_matching_pair_successor_color"), " により後続置換の一歩ごとに色が反転し、", ref("claim_finite_map_iterate_add"), " により ", math(String.raw`c(r+1)=\sigma(c(r))`), " なので、", math(String.raw`r`), " についての帰納法で偶数番目の ", math(String.raw`e_r=c(2r)`), " は第一色である。"]),
+                      paragraph([math(String.raw`0\le r<k`), " を固定する。", ref("def_matching_pair_successor"), " により後続置換は第一色の点で短い相手を取るので、第一色の ", math(String.raw`c(2r)`), " の短い相手は ", math(String.raw`\sigma(c(2r))=c(2r+1)`), " である。"]),
                       displayMath(String.raw`\begin{aligned}
 w_{r+1}
 &=\iota(c(2r+2))
@@ -99517,7 +99518,7 @@ w_{r+1}
 &=c(2r+1)
 &&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)
 \end{aligned}`),
-                      paragraph(["短い対の二端は始点を共有して相異なる（", ref("claim_tagged_matching_nonzero_support"), "）。短い対の順序が逆であってもこの二条件は同じである。反転辺の端点計算は ", ref("claim_tagged_short_pair_successor"), " と同じであり、"]),
+                      paragraph([math(String.raw`c(2r)`), " は活動点の上の後続置換の反復なので活動点であり、", ref("claim_tagged_symmetric_difference_active_vertices"), " により ", math(String.raw`D`), " で ", math(String.raw`c(2r)`), " を含む唯一の対の標識は短い。この対を昇順対 ", math(String.raw`(\vec g,\vec f)\in T`), " として取る（", ref("claim_perfect_matching_enumeration_complete"), "）。", ref("claim_perfect_matching_involution"), " により相手の相手は自分なので、", math(String.raw`\{\vec g,\vec f\}=\{c(2r),c(2r+1)\}`), " である。", math(String.raw`(\vec g,\vec f)=(c(2r),c(2r+1))`), " なら、", ref("claim_tagged_short_pair_successor"), " により ", math(String.raw`w_{r+1}=c(2r+1)\in\operatorname{Next}(\iota(c(2r)))=\operatorname{Next}(w_r)`), " である。", math(String.raw`(\vec g,\vec f)=(c(2r+1),c(2r))`), " なら、短い対の二端は始点を共有して相異なる（", ref("claim_tagged_matching_nonzero_support"), "）ので、"]),
                       displayMath(String.raw`\begin{aligned}
 \operatorname{tgt}(w_r)
 &=\operatorname{src}(c(2r))
@@ -99527,7 +99528,7 @@ w_{r+1}
 &=\operatorname{src}(w_{r+1})
 &&\bigl(\because\ w_{r+1}=c(2r+1)\bigr)
 \end{aligned}`),
-                      paragraph([ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`c(2r+1)\ne c(2r)`), " である。", math(String.raw`w_{r+1}=c(2r+1)`), " は上で示し、", math(String.raw`\iota(w_r)=c(2r)`), " は ", ref("claim_reversal_is_involution"), " と ", math(String.raw`w_r=\iota(c(2r))`), " から従う。よって ", math(String.raw`w_{r+1}\ne\iota(w_r)`), " である。", ref("def_nonbacktracking_successors"), " により ", math(String.raw`w_{r+1}\in\operatorname{Next}(w_r)`), " を得る。", math(String.raw`r=k-1`), " では ", math(String.raw`w_k=w_0`), " なので周期境界の接続となる。辺長一でも長短の標識を区別する。"]),
+                      paragraph([ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`c(2r+1)\ne c(2r)`), " である。", math(String.raw`w_{r+1}=c(2r+1)`), " は上で示し、", math(String.raw`\iota(w_r)=c(2r)`), " は ", ref("claim_reversal_is_involution"), " と ", math(String.raw`w_r=\iota(c(2r))`), " から従う。よって ", math(String.raw`w_{r+1}\ne\iota(w_r)`), " である。", ref("def_nonbacktracking_successors"), " により ", math(String.raw`w_{r+1}\in\operatorname{Next}(w_r)`), " を得る。どちらの順序でも ", math(String.raw`w_{r+1}\in\operatorname{Next}(w_r)`), " である。", math(String.raw`r=k-1`), " では ", math(String.raw`w_k=w_0`), " なので周期境界の接続となる。辺長一でも長短の標識を区別する。"]),
                     ],
                   },
                 },
@@ -99672,7 +99673,7 @@ e
 &=p(w_{C,r})
 &&\bigl(\because\ \blkref{claim_projected_edge_cycle_nonbacktracking}\bigr).
 \end{aligned}`),
-                      paragraph(["もし ", math(String.raw`\vec e`), " が第二色なら、", ref("claim_matching_pair_second_coloring_alternates"), " により長い相手 ", math(String.raw`m_{\mathcal D_0}(\vec e)`), " は同じ閉路の第一色である。", ref("claim_reference_long_mate_reversal"), " によりこの相手は ", math(String.raw`\iota(\vec e)`), " である。", ref("claim_tagged_difference_alternating_cycle"), " の一周期の列挙により ", math(String.raw`\iota(\vec e)=c_C(2r)`), " となる ", math(String.raw`0\le r<k_C`), " がある。このとき"]),
+                      paragraph(["もし ", math(String.raw`\vec e`), " が第二色なら、", ref("claim_reference_long_matching"), " の基準完全マッチング ", math(String.raw`\mathcal D_0`), " での長い相手 ", math(String.raw`\upsilon(\vec e)=m_{\mathcal D_0}(\vec e)`), " は、", ref("claim_matching_pair_second_coloring_alternates"), " により第一色である。短い相手を ", math(String.raw`\tau(\vec e)`), " と書くと、", ref("claim_perfect_matching_involution"), " により ", math(String.raw`\tau(\tau(\vec e))=\vec e`), " なので、", math(String.raw`\upsilon(\vec e)=\upsilon(\tau(\tau(\vec e)))`), " は ", math(String.raw`\tau(\vec e)`), " を ", ref("def_matching_pair_step"), " の二歩置換で一歩進めた点である。", math(String.raw`\tau(\vec e)`), " は ", ref("def_finite_permutation_orbit"), " の零回の反復で自分の二歩軌道に属し、", ref("claim_finite_permutation_orbit_invariant"), " により ", math(String.raw`\upsilon(\vec e)`), " も同じ二歩軌道に属する。", ref("def_matching_pair_component"), " により ", math(String.raw`\upsilon(\vec e)`), " は ", math(String.raw`\vec e`), " と同じ閉路 ", math(String.raw`C`), " に属する。", ref("claim_reference_long_mate_reversal"), " によりこの相手は ", math(String.raw`\iota(\vec e)`), " である。", ref("claim_tagged_difference_alternating_cycle"), " の一周期の列挙により ", math(String.raw`\iota(\vec e)=c_C(2r)`), " となる ", math(String.raw`0\le r<k_C`), " がある。このとき"]),
                       displayMath(String.raw`\begin{aligned}
 e
 &=p(\vec e)

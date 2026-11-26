@@ -33,12 +33,14 @@ theorem taggedActive_shortMate_mem_nonbacktrackingSuccessors {L : ℕ} (z : Qbar
         exact perfectMatchingMate_involutive D p.1
       rw [hback, Set.pair_comm]
   have hpt : p ∈ t := (shortUnderlyingPairs_iff D t ht p hp).mp (hset ▸ hshort)
-  have hlocal := (taggedMatching_nonzero_term_support z s D t hterm).2 p hpt
-  apply (mem_nonbacktrackingSuccessors_reversal e (perfectMatchingMate D e)).2
   rcases hcover with rfl | rfl
-  · rw [hmate]
-    exact ⟨hlocal.1, hlocal.2⟩
-  · have hback : perfectMatchingMate D p.2 = p.1 := by
+  · -- 本文: 対の順序が (e, 相手) なら短い対の後続の主張そのもの。
+    rw [hmate]
+    exact taggedShortPair_successor z s D t hterm p hpt
+  · -- 本文: 順序が逆なら、始点の共有と相異から同じ端点計算をする。
+    have hlocal := (taggedMatching_nonzero_term_support z s D t hterm).2 p hpt
+    apply (mem_nonbacktrackingSuccessors_reversal p.2 (perfectMatchingMate D p.2)).2
+    have hback : perfectMatchingMate D p.2 = p.1 := by
       rw [← hmate]
       exact perfectMatchingMate_involutive D p.1
     rw [hback]
@@ -82,7 +84,8 @@ theorem taggedActive_projectedCycle_nonbacktracking {L : ℕ} (z : Qbar)
     change m ∈ finitePermutationOrbit (matchingPairStep τ υ)
       (matchingPairComponentMinimum τ υ m)
     rw [hbase]
-    exact finitePermutationOrbit_self_mem _ m
+    -- 本文: 軌道の定義の零回の反復。
+    exact ⟨0, Or.inl rfl⟩
   have hflip (j : _) : σ j ∈ C ↔ j ∉ C := matchingPairSuccessor_color τ υ j
   have heven (r : ℕ) : finiteMapIterate σ (2 * r) m ∈ C := by
     induction r with
@@ -107,6 +110,7 @@ theorem taggedActive_projectedCycle_nonbacktracking {L : ℕ} (z : Qbar)
       rfl
     calc
       τ.val e = σ e := by
+        -- 本文: 後続置換の定義により、第一色の点では短い相手を取る。
         change τ.val e = matchingPairSuccessor τ υ e
         rw [matchingPairSuccessor, if_pos (heven r)]
       _ = f := hstep
