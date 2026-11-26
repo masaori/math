@@ -111062,7 +111062,9 @@ f^{\mathrm{per}}(q)
 &<\rho_{R\to\mathbb R}(\xi)
 &&\bigl(\because\ 0<_R\xi\text{ と }\blkref{claim_cut_realization_preserves_strict_order}\bigr)\\
 &=r
-&&\bigl(\because\ r\text{ の定義}\bigr),\\
+&&\bigl(\because\ r\text{ の定義}\bigr)
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
 r
 &=\rho_{R\to\mathbb R}(\xi)
 &&\bigl(\because\ r\text{ の定義}\bigr)\\
