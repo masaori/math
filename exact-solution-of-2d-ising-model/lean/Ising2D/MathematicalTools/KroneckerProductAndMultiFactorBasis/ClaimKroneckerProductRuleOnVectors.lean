@@ -10,7 +10,7 @@
 | 人手 | Lean |
 | --- | --- |
 | 準備の `M = 1`（両辺とも `c_1(1) + c_1(2)`） | `sum_over_multi_index_of_product_eq_product_of_sums` の `0` の節の `calc` の 2 段 |
-| 準備の `M → M+1` の 4 行（最後の成分で場合分けした有限和の分割 → 分配律 → 帰納法の仮定 → 有限積の最後の因子を戻す） | 同じく `M + 1` の節の `calc` の 4 段（1 段目は `sum_conf_succ_eq_sum_last_sum_init`） |
+| 準備の `M → M+1` の 5 行（`finite_sum_over_multi_indices_split_by_last_component` → 有限積の最後の因子を分ける → 分配律 → 帰納法の仮定 → 有限積の最後の因子を戻す） | 同じく `M + 1` の節の `calc` の 4 段（1 段目の `sum_conf_succ_eq_sum_last_sum_init` が人手の 1・2 行目を 2 段の `calc` で持つ） |
 | (3) の 6 行（行列と数ベクトルの積の定義 → `ν` は全単射・`⊠` の定義 → 複素数の積の可換律・結合律 → 準備を `c_k(t) = (A_k)_{i_kt}(v_k)_t` に適用 → 行列と数ベクトルの積の定義 → `⊠` の定義） | `kronecker_product_rule_mulVec` の `calc` の 6 段 |
 
 - 人手の `M ∈ ℤ_{≥1}` は Lean の `M + 1` である（添字は 0 始まりで、人手の `k` は `k - 1`、成分の番号 `1, 2` は `0, 1`）。
@@ -22,8 +22,9 @@
   数ベクトルのクロネッカー積（(1)）は `vecKron`（`DefinitionKroneckerProductOfVectors.lean`）、行列と数ベクトルの積（`mat_mult`）は
   `Matrix.mulVec`（成分 `Σ_j B_{ij}x_j` は `rfl`）である。
 - 「複素数の積の可換律・結合律」の段（`(Π a_k)(Π b_k) = Π (a_k b_k)`）は mathlib の `Finset.prod_mul_distrib`、
-  「分配律」の段は `Finset.mul_sum`・`Finset.sum_mul`、有限和の分割は `Fin.snocEquiv` による和の付け替えと
-  `Fintype.sum_prod_type` で読む。いずれも人手が名前で引く操作そのもので、本文に対応するブロックは無い。
+  「分配律」の段は `Finset.mul_sum`・`Finset.sum_mul` で読む。人手が名前で引く操作そのもので、本文に対応するブロックは無い。
+  有限和の分割は本文の主張 `finite_sum_over_multi_indices_split_by_last_component`（`ClaimFiniteSumOverMultiIndicesSplitByLastComponent.lean`）を引き、
+  有限積の最後の因子を分ける段は `Fin.prod_univ_castSucc` で読む。
 
 必要十分版は `Ising2D/NecSuf/KroneckerProductRuleOnVectors.lean`、具体版をその系として導くのは
 `ClaimKroneckerProductRuleOnVectorsFromNecSuf.lean`。段の対応: 準備の 2 つの節は必要十分版
@@ -32,6 +33,7 @@
 -/
 import Ising2D.Representation
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionKroneckerProductOfVectors
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumOverMultiIndicesSplitByLastComponent
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Fin.Tuple.Basic
 
@@ -39,18 +41,31 @@ namespace Ising2D
 
 open Matrix
 
-/-- 人手の準備の `M → M+1` の 1 行目「最後の成分 `t_{M+1} = t` で場合分けした有限和の分割」:
+/-- 人手の準備の `M → M+1` の 1・2 行目（`finite_sum_over_multi_indices_split_by_last_component` の適用と、
+`def_finite_product_of_complex_numbers` の帰納の式で最後の因子を分ける段）:
 `Σ_{(t_1,…,t_{M+1}) ∈ 𝓘_{M+1}} Π_{k=1}^{M+1} c_k(t_k) = Σ_{t=1}^{2} Σ_{K ∈ 𝓘_M} (Π_{k=1}^{M} c_k(t_k)) c_{M+1}(t)`
 （人手の `M` は Lean の `M + 1`）。 -/
 theorem sum_conf_succ_eq_sum_last_sum_init (M : ℕ) (c : Fin (M + 2) → Fin 2 → ℂ) :
     ∑ K : Conf (M + 2), ∏ k, c k (K k)
       = ∑ t : Fin 2, ∑ K : Conf (M + 1),
-          (∏ k : Fin (M + 1), c (Fin.castSucc k) (K k)) * c (Fin.last (M + 1)) t := by
-  rw [← Fintype.sum_prod_type (f := fun p : Fin 2 × Conf (M + 1) =>
-      (∏ k : Fin (M + 1), c (Fin.castSucc k) (p.2 k)) * c (Fin.last (M + 1)) p.1)]
-  refine Fintype.sum_equiv (Fin.snocEquiv (fun _ => Fin 2)).symm _ _ fun K => ?_
-  simp only [Fin.snocEquiv_symm_apply, Fin.init]
-  exact Fin.prod_univ_castSucc _
+          (∏ k : Fin (M + 1), c (Fin.castSucc k) (K k)) * c (Fin.last (M + 1)) t :=
+  calc ∑ K : Conf (M + 2), ∏ k, c k (K k)
+      = ∑ t : Fin 2, ∑ K : Conf (M + 1), ∏ k, c k ((Fin.snoc K t : Conf (M + 2)) k) :=
+        finite_sum_over_multi_indices_split_by_last_component M _
+          (fun K t => ∏ k, c k ((Fin.snoc K t : Conf (M + 2)) k)) (fun I K t h1 h2 => by
+            -- 成分の条件を満たす `I` は `(K,t)`（Lean の `Fin.snoc K t`）である
+            have hI : I = Fin.snoc K t := funext fun m => by
+              refine Fin.lastCases ?_ (fun m' => ?_) m
+              · rw [Fin.snoc_last]
+                exact h2 _ ((finIndexToZZ_eq_iff_val_add_one_eq _ _).2 (by simp))
+              · rw [Fin.snoc_castSucc]
+                exact h1 _ m' rfl
+            rw [hI])                                                            -- `finite_sum_over_multi_indices_split_by_last_component`
+    _ = ∑ t : Fin 2, ∑ K : Conf (M + 1),
+          (∏ k : Fin (M + 1), c (Fin.castSucc k) (K k)) * c (Fin.last (M + 1)) t :=
+        Finset.sum_congr rfl fun t _ => Finset.sum_congr rfl fun K _ => by
+          rw [Fin.prod_univ_castSucc]
+          simp only [Fin.snoc_castSucc, Fin.snoc_last]                           -- `def_finite_product_of_complex_numbers` の帰納の式（最後の因子を分ける）
 
 /-- **人手 `kronecker_product_rule` の証明の準備**（多重添字の和を各因子ごとの和の積へ直すこと）:
 `Σ_{K ∈ 𝓘_M} Π_{k=1}^{M} c_k(t_k) = Π_{k=1}^{M} (Σ_{t=1}^{2} c_k(t))`（人手の `M` は Lean の `M + 1`）。 -/

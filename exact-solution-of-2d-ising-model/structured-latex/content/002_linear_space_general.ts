@@ -7828,6 +7828,234 @@ u
     },
   },
   {
+    id: "linear_space_general_000_claim_finite_sum_of_complex_numbers_in_consecutive_pairs",
+    kind: "claim",
+    title: { text: "複素数の偶数個の有限和は、隣り合う二項の和の有限和に等しい" },
+    labels: ["finite_sum_of_complex_numbers_in_consecutive_pairs"],
+    lean: ["Ising2D.finite_sum_of_complex_numbers_in_consecutive_pairs"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`z_1,\dots,z_{2n} \in \mathbb{C}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        "、和は ",
+        ref("definition_of_cc"),
+        " の和による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{2n} z_j = \sum_{k=1}^{n} \bigl(z_{2k-1} + z_{2k}\bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`n = 0`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{0} z_j
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} z_j := 0_{\mathbb{C}}\bigr)\\
+&= \sum_{k=1}^{0} \bigl(z_{2k-1} + z_{2k}\bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{0} z_j := 0_{\mathbb{C}}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " は ",
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+        math(String.raw`n = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{2} z_j
+&= \Bigl(\sum_{j=1}^{1} z_j\Bigr) + z_2
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の帰納の式}\ (m \to 1)\bigr)\\
+&= z_1 + z_2
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{1} z_j := z_1\bigr)\\
+&= \sum_{k=1}^{1} \bigl(z_{2k-1} + z_{2k}\bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{1} z_j := z_1\ \text{を右辺から左辺へ}\ (k = 1\ \text{の項は}\ z_1 + z_2)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " で成り立つと仮定し、",
+        math(String.raw`z_1,\dots,z_{2n+2} \in \mathbb{C}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{2(n+1)} z_j
+&= \sum_{j=1}^{2n+2} z_j
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ 2(n+1) = 2n + 2\bigr)\\
+&= \Bigl(\sum_{j=1}^{2n+1} z_j\Bigr) + z_{2n+2}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の帰納の式}\ (m \to 2n+1)\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{2n} z_j\Bigr) + z_{2n+1}\Bigr) + z_{2n+2}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の帰納の式}\ (m \to 2n)\bigr)\\
+&= \Bigl(\sum_{j=1}^{2n} z_j\Bigr) + \bigl(z_{2n+1} + z_{2n+2}\bigr)
+&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の和は成分ごとの}\ \mathbb{R}\ \text{の和なので、}\blkref{set_and_algebra_notation}\ \text{の加法の結合律を二つの成分へ同時適用}\bigr)\\
+&= \Bigl(\sum_{k=1}^{n} \bigl(z_{2k-1} + z_{2k}\bigr)\Bigr) + \bigl(z_{2n+1} + z_{2n+2}\bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \Bigl(\sum_{k=1}^{n} \bigl(z_{2k-1} + z_{2k}\bigr)\Bigr) + \bigl(z_{2(n+1)-1} + z_{2(n+1)}\bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ 2(n+1) - 1 = 2n + 1,\ 2(n+1) = 2n + 2\bigr)\\
+&= \sum_{k=1}^{n+1} \bigl(z_{2k-1} + z_{2k}\bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の帰納の式}\ (m \to n)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の六単位目の三つ目）: 原文（Typst）に対応ブロックは無い。finite_sum_over_multi_indices_split_by_last_component が、𝓘_{M+1} の上の和を ν^{-1} で開いた {1,…,2^{M+1}} の上の和を、最後の成分が 1 の項と 2 の項の組へまとめる段を引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_000_claim_finite_sum_over_multi_indices_split_by_last_component",
+    kind: "claim",
+    title: { text: "多重添字の集合の上の有限和を、最後の成分で分ける" },
+    labels: ["finite_sum_over_multi_indices_split_by_last_component"],
+    lean: ["Ising2D.finite_sum_over_multi_indices_split_by_last_component"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_kronecker"),
+        " の ",
+        math(String.raw`\mathcal{I}_M`),
+        "・",
+        math(String.raw`\mathcal{I}_{M+1}`),
+        " を用いる。",
+        math(String.raw`K = (t_1,\dots,t_M) \in \mathcal{I}_M`),
+        " と ",
+        math(String.raw`t \in \{1,2\}`),
+        " について、",
+        math(String.raw`(K,t) := (t_1,\dots,t_M,t) \in \mathcal{I}_{M+1}`),
+        " と書く。写像 ",
+        math(String.raw`a : \mathcal{I}_{M+1} \to \mathbb{C}`),
+        " について",
+      ]),
+      displayMath(String.raw`\sum_{I\in\mathcal{I}_{M+1}} a(I) = \sum_{t=1}^{2}\ \sum_{K\in\mathcal{I}_M} a(K,t)`),
+      paragraph([
+        "が成り立つ。左辺と内側の和は ",
+        ref("def_finite_sum_of_complex_numbers_over_multi_indices"),
+        "、外側の和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        " の有限和である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`K = (t_1,\dots,t_M) \in \mathcal{I}_M`),
+        " と ",
+        math(String.raw`t \in \{1,2\}`),
+        " について ",
+        math(String.raw`\nu(K,t) = 2(\nu(K) - 1) + t`),
+        " を示す（左辺の ",
+        math(String.raw`\nu`),
+        " は ",
+        math(String.raw`\mathcal{I}_{M+1}`),
+        " の上の、右辺の ",
+        math(String.raw`\nu`),
+        " は ",
+        math(String.raw`\mathcal{I}_M`),
+        " の上の ",
+        ref("def_kronecker"),
+        " の番号付けであり、計算は ",
+        math(String.raw`\mathbb{Z}`),
+        " の中で行う）。",
+        math(String.raw`(s_1,\dots,s_{M+1}) := (K,t)`),
+        " とおく。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu(K,t)
+&= 1 + \sum_{k=1}^{M+1} (s_k - 1)\,2^{M+1-k}
+&&\bigl(\because\ \blkref{def_kronecker}\ \text{の}\ \nu\ (M \to M+1)\bigr)\\
+&= 1 + \Bigl(\sum_{k=1}^{M} (t_k - 1)\,2^{M+1-k}\Bigr) + (t - 1)\,2^{0}
+&&\bigl(\because\ \text{和の最後の項}\ k = M+1\ \text{を分ける}\ (s_k = t_k\ (k \le M),\ s_{M+1} = t)\bigr)\\
+&= 1 + \Bigl(\sum_{k=1}^{M} (t_k - 1)\,\bigl(2^{M-k}\,2\bigr)\Bigr) + (t - 1)\,1
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ a^{m+1} := a^m a\ (m \to M-k)\ \text{と}\ a^0 := 1_{\mathbb{Z}}\bigr)\\
+&= 1 + 2\Bigl(\sum_{k=1}^{M} (t_k - 1)\,2^{M-k}\Bigr) + (t - 1)
+&&\bigl(\because\ \text{和の各項から共通の因子 } 2 \text{ をくくり出す}\ (\mathbb{Z}\ \text{の乗法の結合律・可換律と分配律を}\ M\ \text{項へ})\ \text{と}\ (t-1)\,1 = t-1\bigr)\\
+&= 1 + 2\bigl(\nu(K) - 1\bigr) + (t - 1)
+&&\bigl(\because\ \blkref{def_kronecker}\ \text{の}\ \nu\bigr)\\
+&= 2\bigl(\nu(K) - 1\bigr) + t
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の結合律と交換律}\bigr)
+\end{aligned}`),
+      paragraph([
+        "次に、",
+        math(String.raw`k \in \{1,\dots,2^M\}`),
+        " と ",
+        math(String.raw`t \in \{1,2\}`),
+        " について ",
+        math(String.raw`\nu^{-1}\bigl(2(k-1)+t\bigr) = \bigl(\nu^{-1}(k),t\bigr)`),
+        " を示す（左辺の ",
+        math(String.raw`\nu^{-1}`),
+        " は ",
+        math(String.raw`\mathcal{I}_{M+1}`),
+        " の、右辺の ",
+        math(String.raw`\nu^{-1}`),
+        " は ",
+        math(String.raw`\mathcal{I}_M`),
+        " の ",
+        ref("def_inverse_of_kronecker_numbering"),
+        " の逆写像）。上の準備より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\nu\bigl(\nu^{-1}(k),t\bigr)
+&= 2\bigl(\nu(\nu^{-1}(k)) - 1\bigr) + t
+&&\bigl(\because\ \text{上の準備}\ (K \to \nu^{-1}(k))\bigr)\\
+&= 2(k-1) + t
+&&\bigl(\because\ \blkref{def_inverse_of_kronecker_numbering}\ \text{の}\ \nu(\nu^{-1}(k)) = k\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\nu\ (M \to M+1)`),
+        " の値なので ",
+        math(String.raw`2(k-1)+t \in \{1,\dots,2^{M+1}\}`),
+        " である。",
+        ref("def_inverse_of_kronecker_numbering"),
+        " （",
+        math(String.raw`M \to M+1`),
+        "）より ",
+        math(String.raw`\nu(I) = 2(k-1)+t`),
+        " を満たす ",
+        math(String.raw`I \in \mathcal{I}_{M+1}`),
+        " はただ一つで、それが ",
+        math(String.raw`\nu^{-1}\bigl(2(k-1)+t\bigr)`),
+        " だから、",
+        math(String.raw`\nu^{-1}\bigl(2(k-1)+t\bigr) = \bigl(\nu^{-1}(k),t\bigr)`),
+        " である。以上の準備のもとで",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{I\in\mathcal{I}_{M+1}} a(I)
+&= \sum_{j=1}^{2^{M+1}} a\bigl(\nu^{-1}(j)\bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers_over_multi_indices}\ (M \to M+1)\bigr)\\
+&= \sum_{j=1}^{2 \cdot 2^{M}} a\bigl(\nu^{-1}(j)\bigr)
+&&\bigl(\because\ \blkref{def_power_of_integer}\ \text{の}\ a^{m+1} := a^m a\ (a \to 2_{\mathbb{Z}},\ m \to M)\ \text{と}\ \mathbb{Z}\ \text{の乗法の可換律}\bigr)\\
+&= \sum_{k=1}^{2^{M}} \Bigl(a\bigl(\nu^{-1}(2k-1)\bigr) + a\bigl(\nu^{-1}(2k)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_complex_numbers_in_consecutive_pairs}\ (n \to 2^M,\ z_j \to a(\nu^{-1}(j)))\bigr)\\
+&= \sum_{k=1}^{2^{M}} \Bigl(a\bigl(\nu^{-1}(2(k-1)+1)\bigr) + a\bigl(\nu^{-1}(2(k-1)+2)\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{Z}\ \text{の分配律}\ 2k - 1 = 2(k-1) + 1,\ 2k = 2(k-1) + 2\ \text{を全ての}\ k\ \text{へ同時適用}\bigr)\\
+&= \sum_{k=1}^{2^{M}} \Bigl(a\bigl(\nu^{-1}(k),1\bigr) + a\bigl(\nu^{-1}(k),2\bigr)\Bigr)
+&&\bigl(\because\ \text{上の準備}\ \nu^{-1}(2(k-1)+t) = (\nu^{-1}(k),t)\ \text{を}\ t = 1, 2\ \text{と全ての}\ k\ \text{へ同時適用}\bigr)\\
+&= \Bigl(\sum_{k=1}^{2^{M}} a\bigl(\nu^{-1}(k),1\bigr)\Bigr) + \Bigl(\sum_{k=1}^{2^{M}} a\bigl(\nu^{-1}(k),2\bigr)\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_complex_sums}\ (n \to 2^M)\bigr)\\
+&= \Bigl(\sum_{K\in\mathcal{I}_M} a(K,1)\Bigr) + \Bigl(\sum_{K\in\mathcal{I}_M} a(K,2)\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers_over_multi_indices}\ (K \mapsto a(K,1);\ K \mapsto a(K,2))\ \text{を右辺から左辺へ 2 か所同時適用}\bigr)\\
+&= \Bigl(\sum_{t=1}^{1}\ \sum_{K\in\mathcal{I}_M} a(K,t)\Bigr) + \sum_{K\in\mathcal{I}_M} a(K,2)
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の}\ \textstyle\sum_{j=1}^{1} z_j := z_1\ \text{を右辺から左辺へ}\bigr)\\
+&= \sum_{t=1}^{2}\ \sum_{K\in\mathcal{I}_M} a(K,t)
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\ \text{の帰納の式}\ (m \to 1)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の六単位目の三つ目）: 原文（Typst）に対応ブロックは無い。kronecker_product_rule の証明の準備が「最後の成分 t_{M+1} = t で場合分けした有限和の分割」と名前だけで根拠にしていた段を、def_finite_sum_of_complex_numbers_over_multi_indices（ν^{-1} で定めた和）から導く主張として立てた。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_000b_claim_kronecker_product_rule",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
@@ -7893,7 +8121,9 @@ u
 \qquad (K=(t_1,\dots,t_M))`,
       ),
       paragraph([
-        "が成り立つ。",
+        "が成り立つ（左辺の和は ",
+        ref("def_finite_sum_of_complex_numbers_over_multi_indices"),
+        " の和）。",
         math(String.raw`M`),
         " についての帰納法で示す。",
         math(String.raw`M=1`),
@@ -7902,18 +8132,22 @@ u
         "。",
         math(String.raw`M`),
         " で成り立つとすると、",
-        math(String.raw`\mathcal{I}_{M+1}`),
-        " の元は ",
-        math(String.raw`(K,t)`),
+        math(String.raw`K=(t_1,\dots,t_M)\in\mathcal{I}_M,\ t\in\{1,2\}`),
+        " について ",
+        math(String.raw`(K,t)=(t_1,\dots,t_M,t)\in\mathcal{I}_{M+1}`),
         "（",
-        math(String.raw`K\in\mathcal{I}_M,\ t\in\{1,2\}`),
-        "）と一対一に対応するから",
+        ref("finite_sum_over_multi_indices_split_by_last_component"),
+        " の記法）と書き、",
+        math(String.raw`(s_1,\dots,s_{M+1}) := (K,t)`),
+        " とおいて",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{(t_1,\dots,t_{M+1})\in\mathcal{I}_{M+1}}\prod_{k=1}^{M+1}c_k(t_k)
+&= \sum_{t=1}^{2}\sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M+1}c_k(s_k)
+   &&(\because \blkref{finite_sum_over_multi_indices_split_by_last_component}\ (a(I) \to \textstyle\prod_{k=1}^{M+1}c_k(i_k),\ I=(i_1,\dots,i_{M+1}))) \\
 &= \sum_{t=1}^{2}\sum_{K\in\mathcal{I}_M}\left(\prod_{k=1}^{M}c_k(t_k)\right)c_{M+1}(t)
-   &&(\because \text{最後の成分 } t_{M+1}=t \text{ で場合分けした有限和の分割}) \\
+   &&(\because \blkref{def_finite_product_of_complex_numbers} \text{ の帰納の式}\ (m \to M)\ \text{を全ての } K, t \text{ へ同時適用。} s_k = t_k\ (k \le M),\ s_{M+1} = t) \\
 &= \left(\sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}c_k(t_k)\right)\left(\sum_{t=1}^{2}c_{M+1}(t)\right)
    &&(\because \text{分配律}) \\
 &= \left(\prod_{k=1}^{M}\left(\sum_{s=1}^{2}c_k(s)\right)\right)\left(\sum_{t=1}^{2}c_{M+1}(t)\right)
@@ -8017,6 +8251,7 @@ u
           "004 章以降の証明で繰り返し根拠として使われているのに、定義も証明も本文に無かった" +
           "（goal-alignment-audit の A-3）。クロネッカー積として定義したことで、成分計算で証明できる" +
           "主張になったのでここに置いた。",
+        "2026-11-25（Lean の点検の直し、状態台帳の行「有限和と有限集合の記号」の六単位目の三つ目）: 準備の左辺の和 Σ_{K∈𝓘_M} に def_finite_sum_of_complex_numbers_over_multi_indices を引いた。M → M+1 の 1 行目「最後の成分 t_{M+1}=t で場合分けした有限和の分割」を、finite_sum_over_multi_indices_split_by_last_component の適用と、def_finite_product_of_complex_numbers の帰納の式で最後の因子を分ける段の 2 行に割った。主張は変えていない。",
         "2026-08-10: 式変形の書き方の統一。2 箇所を直した。準備（多重添字の和を各因子ごとの" +
           "和の積へ直す段）の鎖の最終行に根拠が無かったので (∵ …) を付けた。" +
           "(3) の鎖は、1 行で 2 つの定理を同時に適用していた段（ν が全単射であることと ⊠ の定義で" +
