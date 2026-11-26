@@ -48,13 +48,10 @@
   「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
 - 人手【単位ベクトルでの評価】の `m_0` の鎖の「各 `k` の内側の和の `l ≠ k` の各項へ 0 を当てる」行は `Finset.sum_congr` で各項を `if l = k then _ else 0` に書き、
   「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
-- 人手の `finite_sum_of_real_scalar_multiples` を当てる行のうち、【`(W_ℝ)^n` の成分の評価】の 4 つの項へ分ける行は mathlib の `Finset.mul_sum`・
-  `Finset.sum_sub_distrib`・`Finset.sum_add_distrib` で、`m_n ≤ T` の外側の和へ当てる行は `Finset.sum_mul` で書く（掛ける数が右にあるため）。
-  `m_n ≤ T` の「有限和の加法の交換律・結合律」の行（人手に参照が無い）は `Finset.sum_add_distrib` で書く。
-- 人手の `finite_sum_of_real_scalar_multiples` を `𝓘_M`（Lean の `Conf M`）の上の和へ当てる行は、その他の行も含めて
-  `finite_sum_over_multi_indices_of_real_scalar_multiples`（本文の `𝓘_M` の上の和の定義 `def_finite_sum_of_real_numbers_over_multi_indices` で
-  `{1,…,2^M}` の上の和へ開いて当てる補題。`ClaimFiniteSumsOverMultiIndices.lean`）で書く。上の項目の mathlib の `Finset.mul_sum`・`Finset.sum_mul`・
-  `Finset.sum_sub_distrib`・`Finset.sum_add_distrib` で書いた行はまだ本文の `𝓘_M` の上の和の定義を通していない（状態台帳の行「有限和と有限集合の記号」の残り）。
+- 人手の `finite_sum_of_real_scalar_multiples`・`finite_sum_of_real_differences`・`finite_sum_of_real_sums` を `𝓘_M`（Lean の `Conf M`）の上の和へ当てる行は、
+  本文の `𝓘_M` の上の和の定義 `def_finite_sum_of_real_numbers_over_multi_indices` で `{1,…,2^M}` の上の和へ開いて当てる補題
+  （`ClaimFiniteSumsOverMultiIndices.lean` の `finite_sum_over_multi_indices_of_*`）で書く。`m_n ≤ T` の外側の和のように掛ける数が右にある行は
+  `finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right`（乗法の交換律で左へ移して当てる）で書く。
 - 本文の `W` への当てはめ（`*_physical`）は段ごとには置かない。主張 `trace_power_sandwich` の当てはめ `trace_power_sandwich_physical`（`PhysicalPartitionFunctionSandwich.lean`）が、ここの段をまとめて本文の `W` へ渡す。
 - 人手の `ℝ` の分配律・結合律・交換律と、同類項の加法は `ring` で、商と順序の行は mathlib の `div_le_div_of_nonneg_right`・
   `mul_div_cancel_*`・`mul_le_mul_of_nonneg_left` で書く（人手のこれらの行には参照が無い）。
@@ -305,9 +302,10 @@ theorem power_of_W_real_entry_bound (n : ℕ) (x : Conf M → ℝ) (k l : Conf M
       _ = (x l * x l) * ∑ i, ∑ j, ek i * P i j * ek j - x l * x k * ∑ i, ∑ j, ek i * P i j * el j
             - x k * x l * ∑ i, ∑ j, el i * P i j * ek j
             + (x k * x k) * ∑ i, ∑ j, el i * P i j * el j := by
-          simp only [Finset.mul_sum, ← Finset.sum_sub_distrib, ← Finset.sum_add_distrib]
+          simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples,
+            ← finite_sum_over_multi_indices_of_real_differences, ← finite_sum_over_multi_indices_of_real_sums]
           exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => by ring
-                                                                            -- `ℝ` の分配律・交換律・結合律と、`finite_sum_of_real_scalar_multiples` を内側と外側の和へ
+                                                                            -- `ℝ` の分配律・交換律・結合律と、`finite_sum_of_real_scalar_multiples`・`finite_sum_of_real_differences`・`finite_sum_of_real_sums` を内側と外側の和へ
       _ = x l ^ 2 * ∑ i, ∑ j, ek i * P i j * ek j - x l * x k * ∑ i, ∑ j, ek i * P i j * el j
             - x k * x l * ∑ i, ∑ j, el i * P i j * ek j
             + x k ^ 2 * ∑ i, ∑ j, el i * P i j * el j := by
@@ -440,9 +438,10 @@ theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : 
               power_of_W_real_entry_bound W hW hWRsymm hpd n x k l)
           (by norm_num)                                                     -- 【`(W_ℝ)^n` の成分の評価】を組 `(k,l)` ごとの項へ同時に、項ごとの不等式の有限和と `2^{-1} > 0` 倍
     _ = 2⁻¹ * (∑ k, ∑ l, x l ^ 2 * P k k + ∑ k, ∑ l, x k ^ 2 * P l l) := by
-        rw [← Finset.sum_add_distrib]
-        exact congrArg (2⁻¹ * ·) (Finset.sum_congr rfl fun k _ => Finset.sum_add_distrib)
-                                                                            -- `ℝ` の有限和の加法の交換律・結合律
+        rw [← finite_sum_over_multi_indices_of_real_sums]
+        exact congrArg (2⁻¹ * ·)
+          (Finset.sum_congr rfl fun k _ => finite_sum_over_multi_indices_of_real_sums _ _)
+                                                                            -- `finite_sum_of_real_sums` を内側と外側の和へ
     _ = 2⁻¹ * (∑ k, P k k * ∑ l, x l ^ 2 + ∑ k, x k ^ 2 * ∑ l, P l l) := by
         congr 2
         · exact Finset.sum_congr rfl fun k _ => by
@@ -451,7 +450,8 @@ theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : 
         · exact Finset.sum_congr rfl fun k _ => by
             rw [← finite_sum_over_multi_indices_of_real_scalar_multiples]              -- 乗法の交換律と、`finite_sum_of_real_scalar_multiples` を内側の和へ
     _ = 2⁻¹ * ((∑ k, P k k) * (∑ l, x l ^ 2) + (∑ k, x k ^ 2) * (∑ l, P l l)) := by
-        rw [Finset.sum_mul, Finset.sum_mul]                                 -- 乗法の交換律と、`finite_sum_of_real_scalar_multiples` を外側の和へ
+        rw [finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right,
+          finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right]  -- 乗法の交換律と、`finite_sum_of_real_scalar_multiples` を外側の和へ
     _ = 2⁻¹ * (T * 1 + 1 * T) := by rw [hs]                                 -- `T := Σ_k((W_ℝ)^n)_kk` と、上の `Σ_k x_k^2 = 1`
     _ = T := by ring                                                        -- `ℝ` の四則
 

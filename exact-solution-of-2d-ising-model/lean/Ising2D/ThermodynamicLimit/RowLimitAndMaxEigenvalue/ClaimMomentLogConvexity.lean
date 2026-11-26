@@ -56,7 +56,9 @@
 - 人手の「`k` 以外の各項へ 0 を当てる」行は `Finset.sum_congr` で各項を `if _ = k then _ else 0` に書き、
   「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
   「各項は 0 以上なので和は 0 以上」「正の項があるので和は正」は mathlib の `Finset.sum_nonneg`・`Finset.sum_pos'` で書く
-  （人手のこの 2 か所には参照が無い）。`ℝ` の分配律・結合律・交換律と有限和の順序の交換は `Finset.mul_sum`・`Finset.sum_mul`・`Finset.sum_comm`・`ring` で書く。
+  （人手のこの 2 か所には参照が無い）。有限和から共通の因子をくくり出す・和へ配る行（人手の「`ℝ` の分配律」）は `finite_sum_of_real_scalar_multiples` を `𝓘_M` の上の和へ当てた
+  `finite_sum_over_multi_indices_of_real_scalar_multiples`（掛ける数が右なら `_on_the_right`。`ClaimFiniteSumsOverMultiIndices.lean`）で書き、
+  `ℝ` の結合律・交換律は `mul_assoc`・`ring` で書く。有限和の順序の交換は `Finset.sum_comm` で書く（`𝓘_M` の上の二重和の交換の補題がまだ無い。状態台帳の行「有限和と有限集合の記号」の残り）。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperBound
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPsdCauchySchwarz
@@ -244,7 +246,9 @@ theorem real_bilinear_value_between_two_powers (CR : Matrix (Conf M) (Conf M) �
     _ = ∑ i, ∑ j, x i * (∑ l, Pb i l * (CR * Pa) l j) * x j := rfl          -- `def_real_matrix_product`
     _ = ∑ i, ∑ j, x i * (∑ l, Pb i l * ∑ m, CR l m * Pa m j) * x j := rfl   -- `def_real_matrix_product`
     _ = ∑ i, ∑ j, ∑ l, ∑ m, x i * Pb i l * CR l m * Pa m j * x j := by
-        simp only [Finset.mul_sum, Finset.sum_mul, mul_assoc]               -- `ℝ` の分配律と乗法の結合律
+        simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples,
+          ← finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right, mul_assoc]
+                                                                            -- `finite_sum_of_real_scalar_multiples` を右辺から左辺へ各段の和へと、`ℝ` の乗法の交換律・結合律
     _ = ∑ l, ∑ m, ∑ i, ∑ j, x i * Pb i l * CR l m * Pa m j * x j := by
         calc ∑ i, ∑ j, ∑ l, ∑ m, x i * Pb i l * CR l m * Pa m j * x j
             = ∑ i, ∑ l, ∑ m, ∑ j, x i * Pb i l * CR l m * Pa m j * x j :=
@@ -255,11 +259,12 @@ theorem real_bilinear_value_between_two_powers (CR : Matrix (Conf M) (Conf M) �
                                                                             -- `ℝ` の有限和の順序の交換
     _ = ∑ l, ∑ m, (∑ i, x i * Pb i l) * CR l m * (∑ j, Pa m j * x j) := by
         refine Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun m _ => ?_
-        rw [Finset.sum_mul, Finset.sum_mul]
+        rw [← finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right,
+          ← finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right]
         refine Finset.sum_congr rfl fun i _ => ?_
-        rw [Finset.mul_sum]
+        rw [← finite_sum_over_multi_indices_of_real_scalar_multiples]
         exact Finset.sum_congr rfl fun j _ => by ring
-                                                                            -- `ℝ` の分配律と乗法の交換律・結合律
+                                                                            -- `finite_sum_of_real_scalar_multiples` を内側の二つの和へと、`ℝ` の乗法の交換律・結合律
     _ = ∑ l, ∑ m, (∑ i, x i * Pb l i) * CR l m * (∑ j, Pa m j * x j) := by
         simp only [hPb, power_of_W_real_entry_symm W hW b _ _]              -- 【冪の対称性】の `((W_ℝ)^b)_il = ((W_ℝ)^b)_li`
     _ = ∑ l, ∑ m, (∑ i, Pb l i * x i) * CR l m * (∑ j, Pa m j * x j) := by
@@ -324,10 +329,12 @@ theorem power_succ_of_W_real_mulVec_apply (a : ℕ) (x : Conf M → ℝ) (l : Co
     _ = ∑ m, (WR * WR ^ a) l m * x m := by rw [power_succ_of_W_real W hW a] -- 上の式変形
     _ = ∑ m, (∑ n, WR l n * (WR ^ a) n m) * x m := rfl                      -- `def_real_matrix_product`
     _ = ∑ m, ∑ n, WR l n * (WR ^ a) n m * x m := by
-        simp only [Finset.sum_mul]                                          -- `ℝ` の分配律と乗法の結合律
+        simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right]
+                                                                            -- `ℝ` の乗法の交換律で `x_m` を左へ移し、`finite_sum_of_real_scalar_multiples` を右辺から左辺へ各 `m` の項へ同時に当て、交換律で右へ戻す
     _ = ∑ n, ∑ m, WR l n * (WR ^ a) n m * x m := Finset.sum_comm            -- `ℝ` の有限和の順序の交換
     _ = ∑ n, WR l n * ∑ m, (WR ^ a) n m * x m := by
-        simp only [Finset.mul_sum, mul_assoc]                               -- `ℝ` の分配律と乗法の結合律
+        simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples, mul_assoc]
+                                                                            -- 乗法の結合律と、`finite_sum_of_real_scalar_multiples` を各項へ同時に
     _ = ∑ n, WR l n * ((WR ^ a) *ᵥ x) n := rfl                              -- 【`(W_ℝ)^ax` の成分】
     _ = (WR *ᵥ ((WR ^ a) *ᵥ x)) l := rfl                                    -- `def_real_matrix_vector_product`（`P → W_ℝ`, `x → u^{(a)}`）
 
@@ -345,7 +352,8 @@ theorem real_bilinear_value_eq_zero_of_mulVec_eq_zero (u : Conf M → ℝ)
       = ∑ k, ∑ l, u k * WR k l * u l := dotProduct_mulVec_eq_real_bilinear_value u u WR
                                                                             -- `def_real_bilinear_value`
     _ = ∑ k, u k * ∑ l, WR k l * u l := by
-        simp only [Finset.mul_sum, mul_assoc]                               -- `ℝ` の分配律と乗法の結合律
+        simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples, mul_assoc]
+                                                                            -- 乗法の結合律と、`finite_sum_of_real_scalar_multiples` を各項へ同時に
     _ = ∑ k, u k * (WR *ᵥ u) k := rfl                                       -- `def_real_matrix_vector_product`
     _ = ∑ k, u k * (0 : Conf M → ℝ) k := by rw [hu]                         -- `W_ℝu = 0` という仮定
     _ = ∑ _k : Conf M, (0 : ℝ) :=

@@ -326,7 +326,8 @@ theorem diagonal_bound_odd (n a : ℕ) (hn : n = 2 * a + 1) (k : Conf M) :
     _ = ∑ l, (WR ^ a) k l * (WR * WR ^ a) l k := rfl                        -- `def_real_matrix_product`（`P → (W_ℝ)^a`, `Q → W_ℝ(W_ℝ)^a`）
     _ = ∑ l, (WR ^ a) k l * ∑ r, WR l r * (WR ^ a) r k := rfl               -- `def_real_matrix_product`（`P → W_ℝ`, `Q → (W_ℝ)^a`, `i → l`, `j → r`, `k → k`）
     _ = ∑ l, ∑ r, (WR ^ a) k l * WR l r * (WR ^ a) r k := by
-        simp only [Finset.mul_sum, mul_assoc]                               -- 分配律と乗法の結合律
+        simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples, mul_assoc]
+                                                                            -- `finite_sum_of_real_scalar_multiples` を右辺から左辺へ各 `l` の項へと、乗法の結合律
     _ = ∑ l, ∑ r, (WR ^ a) l k * WR l r * (WR ^ a) r k :=
         Finset.sum_congr rfl fun l _ => Finset.sum_congr rfl fun r _ => by
           rw [power_of_W_real_entry_symm W hW a k l]                        -- 【冪の対称性】の `((W_ℝ)^a)_kl = ((W_ℝ)^a)_lk`

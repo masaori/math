@@ -58,6 +58,30 @@ theorem finite_sum_over_multi_indices_of_real_sums (a b : Conf M → ℝ) :
     _ = (∑ k : Fin n, a (σ k)) + ∑ k : Fin n, b (σ k) := finite_sum_of_real_sums n _ _  -- `finite_sum_of_real_sums`
     _ = (∑ I : Conf M, a I) + ∑ I : Conf M, b I := by rw [hsum a, hsum b]   -- `def_finite_sum_of_real_numbers_over_multi_indices` を 2 か所
 
+/-- 人手 `finite_sum_of_real_scalar_multiples` を `𝓘_M`（Lean の `Conf M`）の上の和へ、掛ける数を右に置いて当てたもの:
+`Σ_{I∈𝓘_M} a(I) c = (Σ_{I∈𝓘_M} a(I)) c`。本文は `ℝ` の乗法の交換律で掛ける数を左へ移してから
+`finite_sum_of_real_scalar_multiples` を当てる（`m_n ≤ T` の外側の和、`u^{(a+1)}` の成分の鎖など）。
+各項に乗法の交換律を当てて掛ける数を左へ移し、上の `finite_sum_over_multi_indices_of_real_scalar_multiples` を当て、乗法の交換律で右へ戻す。 -/
+theorem finite_sum_over_multi_indices_of_real_scalar_multiples_on_the_right (c : ℝ) (a : Conf M → ℝ) :
+    ∑ I : Conf M, a I * c = (∑ I : Conf M, a I) * c :=
+  calc ∑ I : Conf M, a I * c
+      = ∑ I : Conf M, c * a I := Finset.sum_congr rfl fun I _ => mul_comm (a I) c  -- `ℝ` の乗法の交換律を各項へ同時に
+    _ = c * ∑ I : Conf M, a I := finite_sum_over_multi_indices_of_real_scalar_multiples c a
+                                                                            -- `finite_sum_of_real_scalar_multiples`
+    _ = (∑ I : Conf M, a I) * c := mul_comm _ _                             -- `ℝ` の乗法の交換律
+
+/-- 人手 `finite_sum_of_real_differences` を `𝓘_M`（Lean の `Conf M`）の上の和へ当てたもの:
+`Σ_{I∈𝓘_M} (a(I) − b(I)) = Σ_{I∈𝓘_M} a(I) − Σ_{I∈𝓘_M} b(I)`。
+定義の一致の補題で三つの和を `ν^{-1}`（Lean の `σ`）による `{1,…,2^M}` の上の和へ開き、具体版 `finite_sum_of_real_differences` を当てて閉じる。 -/
+theorem finite_sum_over_multi_indices_of_real_differences (a b : Conf M → ℝ) :
+    ∑ I : Conf M, (a I - b I) = (∑ I : Conf M, a I) - ∑ I : Conf M, b I := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M     -- `def_inverse_of_kronecker_numbering`
+  have hsum := finset_sum_conf_real_eq_finite_sum_over_multi_indices M n hord σ hσ
+  calc ∑ I : Conf M, (a I - b I)
+      = ∑ k : Fin n, (a (σ k) - b (σ k)) := hsum (fun I => a I - b I)        -- `def_finite_sum_of_real_numbers_over_multi_indices`
+    _ = (∑ k : Fin n, a (σ k)) - ∑ k : Fin n, b (σ k) := finite_sum_of_real_differences n _ _  -- `finite_sum_of_real_differences`
+    _ = (∑ I : Conf M, a I) - ∑ I : Conf M, b I := by rw [hsum a, hsum b]   -- `def_finite_sum_of_real_numbers_over_multi_indices` を 2 か所
+
 /-- 人手 `finite_sum_of_real_numbers_is_monotone` を `𝓘_M`（Lean の `Conf M`）の上の和へ当てたもの:
 すべての `I ∈ 𝓘_M` で `a(I) ≤ b(I)` なら `Σ_{I∈𝓘_M} a(I) ≤ Σ_{I∈𝓘_M} b(I)`。
 両辺を `ν^{-1}`（Lean の `σ`）による `{1,…,2^M}` の上の和へ開き、具体版 `finite_sum_of_real_numbers_is_monotone`（`a_k → a(ν^{-1}(k))`）を当てる。 -/

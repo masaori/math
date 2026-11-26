@@ -2379,7 +2379,7 @@ e_k^\top (W_{\mathbb{R}})^{2a+1}e_k
 &=\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\sum_{r=1}^{d}(W_{\mathbb{R}})_{lr}\,\bigl((W_{\mathbb{R}})^a\bigr)_{rk}
 &&\bigl(\because\ \blkref{def_real_matrix_product}\ (m, n, p \to d,\ P \to W_{\mathbb{R}},\ Q \to (W_{\mathbb{R}})^a,\ i \to l,\ j \to r,\ k \to k)\bigr)\\
 &=\sum_{l=1}^{d}\sum_{r=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{kl}\,(W_{\mathbb{R}})_{lr}\,\bigl((W_{\mathbb{R}})^a\bigr)_{rk}
-&&\bigl(\because\ \text{分配律と乗法の結合律}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ (c \to ((W_{\mathbb{R}})^a)_{kl})\ \text{を右辺から左辺へ各}\ l\ \text{の項へ同時に適用し、乗法の結合律}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{r=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{lk}\,(W_{\mathbb{R}})_{lr}\,\bigl((W_{\mathbb{R}})^a\bigr)_{rk}
 &&\bigl(\because\ \text{【冪の対称性】の}\ ((W_{\mathbb{R}})^a)_{kl} = ((W_{\mathbb{R}})^a)_{lk}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{r=1}^{d}u_l\,(W_{\mathbb{R}})_{lr}\,u_r
@@ -2803,11 +2803,11 @@ x^\top\Bigl((W_{\mathbb{R}})^b\bigl(C_{\mathbb{R}}(W_{\mathbb{R}})^a\bigr)\Bigr)
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\Bigl(\sum_{l=1}^{d}\bigl((W_{\mathbb{R}})^b\bigr)_{il}\sum_{m=1}^{d}(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\Bigr)x_j
 &&\bigl(\because\ \blkref{def_real_matrix_product}\bigr)\\
 &=\sum_{i=1}^{d}\sum_{j=1}^{d}\sum_{l=1}^{d}\sum_{m=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
-&&\bigl(\because\ \mathbb{R}\ \text{の分配律と乗法の結合律}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ \text{を右辺から左辺へ各段の和へ適用し（掛ける数が右にある段は}\ \mathbb{R}\ \text{の乗法の交換律で左へ移す）、乗法の交換律・結合律}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\sum_{i=1}^{d}\sum_{j=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\,(C_{\mathbb{R}})_{lm}\,\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j
 &&\bigl(\because\ \mathbb{R}\ \text{の有限和の順序の交換}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{il}\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の分配律と乗法の交換律・結合律}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_real_scalar_multiples}\ \text{を各}\ (l,m)\ \text{の項の}\ i\ \text{の和と}\ j\ \text{の和へ適用し（掛ける数が右にある和は}\ \mathbb{R}\ \text{の乗法の交換律で左へ移す）、乗法の交換律・結合律}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}x_i\,\bigl((W_{\mathbb{R}})^b\bigr)_{li}\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
 &&\bigl(\because\ \text{【冪の対称性】の}\ ((W_{\mathbb{R}})^b)_{il} = ((W_{\mathbb{R}})^b)_{li}\bigr)\\
 &=\sum_{l=1}^{d}\sum_{m=1}^{d}\Bigl(\sum_{i=1}^{d}\bigl((W_{\mathbb{R}})^b\bigr)_{li}\,x_i\Bigr)(C_{\mathbb{R}})_{lm}\Bigl(\sum_{j=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{mj}\,x_j\Bigr)
@@ -2999,11 +2999,11 @@ u^{(a+1)}_l
 &=\sum_{m=1}^{d}\Bigl(\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\Bigr)x_m
 &&\bigl(\because\ \blkref{def_real_matrix_product}\bigr)\\
 &=\sum_{m=1}^{d}\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
-&&\bigl(\because\ \mathbb{R}\ \text{の分配律と乗法の結合律}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律で掛ける数}\ x_m\ \text{を左へ移し、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to x_m)\ \text{を右辺から左辺へ各}\ m\ \text{の項へ同時に適用し、乗法の交換律で}\ x_m\ \text{を右へ戻す}\bigr)\\
 &=\sum_{n=1}^{d}\sum_{m=1}^{d}(W_{\mathbb{R}})_{ln}\,\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
 &&\bigl(\because\ \mathbb{R}\ \text{の有限和の順序の交換}\bigr)\\
 &=\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\sum_{m=1}^{d}\bigl((W_{\mathbb{R}})^a\bigr)_{nm}\,x_m
-&&\bigl(\because\ \mathbb{R}\ \text{の分配律と乗法の結合律}\bigr)\\
+&&\bigl(\because\ \text{乗法の結合律と、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to (W_{\mathbb{R}})_{ln})\ \text{を各}\ n\ \text{の項へ同時に適用}\bigr)\\
 &=\sum_{n=1}^{d}(W_{\mathbb{R}})_{ln}\,u^{(a)}_n
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^ax\text{ の成分】}\bigr)\\
 &=\bigl(W_{\mathbb{R}}u^{(a)}\bigr)_l
@@ -3021,7 +3021,7 @@ u^{(a+1)}_l
 &=\sum_{k=1}^{d}\sum_{l=1}^{d}u^{(a)}_k\,(W_{\mathbb{R}})_{kl}\,u^{(a)}_l
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &=\sum_{k=1}^{d}u^{(a)}_k\sum_{l=1}^{d}(W_{\mathbb{R}})_{kl}\,u^{(a)}_l
-&&\bigl(\because\ \mathbb{R}\ \text{の分配律と乗法の結合律}\bigr)\\
+&&\bigl(\because\ \text{乗法の結合律と、}\blkref{finite_sum_of_real_scalar_multiples}\ (c \to u^{(a)}_k)\ \text{を各}\ k\ \text{の項へ同時に適用}\bigr)\\
 &=\sum_{k=1}^{d}u^{(a)}_k\,\bigl(W_{\mathbb{R}}u^{(a)}\bigr)_k
 &&\bigl(\because\ \blkref{def_real_matrix_vector_product}\bigr)\\
 &=\sum_{k=1}^{d}u^{(a)}_k\cdot 0
@@ -3824,7 +3824,7 @@ z^\top (W_{\mathbb{R}})^nz
  - x_lx_k\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j\\
 &\qquad - x_kx_l\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
  + (x_kx_k)\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j
-&&\bigl(\because\ \mathbb{R}\ \text{の分配律と乗法の交換律・結合律、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側と外側の和へ適用}\bigr)\\
+&&\bigl(\because\ \mathbb{R}\ \text{の分配律と乗法の交換律・結合律、}\blkref{finite_sum_of_real_scalar_multiples}\text{・}\blkref{finite_sum_of_real_differences}\text{・}\blkref{finite_sum_of_real_sums}\ \text{を内側と外側の和へ適用}\bigr)\\
 &=x_l^2\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
  - x_lx_k\sum_{i=1}^{d}\sum_{j=1}^{d}(e_k)_i((W_{\mathbb{R}})^n)_{ij}(e_l)_j\\
 &\qquad - x_kx_l\sum_{i=1}^{d}\sum_{j=1}^{d}(e_l)_i((W_{\mathbb{R}})^n)_{ij}(e_k)_j
@@ -4008,7 +4008,7 @@ m_n
 &\leq 2^{-1}\sum_{k=1}^{d}\sum_{l=1}^{d}\bigl(x_l^2\,((W_{\mathbb{R}})^n)_{kk} + x_k^2\,((W_{\mathbb{R}})^n)_{ll}\bigr)
 &&\bigl(\because\ \text{【}(W_{\mathbb{R}})^n\text{ の成分の評価】を}\ k, l \in \{1,\dots,d\}\ \text{の組}\ (k,l)\ \text{ごとの項へ同時に適用し、項ごとの不等式の有限和と}\ 2^{-1} > 0\ \text{倍は順序を保つ}\bigr)\\
 &=2^{-1}\Bigl(\sum_{k=1}^{d}\sum_{l=1}^{d}x_l^2\,((W_{\mathbb{R}})^n)_{kk} + \sum_{k=1}^{d}\sum_{l=1}^{d}x_k^2\,((W_{\mathbb{R}})^n)_{ll}\Bigr)
-&&\bigl(\because\ \mathbb{R}\ \text{の有限和の加法の交換律・結合律}\bigr)\\
+&&\bigl(\because\ \blkref{finite_sum_of_real_sums}\ \text{を内側と外側の和へ適用}\bigr)\\
 &=2^{-1}\Bigl(\sum_{k=1}^{d}((W_{\mathbb{R}})^n)_{kk}\sum_{l=1}^{d}x_l^2 + \sum_{k=1}^{d}x_k^2\sum_{l=1}^{d}((W_{\mathbb{R}})^n)_{ll}\Bigr)
 &&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換律と、}\blkref{finite_sum_of_real_scalar_multiples}\ \text{を内側の和へ適用}\bigr)\\
 &=2^{-1}\Bigl(\Bigl(\sum_{k=1}^{d}((W_{\mathbb{R}})^n)_{kk}\Bigr)\Bigl(\sum_{l=1}^{d}x_l^2\Bigr) + \Bigl(\sum_{k=1}^{d}x_k^2\Bigr)\Bigl(\sum_{l=1}^{d}((W_{\mathbb{R}})^n)_{ll}\Bigr)\Bigr)
