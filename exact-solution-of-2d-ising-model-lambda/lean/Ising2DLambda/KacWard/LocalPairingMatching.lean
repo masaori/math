@@ -178,6 +178,35 @@ theorem taggedMatching_recovers_labels {L : ℕ} (z : Qbar)
       (x := p.1) (by simp) (by simpa using hendpoint)
     exact hpq ▸ hq
 
+/-- The paper's statement: the matching rebuilt from the original local mates is
+    the original matching, and the short labels read from the complement on it are
+    the original short labels. The first part is the matching recovery. -/
+theorem taggedMatching_recovers_matching_and_labels {L : ℕ} (z : Qbar)
+    (s : SpinStructure) (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hterm : matchingSignPolynomial D *
+      ((-1 : Polynomial Qbar) ^ t.card *
+        (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
+        (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0)
+    (κ : OrientedEdge L → OrientedEdge L)
+    (hlocalSelected : ∀ h, h.1 ∈ taggedComplementEdges D t →
+      (κ h).1 ∈ taggedComplementEdges D t)
+    (hlocalInvolutive : ∀ h, h.1 ∈ taggedComplementEdges D t → κ (κ h) = h)
+    (hlocalNe : ∀ h, h.1 ∈ taggedComplementEdges D t → κ h ≠ h)
+    (hκ : ∀ h, h.1 ∈ taggedComplementEdges D t →
+      κ h = perfectMatchingMate D h) :
+    localPairingMatching (taggedComplementEdges D t) κ
+        hlocalSelected hlocalInvolutive hlocalNe = D ∧
+      localPairingMatchingShortPairs (taggedComplementEdges D t)
+        (localPairingMatching (taggedComplementEdges D t) κ
+          hlocalSelected hlocalInvolutive hlocalNe) = t := by
+  have hD := taggedMatching_recovers_matching z s D t ht hterm κ
+    hlocalSelected hlocalInvolutive hlocalNe hκ
+  refine ⟨hD, ?_⟩
+  rw [hD]
+  exact (taggedMatching_recovers_labels z s D t ht hterm).symm
+
 theorem localPairingMatching_label_support {L : ℕ} (P : Finset (Edge L))
     (κ : OrientedEdge L → OrientedEdge L)
     (hlocalSelected : ∀ h, h.1 ∈ P → (κ h).1 ∈ P)

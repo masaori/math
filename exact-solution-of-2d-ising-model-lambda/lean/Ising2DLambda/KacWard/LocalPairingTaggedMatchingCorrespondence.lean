@@ -243,14 +243,13 @@ theorem localPairingTaggedMatching_eq_of_mate (z : Qbar) (s : SpinStructure) (P 
     unfold halfEdgePairing
     rw [← hmate _ _ hi, Prod.mk.eta, Equiv.symm_apply_apply]
   subst hP
-  have hD : (localPairingTaggedMatching _ κ hκ).1 = D :=
-    taggedMatching_recovers_matching z s D t ht hterm _
-      (halfEdgePairing_selected _ _ hκ) (fun h _ => halfEdgePairing_involutive _ _ hκ h)
-      (halfEdgePairing_ne _ _ hκ) hpair
-  apply Prod.ext hD
+  obtain ⟨hD, hT⟩ := taggedMatching_recovers_matching_and_labels z s D t ht hterm _
+    (halfEdgePairing_selected _ _ hκ) (fun h _ => halfEdgePairing_involutive _ _ hκ h)
+    (halfEdgePairing_ne _ _ hκ) hpair
+  have hD' : (localPairingTaggedMatching _ κ hκ).1 = D := hD
+  apply Prod.ext hD'
   change localPairingMatchingShortPairs _ (localPairingTaggedMatching _ κ hκ).1 = t
-  rw [hD]
-  exact (taggedMatching_recovers_labels z s D t ht hterm).symm
+  exact hT
 
 /-- 非零項の短い対は局所対合族を与え、その対合族から作った項は元の項に戻る
     （`claim_tagged_matching_local_pairs`・`claim_tagged_matching_label_recovery`）。 -/

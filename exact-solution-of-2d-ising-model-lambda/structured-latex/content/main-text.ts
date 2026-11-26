@@ -98107,11 +98107,14 @@ d_{P(D,T)}(v)
                       paragraph(["が成り立つ。"]),
                     ],
                     proof: [
-                      paragraph(["補辺の各辺には端点番号 ", math(String.raw`0,1`), " による二つの向きがある。", ref("claim_tagged_matching_nonzero_support"), " と ", ref("claim_tagged_matching_even_complement"), " の証明で構成した対応により、それらは短い標識の対に属する向き付き辺全体と一致する。したがって"]),
+                      paragraph(["補辺の各辺には端点番号 ", math(String.raw`0,1`), " による二つの向きがある。", ref("claim_perfect_matching_enumeration_complete"), " の完全列挙により、各向き付き辺は ", math(String.raw`D`), " のただ一つの昇順対 ", math(String.raw`r=(\vec e,\vec f)\in E_D`), " に現れる。この対の寄与を ", math(String.raw`c(r):=[p(\vec e)\in P(D,T)]+[p(\vec f)\in P(D,T)]\in\mathbb N`), " と置く（", math(String.raw`p`), " は ", ref("def_oriented_edges"), " の台への射影、", math(String.raw`[\,\cdot\,]`), " は真なら一、偽なら零）。"]),
+                      paragraph([math(String.raw`r\in E_D\setminus T`), " なら、", ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`\vec f=\iota(\vec e)`), " であり、二つの向きの台は同じ辺で、そこに長い標識の対があるので ", ref("def_tagged_matching_complement_edges"), " より補辺に入らず、", math(String.raw`c(r)=0`), " である。", math(String.raw`r\in T`), " なら、", math(String.raw`\vec e`), " の台が補辺に入らないとすると、その台の長い標識の対が ", ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`\vec e`), " を含み、", math(String.raw`\vec e`), " がただ一つの対に現れることに反する。", math(String.raw`\vec f`), " も同じなので ", math(String.raw`c(r)=2`), " である。したがって"]),
                       displayMath(String.raw`\begin{aligned}
-\#\{(e,a)\in\vec E_L\mid e\in P(D,T)\}
-&=2|P(D,T)|&&\bigl(\because\ \blkref{def_tagged_matching_complement_edges}\text{ と二つの端点番号}\bigr)\\
-&=2|T|&&\bigl(\because\ \blkref{claim_tagged_matching_nonzero_support}\text{ と完全マッチングの分割}\bigr).
+2|P(D,T)|
+&=\#\{(e,a)\in\vec E_L\mid e\in P(D,T)\}&&\bigl(\because\ \blkref{def_tagged_matching_complement_edges}\text{ と二つの端点番号}\bigr)\\
+&=\sum_{r\in E_D}c(r)&&\bigl(\because\ \blkref{claim_perfect_matching_enumeration_complete}\text{ の完全列挙}\bigr)\\
+&=\sum_{r\in T}2&&\bigl(\because\ \blkref{claim_tagged_matching_nonzero_support}\text{ と上の }c(r)\text{ の値}\bigr)\\
+&=2|T|&&\bigl(\because\ \text{定数の有限和}\bigr).
 \end{aligned}`),
                       displayMath(String.raw`|P(D,T)|=|T|\qquad\bigl(\because\ 2|P(D,T)|=2|T|\text{ と自然数の二倍の消去}\bigr)`),
                       paragraph(["辺長一でも同一の二元集合に長短の別の標識を付けて数え、二つの向きを区別するため、同じ計数が成り立つ。"]),
@@ -98149,9 +98152,9 @@ d_{P(D,T)}(v)
                       paragraph([ref("claim_tagged_matching_expansion"), " の標識付き完全マッチング ", math(String.raw`(D,T)`), " の項が零でないとする。", ref("def_tagged_matching_complement_edges"), " の ", math(String.raw`P=P(D,T)\subseteq E_L`), " と頂点 ", math(String.raw`v\in V_L`), " を固定する。半辺の集合 ", math(String.raw`H_v(P):=\{(e,a)\mid e\in P,\ a\in\{0,1\},\ \operatorname{src}(\vec e_a)=v\}`), " と短い対の集合 ", math(String.raw`T_v:=\{p\in T\mid\operatorname{src}(p_1)=v\}`), " を取る。このとき各 ", math(String.raw`(e,a)\in H_v(P)`), " は ", math(String.raw`T_v`), " のただ一つの対に属する。" ]),
                     ],
                     proof: [
-                      paragraph(["任意の ", math(String.raw`(e,a)\in H_v(P)`), " を取り、対応する向き付き辺を ", math(String.raw`\vec e_a\in\vec E_L`), " とする。", ref("claim_tagged_matching_even_complement"), " の証明で使った端点番号つき半辺と向き付き辺の全単射により、", math(String.raw`e\in P`), " と ", math(String.raw`\operatorname{src}(\vec e_a)=v`), " である。", ref("claim_tagged_matching_nonzero_support"), " より、", math(String.raw`e\in P`), " の二つの向きはいずれも短い標識の対に属する。従って ", math(String.raw`\vec e_a`), " を含む ", math(String.raw`p\in T`), " が存在する。" ]),
+                      paragraph(["任意の ", math(String.raw`(e,a)\in H_v(P)`), " を取り、対応する向き付き辺を ", math(String.raw`\vec e_a\in\vec E_L`), " とする。", math(String.raw`H_v(P)`), " の定義により、", math(String.raw`e\in P`), " と ", math(String.raw`\operatorname{src}(\vec e_a)=v`), " である。", ref("claim_perfect_matching_enumeration_complete"), " の完全列挙により、", math(String.raw`\vec e_a`), " を含む ", math(String.raw`D`), " の昇順対 ", math(String.raw`p\in E_D`), " がただ一つある。", math(String.raw`p\notin T`), " なら、", ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`p`), " は ", math(String.raw`e`), " の二つの向きの反転対で、", ref("def_tagged_matching_complement_edges"), " より ", math(String.raw`e\notin P`), " となって矛盾する。従って ", math(String.raw`\vec e_a`), " を含む ", math(String.raw`p\in T`), " が存在する。" ]),
                       paragraph([ref("claim_tagged_matching_nonzero_support"), " により短い対の二つの向きは同じ始点を持つ。ゆえに ", math(String.raw`\operatorname{src}(p_1)=v`), " であり、", math(String.raw`p\in T_v`), " である。" ]),
-                      paragraph(["もし ", math(String.raw`p,q\in T_v`), " がともに ", math(String.raw`\vec e_a`), " を含むなら、", ref("claim_tagged_matching_expansion"), " の完全マッチング ", math(String.raw`D`), " では各向き付き辺はただ一つの対に属するため ", math(String.raw`p=q`), " である。従って ", math(String.raw`T_v`), " は ", math(String.raw`H_v(P)`), " の半辺を重なりなく二つずつ組む。", math(String.raw`L=1`), " の自己ループでも端点番号 ", math(String.raw`0,1`), " は異なる半辺として扱い、長短の標識は別々に保つ。" ]),
+                      paragraph(["もし ", math(String.raw`p,q\in T_v`), " がともに ", math(String.raw`\vec e_a`), " を含むなら、", ref("claim_perfect_matching_enumeration_complete"), " の完全列挙では各向き付き辺はただ一つの昇順対に現れるため ", math(String.raw`p=q`), " である。従って ", math(String.raw`T_v`), " は ", math(String.raw`H_v(P)`), " の半辺を重なりなく二つずつ組む。", math(String.raw`L=1`), " の自己ループでも端点番号 ", math(String.raw`0,1`), " は異なる半辺として扱い、長短の標識は別々に保つ。" ]),
                     ],
                   },
                 },
@@ -98748,8 +98751,7 @@ q_{\vec e,\vec f}
                     habitat: "N",
                     verification: ["sagemath/check/tagged-matching-label-recovery"],
                     lean: [
-                      "Ising2DLambda.KacWard.taggedMatching_recovers_labels",
-                      "Ising2DLambda.KacWard.taggedMatching_recovers_matching",
+                      "Ising2DLambda.KacWard.taggedMatching_recovers_matching_and_labels",
                       "Ising2DLambda.NecSuf.KacWard.labels_eq_filter_of_endpoint_cover",
                     ],
                     statement: [
@@ -98760,7 +98762,7 @@ q_{\vec e,\vec f}
                     proof: [
                       paragraph([ref("claim_tagged_matching_matching_recovery"), " より ", math(String.raw`\mathcal D_\tau=D`), " である。従って両者の昇順対集合も等しい。任意の ", math(String.raw`r=(\vec e,\vec f)\in E_D`), " を取る。", ref("claim_local_pairing_matching_label_support"), " の定義から、"]),
                       displayMath(String.raw`r\in T_P\iff p(\vec e)\in P\qquad\bigl(\because\ \blkref{claim_local_pairing_matching_label_support}\bigr)`),
-                      paragraph(["まず ", math(String.raw`r\in T`), " とする。", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec e,\vec f`), " は同じ始点を持つ。もし ", math(String.raw`p(\vec e)\notin P`), " なら、", ref("def_tagged_matching_complement_edges"), " により同じ台の長い標識の対 ", math(String.raw`q\in E_D\setminus T`), " がある。", ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`q`), " はその台の二つの向き付き辺を含み、", math(String.raw`\vec e`), " も含む。異なる二対が ", math(String.raw`\vec e`), " を共有するのは完全マッチングに反するので ", math(String.raw`r=q`), " となるが、", math(String.raw`r\in T`), " と ", math(String.raw`q\notin T`), " に矛盾する。ゆえに ", math(String.raw`p(\vec e)\in P`), "、従って ", math(String.raw`r\in T_P`), " である。"]),
+                      paragraph(["まず ", math(String.raw`r\in T`), " とする。", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec e,\vec f`), " は同じ始点を持つ。もし ", math(String.raw`p(\vec e)\notin P`), " なら、", ref("def_tagged_matching_complement_edges"), " により同じ台の長い標識の対 ", math(String.raw`q\in E_D\setminus T`), " がある。", ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`q`), " はその台の二つの向き付き辺を含み、", math(String.raw`\vec e`), " も含む。", ref("claim_perfect_matching_enumeration_complete"), " の完全列挙では各向き付き辺はただ一つの昇順対に現れるので ", math(String.raw`r=q`), " となるが、", math(String.raw`r\in T`), " と ", math(String.raw`q\notin T`), " に矛盾する。ゆえに ", math(String.raw`p(\vec e)\in P`), "、従って ", math(String.raw`r\in T_P`), " である。"]),
                       paragraph(["逆に ", math(String.raw`r\in T_P`), " とする。もし ", math(String.raw`r\notin T`), " なら ", math(String.raw`r\in E_D\setminus T`), " であり、", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec f=\iota(\vec e)`), " である。", ref("def_edge_reversal"), " より両者の台は ", math(String.raw`p(\vec e)`), " であり、", ref("def_tagged_matching_complement_edges"), " により ", math(String.raw`p(\vec e)\notin P`), " となる。これは ", math(String.raw`r\in T_P`), " に矛盾する。従って ", math(String.raw`r\in T`), " である。"]),
                       paragraph(["二つの包含から ", math(String.raw`T_P=T`), " を得る。共通の ", math(String.raw`E_D`), " から同じ集合を除けば長い標識の集合も等しい。辺長一で同じ二元対に二種類の寄与があっても、短い標識への所属は ", math(String.raw`T`), " で判定しており、二元対の形から推測していない。"]),
                     ],
@@ -99606,10 +99608,11 @@ w_{r+1}
                       paragraph(["両向きについて同じ同値が成り立つ。辺長一でも長短の標識を区別する。実数体と複素数体は現れない。"]),
                     ],
                     proof: [
-                      paragraph(["向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " を固定する。", ref("def_finite_perfect_matching"), " により、", math(String.raw`D`), " で ", math(String.raw`\vec e`), " を含む対 ", math(String.raw`d_{\vec e}`), " はただ一つである。", ref("claim_tagged_matching_nonzero_support"), " により、長い標識の対は必ず同じ辺の二つの向きを組にする。"]),
+                      paragraph(["向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " を固定する。", ref("claim_perfect_matching_enumeration_complete"), " の完全列挙により、", math(String.raw`D`), " で ", math(String.raw`\vec e`), " を含む昇順対はただ一つであり、", ref("claim_perfect_matching_involution"), " の相手写像によりその二元集合は ", math(String.raw`d_{\vec e}=\{\vec e,\operatorname{mate}_D(\vec e)\}`), " である。", ref("claim_tagged_matching_nonzero_support"), " により、長い標識の対は必ず同じ辺の二つの向きを組にする。"]),
                       paragraph([math(String.raw`p(\vec e)\in P(D,T)`), " ならば、", ref("def_tagged_matching_complement_edges"), " により、", math(String.raw`p(\vec e)`), " の二向きを組にした長い標識の対は無い。", math(String.raw`d_{\vec e}`), " が長い標識ならその対が存在して矛盾する。ゆえに ", math(String.raw`d_{\vec e}`), " は短い標識である。"]),
                       paragraph(["逆に ", math(String.raw`d_{\vec e}`), " が短い標識とする。もし ", math(String.raw`p(\vec e)\notin P(D,T)`), " なら、", ref("def_tagged_matching_complement_edges"), " により同じ台の長い標識の対がある。", ref("claim_tagged_matching_nonzero_support"), " によりそれは ", math(String.raw`\vec e`), " を含み、", math(String.raw`d_{\vec e}`), " の一意性に反する。従って ", math(String.raw`p(\vec e)\in P(D,T)`), " である。"]),
-                      paragraph(["これで補辺への所属と ", math(String.raw`d_{\vec e}`), " の短い標識は同値である。", ref("claim_tagged_symmetric_difference_active_vertices"), " より、後者は ", math(String.raw`\vec e\in V_{\mathcal A}`), " と同値である。", ref("def_edge_reversal"), " より"]),
+                      paragraph(["これで補辺への所属と ", math(String.raw`d_{\vec e}`), " の短い標識は同値である。", ref("claim_tagged_symmetric_difference_active_vertices"), " より、後者は ", math(String.raw`\vec e\in V_{\mathcal A}`), " と同値である。"]),
+                      paragraph(["活動点は対の比較でも読める。", ref("claim_reference_long_matching"), " の基準完全マッチング ", math(String.raw`\mathcal D_0`), " で ", math(String.raw`\vec e`), " を含む対はただ一つで、", ref("claim_reference_long_mate_reversal"), " よりその二元集合は ", math(String.raw`\{\vec e,\iota(\vec e)\}`), "、標識は長い。", ref("def_tagged_symmetric_difference"), " の対称差に ", math(String.raw`\vec e`), " を含む標識付き対が残ることは、", math(String.raw`D`), " で ", math(String.raw`\vec e`), " を含む標識付き対 ", math(String.raw`d_{\vec e}`), " とこの長い対が異なることと同値である（", ref("def_tagged_difference_active_vertices"), "）。上の同値はこの読みでも同じである。", ref("def_edge_reversal"), " より"]),
                       displayMath(String.raw`p(\iota(\vec e))=p(\vec e)\qquad\bigl(\because\ \blkref{def_edge_reversal}\text{ と }\blkref{def_oriented_edges}\bigr)`),
                       paragraph(["同じ結論は反転した向きにも成り立つ。"]),
                     ],
