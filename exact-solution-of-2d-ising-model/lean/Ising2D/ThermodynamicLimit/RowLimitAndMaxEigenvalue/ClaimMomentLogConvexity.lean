@@ -52,7 +52,7 @@
   `(W^p)_ℝ` に渡す証明は `matrix_pow_hasRealEntries`、`(AB)_ℝ` に渡す証明は `matrix_mul_hasRealEntries` である。
   `A = B` から `A_ℝ = B_ℝ` を出す行は `realMatrixOfRealEntries_congr` で書く。
 - 人手の `def_real_matrix_product`・`def_real_matrix_vector_product` は Lean の `Matrix _ _ ℝ` の `*`・`*ᵥ`（成分は和で `rfl`）、
-  `def_real_bilinear_value` は `dotProduct_mulVec_eq_real_bilinear_value`、`‖·‖` は `vecNorm` である。
+  `def_real_bilinear_value` は `realMatrix_conf_bilinear_value_apply`（`x ⬝ᵥ P *ᵥ y` を `𝓘_M` の上の二重の和へ開く）、`‖·‖` は `vecNorm` である。
 - 人手の「`k` 以外の各項へ 0 を当てる」行は `Finset.sum_congr` で各項を `if _ = k then _ else 0` に書き、
   「`0 + r = r` と `r + 0 = r` を左から順に」の行は mathlib の `Finset.sum_ite_eq'` で書く（`ClaimTracePowerUpperBound.lean` と同じ扱い）。
   「各項は 0 以上なので和は 0 以上」「正の項があるので和は正」は mathlib の `Finset.sum_nonneg`・`Finset.sum_pos'` で書く
@@ -87,7 +87,7 @@ theorem real_bilinear_value_of_real_identity_matrix (y : Conf M → ℝ) :
       _ = 0 := real_zero_times_is_zero (y l)                               -- `real_zero_times_is_zero`（`x → y_l`）
   calc y ⬝ᵥ I *ᵥ y
       = ∑ k, ∑ l, y k * I k l * y l :=
-        dotProduct_mulVec_eq_real_bilinear_value y y I                      -- `def_real_bilinear_value`
+        realMatrix_conf_bilinear_value_apply y y I                         -- `def_real_bilinear_value`
     _ = ∑ k, ∑ l, if l = k then y k * I k k * y k else 0 := by
         refine Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => ?_
         by_cases h : l = k
@@ -243,7 +243,7 @@ theorem real_bilinear_value_between_two_powers (CR : Matrix (Conf M) (Conf M) �
   set Pb := realMatrixOfRealEntries W hW.1 ^ b with hPb
   calc x ⬝ᵥ (Pb * (CR * Pa)) *ᵥ x
       = ∑ i, ∑ j, x i * (Pb * (CR * Pa)) i j * x j :=
-        dotProduct_mulVec_eq_real_bilinear_value x x _                      -- `def_real_bilinear_value`
+        realMatrix_conf_bilinear_value_apply x x _                         -- `def_real_bilinear_value`
     _ = ∑ i, ∑ j, x i * (∑ l, Pb i l * (CR * Pa) l j) * x j := rfl          -- `def_real_matrix_product`
     _ = ∑ i, ∑ j, x i * (∑ l, Pb i l * ∑ m, CR l m * Pa m j) * x j := rfl   -- `def_real_matrix_product`
     _ = ∑ i, ∑ j, ∑ l, ∑ m, x i * Pb i l * CR l m * Pa m j * x j := by
@@ -283,7 +283,7 @@ theorem real_bilinear_value_between_two_powers (CR : Matrix (Conf M) (Conf M) �
         simp only [mul_comm (x _) (Pb _ _)]                                 -- `ℝ` の乗法の交換律
     _ = ∑ l, ∑ m, (Pb *ᵥ x) l * CR l m * (Pa *ᵥ x) m := rfl                 -- 【`(W_ℝ)^ax` の成分】を `a` と `b` へ同時に
     _ = (Pb *ᵥ x) ⬝ᵥ CR *ᵥ (Pa *ᵥ x) :=
-        (dotProduct_mulVec_eq_real_bilinear_value _ _ CR).symm              -- `def_real_bilinear_value`
+        (realMatrix_conf_bilinear_value_apply _ _ CR).symm                 -- `def_real_bilinear_value`
 
 /-- 人手【`(W_ℝ)^ax` は零でない】の `a = 0` の `m ≠ l` の項の 2 行と 5 行: `u^{(0)}_l = x_l`。 -/
 theorem power_zero_of_W_real_mulVec_apply (x : Conf M → ℝ) (l : Conf M) :
@@ -367,7 +367,7 @@ theorem real_bilinear_value_eq_zero_of_mulVec_eq_zero (u : Conf M → ℝ)
     simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, card_conf_nat, nsmul_eq_mul, mul_one] at h
     exact_mod_cast h.symm
   calc u ⬝ᵥ WR *ᵥ u
-      = ∑ k, ∑ l, u k * WR k l * u l := dotProduct_mulVec_eq_real_bilinear_value u u WR
+      = ∑ k, ∑ l, u k * WR k l * u l := realMatrix_conf_bilinear_value_apply u u WR
                                                                             -- `def_real_bilinear_value`
     _ = ∑ k, u k * ∑ l, WR k l * u l := by
         simp only [← finite_sum_over_multi_indices_of_real_scalar_multiples, mul_assoc]

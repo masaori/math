@@ -28,6 +28,8 @@
 ライブラリが置いた積、ℂ の行列と ℝ の行列）と、本文が定める添字が `{1,…,n}` の行列の演算と本文に定義の無い添字が任意の型の行列の演算を、
 分けて数えるためである。
 演算の型としての行列は、行と列の添字の型と成分の型の頭まで `Matrix[Fin,Fin,Complex]` と書く。
+`dotProduct` のうち二つ目のベクトルが `Matrix.mulVec` の項であるもの（`x ⬝ᵥ P *ᵥ y`。本文の双線型値 `x^⊤Py`）は、
+二つのベクトルの `dotProduct` と分けて `dotProduct[Matrix.mulVec]@…` と書き出す。
 行列の型そのもの（`Matrix m n α`）は、同じ理由で、行と列の添字の型と成分の型の頭を添えて `Matrix@Fin,Fin,Complex` と書き出す。
 インスタンス引数をとる型クラスの演算でない関数（`Finset.sum`・`Matrix.trace`・`nhds` など）も、最初のインスタンス引数より前の
 引数の頭と各インスタンス引数の頭を添えて `Finset.sum@Complex,Fin@Complex.instAddCommMonoid` のように書き出す。型が変数なら `?`、関数の型なら `→`、λ なら `fun` を添える。
@@ -213,13 +215,18 @@ partial def recordHead (c : Name) (args : Array Expr) : WalkM Unit := do
     -- インスタンス引数をとる関数（`Finset.sum`・`Matrix.trace`・`nhds` など）は、どの和・どの位相かを
     -- インスタンスが決めるので、最初のインスタンス引数より前の引数の頭と、各インスタンス引数の頭を添える。
     let mask ← maskOf env c
+    -- 二つ目のベクトルが行列とベクトルの積である `dotProduct x (Matrix.mulVec P y)`（`x ⬝ᵥ P *ᵥ y`）は、本文が一つの記号として
+    -- 定める双線型値 `x^⊤Py`（`def_real_bilinear_value`）に当たるので、二つのベクトルの `dotProduct` とは別の記号
+    -- `dotProduct[Matrix.mulVec]` として数える（`Matrix.mulVec` 自身も別に数える）。
+    let name := if c == ``dotProduct && args.size == 7 && args[6]!.getAppFn.isConstOf ``Matrix.mulVec then
+        s!"{c}[{``Matrix.mulVec}]" else c.toString
     match mask.findIdx? id with
-    | none => record c.toString
+    | none => record name
     | some first =>
       let types := (args.extract 0 first).toList.map carrierHead
       let insts := (List.range mask.size).filter (fun i => mask[i]!) |>.map fun i =>
         if i < args.size then instanceHead env args[i]! else "?"
-      record s!"{c}@{",".intercalate types}@{",".intercalate insts}"
+      record s!"{name}@{",".intercalate types}@{",".intercalate insts}"
 
 /-- インスタンスとして渡す項。登録されたインスタンスと親への射影は書き出さずに引数を辿り、
 それ以外の定数（登録されていない定義を `letI` で入れたものなど）は書き出す。 -/

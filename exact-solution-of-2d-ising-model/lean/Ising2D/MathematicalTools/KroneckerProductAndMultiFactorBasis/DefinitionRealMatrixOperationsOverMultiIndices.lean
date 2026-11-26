@@ -1,10 +1,11 @@
 /-
-# 実数の行列の全体 `Mat(m, n, ℝ)` と、実数の行列 `Mat(2^M, ℝ)` の積・実数のベクトルとの積・単位行列と、Lean の `Matrix (Conf M) (Conf M) ℝ` の演算（具体版）
+# 実数の行列の全体 `Mat(m, n, ℝ)` と、実数の行列 `Mat(2^M, ℝ)` の積・実数のベクトルとの積・単位行列・実数の双線型値 `x^⊤Py` と、Lean の `Matrix (Conf M) (Conf M) ℝ` の演算（具体版）
 
 正本: `structured-latex/content/002_linear_space_general.ts`（`linear_space_general_definition_real_matrices`、ラベル **`def_real_matrices`**・
 `linear_space_general_definition_real_matrix_product`、ラベル **`def_real_matrix_product`**・
 `linear_space_general_definition_real_matrix_vector_product`、ラベル **`def_real_matrix_vector_product`**・
-`linear_space_general_definition_real_identity_matrix`、ラベル **`def_real_identity_matrix`**）
+`linear_space_general_definition_real_identity_matrix`、ラベル **`def_real_identity_matrix`**）、
+`structured-latex/content/011_max_eigenvalue.ts`（`maxeig_definition_real_bilinear_value`、ラベル **`def_real_bilinear_value`**）
 
 人手の `Mat(m, n, ℝ)` は添字の集合の直積 `{1,…,m} × {1,…,n}` から `ℝ` への写像の全体（`def_real_matrices`）で、演算を成分の式で定める:
 `(PQ)_{ik} := Σ_{j=1}^{n} P_{ij} Q_{jk}`、`(Px)_i := Σ_{j=1}^{n} P_{ij} x_j`、`(I_{Mat(n,ℝ)})_{st} := 1 (s = t)、0 (s ≠ t)`（添字の文字は本文どおり）。
@@ -20,6 +21,9 @@ Lean の `Matrix (Conf M) (Conf M) ℝ` は添字型が `𝓘_M`（Lean の `Con
   `def_finite_sum_of_real_numbers_over_multi_indices` で番号の上の和へ移す（`realMatrix_conf_mul_apply_eq_def_real_matrix_product`・
   `realMatrix_conf_mulVec_apply_eq_def_real_matrix_vector_product`）。証明の段が `𝓘_M` の元を添字に書くときのために、`𝓘_M` の上の和の形
   `realMatrix_conf_mul_apply`・`realMatrix_conf_mulVec_apply` もそこから導く。
+- 実数の双線型値 `x^⊤Py := Σ_{k=1}^{n} Σ_{l=1}^{n} x_k P_{kl} y_l`（`def_real_bilinear_value`）は、Lean では `x ⬝ᵥ P *ᵥ y` と書く。
+  `⬝ᵥ` と `*ᵥ` の値を番号の上の和へ移し、`x_k` を内側の和へ入れて、本文の二重の和に等しいことを示す
+  （`realMatrix_conf_bilinear_value_eq_def_real_bilinear_value`）。`𝓘_M` の上の二重の和の形 `realMatrix_conf_bilinear_value_apply` もそこから導く。
 - 単位行列は成分の式が番号の等号で場合を分けるので、`ν^{-1}` で番号へ移した成分が本文の二つの場合の値に等しいことを `ν^{-1}` の単射で示す
   （`realMatrix_conf_one_apply_eq_def_real_identity_matrix`）。`𝓘_M` の添字の形 `realMatrix_conf_one_apply` もそこから導く。
 
@@ -28,6 +32,7 @@ Lean の `Matrix (Conf M) (Conf M) ℝ` は添字型が `𝓘_M`（Lean の `Con
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionKroneckerNumbering
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionFiniteSumOverMultiIndices
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 
 namespace Ising2D
 
@@ -163,5 +168,56 @@ theorem realMatrix_conf_one_apply {M : ℕ} :
     obtain ⟨t, rfl⟩ := hsurj K
     exact (realMatrix_conf_one_apply_eq_def_real_identity_matrix M n σ hσ).2 s t
       (fun h => hIK (by rw [h]))                            -- `def_real_identity_matrix` の `s ≠ t`
+
+/-- **`def_real_bilinear_value`**: Lean の `x ⬝ᵥ P *ᵥ y`（`x y : Conf M → ℝ`、`P : Matrix (Conf M) (Conf M) ℝ`）は、成分を `ν^{-1}` で番号へ移すと、
+本文の `x^⊤Py := Σ_{k=1}^{n} Σ_{l=1}^{n} x_k P_{kl} y_l`（`n = 2^M`、`x_k` が `x (ν^{-1}(k))`、`P_{kl}` が `P (ν^{-1}(k)) (ν^{-1}(l))`）の右辺に等しい
+（Lean だけの段の補題。冒頭の説明を見よ）。本文の `x^⊤Py` は一つの記号で、数ベクトルの転置と行列の積の組み合わせとしては読まないので、
+Lean の `⬝ᵥ`（mathlib の `dotProduct`）は具体版の主張と定義の中で `x ⬝ᵥ P *ᵥ y` の形でだけ使い、この補題で本文の定義の右辺と結ぶ。
+mathlib の `⬝ᵥ` と `*ᵥ` の値は `𝓘_M`（Lean の `Conf M`）の上の和で、それを番号の上の和へ移すのは
+`def_finite_sum_of_real_numbers_over_multi_indices`（`finset_sum_conf_real_eq_finite_sum_over_multi_indices`）である。 -/
+theorem realMatrix_conf_bilinear_value_eq_def_real_bilinear_value (M : ℕ) :
+    ∀ (n : ℕ), (∀ I : Conf M, ∃ k : Fin n, kroneckerNumbering I = finIndexToZZ n k) →
+      ∀ (σ : Fin n → Conf M), (∀ k, kroneckerNumbering (σ k) = finIndexToZZ n k) →
+        ∀ (x y : Conf M → ℝ) (P : Matrix (Conf M) (Conf M) ℝ),
+          x ⬝ᵥ P *ᵥ y = ∑ k : Fin n, ∑ l : Fin n, x (σ k) * P (σ k) (σ l) * y (σ l) := by
+  intro n hord σ hσ x y P
+  calc x ⬝ᵥ P *ᵥ y
+      = ∑ K : Conf M, x K * (P *ᵥ y) K := rfl               -- mathlib の `⬝ᵥ` の定義を開く
+    _ = ∑ k : Fin n, x (σ k) * (P *ᵥ y) (σ k) :=
+        finset_sum_conf_real_eq_finite_sum_over_multi_indices M n hord σ hσ _
+                                                            -- `def_finite_sum_of_real_numbers_over_multi_indices`
+    _ = ∑ k : Fin n, x (σ k) * ∑ l : Fin n, P (σ k) (σ l) * y (σ l) :=
+        Finset.sum_congr rfl fun k _ => by
+          rw [realMatrix_conf_mulVec_apply_eq_def_real_matrix_vector_product M n hord σ hσ P y k]
+                                                            -- `def_real_matrix_vector_product` を各 `k` の項へ
+    _ = ∑ k : Fin n, ∑ l : Fin n, x (σ k) * (P (σ k) (σ l) * y (σ l)) :=
+        Finset.sum_congr rfl fun k _ =>
+          (finite_sum_of_real_scalar_multiples n (x (σ k)) (fun l => P (σ k) (σ l) * y (σ l))).symm
+                                                            -- `finite_sum_of_real_scalar_multiples`（`c → x_k`）を右辺から左辺へ各 `k` の項へ
+    _ = ∑ k : Fin n, ∑ l : Fin n, x (σ k) * P (σ k) (σ l) * y (σ l) :=
+        Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ =>
+          (mul_assoc (x (σ k)) (P (σ k) (σ l)) (y (σ l))).symm
+                                                            -- `ℝ` の乗法の結合律（`set_and_algebra_notation`）を各項へ
+
+/-- **`def_real_bilinear_value`**（`𝓘_M` の添字の形）: `x ⬝ᵥ P *ᵥ y = Σ_{K∈𝓘_M} Σ_{L∈𝓘_M} x_K P_{KL} y_L` である。
+`realMatrix_conf_bilinear_value_eq_def_real_bilinear_value` で番号の上の二重の和にし、
+`def_finite_sum_of_real_numbers_over_multi_indices` を内側と外側の和へ当てて `𝓘_M` の上の和へ戻す
+（Lean だけの段。本文の和の添字を `𝓘_M` の元で書く証明の段が使う）。 -/
+theorem realMatrix_conf_bilinear_value_apply {M : ℕ} (x y : Conf M → ℝ) (P : Matrix (Conf M) (Conf M) ℝ) :
+    x ⬝ᵥ P *ᵥ y = ∑ K : Conf M, ∑ L : Conf M, x K * P K L * y L := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M
+  calc x ⬝ᵥ P *ᵥ y
+      = ∑ k : Fin n, ∑ l : Fin n, x (σ k) * P (σ k) (σ l) * y (σ l) :=
+        realMatrix_conf_bilinear_value_eq_def_real_bilinear_value M n hord σ hσ x y P
+                                                            -- `def_real_bilinear_value`
+    _ = ∑ k : Fin n, ∑ L : Conf M, x (σ k) * P (σ k) L * y L :=
+        Finset.sum_congr rfl fun k _ =>
+          (finset_sum_conf_real_eq_finite_sum_over_multi_indices M n hord σ hσ
+            (fun L => x (σ k) * P (σ k) L * y L)).symm
+                                                            -- `def_finite_sum_of_real_numbers_over_multi_indices` を内側の和へ
+    _ = ∑ K : Conf M, ∑ L : Conf M, x K * P K L * y L :=
+        (finset_sum_conf_real_eq_finite_sum_over_multi_indices M n hord σ hσ
+          (fun K => ∑ L : Conf M, x K * P K L * y L)).symm
+                                                            -- `def_finite_sum_of_real_numbers_over_multi_indices` を外側の和へ
 
 end Ising2D
