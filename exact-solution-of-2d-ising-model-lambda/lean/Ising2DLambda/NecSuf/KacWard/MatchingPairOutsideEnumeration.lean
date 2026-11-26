@@ -12,6 +12,23 @@ noncomputable def matchingPairOutsideEnumeration (mate : J → J) (A : Set J) :
   ((Finset.univ.filter (fun e : J => e ∉ A ∧ e < mate e)).sort (· ≤ ·)).map
     (fun e => (e, mate e))
 
+/-- 列挙した対の端点は活動点の外にある。 -/
+theorem matchingPairOutsideEnumeration_outside (mate : J → J) (A : Set J)
+    (hinv : ∀ e, mate (mate e) = e)
+    (hclosed : ∀ e, e ∈ A → mate e ∈ A)
+    (x : J)
+    (hx : x ∈ (matchingPairOutsideEnumeration mate A).flatMap (fun p => [p.1, p.2])) :
+    x ∉ A := by
+  obtain ⟨p, hp, hxp⟩ := List.mem_flatMap.mp hx
+  obtain ⟨e, he, rfl⟩ := List.mem_map.mp hp
+  have he' := (Finset.mem_filter.mp ((Finset.mem_sort _).mp he)).2
+  simp only [List.mem_cons, List.not_mem_nil, or_false] at hxp
+  rcases hxp with rfl | rfl
+  · exact he'.1
+  · intro hm
+    apply he'.1
+    simpa only [hinv] using hclosed (mate e) hm
+
 /-- 不動点のない対合で列挙した対の端点は互いに異なる。 -/
 theorem matchingPairOutsideEnumeration_nodup (mate : J → J) (A : Set J)
     (hfix : ∀ e, mate e ≠ e) (hinv : ∀ e, mate (mate e) = e) :

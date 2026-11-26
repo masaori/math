@@ -3,10 +3,6 @@
 # 行は減らすだけにする。直して違反でなくなった行は同じ回に消す。
 DEP	necsuf	Ising2DLambda.NecSuf.AlgebraicEigenvalue.emptyWeightedPfaffianDeterminant
 DEP	necsuf	Ising2DLambda.NecSuf.CriticalExponent.criticalPoint_rationalPartitionInterval_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.commonPairsOf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.commonPairs_nodup_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.commonPairs_outside_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.commonPairs_spec_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycleMinimaOf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePointsOf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_disjoint_necSuf

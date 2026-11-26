@@ -51,10 +51,6 @@ noncomputable def cycleWordsOf {A : Set J} (τ υ : FixedPointFreeInvolution {x 
     List (List J) :=
   ((cycleMinimaOf τ υ).sort (· ≤ ·)).map (cyclePointsOf τ υ)
 
-/-- A の外の D の対を昇順に並べた列。 -/
-noncomputable def commonPairsOf (D : PerfectMatching J) (A : Set J) : List (J × J) :=
-  matchingPairOutsideEnumeration (perfectMatchingMate D) A
-
 section Facts
 
 variable (D D₀ : PerfectMatching J) (A : Set J) (τ υ : FixedPointFreeInvolution {x // x ∈ A})
@@ -225,33 +221,20 @@ theorem cycleWords_flatten_nodup_necSuf : (cycleWordsOf τ υ).flatten.Nodup := 
       ((Finset.mem_sort _).mp hb) hab
 
 include hτ in
-theorem commonPairs_outside_necSuf (x : J) (hx : x ∈ matchingPairWord (commonPairsOf D A)) :
-    x ∉ A := by
-  obtain ⟨p, hp, hxp⟩ := List.mem_flatMap.mp hx
-  obtain ⟨e, he, rfl⟩ := List.mem_map.mp hp
-  have he' := (Finset.mem_filter.mp ((Finset.mem_sort _).mp he)).2
-  simp only [List.mem_cons, List.not_mem_nil, or_false] at hxp
-  rcases hxp with rfl | rfl
-  · exact he'.1
-  · exact outside_mate_outside (perfectMatchingMate D) A
-      (perfectMatchingMate_involutive D)
-      (fun e he => by
-        have h := (τ.val ⟨e, he⟩).2
-        rwa [hτ] at h) e he'.1
-
-theorem commonPairs_nodup_necSuf : (matchingPairWord (commonPairsOf D A)).Nodup := by
-  exact matchingPairOutsideEnumeration_nodup (perfectMatchingMate D) A
-    (perfectMatchingMate_ne D) (perfectMatchingMate_involutive D)
-
-include hτ in
 theorem cycleWords_complete_necSuf :
-    IsCompleteWord ((cycleWordsOf τ υ).flatten ++ matchingPairWord (commonPairsOf D A)) := by
+    IsCompleteWord ((cycleWordsOf τ υ).flatten ++
+      matchingPairWord (matchingPairOutsideEnumeration (perfectMatchingMate D) A)) := by
   constructor
   · rw [List.nodup_append]
-    refine ⟨cycleWords_flatten_nodup_necSuf A τ υ, commonPairs_nodup_necSuf D A, ?_⟩
+    refine ⟨cycleWords_flatten_nodup_necSuf A τ υ,
+      matchingPairOutsideEnumeration_nodup (perfectMatchingMate D) A
+        (perfectMatchingMate_ne D) (perfectMatchingMate_involutive D), ?_⟩
     intro x hx y hy hxy
     subst hxy
-    apply commonPairs_outside_necSuf D A τ hτ x hy
+    apply matchingPairOutsideEnumeration_outside (perfectMatchingMate D) A
+      (perfectMatchingMate_involutive D) (fun e he => by
+        have h := (τ.val ⟨e, he⟩).2
+        rwa [hτ] at h) x hy
     obtain ⟨l, hl, hxl⟩ := List.mem_flatten.mp hx
     obtain ⟨m, _, rfl⟩ := List.mem_map.mp hl
     exact (cyclePoints_mem_component_necSuf A τ υ m x hxl).1
@@ -287,15 +270,6 @@ theorem cycleWords_complete_necSuf :
         exact List.mem_map.mpr ⟨y, (Finset.mem_sort _).mpr
           (Finset.mem_filter.mpr ⟨Finset.mem_univ _, hout', by rw [hyx]; exact hgt⟩), rfl⟩
 
-include hout in
-theorem commonPairs_spec_necSuf :
-    ∀ p ∈ commonPairsOf D A, p.1 < p.2 ∧ ({p.1, p.2} : Set J) ∈ D.val ∧
-      ({p.1, p.2} : Set J) ∈ D₀.val := by
-  exact matchingPairOutsideEnumeration_spec D.val D₀.val
-    (perfectMatchingMate D) (perfectMatchingMate D₀) A
-    (fun e => (perfectMatchingMate_spec D e).2)
-    (fun e => (perfectMatchingMate_spec D₀ e).2) hout
-
 end Facts
 
 /-- 必要十分版の主張。sgn_F(D) sgn_F(D₀) = (-1)^{閉路の数} ∏ α_D(C) α₀(C)。 -/
@@ -315,7 +289,8 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
   have hlen : (cycleWordsOf τ υ).length = (cycleMinimaOf τ υ).card := by
     simp [cycleWordsOf]
   rw [← hlen]
-  apply alternating_cycle_matching_sign_necSuf F hswap D D₀ (cycleWordsOf τ υ) (commonPairsOf D A)
+  apply alternating_cycle_matching_sign_necSuf F hswap D D₀ (cycleWordsOf τ υ)
+    (matchingPairOutsideEnumeration (perfectMatchingMate D) A)
   · intro c hc
     obtain ⟨m, _, rfl⟩ := List.mem_map.mp hc
     exact cyclePoints_even_necSuf A τ υ m
@@ -328,7 +303,10 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc
     obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp ((Finset.mem_sort _).mp hm)
     exact cycle_pairs_reference_necSuf D D₀ A τ υ hτ hυ i
-  · exact commonPairs_spec_necSuf D D₀ A hout
+  · exact matchingPairOutsideEnumeration_spec D.val D₀.val
+      (perfectMatchingMate D) (perfectMatchingMate D₀) A
+      (fun e => (perfectMatchingMate_spec D e).2)
+      (fun e => (perfectMatchingMate_spec D₀ e).2) hout
   · exact hsD
 
 end Ising2DLambda.NecSuf.KacWard
