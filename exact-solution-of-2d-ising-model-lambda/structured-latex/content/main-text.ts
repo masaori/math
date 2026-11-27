@@ -113350,7 +113350,7 @@ h\cdot h-(q-x_c)\cdot(q-x_c)
                       math(String.raw`\varepsilon\in\mathbb{Q}_{>0}`), " を取り、次で ",
                       math(String.raw`\eta\in\mathbb{Q}`), " を定める。",
                     ]),
-                    displayMath(String.raw`\eta:=(\varepsilon\cdot\varepsilon)/4\qquad(\because\ \mathbb{Q}\text{ の四則})`),
+                    displayMath(String.raw`\eta:=(\varepsilon\cdot\varepsilon)/4\qquad\bigl(\because\ \mathbb{Q}\text{ の四則}\bigr)`),
                     paragraph([
                       math(String.raw`\varepsilon`), " は零でない有理数だから ",
                       math(String.raw`\varepsilon\cdot\varepsilon\in\mathbb{Q}_{>0}`),

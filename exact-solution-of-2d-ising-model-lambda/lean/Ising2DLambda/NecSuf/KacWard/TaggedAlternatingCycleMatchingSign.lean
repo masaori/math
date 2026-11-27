@@ -14,6 +14,7 @@
 import Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.KacWard.AlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairColoring
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEvenOrbit
 import Ising2DLambda.NecSuf.KacWard.MatchingPairOutsideEnumeration
 
 namespace Ising2DLambda.NecSuf.KacWard
@@ -95,8 +96,10 @@ theorem cycle_period_necSuf (m : {x // x ∈ A}) :
         (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m) m = m := by
   have hs := finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) m
   refine ⟨hs.1, ?_, hs.2.1⟩
-  rw [finitePermutationMinimalPeriod_eq_orbitLength]
-  exact matchingPairPermutation_even_orbit _ _ m
+  exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.even_of_color_flip
+    (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+    (matchingPairSuccessor_color τ υ)
+    _ m hs.2.1
 
 theorem cyclePoints_even_necSuf (m : {x // x ∈ A}) :
     cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))

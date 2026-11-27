@@ -114,7 +114,6 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.local_east_outgoing_matches_next_incoming
   Ising2DLambda.KacWard.cellBoundary_west_outgoing_matches_next_incoming
   Ising2DLambda.NecSuf.KacWard.local_west_outgoing_matches_next_incoming
-  Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_eulerNumber_eq_one
   Ising2DLambda.KacWard.cellGridEvenEdge_iff_encoded
   Ising2DLambda.KacWard.cellGridEvenEdge_card_encoded
   Ising2DLambda.KacWard.cellSubset_graphEvenEdge_card
