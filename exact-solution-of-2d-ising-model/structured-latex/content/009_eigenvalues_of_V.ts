@@ -252,7 +252,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "行列のスカラー倍のトレース" },
     labels: ["trace_of_scalar_multiple"],
-    lean: ["Ising2D.trace_of_scalar_multiple"],
+    lean: ["Ising2D.trace_of_scalar_multiple", "Ising2D.trace_smul_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -287,6 +287,7 @@ export default defineBlocks([
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の六単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.trace_smul_tensorPow（ClaimTraceOfSumOverBinaryWords.lean。同じ 5 行の鎖）を足した。主張と証明は不変。",
         "2026-11-03: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 1 が tr(exp(ǧ(ε))Q̌_ε) = exp(ǧ(ε))tr(Q̌_ε) を根拠なしに使っていたので足した。trace_basic_properties (1) の β = 0_ℂ の場合として示す。Lean は具体版 Ising2D.trace_of_scalar_multiple（ClaimTraceOfSumOverBinaryWords.lean）。",
       ],
     },

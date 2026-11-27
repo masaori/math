@@ -2102,6 +2102,8 @@ targets=(
   Ising2D.matrix_add_comm_of_necSuf
   Ising2D.zero_smul_tensorPow
   Ising2D.add_comm_tensorPow
+  Ising2D.zero_smul_tensorPow_of_necSuf
+  Ising2D.add_comm_tensorPow_of_necSuf
   "Ising2D.NecSuf.add_sub_cancel_matrix'"
   Ising2D.matrix_add_sub_cancel
   Ising2D.matrix_add_sub_cancel_of_necSuf

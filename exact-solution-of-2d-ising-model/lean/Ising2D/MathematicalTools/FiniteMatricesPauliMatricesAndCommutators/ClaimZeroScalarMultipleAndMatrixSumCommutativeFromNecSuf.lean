@@ -6,8 +6,9 @@
 `hcomm := add_comm`（`complex_numbers_form_a_field` の加法の交換律）を渡す。
 人手のラベルは `zero_scalar_multiple_is_zero_matrix`・`matrix_sum_is_commutative`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin m` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。
+`TensorPow M`（添字 `Conf M`）の具体版 `ClaimTensorPowZeroScalarMultipleAndMatrixSumCommutative.lean` の主張
+`zero_smul_tensorPow`・`add_comm_tensorPow` も、同じ必要十分版の添字 `Conf M` の特殊化として得る
+（`zero_smul_tensorPow_of_necSuf`・`add_comm_tensorPow_of_necSuf`）。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutative
 import Ising2D.NecSuf.ZeroSmulAndAddCommMatrix
@@ -23,12 +24,14 @@ theorem matrix_zero_smul_of_necSuf {m n : ℕ} (A : Matrix (Fin m) (Fin n) ℂ) 
 theorem matrix_add_comm_of_necSuf {m n : ℕ} (A B : Matrix (Fin m) (Fin n) ℂ) : A + B = B + A :=
   NecSuf.add_comm_matrix' (fun x y : ℂ => add_comm x y) A B
 
-/-- `zero_scalar_multiple_is_zero_matrix` の `TensorPow M` での系。 -/
-theorem zero_smul_tensorPow {M : ℕ} (A : TensorPow M) : (0 : ℂ) • A = 0 :=
+/-- 具体版 `zero_smul_tensorPow`（`zero_scalar_multiple_is_zero_matrix` の `TensorPow M` での具体版）を
+`NecSuf.zero_smul_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem zero_smul_tensorPow_of_necSuf {M : ℕ} (A : TensorPow M) : (0 : ℂ) • A = 0 :=
   NecSuf.zero_smul_matrix' (fun x : ℂ => zero_mul x) A
 
-/-- `matrix_sum_is_commutative` の `TensorPow M` での系。 -/
-theorem add_comm_tensorPow {M : ℕ} (A B : TensorPow M) : A + B = B + A :=
+/-- 具体版 `add_comm_tensorPow`（`matrix_sum_is_commutative` の `TensorPow M` での具体版）を
+`NecSuf.add_comm_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem add_comm_tensorPow_of_necSuf {M : ℕ} (A B : TensorPow M) : A + B = B + A :=
   NecSuf.add_comm_matrix' (fun x y : ℂ => add_comm x y) A B
 
 end Ising2D

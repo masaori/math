@@ -69,6 +69,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowZeroScalarMultipleAndMatrixSumCommutative
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroMatrixIsRightZeroOfMatMultFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatricesOmittingOneIndexFromNecSuf
@@ -780,12 +781,14 @@ theorem nOp_mul_Qproj_of_mem {ν : CheckIdx M} {T : Finset (CheckIdx M)} (hν : 
     exact nOp_mul_Qproj_of_mem_step3 F j hν
 
 /-- **原文 (3)** の `ε(ν) = 0` の場合の `ň_ν Q̌_ε = O`（人手の `ε(ν) = 0` は Lean の `ν ∉ T`）。
-人手の範囲 `M_col ≥ 2` では Step 3 の鎖 `nOp_mul_Qproj_of_not_mem_step3`、`M = 0, 1` は必要十分版の特殊化で閉じる。 -/
+人手の範囲 `M_col ≥ 2` では Step 3 の鎖 `nOp_mul_Qproj_of_not_mem_step3`、`M = 0, 1` は必要十分版の特殊化
+`nOp_mul_Qproj_of_necSuf` と `zero_smul_tensorPow_of_necSuf` で閉じる（具体版 `zero_smul_tensorPow` で閉じると、本文
+`check_joint_eigenspace_decomposition` が引かない `zero_scalar_multiple_is_zero_matrix` を Lean が使うことになる）。 -/
 theorem nOp_mul_Qproj_of_not_mem {ν : CheckIdx M} {T : Finset (CheckIdx M)} (hν : ν ∉ T) :
     F.nOp ν * F.Qproj T = 0 := by
   match M, F, ν, T, hν with
-  | 0, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_neg hν, zero_smul_tensorPow]
-  | 1, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_neg hν, zero_smul_tensorPow]
+  | 0, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_neg hν, zero_smul_tensorPow_of_necSuf]
+  | 1, F, ν, T, hν => rw [F.nOp_mul_Qproj_of_necSuf ν T, if_neg hν, zero_smul_tensorPow_of_necSuf]
   | r + 2, F, ν, T, hν =>
     obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective ν       -- 人手の `ν = finIndexToZZ M j`
     exact nOp_mul_Qproj_of_not_mem_step3 F j hν

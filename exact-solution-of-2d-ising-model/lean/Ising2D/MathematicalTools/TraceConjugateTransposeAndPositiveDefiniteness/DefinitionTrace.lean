@@ -28,6 +28,10 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.LinearAlgebra.Projection
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.LinearAlgebra.Matrix.Basis
+-- 下の `simp [idempotentAdaptedBasis]` が生成する `Module.finBasis.congr_simp` は mathlib のこのモジュールにも在る。先に import して、
+-- ライブラリの環境でその定数が mathlib のものとして数えられるようにする（`scripts/lean-concrete-general-theory/` は
+-- 定数を最初に持つモジュールで分類するので、import の順でこのファイルの具体版の定数に数えられることがある）。
+import Mathlib.LinearAlgebra.Determinant
 import Ising2D.NecSuf.MatColumnwise
 import Mathlib.Data.Complex.Basic
 import Ising2D.Basic

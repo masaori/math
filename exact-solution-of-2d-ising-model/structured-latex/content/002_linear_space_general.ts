@@ -630,7 +630,7 @@ X - O
     kind: "claim",
     title: { text: "行列の 0 倍は零行列" },
     labels: ["zero_scalar_multiple_is_zero_matrix"],
-    lean: ["Ising2D.matrix_zero_smul", "Ising2D.matrix_zero_smul_apply"],
+    lean: ["Ising2D.matrix_zero_smul", "Ising2D.matrix_zero_smul_apply", "Ising2D.zero_smul_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -675,6 +675,7 @@ X - O
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operators_commute の Step 1 の δ_{M+1-ν, M+1-μ} I = O が「δ = 0 を代入する」と「0_ℂ I = O」の 2 段を 1 行で済ませていたので、後者を引けるよう足した。scalar_multiple_of_zero_matrix（aO = O）とは向きが逆である。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の六単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.zero_smul_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowZeroScalarMultipleAndMatrixSumCommutative.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。主張と証明は不変。",
       ],
     },
   },
@@ -683,7 +684,7 @@ X - O
     kind: "claim",
     title: { text: "行列の和の可換律" },
     labels: ["matrix_sum_is_commutative"],
-    lean: ["Ising2D.matrix_add_comm", "Ising2D.matrix_add_comm_apply"],
+    lean: ["Ising2D.matrix_add_comm", "Ising2D.matrix_add_comm_apply", "Ising2D.add_comm_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -724,6 +725,7 @@ X - O
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operators_commute の Step 1 の第 3 式が、反交換子が引数の順序に依らないことを行列の和の交換で示す段を、主張を置かずに使っていたので足した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の六単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.add_comm_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowZeroScalarMultipleAndMatrixSumCommutative.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。主張と証明は不変。",
       ],
     },
   },
