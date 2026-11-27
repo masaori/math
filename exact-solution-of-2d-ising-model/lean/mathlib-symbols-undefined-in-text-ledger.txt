@@ -4788,8 +4788,6 @@ Ising2D.physicalV1halfC_transpose	Matrix.transpose
 Ising2D.physicalV1halfInvC	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.physicalV1halfInvC	HSMul.hSMul@Complex,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.smul
 Ising2D.physicalV1halfInvC	Neg.neg@Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.neg
-Ising2D.physicalV1halfR	Matrix.diagonal@Ising2D.Conf,Real@?,Real.instZero
-Ising2D.physicalV1halfR	Real.exp
 Ising2D.physicalV1halfR_mul_self_map	Complex.ofRealHom
 Ising2D.physicalV1halfR_mul_self_map	DFunLike.coe@RingHom,Real,fun@RingHom.instFunLike
 Ising2D.physicalV1halfR_mul_self_map	Matrix.map
