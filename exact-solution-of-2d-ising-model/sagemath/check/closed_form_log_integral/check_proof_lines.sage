@@ -15,6 +15,14 @@ RW.<Wv> = K[]; Q.<W> = RW.quotient(Wv^2 - dl^2 - th^2/4)
 q = th / (2*dl)
 assert (W/dl)^2 == W^2/dl^2 == (dl^2 + th^2/4)/dl^2 == (th/(2*dl))^2 + 1 == q^2 + 1
 print("準備の鎖が QQ(δ,θ)[W]/(W²-δ²-θ²/4) で成り立つ")
+# 準備の 0 < δ² の鎖: 0 < δδ（仮定の 0 < δ と real_product_of_positives_is_positive）= δ²（square_of_real_number_is_product）
+Pd.<dd> = PolynomialRing(QQ)
+assert dd*dd == dd^2                                                    # 2 行目の等号を QQ[δ] で
+DPTS = [QQ(1)/100, QQ(1)/10, QQ(1)/2, QQ(1), QQ(2), QQ(7)/3]
+for d0 in DPTS:
+    assert d0 > 0 and d0*d0 > 0 and d0*d0 == d0^2                        # 1 行目の < と 2 行目の等号を QQ の点で
+assert not (QQ(0)*QQ(0) > 0)                                           # 対照: 仮定 0 < δ を外した δ = 0 では 0 < δδ は成り立たない
+print(f"準備の 0 < δδ = δ² の鎖が QQ[δ] と {len(DPTS)} 点の QQ で成り立つ")
 assert AA(1).sqrt() == 1   # F(0) の鎖の √1 = 1 の行（sqrt_of_real_one_is_one）
 POINTS = [(QQ(1)/100, QQ(0)), (QQ(1)/10, QQ(1)), (QQ(1)/2, QQ(3)), (QQ(1), QQ(3141)/1000), (QQ(7), QQ(2))]   # θ ∈ [0, π]
 ts, ds = SR.var('ts ds')

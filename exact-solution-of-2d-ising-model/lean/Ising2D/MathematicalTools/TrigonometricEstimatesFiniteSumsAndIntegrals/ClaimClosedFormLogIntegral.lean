@@ -25,6 +25,7 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimRealLogOfProduct
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRealLogStrictlyIncreasing
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusZeroIsSelf
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 
@@ -43,7 +44,8 @@ open Real MeasureTheory
 微分の公式は mathlib の `hasDerivAt_id`・`hasDerivAt_id'`・`HasDerivAt.mul`・`HasDerivAt.div_const`・`HasDerivAt.const_add`・
 `HasDerivAt.const_mul`・`HasDerivAt.comp`・`HasDerivAt.sqrt`・`HasDerivAt.inv`、「微分可能な関数は連続」は
 `HasDerivAt.continuousAt`、(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、`exp 0 = 1` は
-`Real.exp_zero`、`log(exp x) = x` は `Real.log_exp` で受ける。 -/
+`Real.exp_zero`、`log(exp x) = x` は `Real.log_exp` で受ける。準備の `0 < δ²` は人手の鎖どおり
+`real_product_of_positives_is_positive` と `square_of_real_number_is_product` で受ける。 -/
 theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
     (∫ θ in (0:ℝ)..Real.pi, (Real.sqrt (δ ^ 2 + θ ^ 2 / 4))⁻¹)
       = 2 * Real.arsinh (Real.pi / (2 * δ)) := by
@@ -52,9 +54,15 @@ theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
   set F : ℝ → ℝ := fun θ => 2 * Real.arsinh (q θ) with hF_def
   set W : ℝ → ℝ := fun θ => Real.sqrt (δ ^ 2 + θ ^ 2 / 4) with hW_def
   have hδne : δ ≠ 0 := ne_of_gt hδ
-  -- `δ² + θ²/4 ≥ δ² > 0`
+  -- 準備の `0 < δ²` の鎖
+  have hδsq : 0 < δ ^ 2 :=
+    calc 0 < δ * δ := real_product_of_positives_is_positive δ δ hδ hδ
+                                        -- 仮定の `0 < δ` に `real_product_of_positives_is_positive`（`a → δ, b → δ`）
+      _ = δ ^ 2 := (square_of_real_number_is_product δ).symm
+                                        -- `square_of_real_number_is_product`（`r → δ`）を右辺から左辺へ
+  -- 上の `0 < δ²` から `δ² + θ²/4 ≥ δ² > 0`
   have hrad : ∀ θ : ℝ, 0 < δ ^ 2 + θ ^ 2 / 4 := fun θ =>
-    calc 0 < δ ^ 2 := by positivity     -- `δ > 0`
+    calc 0 < δ ^ 2 := hδsq              -- 上の `0 < δ²`
       _ ≤ δ ^ 2 + θ ^ 2 / 4 := by have := sq_nonneg θ; linarith
                                         -- `θ²/4 ≥ 0`
   -- `W(θ)² = δ² + θ²/4`（`definition_of_sqrt_r_positive`）
@@ -288,7 +296,7 @@ theorem integral_inv_sqrt_pi_bounds {δ : ℝ} (hδ : 0 < δ) :
 微分の公式は mathlib の `hasDerivAt_id'`・`HasDerivAt.mul`・`HasDerivAt.const_mul`・`HasDerivAt.div_const`・
 `HasDerivAt.const_add`・`HasDerivAt.sqrt`・`HasDerivAt.div`・`HasDerivAt.inv`（商 `1/x` を逆数で書く）、「微分可能な関数は連続」は
 `HasDerivAt.continuousAt`、(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、`r(θ) ≥ 0` は `Real.sqrt_nonneg`、
-順序体の積の正値性は `real_product_of_positives_is_positive`、逆数の正値性は `real_inverse_of_positive_is_positive`、
+順序体の積の正値性は `real_product_of_positives_is_positive`、準備の `δ² = δδ` は `square_of_real_number_is_product`、逆数の正値性は `real_inverse_of_positive_is_positive`、
 商は `def_real_quotient` の具体版 `real_div_eq_mul_inv` で受ける。 -/
 theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) :
     (∫ θ in (0:ℝ)..Real.pi,
@@ -299,10 +307,15 @@ theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) 
   set r : ℝ → ℝ := fun θ => Real.sqrt (w θ) with hr_def
   set G : ℝ → ℝ := fun θ => θ / (δ ^ 2 * r θ) with hG_def
   have hδne : δ ≠ 0 := ne_of_gt hδ
-  -- `w(θ) ≥ δ² > 0`
+  -- 準備の `0 < δ²` の鎖
+  have hδsq : 0 < δ ^ 2 :=
+    calc 0 < δ * δ := real_product_of_positives_is_positive δ δ hδ hδ
+                                        -- 仮定の `0 < δ` に `real_product_of_positives_is_positive`（`a → δ, b → δ`）
+      _ = δ ^ 2 := (square_of_real_number_is_product δ).symm
+                                        -- `square_of_real_number_is_product`（`r → δ`）を右辺から左辺へ
+  -- 上の `0 < δ²` から `w(θ) ≥ δ² > 0`
   have hw : ∀ θ : ℝ, 0 < w θ := fun θ =>
-    calc 0 < δ ^ 2 := by rw [pow_two]; exact mul_pos hδ hδ
-                                        -- `δ > 0` と正の数どうしの積
+    calc 0 < δ ^ 2 := hδsq              -- 上の `0 < δ²`
       _ ≤ δ ^ 2 + a ^ 2 * θ ^ 2 / 4 := by
             have := mul_nonneg (sq_nonneg a) (sq_nonneg θ); linarith
                                         -- `a²θ²/4 ≥ 0`
@@ -399,12 +412,9 @@ theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) 
                                         -- `real_zero_less_than_two` と `real_product_of_positives_is_positive`（`a → 2, b → (aπr(π))^{-1}`）
     rwa [← real_div_eq_mul_inv 2 _ hapirne] at h
                                         -- `def_real_quotient`（`y → 2, z → aπr(π)`）を右辺から左辺へ
-  have hδ2 : 0 < δ ^ 2 := by
-    have h : 0 < δ * δ := real_product_of_positives_is_positive δ δ hδ hδ  -- 同じ理由（`a, b → δ`）
-    rwa [← pow_two] at h
-  have hδ2ne : δ ^ 2 ≠ 0 := fun h => ((real_lt_iff_le_and_ne 0 _).1 hδ2).2 h.symm
+  have hδ2ne : δ ^ 2 ≠ 0 := fun h => ((real_lt_iff_le_and_ne 0 _).1 hδsq).2 h.symm
                                         -- `def_real_strict_order` の `≠` の側（`x → 0, y → δ²`）と等号の対称律
-  have hinvδ2 : 0 < (δ ^ 2)⁻¹ := real_inverse_of_positive_is_positive _ hδ2
+  have hinvδ2 : 0 < (δ ^ 2)⁻¹ := real_inverse_of_positive_is_positive _ hδsq
                                         -- `real_inverse_of_positive_is_positive`（`a → δ²`）
   have hpiδ2 : 0 < Real.pi / δ ^ 2 := by
     have h : 0 < Real.pi * (δ ^ 2)⁻¹ := real_product_of_positives_is_positive _ _ hpi hinvδ2

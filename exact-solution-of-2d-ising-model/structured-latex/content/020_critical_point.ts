@@ -3352,8 +3352,26 @@ y + s
         "、",
         math(String.raw`W(\theta) := \sqrt{\delta^2 + \theta^2/4} \in \mathbb{R}_{\geq 0}`),
         " と置く。",
+      ]),
+      paragraph([
+        "仮定の ",
+        math(String.raw`0 < \delta`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&< \delta\,\delta
+&&\bigl(\because\ \text{仮定の}\ 0 < \delta\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to \delta,\ b \to \delta)\bigr)\\
+&= \delta^2
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \delta)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        "上の ",
+        math(String.raw`0 < \delta^2`),
+        " から ",
         math(String.raw`\delta^2 + \theta^2/4 \geq \delta^2 > 0`),
-        " と ",
+        " であり、これと ",
         math(String.raw`W(\theta)^2 = \delta^2 + \theta^2/4`),
         " より ",
         math(String.raw`W(\theta) \neq 0`),
@@ -3445,6 +3463,7 @@ F(0)
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 準備の δ² > 0 を、仮定の 0 < δ に real_product_of_positives_is_positive（a → δ, b → δ）を当てて 0 < δδ、square_of_real_number_is_product（r → δ）を右辺から左辺へ当てて δ² に戻す鎖にした。Lean の integral_inv_sqrt_pi の positivity を同じ鎖にした。値と主張は不変。",
         "2026-11-02: 旧 closed_form_log_integral は (1) の閉じた形、(2) の arcsinh と積分の log 評価、(3) の 3/2 乗の積分の評価を束ねていたので、1 ブロック 1 主張に分け、このブロックには (1) だけを残した。" +
           "旧証明の √((θ²+4δ²)/(4δ²)) = √(θ²+4δ²)/(2δ) は平方根の商の規則を定めるブロックが本文に無いので、平方根の一意性から √(q²+1) = W/δ を示す形に改め、F(0) = 0 と F' の連続性を書いた。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: F(0) の鎖の √1 = 1 の行の名前だけの根拠を sqrt_of_real_one_is_one の参照にし、準備の文の「同じ一意性と 1 ≥ 0、1^2 = 1 より √1 = 1」を消した（その主張が担う）。値と主張は不変。",
@@ -3598,6 +3617,24 @@ F(0)
         "、",
         math(String.raw`G(\theta) := \dfrac{\theta}{\delta^2\,r(\theta)}`),
         " と置く。",
+      ]),
+      paragraph([
+        "仮定の ",
+        math(String.raw`0 < \delta`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&< \delta\,\delta
+&&\bigl(\because\ \text{仮定の}\ 0 < \delta\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to \delta,\ b \to \delta)\bigr)\\
+&= \delta^2
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \delta)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        "上の ",
+        math(String.raw`0 < \delta^2`),
+        " から ",
         math(String.raw`w(\theta) \geq \delta^2 > 0`),
         " なので、",
         ref("def_three_halves_power"),
@@ -3712,11 +3749,9 @@ G'(\theta)
 &&\bigl(\because\ \blkref{def_real_quotient}\ (y \to 2,\ z \to a\pi\,r(\pi))\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       paragraph([
-        "仮定の ",
-        math(String.raw`0 < \delta`),
-        " から同じ理由で ",
+        "準備の ",
         math(String.raw`0 < \delta^2`),
-        " である。",
+        " について、",
         ref("def_real_strict_order"),
         " より同じく ",
         math(String.raw`\delta^2 \neq 0`),
@@ -3791,6 +3826,7 @@ r(\pi)^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 準備の δ² > 0 を、仮定の 0 < δ に real_product_of_positives_is_positive（a → δ, b → δ）を当てて 0 < δδ、square_of_real_number_is_product（r → δ）を右辺から左辺へ当てて δ² に戻す鎖にし、正値性の段の「同じ理由で 0 < δ²」を準備の 0 < δ² への参照に替えた。Lean の integral_inv_pow_three_half_pi の mul_pos・pow_two を同じ鎖にした。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認、二回目）: π > 0 から出す aπ > 0・aπ ≠ 0・aπ/2 > 0・2/(aπ r(π)) > 0・π/δ² > 0 を、正の数どうしの積と正の数の逆数は正（ℝ は順序体 set_and_algebra_notation）の段を書いて G' の連続性の後の段落に置き、鎖の根拠 5 か所（δ² > 0 を含む）を「上の」で引く形にした。値と主張は不変。",
         "2026-11-27（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」の順序の (a) の残り）: 正値性の段の「ℝ で正の数の逆数は正（ℝ は順序体）」と「0 < 2 の積で」「逆数をとって」「0 < π の積で」を、def_real_strict_order で ≠ 0 を出し、real_inverse_of_positive_is_positive で逆元の正値、real_zero_less_than_two・real_product_of_positives_is_positive で積の正値、def_real_quotient で商へ戻す二つの鎖にした。aπ ≠ 0 も def_real_strict_order から出す。Lean の具体版 integral_inv_pow_three_half_pi の one_div_pos・ne_of_gt の段を同じ主張で書き直した。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 散文の「remark_real_analysis_facts_R3_R4 の円周率の数値の評価より π > 0」を pi_is_positive の参照にした。値と主張は不変。",
