@@ -103284,7 +103284,7 @@ y^L
 &=\xi_a^k\sum_{y\in\mu_L}y^k
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の冪法則と有限和の分配律}\bigr)\\
 &=\xi_a^k\begin{cases}L&L\mid k,\\0&L\nmid k\end{cases}
-&&\bigl(\because\ \blkref{claim_root_of_unity_power_sum_value},\ n=L,\ m=k\bigr).
+&&\bigl(\because\ \blkref{claim_root_of_unity_power_sum_value},\ n=L,\ m=k\bigr)
 \end{aligned}`),
                   paragraph([
                     "縦方向でも ", ref("claim_vertical_twisted_modes_coset"),
@@ -103302,7 +103302,7 @@ y^L
 &=\eta_b^k\sum_{y\in\mu_L}y^k
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の冪法則と有限和の分配律}\bigr)\\
 &=\eta_b^k\begin{cases}L&L\mid k,\\0&L\nmid k\end{cases}
-&&\bigl(\because\ \blkref{claim_root_of_unity_power_sum_value},\ n=L,\ m=k\bigr).
+&&\bigl(\because\ \blkref{claim_root_of_unity_power_sum_value},\ n=L,\ m=k\bigr)
 \end{aligned}`),
                 ],
               },
