@@ -450,6 +450,7 @@ export const ALL_LABELS = [
   "claim_periodic_plane_lift_transverse_bounded",
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
+  "claim_permutation_sign_transport",
   "claim_pfaffian_signed_even_subgraph",
   "claim_pigeonhole_one_more_than_cardinality",
   "claim_plane_cell_boundary_even_at_vertex",

@@ -5088,6 +5088,159 @@ C&:=\bigl\{\,(u,u')\in P_L \bigm| \varphi\bigl(\Psi(u,u')_2\bigr)\prec\varphi\bi
                   },
                 },
                 {
+                  role: "supporting",
+                  element: {
+                    kind: "elementGroup",
+                    id: "group_of_algebraic_eigenvalue_claim_permutation_sign_transport",
+                    focus: {
+                      id: "algebraic_eigenvalue_claim_permutation_sign_transport",
+                      kind: "claim",
+                      title: { text: "全単射で移した置換の符号はもとの置換の符号に等しい" },
+                      labels: ["claim_permutation_sign_transport"],
+                      habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.transportPairMap",
+                        "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.inversionCount_permCongr_eq_card",
+                        "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.card_transportPairMap_preimage",
+                        "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.transport_parity_at_pair",
+                        "Ising2DLambda.AlgebraicEigenvalue.IndependentFiniteOrderedSign.finiteOrderedSign_permCongr",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_permCongr",
+                        "Ising2DLambda.AlgebraicEigenvalue.finiteOrderedSign_permCongr_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/permutation-sign-transport"],
+                      statement: [
+                        paragraph([
+                          "線型順序 ", math(String.raw`\prec_{\mathcal J}`), " を持つ有限集合 ", math(String.raw`\mathcal J`),
+                          " と、線型順序 ", math(String.raw`\prec_{\mathcal K}`), " を持つ有限集合 ", math(String.raw`\mathcal K`),
+                          "、全単射 ", math(String.raw`d:\mathcal J\to\mathcal K`), "、置換 ",
+                          math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " を任意に取る。",
+                          math(String.raw`d`), " が順序を保つことは仮定しない。",
+                          math(String.raw`\mathcal J`), " の上の符号を ", math(String.raw`\prec_{\mathcal J}`),
+                          " による ", ref("def_permutation_sign"), " の符号 ", math(String.raw`\operatorname{sgn}_{\mathcal J}`),
+                          "、", math(String.raw`\mathcal K`), " の上の符号を ", math(String.raw`\prec_{\mathcal K}`),
+                          " による符号 ", math(String.raw`\operatorname{sgn}_{\mathcal K}`), " と書く。",
+                          math(String.raw`\tau:=d\circ\sigma\circ d^{-1}`), " は ",
+                          math(String.raw`\operatorname{Perm}(\mathcal K)`), " の元であり、",
+                        ]),
+                        displayMath(String.raw`\operatorname{sgn}_{\mathcal K}(\tau)=\operatorname{sgn}_{\mathcal J}(\sigma)\in\mathbb Z`),
+                        paragraph(["が成り立つ。実数体は現れない。"]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "順序づけられた対の集合を ",
+                          math(String.raw`P_{\mathcal J}:=\{(u,u')\in\mathcal J\times\mathcal J\mid u\prec_{\mathcal J}u'\}`),
+                          "、", math(String.raw`P_{\mathcal K}:=\{(v,v')\in\mathcal K\times\mathcal K\mid v\prec_{\mathcal K}v'\}`),
+                          " と置く。全単射 ", math(String.raw`f:\mathcal J\to\mathcal K`), " に対して、写像 ",
+                          math(String.raw`\Pi_f:P_{\mathcal J}\to P_{\mathcal K}`), " を",
+                        ]),
+                        displayMath(String.raw`\Pi_f(u,u'):=\begin{cases}
+  (f(u),f(u')) & (f(u)\prec_{\mathcal K}f(u')),\\
+  (f(u'),f(u)) & (f(u')\prec_{\mathcal K}f(u))
+\end{cases}`),
+                        paragraph([
+                          "で定める。", math(String.raw`u\prec_{\mathcal J}u'`), " なら三分律から ", math(String.raw`u\ne u'`),
+                          " であり、", math(String.raw`f`), " が単射なので ", math(String.raw`f(u)\ne f(u')`),
+                          " だから、三分律により右辺のちょうど一方の場合が起き、どちらの場合も右辺は ",
+                          math(String.raw`P_{\mathcal K}`), " の元である。", math(String.raw`f^{-1}`),
+                          " から同じ作り方で得られる ", math(String.raw`\Pi_{f^{-1}}:P_{\mathcal K}\to P_{\mathcal J}`),
+                          " は ", math(String.raw`\Pi_f`), " の逆写像である。実際、どちらの場合も ",
+                          math(String.raw`\Pi_f(u,u')`), " の二成分を ", math(String.raw`f^{-1}`),
+                          " で戻すと ", math(String.raw`u,u'`), " か ", math(String.raw`u',u`), " であり、",
+                          math(String.raw`u\prec_{\mathcal J}u'`), " なので ", math(String.raw`\Pi_{f^{-1}}(\Pi_f(u,u'))=(u,u')`),
+                          " である。", math(String.raw`f`), " と ", math(String.raw`f^{-1}`),
+                          " を入れ替えれば同じ議論で ", math(String.raw`\Pi_f(\Pi_{f^{-1}}(v,v'))=(v,v')`), " が出る。",
+                          math(String.raw`\mathcal K=\mathcal J`), " かつ ", math(String.raw`f=\sigma`),
+                          " のときも同じ作り方で ", math(String.raw`\Pi_\sigma:P_{\mathcal J}\to P_{\mathcal J}`), " が全単射になる。",
+                        ]),
+                        paragraph([
+                          "次に、", math(String.raw`P_{\mathcal J}`), " の四つの部分集合を置く。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+A&:=\{(u,u')\in P_{\mathcal J}\mid \sigma(u')\prec_{\mathcal J}\sigma(u)\},\\
+B&:=\{(u,u')\in P_{\mathcal J}\mid d(u')\prec_{\mathcal K}d(u)\},\\
+B'&:=\{p\in P_{\mathcal J}\mid \Pi_\sigma(p)\in B\},\\
+C&:=\{p\in P_{\mathcal J}\mid \tau\bigl((\Pi_d(p))_2\bigr)\prec_{\mathcal K}\tau\bigl((\Pi_d(p))_1\bigr)\}
+\end{aligned}`),
+                        paragraph([
+                          "（", math(String.raw`(v,v')_1:=v`), "、", math(String.raw`(v,v')_2:=v'`),
+                          " は対の成分を取り出す記号である）。", ref("def_permutation_sign"), " の転倒数から ",
+                          math(String.raw`|A|=\mathrm{inv}_{\mathcal J}(\sigma)`), " である。",
+                          math(String.raw`C`), " は ", math(String.raw`\Pi_d`), " による ",
+                          math(String.raw`\{(v,v')\in P_{\mathcal K}\mid\tau(v')\prec_{\mathcal K}\tau(v)\}`),
+                          " の逆像であり、", math(String.raw`\Pi_d`), " が全単射なので ",
+                          math(String.raw`|C|=\mathrm{inv}_{\mathcal K}(\tau)`), " である。",
+                          math(String.raw`B'`), " は ", math(String.raw`\Pi_\sigma`), " による ", math(String.raw`B`),
+                          " の逆像であり、", math(String.raw`\Pi_\sigma`), " が全単射なので ",
+                          math(String.raw`|B'|=|B|`), " である。",
+                        ]),
+                        paragraph([
+                          math(String.raw`(u,u')\in P_{\mathcal J}`), " について、", math(String.raw`A,B,B',C`),
+                          " のうちその対が属するものの個数は偶数である。", math(String.raw`\tau(d(w))=d(\sigma(w))`),
+                          "（", math(String.raw`w\in\mathcal J`), "）を使い、命題 ", math(String.raw`X`),
+                          " が成り立つとき ", math(String.raw`1`), "、成り立たないとき ", math(String.raw`0`),
+                          " を表す ", math(String.raw`[X]\in\mathbb F_2`), " で書く。",
+                          math(String.raw`d(u)\prec_{\mathcal K}d(u')`), " の場合は ", math(String.raw`\Pi_d(u,u')=(d(u),d(u'))`),
+                          " なので ", math(String.raw`C`), " の条件は ", math(String.raw`d(\sigma(u'))\prec_{\mathcal K}d(\sigma(u))`),
+                          " であり、", math(String.raw`d(u')\prec_{\mathcal K}d(u)`), " の場合は ",
+                          math(String.raw`\Pi_d(u,u')=(d(u'),d(u))`), " なので ", math(String.raw`C`),
+                          " の条件は ", math(String.raw`d(\sigma(u))\prec_{\mathcal K}d(\sigma(u'))`), " である。",
+                          math(String.raw`d(\sigma(u))\ne d(\sigma(u'))`), " と三分律から、どちらの場合も",
+                        ]),
+                        displayMath(String.raw`[p\in C]=[p\in B]+\bigl[d(\sigma(u'))\prec_{\mathcal K}d(\sigma(u))\bigr]\quad\text{in }\mathbb F_2`),
+                        paragraph([
+                          "である（", math(String.raw`p:=(u,u')`), "）。同じく ", math(String.raw`\sigma(u)\prec_{\mathcal J}\sigma(u')`),
+                          " の場合は ", math(String.raw`\Pi_\sigma(u,u')=(\sigma(u),\sigma(u'))`), "、",
+                          math(String.raw`\sigma(u')\prec_{\mathcal J}\sigma(u)`), " の場合は ",
+                          math(String.raw`\Pi_\sigma(u,u')=(\sigma(u'),\sigma(u))`), " なので、",
+                        ]),
+                        displayMath(String.raw`[p\in B']=[p\in A]+\bigl[d(\sigma(u'))\prec_{\mathcal K}d(\sigma(u))\bigr]\quad\text{in }\mathbb F_2`),
+                        paragraph([
+                          "である。二つを足すと ", math(String.raw`[p\in A]+[p\in B]+[p\in B']+[p\in C]=0`),
+                          "（", math(String.raw`\mathbb F_2`), "）であり、属するものの個数は偶数である。",
+                        ]),
+                        paragraph([
+                          math(String.raw`P_{\mathcal J}`), " の部分集合 ", math(String.raw`X`), " に対し、",
+                          math(String.raw`f_X:P_{\mathcal J}\to\mathbb Z`), " を ", math(String.raw`p\in X`), " なら ",
+                          math(String.raw`-1`), "、そうでなければ ", math(String.raw`1`),
+                          " と定める。いま見たことから各 ", math(String.raw`p\in P_{\mathcal J}`), " で ",
+                          math(String.raw`f_C(p)\cdot f_A(p)\cdot f_B(p)\cdot f_{B'}(p)=1`), " である。したがって",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(-1)^{\mathrm{inv}_{\mathcal K}(\tau)}\cdot(-1)^{\mathrm{inv}_{\mathcal J}(\sigma)}\cdot(-1)^{|B|}\cdot(-1)^{|B|}
+&=(-1)^{|C|}\cdot(-1)^{|A|}\cdot(-1)^{|B|}\cdot(-1)^{|B'|}
+&&\bigl(\because\ |C|=\mathrm{inv}_{\mathcal K}(\tau),\ |A|=\mathrm{inv}_{\mathcal J}(\sigma),\ |B'|=|B|\bigr)\\
+&=\prod_{p\in P_{\mathcal J}}f_C(p)\cdot\prod_{p\in P_{\mathcal J}}f_A(p)\cdot\prod_{p\in P_{\mathcal J}}f_B(p)\cdot\prod_{p\in P_{\mathcal J}}f_{B'}(p)
+&&\bigl(\because\ \text{属するときだけ}\ -1\ \text{を掛けた有限積は}\ (-1)\ \text{の個数乗}\bigr)\\
+&=\prod_{p\in P_{\mathcal J}}\bigl(f_C(p)\cdot f_A(p)\cdot f_B(p)\cdot f_{B'}(p)\bigr)
+&&\bigl(\because\ \text{有限積の各因子ごとのまとめ}\bigr)\\
+&=\prod_{p\in P_{\mathcal J}}1
+&&\bigl(\because\ \text{属するものの個数が偶数}\bigr)\\
+&=1
+&&\bigl(\because\ 1\ \text{の有限積は}\ 1\bigr)
+\end{aligned}`),
+                        paragraph(["である。これを使って"]),
+                        displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}_{\mathcal K}(\tau)
+&=(-1)^{\mathrm{inv}_{\mathcal K}(\tau)}
+&&\bigl(\because\ \blkref{def_permutation_sign}\bigr)\\
+&=(-1)^{\mathrm{inv}_{\mathcal K}(\tau)}\cdot\bigl((-1)^{\mathrm{inv}_{\mathcal J}(\sigma)}\cdot(-1)^{\mathrm{inv}_{\mathcal J}(\sigma)}\bigr)\cdot\bigl((-1)^{|B|}\cdot(-1)^{|B|}\bigr)
+&&\bigl(\because\ (-1)^n\cdot(-1)^n=1\ (n\in\mathbb N)\bigr)\\
+&=\bigl((-1)^{\mathrm{inv}_{\mathcal K}(\tau)}\cdot(-1)^{\mathrm{inv}_{\mathcal J}(\sigma)}\cdot(-1)^{|B|}\cdot(-1)^{|B|}\bigr)\cdot(-1)^{\mathrm{inv}_{\mathcal J}(\sigma)}
+&&\bigl(\because\ \mathbb Z\text{ の積の結合則と交換則}\bigr)\\
+&=1\cdot(-1)^{\mathrm{inv}_{\mathcal J}(\sigma)}
+&&\bigl(\because\ \text{直前の等式}\bigr)\\
+&=\operatorname{sgn}_{\mathcal J}(\sigma)
+&&\bigl(\because\ \blkref{def_permutation_sign}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "を得る。使ったのは二つの順序の三分律、全単射が単射であること、有限集合の数え上げ、整数の積だけである。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                  },
+                },
+                {
                   role: "primary",
                   element: {
                     kind: "elementGroup",
@@ -104316,8 +104469,12 @@ D^{a,b}_L(x)
                     "行列式の ", ref("def_qbar_polynomial_determinant"),
                     " の有限和を、置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J_m)`),
                     " から ", math(String.raw`d_m\circ\sigma\circ d_m^{-1}\in\operatorname{Perm}(\mathbb Z/4\mathbb Z)`),
-                    " への全単射で再添字付けする。", ref("claim_permutation_sign_mul"),
-                    " により、共役で置換符号は変わらない。成分の有限積は上の等式で一致するため、二つの行列式は等しい。",
+                    " への全単射で再添字付けする。", math(String.raw`\mathcal J_m`), " の線型順序と ",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " の方向番号の順序 ", math(String.raw`0,1,2,3`),
+                    " は ", math(String.raw`d_m`), " で対応するとは限らないが、", ref("claim_permutation_sign_transport"),
+                    " により ", math(String.raw`\operatorname{sgn}_{\mathbb Z/4\mathbb Z}(d_m\circ\sigma\circ d_m^{-1})=\operatorname{sgn}_{\mathcal J_m}(\sigma)`),
+                    " である。成分の有限積は ", math(String.raw`\delta=d_m(j)`),
+                    "（", math(String.raw`j\in\mathcal J_m`), "）と再添字付けすると上の等式で一致するため、二つの行列式は等しい。",
                   ]),
                 ],
               },
