@@ -1943,6 +1943,8 @@ targets=(
   Ising2D.add_mul_matrix_of_necSuf
   Ising2D.mul_add_matrix_tensorPow
   Ising2D.add_mul_matrix_tensorPow
+  Ising2D.mul_add_matrix_tensorPow_of_necSuf
+  Ising2D.add_mul_matrix_tensorPow_of_necSuf
   Ising2D.conj_add_matrix
   Ising2D.conj_smul_matrix
   Ising2D.conj_finite_sum_of_matrices

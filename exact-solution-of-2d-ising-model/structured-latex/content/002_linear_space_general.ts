@@ -1310,7 +1310,7 @@ X - O
     kind: "claim",
     title: { text: "行列の積は右の因子の和に分配する" },
     labels: ["mat_mult_distributes_over_sum_in_right_factor"],
-    lean: ["Ising2D.mul_add_matrix", "Ising2D.mul_add_matrix_apply"],
+    lean: ["Ising2D.mul_add_matrix", "Ising2D.mul_add_matrix_apply", "Ising2D.mul_add_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -1359,6 +1359,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。linearity_of_T の証明が「左からの行列積の分配法則」と名前だけで根拠にしていた段を引けるよう足した。" +
           "sign_flip_conjugation の Step 3 の「共役の ℂ 線型性」（有限和への適用）は、いまは名前だけの根拠であり、共役が和を保つことを示す主張を経てこの主張を引くよう直す予定である。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の九単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.mul_add_matrix_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowMatMultDistributesOverSum.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。",
       ],
     },
   },
@@ -1367,7 +1368,7 @@ X - O
     kind: "claim",
     title: { text: "行列の積は左の因子の和に分配する" },
     labels: ["mat_mult_distributes_over_sum_in_left_factor"],
-    lean: ["Ising2D.add_mul_matrix", "Ising2D.add_mul_matrix_apply"],
+    lean: ["Ising2D.add_mul_matrix", "Ising2D.add_mul_matrix_apply", "Ising2D.add_mul_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -1416,6 +1417,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。linearity_of_T の証明が「右からの行列積の分配法則」と名前だけで根拠にしていた段を引けるよう足した。" +
           "sign_flip_conjugation の Step 3 の「共役の ℂ 線型性」（有限和への適用）は、いまは名前だけの根拠であり、共役が和を保つことを示す主張を経てこの主張を引くよう直す予定である。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の九単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.add_mul_matrix_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowMatMultDistributesOverSum.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。",
       ],
     },
   },

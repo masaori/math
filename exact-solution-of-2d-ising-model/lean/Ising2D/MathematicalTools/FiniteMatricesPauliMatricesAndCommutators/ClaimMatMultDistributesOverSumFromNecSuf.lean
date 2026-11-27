@@ -5,11 +5,11 @@
 係数 `R := ℂ`、添字 `Fin m`・`Fin n`・`Fin p` の特殊化として得る。人手のラベルは `finite_sum_of_complex_sums`・
 `mat_mult_distributes_over_sum_in_right_factor`・`mat_mult_distributes_over_sum_in_left_factor`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin m` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである（積の中で縮める添字 `Conf M` には、必要十分版の `finite_sum_add'` が
-`Fintype.equivFin` で番号を付けてから人手と同じ帰納法を使う）。
+`TensorPow M`（添字 `Conf M`）の具体版 `ClaimTensorPowMatMultDistributesOverSum.lean` の主張 `mul_add_matrix_tensorPow`・
+`add_mul_matrix_tensorPow` も、同じ必要十分版の添字 `Conf M` の特殊化として得る（`*_tensorPow_of_necSuf`）。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSum
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowMatMultDistributesOverSum
 import Ising2D.NecSuf.MatMulDistribSum
 import Ising2D.Basic
 
@@ -30,12 +30,14 @@ theorem add_mul_matrix_of_necSuf {m n p : ℕ} (A B : Matrix (Fin m) (Fin n) ℂ
     (A + B) * C = A * C + B * C :=
   NecSuf.add_mul_matrix' A B C
 
-/-- `mat_mult_distributes_over_sum_in_right_factor` の `TensorPow M` での系（`NecSuf.mul_add_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem mul_add_matrix_tensorPow {M : ℕ} (A B C : TensorPow M) : A * (B + C) = A * B + A * C :=
+/-- 具体版 `mul_add_matrix_tensorPow`（`mat_mult_distributes_over_sum_in_right_factor` の `TensorPow M` での具体版）を
+`NecSuf.mul_add_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem mul_add_matrix_tensorPow_of_necSuf {M : ℕ} (A B C : TensorPow M) : A * (B + C) = A * B + A * C :=
   NecSuf.mul_add_matrix' A B C
 
-/-- `mat_mult_distributes_over_sum_in_left_factor` の `TensorPow M` での系（`NecSuf.add_mul_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem add_mul_matrix_tensorPow {M : ℕ} (A B C : TensorPow M) : (A + B) * C = A * C + B * C :=
+/-- 具体版 `add_mul_matrix_tensorPow`（`mat_mult_distributes_over_sum_in_left_factor` の `TensorPow M` での具体版）を
+`NecSuf.add_mul_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem add_mul_matrix_tensorPow_of_necSuf {M : ℕ} (A B C : TensorPow M) : (A + B) * C = A * C + B * C :=
   NecSuf.add_mul_matrix' A B C
 
 end Ising2D

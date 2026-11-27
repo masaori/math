@@ -50,7 +50,7 @@
 | `Ising2D.smul_conj_smul_inv_eq` | 人手に無い一般化 `V2H2Form` 版の第 3・第 4 式で、前因子 `(2s_2)^{M/2}` を打ち消す段（逆元の係数が複素数の逆数 `c^{-1}`。人手の `V_2` 版は `TConj_V2_checkZ` の中で `real_inclusion_mul` を引く） | 同上 |
 | `Ising2D.TConj_V2H2Form_checkZ` / `..._checkY` | 原文 第 3・第 4 式を `V2H2Form` の単元（一般形）で述べたもの（前因子 `(2s_2)^{M/2}` の相殺つき） | `T_actions_on_check_Z_Y` |
 | `Ising2D.TConj_V2_checkZ` / `..._checkY` | 原文 第 3・第 4 式（人手の `V_2` の単元 `V2Units` について。人手の鎖と 1 対 1、係数は `(cosh 2K_2^*)_ℂ` の像） | 同上 |
-| `Ising2D.linearity_of_T_on_check` | `T_g` の ℂ 線型性（人手の鎖の 6 行と 1 対 1 の `calc`。分配は `mul_add_matrix_tensorPow`・`add_mul_matrix_tensorPow`、スカラー倍は `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow`。これらは添字が `Conf M` の行列なので、添字が `Fin n` の具体版 `mul_add_matrix` などではなく必要十分版の特殊化であり、縮める添字の和は `NecSuf.finite_sum_add'` が `Fintype.equivFin` で番号を付けてから人手と同じ帰納法を使う） | `linearity_of_T` |
+| `Ising2D.linearity_of_T_on_check` | `T_g` の ℂ 線型性（人手の鎖の 6 行と 1 対 1 の `calc`。分配は `mul_add_matrix_tensorPow`・`add_mul_matrix_tensorPow`、スカラー倍は `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow`。これらは添字が `Conf M` の行列についての具体版で、番号 ν^{-1} で `Fin n` の行列へ移し、本文の成分の鎖を引く（`ClaimTensorPowMatMultDistributesOverSum.lean`・`ClaimIdentityAndScalarMultipleInTensorPowProduct.lean`）） | `linearity_of_T` |
 | `Ising2D.linearity_of_T_V1plusHalf` | `T_g` の ℂ 線型性の半指数行列への特殊化 | `linearity_of_T_on_check_Z_Y` |
 | `Ising2D.linearity_of_T_V2` / `linearity_of_T_V2H2Form` | `T_g` の ℂ 線型性の `V_2`（人手の `V_2`／一般形 `V2H2Form`）への特殊化 | `linearity_of_T_V2` |
 | `Ising2D.B1mat_zero_zero` ほか 8 本（`DefinitionB1B2.lean`） | `B_1(θ), B_2` の 4 成分が原文の行列と一致すること | `def_B1_theta_B2` |

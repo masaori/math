@@ -260,7 +260,6 @@ Ising2D.acomm_sum_smul_left
 Ising2D.actsBy_TConj_V2_check
 Ising2D.add_mem_evenEigenvectors
 Ising2D.add_mul_matrix
-Ising2D.add_mul_matrix_apply
 Ising2D.adjTwo_mul
 Ising2D.adjTwo_mul_apply_00
 Ising2D.adjTwo_mul_apply_01
@@ -733,7 +732,6 @@ Ising2D.mulVec_two_zero
 Ising2D.mulVec_zero_apply
 Ising2D.mulVec_zero_eq
 Ising2D.mul_add_matrix
-Ising2D.mul_add_matrix_apply
 Ising2D.mul_binaryWordMatrixSum
 Ising2D.mul_finite_sum_of_matrices
 Ising2D.mul_neg_matrix
