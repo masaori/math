@@ -47,6 +47,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWords
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverTensorPowSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
 
 namespace Ising2D
 
@@ -302,9 +303,9 @@ theorem constant_c_steps_four_five {c τ τ' T T' : ℂ} {a r t : ℝ} (hcne : c
     exact (ne_of_gt hq) hre
   -- Step 4: `c^2 w = (a^2)_ℂ w`
   have hcw : c ^ 2 * T' = ((a ^ 2 : ℝ) : ℂ) * T' :=
-    calc c ^ 2 * T' = (c ^ 1 * c) * T' := by rw [pow_succ c 1]         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`z → c`, `m → 1`）
-      _ = ((c ^ 0 * c) * c) * T' := by rw [pow_succ c 0]               -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`z → c`, `m → 0`）
-      _ = ((1 * c) * c) * T' := by rw [pow_zero c]                     -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → c`）
+    calc c ^ 2 * T' = (c ^ 1 * c) * T' := by rw [(complex_pow_zero_and_succ c).2 1]         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`z → c`, `m → 1`）
+      _ = ((c ^ 0 * c) * c) * T' := by rw [(complex_pow_zero_and_succ c).2 0]               -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`z → c`, `m → 0`）
+      _ = ((1 * c) * c) * T' := by rw [(complex_pow_zero_and_succ c).1]                     -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → c`）
       _ = (c * c) * T' := by rw [one_mul c]                            -- `1_ℂ` は乗法の単位元
       _ = (c * c) * (c⁻¹ * (t : ℂ)) := by rw [hT'c]                     -- Step 3 の第二の鎖
       _ = c * (c * (c⁻¹ * (t : ℂ))) := mul_assoc _ _ _                 -- 乗法の結合律
@@ -357,9 +358,9 @@ theorem constant_c_steps_four_five {c τ τ' T T' : ℂ} {a r t : ℝ} (hcne : c
       _ = (ρ : ℂ) * (ρ : ℂ) := (real_inclusion_mul _ _).symm           -- `real_inclusion_preserves_product` を右辺から左辺へ
       _ = c * c := by rw [← hcρ]                                       -- 上の鎖の `c = ρ_ℂ`
       _ = (1 * c) * c := by rw [one_mul c]                             -- `1_ℂ` は乗法の単位元を右辺から左辺へ
-      _ = (c ^ 0 * c) * c := by rw [pow_zero c]                        -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
-      _ = c ^ 1 * c := by rw [← pow_succ c 0]                          -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
-      _ = c ^ 2 := by rw [← pow_succ c 1]                              -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 1`）を右辺から左辺へ
+      _ = (c ^ 0 * c) * c := by rw [(complex_pow_zero_and_succ c).1]                        -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+      _ = c ^ 1 * c := by rw [← (complex_pow_zero_and_succ c).2 0]                          -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
+      _ = c ^ 2 := by rw [← (complex_pow_zero_and_succ c).2 1]                              -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 1`）を右辺から左辺へ
       _ = ((a ^ 2 : ℝ) : ℂ) := hc2                                     -- Step 4
       _ = ((a * a : ℝ) : ℂ) := by rw [square_of_real_number_is_product a] -- `square_of_real_number_is_product`（`r → a`）
       _ = ⟨a * a, 0⟩ := rfl                                            -- `inclusion_rr_to_cc`

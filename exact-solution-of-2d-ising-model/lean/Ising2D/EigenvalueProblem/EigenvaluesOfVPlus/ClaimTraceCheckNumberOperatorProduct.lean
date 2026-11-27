@@ -43,6 +43,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
 
 namespace Ising2D
 
@@ -321,7 +322,7 @@ theorem trace_projFactor_finProdLeft (T : Finset (CheckIdx M)) :
       _ = (2 : ℂ)⁻¹ * (2 : ℂ) ^ ((M - (0 + 1)) + 1) := by
           rw [show M - 0 = (M - (0 + 1)) + 1 by omega]   -- `M_col - (k - 1) = (M_col - k) + 1`
       _ = (2 : ℂ)⁻¹ * ((2 : ℂ) ^ (M - (0 + 1)) * 2) := by
-          rw [pow_succ]
+          rw [(complex_pow_zero_and_succ _).2]
                                                                 -- `def_power_of_complex_number`（`m → M_col - k`）
       _ = (2 : ℂ)⁻¹ * (2 * (2 : ℂ) ^ (M - (0 + 1))) := by rw [mul_comm ((2 : ℂ) ^ (M - (0 + 1)))]
                                                                 -- `complex_numbers_form_a_field` の積の可換律
@@ -350,7 +351,7 @@ theorem trace_projFactor_finProdLeft (T : Finset (CheckIdx M)) :
       _ = (2 : ℂ)⁻¹ * (2 : ℂ) ^ ((M - (r + 1 + 1)) + 1) := by
           rw [show M - (r + 1) = (M - (r + 1 + 1)) + 1 by omega]   -- `M_col - (k - 1) = (M_col - k) + 1`
       _ = (2 : ℂ)⁻¹ * ((2 : ℂ) ^ (M - (r + 1 + 1)) * 2) := by
-          rw [pow_succ]
+          rw [(complex_pow_zero_and_succ _).2]
                                                                 -- `def_power_of_complex_number`（`m → M_col - k`）
       _ = (2 : ℂ)⁻¹ * (2 * (2 : ℂ) ^ (M - (r + 1 + 1))) := by rw [mul_comm ((2 : ℂ) ^ (M - (r + 1 + 1)))]
                                                                 -- `complex_numbers_form_a_field` の積の可換律

@@ -26,7 +26,7 @@
 `scalar_multiple_is_associative`・`mat_mult_associative` は Lean の具体版が無いので既存の慣行どおり mathlib の
 `smul_smul`・`mul_assoc`、ℂ の積の可換律（`complex_numbers_form_a_field`）は `mul_comm` である。
 準備 (P3)・(P4) の根拠は、冪の定義 `A^0 := I`・`A^{n+1} := A^nA`（`def_matrix_power`）が `TensorPow M` での一致の補題
-`tensorPow_pow_zero_and_succ`（`DefinitionMatrixOperationsOverMultiIndices.lean`）、`def_power_of_complex_number` が `pow_zero`・`pow_succ`、`epsilon_G_is_involution` の `X^2 := XX` が `pow_two`、`identity_matrix_is_left_unit_of_mat_mult` が
+`tensorPow_pow_zero_and_succ`（`DefinitionMatrixOperationsOverMultiIndices.lean`）、`def_power_of_complex_number` がその具体版 `complex_pow_zero_and_succ`（`DefinitionPowerOfComplexNumber.lean`）、`epsilon_G_is_involution` の `X^2 := XX` が `pow_two`、`identity_matrix_is_left_unit_of_mat_mult` が
 `identity_matrix_mul_tensorPow`、`scalar_multiple_by_one` が `one_smul_tensorPow`、`scalar_multiple_factors_out_of_left_factor`・
 `scalar_multiple_factors_out_of_right_factor` が `smul_mul_matrix_tensorPow`・`mul_smul_matrix_tensorPow`（いずれも `TensorPow M` での系）である。
 人手 Step 1 は `V_2` との可換性を挙げるが、式変形の各行が使うのは `B` と `V_1^{(+)}` との可換性だけなので、
@@ -58,6 +58,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSumFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.SeriesSumUnderReindexToFin
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
 
 namespace Ising2D
 
@@ -210,7 +211,7 @@ theorem smul_pow_tensorPow (κ : ℂ) (X : TensorPow M) (n : ℕ) : (κ • X) ^
     calc (κ • X) ^ 0
         = 1 := (tensorPow_pow_zero_and_succ (κ • X)).1        -- 冪の定義 `A^0 := I`
       _ = (1 : ℂ) • (1 : TensorPow M) := (one_smul_tensorPow 1).symm   -- `scalar_multiple_by_one` を右辺から左辺へ
-      _ = κ ^ 0 • X ^ 0 := by rw [pow_zero κ, (tensorPow_pow_zero_and_succ X).1] -- `κ^0 = 1_ℂ`（`def_power_of_complex_number`）と冪の定義
+      _ = κ ^ 0 • X ^ 0 := by rw [(complex_pow_zero_and_succ κ).1, (tensorPow_pow_zero_and_succ X).1] -- `κ^0 = 1_ℂ`（`def_power_of_complex_number`）と冪の定義
   | succ n ih =>
     calc (κ • X) ^ (n + 1)
         = (κ • X) ^ n * (κ • X) := (tensorPow_pow_zero_and_succ (κ • X)).2 n -- 冪の定義
@@ -221,7 +222,7 @@ theorem smul_pow_tensorPow (κ : ℂ) (X : TensorPow M) (n : ℕ) : (κ • X) ^
           rw [mul_smul_matrix_tensorPow]                      -- `scalar_multiple_factors_out_of_right_factor`
       _ = (κ ^ n * κ) • (X ^ n * X) := smul_smul _ _ _        -- `scalar_multiple_is_associative`（具体版が無いので mathlib の `smul_smul`）
       _ = κ ^ (n + 1) • X ^ (n + 1) := by                     -- `def_power_of_complex_number` と冪の定義
-          rw [← pow_succ κ n, ← (tensorPow_pow_zero_and_succ X).2 n]
+          rw [← (complex_pow_zero_and_succ κ).2 n, ← (tensorPow_pow_zero_and_succ X).2 n]
 
 /-! ## Step 2 の真ん中の鎖 `exp(κ(εG)) = (cosh K_1)_ℂI + (sinh K_1)_ℂ(εG)`
 

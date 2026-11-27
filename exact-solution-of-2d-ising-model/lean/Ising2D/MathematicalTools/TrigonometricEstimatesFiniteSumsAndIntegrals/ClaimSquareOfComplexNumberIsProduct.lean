@@ -10,23 +10,24 @@
 | --- | --- |
 | 4 行の鎖（`z^{m+1} := z^m z`（`m → 1`）→ 同（`m → 0`）→ `z^0 := 1_ℂ` → `complex_numbers_form_a_field` の積の単位元） | `square_of_complex_number_is_product` の `calc` の 4 段 |
 
-- 人手の冪（`def_power_of_complex_number`）は mathlib の `z ^ 2`（`Monoid.npow`）で、定義の 2 つの式は `pow_zero`・`pow_succ` で読む
-  （`ClaimSquareOfRealNumberIsProduct.lean` と同じ）。mathlib の `sq`・`pow_two` は使わない。
+- 人手の冪（`def_power_of_complex_number`）は mathlib の `z ^ 2`（`Monoid.npow`）で、定義の 2 つの式はその具体版
+  `complex_pow_zero_and_succ`（`DefinitionPowerOfComplexNumber.lean`）で読む。mathlib の `sq`・`pow_two` は使わない。
 
 必要十分版は `Ising2D/NecSuf/SquareIsProduct.lean`、具体版をその系として導くのは
 `ClaimSquareOfComplexNumberIsProductFromNecSuf.lean`。
 -/
 import Mathlib.Algebra.Group.Basic
 import Mathlib.Data.Complex.Basic
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
 
 namespace Ising2D
 
 /-- **人手 `square_of_complex_number_is_product`**: `z ∈ ℂ` について `z^2 = z z`（人手の 4 行の鎖と 1 対 1 の `calc`）。 -/
 theorem square_of_complex_number_is_product (z : ℂ) : z ^ 2 = z * z :=
   calc z ^ 2
-      = z ^ 1 * z := pow_succ z 1                                             -- `z^{m+1} := z^m z`（`m → 1`）
-    _ = (z ^ 0 * z) * z := by rw [pow_succ z 0]                               -- `z^{m+1} := z^m z`（`m → 0`）
-    _ = (1 * z) * z := by rw [pow_zero z]                                     -- `z^0 := 1_ℂ`
+      = z ^ 1 * z := (complex_pow_zero_and_succ z).2 1                                             -- `z^{m+1} := z^m z`（`m → 1`）
+    _ = (z ^ 0 * z) * z := by rw [(complex_pow_zero_and_succ z).2 0]                               -- `z^{m+1} := z^m z`（`m → 0`）
+    _ = (1 * z) * z := by rw [(complex_pow_zero_and_succ z).1]                                     -- `z^0 := 1_ℂ`
     _ = z * z := by rw [one_mul z]                                            -- `complex_numbers_form_a_field` の積の単位元
 
 end Ising2D

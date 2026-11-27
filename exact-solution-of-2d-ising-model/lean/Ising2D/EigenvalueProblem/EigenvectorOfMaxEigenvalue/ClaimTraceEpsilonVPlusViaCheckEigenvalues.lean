@@ -63,6 +63,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationOfPositiveIsNegative
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesNegationIsNegationOfProduct
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
 
 namespace Ising2D
 
@@ -217,7 +218,7 @@ theorem checkU_zero : checkU 0 = -1 := rfl
 `k = 1` の `ε(1) = 1` の 5 行・`ε(1) = 0` の 7 行、`k → k+1` の `ε(k+1) = 1`・`ε(k+1) = 0` の 6 行ずつを同じ行の calc で置く。
 人手の有限積（`def_finite_product_of_real_numbers`）は Lean の `∏ μ, …`（`Finset.prod`）で、定義の 2 つの式は
 `Fin.prod_univ_one`・`Fin.prod_univ_castSucc` で読む（`finite_product_of_positive_reals_is_positive` と同じ）。
-`def_power_of_complex_number` の `z^0 := 1_ℂ`・`z^{m+1} := z^m z` は mathlib の `pow_zero`・`pow_succ` である。 -/
+`def_power_of_complex_number` の `z^0 := 1_ℂ`・`z^{m+1} := z^m z` は、その具体版 `complex_pow_zero_and_succ`（`DefinitionPowerOfComplexNumber.lean`）で受ける。 -/
 theorem checkU_prod_eq_neg_one_pow :
     ∀ (n : ℕ) (ε : Fin (n + 1) → Fin 2),
       ((∏ μ, checkU (ε μ) : ℝ) : ℂ) = (-1 : ℂ) ^ ((n + 1) - (CheckFermi.finsetOfWord ε).card)
@@ -230,7 +231,7 @@ theorem checkU_prod_eq_neg_one_pow :
                                                         -- `def_finite_product_of_real_numbers`
         _ = ((checkU 1 : ℝ) : ℂ) := by rw [he]          -- `ε(1) = 1`
         _ = 1 := by rw [checkU_one, Complex.ofReal_one] -- `ǔ^{(1)} := 1` と `inclusion_rr_to_cc` の略記
-        _ = (-1 : ℂ) ^ 0 := (pow_zero _).symm           -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+        _ = (-1 : ℂ) ^ 0 := (complex_pow_zero_and_succ _).1.symm           -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
         _ = (-1 : ℂ) ^ ((0 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hc]
                                                         -- `|ε|_1 = 1`
     · -- `ε(1) = 0` なら `|ε|_1 = 0`
@@ -242,8 +243,8 @@ theorem checkU_prod_eq_neg_one_pow :
         _ = -1 := by rw [checkU_zero, Complex.ofReal_neg, Complex.ofReal_one]
                                                         -- `ǔ^{(0)} := −1` と `inclusion_rr_to_cc` の略記
         _ = 1 * (-1 : ℂ) := (one_mul _).symm            -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
-        _ = (-1 : ℂ) ^ 0 * (-1 : ℂ) := by rw [pow_zero] -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
-        _ = (-1 : ℂ) ^ 1 := (pow_succ _ 0).symm         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
+        _ = (-1 : ℂ) ^ 0 * (-1 : ℂ) := by rw [(complex_pow_zero_and_succ _).1] -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+        _ = (-1 : ℂ) ^ 1 := ((complex_pow_zero_and_succ _).2 0).symm         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
         _ = (-1 : ℂ) ^ ((0 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hc]
                                                         -- `|ε|_1 = 0`
   | n + 1, ε => by
@@ -288,7 +289,7 @@ theorem checkU_prod_eq_neg_one_pow :
               * (-1 : ℂ) := by rw [he, checkU_zero, Complex.ofReal_neg, Complex.ofReal_one]
                                                         -- `ε(k+1) = 0`、`ǔ^{(0)} := −1` と `inclusion_rr_to_cc` の略記
         _ = (-1 : ℂ) ^ (((n + 1) - (CheckFermi.finsetOfWord (fun μ : Fin (n + 1) => ε (Fin.castSucc μ))).card) + 1) :=
-            (pow_succ _ _).symm                         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`
+            ((complex_pow_zero_and_succ _).2 _).symm                         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`
                                                         -- （`m → k − |ε|_k`）を右辺から左辺へ
         _ = (-1 : ℂ) ^ ((n + 1 + 1) - (CheckFermi.finsetOfWord ε).card) := by rw [hk]
                                                         -- `(k+1) − |ε|_{k+1} = (k − |ε|_k) + 1`

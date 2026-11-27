@@ -20,6 +20,7 @@ import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimConstantCEvenSector
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealOneMinusHalfIsHalf
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
 
 namespace Ising2D
 
@@ -472,11 +473,11 @@ theorem checkBigLambda_max_mul_min_eq_c_sq (F : CheckFermiSetup M) (g : CheckIdx
     _ = (1 * c) * c := by
         rw [one_mul]                                    -- 5 行目: `complex_numbers_form_a_field` の `1_ℂ z = z` を右辺から左辺へ
     _ = (c ^ 0 * c) * c := by
-        rw [pow_zero]                                   -- 6 行目: `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
+        rw [(complex_pow_zero_and_succ _).1]                                   -- 6 行目: `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
     _ = c ^ 1 * c := by
-        rw [← pow_succ]                                 -- 7 行目: `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
+        rw [← (complex_pow_zero_and_succ _).2]                                 -- 7 行目: `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
     _ = c ^ 2 := by
-        rw [← pow_succ]                                 -- 8 行目: `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 1`）を右辺から左辺へ
+        rw [← (complex_pow_zero_and_succ _).2]                                 -- 8 行目: `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 1`）を右辺から左辺へ
 
 end EigenVPlus
 

@@ -78,6 +78,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroMatrixProductAndSumEquationsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowDifferenceIsSumWithNegation
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
 
 namespace Ising2D
 
@@ -841,7 +842,7 @@ theorem Qproj_mul_nOp (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
 1 行目は `trace_of_check_number_operator_product` の具体版のうち人手の帰納法と 1 対 1 の `trace_projFactor_finProdLeft` を、`k → M_col`、
 `(μ_1, …, μ_{M_col}) → (1, …, M_col)`（Lean の `μ → checkIdxOfFin`。単射）、`(e_1, …, e_{M_col}) → (ε(1), …, ε(M_col))`（Lean の `T`）として
 適用する行である。`Q̌_ε` は証明の冒頭の `Q̌_ε = ∏_{μ=1}^{M_col} R_μ^{(ε(μ))}`（`Qproj_eq_finProdLeft`）で左から掛ける積に読む。人手の `M_col` が Lean の `r + 1`。
-3 行目の `z^0 := 1_ℂ`（`def_power_of_complex_number`、`z → 2`）は、mathlib の `ℂ` の冪（`Monoid.npow`）の 0 乗の公理 `Monoid.npow_zero` から出る `pow_zero` で受ける。
+3 行目の `z^0 := 1_ℂ`（`def_power_of_complex_number`、`z → 2`）は、その具体版 `complex_pow_zero_and_succ`（`DefinitionPowerOfComplexNumber.lean`）で受ける。
 人手の範囲外の `M = 0` は、必要十分版の特殊化 `trace_projFactorProd`（`S → 𝓜̌` 全体）で同じ 3 行を通す。 -/
 theorem trace_Qproj_step4 (T : Finset (CheckIdx M)) : (F.Qproj T).trace = 1 := by
   match M, F, T with
@@ -852,7 +853,7 @@ theorem trace_Qproj_step4 (T : Finset (CheckIdx M)) : (F.Qproj T).trace = 1 := b
           rw [Finset.card_univ, CheckIdx.card] at h
           exact h                                       -- `trace_of_check_number_operator_product`（必要十分版の特殊化）
       _ = (2 : ℂ) ^ 0 := by rw [Nat.sub_self]           -- `M_col − M_col = 0`
-      _ = 1 := pow_zero (2 : ℂ)                         -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → 2`）
+      _ = 1 := (complex_pow_zero_and_succ (2 : ℂ)).1                         -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → 2`）
   | r + 1, F, T =>
     calc (F.Qproj T).trace
         = (2 : ℂ) ^ ((r + 1) - (r + 1)) := by
@@ -860,7 +861,7 @@ theorem trace_Qproj_step4 (T : Finset (CheckIdx M)) : (F.Qproj T).trace = 1 := b
           exact F.trace_projFactor_finProdLeft T r checkIdxOfFin checkIdxOfFin_injective
                                                         -- `trace_of_check_number_operator_product`（上の適用）
       _ = (2 : ℂ) ^ 0 := by rw [Nat.sub_self]           -- `M_col − M_col = 0`
-      _ = 1 := pow_zero (2 : ℂ)                         -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → 2`）
+      _ = 1 := (complex_pow_zero_and_succ (2 : ℂ)).1                         -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → 2`）
 
 /-- **原文 (4)**: `tr(Q̌_ε) = 1`。Step 4 の鎖 `trace_Qproj_step4` で示す。
 

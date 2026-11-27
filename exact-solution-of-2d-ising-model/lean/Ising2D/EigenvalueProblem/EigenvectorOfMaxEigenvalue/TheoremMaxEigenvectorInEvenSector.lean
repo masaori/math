@@ -13,7 +13,7 @@
 
 人手の `ε ∈ {0,1}^{𝓜̌}` は Lean では `T : Finset (Fin M)`（`ε(μ) = 1` の `μ` の集合）で、`|ε|` は `T.card`、
 `(1,…,1)` は `Finset.univ` である。人手の `-1_ℂ := (−1)_ℂ` は Lean の `(-1 : ℂ)` で、
-`(-1)^k` は mathlib の `Monoid.npow`（人手 `def_power_of_complex_number` の `z^0 = 1`・`z^{m+1} = z^m z` と同じ再帰）である。
+`(-1)^k` は mathlib の `Monoid.npow`（人手 `def_power_of_complex_number` の `z^0 = 1`・`z^{m+1} = z^m z` と同じ再帰。二つの式との一致は `complex_pow_zero_and_succ`（`DefinitionPowerOfComplexNumber.lean`））である。
 
 | 人手の行 | Lean |
 | --- | --- |

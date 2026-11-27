@@ -48,6 +48,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatricesOmittingOneIndexFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
 
 namespace Ising2D
 
@@ -701,7 +702,7 @@ theorem eta_eq_eta_univ_mul_of_sub_card (k : ℕ) :
         omega
       calc F.eta T = F.eta Finset.univ := by rw [hT]     -- `ε = (1,…,1)`
         _ = F.eta Finset.univ * 1 := (mul_one _).symm    -- `complex_numbers_form_a_field` の積の単位元
-        _ = F.eta Finset.univ * (-1 : ℂ) ^ 0 := by rw [pow_zero]
+        _ = F.eta Finset.univ * (-1 : ℂ) ^ 0 := by rw [(complex_pow_zero_and_succ _).1]
                                                           -- `def_power_of_complex_number` の `z^0 := 1_ℂ`
         _ = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by rw [hk]
                                                           -- `0 = M_col − |ε|`
@@ -730,7 +731,7 @@ theorem eta_eq_eta_univ_mul_of_sub_card (k : ℕ) :
                                                           -- `complex_numbers_form_a_field` の積の可換律
         _ = F.eta Finset.univ * ((-1 : ℂ) ^ (M - T.card - 1) * (-1)) := mul_assoc _ _ _
                                                           -- `complex_numbers_form_a_field` の積の結合律
-        _ = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by rw [← pow_succ, Nat.sub_add_cancel hpos]
+        _ = F.eta Finset.univ * (-1 : ℂ) ^ (M - T.card) := by rw [← (complex_pow_zero_and_succ _).2, Nat.sub_add_cancel hpos]
                                                           -- `def_power_of_complex_number` の `z^{m+1} = z^m z`
 
 /-- **原文 (3)**: `η_ε = η_{(1,…,1)}(-1)^{M-|ε|}`。`k := M_col − |ε|` で帰納法 `eta_eq_eta_univ_mul_of_sub_card` を使う。 -/
@@ -860,9 +861,9 @@ theorem finProdLeft_mul_Qproj (T : Finset (Fin M)) :
         _ = (-1 : ℂ) • F.Qproj T := h1 0 he             -- 上の `ε(μ) = 1` の場合の鎖（`μ → 1`）
         _ = ((1 : ℂ) * (-1)) • F.Qproj T := by rw [one_mul]
                                                         -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
-        _ = ((-1 : ℂ) ^ 0 * (-1)) • F.Qproj T := by rw [pow_zero]
+        _ = ((-1 : ℂ) ^ 0 * (-1)) • F.Qproj T := by rw [(complex_pow_zero_and_succ _).1]
                                                         -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
-        _ = (-1 : ℂ) ^ 1 • F.Qproj T := by rw [← pow_succ]
+        _ = (-1 : ℂ) ^ 1 • F.Qproj T := by rw [← (complex_pow_zero_and_succ _).2]
                                                         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`（`m → 0`）を右辺から左辺へ
         _ = (-1 : ℂ) ^ (finsetOfWord e).card • F.Qproj T := by rw [hc]
                                                         -- `|ε|_1 = 1`
@@ -873,7 +874,7 @@ theorem finProdLeft_mul_Qproj (T : Finset (Fin M)) :
         _ = F.Qproj T := h0 0 he                        -- 上の `ε(μ) = 0` の場合の鎖（`μ → 1`）
         _ = (1 : ℂ) • F.Qproj T := (one_smul_tensorPow _).symm
                                                         -- `scalar_multiple_by_one` を右辺から左辺へ
-        _ = (-1 : ℂ) ^ 0 • F.Qproj T := by rw [pow_zero]
+        _ = (-1 : ℂ) ^ 0 • F.Qproj T := by rw [(complex_pow_zero_and_succ _).1]
                                                         -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
         _ = (-1 : ℂ) ^ (finsetOfWord e).card • F.Qproj T := by rw [hc]
                                                         -- `|ε|_1 = 0`
@@ -903,7 +904,7 @@ theorem finProdLeft_mul_Qproj (T : Finset (Fin M)) :
         _ = ((-1 : ℂ) ^ (finsetOfWord (fun j : Fin (r + 1) => e (Fin.castSucc j))).card * (-1 : ℂ))
               • F.Qproj T := by rw [mul_comm (-1 : ℂ)]  -- `complex_numbers_form_a_field` の積の可換律
         _ = (-1 : ℂ) ^ ((finsetOfWord (fun j : Fin (r + 1) => e (Fin.castSucc j))).card + 1)
-              • F.Qproj T := by rw [← pow_succ]         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`
+              • F.Qproj T := by rw [← (complex_pow_zero_and_succ _).2]         -- `def_power_of_complex_number` の `z^{m+1} := z^m z`
                                                         -- （`m → |ε|_k`）を右辺から左辺へ
         _ = (-1 : ℂ) ^ (finsetOfWord e).card • F.Qproj T := by rw [hk]
                                                         -- `|ε|_{k+1} = |ε|_k + 1`
@@ -943,8 +944,8 @@ theorem parityProd_mul_Qproj (T : Finset (Fin M)) :
       _ = F.Qproj T := identity_matrix_mul_tensorPow _  -- `identity_matrix_is_left_unit_of_mat_mult`
       _ = (1 : ℂ) • F.Qproj T := (one_smul_tensorPow _).symm
                                                         -- `scalar_multiple_by_one`
-      _ = (-1 : ℂ) ^ T.card • F.Qproj T := by rw [hT, Finset.card_empty, pow_zero]
-                                                        -- `|ε| = 0`
+      _ = (-1 : ℂ) ^ T.card • F.Qproj T := by rw [hT, Finset.card_empty, (complex_pow_zero_and_succ _).1]
+                                                        -- `|ε| = 0` と `def_power_of_complex_number` の `z^0 := 1_ℂ`
   | r + 1, F, T =>
     calc F.parityProd * F.Qproj T
         = NecSuf.finProdLeft r F.parityFactor * F.Qproj T := rfl

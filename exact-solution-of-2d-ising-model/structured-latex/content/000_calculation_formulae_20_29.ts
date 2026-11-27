@@ -4585,6 +4585,7 @@ x
     kind: "definition",
     title: { text: "複素数の冪" },
     labels: ["def_power_of_complex_number"],
+    lean: ["Ising2D.complex_pow_zero_and_succ"],
     statement: [
       paragraph([
         math(String.raw`z \in \mathbb{C}`),
@@ -4613,7 +4614,8 @@ z^{m+1} := z^m\, z`),
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 4 の最後の行 2^0 = 1 が「冪の零乗」を名前だけで根拠にしていたので足した。" +
-          "行列の冪（def_exp (1) の A^0 := I、A^{m+1} := A^m A）と同じ形に揃えた。Lean の ℂ の冪は Monoid.npow で、二つの式は pow_zero・pow_succ である。",
+          "行列の冪（def_exp (1) の A^0 := I、A^{m+1} := A^m A）と同じ形に揃えた。",
+        "2026-11-27（Lean の点検の直し、状態台帳の行「ℂ とその演算」の冪）: Lean の具体版は mathlib の ℂ の冪 Monoid.npow（npowRec）で、二つの式との一致を Ising2D.complex_pow_zero_and_succ（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/DefinitionPowerOfComplexNumber.lean。rfl）で示す。",
       ],
     },
   },
