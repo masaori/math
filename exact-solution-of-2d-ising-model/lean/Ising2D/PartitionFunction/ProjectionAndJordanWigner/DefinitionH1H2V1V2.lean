@@ -78,6 +78,7 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
 全サイトで足し合わせたものが `I_smul_H2_eq_sum_sigmaX` である。人手 `V2_in_Z_Y` の Step 3 は
 これを指数の肩の等式として使う。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIndexSetFromOneToN
 import Ising2D.Representation
@@ -265,10 +266,10 @@ theorem indexedHyperbolicAbbreviations_pos
       0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c2star ∧
       0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s2star := by
   -- 人手本文の第1段: 正の結合定数を二倍しても正である。
-  have h2K1 : 0 < 2 * K1 := mul_pos (by norm_num) hK1
-  have h2K1star : 0 < 2 * K1star := mul_pos (by norm_num) hK1star
-  have h2K2 : 0 < 2 * K2 := mul_pos (by norm_num) hK2
-  have h2K2star : 0 < 2 * K2star := mul_pos (by norm_num) hK2star
+  have h2K1 : 0 < 2 * K1 := real_product_of_positives_is_positive _ _ (by norm_num) hK1
+  have h2K1star : 0 < 2 * K1star := real_product_of_positives_is_positive _ _ (by norm_num) hK1star
+  have h2K2 : 0 < 2 * K2 := real_product_of_positives_is_positive _ _ (by norm_num) hK2
+  have h2K2star : 0 < 2 * K2star := real_product_of_positives_is_positive _ _ (by norm_num) hK2star
   -- 人手本文の第2段: 各正の引数で `cosh x > sinh x > 0` を得る（`cosh_sinh_basic_properties` (3)）。
   have h3K1 := cosh_sinh_basic_properties_3 h2K1
   have h3K1star := cosh_sinh_basic_properties_3 h2K1star

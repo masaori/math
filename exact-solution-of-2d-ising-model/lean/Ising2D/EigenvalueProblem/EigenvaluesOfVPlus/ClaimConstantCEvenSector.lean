@@ -40,6 +40,7 @@ Lean ではそれぞれ `F.trace_Vprime_pos g`・`trace_VPlus_pos` の存在の�
 `V^{(+)}` の可逆性から `c ≠ 0` を出す `c_ne_zero_of_VPlus_eq_smul` を置く（人手の行は無い。使う側の仮定が人手の `c ∈ ℂ^×` を
 持たないことの橋渡しである）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusPositiveDefinite
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimSignFlipConjugation
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimPositiveRealSquareInjective
@@ -294,7 +295,8 @@ theorem constant_c_steps_four_five {c τ τ' T T' : ℂ} {a r t : ℝ} (hcne : c
           rw [real_inclusion_mul a⁻¹ r]                               -- `real_inclusion_preserves_product`
       _ = ((a⁻¹ * (a⁻¹ * r) : ℝ) : ℂ) := real_inclusion_mul _ _        -- `real_inclusion_preserves_product`
   -- `q > 0`（ℝ の順序）と `w = (q, 0) ≠ (0, 0)`（成分ごとの等号）
-  have hq : 0 < a⁻¹ * (a⁻¹ * r) := mul_pos (inv_pos.2 ha) (mul_pos (inv_pos.2 ha) hr)
+  have hq : 0 < a⁻¹ * (a⁻¹ * r) :=
+    real_product_of_positives_is_positive _ _ (inv_pos.2 ha) (real_product_of_positives_is_positive _ _ (inv_pos.2 ha) hr)  -- `real_product_of_positives_is_positive` を 2 回
   have hwne : T' ≠ 0 := by
     rw [hw]
     intro h0
@@ -339,7 +341,7 @@ theorem constant_c_steps_four_five {c τ τ' T T' : ℂ} {a r t : ℝ} (hcne : c
       _ = ((a ^ 2 : ℝ) : ℂ) := mul_one _                               -- `1_ℂ` は乗法の単位元
   -- Step 5: `ρ := rt^{-1} ∈ ℝ_{>0}`（ℝ の順序）と `c = ρ_ℂ`
   set ρ : ℝ := r * t⁻¹ with hρdef
-  have hρpos : 0 < ρ := mul_pos hr (inv_pos.2 ht)
+  have hρpos : 0 < ρ := real_product_of_positives_is_positive _ _ hr (inv_pos.2 ht)  -- `real_product_of_positives_is_positive`（`a → r, b → t^{-1}`）
   have hcρ : c = (ρ : ℂ) :=
     calc c = c * 1 := (mul_one _).symm                                 -- `1_ℂ` は乗法の単位元
       _ = c * ((t * t⁻¹ : ℝ) : ℂ) := by

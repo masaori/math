@@ -6613,8 +6613,12 @@ w
         " の積なので ",
         math(String.raw`q \in \mathbb{R}_{>0}`),
         "（",
-        math(String.raw`\mathbb{R}`),
-        " の順序）であり、",
+        ref("real_product_of_positives_is_positive"),
+        " を ",
+        math(String.raw`(a \to a^{-1},\ b \to r)`),
+        " と ",
+        math(String.raw`(a \to a^{-1},\ b \to a^{-1}r)`),
+        " の順に当てる）であり、",
         math(String.raw`w = q_{\mathbb{C}} = (q, 0) \neq (0, 0)`),
         "（",
         ref("inclusion_rr_to_cc"),
@@ -6700,9 +6704,11 @@ c^2
         math(String.raw`t^{-1} \in \mathbb{R}_{>0}`),
         " と書き、",
         math(String.raw`\rho := rt^{-1} \in \mathbb{R}_{>0}`),
-        "（正の実数の積。",
-        math(String.raw`\mathbb{R}`),
-        " の順序）と置く。",
+        "（",
+        ref("real_product_of_positives_is_positive"),
+        " ",
+        math(String.raw`(a \to r,\ b \to t^{-1})`),
+        "）と置く。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -7276,7 +7282,7 @@ x &= Ix
 &= a\exp(\check{g}(\epsilon))
    &&(\because\ a\ \text{の置き方を右辺から左辺へ}) \\
 &> 0
-   &&(\because\ \mathbb{R}\ \text{で}\ u > 0,\ v > 0\ \text{なら}\ uv > 0\ \bigl(u \to a,\ v \to \exp(\check{g}(\epsilon))\bigr)\ \text{に前置きの 2 つの不等号を当てる})
+   &&(\because\ \blkref{real_product_of_positives_is_positive}\ \bigl(a \to a,\ b \to \exp(\check{g}(\epsilon))\bigr)\ \text{に前置きの 2 つの不等号を当てる})
 \end{aligned}`,
       ),
       paragraph([

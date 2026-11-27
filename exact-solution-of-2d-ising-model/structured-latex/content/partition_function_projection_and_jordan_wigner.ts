@@ -1539,9 +1539,9 @@ K_2^*&=-\frac12\log(\tanh K_2)
       ]),
       displayMath(String.raw`\begin{aligned}
 2K_i&>0
-&&\bigl(\because 2>0,\ K_i>0,\ \text{正数の積}\bigr),\\
+&&\bigl(\because 2>0,\ K_i>0,\ \blkref{real_product_of_positives_is_positive}\ (a \to 2,\ b \to K_i)\bigr),\\
 2K_i^*&>0
-&&\bigl(\because 2>0,\ K_i^*>0,\ \text{正数の積}\bigr).
+&&\bigl(\because 2>0,\ K_i^*>0,\ \blkref{real_product_of_positives_is_positive}\ (a \to 2,\ b \to K_i^*)\bigr).
 \end{aligned}`),
       paragraph([
         ref("cosh_sinh_basic_properties"),

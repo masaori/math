@@ -15,11 +15,12 @@
 - 人手の `r_1, …, r_m`（`m ≥ 1`）は Lean の `r : Fin (m + 1) → ℝ` である（人手の `m` は Lean の `m + 1`。添字は 0 始まりで、人手の `j` は `j - 1`）。
 - 人手の有限積（`def_finite_product_of_real_numbers`）は Lean の `∏ j, r j`（`Finset.prod`）で、定義の 2 つの式は
   `Fin.prod_univ_one`・`Fin.prod_univ_castSucc` で読む（`ClaimRealExpOfFiniteSum.lean` と同じ）。
-- 人手の「ℝ で `a > 0, b > 0` なら `ab > 0`」は mathlib の `mul_pos`（順序体の規則の 1 つ）である。mathlib の `Finset.prod_pos` は使わない。
+- 人手が引く `real_product_of_positives_is_positive` は同じ名前の具体版で読む。mathlib の `Finset.prod_pos` は使わない。
 
 必要十分版は `Ising2D/NecSuf/FiniteProductOfPositiveElementsIsPositive.lean`、具体版をその系として導くのは
 `ClaimFiniteProductOfPositiveRealsIsPositiveFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Algebra.Order.Ring.Defs
 import Mathlib.Data.Real.Basic
@@ -42,7 +43,7 @@ theorem finite_product_of_positive_reals_is_positive :
     calc ∏ j, r j
         = (∏ j : Fin (m + 1), r (Fin.castSucc j)) * r (Fin.last (m + 1)) :=
           Fin.prod_univ_castSucc r                                            -- `def_finite_product_of_real_numbers`
-      _ > 0 := mul_pos hprod hlast                                            -- ℝ で `a > 0, b > 0` なら `ab > 0`
+      _ > 0 := real_product_of_positives_is_positive _ _ hprod hlast  -- `real_product_of_positives_is_positive`
                                                                               -- （`a → Π_{j=1}^{m} r_j`、`b → r_{m+1}`）
 
 end Ising2D

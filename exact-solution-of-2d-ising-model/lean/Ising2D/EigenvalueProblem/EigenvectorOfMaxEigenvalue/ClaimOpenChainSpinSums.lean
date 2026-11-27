@@ -50,6 +50,7 @@
 `ς(1) = 1`・`ς(0) = -1`、`{-1,1}` の上の和）と、Step 2 の `M_col = 2`・`M_col ≥ 3` の鎖を、この具体版と同じ並びで踏む。
 重みに固有の行と冪の行は、導出のファイルに具体版と同じ根拠で置く。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRowConfigurationNumberingBijective
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
@@ -464,13 +465,15 @@ theorem open_chain_endpoint_product_sum (hM : 2 ≤ M) (K : ℝ) :
 theorem open_chain_partition_sum_pos (hM : 2 ≤ M) {K : ℝ} (_hK : 0 < K) :
     0 < ∑ s : SpinConf M, Real.exp (K * openChainEnergy s) := by
   rw [open_chain_partition_sum hM K]
-  exact mul_pos two_pos (pow_pos (mul_pos two_pos (cosh_pos_of_two_cosh_pos K)) _)
+  exact real_product_of_positives_is_positive _ _ two_pos (pow_pos (real_product_of_positives_is_positive _ _ two_pos (cosh_pos_of_two_cosh_pos K)) _)
+                                                        -- 準備の `2cosh K > 0` と本体の `> 0`: `real_product_of_positives_is_positive`（`a → 2`）
 
 /-- **人手 `open_chain_spin_sums_positive`** の二つ目: `∑_{s∈𝔐} s(M_col)s(1) exp(KE(s)) > 0`。 -/
 theorem open_chain_endpoint_product_sum_pos (hM : 2 ≤ M) {K : ℝ} (hK : 0 < K) :
     0 < ∑ s : SpinConf M, (s (lastSite M (by omega)) : ℝ) * (s (firstSite M (by omega)) : ℝ)
         * Real.exp (K * openChainEnergy s) := by
   rw [open_chain_endpoint_product_sum hM K]
-  exact mul_pos two_pos (pow_pos (mul_pos two_pos (real_sinh_pos_of_pos hK)) _)
+  exact real_product_of_positives_is_positive _ _ two_pos (pow_pos (real_product_of_positives_is_positive _ _ two_pos (real_sinh_pos_of_pos hK)) _)
+                                                        -- 準備の `2sinh K > 0` と本体の `> 0`: `real_product_of_positives_is_positive`（`a → 2`）
 
 end Ising2D

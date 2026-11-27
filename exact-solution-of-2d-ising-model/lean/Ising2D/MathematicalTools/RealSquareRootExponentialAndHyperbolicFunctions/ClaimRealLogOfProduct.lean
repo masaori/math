@@ -9,7 +9,7 @@
 
 | 人手の段 | Lean |
 | --- | --- |
-| 準備: 正の数の積は正なので `ab > 0` | `mul_pos` |
+| 準備: `real_product_of_positives_is_positive` より `ab > 0` | `real_product_of_positives_is_positive` |
 | 準備の鎖 `exp(log a + log b) = exp(log a)exp(log b) = ab` | `hprep` の 2 段の `calc` |
 | 本体の鎖 `log(ab) = log(exp(log a + log b)) = log a + log b` | 2 段の `calc` |
 
@@ -23,6 +23,7 @@ mathlib の `Real.exp_add`（`def_scalar_exp` の Lean の具体版は無い）�
 必要十分版は `Ising2D/NecSuf/InverseOfAdditiveToMultiplicativeMap.lean` の `NecSuf.inv_map_mul`、
 具体版をその系として導くのは `ClaimRealLogOfProductFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 namespace Ising2D
@@ -36,7 +37,7 @@ theorem real_log_of_product {a b : ℝ} (ha : 0 < a) (hb : 0 < b) :
                                         -- `scalar_exp_product` を右辺から左辺へ
       _ = a * b := by rw [Real.exp_log ha, Real.exp_log hb]
                                         -- `def_real_logarithm_positive` の `exp(log y) = y` を 2 箇所へ
-  refine ⟨mul_pos ha hb, ?_⟩            -- 準備: 正の数の積は正
+  refine ⟨real_product_of_positives_is_positive a b ha hb, ?_⟩  -- 準備: `real_product_of_positives_is_positive`（`a → a, b → b`）
   calc Real.log (a * b)
       = Real.log (Real.exp (Real.log a + Real.log b)) := by rw [hprep]
                                         -- 準備の鎖

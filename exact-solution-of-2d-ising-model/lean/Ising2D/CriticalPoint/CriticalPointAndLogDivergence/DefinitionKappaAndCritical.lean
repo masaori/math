@@ -23,6 +23,7 @@
 （`sinh 2K^* = 1/sinh 2K`）から得る（`sinh_two_mul_sinh_two_Kstar`）。人手の
 `isotropic_kappa_equals_kappa_of_K` の準備 `K_2^* = K^*` は `isoParam_K2star` に当たる。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshSinhBasicProperties
@@ -40,7 +41,7 @@ noncomputable def AP (P : IsingParam) : ℝ :=
 
 /-- 原文 `def_critical_sinh_product_A`: `A > 0`。 -/
 theorem AP_pos (P : IsingParam) : 0 < AP P :=
-  mul_pos P.s1_pos P.s2star_pos
+  real_product_of_positives_is_positive _ _ P.s1_pos P.s2star_pos  -- `real_product_of_positives_is_positive`（`a → s_1, b → s_2^*`）
 
 /-- `1 - cos θ = 2 sin²(θ/2)`（原文の倍角公式の使用箇所）。 -/
 theorem one_sub_cos_eq (θ : ℝ) : 1 - Real.cos θ = 2 * Real.sin (θ / 2) ^ 2 := by

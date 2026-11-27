@@ -42,6 +42,7 @@
 順序体での正の数の積と和の正値性だけで、必要十分版にしても何が本質的かについて情報を与えない
 （`ClaimTraceEpsilonVPlusMatrixEntries.lean` と同じ扱い。二つのスピン和の一般形は `NecSuf/OpenChainSpinSum.lean` が既に持つ）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusMatrixEntries
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesFiniteSum
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionFiniteSumOverRowConfigurations
@@ -357,8 +358,8 @@ theorem trace_epsilon_VPlusOfTransfer_closed_form (hM : 2 ≤ M) (K1 K2 : ℝ) :
 /-- **人手 Step 6**: `(2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col} > 0`。
 Step 5 の実数の鎖の左辺の二項がともに正であること（`open_chain_spin_sums_positive` の `S_cosh > 0`・`S_sinh > 0`、
 `cosh_sinh_basic_properties` (3) から `cosh K_1 > sinh K_1 > 0`、`real_exp_positive` から `exp(∓K_2M_col) > 0`、
-正の実数の積は正）から左辺が正（正の実数の和は正）、それが右辺に等しい。
-「正の実数の積・和は正」は人手が名前の付いたブロックを引かないので mathlib の `mul_pos`・`add_pos` を引く。 -/
+`real_product_of_positives_is_positive`）から左辺が正（正の実数の和は正）、それが右辺に等しい。
+「正の実数の和は正」は人手が名前の付いたブロックを引かないので mathlib の `add_pos` を引く。 -/
 theorem closed_form_of_trace_epsilon_V_plus_pos (hM : 2 ≤ M) {K1 : ℝ} (hK1 : 0 < K1) (K2 : ℝ) :
     0 < (2 * Real.exp (-K2) * Real.cosh K1) ^ M + (2 * Real.exp K2 * Real.sinh K1) ^ M := by
   obtain ⟨n, rfl⟩ : ∃ n : ℕ, M = n + 1 := ⟨M - 1, by omega⟩
@@ -367,8 +368,8 @@ theorem closed_form_of_trace_epsilon_V_plus_pos (hM : 2 ≤ M) {K1 : ℝ} (hK1 :
   have hcosh : Real.cosh K1 > 0 := lt_trans hsinh (cosh_sinh_basic_properties_3 hK1).1
   rw [← spin_sums_combination_eq_closed_form n (by omega) K1 K2]
   exact add_pos
-    (mul_pos hcosh (mul_pos (real_exp_positive _) (open_chain_partition_sum_pos hM hK1)))
-    (mul_pos hsinh (mul_pos (real_exp_positive _) (open_chain_endpoint_product_sum_pos hM hK1)))
+    (real_product_of_positives_is_positive _ _ hcosh (real_product_of_positives_is_positive _ _ (real_exp_positive _) (open_chain_partition_sum_pos hM hK1)))
+    (real_product_of_positives_is_positive _ _ hsinh (real_product_of_positives_is_positive _ _ (real_exp_positive _) (open_chain_endpoint_product_sum_pos hM hK1)))
 
 /-- `0 < Re tr(εV^{(+)})`: Step 5 の主張の等号で `tr(εV^{(+)})` を実数の包含に書き、その実部（包含した実数そのもの）に
 Step 6 を当てる。 -/

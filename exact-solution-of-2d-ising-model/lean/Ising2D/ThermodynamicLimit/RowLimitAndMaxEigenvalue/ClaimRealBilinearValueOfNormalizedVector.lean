@@ -26,6 +26,7 @@
 ノルムであることは効いていない（`v̂` が `v` の実数倍であることだけを使い、`‖v‖` を任意の実数 `s` に替えた `v̂_k = v_k/s` でも同じ段で通る。
 `hN`・`hN2` は人手の準備の行との対応のために置いており、Lean の段では使わない）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimNormOfNormalizedRealVectorIsOne
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealBilinearValueWithNonnegativeEntriesAndScalarMultiple
 
@@ -46,8 +47,8 @@ theorem real_bilinear_value_of_normalized_vector (P : Matrix n n ℝ) (v vhat : 
   have hN : vecNorm v ≠ 0 := (vecNorm_pos_of_ne_zero hv0).ne'      -- `norm_of_normalized_real_vector_is_one` の `‖v‖ > 0` から `‖v‖ ≠ 0`
   have hN2 : vecNorm v ^ 2 ≠ 0 := by
     rw [square_of_real_number_is_product (vecNorm v)]               -- `‖v‖^2 = ‖v‖‖v‖`（`square_of_real_number_is_product`, `r → ‖v‖`）
-    exact (mul_pos (vecNorm_pos_of_ne_zero hv0)
-      (vecNorm_pos_of_ne_zero hv0)).ne'                             -- `> 0`（正の実数どうしの積は正）から `‖v‖^2 ≠ 0`
+    exact (real_product_of_positives_is_positive _ _ (vecNorm_pos_of_ne_zero hv0)
+      (vecNorm_pos_of_ne_zero hv0)).ne'                             -- `> 0`（`real_product_of_positives_is_positive`、`a, b → ‖v‖`）から `‖v‖^2 ≠ 0`
   have hscal : ∀ k, vhat k = 1 / vecNorm v * v k := fun k =>
     calc vhat k
         = v k / vecNorm v := hvhat k                                -- `v̂` の定義

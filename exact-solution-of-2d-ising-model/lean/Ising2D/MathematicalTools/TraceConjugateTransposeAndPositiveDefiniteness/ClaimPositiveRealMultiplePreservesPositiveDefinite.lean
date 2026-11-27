@@ -17,7 +17,7 @@
 | --- | --- |
 | エルミート性（`real_multiple_of_hermitian_is_hermitian`） | `real_multiple_isHermitian` |
 | 正値性の 13 行の鎖 | `conjugate_bilinear_value_of_positive_real_multiple` の `calc` の 13 段 |
-| `α, r ∈ ℝ_{>0}` なので `αr ∈ ℝ_{>0}` | `mul_pos` |
+| `α, r ∈ ℝ_{>0}` なので `αr ∈ ℝ_{>0}`（`real_product_of_positives_is_positive`） | `real_product_of_positives_is_positive` |
 
 - 人手の鎖の「分配律を項の数だけ繰り返す」（`complex_numbers_form_a_field`）は、mathlib の `Finset.mul_sum` を、
   人手と同じ 1 行に当たる段の中でだけ使う。積の結合律・可換律も同じ根拠で、`mul_assoc`・`mul_comm` を各項へ 1 回ずつ引く。
@@ -26,6 +26,7 @@
   人手の 12 行目「ℝ の四則」の 1 段に当たる）。
 - 人手の `n ∈ ℤ_{≥1}` は効かないので仮定に置かない（`n = 0` でも主張は成り立つ）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimCongruencePreservesPositiveDefinite
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealMultipleOfHermitianIsHermitian
 
@@ -66,6 +67,6 @@ theorem positive_real_multiple_preserves_positive_definite {n : ℕ} {A : Matrix
   refine posDef_of_conjugateBilinearValue_pos (real_multiple_isHermitian α hA.isHermitian) fun x hx => ?_  -- エルミート性
   -- `A` が正定値なので `x^*Ax = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある
   obtain ⟨r, hr, hrA⟩ := posDef_conjugateBilinearValue_pos hA hx
-  exact ⟨α * r, mul_pos hα hr, conjugate_bilinear_value_of_positive_real_multiple α A x hrA⟩  -- 正の実数の積は正
+  exact ⟨α * r, real_product_of_positives_is_positive α r hα hr, conjugate_bilinear_value_of_positive_real_multiple α A x hrA⟩  -- `real_product_of_positives_is_positive`（`a → α, b → r`）
 
 end Ising2D

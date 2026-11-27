@@ -35,6 +35,7 @@
   （`μ` の範囲はどこにも効かない）。人手証明と 1 対 1 に対応する `𝓜̌` 版も別に立てる
   （`gamma2_thetaTilde_ne_zero_checkIndex`）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionGamma1Gamma2OfThetaTilde
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
 
@@ -181,8 +182,8 @@ theorem gamma2_thetaTilde_ne_zero {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
     -- Step 4: 矛盾の鎖 `0 < s_1c_2 = -c_1 < 0`
     have hlt : (0 : ℝ) < 0 :=
       calc (0 : ℝ)
-          < P.const.s1 * P.const.c2 := mul_pos P.s1_pos P.c2_pos
-                                                  -- Step 0 の `s_1 > 0`、`c_2 > 0` と正数の積
+          < P.const.s1 * P.const.c2 := real_product_of_positives_is_positive _ _ P.s1_pos P.c2_pos
+                                                  -- Step 0 の `s_1 > 0`、`c_2 > 0` と `real_product_of_positives_is_positive`
         _ = -P.const.c1 := hchain                 -- 直前の鎖
         _ < 0 := neg_neg_of_pos P.c1_pos          -- Step 0 の `c_1 > 0`
     exact lt_irrefl 0 hlt

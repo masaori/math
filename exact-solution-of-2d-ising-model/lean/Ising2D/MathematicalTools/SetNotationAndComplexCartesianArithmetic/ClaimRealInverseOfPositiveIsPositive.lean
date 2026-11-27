@@ -17,8 +17,8 @@
 | 第 3 の鎖 `1 = 0 + 1 < (−1) + 1 = 1 + (−1) = 0` | `h3` の `calc` の 4 段 |
 | 結び `0 < 1 ∧ 1 < 0 ⇒ 0 < 0 ⇒ 0 ≠ 0`（`real_zero_less_than_one`、推移律、`<` の意味の後半）と反射律との矛盾 | `h00`（`lt_trans`）と `lt_iff_le_and_ne` の後半に `rfl` |
 
-- 人手の順序体の公理は、mathlib の `ℝ` の全順序の場合分け（`lt_or_gt_of_ne`）、
-  正の数どうしの積は正 `mul_pos`、推移律 `lt_trans` で読む。
+- 人手の順序体の公理は、mathlib の `ℝ` の全順序の場合分け（`lt_or_gt_of_ne`）、推移律 `lt_trans` で読む。
+  人手の正の数どうしの積は正は本文の主張 `real_product_of_positives_is_positive`（同じフォルダの `ClaimRealProductOfPositivesIsPositive.lean`）で読む。
   人手の狭義の順序と加法の両立 `x < y ⇒ x + c < y + c` は、順序体の公理ではなく本文の主張 `real_less_than_preserved_by_adding_on_right`（同じフォルダの `ClaimRealLessThanPreservedByAddingOnRight.lean`）で読む。
   `a` の乗法の逆元 `a·a⁻¹ = 1` は体の公理の具体版 `real_mul_inv_cancel`（`DefinitionRealQuotient.lean`）で読む。
 - 人手の `<` の意味（`x ≤ y` かつ `x ≠ y`）は `lt_iff_le_and_ne` で読む。
@@ -27,6 +27,7 @@
 必要十分版は `Ising2D/NecSuf/InvPosOfOrderedAxioms.lean`、具体版をその系として導くのは
 `ClaimRealInverseOfPositiveIsPositiveFromNecSuf.lean`。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealLessThanPreservedByAddingOnRight
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusOneTimesIsNegation
@@ -60,7 +61,7 @@ theorem real_inverse_of_positive_is_positive (a : ℝ) (ha : 0 < a) : 0 < a⁻¹
         _ = -a⁻¹ := zero_add (-a⁻¹)                           -- 加法の単位元
     have h2 : (0 : ℝ) < -1 :=
       calc (0 : ℝ)
-          < a * -a⁻¹ := mul_pos ha h1                         -- 正の数どうしの積は正
+          < a * -a⁻¹ := real_product_of_positives_is_positive a (-a⁻¹) ha h1  -- `real_product_of_positives_is_positive`（`a → a, b → −a⁻¹`）
         _ = a * ((-1) * a⁻¹) := by rw [real_minus_one_times_is_negation a⁻¹]  -- `a → a⁻¹` を右辺から左辺へ
         _ = (a * (-1)) * a⁻¹ := (mul_assoc a (-1) a⁻¹).symm   -- 乗法の結合律
         _ = ((-1) * a) * a⁻¹ := by rw [mul_comm a (-1)]       -- 乗法の可換律

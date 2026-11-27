@@ -16,6 +16,7 @@
 - `γ(θ~_μ) > 0` が狭義なので大小比較も狭義に（`TheoremMaxEigenvalueSimple.lean` の `checkBigLambda_lt_checkBigLambda_univ`）
 なる。狭義性は同じファイルの単純性の根拠である。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimConstantCEvenSector
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealNegationTimesIsNegationOfProduct
@@ -124,7 +125,7 @@ theorem VPlus_mulVec_of_mem_range {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : C
 `hapos` は `constant_c_value_even_sector` の準備の `a ∈ ℝ_{>0}` と同じく、Lean の `a` が `(2s_2)^{M/2}`（`Real.rpow`）なので
 `Real.rpow_pos_of_pos` で作る（Lean の `s2` は `K_2` から独立な正の引数で、`2s_2 > 0` は `hs2` から出る）。
 鎖の 1・3・4 行目（`Λ̌_ε` の定義、`ǧ(ε)` の定義、`a` の置き方）は `checkBigLambda` の定義の展開 `rfl` の 1 段が受け持つ。
-2 行目（`s_2 = sinh 2K_2`）に当たる段は `s2` が引数なので無い（`VPlus_mul_Qproj` の 8 行目と同じ）。5 行目は ℝ で `u > 0, v > 0` なら `uv > 0`（mathlib の `mul_pos`）である。 -/
+2 行目（`s_2 = sinh 2K_2`）に当たる段は `s2` が引数なので無い（`VPlus_mul_Qproj` の 8 行目と同じ）。5 行目は `real_product_of_positives_is_positive` である。 -/
 theorem checkBigLambda_pos (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) {s2 : ℝ} (hs2 : 0 < s2)
     (T : Finset (CheckIdx M)) : 0 < checkBigLambda F g s2 T := by
   have hapos : 0 < (2 * s2) ^ ((M : ℝ) / 2) := Real.rpow_pos_of_pos (by linarith) _
@@ -134,7 +135,7 @@ theorem checkBigLambda_pos (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) {s2 
   calc checkBigLambda F g s2 T
       = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp (F.gval g T) := rfl
                                                         -- 1・3・4 行目（`Λ̌_ε`・`ǧ(ε)` の定義、`a` の置き方）
-    _ > 0 := mul_pos hapos hexp                         -- ℝ で `u > 0, v > 0` なら `uv > 0`（`u → a`、`v → exp(ǧ(ε))`）
+    _ > 0 := real_product_of_positives_is_positive _ _ hapos hexp  -- `real_product_of_positives_is_positive`（`a → a`、`b → exp(ǧ(ε))`）
 
 open CheckFermiSetup in
 /-- `def_sum_over_check_index_set`（`Σ_{μ∈𝓜̌}` を `Σ_{μ=1}^{M_col}` へ開く）を `ǧ(ε)` の和に当てたもの（`ℝ` の値）:

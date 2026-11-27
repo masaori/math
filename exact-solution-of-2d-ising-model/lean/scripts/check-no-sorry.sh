@@ -3158,6 +3158,7 @@ targets=(
   Ising2D.NecSuf.zero_div_of_zeroMul
   Ising2D.real_zero_divided_is_zero_of_necSuf
   Ising2D.real_product_of_nonzero_is_nonzero
+  Ising2D.real_product_of_positives_is_positive
   Ising2D.NecSuf.mul_ne_zero_of_leftInverse
   Ising2D.real_product_of_nonzero_is_nonzero_of_necSuf
   Ising2D.real_product_of_inverses_is_inverse_of_product

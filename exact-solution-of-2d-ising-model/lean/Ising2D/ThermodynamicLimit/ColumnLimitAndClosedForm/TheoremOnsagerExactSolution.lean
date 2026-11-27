@@ -47,6 +47,7 @@
 `NecSuf/RiemannSum.lean` の `tendsto_riemann_sum`）を章 012 が既に系として使っており、本ファイルは
 それらの具体版を接続するだけだからである。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.TheoremCPlusEqualsLambda
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimCPlusLeC
 import Ising2D.NecSuf.EvenSectorUpperBound
@@ -133,7 +134,7 @@ theorem c_le_twice_c_plus_physical (n : ℕ) {K1 K2 : ℝ} (hK1 : 0 < K1) (hK2 :
     have hvhatnorm : vecNorm vhat = 1 := norm_of_normalized_real_vector_is_one v vhat hv0 (fun _ => rfl)
     have hv2pos : 0 < vecNorm v ^ 2 := by
       rw [square_of_real_number_is_product]                                   -- `square_of_real_number_is_product`（`r → ‖v‖`）
-      exact mul_pos hvpos hvpos                                               -- 正の実数どうしの積
+      exact real_product_of_positives_is_positive _ _ hvpos hvpos  -- `real_product_of_positives_is_positive`（`a, b → ‖v‖`）
     -- 準備: `epsilon_real_fixes_sum_of_vector_and_its_image`（`u → u`）より `ε_ℝv = v`
     have hεv : epsilonReal n *ᵥ v = v := epsilon_real_fixes_sum_of_vector_and_its_image n u v (fun _ => rfl)
     -- 準備: `real_matrix_fixed_vector_stays_fixed_after_normalization`（`P → ε_ℝ`、`v → v`）より `ε_ℝv̂ = v̂`

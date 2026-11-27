@@ -696,6 +696,7 @@ export const ALL_LABELS = [
   "real_plus_or_minus_one_times_itself_is_one",
   "real_product_of_inverses_is_inverse_of_product",
   "real_product_of_nonzero_is_nonzero",
+  "real_product_of_positives_is_positive",
   "real_scalar_multiple_of_real_entry_matrix_has_real_entries",
   "real_section_minus_half_pi_in_principal_interval",
   "real_sum_of_two_equal_terms_is_twice",

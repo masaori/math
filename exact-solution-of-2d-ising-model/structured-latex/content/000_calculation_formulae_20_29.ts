@@ -1226,8 +1226,8 @@ a^2+b^2
         " であるから ",
         math(String.raw`(a^2+b^2)(c^2+d^2)>0`),
         " である（",
-        math(String.raw`\mathbb{R}`),
-        " では正の元どうしの積は正）。",
+        ref("real_product_of_positives_is_positive"),
+        "）。",
         ref("product_of_sums_of_two_squares_identity"),
         " より ",
         math(String.raw`zw=(ac-bd,\ ad+bc)`),
@@ -2616,6 +2616,93 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_real_product_of_positives_is_positive",
+    kind: "claim",
+    title: { text: "正の実数どうしの積は正" },
+    labels: ["real_product_of_positives_is_positive"],
+    lean: ["Ising2D.real_product_of_positives_is_positive"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        "、",
+        math(String.raw`0 < a`),
+        "、",
+        math(String.raw`0 < b`),
+        " とする。積・",
+        math(String.raw`0`),
+        "・順序 ",
+        math(String.raw`\leq`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の順序体 ",
+        math(String.raw`\mathbb{R}`),
+        " のもの、",
+        math(String.raw`<`),
+        " は ",
+        ref("def_real_strict_order"),
+        " の狭義の順序である。このとき",
+      ]),
+      displayMath(String.raw`0 < a\cdot b`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`0 < a`),
+        "・",
+        math(String.raw`0 < b`),
+        " から、",
+        math(String.raw`0 \leq a`),
+        "・",
+        math(String.raw`0 \leq b`),
+        "・",
+        math(String.raw`a \neq 0`),
+        "・",
+        math(String.raw`b \neq 0`),
+        " を出す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < a
+&\Longrightarrow 0 \leq a\ \wedge\ 0 \neq a
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to a)\bigr)\\
+&\Longrightarrow 0 \leq a\ \wedge\ a \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to a,\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0 < b
+&\Longrightarrow 0 \leq b\ \wedge\ 0 \neq b
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to b)\bigr)\\
+&\Longrightarrow 0 \leq b\ \wedge\ b \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to b,\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      paragraph(["準備の 4 つの事実から、"]),
+      displayMath(String.raw`\begin{aligned}
+0 \leq a\ \wedge\ 0 \leq b
+&\Longrightarrow 0 \leq a\cdot b
+&&\bigl(\because\ \mathbb{R}\ \text{の順序と乗法の両立}\ (0 \leq x\ \wedge\ 0 \leq y) \Rightarrow 0 \leq x\cdot y\ (x \to a,\ y \to b)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+a \neq 0\ \wedge\ b \neq 0
+&\Longrightarrow a\cdot b \neq 0
+&&\bigl(\because\ \blkref{real_product_of_nonzero_is_nonzero}\ (a \to a,\ b \to b)\bigr)\\
+&\Longrightarrow 0 \neq a\cdot b
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to 0,\ y \to a\cdot b)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      paragraph(["であり、この 2 つを合わせて"]),
+      displayMath(String.raw`\begin{aligned}
+0 \leq a\cdot b\ \wedge\ 0 \neq a\cdot b
+&\Longrightarrow 0 < a\cdot b
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to a\cdot b)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-27（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a)）: 原文（Typst）に対応ブロックは無い。set_and_algebra_notation の順序と乗法の両立は ≤ の形 (0 ≤ x ∧ 0 ≤ y) ⇒ 0 ≤ xy だけなのに、本文の証明が狭義の形「ℝ で正の数どうしの積は正（ℝ は順序体）」を名前だけで根拠にしていたので、≤ の両立と real_product_of_nonzero_is_nonzero と def_real_strict_order から示す主張として足し、その根拠をこのブロックへの参照に替えた。Lean の具体版は Ising2D.real_product_of_positives_is_positive（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealProductOfPositivesIsPositive.lean）。数値検証: sagemath/check/real_product_of_positives_is_positive/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_real_product_of_inverses_is_inverse_of_product",
     kind: "claim",
     title: { text: "0 でない実数の逆元どうしの積は積の逆元" },
@@ -2780,7 +2867,7 @@ a^{-1}\cdot b^{-1}
       displayMath(String.raw`\begin{aligned}
 0
 &< (-1)\cdot(-1)
-&&\bigl(\because\ \text{上の鎖の}\ 0 < -1\ \text{を 2 つの因子へ当て、}\mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \text{上の鎖の}\ 0 < -1\ \text{を 2 つの因子へ当て、}\blkref{real_product_of_positives_is_positive}\ (a \to -1,\ b \to -1)\bigr)\\
 &= 1\cdot 1
 &&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ (a \to 1,\ b \to 1)\bigr)\\
 &= 1
@@ -3347,7 +3434,7 @@ a^{-1} \neq 0
       displayMath(String.raw`\begin{aligned}
 0
 &< a\cdot(-a^{-1})
-&&\bigl(\because\ \text{主張の仮定}\ 0 < a\ \text{と上の鎖の}\ 0 < -a^{-1}\ \text{と、}\mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \text{主張の仮定}\ 0 < a\ \text{と上の鎖の}\ 0 < -a^{-1}\ \text{と、}\blkref{real_product_of_positives_is_positive}\ (a \to a,\ b \to -a^{-1})\bigr)\\
 &= a\cdot\bigl((-1)\cdot a^{-1}\bigr)
 &&\bigl(\because\ \blkref{real_minus_one_times_is_negation}\ (a \to a^{-1})\ \text{を右辺から左辺へ}\bigr)\\
 &= \bigl(a\cdot(-1)\bigr)\cdot a^{-1}
@@ -3848,7 +3935,7 @@ z - 0_{\mathbb{C}}
 &= \Bigl(\prod_{j=1}^{m} r_j\Bigr)\, r_{m+1}
 &&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
 &> 0
-&&\bigl(\because\ \mathbb{R}\ \text{で}\ a > 0,\ b > 0\ \text{なら}\ ab > 0\ \bigl(a \to \textstyle\prod_{j=1}^{m} r_j,\ b \to r_{m+1}\bigr)\ \text{に前置きの 2 つの不等号を当てる}\bigr)
+&&\bigl(\because\ \blkref{real_product_of_positives_is_positive}\ \bigl(a \to \textstyle\prod_{j=1}^{m} r_j,\ b \to r_{m+1}\bigr)\ \text{に前置きの 2 つの不等号を当てる}\bigr)
 \end{aligned}`),
       paragraph(["である。"]),
     ],
@@ -5424,12 +5511,8 @@ z^2
         " と ",
         math(String.raw`0<2`),
         " から、",
-        math(String.raw`\mathbb{R}`),
-        " で正の数どうしの積は正（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
-        ref("set_and_algebra_notation"),
-        "）なので ",
+        ref("real_product_of_positives_is_positive"),
+        "（正の実数どうしの積は正）なので ",
         math(String.raw`0<2\pi`),
         " である。また",
       ]),

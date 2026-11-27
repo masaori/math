@@ -1623,7 +1623,7 @@ t
       displayMath(String.raw`\begin{aligned}
 0
 &< \pi\cdot 2^{-1}
-&&\bigl(\because\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{と準備の}\ 0 < 2^{-1}\ \text{と、}\mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&&\bigl(\because\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{と準備の}\ 0 < 2^{-1}\ \text{と、}\blkref{real_product_of_positives_is_positive}\ (a \to \pi,\ b \to 2^{-1})\bigr)\\
 &= \pi/2
 &&\bigl(\because\ \blkref{def_real_quotient}\ (y \to \pi,\ z \to 2)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
@@ -2547,7 +2547,9 @@ c_0
         math(String.raw`a > 0`),
         " と ",
         math(String.raw`b > 0`),
-        " より、正の数の積は正なので ",
+        " より、",
+        ref("real_product_of_positives_is_positive"),
+        "（正の実数どうしの積は正）なので ",
         math(String.raw`ab > 0`),
         " である。",
         math(String.raw`\log a, \log b \in \mathbb{R}`),
@@ -3519,13 +3521,16 @@ F(0)
       ]),
       displayMath(String.raw`w^{3/2} := w\sqrt{w} \in \mathbb{R}_{>0}`),
       paragraph([
-        "と定める。値が正であるのは、",
+        "と定める。値は正である。",
+        "なぜなら、",
         math(String.raw`\sqrt{w} \geq 0`),
         " と ",
         math(String.raw`(\sqrt{w})^2 = w > 0`),
         " より ",
         math(String.raw`\sqrt{w} > 0`),
-        " であり、正の数の積は正だからである。",
+        " であり、",
+        ref("real_product_of_positives_is_positive"),
+        "（正の実数どうしの積は正）が成り立つからである。",
         math(String.raw`\mathbb{R}`),
         " を使うのは、平方根の値が実数だからである。",
       ]),
@@ -3633,12 +3638,8 @@ G'(\theta)
         " と仮定の ",
         math(String.raw`0 < a`),
         " から、",
-        math(String.raw`\mathbb{R}`),
-        " で正の数どうしの積は正（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
-        ref("set_and_algebra_notation"),
-        "）なので ",
+        ref("real_product_of_positives_is_positive"),
+        "（正の実数どうしの積は正）なので ",
         math(String.raw`0 < a\pi`),
         "、したがって ",
         math(String.raw`a\pi \neq 0`),
@@ -3656,7 +3657,11 @@ G'(\theta)
         math(String.raw`0 < a\pi\,r(\pi)`),
         "、",
         math(String.raw`\mathbb{R}`),
-        " で正の数の逆数は正（同じく順序体）なので ",
+        " で正の数の逆数は正（",
+        math(String.raw`\mathbb{R}`),
+        " は順序体 ",
+        ref("set_and_algebra_notation"),
+        "）なので ",
         math(String.raw`0 < \tfrac{1}{a\pi\,r(\pi)}`),
         "、これと ",
         math(String.raw`0 < 2`),

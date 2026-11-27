@@ -56,6 +56,7 @@
 - 人手の `ℝ` の分配律・結合律・交換律と、同類項の加法は `ring` で、商と順序の行は mathlib の `div_le_div_of_nonneg_right`・
   `mul_div_cancel_*`・`mul_le_mul_of_nonneg_left` で書く（人手のこれらの行には参照が無い）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimMomentLogConvexity
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimPowerOfRealOneIsOne
@@ -96,8 +97,8 @@ theorem norm_sq_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0
         finite_sum_over_multi_indices_of_nonnegative_reals_ge_term (fun j => |z j| ^ 2)
           (fun j => abs_sq_of_real_number_nonneg (z j)) j0                  -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`a_j → |z_j|^2`, `k → j_0`）。各項が非負なのは上の `|z_j|^2 ≥ 0`
     _ = |z j0| * |z j0| := square_of_real_number_is_product |z j0|          -- `square_of_real_number_is_product`（`r → |z_{j_0}|`）
-    _ > 0 := mul_pos (abs_pos_of_real_number_ne_zero hj0)
-        (abs_pos_of_real_number_ne_zero hj0)                                -- 上の `|z_{j_0}| > 0` と、ℝ の順序で正の数の積は正
+    _ > 0 := real_product_of_positives_is_positive _ _ (abs_pos_of_real_number_ne_zero hj0)
+        (abs_pos_of_real_number_ne_zero hj0)                                -- 上の `|z_{j_0}| > 0` と `real_product_of_positives_is_positive`（`a, b → |z_{j_0}|`）
 
 /-- 人手【`(W_ℝ)^n` の半正定値性】の `‖z‖ ≥ 0` と `‖z‖ ≠ 0` から `‖z‖ > 0`。 -/
 theorem norm_pos_of_component_ne_zero {z : Conf M → ℝ} {j0 : Conf M} (hj0 : z j0 ≠ 0) :
@@ -278,7 +279,7 @@ theorem power_of_W_real_is_positive_semidefinite (n : ℕ) (z : Conf M → ℝ) 
         _ = vecNorm z ^ 2 * (w ⬝ᵥ P *ᵥ w) := by
             rw [dotProduct_mulVec_eq_real_bilinear_value w w P]             -- `def_real_bilinear_value`
         _ > 0 :=
-            mul_pos hsq hwpos                                               -- 上の `‖z‖^2 > 0` と `w^⊤(W_ℝ)^nw > 0` で、ℝ の順序で正の数の積は正
+            real_product_of_positives_is_positive _ _ hsq hwpos  -- 上の `‖z‖^2 > 0` と `w^⊤(W_ℝ)^nw > 0` で `real_product_of_positives_is_positive`（`a → ‖z‖^2, b → w^⊤(W_ℝ)^nw`）
     exact hpos.le
 
 /-- 人手【`(W_ℝ)^n` の成分の評価】: `2x_k((W_ℝ)^n)_klx_l ≤ x_l^2((W_ℝ)^n)_kk + x_k^2((W_ℝ)^n)_ll`

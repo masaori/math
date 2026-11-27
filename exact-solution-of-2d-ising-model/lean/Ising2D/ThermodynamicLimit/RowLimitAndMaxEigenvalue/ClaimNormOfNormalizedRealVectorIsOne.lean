@@ -30,6 +30,7 @@
 必要十分版は置かない。主張は `def_matrix_norm` を開いて `square_of_real_absolute_value`・`finite_sum_of_real_scalar_multiples`
 （必要十分版はそれぞれ `NecSuf/SquareOfAbsoluteValueAndOfSum.lean`・`NecSuf/FiniteSums.lean`）を当て、`ℝ` の四則演算で `1` にすることに尽きる。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.RealMatrixBilinearFormAndNorm
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealAbsoluteValueAndOfRealSum
@@ -69,7 +70,7 @@ theorem norm_of_normalized_real_vector_is_one (v vhat : n → ℝ) (hv0 : v ≠ 
   have hN : vecNorm v ≠ 0 := (vecNorm_pos_of_ne_zero hv0).ne'
   have hN2pos : 0 < vecNorm v ^ 2 := by
     rw [square_of_real_number_is_product (vecNorm v)]               -- `‖v‖^2 = ‖v‖‖v‖`（`square_of_real_number_is_product`, `r → ‖v‖`）
-    exact mul_pos (vecNorm_pos_of_ne_zero hv0) (vecNorm_pos_of_ne_zero hv0)  -- `> 0`（正の実数どうしの積は正）
+    exact real_product_of_positives_is_positive _ _ (vecNorm_pos_of_ne_zero hv0) (vecNorm_pos_of_ne_zero hv0)  -- `> 0`（`real_product_of_positives_is_positive`、`a, b → ‖v‖`）
   have hN2 : vecNorm v ^ 2 ≠ 0 := hN2pos.ne'                       -- よって `‖v‖^2 ≠ 0`
   calc vecNorm vhat
       = Real.sqrt (∑ k, |vhat k| ^ 2) := by

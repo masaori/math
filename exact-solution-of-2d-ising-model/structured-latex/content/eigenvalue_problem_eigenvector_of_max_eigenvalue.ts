@@ -2237,7 +2237,7 @@ P_{k+1}\check{Q}_\epsilon
 &= \gamma(\tilde\theta_\mu)\cdot 2^{-1}
 &&\bigl(\because\ \blkref{def_real_quotient}\ (y \to \gamma(\tilde\theta_\mu),\ z \to 2)\bigr)\\
 &> 0
-&&\bigl(\because\ \mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）に、}\gamma(\tilde\theta_\mu) > 0\ \text{と}\ 0 < 2^{-1}\ \text{を当てる}\bigr)
+&&\bigl(\because\ \blkref{real_product_of_positives_is_positive}\ (a \to \gamma(\tilde\theta_\mu),\ b \to 2^{-1})\ \text{に、}\gamma(\tilde\theta_\mu) > 0\ \text{と}\ 0 < 2^{-1}\ \text{を当てる}\bigr)
 \end{aligned}`,
       ),
       displayMath(
@@ -2251,7 +2251,7 @@ P_{k+1}\check{Q}_\epsilon
         String.raw`\begin{aligned}
 2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
 &> 0
-&&\bigl(\because\ \mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）に、}\blkref{real_zero_less_than_two}\ \text{の}\ 0 < 2\ \text{と直前の鎖を当てる}\bigr)
+&&\bigl(\because\ \blkref{real_product_of_positives_is_positive}\ (a \to 2,\ b \to \sinh(\gamma(\tilde\theta_\mu)/2))\ \text{に、}\blkref{real_zero_less_than_two}\ \text{の}\ 0 < 2\ \text{と直前の鎖を当てる}\bigr)
 \end{aligned}`,
       ),
       displayMath(
@@ -2267,7 +2267,7 @@ P_{k+1}\check{Q}_\epsilon
 &= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
 &&\bigl(\because\ \varkappa\ \text{の置き方}\bigr)\\
 &> 0
-&&\bigl(\because\ \mathbb{R}\ \text{で正の数どうしの積は正（}\mathbb{R}\ \text{は順序体 }\blkref{set_and_algebra_notation}\text{）に、}\blkref{def_second_transfer_matrix_prefactor}\ \text{の}\ (2\sinh 2K_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}\ \text{と直前の鎖を当てる}\bigr)
+&&\bigl(\because\ \blkref{real_product_of_positives_is_positive}\ \bigl(a \to (2\sinh 2K_2)^{M_{\mathrm{col}}/2},\ b \to \textstyle\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh(\gamma(\tilde\theta_\mu)/2)\bigr)\ \text{に、}\blkref{def_second_transfer_matrix_prefactor}\ \text{の}\ (2\sinh 2K_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}\ \text{と直前の鎖を当てる}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -3579,11 +3579,11 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
 \cosh K &> 0
    \quad (\because \blkref{cosh_sinh_basic_properties}\ (1)\ (x \to K)) \\
 2\cosh K &> 0
-   \quad (\because 2>0\text{ と直前の行、正の実数どうしの積は正}) \\
+   \quad (\because 2>0\text{ と直前の行、}\blkref{real_product_of_positives_is_positive}\ (a \to 2,\ b \to \cosh K)) \\
 \sinh K &> 0
    \quad (\because \blkref{cosh_sinh_basic_properties}\ (3)\ (x \to K>0)) \\
 2\sinh K &> 0
-   \quad (\because 2>0\text{ と直前の行、正の実数どうしの積は正}) \\
+   \quad (\because 2>0\text{ と直前の行、}\blkref{real_product_of_positives_is_positive}\ (a \to 2,\ b \to \sinh K)) \\
 \prod_{j=1}^{M_{\mathrm{col}}-1}(2\cosh K) &> 0
    \quad (\because \blkref{finite_product_of_positive_reals_is_positive}\ (m \to M_{\mathrm{col}}-1\in\mathbb Z_{\geq1},\ r_j \to 2\cosh K)) \\
 \prod_{j=1}^{M_{\mathrm{col}}-1}(2\sinh K) &> 0
@@ -3599,7 +3599,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
 &=2\prod_{j=1}^{M_{\mathrm{col}}-1}\left(2\cosh K\right)
    \quad (\because \blkref{open_chain_partition_sum}\text{ の主張の冪の定義}) \\
 &>0
-   \quad (\because \text{上の準備の }\textstyle\prod_{j=1}^{M_{\mathrm{col}}-1}(2\cosh K)>0\text{ と }2>0\text{、正の実数どうしの積は正})
+   \quad (\because \text{上の準備の }\textstyle\prod_{j=1}^{M_{\mathrm{col}}-1}(2\cosh K)>0\text{ と }2>0\text{、}\blkref{real_product_of_positives_is_positive}\ (a \to 2,\ b \to \textstyle\prod_{j=1}^{M_{\mathrm{col}}-1}(2\cosh K)))
 \end{aligned}`,
       ),
       displayMath(
@@ -3610,7 +3610,7 @@ s(M_{\mathrm{col}})s(1)\exp(KE(s))
 &=2\prod_{j=1}^{M_{\mathrm{col}}-1}\left(2\sinh K\right)
    \quad (\because \blkref{open_chain_endpoint_product_sum}\text{ の主張の冪の定義}) \\
 &>0
-   \quad (\because \text{上の準備の }\textstyle\prod_{j=1}^{M_{\mathrm{col}}-1}(2\sinh K)>0\text{ と }2>0\text{、正の実数どうしの積は正})
+   \quad (\because \text{上の準備の }\textstyle\prod_{j=1}^{M_{\mathrm{col}}-1}(2\sinh K)>0\text{ と }2>0\text{、}\blkref{real_product_of_positives_is_positive}\ (a \to 2,\ b \to \textstyle\prod_{j=1}^{M_{\mathrm{col}}-1}(2\sinh K)))
 \end{aligned}`,
       ),
     ],
@@ -4554,7 +4554,9 @@ V_1^{(+)}
         ref("real_exp_positive"),
         " から ",
         math(String.raw`\exp(\mp K_2M_{\mathrm{col}}) > 0`),
-        "。正の実数の積は正なので、Step 5 の最後の鎖の左辺の二項はともに正であり、正の実数の和は正なので、左辺は正である。それが右辺に等しいので ",
+        "。",
+        ref("real_product_of_positives_is_positive"),
+        " より、Step 5 の最後の鎖の左辺の二項はともに正であり、正の実数の和は正なので、左辺は正である。それが右辺に等しいので ",
         math(String.raw`\left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}} + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}} \in \mathbb{R}_{>0}`),
         " である。",
       ]),

@@ -3282,7 +3282,7 @@ s_1c_2
         String.raw`\begin{aligned}
 0
 &< s_1c_2
-   \quad (\because \text{Step 0 の } s_1 > 0,\ c_2 > 0 \text{ と正数の積}) \\
+   \quad (\because \text{Step 0 の } s_1 > 0,\ c_2 > 0 \text{ と }\blkref{real_product_of_positives_is_positive}\ (a \to s_1,\ b \to c_2)) \\
 &= -c_1
    \quad (\because \text{直前の鎖}) \\
 &< 0

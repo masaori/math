@@ -3606,7 +3606,7 @@ z^\top (W_{\mathbb{R}})^nz
 &=|z_{j_0}|\,|z_{j_0}|
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to |z_{j_0}|)\bigr)\\
 &>0
-&&\bigl(\because\ \text{上の}\ |z_{j_0}| > 0\ \text{と、}\mathbb{R}\ \text{の順序で正の数の積は正}\bigr)
+&&\bigl(\because\ \text{上の}\ |z_{j_0}| > 0\ \text{と、}\blkref{real_product_of_positives_is_positive}\ (a \to |z_{j_0}|,\ b \to |z_{j_0}|)\bigr)
 \end{aligned}`),
       paragraph([
         "である。",
@@ -3724,7 +3724,7 @@ z^\top (W_{\mathbb{R}})^nz
 &=\|z\|^2\,\bigl(w^\top (W_{\mathbb{R}})^nw\bigr)
 &&\bigl(\because\ \blkref{def_real_bilinear_value}\bigr)\\
 &>0
-&&\bigl(\because\ \text{上の}\ \|z\|^2 > 0\ \text{と}\ w^\top (W_{\mathbb{R}})^nw > 0\ \text{で、}\mathbb{R}\ \text{の順序で正の数の積は正}\bigr)
+&&\bigl(\because\ \text{上の}\ \|z\|^2 > 0\ \text{と}\ w^\top (W_{\mathbb{R}})^nw > 0\ \text{で、}\blkref{real_product_of_positives_is_positive}\ (a \to \|z\|^2,\ b \to w^\top (W_{\mathbb{R}})^nw)\bigr)
 \end{aligned}`),
       paragraph([
         "である。いずれの場合も ",

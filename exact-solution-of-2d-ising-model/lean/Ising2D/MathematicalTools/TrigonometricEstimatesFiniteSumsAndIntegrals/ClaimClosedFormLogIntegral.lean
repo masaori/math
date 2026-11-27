@@ -16,6 +16,7 @@
 使わない（特殊化としての導出は `ClaimClosedFormLogIntegralFromNecSuf.lean` の `integral_inv_sqrt_pi_of_necSuf`・
 `arsinh_log_bounds_of_necSuf`・`integral_inv_pow_three_half_pi_of_necSuf`）。
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimRealLogOfProduct
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRealLogStrictlyIncreasing
@@ -283,7 +284,7 @@ theorem integral_inv_sqrt_pi_bounds {δ : ℝ} (hδ : 0 < δ) :
 微分の公式は mathlib の `hasDerivAt_id'`・`HasDerivAt.mul`・`HasDerivAt.const_mul`・`HasDerivAt.div_const`・
 `HasDerivAt.const_add`・`HasDerivAt.sqrt`・`HasDerivAt.div`・`HasDerivAt.inv`（商 `1/x` を逆数で書く）、「微分可能な関数は連続」は
 `HasDerivAt.continuousAt`、(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、`r(θ) ≥ 0` は `Real.sqrt_nonneg`、
-順序体の積と逆数の正値性は `mul_pos`・`one_div_pos` で受ける。 -/
+順序体の積の正値性は `real_product_of_positives_is_positive`、逆数の正値性は `one_div_pos` で受ける。 -/
 theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) :
     (∫ θ in (0:ℝ)..Real.pi,
         ((δ ^ 2 + a ^ 2 * θ ^ 2 / 4) * Real.sqrt (δ ^ 2 + a ^ 2 * θ ^ 2 / 4))⁻¹)
@@ -374,25 +375,25 @@ theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) 
                                         -- 積と商（`1/x` を逆数で書く）の微分の公式と「微分可能な関数は連続」
   -- 正値性の段
   have hpi : 0 < Real.pi := Real.pi_pos -- `pi_is_positive`
-  have hapi : 0 < a * Real.pi := mul_pos ha hpi
-                                        -- 正の数どうしの積は正（`set_and_algebra_notation`）
+  have hapi : 0 < a * Real.pi := real_product_of_positives_is_positive a Real.pi ha hpi
+                                        -- `real_product_of_positives_is_positive`（`a → a, b → π`）
   have hapine : a * Real.pi ≠ 0 := ne_of_gt hapi
   have hapi2 : 0 < a * Real.pi / 2 := by
-    have h : 0 < a * Real.pi * (1 / 2) := mul_pos hapi (by norm_num)
-                                        -- `0 < 1/2`（有理数の大小比較）と正の数どうしの積
+    have h : 0 < a * Real.pi * (1 / 2) := real_product_of_positives_is_positive _ _ hapi (by norm_num)
+                                        -- `0 < 1/2`（有理数の大小比較）と `real_product_of_positives_is_positive`
     rwa [mul_one_div] at h
-  have hapir : 0 < a * Real.pi * r Real.pi := mul_pos hapi (hrpos Real.pi)
+  have hapir : 0 < a * Real.pi * r Real.pi := real_product_of_positives_is_positive _ _ hapi (hrpos Real.pi)  -- 同じ理由（`b → r(π)`）
   have hinvapir : 0 < 1 / (a * Real.pi * r Real.pi) := one_div_pos.2 hapir
                                         -- 正の数の逆数は正
   have h2apir : 0 < 2 / (a * Real.pi * r Real.pi) := by
-    have h : 0 < 2 * (1 / (a * Real.pi * r Real.pi)) := mul_pos (by norm_num) hinvapir
+    have h : 0 < 2 * (1 / (a * Real.pi * r Real.pi)) := real_product_of_positives_is_positive _ _ (by norm_num) hinvapir  -- `0 < 2` との積
     rwa [mul_one_div] at h
   have hδ2 : 0 < δ ^ 2 := by
-    have h : 0 < δ * δ := mul_pos hδ hδ
+    have h : 0 < δ * δ := real_product_of_positives_is_positive δ δ hδ hδ  -- 同じ理由（`a, b → δ`）
     rwa [← pow_two] at h
   have hinvδ2 : 0 < 1 / δ ^ 2 := one_div_pos.2 hδ2
   have hpiδ2 : 0 < Real.pi / δ ^ 2 := by
-    have h : 0 < Real.pi * (1 / δ ^ 2) := mul_pos hpi hinvδ2
+    have h : 0 < Real.pi * (1 / δ ^ 2) := real_product_of_positives_is_positive _ _ hpi hinvδ2  -- `0 < π` との積
     rwa [mul_one_div] at h
   -- 背理法: `r(π) ≤ aπ/2` なら `r(π)² < r(π)²`
   have hrgt : a * Real.pi / 2 < r Real.pi := by

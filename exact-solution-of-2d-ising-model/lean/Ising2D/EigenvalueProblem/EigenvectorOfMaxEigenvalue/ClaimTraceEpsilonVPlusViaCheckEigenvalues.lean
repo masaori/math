@@ -41,6 +41,7 @@ Step 7 の `⟹` の 2 行目と `η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行目�
 | Step 6 の 5 本の鎖（(2) の不等号）`γ(θ̃_μ)/2 > 0`、`sinh(γ(θ̃_μ)/2) > 0`、`2sinh(γ(θ̃_μ)/2) > 0`、`Π_μ2sinh(γ(θ̃_μ)/2) > 0`、`ϰ > 0` | `VPlusData.gam_half_pos`・`VPlusData.sinh_gam_half_pos`・`VPlusData.two_sinh_gam_half_pos`・`VPlusData.prod_two_sinh_gam_half_pos`・`VPlusData.traceFactor_pos_step6`（1・3・5 本目は同じ行の calc（3 本目は 1 段）、2 本目は `cosh_sinh_basic_properties` (3) の適用 1 つ、4 本目は `finite_product_of_positive_reals_is_positive` の適用 1 つ（どちらも人手で 1 行）。人手の `M_col` が `r + 1`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.traceFactor_pos`（人手の範囲外の `M = 0` は mathlib の `simp`） |
 | Step 7 の同値（(3)）: `⟹` の 2 行の鎖 `tr(εV^{(+)}) = 1_ℂϰ_ℂ = ϰ_ℂ`、`⟸` の 2 行の鎖 `r_ℂ = tr(εV^{(+)}) = (ȟϰ)_ℂ`、`ȟ = −1` の背理の 4 行（1 行目は `inclusion_rr_to_cc_is_injective`）と `real_less_than_is_asymmetric` による矛盾、`η_{(1,…,1)} = ȟ_ℂ = 1_ℂ` の 2 行 | `VPlusData.trace_pos_of_eta_univ_eq_one_step7`・`VPlusData.eta_univ_eq_one_of_trace_pos_step7`・`VPlusData.eta_univ_eq_one_iff_trace_pos_step7`（各鎖は同じ行の calc。人手の `M_col` が `r + 1`、人手の `r` が `s`。`⟸` の 2 行目が引く Step 5 の鎖の 1〜6 行目は `VPlusData.trace_epsilon_mul_V_step5_rows_one_to_six`。必要十分版は置かない）。`M` を一般に取る形が `VPlusData.eta_univ_eq_one_iff_trace_pos`（人手の範囲外の `M = 0` は `Complex.ofReal_injective` と `linarith`）。下流が渡す `0 < Re tr(εV^{(+)})` の形で読む運ぶ段が `VPlusData.eta_univ_eq_one_of_trace_pos`（`VPlusData.trace_epsilon_mul_V_eq_ofReal` を通す） |
 -/
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
@@ -605,7 +606,7 @@ theorem gam_half_pos (μ : Fin M) : D.gam μ / 2 > 0 :=
     real_inverse_of_positive_is_positive 2 real_zero_less_than_two     -- 準備: `real_inverse_of_positive_is_positive`（`a → 2`）
   calc D.gam μ / 2
       = D.gam μ * 2⁻¹ := real_div_eq_mul_inv _ _ h2     -- `def_real_quotient`（`y → γ(θ̃_μ)`、`z → 2`）
-    _ > 0 := mul_pos (D.hgam μ) h2inv                   -- ℝ で正の数どうしの積は正（順序体）に、
+    _ > 0 := real_product_of_positives_is_positive _ _ (D.hgam μ) h2inv  -- `real_product_of_positives_is_positive`（`a → γ(θ̃_μ), b → 2^{-1}`）に、
                                                         -- `γ(θ̃_μ) > 0` と `0 < 2^{-1}` を当てる
 
 /-- **原文 Step 6** の 2 本目の鎖: `sinh(γ(θ̃_μ)/2) > 0`（`γ(θ̃_μ)` が `D.gam μ`）。 -/
@@ -616,8 +617,8 @@ theorem sinh_gam_half_pos (μ : Fin M) : Real.sinh (D.gam μ / 2) > 0 :=
 /-- **原文 Step 6** の 3 本目の鎖: `2sinh(γ(θ̃_μ)/2) > 0`。 -/
 theorem two_sinh_gam_half_pos (μ : Fin M) : 2 * Real.sinh (D.gam μ / 2) > 0 :=
   calc 2 * Real.sinh (D.gam μ / 2)
-      > 0 := mul_pos real_zero_less_than_two (D.sinh_gam_half_pos μ)
-                                                        -- ℝ で正の数どうしの積は正（順序体）に、
+      > 0 := real_product_of_positives_is_positive _ _ real_zero_less_than_two (D.sinh_gam_half_pos μ)
+                                                        -- `real_product_of_positives_is_positive`（`a → 2, b → sinh(γ(θ̃_μ)/2)`）に、
                                                         -- `real_zero_less_than_two` の `0 < 2` と直前の鎖を当てる
 
 end VPlusData
@@ -638,14 +639,14 @@ theorem prod_two_sinh_gam_half_pos {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlus
 `VPlusData` の入力 `D.hC`）。必要十分版は置かない（Step 6 の 5 本の鎖が効かせるのは、引いた
 `cosh_sinh_basic_properties` (3)・`finite_product_of_positive_reals_is_positive`・`def_real_quotient`・
 `real_two_is_nonzero`・`real_inverse_of_positive_is_positive`・`real_zero_less_than_two`
-（それぞれ必要十分版あり。`def_real_quotient` は定義）と、ℝ の順序と乗法の計算規則（正の数どうしの積は正）だけで、
+（それぞれ必要十分版あり。`def_real_quotient` は定義）と `real_product_of_positives_is_positive`（必要十分版なし）だけで、
 鎖に固有の取り払える構造が無い）。 -/
 theorem traceFactor_pos_step6 {r : ℕ} {F : CheckFermi (r + 1)} (D : VPlusData (r + 1) F) :
     D.traceFactor > 0 :=
   calc D.traceFactor
       = D.C * ∏ μ, 2 * Real.sinh (D.gam μ / 2) := rfl  -- `ϰ` の置き方
-    _ > 0 := mul_pos D.hC D.prod_two_sinh_gam_half_pos
-                                                        -- ℝ で正の数どうしの積は正（順序体）に、
+    _ > 0 := real_product_of_positives_is_positive _ _ D.hC D.prod_two_sinh_gam_half_pos
+                                                        -- `real_product_of_positives_is_positive`（`a → (2sinh 2K_2)^{M_col/2}, b → Π…`）に、
                                                         -- `D.hC` の `(2sinh 2K_2)^{M_col/2} > 0` と直前の鎖を当てる
 
 end VPlusData
