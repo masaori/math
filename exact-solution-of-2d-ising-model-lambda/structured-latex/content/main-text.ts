@@ -23554,7 +23554,7 @@ r\cdot r
 &=q\cdot q
 &&\bigl(\because\ r=q\bigr)\\
 &=2
-&&\bigl(\because\ q\cdot q=2\bigr).
+&&\bigl(\because\ q\cdot q=2\bigr)
 \end{aligned}`),
                               paragraph([
                                 math(String.raw`q<0`),
