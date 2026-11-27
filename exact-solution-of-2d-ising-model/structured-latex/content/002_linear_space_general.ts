@@ -4385,7 +4385,7 @@ B_{ik}
     kind: "claim",
     title: { text: "行列 A と差 B − A の和は B" },
     labels: ["matrix_plus_difference_cancels"],
-    lean: ["Ising2D.matrix_add_sub_cancel", "Ising2D.matrix_add_sub_cancel_apply"],
+    lean: ["Ising2D.matrix_add_sub_cancel", "Ising2D.matrix_add_sub_cancel_apply", "Ising2D.add_sub_cancel_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -4436,6 +4436,7 @@ B_{ik}
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 0 が R_μ^{(1)} + R_μ^{(0)} = ň_μ + (I − ň_μ) = I を「行列の加法（加法逆元と単位元）」とだけ書いて主張を置かずに使っていたので足した。Lean は具体版 Ising2D.matrix_add_sub_cancel（ClaimMatrixPlusDifferenceCancels.lean）。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 左から足した 0_C を消す行の根拠を、complex_numbers_form_a_field の「加法の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の十八単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.add_sub_cancel_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowMatrixPlusDifferenceCancels.lean。番号 ν^{-1} で Fin n の行列へ移して、この主張の成分の鎖を引く）。",
       ],
     },
   },

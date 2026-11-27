@@ -2118,6 +2118,7 @@ targets=(
   Ising2D.matrix_add_sub_cancel
   Ising2D.matrix_add_sub_cancel_of_necSuf
   Ising2D.add_sub_cancel_tensorPow
+  Ising2D.add_sub_cancel_tensorPow_of_necSuf
   "Ising2D.NecSuf.one_smul_matrix'"
   Ising2D.matrix_one_smul
   Ising2D.matrix_one_smul_of_necSuf

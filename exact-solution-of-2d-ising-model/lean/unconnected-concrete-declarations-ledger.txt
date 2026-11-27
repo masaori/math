@@ -658,7 +658,6 @@ Ising2D.matrixUnitBasis_apply
 Ising2D.matrix_add_smul
 Ising2D.matrix_add_smul_apply
 Ising2D.matrix_add_sub_cancel
-Ising2D.matrix_add_sub_cancel_apply
 Ising2D.matrix_commuting_with_each_factor_commutes_with_finite_product
 Ising2D.matrix_conjTranspose_add_smul
 Ising2D.matrix_conjTranspose_add_smul_apply
