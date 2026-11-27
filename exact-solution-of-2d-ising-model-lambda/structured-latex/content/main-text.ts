@@ -21138,7 +21138,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
 &=-\varepsilon(U\mathbin{+\!+}[a_r,b_r]\mathbin{+\!+}V)
 &&\bigl(\because\ \blkref{claim_matching_word_sign_swap}\bigr)\\
 &=\eta_S(a_r,b_r)\varepsilon(U\mathbin{+\!+}[a_r,b_r]\mathbin{+\!+}V)
-&&\bigl(\because\ a_r\notin S\text{ での }\eta_S\text{ の置き方}\bigr).
+&&\bigl(\because\ a_r\notin S\text{ での }\eta_S\text{ の置き方}\bigr)
 \end{aligned}`),
                       paragraph(["列挙の長さ ", math(String.raw`m`), " に関する帰納法で、処理済みの端点を ", math(String.raw`U`), " に残したまま各対に上の交換を適用する。空列では積は一である。各段で一つの因子を掛けるので"]),
                       displayMath(String.raw`\begin{aligned}
@@ -21146,7 +21146,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
 &=\left(\prod_{r=1}^{m}\eta_S(a_r,b_r)\right)\varepsilon(W(\mathcal L))
 &&\bigl(\because\ \text{対の個数に関する上の帰納法}\bigr)\\
 &=\left(\prod_{r=1}^{m}\eta_S(a_r,b_r)\right)\operatorname{sgn}(\mathcal D)
-&&\bigl(\because\ \blkref{claim_perfect_matching_sign_enumeration_independent}\bigr).
+&&\bigl(\because\ \blkref{claim_perfect_matching_sign_enumeration_independent}\bigr)
 \end{aligned}`),
                       paragraph(["対の並べ替えは ", ref("claim_perfect_matching_sign_enumeration_independent"), " の四回の隣接交換で符号を保ち、積は整数の可換性で順序に依存しない。第一色と第二色には同じ帰納法を適用する。有限列と整数だけを使い、実数体への脱出はない。"]),
                     ],

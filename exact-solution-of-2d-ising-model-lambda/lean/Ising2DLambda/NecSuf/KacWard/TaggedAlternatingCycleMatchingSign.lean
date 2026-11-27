@@ -88,18 +88,19 @@ theorem iterate_color_parity_necSuf (m : {x // x ∈ A}) (hm : m ∈ matchingPai
         rfl
       rw [hstep, matchingPairSuccessor_color, ih, Nat.even_add_one]
 
-/-- 周期は正で偶数で、周期で戻る。 -/
-theorem cycle_period_necSuf (m : {x // x ∈ A}) :
-    0 < finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m ∧
-      Even (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m) ∧
-      finiteMapIterate (matchingPairPermutation τ υ)
-        (finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m) m = m := by
-  have hs := finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) m
-  refine ⟨hs.1, ?_, hs.2.1⟩
+omit [Fintype J] [LinearOrder J] in
+/-- 帰還時刻が正で、後続写像が色を反転すれば、帰還時刻は偶数。 -/
+theorem cycle_period_necSuf {K : Type*} (successor : K → K) (color : K → Prop)
+    (period : K → ℕ) (iterate : ℕ → K → K)
+    (hiterate : ∀ n m, iterate n m = successor^[n] m)
+    (hflip : ∀ m, color (successor m) ↔ ¬ color m)
+    (hperiod : ∀ m, 0 < period m ∧ iterate (period m) m = m)
+    (m : K) :
+    0 < period m ∧ Even (period m) ∧ iterate (period m) m = m := by
+  obtain ⟨hpos, hreturn⟩ := hperiod m
+  refine ⟨hpos, ?_, hreturn⟩
   exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.even_of_color_flip
-    (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
-    (matchingPairSuccessor_color τ υ)
-    _ m hs.2.1
+    successor color hflip _ m ((hiterate _ _).symm ▸ hreturn)
 
 omit [Fintype J] [LinearOrder J] in
 theorem cyclePoints_even_necSuf {K : Type*} (period : K → ℕ)
@@ -123,7 +124,14 @@ theorem cycle_pairs_D_necSuf (D' : Set (Set J)) (mate : J → J)
       ({p.1, p.2} : Set J) ∈ D' := by
   intro p hp
   set m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i
-  obtain ⟨k, hk⟩ := (cycle_period_necSuf A τ υ m).2.1
+  obtain ⟨k, hk⟩ := (cycle_period_necSuf
+    (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+    (finiteMapIterate (matchingPairPermutation τ υ))
+    (by intro n j; rfl)
+    (matchingPairSuccessor_color τ υ)
+    (by intro j; have hs := finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) j
+        exact ⟨hs.1, hs.2.1⟩) m).2.1
   have hk2 : finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m = 2 * k := by omega
   unfold cyclePointsOf at hp
   rw [hk2, pairChunks_map_range] at hp
@@ -153,7 +161,14 @@ theorem cycle_pairs_reference_necSuf (D₀' : Set (Set J)) (mate : J → J)
       ({p.1, p.2} : Set J) ∈ D₀' := by
   intro p hp
   set m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i
-  obtain ⟨hpos, ⟨k, hk⟩, hper⟩ := cycle_period_necSuf A τ υ m
+  obtain ⟨hpos, ⟨k, hk⟩, hper⟩ := cycle_period_necSuf
+    (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+    (finiteMapIterate (matchingPairPermutation τ υ))
+    (by intro n j; rfl)
+    (matchingPairSuccessor_color τ υ)
+    (by intro j; have hs := finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) j
+        exact ⟨hs.1, hs.2.1⟩) m
   have hk2 : finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m = 2 * k := by omega
   unfold cyclePointsOf at hp
   rw [rotate_range_of_period _ _ hpos (by rw [hper]; rfl), hk2, pairChunks_map_range] at hp
@@ -360,7 +375,14 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
     (matchingPairOutsideEnumeration (perfectMatchingMate D) A)
   · intro c hc
     obtain ⟨m, _, rfl⟩ := List.mem_map.mp hc
-    obtain ⟨hpos, hev, _⟩ := cycle_period_necSuf A τ υ m
+    obtain ⟨hpos, hev, _⟩ := cycle_period_necSuf
+      (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+      (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ))
+      (by intro n j; rfl)
+      (matchingPairSuccessor_color τ υ)
+      (by intro j; have hs := finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) j
+          exact ⟨hs.1, hs.2.1⟩) m
     exact cyclePoints_even_necSuf
       (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
       (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m hpos hev
