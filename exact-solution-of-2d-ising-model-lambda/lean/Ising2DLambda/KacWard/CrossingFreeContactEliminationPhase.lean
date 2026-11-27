@@ -26,8 +26,7 @@
 - 「両族を連結して `(δ_i)_{1≤i≤p+q}` と置く」: リストの連結 `αs ++ βs`。台の分割は `chainListUnion_append`・
   `subset_chainListUnion`。
 - 切断線偶奇の式の一行目「二本への帰納法の仮定と有限和の分割」: `List.sum_append` と `Nat.add_mod`。
-  二行目 `claim_contact_split_seam_parity`: `closedWalk_smoothing_split_seam_parity`（添字区間による二本の
-  切断線偶奇の和で、接触か横断かに依らない）。
+  二行目 `claim_contact_split_seam_parity`: `closedWalk_contact_split_seam_parity`。
 - 「交差形式の分配」: `evenEdgeChainIntersection_chainListUnion`。
 - 位相の式の一行目 `claim_crossing_free_contact_split_phase`: `crossing_free_contact_split_phase`。
   二行目「二本への帰納法の仮定」、三行目「交差形式の分配、有限積の分割、`𝔽₂` の加法」:
@@ -37,6 +36,7 @@
 import Ising2DLambda.KacWard.CrossingFreeContactSplitPhase
 import Ising2DLambda.KacWard.EdgeDistinctCrossingEliminationParity
 import Ising2DLambda.KacWard.ContactPairCount
+import Ising2DLambda.KacWard.ContactSplitWalkSeamParity
 
 namespace Ising2DLambda.KacWard
 
@@ -309,7 +309,7 @@ theorem crossing_free_contact_elimination_phase {z : Qbar} (hz4 : z ^ 4 = -1)
               ((edgeSequenceSeamParities (List.ofFn γA)).2
                 + (edgeSequenceSeamParities (List.ofFn γB)).2) % 2) := by
             rw [hαh, hαv, hβh, hβv]
-        _ = edgeSequenceSeamParities (List.ofFn γ) := closedWalk_smoothing_split_seam_parity γ hγ hkl
+        _ = edgeSequenceSeamParities (List.ofFn γ) := closedWalk_contact_split_seam_parity γ hγ hkl
     · -- ζ_8^{t_∘(γ)} = (−1)^{1+I_L(C_A,C_B)} ζ_8^{t_∘(γ_A)+t_∘(γ_B)} = …
       have hp : 1 ≤ αs.length := List.length_pos_iff.mpr hαne
       have hq : 1 ≤ βs.length := List.length_pos_iff.mpr hβne

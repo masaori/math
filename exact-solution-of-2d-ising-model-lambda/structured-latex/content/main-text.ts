@@ -84403,6 +84403,8 @@ d_k&=1-d_k
               verification: ["sagemath/check/edge-simple-contact-split"],
               lean: [
                 "Ising2DLambda.KacWard.smoothing_split_seam_parity",
+                "Ising2DLambda.KacWard.contactSplit_seam_sum",
+                "Ising2DLambda.KacWard.closedWalk_contact_split_seam_parity",
                 "Ising2DLambda.NecSuf.KacWard.interval_split_parity_pair_necSuf",
                 "Ising2DLambda.KacWard.smoothing_split_seam_parity_from_necSuf",
               ],
@@ -100346,6 +100348,7 @@ H^{\mathrm h}_{0,j}
                       habitat: "N",
                       lean: [
                         "Ising2DLambda.KacWard.evenEdgeChainIntersection",
+                        "Ising2DLambda.KacWard.evenEdgeChainIntersection_chainListUnion",
                         "Ising2DLambda.NecSuf.KacWard.finiteEdgeChainIntersection",
                         "Ising2DLambda.KacWard.evenEdgeChainIntersection_from_necSuf",
                       ],
@@ -100695,7 +100698,6 @@ c(\gamma)+1
                     verification: ["sagemath/check/edge-distinct-crossing-elimination-parity"],
                     lean: [
                       "Ising2DLambda.KacWard.edge_distinct_crossing_elimination_parity",
-                      "Ising2DLambda.KacWard.evenEdgeChainIntersection_chainListUnion",
                       "Ising2DLambda.KacWard.evenEdgeChainIntersection_biUnion",
                       "Ising2DLambda.NecSuf.KacWard.crossing_elimination_family_necSuf",
                       "Ising2DLambda.NecSuf.KacWard.finiteChainIntersection_biUnion_necSuf",
