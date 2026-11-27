@@ -272,8 +272,8 @@ theorem exists_eta_with_generator (T : Finset (Fin M)) :
     exact hq0 (funext hc)
   have hk0 : (η * η - 1) * q k = 0 := by
     have := congrFun hO k
-    rwa [Pi.smul_apply, smul_eq_mul, Pi.zero_apply] at this
-                                                        -- 上の式の第 `k` 成分（`def_matrix_scalar_multiple`）
+    rwa [Pi.smul_apply, smul_eq_mul, confVec_zero_apply] at this
+                                                        -- 上の式の第 `k` 成分（`def_matrix_scalar_multiple`・`def_zero_matrix`）
   have hηη : η * η - 1 = 0 := (mul_eq_zero.1 hk0).resolve_right hk
                                                         -- `complex_numbers_form_a_field` より `ℂ` は体
   exact ⟨η, eta_mem_of_mul_self_sub_one hηη,

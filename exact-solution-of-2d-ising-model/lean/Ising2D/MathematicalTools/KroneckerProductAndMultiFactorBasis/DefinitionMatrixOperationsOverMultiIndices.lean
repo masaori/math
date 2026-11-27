@@ -28,6 +28,7 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が `𝓘_M`�
 - スカラー倍・和・零行列は成分の式が各成分だけで閉じ、番号 `ν(I)`・`ν(K)` の成分の式は Lean の `I`・`K` の成分の式と同じ形なので、
   `Conf M` の添字で一本ずつ書く（`matrix_conf_smul_apply`・`matrix_conf_add_apply`・`matrix_conf_zero_apply` を本体とし、
   略記 `TensorPow M` で書いた `tensorPow_smul_apply`・`tensorPow_add_apply`・`tensorPow_zero_apply` をそこから導く）。
+  零ベクトル（`def_zero_matrix` の `p = 1`）も同じく `Conf M` の添字で書く（`confVec_zero_apply`）。
   この 3 つの演算の補題（と、下の符号反転・差の補題）は `def_kronecker` の「`I` を番号 `ν(I)` と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii) が直す同一視）。
 
 人手の `Mat(m, n, ℂ)` は添字の集合の直積 `{1,…,m} × {1,…,n}` から `ℂ` への写像の全体（`def_complex_matrices`）で、Lean の
@@ -157,6 +158,12 @@ theorem matrix_conf_zero_apply {M : ℕ} (I K : Conf M) :
 theorem tensorPow_zero_apply {M : ℕ} (I K : Conf M) :
     (0 : TensorPow M) I K = 0 :=
   matrix_conf_zero_apply I K
+
+/-- **`def_zero_matrix`**（`p = 1`、零ベクトル）: Lean の数ベクトル `Conf M → ℂ`（本文の `ℂ^{2^M}` の元を、第 `k` 成分を `ν^{-1}(k)` での値として持つ）の
+零ベクトルの成分は、本文の `O_{k1} := 0` を番号 `k = ν(I)` で読んだもの `0_I = 0` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
+theorem confVec_zero_apply {M : ℕ} (I : Conf M) :
+    (0 : Conf M → ℂ) I = 0 :=
+  rfl                                                     -- mathlib の関数の零は成分ごとの零
 
 /-- **`def_matrix_negation`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（本文の `Mat(2^M, ℂ)`）の符号反転の成分は、本文の `(-A)_{ik} := -A_{ik}` を
 番号 `i = ν(I)`・`k = ν(K)` で読んだもの `(-A)_{IK} = -A_{IK}` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/

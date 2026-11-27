@@ -368,3 +368,13 @@ HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Matrix[Ising2D.Conf,Isin
 # 𝓘_M の上の二重の和の形 realMatrix_conf_bilinear_value_apply をそこから導き、通しの定理に繋がる real_bilinear_value_of_real_identity_matrix・
 # real_bilinear_value_between_two_powers・real_bilinear_value_eq_zero_of_mulVec_eq_zero が使う）。添字が任意の型の dotProduct[Matrix.mulVec]（@?,…）と ℂ のものはまだ載せない。
 dotProduct[Matrix.mulVec]@Ising2D.Conf,Real@Pi.instFintype,Real.instMul,Real.instAddCommMonoid	def_real_bilinear_value
+#
+# 数ベクトルの零: def_zero_matrix が零行列 O_{ik} := 0 を定め、p = 1 のとき（数ベクトルのとき）を 0 と書いて零ベクトルと呼ぶ。
+# Lean の数ベクトルは第 j 成分の割り当て（Fin n → ℂ、本文の ℂ^n の元を def_complex_number_vectors の vecToColumn で n 行 1 列の行列へ送る）か、
+# 多重添字の集合 𝓘_M の上の割り当て（Conf M → ℂ、本文の ℂ^{2^M} の元の第 k 成分を ν^{-1}(k) での値として持つ）で、mathlib の関数の零は成分ごとの零である。
+# 一致は vec_zero_apply（Fin）と confVec_zero_apply（Conf M。ClaimEpsilonEigenvalueOnCheckQ.lean の exists_eta_with_generator の段で使う）。どちらも rfl。
+# Conf M → ℂ を ℂ^{2^M} と読むのは def_kronecker の「I を番号 ν(I) と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii) が直す同一視）。
+# 鍵は Fin 0 → ℂ の零も区別しない。本文は n ∈ ℤ_{≥1} だけを扱うので、Fin 0 の零を使う具体版の主張は本文の主張と一対一でない（Conf 0 は元が 1 つで本文の範囲に入る）。
+# 本文に ℝ の数ベクトルの零の定義が無いので、Conf M → ℝ と定義域が任意の型の零（OfNat.ofNat@→[Ising2D.Conf,Real],0・→[?,…],0）は載せない。
+OfNat.ofNat@→[Fin,Complex],0@Zero.toOfNat0	def_zero_matrix
+OfNat.ofNat@→[Ising2D.Conf,Complex],0@Zero.toOfNat0	def_zero_matrix

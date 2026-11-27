@@ -28,11 +28,12 @@
 ライブラリが置いた積、ℂ の行列と ℝ の行列）と、本文が定める添字が `{1,…,n}` の行列の演算と本文に定義の無い添字が任意の型の行列の演算を、
 分けて数えるためである。
 演算の型としての行列は、行と列の添字の型と成分の型の頭まで `Matrix[Fin,Fin,Complex]` と書く。
+関数の型は、定義域と値域の型の頭まで `→[Fin,Complex]` と書く（数ベクトルの零 `OfNat.ofNat@→[Fin,Complex],0@Zero.toOfNat0` など）。
 `dotProduct` のうち二つ目のベクトルが `Matrix.mulVec` の項であるもの（`x ⬝ᵥ P *ᵥ y`。本文の双線型値 `x^⊤Py`）は、
 二つのベクトルの `dotProduct` と分けて `dotProduct[Matrix.mulVec]@…` と書き出す。
 行列の型そのもの（`Matrix m n α`）は、同じ理由で、行と列の添字の型と成分の型の頭を添えて `Matrix@Fin,Fin,Complex` と書き出す。
 インスタンス引数をとる型クラスの演算でない関数（`Finset.sum`・`Matrix.trace`・`nhds` など）も、最初のインスタンス引数より前の
-引数の頭と各インスタンス引数の頭を添えて `Finset.sum@Complex,Fin@Complex.instAddCommMonoid` のように書き出す。型が変数なら `?`、関数の型なら `→`、λ なら `fun` を添える。
+引数の頭と各インスタンス引数の頭を添えて `Finset.sum@Complex,Fin@Complex.instAddCommMonoid` のように書き出す。型が変数なら `?`、関数の型なら `→[<定義域>,<値域>]`、λ なら `fun` を添える。
 
 書き出すもの（タブ区切り、一行に一件）: `UNDEF  <具体版の宣言>  <記号>`。
 -/
@@ -161,7 +162,9 @@ partial def carrierHead (e : Expr) : String :=
       let a := e.getAppArgs
       s!"Matrix[{carrierHead a[0]!},{carrierHead a[1]!},{carrierHead a[2]!}]"
     else (userName c).toString
-  | .forallE .. => "→"
+  -- 関数の型は定義域と値域の頭まで書く（本文が数ベクトルとして定めるのは ℂ^n（Lean の `Fin n → ℂ`）と、それを ν で読んだ
+  -- ℂ^{2^M}（`Conf M → ℂ`）であり、ほかの関数の型とは鍵を分ける。例えば零ベクトル `OfNat.ofNat@→[Fin,Complex],0@…`）。
+  | .forallE _ d b _ => s!"→[{carrierHead d},{carrierHead b}]"
   | .sort _ => "Sort"
   | .lit (.natVal n) => toString n
   | .lam .. => "fun"
