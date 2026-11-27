@@ -24,8 +24,22 @@ theorem taggedActive_alternatingCycle {L : ℕ}
       (∀ j, σ j ∈ matchingPairColor τ υ ↔ j ∉ matchingPairColor τ υ) ∧
       (∀ j, σ j = if j ∈ matchingPairColor τ υ then τ.val j else υ.val j) := by
   dsimp
-  let τ := concreteShortInvolution D t
-  let υ := concreteLongInvolution D t
+  -- 本文の第一段: 基準マッチング `𝒟₀`（`claim_reference_long_matching`）と `D` の相手写像は
+  -- `claim_perfect_matching_involution` により不動点のない対合で、
+  -- `claim_tagged_difference_two_step_orbit` の活動点への制限も同じ値を取るので不動点のない対合である。
+  let D₀ : PerfectMatching (OrientedEdge L) :=
+    ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
+  let τ : FixedPointFreeInvolution {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t} :=
+    ⟨taggedConcreteShortMate D t,
+      (fun i h => perfectMatchingMate_ne D i.1 (congrArg Subtype.val h)),
+      (fun i => Subtype.ext (perfectMatchingMate_involutive D i.1))⟩
+  let υ : FixedPointFreeInvolution {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t} :=
+    ⟨taggedConcreteLongMate D t,
+      (fun i h => perfectMatchingMate_ne D₀ i.1 (congrArg Subtype.val h)),
+      (fun i => Subtype.ext (perfectMatchingMate_involutive D₀ i.1))⟩
+  have hτ : concreteShortInvolution D t = τ := rfl
+  have hυ : concreteLongInvolution D t = υ := rfl
+  rw [hτ, hυ]
   have hm : matchingPairComponentMinimum τ υ i ∈ matchingPairComponent τ υ i :=
     matchingPairComponentMinimum_mem τ υ i
   constructor
