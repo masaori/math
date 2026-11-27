@@ -13,7 +13,7 @@ namespace Ising2D
 
 /-- `real_zero_less_than_one` を `NecSuf.zero_lt_one_of_orderedAxioms`（`R := ℝ`）の特殊化として得る。 -/
 theorem real_zero_less_than_one_of_necSuf : (0 : ℝ) < 1 :=
-  NecSuf.zero_lt_one_of_orderedAxioms zero_ne_one add_neg_cancel zero_add one_mul
+  NecSuf.zero_lt_one_of_orderedAxioms zero_ne_one add_neg_cancel zero_add mul_one
     (fun _ _ c h => add_lt_add_left h c) (fun _ _ ha hb => mul_pos ha hb)
     real_negation_times_negation_is_product
 

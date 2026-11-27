@@ -2800,19 +2800,15 @@ a^{-1}\cdot b^{-1}
         math(String.raw`0`),
         "・",
         math(String.raw`1`),
-        "・順序 ",
-        math(String.raw`<`),
         " は ",
         ref("set_and_algebra_notation"),
         " の順序体 ",
         math(String.raw`\mathbb{R}`),
-        " のものである（",
-        math(String.raw`x < y`),
+        " のもの、狭義の順序 ",
+        math(String.raw`<`),
         " は ",
-        math(String.raw`x \leq y`),
-        " かつ ",
-        math(String.raw`x \neq y`),
-        " のこと）。このとき",
+        ref("def_real_strict_order"),
+        " で定めたものである。このとき",
       ]),
       displayMath(String.raw`0 < 1`),
       paragraph(["が成り立つ。"]),
@@ -2825,6 +2821,12 @@ a^{-1}\cdot b^{-1}
         ref("set_and_algebra_notation"),
         "）の公理より ",
         math(String.raw`0 \neq 1`),
+        " であり、等号の対称律 ",
+        math(String.raw`x = y \Rightarrow y = x`),
+        "（",
+        math(String.raw`x \to 1,\ y \to 0`),
+        "）の対偶より ",
+        math(String.raw`1 \neq 0`),
         " である。",
         math(String.raw`-1 \in \mathbb{R}`),
         " は ",
@@ -2832,26 +2834,41 @@ a^{-1}\cdot b^{-1}
         " の ",
         math(String.raw`1`),
         " の加法の逆元である。",
-        math(String.raw`\mathbb{R}`),
-        " の順序は全順序（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
+      ]),
+      paragraph([
         ref("set_and_algebra_notation"),
-        "）なので ",
-        math(String.raw`0 \leq 1`),
+        " の全順序 ",
+        math(String.raw`x \le y \vee y \le x`),
+        "（",
+        math(String.raw`x \to 0,\ y \to 1`),
+        "）より ",
+        math(String.raw`0 \le 1`),
         " か ",
-        math(String.raw`1 \leq 0`),
-        " であり、",
-        math(String.raw`0 \neq 1`),
-        " と合わせて ",
-        math(String.raw`0 < 1`),
-        " か ",
+        math(String.raw`1 \le 0`),
+        " である。それぞれの場合について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 \le 1
+&\Longrightarrow 0 \le 1\ \wedge\ 0 \neq 1
+&&\bigl(\because\ \text{準備の}\ 0 \neq 1\bigr)\\
+&\Longrightarrow 0 < 1
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to 1)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+1 \le 0
+&\Longrightarrow 1 \le 0\ \wedge\ 1 \neq 0
+&&\bigl(\because\ \text{準備の}\ 1 \neq 0\bigr)\\
+&\Longrightarrow 1 < 0
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 1,\ y \to 0)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0 \le 1`),
+        " の場合は、上の第一の鎖の結論が主張そのものである。",
+        math(String.raw`1 \le 0`),
+        " の場合は、上の第二の鎖の結論 ",
         math(String.raw`1 < 0`),
-        " である。",
-        math(String.raw`0 < 1`),
-        " の場合は主張そのものである。",
-        math(String.raw`1 < 0`),
-        " の場合にも ",
+        " から ",
         math(String.raw`0 < 1`),
         " となることを示す。",
       ]),
@@ -2860,14 +2877,14 @@ a^{-1}\cdot b^{-1}
 &= 1 + (-1)
 &&\bigl(\because\ \blkref{def_real_difference}\ \text{の加法の逆元}\ z + (-z) = 0\ (z \to 1)\ \text{を右辺から左辺へ}\bigr)\\
 &< 0 + (-1)
-&&\bigl(\because\ \text{場合の仮定}\ 1 < 0\ \text{と、}\blkref{real_less_than_preserved_by_adding_on_right}\ \text{の}\ x < y \Rightarrow x + c < y + c\ (x \to 1,\ y \to 0,\ c \to -1)\bigr)\\
+&&\bigl(\because\ \text{上の第二の鎖の結論}\ 1 < 0\ \text{と、}\blkref{real_less_than_preserved_by_adding_on_right}\ \text{の}\ x < y \Rightarrow x + c < y + c\ (x \to 1,\ y \to 0,\ c \to -1)\bigr)\\
 &= -1
 &&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 0
 &< (-1)\cdot(-1)
-&&\bigl(\because\ \text{上の鎖の}\ 0 < -1\ \text{を 2 つの因子へ当て、}\blkref{real_product_of_positives_is_positive}\ (a \to -1,\ b \to -1)\bigr)\\
+&&\bigl(\because\ \text{上の第三の鎖の結論}\ 0 < -1\ \text{を 2 つの因子へ当て、}\blkref{real_product_of_positives_is_positive}\ (a \to -1,\ b \to -1)\bigr)\\
 &= 1\cdot 1
 &&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ (a \to 1,\ b \to 1)\bigr)\\
 &= 1
@@ -2885,6 +2902,7 @@ a^{-1}\cdot b^{-1}
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。本文は ℝ の 0 < 1・0 < 2・2 ≠ 0 を名前だけで根拠にしており（zero_in_closed_interval_from_minus_half_pi_to_half_pi・inverse_of_sqrt_cc・relation_of_gamma_2_theta_tilde ほか）、0 < 1 は順序体の公理に含まれないので、ℝ の 2 を定めて 0 < 2 を示す前段として示す主張にした。Lean の具体版は Ising2D.real_zero_less_than_one（MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimRealZeroLessThanOne.lean）、必要十分版は Ising2D.NecSuf.zero_lt_one_of_orderedAxioms（NecSuf/ZeroLtOneOfOrderedAxioms.lean）。数値検証: sagemath/check/real_zero_less_than_one/。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: ℝ の単位元を set_and_algebra_notation で引く行に、使った形と代入が書かれていない、または形が参照の後ろに置かれていたので、multiplicative_group_of_cc・monoid_of_polar_representation の同じ行と同じ「0（1）は ℝ の加法（乗法）の単位元 形 (代入)（参照）」の並びにした: 0 + (−1) = −1（0 + x = x の x → −1）と 1·1 = 1（x·1 = x の x → 1）。式・鎖の両端・段数は不変。SageMath の検算 check_unit_rows_cite_set_and_algebra_notation.sage を足した。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (a)）: 狭義の順序と加法の両立 x < y ⇒ x + c < y + c を「ℝ の順序と加法の両立（ℝ は順序体 set_and_algebra_notation）」として名前だけで引いていた行の根拠を、この回に足した主張 real_less_than_preserved_by_adding_on_right への参照に替えた（1 < 0 の場合の第 1 の鎖の 2 行目）。式・鎖の両端・段数は不変。",
+        "2026-11-27（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」のうち順序の (e)）: 準備の「全順序なので 0 ≤ 1 か 1 ≤ 0 であり、0 ≠ 1 と合わせて 0 < 1 か 1 < 0」の段は、< の定義を名前を出さずに使っていた。set_and_algebra_notation の全順序（x → 0, y → 1）で 0 ≤ 1 か 1 ≤ 0 に分け、それぞれを 0 ≠ 1（1 ≤ 0 の側は、準備に足した等号の対称律の対偶による 1 ≠ 0）と def_real_strict_order で 0 < 1・1 < 0 にする 2 本の鎖に割った。主張の「x < y は x ≤ y かつ x ≠ y のこと」も def_real_strict_order への参照に替えた。1 < 0 の側の後の 2 本の鎖は不変（引く結論の呼び方だけ替えた）。",
       ],
     },
   },
