@@ -4,7 +4,8 @@
 モード `(1,1)` の所属の段は `SignedEvenSubgraphRationalSignMembership.lean` にある。
 
   人手証明                                                    このファイル・引く具体版
-  `q² + 2q − 1 ≠ 0`（`claim_no_rational_square_two`）           主張の場合分けの前提（`q²+2q−1 < 0` か `> 0`）
+  `q² + 2q − 1 ≠ 0`: 零なら `(q+1)² = (q²+2q−1)+2 = 2` で
+    `claim_no_rational_square_two` に反する                     `rationalPoint_selfDualQuadratic_ne_zero`
   R の正の元の積は正: `u = s·s`、`v = t·t` なら
     `u·v = (s·s)(t·t) = (s·t)(s·t)`、`s·t ≠ 0`                  `rPositive_mul`
   空積は `1 = 1·1` で正                                         `rPositive_one`
@@ -27,6 +28,7 @@
 import Ising2DLambda.KacWard.SignedEvenSubgraphRationalSignFactors
 import Ising2DLambda.KacWard.SignedEvenSubgraphRationalSignMembership
 import Ising2DLambda.KacWard.SignedEvenSubgraphOrbitProduct
+import Ising2DLambda.FisherZero.NoRationalSquareTwo
 
 namespace Ising2DLambda.KacWard
 
@@ -35,6 +37,14 @@ open Ising2DLambda.AlgebraicEigenvalue
 open Ising2DLambda.FisherZero
 open Ising2DLambda.CriticalExponent
 open Classical
+
+/-- 本文の第一段: `q² + 2q − 1 ≠ 0`。零なら `(q+1)·(q+1) = 2` となり `claim_no_rational_square_two` に反する。 -/
+theorem rationalPoint_selfDualQuadratic_ne_zero (q : ℚ) : q ^ 2 + 2 * q - 1 ≠ 0 := by
+  intro h
+  apply noRationalSquareTwo (q + 1)
+  calc (q + 1) * (q + 1) = q ^ 2 + 2 * q + 1 := by ring
+    _ = (q ^ 2 + 2 * q - 1) + 2 := by ring
+    _ = 2 := by rw [h]; ring
 
 /-- `y ∈ Qbar` が R の元であって `0 <_R y` であること。 -/
 def RPositive (data : RealClosedSubfieldData) (y : Qbar) : Prop :=

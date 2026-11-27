@@ -84058,6 +84058,9 @@ c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)
                     ],
                     proof: [
                       paragraph([
+                        ref("claim_smoothing_splits_closed_walk"), " により ",
+                        math(String.raw`\gamma_A,\gamma_B`), " は閉じた非後退辺列なので、横断数 ",
+                        math(String.raw`c(\gamma_A),c(\gamma_B)\in\mathbb N`), " が定まる。",
                         "選んだ二つの通過は横断するので（", ref("def_index_pair_crossing"), "）、横断頂点 ",
                         math(String.raw`v`), " で互いに異なる二軸を直進する。従って ",
                         ref("def_smoothing_straight_visit_count"), " の平滑化前の直進通過数は ",
@@ -91393,7 +91396,6 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                     lean: [
                       "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_actual_even_edge_counts",
                       "Ising2DLambda.KacWard.interiorCellsOfWalk_eulerNumber_eq_one",
-                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_eulerNumber_eq_one",
                       "Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_even_edge_counts",
                     ],
                     statement: [
@@ -105644,6 +105646,7 @@ Q_L^{0,0}(1)
                   "Ising2DLambda.KacWard.oneElementOrbits_filter_one_one",
                   "Ising2DLambda.NecSuf.KacWard.one_element_filter_rep_necSuf",
                   "Ising2DLambda.KacWard.oneElementOrbits_filter_one_one_from_necSuf",
+                  "Ising2DLambda.KacWard.rationalPoint_selfDualQuadratic_ne_zero",
                   "Ising2DLambda.KacWard.signedEvenSubgraphPolynomial_rational_sign",
                   "Ising2DLambda.NecSuf.KacWard.sign_compose_necSuf",
                   "Ising2DLambda.KacWard.signedEvenSubgraphPolynomial_rational_sign_from_necSuf",
@@ -105747,7 +105750,8 @@ u\cdot v-0
                     " である。よって ", math(String.raw`0<_Ru\cdot v`), "（", ref("def_real_algebraic_strict_order"),
                     "）であり、因子の個数についての帰納法で正の元の有限積は正である。空積は ",
                     math(String.raw`1-0=1\cdot1`), " なので正である。正の有理数の因子は ",
-                    ref("claim_positive_rational_positive_in_real_closed"), " により ",
+                    ref("claim_rationals_are_real_algebraic"), " により ", math(String.raw`R`),
+                    " に属し、", ref("claim_positive_rational_positive_in_real_closed"), " により ",
                     math(String.raw`R`), " で正である。代表元が ", math(String.raw`(1,1)`),
                     " でない一元軌道の因子・二元軌道の因子 ", math(String.raw`\Delta_O(q)`),
                     "・四元軌道の因子 ", math(String.raw`\Delta_O(q)^2`),

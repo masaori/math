@@ -85,8 +85,20 @@ theorem vertexSimpleWalk_cyclicTotalTurning_four {L m : ℕ} [NeZero L]
   have hedgeIncidence := interiorCellsOfWalk_edgeIncidence_boundary_interior γ hγ hh hv
   -- 辺数 E = E_∘ + E_∂
   have hedge := cellEdges_card_eq_interior_add_boundary cells
-  -- Euler 数 V - E + F = 1
-  have heuler := interiorCellsOfWalk_eulerNumber_eq_one γ hγ hh hv hdistinct
+  -- 内側セル集合は空でなく有限かつ辺連結で、その補集合も辺連結なので
+  -- （`claim_odd_ray_interior_cells_bounded`・`claim_interior_cell_set_edge_connected`・
+  -- `claim_exterior_cell_set_edge_connected`）、Euler 数 V - E + F = 1
+  -- （`claim_hole_free_cell_set_euler_number_one`）
+  have hinside := interiorCellSetOfWalk_nonempty_edgeConnected γ hγ hh hv hdistinct
+  have houtside := exteriorCellSetOfWalk_nonempty_edgeConnected γ hγ hh hv hdistinct
+  have hset : (cells : Set GridCell) = oddRayInteriorCellsOfWalk γ hγ hh hv :=
+    Set.Finite.coe_toFinset _
+  have heuler : cellEulerNumber cells = 1 := by
+    apply cellEulerNumber_eq_one_of_actual_even_edge_counts
+    · obtain ⟨x, hx⟩ := hinside.1
+      exact ⟨x, by simpa only [hcells, Set.Finite.mem_toFinset] using hx⟩
+    · simpa only [hset] using hinside.2
+    · simpa only [hset] using houtside.2
   -- 境界頂点の局所回転数の和 = v₃ - v₁
   have hturnSum := interiorCellsOfWalk_boundary_turn_sum γ hγ hh hv hdistinct
   dsimp only at hvertexIncidence hedgeIncidence hturnSum
