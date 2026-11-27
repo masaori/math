@@ -120,38 +120,4 @@ theorem interiorCellOfWalk_reaches_band {L m : ℕ} [NeZero L]
       hlast htraversed, ?_⟩
   exact interiorRow_path _ r c g hcg hrow
 
-/-- Every interior cell of a one-sided closure projection reaches its interior band. -/
-theorem oneSidedClosureProjectionFromWalk_interior_reaches_band
-    {L m : ℕ} [NeZero L]
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ)
-    (hcontact : contactPairCount γ hγ = 0)
-    (hwind : (horizontalDirectedWindingNumber γ,
-      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
-    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
-      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
-        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
-      let N := oneSidedClosureLength (m + 1) L
-        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
-      let Γ : Fin (N - 1 + 1) → OrientedEdge L := fun j =>
-        projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)
-      ∃ (hΓ : closedNonbacktrackingWalk Γ)
-        (hh : horizontalDirectedWindingNumber Γ = 0)
-        (hv : verticalDirectedWindingNumber Γ = 0),
-        ∀ p ∈ oddRayInteriorCellsOfWalk Γ hΓ hh hv,
-          ∃ b ∈ walkSideInteriorBandFromWalk Γ hΓ hh hv,
-            Relation.ReflTransGen
-              (fun a b => a ∈ oddRayInteriorCellsOfWalk Γ hΓ hh hv ∧
-                b ∈ oddRayInteriorCellsOfWalk Γ hΓ hh hv ∧ CellEdgeAdjacent a b)
-              p b := by
-  obtain ⟨k₀, hprojection⟩ :=
-    oneSidedClosureProjectionFromWalk_winding_zero γ hγ hcontact hwind
-  refine ⟨k₀, ?_⟩
-  intro t c ht hc
-  have hp := hprojection t c ht hc
-  dsimp only at hp ⊢
-  refine ⟨hp.1, hp.2.2, hp.2.1, ?_⟩
-  rintro ⟨r, c'⟩ hinside
-  exact interiorCellOfWalk_reaches_band _ hp.1 hp.2.2 hp.2.1 r c' hinside
-
 end Ising2DLambda.KacWard

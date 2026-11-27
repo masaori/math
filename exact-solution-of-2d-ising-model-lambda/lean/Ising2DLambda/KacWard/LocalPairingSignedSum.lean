@@ -40,11 +40,12 @@ theorem selectedPortNumbers_card_eq_incidence {L : ℕ} [NeZero L]
     apply Finset.sum_congr rfl
     intro h _
     by_cases h₁ : orientedSource h = v <;> by_cases h₂ : h.1 ∈ P <;> simp [h₁, h₂]
-  · intro e he f hf hdir
+  · -- `claim_vertex_port_bijection` の制限 `d_v|_{H_v(P)}` の単射性
+    intro e he f hf hdir
     have he' := (Finset.mem_filter.mp (Finset.mem_coe.mp he)).2
     have hf' := (Finset.mem_filter.mp (Finset.mem_coe.mp hf)).2
-    apply sourceDirection_bijective.1
-    exact Prod.ext (he'.1.trans hf'.1.symm) ((ZMod.finEquiv 4).symm.injective hdir)
+    exact (selectedVertexPort_bijective v P).injOn he' hf'
+      ((ZMod.finEquiv 4).symm.injective hdir)
 
 /-- 偶部分グラフでは各頂点の選択数は零・二・四のいずれかである。 -/
 theorem selectedPortNumbers_card_cases {L : ℕ} [NeZero L]

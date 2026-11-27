@@ -89281,9 +89281,6 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.interiorCellSetOfWalk_nonempty_edgeConnected",
-                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_reaches_band",
-                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_planeLift_injective",
-                      "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_interior_nonempty_edgeConnected",
                       "Ising2DLambda.NecSuf.KacWard.connected_of_connected_core_and_reaches_necSuf",
                       "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected_from_necSuf",
                     ],
@@ -101502,20 +101499,20 @@ M_{D,T}(x)
 &=1
 &&\bigl(\because\ \mathbb Z\text{ の加法}\bigr).
 \end{aligned}`),
-                      paragraph([ref("claim_vertex_local_pairing_product"), " の直積の対応で各頂点の選択は独立である。", math(String.raw`(-1)^{\sum_v c_v}=\prod_v(-1)^{c_v}`), " は整数の冪の法則である。有限和への分配律を一頂点ずつ適用して"]),
+                      paragraph([math(String.raw`\mathcal C(P)`), " は主張文で各頂点の ", math(String.raw`\mathcal K(S_v(P))`), " の直積として置いた集合なので、各頂点の選択は独立である。", math(String.raw`(-1)^{\sum_v c_v}=\prod_v(-1)^{c_v}`), " は整数の冪の法則である。有限和への分配律を一頂点ずつ適用して"]),
                       displayMath(String.raw`\begin{aligned}
 \sum_{\boldsymbol\kappa\in\mathcal C(P)}(-1)^{t_P(\boldsymbol\kappa)}
 &=\sum_{\boldsymbol\kappa\in\mathcal C(P)}\prod_{v\in V_L}(-1)^{c_v(\kappa_v)}
 &&\bigl(\because\ t_P\text{ の定義と整数の冪の法則}\bigr)\\
 &=\prod_{v\in V_L}\sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}
-&&\bigl(\because\ \blkref{claim_vertex_local_pairing_product}\text{ と有限和の分配律}\bigr)\\
+&&\bigl(\because\ \mathcal C(P)\text{ が直積であることと有限和の分配律}\bigr)\\
 &=\prod_{v\in V_L}1
 &&\bigl(\because\ \text{上の頂点ごとの計算}\bigr)\\
 &=1
 &&\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr).
 \end{aligned}`),
-                      paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。逆に ", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、", ref("claim_local_pairing_matching_complement_recovery"), " によりその補辺は固定した ", math(String.raw`P`), " に等しい。", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。"]),
-                      paragraph(["対合族 ", math(String.raw`\boldsymbol\kappa`), " から作った項 ", math(String.raw`(D,T)`), " の短い対は、", ref("claim_vertex_port_bijection"), " の全単射で、頂点 ", math(String.raw`v`), " の方向番号 ", math(String.raw`i\in S_v(P)`), " の半辺 ", math(String.raw`\vec e`), " と方向番号 ", math(String.raw`\kappa_v(i)`), " の半辺 ", math(String.raw`\vec f`), " の組である。", math(String.raw`\operatorname{tgt}(\iota(\vec e))=\operatorname{src}(\vec e)=\operatorname{src}(\vec f)`), "（", ref("def_edge_reversal"), "）であり、", math(String.raw`\vec f\ne\vec e=\iota(\iota(\vec e))`), "（", ref("claim_reversal_is_involution"), "）なので ", math(String.raw`\vec f\in\operatorname{Next}(\iota(\vec e))`), "（", ref("def_nonbacktracking_successors"), "）である。その通過 ", math(String.raw`\iota(\vec e)\to\vec f`), " が直進するのは ", math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`), " のときである（", ref("claim_reversal_direction_shift"), "）。", ref("def_transverse_crossing"), " により、二つの短い対が横断するのは、始点が等しく、ともに直進し、方向軸が異なるときである。方向番号 ", math(String.raw`I`), " の上の有限の確認により、そのような二つの対が頂点 ", math(String.raw`v`), " にあるのは ", math(String.raw`c_v(\kappa_v)=1`), " のときだけで、そのとき ", math(String.raw`v`), " を始点とする短い対は方向番号 ", math(String.raw`\{0,2\}`), " と ", math(String.raw`\{1,3\}`), " の二つだけであり、この二つは横断する。ゆえに頂点 ", math(String.raw`v`), " を始点とする横断する順序のない対の個数は ", math(String.raw`c_v(\kappa_v)`), " であり、"]),
+                      paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。ここで、非零項では長い標識の対が反転の対であり短い標識の対の二つの半辺の始点が等しいこと（", ref("claim_tagged_matching_nonzero_support"), "）と、", math(String.raw`E_D`), " の昇順対の端点が向き付き辺の完全列挙をなすこと（", ref("claim_perfect_matching_enumeration_complete"), "）から、補辺に乗る半辺の相手は同じ始点を持つ短い標識の対のもう一方であり、相手写像は対合である（", ref("claim_perfect_matching_involution"), "）。逆に各頂点 ", math(String.raw`v\in V_L`), " で ", ref("claim_vertex_port_bijection"), " の全単射 ", math(String.raw`d_v:H_v\to I`), " により対合族を向き付き辺の上の局所対合へ移すと、", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、その短い標識は ", ref("claim_local_pairing_matching_label_support"), " の ", math(String.raw`T_P`), " であり、", ref("claim_local_pairing_matching_complement_recovery"), " によりその補辺は固定した ", math(String.raw`P`), " に等しい。", ref("claim_local_pairing_matching_local_mate_recovery"), " により、作った項で選択辺の半辺の相手は元の対合族が指す半辺なので、異なる対合族からは異なる項ができる。", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。"]),
+                      paragraph(["対合族 ", math(String.raw`\boldsymbol\kappa`), " から作った項 ", math(String.raw`(D,T)`), " の短い対は、", ref("claim_vertex_port_bijection"), " の全単射で、頂点 ", math(String.raw`v`), " の方向番号 ", math(String.raw`i\in S_v(P)`), " の半辺 ", math(String.raw`\vec e`), " と方向番号 ", math(String.raw`\kappa_v(i)`), " の半辺 ", math(String.raw`\vec f`), " の組である。", math(String.raw`\operatorname{tgt}(\iota(\vec e))=\operatorname{src}(\vec e)=\operatorname{src}(\vec f)`), "（", ref("def_edge_reversal"), "）であり、", math(String.raw`\vec f\ne\vec e=\iota(\iota(\vec e))`), "（", ref("claim_reversal_is_involution"), "）なので ", math(String.raw`\vec f\in\operatorname{Next}(\iota(\vec e))`), "（", ref("def_nonbacktracking_successors"), "）である。非後退接続で一歩の回転数が零であることは方向番号が等しいことと同値である（", ref("claim_disjoint_walk_mutual_crossing_intersection"), " の証明の局所項の段）から、その通過 ", math(String.raw`\iota(\vec e)\to\vec f`), " が直進するのは ", math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`), " のときである（", ref("claim_reversal_direction_shift"), "）。", ref("def_transverse_crossing"), " により、二つの短い対が横断するのは、始点が等しく、ともに直進し、方向軸が異なるときである。方向番号 ", math(String.raw`I`), " の上の有限の確認により、そのような二つの対が頂点 ", math(String.raw`v`), " にあるのは ", math(String.raw`c_v(\kappa_v)=1`), " のときだけで、そのとき ", math(String.raw`v`), " を始点とする短い対は方向番号 ", math(String.raw`\{0,2\}`), " と ", math(String.raw`\{1,3\}`), " の二つだけであり、この二つは横断する。ゆえに頂点 ", math(String.raw`v`), " を始点とする横断する順序のない対の個数は ", math(String.raw`c_v(\kappa_v)`), " であり、"]),
                       displayMath(String.raw`\begin{aligned}
 t(D,T)
 &=\sum_{v\in V_L}\bigl|\{\text{頂点 }v\text{ を始点とする横断する順序のない対}\}\bigr|

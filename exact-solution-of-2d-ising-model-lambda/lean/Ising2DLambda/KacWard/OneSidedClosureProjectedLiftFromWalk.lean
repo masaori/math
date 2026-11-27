@@ -297,25 +297,6 @@ theorem oneSidedClosureProjectionFromWalk_planeLift_injective_of_point_injective
       _ = W j := by abel
   exact hsimple t c ht hc i (by omega) j (by omega) hW
 
-/-- 実際の閉歩道から作った射影辺列の持ち上げ点は、終点を除いて相異なる。 -/
-theorem oneSidedClosureProjectionFromWalk_planeLift_injective {L m : ℕ} [NeZero L]
-    (γ : Fin (m + 1) → OrientedEdge L)
-    (hγ : closedNonbacktrackingWalk γ)
-    (hcontact : contactPairCount γ hγ = 0)
-    (hwind : (horizontalDirectedWindingNumber γ,
-      verticalDirectedWindingNumber γ) ≠ (0, 0)) :
-    ∃ k₀ : ℤ, ∀ t c : ℕ, 0 < t → 0 < c →
-      let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
-        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
-      let N := oneSidedClosureLength (m + 1) L
-        (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
-      Function.Injective (fun i : Fin (N - 1 + 1) =>
-        planeLift (fun j : Fin (N - 1 + 1) =>
-          projectedUnitStep L (W j.val) (W (j.val + 1) - W j.val)) i.castSucc) := by
-  obtain ⟨k₀, hsimple⟩ := oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
-  exact ⟨k₀, oneSidedClosureProjectionFromWalk_planeLift_injective_of_point_injective
-    γ hγ hwind k₀ hsimple⟩
-
 /-- A point-simple one-sided closure projects to a closed nonbacktracking walk. -/
 theorem oneSidedClosureProjectionFromWalk_closedNonbacktracking_of_point_injective
     {L m : ℕ} [NeZero L]
