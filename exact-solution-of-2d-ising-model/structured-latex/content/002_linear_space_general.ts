@@ -1801,7 +1801,7 @@ X - O
     kind: "claim",
     title: { text: "スカラー倍は行列の差に分配する" },
     labels: ["scalar_multiple_distributes_over_matrix_difference"],
-    lean: ["Ising2D.matrix_smul_sub", "Ising2D.matrix_smul_sub_apply"],
+    lean: ["Ising2D.matrix_smul_sub", "Ising2D.matrix_smul_sub_apply", "Ising2D.smul_sub_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -1861,6 +1861,7 @@ X - O
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。matrix_exp_conjugation の Step 1 の ad_X(cZ) の鎖が「スカラー倍の分配律」と名前だけで根拠にしていた段を引けるよう足した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の十三単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.smul_sub_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowScalarMultipleDistributesOverMatrixDifference.lean。番号 ν^{-1} で Fin n の行列へ移し、この証明の成分の鎖を引く）。",
       ],
     },
   },

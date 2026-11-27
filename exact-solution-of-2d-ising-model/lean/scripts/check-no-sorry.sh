@@ -2133,6 +2133,7 @@ targets=(
   Ising2D.matrix_smul_sub
   Ising2D.matrix_smul_sub_of_necSuf
   Ising2D.smul_sub_tensorPow
+  Ising2D.smul_sub_tensorPow_of_necSuf
   Ising2D.matrix_smul_add_apply
   Ising2D.matrix_smul_add
   Ising2D.finite_sum_smul_of_matrices

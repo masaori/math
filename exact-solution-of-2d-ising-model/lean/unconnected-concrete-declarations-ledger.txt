@@ -685,7 +685,6 @@ Ising2D.matrix_of_basis_columns_has_inverse
 Ising2D.matrix_smul_add
 Ising2D.matrix_smul_add_apply
 Ising2D.matrix_smul_sub
-Ising2D.matrix_smul_sub_apply
 Ising2D.matrix_smul_zero_matrix
 Ising2D.matrix_smul_zero_matrix_apply
 Ising2D.matrix_sub_eq_add_neg
