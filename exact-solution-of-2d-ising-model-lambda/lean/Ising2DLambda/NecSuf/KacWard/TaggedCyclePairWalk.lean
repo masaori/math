@@ -66,7 +66,10 @@ theorem tagged_cycle_term_split_necSuf (ℓ 𝔰 : J × J → R)
       obtain ⟨c, hc', rfl⟩ := List.mem_map.mp hl
       exact hD c hc' p hpl
     · exact hP p hcom
-  rw [tagged_matching_term_oriented_necSuf ℓ 𝔰 hℓ h𝔰 D t ht _ hcw hDl]
+  have hpairs : Ising2DLambda.AlgebraicEigenvalue.matchingOrientedPairs D =
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientedMatchingPairs D := rfl
+  rw [hpairs, tagged_matching_term_oriented_necSuf ℓ 𝔰 hℓ h𝔰 D t
+    (by simpa only [← hpairs] using ht) ascendingPair (by intro p; rfl) _ hcw hDl]
   congr 1
   have hcyc : ∀ c ∈ cs,
       ((consecutivePairs c).map (fun p => if ascendingPair p ∈ t then 𝔰 p else ℓ p)).prod =

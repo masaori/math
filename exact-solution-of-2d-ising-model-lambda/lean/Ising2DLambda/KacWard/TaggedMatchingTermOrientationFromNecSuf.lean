@@ -21,9 +21,12 @@ theorem taggedMatchingTerm_oriented_from_necSuf {L : ℕ} (z : Qbar) (hz : z ^ (
         (∏ p ∈ t, gaugedShortContribution z s p) =
       qbarConst (((l.map pairOrientation).prod : ℤ) : Qbar) *
         (l.map (orientedTaggedContribution z s t)).prod := by
-  rw [NecSuf.KacWard.tagged_matching_term_oriented_necSuf (gaugedLongContribution z s)
+  have hpairs : matchingOrientedPairs D =
+      NecSuf.AlgebraicEigenvalue.orientedMatchingPairs D := rfl
+  rw [hpairs, NecSuf.KacWard.tagged_matching_term_oriented_necSuf (gaugedLongContribution z s)
     (gaugedShortContribution z s) (gaugedLongContribution_swap z hz s)
-    (gaugedShortContribution_swap z hz s) D t ht l hc hD]
+    (gaugedShortContribution_swap z hz s) D t (by simpa only [← hpairs] using ht)
+    ascendingPair (by intro p; rfl) l hc hD]
   congr 1
   rw [qbarConst, Polynomial.C_eq_intCast, Int.cast_list_prod, List.map_map]
   congr 1

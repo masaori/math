@@ -21245,7 +21245,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
                       paragraph([ref("claim_matching_pair_word_orientation_sign"), " を二つの向き付き列挙へ適用する。仮定した列の一致を代入すると"]),
                       displayMath(String.raw`\begin{aligned}
 \varepsilon(W_\tau(w))&=\alpha_{\mathcal D}\operatorname{sgn}(\mathcal D)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr)\\
-\varepsilon(W_\upsilon(w))&=\alpha_{\mathcal E}\operatorname{sgn}(\mathcal E)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr).
+\varepsilon(W_\upsilon(w))&=\alpha_{\mathcal E}\operatorname{sgn}(\mathcal E)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr)
 \end{aligned}`),
                       paragraph(["各 ", math(String.raw`\eta_S(a,b),\eta_T(a,b)`), " は ", math(String.raw`1`), " または ", math(String.raw`-1`), " なので、その有限積も平方が一である。", ref("def_matching_word_sign"), " と ", ref("def_perfect_matching_sign"), " では符号が ", math(String.raw`(-1)^k`), "（", math(String.raw`k\in\mathbb N`), "）の形だから、"]),
                       displayMath(String.raw`\begin{aligned}
@@ -21272,7 +21272,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
 &=\alpha_{\mathcal E}\operatorname{sgn}(\mathcal E)\alpha_{\mathcal D}\operatorname{sgn}(\mathcal D)
 &&\bigl(\because\ \text{第二の列符号の等号}\bigr)\\
 &=\alpha_{\mathcal D}\alpha_{\mathcal E}\operatorname{sgn}(\mathcal D)\operatorname{sgn}(\mathcal E)
-&&\bigl(\because\ \mathbb Z\text{ の積の可換則}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の積の可換則}\bigr)
 \end{aligned}`),
                       paragraph(["空集合でも同じ等号が成立する。有限列と整数の符号だけを使い、実数体への脱出はない。"]),
                     ],
