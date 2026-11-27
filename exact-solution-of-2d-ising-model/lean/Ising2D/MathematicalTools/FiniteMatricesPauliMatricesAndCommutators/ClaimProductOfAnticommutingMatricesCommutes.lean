@@ -5,7 +5,8 @@
 （`structured-latex/content/002_linear_space_general.ts` の `linear_space_general_claim_product_of_anticommuting_matrices_commutes`）。
 
 **必要十分版**: `Ising2D/NecSuf/CommuteWithAnticommutingProductAndScalarMultiple.lean` の `NecSuf.commute_mul_of_anticomm'`。
-具体版をその系として導くのと `TensorPow M` での系は `ClaimProductOfAnticommutingMatricesCommutesFromNecSuf.lean`。
+具体版をその系として導くのは `ClaimProductOfAnticommutingMatricesCommutesFromNecSuf.lean`。`TensorPow M`（`Mat(2^M, ℂ)`）の場合の具体版は
+`ClaimTensorPowProductOfAnticommutingMatricesCommutes.lean`。
 
 ## 人手証明との対応
 

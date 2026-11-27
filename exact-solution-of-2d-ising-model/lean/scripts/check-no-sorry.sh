@@ -2099,6 +2099,7 @@ targets=(
   Ising2D.vec_sub_eq_zero_iff_tensorPow
   Ising2D.identity_matrix_mulVec_tensorPow
   Ising2D.mul_comm_of_anticomm_pair_tensorPow
+  Ising2D.mul_comm_of_anticomm_pair_tensorPow_of_necSuf
   "Ising2D.NecSuf.commute_smul_of_commute'"
   Ising2D.matrix_mul_smul_comm_of_commute
   Ising2D.matrix_mul_smul_comm_of_commute_of_necSuf

@@ -52,7 +52,7 @@
 | `CheckFermi.nOp_mul_Qproj` / `nOp_mul_Qproj_of_mem` / `nOp_mul_Qproj_of_notMem` | `ň_μ Q̌_ε` を `μ ∈ T` で場合分けした係数で書いた形と、人手の場合分けの形 `ε(μ) = 1` なら `ň_μQ̌_ε = Q̌_ε`、`ε(μ) = 0` なら `ň_μQ̌_ε = O` | 同上 |
 | `CheckFermi.trace_Qproj` / `Qproj_ne_zero` | `tr Q̌_ε = 1`（`im Q̌_ε` は 1 次元） | 同上 |
 | `CheckFermi.epsilon_anticomm_cre` / `epsilon_anticomm_ann` | `ε ψ̌^† = −ψ̌^† ε`, `ε ψ̌ = −ψ̌ ε` | `epsilon_anticommutes_with_check_Z_Y` (3) |
-| **`CheckFermi.commute_epsilon_nOp`** | **`ε ň_μ = ň_μ ε`**（人手の 3 行の鎖と同じ calc。2 行目は `product_of_anticommuting_matrices_commutes` の `TensorPow M` での系 `mul_comm_of_anticomm_pair_tensorPow`） | **同 (4) 前半** |
+| **`CheckFermi.commute_epsilon_nOp`** | **`ε ň_μ = ň_μ ε`**（人手の 3 行の鎖と同じ calc。2 行目は `product_of_anticommuting_matrices_commutes` の `Mat(2^M, ℂ)` の場合の具体版 `mul_comm_of_anticomm_pair_tensorPow`） | **同 (4) 前半** |
 | `CheckFermi.epsVal` / `rFactor` / `defFactor` | 人手の `ε(ν) ∈ {0,1}`（`ν ∈ T` なら `1`）、`def_check_R_factor` の `R_ν^{(e)}`、`def_check_Q_epsilon` の因子 `R_ν^{(ε(ν))}` | `def_binary_assignments_on_check_index_set`・`def_check_R_factor`・`def_check_Q_epsilon` |
 | `CheckFermi.epsilon_mul_identity_eq_identity_mul_epsilon` | `εI = Iε`（2 行） | 同 (4) |
 | `CheckFermi.commute_epsilon_defFactor` | `εR_ν^{(ε(ν))} = R_ν^{(ε(ν))}ε`（`ε(I − ň_ν) = (I − ň_ν)ε` の 1 式と、`ε(ν) = 1`・`ε(ν) = 0` の場合の 5 行ずつの鎖） | 同 (4) |

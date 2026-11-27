@@ -672,7 +672,6 @@ Ising2D.matrix_eq_sub_of_add_eq_apply
 Ising2D.matrix_eq_sum_delta_smul
 Ising2D.matrix_eq_zero_of_add_self_eq_zero
 Ising2D.matrix_eq_zero_of_add_self_eq_zero_apply
-Ising2D.matrix_mul_comm_of_anticomm_pair
 Ising2D.matrix_mul_left_tendsto
 Ising2D.matrix_mul_right_tendsto
 Ising2D.matrix_mul_smul_comm_of_commute
@@ -724,7 +723,6 @@ Ising2D.mulVec_zero_eq
 Ising2D.mul_add_matrix
 Ising2D.mul_binaryWordMatrixSum
 Ising2D.mul_finite_sum_of_matrices
-Ising2D.mul_neg_matrix
 Ising2D.multiIndexDelta
 Ising2D.multiIndexDelta_of_ne
 Ising2D.multiIndexDelta_self
@@ -735,7 +733,6 @@ Ising2D.neg_matrix_add_self
 Ising2D.neg_matrix_add_self_apply
 Ising2D.neg_matrix_mul_self_apply
 Ising2D.neg_matrix_mul_self_comm
-Ising2D.neg_mul_matrix
 Ising2D.neg_one_pow_mul_neg_one_pow
 Ising2D.neg_sub_neg_matrix
 Ising2D.neg_thetaTilde_add_int_mul

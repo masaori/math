@@ -4445,7 +4445,7 @@ B_{ik}
     kind: "claim",
     title: { text: "反可換な二つの行列の積は可換" },
     labels: ["product_of_anticommuting_matrices_commutes"],
-    lean: ["Ising2D.matrix_mul_comm_of_anticomm_pair"],
+    lean: ["Ising2D.matrix_mul_comm_of_anticomm_pair", "Ising2D.mul_comm_of_anticomm_pair_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -4489,6 +4489,7 @@ G(XY)
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と σ_m^zσ_{m+1}^z、ε と Y_mZ_{m'} の可換性を「反可換性を二回使う」の散文で済ませていたので、一つの主張として切り出した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の十九単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.mul_comm_of_anticomm_pair_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowProductOfAnticommutingMatricesCommutes.lean。番号 ν^{-1} で二つの仮定を Fin n の行列へ移して、この主張を引く）。",
       ],
     },
   },
