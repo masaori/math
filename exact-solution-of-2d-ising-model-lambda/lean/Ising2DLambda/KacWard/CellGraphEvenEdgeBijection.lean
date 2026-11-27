@@ -1,4 +1,5 @@
 import Ising2DLambda.KacWard.CellGridIncidentParity
+import Ising2DLambda.KacWard.CellVertexGraph
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard

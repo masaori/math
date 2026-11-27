@@ -1,5 +1,4 @@
-import Ising2DLambda.KacWard.CellBoundaryEvenEdgeBijection
-import Ising2DLambda.KacWard.CellVertexGraph
+import Ising2DLambda.KacWard.CellCornerConnected
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard

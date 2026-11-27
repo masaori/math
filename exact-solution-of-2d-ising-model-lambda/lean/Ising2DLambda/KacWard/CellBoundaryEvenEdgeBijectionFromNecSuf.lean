@@ -20,7 +20,8 @@ theorem cellBoundary_evenEdge_bijective_from_necSuf (cells : Finset GridCell)
   have hpreimage : ∀ edges, IsEvenCellEdgeSubset cells edges →
       ∃ selected, selected ⊆ cells ∧ planeCellBoundary selected = edges := by
     intro edges hedges
-    exact evenEdgeSet_cell_boundary cells edges hedges.2 hedges.1 hconnected
+    exact evenEdgeSet_cell_boundary cells edges
+      (fun r c => (gridIncidentEven_iff edges r c).mpr (hedges.2 r c)) hedges.1 hconnected
   exact Ising2DLambda.NecSuf.KacWard.boundary_bijective_of_even_edge_preimages
     planeCellBoundary cells (IsEvenCellEdgeSubset cells)
     planeCellBoundary_symmDiff hkernel hclosed hpreimage

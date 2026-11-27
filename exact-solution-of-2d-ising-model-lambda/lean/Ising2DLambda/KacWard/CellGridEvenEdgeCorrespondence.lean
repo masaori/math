@@ -1,4 +1,4 @@
-import Ising2DLambda.KacWard.CellGridIncidentParity
+import Ising2DLambda.KacWard.CellBoundaryEvenEdgeBijection
 import Ising2DLambda.KacWard.CellGraphEvenEdgeBijection
 import Mathlib.Tactic
 
@@ -29,11 +29,10 @@ theorem cellGridEvenEdge_iff_encoded (cells : Finset GridCell)
   constructor
   · intro h r c
     rw [hcard r c]
-    exact (gridIncidentEven_iff A r c).mp (h.2 r c)
+    exact h.2 r c
   · intro h
     refine ⟨hA, ?_⟩
     intro r c
-    apply (gridIncidentEven_iff A r c).mpr
     rw [← hcard r c]
     exact h r c
 

@@ -91345,7 +91345,36 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                             math(String.raw`T`), " のセルの辺であり、従って ",
                             math(String.raw`\mathcal E_{\square}(S)`), " に属する。",
                             ref("claim_plane_cell_boundary_even_at_vertex"),
-                            " により境界の各頂点の次数は偶数だから、この写像は指定した集合へ入る。",
+                            " により、境界の各頂点 ", math(String.raw`v=(r,c)\in\mathbb Z\times\mathbb Z`),
+                            " で横二辺と縦二辺の指示関数の和は二を法として零である。",
+                            ref("def_grid_edge_endpoints"), " の端点集合で境界を符号化辺へ引き戻した有限集合を ",
+                            math(String.raw`A_T:=\{e\in\{0,1\}\times\mathbb Z\times\mathbb Z\mid\operatorname{end}_{\square}(e)\in\mathcal B_{\square}(T)\}`),
+                            " と置くと、", ref("claim_grid_incident_four_edge_parity"),
+                            " の四つの接続候補 ", math(String.raw`e_1,e_2,e_3,e_4`), " の端点集合は順に ",
+                            math(String.raw`\{(r,c),(r,c+1)\},\{(r,c-1),(r,c)\},\{(r,c),(r+1,c)\},\{(r-1,c),(r,c)\}`),
+                            " なので、", math(String.raw`\mathbf 1_{A_T}(e_i)`),
+                            " はその四辺の境界への所属の指示関数に等しい。",
+                            ref("def_plane_cell_boundary_edge_set"), " の横辺 ",
+                            math(String.raw`\{(r,c),(r,c+1)\}`), " と縦辺 ",
+                            math(String.raw`\{(r,c),(r+1,c)\}`), " はそれぞれ ",
+                            math(String.raw`\operatorname{end}_{\square}(0,r,c)`), " と ",
+                            math(String.raw`\operatorname{end}_{\square}(1,r,c)`),
+                            " であり、", ref("def_grid_edge_endpoints"),
+                            " の ", math(String.raw`(r,c)`), " は二つの端点のうち座標の和が小さい方、",
+                            math(String.raw`d`), " は残りの端点が列と行のどちらで異なるかで決まるので、",
+                            math(String.raw`e\mapsto\operatorname{end}_{\square}(e)`), " は ",
+                            math(String.raw`A_T`), " から ", math(String.raw`\mathcal B_{\square}(T)`),
+                            " への全単射である。従って",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\bigl|\{g\in\mathcal B_{\square}(T)\mid v\in g\}\bigr|
+&=\bigl|\{e\in A_T\mid v\in\operatorname{end}_{\square}(e)\}\bigr|
+&&\bigl(\because\ e\mapsto\operatorname{end}_{\square}(e)\text{ は }A_T\to\mathcal B_{\square}(T)\text{ の全単射}\bigr)\\
+&\equiv0\pmod2
+&&\bigl(\because\ \blkref{claim_plane_cell_boundary_even_at_vertex},\ \blkref{claim_grid_incident_four_edge_parity}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "である。従って境界の各頂点に接する辺の本数は偶数で、この写像は指定した集合へ入る。",
                           ]),
                           displayMath(String.raw`\mathcal B_{\square}(T)\subset\mathcal E_{\square}(S)
 \qquad\bigl(\because\ \blkref{def_plane_cell_boundary_edge_set},\ \blkref{def_cell_edge_set},\ T\subset S\bigr)`),
