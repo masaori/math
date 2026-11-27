@@ -350,7 +350,7 @@ theorem cycleWords_complete_necSuf :
                   τ.val υ.val τ.property.2 υ.property.2 i m
                   (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ i)
               rw [heq, hcomp]
-              exact Or.inl (finitePermutationOrbit_self_mem _ _)
+              exact Or.inl ⟨0, Or.inl rfl⟩
             exact horbit)
           (by
             intro m i hi
