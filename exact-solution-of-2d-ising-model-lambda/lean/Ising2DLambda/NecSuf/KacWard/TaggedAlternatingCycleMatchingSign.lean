@@ -17,6 +17,7 @@ import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairColoring
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEvenOrbit
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PeriodicTwoWayOrbit
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairMinimumOrbit
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PermutationOrbitMinimum
 import Ising2DLambda.NecSuf.KacWard.MatchingPairOutsideEnumeration
 
 namespace Ising2DLambda.NecSuf.KacWard
