@@ -51,6 +51,14 @@ for size in (2, 4, 6):
                         color = 'long' if color == 'short' else 'short'
                     assert len(cycle) % 2 == 0
                     first_color = cycle[::2]
+                    # 準備: 最小元の二歩軌道（第一色）は一周期の列挙の偶数番目でちょうど尽くされる。
+                    orbit = {start}
+                    point = mate(reference, mate(matching, start))
+                    while point != start:
+                        orbit.add(point)
+                        point = mate(reference, mate(matching, point))
+                    assert orbit == set(first_color)
+                    assert all(vertex not in orbit for vertex in cycle[1::2])
                     projected = {vertex // 2 for vertex in first_color}
                     assert len(projected) == len(first_color)
                     union.update(projected)

@@ -60,7 +60,8 @@ theorem projectedCycleSupportUnion_eq_complement_from_necSuf {L : ℕ} (z : Qbar
     rfl
   have hcover : projectedCycleSupportUnion D t =
       Set.range (fun j : {a : OrientedEdge L // a ∈ A} => j.val.1) := by
-    simpa [projectedCycleSupportUnion, concreteAlternatingComponent, reversal] using
+    rw [projectedCycleSupportUnion_eq_firstColor]
+    simpa [concreteAlternatingComponent, reversal] using
       (projectedCycleSupportUnion_eq_range_concrete
         τ υ (fun j : {a : OrientedEdge L // a ∈ A} => j.val.1) hp)
   rw [hcover]
