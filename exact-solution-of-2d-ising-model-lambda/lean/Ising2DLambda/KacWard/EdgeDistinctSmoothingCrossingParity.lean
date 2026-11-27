@@ -124,30 +124,100 @@ theorem vertexAxisStraightVisitCount_eq_localVisit (γ : Fin (m + 1) → Oriente
   simp only [Finset.mem_filter, Finset.mem_univ, true_and, closedWalkPassVertex, closedWalkPass]
   rw [closedWalkLocalVisit_straight_iff, closedWalkLocalVisit_vertical_eq_iff]
 
-/-- 選んだ添字 `k` は平滑化後に直進しない（直進なら `dir(f_l) = dir(e_k)` で、`f_l` は `e_l` と
-同じ方向なので、二つの軸が一致して横断に反する）。 -/
+/-- 人手証明（`claim_smoothing_straight_visit_count_update`）の第一段の道具:
+非後退接続 `e → f` の一歩の回転が零なら `dir(f) = dir(e)`
+（`claim_step_advances_direction` を回転零に適用する）。 -/
+theorem direction_eq_of_stepTurning_eq_zero (e f : OrientedEdge L)
+    (hf : f ∈ nonbacktrackingSuccessors e) (h : stepTurning e f = 0) :
+    directionNumber f = directionNumber e := by
+  have hstep := step_advances_direction e f hf
+  rw [h] at hstep
+  simpa [directionResidueProjection] using hstep
+
+/-- 選んだ添字 `k` は平滑化後に直進しない（人手証明の第一段）。直進なら
+`claim_step_advances_direction` を接続 `e_k → f_k` に適用して `dir(f_k) = dir(e_k)`、
+`f_k = e_{σ(l)}` と `τ(e_l, e_{σ(l)}) = 0` に同じ主張を適用して `dir(f_k) = dir(e_l)`。
+軸を取ると横断の軸の相異に反する。 -/
 theorem smoothedExit_not_straight_left (γ : Fin (m + 1) → OrientedEdge L)
     (hγ : closedNonbacktrackingWalk γ) {k l : Fin (m + 1)} (hcross : indexPairCrossing γ hγ k l) :
     stepTurning (γ k) (smoothedExitEdge γ k l k) ≠ 0 := by
   intro h
+  -- 接続 e_k → f_k は非後退（`claim_smoothed_exit_nonbacktracking`）
   have hmem := smoothedExitEdge_mem_nonbacktrackingSuccessors γ hγ hcross k
-  rw [stepTurning_eq_zero_iff _ _ hmem] at h
-  unfold smoothedExitEdge at h
-  rw [if_pos rfl] at h
-  obtain ⟨-, hl⟩ := crossing_straight γ hγ hcross
-  exact hcross.2.2.2.2.2.2 (by rw [← h, hl])
+  -- dir(f_k) = dir(e_k)
+  have hfk := direction_eq_of_stepTurning_eq_zero _ _ hmem h
+  -- f_k = e_{σ(l)}
+  unfold smoothedExitEdge at hfk
+  rw [if_pos rfl] at hfk
+  -- dir(e_{σ(l)}) = dir(e_l)
+  obtain ⟨-, -, hl, -, -, hsl, haxis⟩ := hcross
+  have hel := direction_eq_of_stepTurning_eq_zero _ _ hl hsl
+  exact haxis (by rw [← hfk, hel])
 
-/-- 選んだ添字 `l` は平滑化後に直進しない（`k` の場合と対称）。 -/
+/-- 選んだ添字 `l` は平滑化後に直進しない（`k` と `l` を入れ替えた同じ論法）。 -/
 theorem smoothedExit_not_straight_right (γ : Fin (m + 1) → OrientedEdge L)
     (hγ : closedNonbacktrackingWalk γ) {k l : Fin (m + 1)} (hcross : indexPairCrossing γ hγ k l) :
     stepTurning (γ l) (smoothedExitEdge γ k l l) ≠ 0 := by
   intro h
   have hmem := smoothedExitEdge_mem_nonbacktrackingSuccessors γ hγ hcross l
-  rw [stepTurning_eq_zero_iff _ _ hmem] at h
-  unfold smoothedExitEdge at h
-  rw [if_neg (Ne.symm hcross.1), if_pos rfl] at h
-  obtain ⟨hk, -⟩ := crossing_straight γ hγ hcross
-  exact hcross.2.2.2.2.2.2 (by rw [← h, hk])
+  have hfl := direction_eq_of_stepTurning_eq_zero _ _ hmem h
+  unfold smoothedExitEdge at hfl
+  rw [if_neg (Ne.symm hcross.1), if_pos rfl] at hfl
+  obtain ⟨-, hk, -, -, hsk, -, haxis⟩ := hcross
+  have hek := direction_eq_of_stepTurning_eq_zero _ _ hk hsk
+  exact haxis (by rw [← hek, hfl])
+
+omit [NeZero L] in
+open Classical in
+/-- 平滑化後の直進通過数 `n^sm_{w,a}(γ;k,l)` は、出辺を平滑化後の出辺に取った局所データの
+頂点・直進・軸による数え上げに等しい。 -/
+theorem smoothedStraightVisitCount_eq_localVisit (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ) (k l : Fin (m + 1)) (w : Vertex L) (a : ZMod 2) :
+    smoothedStraightVisitCount γ hγ k l w a =
+      (Finset.univ.filter fun r : Fin (m + 1) => orientedTarget (γ r) = w ∧
+        (closedWalkLocalVisit γ (smoothedExitEdge γ k l) r).turn = .straight ∧
+        (closedWalkLocalVisit γ (smoothedExitEdge γ k l) r).vertical = decide (a = 1)).card := by
+  unfold smoothedStraightVisitCount
+  congr 1
+  ext r
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+  rw [closedWalkLocalVisit_straight_iff, closedWalkLocalVisit_vertical_eq_iff]
+
+/-- `claim_smoothing_straight_visit_count_update` を実際の閉じた非後退辺列と横断する添字 `k, l`
+について述べたもの: `n_{w,a}(γ) = n^sm_{w,a}(γ;k,l) + [w = v]`（`v = tgt(e_k)` は横断の頂点）。
+第一段（選んだ二添字は平滑化後に直進でない）は `smoothedExit_not_straight_left`・
+`smoothedExit_not_straight_right`、集合の等式と二つの場合の数え上げは
+`smoothing_straight_visit_count_update`。 -/
+theorem closedWalk_smoothing_straight_visit_count_update (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ) {k l : Fin (m + 1)} (hcross : indexPairCrossing γ hγ k l)
+    (w : Vertex L) (a : ZMod 2) :
+    vertexAxisStraightVisitCount γ hγ w a =
+      smoothedStraightVisitCount γ hγ k l w a
+        + (if orientedTarget (γ k) = w then 1 else 0) := by
+  classical
+  have hIndex : IndexCrossing (fun r => orientedTarget (γ r))
+      (closedWalkLocalVisit γ fun r => γ (closedWalkSuccessor r)) k l := by
+    obtain ⟨-, -, -, hv, hs1, hs2, hax⟩ := hcross
+    refine ⟨hv, ?_, ?_, ?_⟩
+    · exact (closedWalkLocalVisit_straight_iff _ _ _).mpr hs1
+    · exact (closedWalkLocalVisit_straight_iff _ _ _).mpr hs2
+    · exact (closedWalkLocalVisit_vertical_ne_iff _ _ _ _ _).mpr hax
+  have hother : ∀ r, r ≠ k → r ≠ l →
+      closedWalkLocalVisit γ (smoothedExitEdge γ k l) r =
+        closedWalkLocalVisit γ (fun r => γ (closedWalkSuccessor r)) r := by
+    intro r hrk hrl
+    simp only [closedWalkLocalVisit, smoothedExitEdge, if_neg hrk, if_neg hrl]
+  have ha : (closedWalkLocalVisit γ (smoothedExitEdge γ k l) k).turn ≠ .straight := by
+    rw [Ne, closedWalkLocalVisit_straight_iff]
+    exact smoothedExit_not_straight_left γ hγ hcross
+  have hb : (closedWalkLocalVisit γ (smoothedExitEdge γ k l) l).turn ≠ .straight := by
+    rw [Ne, closedWalkLocalVisit_straight_iff]
+    exact smoothedExit_not_straight_right γ hγ hcross
+  rw [vertexAxisStraightVisitCount_eq_localVisit, smoothedStraightVisitCount_eq_localVisit]
+  convert smoothing_straight_visit_count_update (fun r => orientedTarget (γ r))
+    (closedWalkLocalVisit γ fun r => γ (closedWalkSuccessor r))
+    (closedWalkLocalVisit γ (smoothedExitEdge γ k l)) k l hIndex hother ha hb w (decide (a = 1))
+    using 2
 
 /-- `claim_smoothing_crossing_number_update` を実際の閉歩道へ当てはめたもの:
 `c(γ) + 1 = c_sm(γ; k, l) + n_{v,0}(γ) + n_{v,1}(γ)`（`v` は横断の頂点）。 -/
