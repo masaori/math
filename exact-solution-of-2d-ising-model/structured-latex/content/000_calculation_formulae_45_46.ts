@@ -258,7 +258,7 @@ T_B(I)
     kind: "definition",
     title: { text: "行列の差" },
     labels: ["def_matrix_difference"],
-    lean: ["Ising2D.matrix_sub_apply", "Ising2D.vec_sub_apply", "Ising2D.tensorPow_sub_apply"],
+    lean: ["Ising2D.matrix_sub_apply", "Ising2D.vec_sub_apply", "Ising2D.matrix_conf_sub_apply", "Ising2D.tensorPow_sub_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -294,7 +294,7 @@ T_B(I)
     kind: "definition",
     title: { text: "零行列" },
     labels: ["def_zero_matrix"],
-    lean: ["Ising2D.matrix_zero_apply", "Ising2D.vec_zero_apply", "Ising2D.tensorPow_zero_apply"],
+    lean: ["Ising2D.matrix_zero_apply", "Ising2D.vec_zero_apply", "Ising2D.matrix_conf_zero_apply", "Ising2D.tensorPow_zero_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -325,7 +325,7 @@ T_B(I)
     kind: "definition",
     title: { text: "行列の符号反転" },
     labels: ["def_matrix_negation"],
-    lean: ["Ising2D.matrix_neg_apply", "Ising2D.tensorPow_neg_apply"],
+    lean: ["Ising2D.matrix_neg_apply", "Ising2D.matrix_conf_neg_apply", "Ising2D.tensorPow_neg_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),

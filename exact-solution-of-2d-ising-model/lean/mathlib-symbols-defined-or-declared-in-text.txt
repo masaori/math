@@ -208,8 +208,8 @@ Int.cast@Real@Real.instIntCast	inclusion_zz_to_rr
 # def_kronecker が I ∈ 𝓘_M を番号 ν(I) と同一視して成分を並べる。mathlib の行列の演算と本文の成分の式が ν を通して等しいことを、演算ごとに補題一本で示した
 # （DefinitionMatrixOperationsOverMultiIndices.lean）。単位行列は 1 (ν^{-1}(i)) (ν^{-1}(k)) = δ_{ik}（tensorPow_one_apply_eq_identity_matrix。ν^{-1} の単射による）、
 # スカラー倍・和・零行列は成分の式が各成分だけで閉じるので Conf M の添字のまま（tensorPow_smul_apply・tensorPow_add_apply・tensorPow_zero_apply）。
-# 記号の鍵は TensorPow と書かれた演算だけを指す（Matrix (Conf M) (Conf M) ℂ と書いた行列は鍵が Matrix[Ising2D.Conf,Ising2D.Conf,Complex]、Fin n の添字の行列は
-# Matrix[Fin,Fin,Complex] で、別の行）。
+# 下の 6 行の鍵は TensorPow と書かれた演算を指す（Matrix (Conf M) (Conf M) ℂ と書いた行列は鍵が Matrix[Ising2D.Conf,Ising2D.Conf,Complex] で、その下の 5 行と、
+# 行列の型の行の後の単位行列・積・冪の行。Fin n の添字の行列は Matrix[Fin,Fin,Complex] で、別の行）。
 # 積は下の行列の型の行の後に載せた。符号反転（Neg.neg@Ising2D.TensorPow）は def_matrix_negation が (-A)_{ik} := -A_{ik} と定め、スカラー倍と同じく
 # Conf M の添字のまま補題一本 tensorPow_neg_apply（rfl）で示し、分離の行「TensorPow 上の行列の基本恒等式」の具体版 neg_mul_matrix_tensorPow・mul_neg_matrix_tensorPow
 # （ClaimNegationFactorsOutOfTensorPowProduct.lean）の証明で使って通しの定理に繋げた。差（HSub.hSub@Ising2D.TensorPow）は def_matrix_difference が
@@ -222,6 +222,15 @@ HAdd.hAdd@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.add	def_m
 OfNat.ofNat@Ising2D.TensorPow,0@Zero.toOfNat0	def_zero_matrix
 Neg.neg@Ising2D.TensorPow@Matrix.neg	def_matrix_negation
 HSub.hSub@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub	def_matrix_difference
+# 同じ五つの演算を Matrix (Conf M) (Conf M) ℂ と書いた形（主に、mathlib の積の値の型がこの書き方なので、-(ZY)・a • (AB)・AB - BA のように積に演算を施すとこの鍵になる）:
+# 一致の補題 matrix_conf_smul_apply・matrix_conf_add_apply・matrix_conf_zero_apply・matrix_conf_neg_apply・matrix_conf_sub_apply（rfl）を本体とし、
+# 上の 5 行の TensorPow M と書いた補題 tensorPow_*_apply をそこから導いて通しの定理に繋げた（DefinitionMatrixOperationsOverMultiIndices.lean。各定義のブロックの欄 lean）。
+# 根拠が def_kronecker の同一視に頼ることは上の 5 行と同じである。左右の書き方が違う和・差（HAdd.hAdd@Ising2D.TensorPow,Matrix[…] など）は別の鍵で、まだ載せていない。
+HSMul.hSMul@Complex,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.smul	def_matrix_scalar_multiple
+HAdd.hAdd@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.add	def_matrix_sum
+OfNat.ofNat@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],0@Zero.toOfNat0	def_zero_matrix
+Neg.neg@Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.neg	def_matrix_negation
+HSub.hSub@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.sub	def_matrix_difference
 # 行列の型: def_complex_matrices が Mat(m,n,ℂ) を添字の集合の直積 {1,…,m} × {1,…,n} から ℂ への写像の全体と定める。記号の鍵は、行列の型そのものを
 # 行と列の添字の型と成分の型の頭で分ける（UndefinedSymbols.lean）。
 # Matrix (Fin m) (Fin n) ℂ（Fin m → Fin n → ℂ）は、行と列の添字を写像 finIndexToZZ で送ると、成分が行列を定め、どの成分の割り当ても行列になることを
@@ -248,7 +257,8 @@ HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,C
 # 7 本は本文の各定義のブロックの欄 lean に在り、通しの定理の依存に入っている。
 # 本文の定義は m, n ∈ ℤ_{≥1} だけを扱うが、Lean の Fin 0 の添字の行列も鍵は同じで、この 7 行はそれも許す（def_complex_matrices の行と同じ扱い）。
 # Matrix (Fin n) (Fin 1) ℂ で数ベクトルを書く宣言の演算もこの鍵に入る（mat_mult の「n 行 1 列の行列とみなし」は def_complex_matrices の行と同じく残り）。
-# 添字が任意の型の行列（Matrix[?,?,Complex]）、Conf M の添字を Matrix と書いた行列、Conf M と Fin の組、ℝ の行列の演算はまだ載せない（状態台帳の行「行列とその演算」）。
+# 添字が任意の型の行列（Matrix[?,?,Complex]）、Conf M と Fin の組、Conf M の添字で左右の書き方（TensorPow と Matrix）が違う和・差、ℝ の行列の演算はまだ載せない
+# （状態台帳の行「行列とその演算」。Conf M の添字を Matrix と書いたスカラー倍・和・零・符号反転・差は上の行で、単位行列・積・冪は下の行で載せた）。
 OfNat.ofNat@Matrix[Fin,Fin,Complex],1@One.toOfNat1	def_identity_matrix
 HSMul.hSMul@Complex,Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex]@Matrix.smul	def_matrix_scalar_multiple
 HAdd.hAdd@Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex],Matrix[Fin,Fin,Complex]@Matrix.add	def_matrix_sum

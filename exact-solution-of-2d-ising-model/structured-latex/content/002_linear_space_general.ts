@@ -83,7 +83,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "行列のスカラー倍" },
     labels: ["def_matrix_scalar_multiple"],
-    lean: ["Ising2D.matrix_smul_apply", "Ising2D.vec_smul_apply", "Ising2D.tensorPow_smul_apply"],
+    lean: ["Ising2D.matrix_smul_apply", "Ising2D.vec_smul_apply", "Ising2D.matrix_conf_smul_apply", "Ising2D.tensorPow_smul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -124,7 +124,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "行列の和" },
     labels: ["def_matrix_sum"],
-    lean: ["Ising2D.matrix_sum_apply", "Ising2D.tensorPow_add_apply"],
+    lean: ["Ising2D.matrix_sum_apply", "Ising2D.matrix_conf_add_apply", "Ising2D.tensorPow_add_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),

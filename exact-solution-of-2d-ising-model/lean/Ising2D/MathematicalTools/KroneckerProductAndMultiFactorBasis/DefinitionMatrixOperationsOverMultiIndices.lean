@@ -20,14 +20,15 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が `𝓘_M`�
 人手の番号 `k ∈ {1,…,n}` は Lean の `k : Fin n` を名前を付けた写像 `finIndexToZZ n` で送った値であり、`ν^{-1}` は Lean の
 `σ : Fin n → Conf M` で、`ν(σ(k)) = finIndexToZZ n k` によって定まる（`exists_inverse_of_kronecker_numbering`）。
 したがって人手の成分 `A_{ij}` は Lean の `A (σ i) (σ j)` である。
-単位行列・積・冪の一致の補題は、`Matrix (Conf M) (Conf M) ℂ` と書いた形（`matrix_conf_*`）を本体とし、`tensorPow_*` はそれを略記 `TensorPow M` で
+単位行列・スカラー倍・和・零行列・符号反転・差・積・冪の一致の補題は、`Matrix (Conf M) (Conf M) ℂ` と書いた形（`matrix_conf_*`）を本体とし、`tensorPow_*` はそれを略記 `TensorPow M` で
 書き直したものである（mathlib の行列の積の値の型は `Matrix (Conf M) (Conf M) ℂ` と書かれるので、両方の書き方が主張に現れる）。
 
 - 単位行列は、成分の式が番号の上の `δ` を使うので、Lean の成分 `1 (σ i) (σ k)` が人手の右辺 `δ_{ik}`（本文の `δ_{ij}` の `j → k`）に等しいことを
   `ν^{-1}` の単射で示す（`tensorPow_one_apply_eq_identity_matrix`）。
 - スカラー倍・和・零行列は成分の式が各成分だけで閉じ、番号 `ν(I)`・`ν(K)` の成分の式は Lean の `I`・`K` の成分の式と同じ形なので、
-  `Conf M` の添字で一本ずつ書く（`tensorPow_smul_apply`・`tensorPow_add_apply`・`tensorPow_zero_apply`）。
-  この 3 本は `def_kronecker` の「`I` を番号 `ν(I)` と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii) が直す同一視）。
+  `Conf M` の添字で一本ずつ書く（`matrix_conf_smul_apply`・`matrix_conf_add_apply`・`matrix_conf_zero_apply` を本体とし、
+  略記 `TensorPow M` で書いた `tensorPow_smul_apply`・`tensorPow_add_apply`・`tensorPow_zero_apply` をそこから導く）。
+  この 3 つの演算の補題（と、下の符号反転・差の補題）は `def_kronecker` の「`I` を番号 `ν(I)` と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii) が直す同一視）。
 
 人手の `Mat(m, n, ℂ)` は添字の集合の直積 `{1,…,m} × {1,…,n}` から `ℂ` への写像の全体（`def_complex_matrices`）で、Lean の
 `Matrix (Fin m) (Fin n) ℂ` は `Fin m → Fin n → ℂ` である。行と列の添字を `finIndexToZZ` で送ると、成分が行列を定め、どの成分の割り当ても
@@ -43,7 +44,7 @@ Lean の `A *ᵥ f`（`f : Conf M → ℂ` は `ℂ^{2^M}` の数ベクトルを
 トレース（`def_trace`、`tr(A) := Σ_{k=1}^{n} A_{kk}`）も同じく、Lean の `A.trace`（`def_trace` の具体版 `trace_eq_sum_diag` で対角成分の
 `𝓘_M` の上の和）を `ν^{-1}` で番号へ移して書き（`tensorPow_trace_eq_def_trace`）、`𝓘_M` の上の和の形 `tensorPow_trace_apply` をそこから導く。
 符号反転（`def_matrix_negation`）と差（`def_matrix_difference`）もスカラー倍と同じく成分の式が各成分だけで閉じるので、`Conf M` の添字で
-一本ずつ書く（`tensorPow_neg_apply`・`tensorPow_sub_apply`）。
+一本ずつ書く（`matrix_conf_neg_apply`・`matrix_conf_sub_apply` を本体とし、`tensorPow_neg_apply`・`tensorPow_sub_apply` をそこから導く）。
 冪（`def_matrix_power` の `K = ℂ`）は `A^0 := I`、`A^{m+1} := A^m A` の帰納法で定まる。mathlib の行列の冪も同じ帰納法 `npowRec` で
 定義されているので、二つの式を定義を開くだけで示す（`tensorPow_pow_zero_and_succ`）。
 
@@ -124,35 +125,60 @@ theorem tensorPow_one_apply_eq_identity_matrix (M : ℕ) :
       ∀ (i k : Fin n), (1 : TensorPow M) (σ i) (σ k) = kroneckerDelta i k :=
   matrix_conf_one_apply_eq_identity_matrix M
 
-/-- **`def_matrix_scalar_multiple`**: Lean の `TensorPow M` のスカラー倍の成分は、本文の `(aA)_{ij} := a A_{ij}` を
+/-- **`def_matrix_scalar_multiple`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（本文の `Mat(2^M, ℂ)`）のスカラー倍の成分は、本文の `(aA)_{ij} := a A_{ij}` を
 番号 `i = ν(I)`・`j = ν(K)` で読んだもの `(aA)_{IK} = a A_{IK}` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
+theorem matrix_conf_smul_apply {M : ℕ} (a : ℂ) (A : Matrix (Conf M) (Conf M) ℂ) (I K : Conf M) :
+    (a • A) I K = a * A I K :=
+  rfl                                                     -- mathlib の行列のスカラー倍は成分ごと
+
+/-- **`def_matrix_scalar_multiple`**（`TensorPow M` と書いた形）: 上の補題を、`Matrix (Conf M) (Conf M) ℂ` の略記 `TensorPow M` で書いたもの。 -/
 theorem tensorPow_smul_apply {M : ℕ} (a : ℂ) (A : TensorPow M) (I K : Conf M) :
     (a • A) I K = a * A I K :=
-  rfl                                                       -- mathlib の行列のスカラー倍は成分ごと
+  matrix_conf_smul_apply a A I K
 
-/-- **`def_matrix_sum`**: Lean の `TensorPow M` の和の成分は、本文の `(A + B)_{ij} := A_{ij} + B_{ij}` を
+/-- **`def_matrix_sum`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（本文の `Mat(2^M, ℂ)`）の和の成分は、本文の `(A + B)_{ij} := A_{ij} + B_{ij}` を
 番号 `i = ν(I)`・`j = ν(K)` で読んだもの `(A + B)_{IK} = A_{IK} + B_{IK}` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
+theorem matrix_conf_add_apply {M : ℕ} (A B : Matrix (Conf M) (Conf M) ℂ) (I K : Conf M) :
+    (A + B) I K = A I K + B I K :=
+  rfl                                                     -- mathlib の行列の和は成分ごと
+
+/-- **`def_matrix_sum`**（`TensorPow M` と書いた形）: 上の補題を、`Matrix (Conf M) (Conf M) ℂ` の略記 `TensorPow M` で書いたもの。 -/
 theorem tensorPow_add_apply {M : ℕ} (A B : TensorPow M) (I K : Conf M) :
     (A + B) I K = A I K + B I K :=
-  rfl                                                       -- mathlib の行列の和は成分ごと
+  matrix_conf_add_apply A B I K
 
-/-- **`def_zero_matrix`**: Lean の `TensorPow M` の零行列の成分は、本文の `O_{ik} := 0` を
+/-- **`def_zero_matrix`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（本文の `Mat(2^M, ℂ)`）の零行列の成分は、本文の `O_{ik} := 0` を
 番号 `i = ν(I)`・`k = ν(K)` で読んだもの `O_{IK} = 0` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
+theorem matrix_conf_zero_apply {M : ℕ} (I K : Conf M) :
+    (0 : Matrix (Conf M) (Conf M) ℂ) I K = 0 :=
+  rfl                                                     -- mathlib の零行列の成分
+
+/-- **`def_zero_matrix`**（`TensorPow M` と書いた形）: 上の補題を、`Matrix (Conf M) (Conf M) ℂ` の略記 `TensorPow M` で書いたもの。 -/
 theorem tensorPow_zero_apply {M : ℕ} (I K : Conf M) :
     (0 : TensorPow M) I K = 0 :=
-  rfl                                                       -- mathlib の零行列の成分
+  matrix_conf_zero_apply I K
 
-/-- **`def_matrix_negation`**: Lean の `TensorPow M` の符号反転の成分は、本文の `(-A)_{ik} := -A_{ik}` を
+/-- **`def_matrix_negation`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（本文の `Mat(2^M, ℂ)`）の符号反転の成分は、本文の `(-A)_{ik} := -A_{ik}` を
 番号 `i = ν(I)`・`k = ν(K)` で読んだもの `(-A)_{IK} = -A_{IK}` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
+theorem matrix_conf_neg_apply {M : ℕ} (A : Matrix (Conf M) (Conf M) ℂ) (I K : Conf M) :
+    (-A) I K = -A I K :=
+  rfl                                                     -- mathlib の行列の符号反転は成分ごと
+
+/-- **`def_matrix_negation`**（`TensorPow M` と書いた形）: 上の補題を、`Matrix (Conf M) (Conf M) ℂ` の略記 `TensorPow M` で書いたもの。 -/
 theorem tensorPow_neg_apply {M : ℕ} (A : TensorPow M) (I K : Conf M) :
     (-A) I K = -A I K :=
-  rfl                                                       -- mathlib の行列の符号反転は成分ごと
+  matrix_conf_neg_apply A I K
 
-/-- **`def_matrix_difference`**: Lean の `TensorPow M` の差の成分は、本文の `(A - B)_{ik} := A_{ik} - B_{ik}` を
+/-- **`def_matrix_difference`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（本文の `Mat(2^M, ℂ)`）の差の成分は、本文の `(A - B)_{ik} := A_{ik} - B_{ik}` を
 番号 `i = ν(I)`・`k = ν(K)` で読んだもの `(A - B)_{IK} = A_{IK} - B_{IK}` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
+theorem matrix_conf_sub_apply {M : ℕ} (A B : Matrix (Conf M) (Conf M) ℂ) (I K : Conf M) :
+    (A - B) I K = A I K - B I K :=
+  rfl                                                     -- mathlib の行列の差は成分ごと
+
+/-- **`def_matrix_difference`**（`TensorPow M` と書いた形）: 上の補題を、`Matrix (Conf M) (Conf M) ℂ` の略記 `TensorPow M` で書いたもの。 -/
 theorem tensorPow_sub_apply {M : ℕ} (A B : TensorPow M) (I K : Conf M) :
     (A - B) I K = A I K - B I K :=
-  rfl                                                       -- mathlib の行列の差は成分ごと
+  matrix_conf_sub_apply A B I K
 
 /-- **`mat_mult`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（略記 `TensorPow M`）の積の成分を `ν^{-1}` で番号へ移すと、本文の `(AB)_{ik} := Σ_{j=1}^{n} A_{ij} B_{jk}`（`n = 2^M`）の
 右辺に等しい（Lean だけの段の補題。冒頭の説明を見よ）。mathlib の積の成分は `𝓘_M`（Lean の `Conf M`）の上の和で、それを番号の上の和へ移すのは
