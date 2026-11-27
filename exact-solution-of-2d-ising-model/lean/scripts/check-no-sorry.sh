@@ -786,7 +786,7 @@ targets=(
   Ising2D.trace_binWordSum_tensorPow
   Ising2D.conjugateBilinearValue
   Ising2D.dotProduct_mulVec_eq_conjugateBilinearValue
-  Ising2D.posDef_conjugateBilinearValue_pos
+  Ising2D.IsPositiveDefiniteTensorPow
   Ising2D.standardBasisVec_ne_zero
   Ising2D.star_kroneckerDelta
   Ising2D.real_multiple_isHermitian
@@ -804,7 +804,6 @@ targets=(
   "Ising2D.posDef_conjBilin'_pos"
   Ising2D.trace_of_positive_definite_is_positive_of_necSuf
   Ising2D.trace_of_positive_definite_is_positive_tensorPow
-  Ising2D.posDef_of_conjugateBilinearValue_pos
   Ising2D.conjugate_bilinear_value_of_congruence
   Ising2D.conjTranspose_conjTranspose_apply
   Ising2D.conjTranspose_conjTranspose_eq

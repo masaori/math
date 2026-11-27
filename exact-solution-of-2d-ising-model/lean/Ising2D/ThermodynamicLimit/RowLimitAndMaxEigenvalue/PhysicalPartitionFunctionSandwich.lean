@@ -52,7 +52,7 @@
 | Step 3: `congruence_preserves_positive_definite`（`n → d`, `A → A`, `B → B`, `B' → B'`。Lean は `TensorPow M` の系 `congruence_preserves_positive_definite_tensorPow`。必要十分版の特殊化で、添字 `Fin n` の 1 対 1 の具体版は通らない）で `B^*(AB)` は正定値、`mat_mult_associative`（`m, n, p, q → d`, `A → B^*`, `B → A`, `C → B`）で `(B^*A)B = B^*(AB)`、`K_2 > 0` で `(2s_2)^{M_col/2} > 0`、`positive_real_multiple_preserves_positive_definite`（`n → d`, `α → (2s_2)^{M_col/2}`, `A → (B^*A)B`）で `W` は正定値 | `physicalSymTransferC_posDef`（`twoS2Pow_pos`） |
 | `def_W_real`: `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`） | `realMatrixOfRealEntries (physicalSymTransferC …) (physicalSymTransferC_hasRealEntries …)`。実成分で組んだ `physicalSymTransferR` に等しい（`physicalSymTransferR_eq_realMatrixOfRealEntries`） |
 | `W_real_is_positive_definite`: `ξ_k := (x_k)_ℂ` と `ξ ≠ 0`（`inclusion_rr_to_cc_is_injective`、`a → x_k`, `b → 0`） | `W_real_is_positive_definite` の `hξ` |
-| 同じ主張の「`ξ^*Wξ = ρ_ℂ` を満たす `ρ ∈ ℝ_{>0}`」（`W_is_real_symmetric_positive_definite`、`def_hermitian_positive_definite`） | 同じ定理の `posDef_conjugateBilinearValue_pos (physicalSymTransferC_posDef …)` |
+| 同じ主張の「`ξ^*Wξ = ρ_ℂ` を満たす `ρ ∈ ℝ_{>0}`」（`W_is_real_symmetric_positive_definite`、`def_hermitian_positive_definite`） | 同じ定理の `(physicalSymTransferC_posDef …).2`（正定値の述語 `IsPositiveDefiniteTensorPow` の第 2 成分） |
 | 同じ主張の 10 行の鎖 `ρ_ℂ = ξ^*Wξ = … = (x^⊤W_ℝx)_ℂ` | `conjugate_bilinear_value_of_real_vector_W` の `calc` の 9 段と、10 行目（`def_real_bilinear_value`）の `W_real_is_positive_definite` の `rw [dotProduct_mulVec_eq_real_bilinear_value]` |
 | 同じ主張の結び（`inclusion_rr_to_cc_is_injective`、`a → ρ`, `b → x^⊤W_ℝx`） | `W_real_is_positive_definite` |
 | 同じ主張を実成分で組んだ `W` で読む（`partition_function_sandwich_and_limit_in_N_row`・`onsager_limit_in_N_row_physical` の `c(M_col) > 0` と、章「M→∞ の極限と閉形式」の偶セクターの橋渡しが使う形） | `physicalSymTransferR_posDef` |
@@ -369,13 +369,13 @@ theorem physicalV1halfC_transpose (K1 : ℝ) : (physicalV1halfC M K1)ᵀ = physi
 /-! ## Step 1・Step 2: `B = exp(½K_1D)` と `A = exp(S_2)` は正定値、`B' = exp(-½K_1D)` は `B'B = I` -/
 
 /-- 人手 Step 2: `B = exp(½K_1D)` は正定値（`exp_hermitian_is_positive_definite`、`n → d`, `S → ½K_1D`）。 -/
-theorem physicalV1halfC_posDef (K1 : ℝ) : (physicalV1halfC M K1).PosDef := by
+theorem physicalV1halfC_posDef (K1 : ℝ) : IsPositiveDefiniteTensorPow (physicalV1halfC M K1) := by
   rw [physicalV1halfC_eq_matExp_half]
   exact posDef_exp_of_isHermitian (halfK1D_isHermitian K1)
 
 /-- 人手 Step 3 の `B^* = B`（Step 2 の「`B` は正定値（とくにエルミート）」から）。 -/
 theorem physicalV1halfC_conjTranspose (K1 : ℝ) : (physicalV1halfC M K1)ᴴ = physicalV1halfC M K1 :=
-  (physicalV1halfC_posDef K1).isHermitian.eq
+  (physicalV1halfC_posDef K1).1
 
 /-- 人手 Step 2 の `B' := exp(-½K_1D)`。 -/
 noncomputable def physicalV1halfInvC (M : ℕ) (K1 : ℝ) : TensorPow M :=
@@ -400,7 +400,7 @@ noncomputable def expS2C (M : ℕ) (K2 : ℝ) : TensorPow M :=
 
 /-- 人手 Step 2: `A = exp(S_2)` は正定値（Step 1 の `S_2` の実対称性と `real_symmetric_matrix_is_hermitian`（`n → d`, `A → S_2`）で
 `S_2` はエルミート、`exp_hermitian_is_positive_definite`（`n → d`, `S → S_2`））。 -/
-theorem expS2C_posDef (K2 : ℝ) : (expS2C M K2).PosDef :=
+theorem expS2C_posDef (K2 : ℝ) : IsPositiveDefiniteTensorPow (expS2C M K2) :=
   posDef_exp_of_isHermitian (real_symmetric_isHermitian _ (S2C_isRealSymmetric K2))
 
 /-- 人手 Step 3 の係数 `(2s_2)^{M_col/2}`（`s_2 = sinh 2K_2`）。 -/
@@ -548,8 +548,8 @@ theorem physicalSymTransferC_eq_smul_congruence (K1 : ℝ) {K2 : ℝ} (hK2 : 0 <
 `congruence_preserves_positive_definite`（`n → d`, `A → A = exp(S_2)`, `B → B = V_1^{1/2}`, `B' → B' = exp(-½K_1D)`）で `B^*(AB)` は正定値、
 `mat_mult_associative`（`m, n, p, q → d`, `A → B^*`, `B → A`, `C → B`）で `(B^*A)B = B^*(AB)`、`positive_real_multiple_preserves_positive_definite`（`n → d`, `α → (2s_2)^{M_col/2}`, `A → (B^*A)B`）で `W` は正定値。 -/
 theorem physicalSymTransferC_posDef (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
-    (physicalSymTransferC M K1 K2).PosDef := by
-  have hcong : ((physicalV1halfC M K1)ᴴ * (expS2C M K2 * physicalV1halfC M K1)).PosDef :=
+    IsPositiveDefiniteTensorPow (physicalSymTransferC M K1 K2) := by
+  have hcong : IsPositiveDefiniteTensorPow ((physicalV1halfC M K1)ᴴ * (expS2C M K2 * physicalV1halfC M K1)) :=
     congruence_preserves_positive_definite_tensorPow (expS2C_posDef K2)
       (physicalV1halfInvC_mul_physicalV1halfC K1)                               -- `congruence_preserves_positive_definite`
   have hassoc : (physicalV1halfC M K1)ᴴ * expS2C M K2 * physicalV1halfC M K1
@@ -604,7 +604,7 @@ theorem W_real_is_positive_definite (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Co
     exact inclusion_rr_to_cc_is_injective
       ((congrFun h k).trans Complex.ofReal_zero.symm)                             -- `ξ_k = 0_ℂ = (0)_ℂ` なら `x_k = 0`（`a → x_k`, `b → 0`）
   obtain ⟨ρ, hρ, hρW⟩ :=
-    posDef_conjugateBilinearValue_pos (physicalSymTransferC_posDef K1 hK2) hξ     -- `W` は正定値（`W_is_real_symmetric_positive_definite`）
+    (physicalSymTransferC_posDef K1 hK2).2 _ hξ     -- `W` は正定値（`W_is_real_symmetric_positive_definite`）
   have hxWx := inclusion_rr_to_cc_is_injective
     (conjugate_bilinear_value_of_real_vector_W K1 hK2 x hρW)                      -- 単射性（`a → ρ`, `b → x^⊤W_ℝx`）
   rw [dotProduct_mulVec_eq_real_bilinear_value, ← hxWx]                           -- `def_real_bilinear_value`（人手の鎖の 10 行目）

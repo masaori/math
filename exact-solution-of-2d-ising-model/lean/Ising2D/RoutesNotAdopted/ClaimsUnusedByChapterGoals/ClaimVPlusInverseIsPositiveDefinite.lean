@@ -43,7 +43,7 @@ theorem VPlusInv_posDef {K1 K2star : ℂ} {s2 : ℝ}
   have hEherm : E.IsHermitian := by
     rw [hEeq]
     -- `exp_hermitian_is_positive_definite`（`S → -½S_1^{(+)}`）で正定値、`def_hermitian_positive_definite` よりとくにエルミート
-    exact (posDef_exp_of_isHermitian hS1).isHermitian
+    exact (posDef_exp_of_isHermitian hS1).1
   have hEinj : Function.Injective E.mulVec := by
     rw [hEeq]
     exact Matrix.mulVec_injective_of_isUnit (Matrix.isUnit_exp _)
@@ -54,11 +54,12 @@ theorem VPlusInv_posDef {K1 K2star : ℂ} {s2 : ℝ}
     exact h
   have hBpos : B.PosDef := by
     rw [hB, matExp]
-    exact posDef_exp_of_isHermitian hS2
+    have h := posDef_exp_of_isHermitian hS2
+    exact posDef_of_conjBilin'_pos h.1 h.2
   have hEBE : (Eᴴ * B * E).PosDef := hBpos.conjTranspose_mul_mul_same hEinj
   rw [hEherm.eq] at hEBE
   rw [VPlusInv]
-  refine positive_real_multiple_preserves_positive_definite_tensorPow hEBE ?_
+  refine positive_real_multiple_preserves_positive_definite_of_necSuf' hEBE ?_
   have : (0 : ℝ) < 2 * s2 := by linarith
   exact inv_pos.mpr (Real.rpow_pos_of_pos this _)
 

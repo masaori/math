@@ -11,8 +11,8 @@
   クロネッカー積の共役転置の成分の鎖（`siteProd_conjTranspose_apply`）
   と `(σ_k^a)^* = σ_k^a` の鎖（`siteOp_conjTranspose_of_conjTranspose_eq`）と `Z_j^*` の鎖（`jw_conjTranspose_of_siteOp_conjTranspose_eq`。`Z_conjTranspose`・`Y_conjTranspose`）
 
-原文の「共役転置 `A^*`」「エルミート」「正定値」は mathlib の
-`Matrix.conjTranspose` / `Matrix.IsHermitian` / `Matrix.PosDef` と同じものである。
+原文の「共役転置 `A^*`」「エルミート」は mathlib の `Matrix.conjTranspose` / `Matrix.IsHermitian` と同じものである。
+「正定値」は本文の定義どおりの述語 `IsPositiveDefiniteTensorPow`（`ClaimTraceOfPositiveDefiniteIsPositive.lean`）で述べる。
 
 ## `star_preserves_norm_and_limits` と `exp` のエルミート性の置き場
 
@@ -44,6 +44,7 @@
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositive
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
@@ -418,7 +419,7 @@ section PosDef
 人手の `T^* = T`（`exp_of_hermitian_is_hermitian` を `H = S/2` に当てはめる）だけは、その具体版
 `matExp_conjTranspose_of_conjTranspose_eq` を引く。 -/
 theorem posDef_exp_of_isHermitian {M : ℕ} {S : TensorPow M} (hS : S.IsHermitian) :
-    (NormedSpace.exp S).PosDef := by
+    IsPositiveDefiniteTensorPow (NormedSpace.exp S) := by
   set X : TensorPow M := (1 / 2 : ℂ) • S with hX
   have hhalf : X.IsHermitian := by
     have : Xᴴ = X := by
@@ -433,7 +434,14 @@ theorem posDef_exp_of_isHermitian {M : ℕ} {S : TensorPow M} (hS : S.IsHermitia
   have h := Matrix.PosDef.conjTranspose_mul_self (NormedSpace.exp X) hinj
   -- 人手 `T^* = T`（`exp_of_hermitian_is_hermitian`、`S → H = S/2`）
   have hT : (NormedSpace.exp X)ᴴ = NormedSpace.exp X := matExp_conjTranspose_of_conjTranspose_eq X hhalf
-  rwa [hT, hsq] at h
+  rw [hT, hsq] at h
+  -- mathlib の `Matrix.PosDef` の結論を `def_hermitian_positive_definite` の正定値（`IsPositiveDefiniteTensorPow`）で読む:
+  -- `0 < x^*Ax`（`ℂ` の順序 `ComplexOrder`）は `0 < Re(x^*Ax)` かつ `Im(x^*Ax) = 0`（`Complex.pos_iff`）なので `x^*Ax = (Re(x^*Ax))_ℂ`
+  refine ⟨h.isHermitian.eq, fun x hx => ?_⟩
+  have hx' := Complex.pos_iff.mp (h.dotProduct_mulVec_pos hx)
+  rw [dotProduct_mulVec_eq_conjugateBilinearValue] at hx'
+  exact ⟨(conjugateBilinearValue x (NormedSpace.exp S) x).re, hx'.1,
+    Complex.ext rfl (by rw [Complex.ofReal_im, ← hx'.2])⟩
 
 end PosDef
 

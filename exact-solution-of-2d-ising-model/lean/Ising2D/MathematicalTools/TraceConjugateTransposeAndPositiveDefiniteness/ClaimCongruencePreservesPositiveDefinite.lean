@@ -6,9 +6,8 @@
 - `congruence_preserves_positive_definite`
 
 人手の `x^*Ay` は `def_conjugate_bilinear_value`（Lean の `conjugateBilinearValue`）、共役転置・エルミート・正定値は
-`def_hermitian_positive_definite`（mathlib の `Matrix.conjTranspose`・`Matrix.PosDef` と同じもの。読み替えは
-`ClaimTraceOfPositiveDefiniteIsPositive.lean` の `dotProduct_mulVec_eq_conjugateBilinearValue`・`posDef_conjugateBilinearValue_pos`
-と、このファイルの `posDef_of_conjugateBilinearValue_pos`）による。
+`def_hermitian_positive_definite`（共役転置は mathlib の `Matrix.conjTranspose`、正定値は
+主張の中に書き下した「`A^* = A` かつ零でない `x` で `x^*Ax = r_ℂ`（`r ∈ ℝ_{>0}`）」）による。
 
 **必要十分版**: `Ising2D/NecSuf/CongruencePreservesPositiveDefinite.lean`。具体版をその特殊化として導くのと、
 `TensorPow M`（添字 `Conf M`）の系は `ClaimCongruencePreservesPositiveDefiniteFromNecSuf.lean` に置く。
@@ -42,16 +41,6 @@ namespace Ising2D
 
 open Matrix
 open scoped ComplexOrder
-
-/-- `def_hermitian_positive_definite` の正定値の条件の逆向きの読み: 人手の `x^*Ax ∈ ℝ_{>0}`（`x^*Ax = r_ℂ` を満たす
-`r ∈ ℝ_{>0}` がある）から mathlib の `0 < star x ⬝ᵥ (A *ᵥ x)` を得る（`ℂ` の順序 `ComplexOrder` で `0 < r_ℂ ↔ 0 < r`）。 -/
-theorem posDef_of_conjugateBilinearValue_pos {n : ℕ} {A : Matrix (Fin n) (Fin n) ℂ} (hH : A.IsHermitian)
-    (hpos : ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ)) :
-    A.PosDef := by
-  refine Matrix.PosDef.of_dotProduct_mulVec_pos hH fun x hx => ?_
-  obtain ⟨r, hr, hval⟩ := hpos x hx
-  rw [dotProduct_mulVec_eq_conjugateBilinearValue, hval]
-  exact Complex.zero_lt_real.mpr hr
 
 /-- **人手 `conjugate_bilinear_value_of_congruence`**: `x^*(B^*(AB))y = (Bx)^*A(By)`（14 行の鎖と同じ並び）。 -/
 theorem conjugate_bilinear_value_of_congruence {n : ℕ} (A B : Matrix (Fin n) (Fin n) ℂ) (x y : Fin n → ℂ) :
@@ -146,10 +135,12 @@ theorem mulVec_ne_zero_of_left_inverse {n : ℕ} {B B' : Matrix (Fin n) (Fin n) 
 
 /-- **人手 `congruence_preserves_positive_definite`**: `A` が正定値で `B'B = I` なら `B^*(AB)` は正定値。 -/
 theorem congruence_preserves_positive_definite {n : ℕ} {A B B' : Matrix (Fin n) (Fin n) ℂ}
-    (hA : A.PosDef) (hB : B' * B = 1) : (Bᴴ * (A * B)).PosDef := by
-  refine posDef_of_conjugateBilinearValue_pos (congruence_isHermitian hA.isHermitian.eq B) fun x hx => ?_
+    (hA : (Aᴴ = A ∧ ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ))) (hB : B' * B = 1) :
+    ((Bᴴ * (A * B))ᴴ = Bᴴ * (A * B) ∧
+      ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x (Bᴴ * (A * B)) x = (r : ℂ)) := by
+  refine ⟨congruence_isHermitian hA.1 B, fun x hx => ?_⟩                           -- エルミート性（`def_hermitian_positive_definite`）
   -- `Bx ≠ 0` なので、`A` が正定値なので `(Bx)^*A(Bx) = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある
-  obtain ⟨r, hr, hrA⟩ := posDef_conjugateBilinearValue_pos hA (mulVec_ne_zero_of_left_inverse hB hx)
+  obtain ⟨r, hr, hrA⟩ := hA.2 (B *ᵥ x) (mulVec_ne_zero_of_left_inverse hB hx)
   refine ⟨r, hr, ?_⟩
   calc conjugateBilinearValue x (Bᴴ * (A * B)) x
       = conjugateBilinearValue (B *ᵥ x) A (B *ᵥ x) :=

@@ -5,7 +5,7 @@
 の `eigenvalues_of_V_claim_positive_real_multiple_preserves_positive_definite`（ラベル **`positive_real_multiple_preserves_positive_definite`**）。
 
 人手の `x^*Ay` は `def_conjugate_bilinear_value`（Lean の `conjugateBilinearValue`）、正定値は `def_hermitian_positive_definite`
-（mathlib の `Matrix.PosDef` との読み替えは `posDef_conjugateBilinearValue_pos`・`posDef_of_conjugateBilinearValue_pos`）、
+（主張の中に「`A^* = A` かつ零でない `x` で `x^*Ax = r_ℂ`（`r ∈ ℝ_{>0}`）」と書き下す）、
 `α_ℂ` は `inclusion_rr_to_cc`（Lean の `(α : ℂ)`。実部 `α`、虚部 `0` の構造体）による。
 
 **必要十分版**: `Ising2D/NecSuf/PositiveMultiplePreservesPositiveDefinite.lean`。具体版をその特殊化として導くのと、
@@ -63,10 +63,12 @@ theorem conjugate_bilinear_value_of_positive_real_multiple {n : ℕ} (α : ℝ) 
 
 /-- **人手 `positive_real_multiple_preserves_positive_definite`**: `A` が正定値、`α ∈ ℝ_{>0}` なら `α_ℂA` は正定値。 -/
 theorem positive_real_multiple_preserves_positive_definite {n : ℕ} {A : Matrix (Fin n) (Fin n) ℂ}
-    (hA : A.PosDef) {α : ℝ} (hα : 0 < α) : ((α : ℂ) • A).PosDef := by
-  refine posDef_of_conjugateBilinearValue_pos (real_multiple_isHermitian α hA.isHermitian) fun x hx => ?_  -- エルミート性
+    (hA : (Aᴴ = A ∧ ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ))) {α : ℝ} (hα : 0 < α) :
+    (((α : ℂ) • A)ᴴ = (α : ℂ) • A ∧
+      ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x ((α : ℂ) • A) x = (r : ℂ)) := by
+  refine ⟨real_multiple_isHermitian α hA.1, fun x hx => ?_⟩                       -- エルミート性
   -- `A` が正定値なので `x^*Ax = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある
-  obtain ⟨r, hr, hrA⟩ := posDef_conjugateBilinearValue_pos hA hx
+  obtain ⟨r, hr, hrA⟩ := hA.2 x hx
   exact ⟨α * r, real_product_of_positives_is_positive α r hα hr, conjugate_bilinear_value_of_positive_real_multiple α A x hrA⟩  -- `real_product_of_positives_is_positive`（`a → α, b → r`）
 
 end Ising2D

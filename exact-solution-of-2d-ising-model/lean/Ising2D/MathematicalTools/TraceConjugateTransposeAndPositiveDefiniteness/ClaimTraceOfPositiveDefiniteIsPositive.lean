@@ -13,7 +13,7 @@
 | 人手 | Lean（具体版） |
 | --- | --- |
 | `x^*Ay := Σ_k Σ_l (\overline{x_k}A_{kl})y_l`（`def_conjugate_bilinear_value`） | `conjugateBilinearValue` |
-| 正定値の `x^*Ax ∈ ℝ_{>0}`（`def_hermitian_positive_definite`）と mathlib の `Matrix.PosDef` の読み替え | `posDef_conjugateBilinearValue_pos` |
+| 正定値（`def_hermitian_positive_definite`。添字 `{1,…,n}` は主張の中に条件を書き下し、`Mat(2^M,ℂ)` の添字 `Conf M` は述語） | `trace_of_positive_definite_is_positive` の仮定・`IsPositiveDefiniteTensorPow` |
 | `b^{(k)}_i := δ_{ik}`、`b^{(k)}_k = 1_ℂ = (1,0) ≠ (0,0) = 0_ℂ` なので `b^{(k)} ≠ 0` | `standardBasisVec`・`standardBasisVec_ne_zero` |
 | `δ_{ij}` は `1_ℂ` か `0_ℂ` なので `\overline{δ_{ij}} = δ_{ij}`（`complex_conjugate_of_real_inclusion`） | `star_kroneckerDelta` |
 | `i = j ⟺ j = i` なので `δ_{ij} = δ_{ji}` | `kroneckerDelta_comm` |
@@ -26,8 +26,9 @@
   `mul_identity_matrix`・`identity_matrix_mul`（`identity_matrix_is_right_unit_of_mat_mult`・`_left_unit_`）・
   `trace_eq_sum_diag`（`def_trace`）である。
 - 人手の `real_inclusion_preserves_finite_sum` は具体版 `real_inclusion_of_finite_sum_fintype` を引く（`1 ≤ n` から添字 `Fin n` は空でない）。
-- `conjugateBilinearValue`・`posDef_conjugateBilinearValue_pos` の添字は有限集合 `ι` で受け取る（人手の `{1,…,n}` は `Fin n`、
+- `conjugateBilinearValue` の添字は有限集合 `ι` で受け取る（人手の `{1,…,n}` は `Fin n`、
   `2^{M_col}` 個の行配位で添字づけた行列（`W_real_is_positive_definite`）は `Conf M`）。和を取るのに有限であることだけを使う。
+  正定値は、添字 `Conf M` の行列には述語 `IsPositiveDefiniteTensorPow` を置き、添字 `Fin n` の行列には主張の中に同じ条件を書き下す。
 - 人手の `n ∈ ℤ_{≥1}` は仮定 `1 ≤ n` で受け取る。`r_1` は添字 `⟨0, _⟩ : Fin n` の `r` である。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
@@ -48,7 +49,7 @@ open scoped ComplexOrder
 def conjugateBilinearValue {ι : Type*} [Fintype ι] (x : ι → ℂ) (A : Matrix ι ι ℂ) (y : ι → ℂ) : ℂ :=
   ∑ k, ∑ l, (star (x k) * A k l) * y l
 
-/-- mathlib の `star x ⬝ᵥ (A *ᵥ y)` は人手の `x^*Ay` と同じ値である（`Matrix.PosDef` を人手の正定値で読むため）。 -/
+/-- mathlib の `star x ⬝ᵥ (A *ᵥ y)` は人手の `x^*Ay` と同じ値である（mathlib の `Matrix.PosDef` の結論を人手の正定値で読むため）。 -/
 theorem dotProduct_mulVec_eq_conjugateBilinearValue {ι : Type*} [Fintype ι] (x : ι → ℂ) (A : Matrix ι ι ℂ)
     (y : ι → ℂ) : star x ⬝ᵥ (A *ᵥ y) = conjugateBilinearValue x A y :=
   calc star x ⬝ᵥ (A *ᵥ y)
@@ -59,15 +60,14 @@ theorem dotProduct_mulVec_eq_conjugateBilinearValue {ι : Type*} [Fintype ι] (x
         Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ => (mul_assoc _ _ _).symm
     _ = conjugateBilinearValue x A y := rfl                                       -- `def_conjugate_bilinear_value`
 
-/-- **`def_hermitian_positive_definite`** の正定値の条件: `A` が正定値で `x ≠ 0` なら、`x^*Ax = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある。
-
-mathlib の `Matrix.PosDef` は `0 < star x ⬝ᵥ (A *ᵥ x)`（`ℂ` の順序 `ComplexOrder`）の形なので、
-`0 < z ↔ 0 < z.re ∧ 0 = z.im`（`Complex.pos_iff`）で人手の略記 `z ∈ ℝ_{>0}` へ読み替える。 -/
-theorem posDef_conjugateBilinearValue_pos {ι : Type*} [Fintype ι] {A : Matrix ι ι ℂ} (hA : A.PosDef)
-    {x : ι → ℂ} (hx : x ≠ 0) : ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ) := by
-  have h := Complex.pos_iff.mp (hA.dotProduct_mulVec_pos hx)
-  rw [dotProduct_mulVec_eq_conjugateBilinearValue] at h
-  exact ⟨(conjugateBilinearValue x A x).re, h.1, Complex.ext rfl (by rw [Complex.ofReal_im, ← h.2])⟩
+/-- **`def_hermitian_positive_definite`** の正定値の `Mat(2^M,ℂ)` の場合（添字を `2^M` 個の行配位 `Conf M` で付けた行列 `A`）:
+`A^* = A`（エルミート）で、零でない全ての `x ∈ ℂ^{Conf M}` について `x^*Ax ∈ ℝ_{>0}`、すなわち `x^*Ax = r_ℂ` を満たす
+`r ∈ ℝ_{>0}` がある（`x^*Ax` は `def_conjugate_bilinear_value`、`r_ℂ` は `inclusion_rr_to_cc`、`0` は `def_zero_matrix` の零ベクトル）。
+添字 `{1,…,n}`（`Fin n`）の行列の正定値は述語の宣言を置かず、それを使う主張（`trace_of_positive_definite_is_positive`・
+`congruence_preserves_positive_definite`・`positive_real_multiple_preserves_positive_definite`）の中に同じ条件を書き下す
+（これらの主張は最終定理に繋がらないので、述語を宣言すると最終定理に繋がらない宣言が増える）。 -/
+def IsPositiveDefiniteTensorPow {M : ℕ} (A : TensorPow M) : Prop :=
+  Aᴴ = A ∧ ∀ x : Conf M → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ)
 
 /-- 標準基底ベクトル `b^{(k)}_i := δ_{ik}`（`def_kronecker_delta`）。 -/
 def standardBasisVec {n : ℕ} (k : Fin n) : Fin n → ℂ := fun i => kroneckerDelta i k
@@ -124,9 +124,9 @@ theorem conjugate_bilinear_value_basis_eq_diag {n : ℕ} (A : Matrix (Fin n) (Fi
 
 /-- **`trace_of_positive_definite_is_positive`**: `n ∈ ℤ_{≥1}`、`A ∈ Mat(n,ℂ)` が正定値なら `tr(A) ∈ ℝ_{>0}`。 -/
 theorem trace_of_positive_definite_is_positive {n : ℕ} (hn : 1 ≤ n) (A : Matrix (Fin n) (Fin n) ℂ)
-    (hA : A.PosDef) : ∃ s : ℝ, 0 < s ∧ A.trace = (s : ℂ) := by
+    (hA : (Aᴴ = A ∧ ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ))) : ∃ s : ℝ, 0 < s ∧ A.trace = (s : ℂ) := by
   -- `A` が正定値で `b^{(k)} ≠ 0` なので、`A_{kk} = b^{(k)*}Ab^{(k)} = (r_k)_ℂ` を満たす `r_k ∈ ℝ_{>0}` がある
-  choose r hr hrA using fun k : Fin n => posDef_conjugateBilinearValue_pos hA (standardBasisVec_ne_zero k)
+  choose r hr hrA using fun k : Fin n => hA.2 (standardBasisVec k) (standardBasisVec_ne_zero k)
   have hd : ∀ k, A k k = (r k : ℂ) := fun k =>
     (conjugate_bilinear_value_basis_eq_diag A k).symm.trans (hrA k)
   haveI : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩                                          -- `n ∈ ℤ_{≥1}` なので添字の集合は空でない

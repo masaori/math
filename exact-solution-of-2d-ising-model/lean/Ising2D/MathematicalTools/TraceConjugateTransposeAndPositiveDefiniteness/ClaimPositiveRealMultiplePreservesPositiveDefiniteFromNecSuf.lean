@@ -22,7 +22,7 @@ namespace Ising2D
 open Matrix
 open scoped ComplexOrder
 
-/-- 添字が任意の有限型の行列について、`positive_real_multiple_preserves_positive_definite` を必要十分版のエルミート性の段
+/-- 添字が任意の有限型の行列について、mathlib の `Matrix.PosDef` で述べた `positive_real_multiple_preserves_positive_definite` を必要十分版のエルミート性の段
 `NecSuf.star_fixed_smul_isHermitian` と正値性の段 `NecSuf.smul_preserves_pos'` の特殊化として得る。 -/
 theorem positive_real_multiple_preserves_positive_definite_of_necSuf' {ι : Type*} [Fintype ι] [DecidableEq ι]
     {A : Matrix ι ι ℂ} (hA : A.PosDef) {α : ℝ} (hα : 0 < α) : ((α : ℂ) • A).PosDef :=
@@ -34,12 +34,16 @@ theorem positive_real_multiple_preserves_positive_definite_of_necSuf' {ι : Type
 
 /-- `positive_real_multiple_preserves_positive_definite`（添字 `Fin n`）を必要十分版の特殊化として得る。 -/
 theorem positive_real_multiple_preserves_positive_definite_of_necSuf {n : ℕ} {A : Matrix (Fin n) (Fin n) ℂ}
-    (hA : A.PosDef) {α : ℝ} (hα : 0 < α) : ((α : ℂ) • A).PosDef :=
-  positive_real_multiple_preserves_positive_definite_of_necSuf' hA hα
+    (hA : (Aᴴ = A ∧ ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ))) {α : ℝ} (hα : 0 < α) :
+    (((α : ℂ) • A)ᴴ = (α : ℂ) • A ∧
+      ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x ((α : ℂ) • A) x = (r : ℂ)) :=
+  ⟨NecSuf.star_fixed_smul_isHermitian (complex_conjugate_of_product_eq _) (complex_conjugate_of_real_inclusion α) hA.1,
+    NecSuf.smul_preserves_pos' realInclusionAddHom (fun a b => real_inclusion_mul a b) hα (fun y => mul_comm y _) hA.2⟩
 
 /-- `positive_real_multiple_preserves_positive_definite` の `TensorPow M` での系（必要十分版の添字 `Conf M` の特殊化）。 -/
 theorem positive_real_multiple_preserves_positive_definite_tensorPow {M : ℕ} {A : TensorPow M}
-    (hA : A.PosDef) {α : ℝ} (hα : 0 < α) : ((α : ℂ) • A).PosDef :=
-  positive_real_multiple_preserves_positive_definite_of_necSuf' hA hα
+    (hA : IsPositiveDefiniteTensorPow A) {α : ℝ} (hα : 0 < α) : IsPositiveDefiniteTensorPow ((α : ℂ) • A) :=
+  ⟨NecSuf.star_fixed_smul_isHermitian (complex_conjugate_of_product_eq _) (complex_conjugate_of_real_inclusion α) hA.1,
+    NecSuf.smul_preserves_pos' realInclusionAddHom (fun a b => real_inclusion_mul a b) hα (fun y => mul_comm y _) hA.2⟩
 
 end Ising2D

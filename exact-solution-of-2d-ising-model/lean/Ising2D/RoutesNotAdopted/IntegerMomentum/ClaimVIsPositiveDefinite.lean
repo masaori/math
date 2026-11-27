@@ -43,9 +43,10 @@ theorem Vmat_posDef {K1 η K2star : ℂ} {s2 : ℝ}
       rw [V1pmHalf, matExp, smul_smul, mul_assoc]
     rw [hEq]
     -- `exp_hermitian_is_positive_definite`（`S → ½(iK_1H)`）で正定値、`def_hermitian_positive_definite` よりとくにエルミート
-    exact (posDef_exp_of_isHermitian hS1).isHermitian
+    exact (posDef_exp_of_isHermitian hS1).1
   have hA : (NormedSpace.exp ((Complex.I * K2star) • H2 M)).PosDef :=
-    posDef_exp_of_isHermitian (S2_isHermitian_by_anticommutation hK2)
+    have h := posDef_exp_of_isHermitian (S2_isHermitian_by_anticommutation hK2)
+    posDef_of_conjBilin'_pos h.1 h.2
   have hinj : Function.Injective (V1pmHalf M K1 η).mulVec := by
     have hEq : V1pmHalf M K1 η = NormedSpace.exp (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η) := rfl
     rw [hEq]
@@ -59,7 +60,7 @@ theorem Vmat_posDef {K1 η K2star : ℂ} {s2 : ℝ}
     rw [Vmat, V2H2Form, matExp]
     rw [Matrix.mul_smul, Matrix.smul_mul]
   rw [hV]
-  refine positive_real_multiple_preserves_positive_definite_tensorPow hBAB ?_
+  refine positive_real_multiple_preserves_positive_definite_of_necSuf' hBAB ?_
   have : (0 : ℝ) < 2 * s2 := by linarith
   exact Real.rpow_pos_of_pos this _
 

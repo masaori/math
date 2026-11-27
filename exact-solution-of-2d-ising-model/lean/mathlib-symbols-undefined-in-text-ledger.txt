@@ -1331,8 +1331,6 @@ Ising2D.VPlus_mulVec_of_mem_range_Qproj_univ	Membership.mem@→[Ising2D.Conf,Com
 Ising2D.VPlus_mulVec_of_mem_range_Qproj_univ	RingHom.id@Complex@Semiring.toNonAssocSemiring
 Ising2D.VPlus_mulVec_of_mem_range_Qproj_univ	Submodule@Complex,→[Ising2D.Conf,Complex]@Complex.instCommSemiring,Pi.addCommMonoid,Pi.Function.module
 Ising2D.VPlus_mul_Qproj	Finset
-Ising2D.VPlus_posDef	Complex.partialOrder
-Ising2D.VPlus_posDef	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum	Finset.univ@Ising2D.CheckIdx@Ising2D.CheckIdx.instFintype
@@ -2019,8 +2017,6 @@ Ising2D.configBasisIso_negSpinConf	DFunLike.coe@Equiv,Ising2D.SpinConf,fun@Equiv
 Ising2D.configBasisIso_negSpinConf	Equiv
 Ising2D.config_numbering_equals_kronecker_numbering	DFunLike.coe@Equiv,Ising2D.SpinConf,fun@EquivLike.toFunLike
 Ising2D.config_numbering_equals_kronecker_numbering	Equiv
-Ising2D.congruence_preserves_positive_definite	Complex.partialOrder
-Ising2D.congruence_preserves_positive_definite	Matrix.PosDef@Fin,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.conjIdx	Finset
 Ising2D.conjIdx	Membership.mem@Int,Finset@SetLike.instMembership
 Ising2D.conjIdx	Subtype.mk
@@ -2601,8 +2597,6 @@ Ising2D.expPhase_eq_zpow	HPow.hPow@Complex,Int,Complex@ZPow.toPow
 Ising2D.expPhase_eq_zpow	Real.pi
 Ising2D.expPhase_two_mul	OfNat.ofNat@Int,2@instOfNat
 Ising2D.expPhase_zpow	HPow.hPow@Complex,Int,Complex@ZPow.toPow
-Ising2D.expS2C_posDef	Complex.partialOrder
-Ising2D.expS2C_posDef	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.exp_I_mul_exp_neg_I_mul	Complex.exp
 Ising2D.exp_I_mul_int_mul_real	Complex.exp
 Ising2D.exp_I_mul_int_mul_real	Int.cast@Complex@Complex.instIntCast
@@ -4194,8 +4188,6 @@ Ising2D.physicalSymTransferC_eq_map	DFunLike.coe@RingHom,Real,fun@RingHom.instFu
 Ising2D.physicalSymTransferC_eq_map	Matrix.map
 Ising2D.physicalSymTransferC_eq_map	RingHom@Real,Complex@Semiring.toNonAssocSemiring,Semiring.toNonAssocSemiring
 Ising2D.physicalSymTransferC_isUnit	IsUnit@Ising2D.TensorPow@Matrix.semiring
-Ising2D.physicalSymTransferC_posDef	Complex.partialOrder
-Ising2D.physicalSymTransferC_posDef	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.physicalSymTransferC_transpose	Matrix.transpose
 Ising2D.physicalSymTransferR_isSymm	Matrix.IsSymm
 Ising2D.physicalSymTransferR_posDef	OfNat.ofNat@→[Ising2D.Conf,Real],0@Zero.toOfNat0
@@ -4212,8 +4204,6 @@ Ising2D.physicalV1halfC_isUnit	IsUnit@Ising2D.TensorPow@Matrix.semiring
 Ising2D.physicalV1halfC_mul_V2_apply_mul_apply_of_ne	DFunLike.coe@Equiv,Ising2D.SpinConf,fun@EquivLike.toFunLike
 Ising2D.physicalV1halfC_mul_V2_apply_mul_apply_of_ne	Equiv
 Ising2D.physicalV1halfC_mul_V2_isUnit	IsUnit@Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.semiring
-Ising2D.physicalV1halfC_posDef	Complex.partialOrder
-Ising2D.physicalV1halfC_posDef	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.physicalV1halfC_transpose	Matrix.transpose
 Ising2D.physicalV1halfInvC	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.physicalV1halfR_mul_self_map	Complex.ofRealHom
@@ -4228,22 +4218,10 @@ Ising2D.physicalV2R	DFunLike.coe@Equiv,→[Ising2D.Conf,→[Ising2D.Conf,Real]],
 Ising2D.physicalV2R	Equiv
 Ising2D.physicalV2R	Matrix.of
 Ising2D.physicalV2R	Real.exp
-Ising2D.posDef_conjugateBilinearValue_pos	Complex.partialOrder
-Ising2D.posDef_conjugateBilinearValue_pos	Fintype
-Ising2D.posDef_conjugateBilinearValue_pos	Matrix.PosDef@?,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
-Ising2D.posDef_conjugateBilinearValue_pos	Matrix@?,?,Complex
-Ising2D.posDef_conjugateBilinearValue_pos	OfNat.ofNat@→[?,Complex],0@Zero.toOfNat0
-Ising2D.posDef_exp_of_isHermitian	Complex.partialOrder
-Ising2D.posDef_exp_of_isHermitian	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.posDef_exp_of_isHermitian	NormedSpace.exp@Ising2D.TensorPow@Matrix.instRing,instTopologicalSpaceMatrix,Matrix.topologicalRing
-Ising2D.posDef_of_conjugateBilinearValue_pos	Complex.partialOrder
-Ising2D.posDef_of_conjugateBilinearValue_pos	Matrix.IsHermitian@Complex,Fin@StarRing.toStarAddMonoid
-Ising2D.posDef_of_conjugateBilinearValue_pos	Matrix.PosDef@Fin,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.pos_of_mem_Dnbhd	Membership.mem@Real,Set@Set.instMembership
 Ising2D.pos_of_mem_Dnbhd	Set
 Ising2D.positive_coupling_tanh_lt_one	Real.tanh
-Ising2D.positive_real_multiple_preserves_positive_definite	Complex.partialOrder
-Ising2D.positive_real_multiple_preserves_positive_definite	Matrix.PosDef@Fin,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.power_of_W_real_entry_bound	Matrix.IsSymm
 Ising2D.power_of_W_real_entry_bound	OfNat.ofNat@→[Ising2D.Conf,Real],0@Zero.toOfNat0
 Ising2D.power_of_W_real_is_positive_semidefinite	Matrix.IsSymm
@@ -5376,8 +5354,6 @@ Ising2D.trace_of_idempotent	Module.finrank@Complex,Subtype@Complex.instSemiring,
 Ising2D.trace_of_idempotent	RingHom.id@Complex@Semiring.toNonAssocSemiring
 Ising2D.trace_of_idempotent	Submodule@Complex,→[?,Complex]@Complex.instCommSemiring,Pi.addCommMonoid,Pi.Function.module
 Ising2D.trace_of_idempotent	Subtype
-Ising2D.trace_of_positive_definite_is_positive	Complex.partialOrder
-Ising2D.trace_of_positive_definite_is_positive	Matrix.PosDef@Fin,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.trace_of_positive_definite_is_positive	Matrix.trace@Fin,Complex@Fin.fintype,Complex.instAddCommMonoid
 Ising2D.trace_of_power_pos	Matrix.IsSymm
 Ising2D.trace_of_power_pos	OfNat.ofNat@→[Ising2D.Conf,Real],0@Zero.toOfNat0

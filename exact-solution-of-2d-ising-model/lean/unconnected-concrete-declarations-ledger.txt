@@ -773,7 +773,6 @@ Ising2D.physicalV1halfC_isUnit
 Ising2D.physicalV1halfC_mul_V2_isUnit
 Ising2D.physicalV1halfC_mul_physicalV1halfInvC
 Ising2D.physicalV1halfR_mul_self_map
-Ising2D.posDef_of_conjugateBilinearValue_pos
 Ising2D.pos_of_mem_Dnbhd
 Ising2D.positive_real_multiple_preserves_positive_definite
 Ising2D.prefixEntryProduct

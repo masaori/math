@@ -100,7 +100,7 @@ theorem VPlus_eq_smul (s2 : ℝ) (K1 K2star : ℂ) :
 /-- **原文 `V_plus_is_positive_definite` Step 2〜3**: `V^{(+)}` は正定値。 -/
 theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
-    (VPlus M s2 K1 K2star).PosDef := by
+    IsPositiveDefiniteTensorPow (VPlus M s2 K1 K2star) := by
   set B := matExp ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M)) with hB
   set A := matExp ((Complex.I * K2star) • H2 M) with hA
   -- Step 2: `\tfrac12 S_1^{(+)}` はエルミート（`iH_is_real_symmetric` と実係数倍）。`S_2` は `iH_is_real_symmetric` と `real_symmetric_matrix_is_hermitian`（`S2_isHermitian`）
@@ -114,18 +114,21 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
   have hBherm : B.IsHermitian := by
     rw [hB, matExp]
     -- `exp_hermitian_is_positive_definite`（`S → ½S_1^{(+)}`）で正定値、`def_hermitian_positive_definite` よりとくにエルミート
-    exact (posDef_exp_of_isHermitian hS1).isHermitian
-  -- Step 2: `B` は可逆
-  have hBinj : Function.Injective B.mulVec := by
-    rw [hB, matExp]
-    exact Matrix.mulVec_injective_of_isUnit (Matrix.isUnit_exp _)
+    exact (posDef_exp_of_isHermitian hS1).1
+  -- Step 2: `B' := exp(-½S_1^{(+)})` は `B'B = I` を満たす（`exp_of_negative_is_left_inverse`、`A → ½S_1^{(+)}`）
+  have hBinv : matExp (-((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))) * B = 1 := by
+    rw [hB]
+    exact matExp_neg_mul_matExp_tensorPow _
   -- Step 2: `A` は正定値（`exp_hermitian_is_positive_definite`）
-  have hApos : A.PosDef := by
+  have hApos : IsPositiveDefiniteTensorPow A := by
     rw [hA, matExp]
     exact posDef_exp_of_isHermitian (S2_isHermitian hK2)
-  -- Step 3: `B^* A B` は正定値（`congruence_preserves_positive_definite`）、`B^* = B`（`def_hermitian_positive_definite` のエルミートの定義）。
-  -- 人手の Step 3 の鎖 `c((BA)B) = c(B(AB)) = c(B^*(AB))` と係数の行とは、まだ 1 対 1 でない（状態台帳の `VPlus_posDef` の件）
-  have hBAB : (Bᴴ * A * B).PosDef := hApos.conjTranspose_mul_mul_same hBinj
+  -- Step 3: `B^*(AB)` は正定値（`congruence_preserves_positive_definite`、`A → A`, `B → B`, `B' → B'`。添字が `Conf M` なので
+  -- `TensorPow M` の系 `congruence_preserves_positive_definite_tensorPow`）、`(B^*A)B = B^*(AB)`（`mat_mult_associative`）、
+  -- `B^* = B`（`def_hermitian_positive_definite` のエルミートの定義）
+  have hBAB : IsPositiveDefiniteTensorPow (Bᴴ * A * B) := by
+    rw [Matrix.mul_assoc]                                                         -- `mat_mult_associative`
+    exact congruence_preserves_positive_definite_tensorPow hApos hBinv            -- `congruence_preserves_positive_definite`
   rw [(matrix_conf_isHermitian_iff B).1 hBherm] at hBAB
   -- Step 3: `(2s_2)^{M/2} > 0` 倍も正定値（`positive_real_multiple_preserves_positive_definite`）
   rw [VPlus_eq_smul]
@@ -323,7 +326,7 @@ theorem VPlus_isUnit_and_inv_eq {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
 theorem trace_VPlus_pos {K1 K2star : ℂ} {s2 : ℝ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
     ∃ r : ℝ, 0 < r ∧ (VPlus M s2 K1 K2star).trace = (r : ℂ) :=
-  have hpos : (VPlus M s2 K1 K2star).PosDef := VPlus_posDef hK1 hK2 hs2   -- `V_plus_is_positive_definite`
+  have hpos : IsPositiveDefiniteTensorPow (VPlus M s2 K1 K2star) := VPlus_posDef hK1 hK2 hs2   -- `V_plus_is_positive_definite`
   trace_of_positive_definite_is_positive_tensorPow _ hpos                  -- `trace_of_positive_definite_is_positive`（`A = V^{(+)}`）
 
 end VPlus

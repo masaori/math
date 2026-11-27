@@ -314,9 +314,10 @@ Matrix.trace@Ising2D.Conf,Complex@Pi.instFintype,Complex.instAddCommMonoid	def_t
 # matrix_fin_conjTranspose_apply、Conf M の添字は番号 ν(K)・ν(L) で読んだ形 matrix_conf_conjTranspose_apply（どちらも rfl。根拠が def_kronecker の同一視に
 # 頼ることはスカラー倍の行と同じ）で示した。エルミートは mathlib の A.IsHermitian の定義 Aᴴ = A そのもので、Conf M の添字は matrix_conf_isHermitian_iff（Iff.rfl）で示した
 # （DefinitionConjugateTransposeAndHermitian.lean。三つとも欄 lean に在り、通しの定理に繋がる siteProd_conjTranspose_apply・expPartialSum_conjTranspose_apply・
-# Pauli 行列の共役転置・identity_conjTranspose_tensorPow・S1_isHermitian・S2_isHermitian_by_anticommutation・posDef_exp_of_isHermitian・VPlus_posDef が使う）。Fin n の添字のエルミート（Matrix.IsHermitian@Complex,Fin）は、それを使う具体版の宣言
-# posDef_of_conjugateBilinearValue_pos が通しの定理に繋がっておらず一致の補題を繋げる使い道が無いので、添字が任意の型のもの（Matrix.conjTranspose@?,?,Complex・
-# Matrix.IsHermitian@Complex,?）と一緒にまだ載せない（状態台帳の行「行列とその演算」）。正定値（Matrix.PosDef）は Complex.partialOrder と組で残る（状態台帳の行「ℂ とその演算」）。
+# Pauli 行列の共役転置・identity_conjTranspose_tensorPow・S1_isHermitian・S2_isHermitian_by_anticommutation・posDef_exp_of_isHermitian・VPlus_posDef が使う）。Fin n の添字のエルミート（Matrix.IsHermitian@Complex,Fin）と、
+# 添字が任意の型のもの（Matrix.conjTranspose@?,?,Complex・Matrix.IsHermitian@Complex,?）はまだ載せない（状態台帳の行「行列とその演算」）。
+# 正定値は mathlib の Matrix.PosDef（ℂ の順序 Complex.partialOrder で 0 < x^*Ax と述べる）を使わず、本文の定義どおりの述語
+# IsPositiveDefiniteTensorPow（Conf M の添字。Fin n の添字は使う主張の中に同じ条件を書き下す）で述べる（ClaimTraceOfPositiveDefiniteIsPositive.lean）。
 Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid	def_hermitian_positive_definite
 Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid	def_hermitian_positive_definite
 Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid	def_hermitian_positive_definite

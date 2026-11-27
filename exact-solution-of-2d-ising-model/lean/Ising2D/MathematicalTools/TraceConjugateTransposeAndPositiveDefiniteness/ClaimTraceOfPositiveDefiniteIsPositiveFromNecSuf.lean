@@ -19,7 +19,8 @@ open scoped ComplexOrder
 /-- 包含 `(·)_ℂ : ℝ → ℂ` を和を保つ写像として。 -/
 noncomputable def realInclusionAddHom : ℝ →+ ℂ := Complex.ofRealHom.toAddMonoidHom
 
-/-- mathlib の `Matrix.PosDef` を、必要十分版の正定値の仮定の形（`x^*Ax = (r)_ℂ`、`r > 0`）に読む（添字は任意の有限型）。 -/
+/-- mathlib の `Matrix.PosDef` を、必要十分版の正定値の仮定の形（`x^*Ax = (r)_ℂ`、`r > 0`）に読む（添字は任意の有限型。
+本文から退避した経路の形式化（`RoutesNotAdopted`）が、mathlib の `Matrix.PosDef` で述べた主張に使う）。 -/
 theorem posDef_conjBilin'_pos {ι : Type*} [Fintype ι] [DecidableEq ι] {A : Matrix ι ι ℂ} (hA : A.PosDef)
     (x : ι → ℂ) (hx : x ≠ 0) : ∃ r : ℝ, 0 < r ∧ NecSuf.conjBilin' x A x = realInclusionAddHom r := by
   have h := Complex.pos_iff.mp (hA.dotProduct_mulVec_pos hx)
@@ -31,14 +32,14 @@ theorem posDef_conjBilin'_pos {ι : Type*} [Fintype ι] [DecidableEq ι] {A : Ma
 
 /-- `trace_of_positive_definite_is_positive` を `NecSuf.trace_pos_of_conjBilin_pos'`（係数 `ℂ`、添字 `Fin n`）の特殊化として得る。 -/
 theorem trace_of_positive_definite_is_positive_of_necSuf {n : ℕ} (hn : 1 ≤ n) (A : Matrix (Fin n) (Fin n) ℂ)
-    (hA : A.PosDef) : ∃ s : ℝ, 0 < s ∧ A.trace = (s : ℂ) := by
+    (hA : (Aᴴ = A ∧ ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ))) : ∃ s : ℝ, 0 < s ∧ A.trace = (s : ℂ) := by
   haveI : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩
-  exact NecSuf.trace_pos_of_conjBilin_pos' (star_one ℂ) (star_zero ℂ) realInclusionAddHom A (posDef_conjBilin'_pos hA)
+  exact NecSuf.trace_pos_of_conjBilin_pos' (star_one ℂ) (star_zero ℂ) realInclusionAddHom A hA.2
 
 /-- `trace_of_positive_definite_is_positive` の `TensorPow M` での系（`NecSuf.trace_pos_of_conjBilin_pos'` の添字 `Conf M` の特殊化）。 -/
-theorem trace_of_positive_definite_is_positive_tensorPow {M : ℕ} (A : TensorPow M) (hA : A.PosDef) :
+theorem trace_of_positive_definite_is_positive_tensorPow {M : ℕ} (A : TensorPow M) (hA : IsPositiveDefiniteTensorPow A) :
     ∃ s : ℝ, 0 < s ∧ A.trace = (s : ℂ) := by
   haveI : Nonempty (Conf M) := ⟨fun _ => 0⟩
-  exact NecSuf.trace_pos_of_conjBilin_pos' (star_one ℂ) (star_zero ℂ) realInclusionAddHom A (posDef_conjBilin'_pos hA)
+  exact NecSuf.trace_pos_of_conjBilin_pos' (star_one ℂ) (star_zero ℂ) realInclusionAddHom A hA.2
 
 end Ising2D

@@ -677,7 +677,7 @@ Qv_j
     origin: { path: SRC, ordinal: 13 },
     title: { text: "共役転置・エルミート行列・正定値行列" },
     labels: ["def_hermitian_positive_definite"],
-    lean: ["Ising2D.matrix_fin_conjTranspose_apply", "Ising2D.matrix_conf_conjTranspose_apply", "Ising2D.matrix_conf_isHermitian_iff", "Ising2D.posDef_conjugateBilinearValue_pos", "Ising2D.posDef_of_conjugateBilinearValue_pos"],
+    lean: ["Ising2D.matrix_fin_conjTranspose_apply", "Ising2D.matrix_conf_conjTranspose_apply", "Ising2D.matrix_conf_isHermitian_iff", "Ising2D.IsPositiveDefiniteTensorPow"],
     statement: [
       paragraph(["行列の積は ", ref("mat_mult"), "、実数の複素数への包含は ", ref("inclusion_rr_to_cc"), " を用いる。"]),
       paragraph([

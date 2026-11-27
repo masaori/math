@@ -39,7 +39,7 @@ theorem posDef_of_conjBilin'_pos {ι : Type*} [Fintype ι] [DecidableEq ι] {A :
   rw [heq, hval]
   exact Complex.zero_lt_real.mpr hr
 
-/-- 添字が任意の有限型の行列について、`congruence_preserves_positive_definite` を必要十分版のエルミート性の段
+/-- 添字が任意の有限型の行列について、mathlib の `Matrix.PosDef` で述べた `congruence_preserves_positive_definite` を必要十分版のエルミート性の段
 `NecSuf.congruence_isHermitian'` と正値性の段 `NecSuf.congruence_preserves_pos'` の特殊化として得る。 -/
 theorem congruence_preserves_positive_definite_of_necSuf' {ι : Type*} [Fintype ι] [DecidableEq ι]
     {A B B' : Matrix ι ι ℂ} (hA : A.PosDef) (hB : B' * B = 1) : (Bᴴ * (A * B)).PosDef :=
@@ -49,12 +49,16 @@ theorem congruence_preserves_positive_definite_of_necSuf' {ι : Type*} [Fintype 
 
 /-- `congruence_preserves_positive_definite`（添字 `Fin n`）を必要十分版の特殊化として得る。 -/
 theorem congruence_preserves_positive_definite_of_necSuf {n : ℕ} {A B B' : Matrix (Fin n) (Fin n) ℂ}
-    (hA : A.PosDef) (hB : B' * B = 1) : (Bᴴ * (A * B)).PosDef :=
-  congruence_preserves_positive_definite_of_necSuf' hA hB
+    (hA : (Aᴴ = A ∧ ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x A x = (r : ℂ))) (hB : B' * B = 1) :
+    ((Bᴴ * (A * B))ᴴ = Bᴴ * (A * B) ∧
+      ∀ x : Fin n → ℂ, x ≠ 0 → ∃ r : ℝ, 0 < r ∧ conjugateBilinearValue x (Bᴴ * (A * B)) x = (r : ℂ)) :=
+  ⟨NecSuf.congruence_isHermitian' hA.1 B,
+    NecSuf.congruence_preserves_pos' (fun z => ∃ r : ℝ, 0 < r ∧ z = realInclusionAddHom r) hB hA.2⟩
 
 /-- `congruence_preserves_positive_definite` の `TensorPow M` での系（必要十分版の添字 `Conf M` の特殊化）。 -/
 theorem congruence_preserves_positive_definite_tensorPow {M : ℕ} {A B B' : TensorPow M}
-    (hA : A.PosDef) (hB : B' * B = 1) : (Bᴴ * (A * B)).PosDef :=
-  congruence_preserves_positive_definite_of_necSuf' hA hB
+    (hA : IsPositiveDefiniteTensorPow A) (hB : B' * B = 1) : IsPositiveDefiniteTensorPow (Bᴴ * (A * B)) :=
+  ⟨NecSuf.congruence_isHermitian' hA.1 B,
+    NecSuf.congruence_preserves_pos' (fun z => ∃ r : ℝ, 0 < r ∧ z = realInclusionAddHom r) hB hA.2⟩
 
 end Ising2D
