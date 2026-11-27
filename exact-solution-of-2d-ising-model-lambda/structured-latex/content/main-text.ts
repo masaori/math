@@ -28746,7 +28746,7 @@ q
                               displayMath(String.raw`\begin{aligned}
 \xi
 &\in Q_s
-&&\bigl(\because\ \xi\in P_s\text{ と }\blkref{def_quadratic_positive_cone}\bigr).
+&&\bigl(\because\ \xi\in P_s\text{ と }\blkref{def_quadratic_positive_cone}\bigr)
 \end{aligned}`),
                               paragraph([
                                 math(String.raw`m\in\mathbb N`), " について二つの所属を同時に帰納法で示す。",
