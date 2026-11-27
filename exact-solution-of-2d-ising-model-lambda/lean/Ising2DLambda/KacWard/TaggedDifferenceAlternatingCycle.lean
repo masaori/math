@@ -48,4 +48,18 @@ theorem taggedActive_alternatingCycle {L : ℕ}
   · intro j
     rfl
 
+/-- 本文の主張のうち、周期が偶数であることと周期で始点へ帰ることだけを取り出す。
+引く側が軌道の列挙を使わないとき、列挙の全単射を結論の型に持ち込まないためにこちらを引く。 -/
+theorem taggedActive_alternatingCycle_even_return {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (i : {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t}) :
+    let τ := concreteShortInvolution D t
+    let υ := concreteLongInvolution D t
+    let m := matchingPairComponentMinimum τ υ i
+    let σ := matchingPairPermutation τ υ
+    let n := finitePermutationMinimalPeriod σ m
+    Even n ∧ finiteMapIterate σ n m = m :=
+  ⟨(taggedActive_alternatingCycle D t i).1, (taggedActive_alternatingCycle D t i).2.2.2.1⟩
+
 end Ising2DLambda.KacWard

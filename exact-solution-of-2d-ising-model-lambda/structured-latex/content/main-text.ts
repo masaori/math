@@ -87448,7 +87448,11 @@ c_{k+1}&=c_k&&\bigl(\because\ \blkref{claim_vertex_simple_boundary_distinct_pass
                         "すると ", math(String.raw`k`), " は ", math(String.raw`j`), " の直後であり、",
                         "前後二辺の基底辺の相異（", ref("claim_nonloop_successor_distinct_base"),
                         "）と矛盾する。従って各基底辺の通過位置は高々一つである。"]),
-                      paragraph(["最初の辺の基底辺は一度通るので、",
+                      paragraph(["最初の辺の基底辺 ", math(String.raw`\operatorname{base}(\vec e_1)\in E_L`),
+                        " は、", ref("claim_edge_row_partition"), " により、ある ",
+                        math(String.raw`i,j\in\mathbb Z/L\mathbb Z`), " について ",
+                        math(String.raw`n_{\mathrm h}(i,j)`), " または ", math(String.raw`n_{\mathrm v}(i,j)`),
+                        " である。この基底辺は一度通るので、",
                         ref("claim_height_one_boundary_all_edges_parity"), " と ",
                         ref("claim_height_one_boundary_support"), " より、その境界係数は ",
                         math(String.raw`\{1,-1\}`), " に属する。そこで"]),
@@ -96837,7 +96841,6 @@ K^{a,b}_{\vec g,\vec f}(x)
                     habitat: "Qbar",
                     verification: ["sagemath/check/terminal-matrix-entries"],
                     lean: [
-                      "Ising2DLambda.KacWard.orientedTarget_reversal",
                       "Ising2DLambda.KacWard.mem_nonbacktrackingSuccessors_reversal",
                       "Ising2DLambda.KacWard.terminalMatrix_entry",
                       "Ising2DLambda.NecSuf.KacWard.terminalMatrix_entry_necSuf",
@@ -98690,7 +98693,12 @@ q_{\vec e,\vec f}
 \mathsf S_p&=xC(q_{\vec e,\vec f})&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\bigr)\\
 &\ne0&&\bigl(\because\ x\ne0,\ C\text{ の単射性と多項式環の零積性}\bigr).
 \end{aligned}`),
-                      paragraph([ref("def_qbar_polynomial_pfaffian"), " により ", math(String.raw`c_{\mathcal D_\tau}\in\{1,-1\}\subset\overline{\mathbb Q}[x]`), " で、これも零でない。両有限積は、各因子が非零なので非零である。空積の場合も一である。さらに ", math(String.raw`(-1)^{|T_P|}\ne0`), " である。よって有限個の非零因子の積として ", math(String.raw`M_{\mathcal D_\tau,T_P}(x)\ne0`), " を得る（多項式環の零積性）。辺長一でも標識ごとに別の因子を選ぶので同じ証明が成り立つ。"]),
+                      paragraph([math(String.raw`\mathcal D_\tau`), " は ", ref("claim_local_pairing_matching_construction"), " の完全マッチングなので、", ref("def_qbar_polynomial_pfaffian"), " の定数 ", math(String.raw`c_{\mathcal D_\tau}`), " が定まり、"]),
+                      displayMath(String.raw`\begin{aligned}
+c_{\mathcal D_\tau}&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\mathcal D_\tau))}&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr)\\
+&\in\bigl\{\widehat{\iota_{\mathbb Z}(1)},\widehat{\iota_{\mathbb Z}(-1)}\bigr\}=\{1,-1\}\subset\overline{\mathbb Q}[x]&&\bigl(\because\ \blkref{claim_perfect_matching_sign_enumeration_independent}\text{ の }\operatorname{sgn}(\mathcal D_\tau)\in\{-1,1\}\bigr)
+\end{aligned}`),
+                      paragraph(["なので、これも零でない。両有限積は、各因子が非零なので非零である。空積の場合も一である。さらに ", math(String.raw`(-1)^{|T_P|}\ne0`), " である。よって有限個の非零因子の積として ", math(String.raw`M_{\mathcal D_\tau,T_P}(x)\ne0`), " を得る（多項式環の零積性）。辺長一でも標識ごとに別の因子を選ぶので同じ証明が成り立つ。"]),
                     ],
                   },
                 },
@@ -99418,6 +99426,7 @@ d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ 
                     verification: ["sagemath/check/tagged-difference-alternating-cycle"],
                     lean: [
                       "Ising2DLambda.KacWard.taggedActive_alternatingCycle",
+                      "Ising2DLambda.KacWard.taggedActive_alternatingCycle_even_return",
                       "Ising2DLambda.NecSuf.KacWard.alternatingCycleAtRepresentative",
                     ],
                     statement: [
@@ -99504,11 +99513,11 @@ c(n)&=c(0)&& (\because\ \blkref{def_finite_permutation_minimal_period}\text{ の
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。短い標識の順序付き対 ", math(String.raw`(\vec g,\vec f)\in T`), " の二端 ", math(String.raw`\vec g,\vec f\in\vec E_L`), " について、", math(String.raw`\vec f\in\operatorname{Next}(\iota(\vec g))`), " である。", math(String.raw`L=1`), " で ", math(String.raw`\vec f=\iota(\vec g)`), " となる場合も含む。実数体と複素数体は現れない。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_tagged_matching_nonzero_support"), " により、短い標識の対の二端は始点が等しく、相異なる。反転辺の終点については ", ref("claim_terminal_matrix_entries"), " の端点計算を使う。" ]),
+                      paragraph([ref("claim_tagged_matching_nonzero_support"), " により、短い標識の対の二端は始点が等しく、相異なる。反転辺の終点は、", ref("def_edge_reversal"), " と ", ref("def_oriented_edge_endpoints"), " を向きの二つの場合で照合して読む。" ]),
                       displayMath(String.raw`\begin{aligned}
 \operatorname{tgt}(\iota(\vec g))
 &=\operatorname{src}(\vec g)
-&&(\because\ \blkref{claim_terminal_matrix_entries}\text{ の端点計算})\\
+&&(\because\ \blkref{def_edge_reversal},\ \blkref{def_oriented_edge_endpoints}\text{ の向きの二場合})\\
 &=\operatorname{src}(\vec f)
 &&(\because\ \blkref{claim_tagged_matching_nonzero_support})
 \end{aligned}`),
@@ -100299,9 +100308,21 @@ I_L(C,D)
                       paragraph([
                         "各頂点 ", math(String.raw`v\in V_L`), " の四つの半辺を左・上・右・下と呼び、それぞれ方向番号 ",
                         math(String.raw`2,3,0,1\in\mathbb Z/4\mathbb Z`), " を対応させる（", ref("def_oriented_edge_direction"), "）。",
+                        math(String.raw`v=(i,j)`), " の左・上・右・下の半辺はそれぞれ辺 ",
+                        math(String.raw`n_{\mathrm h}(i,j-1),\ n_{\mathrm v}(i-1,j),\ n_{\mathrm h}(i,j),\ n_{\mathrm v}(i,j)`),
+                        " が担い、その向き付き辺の始点が ", math(String.raw`v`), " であることは ",
+                        ref("claim_edge_row_partition"), " の端点の式で読める。",
                         "始点 ", math(String.raw`v`), "、方向番号 ", math(String.raw`d`), " の向き付き辺はただ一つである（",
                         ref("claim_source_direction_bijection"), "）。方向 ", math(String.raw`d`),
-                        " の半辺を出る通過はこの辺を出辺に使い、その半辺から入る通過はこの辺の反転を入辺に使う。",
+                        " の半辺を出る通過はこの辺を出辺に使う。向き付き辺 ", math(String.raw`\vec g`), " について、反転の始点は元の終点であり（",
+                        ref("def_edge_reversal"), "、", ref("def_oriented_edge_endpoints"), "）、反転の方向番号は元の方向番号に ",
+                        math(String.raw`2`), " を足したものである（", ref("claim_reversal_direction_shift"), "）。",
+                        "従って ", math(String.raw`\operatorname{tgt}(\vec g)=v`), " かつ ", math(String.raw`\operatorname{dir}(\vec g)+2=d`),
+                        " であることは、", math(String.raw`\iota(\vec g)`), " が始点 ", math(String.raw`v`), "、方向番号 ",
+                        math(String.raw`d`), " の向き付き辺であること、すなわち ", math(String.raw`\iota(\vec g)`),
+                        " がこの辺であることと同値であり、反転は対合なので（", ref("claim_reversal_is_involution"),
+                        "）", math(String.raw`\vec g`), " がこの辺の反転であることと同値である。",
+                        "従ってその半辺から入る通過はこの辺の反転を入辺に使う。",
                         "反転の方向番号は ", math(String.raw`d+2`), " である（", ref("claim_reversal_direction_shift"), "）。",
                         "閉歩道が半辺を使うときは入辺と出辺を一つずつ使う。",
                         "二本を通じて辺の標識が相異なるので、同じ頂点で両方の歩道が通過する場合、",

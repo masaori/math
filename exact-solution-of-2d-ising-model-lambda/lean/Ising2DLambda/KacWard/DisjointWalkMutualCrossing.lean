@@ -168,19 +168,21 @@ theorem halfEdgeOutgoing_iff (o : OrientedEdge L) (v : Vertex L) (d : ZMod 4) :
 theorem halfEdgeIncoming_iff (o : OrientedEdge L) (v : Vertex L) (d : ZMod 4) :
     (orientedTarget o = v ∧ directionNumber o + 2 = d) ↔
       o = reversal (halfEdgeOutgoing v d) := by
-  have h := halfEdgeOutgoing_source_direction v d
-  have h4 : ∀ x : ZMod 4, x + 2 + 2 = x := by decide
-  constructor
-  · rintro ⟨ht, hd⟩
-    apply targetDirection_bijective.1
-    refine Prod.ext ?_ ?_
-    · change orientedTarget o = orientedTarget (reversal (halfEdgeOutgoing v d))
-      rw [orientedTarget_reversal, h.1, ht]
-    · change directionNumber o = directionNumber (reversal (halfEdgeOutgoing v d))
-      rw [directionNumber_reversal, h.2, ← hd, h4]
-  · rintro rfl
-    refine ⟨by rw [orientedTarget_reversal, h.1], ?_⟩
-    rw [directionNumber_reversal, h.2, h4]
+  -- 本文: 反転の始点は元の終点（反転と向き付き辺の端点の定義）。
+  have hsource : orientedSource (reversal o) = orientedTarget o := by
+    rcases o with ⟨e, _ | _⟩ <;> rfl
+  calc
+    (orientedTarget o = v ∧ directionNumber o + 2 = d) ↔
+        (orientedSource (reversal o) = v ∧ directionNumber (reversal o) = d) := by
+      rw [hsource, directionNumber_reversal]
+    _ ↔ reversal o = halfEdgeOutgoing v d := halfEdgeOutgoing_iff (reversal o) v d
+    _ ↔ o = reversal (halfEdgeOutgoing v d) := by
+      -- 本文: 反転は対合である。
+      constructor
+      · intro h
+        rw [← h, reversal_involutive]
+      · intro h
+        rw [h, reversal_involutive]
 
 /-- 通過が方向 `d` の半辺を使うなら、その半辺を担う辺は歩道の辺である。 -/
 theorem pass_halfEdge_mem {m : ℕ} (γ : Fin (m + 1) → OrientedEdge L)

@@ -52,9 +52,9 @@ theorem taggedActive_projectedClosedEdgeCycle {L : ℕ}
       exact hnext
   let n := finitePermutationMinimalPeriod σ m
   -- 本文: 交互閉路の主張により n は偶数で、周期で始点へ帰る。
-  have hcycle := taggedActive_alternatingCycle D t i
+  have hcycle := taggedActive_alternatingCycle_even_return D t i
   have hneven : Even n := hcycle.1
-  have hnreturn : finiteMapIterate σ n m = m := hcycle.2.2.2.1
+  have hnreturn : finiteMapIterate σ n m = m := hcycle.2
   obtain ⟨k, hk⟩ := hneven
   have hkpos : 0 < k := by
     -- 本文: 最小正周期は正の帰還時刻の最小元なので正である。
