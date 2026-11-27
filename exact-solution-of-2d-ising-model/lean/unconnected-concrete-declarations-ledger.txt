@@ -667,11 +667,7 @@ Ising2D.matrix_conjTranspose_norm
 Ising2D.matrix_conjTranspose_sub
 Ising2D.matrix_conjTranspose_sub_apply
 Ising2D.matrix_conjTranspose_tendsto
-Ising2D.matrix_eq_sub_of_add_eq
-Ising2D.matrix_eq_sub_of_add_eq_apply
 Ising2D.matrix_eq_sum_delta_smul
-Ising2D.matrix_eq_zero_of_add_self_eq_zero
-Ising2D.matrix_eq_zero_of_add_self_eq_zero_apply
 Ising2D.matrix_mul_left_tendsto
 Ising2D.matrix_mul_right_tendsto
 Ising2D.matrix_mul_smul_comm_of_commute
@@ -909,8 +905,6 @@ Ising2D.vec_sub_eq_zero_iff
 Ising2D.vec_zero_apply
 Ising2D.xString_mul_self
 Ising2D.xString_succ_eq
-Ising2D.zero_matrix_mul
-Ising2D.zero_matrix_mul_apply
 Ising2D.zero_mem_evenEigenvectors
 Ising2D.zyPrefixProduct
 Ising2D.zyPrefixProduct_eq_neg_i_pow_smul_xString

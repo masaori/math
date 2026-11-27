@@ -7,7 +7,8 @@
 `linear_space_general_claim_matrix_summand_from_sum_equation`）。
 
 **必要十分版**: `Ising2D/NecSuf/MatrixZeroMulAndSumEquations.lean`。具体版をその系として導くのは
-`ClaimZeroMatrixProductAndSumEquationsFromNecSuf.lean`。
+`ClaimZeroMatrixProductAndSumEquationsFromNecSuf.lean`。`TensorPow M`（`Mat(2^M, ℂ)`）の場合の具体版は
+`ClaimTensorPowZeroMatrixProductAndSumEquations.lean`。
 
 ## 人手証明との対応
 

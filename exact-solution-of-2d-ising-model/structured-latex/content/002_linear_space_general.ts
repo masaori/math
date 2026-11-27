@@ -2681,7 +2681,7 @@ X - (-Y)
     kind: "claim",
     title: { text: "零行列を左から掛けると零行列" },
     labels: ["zero_matrix_is_left_zero_of_mat_mult"],
-    lean: ["Ising2D.zero_matrix_mul", "Ising2D.zero_matrix_mul_apply"],
+    lean: ["Ising2D.zero_matrix_mul", "Ising2D.zero_matrix_mul_apply", "Ising2D.zero_matrix_mul_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
@@ -2729,6 +2729,7 @@ X - (-Y)
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent (3) の末尾が「零元との積」を名前だけで根拠にしていたので足した。Lean は具体版 Ising2D.zero_matrix_mul（ClaimZeroMatrixProductAndSumEquations.lean）。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の二十単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.zero_matrix_mul_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowZeroMatrixProductAndSumEquations.lean。番号 ν^{-1} で Fin n の行列へ移して、この主張を引く）。",
       ],
     },
   },
@@ -4231,7 +4232,7 @@ X\prod_{j=1}^{r+1} A_j
     kind: "claim",
     title: { text: "自分自身との和が零行列なら零行列" },
     labels: ["matrix_sum_with_itself_zero_implies_zero"],
-    lean: ["Ising2D.matrix_eq_zero_of_add_self_eq_zero", "Ising2D.matrix_eq_zero_of_add_self_eq_zero_apply"],
+    lean: ["Ising2D.matrix_eq_zero_of_add_self_eq_zero", "Ising2D.matrix_eq_zero_of_add_self_eq_zero_apply", "Ising2D.eq_zero_of_add_self_eq_zero_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -4315,6 +4316,7 @@ X_{ik}
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent (1) が「同じ項の和」で X + X を 2X とし、行列に「ℂ の四則」を当てて ½ を掛けていたので、成分の鎖で示すこの主張に置き換えた。Lean は具体版 Ising2D.matrix_eq_zero_of_add_self_eq_zero（ClaimZeroMatrixProductAndSumEquations.lean）。",
         "2026-11-10（Lean の通しの証明）: 準備の 1_ℂ+1_ℂ = 2_ℂ の 4 行の鎖を、同じ鎖を置いていたほかの証明と合わせて主張 one_plus_one_is_two_in_cc にし、ここではその参照にした。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の二十単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.eq_zero_of_add_self_eq_zero_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowZeroMatrixProductAndSumEquations.lean。番号 ν^{-1} で Fin n の行列へ移して、この主張を引く）。",
       ],
     },
   },
@@ -4323,7 +4325,7 @@ X_{ik}
     kind: "claim",
     title: { text: "和の等式から右の項を差で表す" },
     labels: ["matrix_summand_from_sum_equation"],
-    lean: ["Ising2D.matrix_eq_sub_of_add_eq", "Ising2D.matrix_eq_sub_of_add_eq_apply"],
+    lean: ["Ising2D.matrix_eq_sub_of_add_eq", "Ising2D.matrix_eq_sub_of_add_eq_apply", "Ising2D.eq_sub_of_add_eq_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -4377,6 +4379,7 @@ B_{ik}
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent (2) が行列の等式に「ℂ の四則」を当てて ψ̌ψ̌^† = (ψ̌^†ψ̌ + ψ̌ψ̌^†) - ψ̌^†ψ̌ としていたので、成分の鎖で示すこの主張に置き換えた。Lean は具体版 Ising2D.matrix_eq_sub_of_add_eq（ClaimZeroMatrixProductAndSumEquations.lean）。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 左から 0_C を足す行（右辺から左辺へ）の根拠を、complex_numbers_form_a_field の「加法の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 0_C を (-A_{ik}) + A_{ik}（逆元を左から足した和）に開く行（右辺から左辺へ）の根拠を、complex_numbers_form_a_field の加法の逆元（右から足す z + (-z) = 0_C しか示していない）から negation_plus_self_is_zero_in_cc (x → A_{ik}) に替えた。式は不変。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の二十単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.eq_sub_of_add_eq_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowZeroMatrixProductAndSumEquations.lean。番号 ν^{-1} で Fin n の行列へ移して、この主張を引く）。",
       ],
     },
   },

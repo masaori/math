@@ -7,10 +7,12 @@
 `h·0 = 0` は `mul_zero`（`complex_times_zero_is_zero`）を渡す。
 人手のラベルは `zero_matrix_is_left_zero_of_mat_mult`・`matrix_sum_with_itself_zero_implies_zero`・`matrix_summand_from_sum_equation`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin m` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。
+`TensorPow M`（添字 `Conf M`）の具体版 `ClaimTensorPowZeroMatrixProductAndSumEquations.lean` の `zero_matrix_mul_tensorPow`・
+`eq_zero_of_add_self_eq_zero_tensorPow`・`eq_sub_of_add_eq_tensorPow` も、同じ必要十分版の添字 `Conf M` の特殊化として得る
+（`*_tensorPow_of_necSuf`）。`TensorPow M` と `2^M` 行 1 列の行列の積の系 `zero_matrix_mul_colVec` は、まだ具体版を持たないのでここに置く。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroMatrixProductAndSumEquations
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowZeroMatrixProductAndSumEquations
 import Ising2D.NecSuf.MatrixZeroMulAndSumEquations
 import Ising2D.Basic
 
@@ -37,17 +39,17 @@ theorem matrix_eq_sub_of_add_eq_of_necSuf {m p : ℕ} (A B C : Matrix (Fin m) (F
     B = C - A :=
   NecSuf.eq_sub_of_add_eq_matrix' A B C h
 
-/-- `zero_matrix_is_left_zero_of_mat_mult` の `TensorPow M` での系（`NecSuf.zero_mul_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem zero_matrix_mul_tensorPow {M : ℕ} (B : TensorPow M) : (0 : TensorPow M) * B = 0 :=
+/-- `zero_matrix_mul_tensorPow` を `NecSuf.zero_mul_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem zero_matrix_mul_tensorPow_of_necSuf {M : ℕ} (B : TensorPow M) : (0 : TensorPow M) * B = 0 :=
   NecSuf.zero_mul_matrix' (fun x => zero_mul x) B
 
-/-- `matrix_sum_with_itself_zero_implies_zero` の `TensorPow M` での系。 -/
-theorem eq_zero_of_add_self_eq_zero_tensorPow {M : ℕ} (X : TensorPow M) (h : X + X = 0) : X = 0 :=
+/-- `eq_zero_of_add_self_eq_zero_tensorPow` を `NecSuf.eq_zero_of_add_self_eq_zero_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem eq_zero_of_add_self_eq_zero_tensorPow_of_necSuf {M : ℕ} (X : TensorPow M) (h : X + X = 0) : X = 0 :=
   NecSuf.eq_zero_of_add_self_eq_zero_matrix' complexTwo⁻¹ complexTwo_inv_mul one_mul mul_assoc
     (mul_zero _) X h
 
-/-- `matrix_summand_from_sum_equation` の `TensorPow M` での系。 -/
-theorem eq_sub_of_add_eq_tensorPow {M : ℕ} (A B C : TensorPow M) (h : A + B = C) : B = C - A :=
+/-- `eq_sub_of_add_eq_tensorPow` を `NecSuf.eq_sub_of_add_eq_matrix'` の添字 `Conf M` の特殊化として得る。 -/
+theorem eq_sub_of_add_eq_tensorPow_of_necSuf {M : ℕ} (A B C : TensorPow M) (h : A + B = C) : B = C - A :=
   NecSuf.eq_sub_of_add_eq_matrix' A B C h
 
 /-- `zero_matrix_is_left_zero_of_mat_mult`（`p → 1`）の、`TensorPow M` と `2^M` 行 1 列の行列での系

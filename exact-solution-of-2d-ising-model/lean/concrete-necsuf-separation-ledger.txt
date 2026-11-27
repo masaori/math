@@ -32,7 +32,6 @@ DEP	concrete	Ising2D.CheckFermi.finProdLeft_mul_Qproj
 DEP	concrete	Ising2D.CheckFermi.generator_eq_eta_mul_eta_smul
 DEP	concrete	Ising2D.CheckFermi.nOp
 DEP	concrete	Ising2D.CheckFermi.nOp_mul_Qproj
-DEP	concrete	Ising2D.CheckFermi.nOp_mul_cre
 DEP	concrete	Ising2D.CheckFermi.nOp_mul_self
 DEP	concrete	Ising2D.CheckFermi.omittingDefFactor_insert
 DEP	concrete	Ising2D.CheckFermi.omittingDefFactor_mulVec_generator
@@ -61,12 +60,9 @@ DEP	concrete	Ising2D.CheckFermiSetup.Vprime_mul_Qproj
 DEP	concrete	Ising2D.CheckFermiSetup.Xop_mul_Qproj_step1
 DEP	concrete	Ising2D.CheckFermiSetup.acomm_cre_ann
 DEP	concrete	Ising2D.CheckFermiSetup.ann
-DEP	concrete	Ising2D.CheckFermiSetup.ann_mul_cre
 DEP	concrete	Ising2D.CheckFermiSetup.ann_mul_projFactor_prep2
-DEP	concrete	Ising2D.CheckFermiSetup.ann_sq
 DEP	concrete	Ising2D.CheckFermiSetup.colVec_eq_sum_Qproj_mul_step5
 DEP	concrete	Ising2D.CheckFermiSetup.commute_nOp_Qproj
-DEP	concrete	Ising2D.CheckFermiSetup.cre_sq
 DEP	concrete	Ising2D.CheckFermiSetup.exists_conj_diagonal_Vprime
 DEP	concrete	Ising2D.CheckFermiSetup.exists_eigenBasis_Vprime
 DEP	concrete	Ising2D.CheckFermiSetup.iSupIndep_range_Qproj
@@ -86,7 +82,6 @@ DEP	concrete	Ising2D.CheckFermiSetup.nOp_mul_projFactor_comm_step3
 DEP	concrete	Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_mem
 DEP	concrete	Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_not_mem
 DEP	concrete	Ising2D.CheckFermiSetup.nOp_mul_projFactor_step3
-DEP	concrete	Ising2D.CheckFermiSetup.nOp_mul_self
 DEP	concrete	Ising2D.CheckFermiSetup.one_sub_nOp_mul_nOp
 DEP	concrete	Ising2D.CheckFermiSetup.partialExpSum_mul_Qproj
 DEP	concrete	Ising2D.CheckFermiSetup.projFactor_comm_factor_step1

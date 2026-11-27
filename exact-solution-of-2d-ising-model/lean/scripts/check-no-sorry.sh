@@ -1982,6 +1982,9 @@ targets=(
   Ising2D.zero_matrix_mul_colVec
   Ising2D.eq_zero_of_add_self_eq_zero_tensorPow
   Ising2D.eq_sub_of_add_eq_tensorPow
+  Ising2D.zero_matrix_mul_tensorPow_of_necSuf
+  Ising2D.eq_zero_of_add_self_eq_zero_tensorPow_of_necSuf
+  Ising2D.eq_sub_of_add_eq_tensorPow_of_necSuf
   "Ising2D.NecSuf.mul_zero_matrix'"
   Ising2D.matrix_mul_zero_matrix
   Ising2D.matrix_mul_zero_matrix_of_necSuf

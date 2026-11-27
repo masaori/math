@@ -51,6 +51,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfTensorPowProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowDoubleNegation
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowAddAndSubtractZeroMatrix
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowZeroMatrixProductAndSumEquations
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroMatrixProductAndSumEquationsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionMatrixAnticommutator
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowMatrixEqualsNegationIfSumIsZero
@@ -151,11 +152,14 @@ theorem conjIdx_injective (M : ℕ) : Function.Injective (conjIdx M) :=
 
 /-! ## `Mat(2^M, ℂ)` に 2-捩れが無いこと（原文 `check_number_operator_idempotent` (1) で使う） -/
 
-/-- `Mat(2^M, ℂ)` の `x` について `x + x = 0` なら `x = 0`。人手 `matrix_sum_with_itself_zero_implies_zero` の
-`TensorPow M` の系 `eq_zero_of_add_self_eq_zero_tensorPow` の別名である。
-必要十分版 `NecSuf.sq_eq_zero_of_acomm_self`・`NecSuf.num_mul_num` が、環の公理と反交換関係のほかに仮定する唯一の性質である。 -/
+/-- `Mat(2^M, ℂ)` の `x` について `x + x = 0` なら `x = 0`。必要十分版 `NecSuf.sq_eq_zero_of_acomm_self`・`NecSuf.num_mul_num` が、
+環の公理と反交換関係のほかに仮定する唯一の性質である。人手 `matrix_sum_with_itself_zero_implies_zero` の `Mat(2^M, ℂ)` の場合の
+導出 `eq_zero_of_add_self_eq_zero_tensorPow_of_necSuf` で示す（分離の台帳に載る違反）。具体版 `eq_zero_of_add_self_eq_zero_tensorPow`
+で示すと、章 018 の設定 `CheckFermiInput.lean` の `CheckFermi.cre_sq`・`ann_sq`・`nOp_mul_self`（必要十分版を使う具体版）を通して、
+本文がこの主張を引かない主張（`c_plus_equals_Lambda_half_integer` ほか）の具体版がこの主張を使うことになるためである。
+章 018 の設定を本文の経路へ直すときに、具体版へ移す。 -/
 theorem tensorPow_two_torsion_free {M : ℕ} (x : TensorPow M) (h : x + x = 0) : x = 0 :=
-  eq_zero_of_add_self_eq_zero_tensorPow x h
+  eq_zero_of_add_self_eq_zero_tensorPow_of_necSuf x h
 
 /-! ## 原文 `def_check_fermi` / `anticommutator_of_check_psi` の受け取り -/
 
