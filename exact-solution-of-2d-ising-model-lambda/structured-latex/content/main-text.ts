@@ -93783,7 +93783,7 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                         math(String.raw`b\in\{0,\ldots,n_{\parallel}\}`), "（ただし ",
                         math(String.raw`a=c`), " なら ", math(String.raw`b=0`), "）により ",
                         math(String.raw`S+t d_{\perp}(\gamma)+(c-a)B_{\gamma}-G^{\gamma}_b`),
-                        " と書ける。横断座標を取ると",
+                        " と書ける（", ref("claim_one_sided_parallel_return_repetition"), " の局所添字の点列）。横断座標を取ると",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \kappa_{\gamma}\!\left(S+t d_{\perp}(\gamma)+(c-a)B_{\gamma}-G^{\gamma}_b\right)
@@ -93795,7 +93795,9 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
 &&\bigl(\because\ t\ge1\text{ かつ }W_{\perp}(\gamma)\ge1\bigr)
 \end{aligned}`),
                       paragraph([
-                        "したがって反転平行階段は周期持ち上げと交わらない。",
+                        "一方、周期持ち上げ部分の頂点の横断座標は ", math(String.raw`K_{\max}(\gamma)`),
+                        " 以下である（", ref("claim_periodic_plane_lift_transverse_bounded"),
+                        "）。したがって反転平行階段は周期持ち上げと交わらない。",
                       ]),
                       paragraph([
                         "上り階段の基点について",
@@ -95872,8 +95874,10 @@ t_{\circ}(\Pi(W))
                         " と周期数 ", math(String.raw`c\in\mathbb N_{>0}`), " を取る。",
                         math(String.raw`n:=n_{\parallel},\ b:=t n_{\perp}`), " と置くと ",
                         math(String.raw`m,n,b\in\mathbb N_{>0}`), " である。固定した四つの歩ベクトル列 ",
-                        math(String.raw`u,v,r,x`), " は ", ref("claim_one_sided_closure_junction_pairs"),
-                        " の定義を使い、長さは順に ", math(String.raw`m,b,n,b`),
+                        math(String.raw`u,v,r,x`), " と、一側閉包の四部分の歩ベクトル列 ",
+                        math(String.raw`A_c,V_c,R_c,X_c`), " は ", ref("claim_one_sided_closure_junction_pairs"),
+                        " の定義を使う。長さは順に ", math(String.raw`m,b,n,b`), " と ",
+                        math(String.raw`cm,b,cn,b`),
                         "、値は ", math(String.raw`\mathbb Z^2`), "、範囲外の値は零ベクトルとする。",
                         "連結（", ref("def_finite_sequence_concatenation"), "）と循環隣接和（", ref("def_cyclic_adjacent_sum"), "）を使って、",
                       ]),
@@ -95896,12 +95900,7 @@ w^{(c)}_j:=F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                     ],
                     proof: [
                       paragraph([
-                        "一側閉包の四部分の歩ベクトル列を ", math(String.raw`A_c,V_c,R_c,X_c`),
-                        " と書く（", ref("claim_one_sided_closure_junction_pairs"), "）。",
-                        "各列の長さは順に ", math(String.raw`cm,b,cn,b`),
-                        " であり、範囲外は零ベクトルとする。三接合の点の一致は ",
-                        ref("claim_one_sided_periodic_lift_closure_closed_unit_steps"),
-                        " で示した。各部分の歩を、任意の自然数添字 ",
+                        "各部分の歩を、任意の自然数添字 ",
                         math(String.raw`j<cm`), "、", math(String.raw`i<b`), "、", math(String.raw`s<cn`),
                         " に対して固定列へ戻すと、",
                       ]),
@@ -95996,6 +95995,7 @@ C_{N_c}\bigl(w^{(c)}\bigr)
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.periodicPlaneLift_periodTurning",
+                      "Ising2DLambda.KacWard.periodicPlaneLiftFromWalk_periodTurning",
                       "Ising2DLambda.NecSuf.KacWard.integerPeriodicLift_periodAdjacentSum_necSuf",
                       "Ising2DLambda.KacWard.periodicPlaneLift_periodTurning_from_necSuf",
                     ],
