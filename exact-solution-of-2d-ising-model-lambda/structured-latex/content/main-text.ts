@@ -28761,7 +28761,7 @@ q
 &&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=1_{\mathbb Q}\text{ へ適用}\bigr),\\
 \iota_{\mathbb Q}(1_{\mathbb Q})
 &\in P_s
-&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=1_{\mathbb Q}\text{ へ適用}\bigr).
+&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=1_{\mathbb Q}\text{ へ適用}\bigr)
 \end{aligned}`),
                               paragraph([ref("claim_positive_rational_in_positive_cone"), " の二つの所属を冪へ移すため、次の鎖を使う。"]),
                               displayMath(String.raw`\begin{aligned}
@@ -28769,7 +28769,7 @@ q
 &=1_{\overline{\mathbb Q}}
 &&\bigl(\because\ \text{零乗の定義}\bigr)\\
 &=\iota_{\mathbb Q}(1_{\mathbb Q})
-&&\bigl(\because\ \text{包含が一を保つ、}\blkref{def_algebraic_numbers}\bigr).
+&&\bigl(\because\ \text{包含が一を保つ、}\blkref{def_algebraic_numbers}\bigr)
 \end{aligned}`),
                               displayMath(String.raw`\begin{aligned}
 \xi^0
@@ -28777,7 +28777,7 @@ q
 &&\bigl(\because\ \text{上の等号を }\iota_{\mathbb Q}(1_{\mathbb Q})\in Q_s\text{ へ代入}\bigr),\\
 \xi^0
 &\in P_s
-&&\bigl(\because\ \text{上の等号を }\iota_{\mathbb Q}(1_{\mathbb Q})\in P_s\text{ へ代入}\bigr).
+&&\bigl(\because\ \text{上の等号を }\iota_{\mathbb Q}(1_{\mathbb Q})\in P_s\text{ へ代入}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "次に、ある ", math(String.raw`m\in\mathbb{N}`), " について ",
@@ -28792,18 +28792,18 @@ q
 \xi^m\cdot\xi
 &\in P_s
 &&\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}
-\text{ を }\xi^m,\xi\in P_s\text{ へ適用}\bigr).
+\text{ を }\xi^m,\xi\in P_s\text{ へ適用}\bigr)
 \end{aligned}`),
                               paragraph([ref("claim_quadratic_multiplication_mem"), " と ", ref("claim_quadratic_positive_cone_mul_closed"), " の所属を、次の等号で後者の冪へ移す。"]),
                               displayMath(String.raw`\xi^{m+1}=\xi^m\cdot\xi
-\qquad\bigl(\because\ \text{後者の冪の定義}\bigr).`),
+\qquad\bigl(\because\ \text{後者の冪の定義}\bigr)`),
                               displayMath(String.raw`\begin{aligned}
 \xi^{m+1}
 &\in Q_s
 &&\bigl(\because\ \text{直前の等号を }\xi^m\cdot\xi\in Q_s\text{ へ代入}\bigr),\\
 \xi^{m+1}
 &\in P_s
-&&\bigl(\because\ \text{直前の等号を }\xi^m\cdot\xi\in P_s\text{ へ代入}\bigr).
+&&\bigl(\because\ \text{直前の等号を }\xi^m\cdot\xi\in P_s\text{ へ代入}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "したがって任意の ", math(String.raw`m\in\mathbb{N}`),
