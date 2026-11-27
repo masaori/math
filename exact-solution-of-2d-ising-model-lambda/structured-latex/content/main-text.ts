@@ -91758,6 +91758,7 @@ H_{a,b}(\gamma)&=0
                       "sagemath/check/no-diagonal-only-contact",
                       "sagemath/check/step-turning-reversal",
                       "sagemath/check/boundary-vertex-local-turn",
+                      "sagemath/check/plane-simple-polygon-lift-point-boundary-vertex-bijection",
                     ],
                     statement: [
                       paragraph([
@@ -91921,8 +91922,41 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                         math(String.raw`3`), " である。",
                       ]),
                       paragraph([
-                        "各歩の内側が左か右かを真偽値で記す。内部の隣接二歩では四セルの表と二歩不帰還性により真偽値が等しく、",
-                        "最後と最初の二歩も零巻き付きによる端点一致を使って等しい。最初の歩から有限回の帰納法で全歩の真偽値は等しい。",
+                        "一周期の持ち上げ点と境界頂点を対応させる。各 ", math(String.raw`j\in\{1,\ldots,m\}`),
+                        " について歩の単位辺 ", math(String.raw`E_j:=\{P_{j-1}(\gamma),P_j(\gamma)\}`),
+                        " は、通過回数がちょうど ", math(String.raw`1`), " で、",
+                        math(String.raw`\mathcal B_{\square}(\mathcal F)`), " に属する（",
+                        ref("claim_walk_side_interior_band_edge_connected"), " の証明の、各 ",
+                        math(String.raw`A_j\cap A_{j+1}`), " が空でないことの段、", ref("def_plane_cell_boundary_edge_set"),
+                        "）。したがって各 ", math(String.raw`k\in\{0,\ldots,m-1\}`), " について ",
+                        math(String.raw`P_k(\gamma)\in E_{k+1}\subset\mathcal V_{\partial}`), " である。",
+                        "逆に、任意の ", math(String.raw`v\in\mathcal V_{\partial}`), " を取り、",
+                        math(String.raw`v\in e`), " となる境界辺 ", math(String.raw`e\in\mathcal B_{\square}(\mathcal F)`),
+                        " を取る。", math(String.raw`e`), " に接する二セルのちょうど一方が ",
+                        math(String.raw`\mathcal F`), " に属する（", ref("def_plane_cell_boundary_edge_set"), "）。",
+                        math(String.raw`e=\{(r,c+1),(r+1,c+1)\}`), " が縦辺なら、二セルは横に隣り合う ",
+                        math(String.raw`(r,c)`), " と ", math(String.raw`(r,c+1)`),
+                        " で、交差数の奇偶が異なるので（", ref("def_odd_ray_interior_cells"), "）、",
+                        math(String.raw`V_{r,c+1}(\gamma)`), " は奇数である（",
+                        ref("claim_adjacent_cells_ray_crossing_difference"), "）。",
+                        math(String.raw`e=\{(r+1,c),(r+1,c+1)\}`), " が横辺なら、二セルは上下に隣り合う ",
+                        math(String.raw`(r,c)`), " と ", math(String.raw`(r+1,c)`),
+                        " で、同様に ", math(String.raw`H_{r+1,c}(\gamma)`), " は奇数である（",
+                        ref("claim_vertically_adjacent_cells_boundary_parity"), "）。",
+                        "奇数は ", math(String.raw`0`), " でないので、ある ", math(String.raw`j\in\{1,\ldots,m\}`),
+                        " で ", math(String.raw`E_j=e`), " となり（", ref("def_vertical_edge_traversal_count"), "、",
+                        ref("def_horizontal_edge_traversal_count"), "）、", math(String.raw`v`), " は ",
+                        math(String.raw`P_{j-1}(\gamma)`), " か ", math(String.raw`P_j(\gamma)`), " に等しい。",
+                        math(String.raw`P_m(\gamma)=P_0(\gamma)`), " なので、", math(String.raw`v`), " はある ",
+                        math(String.raw`k\in\{0,\ldots,m-1\}`), " について ", math(String.raw`P_k(\gamma)`),
+                        " に等しい。一周期の点は二つずつ相異なるので、写像 ",
+                        math(String.raw`\{0,\ldots,m-1\}\to\mathcal V_{\partial},\ k\mapsto P_k(\gamma)`),
+                        " は全単射である。以下、循環総回転数の和をこの全単射で境界頂点の和へ移す。",
+                      ]),
+                      paragraph([
+                        "各歩の内側が左か右かを真偽値で記す。内部の隣接二歩では四セルの表と、持ち上げた隣接二歩が逆ベクトルにならないこと（",
+                        ref("claim_lifted_steps_do_not_reverse"), "）により真偽値が等しく、",
+                        "最後と最初の二歩も零巻き付きによる端点一致と同じ主張を使って等しい。最初の歩から有限回の帰納法で全歩の真偽値は等しい。",
                       ]),
                       paragraph([
                         "歩道の隣接二歩 ", math(String.raw`\vec e`), "、", math(String.raw`\vec f\in\operatorname{Next}(\vec e)`),
@@ -91966,7 +92000,7 @@ abcd&a+b+c+d&d_{\mathrm{in}}&d_{\mathrm{out}}\\\hline
                       displayMath(String.raw`\begin{aligned}
 t_{\circ}(\gamma)
 &=v_1-v_3
-&&\bigl(\because\ \text{内側セルを右に置く巡回方向}\bigr)\\
+&&\bigl(\because\ \text{内側セルを右に置く巡回方向と全単射 }k\mapsto P_k(\gamma)\bigr)\\
 &=4
 &&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}
@@ -91974,7 +92008,7 @@ t_{\circ}(\gamma)
 \begin{aligned}
 t_{\circ}(\gamma)
 &=-(v_1-v_3)
-&&\bigl(\because\ \text{内側セルを左に置く巡回方向}\bigr)\\
+&&\bigl(\because\ \text{内側セルを左に置く巡回方向と全単射 }k\mapsto P_k(\gamma)\bigr)\\
 &=-4
 &&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}`),
