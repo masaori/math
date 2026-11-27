@@ -33156,9 +33156,20 @@ a^2+b^2&=c^2&&(\because\ c^2=a^2+b^2)\\
                         math(String.raw`2\ne0`),
                         " である。",
                         math(String.raw`s=0`),
-                        " と仮定すると ",
-                        math(String.raw`2=s\cdot s=0\cdot0=0`),
-                        " となって矛盾するので、",
+                        " と仮定すると、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+2&=s\cdot s
+&&\bigl(\because\ \blkref{claim_sqrt_two_exists}\bigr)\\
+&=0\cdot0
+&&\bigl(\because\ s=0\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "となり、上で示した ",
+                        math(String.raw`2\ne0`),
+                        " に矛盾するので、",
                         math(String.raw`s\ne0`),
                         " である。",
                         math(String.raw`\overline{\mathbb{Q}}`),

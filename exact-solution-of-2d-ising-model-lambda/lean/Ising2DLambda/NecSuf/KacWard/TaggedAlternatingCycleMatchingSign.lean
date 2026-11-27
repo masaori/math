@@ -259,12 +259,14 @@ theorem cycleMinima_iterate_surjective_necSuf {K : Type*} [Fintype K]
   refine ⟨minimum i, (mem_cycleMinimaOf minimum _).mpr ⟨i, rfl⟩, ?_⟩
   exact henum (minimum i) i (hmember i)
 
-include hτ in
-theorem cycleWords_complete_necSuf :
+theorem cycleWords_complete_necSuf (mate : J → J)
+    (hmate_ne : ∀ e, mate e ≠ e)
+    (hmate_inv : ∀ e, mate (mate e) = e)
+    (hτmate : ∀ i, (τ.val i).1 = mate i.1) :
     IsCompleteWord ((cycleWordsOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
     (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
     (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val).flatten ++
-      matchingPairWord (matchingPairOutsideEnumeration (perfectMatchingMate D) A)) := by
+      matchingPairWord (matchingPairOutsideEnumeration mate A)) := by
   constructor
   · rw [List.nodup_append]
     refine ⟨cycleWords_flatten_nodup_necSuf
@@ -305,14 +307,13 @@ theorem cycleWords_complete_necSuf :
           (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_le τ υ)
         exact horbit)
       Subtype.val_injective,
-      matchingPairOutsideEnumeration_nodup (perfectMatchingMate D) A
-        (perfectMatchingMate_ne D) (perfectMatchingMate_involutive D), ?_⟩
+      matchingPairOutsideEnumeration_nodup mate A hmate_ne hmate_inv, ?_⟩
     intro x hx y hy hxy
     subst hxy
-    apply matchingPairOutsideEnumeration_outside (perfectMatchingMate D) A
-      (perfectMatchingMate_involutive D) (fun e he => by
+    apply matchingPairOutsideEnumeration_outside mate A
+      hmate_inv (fun e he => by
         have h := (τ.val ⟨e, he⟩).2
-        rwa [hτ] at h) x hy
+        rwa [hτmate] at h) x hy
     obtain ⟨l, hl, hxl⟩ := List.mem_flatten.mp hx
     obtain ⟨m, _, rfl⟩ := List.mem_map.mp hl
     apply (cyclePoints_mem_component_necSuf A
@@ -362,18 +363,18 @@ theorem cycleWords_complete_necSuf :
                 hs.1 hs.2.1 i).mp hi
             exact ⟨r, hr, heq⟩)) xx
     · apply List.mem_append_right
-      have hout' := outside_mate_outside (perfectMatchingMate D) A
-        (perfectMatchingMate_involutive D)
+      have hout' := outside_mate_outside mate A
+        hmate_inv
         (fun e he => by
           have h := (τ.val ⟨e, he⟩).2
-          rwa [hτ] at h) x hx
-      rcases lt_or_gt_of_ne (perfectMatchingMate_ne D x).symm with hlt | hgt
-      · refine List.mem_flatMap.mpr ⟨(x, perfectMatchingMate D x), ?_, by simp⟩
+          rwa [hτmate] at h) x hx
+      rcases lt_or_gt_of_ne (hmate_ne x).symm with hlt | hgt
+      · refine List.mem_flatMap.mpr ⟨(x, mate x), ?_, by simp⟩
         exact List.mem_map.mpr ⟨x, (Finset.mem_sort _).mpr
           (Finset.mem_filter.mpr ⟨Finset.mem_univ _, hx, hlt⟩), rfl⟩
-      · let y := perfectMatchingMate D x
-        have hyx : perfectMatchingMate D y = x := perfectMatchingMate_involutive D x
-        refine List.mem_flatMap.mpr ⟨(y, perfectMatchingMate D y), ?_, by simp [hyx]⟩
+      · let y := mate x
+        have hyx : mate y = x := hmate_inv x
+        refine List.mem_flatMap.mpr ⟨(y, mate y), ?_, by simp [hyx]⟩
         exact List.mem_map.mpr ⟨y, (Finset.mem_sort _).mpr
           (Finset.mem_filter.mpr ⟨Finset.mem_univ _, hout', by rw [hyx]; exact hgt⟩), rfl⟩
 
@@ -417,7 +418,9 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
     exact cyclePoints_even_necSuf
       (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
       (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m hpos hev
-  · exact cycleWords_complete_necSuf D A τ υ hτ
+  · exact cycleWords_complete_necSuf A τ υ
+      (perfectMatchingMate D) (perfectMatchingMate_ne D)
+      (perfectMatchingMate_involutive D) hτ
   · intro c hc
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc
     obtain ⟨i, rfl⟩ := (mem_cycleMinimaOf _ _).mp ((Finset.mem_sort _).mp hm)
