@@ -857,9 +857,12 @@ v_p(a)-v_p(b)
 &&\bigl(\because\ \blkref{def_log_order_group}\text{ の }\Lambda\text{ の整数倍の定義}\bigr)
 \end{aligned}`),
                               paragraph([
-                                "であり、両辺は ",
-                                math(String.raw`\Lambda`),
-                                " の単位元（零写像）として等しい。ある ",
+                                "素数ごとの値が等しいので、",
+                              ]),
+                              displayMath(String.raw`\log(q^{0})=0\cdot\log q
+\qquad\bigl(\because\ \Lambda\text{ の元は素数から }\mathbb Z\text{ への写像（}\blkref{def_log_order_group}\text{）}\bigr)`),
+                              paragraph([
+                                "ある ",
                                 math(String.raw`k\in\mathbb{N}`),
                                 " について ",
                                 math(String.raw`\log(q^{\,k})=k\,\log q`),

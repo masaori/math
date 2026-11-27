@@ -323,17 +323,14 @@ theorem cycleWords_complete_necSuf (mate : J → J)
           (finitePermutationOrbit (matchingPairPermutation τ υ))
           (by
             intro i
-            let m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i
-            have horbit : i ∈ finitePermutationOrbit (matchingPairPermutation τ υ) m := by
-              have heq : finitePermutationOrbit (matchingPairPermutation τ υ) m =
-                  matchingPairComponent τ υ m := by
-                exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation_orbit_eq_component τ υ m
-              have hcomp : matchingPairComponent τ υ m = matchingPairComponent τ υ i :=
-                Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponent_basepoint
-                  τ.val υ.val τ.property.2 υ.property.2 i m
-                  (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ i)
-              rw [heq, hcomp]
-              exact Or.inl ⟨0, Or.inl rfl⟩
+            let σ := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation τ υ
+            let m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbitMinimum σ i
+            have hm : m ∈ Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit σ i :=
+              Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbitMinimum_mem σ i
+            have horbit : i ∈ Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit σ m := by
+              rw [Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_basepoint_necSuf σ i m hm]
+              exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_self_mem_necSuf σ i
+            rw [Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_eq_permutationOrbitMinimum τ υ i]
             exact horbit)
           (by
             intro m i hi
