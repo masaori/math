@@ -50,7 +50,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "単位行列" },
     labels: ["def_identity_matrix"],
-    lean: ["Ising2D.identity_matrix_apply", "Ising2D.tensorPow_one_apply_eq_identity_matrix"],
+    lean: ["Ising2D.identity_matrix_apply", "Ising2D.tensorPow_one_apply_eq_identity_matrix", "Ising2D.matrix_conf_one_apply_eq_identity_matrix"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),

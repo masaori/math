@@ -861,15 +861,19 @@ theorem Uflip_conj_pow (S : TensorPow M) (k : ℕ) :
   induction k with
   | zero =>
     calc Uflip M * S ^ 0 * UflipInv M
-        = Uflip M * UflipInv M := by rw [pow_zero, mul_one]
+        = Uflip M * UflipInv M := by
+          rw [(tensorPow_pow_zero_and_succ S).1, mul_one]  -- `def_matrix_power` の `A^0 := I`
       _ = 1 := Uflip_mul_inv
-      _ = (Uflip M * S * UflipInv M) ^ 0 := (pow_zero _).symm
+      _ = (Uflip M * S * UflipInv M) ^ 0 :=
+          (matrix_conf_pow_zero_and_succ _).1.symm      -- `def_matrix_power` の `A^0 := I`（`A → USU^{-1}`）
   | succ k ih =>
     calc Uflip M * S ^ (k + 1) * UflipInv M
-        = Uflip M * (S ^ k * S) * UflipInv M := by rw [pow_succ]
+        = Uflip M * (S ^ k * S) * UflipInv M := by
+          rw [(tensorPow_pow_zero_and_succ S).2 k]      -- `def_matrix_power` の `A^{m+1} := A^mA`
       _ = (Uflip M * S ^ k * UflipInv M) * (Uflip M * S * UflipInv M) := Uflip_conj_mul _ _
       _ = (Uflip M * S * UflipInv M) ^ k * (Uflip M * S * UflipInv M) := by rw [ih]
-      _ = (Uflip M * S * UflipInv M) ^ (k + 1) := (pow_succ _ _).symm
+      _ = (Uflip M * S * UflipInv M) ^ (k + 1) :=
+          ((matrix_conf_pow_zero_and_succ _).2 k).symm  -- `def_matrix_power` の `A^{m+1} := A^mA`（`A → USU^{-1}`）
 
 /-- 人手本文 `constant_c_value_even_sector` Step 2 の「共役は行列の積・和・スカラー倍を保ち」を
 `def_exp` の部分和 `∑_{k<n} (k!)^{-1} S^k` に当てたもの（和を保つのは分配律 `Uflip_conj_sum`）。

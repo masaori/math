@@ -211,7 +211,7 @@ theorem sigmaZ_mul_self (k : Fin M) : sigmaZ k * sigmaZ k = 1 :=
 人手は `M_col ≥ 2` から `M_col ≠ 1`（サイト `1` と `M_col` が異なること）を出し、11 行目で
 `distinct_site_pauli_matrices_commute` を引く。Lean はその具体版 `siteOp_mul_comm` に `firstSite ≠ lastSite` を渡す。 -/
 theorem epsilon_mul_boundaryG_sq (hM : 2 ≤ M) :
-    (epsilon M * boundaryG M (by omega)) ^ 2 = 1 := by
+    (epsilon M * boundaryG M (by omega)) ^ 2 = (1 : Matrix (Conf M) (Conf M) ℂ) := by
   have hM0 : M ≠ 0 := by omega
   have hne : firstSite M hM0 ≠ lastSite M hM0 := by
     -- `M_col ≥ 2` より `M_col ≠ 1`。サイト `1` と `M_col` の像 `1_ℤ`・`ι_{ℕ→ℤ}(M)`（`finIndexToZZ_firstSite`・`finIndexToZZ_lastSite`）が

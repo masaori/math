@@ -391,7 +391,6 @@ Ising2D.CheckFermiSetup.Qproj_mul_partialExpSum	Nat.factorial
 Ising2D.CheckFermiSetup.Qproj_mul_self	Finset
 Ising2D.CheckFermiSetup.Qproj_mul_self_step1	Finset
 Ising2D.CheckFermiSetup.Qproj_sq_eq_mul_self_step1	Finset
-Ising2D.CheckFermiSetup.Qproj_sq_eq_mul_self_step1	HPow.hPow@Ising2D.TensorPow,Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@NPow.toPow
 Ising2D.CheckFermiSetup.Qproj_sq_step1	Finset
 Ising2D.CheckFermiSetup.VprimeUnits	Units@Ising2D.TensorPow@Matrix.semiring
 Ising2D.CheckFermiSetup.VprimeUnits_inv	Inv.inv@Units@Units.instInv
@@ -1326,16 +1325,13 @@ Ising2D.Uflip_conj_expPartialSum	Finset.range
 Ising2D.Uflip_conj_expPartialSum	Finset.sum@Nat,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.Uflip_conj_expPartialSum	Finset.sum@Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.Uflip_conj_expPartialSum	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
-Ising2D.Uflip_conj_expPartialSum	HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@NPow.toPow
 Ising2D.Uflip_conj_expPartialSum	HSMul.hSMul@Complex,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.smul
 Ising2D.Uflip_conj_expPartialSum	Nat.cast@Complex@Complex.instNatCast
 Ising2D.Uflip_conj_expPartialSum	Nat.factorial
 Ising2D.Uflip_conj_matExp	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.Uflip_conj_mul	HMul.hMul@Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.Uflip_conj_mul	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
-Ising2D.Uflip_conj_mul	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.Uflip_conj_pow	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
-Ising2D.Uflip_conj_pow	HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@NPow.toPow
 Ising2D.Uflip_conj_sigmaX_eq_neg	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.Uflip_conj_sigmaY_of_even	Even@Nat@instAddNat
 Ising2D.Uflip_conj_sigmaY_of_even	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
@@ -2771,7 +2767,6 @@ Ising2D.epsilon_mul_V1plus	Real.cosh
 Ising2D.epsilon_mul_V1plus	Real.sinh
 Ising2D.epsilon_mul_Y_mul_Z_next_of_last	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.epsilon_mul_Y_mul_Z_next_of_last	HSMul.hSMul@Complex,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.smul
-Ising2D.epsilon_mul_boundaryG_sq	HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Ising2D.TensorPow@NPow.toPow
 Ising2D.epsilon_mul_sigmaZ_mul_sigmaZ	HMul.hMul@Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.epsilon_mul_sigmaZ_mul_sigmaZ	HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
 Ising2D.epsilon_projector_properties_image	Set
@@ -3642,7 +3637,6 @@ Ising2D.idempotent_sub_mem_ker	Matrix.mulVec@?,?,Complex@NonUnitalNonAssocRing.t
 Ising2D.idempotent_sub_mem_ker	Matrix@?,?,Complex
 Ising2D.idempotent_sub_mem_ker	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.identity_conjTranspose_tensorPow	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
-Ising2D.identity_conjTranspose_tensorPow	OfNat.ofNat@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],1@One.toOfNat1
 Ising2D.identity_matrix_entry_cases_tensorPow	ite@Complex,Eq@Fintype.decidablePiFintype
 Ising2D.identity_matrix_entry_eq_real_identity_entry	DecidableEq
 Ising2D.identity_matrix_entry_eq_real_identity_entry	Matrix@?,?,Complex
@@ -3660,7 +3654,6 @@ Ising2D.identity_matrix_two_eq_ofReal	Matrix.vecCons
 Ising2D.identity_matrix_two_eq_ofReal	Matrix.vecEmpty
 Ising2D.identity_matrix_two_transpose	Matrix.transpose
 Ising2D.identity_transpose_tensorPow	Matrix.transpose
-Ising2D.identity_transpose_tensorPow	OfNat.ofNat@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],1@One.toOfNat1
 Ising2D.idxOfSpin	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.idxOfSpin	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.idxOfSpin	Subtype.val
@@ -4645,9 +4638,7 @@ Ising2D.partition_function_sandwich_and_limit_in_N_row	Nat.cast@Real@Real.instNa
 Ising2D.partition_function_sandwich_and_limit_in_N_row	Real.log
 Ising2D.partition_function_sandwich_and_limit_in_N_row	nhds@Real@Real.pseudoMetricSpace
 Ising2D.partition_function_sandwich_physical	HPow.hPow@Real,Nat,Real@NPow.toPow
-Ising2D.partition_function_via_pauli_transfer_matrices	HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@NPow.toPow
 Ising2D.partition_function_via_pauli_transfer_matrices	Real.sinh
-Ising2D.partition_function_via_transfer_matrix	HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@NPow.toPow
 Ising2D.pauliComb_apply_00	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.pauliComb_apply_01	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.pauliComb_apply_01	OfNat.ofNat@Fin,1@Fin.instOfNat
@@ -5638,10 +5629,8 @@ Ising2D.smul_epsilon_mul_boundaryG_mul_smul_openChainD0	HMul.hMul@Matrix[Ising2D
 Ising2D.smul_epsilon_mul_boundaryG_mul_smul_openChainD0	HSMul.hSMul@Complex,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.smul
 Ising2D.smul_epsilon_mul_boundaryG_pow_of_even	Even@Nat@instAddNat
 Ising2D.smul_epsilon_mul_boundaryG_pow_of_even	HPow.hPow@Complex,Nat,Complex@NPow.toPow
-Ising2D.smul_epsilon_mul_boundaryG_pow_of_even	HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@NPow.toPow
 Ising2D.smul_epsilon_mul_boundaryG_pow_of_even	HSMul.hSMul@Complex,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.smul
 Ising2D.smul_epsilon_mul_boundaryG_pow_of_odd	HPow.hPow@Complex,Nat,Complex@NPow.toPow
-Ising2D.smul_epsilon_mul_boundaryG_pow_of_odd	HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@NPow.toPow
 Ising2D.smul_epsilon_mul_boundaryG_pow_of_odd	HSMul.hSMul@Complex,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.smul
 Ising2D.smul_epsilon_mul_boundaryG_pow_of_odd	Odd@Nat@Nat.instSemiring
 Ising2D.smul_matrix_tendsto	Filter.Tendsto

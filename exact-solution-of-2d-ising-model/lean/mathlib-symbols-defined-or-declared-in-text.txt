@@ -300,9 +300,16 @@ HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Real],Nat,Matrix[Ising2D.Conf,Ising2D
 # mathlib の冪も同じ帰納法 npowRec で定義されており、二つの式が定義を開くだけで成り立つことを補題一本 tensorPow_pow_zero_and_succ で示した
 # （DefinitionMatrixOperationsOverMultiIndices.lean。def_matrix_power の欄 lean に在る。通しの定理に繋がる matrix_power_exponent_law・
 # power_of_real_symmetric_complex_matrix_is_real_symmetric・matrix_pow_one_eq_self_tensorPow・matrix_pow_succ_transpose_apply_tensorPow が使う）。
-# 鍵は TensorPow と書いた冪だけを指す。Matrix (Conf M) (Conf M) ℂ と書いた冪（Matrix[Ising2D.Conf,Ising2D.Conf,Complex]）と、底と値で書き方の違う冪は、
-# その一致の補題の主張に要る Matrix と書いた単位行列と積の鍵がまだ許可の一覧に無いので載せない（状態台帳の行「行列とその演算」）。
 HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow	def_matrix_power
+# Matrix (Conf M) (Conf M) ℂ と書いた単位行列・積・冪（略記 TensorPow M と同じ型。mathlib の行列の積の値の型はこの書き方になるので、積の積や積の冪はこの鍵で数えられる）:
+# 一致の補題は TensorPow と書いた形と同じ証明で、matrix_conf_one_apply_eq_identity_matrix（def_identity_matrix）・matrix_conf_mul_apply_eq_mat_mult（mat_mult）・
+# matrix_conf_pow_zero_and_succ（def_matrix_power。npowRec の定義を開くだけ）を DefinitionMatrixOperationsOverMultiIndices.lean に置き、各定義のブロックの欄 lean に載せた。
+# TensorPow と書いた単位行列と積の補題はこの二本を略記で書き直したもので、通しの定理には二本を通して繋がる。冪の補題は通しの定理に繋がる Uflip_conj_pow の
+# (USU^{-1})^k の段で使う。底と値で書き方の違う冪（Qproj_sq_eq_mul_self_step1・epsilon_mul_boundaryG_sq）は主張の型の書き方を揃えて鍵から外した。
+# epsilon_mul_boundaryG_sq の (εG)^2 は、本文 epsilon_G_is_involution が主張の中で X^2 := XX と定めた冪で、Lean の段も sq でそれを開く（def_matrix_power を引く段ではない）。
+OfNat.ofNat@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],1@One.toOfNat1	def_identity_matrix
+HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	mat_mult
+HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@NPow.toPow	def_matrix_power
 # 実数の双線型値 x^⊤Py（Conf M の添字）: def_real_bilinear_value が x^⊤Py := Σ_{k=1}^{n} Σ_{l=1}^{n} x_k P_{kl} y_l と一つの記号として定める。
 # 未定義の記号の検査（UndefinedSymbols.lean）は、二つ目のベクトルが Matrix.mulVec の項である dotProduct（x ⬝ᵥ P *ᵥ y）を、二つのベクトルの dotProduct とは
 # 別の鍵 dotProduct[Matrix.mulVec]@… で数える。この鍵だけを載せ、x ⬝ᵥ y の形の dotProduct は載せない。ν^{-1} で番号へ移すと x ⬝ᵥ P *ᵥ y が本文の右辺の

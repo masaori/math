@@ -20,6 +20,8 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が `𝓘_M`�
 人手の番号 `k ∈ {1,…,n}` は Lean の `k : Fin n` を名前を付けた写像 `finIndexToZZ n` で送った値であり、`ν^{-1}` は Lean の
 `σ : Fin n → Conf M` で、`ν(σ(k)) = finIndexToZZ n k` によって定まる（`exists_inverse_of_kronecker_numbering`）。
 したがって人手の成分 `A_{ij}` は Lean の `A (σ i) (σ j)` である。
+単位行列・積・冪の一致の補題は、`Matrix (Conf M) (Conf M) ℂ` と書いた形（`matrix_conf_*`）を本体とし、`tensorPow_*` はそれを略記 `TensorPow M` で
+書き直したものである（mathlib の行列の積の値の型は `Matrix (Conf M) (Conf M) ℂ` と書かれるので、両方の書き方が主張に現れる）。
 
 - 単位行列は、成分の式が番号の上の `δ` を使うので、Lean の成分 `1 (σ i) (σ k)` が人手の右辺 `δ_{ik}`（本文の `δ_{ij}` の `j → k`）に等しいことを
   `ν^{-1}` の単射で示す（`tensorPow_one_apply_eq_identity_matrix`）。
@@ -96,24 +98,30 @@ theorem tensorPow_entries_by_kronecker_numbering (M : ℕ) :
     show C (Classical.choose (hsurj (σ i))) (Classical.choose (hsurj (σ k))) = C i k
     rw [hinj _ _ (Classical.choose_spec (hsurj (σ i))), hinj _ _ (Classical.choose_spec (hsurj (σ k)))]
 
-/-- **`def_identity_matrix`**: Lean の `TensorPow M` の単位行列の成分 `1 (ν^{-1}(i)) (ν^{-1}(k))` は、本文の
+/-- **`def_identity_matrix`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（略記 `TensorPow M`）の単位行列の成分 `1 (ν^{-1}(i)) (ν^{-1}(k))` は、本文の
 `(I_{Mat(n,ℂ)})_{ij} := δ_{ij}`（`n = 2^M`、`def_kronecker_delta`）の `j → k` の右辺に等しい（Lean だけの段の補題。冒頭の説明を見よ）。
 mathlib の単位行列の成分は `ν^{-1}(i) = ν^{-1}(k)` かどうかで決まり、`ν^{-1}` の単射によりそれは `i = k` かどうかと同じである。 -/
-theorem tensorPow_one_apply_eq_identity_matrix (M : ℕ) :
+theorem matrix_conf_one_apply_eq_identity_matrix (M : ℕ) :
     ∀ (n : ℕ) (σ : Fin n → Conf M), (∀ k, kroneckerNumbering (σ k) = finIndexToZZ n k) →
-      ∀ (i k : Fin n), (1 : TensorPow M) (σ i) (σ k) = kroneckerDelta i k := by
+      ∀ (i k : Fin n), (1 : Matrix (Conf M) (Conf M) ℂ) (σ i) (σ k) = kroneckerDelta i k := by
   intro n σ hσ i k
   by_cases hik : i = k
   · subst hik
-    calc (1 : TensorPow M) (σ i) (σ i)
+    calc (1 : Matrix (Conf M) (Conf M) ℂ) (σ i) (σ i)
         = 1 := Matrix.one_apply_eq _                       -- mathlib の単位行列の対角成分
       _ = kroneckerDelta i i := (kroneckerDelta_self i).symm  -- `def_kronecker_delta` の `i = k` の場合
   · -- `ν^{-1}` の単射: `ν(ν^{-1}(i)) = finIndexToZZ n i` と `finIndexToZZ n` の単射から
     have hσik : σ i ≠ σ k := fun h =>
       hik ((finIndexToZZ_bijective_onto_index_set n).1 i k (by rw [← hσ, ← hσ, h]))
-    calc (1 : TensorPow M) (σ i) (σ k)
+    calc (1 : Matrix (Conf M) (Conf M) ℂ) (σ i) (σ k)
         = 0 := Matrix.one_apply_ne hσik                    -- mathlib の単位行列の対角でない成分
       _ = kroneckerDelta i k := (kroneckerDelta_of_ne hik).symm  -- `def_kronecker_delta` の `i ≠ k` の場合
+
+/-- **`def_identity_matrix`**（`TensorPow M` と書いた形）: 上の補題を、`Matrix (Conf M) (Conf M) ℂ` の略記 `TensorPow M` で書いたもの。 -/
+theorem tensorPow_one_apply_eq_identity_matrix (M : ℕ) :
+    ∀ (n : ℕ) (σ : Fin n → Conf M), (∀ k, kroneckerNumbering (σ k) = finIndexToZZ n k) →
+      ∀ (i k : Fin n), (1 : TensorPow M) (σ i) (σ k) = kroneckerDelta i k :=
+  matrix_conf_one_apply_eq_identity_matrix M
 
 /-- **`def_matrix_scalar_multiple`**: Lean の `TensorPow M` のスカラー倍の成分は、本文の `(aA)_{ij} := a A_{ij}` を
 番号 `i = ν(I)`・`j = ν(K)` で読んだもの `(aA)_{IK} = a A_{IK}` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
@@ -145,13 +153,13 @@ theorem tensorPow_sub_apply {M : ℕ} (A B : TensorPow M) (I K : Conf M) :
     (A - B) I K = A I K - B I K :=
   rfl                                                       -- mathlib の行列の差は成分ごと
 
-/-- **`mat_mult`**: Lean の `TensorPow M` の積の成分を `ν^{-1}` で番号へ移すと、本文の `(AB)_{ik} := Σ_{j=1}^{n} A_{ij} B_{jk}`（`n = 2^M`）の
+/-- **`mat_mult`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（略記 `TensorPow M`）の積の成分を `ν^{-1}` で番号へ移すと、本文の `(AB)_{ik} := Σ_{j=1}^{n} A_{ij} B_{jk}`（`n = 2^M`）の
 右辺に等しい（Lean だけの段の補題。冒頭の説明を見よ）。mathlib の積の成分は `𝓘_M`（Lean の `Conf M`）の上の和で、それを番号の上の和へ移すのは
 `def_finite_sum_of_complex_numbers_over_multi_indices`（`finset_sum_conf_complex_eq_finite_sum_over_multi_indices`）である。 -/
-theorem tensorPow_mul_apply_eq_mat_mult (M : ℕ) :
+theorem matrix_conf_mul_apply_eq_mat_mult (M : ℕ) :
     ∀ (n : ℕ), (∀ I : Conf M, ∃ k : Fin n, kroneckerNumbering I = finIndexToZZ n k) →
       ∀ (σ : Fin n → Conf M), (∀ k, kroneckerNumbering (σ k) = finIndexToZZ n k) →
-        ∀ (A B : TensorPow M) (i k : Fin n),
+        ∀ (A B : Matrix (Conf M) (Conf M) ℂ) (i k : Fin n),
           (A * B) (σ i) (σ k) = ∑ j : Fin n, A (σ i) (σ j) * B (σ j) (σ k) := by
   intro n hord σ hσ A B i k
   calc (A * B) (σ i) (σ k)
@@ -159,6 +167,14 @@ theorem tensorPow_mul_apply_eq_mat_mult (M : ℕ) :
     _ = ∑ j : Fin n, A (σ i) (σ j) * B (σ j) (σ k) :=
         finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ _
                                                             -- `def_finite_sum_of_complex_numbers_over_multi_indices`
+
+/-- **`mat_mult`**（`TensorPow M` と書いた形）: 上の補題を、`Matrix (Conf M) (Conf M) ℂ` の略記 `TensorPow M` で書いたもの。 -/
+theorem tensorPow_mul_apply_eq_mat_mult (M : ℕ) :
+    ∀ (n : ℕ), (∀ I : Conf M, ∃ k : Fin n, kroneckerNumbering I = finIndexToZZ n k) →
+      ∀ (σ : Fin n → Conf M), (∀ k, kroneckerNumbering (σ k) = finIndexToZZ n k) →
+        ∀ (A B : TensorPow M) (i k : Fin n),
+          (A * B) (σ i) (σ k) = ∑ j : Fin n, A (σ i) (σ j) * B (σ j) (σ k) :=
+  matrix_conf_mul_apply_eq_mat_mult M
 
 /-- **`mat_mult`**（`𝓘_M` の添字の形）: `TensorPow M` の積の成分は `(AB)_{IK} = Σ_{J∈𝓘_M} A_{IJ} B_{JK}` である。
 `I = ν^{-1}(i)`・`K = ν^{-1}(k)` と書いて `tensorPow_mul_apply_eq_mat_mult` で番号の上の和にし、
@@ -247,6 +263,14 @@ theorem tensorPow_trace_apply {M : ℕ} (A : TensorPow M) :
 `npowRec`（`a^0 := 1`、`a^{m+1} := a^m * a`）で定義されているので、二つの式はどちらも定義を開くだけで成り立つ。 -/
 theorem tensorPow_pow_zero_and_succ {M : ℕ} (A : TensorPow M) :
     A ^ 0 = (1 : TensorPow M) ∧ ∀ m : ℕ, A ^ (m + 1) = A ^ m * A :=
+  ⟨rfl, fun _ => rfl⟩                                       -- mathlib の冪 `npowRec` の定義を開く
+
+/-- **`def_matrix_power`**（`K = ℂ`、`Mat(2^M, ℂ)` を `Matrix (Conf M) (Conf M) ℂ` と書いた形）: 上の補題と同じく、mathlib の冪は本文の
+`A^0 := I`、`A^{m+1} := A^m A` の二つの式を満たす。積と単位行列は `Matrix (Conf M) (Conf M) ℂ` の上のもので、本文との一致は
+`matrix_conf_mul_apply_eq_mat_mult`・`matrix_conf_one_apply_eq_identity_matrix` である。行列の積の値の型は mathlib では
+`Matrix (Conf M) (Conf M) ℂ` と書かれるので、積の冪（例: `(UAU^{-1})^k`）はこの形になる。 -/
+theorem matrix_conf_pow_zero_and_succ {M : ℕ} (A : Matrix (Conf M) (Conf M) ℂ) :
+    A ^ 0 = (1 : Matrix (Conf M) (Conf M) ℂ) ∧ ∀ m : ℕ, A ^ (m + 1) = A ^ m * A :=
   ⟨rfl, fun _ => rfl⟩                                       -- mathlib の冪 `npowRec` の定義を開く
 
 end Ising2D

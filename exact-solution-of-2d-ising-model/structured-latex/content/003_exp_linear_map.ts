@@ -1111,7 +1111,7 @@ s_i
     kind: "definition",
     title: { text: "行列の冪" },
     labels: ["def_matrix_power"],
-    lean: ["Ising2D.realMatrix_conf_pow_zero_and_succ", "Ising2D.tensorPow_pow_zero_and_succ"],
+    lean: ["Ising2D.realMatrix_conf_pow_zero_and_succ", "Ising2D.tensorPow_pow_zero_and_succ", "Ising2D.matrix_conf_pow_zero_and_succ"],
     statement: [
       paragraph([
         math(String.raw`K := \mathbb{R}`),
