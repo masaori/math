@@ -101810,9 +101810,9 @@ D_L^{a,b}(x)
 &&\bigl(\because\ (-1)^{0}=1\bigr)
 \end{aligned}`),
                         paragraph(["である。平方は"]),
-                        displayMath(String.raw`Q_L^{a,b}Q_L^{a,b}=D_L^{a,b}\quad(\because\ \blkref{claim_determinant_signed_even_subgraph_square}).`),
+                        displayMath(String.raw`Q_L^{a,b}Q_L^{a,b}=D_L^{a,b}\quad(\because\ \blkref{claim_determinant_signed_even_subgraph_square})`),
                         paragraph(["よって ", math(String.raw`Q_L^{a,b}`), " が平方根の存在証人である。一意性から"]),
-                        displayMath(String.raw`S_L^{a,b}=Q_L^{a,b}\quad(\because\ \blkref{claim_qbar_polynomial_square_root_unique}).`),
+                        displayMath(String.raw`S_L^{a,b}=Q_L^{a,b}\quad(\because\ \blkref{claim_qbar_polynomial_square_root_unique})`),
                       ],
                     },
                   }],
