@@ -28844,7 +28844,7 @@ q
 &=\iota(\nu(0_{\mathbb N}))\cdot\xi&&\bigl(\because\ c=0_{\mathbb N}\text{ の代入}\bigr)\\
 &=\iota(0_{\mathbb Q})\cdot\xi&&\bigl(\because\ \nu\text{ は零を保つ}\bigr)\\
 &=0_{\overline{\mathbb Q}}\cdot\xi&&\bigl(\because\ \iota\text{ は零を保つ}\bigr)\\
-&=0_{\overline{\mathbb Q}}&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr).
+&=0_{\overline{\mathbb Q}}&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr)
 \end{aligned}`),
                           paragraph(["次に零元が台集合に属することを、係数の組 ", math(String.raw`(0_{\mathbb Q},0_{\mathbb Q})\in\mathbb Q\times\mathbb Q`), " を用いて確かめる。"]),
                           displayMath(String.raw`\begin{aligned}
@@ -28852,7 +28852,7 @@ q
 &=0_{\overline{\mathbb Q}}+0_{\overline{\mathbb Q}}&&\bigl(\because\ \text{加法の単位元則}\bigr)\\
 &=0_{\overline{\mathbb Q}}+(0_{\overline{\mathbb Q}}\cdot s)&&\bigl(\because\ \text{零元との積}\bigr)\\
 &=\iota(0_{\mathbb Q})+(0_{\overline{\mathbb Q}}\cdot s)&&\bigl(\because\ \iota\text{ の零保存を第一項へ代入}\bigr)\\
-&=\iota(0_{\mathbb Q})+\iota(0_{\mathbb Q})\cdot s&&\bigl(\because\ \iota\text{ の零保存を第二項の係数へ代入}\bigr).
+&=\iota(0_{\mathbb Q})+\iota(0_{\mathbb Q})\cdot s&&\bigl(\because\ \iota\text{ の零保存を第二項の係数へ代入}\bigr)
 \end{aligned}`),
                           displayMath(String.raw`\begin{aligned}
 0_{\overline{\mathbb Q}}&\in Q_s&&\bigl(\because\ \text{直前の表示と }\blkref{def_quadratic_field_set}\bigr),\\
@@ -28865,7 +28865,7 @@ q
 \iota(\nu(c))&\in Q_s&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=\nu(c)\text{ へ適用}\bigr),\\
 \iota(\nu(c))&\in P_s&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=\nu(c)\text{ へ適用}\bigr),\\
 \iota(\nu(c))\cdot\xi&\in Q_s&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\bigr),\\
-\iota(\nu(c))\cdot\xi&\in P_s&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}\text{ と二因子の正錐への所属}\bigr).
+\iota(\nu(c))\cdot\xi&\in P_s&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}\text{ と二因子の正錐への所属}\bigr)
 \end{aligned}`),
                           paragraph(["どちらの場合も積は台集合に属し、零の場合は零元、正の場合は正錐の元である。全過程は自然数の場合分け、有理数の四則と順序、代数的数の加法・乗法だけで閉じ、実数体も複素数体も現れない。"]),
                         ],
