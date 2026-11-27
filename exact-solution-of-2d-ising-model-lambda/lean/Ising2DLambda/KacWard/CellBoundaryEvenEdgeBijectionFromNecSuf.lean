@@ -7,12 +7,7 @@ namespace Ising2DLambda.KacWard
 /-- The abstract finite-boundary argument specializes to planar cell boundaries. -/
 theorem cellBoundary_evenEdge_bijective_from_necSuf (cells : Finset GridCell)
     (hconnected : EdgeConnectedCellSet (↑cells : Set GridCell)ᶜ) :
-    Function.Bijective
-      (fun selected : {T : Finset GridCell // T ⊆ cells} =>
-        (⟨planeCellBoundary selected.1,
-          boundary_subset selected.1 cells selected.2,
-          boundary_even selected.1⟩ :
-          {E : Finset GridEdge // IsEvenCellEdgeSubset cells E})) := by
+    Function.Bijective (cellBoundaryEvenEdgeMap cells) := by
   have hclosed : ∀ selected, selected ⊆ cells →
       IsEvenCellEdgeSubset cells (planeCellBoundary selected) := by
     intro selected hsubset

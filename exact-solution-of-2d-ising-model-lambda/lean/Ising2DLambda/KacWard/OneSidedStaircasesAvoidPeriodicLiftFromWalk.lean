@@ -1,6 +1,8 @@
 import Ising2DLambda.KacWard.PeriodicPlaneLiftDistinctFromWalk
 import Ising2DLambda.KacWard.PeriodicLiftStepRepetition
 import Ising2DLambda.KacWard.IteratedTransverseStaircase
+import Ising2DLambda.KacWard.StaircaseFromBandTopAvoidsPeriodicPlaneLift
+import Ising2DLambda.KacWard.PeriodicPlaneLiftTransverseBounded
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -36,6 +38,30 @@ theorem oneSidedStaircasesFromWalk_avoid_periodicLift {L m : ℕ} [NeZero L]
   have hκbase : κ (S + c • windingShift L wv wh) = κ S := by
     simp [κ, windingTransverseCoordinate, Prod.smul_mk, windingShift]
     ring
+  -- 本文の `K_max(γ)`: 一周期の持ち上げ点の横断座標は `κ(S)` 以下である
+  -- （`claim_periodic_plane_lift_transverse_bounded` の剰余への還元で `hmax` を一周期へ移す）。
+  have hupper : ∀ r : ℤ, 0 ≤ r → r < ((m + 1 : ℕ) : ℤ) →
+      κ (planeLiftIntegerBase γ r) ≤ κ S := by
+    intro r hr0 hr1
+    have hpos : (0 : ℤ) < ((m + 1 : ℕ) : ℤ) := by omega
+    let i : ℕ := ((r - k₀) % ((m + 1 : ℕ) : ℤ)).toNat
+    have hi : ((i : ℕ) : ℤ) = (r - k₀) % ((m + 1 : ℕ) : ℤ) :=
+      Int.toNat_of_nonneg (Int.emod_nonneg _ (ne_of_gt hpos))
+    have hmod : (k₀ + (i : ℤ)) % ((m + 1 : ℕ) : ℤ) = r := by
+      rw [hi, Int.add_emod, Int.emod_emod_of_dvd _ (dvd_refl _), ← Int.add_emod]
+      rw [show k₀ + (r - k₀) = r by ring]
+      exact Int.emod_eq_of_lt hr0 hr1
+    have h := hmax i
+    change κ (periodicPlaneLift (m + 1) (planeLiftIntegerBase γ) L wv wh (k₀ + (i : ℤ))) ≤ κ S at h
+    rw [periodicPlaneLift_transverseCoordinate_eq_base, hmod] at h
+    exact h
+  have htpos : ∀ j : ℕ, 0 < j → j ≤ t * (wh.natAbs + wv.natAbs) → 1 ≤ t := by
+    intro j hj hjb
+    rcases Nat.eq_zero_or_pos t with h0 | h0
+    · subst h0
+      simp at hjb
+      omega
+    · exact h0
   constructor
   · intro i hi j hj heq
     change periodicPlaneLiftFromWalk γ (k₀ + i) =
@@ -56,23 +82,20 @@ theorem oneSidedStaircasesFromWalk_avoid_periodicLift {L m : ℕ} [NeZero L]
       rw [hbase] at heq
       have hinj := periodicPlaneLiftFromWalk_injective γ hγ hcontact hwind heq
       omega
-    · have hstep := (iteratedTransverseStaircase_lower_bound wh wv
-        (S + c • windingShift L wv wh) hwind).2.2.1 j
-      change κ (S + c • windingShift L wv wh) + (j : ℤ) ≤
-        κ (iteratedTransverseStaircase wh wv (S + c • windingShift L wv wh) j) at hstep
-      have htop := hmax i
-      change κ (periodicPlaneLiftFromWalk γ (k₀ + i)) ≤ κ S at htop
-      rw [heq] at htop
-      rw [hκbase] at hstep
-      omega
-  · intro i hi j hj _ heq
+    · -- 本文: 上り階段は基点 `Q_1` 以外で周期持ち上げと交わらない
+      -- （`claim_staircase_from_band_top_meets_lift_only_at_base`、`κ(Q_1) = κ(S)`）。
+      have hjpos : 0 < j := Nat.pos_of_ne_zero hj0
+      exact iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top
+        (m + 1) L (planeLiftIntegerBase γ) wv wh (S + c • windingShift L wv wh) (κ S)
+        hwind (le_of_eq hκbase.symm) (by omega) hupper t j
+        (htpos j hjpos (le_of_lt hj)) hjpos (le_of_lt hj) (k₀ + i) heq.symm
+  · intro i hi j hj hjb heq
     change periodicPlaneLiftFromWalk γ (k₀ + i) =
       iteratedTransverseStaircase wh wv S j at heq
-    have hstep := (iteratedTransverseStaircase_lower_bound wh wv S hwind).2.2.1 j
-    change κ S + (j : ℤ) ≤ κ (iteratedTransverseStaircase wh wv S j) at hstep
-    have htop := hmax i
-    change κ (periodicPlaneLiftFromWalk γ (k₀ + i)) ≤ κ S at htop
-    rw [heq] at htop
-    omega
+    -- 本文: 下り階段の頂点集合は `S` 以外で周期持ち上げと交わらない
+    -- （`claim_staircase_from_band_top_meets_lift_only_at_base` を基点 `S` へ当てる）。
+    exact iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top
+      (m + 1) L (planeLiftIntegerBase γ) wv wh S (κ S)
+      hwind le_rfl (by omega) hupper t j (htpos j hj hjb) hj hjb (k₀ + i) heq.symm
 
 end Ising2DLambda.KacWard

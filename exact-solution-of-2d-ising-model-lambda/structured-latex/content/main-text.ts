@@ -91309,6 +91309,7 @@ w&\in\mathcal V_{\square}(\{p\})\cap\mathcal V_{\square}(\{q\})
                         labels: ["claim_cell_boundary_even_edge_bijection"],
                         habitat: "Z",
                         lean: [
+                          "Ising2DLambda.KacWard.cellBoundaryEvenEdgeMap",
                           "Ising2DLambda.KacWard.cellBoundary_evenEdge_bijective",
                           "Ising2DLambda.NecSuf.KacWard.boundary_bijective_of_even_edge_preimages",
                           "Ising2DLambda.KacWard.cellBoundary_evenEdge_bijective_from_necSuf",
@@ -105737,9 +105738,7 @@ q^2+2q-1>0&\Longrightarrow Q_L^{0,0}(q)<0\ \text{かつ}\ Q_L^{a,b}(q)>0\quad((a
 1-2q-q^2&=-(q^2+2q-1)&&\bigl(\because\ \mathbb Q\text{ の加法逆元}\bigr).
 \end{aligned}`),
                   paragraph([
-                    ref("claim_mode_inversion_orbit_cardinality"),
-                    " より一元軌道の元は ", math(String.raw`\{1,-1\}^2`),
-                    " に属する。", math(String.raw`(1,1)`), " がモード集合に属する条件を計算する。",
+                    math(String.raw`(1,1)`), " がモード集合に属する条件を計算する。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 (1,1)\in\mathcal U_a\times\mathcal W_b
@@ -105751,8 +105750,8 @@ q^2+2q-1>0&\Longrightarrow Q_L^{0,0}(q)<0\ \text{かつ}\ Q_L^{a,b}(q)>0\quad((a
 &&\bigl(\because\ (-1)^0=1,\ (-1)^1=-1\ne1\text{（}\mathbb Q\text{ の四則}\text{）と }\blkref{def_spin_structures}\bigr).
 \end{aligned}`),
                   paragraph([
-                    math(String.raw`1^{-1}=1`), " なので ",
-                    ref("claim_mode_inversion_orbit_cardinality"), " の軌道は ",
+                    math(String.raw`1^{-1}=1`), " なので、", ref("claim_signed_even_subgraph_orbit_product"),
+                    " の軌道の集合に現れる軌道は ",
                     math(String.raw`O(1,1)=\{(1,1)\}`), " である。",
                     "軌道 ", math(String.raw`O(\varpi,\varsigma)\in\mathfrak M_L^{a,b}`), " が ",
                     math(String.raw`(1,1)`), " を含めば、同じ定義から ",

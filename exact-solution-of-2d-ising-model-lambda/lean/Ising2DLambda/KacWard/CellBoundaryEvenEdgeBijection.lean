@@ -35,15 +35,19 @@ theorem boundary_even (selected : Finset GridCell) :
     by_cases h₄ : (true, (r - 1, c)) ∈ planeCellBoundary selected <;>
     simp_all <;> decide
 
+/-- 本文の写像 `T ↦ B_□(T)`（`T ⊆ S`）。値が `E_□(S)` に含まれる偶辺集合であることは
+`boundary_subset`・`boundary_even`。 -/
+def cellBoundaryEvenEdgeMap (cells : Finset GridCell)
+    (selected : {T : Finset GridCell // T ⊆ cells}) :
+    {E : Finset GridEdge // IsEvenCellEdgeSubset cells E} :=
+  ⟨planeCellBoundary selected.1,
+    boundary_subset selected.1 cells selected.2,
+    boundary_even selected.1⟩
+
 /-- Boundary is a bijection from subsets of a hole-free cell set to even edge subsets. -/
 theorem cellBoundary_evenEdge_bijective (cells : Finset GridCell)
     (hconnected : EdgeConnectedCellSet (↑cells : Set GridCell)ᶜ) :
-    Function.Bijective
-      (fun selected : {T : Finset GridCell // T ⊆ cells} =>
-        (⟨planeCellBoundary selected.1,
-          boundary_subset selected.1 cells selected.2,
-          boundary_even selected.1⟩ :
-          {E : Finset GridEdge // IsEvenCellEdgeSubset cells E})) := by
+    Function.Bijective (cellBoundaryEvenEdgeMap cells) := by
   constructor
   · intro a b h
     apply Subtype.ext
