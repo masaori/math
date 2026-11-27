@@ -4494,7 +4494,7 @@ G(XY)
     kind: "claim",
     title: { text: "可換な行列のスカラー倍とも可換" },
     labels: ["commuting_with_scalar_multiple"],
-    lean: ["Ising2D.matrix_mul_smul_comm_of_commute"],
+    lean: ["Ising2D.matrix_mul_smul_comm_of_commute", "Ising2D.mul_smul_comm_of_commute_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -4528,6 +4528,7 @@ G(cX)
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明が「スカラー倍との可換性」を根拠なしで使っていたので足した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の十五単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.mul_smul_comm_of_commute_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowCommutingWithScalarMultiple.lean。この証明の 3 段を、引く主張の Mat(2^M, ℂ) の具体版で辿る）。",
       ],
     },
   },

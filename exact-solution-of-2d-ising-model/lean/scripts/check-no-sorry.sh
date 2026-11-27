@@ -2101,6 +2101,7 @@ targets=(
   Ising2D.matrix_mul_smul_comm_of_commute
   Ising2D.matrix_mul_smul_comm_of_commute_of_necSuf
   Ising2D.mul_smul_comm_of_commute_tensorPow
+  Ising2D.mul_smul_comm_of_commute_tensorPow_of_necSuf
   "Ising2D.NecSuf.zero_smul_matrix'"
   "Ising2D.NecSuf.add_comm_matrix'"
   Ising2D.matrix_zero_smul
