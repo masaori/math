@@ -39357,7 +39357,11 @@ d&(e=a\text{ のとき})\\
                             math(String.raw`\varrho`),
                             " は単射）、有限積の添字をこの全単射で付け替えて",
                           ]),
-                          displayMath(String.raw`\prod_{k\in S}X^{(n)}_{\varrho(k)}=\prod_{i\in\varrho(S)}X^{(n)}_i\qquad(S\subseteq\mathbb{N}_{<n})`),
+                          displayMath(String.raw`\begin{aligned}
+\prod_{k\in S}X^{(n)}_{\varrho(k)}
+&=\prod_{i\in\varrho(S)}X^{(n)}_i
+&&\bigl(\because\ \blkref{def_qbar_variable_permutation}\text{ の }\varrho|_S:S\to\varrho(S)\text{ は全単射であり、有限積を再添字付けする}\bigr)
+\end{aligned}\qquad(S\subseteq\mathbb{N}_{<n})`),
                           paragraph([
                             "である。第二に、",
                             math(String.raw`|S|=j`),

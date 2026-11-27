@@ -15,6 +15,7 @@ import Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.KacWard.AlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairColoring
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEvenOrbit
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PeriodicTwoWayOrbit
 import Ising2DLambda.NecSuf.KacWard.MatchingPairOutsideEnumeration
 
 namespace Ising2DLambda.NecSuf.KacWard
@@ -271,10 +272,15 @@ theorem cycleWords_complete_necSuf :
       (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val
       (by
         intro m r s hr hs hrs
-        have hinj := (finitePermutationOrbitEnumeration_bijective
-          (matchingPairPermutation τ υ) m).1
-        have h := @hinj ⟨r, hr⟩ ⟨s, hs⟩ (Subtype.ext (Subtype.ext hrs))
-        exact congrArg Fin.val h)
+        let σ := matchingPairPermutation τ υ
+        have hspec := finitePermutationMinimalPeriod_spec σ m
+        have hmin : ∀ n : ℕ, 0 < n → σ^[n] m = m →
+            finitePermutationMinimalPeriod σ m ≤ n := by
+          intro n hn heq
+          exact hspec.2.2 n hn heq
+        exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_injOn_of_no_short_return_necSuf
+          σ σ.injective m (finitePermutationMinimalPeriod σ m) hmin
+          hr hs (Subtype.val_injective hrs))
       (by
         intro i
         exact (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
@@ -336,9 +342,13 @@ theorem cycleWords_complete_necSuf :
             exact horbit)
           (by
             intro m i hi
-            obtain ⟨r, hr⟩ := (finitePermutationOrbitEnumeration_bijective
-              (matchingPairPermutation τ υ) m).2 ⟨i, hi⟩
-            exact ⟨r.val, r.isLt, congrArg Subtype.val hr⟩)) xx
+            let σ := matchingPairPermutation τ υ
+            have hs := finitePermutationMinimalPeriod_spec σ m
+            obtain ⟨r, hr, heq⟩ :=
+              (Ising2DLambda.NecSuf.AlgebraicEigenvalue.twoWayOrbit_mem_iff_lt_period_necSuf
+                σ σ.symm σ.symm_apply_apply m (finitePermutationMinimalPeriod σ m)
+                hs.1 hs.2.1 i).mp hi
+            exact ⟨r, hr, heq⟩)) xx
     · apply List.mem_append_right
       have hout' := outside_mate_outside (perfectMatchingMate D) A
         (perfectMatchingMate_involutive D)
