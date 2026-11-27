@@ -848,7 +848,6 @@ Ising2D.smul_mul_matrix
 Ising2D.smul_neg_matrix
 Ising2D.smul_neg_matrix_apply
 Ising2D.smul_sub_smul_matrix
-Ising2D.smul_sub_smul_matrix_apply
 Ising2D.specific_heat_log_divergence
 Ising2D.specific_heat_log_divergence_dist
 Ising2D.specific_heat_ratio_tendsto

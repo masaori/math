@@ -2205,7 +2205,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     kind: "claim",
     title: { text: "一つの行列のスカラー倍の差は係数の差によるスカラー倍に等しい" },
     labels: ["difference_of_scalar_multiples_of_one_matrix"],
-    lean: ["Ising2D.smul_sub_smul_matrix", "Ising2D.smul_sub_smul_matrix_apply"],
+    lean: ["Ising2D.smul_sub_smul_matrix", "Ising2D.smul_sub_smul_matrix_apply", "Ising2D.smul_sub_smul_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -2261,6 +2261,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
       status: "added",
       notes: [
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。eigenvalues_of_check_Vprime の Step 1 が γ(θ̃_μ)(ε_μQ̌_ε − ½Q̌_ε) を (γ(θ̃_μ)(ε_μ − ½))Q̌_ε へまとめる段を「有限和のくくり出し」と名前だけで根拠にしていたので、係数の差をくくり出す段を引けるよう足した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の十二単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.smul_sub_smul_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowDifferenceOfScalarMultiplesOfOneMatrix.lean。番号 ν^{-1} で Fin n の行列へ移し、この証明の成分の鎖を引く）。",
       ],
     },
   },
