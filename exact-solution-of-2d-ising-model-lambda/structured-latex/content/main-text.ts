@@ -21117,6 +21117,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
                     verification: ["sagemath/check/matching-pair-word-orientation-sign"],
                     lean: [
                       "Ising2DLambda.AlgebraicEigenvalue.matchingPairWordOrientationSign",
+                      "Ising2DLambda.AlgebraicEigenvalue.matchingPairWordOrientationSign_forEnumeration",
                       "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWordOrientationSign",
                       "Ising2DLambda.AlgebraicEigenvalue.matchingPairWordOrientationSign_from_necSuf",
                     ],
@@ -21241,7 +21242,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
                       paragraph(["が成り立つ。列挙との二つの一致は仮定であり、実際の二色のマッチングについては次の節で示す。空集合ではすべての列・積・符号は空の値一である。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_matching_pair_word_orientation_sign"), " を二つの向き付き列挙へ適用する。その証明の各対の反転は ", ref("claim_matching_word_sign_swap"), " による。仮定した列の一致を代入すると"]),
+                      paragraph([ref("claim_matching_pair_word_orientation_sign"), " を二つの向き付き列挙へ適用する。仮定した列の一致を代入すると"]),
                       displayMath(String.raw`\begin{aligned}
 \varepsilon(W_\tau(w))&=\alpha_{\mathcal D}\operatorname{sgn}(\mathcal D)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr)\\
 \varepsilon(W_\upsilon(w))&=\alpha_{\mathcal E}\operatorname{sgn}(\mathcal E)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr).
@@ -101212,15 +101213,15 @@ M_{\mathcal D_0,\varnothing}(x)
                     proof: [
                       paragraph([ref("claim_tagged_difference_cycle_cover"), " により交互閉路の点集合は互いに素で、全活動点を覆う。", ref("claim_tagged_symmetric_difference_degree"), " より活動点以外の ", math(String.raw`D`), " の対は ", math(String.raw`\mathcal D_0`), " の長い対と一致する。両マッチングに共通する対を昇順に並べ、各閉路の後ろへ同じ順で付ける。" ]),
                       paragraph(["各閉路 ", math(String.raw`C`), " について、", ref("claim_tagged_difference_alternating_cycle"), " と ", ref("def_matching_pair_successor"), " により ", math(String.raw`(c_C(2r),c_C(2r+1))`), " は ", math(String.raw`D`), " の対の向き付き列挙であり、", math(String.raw`(c_C(2r+1),c_C(2r+2))`), " は ", math(String.raw`\mathcal D_0`), " の対の向き付き列挙である。共通する対は両列挙で同じ昇順の向きに取る。" ]),
-                      paragraph(["閉路を同じ順で並べて ", math(String.raw`D`), " の向き付き端点列を ", math(String.raw`W_D`), "、基準マッチングの列を ", math(String.raw`W_0`), " と書く。各列の対の第一端点を選んだ集合は各対から一端点だけを含むので、", ref("claim_matching_pair_word_orientation_sign"), " を適用できる。各閉路で後者の部分列は前者の ", math(String.raw`2k_C`), " 個の文字を一つ左へ巡回移動したものなので、その置換の符号は ", math(String.raw`(-1)^{2k_C-1}=-1`), " である。共通対の部分列は変わらない。", ref("def_matching_word_sign"), " に従って端点列の符号を ", math(String.raw`\varepsilon`), " と書くと、"]),
+                      paragraph(["閉路を同じ順で並べて ", math(String.raw`D`), " の向き付き端点列を ", math(String.raw`W_D`), "、基準マッチングの列を ", math(String.raw`W_0`), " と書く。各列の対の第一端点を選んだ集合は各対から一端点だけを含むので、", ref("claim_matching_pair_word_orientation_sign"), " を適用できる。各閉路で後者の部分列は前者の ", math(String.raw`2k_C`), " 個の文字を一つ左へ巡回移動したもの、すなわち先頭の一文字を隣接交換 ", math(String.raw`2k_C-1`), " 回で末尾へ送ったものなので、", ref("claim_matching_word_sign_swap"), " を各交換に適用して符号は ", math(String.raw`(-1)^{2k_C-1}=-1`), " 倍になる。共通対の部分列は変わらない。", ref("def_matching_word_sign"), " に従って端点列の符号を ", math(String.raw`\varepsilon`), " と書くと、"]),
                       displayMath(String.raw`\begin{aligned}
 \varepsilon(W_0)
 &=\prod_{C\in\mathcal C}(-1)^{2k_C-1}\,\varepsilon(W_D)
-&&\bigl(\because\ \text{閉路ごとの巡回移動と置換符号の積}\bigr)\\
+&&\bigl(\because\ \text{閉路ごとに }2k_C-1\text{ 回の }\blkref{claim_matching_word_sign_swap}\bigr)\\
 &=(-1)^{|\mathcal C|}\varepsilon(W_D)
 &&\bigl(\because\ 2k_C-1\text{ は奇数}\bigr).
 \end{aligned}`),
-                      paragraph([ref("claim_matching_pair_word_orientation_sign"), " の向き直しの等式を各列挙へ適用する。対の列挙順序は ", ref("claim_perfect_matching_sign_enumeration_independent"), " で符号に影響しない。共通対の向きは両側で ", math(String.raw`+1`), " なので、"]),
+                      paragraph([ref("claim_matching_pair_word_orientation_sign"), " の向き直しの等式を、各列の対を昇順へ直した ", math(String.raw`D`), "・", math(String.raw`\mathcal D_0`), " の昇順対の列挙へ適用する（その主張は任意の列挙について述べている）。共通対の向きは両側で ", math(String.raw`+1`), " なので、"]),
                       displayMath(String.raw`\begin{aligned}
 \alpha_0\operatorname{sgn}(\mathcal D_0)
 &=\varepsilon(W_0)
@@ -101238,7 +101239,7 @@ M_{\mathcal D_0,\varnothing}(x)
 &=(-1)^{|\mathcal C|}\alpha_0\alpha_D\operatorname{sgn}(D)^2
 &&\bigl(\because\ \text{上の端点列の符号の等式}\bigr)\\
 &=(-1)^{|\mathcal C|}\alpha_0\alpha_D
-&&\bigl(\because\ \operatorname{sgn}(D)^2=1\bigr).
+&&\bigl(\because\ \blkref{claim_perfect_matching_sign_enumeration_independent}\text{ により }\operatorname{sgn}(D)\in\{-1,1\}\bigr).
 \end{aligned}`),
                       paragraph(["空集合でも同じ空積の計算が成り立つ。"]),
                     ],

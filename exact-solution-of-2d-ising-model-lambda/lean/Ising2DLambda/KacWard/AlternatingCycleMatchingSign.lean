@@ -5,7 +5,7 @@
 
   人手証明                                              このファイル
   対の第一端点を選んだ向き直しの等式                      `orientedPairWord_sign`
-  （claim_matching_pair_word_orientation_sign と列挙独立性）
+  （claim_matching_pair_word_orientation_sign を昇順へ直した対の列挙へ適用）
   閉路ごとの一文字の巡回移動の符号 (-1)^{2k_C-1}          `matchingWordSign_rotate_one`
   ε(W₀) = (-1)^{|𝒞|} ε(W_D) の二等号                     `matchingWordSign_rotate_cycles`
   α₀ sgn(𝒟₀) = ε(W₀) = (-1)^{|𝒞|} ε(W_D) = (-1)^{|𝒞|} α_D sgn(D)
@@ -17,7 +17,7 @@
 必要十分版は呼ばない。住処は有限集合と ℤ で、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.KacWard.ReferenceMatchingConstantTerm
-import Ising2DLambda.AlgebraicEigenvalue.MatchingPairWordOrientationSign
+import Ising2DLambda.AlgebraicEigenvalue.MatchingPairSignComposition
 
 namespace Ising2DLambda.KacWard
 
@@ -152,9 +152,9 @@ theorem ascendingPairs_enumeration (D : PerfectMatching J) (l : List (J × J))
         (hu _ ⟨hq'.2, by simp⟩).symm
 
 /-- 本文の向き直しの等式を任意の向き付き対の列へ当てる。
-    ε(端点列) = (∏ η) sgn(D)。claim_matching_pair_word_orientation_sign の具体版
-    `matchingOrientationSignAux` を、各対の第一端点を選んだ集合 S で使い、
-    列挙独立性 `perfectMatchingSign_enumeration_independent` で sgn(D) へ移す。 -/
+    ε(端点列) = (∏ η) sgn(D)。昇順へ直した対の列は D の列挙なので、
+    claim_matching_pair_word_orientation_sign の具体版
+    `matchingPairWordOrientationSign_forEnumeration` を、各対の第一端点を選んだ集合 S で使う。 -/
 theorem orientedPairWord_sign (D : PerfectMatching J) (l : List (J × J))
     (hc : IsCompleteWord (matchingPairWord l))
     (hD : ∀ p ∈ l, ({p.1, p.2} : Set J) ∈ D.val) :
@@ -177,10 +177,8 @@ theorem orientedPairWord_sign (D : PerfectMatching J) (l : List (J × J))
       have hpq := pair_eq_of_shared_point hc.1 hp hq (x := p.2) (by simp) (by simp [hqe])
       subst hpq
       exact hne p hp hqe
-  have haux := matchingOrientationSignAux S (l.map ascendingPair) []
-    (by simpa using matchingEnumeration_complete D _ hen)
-  simp only [List.nil_append] at haux
-  rw [perfectMatchingSign_enumeration_independent D _ hen] at haux
+  have haux := matchingPairWordOrientationSign_forEnumeration D (l.map ascendingPair) hen S
+  simp only [orientationSign] at haux
   convert haux using 2
   · rw [List.flatMap_map, matchingPairWord]
     apply List.flatMap_congr
@@ -199,18 +197,20 @@ theorem orientedPairWord_sign (D : PerfectMatching J) (l : List (J × J))
     · simp only [Function.comp, if_neg (fun hm => h ((hS p hp).mp hm)), pairOrientation, if_neg h]
 
 /-- 一文字を列 c の後ろへ送る |c| 回の隣接交換。符号は (-1)^{|c|} 倍になる。 -/
-theorem matchingWordSign_move_back (a : J) : ∀ (c u v : List J),
+theorem matchingWordSign_move_back (a : J) (c : List J) : ∀ (u v : List J),
     IsCompleteWord (u ++ a :: (c ++ v)) →
     matchingWordSign (u ++ (c ++ a :: v)) =
-      (-1) ^ c.length * matchingWordSign (u ++ a :: (c ++ v))
-  | [], u, v, _ => by simp
-  | b :: c, u, v, h => by
+      (-1) ^ c.length * matchingWordSign (u ++ a :: (c ++ v)) := by
+  induction c with
+  | nil => intro u v _; simp
+  | cons b c ih =>
+      intro u v h
       have h' := completeWord_swap u a b (c ++ v) h
-      have ih := matchingWordSign_move_back a c (u ++ [b]) v (by simpa using h')
+      have ih' := ih (u ++ [b]) v (by simpa using h')
       have hs := matchingWordSign_swap u a b (c ++ v) h
-      simp only [List.append_assoc, List.cons_append, List.nil_append] at ih
+      simp only [List.append_assoc, List.cons_append, List.nil_append] at ih'
       simp only [List.cons_append, List.length_cons]
-      rw [ih, hs, pow_succ]
+      rw [ih', hs, pow_succ]
       ring
 
 /-- 本文の巡回移動の符号。一つ左へ巡回移動した点列は、置換の符号 (-1)^{|c|-1} を掛ける。 -/
