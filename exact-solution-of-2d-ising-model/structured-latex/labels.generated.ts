@@ -475,6 +475,7 @@ export const ALL_LABELS = [
   "identity_matrix_of_order_two_has_real_entries",
   "image_of_matrix_is_subspace",
   "inclusion_nn_to_cc",
+  "inclusion_nn_to_rr",
   "inclusion_nn_to_zz",
   "inclusion_nn_to_zz_image_is_nonnegative",
   "inclusion_nn_to_zz_preserves_order",

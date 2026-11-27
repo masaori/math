@@ -3346,6 +3346,42 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_definition_inclusion_nn_to_rr",
+    kind: "definition",
+    title: { tex: String.raw`\mathbb{N}\to\mathbb{R}\text{の包含写像}` },
+    labels: ["inclusion_nn_to_rr"],
+    lean: ["Ising2D.inclusionNNtoRR", "Ising2D.inclusionNNtoRR_eq_natCast"],
+    statement: [
+      paragraph([
+        ref("inclusion_nn_to_zz"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}`),
+        " と ",
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        " を合成して、写像 ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{R}}:\mathbb{N}\to\mathbb{R}`),
+        " を",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{N}\to\mathbb{R}}(n) := \iota_{\mathbb{Z}\to\mathbb{R}}(\iota_{\mathbb{N}\to\mathbb{Z}}(n))
+\qquad (n \in \mathbb{N})`),
+      paragraph([
+        "と定める。これを ",
+        math(String.raw`\mathbb{N}`),
+        " から ",
+        math(String.raw`\mathbb{R}`),
+        " への包含写像と呼ぶ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-27（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」の残りの Nat.cast@Real）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum が略記 n_ℝ := (n_ℤ)_ℝ（n ∈ ℕ）を置いていたが、この写像を定めるブロックが無かった。antiperiodic_exp_sum の略記をこのブロックの ι_{ℕ→ℝ} に結び付けた（定義の右辺は元の略記と同じ合成である）。Lean の具体版は ℤ_{≥0} の元を ℕ の元 n の像 ι_{ℕ→ℤ}(n) として書き、それを ℝ へ送るのに Lean の Nat.cast を使うので、その写像を名前の付いた二つの写像の合成として定めた。Lean の具体版は Ising2D.inclusionNNtoRR（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/DefinitionInclusionOfNaturalNumbersIntoRealNumbers.lean。同じ合成で定める）で、Lean の Nat.cast（ℕ → ℝ）との一致は補題一本 Ising2D.inclusionNNtoRR_eq_natCast である。定義であり証明を持たないので、SageMath の検算は置かない。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_definition_inclusion_nn_to_cc",
     kind: "definition",
     title: { tex: String.raw`\mathbb{N}\to\mathbb{C}\text{の包含写像}` },

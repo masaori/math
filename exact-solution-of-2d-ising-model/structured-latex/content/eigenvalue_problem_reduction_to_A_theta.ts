@@ -1798,7 +1798,11 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         ref("inclusion_zz_to_rr"),
         "）を用いる。また、",
         ref("inclusion_rr_to_cc"),
-        " の実数から複素数への包含と、自然数を複素数へ送る包含 ",
+        " の実数から複素数への包含と、自然数を実数へ送る包含 ",
+        math(String.raw`\iota_{\mathbb N\to\mathbb R}:\mathbb N\to\mathbb R`),
+        "（",
+        ref("inclusion_nn_to_rr"),
+        "）と、自然数を複素数へ送る包含 ",
         math(String.raw`\iota_{\mathbb N\to\mathbb C}:\mathbb N\to\mathbb C`),
         "（",
         ref("inclusion_nn_to_cc"),
@@ -1807,7 +1811,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
       displayMath(
         String.raw`n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\quad(n\in\mathbb N),
 \qquad a_{\mathbb R}:=\iota_{\mathbb Z\to\mathbb R}(a)\quad(a\in\mathbb Z),
-\qquad n_{\mathbb R}:=(n_{\mathbb Z})_{\mathbb R},
+\qquad n_{\mathbb R}:=\iota_{\mathbb N\to\mathbb R}(n),
 \qquad a_{\mathbb C}:=(a_{\mathbb R})_{\mathbb C},
 \qquad n_{\mathbb C}:=\iota_{\mathbb N\to\mathbb C}(n)`,
       ),
@@ -2105,13 +2109,13 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
 &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb N}\ \text{の定義}\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
 ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}
 &=(M_{\mathrm{col}})_{\mathbb R}
-&&\bigl(\because\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
+&&\bigl(\because\ \text{略記}\ n_{\mathbb R}:=\iota_{\mathbb N\to\mathbb R}(n)\ \text{と、}\blkref{inclusion_nn_to_rr}\ \text{の定義}\ \iota_{\mathbb N\to\mathbb R}(n)=\iota_{\mathbb Z\to\mathbb R}(n_{\mathbb Z})\ (n\to(M_{\mathrm{col}})_{\mathbb N})\ \text{と、}((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
 (2M_{\mathrm{col}})_{\mathbb R}
 &=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}
 &&\bigl(\because\ \text{上の鎖}\ (2_{\mathbb Z}\cdot_{\mathbb Z}a)_{\mathbb R}=2_{\mathbb R}\cdot_{\mathbb R}a_{\mathbb R}\ (a\to M_{\mathrm{col}})\bigr)\\
 (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}
 &=((2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z})_{\mathbb R}
-&&\bigl(\because\ \text{略記}\ n_{\mathbb R}:=(n_{\mathbb Z})_{\mathbb R}\bigr)\\
+&&\bigl(\because\ \text{略記}\ n_{\mathbb R}:=\iota_{\mathbb N\to\mathbb R}(n)\ \text{と、}\blkref{inclusion_nn_to_rr}\ \text{の定義}\ \iota_{\mathbb N\to\mathbb R}(n)=\iota_{\mathbb Z\to\mathbb R}(n_{\mathbb Z})\ (n\to2(M_{\mathrm{col}})_{\mathbb N})\bigr)\\
 &=(2_{\mathbb Z}\cdot_{\mathbb Z}M_{\mathrm{col}})_{\mathbb R}
 &&\bigl(\because\ (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=2_{\mathbb Z}\cdot_{\mathbb Z}M_{\mathrm{col}}\bigr)\\
 &=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}
@@ -2568,6 +2572,7 @@ k
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」の残りの Nat.cast@Real）: 前置きの略記 n_ℝ（n ∈ ℕ）を、同じ合成 (n_ℤ)_ℝ を定める定義のブロック inclusion_nn_to_rr の ι_{ℕ→ℝ}(n) に結び付けた。証明の ((M_col)_ℕ)_ℝ = (M_col)_ℝ の行と (2(M_col)_ℕ)_ℝ = ((2(M_col)_ℕ)_ℤ)_ℝ の行の根拠に、この略記と inclusion_nn_to_rr の定義（n の置き換えを添えて）を blkref で書いた。主張と証明の式は変えていない。",
         "2026-11-27（Lean の点検の直し、未定義の記号の行「ℂ とその演算」の残りの Nat.cast@Complex）: 前置きの略記 n_ℂ（n ∈ ℕ）を、同じ合成 ((n_ℤ)_ℝ)_ℂ を定める定義のブロック inclusion_nn_to_cc の ι_{ℕ→ℂ}(n) に結び付けた。主張と証明の式は変えていない。証明の ((M_col)_ℕ)_ℂ = (M_col)_ℂ と (2(M_col)_ℕ)_ℂ = (2M_col)_ℂ の行は、根拠（inclusion_nn_to_cc の定義と ((M_col)_ℕ)_ℤ = M_col）をまだ blkref で書いていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: k ≢ 0 (mod M) の鎖と l が奇数の鎖で、左から足す 0_C を消す行（0_C + (−0_C) = −0_C と 0_C + (−(M_col)_C) = −(M_col)_C）の根拠を、complex_numbers_form_a_field の「和の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 二つの鎖で右から 0_C を掛ける行（(2M_col)_C·0_C = 0_C の 2 行、(M_col)_C·0_C = 0_C、(−1_C)·0_C = 0_C）の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → (2M_col)_C、(M_col)_C、−1_C）に替えた。式は不変。",

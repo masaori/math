@@ -23,7 +23,7 @@
   `DefinitionInclusionOfIntegersIntoRealNumbers.lean` の `inclusionZZtoRR` で、`Int.cast` との一致は補題一本 `inclusionZZtoRR_eq_intCast` である。
   `inclusion_zz_to_rr_neg` は `inclusionZZtoRR` の定義の式をこの一致で `Int.cast` の形へ移す。人手の定義の 3 つの式は
   `inclusion_zz_to_rr_zero`（`Nat.cast_zero`）・`inclusion_zz_to_rr_succ`（`Nat.cast_succ`）・`inclusion_zz_to_rr_neg` で、
-  `ℤ_{≥0}` の上で 2 つの書き方が一致することは `inclusion_zz_to_rr_of_natCast`（`Int.cast_natCast`）である。
+  `ℤ_{≥0}` の上で 2 つの書き方が一致することは `inclusion_zz_to_rr_of_natCast`（人手 `inclusion_nn_to_rr` の `ι_{ℕ→ℝ}` を通す）である。
   `ι(0) := 0` を `Int.cast` の形で書いたものは `inclusion_zz_to_rr_zero_intCast`（`inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形へ移して当てる）。
   `trace_power_upper_bound`・`real_log_of_power` は `ℤ_{≥0}` の元だけを送るので `Nat.cast` の形だけを使い、`limit_of_log_Z_in_N_row` の
   `N_0 ∈ ℤ` は `Int.cast` で送る。
@@ -71,6 +71,7 @@
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionInclusionOfNaturalNumbersIntoIntegers
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionInclusionOfIntegersIntoRealNumbers
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionInclusionOfNaturalNumbersIntoRealNumbers
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionIntegerDifference
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerDifferencePlusSubtrahendIsOriginal
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimIntegerNegationOfSumIsSumOfNegations
@@ -104,8 +105,15 @@ theorem inclusion_zz_to_rr_neg (n : ℤ) (hn : 1 ≤ n) : ((-n : ℤ) : ℝ) = -
     _ = -inclusionZZtoRR ((m + 1 : ℕ) : ℤ) := rfl                          -- `inclusion_zz_to_rr` の `ι(-n) := -ι(n)`（`n → m + 1`）
     _ = -(((m + 1 : ℕ) : ℤ) : ℝ) := by rw [inclusionZZtoRR_eq_intCast]     -- 同じ一致で `Int.cast` の形へ移す（Lean だけの段）
 
-/-- `ℤ_{≥0}` の上で、`ℤ` 全体の `ι`（`Int.cast`）と `ℕ` の埋め込み（`Nat.cast`）は一致する。 -/
-theorem inclusion_zz_to_rr_of_natCast (n : ℕ) : (((n : ℤ)) : ℝ) = (n : ℝ) := Int.cast_natCast n
+/-- `ℤ_{≥0}` の上で、`ℤ` 全体の `ι`（`Int.cast`）と `ℕ` の埋め込み（`Nat.cast`）は一致する。
+人手の `ι_{ℕ→ℝ}` の定義 `ι_{ℕ→ℝ}(n) := ι_{ℤ→ℝ}(ι_{ℕ→ℤ}(n))`（`inclusion_nn_to_rr`）を、両辺を Lean の写像で書いた形である。 -/
+theorem inclusion_zz_to_rr_of_natCast (n : ℕ) : (((n : ℤ)) : ℝ) = (n : ℝ) :=
+  calc (((n : ℤ)) : ℝ) = inclusionZZtoRR (n : ℤ) := (inclusionZZtoRR_eq_intCast _).symm
+                                                          -- `ι_{ℤ→ℝ}` と `Int.cast` の一致（Lean だけの段）
+    _ = inclusionZZtoRR (inclusionNNtoZZ n) := by rw [inclusionNNtoZZ_eq_natCast]
+                                                          -- `ι_{ℕ→ℤ}` と `Nat.cast`（ℕ → ℤ）の一致（Lean だけの段）
+    _ = inclusionNNtoRR n := rfl                          -- `inclusion_nn_to_rr`: `ι_{ℤ→ℝ}(ι_{ℕ→ℤ}(n)) = ι_{ℕ→ℝ}(n)`
+    _ = (n : ℝ) := inclusionNNtoRR_eq_natCast n           -- `ι_{ℕ→ℝ}` と `Nat.cast`（ℕ → ℝ）の一致（Lean だけの段）
 
 /-- **`inclusion_zz_to_rr`** の `ι(0_ℤ) := 0_ℝ` を `ℤ` 全体の `ι`（`Int.cast`）の形で書いたもの。
 `0_ℤ ∈ ℤ_{≥0}` なので、2 つの書き方の一致 `inclusion_zz_to_rr_of_natCast` で `Nat.cast` の形 `inclusion_zz_to_rr_zero` へ移す。
