@@ -7,7 +7,6 @@
 - `exp_hermitian_is_positive_definite`（`eigenvalues_of_V_013_claim_...`）
 - `iH_is_real_symmetric`（`eigenvalues_of_V_014_claim_...`。正本は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）の、反可換性による別の論法の補助だけ
   （人手の主張の具体版は `EigenvalueProblem/EigenvaluesOfVPlus/ClaimIHPauliForm.lean`）
-- `V_is_positive_definite`（`eigenvalues_of_V_015_claim_...`）
 - `check_number_operator_is_hermitian`（正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）の (1) の証明の中の、
   クロネッカー積の共役転置の成分の鎖（`siteProd_conjTranspose_apply`）
   と `(σ_k^a)^* = σ_k^a` の鎖（`siteOp_conjTranspose_of_conjTranspose_eq`）と `Z_j^*` の鎖（`jw_conjTranspose_of_siteOp_conjTranspose_eq`。`Z_conjTranspose`・`Y_conjTranspose`）
@@ -19,8 +18,7 @@
 
 原文 `star_preserves_norm_and_limits` の (1)(2)(3) の具体版は、人手の鎖と 1 対 1 に
 `ClaimStarPreservesNormAndLimits.lean` に置いた。`posDef_exp_of_isHermitian` の `T^* = T` は、人手 `exp_of_hermitian_is_hermitian` の
-具体版 `matExp_conjTranspose_of_conjTranspose_eq`（`ClaimExpOfHermitianIsHermitian.lean`）を引く。`Vmat_posDef` の `B^* = B` は、
-人手 `V_is_positive_definite` の Step 2 どおり、`posDef_exp_of_isHermitian` の正定値性から「とくにエルミート」を読む。`matExp_conjTranspose_of_conjTranspose_eq` は `TensorPow M` で述べてあるので、`posDef_exp_of_isHermitian` も
+具体版 `matExp_conjTranspose_of_conjTranspose_eq`（`ClaimExpOfHermitianIsHermitian.lean`）を引く。`matExp_conjTranspose_of_conjTranspose_eq` は `TensorPow M` で述べてあるので、`posDef_exp_of_isHermitian` も
 `TensorPow M` で述べる（使う側はすべて `TensorPow M` である）。
 
 ## 人手 `iH_is_real_symmetric` との違い（形式化して分かったこと）
@@ -37,9 +35,10 @@
 この論法は人手の論法とは別なので、人手 `iH_is_real_symmetric` の主張の具体版 `S1plus_isHermitian`・`S1plus_transpose`・
 `S2_isHermitian`・`S2_transpose` はここには置かず、人手の Step 3 の鎖（因子ごとの転置と成分の実性）から
 `EigenvalueProblem/EigenvaluesOfVPlus/ClaimIHPauliForm.lean` で示す。このファイルに残すのは、境界項の係数を引数 `η` に
-持たせた一般形 `S1_isHermitian` / `S1_transpose`（整数運動量の経路の形式化の記録（`Vmat` ほか）と、人手の主張の範囲外の
+持たせた一般形 `S1_isHermitian` / `S1_transpose`（整数運動量の経路の形式化の記録（`Vmat` ほか。`V_is_positive_definite` の `Vmat`・`Vmat_posDef`・`trace_Vmat_pos` は
+`RoutesNotAdopted/IntegerMomentum/ClaimVIsPositiveDefinite.lean`）と、人手の主張の範囲外の
 `M_col ≤ 1` の場合を埋めるために `S1plus_isHermitian` / `S1plus_transpose` が使う）と、補助
-`S2_isHermitian_by_anticommutation`・`H2_transpose`（`Vmat_posDef` と、人手の主張の範囲外の `M_col = 0` の場合を埋めるために
+`S2_isHermitian_by_anticommutation`・`H2_transpose`（整数運動量の経路の形式化の記録 `Vmat_posDef` と、人手の主張の範囲外の `M_col = 0` の場合を埋めるために
 `S2_isHermitian` / `S2_transpose` が使う）である。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
@@ -395,7 +394,7 @@ theorem S1_transpose {K1 η : ℂ} : (((Complex.I * K1) • H1 M η))ᵀ = (Comp
 /-- 補助: `S_2 = iK_2^*H_2`（`K_2^*` 実）は、`[Z, Y]_+ = 0` からエルミート（全ての `M`）。
 人手 `iH_is_real_symmetric` の論法（Step 3 の転置の鎖と成分の実性）ではない。人手の主張の具体版は
 `S2_isHermitian`（`EigenvalueProblem/EigenvaluesOfVPlus/ClaimIHPauliForm.lean`）で、このファイルの中で `S_2` のエルミート性を要る
-整数運動量の経路の形式化の記録 `Vmat_posDef`（このファイルは `ClaimIHPauliForm.lean` より前にある）と、`S2_isHermitian` の
+整数運動量の経路の形式化の記録 `Vmat_posDef`（`RoutesNotAdopted/IntegerMomentum/ClaimVIsPositiveDefinite.lean`。このファイルを取り込み、`ClaimIHPauliForm.lean` を取り込まない）と、`S2_isHermitian` の
 人手の主張の範囲外の `M_col = 0` の場合がこちらを使う。 -/
 theorem S2_isHermitian_by_anticommutation {K2star : ℂ} (hK2 : star K2star = K2star) :
     (((Complex.I * K2star) • H2 M)).IsHermitian := by
@@ -436,60 +435,5 @@ theorem posDef_exp_of_isHermitian {M : ℕ} {S : TensorPow M} (hS : S.IsHermitia
   rwa [hT, hsq] at h
 
 end PosDef
-
-/-! ## `V` の正定値性（原文 `V_is_positive_definite`） -/
-
-section Vpos
-
-variable {M : ℕ}
-
-/-- **原文 `V_is_positive_definite` の `V := (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}`**。 -/
-noncomputable def Vmat (M : ℕ) (K1 η : ℂ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
-  V1pmHalf M K1 η * V2H2Form M s2 K2star * V1pmHalf M K1 η
-
-/-- **原文 `V_is_positive_definite` Step 3**: `V` は正定値。 -/
-theorem Vmat_posDef {K1 η K2star : ℂ} {s2 : ℝ}
-    (hK1 : star K1 = K1) (hη : star η = η)
-    (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
-    (Vmat M K1 η s2 K2star).PosDef := by
-  have hS1 : (((1 / 2 : ℂ)) • ((Complex.I * K1) • H1 M η)).IsHermitian := by
-    have : ((((1 / 2 : ℂ)) • ((Complex.I * K1) • H1 M η)))ᴴ
-        = ((1 / 2 : ℂ)) • ((Complex.I * K1) • H1 M η) := by
-      rw [Matrix.conjTranspose_smul, (S1_isHermitian hK1 hη).eq]
-      norm_num
-    exact this
-  have hB : (V1pmHalf M K1 η).IsHermitian := by
-    have hEq : V1pmHalf M K1 η = NormedSpace.exp (((1 / 2 : ℂ)) • ((Complex.I * K1) • H1 M η)) := by
-      rw [V1pmHalf, matExp, smul_smul, mul_assoc]
-    rw [hEq]
-    -- `exp_hermitian_is_positive_definite`（`S → ½(iK_1H)`）で正定値、`def_hermitian_positive_definite` よりとくにエルミート
-    exact (posDef_exp_of_isHermitian hS1).isHermitian
-  have hA : (NormedSpace.exp ((Complex.I * K2star) • H2 M)).PosDef :=
-    posDef_exp_of_isHermitian (S2_isHermitian_by_anticommutation hK2)
-  have hinj : Function.Injective (V1pmHalf M K1 η).mulVec := by
-    have hEq : V1pmHalf M K1 η = NormedSpace.exp (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η) := rfl
-    rw [hEq]
-    exact Matrix.mulVec_injective_of_isUnit (Matrix.isUnit_exp _)
-  have hBAB : ((V1pmHalf M K1 η)ᴴ * NormedSpace.exp ((Complex.I * K2star) • H2 M)
-      * V1pmHalf M K1 η).PosDef := hA.conjTranspose_mul_mul_same hinj
-  rw [hB.eq] at hBAB
-  have hV : Vmat M K1 η s2 K2star
-      = (((((2 * s2) ^ ((M : ℝ) / 2) : ℝ)) : ℂ))
-        • (V1pmHalf M K1 η * NormedSpace.exp ((Complex.I * K2star) • H2 M) * V1pmHalf M K1 η) := by
-    rw [Vmat, V2H2Form, matExp]
-    rw [Matrix.mul_smul, Matrix.smul_mul]
-  rw [hV]
-  refine positive_real_multiple_preserves_positive_definite_tensorPow hBAB ?_
-  have : (0 : ℝ) < 2 * s2 := by linarith
-  exact Real.rpow_pos_of_pos this _
-
-/-- **原文 `V_is_positive_definite` Step 5**: `tr(V) > 0`。 -/
-theorem trace_Vmat_pos {K1 η K2star : ℂ} {s2 : ℝ}
-    (hK1 : star K1 = K1) (hη : star η = η)
-    (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
-    0 < (Vmat M K1 η s2 K2star).trace :=
-  (Vmat_posDef hK1 hη hK2 hs2).trace_pos
-
-end Vpos
 
 end Ising2D

@@ -140,9 +140,9 @@
 | `matExp_mul_matExp_neg_eq_one`（`exp_of_negative_is_left_inverse` は `matExp_neg_mul_matExp_tensorPow`、`MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfNegativeIsLeftInverseFromNecSuf.lean`）/ `expHalfS1plus_mul_expNegHalfS1plus` / `expNegHalfS1plus_mul_expHalfS1plus` / `expS2_mul_expNegS2` / `expNegS2_mul_expS2`（`ClaimVPlusPositiveDefinite.lean`） | 指数行列どうしの左右逆 `E_±E_∓ = I`, `A_±A_∓ = I` | `V_plus_is_invertible` Step 1 |
 | `VPlusInv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | `R^{(+)}`（係数は `(2s_2)^{-M/2} := ((2s_2)^{M/2})^{-1}`）、`R^{(+)}` が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` Step 2〜3 |
 | `real_rpow_two_s2_ne_zero` / `VPlus_isUnit_and_inv_eq` | `a := (2s_2)^{M/2} ≠ 0`、`V^{(+)} ∈ R^×` かつ `(V^{(+)})^{-1} = R^{(+)}` | `V_plus_is_invertible` Step 2 の `a ∈ ℝ_{>0}`、最後の 2 行 |
-| `VPlusInv_posDef` | `(V^{(+)})^{-1}` の正定値性 | `V_plus_inverse_is_positive_definite` |
+| `VPlusInv_posDef`（`RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimVPlusInverseIsPositiveDefinite.lean`。本文から参照用ノートへ退避した主張の形式化の記録） | `(V^{(+)})^{-1}` の正定値性 | `V_plus_inverse_is_positive_definite` |
 | `trace_VPlus_pos` | `tr(V^{(+)}) = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある（`VPlus_posDef` と `trace_of_positive_definite_is_positive_tensorPow`、`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf.lean`） | `trace_V_plus_is_positive` |
-| `trace_VPlusInv_pos` | `tr((V^{(+)})^{-1})` の正値性 | `V_plus_inverse_positive_and_trace_positivity` |
+| `trace_VPlusInv_pos`（`RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimVPlusInverseIsPositiveDefinite.lean`。本文から参照用ノートへ退避した主張の形式化の記録） | `tr((V^{(+)})^{-1})` の正値性 | `V_plus_inverse_positive_and_trace_positivity` |
 | `half_smul_add_half_smul` / `matExp_half_mul_matExp_half` / `matExp_neg_half_mul_matExp_neg_half` / `tauPlus` / `tauPlusPrime`（`ClaimConstantCEvenSector.lean`） | `H + H = S_1`（成分の鎖 8 行）、`exp(H)exp(H) = exp(S_1)`、`exp(-H)exp(-H) = exp(-S_1)`、`τ`、`τ'` | `constant_c_value_even_sector` の準備 |
 | `trace_VPlus_eq_tauPlus` / `trace_VPlusInv_eq_tauPlusPrime` | `tr(V^{(+)}) = a_ℂτ`、`tr((V^{(+)})^{-1}) = (a^{-1})_ℂτ'` | 同 Step 1 |
 | `tauPlusPrime_eq_tauPlus` | `τ' = τ`（`trace_similarity_invariant` は `trace_basic_properties` (4) の人手の形） | 同 Step 2 |

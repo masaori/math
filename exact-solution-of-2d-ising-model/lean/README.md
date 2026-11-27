@@ -324,7 +324,7 @@ cd exact-solution-of-2d-ising-model/lean
   `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` にある。
   これらに対応する Lean（`PartitionFunction/ProjectionAndJordanWigner/EvenEigenvectors.lean` の `evenEigenspace_carrier`、
   `RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimEpsilonActionEigenvalues.lean` とその必要十分版の導出、
-  `RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimH1H2ViaCheckZY.lean`, `EigenvalueProblem/EigenvaluesOfVPlus/ClaimVPlusPositiveDefinite.lean` の `(V^{(+)})^{-1}` の 2 定理）は
+  `RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimH1H2ViaCheckZY.lean`, `RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimVPlusInverseIsPositiveDefinite.lean` の `(V^{(+)})^{-1}` の 2 定理）は
   形式化の記録として残してあり（ビルドは通し続ける）、対応先は本文ではなくそのノートである。
 - **`tensor_basis` の (2)（`Mat(2,ℂ)` の任意の基底のクロネッカー積の族は基底）は本文から同じノートへ退避してある（2026-11-13）。**
   `Z_Y_generate_algebra` は `kronecker_family_of_spanning_family_spans` を、`Z_Y_linearly_independent` は

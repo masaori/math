@@ -24,7 +24,7 @@
 抽象化してある）。
 -/
 import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvaluesAndTraceOfVprime
-import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimVIsPositiveDefinite
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimSignFlipConjugation
 
 namespace Ising2D

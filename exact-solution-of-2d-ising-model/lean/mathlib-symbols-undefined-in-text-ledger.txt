@@ -1354,8 +1354,6 @@ Ising2D.VPlusData.traceFactor	Real.sinh
 Ising2D.VPlusData.two_sinh_gam_half_pos	Real.sinh
 Ising2D.VPlusInv	HPow.hPow@Real,Real,Real@Real.instPow
 Ising2D.VPlusInv	Nat.cast@Real@Real.instNatCast
-Ising2D.VPlusInv_posDef	Complex.partialOrder
-Ising2D.VPlusInv_posDef	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.VPlusOfTransfer_eq_VPlus	Real.sinh
 Ising2D.VPlusR	Real.sinh
 Ising2D.VPlusUnits	HMul.hMul@Units,Units,Units@Units.instMul
@@ -1406,8 +1404,6 @@ Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator	Real.sinh
 Ising2D.V_plus_exponential_form	HPow.hPow@Real,Real,Real@Real.instPow
 Ising2D.V_plus_exponential_form	Nat.cast@Real@Real.instNatCast
 Ising2D.V_plus_exponential_form	Real.sinh
-Ising2D.Vmat_posDef	Complex.partialOrder
-Ising2D.Vmat_posDef	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	Complex.ofRealHom
 Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	DFunLike.coe@RingHom,Real,fun@RingHom.instFunLike
 Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form	HPow.hPow@Real,Real,Real@Real.instPow
@@ -5597,12 +5593,8 @@ Ising2D.toMatrixAlgHom_tprod	PiTensorProduct.tprod@Fin,Complex@Complex.instCommS
 Ising2D.toMatrixAlgHom_tprod	PiTensorProduct@Fin,Complex@Complex.instCommSemiring,?,?
 Ising2D.trace_VPlusInv_eq_tauPlusPrime	HPow.hPow@Real,Real,Real@Real.instPow
 Ising2D.trace_VPlusInv_eq_tauPlusPrime	Nat.cast@Real@Real.instNatCast
-Ising2D.trace_VPlusInv_pos	Complex.partialOrder
-Ising2D.trace_VPlusInv_pos	LT.lt@Complex@Complex.partialOrder
 Ising2D.trace_VPlus_eq_tauPlus	HPow.hPow@Real,Real,Real@Real.instPow
 Ising2D.trace_VPlus_eq_tauPlus	Nat.cast@Real@Real.instNatCast
-Ising2D.trace_Vmat_pos	Complex.partialOrder
-Ising2D.trace_Vmat_pos	LT.lt@Complex@Complex.partialOrder
 Ising2D.trace_add_matrix	Matrix.trace@Fin,Complex@Fin.fintype,Complex.instAddCommMonoid
 Ising2D.trace_binaryWordMatrixSum	Matrix.trace@Fin,Complex@Fin.fintype,Complex.instAddCommMonoid
 Ising2D.trace_conj	DecidableEq

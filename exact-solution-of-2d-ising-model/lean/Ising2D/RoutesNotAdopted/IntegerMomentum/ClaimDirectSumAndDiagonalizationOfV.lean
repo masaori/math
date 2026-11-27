@@ -21,7 +21,7 @@
 そこから固有ベクトルからなる基底を構成する。
 -/
 import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvaluesAndTraceOfVprime
-import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimVIsPositiveDefinite
 import Ising2D.NecSuf.JointEigenspaceDecomposition
 
 namespace Ising2D

@@ -1,10 +1,10 @@
 /-
 # `V^{(+)}` は正定値（**具体版**）
 
-対応する人手証明（`V_plus_is_positive_definite`、`V_plus_is_invertible`、`trace_V_plus_is_positive` は
-`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`、
-`V_plus_inverse_is_positive_definite`、`V_plus_inverse_positive_and_trace_positivity` は
-`structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts`（本文から参照用ノートへ退避した主張。この Lean は形式化の記録として残す））。
+対応する人手証明（`V_plus_is_positive_definite`、`V_plus_is_invertible`、`trace_V_plus_is_positive`。
+`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）。
+本文から参照用ノートへ退避した `V_plus_inverse_is_positive_definite`、`V_plus_inverse_positive_and_trace_positivity` の形式化の記録は
+`RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimVPlusInverseIsPositiveDefinite.lean` にある。
 
 **必要十分版は置かない。** この主張は `S_1^{(+)}, S_2` というこの模型の具体的な対象についての
 主張であり、取り払える一般構造が無い。使っている一般論（エルミート行列の `exp` が正定値、
@@ -314,47 +314,6 @@ theorem VPlus_isUnit_and_inv_eq {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
   ⟨⟨VPlus M s2 K1 K2star, VPlusInv M K1 s2 K2star, VPlus_mul_VPlusInv hs2, VPlusInv_mul_VPlus hs2⟩,
     rfl, rfl⟩
 
-/-- **原文 `V_plus_inverse_is_positive_definite`**:
-`(V^{(+)})^{-1}` も正定値。
-
-証明は Step 2〜3 をそのまま `-\tfrac12 S_1^{(+)}`, `-S_2` に適用するだけである。 -/
-theorem VPlusInv_posDef {K1 K2star : ℂ} {s2 : ℝ}
-    (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
-    (VPlusInv M K1 s2 K2star).PosDef := by
-  set E := matExp (-((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))) with hE
-  set B := matExp (-((Complex.I * K2star) • H2 M)) with hB
-  -- `-\tfrac12 S_1^{(+)}` はエルミート
-  have hS1 : (-(((1 / 2 : ℂ)) • ((Complex.I * K1) • H1plus M))).IsHermitian := by
-    have h : (-(((1 / 2 : ℂ)) • ((Complex.I * K1) • H1plus M)))ᴴ
-        = -(((1 / 2 : ℂ)) • ((Complex.I * K1) • H1plus M)) := by
-      rw [Matrix.conjTranspose_neg, Matrix.conjTranspose_smul,
-        (S1plus_isHermitian hK1).eq]
-      norm_num
-    exact h
-  have hEeq : E = NormedSpace.exp (-(((1 / 2 : ℂ)) • ((Complex.I * K1) • H1plus M))) := by
-    rw [hE, matExp]
-  have hEherm : E.IsHermitian := by
-    rw [hEeq]
-    -- `exp_hermitian_is_positive_definite`（`S → -½S_1^{(+)}`）で正定値、`def_hermitian_positive_definite` よりとくにエルミート
-    exact (posDef_exp_of_isHermitian hS1).isHermitian
-  have hEinj : Function.Injective E.mulVec := by
-    rw [hEeq]
-    exact Matrix.mulVec_injective_of_isUnit (Matrix.isUnit_exp _)
-  -- `-S_2` はエルミートなので `exp(-S_2)` は正定値
-  have hS2 : (-((Complex.I * K2star) • H2 M)).IsHermitian := by
-    have h : (-((Complex.I * K2star) • H2 M))ᴴ = -((Complex.I * K2star) • H2 M) := by
-      rw [Matrix.conjTranspose_neg, (S2_isHermitian hK2).eq]
-    exact h
-  have hBpos : B.PosDef := by
-    rw [hB, matExp]
-    exact posDef_exp_of_isHermitian hS2
-  have hEBE : (Eᴴ * B * E).PosDef := hBpos.conjTranspose_mul_mul_same hEinj
-  rw [hEherm.eq] at hEBE
-  rw [VPlusInv]
-  refine positive_real_multiple_preserves_positive_definite_tensorPow hEBE ?_
-  have : (0 : ℝ) < 2 * s2 := by linarith
-  exact inv_pos.mpr (Real.rpow_pos_of_pos this _)
-
 /-- **原文 `trace_V_plus_is_positive`**: `tr(V^{(+)}) ∈ ℝ_{>0}`（`tr(V^{(+)}) = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある）。
 
 人手の 2 行と 1 対 1: `V^{(+)}` は正定値（`V_plus_is_positive_definite`）、
@@ -365,13 +324,6 @@ theorem trace_VPlus_pos {K1 K2star : ℂ} {s2 : ℝ}
     ∃ r : ℝ, 0 < r ∧ (VPlus M s2 K1 K2star).trace = (r : ℂ) :=
   have hpos : (VPlus M s2 K1 K2star).PosDef := VPlus_posDef hK1 hK2 hs2   -- `V_plus_is_positive_definite`
   trace_of_positive_definite_is_positive_tensorPow _ hpos                  -- `trace_of_positive_definite_is_positive`（`A = V^{(+)}`）
-
-/-- **原文 `V_plus_inverse_positive_and_trace_positivity`**:
-`tr((V^{(+)})^{-1}) > 0`。 -/
-theorem trace_VPlusInv_pos {K1 K2star : ℂ} {s2 : ℝ}
-    (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
-    0 < (VPlusInv M K1 s2 K2star).trace :=
-  (VPlusInv_posDef hK1 hK2 hs2).trace_pos
 
 end VPlus
 

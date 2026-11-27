@@ -846,8 +846,6 @@ targets=(
   Ising2D.S1plus_isRealSymmetric
   Ising2D.S2_isHermitian_by_anticommutation
   Ising2D.posDef_exp_of_isHermitian
-  Ising2D.Vmat_posDef
-  Ising2D.trace_Vmat_pos
   Ising2D.matBilin
   Ising2D.matBilin_apply
   Ising2D.matBilin_one_apply
@@ -3237,9 +3235,7 @@ targets=(
   Ising2D.VPlusInv_mul_VPlus
   Ising2D.real_rpow_two_s2_ne_zero
   Ising2D.VPlus_isUnit_and_inv_eq
-  Ising2D.VPlusInv_posDef
   Ising2D.trace_VPlus_pos
-  Ising2D.trace_VPlusInv_pos
   Ising2D.half_smul_add_half_smul
   Ising2D.matExp_half_mul_matExp_half
   Ising2D.matExp_neg_half_mul_matExp_neg_half
@@ -3550,6 +3546,8 @@ targets=(
   Ising2D.exists_eigenBasis_VPlus
   Ising2D.exists_conj_diagonal_VPlus
   # --- 本文から参照用ノートへ退避した整数運動量の経路の形式化の記録（RoutesNotAdopted/IntegerMomentum/。必要十分版は NecSuf/DiscreteFourier.lean・NecSuf/FourierClifford.lean・NecSuf/CommutatorClifford.lean・NecSuf/TVAction.lean・NecSuf/Fermion.lean・NecSuf/NumberOperator.lean・NecSuf/JointEigenspace.lean・NecSuf/JointEigenspaceDecomposition.lean）---
+  Ising2D.Vmat_posDef
+  Ising2D.trace_Vmat_pos
   Ising2D.hatZMinus_eq
   Ising2D.hatZPlus_eq_hatZMinus_sub
   Ising2D.expPhase_add_mul_natCast
@@ -3785,6 +3783,8 @@ targets=(
   Ising2D.rayleighSup_attained_in_even_sector
   Ising2D.rayleighSup_mem_rayleighSet
   # --- 本文から参照用ノート claims_unused_by_chapter_goals_not_adopted.ts へ退避した、どの章のゴールの主張からも使われない主張の形式化の記録（RoutesNotAdopted/ClaimsUnusedByChapterGoals/。必要十分版は NecSuf/InvolutionEigenvalue.lean）---
+  Ising2D.VPlusInv_posDef
+  Ising2D.trace_VPlusInv_pos
   Ising2D.NecSuf.eigenvalue_eq_one_or_neg_one_of_involution
   Ising2D.epsilon_action_eigenvalues_are_signs
   Ising2D.epsilon_action_eigenvalues_are_signs_of_necSuf
