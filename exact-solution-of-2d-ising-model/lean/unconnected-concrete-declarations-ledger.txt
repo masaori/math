@@ -844,7 +844,6 @@ Ising2D.smul_mulVec_eq
 Ising2D.smul_mulVec_eq_apply
 Ising2D.smul_mul_matrix
 Ising2D.smul_neg_matrix
-Ising2D.smul_neg_matrix_apply
 Ising2D.smul_sub_smul_matrix
 Ising2D.specific_heat_log_divergence
 Ising2D.specific_heat_log_divergence_dist

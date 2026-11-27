@@ -1897,6 +1897,7 @@ targets=(
   Ising2D.smul_neg_matrix
   Ising2D.smul_neg_matrix_of_necSuf
   Ising2D.smul_neg_matrix_tensorPow
+  Ising2D.smul_neg_matrix_tensorPow_of_necSuf
   Ising2D.neg_eq_neg_one_smul_matrix_apply
   Ising2D.neg_eq_neg_one_smul_matrix
   Ising2D.neg_eq_neg_one_smul_matrix_of_necSuf

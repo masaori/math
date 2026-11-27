@@ -1476,7 +1476,7 @@ X - O
     kind: "claim",
     title: { text: "符号反転した行列のスカラー倍はスカラー倍の符号反転に等しい" },
     labels: ["scalar_multiple_of_negated_matrix"],
-    lean: ["Ising2D.smul_neg_matrix", "Ising2D.smul_neg_matrix_apply"],
+    lean: ["Ising2D.smul_neg_matrix", "Ising2D.smul_neg_matrix_apply", "Ising2D.smul_neg_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1531,6 +1531,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 4 が「共役はスカラー倍を保つ」と名前だけで根拠にしていた鎖を一ステップ一定理に割ると、" +
           "iK_1(−H_1^{(+)}) = −(iK_1H_1^{(+)}) の段が要るので足した。−A は def_matrix_negation の成分ごとの符号反転であって (−1)A ではないので、スカラー倍の結合律の特殊化としてではなく、成分計算の鎖で示した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の十六単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.smul_neg_matrix_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowScalarMultipleOfNegatedMatrix.lean。番号 ν^{-1} で Fin n の行列へ移して、この証明の成分の鎖を引く）。",
       ],
     },
   },
