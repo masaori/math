@@ -15562,13 +15562,15 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                             ref("claim_root_of_unity_finite_card_bound"), " より ", math(String.raw`\mu_n`),
                             " は有限集合であり、",
                           ]),
-                          displayMath(String.raw`\lvert\mu_n\rvert\le n\quad(\because\ \blkref{claim_root_of_unity_finite_card_bound})`),
+                          displayMath(String.raw`\lvert\mu_n\rvert\le n
+\qquad\bigl(\because\ \blkref{claim_root_of_unity_finite_card_bound}\bigr)`),
                           paragraph([
                             "である。一方、", ref("claim_root_polynomial_distinct_factorization"), " を ",
                             math(String.raw`j=n`), " に当てると、互いに相異なる ",
                             math(String.raw`w(0),\dots,w(n-1)\in\mu_n`), " が存在する。したがって、",
                           ]),
-                          displayMath(String.raw`n\le\lvert\mu_n\rvert\quad(\because\ \text{相異なる}\ n\ \text{個の元の存在})`),
+                          displayMath(String.raw`n\le\lvert\mu_n\rvert
+\qquad\bigl(\because\ \text{相異なる}\ n\ \text{個の元の存在}\bigr)`),
                           paragraph(["である。二つの不等式を組み合わせると、"]),
                           displayMath(String.raw`\begin{aligned}
 \lvert\mu_n\rvert
@@ -15577,7 +15579,8 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
 &\le\lvert\mu_n\rvert
 &&(\because\ \blkref{claim_root_polynomial_distinct_factorization}\ \text{を}\ j=n\ \text{に当てる})
 \end{aligned}`),
-                          displayMath(String.raw`\lvert\mu_n\rvert=n\quad(\because\ \mathbb{N}\ \text{の大小の反対称性})`),
+                          displayMath(String.raw`\lvert\mu_n\rvert=n
+\qquad\bigl(\because\ \mathbb{N}\ \text{の大小の反対称性}\bigr)`),
                           paragraph(["この議論に実数体も複素数体も現れない。"]),
                         ],
                       },
