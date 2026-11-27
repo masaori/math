@@ -15,15 +15,41 @@
   偶数長（hev）を外すと、二つずつ区切った対の端点列が閉路の点列に戻らず、hc から列の完全性が出ない。
   活動点・非零項・射影した閉歩道であることは使わない（具体版ではそれらから hshort・hlong を得る）。
 -/
-import Ising2DLambda.KacWard.TaggedAlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.KacWard.TaggedMatchingTermOrientation
 
 namespace Ising2DLambda.NecSuf.KacWard
 
-open Ising2DLambda.AlgebraicEigenvalue
-open Ising2DLambda.KacWard (consecutivePairs ascendingPair
-  pairWord_consecutivePairs matchingPairWord_append matchingPairWord_flatten)
+open Ising2DLambda.NecSuf.AlgebraicEigenvalue
 open scoped Classical
+
+def ascendingPairOf {J : Type*} [LinearOrder J] (p : J × J) : J × J :=
+  if p.1 < p.2 then p else (p.2, p.1)
+
+private theorem pairWord_append {K : Type*} (l r : List (K × K)) :
+    matchingPairWord (l ++ r) = matchingPairWord l ++ matchingPairWord r := by
+  simp [matchingPairWord, List.flatMap_append]
+
+private theorem pairWord_flatten {K : Type*} :
+    ∀ ls : List (List (K × K)),
+      matchingPairWord ls.flatten = (ls.map matchingPairWord).flatten
+  | [] => rfl
+  | l :: ls => by
+      rw [List.flatten_cons, pairWord_append, pairWord_flatten ls]
+      rfl
+
+private theorem pairWord_pairChunks_of_even {K : Type*} :
+    ∀ (c : List K), Even c.length →
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWord (pairChunks c) = c
+  | [], _ => rfl
+  | [_], h => by simp at h
+  | a :: b :: rest, h => by
+      have hr : Even rest.length := by
+        obtain ⟨k, hk⟩ := h
+        refine ⟨k - 1, ?_⟩
+        simp only [List.length_cons] at hk
+        omega
+      simpa [pairChunks, matchingPairWord] using
+        congrArg (fun l => a :: b :: l) (pairWord_pairChunks_of_even rest hr)
 
 /-- 閉歩道の辺による読みの必要十分版。w_r = ι(c(2r)) と置くと、(c(2r), c(2r+1)) = (ι(w_r), w_{r+1})。 -/
 theorem cycle_pairs_walk_necSuf {K : Type*} (ι : K → K) (hι : ∀ e, ι (ι e) = e)
@@ -41,43 +67,43 @@ variable {J R : Type*} [Fintype J] [LinearOrder J] [CommRing R]
 /-- 寄与の読み分けの必要十分版。 -/
 theorem tagged_cycle_term_split_necSuf (ℓ 𝔰 : J × J → R)
     (hℓ : ∀ p : J × J, ℓ (p.2, p.1) = -ℓ p) (h𝔰 : ∀ p : J × J, 𝔰 (p.2, p.1) = -𝔰 p)
-    (D : PerfectMatching J) (t : Finset (J × J)) (ht : t ⊆ matchingOrientedPairs D)
+    (D : PerfectMatching J) (t : Finset (J × J))
+    (ht : t ⊆ Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientedMatchingPairs D)
     (cs : List (List J)) (P : List (J × J))
     (hev : ∀ c ∈ cs, Even c.length)
     (hc : IsCompleteWord (cs.flatten ++ matchingPairWord P))
-    (hD : ∀ c ∈ cs, ∀ p ∈ consecutivePairs c, ({p.1, p.2} : Set J) ∈ D.val)
+    (hD : ∀ c ∈ cs, ∀ p ∈ pairChunks c, ({p.1, p.2} : Set J) ∈ D.val)
     (hP : ∀ p ∈ P, ({p.1, p.2} : Set J) ∈ D.val)
-    (hshort : ∀ c ∈ cs, ∀ p ∈ consecutivePairs c, ascendingPair p ∈ t)
-    (hlong : ∀ p ∈ P, ascendingPair p ∉ t) :
-    (∏ p ∈ matchingOrientedPairs D \ t, ℓ p) * (∏ p ∈ t, 𝔰 p) =
-      (((cs.map consecutivePairs).flatten ++ P).map (pairOrientationIn R)).prod *
-        ((cs.map (fun c => ((consecutivePairs c).map 𝔰).prod)).prod * (P.map ℓ).prod) := by
-  have hcycles : (cs.map consecutivePairs).map matchingPairWord = cs := by
+    (hshort : ∀ c ∈ cs, ∀ p ∈ pairChunks c, ascendingPairOf p ∈ t)
+    (hlong : ∀ p ∈ P, ascendingPairOf p ∉ t) :
+    (∏ p ∈ Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientedMatchingPairs D \ t, ℓ p) *
+      (∏ p ∈ t, 𝔰 p) =
+      (((cs.map pairChunks).flatten ++ P).map (pairOrientationIn R)).prod *
+        ((cs.map (fun c => ((pairChunks c).map 𝔰).prod)).prod * (P.map ℓ).prod) := by
+  have hcycles : (cs.map pairChunks).map matchingPairWord = cs := by
     rw [List.map_map]
     conv_rhs => rw [← List.map_id cs]
-    exact List.map_congr_left fun c hc' => pairWord_consecutivePairs c (hev c hc')
-  have hcw : IsCompleteWord (matchingPairWord ((cs.map consecutivePairs).flatten ++ P)) := by
-    rw [matchingPairWord_append, matchingPairWord_flatten, hcycles]
+    exact List.map_congr_left fun c hc' => pairWord_pairChunks_of_even c (hev c hc')
+  have hcw : IsCompleteWord (matchingPairWord ((cs.map pairChunks).flatten ++ P)) := by
+    rw [pairWord_append, pairWord_flatten, hcycles]
     exact hc
-  have hDl : ∀ p ∈ (cs.map consecutivePairs).flatten ++ P, ({p.1, p.2} : Set J) ∈ D.val := by
+  have hDl : ∀ p ∈ (cs.map pairChunks).flatten ++ P, ({p.1, p.2} : Set J) ∈ D.val := by
     intro p hp
     rcases List.mem_append.mp hp with hcyc | hcom
     · obtain ⟨l, hl, hpl⟩ := List.mem_flatten.mp hcyc
       obtain ⟨c, hc', rfl⟩ := List.mem_map.mp hl
       exact hD c hc' p hpl
     · exact hP p hcom
-  have hpairs : Ising2DLambda.AlgebraicEigenvalue.matchingOrientedPairs D =
-      Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientedMatchingPairs D := rfl
-  rw [hpairs, tagged_matching_term_oriented_necSuf ℓ 𝔰 hℓ h𝔰 D t
-    (by simpa only [← hpairs] using ht) ascendingPair (by intro p; rfl) _ hcw hDl]
+  rw [tagged_matching_term_oriented_necSuf ℓ 𝔰 hℓ h𝔰 D t ht
+    ascendingPairOf (by intro p; rfl) _ hcw hDl]
   congr 1
   have hcyc : ∀ c ∈ cs,
-      ((consecutivePairs c).map (fun p => if ascendingPair p ∈ t then 𝔰 p else ℓ p)).prod =
-        ((consecutivePairs c).map 𝔰).prod := by
+      ((pairChunks c).map (fun p => if ascendingPairOf p ∈ t then 𝔰 p else ℓ p)).prod =
+        ((pairChunks c).map 𝔰).prod := by
     intro c hc'
     congr 1
     exact List.map_congr_left fun p hp => if_pos (hshort c hc' p hp)
-  have hcom : P.map (fun p => if ascendingPair p ∈ t then 𝔰 p else ℓ p) = P.map ℓ :=
+  have hcom : P.map (fun p => if ascendingPairOf p ∈ t then 𝔰 p else ℓ p) = P.map ℓ :=
     List.map_congr_left fun p hp => if_neg (hlong p hp)
   rw [List.map_append, List.prod_append, List.map_flatten, List.prod_flatten, List.map_map,
     List.map_map, hcom]

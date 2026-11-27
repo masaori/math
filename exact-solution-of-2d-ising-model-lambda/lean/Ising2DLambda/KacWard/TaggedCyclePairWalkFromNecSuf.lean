@@ -10,6 +10,12 @@ import Ising2DLambda.NecSuf.KacWard.TaggedCyclePairWalk
 
 namespace Ising2DLambda.KacWard
 
+private theorem pairChunks_eq_consecutivePairs {K : Type*} :
+    ∀ c : List K, NecSuf.KacWard.pairChunks c = consecutivePairs c
+  | [] => rfl
+  | [_] => rfl
+  | _ :: _ :: rest => congrArg _ (pairChunks_eq_consecutivePairs rest)
+
 private theorem consecutivePairs_eq_pairChunks_map_range {K : Type*} (k : ℕ) (f : ℕ → K) :
     consecutivePairs ((List.range (2 * k)).map f) =
       NecSuf.KacWard.pairChunks ((List.range (2 * k)).map f) := by
@@ -43,14 +49,34 @@ theorem taggedMatchingTerm_cycleWalk_from_necSuf {L : ℕ} (z : Qbar) (hz : z ^ 
     obtain ⟨_, hmate⟩ := taggedCycle_pair_mate D t c hc p hp
     rw [hmate]
     exact (perfectMatchingMate_spec D p.1).2
+  have hD' : ∀ c ∈ taggedCycleWords D t, ∀ p ∈ NecSuf.KacWard.pairChunks c,
+      ({p.1, p.2} : Set (OrientedEdge L)) ∈ D.val := by
+    simpa only [pairChunks_eq_consecutivePairs] using hD
+  have hshort' : ∀ c ∈ taggedCycleWords D t, ∀ p ∈ NecSuf.KacWard.pairChunks c,
+      NecSuf.KacWard.ascendingPairOf p ∈ t := by
+    simpa only [pairChunks_eq_consecutivePairs, NecSuf.KacWard.ascendingPairOf,
+      ascendingPair] using taggedCycle_pairs_short D t z s ht hterm
+  have hlong' : ∀ p ∈ taggedCommonPairs D t,
+      NecSuf.KacWard.ascendingPairOf p ∉ t := by
+    simpa only [NecSuf.KacWard.ascendingPairOf, ascendingPair] using
+      (fun p hp => (taggedCommonPairs_long D t z s ht hterm p hp).1)
+  have hpairs : matchingOrientedPairs D =
+      NecSuf.AlgebraicEigenvalue.orientedMatchingPairs D := rfl
+  rw [hpairs]
   rw [NecSuf.KacWard.tagged_cycle_term_split_necSuf (gaugedLongContribution z s)
     (gaugedShortContribution z s) (gaugedLongContribution_swap z hz s)
     (gaugedShortContribution_swap z hz s) D t ht (taggedCycleWords D t) (taggedCommonPairs D t)
-    hev (taggedCycleWords_complete D t) hD (fun p hp => (taggedCommonPairs_spec D t p hp).2.1)
-    (taggedCycle_pairs_short D t z s ht hterm)
-    (fun p hp => (taggedCommonPairs_long D t z s ht hterm p hp).1)]
+    hev (taggedCycleWords_complete D t) hD' (fun p hp => (taggedCommonPairs_spec D t p hp).2.1)
+    hshort' hlong']
   refine congrArg₂ (· * ·) ?_ ?_
   · rw [qbarConst, Polynomial.C_eq_intCast, Int.cast_list_prod, List.map_map]
+    have hcs : (taggedCycleWords D t).map NecSuf.KacWard.pairChunks =
+        (taggedCycleWords D t).map consecutivePairs := by
+      apply List.map_congr_left
+      intro c _
+      exact pairChunks_eq_consecutivePairs c
+    rw [hcs]
+    unfold taggedOrientationList
     refine congrArg List.prod ?_
     apply List.map_congr_left
     intro p _
@@ -84,7 +110,7 @@ theorem taggedMatchingTerm_cycleWalk_from_necSuf {L : ℕ} (z : Qbar) (hz : z ^ 
       exact referenceLongMate_eq_reversal _
     simp only [Function.comp]
     unfold taggedCyclePoints
-    rw [hk2, consecutivePairs_eq_pairChunks_map_range,
+    rw [hk2,
       NecSuf.KacWard.cycle_pairs_walk_necSuf reversal reversal_involutive
       (fun r => (finiteMapIterate (concreteAlternatingSuccessor D t) r m).1) k hstep, hlen,
       List.map_map]
