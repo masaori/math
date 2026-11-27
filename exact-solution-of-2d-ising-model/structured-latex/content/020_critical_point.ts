@@ -2451,20 +2451,40 @@ c_0
         " で割って ",
         math(String.raw`0 \leq \tfrac{\theta}{2} \leq \tfrac{\pi}{2}`),
         " である。また ",
-        ref("pi_is_positive"),
+        ref("real_zero_less_than_two"),
         " の ",
-        math(String.raw`0 < \pi`),
+        math(String.raw`0 < 2`),
         " と ",
-        math(String.raw`0 < \tfrac{1}{2}`),
-        "（有理数の大小比較）から、",
-        math(String.raw`\mathbb{R}`),
-        " で正の数どうしの積は正（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
-        ref("set_and_algebra_notation"),
-        "）なので ",
-        math(String.raw`0 < \tfrac{\pi}{2}`),
-        " である。これから次を得る。",
+        ref("def_real_strict_order"),
+        " より ",
+        math(String.raw`0 < 2`),
+        " は ",
+        math(String.raw`0 \neq 2`),
+        " を含むので ",
+        math(String.raw`2 \neq 0`),
+        " であり、",
+        ref("def_real_quotient"),
+        " の乗法の逆元 ",
+        math(String.raw`2^{-1} \in \mathbb{R}`),
+        "（",
+        math(String.raw`z \to 2`),
+        "）がある。",
+        ref("real_inverse_of_positive_is_positive"),
+        "（",
+        math(String.raw`a \to 2`),
+        "）より ",
+        math(String.raw`0 < 2^{-1}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&< \pi\cdot 2^{-1}
+&&\bigl(\because\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{と上の}\ 0 < 2^{-1}\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to \pi,\ b \to 2^{-1})\bigr)\\
+&= \frac{\pi}{2}
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to \pi,\ z \to 2)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "これから次を得る。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \left(\frac{\theta}{2}\right)^2
@@ -2511,6 +2531,7 @@ c_0
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の通しの証明のゴールラインの確認）: 準備の 0 < π/2 を、名前だけで引いていた「正の数どうしの積は正（ℝ は順序体）」と「0 < 1/2（有理数の大小比較）」から、real_zero_less_than_two・def_real_strict_order・real_inverse_of_positive_is_positive で 0 < 2^{-1}、pi_is_positive と real_product_of_positives_is_positive で 0 < π·2^{-1}、def_real_quotient で π/2 へ戻す鎖にした。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備に pi_is_positive の 0 < π と 0 < 1/2（正の数どうしの積は正。ℝ は順序体 set_and_algebra_notation）から 0 < π/2 を出す文を置き、鎖の根拠「π/2 > 0」をその参照にした。値と主張は不変。",
         "2026-11-02: 旧 elementary_sine_bounds の主張の第二の行を独立の主張にした。(θ/2)² ≤ π²/4 を準備の鎖にした。",
         "2026-11-16（Lean の通しの証明のゴールラインの確認）: 上からの評価の鎖の最後の行 θ/2 − 0 = θ/2 に根拠が無かったので、real_minus_zero_is_self（a → θ/2）の参照を付けた。式は不変。",
