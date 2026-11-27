@@ -33,6 +33,8 @@
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexNumbers
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealAndImaginaryParts
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
@@ -365,7 +367,8 @@ noncomputable def sqrtM (M : ℕ) : ℂ := (Real.sqrt M : ℂ)
 1. `M_col ≥ 2 ≥ 1` なので `ι(M_col) ≥ 1 > 0`（`inclusion_zz_to_rr_of_positive_is_at_least_one`（`n → M_col`）と ℝ の順序。
    Lean は `M_col ≥ 2` を使う側から `M ≠ 0` で受け取り、`1 ≤ M` を出す）、`sqrt_of_positive_real_is_positive`（`x → ι(M_col)`）より `√M_col > 0`。
 2. `s = 0_ℂ` を仮定すると第 1 成分が `√M_col = 0` になり 1 と矛盾する（`definition_of_cc` の等号は成分ごと、
-   `inclusion_rr_to_cc` の第 1 成分は `√M_col`）。 -/
+   `inclusion_rr_to_cc` の第 1 成分は `√M_col`）。Lean は第 1 成分を `def_real_imag_parts` の `Re` で取り、
+   `Re((x, y)) = x` を `complex_re_mk` で引く。 -/
 theorem sqrtM_ne_zero {M : ℕ} (hM : M ≠ 0) : sqrtM M ≠ 0 := by
   have hM1 : 1 ≤ M := Nat.one_le_iff_ne_zero.2 hM
                                       -- 段 1: `M_col ≥ 1`（ℕ の順序）
@@ -375,14 +378,20 @@ theorem sqrtM_ne_zero {M : ℕ} (hM : M ≠ 0) : sqrtM M ≠ 0 := by
                                       -- 段 1: `√M_col > 0`（`sqrt_of_positive_real_is_positive`（`x → ι(M_col)`））
   intro h
   have hre : (sqrtM M).re = (0 : ℂ).re := congrArg Complex.re h
-                                      -- 仮定 `s = 0_ℂ` の第 1 成分（`definition_of_cc` の `ℝ^2` の元の等号は成分ごと）
+                                      -- 仮定 `s = 0_ℂ` の両辺の第 1 成分 `Re`（`def_real_imag_parts`）
   have h0 : Real.sqrt M = 0 :=
     calc Real.sqrt M
-        = ((Real.sqrt M : ℝ) : ℂ).re := (Complex.ofReal_re _).symm
-                                      -- `inclusion_rr_to_cc`: `s = (√M_col, 0)` の第 1 成分を右辺から左辺へ
+        = (⟨Real.sqrt M, 0⟩ : ℂ).re := (complex_re_mk _ _).symm
+                                      -- `def_real_imag_parts`: `(√M_col, 0)` の第 1 成分 `Re((√M_col, 0)) = √M_col` を右辺から左辺へ
+      _ = ((Real.sqrt M : ℝ) : ℂ).re := by rw [complex_ofReal_eq_mk]
+                                      -- `inclusion_rr_to_cc`: `(√M_col)_ℂ = (√M_col, 0)`
       _ = (sqrtM M).re := rfl         -- `s` の定義
       _ = (0 : ℂ).re := hre           -- 仮定の第 1 成分
-      _ = 0 := Complex.zero_re        -- `0_ℂ = (0, 0)` の第 1 成分
+      _ = ((0 : ℝ) : ℂ).re := by rw [complex_zero_eq_ofReal_zero]
+                                      -- `inclusion_rr_to_cc` の略記 `0_ℂ := (0_ℝ)_ℂ`
+      _ = (⟨0, 0⟩ : ℂ).re := by rw [complex_ofReal_eq_mk]
+                                      -- `inclusion_rr_to_cc`: `(0_ℝ)_ℂ = (0, 0)`
+      _ = 0 := complex_re_mk 0 0      -- `def_real_imag_parts`: `Re((0, 0)) = 0`
   exact hpos.ne' h0                   -- 段 2: 第 1 成分 `√M_col` は `0` でない
 
 /-- `σ^2 = (M_col)_ℂ`（人手 `anticommutator_of_check_psi` の `s := √((M_col)_ℝ)`、`σ := s_ℂ`。`(M_col)_ℂ` は

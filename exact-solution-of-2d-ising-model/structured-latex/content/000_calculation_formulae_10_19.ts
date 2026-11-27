@@ -7,6 +7,7 @@ export default defineBlocks([
     origin: { path: "_old/typst/parts/000_計算公式/010_definition_CCの実部虚部.typ", ordinal: 11 },
     title: { tex: "\\mathbb{C}\\text{の実部/虚部}" },
     labels: ["def_real_imag_parts"],
+    lean: ["Ising2D.complex_re_mk"],
     statement: [
       displayMath("x,y\\in\\mathbb{R},\\ (x,y)\\in\\mathbb{C}"),
       displayMath("Re:\\mathbb{C}\\to\\mathbb{R},\\quad (x,y)\\mapsto x"),
@@ -23,6 +24,9 @@ export default defineBlocks([
     ],
     conversion: {
       status: "converted",
+      notes: [
+        "2026-11-27（Lean の点検の直し、未定義の記号の行「ℂ とその演算」の残りの Complex.re）: 欄 lean を足した。Lean の具体版は Ising2D.complex_re_mk（MathematicalTools/SetNotationAndComplexCartesianArithmetic/DefinitionRealAndImaginaryParts.lean。mathlib の Complex.re は ℂ の第 1 成分の射影で、Re((x,y)) = x と rfl で等しい）である。具体版の定義と主張に虚部 Complex.im は出ないので、虚部の具体版は置かない。定義であり証明を持たないので、SageMath の検算は置かない。",
+      ],
     },
   },
   {

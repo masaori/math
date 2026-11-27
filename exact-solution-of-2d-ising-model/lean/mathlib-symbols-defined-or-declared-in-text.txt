@@ -84,6 +84,11 @@ HDiv.hDiv@Real,Real,Real@Real.instDivInvMonoid	def_real_quotient
 # DefinitionComplexQuotient.lean の complex_div_eq_mul_inv（z / w = z * w⁻¹）で示した。0 での値の扱いは ℝ と同じ。
 Inv.inv@Complex@Complex.instInv	def_complex_inverse
 HDiv.hDiv@Complex,Complex,Complex@Complex.instDivInvMonoid	def_complex_quotient
+# ℂ の実部: def_real_imag_parts が Re : ℂ → ℝ、(x, y) ↦ x と定める。mathlib の Complex.re は構造体 ℂ の第 1 成分の射影で、
+# 一致は補題一本 complex_re_mk（Re(⟨x, y⟩) = x。rfl。DefinitionRealAndImaginaryParts.lean。def_real_imag_parts の欄 lean に在る）。
+# 載せる前に台帳に在った Complex.re の 20 行は、いずれも本文が Re を書かない位置（tr(εV^{(+)}) > 0 を ℝ の元として述べる段、実成分の行列・ベクトルを
+# ℝ の行列・ベクトルへ移す段など）で Lean だけが Re を取っている宣言である（本文が Re を書く唯一の frobenius_inner_product_axioms は具体版を持たない）。状態台帳の行「ℂ とその演算」が、git の履歴（載せる前の main の先端 fe22aa5f1）から引く手順を持つ。
+Complex.re	def_real_imag_parts
 #
 # ℤ の演算・順序・数: set_and_algebra_notation が ℤ の +・·・0・1・符号反転 −・≤ を外から持ち込み、証明が使う性質（可換環の等式、0 ≠ 1、
 # 順序の反射律・反対称律・推移律・全順序、加法・乗法との両立、0 以上の元の分解、k から始める数学的帰納法）を列挙し、数字 0・1 が 0_ℤ・1_ℤ を表すと書いている。
