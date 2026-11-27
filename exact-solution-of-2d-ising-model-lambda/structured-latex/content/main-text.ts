@@ -40426,7 +40426,11 @@ d&(e=a\text{ のとき})\\
                             math(String.raw`I`),
                             " の元の個数について繰り返し使うと",
                           ]),
-                          displayMath(String.raw`\mathrm{mco}_a\Bigl(\sum_{i\in I}P(i)\Bigr)=\sum_{i\in I}\mathrm{mco}_a\bigl(P(i)\bigr)`),
+                          displayMath(String.raw`\begin{aligned}
+\mathrm{mco}_a\Bigl(\sum_{i\in I}P(i)\Bigr)
+&=\sum_{i\in I}\mathrm{mco}_a\bigl(P(i)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_multivariate_polynomial_ring}\text{ の和の係数を }I\text{ の元の個数について繰り返し使う}\bigr)
+\end{aligned}`),
                           paragraph([
                             "であり、左辺は ",
                             math(String.raw`0`),
