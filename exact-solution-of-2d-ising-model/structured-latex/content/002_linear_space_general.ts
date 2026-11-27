@@ -303,7 +303,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "零行列を右から足しても行列は変わらない" },
     labels: ["matrix_plus_zero_matrix"],
-    lean: ["Ising2D.matrix_add_zero_matrix", "Ising2D.matrix_add_zero_matrix_apply"],
+    lean: ["Ising2D.matrix_add_zero_matrix", "Ising2D.matrix_add_zero_matrix_apply", "Ising2D.matrix_add_zero_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -363,6 +363,7 @@ export default defineBlocks([
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の七単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.matrix_add_zero_matrix_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowAddAndSubtractZeroMatrix.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。主張と証明は不変。",
         "2026-11-01: 原文（Typst）に対応ブロックは無い。commutator_of_H_and_check_Z_Y Step 1 が「零行列の和は零行列」と名前だけで根拠にしていた段を、" +
           "有限和を O にする段と O を足して消す段に分け、後者を引けるよう足した（前者は 4 か所で添字の集合の上の和のため名前の根拠のまま）。",
       ],
@@ -443,7 +444,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "零行列を引いても行列は変わらない" },
     labels: ["matrix_minus_zero_matrix"],
-    lean: ["Ising2D.matrix_sub_zero_matrix", "Ising2D.matrix_sub_zero_matrix_apply"],
+    lean: ["Ising2D.matrix_sub_zero_matrix", "Ising2D.matrix_sub_zero_matrix_apply", "Ising2D.matrix_sub_zero_matrix_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -515,6 +516,7 @@ X - O
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の七単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.matrix_sub_zero_matrix_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowAddAndSubtractZeroMatrix.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。主張と証明は不変。",
         "2026-11-01: 原文（Typst）に対応ブロックは無い。commutator_of_H_and_check_Z_Y Step 1 が「零行列を引いても変わらない」と名前だけで根拠にしていたので、引けるよう足した。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: 成分の鎖の 7 行目の名前だけの根拠「ℝ の四則」（0 を掛けると 0・0 − 0 = 0・0 + 0 = 0 の 3 つの事実を 1 行で使っていた）を、real_times_zero_is_zero を 2 箇所へ（x → −1, −1）・real_zero_times_is_zero を 2 箇所へ（x → 0, 0）・real_minus_zero_is_self（a → 0）・「ℝ で 0 + 0 = 0」の 4 行に割った（鎖の両端と主張は不変）。",
       ],

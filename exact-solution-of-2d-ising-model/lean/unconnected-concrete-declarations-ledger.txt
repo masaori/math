@@ -698,7 +698,6 @@ Ising2D.matrix_sub_eq_zero_iff
 Ising2D.matrix_sub_hasRealEntries
 Ising2D.matrix_sub_neg_eq_zero_of_add_eq_zero
 Ising2D.matrix_sub_zero_matrix
-Ising2D.matrix_sub_zero_matrix_apply
 Ising2D.matrix_sum_is_associative
 Ising2D.matrix_transpose_add
 Ising2D.matrix_transpose_add_apply

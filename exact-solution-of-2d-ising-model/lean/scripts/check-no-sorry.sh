@@ -1875,6 +1875,10 @@ targets=(
   Ising2D.zero_matrix_add_matrix_of_necSuf
   Ising2D.matrix_sub_zero_matrix_of_necSuf
   Ising2D.finite_sum_of_zero_matrices_of_necSuf
+  Ising2D.matrix_add_zero_matrix_tensorPow
+  Ising2D.zero_matrix_add_matrix_tensorPow
+  Ising2D.matrix_add_zero_matrix_tensorPow_of_necSuf
+  Ising2D.matrix_sub_zero_matrix_tensorPow_of_necSuf
   Ising2D.matrix_smul_zero_matrix_apply
   Ising2D.matrix_smul_zero_matrix
   Ising2D.matrix_smul_zero_matrix_of_necSuf
