@@ -98,7 +98,7 @@
 - Step 3 の `W^⊤ = W` の鎖の `transpose_of_matrix_product` は、添字が `Conf M` の行列なので `TensorPow M` の系 `transpose_mul_tensorPow` を引き、
   `mat_mult_associative` は具体版が無いので mathlib の `Matrix.mul_assoc` を引く。
 - 可逆性の段の `matrix_double_negation`・`exp_of_negative_is_left_inverse`・`def_invertible_elements_of_R` (ii) は、添字が `Conf M` の行列なので
-  `TensorPow M` の系 `neg_neg_tensorPow`・`matExp_neg_mul_matExp_tensorPow`・`invertible_product_isUnit_tensorPow`（必要十分版の特殊化。
+  `TensorPow M` の系 `neg_neg_tensorPow`（具体版。`ClaimTensorPowDoubleNegation.lean`）・`matExp_neg_mul_matExp_tensorPow`・`invertible_product_isUnit_tensorPow`（後の 2 つは必要十分版の特殊化。
   (ii) の具体版（添字 `Fin n`、人手の 2 本の 6 行の鎖と 1 対 1）は `DefinitionInvertibleElementsProduct.lean`）を引く。
 
 ## 仮定について
@@ -131,7 +131,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimProductOfRealEntryMatricesHasRealEntries
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfRealSymmetricIsRealSymmetric
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionInvertibleElementsProductFromNecSuf
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowDoubleNegation
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealMatrixOfRealEntryMatrixPreservesProductAndPower

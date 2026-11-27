@@ -1536,7 +1536,7 @@ X - O
     kind: "claim",
     title: { text: "行列の符号反転を二回施すと元に戻る" },
     labels: ["matrix_double_negation"],
-    lean: ["Ising2D.neg_neg_matrix", "Ising2D.neg_neg_matrix_apply"],
+    lean: ["Ising2D.neg_neg_matrix", "Ising2D.neg_neg_matrix_apply", "Ising2D.neg_neg_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1581,6 +1581,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 1 の合成の段で、k が奇数のときの Uσ_k^yU^{-1} が −(−σ_k^y) になり、" +
           "σ_k^y へ戻す段を引けるよう足した。−A は def_matrix_negation の成分ごとの符号反転なので、成分計算の鎖で示した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の八単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.neg_neg_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowDoubleNegation.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。主張と証明は不変。",
       ],
     },
   },

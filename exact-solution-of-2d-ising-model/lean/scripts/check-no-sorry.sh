@@ -1909,6 +1909,7 @@ targets=(
   Ising2D.complex_neg_one_mul_neg_one
   Ising2D.neg_neg_matrix_of_necSuf
   Ising2D.neg_neg_tensorPow
+  Ising2D.neg_neg_tensorPow_of_necSuf
   Ising2D.finite_sum_of_complex_sums_step
   Ising2D.finite_sum_of_complex_sums_succ
   Ising2D.finite_sum_of_complex_sums

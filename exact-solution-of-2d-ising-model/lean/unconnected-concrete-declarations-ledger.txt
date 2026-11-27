@@ -749,7 +749,6 @@ Ising2D.neg_matrix_mul_self_apply
 Ising2D.neg_matrix_mul_self_comm
 Ising2D.neg_mul_matrix
 Ising2D.neg_neg_matrix
-Ising2D.neg_neg_matrix_apply
 Ising2D.neg_one_pow_mul_neg_one_pow
 Ising2D.neg_sub_neg_matrix
 Ising2D.neg_thetaTilde_add_int_mul
