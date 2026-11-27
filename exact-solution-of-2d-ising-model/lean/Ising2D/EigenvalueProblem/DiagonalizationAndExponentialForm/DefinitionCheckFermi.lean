@@ -38,6 +38,7 @@ import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1Lo
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRecoverZYFromCheckZY
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionInclusionOfNaturalNumbersIntoComplexNumbers
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionRealMatrixOfRealEntryMatrix
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelationGamma2Tilde
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
@@ -384,11 +385,20 @@ theorem sqrtM_ne_zero {M : ℕ} (hM : M ≠ 0) : sqrtM M ≠ 0 := by
       _ = 0 := Complex.zero_re        -- `0_ℂ = (0, 0)` の第 1 成分
   exact hpos.ne' h0                   -- 段 2: 第 1 成分 `√M_col` は `0` でない
 
-/-- `(√M)^2 = M`。 -/
+/-- `σ^2 = (M_col)_ℂ`（人手 `anticommutator_of_check_psi` の `s := √((M_col)_ℝ)`、`σ := s_ℂ`。`(M_col)_ℂ` は
+`antiperiodic_exp_sum` の ℤ の元の略記 `a_ℂ := (ι_{ℤ→ℝ}(a))_ℂ` である）。Lean は `M_col` を `ι_{ℕ→ℤ}(M)`（`M ∈ ℕ`）と書くので、
+`inclusion_nn_to_cc` の定義によりこれは `ι_{ℕ→ℂ}(M)` であり、一致の補題で `Nat.cast` の形へ移す。 -/
 @[simp]
-theorem sqrtM_sq (M : ℕ) : sqrtM M ^ 2 = (M : ℂ) := by
-  have : Real.sqrt M ^ 2 = (M : ℝ) := Real.sq_sqrt (by positivity)
-  simp only [sqrtM, ← Complex.ofReal_pow, this, Complex.ofReal_natCast]
+theorem sqrtM_sq (M : ℕ) : sqrtM M ^ 2 = (M : ℂ) :=
+  calc sqrtM M ^ 2 = ((Real.sqrt M ^ 2 : ℝ) : ℂ) := (Complex.ofReal_pow _ _).symm
+                                      -- `s` の定義と、`(·)_ℂ` が冪を保つこと
+    _ = ((M : ℝ) : ℂ) := by rw [Real.sq_sqrt (Nat.cast_nonneg M)]
+                                      -- 根号の中 `ι_{ℤ→ℝ}(M_col) ≥ 0` の平方根の 2 乗
+    _ = inclusionNNtoCC M := by
+          rw [inclusionNNtoCC, inclusionNNtoZZ_eq_natCast, inclusionZZtoRR_eq_intCast, Int.cast_natCast]
+                                      -- `inclusion_nn_to_cc`: `(ι_{ℤ→ℝ}(ι_{ℕ→ℤ}(M)))_ℂ = ι_{ℕ→ℂ}(M)`（Lean の `(M : ℝ)` は `ι_{ℤ→ℝ}(ι_{ℕ→ℤ}(M))`）
+    _ = (M : ℂ) := inclusionNNtoCC_eq_natCast M
+                                      -- `ι_{ℕ→ℂ}` と Lean の `Nat.cast`（ℕ → ℂ）の一致
 
 /-! ## `ψ̌_μ^†`, `ψ̌_μ` の定義（人手 `def_check_fermi`） -/
 

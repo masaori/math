@@ -1798,14 +1798,18 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         ref("inclusion_zz_to_rr"),
         "）を用いる。また、",
         ref("inclusion_rr_to_cc"),
-        " の実数から複素数への包含を用いる。",
+        " の実数から複素数への包含と、自然数を複素数へ送る包含 ",
+        math(String.raw`\iota_{\mathbb N\to\mathbb C}:\mathbb N\to\mathbb C`),
+        "（",
+        ref("inclusion_nn_to_cc"),
+        "）を用いる。",
       ]),
       displayMath(
         String.raw`n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\quad(n\in\mathbb N),
 \qquad a_{\mathbb R}:=\iota_{\mathbb Z\to\mathbb R}(a)\quad(a\in\mathbb Z),
 \qquad n_{\mathbb R}:=(n_{\mathbb Z})_{\mathbb R},
 \qquad a_{\mathbb C}:=(a_{\mathbb R})_{\mathbb C},
-\qquad n_{\mathbb C}:=(n_{\mathbb R})_{\mathbb C}`,
+\qquad n_{\mathbb C}:=\iota_{\mathbb N\to\mathbb C}(n)`,
       ),
       paragraph([
         "と書く。",
@@ -2564,6 +2568,7 @@ k
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の点検の直し、未定義の記号の行「ℂ とその演算」の残りの Nat.cast@Complex）: 前置きの略記 n_ℂ（n ∈ ℕ）を、同じ合成 ((n_ℤ)_ℝ)_ℂ を定める定義のブロック inclusion_nn_to_cc の ι_{ℕ→ℂ}(n) に結び付けた。主張と証明の式は変えていない。証明の ((M_col)_ℕ)_ℂ = (M_col)_ℂ と (2(M_col)_ℕ)_ℂ = (2M_col)_ℂ の行は、根拠（inclusion_nn_to_cc の定義と ((M_col)_ℕ)_ℤ = M_col）をまだ blkref で書いていない。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: k ≢ 0 (mod M) の鎖と l が奇数の鎖で、左から足す 0_C を消す行（0_C + (−0_C) = −0_C と 0_C + (−(M_col)_C) = −(M_col)_C）の根拠を、complex_numbers_form_a_field の「和の単位元」（右から足す z + 0_C = z しか示していない）から complex_zero_plus_is_original に替えた。式は不変。",
         "2026-11-14（Lean の通しの証明のゴールラインの確認）: 二つの鎖で右から 0_C を掛ける行（(2M_col)_C·0_C = 0_C の 2 行、(M_col)_C·0_C = 0_C、(−1_C)·0_C = 0_C）の根拠を、complex_numbers_form_a_field（体の公理は z·0 = 0 を含まない）から complex_times_zero_is_zero（z → (2M_col)_C、(M_col)_C、−1_C）に替えた。式は不変。",
         "2026-11-23（Lean の点検の直し、未定義の記号の行「ℤ の狭義の順序・数字」の残りのうち正数倍と狭義の順序）: 「とくに」の |l| < 1 の行は根拠が「M_col > 0 なので、整数における正数倍は狭義順序を反映する」（|l|M_col < 1·M_col, M_col > 0）と名前だけで、M_col > 0 も示していなかった。int_less_than_one_of_product_less_than_nonnegative_factor（0 ≤ c かつ x·c < c なら x < 1_ℤ）を足し、その主張（x → |l|, c → M_col）に既に示した 0_ℤ ≤ M_col と |l|M_col < M_col を使う 1 行にした（M_col > 0 は要らなくなった）。主張は不変。",

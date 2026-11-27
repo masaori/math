@@ -206,6 +206,11 @@ abs@Int@instLatticeInt,Int.instAddGroup	def_int_absolute_value
 # 書かない位置で Lean だけが ℤ を ℝ へ送っている宣言を含む（例: openChainEnergy_mem_int。本文の def_open_chain_spin_energy は ℝ の元 E(s) を「∈ ℤ」と書く）。
 # 状態台帳の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」が、git の履歴（載せる前の main の先端 807458d43）から引く手順を持つ。
 Int.cast@Real@Real.instIntCast	inclusion_zz_to_rr
+# ℕ から ℂ への包含写像: inclusion_nn_to_cc が ι_{ℕ→ℂ}(n) := (ι_{ℤ→ℝ}(ι_{ℕ→ℤ}(n)))_ℂ と、名前の付いた三つの写像の合成で定める。具体版 inclusionNNtoCC は
+# 同じ合成で定め、Lean の Nat.cast（ℕ → ℂ）との一致を補題一本 inclusionNNtoCC_eq_natCast で示した（DefinitionInclusionOfNaturalNumbersIntoComplexNumbers.lean）。
+# 載せる前に台帳に在った Nat.cast（ℂ へ）の 59 行は、本文が ℤ_{≥0} の元を ℂ へ送る写像を書かない位置（def_exp の 1/m! など）で Lean だけが ℕ を ℂ へ送っている宣言を含む。
+# 状態台帳の行「本文の ℤ_{≥k} と Lean の ℕ の間の写像」が、git の履歴（載せる前の main の先端 7343cb1ac）から引く手順を持つ。
+Nat.cast@Complex@Complex.instNatCast	inclusion_nn_to_cc
 #
 # Lean の TensorPow M（Matrix (Conf M) (Conf M) ℂ。添字が多重添字の集合 𝓘_M の行列で、本文の Mat(2^M, ℂ)）の単位行列・スカラー倍・和・零行列:
 # def_identity_matrix・def_matrix_scalar_multiple・def_matrix_sum・def_zero_matrix が Mat(n, ℂ) の演算を番号 i, k ∈ {1,…,n} の成分の式で定め、

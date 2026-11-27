@@ -3346,6 +3346,46 @@ T_B(X - W)
     },
   },
   {
+    id: "calc_formulae_definition_inclusion_nn_to_cc",
+    kind: "definition",
+    title: { tex: String.raw`\mathbb{N}\to\mathbb{C}\text{の包含写像}` },
+    labels: ["inclusion_nn_to_cc"],
+    lean: ["Ising2D.inclusionNNtoCC", "Ising2D.inclusionNNtoCC_eq_natCast"],
+    statement: [
+      paragraph([
+        ref("inclusion_nn_to_zz"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{Z}}`),
+        "、",
+        ref("inclusion_zz_to_rr"),
+        " の ",
+        math(String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}`),
+        "、",
+        ref("inclusion_rr_to_cc"),
+        " の ",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " を合成して、写像 ",
+        math(String.raw`\iota_{\mathbb{N}\to\mathbb{C}}:\mathbb{N}\to\mathbb{C}`),
+        " を",
+      ]),
+      displayMath(String.raw`\iota_{\mathbb{N}\to\mathbb{C}}(n) := \bigl(\iota_{\mathbb{Z}\to\mathbb{R}}(\iota_{\mathbb{N}\to\mathbb{Z}}(n))\bigr)_{\mathbb{C}}
+\qquad (n \in \mathbb{N})`),
+      paragraph([
+        "と定める。これを ",
+        math(String.raw`\mathbb{N}`),
+        " から ",
+        math(String.raw`\mathbb{C}`),
+        " への包含写像と呼ぶ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-27（Lean の点検の直し、未定義の記号の行「ℂ とその演算」の残りの Nat.cast@Complex）: 原文（Typst）に対応ブロックは無い。antiperiodic_exp_sum が略記 n_ℂ := ((n_ℤ)_ℝ)_ℂ（n ∈ ℕ）を置き、証明で ((M_col)_ℕ)_ℂ を使っていたが、この写像を定めるブロックが無かった。antiperiodic_exp_sum の略記をこのブロックの ι_{ℕ→ℂ} に結び付けた（定義の右辺は元の略記と同じ合成である）。Lean の具体版は ℤ_{≥0} の元を ℕ の元 n の像 ι_{ℕ→ℤ}(n) として書き、それを ℂ へ送るのに Lean の Nat.cast を使うので、その写像を名前の付いた三つの写像の合成として定めた。Lean の具体版は Ising2D.inclusionNNtoCC（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/DefinitionInclusionOfNaturalNumbersIntoComplexNumbers.lean。同じ合成で定める）で、Lean の Nat.cast（ℕ → ℂ）との一致は補題一本 Ising2D.inclusionNNtoCC_eq_natCast である。定義であり証明を持たないので、SageMath の検算は置かない。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_claim_inclusion_zz_to_rr_of_one",
     kind: "claim",
     title: { tex: String.raw`\iota_{\mathbb{Z}\to\mathbb{R}}(1_{\mathbb{Z}}) = 1_{\mathbb{R}}` },
