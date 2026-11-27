@@ -7,13 +7,14 @@
 共役の仮定には、人手の `complex_conjugate_of_sum`（`hsumRange`）・`complex_conjugate_of_product`（`hmul`）・
 `complex_conjugate_of_difference`（`hsub`）の具体版 `complex_conjugate_of_product_eq`・`complex_conjugate_of_difference_eq`
 （`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifference.lean`）と、和の具体版を添字 `0, …, N − 1` へ読み替えた `complex_conjugate_star_sum_range`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`）と、
-`complex_conjugate_of_sum` の添字 `Conf M` の和（`hsum`）に、添字を `finFunctionFinEquiv` で `Fin (2^M)` へ付け替えて当てる `complex_conjugate_star_sum_conf`、
+`complex_conjugate_of_sum` の添字 `Conf M` の和（`hsum`）に、添字を `finFunctionFinEquiv` で `Fin (2^M)` へ付け替えて当てる `complex_conjugate_star_sum_conf`（`ClaimStarPreservesNormAndLimitsFromNecSuf.lean`）、
 `abs_of_complex_conjugate`（`hnorm`）に mathlib の `norm_star`（Lean の具体版が無い）と、
 人手 `complex_conjugate_of_real_inclusion` の具体版（`h0`・`h1`、係数の `hc` は `star_inv_factorial`）を渡す。
 部分和と極限の段の `h0` は必要十分版の中で `hsumRange` から作るので、そこでは渡さない。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfHermitianIsHermitian
 import Ising2D.NecSuf.SeriesOfHermitianIsHermitian
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
 
 namespace Ising2D
 

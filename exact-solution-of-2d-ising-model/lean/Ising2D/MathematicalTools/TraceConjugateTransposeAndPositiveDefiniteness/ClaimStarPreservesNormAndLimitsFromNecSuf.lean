@@ -10,13 +10,18 @@
 `complex_conjugate_star_finite_sum`（`MathematicalTools/SetNotationAndComplexCartesianArithmetic/ClaimComplexConjugateOfSumProductDifferenceStarForm.lean`）を渡す。
 `abs_of_complex_conjugate`（`hnorm`）は具体版と同じく、Lean の具体版が無いので mathlib の `norm_star` を渡す。
 
-`TensorPow M`（添字 `Conf M`）の系 `conjTranspose_mul_tensorPow`・`conjTranspose_add_smul_tensorPow`・`conjTranspose_tendsto_tensorPow` も同じ必要十分版の特殊化として置く。
-具体版は添字が `Fin n` の行列について述べてあり、`Conf M` の行列には当てはまらないためである
-（`ClaimTransposePreservesMatrixNormAndLimitsFromNecSuf.lean` と同じ）。この系の `hsum`（添字 `Conf M` の和）には、
-添字を `finFunctionFinEquiv` で `Fin (2^M)` へ付け替えて当てる `complex_conjugate_star_sum_conf` を渡す。使う側は人手 `exp_of_hermitian_is_hermitian` の具体版（`ClaimExpOfHermitianIsHermitian.lean`）と、人手 `check_number_operator_is_hermitian` (3) の具体版 `checkPsiDag_conjTranspose`（`ClaimCheckFermiFromDiagonalizationAndExponentialForm.lean`）である。
+`TensorPow M`（添字 `Conf M`）の (1) の具体版 `ClaimTensorPowStarOfProductAndLinearCombination.lean` の `conjTranspose_mul_tensorPow`・
+`conjTranspose_add_smul_tensorPow` も、同じ必要十分版の添字 `Conf M` の特殊化として得る（`conjTranspose_mul_tensorPow_of_necSuf`・
+`conjTranspose_add_smul_tensorPow_of_necSuf`）。この特殊化の `hsum`（添字 `Conf M` の和）には、
+添字を `finFunctionFinEquiv` で `Fin (2^M)` へ付け替えて当てる `complex_conjugate_star_sum_conf` を渡す。
+(3) の `TensorPow M` での系 `conjTranspose_tendsto_tensorPow` は、具体版が無いので必要十分版の特殊化として置く
+（具体版は添字が `Fin n` の行列について述べてあり、`Conf M` の行列には当てはまらないため。`ClaimTransposePreservesMatrixNormAndLimitsFromNecSuf.lean` と同じ）。
+使う側は人手 `exp_of_hermitian_is_hermitian` の具体版（`ClaimExpOfHermitianIsHermitian.lean`）である。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimits
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTensorPowStarOfProductAndLinearCombination
 import Ising2D.NecSuf.StarPreservesNormAndLimits
+import Mathlib.Logic.Equiv.Fin.Basic
 import Ising2D.Basic
 
 namespace Ising2D
@@ -24,6 +29,18 @@ namespace Ising2D
 open Matrix Filter Topology
 
 attribute [local instance] Matrix.frobeniusNormedAddCommGroup
+
+/-- 添字 `Conf M` の `\overline{Σ_s z_s} = Σ_s \overline{z_s}`（人手 `complex_conjugate_of_sum` の `m = 2^M`）。必要十分版の和の仮定 `hsum` を添字 `Conf M` で満たすための導出の補題。
+添字を全単射 `finFunctionFinEquiv : Conf M ≃ Fin (2^M)` で `Fin (2^M)` へ移して当て、戻す。 -/
+theorem complex_conjugate_star_sum_conf (M : ℕ) (z : (Fin M → Fin 2) → ℂ) :
+    star (∑ s, z s) = ∑ s, star (z s) :=
+  calc star (∑ s, z s)
+      = star (∑ i : Fin (2 ^ M), z (finFunctionFinEquiv.symm i)) := by
+        rw [Equiv.sum_comp finFunctionFinEquiv.symm z]          -- 添字 `Conf M` を `Fin (2^M)` へ移す
+    _ = ∑ i : Fin (2 ^ M), star (z (finFunctionFinEquiv.symm i)) :=
+        complex_conjugate_star_finite_sum (2 ^ M) _               -- `complex_conjugate_of_sum` の `m = 2^M`
+    _ = ∑ s, star (z s) :=
+        Equiv.sum_comp finFunctionFinEquiv.symm (fun s => star (z s)) -- 添字を `Conf M` へ戻す
 
 /-- `matrix_conjTranspose_mul` を `NecSuf.conjTranspose_mul_matrix'` の特殊化として得る。 -/
 theorem matrix_conjTranspose_mul_of_necSuf {n : ℕ} (A B : Matrix (Fin n) (Fin n) ℂ) : (A * B)ᴴ = Bᴴ * Aᴴ :=
@@ -44,12 +61,12 @@ theorem matrix_conjTranspose_tendsto_of_necSuf {n : ℕ} (A : ℕ → Matrix (Fi
     Tendsto (fun N => ‖(A N)ᴴ - Alimᴴ‖) atTop (𝓝 0) :=
   NecSuf.conjTranspose_tendsto' norm_star complex_conjugate_of_difference_eq A Alim h
 
-/-- `star_preserves_norm_and_limits` (1) の第 1 式の `TensorPow M` での系（`NecSuf.conjTranspose_mul_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem conjTranspose_mul_tensorPow {M : ℕ} (A B : TensorPow M) : (A * B)ᴴ = Bᴴ * Aᴴ :=
+/-- `conjTranspose_mul_tensorPow` を `NecSuf.conjTranspose_mul_matrix'`（添字 `Conf M`）の特殊化として得る。 -/
+theorem conjTranspose_mul_tensorPow_of_necSuf {M : ℕ} (A B : TensorPow M) : (A * B)ᴴ = Bᴴ * Aᴴ :=
   NecSuf.conjTranspose_mul_matrix' (complex_conjugate_star_sum_conf M) complex_conjugate_of_product_eq A B
 
-/-- `star_preserves_norm_and_limits` (1) の第 2 式の `TensorPow M` での系（`NecSuf.conjTranspose_add_smul_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem conjTranspose_add_smul_tensorPow {M : ℕ} (α β : ℂ) (A B : TensorPow M) :
+/-- `conjTranspose_add_smul_tensorPow` を `NecSuf.conjTranspose_add_smul_matrix'`（添字 `Conf M`）の特殊化として得る。 -/
+theorem conjTranspose_add_smul_tensorPow_of_necSuf {M : ℕ} (α β : ℂ) (A B : TensorPow M) :
     (α • A + β • B)ᴴ = star α • Aᴴ + star β • Bᴴ :=
   NecSuf.conjTranspose_add_smul_matrix' complex_conjugate_of_sum_two complex_conjugate_of_product_eq α β A B
 

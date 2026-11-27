@@ -1993,8 +1993,6 @@ Ising2D.commute_smul_sigmaX	Commute@Ising2D.TensorPow@Matrix.instMulOfFintypeOfA
 Ising2D.commute_xString_of_commute_sigmaX	Fin.mk
 Ising2D.commute_xString_of_commute_sigmaX	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid
 Ising2D.complex_conjugate_star_finite_prod	Finset.prod@Fin,Complex@CommRing.toCommMonoid
-Ising2D.complex_conjugate_star_sum_conf	Finset.sum@→[Fin,Fin],Complex@Complex.instAddCommMonoid
-Ising2D.complex_conjugate_star_sum_conf	Finset.univ@→[Fin,Fin]@Pi.instFintype
 Ising2D.complex_conjugate_star_sum_range	Finset.range
 Ising2D.complex_conjugate_star_sum_range	Finset.sum@Nat,Complex@Complex.instAddCommMonoid
 Ising2D.complex_cos_add_I_mul_sin_chain	Complex.exp

@@ -1,5 +1,5 @@
 /-
-# 複素共役は有限和・積を保つ: 添字 `Fin n`・`Finset.range`・`Conf M` への読み替え（具体版）
+# 複素共役は有限和・積を保つ: 添字 `Fin n`・`Finset.range` への読み替え（具体版）
 
 対応する人手証明（正本は `structured-latex/content/005_exp_conjugation_proof.ts`）:
 - `exp_conjugation_claim_complex_conjugate_of_sum`（ラベル `complex_conjugate_of_sum`）
@@ -7,14 +7,13 @@
 
 `complex_conjugate_star_finite_sum` は人手 `complex_conjugate_of_sum`（`m ∈ ℤ_{≥0}`）の主の具体版で、`n = 0` の段が人手の `m = 0` の 6 行、
 `n = m + 1` の段が `complex_conjugate_of_finite_sum_succ` である。ほかの宣言は新しい主張を立てない。2 つの主張の
-`ClaimComplexConjugateOfSumProductDifference.lean` の具体版は、有限和の添字が `Fin (m + 1)` で、積は 2 因子である。使う側の和の添字は `Fin n`（`n = 0` を含む）・`Finset.range N`・`Conf M`、
+`ClaimComplexConjugateOfSumProductDifference.lean` の具体版は、有限和の添字が `Fin (m + 1)` で、積は 2 因子である。使う側の和の添字は `Fin n`（`n = 0` を含む）・`Finset.range N`、
 積は `M` 個の因子なので、使う側がそのまま当てられる形へ読み替える。
 
 | 人手 | Lean |
 | --- | --- |
 | `complex_conjugate_of_sum` の `m = n` | `complex_conjugate_star_finite_sum`（`n = m + 1` で `complex_conjugate_of_finite_sum_succ`） |
 | `complex_conjugate_of_sum` の `m = N`（添字 `0, …, N − 1`） | `complex_conjugate_star_sum_range`（添字の付け替え `Finset.sum_range` と `complex_conjugate_star_finite_sum`） |
-| `complex_conjugate_of_sum` の `m = 2^M`（添字 `Conf M`） | `complex_conjugate_star_sum_conf`（添字の付け替え `finFunctionFinEquiv` と `complex_conjugate_star_finite_sum`） |
 | `complex_conjugate_of_product` の反復適用（`M` 個の因子の有限積） | `complex_conjugate_star_finite_prod`（`def_finite_product_of_complex_numbers` で末尾の因子を外し、1 段ごとに `complex_conjugate_of_product_eq` を 1 回） |
 
 - 人手の `m ∈ ℤ_{≥0}` の `m = 0` の 6 行は、`complex_conjugate_star_finite_sum` の `n = 0` の段で、空の和の式
@@ -32,10 +31,6 @@
 - 人手の添字 `0, …, N` の和（`def_exp` の部分和）は、`Finset.range (N + 1)` の和である（`complex_conjugate_star_sum_range` の `N → N + 1`）。`def_finite_sum_of_complex_numbers` の
   添字 `1, …, m` の和（Lean の `Fin (m + 1)` の和）との行き来は、mathlib の `Finset.sum_range`（`Σ_{m ∈ range n} f m = Σ_{i : Fin n} f i`）
   で行う（添字の付け方そのものは状態台帳の「有限和の添字の付け方」の件）。
-- `TensorPow M` の行列の添字 `Conf M`（`Fin M → Fin 2`）の和は、`Conf M` から `Fin (2^M)` への全単射 `finFunctionFinEquiv`
-  （`toFinPowAlgEquiv M`（`Representation.lean`）の添字の付け替えと同じもの）で `Fin (2^M)` の和へ移してから当て、戻す。
-  主張の添字は `Conf M` の中身 `Fin M → Fin 2` で書く（`Conf M` は略記なので、使う側はそのまま当てられる）。
-  移す段と戻す段は人手の行ではない（`ClaimTraceEpsilonVPlusReduction.lean` の `Φ` と同じ扱い）。結論は付け替えの選び方によらない。
 
 `complex_conjugate_star_finite_sum` の必要十分版は `NecSuf/AdditiveMapPreservesFiniteSum.lean` の
 `NecSuf.map_finSumLeftFromEmpty_of_map_add_of_map_zero'`（導出は `ClaimComplexConjugateOfSumFromNecSuf.lean`）。
@@ -45,7 +40,6 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.Defini
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifference
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionFiniteSumOverIndexSet
 import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Logic.Equiv.Fin.Basic
 
 namespace Ising2D
 
@@ -122,17 +116,5 @@ theorem complex_conjugate_star_sum_range (N : ℕ) (z : ℕ → ℂ) :
         complex_conjugate_star_finite_sum N (fun i => z i)        -- `complex_conjugate_of_sum` の `m = N`
     _ = ∑ m ∈ Finset.range N, star (z m) :=
         (Finset.sum_range (fun m => star (z m))).symm             -- 添字を `0, …, N − 1` へ戻す
-
-/-- 添字 `Conf M` の `\overline{Σ_s z_s} = Σ_s \overline{z_s}`（人手 `complex_conjugate_of_sum` の `m = 2^M`）。
-添字を全単射 `finFunctionFinEquiv : Conf M ≃ Fin (2^M)` で `Fin (2^M)` へ移して当て、戻す。 -/
-theorem complex_conjugate_star_sum_conf (M : ℕ) (z : (Fin M → Fin 2) → ℂ) :
-    star (∑ s, z s) = ∑ s, star (z s) :=
-  calc star (∑ s, z s)
-      = star (∑ i : Fin (2 ^ M), z (finFunctionFinEquiv.symm i)) := by
-        rw [Equiv.sum_comp finFunctionFinEquiv.symm z]          -- 添字 `Conf M` を `Fin (2^M)` へ移す
-    _ = ∑ i : Fin (2 ^ M), star (z (finFunctionFinEquiv.symm i)) :=
-        complex_conjugate_star_finite_sum (2 ^ M) _               -- `complex_conjugate_of_sum` の `m = 2^M`
-    _ = ∑ s, star (z s) :=
-        Equiv.sum_comp finFunctionFinEquiv.symm (fun s => star (z s)) -- 添字を `Conf M` へ戻す
 
 end Ising2D

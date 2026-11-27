@@ -153,7 +153,6 @@ DEP	concrete	Ising2D.c_equals_c_plus
 DEP	concrete	Ising2D.c_minus_le_c_plus
 DEP	concrete	Ising2D.c_minus_le_c_plus_of_nonneg
 DEP	concrete	Ising2D.checkFermiOf_Qproj_eq
-DEP	concrete	Ising2D.checkPsiDag_conjTranspose
 DEP	concrete	Ising2D.checkPsi_car
 DEP	concrete	Ising2D.checkVprime_mul_Qproj
 DEP	concrete	Ising2D.checkX_eq_carHam
@@ -195,7 +194,6 @@ DEP	concrete	Ising2D.idempotent_sq_eq_mul_self
 DEP	concrete	Ising2D.idempotent_sub_mem_ker
 DEP	concrete	Ising2D.isPdPair_of_matrix
 DEP	concrete	Ising2D.isPsdPair_of_matrix
-DEP	concrete	Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq
 DEP	concrete	Ising2D.kronecker_family_of_spanning_family_spans
 DEP	concrete	Ising2D.lie_H1_hatY
 DEP	concrete	Ising2D.lie_H1_hatZ_opp
@@ -237,7 +235,6 @@ DEP	concrete	Ising2D.sum_zyStep6Coeff_smul_pauliKroneckerFamily
 DEP	concrete	Ising2D.symmetrized_transfer_matrix_on_sectors
 DEP	concrete	Ising2D.tag_eq_tagPoint
 DEP	concrete	Ising2D.tendsto_modulus_gamma
-DEP	concrete	Ising2D.tensorPow_pow_conjTranspose_of_conjTranspose_eq
 DEP	concrete	Ising2D.tensorPow_pow_transpose_of_transpose_eq
 DEP	concrete	Ising2D.tensorPow_two_torsion_free
 DEP	concrete	Ising2D.trace_VPlus_pos
@@ -246,7 +243,6 @@ DEP	concrete	Ising2D.trace_of_idempotent
 DEP	concrete	Ising2D.trace_similarity_invariant
 DEP	concrete	Ising2D.trace_similarity_invariant_of_columns
 DEP	concrete	Ising2D.vecNormSq_absVec_eq
-DEP	concrete	Ising2D.xString_conjTranspose
 DEP	concrete	Ising2D.zy_step6_prep_t
 IMPORT	concrete	Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimActionTCheckVprime	necsuf	Ising2D.NecSuf.ExpEigenvector
 IMPORT	concrete	Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimActionTCheckVprime	necsuf	Ising2D.NecSuf.FermionLadder
@@ -328,7 +324,6 @@ IMPORT	concrete	Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimTVActionsOnHatZHat
 IMPORT	concrete	Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionNumberOperator	necsuf	Ising2D.NecSuf.NumberOperator
 IMPORT	concrete	Ising2D.RoutesNotAdopted.MinusSector.ClaimEpsilonIsSignFlipPermutation	necsuf	Ising2D.NecSuf.PermSector
 IMPORT	concrete	Ising2D.RoutesNotAdopted.MinusSector.DefinitionOddEigenvectors	necsuf	Ising2D.NecSuf.NegatedVectorsSubmodule
-IMPORT	concrete	Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimCheckFermiFromDiagonalizationAndExponentialForm	derivation	Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
 IMPORT	concrete	Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric	necsuf	Ising2D.NecSuf.PermMatrix
 IMPORT	concrete	Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimZYLinearlyIndependent	derivation	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleOfZeroMatrixFromNecSuf
 IMPORT	concrete	Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimZYLinearlyIndependent	derivation	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrixFromNecSuf

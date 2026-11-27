@@ -20,8 +20,9 @@
 
 * 行列は `TensorPow M`（添字 `Conf M`）で述べる。使う側（`exp_hermitian_is_positive_definite`・`W_is_real_symmetric_positive_definite` の Step 2）が
   `TensorPow M` の `matExp` だからである。人手の `n` は `2^{M_col}` にあたる。添字が `Conf M` なので、
-  `star_preserves_norm_and_limits` (1) の第 1 式・(3) は、必要十分版を添字 `Conf M` へ特殊化した系
-  `conjTranspose_mul_tensorPow`・`conjTranspose_tendsto_tensorPow`（`ClaimStarPreservesNormAndLimitsFromNecSuf.lean`）を引く。
+  `star_preserves_norm_and_limits` (1) の第 1 式は `TensorPow M` の具体版 `conjTranspose_mul_tensorPow`
+  （`ClaimTensorPowStarOfProductAndLinearCombination.lean`）を、(3) は必要十分版を添字 `Conf M` へ特殊化した系
+  `conjTranspose_tendsto_tensorPow`（`ClaimStarPreservesNormAndLimitsFromNecSuf.lean`）を引く。
 * 冒頭の `I^* = I` は、人手が `identity_matrix_is_positive_definite` のエルミート性の段を引いている。その主張の Lean の具体版は無いので、
   そのエルミート性の段の成分の 5 行を `TensorPow M` について `identity_conjTranspose_tensorPow` に置いた。
   人手の `δ_{ij}` は `def_identity_matrix` の成分 `if i = j then 1 else 0`（mathlib の `Matrix.one_apply`）で書く
@@ -45,6 +46,7 @@
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimComplexConjugateOfSumProductDifferenceStarForm
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfSymmetricIsSymmetric
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTensorPowStarOfProductAndLinearCombination
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionConjugateTransposeAndHermitian
 

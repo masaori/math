@@ -1439,7 +1439,7 @@ A^1
     origin: { path: SRC, ordinal: 14 },
     title: { tex: String.raw`\|A^*\| = \|A\| \text{ と極限の共役転置}` },
     labels: ["star_preserves_norm_and_limits"],
-    lean: ["Ising2D.matrix_conjTranspose_mul", "Ising2D.matrix_conjTranspose_add_smul", "Ising2D.matrix_conjTranspose_norm", "Ising2D.matrix_conjTranspose_tendsto", "Ising2D.matrix_conjTranspose_mul_apply", "Ising2D.matrix_conjTranspose_add_smul_apply", "Ising2D.matrix_conjTranspose_sub", "Ising2D.matrix_conjTranspose_sub_apply"],
+    lean: ["Ising2D.matrix_conjTranspose_mul", "Ising2D.matrix_conjTranspose_add_smul", "Ising2D.matrix_conjTranspose_norm", "Ising2D.matrix_conjTranspose_tendsto", "Ising2D.matrix_conjTranspose_mul_apply", "Ising2D.matrix_conjTranspose_add_smul_apply", "Ising2D.matrix_conjTranspose_sub", "Ising2D.matrix_conjTranspose_sub_apply", "Ising2D.conjTranspose_mul_tensorPow", "Ising2D.conjTranspose_add_smul_tensorPow"],
     statement: [
       paragraph(["共役転置は ", ref("def_hermitian_positive_definite"), "、複素共役は ", ref("def_complex_conjugate"), "、行列積は ", ref("mat_mult"), "、行列の和・スカラー倍・差は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "・", ref("def_matrix_difference"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " のものとする。"]),
       paragraph([

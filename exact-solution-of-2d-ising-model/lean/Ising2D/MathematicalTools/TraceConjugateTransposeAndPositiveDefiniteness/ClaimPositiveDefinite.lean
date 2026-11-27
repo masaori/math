@@ -40,6 +40,10 @@
 `M_col ≤ 1` の場合を埋めるために `S1plus_isHermitian` / `S1plus_transpose` が使う）と、補助
 `S2_isHermitian_by_anticommutation`・`H2_transpose`（整数運動量の経路の形式化の記録 `Vmat_posDef` と、人手の主張の範囲外の `M_col = 0` の場合を埋めるために
 `S2_isHermitian` / `S2_transpose` が使う）である。
+この別の論法の `conjTranspose_Y_mul_Z`・`conjTranspose_Z_mul_Y` は、積の共役転置を導出 `conjTranspose_mul_tensorPow_of_necSuf` で受ける。
+具体版 `conjTranspose_mul_tensorPow`（`star_preserves_norm_and_limits` (1)）で受けると、人手 `iH_is_real_symmetric` が引かない
+`star_preserves_norm_and_limits` を Lean が使うことになるためである。`Z_j^*` の鎖（人手 `check_number_operator_is_hermitian` が
+`star_preserves_norm_and_limits` を引く）は具体版で受ける。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
@@ -47,6 +51,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositive
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTensorPowStarOfProductAndLinearCombination
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfHermitianIsHermitian
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimConjugateTransposeOfPauliMatrices
@@ -320,7 +325,7 @@ theorem Y_conjTranspose (m : Fin M) : (Y m)ᴴ = Y m :=
 
 /-- `(Y_m Z_n)^* = -(Y_m Z_n)`（`[Z,Y]_+ = 0` による）。 -/
 theorem conjTranspose_Y_mul_Z (m n : Fin M) : (Y m * Z n)ᴴ = -(Y m * Z n) := by
-  rw [conjTranspose_mul_tensorPow, Z_conjTranspose, Y_conjTranspose]
+  rw [conjTranspose_mul_tensorPow_of_necSuf, Z_conjTranspose, Y_conjTranspose]
   have h := anticomm_Z_Y n m
   rw [acomm] at h
   linear_combination (norm := noncomm_ring) h
@@ -333,7 +338,7 @@ theorem transpose_Y_mul_Z (m n : Fin M) : (Y m * Z n)ᵀ = Y m * Z n := by
   linear_combination (norm := noncomm_ring) -h
 
 theorem conjTranspose_Z_mul_Y (m : Fin M) : (Z m * Y m)ᴴ = -(Z m * Y m) := by
-  rw [conjTranspose_mul_tensorPow, Z_conjTranspose, Y_conjTranspose]
+  rw [conjTranspose_mul_tensorPow_of_necSuf, Z_conjTranspose, Y_conjTranspose]
   have h := anticomm_Z_Y m m
   rw [acomm] at h
   linear_combination (norm := noncomm_ring) h
