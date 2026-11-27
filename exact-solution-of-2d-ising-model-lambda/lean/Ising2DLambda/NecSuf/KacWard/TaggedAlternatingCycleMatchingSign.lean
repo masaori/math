@@ -101,11 +101,12 @@ theorem cycle_period_necSuf (m : {x // x ∈ A}) :
     (matchingPairSuccessor_color τ υ)
     _ m hs.2.1
 
-theorem cyclePoints_even_necSuf (m : {x // x ∈ A}) :
-    cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m ≠ [] ∧ Even (cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m).length := by
-  obtain ⟨hpos, hev, _⟩ := cycle_period_necSuf A τ υ m
+omit [Fintype J] [LinearOrder J] in
+theorem cyclePoints_even_necSuf {K : Type*} (period : K → ℕ)
+    (iterate : ℕ → K → K) (point : K → J) (m : K)
+    (hpos : 0 < period m) (hev : Even (period m)) :
+    cyclePointsOf period iterate point m ≠ [] ∧
+      Even (cyclePointsOf period iterate point m).length := by
   unfold cyclePointsOf
   refine ⟨?_, by simpa using hev⟩
   intro h
@@ -325,7 +326,10 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
     (matchingPairOutsideEnumeration (perfectMatchingMate D) A)
   · intro c hc
     obtain ⟨m, _, rfl⟩ := List.mem_map.mp hc
-    exact cyclePoints_even_necSuf A τ υ m
+    obtain ⟨hpos, hev, _⟩ := cycle_period_necSuf A τ υ m
+    exact cyclePoints_even_necSuf
+      (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m hpos hev
   · exact cycleWords_complete_necSuf D A τ υ hτ
   · intro c hc
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc

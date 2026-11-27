@@ -2,7 +2,6 @@
 # DEP 行は「使う側の分類・使う側の宣言」、IMPORT 行は「取り込む側の分類・モジュール・取り込まれる側の分類・モジュール」。
 # 行は減らすだけにする。直して違反でなくなった行は同じ回に消す。
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_disjoint_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_even_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_mem_component_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_nodup_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycleWords_complete_necSuf

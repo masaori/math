@@ -20481,9 +20481,13 @@ j\notin C\quad\Longrightarrow\quad\eta^{[2]}(j)
 \end{aligned}`),
                       paragraph(["四つの二歩の等式と ", ref("claim_finite_permutation_orbit_invariant"), " により ", math(String.raw`\operatorname{Orb}_\sigma(i)`), " は ", math(String.raw`p`), " と ", math(String.raw`p^{-1}`), " の両方で閉じる。"]),
                       paragraph(["任意の ", math(String.raw`j\in\mathcal J`), " について、", math(String.raw`j\in C`), " なら ", math(String.raw`\tau(j)=\sigma(j)`), "、", math(String.raw`j\notin C`), " なら ", math(String.raw`\tau(j)=\sigma^{-1}(j)`), " である。後者は ", ref("def_matching_pair_predecessor"), " と ", ref("claim_matching_pair_permutation"), " による。よって ", math(String.raw`i,\tau(i)\in\operatorname{Orb}_\sigma(i)`), " であり、二歩で得る点も同じ軌道に属するから"]),
-                      displayMath(String.raw`\mathcal B_{\tau,\upsilon}(i)=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(i))
-\subseteq\operatorname{Orb}_\sigma(i)
-\qquad\bigl(\because\ \blkref{def_matching_pair_component},\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal B_{\tau,\upsilon}(i)
+&=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(i))
+&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr)\\
+&\subseteq\operatorname{Orb}_\sigma(i)
+&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)
+\end{aligned}`),
                       paragraph(["逆の包含を示す。任意の ", math(String.raw`j\in B`), " を取る。"]),
                       displayMath(String.raw`\begin{aligned}
 \mathcal B_{\tau,\upsilon}(j)&=B&&\bigl(\because\ \blkref{claim_matching_pair_component_basepoint}\bigr)\\
