@@ -21087,7 +21087,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
 &=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(c_m))]
 &&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第二色の場合}\bigr)\\
 &=W_{\upsilon}(w)
-&&\bigl(\because\ W_{\upsilon}(w)\text{ の置き方}\bigr).
+&&\bigl(\because\ W_{\upsilon}(w)\text{ の置き方}\bigr)
 \end{aligned}`),
                       paragraph(["空列でも各行は空列の等号となる。有限列と有限置換だけを使い、実数体への脱出はない。"]),
                     ],

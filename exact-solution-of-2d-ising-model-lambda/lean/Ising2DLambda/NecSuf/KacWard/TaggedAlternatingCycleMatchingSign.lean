@@ -177,15 +177,18 @@ theorem cycle_pairs_reference_necSuf (D₀' : Set (Set J)) (mate : J → J)
         exact hυ' _]
   exact hD₀' _
 
-theorem cyclePoints_mem_component_necSuf (m : {x // x ∈ A}) (x : J)
-    (hx : x ∈ cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m) :
-    ∃ h : x ∈ A, (⟨x, h⟩ : {x // x ∈ A}) ∈ matchingPairComponent τ υ m := by
+omit [Fintype J] [LinearOrder J] in
+theorem cyclePoints_mem_component_necSuf
+    (period : {x // x ∈ A} → ℕ)
+    (iterate : ℕ → {x // x ∈ A} → {x // x ∈ A})
+    (component : {x // x ∈ A} → Set {x // x ∈ A})
+    (m : {x // x ∈ A}) (x : J)
+    (hiterate : ∀ r, iterate r m ∈ component m)
+    (hx : x ∈ cyclePointsOf period iterate Subtype.val m) :
+    ∃ h : x ∈ A, (⟨x, h⟩ : {x // x ∈ A}) ∈ component m := by
   unfold cyclePointsOf at hx
   obtain ⟨r, _, rfl⟩ := List.mem_map.mp hx
-  refine ⟨(finiteMapIterate (matchingPairPermutation τ υ) r m).2, ?_⟩
-  rw [← matchingPairPermutation_orbit_eq_component]
-  exact ⟨r, Or.inl rfl⟩
+  exact ⟨(iterate r m).2, hiterate r⟩
 
 omit [Fintype J] [LinearOrder J] in
 theorem cyclePoints_nodup_necSuf {K : Type*} (period : K → ℕ)
@@ -206,8 +209,18 @@ theorem cyclePoints_disjoint_necSuf (m₁ m₂ : {x // x ∈ A})
   intro x hx₁ hx₂
   obtain ⟨i₁, rfl⟩ := (mem_cycleMinimaOf _ _).mp h₁
   obtain ⟨i₂, rfl⟩ := (mem_cycleMinimaOf _ _).mp h₂
-  obtain ⟨ha, hc₁⟩ := cyclePoints_mem_component_necSuf A τ υ _ x hx₁
-  obtain ⟨_, hc₂⟩ := cyclePoints_mem_component_necSuf A τ υ _ x hx₂
+  have hiterate (m : {x // x ∈ A}) (r : ℕ) :
+      finiteMapIterate (matchingPairPermutation τ υ) r m ∈ matchingPairComponent τ υ m := by
+    rw [← matchingPairPermutation_orbit_eq_component]
+    exact ⟨r, Or.inl rfl⟩
+  obtain ⟨ha, hc₁⟩ := cyclePoints_mem_component_necSuf A
+    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+    (finiteMapIterate (matchingPairPermutation τ υ)) (matchingPairComponent τ υ)
+    _ x (hiterate _) hx₁
+  obtain ⟨_, hc₂⟩ := cyclePoints_mem_component_necSuf A
+    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+    (finiteMapIterate (matchingPairPermutation τ υ)) (matchingPairComponent τ υ)
+    _ x (hiterate _) hx₂
   have hbase (j : {x // x ∈ A})
       (hj : ⟨x, ha⟩ ∈ matchingPairComponent τ υ j) :
       Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ ⟨x, ha⟩ = Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ j := by
@@ -270,7 +283,13 @@ theorem cycleWords_complete_necSuf :
         rwa [hτ] at h) x hy
     obtain ⟨l, hl, hxl⟩ := List.mem_flatten.mp hx
     obtain ⟨m, _, rfl⟩ := List.mem_map.mp hl
-    exact (cyclePoints_mem_component_necSuf A τ υ m x hxl).1
+    apply (cyclePoints_mem_component_necSuf A
+      (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) (matchingPairComponent τ υ)
+      m x (by
+        intro r
+        rw [← matchingPairPermutation_orbit_eq_component]
+        exact ⟨r, Or.inl rfl⟩) hxl).1
   · intro x
     by_cases hx : x ∈ A
     · apply List.mem_append_left
