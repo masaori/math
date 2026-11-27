@@ -2051,6 +2051,7 @@ targets=(
   Ising2D.matrix_eq_neg_of_add_eq_zero
   Ising2D.matrix_eq_neg_of_add_eq_zero_of_necSuf
   Ising2D.eq_neg_of_add_eq_zero_tensorPow
+  Ising2D.eq_neg_of_add_eq_zero_tensorPow_of_necSuf
   "Ising2D.NecSuf.mul_sub_eq_sub_mul_of_commute_matrix'"
   Ising2D.matrix_mul_sub_eq_sub_mul_of_commute
   Ising2D.matrix_mul_sub_eq_sub_mul_of_commute_of_necSuf

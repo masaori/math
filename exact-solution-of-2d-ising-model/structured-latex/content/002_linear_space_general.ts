@@ -2489,7 +2489,7 @@ C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     kind: "claim",
     title: { text: "和が零行列なら一方は他方の符号反転" },
     labels: ["matrix_equals_negation_if_sum_is_zero"],
-    lean: ["Ising2D.matrix_eq_neg_of_add_eq_zero", "Ising2D.matrix_sub_neg_eq_zero_of_add_eq_zero"],
+    lean: ["Ising2D.matrix_eq_neg_of_add_eq_zero", "Ising2D.matrix_sub_neg_eq_zero_of_add_eq_zero", "Ising2D.eq_neg_of_add_eq_zero_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -2536,6 +2536,7 @@ X - (-Y)
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。tensor_anticommutation_from_single_site の結論 XY + YX = O から XY = -(YX) を引くために足した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の十七単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.eq_neg_of_add_eq_zero_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowMatrixEqualsNegationIfSumIsZero.lean。番号 ν^{-1} で仮定を Fin n の行列へ移して、この主張を引く）。",
       ],
     },
   },

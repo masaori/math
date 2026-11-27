@@ -668,7 +668,6 @@ Ising2D.matrix_conjTranspose_norm
 Ising2D.matrix_conjTranspose_sub
 Ising2D.matrix_conjTranspose_sub_apply
 Ising2D.matrix_conjTranspose_tendsto
-Ising2D.matrix_eq_neg_of_add_eq_zero
 Ising2D.matrix_eq_sub_of_add_eq
 Ising2D.matrix_eq_sub_of_add_eq_apply
 Ising2D.matrix_eq_sum_delta_smul
@@ -686,11 +685,8 @@ Ising2D.matrix_smul_add
 Ising2D.matrix_smul_sub
 Ising2D.matrix_smul_zero_matrix
 Ising2D.matrix_smul_zero_matrix_apply
-Ising2D.matrix_sub_eq_add_neg
 Ising2D.matrix_sub_eq_add_real_neg_one_smul
-Ising2D.matrix_sub_eq_zero_iff
 Ising2D.matrix_sub_hasRealEntries
-Ising2D.matrix_sub_neg_eq_zero_of_add_eq_zero
 Ising2D.matrix_sub_zero_matrix
 Ising2D.matrix_sum_is_associative
 Ising2D.matrix_transpose_add
@@ -741,7 +737,6 @@ Ising2D.neg_matrix_add_self_apply
 Ising2D.neg_matrix_mul_self_apply
 Ising2D.neg_matrix_mul_self_comm
 Ising2D.neg_mul_matrix
-Ising2D.neg_neg_matrix
 Ising2D.neg_one_pow_mul_neg_one_pow
 Ising2D.neg_sub_neg_matrix
 Ising2D.neg_thetaTilde_add_int_mul
