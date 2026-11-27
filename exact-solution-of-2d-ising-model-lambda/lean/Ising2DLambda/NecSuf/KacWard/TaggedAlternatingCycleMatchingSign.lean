@@ -50,11 +50,11 @@ theorem mem_cycleMinimaOf {K : Type*} [Fintype K] (minimum : K → K) (x : K) :
   classical
   simp [cycleMinimaOf]
 
-/-- 閉路を最小元の昇順に並べた点列の列。 -/
-noncomputable def cycleWordsOf {A : Set J} (τ υ : FixedPointFreeInvolution {x // x ∈ A}) :
-    List (List J) :=
-  ((cycleMinimaOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)).sort (· ≤ ·)).map (cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val)
+/-- 代表点を昇順に並べ、各代表点から一周期の点列を読む。 -/
+noncomputable def cycleWordsOf {K : Type*} [Fintype K] [LinearOrder K]
+    (minimum : K → K) (period : K → ℕ) (iterate : ℕ → K → K)
+    (point : K → J) : List (List J) :=
+  ((cycleMinimaOf minimum).sort (· ≤ ·)).map (cyclePointsOf period iterate point)
 
 section Facts
 
@@ -225,7 +225,9 @@ theorem cyclePoints_disjoint_necSuf (m₁ m₂ : {x // x ∈ A})
       hbase _ hc₂
     _ = Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i₂ := (hmin i₂).1
 
-theorem cycleWords_flatten_nodup_necSuf : (cycleWordsOf τ υ).flatten.Nodup := by
+theorem cycleWords_flatten_nodup_necSuf : (cycleWordsOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+    (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val).flatten.Nodup := by
   unfold cycleWordsOf
   rw [List.nodup_flatten]
   refine ⟨fun l hl => ?_, ?_⟩
@@ -239,7 +241,9 @@ theorem cycleWords_flatten_nodup_necSuf : (cycleWordsOf τ υ).flatten.Nodup := 
 
 include hτ in
 theorem cycleWords_complete_necSuf :
-    IsCompleteWord ((cycleWordsOf τ υ).flatten ++
+    IsCompleteWord ((cycleWordsOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+    (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val).flatten ++
       matchingPairWord (matchingPairOutsideEnumeration (perfectMatchingMate D) A)) := by
   constructor
   · rw [List.nodup_append]
@@ -302,13 +306,19 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
     (hout : ∀ e, e ∉ A → perfectMatchingMate D₀ e = perfectMatchingMate D e)
     (hsD : matchingSignOf F D * matchingSignOf F D = 1) :
     matchingSignOf F D * matchingSignOf F D₀ =
-      (-1) ^ (cycleMinimaOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)).card * ((cycleWordsOf τ υ).map (fun c =>
+      (-1) ^ (cycleMinimaOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)).card * ((cycleWordsOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+    (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val).map (fun c =>
         ((pairChunks c).map (pairOrientationIn R)).prod *
           ((pairChunks (c.rotate 1)).map (pairOrientationIn R)).prod)).prod := by
-  have hlen : (cycleWordsOf τ υ).length = (cycleMinimaOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)).card := by
+  have hlen : (cycleWordsOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+    (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val).length = (cycleMinimaOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)).card := by
     simp [cycleWordsOf]
   rw [← hlen]
-  apply alternating_cycle_matching_sign_necSuf F hswap D D₀ (cycleWordsOf τ υ)
+  apply alternating_cycle_matching_sign_necSuf F hswap D D₀ (cycleWordsOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+    (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val)
     (matchingPairOutsideEnumeration (perfectMatchingMate D) A)
   · intro c hc
     obtain ⟨m, _, rfl⟩ := List.mem_map.mp hc

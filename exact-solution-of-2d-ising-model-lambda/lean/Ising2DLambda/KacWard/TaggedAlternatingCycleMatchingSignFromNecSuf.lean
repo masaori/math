@@ -43,8 +43,14 @@ theorem taggedAlternatingCycles_matching_sign_from_necSuf {L : ℕ}
         (concreteShortInvolution D t) (concreteLongInvolution D t)) = taggedCycleMinima D t := by
     ext x
     simp [NecSuf.KacWard.mem_cycleMinimaOf, taggedCycleMinima]
-  have hw : NecSuf.KacWard.cycleWordsOf (concreteShortInvolution D t)
-      (concreteLongInvolution D t) = taggedCycleWords D t := by
+  have hw : NecSuf.KacWard.cycleWordsOf
+      (NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum
+        (concreteShortInvolution D t) (concreteLongInvolution D t))
+      (finitePermutationMinimalPeriod (matchingPairPermutation
+        (concreteShortInvolution D t) (concreteLongInvolution D t)))
+      (finiteMapIterate (matchingPairPermutation
+        (concreteShortInvolution D t) (concreteLongInvolution D t)))
+      Subtype.val = taggedCycleWords D t := by
     unfold NecSuf.KacWard.cycleWordsOf taggedCycleWords
     rw [hminimum, hm]
     rfl

@@ -12776,11 +12776,11 @@ w^{\,k}\cdot w
                               displayMath(String.raw`\begin{aligned}
 \sum_{i:\ i<0}a
 &=0
-&&(\because\ \text{空の有限和は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元}\ 0)\\
+&&\bigl(\because\ \text{空の有限和は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元}\ 0\bigr)\\
 &=0\cdot a
-&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
+&&\bigl(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元}\bigr)\\
 &=\Bigl(\sum_{i:\ i<0}1\Bigr)\cdot a
-&&(\because\ \text{空の有限和は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元}\ 0)
+&&\bigl(\because\ \text{空の有限和は}\ \overline{\mathbb{Q}}\ \text{の加法の単位元}\ 0\bigr)
 \end{aligned}`),
                               paragraph([
                                 "一歩（", math(String.raw`n`), " から ", math(String.raw`n+1`),
@@ -12791,15 +12791,15 @@ w^{\,k}\cdot w
                               displayMath(String.raw`\begin{aligned}
 \sum_{i:\ i<n+1}a
 &=\Bigl(\sum_{i:\ i<n}a\Bigr)+a
-&&(\because\ \text{有限和から添字}\ i=n\ \text{の項を分ける})\\
+&&\bigl(\because\ \text{有限和から添字}\ i=n\ \text{の項を分ける}\bigr)\\
 &=\Bigl(\sum_{i:\ i<n}1\Bigr)\cdot a+a
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=\Bigl(\sum_{i:\ i<n}1\Bigr)\cdot a+1\cdot a
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)\\
 &=\Bigl(\Bigl(\sum_{i:\ i<n}1\Bigr)+1\Bigr)\cdot a
-&&(\because\ \text{体}\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&&\bigl(\because\ \text{体}\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
 &=\Bigl(\sum_{i:\ i<n+1}1\Bigr)\cdot a
-&&(\because\ \text{有限和へ添字}\ i=n\ \text{の項を合わせる})
+&&\bigl(\because\ \text{有限和へ添字}\ i=n\ \text{の項を合わせる}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "出発点と一歩により、すべての ", math(String.raw`n\in\mathbb{N}`),

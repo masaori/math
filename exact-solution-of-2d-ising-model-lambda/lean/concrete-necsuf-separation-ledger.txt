@@ -5,7 +5,6 @@ DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_disjoint_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_even_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_mem_component_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_nodup_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycleWordsOf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycleWords_complete_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycleWords_flatten_nodup_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycle_pairs_D_necSuf
