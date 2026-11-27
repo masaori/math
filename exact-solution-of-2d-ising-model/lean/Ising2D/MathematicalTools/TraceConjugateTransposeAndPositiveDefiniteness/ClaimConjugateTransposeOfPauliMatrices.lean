@@ -10,7 +10,7 @@
 - `conjugate_transpose_of_pauli_y`: `(σ^y)^* = σ^y`（準備の `\bar i = -i`（11 行）・`\overline{-i} = i`（12 行）と、6 行の鎖）
 
 各 `calc` の段の根拠は人手の行末の根拠と同じである。共役転置の成分の式 `(A^*)_{kl} = \overline{A_{lk}}`
-（`def_hermitian_positive_definite`）は mathlib の `Matrix.conjTranspose_apply` で読む。人手の `0_ℂ`・`1_ℂ`・`(-1)_ℂ` は
+（`def_hermitian_positive_definite`）は、その具体版 `matrix_fin_conjTranspose_apply` で読む。人手の `0_ℂ`・`1_ℂ`・`(-1)_ℂ` は
 `inclusion_rr_to_cc` の略記 `r_ℂ`（`r = 0, 1, -1`）で、Lean の `(0 : ℂ)`・`(1 : ℂ)`・`(-1 : ℂ)` とは型の上で別の項なので、
 `complex_conjugate_of_real_inclusion` を当てる段では `star_of_real_inclusion_abbrev` でその読み替えを挟む。
 準備の `\bar i = -i` は、人手 `relation_of_gamma_2_theta_tilde` の「第二に」の同じ 11 行の鎖の具体版 `conj_I_eq_neg_I` を引く。
@@ -18,6 +18,7 @@
 具体的な 2 次の行列の成分の計算なので、必要十分版は置かない（転置の `pauliX_transpose` ほかと同じ）。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionComplexConjugate
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionConjugateTransposeAndHermitian
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
@@ -48,7 +49,7 @@ theorem identity_matrix_two_conjTranspose : (1 : Matrix (Fin 2) (Fin 2) ℂ)ᴴ 
         !![star ((1 : Matrix (Fin 2) (Fin 2) ℂ) 0 0), star ((1 : Matrix (Fin 2) (Fin 2) ℂ) 1 0);
           star ((1 : Matrix (Fin 2) (Fin 2) ℂ) 0 1), star ((1 : Matrix (Fin 2) (Fin 2) ℂ) 1 1)] := by
       ext p q
-      rw [Matrix.conjTranspose_apply]
+      rw [matrix_fin_conjTranspose_apply]
       fin_cases p <;> fin_cases q <;> rfl
     -- `def_identity_matrix`（`n = 2`）
     _ = !![star (kroneckerDelta (0 : Fin 2) 0), star (kroneckerDelta (1 : Fin 2) 0);
@@ -74,7 +75,7 @@ theorem pauliX_conjTranspose : pauliXᴴ = pauliX := by
     -- `def_hermitian_positive_definite`（`n = 2`）
     pauliXᴴ = !![star (pauliX 0 0), star (pauliX 1 0); star (pauliX 0 1), star (pauliX 1 1)] := by
       ext p q
-      rw [Matrix.conjTranspose_apply]
+      rw [matrix_fin_conjTranspose_apply]
       fin_cases p <;> fin_cases q <;> rfl
     -- `def_pauli_matrices` の σ^x の成分
     _ = !![star (0 : ℂ), star 1; star 1, star 0] := rfl
@@ -92,7 +93,7 @@ theorem pauliZ_conjTranspose : pauliZᴴ = pauliZ := by
     -- `def_hermitian_positive_definite`（`n = 2`）
     pauliZᴴ = !![star (pauliZ 0 0), star (pauliZ 1 0); star (pauliZ 0 1), star (pauliZ 1 1)] := by
       ext p q
-      rw [Matrix.conjTranspose_apply]
+      rw [matrix_fin_conjTranspose_apply]
       fin_cases p <;> fin_cases q <;> rfl
     -- `def_pauli_matrices` の σ^z の成分
     _ = !![star (1 : ℂ), star 0; star 0, star (-1)] := rfl
@@ -135,7 +136,7 @@ theorem pauliY_conjTranspose : pauliYᴴ = pauliY := by
     -- `def_hermitian_positive_definite`（`n = 2`）
     pauliYᴴ = !![star (pauliY 0 0), star (pauliY 1 0); star (pauliY 0 1), star (pauliY 1 1)] := by
       ext p q
-      rw [Matrix.conjTranspose_apply]
+      rw [matrix_fin_conjTranspose_apply]
       fin_cases p <;> fin_cases q <;> rfl
     -- `def_pauli_matrices` の σ^y の成分
     _ = !![star (0 : ℂ), star Complex.I; star (-Complex.I), star 0] := rfl

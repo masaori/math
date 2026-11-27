@@ -31,6 +31,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfNegativeIsLeftInverseFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionConjugateTransposeAndHermitian
 
 namespace Ising2D
 
@@ -106,9 +107,9 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
   have hS1 : ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M)).IsHermitian := by
     have h : ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))ᴴ
         = (1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M) := by
-      rw [Matrix.conjTranspose_smul, (S1plus_isHermitian hK1).eq]
+      rw [Matrix.conjTranspose_smul, (matrix_conf_isHermitian_iff _).1 (S1plus_isHermitian hK1)]  -- `def_hermitian_positive_definite` のエルミート
       norm_num
-    exact h
+    exact (matrix_conf_isHermitian_iff _).2 h               -- `def_hermitian_positive_definite` のエルミート
   -- Step 2: `B` はエルミート（`exp_hermitian_is_positive_definite`）
   have hBherm : B.IsHermitian := by
     rw [hB, matExp]
@@ -125,7 +126,7 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
   -- Step 3: `B^* A B` は正定値（`congruence_preserves_positive_definite`）、`B^* = B`（`def_hermitian_positive_definite` のエルミートの定義）。
   -- 人手の Step 3 の鎖 `c((BA)B) = c(B(AB)) = c(B^*(AB))` と係数の行とは、まだ 1 対 1 でない（状態台帳の `VPlus_posDef` の件）
   have hBAB : (Bᴴ * A * B).PosDef := hApos.conjTranspose_mul_mul_same hBinj
-  rw [hBherm.eq] at hBAB
+  rw [(matrix_conf_isHermitian_iff B).1 hBherm] at hBAB
   -- Step 3: `(2s_2)^{M/2} > 0` 倍も正定値（`positive_real_multiple_preserves_positive_definite`）
   rw [VPlus_eq_smul]
   refine positive_real_multiple_preserves_positive_definite_tensorPow hBAB ?_

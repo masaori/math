@@ -136,11 +136,9 @@ Ising2D.Bconst	OfNat.ofNat@Real,12@instOfNatAtLeastTwo
 Ising2D.Bconst	Real.pi
 Ising2D.Bconst_le	Bool.true
 Ising2D.Bconst_le	OfScientific.ofScientific@Real@NNRatCast.toOfScientific
-Ising2D.CheckFermi	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.CheckFermi	ite@Ising2D.TensorPow,Eq@instDecidableEqFin
 Ising2D.CheckFermi.Qproj	Finset
 Ising2D.CheckFermi.Qproj_conjTranspose	Finset
-Ising2D.CheckFermi.Qproj_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.CheckFermi.Qproj_eq	Finset
 Ising2D.CheckFermi.Qproj_eq_finProdLeft_defFactor	Finset
 Ising2D.CheckFermi.Qproj_insert_mulVec_cre_mulVec_generator	Finset
@@ -156,7 +154,6 @@ Ising2D.CheckFermi.Qproj_mulVec_of_mem_range	Finset
 Ising2D.CheckFermi.Qproj_mul_Qproj_of_ne	Finset
 Ising2D.CheckFermi.Qproj_mul_self	Finset
 Ising2D.CheckFermi.Qproj_ne_zero	Finset
-Ising2D.CheckFermi.ann_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.CheckFermi.ann_mulVec_cre_mulVec_generator	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.CheckFermi.checkH	ite@Real,Eq@Complex.instDecidableEq
 Ising2D.CheckFermi.commute_ann_nOp	Commute@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid
@@ -272,7 +269,6 @@ Ising2D.CheckFermi.halfSign	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.CheckFermi.halfSign	ite@Real,Eq@instDecidableEqFin
 Ising2D.CheckFermi.halfSign_one	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.CheckFermi.halfSign_zero	OfNat.ofNat@Fin,0@Fin.instOfNat
-Ising2D.CheckFermi.nOp_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.CheckFermi.nOp_mulVec_generator_eq_zero	Finset
 Ising2D.CheckFermi.nOp_mulVec_generator_eq_zero	Membership.mem@Fin,Finset@SetLike.instMembership
 Ising2D.CheckFermi.nOp_mulVec_generator_eq_zero	OfNat.ofNat@→,0@Zero.toOfNat0
@@ -869,7 +865,6 @@ Ising2D.H1	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.H1JordanWigner	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.H1JordanWigner	ite@Ising2D.TensorPow,Eq@instDecidableEqNat
 Ising2D.H1JordanWigner_mulVec_eq_H1	HSMul.hSMul@Complex,→,→@Function.hasSMul
-Ising2D.H1_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.H1_plus_in_sigma_z_form	HAdd.hAdd@Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow@Matrix.add
 Ising2D.H1_transpose	Matrix.transpose
 Ising2D.H1plus	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
@@ -882,7 +877,6 @@ Ising2D.H1plus_eq_sub	HMul.hMul@Ising2D.TensorPow,Ising2D.TensorPow,Ising2D.Tens
 Ising2D.H1plus_eq_sub	HSub.hSub@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Ising2D.TensorPow@Matrix.sub
 Ising2D.H1plus_eq_sub	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.H2	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
-Ising2D.H2_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.H2_eq_neg_I_smul_sum_sigmaX	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.H2_transpose	Matrix.transpose
 Ising2D.I_mul_smul_H1plus	HAdd.hAdd@Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow@Matrix.add
@@ -931,7 +925,6 @@ Ising2D.Jint	intervalIntegral@Real@Real.normedAddCommGroup,RCLike.toInnerProduct
 Ising2D.K1D_hasRealEntries	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.K1D_hasRealEntries_succ	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.K1D_isHermitian	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
-Ising2D.K1D_isHermitian	Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid
 Ising2D.K1D_isRealSymmetric	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.K1D_transpose	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.K1D_transpose	Matrix.transpose
@@ -983,7 +976,6 @@ Ising2D.Qproj_mulVec_eq_zero_of_ne_eigenvalue	Finset
 Ising2D.Qproj_mulVec_eq_zero_of_ne_eigenvalue	HSMul.hSMul@Complex,→,→@Function.hasSMul
 Ising2D.Qproj_mulVec_eq_zero_of_ne_eigenvalue	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.Qproj_mul_VPlus	Finset
-Ising2D.S1_isHermitian	Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid
 Ising2D.S1_transpose	Matrix.transpose
 Ising2D.S1plus_eq_K1_smul_sub	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
 Ising2D.S1plus_eq_K1_smul_sub	Fin.castSucc
@@ -991,14 +983,9 @@ Ising2D.S1plus_eq_K1_smul_sub	Fin.succ
 Ising2D.S1plus_eq_K1_smul_sub	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.S1plus_eq_K1_smul_sub	HSub.hSub@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.sub
 Ising2D.S1plus_eq_K1_smul_sub	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.instSemiring,?,Matrix.addCommMonoid,?,Matrix.module
-Ising2D.S1plus_isHermitian	Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid
-Ising2D.S1plus_isHermitian_of_real_symmetric	Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid
 Ising2D.S1plus_transpose	Matrix.transpose
 Ising2D.S1plus_transpose_by_pauli_form	Matrix.transpose
 Ising2D.S2_eq_K2star_smul_sum_sigmaX	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
-Ising2D.S2_isHermitian	Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid
-Ising2D.S2_isHermitian_by_anticommutation	Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid
-Ising2D.S2_isHermitian_of_real_symmetric	Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid
 Ising2D.S2_transpose	Matrix.transpose
 Ising2D.S2_transpose_by_pauli_form	Matrix.transpose
 Ising2D.Sfun	Real.sin
@@ -1397,7 +1384,6 @@ Ising2D.Y	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
 Ising2D.Y	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.instSemiring,?,Matrix.addCommMonoid,?,Matrix.module
 Ising2D.Y_castSucc_mul_Z_succ	Fin.castSucc
 Ising2D.Y_castSucc_mul_Z_succ	Fin.succ
-Ising2D.Y_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.Y_eq_inverse_dft_check	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.Y_eq_sigmaXPrefixProduct_mul	Fin.mk
 Ising2D.Y_kronecker_form	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
@@ -1438,7 +1424,6 @@ Ising2D.ZY_linearIndependent	Sum
 Ising2D.Z_Y_generate_algebra	Algebra.adjoin@Complex,Ising2D.TensorPow@Complex.instCommSemiring,Matrix.semiring,Matrix.instAlgebra
 Ising2D.Z_Y_generate_algebra	Subalgebra@Complex,Ising2D.TensorPow@Complex.instCommSemiring,Matrix.semiring,Matrix.instAlgebra
 Ising2D.Z_Y_generate_algebra	Top.top@Subalgebra@Algebra.instCompleteLatticeSubalgebra
-Ising2D.Z_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.Z_eq_inverse_dft_check	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.Z_eq_sigmaXPrefixProduct_mul	Fin.mk
 Ising2D.Z_firstSite_kronecker_form	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
@@ -1919,7 +1904,6 @@ Ising2D.checkPmat_conj	Matrix.vecEmpty
 Ising2D.checkPmat_eq_cols	DFunLike.coe@Equiv,→,fun@EquivLike.toFunLike
 Ising2D.checkPmat_eq_cols	Equiv
 Ising2D.checkPmat_eq_cols	Matrix.of
-Ising2D.checkPsiDag_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.checkPsiDag_eq_checkPmat_col	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.checkPsiDag_eq_checkPmat_col	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.checkPsi_car	ite@Complex,Eq@Int.instDecidableEq
@@ -1953,7 +1937,6 @@ Ising2D.checkX	HSub.hSub@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.Tenso
 Ising2D.checkX_eq_carHam	Fin.rev
 Ising2D.checkX_mul_Qproj	Finset
 Ising2D.checkY	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
-Ising2D.checkY_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.checkY_conj_eq	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.checkY_conj_eq	OfNat.ofNat@Int,2@instOfNat
 Ising2D.checkY_eq_checkPmat_inv_col	Inv.inv@Matrix[Fin,Fin,Complex]@Matrix.inv
@@ -1972,7 +1955,6 @@ Ising2D.checkZY_row_eq_rowMul_checkPmat_inv	Prod.mk
 Ising2D.checkZ_checkY_generate_algebra	Algebra.adjoin@Complex,Ising2D.TensorPow@Complex.instCommSemiring,Matrix.semiring,Matrix.instAlgebra
 Ising2D.checkZ_checkY_generate_algebra	Subalgebra@Complex,Ising2D.TensorPow@Complex.instCommSemiring,Matrix.semiring,Matrix.instAlgebra
 Ising2D.checkZ_checkY_generate_algebra	Top.top@Subalgebra@Algebra.instCompleteLatticeSubalgebra
-Ising2D.checkZ_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.checkZ_conj_eq	Finset.sum@Fin,Ising2D.TensorPow@Matrix.addCommMonoid
 Ising2D.checkZ_conj_eq	OfNat.ofNat@Int,2@instOfNat
 Ising2D.checkZ_eq_checkPmat_inv_col	Inv.inv@Matrix[Fin,Fin,Complex]@Matrix.inv
@@ -2053,10 +2035,8 @@ Ising2D.configBasisIso_negSpinConf	DFunLike.coe@Equiv,Ising2D.SpinConf,fun@Equiv
 Ising2D.configBasisIso_negSpinConf	Equiv
 Ising2D.config_numbering_equals_kronecker_numbering	DFunLike.coe@Equiv,Ising2D.SpinConf,fun@EquivLike.toFunLike
 Ising2D.config_numbering_equals_kronecker_numbering	Equiv
-Ising2D.congruence_isHermitian	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.congruence_preserves_positive_definite	Complex.partialOrder
 Ising2D.congruence_preserves_positive_definite	Matrix.PosDef@Fin,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
-Ising2D.congruence_preserves_positive_definite	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.conjIdx	Finset
 Ising2D.conjIdx	Membership.mem@Int,Finset@SetLike.instMembership
 Ising2D.conjIdx	Subtype.mk
@@ -2069,10 +2049,6 @@ Ising2D.conjIdx_involutive	Function.Involutive
 Ising2D.conjIdx_val	Finset
 Ising2D.conjIdx_val	Membership.mem@Int,Finset@SetLike.instMembership
 Ising2D.conjIdx_val	Subtype.val
-Ising2D.conjTranspose_Y_mul_Z	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
-Ising2D.conjTranspose_Z_mul_Y	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
-Ising2D.conjTranspose_conjTranspose_apply	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
-Ising2D.conjTranspose_conjTranspose_eq	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.conj_add_matrix	Units@Matrix[Fin,Fin,Complex]@Matrix.semiring
 Ising2D.conj_exp_I_mul_real	Complex.exp
 Ising2D.conj_finite_sum_of_matrices	Finset.sum@Fin,Matrix[Fin,Fin,Complex]@Matrix.addCommMonoid
@@ -2086,7 +2062,6 @@ Ising2D.conjugateBilinearValue	Finset.sum@?,Complex@Complex.instAddCommMonoid
 Ising2D.conjugateBilinearValue	Finset.univ@?@?
 Ising2D.conjugateBilinearValue	Fintype
 Ising2D.conjugateBilinearValue	Matrix@?,?,Complex
-Ising2D.conjugate_bilinear_value_of_congruence	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.constantCW	Inv.inv@Units@Units.instInv
 Ising2D.constantCW	Units.val@Ising2D.TensorPow@Matrix.semiring
 Ising2D.constantCW	Units@Ising2D.TensorPow@Matrix.semiring
@@ -2639,8 +2614,6 @@ Ising2D.expPartialSumReal_tendsto	nhds@Real@Real.pseudoMetricSpace
 Ising2D.expPartialSum_apply	Finset.range
 Ising2D.expPartialSum_apply	Finset.sum@Nat,Complex@Complex.instAddCommMonoid
 Ising2D.expPartialSum_apply	Nat.factorial
-Ising2D.expPartialSum_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
-Ising2D.expPartialSum_conjTranspose_apply	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.expPartialSum_transpose	Matrix.transpose
 Ising2D.expPartialSum_transpose_apply	Matrix.transpose
 Ising2D.expPhase	Complex.exp
@@ -3065,7 +3038,6 @@ Ising2D.hCoshOverSinhSq_deriv_neg	Real.sinh
 Ising2D.halfK1D_eq_half_smul_K1D	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.halfK1D_hasRealEntries	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.halfK1D_isHermitian	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
-Ising2D.halfK1D_isHermitian	Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid
 Ising2D.halfK1D_isRealSymmetric	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.halfK1D_transpose	Finset.sum@Fin,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.addCommMonoid
 Ising2D.halfK1D_transpose	Matrix.transpose
@@ -3247,7 +3219,6 @@ Ising2D.idempotent_sub_mem_ker	HSub.hSub@→,→,→@Pi.instSub
 Ising2D.idempotent_sub_mem_ker	Matrix.mulVec@?,?,Complex@NonUnitalNonAssocRing.toNonUnitalNonAssocSemiring,?
 Ising2D.idempotent_sub_mem_ker	Matrix@?,?,Complex
 Ising2D.idempotent_sub_mem_ker	OfNat.ofNat@→,0@Zero.toOfNat0
-Ising2D.identity_conjTranspose_tensorPow	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.identity_matrix_entry_cases_tensorPow	ite@Complex,Eq@Fintype.decidablePiFintype
 Ising2D.identity_matrix_entry_eq_real_identity_entry	DecidableEq
 Ising2D.identity_matrix_entry_eq_real_identity_entry	Matrix@?,?,Complex
@@ -3257,7 +3228,6 @@ Ising2D.identity_matrix_entry_eq_real_identity_entry	OfNat.ofNat@Matrix[?,?,Real
 Ising2D.identity_matrix_hasRealEntries	DecidableEq
 Ising2D.identity_matrix_hasRealEntries	Matrix@?,?,Complex
 Ising2D.identity_matrix_hasRealEntries	OfNat.ofNat@Matrix[?,?,Complex],1@One.toOfNat1
-Ising2D.identity_matrix_two_conjTranspose	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.identity_matrix_two_eq_ofReal	DFunLike.coe@Equiv,→,fun@EquivLike.toFunLike
 Ising2D.identity_matrix_two_eq_ofReal	Equiv
 Ising2D.identity_matrix_two_eq_ofReal	Matrix.of
@@ -3412,7 +3382,6 @@ Ising2D.jw_anticomm	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLi
 Ising2D.jw_anticomm	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.instSemiring,?,Matrix.addCommMonoid,?,Matrix.module
 Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq	DFunLike.coe@LinearMap,Matrix[Fin,Fin,Complex],fun@LinearMap.instFunLike
 Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq	LinearMap@Complex,Complex@Complex.instSemiring,Complex.instSemiring,Matrix.addCommMonoid,Matrix.addCommMonoid,Matrix.module,Matrix.module
-Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.jw_conjTranspose_of_siteOp_conjTranspose_eq	RingHom.id@Complex@Semiring.toNonAssocSemiring
 Ising2D.jw_eq_finiteMatrixProduct	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
 Ising2D.jw_eq_finiteMatrixProduct	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.instSemiring,?,Matrix.addCommMonoid,?,Matrix.module
@@ -3651,7 +3620,6 @@ Ising2D.matExpUnits_inv	Inv.inv@Units@Units.instInv
 Ising2D.matExpUnits_inv	Units.val@Ising2D.TensorPow@Matrix.semiring
 Ising2D.matExpUnits_inv	Units@Ising2D.TensorPow@Matrix.semiring
 Ising2D.matExpUnits_val	Units.val@Ising2D.TensorPow@Matrix.semiring
-Ising2D.matExp_conjTranspose_of_conjTranspose_eq	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.matExp_conj_eigen	Complex.exp
 Ising2D.matExp_conj_eigen_aux	Complex.exp
 Ising2D.matExp_conj_eigen_aux	NormedSpace.exp@Ising2D.TensorPow@Matrix.instRing,instTopologicalSpaceMatrix,Matrix.topologicalRing
@@ -3773,18 +3741,10 @@ Ising2D.matrix_centralizer_is_scalar	HMul.hMul@Matrix[?,?,Complex],Matrix[?,?,Co
 Ising2D.matrix_centralizer_is_scalar	HSMul.hSMul@Complex,Matrix[?,?,Complex],Matrix[?,?,Complex]@Matrix.smul
 Ising2D.matrix_centralizer_is_scalar	Matrix@?,?,Complex
 Ising2D.matrix_centralizer_is_scalar	OfNat.ofNat@Matrix[?,?,Complex],1@One.toOfNat1
-Ising2D.matrix_conjTranspose_add_smul	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
-Ising2D.matrix_conjTranspose_add_smul_apply	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
-Ising2D.matrix_conjTranspose_mul	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
-Ising2D.matrix_conjTranspose_mul_apply	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
-Ising2D.matrix_conjTranspose_norm	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.matrix_conjTranspose_norm	Matrix.frobeniusNormedAddCommGroup@Fin,Fin,Complex@Fin.fintype,Fin.fintype,Complex.instNormedAddCommGroup
 Ising2D.matrix_conjTranspose_norm	Norm.norm@Matrix[Fin,Fin,Complex]@Matrix.frobeniusNormedAddCommGroup
-Ising2D.matrix_conjTranspose_sub	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
-Ising2D.matrix_conjTranspose_sub_apply	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.matrix_conjTranspose_tendsto	Filter.Tendsto
 Ising2D.matrix_conjTranspose_tendsto	Filter.atTop@Nat@Nat.instPreorder
-Ising2D.matrix_conjTranspose_tendsto	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.matrix_conjTranspose_tendsto	Matrix.frobeniusNormedAddCommGroup@Fin,Fin,Complex@Fin.fintype,Fin.fintype,Complex.instNormedAddCommGroup
 Ising2D.matrix_conjTranspose_tendsto	Norm.norm@Matrix[Fin,Fin,Complex]@Matrix.frobeniusNormedAddCommGroup
 Ising2D.matrix_conjTranspose_tendsto	nhds@Real@Real.pseudoMetricSpace
@@ -4192,7 +4152,6 @@ Ising2D.pauliX_configBasisIso_apply_of_eq_neg	Subtype.val
 Ising2D.pauliX_configBasisIso_apply_of_ne_neg	DFunLike.coe@Equiv,Ising2D.SpinConf,fun@EquivLike.toFunLike
 Ising2D.pauliX_configBasisIso_apply_of_ne_neg	Equiv
 Ising2D.pauliX_configBasisIso_apply_of_ne_neg	Subtype.val
-Ising2D.pauliX_conjTranspose	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.pauliX_eq_ofReal	DFunLike.coe@Equiv,→,fun@EquivLike.toFunLike
 Ising2D.pauliX_eq_ofReal	Equiv
 Ising2D.pauliX_eq_ofReal	Matrix.of
@@ -4233,7 +4192,6 @@ Ising2D.pauliY_apply_01	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.pauliY_apply_10	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.pauliY_apply_10	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.pauliY_apply_11	OfNat.ofNat@Fin,1@Fin.instOfNat
-Ising2D.pauliY_conjTranspose	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.pauliY_transpose	Matrix.transpose
 Ising2D.pauliZ	DFunLike.coe@Equiv,→,fun@EquivLike.toFunLike
 Ising2D.pauliZ	Equiv
@@ -4246,7 +4204,6 @@ Ising2D.pauliZ_apply_01	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.pauliZ_apply_10	OfNat.ofNat@Fin,0@Fin.instOfNat
 Ising2D.pauliZ_apply_10	OfNat.ofNat@Fin,1@Fin.instOfNat
 Ising2D.pauliZ_apply_11	OfNat.ofNat@Fin,1@Fin.instOfNat
-Ising2D.pauliZ_conjTranspose	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
 Ising2D.pauliZ_eq_diagonal	Matrix.diagonal@Fin,Complex@instDecidableEqFin,Complex.instZero
 Ising2D.pauliZ_eq_ofReal	DFunLike.coe@Equiv,→,fun@EquivLike.toFunLike
 Ising2D.pauliZ_eq_ofReal	Equiv
@@ -4266,7 +4223,6 @@ Ising2D.physicalSymTransferC_eq_map	Complex.ofRealHom
 Ising2D.physicalSymTransferC_eq_map	DFunLike.coe@RingHom,Real,fun@RingHom.instFunLike
 Ising2D.physicalSymTransferC_eq_map	Matrix.map
 Ising2D.physicalSymTransferC_eq_map	RingHom@Real,Complex@Semiring.toNonAssocSemiring,Semiring.toNonAssocSemiring
-Ising2D.physicalSymTransferC_eq_smul_congruence	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.physicalSymTransferC_isUnit	IsUnit@Ising2D.TensorPow@Matrix.semiring
 Ising2D.physicalSymTransferC_posDef	Complex.partialOrder
 Ising2D.physicalSymTransferC_posDef	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
@@ -4277,7 +4233,6 @@ Ising2D.physicalV1halfC_apply_configBasisIso_self	DFunLike.coe@Equiv,Ising2D.Spi
 Ising2D.physicalV1halfC_apply_configBasisIso_self	Equiv
 Ising2D.physicalV1halfC_apply_mul_V2_apply_of_ne	DFunLike.coe@Equiv,Ising2D.SpinConf,fun@EquivLike.toFunLike
 Ising2D.physicalV1halfC_apply_mul_V2_apply_of_ne	Equiv
-Ising2D.physicalV1halfC_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.physicalV1halfC_eq_map	Complex.ofRealHom
 Ising2D.physicalV1halfC_eq_map	DFunLike.coe@RingHom,Real,fun@RingHom.instFunLike
 Ising2D.physicalV1halfC_eq_map	Matrix.map
@@ -4309,7 +4264,6 @@ Ising2D.posDef_conjugateBilinearValue_pos	Matrix.PosDef@?,Complex@Complex.instRi
 Ising2D.posDef_conjugateBilinearValue_pos	Matrix@?,?,Complex
 Ising2D.posDef_conjugateBilinearValue_pos	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.posDef_exp_of_isHermitian	Complex.partialOrder
-Ising2D.posDef_exp_of_isHermitian	Matrix.IsHermitian@Complex,Ising2D.Conf@StarRing.toStarAddMonoid
 Ising2D.posDef_exp_of_isHermitian	Matrix.PosDef@Ising2D.Conf,Complex@Complex.instRing,Complex.partialOrder,Complex.instStarRing
 Ising2D.posDef_exp_of_isHermitian	NormedSpace.exp@Ising2D.TensorPow@Matrix.instRing,instTopologicalSpaceMatrix,Matrix.topologicalRing
 Ising2D.posDef_of_conjugateBilinearValue_pos	Complex.partialOrder
@@ -4588,7 +4542,6 @@ Ising2D.recover_off_diagonal_term	Complex.exp
 Ising2D.revSiteProduct	Nat.succ
 Ising2D.revSiteProduct	Unit
 Ising2D.revSiteProduct	Unit.unit
-Ising2D.revSiteProduct_sigmaXAt_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.riemann_sum_to_integral	Continuous@Real,Real@Real.pseudoMetricSpace,Real.pseudoMetricSpace
 Ising2D.riemann_sum_to_integral	Filter.Tendsto
 Ising2D.riemann_sum_to_integral	Filter.atTop@Nat@Nat.instPreorder
@@ -4737,7 +4690,6 @@ Ising2D.sigmaXPrefixProduct_mem_adjoin	Algebra.adjoin@Complex,Ising2D.TensorPow@
 Ising2D.sigmaXPrefixProduct_mem_adjoin	Membership.mem@Ising2D.TensorPow,Subalgebra@SetLike.instMembership
 Ising2D.sigmaXPrefixProduct_mem_adjoin	Subalgebra@Complex,Ising2D.TensorPow@Complex.instCommSemiring,Matrix.semiring,Matrix.instAlgebra
 Ising2D.sigmaXPrefixProduct_succ_of_lt	Fin.mk
-Ising2D.sigmaX_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.sigmaX_mem_adjoin	Algebra.adjoin@Complex,Ising2D.TensorPow@Complex.instCommSemiring,Matrix.semiring,Matrix.instAlgebra
 Ising2D.sigmaX_mem_adjoin	Membership.mem@Ising2D.TensorPow,Subalgebra@SetLike.instMembership
 Ising2D.sigmaX_mem_adjoin	Subalgebra@Complex,Ising2D.TensorPow@Complex.instCommSemiring,Matrix.semiring,Matrix.instAlgebra
@@ -4745,7 +4697,6 @@ Ising2D.sigmaX_transpose	Matrix.transpose
 Ising2D.sigmaY	DFunLike.coe@LinearMap,Matrix[Fin,Fin,Complex],fun@LinearMap.instFunLike
 Ising2D.sigmaY	LinearMap@Complex,Complex@Complex.instSemiring,Complex.instSemiring,Matrix.addCommMonoid,Matrix.addCommMonoid,Matrix.module,Matrix.module
 Ising2D.sigmaY	RingHom.id@Complex@Semiring.toNonAssocSemiring
-Ising2D.sigmaY_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.sigmaY_eq_sigmaXPrefixProduct_mul	Fin.mk
 Ising2D.sigmaY_mem_adjoin	Algebra.adjoin@Complex,Ising2D.TensorPow@Complex.instCommSemiring,Matrix.semiring,Matrix.instAlgebra
 Ising2D.sigmaY_mem_adjoin	Membership.mem@Ising2D.TensorPow,Subalgebra@SetLike.instMembership
@@ -4765,7 +4716,6 @@ Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_kronecker	OfNat.ofNat@→,1@One.toOfNat1
 Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_transpose	Fin.castSucc
 Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_transpose	Fin.succ
 Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_transpose	Matrix.transpose
-Ising2D.sigmaZ_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.sigmaZ_eq_diagonal	Matrix.diagonal@Ising2D.Conf,Complex@?,Complex.instZero
 Ising2D.sigmaZ_eq_sigmaXPrefixProduct_mul	Fin.mk
 Ising2D.sigmaZ_lastSite_mul_sigmaZ_firstSite_kronecker	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
@@ -4897,8 +4847,6 @@ Ising2D.siteOp_apply	OfNat.ofNat@→,1@One.toOfNat1
 Ising2D.siteOp_apply	RingHom.id@Complex@Semiring.toNonAssocSemiring
 Ising2D.siteOp_conjTranspose_of_conjTranspose_eq	DFunLike.coe@LinearMap,Matrix[Fin,Fin,Complex],fun@LinearMap.instFunLike
 Ising2D.siteOp_conjTranspose_of_conjTranspose_eq	LinearMap@Complex,Complex@Complex.instSemiring,Complex.instSemiring,Matrix.addCommMonoid,Matrix.addCommMonoid,Matrix.module,Matrix.module
-Ising2D.siteOp_conjTranspose_of_conjTranspose_eq	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
-Ising2D.siteOp_conjTranspose_of_conjTranspose_eq	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.siteOp_conjTranspose_of_conjTranspose_eq	RingHom.id@Complex@Semiring.toNonAssocSemiring
 Ising2D.siteOp_mul_comm	DFunLike.coe@LinearMap,Matrix[Fin,Fin,Complex],fun@LinearMap.instFunLike
 Ising2D.siteOp_mul_comm	LinearMap@Complex,Complex@Complex.instSemiring,Complex.instSemiring,Matrix.addCommMonoid,Matrix.addCommMonoid,Matrix.module,Matrix.module
@@ -4949,12 +4897,8 @@ Ising2D.siteProd_apply	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.
 Ising2D.siteProd_commute_of_sitewise_commute	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
 Ising2D.siteProd_commute_of_sitewise_commute	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.instSemiring,?,Matrix.addCommMonoid,?,Matrix.module
 Ising2D.siteProd_conjTranspose	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
-Ising2D.siteProd_conjTranspose	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
-Ising2D.siteProd_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.siteProd_conjTranspose	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.instSemiring,?,Matrix.addCommMonoid,?,Matrix.module
 Ising2D.siteProd_conjTranspose_apply	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
-Ising2D.siteProd_conjTranspose_apply	Matrix.conjTranspose@Fin,Fin,Complex@StarRing.toStarAddMonoid
-Ising2D.siteProd_conjTranspose_apply	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.siteProd_conjTranspose_apply	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.instSemiring,?,Matrix.addCommMonoid,?,Matrix.module
 Ising2D.siteProd_conj_siteOp	DFunLike.coe@LinearMap,Matrix[Fin,Fin,Complex],fun@LinearMap.instFunLike
 Ising2D.siteProd_conj_siteOp	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
@@ -5350,7 +5294,6 @@ Ising2D.tensorPowBasis_repr_tprod_apply	MultilinearMap@?,Fin,fun,PiTensorProduct
 Ising2D.tensorPowBasis_repr_tprod_apply	PiTensorProduct.tprod@Fin,?@?,?,?
 Ising2D.tensorPowBasis_repr_tprod_apply	PiTensorProduct@Fin,?@?,?,?
 Ising2D.tensorPowBasis_repr_tprod_apply	RingHom.id@?@Semiring.toNonAssocSemiring
-Ising2D.tensorPow_pow_conjTranspose_of_conjTranspose_eq	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.tensorPow_pow_transpose_of_transpose_eq	Matrix.transpose
 Ising2D.thetaMu	Real.pi
 Ising2D.thetaMu_add_int_mul	Real.pi
@@ -5636,7 +5579,6 @@ Ising2D.vec_zero_apply	OfNat.ofNat@→,0@Zero.toOfNat0
 Ising2D.xString	DFunLike.coe@MultilinearMap,→,fun@MultilinearMap.instFunLikeForall
 Ising2D.xString	MultilinearMap@Complex,Fin,fun,Ising2D.TensorPow@Complex.instSemiring,?,Matrix.addCommMonoid,?,Matrix.module
 Ising2D.xString	ite@Matrix[Fin,Fin,Complex],LT.lt@Nat.decLt
-Ising2D.xString_conjTranspose	Matrix.conjTranspose@Ising2D.Conf,Ising2D.Conf,Complex@StarRing.toStarAddMonoid
 Ising2D.xString_succ	Fin.mk
 Ising2D.xString_succ_eq	Fin.mk
 Ising2D.zero_mem_evenEigenvectors	Membership.mem@→,Set@Set.instMembership

@@ -82,12 +82,13 @@ Pauli 行列と 2 次の単位行列の共役転置 `pauliX_conjTranspose`・`pa
 theorem siteProd_conjTranspose_apply (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (s t : Conf M) :
     (siteProd M x)ᴴ s t = siteProd M (fun k => (x k)ᴴ) s t :=
   calc (siteProd M x)ᴴ s t
-      = star (siteProd M x t s) := rfl                                      -- `def_hermitian_positive_definite`
+      = star (siteProd M x t s) := matrix_conf_conjTranspose_apply _ s t     -- `def_hermitian_positive_definite`
     _ = star (∏ k : Fin M, x k (t k) (s k)) := by
         rw [siteProd_apply]                                                 -- `def_kronecker` (2)
     _ = ∏ k : Fin M, star (x k (t k) (s k)) :=
         complex_conjugate_star_finite_prod M _                              -- `complex_conjugate_of_product` の反復適用
-    _ = ∏ k : Fin M, (x k)ᴴ (s k) (t k) := rfl                              -- `def_hermitian_positive_definite` を各因子へ
+    _ = ∏ k : Fin M, (x k)ᴴ (s k) (t k) :=
+        Finset.prod_congr rfl (fun k _ => (matrix_fin_conjTranspose_apply _ _ _).symm)                        -- `def_hermitian_positive_definite` を各因子へ
     _ = siteProd M (fun k => (x k)ᴴ) s t :=
         (siteProd_apply M (fun k => (x k)ᴴ) s t).symm                      -- `def_kronecker` (2)
 
@@ -385,7 +386,7 @@ theorem S1_isHermitian {K1 η : ℂ} (hK1 : star K1 = K1) (hη : star η = η) :
   have h : (((Complex.I * K1) • H1 M η))ᴴ = (Complex.I * K1) • H1 M η := by
     rw [Matrix.conjTranspose_smul, H1_conjTranspose hη, star_I_mul hK1,
       smul_neg, neg_smul, neg_neg]
-  exact h
+  exact (matrix_conf_isHermitian_iff _).2 h               -- `def_hermitian_positive_definite` のエルミート
 
 /-- 補助: 一般形 `i K_1 H1 M η` は転置不変。 -/
 theorem S1_transpose {K1 η : ℂ} : (((Complex.I * K1) • H1 M η))ᵀ = (Complex.I * K1) • H1 M η := by
@@ -401,7 +402,7 @@ theorem S2_isHermitian_by_anticommutation {K2star : ℂ} (hK2 : star K2star = K2
   have h : (((Complex.I * K2star) • H2 M))ᴴ = (Complex.I * K2star) • H2 M := by
     rw [Matrix.conjTranspose_smul, H2_conjTranspose, star_I_mul hK2,
       smul_neg, neg_smul, neg_neg]
-  exact h
+  exact (matrix_conf_isHermitian_iff _).2 h               -- `def_hermitian_positive_definite` のエルミート
 
 end Herm
 
@@ -421,9 +422,9 @@ theorem posDef_exp_of_isHermitian {M : ℕ} {S : TensorPow M} (hS : S.IsHermitia
   set X : TensorPow M := (1 / 2 : ℂ) • S with hX
   have hhalf : X.IsHermitian := by
     have : Xᴴ = X := by
-      rw [hX, Matrix.conjTranspose_smul, hS.eq]
+      rw [hX, Matrix.conjTranspose_smul, (matrix_conf_isHermitian_iff S).1 hS]  -- `def_hermitian_positive_definite` のエルミート
       norm_num
-    exact this
+    exact (matrix_conf_isHermitian_iff X).2 this           -- `def_hermitian_positive_definite` のエルミート
   have hsq : NormedSpace.exp X * NormedSpace.exp X = NormedSpace.exp S := by
     rw [← Matrix.exp_add_of_commute _ _ (Commute.refl _), hX, ← two_smul ℂ, smul_smul]
     norm_num

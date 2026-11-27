@@ -46,6 +46,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimC
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimExpOfSymmetricIsSymmetric
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimStarPreservesNormAndLimitsFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionConjugateTransposeAndHermitian
 
 namespace Ising2D
 
@@ -75,7 +76,7 @@ theorem star_identity_entry_tensorPow (l k : Conf M) :
 theorem identity_conjTranspose_tensorPow : (1 : TensorPow M)ᴴ = 1 :=
   Matrix.ext fun k l =>
     calc (1 : TensorPow M)ᴴ k l
-        = star ((1 : TensorPow M) l k) := rfl                                    -- `def_hermitian_positive_definite`
+        = star ((1 : TensorPow M) l k) := matrix_conf_conjTranspose_apply _ k l   -- `def_hermitian_positive_definite`
       _ = star (if l = k then (1 : ℂ) else 0) := by rw [Matrix.one_apply]       -- `def_identity_matrix`（`i → l`, `j → k`）
       _ = if l = k then (1 : ℂ) else 0 := star_identity_entry_tensorPow l k      -- `\overline{δ_{lk}} = δ_{lk}`
       _ = if k = l then (1 : ℂ) else 0 := by simp only [eq_comm]                -- `δ_{lk} = δ_{kl}`（`l = k ⟺ k = l`）
@@ -109,7 +110,7 @@ theorem star_inv_factorial (m : ℕ) : star ((m.factorial : ℂ))⁻¹ = ((m.fac
 theorem expPartialSum_conjTranspose_apply (S : TensorPow M) (hS : Sᴴ = S) (N : ℕ) (k l : Conf M) :
     (expPartialSum S N)ᴴ k l = expPartialSum S N k l :=
   calc (expPartialSum S N)ᴴ k l
-      = star (expPartialSum S N l k) := rfl                                                  -- `def_hermitian_positive_definite`
+      = star (expPartialSum S N l k) := matrix_conf_conjTranspose_apply _ k l                -- `def_hermitian_positive_definite`
     _ = star (∑ m ∈ Finset.range (N + 1), ((m.factorial : ℂ))⁻¹ * (S ^ m) l k) := by
         rw [expPartialSum_apply]                                                             -- `(E_N)_{lk}` の成分の式
     _ = ∑ m ∈ Finset.range (N + 1), star (((m.factorial : ℂ))⁻¹ * (S ^ m) l k) :=
@@ -118,7 +119,8 @@ theorem expPartialSum_conjTranspose_apply (S : TensorPow M) (hS : Sᴴ = S) (N :
         simp only [complex_conjugate_of_product_eq]                                               -- `complex_conjugate_of_product` を各項へ
     _ = ∑ m ∈ Finset.range (N + 1), ((m.factorial : ℂ))⁻¹ * star ((S ^ m) l k) := by
         simp only [star_inv_factorial]                                                       -- `complex_conjugate_of_real_inclusion` を各項へ
-    _ = ∑ m ∈ Finset.range (N + 1), ((m.factorial : ℂ))⁻¹ * (S ^ m)ᴴ k l := rfl              -- `def_hermitian_positive_definite` を各項へ
+    _ = ∑ m ∈ Finset.range (N + 1), ((m.factorial : ℂ))⁻¹ * (S ^ m)ᴴ k l :=
+        Finset.sum_congr rfl (fun m _ => by rw [matrix_conf_conjTranspose_apply])                                        -- `def_hermitian_positive_definite` を各項へ
     _ = ∑ m ∈ Finset.range (N + 1), ((m.factorial : ℂ))⁻¹ * (S ^ m) k l := by
         simp only [tensorPow_pow_conjTranspose_of_conjTranspose_eq S hS]                     -- 上で示した `(S^m)^* = S^m` を各項へ
     _ = expPartialSum S N k l := (expPartialSum_apply S N k l).symm                          -- `(E_N)_{kl}` の成分の式
