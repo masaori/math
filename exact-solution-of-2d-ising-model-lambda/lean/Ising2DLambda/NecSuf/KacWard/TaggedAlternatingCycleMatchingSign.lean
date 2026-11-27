@@ -229,6 +229,21 @@ theorem cycleWords_flatten_nodup_necSuf {K : Type*} [Fintype K] [LinearOrder K]
     · exact (Finset.mem_sort _).mp hb
     · exact hab
 
+omit [Fintype J] [LinearOrder J] in
+/-- 各点が代表点から一周期以内の反復で得られれば、閉路点列が全点を覆う。 -/
+theorem cycleWords_cover_necSuf {K : Type*} [Fintype K] [LinearOrder K]
+    (minimum : K → K) (period : K → ℕ) (iterate : ℕ → K → K)
+    (point : K → J)
+    (hcover : ∀ i : K, ∃ m ∈ cycleMinimaOf minimum,
+      ∃ r : ℕ, r < period m ∧ iterate r m = i)
+    (i : K) :
+    point i ∈ (cycleWordsOf minimum period iterate point).flatten := by
+  obtain ⟨m, hm, r, hr, hir⟩ := hcover i
+  apply List.mem_flatten.mpr
+  refine ⟨cyclePointsOf period iterate point m, ?_, ?_⟩
+  · exact List.mem_map.mpr ⟨m, (Finset.mem_sort _).mpr hm, rfl⟩
+  · exact List.mem_map.mpr ⟨r, List.mem_range.mpr hr, by rw [hir]⟩
+
 include hτ in
 theorem cycleWords_complete_necSuf :
     IsCompleteWord ((cycleWordsOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
@@ -288,20 +303,24 @@ theorem cycleWords_complete_necSuf :
     by_cases hx : x ∈ A
     · apply List.mem_append_left
       let xx : {x // x ∈ A} := ⟨x, hx⟩
-      let m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ xx
-      have hm : m ∈ cycleMinimaOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ) :=
-        (mem_cycleMinimaOf _ _).mpr ⟨xx, rfl⟩
-      have horbit : xx ∈ finitePermutationOrbit (matchingPairPermutation τ υ) m := by
-        rw [matchingPairPermutation_orbit_eq_component,
-          matchingPairComponent_basepoint τ υ xx m (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ xx)]
-        exact Or.inl (finitePermutationOrbit_self_mem _ _)
-      obtain ⟨r, hr⟩ := (finitePermutationOrbitEnumeration_bijective
-        (matchingPairPermutation τ υ) m).2 ⟨xx, horbit⟩
-      refine List.mem_flatten.mpr ⟨cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m,
-        List.mem_map.mpr ⟨m, (Finset.mem_sort _).mpr hm, rfl⟩, ?_⟩
-      refine List.mem_map.mpr ⟨r.val, List.mem_range.mpr r.isLt, ?_⟩
-      exact congrArg (fun y => y.1.1) hr
+      exact cycleWords_cover_necSuf
+        (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+        (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+        (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val
+        (by
+          intro i
+          let m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i
+          have hm : m ∈ cycleMinimaOf
+              (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ) :=
+            (mem_cycleMinimaOf _ _).mpr ⟨i, rfl⟩
+          have horbit : i ∈ finitePermutationOrbit (matchingPairPermutation τ υ) m := by
+            rw [matchingPairPermutation_orbit_eq_component,
+              matchingPairComponent_basepoint τ υ i m
+                (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ i)]
+            exact Or.inl (finitePermutationOrbit_self_mem _ _)
+          obtain ⟨r, hr⟩ := (finitePermutationOrbitEnumeration_bijective
+            (matchingPairPermutation τ υ) m).2 ⟨i, horbit⟩
+          exact ⟨m, hm, r.val, r.isLt, congrArg Subtype.val hr⟩) xx
     · apply List.mem_append_right
       have hout' := outside_mate_outside (perfectMatchingMate D) A
         (perfectMatchingMate_involutive D)
