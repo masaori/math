@@ -1,6 +1,7 @@
 # 対象ラベル: second_derivative_log_divergence
 # ℝ への脱出を含む行（積分・実対数・初等関数の値・π）を、ボール（RealBallField(256)）と Arb の数値積分で確かめる。
 # - 「有理数の四則・大小比較」の行: QQ で厳密に（浮動小数点なし）。
+# - 準備の正値の鎖の商の等号（def_real_quotient の当てはめ）: π を不定元 p に置いた QQ(p) で厳密に。
 # - cosh・sinh の値は本文の exp の部分和に尾の評価を半径として足したボール（body_real_exp_ball）から作る。
 #   log・π・平方根・sin は Arb のもの（本文の log は exp の逆写像、sin は弧の長さで定めた arcsin の逆で、標準のものに等しい）。
 # - 積分は ComplexBallField(256).integral（被積分関数は実軸の近傍で解析的。S ≥ δ^2 > 0 なので平方根の分岐に触れない）。
@@ -29,6 +30,12 @@ check("remark_real_analysis_facts_R3_R4 の 3.141592 ≤ π ≤ 3.141593", dec('
 check("数値の評価の段（QQ）: 3.141593 ≤ 3.1416、2·3.141592 = 6.283184 ≥ 6.2831", dec('3.141593') <= dec('3.1416') and 2 * dec('3.141592') == dec('6.283184') and dec('6.283184') >= dec('6.2831'))
 check("数値の評価の段: log 1 = log 1 + log 1 より log 1 = 0、2π > 1 より log(2π) > 0", is_zero(RB(1).log()) is True and RB(2 * PI) > 1 and (2 * PI).log() > 0)
 check("pi_squared_numerical_bounds: 9.8696 ≤ π^2", dec('9.8696') <= PI^2)
+# 準備の正値の鎖: 0 < 2π、0 < 1·(2π)^{-1} = 1/(2π)、0 < 4π、0 < 1·(4π)^{-1} = 1/(4π)。
+# 商の等号は def_real_quotient の当てはめなので、π を不定元 p に置いた QQ(p) で厳密に、< はボールの下端で確かめる。
+Qp.<p> = FractionField(QQ['p'])
+check("準備の鎖の等号（QQ(p)）: 1·(2p)^{-1} = 1/(2p)、1·(4p)^{-1} = 1/(4p)", 1 * (2*p)^(-1) == 1/(2*p) and 1 * (4*p)^(-1) == 1/(4*p))
+check("準備の鎖: 0 < 2π、0 < (2π)^{-1}、0 < 1·(2π)^{-1}", (2 * PI) > 0 and (2 * PI)^(-1) > 0 and (1 * (2 * PI)^(-1)) > 0)
+check("準備の鎖: 0 < 4（QQ）、0 < 4π、0 < (4π)^{-1}、0 < 1·(4π)^{-1}", QQ(0) < 4 and (4 * PI) > 0 and (4 * PI)^(-1) > 0 and (1 * (4 * PI)^(-1)) > 0)
 c0 = 1 - PI^2 / 24                                          # def_sine_bound_constant
 B = PI^2 / (12 * c0 * (1 + c0))                             # def_sine_integral_constant
 check("sine_bound_constant_numerical_bounds: c_0 ≥ 0.5887", dec('0.5887') <= c0)

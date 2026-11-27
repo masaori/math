@@ -2322,36 +2322,75 @@ S
         "、",
         math(String.raw`2\pi \geq 6.283184 \geq 6.2831`),
         " である。",
-        ref("pi_is_positive"),
-        " の ",
-        math(String.raw`0 < \pi`),
-        " と ",
-        math(String.raw`0 < 2`),
-        " から、",
-        math(String.raw`\mathbb{R}`),
-        " で正の数どうしの積は正（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
-        ref("set_and_algebra_notation"),
-        "）なので ",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&< 2\pi
+&&\bigl(\because\ \blkref{real_zero_less_than_two}\ \text{の}\ 0 < 2\ \text{と}\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to 2,\ b \to \pi)\bigr)
+\end{aligned}`),
+      paragraph([
+        ref("def_real_strict_order"),
+        " より ",
         math(String.raw`0 < 2\pi`),
-        " である。これと、",
-        math(String.raw`\mathbb{R}`),
-        " で正の数の逆数は正（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
-        ref("set_and_algebra_notation"),
-        "）であることから ",
-        math(String.raw`0 < \tfrac{1}{2\pi}`),
-        " である。同じく ",
-        math(String.raw`0 < \pi`),
-        " と ",
-        math(String.raw`0 < 4`),
-        " の積で ",
-        math(String.raw`0 < 4\pi`),
-        "、その逆数で ",
-        math(String.raw`0 < \tfrac{1}{4\pi}`),
+        " は ",
+        math(String.raw`0 \neq 2\pi`),
+        " を含むので ",
+        math(String.raw`2\pi \neq 0`),
+        " であり、",
+        ref("def_real_quotient"),
+        " の乗法の逆元 ",
+        math(String.raw`\left(2\pi\right)^{-1} \in \mathbb{R}`),
+        "（",
+        math(String.raw`z \to 2\pi`),
+        "）がある。",
+        ref("real_inverse_of_positive_is_positive"),
+        "（",
+        math(String.raw`a \to 2\pi`),
+        "）より ",
+        math(String.raw`0 < \left(2\pi\right)^{-1}`),
         " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&< 1\cdot\left(2\pi\right)^{-1}
+&&\bigl(\because\ \blkref{real_zero_less_than_one}\ \text{の}\ 0 < 1\ \text{と上の}\ 0 < \left(2\pi\right)^{-1}\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to 1,\ b \to \left(2\pi\right)^{-1})\bigr)\\
+&= \frac{1}{2\pi}
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to 1,\ z \to 2\pi)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "同じく、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&< 4\pi
+&&\bigl(\because\ \text{有理数の大小比較の}\ 0 < 4\ \text{と}\ \blkref{pi_is_positive}\ \text{の}\ 0 < \pi\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to 4,\ b \to \pi)\bigr)
+\end{aligned}`),
+      paragraph([
+        ref("def_real_strict_order"),
+        " より同じく ",
+        math(String.raw`4\pi \neq 0`),
+        " であり、",
+        ref("def_real_quotient"),
+        " の乗法の逆元 ",
+        math(String.raw`\left(4\pi\right)^{-1} \in \mathbb{R}`),
+        "（",
+        math(String.raw`z \to 4\pi`),
+        "）がある。",
+        ref("real_inverse_of_positive_is_positive"),
+        "（",
+        math(String.raw`a \to 4\pi`),
+        "）より ",
+        math(String.raw`0 < \left(4\pi\right)^{-1}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&< 1\cdot\left(4\pi\right)^{-1}
+&&\bigl(\because\ \blkref{real_zero_less_than_one}\ \text{の}\ 0 < 1\ \text{と上の}\ 0 < \left(4\pi\right)^{-1}\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to 1,\ b \to \left(4\pi\right)^{-1})\bigr)\\
+&= \frac{1}{4\pi}
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to 1,\ z \to 4\pi)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
         math(String.raw`9.8696 \leq \pi^2`),
         " は ",
         ref("pi_squared_numerical_bounds"),
@@ -3082,6 +3121,7 @@ G''(\kappa)
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」の順序の (a) の残り）: 準備の「ℝ で正の数どうしの積は正（ℝ は順序体）」「ℝ で正の数の逆数は正（ℝ は順序体）」「0 < 4 の積で」「その逆数で」を、real_zero_less_than_two・pi_is_positive・real_product_of_positives_is_positive で 0 < 2π と 0 < 4π、def_real_strict_order で ≠ 0、real_inverse_of_positive_is_positive で逆元の正値、real_zero_less_than_one・real_product_of_positives_is_positive と def_real_quotient で 0 < 1/(2π)・0 < 1/(4π) を出す鎖にした。Lean の具体版 abs_Gfirst_le・second_derivative_log_divergence_pos の positivity・one_div_pos の段を同じ主張で書き直した。値と主張は不変。0 < 4 は ℝ の数 4 を本文が定めていないので有理数の大小比較のままで、行「ℝ の数・順序・差・商」の残りの対象である。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認、二回目）: 準備に、正の数の逆数は正・正の数どうしの積は正（ℝ は順序体 set_and_algebra_notation）を使い、0 < 2π の逆数で 0 < 1/(2π)、0 < π と 0 < 4 の積 0 < 4π の逆数で 0 < 1/(4π) を出す文と、2π ≥ 6.2831 と 6.2831 > 1 から 2π > 1 を出す文を置き、Step 1 の |G'| の鎖の 2 行、Step 6 の log(π/δ) の鎖の 2 行（real_log_of_product の引数の正）、Step 7 の 1/(2π) を外へ出す行と極限の行の根拠をその参照にした。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: 準備に pi_is_positive の 0 < π と 0 < 2（ℝ は順序体で、正の数どうしの積は正）から 0 < 2π を出す文を置き、根拠「2π > 0」の 2 か所をその参照にした。値と主張は不変。",
         "定数 6/5 は最適化していない（証明中の各段の評価をそのまま足した結果 1.08 以下）。数値では実際の |G'' - (1/2π)log(1/|κ|)| の上限は 0.13 程度である（sagemath/check/055_claim_critical_point/check_04）。",

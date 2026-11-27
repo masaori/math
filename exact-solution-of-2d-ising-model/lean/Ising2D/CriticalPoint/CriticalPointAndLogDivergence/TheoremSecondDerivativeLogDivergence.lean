@@ -23,6 +23,12 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimRealLogOfProduct
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimSinhStrictlyIncreasing
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRealLogStrictlyIncreasing
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealInverseOfPositiveIsPositive
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanOne
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealStrictOrder
 
 namespace Ising2D
 
@@ -132,9 +138,22 @@ theorem abs_Gfirst_le {κ : ℝ} (hκ : κ ≠ 0) : |Gfirst κ| ≤ 1 / 2 := by
     intro t _
     simpa [Real.norm_eq_abs] using abs_dgammaK_le_one t hκ
   simp only [Real.norm_eq_abs] at hbound
-  rw [Gfirst, abs_mul, abs_of_nonneg (by positivity : (0:ℝ) ≤ 1 / (4 * Real.pi))]
+  -- 本文の準備の `0 < 4π` と `0 < 1/(4π)` の鎖
+  have h4pi : (0:ℝ) < 4 * Real.pi := real_product_of_positives_is_positive 4 Real.pi (by norm_num) hpi
+                                        -- 有理数の大小比較の `0 < 4` と `pi_is_positive` に `real_product_of_positives_is_positive`（`a → 4, b → π`）
+  have h4pine : 4 * Real.pi ≠ 0 := fun h => ((real_lt_iff_le_and_ne 0 _).1 h4pi).2 h.symm
+                                        -- `def_real_strict_order` の `≠` の側（`x → 0, y → 4π`）と等号の対称律
+  have hinv4pi : 0 < (4 * Real.pi)⁻¹ := real_inverse_of_positive_is_positive _ h4pi
+                                        -- `real_inverse_of_positive_is_positive`（`a → 4π`）
+  have h1div4pi : 0 < 1 / (4 * Real.pi) := by
+    have h : 0 < 1 * (4 * Real.pi)⁻¹ :=
+      real_product_of_positives_is_positive _ _ real_zero_less_than_one hinv4pi
+                                        -- `real_zero_less_than_one` と `real_product_of_positives_is_positive`（`a → 1, b → (4π)^{-1}`）
+    rwa [← real_div_eq_mul_inv 1 _ h4pine] at h
+                                        -- `def_real_quotient`（`y → 1, z → 4π`）を右辺から左辺へ
+  rw [Gfirst, abs_mul, abs_of_nonneg h1div4pi.le]
   rw [abs_of_nonneg (by linarith [Real.pi_pos] : (0:ℝ) ≤ 2 * Real.pi - 0)] at hbound
-  rw [div_mul_eq_mul_div, div_le_div_iff₀ (by positivity) (by norm_num)]
+  rw [div_mul_eq_mul_div, div_le_div_iff₀ h4pi (by norm_num)]
   nlinarith [hbound, hpi]
 
 /-! ## Step 2: 半区間への折り返し -/
@@ -793,14 +812,28 @@ theorem second_derivative_log_divergence_pos {κ : ℝ} (h0 : 0 < κ) (h1 : κ �
           linarith
       _ ≤ 2.201 + 0.915 + 3.615 := by rw [hTabs]; linarith [hstep6, hmid, hTub]
       _ = 6.731 := by norm_num
+  -- 本文の準備の `0 < 2π` と `0 < 1/(2π)` の鎖
+  have h2pipos : (0:ℝ) < 2 * Real.pi :=
+    real_product_of_positives_is_positive 2 Real.pi real_zero_less_than_two hpi
+                                        -- `real_zero_less_than_two` と `pi_is_positive` に `real_product_of_positives_is_positive`（`a → 2, b → π`）
+  have h2pine : 2 * Real.pi ≠ 0 := fun h => ((real_lt_iff_le_and_ne 0 _).1 h2pipos).2 h.symm
+                                        -- `def_real_strict_order` の `≠` の側（`x → 0, y → 2π`）と等号の対称律
+  have hinv2pi : 0 < (2 * Real.pi)⁻¹ := real_inverse_of_positive_is_positive _ h2pipos
+                                        -- `real_inverse_of_positive_is_positive`（`a → 2π`）
+  have h1div2pi : 0 < 1 / (2 * Real.pi) := by
+    have h : 0 < 1 * (2 * Real.pi)⁻¹ :=
+      real_product_of_positives_is_positive _ _ real_zero_less_than_one hinv2pi
+                                        -- `real_zero_less_than_one` と `real_product_of_positives_is_positive`（`a → 1, b → (2π)^{-1}`）
+    rwa [← real_div_eq_mul_inv 1 _ h2pine] at h
+                                        -- `def_real_quotient`（`y → 1, z → 2π`）を右辺から左辺へ
+  -- 本文 Step 7 の最後の鎖の 1 行目（準備の `0 < 2π`（`2π ≠ 0`）と `0 < 1/(2π)`）
   have hscale : Gsecond κ - (1 / (2 * Real.pi)) * Real.log (1 / κ)
       = (1 / (2 * Real.pi)) * (2 * Real.pi * Gsecond κ - Real.log (1 / κ)) := by
-    field_simp
-  have h2pipos : (0:ℝ) < 2 * Real.pi := by positivity
+    field_simp [h2pine]
   calc |Gsecond κ - (1 / (2 * Real.pi)) * Real.log (1 / κ)|
       = 1 / (2 * Real.pi) * |2 * Real.pi * Gsecond κ - Real.log (1 / κ)| := by
-        rw [hscale, abs_mul, abs_of_pos (one_div_pos.2 h2pipos)]
-    _ ≤ 1 / (2 * Real.pi) * 6.731 := by gcongr
+        rw [hscale, abs_mul, abs_of_pos h1div2pi]
+    _ ≤ 1 / (2 * Real.pi) * 6.731 := mul_le_mul_of_nonneg_left htot h1div2pi.le
     _ = 6.731 / (2 * Real.pi) := by ring
     _ ≤ 6.731 / 6.2831 := by gcongr
     _ ≤ 1.08 := by norm_num
