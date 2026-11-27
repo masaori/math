@@ -21365,7 +21365,7 @@ B_C(\mathcal L_\tau(w))
 &=\mathop{\mathbin{+\!+}}_{r=1}^{m}[c_r,\tau(c_r)]
 &&\bigl(\because\ \text{各対の向きの二場合}\bigr)\\
 &=W_\tau(w)
-&&\bigl(\because\ W_\tau\text{ の定義}\bigr).
+&&\bigl(\because\ W_\tau\text{ の定義}\bigr)
 \end{aligned}`),
                       paragraph(["空集合では対の列と端点列はともに空列である。有限集合と有限列だけを使い、実数体への脱出はない。"]),
                     ],
