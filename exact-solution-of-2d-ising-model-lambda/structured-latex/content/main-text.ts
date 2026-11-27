@@ -15336,13 +15336,13 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                           displayMath(String.raw`\begin{aligned}
 \sum_{w\in s}\mathrm{mult}_{w}(f)
 &=\mathrm{mult}_{w_0}(f)+\sum_{w\in s\setminus\{w_0\}}\mathrm{mult}_{w}(f)
-&& (\because\ w_0\in s)\\
+&&\bigl(\because\ w_0\in s\bigr)\\
 &\le\mathrm{mult}_{w_0}(g)+1+\sum_{w\in s\setminus\{w_0\}}\mathrm{mult}_{w}(g)
-&& (\because\ \blkref{claim_qbar_root_multiplicity_le_quotient_succ}\ \text{と}\ \blkref{claim_qbar_other_root_multiplicity_le_quotient})\\
+&&\bigl(\because\ \blkref{claim_qbar_root_multiplicity_le_quotient_succ}\ \text{と}\ \blkref{claim_qbar_other_root_multiplicity_le_quotient}\bigr)\\
 &=\sum_{w\in s}\mathrm{mult}_{w}(g)+1
-&& (\because\ w_0\in s)\\
+&&\bigl(\because\ w_0\in s\bigr)\\
 &\le n+1
-&& (\because\ \text{帰納法の仮定})
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)
 \end{aligned}`),
                           paragraph(["である。これで帰納法が閉じた。議論は代数的数係数多項式と有限和の中で閉じ、実数体も複素数体も現れない。"]),
                         ],

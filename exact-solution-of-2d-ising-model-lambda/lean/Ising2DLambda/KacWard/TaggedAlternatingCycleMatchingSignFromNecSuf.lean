@@ -31,6 +31,13 @@ theorem taggedAlternatingCycles_matching_sign_from_necSuf {L : ℕ}
     matchingWordSign matchingWordSign_swap D (referenceLongMatching L)
     (concreteTaggedActiveVertices D t) (concreteShortInvolution D t) (concreteLongInvolution D t)
     hτ hυ (fun e he => (inactive_mate_eq_reference D t e he).1) hsD
+  have hminimum :
+      NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum
+          (concreteShortInvolution D t) (concreteLongInvolution D t) =
+        matchingPairComponentMinimum
+          (concreteShortInvolution D t) (concreteLongInvolution D t) := by
+    funext i
+    rfl
   have hm : NecSuf.KacWard.cycleMinimaOf
       (matchingPairComponentMinimum
         (concreteShortInvolution D t) (concreteLongInvolution D t)) = taggedCycleMinima D t := by
@@ -39,11 +46,11 @@ theorem taggedAlternatingCycles_matching_sign_from_necSuf {L : ℕ}
   have hw : NecSuf.KacWard.cycleWordsOf (concreteShortInvolution D t)
       (concreteLongInvolution D t) = taggedCycleWords D t := by
     unfold NecSuf.KacWard.cycleWordsOf taggedCycleWords
-    rw [hm]
+    rw [hminimum, hm]
     rfl
   have hη : NecSuf.KacWard.pairOrientationIn ℤ =
       (pairOrientation : OrientedEdge L × OrientedEdge L → ℤ) := rfl
-  rw [hw, hm, hη] at h
+  rw [hw, hminimum, hm, hη] at h
   simp only [pairChunks_eq_consecutivePairs] at h
   exact h
 
