@@ -21314,7 +21314,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
                       paragraph(["任意の ", math(String.raw`x\in\mathcal J`), " を取る。", math(String.raw`x\in C`), " なら ", math(String.raw`x`), " は ", math(String.raw`w`), " のある項 ", math(String.raw`c_r`), " に等しいので ", math(String.raw`W_\tau(w)`), " に現れる。", math(String.raw`x\notin C`), " なら ", ref("claim_matching_pair_coloring_alternates"), " により ", math(String.raw`\tau(x)\in C`), " である。このとき ", math(String.raw`\tau(x)=c_r`), " となる ", math(String.raw`r`), " があり、"]),
                       displayMath(String.raw`\begin{aligned}
 x&=\tau(\tau(x))&&\bigl(\because\ \blkref{claim_perfect_matching_involution}\bigr)\\
-&=\tau(c_r)&&\bigl(\because\ \tau(x)=c_r\text{ の置き方}\bigr).
+&=\tau(c_r)&&\bigl(\because\ \tau(x)=c_r\text{ の置き方}\bigr)
 \end{aligned}`),
                       paragraph(["なので ", math(String.raw`x`), " も ", math(String.raw`W_\tau(w)`), " に現れる。空集合でも同じ結論である。有限集合と対合だけを使い、実数体への脱出はない。"]),
                     ],
