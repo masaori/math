@@ -14,7 +14,7 @@
 - 人手の `m ≥ 1` は Lean の `m + 1` である（`ClaimFiniteProductOfPositiveRealsIsPositive.lean` と同じ）。
 - 人手の有限積（`def_finite_product_of_real_numbers`、因子 `r_j → r`）は Lean の `∏ _j : Fin (m + 1), r`（`Finset.prod`）で、
   定義の 2 つの式は `Fin.prod_univ_one`・`Fin.prod_univ_castSucc` で読む。
-- 人手の冪（`def_power_of_real_number`）は mathlib の `r ^ m`（`Monoid.npow`）で、定義の 2 つの式は `pow_zero`・`pow_succ` で読む。
+- 人手の冪（`def_power_of_real_number`）は mathlib の `r ^ m`（`Monoid.npow`）で、定義の 2 つの式はその具体版 `real_pow_zero_and_succ`（`DefinitionPowerOfRealNumber.lean`）で読む。
   mathlib の `Finset.prod_const` は使わない。
 
 必要十分版は `Ising2D/NecSuf/FiniteProductOfConstantIsPower.lean`、具体版をその系として導くのは
@@ -22,6 +22,7 @@
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Real.Basic
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfRealNumber
 
 namespace Ising2D
 
@@ -32,13 +33,13 @@ theorem finite_product_of_constant_real_is_power :
     calc ∏ _j : Fin 1, r
         = r := Fin.prod_univ_one _                                            -- `def_finite_product_of_real_numbers`（`r_j → r`）
       _ = 1 * r := (one_mul r).symm                                           -- `1` は ℝ の乗法の単位元
-      _ = r ^ 0 * r := by rw [pow_zero]                                       -- `a^0 := 1`（`a → r`）を右辺から左辺へ
-      _ = r ^ (0 + 1) := (pow_succ r 0).symm                                  -- `a^{m+1} := a^m a`（`a → r`、`m → 0`）を右辺から左辺へ
+      _ = r ^ 0 * r := by rw [(real_pow_zero_and_succ _).1]                                       -- `a^0 := 1`（`a → r`）を右辺から左辺へ
+      _ = r ^ (0 + 1) := ((real_pow_zero_and_succ r).2 0).symm                                  -- `a^{m+1} := a^m a`（`a → r`、`m → 0`）を右辺から左辺へ
   | m + 1, r =>
     calc ∏ _j : Fin (m + 2), r
         = (∏ _j : Fin (m + 1), r) * r := Fin.prod_univ_castSucc _             -- `def_finite_product_of_real_numbers`（`r_j → r`）
       _ = r ^ (m + 1) * r := by rw [finite_product_of_constant_real_is_power m r]
                                                                               -- 帰納法の仮定
-      _ = r ^ (m + 1 + 1) := (pow_succ r (m + 1)).symm                        -- `a^{m+1} := a^m a`（`a → r`）を右辺から左辺へ
+      _ = r ^ (m + 1 + 1) := ((real_pow_zero_and_succ r).2 (m + 1)).symm                        -- `a^{m+1} := a^m a`（`a → r`）を右辺から左辺へ
 
 end Ising2D

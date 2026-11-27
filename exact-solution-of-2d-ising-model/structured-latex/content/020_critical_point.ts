@@ -2583,6 +2583,7 @@ c_0
     kind: "definition",
     title: { text: "実数の冪" },
     labels: ["def_power_of_real_number"],
+    lean: ["Ising2D.real_pow_zero_and_succ"],
     statement: [
       paragraph([
         math(String.raw`a \in \mathbb{R}`),
@@ -2615,6 +2616,7 @@ a^{m+1} := a^m\, a`),
       status: "added",
       notes: [
         "2026-11-05: limit_of_log_Z_in_N_row の証明の c^N・2^M（正の実数の冪）を定めるブロックが本文に無かったので足した。def_power_of_complex_number と同じ形（零乗から始める帰納法）にした。",
+        "2026-11-27（Lean の点検の直し、状態台帳の行「ℝ の数・順序・差・商」の冪）: Lean の具体版は mathlib の ℝ の冪 Monoid.npow（npowRec）で、二つの式との一致を Ising2D.real_pow_zero_and_succ（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/DefinitionPowerOfRealNumber.lean。rfl）で示す。",
       ],
     },
   },

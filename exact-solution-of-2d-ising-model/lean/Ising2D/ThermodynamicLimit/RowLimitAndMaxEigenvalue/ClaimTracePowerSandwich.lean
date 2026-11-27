@@ -35,8 +35,8 @@
 - 人手の `W_ℝ = ϱ(W)` は `realMatrixOfRealEntries W hW.1`、`c := c(M_col)` は `rayleighSup W_ℝ`、`𝓡` は `rayleighSet W_ℝ`、
   `T := Σ_k ((W_ℝ)^n)_kk` は `∑ k, (W_ℝ ^ n) k k` である。
 - 人手の `e_1` は Lean の `Pi.single i 1`（`i` は値がすべて `0` の配位）である。
-- 人手の実数の冪の定義 `def_power_of_real_number` の `a^{m+1} := a^ma` は mathlib の `pow_succ`、`a^0 := 1` は `pow_zero` で書く
-  （Lean の `ℝ` の冪は mathlib の `Monoid.npow` で、この二つはその公理 `Monoid.npow_succ`・`Monoid.npow_zero` である）。人手の「`ℝ` の分配律」「乗法の交換律・結合律」
+- 人手の実数の冪の定義 `def_power_of_real_number` の `a^{m+1} := a^ma`・`a^0 := 1` は、その具体版 `real_pow_zero_and_succ`
+  （`DefinitionPowerOfRealNumber.lean`）で書く。人手の「`ℝ` の分配律」「乗法の交換律・結合律」
   「`ℝ` の加法」の行は `ring` で、`(n c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}` は `mul_inv`、`c^{n-1}(c^{n-1})^{-1} = 1` は `mul_inv_cancel₀`、
   正の数を掛けても順序を保つ行は `mul_lt_mul_of_pos_*`・`mul_le_mul_of_nonneg_left`・`mul_le_mul_of_nonneg_right` で、移項は `linarith` で、
   `0 < n^{-1} ≤ 1` と `c > 0` から `cn^{-1} ≤ c` の行は `inv_le_one_of_one_le₀` と `nlinarith` で、`ℤ` の `n = (n−1)+1`・`p = (p+1)−1` は
@@ -46,6 +46,7 @@
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwichUnitVectorBound
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerUpperBound
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfRealNumber
 
 set_option linter.unusedSectionVars false
 
@@ -60,32 +61,32 @@ theorem power_comparison_of_positive_reals {r s : ℝ} (hr : 0 < r) (hs : 0 < s)
     (0 < r ^ p ∧ r ^ p < s ^ p) ∧ s ^ p - r ^ p ≤ (p : ℝ) * s ^ (p - 1) * (s - r) := by
   induction p, hp using Nat.le_induction with
   | base =>
-      have hr1 : r ^ 1 = r := by rw [pow_succ, pow_zero, one_mul]           -- `r^1 = r^0r = r`（`def_power_of_real_number`）
-      have hs1 : s ^ 1 = s := by rw [pow_succ, pow_zero, one_mul]           -- `s^1 = s`（`def_power_of_real_number`）
+      have hr1 : r ^ 1 = r := by rw [(real_pow_zero_and_succ _).2, (real_pow_zero_and_succ _).1, one_mul]           -- `r^1 = r^0r = r`（`def_power_of_real_number`）
+      have hs1 : s ^ 1 = s := by rw [(real_pow_zero_and_succ _).2, (real_pow_zero_and_succ _).1, one_mul]           -- `s^1 = s`（`def_power_of_real_number`）
       refine ⟨⟨?_, ?_⟩, ?_⟩
       · rw [hr1]; exact hr                                                  -- (a) は `0 < r`
       · rw [hr1, hs1]; exact hrs                                            -- (a) は `r < s`
       · rw [hr1, hs1]
-        exact le_of_eq (by rw [Nat.sub_self, pow_zero, Nat.cast_one, one_mul, one_mul])
+        exact le_of_eq (by rw [Nat.sub_self, (real_pow_zero_and_succ _).1, Nat.cast_one, one_mul, one_mul])
                                                                             -- (b) は `s − r = 1·s^0(s − r)`（`def_power_of_real_number` で `s^0 = 1`）
   | succ p hp ih =>
       obtain ⟨⟨hrp, hrsp⟩, hb⟩ := ih
       have hsp : 0 < s ^ p := lt_trans hrp hrsp                             -- (a) から `s^p > r^p > 0`
       have ha : r ^ (p + 1) < s ^ (p + 1) :=
         calc r ^ (p + 1)
-            = r ^ p * r := pow_succ r p                                     -- `def_power_of_real_number` で `r^{p+1} = r^pr`
+            = r ^ p * r := (real_pow_zero_and_succ r).2 p                                     -- `def_power_of_real_number` で `r^{p+1} = r^pr`
           _ < s ^ p * r := mul_lt_mul_of_pos_right hrsp hr                  -- (a) の `r^p < s^p` と `r > 0`
           _ < s ^ p * s := mul_lt_mul_of_pos_left hrs hsp                   -- `r < s` と、(a) から `s^p > r^p > 0`
-          _ = s ^ (p + 1) := (pow_succ s p).symm                            -- `def_power_of_real_number` で `s^{p+1} = s^ps`
+          _ = s ^ (p + 1) := ((real_pow_zero_and_succ s).2 p).symm                            -- `def_power_of_real_number` で `s^{p+1} = s^ps`
       have hpos : 0 < r ^ (p + 1) := by
-        rw [pow_succ]; exact mul_pos hrp hr                                 -- `r^{p+1} = r^pr > 0`（`def_power_of_real_number`、`r^p > 0`、`r > 0`）
+        rw [(real_pow_zero_and_succ _).2]; exact mul_pos hrp hr                                 -- `r^{p+1} = r^pr > 0`（`def_power_of_real_number`、`r^p > 0`、`r > 0`）
       refine ⟨⟨hpos, ha⟩, ?_⟩
       have hsr : 0 < s - r := sub_pos.mpr hrs
       have hss : s * s ^ (p - 1) = s ^ p := by                              -- `s s^{p−1} = s^{p−1}s = s^p`（乗法の交換律と、`def_power_of_real_number` で `s^{(p−1)+1} = s^{p−1}s`、`ℤ` で `(p−1)+1 = p`）
-        rw [mul_comm, ← pow_succ, Nat.sub_add_cancel hp]
+        rw [mul_comm, ← (real_pow_zero_and_succ _).2, Nat.sub_add_cancel hp]
       calc s ^ (p + 1) - r ^ (p + 1)
           = s * (s ^ p - r ^ p) + r ^ p * (s - r) := by
-            rw [pow_succ, pow_succ]; ring                                   -- `def_power_of_real_number` で `s^{p+1} = s^ps`, `r^{p+1} = r^pr` と `ℝ` の分配律・乗法の交換律（`−sr^p + r^ps = 0`）
+            rw [(real_pow_zero_and_succ _).2, (real_pow_zero_and_succ _).2]; ring                                   -- `def_power_of_real_number` で `s^{p+1} = s^ps`, `r^{p+1} = r^pr` と `ℝ` の分配律・乗法の交換律（`−sr^p + r^ps = 0`）
         _ ≤ s * ((p : ℝ) * s ^ (p - 1) * (s - r)) + r ^ p * (s - r) := by
             have := mul_le_mul_of_nonneg_left hb hs.le
             linarith                                                        -- (b) と `s > 0`
@@ -103,7 +104,7 @@ variable {M : ℕ}
 `r → c, s → c+1, p → n−1` に当てる。 -/
 theorem pow_pred_pos_of_pos {c : ℝ} (hc : 0 < c) {n : ℕ} (hn : 1 ≤ n) : 0 < c ^ (n - 1) := by
   rcases Nat.lt_or_ge n 2 with h | h
-  · rw [show n - 1 = 0 by omega, pow_zero]; exact one_pos                    -- `n = 1` なら `c^0 = 1`（`def_power_of_real_number`）
+  · rw [show n - 1 = 0 by omega, (real_pow_zero_and_succ _).1]; exact one_pos                    -- `n = 1` なら `c^0 = 1`（`def_power_of_real_number`）
   · exact ((power_comparison_of_positive_reals hc (by linarith) (by linarith : c < c + 1)
       (show 1 ≤ n - 1 by omega)).1).1                                       -- 【正の実数の冪の比較】(a)（`r → c, s → c+1, p → n−1`）
 
@@ -151,7 +152,7 @@ theorem rayleighSup_pow_le_trace_of_power {n : ℕ} (hn : 1 ≤ n) :
       _ < c ^ n * ((n : ℝ) * c ^ (n - 1))⁻¹ :=
           mul_lt_mul_of_pos_right (by linarith) (inv_pos.mpr hncn)          -- `T > 0` と、正の `(n c^{n-1})^{-1}` を掛けても順序を保つ
       _ = c ^ (n - 1) * c * ((n : ℝ) * c ^ (n - 1))⁻¹ := by
-          rw [← pow_succ, Nat.sub_add_cancel hn]                            -- `def_power_of_real_number` で `c^{(n−1)+1} = c^{n−1}c` と `ℤ` で `n = (n−1)+1`
+          rw [← (real_pow_zero_and_succ _).2, Nat.sub_add_cancel hn]                            -- `def_power_of_real_number` で `c^{(n−1)+1} = c^{n−1}c` と `ℤ` で `n = (n−1)+1`
       _ = c ^ (n - 1) * c * ((n : ℝ)⁻¹ * (c ^ (n - 1))⁻¹) := by
           rw [mul_inv]                                                      -- `n ≠ 0`, `c^{n-1} ≠ 0` なので `(n c^{n-1})^{-1} = n^{-1}(c^{n-1})^{-1}`
       _ = c * (n : ℝ)⁻¹ * (c ^ (n - 1) * (c ^ (n - 1))⁻¹) := by ring       -- `ℝ` の乗法の交換律・結合律

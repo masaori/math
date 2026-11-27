@@ -63,6 +63,7 @@ import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.Cl
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimFiniteSumsOverMultiIndices
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfRealNumber
 
 set_option linter.unusedSectionVars false
 
@@ -404,7 +405,7 @@ theorem moment_ge_moment_one_pow {x : Conf M → ℝ} (hx : vecNorm x = 1) :
   intro p
   induction p with
   | zero =>                                                                 -- `p = 0`: `m_0 = 1 = m_1^0`（`def_power_of_real_number`）
-      rw [moment_zero_eq_one W hW hx, pow_zero]
+      rw [moment_zero_eq_one W hW hx, (real_pow_zero_and_succ _).1]
   | succ p ih =>
       calc momentWReal W hW x (p + 1)
           ≥ momentWReal W hW x 1 * momentWReal W hW x (p + 1 - 1) :=
@@ -415,7 +416,7 @@ theorem moment_ge_moment_one_pow {x : Conf M → ℝ} (hx : vecNorm x = 1) :
         _ ≥ momentWReal W hW x 1 * momentWReal W hW x 1 ^ p :=
             mul_le_mul_of_nonneg_left ih hm1.le                             -- 帰納法の仮定と、正の `m_1` を掛けても順序を保つ
         _ = momentWReal W hW x 1 ^ (p + 1) := by
-            rw [mul_comm, pow_succ]                                         -- 乗法の交換律と `def_power_of_real_number` で `m_1^{p+1} = m_1^pm_1`
+            rw [mul_comm, (real_pow_zero_and_succ _).2]                                         -- 乗法の交換律と `def_power_of_real_number` で `m_1^{p+1} = m_1^pm_1`
 
 /-- 人手【単位ベクトルでの評価】の `m_n ≤ T`（`T := Σ_k ((W_ℝ)^n)_kk`、8 行）。 -/
 theorem moment_le_trace_of_power {x : Conf M → ℝ} (hx : vecNorm x = 1) (n : ℕ) :

@@ -82,6 +82,7 @@ import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimR
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealTimesZeroIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionFiniteSumOverIndexSet
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfRealNumber
 
 namespace Ising2D
 
@@ -422,7 +423,7 @@ theorem inclusion_zz_to_rr_of_power_of_two (M : ℕ) : ((2 ^ M : ℕ) : ℝ) = (
   | zero =>
     calc ((2 ^ 0 : ℕ) : ℝ) = ((1 : ℕ) : ℝ) := by rw [Nat.pow_zero]        -- `def_power_of_integer` の `a^0 := 1`（`a → 2_ℤ`）
       _ = 1 := inclusion_zz_to_rr_of_one                                   -- `inclusion_zz_to_rr_of_one`
-      _ = (2 : ℝ) ^ 0 := (pow_zero 2).symm                                 -- `def_power_of_real_number` の `a^0 := 1`（`a → 2_ℝ`）を右辺から左辺へ
+      _ = (2 : ℝ) ^ 0 := ((real_pow_zero_and_succ 2).1).symm                                 -- `def_power_of_real_number` の `a^0 := 1`（`a → 2_ℝ`）を右辺から左辺へ
   | succ M ih =>
     calc ((2 ^ (M + 1) : ℕ) : ℝ) = ((2 ^ M * 2 : ℕ) : ℝ) := by rw [Nat.pow_succ]  -- `def_power_of_integer` の `a^{m+1} := a^ma`
       _ = ((2 ^ M * (1 + 1) : ℕ) : ℝ) := rfl                               -- `2_ℤ := 1_ℤ + 1_ℤ`
@@ -434,7 +435,7 @@ theorem inclusion_zz_to_rr_of_power_of_two (M : ℕ) : ((2 ^ M : ℕ) : ℝ) = (
       _ = (2 : ℝ) ^ M * 1 + (2 : ℝ) ^ M * 1 := by rw [mul_one]             -- `1_ℝ` は `ℝ` の乗法の単位元を二か所へ同時に
       _ = (2 : ℝ) ^ M * (1 + 1) := (mul_add _ _ _).symm                    -- `ℝ` の分配律
       _ = (2 : ℝ) ^ M * 2 := by rw [← real_two_eq_one_add_one]                    -- `2_ℝ := 1_ℝ + 1_ℝ`
-      _ = (2 : ℝ) ^ (M + 1) := (pow_succ _ _).symm                         -- `def_power_of_real_number` の `a^{m+1} := a^ma`（`a → 2_ℝ`, `m → M`）を右辺から左辺へ
+      _ = (2 : ℝ) ^ (M + 1) := ((real_pow_zero_and_succ _).2 _).symm                         -- `def_power_of_real_number` の `a^{m+1} := a^ma`（`a → 2_ℝ`, `m → M`）を右辺から左辺へ
 
 /-- **人手 `inclusion_zz_to_rr_of_positive_is_at_least_one`**: `n ∈ ℤ_{≥1}` なら `ι(n) ≥ 1_ℝ`。`n` についての帰納法。 -/
 theorem inclusion_zz_to_rr_of_positive_is_at_least_one (n : ℕ) (hn : 1 ≤ n) : (1 : ℝ) ≤ (n : ℝ) := by

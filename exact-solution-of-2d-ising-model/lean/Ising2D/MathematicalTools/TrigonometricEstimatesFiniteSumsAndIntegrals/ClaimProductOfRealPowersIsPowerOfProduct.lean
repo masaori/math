@@ -12,7 +12,7 @@
 | `m → m+1` の 4 行（`a^{m+1} := a^m a` を 2 箇所へ → `(pq)(rs) = (pr)(qs)` → 帰納法の仮定 → `a^{m+1} := a^m a` を右辺から左辺へ） | `m + 1` の節の `calc` の 4 段 |
 
 - 人手の `m ∈ ℤ_{≥0}` は Lean の `m : ℕ` である。
-- 人手の冪（`def_power_of_real_number`）は mathlib の `a ^ m`（`Monoid.npow`）で、定義の 2 つの式は `pow_zero`・`pow_succ` で読む。
+- 人手の冪（`def_power_of_real_number`）は mathlib の `a ^ m`（`Monoid.npow`）で、定義の 2 つの式はその具体版 `real_pow_zero_and_succ`（`DefinitionPowerOfRealNumber.lean`）で読む。
   mathlib の `mul_pow` は使わない。
 - 人手の「`ℝ` で `(pq)(rs) = (pr)(qs)`（乗法の交換律と結合律）」は mathlib の `mul_mul_mul_comm` である
   （`ClaimFiniteProductOfRealProducts.lean` と同じ）。
@@ -22,6 +22,7 @@
 -/
 import Mathlib.Algebra.Group.Basic
 import Mathlib.Data.Real.Basic
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfRealNumber
 
 namespace Ising2D
 
@@ -30,15 +31,15 @@ theorem product_of_real_powers_is_power_of_product :
     ∀ (m : ℕ) (a b : ℝ), a ^ m * b ^ m = (a * b) ^ m
   | 0, a, b =>
     calc a ^ 0 * b ^ 0
-        = 1 * 1 := by rw [pow_zero, pow_zero]                                 -- `a^0 := 1`（`a → a`、`a → b`）を 2 箇所へ同時に
+        = 1 * 1 := by rw [(real_pow_zero_and_succ _).1, (real_pow_zero_and_succ _).1]                                 -- `a^0 := 1`（`a → a`、`a → b`）を 2 箇所へ同時に
       _ = 1 := one_mul 1                                                      -- `1` は ℝ の乗法の単位元
-      _ = (a * b) ^ 0 := (pow_zero (a * b)).symm                              -- `a^0 := 1`（`a → ab`）を右辺から左辺へ
+      _ = (a * b) ^ 0 := ((real_pow_zero_and_succ (a * b)).1).symm                              -- `a^0 := 1`（`a → ab`）を右辺から左辺へ
   | m + 1, a, b =>
     calc a ^ (m + 1) * b ^ (m + 1)
-        = (a ^ m * a) * (b ^ m * b) := by rw [pow_succ, pow_succ]             -- `a^{m+1} := a^m a`（`a → a`、`a → b`）を 2 箇所へ同時に
+        = (a ^ m * a) * (b ^ m * b) := by rw [(real_pow_zero_and_succ _).2, (real_pow_zero_and_succ _).2]             -- `a^{m+1} := a^m a`（`a → a`、`a → b`）を 2 箇所へ同時に
       _ = (a ^ m * b ^ m) * (a * b) := mul_mul_mul_comm _ _ _ _               -- ℝ で `(pq)(rs) = (pr)(qs)`（乗法の交換律と結合律）
       _ = (a * b) ^ m * (a * b) := by rw [product_of_real_powers_is_power_of_product m a b]
                                                                               -- 帰納法の仮定
-      _ = (a * b) ^ (m + 1) := (pow_succ (a * b) m).symm                      -- `a^{m+1} := a^m a`（`a → ab`）を右辺から左辺へ
+      _ = (a * b) ^ (m + 1) := ((real_pow_zero_and_succ (a * b)).2 m).symm                      -- `a^{m+1} := a^m a`（`a → ab`）を右辺から左辺へ
 
 end Ising2D

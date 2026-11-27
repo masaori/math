@@ -14,12 +14,13 @@
 | `m = 0` の 3 行（`def_power_of_real_number` の `a^0 := 1` → `1_ℂ` は `(1_ℝ)_ℂ` の略記 → `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ） | `real_inclusion_of_power` の `zero` の `calc` の 3 段 |
 | 帰納法の段の 4 行（`a^{m+1} := a^m a` → `real_inclusion_preserves_product` を右辺から左辺へ → 帰納法の仮定 → `z^{m+1} := z^m z` を右辺から左辺へ） | `real_inclusion_of_power` の `succ` の `calc` の 4 段 |
 
-- 人手の ℝ の冪の 2 つの式は、mathlib の `Monoid` の冪の `pow_zero`・`pow_succ`（`a ^ (m + 1) = a ^ m * a`）である。
+- 人手の ℝ の冪の 2 つの式は、その具体版 `real_pow_zero_and_succ`（`DefinitionPowerOfRealNumber.lean`）である。
   ℂ の冪の 2 つの式は、その具体版 `complex_pow_zero_and_succ`（`DefinitionPowerOfComplexNumber.lean`）である。
 - `1_ℂ` が `(1_ℝ)_ℂ` であることは `Complex.ofReal_one`（構造体の実部 `1`、虚部 `0` で、`rfl` と同じ内容）である。
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfRealNumber
 
 namespace Ising2D
 
@@ -28,12 +29,12 @@ theorem real_inclusion_of_power (r : ℝ) (m : ℕ) : ((r ^ m : ℝ) : ℂ) = (r
   induction m with
   | zero =>
     calc ((r ^ 0 : ℝ) : ℂ)
-        = ((1 : ℝ) : ℂ) := by rw [pow_zero]                     -- `def_power_of_real_number` の `a^0 := 1`（`a → r`）
+        = ((1 : ℝ) : ℂ) := by rw [(real_pow_zero_and_succ _).1]                     -- `def_power_of_real_number` の `a^0 := 1`（`a → r`）
       _ = (1 : ℂ) := Complex.ofReal_one                          -- `1_ℂ` は `inclusion_rr_to_cc` の略記 `(1_ℝ)_ℂ`
       _ = (r : ℂ) ^ 0 := (complex_pow_zero_and_succ _).1.symm                       -- `def_power_of_complex_number` の `z^0 := 1_ℂ` を右辺から左辺へ
   | succ m ih =>
     calc ((r ^ (m + 1) : ℝ) : ℂ)
-        = ((r ^ m * r : ℝ) : ℂ) := by rw [pow_succ]              -- `def_power_of_real_number` の `a^{m+1} := a^m a`（`a → r`）
+        = ((r ^ m * r : ℝ) : ℂ) := by rw [(real_pow_zero_and_succ _).2]              -- `def_power_of_real_number` の `a^{m+1} := a^m a`（`a → r`）
       _ = ((r ^ m : ℝ) : ℂ) * (r : ℂ) := (real_inclusion_mul _ _).symm
                                                                  -- `real_inclusion_preserves_product`（`a → r^m`、`b → r`）を右辺から左辺へ
       _ = (r : ℂ) ^ m * (r : ℂ) := by rw [ih]                    -- 帰納法の仮定

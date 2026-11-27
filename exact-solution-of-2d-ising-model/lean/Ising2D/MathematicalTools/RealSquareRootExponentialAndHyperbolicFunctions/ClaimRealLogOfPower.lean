@@ -12,11 +12,11 @@
 | `n` の帰納法で `a^n > 0` と `log(a^n) = ι(n) log a` を同時に示す | `Nat.le_induction`（`n ≥ 1`）、結論は 2 つの連言 |
 | `n = 1`: `a^1 = a^0a = 1·a = a`、よって `a^1 > 0` | `h1` の 3 段の `calc` |
 | `n = 1`: `log(a^1) = log a = 1·log a = ι(1) log a` | 3 段の `calc`（最後は `inclusion_zz_to_rr_of_one`） |
-| `n → n+1`: `a^{n+1} = a^na` は正の数の積なので正 | `pow_succ` と `(real_log_of_product …).1` |
+| `n → n+1`: `a^{n+1} = a^na` は正の数の積なので正 | `real_pow_zero_and_succ` と `(real_log_of_product …).1` |
 | `n → n+1`: `log(a^{n+1}) = log(a^na) = log(a^n) + log a = ι(n) log a + log a = ι(n) log a + 1·log a = (ι(n)+1) log a = ι(n+1) log a` | 6 段の `calc`（最後は `inclusion_zz_to_rr_succ`） |
 
 人手の `log` は `def_real_logarithm_positive` で、Lean は mathlib の `Real.log` で表す（具体版は無い）。
-人手の実数の冪の定義 `def_power_of_real_number` の `a^{m+1} := a^ma` は mathlib の `pow_succ`、`a^0 := 1` は `pow_zero` で書く。
+人手の実数の冪の定義 `def_power_of_real_number` の `a^{m+1} := a^ma`・`a^0 := 1` は、その具体版 `real_pow_zero_and_succ`（`DefinitionPowerOfRealNumber.lean`）で書く。
 人手の `ι_{ℤ→ℝ}(n)` は、`n ∈ ℤ_{≥1}` を Lean の `ℕ` で書くので自然数の実数への埋め込み `(n : ℝ)` で書く（`ClaimInclusionOfIntegersIntoRealNumbers.lean`）。
 
 この人手の項目は、棚卸し `docs/organization/flat-inventory.json` にまだ無い（章が未割り当て）。Ising 模型を参照しない実数の主張なので、棚卸しの分類の規則に従って部「数学的道具立て」の
@@ -27,6 +27,7 @@
 -/
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimRealLogOfProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimInclusionOfIntegersIntoRealNumbers
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfRealNumber
 
 namespace Ising2D
 
@@ -37,9 +38,9 @@ theorem real_log_of_power {a : ℝ} (ha : 0 < a) :
   induction n, hn using Nat.le_induction with
   | base =>
     have h1 : a ^ 1 = a :=
-      calc a ^ 1 = a ^ 0 * a := pow_succ a 0
+      calc a ^ 1 = a ^ 0 * a := (real_pow_zero_and_succ a).2 0
                                         -- `def_power_of_real_number` の `a^{m+1} := a^ma` を `m = 0` で
-        _ = 1 * a := by rw [pow_zero]
+        _ = 1 * a := by rw [(real_pow_zero_and_succ _).1]
                                         -- `def_power_of_real_number` の `a^0 := 1`
         _ = a := one_mul a
                                         -- ℝ の乗法の単位元
@@ -54,9 +55,9 @@ theorem real_log_of_power {a : ℝ} (ha : 0 < a) :
     have hprod := real_log_of_product ih.1 ha
                                         -- `real_log_of_product` を `a^n, a ∈ ℝ_{>0}` に
     refine ⟨?_, ?_⟩
-    · rw [pow_succ]                     -- `def_power_of_real_number` の `a^{n+1} := a^na`
+    · rw [(real_pow_zero_and_succ _).2]                     -- `def_power_of_real_number` の `a^{n+1} := a^na`
       exact hprod.1                     -- 正の数 `a^n` と `a` の積なので正
-    · calc Real.log (a ^ (n + 1)) = Real.log (a ^ n * a) := by rw [pow_succ]
+    · calc Real.log (a ^ (n + 1)) = Real.log (a ^ n * a) := by rw [(real_pow_zero_and_succ _).2]
                                         -- `def_power_of_real_number` の `a^{n+1} := a^na`
         _ = Real.log (a ^ n) + Real.log a := hprod.2
                                         -- `real_log_of_product` を `a^n, a ∈ ℝ_{>0}` に
