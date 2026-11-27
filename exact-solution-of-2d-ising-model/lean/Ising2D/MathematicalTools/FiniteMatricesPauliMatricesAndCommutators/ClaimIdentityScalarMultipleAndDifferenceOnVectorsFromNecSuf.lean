@@ -6,11 +6,14 @@
 人手のラベルは `matrix_difference_zero_iff_equal`・`identity_matrix_is_left_unit_of_mat_mult`・
 `scalar_multiple_factors_out_of_left_factor`・`matrix_difference_mul_vector`（前の 2 つの主張は右の因子が数ベクトルの場合）。
 
-`matrix_difference_zero_iff_equal`・`identity_matrix_is_left_unit_of_mat_mult`・`matrix_difference_mul_vector` と、`scalar_multiple_factors_out_of_left_factor` の右の因子が数ベクトルの場合の
-`TensorPow M`（添字 `Conf M`）での系も同じ必要十分版の特殊化として置く。
-具体版は添字が `Fin m` の行列について述べてあり、`Conf M` の行列には当てはまらないためである。
+`TensorPow M`（添字 `Conf M`）の具体版 `ClaimTensorPowMatrixDifferenceZeroIffEqual.lean` の `matrix_sub_eq_zero_iff_tensorPow` も、
+同じ必要十分版の添字 `Conf M` の特殊化として得る（`matrix_sub_eq_zero_iff_tensorPow_of_necSuf`）。
+数ベクトルの場合の `matrix_difference_zero_iff_equal`・`identity_matrix_is_left_unit_of_mat_mult`・`matrix_difference_mul_vector` と、
+`scalar_multiple_factors_out_of_left_factor` の右の因子が数ベクトルの場合の `TensorPow M`（添字 `Conf M`）での系は、
+まだ具体版を持たないので同じ必要十分版の特殊化としてここに置く。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowMatrixDifferenceZeroIffEqual
 import Ising2D.NecSuf.MatrixVectorIdentityScalarDifference
 import Ising2D.Basic
 
@@ -41,8 +44,8 @@ theorem sub_mulVec_eq_of_necSuf {m n : ℕ} (A B : Matrix (Fin m) (Fin n) ℂ) (
     A *ᵥ v - B *ᵥ v = (A - B) *ᵥ v :=
   NecSuf.sub_mulVec_eq' A B v
 
-/-- `matrix_difference_zero_iff_equal` の `TensorPow M` での系（`NecSuf.sub_eq_zero_iff_matrix` の添字 `Conf M` の特殊化）。 -/
-theorem matrix_sub_eq_zero_iff_tensorPow {M : ℕ} (A B : TensorPow M) : A - B = 0 ↔ A = B :=
+/-- `matrix_sub_eq_zero_iff_tensorPow` を `NecSuf.sub_eq_zero_iff_matrix` の添字 `Conf M` の特殊化として得る。 -/
+theorem matrix_sub_eq_zero_iff_tensorPow_of_necSuf {M : ℕ} (A B : TensorPow M) : A - B = 0 ↔ A = B :=
   NecSuf.sub_eq_zero_iff_matrix A B
 
 /-- `scalar_multiple_factors_out_of_left_factor`（`p → 1`。右の因子が数ベクトル）の `TensorPow M` での系

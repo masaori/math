@@ -359,7 +359,7 @@ T_B(I)
     kind: "claim",
     title: { text: "行列の差が零行列であることと等しいことの同値" },
     labels: ["matrix_difference_zero_iff_equal"],
-    lean: ["Ising2D.matrix_sub_eq_zero_iff", "Ising2D.vec_sub_eq_zero_iff"],
+    lean: ["Ising2D.matrix_sub_eq_zero_iff", "Ising2D.vec_sub_eq_zero_iff", "Ising2D.matrix_sub_eq_zero_iff_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -410,6 +410,7 @@ T_B(I)
       status: "added",
       notes: [
         "2026-11-01: eigenvector_of_A_theta_tilde Step 1 の「Av = λv ⟺ Av − λv = 0」が「移項」とだけ書いて行列（数ベクトル）の差の定義を経ていなかったので、成分ごとの移項に帰着する主張として足した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の二十一単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.matrix_sub_eq_zero_iff_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowMatrixDifferenceZeroIffEqual.lean。番号 ν^{-1} で Fin n の行列へ移して、この主張の Fin n の具体版 Ising2D.matrix_sub_eq_zero_iff を引く）。主張・証明は不変。",
       ],
     },
   },

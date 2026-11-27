@@ -15,7 +15,8 @@
 後の 2 つの主張は、`eigenvector_of_A_theta_tilde` Step 1 が使う数ベクトル（右の因子が 1 列の行列）の場合だけを形式化する。
 
 **必要十分版**: `Ising2D/NecSuf/MatrixVectorIdentityScalarDifference.lean`。具体版をその系として導くのは
-`ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf.lean`。
+`ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf.lean`。`matrix_difference_zero_iff_equal` の `TensorPow M`（`Mat(2^M, ℂ)`）の場合の具体版は
+`ClaimTensorPowMatrixDifferenceZeroIffEqual.lean`。
 
 ## 人手証明との対応
 

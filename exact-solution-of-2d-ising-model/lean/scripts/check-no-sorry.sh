@@ -2098,6 +2098,8 @@ targets=(
   Ising2D.lambdaPlusR_eq_exp_of_necSuf
   Ising2D.lambdaMinusR_eq_exp_of_necSuf
   Ising2D.gammaFn_thetaTilde_pos_of_necSuf
+  Ising2D.matrix_sub_eq_zero_iff_tensorPow
+  Ising2D.matrix_sub_eq_zero_iff_tensorPow_of_necSuf
   Ising2D.vec_sub_eq_zero_iff_tensorPow
   Ising2D.identity_matrix_mulVec_tensorPow
   Ising2D.mul_comm_of_anticomm_pair_tensorPow
