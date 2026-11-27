@@ -75,18 +75,19 @@ theorem outside_mate_outside (mate : J → J) (A : Set J)
   have h := hclosed (mate e) hm
   rwa [hinv] at h
 
-/-- 第一色の点からの反復は、偶数回なら第一色にある。 -/
-theorem iterate_color_parity_necSuf (m : {x // x ∈ A}) (hm : m ∈ matchingPairColor τ υ) :
-    ∀ r : ℕ, finiteMapIterate (matchingPairPermutation τ υ) r m ∈ matchingPairColor τ υ ↔
-      Even r
-  | 0 => by simpa [finiteMapIterate] using hm
+omit [Fintype J] [LinearOrder J] in
+/-- 色を反転する写像の反復は、偶数回だけ初期の色に戻る。 -/
+theorem iterate_color_parity_necSuf {K : Type*} (successor : K → K) (color : K → Prop)
+    (iterate : ℕ → K → K)
+    (hiterate : ∀ n m, iterate n m = successor^[n] m)
+    (hflip : ∀ m, color (successor m) ↔ ¬ color m)
+    (m : K) (hm : color m) :
+    ∀ r : ℕ, color (iterate r m) ↔ Even r
+  | 0 => by simpa [hiterate 0 m] using hm
   | r + 1 => by
-      have ih := iterate_color_parity_necSuf m hm r
-      have hstep : finiteMapIterate (matchingPairPermutation τ υ) (r + 1) m =
-          matchingPairSuccessor τ υ (finiteMapIterate (matchingPairPermutation τ υ) r m) := by
-        simp only [finiteMapIterate, Function.iterate_succ_apply']
-        rfl
-      rw [hstep, matchingPairSuccessor_color, ih, Nat.even_add_one]
+      have ih := iterate_color_parity_necSuf successor color iterate hiterate hflip m hm r
+      rw [hiterate, Function.iterate_succ_apply', ← hiterate r m, hflip, ih,
+        Nat.even_add_one]
 
 omit [Fintype J] [LinearOrder J] in
 /-- 帰還時刻が正で、後続写像が色を反転すれば、帰還時刻は偶数。 -/
@@ -139,7 +140,10 @@ theorem cycle_pairs_D_necSuf (D' : Set (Set J)) (mate : J → J)
   have hmin := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
     τ υ (· ≤ ·) (fun _ _ => le_antisymm) (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
     (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ) (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_le τ υ) i
-  have hcol := (iterate_color_parity_necSuf A τ υ m hmin.2
+  have hcol := (iterate_color_parity_necSuf
+    (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+    (finiteMapIterate (matchingPairPermutation τ υ))
+    (by intro n j; rfl) (matchingPairSuccessor_color τ υ) m hmin.2
     (2 * r)).mpr (even_two_mul r)
   simp only
   rw [show (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m).1 =
@@ -178,7 +182,10 @@ theorem cycle_pairs_reference_necSuf (D₀' : Set (Set J)) (mate : J → J)
     (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ) (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_le τ υ) i
   have hcol : ¬ finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m ∈
       matchingPairColor τ υ := by
-    rw [iterate_color_parity_necSuf A τ υ m hmin.2 (2 * r + 1)]
+    rw [iterate_color_parity_necSuf
+      (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+      (finiteMapIterate (matchingPairPermutation τ υ))
+      (by intro n j; rfl) (matchingPairSuccessor_color τ υ) m hmin.2 (2 * r + 1)]
     exact Nat.not_even_iff_odd.mpr (odd_two_mul_add_one r)
   simp only
   rw [show (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1 + 1) m).1 =
