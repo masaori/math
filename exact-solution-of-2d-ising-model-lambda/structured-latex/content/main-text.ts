@@ -21201,7 +21201,7 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
 &=\operatorname{sgn}(\sigma)\operatorname{sgn}(\pi_{W_\tau(w)})
 &&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
 &=\operatorname{sgn}(\sigma)\,\varepsilon(W_\tau(w))
-&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr).
+&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)
 \end{aligned}`),
                       paragraph(["空集合では置換は恒等写像で、両列は空列である。有限列と整数の符号だけを使い、実数体への脱出はない。"]),
                     ],
