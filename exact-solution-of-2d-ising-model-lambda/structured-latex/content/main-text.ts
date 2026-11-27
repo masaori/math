@@ -101844,7 +101844,7 @@ Z_L
 &=\frac12\sum_{(a,b)\in\mathcal S}Q_L^{a,b}
 &&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\text{ の }\mathbb Z[x]\text{ の等式を係数ごとに }\overline{\mathbb Q}[x]\text{ へ送る}\bigr)\\
 &=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}
-&&\bigl(\because\ \blkref{claim_determinant_polynomial_square_root_exists}\bigr).
+&&\bigl(\because\ \blkref{claim_determinant_polynomial_square_root_exists}\bigr)
 \end{aligned}`),
                     ],
                   },

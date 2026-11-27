@@ -133,47 +133,24 @@ theorem cycle_pairs_D_necSuf {K : Type*} (D' : Set (Set J)) (mate : J → J)
   rw [hstep r]
   exact hD' _
 
-theorem cycle_pairs_reference_necSuf (D₀' : Set (Set J)) (mate : J → J)
-    (hυ' : ∀ i, (υ.val i).1 = mate i.1)
+omit [Fintype J] [LinearOrder J] in
+theorem cycle_pairs_reference_necSuf {K : Type*} (D₀' : Set (Set J)) (mate : J → J)
     (hD₀' : ∀ e, ({e, mate e} : Set J) ∈ D₀')
-    (i : {x // x ∈ A}) :
-    ∀ p ∈ pairChunks ((cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i)).rotate 1),
+    (period : K → ℕ) (iterate : ℕ → K → K) (point : K → J) (m : K)
+    (hpos : 0 < period m) (heven : Even (period m))
+    (hreturn : point (iterate (period m) m) = point (iterate 0 m))
+    (hstep : ∀ r, point (iterate (2 * r + 1 + 1) m) =
+      mate (point (iterate (2 * r + 1) m))) :
+    ∀ p ∈ pairChunks ((cyclePointsOf period iterate point m).rotate 1),
       ({p.1, p.2} : Set J) ∈ D₀' := by
   intro p hp
-  set m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i
-  obtain ⟨hpos, ⟨k, hk⟩, hper⟩ := cycle_period_necSuf
-    (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
-    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-    (finiteMapIterate (matchingPairPermutation τ υ))
-    (by intro n j; rfl)
-    (matchingPairSuccessor_color τ υ)
-    (by intro j; have hs := finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) j
-        exact ⟨hs.1, hs.2.1⟩) m
-  have hk2 : finitePermutationMinimalPeriod (matchingPairPermutation τ υ) m = 2 * k := by omega
+  obtain ⟨k, hk⟩ := heven
   unfold cyclePointsOf at hp
-  rw [rotate_range_of_period _ _ hpos (by rw [hper]; rfl), hk2, pairChunks_map_range] at hp
+  rw [rotate_range_of_period _ _ hpos hreturn, hk,
+    show k + k = 2 * k by omega, pairChunks_map_range] at hp
   obtain ⟨r, _, rfl⟩ := List.mem_map.mp hp
-  have hmin := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
-    τ υ (· ≤ ·) (fun _ _ => le_antisymm) (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
-    (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ) (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_le τ υ) i
-  have hcol : ¬ finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m ∈
-      matchingPairColor τ υ := by
-    rw [iterate_color_parity_necSuf
-      (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
-      (finiteMapIterate (matchingPairPermutation τ υ))
-      (by intro n j; rfl) (matchingPairSuccessor_color τ υ) m hmin.2 (2 * r + 1)]
-    exact Nat.not_even_iff_odd.mpr (odd_two_mul_add_one r)
   simp only
-  rw [show (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1 + 1) m).1 =
-      mate (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m).1 from by
-        have hstep : finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1 + 1) m =
-            matchingPairSuccessor τ υ
-              (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m) := by
-          simp only [finiteMapIterate, Function.iterate_succ_apply']
-          rfl
-        rw [hstep, matchingPairSuccessor, if_neg hcol]
-        exact hυ' _]
+  rw [hstep r]
   exact hD₀' _
 
 omit [Fintype J] [LinearOrder J] in
@@ -417,8 +394,53 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
   · intro c hc
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc
     obtain ⟨i, rfl⟩ := (mem_cycleMinimaOf _ _).mp ((Finset.mem_sort _).mp hm)
-    exact cycle_pairs_reference_necSuf A τ υ D₀.val (perfectMatchingMate D₀)
-      hυ (fun e => (perfectMatchingMate_spec D₀ e).2) i
+    let m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i
+    apply cycle_pairs_reference_necSuf D₀.val (perfectMatchingMate D₀)
+      (fun e => (perfectMatchingMate_spec D₀ e).2)
+      (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m
+    · exact (cycle_period_necSuf
+        (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+        (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+        (finiteMapIterate (matchingPairPermutation τ υ))
+        (by intro n j; rfl) (matchingPairSuccessor_color τ υ)
+        (by intro j; have hs := finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) j
+            exact ⟨hs.1, hs.2.1⟩) m).1
+    · exact (cycle_period_necSuf
+        (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+        (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+        (finiteMapIterate (matchingPairPermutation τ υ))
+        (by intro n j; rfl) (matchingPairSuccessor_color τ υ)
+        (by intro j; have hs := finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) j
+            exact ⟨hs.1, hs.2.1⟩) m).2.1
+    · have hper := (cycle_period_necSuf
+        (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+        (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+        (finiteMapIterate (matchingPairPermutation τ υ))
+        (by intro n j; rfl) (matchingPairSuccessor_color τ υ)
+        (by intro j; have hs := finitePermutationMinimalPeriod_spec (matchingPairPermutation τ υ) j
+            exact ⟨hs.1, hs.2.1⟩) m).2.2
+      simpa [finiteMapIterate] using congrArg Subtype.val hper
+    · intro r
+      have hmin := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
+        τ υ (· ≤ ·) (fun _ _ => le_antisymm)
+        (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+        (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ)
+        (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_le τ υ) i
+      have hcol : ¬ finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m ∈
+          matchingPairColor τ υ := by
+        rw [iterate_color_parity_necSuf
+          (matchingPairPermutation τ υ) (fun j => j ∈ matchingPairColor τ υ)
+          (finiteMapIterate (matchingPairPermutation τ υ))
+          (by intro n j; rfl) (matchingPairSuccessor_color τ υ) m hmin.2 (2 * r + 1)]
+        exact Nat.not_even_iff_odd.mpr (odd_two_mul_add_one r)
+      have hnext : finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1 + 1) m =
+          matchingPairSuccessor τ υ
+            (finiteMapIterate (matchingPairPermutation τ υ) (2 * r + 1) m) := by
+        simp only [finiteMapIterate, Function.iterate_succ_apply']
+        rfl
+      rw [hnext, matchingPairSuccessor, if_neg hcol]
+      exact hυ _
   · exact matchingPairOutsideEnumeration_spec D.val D₀.val
       (perfectMatchingMate D) (perfectMatchingMate D₀) A
       (fun e => (perfectMatchingMate_spec D e).2)
