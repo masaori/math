@@ -5,7 +5,7 @@
 （`structured-latex/content/009_eigenvalues_of_V.ts` の `eigenvalues_of_V_claim_exp_of_negative_is_left_inverse`）。
 
 **必要十分版**: `Ising2D/NecSuf/ExpNegMulExp.lean`。具体版をその系として導くのは
-`ClaimExpOfNegativeIsLeftInverseFromNecSuf.lean`（`TensorPow M` の系もそこに置く）。
+`ClaimExpOfNegativeIsLeftInverseFromNecSuf.lean`。`Mat(2^M, ℂ)` の場合の具体版は `ClaimTensorPowExpOfNegativeIsLeftInverse.lean`。
 
 ## 人手証明との対応
 

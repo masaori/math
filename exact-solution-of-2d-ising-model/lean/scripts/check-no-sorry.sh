@@ -2100,6 +2100,9 @@ targets=(
   Ising2D.gammaFn_thetaTilde_pos_of_necSuf
   Ising2D.matrix_sub_eq_zero_iff_tensorPow
   Ising2D.matrix_sub_eq_zero_iff_tensorPow_of_necSuf
+  Ising2D.matExp_neg_mul_matExp_tensorPow_of_necSuf
+  Ising2D.neg_tensorPow_mul_self_comm
+  Ising2D.neg_tensorPow_add_self
   Ising2D.vec_sub_eq_zero_iff_tensorPow
   Ising2D.identity_matrix_mulVec_tensorPow
   Ising2D.mul_comm_of_anticomm_pair_tensorPow

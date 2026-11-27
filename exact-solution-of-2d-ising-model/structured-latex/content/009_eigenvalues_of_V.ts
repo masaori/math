@@ -2313,7 +2313,7 @@ b^{(k)*}Ab^{(k)}
     kind: "claim",
     title: { tex: String.raw`\exp(-A)\exp(A) = I` },
     labels: ["exp_of_negative_is_left_inverse"],
-    lean: ["Ising2D.matrixExp_neg_mul_matrixExp", "Ising2D.neg_matrix_add_self_apply", "Ising2D.neg_matrix_mul_self_apply", "Ising2D.neg_matrix_add_self", "Ising2D.neg_matrix_mul_self_comm"],
+    lean: ["Ising2D.matrixExp_neg_mul_matrixExp", "Ising2D.neg_matrix_add_self_apply", "Ising2D.neg_matrix_mul_self_apply", "Ising2D.neg_matrix_add_self", "Ising2D.neg_matrix_mul_self_comm", "Ising2D.matExp_neg_mul_matExp_tensorPow", "Ising2D.neg_tensorPow_mul_self_comm", "Ising2D.neg_tensorPow_add_self"],
     statement: [
       paragraph(["指数は ", ref("def_exp"), "、符号反転は ", ref("def_matrix_negation"), "、行列の積は ", ref("mat_mult"), "、単位行列 ", math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`), " は ", ref("def_identity_matrix"), " による。"]),
       paragraph([
@@ -2399,6 +2399,7 @@ b^{(k)*}Ab^{(k)}
       status: "added",
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。exp_hermitian_is_positive_definite の (1) の証明は exp(S/2)exp(-S/2) = I（右逆元）から可逆性を述べていたが、Bx = 0 ⇒ x = 0 に要るのは左逆元である。正定値性の主張を分けるときに、左逆元を与える独立の主張にした。下流（V^{(+)} と対称化した転送行列の正定値性）も B' := exp(-½S) をこれで得る。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の二十二単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.matExp_neg_mul_matExp_tensorPow・neg_tensorPow_mul_self_comm・neg_tensorPow_add_self を足した（MathematicalTools/MatrixExponentialAndCommutators/ClaimTensorPowExpOfNegativeIsLeftInverse.lean。準備の二つの鎖は番号 ν^{-1} で Fin n の行列へ移してこの主張の Fin n の具体版の鎖を引き、指数の鎖の 3 行は同じ形で書く）。主張・証明は不変。",
       ],
     },
   },

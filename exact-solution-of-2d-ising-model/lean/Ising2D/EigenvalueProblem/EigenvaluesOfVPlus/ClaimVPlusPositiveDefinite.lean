@@ -29,7 +29,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowDoubleNegation
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
-import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfNegativeIsLeftInverseFromNecSuf
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimTensorPowExpOfNegativeIsLeftInverse
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionConjugateTransposeAndHermitian
 
@@ -157,7 +157,7 @@ theorem real_rpow_two_s2_ne_zero {s2 : ℝ} (hs2 : 0 < s2) :
 同じ形を一般の `X` について書き、4 つの左右逆はその代入として得る（人手の各鎖の 1 行目「`E_±`・`A_±` の置き方」は、
 下の `expHalfS1plus_mul_expNegHalfS1plus` などの代入が担う）。`exp_of_negative_is_left_inverse` は
 `MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfNegativeIsLeftInverse.lean` の具体版の `TensorPow M` の系
-`matExp_neg_mul_matExp_tensorPow`（`ClaimExpOfNegativeIsLeftInverseFromNecSuf.lean`）を引く。 -/
+`matExp_neg_mul_matExp_tensorPow`（`ClaimTensorPowExpOfNegativeIsLeftInverse.lean`）を引く。 -/
 
 /-- `exp(X) exp(-X) = I`（人手 Step 1 の第一・第三の鎖）。 -/
 theorem matExp_mul_matExp_neg_eq_one (X : TensorPow M) : matExp X * matExp (-X) = 1 := by
