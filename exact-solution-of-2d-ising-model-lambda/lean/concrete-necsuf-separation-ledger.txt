@@ -3,7 +3,6 @@
 # 行は減らすだけにする。直して違反でなくなった行は同じ回に消す。
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_disjoint_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_mem_component_necSuf
-DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cyclePoints_nodup_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycleWords_complete_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycleWords_flatten_nodup_necSuf
 DEP	necsuf	Ising2DLambda.NecSuf.KacWard.cycle_pairs_D_necSuf

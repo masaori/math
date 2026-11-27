@@ -187,15 +187,16 @@ theorem cyclePoints_mem_component_necSuf (m : {x // x ∈ A}) (x : J)
   rw [← matchingPairPermutation_orbit_eq_component]
   exact ⟨r, Or.inl rfl⟩
 
-theorem cyclePoints_nodup_necSuf (m : {x // x ∈ A}) : (cyclePointsOf (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m).Nodup := by
+omit [Fintype J] [LinearOrder J] in
+theorem cyclePoints_nodup_necSuf {K : Type*} (period : K → ℕ)
+    (iterate : ℕ → K → K) (point : K → J) (m : K)
+    (hinj : ∀ r s, r < period m → s < period m →
+      point (iterate r m) = point (iterate s m) → r = s) :
+    (cyclePointsOf period iterate point m).Nodup := by
   unfold cyclePointsOf
   apply List.Nodup.map_on _ List.nodup_range
   intro r hr s hs hrs
-  have hinj := (finitePermutationOrbitEnumeration_bijective (matchingPairPermutation τ υ) m).1
-  have := @hinj ⟨r, List.mem_range.mp hr⟩ ⟨s, List.mem_range.mp hs⟩
-    (Subtype.ext (Subtype.ext hrs))
-  exact congrArg Fin.val this
+  exact hinj r s (List.mem_range.mp hr) (List.mem_range.mp hs) hrs
 
 theorem cyclePoints_disjoint_necSuf (m₁ m₂ : {x // x ∈ A})
     (h₁ : m₁ ∈ cycleMinimaOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)) (h₂ : m₂ ∈ cycleMinimaOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)) (hne : m₁ ≠ m₂) :
@@ -236,7 +237,14 @@ theorem cycleWords_flatten_nodup_necSuf : (cycleWordsOf (Ising2DLambda.NecSuf.Al
   rw [List.nodup_flatten]
   refine ⟨fun l hl => ?_, ?_⟩
   · obtain ⟨m, _, rfl⟩ := List.mem_map.mp hl
-    exact cyclePoints_nodup_necSuf A τ υ m
+    apply cyclePoints_nodup_necSuf
+      (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m
+    intro r s hr hs hrs
+    have hinj := (finitePermutationOrbitEnumeration_bijective
+      (matchingPairPermutation τ υ) m).1
+    have h := @hinj ⟨r, hr⟩ ⟨s, hs⟩ (Subtype.ext (Subtype.ext hrs))
+    exact congrArg Fin.val h
   · rw [List.pairwise_map]
     apply List.Nodup.pairwise_of_forall_ne (Finset.sort_nodup _ _)
     intro a ha b hb hab
