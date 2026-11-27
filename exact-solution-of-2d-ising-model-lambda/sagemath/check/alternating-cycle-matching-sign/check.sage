@@ -29,7 +29,12 @@ def cycle_rhs(pairs, base, short_common):
     z = mate_map(base)
     shared = set(tuple(sorted(p)) for p in pairs) & set(base)
     inactive = set(v for pair in shared - short_common for v in pair)
-    unseen = set(d) - inactive
+    active = set(d) - inactive
+    # 準備: 活動点以外の点では D と基準マッチングの相手が一致し、その相手も活動点でない。
+    for v in inactive:
+        assert d[v] == z[v] and d[v] in inactive and d[d[v]] == v
+    unseen = set(active)
+    covered = set()
     rhs = ZZ(1)
     while unseen:
         start = min(unseen)
@@ -42,10 +47,16 @@ def cycle_rhs(pairs, base, short_common):
                 break
             c.append(next_z)
         assert len(set(c)) == len(c)
+        # 準備: 最小元から読んだ閉路は正の偶数長で、周期で始点へ戻り、他の閉路と交わらない。
+        assert len(c) > 0 and len(c) % 2 == 0 and z[c[-1]] == start
+        assert start == min(c) and covered.isdisjoint(c)
+        covered.update(c)
         unseen.difference_update(c)
         alpha_d = prod(ZZ(1) if c[2*r] < c[2*r+1] else ZZ(-1) for r in range(len(c)//2))
         alpha_0 = prod(ZZ(1) if c[2*r+1] < c[(2*r+2)%len(c)] else ZZ(-1) for r in range(len(c)//2))
         rhs *= -alpha_d*alpha_0
+    # 準備: 閉路の点集合は全活動点を覆う。
+    assert covered == active
     return rhs
 
 cases = 0

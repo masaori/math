@@ -349,13 +349,16 @@ theorem taggedCycleWords_complete :
       let xx : TaggedActive D t := ⟨x, hx⟩
       let m := matchingPairComponentMinimum τ υ xx
       have hm : m ∈ taggedCycleMinima D t := Finset.mem_image_of_mem _ (Finset.mem_univ _)
+      -- 本文の第一段: claim_tagged_difference_cycle_cover により活動点 xx は自分の閉路に属し、
+      -- claim_tagged_difference_alternating_cycle によりその閉路は σ の m を通る軌道に等しく、
+      -- 一周期の列挙はその軌道への全単射である。
+      obtain ⟨_, hbij, horb, -⟩ := taggedActive_alternatingCycle D t xx
+      have hcov : xx ∈ concreteAlternatingComponent D t xx := (taggedActive_cycleCover D t).1 xx
       have horbit : xx ∈ finitePermutationOrbit (concreteAlternatingSuccessor D t) m := by
         change xx ∈ finitePermutationOrbit (matchingPairPermutation τ υ) m
-        rw [matchingPairPermutation_orbit_eq_component,
-          matchingPairComponent_basepoint τ υ xx m (matchingPairComponentMinimum_mem τ υ xx)]
-        exact Or.inl (finitePermutationOrbit_self_mem _ _)
-      obtain ⟨r, hr⟩ := (finitePermutationOrbitEnumeration_bijective
-        (concreteAlternatingSuccessor D t) m).2 ⟨xx, horbit⟩
+        rw [horb]
+        exact hcov
+      obtain ⟨r, hr⟩ := hbij.2 ⟨xx, horbit⟩
       refine List.mem_flatten.mpr ⟨taggedCyclePoints D t m,
         List.mem_map.mpr ⟨m, (Finset.mem_sort _).mpr hm, rfl⟩, ?_⟩
       refine List.mem_map.mpr ⟨r.val, List.mem_range.mpr r.isLt, ?_⟩
