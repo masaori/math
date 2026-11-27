@@ -1870,7 +1870,7 @@ X - O
     kind: "claim",
     title: { text: "スカラー倍は行列の和に分配する" },
     labels: ["scalar_multiple_distributes_over_matrix_sum"],
-    lean: ["Ising2D.matrix_smul_add", "Ising2D.matrix_smul_add_apply"],
+    lean: ["Ising2D.matrix_smul_add", "Ising2D.matrix_smul_add_apply", "Ising2D.smul_add_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1917,6 +1917,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。スカラー倍を有限和の外へ出す finite_sum_of_scalar_multiples の帰納法の段に要るので足した。" +
           "iH_is_real_symmetric の Step 1・Step 2 の鎖が「スカラー倍の和の分配」と名前だけで根拠にしていた段を、その主張で引けるようにするためである。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の十四単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.smul_add_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowScalarMultipleDistributesOverMatrixSum.lean。番号 ν^{-1} で Fin n の行列へ移し、この証明の成分の鎖を引く）。",
       ],
     },
   },

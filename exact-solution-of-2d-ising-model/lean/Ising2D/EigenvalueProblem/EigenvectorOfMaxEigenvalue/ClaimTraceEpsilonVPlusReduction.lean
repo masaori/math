@@ -21,8 +21,8 @@
 （`def_V_plus`）、`BB = V_1^{(+)}` は `V1_plus_square_root_property`、`εB = Bε`・`εV_1^{(+)} = V_1^{(+)}ε` は
 `epsilon_commute_V1plusHalf`・`epsilon_commute_V1plus`（`epsilon_commutes_with_V1_plus_square_root`・`epsilon_commutes_with_V1_plus`）、
 トレースの巡回性は `trace_cyclic`（`trace_basic_properties` (2)）である。
-準備 (P1)・(P2) の根拠は、`scalar_multiple_distributes_over_matrix_sum` が `smul_add_tensorPow`、
-`commuting_with_scalar_multiple` が `mul_smul_comm_of_commute_tensorPow`（どちらも `TensorPow M` での系）、
+準備 (P1)・(P2) の根拠は、`scalar_multiple_distributes_over_matrix_sum` が `smul_add_tensorPow`（`TensorPow M` での具体版）、
+`commuting_with_scalar_multiple` が `mul_smul_comm_of_commute_tensorPow`（`TensorPow M` での系）、
 `scalar_multiple_is_associative`・`mat_mult_associative` は Lean の具体版が無いので既存の慣行どおり mathlib の
 `smul_smul`・`mul_assoc`、ℂ の積の可換律（`complex_numbers_form_a_field`）は `mul_comm` である。
 準備 (P3)・(P4) の根拠は、冪の定義 `A^0 := I`・`A^{n+1} := A^nA`（`def_matrix_power`）が `TensorPow M` での一致の補題
@@ -52,7 +52,7 @@ import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonD0GCommu
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionV1PlusSquareRoot
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutingWithScalarMultipleFromNecSuf
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixSumFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleDistributesOverMatrixSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowMatMultDistributesOverSum
