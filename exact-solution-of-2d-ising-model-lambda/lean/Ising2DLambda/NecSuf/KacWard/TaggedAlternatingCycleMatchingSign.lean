@@ -250,103 +250,52 @@ theorem cycleMinima_iterate_surjective_necSuf {K : Type*} [Fintype K]
 theorem cycleWords_complete_necSuf (mate : J → J)
     (hmate_ne : ∀ e, mate e ≠ e)
     (hmate_inv : ∀ e, mate (mate e) = e)
-    (hτmate : ∀ i, (τ.val i).1 = mate i.1) :
-    IsCompleteWord ((cycleWordsOf (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
-    (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-    (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val).flatten ++
-      matchingPairWord (matchingPairOutsideEnumeration mate A)) := by
+    (hclosed : ∀ e, e ∈ A → mate e ∈ A)
+    (period : {x // x ∈ A} → ℕ)
+    (iterate : ℕ → {x // x ∈ A} → {x // x ∈ A})
+    (hinj : ∀ m r s, r < period m → s < period m →
+      (iterate r m).1 = (iterate s m).1 → r = s)
+    (minimum : {x // x ∈ A} → {x // x ∈ A})
+    (hself : ∀ i, minimum (minimum i) = minimum i)
+    (hiterate : ∀ i r, minimum (iterate r i) = minimum i)
+    (hcover : ∀ i, ∃ m ∈ cycleMinimaOf minimum,
+      ∃ r, r < period m ∧
+        iterate r m = i) :
+    (((cycleWordsOf minimum
+    period iterate Subtype.val).flatten ++
+      (matchingPairOutsideEnumeration mate A).flatMap (fun p => [p.1, p.2])).Nodup ∧
+      ∀ x : J, x ∈ (cycleWordsOf minimum
+        period iterate Subtype.val).flatten ++
+        (matchingPairOutsideEnumeration mate A).flatMap (fun p => [p.1, p.2])) := by
   constructor
   · rw [List.nodup_append]
     refine ⟨cycleWords_flatten_nodup_necSuf
-      (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
-      (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-      (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val
-      (by
-        intro m r s hr hs hrs
-        let σ := matchingPairPermutation τ υ
-        have hspec := finitePermutationMinimalPeriod_spec σ m
-        have hmin : ∀ n : ℕ, 0 < n → σ^[n] m = m →
-            finitePermutationMinimalPeriod σ m ≤ n := by
-          intro n hn heq
-          exact hspec.2.2 n hn heq
-        exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_injOn_of_no_short_return_necSuf
-          σ σ.injective m (finitePermutationMinimalPeriod σ m) hmin
-          hr hs (Subtype.val_injective hrs))
-      (by
-        intro i
-        exact (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
-          τ υ (· ≤ ·) (fun _ _ => le_antisymm)
-          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
-          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ)
-          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_le τ υ) i).1)
-      (by
-        intro i r
-        have horbit : finiteMapIterate (matchingPairPermutation τ υ) r i ∈
-            matchingPairComponent τ υ i := by
-          have heq : finitePermutationOrbit (matchingPairPermutation τ υ) i =
-              matchingPairComponent τ υ i := by
-            exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation_orbit_eq_component τ υ i
-          rw [← heq]
-          exact ⟨r, Or.inl rfl⟩
-        apply Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_basepoint
-          τ υ (· ≤ ·) (fun _ _ => le_antisymm)
-          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
-          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ)
-          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_le τ υ)
-        exact horbit)
+      minimum
+      period iterate Subtype.val
+      hinj
+      hself hiterate
       Subtype.val_injective,
       matchingPairOutsideEnumeration_nodup mate A hmate_ne hmate_inv, ?_⟩
     intro x hx y hy hxy
     subst hxy
     apply matchingPairOutsideEnumeration_outside mate A
-      hmate_inv (fun e he => by
-        have h := (τ.val ⟨e, he⟩).2
-        rwa [hτmate] at h) x hy
+      hmate_inv hclosed x hy
     obtain ⟨l, hl, hxl⟩ := List.mem_flatten.mp hx
     obtain ⟨m, _, rfl⟩ := List.mem_map.mp hl
     unfold cyclePointsOf at hxl
     obtain ⟨r, _, hr⟩ := List.mem_map.mp hxl
     rw [← hr]
-    exact (finiteMapIterate (matchingPairPermutation τ υ) r m).2
+    exact (iterate r m).2
   · intro x
     by_cases hx : x ∈ A
     · apply List.mem_append_left
       let xx : {x // x ∈ A} := ⟨x, hx⟩
       exact cycleWords_cover_necSuf
-        (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
-        (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-        (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val
-        (cycleMinima_iterate_surjective_necSuf
-          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
-          (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
-          (finiteMapIterate (matchingPairPermutation τ υ))
-          (finitePermutationOrbit (matchingPairPermutation τ υ))
-          (by
-            intro i
-            let σ := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation τ υ
-            let m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbitMinimum σ i
-            have hm : m ∈ Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit σ i :=
-              Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbitMinimum_mem σ i
-            have horbit : i ∈ Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit σ m := by
-              rw [Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_basepoint_necSuf σ i m hm]
-              exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_self_mem_necSuf σ i
-            rw [Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_eq_permutationOrbitMinimum τ υ i]
-            exact horbit)
-          (by
-            intro m i hi
-            let σ := matchingPairPermutation τ υ
-            have hs := finitePermutationMinimalPeriod_spec σ m
-            obtain ⟨r, hr, heq⟩ :=
-              (Ising2DLambda.NecSuf.AlgebraicEigenvalue.twoWayOrbit_mem_iff_lt_period_necSuf
-                σ σ.symm σ.symm_apply_apply m (finitePermutationMinimalPeriod σ m)
-                hs.1 hs.2.1 i).mp hi
-            exact ⟨r, hr, heq⟩)) xx
+        minimum
+        period iterate Subtype.val
+        hcover xx
     · apply List.mem_append_right
-      have hout' := outside_mate_outside mate A
-        hmate_inv
-        (fun e he => by
-          have h := (τ.val ⟨e, he⟩).2
-          rwa [hτmate] at h) x hx
+      have hout' := outside_mate_outside mate A hmate_inv hclosed x hx
       rcases lt_or_gt_of_ne (hmate_ne x).symm with hlt | hgt
       · refine List.mem_flatMap.mpr ⟨(x, mate x), ?_, by simp⟩
         exact List.mem_map.mpr ⟨x, (Finset.mem_sort _).mpr
@@ -397,9 +346,73 @@ theorem tagged_alternating_cycles_matching_sign_necSuf {R : Type*} [CommRing R]
     exact cyclePoints_even_necSuf
       (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
       (finiteMapIterate (matchingPairPermutation τ υ)) Subtype.val m hpos hev
-  · exact cycleWords_complete_necSuf A τ υ
+  · exact cycleWords_complete_necSuf A
       (perfectMatchingMate D) (perfectMatchingMate_ne D)
-      (perfectMatchingMate_involutive D) hτ
+      (perfectMatchingMate_involutive D)
+      (by
+        intro e he
+        have h := (τ.val ⟨e, he⟩).2
+        rwa [hτ] at h)
+      (finitePermutationMinimalPeriod (matchingPairPermutation τ υ))
+      (finiteMapIterate (matchingPairPermutation τ υ))
+      (by
+        intro m r s hr hs hrs
+        let σ := matchingPairPermutation τ υ
+        have hspec := finitePermutationMinimalPeriod_spec σ m
+        have hmin : ∀ n : ℕ, 0 < n → σ^[n] m = m →
+            finitePermutationMinimalPeriod σ m ≤ n := by
+          intro n hn heq
+          exact hspec.2.2 n hn heq
+        exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_injOn_of_no_short_return_necSuf
+          σ σ.injective m (finitePermutationMinimalPeriod σ m) hmin
+          hr hs (Subtype.val_injective hrs))
+      (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+      (by
+        intro i
+        exact (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_self_and_color
+          τ υ (· ≤ ·) (fun _ _ => le_antisymm)
+          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ)
+          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_le τ υ) i).1)
+      (by
+        intro i r
+        have horbit : finiteMapIterate (matchingPairPermutation τ υ) r i ∈
+            matchingPairComponent τ υ i := by
+          have heq : finitePermutationOrbit (matchingPairPermutation τ υ) i =
+              matchingPairComponent τ υ i := by
+            exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation_orbit_eq_component τ υ i
+          rw [← heq]
+          exact ⟨r, Or.inl rfl⟩
+        apply Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_basepoint
+          τ υ (· ≤ ·) (fun _ _ => le_antisymm)
+          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ)
+          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ)
+          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_le τ υ)
+        exact horbit)
+      (by
+        intro i
+        let σ := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation τ υ
+        let m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbitMinimum σ i
+        have hm : m ∈ Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit σ i :=
+          Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbitMinimum_mem σ i
+        have horbit : i ∈ Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit σ m := by
+          rw [Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_basepoint_necSuf σ i m hm]
+          exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_self_mem_necSuf σ i
+        have hmin : Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i = m := by
+          exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_eq_permutationOrbitMinimum τ υ i
+        refine ⟨_, (mem_cycleMinimaOf _ _).mpr ⟨i, rfl⟩, ?_⟩
+        have hmem : i ∈ finitePermutationOrbit (matchingPairPermutation τ υ)
+            (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i) := by
+          rw [hmin]
+          exact horbit
+        let σ' := matchingPairPermutation τ υ
+        have hs := finitePermutationMinimalPeriod_spec σ'
+          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i)
+        obtain ⟨r, hr, heq⟩ :=
+          (Ising2DLambda.NecSuf.AlgebraicEigenvalue.twoWayOrbit_mem_iff_lt_period_necSuf
+            σ' σ'.symm σ'.symm_apply_apply _ (finitePermutationMinimalPeriod σ' _)
+            hs.1 hs.2.1 i).mp hmem
+        exact ⟨r, hr, heq⟩)
   · intro c hc
     obtain ⟨m, hm, rfl⟩ := List.mem_map.mp hc
     obtain ⟨i, rfl⟩ := (mem_cycleMinimaOf _ _).mp ((Finset.mem_sort _).mp hm)

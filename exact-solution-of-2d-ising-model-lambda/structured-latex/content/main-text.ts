@@ -15478,16 +15478,19 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                             ref("claim_qbar_factor_quotient_coeff_bound"), " により、", math(String.raw`n<i`),
                             " ならば ", math(String.raw`\mathrm{ac}_i(g)=0`), " である。よって帰納法の仮定から",
                           ]),
-                          displayMath(String.raw`\sum_{w\in s}\mathrm{mult}_{w}(g)\le n`),
+                          displayMath(String.raw`\sum_{w\in s}\mathrm{mult}_{w}(g)\le n
+\qquad\bigl(\because\ \text{帰納法の仮定}\bigr)`),
                           paragraph([
                             "を得る。一方、", ref("claim_qbar_root_multiplicity_le_quotient_succ"), " により",
                           ]),
-                          displayMath(String.raw`\mathrm{mult}_{w_0}(f)\le\mathrm{mult}_{w_0}(g)+1`),
+                          displayMath(String.raw`\mathrm{mult}_{w_0}(f)\le\mathrm{mult}_{w_0}(g)+1
+\qquad\bigl(\because\ \blkref{claim_qbar_root_multiplicity_le_quotient_succ}\bigr)`),
                           paragraph([
                             "である。また ", math(String.raw`w\in s\setminus\{w_0\}`), " ならば ",
                             math(String.raw`w\ne w_0`), " なので、", ref("claim_qbar_other_root_multiplicity_le_quotient"), " により",
                           ]),
-                          displayMath(String.raw`\mathrm{mult}_{w}(f)\le\mathrm{mult}_{w}(g)`),
+                          displayMath(String.raw`\mathrm{mult}_{w}(f)\le\mathrm{mult}_{w}(g)
+\qquad\bigl(\because\ \blkref{claim_qbar_other_root_multiplicity_le_quotient}\bigr)`),
                           paragraph(["である。したがって"]),
                           displayMath(String.raw`\begin{aligned}
 \sum_{w\in s}\mathrm{mult}_{w}(f)
