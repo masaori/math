@@ -33,9 +33,14 @@ def period_difference_cases():
         r = tuple(pt_scale(-1, step) for step in parallel_steps)
         x = tuple(pt_sub(D(b-i-1), D(b-i)) for i in range(b))
         kappa = lambda point: wh*point[0] - wv*point[1]
+        parallel = lambda point: wv*point[0] + wh*point[1]
+        walk_edges = row['edges']
+        displacements = tuple(pt_displacement(L, edge) for edge in walk_edges)
+        unit = ((0, 1), (1, 0), (0, -1), (-1, 0))
         maximum = max(kappa(point) for point in P[:-1])
         at_maximum = kappa(S) == maximum
         projection_nonbacktracking = []
+        fixed_word, junction_pairs = [], []
         projected_sums, step_sums, repeated_sums = [], [], []
         for q in (c, c+1):
             lift = [pt_lift(P, B, k+j) for j in range(q*m+1)]
@@ -57,6 +62,13 @@ def period_difference_cases():
             # 点列の整数除法による構成と、四つの固定歩列の反復を独立に比較する。
             assert steps == repeated
             assert points == difference_path(S, repeated)
+            fixed_word.append(all(steps[j] == repeated[j] for j in range(len(steps))))
+            N = len(repeated)
+            junction_pairs.append(
+                (repeated[q*m-1], repeated[q*m]) == (u[m-1], v[0])
+                and (repeated[q*m+b-1], repeated[q*m+b]) == (v[b-1], r[0])
+                and (repeated[q*m+b+q*n-1], repeated[q*m+b+q*n]) == (r[n-1], x[0])
+                and (repeated[N-1], repeated[0]) == (x[b-1], u[0]))
             projected_sums.append(sum(pt_direction_turn(L, edges[j], edges[(j+1) % len(edges)])
                                       for j in range(len(edges))))
             step_sums.append(pt_cyclic_weight(steps))
@@ -94,7 +106,26 @@ def period_difference_cases():
             increasing=all(kappa(step) > 0 for step in v),
             parts=all(word[(j+1) % len(word)] != pt_scale(-1, word[j])
                       for word in (u, v, r, x) for j in range(len(word))),
-            projected=all(projection_nonbacktracking))
+            projected=all(projection_nonbacktracking),
+            fixed_word=all(fixed_word),
+            junction_index=all((q*h-1) % h == ((q-1)*h+(h-1)) % h == (h-1) % h == h-1
+                               for q in (c, c+1) for h in (m, n)),
+            junction_pairs=all(junction_pairs),
+            lift_steps=all(u[j] == displacements[(k+j) % m]
+                           and u[(j+1) % m] == displacements[((k+j) % m + 1) % m]
+                           for j in range(m)),
+            lift_direction=all(pt_endpoints(L, walk_edges[(i+1) % m])[0] == pt_endpoints(L, walk_edges[i])[1]
+                               and walk_edges[(i+1) % m] != (walk_edges[i][0], 1-walk_edges[i][1])
+                               and pt_direction(L, (walk_edges[i][0], 1-walk_edges[i][1]))
+                                   == (pt_direction(L, walk_edges[i]) + 2) % 4
+                               and pt_direction(L, walk_edges[(i+1) % m]) != (pt_direction(L, walk_edges[i]) + 2) % 4
+                               for i in range(m)),
+            lift_unit=all(displacements[i] == unit[pt_direction(L, walk_edges[i])] for i in range(m))
+                and all((unit[d2] == pt_scale(-1, unit[d1])) == (d2 == (d1+2) % 4)
+                        for d1 in range(4) for d2 in range(4))
+                and all(u[(j+1) % m] != pt_scale(-1, u[j]) for j in range(m)),
+            return_parallel=all(parallel(r[s]) == -(parallel(G[s+1]) - parallel(G[s])) < 0
+                                for s in range(n)))
         yield dict(stages=stages, scalar=scalar, at_maximum=at_maximum,
                    period_sum=period_sum, return_sum=return_sum,
                    return_turn=return_turn, original=original, m=m, n=n, k=k, L=L, t=t, c=c)

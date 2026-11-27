@@ -51,10 +51,18 @@
 | `return_first_definition`, `return_first_additivity`, `return_first_endpoint`, `return_first_sign` | 帰路始歩の横断座標が非負となる四行 | PASS |
 | `return_last_definition`, `return_last_additivity`, `return_last_endpoint`, `return_last_sign` | 帰路末歩の横断座標が非正となる四行 | PASS |
 | `lift_upper_sign`, `upper_return_sign`, `return_lower_sign`, `lower_lift_sign` | 四接合の横断座標の符号の不一致 | PASS |
+| `steps_fixed_word` | 閉包の歩と四部分反復列の各添字での一致 | PASS |
+| `junction_index` | 反復列の末項の添字 $(ch-1)\bmod h=h-1$ の三行 | PASS |
+| `junction_pairs` | 四部分反復列の四接合の対が固定列の端の対であること | PASS |
+| `lift_steps` | 周期持ち上げの歩と元の辺の変位の一致（隣接対の両方） | PASS |
+| `lift_direction` | 後続辺の始点・非反転と、反転の方向番号が二つずれること | PASS |
+| `lift_unit` | 変位が方向単位ベクトルで、逆ベクトルが方向番号の差二と同値であることから周期持ち上げの隣接対が逆ベクトルでないこと | PASS |
+| `return_parallel` | 平行帰路の各歩の平行座標が負となる二行 | PASS |
 | `parts_nonbacktracking` | 固定四列の内部と反復境界で逆歩が隣り合わない | PASS |
 | `projection_nonbacktracking` | 実際の閉包を射影した辺列の連続性と全隣接対の非後退性 | PASS |
 
 2026-10-04: 非後退性の追加行別31本は各6,988例で全て通過した。
+2026-11-27: 本文の非後退性の段に足した七行（上の表の `steps_fixed_word` から `return_parallel`）も各6,988例で全て通過した。
 最大横断水準を基点とするものだけを対象とし、そのうち1,100例は元の回転数が非零である。
 周期数 c と c+1 の両閉包について実際の射影辺を読み、連続性と全隣接対を確かめた。
 Lean の補助証明も元周期の最大水準と循環非後退性から四接合条件を導き、頂点単純性を仮定しない。

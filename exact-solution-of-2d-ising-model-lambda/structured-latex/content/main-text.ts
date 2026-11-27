@@ -96184,8 +96184,7 @@ C_n(r)&=t_{\circ}(R_-)
 &&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の基点条件}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "固定列の定義（", ref("claim_one_sided_closure_junction_pairs"),
-                        "）で始歩と末歩を読むと、",
+                        "固定列 ", math(String.raw`u`), " の定義で始歩と末歩を読むと、",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \kappa(u(m-1))&=\kappa(P_m-P_{m-1})
@@ -96248,8 +96247,58 @@ C_n(r)&=t_{\circ}(R_-)
 &&\bigl(\because\ \kappa(G_{n-1})\le0\bigr)
 \end{aligned}`),
                       paragraph([
-                        "四接合（", ref("claim_one_sided_closure_junction_pairs"),
-                        "）では、今の符号から順に、",
+                        "閉包の各歩を四部分反復列で読む。一側閉包の四部分の歩ベクトル列を、",
+                        ref("claim_one_sided_closure_cyclic_sum"), " と同じく ",
+                        math(String.raw`A_c,V_c,R_c,X_c`), "（長さ ", math(String.raw`cm,b,cn,b`),
+                        "、範囲外は零ベクトル）と書く。任意の自然数添字 ",
+                        math(String.raw`0\le j<cm`), "、", math(String.raw`0\le i<b`), "、",
+                        math(String.raw`0\le s<cn`), " について、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+A_c(j)&=u(j\bmod m)
+&&\bigl(\because\ \blkref{claim_one_sided_periodic_lift_repetition}\bigr),\\
+V_c(i)&=v(i)
+&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr),\\
+R_c(s)&=r(s\bmod n)
+&&\bigl(\because\ \blkref{claim_one_sided_parallel_return_repetition}\bigr),\\
+X_c(i)&=x(i)
+&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。連結（", ref("def_finite_sequence_concatenation"),
+                        "）が各段で選ぶ添字は上の範囲に入るので、任意の ",
+                        math(String.raw`0\le j<N_c`), " について",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+w^{(c)}_j
+&=\Bigl(\bigl((A_c*_{cm}V_c)*_{cm+b}R_c\bigr)*_{cm+b+cn}X_c\Bigr)_j
+&&\bigl(\because\ \blkref{claim_one_sided_closure_step_sequence}\bigr)\\
+&=z^{(c)}_j
+&&\bigl(\because\ \text{上の四つの等式を各段で選ばれる添字へ代入}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "が成り立つ。従って閉じ目 ", math(String.raw`(w^{(c)}_{N_c-1},w^{(c)}_0)`),
+                        " を含む ", math(String.raw`w^{(c)}`), " の隣接対は、",
+                        math(String.raw`z^{(c)}`), " の隣接対と閉じ目 ",
+                        math(String.raw`(z^{(c)}_{N_c-1},z^{(c)}_0)`), " に等しい。",
+                        "反復列の末項の添字は、", math(String.raw`h\in\{m,n\}`), " に対し ",
+                        math(String.raw`c\ge1`), " から",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+(ch-1)\bmod h
+&=((c-1)h+(h-1))\bmod h
+&&\bigl(\because\ \mathbb Z\text{ の四則と }c,h\ge1\bigr)\\
+&=(h-1)\bmod h
+&&\bigl(\because\ \text{整数倍の加算は余りを変えない}\bigr)\\
+&=h-1
+&&\bigl(\because\ 0\le h-1<h\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。連結の定義で四接合の対を読むと、",
+                        math(String.raw`z^{(c)}`), " の四接合の対は順に ",
+                        math(String.raw`(u(m-1),v(0))`), "、", math(String.raw`(v(b-1),r(0))`), "、",
+                        math(String.raw`(r(n-1),x(0))`), "、閉じ目の ", math(String.raw`(x(b-1),u(0))`),
+                        " である。四接合では、今の符号から順に、",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \kappa(v(0))&>0\ge-\kappa(u(m-1))
@@ -96263,10 +96312,66 @@ C_n(r)&=t_{\circ}(R_-)
 \end{aligned}`),
                       paragraph([
                         "となる。逆ベクトルなら横断座標も互いの符号反転となるので、各接合で逆向きの歩は隣り合わない。",
-                        "周期持ち上げ部分の内部と反復境界は元の閉じた非後退辺列の方向を読む（",
-                        ref("claim_periodic_plane_lift_period_turning"), " の一歩の同定）。",
-                        "横断二列の内部は横断座標の同じ厳密な符号により非後退であり、平行帰路の内部と反復境界は ",
-                        ref("claim_negated_parallel_staircase_turning_zero"), " の非後退性による。",
+                        "横断二列の内部は横断座標の同じ厳密な符号により非後退である。",
+                        "周期持ち上げ部分の内部と反復境界は、隣接対 ",
+                        math(String.raw`(u(j),u((j+1)\bmod m))\ (0\le j<m)`), " である。",
+                        math(String.raw`I_m:=\{0,\ldots,m-1\}`), "、余り ", math(String.raw`[h]_m`),
+                        " と巡回移動 ", math(String.raw`\rho_1`), " を ",
+                        ref("claim_periodic_plane_lift_period_turning"), " の記法とし、",
+                        math(String.raw`D_i:=(\delta_{\mathrm{row}}(\vec e_{i+1}),\delta_{\mathrm{col}}(\vec e_{i+1}))\in\mathbb Z^2\ (i\in I_m)`),
+                        " と置く（", ref("def_plane_displacement"), "）。",
+                        ref("claim_periodic_plane_lift_period_turning"),
+                        " の証明中の一歩の同定（周期の継ぎ目では ", ref("claim_plane_lift_endpoint_winding"),
+                        " を使う）により、任意の ", math(String.raw`j\in I_m`), " について ",
+                        math(String.raw`u(j)=D_{[k_0+j]_m}`), " かつ ",
+                        math(String.raw`u((j+1)\bmod m)=D_{\rho_1([k_0+j]_m)}`), " である。",
+                        "任意の ", math(String.raw`i\in I_m`), " を取り、",
+                        math(String.raw`\vec e:=\vec e_{i+1},\ \vec f:=\vec e_{\rho_1(i)+1}`), " と書く。",
+                        math(String.raw`\gamma`), " は閉じた非後退辺列なので（", ref("def_nonbacktracking_edge_sequence"),
+                        "、閉じ目は ", ref("def_closed_nonbacktracking_walk"), "）",
+                        math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), "、すなわち ",
+                        math(String.raw`\operatorname{src}(\vec f)=\operatorname{tgt}(\vec e)`), " かつ ",
+                        math(String.raw`\vec f\ne\iota(\vec e)`), " である（", ref("def_nonbacktracking_successors"), "）。",
+                        "反転は始点と終点を入れ替えるので ",
+                        math(String.raw`\operatorname{src}(\iota(\vec e))=\operatorname{tgt}(\vec e)`),
+                        "（", ref("def_edge_reversal"), "、", ref("def_oriented_edge_endpoints"), "）。",
+                        "始点の等しい相異なる二辺は始点と方向番号の全単射（", ref("claim_source_direction_bijection"),
+                        "）により方向番号が異なるので、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec f)&\ne\operatorname{dir}(\iota(\vec e))
+&&\bigl(\because\ \blkref{claim_source_direction_bijection}\bigr)\\
+&=\operatorname{dir}(\vec e)+2
+&&\bigl(\because\ \blkref{claim_reversal_direction_shift}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。", math(String.raw`D_i`), " と ", math(String.raw`D_{\rho_1(i)}`),
+                        " はそれぞれ ", math(String.raw`\operatorname{dir}(\vec e)`), " と ",
+                        math(String.raw`\operatorname{dir}(\vec f)`), " の方向単位ベクトルであり（",
+                        ref("claim_displacement_is_direction_unit"), "）、方向単位ベクトルの四つの値（",
+                        ref("def_direction_unit_vector"), "）を見ると、二つの方向番号 ",
+                        math(String.raw`d,d'\in\mathbb Z/4\mathbb Z`), " の方向単位ベクトルが互いの逆ベクトルであることは ",
+                        math(String.raw`d'=d+2`), " と同値である。従って ",
+                        math(String.raw`D_{\rho_1(i)}\ne-D_i`), " であり、",
+                        math(String.raw`i=[k_0+j]_m`), " と置けば ",
+                        math(String.raw`u((j+1)\bmod m)\ne-u(j)`), " となる。",
+                        "平行帰路の内部と反復境界は、隣接対 ",
+                        math(String.raw`(r(s),r((s+1)\bmod n))\ (0\le s<n)`),
+                        " である。平行座標 ", math(String.raw`\pi_\gamma`), "（",
+                        ref("def_winding_parallel_coordinate"), "）は加法的なので、任意の ",
+                        math(String.raw`s\in\{0,\ldots,n-1\}`), " について",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\pi_\gamma(r(s))&=\pi_\gamma(-(G_{s+1}-G_s))
+&&\bigl(\because\ r\text{ の定義}\bigr)\\
+&=-\bigl(\pi_\gamma(G_{s+1})-\pi_\gamma(G_s)\bigr)
+&&\bigl(\because\ \pi_\gamma\text{ の加法性}\bigr)\\
+&<0
+&&\bigl(\because\ \blkref{claim_winding_parallel_staircase_step_increase}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。逆ベクトルなら平行座標も互いの符号反転となるので、平行座標がともに負の二歩 ",
+                        math(String.raw`r(s),r((s+1)\bmod n)`), " は逆ベクトルでない。",
                         "これで閉じ目を含む全隣接対を尽くした。閉性と単位歩は ",
                         ref("claim_one_sided_periodic_lift_closure_closed_unit_steps"), " による。射影の四方向表（",
                         ref("claim_plane_projection_cyclic_turning"), "）と反転方向（",
