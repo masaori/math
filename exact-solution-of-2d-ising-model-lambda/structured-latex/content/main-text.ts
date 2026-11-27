@@ -93591,6 +93591,7 @@ D^{\gamma,S,t}_{N-j},&cm+t\,n_{\perp}+c\,n_{\parallel}\le j\le N.
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps",
                       "Ising2DLambda.KacWard.oneSidedClosurePoint_unit_steps",
                       "Ising2DLambda.KacWard.oneSidedClosureFromWalk_unit_steps",
+                      "Ising2DLambda.KacWard.oneSidedClosureFromWalk_closed",
                       "Ising2DLambda.NecSuf.KacWard.one_sided_four_segments_closed_steps_necSuf",
                       "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps_from_necSuf",
                     ],
@@ -94072,6 +94073,7 @@ cL W_{\perp}(\gamma)
                     habitat: "Z",
                     lean: [
                       "Ising2DLambda.KacWard.projectedPlaneCycleLift_translation_and_winding_zero",
+                      "Ising2DLambda.KacWard.projectedPlaneCycleLift_translation_and_winding_zero_ofWalk",
                       "Ising2DLambda.NecSuf.KacWard.projected_cycle_lift_translation_necSuf",
                       "Ising2DLambda.KacWard.projectedPlaneCycleLift_translation_and_winding_zero_from_necSuf",
                     ],
@@ -94200,8 +94202,6 @@ P_n(\gamma)
                     lean: [
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_simple_zero_winding",
-                      "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_injective",
-                      "Ising2DLambda.KacWard.oneSidedClosureProjectedLiftFromWalk_closed",
                       "Ising2DLambda.KacWard.oneSidedClosureProjectionFromWalk_winding_zero",
                       "Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf",
                       "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning_from_necSuf",

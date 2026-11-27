@@ -1,4 +1,4 @@
-import Ising2DLambda.KacWard.ProjectedClosedUnitPathWinding
+import Ising2DLambda.KacWard.ProjectedPlaneCycleLiftOfWalk
 
 namespace Ising2DLambda.KacWard
 
@@ -86,23 +86,13 @@ theorem oneSidedClosureProjectionFromWalk_winding_zero_of_projection
         simpa using hΓ (0 : Fin (m' + 1))
       rw [← hΓ (Fin.last m'), ← hz] at hs hr
       exact Finset.mem_filter.mpr ⟨Finset.mem_univ _, hs, hr⟩
-  have hclosed : W N = W 0 := by
-    have ht' := oneSidedClosureProjectedLiftFromWalk_translation
-      γ hγ hwind k₀ t c ht hc (0, 0) N (le_refl N)
-    have hc' := oneSidedClosureProjectedLiftFromWalk_closed
-      γ hγ hwind k₀ t c ht hc (0, 0)
-    dsimp only at hc'
-    rw [ht'] at hc'
-    have hfst := congrArg Prod.fst hc'
-    have hsnd := congrArg Prod.snd hc'
-    exact Prod.ext (by simpa [W] using sub_eq_zero.mp hfst)
-      (by simpa [W] using sub_eq_zero.mp hsnd)
+  have hclosed : W N = W 0 := oneSidedClosureFromWalk_closed γ k₀ t c hc
   have hunit := oneSidedClosureFromWalk_unit_steps γ hγ hwind k₀ t c ht hc
-  have hresult := projectedClosedUnitPath_winding_zero L m' W
+  have hresult := projectedPlaneCycleLift_translation_and_winding_zero_ofWalk L m' W
     (by simpa [hm'] using hclosed)
     (by intro j hj; exact hunit j (by simpa [hm'] using hj))
     hwalk
-  exact ⟨hwalk, by simpa [Γ, hm'] using hresult⟩
+  exact ⟨hwalk, by simpa [Γ, hm'] using hresult.2.2⟩
 
 /-- 実際の閉歩道から作った一側閉包の射影辺列は巻き付きが零である。 -/
 theorem oneSidedClosureProjectionFromWalk_winding_zero {L m : ℕ} [NeZero L]
@@ -145,8 +135,6 @@ theorem oneSidedClosureProjectionFromWalk_simple_zero_winding
       verticalDirectedWindingNumber Γ = 0 ∧
       horizontalDirectedWindingNumber Γ = 0 := by
   obtain ⟨k₀, hsimple⟩ := oneSidedClosurePointFromWalk_injective γ hγ hcontact hwind
-  have hinj := oneSidedClosureProjectionFromWalk_planeLift_injective_of_point_injective
-    γ hγ hwind k₀ hsimple
   have hprojection :=
     oneSidedClosureProjectionFromWalk_closedNonbacktracking_of_point_injective
       γ hγ hwind k₀ hsimple
@@ -154,6 +142,45 @@ theorem oneSidedClosureProjectionFromWalk_simple_zero_winding
     γ hγ hwind k₀ hprojection
   refine ⟨k₀, ?_⟩
   intro t c ht hc
-  exact ⟨hinj t c ht hc, hzero t c ht hc⟩
+  have hz := hzero t c ht hc
+  dsimp only at hz ⊢
+  obtain ⟨hwalk, hv, hh⟩ := hz
+  refine ⟨?_, hwalk, hv, hh⟩
+  let W := oneSidedClosurePoint (m + 1) L (planeLiftIntegerBase γ)
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) k₀ t c
+  let N := oneSidedClosureLength (m + 1) L
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ) t c
+  have hsum : 0 < (horizontalDirectedWindingNumber γ).natAbs +
+      (verticalDirectedWindingNumber γ).natAbs := by
+    by_contra h
+    have hh0 : horizontalDirectedWindingNumber γ = 0 :=
+      Int.natAbs_eq_zero.mp (by omega)
+    have hv0 : verticalDirectedWindingNumber γ = 0 :=
+      Int.natAbs_eq_zero.mp (by omega)
+    exact hwind (Prod.ext hh0 hv0)
+  have hN : N - 1 + 1 = N := by
+    dsimp [N, oneSidedClosureLength]
+    have hb := Nat.mul_pos ht hsum
+    omega
+  -- 射影の平面持ち上げは閉包点列の平行移動である
+  have htranslation := (projectedPlaneCycleLift_translation_and_winding_zero_ofWalk L (N - 1) W
+    (by rw [hN]; exact oneSidedClosureFromWalk_closed γ k₀ t c hc)
+    (by
+      intro j hj
+      exact oneSidedClosureFromWalk_unit_steps γ hγ hwind k₀ t c ht hc j (by omega))
+    hwalk).1
+  -- 持ち上げ点が一致すれば閉包点が一致し、閉包の単純性から添字が一致する
+  intro i j hij
+  have hi := htranslation i.castSucc
+  have hj := htranslation j.castSucc
+  dsimp only at hij
+  rw [hi, hj] at hij
+  have hW : W i.val = W j.val := by
+    have hfst := congrArg Prod.fst hij
+    have hsnd := congrArg Prod.snd hij
+    simp only [Fin.val_castSucc, Prod.fst_add, Prod.snd_add, Prod.fst_sub,
+      Prod.snd_sub] at hfst hsnd
+    exact Prod.ext (by omega) (by omega)
+  exact Fin.ext (hsimple t c ht hc i.val (by omega) j.val (by omega) hW)
 
 end Ising2DLambda.KacWard
