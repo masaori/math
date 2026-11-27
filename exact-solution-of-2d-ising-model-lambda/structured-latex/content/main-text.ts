@@ -21016,13 +21016,13 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
                       paragraph(["任意の ", math(String.raw`i\in S`), " について、", math(String.raw`i\prec m(i)`), " なら ", math(String.raw`q_m(i)=(i,m(i))`), " かつ ", math(String.raw`\epsilon_m(i)=1`), " である。", math(String.raw`m(i)\prec i`), " なら ", math(String.raw`q_m(i)=(m(i),i)`), " であり、反対称性から次の等号を得る。"]),
                       displayMath(String.raw`\begin{aligned}
 A_{i,m(i)}&=-A_{m(i),i}&&\bigl(\because\ \text{仮定した反対称性}\bigr)\\
-&=\epsilon_m(i)A_{q_m(i)_1,q_m(i)_2}&&\bigl(\because\ \epsilon_m(i)=-1,\ q_m(i)=(m(i),i)\bigr).
+&=\epsilon_m(i)A_{q_m(i)_1,q_m(i)_2}&&\bigl(\because\ \epsilon_m(i)=-1,\ q_m(i)=(m(i),i)\bigr)
 \end{aligned}`),
                       displayMath(String.raw`\begin{aligned}
 A_{i,m(i)}&=A_{q_m(i)_1,q_m(i)_2}
 &&\bigl(\because\ q_m(i)=(i,m(i))\bigr)\\
 &=\epsilon_m(i)A_{q_m(i)_1,q_m(i)_2}
-&&\bigl(\because\ \epsilon_m(i)=1\bigr).
+&&\bigl(\because\ \epsilon_m(i)=1\bigr)
 \end{aligned}`),
                       displayMath(String.raw`\begin{aligned}
 \prod_{i\in S}A_{i,m(i)}
@@ -21033,7 +21033,7 @@ A_{i,m(i)}&=A_{q_m(i)_1,q_m(i)_2}
 &&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性と積の乗法性}\bigr)\\
 &=\left(\prod_{i\in S}\epsilon_m(i)\right)
   \left(\prod_{(a,b)\in E_{m,S}}A_{a,b}\right)
-&&\bigl(\because\ q_m:S\longrightarrow E_{m,S}\text{ は全単射}\bigr).
+&&\bigl(\because\ q_m:S\longrightarrow E_{m,S}\text{ は全単射}\bigr)
 \end{aligned}`),
                       paragraph(["同じ有限積の論法を ", math(String.raw`m=\tau`), " と ", math(String.raw`m=\upsilon`), " に適用した。空集合でも空積は一である。すべての量は有限集合・整数・代数的数係数多項式に属し、実数体への脱出はない。"]),
                     ],
