@@ -20,9 +20,9 @@
 - 人手の `m, n ∈ ℤ_{≥1}` と成分の番号は、和と有限和では Lean の行と列の添字の型 `α`・`β` の元である
   （`MatrixHasRealEntries`・`real_smul_hasRealEntries` と同じ。`TensorPow M` の行列にもそのまま使う）。
   `def_matrix_sum` の段 `(A + B) p q = A p q + B p q` は mathlib の行列の和の定義で `rfl` である。
-- 差の鎖が引く `matrix_difference_is_sum_with_negation`・`negation_is_scalar_multiple_by_minus_one` の Lean の具体版は添字 `Fin m` の行列について
-  述べてある（`matrix_sub_eq_add_neg`・`neg_eq_neg_one_smul_matrix`）。そこで差の主張は、添字 `Fin m` の具体版 `matrix_sub_hasRealEntries` と、
-  同じ鎖を `TensorPow M` の系 `sub_eq_add_neg_tensorPow`・`neg_eq_neg_one_smul_tensorPow` で辿る `sub_hasRealEntries_tensorPow` の 2 本に置く
+- 差の鎖が引く `matrix_difference_is_sum_with_negation`・`negation_is_scalar_multiple_by_minus_one` の Lean の具体版は、添字 `Fin m` の行列の
+  `matrix_sub_eq_add_neg`・`neg_eq_neg_one_smul_matrix` と、`TensorPow M` の行列の `sub_eq_add_neg_tensorPow`・`neg_eq_neg_one_smul_tensorPow` に
+  分かれている。そこで差の主張は、前者で辿る `matrix_sub_hasRealEntries` と、後者で辿る `sub_hasRealEntries_tensorPow` の 2 本に置く
   （`iH_is_real_symmetric` の Step 3 は後者を使う）。
 - 人手の `(s, 0)`（`inclusion_rr_to_cc`）は Lean の `(⟨s, 0⟩ : ℂ)` で、`(s : ℂ)` とは定義で一致する（`rfl`）。
   `definition_of_cc` の和の段 `⟨s, 0⟩ + ⟨t, 0⟩ = ⟨s + t, 0 + 0⟩` も mathlib の `ℂ` の和の定義で `rfl` である。
@@ -34,7 +34,7 @@
 -/
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealScalarMultipleOfRealEntryMatrixHasRealEntries
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowDifferenceIsSumWithNegation
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowNegationIsScalarMultipleByMinusOne
 import Mathlib.Algebra.BigOperators.Fin
 
 namespace Ising2D
@@ -75,8 +75,8 @@ theorem matrix_sub_hasRealEntries {m n : ℕ} (A B : Matrix (Fin m) (Fin n) ℂ)
 theorem sub_eq_add_real_neg_one_smul_tensorPow {M : ℕ} (A B : TensorPow M) :
     A - B = A + (((-1 : ℝ) : ℂ) • B) :=
   calc A - B
-      = A + (-B) := sub_eq_add_neg_tensorPow A B                            -- `matrix_difference_is_sum_with_negation`（`TensorPow M` の系）
-    _ = A + ((-1 : ℂ) • B) := by rw [neg_eq_neg_one_smul_tensorPow B]       -- `negation_is_scalar_multiple_by_minus_one`（`TensorPow M` の系。`A → B`）
+      = A + (-B) := sub_eq_add_neg_tensorPow A B                            -- `matrix_difference_is_sum_with_negation`（`TensorPow M` の具体版）
+    _ = A + ((-1 : ℂ) • B) := by rw [neg_eq_neg_one_smul_tensorPow B]       -- `negation_is_scalar_multiple_by_minus_one`（`TensorPow M` の具体版。`A → B`）
     _ = A + (((-1 : ℝ) : ℂ) • B) := by
         rw [Complex.ofReal_neg, Complex.ofReal_one]                         -- `inclusion_rr_to_cc` の略記 `-1_ℂ = ι(-1)`
 

@@ -1426,7 +1426,7 @@ X - O
     kind: "claim",
     title: { text: "行列の符号反転は −1 倍に等しい" },
     labels: ["negation_is_scalar_multiple_by_minus_one"],
-    lean: ["Ising2D.neg_eq_neg_one_smul_matrix", "Ising2D.neg_eq_neg_one_smul_matrix_apply"],
+    lean: ["Ising2D.neg_eq_neg_one_smul_matrix", "Ising2D.neg_eq_neg_one_smul_matrix_apply", "Ising2D.neg_eq_neg_one_smul_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -1467,6 +1467,7 @@ X - O
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 1 が「パウリ行列の積」と名前だけで根拠にしていた σ_k^zσ_k^x = −(σ_k^xσ_k^z) を一ステップ一定理に割ると、" +
           "サイト k の因子の符号反転をクロネッカー積の外へ出す段で kronecker_multilinear（スカラー倍についての線型性）を使うために、−C を (−1)C に書き直す段が要るので足した。",
+        "2026-11-27（Lean の点検の直し、状態台帳の分離の行「TensorPow 上の行列の基本恒等式」の十単位目）: 欄 lean に、Mat(2^M, ℂ) の場合の具体版 Ising2D.neg_eq_neg_one_smul_tensorPow を足した（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTensorPowNegationIsScalarMultipleByMinusOne.lean。番号 ν^{-1} で Fin n の行列へ移し、この主張の成分の鎖を引く）。",
       ],
     },
   },
