@@ -6,7 +6,7 @@
 
 - ファイル: `structured-latex/content/020_critical_point.ts`
 - ブロック: `critical_claim_three_halves_power_integral_bound`（δ, a > 0 なら ∫_0^π dθ/(δ²+a²θ²/4)^{3/2} ≤ 2/(aδ²)）
-- 範囲: w' の鎖、r' の鎖、G' の鎖、r(π) > aπ/2 の背理法の鎖、積分の鎖
+- 範囲: w' の鎖、r' の鎖、G' の鎖、正値性の段の二つの鎖（0 < 2·(aπr(π))^{-1} = 2/(aπr(π))、0 < π·(δ²)^{-1} = π/δ²）、r(π) > aπ/2 の背理法の鎖、積分の鎖
 
 ## 証明の行との対応
 
@@ -14,6 +14,8 @@
 |---|---|---|---|---|
 | w' の鎖 | `check_proof_lines.sage` | QQ[a,δ,θ] の多項式の微分として厳密に | **PASS** | 成り立つ |
 | r' の鎖と G' の鎖の各行（最後は def_three_halves_power の w√w） | `check_proof_lines.sage` | 関数体 QQ(a,δ)(θ)[r]/(r²-δ²-a²θ²/4) の θ についての微分で、D(G) と各行が一致 | **PASS** | 成り立つ |
+| 正値性の段の二つの鎖の 2 行目（`def_real_quotient` を右辺から左辺へ）の等号 | `check_proof_lines.sage` | π を不定元に置いた QQ(a,δ,p)[r]/(r²-δ²-a²p²/4) で厳密に | **PASS** | 成り立つ |
+| 正値性の段の二つの鎖の 1 行目の < | `check_proof_lines.sage` | 5 点の (δ, a) で、左辺の積のボールの下端が正 | **PASS** | 成り立つ |
 | 背理法の鎖の 4〜6 行目の等号と <、1/r(π) の鎖の等号、積分の鎖の 3・4・6 行目 | `check_proof_lines.sage` | π を不定元に置いた QQ(a,δ,p)[r]/(r²-δ²-a²p²/4) で厳密に | **PASS** | 成り立つ |
 | r(π) > aπ/2、積分の鎖の 1〜3 行目（(R4) の当てはめ）・5 行目の大小と主張 | `check_proof_lines.sage` | 5 点の (δ, a) で Arb の厳密な数値積分のボールと π のボール | **PASS** | 成り立つ |
 | 対照 | `check_proof_lines.sage` | 上界を 1/(aδ²) にすると成り立たない（δ = 1/100, a = 1/2）。関数体で 1/(w√w) ≠ 1/w | **PASS** | 成り立つ |
@@ -36,3 +38,5 @@ bash sagemath/tools/run-all-checks.sh three_halves_power_integral_bound
 ```
 
 実行ログは `logs/` に保存する。
+
+商の等号（`2·x^{-1} = 2/x` など）は `def_real_quotient` の当てはめなので、体の中では恒等的に成り立つ。検算はその行が本文の書いた式どおりであることだけを確かめる。

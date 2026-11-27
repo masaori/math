@@ -12,9 +12,8 @@
 #
 # 対象: structured-latex conjugate_index_of_check_Z_Y
 # =========================================================================
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '_prelude.sage'))
+import sys
+load('_prelude.sage')  # run-all-checks.sh がこのディレクトリへ cd してから呼ぶ
 
 print("=== check_02: 共役添字 M+1-μ ===")
 
@@ -56,3 +55,6 @@ ok_all &= report("H_1^{(+)}, H_2 の表示が書き換えで変わらない", RD
 print(f"  （M = {MATRIX_M}、j は -2M..2M）")
 
 print("check_02:", "PASS" if ok_all else "FAIL")
+print("RESULT: PASS" if ok_all else "RESULT: FAIL")
+if not ok_all:
+    sys.exit(1)

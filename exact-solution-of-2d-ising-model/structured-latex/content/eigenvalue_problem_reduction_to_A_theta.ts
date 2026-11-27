@@ -3255,15 +3255,15 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
         "(1) ",
         ref("antiperiodic_exp_sum"),
         " より ",
-        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}}`),
+        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi\left(\mu_{\mathbb R}-\frac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}`),
         " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \tilde\theta_\nu - \tilde\theta_\mu
-&= \frac{2\pi\left(\nu-\frac12\right)}{M_{\mathrm{col}}} - \frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}}
+&= \frac{2\pi\left(\nu_{\mathbb R}-\frac12\right)}{(M_{\mathrm{col}})_{\mathbb R}} - \frac{2\pi\left(\mu_{\mathbb R}-\frac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\bigl(\because \blkref{antiperiodic_exp_sum}\text{ の } \tilde\theta \text{ の定義}\bigr) \\
-&= \frac{2\pi}{M_{\mathrm{col}}}\left(\nu - \mu\right)
+&= \frac{2\pi}{(M_{\mathrm{col}})_{\mathbb R}}\left(\nu_{\mathbb R} - \mu_{\mathbb R}\right)
 &&\bigl(\because \text{通分と分配律}\bigr)
 \end{aligned}`,
       ),
@@ -3273,26 +3273,96 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
         " の ",
         math(String.raw`0 < \pi`),
         " と ",
+        ref("real_zero_less_than_two"),
+        " の ",
         math(String.raw`0 < 2`),
         " から、",
         ref("real_product_of_positives_is_positive"),
         "（正の実数どうしの積は正）なので ",
         math(String.raw`0 < 2\pi`),
         " である。",
-        math(String.raw`M_{\mathrm{col}} \geq 2 > 0`),
-        " と、",
-        math(String.raw`\mathbb{R}`),
-        " で正の数の逆数は正（",
-        math(String.raw`\mathbb{R}`),
-        " は順序体 ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R} := \iota_{\mathbb{Z}\to\mathbb{R}}(M_{\mathrm{col}})`),
+        "（",
+        ref("inclusion_zz_to_rr"),
+        "）とおく。",
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2} \subset \mathbb{Z}_{\geq 1}`),
+        " なので ",
+        ref("inclusion_zz_to_rr_of_positive_is_at_least_one"),
+        "（",
+        math(String.raw`n \to M_{\mathrm{col}}`),
+        "）より ",
+        math(String.raw`1_{\mathbb R} \leq (M_{\mathrm{col}})_{\mathbb R}`),
+        " である。",
+        ref("real_zero_less_than_one"),
+        " の ",
+        math(String.raw`0_{\mathbb R} < 1_{\mathbb R}`),
+        " は ",
+        ref("def_real_strict_order"),
+        " より ",
+        math(String.raw`0_{\mathbb R} \leq 1_{\mathbb R}`),
+        " かつ ",
+        math(String.raw`0_{\mathbb R} \neq 1_{\mathbb R}`),
+        " のことである。",
+        math(String.raw`0_{\mathbb R} \leq 1_{\mathbb R}`),
+        " と ",
+        math(String.raw`1_{\mathbb R} \leq (M_{\mathrm{col}})_{\mathbb R}`),
+        " に ",
         ref("set_and_algebra_notation"),
-        "）であることから ",
-        math(String.raw`0 < \frac{1}{M_{\mathrm{col}}}`),
-        "、これと ",
-        math(String.raw`0 < 2\pi`),
-        " の積で ",
-        math(String.raw`\frac{2\pi}{M_{\mathrm{col}}} > 0`),
-        " なので、",
+        " の ",
+        math(String.raw`\leq`),
+        " の推移律を当てて ",
+        math(String.raw`0_{\mathbb R} \leq (M_{\mathrm{col}})_{\mathbb R}`),
+        " である。",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R} = 0_{\mathbb R}`),
+        " と仮定すると、",
+        math(String.raw`1_{\mathbb R} \leq 0_{\mathbb R}`),
+        " と ",
+        math(String.raw`0_{\mathbb R} \leq 1_{\mathbb R}`),
+        " に ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\leq`),
+        " の反対称律を当てて ",
+        math(String.raw`0_{\mathbb R} = 1_{\mathbb R}`),
+        " となり、",
+        math(String.raw`0_{\mathbb R} \neq 1_{\mathbb R}`),
+        " に反する。よって ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R} \neq 0_{\mathbb R}`),
+        "、すなわち ",
+        math(String.raw`0_{\mathbb R} \neq (M_{\mathrm{col}})_{\mathbb R}`),
+        " であり、",
+        ref("def_real_strict_order"),
+        " より ",
+        math(String.raw`0_{\mathbb R} < (M_{\mathrm{col}})_{\mathbb R}`),
+        " である。",
+        ref("def_real_quotient"),
+        " の乗法の逆元 ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}^{-1} \in \mathbb{R}`),
+        "（",
+        math(String.raw`z \to (M_{\mathrm{col}})_{\mathbb R}`),
+        "）がある。",
+        ref("real_inverse_of_positive_is_positive"),
+        "（",
+        math(String.raw`a \to (M_{\mathrm{col}})_{\mathbb R}`),
+        "）より ",
+        math(String.raw`0 < (M_{\mathrm{col}})_{\mathbb R}^{-1}`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0
+&< 2\pi\cdot (M_{\mathrm{col}})_{\mathbb R}^{-1}
+&&\bigl(\because\ \text{上の}\ 0 < 2\pi\ \text{と}\ 0 < (M_{\mathrm{col}})_{\mathbb R}^{-1}\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to 2\pi,\ b \to (M_{\mathrm{col}})_{\mathbb R}^{-1})\bigr)\\
+&= \frac{2\pi}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to 2\pi,\ z \to (M_{\mathrm{col}})_{\mathbb R})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "上の鎖の ",
+        math(String.raw`0 < \frac{2\pi}{(M_{\mathrm{col}})_{\mathbb R}}`),
+        " と ",
+        math(String.raw`\tilde\theta_\nu - \tilde\theta_\mu = \frac{2\pi}{(M_{\mathrm{col}})_{\mathbb R}}\left(\nu_{\mathbb R} - \mu_{\mathbb R}\right)`),
+        " から、",
         math(String.raw`\mu \neq \nu`),
         " なら ",
         math(String.raw`\tilde\theta_\mu \neq \tilde\theta_\nu`),
@@ -3305,29 +3375,43 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
       displayMath(
         String.raw`\begin{aligned}
 \tilde\theta_1
-&=\frac{2\pi\left(1-\frac12\right)}{M_{\mathrm{col}}}
+&=\frac{2\pi\left((1)_{\mathbb R}-\frac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\left(\because\ \blkref{antiperiodic_exp_sum}\text{ の }\tilde\theta\text{ の定義}\right)\\
-&=\frac{\pi}{M_{\mathrm{col}}}
+&=\frac{2\pi\left(1_{\mathbb R}-\frac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\left(\because\ \blkref{inclusion_zz_to_rr_of_one}\right)\\
+&=\frac{\pi}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\left(\because\ \mathbb R\text{ の四則}\right)\\
 &\leq\tilde\theta_\mu
 &&\left(\because\ 1\leq\mu\text{ と }\mu\mapsto\tilde\theta_\mu\text{ の単調増加}\right)\\
 &\leq\tilde\theta_{M_{\mathrm{col}}}
 &&\left(\because\ \mu\leq M_{\mathrm{col}}\text{ と }\mu\mapsto\tilde\theta_\mu\text{ の単調増加}\right)\\
-&=\frac{2\pi\left(M_{\mathrm{col}}-\frac12\right)}{M_{\mathrm{col}}}
+&=\frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}-\frac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\left(\because\ \blkref{antiperiodic_exp_sum}\text{ の }\tilde\theta\text{ の定義}\right)\\
-&=2\pi-\frac{\pi}{M_{\mathrm{col}}}
+&=2\pi-\frac{\pi}{(M_{\mathrm{col}})_{\mathbb R}}
 &&\left(\because\ \mathbb R\text{ の四則}\right)
 \end{aligned}`,
       ),
       paragraph([
         "であり、",
+        ref("pi_is_positive"),
+        " の ",
         math(String.raw`0 < \pi`),
         " と上の ",
-        math(String.raw`0 < \frac{1}{M_{\mathrm{col}}}`),
-        " の積で ",
-        math(String.raw`0 < \frac{\pi}{M_{\mathrm{col}}}`),
+        math(String.raw`0 < (M_{\mathrm{col}})_{\mathbb R}^{-1}`),
+        " に ",
+        ref("real_product_of_positives_is_positive"),
+        "（",
+        math(String.raw`a \to \pi,\ b \to (M_{\mathrm{col}})_{\mathbb R}^{-1}`),
+        "）を当てて ",
+        math(String.raw`0 < \pi\cdot (M_{\mathrm{col}})_{\mathbb R}^{-1}`),
+        "、",
+        ref("def_real_quotient"),
+        "（",
+        math(String.raw`y \to \pi,\ z \to (M_{\mathrm{col}})_{\mathbb R}`),
+        "）を右辺から左辺へ当てて ",
+        math(String.raw`0 < \frac{\pi}{(M_{\mathrm{col}})_{\mathbb R}}`),
         " かつ ",
-        math(String.raw`2\pi - \frac{\pi}{M_{\mathrm{col}}} < 2\pi`),
+        math(String.raw`2\pi - \frac{\pi}{(M_{\mathrm{col}})_{\mathbb R}} < 2\pi`),
         " なので ",
         math(String.raw`0 < \tilde\theta_\mu < 2\pi`),
         "。",
@@ -3470,6 +3554,7 @@ j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
       notes: [
         "𝓜̌ = {1,…,M} はこれ以上減らせない: θ~_μ (μ = 1..M) は (0,2π) 内の相異なる M 個であり ((1))、共役 μ ↦ M+1−μ について閉じている ((2))。008 章の 𝓜 = {−M,…,−1,1,…,M} が μ ↦ −μ について閉じていたのと同じ構造である。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認）: (1) の 2π/M_col > 0 と 0 < π/M_col を、pi_is_positive の 0 < π から正の数どうしの積と正の数の逆数は正（ℝ は順序体 set_and_algebra_notation）の段を書いて導く形にした。値と主張は不変。",
+        "2026-11-27（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」の順序の (a) の残り）: (1) の「ℝ で正の数の逆数は正（ℝ は順序体）」を real_inverse_of_positive_is_positive の参照にし、整数 M_col を ℝ の式に入れる箇所を θ̃ の定義どおり (M_col)_ℝ = ι_{ℤ→ℝ}(M_col) と書き分けた。0 < (M_col)_ℝ は inclusion_zz_to_rr_of_positive_is_at_least_one・real_zero_less_than_one と ≤ の推移律・反対称律、def_real_strict_order から出す。積の正値と商は real_product_of_positives_is_positive・def_real_quotient を引く。定義のブロックなので一対一の検査は比べず、Lean の thetaTilde_pos・thetaTilde_lt_two_pi は本文のこの鎖と一対一でないまま（div_pos・nlinarith）。「μ ≠ ν なら θ̃_μ ≠ θ̃_ν」に要る ι_{ℤ→ℝ} の単射性の根拠は本文にまだ無い（残り）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },

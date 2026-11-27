@@ -17,6 +17,10 @@
 `arsinh_log_bounds_of_necSuf`・`integral_inv_pow_three_half_pi_of_necSuf`）。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealInverseOfPositiveIsPositive
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealStrictOrder
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimRealLogOfProduct
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRealLogStrictlyIncreasing
@@ -284,7 +288,8 @@ theorem integral_inv_sqrt_pi_bounds {δ : ℝ} (hδ : 0 < δ) :
 微分の公式は mathlib の `hasDerivAt_id'`・`HasDerivAt.mul`・`HasDerivAt.const_mul`・`HasDerivAt.div_const`・
 `HasDerivAt.const_add`・`HasDerivAt.sqrt`・`HasDerivAt.div`・`HasDerivAt.inv`（商 `1/x` を逆数で書く）、「微分可能な関数は連続」は
 `HasDerivAt.continuousAt`、(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、`r(θ) ≥ 0` は `Real.sqrt_nonneg`、
-順序体の積の正値性は `real_product_of_positives_is_positive`、逆数の正値性は `one_div_pos` で受ける。 -/
+順序体の積の正値性は `real_product_of_positives_is_positive`、逆数の正値性は `real_inverse_of_positive_is_positive`、
+商は `def_real_quotient` の具体版 `real_div_eq_mul_inv` で受ける。 -/
 theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) :
     (∫ θ in (0:ℝ)..Real.pi,
         ((δ ^ 2 + a ^ 2 * θ ^ 2 / 4) * Real.sqrt (δ ^ 2 + a ^ 2 * θ ^ 2 / 4))⁻¹)
@@ -377,24 +382,35 @@ theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) 
   have hpi : 0 < Real.pi := Real.pi_pos -- `pi_is_positive`
   have hapi : 0 < a * Real.pi := real_product_of_positives_is_positive a Real.pi ha hpi
                                         -- `real_product_of_positives_is_positive`（`a → a, b → π`）
-  have hapine : a * Real.pi ≠ 0 := ne_of_gt hapi
+  have hapine : a * Real.pi ≠ 0 := fun h => ((real_lt_iff_le_and_ne 0 _).1 hapi).2 h.symm
+                                        -- `def_real_strict_order` の `≠` の側（`x → 0, y → aπ`）と等号の対称律
   have hapi2 : 0 < a * Real.pi / 2 := by
     have h : 0 < a * Real.pi * (1 / 2) := real_product_of_positives_is_positive _ _ hapi (by norm_num)
                                         -- `0 < 1/2`（有理数の大小比較）と `real_product_of_positives_is_positive`
     rwa [mul_one_div] at h
   have hapir : 0 < a * Real.pi * r Real.pi := real_product_of_positives_is_positive _ _ hapi (hrpos Real.pi)  -- 同じ理由（`b → r(π)`）
-  have hinvapir : 0 < 1 / (a * Real.pi * r Real.pi) := one_div_pos.2 hapir
-                                        -- 正の数の逆数は正
+  have hapirne : a * Real.pi * r Real.pi ≠ 0 := fun h => ((real_lt_iff_le_and_ne 0 _).1 hapir).2 h.symm
+                                        -- `def_real_strict_order` の `≠` の側（`x → 0, y → aπr(π)`）と等号の対称律
+  have hinvapir : 0 < (a * Real.pi * r Real.pi)⁻¹ := real_inverse_of_positive_is_positive _ hapir
+                                        -- `real_inverse_of_positive_is_positive`（`a → aπr(π)`）
   have h2apir : 0 < 2 / (a * Real.pi * r Real.pi) := by
-    have h : 0 < 2 * (1 / (a * Real.pi * r Real.pi)) := real_product_of_positives_is_positive _ _ (by norm_num) hinvapir  -- `0 < 2` との積
-    rwa [mul_one_div] at h
+    have h : 0 < 2 * (a * Real.pi * r Real.pi)⁻¹ :=
+      real_product_of_positives_is_positive _ _ real_zero_less_than_two hinvapir
+                                        -- `real_zero_less_than_two` と `real_product_of_positives_is_positive`（`a → 2, b → (aπr(π))^{-1}`）
+    rwa [← real_div_eq_mul_inv 2 _ hapirne] at h
+                                        -- `def_real_quotient`（`y → 2, z → aπr(π)`）を右辺から左辺へ
   have hδ2 : 0 < δ ^ 2 := by
     have h : 0 < δ * δ := real_product_of_positives_is_positive δ δ hδ hδ  -- 同じ理由（`a, b → δ`）
     rwa [← pow_two] at h
-  have hinvδ2 : 0 < 1 / δ ^ 2 := one_div_pos.2 hδ2
+  have hδ2ne : δ ^ 2 ≠ 0 := fun h => ((real_lt_iff_le_and_ne 0 _).1 hδ2).2 h.symm
+                                        -- `def_real_strict_order` の `≠` の側（`x → 0, y → δ²`）と等号の対称律
+  have hinvδ2 : 0 < (δ ^ 2)⁻¹ := real_inverse_of_positive_is_positive _ hδ2
+                                        -- `real_inverse_of_positive_is_positive`（`a → δ²`）
   have hpiδ2 : 0 < Real.pi / δ ^ 2 := by
-    have h : 0 < Real.pi * (1 / δ ^ 2) := real_product_of_positives_is_positive _ _ hpi hinvδ2  -- `0 < π` との積
-    rwa [mul_one_div] at h
+    have h : 0 < Real.pi * (δ ^ 2)⁻¹ := real_product_of_positives_is_positive _ _ hpi hinvδ2
+                                        -- `real_product_of_positives_is_positive`（`a → π, b → (δ²)^{-1}`）
+    rwa [← real_div_eq_mul_inv Real.pi _ hδ2ne] at h
+                                        -- `def_real_quotient`（`y → π, z → δ²`）を右辺から左辺へ
   -- 背理法: `r(π) ≤ aπ/2` なら `r(π)² < r(π)²`
   have hrgt : a * Real.pi / 2 < r Real.pi := by
     by_contra hle

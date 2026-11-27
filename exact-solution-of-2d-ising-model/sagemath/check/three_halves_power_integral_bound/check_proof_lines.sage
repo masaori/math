@@ -1,5 +1,5 @@
 # 対象ラベル: three_halves_power_integral_bound
-# w' の鎖の二行、r' の鎖の三行、G' の鎖の九行、r(π) > aπ/2 の背理法の鎖、1/r(π) の鎖の三行、積分の鎖の六行を確かめる。
+# w' の鎖の二行、r' の鎖の三行、G' の鎖の九行、正値性の段の二つの鎖、r(π) > aπ/2 の背理法の鎖、1/r(π) の鎖の三行、積分の鎖の六行を確かめる。
 # 帰属:
 # - w' の鎖は QQ[a, δ, θ] の多項式の微分として厳密に。
 # - r' と G' の鎖は、関数体 L = K(θ)[r]/(r² - δ² - a²θ²/4)（K = QQ(a, δ)）の θ についての微分 D で厳密に。
@@ -40,12 +40,16 @@ assert (ac*pc/2) * (2/(ac*pc*rr)) == 1/rr and rr * (2/(ac*pc*rr)) == 2/(ac*pc)  
 assert pc/(dc^2*rr) - 0/(dc^2) == (pc/dc^2) * (1/rr)                                    # 積分の鎖の 3・4 行目（G(0) = 0）
 assert (pc/dc^2) * (2/(ac*pc)) == 2/(ac*dc^2)                                         # 6 行目
 print("背理法の鎖の等号、1/r(π) の鎖の等号、積分の鎖の 4・6 行目が QQ(a,δ,p)[r]/(r²-δ²-a²p²/4) で成り立つ")
+# 正値性の段の二つの鎖の 2 行目（def_real_quotient を右辺から左辺へ）: 2·(aπr(π))^{-1} = 2/(aπr(π))、π·(δ²)^{-1} = π/δ²。
+assert 2*(ac*pc*rr)^(-1) == 2/(ac*pc*rr) and pc*(dc^2)^(-1) == pc/dc^2
+print("正値性の段の二つの鎖の等号（商は逆元との積）が QQ(a,δ,p)[r]/(r²-δ²-a²p²/4) で成り立つ")
 POINTS = [(QQ(1)/100, QQ(1)/2), (QQ(1)/10, QQ(5887)/10000), (QQ(1), QQ(1)), (QQ(2), QQ(3)), (QQ(1)/2, QQ(10))]
 for d0, a0 in POINTS:
     pi_b = RBF512.pi()
     w_pi = d0^2 + a0^2*pi_b^2/4; r_pi = w_pi.sqrt()
     half = a0*pi_b/2
     assert surely_lt(half, r_pi) and half.lower() > 0                    # r(π) > aπ/2 > 0
+    assert (2*(a0*pi_b*r_pi)^(-1)).lower() > 0 and (pi_b*(d0^2)^(-1)).lower() > 0  # 正値性の段の二つの鎖の 1 行目の <
     assert surely_le(1/r_pi, 2/(a0*pi_b))
     I = integral_over_zero_pi(lambda th_, an: (lambda w_: 1 / (w_ * w_.sqrt(analytic=an)))(CBF256(d0^2) + CBF256(a0^2)*th_^2/4))
     assert surely_equal(I, pi_b/(d0^2*r_pi) - 0)                         # 積分の鎖の 1〜3 行目（(R4) の当てはめ）

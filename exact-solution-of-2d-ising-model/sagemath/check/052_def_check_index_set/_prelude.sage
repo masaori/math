@@ -6,9 +6,7 @@
 #
 #   θ~_μ = 2π(μ - 1/2)/M,  Ž_μ = Σ_j Z_j e^{-i j θ~_μ},  Y̌_μ = Σ_j Y_j e^{-i j θ~_μ}
 # ---------------------------------------------------------
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/spin_ops.sage'))
+load('../../_shared/spin_ops.sage')  # 呼び出し側の check ディレクトリからの相対パス
 
 TOL = 1e-8
 

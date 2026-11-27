@@ -47,7 +47,7 @@
 
 | # | ファイル | 検証内容 | ステータス | 結果 |
 |---|---------|---------|-----------|------|
-| 01 | check_01_index_set_properties.sage | `def_check_index_set` (1)〜(5)、および `𝓜̌` の最小性 | PASS | （run-log.txt 参照） |
+| 01 | check_01_index_set_properties.sage | `def_check_index_set` (1)〜(5)、`𝓜̌` の最小性、(1) の証明の正値性の鎖（`0 < 2π·M^{-1} = 2π/M`、`0 < π·M^{-1} = π/M`。等号は π を不定元に置いた `QQ(p)` で厳密に、`<` は π のボールで） | PASS | （run-log.txt 参照） |
 | 02 | check_02_conjugate_index.sage | `conjugate_index_of_check_Z_Y` (1)(2)(3)、書き換えが `H_1^{(+)}, H_2` の表示を変えないこと | PASS | （run-log.txt 参照） |
 
 ## 備考
@@ -66,9 +66,13 @@
 ## 実行方法
 
 ```bash
-for f in sagemath/check/052_def_check_index_set/check_*.sage; do sage "$f"; done
+bash sagemath/tools/run-all-checks.sh 052_def_check_index_set
 ```
+
+実行の後、`logs/` の二つのログを連結して `run-log.txt` に置く。
 
 ## 実行ログ
 
 `run-log.txt` に実際の実行出力（全チェックの残差と PASS/FAIL）を保存してある。
+
+商の等号（`2·x^{-1} = 2/x` など）は `def_real_quotient` の当てはめなので、体の中では恒等的に成り立つ。検算はその行が本文の書いた式どおりであることだけを確かめる。

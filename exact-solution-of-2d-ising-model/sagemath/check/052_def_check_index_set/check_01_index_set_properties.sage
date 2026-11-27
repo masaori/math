@@ -12,9 +12,8 @@
 #
 # 対象: structured-latex def_check_index_set
 # =========================================================================
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '_prelude.sage'))
+import sys
+load('_prelude.sage')  # run-all-checks.sh がこのディレクトリへ cd してから呼ぶ
 
 print("=== check_01: 𝓜̌ = {1,...,M} の性質 (1)-(5) ===")
 
@@ -92,4 +91,16 @@ print(f"  （M = {INDEX_M[0]}..{INDEX_M[-1]} を全探索。自己共役点は�
       f" = M が奇数の場合の数 {sum(1 for M in INDEX_M if M % 2 == 1)}）")
 ok_all &= (n_self == sum(1 for M in INDEX_M if M % 2 == 1))
 
+# (1) の証明の正値性の鎖: 0 < 2π·M^{-1} = 2π/M、0 < π·M^{-1} = π/M。
+# 等号は π を不定元 p に置いた QQ(p) で厳密に、< は M^{-1} ∈ QQ_{>0} と π のボールの下端の符号で（π の値のための ℝ への脱出）。
+Kp = PolynomialRing(QQ, 'p').fraction_field(); p = Kp.gen()
+v_quot = sum(1 for M in INDEX_M if not (2*p*QQ(M)^(-1) == 2*p/M and p*QQ(M)^(-1) == p/M))
+pi_ball = RealBallField(128).pi()
+v_pos = sum(1 for M in INDEX_M if not (QQ(M)^(-1) > 0 and (2*pi_ball*QQ(M)^(-1)).lower() > 0 and (pi_ball*QQ(M)^(-1)).lower() > 0))
+ok_all &= report("(1) の証明: 2π·M^{-1} = 2π/M, π·M^{-1} = π/M の違反件数", RDF(v_quot), TOL)
+ok_all &= report("(1) の証明: 0 < M^{-1}, 0 < 2π·M^{-1}, 0 < π·M^{-1} の違反件数", RDF(v_pos), TOL)
+
 print("check_01:", "PASS" if ok_all else "FAIL")
+print("RESULT: PASS" if ok_all else "RESULT: FAIL")
+if not ok_all:
+    sys.exit(1)
