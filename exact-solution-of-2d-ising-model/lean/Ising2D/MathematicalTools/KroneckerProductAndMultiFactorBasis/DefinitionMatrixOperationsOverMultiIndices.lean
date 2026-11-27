@@ -35,7 +35,8 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が `𝓘_M`�
 成分について同じことが言える（`tensorPow_entries_by_kronecker_numbering`）。
 積（`mat_mult`）は成分の式が番号の上の和なので、単位行列と同じく `ν^{-1}` で番号へ移した成分で書き、mathlib の積の成分（`𝓘_M` の上の和）を
 `def_finite_sum_of_complex_numbers_over_multi_indices` で番号の上の和へ移す（`tensorPow_mul_apply_eq_mat_mult`）。証明の段が `𝓘_M` の元を
-添字に書くときのために、`𝓘_M` の上の和の形 `tensorPow_mul_apply` もそこから導く。
+添字に書くときのために、`𝓘_M` の上の和の形 `tensorPow_mul_apply` もそこから導く。左右の因子の一方を `Matrix (Conf M) (Conf M) ℂ`、他方を
+`TensorPow M` と書いた積（積に行列を掛けた外側の積）にも、同じ証明で `ν^{-1}` の形と `𝓘_M` の添字の形を一本ずつ置く（`matrix_conf_mul_tensorPow_*`・`tensorPow_mul_matrix_conf_*`）。
 行列と数ベクトルの積（`mat_mult` の `p = 1` の場合。数ベクトルは `def_complex_number_vectors` の `ℂ^n := Mat(n,1,ℂ)` の元）も同じく、
 Lean の `A *ᵥ f`（`f : Conf M → ℂ` は `ℂ^{2^M}` の数ベクトルを、第 `k` 成分 `a_k` を `f (ν^{-1}(k))` として持つ）の成分を `ν^{-1}` で番号へ移して書き
 （`tensorPow_mulVec_apply_eq_mat_mult`）、`𝓘_M` の上の和の形 `tensorPow_mulVec_apply` をそこから導く。
@@ -191,6 +192,63 @@ theorem tensorPow_mul_apply {M : ℕ} (A B : TensorPow M) (I K : Conf M) :
   calc (A * B) (σ i) (σ k)
       = ∑ j : Fin n, A (σ i) (σ j) * B (σ j) (σ k) :=
         tensorPow_mul_apply_eq_mat_mult M n hord σ hσ A B i k  -- `mat_mult`
+    _ = ∑ J : Conf M, A (σ i) J * B J (σ k) :=
+        (finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ
+          (fun J => A (σ i) J * B J (σ k))).symm
+                                                            -- `def_finite_sum_of_complex_numbers_over_multi_indices`
+
+/-- **`mat_mult`**（左の因子を `Matrix (Conf M) (Conf M) ℂ`、右の因子を略記 `TensorPow M` で書いた形）: 二つは同じ型なので、
+証明は `matrix_conf_mul_apply_eq_mat_mult` と同じである（Lean だけの段の補題。mathlib の行列の積の値の型は `Matrix (Conf M) (Conf M) ℂ` と書かれるので、
+積にさらに `TensorPow M` の行列を右から掛けた `(AB)C` の外側の積がこの書き方になる）。 -/
+theorem matrix_conf_mul_tensorPow_apply_eq_mat_mult (M : ℕ) :
+    ∀ (n : ℕ), (∀ I : Conf M, ∃ k : Fin n, kroneckerNumbering I = finIndexToZZ n k) →
+      ∀ (σ : Fin n → Conf M), (∀ k, kroneckerNumbering (σ k) = finIndexToZZ n k) →
+        ∀ (A : Matrix (Conf M) (Conf M) ℂ) (B : TensorPow M) (i k : Fin n),
+          (A * B) (σ i) (σ k) = ∑ j : Fin n, A (σ i) (σ j) * B (σ j) (σ k) :=
+  matrix_conf_mul_apply_eq_mat_mult M
+
+/-- **`mat_mult`**（左の因子を略記 `TensorPow M`、右の因子を `Matrix (Conf M) (Conf M) ℂ` で書いた形）: 上の補題の左右を入れ替えた書き方
+（`TensorPow M` の行列に積 `BC` を右から掛けた `A(BC)` の外側の積がこの書き方になる）。 -/
+theorem tensorPow_mul_matrix_conf_apply_eq_mat_mult (M : ℕ) :
+    ∀ (n : ℕ), (∀ I : Conf M, ∃ k : Fin n, kroneckerNumbering I = finIndexToZZ n k) →
+      ∀ (σ : Fin n → Conf M), (∀ k, kroneckerNumbering (σ k) = finIndexToZZ n k) →
+        ∀ (A : TensorPow M) (B : Matrix (Conf M) (Conf M) ℂ) (i k : Fin n),
+          (A * B) (σ i) (σ k) = ∑ j : Fin n, A (σ i) (σ j) * B (σ j) (σ k) :=
+  matrix_conf_mul_apply_eq_mat_mult M
+
+/-- **`mat_mult`**（`𝓘_M` の添字の形、左の因子を `Matrix (Conf M) (Conf M) ℂ` で書いた形）: `tensorPow_mul_apply` と同じ段を
+`matrix_conf_mul_tensorPow_apply_eq_mat_mult` で辿る。 -/
+theorem matrix_conf_mul_tensorPow_apply {M : ℕ} (A : Matrix (Conf M) (Conf M) ℂ) (B : TensorPow M) (I K : Conf M) :
+    (A * B) I K = ∑ J : Conf M, A I J * B J K := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M
+  -- `ν^{-1}` の全射（`kronecker_numbering_injective`）: `I = σ(i)`・`K = σ(k)`
+  obtain ⟨i, hi⟩ := hord I
+  obtain ⟨k, hk⟩ := hord K
+  have hI : σ i = I := kronecker_numbering_injective _ _ (by rw [hσ, hi])
+  have hK : σ k = K := kronecker_numbering_injective _ _ (by rw [hσ, hk])
+  subst hI hK
+  calc (A * B) (σ i) (σ k)
+      = ∑ j : Fin n, A (σ i) (σ j) * B (σ j) (σ k) :=
+        matrix_conf_mul_tensorPow_apply_eq_mat_mult M n hord σ hσ A B i k  -- `mat_mult`
+    _ = ∑ J : Conf M, A (σ i) J * B J (σ k) :=
+        (finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ
+          (fun J => A (σ i) J * B J (σ k))).symm
+                                                            -- `def_finite_sum_of_complex_numbers_over_multi_indices`
+
+/-- **`mat_mult`**（`𝓘_M` の添字の形、右の因子を `Matrix (Conf M) (Conf M) ℂ` で書いた形）: `tensorPow_mul_apply` と同じ段を
+`tensorPow_mul_matrix_conf_apply_eq_mat_mult` で辿る。 -/
+theorem tensorPow_mul_matrix_conf_apply {M : ℕ} (A : TensorPow M) (B : Matrix (Conf M) (Conf M) ℂ) (I K : Conf M) :
+    (A * B) I K = ∑ J : Conf M, A I J * B J K := by
+  obtain ⟨n, σ, hord, hσ⟩ := exists_inverse_of_kronecker_numbering M
+  -- `ν^{-1}` の全射（`kronecker_numbering_injective`）: `I = σ(i)`・`K = σ(k)`
+  obtain ⟨i, hi⟩ := hord I
+  obtain ⟨k, hk⟩ := hord K
+  have hI : σ i = I := kronecker_numbering_injective _ _ (by rw [hσ, hi])
+  have hK : σ k = K := kronecker_numbering_injective _ _ (by rw [hσ, hk])
+  subst hI hK
+  calc (A * B) (σ i) (σ k)
+      = ∑ j : Fin n, A (σ i) (σ j) * B (σ j) (σ k) :=
+        tensorPow_mul_matrix_conf_apply_eq_mat_mult M n hord σ hσ A B i k  -- `mat_mult`
     _ = ∑ J : Conf M, A (σ i) J * B J (σ k) :=
         (finset_sum_conf_complex_eq_finite_sum_over_multi_indices M n hord σ hσ
           (fun J => A (σ i) J * B J (σ k))).symm

@@ -153,14 +153,15 @@ theorem mulVec_basisVec_configBasisIso_apply (X : TensorPow M) (s s' : SpinConf 
 行 `ord(s)` の成分が `ord(u)` 以外で `0_ℂ` なら `(AX)_{ord(s),J} = A_{ord(s),ord(u)}X_{ord(u),J}`。
 
 `k ≠ ord(u)` の番号を `t ≠ u` なる `k = ord(t)` と書くのは `row_configuration_numbering_bijective`
-（Lean では `ι` の全射性 `(configBasisIso M).surjective`）である。 -/
-theorem mul_apply_configBasisIso_of_single_nonzero {A : TensorPow M} (X : TensorPow M) {s u : SpinConf M}
+（Lean では `ι` の全射性 `(configBasisIso M).surjective`）である。右の因子 `X` は `Matrix (Conf M) (Conf M) ℂ`（`TensorPow M` と同じ型）で取り、
+積 `εV_2`・`GV_2` を入れる外側の積の段も、`V_2` を入れる内側の積の段もこの一本で受ける。 -/
+theorem mul_apply_configBasisIso_of_single_nonzero {A : TensorPow M} (X : Matrix (Conf M) (Conf M) ℂ) {s u : SpinConf M}
     (hA : ∀ t : SpinConf M, t ≠ u → A (configBasisIso M s) (configBasisIso M t) = 0) (J : Conf M) :
     (A * X) (configBasisIso M s) J
       = A (configBasisIso M s) (configBasisIso M u) * X (configBasisIso M u) J :=
   calc (A * X) (configBasisIso M s) J
       = ∑ k : Conf M, A (configBasisIso M s) k * X k J := by
-        rw [tensorPow_mul_apply]                                   -- `mat_mult`
+        rw [tensorPow_mul_matrix_conf_apply]                       -- `mat_mult`
     _ = A (configBasisIso M s) (configBasisIso M u) * X (configBasisIso M u) J := by
         -- `finite_sum_with_single_nonzero_term`
         refine Finset.sum_eq_single (configBasisIso M u) (fun k _ hk => ?_)

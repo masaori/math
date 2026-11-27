@@ -2361,7 +2361,7 @@ y^2>x\ \land\ x>0
     origin: { path: "_old/typst/parts/000_計算公式/003_theorem_行列の分解.typ", ordinal: 4 },
     title: { text: "行列の積の成分による定義" },
     labels: ["mat_mult"],
-    lean: ["Ising2D.matrix_mul_apply_sum", "Ising2D.mulVec_apply_sum", "Ising2D.mul_two_apply", "Ising2D.mulVec_two_zero", "Ising2D.mulVec_two_one", "Ising2D.tensorPow_mul_apply_eq_mat_mult", "Ising2D.matrix_conf_mul_apply_eq_mat_mult", "Ising2D.tensorPow_mul_apply", "Ising2D.tensorPow_mulVec_apply_eq_mat_mult", "Ising2D.tensorPow_mulVec_apply"],
+    lean: ["Ising2D.matrix_mul_apply_sum", "Ising2D.mulVec_apply_sum", "Ising2D.mul_two_apply", "Ising2D.mulVec_two_zero", "Ising2D.mulVec_two_one", "Ising2D.tensorPow_mul_apply_eq_mat_mult", "Ising2D.matrix_conf_mul_apply_eq_mat_mult", "Ising2D.tensorPow_mul_apply", "Ising2D.matrix_conf_mul_tensorPow_apply_eq_mat_mult", "Ising2D.tensorPow_mul_matrix_conf_apply_eq_mat_mult", "Ising2D.matrix_conf_mul_tensorPow_apply", "Ising2D.tensorPow_mul_matrix_conf_apply", "Ising2D.tensorPow_mulVec_apply_eq_mat_mult", "Ising2D.tensorPow_mulVec_apply"],
     statement: [
       paragraph([
         math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),

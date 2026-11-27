@@ -309,6 +309,13 @@ HPow.hPow@Ising2D.TensorPow,Nat,Ising2D.TensorPow@NPow.toPow	def_matrix_power
 # epsilon_mul_boundaryG_sq の (εG)^2 は、本文 epsilon_G_is_involution が主張の中で X^2 := XX と定めた冪で、Lean の段も sq でそれを開く（def_matrix_power を引く段ではない）。
 OfNat.ofNat@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],1@One.toOfNat1	def_identity_matrix
 HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	mat_mult
+# 左右の因子の一方を Matrix (Conf M) (Conf M) ℂ、他方を略記 TensorPow M と書いた積（同じ型。積に行列を掛けた外側の積 (AB)C・A(BC) がこの書き方になる）:
+# 一致の補題 matrix_conf_mul_tensorPow_apply_eq_mat_mult・tensorPow_mul_matrix_conf_apply_eq_mat_mult は matrix_conf_mul_apply_eq_mat_mult と同じ証明で、
+# 𝓘_M の添字の形 matrix_conf_mul_tensorPow_apply・tensorPow_mul_matrix_conf_apply をそこから導く（DefinitionMatrixOperationsOverMultiIndices.lean。mat_mult の欄 lean）。
+# 通しの定理に繋がる physicalSymTransferC_apply_configBasisIso（W = (BV_2)B の外側の積の段）と mul_apply_configBasisIso_of_single_nonzero
+# （exp(κD_0)(εV_2)・exp(κD_0)(GV_2) の外側の積の段と、εV_2・GV_2 の内側の積の段）が使う。
+HMul.hMul@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	mat_mult
+HMul.hMul@Ising2D.TensorPow,Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid	mat_mult
 HPow.hPow@Matrix[Ising2D.Conf,Ising2D.Conf,Complex],Nat,Matrix[Ising2D.Conf,Ising2D.Conf,Complex]@NPow.toPow	def_matrix_power
 # 実数の双線型値 x^⊤Py（Conf M の添字）: def_real_bilinear_value が x^⊤Py := Σ_{k=1}^{n} Σ_{l=1}^{n} x_k P_{kl} y_l と一つの記号として定める。
 # 未定義の記号の検査（UndefinedSymbols.lean）は、二つ目のベクトルが Matrix.mulVec の項である dotProduct（x ⬝ᵥ P *ᵥ y）を、二つのベクトルの dotProduct とは
