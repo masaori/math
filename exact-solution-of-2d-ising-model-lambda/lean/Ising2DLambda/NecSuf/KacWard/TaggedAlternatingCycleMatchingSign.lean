@@ -16,6 +16,7 @@ import Ising2DLambda.NecSuf.KacWard.AlternatingCycleMatchingSign
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairColoring
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEvenOrbit
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PeriodicTwoWayOrbit
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairMinimumOrbit
 import Ising2DLambda.NecSuf.KacWard.MatchingPairOutsideEnumeration
 
 namespace Ising2DLambda.NecSuf.KacWard
@@ -292,7 +293,10 @@ theorem cycleWords_complete_necSuf :
         intro i r
         have horbit : finiteMapIterate (matchingPairPermutation τ υ) r i ∈
             matchingPairComponent τ υ i := by
-          rw [← matchingPairPermutation_orbit_eq_component]
+          have heq : finitePermutationOrbit (matchingPairPermutation τ υ) i =
+              matchingPairComponent τ υ i := by
+            exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation_orbit_eq_component τ υ i
+          rw [← heq]
           exact ⟨r, Or.inl rfl⟩
         apply Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimum_basepoint
           τ υ (· ≤ ·) (fun _ _ => le_antisymm)
@@ -316,7 +320,10 @@ theorem cycleWords_complete_necSuf :
       (finiteMapIterate (matchingPairPermutation τ υ)) (matchingPairComponent τ υ)
       m x (by
         intro r
-        rw [← matchingPairPermutation_orbit_eq_component]
+        have heq : finitePermutationOrbit (matchingPairPermutation τ υ) m =
+            matchingPairComponent τ υ m := by
+          exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation_orbit_eq_component τ υ m
+        rw [← heq]
         exact ⟨r, Or.inl rfl⟩) hxl).1
   · intro x
     by_cases hx : x ∈ A
@@ -335,7 +342,10 @@ theorem cycleWords_complete_necSuf :
             intro i
             let m := Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum τ υ i
             have horbit : i ∈ finitePermutationOrbit (matchingPairPermutation τ υ) m := by
-              rw [matchingPairPermutation_orbit_eq_component,
+              have heq : finitePermutationOrbit (matchingPairPermutation τ υ) m =
+                  matchingPairComponent τ υ m := by
+                exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation_orbit_eq_component τ υ m
+              rw [heq,
                 matchingPairComponent_basepoint τ υ i m
                   (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ i)]
               exact Or.inl (finitePermutationOrbit_self_mem _ _)
