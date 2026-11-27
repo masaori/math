@@ -28655,12 +28655,12 @@ A \cdot A &< 2 \cdot (B \cdot B)\quad(\because\ \text{上で示した平方の�
 &=\iota_{\mathbb Q}(q)+\iota_{\mathbb Q}(0_{\mathbb Q})\cdot s
 &&\bigl(\because\ \text{包含が零を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
 &\in Q_s
-&&\bigl(\because\ \text{有理係数の組 }(q,0_{\mathbb Q})\text{ が }\blkref{def_quadratic_field_set}\text{ の証人}\bigr).
+&&\bigl(\because\ \text{有理係数の組 }(q,0_{\mathbb Q})\text{ が }\blkref{def_quadratic_field_set}\text{ の証人}\bigr)
 \end{aligned}`),
                               displayMath(String.raw`\begin{aligned}
 \mathrm{rep}_s\bigl(\iota_{\mathbb Q}(q)\bigr)
 &=(q,0_{\mathbb Q})
-&&\bigl(\because\ \text{上の表示、}\blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr).
+&&\bigl(\because\ \text{上の表示、}\blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr)
 \end{aligned}`),
                               paragraph([
                                 math(String.raw`(a,b):=(q,0_{\mathbb Q})\in\mathbb Q\times\mathbb Q`),
@@ -28688,7 +28688,7 @@ q
 &&\bigl(\because\ a=q\ne0\text{ と組の第一成分の比較}\bigr)\\
 \iota_{\mathbb Q}(q)
 &\in P_s
-&&\bigl(\because\ \text{上の表示が }\blkref{def_quadratic_positive_cone}\text{ の第一条件を満たす}\bigr).
+&&\bigl(\because\ \text{上の表示が }\blkref{def_quadratic_positive_cone}\text{ の第一条件を満たす}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "全過程は有理数の四則と順序、および代数的数の表示の中で閉じ、実数体も複素数体も現れない。",

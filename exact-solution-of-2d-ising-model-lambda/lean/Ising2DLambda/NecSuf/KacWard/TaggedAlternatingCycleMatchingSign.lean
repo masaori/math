@@ -345,9 +345,11 @@ theorem cycleWords_complete_necSuf :
               have heq : finitePermutationOrbit (matchingPairPermutation τ υ) m =
                   matchingPairComponent τ υ m := by
                 exact Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairMinimumPermutation_orbit_eq_component τ υ m
-              rw [heq,
-                matchingPairComponent_basepoint τ υ i m
-                  (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ i)]
+              have hcomp : matchingPairComponent τ υ m = matchingPairComponent τ υ i :=
+                Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponent_basepoint
+                  τ.val υ.val τ.property.2 υ.property.2 i m
+                  (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponentMinimum_mem τ υ i)
+              rw [heq, hcomp]
               exact Or.inl (finitePermutationOrbit_self_mem _ _)
             exact horbit)
           (by
