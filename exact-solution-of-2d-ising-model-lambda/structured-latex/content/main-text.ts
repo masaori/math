@@ -2066,15 +2066,15 @@ N\lambda\le_{\Lambda}N\mu
                               displayMath(String.raw`\begin{aligned}
 \bigl(n\cdot\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)\bigr)(p)
 &=n\,\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(\nu)\bigr)(p)
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の定義})\\
+&&\bigl(\because\ \blkref{def_rational_log_order_group}\text{ の有理数倍の定義}\bigr)\\
 &=n\,\bigl(\nu(p)/1\bigr)
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})\\
+&&\bigl(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義}\bigr)\\
 &=(n\cdot\nu(p))/1
-&&(\because\ \text{分母 }1\text{ の有理数の積は整数の積})\\
+&&\bigl(\because\ \text{分母 }1\text{ の有理数の積は整数の積}\bigr)\\
 &=(n\nu)(p)/1
-&&(\because\ \blkref{def_log_order_group}\text{ の整数倍の定義})\\
+&&\bigl(\because\ \blkref{def_log_order_group}\text{ の整数倍の定義}\bigr)\\
 &=\bigl(\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}(n\nu)\bigr)(p)
-&&(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義})
+&&\bigl(\because\ \blkref{def_rational_log_order_group}\text{ の }\iota_{\Lambda\to\Lambda_{\mathbb{Q}}}\text{ の定義}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "すべて整数と有理数の四則と有限台写像の演算であり、実数体は現れない。",
