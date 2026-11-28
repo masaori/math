@@ -4,10 +4,10 @@ import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected
 namespace Ising2DLambda.Tools
 
 /-- A path from a vertex in a proper nonempty set to a vertex outside it crosses its boundary. -/
-theorem connectedGraph_crossingEdge (n : ℕ) (G : FiniteSimpleGraph n)
-    (hG : FiniteGraphConnected G) (U : Finset (Fin n))
+theorem connectedGraph_crossingEdge (n : ℕ) (G : FiniteSimpleGraphEdgeData n)
+    (hG : FiniteGraphConnected G.toSimpleGraph) (U : Finset (Fin n))
     (hU : U.Nonempty) (hproper : U ≠ Finset.univ) :
-    ∃ u v : Fin n, u ∈ U ∧ v ∉ U ∧ G.Adj u v := by
+    ∃ u v : Fin n, u ∈ U ∧ v ∉ U ∧ s(u, v) ∈ G.edges := by
   classical
   by_contra hno
   -- Choose vertices on opposite sides and a simple path between them.
@@ -18,7 +18,7 @@ theorem connectedGraph_crossingEdge (n : ℕ) (G : FiniteSimpleGraph n)
     exact hproper (Finset.eq_univ_of_forall h)
   obtain ⟨p, _⟩ := hG.2 a b
   -- If no edge crosses the cut, membership propagates along each path step.
-  have hwalk : ∀ {x y : Fin n} (q : G.Walk x y), x ∈ U → y ∈ U := by
+  have hwalk : ∀ {x y : Fin n} (q : G.toSimpleGraph.Walk x y), x ∈ U → y ∈ U := by
     intro x y q
     induction q with
     | nil => exact id

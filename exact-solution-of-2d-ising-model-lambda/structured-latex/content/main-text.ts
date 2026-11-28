@@ -24772,7 +24772,7 @@ b
 &=\iota_{\mathbb Q}(-a)+\iota_{\mathbb Q}(-b)\cdot s
 &&\bigl(\because\ \text{包含が }b\text{ の加法逆元を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
 &\in Q_s
-&&\bigl(\because\ -a,-b\in\mathbb Q,\ \blkref{def_quadratic_field_set}\bigr).
+&&\bigl(\because\ -a,-b\in\mathbb Q,\ \blkref{def_quadratic_field_set}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "全過程は有理数と代数的数の四則で閉じ、実数体も複素数体も現れない。",
