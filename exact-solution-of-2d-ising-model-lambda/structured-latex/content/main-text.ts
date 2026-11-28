@@ -98026,6 +98026,8 @@ K^{\mathrm{as}}_{\vec e,\vec f}
                     verification: ["sagemath/check/gauged-terminal-matrix-skew"],
                     lean: [
                       "Ising2DLambda.KacWard.gaugedTerminalMatrix_skew",
+                      "Ising2DLambda.KacWard.gaugeLongCoefficient_skew",
+                      "Ising2DLambda.KacWard.gaugeShortCoefficient_skew",
                       "Ising2DLambda.NecSuf.KacWard.gaugedKernel_skew_necSuf",
                       "Ising2DLambda.KacWard.gaugedTerminalMatrix_skew_from_necSuf",
                       "Ising2DLambda.KacWard.gaugedTerminalMatrix_diagonal_zero",
@@ -101745,25 +101747,78 @@ w_{\iota(\vec e_{r-1}),\vec e_r}
                       "Ising2DLambda.KacWard.taggedMatchingTerm_cycleWeight_from_necSuf",
                     ],
                     statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。", ref("claim_tagged_difference_cycle_cover"), " の交互閉路の集合を ", math(String.raw`\mathcal C(D,T)`), " とする。各 ", math(String.raw`C\in\mathcal C(D,T)`), " の射影した閉歩道を ", math(String.raw`\gamma_C=(\vec e_{C,0},\ldots,\vec e_{C,k_C-1})`), " と置き、添字を ", math(String.raw`\mathbb Z/k_C\mathbb Z`), " で読む。", math(String.raw`k_C\in\mathbb N_{>0}`), " である。" ]),
-                      displayMath(String.raw`M_{D,T}(x)=\prod_{C\in\mathcal C(D,T)}\left[-x^{k_C}\prod_{r\in\mathbb Z/k_C\mathbb Z}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]\quad\text{in }\overline{\mathbb Q}[x].`),
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。", ref("claim_tagged_difference_cycle_cover"), " の交互閉路の集合を ", math(String.raw`\mathcal C(D,T)`), " とする。各 ", math(String.raw`C\in\mathcal C(D,T)`), " について、", ref("claim_alternating_cycle_matching_sign"), " の点列を最小元から取って ", math(String.raw`c_C(0),\ldots,c_C(2k_C)`), " とし、", math(String.raw`\vec e_{C,r}:=\iota(c_C(2r))\in\vec E_L\ (0\le r\le k_C)`), " と置く。", ref("claim_projected_edge_cycle_nonbacktracking"), " により ", math(String.raw`\gamma_C=(\vec e_{C,0},\ldots,\vec e_{C,k_C-1})`), " は射影した閉歩道であり、", math(String.raw`\vec e_{C,k_C}=\vec e_{C,0}`), " である。添字を ", math(String.raw`\mathbb Z/k_C\mathbb Z`), " で読む。", math(String.raw`k_C\in\mathbb N_{>0}`), " である。", math(String.raw`C:\overline{\mathbb Q}\to\overline{\mathbb Q}[x]`), " は ", ref("def_qbar_constant_embedding"), " の定数埋込みである。"]),
+                      displayMath(String.raw`M_{D,T}(x)=\prod_{C\in\mathcal C(D,T)}\left[-x^{k_C}\,C\Bigl(\prod_{r\in\mathbb Z/k_C\mathbb Z}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\Bigr)\right]\quad\text{in }\overline{\mathbb Q}[x].`),
                       paragraph(["左辺は ", ref("claim_tagged_matching_expansion"), " の当該項である。空積は一であり、辺長一の一歩閉路も含む。実数体・複素数体は使わない。"]),
                     ],
                     proof: [
-                      paragraph(["各閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{C,r-1}),\vec e_{C,r})`), "、基準の長い標識の対を ", math(String.raw`(\vec e_{C,r},\iota(\vec e_{C,r}))`), " の向きで取る。各対を辞書式の昇順へ直す符号は、順に ", math(String.raw`\alpha_D(C),\alpha_0(C)`), " である（", ref("claim_alternating_cycle_matching_sign"), "）。反転は対合なので、短い対の第一成分の反転は ", math(String.raw`\iota(\iota(\vec e_{C,r-1}))=\vec e_{C,r-1}`), " である（", ref("claim_reversal_is_involution"), "）。", ref("def_tagged_matching_contributions"), " より、短い対には ", math(String.raw`-xw_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})`), "、長い対には ", math(String.raw`w_{\vec e_{C,r},\iota(\vec e_{C,r})}`), " が対応する。"]),
-                      paragraph([ref("claim_tagged_difference_cycle_cover"), " により、閉路の対は重複しない。", ref("claim_tagged_matching_short_pair_count"), " と ", ref("claim_projected_cycle_support_union"), " より短い対の総数は ", math(String.raw`|T|=\sum_C k_C`), " である。活動点の外の長い対は基準項と一致し、", ref("claim_reference_matching_constant_term"), " より基準項は一である。従って各閉路の項の比を掛ければ ", math(String.raw`M_{D,T}(x)`), " を得る。"]),
+                      paragraph(["準備として、各 ", math(String.raw`C\in\mathcal C(D,T)`), " の点列を最小元から読む。", ref("def_matching_pair_component_minimum"), " の最小元を ", math(String.raw`\mu_C\in C`), " と書く。", ref("claim_matching_pair_component_basepoint"), " により ", math(String.raw`\mu_C`), " を含む二歩軌道の合併は ", math(String.raw`C`), " に等しいので、", math(String.raw`\mu_C`), " は ", ref("def_matching_pair_coloring"), " の第一色である。", ref("claim_matching_pair_permutation"), " により ", ref("def_matching_pair_successor"), " の後続写像 ", math(String.raw`\sigma`), " は置換であり、", ref("claim_finite_permutation_positive_return"), "・", ref("claim_finite_permutation_orbit_enumeration"), "・", ref("claim_matching_pair_even_orbit"), " により ", math(String.raw`\sigma`), " の ", math(String.raw`\mu_C`), " での最小周期は正の偶数 ", math(String.raw`2k_C`), " であって、", math(String.raw`c_C(s)=\sigma^{[s]}(\mu_C)\ (0\le s\le 2k_C)`), " である。", ref("claim_perfect_matching_involution"), " の相手写像を ", math(String.raw`m_D,m_{\mathcal D_0}:\vec E_L\to\vec E_L`), " と書く。", ref("def_matching_pair_coloring"), " と ", ref("def_matching_pair_successor"), " により後続写像は一歩ごとに色を入れ替えるので、偶数番目の点は第一色、奇数番目の点は第二色であり、各 ", math(String.raw`0\le r<k_C`), " で"]),
+                      displayMath(String.raw`\begin{aligned}
+c_C(2r+1)&=m_D(c_C(2r))&&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第一色の場合}\bigr)\\
+c_C(2r+2)&=m_{\mathcal D_0}(c_C(2r+1))&&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第二色の場合}\bigr)\\
+&=\iota(c_C(2r+1))&&\bigl(\because\ \blkref{claim_reference_long_mate_reversal}\bigr)\\
+c_C(2k_C)&=c_C(0)&&\bigl(\because\ 2k_C\text{ は最小周期}\bigr)
+\end{aligned}`),
+                      paragraph(["を得る。射影した閉歩道の辺で読むと"]),
+                      displayMath(String.raw`\begin{aligned}
+c_C(2r)&=\iota(\iota(c_C(2r)))&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=\iota(\vec e_{C,r})&&\bigl(\because\ \vec e_{C,r}\text{ の定義}\bigr)\\
+c_C(2r+1)&=\iota(\iota(c_C(2r+1)))&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=\iota(c_C(2r+2))&&\bigl(\because\ c_C(2r+2)=\iota(c_C(2r+1))\bigr)\\
+&=\vec e_{C,r+1}&&\bigl(\because\ \vec e_{C,r+1}\text{ の定義}\bigr)
+\end{aligned}`),
+                      paragraph(["である。従って閉路の ", math(String.raw`D`), " の対は ", math(String.raw`(\iota(\vec e_{C,r}),\vec e_{C,r+1})`), "、", math(String.raw`\mathcal D_0`), " の対は ", math(String.raw`(\vec e_{C,r+1},\iota(\vec e_{C,r+1}))`), " の向きで現れ、それらを昇順へ直す符号の積が ", ref("claim_alternating_cycle_matching_sign"), " の ", math(String.raw`\alpha_D(C)`), " と ", math(String.raw`\alpha_0(C)`), " である。"]),
+                      paragraph(["閉路の ", math(String.raw`D`), " の対を閉路の順に並べ、続いて両マッチングに共通する対の集合 ", math(String.raw`\mathcal P_{\mathrm{com}}`), " を昇順に並べた向き付き対の列を ", math(String.raw`W`), " と書く。", ref("claim_alternating_cycle_matching_sign"), " の証明の端点列 ", math(String.raw`W_D`), " と同じく、", math(String.raw`W`), " は ", math(String.raw`E_D`), " の各対をただ一度ずつ向きを付けて並べ、", ref("claim_perfect_matching_involution"), " により閉路の対 ", math(String.raw`\{c_C(2r),m_D(c_C(2r))\}`), " は ", math(String.raw`D`), " の対である。点 ", math(String.raw`\vec e`), " を含む ", math(String.raw`D`), " の対を昇順に向けたものは ", ref("claim_perfect_matching_enumeration_complete"), " により ", math(String.raw`E_D`), " のただ一つの元であり、", ref("claim_tagged_symmetric_difference_active_vertices"), " によりそれが ", math(String.raw`T`), " に属することと ", math(String.raw`\vec e`), " が活動点であることは同値である。閉路の点は活動点であり、", ref("claim_alternating_cycle_matching_sign"), " の証明のとおり共通対の点は活動点でない。従って ", math(String.raw`T`), " の元はちょうど閉路の ", math(String.raw`D`), " の対を昇順へ直したものであり、共通対は長い標識を持つ。共通対は ", math(String.raw`\mathcal D_0`), " の対なので、", ref("claim_reference_long_mate_reversal"), " により ", math(String.raw`(\vec e,\iota(\vec e))`), " の形をしている。閉路 ", math(String.raw`C`), " の ", math(String.raw`D`), " の対は ", math(String.raw`k_C`), " 個なので"]),
+                      displayMath(String.raw`|T|=\sum_{C\in\mathcal C(D,T)}k_C\qquad\bigl(\because\ T\text{ の元と閉路の }D\text{ の対の一対一対応}\bigr)`),
+                      paragraph([ref("claim_gauged_terminal_matrix_skew"), " の反対称性は長い係数と短い係数のそれぞれで成り立つ（その証明は二つの係数を別々に示す）。従って ", ref("def_tagged_matching_contributions"), " により、任意の ", math(String.raw`\vec e,\vec f\in\vec E_L`), " で ", math(String.raw`\mathsf L_{\vec f,\vec e}=-\mathsf L_{\vec e,\vec f}`), " と ", math(String.raw`\mathsf S_{\vec f,\vec e}=-\mathsf S_{\vec e,\vec f}`), " である。", math(String.raw`E_D`), " の対 ", math(String.raw`p`), " と、同じ二点を ", math(String.raw`W`), " の向きで並べた対 ", math(String.raw`\vec p`), " の寄与は、", math(String.raw`\vec p`), " を昇順へ直す符号 ", math(String.raw`\eta(\vec p)`), " 倍だけ異なる。共通対は昇順なので ", math(String.raw`\eta=1`), " である。この反転を全ての対へ同時に適用すると"]),
+                      displayMath(String.raw`\Bigl(\prod_{p\in E_D\setminus T}\mathsf L_p\Bigr)\Bigl(\prod_{p\in T}\mathsf S_p\Bigr)
+=\prod_{C\in\mathcal C(D,T)}\Bigl[\alpha_D(C)\prod_{r=0}^{k_C-1}\mathsf S_{\iota(\vec e_{C,r}),\vec e_{C,r+1}}\Bigr]\prod_{(\vec e,\iota(\vec e))\in\mathcal P_{\mathrm{com}}}\mathsf L_{\vec e,\iota(\vec e)}
+\qquad\bigl(\because\ \blkref{claim_gauged_terminal_matrix_skew}\text{ の二つの係数の反対称性}\bigr)`),
+                      paragraph(["長い対の重みは昇順へ直す符号で書ける。任意の ", math(String.raw`\vec e\in\vec E_L`), " について、", ref("def_reference_long_pairs"), " の昇順対は ", math(String.raw`\vec e\prec\iota(\vec e)`), " なら ", math(String.raw`(\vec e,\iota(\vec e))`), "、そうでなければ ", math(String.raw`(\iota(\vec e),\vec e)`), " であり、", ref("claim_reference_matching_constant_term"), " によりその長い寄与は一である。", ref("claim_reversal_is_involution"), " の ", math(String.raw`\iota(\iota(\vec e))=\vec e`), " と長い係数の反対称性を合わせると"]),
+                      displayMath(String.raw`w_{\vec e,\iota(\vec e)}=\eta(\vec e,\iota(\vec e))\in\{-1,1\}\qquad\bigl(\because\ \blkref{claim_reference_matching_constant_term},\ \blkref{claim_gauged_terminal_matrix_skew}\bigr)`),
+                      paragraph(["である。特に共通対は昇順なので、その長い寄与は ", math(String.raw`\mathsf L_{\vec e,\iota(\vec e)}=C(1)=1`), " である。非零項なので ", math(String.raw`T`), " の各短い寄与は零でなく、反転で符号だけが変わるので、", math(String.raw`W`), " の向きの短い寄与も ", ref("def_tagged_matching_contributions"), " の第一の場合に当たる。各 ", math(String.raw`C`), " で ", math(String.raw`\Phi_C:=\prod_{r\in\mathbb Z/k_C\mathbb Z}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\in\overline{\mathbb Q}`), " と置き、", math(String.raw`k:=k_C`), " と略記すると"]),
+                      displayMath(String.raw`\begin{aligned}
+\prod_{r=0}^{k-1}\mathsf S_{\iota(\vec e_{C,r}),\vec e_{C,r+1}}
+&=\prod_{r=0}^{k-1}x\,C\bigl(w_{\iota(\vec e_{C,r}),\vec e_{C,r+1}}\varepsilon_{a,b}(\vec e_{C,r+1})\rho(\iota(\iota(\vec e_{C,r})),\vec e_{C,r+1})\bigr)
+&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\bigr)\\
+&=\prod_{r=0}^{k-1}x\,C\bigl(w_{\iota(\vec e_{C,r}),\vec e_{C,r+1}}\varepsilon_{a,b}(\vec e_{C,r+1})\rho(\vec e_{C,r},\vec e_{C,r+1})\bigr)
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=x^{k}\,C\Bigl(\prod_{r=0}^{k-1}w_{\iota(\vec e_{C,r}),\vec e_{C,r+1}}\Bigr)\,C\Bigl(\prod_{r=0}^{k-1}\varepsilon_{a,b}(\vec e_{C,r+1})\rho(\vec e_{C,r},\vec e_{C,r+1})\Bigr)
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の積の保存}\bigr)\\
+&=x^{k}\,C\Bigl(\prod_{r\in\mathbb Z/k\mathbb Z}w_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}\Bigr)\,C(\Phi_C)
+&&\bigl(\because\ \vec e_{C,k}=\vec e_{C,0}\text{ による添字の巡回}\bigr)\\
+&=x^{k}\,C\Bigl((-1)^{k}\prod_{r\in\mathbb Z/k\mathbb Z}w_{\vec e_{C,r},\iota(\vec e_{C,r})}\Bigr)\,C(\Phi_C)
+&&\bigl(\because\ \blkref{claim_alternating_cycle_gauge_ratio}\bigr)\\
+&=x^{k}\,C\Bigl((-1)^{k}\prod_{r\in\mathbb Z/k\mathbb Z}\eta(\vec e_{C,r},\iota(\vec e_{C,r}))\Bigr)\,C(\Phi_C)
+&&\bigl(\because\ \text{上の長い対の重み}\bigr)\\
+&=x^{k}\,C\bigl((-1)^{k}\alpha_0(C)\bigr)\,C(\Phi_C)
+&&\bigl(\because\ \alpha_0(C)\text{ の定義と }\vec e_{C,k}=\vec e_{C,0}\bigr)
+\end{aligned}`),
+                      paragraph([ref("def_qbar_polynomial_pfaffian"), " の符号因子は ", math(String.raw`c_D=C(\operatorname{sgn}(D))`), " である。以上を合わせると"]),
                       displayMath(String.raw`\begin{aligned}
 M_{D,T}(x)
-&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}\alpha_D(C)^2\alpha_0(C)^2x^{k_C}\prod_r\frac{w_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}}{w_{\vec e_{C,r},\iota(\vec e_{C,r})}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
-&&\bigl(\because\ \blkref{claim_alternating_cycle_matching_sign},\ \blkref{claim_tagged_matching_expansion}\bigr)\\
-&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}x^{k_C}\prod_r\frac{w_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}}{w_{\vec e_{C,r},\iota(\vec e_{C,r})}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
-&&\bigl(\because\ \alpha_D(C)^2=\alpha_0(C)^2=1\text{ と昇順への向き直し}\bigr)\\
-&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}x^{k_C}(-1)^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
-&&\bigl(\because\ \blkref{claim_alternating_cycle_gauge_ratio}\bigr)\\
-&=\prod_{C\in\mathcal C(D,T)}\left[-x^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
-&&\bigl(\because\ (-1)^{2k_C}=1\bigr).
+&=c_D(-1)^{|T|}\Bigl(\prod_{p\in E_D\setminus T}\mathsf L_p\Bigr)\Bigl(\prod_{p\in T}\mathsf S_p\Bigr)
+&&\bigl(\because\ \text{主張文の項の形}\bigr)\\
+&=c_D(-1)^{|T|}\prod_{C}\Bigl[\alpha_D(C)\prod_{r=0}^{k_C-1}\mathsf S_{\iota(\vec e_{C,r}),\vec e_{C,r+1}}\Bigr]\prod_{(\vec e,\iota(\vec e))\in\mathcal P_{\mathrm{com}}}\mathsf L_{\vec e,\iota(\vec e)}
+&&\bigl(\because\ \text{上の向き直しの等式}\bigr)\\
+&=c_D(-1)^{|T|}\prod_{C}\Bigl[\alpha_D(C)\prod_{r=0}^{k_C-1}\mathsf S_{\iota(\vec e_{C,r}),\vec e_{C,r+1}}\Bigr]
+&&\bigl(\because\ \text{共通対の長い寄与は一}\bigr)\\
+&=c_D\prod_{C}\Bigl[(-1)^{k_C}\alpha_D(C)\prod_{r=0}^{k_C-1}\mathsf S_{\iota(\vec e_{C,r}),\vec e_{C,r+1}}\Bigr]
+&&\bigl(\because\ |T|=\textstyle\sum_C k_C\bigr)\\
+&=c_D\prod_{C}\Bigl[(-1)^{k_C}\alpha_D(C)(-1)^{k_C}\alpha_0(C)\,x^{k_C}\,C(\Phi_C)\Bigr]
+&&\bigl(\because\ \text{上の閉路ごとの等式}\bigr)\\
+&=c_D\prod_{C}\Bigl[(-1)^{2k_C}\alpha_D(C)\alpha_0(C)\,x^{k_C}\,C(\Phi_C)\Bigr]
+&&\bigl(\because\ \mathbb Z\text{ の積の可換則と指数法則}\bigr)\\
+&=C\bigl(\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)\bigr)\prod_{C}\Bigl[(-1)^{2k_C}\alpha_D(C)\alpha_0(C)\,x^{k_C}\,C(\Phi_C)\Bigr]
+&&\bigl(\because\ c_D=C(\operatorname{sgn}(D))\text{ と }\blkref{claim_reference_matching_constant_term}\text{ の }\operatorname{sgn}(\mathcal D_0)=1\bigr)\\
+&=C\Bigl((-1)^{|\mathcal C(D,T)|}\prod_{C}\alpha_D(C)\alpha_0(C)\Bigr)\prod_{C}\Bigl[(-1)^{2k_C}\alpha_D(C)\alpha_0(C)\,x^{k_C}\,C(\Phi_C)\Bigr]
+&&\bigl(\because\ \blkref{claim_alternating_cycle_matching_sign}\bigr)\\
+&=\prod_{C}\Bigl[-(-1)^{2k_C}\alpha_D(C)^2\alpha_0(C)^2\,x^{k_C}\,C(\Phi_C)\Bigr]
+&&\bigl(\because\ C\text{ の積の保存と有限積の並べ替え}\bigr)\\
+&=\prod_{C\in\mathcal C(D,T)}\Bigl[-x^{k_C}\,C(\Phi_C)\Bigr]
+&&\bigl(\because\ \alpha_D(C),\alpha_0(C)\in\{-1,1\},\ (-1)^{2k_C}=1\bigr).
 \end{aligned}`),
-                      paragraph(["全ての分母は ", ref("claim_gauge_pair_weight_nonzero"), " により非零である。有限積と定数多項式への埋込みだけを用いた。"]),
+                      paragraph(["空の閉路集合でも同じ空積の計算が成り立つ。有限積と定数多項式への埋込みだけを用い、割り算は使わない。"]),
                     ],
                   },
                 },
