@@ -9,11 +9,12 @@
 `TensorPow M`（添字 `Conf M`）の具体版 `ClaimTensorPowMatrixDifferenceZeroIffEqual.lean` の `matrix_sub_eq_zero_iff_tensorPow` も、
 同じ必要十分版の添字 `Conf M` の特殊化として得る（`matrix_sub_eq_zero_iff_tensorPow_of_necSuf`）。
 数ベクトルの場合の `matrix_difference_zero_iff_equal`・`identity_matrix_is_left_unit_of_mat_mult`・`matrix_difference_mul_vector` と、
-`scalar_multiple_factors_out_of_left_factor` の右の因子が数ベクトルの場合の `TensorPow M`（添字 `Conf M`）での系は、
-まだ具体版を持たないので同じ必要十分版の特殊化としてここに置く。
+`scalar_multiple_factors_out_of_left_factor` の右の因子が数ベクトルの場合の `TensorPow M`（添字 `Conf M`）の具体版
+`ClaimTensorPowIdentityScalarMultipleAndDifferenceOnVectors.lean` の 4 つも、同じ必要十分版の添字 `Conf M` の特殊化として得る（`*_tensorPow_of_necSuf`）。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowMatrixDifferenceZeroIffEqual
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowIdentityScalarMultipleAndDifferenceOnVectors
 import Ising2D.NecSuf.MatrixVectorIdentityScalarDifference
 import Ising2D.Basic
 
@@ -48,25 +49,21 @@ theorem sub_mulVec_eq_of_necSuf {m n : ℕ} (A B : Matrix (Fin m) (Fin n) ℂ) (
 theorem matrix_sub_eq_zero_iff_tensorPow_of_necSuf {M : ℕ} (A B : TensorPow M) : A - B = 0 ↔ A = B :=
   NecSuf.sub_eq_zero_iff_matrix A B
 
-/-- `scalar_multiple_factors_out_of_left_factor`（`p → 1`。右の因子が数ベクトル）の `TensorPow M` での系
-（`NecSuf.smul_mulVec_eq'` の係数 `ℂ`、添字 `Conf M` の特殊化）: `(λB)v = λ(Bv)`。 -/
-theorem smul_mulVec_tensorPow {M : ℕ} (lam : ℂ) (B : TensorPow M) (v : Conf M → ℂ) :
+/-- `smul_mulVec_tensorPow` を `NecSuf.smul_mulVec_eq'`（係数 `ℂ`）の添字 `Conf M` の特殊化として得る。 -/
+theorem smul_mulVec_tensorPow_of_necSuf {M : ℕ} (lam : ℂ) (B : TensorPow M) (v : Conf M → ℂ) :
     (lam • B) *ᵥ v = lam • (B *ᵥ v) :=
   NecSuf.smul_mulVec_eq' lam B v
 
-/-- `matrix_difference_zero_iff_equal`（`p = 1`。数ベクトル）の `TensorPow M` での系
-（`NecSuf.sub_eq_zero_iff_vec` の係数 `ℂ`、添字 `Conf M` の特殊化）: `u − w = O ⟺ u = w`。 -/
-theorem vec_sub_eq_zero_iff_tensorPow {M : ℕ} (u w : Conf M → ℂ) : u - w = 0 ↔ u = w :=
+/-- `vec_sub_eq_zero_iff_tensorPow` を `NecSuf.sub_eq_zero_iff_vec`（係数 `ℂ`）の添字 `Conf M` の特殊化として得る。 -/
+theorem vec_sub_eq_zero_iff_tensorPow_of_necSuf {M : ℕ} (u w : Conf M → ℂ) : u - w = 0 ↔ u = w :=
   NecSuf.sub_eq_zero_iff_vec u w
 
-/-- `identity_matrix_is_left_unit_of_mat_mult`（右の因子が数ベクトル）の `TensorPow M` での系
-（`NecSuf.one_mulVec_eq` の係数 `ℂ`、添字 `Conf M` の特殊化）: `Iv = v`。 -/
-theorem identity_matrix_mulVec_tensorPow {M : ℕ} (v : Conf M → ℂ) : (1 : TensorPow M) *ᵥ v = v :=
+/-- `identity_matrix_mulVec_tensorPow` を `NecSuf.one_mulVec_eq`（係数 `ℂ`）の添字 `Conf M` の特殊化として得る。 -/
+theorem identity_matrix_mulVec_tensorPow_of_necSuf {M : ℕ} (v : Conf M → ℂ) : (1 : TensorPow M) *ᵥ v = v :=
   NecSuf.one_mulVec_eq v
 
-/-- `matrix_difference_mul_vector` の `TensorPow M` での系
-（`NecSuf.sub_mulVec_eq'` の係数 `ℂ`、添字 `Conf M` の特殊化）: `Av − Bv = (A − B)v`。 -/
-theorem sub_mulVec_tensorPow {M : ℕ} (A B : TensorPow M) (v : Conf M → ℂ) :
+/-- `sub_mulVec_tensorPow` を `NecSuf.sub_mulVec_eq'`（係数 `ℂ`）の添字 `Conf M` の特殊化として得る。 -/
+theorem sub_mulVec_tensorPow_of_necSuf {M : ℕ} (A B : TensorPow M) (v : Conf M → ℂ) :
     A *ᵥ v - B *ᵥ v = (A - B) *ᵥ v :=
   NecSuf.sub_mulVec_eq' A B v
 

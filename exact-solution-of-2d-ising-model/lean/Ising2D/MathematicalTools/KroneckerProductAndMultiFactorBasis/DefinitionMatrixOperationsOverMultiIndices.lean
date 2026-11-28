@@ -28,8 +28,9 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が `𝓘_M`�
 - スカラー倍・和・零行列は成分の式が各成分だけで閉じ、番号 `ν(I)`・`ν(K)` の成分の式は Lean の `I`・`K` の成分の式と同じ形なので、
   `Conf M` の添字で一本ずつ書く（`matrix_conf_smul_apply`・`matrix_conf_add_apply`・`matrix_conf_zero_apply` を本体とし、
   略記 `TensorPow M` で書いた `tensorPow_smul_apply`・`tensorPow_add_apply`・`tensorPow_zero_apply` をそこから導く）。
-  零ベクトル（`def_zero_matrix` の `p = 1`）も同じく `Conf M` の添字で書く（`confVec_zero_apply`）。
-  この 3 つの演算の補題（と、下の符号反転・差の補題）は `def_kronecker` の「`I` を番号 `ν(I)` と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii) が直す同一視）。
+  零ベクトル（`def_zero_matrix` の `p = 1`）と数ベクトルのスカラー倍（`def_matrix_scalar_multiple` の `n = 1`）・差（`def_matrix_difference` の `p = 1`）も同じく
+  `Conf M` の添字で書く（`confVec_zero_apply`・`confVec_smul_apply`・`confVec_sub_apply`）。
+  スカラー倍・和・零行列と数ベクトルの零・スカラー倍・差の補題（と、下の符号反転・差の補題）は `def_kronecker` の「`I` を番号 `ν(I)` と同一視する」に頼る（状態台帳の行「有限和と有限集合の記号」の (iii) が直す同一視）。
 
 人手の `Mat(m, n, ℂ)` は添字の集合の直積 `{1,…,m} × {1,…,n}` から `ℂ` への写像の全体（`def_complex_matrices`）で、Lean の
 `Matrix (Fin m) (Fin n) ℂ` は `Fin m → Fin n → ℂ` である。行と列の添字を `finIndexToZZ` で送ると、成分が行列を定め、どの成分の割り当ても
@@ -164,6 +165,18 @@ theorem tensorPow_zero_apply {M : ℕ} (I K : Conf M) :
 theorem confVec_zero_apply {M : ℕ} (I : Conf M) :
     (0 : Conf M → ℂ) I = 0 :=
   rfl                                                     -- mathlib の関数の零は成分ごとの零
+
+/-- **`def_matrix_scalar_multiple`**（`n = 1`、数ベクトル）: Lean の数ベクトル `Conf M → ℂ`（本文の `ℂ^{2^M}` の元）のスカラー倍の成分は、
+本文の `(aA)_{ij} := a A_{ij}` の `n = 1`（`j = 1`）を番号 `i = ν(I)` で読んだもの `(af)_I = a f_I` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
+theorem confVec_smul_apply {M : ℕ} (a : ℂ) (f : Conf M → ℂ) (I : Conf M) :
+    (a • f) I = a * f I :=
+  rfl                                                     -- mathlib の関数のスカラー倍は成分ごと
+
+/-- **`def_matrix_difference`**（`p = 1`、数ベクトル）: Lean の数ベクトル `Conf M → ℂ`（本文の `ℂ^{2^M}` の元）の差の成分は、
+本文の `(A - B)_{k1} := A_{k1} - B_{k1}` を番号 `k = ν(I)` で読んだもの `(f - g)_I = f_I - g_I` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/
+theorem confVec_sub_apply {M : ℕ} (f g : Conf M → ℂ) (I : Conf M) :
+    (f - g) I = f I - g I :=
+  rfl                                                     -- mathlib の関数の差は成分ごと
 
 /-- **`def_matrix_negation`**: Lean の `Matrix (Conf M) (Conf M) ℂ`（本文の `Mat(2^M, ℂ)`）の符号反転の成分は、本文の `(-A)_{ik} := -A_{ik}` を
 番号 `i = ν(I)`・`k = ν(K)` で読んだもの `(-A)_{IK} = -A_{IK}` である（Lean だけの段の補題。冒頭の説明を見よ）。 -/

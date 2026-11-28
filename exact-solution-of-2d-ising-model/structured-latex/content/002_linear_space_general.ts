@@ -83,7 +83,7 @@ export default defineBlocks([
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "行列のスカラー倍" },
     labels: ["def_matrix_scalar_multiple"],
-    lean: ["Ising2D.matrix_smul_apply", "Ising2D.vec_smul_apply", "Ising2D.matrix_conf_smul_apply", "Ising2D.tensorPow_smul_apply"],
+    lean: ["Ising2D.matrix_smul_apply", "Ising2D.vec_smul_apply", "Ising2D.matrix_conf_smul_apply", "Ising2D.tensorPow_smul_apply", "Ising2D.confVec_smul_apply"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -798,7 +798,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "単位行列を左から掛けても変わらない" },
     labels: ["identity_matrix_is_left_unit_of_mat_mult"],
-    lean: ["Ising2D.identity_matrix_mul", "Ising2D.identity_matrix_mulVec", "Ising2D.identity_matrix_mulVec_apply", "Ising2D.identity_matrix_mul_apply", "Ising2D.identity_matrix_mul_tensorPow"],
+    lean: ["Ising2D.identity_matrix_mul", "Ising2D.identity_matrix_mulVec", "Ising2D.identity_matrix_mulVec_apply", "Ising2D.identity_matrix_mul_apply", "Ising2D.identity_matrix_mul_tensorPow", "Ising2D.identity_matrix_mulVec_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
@@ -916,7 +916,7 @@ X - O
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
     title: { text: "左の因子のスカラー倍は行列の積の外へ出せる" },
     labels: ["scalar_multiple_factors_out_of_left_factor"],
-    lean: ["Ising2D.smul_mul_matrix", "Ising2D.smul_mul_matrix_apply", "Ising2D.smul_mulVec_eq", "Ising2D.smul_mulVec_eq_apply", "Ising2D.smul_mul_matrix_tensorPow"],
+    lean: ["Ising2D.smul_mul_matrix", "Ising2D.smul_mul_matrix_apply", "Ising2D.smul_mulVec_eq", "Ising2D.smul_mulVec_eq_apply", "Ising2D.smul_mul_matrix_tensorPow", "Ising2D.smul_mulVec_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),

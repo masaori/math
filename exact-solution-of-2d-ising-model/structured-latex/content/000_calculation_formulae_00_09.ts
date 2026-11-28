@@ -2323,7 +2323,7 @@ y^2>x\ \land\ x>0
     kind: "definition",
     title: { text: "複素数を成分とする数ベクトルの全体" },
     labels: ["def_complex_number_vectors"],
-    lean: ["Ising2D.vecToColumn"],
+    lean: ["Ising2D.vecToColumn", "Ising2D.confVec_eq_iff_entries_by_kronecker_numbering"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),

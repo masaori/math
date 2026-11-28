@@ -258,7 +258,7 @@ T_B(I)
     kind: "definition",
     title: { text: "行列の差" },
     labels: ["def_matrix_difference"],
-    lean: ["Ising2D.matrix_sub_apply", "Ising2D.vec_sub_apply", "Ising2D.matrix_conf_sub_apply", "Ising2D.tensorPow_sub_apply"],
+    lean: ["Ising2D.matrix_sub_apply", "Ising2D.vec_sub_apply", "Ising2D.matrix_conf_sub_apply", "Ising2D.tensorPow_sub_apply", "Ising2D.confVec_sub_apply"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -359,7 +359,7 @@ T_B(I)
     kind: "claim",
     title: { text: "行列の差が零行列であることと等しいことの同値" },
     labels: ["matrix_difference_zero_iff_equal"],
-    lean: ["Ising2D.matrix_sub_eq_zero_iff", "Ising2D.vec_sub_eq_zero_iff", "Ising2D.matrix_sub_eq_zero_iff_tensorPow"],
+    lean: ["Ising2D.matrix_sub_eq_zero_iff", "Ising2D.vec_sub_eq_zero_iff", "Ising2D.matrix_sub_eq_zero_iff_tensorPow", "Ising2D.vec_sub_eq_zero_iff_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
@@ -419,7 +419,7 @@ T_B(I)
     kind: "claim",
     title: { text: "行列の差と数ベクトルの積の分配律" },
     labels: ["matrix_difference_mul_vector"],
-    lean: ["Ising2D.sub_mulVec_eq", "Ising2D.sub_mulVec_eq_apply"],
+    lean: ["Ising2D.sub_mulVec_eq", "Ising2D.sub_mulVec_eq_apply", "Ising2D.sub_mulVec_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),

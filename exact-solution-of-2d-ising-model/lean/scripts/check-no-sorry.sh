@@ -2105,6 +2105,15 @@ targets=(
   Ising2D.neg_tensorPow_add_self
   Ising2D.vec_sub_eq_zero_iff_tensorPow
   Ising2D.identity_matrix_mulVec_tensorPow
+  Ising2D.vec_sub_eq_zero_iff_tensorPow_of_necSuf
+  Ising2D.identity_matrix_mulVec_tensorPow_of_necSuf
+  Ising2D.smul_mulVec_tensorPow
+  Ising2D.smul_mulVec_tensorPow_of_necSuf
+  Ising2D.sub_mulVec_tensorPow
+  Ising2D.sub_mulVec_tensorPow_of_necSuf
+  Ising2D.confVec_eq_iff_entries_by_kronecker_numbering
+  Ising2D.confVec_smul_apply
+  Ising2D.confVec_sub_apply
   Ising2D.mul_comm_of_anticomm_pair_tensorPow
   Ising2D.mul_comm_of_anticomm_pair_tensorPow_of_necSuf
   "Ising2D.NecSuf.commute_smul_of_commute'"

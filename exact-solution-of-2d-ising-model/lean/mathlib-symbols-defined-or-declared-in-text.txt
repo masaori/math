@@ -379,3 +379,11 @@ dotProduct[Matrix.mulVec]@Ising2D.Conf,Real@Pi.instFintype,Real.instMul,Real.ins
 # 本文に ℝ の数ベクトルの零の定義が無いので、Conf M → ℝ と定義域が任意の型の零（OfNat.ofNat@→[Ising2D.Conf,Real],0・→[?,…],0）は載せない。
 OfNat.ofNat@→[Fin,Complex],0@Zero.toOfNat0	def_zero_matrix
 OfNat.ofNat@→[Ising2D.Conf,Complex],0@Zero.toOfNat0	def_zero_matrix
+# 数ベクトルのスカラー倍と差: def_matrix_scalar_multiple が (aA)_{ij} := a A_{ij}、def_matrix_difference が (A - B)_{ik} := A_{ik} - B_{ik} を定め、
+# 列の数が 1 のとき（数ベクトルのとき。前者は n = 1、後者は p = 1）も同じ式である。Lean の Conf M → ℂ（本文の ℂ^{2^M} の元の第 k 成分を ν^{-1}(k) での値として持つ）の mathlib の
+# 関数のスカラー倍・差は成分ごとで、一致は confVec_smul_apply（def_matrix_scalar_multiple）・confVec_sub_apply（def_matrix_difference）。どちらも rfl で、
+# 各定義のブロックの欄 lean に在り、ClaimTensorPowIdentityScalarMultipleAndDifferenceOnVectors.lean の smul_mulVec_tensorPow・sub_mulVec_tensorPow・
+# vec_sub_eq_zero_iff_tensorPow を通して通しの定理に繋がる。Conf M → ℂ を ℂ^{2^M} と読むのは、数ベクトルの零の行と同じく def_kronecker の同一視に頼る。
+# Fin n → ℂ と定義域が任意の型の数ベクトルのスカラー倍・差はまだ載せない。
+HSMul.hSMul@Complex,→[Ising2D.Conf,Complex],→[Ising2D.Conf,Complex]@Function.hasSMul	def_matrix_scalar_multiple
+HSub.hSub@→[Ising2D.Conf,Complex],→[Ising2D.Conf,Complex],→[Ising2D.Conf,Complex]@Pi.instSub	def_matrix_difference
