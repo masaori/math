@@ -5,10 +5,12 @@
 係数 `R := ℂ`、添字 `Fin n`、`B := ↑B`、`B' := ↑B⁻¹`（単元 `B` の逆元）の特殊化として得る。
 人手のラベルは `mat_conj`・`matrix_conjugation_preserves_finite_sum`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin n` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。
+`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版 `ClaimMatrixConjugationPreservesSums.lean` は添字が `Fin n` の行列について述べてあり、
+`Conf M` の行列には当てはまらないためである。スカラー倍を保つことの `TensorPow M` の具体版は
+`ClaimTensorPowConjugationPreservesScalarMultiple.lean` の `conj_smul_tensorPow` にあり、ここではそれを特殊化として導く。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesSums
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowConjugationPreservesScalarMultiple
 import Ising2D.NecSuf.MatrixConjugationSum
 import Ising2D.Basic
 
@@ -36,10 +38,11 @@ theorem conj_add_tensorPow {M : ℕ} (B : (TensorPow M)ˣ) (A C : TensorPow M) :
     Conjugation.T B (A + C) = Conjugation.T B A + Conjugation.T B C :=
   NecSuf.conj_add_matrix' (B : TensorPow M) ((B⁻¹ : (TensorPow M)ˣ) : TensorPow M) A C
 
-/-- `mat_conj`（スカラー倍を保つ）の `TensorPow M` での系（`NecSuf.conj_smul_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem conj_smul_tensorPow {M : ℕ} (B : (TensorPow M)ˣ) (α : ℂ) (A : TensorPow M) :
-    Conjugation.T B (α • A) = α • Conjugation.T B A :=
-  NecSuf.conj_smul_matrix' α (B : TensorPow M) ((B⁻¹ : (TensorPow M)ˣ) : TensorPow M) A
+/-- `mat_conj`（スカラー倍を保つ）の `TensorPow M` での具体版 `conj_smul_tensorPow`
+（`ClaimTensorPowConjugationPreservesScalarMultiple.lean`）を、`NecSuf.conj_smul_matrix'` の添字 `Conf M`、`B' := Binv` の特殊化として得る。 -/
+theorem conj_smul_tensorPow_of_necSuf {M : ℕ} (B Binv : TensorPow M) (α : ℂ) (A : TensorPow M) :
+    B * (α • A) * Binv = α • (B * A * Binv) :=
+  NecSuf.conj_smul_matrix' α B Binv A
 
 /-- `matrix_conjugation_preserves_finite_sum` の `TensorPow M` での系（`NecSuf.conj_finite_sum_matrix'` の添字 `Conf M` の特殊化）。 -/
 theorem conj_finite_sum_tensorPow {M : ℕ} (B : (TensorPow M)ˣ) (r : ℕ) (X : Fin (r + 1) → TensorPow M) :

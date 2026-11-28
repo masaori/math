@@ -121,7 +121,6 @@ DEP	concrete	Ising2D.TV_hatZ_hatY_via_sandwich
 DEP	concrete	Ising2D.UflipInv_mul
 DEP	concrete	Ising2D.Uflip_conj_H1plus
 DEP	concrete	Ising2D.Uflip_conj_H2
-DEP	concrete	Ising2D.Uflip_conj_smul
 DEP	concrete	Ising2D.Uflip_mul_inv
 DEP	concrete	Ising2D.V1_plus_square_root_property
 DEP	concrete	Ising2D.V2_transpose

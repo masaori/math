@@ -39,6 +39,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimTensorPowConjugationIsRingHom
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesSumsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowConjugationPreservesScalarMultiple
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSumFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowDifferenceIsSumWithNegation
@@ -590,10 +591,9 @@ theorem Uflip_conj_smul (c : ℂ) (A : TensorPow M) :
     Uflip M * (c • A) * UflipInv M = c • (Uflip M * A * UflipInv M) :=
   calc Uflip M * (c • A) * UflipInv M
       = (c • (Uflip M * A)) * UflipInv M := by
-        -- 本文 `conjugation_commutes_with_matrix_exp` がスカラー倍の法則を引かないので、この補題の 2 段は導出を使う（状態台帳の分離の行の備考）
-        rw [mul_smul_matrix_tensorPow_of_necSuf]                                       -- `scalar_multiple_factors_out_of_right_factor`
+        rw [mul_smul_matrix_tensorPow]                                                 -- `scalar_multiple_factors_out_of_right_factor`
     _ = c • (Uflip M * A * UflipInv M) :=
-        smul_mul_matrix_tensorPow_of_necSuf _ _ _                                      -- `scalar_multiple_factors_out_of_left_factor`
+        smul_mul_matrix_tensorPow _ _ _                                                -- `scalar_multiple_factors_out_of_left_factor`
 
 theorem Uflip_conj_sum {ι : Type*} (s : Finset ι) (f : ι → TensorPow M) :
     Uflip M * (∑ i ∈ s, f i) * UflipInv M = ∑ i ∈ s, Uflip M * f i * UflipInv M := by
@@ -876,8 +876,9 @@ theorem Uflip_conj_pow (S : TensorPow M) (k : ℕ) :
       _ = (Uflip M * S * UflipInv M) ^ (k + 1) :=
           ((matrix_conf_pow_zero_and_succ _).2 k).symm  -- `def_matrix_power` の `A^{m+1} := A^mA`（`A → USU^{-1}`）
 
-/-- 人手本文 `constant_c_value_even_sector` Step 2 の「共役は行列の積・和・スカラー倍を保ち」を
-`def_exp` の部分和 `∑_{k<n} (k!)^{-1} S^k` に当てたもの（和を保つのは分配律 `Uflip_conj_sum`）。
+/-- 人手本文 `conjugation_commutes_with_matrix_exp` Step 2（部分和の共役）の「共役は行列の積・和・スカラー倍を保ち」を
+`def_exp` の部分和 `∑_{k<n} (k!)^{-1} S^k` に当てたもの（和を保つのは分配律 `Uflip_conj_sum`、
+スカラー倍を保つのは `mat_conj` の `Mat(2^M, ℂ)` の具体版 `conj_smul_tensorPow`）。
 必要十分版は `NecSuf.conj_partialSum_of_inv`。 -/
 theorem Uflip_conj_expPartialSum (S : TensorPow M) (n : ℕ) :
     Uflip M * (∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • S ^ k) * UflipInv M
@@ -886,7 +887,7 @@ theorem Uflip_conj_expPartialSum (S : TensorPow M) (n : ℕ) :
       = ∑ k ∈ Finset.range n, Uflip M * (((k.factorial : ℂ))⁻¹ • S ^ k) * UflipInv M :=
         Uflip_conj_sum _ _
     _ = ∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • (Uflip M * S ^ k * UflipInv M) := by
-        simp only [Uflip_conj_smul]
+        simp only [conj_smul_tensorPow (Uflip M) (UflipInv M)]  -- `mat_conj` のスカラー倍を保つこと（`n → 2^{M_col}`, `B → U`, `B^{-1} → U^{-1}`, `α → (k!)^{-1}`, `A → S^k`）
     _ = ∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • (Uflip M * S * UflipInv M) ^ k := by
         simp only [Uflip_conj_pow]
 
