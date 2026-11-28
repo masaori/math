@@ -1,4 +1,4 @@
-import Ising2DLambda.KacWard.CellBoundaryWinding
+import Mathlib
 
 namespace Ising2DLambda.NecSuf.KacWard
 
