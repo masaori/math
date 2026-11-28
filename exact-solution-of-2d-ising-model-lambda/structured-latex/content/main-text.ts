@@ -22149,8 +22149,8 @@ F\cup\{e\}&\subseteq E\cup\{e\}&&(\because\ F\subseteq E)\\
                           "列の長さについて帰納法を使う。", math(String.raw`i=0`), " では",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-F_0&=\varnothing&&\bigl(\because\ \text{辺選択の初期値}\bigr)\\
-&\subseteq E&&\bigl(\because\ \varnothing\text{ は任意の集合に含まれる}\bigr)
+F_0&=\varnothing\quad\bigl(\because\ \text{辺選択の初期値}\bigr)\\
+&\subseteq E\quad\bigl(\because\ \varnothing\text{ は任意の集合に含まれる}\bigr)
 \end{aligned}`),
                         paragraph(["であり、辺が無いので閉路も無い。"]),
                         paragraph([
@@ -22161,8 +22161,8 @@ F_0&=\varnothing&&\bigl(\because\ \text{辺選択の初期値}\bigr)\\
                           math(String.raw`e=\{a_i,b_i\}`), " に適用して、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-F_i&=F_{i-1}\cup\{e\}&&\bigl(\because\ \text{辺選択の規則}\bigr)\\
-&\subseteq E&&\bigl(\because\ \blkref{claim_forest_add_disconnected_edge}\bigr)
+F_i&=F_{i-1}\cup\{e\}\quad\bigl(\because\ \text{辺選択の規則}\bigr)\\
+&\subseteq E\quad\bigl(\because\ \blkref{claim_forest_add_disconnected_edge}\bigr)
 \end{aligned}`),
                         paragraph([
                           "を得て、同じ主張から ", math(String.raw`(V,F_i)`),

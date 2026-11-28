@@ -18,49 +18,62 @@ noncomputable def forestEdgeScan {n : ℕ} (G : FiniteSimpleGraph n)
     (pairs : List (Fin n × Fin n)) : FiniteSimpleGraph n :=
   pairs.foldl (forestEdgeScanStep G) ⊥
 
-/-- Every finite prefix of the edge scan remains an acyclic subgraph. -/
-theorem forestEdgeScan_invariant {n : ℕ} (G : FiniteSimpleGraph n)
-    (pairs : List (Fin n × Fin n)) :
-    (forestEdgeScan G pairs).IsAcyclic ∧ forestEdgeScan G pairs ≤ G := by
+noncomputable def forestEdgeScanEdges {n : ℕ} (G : FiniteSimpleGraphEdgeData n)
+    (pairs : List (Fin n × Fin n)) : Finset (Sym2 (Fin n)) := by
   classical
-  unfold forestEdgeScan
-  have hstep : ∀ (F : FiniteSimpleGraph n) (uv : Fin n × Fin n),
-      F.IsAcyclic ∧ F ≤ G →
-      (forestEdgeScanStep G F uv).IsAcyclic ∧ forestEdgeScanStep G F uv ≤ G := by
-    intro F uv hF
-    unfold forestEdgeScanStep
-    split_ifs with h
-    · let Gd := FiniteSimpleGraphEdgeData.ofSimpleGraph G
-      let Fd := FiniteSimpleGraphEdgeData.ofSimpleGraph F
-      have hFgraph : Fd.toSimpleGraph = F :=
-        FiniteSimpleGraphEdgeData.toSimpleGraph_ofSimpleGraph F
-      have hFGd : Fd.edges ⊆ Gd.edges := SimpleGraph.edgeFinset_mono hF.2
-      have hforest : Fd.toSimpleGraph.IsAcyclic := by
-        rw [hFgraph]
-        exact hF.1
-      have huv : s(uv.1, uv.2) ∈ Gd.edges := by
-        exact SimpleGraph.mem_edgeFinset.mpr h.1
-      have hnot : ¬ Fd.toSimpleGraph.Reachable uv.1 uv.2 := by
-        rw [hFgraph]
-        exact h.2
-      have hd := forest_addDisconnectedEdge n Gd Fd hFGd hforest uv.1 uv.2 huv hnot
-      refine ⟨?_, ?_⟩
-      · simpa only [hFgraph] using hd.1
-      · intro a b hab
-        have hab' : (Fd.toSimpleGraph ⊔ edge uv.1 uv.2).Adj a b := by
-          simpa only [hFgraph] using hab
-        have he : s(a, b) ∈ (Fd.toSimpleGraph ⊔ edge uv.1 uv.2).edgeFinset := by
-          simpa only [SimpleGraph.mem_edgeFinset, SimpleGraph.mem_edgeSet] using hab'
-        rw [hd.2.1] at he
-        have hmem := hd.2.2 he
-        have heG : s(a, b) ∈ G.edgeFinset := hmem
-        simpa only [SimpleGraph.mem_edgeFinset, SimpleGraph.mem_edgeSet] using heG
-    · exact hF
-  induction pairs using List.reverseRecOn with
-  | nil => simp
-  | append_singleton pairs uv ih =>
-      rw [List.foldl_append, List.foldl_cons, List.foldl_nil]
-      exact hstep _ uv ih
+  exact (forestEdgeScan G.toSimpleGraph pairs).edgeFinset
+
+/-- Every finite prefix of the edge scan remains an acyclic subgraph. -/
+theorem forestEdgeScan_invariant {n : ℕ} (G : FiniteSimpleGraphEdgeData n)
+    (pairs : List (Fin n × Fin n)) :
+    forestEdgeScanEdges G pairs ⊆ G.edges ∧
+      (forestEdgeScan G.toSimpleGraph pairs).IsAcyclic := by
+  classical
+  have hscan : (forestEdgeScan G.toSimpleGraph pairs).IsAcyclic ∧
+      forestEdgeScan G.toSimpleGraph pairs ≤ G.toSimpleGraph := by
+    unfold forestEdgeScan
+    have hstep : ∀ (F : FiniteSimpleGraph n) (uv : Fin n × Fin n),
+        F.IsAcyclic ∧ F ≤ G.toSimpleGraph →
+        (forestEdgeScanStep G.toSimpleGraph F uv).IsAcyclic ∧
+          forestEdgeScanStep G.toSimpleGraph F uv ≤ G.toSimpleGraph := by
+      intro F uv hF
+      unfold forestEdgeScanStep
+      split_ifs with h
+      · let Fd := FiniteSimpleGraphEdgeData.ofSimpleGraph F
+        have hFgraph : Fd.toSimpleGraph = F :=
+          FiniteSimpleGraphEdgeData.toSimpleGraph_ofSimpleGraph F
+        have hFGd : Fd.edges ⊆ G.edges := by
+          apply (FiniteSimpleGraphEdgeData.toSimpleGraph_le_iff Fd G).mp
+          rw [hFgraph]
+          exact hF.2
+        have hforest : Fd.toSimpleGraph.IsAcyclic := by
+          rw [hFgraph]
+          exact hF.1
+        have huv : s(uv.1, uv.2) ∈ G.edges := h.1
+        have hnot : ¬ Fd.toSimpleGraph.Reachable uv.1 uv.2 := by
+          rw [hFgraph]
+          exact h.2
+        have hd := forest_addDisconnectedEdge n G Fd hFGd hforest uv.1 uv.2 huv hnot
+        refine ⟨?_, ?_⟩
+        · simpa only [hFgraph] using hd.1
+        · intro a b hab
+          have hab' : (Fd.toSimpleGraph ⊔ edge uv.1 uv.2).Adj a b := by
+            simpa only [hFgraph] using hab
+          have he : s(a, b) ∈ (Fd.toSimpleGraph ⊔ edge uv.1 uv.2).edgeFinset := by
+            simpa only [SimpleGraph.mem_edgeFinset, SimpleGraph.mem_edgeSet] using hab'
+          rw [hd.2.1] at he
+          exact hd.2.2 he
+      · exact hF
+    induction pairs using List.reverseRecOn with
+    | nil => simp
+    | append_singleton pairs uv ih =>
+        rw [List.foldl_append, List.foldl_cons, List.foldl_nil]
+        exact hstep _ uv ih
+  constructor
+  · unfold forestEdgeScanEdges
+    rw [← G.edgeFinset_toSimpleGraph]
+    exact SimpleGraph.edgeFinset_mono hscan.2
+  · exact hscan.1
 
 /-- Every inspected edge has connected endpoints after the whole scan. -/
 theorem forestEdgeScan_inspected_reachable {n : ℕ} (G : FiniteSimpleGraph n)
@@ -132,9 +145,23 @@ theorem finiteGraphConnected_has_spanningTree {n : ℕ} (G : FiniteSimpleGraph n
     have hr : T.Reachable u v := hreach u v (hG.2 u v).some.1.reachable
     -- Erasing repeated vertices gives the simple path required by the paper's definition.
     exact ⟨hr.some.toPath⟩
-  have hinvariant := forestEdgeScan_invariant G pairs
-  refine ⟨T, ⟨⟨hconn, ?_⟩, hinvariant.2⟩⟩
+  let Gd := FiniteSimpleGraphEdgeData.ofSimpleGraph G
+  have hGd : Gd.toSimpleGraph = G :=
+    FiniteSimpleGraphEdgeData.toSimpleGraph_ofSimpleGraph G
+  have hinvariant := forestEdgeScan_invariant Gd pairs
+  rw [hGd] at hinvariant
+  have hTG : T ≤ G := by
+    intro a b hab
+    have he : s(a, b) ∈ T.edgeFinset := SimpleGraph.mem_edgeFinset.mpr hab
+    have heG : s(a, b) ∈ Gd.edges := by
+      apply hinvariant.1
+      unfold forestEdgeScanEdges
+      rw [hGd]
+      exact he
+    have hAdj : Gd.toSimpleGraph.Adj a b := heG
+    simpa only [hGd] using hAdj
+  refine ⟨T, ⟨⟨hconn, ?_⟩, hTG⟩⟩
   intro u ⟨p⟩
-  exact hinvariant.1 p.1 p.2
+  exact hinvariant.2 p.1 p.2
 
 end Ising2DLambda.Tools
