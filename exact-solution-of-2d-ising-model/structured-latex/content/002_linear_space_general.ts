@@ -12079,13 +12079,21 @@ u^2&=u\cdot u &&(\because\ \text{平方の定義})\\
         math(String.raw`Q>0`),
         " のときは、任意の ",
         math(String.raw`t\in\mathbb{R}`),
-        " について",
+        " について、",
+        ref("real_square_is_nonnegative"),
+        "（",
+        math(String.raw`r\to u_k-tv_k`),
+        "）から各 ",
+        math(String.raw`k`),
+        " で ",
+        math(String.raw`0\le(u_k-tv_k)^2`),
+        " であり、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 0
 &\le\sum_{k=1}^{m}(u_k-tv_k)^2
-&&(\because \text{実数の平方は非負であり、非負数の有限和は非負}) \\
+&&(\because \text{上の}\ 0\le(u_k-tv_k)^2\ \text{と、非負数の有限和は非負}) \\
 &= \sum_{k=1}^{m}\left(u_k^2-2tu_kv_k+t^2v_k^2\right)
 &&(\because \text{分配律}) \\
 &= P-2tR+t^2Q
@@ -12264,6 +12272,7 @@ R^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を主張 real_square_is_nonnegative の参照にした。Cauchy–Schwarz の段の各項の非負（r → u_k − t v_k）を先に述べた。「非負数の有限和は非負」は名前だけのままである。",
         "原文（Typst）に対応ブロックは無い。ノルムの定義（labels: def_matrix_norm）を置いた以上、" +
           "極限の一意性や行列乗算の連続性（labels: matrix_multiplication_continuity）の議論が" +
           "前提としている非退化性・斉次性・三角不等式を明示的に証明しておく必要があるため追加した。",

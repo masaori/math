@@ -881,15 +881,15 @@ u \neq v
       ]),
     ],
     proof: [
-      paragraph(["実数の平方は非負なので ", math(String.raw`y^2 \geq 0`), " である。"]),
+      paragraph([ref("real_square_is_nonnegative"), "（", math(String.raw`r \to y`), "）から ", math(String.raw`y^2 \geq 0`), " である。"]),
       displayMath(String.raw`\begin{aligned}
 y^2+1
 &\geq 0+1
-&&(\because\ y^2 \geq 0\ \text{の両辺に }1\text{ を加える})\\
+&&\bigl(\because\ y^2 \geq 0\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x\le y\Rightarrow x+t\le y+t\ (x\to 0,\ y\to y^2,\ t\to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= 1
-&&(\because\ \mathbb{R}\ \text{の四則})\\
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 1)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &> 0
-&&(\because\ \mathbb{R}\ \text{の順序})
+&&(\because\ \blkref{real_zero_less_than_one})
 \end{aligned}`),
       paragraph([
         "とくに ",
@@ -928,6 +928,7 @@ s = 0
     conversion: {
       status: "added",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を主張 real_square_is_nonnegative の参照にした。続く鎖の名前だけの根拠「両辺に 1 を加える」「ℝ の四則」「ℝ の順序」も、順序と加法の両立・加法の単位元（set_and_algebra_notation）と real_zero_less_than_one の参照にした（式は不変）。",
         "2026-11-02: arcsinh の定義・微分の証明が使う √(y²+1) > 0 を、他のブロックの証明の中身を引かずに済むよう独立の主張にした。",
       ],
     },

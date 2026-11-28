@@ -12,7 +12,7 @@ def right_id(x):  # x + 0 = x
 
 rows = [
     left_id(b),                                   # 積の単位元の鎖の最後の行: (a, 0 + b) = (a, b) の第 2 成分
-    left_id(zero),                                # 平方和の非負の鎖: 0 + 0 = 0
+    left_id(b^2),                                 # 平方和の非負の鎖: 0 + b² = b²
     right_id(a^2),                                # a² = a² + 0（右辺から左辺へ）
     left_id(-b^2),                                # 0 + (−b²) = −b²
     left_id(zero),                                # a = b = 0 の平方和の鎖: 0 + 0 = 0

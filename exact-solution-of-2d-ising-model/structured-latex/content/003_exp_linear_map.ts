@@ -2862,7 +2862,7 @@ S_N([0]_K)
 &= \left(\exp\!\left(\frac{x}{2}\right)\right)^2
    \quad (\because \text{冪の定義}) \\
 &\ge 0
-   \quad (\because \text{実数の平方は非負})
+   \quad (\because \blkref{real_square_is_nonnegative}\ (r \to \exp(\tfrac{x}{2})))
 \end{aligned}`,
       ),
       paragraph([
@@ -2878,6 +2878,7 @@ S_N([0]_K)
     conversion: {
       status: "added",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を主張 real_square_is_nonnegative の参照にした。Step 2 の最後の行（r → exp(x/2)）。Lean の具体版 Ising2D.real_exp_nonneg の同じ段も、mathlib の sq_nonneg から具体版 Ising2D.real_square_is_nonnegative に替えた。",
         "実数の exp を行列の exp から定義したことに伴い置いた。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: Step 1 の背理の鎖の最後の行 0·exp(−x) = 0 の根拠が名前だけの「ℝ の元に 0 を掛けると 0」だったので、real_zero_times_is_zero（その x に exp(−x) を入れる）の参照に替えた（式は不変）。Lean の具体版 Ising2D.real_exp_ne_zero の同じ段も、mathlib の zero_mul から具体版 Ising2D.real_zero_times_is_zero に替えた。",
       ],

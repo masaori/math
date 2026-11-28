@@ -1135,17 +1135,27 @@ z\cdot 1_{\mathbb{C}}
         math(String.raw`z=(a,b)\in\mathbb{C}`),
         " について ",
         math(String.raw`z\ne(0,0)\iff a^2+b^2>0`),
-        " を示す。まず",
+        " を示す。まず、",
+        ref("real_square_is_nonnegative"),
+        "（",
+        math(String.raw`r\to a`),
+        "、",
+        math(String.raw`r\to b`),
+        "）の ",
+        math(String.raw`0\le a^2`),
+        " と ",
+        math(String.raw`0\le b^2`),
+        " から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 a^2+b^2
 &\ge 0+b^2
-&&(\because\ \mathbb{R}\ \text{では平方は非負であることと、和が順序を保つこと})\\
-&\ge 0+0
-&&(\because\ \mathbb{R}\ \text{では平方は非負であることと、和が順序を保つこと})\\
-&= 0
-&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+&&\bigl(\because\ 0\le a^2\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x\le y\Rightarrow x+t\le y+t\ (x\to 0,\ y\to a^2,\ t\to b^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= b^2
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to b^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\ge 0
+&&(\because\ \text{上の}\ 0\le b^2)
 \end{aligned}`,
       ),
       paragraph([
@@ -1398,6 +1408,7 @@ t
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を主張 real_square_is_nonnegative の参照にした。零でないことと平方和が正であることの同値の a²+b² ≥ 0 の鎖は、平方の非負と加法との両立を一行で使っていたので、a²・b² の非負を先に述べ、順序と加法の両立・加法の単位元・b² の非負の 3 行にした（鎖の両端は不変）。",
         "原文の proof は TODO のみ。ここで証明を与えた。" +
           "原文の z^{-1}=1/z は、商 w/z := w z^{-1} を定めたうえでの記法の一致として解釈した。",
         "2026-08-09: 式変形の書き方を統一した。Step 1〜Step 8 の番号を内容の分かる名前へ改め、" +

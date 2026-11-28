@@ -377,12 +377,22 @@ x^2+y^2
       ),
       paragraph([
         "Cauchy--Schwarz の不等式（2 成分の場合）。",
+        ref("real_square_is_nonnegative"),
+        "（",
+        math(String.raw`r\to ad-bc`),
+        "）から ",
+        math(String.raw`0\le(ad-bc)^2`),
+        " であり、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 (ac+bd)^2
-&\le (ac+bd)^2+(ad-bc)^2
-&&(\because\ \mathbb{R}\ \text{では平方は非負であることと、和が順序を保つこと})\\
+&= 0+(ac+bd)^2
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to (ac+bd)^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\le (ad-bc)^2+(ac+bd)^2
+&&\bigl(\because\ 0\le(ad-bc)^2\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x\le y\Rightarrow x+t\le y+t\ (x\to 0,\ y\to (ad-bc)^2,\ t\to (ac+bd)^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= (ac+bd)^2+(ad-bc)^2
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ (x\to (ad-bc)^2,\ y\to (ac+bd)^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
 &= (a^2+b^2)(c^2+d^2)
 &&(\because\ \text{上で示した Lagrange の恒等式})\\
 &= |z_1|^2|z_2|^2
@@ -510,6 +520,7 @@ x^2+y^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を主張 real_square_is_nonnegative の参照にした。Cauchy–Schwarz の不等式（2 成分）の最初の行は平方の非負と加法との両立を一行で使っていたので、(ad−bc)² の非負を先に述べ、加法の単位元・順序と加法の両立・加法の交換律の 3 行に割った（鎖の両端は不変）。",
         "2026-11-18（Lean の通しの証明のゴールラインの確認）: (1) の x = 0 の三つの場合の鎖・(4) の Lagrange の恒等式の鎖・(6) の鎖で、名前だけの根拠「ℝ では 0 は和の単位元」だった 5 行を、「0 は ℝ の加法の単位元 形 (代入)（set_and_algebra_notation）」の行にした（0 + p = p の p → y^2 を 2 か所、p → 0、p + 0 = p の p → a^2c^2+b^2d^2+a^2d^2+b^2c^2、p → x^2。形の文字は証明の x, y と衝突しないよう p にした）。式は不変。",
         "2026-11-17（Lean の通しの証明のゴールラインの確認）: (4) の鎖の (ac−bd)²+(ad+bc)² = (a²+b²)(c²+d²) の行は、multiplicative_group_of_cc の証明の中の段（「積について閉じること」の恒等式）を引いていた。その主張は「ℂ^× は群をなす」だけなので、恒等式を独立した主張 product_of_sums_of_two_squares_identity にし、その参照に替えた（a, b, c, d はこの段の z_1 = (a,b), z_2 = (c,d) の成分で、主張の文字と同じ）。式・鎖の両端・段数は不変。",
         "2026-11-15（Lean の通しの証明のゴールラインの確認）: (1) の x = 0, y < 0 の鎖の √(y^2) = √((−y)^2) と (6) の x < 0 の鎖の √(x^2) = √((−x)^2) の行の根拠が「ℝ では (−y)^2 = y^2」「(−x)^2 = x^2」の名前だけだったので、それぞれを square_of_real_number_is_product（r → y、r → x）・real_negation_times_negation_is_product（a, b → y、a, b → x を右辺から左辺へ。この回に足した主張）・square_of_real_number_is_product（r → −y、r → −x を右辺から左辺へ）の 3 行に割った。鎖の両端と主張は変えていない。数値検証: sagemath/check/103_abs_basic_properties/check_negation_square_rows.sage。",

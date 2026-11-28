@@ -23,6 +23,7 @@ mathlib の `Real.exp_add`・`Real.exp_zero` で表す。この 2 つ以外の�
 -/
 import Mathlib.Analysis.SpecialFunctions.Exp
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroTimesIsZero
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealSquareIsNonnegative
 
 namespace Ising2D
 
@@ -59,8 +60,8 @@ theorem real_exp_nonneg (x : ℝ) : Real.exp x ≥ 0 :=
                                         -- `scalar_exp_product`（Lean は mathlib の `Real.exp_add`）
     _ = (Real.exp (x / 2)) ^ 2 := (sq _).symm
                                         -- 冪の定義
-    _ ≥ 0 := sq_nonneg _
-                                        -- 実数の平方は非負
+    _ ≥ 0 := real_square_is_nonnegative _
+                                        -- `real_square_is_nonnegative`（`r → exp(x/2)`）
 
 /-- **人手 `real_exp_positive`**: `x ∈ ℝ` について `exp(x) > 0`。Step 2 の `exp(x) ≥ 0` と Step 1 の `exp(x) ≠ 0` から。 -/
 theorem real_exp_positive (x : ℝ) : Real.exp x > 0 :=

@@ -77,15 +77,29 @@ export default defineBlocks([
       paragraph(["を満たす ", math(String.raw`r\in\mathbb R_{>0}`), " と ", math(String.raw`(x_c,y_c)\in\mathbb R^2`), " が一意に存在する。"]),
     ],
     proof: [
-      paragraph([math(String.raw`(x,y)\ne(0,0)`), " なので ", math(String.raw`x\ne0`), " または ", math(String.raw`y\ne0`), " である。", math(String.raw`x\ne0`), " のとき"]),
+      paragraph([math(String.raw`(x,y)\ne(0,0)`), " なので ", math(String.raw`x\ne0`), " または ", math(String.raw`y\ne0`), " である。", math(String.raw`x\ne0`), " のとき、", ref("real_square_is_nonnegative"), "（", math(String.raw`r\to y`), "）の ", math(String.raw`0\le y^2`), " から"]),
       displayMath(String.raw`\begin{aligned}
 x^2+y^2
-&\ge x^2
- &&\left(\because\ y^2\ge0\ (\text{実数の平方は非負})\right)\\
+&=y^2+x^2
+ &&\left(\because\ \mathbb{R}\ \text{の加法の交換律}\ (x\to x^2,\ y\to y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
+&\ge 0+x^2
+ &&\left(\because\ 0\le y^2\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x\le y\Rightarrow x+t\le y+t\ (x\to0,\ y\to y^2,\ t\to x^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
+&=x^2
+ &&\left(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0+x=x\ (x\to x^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
 &>0
  &&\left(\because\ x\ne0\ (\text{非零実数の平方は正})\right)
 \end{aligned}`),
-      paragraph([math(String.raw`y\ne0`), " のときも ", math(String.raw`x`), " と ", math(String.raw`y`), " を入れ替えた同じ二行で ", math(String.raw`x^2+y^2>0`), " である。よって"]),
+      paragraph([math(String.raw`y\ne0`), " のとき、", ref("real_square_is_nonnegative"), "（", math(String.raw`r\to x`), "）の ", math(String.raw`0\le x^2`), " から"]),
+      displayMath(String.raw`\begin{aligned}
+x^2+y^2
+&\ge 0+y^2
+ &&\left(\because\ 0\le x^2\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x\le y\Rightarrow x+t\le y+t\ (x\to0,\ y\to x^2,\ t\to y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
+&=y^2
+ &&\left(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0+x=x\ (x\to y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
+&>0
+ &&\left(\because\ y\ne0\ (\text{非零実数の平方は正})\right)
+\end{aligned}`),
+      paragraph(["である。いずれの場合も ", math(String.raw`x^2+y^2>0`), " である。よって"]),
       displayMath(String.raw`r:=\sqrt{x^2+y^2}^{(\mathbb R_{\ge0})}\in\mathbb R_{\ge0}`),
       paragraph(["と定める。"]),
       displayMath(String.raw`\begin{aligned}
@@ -167,7 +181,7 @@ y_c'
 \end{aligned}`),
       paragraph(["であり一意である。"]),
     ],
-    conversion: { status: "added", notes: ["写像定義に混在していた存在一意性を独立させた。"] },
+    conversion: { status: "added", notes: ["写像定義に混在していた存在一意性を独立させた。", "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を主張 real_square_is_nonnegative の参照にした。x ≠ 0 の場合の鎖 x²+y² ≥ x² は、加法との両立を一行で使っていたので、加法の交換律・順序と加法の両立・加法の単位元の 3 行に割った（鎖の両端は不変）。y ≠ 0 の場合は「x と y を入れ替えた同じ二行」と書いていたが、入れ替えると結論が y²+x² > 0 になり、0 ≤ x² も引いていなかったので、0 ≤ x²（r → x）を引いた順序と加法の両立・加法の単位元の鎖を明示した。"] },
   },
   {
     id: "calc_formulae_013_definition_map_cc_to_c_unit",

@@ -2171,7 +2171,11 @@ y^2>x\ \land\ x>0
       paragraph([
         "であり、とくに ",
         math(String.raw`-x\in\mathbb{R}_{\ge 0}`),
-        " である。また、実数の平方は非負なので ",
+        " である。また、",
+        ref("real_square_is_nonnegative"),
+        "（",
+        math(String.raw`r\to -x`),
+        "）から ",
         math(String.raw`(-x)^2\in\mathbb{R}_{\ge 0}`),
         " である。したがって ",
         math(String.raw`y=-x`),
@@ -2212,6 +2216,7 @@ y^2>x\ \land\ x>0
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を主張 real_square_is_nonnegative の参照にした（r → −x）。",
         "原文（Typst）の証明は等号でつながった式変形ではなく、" +
           "「-√a = x になるような a」「自乗して a になる実数のうち…」という探索の過程を" +
           "数式の中の日本語として並べたものだった。どの行がどの行から従うのかが書かれておらず、" +
