@@ -27,6 +27,7 @@
   `(δ, e) = ε'` は `Fin.snoc_init_self`、`(δ', e'') ≠ ε'` と `(δ, e') ≠ ε'` の段は `binaryWord_snoc_ne_of_ne_init`・`binaryWord_snoc_ne_of_ne_last` である。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSum
+import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionBinarySetZeroOne
 import Mathlib.Data.Fin.Tuple.Basic
 import Mathlib.Tactic.FinCases
 
@@ -128,16 +129,19 @@ theorem mul_binaryWordMatrixSum {m n p : ℕ} :
           congr 1; funext ε'; exact mul_add_matrix _ _ _                      -- `mat_mult_distributes_over_sum_in_right_factor` を各項へ
       _ = binaryWordMatrixSum (r + 1) (fun ε => C * X ε) := rfl               -- `def_sum_over_binary_words` を右辺から左辺へ
 
+/-- `e ∈ {0,1}` は `1` か `0` である（`def_binary_set_zero_one` の `{0,1} := {k ∈ ℤ | k = 0_ℤ ∨ k = 1_ℤ}`）。
+Lean の `e : Fin 2` を写像 `finBinaryToZZ` で人手の `{0,1}` へ送り、像が `0_ℤ` か `1_ℤ` であること（全単射の補題の二つ目）から、
+単射（一つ目）で `e` が `(0 : Fin 2)` か `(1 : Fin 2)` であることへ戻す。 -/
+theorem binaryWord_fin_two_eq_one_or_zero (e : Fin 2) : e = 1 ∨ e = 0 := by
+  rcases finBinaryToZZ_bijective_onto_binary_set.2.1 e with h | h
+  · right; exact finBinaryToZZ_bijective_onto_binary_set.1 e 0 (h.trans finBinaryToZZ_zero.symm)
+  · left; exact finBinaryToZZ_bijective_onto_binary_set.1 e 1 (h.trans finBinaryToZZ_one.symm)
+
 /-- `{0,1}^1` の元は `(1)` と `(0)` である（`def_sum_over_binary_words`）。 -/
 theorem binaryWord_one_eq_one_or_zero (ε : Fin 1 → Fin 2) : ε = (fun _ => 1) ∨ ε = (fun _ => 0) := by
-  have h : ε 0 = 1 ∨ ε 0 = 0 := by generalize ε 0 = e; fin_cases e <;> simp
-  rcases h with h | h
+  rcases binaryWord_fin_two_eq_one_or_zero (ε 0) with h | h
   · left; funext j; rw [Subsingleton.elim j 0, h]
   · right; funext j; rw [Subsingleton.elim j 0, h]
-
-/-- `e ∈ {0,1}` は `1` か `0` である。 -/
-theorem binaryWord_fin_two_eq_one_or_zero (e : Fin 2) : e = 1 ∨ e = 0 := by
-  fin_cases e <;> simp
 
 /-- 人手の「`δ' ≠ δ` なら、ある `j ≤ r` で `δ'_j ≠ δ_j` であり、`(δ', e'')_j = δ'_j ≠ δ_j = ε'_j` なので `(δ', e'') ≠ ε'`」。
 `δ` は `ε'` の初めの `r` 成分（`Fin.init ε'`）である。 -/

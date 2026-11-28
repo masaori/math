@@ -184,6 +184,7 @@ export const ALL_LABELS = [
   "def_bijection_composed_with_index_skipping_map",
   "def_binary_assignment_with_one_value_set_to_one",
   "def_binary_assignments_on_check_index_set",
+  "def_binary_set_zero_one",
   "def_check_Q_epsilon",
   "def_check_R_factor",
   "def_check_Vprime",

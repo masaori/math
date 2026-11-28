@@ -115,10 +115,25 @@ Nat.cast@Int@instNatCastInt	inclusion_nn_to_zz
 # 補題一本 finIndexToZZ_bijective_onto_index_set で示した（DefinitionIndexSetFromOneToN.lean）。Fin.val は Fin n の元から ℕ の元を取り出す射影で、写像の定義の式に現れる。
 # 載せる前に台帳に在った Fin・Fin.val の行は、本文の添字と Lean の Fin n の元を写像を通さずに行き来している宣言と、Fin 2 で本文の二値の集合 {0,1}
 # （添字の集合ではない）を表している宣言（スピン配置 Conf、二値の語の上の和など）を含む。状態台帳の行「添字の集合 {1,…,n} と Lean の Fin n の間の写像」と
-# 行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が、git の履歴（載せる前の main の先端 722368b1d）から引く手順を持つ。
-# Fin の数字（OfNat.ofNat@Fin）は、添字の 1 つずれた値（(0 : Fin n) は添字 1）と二値の 0・1 の両方に使われているので、まだ載せない。
+# 行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が、git の履歴（載せる前の main の先端 722368b1d）から引く手順を持つ。後者は 2026-11-28 に済んだ: 二値の集合として読む
+# Fin 2 の元の値 e.val（card_finsetOfWord_one の (ε 0).val、ite_eq_one_eq_val など）は、写像 finBinaryToZZ（def_binary_set_zero_one。e ↦ ι_{ℕ→ℤ}(e.val)）の像の中身である。
 Fin	def_index_set_from_one_to_n
 Fin.val	def_index_set_from_one_to_n
+#
+# Fin の数字 (k : Fin n)（OfNat.ofNat@Fin。Lean の定義は Fin.ofNat で値 k % n）は、具体版で次の二通りにだけ使われている（2026-11-28 に、載せる前の台帳の
+# 148 宣言を一つずつ見て分けた）。どちらも、名前を付けた写像を通した本文の元を表す。許可の一覧は一つの記号に一つのラベルしか持てないので、ラベルは添字の集合の
+# def_index_set_from_one_to_n にし、二値の集合として読む使い方の根拠は def_binary_set_zero_one（同じ章の次のブロック。本文で二つの集合が別であることを書いた）とする。
+#   添字の集合 {1,…,n} の元: 写像 finIndexToZZ n（def_index_set_from_one_to_n）で k < n の (k : Fin n) は本文の添字 k + 1 に写る（定義どおり）。
+#     2 × 2 行列の成分（pauliX_apply_00 は本文の (σ^x)_{11}、adjTwo・det_two_by_two_def・factorization_step1_N11 など）、𝓘_M = {1,2}^M の成分
+#     （Conf M = Fin M → Fin 2。sgn・idxOfSpin・flipIdx）、Fin 4 の添字（pauliComb_eq_sum_pauliFamily の c 0, …, c 3 が本文の c_1, …, c_4。数字 2・3 はここだけ）、
+#     サイトと有限積の添字（Y_last_mul_Z_zero の Z 0 が本文の Z_1、finiteMatrixProduct_zero・prod_bondSpin_of_two・openChainPhiInv_zero など）。
+#   二値の集合 {0,1} の元: 写像 finBinaryToZZ（def_binary_set_zero_one）で (0 : Fin 2)・(1 : Fin 2) は本文の 0・1 に写る（finBinaryToZZ_zero・finBinaryToZZ_one）。
+#     二値の語 {0,1}^r の成分（binaryWordMatrixSum_zero の B (fun _ => 1) が本文の B_{(1)}、expansion_of_finite_product_of_two_term_sums）、
+#     R_μ^{(e)}・ǔ^{(e)}・h(e) の e（rFactor_one・checkU_one・halfSign_one）、ε ∈ {0,1}^𝓜̌ の値（epsVal・binOfMem・finsetOfWord）、ς : {0,1} → {−1,1}（coe_varsigma_one）。
+OfNat.ofNat@Fin,0@Fin.instOfNat	def_index_set_from_one_to_n
+OfNat.ofNat@Fin,1@Fin.instOfNat	def_index_set_from_one_to_n
+OfNat.ofNat@Fin,2@Fin.instOfNat	def_index_set_from_one_to_n
+OfNat.ofNat@Fin,3@Fin.instOfNat	def_index_set_from_one_to_n
 # Fin.castLE h : Fin m → Fin n（m ≤ n）: 本文は m ≤ n のとき {1,…,m} の元をそのまま {1,…,n} の元として書く（開鎖項 D_0 の和の添字 m ∈ {1,…,M_col−1} を
 # サイトの添字に使うなど）。Lean は型 Fin m の元から型 Fin n の元へ Fin.castLE で移り、移しても写像 finIndexToZZ の像（本文の添字）が同じ整数であることを
 # 補題一本 finIndexToZZ_castLE で示した（DefinitionIndexSetFromOneToN.lean）。
@@ -145,8 +160,12 @@ Fin.castLE	def_index_set_from_one_to_n
 # real_bilinear_value_is_sum_with_real_matrix_vector_product・real_symmetric_matrix_moves_between_factors_of_sum_of_products・trace_basic_properties の
 # trace_identity_eq_sum_one）と行列の和（H2 の M = 0 など）は、下の行列の有限和と同じく行「行列とその演算」で扱う）、(b) Fin の部分集合（univ.filter …）の上の和（2026-11-25 に、
 # openChainD0・openChainEnergy・openChainD0_mulVec_basisVec・H1plus_eq_bulk_sub_boundary を Fin (M − 1) の上の和へ書き換え、filter の補題を消して済んだ）、
-# (c) 二値の集合 {0,1} を表す Fin 2 の上の和と Fin 2 の univ（sum_conf_succ_eq_sum_last_sum_init など）。消した行は、載せる前の main の先端 27bea56a1 の
-# 台帳から引ける。状態台帳の行「有限和と有限集合の記号」の三単位目が (a) を、四単位目が (b) を（済み）、行「二値の集合 {0,1} と Lean の Fin 2 の間の写像」が (c) を引き受ける。
+# (c) Fin 2 の上の和と Fin 2 の univ（sum_conf_succ_eq_sum_last_sum_init など）。2026-11-28 に、この検査が見る具体版の定義と主張（証明は見ない）について確かめた:
+# Fin 2 の上の Finset.sum は、どれも添字の集合 {1,2} の上の和である（sum_conf_succ_eq_sum_last_sum_init・ClaimKroneckerProductRuleOnVectors.lean の t : Fin 2 は
+# 𝓘_M = {1,2}^M（def_kronecker）の成分、ClaimFiniteSumOfComplexNumbersInConsecutivePairs.lean などの j : Fin 2 は二項の和の添字 {1,2}）。したがって (c) は上の補題の範囲の内である。
+# 二値の語 {0,1}^r の上の mathlib の和（Fin r → Fin 2 の上の Finset.sum。binaryWordRealSum_eq_sum_univ の主張など）は Fin の上の和ではなく、記号 Finset.sum@→[Fin,Fin] として
+# 台帳に残り、状態台帳の行「有限和と有限集合の記号」の残りが扱う（その証明の中で最後の成分 e ∈ {0,1} について Fin 2 の上の和を取る段も、そこで本文の二値の語の和へ直す）。
+# 消した行は、載せる前の main の先端 27bea56a1 の台帳から引ける。状態台帳の行「有限和と有限集合の記号」の三単位目が (a) を、四単位目が (b) を済ませた。
 # 行列の有限和（def_finite_sum_of_matrices）は式に行列の和が現れるので、状態台帳の行「行列とその演算」で行列の和を載せた後に同じ形で載せる。
 # Fin でない有限集合の上の和のうち 𝔐（SpinConf M）と 𝓘_M（Conf M）の上の和は下の行で載せた。ほかの上の和と、Finset・Fintype の残りは、状態台帳の行「有限和と有限集合の記号」の六単位目の三つ目以降が扱う。
 Finset.univ@Fin@Fin.fintype	def_index_set_from_one_to_n
