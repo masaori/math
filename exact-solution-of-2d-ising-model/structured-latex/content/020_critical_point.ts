@@ -3751,11 +3751,7 @@ F(0)
         "準備。",
         math(String.raw`\theta \in [0,\pi]`),
         " について ",
-        math(String.raw`w(\theta) := \delta^2 + a^2\theta^2/4`),
-        "、",
-        math(String.raw`r(\theta) := \sqrt{w(\theta)}`),
-        "、",
-        math(String.raw`G(\theta) := \dfrac{\theta}{\delta^2\,r(\theta)}`),
+        math(String.raw`w(\theta) := \delta^2 + a^2\theta^2/4 \in \mathbb{R}`),
         " と置く。",
       ]),
       paragraph([
@@ -3771,20 +3767,168 @@ F(0)
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \delta)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       paragraph([
+        "である。有理数の大小比較の ",
+        math(String.raw`0 < 4`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < 4
+&\Longrightarrow 0 \leq 4\ \wedge\ 0 \neq 4
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to 4)\bigr)\\
+&\Longrightarrow 0 \neq 4
+&&(\because\ \text{論理積の後半})\\
+&\Longrightarrow 4 \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to 4,\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0 < 4
+&\Longrightarrow 0 < 4^{-1}
+&&\bigl(\because\ \blkref{real_inverse_of_positive_is_positive}\ (a \to 4)\bigr)\\
+&\Longrightarrow 0 \leq 4^{-1}\ \wedge\ 0 \neq 4^{-1}
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to 4^{-1})\bigr)\\
+&\Longrightarrow 0 \leq 4^{-1}
+&&(\because\ \text{論理積の前半})
+\end{aligned}`),
+      paragraph([
         "である。",
-        "上の ",
+        ref("real_square_is_nonnegative"),
+        "（",
+        math(String.raw`r \to a`),
+        " と ",
+        math(String.raw`r \to \theta`),
+        "）の ",
+        math(String.raw`0 \leq a^2`),
+        "・",
+        math(String.raw`0 \leq \theta^2`),
+        " と上の ",
+        math(String.raw`0 \leq 4^{-1}`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 \leq a^2\ \wedge\ 0 \leq \theta^2
+&\Longrightarrow 0 \leq a^2\theta^2
+&&\bigl(\because\ \mathbb{R}\ \text{の順序と乗法の両立}\ (x \to a^2,\ y \to \theta^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\Longrightarrow 0 \leq a^2\theta^2\cdot 4^{-1}
+&&\bigl(\because\ \text{上の}\ 0 \leq 4^{-1}\ \text{と}\ \mathbb{R}\ \text{の順序と乗法の両立}\ (x \to a^2\theta^2,\ y \to 4^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\Longrightarrow 0 \leq a^2\theta^2/4
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to a^2\theta^2,\ z \to 4)\ \text{を右辺から左辺へ。}4 \neq 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。これから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^2
+&= 0 + \delta^2
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to \delta^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\leq a^2\theta^2/4 + \delta^2
+&&\bigl(\because\ 0 \leq a^2\theta^2/4\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x \le y \Rightarrow x + t \le y + t\ (x \to 0,\ y \to a^2\theta^2/4,\ t \to \delta^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \delta^2 + a^2\theta^2/4
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ (x \to a^2\theta^2/4,\ y \to \delta^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= w(\theta)
+&&(\because\ w\ \text{の置き方})
+\end{aligned}`),
+      paragraph([
+        "である。上の ",
         math(String.raw`0 < \delta^2`),
-        " から ",
-        math(String.raw`w(\theta) \geq \delta^2 > 0`),
-        " なので、",
-        ref("def_three_halves_power"),
-        " と同じ理由で ",
-        math(String.raw`r(\theta) > 0`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < \delta^2
+&\Longrightarrow 0 \leq \delta^2\ \wedge\ 0 \neq \delta^2
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to \delta^2)\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 \leq \delta^2\ \wedge\ \delta^2 \leq w(\theta)
+&\Longrightarrow 0 \leq w(\theta)
+&&\bigl(\because\ \mathbb{R}\ \text{の順序の推移律}\ (x \to 0,\ y \to \delta^2,\ t \to w(\theta))\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`0 = w(\theta)`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 = w(\theta)
+&\Longrightarrow \delta^2 \leq 0
+&&\bigl(\because\ \text{上の}\ \delta^2 \leq w(\theta)\ \text{の右辺に代入}\bigr)\\
+&\Longrightarrow \delta^2 \leq 0\ \wedge\ 0 \leq \delta^2
+&&\bigl(\because\ \text{上の}\ 0 \leq \delta^2\bigr)\\
+&\Longrightarrow \delta^2 = 0
+&&\bigl(\because\ \mathbb{R}\ \text{の順序の反対称律}\ (x \to \delta^2,\ y \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\Longrightarrow 0 = \delta^2
+&&\bigl(\because\ \text{等号の対称律}\ (x \to \delta^2,\ y \to 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、上の ",
+        math(String.raw`0 \neq \delta^2`),
+        " に反する。よって ",
+        math(String.raw`0 \neq w(\theta)`),
         " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 \leq w(\theta)\ \wedge\ 0 \neq w(\theta)
+&\Longrightarrow 0 < w(\theta)
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to w(\theta))\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0 \leq w(\theta)`),
+        " なので、",
+        ref("definition_of_sqrt_r_positive"),
+        " の平方根で ",
+        math(String.raw`r(\theta) := \sqrt{w(\theta)} \in \mathbb{R}_{\geq 0}`),
+        " と置き、",
         math(String.raw`r(\theta)^2 = w(\theta)`),
         "（",
         ref("definition_of_sqrt_r_positive"),
-        "）である。",
+        "）である。上の ",
+        math(String.raw`0 < w(\theta)`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < w(\theta)
+&\Longrightarrow 0 < r(\theta)
+&&\bigl(\because\ \blkref{sqrt_of_positive_real_is_positive}\ (x \to w(\theta))\ \text{と}\ r\ \text{の置き方}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < r(\theta)
+&\Longrightarrow 0 \leq r(\theta)\ \wedge\ 0 \neq r(\theta)
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to r(\theta))\bigr)\\
+&\Longrightarrow 0 \neq r(\theta)
+&&(\because\ \text{論理積の後半})\\
+&\Longrightarrow r(\theta) \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ (x \to r(\theta),\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、上の ",
+        math(String.raw`0 < r(\theta)`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < r(\theta)
+&\Longrightarrow 0 < \delta^2\,r(\theta)
+&&\bigl(\because\ \text{上の}\ 0 < \delta^2\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to \delta^2,\ b \to r(\theta))\bigr)\\
+&\Longrightarrow 0 \leq \delta^2\,r(\theta)\ \wedge\ 0 \neq \delta^2\,r(\theta)
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to \delta^2\,r(\theta))\bigr)\\
+&\Longrightarrow 0 \neq \delta^2\,r(\theta)
+&&(\because\ \text{論理積の後半})\\
+&\Longrightarrow \delta^2\,r(\theta) \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ (x \to \delta^2\,r(\theta),\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\delta^2\,r(\theta) \neq 0`),
+        " なので ",
+        math(String.raw`G(\theta) := \dfrac{\theta}{\delta^2\,r(\theta)} \in \mathbb{R}`),
+        " と置く（",
+        ref("def_real_quotient"),
+        "）。",
         ref("remark_real_analysis_facts_R3_R4"),
         " の微分の公式（定数倍・積・和・平方根・合成・商）より ",
         math(String.raw`w, r, G`),
@@ -3800,7 +3944,7 @@ w'(\theta)
       displayMath(String.raw`\begin{aligned}
 r'(\theta)
 &= \frac{1}{2\sqrt{w(\theta)}}\,w'(\theta)
-&&(\because\ \text{微分の公式の平方根と合成。}w(\theta) > 0)\\
+&&(\because\ \text{微分の公式の平方根と合成。上の}\ 0 \neq w(\theta)\ \text{と等号の対称律})\\
 &= \frac{1}{2\,r(\theta)}\cdot\frac{a^2\theta}{2}
 &&(\because\ r\ \text{の置き方と}\ w'(\theta) = \tfrac{a^2\theta}{2})\\
 &= \frac{a^2\theta}{4\,r(\theta)}
@@ -3809,7 +3953,7 @@ r'(\theta)
       displayMath(String.raw`\begin{aligned}
 G'(\theta)
 &= \frac{1\cdot\delta^2 r(\theta) - \theta\cdot\delta^2 r'(\theta)}{\left(\delta^2 r(\theta)\right)^2}
-&&(\because\ \text{微分の公式の商と定数倍。}\delta^2 r(\theta) \neq 0)\\
+&&(\because\ \text{微分の公式の商と定数倍。上の}\ \delta^2 r(\theta) \neq 0)\\
 &= \frac{\delta^2 r(\theta) - \theta\cdot\delta^2\,\dfrac{a^2\theta}{4\,r(\theta)}}{\left(\delta^2 r(\theta)\right)^2}
 &&(\because\ r'(\theta) = \tfrac{a^2\theta}{4 r(\theta)})\\
 &= \frac{\delta^2 r(\theta) - \delta^2\,\dfrac{a^2\theta^2}{4\,r(\theta)}}{\delta^4\,r(\theta)^2}
@@ -3966,6 +4110,7 @@ r(\pi)^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 準備が「上の 0 < δ² から w(θ) ≥ δ² > 0」「def_three_halves_power と同じ理由で r(θ) > 0」と根拠を書かずに述べ、G' の鎖が δ² r(θ) ≠ 0 を根拠なしに使い、平方根の引数の非負と分母の非零を示す前に r(θ)・G(θ) を置いていた。0 < 4 から 4 ≠ 0 と 0 ≤ 4^{-1}、real_square_is_nonnegative（r → a, r → θ）と順序と乗法の両立と def_real_quotient で 0 ≤ a²θ²/4、加法の単位元・順序と加法の両立・加法の交換律で δ² ≤ w(θ)、def_real_strict_order・順序の推移律・反対称律・等号の対称律で 0 < w(θ)、sqrt_of_positive_real_is_positive（x → w(θ)）で 0 < r(θ)、def_real_strict_order と対称律の対偶で r(θ) ≠ 0、real_product_of_positives_is_positive（a → δ², b → r(θ)）と def_real_strict_order と対称律の対偶で δ² r(θ) ≠ 0 を出す鎖にし、r(θ)・G(θ) を置く段をそれぞれの後へ移した。Lean の具体版 integral_inv_pow_three_half_pi の sq_nonneg・linarith・Real.sqrt_nonneg・lt_of_le_of_ne・mul_ne_zero を同じ鎖にした。値と主張は不変。",
         "2026-11-27（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 準備の δ² > 0 を、仮定の 0 < δ に real_product_of_positives_is_positive（a → δ, b → δ）を当てて 0 < δδ、square_of_real_number_is_product（r → δ）を右辺から左辺へ当てて δ² に戻す鎖にし、正値性の段の「同じ理由で 0 < δ²」を準備の 0 < δ² への参照に替えた。Lean の integral_inv_pow_three_half_pi の mul_pos・pow_two を同じ鎖にした。値と主張は不変。",
         "2026-11-09（Lean の通しの証明のゴールラインの確認、二回目）: π > 0 から出す aπ > 0・aπ ≠ 0・aπ/2 > 0・2/(aπ r(π)) > 0・π/δ² > 0 を、正の数どうしの積と正の数の逆数は正（ℝ は順序体 set_and_algebra_notation）の段を書いて G' の連続性の後の段落に置き、鎖の根拠 5 か所（δ² > 0 を含む）を「上の」で引く形にした。値と主張は不変。",
         "2026-11-27（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」の順序の (a) の残り）: 正値性の段の「ℝ で正の数の逆数は正（ℝ は順序体）」と「0 < 2 の積で」「逆数をとって」「0 < π の積で」を、def_real_strict_order で ≠ 0 を出し、real_inverse_of_positive_is_positive で逆元の正値、real_zero_less_than_two・real_product_of_positives_is_positive で積の正値、def_real_quotient で商へ戻す二つの鎖にした。aπ ≠ 0 も def_real_strict_order から出す。Lean の具体版 integral_inv_pow_three_half_pi の one_div_pos・ne_of_gt の段を同じ主張で書き直した。",

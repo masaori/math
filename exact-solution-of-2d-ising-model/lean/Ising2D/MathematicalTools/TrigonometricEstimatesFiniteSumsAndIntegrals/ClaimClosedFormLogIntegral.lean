@@ -353,40 +353,88 @@ theorem integral_inv_sqrt_pi_bounds {δ : ℝ} (hδ : 0 < δ) :
 無いので、証明の中の段で受ける。`π > 0` は mathlib の `Real.pi_pos`、`r(θ)² = w(θ)` は mathlib の `Real.sq_sqrt`、
 微分の公式は mathlib の `hasDerivAt_id'`・`HasDerivAt.mul`・`HasDerivAt.const_mul`・`HasDerivAt.div_const`・
 `HasDerivAt.const_add`・`HasDerivAt.sqrt`・`HasDerivAt.div`・`HasDerivAt.inv`（商 `1/x` を逆数で書く）、「微分可能な関数は連続」は
-`HasDerivAt.continuousAt`、(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、`r(θ) ≥ 0` は `Real.sqrt_nonneg`、
+`HasDerivAt.continuousAt`、(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、
 順序体の積の正値性は `real_product_of_positives_is_positive`、準備の `δ² = δδ` は `square_of_real_number_is_product`、逆数の正値性は `real_inverse_of_positive_is_positive`、
-商は `def_real_quotient` の具体版 `real_div_eq_mul_inv` で受ける。 -/
+商は `def_real_quotient` の具体版 `real_div_eq_mul_inv` で受ける。準備の `4 ≠ 0`・`0 ≤ 4⁻¹`・`0 ≤ a²θ²/4`・`δ² ≤ w(θ)`・
+`0 < w(θ)`・`0 < r(θ)`・`r(θ) ≠ 0`・`δ² r(θ) ≠ 0` は人手の鎖どおり、有理数の大小比較の `0 < 4`（`norm_num`）・`def_real_strict_order`・
+論理積の前半と後半・等号の対称律の対偶・`real_inverse_of_positive_is_positive`・`real_square_is_nonnegative`・順序と乗法の両立
+（`mul_nonneg`）・`def_real_quotient`・加法の単位元（`zero_add`）・順序と加法の両立（`add_le_add_left`）・加法の交換律（`add_comm`）・
+順序の推移律（`le_trans`）・反対称律（`le_antisymm`）・`sqrt_of_positive_real_is_positive`・`real_product_of_positives_is_positive` で受ける。
+人手は `θ ∈ [0,π]` について述べるが、この鎖は `θ ≥ 0` を使わないので Lean は `θ ∈ ℝ` 全体で述べる。 -/
 theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) :
     (∫ θ in (0:ℝ)..Real.pi,
         ((δ ^ 2 + a ^ 2 * θ ^ 2 / 4) * Real.sqrt (δ ^ 2 + a ^ 2 * θ ^ 2 / 4))⁻¹)
       ≤ 2 / (a * δ ^ 2) := by
-  -- 準備: `w(θ) := δ² + a²θ²/4`, `r(θ) := √w(θ)`, `G(θ) := θ/(δ² r(θ))`
+  -- 準備: `w(θ) := δ² + a²θ²/4`
   set w : ℝ → ℝ := fun θ => δ ^ 2 + a ^ 2 * θ ^ 2 / 4 with hw_def
-  set r : ℝ → ℝ := fun θ => Real.sqrt (w θ) with hr_def
-  set G : ℝ → ℝ := fun θ => θ / (δ ^ 2 * r θ) with hG_def
-  have hδne : δ ≠ 0 := ne_of_gt hδ
   -- 準備の `0 < δ²` の鎖
   have hδsq : 0 < δ ^ 2 :=
     calc 0 < δ * δ := real_product_of_positives_is_positive δ δ hδ hδ
                                         -- 仮定の `0 < δ` に `real_product_of_positives_is_positive`（`a → δ, b → δ`）
       _ = δ ^ 2 := (square_of_real_number_is_product δ).symm
                                         -- `square_of_real_number_is_product`（`r → δ`）を右辺から左辺へ
-  -- 上の `0 < δ²` から `w(θ) ≥ δ² > 0`
+  -- 準備の `4 ≠ 0` と `0 ≤ 4⁻¹` の鎖
+  have h4 : (0 : ℝ) < 4 := by norm_num  -- 有理数の大小比較の `0 < 4`
+  have h4' : 0 ≤ (4 : ℝ) ∧ (0 : ℝ) ≠ 4 := (real_lt_iff_le_and_ne 0 4).mp h4
+                                        -- `def_real_strict_order`（`x → 0, y → 4`）
+  have h4ne : (4 : ℝ) ≠ 0 := fun h => h4'.2 h.symm
+                                        -- 論理積の後半と、等号の対称律（`x → 4, y → 0`）の対偶
+  have h4inv : 0 ≤ (4 : ℝ)⁻¹ :=
+    ((real_lt_iff_le_and_ne 0 (4 : ℝ)⁻¹).mp (real_inverse_of_positive_is_positive 4 h4)).1
+                                        -- `real_inverse_of_positive_is_positive`（`a → 4`）、
+                                        -- `def_real_strict_order`（`x → 0, y → 4⁻¹`）、論理積の前半
+  -- 準備の `0 ≤ a²θ²/4` の鎖
+  have haθ4 : ∀ θ : ℝ, 0 ≤ a ^ 2 * θ ^ 2 / 4 := fun θ => by
+    have h1 : 0 ≤ a ^ 2 * θ ^ 2 :=
+      mul_nonneg (real_square_is_nonnegative a) (real_square_is_nonnegative θ)
+                                        -- `real_square_is_nonnegative`（`r → a`, `r → θ`）と順序と乗法の両立（`x → a², y → θ²`）
+    have h2 : 0 ≤ a ^ 2 * θ ^ 2 * (4 : ℝ)⁻¹ := mul_nonneg h1 h4inv
+                                        -- 上の `0 ≤ 4⁻¹` と順序と乗法の両立（`x → a²θ², y → 4⁻¹`）
+    rw [real_div_eq_mul_inv (a ^ 2 * θ ^ 2) 4 h4ne]
+                                        -- `def_real_quotient`（`y → a²θ², z → 4`）を右辺から左辺へ。`4 ≠ 0`
+    exact h2
+  -- 準備の `δ² ≤ w(θ)` の鎖
+  have hδle : ∀ θ : ℝ, δ ^ 2 ≤ w θ := fun θ =>
+    calc δ ^ 2 = 0 + δ ^ 2 := (zero_add (δ ^ 2)).symm
+                                        -- 加法の単位元 `0 + x = x`（`x → δ²`）を右辺から左辺へ
+      _ ≤ a ^ 2 * θ ^ 2 / 4 + δ ^ 2 := add_le_add_left (haθ4 θ) (δ ^ 2)
+                                        -- 順序と加法の両立（`x → 0, y → a²θ²/4, t → δ²`）
+      _ = δ ^ 2 + a ^ 2 * θ ^ 2 / 4 := add_comm (a ^ 2 * θ ^ 2 / 4) (δ ^ 2)
+                                        -- 加法の交換律（`x → a²θ²/4, y → δ²`）
+      _ = w θ := rfl                    -- `w` の置き方
+  -- 準備の `0 < w(θ)` の鎖
+  have hδsq' : 0 ≤ δ ^ 2 ∧ (0 : ℝ) ≠ δ ^ 2 := (real_lt_iff_le_and_ne 0 (δ ^ 2)).mp hδsq
+                                        -- `def_real_strict_order`（`x → 0, y → δ²`）
+  have hw_le : ∀ θ : ℝ, 0 ≤ w θ := fun θ => le_trans hδsq'.1 (hδle θ)
+                                        -- 順序の推移律（`x → 0, y → δ², t → w(θ)`）
+  have hw_ne : ∀ θ : ℝ, (0 : ℝ) ≠ w θ := fun θ e => by
+    have h1 : δ ^ 2 ≤ 0 := by rw [e]; exact hδle θ
+                                        -- 上の `δ² ≤ w(θ)` の右辺に代入
+    have h2 : δ ^ 2 = 0 := le_antisymm h1 hδsq'.1
+                                        -- 上の `0 ≤ δ²` と順序の反対称律（`x → δ², y → 0`）
+    exact hδsq'.2 h2.symm              -- 等号の対称律で `0 = δ²`。上の `0 ≠ δ²` に反する
   have hw : ∀ θ : ℝ, 0 < w θ := fun θ =>
-    calc 0 < δ ^ 2 := hδsq              -- 上の `0 < δ²`
-      _ ≤ δ ^ 2 + a ^ 2 * θ ^ 2 / 4 := by
-            have := mul_nonneg (sq_nonneg a) (sq_nonneg θ); linarith
-                                        -- `a²θ²/4 ≥ 0`
+    (real_lt_iff_le_and_ne 0 _).mpr ⟨hw_le θ, hw_ne θ⟩
+                                        -- `def_real_strict_order`（`x → 0, y → w(θ)`）を右辺から左辺へ
+  -- `0 ≤ w(θ)` なので `r(θ) := √w(θ)` と置く
+  set r : ℝ → ℝ := fun θ => Real.sqrt (w θ) with hr_def
   -- `r(θ)² = w(θ)`（`definition_of_sqrt_r_positive`）
-  have hrsq : ∀ θ : ℝ, r θ ^ 2 = w θ := fun θ => Real.sq_sqrt (hw θ).le
-  -- `def_three_halves_power` と同じ理由で `r(θ) > 0`: `r(θ) ≥ 0` と `r(θ)² = w(θ) > 0`
-  have hrne : ∀ θ : ℝ, r θ ≠ 0 := by
-    intro θ hr0
-    have h := hrsq θ
-    rw [hr0] at h
-    linarith [hw θ]                     -- `0² = 0 < w(θ)` に反する
-  have hrpos : ∀ θ : ℝ, 0 < r θ := fun θ =>
-    lt_of_le_of_ne (Real.sqrt_nonneg _) (hrne θ).symm
+  have hrsq : ∀ θ : ℝ, r θ ^ 2 = w θ := fun θ => Real.sq_sqrt (hw_le θ)
+  -- `0 < r(θ)`、`r(θ) ≠ 0`、`0 < δ² r(θ)`、`δ² r(θ) ≠ 0` の鎖
+  have hrpos : ∀ θ : ℝ, 0 < r θ := fun θ => sqrt_of_positive_real_is_positive _ (hw θ)
+                                        -- `sqrt_of_positive_real_is_positive`（`x → w(θ)`）と `r` の置き方
+  have hrne : ∀ θ : ℝ, r θ ≠ 0 := fun θ => fun h => ((real_lt_iff_le_and_ne 0 _).1 (hrpos θ)).2 h.symm
+                                        -- `def_real_strict_order`（`x → 0, y → r(θ)`）、論理積の後半、
+                                        -- 等号の対称律（`x → r(θ), y → 0`）の対偶
+  have hdpos : ∀ θ : ℝ, 0 < δ ^ 2 * r θ := fun θ =>
+    real_product_of_positives_is_positive _ _ hδsq (hrpos θ)
+                                        -- 上の `0 < δ²` に `real_product_of_positives_is_positive`（`a → δ², b → r(θ)`）
+  have hdne' : ∀ θ : ℝ, δ ^ 2 * r θ ≠ 0 := fun θ =>
+    have h : 0 ≤ δ ^ 2 * r θ ∧ (0 : ℝ) ≠ δ ^ 2 * r θ := (real_lt_iff_le_and_ne 0 _).mp (hdpos θ)
+                                        -- `def_real_strict_order`（`x → 0, y → δ² r(θ)`）
+    fun e => h.2 e.symm                 -- 論理積の後半と、等号の対称律（`x → δ² r(θ), y → 0`）の対偶
+  -- `δ² r(θ) ≠ 0` なので `G(θ) := θ/(δ² r(θ))` と置く
+  set G : ℝ → ℝ := fun θ => θ / (δ ^ 2 * r θ) with hG_def
   -- `w'(θ) = a²θ/2`（微分の公式の和・定数倍・積と、定数関数の導関数 0、恒等関数の導関数 1）
   have hw' : ∀ θ : ℝ, HasDerivAt w (a ^ 2 * θ / 2) θ := by
     intro θ
@@ -403,9 +451,9 @@ theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) 
   -- `r'(θ) = a²θ/(4 r(θ))`
   have hr' : ∀ θ : ℝ, HasDerivAt r (a ^ 2 * θ / (4 * r θ)) θ := by
     intro θ
-    -- 微分の公式の平方根と合成（`w(θ) > 0`）
+    -- 微分の公式の平方根と合成（上の `0 ≠ w(θ)` と等号の対称律）
     have h : HasDerivAt r (a ^ 2 * θ / 2 / (2 * Real.sqrt (w θ))) θ :=
-      (hw' θ).sqrt (ne_of_gt (hw θ))
+      (hw' θ).sqrt (hw_ne θ).symm       -- 上の `0 ≠ w(θ)`
     have hval : a ^ 2 * θ / 2 / (2 * Real.sqrt (w θ)) = a ^ 2 * θ / (4 * r θ) :=
       calc a ^ 2 * θ / 2 / (2 * Real.sqrt (w θ))
           = 1 / (2 * r θ) * (a ^ 2 * θ / 2) := by
@@ -418,7 +466,7 @@ theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) 
   -- `G'(θ) = 1/w(θ)^{3/2}`
   have hG' : ∀ θ : ℝ, HasDerivAt G (w θ * Real.sqrt (w θ))⁻¹ θ := by
     intro θ
-    have hdne : δ ^ 2 * r θ ≠ 0 := mul_ne_zero (pow_ne_zero 2 hδne) (hrne θ)
+    have hdne : δ ^ 2 * r θ ≠ 0 := hdne' θ  -- 上の `δ² r(θ) ≠ 0`
     -- 微分の公式の商と定数倍（`δ² r(θ) ≠ 0`）と `r'(θ) = a²θ/(4r(θ))`。`HasDerivAt` は導関数の値と組で出るので
     -- 本文の `G'` の鎖の 1・2 行目は一段になる
     have h : HasDerivAt G

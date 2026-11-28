@@ -19,6 +19,27 @@ for d0 in DPTS:
     assert d0 > 0 and d0*d0 > 0 and d0*d0 == d0^2                        # 1 行目の < と 2 行目の等号を QQ の点で
 assert not (QQ(0)*QQ(0) > 0)                                           # 対照: 仮定 0 < δ を外した δ = 0 では 0 < δδ は成り立たない
 print(f"準備の 0 < δδ = δ² の鎖が QQ[δ] と {len(DPTS)} 点の QQ で成り立つ")
+# 準備の 4 ≠ 0・0 ≤ 4^{-1}・0 ≤ a²θ²/4・δ² ≤ w(θ)・0 < w(θ)・0 < r(θ)・0 < δ²r(θ)・δ²r(θ) ≠ 0 の鎖
+assert QQ(0) < 4 and (0 <= QQ(4) and 0 != QQ(4)) and QQ(4) != 0     # 0 < 4、def_real_strict_order、論理積の後半、対称律の対偶
+assert 0 < 1/QQ(4) and (0 <= 1/QQ(4) and 0 != 1/QQ(4))             # real_inverse_of_positive_is_positive と def_real_strict_order
+Padt.<aq, dq, tq> = QQ[]
+assert 0 + dq^2 == dq^2 and aq^2*tq^2/4 + dq^2 == dq^2 + aq^2*tq^2/4 and aq^2*tq^2 * (1/QQ(4)) == aq^2*tq^2/4   # 単位元・交換律・def_real_quotient を QQ[a,δ,θ] で
+nq = 0
+for d0 in DPTS:
+    for a0 in [QQ(1)/2, QQ(1), QQ(3)]:
+        for t0 in [QQ(0), QQ(1), QQ(3141)/1000, QQ(-2)]:
+            assert 0 <= a0^2 and 0 <= t0^2 and 0 <= a0^2*t0^2                     # real_square_is_nonnegative（r → a, r → θ）と乗法の両立
+            assert 0 <= a0^2*t0^2 * (1/QQ(4)) and a0^2*t0^2 * (1/QQ(4)) == a0^2*t0^2/4   # 乗法の両立と def_real_quotient
+            w0 = d0^2 + a0^2*t0^2/4
+            assert d0^2 == 0 + d0^2 and 0 + d0^2 <= a0^2*t0^2/4 + d0^2 and a0^2*t0^2/4 + d0^2 == w0   # δ² ≤ w(θ) の 4 行
+            assert (0 <= d0^2 and 0 != d0^2) and 0 <= w0 and 0 != w0 and 0 < w0    # 推移律・反対称律の背理・def_real_strict_order
+            r0 = AA(w0).sqrt()
+            assert r0^2 == w0 and 0 < r0                                          # definition_of_sqrt_r_positive と sqrt_of_positive_real_is_positive
+            assert (0 <= r0 and 0 != r0) and r0 != 0                              # def_real_strict_order、論理積の後半、対称律の対偶で r(θ) ≠ 0
+            assert 0 < d0^2 * r0 and (0 <= d0^2 * r0 and 0 != d0^2 * r0) and d0^2 * r0 != 0   # 積の正値、def_real_strict_order、対称律の対偶
+            nq += 1
+assert not (0 < QQ(0)^2 + QQ(1)^2*QQ(0)^2/4)                           # 対照: 0 < δ² を外した δ = 0, θ = 0 では 0 < w(θ) は成り立たない
+print(f"準備の 4 ≠ 0・0 ≤ 4^(-1)・0 ≤ a²θ²/4・δ² ≤ w(θ)・0 < w(θ)・0 < r(θ)・r(θ) ≠ 0・δ²r(θ) ≠ 0 の鎖が QQ[a,δ,θ] と {nq} 点で成り立つ")
 K0 = PolynomialRing(QQ, 'av,dv').fraction_field(); av, dv = K0.gens()
 Ft.<t> = FunctionField(K0); RS.<S> = Ft[]; L.<r> = Ft.extension(S^2 - (dv^2 + av^2*t^2/4))
 D = L.derivation()

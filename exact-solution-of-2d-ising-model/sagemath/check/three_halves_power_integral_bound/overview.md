@@ -6,13 +6,14 @@
 
 - ファイル: `structured-latex/content/020_critical_point.ts`
 - ブロック: `critical_claim_three_halves_power_integral_bound`（δ, a > 0 なら ∫_0^π dθ/(δ²+a²θ²/4)^{3/2} ≤ 2/(aδ²)）
-- 範囲: 準備の 0 < δδ = δ² の鎖、w' の鎖、r' の鎖、G' の鎖、正値性の段の二つの鎖（0 < 2·(aπr(π))^{-1} = 2/(aπr(π))、0 < π·(δ²)^{-1} = π/δ²）、r(π) > aπ/2 の背理法の鎖、積分の鎖
+- 範囲: 準備の 0 < δδ = δ² の鎖、準備の 4 ≠ 0・0 ≤ 4^{-1}・0 ≤ a²θ²/4・δ² ≤ w(θ)・0 < w(θ)・0 < r(θ)・r(θ) ≠ 0・δ²r(θ) ≠ 0 の鎖、w' の鎖、r' の鎖、G' の鎖、正値性の段の二つの鎖（0 < 2·(aπr(π))^{-1} = 2/(aπr(π))、0 < π·(δ²)^{-1} = π/δ²）、r(π) > aπ/2 の背理法の鎖、積分の鎖
 
 ## 証明の行との対応
 
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 準備の 0 < δδ = δ² の鎖（`real_product_of_positives_is_positive`・`square_of_real_number_is_product`） | `check_proof_lines.sage` | 2 行目の等号を QQ[δ] で、1 行目の < と 2 行目の等号を 6 点の QQ で厳密に。対照は δ = 0 で < が成り立たないこと | **PASS** | 成り立つ |
+| 準備の 4 ≠ 0・0 ≤ 4^{-1}・0 ≤ a²θ²/4・δ² ≤ w(θ)・0 < w(θ)・0 < r(θ)・r(θ) ≠ 0・δ²r(θ) ≠ 0 の鎖（`def_real_strict_order`・`real_inverse_of_positive_is_positive`・`real_square_is_nonnegative`・順序と乗法の両立・`def_real_quotient`・加法の単位元・順序と加法の両立・加法の交換律・順序の推移律・反対称律・`definition_of_sqrt_r_positive`・`sqrt_of_positive_real_is_positive`・`real_product_of_positives_is_positive`） | `check_proof_lines.sage` | 等号の行を QQ[a,δ,θ] で、各行を 6 点の δ・3 点の a・4 点の θ（QQ。r(θ) は AA）で厳密に。対照は δ = θ = 0 で < が成り立たないこと | **PASS** | 成り立つ |
 | w' の鎖 | `check_proof_lines.sage` | QQ[a,δ,θ] の多項式の微分として厳密に | **PASS** | 成り立つ |
 | r' の鎖と G' の鎖の各行（最後は def_three_halves_power の w√w） | `check_proof_lines.sage` | 関数体 QQ(a,δ)(θ)[r]/(r²-δ²-a²θ²/4) の θ についての微分で、D(G) と各行が一致 | **PASS** | 成り立つ |
 | 正値性の段の二つの鎖の 2 行目（`def_real_quotient` を右辺から左辺へ）の等号 | `check_proof_lines.sage` | π を不定元に置いた QQ(a,δ,p)[r]/(r²-δ²-a²p²/4) で厳密に | **PASS** | 成り立つ |
