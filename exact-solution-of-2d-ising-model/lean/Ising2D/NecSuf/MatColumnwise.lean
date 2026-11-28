@@ -2,8 +2,8 @@
 # 行列の積は列ごとに作用する（**必要十分版**）
 
 具体版: `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimMatColumnwise.lean`
-（人手 `mat_columnwise`）。具体版をこのファイルの系として導くのと `TensorPow M` での系は、同じフォルダの
-`ClaimMatColumnwiseFromNecSuf.lean`。
+（人手 `mat_columnwise`）。`Mat(2^M, ℂ)` の場合の具体版は同じフォルダの `ClaimTensorPowMatColumnwise.lean`。
+具体版（両方）をこのファイルの系として導くのは、同じフォルダの `ClaimMatColumnwiseFromNecSuf.lean`。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |

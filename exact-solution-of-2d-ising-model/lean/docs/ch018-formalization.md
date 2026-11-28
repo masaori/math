@@ -90,7 +90,7 @@
 | `CheckFermi.Qproj_mulVec_epsilon_mulVec_generator` | `Q̌_ε(εq) = εq`（人手の 4 行） | (1) |
 | `CheckFermi.generator_eq_eta_mul_eta_smul` / `eta_mul_eta_sub_one_smul_generator` / `eta_mem_of_mul_self_sub_one` | `q = (ηη)q`（7 行）、`(ηη − 1)q = O`（4 行）、`(η − 1)(η + 1) = 0`（9 行）から `η ∈ {±1}` | (1) |
 | `CheckFermi.smul_generator_cancel` | `q ≠ 0`, `aq = bq ⇒ a = b`（成分 `q_k ≠ 0` で約す） | (1) の「一意に定まる」 |
-| `CheckFermi.epsilon_mul_Qproj_mulVec` / `epsilon_mul_Qproj_eq_smul_of_mulVec` | `(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）、列ごとに `εQ̌_ε = ηQ̌_ε`（7 行。`mat_columnwise` の `mul_columns_tensorPow`） | (1) |
+| `CheckFermi.epsilon_mul_Qproj_mulVec` / `epsilon_mul_Qproj_eq_smul_of_mulVec` | `(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）、列ごとに `εQ̌_ε = ηQ̌_ε`（7 行。`mat_columnwise` の `Mat(2^M, ℂ)` の場合の具体版 `mul_columns_tensorPow`（`ClaimTensorPowMatColumnwise.lean`）） | (1) |
 | **`CheckFermi.exists_eta_with_generator` / `exists_eta` / `eta` / `eta_mem` / `epsilon_mul_Qproj` / `exists_generator_of_eta`** | **`∃ η_ε ∈ {±1}, ε Q̌_ε = η_ε Q̌_ε`**（`η_ε` を定めた `q` と `εq = η_ε q` を組で持つ） | **(1)** |
 | `CheckFermi.smul_generator_eq_eta_smul` / **`eta_unique`** | 一意性の 6 行の鎖 `η'q = … = εq = ηq` と、`q ≠ 0` による `η' = η_ε` | **(1) の一意性** |
 | `CheckFermi.nOp_mulVec_generator_eq_zero` / `ann_mulVec_cre_mulVec_generator` / `cre_mulVec_generator_ne_zero` | `ň_μ q = 0`（6 行）、`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行。Lean の `ann μ` が人手の `ψ̌_{M+1−μ}`）、背理法の 3 行で `ψ̌_μ^† q ≠ 0` | (2) Step 1 |

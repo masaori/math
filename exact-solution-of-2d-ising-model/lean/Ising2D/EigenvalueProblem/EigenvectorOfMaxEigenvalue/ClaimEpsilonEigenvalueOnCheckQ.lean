@@ -36,7 +36,7 @@
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.CheckFermiInput
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimNegationInProductAndNegationPlusSelfInCC
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatColumnwiseFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowMatColumnwise
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowIdentityScalarMultipleAndDifferenceOnVectors
 import Ising2D.NecSuf.BinaryWordSumAsFinsetSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionSumOverBinaryWordsFromNecSuf
@@ -240,12 +240,14 @@ theorem epsilon_mul_Qproj_eq_smul_of_mulVec {T : Finset (Fin M)} {η : ℂ}
                                                         -- `identity_matrix_is_right_unit_of_mat_mult`
     _ = (epsilon M * F.Qproj T) * Matrix.of (fun j k => e k j) := rfl
                                                         -- `I = [e_1 ⋯ e_N]`
-    _ = Matrix.of (fun i k => ((epsilon M * F.Qproj T) *ᵥ e k) i) := mul_columns_tensorPow _ _
+    _ = Matrix.of (fun i k => ((epsilon M * F.Qproj T) *ᵥ e k) i) :=
+        mul_columns_tensorPow _ _ _ e (fun _ _ => rfl) (fun _ _ => rfl)
                                                         -- `mat_columnwise`
     _ = Matrix.of (fun i k => ((η • F.Qproj T) *ᵥ e k) i) := by
         exact congrArg Matrix.of (funext fun i => funext fun k => by rw [hx (e k)])
                                                         -- 上の等式を `N` 箇所へ同時適用
-    _ = (η • F.Qproj T) * Matrix.of (fun j k => e k j) := (mul_columns_tensorPow _ _).symm
+    _ = (η • F.Qproj T) * Matrix.of (fun j k => e k j) :=
+        (mul_columns_tensorPow _ _ _ e (fun _ _ => rfl) (fun _ _ => rfl)).symm
                                                         -- `mat_columnwise`
     _ = (η • F.Qproj T) * 1 := rfl                      -- `I = [e_1 ⋯ e_N]`
     _ = η • F.Qproj T := mul_identity_matrix_tensorPow _

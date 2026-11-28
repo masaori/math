@@ -5,7 +5,8 @@
 （`structured-latex/content/000_calculation_formulae_00_09.ts` の `calc_formulae_004_action_on_matrix_pair`）。
 
 **必要十分版**: `Ising2D/NecSuf/MatColumnwise.lean` の `NecSuf.mul_cols_eq_cols_mulVec`。
-具体版をその系として導くのと `TensorPow M` での系は `ClaimMatColumnwiseFromNecSuf.lean`。
+具体版をその系として導くのは `ClaimMatColumnwiseFromNecSuf.lean`。`Mat(2^M, ℂ)`（`TensorPow M`）の場合の具体版は
+`ClaimTensorPowMatColumnwise.lean` の `mul_columns_tensorPow`。
 
 ## 人手証明との対応
 

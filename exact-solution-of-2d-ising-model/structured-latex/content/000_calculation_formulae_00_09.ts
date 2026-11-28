@@ -2414,7 +2414,7 @@ y^2>x\ \land\ x>0
     origin: { path: "_old/typst/parts/000_計算公式/004_theorem_行列の組みへの作用.typ", ordinal: 5 },
     title: { text: "行列の積は列ごとに作用する" },
     labels: ["mat_columnwise"],
-    lean: ["Ising2D.matrix_mul_columns"],
+    lean: ["Ising2D.matrix_mul_columns", "Ising2D.mul_columns_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),

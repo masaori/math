@@ -2069,6 +2069,7 @@ targets=(
   Ising2D.matrix_mul_columns
   Ising2D.matrix_mul_columns_of_necSuf
   Ising2D.mul_columns_tensorPow
+  Ising2D.mul_columns_tensorPow_of_necSuf
   Ising2D.NecSuf.mul_cols_eq_cols_mulVec
   Ising2D.column_entry_mul_offdiag_eq_zero
   Ising2D.cols_mul_diagonal_matrix
