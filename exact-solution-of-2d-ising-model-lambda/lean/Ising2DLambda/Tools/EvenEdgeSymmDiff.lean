@@ -1,4 +1,4 @@
-import Mathlib.Combinatorics.SimpleGraph.Finite
+import Ising2DLambda.Tools.FiniteSimpleGraph
 import Mathlib.Data.Finset.SymmDiff
 import Mathlib.Tactic
 
@@ -17,6 +17,10 @@ def IsEvenEdgeSubsetOf (n : ℕ) (G : SimpleGraph (Fin n))
     [DecidableRel G.Adj] (A : Finset (Sym2 (Fin n))) : Prop :=
   A ⊆ G.edgeFinset ∧ IsEvenEdgeSet n A
 
+def IsEvenEdgeSubsetOfData (n : ℕ) (G : FiniteSimpleGraphEdgeData n)
+    (A : Finset (Sym2 (Fin n))) : Prop :=
+  A ⊆ G.edges ∧ IsEvenEdgeSet n A
+
 theorem edgeParity_symmDiff (n : ℕ) (A B : Finset (Sym2 (Fin n))) (v : Fin n) :
     edgeParity n (A ∆ B) v = edgeParity n A v + edgeParity n B v := by
   unfold edgeParity
@@ -32,10 +36,10 @@ theorem evenEdgeSet_symmDiff (n : ℕ) (A B : Finset (Sym2 (Fin n)))
   intro v
   rw [edgeParity_symmDiff, hA v, hB v, add_zero]
 
-theorem evenEdgeSubset_symmDiff (n : ℕ) (G : SimpleGraph (Fin n))
-    [DecidableRel G.Adj] (A B : Finset (Sym2 (Fin n)))
-    (hA : IsEvenEdgeSubsetOf n G A) (hB : IsEvenEdgeSubsetOf n G B) :
-    IsEvenEdgeSubsetOf n G (A ∆ B) := by
+theorem evenEdgeSubset_symmDiff (n : ℕ) (G : FiniteSimpleGraphEdgeData n)
+    (A B : Finset (Sym2 (Fin n)))
+    (hA : IsEvenEdgeSubsetOfData n G A) (hB : IsEvenEdgeSubsetOfData n G B) :
+    IsEvenEdgeSubsetOfData n G (A ∆ B) := by
   constructor
   · exact (Finset.symmDiff_subset_union).trans (Finset.union_subset hA.1 hB.1)
   · exact evenEdgeSet_symmDiff n A B hA.2 hB.2
