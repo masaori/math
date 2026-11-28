@@ -3560,13 +3560,17 @@ F'(\theta)
 \end{aligned}`),
       paragraph([
         math(String.raw`W`),
-        " は平方根と ",
-        math(String.raw`\mathbb{R}_{>0}`),
-        " に値をとる微分可能な関数 ",
+        " は平方根と微分可能な関数 ",
         math(String.raw`\theta \mapsto \delta^2 + \theta^2/4`),
-        " の合成なので微分可能で、",
+        " の合成で、上の ",
+        math(String.raw`0 < \delta^2 + \theta^2/4`),
+        " からこの関数は ",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " に値をとるので微分可能で（微分の公式の平方根と合成）、",
         math(String.raw`F' = \tfrac{1}{W}`),
-        " は分母が 0 でない商なので微分可能、したがって連続である（微分の公式）。",
+        " は上の ",
+        math(String.raw`W(\theta) \neq 0`),
+        " から分母が 0 でない商なので微分可能、したがって連続である（微分の公式）。",
       ]),
       displayMath(String.raw`\begin{aligned}
 F(0)
@@ -3922,6 +3926,22 @@ F(0)
 &&\bigl(\because\ \text{等号の対称律}\ (x \to \delta^2\,r(\theta),\ y \to 0)\ \text{の対偶}\bigr)
 \end{aligned}`),
       paragraph([
+        "であり、上の ",
+        math(String.raw`0 < r(\theta)`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < r(\theta)
+&\Longrightarrow 0 < w(\theta)\,r(\theta)
+&&\bigl(\because\ \text{上の}\ 0 < w(\theta)\ \text{に}\ \blkref{real_product_of_positives_is_positive}\ (a \to w(\theta),\ b \to r(\theta))\bigr)\\
+&\Longrightarrow 0 \leq w(\theta)\,r(\theta)\ \wedge\ 0 \neq w(\theta)\,r(\theta)
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to w(\theta)\,r(\theta))\bigr)\\
+&\Longrightarrow 0 \neq w(\theta)\,r(\theta)
+&&(\because\ \text{論理積の後半})\\
+&\Longrightarrow w(\theta)\,r(\theta) \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ (x \to w(\theta)\,r(\theta),\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      paragraph([
         "である。",
         math(String.raw`\delta^2\,r(\theta) \neq 0`),
         " なので ",
@@ -3944,7 +3964,7 @@ w'(\theta)
       displayMath(String.raw`\begin{aligned}
 r'(\theta)
 &= \frac{1}{2\sqrt{w(\theta)}}\,w'(\theta)
-&&(\because\ \text{微分の公式の平方根と合成。上の}\ 0 \neq w(\theta)\ \text{と等号の対称律})\\
+&&(\because\ \text{微分の公式の平方根と合成。上の}\ 0 < w(\theta)\ \text{から}\ w\ \text{は}\ \mathbb{R}_{>0}\ \text{に値をとる})\\
 &= \frac{1}{2\,r(\theta)}\cdot\frac{a^2\theta}{2}
 &&(\because\ r\ \text{の置き方と}\ w'(\theta) = \tfrac{a^2\theta}{2})\\
 &= \frac{a^2\theta}{4\,r(\theta)}
@@ -3972,8 +3992,18 @@ G'(\theta)
 &&(\because\ \blkref{def_three_halves_power})
 \end{aligned}`),
       paragraph([
+        math(String.raw`G'(\theta) = \tfrac{1}{w(\theta)\,r(\theta)}`),
+        "（",
+        ref("def_three_halves_power"),
+        " と ",
+        math(String.raw`r`),
+        " の置き方）の分母 ",
+        math(String.raw`\theta \mapsto w(\theta)\,r(\theta)`),
+        " は微分可能な関数の積なので微分可能で（微分の公式の積）、上の ",
+        math(String.raw`w(\theta)\,r(\theta) \neq 0`),
+        " から ",
         math(String.raw`G'`),
-        " は分母が 0 でない微分可能な関数の商なので微分可能、したがって連続である（微分の公式）。",
+        " は分母が 0 でない微分可能な関数の商なので微分可能、したがって連続である（微分の公式の商）。",
         ref("pi_is_positive"),
         " の ",
         math(String.raw`0 < \pi`),

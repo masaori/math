@@ -185,9 +185,11 @@ theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
     have hinner : HasDerivAt (fun t : ℝ => δ ^ 2 + t ^ 2 / 4) ((1 * θ + θ * 1) / 4) θ :=
       (hmul.div_const 4).const_add (δ ^ 2)
                                         -- 微分の公式（定数倍と、定数との和）
-    exact hinner.sqrt (ne_of_gt (hrad θ))
-                                        -- 微分の公式（平方根と合成）
-  -- `F' = 1/W` は分母が 0 でない商なので微分可能、したがって連続（微分の公式）
+    exact hinner.sqrt (fun e => ((real_lt_iff_le_and_ne 0 _).1 (hrad θ)).2 e.symm)
+                                        -- 微分の公式（平方根と合成）。上の `0 < δ² + θ²/4`（`ℝ_{>0}` に値をとる）。
+                                        -- mathlib の平方根の微分は引数 `≠ 0` で述べるので、`def_real_strict_order`
+                                        -- （`x → 0, y → δ² + θ²/4`）の後半と等号の対称律の対偶で渡す
+  -- `F' = 1/W` は上の `W(θ) ≠ 0` から分母が 0 でない商なので微分可能、したがって連続（微分の公式）
   have hcont : ContinuousOn (fun θ : ℝ => (W θ)⁻¹) (Set.uIcc 0 Real.pi) := by
     intro θ _
     exact ((hW' θ).inv (hWne θ)).continuousAt.continuousWithinAt
@@ -433,6 +435,13 @@ theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) 
     have h : 0 ≤ δ ^ 2 * r θ ∧ (0 : ℝ) ≠ δ ^ 2 * r θ := (real_lt_iff_le_and_ne 0 _).mp (hdpos θ)
                                         -- `def_real_strict_order`（`x → 0, y → δ² r(θ)`）
     fun e => h.2 e.symm                 -- 論理積の後半と、等号の対称律（`x → δ² r(θ), y → 0`）の対偶
+  have hwrpos : ∀ θ : ℝ, 0 < w θ * r θ := fun θ =>
+    real_product_of_positives_is_positive _ _ (hw θ) (hrpos θ)
+                                        -- 上の `0 < w(θ)` に `real_product_of_positives_is_positive`（`a → w(θ), b → r(θ)`）
+  have hwrne : ∀ θ : ℝ, w θ * r θ ≠ 0 := fun θ =>
+    have h : 0 ≤ w θ * r θ ∧ (0 : ℝ) ≠ w θ * r θ := (real_lt_iff_le_and_ne 0 _).mp (hwrpos θ)
+                                        -- `def_real_strict_order`（`x → 0, y → w(θ) r(θ)`）
+    fun e => h.2 e.symm                 -- 論理積の後半と、等号の対称律（`x → w(θ) r(θ), y → 0`）の対偶
   -- `δ² r(θ) ≠ 0` なので `G(θ) := θ/(δ² r(θ))` と置く
   set G : ℝ → ℝ := fun θ => θ / (δ ^ 2 * r θ) with hG_def
   -- `w'(θ) = a²θ/2`（微分の公式の和・定数倍・積と、定数関数の導関数 0、恒等関数の導関数 1）
@@ -451,9 +460,11 @@ theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) 
   -- `r'(θ) = a²θ/(4 r(θ))`
   have hr' : ∀ θ : ℝ, HasDerivAt r (a ^ 2 * θ / (4 * r θ)) θ := by
     intro θ
-    -- 微分の公式の平方根と合成（上の `0 ≠ w(θ)` と等号の対称律）
+    -- 微分の公式の平方根と合成（上の `0 < w(θ)` から `w` は `ℝ_{>0}` に値をとる）
     have h : HasDerivAt r (a ^ 2 * θ / 2 / (2 * Real.sqrt (w θ))) θ :=
-      (hw' θ).sqrt (hw_ne θ).symm       -- 上の `0 ≠ w(θ)`
+      (hw' θ).sqrt (fun e => ((real_lt_iff_le_and_ne 0 _).1 (hw θ)).2 e.symm)
+                                        -- mathlib の平方根の微分は引数 `≠ 0` で述べるので、上の `0 < w(θ)` を
+                                        -- `def_real_strict_order`（`x → 0, y → w(θ)`）の後半と等号の対称律の対偶で渡す
     have hval : a ^ 2 * θ / 2 / (2 * Real.sqrt (w θ)) = a ^ 2 * θ / (4 * r θ) :=
       calc a ^ 2 * θ / 2 / (2 * Real.sqrt (w θ))
           = 1 / (2 * r θ) * (a ^ 2 * θ / 2) := by
@@ -492,10 +503,11 @@ theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) 
                                         -- `def_three_halves_power`
     rw [hval] at h
     exact h
-  -- `G'` は分母が 0 でない微分可能な関数の商なので微分可能、したがって連続（微分の公式）
+  -- `G'(θ) = 1/(w(θ) r(θ))` の分母は微分可能な関数の積なので微分可能（微分の公式の積）で、上の
+  -- `w(θ) r(θ) ≠ 0` から `G'` は分母が 0 でない微分可能な関数の商なので微分可能、したがって連続（微分の公式の商）
   have hcont : ContinuousOn (fun θ : ℝ => (w θ * Real.sqrt (w θ))⁻¹) (Set.uIcc 0 Real.pi) := by
     intro θ _
-    exact (((hw' θ).mul (hr' θ)).inv (mul_ne_zero (ne_of_gt (hw θ)) (hrne θ))).continuousAt.continuousWithinAt
+    exact (((hw' θ).mul (hr' θ)).inv (hwrne θ)).continuousAt.continuousWithinAt
                                         -- 積と商（`1/x` を逆数で書く）の微分の公式と「微分可能な関数は連続」
   -- 正値性の段
   have hpi : 0 < Real.pi := Real.pi_pos -- `pi_is_positive`

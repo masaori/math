@@ -37,9 +37,10 @@ for d0 in DPTS:
             assert r0^2 == w0 and 0 < r0                                          # definition_of_sqrt_r_positive と sqrt_of_positive_real_is_positive
             assert (0 <= r0 and 0 != r0) and r0 != 0                              # def_real_strict_order、論理積の後半、対称律の対偶で r(θ) ≠ 0
             assert 0 < d0^2 * r0 and (0 <= d0^2 * r0 and 0 != d0^2 * r0) and d0^2 * r0 != 0   # 積の正値、def_real_strict_order、対称律の対偶
+            assert 0 < w0 * r0 and (0 <= w0 * r0 and 0 != w0 * r0) and w0 * r0 != 0   # G' の分母 w(θ)r(θ) の積の正値、def_real_strict_order、対称律の対偶
             nq += 1
 assert not (0 < QQ(0)^2 + QQ(1)^2*QQ(0)^2/4)                           # 対照: 0 < δ² を外した δ = 0, θ = 0 では 0 < w(θ) は成り立たない
-print(f"準備の 4 ≠ 0・0 ≤ 4^(-1)・0 ≤ a²θ²/4・δ² ≤ w(θ)・0 < w(θ)・0 < r(θ)・r(θ) ≠ 0・δ²r(θ) ≠ 0 の鎖が QQ[a,δ,θ] と {nq} 点で成り立つ")
+print(f"準備の 4 ≠ 0・0 ≤ 4^(-1)・0 ≤ a²θ²/4・δ² ≤ w(θ)・0 < w(θ)・0 < r(θ)・r(θ) ≠ 0・δ²r(θ) ≠ 0・w(θ)r(θ) ≠ 0 の鎖が QQ[a,δ,θ] と {nq} 点で成り立つ")
 K0 = PolynomialRing(QQ, 'av,dv').fraction_field(); av, dv = K0.gens()
 Ft.<t> = FunctionField(K0); RS.<S> = Ft[]; L.<r> = Ft.extension(S^2 - (dv^2 + av^2*t^2/4))
 D = L.derivation()
