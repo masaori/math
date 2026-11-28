@@ -20,7 +20,7 @@
 `ηsign = -η` であり、偶セクターは `(η, ηsign) = (1, -1)`、奇セクターは `(-1, 1)` である。
 
 `sector_replacement_pow` は `sector_replacement_of_V1` から純代数的に従う
-（必要十分版 `Ising2D.NecSuf.pow_mul_proj`、`Ising2D/NecSuf/Projector.lean`）。
+（同じ論法の必要十分版は `Ising2D.NecSuf.pow_mul_proj`、`Ising2D/NecSuf/Projector.lean`）。
 冪の置き換えに効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」
 「`V_1 P = V_1^{(±)} P`」の 3 点だけで、`P` が射影子の形をしていることすら使わない。
 -/
@@ -67,13 +67,39 @@ theorem sector_replacement_of_V1 {K1 : ℝ} {η : ℂ} (hM : 2 ≤ M) (hη : η 
   exact V1_restrictsOnSector_of_opposite_sign hM hη _ (epsProj_mulVec_mem hη _)
 
 /-- **ノートへ退避した `sector_replacement_pow`: `(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`**
-（`V_1, V_2` は `def_transfer_matrix` の転送行列。必要十分版 `Ising2D.NecSuf.pow_mul_proj` の系）。 -/
+（`V_1, V_2` は `def_transfer_matrix` の転送行列）。`n` についての帰納法で、
+`P` の冪等性・`P` と `V_1, V_2, V_1^{(±)}` の可換性・`V_1 P = V_1^{(±)} P` だけを使う。 -/
 theorem sector_replacement_pow {K1 K2 : ℝ} {η : ℂ} (hM : 2 ≤ M) (hK2 : 0 < K2)
-    (hη : η * η = 1) (n : ℕ) :
+    (hη : η * η = 1) : ∀ n : ℕ,
     (V1 M K1 * V2 M K2) ^ n * epsProj M η
-      = (V1pm M K1 (-η) * V2 M K2) ^ n * epsProj M η :=
-  NecSuf.pow_mul_proj (epsProj_sq hη) (commute_V1_epsProj K1 η)
-    (commute_V2_epsProj hK2 η) (commute_V1pm_epsProj K1 (-η) η)
-    (sector_replacement_of_V1 hM hη) n
+      = (V1pm M K1 (-η) * V2 M K2) ^ n * epsProj M η
+  | 0 => by rw [pow_zero, pow_zero]
+  | n + 1 => by
+      set P := epsProj M η with hPdef
+      set a := V1 M K1
+      set b := V2 M K2
+      set a' := V1pm M K1 (-η)
+      have hP : P * P = P := epsProj_sq hη
+      have hbP : Commute b P := commute_V2_epsProj hK2 η
+      have ha'P : Commute a' P := commute_V1pm_epsProj K1 (-η) η
+      have h : a * P = a' * P := sector_replacement_of_V1 hM hη
+      have hX : Commute ((a' * b) ^ n) P := (Commute.mul_left ha'P hbP).pow_left n
+      have ih : (a * b) ^ n * P = (a' * b) ^ n * P := sector_replacement_pow hM hK2 hη n
+      set Y : TensorPow M := (a' * b) ^ n * P with hYdef
+      have hPY : P * Y = Y := by
+        rw [hYdef, ← mul_assoc, ← hX.eq, mul_assoc, hP]
+      have hstep : a * (b * Y) = a' * (b * Y) := by
+        calc a * (b * Y) = a * (b * (P * Y)) := by rw [hPY]
+          _ = (a * P) * (b * Y) := by
+              rw [← mul_assoc b P Y, hbP.eq, mul_assoc P b Y, ← mul_assoc a P (b * Y)]
+          _ = (a' * P) * (b * Y) := by rw [h]
+          _ = a' * (b * (P * Y)) := by
+              rw [mul_assoc a' P (b * Y), ← mul_assoc P b Y, ← hbP.eq, mul_assoc b P Y]
+          _ = a' * (b * Y) := by rw [hPY]
+      calc (a * b) ^ (n + 1) * P
+          = a * (b * ((a * b) ^ n * P)) := by rw [pow_succ']; simp only [mul_assoc]
+        _ = a * (b * Y) := by rw [ih]
+        _ = a' * (b * Y) := hstep
+        _ = (a' * b) ^ (n + 1) * P := by rw [pow_succ']; simp only [mul_assoc, hYdef]
 
 end Ising2D

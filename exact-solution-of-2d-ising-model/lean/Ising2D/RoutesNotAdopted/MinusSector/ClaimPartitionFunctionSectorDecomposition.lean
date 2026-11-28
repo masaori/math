@@ -23,7 +23,7 @@ Lean の `((partitionFunction … : ℝ) : ℂ)` と同じ）:
 * Step 2（各セクターで `V_1 → V_1^{(±)}`）→ `sector_replacement_pow`
   （`RoutesNotAdopted/MinusSector/ClaimSectorReplacementOfV1.lean`）。
 * Step 3（対称形 `(B V_2 B)^n` の解消）→ `trace_epsProj_sym_pow`。
-  代数的な核は必要十分版 `Ising2D.NecSuf.mul_pow_conj_left`
+  代数的な核（`trace_epsProj_sym_pow` の中の帰納法）と同じ論法の必要十分版は `Ising2D.NecSuf.mul_pow_conj_left`
   （`B (B V B)^n = (B B V)^n B`、結合律のみ）。トレース側で使うのは
   巡回性 `Matrix.trace_mul_comm` と `P^{(±)}` が `B` と可換であることだけ。
 * Step 4（結論）→ `partition_function_sector_decomposition`。
@@ -70,9 +70,20 @@ theorem trace_epsProj_sym_pow {K1 K2 : ℝ} {ηsign η : ℂ} (n : ℕ) :
   have hBiB : Bi * B = 1 := (V1pmHalfUnits M K1 ηsign).inv_mul
   have hPB : epsProj M η * B = B * epsProj M η :=
     (commute_V1pmHalf_epsProj K1 ηsign η).symm.eq
+  -- `(B V B)^k` の対称形の解消: `B (BVB)^k = (BBV)^k B`（`k` についての帰納法）
+  have conj : ∀ k : ℕ, B * (B * V2 M K2 * B) ^ k = (B * B * V2 M K2) ^ k * B := by
+    intro k
+    induction k with
+    | zero => rw [pow_zero, pow_zero, mul_one, one_mul]
+    | succ k ih =>
+      calc B * (B * V2 M K2 * B) ^ (k + 1)
+          = (B * (B * V2 M K2 * B) ^ k) * (B * V2 M K2 * B) := by rw [pow_succ, ← mul_assoc]
+        _ = ((B * B * V2 M K2) ^ k * B) * (B * V2 M K2 * B) := by rw [ih]
+        _ = (B * B * V2 M K2) ^ k * (B * B * V2 M K2) * B := by simp only [mul_assoc]
+        _ = (B * B * V2 M K2) ^ (k + 1) * B := by rw [pow_succ]
   have key : B * (B * V2 M K2 * B) ^ n
       = (V1pm M K1 ηsign * V2 M K2) ^ n * B := by
-    rw [NecSuf.mul_pow_conj_left, hB, V1pmHalf_sq]
+    rw [conj, hB, V1pmHalf_sq]
   calc (epsProj M η * (Vsym M K1 ηsign K2) ^ n).trace
       = (Bi * (B * (epsProj M η * (B * V2 M K2 * B) ^ n))).trace := by
         rw [← mul_assoc, hBiB, one_mul, Vsym]

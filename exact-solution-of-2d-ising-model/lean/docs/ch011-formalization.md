@@ -185,7 +185,7 @@
 | `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(_pow)`（人手の鎖と 1 対 1） | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`Ising2D.rayleigh_bounds_operator_norm(_pow)_of_necSuf`。`isPsdPair_of_matrix` 経由） |
 | `trace_power_upper_bound` | `Ising2D.trace_power_upper_bound`（人手の鎖と 1 対 1） | `NecSuf.IsPsdPair.moment_le_pow`（各 `k` の評価。同じ偶奇の手順で、人手の【冪の対称性】と成分の鎖に当たる段は自己共役性から出る `moment_split`） | 各 `k` の評価は**はい**（`trace_power_upper_bound_of_necSuf`）。対角成分の和の段は有限の添字と ℝ の順序に固有なので具体版のみ（`Σ_k c^n = ι(d)c^n`・`ι(2^{M_col}) = 2^{M_col}` の段が引く主張の必要十分版は `NecSuf/NaturalNumberCastIntoSemiring.lean`） |
 | `trace_power_sandwich` | `Ising2D.trace_power_sandwich`（人手の鎖と 1 対 1） | 【単位ベクトルでの評価】の `NecSuf.IsPdPair.moment_ratio_le` / `moment_pow_le`（上からの評価は `trace_power_upper_bound` の行） | 【単位ベクトルでの評価】は**はい**（`moment_ge_moment_one_pow_of_necSuf`）。【正の実数の冪の比較】・【上限への移行】・跡の段は ℝ の順序と `sup` に固有なので具体版のみ |
-| `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
+| `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（最後の段 `BV_2BP = CV_2CP` を `B,C,V,P` の各因子へ特殊化。`sandwich_mul_epsProjPlus_eq_of_necSuf`、`PartitionFunction/ProjectionAndJordanWigner/PhysicalSymTransferBridgeFromNecSuf.lean`。具体版の最後の段は本文の 15 行の鎖と 1 対 1 の `calc`） |
 | `Z_equals_trace_of_W` | `Ising2D.trace_mul_pow_eq_trace_symmetrized_pow` | `Ising2D.NecSuf.trace_mul_pow_eq_trace_sandwich_pow`（`NecSuf/OpenProductPowAndCyclicTrace.lean`。モノイドと巡回的な写像） | **はい**（`trace_mul_pow_eq_trace_symmetrized_pow_of_necSuf`、`ClaimZEqualsTraceOfWFromNecSuf.lean`） |
 | `W_is_real_symmetric_positive_definite` | `Ising2D.physicalSymTransferC_isRealSymmetric` / `physicalSymTransferC_posDef` / `physicalSymTransferC_isUnit`（具体的な `W`）。`Ising2D.symTransfer_isSymm` / `symTransfer_posDef` は実行列の一般の形 | なし（下記） | — |
 | `W_has_positive_entries` | `Ising2D.W_has_positive_entries`（人手の主張の形。人手の Step 1〜3 の鎖と 1 対 1） / `W_has_positive_entries_physical` / `physicalSymTransferR_pos`（実成分で組んだ具体的な `W`。主張の形から導く）。`Ising2D.symTransfer_entry_pos` は一般の対角行列で挟んだ形で、人手の Step 3 の式変形は通らない | `Ising2D.NecSuf.sandwich_outer_term_of_ne` / `sandwich_inner_term_of_ne` / `sandwich_apply_eq_map` / `sandwich_weight_pos` / `sandwich_apply_pos`（`NecSuf/SandwichByDiagonal.lean`。Step 3 の補助の鎖 2 本・主の鎖・`w > 0` の鎖・主張の形を同じ並びで。添字は有限、係数 `R` は加法の可換モノイドと乗法で、`x·0 = 0`・`0·x = 0` を明示の仮定に置く。`B` は `l` 列・`k` 行の非対角成分が `0`、値は積を保つ写像 `φ : S → R` の像。正値性には `S` の「正の元どうしの積は正」だけ） | **はい**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`。`R := ℂ`・`S := ℝ`・`φ := ℝ → ℂ の埋め込み`、`B := V₁^{1/2}`・`V := V₂`） |
@@ -217,7 +217,7 @@
 
 - **`symmetrized_transfer_matrix_on_sectors` の射影子移動は任意の半群で閉じている。**
   `BP=CP` と `C,V` が `P` と可換であることだけを使い、`P` の冪等性も、行列・複素数・
-  転送行列であることも使わない。具体版はこの一般定理へ物理的な四因子を特殊化して得られる。
+  転送行列であることも使わない。具体版の段はこの一般定理へ物理的な四因子を特殊化して得られる（導出 `sandwich_mul_epsProjPlus_eq_of_necSuf`）。
 
 - **`tr((V₁V₂)^n) = tr(W^n)` に効いているのは、積の結合律・単位元・冪の定め方（モノイド）と、跡の巡回性 `τ(ab) = τ(ba)` だけである。**
   必要十分版 `NecSuf/OpenProductPowAndCyclicTrace.lean` は具体版と同じ段の calc を、任意のモノイドと巡回的な写像 `τ` で述べる。

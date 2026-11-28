@@ -93,9 +93,9 @@
 
 | 人手証明のラベル | 具体版 | 必要十分版 | 必要十分版で分かったこと |
 | --- | --- | --- | --- |
-| `epsilon_projector_properties` (1)（とノートの `P^{(+)}P^{(-)} = 0`・`P^{(+)} + P^{(-)} = I`） | `Ising2D.epsProjPlus_sq`（一般形 `epsProj_sq` 経由）/ `epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg`（**必要十分版の系として導出済み**） | `Ising2D.NecSuf.invProj_sq` ほか（`NecSuf/Projector.lean`） | 効いているのは **`ε² = I` と `2` が可逆であること**だけ。`ε` が Jordan–Wigner 文字列の積であることも、行列であることも、環が可換であることも効いていない |
-| `epsilon_projector_commutes_with_epsilon_commuting_matrix` | `Ising2D.commute_epsProjPlus_of_commute_epsilon`（**必要十分版の系**） | `Ising2D.NecSuf.commute_invProj` | 「`ε` と可換なら `P^{(+)}` とも可換」に効いているのはスカラー作用と加法の両立則だけ |
-| ノート `sector_replacement_pow` | `Ising2D.sector_replacement_pow`（**必要十分版の系**） | `Ising2D.NecSuf.pow_mul_proj` | 効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」「`V_1P = V_1^{(±)}P`」の 3 点だけ。**`P` が `(I±ε)/2` の形であることすら使わない**。すなわち「偶奇セクター」という言葉のうちこの段で使われている情報は冪等元と可換性だけである |
+| `epsilon_projector_properties` (1)（とノートの `P^{(+)}P^{(-)} = 0`・`P^{(+)} + P^{(-)} = I`） | `Ising2D.epsProjPlus_sq`（本文の 15 行の鎖を具体版の主張で 1 行ずつ）/ 一般形の記録 `epsProj_sq` / `epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg`（具体版。必要十分版の系としての導出は `ClaimEpsilonProjectorsFromNecSuf.lean` の `*_of_necSuf`） | `Ising2D.NecSuf.invProj_sq` ほか（`NecSuf/Projector.lean`） | 効いているのは **`ε² = I` と `2` が可逆であること**だけ。`ε` が Jordan–Wigner 文字列の積であることも、行列であることも、環が可換であることも効いていない |
+| `epsilon_projector_commutes_with_epsilon_commuting_matrix` | `Ising2D.commute_epsProjPlus_of_commute_epsilon`（一般形 `commute_epsProj_of_commute_epsilon` の `η = 1`。一般形が本文の 9 行の鎖を辿り、`η` の出し入れの 2 行と `1ε = ε` の段だけが本文に無い。必要十分版の系としての導出は `ClaimEpsilonProjectorsFromNecSuf.lean` の `commute_epsProj_of_commute_epsilon_of_necSuf`） | `Ising2D.NecSuf.commute_invProj` | 「`ε` と可換なら `P^{(+)}` とも可換」に効いているのはスカラー作用と加法の両立則だけ |
+| ノート `sector_replacement_pow` | `Ising2D.sector_replacement_pow`（`n` についての帰納法の具体版。必要十分版の系としての導出は `RoutesNotAdopted/MinusSector/ClaimSectorReplacementFromNecSuf.lean` の `sector_replacement_pow_of_necSuf`。`trace_epsProj_sym_pow` の中の対称形の解消の導出 `V1pmHalf_mul_sym_pow_of_necSuf` も同じファイル） | `Ising2D.NecSuf.pow_mul_proj` | 効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」「`V_1P = V_1^{(±)}P`」の 3 点だけ。**`P` が `(I±ε)/2` の形であることすら使わない**。すなわち「偶奇セクター」という言葉のうちこの段で使われている情報は冪等元と可換性だけである |
 | ノート `partition_function_sector_decomposition` Step 3 | `Ising2D.trace_epsProj_sym_pow` | `Ising2D.NecSuf.mul_pow_conj_left` | 対称形 `(BV_2B)^n` の解消は**結合律だけ**（原文の「結合法則で括り直すだけ」が文字どおり正しい）。トレース側で追加に要るのは巡回性と `P` と `B` の可換性のみで、`B` が `exp` であることは効いていない |
 
 必要十分版を置かなかった主張とその理由: 本章の主張は上の表のとおり必要十分版を持つか、その系である。

@@ -3052,9 +3052,6 @@ Ising2D.instFintypeSpinVal	Fintype
 Ising2D.instFintypeSpinVal	Fintype.subtype
 Ising2D.instFintypeSpinVal	Insert.insert@Real,Finset@Finset.instInsert
 Ising2D.instFintypeSpinVal	Singleton.singleton@Real,Finset@Finset.instSingleton
-Ising2D.instInvertibleTwoTensorPow	Invertible.mk@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid,Matrix.one
-Ising2D.instInvertibleTwoTensorPow	Invertible@Ising2D.TensorPow@Matrix.instMulOfFintypeOfAddCommMonoid,Matrix.one
-Ising2D.instInvertibleTwoTensorPow	OfNat.ofNat@Ising2D.TensorPow,2@instOfNatAtLeastTwo
 Ising2D.instNonemptySpinVal	Nonempty
 Ising2D.integral_d2gammaK_eq	MeasureTheory.MeasureSpace.volume@Real@Real.measureSpace
 Ising2D.integral_d2gammaK_eq	Real.cosh
@@ -3088,8 +3085,6 @@ Ising2D.interior_Dnbhd	OfNat.ofNat@Real,10@instOfNatAtLeastTwo
 Ising2D.interior_Dnbhd	Set
 Ising2D.interior_Dnbhd	Set.Ioo@Real@Real.instPreorder
 Ising2D.interior_Dnbhd	interior@Real@Real.pseudoMetricSpace
-Ising2D.invOf_two_tensorPow	Invertible.invOf@Ising2D.TensorPow,Matrix.instMulOfFintypeOfAddCommMonoid,Matrix.one,OfNat.ofNat@Ising2D.instInvertibleTwoTensorPow
-Ising2D.invOf_two_tensorPow	OfNat.ofNat@Ising2D.TensorPow,2@instOfNatAtLeastTwo
 Ising2D.inv_M_log_LambdaM	Finset.Icc@Nat@Nat.instPreorder,Nat.instLocallyFiniteOrder
 Ising2D.inv_M_log_LambdaM	Finset.sum@Nat,Real@Real.instAddCommMonoid
 Ising2D.inv_M_log_LambdaM	Real.log

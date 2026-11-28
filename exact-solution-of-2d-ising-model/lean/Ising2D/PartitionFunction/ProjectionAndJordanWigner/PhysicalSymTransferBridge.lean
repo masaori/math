@@ -114,7 +114,8 @@ theorem physicalSymTransferC_eq_map (K1 K2 : ℝ) :
 証明は本文と同じく、`V1_restriction_to_eigenspaces` に結合定数 `K_1/2` を代入して
 `f ∈ 𝓕^{(+)}` で `B f = C f` を得、`epsilon_projector_properties` (2) の `P^{(+)} x ∈ 𝓕^{(+)}` から
 `B P = C P` を作り、`P C = C P`, `P V₂ = V₂ P` を一行ずつ代入する。
-この代入の鎖で使う構造だけを残した必要十分版は `Ising2D.NecSuf.sandwich_mul_proj_eq` である。 -/
+この代入の鎖で使う構造だけを残した必要十分版は `Ising2D.NecSuf.sandwich_mul_proj_eq` で、
+特殊化としての導出は `PhysicalSymTransferBridgeFromNecSuf.lean` にある。 -/
 theorem symmetrized_transfer_matrix_on_sectors {K2 : ℝ} (K1 : ℝ)
     (hM : 2 ≤ M) (hK2 : 0 < K2) :
     (physicalSymTransferR M K1 K2).map Complex.ofRealHom * epsProjPlus M
@@ -146,6 +147,21 @@ theorem symmetrized_transfer_matrix_on_sectors {K2 : ℝ} (K1 : ℝ)
   have hCP : C * P = P * C := (commute_V1plusHalf_epsProjPlus (M := M) (K1 : ℂ)).eq
   have hVP : V * P = P * V := (commute_V2_epsProjPlus (M := M) hK2).eq
   change B * V * B * P = C * V * C * P
-  exact NecSuf.sandwich_mul_proj_eq hBP hCP hVP
+  -- 本文の 15 行の鎖（`mat_mult_associative` は具体版が無いので mathlib の `Matrix.mul_assoc`）
+  calc B * V * B * P
+      = (B * V) * (B * P) := Matrix.mul_assoc _ _ _          -- `mat_mult_associative`
+    _ = (B * V) * (C * P) := by rw [hBP]                      -- `BP = CP`
+    _ = (B * V) * (P * C) := by rw [hCP]                      -- `epsilon_projector_commutes_with_V1_plus_square_root`
+    _ = ((B * V) * P) * C := (Matrix.mul_assoc _ _ _).symm   -- `mat_mult_associative`
+    _ = (B * (V * P)) * C := by rw [Matrix.mul_assoc B V P]   -- `mat_mult_associative`
+    _ = (B * (P * V)) * C := by rw [hVP]                      -- `epsilon_projector_commutes_with_V2`
+    _ = ((B * P) * V) * C := by rw [Matrix.mul_assoc B P V]   -- `mat_mult_associative`
+    _ = ((C * P) * V) * C := by rw [hBP]                      -- `BP = CP`
+    _ = (C * (P * V)) * C := by rw [Matrix.mul_assoc C P V]   -- `mat_mult_associative`
+    _ = (C * (V * P)) * C := by rw [hVP]                      -- `epsilon_projector_commutes_with_V2`
+    _ = ((C * V) * P) * C := by rw [Matrix.mul_assoc C V P]   -- `mat_mult_associative`
+    _ = (C * V) * (P * C) := Matrix.mul_assoc _ _ _          -- `mat_mult_associative`
+    _ = (C * V) * (C * P) := by rw [hCP]                      -- `epsilon_projector_commutes_with_V1_plus_square_root`
+    _ = C * V * C * P := (Matrix.mul_assoc _ _ _).symm       -- `mat_mult_associative`
 
 end Ising2D

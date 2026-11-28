@@ -18,16 +18,18 @@
 `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した `(−)` セクターの議論
 （`partition_function_sector_decomposition` ほか）の形式化の記録として残してある。
 
-必要十分版は `Ising2D/NecSuf/Projector.lean`（同じラベル）。
-そこで確かめたとおり、(1) に効いているのは
-**`ε` が対合であること（`ε² = I`）と `2` が可逆であること**だけである。
-(1) は一般形 `epsProj_sq`（必要十分版 `Ising2D.NecSuf.invProj_sq` の系）を `η = 1` で使う。
+(1) は本文の 15 行の鎖（スカラー倍の出し入れ・分配律・単位行列・`ε² = I`・成分ごとの加法）を
+`TensorPow M` の具体版の主張で一行ずつ辿る（`epsProjPlus_sq`）。
+必要十分版は `Ising2D/NecSuf/Projector.lean`（同じラベル）。一般形がその特殊化であることは
+導出 `ClaimEpsilonProjectorsFromNecSuf.lean` だけが述べる。
 
 (2)（`im P^{(+)} = 𝓕^{(+)}`）は「行列がベクトルに作用する」という具体的な文脈が要るので、
 ベクトルの言葉で直接述べる。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
-import Ising2D.NecSuf.Projector
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInTensorPowProduct
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowMatMultDistributesOverSum
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 
 namespace Ising2D
 
@@ -35,34 +37,11 @@ open Matrix
 
 variable {M : ℕ}
 
-/-! ## `2` の可逆性 -/
-
-/-- `TensorPow M = Mat(2^M, ℂ)` では `2` は可逆で、逆元は `(1/2) I`。 -/
-noncomputable instance instInvertibleTwoTensorPow : Invertible (2 : TensorPow M) where
-  invOf := (1 / 2 : ℂ) • (1 : TensorPow M)
-  invOf_mul_self := by
-    have h2 : (2 : TensorPow M) = (2 : ℂ) • (1 : TensorPow M) := by
-      rw [← Algebra.algebraMap_eq_smul_one, map_ofNat]
-    rw [h2, smul_mul_smul_comm, one_mul]
-    norm_num
-  mul_invOf_self := by
-    have h2 : (2 : TensorPow M) = (2 : ℂ) • (1 : TensorPow M) := by
-      rw [← Algebra.algebraMap_eq_smul_one, map_ofNat]
-    rw [h2, smul_mul_smul_comm, one_mul]
-    norm_num
-
-theorem invOf_two_tensorPow : ⅟(2 : TensorPow M) = (1 / 2 : ℂ) • (1 : TensorPow M) := rfl
-
 /-! ## 射影子の定義 -/
 
 /-- 補助: 符号引数つきの一般形 `(I + ηε)/2`（`η = 1` が人手の `P^{(+)}`）。 -/
 noncomputable def epsProj (M : ℕ) (η : ℂ) : TensorPow M :=
   (1 / 2 : ℂ) • (1 + η • epsilon M)
-
-/-- 必要十分版の射影子との一致（`e = η ε`）。 -/
-theorem epsProj_eq_invProj (η : ℂ) :
-    epsProj M η = NecSuf.invProj (η • epsilon M) := by
-  rw [epsProj, NecSuf.invProj, invOf_two_tensorPow, smul_mul_assoc, one_mul]
 
 /-- `ε² = I`（人手 `epsilon_square_and_eigenvalues`。既存の `Ising2D.epsilon_mul_self` の言い換え）。 -/
 theorem epsilon_sq : epsilon M * epsilon M = 1 := epsilon_mul_self
@@ -72,27 +51,25 @@ theorem eta_smul_epsilon_sq {η : ℂ} (hη : η * η = 1) :
     (η • epsilon M) * (η • epsilon M) = 1 := by
   rw [smul_mul_smul_comm, epsilon_sq, hη, one_smul]
 
-/-- 補助: 一般形の冪等性（必要十分版の系）。 -/
+/-- 補助: 一般形の冪等性（退避した `(−)` セクターの議論が使う）。 -/
 theorem epsProj_sq {η : ℂ} (hη : η * η = 1) :
     epsProj M η * epsProj M η = epsProj M η := by
-  rw [epsProj_eq_invProj]
-  exact NecSuf.invProj_sq (eta_smul_epsilon_sq hη)
+  rw [epsProj, smul_mul_smul_comm, mul_add, add_mul, add_mul, one_mul, one_mul, mul_one,
+    eta_smul_epsilon_sq hη, add_comm (η • epsilon M) 1, ← two_smul ℂ (1 + η • epsilon M), smul_smul]
+  norm_num
 
-/-- 退避した `(−)` セクターの議論の記録: `P^{(+)}P^{(-)} = 0`（必要十分版の系）。 -/
+/-- 退避した `(−)` セクターの議論の記録: `P^{(+)}P^{(-)} = 0`。 -/
 theorem epsProj_mul_epsProj_neg {η : ℂ} (hη : η * η = 1) :
     epsProj M η * epsProj M (-η) = 0 := by
-  have h : epsProj M (-η) = NecSuf.invProj (-(η • epsilon M)) := by
-    rw [epsProj_eq_invProj, neg_smul]
-  rw [epsProj_eq_invProj, h]
-  exact NecSuf.invProj_mul_invProj_neg (eta_smul_epsilon_sq hη)
+  rw [epsProj, epsProj, smul_mul_smul_comm, neg_smul, ← sub_eq_add_neg, mul_sub, add_mul, add_mul,
+    one_mul, one_mul, mul_one, eta_smul_epsilon_sq hη, add_comm (η • epsilon M) 1, sub_self, smul_zero]
 
-/-- 退避した `(−)` セクターの議論の記録: `P^{(+)} + P^{(-)} = I`（必要十分版の系）。 -/
+/-- 退避した `(−)` セクターの議論の記録: `P^{(+)} + P^{(-)} = I`。 -/
 theorem epsProj_add_epsProj_neg (η : ℂ) :
     epsProj M η + epsProj M (-η) = 1 := by
-  have h : epsProj M (-η) = NecSuf.invProj (-(η • epsilon M)) := by
-    rw [epsProj_eq_invProj, neg_smul]
-  rw [epsProj_eq_invProj, h]
-  exact NecSuf.invProj_add_invProj_neg _
+  rw [epsProj, epsProj, ← smul_add, neg_smul, add_add_add_comm, add_neg_cancel, add_zero,
+    ← two_smul ℂ (1 : TensorPow M), smul_smul]
+  norm_num
 
 /-! ## 一般形の像は `ε` の固有空間（補助） -/
 
@@ -126,10 +103,59 @@ noncomputable def epsProjPlus (M : ℕ) : TensorPow M :=
 theorem epsProjPlus_eq_epsProj : epsProjPlus M = epsProj M 1 := by
   rw [epsProjPlus, epsProj, one_smul]
 
-/-- **人手本文 `epsilon_projector_properties` (1)**: `(P^{(+)})^2 = P^{(+)}`。 -/
+/-- **人手本文 `epsilon_projector_properties` (1)**: `(P^{(+)})^2 = P^{(+)}`。
+本文の鎖の各行と 1 対 1 に対応する（`scalar_multiple_is_associative` は具体版が無いので mathlib の `smul_smul`）。 -/
 theorem epsProjPlus_sq : epsProjPlus M * epsProjPlus M = epsProjPlus M := by
-  rw [epsProjPlus_eq_epsProj]
-  exact epsProj_sq (by norm_num)
+  -- `ℂ` の数の等式 `(1/2)·(1/2) = 1/4`（包含で写した実数の積を `real_inclusion_preserves_product` で読む）
+  have hquarter : (1 / 2 : ℂ) * (1 / 2 : ℂ) = (1 / 4 : ℂ) :=
+    calc (1 / 2 : ℂ) * (1 / 2 : ℂ)
+        = ((1 / 2 : ℝ) : ℂ) * ((1 / 2 : ℝ) : ℂ) := by norm_num        -- 包含で写した実数 `1/2`
+      _ = (((1 / 2) * (1 / 2) : ℝ) : ℂ) := real_inclusion_mul _ _     -- `real_inclusion_preserves_product`
+      _ = ((1 / 4 : ℝ) : ℂ) := by norm_num                             -- `ℝ` での `1/2·1/2 = 1/4`
+      _ = (1 / 4 : ℂ) := by norm_num                                   -- 包含で写した実数 `1/4`
+  -- `ℂ` の数の等式 `(1/4)·2 = 1/2`
+  have hhalf : (1 / 4 : ℂ) * (2 : ℂ) = (1 / 2 : ℂ) :=
+    calc (1 / 4 : ℂ) * (2 : ℂ)
+        = ((1 / 4 : ℝ) : ℂ) * ((2 : ℝ) : ℂ) := by norm_num              -- 包含で写した実数 `1/4`・`2`
+      _ = (((1 / 4) * 2 : ℝ) : ℂ) := real_inclusion_mul _ _            -- `real_inclusion_preserves_product`
+      _ = ((1 / 2 : ℝ) : ℂ) := by norm_num                             -- `ℝ` での `1/4·2 = 1/2`
+      _ = (1 / 2 : ℂ) := by norm_num                                   -- 包含で写した実数 `1/2`
+  calc epsProjPlus M * epsProjPlus M
+      = ((1 / 2 : ℂ) • (1 + epsilon M)) * ((1 / 2 : ℂ) • (1 + epsilon M)) := rfl
+                                                        -- `def_epsilon_projectors`
+    _ = (1 / 2 : ℂ) • ((1 + epsilon M) * ((1 / 2 : ℂ) • (1 + epsilon M))) :=
+          smul_mul_matrix_tensorPow _ _ _               -- `scalar_multiple_factors_out_of_left_factor`
+    _ = (1 / 2 : ℂ) • ((1 / 2 : ℂ) • ((1 + epsilon M) * (1 + epsilon M))) := by
+          rw [mul_smul_matrix_tensorPow]                -- `scalar_multiple_factors_out_of_right_factor`
+    _ = ((1 / 2 : ℂ) * (1 / 2 : ℂ)) • ((1 + epsilon M) * (1 + epsilon M)) :=
+          smul_smul _ _ _                               -- `scalar_multiple_is_associative`
+    _ = (1 / 4 : ℂ) • ((1 + epsilon M) * (1 + epsilon M)) := by
+          rw [hquarter]         -- `real_inclusion_preserves_product` と `ℝ` での `1/2·1/2 = 1/4`
+    _ = (1 / 4 : ℂ) • (1 * (1 + epsilon M) + epsilon M * (1 + epsilon M)) := by
+          rw [add_mul_matrix_tensorPow]                 -- `mat_mult_distributes_over_sum_in_left_factor`
+    _ = (1 / 4 : ℂ) • ((1 * 1 + 1 * epsilon M) + (epsilon M * 1 + epsilon M * epsilon M)) := by
+          rw [mul_add_matrix_tensorPow, mul_add_matrix_tensorPow]
+                                                        -- `mat_mult_distributes_over_sum_in_right_factor` を二つの積へ
+    _ = (1 / 4 : ℂ) • ((1 + epsilon M) + (epsilon M * 1 + epsilon M * epsilon M)) := by
+          rw [identity_matrix_mul_tensorPow, identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult` を `II`・`Iε` へ
+    _ = (1 / 4 : ℂ) • ((1 + epsilon M) + (epsilon M + epsilon M * epsilon M)) := by
+          rw [mul_identity_matrix_tensorPow]            -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = (1 / 4 : ℂ) • ((1 + epsilon M) + (epsilon M + 1)) := by
+          rw [epsilon_mul_self]                         -- `εε = I`（`epsilon_square_and_eigenvalues`）
+    _ = (1 / 4 : ℂ) • ((1 + epsilon M) + (1 + epsilon M)) :=
+          congrArg (fun Y : TensorPow M => (1 / 4 : ℂ) • ((1 + epsilon M) + Y))
+            (Matrix.ext fun I K => by rw [tensorPow_add_apply, tensorPow_add_apply, add_comm])
+                                                        -- `def_matrix_sum` による成分ごとの加法の可換性
+    _ = (1 / 4 : ℂ) • ((2 : ℂ) • (1 + epsilon M)) :=
+          congrArg (fun Y : TensorPow M => (1 / 4 : ℂ) • Y)
+            (Matrix.ext fun I K => by rw [tensorPow_add_apply, tensorPow_smul_apply, two_mul])
+                                                        -- `def_matrix_sum` と `def_matrix_scalar_multiple` により成分ごとに `z + z = 2z`
+    _ = ((1 / 4 : ℂ) * (2 : ℂ)) • (1 + epsilon M) :=
+          smul_smul _ _ _                               -- `scalar_multiple_is_associative`
+    _ = (1 / 2 : ℂ) • (1 + epsilon M) := by
+          rw [hhalf]          -- `real_inclusion_preserves_product` と `ℝ` での `1/4·2 = 1/2`
+    _ = epsProjPlus M := rfl                            -- `def_epsilon_projectors`
 
 /-- **人手本文 `epsilon_projector_properties` (2) の `(⊆)`**:
 `P^{(+)} x ∈ 𝓕^{(+)}`、すなわち `ε (P^{(+)} x) = P^{(+)} x`。

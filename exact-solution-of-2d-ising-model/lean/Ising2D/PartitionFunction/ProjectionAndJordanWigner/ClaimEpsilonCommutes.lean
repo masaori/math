@@ -25,19 +25,22 @@
 * Step 4（`V_1^{(+)}` と `(V_1^{(+)})^{1/2}`）→ `epsilon_commute_H1plus` から
   `epsilon_commute_V1plus` / `epsilon_commute_V1plusHalf`。
 * `epsilon_projector_commutes_with_epsilon_commuting_matrix`（`P^{(+)}`）→
-  `commute_epsProjPlus_of_commute_epsilon`（必要十分版 `Ising2D.NecSuf.commute_invProj` の系）と、
+  `commute_epsProjPlus_of_commute_epsilon`（一般形 `commute_epsProj_of_commute_epsilon` の `η = 1`）と、
   その `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` への適用 `commute_V1_epsProjPlus` /
   `commute_V2_epsProjPlus` / `commute_V1plus_epsProjPlus` / `commute_V1plusHalf_epsProjPlus`
   （人手の `epsilon_projector_commutes_with_V1` / `_V2` / `_V1_plus` / `_V1_plus_square_root`）。
-  人手の一般の主張は 9 行の鎖（分配律・単位行列・スカラー倍の出し入れを 1 行ずつ）だが、
-  Lean の `commute_epsProjPlus_of_commute_epsilon` はまだ鎖と 1 対 1 ではない。
+  人手の一般の主張は 9 行の鎖（分配律・単位行列・スカラー倍の出し入れを 1 行ずつ）である。
+  `commute_epsProjPlus_of_commute_epsilon` は一般形 `commute_epsProj_of_commute_epsilon` の `η = 1` で、
+  一般形はその鎖を `ε` を `ηε` に替えて同じ順に辿り、`η` を出し入れする 2 行だけが鎖に無い。
+  `P^{(+)} = (1/2)(I + 1ε)` と読む段（`scalar_multiple_by_one`）も鎖に無い。
 
 符号引数つきの一般形（`epsilon_commute_H1` / `epsilon_commute_V1pm` / `epsilon_commute_V1pmHalf`、
 `epsProj M η` との可換性）は補助として残す。人手の本文から参照用ノート
 `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した `(−)` セクターの議論と、
 整数運動量の経路の形式化の記録が使う。
 
-必要十分版は射影子との可換性の部分だけ（`Ising2D/NecSuf/Projector.lean`）。Step 1〜4 は
+必要十分版は射影子との可換性の部分だけ（`Ising2D/NecSuf/Projector.lean`。特殊化としての導出は
+`ClaimEpsilonProjectorsFromNecSuf.lean`）。Step 1〜4 は
 `ε` と Pauli 行列の具体的な反交換関係の計算であり、取り払える構造が無い。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonProjectors
@@ -227,12 +230,35 @@ theorem epsilon_commute_V1plusHalf (K1 : ℂ) : Commute (epsilon M) (V1plusHalf 
 
 /-! ## 射影子との可換性 -/
 
-/-- 補助: `ε` と可換な行列は一般形 `epsProj M η` とも可換
-（必要十分版 `Ising2D.NecSuf.commute_invProj` の系）。 -/
+/-- 補助: `ε` と可換な行列は一般形 `epsProj M η` とも可換。
+本文 `epsilon_projector_commutes_with_epsilon_commuting_matrix` の鎖を `ε` を `ηε` に替えて辿る
+（`η` を出し入れする 2 行だけが増え、そこでも本文が引く `scalar_multiple_factors_out_of_left_factor`・
+`scalar_multiple_factors_out_of_right_factor` を使う）。 -/
 theorem commute_epsProj_of_commute_epsilon {a : TensorPow M} (η : ℂ)
     (h : Commute a (epsilon M)) : Commute a (epsProj M η) := by
-  rw [epsProj_eq_invProj]
-  exact NecSuf.commute_invProj (h.smul_right η)
+  show a * epsProj M η = epsProj M η * a
+  symm
+  calc epsProj M η * a
+      = ((1 / 2 : ℂ) • (1 + η • epsilon M)) * a := rfl      -- `def_epsilon_projectors`
+    _ = (1 / 2 : ℂ) • ((1 + η • epsilon M) * a) :=
+          smul_mul_matrix_tensorPow _ _ _                   -- `scalar_multiple_factors_out_of_left_factor`
+    _ = (1 / 2 : ℂ) • (1 * a + (η • epsilon M) * a) := by
+          rw [add_mul_matrix_tensorPow]                     -- `mat_mult_distributes_over_sum_in_left_factor`
+    _ = (1 / 2 : ℂ) • (a + (η • epsilon M) * a) := by
+          rw [identity_matrix_mul_tensorPow]                -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = (1 / 2 : ℂ) • (a + η • (epsilon M * a)) := by
+          rw [smul_mul_matrix_tensorPow]                    -- `scalar_multiple_factors_out_of_left_factor`（`η` の出し入れ）
+    _ = (1 / 2 : ℂ) • (a + η • (a * epsilon M)) := by
+          rw [h.eq]                                         -- 仮定 `εX = Xε`
+    _ = (1 / 2 : ℂ) • (a + a * (η • epsilon M)) := by
+          rw [mul_smul_matrix_tensorPow]                    -- `scalar_multiple_factors_out_of_right_factor`（`η` の出し入れ）
+    _ = (1 / 2 : ℂ) • (a * 1 + a * (η • epsilon M)) := by
+          rw [mul_identity_matrix_tensorPow]                -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = (1 / 2 : ℂ) • (a * (1 + η • epsilon M)) := by
+          rw [mul_add_matrix_tensorPow]                     -- `mat_mult_distributes_over_sum_in_right_factor`
+    _ = a * ((1 / 2 : ℂ) • (1 + η • epsilon M)) :=
+          (mul_smul_matrix_tensorPow _ _ _).symm            -- `scalar_multiple_factors_out_of_right_factor`
+    _ = a * epsProj M η := rfl                              -- `def_epsilon_projectors`
 
 theorem commute_V1PauliForm_epsProj (K1 η : ℂ) : Commute (V1PauliForm M K1) (epsProj M η) :=
   commute_epsProj_of_commute_epsilon η (epsilon_commute_V1PauliForm K1).symm
@@ -260,7 +286,8 @@ theorem commute_V1pmHalf_epsProj (K1 ηsign η : ℂ) : Commute (V1pmHalf M K1 �
   commute_epsProj_of_commute_epsilon η (epsilon_commute_V1pmHalf K1 ηsign).symm
 
 /-- **人手 `epsilon_projector_commutes_with_epsilon_commuting_matrix`**:
-`εX = Xε` なら `P^{(+)} X = X P^{(+)}`（必要十分版 `Ising2D.NecSuf.commute_invProj` の系）。 -/
+`εX = Xε` なら `P^{(+)} X = X P^{(+)}`（一般形 `commute_epsProj_of_commute_epsilon` の `η = 1`。
+一般形が本文の 9 行の鎖を辿り、`η` を出し入れする 2 行と `1ε = ε` の段だけが本文に無い）。 -/
 theorem commute_epsProjPlus_of_commute_epsilon {a : TensorPow M}
     (h : Commute a (epsilon M)) : Commute a (epsProjPlus M) := by
   rw [epsProjPlus_eq_epsProj]

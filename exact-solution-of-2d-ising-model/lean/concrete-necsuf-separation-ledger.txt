@@ -139,14 +139,9 @@ DEP	concrete	Ising2D.checkPsi_car
 DEP	concrete	Ising2D.checkVprime_mul_Qproj
 DEP	concrete	Ising2D.checkX_eq_carHam
 DEP	concrete	Ising2D.colVec_eq_Qproj_mul_of_zero
-DEP	concrete	Ising2D.commute_epsProj_of_commute_epsilon
 DEP	concrete	Ising2D.commute_xString_of_commute_sigmaX
 DEP	concrete	Ising2D.conjTranspose_Y_mul_Z
 DEP	concrete	Ising2D.conjTranspose_Z_mul_Y
-DEP	concrete	Ising2D.epsProj_add_epsProj_neg
-DEP	concrete	Ising2D.epsProj_eq_invProj
-DEP	concrete	Ising2D.epsProj_mul_epsProj_neg
-DEP	concrete	Ising2D.epsProj_sq
 DEP	concrete	Ising2D.epsilonR
 DEP	concrete	Ising2D.epsilonR_entry_zero_or_one
 DEP	concrete	Ising2D.epsilonR_isSymm
@@ -209,16 +204,13 @@ DEP	concrete	Ising2D.riemann_sum_to_integral
 DEP	concrete	Ising2D.riemann_sum_to_integral_error
 DEP	concrete	Ising2D.sectorSet_neg_nonempty_epsilonR
 DEP	concrete	Ising2D.sectorSet_pos_nonempty_epsilonR
-DEP	concrete	Ising2D.sector_replacement_pow
 DEP	concrete	Ising2D.sigmaZ_mul_sigmaZ_nextSite_transpose
 DEP	concrete	Ising2D.sum_Icc_eq_sum_range_tag
 DEP	concrete	Ising2D.sum_zyStep6Coeff_smul_pauliKroneckerFamily
-DEP	concrete	Ising2D.symmetrized_transfer_matrix_on_sectors
 DEP	concrete	Ising2D.tag_eq_tagPoint
 DEP	concrete	Ising2D.tendsto_modulus_gamma
 DEP	concrete	Ising2D.tensorPow_pow_transpose_of_transpose_eq
 DEP	concrete	Ising2D.tensorPow_two_torsion_free
-DEP	concrete	Ising2D.trace_epsProj_sym_pow
 DEP	concrete	Ising2D.trace_similarity_invariant
 DEP	concrete	Ising2D.trace_similarity_invariant_of_columns
 DEP	concrete	Ising2D.vecNormSq_absVec_eq
@@ -286,7 +278,6 @@ IMPORT	concrete	Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefi
 IMPORT	concrete	Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace	necsuf	Ising2D.NecSuf.MatrixVectorIdentityScalarDifference
 IMPORT	concrete	Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.RealMatrixBilinearFormAndNorm	necsuf	Ising2D.NecSuf.RayleighMoments
 IMPORT	concrete	Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.TheoremRiemannSumToIntegral	necsuf	Ising2D.NecSuf.RiemannSum
-IMPORT	concrete	Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonProjectors	necsuf	Ising2D.NecSuf.Projector
 IMPORT	concrete	Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionV1PlusSquareRoot	derivation	Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrixFromNecSuf
 IMPORT	concrete	Ising2D.Representation	necsuf	Ising2D.NecSuf.MatrixUnits
 IMPORT	concrete	Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimCommutatorHAndHatZHatY	necsuf	Ising2D.NecSuf.CommutatorClifford

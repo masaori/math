@@ -968,6 +968,14 @@ targets=(
   Ising2D.epsilon_commute_V1pm
   Ising2D.epsilon_commute_V1pmHalf
   Ising2D.commute_epsProj_of_commute_epsilon
+  Ising2D.epsProj_eq_invProj
+  Ising2D.epsProj_sq_of_necSuf
+  Ising2D.epsProj_mul_epsProj_neg_of_necSuf
+  Ising2D.epsProj_add_epsProj_neg_of_necSuf
+  Ising2D.commute_epsProj_of_commute_epsilon_of_necSuf
+  Ising2D.sandwich_mul_epsProjPlus_eq_of_necSuf
+  Ising2D.sector_replacement_pow_of_necSuf
+  Ising2D.V1pmHalf_mul_sym_pow_of_necSuf
   Ising2D.NecSuf.continuous_arcosh_comp
   Ising2D.NecSuf.cosh_sub_le_cosh_mul_cosh_sub
   Ising2D.NecSuf.one_le_cosh_mul_cosh_sub
