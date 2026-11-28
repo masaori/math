@@ -101557,7 +101557,7 @@ M_{\mathcal D_0,\varnothing}(x)
                       "Ising2DLambda.KacWard.taggedCommonPairs_spec",
                       "Ising2DLambda.KacWard.taggedAlternatingCycles_matching_sign",
                       "Ising2DLambda.NecSuf.KacWard.alternating_cycle_matching_sign_necSuf",
-                      "Ising2DLambda.NecSuf.KacWard.tagged_alternating_cycles_matching_sign_necSuf",
+                      "Ising2DLambda.KacWard.taggedAlternatingCycles_matching_sign_application",
                       "Ising2DLambda.KacWard.taggedAlternatingCycles_matching_sign_from_necSuf",
                     ],
                     statement: [
