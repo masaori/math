@@ -73,8 +73,8 @@ theorem trace_identity_eq_sum_one : (1 : Matrix n n ℂ).trace = ∑ _k : n, (1 
 theorem trace_one_eq_card : (1 : Matrix n n ℂ).trace = (Fintype.card n : ℂ) :=
   Matrix.trace_one
 
-/-- 共役でトレースは変わらない（左辺を `(PA)Q` で受け取る旧い形。人手 `trace_basic_properties` (4) の形 `tr(P(AP'))` は
-`trace_similarity_invariant`）。
+/-- 共役でトレースは変わらない（左辺を `(PA)Q` で受け取る旧い形。人手 `trace_basic_properties` (4) の形 `tr(P(AP'))` は、
+`Mat(2^M, ℂ)` の場合の `ClaimTensorPowTraceSimilarityInvariant.lean` の `trace_similarity_invariant_tensorPow`）。
 
 原文は `P` が可逆であることを仮定するが、証明が使うのは `P^{-1}P = I` だけなので、
 逆行列の存在ではなく「左逆元 `Q`」の形で述べる（可逆な `P` に対しては `Q = P^{-1}`）。 -/
@@ -83,20 +83,6 @@ theorem trace_conj (P Q A : Matrix n n ℂ) (h : Q * P = 1) :
   calc (P * A * Q).trace = (Q * (P * A)).trace := Matrix.trace_mul_comm _ _
     _ = ((Q * P) * A).trace := by rw [mul_assoc]
     _ = A.trace := by rw [h, one_mul]
-
-/-- **原文 `trace_basic_properties` (4)** の人手の形: `P'P = I` なら `tr(P(AP')) = tr(A)`。
-
-人手の 5 行と 1 対 1（`mat_mult_associative` は Lean の具体版が無く、mathlib の `Matrix.mul_assoc` を引く。
-`identity_matrix_is_left_unit_of_mat_mult` は具体版の添字が `Fin m` に限るので、必要十分版
-`NecSuf.one_mul_matrix` の係数 `ℂ`・添字 `n` の特殊化を引く）。上の `trace_conj` は左辺を `(PA)P'` で受け取る旧い形である。 -/
-theorem trace_similarity_invariant (P P' A : Matrix n n ℂ) (h : P' * P = 1) :
-    (P * (A * P')).trace = A.trace :=
-  calc (P * (A * P')).trace
-      = ((P * A) * P').trace := by rw [Matrix.mul_assoc]   -- `mat_mult_associative`
-    _ = (P' * (P * A)).trace := trace_cyclic _ _           -- (2) を `A → PA`、`B → P'` に適用
-    _ = ((P' * P) * A).trace := by rw [Matrix.mul_assoc]   -- `mat_mult_associative`
-    _ = ((1 : Matrix n n ℂ) * A).trace := by rw [h]        -- `P'P = I`
-    _ = A.trace := by rw [NecSuf.one_mul_matrix]           -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-- 単元による共役版（原文の `P` が可逆な場合そのもの）。 -/
 theorem trace_units_conj (P : (Matrix n n ℂ)ˣ) (A : Matrix n n ℂ) :
@@ -297,7 +283,7 @@ theorem exists_inverse_of_basis_columns {ι : Type*} [Fintype ι] [DecidableEq �
 
 /-- **人手 `trace_basic_properties` (4)** を、行と列の添字の型が違う行列 `P : ι × n`、`P' : n × ι` へ当てる形:
 `P'P = I` なら `tr(P(AP')) = tr(A)`。人手 Step 3 の `P`（行が `ℂ^n` の添字 `n`、列が基底の添字 `Fin (r + s)` の長方行列。`idempotentAdaptedBasis` の注を見よ）と `P'` へ、`P → P'`・`P' → P` と入れ替えて当てる。
-手順は `trace_similarity_invariant` の 5 行と同じで、(2) の巡回性だけは `trace_cyclic` が正方行列に限るので
+手順は `trace_similarity_invariant_tensorPow`（`ClaimTensorPowTraceSimilarityInvariant.lean`）の 5 行と同じで、(2) の巡回性だけは `trace_cyclic` が正方行列に限るので
 `Matrix.trace_mul_comm`（`trace_cyclic` の証明そのもの）を引く。 -/
 theorem trace_similarity_invariant_of_columns {ι : Type*} [Fintype ι]
     (P : Matrix ι n ℂ) (P' : Matrix n ι ℂ) (A : Matrix n n ℂ) (h : P' * P = 1) :

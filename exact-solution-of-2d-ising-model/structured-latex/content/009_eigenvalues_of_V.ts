@@ -40,7 +40,7 @@ export default defineBlocks([
     origin: { path: SRC, ordinal: 4 },
     title: { text: "トレースの基本性質" },
     labels: ["trace_basic_properties"],
-    lean: ["Ising2D.trace_linear", "Ising2D.trace_cyclic", "Ising2D.trace_similarity_invariant", "Ising2D.trace_identity_eq_sum_one", "Ising2D.trace_similarity_invariant_of_columns"],
+    lean: ["Ising2D.trace_linear", "Ising2D.trace_cyclic", "Ising2D.trace_similarity_invariant_tensorPow", "Ising2D.trace_identity_eq_sum_one", "Ising2D.trace_similarity_invariant_of_columns"],
     statement: [
       paragraph([
         "トレースは ", ref("def_trace"), "、行列の積は ", ref("mat_mult"), "、行列の和は ", ref("def_matrix_sum"),

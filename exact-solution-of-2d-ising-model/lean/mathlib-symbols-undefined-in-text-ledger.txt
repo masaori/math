@@ -5098,12 +5098,6 @@ Ising2D.trace_power_sandwich	Matrix.IsSymm
 Ising2D.trace_power_sandwich	OfNat.ofNat@→[Ising2D.Conf,Real],0@Zero.toOfNat0
 Ising2D.trace_power_upper_bound	Matrix.IsSymm
 Ising2D.trace_power_upper_bound	OfNat.ofNat@→[Ising2D.Conf,Real],0@Zero.toOfNat0
-Ising2D.trace_similarity_invariant	DecidableEq
-Ising2D.trace_similarity_invariant	Fintype
-Ising2D.trace_similarity_invariant	HMul.hMul@Matrix[?,?,Complex],Matrix[?,?,Complex],Matrix[?,?,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid
-Ising2D.trace_similarity_invariant	Matrix.trace@?,Complex@?,Complex.instAddCommMonoid
-Ising2D.trace_similarity_invariant	Matrix@?,?,Complex
-Ising2D.trace_similarity_invariant	OfNat.ofNat@Matrix[?,?,Complex],1@One.toOfNat1
 Ising2D.trace_similarity_invariant_of_columns	DecidableEq
 Ising2D.trace_similarity_invariant_of_columns	Fintype
 Ising2D.trace_similarity_invariant_of_columns	HMul.hMul@Matrix[?,?,Complex],Matrix[?,?,Complex],Matrix[?,?,Complex]@Matrix.instHMulOfFintypeOfMulOfAddCommMonoid

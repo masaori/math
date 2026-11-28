@@ -766,7 +766,7 @@ targets=(
   Ising2D.complex_finset_sum_eq_finSumLeft
   "Ising2D.NecSuf.map_finSumLeft_of_map_add'"
   Ising2D.trace_conj
-  Ising2D.trace_similarity_invariant
+  Ising2D.trace_similarity_invariant_tensorPow
   Ising2D.trace_of_idempotent
   Ising2D.isCompl_range_ker_of_idempotent
   Ising2D.idempotent_mulVec_of_eq_mulVec

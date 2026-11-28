@@ -211,7 +211,6 @@ DEP	concrete	Ising2D.tag_eq_tagPoint
 DEP	concrete	Ising2D.tendsto_modulus_gamma
 DEP	concrete	Ising2D.tensorPow_pow_transpose_of_transpose_eq
 DEP	concrete	Ising2D.tensorPow_two_torsion_free
-DEP	concrete	Ising2D.trace_similarity_invariant
 DEP	concrete	Ising2D.trace_similarity_invariant_of_columns
 DEP	concrete	Ising2D.vecNormSq_absVec_eq
 DEP	concrete	Ising2D.zy_step6_prep_t

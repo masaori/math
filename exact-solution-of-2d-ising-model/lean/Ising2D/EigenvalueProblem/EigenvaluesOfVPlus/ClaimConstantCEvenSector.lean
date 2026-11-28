@@ -49,6 +49,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverTensorPowSum
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.DefinitionMatrixOperationsOverMultiIndices
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.DefinitionPowerOfComplexNumber
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTensorPowTraceSimilarityInvariant
 
 namespace Ising2D
 
@@ -176,7 +177,7 @@ theorem tauPlusPrime_eq_tauPlus (K1 K2star : ℂ) :
         rw [Matrix.mul_assoc (Uflip M) (matExp S1 * matExp S2) (UflipInv M)]
     _ = (matExp S1 * matExp S2).trace :=
         -- `trace_basic_properties` (4)（`P → U`、`P' → U^{-1}`）と `U^{-1}U = I`
-        trace_similarity_invariant _ _ _ UflipInv_mul
+        trace_similarity_invariant_tensorPow _ _ _ UflipInv_mul
     _ = tauPlus M K1 K2star := rfl                                    -- `τ` の定義
 
 /-! ### Step 3 -/

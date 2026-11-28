@@ -53,6 +53,7 @@
 | `tensorPow_trace_eq_def_trace` / `tensorPow_trace_apply`（`MathematicalTools/KroneckerProductAndMultiFactorBasis/DefinitionMatrixOperationsOverMultiIndices.lean`） | `TensorPow M` のトレースを `ν^{-1}` で番号へ移すと `Σ_{k=1}^{n} A_{kk}`、`𝓘_M` の添字の形は `Σ_{I∈𝓘_M} A_{II}` | `def_trace` |
 | `trace_linear` / `trace_cyclic` / `trace_one_eq_card` / `trace_conj`（`DefinitionTrace.lean`） | 線型性・巡回性・`tr(I)=n`・共役不変 | `trace_basic_properties` (1)(2)(3)(4) |
 | `trace_identity_eq_sum_one`（`DefinitionTrace.lean`。人手の 3 行と 1 対 1） | `tr(I_n) = Σ_{k=1}^{n} 1_ℂ` | `trace_basic_properties` (3) |
+| `trace_similarity_invariant_tensorPow`（`ClaimTensorPowTraceSimilarityInvariant.lean`。人手の 5 行と 1 対 1。左の単位律は `TensorPow M` の具体版 `identity_matrix_mul_tensorPow`） | `Mat(2^M, ℂ)` の `P'P = I` なら `tr(P(AP')) = tr(A)` | `trace_basic_properties` (4) |
 | `trace_add_matrix` / `trace_binaryWordMatrixSum` / `trace_of_scalar_multiple`（`ClaimTraceOfSumOverBinaryWords.lean`） | `tr(A+B) = tr(A)+tr(B)`、`tr(Σ_{ε∈{0,1}^r}B_ε) = Σ_ε tr(B_ε)`、`tr(αA) = αtr(A)` | `trace_of_sum_over_binary_words`（準備の鎖と帰納法）・`trace_of_scalar_multiple` |
 | `trace_of_idempotent` | `Q^2=Q ⇒ tr(Q) = dim im Q`（Step 3 の鎖を人手の 9 行と 1 対 1 の `calc`。準備・Step 1・Step 2 は下の行） | `trace_of_idempotent` |
 | `idempotent_sq_eq_mul_self` / `idempotent_mul_self_of_sq`（人手の 4 行と 1 対 1） | `Q^2 = QQ`、`Q^2 = Q ⇒ QQ = Q` | `trace_of_idempotent` の準備 |
