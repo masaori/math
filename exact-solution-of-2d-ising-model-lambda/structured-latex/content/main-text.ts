@@ -24960,7 +24960,7 @@ r\cdot r
                               displayMath(String.raw`\begin{aligned}
 r\cdot r
 &\ne2
-&&\bigl(\because\ \blkref{claim_no_rational_square_two}\bigr).
+&&\bigl(\because\ \blkref{claim_no_rational_square_two}\bigr)
 \end{aligned}
 `),
                               paragraph([
