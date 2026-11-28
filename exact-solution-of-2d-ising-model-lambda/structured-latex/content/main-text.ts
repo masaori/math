@@ -5189,18 +5189,29 @@ C&:=\{p\in P_{\mathcal J}\mid \tau\bigl((\Pi_d(p))_2\bigr)\prec_{\mathcal K}\tau
                           " の条件は ", math(String.raw`d(\sigma(u))\prec_{\mathcal K}d(\sigma(u'))`), " である。",
                           math(String.raw`d(\sigma(u))\ne d(\sigma(u'))`), " と三分律から、どちらの場合も",
                         ]),
-                        displayMath(String.raw`[p\in C]=[p\in B]+\bigl[d(\sigma(u'))\prec_{\mathcal K}d(\sigma(u))\bigr]\quad\text{in }\mathbb F_2`),
+                        displayMath(String.raw`[p\in C]=[p\in B]+\bigl[d(\sigma(u'))\prec_{\mathcal K}d(\sigma(u))\bigr]
+\qquad\bigl(\because\ \Pi_d\text{ の二つの場合と }B,C\text{ の定義}\bigr)\quad\text{in }\mathbb F_2`),
                         paragraph([
                           "である（", math(String.raw`p:=(u,u')`), "）。同じく ", math(String.raw`\sigma(u)\prec_{\mathcal J}\sigma(u')`),
                           " の場合は ", math(String.raw`\Pi_\sigma(u,u')=(\sigma(u),\sigma(u'))`), "、",
                           math(String.raw`\sigma(u')\prec_{\mathcal J}\sigma(u)`), " の場合は ",
                           math(String.raw`\Pi_\sigma(u,u')=(\sigma(u'),\sigma(u))`), " なので、",
                         ]),
-                        displayMath(String.raw`[p\in B']=[p\in A]+\bigl[d(\sigma(u'))\prec_{\mathcal K}d(\sigma(u))\bigr]\quad\text{in }\mathbb F_2`),
+                        displayMath(String.raw`[p\in B']=[p\in A]+\bigl[d(\sigma(u'))\prec_{\mathcal K}d(\sigma(u))\bigr]
+\qquad\bigl(\because\ \Pi_\sigma\text{ の二つの場合と }A,B'\text{ の定義}\bigr)\quad\text{in }\mathbb F_2`),
                         paragraph([
-                          "である。二つを足すと ", math(String.raw`[p\in A]+[p\in B]+[p\in B']+[p\in C]=0`),
-                          "（", math(String.raw`\mathbb F_2`), "）であり、属するものの個数は偶数である。",
+                          "である。二つの等式から、", math(String.raw`\mathbb F_2`), " では",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+[p\in A]+[p\in B]+[p\in B']+[p\in C]
+&=\bigl([p\in A]+[p\in B']\bigr)+\bigl([p\in B]+[p\in C]\bigr)
+&&\bigl(\because\ \mathbb F_2\text{ の加法の可換性と結合性}\bigr)\\
+&=\bigl[d(\sigma(u'))\prec_{\mathcal K}d(\sigma(u))\bigr]+\bigl[d(\sigma(u'))\prec_{\mathcal K}d(\sigma(u))\bigr]
+&&\bigl(\because\ \text{直前の二つの等式}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb F_2\text{ の同じ元の和は零}\bigr)
+\end{aligned}`),
+                        paragraph(["したがって、属するものの個数は偶数である。"]),
                         paragraph([
                           math(String.raw`P_{\mathcal J}`), " の部分集合 ", math(String.raw`X`), " に対し、",
                           math(String.raw`f_X:P_{\mathcal J}\to\mathbb Z`), " を ", math(String.raw`p\in X`), " なら ",
