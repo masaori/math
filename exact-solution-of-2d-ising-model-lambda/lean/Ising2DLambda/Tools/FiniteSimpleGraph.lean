@@ -2,6 +2,39 @@ import Mathlib.Combinatorics.SimpleGraph.Paths
 
 namespace Ising2DLambda.Tools
 
+/-! The paper specifies a graph by its finite vertex set and a set of unordered
+distinct pairs.  `Fin n` is the numbered copy of that vertex set. -/
+structure FiniteSimpleGraphEdgeData (n : ℕ) where
+  edges : Finset (Sym2 (Fin n))
+  noLoops : ∀ v : Fin n, s(v, v) ∉ edges
+
+def FiniteSimpleGraphEdgeData.toSimpleGraph {n : ℕ}
+    (G : FiniteSimpleGraphEdgeData n) : SimpleGraph (Fin n) where
+  Adj u v := s(u, v) ∈ G.edges
+  symm := by
+    constructor
+    intro u v h
+    simpa only [Sym2.eq_swap] using h
+  loopless := by
+    constructor
+    intro v
+    exact G.noLoops v
+
+def FiniteSimpleGraphEdgeData.ofSimpleGraph {n : ℕ}
+    (G : SimpleGraph (Fin n)) [DecidableRel G.Adj] :
+    FiniteSimpleGraphEdgeData n where
+  edges := G.edgeFinset
+  noLoops := by
+    intro v hv
+    rcases G.loopless with ⟨hloopless⟩
+    exact hloopless v (SimpleGraph.mem_edgeFinset.mp hv)
+
+theorem FiniteSimpleGraphEdgeData.toSimpleGraph_ofSimpleGraph {n : ℕ}
+    (G : SimpleGraph (Fin n)) [DecidableRel G.Adj] :
+    (FiniteSimpleGraphEdgeData.ofSimpleGraph G).toSimpleGraph = G := by
+  ext u v
+  exact SimpleGraph.mem_edgeFinset
+
 /-- A finite simple graph with numbered vertices; any finite vertex set can be enumerated. -/
 abbrev FiniteSimpleGraph (n : ℕ) := SimpleGraph (Fin n)
 

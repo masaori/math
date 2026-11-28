@@ -24840,7 +24840,7 @@ b
 &=\iota_{\mathbb Q}(-a)+\bigl(-\iota_{\mathbb Q}(b)\bigr)\cdot s
 &&\bigl(\because\ \text{包含が }a\text{ の加法逆元を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
 &=\iota_{\mathbb Q}(-a)+\iota_{\mathbb Q}(-b)\cdot s
-&&\bigl(\because\ \text{包含が }b\text{ の加法逆元を保つ、}\blkref{def_algebraic_numbers}\bigr).
+&&\bigl(\because\ \text{包含が }b\text{ の加法逆元を保つ、}\blkref{def_algebraic_numbers}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "と計算できる。", ref("claim_quadratic_negation_mem"), " により ",
@@ -24850,7 +24850,7 @@ b
                               displayMath(String.raw`\begin{aligned}
 \mathrm{rep}_s(-\xi)
 &=(-a,-b)
-&&\bigl(\because\ \text{直前の表示、}\blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr).
+&&\bigl(\because\ \text{直前の表示、}\blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "全過程は有理数と代数的数の四則で閉じ、実数体も複素数体も現れない。",
