@@ -30,7 +30,31 @@ theorem forestEdgeScan_invariant {n : ℕ} (G : FiniteSimpleGraph n)
     intro F uv hF
     unfold forestEdgeScanStep
     split_ifs with h
-    · exact forest_addDisconnectedEdge n G F hF.2 hF.1 uv.1 uv.2 h.1 h.2
+    · let Gd := FiniteSimpleGraphEdgeData.ofSimpleGraph G
+      let Fd := FiniteSimpleGraphEdgeData.ofSimpleGraph F
+      have hFgraph : Fd.toSimpleGraph = F :=
+        FiniteSimpleGraphEdgeData.toSimpleGraph_ofSimpleGraph F
+      have hFGd : Fd.edges ⊆ Gd.edges := SimpleGraph.edgeFinset_mono hF.2
+      have hforest : Fd.toSimpleGraph.IsAcyclic := by
+        rw [hFgraph]
+        exact hF.1
+      have huv : s(uv.1, uv.2) ∈ Gd.edges := by
+        exact SimpleGraph.mem_edgeFinset.mpr h.1
+      have hnot : ¬ Fd.toSimpleGraph.Reachable uv.1 uv.2 := by
+        rw [hFgraph]
+        exact h.2
+      have hd := forest_addDisconnectedEdge n Gd Fd hFGd hforest uv.1 uv.2 huv hnot
+      refine ⟨?_, ?_⟩
+      · simpa only [hFgraph] using hd.1
+      · intro a b hab
+        have hab' : (Fd.toSimpleGraph ⊔ edge uv.1 uv.2).Adj a b := by
+          simpa only [hFgraph] using hab
+        have he : s(a, b) ∈ (Fd.toSimpleGraph ⊔ edge uv.1 uv.2).edgeFinset := by
+          simpa only [SimpleGraph.mem_edgeFinset, SimpleGraph.mem_edgeSet] using hab'
+        rw [hd.2.1] at he
+        have hmem := hd.2.2 he
+        have heG : s(a, b) ∈ G.edgeFinset := hmem
+        simpa only [SimpleGraph.mem_edgeFinset, SimpleGraph.mem_edgeSet] using heG
     · exact hF
   induction pairs using List.reverseRecOn with
   | nil => simp
