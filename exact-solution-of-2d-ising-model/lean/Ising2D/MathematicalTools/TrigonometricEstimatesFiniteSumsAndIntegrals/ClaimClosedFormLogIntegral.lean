@@ -25,6 +25,7 @@ import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimRealLogOfProduct
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRealLogStrictlyIncreasing
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfRealOneIsOne
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSqrtOfPositiveRealIsPositive
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealMinusZeroIsSelf
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
@@ -45,7 +46,10 @@ open Real MeasureTheory
 `HasDerivAt.const_mul`・`HasDerivAt.comp`・`HasDerivAt.sqrt`・`HasDerivAt.inv`、「微分可能な関数は連続」は
 `HasDerivAt.continuousAt`、(R4) は `intervalIntegral.integral_eq_sub_of_hasDerivAt`、`exp 0 = 1` は
 `Real.exp_zero`、`log(exp x) = x` は `Real.log_exp` で受ける。準備の `0 < δ²` は人手の鎖どおり
-`real_product_of_positives_is_positive` と `square_of_real_number_is_product` で受ける。 -/
+`real_product_of_positives_is_positive` と `square_of_real_number_is_product` で、`δ ≠ 0`・`0 ≤ δ⁻¹`・`W(θ) > 0`・
+`W(θ)/δ ≥ 0` は人手の鎖どおり `def_real_strict_order`・論理積の前半と後半・等号の対称律の対偶・
+`real_inverse_of_positive_is_positive`・`sqrt_of_positive_real_is_positive`・順序と乗法の両立（`mul_nonneg`）・
+`def_real_quotient` で受ける。 -/
 theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
     (∫ θ in (0:ℝ)..Real.pi, (Real.sqrt (δ ^ 2 + θ ^ 2 / 4))⁻¹)
       = 2 * Real.arsinh (Real.pi / (2 * δ)) := by
@@ -53,13 +57,22 @@ theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
   set q : ℝ → ℝ := fun θ => θ / (2 * δ) with hq_def
   set F : ℝ → ℝ := fun θ => 2 * Real.arsinh (q θ) with hF_def
   set W : ℝ → ℝ := fun θ => Real.sqrt (δ ^ 2 + θ ^ 2 / 4) with hW_def
-  have hδne : δ ≠ 0 := ne_of_gt hδ
   -- 準備の `0 < δ²` の鎖
   have hδsq : 0 < δ ^ 2 :=
     calc 0 < δ * δ := real_product_of_positives_is_positive δ δ hδ hδ
                                         -- 仮定の `0 < δ` に `real_product_of_positives_is_positive`（`a → δ, b → δ`）
       _ = δ ^ 2 := (square_of_real_number_is_product δ).symm
                                         -- `square_of_real_number_is_product`（`r → δ`）を右辺から左辺へ
+  -- 準備の `δ ≠ 0` の鎖
+  have hδ' : 0 ≤ δ ∧ (0 : ℝ) ≠ δ := (real_lt_iff_le_and_ne 0 δ).mp hδ
+                                        -- `def_real_strict_order`（`x → 0, y → δ`）
+  have hδne : δ ≠ 0 := fun h => hδ'.2 h.symm
+                                        -- 論理積の後半と、等号の対称律（`x → δ, y → 0`）の対偶
+  -- 準備の `0 ≤ δ⁻¹` の鎖
+  have hδinv : 0 ≤ δ⁻¹ :=
+    ((real_lt_iff_le_and_ne 0 δ⁻¹).mp (real_inverse_of_positive_is_positive δ hδ)).1
+                                        -- `real_inverse_of_positive_is_positive`（`a → δ`）、
+                                        -- `def_real_strict_order`（`x → 0, y → δ⁻¹`）、論理積の前半
   -- 上の `0 < δ²` から `δ² + θ²/4 ≥ δ² > 0`
   have hrad : ∀ θ : ℝ, 0 < δ ^ 2 + θ ^ 2 / 4 := fun θ =>
     calc 0 < δ ^ 2 := hδsq              -- 上の `0 < δ²`
@@ -67,16 +80,22 @@ theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
                                         -- `θ²/4 ≥ 0`
   -- `W(θ)² = δ² + θ²/4`（`definition_of_sqrt_r_positive`）
   have hWsq : ∀ θ : ℝ, W θ ^ 2 = δ ^ 2 + θ ^ 2 / 4 := fun θ => Real.sq_sqrt (hrad θ).le
-  -- `W(θ) ≠ 0`、したがって `W(θ) > 0`
-  have hWne : ∀ θ : ℝ, W θ ≠ 0 := by
-    intro θ hW0
-    have h := hWsq θ
-    rw [hW0] at h
-    linarith [hrad θ]                   -- `0² = 0 < δ² + θ²/4` に反する
-  -- 本文の準備の `W(θ) > 0`。以後の段は `W(θ) ≠ 0` と `W(θ) ≥ 0` だけを使う
-  have _hWpos : ∀ θ : ℝ, 0 < W θ := fun θ =>
-    lt_of_le_of_ne (Real.sqrt_nonneg _) (hWne θ).symm
-                                        -- `W(θ) ≥ 0` と `W(θ) ≠ 0`
+  -- `0 < W(θ)`、したがって `0 ≤ W(θ)` と `W(θ) ≠ 0`
+  have hWpos : ∀ θ : ℝ, 0 < W θ := fun θ => sqrt_of_positive_real_is_positive _ (hrad θ)
+                                        -- `sqrt_of_positive_real_is_positive`（`x → δ² + θ²/4`）と `W` の置き方
+  have hWle_ne : ∀ θ : ℝ, 0 ≤ W θ ∧ W θ ≠ 0 := fun θ =>
+    have h : 0 ≤ W θ ∧ (0 : ℝ) ≠ W θ := (real_lt_iff_le_and_ne 0 (W θ)).mp (hWpos θ)
+                                        -- `def_real_strict_order`（`x → 0, y → W(θ)`）
+    ⟨h.1, fun e => h.2 e.symm⟩         -- 等号の対称律（`x → W(θ), y → 0`）の対偶を後半に
+  have hWnonneg : ∀ θ : ℝ, 0 ≤ W θ := fun θ => (hWle_ne θ).1
+  have hWne : ∀ θ : ℝ, W θ ≠ 0 := fun θ => (hWle_ne θ).2
+  -- 本文の準備の `W(θ)/δ ≥ 0`
+  have hWdnonneg : ∀ θ : ℝ, 0 ≤ W θ / δ := fun θ => by
+    have h : 0 ≤ W θ * δ⁻¹ := mul_nonneg (hWnonneg θ) hδinv
+                                        -- 順序と乗法の両立（`x → W(θ), y → δ⁻¹`。`set_and_algebra_notation`）
+    rw [real_div_eq_mul_inv (W θ) δ hδne]
+                                        -- `def_real_quotient`（`y → W(θ), z → δ`）を右辺から左辺へ。`δ ≠ 0`
+    exact h
   -- `(W(θ)/δ)² = q(θ)² + 1`
   have hWdsq : ∀ θ : ℝ, (W θ / δ) ^ 2 = q θ ^ 2 + 1 := by
     intro θ
@@ -89,7 +108,7 @@ theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
       _ = q θ ^ 2 + 1 := rfl            -- `q` の置き方
   -- `sqrt_nonnegative_existence_uniqueness` の一意性: `√(q(θ)²+1) = W(θ)/δ`
   have hsqrtq : ∀ θ : ℝ, Real.sqrt (q θ ^ 2 + 1) = W θ / δ := fun θ =>
-    (Real.sqrt_eq_iff_eq_sq (by positivity) (div_nonneg (Real.sqrt_nonneg _) hδ.le)).mpr
+    (Real.sqrt_eq_iff_eq_sq (by positivity) (hWdnonneg θ)).mpr
       (hWdsq θ).symm
   -- 微分の公式（定数倍と恒等関数。`θ/(2δ)` は恒等関数の `1/(2δ)` 倍）: `q'(θ) = 1/(2δ)`
   have hq' : ∀ θ : ℝ, HasDerivAt q (1 / (2 * δ)) θ := by

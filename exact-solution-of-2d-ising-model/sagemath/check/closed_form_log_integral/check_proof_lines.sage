@@ -1,4 +1,5 @@
 # 対象ラベル: closed_form_log_integral
+# 準備の δ ≠ 0・0 ≤ δ^{-1} の鎖、0 < W(θ) から 0 ≤ W(θ) と W(θ) ≠ 0 の鎖、0 ≤ W(θ)·δ^{-1} = W(θ)/δ の鎖、
 # 準備の鎖 (W/δ)² = W²/δ² = (δ² + θ²/4)/δ² = (θ/(2δ))² + 1 = q² + 1 と √(q²+1) = W/δ、q' = 1/(2δ)、
 # F' の鎖の五行、F(0) の鎖の七行、積分の鎖の五行を確かめる。
 # 帰属:
@@ -23,6 +24,16 @@ for d0 in DPTS:
     assert d0 > 0 and d0*d0 > 0 and d0*d0 == d0^2                        # 1 行目の < と 2 行目の等号を QQ の点で
 assert not (QQ(0)*QQ(0) > 0)                                           # 対照: 仮定 0 < δ を外した δ = 0 では 0 < δδ は成り立たない
 print(f"準備の 0 < δδ = δ² の鎖が QQ[δ] と {len(DPTS)} 点の QQ で成り立つ")
+for d0 in DPTS:                                                         # 準備の δ ≠ 0 と 0 ≤ δ^{-1} の鎖
+    assert (0 <= d0 and 0 != d0) and d0 != 0                            # def_real_strict_order、論理積の後半、等号の対称律の対偶
+    assert 0 < 1/d0 and (0 <= 1/d0 and 0 != 1/d0)                      # real_inverse_of_positive_is_positive と def_real_strict_order
+    for t0 in [QQ(0), QQ(1), QQ(3), QQ(3141)/1000]:
+        W0 = AA(d0^2 + t0^2/4).sqrt()
+        assert 0 < d0^2 + t0^2/4 and 0 < W0                             # sqrt_of_positive_real_is_positive（x → δ²+θ²/4）
+        assert (0 <= W0 and 0 != W0) and W0 != 0                        # def_real_strict_order と対称律の対偶
+        assert 0 <= W0 * (1/d0) and W0 * (1/d0) == W0 / d0              # 順序と乗法の両立と def_real_quotient
+assert AA(-1) * (1/QQ(2)) < 0                                           # 対照: 0 ≤ W を外すと積の非負は成り立たない
+print(f"準備の δ ≠ 0・0 ≤ δ^(-1)・0 < W(θ)・W(θ) ≠ 0・0 ≤ W(θ)/δ の鎖が {len(DPTS)} 点の δ と 4 点の θ で成り立つ")
 assert AA(1).sqrt() == 1   # F(0) の鎖の √1 = 1 の行（sqrt_of_real_one_is_one）
 POINTS = [(QQ(1)/100, QQ(0)), (QQ(1)/10, QQ(1)), (QQ(1)/2, QQ(3)), (QQ(1), QQ(3141)/1000), (QQ(7), QQ(2))]   # θ ∈ [0, π]
 ts, ds = SR.var('ts ds')

@@ -3366,20 +3366,57 @@ y + s
 &&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to \delta)\ \text{を右辺から左辺へ}\bigr)
 \end{aligned}`),
       paragraph([
+        "であり、同じ仮定から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < \delta
+&\Longrightarrow 0 \leq \delta\ \wedge\ 0 \neq \delta
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to \delta)\bigr)\\
+&\Longrightarrow 0 \neq \delta
+&&(\because\ \text{論理積の後半})\\
+&\Longrightarrow \delta \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to \delta,\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0 < \delta
+&\Longrightarrow 0 < \delta^{-1}
+&&\bigl(\because\ \blkref{real_inverse_of_positive_is_positive}\ (a \to \delta)\bigr)\\
+&\Longrightarrow 0 \leq \delta^{-1}\ \wedge\ 0 \neq \delta^{-1}
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to \delta^{-1})\bigr)\\
+&\Longrightarrow 0 \leq \delta^{-1}
+&&(\because\ \text{論理積の前半})
+\end{aligned}`),
+      paragraph([
         "である。",
         "上の ",
         math(String.raw`0 < \delta^2`),
         " から ",
         math(String.raw`\delta^2 + \theta^2/4 \geq \delta^2 > 0`),
-        " であり、これと ",
-        math(String.raw`W(\theta)^2 = \delta^2 + \theta^2/4`),
-        " より ",
-        math(String.raw`W(\theta) \neq 0`),
-        "、したがって ",
-        math(String.raw`W(\theta) > 0`),
-        " である。",
-        math(String.raw`\tfrac{W(\theta)}{\delta} \geq 0`),
-        " であり",
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < \delta^2 + \theta^2/4
+&\Longrightarrow 0 < W(\theta)
+&&\bigl(\because\ \blkref{sqrt_of_positive_real_is_positive}\ (x \to \delta^2 + \theta^2/4)\ \text{と}\ W\ \text{の置き方}\bigr)\\
+&\Longrightarrow 0 \leq W(\theta)\ \wedge\ 0 \neq W(\theta)
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to W(\theta))\bigr)\\
+&\Longrightarrow 0 \leq W(\theta)\ \wedge\ W(\theta) \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to W(\theta),\ y \to 0)\ \text{の対偶を後半に}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。この前半と上の ",
+        math(String.raw`0 \leq \delta^{-1}`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 \leq W(\theta)\ \wedge\ 0 \leq \delta^{-1}
+&\Longrightarrow 0 \leq W(\theta)\cdot\delta^{-1}
+&&\bigl(\because\ \mathbb{R}\ \text{の順序と乗法の両立}\ (0 \leq x\ \wedge\ 0 \leq y) \Rightarrow 0 \leq x\cdot y\ (x \to W(\theta),\ y \to \delta^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\Longrightarrow 0 \leq \frac{W(\theta)}{\delta}
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to W(\theta),\ z \to \delta)\ \text{を右辺から左辺へ。}\delta \neq 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり",
       ]),
       displayMath(String.raw`\begin{aligned}
 \left(\frac{W(\theta)}{\delta}\right)^2
@@ -3463,6 +3500,7 @@ F(0)
     conversion: {
       status: "added",
       notes: [
+        "2026-11-27（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 準備の根拠を書かずに述べていた δ ≠ 0・W(θ) ≠ 0・W(θ) > 0・W(θ)/δ ≥ 0 を、def_real_strict_order と等号の対称律の対偶で δ ≠ 0、real_inverse_of_positive_is_positive と def_real_strict_order で 0 ≤ δ^{-1}、sqrt_of_positive_real_is_positive（x → δ²+θ²/4）で 0 < W(θ)、def_real_strict_order と対称律の対偶で 0 ≤ W(θ) と W(θ) ≠ 0（W(θ)² = δ²+θ²/4 から W(θ) ≠ 0 を出していた根拠の無い段を置き換えた）、順序と乗法の両立（set_and_algebra_notation）と def_real_quotient で 0 ≤ W(θ)/δ を出す鎖にした。Lean の integral_inv_sqrt_pi の ne_of_gt・W(θ) ≠ 0 の linarith・lt_of_le_of_ne・div_nonneg を同じ鎖にした。値と主張は不変。",
         "2026-11-27（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 準備の δ² > 0 を、仮定の 0 < δ に real_product_of_positives_is_positive（a → δ, b → δ）を当てて 0 < δδ、square_of_real_number_is_product（r → δ）を右辺から左辺へ当てて δ² に戻す鎖にした。Lean の integral_inv_sqrt_pi の positivity を同じ鎖にした。値と主張は不変。",
         "2026-11-02: 旧 closed_form_log_integral は (1) の閉じた形、(2) の arcsinh と積分の log 評価、(3) の 3/2 乗の積分の評価を束ねていたので、1 ブロック 1 主張に分け、このブロックには (1) だけを残した。" +
           "旧証明の √((θ²+4δ²)/(4δ²)) = √(θ²+4δ²)/(2δ) は平方根の商の規則を定めるブロックが本文に無いので、平方根の一意性から √(q²+1) = W/δ を示す形に改め、F(0) = 0 と F' の連続性を書いた。",
