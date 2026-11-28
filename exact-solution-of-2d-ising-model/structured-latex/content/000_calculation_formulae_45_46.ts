@@ -7,7 +7,7 @@ export default defineBlocks([
     origin: { path: "_old/typst/parts/000_計算公式/045_claim_共役写像は環準同型.typ", ordinal: 46 },
     title: { text: "共役写像は環準同型" },
     labels: ["conjugation_is_ring_homomorphism"],
-    lean: ["Ising2D.Conjugation.conj_mul_matrix", "Ising2D.Conjugation.conj_one_matrix", "Ising2D.Conjugation.conj_comp_matrix", "Ising2D.Conjugation.conj_comp_matrix_of_chains", "Ising2D.Conjugation.mul_mul_inv_rev_matrix", "Ising2D.Conjugation.inv_rev_mul_mul_matrix", "Ising2D.Conjugation.units_mul_inv_rev_matrix"],
+    lean: ["Ising2D.Conjugation.conj_mul_matrix", "Ising2D.Conjugation.conj_one_matrix", "Ising2D.Conjugation.conj_comp_matrix", "Ising2D.Conjugation.conj_comp_matrix_of_chains", "Ising2D.Conjugation.mul_mul_inv_rev_matrix", "Ising2D.Conjugation.inv_rev_mul_mul_matrix", "Ising2D.Conjugation.units_mul_inv_rev_matrix", "Ising2D.Conjugation.conj_mul_tensorPow", "Ising2D.Conjugation.conj_one_tensorPow"],
     statement: [
       paragraph([math(String.raw`n \in \mathbb{Z}_{\geq 1}`), " とする。"]),
       paragraph([

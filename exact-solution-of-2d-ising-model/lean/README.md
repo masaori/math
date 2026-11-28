@@ -895,8 +895,8 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.centralizer_is_scalar` | 全元と可換な元はスカラー | `<centralizer_is_scalar>` |
 | `Ising2D.centralizer_is_scalar_abstract` | 同上（抽象テンソル冪側） | 同上（移送の例） |
 | `Ising2D.matExp_hasSum` | `exp(X) = ∑_k (k!)^{-1}X^k`（Frobenius ノルムでの級数の和） | `def_exp` |
-| `Ising2D.Conjugation.conj_mul_matrix` | 共役写像は乗法的（`(Matrix (Fin n) (Fin n) ℂ)ˣ` の単元 `B`、人手の乗法性の鎖の 9 行と 1 対 1 の `calc`。`TensorPow M` での系は `conj_mul_tensorPow`） | `<conjugation_is_ring_homomorphism>` 乗法性 |
-| `Ising2D.Conjugation.conj_one_matrix` | 共役写像は単位的（人手の単位性の鎖の 3 行。`TensorPow M` での系は `conj_one_tensorPow`） | `<conjugation_is_ring_homomorphism>` 単位性 |
+| `Ising2D.Conjugation.conj_mul_matrix` | 共役写像は乗法的（`(Matrix (Fin n) (Fin n) ℂ)ˣ` の単元 `B`、人手の乗法性の鎖の 9 行と 1 対 1 の `calc`。`Mat(2^M, ℂ)` の場合の具体版は `ClaimTensorPowConjugationIsRingHom.lean` の `conj_mul_tensorPow`（`B^{-1}` を行列 `Binv` と `B^{-1}B = I` の仮定で受け、`T_B` を開いた形の 6 段）） | `<conjugation_is_ring_homomorphism>` 乗法性 |
+| `Ising2D.Conjugation.conj_one_matrix` | 共役写像は単位的（人手の単位性の鎖の 3 行。`Mat(2^M, ℂ)` の場合の具体版は `conj_one_tensorPow`（`BB^{-1} = I` の仮定で受ける 2 段）） | `<conjugation_is_ring_homomorphism>` 単位性 |
 | `Ising2D.Conjugation.mul_mul_inv_rev_matrix` / `inv_rev_mul_mul_matrix` / `mulUnitOfChains` / `units_mul_inv_rev_matrix` | `(GH)(H^{-1}G^{-1}) = I`・`(H^{-1}G^{-1})(GH) = I`（各 5 行）、2 本から組んだ単元（`GH` は正則。`mulUnitOfChains_eq_mul` で `G * H` と同じ）、`(GH)^{-1} = H^{-1}G^{-1}`（5 行。値が `GH` のどの単元についても） | `<conjugation_is_ring_homomorphism>` 合成則の準備 |
 | `Ising2D.Conjugation.conj_comp_matrix` / `conj_comp_matrix_of_chains` | `(T_G ∘ T_H)(X) = T_{GH}(X)`（人手の合成則の鎖の 8 行。`T_{GH}` は値が `GH` の単元の共役、2 本の鎖から組んだ単元で述べたものが `_of_chains`） | `<conjugation_is_ring_homomorphism>` 合成則 |
 | `Ising2D.Conjugation.T_mul` | 共役写像は乗法的（一般の環 `R` の単元。人手と 1 対 1 ではない） | `<conjugation_is_ring_homomorphism>` (1) |

@@ -703,6 +703,8 @@ targets=(
   Ising2D.Conjugation.conj_comp_matrix_of_necSuf
   Ising2D.Conjugation.conj_mul_tensorPow
   Ising2D.Conjugation.conj_one_tensorPow
+  Ising2D.Conjugation.conj_mul_tensorPow_of_necSuf
+  Ising2D.Conjugation.conj_one_tensorPow_of_necSuf
   Ising2D.Conjugation.T_mul
   Ising2D.Conjugation.T_one
   Ising2D.Conjugation.T_add

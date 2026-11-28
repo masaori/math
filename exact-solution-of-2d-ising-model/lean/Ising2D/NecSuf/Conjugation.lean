@@ -9,7 +9,7 @@
 
 | 人手証明のラベル | 具体版（複素行列） |
 | --- | --- |
-| `<conjugation_is_ring_homomorphism>` | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` |
+| `<conjugation_is_ring_homomorphism>` | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean`（`Mat(2^M, ℂ)` の乗法性と単位性は同じフォルダの `ClaimTensorPowConjugationIsRingHom.lean`） |
 
 本ファイルの必要十分版から具体版（`Mat(n,ℂ)` と `Matrix.inv` による共役）を系として導出したものは
 `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHomFromNecSuf.lean` にある。

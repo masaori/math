@@ -7,9 +7,9 @@
 
 | | ファイル | 主要な宣言 |
 | --- | --- | --- |
-| 具体版（人手証明と 1 対 1） | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` | `Ising2D.Conjugation.conj_mul_matrix` / `conj_one_matrix` / `mul_mul_inv_rev_matrix` / `inv_rev_mul_mul_matrix` / `mulUnitOfChains` / `units_mul_inv_rev_matrix` / `conj_comp_matrix` / `conj_comp_matrix_of_chains`（`Matrix.inv` の記法の `matrix_conj_mul` / `matrix_conj_one` / `matrix_conj_comp` は人手の鎖と 1 対 1 ではない） |
+| 具体版（人手証明と 1 対 1） | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` | `Ising2D.Conjugation.conj_mul_matrix` / `conj_one_matrix` / `mul_mul_inv_rev_matrix` / `inv_rev_mul_mul_matrix` / `mulUnitOfChains` / `units_mul_inv_rev_matrix` / `conj_comp_matrix` / `conj_comp_matrix_of_chains`、`Mat(2^M, ℂ)` の場合の `ClaimTensorPowConjugationIsRingHom.lean` の `conj_mul_tensorPow` / `conj_one_tensorPow`（`Matrix.inv` の記法の `matrix_conj_mul` / `matrix_conj_one` / `matrix_conj_comp` は人手の鎖と 1 対 1 ではない） |
 | 必要十分版 | `Ising2D/NecSuf/Conjugation.lean` | `Ising2D.NecSuf.Conj.sandwich_mul` / `sandwich_one` / `sandwich_comp` / `sandwich_add` / `conjMulAutHom` |
-| 必要十分版からの導出 | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHomFromNecSuf.lean` | `Ising2D.Conjugation.conj_mul_matrix_of_necSuf` / `conj_one_matrix_of_necSuf` / `conj_comp_matrix_of_necSuf`、`TensorPow M` での系 `conj_mul_tensorPow` / `conj_one_tensorPow`、`matrix_conj_mul_of_necSuf` ほか |
+| 必要十分版からの導出 | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHomFromNecSuf.lean` | `Ising2D.Conjugation.conj_mul_matrix_of_necSuf` / `conj_one_matrix_of_necSuf` / `conj_comp_matrix_of_necSuf`、`Mat(2^M, ℂ)` の場合の具体版を得る `conj_mul_tensorPow_of_necSuf` / `conj_one_tensorPow_of_necSuf`、`matrix_conj_mul_of_necSuf` ほか |
 
 以下はすべて Lean で通っている証明（`lake build` と `scripts/check-no-sorry.sh` が通る状態）に
 基づく記述であり、見込みや推測ではない。

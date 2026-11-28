@@ -24,6 +24,7 @@
 import Ising2D.Basic
 import Ising2D.NecSuf.Conjugation
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimTensorPowConjugationIsRingHom
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 
 namespace Ising2D.Conjugation
@@ -126,18 +127,19 @@ end ComplexMatrixChains
 
 section TensorPow
 
-/-! ### `TensorPow M`（`Mat(2^M,ℂ)` の Lean の型）での系
+/-! ### `TensorPow M`（`Mat(2^M,ℂ)` の Lean の型）の具体版を必要十分版の特殊化として得る
 
-`sign_flip_conjugation` Step 2・Step 3 が `B = U`、`n = 2^{M_col}` で使う乗法性と単位性。添字の型が `Fin n` でなく
-`Conf M` なので、具体版を型ごとに書き直さず、必要十分版をそのまま特殊化する（他の `*_tensorPow` の系と同じ扱い）。 -/
+具体版 `conj_mul_tensorPow`・`conj_one_tensorPow`（`ClaimTensorPowConjugationIsRingHom.lean`。`sign_flip_conjugation` Step 2・Step 3 が
+`B = U`、`n = 2^{M_col}` で使う乗法性と単位性）を、`Conj.sandwich_mul`・`Conj.sandwich_one` の係数 `TensorPow M` の特殊化として得る。
+`B^{-1}` は行列 `Binv` で、`Conj.sandwich_mul` の `u * b = 1` に `Binv * B = 1` を、`Conj.sandwich_one` の `b * u = 1` に `B * Binv = 1` を渡す。 -/
 
-theorem conj_mul_tensorPow {M : ℕ} (B : (TensorPow M)ˣ) (A C : TensorPow M) :
-    T B (A * C) = T B A * T B C :=
-  Conj.sandwich_mul B.inv_mul A C
+theorem conj_mul_tensorPow_of_necSuf {M : ℕ} (B Binv : TensorPow M) (hinv : Binv * B = 1) (A C : TensorPow M) :
+    B * (A * C) * Binv = (B * A * Binv) * (B * C * Binv) :=
+  Conj.sandwich_mul (b := B) (u := Binv) hinv A C
 
-theorem conj_one_tensorPow {M : ℕ} (B : (TensorPow M)ˣ) :
-    T B (1 : TensorPow M) = 1 :=
-  Conj.sandwich_one B.mul_inv
+theorem conj_one_tensorPow_of_necSuf {M : ℕ} (B Binv : TensorPow M) (hinv : B * Binv = 1) :
+    B * (1 : TensorPow M) * Binv = 1 :=
+  Conj.sandwich_one (b := B) (u := Binv) hinv
 
 end TensorPow
 

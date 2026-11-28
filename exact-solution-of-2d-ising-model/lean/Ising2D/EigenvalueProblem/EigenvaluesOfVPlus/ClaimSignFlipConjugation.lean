@@ -36,7 +36,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleOfNegatedMatrix
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowNegationIsScalarMultipleByMinusOne
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowDoubleNegation
-import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHomFromNecSuf
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimTensorPowConjugationIsRingHom
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesSumsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSumFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesDifferenceFromNecSuf
@@ -573,7 +574,7 @@ noncomputable def UflipUnit (M : ℕ) : (TensorPow M)ˣ :=
   ⟨Uflip M, UflipInv M, Uflip_mul_inv, UflipInv_mul⟩
 
 /-- 人手 Step 2・Step 3 の 3 行: 共役 `X ↦ U X U^{-1}` は積を保つ。
-`U(AB)U^{-1} = T_U(AB)`（`T_B` の定義）`= T_U(A)T_U(B)`（`conjugation_is_ring_homomorphism` の乗法性。具体版 `Conjugation.conj_mul_matrix` の `TensorPow M` の系 `Conjugation.conj_mul_tensorPow`）
+`U(AB)U^{-1} = T_U(AB)`（`T_B` の定義）`= T_U(A)T_U(B)`（`conjugation_is_ring_homomorphism` の乗法性。`Mat(2^M, ℂ)` の具体版 `Conjugation.conj_mul_tensorPow` に `B → U`、`B^{-1} → U^{-1}` を渡す）
 `= (UAU^{-1})(UBU^{-1})`（`T_B` の定義）。Lean の `U * X * U⁻¹` は人手の読み `(UX)U^{-1}` と同じ括弧である。 -/
 theorem Uflip_conj_mul (A B : TensorPow M) :
     Uflip M * (A * B) * UflipInv M
@@ -581,7 +582,7 @@ theorem Uflip_conj_mul (A B : TensorPow M) :
   calc Uflip M * (A * B) * UflipInv M
       = Conjugation.T (UflipUnit M) (A * B) := rfl                           -- `T_B` の定義（`B = U`）
     _ = Conjugation.T (UflipUnit M) A * Conjugation.T (UflipUnit M) B :=
-        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性
+        Conjugation.conj_mul_tensorPow (Uflip M) (UflipInv M) UflipInv_mul _ _  -- 乗法性
     _ = (Uflip M * A * UflipInv M) * (Uflip M * B * UflipInv M) := rfl       -- `T_B` の定義（`B = U`）
 
 /-- 人手 Step 4 の 2 行: `(U(cA))U^{-1} = (c(UA))U^{-1} = c((UA)U^{-1})`。 -/
@@ -610,7 +611,7 @@ theorem Uflip_conj_xString_zero :
   calc Uflip M * xString M 0 * UflipInv M
       = Uflip M * 1 * UflipInv M := by rw [xString_zero]                   -- `P_0` の定義
     _ = Conjugation.T (UflipUnit M) 1 := rfl                                -- `T_B` の定義（`B = U`）
-    _ = 1 := Conjugation.conj_one_tensorPow _                               -- 単位性（`Conjugation.conj_one_matrix` の `TensorPow M` の系）
+    _ = 1 := Conjugation.conj_one_tensorPow (Uflip M) (UflipInv M) Uflip_mul_inv -- 単位性（`n → 2^{M_col}`, `B → U`）
     _ = xString M 0 := xString_zero.symm                                    -- `P_0` の定義
 
 /-- 人手 Step 2 の帰納法の段の前半（場合分けの前の 6 行）:
@@ -743,7 +744,7 @@ theorem Uflip_conj_ZY (j : Fin M) : Uflip M * (Z j * Y j) * UflipInv M = -(Z j *
   calc Uflip M * (Z j * Y j) * UflipInv M
       = Conjugation.T (UflipUnit M) (Z j * Y j) := rfl                      -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
     _ = Conjugation.T (UflipUnit M) (Z j) * Conjugation.T (UflipUnit M) (Y j) :=
-        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性（`n → 2^{M_col}`, `B → U`）
+        Conjugation.conj_mul_tensorPow (Uflip M) (UflipInv M) UflipInv_mul _ _  -- 乗法性（`n → 2^{M_col}`, `B → U`）
     _ = (Uflip M * Z j * UflipInv M) * (Uflip M * Y j * UflipInv M) := rfl   -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
     _ = (-(Z j)) * Y j := by rw [Uflip_conj_Z, Uflip_conj_Y]                 -- Step 2 の `UZ_mU^{-1} = -Z_m` と `UY_mU^{-1} = Y_m` を `m = j` で
     _ = -(Z j * Y j) := neg_mul_matrix_tensorPow _ _                         -- `negation_factors_out_of_left_factor`（`m, n, p → 2^{M_col}`, `A → Z_j`, `B → Y_j`）
@@ -790,7 +791,7 @@ theorem Uflip_conj_YZ (j k : Fin M) : Uflip M * (Y j * Z k) * UflipInv M = -(Y j
   calc Uflip M * (Y j * Z k) * UflipInv M
       = Conjugation.T (UflipUnit M) (Y j * Z k) := rfl                      -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
     _ = Conjugation.T (UflipUnit M) (Y j) * Conjugation.T (UflipUnit M) (Z k) :=
-        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性（`n → 2^{M_col}`, `B → U`）
+        Conjugation.conj_mul_tensorPow (Uflip M) (UflipInv M) UflipInv_mul _ _  -- 乗法性（`n → 2^{M_col}`, `B → U`）
     _ = (Uflip M * Y j * UflipInv M) * (Uflip M * Z k * UflipInv M) := rfl   -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
     _ = Y j * (-(Z k)) := by rw [Uflip_conj_Y, Uflip_conj_Z]                 -- Step 2 の `UY_mU^{-1} = Y_m` を `m = j` で、`UZ_mU^{-1} = -Z_m` を `m = k` で
     _ = -(Y j * Z k) := mul_neg_matrix_tensorPow _ _                         -- `negation_factors_out_of_right_factor`（`m, n, p → 2^{M_col}`, `A → Y_j`, `B → Z_k`）
