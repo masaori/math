@@ -1308,7 +1308,7 @@ s'(y)
       ]),
     ],
     proof: [
-      paragraph(["実数の平方は非負なので ", math(String.raw`\sinh^2\!\left(\tfrac{x}{2}\right) \geq 0`), " である。"]),
+      paragraph([ref("real_square_is_nonnegative"), "（", math(String.raw`r \to \sinh\!\left(\tfrac{x}{2}\right)`), "）から ", math(String.raw`\sinh^2\!\left(\tfrac{x}{2}\right) = \left(\sinh\!\left(\tfrac{x}{2}\right)\right)^2 \geq 0`), " である（", math(String.raw`\sinh^2 a := (\sinh a)^2`), "）。"]),
       displayMath(String.raw`\begin{aligned}
 \sinh^2\!\left(\tfrac{x}{2}\right) \geq 0
 &\Longrightarrow 2\sinh^2\!\left(\tfrac{x}{2}\right) \geq 2\cdot 0
@@ -1329,6 +1329,7 @@ s'(y)
     conversion: {
       status: "added",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を、新しく足した主張 real_square_is_nonnegative の参照にした。Lean の具体版の sq_nonneg も同じ主張にした。",
         "2026-11-02: 旧 cosh_addition_and_half_angle (5) の証明が積分の単調性から導いていた cosh u ≥ 1 を、半角公式から導く独立の主張にした。",
       ],
     },
@@ -3349,8 +3350,6 @@ y + s
         math(String.raw`q(\theta) := \dfrac{\theta}{2\delta} \in \mathbb{R}`),
         "、",
         math(String.raw`F(\theta) := 2\,\mathrm{arcsinh}(q(\theta)) \in \mathbb{R}`),
-        "、",
-        math(String.raw`W(\theta) := \sqrt{\delta^2 + \theta^2/4} \in \mathbb{R}_{\geq 0}`),
         " と置く。",
       ]),
       paragraph([
@@ -3387,12 +3386,114 @@ y + s
 &&(\because\ \text{論理積の前半})
 \end{aligned}`),
       paragraph([
+        "である。有理数の大小比較の ",
+        math(String.raw`0 < 4`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < 4
+&\Longrightarrow 0 \leq 4\ \wedge\ 0 \neq 4
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to 4)\bigr)\\
+&\Longrightarrow 0 \neq 4
+&&(\because\ \text{論理積の後半})\\
+&\Longrightarrow 4 \neq 0
+&&\bigl(\because\ \text{等号の対称律}\ x = y \Rightarrow y = x\ (x \to 4,\ y \to 0)\ \text{の対偶}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0 < 4
+&\Longrightarrow 0 < 4^{-1}
+&&\bigl(\because\ \blkref{real_inverse_of_positive_is_positive}\ (a \to 4)\bigr)\\
+&\Longrightarrow 0 \leq 4^{-1}\ \wedge\ 0 \neq 4^{-1}
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to 4^{-1})\bigr)\\
+&\Longrightarrow 0 \leq 4^{-1}
+&&(\because\ \text{論理積の前半})
+\end{aligned}`),
+      paragraph([
         "である。",
-        "上の ",
+        ref("real_square_is_nonnegative"),
+        "（",
+        math(String.raw`r \to \theta`),
+        "）の ",
+        math(String.raw`0 \leq \theta^2`),
+        " と上の ",
+        math(String.raw`0 \leq 4^{-1}`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 \leq \theta^2\ \wedge\ 0 \leq 4^{-1}
+&\Longrightarrow 0 \leq \theta^2\cdot 4^{-1}
+&&\bigl(\because\ \mathbb{R}\ \text{の順序と乗法の両立}\ (x \to \theta^2,\ y \to 4^{-1})\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\Longrightarrow 0 \leq \theta^2/4
+&&\bigl(\because\ \blkref{def_real_quotient}\ (y \to \theta^2,\ z \to 4)\ \text{を右辺から左辺へ。}4 \neq 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。これから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta^2
+&= 0 + \delta^2
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to \delta^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\leq \theta^2/4 + \delta^2
+&&\bigl(\because\ 0 \leq \theta^2/4\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x \le y \Rightarrow x + t \le y + t\ (x \to 0,\ y \to \theta^2/4,\ t \to \delta^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= \delta^2 + \theta^2/4
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の交換律}\ (x \to \theta^2/4,\ y \to \delta^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。上の ",
         math(String.raw`0 < \delta^2`),
-        " から ",
-        math(String.raw`\delta^2 + \theta^2/4 \geq \delta^2 > 0`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 < \delta^2
+&\Longrightarrow 0 \leq \delta^2\ \wedge\ 0 \neq \delta^2
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to \delta^2)\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 \leq \delta^2\ \wedge\ \delta^2 \leq \delta^2 + \theta^2/4
+&\Longrightarrow 0 \leq \delta^2 + \theta^2/4
+&&\bigl(\because\ \mathbb{R}\ \text{の順序の推移律}\ (x \to 0,\ y \to \delta^2,\ t \to \delta^2 + \theta^2/4)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`0 = \delta^2 + \theta^2/4`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 = \delta^2 + \theta^2/4
+&\Longrightarrow \delta^2 \leq 0
+&&\bigl(\because\ \text{上の}\ \delta^2 \leq \delta^2 + \theta^2/4\ \text{の右辺に代入}\bigr)\\
+&\Longrightarrow \delta^2 \leq 0\ \wedge\ 0 \leq \delta^2
+&&\bigl(\because\ \text{上の}\ 0 \leq \delta^2\bigr)\\
+&\Longrightarrow \delta^2 = 0
+&&\bigl(\because\ \mathbb{R}\ \text{の順序の反対称律}\ (x \to \delta^2,\ y \to 0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&\Longrightarrow 0 = \delta^2
+&&\bigl(\because\ \text{等号の対称律}\ (x \to \delta^2,\ y \to 0)\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、上の ",
+        math(String.raw`0 \neq \delta^2`),
+        " に反する。よって ",
+        math(String.raw`0 \neq \delta^2 + \theta^2/4`),
         " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0 \leq \delta^2 + \theta^2/4\ \wedge\ 0 \neq \delta^2 + \theta^2/4
+&\Longrightarrow 0 < \delta^2 + \theta^2/4
+&&\bigl(\because\ \blkref{def_real_strict_order}\ (x \to 0,\ y \to \delta^2 + \theta^2/4)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0 \leq \delta^2 + \theta^2/4`),
+        " なので、",
+        ref("definition_of_sqrt_r_positive"),
+        " の平方根で ",
+        math(String.raw`W(\theta) := \sqrt{\delta^2 + \theta^2/4} \in \mathbb{R}_{\geq 0}`),
+        " と置く。上の ",
+        math(String.raw`0 < \delta^2 + \theta^2/4`),
+        " から",
       ]),
       displayMath(String.raw`\begin{aligned}
 0 < \delta^2 + \theta^2/4
@@ -3500,6 +3601,7 @@ F(0)
     conversion: {
       status: "added",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 準備が「上の 0 < δ² から δ²+θ²/4 ≥ δ² > 0」と根拠を書かずに述べ、平方根の引数の非負を示す前に W(θ) を置いていた。0 < 4 から 4 ≠ 0 と 0 ≤ 4^{-1}、real_square_is_nonnegative（r → θ。新しく足した主張）と順序と乗法の両立と def_real_quotient で 0 ≤ θ²/4、加法の単位元・順序と加法の両立・加法の交換律で δ² ≤ δ²+θ²/4、def_real_strict_order・順序の推移律・反対称律・等号の対称律で 0 < δ²+θ²/4 を出す鎖にし、W(θ) を置く段をその後へ移した。Lean の具体版 integral_inv_sqrt_pi の sq_nonneg・linarith を同じ鎖にした。",
         "2026-11-27（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 準備の根拠を書かずに述べていた δ ≠ 0・W(θ) ≠ 0・W(θ) > 0・W(θ)/δ ≥ 0 を、def_real_strict_order と等号の対称律の対偶で δ ≠ 0、real_inverse_of_positive_is_positive と def_real_strict_order で 0 ≤ δ^{-1}、sqrt_of_positive_real_is_positive（x → δ²+θ²/4）で 0 < W(θ)、def_real_strict_order と対称律の対偶で 0 ≤ W(θ) と W(θ) ≠ 0（W(θ)² = δ²+θ²/4 から W(θ) ≠ 0 を出していた根拠の無い段を置き換えた）、順序と乗法の両立（set_and_algebra_notation）と def_real_quotient で 0 ≤ W(θ)/δ を出す鎖にした。Lean の integral_inv_sqrt_pi の ne_of_gt・W(θ) ≠ 0 の linarith・lt_of_le_of_ne・div_nonneg を同じ鎖にした。値と主張は不変。",
         "2026-11-27（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 準備の δ² > 0 を、仮定の 0 < δ に real_product_of_positives_is_positive（a → δ, b → δ）を当てて 0 < δδ、square_of_real_number_is_product（r → δ）を右辺から左辺へ当てて δ² に戻す鎖にした。Lean の integral_inv_sqrt_pi の positivity を同じ鎖にした。値と主張は不変。",
         "2026-11-02: 旧 closed_form_log_integral は (1) の閉じた形、(2) の arcsinh と積分の log 評価、(3) の 3/2 乗の積分の評価を束ねていたので、1 ブロック 1 主張に分け、このブロックには (1) だけを残した。" +

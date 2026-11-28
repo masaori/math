@@ -14,7 +14,7 @@
 | --- | --- |
 | `square_of_real_absolute_value` の `q ≥ 0` の 1 行（`def_real_absolute_value`） | `abs_of_nonneg` で `|q| = q` に開く 1 段 |
 | `square_of_real_absolute_value` の `q < 0` の 4 行（`def_real_absolute_value`、`square_of_real_number_is_product`、ℝ で `(-a)(-b) = ab`、`square_of_real_number_is_product` を右辺から左辺へ） | `abs_of_neg` の段、`square_of_real_number_is_product` の段、`neg_mul_neg` の段、`square_of_real_number_is_product` の逆向きの段 |
-| `square_of_real_sum_is_at_most_twice_sum_of_squares` の 6 行の鎖 | 準備の `0 ≤ (a - b)^2` は `sq_nonneg`、`calc` の 6 段（加法の単位元 `add_zero`、準備と順序と加法の両立 `add_le_add`、`square_of_real_number_is_product` を 2 か所、展開、`square_of_real_number_is_product` を右辺から左辺へ 4 か所、加法と減法の計算） |
+| `square_of_real_sum_is_at_most_twice_sum_of_squares` の 6 行の鎖 | 準備の `0 ≤ (a - b)^2` は `real_square_is_nonnegative`、`calc` の 6 段（加法の単位元 `add_zero`、準備と順序と加法の両立 `add_le_add`、`square_of_real_number_is_product` を 2 か所、展開、`square_of_real_number_is_product` を右辺から左辺へ 4 か所、加法と減法の計算） |
 
 * 人手 `def_real_absolute_value`（`q ≥ 0` なら `|q| = q`、`q < 0` なら `|q| = -q`）は、`ClaimRealAbsoluteValueBoundsTriangleAndProduct.lean` と同じく
   mathlib の `abs_of_nonneg`・`abs_of_neg` で場合分けの形へ開いて読む。
@@ -24,6 +24,7 @@
   人手の展開は `ab` と `ba` を分けて書き、乗法の可換性を使わない（必要十分版が `Ring` で通ることがその検査である）。
 -/
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSquareOfRealNumberIsProduct
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealSquareIsNonnegative
 import Mathlib.Algebra.Order.Ring.Abs
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic.Ring
@@ -49,7 +50,7 @@ theorem square_of_real_sum_is_at_most_twice_sum_of_squares (a b : ℝ) :
   calc (a + b) ^ 2
       = (a + b) ^ 2 + 0 := (add_zero _).symm                                  -- `0` は ℝ の加法の単位元
     _ ≤ (a + b) ^ 2 + (a - b) ^ 2 :=
-        add_le_add le_rfl (sq_nonneg (a - b))                                 -- 準備の `0 ≤ (a - b)^2`（実数の平方は非負）と順序と加法の両立（`c → (a + b)^2`）
+        add_le_add le_rfl (real_square_is_nonnegative (a - b))                -- 準備の `0 ≤ (a - b)^2`（`real_square_is_nonnegative`、`r → a − b`）と順序と加法の両立（`c → (a + b)^2`）
     _ = (a + b) * (a + b) + (a - b) * (a - b) := by
         rw [square_of_real_number_is_product (a + b),
           square_of_real_number_is_product (a - b)]                           -- `square_of_real_number_is_product`（`r → a + b`, `r → a - b`）を 2 か所へ同時適用

@@ -17,6 +17,7 @@
 `arsinh_log_bounds_of_necSuf`・`integral_inv_pow_three_half_pi_of_necSuf`）。
 -/
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealProductOfPositivesIsPositive
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealSquareIsNonnegative
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealInverseOfPositiveIsPositive
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.ClaimRealZeroLessThanTwo
 import Ising2D.MathematicalTools.SetNotationAndComplexCartesianArithmetic.DefinitionRealQuotient
@@ -49,14 +50,16 @@ open Real MeasureTheory
 `real_product_of_positives_is_positive` と `square_of_real_number_is_product` で、`δ ≠ 0`・`0 ≤ δ⁻¹`・`W(θ) > 0`・
 `W(θ)/δ ≥ 0` は人手の鎖どおり `def_real_strict_order`・論理積の前半と後半・等号の対称律の対偶・
 `real_inverse_of_positive_is_positive`・`sqrt_of_positive_real_is_positive`・順序と乗法の両立（`mul_nonneg`）・
-`def_real_quotient` で受ける。 -/
+`def_real_quotient` で受ける。`4 ≠ 0`・`0 ≤ 4⁻¹`・`0 ≤ θ²/4`・`δ² ≤ δ²+θ²/4`・`0 < δ²+θ²/4` も人手の鎖どおり、
+有理数の大小比較の `0 < 4`（`norm_num`）・`real_square_is_nonnegative`・加法の単位元（`zero_add`）・順序と加法の両立
+（`add_le_add_left`）・加法の交換律（`add_comm`）・順序の推移律（`le_trans`）・反対称律（`le_antisymm`）で受ける。
+人手は `θ ∈ [0,π]` について述べるが、この鎖は `θ ≥ 0` を使わないので Lean は `θ ∈ ℝ` 全体で述べる。 -/
 theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
     (∫ θ in (0:ℝ)..Real.pi, (Real.sqrt (δ ^ 2 + θ ^ 2 / 4))⁻¹)
       = 2 * Real.arsinh (Real.pi / (2 * δ)) := by
   -- 準備: `q(θ) := θ/(2δ)`, `F(θ) := 2 arcsinh(q(θ))`, `W(θ) := √(δ² + θ²/4)`
   set q : ℝ → ℝ := fun θ => θ / (2 * δ) with hq_def
   set F : ℝ → ℝ := fun θ => 2 * Real.arsinh (q θ) with hF_def
-  set W : ℝ → ℝ := fun θ => Real.sqrt (δ ^ 2 + θ ^ 2 / 4) with hW_def
   -- 準備の `0 < δ²` の鎖
   have hδsq : 0 < δ ^ 2 :=
     calc 0 < δ * δ := real_product_of_positives_is_positive δ δ hδ hδ
@@ -73,13 +76,49 @@ theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
     ((real_lt_iff_le_and_ne 0 δ⁻¹).mp (real_inverse_of_positive_is_positive δ hδ)).1
                                         -- `real_inverse_of_positive_is_positive`（`a → δ`）、
                                         -- `def_real_strict_order`（`x → 0, y → δ⁻¹`）、論理積の前半
-  -- 上の `0 < δ²` から `δ² + θ²/4 ≥ δ² > 0`
+  -- 準備の `4 ≠ 0` と `0 ≤ 4⁻¹` の鎖
+  have h4 : (0 : ℝ) < 4 := by norm_num  -- 有理数の大小比較の `0 < 4`
+  have h4' : 0 ≤ (4 : ℝ) ∧ (0 : ℝ) ≠ 4 := (real_lt_iff_le_and_ne 0 4).mp h4
+                                        -- `def_real_strict_order`（`x → 0, y → 4`）
+  have h4ne : (4 : ℝ) ≠ 0 := fun h => h4'.2 h.symm
+                                        -- 論理積の後半と、等号の対称律（`x → 4, y → 0`）の対偶
+  have h4inv : 0 ≤ (4 : ℝ)⁻¹ :=
+    ((real_lt_iff_le_and_ne 0 (4 : ℝ)⁻¹).mp (real_inverse_of_positive_is_positive 4 h4)).1
+                                        -- `real_inverse_of_positive_is_positive`（`a → 4`）、
+                                        -- `def_real_strict_order`（`x → 0, y → 4⁻¹`）、論理積の前半
+  -- 準備の `0 ≤ θ²/4` の鎖
+  have hθ4 : ∀ θ : ℝ, 0 ≤ θ ^ 2 / 4 := fun θ => by
+    have h : 0 ≤ θ ^ 2 * (4 : ℝ)⁻¹ := mul_nonneg (real_square_is_nonnegative θ) h4inv
+                                        -- `real_square_is_nonnegative`（`r → θ`）と順序と乗法の両立（`x → θ², y → 4⁻¹`）
+    rw [real_div_eq_mul_inv (θ ^ 2) 4 h4ne]
+                                        -- `def_real_quotient`（`y → θ², z → 4`）を右辺から左辺へ。`4 ≠ 0`
+    exact h
+  -- 準備の `δ² ≤ δ² + θ²/4` の鎖
+  have hδle : ∀ θ : ℝ, δ ^ 2 ≤ δ ^ 2 + θ ^ 2 / 4 := fun θ =>
+    calc δ ^ 2 = 0 + δ ^ 2 := (zero_add (δ ^ 2)).symm
+                                        -- 加法の単位元 `0 + x = x`（`x → δ²`）を右辺から左辺へ
+      _ ≤ θ ^ 2 / 4 + δ ^ 2 := add_le_add_left (hθ4 θ) (δ ^ 2)
+                                        -- 順序と加法の両立（`x → 0, y → θ²/4, t → δ²`）
+      _ = δ ^ 2 + θ ^ 2 / 4 := add_comm (θ ^ 2 / 4) (δ ^ 2)
+                                        -- 加法の交換律（`x → θ²/4, y → δ²`）
+  -- 準備の `0 < δ² + θ²/4` の鎖
+  have hδsq' : 0 ≤ δ ^ 2 ∧ (0 : ℝ) ≠ δ ^ 2 := (real_lt_iff_le_and_ne 0 (δ ^ 2)).mp hδsq
+                                        -- `def_real_strict_order`（`x → 0, y → δ²`）
+  have hrad_le : ∀ θ : ℝ, 0 ≤ δ ^ 2 + θ ^ 2 / 4 := fun θ => le_trans hδsq'.1 (hδle θ)
+                                        -- 順序の推移律（`x → 0, y → δ², t → δ² + θ²/4`）
+  have hrad_ne : ∀ θ : ℝ, (0 : ℝ) ≠ δ ^ 2 + θ ^ 2 / 4 := fun θ e => by
+    have h1 : δ ^ 2 ≤ 0 := by rw [e]; exact hδle θ
+                                        -- 上の `δ² ≤ δ² + θ²/4` の右辺に代入
+    have h2 : δ ^ 2 = 0 := le_antisymm h1 hδsq'.1
+                                        -- 上の `0 ≤ δ²` と順序の反対称律（`x → δ², y → 0`）
+    exact hδsq'.2 h2.symm              -- 等号の対称律で `0 = δ²`。上の `0 ≠ δ²` に反する
   have hrad : ∀ θ : ℝ, 0 < δ ^ 2 + θ ^ 2 / 4 := fun θ =>
-    calc 0 < δ ^ 2 := hδsq              -- 上の `0 < δ²`
-      _ ≤ δ ^ 2 + θ ^ 2 / 4 := by have := sq_nonneg θ; linarith
-                                        -- `θ²/4 ≥ 0`
+    (real_lt_iff_le_and_ne 0 _).mpr ⟨hrad_le θ, hrad_ne θ⟩
+                                        -- `def_real_strict_order`（`x → 0, y → δ² + θ²/4`）を右辺から左辺へ
+  -- `0 ≤ δ² + θ²/4` なので `W(θ) := √(δ² + θ²/4)` と置く
+  set W : ℝ → ℝ := fun θ => Real.sqrt (δ ^ 2 + θ ^ 2 / 4) with hW_def
   -- `W(θ)² = δ² + θ²/4`（`definition_of_sqrt_r_positive`）
-  have hWsq : ∀ θ : ℝ, W θ ^ 2 = δ ^ 2 + θ ^ 2 / 4 := fun θ => Real.sq_sqrt (hrad θ).le
+  have hWsq : ∀ θ : ℝ, W θ ^ 2 = δ ^ 2 + θ ^ 2 / 4 := fun θ => Real.sq_sqrt (hrad_le θ)
   -- `0 < W(θ)`、したがって `0 ≤ W(θ)` と `W(θ) ≠ 0`
   have hWpos : ∀ θ : ℝ, 0 < W θ := fun θ => sqrt_of_positive_real_is_positive _ (hrad θ)
                                         -- `sqrt_of_positive_real_is_positive`（`x → δ² + θ²/4`）と `W` の置き方

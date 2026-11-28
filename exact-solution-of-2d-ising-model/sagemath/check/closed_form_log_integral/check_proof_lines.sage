@@ -32,6 +32,21 @@ for d0 in DPTS:                                                         # 準備
         assert 0 < d0^2 + t0^2/4 and 0 < W0                             # sqrt_of_positive_real_is_positive（x → δ²+θ²/4）
         assert (0 <= W0 and 0 != W0) and W0 != 0                        # def_real_strict_order と対称律の対偶
         assert 0 <= W0 * (1/d0) and W0 * (1/d0) == W0 / d0              # 順序と乗法の両立と def_real_quotient
+# 準備の 4 ≠ 0・0 ≤ 4^{-1}・0 ≤ θ²/4・δ² ≤ δ²+θ²/4・0 < δ²+θ²/4 の鎖
+assert QQ(0) < 4 and (0 <= QQ(4) and 0 != QQ(4)) and QQ(4) != 0     # 0 < 4、def_real_strict_order、論理積の後半、対称律の対偶
+assert 0 < 1/QQ(4) and (0 <= 1/QQ(4) and 0 != 1/QQ(4))             # real_inverse_of_positive_is_positive と def_real_strict_order
+Pdt.<dv, tv> = QQ[]
+assert 0 + dv^2 == dv^2 and tv^2/4 + dv^2 == dv^2 + tv^2/4 and tv^2 * (1/QQ(4)) == tv^2/4   # 単位元・交換律・def_real_quotient を QQ[δ,θ] で
+nq = 0
+for d0 in DPTS:
+    for t0 in [QQ(0), QQ(1), QQ(3), QQ(3141)/1000, QQ(-2)]:
+        assert 0 <= t0^2 and 0 <= t0^2 * (1/QQ(4)) and t0^2 * (1/QQ(4)) == t0^2/4   # real_square_is_nonnegative、乗法の両立、商
+        assert d0^2 == 0 + d0^2 and 0 + d0^2 <= t0^2/4 + d0^2 and t0^2/4 + d0^2 == d0^2 + t0^2/4   # δ² ≤ δ²+θ²/4 の 3 行
+        s0 = d0^2 + t0^2/4
+        assert (0 <= d0^2 and 0 != d0^2) and 0 <= s0 and 0 != s0 and 0 < s0   # 推移律・反対称律の背理・def_real_strict_order
+        nq += 1
+assert not (0 < QQ(0)^2 + QQ(0)^2/4)                                    # 対照: 0 < δ² を外した δ = 0, θ = 0 では 0 < δ²+θ²/4 は成り立たない
+print(f"準備の 4 ≠ 0・0 ≤ 4^(-1)・0 ≤ θ²/4・δ² ≤ δ²+θ²/4・0 < δ²+θ²/4 の鎖が QQ[δ,θ] と {nq} 点で成り立つ")
 assert AA(-1) * (1/QQ(2)) < 0                                           # 対照: 0 ≤ W を外すと積の非負は成り立たない
 print(f"準備の δ ≠ 0・0 ≤ δ^(-1)・0 < W(θ)・W(θ) ≠ 0・0 ≤ W(θ)/δ の鎖が {len(DPTS)} 点の δ と 4 点の θ で成り立つ")
 assert AA(1).sqrt() == 1   # F(0) の鎖の √1 = 1 の行（sqrt_of_real_one_is_one）

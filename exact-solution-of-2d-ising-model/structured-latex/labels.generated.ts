@@ -699,6 +699,7 @@ export const ALL_LABELS = [
   "real_product_of_positives_is_positive",
   "real_scalar_multiple_of_real_entry_matrix_has_real_entries",
   "real_section_minus_half_pi_in_principal_interval",
+  "real_square_is_nonnegative",
   "real_sum_of_two_equal_terms_is_twice",
   "real_sum_over_binary_words_distributes_in_left_factor",
   "real_symmetric_matrix_is_hermitian",

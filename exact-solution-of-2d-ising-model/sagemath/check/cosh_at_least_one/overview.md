@@ -13,7 +13,7 @@
 | 証明の行 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|---|
 | 1 行目 cosh_half_angle_formula | `check_proof_lines.sage` | QQ[x]（または QQ[x,y]）の形式冪級数として全次数 14 以下で比べる。本文の exp は 1 行 1 列の行列の exp の成分で部分和の極限なので、部分和の切り捨てで比べる | **PASS** | 成り立つ |
-| 2 行目と含意の鎖（平方は非負、2 倍、1 を足す） | `check_proof_lines.sage` | 9 点で具体の点で、本文の exp の部分和に尾の評価を半径として足したボール（RealBallField(512)）で比べる。許容誤差は置かず、ボールの重なり・上端と下端の比較で判定する | **PASS** | 成り立つ |
+| 2 行目と含意の鎖（`real_square_is_nonnegative` の平方は非負、2 倍、1 を足す） | `check_proof_lines.sage` | 9 点で具体の点で、本文の exp の部分和に尾の評価を半径として足したボール（RealBallField(512)）で比べる。許容誤差は置かず、ボールの重なり・上端と下端の比較で判定する | **PASS** | 成り立つ |
 | 3 行目 四則 | `check_proof_lines.sage` | QQ | **PASS** | 成り立つ |
 | 主張そのもの | `check_proof_lines.sage` | 9 点で具体の点で、本文の exp の部分和に尾の評価を半径として足したボール（RealBallField(512)）で比べる。許容誤差は置かず、ボールの重なり・上端と下端の比較で判定する（x ≠ 0 では cosh x > 1） | **PASS** | 成り立つ |
 

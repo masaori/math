@@ -12,12 +12,14 @@
 具体版をその特殊化として得る導出は `ClaimCoshAtLeastOneFromNecSuf.lean`。
 -/
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimRealSquareIsNonnegative
 
 namespace Ising2D
 
 /-- **人手 `cosh_at_least_one`**: `x ∈ ℝ` について `cosh x ≥ 1`。 -/
 theorem cosh_at_least_one (x : ℝ) : Real.cosh x ≥ 1 := by
-  have h0 : Real.sinh (x / 2) ^ 2 ≥ 0 := sq_nonneg _    -- 実数の平方は非負
+  have h0 : Real.sinh (x / 2) ^ 2 ≥ 0 := real_square_is_nonnegative _
+                                                        -- `real_square_is_nonnegative`（`r → sinh(x/2)`）
   have h1 : 2 * Real.sinh (x / 2) ^ 2 ≥ 2 * 0 :=
     mul_le_mul_of_nonneg_left h0 two_pos.le            -- 両辺に `2 > 0` を掛ける
   have h2 : 1 + 2 * Real.sinh (x / 2) ^ 2 ≥ 1 + 2 * 0 :=

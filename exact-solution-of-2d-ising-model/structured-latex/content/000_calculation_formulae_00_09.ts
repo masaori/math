@@ -6794,6 +6794,96 @@ r^2
   },
 
   {
+    id: "calc_formulae_claim_real_square_is_nonnegative",
+    kind: "claim",
+    title: { text: "実数の二乗は 0 以上" },
+    labels: ["real_square_is_nonnegative"],
+    lean: ["Ising2D.real_square_is_nonnegative"],
+    statement: [
+      paragraph([
+        math(String.raw`r \in \mathbb{R}`),
+        " とする。二乗 ",
+        math(String.raw`r^2`),
+        " は ",
+        ref("def_power_of_real_number"),
+        " の冪（",
+        math(String.raw`m = 2`),
+        "）、",
+        math(String.raw`0`),
+        "・",
+        math(String.raw`\le`),
+        " は ",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`\mathbb{R}`),
+        " の零元・順序である。このとき",
+      ]),
+      displayMath(String.raw`0 \le r^2`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`0 \le r`),
+        " の場合と、そうでない場合に分ける。",
+        math(String.raw`0 \le r`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&\le r\,r
+&&\bigl(\because\ \text{場合の仮定}\ 0 \le r\ \text{に}\ \mathbb{R}\ \text{の順序と乗法の両立}\ (0 \le x\ \wedge\ 0 \le y) \Rightarrow 0 \le x\cdot y\ (x \to r,\ y \to r)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= r^2
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to r)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\neg\,(0 \le r)`),
+        " のとき、",
+        math(String.raw`\mathbb{R}`),
+        " の全順序 ",
+        math(String.raw`0 \le r \vee r \le 0`),
+        "（",
+        ref("set_and_algebra_notation"),
+        " の ",
+        math(String.raw`x \to 0,\ y \to r`),
+        "）の左が成り立たないので ",
+        math(String.raw`r \le 0`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&= r + (-r)
+&&\bigl(\because\ \mathbb{R}\ \text{の加法の逆元}\ x + (-x) = 0\ (x \to r)\ \text{（}\blkref{set_and_algebra_notation}\text{）を右辺から左辺へ}\bigr)\\
+&\le 0 + (-r)
+&&\bigl(\because\ r \le 0\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x \le y \Rightarrow x + t \le y + t\ (x \to r,\ y \to 0,\ t \to -r)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= -r
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0 + x = x\ (x \to -r)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。この ",
+        math(String.raw`0 \le -r`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&\le (-r)\cdot(-r)
+&&\bigl(\because\ 0 \le -r\ \text{に}\ \mathbb{R}\ \text{の順序と乗法の両立}\ (x \to -r,\ y \to -r)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\bigr)\\
+&= r\,r
+&&\bigl(\because\ \blkref{real_negation_times_negation_is_product}\ (a \to r,\ b \to r)\bigr)\\
+&= r^2
+&&\bigl(\because\ \blkref{square_of_real_number_is_product}\ (r \to r)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。どちらの場合も ", math(String.raw`0 \le r^2`), " が成り立つ。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-28（Lean の点検の直し、未定義の記号の行「ℝ の数・順序・差・商」の順序の (a) の残り）: 原文（Typst）に対応ブロックは無い。closed_form_log_integral の準備が「上の 0 < δ² から δ²+θ²/4 ≥ δ² > 0」と根拠を書かずに述べており、Lean の具体版は θ²/4 ≥ 0 を mathlib の sq_nonneg で閉じていた。その部品として、set_and_algebra_notation の ℝ の行（全順序・加法の逆元・順序と加法の両立・加法の単位元・順序と乗法の両立）と square_of_real_number_is_product・real_negation_times_negation_is_product から示す主張を足した（int_absolute_value_is_nonnegative と同じ場合分け）。Lean の具体版は Ising2D.real_square_is_nonnegative（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimRealSquareIsNonnegative.lean）、必要十分版は Ising2D.NecSuf.sq_nonneg_of_cases（NecSuf/SqNonnegOfCases.lean）。数値検証: sagemath/check/real_square_is_nonnegative/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_square_of_real_absolute_value",
     kind: "claim",
     title: { text: "実数の絶対値の二乗は、もとの実数の二乗に等しい" },
@@ -6871,7 +6961,10 @@ r^2
     ],
     proof: [
       paragraph([
-        "実数の平方は非負なので、",
+        ref("real_square_is_nonnegative"),
+        "（",
+        math(String.raw`r \to a - b`),
+        "）から ",
         math(String.raw`0 \leq (a - b)^2`),
         " である。",
       ]),
@@ -6894,6 +6987,7 @@ r^2
     conversion: {
       status: "added",
       notes: [
+        "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を、新しく足した主張 real_square_is_nonnegative の参照にした。Lean の具体版の sq_nonneg も同じ主張にした。",
         "2026-11-07（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。c_between_Lambda_half_and_twice_Lambda_half の Step 2 の ‖v‖^2 ≤ 4 を、成分ごとの評価 |v_k|^2 ≤ 2|u_k|^2 + 2|(ε_ℝu)_k|^2 から示すために足した。norm_squared_of_sum_of_unit_vector_and_its_epsilon_real_image_is_at_most_four が引く。数値検証: sagemath/check/square_of_real_sum_is_at_most_twice_sum_of_squares/。",
         "2026-11-08（Lean の通しの証明のゴールラインの確認）: 二乗をその場の r^2 := rr から def_power_of_real_number の冪に替え、積の形へ開く行を square_of_real_number_is_product で引く行として足した（記号の濫用の解消）。",
       ],
