@@ -111627,6 +111627,15 @@ f^{\mathrm{per}}(q)
                 ],
                 proof: [
                   paragraph([
+                    "証明で用いる組 ", math(String.raw`(R,\omega)`), " は、", ref("def_real_closed_subfield"),
+                    " が ", ref("claim_real_closed_subfield_exists"), " により存在するものを固定した組である（",
+                    math(String.raw`s\cdot s=2`), " を満たす ", math(String.raw`s\in\overline{\mathbb Q}`), " は ",
+                    ref("claim_sqrt_two_exists"), " による）。", math(String.raw`Q_L^{a,b}`),
+                    " の定義に現れる ", math(String.raw`\zeta_8\in\overline{\mathbb Q}`), " は、",
+                    ref("def_rotation_phase"), " が ", ref("claim_eighth_root_exists"),
+                    " により存在するものを固定した元である。",
+                  ]),
+                  paragraph([
                     "右辺を ", math(String.raw`I_q\in\mathbb R`), " と置く。辺長 ",
                     math(String.raw`L\in\mathbb N_{\ge1}`), " と ", ref("def_spin_structures"),
                     " の ", math(String.raw`(a,b)\in\mathcal S`), " について、",
@@ -111805,6 +111814,13 @@ f^{\mathrm{per}}(q)
                 ],
                 proof: [
                   paragraph([
+                    "下で引く ", ref("theorem_periodic_density_onsager_integral"), " の組 ",
+                    math(String.raw`(R,\omega)`), " と ", math(String.raw`\zeta_8`), " は、",
+                    ref("claim_real_closed_subfield_exists"), "（", math(String.raw`s\cdot s=2`), " を満たす ",
+                    math(String.raw`s`), " は ", ref("claim_sqrt_two_exists"), "）と ",
+                    ref("claim_eighth_root_exists"), " により存在するものを固定したものである。",
+                  ]),
+                  paragraph([
                     ref("def_real_exponential"), " の二つの性質から、次の二つの式鎖を得る。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
@@ -111838,8 +111854,7 @@ f^{\mathrm{per}}(q)
 \end{aligned}`),
                   paragraph([
                     "以下、", math(String.raw`B_q(\theta_1,\theta_2):=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)`),
-                    " と略記する。", ref("claim_dispersion_algebraic_onsager_form"),
-                    " と同じ有理式を、ここでは実数の余弦値について直接計算する。",
+                    " と略記する。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 B_q(\theta_1,\theta_2)
@@ -111922,6 +111937,8 @@ f^{\mathrm{per}}(q)
                 ],
                 proof: [
                   paragraph([
+                    "主張の組 ", math(String.raw`(R,\omega)`), " は、", ref("def_real_closed_subfield"),
+                    " が ", ref("claim_real_closed_subfield_exists"), " により存在するものを固定した組である。",
                     "証明の中だけで使う記号を置く。", math(String.raw`s\in\overline{\mathbb Q}`),
                     " は ", ref("def_critical_point"), " で ", math(String.raw`x_c=-1+s`),
                     " を定めた ", math(String.raw`s\cdot s=2`), " の元とする。",

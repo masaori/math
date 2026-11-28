@@ -9,8 +9,9 @@
                                                   （claim_dispersion_product_real_log_sum の具体版
                                                     `dispersion_product_real_log_sum` から）
   最初の式鎖の二〜四行目と結論の式鎖                                   `modeLogDensity_tendsto_of_realLogSum`
-  四つの (a,b) の極限から f^per(q) = I_q と Onsager 表示              `periodicFreeEnergyDensity_eq_dispersionIntegral_of_realLogSum`
-                                                                     `periodicFreeEnergyDensity_onsagerForm_of_realLogSum`
+  四つの (a,b) の極限から f^per(q) = I_q                            `periodicFreeEnergyDensity_eq_dispersionIntegral_of_realLogSum`
+  Onsager 表示の証明: f^per(q) = I_q（theorem_periodic_density_onsager_integral）と書換え
+                                                                     `periodicFreeEnergyDensity_onsagerForm`
 
 和の項は `φ(ϖ,ς) := log_ℝ ρ(Δ(q;ϖ,ς))` で、`Δ(q;ϖ,ς)` は `dispersion_product_real_log_sum` が与える
 実閉部分体の元である。同じ `Qbar` の値を持つ実閉部分体の元は等しいので、`hsum` の一つ目の条件が従う。
@@ -78,8 +79,18 @@ theorem periodicFreeEnergyDensity_onsagerForm
         realLog ⟨2, two_pos⟩ + realLog (onsagerRadius q hq0) +
           1 / (8 * Real.pi ^ 2) *
             (∫ θ₁ in (0 : ℝ)..2 * Real.pi, ∫ θ₂ in (0 : ℝ)..2 * Real.pi,
+              onsagerHyperbolicLog q hq0 hq1 (θ₁, θ₂)) := by
+  obtain ⟨hc, hs, hH, hint⟩ := onsager_hyperbolic_integral_rewrite q hq0 hq1
+  refine ⟨hc, hs, hH, ?_⟩
+  calc periodicFreeEnergyDensity q
+      = dispersionIntegral q hq0 hq1 :=
+        -- 最後の式鎖の一行目: theorem_periodic_density_onsager_integral
+        periodicFreeEnergyDensity_eq_dispersionIntegral data z hz4 q hq0 hq1
+    _ = realLog ⟨2, two_pos⟩ + realLog (onsagerRadius q hq0) +
+          1 / (8 * Real.pi ^ 2) *
+            (∫ θ₁ in (0 : ℝ)..2 * Real.pi, ∫ θ₂ in (0 : ℝ)..2 * Real.pi,
               onsagerHyperbolicLog q hq0 hq1 (θ₁, θ₂)) :=
-  periodicFreeEnergyDensity_onsagerForm_of_realLogSum data z hz4 q hq0 hq1
-    (fun s L => realLogSum_of_dispersionProduct data z hz4 q hq0 hq1 s L)
+        -- 双曲線関数の式鎖と、最後の式鎖の二行目以降
+        hint
 
 end Ising2DLambda.RealEscape
