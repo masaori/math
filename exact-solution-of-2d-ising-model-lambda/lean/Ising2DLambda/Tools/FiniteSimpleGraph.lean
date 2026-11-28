@@ -74,6 +74,30 @@ noncomputable def finiteSimpleGraphEdgeEquiv (n : ℕ) :
     classical
     exact FiniteSimpleGraphEdgeData.toSimpleGraph_ofSimpleGraph G
 
+instance FiniteSimpleGraphEdgeData.instDecidableRelToSimpleGraph {n : ℕ}
+    (G : FiniteSimpleGraphEdgeData n) : DecidableRel G.toSimpleGraph.Adj :=
+  fun u v => inferInstanceAs (Decidable (s(u, v) ∈ G.edges))
+
+theorem FiniteSimpleGraphEdgeData.edgeFinset_toSimpleGraph {n : ℕ}
+    (G : FiniteSimpleGraphEdgeData n) : G.toSimpleGraph.edgeFinset = G.edges := by
+  classical
+  ext e
+  induction e using Sym2.inductionOn with
+  | _ u v =>
+    simp only [SimpleGraph.mem_edgeFinset, SimpleGraph.mem_edgeSet]
+    rfl
+
+theorem FiniteSimpleGraphEdgeData.toSimpleGraph_le_iff {n : ℕ}
+    (G H : FiniteSimpleGraphEdgeData n) :
+    G.toSimpleGraph ≤ H.toSimpleGraph ↔ G.edges ⊆ H.edges := by
+  classical
+  constructor
+  · intro h e he
+    rw [← G.edgeFinset_toSimpleGraph] at he
+    exact H.edgeFinset_toSimpleGraph ▸ SimpleGraph.edgeFinset_mono h he
+  · intro h u v huv
+    exact h huv
+
 /-- A nonempty vertex walk with no repeated vertices; a singleton is allowed. -/
 abbrev FiniteSimplePath {n : ℕ} (G : FiniteSimpleGraph n) (u v : Fin n) :=
   {p : G.Walk u v // p.IsPath}

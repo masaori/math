@@ -11098,7 +11098,7 @@ t\,t^{k+1}&=t\bigl(t^{k}t\bigr)
 &=\bigl(t^{\,n}-\widehat{w}^{\,n}\bigr)\widehat{w}+(t-\widehat{w})t^{\,n}
 &&(\because\ \text{帰納法の仮定})\\
 &=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n}\widehat{w}\bigr)+(t-\widehat{w})t^{\,n}
-&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}[t]\ \text{の分配則}\bigr)\\
 &=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n+1}\bigr)+(t-\widehat{w})t^{\,n}
 &&(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の約束}\ \widehat{w}^{\,n+1}=\widehat{w}^{\,n}\widehat{w})\\
 &=\bigl(t^{\,n}\widehat{w}-\widehat{w}^{\,n+1}\bigr)+\bigl(t\,t^{\,n}-\widehat{w}\,t^{\,n}\bigr)
