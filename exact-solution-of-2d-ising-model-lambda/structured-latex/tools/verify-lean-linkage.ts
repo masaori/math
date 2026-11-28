@@ -33,6 +33,9 @@ const leanRoot = join(projectRoot, "lean", "Ising2DLambda");
  */
 const MATHLIB_ALLOWLIST = new Set([
   "Polynomial.X", "Polynomial.aeval", "Finset.card", "Fintype.card", "HAdd.hAdd", "One.one",
+  // 実数体への脱出の章が定義せずに用いる解析の道具（本文の宣言のブロックが使う性質を限る）。
+  "Complex.exp", "Real.pi", "Real.cos", "Real.sin", "Real.exp", "intervalIntegral",
+  "Filter.Tendsto", "Metric.tendsto_atTop",
 ]);
 
 const DECL_RE =

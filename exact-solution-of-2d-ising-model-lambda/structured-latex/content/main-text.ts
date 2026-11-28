@@ -108352,6 +108352,81 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
             element: {
               kind: "elementGroup",
               id: "group_of_real_escape_claim_complex_root_candidates_bijection",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "real_escape_def_complex_exponential",
+                    kind: "definition",
+                    title: { text: "複素指数関数（実数体への脱出: 指数評価）" },
+                    labels: ["def_complex_exponential"],
+                    habitat: "C",
+                    realEscape:
+                      "指数評価。1 の冪根を角で表示するため、複素数体上の指数関数を定義せずに呼び出す。使う性質は加法法則、零での値、冪の法則の三つである。",
+                    lean: [
+                      "Complex.exp",
+                    ],
+                    statement: [
+                      paragraph([
+                        "複素数体 ", math(String.raw`\mathbb C`), " 上の指数関数を ",
+                        math(String.raw`\exp:\mathbb C\to\mathbb C`),
+                        " と書き、本文はこれを定義せずに用いる（級数による構成も微分方程式による特徴づけも使わない）。",
+                        "Lean の対応先は mathlib の ", math(String.raw`\texttt{Complex.exp}`),
+                        " である。本文が ", math(String.raw`\exp`), " について使う性質は次の三つだけである。",
+                      ]),
+                      list([
+                        [
+                          "加法法則: 任意の ", math(String.raw`s,t\in\mathbb C`), " について ",
+                          math(String.raw`\exp(s+t)=\exp(s)\exp(t)`), "。",
+                        ],
+                        ["零での値: ", math(String.raw`\exp(0)=1`), "。"],
+                        [
+                          "冪の法則: 任意の ", math(String.raw`t\in\mathbb C`), " と ",
+                          math(String.raw`L\in\mathbb N_{\ge1}`), " について ",
+                          math(String.raw`\exp(t)^L=\exp(Lt)`),
+                          "（加法法則から ", math(String.raw`L`), " についての帰納法で従う）。",
+                        ],
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "real_escape_def_real_pi",
+                    kind: "definition",
+                    title: { text: "円周率（実数体への脱出: 指数評価）" },
+                    labels: ["def_real_pi"],
+                    habitat: "R",
+                    realEscape:
+                      "指数評価。複素指数関数の周期を表す実数を定義せずに呼び出す。使う性質は正であること、二つの特殊値、周期性の三つである。",
+                    lean: [
+                      "Real.pi",
+                    ],
+                    statement: [
+                      paragraph([
+                        "円周率を ", math(String.raw`\pi\in\mathbb R`),
+                        " と書き、本文はこれを定義せずに用いる。Lean の対応先は mathlib の ",
+                        math(String.raw`\texttt{Real.pi}`), " である。",
+                        ref("def_complex_exponential"), " の ", math(String.raw`\exp`),
+                        " とあわせて本文が使う性質は次の三つだけである。",
+                      ]),
+                      list([
+                        ["正であること: ", math(String.raw`0<\pi`), "。"],
+                        [
+                          "特殊値: ", math(String.raw`\exp(\pi i)=-1`), "、および任意の ",
+                          math(String.raw`n\in\mathbb Z`), " について ", math(String.raw`\exp(2\pi in)=1`), "。",
+                        ],
+                        [
+                          "周期性: ", math(String.raw`s,t\in\mathbb C`), " が ",
+                          math(String.raw`\exp(s)=\exp(t)`), " を満たすなら、ある ",
+                          math(String.raw`n\in\mathbb Z`), " で ", math(String.raw`s=t+2\pi in`), "。",
+                        ],
+                      ]),
+                    ],
+                  },
+                },
+              ],
               focus: {
                 id: "real_escape_claim_complex_root_candidates_bijection",
                 kind: "claim",
@@ -108379,7 +108454,7 @@ e_{L,c,k}:=\exp\!\left(\frac{2\pi i(k+c/2)}{L}\right)\in\mathbb C\quad(k\in\{0,\
                 ],
                 proof: [
                   paragraph([
-                    "任意の ", math(String.raw`k\in\{0,\ldots,L-1\}`), " について、複素指数関数の加法法則から",
+                    "任意の ", math(String.raw`k\in\{0,\ldots,L-1\}`), " について、", ref("def_complex_exponential"), " の加法法則と冪の法則から",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 e_{L,c,k}^{L}
@@ -108393,7 +108468,7 @@ e_{L,c,k}^{L}
                     math(String.raw`\mathrm{rt}_{L,c}`), " は値を ", math(String.raw`E_{L,c}`), " に取る。",
                     math(String.raw`j,k\in\{0,\ldots,L-1\}`), " が ",
                     math(String.raw`e_{L,c,j}=e_{L,c,k}`), " を満たすとする。",
-                    "複素指数関数の周期性（", math(String.raw`s,t\in\mathbb C`), " が ",
+                    ref("def_real_pi"), " の周期性（", math(String.raw`s,t\in\mathbb C`), " が ",
                     math(String.raw`\exp(s)=\exp(t)`), " を満たすなら、ある ",
                     math(String.raw`n\in\mathbb Z`), " で ", math(String.raw`s=t+2\pi i n`),
                     "）を ", math(String.raw`s=2\pi i(j+c/2)/L`), "、",
@@ -108652,6 +108727,68 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
             element: {
               kind: "elementGroup",
               id: "group_of_real_escape_claim_dispersion_angle_realization",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "real_escape_def_real_cosine",
+                    kind: "definition",
+                    title: { text: "実余弦（実数体への脱出: 指数評価）" },
+                    labels: ["def_real_cosine"],
+                    habitat: "R",
+                    realEscape:
+                      "指数評価。複素実現したモードの角表示から分散因子の実現値を書くため、実数上の余弦を定義せずに呼び出す。使う性質は偶性、上界、連続性の三つである。",
+                    lean: [
+                      "Real.cos",
+                    ],
+                    statement: [
+                      paragraph([
+                        "実数上の余弦を ", math(String.raw`\cos:\mathbb R\to\mathbb R`),
+                        " と書き、本文はこれを定義せずに用いる。Lean の対応先は mathlib の ",
+                        math(String.raw`\texttt{Real.cos}`), " である。本文が使う性質は次の三つだけである。",
+                      ]),
+                      list([
+                        ["偶性: 任意の ", math(String.raw`t\in\mathbb R`), " について ", math(String.raw`\cos(-t)=\cos t`), "。"],
+                        ["上界: 任意の ", math(String.raw`t\in\mathbb R`), " について ", math(String.raw`\cos t\le1`), "。"],
+                        ["連続性: ", math(String.raw`\cos`), " は実数の通常の位相について連続である。"],
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "real_escape_def_real_sine",
+                    kind: "definition",
+                    title: { text: "実正弦（実数体への脱出: 指数評価）" },
+                    labels: ["def_real_sine"],
+                    habitat: "R",
+                    realEscape:
+                      "指数評価。複素指数関数を実部と虚部に分けるため、実数上の正弦を定義せずに呼び出す。使う性質は奇性と Euler の公式の二つである。",
+                    lean: [
+                      "Real.sin",
+                    ],
+                    statement: [
+                      paragraph([
+                        "実数上の正弦を ", math(String.raw`\sin:\mathbb R\to\mathbb R`),
+                        " と書き、本文はこれを定義せずに用いる。Lean の対応先は mathlib の ",
+                        math(String.raw`\texttt{Real.sin}`), " である。",
+                        ref("def_complex_exponential"), " の ", math(String.raw`\exp`), " と ",
+                        ref("def_real_cosine"), " の ", math(String.raw`\cos`),
+                        " とあわせて本文が使う性質は次の二つだけである。",
+                      ]),
+                      list([
+                        ["奇性: 任意の ", math(String.raw`t\in\mathbb R`), " について ", math(String.raw`\sin(-t)=-\sin t`), "。"],
+                        [
+                          "Euler の公式: 任意の ", math(String.raw`t\in\mathbb R`),
+                          " について、", math(String.raw`t`), " を複素数の実部へ入れて ",
+                          math(String.raw`\exp(it)=\cos t+i\sin t`), "。",
+                        ],
+                      ]),
+                    ],
+                  },
+                },
+              ],
               focus: {
                 id: "real_escape_claim_dispersion_angle_realization",
                 kind: "claim",
@@ -108701,7 +108838,8 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                     "複素数 ", math(String.raw`z=u+iv`), "（", math(String.raw`u,v\in\mathbb R`),
                     "）の実部を ", math(String.raw`\operatorname{Re}(z):=u\in\mathbb R`),
                     " と書く。実数 ", math(String.raw`t\in\mathbb R`),
-                    " について使う複素指数関数と実余弦・実正弦の性質は、加法法則 ",
+                    " について使う複素指数関数（", ref("def_complex_exponential"), "）と実余弦（", ref("def_real_cosine"),
+                    "）・実正弦（", ref("def_real_sine"), "）の性質は、加法法則 ",
                     math(String.raw`\exp(s)\exp(s')=\exp(s+s')`), "（", math(String.raw`s,s'\in\mathbb C`),
                     "）、", math(String.raw`\exp(0)=1`), "、Euler の公式 ",
                     math(String.raw`\exp(it)=\cos t+i\sin t`), "、偶奇 ",
@@ -108888,7 +109026,7 @@ f_q(\theta_1,\theta_2):=\log_{\mathbb R}B_q(\theta_1,\theta_2)`),
                     "証明の中だけで使う記号として ", math(String.raw`p:=q^2+2q-1\in\mathbb Q`),
                     " と、", math(String.raw`\theta_1,\theta_2\in\mathbb R`), " に対して ",
                     math(String.raw`c_j:=\cos\theta_j\in\mathbb R`), "（", math(String.raw`j\in\{1,2\}`),
-                    "）を置く。実余弦について使う性質は ", math(String.raw`c_j\le1`),
+                    "）を置く。", ref("def_real_cosine"), " の実余弦について使う性質は ", math(String.raw`c_j\le1`),
                     " と連続性の二つだけである。",
                   ]),
                   paragraph([
@@ -108982,13 +109120,129 @@ B_q(\theta_1,\theta_2)
             element: {
               kind: "elementGroup",
               id: "group_of_real_escape_claim_shifted_mode_riemann_sums",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "real_escape_def_real_interval_integral",
+                    kind: "definition",
+                    title: { text: "実数の区間積分（実数体への脱出: 積分）" },
+                    labels: ["def_real_interval_integral"],
+                    habitat: "R",
+                    realEscape:
+                      "積分。モード和の極限の値を表すため、実数の閉区間上の連続関数の区間積分を定義せずに呼び出す。使う性質は線型性、定数の積分、隣接区間での加法性、上界による評価、媒介変数についての連続性の五つである。",
+                    lean: [
+                      "intervalIntegral",
+                    ],
+                    statement: [
+                      paragraph([
+                        "実数 ", math(String.raw`\alpha\le\beta`), " と連続関数 ",
+                        math(String.raw`g:\mathbb R\to\mathbb R`), " に対し、区間積分 ",
+                        math(String.raw`\int_\alpha^\beta g(\theta)\,d\theta\in\mathbb R`),
+                        " を定義せずに用いる。Lean の対応先は mathlib の ",
+                        math(String.raw`\texttt{intervalIntegral}`),
+                        "（Lebesgue 測度による区間積分）であり、本文もこれを区間積分と呼ぶ。",
+                        "本文は積分の構成（Riemann 和の極限による構成も Lebesgue 測度による構成も）を使わず、",
+                        "連続関数について両者の値が一致することも使わない。",
+                        "連続関数 ", math(String.raw`g:\mathbb R^2\to\mathbb R`), " の二重の積分 ",
+                        math(String.raw`\int_\alpha^\beta\!\int_\gamma^\delta g(\theta_1,\theta_2)\,d\theta_2\,d\theta_1`),
+                        " は、内側の区間積分を ", math(String.raw`\theta_1`),
+                        " の関数として外側の区間積分を取ったものである（内側の積分が連続であることは下の五つ目の性質による）。",
+                        "本文が使う性質は次の五つだけである。以下 ", math(String.raw`g,h:\mathbb R\to\mathbb R`),
+                        " は連続、", math(String.raw`c\in\mathbb R`), " とする。",
+                      ]),
+                      list([
+                        [
+                          "線型性: ", math(String.raw`\int_\alpha^\beta(g+h)=\int_\alpha^\beta g+\int_\alpha^\beta h`),
+                          "、", math(String.raw`\int_\alpha^\beta cg=c\int_\alpha^\beta g`), "。",
+                        ],
+                        ["定数の積分: ", math(String.raw`\int_\alpha^\beta c\,d\theta=c(\beta-\alpha)`), "。"],
+                        [
+                          "隣接区間での加法性: ", math(String.raw`\alpha\le\beta\le\gamma`), " について ",
+                          math(String.raw`\int_\alpha^\gamma g=\int_\alpha^\beta g+\int_\beta^\gamma g`), "。",
+                        ],
+                        [
+                          "上界による評価: 任意の ", math(String.raw`\theta\in[\alpha,\beta]`), " で ",
+                          math(String.raw`|g(\theta)|\le c`), " なら ",
+                          math(String.raw`\bigl|\int_\alpha^\beta g\bigr|\le c(\beta-\alpha)`), "。",
+                        ],
+                        [
+                          "媒介変数についての連続性: 連続関数 ", math(String.raw`g:\mathbb R^2\to\mathbb R`),
+                          " と実数 ", math(String.raw`\gamma\le\delta`), " について、",
+                          math(String.raw`\theta_1\mapsto\int_\gamma^\delta g(\theta_1,\theta_2)\,d\theta_2`),
+                          " は連続である。",
+                        ],
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "real_escape_def_real_sequence_limit",
+                    kind: "definition",
+                    title: { text: "実数列の収束と極限（実数体への脱出: 連続極限）" },
+                    labels: ["def_real_sequence_limit"],
+                    habitat: "R",
+                    realEscape:
+                      "連続極限。辺長を無限大へ送るため、実数列の収束を実数体の順序と絶対値で定め、実数体の完備性を呼び出す。",
+                    lean: [
+                      "Filter.Tendsto",
+                      "Metric.tendsto_atTop",
+                    ],
+                    statement: [
+                      paragraph([
+                        "実数列 ", math(String.raw`(a_L)_{L\ge1}`), " と ", math(String.raw`I\in\mathbb R`),
+                        " について、任意の実数 ", math(String.raw`\varepsilon>0`), " に対してある ",
+                        math(String.raw`N\in\mathbb N_{\ge1}`), " が存在し、", math(String.raw`N\le L`),
+                        " を満たすすべての ", math(String.raw`L\in\mathbb N`), " で ",
+                        math(String.raw`|a_L-I|<\varepsilon`), " が成り立つとき、",
+                        math(String.raw`(a_L)_{L\ge1}`), " は ", math(String.raw`I`),
+                        " に**収束する**といい、", math(String.raw`a_L\to I`), " と書く。",
+                        "収束先は一つしかない（二つの収束先 ", math(String.raw`I,I'`), " について、任意の ",
+                        math(String.raw`\varepsilon>0`), " で ", math(String.raw`|I-I'|<2\varepsilon`),
+                        " となるので ", math(String.raw`I=I'`), "）。それを ",
+                        math(String.raw`\lim_{L\to\infty}a_L`), " と書く。",
+                        "Lean の対応先は ", math(String.raw`\texttt{Filter.Tendsto}\ a\ \texttt{atTop}\ (\mathcal N\,I)`),
+                        "（", math(String.raw`\mathcal N\,I`), " は ", math(String.raw`I`),
+                        " の近傍の全体）であり、この定義との一致は mathlib の ",
+                        math(String.raw`\texttt{Metric.tendsto\_atTop}`),
+                        "（実数の距離は差の絶対値）による。",
+                        "本文が収束について、この定義から書き下さずに使う性質は次の五つである。以下 ",
+                        math(String.raw`a_L\to I`), "、", math(String.raw`b_L\to J`), "、", math(String.raw`c\in\mathbb R`), " とする。",
+                      ]),
+                      list([
+                        ["和と実数倍: ", math(String.raw`a_L+b_L\to I+J`), "、", math(String.raw`ca_L\to cI`), "。"],
+                        ["広義の不等式の保存: 十分先のすべての ", math(String.raw`L`), " で ", math(String.raw`a_L\le b_L`), " なら ", math(String.raw`I\le J`), "。"],
+                        [
+                          "挟み込み: ", math(String.raw`I=J`), " で、十分先のすべての ", math(String.raw`L`),
+                          " で ", math(String.raw`a_L\le d_L\le b_L`), " を満たす実数列 ",
+                          math(String.raw`(d_L)_{L\ge1}`), " は ", math(String.raw`I`), " に収束する。",
+                        ],
+                        [
+                          "有限個の列の最大値: 有限集合で添字付けた実数列がどれも同じ ",
+                          math(String.raw`I`), " に収束するなら、項ごとの最大値の列も ",
+                          math(String.raw`I`), " に収束する。",
+                        ],
+                        [
+                          "完備性: 任意の実数 ", math(String.raw`\varepsilon>0`), " に対してある ",
+                          math(String.raw`N\in\mathbb N_{\ge1}`), " が存在し、", math(String.raw`N\le L`),
+                          " かつ ", math(String.raw`N\le M`), " を満たすすべての ",
+                          math(String.raw`L,M\in\mathbb N`), " で ", math(String.raw`|a_L-a_M|<\varepsilon`),
+                          " となる実数列（実数の Cauchy 列）は、ある実数に収束する。",
+                        ],
+                      ]),
+                    ],
+                  },
+                },
+              ],
               focus: {
                 id: "real_escape_claim_shifted_mode_riemann_sums",
                 kind: "claim",
                 title: { text: "半格子ずれた四つのモード和は同じ積分へ収束する" },
                 labels: ["claim_shifted_mode_riemann_sums"],
                 habitat: "R",
-                realEscape: "連続極限。有限モード和を実数の角の格子和として読み、連続関数の一様連続性と Riemann 積分により辺長を無限大へ送る。",
+                realEscape: "連続極限。有限モード和を実数の角の格子和として読み、連続関数の一様連続性と区間積分により辺長を無限大へ送る。",
                 verification: ["sagemath/check/shifted-mode-riemann-sums"],
                 lean: [
                   "Ising2DLambda.RealEscape.shiftedModeRiemannSums_tendsto",
@@ -109010,7 +109264,10 @@ t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
                   paragraph(["と置く。このとき四つの ", math(String.raw`(a,b)\in\mathcal S`), " のどれについても"]),
                   displayMath(String.raw`\lim_{L\to\infty}\frac{1}{L^2}\log_{\mathbb R}\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|
 =\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi} f_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1`),
-                  paragraph(["が成り立つ。積分は実数体上の連続関数の Riemann 積分である。"]),
+                  paragraph([
+                    "が成り立つ。積分は ", ref("def_real_interval_integral"), " の区間積分、極限は ",
+                    ref("def_real_sequence_limit"), " の実数列の極限である。",
+                  ]),
                 ],
                 proof: [
                   paragraph([
@@ -109044,7 +109301,7 @@ t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
                     "次に ", math(String.raw`I:=\int_0^{2\pi}\!\int_0^{2\pi}f_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1`),
                     " と置く。", ref("claim_dispersion_angle_log_continuous"), " により ",
                     math(String.raw`f_q`), " はコンパクトな正方形 ", math(String.raw`[0,2\pi]^2`),
-                    " 上で一様連続であり、Riemann 可積分である。任意の実数 ",
+                    " 上で一様連続であり、", ref("def_real_interval_integral"), " の二重の区間積分 ", math(String.raw`I`), " が定まる。任意の実数 ",
                     math(String.raw`\varepsilon>0`), " を取る。一様連続性から、",
                     math(String.raw`x,y\in[0,2\pi]^2`), " が ",
                     math(String.raw`\max_{j\in\{1,2\}}|x_j-y_j|<\eta`),
@@ -110136,7 +110393,7 @@ c
                     " は ", math(String.raw`I`),
                     " に収束し、", math(String.raw`L\ge N`),
                     " の全ての項が ", math(String.raw`\rho(\mu)`),
-                    " 以上なので、実数列の極限は広義の不等式を保つ（実数体への脱出: 連続極限）ことから ",
+                    " 以上なので、実数列の極限は広義の不等式を保つ（", ref("def_real_sequence_limit"), "）ことから ",
                     math(String.raw`\rho(\mu)\le I`),
                     " である。ゆえに ", math(String.raw`I`), " は ", math(String.raw`P`),
                     " の上界である。",
@@ -110198,7 +110455,7 @@ b
                     " であり、", math(String.raw`\rho(\varepsilon)\ne\rho(0)`),
                     " だから ", math(String.raw`\varepsilon\ne0`),
                     " である。", math(String.raw`\rho(\mu+\varepsilon)<I`),
-                    " と収束の仮定（実数体への脱出: 連続極限）により、ある ",
+                    " と収束の仮定（", ref("def_real_sequence_limit"), " の収束の定義）により、ある ",
                     math(String.raw`N\in\mathbb N_{\ge1}`), " があって、任意の ",
                     math(String.raw`L\in\mathbb N`), "、", math(String.raw`L\ge N`),
                     " について ", math(String.raw`\rho(\mu+\varepsilon)<\rho(\lambda_L)`),
@@ -110360,7 +110617,7 @@ b
 \end{aligned}`),
                   paragraph([
                     "である。よって ", math(String.raw`|\rho(\lambda_L)-\rho(\lambda_M)|<\delta`),
-                    " であり、実数列は Cauchy である。実数体の完備性により極限 ",
+                    " であり、実数列は Cauchy である。", ref("def_real_sequence_limit"), " の完備性により極限 ",
                     math(String.raw`I\in\mathbb R`), " が存在する。最後に ",
                     ref("claim_open_square_density_sequence_cauchy_le_one"),
                     " を ", math(String.raw`\lambda_L:=\Psi^{\mathrm{op}}_L(q)`),
@@ -111349,7 +111606,7 @@ f^{\mathrm{per}}(q)
                     "被対数は ", ref("claim_dispersion_angle_log_continuous"), " の ",
                     math(String.raw`B_q(\theta_1,\theta_2)`), " であり、角 ",
                     math(String.raw`\theta_1,\theta_2\in[0,2\pi]`), " で正である。",
-                    "積分は実数の連続関数の Riemann 積分である。",
+                    "積分は ", ref("def_real_interval_integral"), " の区間積分である。",
                   ]),
                 ],
                 proof: [
@@ -111370,7 +111627,7 @@ f^{\mathrm{per}}(q)
                     math(String.raw`M_L^{\mathrm{abs}}(q)>0`), " である。",
                     ref("claim_shifted_mode_riemann_sums"),
                     " により四つの列 ", math(String.raw`u_{L,a,b}`), " はいずれも ",
-                    math(String.raw`I_q`), " に収束する。有限集合上の最大値は各成分の共通極限へ収束するから ",
+                    math(String.raw`I_q`), " に収束する。", ref("def_real_sequence_limit"), " の有限個の列の最大値の性質から ",
                     math(String.raw`v_L\to I_q`), " である。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
@@ -111412,7 +111669,7 @@ v_L
                   paragraph([
                     "となる。実数列 ", math(String.raw`v_L\to I_q`), " と ",
                     math(String.raw`L^{-2}\log_{\mathbb R}2\to0`),
-                    " から、挟み込みにより ", math(String.raw`\rho_{\mathbb R}(\Psi_L(q))\to I_q`),
+                    " から、", ref("def_real_sequence_limit"), " の和と実数倍と挟み込みにより ", math(String.raw`\rho_{\mathbb R}(\Psi_L(q))\to I_q`),
                     " である。最後に ", ref("def_periodic_density_lower_set"), " と ",
                     ref("claim_sequence_lower_set_sup_eq_real_limit"), " をこの列に適用すると",
                   ]),
@@ -111439,6 +111696,44 @@ f^{\mathrm{per}}(q)
             element: {
               kind: "elementGroup",
               id: "group_of_real_escape_claim_onsager_hyperbolic_integral_form",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "real_escape_def_real_exponential",
+                    kind: "definition",
+                    title: { text: "実指数関数（実数体への脱出: 指数評価）" },
+                    labels: ["def_real_exponential"],
+                    habitat: "R",
+                    realEscape:
+                      "指数評価。代数的略記を実数の双曲線関数に読み替えるため、実数上の指数関数を定義せずに呼び出す。使う性質は実対数との逆写像の関係と符号反転の二つである。",
+                    lean: [
+                      "Real.exp",
+                    ],
+                    statement: [
+                      paragraph([
+                        "実数上の指数関数を ", math(String.raw`\exp_{\mathbb R}:\mathbb R\to\mathbb R_{>0}`),
+                        " と書き、本文はこれを定義せずに用いる。Lean の対応先は mathlib の ",
+                        math(String.raw`\texttt{Real.exp}`), " である。添字 ", math(String.raw`\mathbb R`),
+                        " を付けるのは、", ref("def_complex_exponential"), " の複素指数関数 ",
+                        math(String.raw`\exp`), " と同じ記号で書かないためである。",
+                        ref("def_real_logarithm"), " の ", math(String.raw`\log_{\mathbb R}`),
+                        " とあわせて本文が使う性質は次の二つだけである。",
+                      ]),
+                      list([
+                        [
+                          "実対数との逆写像の関係: 任意の ", math(String.raw`u\in\mathbb R_{>0}`), " について ",
+                          math(String.raw`\exp_{\mathbb R}(\log_{\mathbb R}u)=u`), "。",
+                        ],
+                        [
+                          "符号反転: 任意の ", math(String.raw`t\in\mathbb R`), " について ",
+                          math(String.raw`\exp_{\mathbb R}(-t)=\exp_{\mathbb R}(t)^{-1}`), "。",
+                        ],
+                      ]),
+                    ],
+                  },
+                },
+              ],
               focus: {
                 id: "real_escape_claim_onsager_hyperbolic_integral_form",
                 kind: "claim",
@@ -111465,9 +111760,9 @@ f^{\mathrm{per}}(q)
                     math(String.raw`s_q:=(1-r^2)/(2r)`), " を定める。",
                     "この二つは ", ref("claim_dispersion_algebraic_onsager_form"),
                     " の代数的略記を包含写像で送った値である。",
-                    "実数の双曲線関数を ",
-                    math(String.raw`\cosh t:=(e^t+e^{-t})/2`), "、",
-                    math(String.raw`\sinh t:=(e^t-e^{-t})/2`),
+                    "実数の双曲線関数を、", ref("def_real_exponential"), " の実指数関数で ",
+                    math(String.raw`\cosh t:=(\exp_{\mathbb R}(t)+\exp_{\mathbb R}(-t))/2`), "、",
+                    math(String.raw`\sinh t:=(\exp_{\mathbb R}(t)-\exp_{\mathbb R}(-t))/2`),
                     " と定めると ", math(String.raw`c_q=\cosh(2K_q)`), "、",
                     math(String.raw`s_q=\sinh(2K_q)`), " である。",
                   ]),
@@ -111488,34 +111783,34 @@ f^{\mathrm{per}}(q)
                 ],
                 proof: [
                   paragraph([
-                    "指数と実対数の逆写像の関係から、次の二つの式鎖を得る。",
+                    ref("def_real_exponential"), " の二つの性質から、次の二つの式鎖を得る。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-e^{-2K_q}
-&=e^{\log_{\mathbb R}r}
+\exp_{\mathbb R}(-2K_q)
+&=\exp_{\mathbb R}(\log_{\mathbb R}r)
 &&\bigl(\because\ K_q\text{ の定義}\bigr)\\
 &=r
-&&\bigl(\because\ r>0\text{ と指数・実対数の逆写像の関係}\bigr)\\
-e^{2K_q}
-&=(e^{-2K_q})^{-1}
-&&\bigl(\because\ \mathbb R\text{ 上の指数法則}\bigr)\\
+&&\bigl(\because\ r>0\text{ と }\blkref{def_real_exponential}\text{ の実対数との逆写像の関係}\bigr)\\
+\exp_{\mathbb R}(2K_q)
+&=(\exp_{\mathbb R}(-2K_q))^{-1}
+&&\bigl(\because\ \blkref{def_real_exponential}\text{ の符号反転}\bigr)\\
 &=r^{-1}
 &&\bigl(\because\ \text{直前の等式}\bigr)
 \end{aligned}`),
                   paragraph(["双曲線関数の定義から、二つの式鎖を得る。"]),
                   displayMath(String.raw`\begin{aligned}
 \cosh(2K_q)
-&=(e^{2K_q}+e^{-2K_q})/2
+&=(\exp_{\mathbb R}(2K_q)+\exp_{\mathbb R}(-2K_q))/2
 &&\bigl(\because\ \cosh\text{ の定義}\bigr)\\
 &=(r^{-1}+r)/2
-&&\bigl(\because\ e^{2K_q}=r^{-1},\ e^{-2K_q}=r\bigr)\\
+&&\bigl(\because\ \exp_{\mathbb R}(2K_q)=r^{-1},\ \exp_{\mathbb R}(-2K_q)=r\bigr)\\
 &=c_q
 &&\bigl(\because\ c_q\text{ の定義}\bigr)\\
 \sinh(2K_q)
-&=(e^{2K_q}-e^{-2K_q})/2
+&=(\exp_{\mathbb R}(2K_q)-\exp_{\mathbb R}(-2K_q))/2
 &&\bigl(\because\ \sinh\text{ の定義}\bigr)\\
 &=(r^{-1}-r)/2
-&&\bigl(\because\ e^{2K_q}=r^{-1},\ e^{-2K_q}=r\bigr)\\
+&&\bigl(\because\ \exp_{\mathbb R}(2K_q)=r^{-1},\ \exp_{\mathbb R}(-2K_q)=r\bigr)\\
 &=s_q
 &&\bigl(\because\ s_q\text{ の定義}\bigr)
 \end{aligned}`),
