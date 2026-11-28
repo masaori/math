@@ -22100,8 +22100,8 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
                           " で両端が結ばれ、仮定に反する。よって閉路は無い。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-F\cup\{e\}&\subseteq E\cup\{e\}&&\bigl(\because\ F\subseteq E\bigr)\\
-&=E&&\bigl(\because\ e\in E\bigr)
+F\cup\{e\}&\subseteq E\cup\{e\}&&(\because\ F\subseteq E)\\
+&=E&&(\because\ e\in E)
 \end{aligned}`),
                       ],
                     },
