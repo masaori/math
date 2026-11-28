@@ -27,7 +27,7 @@
 import Ising2DLambda.RealEscape.PeriodicDensityLimitFromLogOrderChain
 import Ising2DLambda.RealEscape.CutRealizationAgreesOnRationals
 import Ising2DLambda.KacWard.SignedEvenSubgraphRationalSign
-import Ising2DLambda.KacWard.DispersionPositiveAtRationalPoint
+import Ising2DLambda.FisherZero.NoRationalSquareTwo
 
 namespace Ising2DLambda.RealEscape
 
@@ -53,7 +53,14 @@ theorem signedEvenSubgraphValue_ne_zero (data : RealClosedSubfieldData) {L : ℕ
     (z : Qbar) (hz4 : z ^ 4 = -1) (q : ℚ) (hq0 : 0 < q) (hq1 : q < 1) (s : SpinStructure) :
     signedEvenSubgraphValue L q s ≠ 0 := by
   have hsign := signedEvenSubgraphPolynomial_rational_sign (L := L) data z hz4 s q hq0 hq1
-  rcases lt_or_gt_of_ne (rational_selfDual_ne_zero q) with hc | hc
+  -- `claim_no_rational_square_two` を `q + 1` に当てて `q² + 2q − 1 ≠ 0`
+  have hp : q ^ 2 + 2 * q - 1 ≠ 0 := by
+    intro hp
+    apply noRationalSquareTwo (q + 1)
+    calc (q + 1) * (q + 1) = q ^ 2 + 2 * q + 1 := by ring
+      _ = (q ^ 2 + 2 * q - 1) + 2 := by ring
+      _ = 2 := by rw [hp]; ring
+  rcases lt_or_gt_of_ne hp with hc | hc
   · -- `q² + 2q − 1 < 0`: 四つとも正
     exact ne_of_gt (hsign.1 hc)
   · -- `q² + 2q − 1 > 0`: `(0,0)` だけ負、残りは正

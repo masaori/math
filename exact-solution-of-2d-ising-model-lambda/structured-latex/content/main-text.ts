@@ -108908,7 +108908,7 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                   displayMath(String.raw`\begin{aligned}
 \rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)
 &=\mathrm{pr}_1\bigl(\Theta_{L,a,b}(\varpi,\varsigma)\bigr)
-&&\bigl(\because\ \blkref{claim_twisted_mode_product_bijection}\text{ の }\Theta_{L,a,b}\text{ の定義と }\mathrm{pr}_1\text{ の定義}\bigr)\\
+&&\bigl(\because\ \text{主張文の写像 }\Theta_{L,a,b}\text{ の定義と }\mathrm{pr}_1\text{ の定義}\bigr)\\
 &=\exp\!\left(\frac{2\pi i(k+a/2)}{L}\right)
 &&\bigl(\because\ \Theta_{L,a,b}(\varpi,\varsigma)\text{ の仮定}\bigr)\\
 &=\exp(i\theta_1)
@@ -109012,6 +109012,7 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                 realEscape: "実対数。可算側の有理点を実数へ埋め込み、全ての実数の角で正となる分散式に実対数を適用する。連続性は実数体の位相で述べる。",
                 verification: ["sagemath/check/dispersion-angle-log-continuity"],
                 lean: [
+                  "Ising2DLambda.RealEscape.dispersionAngleArgument_pos",
                   "Ising2DLambda.RealEscape.dispersion_angle_log_continuous",
                   "Ising2DLambda.NecSuf.RealEscape.dispersion_angle_log_continuous_necSuf",
                   "Ising2DLambda.RealEscape.dispersion_angle_log_continuous_from_necSuf",
@@ -111685,7 +111686,7 @@ v_L
 &=L^{-2}\rho_{\mathbb R}\!\left(\jmath(\log M_L^{\mathrm{abs}}(q)-2\ell_2)\right)
 &&\bigl(\because\ \blkref{claim_rational_log_order_group_realization_smul}\bigr)\\
 &=L^{-2}\log_{\mathbb R}\!\left(M_L^{\mathrm{abs}}(q)/4\right)
-&&\bigl(\because\ \blkref{claim_log_order_group_realization_real_log},\ \blkref{claim_log_additive},\ \blkref{claim_log_power}\bigr)\\
+&&\bigl(\because\ \blkref{claim_log_order_group_realization_real_log},\ \blkref{claim_log_additive},\ \blkref{claim_log_power},\ \blkref{claim_rational_log_order_iff}\text{ の証明の }\operatorname{rat}_{\Lambda}(\log q')=q'\text{ を }q':=M_L^{\mathrm{abs}}(q)/4\text{ に当てる}\bigr)\\
 &=v_L-2L^{-2}\log_{\mathbb R}2
 &&\bigl(\because\ \text{実対数の積法則・単調性と有限集合上の最大値の定義}\bigr).
 \end{aligned}`),
@@ -111698,6 +111699,8 @@ v_L
                     " である。", ref("def_periodic_free_energy_density_le_one"), " の上限が定まること（像 ",
                     math(String.raw`\rho_{\mathbb R}(A^{\mathrm{per}}(q))`),
                     " が空でなく上に有界であること）は、",
+                    math(String.raw`q<1`), " なので ", ref("claim_periodic_density_lower_set_eq_open_square_le_one"),
+                    " により ", math(String.raw`A^{\mathrm{per}}(q)=A^{\mathrm{op}}(q)`), " であることと、",
                     ref("claim_open_square_density_lower_set_nonempty"), " と、",
                     ref("claim_open_square_density_lower_set_le_upper_bound"), " の上からの評価を ",
                     ref("claim_rational_log_order_group_realization_monotone"), " で実数へ移したものから従う。",
@@ -111707,7 +111710,7 @@ v_L
                   displayMath(String.raw`\begin{aligned}
 f^{\mathrm{per}}(q)
 &=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))
-&&\bigl(\because\ \blkref{def_periodic_free_energy_density_le_one}\text{。上限が定まることは上の三つの主張}\bigr)\\
+&&\bigl(\because\ \blkref{def_periodic_free_energy_density_le_one}\text{。上限が定まることは上の四つの主張}\bigr)\\
 &=I_q
 &&\bigl(\because\ \blkref{claim_sequence_lower_set_sup_eq_real_limit}\text{ と }\blkref{def_periodic_density_lower_set}\bigr).
 \end{aligned}`),
@@ -111883,7 +111886,7 @@ f^{\mathrm{per}}(q)
 &=\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}(4r^2H_q(\theta_1,\theta_2))\,d\theta_2\,d\theta_1
 &&\bigl(\because\ \text{直前の実数上の恒等式 }B_q=4r^2H_q\bigr)\\
 &=\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\bigl(\log_{\mathbb R}(4r^2)+\log_{\mathbb R}H_q(\theta_1,\theta_2)\bigr)\,d\theta_2\,d\theta_1
-&&\bigl(\because\ 4r^2>0,\ H_q>0\text{ と }\blkref{def_real_logarithm}\text{ の積法則}\bigr)\\
+&&\bigl(\because\ 4r^2>0\text{、}\blkref{claim_dispersion_angle_log_continuous}\text{ の }B_q>0\text{ と }B_q=4r^2H_q\text{ から }H_q>0\text{、}\blkref{def_real_logarithm}\text{ の積法則}\bigr)\\
 &=\frac{4\pi^2}{8\pi^2}\log_{\mathbb R}(4r^2)+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1
 &&\bigl(\because\ \text{積分の線型性と長方形の面積 }(2\pi)^2=4\pi^2\bigr)\\
 &=\tfrac12\log_{\mathbb R}(4r^2)+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1

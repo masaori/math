@@ -26,6 +26,7 @@ import Ising2DLambda.FisherZero.RealAlgebraicOrderTransitive
 import Ising2DLambda.FisherZero.SelfDualQuadraticRoots
 import Ising2DLambda.FisherZero.KwSelfDualQuadraticEquivalence
 import Ising2DLambda.CriticalExponent.CriticalPointPositive
+import Ising2DLambda.AlgebraicEigenvalue.QbarNoZeroDivisors
 
 namespace Ising2DLambda.RealEscape
 
@@ -175,8 +176,11 @@ theorem ne_negOneSubSqrtTwo_of_pos (data : RealClosedSubfieldData) {ξ t : data.
   have hvv : v * v = 0 :=
     calc v * v = 0 - 0 := hv.symm
       _ = 0 := sub_self 0
-  -- `claim_qbar_no_zero_divisors`: 零でない元の平方は零でない。
-  exact hv0 (mul_self_eq_zero.mp hvv)
+  -- `claim_qbar_no_zero_divisors` を `a = b = v` に当てて `v = 0`。
+  have hvQ : (v : Qbar) ≠ 0 := fun h => hv0 (Subtype.ext h)
+  have hvvQ : (v : Qbar) * (v : Qbar) = 0 := by
+    rw [← Subfield.coe_mul, hvv]; rfl
+  exact hv0 (Subtype.ext (qbarNoZeroDivisors hvQ hvvQ))
 
 /-- 本文の六行: `B − (1−2r−r²)² = c((1−cos θ₁)+(1−cos θ₂))`。 -/
 theorem dispersionMinimumArgument_sub_gap (r θ₁ θ₂ : ℝ) :
