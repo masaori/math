@@ -12,6 +12,8 @@
 | --- | --- |
 | `conj_add_matrix`（`T_B` の定義 → 右の因子の和への分配 → 左の因子の和への分配 → `T_B` の定義を 2 か所） | `conj_add_matrix'`（同じ並び） |
 | `conj_smul_matrix`（`T_B` の定義 → スカラー倍を右の因子から出す → 左の因子から出す → `T_B` の定義） | `conj_smul_matrix'`（同じ並び） |
+| `Mat(2^M, ℂ)` の具体版 `conj_add_tensorPow`（`ClaimTensorPowConjugationPreservesSum.lean`。右の因子の和への分配 → 左の因子の和への分配。`T_B` の定義は主張に開いてある） | `conj_add_matrix'`（同じ並び） |
+| `Mat(2^M, ℂ)` の具体版 `conj_smul_tensorPow`（`ClaimTensorPowConjugationPreservesScalarMultiple.lean`。スカラー倍を右の因子から出す → 左の因子から出す） | `conj_smul_matrix'`（同じ並び） |
 | `conj_finite_sum_of_matrices`（`r + 1` 項の帰納法。有限和の定義 → 和を保つこと → 帰納法の仮定 → 有限和の定義） | `conj_finite_sum_matrix'`（同じ並び） |
 
 ## 何が効いているか / 効いていないか

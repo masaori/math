@@ -1957,6 +1957,7 @@ targets=(
   Ising2D.conj_smul_matrix_of_necSuf
   Ising2D.conj_finite_sum_of_matrices_of_necSuf
   Ising2D.conj_add_tensorPow
+  Ising2D.conj_add_tensorPow_of_necSuf
   Ising2D.conj_smul_tensorPow
   Ising2D.conj_finite_sum_tensorPow
   Ising2D.neg_add_matrix
@@ -2154,6 +2155,8 @@ targets=(
   Ising2D.conj_sub_matrix_of_necSuf
   Ising2D.conj_neg_tensorPow
   Ising2D.conj_sub_tensorPow
+  Ising2D.conj_neg_tensorPow_of_necSuf
+  Ising2D.conj_sub_tensorPow_of_necSuf
   Ising2D.Uflip_conj_mul
   Ising2D.Uflip_conj_smul
   Ising2D.mul_neg_matrix_of_necSuf

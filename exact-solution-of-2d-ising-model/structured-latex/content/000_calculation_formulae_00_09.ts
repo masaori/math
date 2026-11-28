@@ -2476,7 +2476,7 @@ y^2>x\ \land\ x>0
     origin: { path: "_old/typst/parts/000_計算公式/005_theorem_行列の共役.typ", ordinal: 6 },
     title: { text: "行列の共役" },
     labels: ["mat_conj"],
-    lean: ["Ising2D.conj_add_matrix", "Ising2D.conj_smul_matrix", "Ising2D.conj_smul_tensorPow"],
+    lean: ["Ising2D.conj_add_matrix", "Ising2D.conj_smul_matrix", "Ising2D.conj_add_tensorPow", "Ising2D.conj_smul_tensorPow"],
     statement: [
       paragraph([
         math("n\\in\\mathbb{Z}_{\\geq 1}"),
@@ -2634,7 +2634,7 @@ T_B\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     kind: "claim",
     title: { text: "行列の共役は符号反転を保つ" },
     labels: ["matrix_conjugation_preserves_negation"],
-    lean: ["Ising2D.conj_neg_matrix"],
+    lean: ["Ising2D.conj_neg_matrix", "Ising2D.conj_neg_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
@@ -2685,7 +2685,7 @@ T_B(-W)
     kind: "claim",
     title: { text: "行列の共役は差を保つ" },
     labels: ["matrix_conjugation_preserves_difference"],
-    lean: ["Ising2D.conj_sub_matrix"],
+    lean: ["Ising2D.conj_sub_matrix", "Ising2D.conj_sub_tensorPow"],
     statement: [
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),

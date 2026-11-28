@@ -5,12 +5,14 @@
 係数 `R := ℂ`、添字 `Fin n`、`B := ↑B`、`B' := ↑B⁻¹`（単元 `B` の逆元）の特殊化として得る。
 人手のラベルは `mat_conj`・`matrix_conjugation_preserves_finite_sum`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版 `ClaimMatrixConjugationPreservesSums.lean` は添字が `Fin n` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。スカラー倍を保つことの `TensorPow M` の具体版は
-`ClaimTensorPowConjugationPreservesScalarMultiple.lean` の `conj_smul_tensorPow` にあり、ここではそれを特殊化として導く。
+有限和を保つことの `TensorPow M`（添字 `Conf M`）の系 `conj_finite_sum_tensorPow` も同じ必要十分版の特殊化として置く。
+具体版 `ClaimMatrixConjugationPreservesSums.lean` は添字が `Fin n` の行列について述べてあり、`Conf M` の行列には当てはまらないためである。和・スカラー倍を保つことの `TensorPow M` の具体版は
+`ClaimTensorPowConjugationPreservesSum.lean` の `conj_add_tensorPow`・`ClaimTensorPowConjugationPreservesScalarMultiple.lean` の
+`conj_smul_tensorPow` にあり、ここではそれらを特殊化として導く。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesSums
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowConjugationPreservesScalarMultiple
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowConjugationPreservesSum
 import Ising2D.NecSuf.MatrixConjugationSum
 import Ising2D.Basic
 
@@ -33,10 +35,11 @@ theorem conj_finite_sum_of_matrices_of_necSuf {n : ℕ} (B : (Matrix (Fin n) (Fi
   NecSuf.conj_finite_sum_matrix' (B : Matrix (Fin n) (Fin n) ℂ)
     ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) r X
 
-/-- `mat_conj`（和を保つ）の `TensorPow M` での系（`NecSuf.conj_add_matrix'` の添字 `Conf M` の特殊化）。 -/
-theorem conj_add_tensorPow {M : ℕ} (B : (TensorPow M)ˣ) (A C : TensorPow M) :
-    Conjugation.T B (A + C) = Conjugation.T B A + Conjugation.T B C :=
-  NecSuf.conj_add_matrix' (B : TensorPow M) ((B⁻¹ : (TensorPow M)ˣ) : TensorPow M) A C
+/-- `mat_conj`（和を保つ）の `TensorPow M` での具体版 `conj_add_tensorPow`
+（`ClaimTensorPowConjugationPreservesSum.lean`）を、`NecSuf.conj_add_matrix'` の添字 `Conf M`、`B' := Binv` の特殊化として得る。 -/
+theorem conj_add_tensorPow_of_necSuf {M : ℕ} (B Binv : TensorPow M) (A C : TensorPow M) :
+    B * (A + C) * Binv = B * A * Binv + B * C * Binv :=
+  NecSuf.conj_add_matrix' B Binv A C
 
 /-- `mat_conj`（スカラー倍を保つ）の `TensorPow M` での具体版 `conj_smul_tensorPow`
 （`ClaimTensorPowConjugationPreservesScalarMultiple.lean`）を、`NecSuf.conj_smul_matrix'` の添字 `Conf M`、`B' := Binv` の特殊化として得る。 -/

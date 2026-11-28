@@ -41,7 +41,7 @@ import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndCon
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesSumsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowConjugationPreservesScalarMultiple
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSumFromNecSuf
-import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesDifferenceFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowConjugationPreservesNegationAndDifference
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowDifferenceIsSumWithNegation
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerMultilinear
 
@@ -815,7 +815,7 @@ theorem Uflip_conj_H1plus : Uflip M * H1plus M * UflipInv M = -(H1plus M) := by
           rfl                                                               -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
       _ = Conjugation.T (UflipUnit (r + 2)) (∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m))
             - Conjugation.T (UflipUnit (r + 2)) (Y (Fin.last (r + 1)) * Z 0) :=
-          conj_sub_tensorPow _ _ _                                          -- `matrix_conjugation_preserves_difference`（`n → 2^{M_col}`, `B → U`, `X → Σ_{ℓ=1}^{M_col-1} Y_ℓZ_{ℓ+1}`, `W → Y_{M_col}Z_1`）
+          conj_sub_tensorPow (Uflip (r + 2)) (UflipInv (r + 2)) _ _          -- `matrix_conjugation_preserves_difference`（`n → 2^{M_col}`, `B → U`, `X → Σ_{ℓ=1}^{M_col-1} Y_ℓZ_{ℓ+1}`, `W → Y_{M_col}Z_1`）
       _ = (∑ m : Fin (r + 1), Conjugation.T (UflipUnit (r + 2)) (Y (Fin.castSucc m) * Z (Fin.succ m)))
             - Conjugation.T (UflipUnit (r + 2)) (Y (Fin.last (r + 1)) * Z 0) := by
           rw [conj_finite_sum_tensorPow (UflipUnit (r + 2)) r]              -- `matrix_conjugation_preserves_finite_sum`（`n → 2^{M_col}`, `B → U`, `r → M_col-1`, `(X_1, …, X_r) → (Y_1Z_2, …, Y_{M_col-1}Z_{M_col})`）

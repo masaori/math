@@ -12,6 +12,8 @@
 | --- | --- |
 | `conj_neg_matrix`（`T_B` の定義 → 符号反転を右の因子から出す → 左の因子から出す → `T_B` の定義） | `conj_neg_matrix'`（同じ並び） |
 | `conj_sub_matrix`（差を和と符号反転へ → 和を保つ → 符号反転を保つ → 和と符号反転を差へ） | `conj_sub_matrix'`（同じ並び） |
+| `Mat(2^M, ℂ)` の具体版 `conj_neg_tensorPow`（`ClaimTensorPowConjugationPreservesNegationAndDifference.lean`。符号反転を右の因子から出す → 左の因子から出す。`T_B` の定義は主張に開いてある） | `conj_neg_matrix'`（同じ並び） |
+| `Mat(2^M, ℂ)` の具体版 `conj_sub_tensorPow`（同じファイル。差を和と符号反転へ → 和を保つ → 符号反転を保つ → 和と符号反転を差へ） | `conj_sub_matrix'`（同じ並び） |
 
 ## 何が効いているか / 効いていないか
 
