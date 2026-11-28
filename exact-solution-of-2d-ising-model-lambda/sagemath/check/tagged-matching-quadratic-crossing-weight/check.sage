@@ -35,4 +35,20 @@ for n in range(4):
                 assert first == second == third == fourth
                 checked += 1
 
-print(f'PASS: {checked} exact cyclotomic family assignments')
+# 回転位相の冪表示: rho(e,f) = zeta^{tau(e,f)}（直進・左・右の三つの場合）と、
+# 閉歩道の位相積が一歩の回転数の和の冪になること（整数指数の加法則）。
+rho = {0: K.one(), 1: zeta, -1: zeta**(-1)}
+turnings = 0
+for k in range(1, 7):
+    for taus in product((-1, 0, 1), repeat=k):
+        assert all(rho[tau] == zeta**tau for tau in taus)
+        assert prod((rho[tau] for tau in taus), K.one()) == zeta**sum(taus)
+        turnings += 1
+
+# 定数埋込みは加法逆元と積を保つ: -x^k C(a) = x^k C(-a)、prod_C x^{k_C} C(a_C) = x^{sum k_C} C(prod a_C)。
+for a_vals in product((K.one(), -K.one(), zeta, -zeta**3), repeat=3):
+    ks = (1, 2, 3)
+    assert all(-x**k * R(a) == x**k * R(-a) for k, a in zip(ks, a_vals))
+    assert prod((x**k * R(a) for k, a in zip(ks, a_vals)), R.one()) == x**sum(ks) * R(prod(a_vals))
+
+print(f'PASS: {checked} exact cyclotomic family assignments, {turnings} turning sequences')

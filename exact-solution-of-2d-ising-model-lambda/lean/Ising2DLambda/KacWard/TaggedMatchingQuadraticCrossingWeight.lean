@@ -12,6 +12,7 @@
   （claim_projected_cycle_distinct_edges・
    claim_projected_cycle_support_union）                   `taggedCycleBaseEdge_injOn`・
                                                          `taggedCycleBaseEdge_image`
+                                                         （`projectedCycleSupportUnion_eq_complement`）
   切断線偶奇は台の非交和で加わる                           `taggedCycleSeam_sum_mod`
   |P| = Σ_C k_C                                          `taggedComplementEdges_card`
   一つ目の式（横断対の分割）                               `shortPairCrossingNumber_cycleSplit`
@@ -25,6 +26,7 @@
 import Ising2DLambda.KacWard.TaggedCycleFamilyQuadraticSign
 import Ising2DLambda.KacWard.TaggedComplementActiveVerticesConcrete
 import Ising2DLambda.KacWard.TaggedComplementActiveVertices
+import Ising2DLambda.KacWard.ProjectedCycleSupportUnion
 
 namespace Ising2DLambda.KacWard
 
@@ -73,7 +75,8 @@ theorem taggedCycleBaseEdge_injOn :
     rfl
   · exact absurd hab (taggedCycleWalk_edge_ne D t ma mb hma hmb hm ra rb)
 
-/-- 閉路の辺の無向辺の全体は補辺 `P` に等しい（`claim_projected_cycle_support_union`）。 -/
+/-- 閉路の辺の無向辺の全体は補辺 `P` に等しい（`claim_projected_cycle_support_union` の具体版
+    `projectedCycleSupportUnion_eq_complement` を、閉路を最小元で表した添字で読む）。 -/
 theorem taggedCycleBaseEdge_image (z : Qbar) (s : SpinStructure)
     (ht : t ⊆ matchingOrientedPairs D)
     (hterm : matchingSignPolynomial D *
@@ -82,55 +85,24 @@ theorem taggedCycleBaseEdge_image (z : Qbar) (s : SpinStructure)
         (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0) :
     (taggedCycleIndices D t).image (fun a => (taggedCycleWalk D t a.1 a.2).1) =
       taggedComplementEdges D t := by
+  have hunion := projectedCycleSupportUnion_eq_complement z s D t ht hterm
   ext e
+  have he : e ∈ taggedComplementEdges D t ↔ e ∈ projectedCycleSupportUnion D t := by
+    rw [hunion, Finset.mem_coe]
+  rw [he, projectedCycleSupportUnion, Set.mem_setOf_eq]
   constructor
-  · -- 閉路の辺 `w_r = ι(c(2r))` の無向辺は、活性な点 `c(2r)` の無向辺なので P に入る
-    intro he
-    obtain ⟨a, _, rfl⟩ := Finset.mem_image.mp he
-    exact (taggedComplement_iff_active_concrete z s D t ht hterm
-      (finiteMapIterate (concreteAlternatingSuccessor D t) (2 * a.2) a.1).1).2
-      (by rw [taggedActiveByLabels_eq_concreteTaggedActiveVertices D t]
-          exact (finiteMapIterate (concreteAlternatingSuccessor D t) (2 * a.2) a.1).2)
-  · -- P の辺 e について (e, false) は活性で、その閉路の偶数番目か奇数番目の点である
-    intro he
-    let a0 : OrientedEdge L := (e, false)
-    have hact : a0 ∈ concreteTaggedActiveVertices D t := by
-      rw [← taggedActiveByLabels_eq_concreteTaggedActiveVertices D t]
-      exact (taggedComplement_iff_active_concrete z s D t ht hterm a0).1 he
-    let τ := concreteShortInvolution D t
-    let υ := concreteLongInvolution D t
-    let xx : TaggedActive D t := ⟨a0, hact⟩
-    let m := matchingPairComponentMinimum τ υ xx
-    have hm : m ∈ taggedCycleMinima D t := Finset.mem_image_of_mem _ (Finset.mem_univ _)
-    have horbit : xx ∈ finitePermutationOrbit (concreteAlternatingSuccessor D t) m := by
-      change xx ∈ finitePermutationOrbit (matchingPairPermutation τ υ) m
-      rw [matchingPairPermutation_orbit_eq_component,
-        matchingPairComponent_basepoint τ υ xx m (matchingPairComponentMinimum_mem τ υ xx)]
-      exact Or.inl (finitePermutationOrbit_self_mem _ _)
-    obtain ⟨j, hj⟩ := (finitePermutationOrbitEnumeration_bijective
-      (concreteAlternatingSuccessor D t) m).2 ⟨xx, horbit⟩
-    have hjval : taggedCyclePoint D t m j.val = a0 := congrArg (fun y => y.1.1) hj
-    have hjlt : j.val < 2 * taggedCycleLength D t m := by
-      rw [← taggedCycle_period_eq D t m]
-      exact j.isLt
-    have hk := taggedCycleLength_pos D t m
-    apply Finset.mem_image.mpr
-    rcases Nat.even_or_odd j.val with ⟨q, hq⟩ | ⟨q, hq⟩
-    · -- j = 2q: ι(w_q) = c(2q) = (e, false)
-      refine ⟨⟨m, q⟩, Finset.mem_sigma.mpr ⟨hm, Finset.mem_range.mpr
-        (show q < taggedCycleLength D t m by omega)⟩, ?_⟩
-      have h1 := (taggedCycleWalk_pair_points D t m hm q).1
-      rw [show 2 * q = j.val by omega, hjval] at h1
-      have h2 := congrArg (fun x : OrientedEdge L => x.1) h1
-      simpa [reversal, a0] using h2
-    · -- j = 2q + 1: w_{q+1} = c(2q+1) = (e, false)。添字は周期 k_C で読み直す
-      refine ⟨⟨m, (q + 1) % taggedCycleLength D t m⟩,
-        Finset.mem_sigma.mpr ⟨hm, Finset.mem_range.mpr (Nat.mod_lt _ hk)⟩, ?_⟩
-      have h2 := (taggedCycleWalk_pair_points D t m hm q).2.1
-      rw [show 2 * q + 1 = j.val by omega, hjval,
-        periodic_eq_mod (taggedCycleWalk D t m) _ (taggedCycleWalk_periodic D t m) (q + 1)] at h2
-      simp only
-      rw [h2]
+  · -- 閉路 `C`（最小元 `m = μ(i)`）の第 `r` 辺 `ι(c_C(2r))` は台の合併の元
+    intro h
+    obtain ⟨⟨m, r⟩, ha, rfl⟩ := Finset.mem_image.mp h
+    obtain ⟨hm, hr⟩ := Finset.mem_sigma.mp ha
+    obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp hm
+    exact ⟨i, r, Finset.mem_range.mp hr, rfl⟩
+  · -- 台の合併の元は、活動点 `i` の閉路の最小元から読んだ第 `r` 辺
+    rintro ⟨i, r, hr, rfl⟩
+    exact Finset.mem_image.mpr
+      ⟨⟨matchingPairComponentMinimum (concreteShortInvolution D t) (concreteLongInvolution D t) i, r⟩,
+        Finset.mem_sigma.mpr ⟨Finset.mem_image_of_mem _ (Finset.mem_univ _), Finset.mem_range.mpr hr⟩,
+        rfl⟩
 
 /-- 閉歩道 `γ_C` の辺列に沿う指示子の和は、閉路の添字にわたる和である。 -/
 theorem taggedCycleFinWalk_indicator_sum (c : OrientedEdge L → ℕ) (m : TaggedActive D t) :
