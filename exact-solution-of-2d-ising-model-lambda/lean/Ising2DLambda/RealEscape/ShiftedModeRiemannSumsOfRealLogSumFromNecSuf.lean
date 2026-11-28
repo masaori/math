@@ -26,6 +26,8 @@ theorem modeLogDensity_tendsto_of_realLogSum_from_necSuf (data : RealClosedSubfi
       (∀ (m : FourierModePair L s) (D : data.carrier),
         (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar) →
           φ m = Real.log (realAlgebraicCutRealization data D)) ∧
+      (∀ m : FourierModePair L s, ∃ D : data.carrier,
+        (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar)) ∧
       modeLogDensity data q s L = 1 / (2 * (L : ℝ) ^ 2) * ∑ m : FourierModePair L s, φ m) :
     Tendsto (modeLogDensity data q s) atTop (𝓝 (dispersionIntegral q hq0 hq1)) := by
   have hpi : Real.pi ≠ 0 := Real.pi_ne_zero
@@ -47,7 +49,7 @@ theorem modeLogDensity_tendsto_of_realLogSum_from_necSuf (data : RealClosedSubfi
     (fun L hL => by
       haveI : NeZero L := ⟨by omega⟩
       rw [hS L (NeZero.ne L), smul_eq_mul]
-      exact (Classical.choose_spec (hsum L)).2)
+      exact (Classical.choose_spec (hsum L)).2.2)
     (fun L hL => by
       haveI : NeZero L := ⟨by omega⟩
       rw [hS L (NeZero.ne L)]
@@ -69,6 +71,8 @@ theorem periodicFreeEnergyDensity_eq_dispersionIntegral_of_realLogSum_from_necSu
       (∀ (m : FourierModePair L s) (D : data.carrier),
         (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar) →
           φ m = Real.log (realAlgebraicCutRealization data D)) ∧
+      (∀ m : FourierModePair L s, ∃ D : data.carrier,
+        (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar)) ∧
       modeLogDensity data q s L = 1 / (2 * (L : ℝ) ^ 2) * ∑ m : FourierModePair L s, φ m) :
     periodicFreeEnergyDensity q = dispersionIntegral q hq0 hq1 :=
   periodicFreeEnergyDensity_eq_dispersionIntegral_of_modeLimits_from_necSuf data z hz4 q hq0 hq1
@@ -82,6 +86,8 @@ theorem periodicFreeEnergyDensity_onsagerForm_of_realLogSum_from_necSuf
       (∀ (m : FourierModePair L s) (D : data.carrier),
         (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar) →
           φ m = Real.log (realAlgebraicCutRealization data D)) ∧
+      (∀ m : FourierModePair L s, ∃ D : data.carrier,
+        (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar)) ∧
       modeLogDensity data q s L = 1 / (2 * (L : ℝ) ^ 2) * ∑ m : FourierModePair L s, φ m) :
     paperCosh (2 * onsagerCoupling q hq0) = onsagerCoshValue q ∧
       paperSinh (2 * onsagerCoupling q hq0) = onsagerSinhValue q ∧

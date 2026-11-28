@@ -108689,9 +108689,15 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
                 ],
                 proof: [
                   paragraph([
-                    ref("claim_dispersion_positive_at_rational_point"), " により各因子は ",
-                    math(String.raw`R`), " で正である。",
-                    ref("claim_cut_realization_preserves_strict_order"), " によりその実現値も正の実数である。",
+                    ref("claim_dispersion_positive_at_rational_point"), " により各因子 ",
+                    math(String.raw`\Delta(q;\varpi,\varsigma)`), " は ",
+                    math(String.raw`0<_R(q^2+2q-1)^2\le_R\Delta(q;\varpi,\varsigma)`),
+                    " を満たし、", ref("claim_real_algebraic_order_transitive"),
+                    " により ", math(String.raw`0<_R\Delta(q;\varpi,\varsigma)`), " である（等号の場合は左の不等式そのもの）。",
+                    ref("claim_cut_realization_preserves_strict_order"), " と ",
+                    ref("claim_cut_realization_agrees_on_rationals"), " の ",
+                    math(String.raw`\rho_{R\to\mathbb R}(0)=\iota_{\mathbb Q\to\mathbb R}(0)=0`),
+                    " によりその実現値も正の実数である。",
                     ref("claim_determinant_signed_even_subgraph_square"), " と ",
                     ref("claim_dispersion_mode_product"), " を ", math(String.raw`x:=q`),
                     " で評価すると、", math(String.raw`(Q_L^{a,b}(q))^2`),
@@ -108718,9 +108724,9 @@ j&=\frac{L}{2\pi i}\cdot\frac{2\pi i(j+c/2)}{L}-\frac c2&&\bigl(\because\ \mathb
 &=\frac{1}{2L^2}\log_{\mathbb R}\rho_{R\to\mathbb R}\left(\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(q;\varpi,\varsigma)\right)
 &&\bigl(\because\ \blkref{claim_dispersion_mode_product}\text{ を }x:=q\text{ で評価}\bigr)\\
 &=\frac{1}{2L^2}\log_{\mathbb R}\left(\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))\right)
-&&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\text{ を有限積に適用}\bigr)\\
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\text{ を有限積に適用。空積は }\blkref{claim_cut_realization_agrees_on_rationals}\text{ の }\rho_{R\to\mathbb R}(1)=1\bigr)\\
 &=\frac{1}{2L^2}\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
-&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の乗法法則を有限積に適用}\bigr)
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の乗法法則を有限積に適用。空積は同じ法則から出る }\log_{\mathbb R}1=0\bigr)
 \end{aligned}`),
                 ],
               },
@@ -111561,11 +111567,17 @@ f^{\mathrm{per}}(q)
                     math(String.raw`J_q\in\mathbb R`), " を取る。",
                     ref("claim_sequence_lower_set_sup_eq_real_limit"),
                     " をこの列と ", math(String.raw`J_q`), " に適用する。",
+                    ref("def_periodic_free_energy_density_le_one"), " の上限が定まること（像 ",
+                    math(String.raw`\rho_{\mathbb R}(A^{\mathrm{per}}(q))`),
+                    " が空でなく上に有界であること）は、",
+                    ref("claim_open_square_density_lower_set_nonempty"), " と、",
+                    ref("claim_open_square_density_lower_set_le_upper_bound"), " の上からの評価を ",
+                    ref("claim_rational_log_order_group_realization_monotone"), " で実数へ移したものから従う。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 f^{\mathrm{per}}(q)
 &=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))
-&&\bigl(\because\ \blkref{def_periodic_free_energy_density_le_one}\bigr)\\
+&&\bigl(\because\ \blkref{def_periodic_free_energy_density_le_one}\text{。上限が定まることは上の三つの主張}\bigr)\\
 &=\sup\rho_{\mathbb R}(A^{\mathrm{op}}(q))
 &&\bigl(\because\ \blkref{claim_periodic_density_lower_set_eq_open_square_le_one}\bigr)\\
 &=J_q
@@ -111674,13 +111686,19 @@ v_L
                     "となる。実数列 ", math(String.raw`v_L\to I_q`), " と ",
                     math(String.raw`L^{-2}\log_{\mathbb R}2\to0`),
                     " から、", ref("def_real_sequence_limit"), " の和と実数倍と挟み込みにより ", math(String.raw`\rho_{\mathbb R}(\Psi_L(q))\to I_q`),
-                    " である。最後に ", ref("def_periodic_density_lower_set"), " と ",
+                    " である。", ref("def_periodic_free_energy_density_le_one"), " の上限が定まること（像 ",
+                    math(String.raw`\rho_{\mathbb R}(A^{\mathrm{per}}(q))`),
+                    " が空でなく上に有界であること）は、",
+                    ref("claim_open_square_density_lower_set_nonempty"), " と、",
+                    ref("claim_open_square_density_lower_set_le_upper_bound"), " の上からの評価を ",
+                    ref("claim_rational_log_order_group_realization_monotone"), " で実数へ移したものから従う。",
+                    "最後に ", ref("def_periodic_density_lower_set"), " と ",
                     ref("claim_sequence_lower_set_sup_eq_real_limit"), " をこの列に適用すると",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 f^{\mathrm{per}}(q)
 &=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))
-&&\bigl(\because\ \blkref{def_periodic_free_energy_density_le_one}\bigr)\\
+&&\bigl(\because\ \blkref{def_periodic_free_energy_density_le_one}\text{。上限が定まることは上の三つの主張}\bigr)\\
 &=I_q
 &&\bigl(\because\ \blkref{claim_sequence_lower_set_sup_eq_real_limit}\text{ と }\blkref{def_periodic_density_lower_set}\bigr).
 \end{aligned}`),

@@ -16,8 +16,8 @@
 `Σ_{(ϖ,ς)}` は `FourierModePair L s`（U_a × W_b の元の組）の上の有限和で、`claim_dispersion_mode_product`
 の具体版 `dispersion_mode_product` と同じ添字である。和の項は「ϖ, ς の分散因子の値を R の元 D として
 実現写像で実数へ送った値の実対数」であり、`hφ` はこの項の定め方（主張の前提）だけを受ける。
-D が在ることは `claim_dispersion_positive_at_rational_point` の具体版から引く。
-最初の式鎖の一行目（`claim_dispersion_product_real_log_sum`）との合成は、主経路がその具体版を示した後に行う。
+D が在ること（`hex`）は、和の項を述べる `claim_dispersion_product_real_log_sum` の主張が与える。
+最初の式鎖の一行目（`claim_dispersion_product_real_log_sum`）との合成は `ShiftedModeRiemannSums.lean` で行う。
 
 脱出理由: 指数評価（モードを複素指数関数で角表示する）と連続極限（辺長を無限大へ送る）。
 必要十分版の定理・定義は使わない。
@@ -105,7 +105,9 @@ theorem modeSum_realizedDispersionLog_eq_sampleSum (data : RealClosedSubfieldDat
     (φ : FourierModePair L s → ℝ)
     (hφ : ∀ (m : FourierModePair L s) (D : data.carrier),
       (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar) →
-        φ m = Real.log (realAlgebraicCutRealization data D)) :
+        φ m = Real.log (realAlgebraicCutRealization data D))
+    (hex : ∀ m : FourierModePair L s, ∃ D : data.carrier,
+      (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar)) :
     ∑ m : FourierModePair L s, φ m =
       ∑ k ∈ Finset.range L, ∑ l ∈ Finset.range L,
         dispersionAngleLog q hq0 hq1 (shiftedSamplePoint L s k l) := by
@@ -115,8 +117,8 @@ theorem modeSum_realizedDispersionLog_eq_sampleSum (data : RealClosedSubfieldDat
       φ (shiftedModeOf data L s k l) = dispersionAngleLog q hq0 hq1 (shiftedSamplePoint L s k l) := by
     intro k l
     set m := shiftedModeOf data L s k l with hm
-    -- claim_dispersion_positive_at_rational_point: Δ(q;ϖ,ς) は R の元 D
-    obtain ⟨D, hD, -⟩ := dispersion_realized_positive data L hL1 s m.1.1 m.1.2 m.2.1 m.2.2 q hq0 hq1
+    -- Δ(q;ϖ,ς) は R の元 D（claim_dispersion_product_real_log_sum の主張が与える。仮定 `hex`）
+    obtain ⟨D, hD⟩ := hex m
     calc φ m
         -- 和の項の定め方
         = Real.log (realAlgebraicCutRealization data D) := hφ m D hD

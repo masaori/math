@@ -14,6 +14,7 @@
 
 和の項は `φ(ϖ,ς) := log_ℝ ρ(Δ(q;ϖ,ς))` で、`Δ(q;ϖ,ς)` は `dispersion_product_real_log_sum` が与える
 実閉部分体の元である。同じ `Qbar` の値を持つ実閉部分体の元は等しいので、`hsum` の一つ目の条件が従う。
+二つ目の条件（`Δ(q;ϖ,ς)` が `R` の元であること）も同じ具体版が与える。
 
 脱出理由: 実対数、指数評価（角表示）、連続極限（辺長を無限大へ送る）、Riemann 積分。いずれも引いた段で宣言済み。
 必要十分版の定理・定義は使わない。
@@ -37,9 +38,12 @@ theorem realLogSum_of_dispersionProduct (data : RealClosedSubfieldData) (z : Qba
       (∀ (m : FourierModePair L s) (D : data.carrier),
         (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar) →
           φ m = Real.log (realAlgebraicCutRealization data D)) ∧
+      (∀ m : FourierModePair L s, ∃ D : data.carrier,
+        (D : Qbar) = (dispersionPolynomial m.1.1 m.1.2).eval (q : Qbar)) ∧
       modeLogDensity data q s L = 1 / (2 * (L : ℝ) ^ 2) * ∑ m : FourierModePair L s, φ m := by
   obtain ⟨Δ, hΔ, -, hlog⟩ := dispersion_product_real_log_sum (L := L) data z hz4 s q hq0 hq1
-  refine ⟨fun m => Real.log (realAlgebraicCutRealization data (Δ m)), fun m D hD => ?_, ?_⟩
+  refine ⟨fun m => Real.log (realAlgebraicCutRealization data (Δ m)), fun m D hD => ?_,
+    fun m => ⟨Δ m, hΔ m⟩, ?_⟩
   · -- Δ(q;ϖ,ς) と D は同じ代数的数を表すので、実閉部分体の元として等しい
     have hΔD : Δ m = D := Subtype.ext ((hΔ m).trans hD.symm)
     show Real.log (realAlgebraicCutRealization data (Δ m)) = _
