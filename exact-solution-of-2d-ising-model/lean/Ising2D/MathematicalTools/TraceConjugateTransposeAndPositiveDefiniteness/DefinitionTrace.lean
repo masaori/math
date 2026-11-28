@@ -37,6 +37,7 @@ import Mathlib.Data.Complex.Basic
 import Ising2D.Basic
 import Ising2D.NecSuf.MatrixProductIdentityAndScalar
 import Ising2D.NecSuf.MatrixVectorIdentityScalarDifference
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 
 namespace Ising2D
 
@@ -326,7 +327,7 @@ theorem trace_of_idempotent (Q : Matrix n n ℂ) (hQ : Q ^ 2 = Q) :
     _ = (P' * (P * D)).trace := by rw [hQP]                 -- Step 2 の `QP = PD`
     _ = ((P' * P) * D).trace := by rw [Matrix.mul_assoc]    -- `mat_mult_associative`
     _ = ((1 : Matrix (Fin (r + s)) (Fin (r + s)) ℂ) * D).trace := by rw [hP'P]   -- `P'P = I`
-    _ = D.trace := by rw [NecSuf.one_mul_matrix]            -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = D.trace := by rw [identity_matrix_mul D]            -- `identity_matrix_is_left_unit_of_mat_mult`（`m → r + s`、`n → r + s`、`A → D`）
     _ = ∑ k, D k k := rfl                                   -- `def_trace`
     _ = ∑ _k : Fin r, (1 : ℂ) + ∑ _k : Fin s, (0 : ℂ) := by -- `D` の定め方
         rw [Fin.sum_univ_add]
