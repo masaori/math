@@ -24,9 +24,10 @@ open Ising2DLambda.CriticalExponent
 open Ising2DLambda.KacWard
 
 /-- 人手証明の帰納法: ρ_C(z^n) = ρ_C(z)^n。 -/
-theorem complexAlgebraicRealization_pow (data : RealClosedSubfieldData) (z : Qbar) :
-    ∀ n : ℕ, complexAlgebraicRealization data (z ^ n) = complexAlgebraicRealization data z ^ n
-  | 0 => by
+theorem complexAlgebraicRealization_pow (data : RealClosedSubfieldData) (z : Qbar) (n : ℕ) :
+    complexAlgebraicRealization data (z ^ n) = complexAlgebraicRealization data z ^ n := by
+  induction n with
+  | zero =>
     calc
       complexAlgebraicRealization data (z ^ 0) = complexAlgebraicRealization data 1 := by
         -- Q̄ の零乗
@@ -35,7 +36,7 @@ theorem complexAlgebraicRealization_pow (data : RealClosedSubfieldData) (z : Qba
       _ = complexAlgebraicRealization data z ^ 0 := by
         -- ℂ の零乗
         rw [pow_zero]
-  | n + 1 => by
+  | succ n ih =>
     calc
       complexAlgebraicRealization data (z ^ (n + 1)) =
           complexAlgebraicRealization data (z ^ n * z) := by
@@ -46,7 +47,7 @@ theorem complexAlgebraicRealization_pow (data : RealClosedSubfieldData) (z : Qba
         complexAlgebraicRealization_preserves_multiplication data (z ^ n) z
       _ = complexAlgebraicRealization data z ^ n * complexAlgebraicRealization data z := by
         -- 帰納法の仮定
-        rw [complexAlgebraicRealization_pow data z n]
+        rw [ih]
       _ = complexAlgebraicRealization data z ^ (n + 1) := by
         -- ℂ の冪の定義
         rw [pow_succ]

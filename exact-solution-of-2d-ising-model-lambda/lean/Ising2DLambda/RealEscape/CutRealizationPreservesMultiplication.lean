@@ -6,8 +6,12 @@
                                                                     （`claim_real_algebraic_rational_bounds` の具体版のファイル）
   0 <_R a <_R B のとき、挟み込みの下側を max(r,0)、上側を min(s,B)
   に取り替えて 0 ≤ r、s ≤ B、r <_R a <_R s、s − r < η                  `realAlgebraic_positive_pinch`
+  有理数は R の元で、有理数の積は R の積と一致する
+  （`claim_rationals_are_real_algebraic`）                              `realClosedRat_mul`
   ab − r_a r_b = a(b − r_b) + r_b(a − r_a) で r_a r_b <_R ab           `realAlgebraic_mul_lower`
   s_a s_b − ab = s_a(s_b − b) + b(s_a − a) で ab <_R s_a s_b           `realAlgebraic_mul_upper`
+  切断の挟み込み（ρ は下切断の像の最小上界。`claim_real_algebraic_lower_cut_has_supremum`）
+                                                                    `cutRealization_pinch`
   ι(r_a r_b) ≤ ρ(ab), ρ(a)ρ(b) ≤ ι(s_a s_b) と
   s_a s_b − r_a r_b = (s_a − r_a)s_b + r_a(s_b − r_b) < η(B_a + B_b)    `cutRealization_mul_close_of_pos`
   B_a, B_b は幅 1 の挟み込みの上側。差が正なら ι(q) が差より小さい q を取り η := q/(B_a + B_b)
@@ -26,12 +30,20 @@ open Ising2DLambda.FisherZero
 open Ising2DLambda.AlgebraicEigenvalue
 open Ising2DLambda.CriticalExponent
 
-/-- 有理数の所属は乗法を保つ（`R` は `Qbar` の部分体）。 -/
+/-- 有理数の所属は乗法を保つ。有理数 `r`、`s`、`r * s` は `R` の元であり
+（`claim_rationals_are_real_algebraic`）、`R` は `Qbar` の部分体なので、有理数の積は `R` の乗法による積と一致する。 -/
 theorem realClosedRat_mul (data : RealClosedSubfieldData) (r s : ℚ) :
     realClosedRat data (r * s) = realClosedRat data r * realClosedRat data s := by
-  simp only [realClosedRat_eq_cast]
-  push_cast
-  rfl
+  -- 有理数の所属（`claim_rationals_are_real_algebraic`）。
+  have hr : ((r : ℚ) : Qbar) ∈ data.carrier := rational_mem_realClosedCarrier data r
+  have hs : ((s : ℚ) : Qbar) ∈ data.carrier := rational_mem_realClosedCarrier data s
+  have hrs : ((r * s : ℚ) : Qbar) ∈ data.carrier := rational_mem_realClosedCarrier data (r * s)
+  show (⟨((r * s : ℚ) : Qbar), hrs⟩ : data.carrier) =
+    (⟨((r : ℚ) : Qbar), hr⟩ : data.carrier) * ⟨((s : ℚ) : Qbar), hs⟩
+  -- 部分体の乗法は `Qbar` の乗法の制限。
+  apply Subtype.ext
+  show ((r * s : ℚ) : Qbar) = ((r : ℚ) : Qbar) * ((s : ℚ) : Qbar)
+  exact Rat.cast_mul r s
 
 /-- 有理数の零の所属は `R` の零。 -/
 theorem realClosedRat_zero (data : RealClosedSubfieldData) :

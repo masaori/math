@@ -52,9 +52,17 @@ theorem toRational_zero' : toRational (0 : LogOrderGroup) = 0 := by
   refine Finsupp.ext fun p => ?_
   rw [toRational_apply, Finsupp.zero_apply, Int.cast_zero, Finsupp.zero_apply]
 
-/-- `rat_Λ(ℓ_2) = 2`（`def_rational_of_log`、`supp(ℓ_2) = {2}`）。 -/
+/-- `rat_Λ(ℓ_2) = 2`（`def_rational_of_log`、`supp(ℓ_2) = {2}`）。
+台が `{2}` なので、積は `2` での因子 `2^1` だけである。 -/
 theorem rationalOfLog_generatorTwo : rationalOfLog (generator ⟨2, Nat.prime_two⟩) = 2 := by
-  rw [← logRat_two, rationalOfLog_logRat two_pos]
+  unfold rationalOfLog generator
+  rw [Finsupp.prod_single_index (by rw [zpow_zero])]
+  norm_num
+
+/-- `rat_Λ(0) = 1`（`def_rational_of_log`、空集合上の積は `1`）。 -/
+theorem rationalOfLog_zero_eq_one : rationalOfLog (0 : LogOrderGroup) = 1 := by
+  unfold rationalOfLog
+  exact Finsupp.prod_zero_index
 
 /-- 第三の事実: `c := ρ(ȷ(ℓ_2))` は正である。本文の鎖を下から上へ読む。 -/
 theorem realizeRational_generatorTwo_pos :
@@ -67,7 +75,7 @@ theorem realizeRational_generatorTwo_pos :
           -- log_ℝ ι(rat_Λ(0)) = log_ℝ ι(1) < log_ℝ ι(2) = log_ℝ ι(rat_Λ(ℓ_2))
           apply realLog_lt_realLog
           show ((rationalOfLog 0 : ℚ) : ℝ) < ((rationalOfLog (generator ⟨2, Nat.prime_two⟩) : ℚ) : ℝ)
-          rw [rationalOfLog_zero, rationalOfLog_generatorTwo]
+          rw [rationalOfLog_zero_eq_one, rationalOfLog_generatorTwo]
           exact Rat.cast_lt.mpr one_lt_two                                  -- 1 < 2 と ι の狭義順序保存
     _ = realizeRational (toRational (generator ⟨2, Nat.prime_two⟩)) :=
           (realizeRational_toRational _).symm                              -- 実現は rat_Λ の実対数

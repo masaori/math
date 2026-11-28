@@ -107708,7 +107708,10 @@ s_as_b-ab
                   ]),
                   paragraph([
                     "実数での比較。", ref("claim_cut_realization_preserves_addition"),
-                    " の証明にある切断の挟み込みを ", math(String.raw`ab,a,b`),
+                    " の証明にある切断の挟み込み（", ref("claim_real_algebraic_lower_cut_has_supremum"),
+                    " により ", math(String.raw`\rho_{R\to\mathbb R}(x)`),
+                    " が下切断 ", math(String.raw`C_x`), " の像の最小上界であることから従う）を ",
+                    math(String.raw`ab,a,b`),
                     " に適用する。", ref("def_real_logarithm"),
                     " の包含写像は有理数の乗法と順序を保つ。",
                     math(String.raw`0\le r_a`), "、", math(String.raw`0\le r_b`),
@@ -108313,8 +108316,9 @@ d&<\iota_{\mathbb Q\to\mathbb R}((q/K)K)
 \end{aligned}`),
                   paragraph([
                     "次に ", math(String.raw`c\in\{0,1\}`), " と置く。",
-                    ref("def_real_closed_subfield"), " の部分体には有理数 ",
-                    math(String.raw`(-1)^c,0\in R`), " が属する。",
+                    ref("claim_rationals_are_real_algebraic"), " により、有理数 ",
+                    math(String.raw`(-1)^c,0`), " は ", ref("def_real_closed_subfield"),
+                    " の ", math(String.raw`R`), " に属する。",
                     ref("claim_cut_realization_agrees_on_rationals"), " と ",
                     ref("def_complex_algebraic_realization"), " から",
                   ]),

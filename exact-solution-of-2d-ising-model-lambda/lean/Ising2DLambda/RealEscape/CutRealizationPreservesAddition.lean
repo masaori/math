@@ -6,6 +6,8 @@
   t ∈ C_x は推移律で t <_R s、三分法の排他性と有理数の三分律で t < s、
   ι(s) は像の上界なので ρ(x) ≤ ι(s)                                  `cutRealization_pinch`
   挟み込みを a, b に当てる                                            `realAlgebraic_rational_pinching`
+  有理数は R の元で、有理数の和は R の和と一致する
+  （`claim_rationals_are_real_algebraic`）                              `realClosedRat_add`
   r_a + r_b <_R a + r_b <_R a + b <_R a + s_b <_R s_a + s_b
   （狭義順序の定義で差は変わらない、推移律）                          `realAlgebraic_add_pinch`
   A ≤ ρ(a+b) ≤ B、A ≤ ρ(a) + ρ(b) ≤ B、B − A < ι(2ε)                  `cutRealization_add_close`
@@ -54,12 +56,20 @@ theorem realAlgebraicLt_add_left (data : RealClosedSubfieldData) {u v : data.car
   calc w + v - (w + u) = v - u := by ring
     _ = t * t := ht
 
-/-- 有理数の所属は加法を保つ（`R` は `Qbar` の部分体）。 -/
+/-- 有理数の所属は加法を保つ。有理数 `r`、`s`、`r + s` は `R` の元であり
+（`claim_rationals_are_real_algebraic`）、`R` は `Qbar` の部分体なので、有理数の和は `R` の加法による和と一致する。 -/
 theorem realClosedRat_add (data : RealClosedSubfieldData) (r s : ℚ) :
     realClosedRat data (r + s) = realClosedRat data r + realClosedRat data s := by
-  simp only [realClosedRat_eq_cast]
-  push_cast
-  rfl
+  -- 有理数の所属（`claim_rationals_are_real_algebraic`）。
+  have hr : ((r : ℚ) : Qbar) ∈ data.carrier := rational_mem_realClosedCarrier data r
+  have hs : ((s : ℚ) : Qbar) ∈ data.carrier := rational_mem_realClosedCarrier data s
+  have hrs : ((r + s : ℚ) : Qbar) ∈ data.carrier := rational_mem_realClosedCarrier data (r + s)
+  show (⟨((r + s : ℚ) : Qbar), hrs⟩ : data.carrier) =
+    (⟨((r : ℚ) : Qbar), hr⟩ : data.carrier) + ⟨((s : ℚ) : Qbar), hs⟩
+  -- 部分体の加法は `Qbar` の加法の制限。
+  apply Subtype.ext
+  show ((r + s : ℚ) : Qbar) = ((r : ℚ) : Qbar) + ((s : ℚ) : Qbar)
+  exact Rat.cast_add r s
 
 /-- `r_a <_R a <_R s_a`、`r_b <_R b <_R s_b` なら `r_a + r_b <_R a + b <_R s_a + s_b`。 -/
 theorem realAlgebraic_add_pinch (data : RealClosedSubfieldData) {a b : data.carrier}
