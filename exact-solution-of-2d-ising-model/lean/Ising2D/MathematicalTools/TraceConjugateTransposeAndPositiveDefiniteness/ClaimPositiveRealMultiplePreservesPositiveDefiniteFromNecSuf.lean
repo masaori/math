@@ -8,8 +8,8 @@
 `α_ℂ` が交換すること `hcomm` は `ℂ` の積の可換律（`complex_numbers_form_a_field`）である。
 人手のラベルは `positive_real_multiple_preserves_positive_definite`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin n` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。
+`TensorPow M`（添字 `Conf M`）の具体版 `ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace.lean` の `positive_real_multiple_preserves_positive_definite_tensorPow` も、
+同じ必要十分版の添字 `Conf M` の特殊化として得る（`positive_real_multiple_preserves_positive_definite_tensorPow_of_necSuf`）。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefinite
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimCongruencePreservesPositiveDefiniteFromNecSuf
@@ -40,8 +40,8 @@ theorem positive_real_multiple_preserves_positive_definite_of_necSuf {n : ℕ} {
   ⟨NecSuf.star_fixed_smul_isHermitian (complex_conjugate_of_product_eq _) (complex_conjugate_of_real_inclusion α) hA.1,
     NecSuf.smul_preserves_pos' realInclusionAddHom (fun a b => real_inclusion_mul a b) hα (fun y => mul_comm y _) hA.2⟩
 
-/-- `positive_real_multiple_preserves_positive_definite` の `TensorPow M` での系（必要十分版の添字 `Conf M` の特殊化）。 -/
-theorem positive_real_multiple_preserves_positive_definite_tensorPow {M : ℕ} {A : TensorPow M}
+/-- `positive_real_multiple_preserves_positive_definite` の `TensorPow M` の具体版を、必要十分版の添字 `Conf M` の特殊化として得る。 -/
+theorem positive_real_multiple_preserves_positive_definite_tensorPow_of_necSuf {M : ℕ} {A : TensorPow M}
     (hA : IsPositiveDefiniteTensorPow A) {α : ℝ} (hα : 0 < α) : IsPositiveDefiniteTensorPow ((α : ℂ) • A) :=
   ⟨NecSuf.star_fixed_smul_isHermitian (complex_conjugate_of_product_eq _) (complex_conjugate_of_real_inclusion α) hA.1,
     NecSuf.smul_preserves_pos' realInclusionAddHom (fun a b => real_inclusion_mul a b) hα (fun y => mul_comm y _) hA.2⟩

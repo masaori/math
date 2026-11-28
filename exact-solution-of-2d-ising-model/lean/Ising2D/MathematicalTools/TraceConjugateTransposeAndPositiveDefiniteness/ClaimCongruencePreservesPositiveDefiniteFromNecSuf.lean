@@ -5,8 +5,8 @@
 係数 `R := ℂ`、述語 `P(z) := (z = r_ℂ を満たす r ∈ ℝ_{>0} がある)`、添字 `Fin n` の特殊化として得る。
 人手のラベルは `conjugate_bilinear_value_of_congruence`・`congruence_preserves_positive_definite`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin n` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。
+`TensorPow M`（添字 `Conf M`）の具体版 `ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace.lean` の `congruence_preserves_positive_definite_tensorPow` も、
+同じ必要十分版の添字 `Conf M` の特殊化として得る（`congruence_preserves_positive_definite_tensorPow_of_necSuf`）。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimCongruencePreservesPositiveDefinite
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf
@@ -55,8 +55,8 @@ theorem congruence_preserves_positive_definite_of_necSuf {n : ℕ} {A B B' : Mat
   ⟨NecSuf.congruence_isHermitian' hA.1 B,
     NecSuf.congruence_preserves_pos' (fun z => ∃ r : ℝ, 0 < r ∧ z = realInclusionAddHom r) hB hA.2⟩
 
-/-- `congruence_preserves_positive_definite` の `TensorPow M` での系（必要十分版の添字 `Conf M` の特殊化）。 -/
-theorem congruence_preserves_positive_definite_tensorPow {M : ℕ} {A B B' : TensorPow M}
+/-- `congruence_preserves_positive_definite` の `TensorPow M` の具体版を、必要十分版の添字 `Conf M` の特殊化として得る。 -/
+theorem congruence_preserves_positive_definite_tensorPow_of_necSuf {M : ℕ} {A B B' : TensorPow M}
     (hA : IsPositiveDefiniteTensorPow A) (hB : B' * B = 1) : IsPositiveDefiniteTensorPow (Bᴴ * (A * B)) :=
   ⟨NecSuf.congruence_isHermitian' hA.1 B,
     NecSuf.congruence_preserves_pos' (fun z => ∃ r : ℝ, 0 < r ∧ z = realInclusionAddHom r) hB hA.2⟩

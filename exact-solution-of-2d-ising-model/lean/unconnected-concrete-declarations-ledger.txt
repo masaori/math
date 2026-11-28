@@ -349,10 +349,6 @@ Ising2D.commute_V2_epsProj
 Ising2D.concatenated_bases_of_direct_sum_form_basis
 Ising2D.confPairEquiv
 Ising2D.config_numbering_equals_kronecker_numbering
-Ising2D.congruence_isHermitian
-Ising2D.congruence_preserves_positive_definite
-Ising2D.conjTranspose_conjTranspose_apply
-Ising2D.conjTranspose_conjTranspose_eq
 Ising2D.conj_add_matrix
 Ising2D.conj_finite_sum_of_matrices
 Ising2D.conj_index_self_iff
@@ -360,9 +356,6 @@ Ising2D.conj_index_sub
 Ising2D.conj_neg_matrix
 Ising2D.conj_smul_matrix
 Ising2D.conj_sub_matrix
-Ising2D.conjugate_bilinear_value_basis_eq_diag
-Ising2D.conjugate_bilinear_value_of_congruence
-Ising2D.conjugate_bilinear_value_of_positive_real_multiple
 Ising2D.continuousOn_d2gammaK
 Ising2D.continuousOn_dgammaK
 Ising2D.continuousOn_kappaDerivSq
@@ -605,7 +598,6 @@ Ising2D.kappaP
 Ising2D.kappaP_isoParam
 Ising2D.kappaSecond
 Ising2D.kernel_of_matrix_is_subspace
-Ising2D.kroneckerDelta_comm
 Ising2D.kronecker_family_of_independent_family_is_independent
 Ising2D.lambdaPlusR_ne_lambdaMinusR
 Ising2D.lambda_mul_lambda_thetaTilde
@@ -659,8 +651,6 @@ Ising2D.matrix_add_sub_cancel
 Ising2D.matrix_commuting_with_each_factor_commutes_with_finite_product
 Ising2D.matrix_conjTranspose_add_smul
 Ising2D.matrix_conjTranspose_add_smul_apply
-Ising2D.matrix_conjTranspose_mul
-Ising2D.matrix_conjTranspose_mul_apply
 Ising2D.matrix_conjTranspose_norm
 Ising2D.matrix_conjTranspose_sub
 Ising2D.matrix_conjTranspose_sub_apply
@@ -706,14 +696,11 @@ Ising2D.mulVecLin_pow
 Ising2D.mulVecLin_pow_apply
 Ising2D.mulVec_dotProduct_selfadjoint
 Ising2D.mulVec_eq_zero_iff_of_isUnit
-Ising2D.mulVec_ne_zero_of_left_inverse
 Ising2D.mulVec_row0_ne_zero
 Ising2D.mulVec_row0_zero_row1_ne_zero
 Ising2D.mulVec_rows_zero
 Ising2D.mulVec_two_one
 Ising2D.mulVec_two_zero
-Ising2D.mulVec_zero_apply
-Ising2D.mulVec_zero_eq
 Ising2D.mul_add_matrix
 Ising2D.mul_binaryWordMatrixSum
 Ising2D.mul_finite_sum_of_matrices
@@ -766,7 +753,6 @@ Ising2D.physicalV1halfC_mul_V2_isUnit
 Ising2D.physicalV1halfC_mul_physicalV1halfInvC
 Ising2D.physicalV1halfR_mul_self_map
 Ising2D.pos_of_mem_Dnbhd
-Ising2D.positive_real_multiple_preserves_positive_definite
 Ising2D.prefixEntryProduct
 Ising2D.prefixEntryProduct_eq_prod
 Ising2D.prefixEntryProduct_succ
@@ -834,9 +820,6 @@ Ising2D.sq_I_absGamma2
 Ising2D.sq_absGamma2
 Ising2D.sqrt_Qfun_pos
 Ising2D.sqrt_two_bounds
-Ising2D.standardBasisVec
-Ising2D.standardBasisVec_ne_zero
-Ising2D.star_kroneckerDelta
 Ising2D.step6_bound
 Ising2D.subspace_has_basis
 Ising2D.suffixLetterIndicator
@@ -874,7 +857,6 @@ Ising2D.toMatrixAlgHom_tprod
 Ising2D.trace_add_matrix
 Ising2D.trace_binaryWordMatrixSum
 Ising2D.trace_conj
-Ising2D.trace_of_positive_definite_is_positive
 Ising2D.trace_of_scalar_multiple
 Ising2D.trace_one_eq_card
 Ising2D.trace_power_upper_bound_physical
@@ -892,7 +874,6 @@ Ising2D.vecKron_update_smul
 Ising2D.vecKron_update_sum_smul
 Ising2D.vecKron_update_sum_smul_apply
 Ising2D.vecNormSq_single
-Ising2D.vec_zero_apply
 Ising2D.xString_mul_self
 Ising2D.xString_succ_eq
 Ising2D.zero_mem_evenEigenvectors

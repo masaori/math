@@ -9,8 +9,8 @@
 `def_hermitian_positive_definite`（共役転置は mathlib の `Matrix.conjTranspose`、正定値は
 主張の中に書き下した「`A^* = A` かつ零でない `x` で `x^*Ax = r_ℂ`（`r ∈ ℝ_{>0}`）」）による。
 
-**必要十分版**: `Ising2D/NecSuf/CongruencePreservesPositiveDefinite.lean`。具体版をその特殊化として導くのと、
-`TensorPow M`（添字 `Conf M`）の系は `ClaimCongruencePreservesPositiveDefiniteFromNecSuf.lean` に置く。
+**必要十分版**: `Ising2D/NecSuf/CongruencePreservesPositiveDefinite.lean`。具体版をその特殊化として導くのは
+`ClaimCongruencePreservesPositiveDefiniteFromNecSuf.lean`。`TensorPow M`（`Mat(2^M, ℂ)`）の場合の具体版は `ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace.lean`。
 
 ## 人手証明との対応
 

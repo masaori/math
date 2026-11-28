@@ -4,8 +4,8 @@
 具体版 `ClaimTraceOfPositiveDefiniteIsPositive.lean` の主張を、必要十分版 `Ising2D/NecSuf/TraceOfPositiveDefinite.lean` の
 係数 `R := ℂ`、`S := ℝ`、包含 `ι := (·)_ℂ`、添字 `Fin n` の特殊化として得る。人手のラベルは `trace_of_positive_definite_is_positive`。
 
-`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin n` の行列について述べてあり、
-`Conf M` の行列には当てはまらないためである。
+`TensorPow M`（添字 `Conf M`）の具体版 `ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace.lean` の `trace_of_positive_definite_is_positive_tensorPow` も、
+同じ必要十分版の添字 `Conf M` の特殊化として得る（`trace_of_positive_definite_is_positive_tensorPow_of_necSuf`）。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositive
 import Ising2D.NecSuf.TraceOfPositiveDefinite
@@ -36,8 +36,8 @@ theorem trace_of_positive_definite_is_positive_of_necSuf {n : ℕ} (hn : 1 ≤ n
   haveI : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩
   exact NecSuf.trace_pos_of_conjBilin_pos' (star_one ℂ) (star_zero ℂ) realInclusionAddHom A hA.2
 
-/-- `trace_of_positive_definite_is_positive` の `TensorPow M` での系（`NecSuf.trace_pos_of_conjBilin_pos'` の添字 `Conf M` の特殊化）。 -/
-theorem trace_of_positive_definite_is_positive_tensorPow {M : ℕ} (A : TensorPow M) (hA : IsPositiveDefiniteTensorPow A) :
+/-- `trace_of_positive_definite_is_positive` の `TensorPow M` の具体版を、`NecSuf.trace_pos_of_conjBilin_pos'` の添字 `Conf M` の特殊化として得る。 -/
+theorem trace_of_positive_definite_is_positive_tensorPow_of_necSuf {M : ℕ} (A : TensorPow M) (hA : IsPositiveDefiniteTensorPow A) :
     ∃ s : ℝ, 0 < s ∧ A.trace = (s : ℂ) := by
   haveI : Nonempty (Conf M) := ⟨fun _ => 0⟩
   exact NecSuf.trace_pos_of_conjBilin_pos' (star_one ℂ) (star_zero ℂ) realInclusionAddHom A hA.2

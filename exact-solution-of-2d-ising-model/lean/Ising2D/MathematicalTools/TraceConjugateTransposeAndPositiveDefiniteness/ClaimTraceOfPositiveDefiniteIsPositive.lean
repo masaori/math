@@ -6,7 +6,7 @@
 人手の `x^*Ay` は `def_conjugate_bilinear_value`、正定値は `def_hermitian_positive_definite` による。
 
 **必要十分版**: `Ising2D/NecSuf/TraceOfPositiveDefinite.lean`。具体版をその系として導くのは
-`ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf.lean`（`TensorPow M` の系もそこに置く）。
+`ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf.lean`。`TensorPow M`（`Mat(2^M, ℂ)`）の場合の具体版は `ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace.lean`。
 
 ## 人手証明との対応
 

@@ -677,7 +677,7 @@ Qv_j
     origin: { path: SRC, ordinal: 13 },
     title: { text: "共役転置・エルミート行列・正定値行列" },
     labels: ["def_hermitian_positive_definite"],
-    lean: ["Ising2D.matrix_fin_conjTranspose_apply", "Ising2D.matrix_conf_conjTranspose_apply", "Ising2D.matrix_conf_isHermitian_iff", "Ising2D.IsPositiveDefiniteTensorPow"],
+    lean: ["Ising2D.matrix_fin_conjTranspose_apply", "Ising2D.matrix_conf_conjTranspose_apply", "Ising2D.matrix_conf_isHermitian_iff", "Ising2D.IsPositiveDefiniteTensorPow", "Ising2D.isPositiveDefiniteTensorPow_iff_by_kronecker_numbering"],
     statement: [
       paragraph(["行列の積は ", ref("mat_mult"), "、実数の複素数への包含は ", ref("inclusion_rr_to_cc"), " を用いる。"]),
       paragraph([
@@ -1863,7 +1863,7 @@ x^*\bigl(B^*(AB)\bigr)y
     kind: "claim",
     title: { tex: String.raw`\text{左逆行列をもつ } B \text{ による } B^*(AB) \text{ は正定値}` },
     labels: ["congruence_preserves_positive_definite"],
-    lean: ["Ising2D.congruence_preserves_positive_definite", "Ising2D.conjTranspose_conjTranspose_apply", "Ising2D.conjTranspose_conjTranspose_eq", "Ising2D.mulVec_zero_apply", "Ising2D.mulVec_zero_eq", "Ising2D.congruence_isHermitian", "Ising2D.mulVec_ne_zero_of_left_inverse"],
+    lean: ["Ising2D.congruence_preserves_positive_definite", "Ising2D.conjTranspose_conjTranspose_apply", "Ising2D.conjTranspose_conjTranspose_eq", "Ising2D.mulVec_zero_apply", "Ising2D.mulVec_zero_eq", "Ising2D.congruence_isHermitian", "Ising2D.mulVec_ne_zero_of_left_inverse", "Ising2D.congruence_preserves_positive_definite_tensorPow"],
     statement: [
       paragraph(["共役転置・エルミート性・正定値性は ", ref("def_hermitian_positive_definite"), "、行列の積は ", ref("mat_mult"), "、単位行列 ", math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`), " は ", ref("def_identity_matrix"), " による。"]),
       paragraph([
@@ -2106,7 +2106,7 @@ x^*Ix
     kind: "claim",
     title: { text: "正定値行列の正の実数倍は正定値" },
     labels: ["positive_real_multiple_preserves_positive_definite"],
-    lean: ["Ising2D.positive_real_multiple_preserves_positive_definite", "Ising2D.conjugate_bilinear_value_of_positive_real_multiple"],
+    lean: ["Ising2D.positive_real_multiple_preserves_positive_definite", "Ising2D.conjugate_bilinear_value_of_positive_real_multiple", "Ising2D.positive_real_multiple_preserves_positive_definite_tensorPow"],
     statement: [
       paragraph(["正定値性は ", ref("def_hermitian_positive_definite"), "、スカラー倍は ", ref("def_matrix_scalar_multiple"), "、", math(String.raw`\alpha_{\mathbb{C}}`), " は ", ref("inclusion_rr_to_cc"), " の略記による。"]),
       paragraph([
@@ -2196,7 +2196,7 @@ x^*(\alpha_{\mathbb{C}}A)x
     kind: "claim",
     title: { text: "正定値行列のトレースは正" },
     labels: ["trace_of_positive_definite_is_positive"],
-    lean: ["Ising2D.trace_of_positive_definite_is_positive", "Ising2D.conjugate_bilinear_value_basis_eq_diag", "Ising2D.standardBasisVec_ne_zero", "Ising2D.kroneckerDelta_comm"],
+    lean: ["Ising2D.trace_of_positive_definite_is_positive", "Ising2D.conjugate_bilinear_value_basis_eq_diag", "Ising2D.standardBasisVec_ne_zero", "Ising2D.kroneckerDelta_comm", "Ising2D.trace_of_positive_definite_is_positive_tensorPow"],
     statement: [
       paragraph(["正定値性は ", ref("def_hermitian_positive_definite"), "、トレースは ", ref("def_trace"), " による。"]),
       paragraph([

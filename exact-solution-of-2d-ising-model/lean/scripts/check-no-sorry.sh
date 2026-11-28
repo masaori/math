@@ -803,7 +803,7 @@ targets=(
   "Ising2D.NecSuf.trace_pos_of_conjBilin_pos'"
   "Ising2D.posDef_conjBilin'_pos"
   Ising2D.trace_of_positive_definite_is_positive_of_necSuf
-  Ising2D.trace_of_positive_definite_is_positive_tensorPow
+  Ising2D.trace_of_positive_definite_is_positive_tensorPow_of_necSuf
   Ising2D.conjugate_bilinear_value_of_congruence
   Ising2D.conjTranspose_conjTranspose_apply
   Ising2D.conjTranspose_conjTranspose_eq
@@ -823,14 +823,18 @@ targets=(
   "Ising2D.posDef_of_conjBilin'_pos"
   "Ising2D.congruence_preserves_positive_definite_of_necSuf'"
   Ising2D.congruence_preserves_positive_definite_of_necSuf
-  Ising2D.congruence_preserves_positive_definite_tensorPow
+  Ising2D.congruence_preserves_positive_definite_tensorPow_of_necSuf
   Ising2D.conjugate_bilinear_value_of_positive_real_multiple
   Ising2D.positive_real_multiple_preserves_positive_definite
   "Ising2D.NecSuf.conjBilin_smul'"
   "Ising2D.NecSuf.smul_preserves_pos'"
   "Ising2D.positive_real_multiple_preserves_positive_definite_of_necSuf'"
   Ising2D.positive_real_multiple_preserves_positive_definite_of_necSuf
+  Ising2D.positive_real_multiple_preserves_positive_definite_tensorPow_of_necSuf
+  Ising2D.isPositiveDefiniteTensorPow_iff_by_kronecker_numbering
+  Ising2D.congruence_preserves_positive_definite_tensorPow
   Ising2D.positive_real_multiple_preserves_positive_definite_tensorPow
+  Ising2D.trace_of_positive_definite_is_positive_tensorPow
   Ising2D.Z_transpose
   Ising2D.Z_conjTranspose
   Ising2D.Y_conjTranspose

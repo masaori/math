@@ -9,8 +9,9 @@
 **必要十分版は置かない。** この主張は `S_1^{(+)}, S_2` というこの模型の具体的な対象についての
 主張であり、取り払える一般構造が無い。使っている一般論（エルミート行列の `exp` が正定値、
 `B^* A B` が正定値、正実数倍が正定値）は数学的道具立て「トレース・共役転置・正定値性」の
-`Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` に置いてある。合同変換と正実数倍は必要十分版を
-`TensorPow M` へ特殊化した系（`congruence_preserves_positive_definite_tensorPow`・`positive_real_multiple_preserves_positive_definite_tensorPow`）、
+`Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` に置いてある。合同変換と正実数倍とトレースは、
+`Mat(2^M, ℂ)` の場合の具体版（`ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace.lean` の `congruence_preserves_positive_definite_tensorPow`・
+`positive_real_multiple_preserves_positive_definite_tensorPow`・`trace_of_positive_definite_is_positive_tensorPow`）、
 `exp` の正定値性は `TensorPow M` で述べた `posDef_exp_of_isHermitian`（`ClaimPositiveDefinite.lean`）を引く。
 
 ## 記号
@@ -30,7 +31,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowDoubleNegation
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTensorPowScalarMultipleByOne
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimTensorPowExpOfNegativeIsLeftInverse
-import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionConjugateTransposeAndHermitian
 
 namespace Ising2D
@@ -124,7 +125,7 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
     rw [hA, matExp]
     exact posDef_exp_of_isHermitian (S2_isHermitian hK2)
   -- Step 3: `B^*(AB)` は正定値（`congruence_preserves_positive_definite`、`A → A`, `B → B`, `B' → B'`。添字が `Conf M` なので
-  -- `TensorPow M` の系 `congruence_preserves_positive_definite_tensorPow`）、`(B^*A)B = B^*(AB)`（`mat_mult_associative`）、
+  -- `Mat(2^M, ℂ)` の場合の具体版 `congruence_preserves_positive_definite_tensorPow`）、`(B^*A)B = B^*(AB)`（`mat_mult_associative`）、
   -- `B^* = B`（`def_hermitian_positive_definite` のエルミートの定義）
   have hBAB : IsPositiveDefiniteTensorPow (Bᴴ * A * B) := by
     rw [Matrix.mul_assoc]                                                         -- `mat_mult_associative`
@@ -321,7 +322,7 @@ theorem VPlus_isUnit_and_inv_eq {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
 /-- **原文 `trace_V_plus_is_positive`**: `tr(V^{(+)}) ∈ ℝ_{>0}`（`tr(V^{(+)}) = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある）。
 
 人手の 2 行と 1 対 1: `V^{(+)}` は正定値（`V_plus_is_positive_definite`）、
-`trace_of_positive_definite_is_positive` を `A = V^{(+)}` へ（添字が `Conf M` なので `TensorPow M` の系
+`trace_of_positive_definite_is_positive` を `A = V^{(+)}` へ（添字が `Conf M` なので `Mat(2^M, ℂ)` の場合の具体版
 `trace_of_positive_definite_is_positive_tensorPow` を引く。人手の `n = 2^{M_col} ≥ 1` は、Lean では `Conf M` が空でないことで受け取り、`Conf 0` も空でないので `M_col ≥ 1` は使わない）。 -/
 theorem trace_VPlus_pos {K1 K2star : ℂ} {s2 : ℝ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :

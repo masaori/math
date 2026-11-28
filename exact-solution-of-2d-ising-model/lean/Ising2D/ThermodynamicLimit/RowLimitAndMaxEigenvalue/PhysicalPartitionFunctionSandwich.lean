@@ -49,7 +49,7 @@
 | Step 2: `exp_of_negative_is_left_inverse`（`n → d`, `A → ½K_1D`）で `B' := exp(-½K_1D)` は `B'B = I` | `physicalV1halfInvC`、`physicalV1halfInvC_mul_physicalV1halfC` |
 | Step 3: `B` がエルミートなので `B^* = B` | `physicalV1halfC_conjTranspose` |
 | Step 3 の 5 行の鎖 `W = (BV_2)B = (B(cA))B = (c(BA))B = c((BA)B) = c((B^*A)B)`（`c = (2s_2)^{M_col/2}`。3 行目は `scalar_multiple_factors_out_of_right_factor`、4 行目は `scalar_multiple_factors_out_of_left_factor`） | `physicalSymTransferC_eq_smul_congruence` の `calc` の 5 段（係数 `c` は `twoS2Pow`。3・4 段は `TensorPow M` の系 `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow`） |
-| Step 3: `congruence_preserves_positive_definite`（`n → d`, `A → A`, `B → B`, `B' → B'`。Lean は `TensorPow M` の系 `congruence_preserves_positive_definite_tensorPow`。必要十分版の特殊化で、添字 `Fin n` の 1 対 1 の具体版は通らない）で `B^*(AB)` は正定値、`mat_mult_associative`（`m, n, p, q → d`, `A → B^*`, `B → A`, `C → B`）で `(B^*A)B = B^*(AB)`、`K_2 > 0` で `(2s_2)^{M_col/2} > 0`、`positive_real_multiple_preserves_positive_definite`（`n → d`, `α → (2s_2)^{M_col/2}`, `A → (B^*A)B`）で `W` は正定値 | `physicalSymTransferC_posDef`（`twoS2Pow_pos`） |
+| Step 3: `congruence_preserves_positive_definite`（`n → d`, `A → A`, `B → B`, `B' → B'`。Lean は `Mat(2^M, ℂ)` の場合の具体版 `congruence_preserves_positive_definite_tensorPow`。番号で読んだ成分の行列について添字 `Fin n` の具体版を引く）で `B^*(AB)` は正定値、`mat_mult_associative`（`m, n, p, q → d`, `A → B^*`, `B → A`, `C → B`）で `(B^*A)B = B^*(AB)`、`K_2 > 0` で `(2s_2)^{M_col/2} > 0`、`positive_real_multiple_preserves_positive_definite`（`n → d`, `α → (2s_2)^{M_col/2}`, `A → (B^*A)B`）で `W` は正定値 | `physicalSymTransferC_posDef`（`twoS2Pow_pos`） |
 | `def_W_real`: `W_ℝ := ϱ(W)`（`def_real_matrix_of_real_entry_matrix`、`B → W`） | `realMatrixOfRealEntries (physicalSymTransferC …) (physicalSymTransferC_hasRealEntries …)`。実成分で組んだ `physicalSymTransferR` に等しい（`physicalSymTransferR_eq_realMatrixOfRealEntries`） |
 | `W_real_is_positive_definite`: `ξ_k := (x_k)_ℂ` と `ξ ≠ 0`（`inclusion_rr_to_cc_is_injective`、`a → x_k`, `b → 0`） | `W_real_is_positive_definite` の `hξ` |
 | 同じ主張の「`ξ^*Wξ = ρ_ℂ` を満たす `ρ ∈ ℝ_{>0}`」（`W_is_real_symmetric_positive_definite`、`def_hermitian_positive_definite`） | 同じ定理の `(physicalSymTransferC_posDef …).2`（正定値の述語 `IsPositiveDefiniteTensorPow` の第 2 成分） |
@@ -83,8 +83,8 @@
   `TensorPow M` の系 `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow`（必要十分版の特殊化。具体版は添字 `Fin n` の
   `mul_smul_matrix`・`smul_mul_matrix`）を引く。`mat_mult_associative` は具体版が無く、mathlib の `Matrix.mul_assoc` を引く。`exp_hermitian_is_positive_definite` の Lean（`posDef_exp_of_isHermitian`）は人手の段と一対一でない
   （`ClaimPositiveDefinite.lean` の注意）。`positive_real_multiple_preserves_positive_definite` は、添字が `Conf M` の行列なので
-  `positive_real_multiple_preserves_positive_definite_tensorPow`（必要十分版の特殊化。具体版は添字 `Fin n` で、人手の 13 行の鎖と
-  1 対 1。`ClaimPositiveRealMultiplePreservesPositiveDefinite.lean`）を引く。
+  `Mat(2^M, ℂ)` の場合の具体版 `positive_real_multiple_preserves_positive_definite_tensorPow`（番号で読んだ成分の行列について、人手の 13 行の鎖と
+  1 対 1 の添字 `Fin n` の具体版を引く。`ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace.lean`）を引く。
 - Step 1 の `transpose_of_matrix_product`・`transpose_of_matrix_scalar_multiple`・`transpose_of_finite_sum_of_matrices`、Step 2 の `(½K_1D)^⊤` の鎖の `transpose_of_matrix_scalar_multiple` は、添字が `Conf M` の行列なので、
   `TensorPow M` の系 `transpose_mul_tensorPow`・`transpose_smul_tensorPow`・`finite_sum_transpose_tensorPow`（必要十分版を添字 `Conf M` へ特殊化したもの。
   具体版（添字 `Fin m`）と手順は同じ。`ClaimIHPauliForm.lean` の Step 3 の節と同じ扱い）を引く。
@@ -123,8 +123,7 @@ import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimIHPauliForm
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionSymmetrizedTransferMatrix
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwich
-import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimCongruencePreservesPositiveDefiniteFromNecSuf
-import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealMultipleOfHermitianIsHermitian
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimTensorPowExpOfNegativeIsLeftInverse
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTransposeOfMatrixProductFromNecSuf

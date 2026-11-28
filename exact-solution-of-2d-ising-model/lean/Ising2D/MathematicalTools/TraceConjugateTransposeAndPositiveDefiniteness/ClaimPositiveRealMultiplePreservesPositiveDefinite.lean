@@ -8,8 +8,8 @@
 （主張の中に「`A^* = A` かつ零でない `x` で `x^*Ax = r_ℂ`（`r ∈ ℝ_{>0}`）」と書き下す）、
 `α_ℂ` は `inclusion_rr_to_cc`（Lean の `(α : ℂ)`。実部 `α`、虚部 `0` の構造体）による。
 
-**必要十分版**: `Ising2D/NecSuf/PositiveMultiplePreservesPositiveDefinite.lean`。具体版をその特殊化として導くのと、
-`TensorPow M`（添字 `Conf M`）の系は `ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf.lean` に置く。
+**必要十分版**: `Ising2D/NecSuf/PositiveMultiplePreservesPositiveDefinite.lean`。具体版をその特殊化として導くのは
+`ClaimPositiveRealMultiplePreservesPositiveDefiniteFromNecSuf.lean`。`TensorPow M`（`Mat(2^M, ℂ)`）の場合の具体版は `ClaimTensorPowPositiveDefiniteCongruenceRealMultipleAndTrace.lean`。
 
 ## 人手証明との対応
 
