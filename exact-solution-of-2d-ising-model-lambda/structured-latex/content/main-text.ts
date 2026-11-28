@@ -13333,9 +13333,9 @@ w^{\,n-1}&\neq0
                               displayMath(String.raw`\begin{aligned}
 w
 &=w^{\,1}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の元の 1 乗})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の元の 1 乗}\bigr)\\
 &=1
-&&(\because\ w\in\mu_1\ \text{と}\ \blkref{def_root_of_unity_set})
+&&\bigl(\because\ w\in\mu_1\ \text{と}\ \blkref{def_root_of_unity_set}\bigr)
 \end{aligned}`),
                               paragraph([
                                 "ゆえに ", math(String.raw`w\in\{1\}`), " であり、",
@@ -13346,12 +13346,12 @@ w
                               displayMath(String.raw`\begin{aligned}
 w^{\,1}
 &=1^{\,1}
-&&(\because\ w=1)\\
+&&\bigl(\because\ w=1\bigr)\\
 &=1
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の単位元の 1 乗})
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の単位元の 1 乗}\bigr)
 \end{aligned}`),
                               displayMath(String.raw`w\in\mu_1
-\quad(\because\ w^{\,1}=1,\ \blkref{def_root_of_unity_set})`),
+\quad\bigl(\because\ w^{\,1}=1,\ \blkref{def_root_of_unity_set}\bigr)`),
                               paragraph([
                                 math(String.raw`\{1\}\subseteq\mu_1`), " である。両包含から求める集合の等号を得る。",
                                 "この議論に実数体も複素数体も現れない。",
