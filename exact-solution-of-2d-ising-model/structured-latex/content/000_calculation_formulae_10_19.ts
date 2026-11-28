@@ -77,7 +77,14 @@ export default defineBlocks([
       paragraph(["を満たす ", math(String.raw`r\in\mathbb R_{>0}`), " と ", math(String.raw`(x_c,y_c)\in\mathbb R^2`), " が一意に存在する。"]),
     ],
     proof: [
-      paragraph([math(String.raw`(x,y)\ne(0,0)`), " なので ", math(String.raw`x\ne0`), " または ", math(String.raw`y\ne0`), " である。", math(String.raw`x\ne0`), " のとき、", ref("real_square_is_nonnegative"), "（", math(String.raw`r\to y`), "）の ", math(String.raw`0\le y^2`), " から"]),
+      paragraph([math(String.raw`(x,y)\ne(0,0)`), " なので ", math(String.raw`x\ne0`), " または ", math(String.raw`y\ne0`), " である。", math(String.raw`x\ne0`), " のとき、", ref("real_square_is_nonnegative"), "（", math(String.raw`r\to x`), "・", math(String.raw`r\to y`), "）から ", math(String.raw`0\le x^2`), "・", math(String.raw`0\le y^2`), " であり、"]),
+      displayMath(String.raw`\begin{aligned}
+&x\,x\ne0
+ &&\left(\because\ x\ne0\ \text{に}\ \blkref{real_product_of_nonzero_is_nonzero}\ (a\to x,\ b\to x)\right)\\
+&x^2\ne0
+ &&\left(\because\ \blkref{square_of_real_number_is_product}\ (r\to x)\ \text{の}\ x^2=x\,x\ \text{を右辺から左辺へ等しいものの代入}\ (a\to x\,x,\ b\to x^2,\ \varphi(z):\equiv z\ne0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)
+\end{aligned}`),
+      paragraph(["である。これらから"]),
       displayMath(String.raw`\begin{aligned}
 x^2+y^2
 &=y^2+x^2
@@ -85,19 +92,67 @@ x^2+y^2
 &\ge 0+x^2
  &&\left(\because\ 0\le y^2\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x\le y\Rightarrow x+t\le y+t\ (x\to0,\ y\to y^2,\ t\to x^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
 &=x^2
- &&\left(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0+x=x\ (x\to x^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
-&>0
- &&\left(\because\ x\ne0\ (\text{非零実数の平方は正})\right)
+ &&\left(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0+x=x\ (x\to x^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)
 \end{aligned}`),
-      paragraph([math(String.raw`y\ne0`), " のとき、", ref("real_square_is_nonnegative"), "（", math(String.raw`r\to x`), "）の ", math(String.raw`0\le x^2`), " から"]),
+      paragraph(["である。すなわち ", math(String.raw`x^2\le x^2+y^2`), " であり、"]),
+      displayMath(String.raw`\begin{aligned}
+0\le x^2\ \wedge\ x^2\le x^2+y^2
+&\Longrightarrow 0\le x^2+y^2
+ &&\left(\because\ \mathbb{R}\ \text{の順序の推移律}\ (x\to0,\ y\to x^2,\ t\to x^2+y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)
+\end{aligned}`),
+      paragraph(["であり、", math(String.raw`0=x^2+y^2`), " と仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+0=x^2+y^2
+&\Longrightarrow x^2\le 0
+ &&\left(\because\ \text{仮定}\ 0=x^2+y^2\ \text{を右辺から左辺へ、上の}\ x^2\le x^2+y^2\ \text{に等しいものの代入}\ (a\to x^2+y^2,\ b\to0,\ \varphi(z):\equiv x^2\le z)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
+&\Longrightarrow x^2\le 0\ \wedge\ 0\le x^2
+ &&\left(\because\ \text{上の}\ 0\le x^2\right)\\
+&\Longrightarrow x^2=0
+ &&\left(\because\ \mathbb{R}\ \text{の順序の反対称律}\ (x\to x^2,\ y\to0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)
+\end{aligned}`),
+      paragraph(["となり、上の ", math(String.raw`x^2\ne0`), " に反する。よって ", math(String.raw`0\ne x^2+y^2`), " であり、"]),
+      displayMath(String.raw`\begin{aligned}
+0\le x^2+y^2\ \wedge\ 0\ne x^2+y^2
+&\Longrightarrow 0<x^2+y^2
+ &&\left(\because\ \blkref{def_real_strict_order}\ (x\to0,\ y\to x^2+y^2)\ \text{を右辺から左辺へ}\right)
+\end{aligned}`),
+      paragraph(["である。"]),
+      paragraph([math(String.raw`y\ne0`), " のとき、", ref("real_square_is_nonnegative"), "（", math(String.raw`r\to x`), "・", math(String.raw`r\to y`), "）から ", math(String.raw`0\le x^2`), "・", math(String.raw`0\le y^2`), " であり、"]),
+      displayMath(String.raw`\begin{aligned}
+&y\,y\ne0
+ &&\left(\because\ y\ne0\ \text{に}\ \blkref{real_product_of_nonzero_is_nonzero}\ (a\to y,\ b\to y)\right)\\
+&y^2\ne0
+ &&\left(\because\ \blkref{square_of_real_number_is_product}\ (r\to y)\ \text{の}\ y^2=y\,y\ \text{を右辺から左辺へ等しいものの代入}\ (a\to y\,y,\ b\to y^2,\ \varphi(z):\equiv z\ne0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)
+\end{aligned}`),
+      paragraph(["である。これらから"]),
       displayMath(String.raw`\begin{aligned}
 x^2+y^2
 &\ge 0+y^2
  &&\left(\because\ 0\le x^2\ \text{に}\ \mathbb{R}\ \text{の順序と加法の両立}\ x\le y\Rightarrow x+t\le y+t\ (x\to0,\ y\to x^2,\ t\to y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
 &=y^2
- &&\left(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0+x=x\ (x\to y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
-&>0
- &&\left(\because\ y\ne0\ (\text{非零実数の平方は正})\right)
+ &&\left(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の加法の単位元}\ 0+x=x\ (x\to y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)
+\end{aligned}`),
+      paragraph(["である。すなわち ", math(String.raw`y^2\le x^2+y^2`), " であり、"]),
+      displayMath(String.raw`\begin{aligned}
+0\le y^2\ \wedge\ y^2\le x^2+y^2
+&\Longrightarrow 0\le x^2+y^2
+ &&\left(\because\ \mathbb{R}\ \text{の順序の推移律}\ (x\to0,\ y\to y^2,\ t\to x^2+y^2)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)
+\end{aligned}`),
+      paragraph(["であり、", math(String.raw`0=x^2+y^2`), " と仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+0=x^2+y^2
+&\Longrightarrow y^2\le 0
+ &&\left(\because\ \text{仮定}\ 0=x^2+y^2\ \text{を右辺から左辺へ、上の}\ y^2\le x^2+y^2\ \text{に等しいものの代入}\ (a\to x^2+y^2,\ b\to0,\ \varphi(z):\equiv y^2\le z)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)\\
+&\Longrightarrow y^2\le 0\ \wedge\ 0\le y^2
+ &&\left(\because\ \text{上の}\ 0\le y^2\right)\\
+&\Longrightarrow y^2=0
+ &&\left(\because\ \mathbb{R}\ \text{の順序の反対称律}\ (x\to y^2,\ y\to0)\ \text{（}\blkref{set_and_algebra_notation}\text{）}\right)
+\end{aligned}`),
+      paragraph(["となり、上の ", math(String.raw`y^2\ne0`), " に反する。よって ", math(String.raw`0\ne x^2+y^2`), " であり、"]),
+      displayMath(String.raw`\begin{aligned}
+0\le x^2+y^2\ \wedge\ 0\ne x^2+y^2
+&\Longrightarrow 0<x^2+y^2
+ &&\left(\because\ \blkref{def_real_strict_order}\ (x\to0,\ y\to x^2+y^2)\ \text{を右辺から左辺へ}\right)
 \end{aligned}`),
       paragraph(["である。いずれの場合も ", math(String.raw`x^2+y^2>0`), " である。よって"]),
       displayMath(String.raw`r:=\sqrt{x^2+y^2}^{(\mathbb R_{\ge0})}\in\mathbb R_{\ge0}`),
@@ -181,7 +236,7 @@ y_c'
 \end{aligned}`),
       paragraph(["であり一意である。"]),
     ],
-    conversion: { status: "added", notes: ["写像定義に混在していた存在一意性を独立させた。", "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を主張 real_square_is_nonnegative の参照にした。x ≠ 0 の場合の鎖 x²+y² ≥ x² は、加法との両立を一行で使っていたので、加法の交換律・順序と加法の両立・加法の単位元の 3 行に割った（鎖の両端は不変）。y ≠ 0 の場合は「x と y を入れ替えた同じ二行」と書いていたが、入れ替えると結論が y²+x² > 0 になり、0 ≤ x² も引いていなかったので、0 ≤ x²（r → x）を引いた順序と加法の両立・加法の単位元の鎖を明示した。"] },
+    conversion: { status: "added", notes: ["写像定義に混在していた存在一意性を独立させた。", "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 名前だけで引いていた「実数の平方は非負」を主張 real_square_is_nonnegative の参照にした。x ≠ 0 の場合の鎖 x²+y² ≥ x² は、加法との両立を一行で使っていたので、加法の交換律・順序と加法の両立・加法の単位元の 3 行に割った（鎖の両端は不変）。y ≠ 0 の場合は「x と y を入れ替えた同じ二行」と書いていたが、入れ替えると結論が y²+x² > 0 になり、0 ≤ x² も引いていなかったので、0 ≤ x²（r → x）を引いた順序と加法の両立・加法の単位元の鎖を明示した。", "2026-11-28（Lean の点検の直し、行「ℝ の数・順序・差・商」の順序の (a)）: 場合分けの鎖の最後の行「x² > 0（非零実数の平方は正）」が名前だけの根拠で、しかも ≥ と > が混ざった鎖から x²+y² > 0 を推移で出していた（≤ と < から < を示す主張は本文に無い）。鎖を x²+y² ≥ x² で止め、準備に x x ≠ 0（real_product_of_nonzero_is_nonzero）・x² ≠ 0（square_of_real_number_is_product を右辺から左辺へ等しいものの代入）を置き、順序の推移律で 0 ≤ x²+y²、0 = x²+y² を仮定して反対称律で x² = 0 の矛盾から 0 ≠ x²+y²、def_real_strict_order を右辺から左辺へ使って 0 < x²+y² とした（critical_point の 0 < δ²+θ²/4 の段と同じ形。y も同じ）。結論は不変。"] },
   },
   {
     id: "calc_formulae_013_definition_map_cc_to_c_unit",
